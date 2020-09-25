@@ -2864,9 +2864,12 @@ for (int i = 0; i < initialCount + 1; i++) {
 
 	public VPPPlanSummaryPage navagateToShopAPlanAndFindZipcode(String zipcode, String countyName, String isMultiCounty) {
 		System.out.println("Proceed to go to top menu to select 'Shop A Plan' option and enter zipcode '"+zipcode+"' to find plan");
+		waitForPageLoadSafari();
 		Actions builder = new Actions(driver);
+		scrollToView(topMenushopForAPlanOption);
 		Action mouseOverButton=builder.moveToElement(topMenushopForAPlanOption).build();
 		mouseOverButton.perform();
+		waitforElement(shopForAPlanOptionZipcodeFieldBox);
 		shopForAPlanOptionZipcodeFieldBox.sendKeys(zipcode);
 		sleepBySec(1);
 		shopForAPlanOptionFindPlanButton.click();
@@ -2880,7 +2883,7 @@ for (int i = 0; i < initialCount + 1; i++) {
 			CommonUtility.waitForPageLoadNew(driver, vppTop, 30);
 		}
 		  sleepBySec(2);
-		
+		  moveMouseToElement(vppTop);
 			return new VPPPlanSummaryPage(driver);
 	}
 
@@ -2916,6 +2919,7 @@ for (int i = 0; i < initialCount + 1; i++) {
 		String headerPath=determineHeaderPath(planType);
 		driver.navigate().refresh();
 		sleepBySec(3);
+		checkIfPageReadySafari();
 		List<String> listOfTestPlans = Arrays.asList(savedPlans.split(","));
 		String unsavePlan=listOfTestPlans.get(0);
 		System.out.println("Proceed to unsave 1st plan from input '"+unsavePlan+"'");
@@ -2962,6 +2966,7 @@ for (int i = 0; i < initialCount + 1; i++) {
 		List<String> listOfTestPlans = Arrays.asList(savePlanNames.split(","));
 		driver.navigate().refresh();
 		sleepBySec(3);
+		CommonUtility.checkPageIsReadyNew(driver);
 		System.out.println("Validate first plan on list is saved and second plan on list is unsaved");
 		for (int i=0; i<listOfTestPlans.size(); i++) {
 			if (i==1) { //In the previous steps the plan 0 is unsaved so we will validate plan 1 is still saved
