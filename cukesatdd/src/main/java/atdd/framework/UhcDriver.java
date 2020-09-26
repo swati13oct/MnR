@@ -610,6 +610,7 @@ try {
 	}
 	
 	public void selectFromDropDownByValue(WebElement dropdownElement, String value) {
+		scrollToView(dropdownElement);
 		Select dropdown = new Select(dropdownElement);
 		waitUntilSelectOptionsPopulated(dropdown);
 		dropdown.selectByValue(value);
