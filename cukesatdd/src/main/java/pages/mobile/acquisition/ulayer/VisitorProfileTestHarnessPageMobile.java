@@ -9,6 +9,7 @@ import org.openqa.selenium.support.PageFactory;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 import pages.acquisition.ole.WelcomePage;
+import pages.mobile.acquisition.ole.WelcomePageMobile;
 
 public class VisitorProfileTestHarnessPageMobile extends UhcDriver {
 
@@ -268,7 +269,7 @@ public class VisitorProfileTestHarnessPageMobile extends UhcDriver {
 		return null;
 	}
 
-	public WelcomePage NavigateToOLEfromVP() {
+	public WelcomePageMobile NavigateToOLEfromVP() {
 		validateNew(jsonHelperChkOLE);
 		jsClickNew(jsonHelperChkOLE);
 		validateNew(LaunchOLEButton);
@@ -277,7 +278,7 @@ public class VisitorProfileTestHarnessPageMobile extends UhcDriver {
 		CommonUtility.waitForPageLoadNew(driver, NextBtn, 30);
 		if (driver.getCurrentUrl().contains("welcome")) {
 			System.out.println("OLE Welcome Page is Displayed");
-			return new WelcomePage(driver);
+			return new WelcomePageMobile(driver);
 		}
 		return null;
 	}

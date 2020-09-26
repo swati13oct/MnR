@@ -35,6 +35,7 @@ import pages.acquisition.ulayer.FindCarePage;
 import pages.acquisition.ulayer.PlanDetailsPage;
 import pages.acquisition.ulayer.VPPPlanSummaryPage;
 import pages.acquisition.ulayer.VisitorProfilePage;
+import pages.mobile.acquisition.dce.bluelayer.DrugCostEstimatorPageMobile;
 import pages.mobile.acquisition.dceredesign.GetStartedPageMobile;
 
 public class ComparePlansPageMobile extends UhcDriver {
@@ -772,7 +773,7 @@ public class ComparePlansPageMobile extends UhcDriver {
 
 	}
 
-	public FindCarePage clickonEditYourDoctors() throws InterruptedException {
+	public FindCarePageMobile clickonEditYourDoctors() throws InterruptedException {
 
 		try {
 			Thread.sleep(5000);
@@ -800,12 +801,12 @@ public class ComparePlansPageMobile extends UhcDriver {
 		waitforElement(FindCareLink);
 		if (validate(FindCareLink)) {
 			System.out.println("User is on Find care Page");
-			return new FindCarePage(driver);
+			return new FindCarePageMobile(driver);
 		} else
 			return null;
 	}
 
-	public FindCarePage clickonEditYourHosptials() throws InterruptedException {
+	public FindCarePageMobile clickonEditYourHosptials() throws InterruptedException {
 
 		try {
 			Thread.sleep(5000);
@@ -834,12 +835,12 @@ public class ComparePlansPageMobile extends UhcDriver {
 		waitforElement(FindCareLink);
 		if (validate(FindCareLink)) {
 			System.out.println("User is on Find care Page");
-			return new FindCarePage(driver);
+			return new FindCarePageMobile(driver);
 		} else
 			return null;
 	}
 
-	public FindCarePage clickonAddYourDoctors() throws InterruptedException {
+	public FindCarePageMobile clickonAddYourDoctors() throws InterruptedException {
 
 		try {
 			Thread.sleep(5000);
@@ -867,12 +868,12 @@ public class ComparePlansPageMobile extends UhcDriver {
 		waitforElement(FindCareLink);
 		if (validate(FindCareLink)) {
 			System.out.println("User is on Find care Page");
-			return new FindCarePage(driver);
+			return new FindCarePageMobile(driver);
 		} else
 			return null;
 	}
 
-	public FindCarePage clickonAddYourHospitals() throws InterruptedException {
+	public FindCarePageMobile clickonAddYourHospitals() throws InterruptedException {
 
 		try {
 			Thread.sleep(5000);
@@ -900,12 +901,12 @@ public class ComparePlansPageMobile extends UhcDriver {
 		waitforElement(FindCareLink);
 		if (validate(FindCareLink)) {
 			System.out.println("User is on Find care Page");
-			return new FindCarePage(driver);
+			return new FindCarePageMobile(driver);
 		} else
 			return null;
 	}
 
-	public DrugCostEstimatorPage clickonEdityourDrugs() {
+	public DrugCostEstimatorPageMobile clickonEdityourDrugs() {
 
 		try {
 			Thread.sleep(5000);
@@ -920,7 +921,7 @@ public class ComparePlansPageMobile extends UhcDriver {
 		waitforElement(addDrug);
 		if (validate(addDrug)) {
 			System.out.println("User is on DCE Page");
-			return new DrugCostEstimatorPage(driver);
+			return new DrugCostEstimatorPageMobile(driver);
 		} else
 			return null;
 	}

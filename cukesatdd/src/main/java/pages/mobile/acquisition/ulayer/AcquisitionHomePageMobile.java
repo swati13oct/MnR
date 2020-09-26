@@ -1,5 +1,7 @@
 package pages.mobile.acquisition.ulayer;
 
+import static org.junit.Assert.assertTrue;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -9,6 +11,7 @@ import org.json.JSONObject;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -35,12 +38,16 @@ import pages.mobile.acquisition.ulayer.AcquisitionHomePageMobile;
 import pages.acquisition.bluelayer.AboutUsPage;
 import pages.acquisition.bluelayer.ContactUsUmsPage;
 import pages.acquisition.bluelayer.DisclaimersPage;
+import pages.acquisition.bluelayer.MultiCountyModalPage;
 import pages.acquisition.bluelayer.PrivacyPolicyUmsPage;
+import pages.acquisition.bluelayer.VPPTestHarnessPage;
+import pages.acquisition.bluelayer.VisitorProfileTestHarnessPage;
 import pages.acquisition.commonpages.AcquisitionHomePage;
 import pages.acquisition.commonpages.keywordSearchAARP;
 import pages.acquisition.dceredesign.GetStartedPage;
 import pages.acquisition.ole.WelcomePage;
 import pages.mobile.acquisition.dceredesign.GetStartedPageMobile;
+import pages.mobile.acquisition.ole.WelcomePageMobile;
 
 /**
  * @author pperugu
@@ -757,7 +764,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		return null;
 
 	}
-	
+
 	public DisclaimersPageMobile disclaimersClick() {
 		validateNew(footerDisclaimersLink);
 		footerDisclaimersLink.click();
@@ -768,6 +775,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		return null;
 
 	}
+
 	/*
 	 * @SuppressWarnings("deprecation") public void openAndValidate(boolean
 	 * alreadyOnSite) { if (alreadyOnSite) {
@@ -1508,7 +1516,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	 * action.moveToElement(ShopForaplan).build().perform(); return new
 	 * ShopforaplanAARPlayer(driver); } else { return null;} }
 	 */
-	public WelcomePage ZipcodeSearchToOLEWithOutCounty(String zipcode, String planName) throws Exception {
+	public WelcomePageMobile ZipcodeSearchToOLEWithOutCounty(String zipcode, String planName) throws Exception {
 		try {
 			Thread.sleep(3000);
 		} catch (InterruptedException e) {
@@ -1534,12 +1542,12 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		System.out.println(driver.getTitle());
 		if (driver.getTitle().contains("Online Enrollment")) {
 			System.out.println("OLE Welcome Page is Displayed");
-			return new WelcomePage(driver);
+			return new WelcomePageMobile(driver);
 		}
 		return null;
 	}
 
-	public WelcomePage ZipcodeSearchToOLEWithCounty(String zipcode, String countyName, String planName)
+	public WelcomePageMobile ZipcodeSearchToOLEWithCounty(String zipcode, String countyName, String planName)
 			throws Exception {
 		try {
 			Thread.sleep(3000);
@@ -1565,9 +1573,146 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		Thread.sleep(5000);
 		if (driver.getTitle().contains("Online Enrollment")) {
 			System.out.println("OLE Welcome Page is Displayed");
-			return new WelcomePage(driver);
+			return new WelcomePageMobile(driver);
 		}
 		return null;
+	}
+
+	public void insertValueIntoSecondSearchBox(String inputValue) {
+		System.out.println("Click on clear button");
+		driver.findElement(By.className("clear-button")).click();
+		System.out.println("Insert value into secondary searchbox");
+		driver.findElement(By.id("secondarySearchInput")).sendKeys(inputValue);
+		driver.findElement(By.id("secondarySearchInput")).sendKeys(Keys.ENTER);
+	}
+
+	public void validateErrorMsg(String inputValue, String newSearchValue) {
+		switch (inputValue) {
+		case "Empty":
+			System.out.println("Varify Error message for " + inputValue + "");
+			String errMessage = driver.findElement(By.id("searchErrorMessage")).getText();
+			assertTrue(errMessage.contains("Your search box was empty. Please enter some text in the search box"));
+			break;
+		case "InvalidCharacter":
+			System.out.println("Validating invalid character message");
+			String invalidSearch = driver.findElement(By.xpath("//div[@class='invalid-search']")).getText();
+			System.out.println("invalidSearch : >>>>> " + invalidSearch);
+			assertTrue(invalidSearch.contains("Your search - " + newSearchValue + " - did not match any documents."));
+			// assertTrue(invalidSearch.contains("No pages were found containing
+			// "+newSearchValue+"."));
+			break;
+		case "Numbers":
+			System.out.println("Numbers");
+			break;
+		}
+	}
+
+	public void enterSecondarySearchValue(String str) {
+		System.out.println("@@@inside secondary search validation method@@@");
+		CommonUtility.waitForPageLoadNewForClick(driver, SecondaryClearBtn, 30);
+		SecondaryClearBtn.click();
+		CommonUtility.waitForPageLoad(driver, SecondarySearchInput, 30);
+		SecondarySearchInput.sendKeys(str);
+		CommonUtility.waitForPageLoadNewForClick(driver, SecondarySearchBtn, 30);
+		SecondarySearchBtn.click();
+		CommonUtility.waitForPageLoadNew(driver, SearchResults, 60);
+
+	}
+
+	public void validateCountResults() {
+		System.out.println("@@@inside count results validation@@");
+		String SearchResultsCountUI = SearchResultsCount.getText();
+		System.out.println("SearchResultsCountUI" + SearchResultsCountUI);
+
+		String[] arr = SearchResultsCountUI.split("\\s+");
+		String expectedCount = arr[3];
+		System.out.println("Expected count from UI" + expectedCount);
+		String SearchResultsCountAttribute = SearchResultsCount.getAttribute("dtmname");
+		System.out.println("SearchResultsCountAttribute" + SearchResultsCountAttribute);
+		String[] arr1 = SearchResultsCountAttribute.split("\\s+");
+		String expectedCountfromAttribute = arr1[0];
+		System.out.println("Expected Count from Attribute" + expectedCountfromAttribute);
+		Assert.assertEquals(expectedCount, expectedCountfromAttribute);
+		System.out.println("check");
+
+	}
+
+	public void validatePaginationofSearchResults() {
+		System.out.println("Inside the pagination validation@@@@");
+		int sizeofpages = driver.findElements(By.xpath("//*[@class='pagination']/li/a")).size();
+		System.out.println("size of pages" + sizeofpages);
+		for (int i = 2; i < sizeofpages; i++) {
+			System.out.println("@@Inside pagination click@@@");
+			threadsleep(5);
+			driver.findElement(By.xpath("(//*[@class='pagination']/li/a)[" + i + "]")).click();
+			CommonUtility.waitForPageLoadNew(driver, SearchResultsCount, 30);
+			this.validateFifteenResults();
+			threadsleep(5);
+			int sizeofNext = driver.findElements(By.xpath("//a[@dtmname='pagination:next']")).size();
+			System.out.println("sizeofNext" + sizeofNext);
+			if (!NextBtn.isDisplayed()) {
+				System.out.println("@@@@Inside next button disappear loop");
+				CommonUtility.waitForPageLoadNewForClick(driver, PreviousBtn, 30);
+				PreviousBtn.click();
+				this.validateFifteenResults();
+				break;
+			}
+
+		}
+		// driver.navigate().back();
+	}
+
+	public void validateFifteenResults() {
+		System.out.println("@@@@@Inside fifteen results validation@@@");
+		int sizeofResults = driver.findElements(By.xpath("//div[@class='list-heading']")).size();
+		System.out.println("number of results displayed on UI" + sizeofResults);
+		if (sizeofResults <= 15) {
+			System.out.println("@@@Inside results displayed less than or equal to 15");
+			Assert.assertTrue(true);
+		} else {
+			System.out.println("@@@Inside results displayed Incorrectly");
+			Assert.assertTrue(false);
+		}
+
+	}
+
+	public void enterSearchtextvalue(String sv) {
+		System.out.println("@@@Inside search text value Method@@@");
+		threadsleep(5);
+		// driver.switchTo().defaultContent();
+		// CommonUtility.waitForPageLoad(driver, EnterSearch, 60);
+		EnterSearch.sendKeys(sv);
+		CommonUtility.waitForPageLoadNewForClick(driver, SubmitBtn, 60);
+		SubmitBtn.click();
+		CommonUtility.waitForPageLoadNew(driver, SearchResults, 60);
+
+	}
+
+	public VisitorProfileTestHarnessPageMobile GetVisitorProfileTestHarnessPage() {
+		return new VisitorProfileTestHarnessPageMobile(driver);
+	}
+
+	public VPPTestHarnessPageMobile GetVPPTestHarnessPage() {
+		return new VPPTestHarnessPageMobile(driver);
+	}
+
+	public void validateCallSamContent() throws InterruptedException {
+
+		Actions action = new Actions(driver);
+		WebElement element = callsam;
+		action.moveToElement(element).perform();
+		String toolTipText = callsamtooltip.getText();
+		System.out.println("====================================================================");
+		System.out.println(toolTipText);
+		System.out.println("====================================================================");
+
+		if (CallSam.equalsIgnoreCase(toolTipText)) {
+			System.out.println("Call sticky action menu roll out and contain the text Call a Licensed Insurance Agent");
+			// return new AcquisitionHomePage(driver);
+		} else
+			Assert.fail(
+					"No Call sticky action menu didn't roll out and doesn't contain the text Call a Licensed Insurance Agent");
+		// return null;
 	}
 
 	public void selectState(String state) {
@@ -1585,6 +1730,16 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		zipCode.sendKeys(txtZipCode);
 
 		return new VPPPlanSummaryPageMobile(driver);
+	}
+
+	public MultiCountyModalPageMobile ValidateMultiCOuntyPopUp(String zipcode) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public MultiCountyModalPageMobile SubNav_ValidateMultiCOuntyPopUp(String zipcode) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	/*
@@ -2117,8 +2272,11 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		}
 		if (present) {
 			System.out.println("@@@@@@@@@ Able to find TFN widget @@@@@@@@@");
-		} else
-			Assert.fail("@@@@@@@@@ No TFN widget @@@@@@@@@");
+
+		}
+		/*
+		 * else System.out.println("@@@@@@@@@ No TFN widget @@@@@@@@@");
+		 */
 
 	}
 
@@ -2155,6 +2313,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		System.out.println("@@@@@@@@@@@@@@@ Chat Icon Clicked @@@@@@@@@@@@@@@");
 
 	}
+
 	public AboutUsPageMobile aboutUsClick() {
 		validateNew(footerAboutUsLink);
 		footerAboutUsLink.click();
@@ -2165,6 +2324,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		return null;
 
 	}
+
 	public ContactUsUmsPageMobile contactUsClick() {
 		validateNew(footerContactUsLink);
 		footerContactUsLink.click();

@@ -110,6 +110,7 @@ public class VppPlanSummaryMobile {
 			plansummaryPage.validateAndClickAddtoCompareinAARP(planType, planName);
 			plansummaryPage.compareTextAfterclickingAddtoCompareinAARP(planName);
 			plansummaryPage.deselectAddToCompareinAARP(planName);
+			
 		}
 	}
 
@@ -457,7 +458,7 @@ public class VppPlanSummaryMobile {
 			util.handlePlanYearSelectionPopup(plantype);
 			getLoginScenario().saveBean(PageConstants.ACQ_PAGE_DRIVER, plansummaryPage.driver);
 		} else {
-			pages.acquisition.bluelayer.VPPPlanSummaryPage plansummaryPage = (pages.acquisition.bluelayer.VPPPlanSummaryPage) getLoginScenario()
+			VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
 					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 			plansummaryPage.viewPlanSummary(plantype);
 			EmailAndPrintUtilMobile util = new EmailAndPrintUtilMobile(plansummaryPage.driver);

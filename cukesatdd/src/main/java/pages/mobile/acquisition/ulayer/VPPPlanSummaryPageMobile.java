@@ -1400,7 +1400,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 	public int checkAllMAPlans() {
 		try {
 			Thread.sleep(5000);
-			
+
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -1415,7 +1415,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 		if (allMAPlans != null) {
 			for (int i = 0; i < plansForCompare; i++) {
 				jsClickNew(allMAPlans.get(i));
-				//allMAPlans.get(i).click();
+				// allMAPlans.get(i).click();
 				System.out.println("Plan added to compare : " + i);
 			}
 		}
@@ -1731,7 +1731,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 					+ "\')]/ancestor::div[contains(@class, 'module-plan-overview')]//div[contains(@class ,'compare-box')]//span[contains(@class ,'ng-scope')]/label"));
 			// WebElement addToCompareCheck =
 			// driver.findElement(By.xpath("//*[contains(@class,'added-num')]/ancestor::div[contains(@class,'compare-add')]//label[contains(@for,'compare-plan')]"));
-			jsClickNew(addToCompareCheck);
+			addToCompareCheck.click();
 			System.out.println("Add to compare checkbox has been deselected");
 			Assert.assertTrue("deselected add to compare ", true);
 		} catch (Exception e) {
@@ -4476,7 +4476,6 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 	}
 
 	public PlanDetailsPageMobile navigateToPlanDetails(String planName, String planType) {
-		CommonUtility.checkPageIsReadyNew(driver);
 
 		if (planType.equalsIgnoreCase("MA") || planType.equalsIgnoreCase("MAPD")) {
 			WebElement MAmoreDetailsLink = driver.findElement(By.xpath("//*[contains(text(), '" + planName
@@ -4493,10 +4492,19 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 			System.out.println("View Plan Details Link is clicked for PDP plan" + planName);
 
 		} else if (planType.equalsIgnoreCase("SNP")) {
-			WebElement SNPmoreDetailsLink = driver.findElement(By.xpath("//a[contains(text(), '" + planName
-					+ "')]/ancestor::div[contains(@class,'module-plan-overview')]//a[contains(text(),'View Plan')]"));
+			WebElement SNPmoreDetailsLink = driver.findElement(By.xpath("//*[contains(text(), '" + planName
+					+ "')]/ancestor::h3/ancestor::*[contains(@class,'module-plan-overview')]//*[contains(text(),'View Plan')]"));
 			CommonUtility.waitForPageLoadNew(driver, SNPmoreDetailsLink, 30);
 			SNPmoreDetailsLink.click();
+			System.out.println("View Plan Details Link is clicked for SNP plan" + planName);
+
+		} else if (planName.contains("HMO") || planName.contains("Regional PPO")) {
+			WebElement MAmoreDetailsLink = driver.findElement(By.xpath("//*[contains(text(), '" + planName
+					+ "')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//a[contains(text(),'View plan and drug coverage details')]"));
+			// CommonUtility.waitForPageLoad(driver, MAmoreDetailsLink, 30);
+			validate(MAmoreDetailsLink);
+
+			MAmoreDetailsLink.click();
 			System.out.println("View Plan Details Link is clicked for MA plan" + planName);
 		}
 		CommonUtility.checkPageIsReadyNew(driver);
