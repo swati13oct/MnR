@@ -37,6 +37,7 @@ import pages.acquisition.ulayer.VPPPlanSummaryPage;
 import pages.acquisition.ulayer.VisitorProfilePage;
 import pages.mobile.acquisition.dce.bluelayer.DrugCostEstimatorPageMobile;
 import pages.mobile.acquisition.dceredesign.GetStartedPageMobile;
+import pages.mobile.acquisition.ole.WelcomePageMobile;
 
 public class ComparePlansPageMobile extends UhcDriver {
 
@@ -371,7 +372,7 @@ public class ComparePlansPageMobile extends UhcDriver {
 			return null;
 	}
 
-	public FindCarePage clickonLookUpYourDoctor() throws InterruptedException {
+	public FindCarePageMobile clickonLookUpYourDoctor() throws InterruptedException {
 
 		try {
 			Thread.sleep(5000);
@@ -408,7 +409,7 @@ public class ComparePlansPageMobile extends UhcDriver {
 		waitforElement(FindCareLink);
 		if (validate(FindCareLink)) {
 			System.out.println("User is on Find care Page");
-			return new FindCarePage(driver);
+			return new FindCarePageMobile(driver);
 		} else
 			return null;
 	}
@@ -486,7 +487,7 @@ public class ComparePlansPageMobile extends UhcDriver {
 		System.out.println("Thank you Message pop up is closed");
 	}
 
-	public WelcomePage Enroll_OLE_Plancompare() throws InterruptedException {
+	public WelcomePageMobile Enroll_OLE_Plancompare() throws InterruptedException {
 		WebElement enrollForPlan = null;
 		enrollForPlan = driver.findElement(By.xpath("//*[@id='enrollbtnplancompare0']//button//span[text()='Enroll']"));
 		if (enrollForPlan != null) {
@@ -497,12 +498,12 @@ public class ComparePlansPageMobile extends UhcDriver {
 		System.out.println(driver.getCurrentUrl());
 		if (driver.getCurrentUrl().contains("welcome")) {
 			System.out.println("OLE Welcome Page is Displayed");
-			return new WelcomePage(driver);
+			return new WelcomePageMobile(driver);
 		}
 		return null;
 	}
 
-	public PlanDetailsPage navigateToPlanDetailfromplanCompare() {
+	public PlanDetailsPageMobile navigateToPlanDetailfromplanCompare() {
 		CommonUtility.checkPageIsReadyNew(driver);
 		WebElement PlanDetailsLink = driver.findElement(By.xpath("(//*[contains(text(),'View Plan Details')])[1]"));
 		CommonUtility.waitForPageLoadNew(driver, PlanDetailsLink, 30);
@@ -512,7 +513,7 @@ public class ComparePlansPageMobile extends UhcDriver {
 		CommonUtility.checkPageIsReadyNew(driver);
 		System.out.println(driver.getCurrentUrl());
 		if (driver.getCurrentUrl().contains("#/details")) {
-			return new PlanDetailsPage(driver);
+			return new PlanDetailsPageMobile(driver);
 		}
 		return null;
 	}
@@ -579,7 +580,7 @@ public class ComparePlansPageMobile extends UhcDriver {
 		}
 	}
 
-	public ComparePlansPage validateChatSam() throws InterruptedException {
+	public ComparePlansPageMobile validateChatSam() throws InterruptedException {
 		boolean present;
 		try {
 			validateNew(chatsam);
@@ -589,7 +590,7 @@ public class ComparePlansPageMobile extends UhcDriver {
 		}
 		if (present) {
 			System.out.println("@@@@@@@@@ Able to find TFN widget @@@@@@@@@");
-			return new ComparePlansPage(driver);
+			return new ComparePlansPageMobile(driver);
 		} else
 			System.out.println("@@@@@@@@@ No TFN widget @@@@@@@@@");
 		return null;
@@ -906,7 +907,7 @@ public class ComparePlansPageMobile extends UhcDriver {
 			return null;
 	}
 
-	public DrugCostEstimatorPageMobile clickonEdityourDrugs() {
+	public pages.mobile.acquisition.dce.ulayer.DrugCostEstimatorPageMobile clickonEdityourDrugs() {
 
 		try {
 			Thread.sleep(5000);
@@ -921,7 +922,7 @@ public class ComparePlansPageMobile extends UhcDriver {
 		waitforElement(addDrug);
 		if (validate(addDrug)) {
 			System.out.println("User is on DCE Page");
-			return new DrugCostEstimatorPageMobile(driver);
+			return new pages.mobile.acquisition.dce.ulayer.DrugCostEstimatorPageMobile(driver);
 		} else
 			return null;
 	}

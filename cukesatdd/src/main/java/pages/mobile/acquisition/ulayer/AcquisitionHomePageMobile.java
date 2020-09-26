@@ -2324,6 +2324,39 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		return null;
 
 	}
+	
+	public void validateChatSamContent() throws InterruptedException {
+		
+		Actions action = new Actions(driver);
+		WebElement element = chatsam;
+		action.moveToElement(element).perform();
+		String ChattoolTipText = chatsamtooltip.getText();
+		System.out.println("====================================================================");
+		System.out.println(ChattoolTipText);
+		System.out.println("====================================================================");
+		
+        if (ChatSamText.equalsIgnoreCase(ChattoolTipText)) {
+          System.out.println("Chat sticky action menu roll out and contain the text Chat with a Licensed Insurance Agent");
+        }
+        else
+        	Assert.fail("No Chat sticky action menu didn't roll out and doesn't contain the text Chat with a Licensed Insurance Agent");
+	}
+	
+	public void OurPlansPDPLanding() {
+
+		Actions action = new Actions(driver);
+		action.moveToElement(navigationSectionOurPlansLink).build().perform();
+
+		PDPLandingLink.click();
+
+		try {
+			Thread.sleep(15000);
+			System.out.println("Thread Sleep completed");
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 
 	public ContactUsUmsPageMobile contactUsClick() {
 		validateNew(footerContactUsLink);

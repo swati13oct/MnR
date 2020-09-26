@@ -42,7 +42,7 @@ import pages.acquisition.dce.bluelayer.DCETestHarnessPage;
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.ulayer.ComparePlansPage;
 import pages.mobile.acquisition.bluelayer.PlanComparePageMobile;
-import pages.mobile.acquisition.dce.bluelayer.DrugCostEstimatorPageMobile;
+import pages.mobile.acquisition.dce.ulayer.DrugCostEstimatorPageMobile;
 import pages.mobile.acquisition.ole.WelcomePageMobile;
 import pages.mobile.acquisition.ulayer.AcquisitionHomePageMobile;
 import pages.mobile.acquisition.ulayer.ComparePlansPageMobile;
