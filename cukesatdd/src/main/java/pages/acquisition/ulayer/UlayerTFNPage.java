@@ -1077,11 +1077,21 @@ public class UlayerTFNPage extends UhcDriver {
 		try{
 			if(IPerceptionsPopup.isDisplayed())	{
 //				driver.switchTo().frame(IPerceptionsFrame);
-				IPerceptionNoBtn.click();
+				IPerceptionPopuNoBtn.click();
 //				driver.switchTo().defaultContent();
 			}
 		}catch(Exception e){
-			System.out.println("Iperceptions popup not found");
+			System.out.println("IPerceptionsPopup not found");
+			try {
+				if(IPerceptionsFrame.isDisplayed())	{
+					System.out.println("IPerceptionsFrame found");
+					driver.switchTo().frame(IPerceptionsFrame);
+					IPerceptionNoBtn.click();
+					driver.switchTo().defaultContent();
+				}
+			}catch(Exception e1) {
+			System.out.println("Iperceptions not found");
+			}
 		}
 
 }
