@@ -43,7 +43,7 @@ public class DrugSummaryPageMobile extends UhcDriver {
 	@FindBy(xpath = "//*[text()='Monthly Premium']/following-sibling::div")
 	public WebElement monthlyPremium;
 	
-	@FindBy(xpath = "//*[text()='Annual Estimated Total']/following-sibling::div")
+	@FindBy(xpath = "//div[contains(text(), 'Annual Estimated')]//following-sibling::div")
 	public WebElement annualEstimatedTotal;
 	
 	@FindBy(xpath = "//*[text()='Drugs Covered']/following-sibling::div")
@@ -72,6 +72,9 @@ public class DrugSummaryPageMobile extends UhcDriver {
 	
 	@FindBy(xpath = "//*[@class='heading-4 mb-10 ng-star-inserted']")
 	public WebElement planTypeHeading;
+	
+	@FindBy(xpath = "//button/span[text()='View Plan Details']")
+	public WebElement viewPlanButton;
 
 	@FindBy(xpath = "//label[contains(@class,'uhc-filter')]//span[contains(text(),'Medicare Advantage Plans')]")
 	public WebElement mapdPlanToggle;
@@ -126,7 +129,6 @@ public class DrugSummaryPageMobile extends UhcDriver {
 	
 	@FindBy(id = "changePharmacyLink")
 	public WebElement changePharmacyLinkDetailsPage;
-
 	@Override
 	public void openAndValidate() {
 		validateNew(reviewDrugCostPageHeading);

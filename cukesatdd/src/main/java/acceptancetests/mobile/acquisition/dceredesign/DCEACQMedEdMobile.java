@@ -27,6 +27,7 @@ import pages.acquisition.ulayer.SavingsOppurtunity;
 import pages.acquisition.ulayer.VPPPlanSummaryPage;
 import pages.mobile.acquisition.bluelayer.AcquisitionHomePageMobile;
 import pages.mobile.acquisition.dceredesign.BuildYourDrugListMobile;
+import pages.mobile.acquisition.dceredesign.DrugSummaryPageMobile;
 import pages.mobile.acquisition.dceredesign.GetStartedPageMobile;
 import pages.mobile.acquisition.dceredesign.TellUsAboutDrugMobile;
 import pages.mobile.acquisition.dceredesign.ZipCodeAndPlanYearCapturePageMobile;
@@ -150,9 +151,9 @@ public class DCEACQMedEdMobile {
 
 	@And("^enduser clicks on continue button in Zip Entry Page$")
 	public void user_clicks_at_continue_button_ZipENtryPage_in_AARP() {
-		ZipCodePlanYearCapturePage zipCodePlanYearPage = (ZipCodePlanYearCapturePage) getLoginScenario()
+		ZipCodeAndPlanYearCapturePageMobile zipCodePlanYearPage = (ZipCodeAndPlanYearCapturePageMobile) getLoginScenario()
 				.getBean(PageConstants.DCE_Redesign_ZipCodePlanYearCapture);
-		DrugSummaryPage drugSummaryPage = zipCodePlanYearPage.clickContinueBtn();
+		DrugSummaryPageMobile drugSummaryPage = zipCodePlanYearPage.clickContinueBtn();
 		// zipCodePlanYearPage.verifyLoadScreen();
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
 	}

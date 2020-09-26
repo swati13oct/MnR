@@ -28,7 +28,7 @@ public class DrugDetailsPageMobile extends UhcDriver {
 
 
 
-	@FindBy(xpath = "//a[@id='changePharmacyLink']")
+	@FindBy(xpath = "//button[@id='changePharmacyLink']")
 	public WebElement DrugDetails_ChangePharmacyLnk;
 
 	@FindBy(xpath = "//a[contains(@class, 'uhc-link-button') and contains(text(), 'plans in your area')]")
@@ -49,7 +49,7 @@ public class DrugDetailsPageMobile extends UhcDriver {
 	@FindBy(xpath = "//div[contains(text(), 'Monthly Premium')]")
 	public WebElement DrugCosts_MonthlyPremium;
 	
-	@FindBy(xpath = "//div[contains(text(), 'Annual Estimated Total')]")
+	@FindBy(xpath = "//div[contains(text(), 'Annual Estimated')]")
 	public WebElement DrugCosts_AnnualEstTotal;
 
 	@FindBy(xpath = "//div[contains(text(), 'Average Monthly Drug Cost')]//following-sibling::div[contains(text(), '$')]")
@@ -58,7 +58,7 @@ public class DrugDetailsPageMobile extends UhcDriver {
 	@FindBy(xpath = "//div[contains(text(), 'Monthly Premium')]//following-sibling::div[contains(text(), '$')]")
 	public WebElement DrugCosts_MonthlyPremium_Amount;
 	
-	@FindBy(xpath = "//div[contains(text(), 'Annual Estimated Total')]//following-sibling::div[contains(text(), '$')]")
+	@FindBy(xpath = "//div[contains(text(), 'Annual Estimated')]//following-sibling::div[contains(text(), '$')]")
 	public WebElement DrugCosts_AnnualEstTotal_Amount;
 
 	@FindBy(xpath = "//button/span[contains(text(), 'View Plan Details')]")
@@ -91,19 +91,19 @@ public class DrugDetailsPageMobile extends UhcDriver {
 	@FindBy(xpath = "//caption[contains(text(), 'Initial Coverage')]")
 	public WebElement MonthlyDrugStage_InitialCoverageStagerTbl;
 
-	@FindBy(xpath = "//a[contains(@id, 'table_initial_coverage')]")
+	@FindBy(xpath = "//button[contains(@id, 'table_initial_coverage')]")
 	public WebElement MonthlyDrugStage_InitialCoverageLink;
 	
 	@FindBy(xpath = "//caption[contains(text(), 'Coverage Gap')]")
 	public WebElement MonthlyDrugStage_CoverageGapStagerTbl;
 
-	@FindBy(xpath = "//a[contains(@id, 'table_coverage_gap')]")
+	@FindBy(xpath = "//button[contains(@id, 'table_coverage_gap')]")
 	public WebElement MonthlyDrugStage_CoverageGapLink;
 
 	@FindBy(xpath = "//caption[contains(text(), 'Catastrophic Coverage')]")
 	public WebElement MonthlyDrugStage_CatastropheStagerTbl;
 
-	@FindBy(xpath = "//a[contains(@id, 'table_catastrophic_coverage')]")
+	@FindBy(xpath = "//button[contains(@id, 'table_catastrophic_coverage')]")
 	public WebElement MonthlyDrugStage_CatastropheLink;
 	
 	@FindBy(xpath = "//h2[contains(text(), 'Important Information')]")
@@ -154,6 +154,45 @@ public class DrugDetailsPageMobile extends UhcDriver {
 	@FindBy(id = "paginationNextBtn")
 	public WebElement nextBtn;
 	
+	@FindBy(xpath = "//a[text()='Keep using this pharmacy.']")
+	public WebElement keepUsingPharmBtn;
+	
+	@FindBy(xpath = "//a[text()='Change Pharmacy']/ancestor::div/div/span']")
+	public WebElement pharmacyName;
+	
+	@FindBy(xpath = "//button[contains(@aria-label,'Select ROCK PHARMACY -')]")
+	public WebElement selectRockPharm;
+	
+	@FindBy(xpath = "//*[@class='uhc-button__text'][contains(text(),'Save and Update Drug Costs')]")
+	public WebElement saveDrugBtn;
+	
+	@FindBy(xpath = "//span[contains(text(),'ROCK PHARMACY, the')]")
+	public WebElement rockPharmAlertText;
+	
+	@FindBy(xpath = "//div[text()='Monthly Premium']/following::div[1]")
+	public WebElement monthlyValue;
+	
+	@FindBy(xpath = "//*[contains(@class,'uhc-modal__content p-5 ng-tns-c37')]/div/div/div/p")
+	public WebElement coverageMsg;
+	
+	@FindBy(xpath = "//*[@id='table_coverage_gap']")
+	public WebElement coverageGap;
+	
+	@FindBy(xpath = "//*[@id='table_catastrophic_coverage']")
+	public WebElement catastrophicCoverage;
+	
+	@FindBy(xpath = "//*[contains(@id, 'cancelicon')]")
+	public WebElement modalCloseIcon;
+	
+	@FindBy(xpath = "//div/a[contains(text(),'View Plan Details')]")
+	public WebElement viewPlanBtn;
+	
+	@FindBy(xpath = "//button[@ng-click='backToDceDrugDetailsOrSummary()']")
+	public WebElement backtoDrugEstBtn;
+	
+	@FindBy(xpath = "//button[@ng-click='backToPlanSummary()']")
+	public WebElement backtoSummaryBtn;
+		
 	public DrugDetailsPageMobile(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -287,13 +326,13 @@ public class DrugDetailsPageMobile extends UhcDriver {
 	@FindBy(xpath = "//h2[contains(text(),'Your estimated')]")
 	public WebElement reviewDrugCostPageHeading;
 
-	public DrugDetailsPageMobile ClickLinktoNavigatetoDrugSummary() {
+	public DrugSummaryPageMobile ClickLinktoNavigatetoDrugSummary() {
 		validateNew(LinkToDrugSummary);
 		jsClickNew(LinkToDrugSummary);
 		CommonUtility.waitForPageLoad(driver, reviewDrugCostPageHeading, 30);
 
 		if(validateNew(reviewDrugCostPageHeading)) {
-			return new DrugDetailsPageMobile(driver);
+			return new DrugSummaryPageMobile(driver);
 		}
 		Assert.fail("DCE - Drug Summary Page is not displayed");
 		return null;

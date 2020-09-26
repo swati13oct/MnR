@@ -79,7 +79,7 @@ public class DCEACQShopPlanPDPMobile {
 	@Then("^end user validates GetStarted Page$")
 	public void the_user_validates_Get_Started_Page() throws Throwable {
 		wd = (AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
-		GetStartedPage DCEgetStarted = new GetStartedPage(wd);
+		GetStartedPageMobile DCEgetStarted = new GetStartedPageMobile(wd);
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_GetStarted, DCEgetStarted);
 
 	}
@@ -143,7 +143,7 @@ public class DCEACQShopPlanPDPMobile {
 	public void user_clicks_on_continue_button_ZipENtryPage_in_AARP() {
 		ZipCodeAndPlanYearCapturePageMobile zipCodePlanYearPage = (ZipCodeAndPlanYearCapturePageMobile) getLoginScenario()
 				.getBean(PageConstants.DCE_Redesign_ZipCodePlanYearCapture);
-		DrugSummaryPage drugSummaryPage = zipCodePlanYearPage.clickContinueBtn();
+		DrugSummaryPageMobile drugSummaryPage = zipCodePlanYearPage.clickContinueBtn();
 		// zipCodePlanYearPage.verifyLoadScreen();
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
 	}

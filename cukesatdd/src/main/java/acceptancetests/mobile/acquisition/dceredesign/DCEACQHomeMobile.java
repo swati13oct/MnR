@@ -74,7 +74,7 @@ public class DCEACQHomeMobile {
 	@Then("^the user validates GetStarted Page$")
 	public void the_user_validates_Get_Started_Page() throws Throwable {
 		wd = (AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
-		GetStartedPage DCEgetStarted = new GetStartedPage(wd);
+		GetStartedPageMobile DCEgetStarted = new GetStartedPageMobile(wd);
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_GetStarted, DCEgetStarted);
 
 	}
@@ -152,7 +152,7 @@ public class DCEACQHomeMobile {
 	public void user_clicks_on_continue_button_ZipENtryPage_in_AARP() {
 		ZipCodeAndPlanYearCapturePageMobile zipCodePlanYearPage = (ZipCodeAndPlanYearCapturePageMobile) getLoginScenario()
 				.getBean(PageConstants.DCE_Redesign_ZipCodePlanYearCapture);
-		DrugSummaryPage drugSummaryPage = zipCodePlanYearPage.clickContinueBtn();
+		DrugSummaryPageMobile drugSummaryPage = zipCodePlanYearPage.clickContinueBtn();
 		// zipCodePlanYearPage.verifyLoadScreen();
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
 	}
@@ -225,7 +225,7 @@ public class DCEACQHomeMobile {
 	public void the_user_validates_link_to_Drug_Summary_Page() throws Throwable {
 		DrugDetailsPageMobile drugDetailsPage = (DrugDetailsPageMobile) getLoginScenario()
 				.getBean(PageConstants.DCE_Redesign_DrugDetails);
-		DrugDetailsPageMobile drugSummaryPage = drugDetailsPage.ClickLinktoNavigatetoDrugSummary();
+		DrugSummaryPageMobile drugSummaryPage = drugDetailsPage.ClickLinktoNavigatetoDrugSummary();
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
 
 	}

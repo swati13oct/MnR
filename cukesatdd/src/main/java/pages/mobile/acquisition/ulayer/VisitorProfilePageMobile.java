@@ -92,6 +92,10 @@ public class VisitorProfilePageMobile extends UhcDriver {
 	@FindBy(xpath = "//div[@class='multi-year-select']/button[contains(@class,'js-select-year select-year')][1]")
 	private WebElement profileCrntYrPlans;
 	
+	@FindBy(xpath = "//button[contains(@id,'addDrug')]")
+	public WebElement AddMyDrugsBtn;
+	
+	
 	public VisitorProfilePageMobile(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -113,8 +117,7 @@ public class VisitorProfilePageMobile extends UhcDriver {
 		return null;
 	}
 	
-	@FindBy(xpath = "//button[contains(@id,'addDrug')]")
-	public WebElement AddMyDrugsBtn;
+
 
 	
 	public GetStartedPageMobile addDrug_DCERedesign(){

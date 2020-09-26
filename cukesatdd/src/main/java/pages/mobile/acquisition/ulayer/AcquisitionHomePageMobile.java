@@ -2336,4 +2336,9 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 	}
 
+	public VisitorProfilePageMobile navigateToVisitorProfilePage() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

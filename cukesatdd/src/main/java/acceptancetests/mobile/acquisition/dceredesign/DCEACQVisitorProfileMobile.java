@@ -11,6 +11,7 @@ import java.util.Map;
 import org.junit.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import pages.acquisition.commonpages.AcquisitionHomePage;
 import pages.acquisition.dceredesign.BuildYourDrugList;
 import pages.acquisition.dceredesign.DrugSummaryPage;
 import pages.acquisition.dceredesign.GetStartedPage;
@@ -68,9 +69,11 @@ public class DCEACQVisitorProfileMobile {
 
 	@And("^the user clicks on the shopping cart icon$")
 	public void the_user_clicks_on_the_shopping_cart_icon_on_DCE_page_in_AARP() {
-		DrugCostEstimatorPageMobile dce = (DrugCostEstimatorPageMobile) getLoginScenario()
-				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
-		VisitorProfilePageMobile visitorProfilePage = dce.clickOnShoppingCart();
+		AcquisitionHomePageMobile acqHomePage = (AcquisitionHomePageMobile) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+
+		VisitorProfilePageMobile visitorProfilePage = acqHomePage.navigateToVisitorProfilePage();
+		
 		getLoginScenario().saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfilePage);
 	}
 
@@ -153,15 +156,15 @@ public class DCEACQVisitorProfileMobile {
 	
 	@Then("^user click on continue button$")
 	public void user_clicks_on_continue_button_ZipENtryPage_in_AARP() {
-		ZipCodePlanYearCapturePage zipCodePlanYearPage = (ZipCodePlanYearCapturePage) getLoginScenario()
+		ZipCodeAndPlanYearCapturePageMobile zipCodePlanYearPage = (ZipCodeAndPlanYearCapturePageMobile) getLoginScenario()
 				.getBean(PageConstants.DCE_Redesign_ZipCodePlanYearCapture);
-		DrugSummaryPage drugSummaryPage = zipCodePlanYearPage.clickContinueBtn();
+		DrugSummaryPageMobile drugSummaryPage = zipCodePlanYearPage.clickContinueBtn();
 		// zipCodePlanYearPage.verifyLoadScreen();
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
 	}
 
 
-	@Given("^the user clicks on the add drugs button to navigate to DCE Redesign on the profile page$")
+	@And("^the user clicks on the add drugs button to navigate to DCE Redesign on the profile page$")
 	public void the_user_clicks_on_the_add_drugs_button_in_the_profile_to_DCE_Redesign_in_AARP_site1() {
 		VisitorProfilePageMobile visitorProfilePage = (VisitorProfilePageMobile) getLoginScenario().
 				getBean(PageConstants.VISITOR_PROFILE_PAGE);

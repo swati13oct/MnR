@@ -237,9 +237,9 @@ public class DCEACQVPPPlanSummaryMobile {
 	
 	@Then("^the enduser validates link to Drug Summary Page$")
 	public void the_user_validates_link_to_Drug_Summary_Page() throws Throwable {
-		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario()
+		DrugDetailsPageMobile drugDetailsPage = (DrugDetailsPageMobile) getLoginScenario()
 				.getBean(PageConstants.DCE_Redesign_DrugDetails);
-		DrugSummaryPage drugSummaryPage = drugDetailsPage.ClickLinktoNavigatetoDrugSummary();
+		DrugSummaryPageMobile drugSummaryPage = drugDetailsPage.ClickLinktoNavigatetoDrugSummary();
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
 
 	}
