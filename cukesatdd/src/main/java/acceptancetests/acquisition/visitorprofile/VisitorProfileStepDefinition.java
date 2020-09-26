@@ -158,7 +158,7 @@ public class VisitorProfileStepDefinition {
 	
 	@And("^the user clicks on the shopping cart icon on DCE page$")
 	public void the_user_clicks_on_the_shopping_cart_icon_on_DCE_page_in_AARP() {
-		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario().getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
+		GetStartedPage dce = (GetStartedPage) getLoginScenario().getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
 		VisitorProfilePage visitorProfilePage = dce.clickOnShoppingCart();
 		getLoginScenario().saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfilePage);
 	}
