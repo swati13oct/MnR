@@ -71,7 +71,7 @@ Feature: 2.03-ACQ-Plan details in vpp flow UMS
       | 15671 |   99210 | No              | Spokane County | MA       | AARP Medicare Advantage Essential (HMO)        | Primary Care Provider               | $0 copay                             | Specialist                 | $45 copay                   | Ambulatory Surgical Center          | $0 copay - $390 copay                      | Outpatient Hospital Services          | $0 copay - $390 copay                       | Diabetes Monitoring Supplies          | $0 copay                               | Ground Ambulance Services          | $250 copay                          | Air Ambulance Services          | $250 copay                       | Urgent Care           | $30 - $40 copay        |
       | 15675 |   99210 | No              | Spokane County | SNP      | UnitedHealthcare Dual Complete (HMO D-SNP)     | Primary Care Provider               | $0 copay - 20% of the cost          | Specialist                 | $0 copay - 20% of the cost     | Ambulatory Surgical Center          | $0 copay - 20% of the cost           | Outpatient Hospital Services          | $0 copay - 20% of the cost             | Diabetes Monitoring Supplies          | $0 copay                               | Ground Ambulance Services          | $0 copay - 20% of the cost          | Air Ambulance Services          | $0 copay - 20% of the cost       | Urgent Care           | $0 copay - $65 copay   |
 
-  @vppPlanDetailsRegressionPlanCosts @vppPlanDetailsRegression_2 @prod
+  @vppPlanDetailsRegressionPlanCosts @vppPlanDetailsRegression_2 
   Scenario Outline: UserStory: <TID> -plan type: <plantype> - Verify Plan costs tab in Plan Details for provided plan
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
@@ -93,7 +93,7 @@ Feature: 2.03-ACQ-Plan details in vpp flow UMS
       | 15640 |   99210 | No              | Spokane County | MA       | AARP Medicare Advantage Essential (HMO)        | $0             | $0            |
       | 15641 |   99210 | No              | Spokane County | SNP      | UnitedHealthcare Dual Complete (HMO D-SNP)     | $25            | $300          |
 
-  @vppPlanDetailsRegressionOptionalRiders @vppPlanDetailsRegression_2 @prod
+  @vppPlanDetailsRegressionOptionalRiders @vppPlanDetailsRegression_2
   Scenario Outline: UserStory: <TID> -plan type: <plantype> - Verify Plan costs tab in Plan Details for provided plan
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
@@ -118,7 +118,7 @@ Feature: 2.03-ACQ-Plan details in vpp flow UMS
       | 15662 |   11516 | No              | Nassau County | MAPD     | UnitedHealthcare Medicare Advantage Essential (Regional PPO) | Dental Platinum | $0            | $0        |
 #      | 15661 |   53910 | No              | Adams County  | SNP      | UnitedHealthcare Medicare Advantage Assist (PPO C-SNP)                | Dental Platinum | $14            | $168          |
 
-  @OTC_HealthCatalog @F338035 @F303834 @vppPlanDetailsRegression_3
+  @OTC_HealthCatalog @F338035 @F303834 @vppPlanDetailsRegression_3 @prod
   Scenario Outline: UserStory: <UID> -plan type: <plantype> - Verify specific Additional Benefits in Plan Details for provided plan
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site

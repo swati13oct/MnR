@@ -55,7 +55,7 @@ Feature: 2.01.1-Vpp to plan Summary UHC Scenarios
       | 15542 |   90210 | UHC|  NO              | Los Angeles County | MA       | AARP Medicare Advantage SecureHorizons Essential (HMO) | $0             | $5  copay            | $10  copay | Yes              | $4,900.00          | No drug coverage       |                                                       |current|
       | 15543 |   90210 | UHC | NO              | Los Angeles County | PDP      | AARP MedicareRx Walgreens (PDP)                        | $0             |                      |            |                  |                    | $0  copay              | $0 for Tier 1, Tier 2 $415 for Tier 3, Tier 4, Tier 5 |current|
 
-  @vppPlanSummaryUHC02 @vppPlanSummaryUHCRun01 @vppPlanSummaryUHCRegression @prod
+  @vppPlanSummaryUHC02 @vppPlanSummaryUHCRun01 @vppPlanSummaryUHCRegression 
   Scenario Outline: TID: <TID> -plan type: <plantype> - Verify right rail on plan summary page in UMS site
     Given the user is on uhcmedicaresolutions site landing page
     When the user does plan search using the following information in UMS site
@@ -147,7 +147,7 @@ Feature: 2.01.1-Vpp to plan Summary UHC Scenarios
       | UID     | zipcode | isMultiCounty | county           | MA_testPlans                                                                                           | PDP_testPlans                                                    | SNP_testPlans                              |
 #      | 1598162 |   80001 | NO            | Jefferson County | AARP Medicare Advantage SecureHorizons Plan 1 (HMO),AARP Medicare Advantage SecureHorizons Plan 2 (HMO)| AARP MedicareRx Preferred (PDP),AARP MedicareRx Saver Plus (PDP) | UnitedHealthcare Dual Complete (HMO D-SNP) |
 
-  @vppPlanSummaryUHC04 @prod
+  @vppPlanSummaryUHC04 
   Scenario Outline: UID: <UID> -zipcode: <zipcode> - Verify user can favorite plans will be saved within session on view plan preview page on UHC site
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
@@ -275,7 +275,7 @@ Feature: 2.01.1-Vpp to plan Summary UHC Scenarios
       | 1598166 | Blayer | PDP      |   80001 | NO            | Jefferson County |
       | 1598166 | Blayer | SNP      |   80001 | NO            | Jefferson County |
 
-  @vppPlanSummaryUHC11 @vppPlanSummaryUHCRun02 @vppPlanSummaryUHCRegression @prod
+  @vppPlanSummaryUHC11 @vppPlanSummaryUHCRun02 @vppPlanSummaryUHCRegression 
   Scenario Outline: Verify Provider Search  in UHC site from plan summary page
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
