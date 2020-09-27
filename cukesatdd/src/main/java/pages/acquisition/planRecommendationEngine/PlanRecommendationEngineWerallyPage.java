@@ -122,6 +122,7 @@ public class PlanRecommendationEngineWerallyPage extends UhcDriver {
 				if (actualResultscount >= count) {
 					for (int i = count - 1; i >= 0; i--) {
 						threadsleep(5000);
+						doctorsName.add(searchResults.get(i).findElement(By.cssSelector("h2")).getText().trim());
 						doctorsSPecialtyName.add(searchResults.get(i)
 								.findElement(By.cssSelector("div[class='small specialties']")).getText().trim());
 						WebElement saveButton = searchResults.get(i)
@@ -135,7 +136,7 @@ public class PlanRecommendationEngineWerallyPage extends UhcDriver {
 						}
 						jsClickNew(saveButton);
 						threadsleep(3000);
-						doctorsName.add(doctorNameinWerally.getText().trim());
+//						doctorsName.add(doctorNameinWerally.getText().trim());
 						chooseFirstLocation();
 						saveModalCloseContinueSearchbutton.click();
 					}
