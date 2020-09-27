@@ -60,7 +60,13 @@ public abstract class UhcDriver {
 	@FindBy(xpath = ".//*[contains(@id,'singleLargeLayoutContainer')]")
 	public static WebElement IPerceptionsPopup;
 	
+	@FindBy(xpath = ".//iframe[contains(@id,'IPerceptionsEmbed')]")
+	public static WebElement IPerceptionsFrame;
+	
 	@FindBy(xpath="//*[contains(@id,'ip-no')]")
+	public static WebElement IPerceptionPopuNoBtn;
+	
+	@FindBy(xpath="//*[contains(@class,'btn-no')]")
 	public static WebElement IPerceptionNoBtn;
 	
 	public void start(String url) {
@@ -744,19 +750,29 @@ try {
 	}
 	
 	public void checkModelPopup(WebDriver driver,long timeoutInSec) {
-
+		
+			CommonUtility.waitForPageLoad(driver, IPerceptionsFrame,timeoutInSec);
 			CommonUtility.waitForPageLoad(driver, IPerceptionsPopup,timeoutInSec);
 			
 			try{
 				if(IPerceptionsPopup.isDisplayed())	{
 					//driver.switchTo().frame(IPerceptionsFrame);
-					IPerceptionNoBtn.click();
+					IPerceptionPopuNoBtn.click();
 					//driver.switchTo().defaultContent();
 				}
 			}catch(Exception e){
-				System.out.println("Iperceptions popup not found");
+				System.out.println("IPerceptionsPopup not found");
+				try {
+					if(IPerceptionsFrame.isDisplayed())	{
+						System.out.println("IPerceptionsFrame found");
+						driver.switchTo().frame(IPerceptionsFrame);
+						IPerceptionNoBtn.click();
+						driver.switchTo().defaultContent();
+					}
+				}catch(Exception e1) {
+				System.out.println("Iperceptions not found");
+				}
 			}
-
 	}
 	
 	/**
