@@ -63,6 +63,30 @@ Feature: 1.05.4.ACQ-OLE common tool flow E2E SNP AARP Mobile
     |   Group Number			 | <groupnumber>          |
     | Member Number        | <membernumber>         | 
     Then the user validates the Prescription drug coverage questions in Medicare Information Page
+    Then the user navigates to SEP Page
+        	|	Input Data					 | <inputdataType>   |
+    	| PartA Date         | <partadate>         |
+   		| PartB Date         | <partbdate>         |
+    Then the user validates the Plan details in SEP Page OLE Right Rail
+    #Then the user validates SEP options and Required Fields for PlanType in SEP Page
+    Then the user selects the following options for SEP Page
+      | Select Options | <selectoptions> |
+      | Option Data    | <optiondata>    |
+#    Then the user navigates to Coverage and Health Information Page
+    Then the user navigates to Proposed Effective Date Page
+    Then the user validates Proposed Effective Date is Displayed
+    Then the user navigates to PCP Page and validates PCP page is not displayed for PDP
+    Then the user validates PCP page for MA and MAPD PFFS plans
+    #Then the user validates Look up Provider for MA MAPD and DSNP plans.
+    Then the user navigates to Monthly Plan Premium Page
+    Then the user navigates to Optional Benefits Page for following plans with available Riders
+      | Rider Flag | <riderflag> |
+    Then the user navigates to Authorization Page for plan as per following rider options
+      | Rider Flag | <riderflag> |
+    Then the user validates required fields for Authorization Page
+    Then the user navigates to Review and Submit Page
+    Then the user validates the Plan and Member details on Review and Submit Page
+    Then the user clicks on Submit Enrollment to complete enrollment
     
     Examples: 
      # | TID   | zipcode | isMultiCounty | county           | plantype | planyear |

@@ -18,9 +18,11 @@ import pages.acquisition.ole.CancelOLEModal;
 import pages.acquisition.ole.LearnMoreModal;
 import pages.acquisition.ole.LeavingOLEmodal;
 import pages.acquisition.ole.MedicareInformationPage;
+import pages.acquisition.ole.OLEconfirmationPage;
 import pages.acquisition.ole.PersonalInformationPage;
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.ulayer.VPPPlanSummaryPage;
+import pages.mobile.acquisition.ulayer.ReviewAndSubmitPageMobile;
 import pages.mobile.acquisition.ulayer.VPPPlanSummaryPageMobile;
 import pages.mobile.acquisition.bluelayer.AcquisitionHomePageMobile;
 import pages.mobile.acquisition.planrecommendationengine.CoverageOptionsMobilePage;
@@ -585,5 +587,36 @@ public void the_user_validates_the_Prescription_drugcoverage_questions_in_Medica
 		else
 			Assert.fail("OLE Other Insurance Questions in Medicare Information Page - Adding Member Details Failed");
 	}
+
+
+@Then("^the user clicks on Submit Enrollment to complete enrollment$")
+public void the_user_clicks_on_Submit_Enrollment_to_complete_enrollment() throws Throwable {
+	/*
+	 * String alreadyEnrolled = (String)
+	 * getLoginScenario().getBean(oleCommonConstants.ALREADY_ENROLLED_FLAG); boolean
+	 * alreadyEnrolled_Flag = (alreadyEnrolled.contentEquals("true")) ? true :
+	 * false; if (alreadyEnrolled_Flag) { System.out.
+	 * println("Already Enrolled Error message is Displayed in OLE Medicare Information  PAGE : "
+	 * + alreadyEnrolled + "  :  " + alreadyEnrolled_Flag + " - Validation Passed");
+	 * getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG,
+	 * "true"); Assert.assertTrue(true); } else {
+	 */
+		if (!(MRScenario.environment.equalsIgnoreCase("offline")
+				|| MRScenario.environment.equalsIgnoreCase("prod"))) {
+			ReviewAndSubmitPageMobile reviewSubmitPage = (ReviewAndSubmitPageMobile) getLoginScenario()
+					.getBean(OLE_PageConstants.OLE_REVIEW_SUBMIT_PAGE);
+			OLEconfirmationPage oleConfirmationPage = reviewSubmitPage.submitEnrollment();
+			if (oleConfirmationPage != null) {
+
+				getLoginScenario().saveBean(OLE_PageConstants.OLE_CONFIRMATION_PAGE, oleConfirmationPage);
+				System.out.println("OLE Confirmation Page is Displayed");
+			} else {
+				getLoginScenario().saveBean(OLE_PageConstants.OLE_CONFIRMATION_PAGE, oleConfirmationPage);
+				System.out.println("OLE Confirmation Page is NOT Displayed : OLE Submission Failed");				}
+		} else {
+			System.out.println("Skipping the submit functionality in Offline-Prod environment");
+		}
+	//}
+}
 
 }
