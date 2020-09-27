@@ -19,7 +19,7 @@ jsonReport = "target/cucumber-RunMRATDDAcquisitionVppPlanDetailMobile.json",deta
 features = { "src/main/resources/feature/mobile/acquisition/vpp" }, dryRun=false,
 plugin = {
 		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionVppPlanDetailMobile.json" }, 
-tags = {})
+tags = {"@prod"})
 public class RunMRATDDAcquisitionVPPPlanDetailMobile { 
  
 }

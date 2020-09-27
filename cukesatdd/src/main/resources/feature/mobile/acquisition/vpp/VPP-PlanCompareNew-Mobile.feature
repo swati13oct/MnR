@@ -1,7 +1,7 @@
 @vppPlanCompareAARPNew
 Feature: 1.01.3-Vpp to plan Compare AARP Scenarios
 
-  @vppPlanCompareAARP01 @vppPlanCompareAARPRun01New @vppPlanCompareAARPRegression
+  @vppPlanCompareAARP01 @vppPlanCompareAARPRun01New @vppPlanCompareAARPRegression @prod
   Scenario Outline: TID: <TID> - Plan Type: <plantype> - Verify the checkbox for add to compare link is not visible for single plan.
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site
@@ -41,7 +41,7 @@ Feature: 1.01.3-Vpp to plan Compare AARP Scenarios
       | TID   | zipcode | isMultiCounty | county             | plantype | planyear |
       | 00005 |   90210 | NO            | Los Angeles County | MAPD     | current  |
 
-  @vppPlanCompareAARP03 @vppPlanCompareAARPRegression
+  @vppPlanCompareAARP03 @vppPlanCompareAARPRegression @prod
   Scenario Outline: TID: <TID> - Plan Type: <plantype> - Verify for zipcode with 2 plans when 1 is selected then the other plan is auto-selected and De-selection
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site
@@ -60,7 +60,7 @@ Feature: 1.01.3-Vpp to plan Compare AARP Scenarios
       | TID   | zipcode | isMultiCounty | county         | plantype | planyear |
       | 00006 |   35616 | NO            | Colbert County | MAPD     | current  |
 
-  @vppPlanCompareAARP04 @vppPlanCompareAARPRun01New @vppPlanCompareAARPRegression
+  @vppPlanCompareAARP04 @vppPlanCompareAARPRun01New @vppPlanCompareAARPRegression @prod
   Scenario Outline: <TCID> - Plan Type: <plantype> - To verify links displayed in the global footer of AARP site
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site
@@ -105,7 +105,7 @@ Feature: 1.01.3-Vpp to plan Compare AARP Scenarios
       | TCID  | zipcode | isMultiCounty | county             | plantype | planyear |
       | 00008 |   90210 | No            | Los Angeles County | MAPD     | current  |
 
-  @vppPlanCompareAARP06 @vppPlanCompareAARPRun01New @vppPlanCompareAARPRegression
+  @vppPlanCompareAARP06 @vppPlanCompareAARPRun01New @vppPlanCompareAARPRegression @prod
   Scenario Outline: TID: <TID> - Plan Type: <plantype> - Verify a plan can be removed using Remove link from the widget on the top of page
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site
@@ -147,7 +147,7 @@ Feature: 1.01.3-Vpp to plan Compare AARP Scenarios
       | TID   | zipcode | isMultiCounty | county             | plantype | count | planyear |
       | 00010 |   90210 | NO            | Los Angeles County | MAPD     |     1 | current  |
 
-  @vppPlanCompareAARP08 @vppPlanCompareAARPRun02New @vppPlanCompareAARPRegression
+  @vppPlanCompareAARP08 @vppPlanCompareAARPRun02New @vppPlanCompareAARPRegression @prod
   Scenario Outline: TID: <TID> - Plan Type: <plantype> - valiadation of Add provider from VPP and Edit provider from plan compare page for AARP
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site
@@ -199,7 +199,7 @@ Feature: 1.01.3-Vpp to plan Compare AARP Scenarios
       | TID   | zipcode | isMultiCounty | county             | plantype | planname                                            | planyear |
       | 00012 |   90210 | NO            | Los Angeles County | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) | current  |
 
-  @vppPlanCompareAARP10 @vppPlanCompareAARPRun02New @vppPlanCompareAARPRegression
+  @vppPlanCompareAARP10 @vppPlanCompareAARPRun02New @vppPlanCompareAARPRegression @prod
   Scenario Outline: TID: <TID> - Plan Type: <plantype> - valiadation of Add Hospital from VPP and Edit hospital from plan compare page for AARP
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site
@@ -252,7 +252,7 @@ Feature: 1.01.3-Vpp to plan Compare AARP Scenarios
       | TID   | zipcode | isMultiCounty | county          | plantype | planname                             | planyear |
       | 00014 |   10010 | NO            | New York County | MAPD     | AARP Medicare Advantage Plan 1 (HMO) | current  |
 
-  @vppPlanCompareAARP12 @vppPlanCompareAARPRegression
+  @vppPlanCompareAARP12 @vppPlanCompareAARPRegression @prod
   Scenario Outline: TID: <TID> - Plan Type: <plantype> - valiadation of Add drug from plan compare and Edit drug from plan compare page for AARP
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information
@@ -321,7 +321,7 @@ Feature: 1.01.3-Vpp to plan Compare AARP Scenarios
       | TID   | zipcode | drugName1 | dosage   | plantype | county             | isMultiCounty | quantity | frequency     | branded | drugInitials2 | drugName2  | drugInitials3 | drugName3     | pharmacyType     | distance | pharmacyName   | plantype | planName                                           | quantity | frequency     | newPharmacyType | genericName1 | genricName3 | aep | currentyear | planyear |
       | 00015 |   90002 | Lipitor   | TAB 10MG | MAPD     | Los Angeles County | no            |       30 | Every 1 month | yes     | dron          | dronabinol | Adva          | Advair Diskus | Standard Network | 15 miles | BRAVO PHARMACY | MAPD     | AARP Medicare Advantage SecureHorizons Focus (HMO) |       30 | Every 1 month | Mail Order      | atorvastatin | fluticasone | no  | no          | current  |
 
-  @vppPlanCompareAARP13 @vppPlanCompareAARPRun02 @vppPlanCompareAARPRegression
+  @vppPlanCompareAARP13 @vppPlanCompareAARPRun02 @vppPlanCompareAARPRegression @prod
   Scenario Outline: <TCID> - Plan Type: <plantype> - Navigation for plan comapre to OLE
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site
@@ -339,7 +339,7 @@ Feature: 1.01.3-Vpp to plan Compare AARP Scenarios
       | TCID  | zipcode | isMultiCounty | county             | plantype | planyear |
       | 00016 |   90210 | No            | Los Angeles County | MAPD     | current  |
 
-  @vppPlanCompareAARP14 @vppPlanCompareAARPRun02 @vppPlanCompareAARPRegression
+  @vppPlanCompareAARP14 @vppPlanCompareAARPRun02 @vppPlanCompareAARPRegression @prod
   Scenario Outline: <TCID> - Plan Type: <plantype> - Navigation for plan comapre to Plan Detail
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site
@@ -373,7 +373,7 @@ Feature: 1.01.3-Vpp to plan Compare AARP Scenarios
       | TCID  | zipcode | isMultiCounty | county          | plantype | count |
       | 00018 |   10010 | No            | New York County | MAPD     |     9 |
 
-  @vppPlanCompareAARP16 @vppPlanCompareAARPRun02 @vppPlanCompareAARPRegression
+  @vppPlanCompareAARP16 @vppPlanCompareAARPRun02 @vppPlanCompareAARPRegression 
   Scenario Outline: <TCID> - Plan Type: <plantype> - Validation for remove icon should be disabled when only one plan on plan compare
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site

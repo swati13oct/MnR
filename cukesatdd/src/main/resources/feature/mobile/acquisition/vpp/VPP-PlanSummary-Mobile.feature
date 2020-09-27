@@ -1,7 +1,7 @@
 @vppPlanSummaryUHC
 Feature: 2.01.1-Vpp to plan Summary UHC Scenarios
 
-  @vppPlanSummaryUHC01 @vppPlanSummaryUHCRun01 @vppPlanSummaryUHCRegression
+  @vppPlanSummaryUHC01 @vppPlanSummaryUHCRun01 @vppPlanSummaryUHCRegression @prod
   Scenario Outline: TID: <TID> -plan type: <plantype> - Verify plan cards on plan summary page in <site> site
     Given the user is on medicare acquisition site landing page
     	|Site| <site>|
@@ -49,13 +49,13 @@ Feature: 2.01.1-Vpp to plan Summary UHC Scenarios
       | 15545 |   90210 | UHC| NO              | Los Angeles County | MAPD     | AARP Medicare Advantage SecureHorizons Plan 1 (HMO) | $0             | $0  copay            | $0  copay  | Yes              | $3,400.00          | $4  copay                                  |                  | current |
       | 15546 |   28105 | UHC| YES             | Mecklenburg County | SNP      | UnitedHealthcare Dual Complete (HMO-POS D-SNP)      | $0             | $0  copay            | $0  copay  | No               | $0 - $6,700.00     | $0, $1.25, $3.40 copay, or 15% coinsurance |                  |  current |
 
-    @prodRegression
+    @prod
     Examples: 
       | TID   | zipcode | site|isMultutiCounty | county             | plantype | planName                                               | monthlyPremium | primaryCarePhysician | specialist | referralRequired | outOfPocketMaximum | prescriptionDrugsTier1 | annualDeductible                                      |planyear|
       | 15542 |   90210 | UHC|  NO              | Los Angeles County | MA       | AARP Medicare Advantage SecureHorizons Essential (HMO) | $0             | $5  copay            | $10  copay | Yes              | $4,900.00          | No drug coverage       |                                                       |current|
       | 15543 |   90210 | UHC | NO              | Los Angeles County | PDP      | AARP MedicareRx Walgreens (PDP)                        | $0             |                      |            |                  |                    | $0  copay              | $0 for Tier 1, Tier 2 $415 for Tier 3, Tier 4, Tier 5 |current|
 
-  @vppPlanSummaryUHC02 @vppPlanSummaryUHCRun01 @vppPlanSummaryUHCRegression
+  @vppPlanSummaryUHC02 @vppPlanSummaryUHCRun01 @vppPlanSummaryUHCRegression @prod
   Scenario Outline: TID: <TID> -plan type: <plantype> - Verify right rail on plan summary page in UMS site
     Given the user is on uhcmedicaresolutions site landing page
     When the user does plan search using the following information in UMS site
@@ -84,7 +84,7 @@ Feature: 2.01.1-Vpp to plan Summary UHC Scenarios
       | TID   | zipcode | isMultutiCounty | county             | plantype | firstName | lastName | emailAddress  |planyear|
       | 15549 |   90210 | NO              | Los Angeles County | MAPD     | test      | test     | test@test.com |current|
 
-  @vppPlanSummaryUHC03 @vppPlanSummaryUHCRun01 @vppPlanSummaryUHCRegression
+  @vppPlanSummaryUHC03 @vppPlanSummaryUHCRun01 @vppPlanSummaryUHCRegression 
   Scenario Outline: UD: <UID> -zipcode: <zipcode> - Verify user can save and unsave favorite plans on view plan preview page on UHC site
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
@@ -147,7 +147,7 @@ Feature: 2.01.1-Vpp to plan Summary UHC Scenarios
       | UID     | zipcode | isMultiCounty | county           | MA_testPlans                                                                                           | PDP_testPlans                                                    | SNP_testPlans                              |
 #      | 1598162 |   80001 | NO            | Jefferson County | AARP Medicare Advantage SecureHorizons Plan 1 (HMO),AARP Medicare Advantage SecureHorizons Plan 2 (HMO)| AARP MedicareRx Preferred (PDP),AARP MedicareRx Saver Plus (PDP) | UnitedHealthcare Dual Complete (HMO D-SNP) |
 
-  @vppPlanSummaryUHC04
+  @vppPlanSummaryUHC04 @prod
   Scenario Outline: UID: <UID> -zipcode: <zipcode> - Verify user can favorite plans will be saved within session on view plan preview page on UHC site
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
@@ -173,7 +173,7 @@ Feature: 2.01.1-Vpp to plan Summary UHC Scenarios
       | UID     | zipcode | isMultiCounty | county           | MA_testPlans                                                                                               | PDP_testPlans                                                    | SNP_testPlans                              |
       | 1598162 |   80001 | NO            | Jefferson County | AARP Medicare Advantage SecureHorizons Essential (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO) | AARP MedicareRx Preferred (PDP),AARP MedicareRx Saver Plus (PDP) | UnitedHealthcare Dual Complete (HMO D-SNP) |
 
-  @vppPlanSummaryUHC05 @vppPlanSummaryUHCRun01 @vppPlanSummaryUHCRegression
+  @vppPlanSummaryUHC05 @vppPlanSummaryUHCRun01 @vppPlanSummaryUHCRegression @prod
   Scenario Outline: Validate Cancel button for Multi Cunty Pop-up on VPP for Change Location
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
@@ -201,7 +201,7 @@ Feature: 2.01.1-Vpp to plan Summary UHC Scenarios
   #Examples:
   #| zipcode | plantype | planName                    |
   #|   55344 | MA       | UnitedHealthcare Sync (PPO) |
-  @vppPlanSummaryUHC07 @vppPlanSummaryUHCRun02 @vppPlanSummaryUHCRegression
+  @vppPlanSummaryUHC07 @vppPlanSummaryUHCRun02 @vppPlanSummaryUHCRegression @prod
   Scenario Outline: UID: <UID>  - Verify Call sticky action menu on UHC site
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
@@ -216,7 +216,7 @@ Feature: 2.01.1-Vpp to plan Summary UHC Scenarios
       | UID     | zipcode | isMultiCounty | county           |
       | F322478 |   80001 | NO            | Jefferson County |
 
-  @vppPlanSummaryUHC08 @vppPlanSummaryUHCRun02
+  @vppPlanSummaryUHC08 @vppPlanSummaryUHCRun02 @prod
   Scenario Outline: UI8: <UID>  - Verify Chat sticky action menu on UHC site
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
@@ -253,7 +253,7 @@ Feature: 2.01.1-Vpp to plan Summary UHC Scenarios
       | zipcode | isMultutiCounty | county             | MultiCOuntyzipcode |
       |   90210 | No              | Los Angeles County |              80002 |
 
-  @vppPlanSummaryUHC10 @vppPlanSummaryUHCRun02
+  @vppPlanSummaryUHC10 @vppPlanSummaryUHCRun02 @prod
   Scenario Outline: UID: <UID> -plantype: <plantype> - Verify user can invoke the email button and the print button on view plan summary page on UHC site
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
@@ -275,7 +275,7 @@ Feature: 2.01.1-Vpp to plan Summary UHC Scenarios
       | 1598166 | Blayer | PDP      |   80001 | NO            | Jefferson County |
       | 1598166 | Blayer | SNP      |   80001 | NO            | Jefferson County |
 
-  @vppPlanSummaryUHC11 @vppPlanSummaryUHCRun02 @vppPlanSummaryUHCRegression
+  @vppPlanSummaryUHC11 @vppPlanSummaryUHCRun02 @vppPlanSummaryUHCRegression @prod
   Scenario Outline: Verify Provider Search  in UHC site from plan summary page
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
@@ -417,7 +417,7 @@ Feature: 2.01.1-Vpp to plan Summary UHC Scenarios
       | 15550 |   90210 | NO            | Los Angeles County | MAPD     | 584 MAIN AVE NORWALK       | FAIRFIELD | CONNECTICUT | test      | test     | test@test.com | NO             | Fairfield County |current|
       | 15550 |   78006 | YES           | Bexar County       | MAPD     | 1750 EPPS BRIDGE RD ATHENS | OCONEE    | GEORGIA     | test      | test     | test@test.com | YES            | Clarke County    |current|
 
-  @vppPlanSummaryUHC15 @vppPlanSummaryUHCRun02 @vppPlanSummaryUHCRegression
+  @vppPlanSummaryUHC15 @vppPlanSummaryUHCRun02 @vppPlanSummaryUHCRegression @prod
   Scenario Outline: TID: <TID> -plan type: <plantype> - Verify Rocky Mountain Health Learn More lands on Correct site from UHC site from plan summary page
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
@@ -437,7 +437,7 @@ Feature: 2.01.1-Vpp to plan Summary UHC Scenarios
       | TID       | zipcode | isMultutiCounty | county      | plantype | planName                                              |planyear|
       | US2567142 |   81501 | NO              | Mesa County | SNP      | Rocky Mountain Health Plans DualCare Plus (HMO D-SNP) |current|
 
-  @vppPlanSummaryUHC16 @vppPlanSummaryUHCRun02 @vppPlanSummaryUHCRegression
+  @vppPlanSummaryUHC16 @vppPlanSummaryUHCRun02 @vppPlanSummaryUHCRegression @prod
   Scenario Outline: TID: <TID> -plan type: <plantype> -plan name: -<planName>- Verify People Health plans Learn More lands on Correct site from UHC site from plan summary page
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
