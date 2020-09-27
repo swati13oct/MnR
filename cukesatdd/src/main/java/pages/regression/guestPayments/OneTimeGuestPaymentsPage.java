@@ -85,7 +85,6 @@ public class OneTimeGuestPaymentsPage extends OneTimeGuestPaymentWebElements {
 	public void validateHeaderAndPageElements() {
 
 		Assert.assertTrue("PROBLEM - unable to locate the One time payments Header",guestPaymentsValidate(guestPaymentsHeader));
-		Assert.assertTrue("PROBLEM - unable to locate the text below the header on One time payments Page",guestPaymentsValidate(oneTimePaymentTextBelowHeader));
 		Assert.assertTrue("PROBLEM - unable to locate select a Payment Header",guestPaymentsValidate(selectAPaymentHeader));
 		Assert.assertTrue("PROBLEM - unable to locate other Amount Radio Button",guestPaymentsValidate(otherAmountRadioButton));
 		Assert.assertTrue("PROBLEM - unable to locate other Amount Text Field",guestPaymentsValidate(otherAmountTextField));

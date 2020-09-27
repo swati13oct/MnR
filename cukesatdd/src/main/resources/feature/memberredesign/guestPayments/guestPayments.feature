@@ -116,7 +116,6 @@ Feature: 1.06.7 Member Guest Payments Page
       | Member ID         | <memberID> |
       | Date of Birth     |  <dob>     |
     And I will click Next to proceed to the Make a One-time payment page
-   # And I validate all the header and page elements on One-time payment page
     Then I will entered other amount Due
     #incorrect Amount
       | Other Amount | 250000 |
@@ -140,7 +139,7 @@ Feature: 1.06.7 Member Guest Payments Page
       | Member ID         | <memberID> |
       | Date of Birth     |  <dob>     |
     And I will click Next to proceed to the Make a One-time payment page
-   # And I validate all the header and page elements on One-time payment page
+    And I validate all the header and page elements on One-time payment page
     Then I select Past Amount Due and choose a Credit Debit payment Method
     Then I will enter Credit card Details
       | Name             | <Name>             |
@@ -174,7 +173,7 @@ Feature: 1.06.7 Member Guest Payments Page
       | Member ID         | <memberID> |
       | Date of Birth     |  <dob>     |
     And I will click Next to proceed to the Make a One-time payment page
-    #And I validate all the header and page elements on One-time payment page
+    And I validate all the header and page elements on One-time payment page
     Then I select Past Amount Due and choose a EFT Checking acc payment Method
     Then I will enter EFT Checking Account Details
       | AccountHoldersFirstName  | <FirstName>  |
@@ -328,7 +327,6 @@ Feature: 1.06.7 Member Guest Payments Page
       | Member ID         | <memberID> |
       | Date of Birth     |  <dob>     |
     And I will click Next to proceed to the Make a One-time payment page
-   # And I validate all the header and page elements on One-time payment page
     Then I select and entered other amount Due and choose a EFT Checking acc payment Method
       | Other Amount | <otherAmountDue> |
     Then I will enter EFT Checking Account Details
@@ -374,6 +372,7 @@ Feature: 1.06.7 Member Guest Payments Page
     Then I will click on Review and Submit button leaving EFT Account information blank
     And I will get an error to enter valid Account EFT information
     Then I will enter EFT Checking Account Details
+    #middle name is not entered here which is a mandatory field
       | AccountHoldersName | <FirstName> |
       | AccountNumber      | <accountNo> |
       | RoutingNumber      | <routingNo> |

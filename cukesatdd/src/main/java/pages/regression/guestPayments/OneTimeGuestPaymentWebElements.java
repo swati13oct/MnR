@@ -33,12 +33,10 @@ public class OneTimeGuestPaymentWebElements extends UhcDriver{
 	}
 
 
-	@FindBy(xpath = "//h1[contains(text(),'Make a One-Time Payment')]")
+	@FindBy(xpath = "//h1[contains(text(),'Make a One-time Payment')]")
 	public WebElement guestPaymentsHeader;
 	
-	@FindBy(xpath = "")
-	public WebElement oneTimePaymentTextBelowHeader;
-	
+
 	@FindBy(xpath = "//h3[contains(text(),'Select a Payment Amount')]")
 	public WebElement selectAPaymentHeader;
 	
@@ -60,7 +58,7 @@ public class OneTimeGuestPaymentWebElements extends UhcDriver{
 	@FindBy(xpath = "//*[@class='input-group-t']/input")
 	public WebElement otherAmountTextField;
 	
-	@FindBy(xpath = "")
+	@FindBy(xpath = "//h3[contains(text(),'Choose a Payment Method')]")
 	public WebElement chooseAPaymentHeading;
 	
 	@FindBy(xpath = "//input[@name='paymentMethod'][@value='CC']")
@@ -69,31 +67,31 @@ public class OneTimeGuestPaymentWebElements extends UhcDriver{
 	@FindBy(xpath = "//input[@name='paymentMethod'][@value='EFT']")
 	public WebElement eftCheckingRadioButton;
 	
-	@FindBy(xpath = "")
+	@FindBy(xpath = "//*[@id='paymentsummary']//p[contains(text(),'Plan:')]")
 	public WebElement sideWidgetPlanName;
 	
-	@FindBy(xpath = "")
+	@FindBy(xpath = "//*[@id='paymentsummary']//p[contains(text(),'Member name:')]")
 	public WebElement sideWidgetMemberNameLabel;
 	
-	@FindBy(xpath = "")
+	@FindBy(xpath = "//*[@id='paymentsummary']//p[contains(text(),'Member name:')]//following::p[1]")
 	public WebElement sideWidgetMemberNameValue;
 	
-	@FindBy(xpath = "")
+	@FindBy(xpath = "//*[@id='paymentsummary']//p[contains(text(),'ID:')]")
 	public WebElement sideWidgetMemberIDLabel;
 	
-	@FindBy(xpath = "")
+	@FindBy(xpath = "//*[@id='paymentsummary']//p[contains(text(),'ID:')]//following::p[1]")
 	public WebElement sideWidgetMemberIDValue;
 	
-	@FindBy(xpath = "")
+	@FindBy(xpath = "//*[@id='paymentsummary']//p[contains(text(),'Payment details:')]")
 	public WebElement sideWidgetPaymentDetailsLabel;
 	
-	@FindBy(xpath = "")
+	@FindBy(xpath = "//*[@id='paymentsummary']//p[contains(text(),'Payment details:')]//following::p[1]")
 	public WebElement sideWidgetPaymentDetailsValue;
 	
-	@FindBy(xpath = "")
+	@FindBy(xpath = "//*[@id='paymentsummary']//p[contains(text(),'Total You Pay')]")
 	public WebElement sideWidgetTotalYouPayLabel;
 
-	@FindBy(xpath = "")
+	@FindBy(xpath = "//*[@id='paymentsummary']//p[contains(text(),'Total You Pay')]//following::p[1]")
 	public WebElement sideWidgetTotalYouPayValue;
 	
 	@FindBy(xpath = "//iframe[@class='frame-area']")
@@ -138,7 +136,7 @@ public class OneTimeGuestPaymentWebElements extends UhcDriver{
 	@FindBy(xpath = "//div[2][contains(text(),'Amount must exceed $1.00')]")
 	public WebElement exceed1errorMessage;
 
-	@FindBy(xpath = "//*[@id='root']/div/div/div[1]/div[2]/div/a")
+	@FindBy(xpath = "//*[@class='alert-body']//div[contains(text(),'errors have been found')]")
 	public WebElement noEftAccountInfo;
 
 }
