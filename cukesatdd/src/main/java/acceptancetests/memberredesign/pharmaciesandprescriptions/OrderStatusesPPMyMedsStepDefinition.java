@@ -37,8 +37,15 @@ public class OrderStatusesPPMyMedsStepDefinition {
 	@Then("^user views a status of order received$")
 	public void user_views_a_status_of_Request_canceled() throws Throwable {
 
+
 		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
+		List<Integer> indexOfOrderReceived = pnpPg.getListOfIndexForOrderReceivedOnMyMed();
+		while (indexOfOrderReceived.size() == 0) {
+			pnpPg.clickOnNextPageArrow();
+			indexOfOrderReceived = pnpPg.getListOfIndexForRequestPlacedOnMyMed();
+		}
+		System.out.println("Validating order received element");
 		pnpPg.validateOrderReceived();
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
 
