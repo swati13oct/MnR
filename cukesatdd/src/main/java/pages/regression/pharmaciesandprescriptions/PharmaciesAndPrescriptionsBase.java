@@ -367,6 +367,7 @@ public class PharmaciesAndPrescriptionsBase extends PharmaciesAndPrescriptionsWe
 
 	public void validateHaveItem(String targetItem, WebElement targetElement) {
 		Assert.assertTrue("PROBLEM - unable to locate element for '"+targetItem+"'", noWaitValidate(targetElement));
+		moveMouseToElement(targetElement);
 	}
 	
 	public void validateDoNotHaveItem(String targetItem, WebElement targetElement) {
@@ -423,11 +424,14 @@ public class PharmaciesAndPrescriptionsBase extends PharmaciesAndPrescriptionsWe
 		scrollElementToCenterScreen(targetElement);
 		targetElement.click();
 		CommonUtility.checkPageIsReadyNew(driver);
-		checkModelPopup(driver,5);
+		checkModelPopup(driver,2);
 		String currentUrl=driver.getCurrentUrl();
 		Assert.assertTrue("PROLEM: destination URL is not as expected for '"+targetItem+"'.  Expect to contain ='"+expUrl+"' | Actual='"+currentUrl+"'", currentUrl.contains(expUrl));
 
-		driver.get(origUrl);
+		if (!currentUrl.contains("/needhelpsectioncontactus")) { //note: for contact us will be on orignal page already, no need to change
+			driver.get(origUrl);
+			CommonUtility.checkPageIsReadyNew(driver);
+		}
 		System.out.println("TEST - Switched back to prior page");
 	}	
 	

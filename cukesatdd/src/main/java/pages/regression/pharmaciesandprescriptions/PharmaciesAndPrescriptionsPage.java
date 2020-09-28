@@ -555,19 +555,11 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 
 	
 	public void validateImportNote_preff(String planType, String memberType) {
-		String targetItem="Contact Us - link";
-		WebElement targetElement=contactUsLnk;
-		validateHaveItem(targetItem, targetElement);
-		
-		String expUrl="/member/contact-us/overview.html";
-		WebElement expElement=contactUsTechSupp;
-		//keep validateLnkBehaviorSameTab(planType, memberType, targetItem, targetElement, expUrl, expElement);
-
 		//=================================
 		//note: Important Note		
 		String targetText="Important Note";
-		targetItem=targetText+" - section header text";
-		targetElement=impNoteSecHead;
+		String targetItem=targetText+" - section header text";
+		WebElement targetElement=impNoteSecHead;
 		validateHaveItem(targetItem, targetElement);
 
 		targetItem=targetText+" - section text";
@@ -623,16 +615,16 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 		targetText="Home delivery management";
 		targetItem=targetText+" - section header text";
 		targetElement=delivMgmtSecHead;
-		//keep if (memberType.toUpperCase().contains("LGHIB") || memberType.toUpperCase().contains("SEIB"))
-		//keep 	validateDoNotHaveItem(targetItem, targetElement);
-		//keep else
+		if (memberType.toUpperCase().contains("LGHIB") || memberType.toUpperCase().contains("SEIB"))
+		 	validateDoNotHaveItem(targetItem, targetElement);
+		else
 			validateHaveItem(targetItem, targetElement);
 
 		targetItem=targetText+" - section text";
 		targetElement=delivMgmtSecTxt;
-		//keep if (memberType.toUpperCase().contains("LGHIB") || memberType.toUpperCase().contains("SEIB"))
-		//keep 	validateDoNotHaveItem(targetItem, targetElement);
-		//keep else
+		if (memberType.toUpperCase().contains("LGHIB") || memberType.toUpperCase().contains("SEIB"))
+			validateDoNotHaveItem(targetItem, targetElement);
+		else
 			validateHaveItem(targetItem, targetElement);
 		
 		//=================================
@@ -645,6 +637,18 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 		targetItem=targetText+" - section text";
 		targetElement=findPharSecTxt;
 		validateHaveItem(targetItem, targetElement);
+
+		//=================================
+		//note: Contact Us		
+		targetItem="Contact Us - link";
+		targetElement=contactUsLnk;
+		validateHaveItem(targetItem, targetElement);
+		
+		String expUrl="/needhelpsectioncontactus";
+		WebElement expElement=contactUsTechSupp;
+		validateLnkBehaviorSameTab(planType, memberType, targetItem, targetElement, expUrl, expElement);
+
+
 	}
 	
 	public void validateHeader_preff() {

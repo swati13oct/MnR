@@ -12,22 +12,22 @@ Feature: 1.18.1 Member Pharamcies And Prescriptions page - Pre-Effective
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
       | Expect Link | <expectLink> |
-    Then user navigates to the payment page to validate Pharamcies and Prescriptions link
-    Then user navigates to the health and wellness page to validate Pharamcies and Prescriptions link
-    Then user navigates to the eob page to validate Pharamcies and Prescriptions link
-    Then user navigates to the benefit and coverage page to validate Pharamcies and Prescriptions link
-    ##Then user navigates to the plan documents and resources page to validate Pharamcies and Prescriptions link
-    Then user navigates to the contact us page to validate Pharamcies and Prescriptions link
-    Then user navigates to the account setting to validate Pharamcies and Prescriptions link
-    Then user navigates to the Notices and Disclosures to validate Pharamcies and Prescriptions link
-##    When user navigates to the pharmacies and prescriptions page from dashboard or testharness page
-## 	  | Plan Type   |	<planType>   |
-##	  | Member Type |	<memberType> |
-##    Then user validates preeffective content for header section
-##    Then user validate preeffective content for plan start date and links section
-##    Then user validate preeffective content for important note section
-##    Then user validates Need Help section content for pharmacies and prescriptions page
-##	  Then user validates footer section content for pharmacies and prescriptions page
+##    Then user navigates to the payment page to validate Pharamcies and Prescriptions link
+##    Then user navigates to the health and wellness page to validate Pharamcies and Prescriptions link
+##    Then user navigates to the eob page to validate Pharamcies and Prescriptions link
+##    Then user navigates to the benefit and coverage page to validate Pharamcies and Prescriptions link
+##    ##Then user navigates to the plan documents and resources page to validate Pharamcies and Prescriptions link
+##    Then user navigates to the contact us page to validate Pharamcies and Prescriptions link
+##    Then user navigates to the account setting to validate Pharamcies and Prescriptions link
+##    Then user navigates to the Notices and Disclosures to validate Pharamcies and Prescriptions link
+    When user navigates to the pharmacies and prescriptions page from dashboard or testharness page
+ 	  | Plan Type   |	<planType>   |
+	  | Member Type |	<memberType> |
+    Then user validates preeffective content for header section
+    Then user validate preeffective content for plan start date and links section
+    Then user validate preeffective content for important note section
+    Then user validates Need Help section content for pharmacies and prescriptions page
+	  Then user validates footer section content for pharmacies and prescriptions page
 
 	@pnpPreff_mapd_ind @devRegression
     Examples: 
