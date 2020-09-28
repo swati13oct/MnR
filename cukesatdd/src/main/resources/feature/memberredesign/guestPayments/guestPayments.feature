@@ -1,7 +1,7 @@
 @guestPayment
 Feature: 1.06.7 Member Guest Payments Page
 
-#Footer steps are being commented right now, need to enable them later
+
  @guestPayment01 @validateUrlForDifferentBrands
   Scenario Outline: TID: <TID> - To validate the Guest Payment home page with different brands
     Given I am on the login screen of Guest Payments Portal
@@ -9,16 +9,16 @@ Feature: 1.06.7 Member Guest Payments Page
     Then I validate all the header and page elements
     When I click on link Help me find my id link
     Then I click on the sign in link and navigate to Member Portal sign in page
-    Then I will see the Logo specific to my plan and the Sign in button
-            | Site Name | <siteName> |
+    #Then I will see the Logo specific to my plan and the Sign in button
+          #  | Site Name | <siteName> |
 
     Examples:
-      | TID   | planType | memberID      | dob           | siteName    |
-      | 10000 | MAPD     | 915516555-1   | 10/29/1947    |   AARP      |
-      #| 10001 | MAPD     | 915516555-1   | 10/29/1947    |   UHC       |
-      #| 10002 | MAPD     | 915516555-1   | 10/29/1947    |   RETIREE   |
-     # | 10003 | MAPD     | 915516555-1   | 10/29/1947    |   PCP       |
-     # | 10004 | MAPD     | 915516555-1   | 10/29/1947    |   MEDICA    |
+      | TID   | planType | siteName    |
+      | 10000 | MAPD     |   AARP      |
+      | 10001 | MAPD     |   UHC       |
+      | 10002 | MAPD     |   RETIREE   |
+      | 10003 | MAPD     |   PCP       |
+      | 10004 | MAPD     |   MEDICA    |
 
 
 

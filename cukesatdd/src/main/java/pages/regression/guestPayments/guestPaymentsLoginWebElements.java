@@ -60,22 +60,19 @@ public class guestPaymentsLoginWebElements extends UhcDriver{
 	@FindBy(xpath= "//button[contains(text(),'Next')]")
     public static WebElement nextButton ;
 
-	@FindBy(className= "row have-troble")
-    public static WebElement havingTroubleText;
-
-	@FindBy(className= "row member-footer")
+	@FindBy(className= "unauth-footer-list")
     public static WebElement footerText;
 
 	@FindBy(className= "memberID")
 	public static WebElement MemberID;
 	
-	@FindBy(className= "memberID") // need to update class id
+	@FindBy(id= "Member-ID-Card") 
 	public static WebElement memberIdCardImage;
 	
-	@FindBy(className= "memberID") // need to update class id
+	@FindBy(xpath= "//p[contains(text(),'Plan Member ID ')]") 
 	public static WebElement textOnFindMyIdPopup;
 
-	@FindBy(className= "memberID") // need to update class id
+	@FindBy(xpath= "//button[contains(text(),'Close')]")
 	public static WebElement CancelButtononID;
 	
 	@FindBy(className= "invalid-feedback") 
