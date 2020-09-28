@@ -426,8 +426,10 @@ public class HealthRecordPage  extends HealthRecordBase {
 			} else if (noWaitValidate(testHarn_desktop_AcctProf_IHRLnk_react)) { //note: rally pages starting to use react
 				ihrLnk=testHarn_desktop_AcctProf_IHRLnk_react;
 				acctProfOptLst=testHarn_AcctProfDropdown_react;
+			} else {
+				return false;
 			}
-			Assert.assertTrue("PROBLEM - unable to locate IHR link from teh Account/Profile dropdown menu", ihrLnk!=null);
+			//tbd Assert.assertTrue("PROBLEM - unable to locate IHR link from teh Account/Profile dropdown menu", ihrLnk!=null);
 			//tbd if (noWaitValidate(testHarn_desktop_AcctProf_IHRLnk)) {
 			//tbd 	Assert.assertTrue("PROBLEM - 'Health Record' should be the first link in the dropdown", testHarn_AcctProfDropdown.get(0).getText().toLowerCase().contains("health record"));
 				Assert.assertTrue("PROBLEM - 'Health Record' should be the first link in the dropdown", acctProfOptLst.get(0).getText().toLowerCase().contains("health record"));
