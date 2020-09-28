@@ -560,8 +560,8 @@ public class ProviderSearchPage extends UhcDriver {
 		
 		 jsClickNew(Savedproviders); 
 		 validateNew(finishReturnBtn); 
-		 //finishReturnBtn.click();
-		 jsClickNew(finishReturnBtn); 
+		 finishReturnBtn.click();
+		 //jsClickNew(finishReturnBtn); 
 		waitForCountDecrement(2);
 		//
 		driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
