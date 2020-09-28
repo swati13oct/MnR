@@ -57,6 +57,9 @@ public class ShopforaplanAARPlayer extends UhcDriver {
 
 	@FindBy(xpath = "//div[@id='planTypesColumn']//a[text()='Enroll']")
 	private WebElement enrollLink;
+	
+	@FindBy(xpath = "//div[@id='planTypesColumn']//a[text()='Shop']")
+	private WebElement enrollShopLink;
 
 	@FindBy(xpath = "//a[contains(@href,'ma-enrollment')]")
 	private WebElement maLeanHowToEnrollLink;
@@ -83,6 +86,42 @@ public class ShopforaplanAARPlayer extends UhcDriver {
 			return new EnrollmentBasicsPage(driver);
 		}
 		return null;
+	}
+
+	public ShopforaplanAARPlayer ShopLinkOnShopPlan() throws Exception {
+		waitforElement(enrollShopLink);
+		enrollShopLink.click();
+		Thread.sleep(4000);
+		if (validate(dsnpLeanHowToEnrollShopLink)) {
+			waitforElement(dsnpLeanHowToEnrollShopLink);
+			System.out.println("OLE Learn More Modal is Displayed");
+			return new ShopforaplanAARPlayer(driver);
+		}
+		return null;
+	}
+	
+	@FindBy(xpath = "//a[contains(@href,'dual-special')]")
+	private WebElement dsnpLeanHowToEnrollShopLink;
+	
+	@FindBy(xpath = "//a[contains(@href,'pdp-enrollment')]")
+	private WebElement pdpLeanHowToEnrollShopLink;
+	
+	@FindBy(xpath = "//div[@id='accordion2']//h3[text()='Enrollment']")
+	private WebElement EnrollmentLink;
+	
+	public void clickONEnrollShopLink(String plantype, String planName) throws Exception{
+		if(plantype.equals("MAPD") || plantype.equals("MA") || plantype.equals("SNP")){
+			waitforElement(dsnpLeanHowToEnrollShopLink);
+			dsnpLeanHowToEnrollShopLink.click();
+			Thread.sleep(5000);
+			EnrollmentLink.click();
+		}
+		else if(plantype.equals("PDP")){
+			waitforElement(pdpLeanHowToEnrollShopLink);
+			pdpLeanHowToEnrollShopLink.click();
+			Thread.sleep(5000);
+			EnrollmentLink.click();
+		}		
 	}
 
 }
