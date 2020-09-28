@@ -240,7 +240,7 @@ public class guestPaymentsLogin extends guestPaymentsLoginWebElements{
 		System.out.println(">>>>>>Sign In button is clicked<<<<<<");
 		CommonUtility.checkPageIsReady(driver);
 		
-		if (driver.getTitle().contains("medicare.uhc.com")) {
+		if (driver.getCurrentUrl().contains("medicare.uhc.com")) {
 			return new HSIDLoginPage(driver);
 		}
 		
