@@ -106,15 +106,21 @@ public class HealthRecordWebElements  extends UhcDriver {
 	protected WebElement acctSettingsLnk;
 
 
-	@FindBy(xpath= "//button[@id='accountprofile']")
+	@FindBy(xpath= "//button[@id='accountprofile' or @id='dropdown-toggle-3']")
 	protected WebElement testHarn_AcctProfBtn;
 	
 	@FindBy(xpath="//ul[contains(@class,'dropdown-menu')]//li")
 	protected List<WebElement> testHarn_AcctProfDropdown;
 
+	@FindBy(xpath="//ul[contains(@id,'dropdown-options-3')]//a")
+	protected List<WebElement> testHarn_AcctProfDropdown_react;
+
 	@FindBy(xpath="//div[@class='deskHeaderContainer']//div[contains(@class,'dropdown') and contains(@class,'open')]//a[contains(@id,'ihr')]")
 	protected WebElement testHarn_desktop_AcctProf_IHRLnk;
 
+	@FindBy(xpath="//div[@data-testid='shared-header']//ul[@aria-expanded='true' and @id='dropdown-options-3']//a[@data-testid='TARGET_AWARE_HEALTH_RECORD']")
+	protected WebElement testHarn_desktop_AcctProf_IHRLnk_react;
+	
 	@FindBy(xpath="//h1[contains(text(),'Welcome') and contains(text(),'Health Record')]")
 	protected WebElement heathRecordPgHeaderText;
 
