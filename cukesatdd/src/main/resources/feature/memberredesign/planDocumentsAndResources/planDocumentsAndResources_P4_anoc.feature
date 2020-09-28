@@ -63,7 +63,7 @@ Feature: 1.06.4 Member Plans and Documents - section: Annual Notice of Changes D
 	@active_mapd
 	Examples: 
       | index  | TID         | planType | memberType            | an_sd | an_en_cy | an_es_cy | an_zh_cy | an_en_ny | an_es_ny | an_zh_ny |
-      | 12-069 | 15303       | MAPD     | GROUP_EFF_PDnR        | true  | true     | false    | false    | false    | false    | false    |
+      | 12-069 | 15303       | MAPD     | GROUP_EFF_PDnR        | true  | true     | false    | false    | true     | false    | false    |
      ### note: PEEHIP group terminated as of 12/31/2019
      #| 13-070 | 15130       | MAPD     | PEEHIP_GROUP_EFF_PDnR | true  | false    | false    | false    | false    | false    | false    |
 
