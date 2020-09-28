@@ -57,15 +57,15 @@ public abstract class UhcDriver {
 	public WebDriver driver;
 	private long defaultTimeoutInSec=15;
 	
-	//tbd @FindBy(xpath = ".//*[contains(@id,'singleLargeLayoutContainer')]")
-	//tbd public static WebElement IPerceptionsPopup;
-
 	@FindBy(xpath = ".//iframe[contains(@id,'IPerceptionsEmbed')]")
 	public static WebElement IPerceptionsPopup;
-
-	//tbd @FindBy(xpath="//*[contains(@id,'ip-no')]")
-	//tbd public static WebElement IPerceptionNoBtn;
-
+	
+	@FindBy(xpath = ".//iframe[contains(@id,'IPerceptionsEmbed')]")
+	public static WebElement IPerceptionsFrame;
+	
+	@FindBy(xpath="//*[contains(@id,'ip-no')]")
+	public static WebElement IPerceptionPopuNoBtn;
+	
 	@FindBy(xpath="//*[contains(@class,'btn-no')]")
 	public static WebElement IPerceptionNoBtn;
 
@@ -750,19 +750,29 @@ try {
 	}
 	
 	public void checkModelPopup(WebDriver driver,long timeoutInSec) {
-
+		
+			CommonUtility.waitForPageLoad(driver, IPerceptionsFrame,timeoutInSec);
 			CommonUtility.waitForPageLoad(driver, IPerceptionsPopup,timeoutInSec);
 			
 			try{
 				if(IPerceptionsPopup.isDisplayed())	{
-					driver.switchTo().frame(IPerceptionsPopup);
-					IPerceptionNoBtn.click();
-					driver.switchTo().defaultContent();
+					//driver.switchTo().frame(IPerceptionsFrame);
+					IPerceptionPopuNoBtn.click();
+					//driver.switchTo().defaultContent();
 				}
 			}catch(Exception e){
-				System.out.println("Iperceptions popup not found");
+				System.out.println("IPerceptionsPopup not found");
+				try {
+					if(IPerceptionsFrame.isDisplayed())	{
+						System.out.println("IPerceptionsFrame found");
+						driver.switchTo().frame(IPerceptionsFrame);
+						IPerceptionNoBtn.click();
+						driver.switchTo().defaultContent();
+					}
+				}catch(Exception e1) {
+				System.out.println("Iperceptions not found");
+				}
 			}
-
 	}
 	
 	/**
