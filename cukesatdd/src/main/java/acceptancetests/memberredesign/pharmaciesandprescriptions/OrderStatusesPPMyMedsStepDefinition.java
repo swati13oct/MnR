@@ -46,4 +46,22 @@ public class OrderStatusesPPMyMedsStepDefinition {
 	}
 
 
+	@Then("^user views a status of request placed cta$")
+	public void user_views_a_status_of_request_placed_cta() throws Throwable {
+
+
+		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
+				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
+		List<Integer> indexOfRequestPlaced = pnpPg.getListOfIndexForRequestPlacedOnMyMed();
+		while (indexOfRequestPlaced.size() == 0) {
+			pnpPg.clickOnNextPageArrow();
+			indexOfRequestPlaced = pnpPg.getListOfIndexForRequestPlacedOnMyMed();
+		}
+		System.out.println("Validating request placed element");
+		pnpPg.validateRequestPlaced();
+		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
+
+	}
+
+
 }
