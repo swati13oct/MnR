@@ -537,7 +537,6 @@ public class ProviderSearchPage extends UhcDriver {
 			}
 
 		}
-		//CommonUtility.waitForPageLoadNew(driver, Savedproviders, 30);
 		CommonUtility.waitForPageLoadNew(driver, Savedproviders, 10);
 		 jsClickNew(Savedproviders); 	
 

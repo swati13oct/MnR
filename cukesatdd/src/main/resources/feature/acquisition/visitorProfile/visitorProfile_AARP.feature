@@ -4,10 +4,11 @@
 Feature: 1.08. ACQ- Visitor profile AARP
 
   @addDrugs @addDrugsULayerSmoke @visitorProfileRegressionAARP @prodRegression @DCE_Regression_Ulayer_VisitorProfile @prodRegression
-  Scenario Outline: Verify user is able to add drug information to the unauthenticated visitor profile
-    Given the user is on the AARP medicare site landing page
-    And the user clicks on the shopping cart icon in AARP site
-    And the user clicks on the add drugs button in the profile in AARP site
+  Scenario Outline: Verify user is able to add drug information to the unauthenticated visitor profile - zip -<zipcode>
+    Given the user is on medicare acquisition site landing page
+    		|Site| <site>|
+    And the user clicks on the shopping cart icon
+    And the user clicks on the add drugs button to navigate to DCE Redesign on the profile page
     Then the user validates Get Started Page
     Then the user clicks on Build Drug List to navigate to Build Drug List Page
     Then the user searches and adds the following Drug to Drug List
@@ -15,19 +16,22 @@ Feature: 1.08. ACQ- Visitor profile AARP
     Then the user clicks on Review Drug Costs to Land on Zip Entry Page
     When user enters valid zipcode and county
       | ZipCode | <zipCode> |
+    And user selects plan year
     And user clicks on continue button in Zip Entry Page
-    And the user clicks on the shopping cart icon on DCE page in AARP
-    Then the user should be able to see the Drug information in the guest profile page on aarp
+    And the user clicks on the shopping cart icon on DCE page
+    Then the user should be able to see the Drug information in the guest profile page
       | Drugname | <drug1> |
 
+		@addDrugs_aarp
     Examples: 
-      | state   | drug1   | zipCode |
-      | Alabama | Lipitor |   90210 |
+      | state   | drug1   | zipCode |	site |
+      | Alabama | Lipitor |   90210 |	AARP |
 
   @addDrugsDCE1
-  Scenario Outline: Verify user is able to add drug from DCE to the unauthenticated visitor profile
-    Given the user is on AARP medicare acquisition site landing page
-    When I access the acquisition DCE tool from home page
+  Scenario Outline: Verify user is able to add drug from DCE to the unauthenticated visitor profile - zip -<zipcode>
+    Given the user is on medicare acquisition site landing page
+    		|Site| <site>|
+    When I access the acquisition DCE Redesign from home page
     Then the user validates Get Started Page
     Then the user clicks on Build Drug List to navigate to Build Drug List Page
     Then the user searches and adds the following Drug to Drug List
@@ -35,23 +39,25 @@ Feature: 1.08. ACQ- Visitor profile AARP
     Then the user clicks on Review Drug Costs to Land on Zip Entry Page
     When user enters valid zipcode and county
       | ZipCode | <zipCode> |
+    When user selects plan year
     And user clicks on continue button in Zip Entry Page
-    And the user clicks on the shopping cart icon on DCE page in AARP
-    Then the user should be able to see the Drug information in the guest profile page on aarp
+    And the user clicks on the shopping cart icon on DCE page
+    Then the user should be able to see the Drug information in the guest profile page
       | Drugname | <drug1> |
 
     Examples: 
-      | state   | drug1   | zipCode |
-      | Alabama | Lipitor |   90210 |
+      | state   | drug1   | zipCode |	site |
+      | Alabama | Lipitor |   90210 |	AARP |
 
   @addPlans @addPlansULayerSmoke @visitorProfileRegressionAARP @prodRegression
   Scenario Outline: Verify user is able to add plans to the unauthenticated visitor profile - zip -<zipcode>
-    Given the user is on AARP medicare acquisition site landing page
-    And the user selects the state drop down value in AARP home page
+    Given the user is on medicare acquisition site landing page
+    		|Site| <site>|
+    And the user selects the state drop down value in home page
       | State | <state> |
-    And the user clicks on the shopping cart icon in AARP site
-    And the user clicks on the add plans button in the profile in AARP site
-    When the user enters zipcode on health plans page in the AARP site
+    And the user clicks on the shopping cart icon
+    And the user clicks on the add plans button in the profile
+    When the user enters zipcode on health plans page
       | Zip Code        | <zipcode>       |
       | County Name     | <county>        |
       | Is Multi County | <isMultiCounty> |
@@ -66,10 +72,11 @@ Feature: 1.08. ACQ- Visitor profile AARP
     And user delets the added plans on visitor profile page of AARP site
       | Test Plans | <testPlans> |
 
+    @addPlans_AARP
     Examples: 
-      | state   | UID       | zipcode | isMultiCounty | county           | plantype | testPlans                                                                                              |
-      | Alabama | US1770330 |   90210 | NO            | Jefferson County | MAPD     | AARP Medicare Advantage SecureHorizons Focus (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO) |
-      | Alabama | US1770330 |   53503 | NO            | Jefferson County | SNP      | UnitedHealthcare Dual Complete LP1 (HMO D-SNP),UnitedHealthcare Medicare Advantage Assist (PPO C-SNP)  |
+      |	site	| state   | UID       | zipcode | isMultiCounty | county           | plantype | testPlans                                                                                              |
+      |	AARP	| Alabama | US1770330 |   90210 | NO            | Jefferson County | MAPD     | AARP Medicare Advantage SecureHorizons Focus (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO) |
+      #| Alabama | US1770330 |   53503 | NO            | Jefferson County | SNP      | UnitedHealthcare Dual Complete LP1 (HMO D-SNP),UnitedHealthcare Medicare Advantage Assist (PPO C-SNP)  |
 
   @addPlansVPP
   Scenario Outline: Verify user is save plans from VPP to the unauthenticated visitor profile

@@ -349,7 +349,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
    	private WebElement ChatSamHead;
    	
    	//@FindBy(xpath ="//*[contains(@id,'sp-close-frame')]")
-   	@FindBy(xpath =" //*[@id='sp-chat-frame']//div/div[@id='sp-close-frame']")
+   	@FindBy(xpath = "//*[@id='sp-chat-frame']//div/div[@id='sp-close-frame']")
 	private WebElement ChatSamTFNClose;
    	
    	@FindBy(id = "pharmacy-zip-search")
@@ -1436,7 +1436,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	
 	 public void validateCallSam() throws InterruptedException {
 	        boolean present;
-	        driver.navigate().refresh();
+//	        driver.navigate().refresh();
 	        try {
 	        validateNew(callsam);
 	        present = true;
@@ -1456,14 +1456,14 @@ public class AcquisitionHomePage extends GlobalWebElements {
 //			Actions action = new Actions(driver);
 //			WebElement element = callsam;
 //			action.moveToElement(element).perform();
-			waitforElementNew(callsamtooltip,60);
+			waitforElementNew(callsamtooltip,30);
 			String toolTipText = callsamtooltip.getText();
 			System.out.println("====================================================================");
 			System.out.println(toolTipText);
 			System.out.println("====================================================================");
 			
 	        if (toolTipText.contains(CallSam1877)) {
-	          System.out.println("Call sticky action menu roll out and contain the text"+ toolTipText);
+	          System.out.println("Call sticky action menu roll out and contain the text: "+ toolTipText);
 	          
 	        }
 	        else if (toolTipText.contains(CallSam1855))	{
@@ -1476,9 +1476,11 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		}
 		
 		public AcquisitionHomePage  validateCallpopup() throws InterruptedException {
-			CommonUtility.checkPageIsReady(driver);
+//			CommonUtility.checkPageIsReady(driver);
+			validate(callsamtooltip);
+			CheckiPerseptions();
 			callsam.click();
-			System.out.println("@@@@@@@@@@@@@@@ Call Icon Clicked @@@@@@@@@@@@@@@");		
+			System.out.println("@@@@@@@@@@@@@@@ Call Icon Clicked @@@@@@@@@@@@@@@");
 			driver.switchTo().activeElement();
 			System.out.println(CallSamTFN.getText());
 			CallSamTFNClose.click();
@@ -1524,9 +1526,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			//CommonUtility.checkPageIsReady(driver);
 			chatsam.click();
 			System.out.println("@@@@@@@@@@@@@@@ Chat Icon Clicked @@@@@@@@@@@@@@@");	
-			chatsamtooltip.click();
+//			chatsamtooltip.click();
 			driver.switchTo().activeElement();
-			System.out.println(ChatSamHead.getText());
+//			System.out.println(ChatSamHead.getText());
 			ChatSamTFNClose.click();
 			validateNew(chatsam);		
 			return null;
