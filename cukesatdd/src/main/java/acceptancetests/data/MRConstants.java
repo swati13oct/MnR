@@ -612,11 +612,11 @@ public class MRConstants {
 	public static final String AARP_CHAT_AGENT = "https://stg-wwe.uhc.com/ui/ad/v1/index.html";
 
 	public static String PROV_NAME = "";
-	public static String AARP_GUEST_PAYMENTS_PAGE_URL = "https://www.team-atest-medicare.ocp-elr-core-nonprod.optum.com/aarp/content/medicare/guest-payment.html#/";
-	public static String UHC_GUEST_PAYMENTS_PAGE_URL = "https://www.team-atest-medicare.ocp-elr-core-nonprod.optum.com/aarp/content/medicare/guest-payment.html#/";
-	public static String RETIREE_GUEST_PAYMENTS_PAGE_URL = "https://www.team-atest-medicare.ocp-elr-core-nonprod.optum.com/aarp/content/medicare/guest-payment.html#/";
-	public static String PCP_GUEST_PAYMENTS_PAGE_URL = "https://www.team-atest-medicare.ocp-elr-core-nonprod.optum.com/aarp/content/medicare/guest-payment.html#/";
-	public static String MEDICA_GUEST_PAYMENTS_PAGE_URL = "https://www.team-atest-medicare.ocp-elr-core-nonprod.optum.com/aarp/content/medicare/guest-payment.html#/";
+	public static String AARP_GUEST_PAYMENTS_PAGE_URL = "https://stage-paymyaarppremium.uhc.com";
+	public static String UHC_GUEST_PAYMENTS_PAGE_URL = "https://stage-paymyuhcpremium.uhc.com";
+	public static String RETIREE_GUEST_PAYMENTS_PAGE_URL = "https://stage-paymyuhcpremium.uhc.com/retiree";
+	public static String PCP_GUEST_PAYMENTS_PAGE_URL = "https://stage-paymypcppremium.uhc.com";
+	public static String MEDICA_GUEST_PAYMENTS_PAGE_URL = "https://stage-paymymedicapremium.uhc.com";
 	public static final String AARP_HAWL = "http://stage-myaarpmedicare.uhc.com/extras";
 	// public static final String
 	// AARP_HAWL="https://stage-medicare.uhc.com/?TARGET=SMSR/healthlineu/health/uhcarticle/hwal-introducing-at-your-best%3fdeeplink=true";
