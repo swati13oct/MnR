@@ -235,6 +235,14 @@ public class VisitorProfileStepDefinition_AARP {
 		visitorProfile.signIn(username, password);
 	}
 	
+	@Then ("^user clicks on back to plan on VP authenticated AARP site$")
+	
+	public void user_clicks_on_back_to_plan_on_VP_authenticated_AARP_site() {
+		VisitorProfilePage visitorProfile = (VisitorProfilePage) getLoginScenario().getBean(PageConstants.VISITOR_PROFILE_PAGE);
+		visitorProfile.backToPlans();
+	}
+	
+	
 	@And("^enroll In Plan should not be clickable on Visitor Profile page in Agent mode on aarp$")
 	public void next_button_should_not_be_clickable_on_OLE_welcome_page_in_Agent_mode() {
 		VisitorProfilePage visitorProfile = (VisitorProfilePage) getLoginScenario().getBean(PageConstants.VISITOR_PROFILE_PAGE);
