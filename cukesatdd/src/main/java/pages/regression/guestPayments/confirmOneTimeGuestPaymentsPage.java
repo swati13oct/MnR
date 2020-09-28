@@ -143,7 +143,7 @@ public class confirmOneTimeGuestPaymentsPage extends UhcDriver {
 	private WebElement anotherEmailReceipt;
 
 	@FindBy(xpath = "")
-	private WebElement cancelButton;
+	private WebElement cancelButtonOnPrint;
 
 	public confirmOneTimeGuestPaymentsPage(WebDriver driver) {
 		super(driver);
@@ -285,20 +285,11 @@ public class confirmOneTimeGuestPaymentsPage extends UhcDriver {
 
 		printReceiptURL.click();
 		System.out.println(">>>>>>Print Payment receipt Link is clicked<<<<<<");
-		CommonUtility.checkPageIsReady(driver);
-
-//		if (driver.getTitle().contains("Print Receipt")) {
-//			System.out.println(">>>>>>>>User Navigated on Print pdf receipt Page<<<<<<<<<<<");
-//		}
-		cancelButton.click();
-
-		if (driver.getTitle().contains("Confirm")) {
-			System.out.println(">>>>>>>>>>Confirm Payments page is displayed<<<<<<<<<<");
-
-		} else {
-			System.out.println(">>>>>>>>>Confirm Payments page is not displayed<<<<<<<<<<");
-
-		}
+		driver.switchTo().window(driver.getWindowHandles().toArray()[1].toString());
+		
+		JavascriptExecutor executor = (JavascriptExecutor) driver;
+		executor.executeScript("return document.querySelector('print-preview-app').shadowRoot.querySelector('print-preview-sidebar').shadowRoot.querySelector('print-preview-destination-settings').shadowRoot.querySelector('cr-button.cancel-button').click();");
+		driver.switchTo().defaultContent();
 
 	}
 
