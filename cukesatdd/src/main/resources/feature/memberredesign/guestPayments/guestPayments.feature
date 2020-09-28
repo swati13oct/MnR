@@ -117,12 +117,12 @@ Feature: 1.06.7 Member Guest Payments Page
       | Date of Birth     |  <dob>     |
     And I will click Next to proceed to the Make a One-time payment page
     Then I will entered other amount Due
-    #incorrect Amount
-      | Other Amount | 250000 |
-    And I will get an error message Cannot exceed annual remaining amount
-    Then I will entered other amount Due
       | Other Amount | 0.50 |
     And I will get an error message Amount must exceed 1.00
+    Then I will entered other amount Due
+      | Other Amount | 250000 |
+    And I will get an error message Cannot exceed annual remaining amount
+
 
     Examples:
       | TID   | planType | memberID    | dob        | siteName |
