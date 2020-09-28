@@ -208,7 +208,8 @@ public class WelcomePage extends UhcDriver{
 	public LearnMoreModal OpenLearnMore() {
 		checkModelPopup(driver);
 		validate(LearnMoreButton);
-		LearnMoreButton.click();
+		jsClickNew(LearnMoreButton);
+//		LearnMoreButton.click();
 		try {
 			Thread.sleep(6000);
 		} catch (InterruptedException e) {

@@ -4,39 +4,37 @@
 package atdd.framework;
 
 import java.text.DecimalFormat;
-import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Random;
-import java.util.TimeZone;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
+import java.util.regex.Pattern;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
-
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Cookie;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.html5.LocalStorage;
 import org.openqa.selenium.html5.SessionStorage;
-import org.openqa.selenium.html5.WebStorage;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.remote.Augmenter;
+import org.openqa.selenium.remote.RemoteExecuteMethod;
+import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.remote.html5.RemoteWebStorage;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import com.google.common.base.Predicate;
 
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.ElementData;
@@ -44,14 +42,11 @@ import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
-import io.appium.java_client.MobileElement;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.touch.WaitOptions;
 import io.appium.java_client.touch.offset.PointOption;
-
-import java.util.regex.Pattern;
 
 /**
  * @author pjaising
@@ -62,8 +57,14 @@ public abstract class UhcDriver {
 	public WebDriver driver;
 	private long defaultTimeoutInSec=15;
 	
+	@FindBy(xpath = ".//*[contains(@id,'singleLargeLayoutContainer')]")
+	public static WebElement IPerceptionsPopup;
+	
 	@FindBy(xpath = ".//iframe[contains(@id,'IPerceptionsEmbed')]")
 	public static WebElement IPerceptionsFrame;
+	
+	@FindBy(xpath="//*[contains(@id,'ip-no')]")
+	public static WebElement IPerceptionPopuNoBtn;
 	
 	@FindBy(xpath="//*[contains(@class,'btn-no')]")
 	public static WebElement IPerceptionNoBtn;
@@ -748,19 +749,29 @@ try {
 	}
 	
 	public void checkModelPopup(WebDriver driver,long timeoutInSec) {
-
+		
 			CommonUtility.waitForPageLoad(driver, IPerceptionsFrame,timeoutInSec);
+			CommonUtility.waitForPageLoad(driver, IPerceptionsPopup,timeoutInSec);
 			
 			try{
-				if(IPerceptionsFrame.isDisplayed())	{
-					driver.switchTo().frame(IPerceptionsFrame);
-					IPerceptionNoBtn.click();
-					driver.switchTo().defaultContent();
+				if(IPerceptionsPopup.isDisplayed())	{
+					//driver.switchTo().frame(IPerceptionsFrame);
+					IPerceptionPopuNoBtn.click();
+					//driver.switchTo().defaultContent();
 				}
 			}catch(Exception e){
-				System.out.println("Iperceptions popup not found");
+				System.out.println("IPerceptionsPopup not found");
+				try {
+					if(IPerceptionsFrame.isDisplayed())	{
+						System.out.println("IPerceptionsFrame found");
+						driver.switchTo().frame(IPerceptionsFrame);
+						IPerceptionNoBtn.click();
+						driver.switchTo().defaultContent();
+					}
+				}catch(Exception e1) {
+				System.out.println("Iperceptions not found");
+				}
 			}
-
 	}
 	
 	/**
@@ -822,9 +833,14 @@ try {
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("window.open('"+urlGetSysTime+"','_blank');");
 		for(String winHandle : driver.getWindowHandles()){
-			driver.switchTo().window(winHandle);
+			if(!winHandle.equals(winHandleBefore)) {
+				driver.switchTo().window(winHandle);
+				break;
+			}
 		}
-		WebElement currentSysTimeElement=timeJson;
+		checkIfPageReadySafari();
+//		WebElement currentSysTimeElement=timeJson;
+		WebElement currentSysTimeElement=driver.findElement(By.xpath("//body/pre"));
 		String currentSysTimeStr=currentSysTimeElement.getText();
 		System.out.println("currentSysTimeStr="+currentSysTimeStr);
 		JSONParser parser = new JSONParser();
@@ -1048,7 +1064,9 @@ try {
 	
 	public String ReturnDriverStorage(WebDriver driver, String StorageType, String StorageKey) {
 		String ReturnValue = "";
-		WebStorage webStorage = (WebStorage) new Augmenter().augment(driver);
+//		WebStorage webStorage = (WebStorage) new Augmenter().augment(driver);
+		RemoteExecuteMethod executeMethod = new RemoteExecuteMethod((RemoteWebDriver) driver);
+		RemoteWebStorage webStorage = new RemoteWebStorage(executeMethod);
 		if(StorageType.equalsIgnoreCase("local storage") || StorageType.equalsIgnoreCase("localstorage") ) {
 			LocalStorage localStorage = webStorage.getLocalStorage();		
 			ReturnValue = localStorage.getItem(StorageKey);
@@ -1160,5 +1178,48 @@ try {
 		}
 		return ReturnValue;
 	}
+    
+    public boolean waitForPageLoadSafari() {
+    	int counter = 5;
+    	boolean ready = false;
+    	if(checkIfPageReadySafari()) {
+    		do {
+    			try {
+    				WebElement overlay = driver.findElement(By.xpath("//body/div[@id='overlay']"));
+    				if(!overlay.isDisplayed()) {
+    					ready = true;
+    					break;
+    				}
+    			} catch(WebDriverException e) {/**decrement counter and retry*/}
 
+    			System.out.println("Waiting for page to load");
+    			counter--;
+
+    		} while(counter > 0);
+
+    	}
+    	return ready;
+    }
+
+    
+    public boolean checkIfPageReadySafari() {
+    	int counter = 10;
+    	boolean ready = false;
+    	if(MRScenario.browserName.equalsIgnoreCase("Safari")) {
+    		CommonUtility.checkPageIsReadyNew(driver);
+    		do {
+    			try {
+    				threadsleep(5);
+    				if(!driver.getPageSource().isEmpty()) {
+    					ready = true;
+    					break;
+    				}
+    			} catch(WebDriverException e) {/**decrement counter and retry*/}
+    			counter--;
+    		}
+    		while(counter > 0);
+    	}
+    	return ready;
+    }
+    
 }

@@ -15,7 +15,8 @@ import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
 import cucumber.api.java.en.Then;
 import gherkin.formatter.model.DataTableRow;
-import pages.acquisition.commonpages.AcquisitionHomePage;
+import pages.acquisition.ulayer.AcquisitionHomePage;
+//import pages.acquisition.commonpages.AcquisitionHomePage;
 /**
  *Functionality:Global Header Footer 
  */
@@ -70,20 +71,10 @@ public class SAMIconsStepDefinitionAARP {
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		aquisitionhomepage.validateChatSam();
 		aquisitionhomepage.verifyChatpopup();
-		//aquisitionhomepage.validateChatpopupconnect();	
+		aquisitionhomepage.validateChatpopupconnect();	
 		
 	}
 	
-	@Then("^the user validates whether chat icon is visible")
-	public void the_user_validates_whether_chaticon_isvisible() throws Throwable {
-		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
-				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		aquisitionhomepage.validateChatSam();
-		aquisitionhomepage.verifyChatpopup();
-		//aquisitionhomepage.validateChatpopupconnect();	
-		
-	}
-
 	@Then("^the user validates whether chat Agent is Available on AARP")
 	public void the_user_validates_whether_chat_Agent_is_visible_on_UHC() throws Throwable {
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
@@ -99,7 +90,7 @@ public class SAMIconsStepDefinitionAARP {
 	boolean flag= false;
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-	flag=aquisitionhomepage.validateChat();
+	flag=aquisitionhomepage.validateChatNonHours();
 
 		Assert.assertTrue("Chat Icon is visible in Non-Chat Hours",flag);
 		

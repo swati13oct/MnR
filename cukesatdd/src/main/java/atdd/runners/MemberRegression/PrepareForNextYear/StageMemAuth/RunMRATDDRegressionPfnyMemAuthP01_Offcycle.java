@@ -14,7 +14,7 @@ jsonReport = "target/cucumber-RunMRATDDRegressionPfnyMemAuthP01_Offcycle.json",d
 overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionPfnyMemAuthP01_Offcycle")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberredesign" }, 
 features = { "src/main/resources/feature/memberredesign/prepareForNextYear" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionPfnyMemAuthP01_Offcycle.json" }, tags = { "@memAuth_prepareForNextYear01a" })
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionPfnyMemAuthP01_Offcycle.json" }, tags = { "@memAuth_prepareForNextYear01_offcycle" })
 public class RunMRATDDRegressionPfnyMemAuthP01_Offcycle {
 
 }

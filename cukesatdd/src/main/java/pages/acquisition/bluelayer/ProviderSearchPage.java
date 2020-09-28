@@ -19,6 +19,7 @@ import acceptancetests.data.ElementData;
 import acceptancetests.data.MRConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
+import pages.acquisition.bluelayer.VPPPlanSummaryPage;
 
 
 /**
@@ -321,62 +322,72 @@ public class ProviderSearchPage extends UhcDriver {
 	public VPPPlanSummaryPage MultipleselectsProvider()  {
 		GetStarted.click();
 
-		CommonUtility.waitForPageLoadNew(driver, People, 30);
+		//CommonUtility.waitForPageLoadNew(driver, People, 30);
+		CommonUtility.waitForPageLoadNew(driver, People, 10);
 		People.click();
 
-		CommonUtility.waitForPageLoadNew(driver, Primary, 30);
+		//CommonUtility.waitForPageLoadNew(driver, Primary, 30);
+		CommonUtility.waitForPageLoadNew(driver, Primary, 10);
 		Primary.click();
 
-		CommonUtility.waitForPageLoadNew(driver, Physician, 30);
+		//CommonUtility.waitForPageLoadNew(driver, Physician, 30);
+		CommonUtility.waitForPageLoadNew(driver, Physician, 10);
 		jsClickNew(Physician);
 		
-		//int counter = 0;
-		for(WebElement element :MulitpleSaveBtns)
-		{
-			CommonUtility.waitForPageLoadNew(driver, element, 45);
-			jsClickNew(element);
-			
-			if(validate(selectLocationOption)){
-				CommonUtility.waitForPageLoadNew(driver, selectLocationOption, 45);
-				
-				selectLocationOption.click();
-				
-				validateNew(NewsaveBtn2);
-	
-				jsClickNew(NewsaveBtn2);
-				
-			}
+		CommonUtility.waitForPageLoadNew(driver, selectProviderBtn, 30);
+		jsClickNew(selectProviderBtn);
 		
-			CommonUtility.waitForPageLoadNew(driver, continueSearching, 45);
-			continueSearching.click();
+		int counter =0;
+		for (WebElement element : MulitpleSaveBtns) {
+			//CommonUtility.waitForPageLoadNew(driver, element, 45);
+			CommonUtility.waitForPageLoadNew(driver, element, 10);
+			jsClickNew(element);
+
+			if (validate(selectLocationOption,10)) {
+				selectLocationOption.click();
+				validateNew(saveBtn2);
+				saveBtn2.click();
+			}
+			/*New Changes
+			 */
+			//CommonUtility.waitForPageLoadNew(driver, continueSearching, 45);
+			CommonUtility.waitForPageLoadNew(driver, continueSearching, 10);
+			//continueSearching.click();
+			jsClickNew(continueSearching);
 			
 			/*
 			CommonUtility.waitForPageLoadNew(driver, BtnClose, 45);
-			jsClickNew(BtnClose);
-			*/
-			//counter++;
-//			if(counter==2)
-//			{
-//				break;
-//			}
-			
-		}
-			
-		CommonUtility.waitForPageLoadNew(driver, Savedproviders, 30);
+			jsClickNew(BtnClose);*/
 
-		 jsClickNew(Savedproviders); 
-		 validateNew(finishReturnBtn); 
-		 finishReturnBtn.click();
-		 
-		/*Old Changes
-		 * jsClickNew(Savedproviders); validateNew(providerNameText);
-		 * validateNew(Checkcoverage); Checkcoverage.click();
-		 */
-		waitForCountDecrement(2);
-		driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
+		
+		counter++;
+		if(counter==6)
+			{
+			break;			
+			}
 
-		return new VPPPlanSummaryPage(driver);
 		}
+		//CommonUtility.waitForPageLoadNew(driver, Savedproviders, 30);
+		CommonUtility.waitForPageLoadNew(driver, Savedproviders, 10);
+		 jsClickNew(Savedproviders); 	
+
+	if(driver.findElements(By.xpath("(//button[contains(text(),'Check Provider Coverage')])[1]")).size() > 0){
+		System.out.println("OLD Rally page displayed");
+		Checkcoverage.click();
+	}	
+	else if(driver.findElements(By.xpath("(//form[@data-ui-element-name='check-provider-coverage']//button[contains(@class,'action-btn')])[1]")).size() > 0){
+		System.out.println("NEW Rally page displayed");
+		FinishButton.click();
+	}else
+		System.out.println("Issue with Xpath");
+
+	threadsleep(3);
+	waitForCountDecrement(2);
+	driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
+
+	return new VPPPlanSummaryPage(driver);
+}
+
 
 	public void entersZipcodeAndSelectPlanName(String zipcode, String planName, String year) {
 		// TODO Auto-generated method stub

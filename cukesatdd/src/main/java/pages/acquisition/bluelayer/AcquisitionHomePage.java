@@ -32,11 +32,20 @@ import org.testng.Assert;
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.pharmacyLocator.PharmacySearchPage;
 import pages.acquisition.ulayer.PageTitleConstants;
-
+import pages.acquisition.commonpages.PlanDocsPage;
 public class AcquisitionHomePage extends GlobalWebElements {
 
 	@FindBy(id = "lookzip")
 	private WebElement lookupZipcode;
+	
+	@FindBy(xpath = "//*[contains(@id,'zipcodemeded-0')]")
+	private WebElement zipCodeShopField;
+	
+	@FindBy(xpath = "//*[contains(@id,'zipcodemeded')][1]//following-sibling::button//*[contains(text(),'Shop Plans')]")
+	private WebElement viewShopPlansButton;
+	
+	@FindBy(xpath = "//*[contains(@id,'change-location')]")
+	private WebElement zipcodeChangeLink;
 
 	@FindBy(id = "takequizbtn")
 	private WebElement takequizbtn;
@@ -1961,7 +1970,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 					if (rname.toUpperCase().contains("PLANRECOMMENDATIONENGINE")
 							&& rname.toUpperCase().contains("BLAYER")) {
 						if (MRScenario.environment.equalsIgnoreCase("digital-uatv2"))
-							startNewPRE(AARP_ACQISITION_PAGE_URL.replace(".com", ".com/plan-recommendation-engine.html")
+							startNewPRE(UMS_ACQISITION_PAGE_URL.replace(".com", ".com/plan-recommendation-engine.html")
 									.replace("www.", ""), browser);
 						else
 							startNewPRE(UMS_ACQISITION_PAGE_URL.replace(".com", ".com/plan-recommendation-engine.html"),
@@ -2616,6 +2625,8 @@ public void validateResultSummaryPage() {
 			startNew(MRConstants.AARP_TELESALES_AGENT_PAGE_URL);
 		} else if (MRScenario.environment.equalsIgnoreCase("stage")) {
 			startNew(MRConstants.AARP_TELESALES_AGENT_PAGE_URL_STAGE);
+		}else if (MRScenario.environment.contains("digital-uatv2")) {
+			startNew(MRConstants.AARP_TELESALES_AGENT_PAGE_URL_Team);
 		}
 	}
 
@@ -2676,8 +2687,8 @@ public boolean isValidatePageLoadError(){
 			}
 	}
 	
-	public boolean validateChat() throws InterruptedException {
-		boolean present = false;
+	public boolean validateChatNonHours() throws InterruptedException {
+	/*	boolean present = false;
 		try {
 			//validateNew(chatsam);
 			present=validateNew(samdiv);
@@ -2696,6 +2707,64 @@ public boolean isValidatePageLoadError(){
 		} catch (NoSuchElementException e) {
 			e.printStackTrace();
 		}
-		  	return present;
+		  	return present;*/
+		
+		boolean present = true;
+		try {
+			// validateNew(chatsam);
+			//present = validateNew(samdiv);
+			//if (present) {
+				//List<WebElement> list = driver.findElements(By.xpath("//div[@id='sam']/button"));
+				List<WebElement> list = driver.findElements(By.xpath("//button[contains(@id,'sam-button--chat')]"));
+				//String chatbtnid = "sam-button--chat";
+				//for (WebElement element : list) {
+					if (list.size() > 0)
+						//	("id").equalsIgnoreCase(chatbtnid)) 
+						{
+						present = false;
+						//break;
+					}
+
+				
+			//}
+
+		} catch (NoSuchElementException e) {
+			e.printStackTrace();
+		}
+		return present;
 	}
+	
+		public VPPPlanSummaryPage searchPlansWithOutCountyShop(String zipcode) throws InterruptedException {
+
+		CommonUtility.waitForPageLoadNew(driver, zipCodeShopField, 30);
+		sendkeys(zipCodeShopField, zipcode);
+		viewShopPlansButton.click();
+		// }
+		CommonUtility.waitForPageLoadNew(driver, zipcodeChangeLink, 30);
+		if (driver.getCurrentUrl().contains("health-plans")) {
+			return new VPPPlanSummaryPage(driver);
+		} else
+			return null;
+	}
+		public VPPPlanSummaryPage searchPlansShop(String zipcode, String countyName) {
+		CommonUtility.waitForPageLoadNew(driver, zipCodeShopField, 30);
+		sendkeys(zipCodeShopField, zipcode);
+		viewShopPlansButton.click();
+		CommonUtility.waitForPageLoad(driver, countyModal, 45);
+		if (validate(countyModal))
+			driver.findElement(By.xpath("//div[@id='selectCounty']//a[text()='" + countyName + "']")).click();
+		CommonUtility.waitForPageLoadNew(driver, vppTop, 30);
+		if (driver.getCurrentUrl().contains("plan-summary")) {
+			return new VPPPlanSummaryPage(driver);
+		}
+		return null;
+	}
+	
+	public PlanDocsPage navigateToPlanDocsFromHome() {
+     	navigateToMenuLinks(ShopForaplan, menuShop);
+     	
+     	driver.findElement(By.xpath("//*[@id='globalContentIdForSkipLink']/div/table/tbody/tr[2]/td/div[1]/div/div/div[3]/div/div/div/div[2]/div/div/div/div/div/div/div/a")).click();
+     	    	
+     		return new PlanDocsPage(driver);
+	 }
 }

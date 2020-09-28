@@ -42,7 +42,7 @@ public class EnterZipCodePage extends UhcDriver{
 				ZipcodeButton.get(zipCodeNumber - 1).click();
 				System.out.println("Clicked on " + zipCodeNumber + " Zip Code Component");
 				System.out.println("Validating VPP page for Zip code " + zipCode);
-				Thread.sleep(3000);
+				Thread.sleep(20000);
 				String vppPageTitle = driver.getTitle();
 				if (driver.getWindowHandles().size() > 1) {
 					String currentPage = driver.getWindowHandle();
@@ -54,9 +54,25 @@ public class EnterZipCodePage extends UhcDriver{
 				}
 
 				System.out.println("Actual : " + vppPageTitle);
-				System.out.println("Expected : " + PageTitleConstants.BLAYER_VPP_PLAN_PAGE_AARP_MEDICARE);
-				assertTrue("Not redirected to VPP page",
-						vppPageTitle.contains(PageTitleConstants.BLAYER_VPP_PLAN_PAGE_AARP_MEDICARE));
+				if(driver.getCurrentUrl().contains("aarpmedicareplans")) {
+						if (vppPageTitle.contains(PageTitleConstants.ULAYER_VPP_PLAN_PAGE_AARP_MEDICARE))
+							System.out.println("Page Title : " + PageTitleConstants.ULAYER_VPP_PLAN_PAGE_AARP_MEDICARE);
+						else if (vppPageTitle.contains(PageTitleConstants.ULAYER_VPP_PLAN_PAGE_AARP_SHOP_MEDICARE))
+							System.out.println("Page Title : " + PageTitleConstants.ULAYER_VPP_PLAN_PAGE_AARP_SHOP_MEDICARE);
+						else
+							assertTrue("Not redirected to VPP page",
+									vppPageTitle.contains(PageTitleConstants.ULAYER_VPP_PLAN_PAGE_AARP_MEDICARE));
+				}
+				else
+				{
+					if (vppPageTitle.contains(PageTitleConstants.BLAYER_VPP_PLAN_PAGE_AARP_MEDICARE))
+						System.out.println("Page Title : " + PageTitleConstants.BLAYER_VPP_PLAN_PAGE_AARP_MEDICARE);
+					else if (vppPageTitle.contains(PageTitleConstants.BLAYER_VPP_PLAN_PAGE_AARP_SHOP_MEDICARE))
+						System.out.println("Page Title : " + PageTitleConstants.BLAYER_VPP_PLAN_PAGE_AARP_SHOP_MEDICARE);
+					else
+						assertTrue("Not redirected to VPP page",
+								vppPageTitle.contains(PageTitleConstants.BLAYER_VPP_PLAN_PAGE_AARP_MEDICARE));
+				}
 				driver.navigate().back();
 				zipCodeNumber++;
 			}

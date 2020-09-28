@@ -172,24 +172,25 @@ Feature: 1.01.1-Vpp to plan Summary AARP Scenarios
       | 1598162 |   80001 | NO            | Jefferson County | AARP Medicare Advantage SecureHorizons Essential (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO) | AARP MedicareRx Preferred (PDP),AARP MedicareRx Saver Plus (PDP) | UnitedHealthcare Dual Complete (HMO D-SNP) |current|
 
   @vppPlanSummaryAARP05 @vppPlanSummaryAARPRun01 @vppPlanSummaryAARPRegression
-  Scenario Outline: Verify plan summary for SNP plan ty pes in AARP site
-    Given the user is on AARP medicare acquisition site landing page
-    When the user performs plan search using following information in the AARP site
+  Scenario Outline: Zipcode: <zipcode> -plan type: <plantype> - Verify plan summary for SNP plan types in AARP site
+    Given the user is on medicare acquisition site landing page
+    	|Site| <site>|
+    When the user performs plan search using following information
       | Zip Code        | <zipcode>         |
       #| County Name | <county>  |
       | Is Multi County | <isMultutiCounty> |
-    Then user validates plan count for all plan types on plan summary page in the AARP site
-    And the user views the plans of the below plan type in AARP site
+    Then user validates plan count for all plan types on plan summary page
+    And the user views the plans of the below plan type
       | Plan Type | <plantype> |
-    And the user selects plan year for the AARP site
+    And the user selects plan year
     	|Plan Year	| <planyear>|
-    And the user validates the available plans for selected plan types in the AARP site
-    Then the user validates plan summary for the below plan in the AARP site
+    And the user validates the available plans for selected plan types
+    Then the user validates plan summary for the below plan
       | Plan Name | <planName> |
 
     Examples: 
-      | zipcode | isMultiCounty | county             | plantype | planName                                       |planyear|
-      |   80001 | NO            | Los Angeles County | SNP      | UnitedHealthcare Nursing Home Plan (PPO I-SNP) |current|
+      |	site	| zipcode | isMultiCounty | county             | plantype | planName                                       |planyear|
+      |	AARP	|   80001 | NO            | Los Angeles County | SNP      | UnitedHealthcare Nursing Home Plan (PPO I-SNP) |current|
 
   @vppPlanSummaryAARP06 @vppPlanSummaryAARPRun02 @vppPlanSummaryAARPRegression
   Scenario Outline: Validate Cancel button for Multi Cunty Pop-up on VPP for Change Location

@@ -281,7 +281,7 @@ public class VppCommonStepDefinition {
 
 		}
 		
-		@Then("^the user clicks on back to all plans link and validates its redirection to Plan Summary")
+		@Then("^the user clicks on back to all plans link and validates its redirection to Plan Summary$")
 		public void User_clicks_BackToPlansLink_and_validates_redirection() {
 
 			PlanDetailsPage planDetailsPage = (PlanDetailsPage) getLoginScenario()
@@ -369,5 +369,66 @@ public class VppCommonStepDefinition {
 				Assert.fail("Error Loading Welcome Page for OLE");
 			}
 		}
+		
+		@Then("^user validates plan count for all plan types on plan summary page$")
+		public void user_validates_following_benefits_ui_aarp() {
+
+			VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+			Assert.assertTrue("Error validating plans in  VPP plan summary page",
+					plansummaryPage.validateVPPPlanSummaryPage());
+			String SiteName = "AARP_ACQ";
+			getLoginScenario().saveBean(oleCommonConstants.ACQ_SITE_NAME, SiteName);
+		}
+		
+		/**
+		 * @toDo:user validates the available plans for selected plan types
+		 */
+		@Then("^the user validates the available plans for selected plan types$")
+		public void user_validates_available_plans_aarp() {
+
+			VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+
+			String planType = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
+			if (plansummaryPage.validatePlanNames(planType)) {
+				String SiteName = "AARP_ACQ";
+				getLoginScenario().saveBean(oleCommonConstants.ACQ_SITE_NAME, SiteName);
+				Assert.assertTrue(true);
+			} else {
+				Assert.fail("Error validating availables plans for selected plantype in  VPP plan summary page");
+			}
+		}
+		
+		@When("^the user enters zipcode on health plans page$")
+		public void enters_zipcode_details_in_aarp_site(DataTable givenAttributes) throws InterruptedException {
+			List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+			Map<String, String> memberAttributesMap = new HashMap<String, String>();
+			for (int i = 0; i < memberAttributesRow.size(); i++) {
+				memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+						memberAttributesRow.get(i).getCells().get(1));
+			}
+			String zipcode = memberAttributesMap.get("Zip Code");
+			String county = memberAttributesMap.get("County Name");
+			String isMultiCounty = memberAttributesMap.get("Is Multi County");
+			getLoginScenario().saveBean(VPPCommonConstants.ZIPCODE, zipcode);
+			getLoginScenario().saveBean(VPPCommonConstants.COUNTY, county);
+			getLoginScenario().saveBean(VPPCommonConstants.IS_MULTICOUNTY, isMultiCounty);
+
+			AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+					.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+			VPPPlanSummaryPage plansummaryPage = null;
+			plansummaryPage = aquisitionhomepage.searchPlanOnHealthPlansPage(zipcode,county,isMultiCounty);
+			
+			
+			if (plansummaryPage != null) {
+				getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
+
+			} else {
+				Assert.fail("Error Loading VPP plan summary page");
+			}
+		}
+
+
 
 }

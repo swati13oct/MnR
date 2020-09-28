@@ -43,14 +43,14 @@ public class BuildYourDrugList extends UhcDriver {
 	@FindBy(xpath = "//a[contains(@class, 'uhc-link-button') and contains(text(), 'Back')]")
 	public WebElement DrugSearchBackClick;
 
-	
 	@FindBy(xpath = "//uhc-autocomplete//*[contains(@class, 'autocomplete-container')]")
 	public WebElement AutoCompleteList;
 
 	@FindBy(xpath = "//uhc-menu-item")
 	public List <WebElement> AutoCompleteitems;
 
-	@FindBy(xpath = "//*[@id='drugPopHeading']")
+//	@FindBy(xpath = "//*[@id='drugPopHeading']")
+	@FindBy(id="modal-label")
 	public WebElement TellUsABoutHeader;
 	
 	@FindBy(xpath = "//img[contains(@class,'uhc-modal__close')]")
@@ -178,6 +178,7 @@ public class BuildYourDrugList extends UhcDriver {
 		EnterDrugNameTxt.sendKeys(drugName);
 		validateNew(SearchBtn);
 		jsClickNew(SearchBtn);
+		CommonUtility.checkPageIsReadyNew(driver);
 		WebElement SelectDrug = driver.findElement(By.xpath("//uhc-list-item//button[contains(@aria-label, 'Select "+drugName+"')]"));
 		validateNew(SelectDrug);
 		jsClickNew(SelectDrug);
@@ -192,7 +193,7 @@ public class BuildYourDrugList extends UhcDriver {
 		}
 	}
 
-	@FindBy(xpath = "//a[@id='changePharmacyLink']")
+	@FindBy(xpath = "//button[@id='changePharmacyLink']")
 	public WebElement DrugDetails_ChangePharmacyLnk;
 
 	@FindBy(xpath = "//h2[contains(text(), 'Drug Cost Details')]")
