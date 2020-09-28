@@ -122,8 +122,7 @@ Feature: 1.06.7 Member Guest Payments Page
     Then I will entered other amount Due
       | Other Amount | 250000 |
     And I will get an error message Cannot exceed annual remaining amount
-
-
+    
     Examples:
       | TID   | planType | memberID    | dob        | siteName |
       | 10000 | MAPD     | 915516555-1 | 10/29/1947 | AARP     |

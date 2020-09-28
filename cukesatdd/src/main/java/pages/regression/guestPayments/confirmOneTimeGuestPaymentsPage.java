@@ -287,6 +287,8 @@ public class confirmOneTimeGuestPaymentsPage extends UhcDriver {
 		System.out.println(">>>>>>Print Payment receipt Link is clicked<<<<<<");
 		driver.switchTo().window(driver.getWindowHandles().toArray()[1].toString());
 		
+		
+		
 		JavascriptExecutor executor = (JavascriptExecutor) driver;
 		executor.executeScript("return document.querySelector('print-preview-app').shadowRoot.querySelector('print-preview-sidebar').shadowRoot.querySelector('print-preview-destination-settings').shadowRoot.querySelector('cr-button.cancel-button').click();");
 		driver.switchTo().defaultContent();
