@@ -1189,7 +1189,7 @@ try {
     public boolean checkIfPageReadySafari() {
     	int counter = 10;
     	boolean ready = false;
-    	if(MRScenario.browserName.equalsIgnoreCase("Safari")) {
+    	if(MRScenario.browsername.equalsIgnoreCase("Safari")) {
     		CommonUtility.checkPageIsReadyNew(driver);
     		do {
     			try {
