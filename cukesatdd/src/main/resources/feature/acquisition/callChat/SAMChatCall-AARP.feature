@@ -108,7 +108,7 @@ Scenario Outline: 1.19.1.3 To test the SAM  Call icons on AARP site on <pagename
 	#Then the user validates whether chat icon is visible on AARP	
 	Then the user validates whether chat Agent is Available on AARP	
 	
-	@samChatCallRegression @samChatRegressionAARP1
+	@samChatCallRegressionAARP @samChatRegressionAARP1
 	Examples: 
 			| pagename |
 			|/|
@@ -123,7 +123,7 @@ Scenario Outline: 1.19.1.3 To test the SAM  Call icons on AARP site on <pagename
       | medicare-education/enrollment-and-changing-plans.html | 
       | medicare-education/medicare-faq.html                  | 
      
-     @samChatCallRegression @samChatRegressionAARP2
+     @samChatCallRegressionAARP @samChatRegressionAARP2
 			Examples: 
 				| pagename | 
       | shop.html          | 
@@ -147,7 +147,7 @@ Scenario Outline: 1.19.1.3 To test the SAM  Call icons on AARP site on <pagename
       | enroll/ma-enrollment.html  |
       | enroll/pdp-enrollment.html | 
       
-      @samChatCallRegression @samChatRegressionAARP3
+      @samChatCallRegressionAARP @samChatRegressionAARP3
       Examples:  
       	| pagename |
       | resources.html                                       |
@@ -169,7 +169,7 @@ Scenario Outline: 1.19.1.3 To test the SAM  Call icons on AARP site on <pagename
       #| health-plans/resources/pdp-resources-materials/pdp-information-forms/medicare-disenrollment.html | 
       | resources/disenrollment-information.html                                            | 
        
-       @samChatCallRegression @samChatRegressionAARP4
+      @samChatCallRegressionAARP @samChatRegressionAARP4
       Examples:
       	| pagename |
       | health-plans.html?zipcode=90210&deepLink=favPlansDeepLink&plantype=MA&year=2020&planId=H0543168000&planYear=2020&systemYear=2020&zipcode=90210&fipsCode=037&product=MAPD&yearDisclaimer=undefined&month=2&yearToggle=undefined&deepLink=plandetail&WT.mc_id=8016371&mrcid=em:Acq:MR%7cFederal%7cEGEM3011%7c::8016371!/details |                              
