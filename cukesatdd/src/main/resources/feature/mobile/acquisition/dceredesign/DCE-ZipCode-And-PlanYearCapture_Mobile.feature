@@ -15,10 +15,10 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test ZipCode and Plan Year capture page i
     Then user should be navigated to zipcode and plan year capture page for AEP
     And plan year dropdown should be displayed during AEP
 
-	@dce_redesign_zipcode_planyear_capture_AEP_AARP
-    Examples: 
-       |drugName|site|
-       |Lipitor|AARP|
+#	@dce_redesign_zipcode_planyear_capture_AEP_AARP
+    #Examples: 
+       #|drugName|site|
+       #|Lipitor|AARP|
        
     @dce_redesign_zipcode_planyear_capture_AEP_UHC
     Examples: 
@@ -43,10 +43,10 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test ZipCode and Plan Year capture page i
     Then load screen should be displayed
     And user should be navigated to Review drug cost estimate page
 
-	@dce_redesign_zipcode_planyear_capture_AEP_AARP
-    Examples: 
-      |drugName|zipCode |site|
-      |Lipitor|  90210 |AARP|
+#	@dce_redesign_zipcode_planyear_capture_AEP_AARP
+    #Examples: 
+      #|drugName|zipCode |site|
+      #|Lipitor|  90210 |AARP|
 		
 		@dce_redesign_zipcode_planyear_capture_AEP_UHC
 		Examples: 
@@ -74,10 +74,10 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test ZipCode and Plan Year capture page i
     Then load screen should be displayed
     And user should be navigated to Review drug cost estimate page
 		
-		@dce_redesign_zipcode_planyear_capture_AEP_AARP
-    Examples: 
-      | invalidzipcode | zipCode | invalidzipcode1 | invalidzipcode2 |drugName|site|
-      |          78452 |   90210|            1234 |00000 |Lipitor|AARP|
+#		@dce_redesign_zipcode_planyear_capture_AEP_AARP
+    #Examples: 
+      #| invalidzipcode | zipCode | invalidzipcode1 | invalidzipcode2 |drugName|site|
+      #|          78452 |   90210|            1234 |00000 |Lipitor|AARP|
       
     @dce_redesign_zipcode_planyear_capture_AEP_UHC
      Examples: 
@@ -97,11 +97,11 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test ZipCode and Plan Year capture page i
     Then user should be navigated to zipcode and plan year capture page for AEP
     Then the user validates whether call icon is visible
     Then the user validates whether chat icon is visible
-
-		@dce_redesign_zipcode_planyear_capture_AEP_AARP
-    Examples: 
-      |drugName|site|
-      |Lipitor|AARP|
+#
+#		@dce_redesign_zipcode_planyear_capture_AEP_AARP
+    #Examples: 
+      #|drugName|site|
+      #|Lipitor|AARP|
       
      @dce_redesign_zipcode_planyear_capture_AEP_UHC
      Examples: 

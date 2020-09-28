@@ -2,7 +2,7 @@
 Feature: 2.03-ACQ-Plan details in vpp flow UMS
 
 
-  @vppPlanDetailsRegression_1 @prodRegression @prod
+  @vppPlanDetailsRegression_1 @prodRegression
   Scenario Outline: UserStory: <TID> -plan type: <plantype> - Verify specific Additional Benefits in Plan Details for provided plan
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
@@ -35,7 +35,7 @@ Feature: 2.03-ACQ-Plan details in vpp flow UMS
      | 15652 |   19019 | No              | Iowa County    | MAPD     | AARP Medicare Advantage Choice Plan 1 (PPO)       | Eyewear            | Eyewear has a plan benefit limit up to $200 per every 2 years | Dental            | Preventive Services Covered. Contact plan for details.                 | Transportation            | 24 one-way trips per year to or from approved locations with no additional cost. | Eye Exam           | $0 copay            | Foot Care - Routine        | $35 copay                   | Hearing Exam           | $0 copay               | Membership in Health Club / Fitness Classes     | Fitness Membership Only: Basic membership in a fitness program at a network location at no additional cost |
      | 15653 |   99210 | No              | Spokane County | SNP      | UnitedHealthcare Dual Complete (HMO D-SNP) | Eyewear            | Eyewear has a plan benefit limit up to $200 per every 2 years                                | Dental            | $3,000 per year towards covered preventive and comprehensive services. | Transportation            | 48 one-way trips per year to or from approved locations with no additional cost. | Eye Exam           | $0 copay            | Foot Care - Routine        | $0 copay                    | Hearing Exam           | $0 copay                | Fitness Program through Renew Active     | Fitness Membership Only: Basic membership in a fitness program at a network location at no additional cost  |
 
-  @vppPlanDetailsRegressionMedical @vppPlanDetailsRegression_1 @prod
+  @vppPlanDetailsRegressionMedical @vppPlanDetailsRegression_1 
   Scenario Outline: UserStory: <TID> -plan type: <plantype> - Verify specific Medical Benefits in Plan Details for provided plan
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
@@ -118,7 +118,7 @@ Feature: 2.03-ACQ-Plan details in vpp flow UMS
       | 15662 |   11516 | No              | Nassau County | MAPD     | UnitedHealthcare Medicare Advantage Essential (Regional PPO) | Dental Platinum | $0            | $0        |
 #      | 15661 |   53910 | No              | Adams County  | SNP      | UnitedHealthcare Medicare Advantage Assist (PPO C-SNP)                | Dental Platinum | $14            | $168          |
 
-  @OTC_HealthCatalog @F338035 @F303834 @vppPlanDetailsRegression_3 @prod
+  @OTC_HealthCatalog @F338035 @F303834 @vppPlanDetailsRegression_3 
   Scenario Outline: UserStory: <UID> -plan type: <plantype> - Verify specific Additional Benefits in Plan Details for provided plan
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site

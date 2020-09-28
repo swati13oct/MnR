@@ -1,7 +1,7 @@
 @vppPlanSummaryUHC
 Feature: 2.01.1-Vpp to plan Summary UHC Scenarios
 
-  @vppPlanSummaryUHC01 @vppPlanSummaryUHCRun01 @vppPlanSummaryUHCRegression @prod
+  @vppPlanSummaryUHC01 @vppPlanSummaryUHCRun01 @vppPlanSummaryUHCRegression 
   Scenario Outline: TID: <TID> -plan type: <plantype> - Verify plan cards on plan summary page in <site> site
     Given the user is on medicare acquisition site landing page
     	|Site| <site>|
@@ -173,7 +173,7 @@ Feature: 2.01.1-Vpp to plan Summary UHC Scenarios
       | UID     | zipcode | isMultiCounty | county           | MA_testPlans                                                                                               | PDP_testPlans                                                    | SNP_testPlans                              |
       | 1598162 |   80001 | NO            | Jefferson County | AARP Medicare Advantage SecureHorizons Essential (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO) | AARP MedicareRx Preferred (PDP),AARP MedicareRx Saver Plus (PDP) | UnitedHealthcare Dual Complete (HMO D-SNP) |
 
-  @vppPlanSummaryUHC05 @vppPlanSummaryUHCRun01 @vppPlanSummaryUHCRegression @prod
+  @vppPlanSummaryUHC05 @vppPlanSummaryUHCRun01 @vppPlanSummaryUHCRegression 
   Scenario Outline: Validate Cancel button for Multi Cunty Pop-up on VPP for Change Location
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
@@ -201,7 +201,7 @@ Feature: 2.01.1-Vpp to plan Summary UHC Scenarios
   #Examples:
   #| zipcode | plantype | planName                    |
   #|   55344 | MA       | UnitedHealthcare Sync (PPO) |
-  @vppPlanSummaryUHC07 @vppPlanSummaryUHCRun02 @vppPlanSummaryUHCRegression @prod
+  @vppPlanSummaryUHC07 @vppPlanSummaryUHCRun02 @vppPlanSummaryUHCRegression 
   Scenario Outline: UID: <UID>  - Verify Call sticky action menu on UHC site
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
@@ -216,7 +216,7 @@ Feature: 2.01.1-Vpp to plan Summary UHC Scenarios
       | UID     | zipcode | isMultiCounty | county           |
       | F322478 |   80001 | NO            | Jefferson County |
 
-  @vppPlanSummaryUHC08 @vppPlanSummaryUHCRun02 @prod
+  @vppPlanSummaryUHC08 @vppPlanSummaryUHCRun02 
   Scenario Outline: UI8: <UID>  - Verify Chat sticky action menu on UHC site
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
@@ -253,7 +253,7 @@ Feature: 2.01.1-Vpp to plan Summary UHC Scenarios
       | zipcode | isMultutiCounty | county             | MultiCOuntyzipcode |
       |   90210 | No              | Los Angeles County |              80002 |
 
-  @vppPlanSummaryUHC10 @vppPlanSummaryUHCRun02 @prod
+  @vppPlanSummaryUHC10 @vppPlanSummaryUHCRun02 
   Scenario Outline: UID: <UID> -plantype: <plantype> - Verify user can invoke the email button and the print button on view plan summary page on UHC site
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
@@ -437,7 +437,7 @@ Feature: 2.01.1-Vpp to plan Summary UHC Scenarios
       | TID       | zipcode | isMultutiCounty | county      | plantype | planName                                              |planyear|
       | US2567142 |   81501 | NO              | Mesa County | SNP      | Rocky Mountain Health Plans DualCare Plus (HMO D-SNP) |current|
 
-  @vppPlanSummaryUHC16 @vppPlanSummaryUHCRun02 @vppPlanSummaryUHCRegression @prod
+  @vppPlanSummaryUHC16 @vppPlanSummaryUHCRun02 @vppPlanSummaryUHCRegression 
   Scenario Outline: TID: <TID> -plan type: <plantype> -plan name: -<planName>- Verify People Health plans Learn More lands on Correct site from UHC site from plan summary page
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site

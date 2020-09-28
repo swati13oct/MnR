@@ -669,7 +669,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 	@FindBy(xpath = "//div[contains(@class,'closeBg')]/*[contains (text() , 'Thank you for your interest')]")
 	private WebElement medicareGuidePopup;
 
-	@FindBy(xpath = "//label[contains(@for,'compare-plan')]")
+	@FindBy(xpath = "//label[contains(@for,'compare-plan')]") 
 	private WebElement planCompareCheckBox;
 
 	@FindBy(xpath = "//span[@class='multiple-added-text show']")

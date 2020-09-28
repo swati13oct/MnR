@@ -23,9 +23,9 @@ Feature: 1.10.3 ACQ-DCERedesign-VPP_PlanCompare - To test DCE - VPP Plan Compare
     Then the user validates drug is displayed on the plan compare page
     	|DrugName	|<drug1>|
 
-    @DCE_Redesign_VPP_PlanCompare_AARP
-    Examples: 
-      |	site	| zipcode | plantype | county | isMultutiCounty | drug1        | planname                                           |
+    #@DCE_Redesign_VPP_PlanCompare_AARP
+    #Examples: 
+      #|	site	| zipcode | plantype | county | isMultutiCounty | drug1        | planname                                           |
 #      |	AARP	|   90210 | MAPD     | none   | no              | meloxicam  | AARP Medicare Advantage SecureHorizons Focus (HMO) |
       
       @DCE_Redesign_VPP_PlanCompare_UHC
@@ -33,11 +33,11 @@ Feature: 1.10.3 ACQ-DCERedesign-VPP_PlanCompare - To test DCE - VPP Plan Compare
       |	site	| zipcode | plantype | county | isMultutiCounty | drug1     | drug2                | drug3      | drug4         | drug5            | drug6   | planname                                           |
       |	UHC		|   90210 | MAPD     | none   | no              | meloxicam | diclofenac potassium | febuxostat | buprenorphine | fentanyl citrate | Lipitor | AARP Medicare Advantage SecureHorizons Focus (HMO) |
 
-    @DCE_Redesign_VPP_PlanCompare_AARP
-    Examples: 
-      |	site	| zipcode | plantype | county       | isMultutiCounty | drug1     | drug2                | drug3      | drug4         | drug5            | drug6   | planname                        |
-      |	AARP	|   80002 | PDP      | Adams County | yes             | meloxicam | diclofenac potassium | febuxostat | buprenorphine | fentanyl citrate | Lipitor | AARP MedicareRx Walgreens (PDP) |
-      
+    #@DCE_Redesign_VPP_PlanCompare_AARP
+    #Examples: 
+      #|	site	| zipcode | plantype | county       | isMultutiCounty | drug1     | drug2                | drug3      | drug4         | drug5            | drug6   | planname                        |
+      #|	AARP	|   80002 | PDP      | Adams County | yes             | meloxicam | diclofenac potassium | febuxostat | buprenorphine | fentanyl citrate | Lipitor | AARP MedicareRx Walgreens (PDP) |
+      #
     @DCE_Redesign_VPP_PlanCompare_UHC
     Examples: 
       |	site	| zipcode | plantype | county       | isMultutiCounty | drug1     | drug2                | drug3      | drug4         | drug5            | drug6   | planname                        |
