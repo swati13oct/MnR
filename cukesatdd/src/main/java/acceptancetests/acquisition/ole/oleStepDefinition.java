@@ -23,6 +23,7 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import gherkin.formatter.model.DataTableRow;
 import pages.acquisition.bluelayer.PlanComparePage;
+import pages.acquisition.commonpages.VPPPlanSummaryPage;
 import pages.acquisition.ole.AuthorizationPage;
 import pages.acquisition.ole.CancelOLEModal;
 import pages.acquisition.ole.CoverageInformationPage;
@@ -44,7 +45,6 @@ import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.ulayer.AcquisitionHomePage;
 import pages.acquisition.ulayer.ComparePlansPage;
 import pages.acquisition.ulayer.PlanDetailsPage;
-import pages.acquisition.ulayer.VPPPlanSummaryPage;
 import pages.acquisition.ulayer.VisitorProfilePage;
 /**
  * @author sdwaraka
@@ -140,7 +140,7 @@ public class oleStepDefinition {
 		//-----------------------------------------------------------------------------------------------------
 		WelcomePage welcomePage;
 		if(SiteName.contains("UHC_ACQ")){
-			pages.acquisition.bluelayer.VPPPlanSummaryPage planSummaryPage = (pages.acquisition.bluelayer.VPPPlanSummaryPage) getLoginScenario()
+			VPPPlanSummaryPage planSummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 			TFN = planSummaryPage.GetTFNforPlanType();
 

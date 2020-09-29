@@ -16,11 +16,9 @@ Feature: 1.5.ACQ-OLE common tool flow E2E Shop Pages
       | Zip Code        | <zipcode>         |
       | County Name     | <county>          |
       | Is Multi County | <isMultutiCounty> |
-    And the user selects plan year
+   	And the user selects plan year
     	|Plan Year	| <planyear>|
-    And the user validates plan summary for the below plan
-      | Plan Name | <planName> |
-    And the user validates the available plans for selected plan types in the AARP site
+    And the user validates the available plans for selected plan types
     Then the user clicks on Enroll Now for AARP site to start the OLE flow
       | Plan Name | <planName> |
     Then the user validates the Plan details on OLE
@@ -104,7 +102,7 @@ Feature: 1.5.ACQ-OLE common tool flow E2E Shop Pages
     #Then the user Validates Next Steps in Confirmation Page for the Plan Type.
 		#Then the user validates the OLE Submission Details in GPS
     #| Plan Type | <plantype> |
-    
+  @ShopPage_OLE  
     Examples: 
       | TID   | site|PlanType | Plan Year|planYear|zipcode | isMultutiCounty | county          | plantype |planyear| planName                                | cardtype | firstname | lastname | medicarenumber | ssnflag | partadate | partbdate | medicaidnumber | esrdflag | dob      | gender | permstreet    | permcity    | mailingaddressquestion | mailingstreet | mailingcity | mailingstate | mailingzip | email         | selectoptions                                                                                                                                                                                                                                       | optiondata              | pdpFlag | longTermFlag | riderflag | emailConfirmation | goGreen |    |healthinsurancename|groupnumber| membernumber|prescriptioncoveragename|pdgroupnumber|pdmembernumber|inputdataType|
      	| 11111 | AARP|PCP-DSNP-MBI |  current |current | 33143 | NO              | Miami-Dade County | SNP      | Preferred Medicare Assist (HMO D-SNP) | MBI      | GOTTFRIED | GARRAND     | 5N69QY6ET34    | false|   09011997 |  11012002 |     0123456789 | true     | 04261944 | Female | 123 Perm Rd | Los Angeles | Yes                    | 876 MailingSt | Mailing LA  | FL           |      33143 | test@test.com | losing coverage/ moved outside of the service area | 01012018/01012018 | yes     | no           | false     | NO                | NO      |HealthInsurance             |HI1562759    | ABC12345DEF     |PrescriptionCoverage            |PD5646136   | BCD12345EFG |Valid|
