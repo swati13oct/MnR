@@ -8,25 +8,25 @@ import com.github.mkolisnyk.cucumber.runner.ExtendedCucumberOptions;
 import cucumber.api.CucumberOptions;
 
 /**
- * this file is to run E2E testing on PRE-VPP-DCE using RunMRATDDAcquisitionPlanRecommendationEngineVppDrugCostEstimatorRedesign
+ * this file is to run E2E testing on PRE-VPP-DCE using RunMRATDDAcquisitionPlanRecommendationEngineVppDrugCostEstimatorRedesignAARP
  */
 @RunWith(ExtendedCucumber.class)
 @ExtendedCucumberOptions(
 		retryCount=2,
 		screenShotSize="", 
 		screenShotLocation="/screenshots/",
-		jsonReport = "target/cucumber-RunMRATDDAcquisitionPlanRecommendationEngineVppDrugCostEstimatorRedesign.json",
+		jsonReport = "target/cucumber-RunMRATDDAcquisitionPlanRecommendationEngineVppDrugCostEstimatorRedesignAARP.json",
 		detailedReport = true,
 		detailedAggregatedReport = true,
 		overviewReport = true,
 		toPDF = true,
-		outputFolder = "target/RunMRATDDAcquisitionPlanRecommendationEngineVppDrugCostEstimatorRedesign")
+		outputFolder = "target/RunMRATDDAcquisitionPlanRecommendationEngineVppDrugCostEstimatorRedesignAARP")
 @CucumberOptions(
 		glue = { "atdd.framework", "acceptancetests.acquisition.planRecommendationEngine" },
 		features = { "src/main/resources/feature/acquisition" },
-		plugin = { "pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionPlanRecommendationEngineVppDrugCostEstimatorRedesign.json" },
-		tags = { "@PRE_VPP_DCE_E2E" })
+		plugin = { "pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionPlanRecommendationEngineVppDrugCostEstimatorRedesignAARP.json" },
+		tags = { "@PRE_VPP_DCE_E2E_AARP" })
 
-public class RunMRATDDAcquisitionPlanRecommendationEngineVppDrugCostEstimatorRedesign {
+public class RunMRATDDAcquisitionPlanRecommendationEngineVppDrugCostEstimatorRedesignAARP {
 
 }
