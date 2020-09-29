@@ -11,7 +11,7 @@ import cucumber.api.CucumberOptions;
  * this file is to run test cases for RunMRATDDAcquisitionVppPlanCompare
  */
 @RunWith(ExtendedCucumber.class)
-@ExtendedCucumberOptions(retryCount=1,screenShotSize="", screenShotLocation="/screenshots/",
+@ExtendedCucumberOptions(retryCount=0,screenShotSize="", screenShotLocation="/screenshots/",
 jsonReport = "target/cucumber-RunMRATDDAcquisitionVppPlanCompare.json",detailedReport = true,
  detailedAggregatedReport = true, overviewReport = true, toPDF = true, 
  outputFolder = "target/RunMRATDDAcquisitionVppPlanCompare")
@@ -19,7 +19,7 @@ jsonReport = "target/cucumber-RunMRATDDAcquisitionVppPlanCompare.json",detailedR
 features = { "src/main/resources/feature/mobile/acquisition/vpp" }, 
 plugin = {
 		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionVppPlanCompare.json" }, 
-tags = { "@VPP-Plan-Summary-Android" })
+tags = {  })
 public class RunMRATDDAcquisitionVPPPlanCompareMobile { 
  
 }

@@ -140,10 +140,10 @@ public class ZipCodeAndPlanYearCapturePageMobile extends UhcDriver {
 		return new ZipCodeAndPlanYearCapturePageMobile(driver);
 	}
 
-	public ZipCodePlanYearCapturePage validatePlanYearDrpDownAEP() {
+	public ZipCodeAndPlanYearCapturePageMobile validatePlanYearDrpDownAEP() {
 		if (validateNew(planYearDropdown)) {
 			Assert.assertTrue("Plan Year dropdoown not displayed during AEP", true);
-			return new ZipCodePlanYearCapturePage(driver);
+			return new ZipCodeAndPlanYearCapturePageMobile(driver);
 		}
 		Assert.fail("Plan year dropdown not displayed during AEP");
 		return null;

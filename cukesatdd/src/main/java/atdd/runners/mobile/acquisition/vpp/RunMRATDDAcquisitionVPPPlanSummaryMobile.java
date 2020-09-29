@@ -11,7 +11,7 @@ import cucumber.api.CucumberOptions;
  * this file is to run test cases for RunMRATDDAcquisitionVppPlanSummary
  */
 @RunWith(ExtendedCucumber.class)
-@ExtendedCucumberOptions(retryCount=1,screenShotSize="", screenShotLocation="/screenshots/",
+@ExtendedCucumberOptions(retryCount=0,screenShotSize="", screenShotLocation="/screenshots/",
 jsonReport = "target/cucumber-RunMRATDDAcquisitionVPPPlanSummaryMobile.json",detailedReport = true,
  detailedAggregatedReport = true, overviewReport = true, toPDF = true, 
  outputFolder = "target/RunMRATDDAcquisitionVPPPlanSummaryMobile")
@@ -19,7 +19,7 @@ jsonReport = "target/cucumber-RunMRATDDAcquisitionVPPPlanSummaryMobile.json",det
 features = { "src/main/resources/feature/mobile/acquisition/vpp/" }, 
 plugin = {
 		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionVPPPlanSummaryMobile.json" }, 
-tags = { "@vppPlanSummaryUHC" },dryRun=false)
+tags = {})
 public class RunMRATDDAcquisitionVPPPlanSummaryMobile { 
  
 }

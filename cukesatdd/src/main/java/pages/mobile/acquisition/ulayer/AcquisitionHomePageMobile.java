@@ -55,14 +55,19 @@ import pages.mobile.acquisition.ole.WelcomePageMobile;
  */
 public class AcquisitionHomePageMobile extends GlobalWebElements {
 
-	// @FindBy(css= "#cta-zipcode")
 	@FindBy(xpath = "//*[contains(@id,'cta-zipcode')]")
 	private WebElement zipCodeField;
+	
+	@FindBy(xpath = "//*[contains(@id,'zipcodemeded-0')]")
+	private WebElement zipCodeShopField;
+	
+	@FindBy(xpath = "//*[contains(@id,'zipcodemeded')][1]//following-sibling::button//*[contains(text(),'Shop Plans')]")
+	private WebElement viewShopPlansButton;
 
-	@FindBy(css = "zipcode")
+	@FindBy(id = "zipcode")
 	private WebElement healthPlansZipcode;
 
-	@FindBy(css = "fd_myPlans")
+	@FindBy(className = "fd_myPlans")
 	private WebElement myPlansTab;
 
 	@FindBy(id = "dce")
@@ -149,10 +154,11 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	@FindBy(xpath = "//div[@class='overview-main']//h2")
 	private WebElement vppTop;
 
-	@FindBy(xpath = "//a[contains(text(),'Get Started')]")
+	@FindBy(xpath = ".//*[contains(@id,'colhowdoesthiswork')]//*[@itemprop='significantLink']/*[contains(@class,'cta-button secondary')and contains(text(),'Get')]")
 	public WebElement getStarted;
 
 	@FindBy(xpath = ".//*[contains(@class, 'meded-article-content__section')]//*[contains(text(), 'Request an Appointment')]")
+	//@FindBy(xpath = "//a[contains(text(),'Find an Agent')]")
 	private WebElement requestAgentApptDropdown;
 
 	@FindBy(xpath = "//*[@class='textalign']//p[2]/a")
@@ -207,11 +213,10 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	 * @FindBy(id = "vpp_selectcounty_box") private WebElement countyModal;
 	 */
 
-	// @FindBy(css = "#change-location")
 	@FindBy(xpath = "//*[contains(@id,'change-location')]")
 	private WebElement zipcodeChangeLink;
 
-	@FindBy(css = "zipcode")
+	@FindBy(id = "zipcode")
 	private WebElement zipCode;
 
 	@FindBy(className = "textalign")
@@ -297,7 +302,8 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	private WebElement callsam;
 
 	// @FindBy(xpath = "//*[@id='sam-call-button']/div/span[1]")
-	@FindBy(xpath = "//*[contains(@id,'sam-call-button')]//*[contains(@class,'sam__button__text')]")
+//	@FindBy(xpath = "//*[contains(@id,'sam-call-button')]//*[contains(@class,'sam__button__text')]")
+	@FindBy(xpath = "//*[contains(@id,'sam-call-button')]/span")
 	private WebElement callsamtooltip;
 
 	@FindBy(xpath = "//*[@id='sam-call-modal']/div/div")
@@ -324,9 +330,11 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	@FindBy(xpath = "//*[contains(@id,'sam-call-modal')]//*[contains(@class,'modal-close')]")
 	private WebElement CallSamTFNClose;
 
-	String CallSam = "Call a Licensed Insurance Agent";
 	@FindBy(xpath = "//*[contains(@class,'activeChatBtn')]")
 	private WebElement chatsam;
+
+	@FindBy(xpath = "//div[@class='sam']")
+	private WebElement samdiv;
 
 	@FindBy(xpath = "//*[contains(@id,'sam-button--chat')]//*[contains(@class,'sam__button__text')]")
 	private WebElement chatsamtooltip;
@@ -412,8 +420,13 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 	@FindBy(xpath = "//a[@id='proceed-link']")
 	private WebElement proceedLink;
+	
+	@FindBy(xpath = "//body/div[@id='overlay']")
+	private WebElement overlayFilm;
 
-	String ChatSamText = "Chat with a Licensed Insurance Agent";
+	//String ChatSamText = "Chat with a Licensed Insurance Agent";
+	String ChatSamText= "Chat Now";
+	String CallSam= "1-877";
 
 	private static String TeamC_ACQUISITION_PAGE_URL = MRConstants.TeamC_UHC_URL;
 
@@ -1697,7 +1710,6 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	}
 
 	public void validateCallSamContent() throws InterruptedException {
-
 		Actions action = new Actions(driver);
 		WebElement element = callsam;
 		action.moveToElement(element).perform();
@@ -1706,7 +1718,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		System.out.println(toolTipText);
 		System.out.println("====================================================================");
 
-		if (CallSam.equalsIgnoreCase(toolTipText)) {
+		if (toolTipText.contains(CallSam)) {
 			System.out.println("Call sticky action menu roll out and contain the text Call a Licensed Insurance Agent");
 			// return new AcquisitionHomePage(driver);
 		} else
