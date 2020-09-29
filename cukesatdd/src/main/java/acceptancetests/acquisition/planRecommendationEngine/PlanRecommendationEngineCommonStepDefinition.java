@@ -17,6 +17,7 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import gherkin.formatter.model.DataTableRow;
 import pages.acquisition.commonpages.AcquisitionHomePage;
+import pages.acquisition.commonpages.VPPPlanSummaryPage;
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineAdditionalServicesPage;
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineCostPreferencesPage;
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineCoverageOptionPage;
@@ -216,8 +217,12 @@ public class PlanRecommendationEngineCommonStepDefinition {
 	@Then("^user validate UI and API recommendation rankings on results page$")
    	public void verify_UI_API_rankings_results_page() {
 		PlanRecommendationEngineResultsPage planSelectorResultspage =  new PlanRecommendationEngineResultsPage(wd);
+		VPPPlanSummaryPage plansummaryPage = new VPPPlanSummaryPage(wd);
+		plansummaryPage.handlePlanYearSelectionPopup("current");
 		planSelectorResultspage.validateUIAPIRecommendations();
 		planSelectorResultspage.validateUIAPIRankingPlans();
+		
+		getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
    	}
 
 }
