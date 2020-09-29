@@ -313,3 +313,45 @@ Feature: ACQ-Plan benefits validation
       Examples: 
       | excelPath                | workSheet | site |
       | Plan Summary Benefits_Data | SheetPDP2021_2  | UHC |
+      
+      # PROD NIGHT RUN SCENARIOS
+      
+       @planSummaryBenefitsUHC01_Prod
+      Examples: 
+      | excelPath                | workSheet | site |
+      | Plan Summary Benefits_Data | Prod_Sheet1 | UHC |
+      
+      @planSummaryBenefitsUHC02_Prod
+      Examples: 
+      | excelPath                | workSheet | site |
+      | Plan Summary Benefits_Data | Prod_Sheet2  | UHC |
+      
+        @planSummaryBenefitsUHC03_Prod
+      Examples: 
+      | excelPath                | workSheet | site |
+      | Plan Summary Benefits_Data | Prod_Sheet3 | UHC |
+      
+      @planSummaryBenefitsUHC04_Prod
+      Examples: 
+      | excelPath                | workSheet | site |
+      | Plan Summary Benefits_Data | Prod_Sheet4  | UHC |
+      
+        @planSummaryBenefitsAARP01_Prod
+      Examples: 
+      | excelPath                | workSheet | site |
+      | Plan Summary Benefits_Data | Prod_Sheet1 | AARP |
+      
+      @planSummaryBenefitsAARP02_Prod
+      Examples: 
+      | excelPath                | workSheet | site |
+      | Plan Summary Benefits_Data | Prod_Sheet2  | AARP |
+      
+        @planSummaryBenefitsAARP03_Prod
+      Examples: 
+      | excelPath                | workSheet | site |
+      | Plan Summary Benefits_Data | Prod_Sheet3 | AARP |
+      
+      @planSummaryBenefitsAARP04_Prod
+      Examples: 
+      | excelPath                | workSheet | site |
+      | Plan Summary Benefits_Data | Prod_Sheet4  | AARP |
