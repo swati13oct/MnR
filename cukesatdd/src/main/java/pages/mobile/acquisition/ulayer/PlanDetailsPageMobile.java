@@ -35,6 +35,7 @@ import pages.acquisition.ulayer.PlanInformationPage;
 import pages.acquisition.ulayer.ProviderSearchPage;
 import pages.acquisition.ulayer.VPPPlanSummaryPage;
 import pages.mobile.acquisition.dceredesign.GetStartedPageMobile;
+import pages.mobile.acquisition.ole.WelcomePageMobile;
 
 /**
  * @author gumeshna
@@ -369,6 +370,9 @@ public class PlanDetailsPageMobile extends UhcDriver {
 		}
 
 	}
+	
+	
+		
 
 	public org.json.JSONObject getActualPdfLinksData() {
 		// TODO Auto-generated method stub
@@ -464,7 +468,7 @@ public class PlanDetailsPageMobile extends UhcDriver {
 
 	}
 
-	public DrugCostEstimatorPage navigateToDCE() {
+	public DrugCostEstimatorPageMobile navigateToDCE() {
 
 		try {
 			Thread.sleep(2000);
@@ -483,7 +487,7 @@ public class PlanDetailsPageMobile extends UhcDriver {
 			e.printStackTrace();
 		}
 		if (currentUrl().contains("/estimate-drug-costs.html"))
-			return new DrugCostEstimatorPage(driver);
+			return new DrugCostEstimatorPageMobile(driver);
 		return null;
 	}
 
@@ -640,7 +644,7 @@ public class PlanDetailsPageMobile extends UhcDriver {
 	 * @return
 	 * @throws InterruptedException
 	 */
-	public WelcomePage Enroll_OLE_Plan(String planName) throws InterruptedException {
+	public WelcomePageMobile Enroll_OLE_Plan(String planName) throws InterruptedException {
 
 		try {
 			Thread.sleep(10000);
@@ -670,7 +674,7 @@ public class PlanDetailsPageMobile extends UhcDriver {
 		}
 		if (driver.getCurrentUrl().contains("welcome")) {
 			System.out.println("OLE Welcome Page is Displayed");
-			return new WelcomePage(driver);
+			return new WelcomePageMobile(driver);
 		}
 		return null;
 	}
@@ -801,13 +805,13 @@ public class PlanDetailsPageMobile extends UhcDriver {
 		return validationFlag;
 	}
 
-	public ProviderSearchPage validateLookUpYourProviderButton() {
+	public ProviderSearchPageMobile validateLookUpYourProviderButton() {
 		// TODO Auto-generated method stub
 		validateNew(lookUpYourProviderButton);
 		CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
 		switchToNewTabNew(lookUpYourProviderButton);
 		if (driver.getCurrentUrl().contains("werally")) {
-			return new ProviderSearchPage(driver);
+			return new ProviderSearchPageMobile(driver);
 		}
 		return null;
 

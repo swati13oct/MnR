@@ -20,6 +20,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
+import pages.acquisition.bluelayer.DrugCostEstimatorPage;
 import pages.acquisition.dce.ulayer.AddDrugDetails;
 import pages.acquisition.dce.ulayer.AddNewDrugModal;
 import pages.acquisition.dce.ulayer.EditDrugDetails;
@@ -460,6 +461,20 @@ if (driver.getTitle().equalsIgnoreCase("estimate-drug-costs") || driver.getTitle
 			Assert.assertTrue(true);
 		else
 			Assert.assertTrue("Drug Cost Estimator is not present", false);
+	}
+	
+	@FindBy(xpath ="//div[@id='plan-name-div']/div/div/div/p")
+	private WebElement dceplanname;
+	
+	public DrugCostEstimatorPage verifyplanname(String planname) {
+
+		if(dceplanname.equals(planname)){
+				return new DrugCostEstimatorPage(driver);
+		}else{
+
+			return null;
+			}
+
 	}
 
 	public boolean validatedrugheading() {

@@ -110,7 +110,7 @@ public class VppPlanSummaryMobile {
 			plansummaryPage.validateAndClickAddtoCompareinAARP(planType, planName);
 			plansummaryPage.compareTextAfterclickingAddtoCompareinAARP(planName);
 			plansummaryPage.deselectAddToCompareinAARP(planName);
-			
+
 		}
 	}
 

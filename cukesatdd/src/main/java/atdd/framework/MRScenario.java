@@ -140,7 +140,8 @@ public class MRScenario {
 
 	public static final String URL = "https://" + USERNAME + ":" + ACCESS_KEY + "@ondemand.saucelabs.com:443/wd/hub";
 	public static final String RealDeviceURL = "https://us1.appium.testobject.com:443/wd/hub";
-	public static final String VirtualDeviceURL = "http://" + USERNAME + ":" + ACCESS_KEY + "@ondemand.saucelabs.com:80/wd/hub";
+	public static final String VirtualDeviceURL = "http://" + USERNAME + ":" + ACCESS_KEY
+			+ "@ondemand.saucelabs.com:80/wd/hub";
 
 	public void saveBean(String id, Object object) {
 		scenarioObjectMap.put(id, object);
@@ -1230,7 +1231,8 @@ public class MRScenario {
 		// capabilities.setCapability("autoAcceptAlerts", true);
 		try {
 
-			String SauceLabsURL = (mobileDeviceType.equalsIgnoreCase(CommonConstants.MOBILE_DEVICE_TYPE_DEFAULT) ? RealDeviceURL
+			String SauceLabsURL = (mobileDeviceType.equalsIgnoreCase(CommonConstants.MOBILE_DEVICE_TYPE_DEFAULT)
+					? RealDeviceURL
 					: VirtualDeviceURL);
 
 			if (mobileDeviceOSName.equalsIgnoreCase("Android")) {

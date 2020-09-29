@@ -4,29 +4,21 @@ import gherkin.formatter.model.DataTableRow;
 import io.appium.java_client.AppiumDriver;
 
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.junit.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import pages.acquisition.commonpages.AcquisitionHomePage;
-import pages.acquisition.dceredesign.BuildYourDrugList;
-import pages.acquisition.dceredesign.DrugSummaryPage;
-import pages.acquisition.dceredesign.GetStartedPage;
-import pages.acquisition.dceredesign.TellUsAboutDrug;
-import pages.acquisition.dceredesign.ZipCodePlanYearCapturePage;
-import pages.acquisition.ulayer.DrugCostEstimatorPage;
-import pages.acquisition.ulayer.VisitorProfilePage;
+import pages.mobile.acquisition.commonpages.VisitorProfilePageMobile;
 import pages.mobile.acquisition.dceredesign.BuildYourDrugListMobile;
-import pages.mobile.acquisition.dceredesign.DrugDetailsPageMobile;
 import pages.mobile.acquisition.dceredesign.DrugSummaryPageMobile;
 import pages.mobile.acquisition.dceredesign.TellUsAboutDrugMobile;
 import pages.mobile.acquisition.dceredesign.ZipCodeAndPlanYearCapturePageMobile;
-import pages.mobile.acquisition.ulayer.AcquisitionHomePageMobile;
-import pages.mobile.acquisition.ulayer.DrugCostEstimatorPageMobile;
-import pages.mobile.acquisition.ulayer.VisitorProfilePageMobile;
+import pages.mobile.acquisition.commonpages.AcquisitionHomePageMobile;
+import pages.mobile.acquisition.commonpages.ComparePlansPageMobile;
+import pages.mobile.acquisition.commonpages.PlanDetailsPageMobile;
+import pages.mobile.acquisition.commonpages.VPPPlanSummaryPageMobile;
 //import pages.mobile.acquisition.ulayer.GetStartedPageMobile;
 import pages.mobile.acquisition.dceredesign.GetStartedPageMobile;
 import acceptancetests.data.CommonConstants;
@@ -37,7 +29,6 @@ import cucumber.api.DataTable;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
 
 /**
  * Functionality:DCE Acquisition
@@ -57,25 +48,7 @@ public class DCEACQVisitorProfileMobile {
 	 * @toDo:user is on medicare acquisition site landing page
 	 */
 
-	@Given("^user is on AARP site$")
-	public void the_user_on__medicaresolutions_Site(DataTable givenAttributes) {
-		wd = getLoginScenario().getMobileDriver();
-		AcquisitionHomePageMobile aquisitionhomepage = new AcquisitionHomePageMobile(wd);
-		aquisitionhomepage.openMobileURL();
-		aquisitionhomepage.fixPrivateConnectionMobile();
-		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
-		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, aquisitionhomepage);
-	}
-
-	@And("^the user clicks on the shopping cart icon$")
-	public void the_user_clicks_on_the_shopping_cart_icon_on_DCE_page_in_AARP() {
-		AcquisitionHomePageMobile acqHomePage = (AcquisitionHomePageMobile) getLoginScenario()
-				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-
-		VisitorProfilePageMobile visitorProfilePage = acqHomePage.navigateToVisitorProfilePage();
-		
-		getLoginScenario().saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfilePage);
-	}
+	
 
 	@And("^user goto DCE redesign profile page via add drug button$")
 	public void the_user_clicks_on_the_add_drugs_button_in_the_profile_to_DCE_Redesign_in_AARP_site() {
@@ -172,6 +145,7 @@ public class DCEACQVisitorProfileMobile {
 		GetStartedPageMobile getStartedPage = visitorProfilePage.addDrug_DCERedesign();
 		if (null != getStartedPage) {
 			getLoginScenario().saveBean(PageConstants.DCE_Redesign_GetStarted, getStartedPage);
+			getLoginScenario().saveBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE, getStartedPage);
 		} else
 			Assert.fail("DCE Redesign page object not loaded");
 

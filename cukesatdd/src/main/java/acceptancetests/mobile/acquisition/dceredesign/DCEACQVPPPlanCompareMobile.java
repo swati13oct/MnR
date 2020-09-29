@@ -61,6 +61,27 @@ public class DCEACQVPPPlanCompareMobile {
 	}
 
 	AppiumDriver wd;
+	
+
+	@Given("^user is on AARP site$")
+	public void the_user_on__medicaresolutions_Site(DataTable givenAttributes) {
+		wd = getLoginScenario().getMobileDriver();
+		AcquisitionHomePageMobile aquisitionhomepage = new AcquisitionHomePageMobile(wd);
+		aquisitionhomepage.openMobileURL();
+		aquisitionhomepage.fixPrivateConnectionMobile();
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, aquisitionhomepage);
+	}
+
+	@And("^the user clicks on the shopping cart icon$")
+	public void the_user_clicks_on_the_shopping_cart_icon_on_DCE_page_in_AARP() {
+		AcquisitionHomePageMobile acqHomePage = (AcquisitionHomePageMobile) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+
+		VisitorProfilePageMobile visitorProfilePage = acqHomePage.navigateToVisitorProfilePage();
+		
+		getLoginScenario().saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfilePage);
+	}
 
 	@Given("^I select \"([^\"]*)\" plans to compare and click on compare plan link$")
 	public void i_select_plans_to_compare_and_click_on_compare_plan_link_in_AARP(String planType) throws Throwable {

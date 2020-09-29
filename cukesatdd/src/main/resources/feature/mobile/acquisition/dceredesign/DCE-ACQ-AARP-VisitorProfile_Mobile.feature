@@ -21,11 +21,11 @@ Feature: 1.10.1 DCE-REDISIGN AARP - To test Acq Visitor Profile to NEW DCE Flows
     When user enters valid zipcode and county
       | ZipCode | <zipCode> |
     And user clicks on continue button in Zip Entry Page
-
-		@DCE_VisitorProfile_AARP
-    Examples: 
-      | drug1   | drug2  | drug3   | drug4    | zipCode |site|
-      | Orkambi | Fanapt | Humalog | Adderall |   80002 |AARP|
+#
+#		@DCE_VisitorProfile_AARP
+    #Examples: 
+      #| drug1   | drug2  | drug3   | drug4    | zipCode |site|
+      #| Orkambi | Fanapt | Humalog | Adderall |   80002 |AARP|
       
       @DCE_VisitorProfile_UHC
     Examples: 
