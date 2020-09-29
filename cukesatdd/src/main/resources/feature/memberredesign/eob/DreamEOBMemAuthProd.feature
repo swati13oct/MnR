@@ -21,7 +21,7 @@ Feature: 1.04.2.2 To Test DREAM EOB for Members - E2E - Member Auth - PROD
       | Member Type  | <memberType>  |
     #-------------- navigate to the target test page for testing
     Then the user navigates to EOB page
-    Then the user validates the header section content on DREAM EOB
+    ###Then the user validates the header section content on DREAM EOB
     #----- Validate Date Range Last 18 months ----  
     And the user selects the desired date range
       | Date Range | Last 18 months |

@@ -12,7 +12,7 @@ Feature: 1.04.1 To Test NON-DREAM EOB for Members - E2E
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
     Then the user navigates to EOB page
-    Then the user validates the header section content
+    ###Then the user validates the header section content
     And the user selects the eob type
       | EOB Type | <eobType> |
     #----- Validate Date Range Last 90 Days ----  
