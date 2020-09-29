@@ -47,6 +47,10 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "//*[contains(@id,'zipcodemeded')][1]//following-sibling::button//*[contains(text(),'Shop Plans')]")
 	private WebElement viewShopPlansButton;
 	
+
+	@FindBy(xpath = "//*[contains(@class,'uhc-zip-button')][1]//*[contains(text(),'Get Started')]")
+	private WebElement ShopEnrollButton;
+	
 	@FindBy(id= "zipcode")
 	private WebElement healthPlansZipcode;
 
@@ -2146,5 +2150,33 @@ public class AcquisitionHomePage extends GlobalWebElements {
 				return new VPPPlanSummaryPage(driver);
 			}
 			return null;
-		}	
+		}
+			
+			
+			public VPPPlanSummaryPage searchPlansWithOutCountyShopEnroll(String zipcode) throws InterruptedException {
+
+				CommonUtility.waitForPageLoadNew(driver, zipCodeShopField, 30);
+				sendkeys(zipCodeShopField, zipcode);
+				ShopEnrollButton.click();
+				// }
+				CommonUtility.waitForPageLoadNew(driver, zipcodeChangeLink, 30);
+				if (driver.getCurrentUrl().contains("health-plans")) {
+					return new VPPPlanSummaryPage(driver);
+				} else
+					return null;
+			}
+				public VPPPlanSummaryPage searchPlansShopEnroll(String zipcode, String countyName) {
+				CommonUtility.waitForPageLoadNew(driver, zipCodeShopField, 30);
+				sendkeys(zipCodeShopField, zipcode);
+				ShopEnrollButton.click();
+				CommonUtility.waitForPageLoad(driver, countyModal, 45);
+				if (validate(countyModal))
+					driver.findElement(By.xpath("//div[@id='selectCounty']//a[text()='" + countyName + "']")).click();
+				CommonUtility.waitForPageLoadNew(driver, vppTop, 30);
+				if (driver.getCurrentUrl().contains("plan-summary")) {
+					return new VPPPlanSummaryPage(driver);
+				}
+				return null;
+			}	
+	
 }

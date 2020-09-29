@@ -46,7 +46,7 @@ public class ShopForaPlanCommonStepDefinition {
 		}
 	}
 	
-	@Given("^click on Enroll Plan on shop for plan for AARP$")
+	@Given("^click on Enroll Plan on shoppages for plans$")
 	public void click_on_Enroll_Plan_on_shop_for_plan_for_AARP() throws Throwable {
 		ShopforaplanAARPlayer shopaplan = (ShopforaplanAARPlayer) getLoginScenario()
 				.getBean(PageConstants.SHOP_FOR_A_PLAN_AARPLAYER);
@@ -57,7 +57,7 @@ public class ShopForaPlanCommonStepDefinition {
 			System.out.println("continue button is not displayed provider search page");
 	}
 	
-	@Given("^click on Learn how to enroll shop pages on enroll page$")
+	@Given("^click on Learn how to enroll shop pages$")
 	public void click_on_Learn_how_to_enroll_Shopplan_on_enroll(DataTable givenAttributes) throws Throwable {
 		List<DataTableRow> givenAttributesRow = givenAttributes
 				.getGherkinRows();

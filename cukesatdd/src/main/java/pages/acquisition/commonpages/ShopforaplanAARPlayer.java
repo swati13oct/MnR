@@ -94,7 +94,7 @@ public class ShopforaplanAARPlayer extends UhcDriver {
 		Thread.sleep(4000);
 		if (validate(dsnpLeanHowToEnrollShopLink)) {
 			waitforElement(dsnpLeanHowToEnrollShopLink);
-			System.out.println("OLE Learn More Modal is Displayed");
+			System.out.println("Shop Page Plan is Displayed");
 			return new ShopforaplanAARPlayer(driver);
 		}
 		return null;
@@ -114,7 +114,7 @@ public class ShopforaplanAARPlayer extends UhcDriver {
 			waitforElement(dsnpLeanHowToEnrollShopLink);
 			dsnpLeanHowToEnrollShopLink.click();
 			Thread.sleep(5000);
-			EnrollmentLink.click();
+			EnrollmentLink.click(); // Need to check tomorrow
 		}
 		else if(plantype.equals("PDP")){
 			waitforElement(pdpLeanHowToEnrollShopLink);

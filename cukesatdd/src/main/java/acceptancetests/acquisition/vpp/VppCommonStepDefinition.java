@@ -429,7 +429,7 @@ public class VppCommonStepDefinition {
 			}
 		}
 
-		@When("^the user performs plan search using Standalone information$")
+		@When("^the user performs plan search using Shop Pages$")
 		public void Standalone_zipcode_details(DataTable givenAttributes) throws InterruptedException {
 			List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 			Map<String, String> memberAttributesMap = new HashMap<String, String>();
@@ -448,9 +448,9 @@ public class VppCommonStepDefinition {
 					.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 			VPPPlanSummaryPage plansummaryPage = null;
 			if (("NO").equalsIgnoreCase(isMultiCounty.trim())) {
-				plansummaryPage = aquisitionhomepage.searchPlansWithOutCountyShop(zipcode);
+				plansummaryPage = aquisitionhomepage.searchPlansWithOutCountyShopEnroll(zipcode);
 			} else {
-				plansummaryPage = aquisitionhomepage.searchPlansShop(zipcode, county);
+				plansummaryPage = aquisitionhomepage.searchPlansShopEnroll(zipcode, county);
 			}
 			
 			if (plansummaryPage != null) {
