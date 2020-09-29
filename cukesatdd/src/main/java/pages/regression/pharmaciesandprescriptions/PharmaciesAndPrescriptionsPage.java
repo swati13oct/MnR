@@ -465,9 +465,9 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 		
 		String expText=planStartDateStr;
 		String actText=targetElement.getText();
-		//keep Assert.assertTrue("PROBLEM - '"+targetItem+"' element text is not as expected. "
-		//keep  		+ "Expected to contain '"+expText+"' | Actual='"+actText+"'", 
-		//keep  		actText.contains(expText));
+		//tbd Assert.assertTrue("PROBLEM - '"+targetItem+"' element text is not as expected. "
+		//tbd  		+ "Expected to contain '"+expText+"' | Actual='"+actText+"'", 
+		//tbd  		actText.contains(expText));
 		//=================================
 		// note: ESTIMATE DRUG COSTS < Link to Acquisition DCE>
 		String targetText="ESTIMATE DRUG COSTS";
@@ -497,7 +497,7 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 			else 
 				expUrl="aarpmedicareplans.com"+expUrl;
 		WebElement expElement=dceHeader;
-		//keep validateLnkBehaviorNewTab(planType, memberType, targetItem, targetElement, expUrl, expElement);
+		validateLnkBehaviorNewTab(planType, memberType, targetItem, targetElement, expUrl, expElement);
 		
 		//=================================
 		//note: FIND A PHARMACY <Link to acquisition pharmacy locator>
@@ -528,7 +528,7 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 			else 
 				expUrl="aarpmedicareplans.com"+expUrl;
 		expElement=phaLocHeader;
-		//keep validateLnkBehaviorNewTab(planType, memberType, targetItem, targetElement, expUrl, expElement);
+		validateLnkBehaviorNewTab(planType, memberType, targetItem, targetElement, expUrl, expElement);
 		
 		//=================================
 		//note: VIEW PLAN DOCUMENTS <link to Plan Documents and Resources>		
@@ -543,9 +543,9 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 
 		expText=targetText;
 		actText=targetElement.getText();
-		//keep Assert.assertTrue("PROBLEM - '"+targetItem+"' element text is not as expected. "
-		//keep 		+ "Expected to contain '"+expText+"' | Actual='"+actText+"'", 
-		//keep 		actText.contains(expText));
+		Assert.assertTrue("PROBLEM - '"+targetItem+"' element text is not as expected. "
+				+ "Expected to contain '"+expText+"' | Actual='"+actText+"'", 
+				actText.contains(expText));
 
 		expUrl="/member/documents/overview.html";
 		expElement=memDocHeader;
@@ -555,6 +555,8 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 
 	
 	public void validateImportNote_preff(String planType, String memberType) {
+		CommonUtility.checkPageIsReadyNew(driver);
+		CommonUtility.waitForPageLoad(driver, impNoteSecHead, 5);
 		//=================================
 		//note: Important Note		
 		String targetText="Important Note";

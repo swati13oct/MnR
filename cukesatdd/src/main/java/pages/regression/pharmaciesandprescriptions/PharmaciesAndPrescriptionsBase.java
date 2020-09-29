@@ -1,7 +1,6 @@
 package pages.regression.pharmaciesandprescriptions;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import org.json.JSONArray;
@@ -12,15 +11,12 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.html5.LocalStorage;
-import org.openqa.selenium.html5.WebStorage;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.remote.Augmenter;
 import org.openqa.selenium.remote.RemoteExecuteMethod;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.remote.html5.RemoteWebStorage;
 import org.openqa.selenium.support.PageFactory;
 import acceptancetests.util.CommonUtility;
-import atdd.framework.MRScenario;
 
 /**
  * Functionality : validations for Pharmacies & Prescriptions page
