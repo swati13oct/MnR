@@ -1,6 +1,6 @@
 Feature: 1.05.4.ACQ-OLE common tool flow E2E SNP AARP Mobile
 
- @SNP_OLE_Mobile
+ @SNP_OLE_Mobile @prod
   Scenario Outline: TID: <TID> - Plan Type: <plantype> - OLE SNP End to end from Acquisition site VPP Plan Summary
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site
@@ -11,7 +11,7 @@ Feature: 1.05.4.ACQ-OLE common tool flow E2E SNP AARP Mobile
       | Plan Type | <plantype> |
     And the user selects plan year for AARP site
       | Plan Year | <planyear> |
-    And the user validates the available plans for selected plan types in the AARP site
+    #And the user validates the available plans for selected plan types in the AARP site
     Then verify plan compare checkbox is not visible on plan summary on AARP
 	 Then the user clicks on Enroll Now for AARP site to start the OLE flow mobile
       | Plan Name | <planName> |

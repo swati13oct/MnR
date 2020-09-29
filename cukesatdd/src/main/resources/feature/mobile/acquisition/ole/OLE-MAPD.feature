@@ -1,6 +1,6 @@
 Feature: 1.05.4.ACQ-OLE common tool flow E2E MAPD AARP Mobile
 
- @SNP_OLE_Mobile_MAPD
+ @SNP_OLE_Mobile_MAPD @prod
   Scenario Outline: TID: <TID> - Plan Type: <plantype> - OLE MAPD End to end  from Acquisition site 
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site
