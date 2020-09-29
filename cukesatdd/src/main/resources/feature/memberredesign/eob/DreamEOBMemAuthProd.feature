@@ -7,7 +7,6 @@ Feature: 1.04.2.2 To Test DREAM EOB for Members - E2E - Member Auth - PROD
 
   #----- begin sanity
   @prod_sanity
-  @prod_dreamEob01 @E2E
   Scenario Outline: -index: <index> -planType: <planType> -memberType: <memberType> -To verify DREAM EOB page content and PDFs
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password

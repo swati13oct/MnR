@@ -13,7 +13,7 @@ jsonReport = "target/cucumber-RunMRATDDSanityEOBShip.json",detailedReport = true
 overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDSanityEOBShip")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberredesign" }, 
 features = { "src/main/resources/feature/memberredesign/eob" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDSanityEOBShip.json" }, tags = { "@sanity" })
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDSanityEOBShip.json" }, tags = { "@eob","@sanity" })
 public class RunMRATDDSanityEOBShip {
 
 }
