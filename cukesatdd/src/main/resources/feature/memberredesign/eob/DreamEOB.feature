@@ -1,11 +1,29 @@
 @Dreameob
 Feature: 1.04.2 To Test DREAM EOB for Members - E2E
 
-  #Background: If run on stage then feature security flag needs to be true
-  #   Given feature security flag must set to true when testing on stage env
-  #    | Feature           | UCPEob |
+  Background: If run on stage then feature security flag needs to be true
+     Given feature security flag must set to true when testing on stage env
+      | Feature           | UCPEob |
 
+  #----- begin sanity
+  @sanity
+  Scenario Outline: -index: <index> -planType: <planType> -memberType: <memberType> -To verify DREAM EOB page content and PDFs
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type   | <planType>   |
+      | Member Type | <memberType> |
+    Then the user navigates to EOB page
+    Then the user validates the header section content on DREAM EOB
+    #----- Validate Date Range Last 18 months ----  
+    And the user selects the desired date range
+      | Date Range | Last 18 months |
+    Then the user validates search result section content for DREAM EOB
+    Then the user clicks on each eob on first page to validate pdf for DREAM EOB
 
+    Examples: 
+      | index | planType | memberType        | flagZeroEob |
+      | S01   | MAPD     | COSMOS_DEOB       | true        |
+
+  #----- begin regression
   @dreamEob01 @E2E @regressionMember 
   Scenario Outline: -index: <index> -planType: <planType> -memberType: <memberType> -To verify DREAM EOB page content and PDFs
     Given login with following details logins in the member portal and validate elements

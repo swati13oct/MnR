@@ -5,8 +5,34 @@ Feature: 1.04.1.1 To Test NON-DREAM EOB for Members - E2E - Member Auth - PROD
   #   Given feature security flag must set to true when testing on stage env
   #    | Feature           | UCPEob |
 
+  #----- begin sanity
+  @prod_sanity
+  Scenario Outline: -index: <index> -planType: <planType> -memberType: <memberType> EOB Type <eobType> -To verify EOB page content and PDFs
+    Given the user is on member auth login flow page
+    When the member is able to login with correct username and password
+      | Username | <username> |
+      | Password | <password> |
+    And Member Enters the Username he wants to search
+      | MemUsername | <MemUserName> |
+    And user clicks on member to select
+    And user stores test input for validations
+      | Username | <MemUserName> |
+      | Plan Type    | <planType>    |
+      | Member Type  | <memberType>  |
+    #-------------- navigate to the target test page for testing
+    Then the user navigates to EOB page
+    Then the user validates the header section content
+    #----- Validate Date Range Last 90 Days ----  
+    And the user selects the desired date range
+      | Date Range | Last 90 Days |
+    Then the user validates search result section content
+    Then the user clicks on first eob from the list to validate pdf
+      | Real EOB | <realEob> |
+    Examples: 
+      | index | username  | password  | MemUserName            | planType                 | memberType         | eobType | realEob | flagZeroEob |
+      | S01   | kkumard   | mnrs786@  | gingerdrais46          | SHIP_HOSPITAL INDEMNITY  | MULTI_SHIP_EOB     | Medical | true    | false       | 
 
-  ##### ----------------- keep all scenarios below this line when dream EOB switches on, below are for SHIP and other non-federal cases ---------------
+  #----- begin regression
   @prod_eob01
   Scenario Outline: -index: <index> -planType: <planType> -memberType: <memberType> EOB Type <eobType> -To verify EOB page content and PDFs
     Given the user is on member auth login flow page

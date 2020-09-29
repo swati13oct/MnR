@@ -5,7 +5,29 @@ Feature: 1.04.1 To Test NON-DREAM EOB for Members - E2E
      Given feature security flag must set to true when testing on stage env
       | Feature           | UCPEob |
 
+  #----- begin sanity
+  @sanity
+  Scenario Outline: -index: <index> -planType: <planType> -memberType: <memberType> EOB Type <eobType> -To verify EOB page content and PDFs
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type   | <planType>   |
+      | Member Type | <memberType> |
+    Then the user navigates to EOB page
+    Then the user validates the header section content
+    And the user selects the eob type
+      | EOB Type | <eobType> |
+    #----- Validate Date Range Last 90 Days ----  
+    And the user selects the desired date range
+      | Date Range | Last 90 Days |
+    Then the user obtains API response info for validation
+    Then the user validates search result section content
+    Then the user clicks on first eob from the list to validate pdf
+      | Real EOB | <realEob> |
 
+    Examples: 
+      | index | planType                 | memberType          | eobType | realEob | flagZeroEob |
+      | S01   | SHIP_MEDICARE SUPPLEMENT | SHIP_EOB            | Medical | true    | true        | 
+
+  #----- begin regression
   @eob01 @regressionMember
   Scenario Outline: -index: <index> -planType: <planType> -memberType: <memberType> EOB Type <eobType> -To verify EOB page content and PDFs
     Given login with following details logins in the member portal and validate elements

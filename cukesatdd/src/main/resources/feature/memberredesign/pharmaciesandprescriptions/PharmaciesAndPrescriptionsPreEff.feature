@@ -27,7 +27,7 @@ Feature: 1.18.1 Member Pharamcies And Prescriptions page - Pre-Effective
     Then user validate preeffective content for plan start date and links section
     Then user validate preeffective content for important note section
     Then user validates Need Help section content for pharmacies and prescriptions page
-	  Then user validates footer section content for pharmacies and prescriptions page
+	Then user validates footer section content for pharmacies and prescriptions page
 
 	@pnpPreff_mapd_ind @devRegression
     Examples: 
