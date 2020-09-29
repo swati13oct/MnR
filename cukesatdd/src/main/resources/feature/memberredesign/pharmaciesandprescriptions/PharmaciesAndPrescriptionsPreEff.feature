@@ -29,7 +29,7 @@ Feature: 1.18.1 Member Pharamcies And Prescriptions page - Pre-Effective
     Then user validates Need Help section content for pharmacies and prescriptions page
 	  Then user validates footer section content for pharmacies and prescriptions page
 
-@abc	@pnpPreff_mapd_ind @devRegression
+	@pnpPreff_mapd_ind @devRegression
     Examples: 
 	  | FID     | planType | memberType          | expectLink |
 	  | F493942 | MAPD     | IND_PREEFF_PnP      | yes        |
