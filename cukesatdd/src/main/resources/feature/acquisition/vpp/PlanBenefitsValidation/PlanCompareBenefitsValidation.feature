@@ -298,6 +298,26 @@ Feature: ACQ-Plan benefits validation
       | workSheet      |
       | PDPSheet2021_3 |
 
+  @planCompareBenefits_NextYear_AARP_ProdCheckout_1
+    Examples:
+      | workSheet    |
+      | Sheet2021_ProdCheckout_1 |
+
+  @planCompareBenefits_NextYear_AARP_ProdCheckout_1
+    Examples:
+      | workSheet    |
+      | Sheet2021_ProdCheckout_2 |
+
+  @planCompareBenefits_NextYear_AARP_ProdCheckout_3
+    Examples:
+      | workSheet    |
+      | Sheet2021_ProdCheckout_3 |
+
+  @planCompareBenefits_NextYear_AARP_ProdCheckout_4
+    Examples:
+      | workSheet    |
+      | Sheet2021_ProdCheckout_4 |
+
   @2021_UHC  @next_year
   Scenario Outline: 2021 UHC Plan Compare Benefits Validation - Sheet : <workSheet>
     Given the user navigates to plan compare page and compares benefits value from excel to UI and reports into excel
@@ -419,3 +439,24 @@ Feature: ACQ-Plan benefits validation
     Examples:
       | workSheet      |
       | PDPSheet2021_3 |
+
+
+  @planCompareBenefits_NextYear_UHC_ProdCheckout_1
+    Examples:
+      | workSheet    |
+      | Sheet2021_ProdCheckout_1 |
+
+  @planCompareBenefits_NextYear_UHC_ProdCheckout_1
+    Examples:
+      | workSheet    |
+      | Sheet2021_ProdCheckout_2 |
+
+  @planCompareBenefits_NextYear_UHC_ProdCheckout_3
+    Examples:
+      | workSheet    |
+      | Sheet2021_ProdCheckout_3 |
+
+  @planCompareBenefits_NextYear_UHC_ProdCheckout_4
+    Examples:
+      | workSheet    |
+      | Sheet2021_ProdCheckout_4 |
