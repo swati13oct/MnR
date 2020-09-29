@@ -26,8 +26,7 @@ Feature: 1.04.1.1 To Test NON-DREAM EOB for Members - E2E - Member Auth - PROD
     And the user selects the desired date range
       | Date Range | Last 90 Days |
     Then the user validates search result section content
-    Then the user clicks on first eob from the list to validate pdf
-      | Real EOB | <realEob> |
+
     Examples: 
       | index | username  | password  | MemUserName            | planType                 | memberType         | eobType | realEob | flagZeroEob |
       | S01   | kkumard   | mnrs786@  | gingerdrais46          | SHIP_HOSPITAL INDEMNITY  | MULTI_SHIP_EOB     | Medical | true    | false       | 

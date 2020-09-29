@@ -17,7 +17,6 @@ Feature: 1.04.2 To Test DREAM EOB for Members - E2E
     And the user selects the desired date range
       | Date Range | Last 18 months |
     Then the user validates search result section content for DREAM EOB
-    Then the user clicks on each eob on first page to validate pdf for DREAM EOB
 
     Examples: 
       | index | planType | memberType        | flagZeroEob |

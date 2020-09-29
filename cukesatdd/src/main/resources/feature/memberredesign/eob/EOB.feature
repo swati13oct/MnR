@@ -20,8 +20,6 @@ Feature: 1.04.1 To Test NON-DREAM EOB for Members - E2E
       | Date Range | Last 90 Days |
     Then the user obtains API response info for validation
     Then the user validates search result section content
-    Then the user clicks on first eob from the list to validate pdf
-      | Real EOB | <realEob> |
 
     Examples: 
       | index | planType                 | memberType          | eobType | realEob | flagZeroEob |
