@@ -239,7 +239,7 @@ public class VisitorProfileStepDefinition_AARP {
 	
 	public void user_clicks_on_back_to_plan_on_VP_authenticated_AARP_site() {
 		VisitorProfilePage visitorProfile = (VisitorProfilePage) getLoginScenario().getBean(PageConstants.VISITOR_PROFILE_PAGE);
-		visitorProfile.backToPlans();
+		visitorProfile.backtoPlan();
 	}
 	
 	

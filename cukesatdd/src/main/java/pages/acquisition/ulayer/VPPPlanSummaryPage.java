@@ -338,6 +338,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	
 	@FindBy(xpath = "//div[contains(@class,'component_info_wrap')]//button[text()='Get Started']")
 	private WebElement getStartedBtn;
+	
+	@FindBy(xpath = "//a[text()='View Saved Items']")
+	private WebElement viewSavedItems;
 
 	//@FindBy(xpath = "//div[contains(@class,'component_info_wrap')]//button[text()='Find My Doctors ']")
 	@FindBy(xpath = "//div[contains(@class,'component_info_wrap')]//button[contains(text(),'Find a Provider')]")
@@ -908,6 +911,15 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			 */
 			
 		}
+	}
+	
+	public void getValidate() {
+		validate(getStartedBtn);
+		validate(viewSavedItems);
+	}
+	
+	public void validateProvider() {
+		validate(nextBestActionModalFindMyDoctorsBtn);
 	}
 
 	public VPPPlanSummaryPage viewPlanSummaryButton(String planType) {

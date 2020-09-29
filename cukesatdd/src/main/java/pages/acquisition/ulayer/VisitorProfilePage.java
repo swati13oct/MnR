@@ -423,4 +423,9 @@ public class VisitorProfilePage extends UhcDriver {
 		}
 		return null;
 	}
+	
+	public void backtoPlan() {
+		backToPlans.click();
+		CommonUtility.checkPageIsReadyNew(driver);
+	}
 }

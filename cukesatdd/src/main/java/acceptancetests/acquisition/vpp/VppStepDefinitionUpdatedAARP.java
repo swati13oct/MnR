@@ -273,6 +273,26 @@ public class VppStepDefinitionUpdatedAARP {
 		if(!plantype.equalsIgnoreCase("MS"))
 			plansummaryPage.handlePlanYearSelectionPopup();
 	}
+	@And("^user validate Saved items and Get started$")
+	public void user_validate_Saved_items_and_Get_started() {
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+	plansummaryPage.getValidate();
+	}
+	
+	@And("^user validate Find a Provider$")
+	public void user_validate_Find_a_Provider() {
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+	plansummaryPage.getValidate();
+	}
+	
+	@And("^user click on get started on AARP site$")
+	public void user_click_Get_started() {
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+	plansummaryPage.clickOnButtonInPlanSummaryPage("Get Started");
+	}
 
 	@And("^the user selects plan year for the AARP site$")
 	public void user_selects_plan_year(DataTable givenAttributes) {

@@ -41,7 +41,8 @@ import pages.acquisition.dceredesign.GetStartedPage;
  */
 public class AcquisitionHomePage extends GlobalWebElements {
 
-	@FindBy(xpath = "//*[contains(@id,'cta-zipcode')]")
+	//@FindBy(xpath = "//*[contains(@id,'cta-zipcode')]")
+	@FindBy(xpath = "//*[@ng-model='zipcode']")
 	private WebElement zipCodeField;
 	
 	@FindBy(xpath = "//*[contains(@id,'zipcodemeded-0')]")
@@ -185,7 +186,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "//*[@class='container meded-article-header']/h1']")
 	private WebElement MALandingHeading;
 
-	@FindBy(xpath = "//*[contains(@id,'zipcodebtn') or (contains(@class,'zip-button' ) and contains( text(),'Go'))]")
+	//@FindBy(xpath = "//*[contains(@id,'zipcodebtn') or (contains(@class,'zip-button' ) and contains( text(),'Go'))]")
+	@FindBy(xpath = "//button[@id='submit']")
 	private WebElement viewPlansButton;
 
 	@FindBy(xpath = "//form[@id='zip-form']//button[@class='zip-button']")
