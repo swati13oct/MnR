@@ -303,7 +303,7 @@ Feature: ACQ-Plan benefits validation
       | workSheet    |
       | Sheet2021_ProdCheckout_1 |
 
-  @planCompareBenefits_NextYear_AARP_ProdCheckout_1
+  @planCompareBenefits_NextYear_AARP_ProdCheckout_2
     Examples:
       | workSheet    |
       | Sheet2021_ProdCheckout_2 |
@@ -446,7 +446,7 @@ Feature: ACQ-Plan benefits validation
       | workSheet    |
       | Sheet2021_ProdCheckout_1 |
 
-  @planCompareBenefits_NextYear_UHC_ProdCheckout_1
+  @planCompareBenefits_NextYear_UHC_ProdCheckout_2
     Examples:
       | workSheet    |
       | Sheet2021_ProdCheckout_2 |
