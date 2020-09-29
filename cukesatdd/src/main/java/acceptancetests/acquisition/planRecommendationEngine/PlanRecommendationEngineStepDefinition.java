@@ -84,6 +84,7 @@ public class PlanRecommendationEngineStepDefinition {
 			System.out.println("Email is:"+county);
 			String isMultiCounty = inputValues.get("Is Multi County");
 			System.out.println("Entered Search Key is:"+isMultiCounty);
+			checkpopup();
 		PlanRecommendationEngineLandingAndZipcodePages planSelectorhomepage =  new PlanRecommendationEngineLandingAndZipcodePages((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
 		if (isMultiCounty.equalsIgnoreCase("NO")) {
 			planSelectorhomepage.quizStartAndRunQuestionnaire(zipcode);

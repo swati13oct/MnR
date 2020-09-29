@@ -136,7 +136,7 @@ public class PlanRecommendationEngineLandingAndZipcodePages extends UhcDriver {
 	@FindBy(css = "iframe[title*=' Survey']")
 	private WebElement popupFrame;
 	
-	@FindBy(css = "button[class*='no']")
+	@FindBy(css = "button[id*='no']")
 	private WebElement popupNo;
 	
 //Landing Page Element Verification Method 
@@ -322,14 +322,15 @@ public void getStartedAndRunzipcodeWithCounty(String zip_code, String County) th
 	public boolean close_Popup() {
 		boolean popup_presents = false;
 		System.out.println("Checking Popup Status...");
-		if(validate(popupFrame, 30)) {
-			driver.switchTo().frame(popupFrame);
+		if(validate(popupNo, 20)) {
+			if(validate(popupFrame, 5))
+				driver.switchTo().frame(popupFrame);
 			threadsleep(1000);
 			popupNo.click();
 			threadsleep(1000);
-			driver.switchTo().defaultContent();
 			popup_presents = true;
 		}
-			return popup_presents;
+		driver.switchTo().defaultContent();
+		return popup_presents;
 	}
 }
