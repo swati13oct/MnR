@@ -18,6 +18,6 @@ import cucumber.api.CucumberOptions;
 tags = { "@DCE_Redesign_VPP_Details" }, dryRun=false)
 
 
-public class RunMRATDDAcquisitionMobileDCEVPPPlanCompare {
+public class RunMRATDDAcquisitionDCEVPPPlanCompareMobile {
 
 }
