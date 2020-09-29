@@ -22,7 +22,7 @@ import cucumber.api.CucumberOptions;
 		toPDF = true,
 		outputFolder = "target/RunMRATDDAcquisitionPlanRecommendationEngineVppDrugCostEstimatorRedesignAARP")
 @CucumberOptions(
-		glue = { "atdd.framework", "acceptancetests.acquisition.planRecommendationEngine" },
+		glue = { "atdd.framework", "acceptancetests.acquisition" },
 		features = { "src/main/resources/feature/acquisition" },
 		plugin = { "pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionPlanRecommendationEngineVppDrugCostEstimatorRedesignAARP.json" },
 		tags = { "@PRE_VPP_DCE_E2E_AARP" })
