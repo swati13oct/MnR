@@ -44,8 +44,8 @@ public class DCEACQMedEdMobile {
 	public void the_user_on_uhc_medicaresolutions_site_mobile() {
 		wd = getLoginScenario().getMobileDriver();
 		AcquisitionHomePageMobile aquisitionhomepage = new AcquisitionHomePageMobile(wd);
-		aquisitionhomepage.openPRE();
-		//aquisitionhomepage.openMobileURL();
+		//aquisitionhomepage.openPRE();
+		aquisitionhomepage.openMobileURL();
 		aquisitionhomepage.fixPrivateConnectionMobile();
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, aquisitionhomepage);
