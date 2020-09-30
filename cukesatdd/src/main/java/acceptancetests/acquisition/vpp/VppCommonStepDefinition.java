@@ -590,6 +590,22 @@ public class VppCommonStepDefinition {
 			Assert.fail("Error in validating the OLE Campaign Landing");
 	}
 	
+	@Given("^the user navigates to following acquisition site page$")
+	public void the_user_navigates_to_medicare_acquisition_site_page(DataTable givenAttributes) throws Throwable {
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		String path = memberAttributesMap.get("PagePath");
+		path = path.replace("!", "#");
+		System.out.print("Path to Acq page : "+path);
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		aquisitionhomepage.navigateToPath(path);
+	}
+	
 	@Then("^User store the information provided from rally to vpp page$")
 	public void user_store_the_information_provided_from_rally_to_vpp(DataTable givenAttributes) {
 	
