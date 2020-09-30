@@ -174,7 +174,7 @@ Feature: 1.01.3-Vpp to plan Compare AARP Scenarios
       | TID   | zipcode | isMultiCounty | county             | plantype | planname                                            | planyear |
       | 00011 |   90210 | NO            | Los Angeles County | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) | current  |
 
-  @vppPlanCompareAARPRegression @prod
+  @vppPlanCompareAARPRegression
   Scenario Outline: TID: <TID> - Plan Type: <plantype> - valiadation of Add provider from plan compare and Edit provider from plan compare page for AARP
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site
@@ -252,7 +252,7 @@ Feature: 1.01.3-Vpp to plan Compare AARP Scenarios
       | TID   | zipcode | isMultiCounty | county          | plantype | planname                             | planyear |
       | 00014 |   10010 | NO            | New York County | MAPD     | AARP Medicare Advantage Plan 1 (HMO) | current  |
 
-  @vppPlanCompareAARPRegression @prod
+  @vppPlanCompareAARPRegression
   Scenario Outline: TID: <TID> - Plan Type: <plantype> - valiadation of Add drug from plan compare and Edit drug from plan compare page for AARP
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information
@@ -339,7 +339,7 @@ Feature: 1.01.3-Vpp to plan Compare AARP Scenarios
       | TCID  | zipcode | isMultiCounty | county             | plantype | planyear |
       | 00016 |   90210 | No            | Los Angeles County | MAPD     | current  |
 
-  @vppPlanCompareAARPRegression @prod
+  @vppPlanCompareAARPRegression
   Scenario Outline: <TCID> - Plan Type: <plantype> - Navigation for plan comapre to Plan Detail
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site

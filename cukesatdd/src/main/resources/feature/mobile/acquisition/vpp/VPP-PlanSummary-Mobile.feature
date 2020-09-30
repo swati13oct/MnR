@@ -231,7 +231,7 @@ Feature: 2.01.1-Vpp to plan Summary UHC Scenarios
       | UID     | zipcode | isMultiCounty | county           |
       | F322478 |   80001 | NO            | Jefferson County |
 
-  @vppPlanSummaryUHCRegression @prod
+  @vppPlanSummaryUHCRegression
   Scenario Outline: To verify links displayed in Global footer section in UMS site on vpp
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
@@ -275,7 +275,7 @@ Feature: 2.01.1-Vpp to plan Summary UHC Scenarios
       | 1598166 | Blayer | PDP      |   80001 | NO            | Jefferson County |
       | 1598166 | Blayer | SNP      |   80001 | NO            | Jefferson County |
 
-  @vppPlanSummaryUHCRegression @prod
+  @vppPlanSummaryUHCRegression
   Scenario Outline: Verify Provider Search  in UHC site from plan summary page
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site

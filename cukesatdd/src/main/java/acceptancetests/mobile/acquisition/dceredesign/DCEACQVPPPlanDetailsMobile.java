@@ -249,7 +249,7 @@ public class DCEACQVPPPlanDetailsMobile {
 		String planType = memberAttributesRow.get(0).getCells().get(1);
 		String planName = memberAttributesRow.get(1).getCells().get(1);
 		VPPPlanSummaryPageMobile plansummaryPage = new VPPPlanSummaryPageMobile(wd);
-		plansummaryPage.viewPlanSummary(planType);
+		//plansummaryPage.viewPlanSummary(planType);
 		PlanDetailsPageMobile plandetailspage = plansummaryPage.navigateToPlanDetails(planName,
 				planType);
 		if (plandetailspage != null) {

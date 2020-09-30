@@ -636,7 +636,7 @@ public class MRScenario {
 			}
 			return props;
 		} else {
-			if (environment.contains("stage") || environment.equals("stage-aarp")
+			if (environment.contains("stage") || environment.equals("stage-aarp") 
 					|| environment.equals("offline-stage-aarp"))
 				domain = "uhc.com";
 			else if (environment.equals("team-atest") || environment.equals("team-e") || environment.equals("team-t")

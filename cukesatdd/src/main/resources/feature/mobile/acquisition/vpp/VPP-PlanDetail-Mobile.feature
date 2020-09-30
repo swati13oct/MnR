@@ -233,7 +233,7 @@ Feature: 2.01.2-Vpp to plan Details UHC Scenarios
       | TID   | zipcode | county             | drugInitials1 | drugName1 | drugInitials2 | drugName2  | drugInitials3 | drugName3     | pharmacyType     | distance | pharmacyName | plantype | planName                                           | quantity | frequency     | newPharmacyType | genericName1 | genricName3 | aep | currentyear | planyear |
       | 00010 |   90002 | Los Angeles County | lipi          | Lipitor   | dron          | dronabinol | Adva          | Advair Diskus | Standard Network | 15 miles | CVS PHARMACY | MAPD     | AARP Medicare Advantage SecureHorizons Focus (HMO) |       30 | Every 1 month | Mail Order      | atorvastatin | fluticasone | no  | no          | current  |
 
-  @vppPlanDetailsUHC09 @vppPlanDetailsUHCRun03 @vppPlanDetailsUHCRegression @prod
+  @vppPlanDetailsUHC09 @vppPlanDetailsUHCRun03 @vppPlanDetailsUHCRegression
   Scenario Outline: TCID - <TID> - plan Type: <plantype> - Verify Prescription Drug Benefits tab in Plan Details for provided plan
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site

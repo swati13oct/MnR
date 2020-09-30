@@ -269,7 +269,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	@FindBy(xpath = "//*[contains(@class,'cta-button secondary') and contains(text(),'Find a Provider')]")
 	private WebElement providerSearchFromHomeScreen;
 
-	@FindBy(id = "ghn_lnk_2")
+	@FindBy(xpath = "//span[contains(normalize-space(),'Shop For a Plan'")
 	private WebElement ShopForaplan;
 
 	@FindBy(xpath = ".//*[@id='updates-mobile-form']/div/div[2]/button")
@@ -2415,10 +2415,9 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 			present = false;
 		}
 		if (present) {
-			System.out.println("@@@@@@@@@ Able to find TFN widget @@@@@@@@@");
-
-		} else
-			Assert.fail("@@@@@@@@@ No TFN widget @@@@@@@@@");
+			System.out.println("@@@@@@@@@ Able to find Chat TFN widget @@@@@@@@@");
+			// validateChatSamContent();
+		}
 
 	}
 

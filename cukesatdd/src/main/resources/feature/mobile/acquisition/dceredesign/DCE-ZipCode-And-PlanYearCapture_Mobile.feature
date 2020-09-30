@@ -1,7 +1,7 @@
 @dce_redesign_zipcode_planyear_capture_AEP @F426582
 Feature: 1.10.1 DCE-REDESIGN AARP - To test ZipCode and Plan Year capture page in New DCE flow during AEP
 
-  @DCE_ZipCodePlanYear_AEP @prod @Regression
+  @DCE_ZipCodePlanYear_AEP @prod
   Scenario Outline: Test to verify the new DCE redesign page displayed for ZipCode and Plan year capture page for AEP on  <site> site
     Given the user is on medicare acquisition site landing page
     	|Site| <site>|
