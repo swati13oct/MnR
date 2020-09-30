@@ -507,7 +507,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 				start(AARP_ACQISITION_PAGE_URL);
 				testSiteUrl=AARP_ACQISITION_PAGE_URL;
 				checkForSecurityPage();
-				checkModelPopup(driver,30);		
+				checkModelPopup(driver,20);		
 			}
 		}
 		
