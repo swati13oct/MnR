@@ -132,7 +132,7 @@ public class OLEStepDefinitionMobile {
 			Assert.fail("Error in validating the OLE Welcome Page");
 	}
 	
-	@Then("^the user validates the Plan details on OLE$")
+/*	@Then("^the user validates the Plan details on OLE$")
 	public void the_user_validates_the_Plan_details_on_OLE() throws Throwable {
 
 		WelcomePage welcomePage = (WelcomePage) getLoginScenario().getBean(OLE_PageConstants.OLE_WELCOME_PAGE);
@@ -153,7 +153,7 @@ public class OLEStepDefinitionMobile {
 			System.out.println("Plan Details Validation in OLE PAGE : "+Validation_Status);
 			Assert.fail();
 		}
-	}
+	}*/
 	
 	@Then("^the user validates TFN in Welcome OLE Right Rail$")
 	public void the_user_validates_TFN_in_Right_Rail() throws Throwable {
