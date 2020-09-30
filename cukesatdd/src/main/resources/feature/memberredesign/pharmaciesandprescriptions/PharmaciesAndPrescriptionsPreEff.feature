@@ -16,7 +16,7 @@ Feature: 1.18.1 Member Pharamcies And Prescriptions page - Pre-Effective
     Then user navigates to the health and wellness page to validate Pharamcies and Prescriptions link
     Then user navigates to the eob page to validate Pharamcies and Prescriptions link
     Then user navigates to the benefit and coverage page to validate Pharamcies and Prescriptions link
-    ##Then user navigates to the plan documents and resources page to validate Pharamcies and Prescriptions link
+    Then user navigates to the plan documents and resources page to validate Pharamcies and Prescriptions link
     Then user navigates to the contact us page to validate Pharamcies and Prescriptions link
     Then user navigates to the account setting to validate Pharamcies and Prescriptions link
     Then user navigates to the Notices and Disclosures to validate Pharamcies and Prescriptions link
@@ -82,7 +82,7 @@ Feature: 1.18.1 Member Pharamcies And Prescriptions page - Pre-Effective
     Then user navigates to the health and wellness page to validate Pharamcies and Prescriptions link
     Then user navigates to the eob page to validate Pharamcies and Prescriptions link
     Then user navigates to the benefit and coverage page to validate Pharamcies and Prescriptions link
-    ##Then user navigates to the plan documents and resources page to validate Pharamcies and Prescriptions link
+    Then user navigates to the plan documents and resources page to validate Pharamcies and Prescriptions link
     Then user navigates to the contact us page to validate Pharamcies and Prescriptions link
     Then user navigates to the account setting to validate Pharamcies and Prescriptions link
     Then user navigates to the Notices and Disclosures to validate Pharamcies and Prescriptions link

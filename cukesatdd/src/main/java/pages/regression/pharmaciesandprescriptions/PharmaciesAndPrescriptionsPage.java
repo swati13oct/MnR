@@ -549,7 +549,7 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 
 		expUrl="/member/documents/overview.html";
 		expElement=memDocHeader;
-		//keep validateLnkBehaviorSameTab(planType, memberType, targetItem, targetElement, expUrl, expElement);
+		validateLnkBehaviorSameTab(planType, memberType, targetItem, targetElement, expUrl, expElement);
 	
 	}
 
