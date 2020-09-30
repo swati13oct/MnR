@@ -15,7 +15,7 @@ import cucumber.api.CucumberOptions;
 jsonReport = "target/cucumber-RunMRATDDAcquisitionMobileOLEMAPD_prod.json",detailedReport = true,
  detailedAggregatedReport = true, overviewReport = true, toPDF = true,
  outputFolder = "target/RunMRATDDAcquisitionMobileOLEMAPD_prod")
-@CucumberOptions(glue = { "atdd.framework", "acceptancetests.mobile" },monochrome=true, 
+@CucumberOptions(glue = { "atdd.framework", "acceptancetests.mobile.acquisition.ole" },monochrome=true, 
 features = { "src/main/resources/feature/mobile/acquisition/ole" }, plugin = {
 		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionMobileOLEMAPD_prod.json" }, 
 tags = { "@SNP_OLE_Mobile_MAPD" })
