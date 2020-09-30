@@ -324,7 +324,7 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	@FindBy(id = "shipping-method-select-element")
 	protected WebElement selectShippingMethod;
 
-	@FindBy(xpath = "/html/body/div[3]/div[1]/main/div[2]/div[2]/div/div/div[1]/div/div[2]/div[1]/div")
+	@FindBy(xpath = "//*[contains(@data-testid,'refill-all-message')]")
 	protected WebElement refillAllMedicationsExplanation;
 
 	@FindBy(xpath = "//span[@data-test-total-medications='9']")
