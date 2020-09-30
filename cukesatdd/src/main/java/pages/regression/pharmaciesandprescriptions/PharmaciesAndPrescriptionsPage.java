@@ -1423,6 +1423,20 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 				isOrderProcessing());
 	}
 
+	public void validateTransferToHDHeader() {
+
+		Assert.assertTrue("PROBLEM - unable to locate transfer to HD page header elements",
+
+				transferToHDHeaderDisplayed());
+	}
+
+	public void isTransfer2HDCTADisplayed() {
+
+		Assert.assertTrue("PROBLEM - unable to locate transfer to HD button element",
+
+				isTransfer2HDCTA());
+	}
+
 	// F392596 Meidine Cabinet// when user click on learn more button on current
 	// medication on PNP page.
 

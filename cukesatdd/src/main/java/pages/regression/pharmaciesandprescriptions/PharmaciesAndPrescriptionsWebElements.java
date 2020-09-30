@@ -416,6 +416,9 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	@FindBy(xpath = "//span[contains(text(),'processing')]")
 	protected List<WebElement> Processing;
 
+	@FindBy(xpath = "//h1[contains(text(),'Transfer to Home Delivery')]")
+	protected WebElement transferToHDHeader;
+
 	@FindBy(xpath = "//span[contains(text(),'request received')]")
 	protected List<WebElement> requestReceived;
 
@@ -1029,6 +1032,22 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 
 	public boolean isOrderProcessing() {
 		if (Processing.size() >= 0) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public boolean transferToHDHeaderDisplayed() {
+		if (validate(transferToHDHeader)) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public boolean isTransfer2HDCTA() {
+		if (listOfTransferToHDCTA.size() >= 0) {
 			return true;
 		} else {
 			return false;
