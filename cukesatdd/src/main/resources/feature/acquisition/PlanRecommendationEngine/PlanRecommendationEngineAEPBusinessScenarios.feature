@@ -1,4 +1,4 @@
-@PlanRecommendationEngine @FuturePRERegression
+@PlanRecommendationEngine @PREAEPRegression
 Feature: Plan Recommendation Engine Ranking - Verify Future PRE flows functionalities with recommendation and Ranking with API results
 
   @PRE @FutureAPIRanking @MAPDFlowRankingFuture @SanityTest
@@ -35,7 +35,7 @@ Feature: Plan Recommendation Engine Ranking - Verify Future PRE flows functional
       | Zipcode | isMultiCounty | county      | isCoverageOpt | specialNeeds | travel   | doctors | DoctorsName           | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch                              | pharmacyoption | Dental-Hearing-Vision-Fitness | costPreferenceOption |
       |   90210 | NO            | Los Angeles | MAPD          | Nursing      | withinUS | Lookup  | Jennifer T. Dixon, NP | NO            | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,1,YES,NO:morphine sulfate,NO,morphine sulfate CAP 10MG ER,,,1,NO,NO | Online         | Yes,Yes,Yes,Yes               | Lower                |
 
-  @PRE @planrecommandonation @APIRanking @MAPDFlowRanking @SanityTest @PRERegression3
+  @PRE @planrecommandonation @APIRanking @MAPDFlowRanking
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds>, <travel>, <doctors>, <DoctorsName>, <Drug Selection> , <Dental-Hearing-Vision-Fitness>, <costPreferenceOption> - To validate SNP API ranking plans in PRE
     Given the user is on UHC medicare acquisition site landing page
     When user navigate to Plan Recommendation Engine and Checking Breadcrumbs
@@ -67,7 +67,7 @@ Feature: Plan Recommendation Engine Ranking - Verify Future PRE flows functional
       |   33143 | No            | Miami-Dade | MAPD          | None         | None   | Lookup          | David B. Auerbach |               | No             | Yes,No,No,No                  | Higher               |
       |   55419 | No            | Hennepin   | MAPD          | None         | None   | AcceptsMedicare |                  |               | No             | Yes,No,No,No                  | Higher               |
 
-  @PRE @planrecommendation @APIRanking @MAFutureFlowRanking @SanityTest @PRERegression6
+  @PRE @planrecommendation @APIRanking @MAFutureFlowRanking
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds> , <travel> , <DoctorsName> , <Dental-Hearing-Vision-Fitness> , <costPreferenceOption> - To validate MA flow functions for MA and MS plans in PRE
     Given the user is on UHC medicare acquisition site landing page
     When user navigate to Plan Recommendation Engine and Checking Breadcrumbs
@@ -97,7 +97,7 @@ Feature: Plan Recommendation Engine Ranking - Verify Future PRE flows functional
       |   15537 | NO            | Bedford       | MA            | None             | withinUS | UHGNetwork |                                  |               | Yes,No,No,No                  | Lower                |
       |   30012 | YES           | Walton County | MA            | Medicaid,Nursing | withinUS | Lookup     | Emily Adams, NP:Azizul Hoque, MD | NO            | Yes,Yes,Yes,Yes               | Lower                |
 
-  @PRE @planrecommendation @APIRanking @PDPFlowRanking @SanityTest @PDPFuture
+  @PRE @planrecommendation @APIRanking @PDPFlowRanking @PDPFuture
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <Drug Selection> , <primaryRecommendation> , <RankingplansOrder> - To validate PDP ranking plans in PRE
     Given the user is on UHC medicare acquisition site landing page
     When user navigate to Plan Recommendation Engine and Checking Breadcrumbs
@@ -116,7 +116,7 @@ Feature: Plan Recommendation Engine Ranking - Verify Future PRE flows functional
       | Zipcode | isMultiCounty | county   | isCoverageOpt | Drug Selection |
       |   10001 | NO            | New York | PDP           | No             |
 
-  @PRE @planrecommendation @APIRanking @PDPFlowRanking @SanityTest @PRERegression6 
+  @PRE @planrecommendation @APIRanking @PDPFlowRanking 
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <Drug Selection> , <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch> , <pharmacyoption> - To validate PDP API ranking plans in PRE
     Given the user is on UHC medicare acquisition site landing page
     When user navigate to Plan Recommendation Engine and Checking Breadcrumbs

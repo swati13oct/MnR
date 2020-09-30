@@ -1,4 +1,4 @@
-@AgentRecommendationEngine @ARERegression
+@AgentRecommendationEngine @AREAEPRegression
 Feature: Agent Recommendation Engine - Verify ARE elements
 
   @ARE @PlanYearAutoRanking @F472941
