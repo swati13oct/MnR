@@ -98,8 +98,14 @@ public class CheckOutSummaryWebElements extends UhcDriver {
 	@FindBy(xpath = "//*[@data-testid='os__payment__changePaymentCTA']")
 	protected WebElement changePaymentCTA;
 
+	@FindBy(xpath = "//*[@data-testid='os__payment__changePaymentCTA']")
+	protected WebElement addPaymentCTA;
+
 	@FindBy(xpath = "//*[@data-testid='os__payment__ccImage']/..")
 	protected WebElement preferredPaymentMethod;
+
+	@FindBy(xpath = "//*[@data-testid='os__payment__expirationMessage']")
+	protected WebElement noPaymentMethod;
 	// *************************Medication Section**********************
 
 	@FindBy(xpath = "//*[@data-testid='rx__removeCTA']")
@@ -193,8 +199,50 @@ public class CheckOutSummaryWebElements extends UhcDriver {
 
 	@FindBy(xpath = "//*[@data-testid='order-management-disclaimer']")
 	protected WebElement disclaimerMessage;
-	
-	@FindBy(xpath="//div[@data-testid='header__title']//*[text()='Change Shipping Address']")
+
+	@FindBy(xpath = "//div[@data-testid='header__title']//*[text()='Change Shipping Address']")
 	protected WebElement changeShippingAddressHeader;
-	
+
+	@FindBy(xpath = "//div[@id='p_message2']")
+	protected WebElement addPaymentPage;
+
+	@FindBy(xpath = "//*[@data-testid='header__title']")
+	protected WebElement changePaymentPage;
+
+	/************************* Auto Refill Selection ************************/
+	// Auto refill off/On checkbox --> ON/OFF
+	@FindBy(xpath = "//*[@data-testid='rx__autoEnroll']//input[@type='checkbox']")
+	protected WebElement autoRefillCheckbox;
+
+	// Auto refill off label
+	@FindBy(xpath = "//*[@data-testid='rx__autoEnroll__cta']//span[text()='Auto Refill Off']")
+	protected WebElement autoRefillOffLabel;
+
+	// Auto refill On label
+	@FindBy(xpath = "//*[@data-testid='rx__autoEnroll__cta']//span[text()='Auto Refill On']")
+	protected WebElement autoRefillOnLabel;
+
+	// Auto refill Enrollment Confirmation:
+	@FindBy(xpath = "//*[@data-testid='header__title']//h1[text()='Would you like to enroll in Auto Refill?']")
+	protected WebElement autoRefillEnrollmentPage;
+
+	// Auto refill disenrollment Confirmation:
+	@FindBy(xpath = "//*[@data-testid='header__title']//h1[text()='Would you like to stop enroll in Auto Refill?']")
+	protected WebElement autoRefillDisenrollmentPage;
+
+	// Auto Refill Confirmation Close button
+	@FindBy(xpath = "//*[@data-testid='header__icon__left']//button[@type='button']")
+	protected WebElement closeAutoRefillPage;
+
+	// Auto Refill Confirmation Cancel button
+	@FindBy(xpath = "//*[@data-testid='rx__enrollment_cancel__button']")
+	protected WebElement cancelAutoRefillPage;
+
+	// Auto Refill Change Enrollment --> STOP/ENROLL
+	@FindBy(xpath = "//*[@data-testid='rx__change__enrollment__cta']")
+	protected WebElement changeAutoRefillEnrollment;
+
+	// Medication eligible for Auto Refill
+	@FindBy(xpath = "//*[@data-testid='rx__refillsLeft']/following-sibling::div//span[@data-testid='rx__autoEnroll']")
+	protected WebElement medicationEligibleForAutoRefillEnrollment;
 }
