@@ -61,21 +61,26 @@ Feature: 1.08. ACQ- Visitor profile AARP
       | Zip Code        | <zipcode>       |
       | County Name     | <county>        |
       | Is Multi County | <isMultiCounty> |
-    Then user validates plan count for all plan types on plan summary page in the AARP site
-    Then user saves two plans as favorite on AARP site
+    Then user validates plan count for all plan types on plan summary page
+    And the user views the plans of the below plan type
+    	 | Plan Type  | <plantype>  |
+    And the user selects plan year
+    	|Plan Year	| <planyear>|
+    	| Plan Type  | <plantype>  |
+    Then user saves two plans as favorite
+      | Test Plans | <testPlans> |
       | Plan Type  | <plantype>  |
+    Then user gets a create profile prompt
+    Then user click on continue as guest button
+    And user validates the added plans on visitor profile page
       | Test Plans | <testPlans> |
-    Then user gets a create profile prompt on AARP site
-    Then user click on continue as guest button on AARP site
-    And user validates the added plans on visitor profile page of AARP site
-      | Test Plans | <testPlans> |
-    And user delets the added plans on visitor profile page of AARP site
+    And user delets the added plans on visitor profile page
       | Test Plans | <testPlans> |
 
     @addPlans_AARP
     Examples: 
-      |	site	| state   | UID       | zipcode | isMultiCounty | county           | plantype | testPlans                                                                                              |
-      |	AARP	| Alabama | US1770330 |   90210 | NO            | Jefferson County | MAPD     | AARP Medicare Advantage SecureHorizons Focus (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO) |
+      |	site	| state   | UID       |planyear| zipcode | isMultiCounty | county           | plantype | testPlans                                                                                              |
+      |	AARP	| Alabama | US1770330 |  current| 90210 | NO            | Jefferson County | MAPD     | AARP Medicare Advantage SecureHorizons Focus (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO) |
       #| Alabama | US1770330 |   53503 | NO            | Jefferson County | SNP      | UnitedHealthcare Dual Complete LP1 (HMO D-SNP),UnitedHealthcare Medicare Advantage Assist (PPO C-SNP)  |
 
   @addPlansVPP

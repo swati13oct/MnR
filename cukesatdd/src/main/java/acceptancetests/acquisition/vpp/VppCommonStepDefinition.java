@@ -35,6 +35,7 @@ import pages.acquisition.commonpages.AcquisitionHomePage;
 import pages.acquisition.commonpages.PlanDetailsPage;
 import pages.acquisition.commonpages.VPPPlanSummaryPage;
 import pages.acquisition.ole.WelcomePage;
+import pages.acquisition.commonpages.VisitorProfilePage;
 import pages.acquisition.commonpages.ComparePlansPage;
 
 
@@ -140,8 +141,7 @@ public class VppCommonStepDefinition {
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 
 		plansummaryPage.viewPlanSummary(plantype);
-		if(!plantype.equalsIgnoreCase("MS"))
-			plansummaryPage.handlePlanYearSelectionPopup();
+		
 	}
 	
 	@When("the user selects plan year$")
@@ -428,7 +428,43 @@ public class VppCommonStepDefinition {
 				Assert.fail("Error Loading VPP plan summary page");
 			}
 		}
+		
+		@Then("^user saves two plans as favorite$")
+		public void user_saves_two_plans_as_favorite_on_AARP_site(DataTable givenAttributes) {
+			VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+			List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+			Map<String, String> memberAttributesMap = new HashMap<String, String>();
+			for (int i = 0; i < memberAttributesRow.size(); i++) {
+				memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+						.get(0), memberAttributesRow.get(i).getCells().get(1));
+			}
+			String savePlanNames = memberAttributesMap.get("Test Plans");
+			String planType = memberAttributesMap.get("Plan Type");
 
+			plansummaryPage.savePlans(savePlanNames, planType);
+			
+			
+		}
+		@Then("^user gets a create profile prompt$")
+		public void user_saves_two_plans_as_favorite_on_AARP_site() {
+			VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 
+			plansummaryPage.validateCreateProfilePrompt();
+			
+			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
+			
+		}
+		
+		@And("^user click on continue as guest button$")
+		public void user_click_on_continue_as_guest_button_on_AARP_site() {
+			VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+
+			VisitorProfilePage visitorProfilePage = plansummaryPage.continueAsGuest();
+			getLoginScenario().saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfilePage);
+			
+		}
 
 }
