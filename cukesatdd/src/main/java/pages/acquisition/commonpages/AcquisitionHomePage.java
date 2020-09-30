@@ -175,7 +175,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "//*[@class='container meded-article-header']/h1']")
 	private WebElement MALandingHeading;
 
-	@FindBy(xpath = "//*[contains(@id,'zipcodebtn') or (contains(@class,'zip-button' ) and contains( text(),'Go'))]")
+//	@FindBy(xpath = "//*[contains(@id,'zipcodebtn') or (contains(@class,'zip-button' ) and contains( text(),'Go'))]")
+	@FindBy(xpath = "//*[@id='submit' and contains(text(),'Find Plans')]")
 	private WebElement viewPlansButton;
 	
 	@FindBy(xpath = "//form[@id='zip-form']//button[@class='zip-button']")

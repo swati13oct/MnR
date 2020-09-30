@@ -58,7 +58,8 @@ public class GetStartedPage extends UhcDriver {
 
 	public BuildYourDrugList clickAddsDrugs() {
 		if(validate(AddMyDrugsBtn))
-			AddMyDrugsBtn.click();
+//			AddMyDrugsBtn.click();
+			jsClickNew(AddMyDrugsBtn);
 		CommonUtility.waitForPageLoad(driver, BuildDrugPage_EnterDrugNameTxt, 30);
 		if (validateNew(BuildDrugPage_EnterDrugNameTxt)) {
 			Assert.assertTrue("Naviagted to Build Drug List Page", true);

@@ -2309,8 +2309,11 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		EnterSearch.sendKeys(inputvalue);
 		CommonUtility.waitForPageLoadNewForClick(driver, SubmitBtn, 60);
 		SubmitBtn.click();
-		CommonUtility.checkPageIsReadyNew(driver);
-		CommonUtility.waitForPageLoadNew(driver, SearchResults, 60);
+		waitForPageLoadSafari();
+		validateNew(SearchResults, 60);
+		checkModelPopup(driver, 20);
+		
+//		CommonUtility.waitForPageLoadNew(driver, SearchResults, 60);
 
 	}
 

@@ -766,7 +766,8 @@ try {
 					if(IPerceptionsFrame.isDisplayed())	{
 						System.out.println("IPerceptionsFrame found");
 						driver.switchTo().frame(IPerceptionsFrame);
-						IPerceptionNoBtn.click();
+//						IPerceptionNoBtn.click();
+						jsClickNew(IPerceptionNoBtn);
 						driver.switchTo().defaultContent();
 					}
 				}catch(Exception e1) {

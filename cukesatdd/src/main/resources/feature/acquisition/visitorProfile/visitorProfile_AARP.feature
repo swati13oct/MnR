@@ -49,7 +49,7 @@ Feature: 1.08. ACQ- Visitor profile AARP
       | state   | drug1   | zipCode |	site |
       | Alabama | Lipitor |   90210 |	AARP |
 
-  @addPlans @addPlansULayerSmoke @visitorProfileRegressionAARP @prodRegression
+  @addPlans @addPlansULayerSmoke @visitorProfileRegressionAARP @prodRegression @Amey
   Scenario Outline: Verify user is able to add plans to the unauthenticated visitor profile - zip -<zipcode>
     Given the user is on medicare acquisition site landing page
     		|Site| <site>|
