@@ -3211,6 +3211,8 @@ for (int i = 0; i < initialCount + 1; i++) {
 	
 	@FindBy(xpath="//h2[contains(@class,'zipcodePrint') and not(contains(@class,'ng-hide'))]")
 	private WebElement comparePgnHeader;
+
+	private Map<String, ArrayList<String>> dataMap;
 	
 	public ComparePlansPage clickFirstComparePlanBtn(String plantype){
 		firstComparePlanButton.click();
@@ -3232,5 +3234,65 @@ for (int i = 0; i < initialCount + 1; i++) {
 				viewMoreLink.get(0).click();
 
 	
+	}
+	
+	public ArrayList<String> providerinforetreive(String planName){
+		CommonUtility.checkPageIsReadyNew(driver);
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		WebElement ProviderSearchLink = driver.findElement(By.xpath("//*[contains(text(),'" + planName
+				+ "')]/ancestor::div[contains(@class, 'module-plan-overview module')]//*[contains(@class,'provider-list added')]"));
+		String mproviderinfo=ProviderSearchLink.getText();
+		System.out.println(mproviderinfo);
+        ProviderSearchLink.click();
+        ArrayList<String> providerNames = new ArrayList<String>();
+		List<WebElement> providers = driver.findElements(By.xpath("//*[contains(text(),'" + planName
+				+ "')]/ancestor::div[contains(@class, 'module-plan-overview module')]//*[contains(@class,'provider-list added')]//div[@class='providers-list']//ul//li//span"));
+		for(WebElement element:providers)
+		{
+			String providername = element.getText();
+			providerNames.add(providername);
+		}
+		
+		return providerNames;
+	}
+	//
+/*		public void setStringList(ArrayList<String> stringList) {
+		
+	    this.stringList = stringList;
+	}
+	
+	public ArrayList<String> getStringList() {
+	    return stringList;
+	}*/
+	
+	public void setMap(Map<String, ArrayList<String>> dataMap) {
+		
+	    this.dataMap = dataMap;
+
+	}
+	
+	public  Map<String, ArrayList<String>> getMap(){
+	    return dataMap;
+
+	}
+	public ArrayList<String> validate_marketing_details(String planName) {
+		
+        ArrayList<String> marketingBulletDetails = new ArrayList<String>();
+		List<WebElement> vppmarketingBullets = driver.findElements(By.xpath("//*[contains(text(),'" + planName
+				+ "')]/ancestor::div[contains(@class, 'module-plan-overview module')]//*[@class='content-cols']//div//ul[@class='highlight-list']//li"));
+		
+		for(WebElement element:vppmarketingBullets)
+		{
+			String marketingDetails = element.getText();
+			marketingBulletDetails.add(marketingDetails);
+		}
+			
+		return marketingBulletDetails;
+		
 	}
 }

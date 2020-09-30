@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -33,6 +34,7 @@ import cucumber.api.java.en.When;
 import gherkin.formatter.model.DataTableRow;
 import pages.acquisition.commonpages.AcquisitionHomePage;
 import pages.acquisition.commonpages.PlanDetailsPage;
+import pages.acquisition.commonpages.ProviderSearchPage;
 import pages.acquisition.commonpages.VPPPlanSummaryPage;
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.commonpages.ComparePlansPage;
@@ -491,5 +493,146 @@ public class VppCommonStepDefinition {
 			Assert.fail("Error Loading VPP plan summary page");
 		}
 	}
+	@When("^the user Click on Is my Provider covered link$")
+	public void clickonProvidercoveredlinks(DataTable Planname ){
+	{
+		List<DataTableRow> plannameAttributesRow = Planname
+				.getGherkinRows();
+		Map<String, String> plannameAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < plannameAttributesRow.size(); i++) {
+
+			plannameAttributesMap.put(plannameAttributesRow.get(i).getCells()
+					.get(0), plannameAttributesRow.get(i).getCells().get(1));
+		}
+		String planName = plannameAttributesMap.get("PlanName");
+		getLoginScenario().saveBean(VPPCommonConstants.PLAN_NAME, planName);
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario().getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		
+		ProviderSearchPage providerSearchPage = plansummaryPage.clicksOnIsProviderCovered(planName);
+		if(providerSearchPage!=null) {
+			getLoginScenario().saveBean(PageConstants.PROVIDER_SEARCH_PAGE, providerSearchPage);
+		}
 	
+	}
+	}
+	@When("^user selects a multiple providers and retuns to VPP page$")
+	public void user_selects_a_multiple_providers_and_retuns_to_VPP_page() {
+	{
+		ProviderSearchPage providerSearchPage = (ProviderSearchPage) getLoginScenario()
+				.getBean(PageConstants.PROVIDER_SEARCH_PAGE);
+		VPPPlanSummaryPage plansummaryPage = providerSearchPage.MultipleselectsProvider();
+		Assert.assertTrue("Not able to return to Plan Summary page", plansummaryPage != null);
+
+	}
+	}
+	
+	@Given("^the user is on VPP Plan Summary page after hits Campaign URL$")
+	public void the_user_on_aarpmedicareplans_Campaign_landing_page() throws Throwable {
+
+		String County = "St. Louis County";
+		String ZipCode = "63043";
+		String PlanYear = "2020"; 
+		String SiteName =  "AARP_ACQ";
+
+		getLoginScenario().saveBean(oleCommonConstants.OLE_ZIPCODE, ZipCode);
+		getLoginScenario().saveBean(oleCommonConstants.OLE_COUNTY, County);
+		getLoginScenario().saveBean(oleCommonConstants.ACQ_SITE_NAME, SiteName);
+		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_YEAR, PlanYear);
+
+
+
+		String OLE_Campaign_URL = "https://stage-aarpmedicareplans.uhc.com/health-plans.html?gclid=EAIaIQobChMI3PKJmZKJ3QIVBqZpCh2ROgj7EAAYAiAAEgKDjPD_BwE&mrcid=ps%253Agoogle%253Aportfolio+ma+ma%257CCofund%257CBrand%253AUHC%253A07.26.18%253A8004731&zipcode=63043&WT.mc_id=8004731#/plan-summary";
+
+
+		WebDriver wd = getLoginScenario().getWebDriverNew();
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+
+		VPPPlanSummaryPage vppPlanSummaryPage = new VPPPlanSummaryPage(wd, OLE_Campaign_URL,true);
+		if (vppPlanSummaryPage != null) {
+			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE,
+					vppPlanSummaryPage);
+			System.out.println("OLE Campaign Landing Page Displayed");
+			Assert.assertTrue(true);
+		}
+		else
+			Assert.fail("Error in validating the OLE Campaign Landing");
+	}
+
+	@Given("^the user is on VPP page after hits Campaign URL$")
+	public void the_user_on_aarp_Campaign_landing_page() throws Throwable {
+
+		String County = "St. Louis County";
+		String ZipCode = "63043";
+		String PlanYear = "2020"; 
+		String SiteName =  "AARP_ACQ";
+
+		getLoginScenario().saveBean(oleCommonConstants.OLE_ZIPCODE, ZipCode);
+		getLoginScenario().saveBean(oleCommonConstants.OLE_COUNTY, County);
+		getLoginScenario().saveBean(oleCommonConstants.ACQ_SITE_NAME, SiteName);
+		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_YEAR, PlanYear);
+
+
+
+		String OLE_Campaign_URL = "https://www.team-acme-aarpmedicareplans.ocp-elr-core-nonprod.optum.com/health-plans.html?gclid=EAIaIQobChMI3PKJmZKJ3QIVBqZpCh2ROgj7EAAYAiAAEgKDjPD_BwE&mrcid=ps%253Agoogle%253Aportfolio+ma+ma%257CCofund%257CBrand%253AUHC%253A07.26.18%253A8004731&zipcode=63043&WT.mc_id=8004731#/plan-summary <>";
+
+
+		WebDriver wd = getLoginScenario().getWebDriverNew();
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+
+		VPPPlanSummaryPage vppPlanSummaryPage = new VPPPlanSummaryPage(wd, OLE_Campaign_URL,true);
+		if (vppPlanSummaryPage != null) {
+			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE,
+					vppPlanSummaryPage);
+			System.out.println("OLE Campaign Landing Page Displayed");
+			Assert.assertTrue(true);
+		}
+		else
+			Assert.fail("Error in validating the OLE Campaign Landing");
+	}
+	
+	@Then("^User store the information provided from rally to vpp page$")
+	public void user_store_the_information_provided_from_rally_to_vpp(DataTable givenAttributes) {
+	
+	List<DataTableRow> givenAttributesRow = givenAttributes
+			.getGherkinRows();
+	Map<String, String> givenAttributesMap = new HashMap<String, String>();
+	for (int i = 0; i < givenAttributesRow.size(); i++) {
+
+		givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+				givenAttributesRow.get(i).getCells().get(1));
+	}
+
+	String planName = givenAttributesMap.get("PlanName");
+
+	VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+			.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+	
+	/*ArrayList<String> providers = plansummaryPage.providerinforetreive(planName);
+	plansummaryPage.setStringList(providers);
+	Assert.assertFalse("Providers not added",providers.isEmpty());
+	
+	//Adding Line for Marketing bullet points
+	VPPPlanSummaryPage plansummaryPage1 = (VPPPlanSummaryPage) getLoginScenario()
+			.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+	ArrayList<String> vppmarketingBullets =plansummaryPage1.validate_marketing_details(planName);
+	plansummaryPage1.setStringList(vppmarketingBullets);
+	Assert.assertFalse("Providers not added",vppmarketingBullets.isEmpty());
+	System.out.println("List of MarketingBullets in OLE page is: " + vppmarketingBullets);
+	// Line End for Marketing bullet points
+	*/
+	ArrayList<String> providers = plansummaryPage.providerinforetreive(planName);
+	Assert.assertFalse("Providers not added",providers.isEmpty());
+	System.out.println("List of Providers in OLE page is: " + providers);
+	ArrayList<String> vppmarketingBullets =plansummaryPage.validate_marketing_details(planName);
+	Assert.assertFalse("Marketing Bullets not added",vppmarketingBullets.isEmpty());
+	System.out.println("List of MarketingBullets in OLE page is: " + vppmarketingBullets);
+    Map<String, ArrayList<String>> map = new HashMap<String, ArrayList<String>>();
+    map.put("Provider", providers);
+    map.put("MarketingBullet", vppmarketingBullets);
+    plansummaryPage.setMap(map);
+    
+
+
+	}
+		
 }

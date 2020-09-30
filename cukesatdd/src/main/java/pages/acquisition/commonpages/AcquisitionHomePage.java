@@ -1,7 +1,9 @@
 package pages.acquisition.commonpages;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import org.json.JSONException;
@@ -30,6 +32,7 @@ import pages.acquisition.dce.DCETestHarnessPage;
 import pages.acquisition.dceredesign.GetStartedPage;
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.pharmacyLocator.PharmacySearchPage;
+import pages.acquisition.ulayer.ProviderSearchPage;
 
 
 /**
@@ -417,6 +420,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	
 	@FindBy(xpath = "//body/div[@id='overlay']")
 	private WebElement overlayFilm;	
+	
+	@FindBy(xpath="//a[contains(@href,'https://www.myuhcagent.com/?WT.mc_id=880180')]")
+	public WebElement RightRail_FindAnAgent; 
 
    	String ChatSamText= "Chat with a Licensed Insurance Agent";
 
@@ -2178,5 +2184,47 @@ public class AcquisitionHomePage extends GlobalWebElements {
 				}
 				return null;
 			}	
-	
+				
+				
+			
+				
+				
+				
+				public RequestHelpAndInformationPage clickonFindanAgentlink() {
+
+					validateNew(RightRail_FindAnAgent);
+					CommonUtility.waitForPageLoadNew(driver, RightRail_FindAnAgent, 30);
+					String parentWindow = driver.getWindowHandle();
+					RightRail_FindAnAgent.click();
+					sleepBySec(3);
+					Set<String> tabs_windows = driver.getWindowHandles();
+					Iterator<String> itr = tabs_windows.iterator();
+					while(itr.hasNext()) {
+						String window = itr.next();
+						if(!parentWindow.equals(window)) {
+							driver.switchTo().window(window);
+						}
+					}
+					
+					CommonUtility.checkPageIsReadyNew(driver);
+					if (driver.getCurrentUrl().contains("myuhcagent")) {
+						System.out.println("myuhcagent Page is displayed");
+						Assert.assertTrue(true);
+						//driver.navigate().back();
+						driver.switchTo().window(parentWindow);                	  
+						}
+					else
+						Assert.fail("Unable to load Myuhcagent Page");
+					return null;           //need tocheck this line         
+				}          
+
+				public void sleepBySec(int sec) {
+					try {
+						Thread.sleep(sec*1000);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+			}
+				}
+
 }
