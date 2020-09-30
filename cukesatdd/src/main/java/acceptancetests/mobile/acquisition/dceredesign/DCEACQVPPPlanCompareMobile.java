@@ -66,8 +66,8 @@ public class DCEACQVPPPlanCompareMobile {
 	public void the_user_on__medicaresolutions_Site(DataTable givenAttributes) {
 		wd = getLoginScenario().getMobileDriver();
 		AcquisitionHomePageMobile aquisitionhomepage = new AcquisitionHomePageMobile(wd);
-		aquisitionhomepage.openPRE();
-		//aquisitionhomepage.openMobileURL();
+		//aquisitionhomepage.openPRE();
+		aquisitionhomepage.openMobileURL();
 		aquisitionhomepage.fixPrivateConnectionMobile();
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, aquisitionhomepage);
