@@ -26,6 +26,9 @@ public class BuildYourDrugListMobile extends UhcDriver {
 
 
 
+
+
+
 	@FindBy(xpath = "//input[contains(@id, 'drugsearch')]")
 	public WebElement EnterDrugNameTxt;
 	
@@ -115,7 +118,8 @@ public class BuildYourDrugListMobile extends UhcDriver {
 	}
 	
 	public void clickReviewDrugCostBtn() {
-		reviewDrugCost.click();
+		//reviewDrugCost.click();
+		jsClickMobile(reviewDrugCost);
 	}
 	public void validateDrugNotFound_ErrorMsg() {
 		validateNew(EnterDrugNameTxt);

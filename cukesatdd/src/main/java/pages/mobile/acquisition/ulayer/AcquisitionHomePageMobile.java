@@ -55,6 +55,7 @@ import pages.mobile.acquisition.ole.WelcomePageMobile;
  */
 public class AcquisitionHomePageMobile extends GlobalWebElements {
 
+
 	@FindBy(xpath = "//*[contains(@id,'cta-zipcode')]")
 	private WebElement zipCodeField;
 	
@@ -424,19 +425,24 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	@FindBy(xpath = "//body/div[@id='overlay']")
 	private WebElement overlayFilm;
 
-	//String ChatSamText = "Chat with a Licensed Insurance Agent";
+
+   	//String ChatSamText= "Chat with a Licensed Insurance Agent";
 	String ChatSamText= "Chat Now";
 	String CallSam= "1-877";
+//	String CallSam= "Call a Licensed Insurance Agent";
+//	String CallSam= "Call UnitedHealthcare Ins. Co.";
+
 
 	private static String TeamC_ACQUISITION_PAGE_URL = MRConstants.TeamC_UHC_URL;
 
 	private static String AARP_ACQISITION_PAGE_URL = MRConstants.AARP_URL;
+	private static String AARP_ACQISITION_PAGE_URL_NEW = MRConstants.AARP_URL_NEW;
 	private static String AARP_ACQISITION_OFFLINE_PAGE_URL = MRConstants.AARP_URL_OFFLINE;
 	private static String AARP_ACQISITION_PROD_PAGE_URL = MRConstants.AARP_URL_PROD;
 	private static String UMS_ACQISITION_PAGE_URL = MRConstants.UHC_URL;
+	private static String UMS_ACQISITION_PAGE_URL_NEW = MRConstants.UHC_URL_NEW;
 	private static String UMS_ACQISITION_OFFLINE_PAGE_URL = MRConstants.UHC_URL_OFFLINE;
 	private static String UMS_ACQISITION_PROD_PAGE_URL = MRConstants.UHCM_URL_PROD;
-	private static String AARP_ACQISITION_PAGE_URL_NEW = MRConstants.AARP_URL_NEW;
 
 	private PageData globalFooter;
 
@@ -502,6 +508,79 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		return new DCETestHarnessPageMobile(driver);
 	}
 
+	public void openPRE() {
+		if (!(MRScenario.getProps() == null)) {// If running from local
+			if (MRScenario.environment.equalsIgnoreCase("digital-uatv2-aarp")) {
+				startNewMobile(
+						AARP_ACQISITION_PAGE_URL.replace("digital-uatv2-aarp", "digital-uatv2").replace("www.", ""));
+				// startNewMobile(AARP_ACQISITION_PAGE_URL.replace("digital-uatv2-aarp",
+				// "digital-uatv2"));
+			} else if (MRScenario.environment.equalsIgnoreCase("digital-uatv2")) {
+				startNewMobile(UMS_ACQISITION_PAGE_URL.replace("www.", ""));
+				// startNewMobile(UMS_ACQISITION_PAGE_URL);
+			} else if (MRScenario.environment.equalsIgnoreCase("offline-stage-aarp")) {
+				startNewMobile(AARP_ACQISITION_PAGE_URL.replace("offline-stage-aarp", "offline-stage"));
+			} else if (MRScenario.environment.equalsIgnoreCase("offline-stage")) {
+				startNewMobile(UMS_ACQISITION_PAGE_URL);
+			} else if (MRScenario.environment.equalsIgnoreCase("stage-aarp")) {
+				startNewMobile(AARP_ACQISITION_PAGE_URL.replace("stage-aarp", "stage"));
+			} else if (MRScenario.environment.equalsIgnoreCase("stage")) {
+				startNewMobile(UMS_ACQISITION_PAGE_URL);
+			} else if (MRScenario.environment.equalsIgnoreCase("offline-prod-aarp")) {
+				startNewMobile(AARP_ACQISITION_OFFLINE_PAGE_URL);
+			} else if (MRScenario.environment.equalsIgnoreCase("offline-prod")) {
+				startNewMobile(UMS_ACQISITION_OFFLINE_PAGE_URL);
+			} else if (MRScenario.environment.equalsIgnoreCase("prod-aarp")) {
+				startNewMobile(AARP_ACQISITION_PROD_PAGE_URL);
+			} else if (MRScenario.environment.equalsIgnoreCase("prod")) {
+				startNewMobile(UMS_ACQISITION_PROD_PAGE_URL);
+			}
+		} else { // For jenkins job
+			String jenkinsRunnerFiles = MRScenario.runnerFiles;
+			if (MRScenario.environment.equalsIgnoreCase("digital-uatv2")
+					|| MRScenario.environment.equalsIgnoreCase("stage")
+					|| MRScenario.environment.equalsIgnoreCase("offline-stage")) {
+				for (String rname : jenkinsRunnerFiles.split(",")) {
+					if (rname.toUpperCase().contains("PLANRECOMMENDATIONENGINE")
+							&& rname.toUpperCase().contains("ULAYER")) {
+						if (MRScenario.environment.equalsIgnoreCase("digital-uatv2"))
+							startNewMobile(AARP_ACQISITION_PAGE_URL.replace("www.", ""));
+						else
+							startNewMobile(AARP_ACQISITION_PAGE_URL);
+					}
+					if (rname.toUpperCase().contains("PLANRECOMMENDATIONENGINE")
+							&& rname.toUpperCase().contains("BLAYER")) {
+						if (MRScenario.environment.equalsIgnoreCase("digital-uatv2"))
+							startNewMobile(UMS_ACQISITION_PAGE_URL.replace("www.", ""));
+						else
+							startNewMobile(UMS_ACQISITION_PAGE_URL);
+					}
+				}
+			}
+			if (MRScenario.environment.equalsIgnoreCase("offline")) {
+				for (String rname : jenkinsRunnerFiles.split(",")) {
+					if (rname.toUpperCase().contains("PLANRECOMMENDATIONENGINE")
+							&& rname.toUpperCase().contains("ULAYER"))
+						startNewMobile(AARP_ACQISITION_OFFLINE_PAGE_URL);
+					if (rname.toUpperCase().contains("PLANRECOMMENDATIONENGINE")
+							&& rname.toUpperCase().contains("BLAYER"))
+						startNewMobile(UMS_ACQISITION_OFFLINE_PAGE_URL);
+				}
+			}
+			if (MRScenario.environment.equalsIgnoreCase("prod")) {
+				for (String rname : jenkinsRunnerFiles.split(",")) {
+					if (rname.toUpperCase().contains("PLANRECOMMENDATIONENGINE")
+							&& rname.toUpperCase().contains("ULAYER"))
+						startNewMobile(AARP_ACQISITION_PROD_PAGE_URL);
+					if (rname.toUpperCase().contains("PLANRECOMMENDATIONENGINE")
+							&& rname.toUpperCase().contains("BLAYER"))
+						startNewMobile(UMS_ACQISITION_PROD_PAGE_URL);
+				}
+			}
+		}
+		System.out.println("Current mobile page URL: " + driver.getCurrentUrl());
+	}
+	
 	public void fixPrivateConnection() {
 		try {
 			// String URL = "https://self-signed.badssl.com/";

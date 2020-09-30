@@ -73,7 +73,8 @@ public class GetStartedPageMobile extends UhcDriver {
 
 	public void clickAddDrugsBtn() {
 		validateNew(AddMyDrugsBtn);
-		AddMyDrugsBtn.click();
+		jsClickMobile(AddMyDrugsBtn);
+		//AddMyDrugsBtn.click();
 		//return new ZipCodePlanYearCapturePage(driver);
 		/*
 		 * CommonUtility.waitForPageLoad(driver, BuildDrugPage_verificationTxt, 30); if

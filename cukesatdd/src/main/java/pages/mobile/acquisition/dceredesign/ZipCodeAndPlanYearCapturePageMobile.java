@@ -99,7 +99,8 @@ public class ZipCodeAndPlanYearCapturePageMobile extends UhcDriver {
 			System.out.println("county box not found");
 		}
 		
-		continueBtn.click();
+		validateNew(continueBtn);
+		//continueBtn.click();
 	}
 
 	public DrugSummaryPageMobile clickContinueBtn() {

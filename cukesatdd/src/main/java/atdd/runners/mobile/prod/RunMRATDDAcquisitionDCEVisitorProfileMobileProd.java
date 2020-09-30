@@ -15,8 +15,9 @@ import cucumber.api.CucumberOptions;
 @ExtendedCucumberOptions(retryCount = 0, screenShotSize = "", screenShotLocation = "/screenshots/", jsonReport = "target/cucumber-RunMRATDDAcquisitionDCEVisitorProfileMobileProd.json", detailedReport = true, detailedAggregatedReport = true, overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDAcquisitionDCEVisitorProfileMobileProd")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.mobile.acquisition" }, monochrome = true, features = {
 		"src/main/resources/feature/mobile/acquisition/dceredesign" }, plugin = { "pretty", "html:reports/test-report",
-				"json:target/cucumber-RunMRATDDAcquisitionDCEVisitorProfileMobileProd.json" }, tags = {
-						"@prod" })
+				"json:target/cucumber-RunMRATDDAcquisitionDCEVisitorProfileMobileProd.json" },
+				tags = {
+						"@DCE_VisitorProfile","@prod" })
 
 public class RunMRATDDAcquisitionDCEVisitorProfileMobileProd {
 

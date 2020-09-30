@@ -80,7 +80,8 @@ public class VppPlanDetailMobile {
 	public void the_user_on_UHC_Medicaresolutions_Site() {
 		wd = getLoginScenario().getMobileDriver();
 		AcquisitionHomePageMobile aquisitionhomepage = new AcquisitionHomePageMobile(wd);
-		aquisitionhomepage.openMobileURL();
+		aquisitionhomepage.openPRE();
+		//aquisitionhomepage.openMobileURL();
 		aquisitionhomepage.fixPrivateConnectionMobile();
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, aquisitionhomepage);

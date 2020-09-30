@@ -241,7 +241,8 @@ public class VppPlanSummaryMobile {
 	public void the_user_on_uhc_medicareplans_Site() {
 		wd = (AppiumDriver) getLoginScenario().getWebDriverNew();
 		AcquisitionHomePageMobile aquisitionhomepage = new AcquisitionHomePageMobile(wd);
-		aquisitionhomepage.openMobileURL();
+		aquisitionhomepage.openPRE();
+		//aquisitionhomepage.openMobileURL();
 		// aquisitionhomepage.openVPPPage();
 		aquisitionhomepage.fixPrivateConnectionMobile();
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
@@ -616,7 +617,8 @@ public class VppPlanSummaryMobile {
 		wd = (AppiumDriver) getLoginScenario().getWebDriverNew();
 
 		AcquisitionHomePageMobile aquisitionhomepage = new AcquisitionHomePageMobile(wd);
-		aquisitionhomepage.openMobileURL();
+		aquisitionhomepage.openPRE();
+		//aquisitionhomepage.openMobileURL();
 		// aquisitionhomepage.openVPPPage();
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, aquisitionhomepage);

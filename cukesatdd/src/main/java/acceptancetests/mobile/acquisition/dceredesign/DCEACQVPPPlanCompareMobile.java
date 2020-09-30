@@ -66,7 +66,8 @@ public class DCEACQVPPPlanCompareMobile {
 	public void the_user_on__medicaresolutions_Site(DataTable givenAttributes) {
 		wd = getLoginScenario().getMobileDriver();
 		AcquisitionHomePageMobile aquisitionhomepage = new AcquisitionHomePageMobile(wd);
-		aquisitionhomepage.openMobileURL();
+		aquisitionhomepage.openPRE();
+		//aquisitionhomepage.openMobileURL();
 		aquisitionhomepage.fixPrivateConnectionMobile();
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, aquisitionhomepage);
@@ -74,8 +75,7 @@ public class DCEACQVPPPlanCompareMobile {
 
 	@And("^the user clicks on the shopping cart icon$")
 	public void the_user_clicks_on_the_shopping_cart_icon_on_DCE_page_in_AARP() {
-		DrugCostEstimatorPageMobile dce = (DrugCostEstimatorPageMobile) getLoginScenario()
-				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
+		DrugCostEstimatorPageMobile dce = (DrugCostEstimatorPageMobile) getLoginScenario().getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
 		VisitorProfilePageMobile visitorProfilePage = dce.clickOnShoppingCart();
 		getLoginScenario().saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfilePage);
 	}

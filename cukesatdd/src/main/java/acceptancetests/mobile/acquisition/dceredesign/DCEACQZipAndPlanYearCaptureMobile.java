@@ -1,3 +1,4 @@
+
 package acceptancetests.mobile.acquisition.dceredesign;
 
 import gherkin.formatter.model.DataTableRow;
