@@ -12,21 +12,21 @@ import cucumber.api.CucumberOptions;
  */
 @RunWith(ExtendedCucumber.class)
 @ExtendedCucumberOptions(
-		retryCount=0, 
+		retryCount=1, 
 		screenShotSize="", 
 		screenShotLocation="/screenshots/",
-		jsonReport = "target/cucumber-RunMRATDDAcquisitionPlanRecommendationEngineBlayer.json",
+		jsonReport = "target/cucumber-RunMRATDDAcquisitionPREAEPRegressionUlayer.json",
 		detailedReport = true, 
 		detailedAggregatedReport = true, 
 		overviewReport = true, 
 		toPDF = true, 
-		outputFolder = "target/RunMRATDDAcquisitionPlanRecommendationEngineBlayer")
+		outputFolder = "target/RunMRATDDAcquisitionPREAEPRegressionUlayer")
 @CucumberOptions(
 		glue = { "atdd.framework", "acceptancetests.acquisition.planRecommendationEngine" }, 
 		features = { "src/main/resources/feature/acquisition/PlanRecommendationEngine" }, 
-		plugin = {"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionPlanRecommendationEngineBlayer.json" }, 
-		tags = {"@MAFutureFlowRanking"})
-public class RunMRATDDAcquisitionPlanRecommendationEngineFutureBlayer {
+		plugin = {"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionPREAEPRegressionUlayer.json" }, 
+		tags = {"@PREAEPRegression"})
+public class RunMRATDDAcquisitionPREAEPRegressionUlayer {
 
 }
 

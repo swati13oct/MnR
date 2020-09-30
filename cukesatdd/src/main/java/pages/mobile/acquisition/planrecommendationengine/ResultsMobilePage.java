@@ -115,7 +115,7 @@ public class ResultsMobilePage extends UhcDriver {
 	@FindBy(css = "#mainBody .swiper-container .module-plan-overview:nth-of-type(1) h2")
 	private WebElement MS1stPlanName;
 
-	@FindBy(css = "#mainBody .swiper-container .module-plan-overview:nth-of-type(1) .swiper-content>a")
+	@FindBy(css = "#mainBody .swiper-container div[class^='module-plan-overview']:nth-of-type(2) .swiper-content>a")
 	private WebElement MS1stPlanEnroll;
 
 	@FindBy(css = "div[data-rel='#plan-list-3']")
@@ -187,7 +187,7 @@ public class ResultsMobilePage extends UhcDriver {
 	@FindBy(css = "#plan-list-1 .swiper-container .module-plan-overview:nth-of-type(1) a[id*='provider-title']")
 	private WebElement providersInfoMA1stPlan;
 
-	@FindBy(css = "#plan-list-1 .swiper-container .module-plan-overview:nth-of-type(1) div[id*='ProviderName']")
+	@FindBy(css = "#plan-list-1 .swiper-container .module-plan-overview:nth-of-type(1) div[id*='ProviderName'] span[class*='name']")
 	private List<WebElement> providersListMA1stPlan;
 
 	@FindBy(css = "#plan-list-1 .swiper-container .module-plan-overview:nth-of-type(1) a.add-drug")
