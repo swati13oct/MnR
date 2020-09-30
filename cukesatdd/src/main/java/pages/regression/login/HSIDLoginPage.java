@@ -134,8 +134,6 @@ public class HSIDLoginPage extends UhcDriver {
 
 	MRScenario loginScenario;
 
-	//tbd boolean doOldSignin;
-	
 	public MRScenario getLoginScenario() {
 		MRScenario loginScenario = null;
 		return loginScenario;
@@ -195,11 +193,6 @@ public class HSIDLoginPage extends UhcDriver {
 		 * 
 		 * else CommonUtility.waitForPageLoadNew(driver, mnrSignInButton, 60);
 		 */
-		//tbd //note: take out this when new sign-in is stable
-		//tbd if (validate(mnrSignInButton,0))
-		//tbd 	doOldSignin=false;
-		//tbd else
-		//tbd 	doOldSignin=true;
 	}
 
 
@@ -213,11 +206,6 @@ public class HSIDLoginPage extends UhcDriver {
 		 * CommonUtility.waitForPageLoadNew(driver, signInButton, 60); // else
 		 * CommonUtility.waitForPageLoadNew(driver, signInButton, 60);
 		 */
-		//tbd if (validate(mnrSignInButton,0))
-		//tbd 	doOldSignin=false;
-		//tbd else
-		//tbd 	doOldSignin=true;
-
 	}
 
 	public void validateHsidPageElements() {
@@ -276,21 +264,14 @@ public class HSIDLoginPage extends UhcDriver {
 	 * @toDo : To login through hsid via entering security questions
 	 */
 	public Object doLoginWith(String username, String password) {
-		//tbd if (doOldSignin) { //note: take out this doOldSignin section when new sign-in is stable
-		//tbd 	System.out.println(driver.getCurrentUrl());
-		//tbd 	CommonUtility.waitForPageLoad(driver, oldUsername, 20);
-		//tbd 	sendkeys(oldUsername, username);
-		//tbd 	sendkeys(oldPassword, password);
-		//tbd 	oldSignInBtn.click();
-		//tbd } else {
-			System.out.println(driver.getCurrentUrl());
-			CommonUtility.waitForPageLoad(driver, mnrSignInButton, 20);
-			mnrSignInButton.click();
-			validateHsidPageElements();
-			sendkeys(userNameField, username);
-			sendkeys(passwordField, password);
-			hsidSignInButton.click();
-		//tbd }
+		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
+		System.out.println(driver.getCurrentUrl());
+		CommonUtility.waitForPageLoad(driver, mnrSignInButton, 20);
+		mnrSignInButton.click();
+		validateHsidPageElements();
+		sendkeys(userNameField, username);
+		sendkeys(passwordField, password);
+		hsidSignInButton.click();
 
 		//wait for some form of header to show
 		if (!validate(authQuestionlabel)) {
