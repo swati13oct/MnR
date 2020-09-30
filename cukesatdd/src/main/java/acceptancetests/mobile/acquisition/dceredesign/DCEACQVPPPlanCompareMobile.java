@@ -62,6 +62,24 @@ public class DCEACQVPPPlanCompareMobile {
 
 	AppiumDriver wd;
 
+	@Given("^user is on AARP site$")
+	public void the_user_on__medicaresolutions_Site(DataTable givenAttributes) {
+		wd = getLoginScenario().getMobileDriver();
+		AcquisitionHomePageMobile aquisitionhomepage = new AcquisitionHomePageMobile(wd);
+		//aquisitionhomepage.openPRE();
+		aquisitionhomepage.openMobileURL();
+		aquisitionhomepage.fixPrivateConnectionMobile();
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, aquisitionhomepage);
+	}
+
+	@And("^the user clicks on the shopping cart icon$")
+	public void the_user_clicks_on_the_shopping_cart_icon_on_DCE_page_in_AARP() {
+		DrugCostEstimatorPageMobile dce = (DrugCostEstimatorPageMobile) getLoginScenario().getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
+		VisitorProfilePageMobile visitorProfilePage = dce.clickOnShoppingCart();
+		getLoginScenario().saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfilePage);
+	}
+
 	@Given("^I select \"([^\"]*)\" plans to compare and click on compare plan link$")
 	public void i_select_plans_to_compare_and_click_on_compare_plan_link_in_AARP(String planType) throws Throwable {
 		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
@@ -76,12 +94,11 @@ public class DCEACQVPPPlanCompareMobile {
 		ComparePlansPageMobile planComparePage = plansummaryPage.clickOnCompareLinkAARP(planType);
 		if (planComparePage != null) {
 			getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
-			
+
 		} else
 			Assert.fail("Error in loading the compare plans page");
 	}
-	
-	
+
 	@When("^I access the DCE Redesign from Plan compare page$")
 	public void the_user_navigates_to_dce_from_plan_compare_site() throws Throwable {
 		ComparePlansPageMobile planComparepage = (ComparePlansPageMobile) getLoginScenario()
@@ -92,21 +109,22 @@ public class DCEACQVPPPlanCompareMobile {
 		} else
 			Assert.fail("DCE Redesign page object not loaded");
 	}
-	
+
 	@Then("^the user clicks on return to compare link on build drug list page to returns to plan compare$")
 	public void the_user_Clicks_button_to_VPP_Plan_Compare_Page_from_Drug_details_Page() throws Throwable {
-		BuildYourDrugListMobile buildDrugListPage = (BuildYourDrugListMobile) getLoginScenario().getBean(PageConstants.DCE_Redesign_BuildDrugList);
+		BuildYourDrugListMobile buildDrugListPage = (BuildYourDrugListMobile) getLoginScenario()
+				.getBean(PageConstants.DCE_Redesign_BuildDrugList);
 		ComparePlansPageMobile planComparePage = buildDrugListPage.returnToPlanComparePage();
 		getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
 
 	}
-	
-	
+
 	@Then("^the user validates drug is displayed on the plan compare page$")
 	public void the_userValidatesDrugInfo(DataTable attributes) throws Throwable {
-		ComparePlansPageMobile planComparePage = (ComparePlansPageMobile) getLoginScenario().getBean(PageConstants.PLAN_COMPARE_PAGE);
+		ComparePlansPageMobile planComparePage = (ComparePlansPageMobile) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
 		List<DataTableRow> memberAttributesRow = attributes.getGherkinRows();
-		
+
 		String drug = memberAttributesRow.get(0).getCells().get(1);
 		planComparePage.validateDrugInfo(drug);
 		getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);

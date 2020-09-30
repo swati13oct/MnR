@@ -352,7 +352,7 @@ public class ComparePlansPageMobile extends UhcDriver {
 
 	}
 
-	public DrugCostEstimatorPage clickonDCE() {
+	public pages.mobile.acquisition.ulayer.DrugCostEstimatorPageMobile clickonDCE() {
 
 		try {
 			Thread.sleep(5000);
@@ -367,7 +367,7 @@ public class ComparePlansPageMobile extends UhcDriver {
 		waitforElement(addDrug);
 		if (validate(addDrug)) {
 			System.out.println("User is on DCE Page");
-			return new DrugCostEstimatorPage(driver);
+			return new pages.mobile.acquisition.ulayer.DrugCostEstimatorPageMobile(driver);
 		} else
 			return null;
 	}

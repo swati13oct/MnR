@@ -60,7 +60,7 @@ import java.util.regex.Pattern;
 public abstract class UhcDriver {
 
 	public WebDriver driver;
-	private long defaultTimeoutInSec = 15;
+	private long defaultTimeoutInSec = 20;
 
 	@FindBy(xpath = ".//iframe[contains(@id,'IPerceptionsEmbed')]")
 	public static WebElement IPerceptionsFrame;
@@ -79,7 +79,7 @@ public abstract class UhcDriver {
 	}
 
 	public void waitforElement(WebElement element) {
-		WebDriverWait wait = new WebDriverWait(driver, 20);
+		WebDriverWait wait = new WebDriverWait(driver, 30);
 		wait.until(ExpectedConditions.visibilityOf(element));
 
 	}
@@ -693,21 +693,37 @@ public abstract class UhcDriver {
 		checkModelPopup(driver, defaultTimeoutInSec);
 	}
 
-	public void checkModelPopup(WebDriver driver, long timeoutInSec) {
-
-		CommonUtility.waitForPageLoad(driver, IPerceptionsFrame, timeoutInSec);
-
-		try {
-			if (IPerceptionsFrame.isDisplayed()) {
-				driver.switchTo().frame(IPerceptionsFrame);
-				IPerceptionNoBtn.click();
-				driver.switchTo().defaultContent();
+	@FindBy(xpath = ".//*[contains(@id,'singleLargeLayoutContainer')]")
+	public static WebElement IPerceptionsPopup;
+	
+	@FindBy(xpath="//*[contains(@id,'ip-no')]")
+	public static WebElement IPerceptionPopuNoBtn;
+	
+	public void checkModelPopup(WebDriver driver,long timeoutInSec) {
+		
+		CommonUtility.waitForPageLoad(driver, IPerceptionsFrame,timeoutInSec);
+		CommonUtility.waitForPageLoad(driver, IPerceptionsPopup,timeoutInSec);
+		
+		try{
+			if(IPerceptionsPopup.isDisplayed())	{
+				//driver.switchTo().frame(IPerceptionsFrame);
+				IPerceptionPopuNoBtn.click();
+				//driver.switchTo().defaultContent();
 			}
-		} catch (Exception e) {
-			System.out.println("Iperceptions popup not found");
+		}catch(Exception e){
+			System.out.println("IPerceptionsPopup not found");
+			try {
+				if(IPerceptionsFrame.isDisplayed())	{
+					System.out.println("IPerceptionsFrame found");
+					driver.switchTo().frame(IPerceptionsFrame);
+					IPerceptionNoBtn.click();
+					driver.switchTo().defaultContent();
+				}
+			}catch(Exception e1) {
+			System.out.println("Iperceptions not found");
+			}
 		}
-
-	}
+}
 
 	/**
 	 * determine system time note: for prod no one would be changing the date, note:

@@ -11,15 +11,11 @@ import cucumber.api.CucumberOptions;
  * this file is to run test cases for RunMRATDDAcquisitionVppPlanCompare
  */
 @RunWith(ExtendedCucumber.class)
-@ExtendedCucumberOptions(retryCount=0,screenShotSize="", screenShotLocation="/screenshots/",
-jsonReport = "target/cucumber-RunMRATDDAcquisitionVppPlanCompare.json",detailedReport = true,
- detailedAggregatedReport = true, overviewReport = true, toPDF = true, 
- outputFolder = "target/RunMRATDDAcquisitionVppPlanCompare")
-@CucumberOptions(glue = { "atdd.framework", "acceptancetests.mobile" }, 
-features = { "src/main/resources/feature/mobile/acquisition/vpp" }, 
-plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionVppPlanCompare.json" }, 
-tags = {  })
-public class RunMRATDDAcquisitionVPPPlanCompareMobile { 
- 
+@ExtendedCucumberOptions(retryCount = 0, screenShotSize = "", screenShotLocation = "/screenshots/", jsonReport = "target/cucumber-RunMRATDDAcquisitionVppPlanCompare.json", detailedReport = true, detailedAggregatedReport = true, overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDAcquisitionVppPlanCompare")
+@CucumberOptions(glue = { "atdd.framework", "acceptancetests.mobile" }, features = {
+		"src/main/resources/feature/mobile/acquisition/vpp" }, plugin = { "pretty", "html:reports/test-report",
+				"json:target/cucumber-RunMRATDDAcquisitionVppPlanCompare.json" }, tags = {
+						"@vppPlanCompareAARPRegression" })
+public class RunMRATDDAcquisitionVPPPlanCompareMobile {
+
 }

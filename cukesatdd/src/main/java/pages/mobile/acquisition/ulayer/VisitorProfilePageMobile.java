@@ -17,7 +17,11 @@ import acceptancetests.data.CommonConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 import pages.acquisition.ulayer.VPPPlanSummaryPage;
+import pages.acquisition.ulayer.VPPTestHarnessPage;
 import pages.mobile.acquisition.dceredesign.GetStartedPageMobile;
+import pages.acquisition.commonpages.AcquisitionHomePage;
+import pages.acquisition.commonpages.ComparePlansPage;
+import pages.acquisition.commonpages.PlanDetailsPage;
 import pages.acquisition.dceredesign.GetStartedPage;
 import pages.acquisition.ole.WelcomePage;
 
@@ -95,7 +99,6 @@ public class VisitorProfilePageMobile extends UhcDriver {
 	@FindBy(xpath = "//button[contains(@id,'addDrug')]")
 	public WebElement AddMyDrugsBtn;
 	
-	
 	public VisitorProfilePageMobile(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -109,15 +112,45 @@ public class VisitorProfilePageMobile extends UhcDriver {
 
 	}
 	
-	public DrugCostEstimatorPageMobile addDrug(){
-		
-		addrugs.click();
-		if(currentUrl().contains("/estimate-drug-costs.html"))
-			return new DrugCostEstimatorPageMobile(driver);
+	public AcquisitionHomePage addPlan() {
+		addPlans.click();
+		CommonUtility.checkPageIsReadyNew(driver);
+		if(driver.getCurrentUrl().contains("zipcode")){
+			String page = "health-plans";
+			return new AcquisitionHomePage(driver,page);
+		}
 		return null;
 	}
 	
-
+	public void validateAddedDrugAndPharmacy(String drug) {
+		expandDrugBlock.click();
+		
+		Assert.assertTrue(drugName.getText().trim().contains(drug));
+		Assert.assertTrue(pharmacyAddress.isDisplayed());
+	}
+	
+	public void validateAddedPlans(String planNames) {
+		List<String> listOfTestPlans = Arrays.asList(planNames.split(","));
+		for (String plan: listOfTestPlans) {
+			Assert.assertEquals(plan, driver.findElement(By.xpath("//h4[text()='"+plan+"']")).getText());
+			Assert.assertTrue(driver.findElement(By.xpath("//h4[text()='"+plan+"']/following::button[1]")).isDisplayed());
+			Assert.assertTrue(driver.findElement(By.xpath("//h4[text()='"+plan+"']/following::div[@class='provider-list'][1]/a")).isDisplayed());
+		}
+	}
+	
+	public PlanDetailsPage navigateToPlanDetails(String planName) {
+		try {
+			driver.findElement(By.xpath("//h4[text()='"+planName+"']")).click();
+			Thread.sleep(20000);
+			if (driver.getCurrentUrl().contains("#/details")) {	
+				return new PlanDetailsPage(driver);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
 
 	
 	public GetStartedPageMobile addDrug_DCERedesign(){
@@ -125,89 +158,6 @@ public class VisitorProfilePageMobile extends UhcDriver {
 		addrugs.click();
 		if (validateNew(AddMyDrugsBtn))
 			return new GetStartedPageMobile(driver);
-		return null;
-	}
-	
-	public AcquisitionHomePageMobile addPlan() throws Exception {
-		addPlans.click();
-		Thread.sleep(10000);
-		CommonUtility.checkPageIsReadyNew(driver);
-		if(driver.getCurrentUrl().contains("health-plans.html")){
-			String page = "health-plans";
-			return new AcquisitionHomePageMobile(driver,page);
-		}
-		return null;
-	}
-	
-	public VPPPlanSummaryPage addPlanForMember() throws Exception {
-		addPlans.click();
-		Thread.sleep(10000);
-		CommonUtility.checkPageIsReadyNew(driver);
-		if (driver.getCurrentUrl().contains("plan-summary")) {
-			return new VPPPlanSummaryPage(driver);
-		}
-		return null;
-	}
-	
-	public void validateAddedDrugAndPharmacy(String drug) {
-		validateNew(expandDrugBlock);
-		jsClickNew(expandDrugBlock);
-		System.out.println("Drug Name Text : " + drugName.getText().trim());
-		Assert.assertTrue(drugName.getText().trim().contains(drug));
-		//Assert.assertTrue(pharmacyAddress.isDisplayed());
-		System.out.println("Verified Drug Displayed :" + drugName.getText().trim() );
-	}
-	
-	public void validateAddedPlans(String planNames) {
-		List<String> listOfTestPlans = Arrays.asList(planNames.split(","));
-		CommonUtility.checkPageIsReadyNew(driver);
-		for (String plan: listOfTestPlans) {
-			Assert.assertEquals(plan, driver.findElement(By.xpath("//h4[text()='"+plan+"']")).getText());
-			Assert.assertTrue(driver.findElement(By.xpath("//h4[text()='"+plan+"']/following::button[1]")).isDisplayed());
-			System.out.println("Verified plans are added on vistior profile page");
-		}
-	}
-	
-	public void validateAddedMsPlans(String planNames) {
-		try {
-			List<String> listOfTestPlans = Arrays.asList(planNames.split(","));
-			CommonUtility.checkPageIsReadyNew(driver);
-			Thread.sleep(20000);
-			for (String plan: listOfTestPlans) {
-				Assert.assertEquals(plan, driver.findElement(By.xpath("//h2[text()='"+plan+"']")).getText());
-				Assert.assertTrue(driver.findElement(By.xpath("//div/a[contains(@aria-describedby,'"+plan+"')] [contains(@class,'pdf-link')]")).isDisplayed());
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-	
-	/**
-	 * Validate the pdf links available
-	 * @param planNames
-	 */
-	public void validateAddedPlansPDFLinks(String planNames) {
-		List<String> listOfTestPlans = Arrays.asList(planNames.split(","));
-		for (String plan: listOfTestPlans) {
-			Assert.assertTrue(driver.findElement(By.xpath("//div/a[contains(@aria-describedby,'"+plan+"')] [contains(@class,'pdf-link')]")).isDisplayed());
-		}
-	}
-	/**
-	 * Navigate to the plan details page
-	 * @param planName
-	 * @return
-	 */
-	public PlanDetailsPageMobile navigateToPlanDetails(String planName) {
-		try {
-			driver.findElement(By.xpath("//h4[text()='"+planName+"']")).click();
-			Thread.sleep(20000);
-			if (driver.getCurrentUrl().contains("#/details")) {	
-				return new PlanDetailsPageMobile(driver);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
 		return null;
 	}
 	
@@ -377,13 +327,13 @@ public class VisitorProfilePageMobile extends UhcDriver {
 
 	}
 
-	public VPPTestHarnessPageMobile switchBackToVPTestharness() {
+	public VPPTestHarnessPage switchBackToVPTestharness() {
 		driver.close();
 		driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
 		System.out.println("Switching back to MainWindow");
 		if (driver.getCurrentUrl().contains("visitorprofiletestharness")) {
 			System.out.println("visitorprofiletestharness Page is Displayed");
-			return new VPPTestHarnessPageMobile(driver);
+			return new VPPTestHarnessPage(driver);
 		}
 		return null;
 	}
@@ -393,7 +343,7 @@ public class VisitorProfilePageMobile extends UhcDriver {
 	 * @param plans
 	 * @return
 	 */
-	public ComparePlansPageMobile planCompare(String plans) {
+	public ComparePlansPage planCompare(String plans) {
 	
 		comparePlans.click();
 		/*CommonUtility.waitForPageLoad(driver, comparePlansOnPopup, 20);
@@ -405,7 +355,7 @@ public class VisitorProfilePageMobile extends UhcDriver {
 		validateNew(enrollBtn);
 		if (driver.getCurrentUrl().contains("/plan-compare")) {
 			System.out.println("Navigation to Plan Compare page is Passed");
-			return new ComparePlansPageMobile(driver);
+			return new ComparePlansPage(driver);
 		} else {
 			Assert.fail("Navigation to Plan Compare page is failed");
 		}
@@ -427,4 +377,34 @@ public class VisitorProfilePageMobile extends UhcDriver {
 		}
 		return null;
 	}
-}
+	
+	public VPPPlanSummaryPage addPlanForMember() throws Exception {
+		addPlans.click();
+		Thread.sleep(10000);
+		CommonUtility.checkPageIsReadyNew(driver);
+		if (driver.getCurrentUrl().contains("plan-summary")) {
+			return new VPPPlanSummaryPage(driver);
+		}
+		return null;
+	}
+	
+	public void validateAddedMsPlans(String planNames) {
+		try {
+			List<String> listOfTestPlans = Arrays.asList(planNames.split(","));
+			CommonUtility.checkPageIsReadyNew(driver);
+			Thread.sleep(20000);
+			for (String plan: listOfTestPlans) {
+				Assert.assertEquals(plan, driver.findElement(By.xpath("//h2[text()='"+plan+"']")).getText());
+				Assert.assertTrue(driver.findElement(By.xpath("//div/a[contains(@aria-describedby,'"+plan+"')] [contains(@class,'pdf-link')]")).isDisplayed());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void validateAddedPlansPDFLinks(String planNames) {
+		List<String> listOfTestPlans = Arrays.asList(planNames.split(","));
+		for (String plan: listOfTestPlans) {
+			Assert.assertTrue(driver.findElement(By.xpath("//div/a[contains(@aria-describedby,'"+plan+"')] [contains(@class,'pdf-link')]")).isDisplayed());
+		}
+	}}

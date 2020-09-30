@@ -1,7 +1,7 @@
 @dce_redesign_zipcode_planyear_capture_AEP @F426582
 Feature: 1.10.1 DCE-REDESIGN AARP - To test ZipCode and Plan Year capture page in New DCE flow during AEP
 
-  @DCE_ZipCodePlanYear_AEP 
+  @DCE_ZipCodePlanYear_AEP @prod
   Scenario Outline: Test to verify the new DCE redesign page displayed for ZipCode and Plan year capture page for AEP on  <site> site
     Given the user is on medicare acquisition site landing page
     	|Site| <site>|
@@ -25,7 +25,7 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test ZipCode and Plan Year capture page i
        |drugName|site|
        |Lipitor|UHC|
 
-  @DCE_ZipCodePlanYear_ValidateContinueBtn_AEP @F443609
+  @DCE_ZipCodePlanYear_ValidateContinueBtn_AEP @F443609 @Regression
   Scenario Outline: Test to verify the functionality of continue button on ZipCode and Plan year capture page when valid zipcode, county and plan year selected on  <site> site
     Given the user is on medicare acquisition site landing page
    		|Site| <site>|
@@ -84,7 +84,7 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test ZipCode and Plan Year capture page i
       | invalidzipcode | zipCode | invalidzipcode1 | invalidzipcode2 |drugName|site|
       |          78452 |   90210|            1234 |00000 |Lipitor|UHC|
 
-  @DCE_ZipCodePlanYear_SamChatCall_AEP
+   @DCE_ZipCodePlanYear_AEP @prod
   Scenario Outline: To verify the SAM icons on DCE Zip code and plan year capture page on <site> site
     Given the user is on medicare acquisition site landing page
     		|Site| <site>|

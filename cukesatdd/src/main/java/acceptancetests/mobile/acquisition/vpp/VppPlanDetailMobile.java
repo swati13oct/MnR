@@ -26,6 +26,7 @@ import cucumber.api.java.en.When;
 import gherkin.formatter.model.DataTableRow;
 import io.appium.java_client.AppiumDriver;
 import pages.acquisition.bluelayer.AcquisitionHomePage;
+import pages.acquisition.bluelayer.AddDrugDetails;
 import pages.acquisition.bluelayer.ComparePlansPageBlayer;
 import pages.acquisition.bluelayer.DrugCostEstimatorPage;
 import pages.acquisition.bluelayer.FindCarePage;
@@ -42,6 +43,7 @@ import pages.acquisition.dce.bluelayer.DCETestHarnessPage;
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.ulayer.ComparePlansPage;
 import pages.mobile.acquisition.bluelayer.PlanComparePageMobile;
+import pages.mobile.acquisition.dce.bluelayer.AddDrugDetailsMobile;
 import pages.mobile.acquisition.dce.ulayer.DrugCostEstimatorPageMobile;
 import pages.mobile.acquisition.ole.WelcomePageMobile;
 import pages.mobile.acquisition.ulayer.AcquisitionHomePageMobile;
@@ -78,6 +80,7 @@ public class VppPlanDetailMobile {
 	public void the_user_on_UHC_Medicaresolutions_Site() {
 		wd = getLoginScenario().getMobileDriver();
 		AcquisitionHomePageMobile aquisitionhomepage = new AcquisitionHomePageMobile(wd);
+		//aquisitionhomepage.openPRE();
 		aquisitionhomepage.openMobileURL();
 		aquisitionhomepage.fixPrivateConnectionMobile();
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
@@ -101,7 +104,170 @@ public class VppPlanDetailMobile {
 		aquisitionhomepage.navigateToPath(path);
 	}
 
-	
+	@Then("^the user clicks on Enroll Now in Plan Details Page to start the OLE flow$")
+	public void the_user_clicks_on_Enroll_Now_in_Plan_Details_Page_to_start_the_OLE_flow() throws Throwable {
+		String PlanName = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_NAME);
+		String PlanYear = (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_YEAR);
+
+		String ZipCode = (String) getLoginScenario().getBean(VPPCommonConstants.ZIPCODE);
+		String County = (String) getLoginScenario().getBean(VPPCommonConstants.COUNTY);
+		String PlanType = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
+		String TFN;
+		String SiteName;
+		SiteName = (String) getLoginScenario().getBean(oleCommonConstants.ACQ_SITE_NAME);
+
+		WelcomePageMobile welcomePage;
+		if (SiteName.contains("UHC_ACQ")) {
+
+			PlanDetailsPageMobile vppPlanDetailsPage = (PlanDetailsPageMobile) getLoginScenario()
+					.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
+			TFN = vppPlanDetailsPage.GetTFNforPlanType();
+			welcomePage = vppPlanDetailsPage.Enroll_OLE_Plan(PlanName);
+		} else {
+			PlanDetailsPageMobile vppPlanDetailsPage = (PlanDetailsPageMobile) getLoginScenario()
+					.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
+			TFN = vppPlanDetailsPage.GetTFNforPlanType();
+			welcomePage = vppPlanDetailsPage.Enroll_OLE_Plan(PlanName);
+		}
+		String PlanPremium = (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_PREMIUM);
+		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_NAME, PlanName);
+		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_TYPE, PlanType);
+		getLoginScenario().saveBean(oleCommonConstants.OLE_ZIPCODE, ZipCode);
+		getLoginScenario().saveBean(oleCommonConstants.OLE_COUNTY, County);
+		getLoginScenario().saveBean(oleCommonConstants.ACQ_SITE_NAME, SiteName);
+		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_YEAR, PlanYear);
+		getLoginScenario().saveBean(oleCommonConstants.OLE_TFN, TFN);
+		System.out.println("Plan Name is : " + PlanName);
+		System.out.println("Plan Type is : " + PlanType);
+		System.out.println("Plan Zip Code is : " + ZipCode);
+		System.out.println("Plan County Name is : " + County);
+		System.out.println("Plan Plan Premium is : " + PlanPremium);
+		System.out.println("TFN for Plan Type is : " + TFN);
+		System.out.println("Plan Year is : " + PlanYear);
+		System.out.println("OLE is being started from Acquisition Site : " + SiteName);
+		if (welcomePage != null) {
+
+			getLoginScenario().saveBean(OLE_PageConstants.OLE_WELCOME_PAGE, welcomePage);
+			System.out.println("OLE Welcome Page is Displayed");
+			Assert.assertTrue(true);
+		} else
+			Assert.fail("Error in validating the OLE Welcome Page");
+	}
+
+	@Then("^the user validates the Plan details on OLE$")
+	public void the_user_validates_the_Plan_details_on_OLE() throws Throwable {
+
+		WelcomePageMobile welcomePage = (WelcomePageMobile) getLoginScenario()
+				.getBean(OLE_PageConstants.OLE_WELCOME_PAGE);
+		Map<String, String> PlanDetailsMap = new HashMap<String, String>();
+		PlanDetailsMap.put("Plan Name", (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_NAME));
+		PlanDetailsMap.put("Plan Year", (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_YEAR));
+		PlanDetailsMap.put("Zip Code", (String) getLoginScenario().getBean(oleCommonConstants.OLE_ZIPCODE));
+		PlanDetailsMap.put("County", (String) getLoginScenario().getBean(oleCommonConstants.OLE_COUNTY));
+		PlanDetailsMap.put("Plan Premium", (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_PREMIUM));
+
+		boolean Validation_Status = welcomePage.validate_plan_details(PlanDetailsMap);
+		if (Validation_Status) {
+			System.out.println("Plan Details Validation in OLE PAGE : " + Validation_Status + " - Validation Passed");
+			getLoginScenario().saveBean(OLE_PageConstants.OLE_WELCOME_PAGE, welcomePage);
+			Assert.assertTrue(true);
+		} else {
+			System.out.println("Plan Details Validation in OLE PAGE : " + Validation_Status);
+			Assert.fail();
+		}
+	}
+
+	@When("^user selects a provider and retuns to VPP plan details page in blayer$")
+	public void user_selects_provider_and_return_vpp_Plan_details_page_blayer() {
+		{
+			ProviderSearchPageMobile providerSearchPage = (ProviderSearchPageMobile) getLoginScenario()
+					.getBean(PageConstants.PROVIDER_SEARCH_PAGE);
+			PlanDetailsPageMobile planDetailsPage = providerSearchPage.selectsProviderFromVppPlanDetailsPage();
+			Assert.assertTrue("Not able to return to Plan Details page", planDetailsPage != null);
+
+		}
+	}
+
+	@Then("^Verify X out of Y provider covered information is displayed on Plan Details page blayer$")
+	public void verify_providers_covered_blayer_planDetails() {
+		PlanDetailsPageMobile vppPlanDetailsPage = (PlanDetailsPageMobile) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
+		if (!vppPlanDetailsPage.providerinfo()) {
+			Assert.fail("Failed in validating the provider link on plan details page");
+		}
+	}
+
+	@Then("^I verify the plan name in UMS site$")
+	public void verifyPlanName(DataTable attributes) {
+		List<DataTableRow> memberAttributesRow = attributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		String planname = memberAttributesMap.get("Plan Name");
+
+		DrugCostEstimatorPageMobile dce = (DrugCostEstimatorPageMobile) getLoginScenario()
+				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
+		dce.verifyplanname(planname);
+		if (dce != null) {
+			getLoginScenario().saveBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE, dce);
+		}
+	}
+
+	@Then("^selects drug details for other drugs in UMS site$")
+	public void user_selects_drug_details_for_other_drugs(DataTable data) throws InterruptedException {
+
+		List<DataTableRow> memberAttributesRow = data.getGherkinRows();
+		String drug = memberAttributesRow.get(0).getCells().get(1);
+		String quantity = memberAttributesRow.get(1).getCells().get(1);
+		String frequency = memberAttributesRow.get(2).getCells().get(1);
+
+		AddDrugDetailsMobile DrugDetails = (AddDrugDetailsMobile) getLoginScenario()
+				.getBean(PageConstants.ADD_DRUG_DETAILS);
+
+		/*
+		 * if(drug.equalsIgnoreCase("Lipitor"))
+		 * DrugDetails.selectDosageAttribute("//li[@data-index='1']");
+		 */
+
+		DrugDetails.selectDosageAttribute(drug);
+		DrugDetails.selectQnty(quantity);
+		DrugDetails.selectFrequency(frequency);
+
+		DrugDetails.continueAddDrugDetailsModNoSaving();
+
+	}
+
+	/* Prescription Drug tab */
+	String estimatedTotalAnnualCost;
+
+	/* DCE cost Estimator */
+	String cost;
+
+	/* Cost comparison for prescription drugs */
+	@Then("^user verifies annual drug cost in the prescription drug tab of UMS site$")
+	public void user_verifies_drug_cost_in_UMS_site(DataTable data) throws Throwable {
+
+		List<DataTableRow> memberAttributesRow = data.getGherkinRows();
+		String planType = memberAttributesRow.get(0).getCells().get(1);
+		PlanDetailsPageMobile plandetailspage = new PlanDetailsPageMobile(wd, planType);
+
+		estimatedTotalAnnualCost = plandetailspage.costComparisonPrescriptionDrugFromDCE();
+
+		if (cost.trim().contains(estimatedTotalAnnualCost))
+			Assert.assertTrue("It's a match on on prescription drug tab and Drug CostEstimator page", true);
+		else
+			Assert.assertTrue("Cost mismatch on prescription drug tab and drug CostEstimator page", false);
+
+		// plandetailspage.navigateBackToPlanSummaryPageFromDetailsPage();
+
+		getLoginScenario().saveBean(PageConstants.PLAN_DETAILS_PAGE, plandetailspage);
+
+	}
+
 	@When("^the user does plan search using the following information in the AARP site$")
 	public void zipcode_details_in_aarp_site(DataTable givenAttributes) throws InterruptedException {
 
@@ -478,7 +644,8 @@ public class VppPlanDetailMobile {
 		VPPPlanSummaryPageMobile vppPlanSummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		String planType = (String) getLoginScenario().getBean(VPPCommonConstantsMobile.PLAN_TYPE);
-		PlanDetailsPageMobile vppPlanDetailsPage = (PlanDetailsPageMobile) vppPlanSummaryPage.navigateToFirstPlanForPlanDetails(planType);
+		PlanDetailsPageMobile vppPlanDetailsPage = (PlanDetailsPageMobile) vppPlanSummaryPage
+				.navigateToFirstPlanForPlanDetails(planType);
 		if (vppPlanDetailsPage != null) {
 			getLoginScenario().saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE, vppPlanDetailsPage);
 			Assert.assertTrue(true);
@@ -914,7 +1081,8 @@ public class VppPlanDetailMobile {
 		getLoginScenario().saveBean(VPPCommonConstantsMobile.ZIPCODE, zipcode);
 		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		MultiCountyModalPageMobile multiCountyModalPage = plansummaryPage.VPP_ChangeLocationValidateMultiCOuntyPopUp(zipcode);
+		MultiCountyModalPageMobile multiCountyModalPage = plansummaryPage
+				.VPP_ChangeLocationValidateMultiCOuntyPopUp(zipcode);
 		if (multiCountyModalPage != null) {
 			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, multiCountyModalPage);
 		} else {
@@ -2367,9 +2535,9 @@ public class VppPlanDetailMobile {
 		String isMultiCounty = memberAttributesMap.get("Is Multi County");
 		getLoginScenario().saveBean(VPPCommonConstantsMobile.COUNTY, county);
 		getLoginScenario().saveBean(VPPCommonConstantsMobile.IS_MULTICOUNTY, isMultiCounty);
-		AcquisitionHomePageMobile  aquisitionhomepage = (AcquisitionHomePageMobile ) getLoginScenario()
+		AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		VPPPlanSummaryPageMobile  plansummaryPage = null;
+		VPPPlanSummaryPageMobile plansummaryPage = null;
 		if (isMultiCounty.contains("YES")) {
 			plansummaryPage = aquisitionhomepage.searchPlansCounty(county);
 		} else {
@@ -2389,7 +2557,7 @@ public class VppPlanDetailMobile {
 
 	@Then("^user clicks on Change Zip code link in UMS site$")
 	public void user_clicks_on_Change_Zip_code_link_in_UMS_site() throws Throwable {
-		VPPPlanSummaryPageMobile  plansummaryPage = (VPPPlanSummaryPageMobile ) getLoginScenario()
+		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		plansummaryPage.clickOnChangeZipCode();
 	}
@@ -2407,7 +2575,7 @@ public class VppPlanDetailMobile {
 		String city = memberAttributesMap.get("City");
 		String state = memberAttributesMap.get("State");
 
-		VPPPlanSummaryPageMobile  plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
+		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		plansummaryPage.enterAddressDetails(address, city, state);
 	}
@@ -2424,7 +2592,7 @@ public class VppPlanDetailMobile {
 		String county2 = memberAttributesMap.get("County Name2");
 		String isMultiCounty2 = memberAttributesMap.get("Is Multi County2");
 
-		VPPPlanSummaryPageMobile  plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
+		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 
 		plansummaryPage.searchPlansCounty(county2, isMultiCounty2);
@@ -2450,7 +2618,8 @@ public class VppPlanDetailMobile {
 		String testSiteUrl = aquisitionhomepage.getTestSiteUrl();
 		getLoginScenario().saveBean(PageConstants.TEST_SITE_URL, testSiteUrl);
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
-		VPPTestHarnessPageMobile vppTestHarnessPage = (VPPTestHarnessPageMobile) aquisitionhomepage.GetVPPTestHarnessPage();
+		VPPTestHarnessPageMobile vppTestHarnessPage = (VPPTestHarnessPageMobile) aquisitionhomepage
+				.GetVPPTestHarnessPage();
 		getLoginScenario().saveBean(PageConstants.VPP_TESTHARNESS_PAGE, vppTestHarnessPage);
 	}
 
@@ -2516,8 +2685,8 @@ public class VppPlanDetailMobile {
 
 		VPPTestHarnessPageMobile vppTestHarnessPage = (VPPTestHarnessPageMobile) loginScenario
 				.getBean(PageConstants.VPP_TESTHARNESS_PAGE);
-		VPPPlanSummaryPageMobile planSummaryPage = vppTestHarnessPage.navigateToShopPlanenterZipcodeToVPP(ZipCode, CountyName,
-				isMultutiCounty);
+		VPPPlanSummaryPageMobile planSummaryPage = vppTestHarnessPage.navigateToShopPlanenterZipcodeToVPP(ZipCode,
+				CountyName, isMultutiCounty);
 		if (planSummaryPage != null) {
 			loginScenario.saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, planSummaryPage);
 		}
@@ -2738,8 +2907,8 @@ public class VppPlanDetailMobile {
 		String planID = givenAttributesMap.get("Plan ID");
 		VPPTestHarnessPageMobile vppTestHarnessPage = (VPPTestHarnessPageMobile) loginScenario
 				.getBean(PageConstants.VPP_TESTHARNESS_PAGE);
-		ProviderSearchPageMobile providerSearchPage = vppTestHarnessPage.enterMandatoryFieldsToProviderSearch(zipCode, planID,
-				planYear);
+		ProviderSearchPageMobile providerSearchPage = vppTestHarnessPage.enterMandatoryFieldsToProviderSearch(zipCode,
+				planID, planYear);
 		if (providerSearchPage != null) {
 			getLoginScenario().saveBean(PageConstants.PROVIDER_SEARCH_PAGE, providerSearchPage);
 		}
@@ -2932,8 +3101,8 @@ public class VppPlanDetailMobile {
 
 		VisitorProfileTestHarnessPageMobile vpTestHarnessPage = (VisitorProfileTestHarnessPageMobile) loginScenario
 				.getBean(PageConstants.VP_TESTHARNESS_PAGE);
-		PlanDetailsPageMobile vppPlanDetailsPage = vpTestHarnessPage.NavigateToPlanDetailsFromVpTest(Zipcode, ContractNo,
-				PbpNo, SegId, CountyCD, product, year);
+		PlanDetailsPageMobile vppPlanDetailsPage = vpTestHarnessPage.NavigateToPlanDetailsFromVpTest(Zipcode,
+				ContractNo, PbpNo, SegId, CountyCD, product, year);
 
 		if (vppPlanDetailsPage != null) {
 			loginScenario.saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE, vppPlanDetailsPage);
@@ -3030,7 +3199,7 @@ public class VppPlanDetailMobile {
 
 	@Then("^the user should see fifteen results before pagination on UHC Site$")
 	public void the_user_should_see_fifteen_results_before_pagination() throws Throwable {
-		AcquisitionHomePageMobile  aquisitionhomepage = (AcquisitionHomePageMobile ) getLoginScenario()
+		AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		aquisitionhomepage.validateFifteenResults();
 
@@ -3038,14 +3207,14 @@ public class VppPlanDetailMobile {
 
 	@Then("^the user validates count of results aganist the total shown at top of the page on UHC Site$")
 	public void the_user_validates_count_of_results_aganist_the_total_shown_at_top_of_the_page() throws Throwable {
-		AcquisitionHomePageMobile  aquisitionhomepage = (AcquisitionHomePageMobile ) getLoginScenario()
+		AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		aquisitionhomepage.validateCountResults();
 	}
 
 	@Then("^the user validates pagination and results displayed on UHC Site$")
 	public void the_user_validates_pagination_and_results_displayed() throws Throwable {
-		AcquisitionHomePageMobile  aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
+		AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		aquisitionhomepage.validatePaginationofSearchResults();
 	}

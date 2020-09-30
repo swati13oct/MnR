@@ -92,14 +92,14 @@ public class ZipCodeAndPlanYearCapturePageMobile extends UhcDriver {
 		try {
 			if (countyDropdown.isDisplayed()) {
 				countyDropdown.click();
-				CommonUtility.waitForPageLoad(driver, countyRows, 30);
+				CommonUtility.waitForPageLoad(driver,countyRows , 30);
 				driver.findElements(By.xpath("//select[@id='county']/option")).get(1).click();
 			}
 		} catch (Exception e) {
 			System.out.println("county box not found");
 		}
-		
-		continueBtn.click();
+		validateNew(continueBtn);
+		//continueBtn.click();
 	}
 
 	public DrugSummaryPageMobile clickContinueBtn() {
@@ -145,7 +145,7 @@ public class ZipCodeAndPlanYearCapturePageMobile extends UhcDriver {
 			Assert.assertTrue("Plan Year dropdoown not displayed during AEP", true);
 			return new ZipCodeAndPlanYearCapturePageMobile(driver);
 		}
-		Assert.fail("Plan year dropdown not displayed during AEP");
+		//Assert.fail("Plan year dropdown not displayed during AEP");
 		return null;
 	}
 

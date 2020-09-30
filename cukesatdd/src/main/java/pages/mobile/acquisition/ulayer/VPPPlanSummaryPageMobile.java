@@ -669,7 +669,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 	@FindBy(xpath = "//div[contains(@class,'closeBg')]/*[contains (text() , 'Thank you for your interest')]")
 	private WebElement medicareGuidePopup;
 
-	@FindBy(xpath = "//label[contains(@for,'compare-plan')]") 
+	@FindBy(xpath = "//label[contains(@for,'compare-plan')]")
 	private WebElement planCompareCheckBox;
 
 	@FindBy(xpath = "//span[@class='multiple-added-text show']")
@@ -1619,7 +1619,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 
 	public int checkAllPDPlans() {
 		try {
-			Thread.sleep(5000);
+			Thread.sleep(2000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -4418,7 +4418,8 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 		} else {
 			WebElement compareLinks2 = driver
 					.findElement(By.xpath("(.//*[@id='plan-list-3']//button[contains(text(),'Compare plans')])[1]"));
-			compareLinks2.click();
+			// compareLinks2.click();
+			jsClickMobile(compareLinks2);
 		}
 
 		try {
@@ -4462,12 +4463,14 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 			WebElement dceLink = driver.findElement(By.xpath("//*[contains(text(),'" + planName
 					+ "')]/ancestor::div[contains(@class, 'module-plan-overview module swiper-slide plan-card')]//descendant::a[contains(@class,'add-drug')]"));
 			if (validate(dceLink))
-				dceLink.click();
+				jsClickMobile(dceLink);
+			// dceLink.click();
 
 		} else {
 			WebElement dceLink = driver.findElement(By.xpath("//*[contains(text(),'" + planName
 					+ "')]/ancestor::div[contains(@class, 'module-plan-overview module swiper-slide pdpPlans ng-scope')]//descendant::a[contains(@id,'pdpDrugCostEstimatorLink')]"));
-			dceLink.click();
+			jsClickMobile(dceLink);
+			// dceLink.click();
 		}
 		if (validateNew(AddMyDrugsBtn))
 			return new GetStartedPageMobile(driver);
@@ -4477,11 +4480,13 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 
 	public PlanDetailsPageMobile navigateToPlanDetails(String planName, String planType) {
 
+		CommonUtility.checkPageIsReadyNew(driver);
+
 		if (planType.equalsIgnoreCase("MA") || planType.equalsIgnoreCase("MAPD")) {
 			WebElement MAmoreDetailsLink = driver.findElement(By.xpath("//*[contains(text(), '" + planName
 					+ "')]/ancestor::div[contains(@class,'module-plan-overview')]//div[contains(@class,'swiper-content')]//div[not (contains(@class,'ng-hide'))]/a[contains(text(),'View Plan')]"));
 			CommonUtility.waitForPageLoadNew(driver, MAmoreDetailsLink, 30);
-			MAmoreDetailsLink.click();
+			jsClickNew(MAmoreDetailsLink);
 			System.out.println("View Plan Details Link is clicked for MA plan" + planName);
 
 		} else if (planType.equalsIgnoreCase("PDP")) {
@@ -4496,15 +4501,6 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 					+ "')]/ancestor::h3/ancestor::*[contains(@class,'module-plan-overview')]//*[contains(text(),'View Plan')]"));
 			CommonUtility.waitForPageLoadNew(driver, SNPmoreDetailsLink, 30);
 			SNPmoreDetailsLink.click();
-			System.out.println("View Plan Details Link is clicked for SNP plan" + planName);
-
-		} else if (planName.contains("HMO") || planName.contains("Regional PPO")) {
-			WebElement MAmoreDetailsLink = driver.findElement(By.xpath("//*[contains(text(), '" + planName
-					+ "')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//a[contains(text(),'View plan and drug coverage details')]"));
-			// CommonUtility.waitForPageLoad(driver, MAmoreDetailsLink, 30);
-			validate(MAmoreDetailsLink);
-
-			MAmoreDetailsLink.click();
 			System.out.println("View Plan Details Link is clicked for MA plan" + planName);
 		}
 		CommonUtility.checkPageIsReadyNew(driver);

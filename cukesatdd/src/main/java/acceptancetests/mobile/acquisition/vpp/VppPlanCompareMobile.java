@@ -33,18 +33,18 @@ import cucumber.api.java.en.When;
 import gherkin.formatter.model.DataTableRow;
 import io.appium.java_client.AppiumDriver;
 import pages.acquisition.pharmacyLocator.PharmacySearchPage;
-import pages.acquisition.tfn.CampaignTFNPage;
-import pages.acquisition.ulayer.AboutUsAARPPage;
-import pages.acquisition.ulayer.AddDrugDetails;
-import pages.acquisition.ulayer.ContactUsAARPPage;
-import pages.acquisition.ulayer.DrugCostEstimatorPage;
-import pages.acquisition.ulayer.ProviderSearchPage;
-import pages.acquisition.ulayer.RequestHelpAndInformationPage;
-import pages.acquisition.ulayer.RequestMailedInformation;
-import pages.acquisition.ulayer.SavingsOppurtunity;
-import pages.acquisition.ulayer.SiteMapAARPPage;
-import pages.acquisition.ulayer.VisitorProfilePage;
-import pages.acquisition.ulayer.ZipcodeLookupHomePage;
+//import pages.acquisition.tfn.CampaignTFNPage;
+//import pages.acquisition.ulayer.AboutUsAARPPage;
+//import pages.acquisition.ulayer.AddDrugDetails;
+//import pages.acquisition.ulayer.ContactUsAARPPage;
+//import pages.acquisition.ulayer.DrugCostEstimatorPage;
+//import pages.acquisition.ulayer.ProviderSearchPage;
+//import pages.acquisition.ulayer.RequestHelpAndInformationPage;
+//import pages.acquisition.ulayer.RequestMailedInformation;
+//import pages.acquisition.ulayer.SavingsOppurtunity;
+//import pages.acquisition.ulayer.SiteMapAARPPage;
+//import pages.acquisition.ulayer.VisitorProfilePage;
+//import pages.acquisition.ulayer.ZipcodeLookupHomePage;
 import pages.mobile.acquisition.bluelayer.SiteMapUMSPageMobile;
 import pages.mobile.acquisition.ulayer.AboutUsAARPPageMobile;
 import pages.mobile.acquisition.ulayer.AcquisitionHomePageMobile;
@@ -59,6 +59,8 @@ import pages.mobile.acquisition.ulayer.MultiCountyModalPageMobile;
 import pages.mobile.acquisition.ulayer.PlanDetailsPageMobile;
 import pages.mobile.acquisition.ulayer.PrivacyPolicyAARPPageMobile;
 import pages.mobile.acquisition.ulayer.ProviderSearchPageMobile;
+import pages.mobile.acquisition.ulayer.RequestHelpAndInformationPageMobile;
+import pages.mobile.acquisition.ulayer.RequestMailedInformationMobile;
 import pages.mobile.acquisition.ulayer.SavingsOppurtunityMobile;
 import pages.mobile.acquisition.ulayer.SiteMapAARPPageMobile;
 import pages.mobile.acquisition.ulayer.VPPPlanSummaryPageMobile;
@@ -89,11 +91,22 @@ public class VppPlanCompareMobile {
 	public void the_user_on_aarp_medicaresolutions_Site() {
 		wd = getLoginScenario().getMobileDriver();
 		AcquisitionHomePageMobile aquisitionhomepage = new AcquisitionHomePageMobile(wd);
+		//aquisitionhomepage.openPRE();
 		aquisitionhomepage.openMobileURL();
 		// aquisitionhomepage.openVPPPage();
 		aquisitionhomepage.fixPrivateConnectionMobile();
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, aquisitionhomepage);
+	}
+
+	@Then("^the user navigates to Presciption Drug Benefits tab in UMS site$")
+	public void the_user_navigates_to_Presciption_Drug_Benefits_tab_in_UMS_site() throws Throwable {
+		PlanDetailsPageMobile plandetailspage = (PlanDetailsPageMobile) getLoginScenario()
+				.getBean(PageConstants.PLAN_DETAILS_PAGE);
+		DrugCostEstimatorPageMobile dce = plandetailspage.navigateToDCE();
+		if (dce != null) {
+			getLoginScenario().saveBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE, dce);
+		}
 	}
 
 	/**
@@ -1374,7 +1387,7 @@ public class VppPlanCompareMobile {
 		PlanDetailsPageMobile vppPlanDetailsPage = (PlanDetailsPageMobile) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
 
-		ProviderSearchPage providerSearchPage = vppPlanDetailsPage.validateLookUpYourProviderButton();
+		ProviderSearchPageMobile providerSearchPage = vppPlanDetailsPage.validateLookUpYourProviderButton();
 		if (providerSearchPage != null) {
 			getLoginScenario().saveBean(PageConstants.PROVIDER_SEARCH_PAGE, providerSearchPage);
 		}
@@ -1435,7 +1448,7 @@ public class VppPlanCompareMobile {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		DrugCostEstimatorPage drugCostEstimatorPage = planComparePage.clickonDCE();
+		DrugCostEstimatorPageMobile drugCostEstimatorPage = planComparePage.clickonDCE();
 		if (drugCostEstimatorPage != null) {
 			getLoginScenario().saveBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE, drugCostEstimatorPage);
 			// comparePlansPage.backToVPPPage();
@@ -2117,9 +2130,9 @@ public class VppPlanCompareMobile {
 	@When("^the user navigates to the request mailed information in AARP site and validates page is loaded$")
 	public void the_user_navigates_to_the_request_mailed_information_in_AARP_site_and_validates_page_is_loaded()
 			throws Throwable {
-		RequestHelpAndInformationPage requestHelpAndInformationPage = (RequestHelpAndInformationPage) getLoginScenario()
+		RequestHelpAndInformationPageMobile requestHelpAndInformationPage = (RequestHelpAndInformationPageMobile) getLoginScenario()
 				.getBean(PageConstants.REQUEST_MORE_HELP_INFORMATION_PAGE);
-		RequestMailedInformation requestmailedinformation = requestHelpAndInformationPage
+		RequestMailedInformationMobile requestmailedinformation = requestHelpAndInformationPage
 				.navigateToRequestMailedinformation();
 		if (requestmailedinformation != null) {
 			getLoginScenario().saveBean(PageConstants.REQUEST_MAILED_INFORMATION, requestmailedinformation);
@@ -2132,7 +2145,7 @@ public class VppPlanCompareMobile {
 	public void the_user_fills_the_Enrollment_guide_plan_form_and_validate_the_order_confirmation_page(
 			DataTable attributes) throws Throwable {
 		if (!MRScenario.environment.equalsIgnoreCase("offline")) {
-			RequestMailedInformation requestmailedinformation = (RequestMailedInformation) getLoginScenario()
+			RequestMailedInformationMobile requestmailedinformation = (RequestMailedInformationMobile) getLoginScenario()
 					.getBean(PageConstants.REQUEST_MAILED_INFORMATION);
 			List<DataTableRow> givenAttributesRow = attributes.getGherkinRows();
 			Map<String, String> givenAttributesMap = new HashMap<String, String>();
@@ -2779,7 +2792,7 @@ public class VppPlanCompareMobile {
 		String city = memberAttributesMap.get("City");
 		String state = memberAttributesMap.get("State");
 
-		ZipcodeLookupHomePage zipcodeLookuphomePage = (ZipcodeLookupHomePage) getLoginScenario()
+		ZipcodeLookupHomePageMobile zipcodeLookuphomePage = (ZipcodeLookupHomePageMobile) getLoginScenario()
 				.getBean(PageConstants.ZIP_LOOK_UP_HOME_PAGE);
 		zipcodeLookuphomePage.enterAddressDetails(address, city, state);
 	}
@@ -2914,7 +2927,8 @@ public class VppPlanCompareMobile {
 		String testSiteUrl = aquisitionhomepage.getTestSiteUrl();
 		getLoginScenario().saveBean(PageConstants.TEST_SITE_URL, testSiteUrl);
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
-		VPPTestHarnessPageMobile vppTestHarnessPage = (VPPTestHarnessPageMobile) aquisitionhomepage.GetVPPTestHarnessPage();
+		VPPTestHarnessPageMobile vppTestHarnessPage = (VPPTestHarnessPageMobile) aquisitionhomepage
+				.GetVPPTestHarnessPage();
 		getLoginScenario().saveBean(PageConstants.VPP_TESTHARNESS_PAGE, vppTestHarnessPage);
 	}
 
@@ -3176,8 +3190,8 @@ public class VppPlanCompareMobile {
 		String planID = givenAttributesMap.get("Plan ID");
 		VPPTestHarnessPageMobile vppTestHarnessPage = (VPPTestHarnessPageMobile) loginScenario
 				.getBean(PageConstants.VPP_TESTHARNESS_PAGE);
-		ProviderSearchPageMobile providerSearchPage = vppTestHarnessPage.enterMandatoryFieldsToProviderSearch(zipCode, planID,
-				planYear);
+		ProviderSearchPageMobile providerSearchPage = vppTestHarnessPage.enterMandatoryFieldsToProviderSearch(zipCode,
+				planID, planYear);
 		if (providerSearchPage != null) {
 			getLoginScenario().saveBean(PageConstants.PROVIDER_SEARCH_PAGE, providerSearchPage);
 		}
@@ -3346,7 +3360,8 @@ public class VppPlanCompareMobile {
 		String Zipcode = inputAttributesMap.get("Zip Code");
 		VisitorProfileTestHarnessPageMobile vpTestHarnessPage = (VisitorProfileTestHarnessPageMobile) loginScenario
 				.getBean(PageConstants.VP_TESTHARNESS_PAGE);
-		ComparePlansPageMobile planComparePage = vpTestHarnessPage.NavigateToPlanCompareFromVpTest(Zipcode, Plancompare);
+		ComparePlansPageMobile planComparePage = vpTestHarnessPage.NavigateToPlanCompareFromVpTest(Zipcode,
+				Plancompare);
 
 		if (planComparePage != null) {
 			loginScenario.saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
@@ -3952,7 +3967,8 @@ public class VppPlanCompareMobile {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		pages.mobile.acquisition.dce.ulayer.DrugCostEstimatorPageMobile drugCostEstimatorPage = planComparePage.clickonEdityourDrugs();
+		pages.mobile.acquisition.dce.ulayer.DrugCostEstimatorPageMobile drugCostEstimatorPage = planComparePage
+				.clickonEdityourDrugs();
 		if (drugCostEstimatorPage != null) {
 			getLoginScenario().saveBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE, drugCostEstimatorPage);
 			// comparePlansPage.backToVPPPage();

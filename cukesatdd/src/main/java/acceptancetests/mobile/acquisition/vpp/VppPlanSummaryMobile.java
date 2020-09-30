@@ -110,7 +110,7 @@ public class VppPlanSummaryMobile {
 			plansummaryPage.validateAndClickAddtoCompareinAARP(planType, planName);
 			plansummaryPage.compareTextAfterclickingAddtoCompareinAARP(planName);
 			plansummaryPage.deselectAddToCompareinAARP(planName);
-			
+
 		}
 	}
 
@@ -241,6 +241,7 @@ public class VppPlanSummaryMobile {
 	public void the_user_on_uhc_medicareplans_Site() {
 		wd = (AppiumDriver) getLoginScenario().getWebDriverNew();
 		AcquisitionHomePageMobile aquisitionhomepage = new AcquisitionHomePageMobile(wd);
+		//aquisitionhomepage.openPRE();
 		aquisitionhomepage.openMobileURL();
 		// aquisitionhomepage.openVPPPage();
 		aquisitionhomepage.fixPrivateConnectionMobile();
@@ -616,6 +617,7 @@ public class VppPlanSummaryMobile {
 		wd = (AppiumDriver) getLoginScenario().getWebDriverNew();
 
 		AcquisitionHomePageMobile aquisitionhomepage = new AcquisitionHomePageMobile(wd);
+		//aquisitionhomepage.openPRE();
 		aquisitionhomepage.openMobileURL();
 		// aquisitionhomepage.openVPPPage();
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
