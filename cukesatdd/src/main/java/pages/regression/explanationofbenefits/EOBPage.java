@@ -974,7 +974,7 @@ public class EOBPage extends EOBBase{
 				Assert.assertTrue("PROBLEM - unable to locate the disabled prev page arrow after clicking prev page arrow", eobValidate(prevPageArrow_disabled));
 				break;
 			}
-			testNote.add("\tEOB number "+(i)+" entry eleemnts validation: PASSED");
+			testNote.add("\tEOB number "+(i)+" entry elements validation: PASSED");
 		}
 		return testNote;
 	}
