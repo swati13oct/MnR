@@ -60,7 +60,8 @@ public class GetStartedPageMobile extends UhcDriver {
 
 	public BuildYourDrugListMobile clickAddsDrugs() {
 		if(validate(AddMyDrugsBtn))
-			AddMyDrugsBtn.click();
+			jsClickMobile(AddMyDrugsBtn);
+			//AddMyDrugsBtn.click();
 		CommonUtility.waitForPageLoad(driver, BuildDrugPage_EnterDrugNameTxt, 40);
 		if (validateNew(BuildDrugPage_EnterDrugNameTxt)) {
 			Assert.assertTrue("Naviagted to Build Drug List Page", true);
