@@ -49,8 +49,8 @@ public class BuildYourDrugList extends UhcDriver {
 	@FindBy(xpath = "//uhc-menu-item")
 	public List <WebElement> AutoCompleteitems;
 
-//	@FindBy(xpath = "//*[@id='drugPopHeading']")
-	@FindBy(id="modal-label")
+	@FindBy(xpath = "//*[@id='drugPopHeading' or @id='modal-label']")
+//	@FindBy(id="modal-label")
 	public WebElement TellUsABoutHeader;
 	
 	@FindBy(xpath = "//img[contains(@class,'uhc-modal__close')]")
@@ -102,6 +102,7 @@ public class BuildYourDrugList extends UhcDriver {
 		WebElement drugname = driver.findElement(By.xpath("//*[contains(@id,'"+drugName+"')]/div"));
 		
 		jsClickNew(drugname);
+		checkIfPageReadySafari();
 		/*
 		 * if(validate(SearchBtn)) SearchBtn.click(); if(validate(selectBtn))
 		 * selectBtn.click();

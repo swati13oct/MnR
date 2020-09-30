@@ -1338,6 +1338,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		sendkeys(zipCodeField, zipcode);
 
 		viewPlansButton.click();
+		waitForPageLoadSafari();
 		validateNew(vppTop);
 		// }
 		/*
