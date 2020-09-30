@@ -25,7 +25,7 @@ import pages.acquisition.commonpages.VPPPlanSummaryPage;
 
 public class GetStartedPageMobile extends UhcDriver {
 
-	@FindBy(xpath = "//span[contains(text(),'Add My Drugs')]")
+	@FindBy(xpath = "//button[contains(@id,'addDrug')]")
 	public WebElement AddMyDrugsBtn;
 
 	@FindBy(xpath = "//input[contains(@id, 'drugsearch')]")
@@ -61,7 +61,7 @@ public class GetStartedPageMobile extends UhcDriver {
 	public BuildYourDrugListMobile clickAddsDrugs() {
 		if(validate(AddMyDrugsBtn))
 			AddMyDrugsBtn.click();
-		CommonUtility.waitForPageLoad(driver, BuildDrugPage_EnterDrugNameTxt, 30);
+		CommonUtility.waitForPageLoad(driver, BuildDrugPage_EnterDrugNameTxt, 40);
 		if (validateNew(BuildDrugPage_EnterDrugNameTxt)) {
 			Assert.assertTrue("Naviagted to Build Drug List Page", true);
 			return new BuildYourDrugListMobile(driver);

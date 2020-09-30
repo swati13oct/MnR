@@ -1619,22 +1619,21 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 
 	public int checkAllPDPlans() {
 		try {
-			Thread.sleep(5000);
+			Thread.sleep(2000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		List<WebElement> allPDPlans = driver
-				.findElements(By.xpath(".//*[@id='plan-list-3']//div[contains(@class,'compare-box')]//label"));
-		int plansForCompare = allPDPlans.size();
+		List<WebElement> allPDPlans = driver.findElements(By.xpath(".//*[@id='plan-list-3']//div[contains(@class,'compare-box')]//label"));	
+		int plansForCompare=allPDPlans.size();
 		if (plansForCompare > 4) {
 			System.out.println("There are more than 4 plans, only first 4 will be compared");
-			plansForCompare = 4;
+			plansForCompare=4;
 		}
-		if (allPDPlans != null) {
-			for (int i = 0; i < plansForCompare; i++) {
+		if(allPDPlans !=null){
+			for(int i = 0; i<plansForCompare; i++){
 				allPDPlans.get(i).click();
-				System.out.println("Plan added to compare : " + i);
+				System.out.println("Plan added to compare : "+i);
 			}
 		}
 		return plansForCompare;
@@ -4403,22 +4402,21 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 
 	public ComparePlansPageMobile clickOnCompareLinkAARP(String plantype) {
 
-		if (plantype.equalsIgnoreCase("MedicareAdvantage")) {
-
-			try {
-				Thread.sleep(5000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			List<WebElement> compareLinks = driver
-					.findElements(By.xpath(".//*[@id='plan-list-1']//button[contains(text(),'Compare plans')]"));
+		if (plantype.equalsIgnoreCase("MedicareAdvantage"))
+		{
+			
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+			List<WebElement> compareLinks = driver.findElements(By.xpath(".//*[@id='plan-list-1']//button[contains(text(),'Compare plans')]"));	
 			moveMouseToElement(compareLinks.get(1));
-			compareLinks.get(1).click();
-		} else {
-			WebElement compareLinks2 = driver
-					.findElement(By.xpath("(.//*[@id='plan-list-3']//button[contains(text(),'Compare plans')])[1]"));
-			compareLinks2.click();
+			compareLinks.get(1).click();	
+		}else{
+			WebElement compareLinks2 = driver.findElement(By.xpath("(.//*[@id='plan-list-3']//button[contains(text(),'Compare plans')])[1]"));	
+			compareLinks2.click();	
 		}
 
 		try {
@@ -4426,11 +4424,12 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-
+			
 		}
-		if (currentUrl().contains("/health-plans.html#/plan-compare"))
+		if(currentUrl().contains("/health-plans.html#/plan-compare"))
 			return new ComparePlansPageMobile(driver);
 		return null;
+
 	}
 
 	public DrugCostEstimatorPageMobile navigateToDCE(String plantype) {
@@ -4458,17 +4457,17 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 	public WebElement AddMyDrugsBtn;
 
 	public GetStartedPageMobile navigateToDCERedesignFromVPPPlanCard(String plantype, String planName) {
-		if (plantype.equals("MA") || plantype.equals("MAPD") || plantype.equalsIgnoreCase("SNP")) {
-			WebElement dceLink = driver.findElement(By.xpath("//*[contains(text(),'" + planName
-					+ "')]/ancestor::div[contains(@class, 'module-plan-overview module swiper-slide plan-card')]//descendant::a[contains(@class,'add-drug')]"));
-			if (validate(dceLink))
+		if(plantype.equals("MA")||plantype.equals("MAPD") || plantype.equalsIgnoreCase("SNP")){
+			WebElement dceLink = driver.findElement
+					(By.xpath("//*[contains(text(),'"+planName+"')]/ancestor::div[contains(@class, 'module-plan-overview module swiper-slide plan-card')]//descendant::a[contains(@class,'add-drug')]"));
+			if(validate(dceLink))
 				dceLink.click();
 
-		} else {
-			WebElement dceLink = driver.findElement(By.xpath("//*[contains(text(),'" + planName
-					+ "')]/ancestor::div[contains(@class, 'module-plan-overview module swiper-slide pdpPlans ng-scope')]//descendant::a[contains(@id,'pdpDrugCostEstimatorLink')]"));
+		}else{
+			WebElement dceLink = driver.findElement
+					(By.xpath("//*[contains(text(),'"+planName+"')]/ancestor::div[contains(@class, 'module-plan-overview module swiper-slide pdpPlans ng-scope')]//descendant::a[contains(@id,'pdpDrugCostEstimatorLink')]"));
 			dceLink.click();
-		}
+		}	
 		if (validateNew(AddMyDrugsBtn))
 			return new GetStartedPageMobile(driver);
 		return null;
@@ -4479,30 +4478,30 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 
 		CommonUtility.checkPageIsReadyNew(driver);
 
-		if (planType.equalsIgnoreCase("MA") || planType.equalsIgnoreCase("MAPD")) {	
+		if (planType.equalsIgnoreCase("MA") || planType.equalsIgnoreCase("MAPD")) {
 			WebElement MAmoreDetailsLink = driver.findElement(By.xpath("//*[contains(text(), '" + planName
 					+ "')]/ancestor::div[contains(@class,'module-plan-overview')]//div[contains(@class,'swiper-content')]//div[not (contains(@class,'ng-hide'))]/a[contains(text(),'View Plan')]"));
 			CommonUtility.waitForPageLoadNew(driver, MAmoreDetailsLink, 30);
 			jsClickNew(MAmoreDetailsLink);
-			System.out.println("View Plan Details Link is clicked for MA plan"+planName);
+			System.out.println("View Plan Details Link is clicked for MA plan" + planName);
 
 		} else if (planType.equalsIgnoreCase("PDP")) {
-            WebElement PDPmoreDetailsLink = driver.findElement(By.xpath("//*[contains(text(), '" + planName
-                    + "')]/ancestor::div[contains(@class,'module-plan-overview')]//*[contains(@id,'viewmoredetlinkpdp')]"));
+			WebElement PDPmoreDetailsLink = driver.findElement(By.xpath("//*[contains(text(), '" + planName
+					+ "')]/ancestor::div[contains(@class,'module-plan-overview')]//*[contains(@id,'viewmoredetlinkpdp')]"));
 			CommonUtility.waitForPageLoadNew(driver, PDPmoreDetailsLink, 30);
 			PDPmoreDetailsLink.click();
-			System.out.println("View Plan Details Link is clicked for PDP plan"+planName);
+			System.out.println("View Plan Details Link is clicked for PDP plan" + planName);
 
 		} else if (planType.equalsIgnoreCase("SNP")) {
 			WebElement SNPmoreDetailsLink = driver.findElement(By.xpath("//*[contains(text(), '" + planName
 					+ "')]/ancestor::h3/ancestor::*[contains(@class,'module-plan-overview')]//*[contains(text(),'View Plan')]"));
 			CommonUtility.waitForPageLoadNew(driver, SNPmoreDetailsLink, 30);
 			SNPmoreDetailsLink.click();
-			System.out.println("View Plan Details Link is clicked for MA plan"+planName);
+			System.out.println("View Plan Details Link is clicked for MA plan" + planName);
 		}
 		CommonUtility.checkPageIsReadyNew(driver);
-		if (driver.getCurrentUrl().contains("#/details")) {	
-			return new PlanDetailsPageMobile(driver,planType);
+		if (driver.getCurrentUrl().contains("#/details")) {
+			return new PlanDetailsPageMobile(driver, planType);
 		}
 		return null;
 	}

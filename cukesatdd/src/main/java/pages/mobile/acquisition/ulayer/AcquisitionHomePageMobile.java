@@ -1411,6 +1411,30 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 							// on page
 		return true;
 	}
+	
+	public GetStartedPageMobile clickDCERedesignLinkonMedEdPage() {
+		WebElement DCELink = driver.findElement(By
+				.xpath("//a[contains(@href,'drug-cost-estimator') and contains(@class,'contentRow__mededcontainer')]"));
+		validateNew(DCELink);
+		jsClickNew(DCELink);
+		if (validateNew(AddMyDrugsBtn))
+			return new GetStartedPageMobile(driver);
+		return null;
+	}
+
+	
+	public void navigateToMedEdPresDrugPage() {
+		waitforElement(lnkLearnAboutMedicare);
+		if (lnkLearnAboutMedicare.isDisplayed()) {
+			Actions actions = new Actions(driver);
+			actions.moveToElement(lnkLearnAboutMedicare);
+			actions.build().perform();
+			System.out.println("Hover over Learn about Medicare completed");
+		}
+		WebElement PresProvidersBenefitsLink = driver.findElement(
+				By.xpath("//*[contains(@class, 'nav-col nav-col-3')]//a[contains(@href,'medicare-benefits')]"));
+		jsClickNew(PresProvidersBenefitsLink);
+	}
 
 	public VPPPlanSummaryPageMobile ZipcodeSearch(String zipcode) {
 		try {
