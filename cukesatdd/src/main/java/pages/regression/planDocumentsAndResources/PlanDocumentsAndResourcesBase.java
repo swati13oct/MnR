@@ -1151,7 +1151,7 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 				}
 			} else {
 				//note: for html or any url that's not pdf related
-				if (planDocValidate(generalPgHeader)) {
+				if (planDocValidate(generalPgHeader) || planDocValidate(generalPgHeader_providerSearch)) {
 					if (targetDocName.equals("PREVIOUS ISSUE")) { //note: for PREVIOUS ISSUE, do additional check for now until problem is fixed
 						//note: header text is //h3 not h1 like others
 						if (planDocValidate(prevIssPgHeader)) {

@@ -39,8 +39,8 @@ Given the user is on AARP medicare acquisition site landing page
       
        Examples: 
       | zipcode | isMultutiCounty |AARPUrl							| county             | plantype | DOB      | Firstname | Lastname|  ApplicationID | applicationType | username | password |AARPUrl-stg|
-      |   90210 | NO              |aarpsupplementalhealth.com/ole/ms.olelaunch.html |Los Angeles County | MS       | 11/13/1950 | John      | Carry   |    ABCD        | Resume          |mnrqavd2@gmail.com | Password@1|https://aarpsupplementalhealth-stg.uhc.com/content/aarpsupplementalhealth/ole/ms.olelaunch.html|
-	#		|   90210 | NO              |https://aarpsupplementalhealth-stg.uhc.com/ole/ms.olelaunch.html|Los Angeles County | MS       | 11/13/1950 | John      | Carry   |    ABCD        | Resume          |mnrqavd2@gmail.com | Password@1|https://aarpsupplementalhealth-stg.uhc.com/ole/ms.olelaunch.html|     
+      |   90210 | NO              |aarpsupplementalhealth.com/ole/ms.olelaunch.html |Los Angeles County | MS       | 11/13/1950 | John      | Carry   |    ABCD        | Resume          |mnrqavd3 | Password@1|https://aarpsupplementalhealth-stg.uhc.com/content/aarpsupplementalhealth/ole/ms.olelaunch.html|
+	#		|   90210 | NO              |https://aarpsupplementalhealth-stg.uhc.com/ole/ms.olelaunch.html|Los Angeles County | MS       | 11/13/1950 | John      | Carry   |    ABCD        | Resume          |mnrqavd3 | Password@1|https://aarpsupplementalhealth-stg.uhc.com/ole/ms.olelaunch.html|     
   
 @UHC_Retrive_App_AARP @oleMedSupUlayer
 Scenario Outline: MedSup Retrieve Application with Application ID

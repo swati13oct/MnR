@@ -144,6 +144,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	public WebElement getStarted;
 
 	@FindBy(xpath = ".//*[contains(@class, 'meded-article-content__section')]//*[contains(text(), 'Request an Appointment')]")
+	//@FindBy(xpath = "//a[contains(text(),'Find an Agent')]")
 	private WebElement requestAgentApptDropdown;
 
 	@FindBy(xpath = "//*[@class='textalign']//p[2]/a")
@@ -287,7 +288,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	private WebElement callsam;
 
 	// @FindBy(xpath = "//*[@id='sam-call-button']/div/span[1]")
-	@FindBy(xpath = "//*[contains(@id,'sam-call-button')]//*[contains(@class,'sam__button__text')]")
+//	@FindBy(xpath = "//*[contains(@id,'sam-call-button')]//*[contains(@class,'sam__button__text')]")
+	@FindBy(xpath = "//*[contains(@id,'sam-call-button')]/span")
 	private WebElement callsamtooltip;
 
 	@FindBy(xpath = "//*[@id='sam-call-modal']/div/div")
@@ -1115,7 +1117,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		// }
 		CommonUtility.checkPageIsReadyNew(driver);
 //		while(validate(overlayFilm, 10)) {/**wait*/}
-		CommonUtility.waitForElementToDisappear(driver, overlayFilm, 25);
+//		CommonUtility.waitForElementToDisappear(driver, overlayFilm, 75);
+		waitForPageLoadSafari();
 			
 		CommonUtility.waitForPageLoadNew(driver, zipcodeChangeLink, 30);
 		if (driver.getCurrentUrl().contains("health-plans")) {
@@ -1206,9 +1209,13 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	public PharmacySearchPage navigateToPharmacyLocator() {
 		// checkModelPopup(driver);
 		Actions action = new Actions(driver);
+		scrollToView(ourPlansHoverLink);
 		action.moveToElement(navigationSectionHomeLink).moveToElement(ourPlansHoverLink).build().perform();
 		pharmacylocator.click();
 		CommonUtility.checkPageIsReadyNew(driver);
+		
+		checkIfPageReadySafari();
+		
 		if (driver.getTitle().toLowerCase()
 				.contains((PageTitleConstants.BLAYER_LOCATE_A_PHARMACY_UNITEDHEALTHCARE).toLowerCase())) {
 			return new PharmacySearchPage(driver);
@@ -1624,6 +1631,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	}
 
 	public void selectState(String state) {
+		scrollToView(stateDropDown);
 		selectFromDropDownByValue(stateDropDown, state);
 	}
 
@@ -1698,7 +1706,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		System.out.println(toolTipText);
 		System.out.println("====================================================================");
 
-		if (CallSam.contains(toolTipText)) {
+		if (toolTipText.contains(CallSam)) {
 			System.out.println("Call sticky action menu roll out and contain the text Call a Licensed Insurance Agent");
 			// return new AcquisitionHomePage(driver);
 		} else
@@ -2498,22 +2506,26 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		}
 	}
 
-	public boolean validateChat() throws InterruptedException {
-		boolean present = false;
+	//Validate 
+	public boolean validateChatNonHours() throws InterruptedException {
+		boolean present = true;
 		try {
 			// validateNew(chatsam);
-			present = validateNew(samdiv);
-			if (present) {
-				List<WebElement> list = driver.findElements(By.xpath("//div[@class='sam']/button"));
-				String chatbtnid = "sam-button--chat";
-				for (WebElement element : list) {
-					if (element.getAttribute("id").equalsIgnoreCase(chatbtnid)) {
+			//present = validateNew(samdiv);
+			//if (present) {
+				//List<WebElement> list = driver.findElements(By.xpath("//div[@id='sam']/button"));
+				List<WebElement> list = driver.findElements(By.xpath("//button[contains(@id,'sam-button--chat')]"));
+				//String chatbtnid = "sam-button--chat";
+				//for (WebElement element : list) {
+					if (list.size() > 0)
+						//	("id").equalsIgnoreCase(chatbtnid)) 
+						{
 						present = false;
-						break;
+						//break;
 					}
 
-				}
-			}
+				
+			//}
 
 		} catch (NoSuchElementException e) {
 			e.printStackTrace();

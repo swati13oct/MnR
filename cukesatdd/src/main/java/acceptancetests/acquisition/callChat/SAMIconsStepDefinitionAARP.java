@@ -90,7 +90,7 @@ public class SAMIconsStepDefinitionAARP {
 	boolean flag= false;
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-	flag=aquisitionhomepage.validateChat();
+	flag=aquisitionhomepage.validateChatNonHours();
 
 		Assert.assertTrue("Chat Icon is visible in Non-Chat Hours",flag);
 		

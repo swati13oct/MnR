@@ -526,8 +526,8 @@ public class DrugCostEstimatorPage extends UhcDriver {
 
 		Thread.sleep(5000);
 		CommonUtility.checkPageIsReady(driver);
-		checkModelPopup(driver,1);
 		CommonUtility.waitForPageLoad(driver, step2Pharmacy, 20);
+		checkModelPopup(driver,1);
 		step2Pharmacy.click();
 
 		CommonUtility.waitForPageLoad(driver, pharmacy_form, 20);

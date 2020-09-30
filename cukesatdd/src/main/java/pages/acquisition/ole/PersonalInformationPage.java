@@ -301,7 +301,8 @@ public class PersonalInformationPage extends UhcDriver{
 	public MedicareInformationPage navigate_to_medicare_info_page() {
 		
 		validateNew(NextBtn);
-		NextBtn.click();
+//		NextBtn.click();
+		jsClickNew(NextBtn);
 		CommonUtility.checkPageIsReadyNew(driver);
 		if(validateNew(driver.findElement(By.xpath("//h1[contains(text(),'Medicare')]")))){			
 			System.out.println("OLE Medicare Information Page is Displayed");

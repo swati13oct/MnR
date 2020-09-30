@@ -92,7 +92,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//div[contains(@class,'module-tabs-tabs')]/div[not (contains(@class,'active'))]//span[@id='pdpviewplans']/following-sibling::a")
 	private WebElement pdpPlansViewLink;
 
-	@FindBy(xpath = "//div[contains(@class,'overview-main')]/h2")
+	@FindBy(xpath = "//div[contains(@class,'overview-main')]//h2")
 	private WebElement vppTop;
 
 	@FindBy(xpath = "//div[@class='maplans_planbutton']/div[2]/div[2]/div[2]")
@@ -1460,7 +1460,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			validateNew(enrollForPlan);
 			enrollForPlan.click();
 		}
+		checkIfPageReadySafari();
 		CommonUtility.waitForPageLoadNew(driver, NextBtn, 30);
+		validate(NextBtn, 20);
 		if(driver.getCurrentUrl().contains("welcome")){
 			System.out.println("OLE Welcome Page is Displayed");
 			return new WelcomePage(driver);
@@ -1584,6 +1586,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		if(plantype.equals("MA")||plantype.equals("MAPD") || plantype.equalsIgnoreCase("SNP")){
 			WebElement dceLink = driver.findElement
 					(By.xpath("//a[contains(text(),'"+planName+"')]/ancestor::div[contains(@class, 'module-plan-overview module swiper-slide plan-card')]//descendant::a[contains(@class,'add-drug')]"));
+			CommonUtility.checkPageIsReadyNew(driver);
 			if(validate(dceLink))
 				dceLink.click();
 
@@ -1593,6 +1596,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			dceLink.click();
 		}
 		CommonUtility.checkPageIsReadyNew(driver);
+		validate(AddMyDrugsBtn, 20);
 		if (validateNew(AddMyDrugsBtn))
 			return new GetStartedPage(driver);
 		return null;
@@ -2068,7 +2072,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 }*/
 
 	public void validateMarketingBullets(String planType , String planName){
-
+		checkIfPageReadySafari();
 		if(!planType.equals("PDP")){
 			WebElement marketingBullets = driver.findElement(By.xpath("//*[contains(text(),\'" + planName + "\')]/ancestor::div[contains(@class, 'module-plan-overview')]//ul[contains(@class ,'highlight-list')]"));
 			validateNew(marketingBullets);
@@ -3097,7 +3101,8 @@ for (int i = 0; i < initialCount + 1; i++) {
 			if(planYear.equalsIgnoreCase("current")) {				// if the scenario is for current year
 				if(validate(CurrentYearPlansBtn, 20)) {
 					System.out.println("*****CLICKING ON Current Year button*****: "+CurrentYearPlansBtn.getText());
-					jsClickNew(CurrentYearPlansBtn);	
+					jsClickNew(CurrentYearPlansBtn);
+					CommonUtility.checkPageIsReadyNew(driver);
 				}
 			}
 	}
