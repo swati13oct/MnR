@@ -2,7 +2,7 @@ Feature: Refill - Change Payment Method
   Ability for a member to change their payment method while in a refill flow. 
 
   @RefillChangePaymentMethod @F482463 @US2929696 @US2929697 @US2929698 @US2929699 @US2944205 @US2777905 @US2777900 @US2777899 @US2777898 @US2777897
-  Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> - To verify the ability to add, edit, change, make preferred payment, so user can ensure that the medication is charged to the correct card. 
+  Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> - To verify the ability to add, edit, change, make preferred payment, so user can ensure that the medication is charged to the correct card.
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
@@ -218,7 +218,6 @@ Feature: Refill - Change Payment Method
     And user will not be able to view the add an additional address line link on Edit Payment Page
     When user select Save and continue on Edit Payment Page
     Then user will view Change Payment in a full page modal
-
     #And user will view a success message for credit card updated
     #Success! You've updated a credit card.
     Examples: 

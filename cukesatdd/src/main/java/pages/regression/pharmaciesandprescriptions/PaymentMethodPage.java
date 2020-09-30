@@ -264,11 +264,15 @@ public class PaymentMethodPage extends PaymentMethodWelement {
 	}
 
 	public void selectAnotherCard() {
-		WebElement radioButton = driver.findElement(By.xpath("//input[@value='1' and @type='radio']"));
-		radioButton.click();
-		WebElement select = (WebElement) new WebDriverWait(driver, 30).until(ExpectedConditions.elementToBeClickable(By
-				.xpath("/html/body/div[3]/div[1]/main/div[2]/div[1]/div[1]/div[2]/div[2]/div[2]/fieldset/div/label[2]/span[1]/span/span/input")));
-		select.click();
+		try {
+			WebElement radioButton = driver.findElement(By.xpath("//input[@value='1' and @type='radio']"));
+			radioButton.click();
+		} catch (Exception e) {
+			WebElement select = (WebElement) new WebDriverWait(driver, 30)
+					.until(ExpectedConditions.elementToBeClickable(By.xpath(
+							"/html/body/div[3]/div[1]/main/div[2]/div[1]/div[1]/div[2]/div[2]/div[2]/fieldset/div/label[2]/span[1]/span/span/input")));
+			select.click();
+		}
 	}
 
 	public boolean validateMakePrefferedCheckboxDisplayed() {

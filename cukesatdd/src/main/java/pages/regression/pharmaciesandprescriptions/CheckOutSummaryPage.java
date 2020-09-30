@@ -479,4 +479,58 @@ public class CheckOutSummaryPage extends CheckOutSummaryWebElements {
 		}
 	}
 
+	public boolean validateAutoRefillField() {
+		return medicationEligibleForAutoRefillEnrollment.size() > 0;
+	}
+
+	public boolean validateAutoRefillOffUnCheckedBox() {
+		System.out.println("Auto Refill OFF Count :: " + autoRefillOffLabel.size());
+		return autoRefillOffLabel.size() > 0;
+	}
+
+	public boolean validateAutoRefillOnCheckedBox() {
+		System.out.println("Auto Refill ON Count :: " + autoRefillOnLabel.size());
+		return autoRefillOnLabel.size() > 0;
+	}
+	
+	public boolean validateAutoRefillOffCheckedBox() {
+		System.out.println("Auto Refill Off Count :: " + autoRefillOffLabel.size());
+		return autoRefillOffLabel.size() > 0;
+	}
+
+	public void deselectAutorefillCheckbox() {
+		if (validateAutoRefillOnCheckedBox()) {
+			autoRefillOnLabel.get(0).click();
+			System.out.println("Auto Refill On checkbox is deselected");
+		}
+	}
+	
+	public void selectAutorefillCheckbox() {
+		if (validateAutoRefillOnCheckedBox()) {
+			autoRefillOffLabel.get(0).click();
+			System.out.println("Auto Refill OFF checkbox is selected");
+		}
+	}
+
+	public boolean validateAutoRefillDisenrollmentPage() {
+		return validate(autoRefillDisenrollmentPage, 30);
+	}
+		
+	public boolean validateAutoRefillEnrollmentPage() {
+		return validate(autoRefillEnrollmentPage, 30);
+	}
+
+	public void ContinueOrCancelAutorefillOn() {
+		cancelAutoRefillPage.click();
+	}
+	
+	public void enrollAutorefillCheckbox() {
+		changeAutoRefillEnrollment.click();
+	}
+	
+	public void stopAutorefillCheckbox() {
+		changeAutoRefillEnrollment.click();
+	}
+	
+	
 }

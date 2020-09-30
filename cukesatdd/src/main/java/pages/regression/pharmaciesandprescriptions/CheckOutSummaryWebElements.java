@@ -212,15 +212,18 @@ public class CheckOutSummaryWebElements extends UhcDriver {
 	/************************* Auto Refill Selection ************************/
 	// Auto refill off/On checkbox --> ON/OFF
 	@FindBy(xpath = "//*[@data-testid='rx__autoEnroll']//input[@type='checkbox']")
-	protected WebElement autoRefillCheckbox;
+	protected List<WebElement> autoRefillCheckbox;
 
+	@FindBy(xpath = "//*[@data-testid='rx__autoEnroll']//input[@type='checkbox' and @data-indeterminate='false' ]")
+	protected List<WebElement> autoRefillOFFCheckbox;
+	
 	// Auto refill off label
 	@FindBy(xpath = "//*[@data-testid='rx__autoEnroll__cta']//span[text()='Auto Refill Off']")
-	protected WebElement autoRefillOffLabel;
+	protected List<WebElement> autoRefillOffLabel;
 
 	// Auto refill On label
 	@FindBy(xpath = "//*[@data-testid='rx__autoEnroll__cta']//span[text()='Auto Refill On']")
-	protected WebElement autoRefillOnLabel;
+	protected List<WebElement> autoRefillOnLabel;
 
 	// Auto refill Enrollment Confirmation:
 	@FindBy(xpath = "//*[@data-testid='header__title']//h1[text()='Would you like to enroll in Auto Refill?']")
@@ -234,7 +237,7 @@ public class CheckOutSummaryWebElements extends UhcDriver {
 	@FindBy(xpath = "//*[@data-testid='header__icon__left']//button[@type='button']")
 	protected WebElement closeAutoRefillPage;
 
-	// Auto Refill Confirmation Cancel button
+	// Auto Refill Confirmation Cancel/Continue button
 	@FindBy(xpath = "//*[@data-testid='rx__enrollment_cancel__button']")
 	protected WebElement cancelAutoRefillPage;
 
@@ -244,5 +247,5 @@ public class CheckOutSummaryWebElements extends UhcDriver {
 
 	// Medication eligible for Auto Refill
 	@FindBy(xpath = "//*[@data-testid='rx__refillsLeft']/following-sibling::div//span[@data-testid='rx__autoEnroll']")
-	protected WebElement medicationEligibleForAutoRefillEnrollment;
+	protected List<WebElement> medicationEligibleForAutoRefillEnrollment;
 }
