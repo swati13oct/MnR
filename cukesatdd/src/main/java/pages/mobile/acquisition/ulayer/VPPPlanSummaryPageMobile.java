@@ -4416,7 +4416,8 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 			compareLinks.get(1).click();	
 		}else{
 			WebElement compareLinks2 = driver.findElement(By.xpath("(.//*[@id='plan-list-3']//button[contains(text(),'Compare plans')])[1]"));	
-			compareLinks2.click();	
+			//compareLinks2.click();	
+			jsClickMobile(compareLinks2);
 		}
 
 		try {
@@ -4429,7 +4430,6 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 		if(currentUrl().contains("/health-plans.html#/plan-compare"))
 			return new ComparePlansPageMobile(driver);
 		return null;
-
 	}
 
 	public DrugCostEstimatorPageMobile navigateToDCE(String plantype) {
@@ -4461,16 +4461,19 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 			WebElement dceLink = driver.findElement
 					(By.xpath("//*[contains(text(),'"+planName+"')]/ancestor::div[contains(@class, 'module-plan-overview module swiper-slide plan-card')]//descendant::a[contains(@class,'add-drug')]"));
 			if(validate(dceLink))
-				dceLink.click();
+				jsClickMobile(dceLink);
+				//dceLink.click();
 
 		}else{
 			WebElement dceLink = driver.findElement
 					(By.xpath("//*[contains(text(),'"+planName+"')]/ancestor::div[contains(@class, 'module-plan-overview module swiper-slide pdpPlans ng-scope')]//descendant::a[contains(@id,'pdpDrugCostEstimatorLink')]"));
-			dceLink.click();
+			jsClickMobile(dceLink);
+			//dceLink.click();
 		}	
 		if (validateNew(AddMyDrugsBtn))
 			return new GetStartedPageMobile(driver);
 		return null;
+
 
 	}
 
