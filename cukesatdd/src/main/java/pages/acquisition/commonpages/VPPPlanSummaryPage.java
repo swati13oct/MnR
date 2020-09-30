@@ -1586,6 +1586,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		if(plantype.equals("MA")||plantype.equals("MAPD") || plantype.equalsIgnoreCase("SNP")){
 			WebElement dceLink = driver.findElement
 					(By.xpath("//a[contains(text(),'"+planName+"')]/ancestor::div[contains(@class, 'module-plan-overview module swiper-slide plan-card')]//descendant::a[contains(@class,'add-drug')]"));
+			CommonUtility.checkPageIsReadyNew(driver);
 			if(validate(dceLink))
 				dceLink.click();
 
@@ -3100,7 +3101,8 @@ for (int i = 0; i < initialCount + 1; i++) {
 			if(planYear.equalsIgnoreCase("current")) {				// if the scenario is for current year
 				if(validate(CurrentYearPlansBtn, 20)) {
 					System.out.println("*****CLICKING ON Current Year button*****: "+CurrentYearPlansBtn.getText());
-					jsClickNew(CurrentYearPlansBtn);	
+					jsClickNew(CurrentYearPlansBtn);
+					CommonUtility.checkPageIsReadyNew(driver);
 				}
 			}
 	}
