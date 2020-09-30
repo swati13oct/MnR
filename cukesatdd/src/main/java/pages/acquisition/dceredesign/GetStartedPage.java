@@ -54,10 +54,6 @@ public class GetStartedPage extends UhcDriver {
 
 	@Override
 	public void openAndValidate() {
-		if (MRScenario.environment.equals("offline") || MRScenario.environment.equals("prod"))
-			checkModelPopup(driver,45);
-		else 
-			checkModelPopup(driver,10);
 		validateNew(getStartedTab);
 	}
 

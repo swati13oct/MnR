@@ -1559,6 +1559,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			validateNew(getStarted);
 			getStarted.click();
 			CommonUtility.checkPageIsReadyNew(driver);
+			checkModelPopup(driver, 30);
 			if (validateNew(AddMyDrugsBtn))
 				return new GetStartedPage(driver);
 			return null;
