@@ -17,7 +17,6 @@ Feature: Transfer - Remove prescription
     And a message confirming my medication was removed
     And a message indicating there are no prescriptions
     When user returns to the My Medications page
-    Then user will see the Transfer to Home Delivery button for eligible medication
 
     Examples:
       | FID     | planType | memberType             |

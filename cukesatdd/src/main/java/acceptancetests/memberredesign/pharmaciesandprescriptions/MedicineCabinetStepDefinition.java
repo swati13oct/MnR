@@ -341,8 +341,15 @@ public class MedicineCabinetStepDefinition {
 	@When("^user views a status of Processing$")
 	public void user_views_a_status_of_Processing() throws Throwable {
 
+
 		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
+		List<Integer> indexOfProcessing = pnpPg.getListOfIndexForProcessingOnMyMed();
+		while (indexOfProcessing.size() == 0) {
+			pnpPg.clickOnNextPageArrow();
+			indexOfProcessing = pnpPg.getListOfIndexForRequestPlacedOnMyMed();
+		}
+		System.out.println("Validating processing element");
 		pnpPg.validateProcessing();
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
 
@@ -353,7 +360,7 @@ public class MedicineCabinetStepDefinition {
 
 		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
-		pnpPg.validateOneFourthHarveyBall();
+		pnpPg.validateHalfHarveyBall();
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
 
 	}

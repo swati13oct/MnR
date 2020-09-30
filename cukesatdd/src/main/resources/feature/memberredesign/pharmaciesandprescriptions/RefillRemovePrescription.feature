@@ -47,7 +47,6 @@ Feature: Refill - Remove prescription
     And a message confirming my medication was removed
     And a message indicating there are no prescriptions
     When user returns to the My Medications page
-    Then user will be brought to the "Complete Your Refill" page for that medication
 
     Examples:
       | FID     | planType | memberType             |
