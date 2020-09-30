@@ -4218,6 +4218,7 @@ public class AccountHomePage extends UhcDriver {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
 	}
+	  CommonUtility.waitForPageLoad(driver, MakeAPaymentButton, 15);
 	  if (MakeAPaymentButton.isDisplayed())
 		{
 		System.out.println("Make a payment button was displayed on Payments page");
