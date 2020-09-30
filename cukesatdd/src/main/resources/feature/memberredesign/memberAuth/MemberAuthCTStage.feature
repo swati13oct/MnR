@@ -9,6 +9,7 @@ Feature: S1.1 To test Member Auth Sign for SSO Micro App.
     And Member Enters the Username he wants to search
       | MemUsername | <member> |
     And user clicks on member to select
+    And I click on logout and validate the login page
 
     Examples: 
       | username  | password  | member                               | Scenario                                                        |
@@ -32,6 +33,7 @@ Feature: S1.1 To test Member Auth Sign for SSO Micro App.
       | Day       | <day>      |
       | Year      | <year>     |
     And user clicks on member to select
+    And I click on logout and validate the login page
 
     Examples: 
       | username  | password  | memberid    | month | day | year | Scenario                                                             |

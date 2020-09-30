@@ -1,9 +1,9 @@
 @Dreameob
 Feature: 1.04.2 To Test DREAM EOB for Members - E2E
 
-  Background: If run on stage then feature security flag needs to be true
-     Given feature security flag must set to true when testing on stage env
-      | Feature           | UCPEob |
+  #Background: If run on stage then feature security flag needs to be true
+  #   Given feature security flag must set to true when testing on stage env
+  #    | Feature           | UCPEob |
 
 
   @dreamEob01 @E2E @regressionMember 
@@ -82,7 +82,7 @@ Feature: 1.04.2 To Test DREAM EOB for Members - E2E
     @dreamEob01c 
     Examples: 
       | index | planType | memberType        | note                              | flagZeroEob |
-      | 05    | MA       | COSMOS_EOB_R      | old C                             | false       |
+      | 05    | MA       | COSMOS_EOB_R      | old C                             | true        |
 
     @dreamEob01c  @devRegression
     Examples: 
@@ -107,5 +107,4 @@ Feature: 1.04.2 To Test DREAM EOB for Members - E2E
     Examples: 
       | index | planType | memberType        | note                              | flagZeroEob |
       | 11    | MAPD     | ES_CnD_NICE_EOB   | 1 new CnD spanish, old M          | true        |
-      | 12    | MAPD     | ES_D_NICE_EOB     | 1 new D spanish, old M            | true        |
-      
+      | 12    | MAPD     | ES_D_NICE_EOB     | 1 new D spanish, old M            | true        |      

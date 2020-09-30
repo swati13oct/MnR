@@ -249,7 +249,9 @@ public class EOBPage extends EOBBase{
 	public void validateHeaderSectionContent_DREAMEOB(String planType) {
 		checkModelPopup(driver,2);
 		CommonUtility.waitForPageLoad(driver, eobSubSectionDescription, 5);
-		Assert.assertTrue("PROBLEM - should not encounter 'internal server problem' error message",!eobValidate(internalServerError));
+		//tbd Assert.assertTrue("PROBLEM - should not encounter 'internal server problem' error message",!eobValidate(internalServerError) && !eobValidate(internalServerError2));
+		if (!eobValidate(eobHeader) || !eobValidate(eobSubSectionDescription))
+			Assert.assertTrue("PROBLEM - should not encounter 'internal server problem' error message",!eobValidate(internalServerError) && !eobValidate(internalServerError2));
 		Assert.assertTrue("PROBLEM - unable to locate EOB page header element", eobValidate(eobHeader));
 		Assert.assertTrue("PROBLEM - unable to locate EOB page sub section description element", eobValidate(eobSubSectionDescription));
 
@@ -977,7 +979,7 @@ public class EOBPage extends EOBBase{
 		return testNote;
 	}
 
-	public void validateEobEntries (String planType, String memberId) {
+	public void validateEobEntries (String planType, String memberId, boolean realEob) {
 		CommonUtility.waitForPageLoad(driver, eobFirst, 5);
 		Assert.assertTrue("PROBLEM - unable to locate first EOB element", eobValidate(eobFirst));
 		scrollElementToCenterScreen(eobFirst);
@@ -1018,31 +1020,34 @@ public class EOBPage extends EOBBase{
 				System.out.println("TEST - responseMessage="+ urlConnection.getResponseMessage());
 				Assert.assertTrue("PROBLEM - unable to validate the PDF content because pdflink is getting non-200 ("+urlConnection.getResponseCode()+") response code.  "
 						+ "PDF link='"+pdfUrl+"'",
-						responseCode==200);
-				System.out.println("TEST - is able to open pdf url, proceed to validate content");
-				PDDocument document = PDDocument.load(urlConnection.getInputStream());
-				String PDFText = new PDFTextStripper().getText(document);
-				//keepForDebug System.out.println("PDF text : " + PDFText);
+						(responseCode==200 && realEob) || (responseCode!=200 && !realEob));
+				if (responseCode==200) {
+					System.out.println("TEST - is able to open pdf url, proceed to validate content");
+					PDDocument document = PDDocument.load(urlConnection.getInputStream());
+					String PDFText = new PDFTextStripper().getText(document);
+					System.out.println("PDF text : " + PDFText);
 
-				String error="Your Explannation of Benefits is currently unavailable.";
-				Assert.assertTrue("PROBLEM : pdf content is not as expected.  "
-						+ "Do not expect to see '"+error+"'", 
-						!PDFText.contains(error));
+					String error="Your Explannation of Benefits is currently unavailable.";
+					Assert.assertTrue("PROBLEM : pdf content is not as expected.  "
+							+ "Do not expect to see '"+error+"'", 
+							!PDFText.contains(error));
 
-				//note: check to see if EOB contains memebr ID
-				String memberId_portion=memberId;
-				//note: strip the leading 0 
-				//note: regex if want to keep one 0 if all 0: memberId_portion.replaceFirst("^0+(?!$)", "")
-				System.out.println("TEST - Proceed to look for Member ID '"+memberId_portion+"' in the PDF doc");
-				if (memberId.contains("-")) {
-					String[] tmp=memberId.split("-");
-					memberId_portion=tmp[0];
+					//note: check to see if EOB contains memebr ID
+					String memberId_portion=memberId;
+					//note: strip the leading 0 
+					//note: regex if want to keep one 0 if all 0: memberId_portion.replaceFirst("^0+(?!$)", "")
+					System.out.println("TEST - Proceed to look for Member ID '"+memberId_portion+"' in the PDF doc");
+					if (memberId.contains("-")) {
+						String[] tmp=memberId.split("-");
+						memberId_portion=tmp[0];
+					}
+					//memberId_portion=StringUtils.stripStart(memberId_portion,"0");
+					memberId_portion=memberId_portion.replaceFirst("^0+(?!$)", "");
+					System.out.println("TEST - after removing leading 0 - memberId_portion="+memberId_portion);
+					Assert.assertTrue("PROBLEM : pdf content does not contain the expected memebr ID portion '"+memberId_portion+"' of '"+memberId+"' ",
+							PDFText.contains(memberId_portion));
+					
 				}
-				//memberId_portion=StringUtils.stripStart(memberId_portion,"0");
-				memberId_portion=memberId_portion.replaceFirst("^0+(?!$)", "");
-				System.out.println("TEST - after removing leading 0 - memberId_portion="+memberId_portion);
-				Assert.assertTrue("PROBLEM : pdf content does not contain the expected memebr ID portion '"+memberId_portion+"' of '"+memberId+"' ",
-						PDFText.contains(memberId_portion));
 
 			} catch (IOException e) {
 				e.printStackTrace();

@@ -2575,7 +2575,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		action.moveToElement(DCELink).build().perform();
 		DCELink.click();
 		CommonUtility.checkPageIsReadyNew(driver);
-		if (driver.getCurrentUrl().contains("drug-cost-estimator")) {
+		if (driver.getCurrentUrl().contains("estimate-drug-costs")) {
 			System.out.println("DCE Page is loaded");
 			return new DrugCostEstimatorPage(driver);
 		} else
@@ -3968,15 +3968,38 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	
 	
 	public void handlePlanYearSelectionPopup(String planYear) {
-		CommonUtility.checkPageIsReadyNew(driver);																// if the plan year popup is not displayed
+	CommonUtility.checkPageIsReadyNew(driver);																// if the plan year popup is not displayed
 			if(planYear.equalsIgnoreCase("current")) {				// if the scenario is for current year
 				if(validate(CurrentYearPlansBtn, 20)) {
 					System.out.println("*****CLICKING ON Current Year button*****: "+CurrentYearPlansBtn.getText());
 					jsClickNew(CurrentYearPlansBtn);	
 				}
 			}
-		
+		/*CommonUtility.checkPageIsReadyNew(driver);			
+		if(planYear.contains("current") && validate(CurrentYearPlansBtn, 20)) {				// if the scenario is for current year
+			//if(validate(NextYearPlansBtn, 20)) {
+				System.out.println("*****CLICKING ON Current Year button*****: "+CurrentYearPlansBtn.getText());
+				jsClickNew(CurrentYearPlansBtn);	
+		}
+		else{
+			//if(validate(NextYearPlansBtn, 20)) {
+			System.out.println("*****CLICKING ON Current Year button*****: "+NextYearPlansBtn.getText());
+			jsClickNew(NextYearPlansBtn);	
+			}
+		*/
 	}
+	
+	public void handlePlanYearFutureSelectionPopup(String planYear) {
+
+		CommonUtility.checkPageIsReadyNew(driver);			
+			if(planYear.equalsIgnoreCase("future")) {				// if the scenario is for current year
+				if(validate(NextYearPlansBtn, 20)) {
+					System.out.println("*****CLICKING ON Next Year button*****: "+NextYearPlansBtn.getText());
+					jsClickNew(NextYearPlansBtn);	
+			}
+			}
+		
+}
 
 	@FindBy(xpath = "//div[contains(@class,'plan-list show active')]//div[contains(@class,'module-plan-overview')][1]//div[contains(@class,'swiper-content')]//div[not (contains(@class,'ng-hide'))]/a[contains(text(),'View plan') or contains(text(),'View Plan Details')]")
 	private WebElement firstPlanDetailsLink;

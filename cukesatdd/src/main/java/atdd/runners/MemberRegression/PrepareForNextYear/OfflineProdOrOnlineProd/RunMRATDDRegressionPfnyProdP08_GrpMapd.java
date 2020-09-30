@@ -14,7 +14,7 @@ jsonReport = "target/cucumber-RunMRATDDRegressionPfnyProdP08_GrpMapd.json",detai
 overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionPfnyProdP08_GrpMapd")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberredesign" }, 
 features = { "src/main/resources/feature/memberredesign/prepareForNextYear" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionPfnyProdP08_GrpMapd.json" }, tags = { "@prod_prepareForNextYear02d" })
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionPfnyProdP08_GrpMapd.json" }, tags = { "@prod_prepareForNextYear02_grp_mapd" })
 public class RunMRATDDRegressionPfnyProdP08_GrpMapd {
 
 }

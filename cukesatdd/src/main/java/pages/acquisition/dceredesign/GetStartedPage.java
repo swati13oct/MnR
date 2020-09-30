@@ -19,6 +19,7 @@ import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 import pages.acquisition.ulayer.PageTitleConstants;
 import pages.acquisition.commonpages.VPPPlanSummaryPage;
+import pages.acquisition.commonpages.VisitorProfilePage;
 
 public class GetStartedPage extends UhcDriver {
 
@@ -36,6 +37,12 @@ public class GetStartedPage extends UhcDriver {
 	
 	@FindBy(xpath = "//*[contains(@id,'get-started')]")
 	public WebElement getStartedTab;
+	
+	@FindBy(xpath = "//body/div[@id='overlay']")
+	private WebElement overlayFilm;
+	
+	@FindBy(id = "dupIconFlyOut")
+	private WebElement shoppingCartIcon;
 
 	public GetStartedPage(WebDriver driver) {
 		super(driver);
@@ -77,6 +84,11 @@ public class GetStartedPage extends UhcDriver {
 	public VPPPlanSummaryPage ClickReturnToBtnToVPPSummary() {
 		validateNew(LinktoExitScenario);
 		jsClickNew(LinktoExitScenario);
+		CommonUtility.checkPageIsReadyNew(driver);
+		
+//		while(validate(overlayFilm, 10)) {/**wait*/}
+		CommonUtility.waitForElementToDisappear(driver, overlayFilm, 75);
+		
 		if (driver.getCurrentUrl().contains("plan-summary")) {
 			return new VPPPlanSummaryPage(driver);	
 		}
@@ -89,7 +101,18 @@ public class GetStartedPage extends UhcDriver {
 		if (driver.getCurrentUrl().contains("plan-summary")) {
 			return new pages.acquisition.bluelayer.VPPPlanSummaryPage(driver);	
 		}
-		return null;	}
+		return null;	
+	}
+	
+	public VisitorProfilePage clickOnShoppingCart() {
+		shoppingCartIcon.click();
+		if (driver.getCurrentUrl().contains("profile")) {
+			return new VisitorProfilePage(driver);
+		} else {
+			System.out.println("Navigation to visitor profile is failed");
+			return null;
+		}
+	}
 		
 
 }

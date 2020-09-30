@@ -243,7 +243,9 @@ public class GlobalWebElements extends UhcDriver {
 	@FindBy(xpath="//*[@id='subnav_2']//*[contains(@href,'estimate')]")
 	public static WebElement headerDrugCostEstimatorLink;
 	
-
+	@FindBy(xpath="//*[@id='planTypesColumn']/h3[4]/a")
+	public static WebElement menuShop;
+	
 	@Override
 	public void openAndValidate() {
 		// TODO Auto-generated method stub

@@ -32,85 +32,86 @@ Feature: 1.06.6.2 Member Plans and Documents - section: Forms And Resources Part
 	  | Section Display                    | <fnr_sd>   | 
 	  | Authorization Forms and Information| <fnr_af>   | 
 
-#	@prod_preeffective_ma_4of7
-#	Examples: 
-#      | index  | TID         | username  | password  | MemUserName     | planType | memberType            | fnr_sd | fnr_af |
-#      | 01-096 | xxxxx       | ashah120  | Mnrqa003  | testusername    | MA       | AARP_IND_PREEFF_PDnR  | false  | false  | 
-#      | 02-097 | xxxxx       | ashah120  | Mnrqa003  | testusername    | MA       | GROUP_PREEFF_PDnR     | false  | false  |
+	@prod_preeffective_ma_4of7
+	Examples: 
+      | index  | TID         | username  | password  | MemUserName     | planType | memberType            | fnr_sd | fnr_af |
+      | 01-096 | xxxxx       | kkumard  | mnrs786@  | Ranch1955    | MA       | AARP_IND_PREEFF_PDnR  | false  | false  | 
+#      | 02-097 | xxxxx       | kkumard  | mnrs786@  | testusername    | MA       | GROUP_PREEFF_PDnR     | false  | false  |
 
 #	@prod_preeffective_mapd_4of7
 #	Examples: 
 #      | index  | TID         | username  | password  | MemUserName     | planType | memberType            | fnr_sd | fnr_af |
-#      | 03-098 | xxxxx       | ashah120  | Mnrqa003  | testusername    | MAPD     | AARP_IND_PREEFF_PDnR  | false  | false  |
+#      | 03-098 | xxxxx       | kkumard  | mnrs786@  | testusername    | MAPD     | AARP_IND_PREEFF_PDnR  | false  | false  |
 
 #	@prod_preeffective_pdp_4of7
 #	Examples: 
 #      | index  | TID         | username  | password  | MemUserName     | planType | memberType            | fnr_sd | fnr_af |
-#      | 04-099 | xxxxx       | ashah120  | Mnrqa003  | testusername    | PDP      | AARP_IND_PREEFF_PDnR  | false  | false  |
-#      | 05-100 | xxxxx       | ashah120  | Mnrqa003  | testusername    | PDP      | GROUP_PREEFF_PDnR     | false  | false  |
+#      | 04-099 | xxxxx       | kkumard  | mnrs786@  | testusername    | PDP      | AARP_IND_PREEFF_PDnR  | false  | false  |
+#      | 05-100 | xxxxx       | kkumard  | mnrs786@  | testusername    | PDP      | GROUP_PREEFF_PDnR     | false  | false  |
 
-#	@prod_terminated_ma_4of7
-#	Examples: 
-#      | index  | TID         | username  | password  | MemUserName     | planType | memberType            | fnr_sd | fnr_af |
-#      | 06-103 | xxxxx       | ashah120  | Mnrqa003  | testusername    | MA       | IND_TERM_PDnR         | true   | true   |
-#      | 07-102 | xxxxx       | ashah120  | Mnrqa003  | testusername    | MA       | GROUP_TERM_PDnR       | true   | true   |
+	@prod_terminated_ma_4of7
+	Examples: 
+      | index  | TID         | username  | password  | MemUserName     | planType | memberType            | fnr_sd | fnr_af |
+#      | 06-103 | xxxxx       | kkumard  | mnrs786@  | testusername    | MA       | IND_TERM_PDnR         | true   | true   |
+      | 07-102 | xxxxx       | kkumard  | mnrs786@  | PJVANEKRIS65    | MA       | GROUP_TERM_PDnR       | true   | true   |
 
 #	@prod_terminated_mapd_4of7
 #	Examples: 
 #      | index  | TID         | username  | password  | MemUserName     | planType | memberType            | fnr_sd | fnr_af |
-#      | 07-101 | xxxxx       | ashah120  | Mnrqa003  | testusername    | MAPD     | IND_TERM_PDnR         | true   | true   |
+#      | 07-101 | xxxxx       | kkumard  | mnrs786@  | BEVERLY_BOB5    | MAPD     | IND_TERM_PDnR         | true   | true   |
 
 	@prod_active_ma_ind_4of7 @prod_active_ma_4of7
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | fnr_sd | fnr_af |
-      | 09-104 | 15129       | ashah120  | Mnrqa003  | ERNIE2450       | MA       | AARP_IND_EFF_PDnR     | true   | true   |
+      | 09-104 | 15129       | kkumard  | mnrs786@  | ERNIE2450       | MA       | AARP_IND_EFF_PDnR     | true   | true   |
 
 	@prod_active_ma_grp_4of7 @prod_active_ma_4of7
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | fnr_sd | fnr_af |
-      | 10-105 | 15130       | ashah120  | Mnrqa003  | 1GIRL4DEAN      | MA       | GROUP_EFF_PDnR        | true   | true   |
-#      | 10-105 | 15130       | ashah120  | Mnrqa003  | SPENCEPR1      | MA       | NICE_GROUP_EFF_PDnR        | true   | true   |
+      | 10-105 | 15130       | kkumard  | mnrs786@  | 1GIRL4DEAN      | MA       | GROUP_EFF_PDnR        | true   | true   |
+#      | 10-105 | 15130       | kkumard  | mnrs786@  | SPENCEPR1      | MA       | NICE_GROUP_EFF_PDnR        | true   | true   |
 
 	@prod_active_mapd_ind_4of7 @prod_active_mapd_4of7
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | fnr_sd | fnr_af |
-      | 11-106 | 15108       | ashah120  | Mnrqa003  | BILL.ROSNER123# | MAPD     | AARP_IND_EFF_PDnR     | true   | true   |
+      | 11-106 | 15108       | kkumard  | mnrs786@  | BILL.ROSNER123# | MAPD     | AARP_IND_EFF_PDnR     | true   | true   |
 
 	@prod_active_mapd_grp_4of7 @prod_active_mapd_4of7
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | fnr_sd | fnr_af |
-      | 12-107 | 15303       | ashah120  | Mnrqa003  | SHERMANJAFFE65 | MAPD | NICE_GROUP_EFF_PDnR  | true   | true   |	  
+      | 12-107 | 15303       | kkumard  | mnrs786@  | SHERMANJAFFE65 | MAPD | NICE_GROUP_EFF_PDnR  | true   | true   |	  
 #     ### note: PEEHIP group terminated as of 12/31/2019
-#     #| 13-108 | 15130       | ashah120  | Mnrqa003  | testusername    | MAPD     | PEEHIP_GROUP_EFF_PDnR | true   | true   |
+#     #| 13-108 | 15130       | kkumard  | mnrs786@  | testusername    | MAPD     | PEEHIP_GROUP_EFF_PDnR | true   | true   |
 
-#	@prod_active_pcp_4of7
-#	Examples: 
-#      | index  | TID         | username  | password  | MemUserName     | planType | memberType            | fnr_sd | fnr_af |
-#      | 14-109 | 15128       | ashah120  | Mnrqa003  | testusername    | PCP      | IND_EFF_PDnR          | true   | true   |
+	@prod_active_pcp_4of7
+	Examples: 
+      | index  | TID         | username  | password  | MemUserName     | planType | memberType            | fnr_sd | fnr_af |
+      | 14-109 | 15128       | kkumard  | mnrs786@  | BATLLOT@AOL.COM    | PCP      | IND_EFF_PDnR          | true   | true   |
 
-#	@prod_active_medica_4of7
-#	Examples: 
-#      | index  | TID         | username  | password  | MemUserName     | planType | memberType            | fnr_sd | fnr_af |
-#      | 15-110 | 15128       | ashah120  | Mnrqa003  | testusername    | MEDICA   | IND_EFF_PDnR          | true   | true   |
+	@prod_active_medica_4of7
+	Examples: 
+      | index  | TID         | username  | password  | MemUserName     | planType | memberType            | fnr_sd | fnr_af |
+      | 15-110 | 15128       | kkumard  | mnrs786@  | SUSICHAPMAN@GMAIL.COM    | MEDICA   | IND_EFF_PDnR          | true   | true   |
 
 	@prod_active_pdp_ind_4of7 @prod_active_pdp_4of7
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | fnr_sd | fnr_af |
-      | 16-111 | 15126,15127 | ashah120  | Mnrqa003  | nawal1215       | PDP      | AARP_IND_EFF_PDnR     | true   | true   |
+      | 16-111 | 15126,15127 | kkumard  | mnrs786@  | nawal1215       | PDP      | AARP_IND_EFF_PDnR     | true   | true   |
 
 	@prod_active_pdp_grp_4of7 @prod_active_pdp_4of7
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | fnr_sd | fnr_af |
-      | 17-112 | 15131,15233 | ashah120  | Mnrqa003  | DKELLY27        | PDP      | COMBO_GROUP_EFF_PDnR  | true   | true   |
+      | 17-112 | 15131,15233 | kkumard  | mnrs786@  | DKELLY27        | PDP      | COMBO_GROUP_EFF_PDnR  | true   | true   |
 
 	@prod_active_ssup_4of7
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | fnr_sd | fnr_af |
-      | 18-113 | 15131,15233 | ashah120  | Mnrqa003  | DKELLY27        | SSP      | COMBO_GROUP_EFF_PDnR  | true   | true   |
+      | 18-113 | 15131,15233 | kkumard  | mnrs786@  | DKELLY27        | SSP      | COMBO_GROUP_EFF_PDnR  | true   | true   |
 
-	@prod_active_ship_4of7
-	Examples: 
-      | index  | TID         | username  | password  | MemUserName     | planType | memberType            | fnr_sd | fnr_af |
-      | 19-114 | 15119,15304 | ashah120  | Mnrqa003  | Pramila1946     | SHIP     | IND_EFF_PDnR          | true   | false  |
-#     | 19-120 | 15119,15304 | ashah120  | Mnrqa003  | q1_feb_2020SHIP_001 | SHIP | MULTI_IND_EFF_PDnR    | true   | false  |
+    #note - covered by P1of7 already
+	#@prod_active_ship_4of7
+	#Examples: 
+    #  | index  | TID         | username  | password  | MemUserName     | planType | memberType            | fnr_sd | fnr_af |
+    #  | 19-114 | 15119,15304 | kkumard  | mnrs786@  | Pramila1946     | SHIP     | IND_EFF_PDnR          | true   | false  |
+#     | 19-120 | 15119,15304 | kkumard  | mnrs786@  | q1_feb_2020SHIP_001 | SHIP | MULTI_IND_EFF_PDnR    | true   | false  |
     

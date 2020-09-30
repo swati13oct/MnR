@@ -246,7 +246,7 @@ public class PharmacySearchWebElements extends UhcDriver {
 	@FindBy(xpath="//a[contains(@aria-label,'Next')]")
 	protected WebElement rightArrow;
 
-	@FindBy(xpath="//nav[@aria-label='Search results navigation']/../div[2]//span[@role='tooltip']")
+	@FindBy(xpath="//nav[@aria-label='Search results navigation']/../div[2]//span[@role='tooltip']//*[name()='svg']")
 	protected WebElement resultNavTooltip;
 
 	@FindBy(xpath="//a[@id='showHideMap']")

@@ -16,7 +16,7 @@ import org.testng.Assert;
 
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
-import pages.acquisition.bluelayer.AcquisitionHomePage;
+import pages.acquisition.commonpages.AcquisitionHomePage;
 
 public class PlanRecommendationEngineHeaderAndFooter extends UhcDriver {
 	
@@ -157,7 +157,7 @@ public class PlanRecommendationEngineHeaderAndFooter extends UhcDriver {
 	@FindBy(css = "#subnav_2 div[class$='content-2']>h3:nth-of-type(4)>a")
     private WebElement headerPrescriptionLink;
     
-    @FindBy(css = "#subnav_2 div[class='content content-2'] h3:nth-of-type(5)>a")
+    @FindBy(xpath = "//a[contains(text(),'Get a Plan Recommendation')]")
     private WebElement headerGetaPlanRecommendationLink;
     
     @FindBy(linkText = "Drug Cost Estimator")
@@ -200,8 +200,11 @@ public class PlanRecommendationEngineHeaderAndFooter extends UhcDriver {
 
 //'Get Help Choosing' is Inside Shop Menu
     
-    @FindBy(xpath = "//span[contains(text(),'Get Help Choosing')]")
-	private WebElement HeaderShopToolsGetHelpChoosingLink;
+    @FindBy(xpath = "//div[contains(@class,'aem-Grid')]/div[contains(@class,'aem-GridColumn')]//a[contains(text(),'Learn More')]")
+	private WebElement HeaderShopFromHomeInFindYourPlan;
+    
+    @FindBy(xpath = "//a[contains(text(),'Get Recommendations')]")
+	private WebElement HeaderGetRecommendationInShop;
 	
 //Footer Elements
 	
@@ -613,8 +616,10 @@ public class PlanRecommendationEngineHeaderAndFooter extends UhcDriver {
 //		actions.clickAndHold(headerNavigationBarShopForaPlanTab).build().perform();
 		desktopCommonUtils.MouseOver(headerNavigationBarShopForaPlanTab, Browsername);
 		headerShopLink.click();
-		validate(HeaderShopToolsGetHelpChoosingLink, 30);
-		HeaderShopToolsGetHelpChoosingLink.click();
+		validate(HeaderShopFromHomeInFindYourPlan, 30);
+		HeaderShopFromHomeInFindYourPlan.click();
+		validate(HeaderGetRecommendationInShop, 30);
+		HeaderGetRecommendationInShop.click();
 		validate(landingpageHeader, 30);
 		Assert.assertTrue(landingpageHeader.getText().contains("Plan"));
 	}

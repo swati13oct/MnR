@@ -20,6 +20,10 @@ public class GlobalWebElements  extends UhcDriver{
 		
 		
 	}
+	
+	@FindBy(xpath="//*[@id='planTypesColumn']/h3[4]/a")
+	public static WebElement menuShop;
+	
 
 	@FindBy(id = "gf_lnk_1")
 	public static WebElement footerHomeLink;

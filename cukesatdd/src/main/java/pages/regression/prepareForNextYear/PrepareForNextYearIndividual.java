@@ -14,23 +14,23 @@ import atdd.framework.MRScenario;
 
 public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 
-	protected static final String m1="09/15/";
-	protected static final String m2="10/01/";
-	protected static final String m3="10/15/";
-	protected static final String m4="12/07/";
+	private static final String m1="09/15/";
+	private static final String m2="10/01/";
+	private static final String m3="10/15/";
+	private static final String m4="12/07/";
 	
-	protected static String cookiePlnChgSection="reviewPlanChanges";
-	protected static String cookiePlnChgSection_findNew="findoutnew";
+	private static String cookiePlnChgSection="reviewPlanChanges";
+	private static String cookiePlnChgSection_findNew="findoutnew";
 
-	protected static String cookiePlnMatSection="reviewPlanMaterials";
-	protected static String cookiePlnMatSection_plnBft="planBenefits";
-	protected static String cookiePlnMatSection_predrg="priscriptionInfo";
-	protected static String cookiePlnMatSection_provInfo="providerInfo";
-	protected static String cookiePlnMatSection_pharInfo="pharmacyInfo";
+	private static String cookiePlnMatSection="reviewPlanMaterials";
+	private static String cookiePlnMatSection_plnBft="planBenefits";
+	private static String cookiePlnMatSection_predrg="priscriptionInfo";
+	private static String cookiePlnMatSection_provInfo="providerInfo";
+	private static String cookiePlnMatSection_pharInfo="pharmacyInfo";
 
-	protected static String cookieComPlnSection="comparePlansOnline";
+	private static String cookieComPlnSection="comparePlansOnline";
 
-	protected static String cookieEnrPlnSection="enrollInaPlan";
+	private static String cookieEnrPlnSection="enrollInaPlan";
 
 	public PrepareForNextYearIndividual(WebDriver driver) {
 		super(driver);
@@ -99,6 +99,14 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 			note.addAll(validateLanguageDropdown(section, ind_revPlnChgSec_docSec_langDropdown, ind_revPlnChgSec_lang_en, ind_revPlnChgSec_lang_es, ind_revPlnChgSec_lang_zh));
 
 			note.addAll(validateFindOutNewSection_ind(section, subSection, planType, memberType, docDisplayMap));
+			
+			
+			note.add("\n\tValidate after all subsection links turned green");
+			if (noWaitValidate(ind_revPlnChgSec_circle_green1)) 
+			 	targetElement=ind_revPlnChgSec_circle_green1;
+			else 
+			 	targetElement=ind_revPlnChgSec_circle_green2;
+			 note.addAll(validateHaveItem(targetItem, targetElement));		
 		} else {
 			if (validateAsMuchAsPossible) {
 				if (!noWaitValidate(targetElement))
@@ -115,55 +123,16 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 	}
 
 	public List<String> validateFindOutNewSection_ind(String section, String subSection, String planType, String memberType, HashMap<String, Boolean> docDisplayMap) {
+		boolean expPlnChgLangDropdown_en=docDisplayMap.get("expPlnChgLangDropdown_en");
+		boolean expPlnChgLangDropdown_es=docDisplayMap.get("expPlnChgLangDropdown_es");
+		boolean expPlnChgLangDropdown_zh=docDisplayMap.get("expPlnChgLangDropdown_zh");
+
 		List<String> note=new ArrayList<String> ();
 		String targetItem=section+" - checkmark";
 		WebElement targetElement=ind_revPlnChgSec_docSec_checkMark_noGreen;
 		note.addAll(validateHaveItem(targetItem, targetElement));
 
 		note.add("\t=================");
-
-		//TODO - delete this when they remove the link
-		//tbd targetItem=section+" - Compare Your Current Plan To Next Year's Plan link";
-		//tbd targetElement=ind_revPlnChgSec_docSec_cmpYurCurrPlnLnk;
-		//tbd note.addAll(validateHaveItem(targetItem, targetElement));
-
-		//tbd String expUrl="https://www.aarpmedicareplans.com/";
-		//tbd WebElement expElement=zipCodeField_acq;
-		//tbd note.addAll(validateLnkBehavior(planType, memberType, targetItem, targetElement, expUrl, expElement));
-
-		//tbd targetItem=section+" - Arrow after Compare Your Current Plan To Next Year's Plan link";
-		//tbd targetElement=ind_revPlnChgSec_docSec_cmpYurCurrPlnLnk_arrow;
-		//tbd note.addAll(validateHaveItem(targetItem, targetElement));
-
-		//tbd //note: after link click, little check should turn green
-		//tbd note.add("\n\tValidate after clicking 'Compare Your Current Plan To Next Year's Plan' link");
-		//tbd targetItem=section+" - green checkmark";
-		//tbd targetElement=ind_revPlnChgSec_docSec_checkMark_green;
-		//tbd note.addAll(validateHaveItem(targetItem, targetElement));
-
-
-		//tbd //note: after link click, section circle should turn green
-		//tbd targetItem=section+" - green circle";
-		//tbd if (noWaitValidate(ind_revPlnChgSec_circle_green1)) 
-		//tbd 	targetElement=ind_revPlnChgSec_circle_green1;
-		//tbd else 
-		//tbd 	targetElement=ind_revPlnChgSec_circle_green2;
-		//tbd note.addAll(validateHaveItem(targetItem, targetElement));
-
-		//tbd note.add("\n\tValidate after cookie remove for 'Compare Your Current Plan To Next Year Plan' section cookie");
-		//tbd deleteCookieAndReloadPgn(cookiePlnChgSection_findNew);
-		//tbd targetElement=ind_revPlnChgSec_docSec_checkMark_green;
-		//tbd note.addAll(validateDontHaveItem(targetItem, targetElement));
-
-		//tbd note.add("\n\tValidate after cookie remove for '"+section+"' section cookie");
-		//tbd deleteCookieAndReloadPgn(cookiePlnChgSection);
-		//tbd if (noWaitValidate(ind_revPlnChgSec_circle_green1)) 
-		//tbd 	targetElement=ind_revPlnChgSec_circle_green1;
-		//tbd else 
-		//tbd 	targetElement=ind_revPlnChgSec_circle_green2;
-		//tbd note.addAll(validateDontHaveItem(targetItem, targetElement));
-
-
 		String docName="Annual Notice of Changes";
 		//note: if there is spanish doc
 		note.add("\t=================");
@@ -178,12 +147,12 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 		WebElement subSecChkmrkgreen1=ind_revPlnChgSec_circle_green1;
 		WebElement subSecChkmrkgreen2=ind_revPlnChgSec_circle_green2; //note: some section has inconsistent way to locate the green chkmrk xpath...
 		boolean willDeleteCookie=true;
-		note.addAll(validatePdInSubSection(planType, 
+		note.addAll(validatePdfInSubSection(planType, 
 				docDisplayMap, 
 				section, subSection, 
 				docName, targetLang, 
 				langDropdownElement1, langDropdown1_targetLangOptionElement, 
-				langDropdownElement2, 
+				langDropdownElement2, expPlnChgLangDropdown_es,
 				pdfElement, arrowAftPdfElement,svgAftPdfElement, 
 				subSecCookie, subSecChkmrkgreen1, subSecChkmrkgreen2,
 				willDeleteCookie));
@@ -201,12 +170,12 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 		subSecChkmrkgreen1=ind_revPlnChgSec_circle_green1;
 		subSecChkmrkgreen2=ind_revPlnChgSec_circle_green2;
 		willDeleteCookie=true;
-		note.addAll(validatePdInSubSection(planType, 
+		note.addAll(validatePdfInSubSection(planType, 
 				docDisplayMap, 
 				section, subSection, 
 				docName, targetLang, 
 				langDropdownElement1, langDropdown1_targetLangOptionElement, 
-				langDropdownElement2, 
+				langDropdownElement2, expPlnChgLangDropdown_zh,
 				pdfElement, arrowAftPdfElement,svgAftPdfElement, 
 				subSecCookie, subSecChkmrkgreen1, subSecChkmrkgreen2,
 				willDeleteCookie));
@@ -216,19 +185,19 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 		langDropdownElement1=ind_revPlnChgSec_docSec_langDropdown;
 		langDropdown1_targetLangOptionElement=ind_revPlnChgSec_lang_en_ava;
 		langDropdownElement2=ind_revPlnMatlsSec_docSec_langDropdown; 
-		pdfElement=ind_revPlnChgSec_docSec_anoc_en;
+		pdfElement=ind_revPlnChgSec_docSec_anoc_en; 
 		arrowAftPdfElement=ind_revPlnChgSec_docSec_aftAnoc_arrow;
 		svgAftPdfElement=ind_revPlnChgSec_docSec_aftAnoc_svg;
 		subSecCookie=cookiePlnChgSection_findNew;
 		subSecChkmrkgreen1=ind_revPlnChgSec_circle_green1;
 		subSecChkmrkgreen2=ind_revPlnChgSec_circle_green2;
 		willDeleteCookie=false;
-		note.addAll(validatePdInSubSection(planType, 
+		note.addAll(validatePdfInSubSection(planType, 
 				docDisplayMap, 
 				section, subSection, 
 				docName, targetLang, 
 				langDropdownElement1, langDropdown1_targetLangOptionElement, 
-				langDropdownElement2, 
+				langDropdownElement2, expPlnChgLangDropdown_en,
 				pdfElement, arrowAftPdfElement,svgAftPdfElement, 
 				subSecCookie, subSecChkmrkgreen1, subSecChkmrkgreen2,
 				willDeleteCookie));
@@ -303,6 +272,8 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 			note.add("\n\tValidate after all subsection links turned green");
 			targetItem=section+" - green circle";
 			targetElement=ind_revPlnMatlsSec_circle_green;
+			//tbd if (MRScenario.environment.equalsIgnoreCase("prod")) 
+			//tbd 	targetElement=ind_revPlnMatlsSec_circle_green_prod;
 			note.addAll(validateHaveItem(targetItem, targetElement));
 
 
@@ -314,6 +285,10 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 	}
 
 	public List<String> validateReviewYourBenefitsPlans(String section, String planType, String memberType, Date currentDate, HashMap<String, Boolean> docDisplayMap) {
+		boolean expPlnMatLangDropdown_en=docDisplayMap.get("expPlnMatLangDropdown_en");
+		boolean expPlnMatLangDropdown_es=docDisplayMap.get("expPlnMatLangDropdown_es");
+		boolean expPlnMatLangDropdown_zh=docDisplayMap.get("expPlnMatLangDropdown_zh");
+
 		System.out.println("Proceed to validate Review Materials - Plan Benefits section content...");
 		List<String> note=new ArrayList<String>();
 		note.add("\t=================");
@@ -354,12 +329,12 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 			WebElement subSecChkmrkgreen1=ind_revPlnMatlsSec_plnBeneSec_checkMark_green;
 			WebElement subSecChkmrkgreen2=null; //note: some section has inconsistent way to locate the green chkmrk xpath...
 			boolean willDeleteCookie=true;
-			note.addAll(validatePdInSubSection(planType, 
+			note.addAll(validatePdfInSubSection(planType, 
 					docDisplayMap, 
 					section, subSection, 
 					docName, targetLang, 
 					langDropdownElement1, langDropdown1_targetLangOptionElement, 
-					langDropdownElement2, 
+					langDropdownElement2, expPlnMatLangDropdown_es,
 					pdfElement, arrowAftPdfElement,svgAftPdfElement, 
 					subSecCookie, subSecChkmrkgreen1, subSecChkmrkgreen2,
 					willDeleteCookie));
@@ -377,12 +352,12 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 			subSecChkmrkgreen1=ind_revPlnMatlsSec_plnBeneSec_checkMark_green;
 			subSecChkmrkgreen2=null; //note: some section has inconsistent way to locate the green chkmrk xpath...
 			willDeleteCookie=true;
-			note.addAll(validatePdInSubSection(planType, 
+			note.addAll(validatePdfInSubSection(planType, 
 					docDisplayMap, 
 					section, subSection, 
 					docName, targetLang, 
 					langDropdownElement1, langDropdown1_targetLangOptionElement, 
-					langDropdownElement2, 
+					langDropdownElement2, expPlnMatLangDropdown_zh,
 					pdfElement, arrowAftPdfElement,svgAftPdfElement, 
 					subSecCookie, subSecChkmrkgreen1, subSecChkmrkgreen2,
 					willDeleteCookie));
@@ -399,12 +374,12 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 			subSecChkmrkgreen1=ind_revPlnMatlsSec_plnBeneSec_checkMark_green;
 			subSecChkmrkgreen2=null; //note: some section has inconsistent way to locate the green chkmrk xpath...
 			willDeleteCookie=false;
-			note.addAll(validatePdInSubSection(planType, 
+			note.addAll(validatePdfInSubSection(planType, 
 					docDisplayMap, 
 					section, subSection, 
 					docName, targetLang, 
 					langDropdownElement1, langDropdown1_targetLangOptionElement, 
-					langDropdownElement2, 
+					langDropdownElement2, expPlnMatLangDropdown_en,
 					pdfElement, arrowAftPdfElement,svgAftPdfElement, 
 					subSecCookie, subSecChkmrkgreen1, subSecChkmrkgreen2,
 					willDeleteCookie));
@@ -435,6 +410,10 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 	}
 
 	public List<String> validateReviewYourPresDrug(String section, String planType, String memberType, Date currentDate, HashMap<String, Boolean> docDisplayMap) {
+		boolean expPlnMatLangDropdown_en=docDisplayMap.get("expPlnMatLangDropdown_en");
+		boolean expPlnMatLangDropdown_es=docDisplayMap.get("expPlnMatLangDropdown_es");
+		boolean expPlnMatLangDropdown_zh=docDisplayMap.get("expPlnMatLangDropdown_zh");
+
 		System.out.println("Proceed to validate Review Plan Materials - Prescription Drug section content...");
 		List<String> note=new ArrayList<String>();
 		note.add("\t=================");
@@ -451,42 +430,51 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 		targetElement=ind_revPlnMatlsSec_presDrugSec_text;
 		note.addAll(validateHaveItem(targetItem, targetElement));
 
-		targetItem=section+subSection+" - arrow after Drug Search link";
-		targetElement=ind_revPlnMatlsSec_presDrugSec_drugSrchLnk_arrow;
-		note.addAll(validateHaveItem(targetItem, targetElement));
+		String showDocDateStr2=m2+String.valueOf(getCurrentYear());
+		Date showDocDate2=convertStrToDate(showDocDateStr2);
+		boolean showSection=false;
+		if (currentDate.equals(showDocDate2) || currentDate.after(showDocDate2)) {
+			showSection=true;
+		}
+		
+		if (showSection) {
+			targetItem=section+subSection+" - arrow after Drug Search link";
+			targetElement=ind_revPlnMatlsSec_presDrugSec_drugSrchLnk_arrow;
+			note.addAll(validateHaveItem(targetItem, targetElement));
 
-		targetItem=section+subSection+" - svg after Drug Search link";
-		targetElement=ind_revPlnMatlsSec_presDrugSec_drugSrchLnk_svg;
-		note.addAll(validateHaveItem(targetItem, targetElement));
+			targetItem=section+subSection+" - svg after Drug Search link";
+			targetElement=ind_revPlnMatlsSec_presDrugSec_drugSrchLnk_svg;
+			note.addAll(validateHaveItem(targetItem, targetElement));
 
-		targetItem=section+subSection+" - Drug Search link";
-		targetElement=ind_revPlnMatlsSec_presDrugSec_drugSrchLnk;
-		note.addAll(validateHaveItem(targetItem, targetElement));
+			targetItem=section+subSection+" - Drug Search link";
+			targetElement=ind_revPlnMatlsSec_presDrugSec_drugSrchLnk;
+			note.addAll(validateHaveItem(targetItem, targetElement));
 
-		String expUrl="/health-plans/estimate-drug-costs.html";
-		if (memberType.toUpperCase().contains("UHC"))
-			if (MRScenario.environment.contains("stage")) 
-				expUrl="uhcmedicaresolutions.uhc.com"+expUrl;
-			else
-				expUrl="uhcmedicaresolutions.com"+expUrl;
-		else 
-			if (MRScenario.environment.contains("stage")) 
-				expUrl="aarpmedicareplans.uhc.com"+expUrl;
+			String expUrl="/health-plans/estimate-drug-costs.html";
+			if (memberType.toUpperCase().contains("UHC"))
+				if (MRScenario.environment.contains("stage")) 
+					expUrl="uhcmedicaresolutions.uhc.com"+expUrl;
+				else
+					expUrl="uhcmedicaresolutions.com"+expUrl;
 			else 
-				expUrl="aarpmedicareplans.com"+expUrl;
-		WebElement expElement=dceHeader;
-		note.addAll(validateLnkBehavior(planType, memberType, targetItem, targetElement, expUrl, expElement));
+				if (MRScenario.environment.contains("stage")) 
+					expUrl="aarpmedicareplans.uhc.com"+expUrl;
+				else 
+					expUrl="aarpmedicareplans.com"+expUrl;
+			WebElement expElement=dceHeader;
+			note.addAll(validateLnkBehavior(planType, memberType, targetItem, targetElement, expUrl, expElement));
 
-		note.add("\n\tValidate after clicking 'Drug Search' link");
-		targetItem=section+" - green checkmark";
-		targetElement=ind_revPlnMatlsSec_presDrugSec_checkMark_green;
-		note.addAll(validateHaveItem(targetItem, targetElement));
+			note.add("\n\tValidate after clicking 'Drug Search' link");
+			targetItem=section+" - green checkmark";
+			targetElement=ind_revPlnMatlsSec_presDrugSec_checkMark_green;
+			note.addAll(validateHaveItem(targetItem, targetElement));
 
-		note.add("\n\tValidate after cookie remove for '"+subSection+"' subsection cookie");
-		deleteCookieAndReloadPgn(cookiePlnMatSection_predrg);
-		targetElement=ind_revPlnMatlsSec_presDrugSec_checkMark_green;
-		note.addAll(validateDontHaveItem(targetItem, targetElement));
-
+			note.add("\n\tValidate after cookie remove for '"+subSection+"' subsection cookie");
+			deleteCookieAndReloadPgn(cookiePlnMatSection_predrg);
+			targetElement=ind_revPlnMatlsSec_presDrugSec_checkMark_green;
+			note.addAll(validateDontHaveItem(targetItem, targetElement));
+		}
+		
 		//---------------------------------------------
 		String docName="Comprehensive Formulary";
 		//note: if there is spanish doc
@@ -502,12 +490,12 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 		WebElement subSecChkmrkgreen1=ind_revPlnMatlsSec_presDrugSec_checkMark_green;
 		WebElement subSecChkmrkgreen2=null; //note: some section has inconsistent way to locate the green chkmrk xpath...
 		boolean willDeleteCookie=true;
-		note.addAll(validatePdInSubSection(planType, 
+		note.addAll(validatePdfInSubSection(planType, 
 				docDisplayMap, 
 				section, subSection, 
 				docName, targetLang, 
 				langDropdownElement1, langDropdown1_targetLangOptionElement, 
-				langDropdownElement2, 
+				langDropdownElement2, expPlnMatLangDropdown_es,
 				pdfElement, arrowAftPdfElement,svgAftPdfElement, 
 				subSecCookie, subSecChkmrkgreen1, subSecChkmrkgreen2,
 				willDeleteCookie));
@@ -526,12 +514,12 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 		subSecChkmrkgreen1=ind_revPlnMatlsSec_presDrugSec_checkMark_green;
 		subSecChkmrkgreen2=null; //note: some section has inconsistent way to locate the green chkmrk xpath...
 		willDeleteCookie=true;
-		note.addAll(validatePdInSubSection(planType, 
+		note.addAll(validatePdfInSubSection(planType, 
 				docDisplayMap, 
 				section, subSection, 
 				docName, targetLang, 
 				langDropdownElement1, langDropdown1_targetLangOptionElement, 
-				langDropdownElement2, 
+				langDropdownElement2, expPlnMatLangDropdown_zh,
 				pdfElement, arrowAftPdfElement,svgAftPdfElement, 
 				subSecCookie, subSecChkmrkgreen1, subSecChkmrkgreen2,
 				willDeleteCookie));
@@ -548,12 +536,12 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 		subSecChkmrkgreen1=ind_revPlnMatlsSec_presDrugSec_checkMark_green;
 		subSecChkmrkgreen2=null; //note: some section has inconsistent way to locate the green chkmrk xpath...
 		willDeleteCookie=false;
-		note.addAll(validatePdInSubSection(planType, 
+		note.addAll(validatePdfInSubSection(planType, 
 				docDisplayMap, 
 				section, subSection, 
 				docName, targetLang, 
 				langDropdownElement1, langDropdown1_targetLangOptionElement, 
-				langDropdownElement2, 
+				langDropdownElement2, expPlnMatLangDropdown_en,
 				pdfElement, arrowAftPdfElement,svgAftPdfElement, 
 				subSecCookie, subSecChkmrkgreen1, subSecChkmrkgreen2,
 				willDeleteCookie));
@@ -573,6 +561,10 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 	}
 
 	public List<String> validateReviewProviderInfo(String section, String planType, String memberType, Date currentDate, HashMap<String, Boolean> docDisplayMap) {
+		boolean expPlnMatLangDropdown_en=docDisplayMap.get("expPlnMatLangDropdown_en");
+		boolean expPlnMatLangDropdown_es=docDisplayMap.get("expPlnMatLangDropdown_es");
+		boolean expPlnMatLangDropdown_zh=docDisplayMap.get("expPlnMatLangDropdown_zh");
+
 		System.out.println("Proceed to validate Review Plan Materials - Provider section content...");
 		List<String> note=new ArrayList<String>();
 		note.add("\t=================");
@@ -649,12 +641,12 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 		WebElement subSecChkmrkgreen1=ind_revPlnMatlsSec_provInfoSec_checkMark_green;
 		WebElement subSecChkmrkgreen2=null; //note: some section has inconsistent way to locate the green chkmrk xpath...
 		boolean willDeleteCookie=true;
-		note.addAll(validatePdInSubSection(planType, 
+		note.addAll(validatePdfInSubSection(planType, 
 				docDisplayMap, 
 				section, subSection, 
 				docName, targetLang, 
 				langDropdownElement1, langDropdown1_targetLangOptionElement, 
-				langDropdownElement2, 
+				langDropdownElement2, expPlnMatLangDropdown_es,
 				pdfElement, arrowAftPdfElement,svgAftPdfElement, 
 				subSecCookie, subSecChkmrkgreen1, subSecChkmrkgreen2,
 				willDeleteCookie));
@@ -672,12 +664,12 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 		subSecChkmrkgreen1=ind_revPlnMatlsSec_provInfoSec_checkMark_green;
 		subSecChkmrkgreen2=null; //note: some section has inconsistent way to locate the green chkmrk xpath...
 		willDeleteCookie=true;
-		note.addAll(validatePdInSubSection(planType, 
+		note.addAll(validatePdfInSubSection(planType, 
 				docDisplayMap, 
 				section, subSection, 
 				docName, targetLang, 
 				langDropdownElement1, langDropdown1_targetLangOptionElement, 
-				langDropdownElement2, 
+				langDropdownElement2, expPlnMatLangDropdown_zh,
 				pdfElement, arrowAftPdfElement,svgAftPdfElement, 
 				subSecCookie, subSecChkmrkgreen1, subSecChkmrkgreen2,
 				willDeleteCookie));
@@ -693,13 +685,16 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 		subSecCookie=cookiePlnMatSection_provInfo;
 		subSecChkmrkgreen1=ind_revPlnMatlsSec_provInfoSec_checkMark_green;
 		subSecChkmrkgreen2=null; //note: some section has inconsistent way to locate the green chkmrk xpath...
-		willDeleteCookie=true;
-		note.addAll(validatePdInSubSection(planType, 
+		if (docDisplayMap.get("Vendor Information Sheet English"))
+			willDeleteCookie=true;
+		else
+			willDeleteCookie=false; //note: if user has no Vendor Info, this will be the last step for this section, keep checkmark green
+		note.addAll(validatePdfInSubSection(planType, 
 				docDisplayMap, 
 				section, subSection, 
 				docName, targetLang, 
 				langDropdownElement1, langDropdown1_targetLangOptionElement, 
-				langDropdownElement2, 
+				langDropdownElement2, expPlnMatLangDropdown_en,
 				pdfElement, arrowAftPdfElement,svgAftPdfElement, 
 				subSecCookie, subSecChkmrkgreen1, subSecChkmrkgreen2,
 				willDeleteCookie));
@@ -719,12 +714,12 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 		subSecChkmrkgreen1=ind_revPlnMatlsSec_provInfoSec_checkMark_green;
 		subSecChkmrkgreen2=null; //note: some section has inconsistent way to locate the green chkmrk xpath...
 		willDeleteCookie=true;
-		note.addAll(validatePdInSubSection(planType, 
+		note.addAll(validatePdfInSubSection(planType, 
 				docDisplayMap, 
 				section, subSection, 
 				docName, targetLang, 
 				langDropdownElement1, langDropdown1_targetLangOptionElement, 
-				langDropdownElement2, 
+				langDropdownElement2, expPlnMatLangDropdown_es,
 				pdfElement, arrowAftPdfElement,svgAftPdfElement, 
 				subSecCookie, subSecChkmrkgreen1, subSecChkmrkgreen2,
 				willDeleteCookie));
@@ -742,12 +737,12 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 		subSecChkmrkgreen1=ind_revPlnMatlsSec_provInfoSec_checkMark_green;
 		subSecChkmrkgreen2=null; //note: some section has inconsistent way to locate the green chkmrk xpath...
 		willDeleteCookie=true;
-		note.addAll(validatePdInSubSection(planType, 
+		note.addAll(validatePdfInSubSection(planType, 
 				docDisplayMap, 
 				section, subSection, 
 				docName, targetLang, 
 				langDropdownElement1, langDropdown1_targetLangOptionElement, 
-				langDropdownElement2, 
+				langDropdownElement2, expPlnMatLangDropdown_zh,
 				pdfElement, arrowAftPdfElement,svgAftPdfElement, 
 				subSecCookie, subSecChkmrkgreen1, subSecChkmrkgreen2,
 				willDeleteCookie));
@@ -764,12 +759,12 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 		subSecChkmrkgreen1=ind_revPlnMatlsSec_provInfoSec_checkMark_green;
 		subSecChkmrkgreen2=null; //note: some section has inconsistent way to locate the green chkmrk xpath...
 		willDeleteCookie=false;
-		note.addAll(validatePdInSubSection(planType, 
+		note.addAll(validatePdfInSubSection(planType, 
 				docDisplayMap, 
 				section, subSection, 
 				docName, targetLang, 
 				langDropdownElement1, langDropdown1_targetLangOptionElement, 
-				langDropdownElement2, 
+				langDropdownElement2, expPlnMatLangDropdown_en,
 				pdfElement, arrowAftPdfElement,svgAftPdfElement, 
 				subSecCookie, subSecChkmrkgreen1, subSecChkmrkgreen2,
 				willDeleteCookie));
@@ -789,6 +784,10 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 	}
 	
 	public List<String> validateReviewPharmacyInfo(String section, String planType, String memberType, Date currentDate, HashMap<String, Boolean> docDisplayMap) {
+		boolean expPlnMatLangDropdown_en=docDisplayMap.get("expPlnMatLangDropdown_en");
+		boolean expPlnMatLangDropdown_es=docDisplayMap.get("expPlnMatLangDropdown_es");
+		boolean expPlnMatLangDropdown_zh=docDisplayMap.get("expPlnMatLangDropdown_zh");
+
 		System.out.println("Proceed to validate Review Plan Materials - Pharmacy section content...");
 		List<String> note=new ArrayList<String>();
 		note.add("\t=================");
@@ -819,19 +818,6 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 		note.addAll(validateHaveItem(targetItem, targetElement));
 
 		String expUrl="/member/pharmacy-locator/overview.html";
-		/* tbd 
-		String expUrl="/health-plans/aarp-pharmacy.html";
-		if (memberType.toUpperCase().contains("UHC")) {
-			if (MRScenario.environment.contains("stage")) 
-				expUrl="uhcmedicaresolutions.uhc.com"+expUrl;
-			else
-				expUrl="uhcmedicaresolutions.com"+expUrl;
-		} else {
-			if (MRScenario.environment.contains("stage"))
-				expUrl="aarpmedicareplans.uhc.com"+expUrl;
-			else
-				expUrl="aarpmedicareplans.com"+expUrl;
-		} */
 		WebElement expElement=pharmacyHeader;
 		note.addAll(validateLnkBehavior(planType, memberType, targetItem, targetElement, expUrl, expElement));
 		
@@ -861,12 +847,12 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 		WebElement subSecChkmrkgreen1=ind_revPlnMatlsSec_pharInfoSec_checkMark_green;
 		WebElement subSecChkmrkgreen2=null; //note: some section has inconsistent way to locate the green chkmrk xpath...
 		boolean willDeleteCookie=true;
-		note.addAll(validatePdInSubSection(planType, 
+		note.addAll(validatePdfInSubSection(planType, 
 				docDisplayMap, 
 				section, subSection, 
 				docName, targetLang, 
 				langDropdownElement1, langDropdown1_targetLangOptionElement, 
-				langDropdownElement2, 
+				langDropdownElement2, expPlnMatLangDropdown_es,
 				pdfElement, arrowAftPdfElement,svgAftPdfElement, 
 				subSecCookie, subSecChkmrkgreen1, subSecChkmrkgreen2,
 				willDeleteCookie));
@@ -884,12 +870,12 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 		subSecChkmrkgreen1=ind_revPlnMatlsSec_pharInfoSec_checkMark_green;
 		subSecChkmrkgreen2=null; //note: some section has inconsistent way to locate the green chkmrk xpath...
 		willDeleteCookie=true;
-		note.addAll(validatePdInSubSection(planType, 
+		note.addAll(validatePdfInSubSection(planType, 
 				docDisplayMap, 
 				section, subSection, 
 				docName, targetLang, 
 				langDropdownElement1, langDropdown1_targetLangOptionElement, 
-				langDropdownElement2, 
+				langDropdownElement2, expPlnMatLangDropdown_zh,
 				pdfElement, arrowAftPdfElement,svgAftPdfElement, 
 				subSecCookie, subSecChkmrkgreen1, subSecChkmrkgreen2,
 				willDeleteCookie));
@@ -906,12 +892,12 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 		subSecChkmrkgreen1=ind_revPlnMatlsSec_pharInfoSec_checkMark_green;
 		subSecChkmrkgreen2=null; //note: some section has inconsistent way to locate the green chkmrk xpath...
 		willDeleteCookie=false;
-		note.addAll(validatePdInSubSection(planType, 
+		note.addAll(validatePdfInSubSection(planType, 
 				docDisplayMap, 
 				section, subSection, 
 				docName, targetLang, 
 				langDropdownElement1, langDropdown1_targetLangOptionElement, 
-				langDropdownElement2, 
+				langDropdownElement2, expPlnMatLangDropdown_en,
 				pdfElement, arrowAftPdfElement,svgAftPdfElement, 
 				subSecCookie, subSecChkmrkgreen1, subSecChkmrkgreen2,
 				willDeleteCookie));
@@ -1066,18 +1052,10 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 			targetElement=ind_compPlnsSec_lrnOthPlnSec_compNewPlnsLnk;
 			note.addAll(validateHaveItem(targetItem, targetElement));
 
-			targetItem=section+subSection+" - Compare New Plans Link arrow";
-			targetElement=ind_compPlnsSec_lrnOthPlnSec_compNewPlnsLnk_arrow;
-			note.addAll(validateHaveItem(targetItem, targetElement));
-
-			targetItem=section+subSection+" - Compare New Plans Link svg";
-			targetElement=ind_compPlnsSec_lrnOthPlnSec_compNewPlnsLnk_svg;
-			note.addAll(validateHaveItem(targetItem, targetElement));
-
 
 			//note - validate link destination
-			//tbd String expUrl="medicareplans.ocp-ctc-dmz-nonprod.optum.com/health-plans.html";
-			String expUrl="/health-plans.html#/plan-summary";
+			//tbd String expUrl="/health-plans.html#/plan-summary";
+			String expUrl="/health-plans.html";
 			if (memberType.toUpperCase().contains("UHC"))
 				if (MRScenario.environment.contains("stage"))
 					expUrl="uhcmedicaresolutions.uhc.com"+expUrl;
@@ -1091,13 +1069,13 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 			WebElement expElement=acqPlanOverviewBox;
 			note.addAll(validateLnkBehavior(planType, memberType, targetItem, targetElement, expUrl, expElement));
 
-			//tbd targetItem=section+subSection+" - Compare New Plans Link Arrow";
-			//tbd targetElement=ind_compPlnsSec_lrnOthPlnSec_compNewPlnsLnk_arrow;
-			//tbd note.addAll(validateHaveItem(targetItem, targetElement));
+			targetItem=section+subSection+" - Compare New Plans Link arrow";
+			targetElement=ind_compPlnsSec_lrnOthPlnSec_compNewPlnsLnk_arrow;
+			note.addAll(validateHaveItem(targetItem, targetElement));
 
-			//tbd targetItem=section+subSection+" - Compare New Plans Link svg";
-			//tbd targetElement=ind_compPlnsSec_lrnOthPlnSec_compNewPlnsLnk_svg;
-			//tbd note.addAll(validateDontHaveItem(targetItem, targetElement));
+			targetItem=section+subSection+" - Compare New Plans Link svg";
+			targetElement=ind_compPlnsSec_lrnOthPlnSec_compNewPlnsLnk_svg;
+			note.addAll(validateHaveItem(targetItem, targetElement));
 
 			note.add("\n\tValidate after clicking 'Compare New Plans' link");
 			//note: after link click, section circle should turn green
@@ -1355,7 +1333,8 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 			note.addAll(validateHaveItem(targetItem, targetElement));
 
 			//note - validate link destination
-			String expUrl="/health-plans.html#/plan-summary";
+			//tbd String expUrl="/health-plans.html#/plan-summary";
+			String expUrl="/health-plans.html";
 			if (memberType.toUpperCase().contains("UHC"))
 				if (MRScenario.environment.contains("stage"))
 					expUrl="uhcmedicaresolutions.uhc.com"+expUrl;

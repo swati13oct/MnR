@@ -153,7 +153,7 @@ public class EobStepDefinition {
 			System.out.println("TEST - m_requestUrl="+m_requestUrl);
 			String m_apiResponseJson=eobPage.getApiResponse(planType, memberType, m_requestUrl);
 			EobApiResponse eobResponseObj=eobPage.parseApiResponse(m_apiResponseJson);
-			Assert.assertTrue("PROBLEM - unable to parse API response1 successfully for further testing", eobResponseObj!=null);
+			Assert.assertTrue("PROBLEM - unable to get a successful API response for further testing. resp1="+m_apiResponseJson, eobResponseObj!=null);
 			System.out.println("Before cleanup, 1st call size="+eobResponseObj.getListOfEob().size());
 
 			EobApiResponse r_eobResponseObj=new EobApiResponse();
@@ -162,7 +162,7 @@ public class EobStepDefinition {
 				System.out.println("TEST - r_requestUrl="+r_requestUrl);
 				String r_apiResponseJson=eobPage.getApiResponse(planType, memberType, r_requestUrl);
 				r_eobResponseObj=eobPage.parseApiResponse(r_apiResponseJson);
-				Assert.assertTrue("PROBLEM - unable to parse API response2 successfully for further testing", r_eobResponseObj!=null);
+				Assert.assertTrue("PROBLEM - unable to get a successful API response for further testing. resp2="+r_apiResponseJson, r_eobResponseObj!=null);
 				System.out.println("Before cleanup, 2nd call size="+r_eobResponseObj.getListOfEob().size());
 			}
 			//note: remove duplicated compoundDoc
@@ -471,13 +471,20 @@ public class EobStepDefinition {
 	}
 
 	@And("^the user clicks on first eob from the list to validate pdf$")
-	public void the_user_clicks_on_first_eob_from_the_list() {
+	public void the_user_clicks_on_first_eob_from_the_list(DataTable givenAttributes) {
+		Map<String, String> memberAttributesMap=parseInputArguments(givenAttributes);
+		String realEob_str = memberAttributesMap.get("Real EOB");
+		Assert.assertTrue("PROBLEM - 'Real EOB' input should either be 'true' or 'false' | Actual='"+realEob_str+"'", 
+				realEob_str.equalsIgnoreCase("true")|| realEob_str.equalsIgnoreCase("false")); 
+		boolean realEob=Boolean.valueOf(realEob_str);
+
+		
 		String planType=(String) getLoginScenario().getBean(LoginCommonConstants.PLANTYPE);
 		String memberId=(String) getLoginScenario().getBean(EobCommonConstants.MEMBERID);
 		int eobCount=(Integer) getLoginScenario().getBean(EobCommonConstants.EOB_COUNT);
 		if (eobCount>0) {
 			EOBPage eobPage =  (EOBPage) getLoginScenario().getBean(PageConstants.EOB_Page);
-			eobPage.validateEobEntries(planType, memberId);
+			eobPage.validateEobEntries(planType, memberId, realEob);
 		} else {
 			System.out.println("Skip step because there is 0 EOB");
 		}

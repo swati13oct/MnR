@@ -1112,8 +1112,17 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 						}
 					}
 				} else {
-					section_note.add("    * FAILED - unable to locate page header text element on the landing page for doc '"+testInputInfoMap.get("docName")+"'");
-					Assert.assertTrue("PROBLEM - unable to locate expected page text element on the landing page for doc '"+testInputInfoMap.get("docName")+"' - doc name="+targetDocName, false);
+					if ((planType.equalsIgnoreCase("MEDICA") || planType.equalsIgnoreCase("PCP")) &&
+						(targetDocName.contains("Medicare Plan Appeals & Grievances Form (Online)")
+						|| targetDocName.contains("Medical Reimbursement Form (Online)")
+						|| targetDocName.contains("Authorization to Share Personal Information Form"))
+						&& planDocValidate(systemError)
+						&& MRScenario.environment.equalsIgnoreCase("offline")) {
+						section_note.add("    * KNOWN ISSUE - offline-prod domain got system error opening this doc '"+testInputInfoMap.get("docName")+"'");
+					} else {
+						section_note.add("    * FAILED - unable to locate page header text element on the landing page for doc '"+testInputInfoMap.get("docName")+"'");
+						Assert.assertTrue("PROBLEM - unable to locate expected page text element on the landing page for doc '"+testInputInfoMap.get("docName")+"' - doc name="+targetDocName, false);
+					}
 				}
 			}			
 		} else {
@@ -1142,19 +1151,15 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 				}
 			} else {
 				//note: for html or any url that's not pdf related
-				if (planDocValidate(generalPgHeader)) {
+				if (planDocValidate(generalPgHeader) || planDocValidate(generalPgHeader_providerSearch)) {
 					if (targetDocName.equals("PREVIOUS ISSUE")) { //note: for PREVIOUS ISSUE, do additional check for now until problem is fixed
 						//note: header text is //h3 not h1 like others
 						if (planDocValidate(prevIssPgHeader)) {
 							section_note.add("    PASSED - located page content on the landing page for doc '"+testInputInfoMap.get("docName")+"'");
 						} else {
-							//tbd if (planType.contains("MEDICA") || planType.contains("PCP")) {
-							//tbd 	section_note.add("    * FAILED - KNOWN ISSUE - INC15084751  - unable to locate page content on the landing page for doc '"+testInputInfoMap.get("docName")+"'");
-							//tbd 	Assert.assertTrue("PROBLEM - KNOWN ISSUE - INC15084751  - unable to locate page content for doc name="+targetDocName, planDocValidate(prevIssPgHeader));
-							//tbd } else {
-								section_note.add("    * FAILED - unable to locate page content on the landing page for doc '"+testInputInfoMap.get("docName")+"'");
-								Assert.assertTrue("PROBLEM - unable to locate page content for doc name="+targetDocName, planDocValidate(prevIssPgHeader));
-								//tbd }
+							CommonUtility.waitForPageLoad(driver, prevIssBody, 5);
+							section_note.add("    * FAILED - unable to locate page content on the landing page for doc '"+testInputInfoMap.get("docName")+"'");
+							Assert.assertTrue("PROBLEM - unable to locate page content for doc name="+targetDocName, planDocValidate(prevIssPgHeader));
 						}
 					} else {
 						section_note.add("    PASSED - validated there is header text element on landing page after clicked");

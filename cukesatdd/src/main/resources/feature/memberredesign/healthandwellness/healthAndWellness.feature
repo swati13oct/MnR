@@ -17,30 +17,30 @@ Feature: 1.09 Member Health and Wellness Page
     And I should see RENEW ACTIVE tile if available and be able to click it
       | Has RenewActive | <hasRenewActive>   |
       
-    @devRegression @healthAndWellness01a
+    @devRegression @healthAndWellness01_ma_mapd
     Examples: 
       | TID   | planType | memberType        | hasReward | hasRenewActive |
       | 15340 | MAPD     | RewardsMember     | true      | true           |
 
-    @healthAndWellness01a
+    @healthAndWellness01_ma_mapd
     Examples: 
       | TID   | planType | memberType        | hasReward | hasRenewActive |
       | 15341 | MA       | AARP_RewardsMember| true      | true           |
       | 15341 | MA       | UHC_RewardsMember | true      | true           |
 
-    @healthAndWellness01b
+    @healthAndWellness01_pdp_ship
     Examples: 
       | TID   | planType | memberType        | hasReward | hasRenewActive |
       | 15342 | PDP      | RewardsMember     | false     | false          |
       | xxxxx | SHIP     | RewardsMember     | false     | false          |
 
-    @healthAndWellness01c
+    @healthAndWellness01_fedShipCombo_shipFedCombo
     Examples: 
       | TID   | planType          | memberType        | hasReward | hasRenewActive |
       | 15343 | FED_SHIP_COMBO    | RewardsMember     | false     | true           |
-      | 15343 | SHIP_FED_COMBO    | RewardsMember     | true      | true           |
+      | 15343 | SHIP_FED_COMBO    | RewardsMember     | false     | true           |
  
-  @healthAndWellness02
+  @healthAndWellness02_uhcDeeplink
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - As an authenticated UHC member on the new Member site, I want to validate health and wellness page content via UHC deeplink
     Given login with a deeplink in the member portal and validate elements
       | Plan Type    | <planType>    |
@@ -57,7 +57,7 @@ Feature: 1.09 Member Health and Wellness Page
       | TID   | planType  | memberType        | hasReward | hasRenewActive |
       | 15341 | MA        | UHC_RewardsMember | true      | true           |
       
-  @healthAndWellness03    
+  @healthAndWellness03_aarpDeeplink    
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - As an authenticated AARP member on the new Member site, I want to validate health and wellness page content via AARP deeplink
     Given login with a deeplink in the member portal and validate elements
       | Plan Type    | <planType>    |

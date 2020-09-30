@@ -23,9 +23,10 @@ import acceptancetests.data.MRConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
-import junit.framework.Assert;
-import pages.acquisition.bluelayer.KeywordSearch;
-import pages.acquisition.dce.ulayer.DCETestHarnessPage;
+import org.testng.Assert;
+
+import pages.acquisition.commonpages.EnterZipCodePage;
+import pages.acquisition.dce.DCETestHarnessPage;
 import pages.acquisition.dceredesign.GetStartedPage;
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.pharmacyLocator.PharmacySearchPage;
@@ -277,7 +278,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
    	private WebElement callsam;
    	
    	//@FindBy(xpath = "//*[@id='sam-call-button']/div/span[1]")
-  	@FindBy(xpath = "//*[contains(@id,'sam-call-button')]//*[contains(@class,'sam__button__text')]")
+  	@FindBy(xpath = "//*[contains(@class,'sam__button__text') and contains(text(),'1-')]")
    	private WebElement callsamtooltip;
    	
    	@FindBy(xpath ="//*[@id='sam-call-modal']/div/div")
@@ -306,7 +307,10 @@ public class AcquisitionHomePage extends GlobalWebElements {
    	@FindBy(xpath ="//*[contains(@id,'sam-call-modal')]//*[contains(@class,'modal-close')]")
    	private WebElement CallSamTFNClose;
    	
-   	String CallSam= "Call a Licensed Insurance Agent";
+//   	String CallSam= "Call a Licensed Insurance Agent";
+   	String CallSam1855= "1-855";
+   	String CallSam1877= "1-877";
+   	
    	@FindBy(xpath = "//*[contains(@class,'activeChatBtn')]")
    	private WebElement chatsam;
    	
@@ -345,7 +349,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
    	private WebElement ChatSamHead;
    	
    	//@FindBy(xpath ="//*[contains(@id,'sp-close-frame')]")
-   	@FindBy(xpath =" //*[@id='sp-chat-frame']//div/div[@id='sp-close-frame']")
+   	@FindBy(xpath = "//*[@id='sp-chat-frame']//div/div[@id='sp-close-frame']")
 	private WebElement ChatSamTFNClose;
    	
    	@FindBy(id = "pharmacy-zip-search")
@@ -399,6 +403,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	
 	@FindBy(xpath = "//button[contains(@id,'addDrug')]")
 	public WebElement AddMyDrugsBtn;
+	
+	@FindBy(xpath = "//body/div[@id='overlay']")
+	private WebElement overlayFilm;	
 
    	String ChatSamText= "Chat with a Licensed Insurance Agent";
 
@@ -425,6 +432,12 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		super(driver);
 		PageFactory.initElements(driver, this);
 		openAndValidate();
+	}
+	
+	public AcquisitionHomePage(WebDriver driver, String planType, boolean details, String site) {
+		super(driver);
+		PageFactory.initElements(driver, this);
+		openAndValidate(site);
 	}
 	
 	public AcquisitionHomePage(WebDriver driver, String site) {
@@ -693,6 +706,10 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		zipCodebtn.click();
 		return new VPPPlanSummaryPage(driver);
 	}
+	
+	public EnterZipCodePage enterZipCode() {
+		return new EnterZipCodePage(driver);
+	}
 
 
 	public Boolean navigationSectionEnterSearchClick() {
@@ -901,6 +918,10 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			sendkeys(zipCodeField, zipcode);
 			viewPlansButton.click();
 	//	}
+//			while(validate(overlayFilm, 10)) {/**wait*/}
+//			CommonUtility.waitForElementToDisappear(driver, overlayFilm, 75);
+			waitForPageLoadSafari();
+			
 			CommonUtility.waitForPageLoadNew(driver, vppTop, 30);
 			if (driver.getCurrentUrl().contains("health-plans")) {
 				return new VPPPlanSummaryPage(driver);
@@ -1060,6 +1081,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		validateNew(viewAllDisclaimerInformationLink);
 
 	}
+	
 
 	public ContactUsAARPPage contactUsFooterClick() {
 		validateNew(footerContactUsLink);
@@ -1089,7 +1111,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		footerPrivacyPolicyLink.click();
 		CommonUtility.checkPageIsReadyNew(driver);
 		validateNew(privacyHeader);
-		if (driver.getCurrentUrl().contains("privacy_policy.html")) {
+		if (driver.getCurrentUrl().contains("privacy-policy.html")) {
 			return new PrivacyPolicyAARPPage(driver);
 		}
 		return null;
@@ -1099,7 +1121,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		validate(footerTermsnConditionsLink);
 		footerTermsnConditionsLink.click();
 		CommonUtility.checkPageIsReadyNew(driver);
-		if (driver.getCurrentUrl().contains("terms_and_conditions")) {
+		if (driver.getCurrentUrl().contains("terms-of-use")) {
 			return new TermsnConditionsAARPPage(driver);
 		}
 		return null;
@@ -1414,6 +1436,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	
 	 public void validateCallSam() throws InterruptedException {
 	        boolean present;
+//	        driver.navigate().refresh();
 	        try {
 	        validateNew(callsam);
 	        present = true;
@@ -1430,27 +1453,34 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		
 		public void validateCallSamContent() throws InterruptedException {
 			
-			Actions action = new Actions(driver);
-			WebElement element = callsam;
-			action.moveToElement(element).perform();
+//			Actions action = new Actions(driver);
+//			WebElement element = callsam;
+//			action.moveToElement(element).perform();
+			waitforElementNew(callsamtooltip,30);
 			String toolTipText = callsamtooltip.getText();
 			System.out.println("====================================================================");
 			System.out.println(toolTipText);
 			System.out.println("====================================================================");
 			
-	        if (CallSam.equalsIgnoreCase(toolTipText)) {
-	          System.out.println("Call sticky action menu roll out and contain the text Call a Licensed Insurance Agent");
+	        if (toolTipText.contains(CallSam1877)) {
+	          System.out.println("Call sticky action menu roll out and contain the text: "+ toolTipText);
 	          
 	        }
+	        else if (toolTipText.contains(CallSam1855))	{
+	        	System.out.println("Call sticky action menu roll out and contain the text"+ toolTipText);
+	        }
+	        		
 	        else
-	        	Assert.fail("No Call sticky action menu didn't roll out and doesn't contain the text Call a Licensed Insurance Agent");
+	        	Assert.fail("No Call sticky action menu didn't roll out and doesn't contain the text 1-877");
 	       
 		}
 		
 		public AcquisitionHomePage  validateCallpopup() throws InterruptedException {
-			//CommonUtility.checkPageIsReady(driver);
+//			CommonUtility.checkPageIsReady(driver);
+			validate(callsamtooltip);
+			CheckiPerseptions();
 			callsam.click();
-			System.out.println("@@@@@@@@@@@@@@@ Call Icon Clicked @@@@@@@@@@@@@@@");		
+			System.out.println("@@@@@@@@@@@@@@@ Call Icon Clicked @@@@@@@@@@@@@@@");
 			driver.switchTo().activeElement();
 			System.out.println(CallSamTFN.getText());
 			CallSamTFNClose.click();
@@ -1496,9 +1526,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			//CommonUtility.checkPageIsReady(driver);
 			chatsam.click();
 			System.out.println("@@@@@@@@@@@@@@@ Chat Icon Clicked @@@@@@@@@@@@@@@");	
-			chatsamtooltip.click();
+//			chatsamtooltip.click();
 			driver.switchTo().activeElement();
-			System.out.println(ChatSamHead.getText());
+//			System.out.println(ChatSamHead.getText());
 			ChatSamTFNClose.click();
 			validateNew(chatsam);		
 			return null;
@@ -1526,7 +1556,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		public GetStartedPage navigateToDCERedesignFromHome() throws InterruptedException {
 			validateNew(getStarted);
 			getStarted.click();
-
+			CommonUtility.checkPageIsReadyNew(driver);
 			if (validateNew(AddMyDrugsBtn))
 				return new GetStartedPage(driver);
 			return null;
@@ -1568,8 +1598,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		}
 		
 		public GetStartedPage clickDCERedesignLinkonShopPDPpage() {
+			CommonUtility.checkPageIsReadyNew(driver);
 			WebElement DCELink = driver.findElement(By.xpath("//a[contains(@href,'drug-cost-estimator') and contains(text(), 'Prescription Drug Costs')]"));
-			validateNew(DCELink);
+			validateNew(DCELink, 10);
 			jsClickNew(DCELink);
 			if (validateNew(AddMyDrugsBtn))
 				return new GetStartedPage(driver);
@@ -1651,8 +1682,434 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			}
 			  	return present;
 		}
+		
+		public void validateHeaderLinks() {
+			validateNew(headerSignInLink);
+			validateNew(headerRegisterLink);
+			if(driver.getCurrentUrl().contains("aarpmedicareplans")) {
+				validateNew(visitAARPLink);
+				validateNew(AARPlogo);
+			}
+			else
+			{
+				System.out.println("UHC Medicare solutions site loaded");
+			}
+			validateNew(visitorprofileicon);
+		}
+		
+		public void signInheader() {
+			headerSignInLink.click();
+			validateNew(signIn);
+			if (driver.getCurrentUrl().contains("medicare.uhc.com")) {
+				Assert.assertTrue(true);
+				System.out.println("Signin page is loaded");
+				driver.navigate().back();
+				CommonUtility.waitForPageLoad(driver, healthPlansZipcode, 30);
+				System.out.println("Home Page is loaded");
+			} else {
+				Assert.fail("Unable to navigate to signin page");
+			}
 
-} 
+		}
+		
+		public void validateLogo() {
+			// TODO Auto-generated method stub
+			if(driver.getCurrentUrl().contains("aarpmedicareplans")) {
+				validateNew(AARPlogo);
+				WebElement AARPLogo = driver.findElement(By.xpath("//a[contains(@id, 'aarpSVGLogo')]"));
+				WebElement UHCLogo = driver.findElement(By.xpath("//a[contains(@id, 'uhcSVGLogo')]"));
+				if (AARPLogo.isDisplayed() && AARPLogo.isEnabled() && !UHCLogo.isDisplayed()) {
+					Assert.assertTrue(true);
+					System.out.println("Correct AARP Logo is Displayed");
+				} else {
+					Assert.fail("AARP logo is not dispalyed for Ulayer");
+				}
+			}
+			else {
+				WebElement AARPLogo = driver.findElement(By.xpath("//a[contains(@id, 'aarpSVGLogo')]"));
+				WebElement UHCLogo = driver.findElement(By.xpath("//a[contains(@id, 'uhcSVGLogo')]"));
+				if (UHCLogo.isDisplayed() && UHCLogo.isEnabled() && !AARPLogo.isDisplayed()) {
+					Assert.assertTrue(true);
+					System.out.println("Correct UHC Logo is Displayed");
+				} else {
+					Assert.fail("UHC logo is not dispalyed for Ulayer");
+				}
+				
+			}
+		}
+		
+		private void CheckPageLoad() {
+			CommonUtility.checkPageIsReadyNew(driver);
+			System.out.println("Current page URL: " + driver.getCurrentUrl());
+			checkModelPopup(driver, 30);
 
+		}
 
-	 
+		public void CheckiPerseptions() {
+			CommonUtility.waitForPageLoad(driver, proactiveChatExitBtn, 20); // do not change this to waitForPageLoadNew as
+																				// we're not trying to fail the test if it
+																				// isn't found
+			try {
+				if (proactiveChatExitBtn.isDisplayed())
+					jsClickNew(proactiveChatExitBtn);
+			} catch (Exception e) {
+				System.out.println("Proactive chat popup not displayed");
+			}
+		}
+
+		
+		public void headerRegisterLink() {
+			if (headerRegisterLink.isDisplayed() && headerRegisterLink.isEnabled()) {
+				Assert.assertTrue(true);
+				System.out.println("Register link is displayed on home page");
+			} else {
+				Assert.fail("Register link is not found/ displayed on home page");
+			}
+
+		}
+		
+		public void validatevisitorprofile() {
+			if (visitorprofileicon.isDisplayed()) {
+				Actions actions = new Actions(driver);
+				actions.moveToElement(visitorprofileicon).perform();
+				System.out.println("Hover over visitor profile completed");
+			}
+			WebElement CreateProfile = driver.findElement(By.xpath("//a[contains(text(), 'Create Profile')]"));
+			WebElement VPSignIn = driver.findElement(
+					By.xpath("//a[contains(text(), 'Sign In') and not(contains(@aria-labelledby ,'VPSignIn'))]"));
+			validateNew(CreateProfile);
+			validateNew(VPSignIn);
+			if (CreateProfile.isEnabled() && VPSignIn.isEnabled()) {
+				Assert.assertTrue(true);
+				System.out.println("Visitor Profile elements are present on home page");
+			} else {
+				Assert.fail("Visitor Profile elements are not present on home page");
+			}
+			visitorprofileicon.click();
+			WebElement GuestProfile = driver.findElement(By.xpath("//*[contains(text(), 'Your Guest Profile')]"));
+			CheckPageLoad();
+			CheckiPerseptions();
+			CommonUtility.waitForPageLoadNew(driver, GuestProfile, 30);
+			if (driver.getCurrentUrl().contains("profile/guest")) {
+				Assert.assertTrue(true);
+				System.out.println("Visitor Profile Page opens successsfully");
+			} else {
+				Assert.fail("Visitor Profile page is not opening up");
+			}
+			driver.navigate().back();
+			CheckPageLoad();
+			CheckiPerseptions();
+
+			CommonUtility.waitForPageLoadNew(driver, findPlansButton, 30);
+		}
+		
+		public void navigateToPath(String path) {
+
+			String CurrentURL = driver.getCurrentUrl();
+			System.out.println("Current URL : " + CurrentURL);
+
+			String NavigateToURL = CurrentURL + path;
+			System.out.println("Navigating to URL : " + NavigateToURL);
+			driver.navigate().to(NavigateToURL);
+			CommonUtility.waitForPageLoad(driver, driver.findElement(By.xpath("//header[contains(@class,'header')]")), 30);
+			System.out.println("Page Title : " + (driver.findElement(By.xpath("//title")).getText()));
+
+		}
+		
+		public void validateGlobalFooterLinks() {
+			validateNew(footerHomeLink);
+			validateNew(footerAboutUsLink);
+			validateNew(footerContactUsLink);
+			validateNew(footerSiteMapLink);
+			validateNew(footerPrivacyPolicyLink);
+			validateNew(footerTermsnConditionsLink);
+			validateNew(footerDisclaimersLink);
+			validateNew(footerAgentsnBrokersLink);
+			validateNew(footerAccessibilitylink);
+			if(driver.getCurrentUrl().contains("aarpmedicareplans")) {
+				validateNew(aarpOrgLink);
+			}
+			else
+			{
+				System.out.println("UHC Medicare solutions site loaded");
+			}
+			validateNew(medicareAdvantagePlansLink);
+			validateNew(medicareSupplementInsurancePlansLink);
+			validateNew(medicarePrescriptionDrug_PlansLink);
+			validateNew(medicareSpecialNeedsPlansLink);
+			validateNew(learnAboutMedicareLink);
+		}
+		
+		public void validateTFNelement(String tfnXpath) {
+			WebElement TFNelement = driver.findElement(By.xpath(tfnXpath));
+			JavascriptExecutor jse = (JavascriptExecutor) driver;
+			jse.executeScript("window.scrollBy(0,document.body.scrollHeight)");
+			jse.executeScript("window.scrollBy(0,-500)");
+			validateNew(TFNelement, 45);
+			if (validateNew(TFNelement) && TFNelement.isDisplayed()) {
+				System.out.println("TFN is Displayed on Page : " + TFNelement.getText());
+			} else {
+				Assert.fail("TFN elemnet is not found / displayed on page : " + tfnXpath);
+			}
+		}
+		
+		public void validateSubNavShopPlanLinks() {
+			CheckPageLoad();
+			CheckiPerseptions();
+
+			waitforElement(ShopForaplan);
+			if (ShopForaplan.isDisplayed()) {
+				Actions actions = new Actions(driver);
+				actions.moveToElement(ShopForaplan);
+				actions.build().perform();
+				System.out.println("Hover over Shop for a Plan completed");
+
+//					waitforElementNew(driver.findElement(By.xpath("//input[@id='nav-zipcode']")));
+//					System.out.println("Submit button is displayed");
+			}
+			WebElement ZipCodeTxt = driver.findElement(By.xpath("//input[@id='nav-zipcode']"));
+			WebElement FindPlansBtn = driver.findElement(By.xpath("//button[@dtmid='acq_top_nav']"));
+			WebElement RequestMoreInfoLink = driver
+					.findElement(By.xpath("//a[@dtmname='Top Nav:Our Plans:Request More Help']"));
+			WebElement EnrollLink = driver.findElement(By.xpath("//a[contains(@href,'enroll.html')]"));
+			WebElement ShopLink = driver.findElement(By.xpath("//a[contains(@href,'shop.html')]"));
+			WebElement ResourceLink = driver.findElement(By.xpath("//a[contains(@href,'resources.html')]"));
+
+			WebElement MAplansLink = driver.findElement(By.xpath(
+					"//*[contains(@class, 'nav-col nav-col-1')]//a[contains(@href,'medicare-advantage-plans.html')]"));
+			List<WebElement> MedSuppPlansLink = driver.findElements(By.xpath(
+					"//*[contains(@class, 'nav-col nav-col-1')]//*[contains(@href,'medicare-supplement-plans.html') or contains(@href,'medicare-supplement-plans-classic.html')]"));
+			WebElement PDPplansLink = driver.findElement(By.xpath(
+					"//*[contains(@class, 'nav-col nav-col-1')]//a[contains(@href,'prescription-drug-plans.html')]"));
+			WebElement SNPplansLink = driver.findElement(
+					By.xpath("//*[contains(@class, 'nav-col nav-col-1')]//a[contains(@href,'special-needs-plans.html')]"));
+
+			WebElement PlanSelectorLink = driver.findElement(By.xpath(
+					"//*[contains(@class, 'nav-col nav-col-1')]//a[contains(@href,'plan-recommendation-engine.html')]"));
+			WebElement DCELink = driver.findElement(
+					By.xpath("//*[contains(@class, 'nav-col nav-col-1')]//a[contains(@href,'drug-cost-estimator')]"));
+			WebElement PharmacySearchLink = driver.findElement(
+					By.xpath("//*[contains(@class, 'nav-col nav-col-1')]//a[contains(@href,'aarp-pharmacy.html')]"));
+			WebElement ProviderSearchLink = driver.findElement(By
+					.xpath("//*[contains(@class, 'nav-col nav-col-1')]//a[contains(@onclick,'loadCachedProviderSearch')]"));
+
+			validateNew(ZipCodeTxt);
+			validateNew(FindPlansBtn);
+			validateNew(RequestMoreInfoLink);
+
+			validateNew(EnrollLink);
+			validateNew(ShopLink);
+			validateNew(ResourceLink);
+
+			validateNew(MAplansLink);
+			Assert.assertTrue(MedSuppPlansLink.size() > 0, "No Med Sup link found in the header navigation");
+			validateNew(PDPplansLink);
+			validateNew(SNPplansLink);
+
+			validateNew(PlanSelectorLink);
+			validateNew(DCELink);
+			validateNew(PharmacySearchLink);
+			validateNew(ProviderSearchLink);
+
+			if (ZipCodeTxt.isDisplayed() && FindPlansBtn.isDisplayed() && RequestMoreInfoLink.isDisplayed()
+					&& EnrollLink.isDisplayed() && ShopLink.isDisplayed() && ResourceLink.isDisplayed()
+					&& MAplansLink.isDisplayed() && PDPplansLink.isDisplayed() && SNPplansLink.isDisplayed()
+					&& PlanSelectorLink.isDisplayed() && DCELink.isDisplayed() && PharmacySearchLink.isDisplayed()
+					&& ProviderSearchLink.isDisplayed()) {
+				Assert.assertTrue(true);
+				System.out.println("Sub Nav - Shop for a Plan - All links and element displayed on Page : ");
+				Actions actions = new Actions(driver);
+				actions.moveToElement(AARPlogo);
+				actions.build().perform();
+			} else {
+				Assert.fail("Sub Nav - Shop for a Plan - All links and element not found / displayed on page : ");
+			}
+		}
+		
+		public void validateSubNavMedEdLinks() {
+			CheckPageLoad();
+			CheckiPerseptions();
+
+			waitforElement(lnkLearnAboutMedicare);
+			if (lnkLearnAboutMedicare.isDisplayed()) {
+				Actions actions = new Actions(driver);
+				actions.moveToElement(lnkLearnAboutMedicare);
+				actions.build().perform();
+				System.out.println("Hover over Learn about Medicare completed");
+			}
+			WebElement EligibilityTxt = driver.findElement(
+					By.xpath("//*[contains(@class, 'nav-col nav-col-3')]//a[contains(@href,'medicare-eligibility')]"));
+			WebElement ChoicesBtn = driver.findElement(By.xpath(
+					"//*[contains(@class, 'nav-col nav-col-3')]//a[contains(@href,'medicare-parts-and-medigap-plans')]"));
+			WebElement PresProvidersBenefitsLink = driver.findElement(
+					By.xpath("//*[contains(@class, 'nav-col nav-col-3')]//a[contains(@href,'medicare-benefits')]"));
+			WebElement CostbasicsLink = driver.findElement(
+					By.xpath("//*[contains(@class, 'nav-col nav-col-3')]//a[contains(@href,'medicare-costs')]"));
+
+			WebElement MAplansLink = driver.findElement(
+					By.xpath("//*[contains(@class, 'nav-col nav-col-3')]//a[contains(@href,'medicare-advantage-plans')]"));
+			WebElement MedSuppPlansLink = driver.findElement(By.xpath(
+					"//*[contains(@class, 'nav-col nav-col-3')]//a[contains(@href,'medicare-supplement-plans.html')]"));
+			WebElement PDPplansLink = driver.findElement(
+					By.xpath("//*[contains(@class, 'nav-col nav-col-3')]//a[contains(@href,'medicare-part-d')]"));
+
+			WebElement EnrollmentBasicsLink = driver.findElement(By.xpath(
+					"//*[contains(@class, 'nav-col nav-col-3')]//a[contains(@href,'enrollment-and-changing-plans')]"));
+//				WebElement FAQLink = driver.findElement(By.xpath("//*[contains(@class, 'nav-col nav-col-3')]//a[contains(@href,'medicare-faq')]"));
+
+			validateNew(EligibilityTxt);
+			validateNew(ChoicesBtn);
+			validateNew(PresProvidersBenefitsLink);
+			validateNew(CostbasicsLink);
+
+			validateNew(MAplansLink);
+			validateNew(MedSuppPlansLink);
+			validateNew(PDPplansLink);
+
+			validateNew(EnrollmentBasicsLink);
+
+			if (EligibilityTxt.isDisplayed() && ChoicesBtn.isDisplayed() && PresProvidersBenefitsLink.isDisplayed()
+					&& CostbasicsLink.isDisplayed() && MAplansLink.isDisplayed() && MedSuppPlansLink.isDisplayed()
+					&& PDPplansLink.isDisplayed() && EnrollmentBasicsLink.isDisplayed()) {
+				// && FAQLink.isDisplayed()
+				Assert.assertTrue(true);
+				System.out.println("Sub Nav - Learn about Medicare - All links and element displayed on Page");
+				Actions actions = new Actions(driver);
+				actions.moveToElement(AARPlogo);
+				actions.build().perform();
+			} else {
+				Assert.fail("Sub Nav - Learn about Medicare - All links and element not found / displayed on page");
+			}
+		}
+		
+		public void validateStateDropDown() {
+			validateNew(stateDropDown);
+			selectFromDropDownByValue(stateDropDown, "California");
+			String StateSessionStorage = ReturnDriverStorage(driver, "sessionStorage", "ucp_geotrackingState");
+			System.out.println("State selected : California");
+			System.out.println("State GeoSessionStorage value : " + StateSessionStorage);
+			Assert.assertTrue(StateSessionStorage.equalsIgnoreCase("CA"), "Geolocation State validation Failed ");
+		}
+		
+		public void validateDisclaimer() {
+			validateNew(disclaimerInformation);
+			disclaimerInformation.click();
+			validateNew(backToTop_Disclaimer);
+		}
+		
+		public void validateVisitAarpOrglink() {
+			if(driver.getCurrentUrl().contains("aarpmedicareplans")) {
+				validateNew(visitAARPFooterLink);
+				String hRef = visitAARPFooterLink.getAttribute("href");
+				System.out.println("href for Visit AARP.org link : " + hRef);
+				Assert.assertTrue(hRef.contains("www.aarp.org"), "Incorrect href for Visit AARP.org : " + hRef);
+				visitAARPFooterLink.isEnabled();
+			}
+			else
+			{
+				System.out.println("UHC Medicare solutions site loaded");
+			}
+			
+		}
+		
+		public void backToToplink() {
+			validateNew(backToTop);
+			backToTop.click();
+		}
+	
+		public void openPRE() {
+			String browser = MRScenario.browsername;
+			if (!(MRScenario.getProps() == null)) {// If running from local
+				if (MRScenario.environment.equalsIgnoreCase("digital-uatv2-aarp")) {
+					startNewPRE(AARP_ACQISITION_PAGE_URL.replace("digital-uatv2-aarp", "digital-uatv2")
+							.replace(".com/", ".com/plan-recommendation-engine.html").replace("www.", ""), browser);
+				} else if (MRScenario.environment.equalsIgnoreCase("digital-uatv2")) {
+					startNewPRE(UMS_ACQISITION_PAGE_URL.replace(".com/", ".com/plan-recommendation-engine.html")
+							.replace("www.", ""), browser);
+				} else if (MRScenario.environment.equalsIgnoreCase("offline-stage-aarp")) {
+					startNewPRE(AARP_ACQISITION_PAGE_URL.replace("offline-stage-aarp", "offline-stage").replace(".com/",
+							".com/plan-recommendation-engine.html"), browser);
+				} else if (MRScenario.environment.equalsIgnoreCase("offline-stage")) {
+					startNewPRE(UMS_ACQISITION_PAGE_URL.replace(".com/", ".com/plan-recommendation-engine.html"), browser);
+				} else if (MRScenario.environment.equalsIgnoreCase("stage-aarp")) {
+					startNewPRE(AARP_ACQISITION_PAGE_URL.replace("stage-aarp", "stage").replace(".com/",
+							".com/plan-recommendation-engine.html"), browser);
+				} else if (MRScenario.environment.equalsIgnoreCase("stage")) {
+					if (driver.getCurrentUrl().contains("aarpmedicareplans"))
+						startNewPRE(AARP_ACQISITION_PAGE_URL.replace(".com/", ".com/plan-recommendation-engine.html"), browser);
+					else if (driver.getCurrentUrl().contains("uhcmedicaresolutions"))
+						startNewPRE(UMS_ACQISITION_PAGE_URL.replace(".com/", ".com/plan-recommendation-engine.html"), browser);
+				} else if (MRScenario.environment.equalsIgnoreCase("offline-prod-aarp")) {
+					startNewPRE(AARP_ACQISITION_OFFLINE_PAGE_URL.replace(".com", ".com/plan-recommendation-engine.html"),
+							browser);
+				} else if (MRScenario.environment.equalsIgnoreCase("offline-prod")) {
+					startNewPRE(UMS_ACQISITION_OFFLINE_PAGE_URL.replace(".com", ".com/plan-recommendation-engine.html"),
+							browser);
+				} else if (MRScenario.environment.equalsIgnoreCase("prod-aarp")) {
+					startNewPRE(AARP_ACQISITION_PROD_PAGE_URL.replace(".com", ".com/plan-recommendation-engine.html"),
+							browser);
+				} else if (MRScenario.environment.equalsIgnoreCase("prod")) {
+					startNewPRE(UMS_ACQISITION_PROD_PAGE_URL.replace(".com", ".com/plan-recommendation-engine.html"),
+							browser);
+				}
+			} else { // For jenkins job
+				String jenkinsRunnerFiles = MRScenario.runnerFiles;
+				if (MRScenario.environment.equalsIgnoreCase("digital-uatv2")
+						|| MRScenario.environment.equalsIgnoreCase("stage")
+						|| MRScenario.environment.equalsIgnoreCase("offline-stage"))
+				{
+					for (String rname : jenkinsRunnerFiles.split(",")) {
+						if (rname.toUpperCase().contains("PLANRECOMMENDATIONENGINE")
+								&& (rname.toUpperCase().contains("ULAYER") || (rname.toUpperCase().contains("AARP")))) {
+							if (MRScenario.environment.equalsIgnoreCase("digital-uatv2"))
+								startNewPRE(AARP_ACQISITION_PAGE_URL.replace(".com", ".com/plan-recommendation-engine.html")
+										.replace("www.", ""), browser);
+							else
+								startNewPRE(
+										AARP_ACQISITION_PAGE_URL.replace(".com", ".com/plan-recommendation-engine.html"),
+										browser);
+						}
+						if (rname.toUpperCase().contains("PLANRECOMMENDATIONENGINE")
+								&& (rname.toUpperCase().contains("BLAYER") || (rname.toUpperCase().contains("UHC")))) {
+							if (MRScenario.environment.equalsIgnoreCase("digital-uatv2"))
+								startNewPRE(AARP_ACQISITION_PAGE_URL.replace(".com", ".com/plan-recommendation-engine.html")
+										.replace("www.", ""), browser);
+							else
+								startNewPRE(UMS_ACQISITION_PAGE_URL.replace(".com", ".com/plan-recommendation-engine.html"),
+										browser);
+						}
+
+					}
+				}
+				if (MRScenario.environment.equalsIgnoreCase("offline")) {
+					for (String rname : jenkinsRunnerFiles.split(",")) {
+						if (rname.toUpperCase().contains("PLANRECOMMENDATIONENGINE")
+								&& rname.toUpperCase().contains("ULAYER"))
+							startNewPRE(AARP_ACQISITION_OFFLINE_PAGE_URL.replace(".com",
+									".com/plan-recommendation-engine.html"), browser);
+						if (rname.toUpperCase().contains("PLANRECOMMENDATIONENGINE")
+								&& rname.toUpperCase().contains("BLAYER"))
+							startNewPRE(
+									UMS_ACQISITION_OFFLINE_PAGE_URL.replace(".com", ".com/plan-recommendation-engine.html"),
+									browser);
+					}
+				}
+				if (MRScenario.environment.equalsIgnoreCase("prod")) {
+					for (String rname : jenkinsRunnerFiles.split(",")) {
+						if (rname.toUpperCase().contains("PLANRECOMMENDATIONENGINE")
+								&& rname.toUpperCase().contains("ULAYER"))
+							startNewPRE(
+									AARP_ACQISITION_PROD_PAGE_URL.replace(".com", ".com/plan-recommendation-engine.html"),
+									browser);
+						if (rname.toUpperCase().contains("PLANRECOMMENDATIONENGINE")
+								&& rname.toUpperCase().contains("BLAYER"))
+							startNewPRE(
+									UMS_ACQISITION_PROD_PAGE_URL.replace(".com", ".com/plan-recommendation-engine.html"),
+									browser);
+					}
+				}
+			}
+
+			System.out.println("Current page URL: " + driver.getCurrentUrl());
+		}
+}

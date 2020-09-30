@@ -62,10 +62,13 @@ public class GlobalWebElements  extends UhcDriver{
 	@FindBy(id = "gfn_lnk_row2_1")
 	 public static WebElement medicareAdvantagePlansLink;
 	
-	@FindBy(id = "gfn_lnk_row2_2")
+	@FindBy(xpath = "//a[contains(@id, 'gfn_lnk_row2') and contains(@dtmname, 'Special Needs')]")
+	 public static WebElement medicareSpecialNeedsPlansLink;
+	
+	@FindBy(xpath = "//a[contains(@id, 'gfn_lnk_row2_3') and contains(@dtmname, 'Medicare Supplement')]")
 	 public static WebElement medicareSupplementInsurancePlansLink;
 	
-	@FindBy(id = "gfn_lnk_row2_4")
+	@FindBy(xpath = "//a[contains(@id, 'gfn_lnk_row2_5') and contains(@dtmname, 'Medicare Prescription')]")
 	 public static WebElement medicarePrescriptionDrug_PlansLink;
 	
 	@FindBy(id = "gfn_lnk_row3_1")
@@ -176,8 +179,6 @@ public class GlobalWebElements  extends UhcDriver{
 	@FindBy(xpath = "//div[@class='top-menu']/div/div[2]/div/form/button")
 	 public static WebElement signInButton;
 	
-	
-
 	@FindBy(xpath="//div[@id='subnav_2']/div/div/div[1]/div[1]/div[2]/p[2]/a")
 	public static WebElement prescriptiondrugPlansRequestMoreHelpLink;
 	
@@ -188,12 +189,11 @@ public class GlobalWebElements  extends UhcDriver{
 	public static WebElement headerMedicareSupplementPlansLink;
 	
 	@FindBy(xpath="//div[@id='subnav_2']/div/div/div[1]/div[1]/div[1]/p[2]/a")
-		public static WebElement medicareAdvantagePlansRequestMoreHelpLink;
+	public static WebElement medicareAdvantagePlansRequestMoreHelpLink;
 	
 	@FindBy(xpath="//div[@id='subnav_2']/div/div/div/div[2]/div/p[2]/a[2]/span")
 	public static WebElement medicareSelectHosipitalDirectoryLink;
-	
-		
+			
 	
 	@FindBy(xpath="//div[@id='subnav_2']/div/div/div[2]/a")
 	public static WebElement takeQuizButton;
@@ -219,6 +219,21 @@ public class GlobalWebElements  extends UhcDriver{
 	
 	@FindBy(xpath="//*[@id='subnav_2']//*[contains(@href,'estimate')]")
 	public static WebElement headerDrugCostEstimatorLink;
+	
+	@FindBy(xpath="(//a[contains(@dtmid, 'acq_top_nav') and contains(text(), 'Sign in')])[1]")
+	public static WebElement headerSignInLink;
+	
+	@FindBy(xpath = "(//a[contains(@href, 'healthsafe-id')])[1]")
+	 public static WebElement headerRegisterLink;
+	
+	@FindBy(id = "aarpSVGLogo")
+	 public static WebElement AARPlogo;
+	
+	@FindBy(xpath = "//img[contains(@dtmid,'acq_visitor_profile')]")
+	 public static WebElement visitorprofileicon;
+	
+	@FindBy(xpath = "//*[contains(@onclick,'jumpToHSIDSignIn()')]")
+	public static WebElement signIn;
 	
 	public void ourPlansHover() {
 		Actions actions = new Actions(driver);
