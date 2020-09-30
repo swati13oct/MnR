@@ -1,5 +1,5 @@
 
-Feature: 1.05.1.ACQ-OLE common tool flow E2E MA AARP
+Feature: 1.05.1.ACQ-OLE common tool flow E2E MA
 
   	Scenario Outline: TID: <TID> -plan type: <PlanType> - OLE End to end from AARP Acquisition site VPP Plan Summary
     Given the user is on medicare acquisition site landing page

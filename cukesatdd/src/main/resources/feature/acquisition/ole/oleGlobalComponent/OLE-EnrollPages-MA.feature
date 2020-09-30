@@ -1,4 +1,4 @@
-Feature: 1.5.ACQ-OLE common tool flow E2E Shop Pages
+Feature: 1.5.ACQ-OLE common tool flow E2E ENROLL Pages
 
  Scenario Outline: Verify Zip code serch from Standlaone zipcode to OLE
     Given the user is on medicare acquisition site landing page

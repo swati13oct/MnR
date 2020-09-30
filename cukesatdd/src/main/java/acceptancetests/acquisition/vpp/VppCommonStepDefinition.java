@@ -526,70 +526,6 @@ public class VppCommonStepDefinition {
 	}
 	}
 	
-	@Given("^the user is on VPP Plan Summary page after hits Campaign URL$")
-	public void the_user_on_aarpmedicareplans_Campaign_landing_page() throws Throwable {
-
-		String County = "St. Louis County";
-		String ZipCode = "63043";
-		String PlanYear = "2020"; 
-		String SiteName =  "AARP_ACQ";
-
-		getLoginScenario().saveBean(oleCommonConstants.OLE_ZIPCODE, ZipCode);
-		getLoginScenario().saveBean(oleCommonConstants.OLE_COUNTY, County);
-		getLoginScenario().saveBean(oleCommonConstants.ACQ_SITE_NAME, SiteName);
-		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_YEAR, PlanYear);
-
-
-
-		String OLE_Campaign_URL = "https://stage-aarpmedicareplans.uhc.com/health-plans.html?gclid=EAIaIQobChMI3PKJmZKJ3QIVBqZpCh2ROgj7EAAYAiAAEgKDjPD_BwE&mrcid=ps%253Agoogle%253Aportfolio+ma+ma%257CCofund%257CBrand%253AUHC%253A07.26.18%253A8004731&zipcode=63043&WT.mc_id=8004731#/plan-summary";
-
-
-		WebDriver wd = getLoginScenario().getWebDriverNew();
-		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
-
-		VPPPlanSummaryPage vppPlanSummaryPage = new VPPPlanSummaryPage(wd, OLE_Campaign_URL,true);
-		if (vppPlanSummaryPage != null) {
-			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE,
-					vppPlanSummaryPage);
-			System.out.println("OLE Campaign Landing Page Displayed");
-			Assert.assertTrue(true);
-		}
-		else
-			Assert.fail("Error in validating the OLE Campaign Landing");
-	}
-
-	@Given("^the user is on VPP page after hits Campaign URL$")
-	public void the_user_on_aarp_Campaign_landing_page() throws Throwable {
-
-		String County = "St. Louis County";
-		String ZipCode = "63043";
-		String PlanYear = "2020"; 
-		String SiteName =  "AARP_ACQ";
-
-		getLoginScenario().saveBean(oleCommonConstants.OLE_ZIPCODE, ZipCode);
-		getLoginScenario().saveBean(oleCommonConstants.OLE_COUNTY, County);
-		getLoginScenario().saveBean(oleCommonConstants.ACQ_SITE_NAME, SiteName);
-		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_YEAR, PlanYear);
-
-
-
-		String OLE_Campaign_URL = "https://www.team-acme-aarpmedicareplans.ocp-elr-core-nonprod.optum.com/health-plans.html?gclid=EAIaIQobChMI3PKJmZKJ3QIVBqZpCh2ROgj7EAAYAiAAEgKDjPD_BwE&mrcid=ps%253Agoogle%253Aportfolio+ma+ma%257CCofund%257CBrand%253AUHC%253A07.26.18%253A8004731&zipcode=63043&WT.mc_id=8004731#/plan-summary <>";
-
-
-		WebDriver wd = getLoginScenario().getWebDriverNew();
-		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
-
-		VPPPlanSummaryPage vppPlanSummaryPage = new VPPPlanSummaryPage(wd, OLE_Campaign_URL,true);
-		if (vppPlanSummaryPage != null) {
-			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE,
-					vppPlanSummaryPage);
-			System.out.println("OLE Campaign Landing Page Displayed");
-			Assert.assertTrue(true);
-		}
-		else
-			Assert.fail("Error in validating the OLE Campaign Landing");
-	}
-	
 	@Given("^the user navigates to following acquisition site page$")
 	public void the_user_navigates_to_medicare_acquisition_site_page(DataTable givenAttributes) throws Throwable {
 		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
@@ -651,4 +587,19 @@ public class VppCommonStepDefinition {
 
 	}
 		
+	@Given("^the user navigates to following Campaign acquisition site page$")
+	public void the_user_navigates_to_following_medicare_acquisition_site(DataTable givenAttributes) throws Throwable {
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		String path = memberAttributesMap.get("PagePath");
+		path = path.replace("!", "#");
+		System.out.print("Path to Acq page : "+path);
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		aquisitionhomepage.navigateToPath(path);
+	}
 }

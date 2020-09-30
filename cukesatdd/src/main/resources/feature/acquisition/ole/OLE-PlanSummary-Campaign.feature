@@ -6,7 +6,7 @@ Feature: 2.05.5. ACQ-OLE Campaign AARP
   #Given the user is on VPP Plan Summary page after hits Campaign URL
   Given the user is on medicare acquisition site landing page
     	|Site| <site>|
-		Given the user navigates to following medicare acquisition site page
+		Given the user navigates to following Campaign acquisition site page
      # | PageName | <pageName> |
       | PagePath | <path>     |
   	And the user views the plans of the below plan type

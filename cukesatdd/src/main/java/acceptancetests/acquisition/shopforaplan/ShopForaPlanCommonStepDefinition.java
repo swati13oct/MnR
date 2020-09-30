@@ -130,6 +130,6 @@ public class ShopForaPlanCommonStepDefinition {
 		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_YEAR, planyear);
 	}
 	
-
+	
 }
 
