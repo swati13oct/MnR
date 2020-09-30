@@ -19,7 +19,7 @@ jsonReport = "target/cucumber-RunMRATDDRegressionMemberAuthCT.json",detailedRepo
 overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionMemberAuthCTPROD")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberredesign" }, 
 features = { "src/main/resources/feature/memberredesign/memberAuth/MemberAuthCTPROD.feature" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionMemberAuthCTPROD.json" }, tags = { "@regressionMemberPROD" })
-public class RunMRATDDRegressionMemberAuthCTPROD {
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionMemberAuthCTPROD.json" }, tags = { "@regressionMemberPROD2" })
+public class RunMRATDDRegressionMemberAuthCTPROD2 {
 
 }

@@ -42,7 +42,7 @@ Feature: 2.06. ACQ-OLE Resume and Retrieve Application UMS
       |   90002 | NO              | aarpsupplementalhealth.com/ole/ms.olelaunch.html|Los Angeles County | MS       | 11/13/1940 | John      | Carry   |    ABCD        | Resume          |mnrqavd3 | Password@1|
      
   
-@UHC_Retrive_App_UHC @OLE_Regression @oleMedSupBlayer
+@UHC_Retrive_App_UHC @oleMedSupBlayer
  Scenario Outline: MedSup Retrieve Application with Application ID
  Given the user is on the uhcmedicaresolutions site landing page
    When the user performs plan search using following information in UMS site

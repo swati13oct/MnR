@@ -1918,7 +1918,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		return null;
 	}
 
-	public void openPRE() {
+	public boolean openPRE() {
+		boolean offline_prod = false;
 		String browser = MRScenario.browsername;
 		if (!(MRScenario.getProps() == null)) {// If running from local
 			if (MRScenario.environment.equalsIgnoreCase("digital-uatv2-aarp")) {
@@ -1940,15 +1941,19 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			} else if (MRScenario.environment.equalsIgnoreCase("offline-prod-aarp")) {
 				startNewPRE(AARP_ACQISITION_OFFLINE_PAGE_URL.replace(".com", ".com/plan-recommendation-engine.html"),
 						browser);
+				offline_prod = true;
 			} else if (MRScenario.environment.equalsIgnoreCase("offline-prod")) {
 				startNewPRE(UMS_ACQISITION_OFFLINE_PAGE_URL.replace(".com", ".com/plan-recommendation-engine.html"),
 						browser);
+				offline_prod = true;
 			} else if (MRScenario.environment.equalsIgnoreCase("prod-aarp")) {
 				startNewPRE(AARP_ACQISITION_PROD_PAGE_URL.replace(".com", ".com/plan-recommendation-engine.html"),
 						browser);
+				offline_prod = true;
 			} else if (MRScenario.environment.equalsIgnoreCase("prod")) {
 				startNewPRE(UMS_ACQISITION_PROD_PAGE_URL.replace(".com", ".com/plan-recommendation-engine.html"),
 						browser);
+				offline_prod = true;
 			}
 		} else { // For jenkins job
 			String jenkinsRunnerFiles = MRScenario.runnerFiles;
@@ -1991,6 +1996,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 								UMS_ACQISITION_OFFLINE_PAGE_URL.replace(".com", ".com/plan-recommendation-engine.html"),
 								browser);
 				}
+				offline_prod = true;
 			}
 			if (MRScenario.environment.equalsIgnoreCase("prod")) {
 				for (String rname : jenkinsRunnerFiles.split(",")) {
@@ -2005,10 +2011,12 @@ public class AcquisitionHomePage extends GlobalWebElements {
 								UMS_ACQISITION_PROD_PAGE_URL.replace(".com", ".com/plan-recommendation-engine.html"),
 								browser);
 				}
+				offline_prod = true;
 			}
 		}
 
 		System.out.println("Current page URL: " + driver.getCurrentUrl());
+		return offline_prod;
 	}
 
 	public void openAndValidate(String siteOrPage, String testharnessurl) {
@@ -2687,8 +2695,8 @@ public boolean isValidatePageLoadError(){
 			}
 	}
 	
-	public boolean validateChat() throws InterruptedException {
-		boolean present = false;
+	public boolean validateChatNonHours() throws InterruptedException {
+	/*	boolean present = false;
 		try {
 			//validateNew(chatsam);
 			present=validateNew(samdiv);
@@ -2707,7 +2715,31 @@ public boolean isValidatePageLoadError(){
 		} catch (NoSuchElementException e) {
 			e.printStackTrace();
 		}
-		  	return present;
+		  	return present;*/
+		
+		boolean present = true;
+		try {
+			// validateNew(chatsam);
+			//present = validateNew(samdiv);
+			//if (present) {
+				//List<WebElement> list = driver.findElements(By.xpath("//div[@id='sam']/button"));
+				List<WebElement> list = driver.findElements(By.xpath("//button[contains(@id,'sam-button--chat')]"));
+				//String chatbtnid = "sam-button--chat";
+				//for (WebElement element : list) {
+					if (list.size() > 0)
+						//	("id").equalsIgnoreCase(chatbtnid)) 
+						{
+						present = false;
+						//break;
+					}
+
+				
+			//}
+
+		} catch (NoSuchElementException e) {
+			e.printStackTrace();
+		}
+		return present;
 	}
 	
 		public VPPPlanSummaryPage searchPlansWithOutCountyShop(String zipcode) throws InterruptedException {
