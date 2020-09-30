@@ -34,7 +34,7 @@ Feature: Order Statuses - P&P, My Meds
       | F439294 | MAPD     | Rx_Individual_PnP_Requestplaced |
 
 
-  @OrderStatuses @F439294 @US2871893
+  @OrderStatuses @F439294 @US2871893 @process
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify user views Processing order status
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
