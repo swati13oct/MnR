@@ -215,7 +215,10 @@ public class CheckOutSummaryWebElements extends UhcDriver {
 	protected List<WebElement> autoRefillCheckbox;
 
 	@FindBy(xpath = "//*[@data-testid='rx__autoEnroll']//input[@type='checkbox' and @data-indeterminate='false' ]")
-	protected List<WebElement> autoRefillOFFCheckbox;
+	protected List<WebElement> listAutoRefillOFFCheckbox;
+	
+	@FindBy(xpath = "//*[@data-testid='rx__autoEnroll']//input[@type='checkbox' and @data-indeterminate='false' ]")
+	protected WebElement autoRefillOFFCheckbox;
 	
 	// Auto refill off label
 	@FindBy(xpath = "//*[@data-testid='rx__autoEnroll__cta']//span[text()='Auto Refill Off']")

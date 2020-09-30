@@ -505,11 +505,14 @@ public class CheckOutSummaryPage extends CheckOutSummaryWebElements {
 		}
 	}
 	
+	//Kiran
 	public void selectAutorefillCheckbox() {
-		if (validateAutoRefillOnCheckedBox()) {
-			autoRefillOffLabel.get(0).click();
+		autoRefillOFFCheckbox.click();
+		/*if (validateAutoRefillOnCheckedBox()) {			
+			autoRefillOFFCheckbox.get(0).click();
+			
 			System.out.println("Auto Refill OFF checkbox is selected");
-		}
+		}*/
 	}
 
 	public boolean validateAutoRefillDisenrollmentPage() {

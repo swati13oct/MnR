@@ -75,7 +75,7 @@ public class AutoRefillSelectionStepDefination {
 	public void user_will_view_Auto_Refill_On_displaying_checked_box() throws Throwable {
 		CheckOutSummaryPage checkoutSumaryPg = (CheckOutSummaryPage) getLoginScenario()
 				.getBean(PageConstants.CHECKOUT_SUMMARY_PAGE);
-		Assert.assertFalse("PROBLEM -  Auto Refill On is not displayed",
+		Assert.assertTrue("PROBLEM -  Auto Refill On is not displayed  for eligible prescription",
 				checkoutSumaryPg.validateAutoRefillOnCheckedBox());
 		getLoginScenario().saveBean(PageConstants.CHECKOUT_SUMMARY_PAGE, checkoutSumaryPg);
 	}

@@ -12,7 +12,7 @@ import cucumber.api.CucumberOptions;
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberredesign" }, features = {
 		"src/main/resources/feature/memberredesign/pharmaciesandprescriptions" }, plugin = { "pretty",
 				"html:reports/test-report",
-				"json:target/cucumber-RunMRATDDRegressionAutoRefillSelection.json" }, tags = { "@US2781893" }, monochrome = true)
+				"json:target/cucumber-RunMRATDDRegressionAutoRefillSelection.json" }, tags = {"@F482464"}, monochrome = true)
 public class RunMRATDDRegressionAutoRefillSelection {
 
 }
