@@ -62,6 +62,9 @@ public class PlanRecommendationEngineWerallyPage extends UhcDriver {
 	// Find doctor element and lookup name
 	@FindBy(css = "h2")
 	private WebElement doctorName;
+	
+	@FindBy(css = "h1.provider-name")
+	private WebElement doctorNameinWerally;
 
 	// div>div[data-test-id*='search-result-person']:nth-of-type(1)
 	// div[class*='hidden'] button
@@ -133,6 +136,7 @@ public class PlanRecommendationEngineWerallyPage extends UhcDriver {
 						}
 						jsClickNew(saveButton);
 						threadsleep(3000);
+//						doctorsName.add(doctorNameinWerally.getText().trim());
 						chooseFirstLocation();
 						saveModalCloseContinueSearchbutton.click();
 					}
