@@ -150,6 +150,7 @@ public class MemberAuthPage extends UhcDriver {
 	 * @todo : Login to app
 	 */
 	public MemberAuthPage navigateToLoginURL() {
+		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
 		if (MRScenario.environment.equalsIgnoreCase("prod"))
 			MEMBER_AUTH = MRConstants.ONLINE_PROD_MEMBER_AUTH;
 		else if (MRScenario.environment.equalsIgnoreCase("offline"))

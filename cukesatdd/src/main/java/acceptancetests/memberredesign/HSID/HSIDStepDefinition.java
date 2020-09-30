@@ -528,7 +528,6 @@ public class HSIDStepDefinition {
 
 		if ("YES".equalsIgnoreCase(MRScenario.isHSIDCompatible)) { //note: isHSIDCompatible=yes then only path is to dashboard
 			HSIDLoginPage loginPage = new HSIDLoginPage(wd);
-		
 
 			if (validateFooter!=null && validateFooter.equalsIgnoreCase("yes")) {
 				loginPage.validateFooter();
