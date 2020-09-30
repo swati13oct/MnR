@@ -3552,6 +3552,7 @@ for (int i = 0; i < initialCount + 1; i++) {
 					}
 				}
 				waitForPageLoadSafari();
+				CommonUtility.checkPageIsReadyNew(driver);
 	/*	CommonUtility.checkPageIsReadyNew(driver);			
 		if(planYear.contains("current") && validate(CurrentYearPlansBtn, 20)) {				// if the scenario is for current year
 			//if(validate(NextYearPlansBtn, 20)) {
