@@ -260,7 +260,7 @@ public class PharmaciesAndPrescriptionsBase extends PharmaciesAndPrescriptionsWe
 			lookForPlanCategory="MEDICARE SUPPLEMENT";
 		else if (planType.equalsIgnoreCase("SSUP")) 
 			lookForPlanCategory="SSP";
-		else if (planType.equalsIgnoreCase("PCP") || planType.equalsIgnoreCase("MEDICA")) 
+		else if (planType.equalsIgnoreCase("PCP") || planType.equalsIgnoreCase("MEDICA") || planType.equalsIgnoreCase("SNP")) 
 			lookForPlanCategory="MAPD";
 		else 
 			lookForPlanCategory=planType;

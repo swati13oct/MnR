@@ -143,8 +143,7 @@ public class PlanDocumentsAndResourcesBaseHelper extends PlanDocumentsAndResourc
 			goToSpecificComboTab(planType, false);
 		}
 		
-		
-		checkModelPopup(driver, 5);
+		checkModelPopup(driver, 1);
 		StopWatch pageLoad = new StopWatch();
 		pageLoad.start();
 		try {
@@ -195,7 +194,7 @@ public class PlanDocumentsAndResourcesBaseHelper extends PlanDocumentsAndResourc
 			goToSpecificComboTab(planType, false);
 		}
 		
-		checkModelPopup(driver, 5);
+		checkModelPopup(driver, 1);
 		StopWatch pageLoad = new StopWatch();
 		pageLoad.start();
 		try {
@@ -320,7 +319,7 @@ public class PlanDocumentsAndResourcesBaseHelper extends PlanDocumentsAndResourc
 
 	public void planDocCheckModelPopup(WebDriver driver) {
 		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS); 
-		checkModelPopup(driver,5);
+		checkModelPopup(driver,1);
 		//note: UhcDriver default is 10
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS); 
 
@@ -328,7 +327,7 @@ public class PlanDocumentsAndResourcesBaseHelper extends PlanDocumentsAndResourc
 	
 	public void backToTopOfPage(String planType, String memberType) {
 		//moveMouseToElement(pageHeader);
-		checkModelPopup(driver, 5);
+		checkModelPopup(driver, 1);
 		if (!planDocValidate(backToTopLink)) {
 			String origUrlBeforeClick=driver.getCurrentUrl();
 			refreshPage(planType, memberType, origUrlBeforeClick);

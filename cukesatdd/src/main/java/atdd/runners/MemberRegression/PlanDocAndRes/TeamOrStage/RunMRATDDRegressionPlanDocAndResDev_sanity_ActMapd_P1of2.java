@@ -15,10 +15,10 @@ import cucumber.api.CucumberOptions;
 
 @RunWith(ExtendedCucumber.class)
 @ExtendedCucumberOptions(retryCount=1,screenShotSize="", screenShotLocation="/screenshots/",
-jsonReport = "target/cucumber-RunMRATDDRegressionPlanDocAndResDev_sanity_ActShip.json",detailedReport = true, detailedAggregatedReport = true,
-overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionPlanDocAndResDev_sanity_ActShip")
+jsonReport = "target/cucumber-RunMRATDDRegressionPlanDocAndResDev_sanity_ActMapd_P1of2.json",detailedReport = true, detailedAggregatedReport = true,
+overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionPlanDocAndResDev_sanity_ActMapd_P1of2")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberredesign" },
 features = { "src/main/resources/feature/memberredesign/planDocumentsAndResources" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionPlanDocAndResDev_sanity_ActShip.json" }, tags = { "@devRegression","@sanity","@active_ship" })
-public class RunMRATDDRegressionPlanDocAndResDev_sanity_ActShip {
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionPlanDocAndResDev_sanity_ActMapd_P1of2.json" }, tags = { "@devRegression","@sanity","@active_mapd_1of2" })
+public class RunMRATDDRegressionPlanDocAndResDev_sanity_ActMapd_P1of2 {
 }

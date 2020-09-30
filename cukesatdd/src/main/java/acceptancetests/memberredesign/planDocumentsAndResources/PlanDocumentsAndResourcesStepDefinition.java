@@ -153,7 +153,7 @@ public class PlanDocumentsAndResourcesStepDefinition {
 		yearsMap.put("nextYear", String.valueOf(nextYear));
 		getLoginScenario().saveBean(PlanDocumentsAndResourcesCommonConstants.TEST_YEARS_MAP, yearsMap);
 		getLoginScenario().saveBean(PlanDocumentsAndResourcesCommonConstants.TEST_INPUT_INFO,testInputInfoMap);
-		planDocumentsAndResourcesPage.sleepBySec(15);
+		//tbd planDocumentsAndResourcesPage.sleepBySec(15);
 		getLoginScenario().saveBean(PageConstants.PLAN_DOCUMENTS_AND_RESOURCES_PAGE,planDocumentsAndResourcesPage);
 	}
 
