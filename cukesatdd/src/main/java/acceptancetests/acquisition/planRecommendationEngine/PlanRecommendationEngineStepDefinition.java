@@ -762,11 +762,25 @@ public class PlanRecommendationEngineStepDefinition {
 			planSelectorResultspage.checkVPP(false);
 	}
 	
-	@Then("^user validate Plan Names in VPP Summary and Details in results page$")
-   	public void verify_Plan_names_results_page() {
+	@Then("^user validate MA Plan Names in VPP Summary VS Details in results page$")
+   	public void verify_MA_Plan_names_results_page() {
 		checkpopup();
 		PlanRecommendationEngineResultsPage planSelectorResultspage =  new PlanRecommendationEngineResultsPage(wd);
-		planSelectorResultspage.validatePlanNamesSummaryAndDetails();
+		planSelectorResultspage.validateMAPlanNamesSummaryAndDetails();
+	}
+	
+	@Then("^user validate PDP Plan Names in VPP Summary VS Details in results page$")
+   	public void verify_PDP_Plan_names_results_page() {
+		checkpopup();
+		PlanRecommendationEngineResultsPage planSelectorResultspage =  new PlanRecommendationEngineResultsPage(wd);
+		planSelectorResultspage.validatePDPPlanNamesSummaryAndDetails();
+	}
+	
+	@Then("^user validate SNP Plan Names in VPP Summary VS Details in results page$")
+   	public void verify_SNP_Plan_names_results_page() {
+		checkpopup();
+		PlanRecommendationEngineResultsPage planSelectorResultspage =  new PlanRecommendationEngineResultsPage(wd);
+		planSelectorResultspage.validateSNPPlanNamesSummaryAndDetails();
 	}
 	
 	@Then("^user adds Drugs in vpp summary page$")

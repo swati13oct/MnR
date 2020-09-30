@@ -1192,15 +1192,19 @@ public void checkVPP(boolean isPREVPP) {
 	}
 }
 
-public void validatePlanNamesSummaryAndDetails() {
-	System.out.println("Validating Plan Names in result pages : ");
+public void validateMAPlanNamesSummaryAndDetails() {
+	System.out.println("Validating MA Plan Names in result pages : ");
 	plansLoader();
 	int maPlanCount = Integer.parseInt(MAPlanCount.getText());
 	System.out.println(maPlanCount);
 	validate(MA1stPlanName, 60);
 	verifyPlanNames(MAPlansName, maPlanCount);
 	verifyviewplanDetails(MAPlansName, maPlanCount);
-	verifyEnrollDetails(MAPlansName, maPlanCount);
+	verifyEnrollDetails(MAPlansName, maPlanCount);	
+	}
+
+public void validatePDPPlanNamesSummaryAndDetails() {
+	System.out.println("Validating PDP Plan Names in result pages : ");
 	plansLoader();
 	PDPViewPlansLink.click();
 	int pdpPlanCount = Integer.parseInt(PDPPlanCount.getText());
@@ -1209,6 +1213,11 @@ public void validatePlanNamesSummaryAndDetails() {
 	verifyviewplanDetails(PDPPlansName, pdpPlanCount);
 	verifyEnrollDetails(PDPPlansName, pdpPlanCount);
 	plansLoader();
+}
+
+public void validateSNPPlanNamesSummaryAndDetails() {
+	System.out.println("Validating SNP Plan Names in result pages : ");
+	plansLoader();
 	SNPViewPlansLink.click();
 	int snpPlanCount = Integer.parseInt(SNPPlanCount.getText());
 	System.out.println(snpPlanCount);
@@ -1216,7 +1225,7 @@ public void validatePlanNamesSummaryAndDetails() {
 	verifyPlanNames(SNPPlansName, snpPlanCount);
 	verifyviewplanDetails(SNPPlansName, snpPlanCount);
 	verifyEnrollDetails(SNPPlansName, snpPlanCount);
-	}
+}
 
 
 public void verifyPlanNames(List<WebElement> plansName, int maPlanCount) {
@@ -1274,6 +1283,7 @@ public String verifyEnrollDetails(List<WebElement> plansName, int PlanCount) {
 	String actualplanName = "";
 	String exceptedplanName = "";
 	for(int i=0;i<PlanCount;i++) {
+		
 		if(i>=1) {
 			if(actualplanName.contains("PDP"))
 				PDPViewPlansLink.click();
@@ -1296,6 +1306,7 @@ public String verifyEnrollDetails(List<WebElement> plansName, int PlanCount) {
 	Assert.assertTrue(actualplanName.contains(exceptedplanName), "--- Plan name are not matches---");
 //	backtoPlanSummary.click();
 	browserBack();
+	threadsleep(10000);
 	try {
         WebDriverWait wait = new WebDriverWait(driver, 2);
         if(wait.until(ExpectedConditions.alertIsPresent())==null) 

@@ -59,7 +59,9 @@ Feature: Plan Recommendation Engine flow - Verify Results page in plan Recommend
     Then user selects cost preferences option in cost preferences page
       | Preference Option | <costPreferenceOption> |
     Then user validate elements in loading results page
-    Then user validate Plan Names in VPP Summary and Details in results page
+    Then user validate MA Plan Names in VPP Summary VS Details in results page
+    Then user validate PDP Plan Names in VPP Summary VS Details in results page
+    Then user validate SNP Plan Names in VPP Summary VS Details in results page
 
     Examples: 
       | Zipcode | isMultiCounty | county   | isCoverageOpt | specialNeeds | travel  | doctors         | DoctorsName | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch | pharmacyoption | Dental-Hearing-Vision-Fitness | costPreferenceOption |
