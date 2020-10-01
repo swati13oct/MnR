@@ -55,13 +55,12 @@ import pages.mobile.acquisition.ole.WelcomePageMobile;
  */
 public class AcquisitionHomePageMobile extends GlobalWebElements {
 
-
 	@FindBy(xpath = "//*[contains(@id,'cta-zipcode')]")
 	private WebElement zipCodeField;
-	
+
 	@FindBy(xpath = "//*[contains(@id,'zipcodemeded-0')]")
 	private WebElement zipCodeShopField;
-	
+
 	@FindBy(xpath = "//*[contains(@id,'zipcodemeded')][1]//following-sibling::button//*[contains(text(),'Shop Plans')]")
 	private WebElement viewShopPlansButton;
 
@@ -159,7 +158,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	public WebElement getStarted;
 
 	@FindBy(xpath = ".//*[contains(@class, 'meded-article-content__section')]//*[contains(text(), 'Request an Appointment')]")
-	//@FindBy(xpath = "//a[contains(text(),'Find an Agent')]")
+	// @FindBy(xpath = "//a[contains(text(),'Find an Agent')]")
 	private WebElement requestAgentApptDropdown;
 
 	@FindBy(xpath = "//*[@class='textalign']//p[2]/a")
@@ -259,13 +258,9 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	@FindBy(xpath = "//*[@class='container meded-article-header']//span[contains(text(),'Health Insurance Broker')]")
 	public WebElement brokerHeader;
 
-	/* LearnAboutMedicare link */
-//	@FindBy(xpath = "//*[@id='ghn_lnk_3']")
-//	private WebElement lnkLearnAboutMedicare;
-
-	@FindBy(xpath = "//span[normalize-space()='Learn About Medicare']") 
+	@FindBy(xpath = "//span[normalize-space()='Learn About Medicare']")
 	private WebElement lnkLearnAboutMedicare;
-	
+
 	@FindBy(xpath = "//h3//*[contains(@onclick,'loadCachedProviderSearch')]")
 	private WebElement providerSearchFromGlobalHeader;
 
@@ -306,7 +301,8 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	private WebElement callsam;
 
 	// @FindBy(xpath = "//*[@id='sam-call-button']/div/span[1]")
-//	@FindBy(xpath = "//*[contains(@id,'sam-call-button')]//*[contains(@class,'sam__button__text')]")
+	// @FindBy(xpath =
+	// "//*[contains(@id,'sam-call-button')]//*[contains(@class,'sam__button__text')]")
 	@FindBy(xpath = "//*[contains(@id,'sam-call-button')]/span")
 	private WebElement callsamtooltip;
 
@@ -424,17 +420,15 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 	@FindBy(xpath = "//a[@id='proceed-link']")
 	private WebElement proceedLink;
-	
+
 	@FindBy(xpath = "//body/div[@id='overlay']")
 	private WebElement overlayFilm;
 
-
-   	//String ChatSamText= "Chat with a Licensed Insurance Agent";
-	String ChatSamText= "Chat Now";
-	String CallSam= "1-877";
-//	String CallSam= "Call a Licensed Insurance Agent";
-//	String CallSam= "Call UnitedHealthcare Ins. Co.";
-
+	// String ChatSamText= "Chat with a Licensed Insurance Agent";
+	String ChatSamText = "Chat Now";
+	String CallSam = "1-877";
+	// String CallSam= "Call a Licensed Insurance Agent";
+	// String CallSam= "Call UnitedHealthcare Ins. Co.";
 
 	private static String TeamC_ACQUISITION_PAGE_URL = MRConstants.TeamC_UHC_URL;
 
@@ -583,7 +577,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		}
 		System.out.println("Current mobile page URL: " + driver.getCurrentUrl());
 	}
-	
+
 	public void fixPrivateConnection() {
 		try {
 			// String URL = "https://self-signed.badssl.com/";
@@ -1493,7 +1487,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 							// on page
 		return true;
 	}
-	
+
 	public GetStartedPageMobile clickDCERedesignLinkonMedEdPage() {
 		WebElement DCELink = driver.findElement(By
 				.xpath("//a[contains(@href,'drug-cost-estimator') and contains(@class,'contentRow__mededcontainer')]"));
@@ -1504,24 +1498,27 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		return null;
 	}
 
-	@FindBy(xpath = "//div[.='MENU']") 
+	@FindBy(xpath = "//div[.='MENU']")
 	private WebElement Menu;
-	
+
 	public void navigateToMedEdPresDrugPage() {
 		waitforElement(Menu);
 		jsClickMobile(Menu);
-		
+
 		waitforElement(lnkLearnAboutMedicare);
-		
+
 		if (lnkLearnAboutMedicare.isDisplayed()) {
 			Actions actions = new Actions(driver);
 			actions.moveToElement(lnkLearnAboutMedicare);
 			actions.build().perform();
 			System.out.println("Hover over Learn about Medicare completed");
-	    }
-		
-		//WebElement PresProvidersBenefitsLink = driver.findElement(By.xpath("//*[contains(@class, 'nav-col nav-col-3')]//a[contains(@href,'medicare-benefits')]"));
-		WebElement PresProvidersBenefitsLink = driver.findElement(By.xpath("//span[contains(text(),'Prescriptions, Providers & Benefits')]"));
+		}
+
+		// WebElement PresProvidersBenefitsLink =
+		// driver.findElement(By.xpath("//*[contains(@class, 'nav-col
+		// nav-col-3')]//a[contains(@href,'medicare-benefits')]"));
+		WebElement PresProvidersBenefitsLink = driver
+				.findElement(By.xpath("//span[contains(text(),'Prescriptions, Providers & Benefits')]"));
 		jsClickNew(PresProvidersBenefitsLink);
 	}
 
@@ -2448,9 +2445,9 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		return null;
 
 	}
-	
+
 	public void validateChatSamContent() throws InterruptedException {
-		
+
 		Actions action = new Actions(driver);
 		WebElement element = chatsam;
 		action.moveToElement(element).perform();
@@ -2458,14 +2455,15 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		System.out.println("====================================================================");
 		System.out.println(ChattoolTipText);
 		System.out.println("====================================================================");
-		
-        if (ChatSamText.equalsIgnoreCase(ChattoolTipText)) {
-          System.out.println("Chat sticky action menu roll out and contain the text Chat with a Licensed Insurance Agent");
-        }
-        else
-        	Assert.fail("No Chat sticky action menu didn't roll out and doesn't contain the text Chat with a Licensed Insurance Agent");
+
+		if (ChatSamText.equalsIgnoreCase(ChattoolTipText)) {
+			System.out.println(
+					"Chat sticky action menu roll out and contain the text Chat with a Licensed Insurance Agent");
+		} else
+			Assert.fail(
+					"No Chat sticky action menu didn't roll out and doesn't contain the text Chat with a Licensed Insurance Agent");
 	}
-	
+
 	public void OurPlansPDPLanding() {
 
 		Actions action = new Actions(driver);
