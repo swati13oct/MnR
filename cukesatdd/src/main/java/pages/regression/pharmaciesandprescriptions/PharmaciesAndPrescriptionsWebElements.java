@@ -1573,4 +1573,32 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	
 	@FindBy(xpath="//a[@data-testid='medication-action-transfer']/ancestor::div[@data-testid]//div[@data-testid='medication-data-day-supply']")
 	protected List<WebElement> listOfDaySupplyEligibleForTransferToHD;
+	
+	@FindBy(xpath = "//*[contains(text(),'shipped')]")
+	protected List<WebElement> listOfShipped;
+	
+	public boolean isOrderShipped() {
+		if (listOfShipped.size() >= 0) {
+			System.out.println("Order Shipped Medication Found");
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	@FindBy(xpath = "//div[@data-testid='medication-status-percent-75']")
+	protected List<WebElement> threeFourthHarveyBall;
+	
+	public boolean isThreeFourthHarveyBall() {
+		if (threeFourthHarveyBall.size() >= 0) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	@FindBy(xpath = "//*[@data-testid='step__label']//span[@data-testid='step__completed']/ancestor::span//span[text()='Shipped']")
+	protected WebElement ShippedOrderTracker;
+	
+	
 }

@@ -1471,7 +1471,7 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 	}
 
 	public void validateOneFourthHarveyBall() {
-		Assert.assertTrue("PROBLEM - unable to locate three fourth Harvey ball  elements", isOneFourthHarveyBall());
+		Assert.assertTrue("PROBLEM - unable to locate one fourth Harvey ball  elements", isOneFourthHarveyBall());
 	}
 
 	public void validateRemovedMessage() {
@@ -2742,4 +2742,55 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 			return false;
 		}
 	}
+	
+	public List<Integer> getListOfIndexForOrderShippedOnMyMed() {
+		int size = listOfDrugName.size();
+		validate(drugsAvailableOnMyMedication, 10);
+		String numberTXT = drugsAvailableOnMyMedication.getText();
+		int expectedSize = Integer.parseInt(numberTXT);
+		System.out.println("Expected Drug Name Size" + expectedSize);
+		while (size != expectedSize) {
+			size = listOfDrugName.size();
+		}
+		List<Integer> listOfIndex = new ArrayList<>();
+		for (int i = 0; i < listOfShipped.size(); i++) {
+			listOfIndex.add(i);
+		}
+		return listOfIndex;
+	}
+	
+	public List<Integer> fetchesMedicationInformationFrShipped() {
+		int size = listOfDrugName.size();
+		validate(drugsAvailableOnMyMedication, 10);
+		String numberTXT = drugsAvailableOnMyMedication.getText();
+		int expectedSize = Integer.parseInt(numberTXT);
+		System.out.println("Expected Drug Name Size for Shipped :: " + expectedSize);
+		while (size != expectedSize) {
+			size = listOfDrugName.size();
+		}
+		List<Integer> listOfIndex = new ArrayList<>();
+		for (int i = 0; i < listOfShipped.size(); i++) {
+			listOfIndex.add(i);
+		}
+		return listOfIndex;
+	}
+	
+	public void clickOnShippedCTABasedOnIndex(int index) {
+		listOfTrackStatus.get(rand_int).click();
+	}
+	
+	
+	public void validateShipped() {
+		Assert.assertTrue("PROBLEM - unable to locate Shipped elements",
+				isOrderShipped());
+	}
+	
+	public void validateThreeFourthHarveyBall() {
+		Assert.assertTrue("PROBLEM - unable to locate three fourth Harvey ball  elements", isThreeFourthHarveyBall());
+	}
+	
+	public boolean validateShippedonOrderTracker() {
+		return pnpValidate(ShippedOrderTracker,30);
+	}
+	
 }

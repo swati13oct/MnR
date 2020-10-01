@@ -839,4 +839,28 @@ public class MedicineCabinetStepDefinition {
 		pnpPg.validateRefillMedications();
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
 	}
+	
+	@When("^user views order status as Shipped$")
+	public void user_views_order_status_as_Shipped() throws Throwable {
+		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
+				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
+		List<Integer> indexOfShipped = pnpPg.getListOfIndexForOrderShippedOnMyMed();
+		while (indexOfShipped.size() == 0) {
+			pnpPg.clickOnNextPageArrow();
+			indexOfShipped = pnpPg.getListOfIndexForRequestPlacedOnMyMed();
+		}
+		System.out.println("Validating Shipped element");
+		pnpPg.validateShipped();
+		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
+
+	}
+	
+	@Then("^user views a three fourth Harvey Ball on that medication row$")
+	public void user_views_a_three_fourth_Harvey_Ball_on_that_medication_row() throws Throwable {
+		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
+				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
+		pnpPg.validateThreeFourthHarveyBall();
+		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
+
+	}
 }
