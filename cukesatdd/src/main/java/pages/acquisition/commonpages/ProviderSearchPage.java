@@ -21,6 +21,7 @@ import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 
 
+
 /**
  * @author pperugu
  *
@@ -47,73 +48,110 @@ public class ProviderSearchPage extends UhcDriver {
 	@FindBy(id = "pageHeader")
 	private WebElement pageHeader;
 
-	@FindBy(xpath="(//button[contains(@class,'saved-provider-button')])[1]")
-	private WebElement SaveBtn;
-	
-	@FindBy(xpath="//a[contains(text(),'View Saved')]")
-	private WebElement Viewsavebtn;
-	
-	@FindBy(xpath="//*[contains(@id,'label_unsaved_selectedLocation0')]")
-	private WebElement selectLocationOption;
-
-	@FindBy(xpath="(//*[contains(text(),'Check Provider Coverage')])[2]")
-	private WebElement Checkcoverage;
-	
-	@FindBy(xpath="//*[contains(text(),'People')][contains(@class,'option-title')]")
-	private WebElement People;
-	
-	@FindBy(xpath="//*[contains(text(),'Primary Care')][contains(@class,'option-title')]")
-	private WebElement Primary;
-	
-	
-	@FindBy(xpath="//button[contains(text(),'Primary Care Physician')]")
-	private WebElement Physician;
-
-	@FindBy(xpath="//div[contains(@class,'first')]//div[@class='hidden-phone']//button")
-	private WebElement Savebtn;
-	
-	@FindBy(xpath="//*[contains(text(),'Get Started')]")
-	private WebElement GetStarted;
-	
-	@FindBy(id="location")
-	private WebElement zipCodeTextfield;
-	
-	@FindBy(xpath="//*[@id='mainContent']//button")
-	private WebElement continueButton;
-	
-	@FindBy(xpath="(//*[contains(@class,'searchData')]//*[contains(@data-test-id,'provider-name-link')])[2]")
-	private WebElement PrimaryCarePhysician;
-	
-	@FindBy(xpath="//*[contains(@class,'action-btn negative print')]")
-	private WebElement PrintEmailBtn;
-
-	@FindBy(xpath="//span[contains(@ng-switch-when, 'false') and contains(text(),'Save')]")
-	private WebElement saveBtn2;
-	
-	@FindBy(xpath="//*[contains(@class,'provider-card')]//*[contains(@class,'provider-name')]")
-	private WebElement providerNameText;
-	
-	@FindBy(xpath="//ul[contains(@class,'gs-options')]/li//div[contains(@class,'img')][contains(@src,'next')]")
-	private WebElement nextYrTile;
-	
-	@FindBy(xpath="//ul[contains(@class,'gs-options')]/li//div[contains(@class,'img')][contains(@src,'current')]")
-	private WebElement currentYrTile;
-	
 	@FindBy(xpath = "(//*[@data-test-id='saved-provider-button'])[1]")
 	private WebElement selectProviderBtn;
+
+	//@FindBys(value = {
+	//		@FindBy(xpath = "//div[@class='acquisitionButtons hidden-phone']//button[contains(@class,'saved-provider-button')]/span[text()='Save']") })
+	@FindBy(xpath="(//button[contains(@class,'saved-provider-button')])[1]")
+	private WebElement SaveBtn;
+
 	
+	@FindBys(value = { @FindBy(xpath = "//div[@class='acquisitionButtons hidden-phone']//button[contains(@class,'saved-provider-button')]/span[text()='Save']") })
+	private List<WebElement> SaveBtns;
+
 	@FindBys(value = {
 			@FindBy(xpath = "//div[@class='acquisitionButtons hidden-phone']//button[contains(@class,'saved-provider-button')]") })
 	private List<WebElement> MulitpleSaveBtns;
+
+	@FindBy(xpath = "//button[@data-test-id='button-close']")
+	private WebElement Viewsavebtn;
+	
+	@FindBy(xpath = "//*[@data-test-id='button-view-saved-provider']")
+	private WebElement ViewsaveOldbtn;
+	
+	//@FindBy(xpath = "//*[contains(@class,'action-btn') and contains(text(),'Finish')]")
+//	@FindBy(xpath = "//*[contains(@class,'action-btn') and contains(text(),'Finish')]")
+	@FindBy(xpath = "(//*[contains(@class,'action-btn') and contains(text(),'Finish')])[2]")
+	private WebElement finishReturnBtn;
+	
+	@FindBy(xpath = "//*[text()='View Saved']")
+	private WebElement ViewsaveProviderbtn;
+	
+	@FindBy(xpath="//*[contains(@text(),'View Saved')]")
+	private WebElement EditSavedButton;
+	
+	@FindBy(xpath="//span[contains(text(),'Saved')]")
+	private WebElement ViewSavedProvidersLink;
+
+	@FindBy(xpath = "//*[contains(@id,'label_unsaved_selectedLocation0')]")
+	private WebElement selectLocationOption;
+
+	@FindBy(xpath = "(//button[contains(text(),'Check Provider Coverage')])[1]")
+	private WebElement Checkcoverage;
+	
+	@FindBy(xpath = "(//form[@data-ui-element-name='check-provider-coverage']//button[contains(@class,'action-btn')])[2]")
+	private WebElement FinishButton;
+
+	@FindBy(xpath = "//*[contains(text(),'People')][contains(@class,'option-title')]")
+	private WebElement People;
+
+	@FindBy(xpath = "//*[contains(text(),'Places')][contains(@class,'option-title')]")
+	private WebElement Places;
+
+	@FindBy(xpath = "//*[contains(text(),'Hospitals')][contains(@class,'option-title')]")
+	private WebElement Hospitals;
+
+	@FindBy(xpath = "//*[contains(text(),'Primary Care')][contains(@class,'option-title')]")
+	private WebElement Primary;
+
+	@FindBy(xpath = "//*[contains(text(),'All Primary Care')]")
+	private WebElement Physician;
+
+	@FindBy(xpath = "//div[contains(@class,'first')]//div[@class='hidden-phone']//button")
+	private WebElement Savebtn;
+
+	@FindBy(xpath = "//*[contains(text(),'Get Started')]")
+	private WebElement GetStarted;
+
+	@FindBy(id = "location")
+	private WebElement zipCodeTextfield;
+
+	@FindBy(xpath = "//*[@id='mainContent']//button")
+	private WebElement continueButton;
+
+	@FindBy(xpath = "(//*[contains(@class,'searchData')]//*[contains(@data-test-id,'provider-name-link')])[2]")
+	private WebElement PrimaryCarePhysician;
+
+	@FindBy(xpath = "//*[contains(@class,'action-btn negative print')]")
+	private WebElement PrintEmailBtn;
+
+	@FindBy(xpath = "//span[contains(@ng-switch-when, 'false') and (text()='Save')]")
+	private WebElement saveBtn2;
+
+	@FindBy(xpath = "//button[text()='Cancel']//following-sibling::button")
+	private WebElement NewsaveBtn2;
+
+	@FindBy(xpath = "(//span[contains(@ng-bind-html, 'item.title') and contains(text(),'Saved')])")
+	private WebElement Savedproviders;
+
+	@FindBy(xpath = "//*[contains(text(),'Close')]")
+	private WebElement BtnClose;
+
+	@FindBy(xpath = "//*[contains(@class,'provider-name')]")
+	private WebElement providerNameText;
+
+	@FindBy(xpath = "//ul[contains(@class,'gs-options')]/li//div[contains(@class,'img')][contains(@src,'next')]")
+	private WebElement nextYrTile;
+
+	@FindBy(xpath = "//ul[contains(@class,'gs-options')]/li//div[contains(@class,'img')][contains(@src,'current')]")
+	private WebElement currentYrTile;
 	
 	@FindBy(xpath="//button[text()='Continue Searching']")
 	private WebElement continueSearching;
 	
-	@FindBy(xpath = "(//span[contains(@ng-bind-html, 'item.title') and contains(text(),'Saved')])")
-	private WebElement Savedproviders;
-	
-	@FindBy(xpath = "(//form[@data-ui-element-name='check-provider-coverage']//button[contains(@class,'action-btn')])[2]")
-	private WebElement FinishButton;
+	@FindBy(xpath="(//button[contains(text(),'Finish')])[2]")
+	private WebElement Finish;
 	
 	
 	public ProviderSearchPage(WebDriver driver) {
