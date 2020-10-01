@@ -1141,25 +1141,24 @@ public class ComparePlansPageMobile extends UhcDriver {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void validateDrugInfo(String drug) {
-		validateNew(backToAllPlansLink);			
+		validateNew(backToAllPlansLink);
 		validateNew(yourDrugsBanner);
 		validateNew(editDrugsLink);
 		validateNew(DrugSummaryHeader);
 		validateNew(DrugSummaryCoverageHeader);
 		System.out.println("Coverage Header for plan 1 : " + DrugSummaryCoverageHeader.getText());
 		validateNew(DrugName);
-		Assert.assertTrue("Drug name is not displayed on the plan compare page",DrugName.getText().contains(drug));
+		Assert.assertTrue("Drug name is not displayed on the plan compare page", DrugName.getText().contains(drug));
 		validateNew(DrugCoverageText);
 		System.out.println("Covered or not covered text for plan 1 : " + DrugCoverageText.getText());
 		System.out.println("Verified Edit Drugs Section header and Summary section");
-		
-	}	
+
+	}
 
 	@FindBy(xpath = "//*[contains(@id,'get-started')]")
 	public WebElement getStartedTab;
-	
 
 	@FindBy(xpath = "//body/div[@id='site-wrapper']/div[@id='globalContentIdForSkipLink']/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[4]/div[1]/div[1]/div[1]/div[1]/div[1]/div[10]/div[5]/div[1]/div[4]/div[1]/div[2]/div[2]/div[1]/div[2]/div[2]/div[2]/div[1]/div[1]/div[2]/div[1]/div[1]/h4[1]/a[1]")
 	public WebElement enterDrugInformation;
