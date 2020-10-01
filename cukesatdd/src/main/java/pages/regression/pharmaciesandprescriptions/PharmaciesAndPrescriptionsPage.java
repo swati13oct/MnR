@@ -2855,4 +2855,16 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 		return pnpValidate(ShippedOrderTracker,30);
 	}
 	
+	public void clickOnViewOrderCTA() {
+		validate(viewOrderCTA, 20);
+		viewOrderCTA.click();
+	}
+	
+	public boolean validateOrderStatusTitleHeader() {
+		return validate(orderStatusPageTitle, 30);
+	}
+	
+	public boolean validateOrderNumber() {
+		return validate(orderNumber, 30) && orderNumber.getText().matches("^[0-9]*$");
+	}
 }
