@@ -1080,9 +1080,12 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 	}
 
 	public void validateOrderStatusHeader() {
+
+		pnpValidate(orderStatusPageHeader,50);
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("arguments[0].scrollIntoView(true);", orderStatusPageHeader);
-		Assert.assertTrue("PROBLEM - unable to locate Order status Header element", pnpValidate(orderStatusPageHeader));
+		Assert.assertTrue("PROBLEM - unable to locate Current Medications Header element",
+				pnpValidate(orderStatusPageHeader,50));
 	}
 
 	public void validateMyMedicationsHeader() {
@@ -2432,6 +2435,22 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 		return listOfVal;
 	}
 
+	public List<Object> fetchesMedicationInformationFrShipped() {
+		List<Object> listOfVal = new ArrayList<>();
+		Random rand = new Random();
+		rand_int = rand.nextInt(listOfShipped.size());
+
+		String text = listOfMedicationShipped.get(rand_int).getText();
+		for (WebElement child : listOfMedicationShipped.get(rand_int).findElements(By.xpath("./*"))) {
+			text = text.replaceFirst(child.getText(), "");
+		}
+		listOfVal.add(text);
+		listOfVal.add(listOfDaySupplyEligibleFrRequestPlaced.get(rand_int).getText());
+		// listOfVal.add(listOfAmntPaidEligibleFrRenew.get(rand_int).getText());
+		listOfVal.add(rand_int);
+		return listOfVal;
+	}
+
 	public List<Object> fetchesMedicationInformationFrProcessing() {
 		List<Object> listOfVal = new ArrayList<>();
 		Random rand = new Random();
@@ -2774,22 +2793,7 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 		}
 		return listOfIndex;
 	}
-	
-	public List<Integer> fetchesMedicationInformationFrShipped() {
-		int size = listOfDrugName.size();
-		validate(drugsAvailableOnMyMedication, 10);
-		String numberTXT = drugsAvailableOnMyMedication.getText();
-		int expectedSize = Integer.parseInt(numberTXT);
-		System.out.println("Expected Drug Name Size for Shipped :: " + expectedSize);
-		while (size != expectedSize) {
-			size = listOfDrugName.size();
-		}
-		List<Integer> listOfIndex = new ArrayList<>();
-		for (int i = 0; i < listOfShipped.size(); i++) {
-			listOfIndex.add(i);
-		}
-		return listOfIndex;
-	}
+
 	
 	public void clickOnShippedCTABasedOnIndex(int index) {
 		listOfTrackStatus.get(rand_int).click();

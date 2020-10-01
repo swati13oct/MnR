@@ -13,7 +13,7 @@ jsonReport = "target/cucumber-RunMRATDDRegressionOrderStatusOrderShipped.json",d
 overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionOrderStatusOrderShipped")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberredesign" }, 
 features = { "src/main/resources/feature/memberredesign/pharmaciesandprescriptions" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionOrderStatusOrderShipped.json" },tags = {"@OrderStatusShipped","@F439294","@F499653"}, monochrome =true)
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionOrderStatusOrderShipped.json" },tags = {"@F499653"}, monochrome =true)
 public class RunMRATDDRegressionOrderStatusOrderShipped {
 
 }

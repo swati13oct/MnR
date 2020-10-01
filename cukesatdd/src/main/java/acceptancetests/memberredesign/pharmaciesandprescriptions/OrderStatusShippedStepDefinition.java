@@ -18,7 +18,7 @@ import java.util.Map;
 
 public class OrderStatusShippedStepDefinition {
 
-	public static List<Integer> listOfMedicationDetail = new ArrayList<>();
+	public static List<Object> listOfMedicationDetail = new ArrayList<>();
 	public static String MedicationName = "";
 	public static String MedicatioNameToBeSearchedOnP_P;
 
@@ -42,19 +42,20 @@ public class OrderStatusShippedStepDefinition {
 
 	@When("^user views a status of Shipped and click track status$")
 	public void user_views_a_status_of_Shipped_and_click_track_status() throws Throwable {
+
+
 		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
 		List<Integer> indexOfShipped = pnpPg.getListOfIndexForOrderShippedOnMyMed();
 		while (indexOfShipped.size() == 0) {
 			pnpPg.clickOnNextPageArrow();
 			indexOfShipped = pnpPg.getListOfIndexForOrderShippedOnMyMed();
-			
 		}
 		listOfMedicationDetail = pnpPg.fetchesMedicationInformationFrShipped();
 		int medicationToBeClicked = (int) listOfMedicationDetail.get(listOfMedicationDetail.size() - 1);
 		MedicatioNameToBeSearchedOnP_P = listOfMedicationDetail.get(0).toString().trim();
 		MedicationName = listOfMedicationDetail.get(0).toString().trim();
-		System.out.println("Medication Name eligilable for Processing is" + MedicationName);
+		System.out.println("Medication Name eligilable for shipped is" + MedicationName);
 		pnpPg.clickOnShippedCTABasedOnIndex(medicationToBeClicked);
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);	
 	}
