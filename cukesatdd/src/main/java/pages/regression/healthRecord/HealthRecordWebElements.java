@@ -35,7 +35,7 @@ public class HealthRecordWebElements  extends UhcDriver {
 	@FindBy(xpath="//h1[contains(.,'Sign In')]")
 	protected WebElement claimsSysTestPg;
 
-	@FindBy(xpath="//header[contains(@class,'sub-nav-header')]//a[contains(@track,'explanation')]")
+	@FindBy(xpath="//header[contains(@class,'sub-nav-header')]//a[contains(@track,'explanation') or contains(@data-testid,'explanation')]")
 	protected WebElement eobTopSubMenuLnk;
 
 	@FindBy(xpath="//div[@class='deskHeaderContainer']//a[contains(@id,'coveragebenefits')]")

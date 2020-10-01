@@ -14,10 +14,14 @@ Feature: 1.24.a Member Individual Health Record - P1 - Dashboard, FindCare, Clai
 	Then the user navigates to Claims page if applicable and validate Health Record link display behavior
 
     #----------- begin - cases with NO IHR link
-    @no_ihr_p1_ship_exclude
+    @no_ihr_p1_ship_exclude @sanity
     Examples: 
 	    | index | FID     | planType                 | memberType         | expectLink  | 
 	    | 01    | F424804 | SHIP_MEDICARE SUPPLEMENT | NO_IHR             | false       |
+
+    @no_ihr_p1_ship_exclude
+    Examples: 
+	    | index | FID     | planType                 | memberType         | expectLink  | 
 	    | 02    | F424804 | MA                       | EXCLUDE_IHR        | false       |
 
     @no_ihr_p1_shipCombo
@@ -42,6 +46,10 @@ Feature: 1.24.a Member Individual Health Record - P1 - Dashboard, FindCare, Clai
     Examples: 
 	    | index | FID     | planType | memberType         | expectLink | 
 	    | 08    | F424804 | MA       | IHR                | true       |
+
+    @ihr_p1_ma_mapd @devRegression @sanity
+    Examples: 
+	    | index | FID     | planType | memberType         | expectLink | 
 	    | 09    | F424804 | MAPD     | NONBOA_GROUP_IHR   | true       |
 
     @ihr_p1_pdp

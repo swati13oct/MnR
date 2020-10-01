@@ -87,11 +87,6 @@ public class HealthRecordStepDefinition {
 
 		testNote.add("===================================================");
 		testNote.add("\tValidation for page '"+targetPage+"'");
-		//tbd Map<String, String> memberAttributesMap=parseInputArguments(memberAttributes);
-		//tbd String tmp=memberAttributesMap.get("Expect Link");
-		//tbd Assert.assertTrue("PROBLEM - input 'Expect Link' value should either be 'true' or 'false' | Actual='"+tmp+"', please correct and retry",tmp.equalsIgnoreCase("true") || tmp.equalsIgnoreCase("false"));
-		//tbd boolean expHealthRecordLnk=Boolean.valueOf(tmp);
-		//tbd getLoginScenario().saveBean(HealthRecordCommonConstants.EXPECT_IHR_LINK, expHealthRecordLnk);	
 
 		HealthRecordPage healthRecordPage = new HealthRecordPage(wd);
 		boolean expComboTab=false;
@@ -871,7 +866,6 @@ public class HealthRecordStepDefinition {
 		}
 		wd=healthRecordPage.navigateToPharmacyLocatorPage(memberType);
 
-		//tbd boolean expHealthRecordLnk=(Boolean) getLoginScenario().getBean(HealthRecordCommonConstants.EXPECT_IHR_LINK);	
 		boolean expComboTab=false;
 		//note: this page will not have combo tab even for combo user
 		//if (memberType.toLowerCase().contains("combo"))
@@ -934,7 +928,6 @@ public class HealthRecordStepDefinition {
 		}
 		wd=healthRecordPage.navigateToDcePage(memberType);
 
-		//tbd boolean expHealthRecordLnk=(Boolean) getLoginScenario().getBean(HealthRecordCommonConstants.EXPECT_IHR_LINK);	
 		boolean expComboTab=false;
 		//note: this page will not have combo tab even for combo user
 		//if (memberType.toLowerCase().contains("combo"))
