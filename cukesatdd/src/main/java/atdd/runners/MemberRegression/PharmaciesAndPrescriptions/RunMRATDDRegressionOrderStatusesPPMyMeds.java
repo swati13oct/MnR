@@ -11,7 +11,7 @@ jsonReport = "target/cucumber-RunMRATDDRegressionOrderStatusesPPMyMeds.json",det
 overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionOrderStatusesPPMyMeds")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberredesign" },
 features = { "src/main/resources/feature/memberredesign/pharmaciesandprescriptions" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionOrderStatusesPPMyMeds.json" }, tags = { "@oops" }, monochrome =true)
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionOrderStatusesPPMyMeds.json" }, tags = { "@F439294" }, monochrome =true)
 public class RunMRATDDRegressionOrderStatusesPPMyMeds {
 
 }

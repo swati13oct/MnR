@@ -52,8 +52,8 @@ Feature: Order Statuses - P&P, My Meds
 
 
 
-  @OrderStatuses @F439294 @US2923817 @oops
-  Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify user views Processing order status
+  @OrderStatuses @F439294 @US2923817
+  Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify user views request cancelled order status
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
