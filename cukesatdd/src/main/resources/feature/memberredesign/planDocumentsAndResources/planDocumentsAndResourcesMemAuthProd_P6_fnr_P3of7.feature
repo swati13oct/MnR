@@ -32,16 +32,16 @@ Feature: 1.06.6.2 Member Plans and Documents - section: Forms And Resources Part
 	  | Section Display                    | <fnr_sd>   | 
 	  | Reimbursement Forms                | <fnr_rf>   | 
 
-	@prod_preeffective_ma_3of7
-	Examples: 
-      | index  | TID         | username  | password  | MemUserName     | planType | memberType            | fnr_sd | fnr_pdmo | fnr_ppi | fnr_rf |
-      | 01-096 | xxxxx       | kkumard  | mnrs786@  | Ranch1955    | MA       | AARP_IND_PREEFF_PDnR  | false  | false    | false   | false  | 
-#      | 02-097 | xxxxx       | kkumard  | mnrs786@  | testusername    | MA       | GROUP_PREEFF_PDnR     | false  | false    | false   | false  |
-
-#	@prod_preeffective_mapd_3of7
+#	@prod_preeffective_ma_3of7
 #	Examples: 
 #      | index  | TID         | username  | password  | MemUserName     | planType | memberType            | fnr_sd | fnr_pdmo | fnr_ppi | fnr_rf |
-#      | 03-098 | xxxxx       | kkumard  | mnrs786@  | testusername    | MAPD     | AARP_IND_PREEFF_PDnR  | false  | false    | false   | false  |
+#      | 01-096 | xxxxx       | kkumard  | mnrs786@  | Ranch1955    | MA       | AARP_IND_PREEFF_PDnR  | false  | false    | false   | false  | 
+#      | 02-097 | xxxxx       | kkumard  | mnrs786@  | testusername    | MA       | GROUP_PREEFF_PDnR     | false  | false    | false   | false  |
+
+	@prod_preeffective_mapd_3of7
+	Examples: 
+      | index  | TID         | username  | password  | MemUserName     | planType | memberType            | fnr_sd | fnr_pdmo | fnr_ppi | fnr_rf |
+      | 03-098 | xxxxx       | kkumard  | mnrs786@  | Abayne01          | MAPD     | AARP_IND_PREEFF_PDnR  | false  | false    | false   | false  |
 
 #	@prod_preeffective_pdp_3of7
 #	Examples: 
