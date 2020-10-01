@@ -2,6 +2,62 @@
 Feature: 1.24.d Member Individual Health Record - P4 - HealthAndWellness, AccountSettings, ContactUs
 
   #----- begin sanity
+  @sanity01
+  Scenario Outline: -Index <index> -FID <FID> -Plan Type: <planType> -Member Type: <memberType> - To verify iHR link display for user that is not on the exclusion table - P4 - HealthAndWellness
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type   | <planType>         |
+      | Member Type | <memberType>       |
+    Then the user store expected link behavior
+      | Expect Link | <expectLink>       |
+	Then the user navigates to Health and Wellness page and validate Health Record link display behavior
+
+    @no_ihr_p4_ship_sanity
+    Examples: 
+	    | index | FID     | planType                 | memberType         | expectLink  | 
+	    | S01   | F424804 | SHIP_MEDICARE SUPPLEMENT | NO_IHR             | false       |
+
+    @ihr_p4_mapd_sanity
+    Examples: 
+	    | index | FID     | planType | memberType         | expectLink | 
+	    | S09   | F424804 | MAPD     | NONBOA_GROUP_IHR   | true       |
+
+  @sanity02
+  Scenario Outline: -Index <index> -FID <FID> -Plan Type: <planType> -Member Type: <memberType> - To verify iHR link display for user that is not on the exclusion table - P4 - AccountSettings
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type   | <planType>         |
+      | Member Type | <memberType>       |
+    Then the user store expected link behavior
+      | Expect Link | <expectLink>       |
+	Then the user navigates to Account Settings page and validate Health Record link display behavior
+
+    @no_ihr_p4_ship_sanity
+    Examples: 
+	    | index | FID     | planType                 | memberType         | expectLink  | 
+	    | S01   | F424804 | SHIP_MEDICARE SUPPLEMENT | NO_IHR             | false       |
+
+    @ihr_p4_mapd_sanity
+    Examples: 
+	    | index | FID     | planType | memberType         | expectLink | 
+	    | S09   | F424804 | MAPD     | NONBOA_GROUP_IHR   | true       |
+
+  @sanity03
+  Scenario Outline: -Index <index> -FID <FID> -Plan Type: <planType> -Member Type: <memberType> - To verify iHR link display for user that is not on the exclusion table - P4 - ContactUs
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type   | <planType>         |
+      | Member Type | <memberType>       |
+    Then the user store expected link behavior
+      | Expect Link | <expectLink>       |
+	Then the user navigates to Contact Us page and validate Health Record link display behavior
+
+    @no_ihr_p4_ship_sanity
+    Examples: 
+	    | index | FID     | planType                 | memberType         | expectLink  | 
+	    | S01   | F424804 | SHIP_MEDICARE SUPPLEMENT | NO_IHR             | false       |
+
+    @ihr_p4_mapd_sanity
+    Examples: 
+	    | index | FID     | planType | memberType         | expectLink | 
+	    | S09   | F424804 | MAPD     | NONBOA_GROUP_IHR   | true       |
 
   #----- begin regression
    @healthRecord01 @regressionMember @US2471601 @F424804
@@ -16,14 +72,10 @@ Feature: 1.24.d Member Individual Health Record - P4 - HealthAndWellness, Accoun
 	Then the user navigates to Contact Us page and validate Health Record link display behavior
 
     #----------- begin - cases with NO IHR link
-    @no_ihr_p4_ship_exclude @sanity
-    Examples: 
-	    | index | FID     | planType                 | memberType         | expectLink  | 
-	    | 01    | F424804 | SHIP_MEDICARE SUPPLEMENT | NO_IHR             | false       |
-
     @no_ihr_p4_ship_exclude
     Examples: 
 	    | index | FID     | planType                 | memberType         | expectLink  | 
+	    | 01    | F424804 | SHIP_MEDICARE SUPPLEMENT | NO_IHR             | false       |
 	    | 02    | F424804 | MA                       | EXCLUDE_IHR        | false       |
 
     @no_ihr_p4_shipCombo
@@ -48,10 +100,6 @@ Feature: 1.24.d Member Individual Health Record - P4 - HealthAndWellness, Accoun
     Examples: 
 	    | index | FID     | planType | memberType         | expectLink | 
 	    | 08    | F424804 | MA       | IHR                | true       |
-
-    @ihr_p4_ma_mapd @devRegression @sanity
-    Examples: 
-	    | index | FID     | planType | memberType         | expectLink | 
 	    | 09    | F424804 | MAPD     | NONBOA_GROUP_IHR   | true       |
 
     @ihr_p4_pdp

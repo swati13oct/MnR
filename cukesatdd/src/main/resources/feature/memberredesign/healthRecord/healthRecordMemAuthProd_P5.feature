@@ -2,9 +2,66 @@
 Feature: 1.24.2.e Member Individual Health Record - PROD - P5 - PharmacyLocator, DCE
 
   #----- begin sanity
+  @prod_sanity01
+  Scenario Outline: -Index <index> -FID <FID> -Plan Type: <planType> -Member Type: <memberType> - To verify iHR link display for user that is not on the exclusion table - P5 - DCE
+    Given the user is on member auth login flow page
+    When the member is able to login with correct username and password
+      | Username | <username> |
+      | Password | <password> |
+    And Member Enters the Username he wants to search
+      | MemUsername | <MemUserName> |
+    And user clicks on member to select
+    And user stores test input for validations
+      | Username | <MemUserName> |
+      | Plan Type    | <planType>    |
+      | Member Type  | <memberType>  |
+    #-------------- navigate to the target test page for testing
+    Then the user store expected link behavior
+      | Expect Link | <expectLink>       |
+	Then the user navigates to Pharmacy Locator page and validate Health Record link display behavior
+
+    #----------- begin - cases with NO IHR link
+    @prod_no_ihr_p5_ship_sanity
+    Examples: 
+	    | index | FID     | username  | password  | MemUserName             | planType                 | memberType         | expectLink  | 
+	    | S01   | F424804 | kkumard   | mnrs786@  | Pramila1946             | SHIP_MEDICARE SUPPLEMENT | NO_IHR             | false       |
+
+    @prod_ihr_p5_mapd_sanity
+    Examples: 
+	    | index | FID     | username  | password  | MemUserName             | planType | memberType         | expectLink | 
+	    | S09   | F424804 | kkumard   | mnrs786@  | SHERMANJAFFE65          | MAPD     | NONBOA_GROUP_IHR   | true       |
+
+  @prod_sanity02
+  Scenario Outline: -Index <index> -FID <FID> -Plan Type: <planType> -Member Type: <memberType> - To verify iHR link display for user that is not on the exclusion table - P5 - DCE
+    Given the user is on member auth login flow page
+    When the member is able to login with correct username and password
+      | Username | <username> |
+      | Password | <password> |
+    And Member Enters the Username he wants to search
+      | MemUsername | <MemUserName> |
+    And user clicks on member to select
+    And user stores test input for validations
+      | Username | <MemUserName> |
+      | Plan Type    | <planType>    |
+      | Member Type  | <memberType>  |
+    #-------------- navigate to the target test page for testing
+    Then the user store expected link behavior
+      | Expect Link | <expectLink>       |
+	Then the user navigates to DCE page and validate Health Record link display behavior
+
+    #----------- begin - cases with NO IHR link
+    @prod_no_ihr_p5_ship_sanity
+    Examples: 
+	    | index | FID     | username  | password  | MemUserName             | planType                 | memberType         | expectLink  | 
+	    | S01   | F424804 | kkumard   | mnrs786@  | Pramila1946             | SHIP_MEDICARE SUPPLEMENT | NO_IHR             | false       |
+
+    @prod_ihr_p5_mapd_sanity
+    Examples: 
+	    | index | FID     | username  | password  | MemUserName             | planType | memberType         | expectLink | 
+	    | S09   | F424804 | kkumard   | mnrs786@  | SHERMANJAFFE65          | MAPD     | NONBOA_GROUP_IHR   | true       |
 
   #----- begin regression
-   @prod_healthRecord01 @US2471601 @F424804
+  @prod_healthRecord01 @US2471601 @F424804
   Scenario Outline: -Index <index> -FID <FID> -Plan Type: <planType> -Member Type: <memberType> - To verify iHR link display for user that is not on the exclusion table - P5 - PharmacyLocator, DCE
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
@@ -24,7 +81,7 @@ Feature: 1.24.2.e Member Individual Health Record - PROD - P5 - PharmacyLocator,
 	Then the user navigates to DCE page and validate Health Record link display behavior
 
     #----------- begin - cases with NO IHR link
-    @prod_no_ihr_p5_ship_exclude @sanity
+    @prod_no_ihr_p5_ship_exclude
     Examples: 
 	    | index | FID     | username  | password  | MemUserName             | planType                 | memberType         | expectLink  | 
 	    | 01    | F424804 | kkumard   | mnrs786@  | Pramila1946             | SHIP_MEDICARE SUPPLEMENT | NO_IHR             | false       |
@@ -54,10 +111,6 @@ Feature: 1.24.2.e Member Individual Health Record - PROD - P5 - PharmacyLocator,
     Examples: 
 	    | index | FID     | username  | password  | MemUserName             | planType | memberType         | expectLink | 
 	    | 08    | F424804 | kkumard   | mnrs786@  | ERNIE2450               | MA       | IHR                | true       |
-
-    @prod_ihr_p5_ma_mapd @sanity
-    Examples: 
-	    | index | FID     | username  | password  | MemUserName             | planType | memberType         | expectLink | 
 	    | 09    | F424804 | kkumard   | mnrs786@  | SHERMANJAFFE65          | MAPD     | NONBOA_GROUP_IHR   | true       |
 
     @prod_ihr_p5_pdp
