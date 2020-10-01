@@ -1962,7 +1962,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 					|| MRScenario.environment.equalsIgnoreCase("offline-stage"))
 			{
 				for (String rname : jenkinsRunnerFiles.split(",")) {
-					if (rname.toUpperCase().contains("PLANRECOMMENDATIONENGINE")
+					if ((rname.toUpperCase().contains("PLANRECOMMENDATIONENGINE") || rname.contains("PRE"))
 							&& rname.toUpperCase().contains("ULAYER")) {
 						if (MRScenario.environment.equalsIgnoreCase("digital-uatv2"))
 							startNewPRE(AARP_ACQISITION_PAGE_URL.replace(".com", ".com/plan-recommendation-engine.html")
@@ -1972,7 +1972,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 									AARP_ACQISITION_PAGE_URL.replace(".com", ".com/plan-recommendation-engine.html"),
 									browser);
 					}
-					if (rname.toUpperCase().contains("PLANRECOMMENDATIONENGINE")
+					if ((rname.toUpperCase().contains("PLANRECOMMENDATIONENGINE") || rname.contains("PRE"))
 							&& rname.toUpperCase().contains("BLAYER")) {
 						if (MRScenario.environment.equalsIgnoreCase("digital-uatv2"))
 							startNewPRE(UMS_ACQISITION_PAGE_URL.replace(".com", ".com/plan-recommendation-engine.html")
@@ -1986,11 +1986,11 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			}
 			if (MRScenario.environment.equalsIgnoreCase("offline")) {
 				for (String rname : jenkinsRunnerFiles.split(",")) {
-					if (rname.toUpperCase().contains("PLANRECOMMENDATIONENGINE")
+					if ((rname.toUpperCase().contains("PLANRECOMMENDATIONENGINE") || rname.contains("PRE"))
 							&& rname.toUpperCase().contains("ULAYER"))
 						startNewPRE(AARP_ACQISITION_OFFLINE_PAGE_URL.replace(".com",
 								".com/plan-recommendation-engine.html"), browser);
-					if (rname.toUpperCase().contains("PLANRECOMMENDATIONENGINE")
+					if ((rname.toUpperCase().contains("PLANRECOMMENDATIONENGINE") || rname.contains("PRE"))
 							&& rname.toUpperCase().contains("BLAYER"))
 						startNewPRE(
 								UMS_ACQISITION_OFFLINE_PAGE_URL.replace(".com", ".com/plan-recommendation-engine.html"),
@@ -2000,12 +2000,12 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			}
 			if (MRScenario.environment.equalsIgnoreCase("prod")) {
 				for (String rname : jenkinsRunnerFiles.split(",")) {
-					if (rname.toUpperCase().contains("PLANRECOMMENDATIONENGINE")
+					if ((rname.toUpperCase().contains("PLANRECOMMENDATIONENGINE") || rname.contains("PRE"))
 							&& rname.toUpperCase().contains("ULAYER"))
 						startNewPRE(
 								AARP_ACQISITION_PROD_PAGE_URL.replace(".com", ".com/plan-recommendation-engine.html"),
 								browser);
-					if (rname.toUpperCase().contains("PLANRECOMMENDATIONENGINE")
+					if ((rname.toUpperCase().contains("PLANRECOMMENDATIONENGINE") || rname.contains("PRE"))
 							&& rname.toUpperCase().contains("BLAYER"))
 						startNewPRE(
 								UMS_ACQISITION_PROD_PAGE_URL.replace(".com", ".com/plan-recommendation-engine.html"),
