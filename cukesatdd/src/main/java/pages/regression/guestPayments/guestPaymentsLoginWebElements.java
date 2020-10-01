@@ -48,7 +48,7 @@ public class guestPaymentsLoginWebElements extends UhcDriver{
 	@FindBy(xpath= "//a[contains(text(),'sign in')]")
     public static WebElement signInLink;
 	
-	@FindBy(xpath= "//a[contains(text(),'Help me find my ID')]")
+	@FindBy(xpath= "//a[contains(text(),'Help me find my id')]")
     public static WebElement helpMeFindMyIdLink;
 		
 	@FindBy(id= "memberId")
