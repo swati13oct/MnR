@@ -421,7 +421,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "//body/div[@id='overlay']")
 	private WebElement overlayFilm;	
 	
-	@FindBy(xpath="//a[contains(@href,'https://www.myuhcagent.com/?WT.mc_id=880180')]")
+	@FindBy(xpath="//a[contains(@href,'https://www.myuhcagent.com/')]")
 	public WebElement RightRail_FindAnAgent; 
 
    	String ChatSamText= "Chat with a Licensed Insurance Agent";
@@ -2211,13 +2211,28 @@ public class AcquisitionHomePage extends GlobalWebElements {
 						System.out.println("myuhcagent Page is displayed");
 						Assert.assertTrue(true);
 						//driver.navigate().back();
-						driver.switchTo().window(parentWindow);                	  
+						//driver.switchTo().window(parentWindow);                	  
 						}
 					else
 						Assert.fail("Unable to load Myuhcagent Page");
-					return null;           //need tocheck this line         
-				}          
+					try {
+						Thread.sleep(2000);
+					
+							
+					threadsleep(3);
+					waitForCountDecrement(2);
+					driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
+					
+					return new RequestHelpAndInformationPage(driver);  
+					
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+				}
+					return null;
+		}
 
+				
 				public void sleepBySec(int sec) {
 					try {
 						Thread.sleep(sec*1000);
