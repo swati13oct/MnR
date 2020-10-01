@@ -25,6 +25,7 @@ import pages.acquisition.ulayer.VPPPlanSummaryPage;
 import pages.mobile.acquisition.ulayer.ReviewAndSubmitPageMobile;
 import pages.mobile.acquisition.ulayer.VPPPlanSummaryPageMobile;
 import pages.mobile.acquisition.bluelayer.AcquisitionHomePageMobile;
+import pages.mobile.acquisition.ole.WelcomePageMobile;
 import pages.mobile.acquisition.planrecommendationengine.CoverageOptionsMobilePage;
 import pages.mobile.acquisition.planrecommendationengine.DoctorsMobilePage;
 import pages.mobile.acquisition.planrecommendationengine.DrugMobilePage;
@@ -63,7 +64,7 @@ public class OLEStepDefinitionMobile {
 	AppiumDriver wd;
 
 
-	@Then("^the user clicks on Enroll Now for AARP site to start the OLE flow$")
+	@Then("^the user clicks on Enroll Now for AARP site to start the OLE flow mobile$")
 	public void the_user_clicks_on_Enroll_Now_to_start_the_OLE_flow(DataTable planAttributes) throws Throwable {
 
 		List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows();
@@ -85,25 +86,16 @@ public class OLEStepDefinitionMobile {
 		String SiteName;
 		SiteName = (String) getLoginScenario().getBean(oleCommonConstants.ACQ_SITE_NAME);	
 		//-----------------------------------------------------------------------------------------------------
-		WelcomePage welcomePage;
-		if(SiteName.contains("UHC_ACQ")){
-			pages.acquisition.bluelayer.VPPPlanSummaryPage planSummaryPage = (pages.acquisition.bluelayer.VPPPlanSummaryPage) getLoginScenario()
+		WelcomePageMobile welcomePage;
+			VPPPlanSummaryPageMobile planSummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
 					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+			
 			TFN = planSummaryPage.GetTFNforPlanType();
 
 			//PlanPremium = planSummaryPage.getPlanPremium(PlanName);
 			welcomePage = planSummaryPage.Enroll_OLE_Plan(PlanName,PlanType);
 
-		}
-		else{
-			VPPPlanSummaryPage planSummaryPage = (VPPPlanSummaryPage) getLoginScenario()
-					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-			TFN = planSummaryPage.GetTFNforPlanType();
-
-			//PlanPremium = planSummaryPage.getPlanPremium(PlanName);
-			welcomePage = planSummaryPage.Enroll_OLE_Plan(PlanName,PlanType);
-
-		} //--------------------------------------------------------------------------------------------------------------------
+		 //--------------------------------------------------------------------------------------------------------------------
 		
 		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_NAME, PlanName);
 		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_TYPE, PlanType);

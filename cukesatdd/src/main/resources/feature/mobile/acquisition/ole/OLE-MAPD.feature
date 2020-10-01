@@ -12,8 +12,7 @@ Feature: 1.05.4.ACQ-OLE common tool flow E2E MAPD AARP Mobile
     And the user selects plan year for AARP site
       | Plan Year | <planyear> |
     And the user validates the available plans for selected plan types in the AARP site
-    Then verify plan compare checkbox is not visible on plan summary on AARP
-	 Then the user clicks on Enroll Now for AARP site to start the OLE flow
+	 Then the user clicks on Enroll Now for AARP site to start the OLE flow mobile
       | Plan Name | <planName> |
     Then the user validates the Plan details on OLE
     Then the user validates TFN in Welcome OLE Right Rail
