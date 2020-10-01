@@ -30,6 +30,7 @@ public class HealthRecordPage  extends HealthRecordBase {
 	public void openAndValidate(){
 	}
 	public WebDriver navigateToContactUsPage() {
+		checkModelPopup(driver,1);
 		if (noWaitValidate(ContactUsLnk)) {
 			ContactUsLnk.click();
 		} else {
@@ -72,6 +73,7 @@ public class HealthRecordPage  extends HealthRecordBase {
 
 
 	public WebDriver navigateToDcePage(String memberType) {
+		checkModelPopup(driver,1);
 		if (noWaitValidate(testharnessTblDceLnk)) {
 			testharnessTblDceLnk.click();
 		} else if (noWaitValidate(drugLookup)) {
@@ -124,6 +126,7 @@ public class HealthRecordPage  extends HealthRecordBase {
 
 
 	public WebDriver navigateToFindCarePage() {
+		checkModelPopup(driver,1);
 		if (noWaitValidate(findCareTopMenuLnk)) {
 			System.out.println("Find findCareTopMenuLnk, click it");
 			findCareTopMenuLnk.click();
@@ -166,11 +169,13 @@ public class HealthRecordPage  extends HealthRecordBase {
 		navigateToClaimsPage();
 		CommonUtility.waitForPageLoad(driver, eobTopSubMenuLnk, 5);
 		Assert.assertTrue("PROBLEM - unable to locate EOB link on top menu", noWaitValidate(eobTopSubMenuLnk));
+		checkModelPopup(driver,1);
 		eobTopSubMenuLnk.click();
 		return driver;
 	}
 
 	public WebDriver navigateToEobPageViaTestharnessTbl() {
+		checkModelPopup(driver,1);
 		if (noWaitValidate(testharnessTblEobLnk)) {
 			testharnessTblEobLnk.click();
 		} else {
@@ -216,6 +221,7 @@ public class HealthRecordPage  extends HealthRecordBase {
 	
 	public WebDriver navigateToPlanDocPage_preEff(String memberType) {
 		navigateToBenefitsPage(memberType);
+		checkModelPopup(driver,1);
 		if (noWaitValidate(planDocHeaderTxt)) {
 			System.out.println("Already on PlanDoc page, no need to go any further");
 		} else {
@@ -231,6 +237,7 @@ public class HealthRecordPage  extends HealthRecordBase {
 	public WebDriver navigateToPlanDocPage(String memberType) {
 		navigateToBenefitsPage(memberType);
 		System.out.println("Finished navigating to benefits page");
+		checkModelPopup(driver,1);
 		if (noWaitValidate(planDocHeaderTxt)) {
 			System.out.println("Already on PlanDoc page, no need to go any further");
 		} else {
@@ -255,6 +262,7 @@ public class HealthRecordPage  extends HealthRecordBase {
 	}
 
 	public WebDriver navigateToMyDocPage() {
+		checkModelPopup(driver,1);
 		//note: take too long to navigate to plan doc page so this step will have together w/ planDoc
 		//note: assume you are already on planDoc
 		Assert.assertTrue("PROBLEM - unable to locate My Documents link on Plan Documents and Resources page", noWaitValidate(myDocLnk));
@@ -271,6 +279,7 @@ public class HealthRecordPage  extends HealthRecordBase {
 
 	public WebDriver navigateToOrderPage(String memberType) {
 		navigateToBenefitsPage(memberType);
+		checkModelPopup(driver,1);
 		if (noWaitValidate(orderTopMenuLnk)) {
 			checkModelPopup(driver,1);
 			orderTopMenuLnk.click();
@@ -292,6 +301,7 @@ public class HealthRecordPage  extends HealthRecordBase {
 	}
 
 	public WebDriver navigateToPaymentsPage() {
+		checkModelPopup(driver,1);
 		if (noWaitValidate(paymentTopMenuLnk)) {
 			paymentTopMenuLnk.click();
 			CommonUtility.checkPageIsReadyNew(driver);
@@ -309,6 +319,7 @@ public class HealthRecordPage  extends HealthRecordBase {
 	}
 
 	public WebDriver navigateToPnpPage() {
+		checkModelPopup(driver,1);
 		if (noWaitValidate(pnpTopMenuLnk)) {
 			pnpTopMenuLnk.click();
 			CommonUtility.checkPageIsReadyNew(driver);
@@ -326,6 +337,7 @@ public class HealthRecordPage  extends HealthRecordBase {
 	}
 
 	public WebDriver navigateToHwPage() {
+		checkModelPopup(driver,1);
 		if (noWaitValidate(hwTopMenuLnk)) {
 			hwTopMenuLnk.click();
 			CommonUtility.checkPageIsReadyNew(driver);

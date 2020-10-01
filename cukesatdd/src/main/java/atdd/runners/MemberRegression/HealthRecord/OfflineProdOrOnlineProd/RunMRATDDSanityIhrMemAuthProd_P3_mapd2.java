@@ -14,7 +14,7 @@ jsonReport = "target/cucumber-RunMRATDDSanityIhrMemAuthProd_P3_mapd2.json",detai
 overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDSanityIhrMemAuthProd_P3_mapd2")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberredesign" }, 
 features = { "src/main/resources/feature/memberredesign/healthRecord" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDSanityIhrMemAuthProd_P3_mapd2.json" }, tags = { "@prod_ihr_p3_mapd_sanity","@sanity02" })
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDSanityIhrMemAuthProd_P3_mapd2.json" }, tags = { "@prod_ihr_p3_mapd_sanity","@prod_sanity02" })
 public class RunMRATDDSanityIhrMemAuthProd_P3_mapd2 {
 
 }

@@ -609,7 +609,27 @@ public class HealthRecordStepDefinition {
 		} 
 
 		HealthRecordPage healthRecordPage = new HealthRecordPage(wd);
-		boolean hasPaymentTab = (Boolean) getLoginScenario().getBean(HealthRecordCommonConstants.HAS_PAYMENT_TAB);
+		boolean hasPaymentTab=false;
+		if (getLoginScenario().getBean(HealthRecordCommonConstants.HAS_PAYMENT_TAB)==null) {
+			wd=healthRecordPage.navigateToBenefitsPage(memberType);
+
+			//note: consumerDetail only show up on secondary page, get all the info now for later use
+			String consumerDetailStr=healthRecordPage.getConsumerDetailsFromlocalStorage();
+			boolean isComboUser=memberType.toLowerCase().contains("combo");
+			String lookForPlanCategory=planType;
+			if (planType.toUpperCase().contains("SHIP")) {
+				String[] tmp=planType.split("_");
+				Assert.assertTrue("PROBLEM - for SHIP user planType value needs to have format SHIP_<planCategory>, please update input in feature file", tmp.length>1);
+				lookForPlanCategory=tmp[1];
+			}
+			hasPaymentTab=healthRecordPage.getPremiumPaymentInConsumerDetails(isComboUser, lookForPlanCategory, consumerDetailStr);
+			getLoginScenario().saveBean(HealthRecordCommonConstants.HAS_PAYMENT_TAB, hasPaymentTab);
+
+		} else {
+			hasPaymentTab = (Boolean) getLoginScenario().getBean(HealthRecordCommonConstants.HAS_PAYMENT_TAB);
+		}
+		
+		
 		if (!hasPaymentTab) {
 			System.out.println(planType+" user hasPaymentTab=false, doesn't have '"+targetPage+"' page, skipping step...");
 			testNote.add("\tSkip Health Record validation for planType='"+planType+"' | memberType='"+memberType+"' | env='"+MRScenario.environment+"'");
