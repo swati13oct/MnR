@@ -85,21 +85,25 @@ public class ZipCodeAndPlanYearCapturePageMobile extends UhcDriver {
 		return null;
 	}
 
+	@FindBy(xpath = "//span[text()='Find Plans' and @xpath=\"1\"]")
+	public WebElement FindPlans;
+
 	public void enterZipCodeandcounty(String zipcode) throws InterruptedException {
 		validateNew(zipCodeTxtbox);
 		sendkeys(zipCodeTxtbox, zipcode);
+		jsClickMobile(FindPlans);
 		Thread.sleep(3000);
 		try {
 			if (countyDropdown.isDisplayed()) {
 				countyDropdown.click();
-				CommonUtility.waitForPageLoad(driver,countyRows , 30);
+				CommonUtility.waitForPageLoad(driver, countyRows, 30);
 				driver.findElements(By.xpath("//select[@id='county']/option")).get(1).click();
 			}
 		} catch (Exception e) {
 			System.out.println("county box not found");
 		}
 		validateNew(continueBtn);
-		//continueBtn.click();
+		// continueBtn.click();
 	}
 
 	public DrugSummaryPageMobile clickContinueBtn() {
@@ -145,7 +149,7 @@ public class ZipCodeAndPlanYearCapturePageMobile extends UhcDriver {
 			Assert.assertTrue("Plan Year dropdoown not displayed during AEP", true);
 			return new ZipCodeAndPlanYearCapturePageMobile(driver);
 		}
-		//Assert.fail("Plan year dropdown not displayed during AEP");
+		// Assert.fail("Plan year dropdown not displayed during AEP");
 		return null;
 	}
 

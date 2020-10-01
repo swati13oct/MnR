@@ -267,7 +267,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	@FindBy(xpath = "//*[contains(@class,'cta-button secondary') and contains(text(),'Find a Provider')]")
 	private WebElement providerSearchFromHomeScreen;
 
-	@FindBy(xpath = "//span[contains(normalize-space(),'Shop For a Plan'")
+	@FindBy(xpath = "//span[contains(text(),'Shop For a Plan')]")
 	private WebElement ShopForaplan;
 
 	@FindBy(xpath = ".//*[@id='updates-mobile-form']/div/div[2]/button")
@@ -2266,6 +2266,8 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	}
 
 	public void navigateToShopPDPpage() {
+		jsClickMobile(Menu);
+
 		waitforElement(ShopForaplan);
 		if (ShopForaplan.isDisplayed()) {
 			Actions actions = new Actions(driver);
