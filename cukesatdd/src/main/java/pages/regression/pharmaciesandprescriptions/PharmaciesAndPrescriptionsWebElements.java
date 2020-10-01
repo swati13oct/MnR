@@ -425,6 +425,15 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	@FindBy(xpath = "//span[contains(text(),'request placed')]")
 	protected List<WebElement> requestPlaced;
 
+	@FindBy(xpath = "//span[contains(text(),'Request Placed')]")
+	protected WebElement requestPlacedTxt;
+
+	@FindBy(xpath = "//*[contains(text(),'Your request has been')]")
+	protected WebElement requestCancelledMessage;
+
+	@FindBy(xpath = "//*[contains(@data-testid,'alert-icon')]")
+	protected WebElement triangleIcon;
+
 	@FindBy(xpath = "//span[contains(text(),'Your order is in the pharmacy processing')]")
 	protected WebElement  processingMessage;
 
@@ -672,6 +681,9 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 
 	@FindBy(xpath = "//button[@data-testid='medication-action-view-order']")
 	protected List<WebElement> listOfViewOrder;
+
+	@FindBy(xpath = "//a[@data-testid='medication-action-view-order-cancelled']")
+	protected List<WebElement> listOfViewOrderRequestCancelled;
 
 	@FindBy(xpath = "//a[@data-testid='medication-action-view-order-cancelled']")
 	protected List<WebElement> listOfViewOrderCancelled;
@@ -1083,6 +1095,34 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 
 	public boolean isRequestPlaced() {
 		if (requestPlaced.size() >= 0) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+
+	public boolean isRequestCancelled() {
+		if (requestPlacedTxt.isDisplayed()) {
+			System.out.println("request cancelled element is displayed");
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public boolean isRequestCancelledMessageDisplayed() {
+		if (requestCancelledMessage.isDisplayed()) {
+			System.out.println("request cancelled message element is displayed");
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public boolean isTriangleIconDisplayed() {
+		if (triangleIcon.isDisplayed()) {
+			System.out.println("triangle icon element is displayed");
 			return true;
 		} else {
 			return false;
@@ -1513,6 +1553,9 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 
 	@FindBy(xpath = "//*[@data-testid='medication-data-order-status']/ancestor::div[@data-testid]//*[@data-testid='medication-data-name']")
 	protected List<WebElement> listOfMedicationRequestPlaced;
+
+	@FindBy(xpath = "//*[@data-testid='medication-data-order-status']/ancestor::div[@data-testid]//*[@data-testid='medication-data-name']")
+	protected List<WebElement> listOfMedicationRequestCancelled;
 
 	@FindBy(xpath = "//*[@data-testid='medication-data-order-status']/ancestor::div[@data-testid]//*[@data-testid='medication-data-name']")
 	protected List<WebElement> listOfMedicationShipped;

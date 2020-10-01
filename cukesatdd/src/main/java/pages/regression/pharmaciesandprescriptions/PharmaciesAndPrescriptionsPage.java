@@ -1392,6 +1392,28 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 				isRequestPlaced());
 	}
 
+	public void validateRequestCancelled() {
+
+		Assert.assertTrue("PROBLEM - unable to locate Request Cacncelled elements",
+
+				isRequestCancelled());
+	}
+
+	public void validateMessageRequestCancelled() {
+
+		Assert.assertTrue("PROBLEM - unable to locate Request Cacncelled  message elements",
+
+				isRequestCancelledMessageDisplayed());
+	}
+
+
+	public void validateTriagleIcon() {
+
+		Assert.assertTrue("PROBLEM - unable to locate triangle icon elements",
+
+				isTriangleIconDisplayed());
+	}
+
 	public void validateProcessingMessage() {
 
 		Assert.assertTrue("PROBLEM - unable to locate Processing message elements",
@@ -2435,6 +2457,22 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 		return listOfVal;
 	}
 
+	public List<Object> fetchesMedicationInformationFrRequestCancelled() {
+		List<Object> listOfVal = new ArrayList<>();
+		Random rand = new Random();
+		rand_int = rand.nextInt(listOfRequestCancelled.size());
+
+		String text = listOfMedicationRequestCancelled.get(rand_int).getText();
+		for (WebElement child : listOfMedicationRequestCancelled.get(rand_int).findElements(By.xpath("./*"))) {
+			text = text.replaceFirst(child.getText(), "");
+		}
+		listOfVal.add(text);
+		listOfVal.add(listOfDaySupplyEligibleFrRequestPlaced.get(rand_int).getText());
+		// listOfVal.add(listOfAmntPaidEligibleFrRenew.get(rand_int).getText());
+		listOfVal.add(rand_int);
+		return listOfVal;
+	}
+
 	public List<Object> fetchesMedicationInformationFrShipped() {
 		List<Object> listOfVal = new ArrayList<>();
 		Random rand = new Random();
@@ -2477,6 +2515,10 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 
 	public void clickOnRequestPlacedCTABasedOnIndex(int index) {
 		listOfTrackStatus.get(rand_int).click();
+	}
+
+	public void clickOnRequestCancelledCTABasedOnIndex(int index) {
+		listOfViewOrderRequestCancelled.get(rand_int).click();
 	}
 
 	public void clickOnProcessingCTABasedOnIndex(int index) {
