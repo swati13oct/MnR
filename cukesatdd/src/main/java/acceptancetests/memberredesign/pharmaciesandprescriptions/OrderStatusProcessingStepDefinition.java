@@ -43,8 +43,6 @@ public class OrderStatusProcessingStepDefinition {
 
 	@When("^user views a status of Processing and click track status$")
 	public void user_views_a_status_of_Processing_and_click_track_status() throws Throwable {
-
-
 		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
 		List<Integer> indexOfProcessing = pnpPg.getListOfIndexForProcessingOnMyMed();
@@ -59,13 +57,10 @@ public class OrderStatusProcessingStepDefinition {
 		System.out.println("Medication Name eligilable for Processing is" + MedicationName);
 		pnpPg.clickOnProcessingCTABasedOnIndex(medicationToBeClicked);
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
-
-
 	}
 
 	@And("^user views a message that my order is being processed$")
 	public void user_views_a_message_that_my_order_is_being_processed() throws Throwable {
-
 		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
 		pnpPg.validateProcessingMessage();
@@ -74,7 +69,7 @@ public class OrderStatusProcessingStepDefinition {
 
 	}
 
-
+	
 
 
 }

@@ -34,14 +34,51 @@ public class OrderStatusesPPMyMedsStepDefinition {
 
 
 
+	@Then("^user views a status of order received cta$")
+	public void user_views_a_status_of_order_received_cta() throws Throwable {
+
+
+		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
+				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
+		List<Integer> indexOfOrderReceived = pnpPg.getListOfIndexForOrderReceivedOnMyMed();
+		while (indexOfOrderReceived.size() == 0) {
+			pnpPg.clickOnNextPageArrow();
+			indexOfOrderReceived = pnpPg.getListOfIndexForRequestPlacedOnMyMed();
+		}
+		System.out.println("Validating order received element");
+		pnpPg.validateOrderReceived();
+		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
+
+
+	}
+
 	@Then("^user views a status of order received$")
-	public void user_views_a_status_of_Request_canceled() throws Throwable {
+	public void user_views_a_status_of_order_received() throws Throwable {
+
 
 		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
 		pnpPg.validateOrderReceived();
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
 
+
+	}
+
+
+	@Then("^user views a status of request placed cta$")
+	public void user_views_a_status_of_request_placed_cta() throws Throwable {
+
+
+		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
+				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
+		List<Integer> indexOfRequestPlaced = pnpPg.getListOfIndexForRequestPlacedOnMyMed();
+		while (indexOfRequestPlaced.size() == 0) {
+			pnpPg.clickOnNextPageArrow();
+			indexOfRequestPlaced = pnpPg.getListOfIndexForRequestPlacedOnMyMed();
+		}
+		System.out.println("Validating request placed element");
+		pnpPg.validateRequestPlaced();
+		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
 
 	}
 

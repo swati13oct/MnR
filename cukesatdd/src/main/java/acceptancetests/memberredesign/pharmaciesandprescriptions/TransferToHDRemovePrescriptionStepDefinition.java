@@ -1,142 +1,120 @@
 package acceptancetests.memberredesign.pharmaciesandprescriptions;
 
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-
-import org.springframework.beans.factory.annotation.Autowired;
-
 import atdd.framework.MRScenario;
-import cucumber.api.DataTable;
+import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import gherkin.formatter.model.DataTableRow;
+import org.junit.Assert;
+import org.springframework.beans.factory.annotation.Autowired;
 import pages.regression.pharmaciesandprescriptions.PharmaciesAndPrescriptionsPage;
 
-public class RefillAllMedicationCTAMyMedicationStepDefination {
-	
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
+public class TransferToHDRemovePrescriptionStepDefinition {
+
 	@Autowired
 	MRScenario loginScenario;
+
+	public static List<Object> listOfMedicationDetail = new ArrayList<>();
 
 	public MRScenario getLoginScenario() {
 		return loginScenario;
 	}
-	
-	public Map<String, String> parseInputArguments(DataTable memberAttributes) {
-		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
-		List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0), 
-					memberAttributesRow.get(i).getCells().get(1));
-		}
-		return memberAttributesMap;
-	}
 
-	@Then("^user will view the Refill All Medications CTA on MY Medications Page$")
-	public void user_will_view_the_Refill_All_Medications_CTA_on_MY_Medications_Page() throws Throwable {
+	@When("^user clicks remove item from Order link$")
+	public void user_clicks_remove_item_from_Order_link() throws Throwable {
 
 		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
-		pnpPg.validateRefillAllMedications();
+		pnpPg.clickOnRemoveItemFromOrderLink();
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
 
 	}
 
-	@Then("^user will view an explanation of the Refill All Medications CTA$")
-	public void user_will_view_an_explanation_of_the_Refill_All_Medications_CTA() throws Throwable {
-
-
-		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
-				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
-		pnpPg.validateRefillAllMedicationsExplanation();
-		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
-
-
-	}
-
-	@Then("^user DO NOT have home delivery medications currently eligible for refill$")
-	public void user_DO_NOT_have_home_delivery_medications_currently_eligible_for_refill() throws Throwable {
+	@When("^user views popup modal and selects Yes$")
+	public void user_views_popup_modal_and_selects_Yes() throws Throwable {
 
 		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
-		pnpPg.validateNoRefillMedications();
-		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
-
-
-	}
-
-	@Then("^user will NOT view the Refill All Medications CTA on MY Medications Page$")
-	public void user_will_NOT_view_the_Refill_All_Medications_CTA_on_MY_Medications_Page() throws Throwable {
-
-		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
-				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
-		pnpPg.validateNoRefillAllMedications();
+		pnpPg.clickYesButton();
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
 
 	}
 
-	@Then("^user will not see an explanation of the Refill All Medications CTA$")
-	public void user_will_not_see_an_explanation_of_the_Refill_All_Medications_CTA() throws Throwable {
-
-
-		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
-				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
-		pnpPg.validateNoRefillAllMedicationsExplanation();
-		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
-
-
-	}
-
-	@When("^user select the Refill All Medications CTA$")
-	public void user_select_the_Refill_All_Medications_CTA() throws Throwable {
+	@When("^user views popup modal and selects X$")
+	public void user_views_popup_modal_and_selects_X() throws Throwable {
 
 		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
-		
-		pnpPg.clickOnRefillAllMedications();
+		pnpPg.clickXButton();
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
 
 	}
-	@Then("^user will view all eligible refill medications moved into the refill flow$")
-	public void user_will_view_all_eligible_refill_medications_moved_into_the_refill_flow() throws Throwable {
 
+	@When("^user views popup modal and selects Cancel$")
+	public void user_views_popup_modal_and_selects_Cancel() throws Throwable {
 
 		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
-		pnpPg.validateNumberOfRefillMedications();
+		pnpPg.clickRemoveCancelButton();
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
-
 
 	}
 
-	@When("^user selects two day shipping$")
-	public void user_selects_two_day_shipping() throws Throwable {
+	@And("^a message confirming my medication was removed$")
+	public void a_message_confirming_my_medication_was_removed() throws Throwable {
 
 		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
-		pnpPg.selectTwoDayShipping();
+		pnpPg.validateRemovedMessage();
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
 
 	}
 
 
-	@When("^user select expedited shipping$")
-	public void user_select_expedited_shipping() throws Throwable {
+	@And("^a message indicating there are no prescriptions$")
+	public void a_message_indicating_there_are_no_prescriptions() throws Throwable {
+
 		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
-		pnpPg.selectExpeditedShipping();
+		pnpPg.validateZeroPrescriptionMessage();
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
+
 
 	}
 
 
-	@Then("^user will NOT see the estimated delivery date$")
-	public void user_will_NOT_see_the_estimated_delivery_date() throws Throwable {
+	@And("^user will see Transfer to Home Delivery page$")
+	public void user_will_see_Transfer_to_Home_Delivery_page() throws Throwable {
 
 		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
-		pnpPg.validateNoEstimatedDeliveryDate();
+		pnpPg.validateTransferToHDHeader();
+		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
+
+
+	}
+
+	@When("^user returns to the My Medications page$")
+	public void user_returns_to_the_My_Medications_page() throws Throwable {
+
+		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
+				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
+		pnpPg.clickBackButtonOnTransferToHD();
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
 
 	}
+
+	@And("^user will see the Transfer to Home Delivery button for eligible medication$")
+	public void user_will_see_the_Transfer_to_Home_Delivery_button_for_eligible_medication() throws Throwable {
+
+		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
+				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
+		pnpPg.isTransfer2HDCTADisplayed();
+		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
+
+	}
+
 }

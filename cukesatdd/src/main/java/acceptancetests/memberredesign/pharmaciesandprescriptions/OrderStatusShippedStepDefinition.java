@@ -6,14 +6,21 @@ import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import gherkin.formatter.model.DataTableRow;
+
+import org.junit.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
 import pages.regression.pharmaciesandprescriptions.PharmaciesAndPrescriptionsPage;
 
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-public class CanceledOrdersStepDefinition {
+public class OrderStatusShippedStepDefinition {
+
+	public static List<Object> listOfMedicationDetail = new ArrayList<>();
+	public static String MedicationName = "";
+	public static String MedicatioNameToBeSearchedOnP_P;
 
 
 	@Autowired
@@ -33,38 +40,34 @@ public class CanceledOrdersStepDefinition {
 		return memberAttributesMap;
 	}
 
-
-
-
-	@Then("^user views a status of Request canceled$")
-	public void user_views_a_status_of_Request_canceled() throws Throwable {
-
+	@When("^user views a status of Shipped and click track status$")
+	public void user_views_a_status_of_Shipped_and_click_track_status() throws Throwable {
 
 
 		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
-		List<Integer> indexOfRequestCancelled = pnpPg.getListOfIndexForRequestCancelledOnMyMed();
-		while (indexOfRequestCancelled.size() == 0) {
+		List<Integer> indexOfShipped = pnpPg.getListOfIndexForOrderShippedOnMyMed();
+		while (indexOfShipped.size() == 0) {
 			pnpPg.clickOnNextPageArrow();
-			indexOfRequestCancelled = pnpPg.getListOfIndexForRequestPlacedOnMyMed();
+			indexOfShipped = pnpPg.getListOfIndexForOrderShippedOnMyMed();
 		}
-		System.out.println("Validating processing element");
-		pnpPg.validateCanceledOrderStatusForHDDrug("Request Canceled");
-		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
-
-	    
+		listOfMedicationDetail = pnpPg.fetchesMedicationInformationFrShipped();
+		int medicationToBeClicked = (int) listOfMedicationDetail.get(listOfMedicationDetail.size() - 1);
+		MedicatioNameToBeSearchedOnP_P = listOfMedicationDetail.get(0).toString().trim();
+		MedicationName = listOfMedicationDetail.get(0).toString().trim();
+		System.out.println("Medication Name eligilable for shipped is" + MedicationName);
+		pnpPg.clickOnShippedCTABasedOnIndex(medicationToBeClicked);
+		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);	
 	}
-
-	@Then("^user views an empty Harvey Ball$")
-	public void user_views_an_empty_Harvey_Ball() throws Throwable {
+	
+	@Then("^user views a status of Shipped on Step two of the tracker$")
+	public void user_views_a_status_of_Shipped_on_Step_two_of_the_tracker() throws Throwable {
 		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
-		pnpPg.validateEmptyHarveyBall();
+		Assert.assertTrue("Problem - Unable to view Shipped status at step two on the tracker.",
+				pnpPg.validateShippedonOrderTracker());
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
-
-
 	}
-
 
 
 }

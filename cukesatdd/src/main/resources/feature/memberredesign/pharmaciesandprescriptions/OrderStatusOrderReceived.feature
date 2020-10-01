@@ -11,7 +11,7 @@ Feature: HD Order Status - Order Received
     When user navigates to the pharmacies and prescriptions page from testharness page
     And user clicks View all medications link to view the My Medications page
     Then user will be directed to My Medications page
-    Then user views a status of order received
+    Then user views a status of order received cta
     When user clicks the Track Status call to action button on that medication's row
     Then user view the Order Status page for the medication
     Then user views a status of order received

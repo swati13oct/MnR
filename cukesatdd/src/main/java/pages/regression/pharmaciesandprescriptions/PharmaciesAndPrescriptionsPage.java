@@ -1080,9 +1080,12 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 	}
 
 	public void validateOrderStatusHeader() {
+
+		pnpValidate(orderStatusPageHeader,50);
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("arguments[0].scrollIntoView(true);", orderStatusPageHeader);
-		Assert.assertTrue("PROBLEM - unable to locate Order status Header element", pnpValidate(orderStatusPageHeader));
+		Assert.assertTrue("PROBLEM - unable to locate Current Medications Header element",
+				pnpValidate(orderStatusPageHeader,50));
 	}
 
 	public void validateMyMedicationsHeader() {
@@ -1423,6 +1426,20 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 				isOrderProcessing());
 	}
 
+	public void validateTransferToHDHeader() {
+
+		Assert.assertTrue("PROBLEM - unable to locate transfer to HD page header elements",
+
+				transferToHDHeaderDisplayed());
+	}
+
+	public void isTransfer2HDCTADisplayed() {
+
+		Assert.assertTrue("PROBLEM - unable to locate transfer to HD button element",
+
+				isTransfer2HDCTA());
+	}
+
 	// F392596 Meidine Cabinet// when user click on learn more button on current
 	// medication on PNP page.
 
@@ -1457,7 +1474,7 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 	}
 
 	public void validateOneFourthHarveyBall() {
-		Assert.assertTrue("PROBLEM - unable to locate three fourth Harvey ball  elements", isOneFourthHarveyBall());
+		Assert.assertTrue("PROBLEM - unable to locate one fourth Harvey ball  elements", isOneFourthHarveyBall());
 	}
 
 	public void validateRemovedMessage() {
@@ -2418,6 +2435,22 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 		return listOfVal;
 	}
 
+	public List<Object> fetchesMedicationInformationFrShipped() {
+		List<Object> listOfVal = new ArrayList<>();
+		Random rand = new Random();
+		rand_int = rand.nextInt(listOfShipped.size());
+
+		String text = listOfMedicationShipped.get(rand_int).getText();
+		for (WebElement child : listOfMedicationShipped.get(rand_int).findElements(By.xpath("./*"))) {
+			text = text.replaceFirst(child.getText(), "");
+		}
+		listOfVal.add(text);
+		listOfVal.add(listOfDaySupplyEligibleFrRequestPlaced.get(rand_int).getText());
+		// listOfVal.add(listOfAmntPaidEligibleFrRenew.get(rand_int).getText());
+		listOfVal.add(rand_int);
+		return listOfVal;
+	}
+
 	public List<Object> fetchesMedicationInformationFrProcessing() {
 		List<Object> listOfVal = new ArrayList<>();
 		Random rand = new Random();
@@ -2565,6 +2598,22 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 		return listOfIndex;
 	}
 
+	public List<Integer> getListOfIndexForOrderReceivedOnMyMed() {
+		int size = listOfDrugName.size();
+		validate(drugsAvailableOnMyMedication, 10);
+		String numberTXT = drugsAvailableOnMyMedication.getText();
+		int expectedSize = Integer.parseInt(numberTXT);
+		System.out.println("Expected Drug Name Size" + expectedSize);
+		while (size != expectedSize) {
+			size = listOfDrugName.size();
+		}
+		List<Integer> listOfIndex = new ArrayList<>();
+		for (int i = 0; i < listOfOrderReceived.size(); i++) {
+			listOfIndex.add(i);
+		}
+		return listOfIndex;
+	}
+
 	public List<Integer> getListOfIndexForProcessingOnMyMed() {
 		int size = listOfDrugName.size();
 		validate(drugsAvailableOnMyMedication, 10);
@@ -2576,6 +2625,22 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 		}
 		List<Integer> listOfIndex = new ArrayList<>();
 		for (int i = 0; i < listOfProcessing.size(); i++) {
+			listOfIndex.add(i);
+		}
+		return listOfIndex;
+	}
+
+	public List<Integer> getListOfIndexForRequestCancelledOnMyMed() {
+		int size = listOfDrugName.size();
+		validate(drugsAvailableOnMyMedication, 10);
+		String numberTXT = drugsAvailableOnMyMedication.getText();
+		int expectedSize = Integer.parseInt(numberTXT);
+		System.out.println("Expected Drug Name Size" + expectedSize);
+		while (size != expectedSize) {
+			size = listOfDrugName.size();
+		}
+		List<Integer> listOfIndex = new ArrayList<>();
+		for (int i = 0; i < listOfRequestCancelled.size(); i++) {
 			listOfIndex.add(i);
 		}
 		return listOfIndex;
@@ -2711,6 +2776,41 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 		} else {
 			return false;
 		}
+	}
+	
+	public List<Integer> getListOfIndexForOrderShippedOnMyMed() {
+		int size = listOfDrugName.size();
+		validate(drugsAvailableOnMyMedication, 10);
+		String numberTXT = drugsAvailableOnMyMedication.getText();
+		int expectedSize = Integer.parseInt(numberTXT);
+		System.out.println("Expected Drug Name Size" + expectedSize);
+		while (size != expectedSize) {
+			size = listOfDrugName.size();
+		}
+		List<Integer> listOfIndex = new ArrayList<>();
+		for (int i = 0; i < listOfShipped.size(); i++) {
+			listOfIndex.add(i);
+		}
+		return listOfIndex;
+	}
+
+	
+	public void clickOnShippedCTABasedOnIndex(int index) {
+		listOfTrackStatus.get(rand_int).click();
+	}
+	
+	
+	public void validateShipped() {
+		Assert.assertTrue("PROBLEM - unable to locate Shipped elements",
+				isOrderShipped());
+	}
+	
+	public void validateThreeFourthHarveyBall() {
+		Assert.assertTrue("PROBLEM - unable to locate three fourth Harvey ball  elements", isThreeFourthHarveyBall());
+	}
+	
+	public boolean validateShippedonOrderTracker() {
+		return pnpValidate(ShippedOrderTracker,30);
 	}
 	
 	public void clickOnViewOrderCTA() {

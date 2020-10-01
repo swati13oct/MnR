@@ -324,7 +324,7 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	@FindBy(id = "shipping-method-select-element")
 	protected WebElement selectShippingMethod;
 
-	@FindBy(xpath = "/html/body/div[3]/div[1]/main/div[2]/div[2]/div/div/div[1]/div/div[2]/div[1]/div")
+	@FindBy(xpath = "//*[contains(@data-testid,'refill-all-message')]")
 	protected WebElement refillAllMedicationsExplanation;
 
 	@FindBy(xpath = "//span[@data-test-total-medications='9']")
@@ -415,6 +415,9 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 
 	@FindBy(xpath = "//span[contains(text(),'processing')]")
 	protected List<WebElement> Processing;
+
+	@FindBy(xpath = "//h1[contains(text(),'Transfer to Home Delivery')]")
+	protected WebElement transferToHDHeader;
 
 	@FindBy(xpath = "//span[contains(text(),'request received')]")
 	protected List<WebElement> requestReceived;
@@ -652,8 +655,14 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	@FindBy(xpath = "//*[contains(text(),'request placed')]")
 	protected List<WebElement> listOfRequestPlaced;
 
+	@FindBy(xpath = "//*[contains(text(),'order received')]")
+	protected List<WebElement> listOfOrderReceived;
+
 	@FindBy(xpath = "//*[contains(text(),'processing')]")
 	protected List<WebElement> listOfProcessing;
+
+	@FindBy(xpath = "//*[contains(text(),'request cancelled')]")
+	protected List<WebElement> listOfRequestCancelled;
 
 	@FindBy(xpath = "//button[@data-testid='medication-action-resolve-hold']")
 	protected List<WebElement> listOfResolveHold;
@@ -1026,6 +1035,22 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 
 	public boolean isOrderProcessing() {
 		if (Processing.size() >= 0) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public boolean transferToHDHeaderDisplayed() {
+		if (validate(transferToHDHeader)) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public boolean isTransfer2HDCTA() {
+		if (listOfTransferToHDCTA.size() >= 0) {
 			return true;
 		} else {
 			return false;
@@ -1490,6 +1515,9 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	protected List<WebElement> listOfMedicationRequestPlaced;
 
 	@FindBy(xpath = "//*[@data-testid='medication-data-order-status']/ancestor::div[@data-testid]//*[@data-testid='medication-data-name']")
+	protected List<WebElement> listOfMedicationShipped;
+
+	@FindBy(xpath = "//*[@data-testid='medication-data-order-status']/ancestor::div[@data-testid]//*[@data-testid='medication-data-name']")
 	protected List<WebElement> listOfMedicationProcessing;
 
 	@FindBy(xpath = "//a[@data-testid='medication-action-refill']/ancestor::div[@data-testid]//*[@data-testid='medication-data-refills-left']")
@@ -1551,6 +1579,33 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	
 	@FindBy(xpath="//a[@data-testid='medication-action-transfer']/ancestor::div[@data-testid]//div[@data-testid='medication-data-day-supply']")
 	protected List<WebElement> listOfDaySupplyEligibleForTransferToHD;
+	
+
+	@FindBy(xpath = "//*[contains(text(),'shipped')]")
+	protected List<WebElement> listOfShipped;
+	
+	public boolean isOrderShipped() {
+		if (listOfShipped.size() >= 0) {
+			System.out.println("Order Shipped Medication Found");
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	@FindBy(xpath = "//div[@data-testid='medication-status-percent-75']")
+	protected List<WebElement> threeFourthHarveyBall;
+	
+	public boolean isThreeFourthHarveyBall() {
+		if (threeFourthHarveyBall.size() >= 0) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	@FindBy(xpath = "//*[@data-testid='step__label']//span[@data-testid='step__completed']/ancestor::span//span[text()='Shipped']")
+	protected WebElement ShippedOrderTracker;
 	
 	@FindBy(xpath="//*[@data-testid='medication-action-view-order']")
 	protected WebElement viewOrderCTA;
