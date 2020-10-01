@@ -661,6 +661,9 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	@FindBy(xpath = "//*[contains(text(),'processing')]")
 	protected List<WebElement> listOfProcessing;
 
+	@FindBy(xpath = "//*[contains(text(),'request cancelled')]")
+	protected List<WebElement> listOfRequestCancelled;
+
 	@FindBy(xpath = "//button[@data-testid='medication-action-resolve-hold']")
 	protected List<WebElement> listOfResolveHold;
 

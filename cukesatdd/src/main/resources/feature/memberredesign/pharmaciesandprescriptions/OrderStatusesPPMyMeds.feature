@@ -49,3 +49,21 @@ Feature: Order Statuses - P&P, My Meds
     Examples:
       | FID     | planType | memberType           |
       | F439294 | MAPD     | Rx_Individual_PnP_processing |
+
+
+
+  @OrderStatuses @F439294 @US2923817 @oops
+  Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify user views Processing order status
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type   | <planType>   |
+      | Member Type | <memberType> |
+    When user navigates to the pharmacies and prescriptions page from testharness page
+    And user clicks View all medications link to view the My Medications page
+    Then user will be directed to My Medications page
+    When user views a status of Request canceled
+    Then user views an empty Harvey Ball
+
+
+    Examples:
+      | FID     | planType | memberType           |
+      | F439294 | MAPD     | Rx_Individual_PnP_canceledOrder |

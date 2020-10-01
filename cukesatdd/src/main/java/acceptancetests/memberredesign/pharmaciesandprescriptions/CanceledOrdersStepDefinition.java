@@ -39,8 +39,16 @@ public class CanceledOrdersStepDefinition {
 	@Then("^user views a status of Request canceled$")
 	public void user_views_a_status_of_Request_canceled() throws Throwable {
 
+
+
 		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
+		List<Integer> indexOfRequestCancelled = pnpPg.getListOfIndexForRequestCancelledOnMyMed();
+		while (indexOfRequestCancelled.size() == 0) {
+			pnpPg.clickOnNextPageArrow();
+			indexOfRequestCancelled = pnpPg.getListOfIndexForRequestPlacedOnMyMed();
+		}
+		System.out.println("Validating processing element");
 		pnpPg.validateCanceledOrderStatusForHDDrug("Request Canceled");
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
 
