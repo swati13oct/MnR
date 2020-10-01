@@ -9,12 +9,12 @@ import cucumber.api.CucumberOptions;
 
 
 @RunWith(ExtendedCucumber.class)
-@ExtendedCucumberOptions(retryCount=1,screenShotSize="", screenShotLocation="/screenshots/",
+@ExtendedCucumberOptions(retryCount=0,screenShotSize="", screenShotLocation="/screenshots/",
 jsonReport = "target/cucumber-RunMRATDDRegressionDCE_P2.json",detailedReport = true, detailedAggregatedReport = true,
 overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionDCE_P2")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberredesign" }, 
 features = { "src/main/resources/feature/memberredesign/drugcostestimator" },monochrome= true, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionDCE_P2.json" }, tags = { "@dce_p2" })
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionDCE_P2.json" }, tags = { "@abc" })
 public class RunMRATDDRegressionDCE_P2 {
 
 }
