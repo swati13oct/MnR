@@ -241,6 +241,7 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 
 	public void scrollToOptumRxSSOLink(String optumrxssolink ) {
 		// TODO Auto-generated method stub
+		TestHarness.checkForIPerceptionModel(driver);
 		String linktobetested = optumrxssolink;
 		if (linktobetested.equalsIgnoreCase("LookUpDrugsButton"))
 		{
