@@ -25,7 +25,7 @@ Feature: 1.24.2.c Member Individual Health Record - PROD - P3 - EOB, OrderPlan, 
 	Then the user navigates to Pharmacies and Prescriptions page and validate Health Record link display behavior
 
     #----------- begin - cases with NO IHR link
-    @prod_no_ihr_p3_ship_exclude
+    @prod_no_ihr_p3_ship_exclude @sanity
     Examples: 
 	    | index | FID     | username  | password  | MemUserName             | planType                 | memberType         | expectLink  | 
 	    | 01    | F424804 | kkumard   | mnrs786@  | Pramila1946             | SHIP_MEDICARE SUPPLEMENT | NO_IHR             | false       |
@@ -55,6 +55,10 @@ Feature: 1.24.2.c Member Individual Health Record - PROD - P3 - EOB, OrderPlan, 
     Examples: 
 	    | index | FID     | username  | password  | MemUserName             | planType | memberType         | expectLink | 
 	    | 08    | F424804 | kkumard   | mnrs786@  | ERNIE2450               | MA       | IHR                | true       |
+
+    @prod_ihr_p3_ma_mapd @sanity
+    Examples: 
+	    | index | FID     | username  | password  | MemUserName             | planType | memberType         | expectLink | 
 	    | 09    | F424804 | kkumard   | mnrs786@  | SHERMANJAFFE65          | MAPD     | NONBOA_GROUP_IHR   | true       |
 
     @prod_ihr_p3_pdp

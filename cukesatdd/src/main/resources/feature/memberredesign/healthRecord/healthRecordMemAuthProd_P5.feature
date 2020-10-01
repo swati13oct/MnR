@@ -24,7 +24,7 @@ Feature: 1.24.2.e Member Individual Health Record - PROD - P5 - PharmacyLocator,
 	Then the user navigates to DCE page and validate Health Record link display behavior
 
     #----------- begin - cases with NO IHR link
-    @prod_no_ihr_p5_ship_exclude
+    @prod_no_ihr_p5_ship_exclude @sanity
     Examples: 
 	    | index | FID     | username  | password  | MemUserName             | planType                 | memberType         | expectLink  | 
 	    | 01    | F424804 | kkumard   | mnrs786@  | Pramila1946             | SHIP_MEDICARE SUPPLEMENT | NO_IHR             | false       |
@@ -54,6 +54,10 @@ Feature: 1.24.2.e Member Individual Health Record - PROD - P5 - PharmacyLocator,
     Examples: 
 	    | index | FID     | username  | password  | MemUserName             | planType | memberType         | expectLink | 
 	    | 08    | F424804 | kkumard   | mnrs786@  | ERNIE2450               | MA       | IHR                | true       |
+
+    @prod_ihr_p5_ma_mapd @sanity
+    Examples: 
+	    | index | FID     | username  | password  | MemUserName             | planType | memberType         | expectLink | 
 	    | 09    | F424804 | kkumard   | mnrs786@  | SHERMANJAFFE65          | MAPD     | NONBOA_GROUP_IHR   | true       |
 
     @prod_ihr_p5_pdp
