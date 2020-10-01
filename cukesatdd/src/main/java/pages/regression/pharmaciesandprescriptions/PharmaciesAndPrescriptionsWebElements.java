@@ -1551,4 +1551,13 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	
 	@FindBy(xpath="//a[@data-testid='medication-action-transfer']/ancestor::div[@data-testid]//div[@data-testid='medication-data-day-supply']")
 	protected List<WebElement> listOfDaySupplyEligibleForTransferToHD;
+	
+	@FindBy(xpath="//*[@data-testid='medication-action-view-order']")
+	protected WebElement viewOrderCTA;
+	
+	@FindBy(xpath="//*[@data-testid='header__title']/*[text()='Order Status']")
+	protected WebElement orderStatusPageTitle;
+	
+	@FindBy(xpath="//*[@data-testid='os__header__orderNumber']//span")
+	protected WebElement orderNumber;
 }
