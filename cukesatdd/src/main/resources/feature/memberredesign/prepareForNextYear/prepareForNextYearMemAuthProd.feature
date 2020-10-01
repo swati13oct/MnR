@@ -45,7 +45,8 @@ Feature: 1.25.2 Member Prepare For Next Year - PROD
     @prod_prepareForNextYear01_preTermShip
     Examples: 
 	    | index | FID     | username  | password  | MemUserName       | planType | memberType          |
-	    | 1-04  | F437767 | kkumard   | mnrs786@  | Ranch1955         | MA	     | IND_PREEFF_PFNY     |
+	   #| 1-04  | F437767 | kkumard   | mnrs786@  | Ranch1955         | MA	     | IND_PREEFF_PFNY     |
+	    | 1-04  | F437767 | kkumard   | mnrs786@  | Abayne01          | MAPD     | IND_PREEFF_PFNY     |
 	    | 1-05  | F437767 | kkumard   | mnrs786@  | BEVERLY_BOB5      | MA	     | IND_TERM_PFNY       |
 	    | 1-06  | F437767 | kkumard   | mnrs786@  | Pramila1946       | SHIP	 | IND_PFNY            |
 			
