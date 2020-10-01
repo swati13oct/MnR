@@ -544,12 +544,6 @@ public class AccountHomePage extends UhcDriver {
 	public AccountHomePage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
-		//tbd // initialize this in case need to workaround later due to Sorry login
-		//tbd // error for certain testing
-		//tbd attemptSorryWorkaround = new HashMap<String, String>();
-		//tbd attemptSorryWorkaround.put("needWorkaround", "no");
-		//tbd attemptSorryWorkaround.put("planType", "na");
-		//tbd attemptSorryWorkaround.put("testType", "na");
 		/*
 		 * try {
 		 * 
@@ -3756,7 +3750,7 @@ public class AccountHomePage extends UhcDriver {
 		//tbd checkForIPerceptionModel(driver);
 		CommonUtility.checkPageIsReady(driver);
 		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
-		checkModelPopup(driver, 5);
+		checkModelPopup(driver, 2);
 		StopWatch pageLoad = new StopWatch();
 		pageLoad.start();
 		try {
@@ -3789,10 +3783,10 @@ public class AccountHomePage extends UhcDriver {
 					System.out.println("User is on dashboard page and URL is ====>" + driver.getCurrentUrl());
 					driver.navigate().to("https://stage-mymedicareaccount.uhc.com/medica/member/documents/overview.html");
 				}
-				checkModelPopup(driver,5);
+				checkModelPopup(driver,2);
 			} else if (MRScenario.environment.equalsIgnoreCase("prod") || MRScenario.environment.equalsIgnoreCase("offline")) {
 				Assert.assertTrue("PROBLEM - unable to locate the plan doc link on rally dashboard", noWaitValidate(planDocResPgLink));
-				checkModelPopup(driver, 5);
+				checkModelPopup(driver, 2);
 				scrollElementToCenterScreen(planDocResPgLink);
 				planDocResPgLink.click();
 			} else {
@@ -3820,7 +3814,7 @@ public class AccountHomePage extends UhcDriver {
 		long pageLoadTime_Seconds = pageLoadTime_ms / 1000;
 		System.out.println("Total Page Load Time: " + pageLoadTime_ms + " milliseconds");
 		System.out.println("Total Page Load Time: " + pageLoadTime_Seconds + " seconds");
-		checkModelPopup(driver, 5);
+		checkModelPopup(driver, 2);
 
 		if (driver.getTitle().contains("Documents")) {
 			return new PlanDocumentsAndResourcesPage(driver);

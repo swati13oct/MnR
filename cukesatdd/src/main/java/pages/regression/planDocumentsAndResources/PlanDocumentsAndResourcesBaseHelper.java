@@ -63,7 +63,7 @@ public class PlanDocumentsAndResourcesBaseHelper extends PlanDocumentsAndResourc
 			System.out.println("Element '"+element.toString()+"' not found/not visible. Exception");
 		}
 		//note: default in UhcDriver is 10
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);  
+		//tbd driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);  
 		return false;
 	} 
 	
@@ -83,7 +83,7 @@ public class PlanDocumentsAndResourcesBaseHelper extends PlanDocumentsAndResourc
 			System.out.println("Element with xpath='"+inputXpath+"' not found/not visible. Exception");
 		}
 		//note: default in UhcDriver is 10
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);  
+		//tbd driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);  
 		return false;
 	} 
 	

@@ -138,6 +138,7 @@ public class MemberAuthPage extends UhcDriver {
 	public MemberAuthPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
+		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
 		// TODO Auto-generated constructor stub
 	}
 
@@ -211,7 +212,7 @@ public class MemberAuthPage extends UhcDriver {
 		password.sendKeys(loginpassword);
 		search.click();
 		Assert.assertTrue("PROBLEM - got initial login error on member auth, please check to see if input username/passowrd is correct or if password expired?", !validate(initialLoginErr,0));
-		CommonUtility.waitForPageLoad(driver, memberUsername, 20);
+		CommonUtility.waitForPageLoad(driver, memberUsername, 10);
 		//tbd waitforElement(memberUsername);
 		if (memberUsername.isDisplayed()) {
 			System.out.println("member auth Login successfully");
@@ -222,14 +223,13 @@ public class MemberAuthPage extends UhcDriver {
 	}
 
 	public MemberAuthPage MainMemberLogin(String MemberUserName) throws InterruptedException {
-		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
 		memberUsername.clear();
 		memberUsername.sendKeys(MemberUserName);
 		FinalSearchButton.click();
 
 		Assert.assertTrue("PROBLEM - Got 'Unable to retrieve member' error after clicking Search button", !validate(redUnableToRetrMemErr,1));
 		//waitforElement(MemberTableUserName); // updated this wait as it is failing for 20 seconds
-		CommonUtility.waitForPageLoad(driver, MemberTableUserName, 30);
+		CommonUtility.waitForPageLoad(driver, MemberTableUserName, 10);
 		if (MemberTableUserName.isDisplayed()) {
 			System.out.println("member Username under the table is displayed");
 			MemberTableUserName.click();
@@ -431,7 +431,7 @@ public class MemberAuthPage extends UhcDriver {
 					// waitforElement(SuperUser_DashboardBanner);
 					if (driver.getCurrentUrl().contains("/dashboard") && SuperUser_DashboardBanner.isDisplayed()) {
 						System.out.println("CSR Dashboard Page is displayed for the Member");
-						checkModelPopup(driver,5);
+						checkModelPopup(driver,2);
 						return new AccountHomePage(driver);
 					}
 				} else if (MRScenario.environment.startsWith("team")) {
@@ -552,7 +552,7 @@ public class MemberAuthPage extends UhcDriver {
 		CommonUtility.waitForPageLoad(driver, goGreenGoToHomepageBtn, 3);
 		System.out.println("Proceed to check if need to perform goGreen workaround...");
 		//checkModelPopup(driver, 2);
-		if (driver.getCurrentUrl().contains("gogreen-splash.html")) {
+		if (driver.getCurrentUrl().contains("gogreen-splash.html") || driver.getCurrentUrl().contains("member-registration-gogreen-splash.html")) {
 			if (MRScenario.environment.contains("team-a") || MRScenario.environment.contains("stage")) {
 				CommonUtility.waitForPageLoad(driver, goGreenGoToHomepageBtn, 5);
 				System.out.println("User encounted gogreen-splash page, handle it...");
