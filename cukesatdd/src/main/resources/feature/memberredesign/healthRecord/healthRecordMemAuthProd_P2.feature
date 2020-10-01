@@ -4,6 +4,7 @@ Feature: 1.24.2.b Member Individual Health Record - PROD - P2 - Benefits, Paymen
   #----- begin sanity
   @prod_sanity01
   Scenario Outline: -Index <index> -FID <FID> -Plan Type: <planType> -Member Type: <memberType> - To verify iHR link display for user that is not on the exclusion table - P2 - Benefits
+    Given the user is on member auth login flow page
     When the member is able to login with correct username and password
       | Username | <username> |
       | Password | <password> |
