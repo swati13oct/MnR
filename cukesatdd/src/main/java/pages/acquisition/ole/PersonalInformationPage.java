@@ -407,7 +407,7 @@ public class PersonalInformationPage extends UhcDriver{
 		 * System.out.println("Last Name Expected : "
 		 * +LastName+"       Displayed on page  - "+LastNameDisplayText);
 		 */
-		System.out.println("State Name Displayed on page  - "+StateDisplayText);
+		System.out.println("State Name Expected - "+ state +"\tState Name Displayed on page  - "+StateDisplayText);
 		System.out.println("Zip Code Name Expected : "+ZipCode+"       Displayed on page  - "+ZipDisplayText);
 		
 		if(StateDisplayText.contains(state) && ZipDisplayText.contains(ZipCode)){

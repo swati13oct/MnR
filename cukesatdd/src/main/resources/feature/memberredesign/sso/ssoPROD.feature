@@ -1,6 +1,6 @@
 Feature: 1.13 Member Outbound SSO functionality for M&R Member Portal
 
-  @regressionMemberPROD
+  @regressionMemberPROD1
   Scenario Outline: Verify that member of <Test Scenario> is able to perfom Outbound SSO - University of Kentucky - Express Scripts SSO
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
@@ -18,7 +18,7 @@ Feature: 1.13 Member Outbound SSO functionality for M&R Member Portal
       | TID   | planType | memberType              | copayCategory | Test Scenario          | username | password | member      |
       | XXXXX | MAPD     | universityofkentuckySSO | NON LIS       | University Of Kentucky | jkuma14  | Brock@03 | Kywoman1953 |
 
-  @regressionMemberPROD
+  @regressionMemberPROD1
   Scenario Outline: Verify that user is able to perfom Outbound SSO - MyHCE_<Test Scenario>
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
@@ -36,7 +36,7 @@ Feature: 1.13 Member Outbound SSO functionality for M&R Member Portal
       | TID   | planType | memberType | copayCategory | zipCode | Test Scenario             | username | password | member                    |
       | XXXXX | MAPD     | myhce      | NON LIS       |   30527 | TC_SSO_SHBP_Georgia_myHCE | jkuma14  | Brock@03 | Andersonga1@Bellsouth.Net |
 
-  @regressionMemberPROD
+  @regressionMemberPROD2
   Scenario Outline: Verify that user is able to perfom Outbound SSO - OptumRx from Benefits and Coverage Page from <optumrxssolink>
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
@@ -58,7 +58,7 @@ Feature: 1.13 Member Outbound SSO functionality for M&R Member Portal
       | TC002 | MAPD     | optumrx    | NON LIS       | TC_OptumxRX_SSO | LookUpDrugsButton                                               | jkuma14  | Brock@03 | Andersonga1@Bellsouth.Net |
       | TC003 | MAPD     | optumrx    | NON LIS       | TC_OptumxRX_SSO | viewDetailsAtOptumrxLink                                        | jkuma14  | Brock@03 | Andersonga1@Bellsouth.Net |
 
-  @regressionMemberPROD2
+  @regressionMemberPROD3
   Scenario Outline: Verify that user is able to perfom Outbound SSO - OptumRx from Pharmacies and Prescriptions Page from link <optumrxssolink>
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
