@@ -260,9 +260,12 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	public WebElement brokerHeader;
 
 	/* LearnAboutMedicare link */
-	@FindBy(xpath = "//*[@id='ghn_lnk_3']")
-	private WebElement lnkLearnAboutMedicare;
+//	@FindBy(xpath = "//*[@id='ghn_lnk_3']")
+//	private WebElement lnkLearnAboutMedicare;
 
+	@FindBy(xpath = "//span[normalize-space()='Learn About Medicare']") 
+	private WebElement lnkLearnAboutMedicare;
+	
 	@FindBy(xpath = "//h3//*[contains(@onclick,'loadCachedProviderSearch')]")
 	private WebElement providerSearchFromGlobalHeader;
 
@@ -1501,17 +1504,24 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		return null;
 	}
 
+	@FindBy(xpath = "//div[.='MENU']") 
+	private WebElement Menu;
 	
 	public void navigateToMedEdPresDrugPage() {
+		waitforElement(Menu);
+		jsClickMobile(Menu);
+		
 		waitforElement(lnkLearnAboutMedicare);
+		
 		if (lnkLearnAboutMedicare.isDisplayed()) {
 			Actions actions = new Actions(driver);
 			actions.moveToElement(lnkLearnAboutMedicare);
 			actions.build().perform();
 			System.out.println("Hover over Learn about Medicare completed");
-		}
-		WebElement PresProvidersBenefitsLink = driver.findElement(
-				By.xpath("//*[contains(@class, 'nav-col nav-col-3')]//a[contains(@href,'medicare-benefits')]"));
+	    }
+		
+		//WebElement PresProvidersBenefitsLink = driver.findElement(By.xpath("//*[contains(@class, 'nav-col nav-col-3')]//a[contains(@href,'medicare-benefits')]"));
+		WebElement PresProvidersBenefitsLink = driver.findElement(By.xpath("//span[contains(text(),'Prescriptions, Providers & Benefits')]"));
 		jsClickNew(PresProvidersBenefitsLink);
 	}
 
