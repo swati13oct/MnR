@@ -367,12 +367,18 @@ public class PersonalInformationPage extends UhcDriver{
 		return new ConfirmYourEligibilityPage(driver);
 	}
 
-
+	@FindBy(xpath = "//select[@id='state']")
+	private WebElement State_DropDown;	
+	@FindBy(xpath = "//input[contains(@id,'zipCode')]")
+	private WebElement EnterZipCode;
+	
 	public boolean validate_member_details(Map<String, String> memberDetailsMap){
 		String FirstName = memberDetailsMap.get("First Name");
 		String LastName = memberDetailsMap.get("Last Name");
 		String ZipCode = memberDetailsMap.get("Zip Code");
-		String state = memberDetailsMap.get("Mailing_State");
+		//String state = memberDetailsMap.get("Mailing_State");
+		String Mailing_State = memberDetailsMap.get("Mailing_State");
+		String Mailing_Zip = memberDetailsMap.get("Mailing_Zip");
 		
 		boolean Validation_Flag = true;
 		
@@ -389,16 +395,20 @@ public class PersonalInformationPage extends UhcDriver{
 
 		}
 		else{
-			WebElement StateSelected = driver.findElement(By.xpath("//select[@id='state']"));
-			StateSelected.click();
-			WebElement StateSelectNC = driver.findElement(By.xpath("//option[@value='"+state+"']"));
+			
+			Select SelectState = new Select(State_DropDown);
+			SelectState.selectByValue(Mailing_State);
+			sendkeysNew(EnterZipCode,ZipCode);
+			//WebElement StateSelected = driver.findElement(By.xpath("//select[@id='state']"));
+		//	StateSelected.click();
+			//WebElement StateSelectNC = driver.findElement(By.xpath("//option[@value='"+state+"']"));
 		
-			StateSelectNC.click();
-			WebElement EnterZip = driver.findElement(By.xpath("//input[contains(@id,'zipCode')]"));
-			EnterZip.sendKeys(ZipCode);
+		//	StateSelectNC.click();
+			//WebElement EnterZip = driver.findElement(By.xpath("//input[contains(@id,'zipCode')]"));
+			//EnterZip.sendKeys(ZipCode);
 			System.out.println("C&S DSNP Plan : State selected and Zip Entered");
-			StateDisplayText = state;
-			ZipDisplayText = EnterZip.getText();
+			StateDisplayText = Mailing_State;
+			ZipDisplayText = ZipCode;
 		}
 		
 		/*
@@ -407,10 +417,10 @@ public class PersonalInformationPage extends UhcDriver{
 		 * System.out.println("Last Name Expected : "
 		 * +LastName+"       Displayed on page  - "+LastNameDisplayText);
 		 */
-		System.out.println("State Name Expected - "+ state +"\tState Name Displayed on page  - "+StateDisplayText);
+		System.out.println("State Name Expected - "+ Mailing_State +"\tState Name Displayed on page  - "+StateDisplayText);
 		System.out.println("Zip Code Name Expected : "+ZipCode+"       Displayed on page  - "+ZipDisplayText);
 		
-		if(StateDisplayText.contains(state) && ZipDisplayText.contains(ZipCode)){
+		if(StateDisplayText.contains(Mailing_State) && ZipDisplayText.contains(ZipCode)){
 			System.out.println("Member Details Validated on Personal Information Page");
 			Validation_Flag = true;
 		}
