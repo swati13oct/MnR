@@ -162,7 +162,7 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth Prod
         
   #TC11_Benefits_for_Ship_member
   #note: this scenario covers multiple testcases TID 15094,15240
-  @memAuth_benefitsAndCoverage22 @CMShip @prod_BnC_Part3
+  @memAuth_benefitsAndCoverage22 @CMShip @prod_BnC_Part3  @bnc_sanity_ship
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify that Page Headers are in place on Benefits and Coverage page
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
@@ -533,6 +533,7 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth Prod
     Examples:  
       | TID   |username |password  |MemUserName | planType| memberType| copayCategory |Identifier      | count | rider   |
       | 15239 | kkumard | mnrs786@ |BIGDADDY0808|PDP      | Group_BnC | NON LIS       |GrpEffectiveUHC | 3     | NoRider |
+    
      #15238 is deprecated 
      # | 15238 | kkumard| mnrs786@|APRILSSPACE1 |MAPD| Individual_BnC | NON LIS |IndEffectiveAARP | 7   | Rider |
       
@@ -580,7 +581,7 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth Prod
       | 15249 |kkumard| mnrs786@| mwsotak1963      |MAPD      | withoutWaysToSave_BnC  |  
       
 #TC21_PDP_LIS(3,4)- Retail Drug Cost Table
-  @memAuth_benefitsAndCoverage1  @PDPLIS3member @prod_BnC_Part5
+  @memAuth_benefitsAndCoverage1  @PDPLIS3member @prod_BnC_Part5 @bnc_sanity_pdp
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify Group LIS 3/4 on Benefits and Coverage page
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
@@ -623,7 +624,7 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth Prod
       | 15248 |kkumard|  mnrs786@|Melw4344|PDP | PDPLIS_Bnc | LIS 3  | Summary of Benefits | Evidence of Coverage | Comprehensive Formulary         | Alternative Drug List |
             
    #TC25_Group members_MAPD_LIS(3,4)
-  @memAuth_benefitsAndCoverage1  @CMGroupmembersTC25  @prod_BnC_Part6 
+  @memAuth_benefitsAndCoverage1  @CMGroupmembersTC25  @prod_BnC_Part6 @bnc_sanity_mapd
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify Group LIS 3/4 on Benefits and Coverage page
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
