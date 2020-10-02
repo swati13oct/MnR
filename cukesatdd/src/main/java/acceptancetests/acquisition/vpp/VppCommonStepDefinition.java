@@ -599,7 +599,15 @@ public class VppCommonStepDefinition {
 		path = path.replace("!", "#");
 		System.out.print("Path to Acq page : "+path);
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
-				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);	
+		
 		aquisitionhomepage.navigateToPath(path);
+		VPPPlanSummaryPage plansummaryPage = new VPPPlanSummaryPage(wd);		
+		if (plansummaryPage != null) {
+			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
+
+		} else {
+			Assert.fail("Error Loading VPP plan summary page");
+		}
 	}
 }
