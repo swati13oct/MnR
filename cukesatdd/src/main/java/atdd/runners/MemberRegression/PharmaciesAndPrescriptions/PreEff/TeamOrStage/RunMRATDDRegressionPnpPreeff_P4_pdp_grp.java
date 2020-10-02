@@ -1,4 +1,4 @@
-package atdd.runners.MemberRegression.PharmaciesAndPrescriptions;
+package atdd.runners.MemberRegression.PharmaciesAndPrescriptions.PreEff.TeamOrStage;
 
 import org.junit.runner.RunWith;
 
@@ -13,7 +13,7 @@ jsonReport = "target/cucumber-RunMRATDDRegressionPnpPreeff_P4_pdp_grp.json",deta
 overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionPnpPreeff_P4_pdp_grp")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberredesign" }, 
 features = { "src/main/resources/feature/memberredesign/pharmaciesandprescriptions" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionPnpPreeff_P4_pdp_grp.json" }, tags = { "@pnpPreff_pdp_grp" })
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionPnpPreeff_P4_pdp_grp.json" }, tags = { "@pnpPreEff_pdp_grp" })
 public class RunMRATDDRegressionPnpPreeff_P4_pdp_grp {
 
 }

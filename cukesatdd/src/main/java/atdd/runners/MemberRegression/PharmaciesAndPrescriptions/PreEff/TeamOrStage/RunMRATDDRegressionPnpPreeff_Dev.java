@@ -1,4 +1,4 @@
-package atdd.runners.MemberRegression.PharmaciesAndPrescriptions;
+package atdd.runners.MemberRegression.PharmaciesAndPrescriptions.PreEff.TeamOrStage;
 
 import org.junit.runner.RunWith;
 

@@ -9,11 +9,11 @@ import cucumber.api.CucumberOptions;
 
 @RunWith(ExtendedCucumber.class)
 @ExtendedCucumberOptions(retryCount=1,screenShotSize="", screenShotLocation="/screenshots/",
-jsonReport = "target/cucumber-RunMRATDDRegressionPnpPreeff_P8_ma_grp.json",detailedReport = true, detailedAggregatedReport = true,
-overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionPnpPreeff_P8_ma_grp")
+jsonReport = "target/cucumber-RunMRATDDSanityPnpPreeff_mapd_ind.json",detailedReport = true, detailedAggregatedReport = true,
+overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDSanityPnpPreeff_mapd_ind")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberredesign" }, 
 features = { "src/main/resources/feature/memberredesign/pharmaciesandprescriptions" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionPnpPreeff_P8_ma_grp.json" }, tags = { "@pnpPreEff_ma_grp" })
-public class RunMRATDDRegressionPnpPreeff_P8_ma_grp {
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDSanityPnpPreeff_mapd_ind.json" }, tags = { "@pnpPreEff_mapd_ind_sanity" })
+public class RunMRATDDSanityPnpPreeff_mapd_ind {
 
 }
