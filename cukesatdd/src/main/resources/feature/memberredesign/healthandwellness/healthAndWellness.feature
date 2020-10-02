@@ -5,6 +5,10 @@ Feature: 1.09 Member Health and Wellness Page
      Given feature security flag must set to true when testing on stage env
       | Feature           | UCPHealthWellness |
       
+  #----- beginning of sanity ------------------
+  #note: look for scenarios w/ sanity tag
+  
+  #----- beginning of test for regression------------------
   @healthAndWellness01  @regressiongenericpagesH&W @regressionMember
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - As an authenticated member on the new Member site, I want to validate health and wellness page content
     Given login with following details logins in the member portal and validate elements
@@ -17,7 +21,7 @@ Feature: 1.09 Member Health and Wellness Page
     And I should see RENEW ACTIVE tile if available and be able to click it
       | Has RenewActive | <hasRenewActive>   |
       
-    @devRegression @healthAndWellness01_ma_mapd
+    @devRegression @healthAndWellness01_ma_mapd @sanity
     Examples: 
       | TID   | planType | memberType        | hasReward | hasRenewActive |
       | 15340 | MAPD     | RewardsMember     | true      | true           |
@@ -32,6 +36,10 @@ Feature: 1.09 Member Health and Wellness Page
     Examples: 
       | TID   | planType | memberType        | hasReward | hasRenewActive |
       | 15342 | PDP      | RewardsMember     | false     | false          |
+
+    @healthAndWellness01_pdp_ship @sanity
+    Examples: 
+      | TID   | planType | memberType        | hasReward | hasRenewActive |
       | xxxxx | SHIP     | RewardsMember     | false     | false          |
 
     @healthAndWellness01_fedShipCombo_shipFedCombo
