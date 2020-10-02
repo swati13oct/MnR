@@ -10,11 +10,11 @@ import cucumber.api.CucumberOptions;
 
 @RunWith(ExtendedCucumber.class)
 @ExtendedCucumberOptions(retryCount=1,screenShotSize="", screenShotLocation="/screenshots/",
-jsonReport = "target/cucumber-RunMRATDDRegressionPfnyStageP10_IndMiscZh.json",detailedReport = true, detailedAggregatedReport = true,
-overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionPfnyStageP10_IndMiscZh")
+jsonReport = "target/cucumber-RunMRATDDSanityPfnyStage_IndMapdAarp.json",detailedReport = true, detailedAggregatedReport = true,
+overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDSanityPfnyStage_IndMapdAarp")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberredesign" }, 
 features = { "src/main/resources/feature/memberredesign/prepareForNextYear" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionPfnyStageP10_IndMiscZh.json" }, tags = { "@stageEnv","@pfny02_ind_zh" })
-public class RunMRATDDRegressionPfnyStageP10_IndMiscZh {
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDSanityPfnyStage_IndMapdAarp.json" }, tags = { "@stageEnv","@pfny_ind_mapd_aarp_sanity" })
+public class RunMRATDDSanityPfnyStage_IndMapdAarp {
 
 }

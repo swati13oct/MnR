@@ -1,4 +1,4 @@
-package atdd.runners.MemberRegression.PrepareForNextYear.OfflineProdOrOnlineProd;
+package atdd.runners.MemberRegression.PrepareForNextYear.TeamOrStage;
 
 
 import org.junit.runner.RunWith;
@@ -10,11 +10,11 @@ import cucumber.api.CucumberOptions;
 
 @RunWith(ExtendedCucumber.class)
 @ExtendedCucumberOptions(retryCount=1,screenShotSize="", screenShotLocation="/screenshots/",
-jsonReport = "target/cucumber-RunMRATDDRegressionPfnyProdP06_IndMa.json",detailedReport = true, detailedAggregatedReport = true,
-overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionPfnyProdP06_IndMa")
+jsonReport = "target/cucumber-RunMRATDDSanityPfnyStage_GrpMapd.json",detailedReport = true, detailedAggregatedReport = true,
+overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDSanityPfnyStage_GrpMapd")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberredesign" }, 
 features = { "src/main/resources/feature/memberredesign/prepareForNextYear" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionPfnyProdP06_IndMa.json" }, tags = { "@prod_pfny02_ind_ma" })
-public class RunMRATDDRegressionPfnyProdP06_IndMa {
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDSanityPfnyStage_GrpMapd.json" }, tags = { "@stageEnv","@pfny_grp_mapd_sanity" })
+public class RunMRATDDSanityPfnyStage_GrpMapd {
 
 }

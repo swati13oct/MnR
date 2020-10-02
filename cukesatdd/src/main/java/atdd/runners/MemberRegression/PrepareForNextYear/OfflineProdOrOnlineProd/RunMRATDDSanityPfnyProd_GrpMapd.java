@@ -10,11 +10,11 @@ import cucumber.api.CucumberOptions;
 
 @RunWith(ExtendedCucumber.class)
 @ExtendedCucumberOptions(retryCount=1,screenShotSize="", screenShotLocation="/screenshots/",
-jsonReport = "target/cucumber-RunMRATDDRegressionPfnyProdP06_IndMa.json",detailedReport = true, detailedAggregatedReport = true,
-overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionPfnyProdP06_IndMa")
+jsonReport = "target/cucumber-RunMRATDDSanityPfnyProd_GrpMapd.json",detailedReport = true, detailedAggregatedReport = true,
+overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDSanityPfnyProd_GrpMapd")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberredesign" }, 
 features = { "src/main/resources/feature/memberredesign/prepareForNextYear" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionPfnyProdP06_IndMa.json" }, tags = { "@prod_pfny02_ind_ma" })
-public class RunMRATDDRegressionPfnyProdP06_IndMa {
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDSanityPfnyProd_GrpMapd.json" }, tags = { "@prod_pfny02_grp_mapd_sanity" })
+public class RunMRATDDSanityPfnyProd_GrpMapd {
 
 }

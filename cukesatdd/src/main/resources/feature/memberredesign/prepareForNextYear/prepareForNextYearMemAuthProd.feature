@@ -51,12 +51,12 @@ Feature: 1.25.2 Member Prepare For Next Year - PROD
 	Then the user navigate to Prepare For Next Year page via Prepare For Next Year tab
 	Then the user validates Prepare For Next Year page content
 
-	@prod_prepareForNextYear02_ind_mapd_aarp_sanity
+	@prod_pfny_ind_mapd_aarp_sanity
     Examples: 
 	    | index | FID     | username  | password  | MemUserName               | planType | memberType | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | co_us | co_es | co_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh | showNxtYrPlan |
 	    | S2-01 | F437767 | kkumard   | mnrs786@  | BILL.ROSNER123#           | MAPD	 | IND_PFNY   | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | false | false | false | true          |
 
-	@prod_prepareForNextYear02_grp_mapd_sanity
+	@prod_pfny02_grp_mapd_sanity
     Examples: 
 	    | index | FID     | username  | password  | MemUserName               | planType | memberType   | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | co_us | co_es | co_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh | showNxtYrPlan |
 	    | S2-06 | F437767 | kkumard   | mnrs786@  | Andersonga1@Bellsouth.Net | MAPD     | UHC_GRP_PFNY | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | false | false | false | false | false | false | true          |
@@ -69,7 +69,7 @@ Feature: 1.25.2 Member Prepare For Next Year - PROD
   # note: UserType and memberType that would NOT expect to see tab even if current system date is within AEM range and toggle is ON
   # note: current system date will be determined at run time
   #-------------------------------------------------
-  @prod_prepareForNextYear01 @noTab
+  @prod_pfny01 @noTab
   Scenario Outline: -Index <index> -FID <FID> -Plan Type: <planType> -Member Type: <memberType> - To verify Prepare For Next Year tab will NOT display when conditions are NOT met
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
@@ -97,7 +97,7 @@ Feature: 1.25.2 Member Prepare For Next Year - PROD
 
     # note: all available PDP group offcycle users are COMBO user, tab will not show for combo user anyway 
     # note: no MA/MAPD offcycle user available at the moment
-    @prod_prepareForNextYear01_offcycle
+    @prod_pfny01_offcycle
     Examples: 
 	    | index | FID     | username  | password  | MemUserName       | planType | memberType          |
 	    | 1-01  | F437767 | kkumard   | mnrs786@  |  1MGriffin2       | PDP	     | GRP_OFFCYC_PFNY     |
@@ -105,7 +105,7 @@ Feature: 1.25.2 Member Prepare For Next Year - PROD
        #| 1-03  | F437767 | kkumard   | mnrs786@  |  diannahill1      | MAPD	 | GRP_OFFCYC_PFNY     |
 
     # caution: if changing system time for testing, the PREEFF or TERM user may no longer be true
-    @prod_prepareForNextYear01_preTermShip
+    @prod_pfny01_preTermShip
     Examples: 
 	    | index | FID     | username  | password  | MemUserName       | planType | memberType          |
 	   #| 1-04  | F437767 | kkumard   | mnrs786@  | Ranch1955         | MA	     | IND_PREEFF_PFNY     |
@@ -113,13 +113,13 @@ Feature: 1.25.2 Member Prepare For Next Year - PROD
 	    | 1-05  | F437767 | kkumard   | mnrs786@  | BEVERLY_BOB5      | MA	     | IND_TERM_PFNY       |
 	    | 1-06  | F437767 | kkumard   | mnrs786@  | Pramila1946       | SHIP	 | IND_PFNY            |
 			
-	@prod_prepareForNextYear01_comboPdpSsp
+	@prod_pfny01_comboPdpSsp
     Examples: 
 	    | index | FID     | username  | password  | MemUserName       | planType | memberType                 |
 	    | 1-07  | F437767 | kkumard   | mnrs786@  | JSENFYFDRE#ERY2GO | PDP      | COMBO_PDP_GRP_SSP_GRP_PFNY |
 	    | 1-08  | F437767 | kkumard   | mnrs786@  | JSENFYFDRE#ERY2GO | SSP      | COMBO_PDP_GRP_SSP_GRP_PFNY |
 		
-	@prod_prepareForNextYear01_comboMaPdp
+	@prod_pfny01_comboMaPdp
     Examples: 
 	    | index | FID     | username  | password  | MemUserName       | planType | memberType                |
 	    | 1-09  | F443004 | kkumard   | mnrs786@  | rc4614            | MA	     | COMBO_MA_GRP_PDP_GRP_PFNY |
@@ -130,7 +130,7 @@ Feature: 1.25.2 Member Prepare For Next Year - PROD
   # note: UserType and memberType that would expect to see tab if current system date is within AEM range and toggle is ON
   # note: current system date will be determined at run time
   #-------------------------------------------------
-  @prod_prepareForNextYear02 @hasTab
+  @prod_pfny02 @hasTab
   Scenario Outline: -Index <index> -FID <FID> -Plan Type: <planType> -Member Type: <memberType> - To verify Prepare For Next Year tab and page content will display when conditions are met 
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
@@ -179,74 +179,74 @@ Feature: 1.25.2 Member Prepare For Next Year - PROD
 	Then the user navigate to Prepare For Next Year page via Prepare For Next Year tab
 	Then the user validates Prepare For Next Year page content
 
-	@prod_prepareForNextYear02_ind_mapd_aarp
+	@prod_pfny02_ind_mapd_aarp
     Examples: 
 	    | index | FID     | username  | password  | MemUserName               | planType | memberType | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | co_us | co_es | co_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh | showNxtYrPlan |
 	    | 2-01  | F437767 | kkumard   | mnrs786@  | BILL.ROSNER123#           | MAPD	 | IND_PFNY   | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | false | false | false | true          |
 
-	@prod_prepareForNextYear02_ind_mapd_uhc
+	@prod_pfny02_ind_mapd_uhc
     Examples: 
 	    | index | FID     | username  | password  | MemUserName               | planType | memberType | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | co_us | co_es | co_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh | showNxtYrPlan |
 	    | 2-01  | F437767 | kkumard   | mnrs786@  | LMHOCHSCHILD11            | MAPD	 | UHC_IND_PFNY| true | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | false | false | false | true          |
 
-	@prod_prepareForNextYear02_ind_pdp
+	@prod_pfny02_ind_pdp
     Examples: 
 	    | index | FID     | username  | password  | MemUserName               | planType | memberType | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | co_us | co_es | co_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh | showNxtYrPlan |
 	    | 2-02  | F437767 | kkumard   | mnrs786@  | nawal1215                 | PDP	     | IND_PFNY   | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | false | false | false | false | false | false | true          |
 
-	@prod_prepareForNextYear02_ind_ma
+	@prod_pfny02_ind_ma
     Examples: 
 	    | index | FID     | username  | password  | MemUserName               | planType | memberType | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | co_us | co_es | co_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh | showNxtYrPlan |
 	    | 2-03  | F437767 | kkumard   | mnrs786@  | haradaty32                | MA	     | IND_PFNY   | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | false | false | false | true          |
 
-	@prod_prepareForNextYear02_ind_medica
+	@prod_pfny02_ind_medica
     Examples: 
 	    | index | FID     | username  | password  | MemUserName               | planType | memberType | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | co_us | co_es | co_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh | showNxtYrPlan | 
 	    | 2-04  | F437767 | kkumard   | mnrs786@  | ALREALESTATE@AOL.COM      | MEDICA   | IND_PFNY   | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | false | true  | true  | false | false | false | true          |
 
-	@prod_prepareForNextYear02_ind_pcp
+	@prod_pfny02_ind_pcp
     Examples: 
 	    | index | FID     | username  | password  | MemUserName               | planType | memberType | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | co_us | co_es | co_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh | showNxtYrPlan | 
 	    | 2-05  | F437767 | kkumard   | mnrs786@  | BATLLOT@AOL.COM           | PCP	     | IND_PFNY   | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | false | true  | true  | false | false | false | true          |
 
-	@prod_prepareForNextYear02_grp_mapd
+	@prod_pfny02_grp_mapd
     Examples: 
 	    | index | FID     | username  | password  | MemUserName               | planType | memberType   | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | co_us | co_es | co_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh | showNxtYrPlan |
 	    | 2-06  | F437767 | kkumard   | mnrs786@  | Andersonga1@Bellsouth.Net | MAPD     | UHC_GRP_PFNY | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | false | false | false | false | false | false | true          |
 
     #note: no suitable user with 2021 doc for validation
-	#@prod_prepareForNextYear02_grp_pdp
+	#@prod_pfny02_grp_pdp
     #Examples: 
 	#    | index | FID     | username  | password  | MemUserName               | planType | memberType   | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | co_us | co_es | co_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh | showNxtYrPlan |
 	#    | 2-07  | F437767 | kkumard   | mnrs786@  | 7547MCGEE                 | PDP	  | UHC_GRP_PFNY | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | false | false | false | false | false | false | true          |
 
     #note: no suitable user with 2021 doc for validation
-	#@prod_prepareForNextYear02_grp_ma
+	#@prod_pfny02_grp_ma
     #Examples: 
 	#    | index | FID     | username  | password  | MemUserName               | planType | memberType   | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | co_us | co_es | co_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh | showNxtYrPlan |
 	#    | 2-08  | F437767 | kkumard   | mnrs786@  | 1GIRL4DEAN                | MA	      | UHC_GRP_PFNY | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | false | false | false | false | false | false | true          |
 
-    #@prod_prepareForNextYear02_ind_zh
+    #@prod_pfny02_ind_zh
     #Examples: 
 	#    | index | FID     | username  | password  | MemUserName              | planType | memberType        | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | co_us | co_es | co_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh | showNxtYrPlan | 
     #    | 2-09  | F437767 | kkumard   | mnrs786@  | testUserName             | MAPD	 | IND_ESZH_PFNY     | true  | true  | true  | true  | true  | true  | true  | true  | true  | true  | true  | true  | false | false | false | false | false | false | true        |
 
-    #@prod_prepareForNextYear02_ind_1act
+    #@prod_pfny02_ind_1act
     #Examples: 
 	#    | index | FID     | username  | password  | MemUserName              | planType | memberType        | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | co_us | co_es | co_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh | showNxtYrPlan | 
     #    | 2-10  | F437767 | kkumard   | mnrs786@  | testUserName             | MAPD	 | UHC_IND_1ACT_PFNY | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | false | false | false | false | false | false | true        |
 
-	@prod_prepareForNextYear02_combo_ship_fed
+	@prod_pfny02_combo_ship_fed
     Examples: 
 	    | index | FID     | username  | password  | MemUserName               | planType | memberType             | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | co_us | co_es | co_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh | showNxtYrPlan |
 	    | 2-11  | F437767 | kkumard   | mnrs786@  | phleauxdailles43          | MA       | COMBO_SHIP_MA_GRP_PFNY | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | false | false | false | false | false | false | true          |
 
-	@prod_prepareForNextYear02_combo_fed_ship
+	@prod_pfny02_combo_fed_ship
     Examples: 
 	    | index | FID     | username  | password  | MemUserName               | planType | memberType             | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | co_us | co_es | co_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh | showNxtYrPlan |
 	    | 2-12  | F437767 | kkumard   | mnrs786@  | PAULAROTH2                | PDP	     | COMBO_PDP_IND_SHIP_PFNY| true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | false | false | false | false | false | false | true          |
 	    
-  @prod_prepareForNextYear03 @hasTab @noCombTabOnPfny
+  @prod_pfny03 @hasTab @noCombTabOnPfny
   Scenario Outline: -Index <index> -FID <FID> -Plan Type: <planType> -Member Type: <memberType> - To verify Prepare For Next Year tab will NOT display when conditions are NOT met
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
@@ -274,17 +274,17 @@ Feature: 1.25.2 Member Prepare For Next Year - PROD
 	Then the user navigate to Prepare For Next Year page via Prepare For Next Year tab
 	Then the user validates the combo user with ship plan should not see ship tab on the Prepare For Next Year page
 
-	@prod_prepareForNextYear03a
+	@prod_pfny03a
     Examples: 
 	    | index | FID     | username  | password  | MemUserName             | planType | memberType              |
 	    | 3-01  | F437767 | kkumard   | mnrs786@  | phleauxdailles43        | SHIP_HIP | COMBO_SHIP_MA_GRP_PFNY  |
 			
-	@prod_prepareForNextYear03b
+	@prod_pfny03b
     Examples: 
 	    | index | FID     | username  | password  | MemUserName             | planType | memberType              |
 	    | 3-02  | F437767 | kkumard   | mnrs786@  | PAULAROTH2              | SHIP	   | COMBO_PDP_IND_SHIP_PFNY |
 
-  @prod_prepareForNextYear04 @hasTab
+  @prod_pfny04 @hasTab
   Scenario Outline: -Index <index> -FID <FID> -Plan Type: <planType> -Member Type: <memberType> - To verify Prepare For Next Year tab and page content will display when conditions are met 
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
@@ -313,7 +313,7 @@ Feature: 1.25.2 Member Prepare For Next Year - PROD
 	Then the user navigate to Prepare For Next Year page via Prepare For Next Year tab
 	Then the user validates Prepare For Next Year page content for user with SARs plan
 
-    @prod_prepareForNextYear04_sars
+    @prod_pfny04_sars
     Examples: 
 	    | index | FID     | username  | password  | MemUserName             | planType | memberType              | showNxtYrPlan |
 	 #note: cannot locate applicable user yet    
