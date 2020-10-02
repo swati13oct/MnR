@@ -46,7 +46,7 @@ public class RequestAgentApptCommonStepDefinition {
 		
 		if(requestHelpAndInformationPage!=null){
 			getLoginScenario().saveBean(PageConstants.REQUEST_MORE_HELP_INFORMATION_PAGE, requestHelpAndInformationPage);
-			Assert.assertTrue(true);
+			//Assert.assertTrue(true);
 		}else
 			Assert.fail("Error in loading the UHC Agent Page");
 	}
