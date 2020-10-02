@@ -687,11 +687,11 @@ public class AepPlanDetailsPage extends UhcDriver {
 		}
 		System.out.println("Finished collecting the info on vpp detail page =====");
 		
-		  for(String keyValue : result.keySet()) {
-		  System.out.println("Key : "+keyValue+" Value: "+result.get(keyValue));
-		  System.out.println(
-		  "_________________________________________________________________________________________________"
-		  ); }
+//		  for(String keyValue : result.keySet()) {
+//		  System.out.println("Key : "+keyValue+" Value: "+result.get(keyValue));
+//		  System.out.println(
+//		  "_________________________________________________________________________________________________"
+//		  ); }
 
 		return result;
 	}

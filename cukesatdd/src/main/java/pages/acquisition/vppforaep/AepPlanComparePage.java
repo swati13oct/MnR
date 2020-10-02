@@ -62,8 +62,8 @@ public class AepPlanComparePage extends UhcDriver {
 			key = key.replace(":", "");
 
 			columnName = columnName.toLowerCase().trim();
-			if(columnName.contains("tier"))
-				System.out.println();
+//			if(columnName.contains("tier"))
+//				System.out.println();
 
 			benefitValue = benefitValue.trim();
 
@@ -200,7 +200,7 @@ public class AepPlanComparePage extends UhcDriver {
 
 		if(listOfRowsInPlanCompareTbl == null || listOfRowsInPlanCompareTbl.size() == 0)
 		{
-			System.out.println(tableId + " - Could not read table data");
+			System.out.println(tableId + " - No benefit data found");
 			return result;
 		}
 
@@ -233,11 +233,11 @@ public class AepPlanComparePage extends UhcDriver {
 		}
 
 
-		for(String keyValue : result.keySet()) {
-			System.out.println("Table : "+tableId +" | Key : "+keyValue+"\t| Value: "+result.get(keyValue));
-			System.out.println(
-					"_________________________________________________________________________________________________"
-			); }
+//		for(String keyValue : result.keySet()) {
+//			System.out.println("Table : "+tableId +" | Key : "+keyValue+"\t| Value: "+result.get(keyValue));
+//			System.out.println(
+//					"_________________________________________________________________________________________________"
+//			); }
 		return result;
 	}
 
