@@ -55,7 +55,7 @@ public class GlobalBeforeHook implements BeforeHook {
 	          System.out.print("Tag: " + tag);
 	        }
 	      
-	        	//MRScenario.loadCSV();
+	        	MRScenario.loadCSV();
 	       
 	       return tagsList;
 	    }
