@@ -93,7 +93,7 @@ Feature: 1.18.1.2 Member Pharamcies And Prescriptions page - Pre-Effective - PRO
 	#@prod_pnpPreEff_pdp_ind
     #Examples: 
 	#  | FID     | username  | password  | MemUserName               | planType | memberType          | expectLink |
-	#  | F493942 | kkumard   | mnrs786@  | testUserName              | PDP      | IND_PREEFF_PnP      | yes        |
+	#  | F493942 | kkumard   | mnrs786@  | Medicare1977              | PDP      | IND_PREEFF_PnP      | yes        |
 
 	#@prod_pnpPreEff_pdp_grp
     #Examples: 
@@ -103,7 +103,7 @@ Feature: 1.18.1.2 Member Pharamcies And Prescriptions page - Pre-Effective - PRO
 	#@prod_pnpPreEff_snp_ind
     #Examples: 
 	#  | FID     | username  | password  | MemUserName               | planType | memberType          | expectLink |
-	#  | F493942 | kkumard   | mnrs786@  | testUserName              | SNP      | IND_PREEFF_PnP      | yes        |
+	#  | F493942 | kkumard   | mnrs786@  | Mino77003                 | SNP      | IND_PREEFF_PnP      | yes        |
 
 	#@prod_pnpPreEff_ssp_grp
     #Examples: 
