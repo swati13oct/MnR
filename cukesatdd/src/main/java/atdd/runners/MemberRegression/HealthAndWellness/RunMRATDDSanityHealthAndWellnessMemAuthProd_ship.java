@@ -20,7 +20,7 @@ jsonReport = "target/cucumber-RunMRATDDSanityHealthAndWellnessMemAuthProd_ship.j
 overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDSanityHealthAndWellnessMemAuthProd_ship")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberredesign" }, 
 features = { "src/main/resources/feature/memberredesign/healthandwellness" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDSanityHealthAndWellnessMemAuthProd_ship.json" }, tags = { "@sanity","@prod_healthAndWellness01_pdp_ship" })
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDSanityHealthAndWellnessMemAuthProd_ship.json" }, tags = { "@prod_sanity","@prod_healthAndWellness01_pdp_ship" })
 public class RunMRATDDSanityHealthAndWellnessMemAuthProd_ship {
 
 }
