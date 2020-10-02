@@ -8,7 +8,7 @@ Feature: 1.12.1 Member Rally claims
   #----- beginning of Regression claims scenarios section ------------------------
   # note: if run on team env, the click MyClaims and landing on Rally Claims page will be skipped
   @rallyClaims01 @regressionMember
-  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> -claimSystem: <claimSystem> - To validate the MEDICAL/SHIP claims Summary and details page E2E Scenario
+  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> -claimSystem: <claimSystem> - To validate navigation onto MyClaims page
     Given login with following details logins in the member portal and validate elements
       | Plan Type    | <planType>    |
       | Member Type  | <memberType>  |
