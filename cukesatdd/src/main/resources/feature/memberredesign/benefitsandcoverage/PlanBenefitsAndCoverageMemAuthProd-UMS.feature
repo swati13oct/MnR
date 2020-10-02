@@ -916,7 +916,7 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth Prod
     And the user validates headers on Bnc page for indi members
       | Plan Type | <planType> |
   #  And the user validates the Primarycare Provider section
-      | Plan Type | <planType> |
+     # | Plan Type | <planType> |
     And the user validates the Out of Pocket Max section
     And the user view the LIS Drug Copays & Discounts header
     And the user MAPD LIS should see drug cost table for Lis members
