@@ -202,12 +202,12 @@ Feature: 1.25.2 Member Prepare For Next Year - PROD
 	@prod_pfny02_ind_medica
     Examples: 
 	    | index | FID     | username  | password  | MemUserName               | planType | memberType | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | co_us | co_es | co_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh | showNxtYrPlan | 
-	    | 2-04  | F437767 | kkumard   | mnrs786@  | ALREALESTATE@AOL.COM      | MEDICA   | IND_PFNY   | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | false | true  | true  | false | false | false | true          |
+	    | 2-04  | F437767 | kkumard   | mnrs786@  | ALREALESTATE@AOL.COM      | MEDICA   | IND_PFNY   | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | false | false | false | true          |
 
 	@prod_pfny02_ind_pcp
     Examples: 
 	    | index | FID     | username  | password  | MemUserName               | planType | memberType | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | co_us | co_es | co_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh | showNxtYrPlan | 
-	    | 2-05  | F437767 | kkumard   | mnrs786@  | BATLLOT@AOL.COM           | PCP	     | IND_PFNY   | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | false | true  | true  | false | false | false | true          |
+	    | 2-05  | F437767 | kkumard   | mnrs786@  | BATLLOT@AOL.COM           | PCP	     | IND_PFNY   | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | false | false | false | true          |
 
 	@prod_pfny02_grp_mapd
     Examples: 
