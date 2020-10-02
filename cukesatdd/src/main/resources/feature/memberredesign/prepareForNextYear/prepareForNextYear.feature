@@ -235,6 +235,7 @@ Feature: 1.25 Member Prepare For Next Year
 
 ##### begin - cases for stage env #################################################################
   #----- begin sanity
+  #note: code will skip some validations for sanity when it see the sanity tag
   @sanity01 @stageEnv
   Scenario Outline: -Index <index> -FID <FID> -Plan Type: <planType> -Member Type: <memberType> - To verify Prepare For Next Year tab and page content will display when conditions are met 
     Given login with following details logins in the member portal and validate elements

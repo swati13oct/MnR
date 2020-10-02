@@ -2,6 +2,7 @@
 Feature: 1.25.2 Member Prepare For Next Year - PROD
 
   #----- begin sanity
+  #note: code will skip some validations for sanity when it see the sanity tag
   @prod_sanity01
   Scenario Outline: -Index <index> -FID <FID> -Plan Type: <planType> -Member Type: <memberType> - To verify Prepare For Next Year tab and page content will display when conditions are met 
     Given the user is on member auth login flow page
