@@ -12,7 +12,7 @@ import org.openqa.selenium.support.PageFactory;
  * @author rkodumur
  *
  */
-public class AgentsnBrokersAARPPage extends GlobalWebElements{
+public class AgentsnBrokersAARPPage extends GlobalWebElementsMobile{
 	
 	@FindBy(xpath = "//*[contains(@class,'meded-article-header__title')]")
 	public static WebElement header;

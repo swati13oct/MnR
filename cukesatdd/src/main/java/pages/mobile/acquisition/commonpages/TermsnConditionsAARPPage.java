@@ -14,7 +14,7 @@ import acceptancetests.util.CommonUtility;
  * @author rkodumur
  *
  */
-public class TermsnConditionsAARPPage extends GlobalWebElements{
+public class TermsnConditionsAARPPage extends GlobalWebElementsMobile{
 		
 	@FindBy(xpath = "//*[contains(@class,'meded-article-header__title')]")
 	public static WebElement header;

@@ -32,7 +32,15 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import gherkin.formatter.model.DataTableRow;
 import io.appium.java_client.AppiumDriver;
+import pages.acquisition.bluelayer.AcquisitionHomePage;
+import pages.acquisition.bluelayer.AgentsAndBrokersPage;
+import pages.acquisition.bluelayer.ComparePlansPageBlayer;
+import pages.acquisition.bluelayer.DrugCostEstimatorPage;
+import pages.acquisition.bluelayer.ProviderSearchPage;
+import pages.acquisition.bluelayer.VPPPlanSummaryPage;
 import pages.acquisition.pharmacyLocator.PharmacySearchPage;
+import pages.mobile.acquisition.bluelayer.AgentsAndBrokersPageMobile;
+import pages.mobile.acquisition.bluelayer.ComparePlansPageBlayerMobile;
 //import pages.acquisition.tfn.CampaignTFNPage;
 //import pages.acquisition.ulayer.AboutUsAARPPage;
 //import pages.acquisition.ulayer.AddDrugDetails;
@@ -4111,4 +4119,93 @@ public class VppPlanCompareMobile {
 		}
 		vppPlanDetailsPage.validateDentalPopupDefaults(planName, optionalRiderFlag);
 	}
+	
+	@When("^user selects a Hospitals and retuns to VPP page in ums$")
+	public void user_selects_Hospitals_and_return_vpp_page_ums() {
+		{
+			ProviderSearchPageMobile providerSearchPage = (ProviderSearchPageMobile) getLoginScenario()
+					.getBean(PageConstants.PROVIDER_SEARCH_PAGE);
+			VPPPlanSummaryPageMobile plansummaryPage = providerSearchPage.selectsHospitals();
+			Assert.assertTrue("Not able to return to Plan Summary page", plansummaryPage != null);
+
+		}
+	}
+	
+	@When("^user access DCE tool on UMS site$")
+	public void accessDCEToolUMS(DataTable attributes) {
+		List<DataTableRow> memberAttributesRow = attributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		String plantype = memberAttributesMap.get("Plan Type");
+		String planName = memberAttributesMap.get("PlanName");
+
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		//plansummaryPage.viewPlanSummary(plantype);
+		DrugCostEstimatorPage dce = plansummaryPage.navigatetoDCEPage(planName);
+		 
+		if (dce != null) {
+			getLoginScenario().saveBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE, dce);
+		}
+	}
+	
+	@Then("^I navigate to step3 page and validate the drug info$")
+	public void I_navigate_to_step_page(DataTable data) throws InterruptedException {
+		List<DataTableRow> memberAttributesRow = data.getGherkinRows();
+		String drug = memberAttributesRow.get(0).getCells().get(1);
+		DrugCostEstimatorPageMobile dce = (DrugCostEstimatorPageMobile) getLoginScenario().getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
+		dce.navigateToStep3();
+	   if(dce.validateDrugOnStep3(drug))
+		   Assert.assertTrue(true);
+	   else
+		   Assert.fail("Error:the drug did not display on step 3 page"); 
+	}
+	
+	@Then("^the user clicks on return link to navigate to plan summary in UHC$")
+	public void clickOnPlanSummaryReturnLink(){
+		DrugCostEstimatorPageMobile dcePage = (DrugCostEstimatorPageMobile) getLoginScenario().getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
+		dcePage.clickReturnToSummaryLink();
+	}
+	
+	
+	@When("^I navigate to step2 page$")
+	public void I_navigate_to_step2_page_aarp () throws InterruptedException
+	{
+		DrugCostEstimatorPageMobile dce = (DrugCostEstimatorPageMobile) getLoginScenario().getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
+		dce.navigateToStep2();
+	}
+	
+	@Then("^the user clicks on Back to Plans button in UHC site and Navigates to new Plan Compare$")
+	public void the_user_clicks_on_Back_to_Plans_button_in_AARP_site_and_Navigates_to_new_Plan_Compare1() throws Throwable {
+		DrugCostEstimatorPageMobile dce = (DrugCostEstimatorPageMobile) getLoginScenario()
+				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
+		ComparePlansPageBlayerMobile planComparePage = dce.clickBtnBackToPlancomparenew();
+		if (planComparePage != null) {
+			getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
+		}
+	}
+	
+	
+	/**
+	 * @toDo:user clicks on Agents & Brokers link from Disclaimers page footer
+	 */
+	@When("^the user clicks on Agents & Brokers link from Disclaimers page footer UHC Medicaresolutions Site$")
+	public void user_clicks_AgentsAndBrokers_link_ums() {
+
+		AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		AgentsAndBrokersPageMobile agentsAndBrokersPage = aquisitionhomepage.agentsAndBrokersClick();
+		if (agentsAndBrokersPage != null) {
+			getLoginScenario().saveBean(PageConstants.AGENTS_AND_BROKERS_PAGE, agentsAndBrokersPage);
+		} else {
+			Assert.fail("Error in Agents and brokers page");
+		}
+
+	}
+
 }

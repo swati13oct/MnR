@@ -14,7 +14,7 @@ import acceptancetests.util.CommonUtility;
 
 
 
-public class LearnAboutMedicarePage extends GlobalWebElements {
+public class LearnAboutMedicarePage extends GlobalWebElementsMobile {
 	@FindBy(className = "bullet_list")
 	private WebElement learnaboutMedicare;
 

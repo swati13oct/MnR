@@ -26,7 +26,7 @@ import pages.acquisition.uhcretiree.Rallytool_Page;
  * @author pgrover1
  *
  */
-public class PlanPreviewPage extends GlobalWebElements {
+public class PlanPreviewPage extends GlobalWebElementsMobile {
 
 	@FindBy(xpath="//*[@id='pipAcq']/div/p[2]/input")
 	private WebElement zipcodetxtbox;

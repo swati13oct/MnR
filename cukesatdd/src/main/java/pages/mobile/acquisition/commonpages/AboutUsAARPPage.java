@@ -15,7 +15,7 @@ import acceptancetests.util.CommonUtility;
  */
 
 
-public class AboutUsAARPPage extends GlobalWebElements{
+public class AboutUsAARPPage extends GlobalWebElementsMobile{
 
 	@FindBy(xpath = "//*[contains(@class,'meded-article-header__title')]")
 	public static WebElement header;

@@ -13,7 +13,7 @@ import acceptancetests.util.CommonUtility;
 import junit.framework.Assert;
 
 @SuppressWarnings({ "deprecation" })
-public class LearnAboutMedicareHomePage extends GlobalWebElements {
+public class LearnAboutMedicareHomePage extends GlobalWebElementsMobile {
 
 	public LearnAboutMedicareHomePage(WebDriver driver) {
 		super(driver);

@@ -8,7 +8,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class MedicarePrescriptionDrugPartDPlansPage extends GlobalWebElements {
+public class MedicarePrescriptionDrugPartDPlansPage extends GlobalWebElementsMobile {
 
 	public MedicarePrescriptionDrugPartDPlansPage(WebDriver driver) {
 		super(driver);

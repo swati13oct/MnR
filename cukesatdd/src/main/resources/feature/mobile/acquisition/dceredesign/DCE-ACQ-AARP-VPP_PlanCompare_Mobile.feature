@@ -1,4 +1,4 @@
-@DCE_Redesign_VPP_Details
+@DCE_Redesign_VPP_Compare
 Feature: 1.10.3 ACQ-DCERedesign-VPP_PlanCompare - To test DCE - VPP Plan Compare Integration
 
   @DCE_Redesign_VPP_PlanCompare @prod

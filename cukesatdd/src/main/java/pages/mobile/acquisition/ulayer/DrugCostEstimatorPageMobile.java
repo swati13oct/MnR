@@ -24,6 +24,8 @@ import atdd.framework.UhcDriver;
 import cucumber.api.DataTable;
 import cucumber.api.java.en.When;
 import gherkin.formatter.model.DataTableRow;
+import pages.acquisition.bluelayer.ComparePlansPageBlayer;
+import pages.mobile.acquisition.bluelayer.ComparePlansPageBlayerMobile;
 
 public class DrugCostEstimatorPageMobile extends UhcDriver {
 
@@ -2044,6 +2046,16 @@ public class DrugCostEstimatorPageMobile extends UhcDriver {
 		return null;
 
 	}
+	
+	public ComparePlansPageBlayerMobile clickBtnBackToPlancomparenew() throws InterruptedException {
+		validateNew(getBtnBackToPlans());
+		getBtnBackToPlans().click();
+		CommonUtility.checkPageIsReadyNew(driver);
+		CommonUtility.waitForPageLoadNew(driver, planCompareVerifyEstimatedDrugCostValue, 60);
+		return new ComparePlansPageBlayerMobile(driver);
+
+	}
+	
 
 	public void validateLocalStorage(Map<String, String> dCEAttributesMap) {
 		

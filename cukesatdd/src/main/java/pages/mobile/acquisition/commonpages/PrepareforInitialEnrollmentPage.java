@@ -12,7 +12,7 @@ import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 
-public class PrepareforInitialEnrollmentPage extends GlobalWebElements {
+public class PrepareforInitialEnrollmentPage extends GlobalWebElementsMobile {
 
 	@FindBy(className = "bullet_list")
 	private WebElement initalenrolllist;

@@ -11,7 +11,7 @@ import acceptancetests.util.CommonUtility;
 
 import java.util.List;
 
-public class MedicareEligibilityPage extends GlobalWebElements {
+public class MedicareEligibilityPage extends GlobalWebElementsMobile {
 
 	public MedicareEligibilityPage(WebDriver driver) {
 		super(driver);

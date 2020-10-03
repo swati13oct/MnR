@@ -7,7 +7,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class PrescriptionsProvidersBenefitsPage extends GlobalWebElements {
+public class PrescriptionsProvidersBenefitsPage extends GlobalWebElementsMobile {
 
 	public PrescriptionsProvidersBenefitsPage(WebDriver driver) {
 		super(driver);

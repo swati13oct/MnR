@@ -9,7 +9,7 @@ import org.openqa.selenium.support.PageFactory;
 import acceptancetests.util.CommonUtility;
 
 @SuppressWarnings({ "deprecation" })
-public class keywordSearchAARP extends GlobalWebElements {
+public class keywordSearchAARP extends GlobalWebElementsMobile {
 
 	public keywordSearchAARP(WebDriver driver) {
 		super(driver);

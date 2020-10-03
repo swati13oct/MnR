@@ -9,7 +9,7 @@ import org.openqa.selenium.WebDriver;
  * @author snagpa4
  *
  */
-public class ResumeYourSavedApplicationPage extends GlobalWebElements{
+public class ResumeYourSavedApplicationPage extends GlobalWebElementsMobile{
 
 	public ResumeYourSavedApplicationPage(WebDriver driver) {
 		super(driver);

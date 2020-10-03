@@ -7,7 +7,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class CoverageChoicesPage extends GlobalWebElements {
+public class CoverageChoicesPage extends GlobalWebElementsMobile {
 
 	public CoverageChoicesPage(WebDriver driver) {
 		super(driver);

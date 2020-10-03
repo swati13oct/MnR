@@ -28,6 +28,7 @@ import atdd.framework.MRScenario;
 import org.testng.Assert;
 
 import pages.mobile.acquisition.bluelayer.AboutUsPageMobile;
+import pages.mobile.acquisition.bluelayer.AgentsAndBrokersPageMobile;
 import pages.mobile.acquisition.bluelayer.ContactUsUmsPageMobile;
 import pages.mobile.acquisition.bluelayer.DisclaimersPageMobile;
 import pages.mobile.acquisition.bluelayer.PrivacyPolicyUmsPageMobile;
@@ -36,6 +37,7 @@ import pages.mobile.acquisition.dce.bluelayer.DCETestHarnessPageMobile;
 import pages.mobile.acquisition.planrecommendationengine.CommonutilitiesMobile;
 import pages.mobile.acquisition.ulayer.AcquisitionHomePageMobile;
 import pages.acquisition.bluelayer.AboutUsPage;
+import pages.acquisition.bluelayer.AgentsAndBrokersPage;
 import pages.acquisition.bluelayer.ContactUsUmsPage;
 import pages.acquisition.bluelayer.DisclaimersPage;
 import pages.acquisition.bluelayer.MultiCountyModalPage;
@@ -2488,6 +2490,17 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		CommonUtility.checkPageIsReadyNew(driver);
 		if (driver.getCurrentUrl().contains("contact-us")) {
 			return new ContactUsUmsPageMobile(driver);
+		}
+		return null;
+
+	}
+	
+	public AgentsAndBrokersPageMobile agentsAndBrokersClick() {
+		validateNew(footerAgentsnBrokersLink);
+		footerAgentsnBrokersLink.click();
+		CommonUtility.checkPageIsReadyNew(driver);
+		if (driver.getCurrentUrl().contains("health-insurance-brokers")) {
+			return new AgentsAndBrokersPageMobile(driver);
 		}
 		return null;
 

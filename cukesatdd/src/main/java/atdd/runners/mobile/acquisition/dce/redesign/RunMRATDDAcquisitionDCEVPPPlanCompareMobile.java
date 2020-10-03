@@ -15,7 +15,7 @@ import cucumber.api.CucumberOptions;
  detailedAggregatedReport = true, overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDAcquisitionMobileDCEVPPPlanCompare")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.mobile.acquisition" },monochrome=true, features = { "src/main/resources/feature/mobile/acquisition/dceredesign" }, plugin = {
 		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionMobileDCEVPPPlanCompare.json" }, 
-tags = { "  @DCE_Redesign_VPP_PlanCompare" })
+tags = { "@DCE_Redesign_VPP_Compare" })
 
 
 public class RunMRATDDAcquisitionDCEVPPPlanCompareMobile {
