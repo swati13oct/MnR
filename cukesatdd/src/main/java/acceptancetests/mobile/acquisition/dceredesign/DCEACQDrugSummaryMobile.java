@@ -9,10 +9,13 @@ import java.util.List;
 import java.util.Map;
 
 import org.junit.Assert;
+import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import pages.acquisition.dceredesign.BuildYourDrugList;
 import pages.acquisition.dceredesign.DrugSummaryPage;
 import pages.acquisition.dceredesign.GetStartedPage;
+import pages.acquisition.dceredesign.ZipCodePlanYearCapturePage;
 import pages.acquisition.ulayer.AcquisitionHomePage;
 import pages.mobile.acquisition.dceredesign.BuildYourDrugListMobile;
 import pages.mobile.acquisition.dceredesign.DrugDetailsPageMobile;
@@ -51,7 +54,8 @@ public class DCEACQDrugSummaryMobile {
 	 */
 
 	@Given("^the user navigates to following AARP medicare acquisition site page$")
-	public void the_user_navigates_to_following_AARP_medicare_acquisition_site_page(DataTable givenAttributes) throws Throwable {
+	public void the_user_navigates_to_following_AARP_medicare_acquisition_site_page(DataTable givenAttributes)
+			throws Throwable {
 		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
@@ -60,13 +64,104 @@ public class DCEACQDrugSummaryMobile {
 		}
 		String path = memberAttributesMap.get("PagePath");
 		path = path.replace("!", "#");
-		System.out.print("Path to Acq page : "+path);
+		System.out.print("Path to Acq page : " + path);
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		aquisitionhomepage.navigateToPath(path);
 	}
+
+	@Then("^the user validates Get Started Page for UHC$")
+	public void the_user_validates_Get_Started_Page_UHC() throws Throwable {
+		wd = (AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		GetStartedPageMobile DCEgetStarted = new GetStartedPageMobile(wd);
+		getLoginScenario().saveBean(PageConstants.DCE_Redesign_BuildDrugList, DCEgetStarted);
+
+	}
+
+	@When("^the user clicks on Add drugs button on UHC$")
+	public void the_user_clicks_on_Add_drugs_button_UHC() {
+		GetStartedPageMobile DCEgetStarted = (GetStartedPageMobile) getLoginScenario()
+				.getBean(PageConstants.DCE_Redesign_BuildDrugList);
+		DCEgetStarted.clickAddDrugsBtn();
+		// getLoginScenario().saveBean(PageConstants.DCE_Redesign_ZipCodePlanYearCapture,
+		// zipCodePlanYearPage);
+	}
+
+	@When("^adds drugs in drug list page on UHC$")
+	public void adds_drugs_in_drug_list_page_UHC(DataTable givenAttributes) {
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		String drugName = memberAttributesMap.get("DrugName");
+		System.out.println("zipcode" + drugName);
+		BuildYourDrugListMobile buildDrugList = new BuildYourDrugListMobile(wd);
+		getLoginScenario().saveBean(PageConstants.DCE_Redesign_BuildDrugList, buildDrugList);
+		buildDrugList.addDrugs(drugName);
+	}
+
+	@When("^clicks on Review drug cost button on UHC$")
+	public void clicks_on_Review_drug_cost_button_UHC() {
+		BuildYourDrugListMobile buildDrugList = (BuildYourDrugListMobile) getLoginScenario()
+				.getBean(PageConstants.DCE_Redesign_BuildDrugList);
+		buildDrugList.clickReviewDrugCostBtn();
+	}
+
+	@Then("^user should be navigated to UHC, zipcode and plan year capture page for Non AEP$")
+	public void user_should_be_navigated_to_zipcode_and_plan_year_capture_page_for_Non_AEP() {
+		/*
+		 * ZipCodePlanYearCapturePage zipCodePlanYearPage = (ZipCodePlanYearCapturePage)
+		 * getLoginScenario()
+		 * .getBean(PageConstants.DCE_Redesign_ZipCodePlanYearCapture);
+		 * zipCodePlanYearPage.validateZipCodePlanYearCapturePageNonAEP();
+		 */
+		ZipCodeAndPlanYearCapturePageMobile zipCodePlanYearPage = new ZipCodeAndPlanYearCapturePageMobile(wd);
+		zipCodePlanYearPage.validateZipCodePlanYearCapturePageNonAEP();
+		getLoginScenario().saveBean(PageConstants.DCE_Redesign_ZipCodePlanYearCapture, zipCodePlanYearPage);
+	}
+
+	@When("^user enters valid zipcode and county on UHC$")
+	public void user_enter_valid_zipcode_UHC(DataTable givenAttributes) throws Throwable {
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		String zipcode = memberAttributesMap.get("ZipCode");
+		ZipCodeAndPlanYearCapturePageMobile zipCodePlanYearPage = (ZipCodeAndPlanYearCapturePageMobile) getLoginScenario()
+				.getBean(PageConstants.DCE_Redesign_ZipCodePlanYearCapture);
+		zipCodePlanYearPage.enterZipCodeandcounty(zipcode);
+	}
+
+	@When("^user clicks on continue button on UHC$")
+	public void user_clicks_on_continue_button_UHC() {
+		ZipCodeAndPlanYearCapturePageMobile zipCodePlanYearPage = (ZipCodeAndPlanYearCapturePageMobile) getLoginScenario()
+				.getBean(PageConstants.DCE_Redesign_ZipCodePlanYearCapture);
+		zipCodePlanYearPage.clickContinueBtn();
+	}
 	
-
-
+	@Then("^load screen should be displayed on UHC$")
+	public void load_screen_should_be_displayed_on_uhc() {
+		ZipCodeAndPlanYearCapturePageMobile zipCodePlanYearPage = (ZipCodeAndPlanYearCapturePageMobile) getLoginScenario()
+				.getBean(PageConstants.DCE_Redesign_ZipCodePlanYearCapture);
+		// zipCodePlanYearPage.verifyLoadScreen();
+	}
+	
+	@Then("^user should be navigated to Review drug cost estimate page on UHC$")
+	public void user_should_be_navigated_to_Review_drug_cost_estimate_page_UHC() {
+		ZipCodeAndPlanYearCapturePageMobile zipCodePlanYearPage = (ZipCodeAndPlanYearCapturePageMobile) getLoginScenario()
+				.getBean(PageConstants.DCE_Redesign_ZipCodePlanYearCapture);
+		zipCodePlanYearPage.verifyReviewDrugCostPageDisplayed();
+	}
+	
+	@Then("^user verify the drug summary page on UHC$")
+	public void user_verify_the_drug_summary_page_uhc() throws InterruptedException {
+		DrugSummaryPageMobile drugSummaryPage = new DrugSummaryPageMobile(wd);
+		drugSummaryPage.validateDrugSummaryPage();
+		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
+	}
 
 }
