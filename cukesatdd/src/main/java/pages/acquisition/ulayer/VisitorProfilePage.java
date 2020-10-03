@@ -106,6 +106,9 @@ public class VisitorProfilePage extends UhcDriver {
 
 	@FindBy(xpath = "//div[@class='multi-year-select']/button[contains(@class,'js-select-year select-year')][1]")
 	private WebElement profileCrntYrPlans;
+	
+	@FindBy(xpath = "//*[contains(@id,'ghn_lnk')]/span[text()='Shop For a Plan']")
+	private WebElement homeTab;
 
 	public VisitorProfilePage(WebDriver driver) {
 		super(driver);
@@ -386,7 +389,7 @@ public class VisitorProfilePage extends UhcDriver {
 				securityAnswer.sendKeys("number1");
 			}
 			driver.findElement(By.cssSelector("input#authQuesSubmitButton")).click();
-			CommonUtility.waitForPageLoadNew(driver, signOut, 15);
+			CommonUtility.waitForPageLoadNew(driver, signOut, 20);
 
 		} catch (Exception e) {
 			Assert.fail("###############Optum Id Sign In failed###############");
@@ -501,5 +504,28 @@ public class VisitorProfilePage extends UhcDriver {
 		backToPlans.click();
 		CommonUtility.checkPageIsReadyNew(driver);
 	}
+	
+	
+	public AcquisitionHomePage clickHomeTab() {
+		try {
+			//homeTab.click();
+			jsClickNew(homeTab);
+			CommonUtility.checkPageIsReadyNew(driver);
+			if (driver.getCurrentUrl().contains("#/plan-summary")) {
+				return new AcquisitionHomePage(driver);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 
+	public VisitorProfilePage validateVisitorProfilePageDisplayed() {
+		if (driver.getCurrentUrl().contains("profile")) {
+			return new VisitorProfilePage(driver);
+		} else {
+			System.out.println("Navigation to visitor profile is failed");
+			return null;
+		}
+	}
 }

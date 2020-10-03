@@ -333,7 +333,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//div[contains(@class,'component_info_wrap')]")
 	private WebElement nextBestActionModal;
 	
-	@FindBy(xpath = "//div[@class='component_title']")
+	@FindBy(xpath = "//*[contains(@class,'component_title')]")
 	private WebElement nextBestActionModalMsg;
 	
 	@FindBy(xpath = "//div[contains(@class,'component_info_wrap')]//button[text()='Get Started']")
@@ -362,6 +362,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	private String savedPlanImgXpath="//img[contains(@src,'ic_favorite-filled.png')]";
 	private static String NEXT_ACTION_MODAL_MSG_PROVIDER_SEARCH="Is my doctor covered?";
 	private static String NEXT_ACTION_MODAL_MSG_ENROLL_PLAN="How do I enroll?";
+	private static String NEXT_ACTION_MODAL_MSG_DRUG_COST="How much will my drugs cost?";
 	
 	@FindBy(xpath = "//div[@id='emailPlanSummaryPopUp']")
 	private WebElement emailPlanSummaryPopupScreen;
@@ -735,7 +736,6 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		
 		@FindBy(xpath = "//input[@class='nextButton']")
 		private WebElement  Submit;
-
 		
 		public WebElement getValEstimatedAnnualDrugCostValue(String planName) {
 			//WebElement valEstimatedAnnualDrugCostValue = driver.findElement(By.xpath("//*[contains(text(),'"+planName+"')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//*[@ng-show='plan.network']"));
@@ -4355,4 +4355,19 @@ for (int i = 0; i < initialCount + 1; i++) {
 		//return NavigateToURL;
 	}
 
+	public void verifyNextBestActionModalForDrugCostAuthenticated() {
+		try {
+			if(nextBestActionModal.isDisplayed()) {
+				validate(getStartedBtn);
+				Assert.assertTrue("The Drug cost message is not displayed on NBA.../n Expected Message"+NEXT_ACTION_MODAL_MSG_DRUG_COST+ "\n Actual message"+nextBestActionModalMsg.getText(), nextBestActionModalMsg.getText().equals(NEXT_ACTION_MODAL_MSG_DRUG_COST));
+			}
+		}
+		catch(Exception ex) {
+			System.out.println("NBA modal not found");
+		}
+	}
+	
+	public void clickSavedItems() {
+		viewSavedItems.click();
+	}
 }

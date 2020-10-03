@@ -371,4 +371,13 @@ public class VisitorProfileStepDefinition_AARP {
 
 		getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, planSummary);
 	}
+	
+	
+	@And("^user clicks on home on VP authenticated AARP site$")
+	public void user_clicks_on_home_on_VP_authenticated_AARP_site() {
+		VisitorProfilePage visitorProfilePage = (VisitorProfilePage) getLoginScenario()
+				.getBean(PageConstants.VISITOR_PROFILE_PAGE);
+		AcquisitionHomePage acquisitionHomePage = visitorProfilePage.clickHomeTab();
+		getLoginScenario().saveBean(PageConstants.ACCOUNT_HOME_PAGE, acquisitionHomePage);
+	}
 }

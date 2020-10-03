@@ -3857,4 +3857,27 @@ public void the_user_validates_the_secondary_search_by_providing_newsearchvalue_
 			Assert.fail("Error Loading VPP plan summary page");
 		}
 	}
+	
+	@Then("^user should see the Get started NBA$")
+	public void user_should_see_the_Get_started_NBA() throws Throwable {
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		plansummaryPage.verifyNextBestActionModalForDrugCostAuthenticated();
+		getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE,
+				plansummaryPage);
+	}
+
+	@When("^user clicks on Saved items$")
+	public void user_clicks_on_Saved_items() throws Throwable {
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);	
+		plansummaryPage.clickSavedItems();
+	}
+
+	@Then("^user should be navigated to visitor profile$")
+	public void user_should_be_navigated_to_visitor_profile() throws Throwable {
+		VisitorProfilePage visitorProfile = (VisitorProfilePage) getLoginScenario()
+				.getBean(PageConstants.VISITOR_PROFILE_PAGE);
+		visitorProfile.validateVisitorProfilePageDisplayed();
+	}
 }
