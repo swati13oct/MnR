@@ -1,7 +1,7 @@
 @vppPlanDetailsUHC
 Feature: 2.01.2-Vpp to plan Details UHC Scenarios
 
-  @vppPlanDetailsUHCRegression @prod
+  @vppPlanDetailsUHC01 @vppPlanDetailsUHCRun01 @vppPlanDetailsUHCRegression
   Scenario Outline: UserStory: <TID> -plan type: <plantype> - Verify specific PDF Plan Documents in Plan Details Page for provided plan
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
@@ -49,7 +49,7 @@ Feature: 2.01.2-Vpp to plan Details UHC Scenarios
       | TID   | zipcode | isMultutiCounty | county         | plantype | planName                                | pdfType         | docCode             | planyear |
       | 00002 |   99210 | No              | Spokane County | MA       | AARP Medicare Advantage Essential (HMO) | Enrollment Form | AAWA20HM4522892_000 | current  |
 
-  @@vppPlanDetailsUHCRegression @prod
+  @vppPlanDetailsUHC03 @vppPlanDetailsUHCRun01 @vppPlanDetailsUHCRegression
   Scenario Outline: UserStory: <TID> -plan type: <plantype> - Verify Plan costs tab in Plan Details for provided plan
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
@@ -72,7 +72,7 @@ Feature: 2.01.2-Vpp to plan Details UHC Scenarios
       | 15640 |   99210 | No              | Spokane County | MA       | AARP Medicare Advantage Essential (HMO)        | $0             | $0            | current  |
       | 15641 |   99210 | No              | Spokane County | SNP      | UnitedHealthcare Dual Complete (HMO D-SNP)     | $25            | $300          | current  |
 
-  #@vppPlanDetailsUHC04 @vppPlanDetailsUHCRun01 @vppPlanDetailsUHCRegression
+  @vppPlanDetailsUHC04 @vppPlanDetailsUHCRun01 @vppPlanDetailsUHCRegression
   Scenario Outline: UserStory: <TID> -plan type: <plantype> - Verify Optional Services tab in Plan Details for provided plan
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
@@ -97,7 +97,7 @@ Feature: 2.01.2-Vpp to plan Details UHC Scenarios
       | 15658 |   11516 | No              | Nassau County | MA       | UnitedHealthcare Medicare Advantage Essential (Regional PPO)     | Dental Platinum | $0             | $0            | current  |
       | 15662 |   11516 | No              | Nassau County | MAPD     | UnitedHealthcare Medicare Advantage Choice Plan 1 (Regional PPO) | Dental Platinum | $16            | $192          | current  |
 
-  @vppPlanDetailsUHCRegression @prod
+  @vppPlanDetailsUHC05 @vppPlanDetailsUHCRun02 @vppPlanDetailsUHCRegression
   Scenario Outline: TCID - <TID> - plan Type: <plantype> - TO click Back to all plans from Top and bottom of the page and verify redirection back to the VPP-Summary page UHC site
     Given the user is on the uhcmedicaresolutions site landing page
     When I access the vpp page
@@ -114,7 +114,7 @@ Feature: 2.01.2-Vpp to plan Details UHC Scenarios
       | TID   | zipcode | planName                                             | plantype | planyear |
       | 00003 |   33012 | AARP Medicare Advantage Choice Plan 2 (Regional PPO) | MAPD     | current  |
 
-  #@vppPlanDetailsUHC06 @vppPlanDetailsUHCRun02 @vppPlanDetailsUHCRegression @prod
+  @vppPlanDetailsUHC06 @vppPlanDetailsUHCRun02 @vppPlanDetailsUHCRegression
   Scenario Outline: TCID - <TID> - plan Type: <plantype> - OLE Landing from UHC Acquisition site VPP Plan Details
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
@@ -138,7 +138,7 @@ Feature: 2.01.2-Vpp to plan Details UHC Scenarios
       | 00007 |   78006 | YES             | Bexar County       | SNP      | UnitedHealthcare Dual Complete Choice (Regional PPO D-SNP) | current  |
 #      | 00008 |   78006 | YES             | Bexar County       | SNP      | UnitedHealthcare Medicare Gold (Regional PPO C-SNP)        | current  |
 
-  #@vppPlanDetailsUHC07 @vppPlanDetailsUHCRun02 @vppPlanDetailsUHCRegression
+  @vppPlanDetailsUHC07 @vppPlanDetailsUHCRun02 @vppPlanDetailsUHCRegression
   Scenario Outline: TCID - <TID> - plan Type: <plantype> - Verify Provider Search  in UHC site from Plan Details page
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
@@ -159,7 +159,7 @@ Feature: 2.01.2-Vpp to plan Details UHC Scenarios
       | TID   | zipcode | isMultutiCounty | county             | plantype | planName                                               | planyear |
       | 00009 |   90210 | NO              | Los Angeles County | MA       | AARP Medicare Advantage SecureHorizons Essential (HMO) | current  |
 
-  #@vppPlanDetailsUHC08 @vppPlanDetailsUHCRun03 @vppPlanDetailsUHCRegression
+  @vppPlanDetailsUHC08 @vppPlanDetailsUHCRun03 @vppPlanDetailsUHCRegression
   Scenario Outline: TCID - <TID> - plan Type: <plantype> - To Verify the drug cost estimator flow for <plantype> through plan details page's Plan Costs tab
     Given user is on blue layer landing page
     When user performs plan search using following information in the UMS site
@@ -233,7 +233,7 @@ Feature: 2.01.2-Vpp to plan Details UHC Scenarios
       | TID   | zipcode | county             | drugInitials1 | drugName1 | drugInitials2 | drugName2  | drugInitials3 | drugName3     | pharmacyType     | distance | pharmacyName | plantype | planName                                           | quantity | frequency     | newPharmacyType | genericName1 | genricName3 | aep | currentyear | planyear |
       | 00010 |   90002 | Los Angeles County | lipi          | Lipitor   | dron          | dronabinol | Adva          | Advair Diskus | Standard Network | 15 miles | CVS PHARMACY | MAPD     | AARP Medicare Advantage SecureHorizons Focus (HMO) |       30 | Every 1 month | Mail Order      | atorvastatin | fluticasone | no  | no          | current  |
 
-  #@vppPlanDetailsUHC09 @vppPlanDetailsUHCRun03 @vppPlanDetailsUHCRegression
+  @vppPlanDetailsUHC09 @vppPlanDetailsUHCRun03 @vppPlanDetailsUHCRegression
   Scenario Outline: TCID - <TID> - plan Type: <plantype> - Verify Prescription Drug Benefits tab in Plan Details for provided plan
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
@@ -281,7 +281,7 @@ Feature: 2.01.2-Vpp to plan Details UHC Scenarios
       | TID   | zipcode | isMultutiCounty | county       | plantype | planName                                            | planyear |
       | 00014 |   80002 | YES             | Adams County | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) | current  |
 
-  #@vppPlanDetailsUHC11 @vppPlanDetailsUHCRun03 @vppPlanDetailsUHCRegression
+  @vppPlanDetailsUHC11 @vppPlanDetailsUHCRun03 @vppPlanDetailsUHCRegression
   Scenario Outline: TCID - <TID> - plan Type: <plantype> - Verify plan details and back to summary and add to compare and uncheck in plan details and verify uncheck in plan summary
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
@@ -304,7 +304,7 @@ Feature: 2.01.2-Vpp to plan Details UHC Scenarios
       | TID   | zipcode | isMultutiCounty | county       | plantype | planName                                            | planyear |
       | 00015 |   80002 | YES             | Adams County | MAPD     | AARP Medicare Advantage SecureHorizons Plan 1 (HMO) | current  |
 
-  #@vppPlanDetailsUHC12 @vppPlanDetailsUHCRun01 @vppPlanDetailsUHCRegression @F435191
+  @vppPlanDetailsUHC12 @vppPlanDetailsUHCRun01 @vppPlanDetailsUHCRegression @F435191
   Scenario Outline: UserStory: <TID> -plan type: <plantype> - Verify <optionalRider> in Plan Details for provided plan and validating Dental Directory link
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
