@@ -4,7 +4,7 @@ Feature: 1.08. ACQ- Viitor Profile Authenticated NBA AARP
   
   @getStartedNBA
  Scenario Outline: Verify get started for  authenticated Visitor Profile page
-   Given the user is on the AARP medicare site landing page
+   Given the user is on AARP medicare acquisition site landing page
     When the user clicks on the shopping cart icon in AARP site
     And the user signs in with optum Id credentials in AARP site
       | User Name | <userName> |
