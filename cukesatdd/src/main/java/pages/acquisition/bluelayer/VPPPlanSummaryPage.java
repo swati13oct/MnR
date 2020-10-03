@@ -2575,7 +2575,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		action.moveToElement(DCELink).build().perform();
 		DCELink.click();
 		CommonUtility.checkPageIsReadyNew(driver);
-		if (driver.getCurrentUrl().contains("drug-cost-estimator")) {
+		if (driver.getCurrentUrl().contains("estimate-drug-costs")) {
 			System.out.println("DCE Page is loaded");
 			return new DrugCostEstimatorPage(driver);
 		} else

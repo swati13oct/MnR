@@ -33,5 +33,5 @@ Feature: Member DCE Page
     Examples: 
       | planType | memberType 	  | drug1   | dosage1          | quantity1 | frequency1    | zipcode | radius   |
       | PDP		 | IndividualPDP  | Lipitor | Lipitor TAB 10MG |        31 | Every 1 month | 07747	 | 25 miles |
-      | MADP	 | IndividualMAPD | Lipitor | Lipitor TAB 10MG |        31 | Every 1 month | 06450	 | 25 miles |
+      | MAPD	 | IndividualMAPD | Lipitor | Lipitor TAB 10MG |        31 | Every 1 month | 06450	 | 25 miles |
      

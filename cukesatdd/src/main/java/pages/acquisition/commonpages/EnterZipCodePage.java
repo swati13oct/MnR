@@ -35,7 +35,7 @@ public class EnterZipCodePage extends UhcDriver{
 			int zipCodeNumber = 1;
 			System.out.println("Total " + zipForm.size() + " Zip code component[s] display on page");
 
-			while (zipCodeNumber < zipForm.size()) {
+			while (zipCodeNumber <= zipForm.size()) {
 				Thread.sleep(3000);
 				ZipCodeText.get(zipCodeNumber - 1).clear();
 				ZipCodeText.get(zipCodeNumber - 1).sendKeys(zipCode);
@@ -55,15 +55,23 @@ public class EnterZipCodePage extends UhcDriver{
 
 				System.out.println("Actual : " + vppPageTitle);
 				if(driver.getCurrentUrl().contains("aarpmedicareplans")) {
-					System.out.println("Expected : " + PageTitleConstants.ULAYER_VPP_PLAN_PAGE_AARP_MEDICARE);
-					assertTrue("Not redirected to VPP page",
-						vppPageTitle.contains(PageTitleConstants.ULAYER_VPP_PLAN_PAGE_AARP_MEDICARE));
+						if (vppPageTitle.contains(PageTitleConstants.ULAYER_VPP_PLAN_PAGE_AARP_MEDICARE))
+							System.out.println("Page Title : " + PageTitleConstants.ULAYER_VPP_PLAN_PAGE_AARP_MEDICARE);
+						else if (vppPageTitle.contains(PageTitleConstants.ULAYER_VPP_PLAN_PAGE_AARP_SHOP_MEDICARE))
+							System.out.println("Page Title : " + PageTitleConstants.ULAYER_VPP_PLAN_PAGE_AARP_SHOP_MEDICARE);
+						else
+							assertTrue("Not redirected to VPP page",
+									vppPageTitle.contains(PageTitleConstants.ULAYER_VPP_PLAN_PAGE_AARP_MEDICARE));
 				}
 				else
 				{
-					System.out.println("Expected : " + PageTitleConstants.BLAYER_VPP_PLAN_PAGE_AARP_MEDICARE);
-					assertTrue("Not redirected to VPP page",
-						vppPageTitle.contains(PageTitleConstants.BLAYER_VPP_PLAN_PAGE_AARP_MEDICARE));
+					if (vppPageTitle.contains(PageTitleConstants.BLAYER_VPP_PLAN_PAGE_AARP_MEDICARE))
+						System.out.println("Page Title : " + PageTitleConstants.BLAYER_VPP_PLAN_PAGE_AARP_MEDICARE);
+					else if (vppPageTitle.contains(PageTitleConstants.BLAYER_VPP_PLAN_PAGE_AARP_SHOP_MEDICARE))
+						System.out.println("Page Title : " + PageTitleConstants.BLAYER_VPP_PLAN_PAGE_AARP_SHOP_MEDICARE);
+					else
+						assertTrue("Not redirected to VPP page",
+								vppPageTitle.contains(PageTitleConstants.BLAYER_VPP_PLAN_PAGE_AARP_MEDICARE));
 				}
 				driver.navigate().back();
 				zipCodeNumber++;

@@ -42,9 +42,9 @@ public class ARECommonutility extends UhcDriver {
 		System.out.println(URL);
 		Assert.assertTrue(URL.contains("plan-compare"), "New Plan Compare view is not loaded properly");
 		pageloadcomplete();
-		validate(planLoaderscreen, 5);
-		waitforElementInvisibilityInTime(planLoaderscreen, 60);
-		threadsleep(3000);// Plan loader
+		//validate(planLoaderscreen, 5);
+		//waitforElementInvisibilityInTime(planLoaderscreen, 5);
+		//threadsleep(3000);// Plan loader
 	}
 
 }

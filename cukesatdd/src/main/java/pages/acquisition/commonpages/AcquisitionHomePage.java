@@ -175,7 +175,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "//*[@class='container meded-article-header']/h1']")
 	private WebElement MALandingHeading;
 
-	@FindBy(xpath = "//*[contains(@id,'zipcodebtn') or (contains(@class,'zip-button' ) and contains( text(),'Go'))]")
+	@FindBy(xpath = "//*[contains(@id,'zip-form')]//button[contains(@class,'zip-button' )]")
 	private WebElement viewPlansButton;
 	
 	@FindBy(xpath = "//form[@id='zip-form']//button[@class='zip-button']")
@@ -278,7 +278,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
    	private WebElement callsam;
    	
    	//@FindBy(xpath = "//*[@id='sam-call-button']/div/span[1]")
-  	@FindBy(xpath = "//*[contains(@id,'sam-call-button')]//*[contains(@class,'sam__button__text')]")
+  	@FindBy(xpath = "//*[contains(@class,'sam__button__text') and contains(text(),'1-')]")
    	private WebElement callsamtooltip;
    	
    	@FindBy(xpath ="//*[@id='sam-call-modal']/div/div")
@@ -308,7 +308,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
    	private WebElement CallSamTFNClose;
    	
 //   	String CallSam= "Call a Licensed Insurance Agent";
-   	String CallSam= "1-877";
+   	String CallSam1855= "1-855";
+   	String CallSam1877= "1-877";
+   	
    	@FindBy(xpath = "//*[contains(@class,'activeChatBtn')]")
    	private WebElement chatsam;
    	
@@ -347,7 +349,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
    	private WebElement ChatSamHead;
    	
    	//@FindBy(xpath ="//*[contains(@id,'sp-close-frame')]")
-   	@FindBy(xpath =" //*[@id='sp-chat-frame']//div/div[@id='sp-close-frame']")
+   	@FindBy(xpath = "//*[@id='sp-chat-frame']//div/div[@id='sp-close-frame']")
 	private WebElement ChatSamTFNClose;
    	
    	@FindBy(id = "pharmacy-zip-search")
@@ -504,7 +506,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 				start(AARP_ACQISITION_PAGE_URL);
 				testSiteUrl=AARP_ACQISITION_PAGE_URL;
 				checkForSecurityPage();
-				checkModelPopup(driver,30);		
+				checkModelPopup(driver,20);		
 			}
 		}
 		
@@ -917,7 +919,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			viewPlansButton.click();
 	//	}
 //			while(validate(overlayFilm, 10)) {/**wait*/}
-			CommonUtility.waitForElementToDisappear(driver, overlayFilm, 25);
+//			CommonUtility.waitForElementToDisappear(driver, overlayFilm, 75);
+			waitForPageLoadSafari();
 			
 			CommonUtility.waitForPageLoadNew(driver, vppTop, 30);
 			if (driver.getCurrentUrl().contains("health-plans")) {
@@ -1433,6 +1436,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	
 	 public void validateCallSam() throws InterruptedException {
 	        boolean present;
+//	        driver.navigate().refresh();
 	        try {
 	        validateNew(callsam);
 	        present = true;
@@ -1449,27 +1453,34 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		
 		public void validateCallSamContent() throws InterruptedException {
 			
-			Actions action = new Actions(driver);
-			WebElement element = callsam;
-			action.moveToElement(element).perform();
+//			Actions action = new Actions(driver);
+//			WebElement element = callsam;
+//			action.moveToElement(element).perform();
+			waitforElementNew(callsamtooltip,30);
 			String toolTipText = callsamtooltip.getText();
 			System.out.println("====================================================================");
 			System.out.println(toolTipText);
 			System.out.println("====================================================================");
 			
-	        if (CallSam.contains(toolTipText)) {
-	          System.out.println("Call sticky action menu roll out and contain the text Call a Licensed Insurance Agent");
+	        if (toolTipText.contains(CallSam1877)) {
+	          System.out.println("Call sticky action menu roll out and contain the text: "+ toolTipText);
 	          
 	        }
+	        else if (toolTipText.contains(CallSam1855))	{
+	        	System.out.println("Call sticky action menu roll out and contain the text"+ toolTipText);
+	        }
+	        		
 	        else
-	        	Assert.fail("No Call sticky action menu didn't roll out and doesn't contain the text Call a Licensed Insurance Agent");
+	        	Assert.fail("No Call sticky action menu didn't roll out and doesn't contain the text 1-877");
 	       
 		}
 		
 		public AcquisitionHomePage  validateCallpopup() throws InterruptedException {
-			//CommonUtility.checkPageIsReady(driver);
+//			CommonUtility.checkPageIsReady(driver);
+			validate(callsamtooltip);
+			CheckiPerseptions();
 			callsam.click();
-			System.out.println("@@@@@@@@@@@@@@@ Call Icon Clicked @@@@@@@@@@@@@@@");		
+			System.out.println("@@@@@@@@@@@@@@@ Call Icon Clicked @@@@@@@@@@@@@@@");
 			driver.switchTo().activeElement();
 			System.out.println(CallSamTFN.getText());
 			CallSamTFNClose.click();
@@ -1515,9 +1526,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			//CommonUtility.checkPageIsReady(driver);
 			chatsam.click();
 			System.out.println("@@@@@@@@@@@@@@@ Chat Icon Clicked @@@@@@@@@@@@@@@");	
-			chatsamtooltip.click();
+//			chatsamtooltip.click();
 			driver.switchTo().activeElement();
-			System.out.println(ChatSamHead.getText());
+//			System.out.println(ChatSamHead.getText());
 			ChatSamTFNClose.click();
 			validateNew(chatsam);		
 			return null;
@@ -1587,8 +1598,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		}
 		
 		public GetStartedPage clickDCERedesignLinkonShopPDPpage() {
+			CommonUtility.checkPageIsReadyNew(driver);
 			WebElement DCELink = driver.findElement(By.xpath("//a[contains(@href,'drug-cost-estimator') and contains(text(), 'Prescription Drug Costs')]"));
-			validateNew(DCELink);
+			validateNew(DCELink, 10);
 			jsClickNew(DCELink);
 			if (validateNew(AddMyDrugsBtn))
 				return new GetStartedPage(driver);
@@ -1688,7 +1700,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		public void signInheader() {
 			headerSignInLink.click();
 			validateNew(signIn);
-			if (driver.getCurrentUrl().contains("medicare.uhc.com/aarp")) {
+			if (driver.getCurrentUrl().contains("medicare.uhc.com")) {
 				Assert.assertTrue(true);
 				System.out.println("Signin page is loaded");
 				driver.navigate().back();
@@ -1778,7 +1790,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			CheckPageLoad();
 			CheckiPerseptions();
 			CommonUtility.waitForPageLoadNew(driver, GuestProfile, 30);
-			if (driver.getCurrentUrl().contains("profile/*")) {
+			if (driver.getCurrentUrl().contains("profile/guest")) {
 				Assert.assertTrue(true);
 				System.out.println("Visitor Profile Page opens successsfully");
 			} else {
@@ -2048,7 +2060,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 				{
 					for (String rname : jenkinsRunnerFiles.split(",")) {
 						if (rname.toUpperCase().contains("PLANRECOMMENDATIONENGINE")
-								&& rname.toUpperCase().contains("ULAYER")) {
+								&& (rname.toUpperCase().contains("ULAYER") || (rname.toUpperCase().contains("AARP")))) {
 							if (MRScenario.environment.equalsIgnoreCase("digital-uatv2"))
 								startNewPRE(AARP_ACQISITION_PAGE_URL.replace(".com", ".com/plan-recommendation-engine.html")
 										.replace("www.", ""), browser);
@@ -2058,7 +2070,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 										browser);
 						}
 						if (rname.toUpperCase().contains("PLANRECOMMENDATIONENGINE")
-								&& rname.toUpperCase().contains("BLAYER")) {
+								&& (rname.toUpperCase().contains("BLAYER") || (rname.toUpperCase().contains("UHC")))) {
 							if (MRScenario.environment.equalsIgnoreCase("digital-uatv2"))
 								startNewPRE(AARP_ACQISITION_PAGE_URL.replace(".com", ".com/plan-recommendation-engine.html")
 										.replace("www.", ""), browser);
@@ -2100,7 +2112,4 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 			System.out.println("Current page URL: " + driver.getCurrentUrl());
 		}
-} 
-
-
-	 
+}

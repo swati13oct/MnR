@@ -1,4 +1,4 @@
-package atdd.runners.acquisition;
+package atdd.runners.acquisition.ARE;
 
 import org.junit.runner.RunWith;
 
@@ -15,18 +15,18 @@ import cucumber.api.CucumberOptions;
 		retryCount=1, 
 		screenShotSize="", 
 		screenShotLocation="/screenshots/",
-		jsonReport = "target/cucumber-RunMRATDDAcquisitionAgentRecommendationEngine.json",
+		jsonReport = "target/cucumber-RunMRATDDAcquisitionAREAEPUlayer.json",
 		detailedReport = true, 
 		detailedAggregatedReport = true, 
 		overviewReport = true, 
 		toPDF = true, 
-		outputFolder = "target/RunMRATDDAcquisitionAgentRecommendationEngine")
+		outputFolder = "target/RunMRATDDAcquisitionAREAEPUlayer")
 @CucumberOptions(
 		glue = { "atdd.framework", "acceptancetests.acquisition.agentRecommendationEngine" }, 
 		features = { "src/main/resources/feature/acquisition/agentRecommendationEngine" }, 
-		plugin = {"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionAgentRecommendationEngine.json" }, 
-		tags = {})
-public class RunMRATDDAcquisitionAgentRecommendationEngine {
+		plugin = {"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionAREAEPUlayer.json" }, 
+		tags = {"@AREAEPRegression"})
+public class RunMRATDDAcquisitionAREAEPUlayer {
 
 }
 

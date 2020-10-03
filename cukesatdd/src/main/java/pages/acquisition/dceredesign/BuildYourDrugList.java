@@ -43,7 +43,6 @@ public class BuildYourDrugList extends UhcDriver {
 	@FindBy(xpath = "//a[contains(@class, 'uhc-link-button') and contains(text(), 'Back')]")
 	public WebElement DrugSearchBackClick;
 
-	
 	@FindBy(xpath = "//uhc-autocomplete//*[contains(@class, 'autocomplete-container')]")
 	public WebElement AutoCompleteList;
 
@@ -179,6 +178,7 @@ public class BuildYourDrugList extends UhcDriver {
 		EnterDrugNameTxt.sendKeys(drugName);
 		validateNew(SearchBtn);
 		jsClickNew(SearchBtn);
+		CommonUtility.checkPageIsReadyNew(driver);
 		WebElement SelectDrug = driver.findElement(By.xpath("//uhc-list-item//button[contains(@aria-label, 'Select "+drugName+"')]"));
 		validateNew(SelectDrug);
 		jsClickNew(SelectDrug);
