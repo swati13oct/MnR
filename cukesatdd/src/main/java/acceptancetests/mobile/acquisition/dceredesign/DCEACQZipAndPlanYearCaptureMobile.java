@@ -67,6 +67,65 @@ public class DCEACQZipAndPlanYearCaptureMobile {
 				.getBean(PageConstants.DCE_Redesign_BuildDrugList);
 		buildDrugList.clickReviewDrugCostBtn();
 	}
+	
+
+	@Then("^user should be navigated to zipcode and plan year capture page for AEP on UHC$")
+	public void user_should_be_navigated_to_zipcode_and_plan_year_capture_page_for_AEP_UHC() {
+		// ZipCodePlanYearCapturePage zipCodePlanYearPage=(ZipCodePlanYearCapturePage)
+		// getLoginScenario().getBean(PageConstants.DCE_Redesign_ZipCodePlanYearCapture);
+		// zipCodePlanYearPage.validateZipCodePlanYearCapturePageAEP();
+		ZipCodeAndPlanYearCapturePageMobile zipCodePlanYearPage = new ZipCodeAndPlanYearCapturePageMobile(wd);
+		zipCodePlanYearPage.validateZipCodePlanYearCapturePageNonAEP();
+		getLoginScenario().saveBean(PageConstants.DCE_Redesign_ZipCodePlanYearCapture, zipCodePlanYearPage);
+	}
+	
+	@Then("^plan year dropdown should be displayed during AEP on UHC$")
+	public void plan_year_dropdown_should_be_displayed_during_AEP_UHC() {
+		ZipCodeAndPlanYearCapturePageMobile zipCodePlanYearPage = (ZipCodeAndPlanYearCapturePageMobile) getLoginScenario()
+				.getBean(PageConstants.DCE_Redesign_ZipCodePlanYearCapture);
+		zipCodePlanYearPage.validatePlanYearDrpDownAEP();
+	}
+
+	@When("^user enter invalid zipcode on UHC$")
+	public void user_enter_invalid_zipcode_UHC(DataTable givenAttributes) throws Throwable {
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		String invalidzipcode = memberAttributesMap.get("inValidzipCode");
+		System.out.println("zipcode" + invalidzipcode);
+		ZipCodeAndPlanYearCapturePageMobile zipCodePlanYearPage = (ZipCodeAndPlanYearCapturePageMobile) getLoginScenario()
+				.getBean(PageConstants.DCE_Redesign_ZipCodePlanYearCapture);
+		zipCodePlanYearPage.enterZipCode(invalidzipcode);
+	}
+
+
+	@Then("^error message should be displayed on UHC$")
+	public void error_message_should_be_displayed_UHC() {
+		ZipCodeAndPlanYearCapturePageMobile zipCodePlanYearPage = (ZipCodeAndPlanYearCapturePageMobile) getLoginScenario()
+				.getBean(PageConstants.DCE_Redesign_ZipCodePlanYearCapture);
+		zipCodePlanYearPage.validateZipCodeErrorMessage();
+	}
+	
+	@When("^user selects plan year on UHC$")
+	public void user_selects_plan_year_UHC() {
+		ZipCodeAndPlanYearCapturePageMobile zipCodePlanYearPage = (ZipCodeAndPlanYearCapturePageMobile) getLoginScenario()
+				.getBean(PageConstants.DCE_Redesign_ZipCodePlanYearCapture);
+		zipCodePlanYearPage.selectPlanYear();
+	}
+	
+	@Then("^the user validates whether call icon is visible on UHC$")
+	public void the_user_validates_whether_callicon_isvisible_on_UHCsite() throws InterruptedException {
+		
+	AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		aquisitionhomepage.validateCallSam();
+		//aquisitionhomepage.validateCallSamContent();
+		aquisitionhomepage.validateCallpopup();
+		
+	}
 
 	@Then("^user should be navigated to zipcode and plan year capture page for AEP$")
 	public void user_should_be_navigated_to_zipcode_and_plan_year_capture_page_for_AEP_in_AARP() {
