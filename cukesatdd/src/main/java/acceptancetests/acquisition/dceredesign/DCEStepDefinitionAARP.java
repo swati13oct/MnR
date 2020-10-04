@@ -1026,4 +1026,14 @@ public class DCEStepDefinitionAARP {
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetailsPage);
 	}
 
+	@And("^the user click on return to plan summary on DCE summary page$")
+	public void the_user_clicks_on_return_to_plan_summary() {
+		GetStartedPage getStartedPage = (GetStartedPage) getLoginScenario().
+				getBean(PageConstants.DCE_Redesign_GetStarted);
+		pages.acquisition.ulayer.VPPPlanSummaryPage plansummaryPage  = getStartedPage.ClickReturnToPlanSummary();
+		if (null != plansummaryPage) {
+			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
+		} else
+			Assert.fail("DCE Redesign page object not loaded");
+	}
 }

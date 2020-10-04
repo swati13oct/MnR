@@ -280,11 +280,11 @@ public class VppStepDefinitionUpdatedAARP {
 	plansummaryPage.getValidate();
 	}
 	
-	@And("^user validate Find a Provider$")
+	@And("^user validate Find a Provider NBA$")
 	public void user_validate_Find_a_Provider() {
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-	plansummaryPage.getValidate();
+	plansummaryPage.validateProviderNBA();
 	}
 	
 	@And("^user click on get started on AARP site$")

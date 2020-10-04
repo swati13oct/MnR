@@ -932,8 +932,16 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		validate(viewSavedItems);
 	}
 	
-	public void validateProvider() {
-		validate(nextBestActionModalFindMyDoctorsBtn);
+	public void validateProviderNBA() {
+		try {
+			if(nextBestActionModal.isDisplayed()) {
+				validate(nextBestActionModalFindMyDoctorsBtn);
+				Assert.assertTrue("The Provider NBA message is not displayed on NBA.../n Expected Message"+NEXT_ACTION_MODAL_MSG_PROVIDER_SEARCH+ "\n Actual message"+nextBestActionModalMsg.getText(), nextBestActionModalMsg.getText().equals(NEXT_ACTION_MODAL_MSG_PROVIDER_SEARCH));
+			}
+		}
+		catch(Exception ex) {
+			System.out.println("NBA modal not found");
+		}
 	}
 
 	public VPPPlanSummaryPage viewPlanSummaryButton(String planType) {

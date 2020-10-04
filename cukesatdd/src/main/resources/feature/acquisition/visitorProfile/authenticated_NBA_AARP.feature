@@ -42,18 +42,19 @@ Feature: 1.08. ACQ- Viitor Profile Authenticated NBA AARP
       | Is Multi County | <isMultutiCounty> |
     And the user views the plans of the below plan type in AARP site and select Next year
       | Plan Type | <plantype> |
-    Then user validate Saved items and Get started
+    Then user should see the Get started NBA
     Then user click on get started on AARP site
     Then the user validates Get Started Page 
     When the user clicks on Add drugs button
     And adds drugs in drug list page
     | DrugName | <drugName> |
     And clicks on Review drug cost button
-    And the user click on return to plan summary from Get Started Page to return to VPP Plan Summary
-    Then user validate Find a Provider
-   
+    And the user click on return to plan summary on DCE summary page
+    Then user validate Find a Provider NBA
+   	When user clicks on Saved items
+    Then user should be navigated to visitor profile
     Examples: 
       | userName           | password   | isMultutiCounty | zipcode|county|plantype|drugName    | dosage   | quantity | frequency     | zipcode | radius   | quantity | frequency     | branded |
-      | chargersqa@23 | Password@23 | NO              |90210| Jefferson County|MAPD|Lipitor|TAB 10MG |       30 | Every 1 month |   90210 | 15 miles |       30 | Every 1 month | yes     |
+      | chargersqa@23 | Password@23 | NO              |10001| New York County|MAPD|Lipitor|TAB 10MG |       30 | Every 1 month |   90210 | 15 miles |       30 | Every 1 month | yes     |
      
       

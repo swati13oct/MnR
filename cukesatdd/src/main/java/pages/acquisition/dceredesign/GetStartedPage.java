@@ -114,5 +114,13 @@ public class GetStartedPage extends UhcDriver {
 		}
 	}
 		
+	public pages.acquisition.ulayer.VPPPlanSummaryPage ClickReturnToPlanSummary() {
+		validateNew(LinktoExitScenario);
+		jsClickNew(LinktoExitScenario);
+		if (driver.getCurrentUrl().contains("plan-summary")) {
+			return new pages.acquisition.ulayer.VPPPlanSummaryPage(driver);	
+		}
+		return null;	
+	}
 
 }
