@@ -28,8 +28,13 @@ Feature: 1.23.2 Member Provider Search - Member Auth - PROD
 	    | index | username  | password  | MemUserName          | planType | memberType              | 
 	    | 01    | kkumard  | mnrs786@  | BILL.ROSNER123#      | MAPD     | AARP_IND_ProviderSearch |
 	    | 02    | kkumard  | mnrs786@  | LMHOCHSCHILD11       | MAPD     | UHC_IND_ProviderSearch  |
+	    
+	@prod_Sanity_providerSearch_mapd
+    Examples: 
+	    | index | username  | password  | MemUserName          | planType | memberType              | 
+	    | 02    | kkumard  | mnrs786@  | LMHOCHSCHILD11       | MAPD     | UHC_IND_ProviderSearch  |
 
-	@prod_providerSearch01_pdp
+	@prod_providerSearch01_pdp  @prod_SanityproviderSearch_pdp
     Examples: 
 	    | index | username  | password  | MemUserName          | planType | memberType              | 
 	    | 03    | kkumard  | mnrs786@  | nawal1215            | PDP      | AARP_IND_ProviderSearch |
@@ -45,6 +50,11 @@ Feature: 1.23.2 Member Provider Search - Member Auth - PROD
 	    | index | username  | password  | MemUserName          | planType | memberType              | 
 	    | 06    | kkumard  | mnrs786@  | ALREALESTATE@AOL.COM | MEDICA   | MEDICA_IND_ProviderSearch |
 	    | 07    | kkumard  | mnrs786@  | BATLLOT@AOL.COM      | PCP      | PCP_IND_ProviderSearch  |
+	    
+    @prod_SanityproviderSearch_medica
+    Examples: 
+	    | index | username  | password  | MemUserName          | planType | memberType              | 
+	    | 06    | kkumard  | mnrs786@  | ALREALESTATE@AOL.COM | MEDICA   | MEDICA_IND_ProviderSearch |
 
 	@prod_providerSearch01_grp
     Examples: 
