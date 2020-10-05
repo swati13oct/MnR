@@ -737,6 +737,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		@FindBy(xpath = "//input[@class='nextButton']")
 		private WebElement  Submit;
 		
+		@FindBy(id = "enrollModalCloseBtn")
+		private WebElement enrollModalCloseBtn;
+		
 		public WebElement getValEstimatedAnnualDrugCostValue(String planName) {
 			//WebElement valEstimatedAnnualDrugCostValue = driver.findElement(By.xpath("//*[contains(text(),'"+planName+"')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//*[@ng-show='plan.network']"));
 			WebElement valEstimatedAnnualDrugCostValue = driver.findElement(By.xpath("//*[contains(text(),'"+planName+"')]/ancestor::*[contains(@class,'module-plan-overview module')]//span[contains(text(),'Estimated Annual Drug Cost:')]/following-sibling::span[not(contains(@class,'ng-hide'))]"));
@@ -4028,6 +4031,7 @@ for (int i = 0; i < initialCount + 1; i++) {
 				Collections.sort(actualPlanNames);
 				System.out.println(expectedPlanNames);
 				System.out.println(actualPlanNames);
+				enrollModalCloseBtn.click();
 				Assert.assertTrue("Saved plans not displayed in Enroll Popup.../n Expected plans" + expectedPlanNames
 						+ "\n Actual plans" + actualPlanNames, actualPlanNames.equals(expectedPlanNames));
 			}
@@ -4059,6 +4063,7 @@ for (int i = 0; i < initialCount + 1; i++) {
 					Collections.sort(actualPlanNames);
 					System.out.println(allPlanNames);
 					System.out.println(actualPlanNames);
+					jsClickNew(enrollModalCloseBtn);
 					Assert.assertTrue("All plans not displayed in Enroll Plan Popup.../n Expected plans" + allPlanNames
 							+ "\n Actual plans" + actualPlanNames, actualPlanNames.equals(allPlanNames));
 				}
