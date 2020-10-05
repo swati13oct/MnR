@@ -644,7 +644,7 @@ public class HealthRecordStepDefinition {
 		boolean expHealthRecordLnk=(Boolean) getLoginScenario().getBean(HealthRecordCommonConstants.EXPECT_IHR_LINK);	
 		boolean expComboTab=false;
 		if (memberType.toLowerCase().contains("combo"))
-			expComboTab=true;
+			expComboTab=false;
 		boolean hasHealthRecordLnk=healthRecordPage.isHeathRecordLnkOnAcctProfDropdownOption(planType, memberType, expComboTab, targetPage,expHealthRecordLnk);
 		if (memberType.toUpperCase().contains("TERM")) 
 			Assert.assertTrue("PROBLEM - KNOWN ISSUE (INC17744933): Federal terminated user needs to have Health Record link suppress on secondary pages - health record link display behavior is not as expected.  Expected to display='"+expHealthRecordLnk+"' | Actual display='"+hasHealthRecordLnk+"'", expHealthRecordLnk==hasHealthRecordLnk);
