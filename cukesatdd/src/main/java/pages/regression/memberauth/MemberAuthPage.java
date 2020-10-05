@@ -230,6 +230,7 @@ public class MemberAuthPage extends UhcDriver {
 		Assert.assertTrue("PROBLEM - Got 'Unable to retrieve member' error after clicking Search button", !validate(redUnableToRetrMemErr,1));
 		//waitforElement(MemberTableUserName); // updated this wait as it is failing for 20 seconds
 		CommonUtility.waitForPageLoad(driver, MemberTableUserName, 10);
+		Assert.assertTrue("PROBLEM - unable ot locate member name from table after search", validate(MemberTableUserName,0));
 		if (MemberTableUserName.isDisplayed()) {
 			System.out.println("member Username under the table is displayed");
 			MemberTableUserName.click();
