@@ -766,7 +766,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		//switchToNewTabNew(ProviderSearchLink);
 		String parentHandle = driver.getWindowHandle();
 		int initialCount = driver.getWindowHandles().size();
-		ProviderSearchLink.click();
+//		ProviderSearchLink.click();
+		jsClickNew(ProviderSearchLink);
 		try {
 			Thread.sleep(5000);
 		} catch (InterruptedException e) {
@@ -1011,9 +1012,10 @@ public class VPPPlanSummaryPage extends UhcDriver {
                         element = getSpecificPlanSummary(findChildElements(elementData, maPlanList), planName);
         } */
 
-		WebElement planCard = driver.findElement(
-				By.xpath("//*[contains(text(),'" + planName + "')]//ancestor::div[contains(@class,'module-plan-overview')]"));
-		scrollToView(planCard);
+		//scrolling to plan for further validation -> safari 
+//		CommonUtility.checkPageIsReadyNew(driver);
+		 /*WebElement planCard = driver.findElement(By.xpath("//*[contains(text(),'" + planName + "')]//ancestor::div[contains(@class,'module-plan-overview')]"));
+		scrollToView(planCard);*/
 		
 		return isSpecificPlanInfoPresent;
 	}
@@ -1464,7 +1466,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		}
 		if(enrollForPlan!=null){
 			validateNew(enrollForPlan);
-			enrollForPlan.click();
+			jsClickNew(enrollForPlan);
+//			enrollForPlan.click();
 		}
 		checkIfPageReadySafari();
 		CommonUtility.waitForPageLoadNew(driver, NextBtn, 30);
@@ -1594,7 +1597,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 					(By.xpath("//a[contains(text(),'"+planName+"')]/ancestor::div[contains(@class, 'module-plan-overview module swiper-slide plan-card')]//descendant::a[contains(@class,'add-drug')]"));
 			CommonUtility.checkPageIsReadyNew(driver);
 			if(validate(dceLink))
-				dceLink.click();
+				jsClickNew(dceLink);
+//				dceLink.click();
 
 		}else{
 			WebElement dceLink = driver.findElement
@@ -2098,10 +2102,11 @@ public class VPPPlanSummaryPage extends UhcDriver {
 }*/
 	public void toolTipForPremium0(String planName){
 		WebElement toolTip = driver.findElement(By.xpath("//*[contains(text(),\'" + planName + "\')]/ancestor::div[contains(@class, 'module-plan-overview')]//descendant :: span[contains(@class, 'standalone')]//*[name()='svg']"));
-		WebElement tooltipContent = driver.findElement(By.xpath("//*[contains(text(),\'" + planName + "\')]/ancestor::div[contains(@class, 'module-plan-overview')]//descendant :: span[contains(@class, 'standalone')]//span"));
-		Actions action = new Actions(driver);
+		/*Actions action = new Actions(driver);
 		scrollToView(toolTip);
-		action.moveToElement(toolTip).build().perform();
+		action.moveToElement(toolTip).build().perform();*/
+		jsMouseOver(toolTip);
+		WebElement tooltipContent = driver.findElement(By.xpath("//*[contains(text(),\'" + planName + "\')]/ancestor::div[contains(@class, 'module-plan-overview')]//descendant :: span[contains(@class, 'standalone')]//span"));
 		String toolTipText = tooltipContent.getAttribute("textContent").trim();
 		if (toolTipText.contains("Why is my premium")){
 			System.out.println("ToolTip text is " + toolTipText);
@@ -2114,8 +2119,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	public void toolTipForAnnualDeductible(String planName) {
 		WebElement toolTip = driver.findElement(By.xpath("(//*[contains(text(),\'" + planName + "\')]/ancestor::div[contains(@class, 'module-plan-overview')]//descendant :: span[contains(@class, 'standalone')]//*[name()='use'])[2]"));
 		WebElement tooltipContent = driver.findElement(By.xpath("(//*[contains(text(),\'" + planName + "\')]/ancestor::div[contains(@class, 'module-plan-overview')]//descendant :: span[contains(@class, 'standalone')]//span)[2]"));
-		Actions action = new Actions(driver);
-		action.moveToElement(toolTip).build().perform();
+		/*Actions action = new Actions(driver);
+		action.moveToElement(toolTip).build().perform();*/
+		jsMouseOver(toolTip);
 		String toolTipText = tooltipContent.getAttribute("textContent").trim();
 		if (toolTipText.contains("annual deductible")){
 			System.out.println("ToolTip text is " + toolTipText);

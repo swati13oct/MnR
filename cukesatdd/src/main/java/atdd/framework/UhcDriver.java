@@ -455,11 +455,9 @@ try {
 
 	public boolean scrollToView(WebElement element) {
 		try {
-
 			JavascriptExecutor js = (JavascriptExecutor) driver;
 			js.executeScript("arguments[0].scrollIntoView();", element);
 		} catch (Exception e) {
-
 			Assert.fail("The element " + element.getText() + "is not  found");
 			return false;
 		}
@@ -767,7 +765,9 @@ try {
 						System.out.println("IPerceptionsFrame found");
 						driver.switchTo().frame(IPerceptionsFrame);
 //						IPerceptionNoBtn.click();
+						threadsleep(1);
 						jsClickNew(IPerceptionNoBtn);
+						threadsleep(1);
 						driver.switchTo().defaultContent();
 					}
 				}catch(Exception e1) {
@@ -1224,4 +1224,23 @@ try {
     	return ready;
     }
     
+	public boolean jsMouseOver(WebElement element) {
+		try {
+			/*String mouseOverScript = "if(document.createEvent){"
+					+ "var evObj = document.createEvent('MouseEvents');"
+					+ "evObj.initEvent('mouseover',true, false); "
+					+ "arguments[0].dispatchEvent(evObj);} "
+					+ "else if(document.createEventObject) { "
+					+ "arguments[0].fireEvent('onmouseover');}";*/
+			JavascriptExecutor js = (JavascriptExecutor) driver;
+			js.executeScript("$(arguments[0]).mouseover();", element);
+//			js.executeScript(mouseOverScript, element);
+		} catch (Exception e) {
+			Assert.fail("The element " + element.getText() + "is not  found");
+			return false;
+		}
+
+		return true;
+	}
+	    
 }
