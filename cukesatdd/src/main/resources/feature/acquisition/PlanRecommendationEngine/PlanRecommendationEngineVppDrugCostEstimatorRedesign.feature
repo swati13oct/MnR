@@ -1,4 +1,4 @@
-@PlanRecommendationEngineVPPDCE @PRERegression
+@PlanRecommendationEngineVPPDCE
 Feature: PRE_VPP_DCERedesign - Verify end-to-end PRE flows functionalities with VPP validation and DCE Redesign
 
 	@PRE_VPP_DCE_E2E
