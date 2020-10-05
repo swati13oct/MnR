@@ -380,7 +380,7 @@ public class HealthAndWellnessPage extends UhcDriver{
 				}
 				count=count+1;
 				System.out.println("Tried #"+count);
-				rewardLogo.click();
+				notNowLnk.click();
 				CommonUtility.checkPageIsReady(driver);
 				sleepBySec(15);
 			}
