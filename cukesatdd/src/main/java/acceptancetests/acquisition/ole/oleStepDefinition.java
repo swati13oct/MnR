@@ -210,7 +210,7 @@ public class oleStepDefinition {
 		//-----------------------------------------------------------------------------------------------------
 		WelcomePage welcomePage;
 		if(SiteName.contains("UHC_ACQ")){
-			pages.acquisition.bluelayer.VPPPlanSummaryPage planSummaryPage = (pages.acquisition.bluelayer.VPPPlanSummaryPage) getLoginScenario()
+		VPPPlanSummaryPage planSummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 			TFN = planSummaryPage.GetTFNforPlanType();
 			welcomePage = planSummaryPage.Enroll_OLE_Plan_campaign_uhc(PlanName,PlanType);

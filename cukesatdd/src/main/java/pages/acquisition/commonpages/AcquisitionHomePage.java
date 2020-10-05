@@ -422,7 +422,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	private WebElement overlayFilm;	
 	
 	@FindBy(xpath="//a[contains(@href,'https://www.myuhcagent.com/')]")
-	public WebElement RightRail_FindAnAgent; 
+	private WebElement RightRail_FindAnAgent; 
 
    	String ChatSamText= "Chat with a Licensed Insurance Agent";
 
@@ -2187,11 +2187,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 				
 				
 			
-				
-				
-				
-				public RequestHelpAndInformationPage clickonFindanAgentlink() {
-
+				/*	
+				public RequestHelpAndInformationPage clickonFindanAgentlink(){
+					WebElement clickonFindanAgentlink = null;
 					validateNew(RightRail_FindAnAgent);
 					CommonUtility.waitForPageLoadNew(driver, RightRail_FindAnAgent, 30);
 					String parentWindow = driver.getWindowHandle();
@@ -2209,30 +2207,12 @@ public class AcquisitionHomePage extends GlobalWebElements {
 					CommonUtility.checkPageIsReadyNew(driver);
 					if (driver.getCurrentUrl().contains("myuhcagent")) {
 						System.out.println("myuhcagent Page is displayed");
-						Assert.assertTrue(true);
-						//driver.navigate().back();
-						//driver.switchTo().window(parentWindow);                	  
-						}
-					else
-						Assert.fail("Unable to load Myuhcagent Page");
-					try {
-						Thread.sleep(2000);
-					
-							
-					threadsleep(3);
-					waitForCountDecrement(2);
-					driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
-					
-					return new RequestHelpAndInformationPage(driver);  
-					
-					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-				}
-					return null;
-		}
-
 				
+					
+					return new RequestHelpAndInformationPage(driver);        				
+				}
+				return null;
+}
 				public void sleepBySec(int sec) {
 					try {
 						Thread.sleep(sec*1000);
@@ -2240,6 +2220,53 @@ public class AcquisitionHomePage extends GlobalWebElements {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 			}
-				}
+				}*/			
+				
+				
+				public void clickonFindanAgentlink(String ExpectedUHCAgentURL ) {
+					
+					validateNew(RightRail_FindAnAgent);
+					CommonUtility.waitForPageLoadNew(driver, RightRail_FindAnAgent, 30);
+					String parentWindow = driver.getWindowHandle();
+					RightRail_FindAnAgent.click();
+					sleepBySec(3);
+					Set<String> tabs_windows = driver.getWindowHandles();
+					Iterator<String> itr = tabs_windows.iterator();
+					while(itr.hasNext()) {
+						String window = itr.next();
+						if(!parentWindow.equals(window)) {
+							driver.switchTo().window(window);
+						}
+					}
+					
+					CommonUtility.checkPageIsReadyNew(driver);
+					String CurrentUHCAgentURL = driver.getCurrentUrl();
+					String ActualCurrentUHCAgentURL=CurrentUHCAgentURL.substring(0, 27).trim();
+					System.out.println("myuhcagent Page is displayed : "+ActualCurrentUHCAgentURL);
+					System.out.println("Expected myuhcagent URL: "+ExpectedUHCAgentURL);
+					System.out.println("Actual myuhcagent URL: "+ActualCurrentUHCAgentURL);
 
-}
+					if(ExpectedUHCAgentURL.equalsIgnoreCase(ActualCurrentUHCAgentURL)) {
+						System.out.println("****************myuhcagent Page is displayed  ***************");
+
+						Assert.assertTrue(true);
+					}
+					else {
+						Assert.fail("****************myuhcagent Page is not loaded ***************");
+					}
+				
+					
+					
+				}			
+				public void sleepBySec(int sec) {
+					try {
+						Thread.sleep(sec*1000);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+			}		
+
+				}					
+}	
+				
+

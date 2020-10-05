@@ -1,6 +1,7 @@
 package acceptancetests.acquisition.agentflow;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -38,18 +39,25 @@ public class RequestAgentApptCommonStepDefinition {
 	 * @toDo: user navigates to request more help and information in 
 	 */
 	@When("^the user navigates to EBRC links$")
-	public void User_navigate_EBRC_Links()
-	
-	{
+	public void User_navigate_EBRC_Links(DataTable arg1) throws InterruptedException {
+		Map<String, String> inputAttributesMap=parseInputArguments(arg1);
+		String myUHCAgentURL = inputAttributesMap.get("UHC Agent URL");
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage)getLoginScenario().getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		RequestHelpAndInformationPage requestHelpAndInformationPage = aquisitionhomepage.clickonFindanAgentlink();
 		
-		if(requestHelpAndInformationPage!=null){
-			getLoginScenario().saveBean(PageConstants.REQUEST_MORE_HELP_INFORMATION_PAGE, requestHelpAndInformationPage);
-			//Assert.assertTrue(true);
+		
+		if(myUHCAgentURL!=null){
+			aquisitionhomepage.clickonFindanAgentlink(myUHCAgentURL);
+			Assert.assertTrue(true);
 		}else
 			Assert.fail("Error in loading the UHC Agent Page");
 	}
 	
-	
+	public Map<String, String> parseInputArguments(DataTable memberAttributes) {
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+		return memberAttributesMap;
+	}
 }
