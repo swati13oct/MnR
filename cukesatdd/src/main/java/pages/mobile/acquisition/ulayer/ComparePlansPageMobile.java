@@ -1164,7 +1164,7 @@ public class ComparePlansPageMobile extends UhcDriver {
 	public WebElement enterDrugInformation;
 
 	public GetStartedPageMobile navigateToDCERedesign() {
-		jsClickMobile(enterDrugInformation);
+		
 		validateNew(addDrugsLink);
 		JavascriptExecutor executor = (JavascriptExecutor) driver;
 		executor.executeScript("arguments[0].scrollIntoView(true);", addDrugsLink);

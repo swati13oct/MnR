@@ -247,12 +247,11 @@ public class DCEACQVPPPlanDetailsMobile {
 		//wd.manage().window().maximize();
 		List<DataTableRow> memberAttributesRow = data.getGherkinRows();
 		String planType = memberAttributesRow.get(0).getCells().get(1);
-		String planName = memberAttributesRow.get(1).getCells().get(1);
-		VPPPlanSummaryPageMobile plansummaryPage = new VPPPlanSummaryPageMobile(wd);
-		//plansummaryPage.viewPlanSummary(planType);
-		PlanDetailsPageMobile plandetailspage = plansummaryPage.navigateToPlanDetails(planName,
-				planType);
-		if (plandetailspage != null) {
+		String planName=memberAttributesRow.get(1).getCells().get(1);
+		VPPPlanSummaryPageMobile plansummaryPage =  new VPPPlanSummaryPageMobile(wd);
+		plansummaryPage.viewPlanSummary(planType);
+		PlanDetailsPageMobile plandetailspage= (PlanDetailsPageMobile)plansummaryPage.navigateToPlanDetails(planName, planType);
+		if(plandetailspage!=null){
 			getLoginScenario().saveBean(PageConstants.PLAN_DETAILS_PAGE, plandetailspage);
 			getLoginScenario().saveBean(DCERedesignCommonConstants.PLANTYPE, planType);
 			getLoginScenario().saveBean(DCERedesignCommonConstants.PLANNAME, planName);
