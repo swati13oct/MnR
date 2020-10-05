@@ -24,7 +24,7 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
 
     Examples: 
       | path                                             | pageName                   | drugName | zipCode |
-      | health-plans/estimate-drug-costs.html/getstarted | DCE Redesign - Get Started | lipitor  |   90210 |
+      | health-plans/estimate-drug-costs.html/getstarted | DCE Redesign - Get Started | Lipitor  |   90210 |
 
   @drugSummary_SAM_Icon_AARP
   Scenario Outline: Test to verify SAM icon is visible on Drug summary page
@@ -136,7 +136,7 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
 
     Examples: 
       | path                                             | pageName                   | drugName | zipCode |
-      | health-plans/estimate-drug-costs.html/getstarted | DCE Redesign - Get Started | lipitor  |   90001 |
+      | health-plans/estimate-drug-costs.html/getstarted | DCE Redesign - Get Started | Lipitor  |   90001 |
 
   @dceRedesignSwitchtoGenericDrug @F484185
   Scenario Outline: Test to Verify that user can switch to generic drug when no drug covered
@@ -169,7 +169,7 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
 
     Examples: 
       | path                                             | pageName                   | drugName | zipCode | drugName2                     |
-      | health-plans/estimate-drug-costs.html/getstarted | DCE Redesign - Get Started | lipitor  |   90001 | atorvastatin calcium TAB 10MG |
+      | health-plans/estimate-drug-costs.html/getstarted | DCE Redesign - Get Started | Lipitor  |   90001 | atorvastatin calcium TAB 10MG |
 
   @dCERedesign_ChangePharmacy_DetailsPage_AARP @F472598
   Scenario Outline: Test to verify change pharmacy functionality from Drug details page
@@ -224,4 +224,4 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
 
     Examples: 
       | path                                             | pageName                   | drugName | zipCode |
-      | health-plans/estimate-drug-costs.html/getstarted | DCE Redesign - Get Started | lipitor  |   90001 |
+      | health-plans/estimate-drug-costs.html/getstarted | DCE Redesign - Get Started | Lipitor  |   90001 |
