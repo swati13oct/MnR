@@ -86,14 +86,21 @@ public class PlanDocumentsAndResourcesStepDefinition {
 	 *       | Skip Link Destination Validation | true |
 	 * @param memberAttributes
 	 */
+	@SuppressWarnings("unchecked")
 	@And("^I want to customize test setup$")
 	public void customTestSetup(DataTable memberAttributes) {
+		//note: take the input from user
 		Map<String, String> memberAttributesMap=parseInputArguments(memberAttributes);
 		validateApi=Boolean.valueOf(memberAttributesMap.get("Validate API"));
-		skipLnkDestCheck=Boolean.valueOf(memberAttributesMap.get("Skip Click and Check Link Destination URL Validation"));
+		//tbd skipLnkDestCheck=Boolean.valueOf(memberAttributesMap.get("Skip Click and Check Link Destination URL Validation"));
+		skipLnkDestCheck=Boolean.valueOf(memberAttributesMap.get("Skip Link Destination Validation"));
 		getLoginScenario().saveBean(PlanDocumentsAndResourcesCommonConstants.TEST_VALIDATE_API, validateApi);
 		getLoginScenario().saveBean(PlanDocumentsAndResourcesCommonConstants.TEST_SKIP_LINK_DEST_CHECK, skipLnkDestCheck);
-		//System.out.println("TEST - at setup - customizing with validateApi='"+validateApi+"' | skipLnkDestCheck="+skipLnkDestCheck);
+		System.out.println("TEST - at setup - customizing with validateApi='"+validateApi+"' | skipLnkDestCheck="+skipLnkDestCheck); //lyc
+		
+		HashMap<String, String> testInputInfoMap=(HashMap<String, String>) getLoginScenario().getBean(PlanDocumentsAndResourcesCommonConstants.TEST_INPUT_INFO);
+		testInputInfoMap.put("skipLnkDestCheck", String.valueOf(skipLnkDestCheck));
+		getLoginScenario().saveBean(PlanDocumentsAndResourcesCommonConstants.TEST_INPUT_INFO,testInputInfoMap);
 	}
 
 	@And("^user navigates to plan documents and resources page validation$")
@@ -102,15 +109,15 @@ public class PlanDocumentsAndResourcesStepDefinition {
 		wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		//note: control the default test setup if no input specified
-		this.validateApi=false;
-		this.skipLnkDestCheck=false; 
+		this.validateApi=false; //note: default = false
 		Boolean v=(Boolean) getLoginScenario().getBean(PlanDocumentsAndResourcesCommonConstants.TEST_VALIDATE_API);
 		if (v!=null)
 			this.validateApi=v;
+		this.skipLnkDestCheck=true; //note: default = true    lyc
 		Boolean s=(Boolean) getLoginScenario().getBean(PlanDocumentsAndResourcesCommonConstants.TEST_SKIP_LINK_DEST_CHECK);
 		if (s!=null)
 			this.skipLnkDestCheck=s;
-		//System.out.println("TEST - at navigation -  customizing with validateApi='"+validateApi+"' | skipLnkDestCheck="+skipLnkDestCheck);
+		System.out.println("TEST - at navigation -  default: validateApi='"+validateApi+"' | skipLnkDestCheck="+skipLnkDestCheck);
 
 		Map<String, String> memberAttributesMap=parseInputArguments(memberAttributes);
 		String planType=memberAttributesMap.get("Plan Type");
