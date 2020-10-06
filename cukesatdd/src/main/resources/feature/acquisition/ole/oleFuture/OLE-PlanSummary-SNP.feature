@@ -50,9 +50,9 @@ Feature: 1.05.4.ACQ-OLE  common tool flow E2E SNP
       | Email              | <email>             |
     Then the user validates the Plan details in Medicare Info OLE Right Rail
 #    Then the user navigates to Preliminary Questions Page
-    Then the user validates requierd ESRD on Medicare Info Page
+  	Then the user validates Medicare Number and not required ESRD question on Medicare Info Page
       | MedicaidNumber | <medicaidnumber> |
-       |Plan Year | <planYear> |
+     |Plan Year | <planYear> |
 #    Then the user validates the Plan details in Preliminary Questions Pag OLE Right Rail
 		Then the user validates the dispalyed sections for the Plan Type in Medicare Information Page
     Then the user answers following questions in Medicare Information Page
@@ -89,23 +89,23 @@ Feature: 1.05.4.ACQ-OLE  common tool flow E2E SNP
     Then the user navigates to Review and Submit Page
     Then the user validates the Plan and Member details on Review and Submit Page
     Then the user clicks on Submit Enrollment to complete enrollment
-    # Then the user validates Plan and Member Details on Confirmation Page
+     Then the user validates the Online Enrollment details on Review and Submit Page
     Then the user Validates Next Steps in Confirmation Page for the Plan Type.
 		#Then the user validates the OLE Submission Details in GPS
     #| Plan Type | <plantype> |
 		
-		@prodRegression @SNP_OLE_AARP
+		@SNP_OLE_AARP_Future 
     Examples: 
       | TID   | site|PlanType |planyear|planYear|zipcode | isMultutiCounty | county            | plantype | planName                              | cardtype | firstname | lastname | medicarenumber | ssnflag | partadate | partbdate | medicaidnumber | esrdflag | dob      | gender | permstreet  | permcity    | mailingaddressquestion | mailingstreet | mailingcity | mailingstate | mailingzip | email         | selectoptions                                      | optiondata        | pdpFlag | longTermFlag | riderflag | emailConfirmation | goGreen |healthinsurancename|groupnumber| membernumber|prescriptioncoveragename|pdgroupnumber|pdmembernumber|inputdataType|
-     | 15574 | AARP|PCP-DSNP-MBI |  current |current | 33143 | NO              | Miami-Dade County | SNP      |  UnitedHealthcare Dual Complete RP - FL (Regional PPO D-SNP) | MBI      | GOTTFRIED | GARRAND     | 5N69QY6ET34    | false|   09011997 |  11012002 |     0123456789 | true     | 04261944 | Female | 123 Perm Rd | Los Angeles | Yes                    | 876 MailingSt | Mailing LA  | FL           |      33143 | test@test.com | losing coverage/ moved outside of the service area | 01012018/01012018 | yes     | no           | false     | NO                | NO      |HealthInsurance             |HI1562759    | ABC12345DEF     |PrescriptionCoverage            |PD5646136   | BCD12345EFG |Valid|
+     | 15574 | AARP|PCP-DSNP-MBI |  future|future | 33143 | NO              | Miami-Dade County | SNP      |  UnitedHealthcare Dual Complete RP - FL (Regional PPO D-SNP) | MBI      | GOTTFRIED | GARRAND     | 5N69QY6ET34    | false|   09011997 |  11012002 |     0123456789 | true     | 04261944 | Female | 123 Perm Rd | Los Angeles | Yes                    | 876 MailingSt | Mailing LA  | FL           |      33143 | test@test.com | losing coverage/ moved outside of the service area | 01012018/01012018 | yes     | no           | false     | NO                | NO      |HealthInsurance             |HI1562759    | ABC12345DEF     |PrescriptionCoverage            |PD5646136   | BCD12345EFG |Valid|
  			#| 15575	| PCP-DSNP-MBI |   33143 | NO              | Miami-Dade County | SNP      | Preferred Medicare Assist (HMO D-SNP) | MBI      | John      | Doe      | 2n22C33YK33    | false   |  01012010 |  01012010 |     0123456789 | true     | 01011983 | Female | 123 Perm Rd | Los Angeles | Yes                    | 876 MailingSt | Mailing LA  | FL           |      33143 | test@test.com | losing coverage/ moved outside of the service area | 01012018/01012018 | yes     | no           | false     | NO                | NO      |Invalid|
     #| 15572 | DSNP-MBI     |  Plan Year| 28035 | NO              | Mecklenburg County | SNP      | UnitedHealthcare Dual Complete (HMO-POS D-SNP)             | MBI      | John      | Doe      | 2n22C33YK33    | true    |  01012010 |  01012010 |     0523456789 | true     | 01011904 | Female | 004 Morris Rd | Los Angeles | Yes                    | 803 MailingSt | Mailing LA  | CA           |      78006 | test@test.com | Medicare Advantage Open Enrollment Period (MA OEP)/change in my Medicaid (newly got Medicaid)/Medicare (or my state)/(or my state helps pay for my Medicare premiums)/major disaster (as declared by the Federal Emergency Management Agency (FEMA) | /12202018/12202018/ / / | yes     | no           | false     | NO                | NO      |
     #| 15575 | C&SNP-MBI    |   78006 | YES             | Bexar County       | SNP      | UnitedHealthcare Dual Complete Choice (Regional PPO D-SNP) | MBI      | John      | Doe      | 2n22C33YK33    | false   |  01012010 |  01012010 |     0523456789 | true     | 01011904 | Female | 004 Morris Rd | Los Angeles | Yes                    | 803 MailingSt | Mailing LA  | CA           |      78006 | test@test.com | Medicare Advantage Open Enrollment Period (MA OEP)/change in my Medicaid (newly got Medicaid)/Medicare (or my state)/(or my state helps pay for my Medicare premiums)/major disaster (as declared by the Federal Emergency Management Agency (FEMA) | /12202018/12202018/ / / | yes     | no           | false     | NO                | NO      |
     
-    @SNP_OLE_UHC
+    @SNP_OLE_UHC_Future
     Examples: 
       | TID   | site|PlanType |planyear|planYear|zipcode | isMultutiCounty | county            | plantype | planName                                             | cardtype | firstname | lastname | medicarenumber | ssnflag | partadate | partbdate | medicaidnumber | esrdflag | dob      | gender | permstreet    | permcity    | mailingaddressquestion | mailingstreet | mailingcity | mailingstate | mailingzip | email         | selectoptions                                                                                                                                                                                                                                       | optiondata              | pdpFlag | longTermFlag | riderflag | emailConfirmation | goGreen |healthinsurancename|groupnumber| membernumber|prescriptioncoveragename|pdgroupnumber|pdmembernumber|inputdataType|
-      | 15575 | UHC|PCP-DSNP-MBI | current|current|  33143 | NO              | Miami-Dade County | SNP      |  UnitedHealthcare Dual Complete RP - FL (Regional PPO D-SNP) | MBI      | GOTTFRIED | GARRAND     | 5N69QY6ET34    | false|   09011997 |  11012002 |     0123456789 | true     | 04261944 | Female | 123 Perm Rd   | Los Angeles | Yes                    | 876 MailingSt | Mailing LA  | FL           |      33143 | test@test.com | losing coverage/ moved outside of the service area                                                                                                                                                                                                  | 01012018/01012018       | yes     | no           | false     | NO                | NO      |HealthInsurance             |HI1562759    | ABC12345DEF     |PrescriptionCoverage            |PD5646136   | BCD12345EFG |Valid|
+      | 15575 | UHC|PCP-DSNP-MBI | future|future|  33143 | NO              | Miami-Dade County | SNP      |  UnitedHealthcare Dual Complete RP - FL (Regional PPO D-SNP) | MBI      | GOTTFRIED | GARRAND     | 5N69QY6ET34    | false|   09011997 |  11012002 |     0123456789 | true     | 04261944 | Female | 123 Perm Rd   | Los Angeles | Yes                    | 876 MailingSt | Mailing LA  | FL           |      33143 | test@test.com | losing coverage/ moved outside of the service area                                                                                                                                                                                                  | 01012018/01012018       | yes     | no           | false     | NO                | NO      |HealthInsurance             |HI1562759    | ABC12345DEF     |PrescriptionCoverage            |PD5646136   | BCD12345EFG |Valid|
   
     
     	#Examples: 
@@ -162,9 +162,9 @@ Feature: 1.05.4.ACQ-OLE  common tool flow E2E SNP
       | Email              | <email>             |
     Then the user validates the Plan details in Medicare Info OLE Right Rail
 #    Then the user navigates to Preliminary Questions Page
-    Then the user validates requierd ESRD on Medicare Info Page
+	Then the user validates Medicare Number and not required ESRD question on Medicare Info Page
       | MedicaidNumber | <medicaidnumber> |
-       |Plan Year | <planYear> |
+     |Plan Year | <planYear> |
     Then the user validates the required fields for CSNP plans on Medicare Information Page
    		 | MedicaidNumber | <medicaidnumber> |
 #		Then the user validates the dispalyed sections for the Plan Type in Medicare Information Page
@@ -274,9 +274,9 @@ Feature: 1.05.4.ACQ-OLE  common tool flow E2E SNP
     Then the user validates TFN in Medicare Info OLE Right Rail
     Then the user validates the Plan details in Medicare Info OLE Right Rail
 #    Then the user navigates to Preliminary Questions Page
-    	Then the user validates requierd ESRD on Medicare Info Page
+	Then the user validates Medicare Number and not required ESRD question on Medicare Info Page
       | MedicaidNumber | <medicaidnumber> |
-      |Plan Year | <planYear> |
+     |Plan Year | <planYear> |
 #    Then the user validates the Plan details in Preliminary Questions Pag OLE Right Rail
 		Then the user validates the dispalyed sections for the Plan Type in Medicare Information Page
     Then the user answers following questions in Medicare Information Page
@@ -313,24 +313,24 @@ Feature: 1.05.4.ACQ-OLE  common tool flow E2E SNP
       | Rider Flag | <riderflag> |
     Then the user validates required fields for Authorization Page
     Then the user navigates to Review and Submit Page
-    Then the user validates the Plan and Member details on Review and Submit Page
+    Then the user validates the Online Enrollment details on Review and Submit Page
     Then the user clicks on Submit Enrollment to complete enrollment
     # Then the user validates Plan and Member Details on Confirmation Page
     #Then the user Validates Next Steps in Confirmation Page for the Plan Type.
 		#Then the user validates the OLE Submission Details in GPS
     #| Plan Type | <plantype> |
     
-    @SNP_OLE_AARP_DSNP @SNP_OLE_AARP
+    @SNP_OLE_AARP_Future 
    		Examples: 
     Examples: 
       | TID   | site|PlanType |planyear|planYear|zipcode | isMultutiCounty | county            | plantype | planName                                             | cardtype | firstname | lastname | medicarenumber | ssnflag |SSNnumber   | partadate | partbdate | medicaidnumber | esrdflag | dob      | gender | permstreet    | permcity    | mailingaddressquestion | mailingstreet | mailingcity | mailingstate | mailingzip | email         | selectoptions                                                                                                                                                                                                                                       | optiondata              | pdpFlag | longTermFlag | riderflag | emailConfirmation | goGreen |healthinsurancename|groupnumber| membernumber|prescriptioncoveragename|pdgroupnumber|pdmembernumber|inputdataType|
-      | 15576 | AARP|DSNP-MBI | current|current |  10001 | NO              | New York County   | SNP      | UnitedHealthcare Dual Complete (HMO D-SNP)           | MBI      | GOTTFRIED | GARRAND  | 5N69QY6ET34    | true    | 5455523211 |  11012002 |  01012006 |     0523456789 | true     | 04261944 | Female | 004 Morris Rd | New York    | Yes                    | 803 MailingSt | Mailing LA  | NY           |      10001 | test@test.com | Medicare Advantage Open Enrollment Period (MA OEP)/change in my Medicaid (newly got Medicaid)/Medicare (or my state)/(or my state helps pay for my Medicare premiums)/major disaster (as declared by the Federal Emergency Management Agency (FEMA) | /12202018/12202018/ / / | yes     | no           | false     | NO                | NO      | HealthInsurance             |HI1562759    | ABC12345DEF     |PrescriptionCoverage            |PD5646136   | BCD12345EFG |Valid|
+      | 15576 | AARP|DSNP-MBI | future|future |  10001 | NO              | New York County   | SNP      | UnitedHealthcare Dual Complete (HMO D-SNP)           | MBI      | GOTTFRIED | GARRAND  | 5N69QY6ET34    | true    | 5455523211 |  11012002 |  01012006 |     0523456789 | true     | 04261944 | Female | 004 Morris Rd | New York    | Yes                    | 803 MailingSt | Mailing LA  | NY           |      10001 | test@test.com | Medicare Advantage Open Enrollment Period (MA OEP)/change in my Medicaid (newly got Medicaid)/Medicare (or my state)/(or my state helps pay for my Medicare premiums)/major disaster (as declared by the Federal Emergency Management Agency (FEMA) | /12202018/12202018/ / / | yes     | no           | false     | NO                | NO      | HealthInsurance             |HI1562759    | ABC12345DEF     |PrescriptionCoverage            |PD5646136   | BCD12345EFG |Valid|
  		#	| 15576 | DSNP-MBI        |   10001 | NO              | New York County   | SNP      | UnitedHealthcare Dual Complete (HMO D-SNP)           | MBI      | John      | Doe      | 2n22C33YK33    | true    | 123456789 |01012010 |  01012010 |     0523456789 | true     | 01011983 | Female | 004 Morris Rd | New York    | Yes                    | 803 MailingSt | Mailing LA  | NY           |      10001 | test@test.com | Medicare Advantage Open Enrollment Period (MA OEP)/change in my Medicaid (newly got Medicaid)/Medicare (or my state)/(or my state helps pay for my Medicare premiums)/major disaster (as declared by the Federal Emergency Management Agency (FEMA) | /12202018/12202018/ / / | yes     | no           | false     | NO                | NO      |InValid|
       
-      @SNP_OLE_UHC_DSNP  @SNP_OLE_UHC
+     @SNP_OLE_UHC_Future
      Examples: 
       | TID   | site|PlanType |planyear|planYear|zipcode | isMultutiCounty | county            | plantype | planName                                             | cardtype | firstname | lastname | medicarenumber | ssnflag |SSNnumber   | partadate | partbdate | medicaidnumber | esrdflag | dob      | gender | permstreet    | permcity    | mailingaddressquestion | mailingstreet | mailingcity | mailingstate | mailingzip | email         | selectoptions                                                                                                                                                                                                                                       | optiondata              | pdpFlag | longTermFlag | riderflag | emailConfirmation | goGreen |healthinsurancename|groupnumber| membernumber|prescriptioncoveragename|pdgroupnumber|pdmembernumber|inputdataType|
-      | 15576 | UHC |DSNP-MBI | current|current |  10001 | NO              | New York County   | SNP      | UnitedHealthcare Dual Complete (HMO D-SNP)           | MBI      | GOTTFRIED | GARRAND  | 5N69QY6ET34    | true    | 5455523211 |  11012002 |  01012006 |     0523456789 | true     | 04261944 | Female | 004 Morris Rd | New York    | Yes                    | 803 MailingSt | Mailing LA  | NY           |      10001 | test@test.com | Medicare Advantage Open Enrollment Period (MA OEP)/change in my Medicaid (newly got Medicaid)/Medicare (or my state)/(or my state helps pay for my Medicare premiums)/major disaster (as declared by the Federal Emergency Management Agency (FEMA) | /12202018/12202018/ / / | yes     | no           | false     | NO                | NO      | HealthInsurance             |HI1562759    | ABC12345DEF     |PrescriptionCoverage            |PD5646136   | BCD12345EFG |Valid|
+      | 15576 | UHC |DSNP-MBI | future|future |  10001 | NO              | New York County   | SNP      | UnitedHealthcare Dual Complete (HMO D-SNP)           | MBI      | GOTTFRIED | GARRAND  | 5N69QY6ET34    | true    | 5455523211 |  11012002 |  01012006 |     0523456789 | true     | 04261944 | Female | 004 Morris Rd | New York    | Yes                    | 803 MailingSt | Mailing LA  | NY           |      10001 | test@test.com | Medicare Advantage Open Enrollment Period (MA OEP)/change in my Medicaid (newly got Medicaid)/Medicare (or my state)/(or my state helps pay for my Medicare premiums)/major disaster (as declared by the Federal Emergency Management Agency (FEMA) | /12202018/12202018/ / / | yes     | no           | false     | NO                | NO      | HealthInsurance             |HI1562759    | ABC12345DEF     |PrescriptionCoverage            |PD5646136   | BCD12345EFG |Valid|
  		#	| 15576 | DSNP-MBI        |   10001 | NO              | New York County   | SNP      | UnitedHealthcare Dual Complete (HMO D-SNP)           | MBI      | John      | Doe      | 2n22C33YK33    | true    | 123456789 |01012010 |  01012010 |     0523456789 | true     | 01011983 | Female | 004 Morris Rd | New York    | Yes                    | 803 MailingSt | Mailing LA  | NY           |      10001 | test@test.com | Medicare Advantage Open Enrollment Period (MA OEP)/change in my Medicaid (newly got Medicaid)/Medicare (or my state)/(or my state helps pay for my Medicare premiums)/major disaster (as declared by the Federal Emergency Management Agency (FEMA) | /12202018/12202018/ / / | yes     | no           | false     | NO                | NO      |InValid|
       
       #@SNP_OLE_UHC_DSNP_Future
