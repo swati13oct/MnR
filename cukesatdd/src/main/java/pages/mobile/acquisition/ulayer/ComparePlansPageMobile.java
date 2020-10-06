@@ -197,7 +197,7 @@ public class ComparePlansPageMobile extends UhcDriver {
 	@FindBy(xpath = "//div[text()='Your Drugs']")
 	private WebElement yourDrugsBanner;
 
-	@FindBy(xpath = "//a[text()='Add Drugs']")
+	@FindBy(xpath="//*[contains(@class,'uhc-link-button') and contains(text(),'Add Drugs')]")
 	private WebElement addDrugsLink;
 
 	@FindBy(xpath = "//*[normalize-space(text())='Edit Drugs']")
