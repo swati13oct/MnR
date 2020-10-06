@@ -119,7 +119,7 @@ Feature: 1.01 Member  benefits and Coverage page
 
   #TC11_Benefits_for_Ship_member
   #note: this scenario covers multiple testcases TID 15094,15240
-  @benefitsAndCoverage22 @CMShip @BnC_Part3_regressionMember
+  @benefitsAndCoverage22 @CMShip @BnC_Part3_regressionMember @bnc_Stage_sanity_ship
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify that Page Headers are in place on Benefits and Coverage page
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -549,8 +549,40 @@ Feature: 1.01 Member  benefits and Coverage page
       | TID   | planType | memberType | copayCategory | SummaryofBenefits   | EvidenceofCoverage   | ComprehensiveFormularyDrug List | AlternativeDrugList   |
       | 15248 | PDP      | PDPLIS_Bnc  | LIS 3         | Summary of Benefits | Evidence of Coverage | Comprehensive Formulary         | Alternative Drug List |
       
+   #TC21_PDP_LIS(3,4)- Retail Drug Cost Table
+  @benefitsAndCoverage1  @PDPLIS3member @BnC_Part5_regressionMember  @bnc_Stage_sanity_pdp
+  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify Group LIS 3/4 on Benefits and Coverage page
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type      | <planType>      |
+      | Member Type    | <memberType>    |
+      | Copay Category | <copayCategory> |
+    Then The user navigate to Benefits and Coverage page
+    And the user validates plan overview section for individual
+    And the user view the LIS Drug Copays & Discounts header
+   And the user validates the Learn More section link for stage
+    And the user validates tier link should not display
+    And the user view the Drug Cost header and text
+    And the user validated the Look up Drugs link
+    And the user validates Locate a Pharmacy button should be visible
+      | Plan Type | <planType> |
+    And the drugcost dropdown should not display
+    And the user validates tier link should not display
+    And the PDP individual user should see drug cost table for Lis members
+    And the user validates static links
+      | Plan Type | <planType> |
+    And the user validates view and document label
+    And the user validates spanish and chinese should not display in dropdown
+    #note: moved to footer feature
+    #And the user validates Needhelp section
+    And the user clicks on More Information link
+    And the user validates contactus section
+
+    Examples: 
+      | TID   | planType | memberType | copayCategory |
+      | 15248 | PDP      | PDPLIS_Bnc  | LIS 3        |
+      
   #TC25_Group members_MAPD_LIS(3,4)
-  @benefitsAndCoverage1 @BnC_Part6_regressionMember @CMGroupmembersTC25 
+  @benefitsAndCoverage1 @BnC_Part6_regressionMember @CMGroupmembersTC25 @bnc_Stage_Sanity_mapd
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify Group LIS 3/4 on Benefits and Coverage page
     Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>      |
@@ -776,6 +808,65 @@ Feature: 1.01 Member  benefits and Coverage page
       | TID   | planType | memberType     | copayCategory | language | SummaryofBenefits   | EvidenceofCoverage   |  ComprehensiveFormularyDrug List     | AlternativeDrugList   | name       | memberid     | effectivedate | monthlypremium | extrahelp            | Identifier       | count | rider   |
       | 15245 | MAPD     | Individual_BnC | LIS 1         | ENGLISH  | Summary of Benefits | Evidence of Coverage | Comprehensive Formulary - Drug List | Alternative Drug List | DBAD ADFED | 919744565-00 | 01/01/2019    | Not Available  | Extra Help Level : 1 | IndEffectiveAARP |     7 | Rider   |
 
+	#TC21_MAPD_LIS(1,2)- Retail Drug Cost Table
+   @bnc_Stage_Sanity_mapdIndividual  
+  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify PDF section is in place on Benefits and Coverage page for Lis user
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type      | <planType>      |
+      | Member Type    | <memberType>    |
+      | Copay Category | <copayCategory> |
+    Then The user navigates to Benefits and Coverage page
+      | Plan Type | <planType> |
+	Then user verifies presence of jump links
+      | Plan Type  | <planType>   |
+      | Rider      | <rider>      |
+      | MemberType | <memberType> |
+      | identifier | <Identifier> |
+    And user clicks on the jump links and checks respective sections
+      | Plan Type  | <planType>   |
+      | Rider      | <rider>      |
+      | MemberType | <memberType> |
+      | identifier | <Identifier> |
+    And verifies links irrelevant to the plan type are not displayed
+      | Plan Type  | <planType>   |
+      | Rider      | <rider>      |
+      | Count      | <count>      |
+      | MemberType | <memberType> |
+    And the user validates Lis member plan overview section
+      | Name            | <name>           |
+      | Member ID       | <memberid>       |
+      | Effective Date  | <effectivedate>  |
+      | Monthly premium | <monthlypremium> |
+      | Extra Help      | <extrahelp>      |
+    And the user validates headers on Bnc page for indi members
+      | Plan Type | <planType> |
+  #  And the user validates the Primarycare Provider section
+      | Plan Type | <planType> |
+    And the user validates the Out of Pocket Max section
+    And the user view the LIS Drug Copays & Discounts header
+    And the user MAPD LIS should see drug cost table for Lis members
+    And the user validates Drug coverage header and text under the section
+    And the user validates text for the Look Up Drugs section
+    And the user validates Look Up Drugs button should be visible
+      | Plan Type | <planType> |
+    And the user validates text for the Locate a Pharmacy section
+    And the user validates Locate a Pharmacy button should be visible
+      | Plan Type | <planType> |
+    And the drugcost dropdown should not display
+    And the user validates the Learn More section link for stage
+    And the user validates tier link should not display
+    And the user validates view and document label
+    And the user validates static links
+      | Plan Type | <planType> |
+    #note: moved to footer feature
+    #And the user validates Needhelp section
+    And the user clicks on More Information link
+    And the user validates contactus section
+
+    Examples: 
+      | TID   | planType | memberType     | copayCategory | language | name       | memberid     | effectivedate | monthlypremium | extrahelp            | Identifier       | count | rider   |
+      | 15245 | MAPD     | Individual_BnC | LIS 1         | ENGLISH  | DBAD ADFED | 919744565-00 | 01/01/2019    | Not Available  | Extra Help Level : 1 | IndEffectiveAARP |     7 | Rider   |
+	
   #TC22_NON LIS Ind plan member(MAPD)- Drug Cost table
   @benefitsAndCoverage14 @CMFedDrugNonLis @deprecated
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> -language: <language> - Verify all sections for Ind NonLIS member on Benefits and Coverage page

@@ -24,22 +24,27 @@ Feature: 1.12.1 Member Rally claims
       | 15234 | MA       | UHC_Individual      | COSMOS_CLAIMS   |
       | xxxxx | MA       | UHC_GROUP           | COSMOS_CLAIMS   |
 
-    @rallyClaims01_medica_pcp
+	@Stage_Sanity_rallyClaimsMA
+    Examples: 
+      | TID   | planType | memberType          | claimSystem     |
+      | 15234 | MA       | UHC_Individual      | COSMOS_CLAIMS   |
+      
+    @rallyClaims01_medica_pcp @Stage_Sanity_rallyClaimsPcp
     Examples: 
       | TID   | planType | memberType          | claimSystem     | 
       | 15268 | PCP      | Individual          | COSMOS_CLAIMS   | 
 
-    @rallyClaims01_mapd @devRegression
+    @rallyClaims01_mapd @devRegression @Stage_Sanity_rallyClaims_MapdIndividual 
     Examples: 
       | TID   | planType | memberType          | claimSystem     | 
       | 15230 | MAPD     | AARP_Individual     | COSMOS_CLAIMS   | 
 
-    @rallyClaims01_mapd
+    @rallyClaims01_mapd @Stage_Sanity_rallyClaims_MapdGroup
     Examples: 
       | TID   | planType | memberType          | claimSystem     | 
       | xxxxx | MAPD     | UHC_GROUP           | COSMOS_CLAIMS   | 
 
-    @rallyClaims01_ship @devRegression
+    @rallyClaims01_ship @devRegression @Stage_Sanity_rallyClaims_Ship
     Examples: 
       | TID   | planType | memberType          | claimSystem     | 
       | 15236 | SHIP     | Individual          | COMPASS_CLAIMS  | 
@@ -49,4 +54,9 @@ Feature: 1.12.1 Member Rally claims
       | TID   | planType | memberType          | claimSystem     | 
       | 15299 | PDP      | Individual          | RX_CLAIMS       | 
       | 15300 | PDP      | GROUP               | RX_CLAIMS       | 
+      
+     @Stage_Sanity_rallyClaims_PdpIndividual
+    Examples: 
+      | TID   | planType | memberType          | claimSystem     | 
+      | 15299 | PDP      | Individual          | RX_CLAIMS       | 
   #----- end of Regression claims scenarios section ------------------------

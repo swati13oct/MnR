@@ -8,7 +8,7 @@ Feature: 1.07 Member DCE Page
       | Member Type | <memberType> |
     Then I should not see drug look up on home page
 
-    @devRegression
+    @devRegression @Stage_sanity01
     Examples: 
       | TID   | planType | memberType   |
       | 15326 | SHIP     | SHIP_DCE     |
@@ -103,6 +103,12 @@ Feature: 1.07 Member DCE Page
       | 15325 | MAPD     |MAPD_DCE   | Lipitor | Lipitor TAB 10MG |        31 | Every 1 month | Lipitor TAB 20MG | Lipitor TAB 20MG | atorvastatin calcium TAB 20MG |   00820 | 25 miles |       100 | Every 3 months | FANAPT|Fanapt TAB 12MG|
       | 15325 | PCP      |PCP_DCE    | Lipitor | Lipitor TAB 10MG |        31 | Every 1 month | Lipitor TAB 20MG | Lipitor TAB 20MG | atorvastatin calcium TAB 20MG |   00820 | 25 miles |       100 | Every 3 months | FANAPT|Fanapt TAB 12MG|
 	  | 15325 | Medica   |Medica_DCE | Lipitor | Lipitor TAB 10MG |        31 | Every 1 month | Lipitor TAB 20MG | Lipitor TAB 20MG | atorvastatin calcium TAB 20MG |   00820 | 25 miles |       100 | Every 3 months | FANAPT|Fanapt TAB 12MG|
+	
+   @Stage_Sanity02  
+   Examples: 
+      | TID   | planType |memberType | drug1   | dosage1          | quantity1 | frequency1    | dosage2          | brandeddrug      | genericdosage                 | zipcode | radius   | quantity2 | frequency2     | drug2 |dosage3        | 
+      | 15325 | MAPD     |MAPD_DCE   | Lipitor | Lipitor TAB 10MG |        31 | Every 1 month | Lipitor TAB 20MG | Lipitor TAB 20MG | atorvastatin calcium TAB 20MG |   00820 | 25 miles |       100 | Every 3 months | FANAPT|Fanapt TAB 12MG|
+      | 15325 | Medica   |Medica_DCE | Lipitor | Lipitor TAB 10MG |        31 | Every 1 month | Lipitor TAB 20MG | Lipitor TAB 20MG | atorvastatin calcium TAB 20MG |   00820 | 25 miles |       100 | Every 3 months | FANAPT|Fanapt TAB 12MG|
 	
   # | 15331   | PDP      |NonLISSplittier  |Lipitor|Lipitor TAB 10MG|31|Every 1 month|Lipitor TAB 20MG|Lipitor TAB 20MG|atorvastatin calcium TAB 20MG|90210|25 miles|100|Every 3 months|
   #| 15333   | COMBO    |ComboDCEmember  |Lipitor|Lipitor TAB 10MG|31|Every 1 month|Lipitor TAB 20MG|Lipitor TAB 20MG|atorvastatin calcium TAB 20MG|90210|25 miles|100|Every 3 months|
