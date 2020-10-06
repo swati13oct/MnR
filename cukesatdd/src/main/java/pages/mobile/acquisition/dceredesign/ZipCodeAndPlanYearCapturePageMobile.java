@@ -16,7 +16,7 @@ import pages.mobile.acquisition.planrecommendationengine.CommonutilitiesMobile;
 
 public class ZipCodeAndPlanYearCapturePageMobile extends UhcDriver {
 
-	@FindBy(xpath = "//input[@id='zip-code']")
+	@FindBy(xpath = "//*[contains(@id,'cta-zipcode')]")
 	public WebElement zipCodeTxtbox;
 
 	@FindBy(xpath = "//span[@id='zipError']")

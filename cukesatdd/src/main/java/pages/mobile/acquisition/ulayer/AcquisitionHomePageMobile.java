@@ -1373,15 +1373,16 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 	public VPPPlanSummaryPageMobile searchPlansWithOutCounty(String zipcode) throws InterruptedException {
 
-		validate(zipCodeField, 20);
-		// CommonUtility.waitForPageLoadNew(driver, zipCodeField, 30);
+		CommonUtility.waitForPageLoadNew(driver, zipCodeField, 30);
 		sendkeys(zipCodeField, zipcode);
-		// viewPlansButton.click();
-		jsClickMobile(viewPlansButton);
-		// mobileUtils.mobileLocateElementClick(viewPlansButton);
+		viewPlansButton.click();
 		// }
-		validate(zipcodeChangeLink, 10);
-		// CommonUtility.waitForPageLoadNew(driver, zipcodeChangeLink, 30);
+		CommonUtility.checkPageIsReadyNew(driver);
+//		while(validate(overlayFilm, 10)) {/**wait*/}
+//		CommonUtility.waitForElementToDisappear(driver, overlayFilm, 75);
+		//waitForPageLoadSafari();
+			
+		CommonUtility.waitForPageLoadNew(driver, zipcodeChangeLink, 30);
 		if (driver.getCurrentUrl().contains("health-plans")) {
 			return new VPPPlanSummaryPageMobile(driver);
 		} else
