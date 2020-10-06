@@ -611,13 +611,13 @@ public class ReviewSubmitPage extends UhcDriver{
 			System.out.println(LastName+" : "+LastNameDisplayed+" : "+flag);
 		}else flag =false;
 		
-		
+		/*--------------   Middle Name---------------
 		String MiddleNameDisplayed = MiddleNameDisplay.getText();
 		if(MiddleNameDisplayed.contains(MiddleName)){
 			flag = (!flag)?false:true;
 			System.out.println(MiddleName+" : "+MiddleNameDisplayed+" : "+flag);
 		}else flag =false;
-
+		 -------------------------------*/
 		if(CardType.contains("HICN") || CardType.contains("RRID") ){
 			String MedicareNumberDisplayed = MedicareClaimNumberDisplay.getText().replaceAll("-", "");
 			if(MedicareNumberDisplayed.contains(MedicareNumber)){
@@ -677,7 +677,7 @@ public class ReviewSubmitPage extends UhcDriver{
 else {
 	System.out.println("MedicaidNumber is not present for User");
 }
-		
+		/*---------Added for Phone No, Mobile No,Email Confirmation,paperless and Email address------------
 		if (StringUtils.isEmpty(PrimaryPhoneNumber)) {
 			System.out.println("PrimaryNumber is Optinal. Hence Skiping this Verification !!!");
 		} else if(driver.findElement(By.xpath("//*[contains(text(), 'Primary Phone Number')]//following-sibling::*"))!=null) {
@@ -759,6 +759,7 @@ else {
 			System.out.println("EmailAddress is not present for User");
 		}
 		
+		---------------------------------*/
 		String DOBDisplayed = DOBDisplay.getText().replaceAll("-", "");
 		if(DOBDisplayed.contains(DOB)){
 			flag = (!flag)?false:true;
@@ -771,7 +772,7 @@ else {
 			System.out.println(Gender+" : "+GenderDisplayed+" : "+flag);
 		}else flag =false;
 		
-		
+		/*------------------------Added for Authorization Page--------------------------------
 		String AuthLastNameDisplayed = AuthLastName.getText();
 		if(AuthLastNameDisplayed.contains(AuthLastNameDisplay)){
 			flag = (!flag)?false:true;
@@ -833,7 +834,7 @@ else {
 			System.out.println(AuthRelationshipDisplay+" : "+AuthRelationshipDisplayed+" : "+flag);
 		}else flag =false;
 		
-		
+		------------------------------------------------------------*/
         if(Expected_PlanName.contains("Gold") || Expected_PlanName.contains("Chronic") || Expected_PlanName.contains("Silver")){
         	System.out.println("Adress and Email validation is skipped for CSNP plans due to Provider Address !!!");
         }else{
@@ -930,7 +931,7 @@ else {
     				System.out.println("healthInsurance is Optinal. Hence Skiping this Verification !!! for PDP Plans ");
     			} else if(driver.findElement(By.xpath("//*[contains(text(), 'Do you or your spouse have other health insurance')]//following-sibling::*"))!=null) {
     				
-    				String HIDisplayed = HealthInsuranceRadio.getText().replaceAll("-", "");
+    				String HIDisplayed = HealthInsuranceRadio.getText();
     				if (HIDisplayed.contains(healthInsurance)) {
     					flag = (!flag) ? false : true;
     					System.out.println(healthInsurance + " : " + HIDisplayed + " : " + flag);
@@ -945,7 +946,7 @@ else {
     				System.out.println("PrescriptionDrug is Optinal. Hence Skiping this Verification !!! for PDP Plans ");
     			} else if(driver.findElement(By.xpath("//*[contains(text(), 'Do you have other insurance that will cover your prescription')]//following-sibling::*"))!=null) {
     				
-    				String PDDisplayed = PrescriptionDrugRadio.getText().replaceAll("-", "");
+    				String PDDisplayed = PrescriptionDrugRadio.getText();
     				if (PDDisplayed.contains(prescriptionDrug)) {
     					flag = (!flag) ? false : true;
     					System.out.println(prescriptionDrug + " : " + PDDisplayed + " : " + flag);
@@ -961,7 +962,7 @@ else {
     				System.out.println("healthInsuranceName is Optinal. Hence Skiping this Verification !!! for PDP Plans ");
     			} else if(driver.findElement(By.xpath("//*[contains(text(), 'Name of Health Insurance Company')]//following-sibling::*"))!=null) {
     				
-    				String HealthInsuranceDisplayed = HealthInsuranceName.getText().replaceAll("-", "");
+    				String HealthInsuranceDisplayed = HealthInsuranceName.getText();
     				if (HealthInsuranceDisplayed.contains(healthInsuranceName)) {
     					flag = (!flag) ? false : true;
     					System.out.println(healthInsuranceName + " : " + HealthInsuranceDisplayed + " : " + flag);
@@ -976,7 +977,7 @@ else {
     				System.out.println("healthInsuranceGroupNo is Optinal. Hence Skiping this Verification !!! for PDP Plans ");
     			} else if(driver.findElement(By.xpath("//*[contains(text(), 'Group Number')]//following-sibling::*"))!=null) {
     				
-    				String HealthInsuranceGroupNoDisplayed = HealthInsuranceGroupNo.getText().replaceAll("-", "");
+    				String HealthInsuranceGroupNoDisplayed = HealthInsuranceGroupNo.getText();
     				if (HealthInsuranceGroupNoDisplayed.contains(healthInsuranceGroupNo)) {
     					flag = (!flag) ? false : true;
     					System.out.println(healthInsuranceGroupNo + " : " + HealthInsuranceGroupNoDisplayed + " : " + flag);
@@ -991,7 +992,7 @@ else {
     				System.out.println("healthInsuranceMemberNo is Optinal. Hence Skiping this Verification !!! for PDP Plans ");
     			} else if(driver.findElement(By.xpath("//*[contains(text(), 'Member Number')]//following-sibling::*"))!=null) {
     				
-    				String HealthInsuranceMemberNoDisplayed = HealthInsuranceMemberNo.getText().replaceAll("-", "");
+    				String HealthInsuranceMemberNoDisplayed = HealthInsuranceMemberNo.getText();
     				if (HealthInsuranceMemberNoDisplayed.contains(healthInsuranceMemberNo)) {
     					flag = (!flag) ? false : true;
     					System.out.println(healthInsuranceMemberNo + " : " + HealthInsuranceMemberNo + " : " + flag);
