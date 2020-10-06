@@ -108,7 +108,8 @@ public class BuildYourDrugListMobile extends UhcDriver {
 		 * selectBtn.click();
 		 */
 		validateNew(addToDrugList);
-		addToDrugList.click();
+		jsClickNew(addToDrugList);
+		//addToDrugList.click();
 		// reviewDrugCost.click();
 	}
 

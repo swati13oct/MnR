@@ -1373,7 +1373,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 	public VPPPlanSummaryPageMobile searchPlansWithOutCounty(String zipcode) throws InterruptedException {
 
-		validate(zipCodeField, 10);
+		validate(zipCodeField, 20);
 		// CommonUtility.waitForPageLoadNew(driver, zipCodeField, 30);
 		sendkeys(zipCodeField, zipcode);
 		// viewPlansButton.click();
