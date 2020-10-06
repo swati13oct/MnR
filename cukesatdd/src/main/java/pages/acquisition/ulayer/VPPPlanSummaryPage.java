@@ -1956,6 +1956,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		FIndPlansButton.click();
 		
 		CommonUtility.checkPageIsReadyNew(driver);
+		waitForPageLoadSafari();
 		if (validate(countyModal,15)) {
 			return new MultiCountyModalPage(driver);
 		}
@@ -2431,7 +2432,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		validateNew(RightRail_AgentInYourArea);
 		CommonUtility.waitForPageLoadNew(driver, RightRail_AgentInYourArea, 30);
 		String parentWindow = driver.getWindowHandle();
-		RightRail_AgentInYourArea.click();
+//		RightRail_AgentInYourArea.click();
+		jsClickNew(RightRail_AgentInYourArea);
 		sleepBySec(3);
 		Set<String> tabs_windows = driver.getWindowHandles();
 		Iterator<String> itr = tabs_windows.iterator();
@@ -2439,6 +2441,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			String window = itr.next();
 			if(!parentWindow.equals(window)) {
 				driver.switchTo().window(window);
+				break;
 			}
 		}
 		
@@ -2543,7 +2546,8 @@ for (int i = 0; i < initialCount + 1; i++) {
 
 	public void validatePlanSelectorPageInRightRail() throws Exception  {
 		validateNew(StartPlanSelector);
-		StartPlanSelector.click();
+//		StartPlanSelector.click();
+		jsClickNew(StartPlanSelector);
 		CommonUtility.checkPageIsReadyNew(driver);
 		if (driver.getCurrentUrl().contains("plan-recommendation-engine")) {
 			WebElement PlanSelector = driver.findElement(By.xpath("//h1[text()='Get a Plan Recommendation']"));
