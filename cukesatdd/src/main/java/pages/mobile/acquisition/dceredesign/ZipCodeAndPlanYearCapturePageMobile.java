@@ -90,7 +90,7 @@ public class ZipCodeAndPlanYearCapturePageMobile extends UhcDriver {
 
 	public void enterZipCodeandcounty(String zipcode) throws InterruptedException {
 		validateNew(zipCodeTxtbox);
-		Thread.sleep(3000);
+		Thread.sleep(5000);
 		sendkeys(zipCodeTxtbox, zipcode);
 		Thread.sleep(3000);
 		try {
