@@ -1,5 +1,8 @@
 package pages.acquisition.dceredesign;
 
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -129,6 +132,15 @@ public class DrugSummaryPage extends UhcDriver {
 	
 	@FindBy(id = "changePharmacyLink")
 	public WebElement changePharmacyLinkDetailsPage;
+	
+	@FindBy(xpath = "//*[text()='Return to Profile']")
+	public WebElement returnToProfileLink;
+	
+	@FindBy(xpath = "//button//span[text()='Back to Profile']")
+	public List<WebElement> backToProfileBtn;
+	
+	@FindBy(xpath = "//*[@class='plane-name-block']")
+	public List<WebElement> planNames;
 
 	@Override
 	public void openAndValidate() {
@@ -453,4 +465,37 @@ public class DrugSummaryPage extends UhcDriver {
 	public void clickViewDrugCostBtn() {
 		viewDrugCostBtn.click();
 	}
+	
+	public void verifyReturnToProfileDisplayed() {
+		try {
+			if(returnToProfileLink.isDisplayed()) {
+				System.out.println("Return to profile displayed");
+			}
+		}
+		catch(Exception e) {
+			Assert.fail("Return to profile not displayed");
+		}
+	}
+	
+	public void verifyBackToProfileDisplayed() {
+		try {
+			if(backToProfileBtn.size()==planNames.size()) {
+				System.out.println("Back to profile displayed for each plan card");
+			}
+		}
+		catch(Exception e) {
+			Assert.fail("Back to profile not displayed for each plan card");
+		}
+	}
+	
+	public void clickBackToProfileBtn() {
+		try {
+			backToProfileBtn.get(1).click();
+				System.out.println("Back to profile clicked");
+		}
+		catch(Exception e) {
+			Assert.fail("Back to profile not displayed ");
+		}
+	}
+	
 }

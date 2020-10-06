@@ -193,6 +193,9 @@ public class DrugDetailsPage extends UhcDriver {
 	@FindBy(xpath = "//button[@ng-click='backToPlanSummary()']")
 	public WebElement backtoSummaryBtn;
 	
+	@FindBy(xpath = "//*[text()='Return to Profile ']")
+	public WebElement returnToProfileLink;
+	
 	public DrugDetailsPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -741,5 +744,28 @@ public class DrugDetailsPage extends UhcDriver {
 		
 		validate(alertTextImg);
 		validate(viewProceBtn);
+	}
+	
+	public void verifyReturnToProfileDisplayed() {
+		try {
+			if(returnToProfileLink.isDisplayed()) {
+				System.out.println("Return to profile displayed");
+			}
+		}
+		catch(Exception e) {
+			Assert.fail("Return to profile not displayed");
+		}
+	}
+	
+	public void clickReturnToProfile() {
+		try {
+			if(returnToProfileLink.isDisplayed()) {
+				System.out.println("Return to profile displayed");
+				returnToProfileLink.click();
+			}
+		}
+		catch(Exception e) {
+			Assert.fail("Return to profile not displayed");
+		}
 	}
 }

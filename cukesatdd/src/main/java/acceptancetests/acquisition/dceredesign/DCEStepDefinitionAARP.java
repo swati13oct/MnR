@@ -17,6 +17,7 @@ import pages.acquisition.dceredesign.DrugSummaryPage;
 import pages.acquisition.dceredesign.GetStartedPage;
 import pages.acquisition.dceredesign.TellUsAboutDrug;
 import pages.acquisition.dceredesign.ZipCodePlanYearCapturePage;
+import pages.acquisition.ulayer.DrugCostEstimatorPage;
 import pages.acquisition.commonpages.AcquisitionHomePage;
 import pages.acquisition.commonpages.ComparePlansPage;
 import pages.acquisition.commonpages.PlanDetailsPage;
@@ -1025,5 +1026,41 @@ public class DCEStepDefinitionAARP {
 		drugDetailsPage.validateCoverageGapMessage(coverageGapMessage);
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetailsPage);
 	}
+	
+	@Then("^user should be able to see Return to profile link on summary page$")
+	public void user_should_be_able_to_see_Return_to_profile_link_on_summary_page() {
+		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
+		drugSummaryPage.verifyReturnToProfileDisplayed();
+	}
+	
+	@Then("^user should be able to see Return to profile link on details page$")
+	public void user_should_be_able_to_see_Return_to_profile_link_on_details_page() {
+		DrugDetailsPage drugDetailsPage = new DrugDetailsPage(driver);
+		drugDetailsPage.verifyReturnToProfileDisplayed();
+	}
+	
+	@Then("^Back to profile button should be displayed for each plan card$")
+	public void back_to_profile_button_for_each_plan_card()  {
+		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
+		drugSummaryPage.verifyBackToProfileDisplayed();
+	}
 
+	@When("^user clicks on Back to profile button$")
+	public void user_clicks_on_Back_to_profile_button()  {
+		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
+		drugSummaryPage.clickBackToProfileBtn();
+	}
+
+	
+	@Then("^user should be navigated to build drug list page$")
+	public void user_should_be_navigated_to_build_drug_list_page() {
+		BuildYourDrugList buildDrugListPage = (BuildYourDrugList) getLoginScenario().getBean(PageConstants.DCE_Redesign_BuildDrugList);
+		buildDrugListPage.validateBuildDrugListPageDisplayed();
+	}
+	
+	@When("^user clicks on Return to profile link on details page$")
+	public void user_clicks_on_Return_to_profile_link_on_details_page() {
+		DrugDetailsPage drugDetailsPage = new DrugDetailsPage(driver);
+		drugDetailsPage.clickReturnToProfile();
+	}
 }

@@ -96,6 +96,16 @@ public class VisitorProfilePage extends UhcDriver {
 	@FindBy(xpath = "//button[contains(@id,'addDrug')]")
 	public WebElement AddMyDrugsBtn;
 	
+	@FindBy(xpath = "//*[@class='locationEnrollment']//*[contains(@class,'drug-list-accordion')]/button")
+	public WebElement expandDrugsGlobal;
+	
+	@FindBy(xpath = "//*[@class='locationEnrollment']//*[@class='edit-drugs']/a")
+	public WebElement editDrugsGlobal;
+	
+	@FindBy(xpath = "//*[@id='dashPlansContainer']//*[@class='add-drug']")
+	public WebElement addDrugsPlanCard;
+	
+
 	public VisitorProfilePage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -405,4 +415,30 @@ public class VisitorProfilePage extends UhcDriver {
 			Assert.assertTrue(driver.findElement(By.xpath("//div/a[contains(@aria-describedby,'"+plan+"')] [contains(@class,'pdf-link')]")).isDisplayed());
 		}
 	}
+
+	public VisitorProfilePage validateVisitorProfilePage() {
+		if (driver.getCurrentUrl().contains("profile")) {
+			validate(btnCreateProfile);
+			return new VisitorProfilePage(driver);
+		} else {
+			Assert.fail("Navigation to visitor profile is failed");
+		}
+		return null;
+	}
+	
+	/**
+	 * click edit drugs globally
+	 */
+	public void clickEditDrugs() {
+		expandDrugsGlobal.click();
+		editDrugsGlobal.click();
+	}
+	
+	/**
+	 * click add drugs from plan card
+	 */
+	public void clickAddDrugsPlancard() {
+		addDrugsPlanCard.click();
+	}
+	
 }

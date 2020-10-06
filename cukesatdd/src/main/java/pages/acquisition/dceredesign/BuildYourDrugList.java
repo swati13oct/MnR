@@ -267,4 +267,9 @@ public class BuildYourDrugList extends UhcDriver {
 		return new ComparePlansPage(driver);
 	}
 
+	public void validateBuildDrugListPageDisplayed() {
+		validateNew(EnterDrugNameTxt);
+		validateNew(SearchBtn);
+		validateNew(PreviousBtn);
+	}
 }

@@ -12,6 +12,7 @@ import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
 import gherkin.formatter.model.DataTableRow;
 import pages.acquisition.ulayer.AcquisitionHomePage;
 import pages.acquisition.ulayer.ComparePlansPage;
@@ -20,6 +21,7 @@ import pages.acquisition.ulayer.PlanDetailsPage;
 import pages.acquisition.ulayer.VPPPlanSummaryPage;
 import pages.acquisition.ulayer.VisitorProfilePage;
 import pages.acquisition.ulayer.VisitorProfileTestHarnessPage;
+
 /**
  * @author bnaveen4
  * Functionality:Visitor Profile for both AAPR and UHC acquisition sites
@@ -323,6 +325,35 @@ public class VisitorProfileStepDefinition_AARP {
 		VPPPlanSummaryPage planSummary = visitorProfilePage.backToPlans();
 		
 		getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, planSummary);
+	}
+	
+	@When("^user clicks on edit drugs button globally$")
+	public void user_clicks_on_edit_drugs_button_globally() {
+		pages.acquisition.commonpages.VisitorProfilePage visitorProfilePage = (pages.acquisition.commonpages.VisitorProfilePage) getLoginScenario().
+				getBean(PageConstants.VISITOR_PROFILE_PAGE);
+		visitorProfilePage.clickEditDrugs();
+	}
+	
+	@Then("^user should be navigated to shopper profile page$")
+	public void user_should_be_navigated_to_shopper_profile_page() {
+		pages.acquisition.commonpages.VisitorProfilePage visitorProfile = (pages.acquisition.commonpages.VisitorProfilePage) getLoginScenario().getBean(PageConstants.VISITOR_PROFILE_PAGE);
+		visitorProfile.validateVisitorProfilePage();
+	}
+	
+	@Then("^the user clicks on the add drugs button from plan card to navigate to DCE Redesign$")
+	public void the_user_clicks_on_the_add_drugs_button_from_plan_card_to_navigate_to_DCE_Redesign() {
+		pages.acquisition.commonpages.VisitorProfilePage visitorProfile = (pages.acquisition.commonpages.VisitorProfilePage) getLoginScenario().getBean(PageConstants.VISITOR_PROFILE_PAGE);
+		visitorProfile.clickAddDrugsPlancard();
+	}
+	
+	@Then("^user should see back to drug cost estimator on visitor profile page$")
+	public void user_should_see_back_to_drug_cost_estimator_on_visitor_profile_page() {
+	    
+	}
+	
+	@When("^user clicks on edit drugs button from plan card$")
+	public void user_clicks_on_edit_drugs_button_from_plan_card() {
+	    
 	}
 } 
 
