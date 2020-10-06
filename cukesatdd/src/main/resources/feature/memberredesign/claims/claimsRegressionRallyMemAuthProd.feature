@@ -31,7 +31,7 @@ Feature: 1.12.2 Member Rally claims - Member Auth - PROD
       | 15234 | kkumard   | mnrs786@  | haradaty32   | MA       | UHC_Individual      | COSMOS_CLAIMS   |
       | xxxxx | kkumard   | mnrs786@  | BNCSAUVE2    | MA       | UHC_GROUP           | COSMOS_CLAIMS   |
       
-   @claims_prodsanityMA_Individual
+   @claims_prodsanityMA_Group
      Examples: 
       | TID   | username   | password  | MemUserName  | planType | memberType          | claimSystem     |
       | xxxxx | kkumard   | mnrs786@  | BNCSAUVE2    | MA       | UHC_GROUP           | COSMOS_CLAIMS   | 
