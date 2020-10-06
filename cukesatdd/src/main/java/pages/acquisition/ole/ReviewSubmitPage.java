@@ -105,12 +105,23 @@ public class ReviewSubmitPage extends UhcDriver{
 	//Permanent Address Display
 	@FindBy(xpath = "//*[contains(text(), 'Street Address')]//following-sibling::*")
 	//@FindBy(xpath = "//*[contains(text(), 'mailing address')]/ancestor::*[contains(@class, 'review-step')]//*[contains(text(), 'Street Address')]//following-sibling::*")
+	//private List <WebElement> StreetDisplays;
 	private List <WebElement> StreetDisplays;
 
 	@FindBy(xpath = "//*[contains(text(), 'City')]//following-sibling::*")
 	//@FindBy(xpath = "//*[contains(text(), 'mailing address')]/ancestor::*[contains(@class, 'review-step')]//*[contains(text(), 'City')]//following-sibling::*")
 	private List <WebElement> CityDisplays;
 
+	
+	@FindBy(xpath = "//*[contains(text(), 'Street Address')]//following-sibling::*")
+	//@FindBy(xpath = "//*[contains(text(), 'mailing address')]/ancestor::*[contains(@class, 'review-step')]//*[contains(text(), 'Street Address')]//following-sibling::*")
+	private WebElement StreetDisplay;
+	
+
+	@FindBy(xpath = "//*[contains(text(), 'City')]//following-sibling::*")
+	//@FindBy(xpath = "//*[contains(text(), 'mailing address')]/ancestor::*[contains(@class, 'review-step')]//*[contains(text(), 'City')]//following-sibling::*")
+	//private List <WebElement> CityDisplays;
+	private WebElement CityDisplay;
 
 	//Mailing Address Display
 	@FindBy(xpath = "//*[contains(text(), 'Is your mailing address the same as')]//following-sibling::*")
@@ -838,7 +849,7 @@ else {
 		------------------------------------------------------------*/
 		
 		if (StringUtils.isEmpty(healthInsurance)) {
-			System.out.println("healthInsurance is Optinal. Hence Skiping this Verification !!! for PDP Plans ");
+			System.out.println("healthInsurance Radio button is Optinal. Hence Skiping this Verification !!! for PDP Plans ");
 		} else if(driver.findElement(By.xpath("//*[contains(text(), 'Do you or your spouse have other health insurance')]//following-sibling::*"))!=null) {
 			
 			String HIDisplayed = HealthInsuranceRadio.getText();
@@ -852,21 +863,12 @@ else {
 			System.out.println("healthInsurance is not present for User");
 		}
 		
-		if (StringUtils.isEmpty(prescriptionDrug)) {
-			System.out.println("PrescriptionDrug is Optinal. Hence Skiping this Verification !!! for PDP Plans ");
-		} else if(driver.findElement(By.xpath("//*[contains(text(), 'Do you have other insurance that will cover your prescription')]//following-sibling::*"))!=null) {
-			
 			String PDDisplayed = PrescriptionDrugRadio.getText();
 			if (PDDisplayed.contains(prescriptionDrug)) {
 				flag = (!flag) ? false : true;
 				System.out.println(prescriptionDrug + " : " + PDDisplayed + " : " + flag);
 			} else
 				flag = false;
-		}
-		else {
-			System.out.println("Prescription Drug option  is not present for User");
-		}
-		
 		
 		if (StringUtils.isEmpty(healthInsuranceName)) {
 			System.out.println("healthInsuranceName is Optinal. Hence Skiping this Verification !!! for PDP Plans ");
@@ -969,8 +971,8 @@ else {
 		else {
 		System.out.println("PCPRecentlyVisited doctor is not present for PDP Plans");
 	}
-		
-        if(Expected_PlanName.contains("Gold") || Expected_PlanName.contains("Chronic") || Expected_PlanName.contains("Silver")){
+	//--------------------------------------	
+		if(Expected_PlanName.contains("Gold") || Expected_PlanName.contains("Chronic") || Expected_PlanName.contains("Silver")){
         	System.out.println("Adress and Email validation is skipped for CSNP plans due to Provider Address !!!");
         }else{
         	String PermStreetDisplayed = StreetDisplays.get(0).getText();
@@ -1022,30 +1024,7 @@ else {
     				flag = (!flag)?false:true;
     				System.out.println(Mailing_City+" : "+MailCityDisplayed+" : "+flag);
     			}else flag =false;
-    			
-    	
-    			
-    			/*		
-    			String HealthInsuranceName1 = HealthInsuranceName.getText();
-    			if(HealthInsuranceName1.contains(healthInsuranceName)){
-    				flag = (!flag)?false:true;
-    				System.out.println(healthInsuranceName+" : "+HealthInsuranceName1+" : "+flag);
-    			}else flag =false;
-    			
-    			String HealthInsuranceGroupNo1 = HealthInsuranceGroupNo.getText();
-    			if(HealthInsuranceGroupNo1.contains(healthInsuranceGroupNo)){
-    				flag = (!flag)?false:true;
-    				System.out.println(healthInsuranceGroupNo+" : "+HealthInsuranceGroupNo1+" : "+flag);
-    			}else flag =false;
-    			
-    			String HealthInsuranceMemberNo1 = HealthInsuranceMemberNo.getText();
-    			if(HealthInsuranceMemberNo1.contains(healthInsuranceMemberNo)){
-    				flag = (!flag)?false:true;
-    				System.out.println(Gender+" : "+HealthInsuranceMemberNo1+" : "+flag);
-    			}else flag =false;
-    			
-    			*/
-    				
+
     			
     		}
     		
