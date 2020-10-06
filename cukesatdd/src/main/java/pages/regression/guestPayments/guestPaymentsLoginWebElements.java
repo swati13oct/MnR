@@ -66,7 +66,7 @@ public class guestPaymentsLoginWebElements extends UhcDriver{
 	@FindBy(className= "memberID")
 	public static WebElement MemberID;
 	
-	@FindBy(id= "Member-ID-Card") 
+	@FindBy(xpath= "//img[contains(@alt,'Member ID Card')]") 
 	public static WebElement memberIdCardImage;
 	
 	@FindBy(xpath= "//p[contains(text(),'Plan Member ID ')]") 
