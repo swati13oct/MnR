@@ -19,6 +19,8 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.MRConstants;
@@ -1373,15 +1375,18 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 	public VPPPlanSummaryPageMobile searchPlansWithOutCounty(String zipcode) throws InterruptedException {
 
-		CommonUtility.waitForPageLoadNew(driver, zipCodeField, 30);
+		// CommonUtility.waitForPageLoadNew(driver, zipCodeField, 30);
+		WebDriverWait wait = new WebDriverWait(driver, 30);
+		wait.until(ExpectedConditions.visibilityOf(zipCodeField));
+		wait.until(ExpectedConditions.elementToBeClickable(zipCodeField));
 		sendkeys(zipCodeField, zipcode);
 		viewPlansButton.click();
 		// }
 		CommonUtility.checkPageIsReadyNew(driver);
-//		while(validate(overlayFilm, 10)) {/**wait*/}
-//		CommonUtility.waitForElementToDisappear(driver, overlayFilm, 75);
-		//waitForPageLoadSafari();
-			
+		// while(validate(overlayFilm, 10)) {/**wait*/}
+		// CommonUtility.waitForElementToDisappear(driver, overlayFilm, 75);
+		// waitForPageLoadSafari();
+
 		CommonUtility.waitForPageLoadNew(driver, zipcodeChangeLink, 30);
 		if (driver.getCurrentUrl().contains("health-plans")) {
 			return new VPPPlanSummaryPageMobile(driver);
@@ -2495,7 +2500,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		return null;
 
 	}
-	
+
 	public AgentsAndBrokersPageMobile agentsAndBrokersClick() {
 		validateNew(footerAgentsnBrokersLink);
 		footerAgentsnBrokersLink.click();
