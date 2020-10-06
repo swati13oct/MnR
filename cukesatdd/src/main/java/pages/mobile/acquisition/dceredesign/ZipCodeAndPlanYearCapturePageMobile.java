@@ -90,6 +90,7 @@ public class ZipCodeAndPlanYearCapturePageMobile extends UhcDriver {
 
 	public void enterZipCodeandcounty(String zipcode) throws InterruptedException {
 		validateNew(zipCodeTxtbox);
+		Thread.sleep(3000);
 		sendkeys(zipCodeTxtbox, zipcode);
 		Thread.sleep(3000);
 		try {
@@ -102,7 +103,7 @@ public class ZipCodeAndPlanYearCapturePageMobile extends UhcDriver {
 			System.out.println("county box not found");
 		}
 		validateNew(continueBtn);
-		//continueBtn.click();
+		continueBtn.click();
 	}
 
 	public DrugSummaryPageMobile clickContinueBtn() {

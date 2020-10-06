@@ -99,8 +99,8 @@ public class BuildYourDrugListMobile extends UhcDriver {
 
 	public void addDrugs(String drugName) {
 		EnterDrugNameTxt.sendKeys(drugName);
-		WebElement drugname = driver.findElement(By.xpath("//div[contains(text(),'Lipitor')]"));
-		//WebElement drugname = driver.findElement(By.xpath("//*[contains(@id,'" + drugName + "')]/div"));
+
+		WebElement drugname = driver.findElement(By.xpath("//*[contains(@id,'" + drugName + "')]/div"));
 
 		jsClickNew(drugname);
 		/*
