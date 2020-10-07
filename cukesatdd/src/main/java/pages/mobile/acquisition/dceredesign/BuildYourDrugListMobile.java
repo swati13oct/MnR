@@ -99,8 +99,8 @@ public class BuildYourDrugListMobile extends UhcDriver {
 
 	public void addDrugs(String drugName) throws InterruptedException {
 		validate(EnterDrugNameTxt);
-		//EnterDrugNameTxt.sendKeys(drugName);
-		jsSendkeys(EnterDrugNameTxt, drugName);
+		EnterDrugNameTxt.sendKeys(drugName);
+		
 		Thread.sleep(5000);
 		WebElement drugname = driver.findElement(By.xpath("//*[contains(@id,'"+drugName+"')]/div"));
 		
@@ -110,7 +110,7 @@ public class BuildYourDrugListMobile extends UhcDriver {
 		 * selectBtn.click();
 		 */
 		validateNew(addToDrugList);
-		Thread.sleep(5000);
+		Thread.sleep(2000);
 		jsClickMobile(addToDrugList);
 		
 		//addToDrugList.click();

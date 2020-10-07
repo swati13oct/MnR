@@ -77,14 +77,14 @@ Feature: 1.10.1 DCE-REDESIGN UHC - To test ZipCode and Plan Year capture page in
       | PagePath | <path>     |
      Then the user validates Get Started Page for UHC
     And the user validates whether call icon is visible on UHC
-    And the user validates whether chat icon is visible on UHC
+    #And the user validates whether chat icon is visible on UHC
      When the user clicks on Add drugs button on UHC
     And adds drugs in drug list page on UHC
       | DrugName | <drugName> |
      And clicks on Review drug cost button on UHC
     Then user should be navigated to zipcode and plan year capture page for AEP on UHC
     Then the user validates whether call icon is visible on UHC
-    Then the user validates whether chat icon is visible on UHC
+    #Then the user validates whether chat icon is visible on UHC
 
     Examples: 
       | path                                             | pageName                   | drugName |
