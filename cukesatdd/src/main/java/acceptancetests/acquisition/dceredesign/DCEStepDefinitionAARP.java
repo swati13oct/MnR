@@ -1063,4 +1063,13 @@ public class DCEStepDefinitionAARP {
 		DrugDetailsPage drugDetailsPage = new DrugDetailsPage(driver);
 		drugDetailsPage.clickReturnToProfile();
 	}
+	
+	
+	@Then("^user should be navigated to shopper profile page$")
+	public void user_should_be_navigated_to_shopper_profile_page() {
+		VisitorProfilePage visitorProfile = new VisitorProfilePage(driver);
+		visitorProfile.validateVisitorProfilePage();
+	}
+	
+	
 }

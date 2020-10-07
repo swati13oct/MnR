@@ -96,16 +96,8 @@ public class VisitorProfilePage extends UhcDriver {
 	@FindBy(xpath = "//button[contains(@id,'addDrug')]")
 	public WebElement AddMyDrugsBtn;
 	
-	@FindBy(xpath = "//*[@class='locationEnrollment']//*[contains(@class,'drug-list-accordion')]/button")
-	public WebElement expandDrugsGlobal;
 	
-	@FindBy(xpath = "//*[@class='locationEnrollment']//*[@class='edit-drugs']/a")
-	public WebElement editDrugsGlobal;
 	
-	@FindBy(xpath = "//*[@id='dashPlansContainer']//*[@class='add-drug']")
-	public WebElement addDrugsPlanCard;
-	
-
 	public VisitorProfilePage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -426,19 +418,5 @@ public class VisitorProfilePage extends UhcDriver {
 		return null;
 	}
 	
-	/**
-	 * click edit drugs globally
-	 */
-	public void clickEditDrugs() {
-		expandDrugsGlobal.click();
-		editDrugsGlobal.click();
-	}
-	
-	/**
-	 * click add drugs from plan card
-	 */
-	public void clickAddDrugsPlancard() {
-		addDrugsPlanCard.click();
-	}
 	
 }

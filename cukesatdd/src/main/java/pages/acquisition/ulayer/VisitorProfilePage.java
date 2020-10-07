@@ -91,7 +91,23 @@ public class VisitorProfilePage extends UhcDriver {
 	@FindBy(xpath = "//div[@class='multi-year-select']/button[contains(@class,'js-select-year select-year')][1]")
 	private WebElement profileCrntYrPlans;
 	
+	@FindBy(xpath = "//*[@class='locationEnrollment']//*[contains(@class,'drug-list-accordion')]/button")
+	public WebElement expandDrugsGlobal;
 	
+	@FindBy(xpath = "//*[@class='locationEnrollment']//*[@class='edit-drugs']/a")
+	public WebElement editDrugsGlobal;
+	
+	@FindBy(xpath = "//*[@id='dashPlansContainer']//*[@class='add-drug']")
+	public WebElement addDrugsPlanCard;
+	
+	@FindBy(xpath = "//a[contains(text(),'Back to Drug Cost Estimator')]")
+	public WebElement backToDrugCostEstimatorLink;
+	
+	@FindBy(xpath = "//*[@id='dashPlansContainer']//*[contains(@class,'drug-list-accordion')]/button")
+	public WebElement expandDrugsPlanCard;
+	
+	@FindBy(xpath = "//*[@id='dashPlansContainer']//*[@class='edit-drugs']")
+	public WebElement editDrugsPlanCard;
 
 	
 	public VisitorProfilePage(WebDriver driver) {
@@ -432,5 +448,30 @@ public class VisitorProfilePage extends UhcDriver {
 		return null;
 	}
 	
+	/**
+	 * click edit drugs globally
+	 */
+	public void clickEditDrugs() {
+		expandDrugsGlobal.click();
+		editDrugsGlobal.click();
+	}
 	
+	/**
+	 * click add drugs from plan card
+	 */
+	public void clickAddDrugsPlancard() {
+		addDrugsPlanCard.click();
+	}
+	
+	public void validateBackToDceLink() {
+		validate(backToDrugCostEstimatorLink);
+	}
+	
+	/**
+	 * click edit drugs from plan card
+	 */
+	public void clickEditDrugsPlancard() {
+		expandDrugsPlanCard.click();
+		editDrugsPlanCard.click();
+	}
 }
