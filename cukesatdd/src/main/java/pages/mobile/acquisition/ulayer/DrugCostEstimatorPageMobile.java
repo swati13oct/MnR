@@ -466,7 +466,7 @@ public class DrugCostEstimatorPageMobile extends UhcDriver {
 	@FindBy(xpath = "//button[contains(@class,'costs-tab-show') and contains(text(),'rofile')]")
 	private WebElement btnReturnToProfile;
 
-	@FindBy(id = "dupIconFlyOut")
+	@FindBy(xpath = "//p[@id='saved-label']")
 	private WebElement shoppingCartIcon;
 
 	public WebElement getImgLoadingIndicator() {

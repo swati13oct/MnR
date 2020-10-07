@@ -1375,17 +1375,11 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 	public VPPPlanSummaryPageMobile searchPlansWithOutCounty(String zipcode) throws InterruptedException {
 
-		// CommonUtility.waitForPageLoadNew(driver, zipCodeField, 30);
-		WebDriverWait wait = new WebDriverWait(driver, 30);
-		wait.until(ExpectedConditions.visibilityOf(zipCodeField));
-		wait.until(ExpectedConditions.elementToBeSelected(zipCodeField));
-		jsClickMobile(zipCodeField);
-		zipCodeField.sendKeys(zipcode);
-		
+		CommonUtility.waitForPageLoadNew(driver, zipCodeField, 30);
+		sendkeys(zipCodeField, zipcode);
 		viewPlansButton.click();
-		// }
+
 		CommonUtility.checkPageIsReadyNew(driver);
-		
 
 		CommonUtility.waitForPageLoadNew(driver, zipcodeChangeLink, 30);
 		if (driver.getCurrentUrl().contains("health-plans")) {
