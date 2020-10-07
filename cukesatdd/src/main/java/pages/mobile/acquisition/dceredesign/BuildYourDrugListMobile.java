@@ -99,6 +99,7 @@ public class BuildYourDrugListMobile extends UhcDriver {
 
 	public void addDrugs(String drugName) throws InterruptedException {
 		validate(EnterDrugNameTxt);
+		EnterDrugNameTxt.click();
 		EnterDrugNameTxt.sendKeys(drugName);
 		
 		Thread.sleep(5000);
