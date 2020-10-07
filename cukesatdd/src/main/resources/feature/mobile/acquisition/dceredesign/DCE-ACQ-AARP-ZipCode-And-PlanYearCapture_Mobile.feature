@@ -17,7 +17,7 @@ Feature: 1.10.1 DCE-REDESIGN UHC - To test ZipCode and Plan Year capture page in
 
     Examples: 
       | path                     | pageName                   |drugName|
-      | health-plans/estimate-drug-costs.html/getstarted | DCE Redesign - Get Started |lipitor|
+      | health-plans/estimate-drug-costs.html/getstarted | DCE Redesign - Get Started |Lipitor|
 
   @DCE_ZipCodePlanYear_ValidateContinueBtn_AEP_UHC @F443609
   Scenario Outline: Test to verify the functionality of continue button on ZipCode and Plan year capture page when valid zipcode, county and plan year selected
@@ -40,7 +40,7 @@ Feature: 1.10.1 DCE-REDESIGN UHC - To test ZipCode and Plan Year capture page in
  
   Examples: 
       | path                     | pageName                   |drugName|zipCode|
-      | health-plans/estimate-drug-costs.html/getstarted | DCE Redesign - Get Started |lipitor|90210|
+      | health-plans/estimate-drug-costs.html/getstarted | DCE Redesign - Get Started |Lipitor|90210|
 
   @DCE_ZipCodePlanYear_ErrorMessage_AEP_UHC @F443609
   Scenario Outline: Test to verify the error message when user does not enter or enter invalid zipcode and clicks on continue button
@@ -66,7 +66,7 @@ Feature: 1.10.1 DCE-REDESIGN UHC - To test ZipCode and Plan Year capture page in
 
     Examples: 
       | path                     | pageName                   | invalidzipcode | zipCode | invalidzipcode1 | invalidzipcode2 |drugName|
-      | health-plans/estimate-drug-costs.html/getstarted | DCE Redesign - Get Started |          78452 |   90210 |            1234 |00000 |lipitor|
+      | health-plans/estimate-drug-costs.html/getstarted | DCE Redesign - Get Started |          78452 |   90210 |            1234 |00000 |Lipitor|
 
 
   @DCE_ZipCodePlanYear_SamChatCall_AEP_UHC
@@ -88,4 +88,4 @@ Feature: 1.10.1 DCE-REDESIGN UHC - To test ZipCode and Plan Year capture page in
 
     Examples: 
       | path                                             | pageName                   | drugName |
-      | health-plans/estimate-drug-costs.html/getstarted | DCE Redesign - Get Started | lipitor  |
+      | health-plans/estimate-drug-costs.html/getstarted | DCE Redesign - Get Started | Lipitor  |
