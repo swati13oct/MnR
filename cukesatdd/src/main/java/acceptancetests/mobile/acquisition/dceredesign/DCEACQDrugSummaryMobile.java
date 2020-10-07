@@ -111,7 +111,7 @@ public class DCEACQDrugSummaryMobile {
 	}
 
 	@When("^adds drugs in drug list page on UHC$")
-	public void adds_drugs_in_drug_list_page_UHC(DataTable givenAttributes) {
+	public void adds_drugs_in_drug_list_page_UHC(DataTable givenAttributes) throws InterruptedException {
 		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {

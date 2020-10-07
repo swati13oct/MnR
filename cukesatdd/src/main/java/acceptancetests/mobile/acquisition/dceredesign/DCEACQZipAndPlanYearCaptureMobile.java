@@ -158,7 +158,7 @@ public class DCEACQZipAndPlanYearCaptureMobile {
 	}
 
 	@When("^adds drugs in drug list page$")
-	public void adds_drugs_in_drug_list_page(DataTable givenAttributes) {
+	public void adds_drugs_in_drug_list_page(DataTable givenAttributes) throws InterruptedException {
 		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {

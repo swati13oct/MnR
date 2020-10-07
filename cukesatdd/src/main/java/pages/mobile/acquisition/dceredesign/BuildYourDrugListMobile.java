@@ -97,20 +97,19 @@ public class BuildYourDrugListMobile extends UhcDriver {
 			Assert.fail("Error Message displayed for Blank Drug search : " + BlankDrugError.getText());
 	}
 
-	public void addDrugs(String drugName) {
+	public void addDrugs(String drugName) throws InterruptedException {
+		validate(EnterDrugNameTxt);
 		EnterDrugNameTxt.sendKeys(drugName);
-
-		WebElement drugname = driver.findElement(By.xpath("//*[contains(@id,'" + drugName + "')]/div"));
-
+		WebElement drugname = driver.findElement(By.xpath("//*[contains(@id,'"+drugName+"')]/div"));
+		
 		jsClickNew(drugname);
 		/*
 		 * if(validate(SearchBtn)) SearchBtn.click(); if(validate(selectBtn))
 		 * selectBtn.click();
 		 */
 		validateNew(addToDrugList);
-		jsClickNew(addToDrugList);
-		//addToDrugList.click();
-		// reviewDrugCost.click();
+		addToDrugList.click();
+		//reviewDrugCost.click();
 	}
 
 	public void clickReviewDrugCostBtn() {
