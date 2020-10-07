@@ -104,11 +104,43 @@ Feature: 1.07 Member DCE Page
       | 15325 | PCP      |PCP_DCE    | Lipitor | Lipitor TAB 10MG |        31 | Every 1 month | Lipitor TAB 20MG | Lipitor TAB 20MG | atorvastatin calcium TAB 20MG |   00820 | 25 miles |       100 | Every 3 months | FANAPT|Fanapt TAB 12MG|
 	  | 15325 | Medica   |Medica_DCE | Lipitor | Lipitor TAB 10MG |        31 | Every 1 month | Lipitor TAB 20MG | Lipitor TAB 20MG | atorvastatin calcium TAB 20MG |   00820 | 25 miles |       100 | Every 3 months | FANAPT|Fanapt TAB 12MG|
 	
-   @Stage_Sanity02  
+	@Stage_Sanity02
+  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> -I1.1 To Verify MR portal DCE flow covering step1 step 2 and step3 .
+    Given login with following details logins in the member portal and validate elements
+        | Plan Type   | <planType>   |
+      | Member Type | <memberType> |
+    When I navigate to drug look up page
+    When I delete all added drugs
+    When I add branded drug
+      | Drug      | <drug1>      |
+      | Dosage    | <dosage1>    |
+      | Quantity  | <quantity1>  |
+      | Frequency | <frequency1> |
+    When I add branded drug
+      | Drug      | <drug1>      |
+      | Dosage    | <dosage2>    |
+      | Quantity  | <quantity2>  |
+      | Frequency | <frequency2> |
+    When I switch to its generic durg
+      | BrandedDrug   | <dosage2>       |
+      | GenericDosage | <genericdosage> |
+      | Quantity      | <quantity2>     |
+      | Frequency     | <frequency2>    |
+    When I delete the drug
+      | Dosage | <genericdosage> |
+    When I navigate to Pharmacy tab
+      | Zipcode | <zipcode> |
+      | Radius  | <radius>  |
+    When I select the pharmacy from the list
+    When I navigate to costs tab
+    Then I should see cost of the drug
+    Then I should see learn more about the drug tiers and learn more about the drug payment stages link
+
+     
    Examples: 
-      | TID   | planType |memberType | drug1   | dosage1          | quantity1 | frequency1    | dosage2          | brandeddrug      | genericdosage                 | zipcode | radius   | quantity2 | frequency2     | drug2 |dosage3        | 
-      | 15325 | MAPD     |MAPD_DCE   | Lipitor | Lipitor TAB 10MG |        31 | Every 1 month | Lipitor TAB 20MG | Lipitor TAB 20MG | atorvastatin calcium TAB 20MG |   00820 | 25 miles |       100 | Every 3 months | FANAPT|Fanapt TAB 12MG|
-      | 15325 | Medica   |Medica_DCE | Lipitor | Lipitor TAB 10MG |        31 | Every 1 month | Lipitor TAB 20MG | Lipitor TAB 20MG | atorvastatin calcium TAB 20MG |   00820 | 25 miles |       100 | Every 3 months | FANAPT|Fanapt TAB 12MG|
+      | TID   | planType |memberType | drug1   | dosage1          | quantity1 | frequency1    | dosage2          | brandeddrug      | genericdosage                 | zipcode | radius   | quantity2 | frequency2     | 
+      | 15325 | MAPD     |MAPD_DCE   | Lipitor | Lipitor TAB 10MG |        31 | Every 1 month | Lipitor TAB 20MG | Lipitor TAB 20MG | atorvastatin calcium TAB 20MG |   00820 | 25 miles |       100 | Every 3 months |
+      | 15325 | Medica   |Medica_DCE | Lipitor | Lipitor TAB 10MG |        31 | Every 1 month | Lipitor TAB 20MG | Lipitor TAB 20MG | atorvastatin calcium TAB 20MG |   00820 | 25 miles |       100 | Every 3 months |
 	
   # | 15331   | PDP      |NonLISSplittier  |Lipitor|Lipitor TAB 10MG|31|Every 1 month|Lipitor TAB 20MG|Lipitor TAB 20MG|atorvastatin calcium TAB 20MG|90210|25 miles|100|Every 3 months|
   #| 15333   | COMBO    |ComboDCEmember  |Lipitor|Lipitor TAB 10MG|31|Every 1 month|Lipitor TAB 20MG|Lipitor TAB 20MG|atorvastatin calcium TAB 20MG|90210|25 miles|100|Every 3 months|
