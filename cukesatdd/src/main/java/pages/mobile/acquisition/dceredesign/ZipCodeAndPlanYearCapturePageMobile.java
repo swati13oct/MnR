@@ -59,7 +59,7 @@ public class ZipCodeAndPlanYearCapturePageMobile extends UhcDriver {
 	@Override
 	public void openAndValidate() {
 		
-		validateNew(zipCodeTxtbox);
+		
 
 	}
 	
@@ -130,9 +130,10 @@ public class ZipCodeAndPlanYearCapturePageMobile extends UhcDriver {
 
 	public ZipCodeAndPlanYearCapturePageMobile validateZipCodePlanYearCapturePageNonAEP() {
 		try {
+			
 			mobileUtils.mobileLocateElement(zipCodeTxtbox);
 			mobileUtils.mobileLocateElement(countyDropdown);
-			// mobileUtils.mobileLocateElement(planYearDropdown);
+			mobileUtils.mobileLocateElement(planYearDropdown);
 			mobileUtils.mobileLocateElement(continueBtn);
 			return new ZipCodeAndPlanYearCapturePageMobile(driver);
 		} catch (Exception e) {
@@ -155,6 +156,7 @@ public class ZipCodeAndPlanYearCapturePageMobile extends UhcDriver {
 	}
 
 	public ZipCodeAndPlanYearCapturePageMobile validatePlanYearDrpDownAEP() {
+		
 		if (validateNew(planYearDropdown)) {
 			Assert.assertTrue("Plan Year dropdoown not displayed during AEP", true);
 			return new ZipCodeAndPlanYearCapturePageMobile(driver);
