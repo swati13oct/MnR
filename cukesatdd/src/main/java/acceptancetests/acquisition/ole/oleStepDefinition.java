@@ -198,11 +198,15 @@ public class oleStepDefinition {
 		}
 		String PlanName = givenAttributesMap.get("Plan Name");
 		//String PlanName = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_NAME);
+		
+		//String County = "St. Louis County";
+		//String ZipCode = "63043";
+		//String PlanYear = "2020"; 
 
 		String PlanYear = (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_YEAR); 
 		String PlanPremium = "";
-		String ZipCode = (String) getLoginScenario().getBean(VPPCommonConstants.ZIPCODE);
-		String County = (String) getLoginScenario().getBean(VPPCommonConstants.COUNTY);
+		String ZipCode = "";
+		String County = "";
 		String PlanType = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
 		String TFN;
 		String SiteName;

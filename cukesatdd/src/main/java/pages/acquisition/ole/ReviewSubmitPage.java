@@ -862,14 +862,20 @@ else {
 		else {
 			System.out.println("healthInsurance is not present for User");
 		}
-		
+		if (StringUtils.isEmpty(prescriptionDrug)) {
+			System.out.println("prescription drug Radio button is Optinal. Hence Skiping this Verification !!! for PDP Plans ");
+		} else if(driver.findElement(By.xpath("//*[contains(text(), 'Do you or your spouse have other health insurance')]//following-sibling::*"))!=null) {
+			
 			String PDDisplayed = PrescriptionDrugRadio.getText();
 			if (PDDisplayed.contains(prescriptionDrug)) {
 				flag = (!flag) ? false : true;
 				System.out.println(prescriptionDrug + " : " + PDDisplayed + " : " + flag);
 			} else
 				flag = false;
-		
+		}
+			else {
+				System.out.println("PrescriptionDrug Radio button is not present for User");
+			}
 		if (StringUtils.isEmpty(healthInsuranceName)) {
 			System.out.println("healthInsuranceName is Optinal. Hence Skiping this Verification !!! for PDP Plans ");
 		} else if(driver.findElement(By.xpath("//*[contains(text(), 'Name of Health Insurance Company')]//following-sibling::*"))!=null) {
@@ -975,18 +981,35 @@ else {
 		if(Expected_PlanName.contains("Gold") || Expected_PlanName.contains("Chronic") || Expected_PlanName.contains("Silver")){
         	System.out.println("Adress and Email validation is skipped for CSNP plans due to Provider Address !!!");
         }else{
-        	String PermStreetDisplayed = StreetDisplays.get(0).getText();
+        	
+        	if (StringUtils.isEmpty(Perm_Street)) {
+    			System.out.println("Perm Street is Optinal. Hence Skiping this Verification !!! ");
+    		} else if(driver.findElement(By.xpath("//*[contains(text(), 'Street Address')]//following-sibling::*"))!=null) {				
+        	
+        	String PermStreetDisplayed = StreetDisplay.getText();
     		if(PermStreetDisplayed.contains(Perm_Street)){
     			flag = (!flag)?false:true;
     			System.out.println(Perm_Street+" : "+PermStreetDisplayed+" : "+flag);
     		}else flag =false;
-    		
-    		String PermCityDisplayed = CityDisplays.get(0).getText();
+    		}  		
+    		else {
+    			System.out.println("Perm Street is not present");
+    		}
+        	
+        	if (StringUtils.isEmpty(Perm_city)) {
+    			System.out.println("Permcity is Optinal. Hence Skiping this Verification !!! ");
+    		} else if(driver.findElement(By.xpath("//*[contains(text(), 'City')]//following-sibling::*"))!=null) {				
+        	
+    		String PermCityDisplayed = CityDisplay.getText();
+    	
     		if(PermCityDisplayed.contains(Perm_city)){
     			flag = (!flag)?false:true;
     			System.out.println(Perm_city+" : "+PermCityDisplayed+" : "+flag);
     		}else flag =false;
-
+    		}  		
+    		else {
+    			System.out.println("Perm City is not present");
+    		}
     		
     		String MailAddQuestionDisplayed = MailingQiuestionDisplay.getText();
     		if(MailAddQuestionDisplayed.contains(MailingQuestion)){
