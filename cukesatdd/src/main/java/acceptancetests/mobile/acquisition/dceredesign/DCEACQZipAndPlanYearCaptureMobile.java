@@ -152,6 +152,7 @@ public class DCEACQZipAndPlanYearCaptureMobile {
 	public void the_user_clicks_on_Add_drugs_button() {
 		GetStartedPageMobile DCEgetStarted = (GetStartedPageMobile) getLoginScenario()
 				.getBean(PageConstants.DCE_Redesign_GetStarted);
+		
 		DCEgetStarted.clickAddDrugsBtn();
 		// getLoginScenario().saveBean(PageConstants.DCE_Redesign_ZipCodePlanYearCapture,
 		// zipCodePlanYearPage);
