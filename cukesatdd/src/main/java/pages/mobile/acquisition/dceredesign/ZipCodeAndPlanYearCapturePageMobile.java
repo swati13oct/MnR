@@ -52,14 +52,24 @@ public class ZipCodeAndPlanYearCapturePageMobile extends UhcDriver {
 	public ZipCodeAndPlanYearCapturePageMobile(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
-		// CommonUtility.waitForPageLoad(driver, addDrugDetailsPage, 10);
+		
 		openAndValidate();
 	}
 
 	@Override
 	public void openAndValidate() {
+		validateNew(zipCodeTxtbox);
 
 	}
+	
+
+	public void selectCounty() {
+		Select county = new Select(countyDropdown);
+		if (county.getFirstSelectedOption().getText().equalsIgnoreCase("Select County")) {
+			county.selectByIndex(1);
+		}
+	}
+
 
 	CommonutilitiesMobile mobileUtils = new CommonutilitiesMobile(driver);
 
@@ -90,7 +100,6 @@ public class ZipCodeAndPlanYearCapturePageMobile extends UhcDriver {
 
 	public void enterZipCodeandcounty(String zipcode) throws InterruptedException {
 		validateNew(zipCodeTxtbox);
-		Thread.sleep(5000);
 		sendkeys(zipCodeTxtbox, zipcode);
 		Thread.sleep(3000);
 		try {
@@ -103,7 +112,7 @@ public class ZipCodeAndPlanYearCapturePageMobile extends UhcDriver {
 			System.out.println("county box not found");
 		}
 		validateNew(continueBtn);
-		continueBtn.click();
+		//continueBtn.click();
 	}
 
 	public DrugSummaryPageMobile clickContinueBtn() {

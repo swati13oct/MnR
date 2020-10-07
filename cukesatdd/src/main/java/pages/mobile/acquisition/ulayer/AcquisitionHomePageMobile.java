@@ -1378,14 +1378,14 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		// CommonUtility.waitForPageLoadNew(driver, zipCodeField, 30);
 		WebDriverWait wait = new WebDriverWait(driver, 30);
 		wait.until(ExpectedConditions.visibilityOf(zipCodeField));
-		wait.until(ExpectedConditions.elementToBeClickable(zipCodeField));
-		sendkeys(zipCodeField, zipcode);
+		wait.until(ExpectedConditions.elementToBeSelected(zipCodeField));
+		jsClickMobile(zipCodeField);
+		zipCodeField.sendKeys(zipcode);
+		
 		viewPlansButton.click();
 		// }
 		CommonUtility.checkPageIsReadyNew(driver);
-		// while(validate(overlayFilm, 10)) {/**wait*/}
-		// CommonUtility.waitForElementToDisappear(driver, overlayFilm, 75);
-		// waitForPageLoadSafari();
+		
 
 		CommonUtility.waitForPageLoadNew(driver, zipcodeChangeLink, 30);
 		if (driver.getCurrentUrl().contains("health-plans")) {
