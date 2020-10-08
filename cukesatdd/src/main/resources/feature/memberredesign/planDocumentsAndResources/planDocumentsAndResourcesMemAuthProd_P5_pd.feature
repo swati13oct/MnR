@@ -113,4 +113,7 @@ Feature: 1.06.5.2 Member Plans and Documents - section: Provider Directory -or- 
       | 19-095 | 15119,15304 | kkumard  | mnrs786@  | Pramila1946      | SHIP     | IND_EFF_PDnR          | false | false | false | false    | false    | false    | false    | false    | false    | 
 #     | 20-119 | 15119,15304 | kkumard  | mnrs786@  | q1_feb_2020SHIP_001 | SHIP  | MULTI_IND_EFF_PDnR    | false | false | false | false    | false    | false    | false    | false    | false    | 
   
-  
+	@prod_preeffective_ship
+	Examples: 
+      | index  | TID         | username  | password  | MemUserName  | planType | memberType            | pd_sd | pd_ps | pd_pl | pd_en_cy | pd_es_cy | pd_zh_cy | pd_en_ny | pd_es_ny | pd_zh_ny |
+#     | 21-121 | xxxxx       | kkumard   | mnrs786@  | testusername | SHIP     | IND_PREEFF_PDnR       | false | false | false | false    | false    | false    | false    | false    | false    |

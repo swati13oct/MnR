@@ -112,4 +112,7 @@ Feature: 1.06.4.2 Member Plans and Documents - section: Annual Notice of Changes
       | 19-076 | 15119,15304 | kkumard   | mnrs786@  | Pramila1946     | SHIP     | IND_EFF_PDnR          | false | false    | false    | false    | false    | false    | false    |
 #     | 20-118 | 15119,15304 | kkumard   | mnrs786@  | q1_feb_2020SHIP_001 | SHIP | MULTI_IND_EFF_PDnR    | false | false    | false    | false    | false    | false    | false    |
 
-
+	@prod_preeffective_ship
+	Examples: 
+      | index  | TID         | username  | password  | MemUserName  | planType | memberType            | an_sd | an_en_cy | an_es_cy | an_zh_cy | an_en_ny | an_es_ny | an_zh_ny |
+#     | 21-121 | xxxxx       | kkumard   | mnrs786@  | testusername | SHIP     | IND_PREEFF_PDnR       | false | false    | false    | false    | false    | false    | false    |

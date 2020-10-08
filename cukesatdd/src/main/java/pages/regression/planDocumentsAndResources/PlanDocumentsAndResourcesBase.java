@@ -179,7 +179,7 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 				if (!MRScenario.environment.contains("team-a")) {
 					System.out.println("Proceed to validate the PDF content");
 					String actUrl=driver.getCurrentUrl();
-					section_note=validateSubPageContent(testInputInfoMap, section_note, actUrl, targetDocName); //lyc
+					section_note=validateSubPageContent(testInputInfoMap, section_note, actUrl, targetDocName); 
 				}
 				section_note.add("    SKIP - element link in href attribute vs actual link URL after clicked validation");
 			}
@@ -598,6 +598,8 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 			return "6016";
 		if (docName.toLowerCase().equalsIgnoreCase("Plan Information".toLowerCase()) ) 
 			return "6017";
+		if (docName.toLowerCase().equalsIgnoreCase("Plan Documents".toLowerCase()) ) 
+			return "dunno";
 		System.out.println("TEST - unable to find a type match for docName="+docName);
 		return "-2";
 	}
@@ -692,9 +694,56 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 		String urlStr = (String) responseObj.get("url");
 		Assert.assertTrue("PROBLEM - unable to locate postData string", urlStr!=null);
 		System.out.println("TEST - urlStr="+urlStr);
+		
+		if (planType.toUpperCase().contains("SHIP")) {
+			System.out.println("SHIP has one more API");
+			lookForText1="ship/planDocuments";
+			lookForText2="responseReceived";
+
+			for (LogEntry entry : entries) {
+				String line=entry.getMessage();
+				//keep for debug System.out.println("TEST each line="+line); 
+				if (memberType.contains("COMBO")) {
+					if (line.contains(lookForText1) && line.contains(lookForText2) && line.contains(planType)) {
+						apiReqeust=line;
+						System.out.println("TEST found line="+line);
+						break;
+					}
+				} else {
+					if (line.contains(lookForText1) && line.contains(lookForText2)) {
+						apiReqeust=line;
+						System.out.println("TEST found line="+line);
+						break;
+					}
+				}
+			}
+			Assert.assertTrue("PROBLEM - unable to locate the network entry that contains '"+lookForText1+"' and '"+lookForText2+"'", apiReqeust!=null);
+			parser = new JSONParser();
+			jsobObj=null;
+			try {
+				jsobObj = (JSONObject) parser.parse(apiReqeust);
+			} catch (ParseException e) {
+				e.printStackTrace();
+				Assert.assertTrue("PROBLEM - unable to convert target string into json object", false);
+			}
+			messageObj = (JSONObject) jsobObj.get("message");
+			Assert.assertTrue("PROBLEM - unable to locate message json object", messageObj!=null);
+			paramsObj = (JSONObject) messageObj.get("params");
+			Assert.assertTrue("PROBLEM - unable to locate message json object", paramsObj!=null);
+			responseObj = (JSONObject) paramsObj.get("response");
+			Assert.assertTrue("PROBLEM - unable to locate message json object", responseObj!=null);
+			System.out.println("TEST - responseObj="+responseObj.toString());
+			statusValue = (Long) responseObj.get("status");
+			Assert.assertTrue("PROBLEM - unable to locate postData string", statusValue!=null);
+			Assert.assertTrue("PROBLEM - API response is not getting status=200 or 206. Actual value="+statusValue, statusValue==200 || statusValue==206);
+			String urlStr_ship = (String) responseObj.get("url");
+			Assert.assertTrue("PROBLEM - unable to locate postData string", urlStr!=null);
+			System.out.println("TEST - urlStr_ship="+urlStr_ship);
+			urlStr=urlStr+"TESTING"+urlStr_ship;
+		}
 		return urlStr;
 	}
-
+	
 	public void selectLangFromDropdown(String section, String targetLang) {
 		WebElement langDropDown=null;
 		String langElementValue="en_us";

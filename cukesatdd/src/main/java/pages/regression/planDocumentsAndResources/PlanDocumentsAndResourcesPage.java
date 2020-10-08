@@ -61,6 +61,10 @@ public class PlanDocumentsAndResourcesPage extends PlanDocumentsAndResourcesBase
 	public void validateFooter_PM(HashMap<String,String> testInputInfoMap) {
 		planMaterials.validateFooter_PM(testInputInfoMap);
 	}
+	
+	public PlanDocApiResponse updatePlanDocMapWithShipDoc(String apiResponseStr2, PlanDocApiResponse planDocMap, String currentYear, String link) {
+		return planMaterials.updatePlanDocMapWithShipDoc(apiResponseStr2, planDocMap, currentYear, link);
+	}
 
 	public void validateJumplink_MM(boolean sectionDisplay)  {
 		membershipMaterials.validateJumplink_MM(sectionDisplay);

@@ -2,6 +2,7 @@ package acceptancetests.memberredesign.planDocumentsAndResources;
 
 import gherkin.formatter.model.DataTableRow;
 import pages.regression.accounthomepage.AccountHomePage;
+import pages.regression.planDocumentsAndResources.Document;
 import pages.regression.planDocumentsAndResources.PlanDocApiResponse;
 import pages.regression.planDocumentsAndResources.PlanDocumentsAndResourcesFnRDocsHelper;
 import pages.regression.planDocumentsAndResources.PlanDocumentsAndResourcesPage;
@@ -96,7 +97,7 @@ public class PlanDocumentsAndResourcesStepDefinition {
 		skipLnkDestCheck=Boolean.valueOf(memberAttributesMap.get("Skip Link Destination Validation"));
 		getLoginScenario().saveBean(PlanDocumentsAndResourcesCommonConstants.TEST_VALIDATE_API, validateApi);
 		getLoginScenario().saveBean(PlanDocumentsAndResourcesCommonConstants.TEST_SKIP_LINK_DEST_CHECK, skipLnkDestCheck);
-		System.out.println("TEST - at setup - customizing with validateApi='"+validateApi+"' | skipLnkDestCheck="+skipLnkDestCheck); //lyc
+		System.out.println("TEST - at setup - customizing with validateApi='"+validateApi+"' | skipLnkDestCheck="+skipLnkDestCheck);
 		
 		HashMap<String, String> testInputInfoMap=(HashMap<String, String>) getLoginScenario().getBean(PlanDocumentsAndResourcesCommonConstants.TEST_INPUT_INFO);
 		testInputInfoMap.put("skipLnkDestCheck", String.valueOf(skipLnkDestCheck));
@@ -177,10 +178,22 @@ public class PlanDocumentsAndResourcesStepDefinition {
 		String planDocAndResources_apiResponse_url=planDocumentsAndResourcesPage.getApiRequestUrl(testInputInfoMap);
 		System.out.println("TEST - planDocAndResources_apiResponse_url="+planDocAndResources_apiResponse_url);
 
+		String planDocAndResources_apiResponse_url2="none";
+		if (planType.toUpperCase().contains("SHIP")) {
+			if (planDocAndResources_apiResponse_url.contains("TESTING")) {
+				String[] url=planDocAndResources_apiResponse_url.split("TESTING");
+				planDocAndResources_apiResponse_url=url[0];
+				planDocAndResources_apiResponse_url2=url[1];
+				System.out.println("TEST - planDocAndResources_apiResponse_url="+planDocAndResources_apiResponse_url);
+				System.out.println("TEST - planDocAndResources_apiResponse_url2="+planDocAndResources_apiResponse_url2);
+			}
+		}
+		
 		String apiResponseStr=planDocumentsAndResourcesPage.getApiResponse(planType, memberType, planDocAndResources_apiResponse_url);
 		System.out.println("TEST - apiResponseStr="+apiResponseStr);
-		HashMap<String, String> yearsMap=(HashMap<String, String>) getLoginScenario().getBean(PlanDocumentsAndResourcesCommonConstants.TEST_YEARS_MAP);
 
+		
+		HashMap<String, String> yearsMap=(HashMap<String, String>) getLoginScenario().getBean(PlanDocumentsAndResourcesCommonConstants.TEST_YEARS_MAP);
 		String currentYear = yearsMap.get("currentYear");
 		String nextYear = yearsMap.get("nextYear");
 		getLoginScenario().saveBean(PlanDocumentsAndResourcesCommonConstants.TEST_YEARS_MAP, yearsMap);
@@ -189,6 +202,14 @@ public class PlanDocumentsAndResourcesStepDefinition {
 		boolean apiSuccess=planDocMap.buildDocListMap(testInputInfoMap, apiResponseStr);
 		Assert.assertTrue("PROBLEM - unable to get a successful API response", apiSuccess);
 		getLoginScenario().saveBean(PlanDocumentsAndResourcesCommonConstants.TEST_ACTUAL_DOC_LIST_MAP, planDocMap);
+
+		String apiResponseStr2="none";
+		if (planType.toUpperCase().contains("SHIP") && !planDocAndResources_apiResponse_url2.equals("none")) {
+			apiResponseStr2=planDocumentsAndResourcesPage.getApiResponse(planType, memberType, planDocAndResources_apiResponse_url2);
+			System.out.println("TEST - apiResponseStr2="+apiResponseStr2);
+			//note: if plan document exist then add it to the map
+			planDocMap=planDocumentsAndResourcesPage.updatePlanDocMapWithShipDoc(apiResponseStr2, planDocMap, String.valueOf(currentYear), planDocAndResources_apiResponse_url2);
+		}
 
 		List<String> noteList=planDocMap.printPlanDocDetail();
 		getLoginScenario().saveBean(PlanDocumentsAndResourcesCommonConstants.TEST_RESULT_NOTE, noteList);

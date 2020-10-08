@@ -97,6 +97,11 @@ Feature: 1.06.2 Member Plans and Documents - section: header -and- My Documents 
       | index  | TID         | planType | memberType            | md_sd | eob_sd | eob_m | eob_d | rm_sd |
       | 20-115 | 15119,15304 | SHIP     | MULTI_IND_EFF_PDnR    | false | true   | true  | false | false |
 
+	@preeffective_ship
+	Examples: 
+      | index  | TID         | planType | memberType            | md_sd | eob_sd | eob_m | eob_d | rm_sd |
+      | 21-121 | xxxxx       | SHIP     | IND_PREEFF_PDnR       | false | false  | false | false | false |
+
 
 
     
