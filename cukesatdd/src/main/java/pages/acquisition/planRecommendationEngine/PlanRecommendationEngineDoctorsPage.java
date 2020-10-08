@@ -179,6 +179,7 @@ public class PlanRecommendationEngineDoctorsPage extends UhcDriver {
 		if (status.toUpperCase().contains("POSITIVE")) {
 			doctorspageOptions(doctor);
 			continueBtn.click();
+			checkIfPageReadySafari();
 			if (doctor.equalsIgnoreCase("Lookup")) {
 				if (multiDoctor.equalsIgnoreCase("YES"))
 					doctorModellookup(doctorsName, 3);
