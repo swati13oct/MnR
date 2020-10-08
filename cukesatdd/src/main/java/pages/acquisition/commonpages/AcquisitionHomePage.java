@@ -189,7 +189,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "//*[@class='container meded-article-header']/h1']")
 	private WebElement MALandingHeading;
 
-	@FindBy(xpath = "//*[contains(@id,'zipcodebtn') or (contains(@class,'zip-button' ) and contains( text(),'Go'))]")
+	@FindBy(xpath = "//*[contains(@id,'zipcodebtn') or (@class='zip-button') and (contains(@dtmid,'plans'))]")
 	private WebElement viewPlansButton;
 	
 	@FindBy(xpath = "//form[@id='zip-form']//button[@class='zip-button']")
@@ -523,7 +523,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 				start(AARP_ACQISITION_PAGE_URL);
 				testSiteUrl=AARP_ACQISITION_PAGE_URL;
 				checkForSecurityPage();
-				checkModelPopup(driver,30);		
+				checkModelPopup(driver,20);		
 			}
 		}
 		

@@ -18,7 +18,7 @@ import cucumber.api.CucumberOptions;
 jsonReport = "target/cucumber-RunMRATDDRegressionMemberAuthSanityCW.json", detailedReport = true, detailedAggregatedReport = true, 
 overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionMemberAuthSanityCW")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberredesign" }, monochrome = true,
-features = { "src/main/resources/feature/memberredesign/cw5minTurnAround/memberAuthSanityCW.feature" }, plugin = {
+features = { "src/main/resources/feature/memberredesign/cwSanity/memberAuthSanityCW.feature" }, plugin = {
 		"pretty", "html:reports/test-report","json:target/cucumber-RunMRATDDRegressionMemberAuthSanityCW.json" }, tags = { "@regressionMember" })
 public class RunMRATDDRegressionMemberAuthSanityCW {
 
