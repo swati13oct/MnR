@@ -61,21 +61,26 @@ Feature: 1.08. ACQ- Visitor profile AARP
       | Zip Code        | <zipcode>       |
       | County Name     | <county>        |
       | Is Multi County | <isMultiCounty> |
-    Then user validates plan count for all plan types on plan summary page in the AARP site
-    Then user saves two plans as favorite on AARP site
+    Then user validates plan count for all plan types on plan summary page
+    And the user views the plans of the below plan type
+    	 | Plan Type  | <plantype>  |
+    And the user selects plan year
+    	|Plan Year	| <planyear>|
+    	| Plan Type  | <plantype>  |
+    Then user saves two plans as favorite
+      | Test Plans | <testPlans> |
       | Plan Type  | <plantype>  |
+    Then user gets a create profile prompt
+    Then user click on continue as guest button
+    And user validates the added plans on visitor profile page
       | Test Plans | <testPlans> |
-    Then user gets a create profile prompt on AARP site
-    Then user click on continue as guest button on AARP site
-    And user validates the added plans on visitor profile page of AARP site
-      | Test Plans | <testPlans> |
-    And user delets the added plans on visitor profile page of AARP site
+    And user delets the added plans on visitor profile page
       | Test Plans | <testPlans> |
 
     @addPlans_AARP
     Examples: 
-      |	site	| state   | UID       | zipcode | isMultiCounty | county           | plantype | testPlans                                                                                              |
-      |	AARP	| Alabama | US1770330 |   90210 | NO            | Jefferson County | MAPD     | AARP Medicare Advantage SecureHorizons Focus (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO) |
+      |	site	| state   | UID       |planyear| zipcode | isMultiCounty | county           | plantype | testPlans                                                                                              |
+      |	AARP	| Alabama | US1770330 |  current| 90210 | NO            | Jefferson County | MAPD     | AARP Medicare Advantage SecureHorizons Focus (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO) |
       #| Alabama | US1770330 |   53503 | NO            | Jefferson County | SNP      | UnitedHealthcare Dual Complete LP1 (HMO D-SNP),UnitedHealthcare Medicare Advantage Assist (PPO C-SNP)  |
 
   @addPlansVPP
@@ -97,10 +102,10 @@ Feature: 1.08. ACQ- Visitor profile AARP
     # The steps for this scenario are being covered by the next sceanrio, hence, commenting this one out
     Examples: 
       | state | UID | zipcode | isMultiCounty | county | plantype | testPlans |
-
   #      | Alabama | US1770330 |   90210 | NO            | Jefferson County | MAPD     | AARP Medicare Advantage SecureHorizons Focus (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO) |
+  
   @addPlansPlanDetail @visitorProfileRegressionAARP @prodRegression
-  Scenario Outline: Verify user is save plans from VPP to the unauthenticated visitor profile
+  Scenario Outline: <UID> - Verify user is save plans from VPP to the unauthenticated visitor profile - zipcode - <zipcode> 
     Given the user is on AARP medicare acquisition site landing page
     When the user does plan search using the following information in the AARP site
       | Zip Code        | <zipcode>       |
@@ -222,7 +227,7 @@ Feature: 1.08. ACQ- Visitor profile AARP
       | US1770330 |   10001 | NO            | New York County | AARP Medicare Advantage Essential (HMO),UnitedHealthcare Medicare Advantage Essential (Regional PPO) | MA-MBI   | MA       | AARP Medicare Advantage Essential (HMO) | MBI      | John      | Doe      | 2n22C33YK33    | false   |  01012010 |  01012010 |      431665465 | true     | 01011903 | Male   | 003 Morris Rd | Los Angeles | Yes                    |               |             | NY           |      10001 | test@test.com | Medicare Advantage Open Enrollment Period (MA OEP)/change in my Medicaid (newly got Medicaid)/Medicare (or my state)/(or my state helps pay for my Medicare premiums)/major disaster (as declared by the Federal Emergency Management Agency (FEMA) | /12202018/12202018/ / / | yes     | no           | true      | NO                | NO      |
 
   @vpMSSavePlan
-  Scenario Outline: Verify user is save plans from VPP to the unauthenticated visitor profile
+  Scenario Outline: Verify user is save plans from VPP to the unauthenticated visitor profile - zipcode - <zipcode>
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site
       | Zip Code        | <zipcode>       |

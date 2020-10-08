@@ -15,12 +15,12 @@ import cucumber.api.CucumberOptions;
  
 @RunWith(ExtendedCucumber.class)
 @ExtendedCucumberOptions(retryCount=0,screenShotSize="", screenShotLocation="/screenshots/",
-jsonReport = "target/cucumber-RunMRATDDRegressionSSOPROD.json",detailedReport = true, detailedAggregatedReport = true,
-overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionSSOPROD")
+jsonReport = "target/cucumber-RunMRATDDRegressionSSOPROD1.json",detailedReport = true, detailedAggregatedReport = true,
+overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionSSOPROD1")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberredesign" }, 
 
 features = { "src/main/resources/feature/memberredesign/sso" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionSSOPROD.json" }, tags = { "@regressionMemberPROD1" })
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionSSOPROD1.json" }, tags = { "@regressionMemberPROD1" })
 public class RunMRATDDRegressionSSOPROD1 {
 
 }
