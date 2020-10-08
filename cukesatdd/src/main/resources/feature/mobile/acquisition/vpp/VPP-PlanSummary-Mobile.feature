@@ -84,7 +84,7 @@ Feature: 2.01.1-Vpp to plan Summary UHC Scenarios
       | TID   | zipcode | isMultutiCounty | county             | plantype | firstName | lastName | emailAddress  |planyear|
       | 15549 |   90210 | NO              | Los Angeles County | MAPD     | test      | test     | test@test.com |current|
 
-  @vppPlanSummaryUHC03 @vppPlanSummaryUHCRun01 @vppPlanSummaryUHCRegression
+  @vppPlanSummaryUHC03 @vppPlanSummaryUHCRun01 
   Scenario Outline: UD: <UID> -zipcode: <zipcode> - Verify user can save and unsave favorite plans on view plan preview page on UHC site
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
@@ -173,7 +173,7 @@ Feature: 2.01.1-Vpp to plan Summary UHC Scenarios
       | UID     | zipcode | isMultiCounty | county           | MA_testPlans                                                                                               | PDP_testPlans                                                    | SNP_testPlans                              |
       | 1598162 |   80001 | NO            | Jefferson County | AARP Medicare Advantage SecureHorizons Essential (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO) | AARP MedicareRx Preferred (PDP),AARP MedicareRx Saver Plus (PDP) | UnitedHealthcare Dual Complete (HMO D-SNP) |
 
-  @vppPlanSummaryUHC05 @vppPlanSummaryUHCRun01 @vppPlanSummaryUHCRegression 
+  @vppPlanSummaryUHC05 @vppPlanSummaryUHCRun01 @vppPlanSummaryUHCRegression
   Scenario Outline: Validate Cancel button for Multi Cunty Pop-up on VPP for Change Location
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
@@ -297,7 +297,7 @@ Feature: 2.01.1-Vpp to plan Summary UHC Scenarios
       | zipcode | isMultutiCounty | county             | plantype | planName                                            |planyear|
       |   90210 | NO              | Los Angeles County | MA       | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) |current|
 
-  @vppPlanSummaryUHC12 @vppPlanSummaryUHCRun02 @vppPlanSummaryUHCRegression
+  @vppPlanSummaryUHC12 @vppPlanSummaryUHCRun02
   Scenario Outline: To Verify the drug cost estimator flow for <plantype> through plan details page's Plan Costs tab
     Given user is on blue layer landing page
     When user performs plan search using following information in the UMS site
@@ -456,8 +456,8 @@ Feature: 2.01.1-Vpp to plan Summary UHC Scenarios
     Examples: 
       | TID       | zipcode | isMultutiCounty | county        | plantype | planName                                 |planyear|
       | US2567133  |   70515 | YES             | Acadia Parish | MAPD     | Peoples Health Choices Gold (HMO-POS)    |current|
-      | US2567133 |   70515 | YES             | Acadia Parish | MAPD     | Peoples Health Choices Value (HMO)       |current|
-      | US2567133 |   70515 | YES             | Acadia Parish | SNP      | Peoples Health Secure Health (HMO D-SNP) |current|
+      #| US2567133 |   70515 | YES             | Acadia Parish | MAPD     | Peoples Health Choices Value (HMO)       |current|
+      #| US2567133 |   70515 | YES             | Acadia Parish | SNP      | Peoples Health Secure Health (HMO D-SNP) |current|
       #| US2567133 |   70718 | YES             | Ascension Parish | MAPD     | Peoples Health Choices 65 "#14 (HMO)"    |
       #| US2567133 |   70420 | YES             | Ascension Parish | MAPD     | Peoples Health Choices 65 "#14 (HMO)"    |
       
