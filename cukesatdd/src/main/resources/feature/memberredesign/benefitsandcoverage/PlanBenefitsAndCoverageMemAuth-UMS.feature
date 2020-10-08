@@ -1126,7 +1126,7 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth
 
     Examples: 
       | TID   |username |password  |MemUserName| planType | memberType     | copayCategory | language | SummaryofBenefits   | EvidenceofCoverage   | ComprehensiveFormularyDrug List     | AlternativeDrugList   | name        | memberid   | effectivedate | monthlypremium | extrahelp            |
-      | 15244 |qavgogine| qavgogine|q3_sep_UAT4_AARP163| PDP| Individual_BnC | LIS 1     | ENGLISH  | Summary of Benefits | Evidence of Coverage | Comprehensive Formulary - Drug List | Alternative Drug List | ECADEA DCAA | 0197331001 | 05/01/2018    | Not Available  | Extra Help Level : 1 |
+      | 15244 |qavgogine| qavgogine|q3_sep_UAT4_AARP216| PDP| Individual_BnC | LIS 1     | ENGLISH  | Summary of Benefits | Evidence of Coverage | Comprehensive Formulary - Drug List | Alternative Drug List | RABI' MALORY | 0182197901 | 01/01/2019    | Not Available  | Extra Help Level : 1 |
     
       #TC22_NON LIS Ind Village_member_ Drug Cost table
   @memAuth_benefitsAndCoverage18 @CMFedNonLisVillage  @BnC_Part8_memAuth @deprecated
