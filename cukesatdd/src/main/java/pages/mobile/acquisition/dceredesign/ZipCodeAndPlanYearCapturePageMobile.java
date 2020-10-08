@@ -100,7 +100,9 @@ public class ZipCodeAndPlanYearCapturePageMobile extends UhcDriver {
 	public WebElement FindPlans;
 
 	public void enterZipCodeandcounty(String zipcode) throws InterruptedException {
-		validateNew(zipCodeTxtbox);
+		//validateNew(zipCodeTxtbox);
+		validate(zipCodeTxtbox, 20);
+		zipCodeTxtbox.click();
 		sendkeys(zipCodeTxtbox, zipcode);
 		Thread.sleep(3000);
 		try {
