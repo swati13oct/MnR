@@ -2034,7 +2034,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			backToTop.click();
 		}
 	
-		public void openPRE() {
+		public boolean openPRE() {
+			boolean offline_prod = false;
 			String browser = MRScenario.browsername;
 			if (!(MRScenario.getProps() == null)) {// If running from local
 				if (MRScenario.environment.equalsIgnoreCase("digital-uatv2-aarp")) {
@@ -2052,22 +2053,23 @@ public class AcquisitionHomePage extends GlobalWebElements {
 					startNewPRE(AARP_ACQISITION_PAGE_URL.replace("stage-aarp", "stage").replace(".com/",
 							".com/plan-recommendation-engine.html"), browser);
 				} else if (MRScenario.environment.equalsIgnoreCase("stage")) {
-					if (driver.getCurrentUrl().contains("aarpmedicareplans"))
-						startNewPRE(AARP_ACQISITION_PAGE_URL.replace(".com/", ".com/plan-recommendation-engine.html"), browser);
-					else if (driver.getCurrentUrl().contains("uhcmedicaresolutions"))
-						startNewPRE(UMS_ACQISITION_PAGE_URL.replace(".com/", ".com/plan-recommendation-engine.html"), browser);
+					startNewPRE(UMS_ACQISITION_PAGE_URL.replace(".com/", ".com/plan-recommendation-engine.html"), browser);
 				} else if (MRScenario.environment.equalsIgnoreCase("offline-prod-aarp")) {
 					startNewPRE(AARP_ACQISITION_OFFLINE_PAGE_URL.replace(".com", ".com/plan-recommendation-engine.html"),
 							browser);
+					offline_prod = true;
 				} else if (MRScenario.environment.equalsIgnoreCase("offline-prod")) {
 					startNewPRE(UMS_ACQISITION_OFFLINE_PAGE_URL.replace(".com", ".com/plan-recommendation-engine.html"),
 							browser);
+					offline_prod = true;
 				} else if (MRScenario.environment.equalsIgnoreCase("prod-aarp")) {
 					startNewPRE(AARP_ACQISITION_PROD_PAGE_URL.replace(".com", ".com/plan-recommendation-engine.html"),
 							browser);
+					offline_prod = true;
 				} else if (MRScenario.environment.equalsIgnoreCase("prod")) {
 					startNewPRE(UMS_ACQISITION_PROD_PAGE_URL.replace(".com", ".com/plan-recommendation-engine.html"),
 							browser);
+					offline_prod = true;
 				}
 			} else { // For jenkins job
 				String jenkinsRunnerFiles = MRScenario.runnerFiles;
@@ -2076,8 +2078,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 						|| MRScenario.environment.equalsIgnoreCase("offline-stage"))
 				{
 					for (String rname : jenkinsRunnerFiles.split(",")) {
-						if (rname.toUpperCase().contains("PLANRECOMMENDATIONENGINE")
-								&& (rname.toUpperCase().contains("ULAYER") || (rname.toUpperCase().contains("AARP")))) {
+						if ((rname.toUpperCase().contains("PLANRECOMMENDATIONENGINE") || rname.contains("PRE"))
+								&& rname.toUpperCase().contains("ULAYER")) {
 							if (MRScenario.environment.equalsIgnoreCase("digital-uatv2"))
 								startNewPRE(AARP_ACQISITION_PAGE_URL.replace(".com", ".com/plan-recommendation-engine.html")
 										.replace("www.", ""), browser);
@@ -2086,10 +2088,10 @@ public class AcquisitionHomePage extends GlobalWebElements {
 										AARP_ACQISITION_PAGE_URL.replace(".com", ".com/plan-recommendation-engine.html"),
 										browser);
 						}
-						if (rname.toUpperCase().contains("PLANRECOMMENDATIONENGINE")
-								&& (rname.toUpperCase().contains("BLAYER") || (rname.toUpperCase().contains("UHC")))) {
+						if ((rname.toUpperCase().contains("PLANRECOMMENDATIONENGINE") || rname.contains("PRE"))
+								&& rname.toUpperCase().contains("BLAYER")) {
 							if (MRScenario.environment.equalsIgnoreCase("digital-uatv2"))
-								startNewPRE(AARP_ACQISITION_PAGE_URL.replace(".com", ".com/plan-recommendation-engine.html")
+								startNewPRE(UMS_ACQISITION_PAGE_URL.replace(".com", ".com/plan-recommendation-engine.html")
 										.replace("www.", ""), browser);
 							else
 								startNewPRE(UMS_ACQISITION_PAGE_URL.replace(".com", ".com/plan-recommendation-engine.html"),
@@ -2100,34 +2102,37 @@ public class AcquisitionHomePage extends GlobalWebElements {
 				}
 				if (MRScenario.environment.equalsIgnoreCase("offline")) {
 					for (String rname : jenkinsRunnerFiles.split(",")) {
-						if (rname.toUpperCase().contains("PLANRECOMMENDATIONENGINE")
+						if ((rname.toUpperCase().contains("PLANRECOMMENDATIONENGINE") || rname.contains("PRE"))
 								&& rname.toUpperCase().contains("ULAYER"))
 							startNewPRE(AARP_ACQISITION_OFFLINE_PAGE_URL.replace(".com",
 									".com/plan-recommendation-engine.html"), browser);
-						if (rname.toUpperCase().contains("PLANRECOMMENDATIONENGINE")
+						if ((rname.toUpperCase().contains("PLANRECOMMENDATIONENGINE") || rname.contains("PRE"))
 								&& rname.toUpperCase().contains("BLAYER"))
 							startNewPRE(
 									UMS_ACQISITION_OFFLINE_PAGE_URL.replace(".com", ".com/plan-recommendation-engine.html"),
 									browser);
 					}
+					offline_prod = true;
 				}
 				if (MRScenario.environment.equalsIgnoreCase("prod")) {
 					for (String rname : jenkinsRunnerFiles.split(",")) {
-						if (rname.toUpperCase().contains("PLANRECOMMENDATIONENGINE")
+						if ((rname.toUpperCase().contains("PLANRECOMMENDATIONENGINE") || rname.contains("PRE"))
 								&& rname.toUpperCase().contains("ULAYER"))
 							startNewPRE(
 									AARP_ACQISITION_PROD_PAGE_URL.replace(".com", ".com/plan-recommendation-engine.html"),
 									browser);
-						if (rname.toUpperCase().contains("PLANRECOMMENDATIONENGINE")
+						if ((rname.toUpperCase().contains("PLANRECOMMENDATIONENGINE") || rname.contains("PRE"))
 								&& rname.toUpperCase().contains("BLAYER"))
 							startNewPRE(
 									UMS_ACQISITION_PROD_PAGE_URL.replace(".com", ".com/plan-recommendation-engine.html"),
 									browser);
 					}
+					offline_prod = true;
 				}
 			}
 
 			System.out.println("Current page URL: " + driver.getCurrentUrl());
+			return offline_prod;
 		}
 		
 		
