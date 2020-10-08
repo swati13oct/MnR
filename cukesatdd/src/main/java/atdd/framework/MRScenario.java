@@ -736,6 +736,7 @@ try {
 
 		
 		  
+		
 		  isSauceLabSelected = true; DesiredCapabilities capabilities =
 		  DesiredCapabilities.chrome();
 		  
@@ -760,6 +761,7 @@ try {
 		  (MalformedURLException e) { // TODO Auto-generated catch block
 		  e.printStackTrace(); } return webDriver;
 		 
+		
 		/*
 		 * File pathToBinary = new
 		 * File("C:/Program Files (x86)/Google/Chrome/Application/chrome.exe");
@@ -774,6 +776,7 @@ try {
 		 * new ChromeDriver(options); webDriver.manage().window().maximize(); return
 		 * webDriver;
 		 */
+		 
 	}
 
 	public WebDriver getIEDriver() {
