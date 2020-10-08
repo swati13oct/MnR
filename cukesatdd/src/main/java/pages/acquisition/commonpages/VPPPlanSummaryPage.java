@@ -3133,6 +3133,7 @@ for (int i = 0; i < initialCount + 1; i++) {
 					System.out.println("*****CLICKING ON Current Year button*****: "+CurrentYearPlansBtn.getText());
 					jsClickNew(CurrentYearPlansBtn);
 					CommonUtility.checkPageIsReadyNew(driver);
+					waitForPageLoadSafari();
 				}
 			}
 	}

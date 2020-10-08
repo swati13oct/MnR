@@ -1185,19 +1185,45 @@ try {
     	int counter = 5;
     	boolean ready = false;
     	if(checkIfPageReadySafari()) {
-    		do {
+    		/*do {
     			try {
+    				threadsleep(2);
     				WebElement overlay = driver.findElement(By.xpath("//body/div[@id='overlay']"));
     				if(!overlay.isDisplayed()) {
     					ready = true;
     					break;
     				}
-    			} catch(WebDriverException e) {/**decrement counter and retry*/}
+    			} catch(WebDriverException e) {*//**decrement counter and retry*//*}
 
     			System.out.println("Waiting for page to load");
     			counter--;
 
-    		} while(counter > 0);
+    		} while(counter > 0);*/
+    		
+    		
+			do {
+				try {
+					threadsleep(2);
+					List<WebElement> overlays = driver.findElements(By.xpath("//div[@id='overlay' or  @id='loading_fader']"));
+					int overlayInvisible = 0;
+					if(overlays.size() > 0) {
+						for(WebElement overlay: overlays) {
+							String display = overlay.getCssValue("display");
+//							System.out.println("Overlay Display " +display);
+							if(display.equalsIgnoreCase("none")) {
+								overlayInvisible++;
+							}
+						}
+					}
+					if(overlays.size() == overlayInvisible) {
+						ready = true;
+						break;
+					}
+					
+				} catch (WebDriverException e) {/**decrement counter and retry*/}
+				System.out.println("Waiting for page to load");
+				counter--;
+			} while(counter > 0);
 
     	}
     	return ready;
@@ -1207,19 +1233,29 @@ try {
     public boolean checkIfPageReadySafari() {
     	int counter = 10;
     	boolean ready = false;
+    	WebDriverWait wait = new WebDriverWait(driver, defaultTimeoutInSec);
     	if(MRScenario.browsername.equalsIgnoreCase("Safari")) {
     		CommonUtility.checkPageIsReadyNew(driver);
     		do {
     			try {
-    				threadsleep(5);
+    				threadsleep(3);
+    				JavascriptExecutor js = (JavascriptExecutor) driver;
+    				if ((boolean) js.executeScript("return window.jQuery != undefined")) {
+    					Function<WebDriver, Boolean> pageLoadedWithAjax = new Function<WebDriver, Boolean>() {
+    						public Boolean apply(WebDriver driver) {
+    							return (Boolean) js
+    									.executeScript("return (document.readyState == 'complete' && jQuery.active == 0)");
+    						}
+    					};
+    					wait.until(pageLoadedWithAjax);
+    				}
     				if(!driver.getPageSource().isEmpty()) {
     					ready = true;
     					break;
     				}
     			} catch(WebDriverException e) {/**decrement counter and retry*/}
     			counter--;
-    		}
-    		while(counter > 0);
+    		} while(counter > 0);
     	}
     	return ready;
     }

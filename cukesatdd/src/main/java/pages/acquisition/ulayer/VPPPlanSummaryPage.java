@@ -906,8 +906,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			validateNew(planListContainer, 30);
 		} else if (planType.equalsIgnoreCase("MS")) {
 			validateNew(msPlansViewLink, 30);
-			sleepBySec(2);
 			msPlansViewLink.click();
+			sleepBySec(2);
 			validateNew(medSuppZipCode, 30);
 			/*msPlansViewLink.click();
 			CommonUtility.waitForPageLoadNew(driver, medSuppPlanList.get(0), 30);*/
@@ -3386,8 +3386,9 @@ for (int i = 0; i < initialCount + 1; i++) {
 		jsClickNew(cancelButton);
 		CommonUtility.waitForPageLoad(driver, cancelButtonPopUp, 30);
 		validate(cancelButtonPopUp, 15);
-		cancelButtonPopUp.click();
+		jsClickNew(cancelButtonPopUp);
 		System.out.println("Cancel application has been clicked on the pop up");
+		waitForPageLoadSafari();
 		return ResumeKey;
 	}
 
@@ -3397,9 +3398,9 @@ for (int i = 0; i < initialCount + 1; i++) {
 		//MedSupFormValidation(DateOfBirth);
 		//waitTillElementClickableInTime(Start_ApplicationBtn, 60);
 		//jsClickNew(Start_ApplicationBtn);
-		checkIfPageReadySafari();
-		CommonUtility.waitForPageLoadNew(driver, resumeApplication, 30);
+		validateNew(resumeApplication, 30);
 		resumeApplication.click();
+		checkIfPageReadySafari();
 		System.out.println("Resume application link clicked successfully");
 	}
 	public void EnterDataForResumeApp(String ApplicationID,String DOB,String zipcode) throws InterruptedException{
@@ -4308,11 +4309,12 @@ for (int i = 0; i < initialCount + 1; i++) {
 
 	public void signInOptumId(String username, String password) {
 		try {
-			checkIfPageReadySafari();
 			signIn.click();
+			waitForPageLoadSafari();
 			driver.findElement(By.cssSelector("input#userNameId_input")).sendKeys(username);
 			driver.findElement(By.cssSelector("input#passwdId_input")).sendKeys(password);
 			driver.findElement(By.cssSelector("input#SignIn")).click();
+			waitForPageLoadSafari();
 			String Question = driver.findElement(By.cssSelector("label#challengeQuestionLabelId")).getText().trim();
 			WebElement securityAnswer = driver.findElement(By.cssSelector("div#challengeSecurityAnswerId >input"));
 			if (Question.equalsIgnoreCase("What is your best friend's name?")) {
@@ -4340,6 +4342,7 @@ for (int i = 0; i < initialCount + 1; i++) {
 		validate(Submit, 15);
 		Submit.click();
 		CommonUtility.checkPageIsReadyNew(driver);
+		waitForPageLoadSafari();
 		String CurrentSupplementURL = driver.getCurrentUrl();
 		System.out.println("Submit application button has been clicked successfully after entering the data on resume application page : "+CurrentSupplementURL);
 		System.out.println("Expected Supplement URL: "+ExpectedsupplementURL);

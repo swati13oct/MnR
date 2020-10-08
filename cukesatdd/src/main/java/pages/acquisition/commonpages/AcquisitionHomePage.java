@@ -1598,6 +1598,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		    }
 			WebElement PDPplansLink = driver.findElement(By.xpath("//*[contains(@class, 'nav-col nav-col-1')]//a[contains(@href,'prescription-drug-plans.html')]"));
 			jsClickNew(PDPplansLink);
+			waitForPageLoadSafari();
 		}
 		
 		public GetStartedPage clickDCERedesignLinkonShopPDPpage() {
