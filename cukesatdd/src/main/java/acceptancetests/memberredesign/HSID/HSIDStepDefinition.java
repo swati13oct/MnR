@@ -936,6 +936,24 @@ public class HSIDStepDefinition {
 		PaymentsDeeplinkLoginPage paymentsDeeplinkLoginPage = new PaymentsDeeplinkLoginPage(wd);
 		paymentsDeeplinkLoginPage.navigateToLoginURL();
 		getLoginScenario().saveBean(PageConstants.STAGE_PAYMENT_DEEPLINK_lOGIN_PAGE,paymentsDeeplinkLoginPage );	
+	}	
+	
+	@Given("^user login with payment Overview link$")
+	public void user_login_with_payment_Overview_link() throws InterruptedException{
+		WebDriver wd = getLoginScenario().getWebDriver();
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+		PaymentsDeeplinkLoginPage paymentsDeeplinkLoginPage = new PaymentsDeeplinkLoginPage(wd);
+		paymentsDeeplinkLoginPage.navigateToLoginOverviewURL();
+		getLoginScenario().saveBean(PageConstants.STAGE_PAYMENT_DEEPLINK_lOGIN_PAGE,paymentsDeeplinkLoginPage );	
+	}
+	
+	@Given("^Member login with payment Overview-new link$")
+	public void Member_login_with_payment_Overview_New_link() throws InterruptedException{
+		WebDriver wd = getLoginScenario().getWebDriver();
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+		PaymentsDeeplinkLoginPage paymentsDeeplinkLoginPage = new PaymentsDeeplinkLoginPage(wd);
+		paymentsDeeplinkLoginPage.navigateToLoginOverviewNewURL();
+		getLoginScenario().saveBean(PageConstants.STAGE_PAYMENT_DEEPLINK_lOGIN_PAGE,paymentsDeeplinkLoginPage );	
 	}
 	/** 
 	 * @todo :member lands on claims deep link
