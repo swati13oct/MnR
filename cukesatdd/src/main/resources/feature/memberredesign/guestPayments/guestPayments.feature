@@ -102,9 +102,9 @@ Feature: 1.06.7 Member Guest Payments Page
     Examples:
       | TID   | memberType       | memberID    | dob        | hasPD  | hasCC  |siteName   |
       | 10000 | memberWithPD     | 920736343-1  | 12/06/1953 | true   | false   | AARP      |
-   #  | 10000 | memberWithoutPD  | 915516555-1 | 10/29/1947 | false  | true   | UHC       |
-      | 10000 | memberWithNoDues | 904498840-1 | 06/19/1933 | false  | false  | RETIREE   |
-      | 10000 | memberWithBOTHDues | 978196889-1 | 10/19/1941 | true | true  | RETIREE   |
+      | 10000 | memberWithoutPD  | 926312971-1  | 10/19/1948 | false  | true   | UHC       |
+      | 10000 | memberWithNoDues | 920736343-1  |12/06/1953 | false  | false  | RETIREE   |
+      | 10000 | memberWithBOTHDues | 002613505-1  | 04/23/1941 | true | true  | RETIREE   |
 
   @guestPayment06 @ErrorsAndContentOneTimePayment @otherAmountErrorAndContent
   Scenario Outline: TID: <TID> - To validate the One time payment page with different error scenarios

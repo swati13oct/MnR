@@ -214,7 +214,8 @@ public class guestPaymentsLogin extends guestPaymentsLoginWebElements{
 	public void verifyDetailsOnErrorPage() {
 		
 		Assert.assertTrue("PROBLEM - unable to locate error message on the Page",guestPaymentsValidate(errorMessageOnErrorPage));
-		Assert.assertTrue("PROBLEM - unable to locate error message on the Page",errorMessageOnErrorPage.getText().contains("plan information"));
+
+		Assert.assertTrue("PROBLEM - unable to locate error text on the Page",errorMessageOnErrorPage.getText().contains("not available"));
 
 		
 		
