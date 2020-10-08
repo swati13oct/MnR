@@ -3670,6 +3670,7 @@ for (int i = 0; i < initialCount + 1; i++) {
 
 	public void handlePlanYearSelectionPopup() {
 		CommonUtility.checkPageIsReady(driver);
+		waitForPageLoadSafari();
 		
 		if (validate(planYearPopup, 20)) {							//if plan year popup is displayed
 			System.out.println("Popup is present for AEP : ");	

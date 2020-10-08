@@ -804,6 +804,7 @@ public class PlanDetailsPage extends UhcDriver {
 		validateNew(lookUpYourProviderButton);
 		CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
 		switchToNewTabNew(lookUpYourProviderButton);
+		waitForPageLoadSafari();
 		if (driver.getCurrentUrl().contains("werally")) {
 			return new ProviderSearchPage(driver);
 		}

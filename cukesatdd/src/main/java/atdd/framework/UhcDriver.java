@@ -1238,7 +1238,7 @@ try {
     		CommonUtility.checkPageIsReadyNew(driver);
     		do {
     			try {
-    				threadsleep(3);
+    				threadsleep(5);
     				JavascriptExecutor js = (JavascriptExecutor) driver;
     				if ((boolean) js.executeScript("return window.jQuery != undefined")) {
     					Function<WebDriver, Boolean> pageLoadedWithAjax = new Function<WebDriver, Boolean>() {

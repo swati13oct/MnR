@@ -1334,6 +1334,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	public VPPPlanSummaryPage searchPlansWithOutCounty(String zipcode) {
 
+		waitForPageLoadSafari();
 		validateNew(zipCodeField,30);
 		sendkeys(zipCodeField, zipcode);
 
