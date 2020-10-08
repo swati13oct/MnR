@@ -14,7 +14,7 @@ jsonReport = "target/cucumber-RunMRATDDRegressionDCE_P2.json",detailedReport = t
 overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionDCE_P2")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberredesign" }, 
 features = { "src/main/resources/feature/memberredesign/drugcostestimator" },monochrome= true, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionDCE_P2.json" }, tags = { "@abc" })
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionDCE_P2.json" }, tags = { "@dce_p2" })
 public class RunMRATDDRegressionDCE_P2 {
 
 }
