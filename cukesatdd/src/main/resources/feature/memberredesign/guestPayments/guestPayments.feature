@@ -66,7 +66,7 @@ Feature: 1.06.7 Member Guest Payments Page
       | TID   | planType              | memberID      | dob           | siteName    |
      #| 10007 | SHIP                  | 361857096-11  | 05/01/1954    |   AARP      |
       | 10008 | TERMINATEDWithNODUE   | 958542476-1   | 03/28/1941    |   UHC       |
-      | 10009 | GroupWithSubsidy      | 925610646-1   | 04/27/1946    |   RETIREE   |
+      | 10009 | GroupWithSubsidy      | 913187412-1   | 01/05/1953  |   RETIREE   |
       | 10011 | PreffectiveWithNoDue  | 020713181-1   | 09/06/1946    |   RETIREE   |
 
 
@@ -103,7 +103,7 @@ Feature: 1.06.7 Member Guest Payments Page
       | TID   | memberType       | memberID    | dob        | hasPD  | hasCC  |siteName   |
       | 10000 | memberWithPD     | 920736343-1  | 12/06/1953 | true   | false   | AARP      |
       | 10000 | memberWithoutPD  | 926312971-1  | 10/19/1948 | false  | true   | UHC       |
-      | 10000 | memberWithNoDues | 920736343-1  |12/06/1953 | false  | false  | RETIREE   |
+      | 10000 | memberWithNoDues | 980958988-1  |04/08/1933 | false  | false  | RETIREE   |
       | 10000 | memberWithBOTHDues | 002613505-1  | 04/23/1941 | true | true  | RETIREE   |
 
   @guestPayment06 @ErrorsAndContentOneTimePayment @otherAmountErrorAndContent

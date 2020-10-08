@@ -84,7 +84,7 @@ public class guestPaymentsLoginWebElements extends UhcDriver{
 	@FindBy(className= "uhc-tempo-header__h1")
 	public static WebElement errorMessageOnErrorPage;
 	
-	@FindBy(xpath= "//a[contains(text(),'Sign In')]") 
+	@FindBy(xpath= "//a[contains(text(),'sign In')]") 
 	public static WebElement signInLinkOnErrorPage;
 	
 	@FindBy(xpath= "//h1[contains(text(),'Make a One - time Payment')]")
