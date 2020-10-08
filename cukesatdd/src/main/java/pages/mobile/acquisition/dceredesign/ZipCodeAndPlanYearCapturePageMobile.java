@@ -31,7 +31,7 @@ public class ZipCodeAndPlanYearCapturePageMobile extends UhcDriver {
 	@FindBy(xpath = "//*[@id='plan-year']")
 	public WebElement planYearDropdown;
 
-	@FindBy(xpath = "//button[contains(@class,'continue-btn')]")
+	@FindBy(xpath = "//button[@dtmid='cta_dce']")
 	public WebElement continueBtn;
 
 	@FindBy(xpath = "//h2[contains(text(),'Your estimated')]")
@@ -108,17 +108,20 @@ public class ZipCodeAndPlanYearCapturePageMobile extends UhcDriver {
 				countyDropdown.click();
 				CommonUtility.waitForPageLoad(driver,countyRows , 30);
 				driver.findElements(By.xpath("//select[@id='county']/option")).get(1).click();
+				driver.findElement(By.xpath("//label[contains(text(),'Select Plan Year')]")).click();
 			}
 		} catch (Exception e) {
 			System.out.println("county box not found");
 		}
 		validateNew(continueBtn);
+		jsClickNew(continueBtn);
 		//continueBtn.click();
 	}
 
 	public DrugSummaryPageMobile clickContinueBtn() {
 		validateNew(continueBtn);
-		continueBtn.click();
+		jsClickNew(continueBtn);
+		//continueBtn.click();
 		CommonUtility.waitForPageLoad(driver, reviewDrugCostPageHeading, 30);
 
 		if (validateNew(reviewDrugCostPageHeading)) {

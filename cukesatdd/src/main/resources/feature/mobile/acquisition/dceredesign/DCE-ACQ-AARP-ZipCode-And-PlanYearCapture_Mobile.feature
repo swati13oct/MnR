@@ -13,7 +13,7 @@ Feature: 1.10.1 DCE-REDESIGN UHC - To test ZipCode and Plan Year capture page in
     | DrugName | <drugName> |
     And clicks on Review drug cost button on UHC
     Then user should be navigated to zipcode and plan year capture page for AEP on UHC
-    And plan year dropdown should be displayed during AEP on UHC
+    #And plan year dropdown should be displayed during AEP on UHC
 
     Examples: 
       | path                     | pageName                   |drugName|
