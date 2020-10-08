@@ -13,12 +13,12 @@ Feature: To test member Signin from new and old payment's Deeplinks
     Examples: 
     | UserType         | username | password   |
     | Federal          | premiumpayment007 | Password@1 |
-   # | Federal +Fedral  | preeffective_pdp_ssup_03 | Password@1 |
-   # | SHIP             | PaymentShipOct010 | Password@1 |
-   # | Combo            | augustcombo001 | Password@1 |
+    | Federal +Fedral  | preeffective_pdp_ssup_03 | Password@1 |
+    | SHIP             | PaymentShipOct010 | Password@1 |
+    | Combo            | augustcombo001 | Password@1 |
 
       
-   @regressionMember12 @paymentDeeplink @CodeTransformers
+   @regressionMember @paymentDeeplink @CodeTransformers
   Scenario Outline: Verify <UserType> Member lands on the payment page after signing in from payments overview-new.html deeplink.
     Given Member login with payment Overview-new link
     And the payments deeplink page is displayed with all the fields
