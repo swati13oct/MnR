@@ -1375,13 +1375,13 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 	public VPPPlanSummaryPageMobile searchPlansWithOutCounty(String zipcode) throws InterruptedException {
 
-		CommonUtility.waitForPageLoadNew(driver, zipCodeField, 30);
+		CommonUtility.waitForPageLoadNew(driver, zipCodeField, 40);
 		sendkeys(zipCodeField, zipcode);
 		viewPlansButton.click();
 
 		//CommonUtility.checkPageIsReadyNew(driver);
 
-		CommonUtility.waitForPageLoadNew(driver, zipcodeChangeLink, 30);
+		CommonUtility.waitForPageLoadNew(driver, zipcodeChangeLink, 40);
 		if (driver.getCurrentUrl().contains("health-plans")) {
 			return new VPPPlanSummaryPageMobile(driver);
 		} else

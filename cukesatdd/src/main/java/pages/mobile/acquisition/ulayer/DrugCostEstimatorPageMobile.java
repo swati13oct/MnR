@@ -466,7 +466,10 @@ public class DrugCostEstimatorPageMobile extends UhcDriver {
 	@FindBy(xpath = "//button[contains(@class,'costs-tab-show') and contains(text(),'rofile')]")
 	private WebElement btnReturnToProfile;
 
-	@FindBy(xpath = "//p[@id='saved-label']")
+//	@FindBy(xpath = "//img[@alt='Shopping Cart' and @dtmid='acq_visitor_profile']")
+//	private WebElement shoppingCartIcon;
+	
+	@FindBy(id = "dupIconFlyOut")
 	private WebElement shoppingCartIcon;
 
 	public WebElement getImgLoadingIndicator() {
@@ -2028,7 +2031,9 @@ public class DrugCostEstimatorPageMobile extends UhcDriver {
 	}
 
 	public VisitorProfilePageMobile clickOnShoppingCart() {
-		shoppingCartIcon.click();
+		validate(shoppingCartIcon, 20);
+		jsClickNew(shoppingCartIcon);
+		//shoppingCartIcon.click();
 		if (driver.getCurrentUrl().contains("profile")) {
 			return new VisitorProfilePageMobile(driver);
 		} else {
