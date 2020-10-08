@@ -143,8 +143,6 @@ public class HSIDLoginPage extends UhcDriver {
 
 	MRScenario loginScenario;
 
-	//tbd boolean doOldSignin;
-	
 	public MRScenario getLoginScenario() {
 		MRScenario loginScenario = null;
 		return loginScenario;
@@ -222,11 +220,6 @@ public class HSIDLoginPage extends UhcDriver {
 		 * 
 		 * else CommonUtility.waitForPageLoadNew(driver, mnrSignInButton, 60);
 		 */
-		//tbd //note: take out this when new sign-in is stable
-		//tbd if (validate(mnrSignInButton,0))
-		//tbd 	doOldSignin=false;
-		//tbd else
-		//tbd 	doOldSignin=true;
 	}
 
 
@@ -240,11 +233,6 @@ public class HSIDLoginPage extends UhcDriver {
 		 * CommonUtility.waitForPageLoadNew(driver, signInButton, 60); // else
 		 * CommonUtility.waitForPageLoadNew(driver, signInButton, 60);
 		 */
-		//tbd if (validate(mnrSignInButton,0))
-		//tbd 	doOldSignin=false;
-		//tbd else
-		//tbd 	doOldSignin=true;
-
 	}
 
 	public void validateHsidPageElements() {
@@ -303,25 +291,18 @@ public class HSIDLoginPage extends UhcDriver {
 	 * @toDo : To login through hsid via entering security questions
 	 */
 	public Object doLoginWith(String username, String password) {
-		//tbd if (doOldSignin) { //note: take out this doOldSignin section when new sign-in is stable
-		//tbd 	System.out.println(driver.getCurrentUrl());
-		//tbd 	CommonUtility.waitForPageLoad(driver, oldUsername, 20);
-		//tbd 	sendkeys(oldUsername, username);
-		//tbd 	sendkeys(oldPassword, password);
-		//tbd 	oldSignInBtn.click();
-		//tbd } else {
-			System.out.println(driver.getCurrentUrl());
-			CommonUtility.waitForPageLoad(driver, mnrSignInButton, 20);
-			mnrSignInButton.click();
-			validateHsidPageElements();
-			sendkeys(userNameField, username);
-			sendkeys(passwordField, password);
-			hsidSignInButton.click();
-		//tbd }
-
+		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
+		System.out.println(driver.getCurrentUrl());
+		CommonUtility.waitForPageLoad(driver, mnrSignInButton, 20);
+		mnrSignInButton.click();
+		validateHsidPageElements();
+		sendkeys(userNameField, username);
+		sendkeys(passwordField, password);
+		hsidSignInButton.click();
+		CommonUtility.waitForPageLoad(driver, authQuestionlabel, 5);
 		//wait for some form of header to show
 		if (!validate(authQuestionlabel)) {
-			System.out.println("waited 35 sec and still not seeing the authQuestionLabel showing...");
+			System.out.println("waited 5 sec and still not seeing the authQuestionLabel showing...");
 			//note: workaround - get URL again to check and see if it goes to the no-email.html page or banner page instead
 			emailAddressRequiredWorkaround(username);
 		}
@@ -355,15 +336,28 @@ public class HSIDLoginPage extends UhcDriver {
 			}
 			//note: workaround - get URL again to check and see if it goes to the no-email.html page instead
 			undeliverEmailAddressRequiredWorkaround(username);
-			CommonUtility.checkPageIsReadyNew(driver);
+			//CommonUtility.checkPageIsReadyNew(driver);
 			emailAddressRequiredWorkaround(username);
-			CommonUtility.checkPageIsReadyNew(driver);
+			//CommonUtility.checkPageIsReadyNew(driver);
 			goGreenSplashPageWorkaround();
-			CommonUtility.checkPageIsReadyNew(driver);
+			//CommonUtility.checkPageIsReadyNew(driver);
 			anocSplashPageWorkaround();
-			CommonUtility.checkPageIsReadyNew(driver);
+			//CommonUtility.checkPageIsReadyNew(driver);
 			paymentSplashPageWorkaround();
-			CommonUtility.checkPageIsReadyNew(driver);
+			//CommonUtility.checkPageIsReadyNew(driver);
+		} else if (currentUrl().contains("login/undeliverable-email.html") 
+				|| currentUrl().contains("login/no-email.html")
+				|| currentUrl().contains("login/multiple-emails.html")
+				|| currentUrl().contains("gogreen-splash.html")
+				|| currentUrl().contains("member-registration-gogreen-splash.html")
+				|| currentUrl().contains("login/anoc.html")
+				|| currentUrl().contains("login/payment-two-offerings.html")
+				) {
+			undeliverEmailAddressRequiredWorkaround(username);
+			emailAddressRequiredWorkaround(username);
+			goGreenSplashPageWorkaround();
+			anocSplashPageWorkaround();
+			paymentSplashPageWorkaround();
 		} else if (currentUrl().contains("/dashboard")) {
 			System.out.println(driver.getCurrentUrl());
 			return new AccountHomePage(driver);
@@ -748,7 +742,7 @@ public class HSIDLoginPage extends UhcDriver {
 	}
 
 	public void goGreenSplashPageWorkaround() {
-		if (driver.getCurrentUrl().contains("gogreen-splash.html")) {
+		if (driver.getCurrentUrl().contains("gogreen-splash.html") || driver.getCurrentUrl().contains("member-registration-gogreen-splash.html")) {
 			if (MRScenario.environment.contains("team-a") || MRScenario.environment.contains("stage") || MRScenario.environment.contains("team-h")) {
 				CommonUtility.waitForPageLoad(driver, goGreenGoToHomepageBtn, 5);
 				System.out.println("User encounted gogreen-splash page, handle it...");
@@ -871,7 +865,7 @@ public class HSIDLoginPage extends UhcDriver {
 	}  
 	
 	public void emailAddressRequiredWorkaround(String username) {
-		if (driver.getCurrentUrl().contains("login/no-email.html") || driver.getCurrentUrl().contains("login/multiple-emails.html") || driver.getCurrentUrl().contains("login/undeliverable-email.html")) {
+		if (driver.getCurrentUrl().contains("login/no-email.html") || driver.getCurrentUrl().contains("login/multiple-emails.html")) {
 			if (MRScenario.environment.contains("team-a") || MRScenario.environment.contains("stage") || MRScenario.environment.contains("team-h")) {
 				CommonUtility.waitForPageLoad(driver, emailGoToHomepageBtn, 5);
 				System.out.println("User encounted no-email or multiple-emails email splash page, handle it");

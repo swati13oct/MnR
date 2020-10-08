@@ -39,9 +39,9 @@ Feature: 1.06.4.2 Member Plans and Documents - section: Annual Notice of Changes
 	@prod_preeffective_ma_mapd
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | an_sd | an_en_cy | an_es_cy | an_zh_cy | an_en_ny | an_es_ny | an_zh_ny |
-      | 01-058 | xxxxx       | kkumard   | mnrs786@  | Ranch1955       | MA       | AARP_IND_PREEFF_PDnR  | false | false    | false    | false    | false    | false    | false    |
+#     | 01-058 | xxxxx       | kkumard   | mnrs786@  | Ranch1955       | MA       | AARP_IND_PREEFF_PDnR  | false | false    | false    | false    | false    | false    | false    |
 #     | 02-059 | xxxxx       | kkumard   | mnrs786@  | testusername    | MA       | GROUP_PREEFF_PDnR     | false | false    | false    | false    | false    | false    | false    |
-#     | 03-060 | xxxxx       | kkumard   | mnrs786@  | testusername    | MAPD     | AARP_IND_PREEFF_PDnR  | false | false    | false    | false    | false    | false    | false    |
+      | 03-060 | xxxxx       | kkumard   | mnrs786@  | Abayne01        | MAPD     | AARP_IND_PREEFF_PDnR  | false | false    | false    | false    | false    | false    | false    |
 
 #	@prod_preeffective_pdp
 #	Examples: 
@@ -66,7 +66,7 @@ Feature: 1.06.4.2 Member Plans and Documents - section: Annual Notice of Changes
 	@prod_active_ma @prod_active_ma_grp
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | an_sd | an_en_cy | an_es_cy | an_zh_cy | an_en_ny | an_es_ny | an_zh_ny |
-      | 10-067 | 15130       | kkumard   | mnrs786@  | 1GIRL4DEAN      | MA       | GROUP_EFF_PDnR        | true  | true     | false    | false    | false    | false    | false    |
+      | 10-067 | 15130       | kkumard   | mnrs786@  | 1GIRL4DEAN      | MA       | GROUP_EFF_PDnR        | true  | true     | false    | false    | true     | false    | false    |
 #     | 10-067 | 15130       | kkumard   | mnrs786@  | SPENCEPR1       | MA       | NICE_GROUP_EFF_PDnR   | true  | true     | false    | false    | false    | false    | false    |
 
 	@prod_active_mapd @prod_active_mapd_ind
@@ -77,7 +77,7 @@ Feature: 1.06.4.2 Member Plans and Documents - section: Annual Notice of Changes
 	@prod_active_mapd @prod_active_mapd_grp
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | an_sd | an_en_cy | an_es_cy | an_zh_cy | an_en_ny | an_es_ny | an_zh_ny |
-      | 12-069 | 15303       | kkumard   | mnrs786@  | SHERMANJAFFE65  | MAPD     | NICE_GROUP_EFF_PDnR   | true  | true     | false    | false    | false    | false    | false    |
+      | 12-069 | 15303       | kkumard   | mnrs786@  | SHERMANJAFFE65  | MAPD     | NICE_GROUP_EFF_PDnR   | true  | true     | false    | false    | true     | false    | false    |
 #     ### note: PEEHIP group terminated as of 12/31/2019
 #     #| 13-070 | 15130       | kkumard  | mnrs786@  | testusername    | MAPD     | PEEHIP_GROUP_EFF_PDnR | true  | false    | false    | false    | false    | false    | false    |
 
@@ -112,4 +112,7 @@ Feature: 1.06.4.2 Member Plans and Documents - section: Annual Notice of Changes
       | 19-076 | 15119,15304 | kkumard   | mnrs786@  | Pramila1946     | SHIP     | IND_EFF_PDnR          | false | false    | false    | false    | false    | false    | false    |
 #     | 20-118 | 15119,15304 | kkumard   | mnrs786@  | q1_feb_2020SHIP_001 | SHIP | MULTI_IND_EFF_PDnR    | false | false    | false    | false    | false    | false    | false    |
 
-
+	@prod_preeffective_ship
+	Examples: 
+      | index  | TID         | username  | password  | MemUserName  | planType | memberType            | an_sd | an_en_cy | an_es_cy | an_zh_cy | an_en_ny | an_es_ny | an_zh_ny |
+#     | 21-121 | xxxxx       | kkumard   | mnrs786@  | testusername | SHIP     | IND_PREEFF_PDnR       | false | false    | false    | false    | false    | false    | false    |

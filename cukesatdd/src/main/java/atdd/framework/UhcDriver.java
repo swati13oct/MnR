@@ -57,7 +57,7 @@ public abstract class UhcDriver {
 	public WebDriver driver;
 	private long defaultTimeoutInSec=15;
 	
-	@FindBy(xpath = ".//*[contains(@id,'singleLargeLayoutContainer')]")
+	@FindBy(xpath = ".//iframe[contains(@id,'IPerceptionsEmbed')]")
 	public static WebElement IPerceptionsPopup;
 	
 	@FindBy(xpath = ".//iframe[contains(@id,'IPerceptionsEmbed')]")
@@ -68,6 +68,7 @@ public abstract class UhcDriver {
 	
 	@FindBy(xpath="//*[contains(@class,'btn-no')]")
 	public static WebElement IPerceptionNoBtn;
+
 	
 	public void start(String url) {
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
