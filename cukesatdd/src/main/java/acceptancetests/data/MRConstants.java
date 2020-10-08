@@ -346,6 +346,8 @@ public class MRConstants {
 
   public static String AARP_TELESALES_AGENT_PAGE_URL_Team = "https://www."+MRScenario.environment+"-aarpmedicareplans.ocp-elr-core-nonprod.optum.com/admin/shopper-profile.html/login";
   
+  public static final String Team_H_NEW_URL_TESTHARNESS = "https://www.team-h-medicare.ocp-ctc-dmz-nonprod.optum.com/content/login/overview.html?testharness=true";
+  
   public static String getDomain() {
 		return (MRScenario.domain == null || MRScenario.domain.equals("")) ? "uhc.com" : MRScenario.domain;
 	}
