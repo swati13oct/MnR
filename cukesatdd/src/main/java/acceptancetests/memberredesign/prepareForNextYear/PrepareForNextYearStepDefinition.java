@@ -556,6 +556,7 @@ public class PrepareForNextYearStepDefinition {
 			return;
 		}
 		
+		//note: if the run is for sanity, will skip clicking on links
 		boolean sanityRun=false;
 		for (String s: MRScenario.getTagList()) {
 			if (s.contains("sanity")) {

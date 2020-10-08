@@ -489,6 +489,10 @@ public class PrepareForNextYearBase  extends PrepareForNextYearWebElements {
 		if (!actUrl.contains(expUrl)) {
 			note.add("\t * FAILED - not getting expected destination URL.  Expect to contain '"+expUrl+"' | Actual URL='"+actUrl+"'");
 			note.add("\t * FAILED - validating PDF content");
+			
+			driver.close();
+			driver.switchTo().window(winHandleBefore);
+			
 			return note;
 		}
 		Assert.assertTrue("PROBLEM - not getting expected destination URL.  Expect to contain '"+expUrl+"' | Actual URL='"+actUrl+"'", actUrl.contains(expUrl));
@@ -496,11 +500,8 @@ public class PrepareForNextYearBase  extends PrepareForNextYearWebElements {
 		for (String s: MRScenario.getTagList()) {
 			if (s.contains("sanity")) {
 				note.add("\tSKIPPED - Validation for pdf content='"+targetDocName+"' for Sanity run");
-
 				driver.close();
 				driver.switchTo().window(winHandleBefore);
-
-
 				return note;
 			}
 		}
@@ -542,7 +543,6 @@ public class PrepareForNextYearBase  extends PrepareForNextYearWebElements {
 
 		driver.close();
 		driver.switchTo().window(winHandleBefore);
-
 		note.add("\tPASSED - validating PDF content");
 		return note;
 
