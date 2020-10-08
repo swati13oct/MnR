@@ -1813,7 +1813,15 @@ public class TestHarness extends UhcDriver {
 			if (validate(logOut,0)) {
 				logOut.click();
 				CommonUtility.checkPageIsReadyNew(driver);
-				Assert.assertTrue(driver.getTitle().contains("UnitedHealthcare Medicare Member Sign In"));
+				System.out.println("Title after logout-" + driver.getTitle());
+				if(MRScenario.environment.contains("team-h")) {
+					if (validate(accountProfile,0)) {
+						Assert.fail("Logout failed. Account Profile option still visible.");
+					}
+					System.out.println("Logged out from Team-H");
+				} else {
+					Assert.assertTrue(driver.getTitle().contains("UnitedHealthcare Medicare Member Sign In"));
+				}
 			} else {
 				Assert.fail("Logout option not displayed");
 			}
