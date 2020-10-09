@@ -57,7 +57,7 @@ public abstract class UhcDriver {
 	public WebDriver driver;
 	private long defaultTimeoutInSec=15;
 	
-	@FindBy(xpath = ".//iframe[contains(@id,'IPerceptionsEmbed')]")
+	@FindBy(xpath = ".//*[contains(@id,'singleLargeLayoutContainer')]")
 	public static WebElement IPerceptionsPopup;
 	
 	@FindBy(xpath = ".//iframe[contains(@id,'IPerceptionsEmbed')]")
