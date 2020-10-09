@@ -310,9 +310,9 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(id = "paymentOverviewApp")
 	public static WebElement paymentsOverview;
 	
-	@FindBy(xpath="//*[@class='btn btn--primary onetimepayment' or @class='btn btn--secondary onetimepayment']")
+	@FindBy(xpath="(//*[@class='btn btn--secondary onetimepayment' or @class='btn btn--primary onetimepayment'])[1]")
 	private WebElement MakeAPaymentButton;
-	
+		
 	@FindBy(xpath="//span[contains(text(),'Make a Payment')]")
 	private WebElement makeapayment;
 
@@ -4189,7 +4189,7 @@ public class AccountHomePage extends UhcDriver {
 	    
 	  if (driver.getCurrentUrl().contains("/dashboard")) {
 	    System.out.println("Member auth agent is on the Dashboard page");
-		CommonUtility.waitForPageLoad(driver, makeapayment, 9);
+		CommonUtility.waitForPageLoad(driver, makeapayment, 20);
 		if (validate(makeapayment)) {
 			makeapayment.click();
 		
@@ -4215,7 +4215,13 @@ public class AccountHomePage extends UhcDriver {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
 	}
-	  CommonUtility.waitForPageLoad(driver, MakeAPaymentButton, 15);
+	  CommonUtility.waitForPageLoad(driver, MakeAPaymentButton, 25);
+	  try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	  if (MakeAPaymentButton.isDisplayed())
 		{
 		System.out.println("Make a payment button was displayed on Payments page");
