@@ -1204,8 +1204,8 @@ try {
     		
 			do {
 				try {
-					threadsleep(5);
-					List<WebElement> overlays = driver.findElements(By.xpath("//div[@id='overlay' or  @id='loading_fader']"));
+					threadsleep(2);
+					/*List<WebElement> overlays = driver.findElements(By.xpath("//div[@id='overlay' or  @id='loading_fader']"));
 					int overlayInvisible = 0;
 					if(overlays.size() > 0) {
 						for(WebElement overlay: overlays) {
@@ -1218,6 +1218,12 @@ try {
 					}
 					if(overlays.size() == overlayInvisible) {
 						ready = true;
+						break;
+					}*/
+					WebDriverWait wait = new WebDriverWait(driver, 10);
+					List<WebElement> overlays = driver.findElements(By.xpath("//div[@id='overlay' or  @id='loading_fader']"));
+					ready = wait.until(ExpectedConditions.invisibilityOfAllElements(overlays));
+					if(ready) {
 						break;
 					}
 					
