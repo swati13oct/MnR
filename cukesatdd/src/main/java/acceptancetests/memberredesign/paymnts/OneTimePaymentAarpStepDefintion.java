@@ -1921,6 +1921,15 @@ public class OneTimePaymentAarpStepDefintion {
 		}
 	}
 
+	@Then("^the user clicks on cancel button on cancel automatic payments page$")
+	public void userclicksoncanceloncancelAutomaticPaymentPage()
+			throws Throwable {
+		UpdateReviewPage updateReviewPage = (UpdateReviewPage) getLoginScenario()
+				.getBean(PageConstants.Update_Review_Page);
+		updateReviewPage.clickCancelOnCancelRecurringPaymentPage();
+	}
+	
+	
 	@Given("^user selects checking Account on Update Automatic recurring payments page and Click on Next$")
 	public void user_selects_checking_Account_on_Update_Automatic_recurring_payments_page_and_Click_on_Next()
 			throws Throwable {
