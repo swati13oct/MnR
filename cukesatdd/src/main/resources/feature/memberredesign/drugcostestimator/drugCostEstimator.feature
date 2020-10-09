@@ -116,13 +116,6 @@ Feature: 1.07 Member DCE Page
       | Dosage    | <dosage2>    |
       | Quantity  | <quantity2>  |
       | Frequency | <frequency2> |
-    When I switch to its generic durg
-      | BrandedDrug   | <dosage2>       |
-      | GenericDosage | <genericdosage> |
-      | Quantity      | <quantity2>     |
-      | Frequency     | <frequency2>    |
-    When I delete the drug
-      | Dosage | <genericdosage> |
     When I navigate to Pharmacy tab
       | Zipcode | <zipcode> |
       | Radius  | <radius>  |
@@ -133,9 +126,9 @@ Feature: 1.07 Member DCE Page
 
      
    Examples: 
-      | TID   | planType |memberType | drug1    |  dosage2           | brandeddrug      | genericdosage                 | zipcode | radius   | quantity2 | frequency2     | 
-      | 15325 | MAPD     |MAPD_DCE   | Lipitor  | Lipitor TAB 20MG   | Lipitor TAB 20MG | atorvastatin calcium TAB 20MG |   00820 | 25 miles |       100 | Every 3 months |
-      | 15325 | Medica   |Medica_DCE |  Lipitor | Lipitor TAB 20MG    | Lipitor TAB 20MG | atorvastatin calcium TAB 20MG |   00820 | 25 miles |       100 | Every 3 months |
+      | TID   | planType |memberType | drug1    |    brandeddrug    | zipcode | radius   | 
+      | 15325 | MAPD     |MAPD_DCE   | Lipitor  |  Lipitor TAB 20MG |   00820 | 25 miles | 
+      | 15325 | Medica   |Medica_DCE | Lipitor  |  Lipitor TAB 20MG |   00820 | 25 miles |  
 	
   # | 15331   | PDP      |NonLISSplittier  |Lipitor|Lipitor TAB 10MG|31|Every 1 month|Lipitor TAB 20MG|Lipitor TAB 20MG|atorvastatin calcium TAB 20MG|90210|25 miles|100|Every 3 months|
   #| 15333   | COMBO    |ComboDCEmember  |Lipitor|Lipitor TAB 10MG|31|Every 1 month|Lipitor TAB 20MG|Lipitor TAB 20MG|atorvastatin calcium TAB 20MG|90210|25 miles|100|Every 3 months|
