@@ -7,6 +7,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
@@ -112,6 +113,7 @@ public class MemberAuthStepDefinition{
 	@Given("^the user is on member auth login flow page$")
 	public void member_auth_login_flow_page(){
 		WebDriver wd = getLoginScenario().getWebDriverNew();	
+		wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 
 		MemberAuthPage memberauth = new MemberAuthPage(wd);

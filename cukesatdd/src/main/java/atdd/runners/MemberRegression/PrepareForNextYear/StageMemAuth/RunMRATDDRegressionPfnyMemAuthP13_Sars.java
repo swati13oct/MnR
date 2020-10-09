@@ -14,7 +14,7 @@ jsonReport = "target/cucumber-RunMRATDDRegressionPfnyMemAuthP13_Sars.json",detai
 overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionPfnyMemAuthP13_Sars")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberredesign" }, 
 features = { "src/main/resources/feature/memberredesign/prepareForNextYear" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionPfnyMemAuthP13_Sars.json" }, tags = { "@memAuth_prepareForNextYear02_combo_fed_ship" })
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionPfnyMemAuthP13_Sars.json" }, tags = { "@memAuth_pfny02_combo_fed_ship" })
 public class RunMRATDDRegressionPfnyMemAuthP13_Sars {
 
 }

@@ -1,7 +1,7 @@
  
 Feature: 1.07.1 Member DCE Page - Member Auth - PROD
 
-  @drugCostEstimator1 @Member_dce_not @NegativeScenario  @prod @prod_dce_p1
+
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> -I1.2 To Verify MR portal members DCE should not come for AARP federal members
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
@@ -15,12 +15,19 @@ Feature: 1.07.1 Member DCE Page - Member Auth - PROD
       | Plan Type    | <planType>    |
       | Member Type  | <memberType>  |
    Then I should not see drug look up on home page
-
-    Examples: 
-      | TID   | username | password | MemUserName   | planType | memberType   |
+   
+   @prod_sanity_01 
+      Examples: 
+      | TID   | username | password | MemUserName       | planType | memberType   |
+      | 15337 | kkumard | mnrs786@ |  BNCSAUVE2  	    | MA       | MA_DCE       |
       | 15326 | kkumard | mnrs786@ |  vernajohnson19651	| SHIP     | SHIP_DCE     |
-      | 15337 | kkumard | mnrs786@ |  BNCSAUVE2  	| MA       | MA_DCE       |
-      | 15327 | kkumard | mnrs786@ |   PTHUYNH50	| SSUP     | SSUP_DCE     |
+
+	@drugCostEstimator1 @Member_dce_not @NegativeScenario  @prod @prod_dce_p1
+    Examples: 
+      | TID   | username | password | MemUserName       | planType | memberType   |
+      | 15326 | kkumard | mnrs786@ |  vernajohnson19651	| SHIP     | SHIP_DCE     |
+      | 15337 | kkumard | mnrs786@ |  BNCSAUVE2  	    | MA       | MA_DCE       |
+      | 15327 | kkumard | mnrs786@ |   PTHUYNH50	    | SSUP     | SSUP_DCE     | 
    
    @drugCostEstimator2 @prod @prod_dce_p2
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> -I1.1 To Verify MR portal members using DCE on a desktop device Pharmacy search tab validation
@@ -43,7 +50,7 @@ Feature: 1.07.1 Member DCE Page - Member Auth - PROD
       | TID   | username | password | MemUserName         | planType | memberType |drug1   | dosage1          | quantity1 | frequency1  |
       | 15325 | kkumard | mnrs786@ | skho@roadrunner.com | MAPD     | MAPD_DCE   |Lipitor | Lipitor TAB 10MG |        31 | Every 1 month |
   
-   @drugCostEstimator3 @prod @prod_dce_p2
+   #@drugCostEstimator3 @prod @prod_dce_p2
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Pharmacy saver results
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
@@ -63,7 +70,14 @@ Feature: 1.07.1 Member DCE Page - Member Auth - PROD
       | Pharmacy Type | <pharmacytype> |
     Then I should see pharmacy results as per the filter
     And I should see pharmacy saver pharmacies in results
+    
+    @prod_sanity_02
+     Examples: 
+      | TID   | username | password | MemUserName | planType| memberType| zipcode| radius  | pharmacytype |
+      | 15325 | kkumard | mnrs786@ | SWISSCHARD26| MAPD    | MAPD_DCE  | 06450  | 25 miles| Pharmacy Saver|
+      | 15325 | kkumard | mnrs786@ | BATLLOT@AOL.COM| PCP  | PCP_DCE  | 06450  | 25 miles| Pharmacy Saver|
 
+	@drugCostEstimator3 @prod @prod_dce_p2
     Examples: 
       | TID   | username | password | MemUserName | planType| memberType| zipcode| radius  | pharmacytype |
       | 15325 | kkumard | mnrs786@ | SWISSCHARD26| MAPD    | MAPD_DCE  | 06450  | 25 miles| Pharmacy Saver|
