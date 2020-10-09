@@ -53,7 +53,7 @@ public class PaymentsFormPage extends UhcDriver {
 	@FindBy(xpath = "//button[@class='btn btn--primary']")
 	private WebElement ContinueButton;
 	
-	@FindBy(xpath = "//button[@class='btn btn--secondary cancelbutton cancel-wcag']")
+	@FindBy(xpath = "(//button[@class='btn btn--secondary cancelbutton cancel-wcag' or @class='btn btn--secondary cancelbutton'])[1]")
 	private WebElement cancelButton;
 	
 	@FindBy(xpath = "//a[@class='btn btn--primary cancel-btn-modal']")

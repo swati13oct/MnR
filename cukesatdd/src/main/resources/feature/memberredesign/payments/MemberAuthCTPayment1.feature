@@ -1,8 +1,8 @@
 @regressionMember
 Feature: S1.1 To test Member Auth premium payment flows Micro App.
 
-  @regressionMemberPROD @memAuthProdOnetimeCreditCardPayment @CodeTransformers
-  Scenario Outline: TID: <TID> -  Test Case 01- To validate Credit Card Payments Flow
+  @regressionMemberPROD
+  Scenario Outline: TID: <TID> -  Test Case 01- To validate One time Credit Card Payment Flow for Federal Plan member
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
       | Username | <username> |
@@ -24,8 +24,8 @@ Feature: S1.1 To test Member Auth premium payment flows Micro App.
       | UID     | username | password | memUserName | planType | claimPeriod    | dateRange      | Name         | CreditCardNumber | validMonth | validYear | paymentType |
       | F243897 | jkuma14  | Brock@03 | DSOADY17    | MAPD     | Last 24 months | Last 18 months | Pooja Minhas | 4121600170691201 |         01 |      2021 | OneTime     |
 
-  @regressionMemberPROD @memAuthProdOneTimeEFT @CodeTransformers
-  Scenario Outline: TID: <TID> -  Test Case 02-Verify EFT payment flow for federal member
+  @regressionMemberPROD
+  Scenario Outline: TID: <TID> -  Test Case 02-Verify One time EFT payment flow for federal member
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
       | Username | <username> |
@@ -45,13 +45,15 @@ Feature: S1.1 To test Member Auth premium payment flows Micro App.
       | Account holder first name  | <firstName>        |
       | Account holder middle name | <middleName>       |
       | Account holder last name   | <lastName>         |
+   And user navigates to Review Your One-Time Payment Information and selects agreements and click on Submit Button for Make One Time
+   And the user is displayed with an error message that he is not authorized
 
     Examples: 
-      | UID     | username | password | memUserName    | planType | claimPeriod    | dateRange      | routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName | paymentType |
-      | F243897 | jkuma14  | Brock@03 | mleroy@mcn.org | MAPD     | Last 24 months | Last 18 months | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    | Recurring   |
+      | TID     | username | password | memUserName    | planType | claimPeriod    | dateRange      | routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName | paymentType |
+      | TC002   | jkuma14  | Brock@03 | mleroy@mcn.org | MAPD     | Last 24 months | Last 18 months | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    | Recurring   |
 
-  @regressionMemberPROD @memAuthProdOneTimeEFTCancel @CodeTransformers
-  Scenario Outline: TID: <TID> -  Test Case 04 -Verify cancel EFT federal member
+  @regressionMemberPROD
+  Scenario Outline: TID: <TID> -  Test Case 04 -Verify cancel button on Update Recurring EFT flow for federal member
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
       | Username | <username> |
@@ -62,8 +64,16 @@ Feature: S1.1 To test Member Auth premium payment flows Micro App.
     And the user navigates to payments overview page
     And user clicks on Update Automatic payments on payment overview page
     And user selects checking Account on Update Automatic recurring payments page and Click on Next
+    And user Enters all Mandatory fields on form page and click on Authorize button for Update Recurring
+      | Routing number             | <routingNo>        |
+      | Confirm routing number     | <confirmRoutingNo> |
+      | Account number             | <accountNo>        |
+      | Confirm account number     | <confirmAccountNo> |
+      | Account holder first name  | <firstName>        |
+      | Account holder middle name | <middleName>       |
+      | Account holder last name   | <lastName>         |
     And the user clicks on cancel button in One time EFT or Recurring EFT
 
     Examples: 
-      | UID     | username | password | memUserName    | planType | claimPeriod    | dateRange      |
-      | F243897 | jkuma14  | Brock@03 | mleroy@mcn.org | MAPD     | Last 24 months | Last 18 months |
+      | TID     | username | password | memUserName    | planType |  routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName |
+      | TC004   | jkuma14  | Brock@03 | mleroy@mcn.org | MAPD     | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    |
