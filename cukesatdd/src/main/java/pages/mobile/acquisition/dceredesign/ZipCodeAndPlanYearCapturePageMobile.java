@@ -99,10 +99,10 @@ public class ZipCodeAndPlanYearCapturePageMobile extends UhcDriver {
 		validateNew(zipCodeTxtbox);
 		// validate(zipCodeTxtbox, 20);
 		zipCodeTxtbox.click();
-		zipCodeTxtbox.clear();
+		//zipCodeTxtbox.clear();
 		//Thread.sleep(2000);
 		//jsClickMobile(zipCodeTxtbox);
-		Thread.sleep(2000);
+		Thread.sleep(1000);
 		sendkeys(zipCodeTxtbox, zipcode);
 		Thread.sleep(3000);
 		try {
