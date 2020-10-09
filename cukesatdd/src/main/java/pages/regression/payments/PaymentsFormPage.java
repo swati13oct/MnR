@@ -240,7 +240,7 @@ checkForIPerceptionModel(driver);
 		String firstName = accountAttributessMap.get("Account holder first name");
 		String middleName = accountAttributessMap.get("Account holder middle name");
 		String lastName = accountAttributessMap.get("Account holder last name");
-
+		TestHarness.checkForIPerceptionModel(driver);
 		routingNumberField.sendKeys(routingNumber);
 		confirmRoutingNumberField.sendKeys(confirmRoutingNumber);
 		accountNumberField.sendKeys(accountNumber);
@@ -249,6 +249,7 @@ checkForIPerceptionModel(driver);
 		middleNameField.sendKeys(middleName);
 		lastNameField.sendKeys(lastName);
 		jsClickNew(ElectronicSignatureInput);
+		TestHarness.checkForIPerceptionModel(driver);
 		ContinueButton.click();
 		System.out.println("Clicked on Continue button");
 		try {
