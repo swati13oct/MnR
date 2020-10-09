@@ -72,8 +72,8 @@ public class VppPlanSummaryMobile {
 
 	AppiumDriver wd;
 
-	@When("^	$")
-	public void user_validates_plan_summary_ums(DataTable planAttributes) throws InterruptedException {
+	@When("^the user validates plan summary for the below plan$")
+	public void user_validates_plan_summary(DataTable planAttributes) throws InterruptedException {
 		List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows();
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
 		for (int i = 0; i < givenAttributesRow.size(); i++) {
@@ -86,9 +86,8 @@ public class VppPlanSummaryMobile {
 		getLoginScenario().saveBean(VPPCommonConstants.PLAN_NAME, planName);
 		VPPPlanSummaryPageMobile planSummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		//Assert.assertTrue("Error loading specific plan summary in VPP plan summary page",
-				//planSummaryPage.getSpecificPlanInfo(planName));
-		planSummaryPage.getSpecificPlanInfo(planName);
+		Assert.assertTrue("Error loading specific plan summary in VPP plan summary page",
+				planSummaryPage.getSpecificPlanInfo(planName));
 	}
 
 	@Then("^the user validates marketing bullets of the plan$")
@@ -242,7 +241,7 @@ public class VppPlanSummaryMobile {
 	public void the_user_on_uhc_medicareplans_Site() {
 		wd = (AppiumDriver) getLoginScenario().getWebDriverNew();
 		AcquisitionHomePageMobile aquisitionhomepage = new AcquisitionHomePageMobile(wd);
-		//aquisitionhomepage.openPRE();
+		// aquisitionhomepage.openPRE();
 		aquisitionhomepage.openMobileURL();
 		// aquisitionhomepage.openVPPPage();
 		aquisitionhomepage.fixPrivateConnectionMobile();
@@ -618,7 +617,7 @@ public class VppPlanSummaryMobile {
 		wd = (AppiumDriver) getLoginScenario().getWebDriverNew();
 
 		AcquisitionHomePageMobile aquisitionhomepage = new AcquisitionHomePageMobile(wd);
-		//aquisitionhomepage.openPRE();
+		// aquisitionhomepage.openPRE();
 		aquisitionhomepage.openMobileURL();
 		// aquisitionhomepage.openVPPPage();
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);

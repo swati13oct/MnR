@@ -2856,6 +2856,7 @@ public class VppPlanCompareMobile {
 
 		AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		Thread.sleep(3000);
 		VPPPlanSummaryPageMobile plansummaryPage = null;
 		if (("NO").equalsIgnoreCase(isMultiCounty.trim())) {
 			plansummaryPage = aquisitionhomepage.searchPlansWithOutCounty(zipcode);
