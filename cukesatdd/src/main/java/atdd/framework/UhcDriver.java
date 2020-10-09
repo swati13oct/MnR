@@ -57,7 +57,7 @@ public abstract class UhcDriver {
 	public WebDriver driver;
 	private long defaultTimeoutInSec=15;
 	
-	@FindBy(xpath = ".//iframe[contains(@id,'IPerceptionsEmbed')]")
+	@FindBy(xpath = ".//*[contains(@id,'singleLargeLayoutContainer')]")
 	public static WebElement IPerceptionsPopup;
 	
 	@FindBy(xpath = ".//iframe[contains(@id,'IPerceptionsEmbed')]")
@@ -1204,7 +1204,7 @@ try {
     		
 			do {
 				try {
-					threadsleep(2);
+					threadsleep(5);
 					List<WebElement> overlays = driver.findElements(By.xpath("//div[@id='overlay' or  @id='loading_fader']"));
 					int overlayInvisible = 0;
 					if(overlays.size() > 0) {
