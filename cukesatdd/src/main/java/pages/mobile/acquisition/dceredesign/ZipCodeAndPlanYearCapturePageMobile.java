@@ -97,12 +97,12 @@ public class ZipCodeAndPlanYearCapturePageMobile extends UhcDriver {
 
 	public void enterZipCodeandcounty(String zipcode) throws InterruptedException {
 		validateNew(zipCodeTxtbox);
-		// validate(zipCodeTxtbox, 20);
-		zipCodeTxtbox.click();
-		//zipCodeTxtbox.clear();
+		zipCodeTxtbox.clear();
+		//zipCodeTxtbox.click();
+		
 		//Thread.sleep(2000);
-		//jsClickMobile(zipCodeTxtbox);
-		Thread.sleep(1000);
+		jsClickMobile(zipCodeTxtbox);
+		//Thread.sleep(1000);
 		sendkeys(zipCodeTxtbox, zipcode);
 		Thread.sleep(3000);
 		try {
