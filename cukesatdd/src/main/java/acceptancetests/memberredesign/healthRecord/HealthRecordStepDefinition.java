@@ -432,7 +432,8 @@ public class HealthRecordStepDefinition {
 	@Then("^the user navigates to Plan Documents and Resources page and My Documents page and validate Health Record link display behavior$")
 	public void user_toBenefitsToPlanDocToMyDoc() {
 		WebDriver wd=(WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
-		wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
+		wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+		wd.manage().timeouts().pageLoadTimeout(3, TimeUnit.MINUTES);
 		String planType=(String) getLoginScenario().getBean(LoginCommonConstants.PLANTYPE);
 		String memberType=(String) getLoginScenario().getBean(LoginCommonConstants.CATOGERY);
 		List<String> testNote=(List<String>) getLoginScenario().getBean(HealthRecordCommonConstants.TEST_NOTE);
