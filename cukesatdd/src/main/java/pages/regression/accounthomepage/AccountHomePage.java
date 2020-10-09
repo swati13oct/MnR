@@ -310,9 +310,9 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(id = "paymentOverviewApp")
 	public static WebElement paymentsOverview;
 	
-	@FindBy(xpath="//*[@class='btn btn--primary onetimepayment' or @class='btn btn--secondary onetimepayment']")
+	@FindBy(xpath="(//*[@class='btn btn--secondary onetimepayment' or @class='btn btn--primary onetimepayment'])[1]")
 	private WebElement MakeAPaymentButton;
-	
+		
 	@FindBy(xpath="//span[contains(text(),'Make a Payment')]")
 	private WebElement makeapayment;
 
@@ -324,7 +324,11 @@ public class AccountHomePage extends UhcDriver {
 	
 	@FindBy(xpath= "//nav[@id='sub-nav']//a[contains(text(),'Explanation of Benefits')]")
 	private WebElement EOBLINK;
-	
+
+	@FindBy(xpath="//div[contains(@class,'deskHeader')]//a[contains(@id,'preeffectivepharmacies')]")
+	private WebElement preEffPnpMenuLnk;
+
+
 	/*
 	 * @FindBy(xpath = "(//a[text()='Find Care & Costs'])[1]")
 	 * private WebElement
@@ -468,7 +472,7 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(xpath = "//div[@id='ui-view-page']//a[@track='EOB_SEARCH']")
 	private WebElement EOB_Dashboard;
 	
-	@FindBy(xpath="//header[contains(@class,'sub-nav-header')]//a[contains(@ng-href,'eob.html')]")
+	@FindBy(xpath="//header[contains(@class,'sub-nav-header')]//a[contains(@ng-href,'eob.html') or contains(@href,'eob.html')]")
 	protected WebElement eobTopMenuLink;
 	
 	//@FindBy(xpath="//a[contains(text(),'View Documents & Resources')]")
@@ -540,12 +544,6 @@ public class AccountHomePage extends UhcDriver {
 	public AccountHomePage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
-		//tbd // initialize this in case need to workaround later due to Sorry login
-		//tbd // error for certain testing
-		//tbd attemptSorryWorkaround = new HashMap<String, String>();
-		//tbd attemptSorryWorkaround.put("needWorkaround", "no");
-		//tbd attemptSorryWorkaround.put("planType", "na");
-		//tbd attemptSorryWorkaround.put("testType", "na");
 		/*
 		 * try {
 		 * 
@@ -3210,6 +3208,41 @@ public class AccountHomePage extends UhcDriver {
 
 		 return null;
 	 }
+	 
+	 @FindBy(xpath="//div[contains(@class,'preEffectiveParsys')]//h1")
+	 private WebElement preEffBnfHeading;
+
+	 @FindBy(xpath="//a[contains(text(),'VIEW PLAN DOCUMENTS')]")
+	 private WebElement preEffPlanDocLnk;
+	 public PlanDocumentsAndResourcesPage navigateDirectToPlanDoc_preEff(String memberType) {
+		 checkModelPopup(driver,5);
+		 if (noWaitValidate(shadowRootHeader)) {
+			 System.out.println("located shadow-root element, attempt to process further...");
+			 WebElement root1 = expandRootElement(shadowRootHeader);
+			 try {
+				 WebElement benefitsTopMenuShadowRootLink = root1.findElement(By.cssSelector("a[data-testid*=nav-link-coverage]"));
+				 benefitsTopMenuShadowRootLink.click();
+			 } catch (Exception e) {
+				 Assert.assertTrue("PROBLEM - unable to locate Benefits link on Rally Dashboard top menu", false);
+			 }		
+
+		 } 
+		 CommonUtility.checkPageIsReady(driver);
+		 checkModelPopup(driver,5);
+		 WebElement heading_e=heading;
+		 if (memberType.contains("PREEFF"))
+			 heading_e=preEffBnfHeading;
+		 CommonUtility.waitForPageLoad(driver, heading_e, 50);
+		 if (driver.getTitle().contains("Benefits")) {
+			 CommonUtility.waitForPageLoad(driver, preEffPlanDocLnk, 5);
+			 Assert.assertTrue("PROBLEM - unable to locate the 'VIEW PLAN DOCUMENTS' button on pre-effective benefits page", noWaitValidate(preEffPlanDocLnk));
+			 preEffPlanDocLnk.click();
+			 CommonUtility.checkPageIsReadyNew(driver);
+			 return new PlanDocumentsAndResourcesPage(driver);
+		 }
+
+		 return null;
+	 }
 
 	public BenefitsAndCoveragePage navigateToBandCPag() {
 
@@ -3717,7 +3750,7 @@ public class AccountHomePage extends UhcDriver {
 		//tbd checkForIPerceptionModel(driver);
 		CommonUtility.checkPageIsReady(driver);
 		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
-		checkModelPopup(driver, 5);
+		checkModelPopup(driver, 2);
 		StopWatch pageLoad = new StopWatch();
 		pageLoad.start();
 		try {
@@ -3750,10 +3783,10 @@ public class AccountHomePage extends UhcDriver {
 					System.out.println("User is on dashboard page and URL is ====>" + driver.getCurrentUrl());
 					driver.navigate().to("https://stage-mymedicareaccount.uhc.com/medica/member/documents/overview.html");
 				}
-				checkModelPopup(driver,5);
+				checkModelPopup(driver,2);
 			} else if (MRScenario.environment.equalsIgnoreCase("prod") || MRScenario.environment.equalsIgnoreCase("offline")) {
 				Assert.assertTrue("PROBLEM - unable to locate the plan doc link on rally dashboard", noWaitValidate(planDocResPgLink));
-				checkModelPopup(driver, 5);
+				checkModelPopup(driver, 2);
 				scrollElementToCenterScreen(planDocResPgLink);
 				planDocResPgLink.click();
 			} else {
@@ -3781,7 +3814,7 @@ public class AccountHomePage extends UhcDriver {
 		long pageLoadTime_Seconds = pageLoadTime_ms / 1000;
 		System.out.println("Total Page Load Time: " + pageLoadTime_ms + " milliseconds");
 		System.out.println("Total Page Load Time: " + pageLoadTime_Seconds + " seconds");
-		checkModelPopup(driver, 5);
+		checkModelPopup(driver, 2);
 
 		if (driver.getTitle().contains("Documents")) {
 			return new PlanDocumentsAndResourcesPage(driver);
@@ -3800,6 +3833,7 @@ public class AccountHomePage extends UhcDriver {
 		}
 		return true;
 	}
+
 	public PharmaciesAndPrescriptionsPage navigateToPharmaciesAndPrescriptions() {
 		System.out.println("user is on '" + MRScenario.environment + "' login page");
 		checkForIPerceptionModel(driver);
@@ -3818,9 +3852,6 @@ public class AccountHomePage extends UhcDriver {
 				}
 			}
 			CommonUtility.checkPageIsReadyNew(driver);
-		//tbd } else if (attemptSorryWorkaround.get("needWorkaround").equalsIgnoreCase("yes")) {
-		//tbd 	//System.out.println("don't bother to work around the sorry error, page displays won't look right");
-		//tbd 	workaroundAttempt("pnp"); 
 		}
 		if (driver.getCurrentUrl().contains("pharmacy/overview.html"))
 			return new PharmaciesAndPrescriptionsPage(driver);
@@ -3856,43 +3887,6 @@ public class AccountHomePage extends UhcDriver {
 		if (pnpTopMenuLink!=null && isPnpLink(pnpTopMenuLink.getText()))
 			return true;
 		return false;
-		/* tbd 
-		//note: use the 2nd menu link as the base and determine which one I really need
-		// if 2 is FIND CARE then 6 is PnP
-		// if 2 is CARE then 5 is PnP
-		String secondTopMenuItemCssStr="#main-nav > div > div > div > a:nth-child(2)";
-		WebElement secondTopMenuItem = locateElementWithinShadowRootNoAssert(shadowRootHeader,
-				secondTopMenuItemCssStr);
-		Assert.assertTrue("PROBLEM - unable locate top menu item", secondTopMenuItem!=null);
-		if (secondTopMenuItem!=null && secondTopMenuItem.getText().contains("FIND CARE")) {
-			String pnpTopMenuItemCssStr="#main-nav > div > div > div > a:nth-child(6)";
-			WebElement pnpTopMenuLink = locateElementWithinShadowRootNoAssert(shadowRootHeader,
-					pnpTopMenuItemCssStr);
-			if (pnpTopMenuLink!=null && isPnpLink(pnpTopMenuLink.getText()))
-				return true;
-			else { //note: maybe user has no payment tab, try this one before giving up
-				pnpTopMenuItemCssStr="#main-nav > div > div > div > a:nth-child(5)";
-				pnpTopMenuLink = locateElementWithinShadowRootNoAssert(shadowRootHeader,
-						pnpTopMenuItemCssStr);
-				if (pnpTopMenuLink!=null && isPnpLink(pnpTopMenuLink.getText()))
-					return true;
-			}
-		} else if (secondTopMenuItem.getText().contains("CLAIMS")) { //note: user has no FIND CARE & COSTS tab
-			String pnpTopMenuItemCssStr="#main-nav > div > div > div > a:nth-child(5)";
-			WebElement pnpTopMenuLink = locateElementWithinShadowRootNoAssert(shadowRootHeader,
-					pnpTopMenuItemCssStr);
-			if (pnpTopMenuLink!=null && isPnpLink(pnpTopMenuLink.getText()))
-				return true;
-			else { //note: maybe user has no payment tab, try this one before giving up
-				pnpTopMenuItemCssStr="#main-nav > div > div > div > a:nth-child(4)";
-				pnpTopMenuLink = locateElementWithinShadowRootNoAssert(shadowRootHeader,
-						pnpTopMenuItemCssStr);
-				if (pnpTopMenuLink!=null && isPnpLink(pnpTopMenuLink.getText()))
-					return true;
-			}
-		} 
-		return false;
-		*/
 	}
 	
 	public PharmaciesAndPrescriptionsPage navigateToPharmaciesAndPrescriptionsFromSecondaryPg() {
@@ -3915,9 +3909,6 @@ public class AccountHomePage extends UhcDriver {
 				}
 			}
 			CommonUtility.checkPageIsReadyNew(driver);
-		//tbd } else if (attemptSorryWorkaround.get("needWorkaround").equalsIgnoreCase("yes")) {
-		//tbd 	//System.out.println("don't bother to work around the sorry error, page displays won't look right");
-		//tbd 	workaroundAttempt("pnp"); 
 		}
 		if (driver.getCurrentUrl().contains("pharmacy/overview.html"))
 			return new PharmaciesAndPrescriptionsPage(driver);
@@ -3932,9 +3923,11 @@ public class AccountHomePage extends UhcDriver {
 			return false;
 	}
 	
-	public boolean findPnPLinksExistOnPg() {
+	public boolean findPnPLinksExistOnPg(String memberType) {
 		System.out.println("user is on '" + MRScenario.environmentMedicare + "' dashboard page, attempt to navigate to secondary page to see if PnP link exists");
 		checkForIPerceptionModel(driver);
+		if (noWaitValidate(preEffPnpMenuLnk) && memberType.contains("PREEFF")) 
+			return true;
 		if (noWaitValidate(pharPresDashboardLink)) {
 			return true;
 		} else if (noWaitValidate(pharPresDashboardLinkAlternative)) {
@@ -4196,7 +4189,7 @@ public class AccountHomePage extends UhcDriver {
 	    
 	  if (driver.getCurrentUrl().contains("/dashboard")) {
 	    System.out.println("Member auth agent is on the Dashboard page");
-		CommonUtility.waitForPageLoad(driver, makeapayment, 9);
+		CommonUtility.waitForPageLoad(driver, makeapayment, 20);
 		if (validate(makeapayment)) {
 			makeapayment.click();
 		
@@ -4222,7 +4215,14 @@ public class AccountHomePage extends UhcDriver {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
 	}
-	  CommonUtility.waitForPageLoad(driver, MakeAPaymentButton, 15);
+	  CommonUtility.waitForPageLoad(driver, MakeAPaymentButton, 25);
+	  try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	  try{
 	  if (MakeAPaymentButton.isDisplayed())
 		{
 		System.out.println("Make a payment button was displayed on Payments page");
@@ -4245,6 +4245,37 @@ public class AccountHomePage extends UhcDriver {
 			}
 			
 		}
+	  }
+	  catch (Exception e)
+	  {
+		  System.out.println("Refreshing page as Make a Payment button was not displayed on first attempt");
+		  driver.navigate().refresh();
+		  CommonUtility.waitForPageLoad(driver, MakeAPaymentButton, 30);
+		  if (MakeAPaymentButton.isDisplayed())
+			{
+			System.out.println("Make a payment button was displayed on Payments page");
+			return new PaymentHistoryPage(driver);
+			}
+			else
+			{
+				System.out.println("Make a payment button was not displayed on first time Payments page loaded, refreshing the page");
+				driver.navigate().refresh();
+				if (MakeAPaymentButton.isDisplayed())
+					
+				{
+					System.out.println("Make a payment button was displayed on Payments page");
+					return new PaymentHistoryPage(driver);
+					}
+				else
+				{
+					System.out.println("Make a payment button was displayed on Payments page");
+					Assert.fail("Make a payment button was not displayed on Payments page");
+				}
+				
+			}
+		  
+	  }
+	  
 		if (driver.getCurrentUrl().contains("payments")) {
 			return new PaymentHistoryPage(driver);
 		}

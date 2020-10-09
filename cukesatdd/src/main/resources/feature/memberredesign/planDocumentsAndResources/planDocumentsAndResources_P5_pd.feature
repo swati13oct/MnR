@@ -95,4 +95,8 @@ Feature: 1.06.5 Member Plans and Documents - section: Provider Directory -or- Ph
       | index  | TID         | planType | memberType            | pd_sd | pd_ps | pd_pl | pd_en_cy | pd_es_cy | pd_zh_cy | pd_en_ny | pd_es_ny | pd_zh_ny |
       | 20-119 | 15119,15304 | SHIP     | MULTI_IND_EFF_PDnR    | false | false | false | false    | false    | false    | false    | false    | false    | 
   
-  
+	@preeffective_ship
+	Examples: 
+      | index  | TID         | planType | memberType            | pd_sd | pd_ps | pd_pl | pd_en_cy | pd_es_cy | pd_zh_cy | pd_en_ny | pd_es_ny | pd_zh_ny |
+      | 21-125 | xxxxx       | SHIP     | IND_PREEFF_PDnR       | false | false | false | false    | false    | false    | false    | false    | false    |
+

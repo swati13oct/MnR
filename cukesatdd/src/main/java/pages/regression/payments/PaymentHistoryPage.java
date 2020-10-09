@@ -1281,6 +1281,7 @@ public class PaymentHistoryPage extends UhcDriver {
 			System.out.println(driver.getCurrentUrl());
 			e.printStackTrace();
 		}
+		TestHarness.checkForIPerceptionModel(driver);
 		if (driver.getTitle().contains("Update Automatic Payments")) {
 			System.out.println("Navigated to Update Automatic Payments page");
 			return new UpdateRecurringPage(driver);
@@ -2028,18 +2029,20 @@ public class PaymentHistoryPage extends UhcDriver {
 				
 				System.out.println("Hovering mouse over daterange dropdown");	
 				Actions action = new Actions(driver);
+				TestHarness.checkForIPerceptionModel(driver);
 				action.moveToElement(menubutton).build().perform();
 				
 				System.out.println("waiting for 5 seconds");	
 				Thread.sleep(5000);
 				System.out.println("Selecting the date from dropdown - Last 6 months ");
-				
+				TestHarness.checkForIPerceptionModel(driver);
 				driver.findElement(By.linkText("Last 6 months")).click();
-				
+				TestHarness.checkForIPerceptionModel(driver);
 				System.out.println("Last 6 months has been clicked in dropdown , waiting for Payment history table to load now ");
 			    CommonUtility.waitForPageLoad(driver, paymentTable, 20);
 			    
 			    try {
+			    	TestHarness.checkForIPerceptionModel(driver);
 					if (paymentTable.isDisplayed()) {
 						System.out.println("Payment History table is displayed");
 						Thread.sleep(2000);
@@ -2092,7 +2095,7 @@ public class PaymentHistoryPage extends UhcDriver {
 				System.out.println("waiting for 2 seconds");	
 				Thread.sleep(2000);
 				System.out.println("Selecting the date from dropdown - Last 24 months ");
-				
+				TestHarness.checkForIPerceptionModel(driver);
 				driver.findElement(By.linkText("Last 24 months")).click();
 				
 				System.out.println("Last 24 months has been clicked in dropdown , waiting for Billing history table to load now ");
@@ -2126,7 +2129,7 @@ public class PaymentHistoryPage extends UhcDriver {
 				System.out.println("waiting for 2 seconds");	
 				Thread.sleep(2000);
 				System.out.println("Selecting the date from dropdown - Last 24 months ");
-				
+				TestHarness.checkForIPerceptionModel(driver);
 				driver.findElement(By.linkText("Last 24 months")).click();
 				
 				System.out.println("Last 24 months has been clicked in dropdown , waiting for Payment history table to load now ");

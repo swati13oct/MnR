@@ -99,4 +99,8 @@ Feature: 1.06.6 Member Plans and Documents - section: Forms And Resources Part 5
 	Examples: 
       | index  | TID         | planType | memberType            | fnr_sd | fnr_maf |
       | 19-120 | 15119,15304 | SHIP     | MULTI_IND_EFF_PDnR    | true   | false   |
-    
+
+	@preeffective_ship_5of7
+	Examples: 
+      | index  | TID         | planType | memberType            | fnr_sd | fnr_maf |
+      | 20-121 | xxxxx       | SHIP     | IND_PREEFF_PDnR       | true   | false   |            
