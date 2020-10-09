@@ -378,6 +378,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	private WebElement SubmitBtn;
 
 	@FindBy(xpath = "//h1[contains(text(),'Search Results')]")
+//	@FindBy(xpath = "//h1[contains(@class,'search-results-title')]")
 	private WebElement SearchResults;
 
 	@FindBy(xpath = "//h2[@class='search-results-count']")
@@ -2316,7 +2317,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		CommonUtility.waitForPageLoad(driver, EnterSearch, 60);
 		EnterSearch.sendKeys(inputvalue);
 		CommonUtility.waitForPageLoadNewForClick(driver, SubmitBtn, 60);
-		SubmitBtn.click();
+		jsClickNew(SubmitBtn);
 		waitForPageLoadSafari();
 		validateNew(SearchResults, 60);
 		checkModelPopup(driver, 20);

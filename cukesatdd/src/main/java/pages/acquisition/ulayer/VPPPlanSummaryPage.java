@@ -3732,8 +3732,8 @@ for (int i = 0; i < initialCount + 1; i++) {
 	public void clickOnViewMoreForPlan(String planName) {
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		waitForPageLoadSafari();
-		scrollToView(driver.findElement(By.xpath("//*[contains(text(),'"+planName+"')]//ancestor::div[contains(@class, 'plan-card')]")));
-		List<WebElement> viewMoreLink = driver.findElements(By.xpath("//*[contains(text(),'"+planName+"')]//ancestor::div[contains(@class, 'plan-card')]//a[@class='accordion-arrow collapsed']"));
+		scrollToView(driver.findElement(By.xpath("//*[contains(text(),'"+planName+"')]/ancestor::div[contains(@class, 'module-plan-overview module')]")));
+		List<WebElement> viewMoreLink = driver.findElements(By.xpath("//*[contains(text(),'"+planName+"')]/ancestor::div[contains(@class, 'module-plan-overview module')]//*[@class='accordion-arrow collapsed']"));
 		if(viewMoreLink.size()>0) //if it finds the that the View More is shown then it will click on it
 				viewMoreLink.get(0).click();
 
