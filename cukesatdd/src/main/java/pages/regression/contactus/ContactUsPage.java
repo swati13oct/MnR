@@ -438,7 +438,7 @@ public class ContactUsPage extends UhcDriver{
 		}
 	
 		public void openAndValidate(String memberType) {
-			if (!memberType.contains("PreEff"))
+			if (!memberType.toUpperCase().contains("PREEFF"))
 				validateNew(heading);
 		}
 	

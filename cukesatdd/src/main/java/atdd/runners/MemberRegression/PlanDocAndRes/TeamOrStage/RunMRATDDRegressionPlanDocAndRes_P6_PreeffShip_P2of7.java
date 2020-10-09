@@ -15,10 +15,10 @@ import cucumber.api.CucumberOptions;
 
 @RunWith(ExtendedCucumber.class)
 @ExtendedCucumberOptions(retryCount=1,screenShotSize="", screenShotLocation="/screenshots/",
-jsonReport = "target/cucumber-RunMRATDDRegressionPlanDocAndResDev_sanity_ActMapd.json",detailedReport = true, detailedAggregatedReport = true,
-overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionPlanDocAndResDev_sanity_ActMapd")
+jsonReport = "target/cucumber-RunMRATDDRegressionPlanDocAndRes_P6_PreeffShip_P2of7.json",detailedReport = true, detailedAggregatedReport = true,
+overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionPlanDocAndRes_P6_PreeffShip_P2of7")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberredesign" },
 features = { "src/main/resources/feature/memberredesign/planDocumentsAndResources" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionPlanDocAndResDev_sanity_ActMapd.json" }, tags = { "@devRegression","@sanity","@active_mapd" })
-public class RunMRATDDRegressionPlanDocAndResDev_sanity_ActMapd {
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionPlanDocAndRes_P6_PreeffShip_P2of7.json" }, tags = { "@planAndDocuments06_2of7","@preeffective_ship_2of7" })
+public class RunMRATDDRegressionPlanDocAndRes_P6_PreeffShip_P2of7 {
 }
