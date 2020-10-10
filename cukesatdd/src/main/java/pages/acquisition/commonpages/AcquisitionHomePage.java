@@ -924,7 +924,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 //			CommonUtility.waitForElementToDisappear(driver, overlayFilm, 75);
 			waitForPageLoadSafari();
 			
-			CommonUtility.waitForPageLoadNew(driver, vppTop, 30);
+//			CommonUtility.waitForPageLoadNew(driver, vppTop, 30);
+			validateNew(vppTop, 30);
 			if (driver.getCurrentUrl().contains("health-plans")) {
 				return new VPPPlanSummaryPage(driver);
 			}
