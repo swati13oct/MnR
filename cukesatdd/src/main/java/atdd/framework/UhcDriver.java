@@ -1240,6 +1240,7 @@ try {
     		
     		//Sets FluentWait Setup
     		for(; counter >= 0; counter--) {
+    			threadsleep(3);
     			List<WebElement> loadingScreen = null;
     			FluentWait<WebDriver> fwait = new FluentWait<WebDriver>(driver)
     					.withTimeout(Duration.ofSeconds(5))
@@ -1260,13 +1261,18 @@ try {
 
     			// checking if loading indicator was found and if so we wait for it to
     			// disappear
-    			if (loadingScreen != null && !loadingScreen.isEmpty()) {
-    				System.out.println("Loading screen visible!!! Waiting till it disappears");
-    				WebDriverWait wait = new WebDriverWait(driver, defaultTimeoutInSec);
-    				wait.until(ExpectedConditions
-    						.invisibilityOfElementLocated(By.xpath("//div[@id='overlay' or  @id='loading_fader']")));
-    				ready = true;
-    				break;
+    			if (loadingScreen != null) {
+    				if(loadingScreen.isEmpty()) {
+    					System.out.println("Loading screen visible!!! Waiting till it disappears");
+    					WebDriverWait wait = new WebDriverWait(driver, defaultTimeoutInSec);
+    					wait.until(ExpectedConditions
+    							.invisibilityOfElementLocated(By.xpath("//div[@id='overlay' or  @id='loading_fader']")));
+    					ready = true;
+    					System.out.println("Loading screen not displayed");
+    					break;
+    				} else {
+    					System.out.println("No loading screen element(s) found");
+    				}
     			}
     		}
 
