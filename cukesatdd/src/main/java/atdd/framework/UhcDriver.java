@@ -1130,4 +1130,9 @@ public abstract class UhcDriver {
 		return ReturnValue;
 	}
 
+	public void addDrugs() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

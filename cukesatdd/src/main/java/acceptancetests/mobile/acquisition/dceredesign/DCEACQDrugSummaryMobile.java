@@ -88,9 +88,8 @@ public class DCEACQDrugSummaryMobile {
 
 	@When("^user verify the drug summary page$")
 	public void user_verify_the_drug_summary_page() throws InterruptedException {
-		DrugSummaryPageMobile drugSummaryPage = new DrugSummaryPageMobile(wd);
+		DrugSummaryPageMobile drugSummaryPage = (DrugSummaryPageMobile) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugSummary);
 		drugSummaryPage.validateDrugSummaryPage();
-		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
 	}
 	
 	@Then("^the user validates Get Started Page for UHC$")

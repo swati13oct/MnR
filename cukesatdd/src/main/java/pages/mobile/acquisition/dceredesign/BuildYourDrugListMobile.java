@@ -1,31 +1,27 @@
 package pages.mobile.acquisition.dceredesign;
 
 import java.util.List;
-import java.util.Map;
 
-import org.json.JSONException;
-import org.json.JSONObject;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Wait;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
-import acceptancetests.data.CommonConstants;
-import acceptancetests.data.PageData;
+import com.itextpdf.text.Document;
+
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
-import pages.acquisition.commonpages.ComparePlansPage;
-import pages.acquisition.dceredesign.TellUsAboutDrug;
-import pages.acquisition.dceredesign.ZipCodePlanYearCapturePage;
-import pages.acquisition.ulayer.PageTitleConstants;
+import io.appium.java_client.AppiumFluentWait;
 import pages.mobile.acquisition.ulayer.ComparePlansPageMobile;
 
 public class BuildYourDrugListMobile extends UhcDriver {
 
-	@FindBy(xpath = "//input[contains(@id, 'drugsearch')]")
+	@FindBy(xpath = "//input[@id='drugsearch']")
 	public WebElement EnterDrugNameTxt;
 
 	@FindBy(xpath = "//button[(@id= 'search')]")
@@ -96,16 +92,27 @@ public class BuildYourDrugListMobile extends UhcDriver {
 		} else
 			Assert.fail("Error Message displayed for Blank Drug search : " + BlankDrugError.getText());
 	}
+	
+	
+
+	public void addDrugs() {
+		validateNew(EnterDrugNameTxt);
+		
+	}
 
 	public void addDrugs(String drugName) throws InterruptedException {
-		validate(EnterDrugNameTxt);
-		//jsClickNew(EnterDrugNameTxt);
-		EnterDrugNameTxt.click();
-		EnterDrugNameTxt.sendKeys(drugName);
-		
+		// validate(EnterDrugNameTxt);
+	
+		//waitforElement(EnterDrugNameTxt);
+	
+//		EnterDrugNameTxt.click();
+//		jsClickNew(EnterDrugNameTxt);
+		//EnterDrugNameTxt.sendKeys(drugName);
+		sendkeys(EnterDrugNameTxt, drugName);
+
 		Thread.sleep(5000);
-		WebElement drugname = driver.findElement(By.xpath("//*[contains(@id,'"+drugName+"')]/div"));
-		
+		WebElement drugname = driver.findElement(By.xpath("//*[contains(@id,'" + drugName + "')]/div"));
+
 		jsClickNew(drugname);
 		/*
 		 * if(validate(SearchBtn)) SearchBtn.click(); if(validate(selectBtn))
@@ -114,10 +121,14 @@ public class BuildYourDrugListMobile extends UhcDriver {
 		validateNew(addToDrugList);
 		Thread.sleep(2000);
 		jsClickMobile(addToDrugList);
-		
-		//addToDrugList.click();
-		//reviewDrugCost.click();
+
+		// addToDrugList.click();
+		// reviewDrugCost.click();
 	}
+
+	
+
+
 
 	public void clickReviewDrugCostBtn() {
 		// reviewDrugCost.click();

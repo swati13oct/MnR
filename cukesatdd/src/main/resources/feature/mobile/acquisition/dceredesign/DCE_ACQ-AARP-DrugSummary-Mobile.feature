@@ -47,12 +47,12 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
     @dce_DrugSummary_Page_AARP
     Examples: 
       | site | path                                             | pageName                   | drugName | zipCode |
-      | AARP | health-plans/estimate-drug-costs.html/getstarted | DCE Redesign - Get Started | Lipitor  |   90210 |
+      | AARP | health-plans/estimate-drug-costs.html/getstarted | DCE Redesign - Get Started | Lipitor  |   10001 |
 
     @dce_DrugSummary_Page_UHC
     Examples: 
       | site | path                                             | pageName                   | drugName | zipCode |
-      | UHC  | health-plans/estimate-drug-costs.html/getstarted | DCE Redesign - Get Started | Lipitor  |   90210 |
+      | UHC  | health-plans/estimate-drug-costs.html/getstarted | DCE Redesign - Get Started | Lipitor  |   10001 |
 
   @drugSummary_SAM_Icon_AARP
   Scenario Outline: Test to verify SAM icon is visible on Drug summary page

@@ -25,10 +25,10 @@ public class DrugSummaryPageMobile extends UhcDriver {
 	@FindBy(xpath = "//h2[contains(text(),'Your estimated')]")
 	public WebElement reviewDrugCostPageHeading;
 
-	@FindBy(xpath = "//*[@class='uhc-filter-group']")
+	@FindBy(xpath = "//body/div[@id='site-wrapper']/div[3]/div[1]/div[1]/div[1]/app-root[1]/app-dceplansummary[1]/div[1]/div[3]/div[2]/select[1]")
 	public WebElement planTypeToggle;
 
-	@FindBy(xpath = "//*[text()='Pharmacy:']/..")
+	@FindBy(xpath = "//span[text()='Pharmacy:']/..")
 	public WebElement pharmacyLink;
 
 	@FindBy(xpath = "//*[@class='column column-12']//*[@class='uhc-select uhc-select--block']")
@@ -49,10 +49,10 @@ public class DrugSummaryPageMobile extends UhcDriver {
 	@FindBy(xpath = "//*[text()='Drugs Covered']/following-sibling::div")
 	public WebElement drugsCovered;
 
-	@FindBy(xpath = "//*[contains(@id,'averageLinkBtn')]/following-sibling::button")
+	@FindBy(xpath = "//*[contains(@id,'averageLinkBtn')]")
 	public WebElement whyAverageLink;
 
-	@FindBy(xpath = "//*[contains(@id,'includeLinkBtn')]/following-sibling::button")
+	@FindBy(xpath = "//*[contains(@id,'includeLinkBtn')]")
 	public WebElement whatsIncludedLink;
 
 	@FindBy(xpath = "//*[contains(@id,'priceLinkBtn')]")
@@ -136,12 +136,25 @@ public class DrugSummaryPageMobile extends UhcDriver {
 
 	}
 
-	public DrugSummaryPageMobile validateDrugSummaryPage() {
-		if (validateNew(reviewDrugCostPageHeading) && validateNew(planTypeToggle) && validateNew(pharmacyLink)
-				&& validateNew(planCardHeader) && validateNew(avgMonthlyDrugCost) && validateNew(monthlyPremium)
-				&& validateNew(annualEstimatedTotal) && validateNew(drugsCovered) && validateNew(whyAverageLink)
-				&& validateNew(whatsIncludedLink) && validateNew(drugPricingLink) && validateNew(viewDrugCostBtn)
-				&& validateNew(viewPlanDetailsBtn) && validateNew(saveBtn) && validateNew(disclaimer)) {
+	public DrugSummaryPageMobile validateDrugSummaryPage() throws InterruptedException {
+		//&& validateNew(whyAverageLink) 
+		//&& validateNew(whatsIncludedLink)
+		
+		if (validateNew(reviewDrugCostPageHeading) 
+				&& validateNew(planTypeToggle) 
+				&& validateNew(pharmacyLink) 
+				&& validateNew(planCardHeader)
+				&& validateNew(avgMonthlyDrugCost) 
+				&& validateNew(monthlyPremium) 
+				&& validateNew(annualEstimatedTotal)
+				&& validateNew(drugsCovered) 
+				&& validateNew(whyAverageLink) 
+				&& validateNew(whatsIncludedLink)
+				&& validateNew(drugPricingLink) 
+				&& validateNew(viewDrugCostBtn) 
+				&& validateNew(viewPlanDetailsBtn)
+				&& validateNew(saveBtn) 
+				&& validateNew(disclaimer)) {
 			return new DrugSummaryPageMobile(driver);
 		}
 
@@ -310,8 +323,8 @@ public class DrugSummaryPageMobile extends UhcDriver {
 	public DrugDetailsPageMobile clickViewDrugDetailsForPlan(String plantype, String planName) {
 		if (plantype.equalsIgnoreCase("MAPD")) {
 			selectFromDropDownByValue(ToggleDropDown, "MAPD");
-			//validateNew(mapdPlanToggle);
-			//jsClickNew(mapdPlanToggle);
+			// validateNew(mapdPlanToggle);
+			// jsClickNew(mapdPlanToggle);
 			System.out.println("MAPD Plan Toggle Clicked");
 			WebElement DrugDetailsLinkforPlan = driver.findElement(
 					By.xpath("//button[contains(@aria-label, 'View Drug Costs') and contains(@aria-label, '" + planName
@@ -322,8 +335,8 @@ public class DrugSummaryPageMobile extends UhcDriver {
 
 		} else if (plantype.equalsIgnoreCase("PDP")) {
 			selectFromDropDownByValue(ToggleDropDown, "PDP");
-			//validateNew(pdpPlanToggle);
-			//jsClickNew(pdpPlanToggle);
+			// validateNew(pdpPlanToggle);
+			// jsClickNew(pdpPlanToggle);
 			System.out.println("PDP Plan Toggle Clicked");
 			WebElement DrugDetailsLinkforPlan = driver.findElement(
 					By.xpath("//button[contains(@aria-label, 'View Drug Costs') and contains(@aria-label, '" + planName
@@ -334,8 +347,8 @@ public class DrugSummaryPageMobile extends UhcDriver {
 
 		} else {
 			selectFromDropDownByValue(ToggleDropDown, "SNP");
-			//validateNew(snpPlanToggle);
-			//jsClickNew(snpPlanToggle);
+			// validateNew(snpPlanToggle);
+			// jsClickNew(snpPlanToggle);
 			System.out.println("SNP Plan Toggle Clicked");
 			WebElement DrugDetailsLinkforPlan = driver.findElement(
 					By.xpath("//button[contains(@aria-label, 'View Drug Costs') and contains(@aria-label, '" + planName

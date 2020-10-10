@@ -16,7 +16,8 @@ import pages.mobile.acquisition.planrecommendationengine.CommonutilitiesMobile;
 
 public class ZipCodeAndPlanYearCapturePageMobile extends UhcDriver {
 
-	@FindBy(xpath = "//input[@id='zip-code' and @placeholder='Enter zip code']")
+	//@FindBy(xpath = "//input[@id='zip-code']")
+	@FindBy(css = "#zip-code")
 	public WebElement zipCodeTxtbox;
 
 	@FindBy(xpath = "//span[@id='zipError']")
@@ -96,12 +97,14 @@ public class ZipCodeAndPlanYearCapturePageMobile extends UhcDriver {
 	public WebElement FindPlans;
 
 	public void enterZipCodeandcounty(String zipcode) throws InterruptedException {
-		validateNew(zipCodeTxtbox);
-		zipCodeTxtbox.clear();
+		//validateNew(zipCodeTxtbox);
+//		validateNew(zipCodeTxtbox, 4000);
+//		zipCodeTxtbox.clear();
 		//zipCodeTxtbox.click();
 		
-		//Thread.sleep(2000);
+		Thread.sleep(2000);
 		jsClickMobile(zipCodeTxtbox);
+		
 		//Thread.sleep(1000);
 		sendkeys(zipCodeTxtbox, zipcode);
 		Thread.sleep(3000);
@@ -110,14 +113,12 @@ public class ZipCodeAndPlanYearCapturePageMobile extends UhcDriver {
 				countyDropdown.click();
 				CommonUtility.waitForPageLoad(driver, countyRows, 30);
 				driver.findElements(By.xpath("//select[@id='county']/option")).get(1).click();
+				/*Clicking on Select Plan year drop down header*/
 				driver.findElement(By.xpath("//label[contains(text(),'Select Plan Year')]")).click();
 			}
 		} catch (Exception e) {
 			System.out.println("county box not found");
 		}
-		validateNew(continueBtn);
-		jsClickNew(continueBtn);
-		// continueBtn.click();
 	}
 
 	public DrugSummaryPageMobile clickContinueBtn() {
