@@ -21,6 +21,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Cookie;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
@@ -1186,6 +1188,7 @@ try {
     	int counter = 5;
     	boolean ready = false;
     	if(checkIfPageReadySafari()) {
+    		// Solution 1 - Check if overlay displayed
     		/*do {
     			try {
     				threadsleep(2);
@@ -1202,10 +1205,11 @@ try {
     		} while(counter > 0);*/
     		
     		
-			do {
+			/*do {
 				try {
 					threadsleep(2);
-					/*List<WebElement> overlays = driver.findElements(By.xpath("//div[@id='overlay' or  @id='loading_fader']"));
+					// Solution 2 - get all elements of overlays and wait till css value of display is none
+					List<WebElement> overlays = driver.findElements(By.xpath("//div[@id='overlay' or  @id='loading_fader']"));
 					int overlayInvisible = 0;
 					if(overlays.size() > 0) {
 						for(WebElement overlay: overlays) {
@@ -1219,7 +1223,9 @@ try {
 					if(overlays.size() == overlayInvisible) {
 						ready = true;
 						break;
-					}*/
+					}
+					
+					// Solution 3 - Using explicit wait to check if all overlays are invisible
 					WebDriverWait wait = new WebDriverWait(driver, 10);
 					List<WebElement> overlays = driver.findElements(By.xpath("//div[@id='overlay' or  @id='loading_fader']"));
 					ready = wait.until(ExpectedConditions.invisibilityOfAllElements(overlays));
@@ -1227,10 +1233,42 @@ try {
 						break;
 					}
 					
-				} catch (WebDriverException e) {/**decrement counter and retry*/}
+				} catch (WebDriverException e) {*//**decrement counter and retry*//*}
 				System.out.println("Waiting for page to load");
 				counter--;
-			} while(counter > 0);
+			} while(counter > 0);*/
+    		
+    		//Sets FluentWait Setup
+    		for(; counter >= 0; counter--) {
+    			List<WebElement> loadingScreen = null;
+    			FluentWait<WebDriver> fwait = new FluentWait<WebDriver>(driver)
+    					.withTimeout(Duration.ofSeconds(5))
+    					.pollingEvery(Duration.ofMillis(500))
+    					.ignoring(NoSuchElementException.class)
+    					.ignoring(TimeoutException.class);
+
+    			// First checking to see if the loading indicator is found
+    			// we catch and throw no exception here in case they aren't ignored
+    			try {
+    				System.out.println("Waiting to check if Loading screen is present");
+    				loadingScreen = fwait.until(new Function<WebDriver, List<WebElement>>() {
+    					public List<WebElement> apply(WebDriver driver) {
+    						return driver.findElements(By.xpath("//div[@id='overlay' or  @id='loading_fader']"));
+    					}
+    				});
+    			} catch (Exception e) {}
+
+    			// checking if loading indicator was found and if so we wait for it to
+    			// disappear
+    			if (loadingScreen != null && !loadingScreen.isEmpty()) {
+    				System.out.println("Loading screen visible!!! Waiting till it disappears");
+    				WebDriverWait wait = new WebDriverWait(driver, defaultTimeoutInSec);
+    				wait.until(ExpectedConditions
+    						.invisibilityOfElementLocated(By.xpath("//div[@id='overlay' or  @id='loading_fader']")));
+    				ready = true;
+    				break;
+    			}
+    		}
 
     	}
     	return ready;
