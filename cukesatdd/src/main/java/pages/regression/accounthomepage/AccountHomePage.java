@@ -4222,6 +4222,7 @@ public class AccountHomePage extends UhcDriver {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	  try{
 	  if (MakeAPaymentButton.isDisplayed())
 		{
 		System.out.println("Make a payment button was displayed on Payments page");
@@ -4244,6 +4245,37 @@ public class AccountHomePage extends UhcDriver {
 			}
 			
 		}
+	  }
+	  catch (Exception e)
+	  {
+		  System.out.println("Refreshing page as Make a Payment button was not displayed on first attempt");
+		  driver.navigate().refresh();
+		  CommonUtility.waitForPageLoad(driver, MakeAPaymentButton, 30);
+		  if (MakeAPaymentButton.isDisplayed())
+			{
+			System.out.println("Make a payment button was displayed on Payments page");
+			return new PaymentHistoryPage(driver);
+			}
+			else
+			{
+				System.out.println("Make a payment button was not displayed on first time Payments page loaded, refreshing the page");
+				driver.navigate().refresh();
+				if (MakeAPaymentButton.isDisplayed())
+					
+				{
+					System.out.println("Make a payment button was displayed on Payments page");
+					return new PaymentHistoryPage(driver);
+					}
+				else
+				{
+					System.out.println("Make a payment button was displayed on Payments page");
+					Assert.fail("Make a payment button was not displayed on Payments page");
+				}
+				
+			}
+		  
+	  }
+	  
 		if (driver.getCurrentUrl().contains("payments")) {
 			return new PaymentHistoryPage(driver);
 		}

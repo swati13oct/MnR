@@ -405,6 +405,8 @@ public class TestHarness extends UhcDriver {
 				}
 				CommonUtility.checkPageIsReadyNew(driver);
 				CommonUtility.waitForPageLoad(driver, MakeAPaymentButton, 20);
+		try
+		{
 		if (MakeAPaymentButton.isDisplayed())
 		{
 		System.out.println("Make a payment button was displayed on Payments page");
@@ -424,6 +426,38 @@ public class TestHarness extends UhcDriver {
 			{
 				System.out.println("Make a payment button was displayed on Payments page");
 				Assert.fail("Make a payment button was not displayed on Payments page");
+			}
+			
+		}
+		}
+		catch (Exception e)
+		{
+			System.out.println("Make a payment button was not displayed on first time Payments page loaded, refreshing the page");
+			driver.navigate().refresh();
+			CommonUtility.checkPageIsReadyNew(driver);
+			CommonUtility.waitForPageLoad(driver, MakeAPaymentButton, 20);
+	
+			if (MakeAPaymentButton.isDisplayed())
+			{
+			System.out.println("Make a payment button was displayed on Payments page");
+			return new PaymentHistoryPage(driver);
+			}
+			else
+			{
+				System.out.println("Make a payment button was not displayed on first time Payments page loaded, refreshing the page");
+				driver.navigate().refresh();
+				if (MakeAPaymentButton.isDisplayed())
+					
+				{
+					System.out.println("Make a payment button was displayed on Payments page");
+					return new PaymentHistoryPage(driver);
+					}
+				else
+				{
+					System.out.println("Make a payment button was displayed on Payments page");
+					Assert.fail("Make a payment button was not displayed on Payments page");
+				}
+				
 			}
 			
 		}
