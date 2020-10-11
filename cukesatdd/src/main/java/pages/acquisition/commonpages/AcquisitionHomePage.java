@@ -1863,8 +1863,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		
 		public void validateSubNavShopPlanLinks() {
 			CheckPageLoad();
+			waitForPageLoadSafari();
 			CheckiPerseptions();
-
 			waitforElement(ShopForaplan);
 			if (ShopForaplan.isDisplayed()) {
 				Actions actions = new Actions(driver);
@@ -1936,6 +1936,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		
 		public void validateSubNavMedEdLinks() {
 			CheckPageLoad();
+			waitForPageLoadSafari();
 			CheckiPerseptions();
 
 			waitforElement(lnkLearnAboutMedicare);
