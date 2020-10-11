@@ -122,12 +122,12 @@ Feature: 1.07 Member DCE Page
     When I select the pharmacy from the list
     When I navigate to costs tab
     Then I should see cost of the drug
-    Then I should see learn more about the drug tiers and learn more about the drug payment stages link
+    #Then I should see learn more about the drug tiers and learn more about the drug payment stages link
 
      
    Examples: 
-      | TID   | planType |memberType | drug1  |   dosage2       | zipcode | radius   | quantity2 | frequency2 |
-      | 15325 | MAPD     |MAPD_DCE   | FANAPT |  FANAPT TAB 1MG |   00820 | 25 miles |  100      |Every 1 month |
+      | TID   | planType |memberType | drug1  |   dosage2        | zipcode | radius   | quantity2 | frequency2 |
+      | 15325 | MAPD     |MAPD_DCE   | FANAPT |  Fanapt TAB 10MG |   00820 | 25 miles |  100      |Every 1 month |
      # | 15325 | Medica   |Medica_DCE | Lipitor  |  Lipitor TAB 20MG |   00820 | 25 miles |  31       | Every 3 months|
 	
   # | 15331   | PDP      |NonLISSplittier  |Lipitor|Lipitor TAB 10MG|31|Every 1 month|Lipitor TAB 20MG|Lipitor TAB 20MG|atorvastatin calcium TAB 20MG|90210|25 miles|100|Every 3 months|
