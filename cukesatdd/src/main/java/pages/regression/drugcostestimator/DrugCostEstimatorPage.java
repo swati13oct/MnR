@@ -151,6 +151,9 @@ public class DrugCostEstimatorPage extends UhcDriver {
 
 	@FindBy(xpath = "//div[@id='pharmacy-results']//span[contains(@class,'pharmacy-name')]")
 	public List<WebElement> pharmacies;
+	
+	@FindBy(xpath = "//li[@id='leftArrowId']/preceding-sibling::li")
+	public WebElement zipcodeSearchresults;
 
 	@FindBy(xpath = "//div[@id='pharmacy-results']/div[1]/ul[1]/li[1]/div/div[2]/a") 
 	public WebElement select_btn_first; 
@@ -857,6 +860,8 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	 */
 	public void validatePharmacylist() {
 		//Assert.assertEquals(3, pharmacies.size());
+		Assert.assertTrue(pharmacies.size()>0);
+		System.out.println("Number of pharmacies search results value is : "  + zipcodeSearchresults.getText());
 	}
 
 	/** 
