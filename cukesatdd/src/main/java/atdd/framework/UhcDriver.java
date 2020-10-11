@@ -1265,7 +1265,7 @@ try {
     			if(!CollectionUtils.isEmpty(loadingScreen)) {
     				System.out.println("Loading screen visible!!! Waiting till it disappears");
     				WebDriverWait wait = new WebDriverWait(driver, defaultTimeoutInSec);
-    				wait.until(ExpectedConditions
+    				fwait.until(ExpectedConditions
     						.invisibilityOfAllElements(loadingScreen));
 //    						.invisibilityOfElementLocated(By.xpath("//div[@id='overlay' or  @id='loading_fader' or @class='loading-block']")));
     				ready = true;
