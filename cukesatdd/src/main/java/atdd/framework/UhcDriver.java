@@ -12,6 +12,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
 import java.util.regex.Pattern;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -1185,9 +1186,9 @@ try {
 	}
     
     public boolean waitForPageLoadSafari() {
-    	int counter = 5;
+    	int counter = 3;
     	boolean ready = false;
-    	if(checkIfPageReadySafari()) {
+//    	if(checkIfPageReadySafari()) {
     		// Solution 1 - Check if overlay displayed
     		/*do {
     			try {
@@ -1239,11 +1240,11 @@ try {
 			} while(counter > 0);*/
     		
     		//Sets FluentWait Setup
-    		for(; counter >= 0; counter--) {
-    			threadsleep(3);
+    		for(; counter > 0; counter--) {
+//    			threadsleep(3);
     			List<WebElement> loadingScreen = null;
     			FluentWait<WebDriver> fwait = new FluentWait<WebDriver>(driver)
-    					.withTimeout(Duration.ofSeconds(5))
+    					.withTimeout(Duration.ofSeconds(10))
     					.pollingEvery(Duration.ofMillis(500))
     					.ignoring(NoSuchElementException.class)
     					.ignoring(TimeoutException.class);
@@ -1254,35 +1255,32 @@ try {
     				System.out.println("Waiting to check if Loading screen is present");
     				loadingScreen = fwait.until(new Function<WebDriver, List<WebElement>>() {
     					public List<WebElement> apply(WebDriver driver) {
-    						return driver.findElements(By.xpath("//div[@id='overlay' or  @id='loading_fader']"));
+    						return driver.findElements(By.xpath("//div[@id='overlay' or  @id='loading_fader' or @class='loading-block']"));
     					}
     				});
     			} catch (Exception e) {}
 
     			// checking if loading indicator was found and if so we wait for it to
     			// disappear
-    			if (loadingScreen != null) {
-    				if(loadingScreen.isEmpty()) {
-    					System.out.println("Loading screen visible!!! Waiting till it disappears");
-    					WebDriverWait wait = new WebDriverWait(driver, defaultTimeoutInSec);
-    					wait.until(ExpectedConditions
-    							.invisibilityOfElementLocated(By.xpath("//div[@id='overlay' or  @id='loading_fader']")));
-    					ready = true;
-    					System.out.println("Loading screen not displayed");
-    					break;
-    				} else {
-    					System.out.println("No loading screen element(s) found");
-    				}
+    			if(!CollectionUtils.isEmpty(loadingScreen)) {
+    				System.out.println("Loading screen visible!!! Waiting till it disappears");
+    				WebDriverWait wait = new WebDriverWait(driver, defaultTimeoutInSec);
+    				wait.until(ExpectedConditions
+    						.invisibilityOfElementLocated(By.xpath("//div[@id='overlay' or  @id='loading_fader' or @class='loading-block']")));
+    				ready = true;
+    				System.out.println("Loading screen disappeared, page is ready.");
+    				break;
+    			} else {
+    				System.out.println("No loading screen element(s) found");
     			}
     		}
-
-    	}
+//    	}
     	return ready;
     }
 
     
     public boolean checkIfPageReadySafari() {
-    	int counter = 10;
+    	int counter = 5;
     	boolean ready = false;
     	WebDriverWait wait = new WebDriverWait(driver, defaultTimeoutInSec);
     	if(MRScenario.browsername.equalsIgnoreCase("Safari")) {
