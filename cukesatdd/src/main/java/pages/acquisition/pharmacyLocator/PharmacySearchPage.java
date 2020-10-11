@@ -126,7 +126,7 @@ public class PharmacySearchPage extends PharmacySearchBase {
 
 
 	public void validateAllTooltips(String language, boolean hasPrefRetailPharmacyWidget) {
-		checkIfPageReadySafari();
+		waitForPageLoadSafari();
 		scrollToView(mapToggleElement);
 		moveMouseToElement(mapToggleElement);
 		String targetTooltipName="Standard Network Pharmacy";

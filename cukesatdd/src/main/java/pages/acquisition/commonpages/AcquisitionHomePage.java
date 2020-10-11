@@ -1799,6 +1799,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			visitorprofileicon.click();
 			WebElement GuestProfile = driver.findElement(By.xpath("//*[contains(text(), 'Your Guest Profile')]"));
 			CheckPageLoad();
+			waitForPageLoadSafari();
 			CheckiPerseptions();
 			CommonUtility.waitForPageLoadNew(driver, GuestProfile, 30);
 			if (driver.getCurrentUrl().contains("profile/guest")) {
@@ -1809,6 +1810,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			}
 			driver.navigate().back();
 			CheckPageLoad();
+			waitForPageLoadSafari();
 			CheckiPerseptions();
 
 			CommonUtility.waitForPageLoadNew(driver, findPlansButton, 30);
