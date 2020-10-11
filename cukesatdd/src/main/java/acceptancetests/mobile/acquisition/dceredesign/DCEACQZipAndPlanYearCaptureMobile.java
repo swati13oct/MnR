@@ -71,12 +71,20 @@ public class DCEACQZipAndPlanYearCaptureMobile {
 
 	@Then("^user should be navigated to zipcode and plan year capture page for AEP on UHC$")
 	public void user_should_be_navigated_to_zipcode_and_plan_year_capture_page_for_AEP_UHC() {
-		// ZipCodePlanYearCapturePage zipCodePlanYearPage=(ZipCodePlanYearCapturePage)
-		// getLoginScenario().getBean(PageConstants.DCE_Redesign_ZipCodePlanYearCapture);
-		// zipCodePlanYearPage.validateZipCodePlanYearCapturePageAEP();
-		ZipCodeAndPlanYearCapturePageMobile zipCodePlanYearPage = new ZipCodeAndPlanYearCapturePageMobile(wd);
+		ZipCodeAndPlanYearCapturePageMobile zipCodePlanYearPage = (ZipCodeAndPlanYearCapturePageMobile) getLoginScenario()
+				.getBean(PageConstants.DCE_Redesign_ZipCodePlanYearCapture);
+
+		zipCodePlanYearPage = (ZipCodeAndPlanYearCapturePageMobile) getLoginScenario()
+				.getBean(PageConstants.DCE_Redesign_ZipCodePlanYearCapture);
 		zipCodePlanYearPage.validateZipCodePlanYearCapturePageNonAEP();
-		getLoginScenario().saveBean(PageConstants.DCE_Redesign_ZipCodePlanYearCapture, zipCodePlanYearPage);
+
+		/*
+		 * ZipCodeAndPlanYearCapturePageMobile zipCodePlanYearPage = new
+		 * ZipCodeAndPlanYearCapturePageMobile(wd);
+		 * zipCodePlanYearPage.validateZipCodePlanYearCapturePageNonAEP();
+		 * getLoginScenario().saveBean(PageConstants.
+		 * DCE_Redesign_ZipCodePlanYearCapture, zipCodePlanYearPage);
+		 */
 	}
 
 	@Then("^plan year dropdown should be displayed during AEP on UHC$")
@@ -106,6 +114,8 @@ public class DCEACQZipAndPlanYearCaptureMobile {
 		ZipCodeAndPlanYearCapturePageMobile zipCodePlanYearPage = (ZipCodeAndPlanYearCapturePageMobile) getLoginScenario()
 				.getBean(PageConstants.DCE_Redesign_ZipCodePlanYearCapture);
 		zipCodePlanYearPage.validateZipCodeErrorMessage();
+		
+		
 	}
 
 	@When("^user selects plan year on UHC$")

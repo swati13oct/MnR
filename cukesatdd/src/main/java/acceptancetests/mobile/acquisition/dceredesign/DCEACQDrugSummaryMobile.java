@@ -128,7 +128,8 @@ public class DCEACQDrugSummaryMobile {
 	public void clicks_on_Review_drug_cost_button_UHC() {
 		BuildYourDrugListMobile buildDrugList = (BuildYourDrugListMobile) getLoginScenario()
 				.getBean(PageConstants.DCE_Redesign_BuildDrugList);
-		buildDrugList.clickReviewDrugCostBtn();
+		ZipCodeAndPlanYearCapturePageMobile zipCodePlanYearPage = buildDrugList.navigateToZipEntryPage();
+		getLoginScenario().saveBean(PageConstants.DCE_Redesign_ZipCodePlanYearCapture, zipCodePlanYearPage);
 	}
 
 	@Then("^user should be navigated to UHC, zipcode and plan year capture page for Non AEP$")

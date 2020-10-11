@@ -1155,6 +1155,7 @@ public class MRScenario {
 
 	public static String returnJobURL() {
 		return JobURL;
+		//return JobURLVD;
 	}
 
 	public void getJobURL(String jobID) {
