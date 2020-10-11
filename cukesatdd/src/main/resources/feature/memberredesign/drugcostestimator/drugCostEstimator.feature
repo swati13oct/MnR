@@ -122,7 +122,7 @@ Feature: 1.07 Member DCE Page
     When I select the pharmacy from the list
     When I navigate to costs tab
     Then I should see cost of the drug
-    #Then I should see learn more about the drug tiers and learn more about the drug payment stages link
+    Then I should see learn more about the drug tiers and learn more about the drug payment stages link
 
      
    Examples: 

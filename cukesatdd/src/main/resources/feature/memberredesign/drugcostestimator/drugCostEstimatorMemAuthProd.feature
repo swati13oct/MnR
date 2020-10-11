@@ -50,7 +50,7 @@ Feature: 1.07.1 Member DCE Page - Member Auth - PROD
       | TID   | username | password | MemUserName         | planType | memberType |drug1   | dosage1          | quantity1 | frequency1  |
       | 15325 | kkumard | mnrs786@ | skho@roadrunner.com | MAPD     | MAPD_DCE   |Lipitor | Lipitor TAB 10MG |        31 | Every 1 month |
   
-   #@drugCostEstimator3 @prod @prod_dce_p2
+   @drugCostEstimator3 @prod @prod_dce_p2
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Pharmacy saver results
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
@@ -69,22 +69,42 @@ Feature: 1.07.1 Member DCE Page - Member Auth - PROD
       | Radius        | <radius>       |
       | Pharmacy Type | <pharmacytype> |
     Then I should see pharmacy results as per the filter
-    And I should see pharmacy saver pharmacies in results
+    When I navigate to costs tab
+    Then I should see cost of the drug
+    Then I should see learn more about the drug tiers and learn more about the drug payment stages link
     
-    @prod_sanity_02
-     Examples: 
-      | TID   | username | password | MemUserName | planType| memberType| zipcode| radius  | pharmacytype |
-      | 15325 | kkumard | mnrs786@ | SWISSCHARD26| MAPD    | MAPD_DCE  | 06450  | 25 miles| Pharmacy Saver|
-      | 15325 | kkumard | mnrs786@ | BATLLOT@AOL.COM| PCP  | PCP_DCE  | 06450  | 25 miles| Pharmacy Saver|
-
-	@drugCostEstimator3 @prod @prod_dce_p2
     Examples: 
       | TID   | username | password | MemUserName | planType| memberType| zipcode| radius  | pharmacytype |
-      | 15325 | kkumard | mnrs786@ | SWISSCHARD26| MAPD    | MAPD_DCE  | 06450  | 25 miles| Pharmacy Saver|
-      | 15325 | kkumard | mnrs786@ | BATLLOT@AOL.COM| PCP  | PCP_DCE  | 06450  | 25 miles| Pharmacy Saver|
-      | 15325 | kkumard | mnrs786@ | SUSICHAPMAN@GMAIL.COM | Medica | Medica_DCE  | 06450  | 25 miles| Pharmacy Saver|
+      | 15325 | kkumard | mnrs786@ | SWISSCHARD26| MAPD    | MAPD_DCE  | 92260  | 25 miles| Pharmacy Saver|
+  #   | 15325 | kkumard | mnrs786@ | BATLLOT@AOL.COM| PCP  | PCP_DCE  | 06450  | 25 miles| Pharmacy Saver|
+      | 15325 | kkumard | mnrs786@ | SUSICHAPMAN@GMAIL.COM | Medica | Medica_DCE  | 33155  | 25 miles| Pharmacy Saver|
       
-      
+   @prod_sanity_02
+  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Pharmacy saver results
+    Given the user is on member auth login flow page
+    When the member is able to login with correct username and password
+      | Username | <username> |
+      | Password | <password> |
+    And Member Enters the Username he wants to search
+      | MemUsername | <MemUserName> |
+    And user clicks on member to select
+    And user stores test input for validations
+        | Plan Type   | <planType>   |
+      | Member Type | <memberType> |
+    When I navigate to drug look up page
+    And I navigate to step2 page
+    And we search the pharmacy within miles zipcode and pharmacy type
+      | Zipcode       | <zipcode>      |
+      | Radius        | <radius>       |
+      | Pharmacy Type | <pharmacytype> |
+    Then I should see pharmacy results as per the filter
+    When I navigate to costs tab
+    Then I should see cost of the drug     
+    
+     Examples: 
+      | TID   | username | password | MemUserName | planType| memberType| zipcode| radius  | pharmacytype |
+      | 15325 | kkumard | mnrs786@  | SWISSCHARD26| MAPD    | MAPD_DCE  | 92260  | 25 miles| Pharmacy Saver|
+      | 15325 | kkumard | mnrs786@  | SUSICHAPMAN@GMAIL.COM| Medica  | Medica_DCE  | 33155  | 25 miles| Pharmacy Saver|
 
   @drugCostEstimator6  @Member_DCE_sso
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> -I1.3 To Verify MR portal group members DCE should redirect to optum rx sso landing page.
