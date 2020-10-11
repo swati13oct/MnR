@@ -1485,11 +1485,12 @@ public class AcquisitionHomePage extends GlobalWebElements {
 //			CommonUtility.checkPageIsReady(driver);
 			validate(callsamtooltip);
 			CheckiPerseptions();
-			callsam.click();
+			jsClickNew(callsam);
 			System.out.println("@@@@@@@@@@@@@@@ Call Icon Clicked @@@@@@@@@@@@@@@");
 			driver.switchTo().activeElement();
 			System.out.println(CallSamTFN.getText());
-			CallSamTFNClose.click();
+//			CallSamTFNClose.click();
+			jsClickNew(CallSamTFNClose);
 			validateNew(callsam);		
 			return null;
 		}
@@ -1531,11 +1532,13 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		public AcquisitionHomePage  validateChatpopup() throws InterruptedException {
 			//CommonUtility.checkPageIsReady(driver);
 			chatsam.click();
+			jsClickNew(chatsam);
 			System.out.println("@@@@@@@@@@@@@@@ Chat Icon Clicked @@@@@@@@@@@@@@@");	
 //			chatsamtooltip.click();
 			driver.switchTo().activeElement();
 //			System.out.println(ChatSamHead.getText());
-			ChatSamTFNClose.click();
+//			ChatSamTFNClose.click();
+			jsClickNew(ChatSamTFNClose);
 			validateNew(chatsam);		
 			return null;
 		}
