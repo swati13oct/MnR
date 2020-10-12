@@ -1,7 +1,7 @@
 @regressionMember
 Feature: S1.1 To test Member Auth premium payment flows Micro App.
 
-  @regressionMemberPROD
+  @regressionMemberPROD @sanityMemberPROD1
   Scenario Outline: TID: <TID> -  Test Case 01- To validate One time Credit Card Payment Flow for Federal Plan member
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password

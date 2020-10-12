@@ -799,8 +799,10 @@ public class PlanRecommendationEngineStepDefinition {
 		planSelectorResultspage.validateUIAPIRecommendations();
 		planSelectorResultspage.validateUIAPIRankingPlans();
 		planSelectorResultspage.changePlanyear("current");
-		//planSelectorResultspage.validateUIAPIRecommendations();
-		//planSelectorResultspage.validateUIAPIRankingPlans();
+		// Toggling back and validating as future year only have values stored in storage
+		planSelectorResultspage.changePlanyear("future");
+		planSelectorResultspage.validateUIAPIRecommendations();
+		planSelectorResultspage.validateUIAPIRankingPlans();
    	}
 	
 	public void checkpopup() {
