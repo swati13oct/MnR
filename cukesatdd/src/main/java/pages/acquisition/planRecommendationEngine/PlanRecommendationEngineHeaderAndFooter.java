@@ -140,9 +140,12 @@ public class PlanRecommendationEngineHeaderAndFooter extends UhcDriver {
     private WebElement headerShopLink;
     
     @FindBy(css = "#planTypesColumn h3:nth-of-type(2)>a")
-    private WebElement headerEnrollLink;
+    private WebElement headerNewExistingMemberLink;
     
     @FindBy(css = "#planTypesColumn h3:nth-of-type(3)>a")
+    private WebElement headerEnrollLink;
+    
+    @FindBy(css = "#planTypesColumn h3:nth-of-type(4)>a")
     private WebElement headerResourcesLink;
     
     @FindBy(css = "#subnav_2 div[class$='content-2']>h3:nth-of-type(1)>a")
@@ -151,10 +154,10 @@ public class PlanRecommendationEngineHeaderAndFooter extends UhcDriver {
     @FindBy(css = "#subnav_2 div[class$='content-2']>h3:nth-of-type(2)>a")
 	private WebElement headerDualSpecialLink;
 
-	@FindBy(css = "#subnav_2 div[class$='content-2']>h3:nth-of-type(3)>a")
+	@FindBy(css = "#subnav_2 div[class$='content-2']>h3 #_82nrmz9f2>a")
     private WebElement headerMedicaresupplementplanLink;
     
-	@FindBy(css = "#subnav_2 div[class$='content-2']>h3:nth-of-type(4)>a")
+	@FindBy(css = "#subnav_2 div[class$='content-2']>h3:nth-of-type(5)>a")
     private WebElement headerPrescriptionLink;
     
     @FindBy(xpath = "//a[contains(text(),'Get a Plan Recommendation')]")
@@ -217,10 +220,10 @@ public class PlanRecommendationEngineHeaderAndFooter extends UhcDriver {
 	@FindBy(css = "#gfn_lnk_row2_1 > span")
 	private WebElement footerMedicareAdvantagePlansLink;
 		
-	@FindBy(css = "#_phmhwb3qf")
+	@FindBy(css = "#_9h82fwc49")
 	private WebElement footerMedicareSupplementInsurancePlansLink;
 	
-	@FindBy(css = "#gfn_lnk_row2_4 > span")
+	@FindBy(css = "#gfn_lnk_row2_5 > span")
 	private WebElement footerMedicarePrescriptionDrugPlansLink;
 	
 	@FindBy(css = "#gfn_lnk_row3_1 > span")
@@ -327,9 +330,11 @@ public class PlanRecommendationEngineHeaderAndFooter extends UhcDriver {
 		validate(headerShopForaPlanMedicareGuideText, 30);
 		validate(headerShopForaPlanEmailBox, 30);
 		validate(headerShopForaPlanEmailButton, 30);
-//2nd column in Shop for a plan		
+//2nd column in Shop for a plan		headerNewExistingMemberLink
 		validate(headerShopLink, 30);
 		Assert.assertTrue(headerShopLink.getText().contains("Shop"));
+		validate(headerNewExistingMemberLink, 30);
+		Assert.assertTrue(headerNewExistingMemberLink.getText().contains("New and Existing Members"));
 		validate(headerEnrollLink, 30);
 		Assert.assertTrue(headerEnrollLink.getText().contains("Enroll"));
 		validate(headerResourcesLink, 30);
@@ -490,6 +495,7 @@ public class PlanRecommendationEngineHeaderAndFooter extends UhcDriver {
 			validate(footerVisitAARPOrgLink, 30);
 			Assert.assertTrue(footerVisitAARPOrgLink.getText().contains("Visit AARP.org"));
 		}
+		scrollToView(footerSection);
 		validate(footerSection, 30);
 		validate(footerMedicareAdvantagePlansLink, 30);
 		Assert.assertTrue(footerMedicareAdvantagePlansLink.getText().contains("Medicare Advantage Plans"));
@@ -746,7 +752,7 @@ public class PlanRecommendationEngineHeaderAndFooter extends UhcDriver {
 		ArrayList<String> windows = new ArrayList<String> (driver.getWindowHandles());
 		System.out.println(windows);
 		if (windows.size() >= 2) {
-			driver.switchTo().window(windows.get(2)); 	
+			driver.switchTo().window(windows.get(1)); 	
 			System.out.println(driver.getCurrentUrl());
 			validateLinks(expURL);
 			driver.close();
