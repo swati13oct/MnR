@@ -18,7 +18,7 @@ import cucumber.api.CucumberOptions;
 jsonReport = "target/cucumber-RunMRATDDSanityPaymentPROD2.json",detailedReport = true, detailedAggregatedReport = true,
 overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDSanityPaymentPROD2")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberredesign" }, 
-features = { "src/main/resources/feature/memberredesign/payments/MemberAuthCTPayment1.feature" }, plugin = {
+features = { "src/main/resources/feature/memberredesign/payments/MemberAuthCTPayment2.feature" }, plugin = {
 		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDSanityPaymentPROD2.json" }, tags = { "@sanityMemberPROD2" })
 public class RunMRATDDSanityPaymentPROD2 {
 
