@@ -18,9 +18,8 @@ Feature: 1.23 Member Provider Search
     Examples: 
 	    | index | planType | memberType              | 
 	    | 01    | MAPD     | AARP_IND_ProviderSearch |
-	    | 02    | MAPD     | UHC_IND_ProviderSearch  |
 	    
-    @SanityStage_providerSearch_mapd
+    @providerSearch01_mapd      @SanityStage_providerSearch_mapd
     Examples: 
 	    | index | planType | memberType              | 
 	    | 02    | MAPD     | UHC_IND_ProviderSearch  |
@@ -34,20 +33,18 @@ Feature: 1.23 Member Provider Search
     Examples: 
 	    | index | planType | memberType              | 
         | 04    | MA       | UHC_IND_ProviderSearch  |
-	    | 05    | MA       | AARP_IND_ProviderSearch |
 
-	@SanityStage_providerSearch_ma
+	@providerSearch01_ma        @SanityStage_providerSearch_ma
     Examples: 
 	    | index | planType | memberType              | 
 	    | 05    | MA       | AARP_IND_ProviderSearch |
 
 	@providerSearch01_medica_pcp
     Examples: 
-	    | index | planType | memberType              | 
-	    | 06    | MEDICA   | MEDICA_IND_ProviderSearch |
+	    | index | planType | memberType              |
 	    | 07    | PCP      | PCP_IND_ProviderSearch  |
 	    
-    @SanityStage_providerSearch_medica
+    @providerSearch01_medica_pcp     @SanityStage_providerSearch_medica
     Examples: 
 	    | index | planType | memberType              | 
 	    | 06    | MEDICA   | MEDICA_IND_ProviderSearch |
