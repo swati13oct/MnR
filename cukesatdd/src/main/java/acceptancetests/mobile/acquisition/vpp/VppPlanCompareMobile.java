@@ -1417,7 +1417,7 @@ public class VppPlanCompareMobile {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		ComparePlansPageMobile planComparePage = plansummaryPage.clickOnCompareLink();
+		ComparePlansPageMobile planComparePage = plansummaryPage.clickOnCompareLinkAARP(null);
 		if (planComparePage != null) {
 			getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
 			// comparePlansPage.backToVPPPage();
@@ -1438,7 +1438,7 @@ public class VppPlanCompareMobile {
 			plansummaryPage.checkAllPDPlans();
 			System.out.println("Selected All PDP plans for Plan Compare");
 		}
-		ComparePlansPageMobile planComparePage = plansummaryPage.clickOnCompareLink();
+		ComparePlansPageMobile planComparePage = plansummaryPage.clickOnCompareLinkAARP(planType);
 		if (planComparePage != null) {
 			getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
 			// comparePlansPage.backToVPPPage();
@@ -2738,7 +2738,7 @@ public class VppPlanCompareMobile {
 			System.out.println("Selected All MAPD plans for Plan Compare");
 		}
 
-		ComparePlansPageMobile planComparePage = plansummaryPage.clickOnCompareLink();
+		ComparePlansPageMobile planComparePage = plansummaryPage.clickOnCompareLinkAARP(Counter);
 		if (planComparePage != null) {
 			getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
 			// comparePlansPage.backToVPPPage();
@@ -2751,7 +2751,7 @@ public class VppPlanCompareMobile {
 		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		plansummaryPage.clickon3rdPlan();
-		ComparePlansPageMobile planComparePage = plansummaryPage.clickOnCompareLink();
+		ComparePlansPageMobile planComparePage = plansummaryPage.clickOnCompareLinkAARP(null);
 		if (planComparePage != null) {
 			getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
 			// comparePlansPage.backToVPPPage();

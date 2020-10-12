@@ -47,6 +47,7 @@ import pages.acquisition.ulayer.MultiCountyModalPage;
 import pages.acquisition.ulayer.PlanDetailsPage;
 import pages.acquisition.ulayer.VisitorProfilePage;
 import pages.acquisition.vppforaep.AepVppPlanSummaryPage;
+import pages.mobile.acquisition.bluelayer.ComparePlansPageBlayerMobile;
 import pages.mobile.acquisition.bluelayer.PlanComparePageMobile;
 import pages.mobile.acquisition.dce.ulayer.DrugCostEstimatorPageMobile;
 import pages.mobile.acquisition.dceredesign.GetStartedPageMobile;
@@ -4393,13 +4394,13 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 		}
 	}
 
-	public ComparePlansPageMobile clickOnCompareLink() {
+	public ComparePlansPageBlayerMobile clickOnCompareLink() {
 		List<WebElement> compareLinks = driver.findElements(
 				By.xpath("//*[contains(@class,'multiple-added-text')]//button[contains(text(),'Compare plans')]"));
 		compareLinks.get(1).click();
 
 		if (currentUrl().contains("/health-plans.html#/plan-compare"))
-			return new ComparePlansPageMobile(driver);
+			return new ComparePlansPageBlayerMobile(driver);
 		return null;
 	}
 
@@ -4591,6 +4592,9 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 		} else
 			Assert.fail("Provider Search Page is not displayed");
 	}
+	
+	
+	
 	/*
 	 * public boolean waitForJStoLoad () {
 	 * 

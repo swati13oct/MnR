@@ -42,6 +42,7 @@ import pages.acquisition.bluelayer.ZipcodeLookupHomePage;
 import pages.acquisition.dce.bluelayer.DCETestHarnessPage;
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.ulayer.ComparePlansPage;
+import pages.mobile.acquisition.bluelayer.ComparePlansPageBlayerMobile;
 import pages.mobile.acquisition.bluelayer.PlanComparePageMobile;
 import pages.mobile.acquisition.dce.bluelayer.AddDrugDetailsMobile;
 import pages.mobile.acquisition.dce.ulayer.DrugCostEstimatorPageMobile;
@@ -498,6 +499,8 @@ public class VppPlanDetailMobile {
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 
 		plansummaryPage.handlePlanYearSelectionPopup(planYear);
+		
+		
 	}
 
 	@Then("^the user validates the Enroll Now Button present for the plan type$")
@@ -2357,7 +2360,7 @@ public class VppPlanDetailMobile {
 	@Given("^I select \"([^\"]*)\" plans and \"([^\"]*)\" plans to compare and click on compare plan link in UHC$")
 	public void i_select_plans_and_plans_to_compare_and_click_on_compare_plan_link_in_UHC(String planType,
 			String Counter) throws Throwable {
-		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		int counter = Integer.parseInt(Counter);
 		if (planType.equals("MAPD")) {
@@ -2366,7 +2369,7 @@ public class VppPlanDetailMobile {
 			System.out.println("Selected All MAPD plans for Plan Compare");
 		}
 
-		ComparePlansPageBlayer planComparePage = plansummaryPage.clickOnCompareLink();
+		ComparePlansPageBlayerMobile planComparePage = plansummaryPage.clickOnCompareLink();
 		if (planComparePage != null) {
 			getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
 			// comparePlansPage.backToVPPPage();
@@ -2398,7 +2401,7 @@ public class VppPlanDetailMobile {
 
 	@Then("^verify plan compare checkbox is not visible on plan summary on UHC$")
 	public void verify_plan_compare_checkbox_is_not_visible_on_plan_summary_on_UHC() throws Throwable {
-		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		boolean validationFlag = plansummaryPage.verifyPlanCompareCheckboxNotVisible();
 		Assert.assertFalse("Validation failed : UnExpected Plan Compare check is Visible - ", validationFlag);
