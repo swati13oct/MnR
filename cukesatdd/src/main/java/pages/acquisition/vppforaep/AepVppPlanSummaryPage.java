@@ -269,9 +269,9 @@ public class AepVppPlanSummaryPage extends UhcDriver {
 		for(String key : benefitsMap.keySet()) {
 			 benefitValueUI = benefitsMap.get(key);
 			tmpUIString1 = benefitValueUI;
-			key = key.toLowerCase();
+			key = key.toLowerCase().trim();
 			//key = key.replace(",", "");
-			columnName = columnName.toLowerCase();
+			columnName = columnName.toLowerCase().trim();
 			if(columnName.contains("tier"))
 				System.out.println();
 			
@@ -286,7 +286,10 @@ public class AepVppPlanSummaryPage extends UhcDriver {
 						benefitValueUI = benefitValueUI.replace("\n", "").replaceAll("\\s+", "");
 						benefitValue = benefitValue.replace("\n", "").replaceAll("\\s+", ""); 
 						
-						//the following code is used to remove the footnote values from the benefit value string. 
+						//the following code is used to remove the footnote values from the benefit value string.
+
+						benefitValue = benefitValue.trim();
+						benefitValueUI = benefitValueUI.trim();
 						
 						if(benefitValueUI.contains(benefitValue)||benefitValueUI.equalsIgnoreCase(benefitValue)) {
 							flag = true;break;
