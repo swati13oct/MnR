@@ -14,7 +14,7 @@ jsonReport = "target/cucumber-RunMRATDDRegressionPfnyMemAuthP09_GrpPdp.json",det
 overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionPfnyMemAuthP09_GrpPdp")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberredesign" }, 
 features = { "src/main/resources/feature/memberredesign/prepareForNextYear" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionPfnyMemAuthP09_GrpPdp.json" }, tags = { "@memAuth_prepareForNextYear02_grp_pdp" })
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionPfnyMemAuthP09_GrpPdp.json" }, tags = { "@memAuth_pfny02_grp_pdp" })
 public class RunMRATDDRegressionPfnyMemAuthP09_GrpPdp {
 
 }

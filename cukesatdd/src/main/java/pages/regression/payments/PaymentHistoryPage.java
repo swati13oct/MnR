@@ -579,28 +579,28 @@ public class PaymentHistoryPage extends UhcDriver {
 	@FindBy(xpath = "//button[contains(text(),'Total Amount Due ')]")
 	private WebElement totalAmntDuelink;
 
-	@FindBy(xpath = "//div[@id='amount-due-content']")
+	@FindBy(xpath = "//h2[@id='amtDueHeader-0' or @id='amtDueHeader-1' or @id='amtDueHeader-2']")
 	private WebElement totalAmntDueToolTip;
 
-	@FindBy(xpath = "//div[@id='amount-due-content']//a[@class='link link--icon-right link--icon-circled align-right moreInfocloseIcon'][contains(text(),'Close')]")
+	@FindBy(xpath = "//div[@id='amount-due-content-0']//a[contains(text(),'Close')]")
 	private WebElement totalAmntDueCloseBtn;
 
 	@FindBy(xpath = "//button[contains(text(),'Next Premium Payment ')]")
 	private WebElement NextPremiumPaymentlink;
 
-	@FindBy(xpath = "//div[@id='next-payment-content']")
+	@FindBy(xpath = "//h2[@id='nextPremHeader-0' or @id='nextPremHeader-1' or @id='nextPremHeader-2']")
 	private WebElement NextPremiumPaymentToolTip;
 
-	@FindBy(xpath = "//div[@id='next-payment-content']//a[@class='link link--icon-right link--icon-circled align-right moreInfocloseIcon'][contains(text(),'Close')]")
+	@FindBy(xpath = "//div[@id='tentcon-ment-mium-0']//a[contains(text(),'Close')]")
 	private WebElement NextPremiumPaymentCloseBtn;
 
 	@FindBy(xpath = "//button[contains(text(),'Monthly Premium')]")
 	private WebElement MonthlyPremiumtlink;
 
-	@FindBy(xpath = "//div[@id='monthly-premium']")
+	@FindBy(xpath = "//h2[@id='heading-mon-h2-0' or @id='heading-mon-h2-1' or @id='heading-mon-h2-2']")
 	private WebElement MonthlyPremiumtToolTip;
 
-	@FindBy(xpath = "//div[@id='monthly-premium']//a[@class='link link--icon-right link--icon-circled align-right moreInfocloseIcon'][contains(text(),'Close')]")
+	@FindBy(xpath = "//div[@id='monthly-premium-0']//a[contains(text(),'Close')]")
 	private WebElement MonthlyPremiumtCloseBtn;
 
 	@FindBy(xpath = "(//button[contains(text(),'Learn about ways to pay ')])[2]")
@@ -1281,6 +1281,7 @@ public class PaymentHistoryPage extends UhcDriver {
 			System.out.println(driver.getCurrentUrl());
 			e.printStackTrace();
 		}
+		TestHarness.checkForIPerceptionModel(driver);
 		if (driver.getTitle().contains("Update Automatic Payments")) {
 			System.out.println("Navigated to Update Automatic Payments page");
 			return new UpdateRecurringPage(driver);
@@ -2028,18 +2029,20 @@ public class PaymentHistoryPage extends UhcDriver {
 				
 				System.out.println("Hovering mouse over daterange dropdown");	
 				Actions action = new Actions(driver);
+				TestHarness.checkForIPerceptionModel(driver);
 				action.moveToElement(menubutton).build().perform();
 				
 				System.out.println("waiting for 5 seconds");	
 				Thread.sleep(5000);
 				System.out.println("Selecting the date from dropdown - Last 6 months ");
-				
+				TestHarness.checkForIPerceptionModel(driver);
 				driver.findElement(By.linkText("Last 6 months")).click();
-				
+				TestHarness.checkForIPerceptionModel(driver);
 				System.out.println("Last 6 months has been clicked in dropdown , waiting for Payment history table to load now ");
 			    CommonUtility.waitForPageLoad(driver, paymentTable, 20);
 			    
 			    try {
+			    	TestHarness.checkForIPerceptionModel(driver);
 					if (paymentTable.isDisplayed()) {
 						System.out.println("Payment History table is displayed");
 						Thread.sleep(2000);
@@ -2092,7 +2095,7 @@ public class PaymentHistoryPage extends UhcDriver {
 				System.out.println("waiting for 2 seconds");	
 				Thread.sleep(2000);
 				System.out.println("Selecting the date from dropdown - Last 24 months ");
-				
+				TestHarness.checkForIPerceptionModel(driver);
 				driver.findElement(By.linkText("Last 24 months")).click();
 				
 				System.out.println("Last 24 months has been clicked in dropdown , waiting for Billing history table to load now ");
@@ -2126,7 +2129,7 @@ public class PaymentHistoryPage extends UhcDriver {
 				System.out.println("waiting for 2 seconds");	
 				Thread.sleep(2000);
 				System.out.println("Selecting the date from dropdown - Last 24 months ");
-				
+				TestHarness.checkForIPerceptionModel(driver);
 				driver.findElement(By.linkText("Last 24 months")).click();
 				
 				System.out.println("Last 24 months has been clicked in dropdown , waiting for Payment history table to load now ");
