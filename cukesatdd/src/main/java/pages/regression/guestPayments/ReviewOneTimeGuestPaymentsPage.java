@@ -43,26 +43,24 @@ public class ReviewOneTimeGuestPaymentsPage extends UhcDriver {
 	@FindBy(xpath = "//*[@class='change-details-icon-span']")
 	public WebElement changePaymentsDetailsLink;
 
-	@FindBy(xpath = "//label[@for='memberID'][contains(text(),'Plan:')]")
+	@FindBy(xpath = "//h3[contains(text(),'Plan:')]")
 	public WebElement planName;
 
-	@FindBy(xpath = "//label[@for='memberID'][contains(text(),'Member Name:')]")
+	@FindBy(xpath = "//h3[contains(text(),'Member Name:')]")
 	public WebElement memberName;
 
-	@FindBy(xpath = "//label[@for='memberID'][contains(text(),'ID:')]")
+	@FindBy(xpath = "//h3[contains(text(),'ID:')]")
 	public WebElement memberID;
 	
-	@FindBy(xpath = "//label[@for='memberID'][contains(text(),'Payment Details:')]")
+	@FindBy(xpath = "//h3[contains(text(),'Payment Details:')]")
 	public WebElement paymentDetails;
 	
 	@FindBy(xpath = "//h3[contains(text(),' Total You Pay ')]")
 	public WebElement totalYouPay;
 	
-	
 	@FindBy(xpath = "//p/a")
 	public WebElement termsOfServiceLink;
 
-	
 	@FindBy(xpath = "//button[contains(text(),'Confirm and Pay')]")
 	public WebElement confirmAndPayButton;
 	

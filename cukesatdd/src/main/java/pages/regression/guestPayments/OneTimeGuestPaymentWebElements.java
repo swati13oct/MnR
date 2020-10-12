@@ -71,31 +71,31 @@ public class OneTimeGuestPaymentWebElements extends UhcDriver{
 	@FindBy(xpath = "//input[@name='paymentMethod'][@value='EFT']")
 	public WebElement eftCheckingRadioButton;
 	
-	@FindBy(xpath = "//*[@id='paymentsummary']//p[contains(text(),'Plan:')]")
+	@FindBy(xpath = "//*[@id='paymentsummary']//h3[contains(text(),'Plan:')]")
 	public WebElement sideWidgetPlanName;
 	
-	@FindBy(xpath = "//*[@id='paymentsummary']//p[contains(text(),'Member name:')]")
+	@FindBy(xpath = "//*[@id='paymentsummary']//h3[contains(text(),'Member name:')]")
 	public WebElement sideWidgetMemberNameLabel;
 	
-	@FindBy(xpath = "//*[@id='paymentsummary']//p[contains(text(),'Member name:')]//following::p[1]")
+	@FindBy(xpath = "//*[@id='paymentsummary']//h3[contains(text(),'Member name:')]//following::p[1]")
 	public WebElement sideWidgetMemberNameValue;
 	
-	@FindBy(xpath = "//*[@id='paymentsummary']//p[contains(text(),'ID:')]")
+	@FindBy(xpath = "//*[@id='paymentsummary']//h3[contains(text(),'ID:')]")
 	public WebElement sideWidgetMemberIDLabel;
 	
-	@FindBy(xpath = "//*[@id='paymentsummary']//p[contains(text(),'ID:')]//following::p[1]")
+	@FindBy(xpath = "//h3[contains(text(),'ID:')]//following::p[1]")
 	public WebElement sideWidgetMemberIDValue;
 	
-	@FindBy(xpath = "//*[@id='paymentsummary']//p[contains(text(),'Payment details:')]")
+	@FindBy(xpath = "//h3[contains(text(),'Payment details:')]")
 	public WebElement sideWidgetPaymentDetailsLabel;
 	
-	@FindBy(xpath = "//*[@id='paymentsummary']//p[contains(text(),'Payment details:')]//following::p[1]")
+	@FindBy(xpath = "//h3[contains(text(),'Payment details:')]//following::p[1]")
 	public WebElement sideWidgetPaymentDetailsValue;
 	
-	@FindBy(xpath = "//*[@id='paymentsummary']//p[contains(text(),'Total You Pay')]")
+	@FindBy(xpath = "//h3[contains(text(),'Total You Pay')]")
 	public WebElement sideWidgetTotalYouPayLabel;
 
-	@FindBy(xpath = "//*[@id='paymentsummary']//p[contains(text(),'Total You Pay')]//following::p[1]")
+	@FindBy(xpath = "//h3[contains(text(),'Total You Pay')]//following::p[1]")
 	public WebElement sideWidgetTotalYouPayValue;
 	
 	@FindBy(xpath = "//iframe[@class='frame-area']")
