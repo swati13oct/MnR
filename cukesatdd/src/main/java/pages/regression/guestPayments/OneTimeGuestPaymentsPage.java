@@ -325,7 +325,7 @@ public class OneTimeGuestPaymentsPage extends OneTimeGuestPaymentWebElements {
 		Assert.assertTrue("PROBLEM - unable to locate Past Amount due value",guestPaymentsValidate(pastAmountValue));
 		}
 		 if(currentChargesDisplay){
-		Assert.assertTrue("PROBLEM - unable to locate Past Amount and Current Charges Radio Button",guestPaymentsValidate(pastAmountCurrentChargesRadioButton));
+		Assert.assertTrue("PROBLEM - unable to locate Past Amount and Current Charges Radio Button or Current Charges Radio Button",guestPaymentsValidate(pastAmountCurrentChargesRadioButton)|| guestPaymentsValidate(CurrentChargesRadioButton));
 		Assert.assertTrue("PROBLEM - unable to locate  Past Amount and Current Charges value",guestPaymentsValidate(pastAmountCurrentChargesValue));
 		 }
 	}

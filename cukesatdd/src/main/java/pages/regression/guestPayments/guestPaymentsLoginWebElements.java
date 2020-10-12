@@ -42,7 +42,7 @@ public class guestPaymentsLoginWebElements extends UhcDriver{
 	@FindBy(className= "uhc-tempo-header__h1")
      public static WebElement guestPaymentsHeader;
 	
-	@FindBy(className= "medicare-only")
+	@FindBy(className= "medicare-only-only")
     public static WebElement staticContentBelowHeader;
 	
 	@FindBy(xpath= "//a[contains(text(),'sign in')]")

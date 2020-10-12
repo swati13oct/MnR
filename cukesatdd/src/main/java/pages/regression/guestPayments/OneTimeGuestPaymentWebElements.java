@@ -49,8 +49,12 @@ public class OneTimeGuestPaymentWebElements extends UhcDriver{
 	@FindBy(id = "pastAmountAndCurentChargesFound")
 	public WebElement pastAmountCurrentChargesRadioButton;
 	
+	@FindBy(id = "onlyCurrentChargesFound")
+	public WebElement CurrentChargesRadioButton;
+	
 	@FindBy(xpath ="//label[contains(text(),'Current Charges')]/following::h2[1]")
 	public WebElement pastAmountCurrentChargesValue;
+
 	
 	@FindBy(id = "otherAmount")
 	public WebElement otherAmountRadioButton;
