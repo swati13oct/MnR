@@ -37,7 +37,7 @@ public class OneTimeGuestPaymentWebElements extends UhcDriver{
 	public WebElement guestPaymentsHeader;
 	
 
-	@FindBy(xpath = "//h3[contains(text(),'Select a Payment Amount')]")
+	@FindBy(xpath = "//h2[contains(text(),'Select a Payment Amount')]")
 	public WebElement selectAPaymentHeader;
 	
 	@FindBy(id = "pastAmountDueFound")
@@ -62,7 +62,7 @@ public class OneTimeGuestPaymentWebElements extends UhcDriver{
 	@FindBy(xpath = "//*[@class='input-group-t']/input")
 	public WebElement otherAmountTextField;
 	
-	@FindBy(xpath = "//h3[contains(text(),'Choose a Payment Method')]")
+	@FindBy(xpath = "//h2[contains(text(),'Choose a Payment Method')]")
 	public WebElement chooseAPaymentHeading;
 	
 	@FindBy(xpath = "//input[@name='paymentMethod'][@value='CC']")
@@ -140,8 +140,11 @@ public class OneTimeGuestPaymentWebElements extends UhcDriver{
 	@FindBy(xpath = "//div[2][contains(text(),'Amount must exceed $1.00')]")
 	public WebElement exceed1errorMessage;
 
-	@FindBy(xpath = "//*[@class='alert-body']//div[contains(text(),'errors have been found')]")
+	@FindBy(xpath = "//*[@id='TopAlertPayError']//div[contains(text(),'errors have')]")
 	public WebElement noEftAccountInfo;
 
+
+	@FindBy(xpath = "//*[@id='TopAlertPayError']//div[contains(text(),'errors have')]")
+	public WebElement oneErrorEftAccountInfo;
 }
 

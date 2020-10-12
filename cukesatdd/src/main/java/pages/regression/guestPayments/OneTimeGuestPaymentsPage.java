@@ -318,7 +318,8 @@ public class OneTimeGuestPaymentsPage extends OneTimeGuestPaymentWebElements {
 
 	public void blankeftAccountError() {
         waitforElementNew(noEftAccountInfo, 3);
-		Assert.assertTrue("PROBLEM - unable to locate error message on the Page",guestPaymentsValidate(noEftAccountInfo));
+		Assert.assertTrue("PROBLEM - unable to locate error message on the Page",guestPaymentsValidate(noEftAccountInfo)||guestPaymentsValidate(oneErrorEftAccountInfo));
+		
 	}
 
 
