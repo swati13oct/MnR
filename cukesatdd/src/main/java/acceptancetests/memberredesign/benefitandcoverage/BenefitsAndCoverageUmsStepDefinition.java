@@ -110,6 +110,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 
 	@Then("^The user navigates to Benefits and Coverage page$")
 	public void user_views_BenefitsAndCoveragejenkins1(DataTable memberAttributes) {
+		String memberType=(String) getLoginScenario().getBean(LoginCommonConstants.CATOGERY);
 		WebDriver wd=(WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
@@ -138,7 +139,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 		//Sardar Start
 		if ("YES".equalsIgnoreCase(MRScenario.isTestHarness)) {
 			TestHarness testHarness = (TestHarness) getLoginScenario().getBean(PageConstantsMnR.TEST_HARNESS_PAGE);
-			benefitsCoveragePage= testHarness.navigateDirectToBnCPagFromTestharnessPage();
+			benefitsCoveragePage= testHarness.navigateDirectToBnCPagFromTestharnessPage(memberType);
 		}else {
 			//Sardar end
 			AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);

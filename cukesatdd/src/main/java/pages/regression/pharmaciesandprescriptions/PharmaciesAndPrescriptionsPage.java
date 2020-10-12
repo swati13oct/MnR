@@ -11,6 +11,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 
 import acceptancetests.util.CommonUtility;
+import atdd.framework.MRScenario;
 import pages.regression.testharness.TestHarness;
 
 /**
@@ -35,6 +36,7 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 				+ "Expected='"+expTxt+"' | Actual='"+actTxt+"'", 
 				expTxt.equals(actTxt));
 	}
+	
 
 	public void validatePharmaciesText() {
 		Assert.assertTrue("PROBLEM - unable to locate pnp page header element", 
@@ -454,4 +456,214 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 				validate(FindAndPriceCallToActnBtn, 30));
 		FindAndPriceCallToActnBtn.click();
 	}
+
+	public void validatePlanStartDateAndLinks_preff(String planType, String memberType, String planStartDateStr) {
+		//=================================
+		//note: plan start date
+		String targetItem="Plan start date";
+		WebElement targetElement=planStartDate;
+		validateHaveItem(targetItem, targetElement);
+		
+		String expText=planStartDateStr;
+		String actText=targetElement.getText();
+		//tbd Assert.assertTrue("PROBLEM - '"+targetItem+"' element text is not as expected. "
+		//tbd  		+ "Expected to contain '"+expText+"' | Actual='"+actText+"'", 
+		//tbd  		actText.contains(expText));
+		//=================================
+		// note: ESTIMATE DRUG COSTS < Link to Acquisition DCE>
+		String targetText="ESTIMATE DRUG COSTS";
+		targetItem=targetText+" - image";
+		targetElement=drugCostImg;
+		validateHaveItem(targetItem, targetElement);
+
+		targetItem=targetText+" - link";
+		targetElement=drugCostLnk;
+		validateHaveItem(targetItem, targetElement);
+		
+		expText=targetText;
+		actText=targetElement.getText();
+		Assert.assertTrue("PROBLEM - '"+targetItem+"' element text is not as expected. "
+				+ "Expected to contain '"+expText+"' | Actual='"+actText+"'", 
+				actText.contains(expText));
+
+		String expUrl="/health-plans/estimate-drug-costs.html";
+		if (memberType.toUpperCase().contains("UHC"))
+			if (MRScenario.environment.contains("stage")) 
+				expUrl="uhcmedicaresolutions.uhc.com"+expUrl;
+			else
+				expUrl="uhcmedicaresolutions.com"+expUrl;
+		else 
+			if (MRScenario.environment.contains("stage")) 
+				expUrl="aarpmedicareplans.uhc.com"+expUrl;
+			else 
+				expUrl="aarpmedicareplans.com"+expUrl;
+		WebElement expElement=dceHeader;
+		validateLnkBehaviorNewTab(planType, memberType, targetItem, targetElement, expUrl, expElement);
+		
+		//=================================
+		//note: FIND A PHARMACY <Link to acquisition pharmacy locator>
+		targetText="FIND A PHARMACY";
+		targetItem=targetText+" - image";
+		targetElement=pharmacyLocatorImg;
+		validateHaveItem(targetItem, targetElement);
+	
+		targetItem=targetText+" - link";
+		targetElement=pharmacyLocatorLnk;
+		validateHaveItem(targetItem, targetElement);
+
+		expText=targetText;
+		actText=targetElement.getText();
+		Assert.assertTrue("PROBLEM - '"+targetItem+"' element text is not as expected. "
+				+ "Expected to contain '"+expText+"' | Actual='"+actText+"'", 
+				actText.contains(expText));
+
+		expUrl="/health-plans/aarp-pharmacy.html";
+		if (memberType.toUpperCase().contains("UHC"))
+			if (MRScenario.environment.contains("stage")) 
+				expUrl="uhcmedicaresolutions.uhc.com"+expUrl;
+			else
+				expUrl="uhcmedicaresolutions.com"+expUrl;
+		else 
+			if (MRScenario.environment.contains("stage")) 
+				expUrl="aarpmedicareplans.uhc.com"+expUrl;
+			else 
+				expUrl="aarpmedicareplans.com"+expUrl;
+		expElement=phaLocHeader;
+		validateLnkBehaviorNewTab(planType, memberType, targetItem, targetElement, expUrl, expElement);
+		
+		//=================================
+		//note: VIEW PLAN DOCUMENTS <link to Plan Documents and Resources>		
+		targetText="VIEW PLAN DOCUMENTS";
+		targetItem=targetText+" - image";
+		targetElement=memDocImg;
+		validateHaveItem(targetItem, targetElement);
+
+		targetItem=targetText+" - link";
+		targetElement=memDocLnk;
+		validateHaveItem(targetItem, targetElement);
+
+		expText=targetText;
+		actText=targetElement.getText();
+		Assert.assertTrue("PROBLEM - '"+targetItem+"' element text is not as expected. "
+				+ "Expected to contain '"+expText+"' | Actual='"+actText+"'", 
+				actText.contains(expText));
+
+		expUrl="/member/documents/overview.html";
+		expElement=memDocHeader;
+		validateLnkBehaviorSameTab(planType, memberType, targetItem, targetElement, expUrl, expElement);
+	
+	}
+
+	
+	public void validateImportNote_preff(String planType, String memberType) {
+		CommonUtility.checkPageIsReadyNew(driver);
+		CommonUtility.waitForPageLoad(driver, impNoteSecHead, 5);
+		//=================================
+		//note: Important Note		
+		String targetText="Important Note";
+		String targetItem=targetText+" - section header text";
+		WebElement targetElement=impNoteSecHead;
+		validateHaveItem(targetItem, targetElement);
+
+		targetItem=targetText+" - section text";
+		targetElement=impNoteSecTxt;
+		validateHaveItem(targetItem, targetElement);
+
+		targetItem=targetText+" - section image";
+		targetElement=impNoteSecImg;
+		validateHaveItem(targetItem, targetElement);
+		//=================================
+		//note: Come back soon		
+		targetText="Important Note";
+		targetItem=targetText+" - section header text";
+		targetElement=comBckSecHead;
+		validateHaveItem(targetItem, targetElement);
+
+		targetItem=targetText+" - section text";
+		targetElement=comBckSecTxt;
+		validateHaveItem(targetItem, targetElement);
+
+		targetItem=targetText+" - section image";
+		targetElement=comBckSecImg;
+		validateHaveItem(targetItem, targetElement);
+
+		//=================================
+		//note: Your medicine cabinet		
+		targetText="Your medicine cabinet";
+		targetItem=targetText+" - section header text";
+		targetElement=medCabSecHead;
+		validateHaveItem(targetItem, targetElement);
+
+		targetItem=targetText+" - section text";
+		targetElement=medCabSecTxt;
+		validateHaveItem(targetItem, targetElement);
+
+		//=================================
+		//note: Find and price a medication		
+		targetText="Find and price a medication";
+		targetItem=targetText+" - section header text";
+		targetElement=priMedSecHead;
+		validateHaveItem(targetItem, targetElement);
+
+		targetItem=targetText+" - section text";
+		targetElement=priMedSecTxt;
+		validateHaveItem(targetItem, targetElement);
+
+		//=================================
+		//note: Home delivery management	
+		//note: Do not display home delivery content for AL LGHIB, and AL SEIB
+		//ALABAMA LGHIB H2001	816	000 103886	15504	
+		//ALABAMA SEIB H2001	816	000 103884	15502
+
+		targetText="Home delivery management";
+		targetItem=targetText+" - section header text";
+		targetElement=delivMgmtSecHead;
+		if (memberType.toUpperCase().contains("LGHIB") || memberType.toUpperCase().contains("SEIB"))
+		 	validateDoNotHaveItem(targetItem, targetElement);
+		else
+			validateHaveItem(targetItem, targetElement);
+
+		targetItem=targetText+" - section text";
+		targetElement=delivMgmtSecTxt;
+		if (memberType.toUpperCase().contains("LGHIB") || memberType.toUpperCase().contains("SEIB"))
+			validateDoNotHaveItem(targetItem, targetElement);
+		else
+			validateHaveItem(targetItem, targetElement);
+		
+		//=================================
+		//note: Find a pharmacy near you		
+		targetText="Find and price a medication";
+		targetItem=targetText+" - section header text";
+		targetElement=findPharSecHead;
+		validateHaveItem(targetItem, targetElement);
+
+		targetItem=targetText+" - section text";
+		targetElement=findPharSecTxt;
+		validateHaveItem(targetItem, targetElement);
+
+		//=================================
+		//note: Contact Us		
+		targetItem="Contact Us - link";
+		targetElement=contactUsLnk;
+		validateHaveItem(targetItem, targetElement);
+		
+		String expUrl="/needhelpsectioncontactus";
+		WebElement expElement=contactUsTechSupp;
+		validateLnkBehaviorSameTab(planType, memberType, targetItem, targetElement, expUrl, expElement);
+
+
+	}
+	
+	public void validateHeader_preff() {
+		String targetItem="Header text";
+		WebElement targetElement=pnpHeader_preeff;
+		validateHaveItem(targetItem, targetElement);
+		
+		String expText="Get the most out of your prescription drug benefits";
+		String actText=targetElement.getText();
+		Assert.assertTrue("PROBLEM - '"+targetItem+"' element text is not as expected. "
+		  		+ "Expected to contain '"+expText+"' | Actual='"+actText+"'", 
+		  		actText.contains(expText));
+	}
+	
 }
