@@ -16,18 +16,17 @@ Feature: 1.07.1 Member DCE Page - Member Auth - PROD
       | Member Type  | <memberType>  |
    Then I should not see drug look up on home page
    
-   @prod_sanity_01 
+    @drugCostEstimator1 @Member_dce_not @NegativeScenario  @prod @prod_dce_p1
       Examples: 
       | TID   | username | password | MemUserName       | planType | memberType   |
-      | 15337 | kkumard | mnrs786@ |  BNCSAUVE2  	    | MA       | MA_DCE       |
-      | 15326 | kkumard | mnrs786@ |  vernajohnson19651	| SHIP     | SHIP_DCE     |
+      | 15327 | kkumard | mnrs786@ |   PTHUYNH50	    | SSUP     | SSUP_DCE     | 
 
-	@drugCostEstimator1 @Member_dce_not @NegativeScenario  @prod @prod_dce_p1
+	@drugCostEstimator1 @Member_dce_not @NegativeScenario  @prod @prod_dce_p1  @prod_sanity_01 
     Examples: 
       | TID   | username | password | MemUserName       | planType | memberType   |
       | 15326 | kkumard | mnrs786@ |  vernajohnson19651	| SHIP     | SHIP_DCE     |
       | 15337 | kkumard | mnrs786@ |  BNCSAUVE2  	    | MA       | MA_DCE       |
-      | 15327 | kkumard | mnrs786@ |   PTHUYNH50	    | SSUP     | SSUP_DCE     | 
+      
    
    @drugCostEstimator2 @prod @prod_dce_p2
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> -I1.1 To Verify MR portal members using DCE on a desktop device Pharmacy search tab validation
