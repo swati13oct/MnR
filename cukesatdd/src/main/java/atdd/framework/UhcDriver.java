@@ -1262,12 +1262,13 @@ try {
 
     			// checking if loading indicator was found and if so we wait for it to
     			// disappear
+    			threadsleep(2);
     			if(!CollectionUtils.isEmpty(loadingScreen)) {
     				System.out.println("Loading screen visible!!! Waiting till it disappears");
     				WebDriverWait wait = new WebDriverWait(driver, defaultTimeoutInSec);
     				fwait.until(ExpectedConditions
-    						.invisibilityOfElementLocated(By.xpath("//div[@id='overlay' or  @id='loading_fader' or @class='loading-block']")));
-//    						.invisibilityOfAllElements(loadingScreen));
+//    						.invisibilityOfElementLocated(By.xpath("//div[@id='overlay' or  @id='loading_fader' or @class='loading-block']")));
+    						.invisibilityOfAllElements(loadingScreen));
     				ready = true;
     				System.out.println("Loading screen disappeared, page is ready.");
     				break;
