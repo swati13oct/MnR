@@ -48,7 +48,7 @@ Feature: S1.1 To test Member Auth premium payment flows Micro App.
       | UID     | username | password | memUserName       | planType |
       | F243897 | jkuma14  | Brock@03 | vernajohnson19651 | SHIP     |
 
-  @regressionMemberPROD
+  @regressionMemberPROD @sanityMemberPROD2
   Scenario Outline: UID: <UID> -plan: <planType> - Test Case 09 - Verify SHIP Setup Recurring EFT flow
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password

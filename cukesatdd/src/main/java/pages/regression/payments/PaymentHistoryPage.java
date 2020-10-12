@@ -579,28 +579,28 @@ public class PaymentHistoryPage extends UhcDriver {
 	@FindBy(xpath = "//button[contains(text(),'Total Amount Due ')]")
 	private WebElement totalAmntDuelink;
 
-	@FindBy(xpath = "//div[@id='amount-due-content']")
+	@FindBy(xpath = "//h2[@id='amtDueHeader-0' or @id='amtDueHeader-1' or @id='amtDueHeader-2']")
 	private WebElement totalAmntDueToolTip;
 
-	@FindBy(xpath = "//div[@id='amount-due-content']//a[@class='link link--icon-right link--icon-circled align-right moreInfocloseIcon'][contains(text(),'Close')]")
+	@FindBy(xpath = "//div[@id='amount-due-content-0']//a[contains(text(),'Close')]")
 	private WebElement totalAmntDueCloseBtn;
 
 	@FindBy(xpath = "//button[contains(text(),'Next Premium Payment ')]")
 	private WebElement NextPremiumPaymentlink;
 
-	@FindBy(xpath = "//div[@id='next-payment-content']")
+	@FindBy(xpath = "//h2[@id='nextPremHeader-0' or @id='nextPremHeader-1' or @id='nextPremHeader-2']")
 	private WebElement NextPremiumPaymentToolTip;
 
-	@FindBy(xpath = "//div[@id='next-payment-content']//a[@class='link link--icon-right link--icon-circled align-right moreInfocloseIcon'][contains(text(),'Close')]")
+	@FindBy(xpath = "//div[@id='tentcon-ment-mium-0']//a[contains(text(),'Close')]")
 	private WebElement NextPremiumPaymentCloseBtn;
 
 	@FindBy(xpath = "//button[contains(text(),'Monthly Premium')]")
 	private WebElement MonthlyPremiumtlink;
 
-	@FindBy(xpath = "//div[@id='monthly-premium']")
+	@FindBy(xpath = "//h2[@id='heading-mon-h2-0' or @id='heading-mon-h2-1' or @id='heading-mon-h2-2']")
 	private WebElement MonthlyPremiumtToolTip;
 
-	@FindBy(xpath = "//div[@id='monthly-premium']//a[@class='link link--icon-right link--icon-circled align-right moreInfocloseIcon'][contains(text(),'Close')]")
+	@FindBy(xpath = "//div[@id='monthly-premium-0']//a[contains(text(),'Close')]")
 	private WebElement MonthlyPremiumtCloseBtn;
 
 	@FindBy(xpath = "(//button[contains(text(),'Learn about ways to pay ')])[2]")
