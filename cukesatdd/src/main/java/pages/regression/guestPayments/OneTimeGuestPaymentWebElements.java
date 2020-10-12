@@ -33,7 +33,7 @@ public class OneTimeGuestPaymentWebElements extends UhcDriver{
 	}
 
 
-	@FindBy(xpath = "//h1[contains(text(),'Make a One-time Payment')]")
+	@FindBy(xpath = "//h1[contains(text(),'Make a One - time Payment')]")
 	public WebElement guestPaymentsHeader;
 	
 

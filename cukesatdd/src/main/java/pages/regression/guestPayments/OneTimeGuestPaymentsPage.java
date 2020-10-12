@@ -257,6 +257,7 @@ public class OneTimeGuestPaymentsPage extends OneTimeGuestPaymentWebElements {
 		System.out.println(">>>>>>>>>>>>Entering Other Amount due in the text field<<<<<<<<<<<<<<<<<<<");
 		otherAmountTextField.sendKeys(otherAmount);
 
+		otherAmountRadioButton.click();
 		creditcardRadioButton.click();
 		System.out.println(">>>>>>>>>>>Credit Card Option is selected<<<<<<<<<<<<<<<<<<<<<<");
 
@@ -271,6 +272,8 @@ public class OneTimeGuestPaymentsPage extends OneTimeGuestPaymentWebElements {
         System.out.println(">>>>>>>>>>>>Entering Other Amount due in the text field<<<<<<<<<<<<<<<<<<<");
 	    otherAmountTextField.sendKeys(otherAmount);
 
+	    otherAmountRadioButton.click();
+	    
 		eftCheckingRadioButton.click();
 		System.out.println(">>>>>>>>>>>EFT Checking Account Option is selected<<<<<<<<<<<<<<<<<<<<<<");
 
@@ -293,6 +296,8 @@ public class OneTimeGuestPaymentsPage extends OneTimeGuestPaymentWebElements {
 		otherAmountTextField.clear();
 	    System.out.println(">>>>>>>>>>>>Entering Other Amount due in the text field<<<<<<<<<<<<<<<<<<<:"+ otherAmount );
 		otherAmountTextField.sendKeys(otherAmount);
+		
+		otherAmountRadioButton.click();
 	}
 
 	public void otherAmountExceedAnnualError() {

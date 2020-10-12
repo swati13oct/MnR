@@ -34,7 +34,7 @@ public class ReviewOneTimeGuestPaymentsPage extends UhcDriver {
 	@FindBy(xpath = "//button[@class='back-btn']")
 	public WebElement reviewAndSubmitBackButton;
 	
-	@FindBy(xpath = "//h3[@class='uhc-tempo-header__h3 token-color-gray-dark-base uhc-tempo-header__medium uhc-pay-txt']")
+	@FindBy(xpath = "//p[@class='uhc-tempo-header__h3 token-color-gray-dark-base uhc-tempo-header__medium uhc-pay-txt']")
 	public WebElement reviewPaymentDetailsStaticText;
 
 	@FindBy(xpath = "//h2[@class='uhc-tempo-header__h2 uhc-tempo-card__header uhc-tempo-header__medium token-color-gray-dark-base'][contains(text(),'Payment Details')]")
@@ -72,7 +72,7 @@ public class ReviewOneTimeGuestPaymentsPage extends UhcDriver {
 	@FindBy(xpath = "//span[@class='generic-error'][contains(text(),'Only one payment request can be submitted per business day.')]")
 	private WebElement errorMessage;
 	
-	@FindBy(xpath = "//h1[contains(text(),'Make a One-time Payment')]")
+	@FindBy(xpath = "//h1[contains(text(),'Make a One - time Payment')]")
 	public WebElement guestPaymentsHeader;
 
 	

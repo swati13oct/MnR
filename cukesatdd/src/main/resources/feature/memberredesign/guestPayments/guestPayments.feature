@@ -277,7 +277,7 @@ Feature: 1.06.7 Member Guest Payments Page
 
     Examples:
       | TID   | planType | memberID      | dob           | siteName    |Name                 | CreditCardNumber | validMonth | validYear |otherAmountDue    |
-      | 10000 | MAPD     | 939838215-1   | 05/19/1937    |   AARP      |CreditCardAutomation | 4111111111111111 |         04 |      2024 |  10.05           |
+      | 10000 | MAPD     | 939838215-1   | 05/19/1937    |   AARP      |CreditCardAutomation | 4111111111111111 |         04 |      2024 |  1.05           |
      # | 10001 | MAPD     | 915516555-1   | 10/29/1947    |   UHC       |CreditCardAutomation | 4111111111111111 |         04 |      2024 |  15.20           |
      # | 10002 | MAPD     | 915516555-1   | 10/29/1947    |   RETIREE   |CreditCardAutomation | 4111111111111111 |         04 |      2024 |  20.30           |
     #  | 10003 | MAPD     | 915516555-1   | 10/29/1947    |   PCP       |CreditCardAutomation | 4111111111111111 |         04 |      2024 |  11.000          |
