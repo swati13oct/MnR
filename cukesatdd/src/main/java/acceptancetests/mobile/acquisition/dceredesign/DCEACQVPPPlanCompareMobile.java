@@ -77,7 +77,7 @@ public class DCEACQVPPPlanCompareMobile {
 	public void the_user_clicks_on_the_shopping_cart_icon_on_DCE_page_in_AARP() {
 		DrugCostEstimatorPageMobile dce = (DrugCostEstimatorPageMobile) getLoginScenario().getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
 		VisitorProfilePageMobile visitorProfilePage = dce.clickOnShoppingCart();
-		getLoginScenario().saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfilePage);
+		getLoginScenario().getBean(PageConstants.VISITOR_PROFILE_PAGE);
 	}
 
 	@Given("^I select \"([^\"]*)\" plans to compare and click on compare plan link$")

@@ -304,7 +304,7 @@ Feature: 2.01.2-Vpp to plan Details UHC Scenarios
       | TID   | zipcode | isMultutiCounty | county       | plantype | planName                                            | planyear |
       | 00015 |   80002 | YES             | Adams County | MAPD     | AARP Medicare Advantage SecureHorizons Plan 1 (HMO) | current  |
 
-  @vppPlanDetailsUHC12 @vppPlanDetailsUHCRun01 @vppPlanDetailsUHCRegression @F435191
+  @vppPlanDetailsUHC12 @vppPlanDetailsUHCRun01 @vppPlanDetailsUHCRegression @F435191 @prod
   Scenario Outline: UserStory: <TID> -plan type: <plantype> - Verify <optionalRider> in Plan Details for provided plan and validating Dental Directory link
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site

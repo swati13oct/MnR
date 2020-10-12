@@ -201,7 +201,7 @@ Feature: 2.01.1-Vpp to plan Summary UHC Scenarios
   #Examples:
   #| zipcode | plantype | planName                    |
   #|   55344 | MA       | UnitedHealthcare Sync (PPO) |
-  @vppPlanSummaryUHC07 @vppPlanSummaryUHCRun02 @vppPlanSummaryUHCRegression
+  @vppPlanSummaryUHC07 @vppPlanSummaryUHCRun02 @vppPlanSummaryUHCRegression @prod
   Scenario Outline: UID: <UID>  - Verify Call sticky action menu on UHC site
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site

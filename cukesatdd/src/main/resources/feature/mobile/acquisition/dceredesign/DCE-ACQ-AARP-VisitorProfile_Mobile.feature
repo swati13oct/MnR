@@ -1,7 +1,7 @@
 @dce_redesign_VP
 Feature: 1.10.1 DCE-REDISIGN AARP - To test Acq Visitor Profile to NEW DCE Flows
 
-  @DCE_VisitorProfile
+  @DCE_VisitorProfile @prod
   Scenario Outline: To verify DCE REDESIGN flow from Ulayer home page
     Given the user is on medicare acquisition site landing page
     		|Site| <site>|

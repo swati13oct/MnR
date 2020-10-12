@@ -1,7 +1,7 @@
 @vppPlanCompareUHC
 Feature: 2.01.3-Vpp to plan Compare UHC Scenarios
 
-  @vppPlanCompareUHC01 @vppPlanCompareUHCRun01New @vppPlanCompareUHCRegression
+  @vppPlanCompareUHC01 @vppPlanCompareUHCRun01New @vppPlanCompareUHCRegression @prod
   Scenario Outline: TID: <TID> - Plan Type: <plantype> -  Verify the checkbox for add to compare link is not visible for single plan.
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
