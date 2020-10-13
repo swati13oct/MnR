@@ -55,7 +55,7 @@ public class ReviewOneTimeGuestPaymentsPage extends UhcDriver {
 	@FindBy(xpath = "//h3[contains(text(),'Payment Details:')]")
 	public WebElement paymentDetails;
 	
-	@FindBy(xpath = "//h3[contains(text(),' Total You Pay ')]")
+	@FindBy(xpath = "//h3[contains(text(),'Total You Pay')]")
 	public WebElement totalYouPay;
 	
 	@FindBy(xpath = "//p/a")
