@@ -1088,8 +1088,8 @@ try {
 				
 				MutableCapabilities sauceOptions = new MutableCapabilities();
 				sauceOptions.setCapability("screenResolution", "1920x1440");
-				sauceOptions.setCapability("maxDuration", "10000");
-				sauceOptions.setCapability("idleTimeout", "200");
+				sauceOptions.setCapability("maxDuration", 3600);
+				sauceOptions.setCapability("idleTimeout", 200);
 
 				SafariOptions browserOptions = new SafariOptions();
 				browserOptions.setCapability("platformName", "macOS 10.14");

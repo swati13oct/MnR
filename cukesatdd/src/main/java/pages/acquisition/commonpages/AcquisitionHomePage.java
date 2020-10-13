@@ -1485,8 +1485,10 @@ public class AcquisitionHomePage extends GlobalWebElements {
 //			CommonUtility.checkPageIsReady(driver);
 			validate(callsamtooltip);
 			CheckiPerseptions();
+			scrollToView(callsam);
 			jsClickNew(callsam);
 			System.out.println("@@@@@@@@@@@@@@@ Call Icon Clicked @@@@@@@@@@@@@@@");
+			validate(callSamPopup, 10);
 			driver.switchTo().activeElement();
 			System.out.println(CallSamTFN.getText());
 //			CallSamTFNClose.click();
@@ -1531,6 +1533,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		
 		public AcquisitionHomePage  validateChatpopup() throws InterruptedException {
 			//CommonUtility.checkPageIsReady(driver);
+			scrollToView(chatsam);
 			chatsam.click();
 			jsClickNew(chatsam);
 			System.out.println("@@@@@@@@@@@@@@@ Chat Icon Clicked @@@@@@@@@@@@@@@");	
@@ -1824,6 +1827,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			String NavigateToURL = CurrentURL + path;
 			System.out.println("Navigating to URL : " + NavigateToURL);
 			driver.navigate().to(NavigateToURL);
+			waitForPageLoadSafari();
 			CommonUtility.waitForPageLoad(driver, driver.findElement(By.xpath("//header[contains(@class,'header')]")), 30);
 			System.out.println("Page Title : " + (driver.findElement(By.xpath("//title")).getText()));
 
@@ -1867,8 +1871,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		}
 		
 		public void validateSubNavShopPlanLinks() {
-			CheckPageLoad();
 			waitForPageLoadSafari();
+			CheckPageLoad();
 			CheckiPerseptions();
 			waitforElement(ShopForaplan);
 			if (ShopForaplan.isDisplayed()) {
@@ -1940,8 +1944,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		}
 		
 		public void validateSubNavMedEdLinks() {
-			CheckPageLoad();
 			waitForPageLoadSafari();
+			CheckPageLoad();
 			CheckiPerseptions();
 
 			waitforElement(lnkLearnAboutMedicare);
