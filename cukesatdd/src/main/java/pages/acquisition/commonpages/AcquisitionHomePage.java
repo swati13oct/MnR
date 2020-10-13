@@ -1616,6 +1616,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			WebElement DCELink = driver.findElement(By.xpath("//a[contains(@href,'drug-cost-estimator') and contains(text(), 'Prescription Drug Costs')]"));
 			validateNew(DCELink, 10);
 			jsClickNew(DCELink);
+			waitForPageLoadSafari();
 			if (validateNew(AddMyDrugsBtn))
 				return new GetStartedPage(driver);
 			return null;
