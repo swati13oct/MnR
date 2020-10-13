@@ -15,22 +15,22 @@ Feature: 1.23 Member Provider Search
     @sanity_providerSearch01_mapd
     Examples: 
 	    | index | planType | memberType              | 
-	    | 02    | MAPD     | UHC_IND_ProviderSearch  |
+	    | S02   | MAPD     | UHC_IND_ProviderSearch  |
 
 	@sanity_providerSearch01_pdp
     Examples: 
 	    | index | planType | memberType              | 
-	    | 03    | PDP      | AARP_IND_ProviderSearch |
+	    | S03   | PDP      | AARP_IND_ProviderSearch |
 
 	@sanity_providerSearch01_ma
     Examples: 
 	    | index | planType | memberType              | 
-	    | 05    | MA       | AARP_IND_ProviderSearch |
+	    | S05   | MA       | AARP_IND_ProviderSearch |
 
     @sanity_providerSearch01_medica_pcp
     Examples: 
 	    | index | planType | memberType              | 
-	    | 06    | MEDICA   | MEDICA_IND_ProviderSearch |
+	    | S06   | MEDICA   | MEDICA_IND_ProviderSearch |
 
   @sanity02
   Scenario Outline: -Index <index> -Plan Type: <planType> -Member Type: <memberType> - To validate navigation from Provider Search page to other secondary pages - pharmacies and prescriptions, health and wellness, account setting
@@ -45,22 +45,22 @@ Feature: 1.23 Member Provider Search
     @sanity_providerSearch01_mapd
     Examples: 
 	    | index | planType | memberType              | 
-	    | 02    | MAPD     | UHC_IND_ProviderSearch  |
+	    | S02   | MAPD     | UHC_IND_ProviderSearch  |
 
 	@sanity_providerSearch01_pdp
     Examples: 
 	    | index | planType | memberType              | 
-	    | 03    | PDP      | AARP_IND_ProviderSearch |
+	    | S03   | PDP      | AARP_IND_ProviderSearch |
 
 	@sanity_providerSearch01_ma
     Examples: 
 	    | index | planType | memberType              | 
-	    | 05    | MA       | AARP_IND_ProviderSearch |
+	    | S05   | MA       | AARP_IND_ProviderSearch |
 
     @sanity_providerSearch01_medica_pcp
     Examples: 
 	    | index | planType | memberType              | 
-	    | 06    | MEDICA   | MEDICA_IND_ProviderSearch |
+	    | S06   | MEDICA   | MEDICA_IND_ProviderSearch |
 
   #----- begin regression
   @providerSearch01 @regressionMember
