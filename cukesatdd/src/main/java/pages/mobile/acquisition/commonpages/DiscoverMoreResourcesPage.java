@@ -3,7 +3,7 @@ package pages.mobile.acquisition.commonpages;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 
-public class DiscoverMoreResourcesPage extends GlobalWebElements {
+public class DiscoverMoreResourcesPage extends GlobalWebElementsMobile {
 
 	public DiscoverMoreResourcesPage(WebDriver driver) {
 		super(driver);

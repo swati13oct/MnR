@@ -197,7 +197,7 @@ public class ComparePlansPageMobile extends UhcDriver {
 	@FindBy(xpath = "//div[text()='Your Drugs']")
 	private WebElement yourDrugsBanner;
 
-	@FindBy(xpath = "//a[text()='Add Drugs']")
+	@FindBy(xpath="//*[contains(@class,'uhc-link-button') and contains(text(),'Add Drugs')]")
 	private WebElement addDrugsLink;
 
 	@FindBy(xpath = "//*[normalize-space(text())='Edit Drugs']")
@@ -1141,27 +1141,30 @@ public class ComparePlansPageMobile extends UhcDriver {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void validateDrugInfo(String drug) {
-		validateNew(backToAllPlansLink);			
+		validateNew(backToAllPlansLink);
 		validateNew(yourDrugsBanner);
 		validateNew(editDrugsLink);
 		validateNew(DrugSummaryHeader);
 		validateNew(DrugSummaryCoverageHeader);
 		System.out.println("Coverage Header for plan 1 : " + DrugSummaryCoverageHeader.getText());
 		validateNew(DrugName);
-		Assert.assertTrue("Drug name is not displayed on the plan compare page",DrugName.getText().contains(drug));
+		Assert.assertTrue("Drug name is not displayed on the plan compare page", DrugName.getText().contains(drug));
 		validateNew(DrugCoverageText);
 		System.out.println("Covered or not covered text for plan 1 : " + DrugCoverageText.getText());
 		System.out.println("Verified Edit Drugs Section header and Summary section");
-		
-	}	
+
+	}
 
 	@FindBy(xpath = "//*[contains(@id,'get-started')]")
 	public WebElement getStartedTab;
 
-	public GetStartedPageMobile navigateToDCERedesign() {
+	@FindBy(xpath = "//body/div[@id='site-wrapper']/div[@id='globalContentIdForSkipLink']/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[4]/div[1]/div[1]/div[1]/div[1]/div[1]/div[10]/div[5]/div[1]/div[4]/div[1]/div[2]/div[2]/div[1]/div[2]/div[2]/div[2]/div[1]/div[1]/div[2]/div[1]/div[1]/h4[1]/a[1]")
+	public WebElement enterDrugInformation;
 
+	public GetStartedPageMobile navigateToDCERedesign() {
+		
 		validateNew(addDrugsLink);
 		JavascriptExecutor executor = (JavascriptExecutor) driver;
 		executor.executeScript("arguments[0].scrollIntoView(true);", addDrugsLink);

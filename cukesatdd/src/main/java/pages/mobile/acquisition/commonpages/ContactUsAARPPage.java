@@ -7,7 +7,7 @@ import org.openqa.selenium.support.PageFactory;
 
 import acceptancetests.util.CommonUtility;
 
-public class ContactUsAARPPage extends GlobalWebElements{
+public class ContactUsAARPPage extends GlobalWebElementsMobile{
 	 
 	@FindBy(xpath = "//*[contains(@class,'meded layout')]")
 	public static WebElement header;

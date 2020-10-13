@@ -24,6 +24,8 @@ import atdd.framework.UhcDriver;
 import cucumber.api.DataTable;
 import cucumber.api.java.en.When;
 import gherkin.formatter.model.DataTableRow;
+import pages.acquisition.bluelayer.ComparePlansPageBlayer;
+import pages.mobile.acquisition.bluelayer.ComparePlansPageBlayerMobile;
 
 public class DrugCostEstimatorPageMobile extends UhcDriver {
 
@@ -464,7 +466,10 @@ public class DrugCostEstimatorPageMobile extends UhcDriver {
 	@FindBy(xpath = "//button[contains(@class,'costs-tab-show') and contains(text(),'rofile')]")
 	private WebElement btnReturnToProfile;
 
-	@FindBy(xpath = "//img[@alt='Shopping Cart' and @dtmname='Visitor Profile:Global Header:Open']")
+//	@FindBy(xpath = "//img[@alt='Shopping Cart' and @dtmid='acq_visitor_profile']")
+//	private WebElement shoppingCartIcon;
+	
+	@FindBy(id = "dupIconFlyOut")
 	private WebElement shoppingCartIcon;
 
 	public WebElement getImgLoadingIndicator() {
@@ -2026,7 +2031,9 @@ public class DrugCostEstimatorPageMobile extends UhcDriver {
 	}
 
 	public VisitorProfilePageMobile clickOnShoppingCart() {
-		shoppingCartIcon.click();
+		validate(shoppingCartIcon, 20);
+		jsClickNew(shoppingCartIcon);
+		//shoppingCartIcon.click();
 		if (driver.getCurrentUrl().contains("profile")) {
 			return new VisitorProfilePageMobile(driver);
 		} else {
@@ -2044,6 +2051,16 @@ public class DrugCostEstimatorPageMobile extends UhcDriver {
 		return null;
 
 	}
+	
+	public ComparePlansPageBlayerMobile clickBtnBackToPlancomparenew() throws InterruptedException {
+		validateNew(getBtnBackToPlans());
+		getBtnBackToPlans().click();
+		CommonUtility.checkPageIsReadyNew(driver);
+		CommonUtility.waitForPageLoadNew(driver, planCompareVerifyEstimatedDrugCostValue, 60);
+		return new ComparePlansPageBlayerMobile(driver);
+
+	}
+	
 
 	public void validateLocalStorage(Map<String, String> dCEAttributesMap) {
 		

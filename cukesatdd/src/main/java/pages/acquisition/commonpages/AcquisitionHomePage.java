@@ -1543,16 +1543,24 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			return null;
 		}
 		
+		
+		
+		
 		public void navigateToMedEdPresDrugPage()
 		{
+		
+			
 			waitforElement(lnkLearnAboutMedicare);
+			
 			if (lnkLearnAboutMedicare.isDisplayed()) {
 				Actions actions = new Actions(driver);
 				actions.moveToElement(lnkLearnAboutMedicare);
 				actions.build().perform();
 				System.out.println("Hover over Learn about Medicare completed");
 		    }
+			
 			WebElement PresProvidersBenefitsLink = driver.findElement(By.xpath("//*[contains(@class, 'nav-col nav-col-3')]//a[contains(@href,'medicare-benefits')]"));
+			//WebElement PresProvidersBenefitsLink = driver.findElement(By.xpath("//span[contains(text(),'Prescriptions, Providers & Benefits')]"));
 			jsClickNew(PresProvidersBenefitsLink);
 		}
 

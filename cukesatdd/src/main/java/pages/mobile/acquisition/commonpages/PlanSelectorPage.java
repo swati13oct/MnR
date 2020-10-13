@@ -19,7 +19,7 @@ import acceptancetests.util.CommonUtility;
  * @author rkodumur
  *
  */
-public class PlanSelectorPage extends GlobalWebElements{
+public class PlanSelectorPage extends GlobalWebElementsMobile{
 	
 	
 	@FindBy(xpath = "//article[@id='criteria']/header/div[1]/h2")

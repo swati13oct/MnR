@@ -7,7 +7,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class CostBasicsPage extends GlobalWebElements {
+public class CostBasicsPage extends GlobalWebElementsMobile {
 
 	public CostBasicsPage(WebDriver driver) {
 		super(driver);

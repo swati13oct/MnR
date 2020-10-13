@@ -9,8 +9,8 @@ import org.openqa.selenium.support.PageFactory;
 
 import atdd.framework.UhcDriver;
 
-public class GlobalWebElements  extends UhcDriver{
-	public GlobalWebElements(WebDriver driver) {
+public class GlobalWebElementsMobile  extends UhcDriver{
+	public GlobalWebElementsMobile(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
 	}

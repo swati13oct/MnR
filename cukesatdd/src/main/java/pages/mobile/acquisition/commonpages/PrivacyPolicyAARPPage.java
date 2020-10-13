@@ -14,7 +14,7 @@ import acceptancetests.util.CommonUtility;
  * @author rkodumur
  *
  */
-public class PrivacyPolicyAARPPage extends GlobalWebElements{
+public class PrivacyPolicyAARPPage extends GlobalWebElementsMobile{
  
 	@FindBy(xpath = "//*[contains(@class,'meded-article-header__title')]")
 	public static WebElement header;

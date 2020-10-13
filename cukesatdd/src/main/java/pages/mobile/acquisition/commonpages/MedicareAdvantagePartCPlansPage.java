@@ -9,7 +9,7 @@ import org.openqa.selenium.support.PageFactory;
 
 import junit.framework.Assert;
 
-public class MedicareAdvantagePartCPlansPage extends GlobalWebElements {
+public class MedicareAdvantagePartCPlansPage extends GlobalWebElementsMobile {
 
 	public MedicareAdvantagePartCPlansPage(WebDriver driver) {
 		super(driver);

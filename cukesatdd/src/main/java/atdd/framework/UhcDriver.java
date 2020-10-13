@@ -60,7 +60,7 @@ import java.util.regex.Pattern;
 public abstract class UhcDriver {
 
 	public WebDriver driver;
-	private long defaultTimeoutInSec = 20;
+	private long defaultTimeoutInSec = 40;
 
 	@FindBy(xpath = ".//iframe[contains(@id,'IPerceptionsEmbed')]")
 	public static WebElement IPerceptionsFrame;
@@ -79,7 +79,7 @@ public abstract class UhcDriver {
 	}
 
 	public void waitforElement(WebElement element) {
-		WebDriverWait wait = new WebDriverWait(driver, 30);
+		WebDriverWait wait = new WebDriverWait(driver, 40);
 		wait.until(ExpectedConditions.visibilityOf(element));
 
 	}
@@ -1128,6 +1128,11 @@ public abstract class UhcDriver {
 			System.out.println("Session Storage - Key: " + StorageKey + "; Value: " + ReturnValue);
 		}
 		return ReturnValue;
+	}
+
+	public void addDrugs() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

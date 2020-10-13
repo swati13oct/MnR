@@ -35,7 +35,7 @@ import pages.acquisition.pharmacyLocator.PharmacySearchPage;
  * @author pperugu
  *
  */
-public class AcquisitionHomePageMobile extends GlobalWebElements {
+public class AcquisitionHomePageMobile extends GlobalWebElementsMobile {
 
 	@FindBy(xpath = "//*[contains(@id,'cta-zipcode')]")
 	private WebElement zipCodeField;

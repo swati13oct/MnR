@@ -3,7 +3,7 @@ package pages.mobile.acquisition.commonpages;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 
-public class MedicareAdvantagePlansPage extends GlobalWebElements {
+public class MedicareAdvantagePlansPage extends GlobalWebElementsMobile {
 	
 
 	public MedicareAdvantagePlansPage(WebDriver driver) {

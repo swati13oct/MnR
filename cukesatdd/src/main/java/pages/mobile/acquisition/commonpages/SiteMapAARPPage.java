@@ -19,7 +19,7 @@ import acceptancetests.util.CommonUtility;
  * @author rkodumur
  *
  */
-public class SiteMapAARPPage extends GlobalWebElements {
+public class SiteMapAARPPage extends GlobalWebElementsMobile {
 	 
 	@FindBy(xpath = "//div[@id='medicareTitle']/*")
 	public static WebElement header;

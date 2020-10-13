@@ -47,6 +47,7 @@ import pages.acquisition.ulayer.MultiCountyModalPage;
 import pages.acquisition.ulayer.PlanDetailsPage;
 import pages.acquisition.ulayer.VisitorProfilePage;
 import pages.acquisition.vppforaep.AepVppPlanSummaryPage;
+import pages.mobile.acquisition.bluelayer.ComparePlansPageBlayerMobile;
 import pages.mobile.acquisition.bluelayer.PlanComparePageMobile;
 import pages.mobile.acquisition.dce.ulayer.DrugCostEstimatorPageMobile;
 import pages.mobile.acquisition.dceredesign.GetStartedPageMobile;
@@ -887,9 +888,9 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 			// CommonUtility.waitForPageLoadNew(driver, planListContainer, 30);
 		} else if (planType.equalsIgnoreCase("MA") || planType.equalsIgnoreCase("MAPD")) {
 			CommonUtility.waitForPageLoadNew(driver, maPlansViewLink, 40);
-			// sleepBySec(9);
-			// jsClickNew(maPlansViewLink);
-			maPlansViewLink.click();
+			sleepBySec(9);
+			jsClickNew(maPlansViewLink);
+			//maPlansViewLink.click();
 			CommonUtility.waitForPageLoadNew(driver, planListContainer, 30);
 		} else if (planType.equalsIgnoreCase("MS")) {
 			// driver.navigate().refresh();
@@ -1174,26 +1175,24 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 	public boolean getSpecificPlanInfo(String planName) throws InterruptedException {
 		boolean isSpecificPlanInfoPresent = false;
 		if (planName.contains("SNP")) {
-			// ElementData elementData = new ElementData("id", "viewDetailsMA");
+			//ElementData elementData = new ElementData("id", "viewDetailsMA");
 			Thread.sleep(4000);
 			isSpecificPlanInfoPresent = getSpecificPlanSummary(snpPlanList, planName);
-			// element = getSpecificPlanSummary(findChildElements(elementData, snpPlanList),
-			// planName);
-		} else if (planName.contains("HMO")) {
+			// element = getSpecificPlanSummary(findChildElements(elementData, snpPlanList), planName);
+		}
+		else if (planName.contains("HMO")) {
 			isSpecificPlanInfoPresent = getSpecificPlanSummary(maPlanList, planName);
 
 		} else if (planName.contains("PDP")) {
-			// ElementData elementData = new ElementData("id", "viewDetailsPDP");
-			// element = getSpecificPlanSummary(findChildElements(elementData, pdpPlanList),
-			// planName);
+			//ElementData elementData = new ElementData("id", "viewDetailsPDP");
+			//element = getSpecificPlanSummary(findChildElements(elementData, pdpPlanList), planName);
 			isSpecificPlanInfoPresent = getSpecificPlanSummary(pdpPlanList, planName);
-		}
-		/*
-		 * else if (planName.contains("Regional PPO")) { //ElementData elementData = new
-		 * ElementData("id", "viewDetailsMA"); element =
-		 * getSpecificPlanSummary(findChildElements(elementData, maPlanList), planName);
-		 * }
-		 */
+		} 
+		/*else if (planName.contains("Regional PPO")) {
+                        //ElementData elementData = new ElementData("id", "viewDetailsMA");
+                        element = getSpecificPlanSummary(findChildElements(elementData, maPlanList), planName);
+        } */
+
 
 		return isSpecificPlanInfoPresent;
 	}
@@ -4391,13 +4390,13 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 		}
 	}
 
-	public ComparePlansPageMobile clickOnCompareLink() {
+	public ComparePlansPageBlayerMobile clickOnCompareLink() {
 		List<WebElement> compareLinks = driver.findElements(
 				By.xpath("//*[contains(@class,'multiple-added-text')]//button[contains(text(),'Compare plans')]"));
 		compareLinks.get(1).click();
 
 		if (currentUrl().contains("/health-plans.html#/plan-compare"))
-			return new ComparePlansPageMobile(driver);
+			return new ComparePlansPageBlayerMobile(driver);
 		return null;
 	}
 
@@ -4589,6 +4588,9 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 		} else
 			Assert.fail("Provider Search Page is not displayed");
 	}
+	
+	
+	
 	/*
 	 * public boolean waitForJStoLoad () {
 	 * 

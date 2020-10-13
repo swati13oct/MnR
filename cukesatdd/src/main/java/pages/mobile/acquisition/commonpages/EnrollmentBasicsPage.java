@@ -7,7 +7,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class EnrollmentBasicsPage extends GlobalWebElements {
+public class EnrollmentBasicsPage extends GlobalWebElementsMobile {
 
 	public EnrollmentBasicsPage(WebDriver driver) {
 		super(driver);
