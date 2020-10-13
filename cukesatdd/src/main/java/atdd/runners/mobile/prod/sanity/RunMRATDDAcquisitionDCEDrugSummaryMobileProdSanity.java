@@ -16,7 +16,7 @@ import cucumber.api.CucumberOptions;
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.mobile" }, monochrome = true, features = {
 		"src/main/resources/feature/mobile/acquisition/dceredesign" }, plugin = { "pretty", "html:reports/test-report",
 				"json:target/cucumber-RunMRATDDAcquisitionDCEDrugSummaryMobileProdSanity.json" }, tags = {
-						"@d@DCE_DrugSummary_ValidatePage_AARP", "@prodSanity" }, dryRun=false)
+						"@DCE_DrugSummary_ValidatePage_AARP", "@prodSanity" }, dryRun=false)
 
 public class RunMRATDDAcquisitionDCEDrugSummaryMobileProdSanity {
 

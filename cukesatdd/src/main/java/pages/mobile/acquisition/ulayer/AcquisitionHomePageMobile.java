@@ -1917,11 +1917,13 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	public VPPPlanSummaryPageMobile searchPlansNoCounty() {
 		if (isHealthPlan) {
 			CommonUtility.waitForPageLoadNew(driver, zipCodeHealthPlans, 45);
+			zipCodeHealthPlans.click();
 			GoBtnHealthPlans.click();
 			CommonUtility.waitForPageLoadNew(driver, vppTop, 30);
 
 		} else {
 			CommonUtility.waitForPageLoadNew(driver, zipCodeField, 20);
+			zipCodeField.click();
 			viewPlansButton.click();
 			CommonUtility.waitForPageLoadNew(driver, vppTop, 40);
 		}

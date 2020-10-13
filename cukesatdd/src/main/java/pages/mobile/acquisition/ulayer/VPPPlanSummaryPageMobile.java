@@ -88,7 +88,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 	@FindBy(xpath = "//*[contains(@class,'module-tabs-tabs')]/*[not (contains(@class,'active'))]//*[contains(@dtmname,'SNP')]/following-sibling::a")
 	private WebElement snpPlansViewLink;
 
-	@FindBy(xpath="//div[contains(@ng-click,'viewMaPlans(true)')]")
+	@FindBy(id = "plan-list-1")
 	private WebElement maPlanList;
 
 	@FindBy(id = "plan-list-3")
@@ -888,9 +888,9 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 			// CommonUtility.waitForPageLoadNew(driver, planListContainer, 30);
 		} else if (planType.equalsIgnoreCase("MA") || planType.equalsIgnoreCase("MAPD")) {
 			CommonUtility.waitForPageLoadNew(driver, maPlansViewLink, 40);
-			// sleepBySec(9);
-			// jsClickNew(maPlansViewLink);
-			maPlansViewLink.click();
+			sleepBySec(9);
+			jsClickNew(maPlansViewLink);
+			//maPlansViewLink.click();
 			CommonUtility.waitForPageLoadNew(driver, planListContainer, 30);
 		} else if (planType.equalsIgnoreCase("MS")) {
 			// driver.navigate().refresh();
@@ -1175,28 +1175,24 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 	public boolean getSpecificPlanInfo(String planName) throws InterruptedException {
 		boolean isSpecificPlanInfoPresent = false;
 		if (planName.contains("SNP")) {
-			// ElementData elementData = new ElementData("id", "viewDetailsMA");
+			//ElementData elementData = new ElementData("id", "viewDetailsMA");
 			Thread.sleep(4000);
 			isSpecificPlanInfoPresent = getSpecificPlanSummary(snpPlanList, planName);
-			// element = getSpecificPlanSummary(findChildElements(elementData, snpPlanList),
-			// planName);
-		} else if (planName.contains("HMO")) {
-			Thread.sleep(4000);
+			// element = getSpecificPlanSummary(findChildElements(elementData, snpPlanList), planName);
+		}
+		else if (planName.contains("HMO")) {
 			isSpecificPlanInfoPresent = getSpecificPlanSummary(maPlanList, planName);
 
 		} else if (planName.contains("PDP")) {
-			Thread.sleep(4000);
-			// ElementData elementData = new ElementData("id", "viewDetailsPDP");
-			// element = getSpecificPlanSummary(findChildElements(elementData, pdpPlanList),
-			// planName);
+			//ElementData elementData = new ElementData("id", "viewDetailsPDP");
+			//element = getSpecificPlanSummary(findChildElements(elementData, pdpPlanList), planName);
 			isSpecificPlanInfoPresent = getSpecificPlanSummary(pdpPlanList, planName);
-		}
-		/*
-		 * else if (planName.contains("Regional PPO")) { //ElementData elementData = new
-		 * ElementData("id", "viewDetailsMA"); element =
-		 * getSpecificPlanSummary(findChildElements(elementData, maPlanList), planName);
-		 * }
-		 */
+		} 
+		/*else if (planName.contains("Regional PPO")) {
+                        //ElementData elementData = new ElementData("id", "viewDetailsMA");
+                        element = getSpecificPlanSummary(findChildElements(elementData, maPlanList), planName);
+        } */
+
 
 		return isSpecificPlanInfoPresent;
 	}

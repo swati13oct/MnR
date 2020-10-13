@@ -67,7 +67,7 @@ public class DCEACQVPPPlanDetailsMobile {
 	public void the_user_on__medicaresolutions_Site(DataTable givenAttributes) {
 		wd = getLoginScenario().getMobileDriver();
 		AcquisitionHomePageMobile aquisitionhomepage = new AcquisitionHomePageMobile(wd);
-		//aquisitionhomepage.openPRE();
+		// aquisitionhomepage.openPRE();
 		aquisitionhomepage.openMobileURL();
 		aquisitionhomepage.fixPrivateConnectionMobile();
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
@@ -244,14 +244,16 @@ public class DCEACQVPPPlanDetailsMobile {
 	@Then("^the user navigates to the plan details for the given plan type$")
 	public void the_user_navigates_to_the_plan_details_for_the_given_plan_type_in_AARP_site(DataTable data)
 			throws Throwable {
-		//wd.manage().window().maximize();
 		List<DataTableRow> memberAttributesRow = data.getGherkinRows();
 		String planType = memberAttributesRow.get(0).getCells().get(1);
-		String planName=memberAttributesRow.get(1).getCells().get(1);
-		VPPPlanSummaryPageMobile plansummaryPage =  new VPPPlanSummaryPageMobile(wd);
+		String planName = memberAttributesRow.get(1).getCells().get(1);
+
+		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+
 		plansummaryPage.viewPlanSummary(planType);
-		PlanDetailsPageMobile plandetailspage= (PlanDetailsPageMobile)plansummaryPage.navigateToPlanDetails(planName, planType);
-		if(plandetailspage!=null){
+		PlanDetailsPageMobile plandetailspage = plansummaryPage.navigateToPlanDetails(planName, planType);
+		if (plandetailspage != null) {
 			getLoginScenario().saveBean(PageConstants.PLAN_DETAILS_PAGE, plandetailspage);
 			getLoginScenario().saveBean(DCERedesignCommonConstants.PLANTYPE, planType);
 			getLoginScenario().saveBean(DCERedesignCommonConstants.PLANNAME, planName);
