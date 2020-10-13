@@ -47,9 +47,11 @@ import pages.acquisition.bluelayer.PrivacyPolicyUmsPage;
 import pages.acquisition.bluelayer.VPPTestHarnessPage;
 import pages.acquisition.bluelayer.VisitorProfileTestHarnessPage;
 import pages.acquisition.commonpages.AcquisitionHomePage;
+import pages.acquisition.commonpages.VisitorProfilePage;
 import pages.acquisition.commonpages.keywordSearchAARP;
 import pages.acquisition.dceredesign.GetStartedPage;
 import pages.acquisition.ole.WelcomePage;
+import pages.mobile.acquisition.dceredesign.BuildYourDrugListMobile;
 import pages.mobile.acquisition.dceredesign.GetStartedPageMobile;
 import pages.mobile.acquisition.ole.WelcomePageMobile;
 
@@ -2504,9 +2506,15 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 	}
 
-	public VisitorProfilePageMobile navigateToVisitorProfilePage() {
-		// TODO Auto-generated method stub
-		return null;
+	public BuildYourDrugListMobile navigateToVisitorProfilePage() {
+		waitforElement(shoppingCartIcon);
+		shoppingCartIcon.click();
+		if(driver.getCurrentUrl().contains("profile")) {
+			return new BuildYourDrugListMobile(driver);
+		}else {
+			System.out.println("Navigation to visitor profile is failed");
+			return null;
+		}
 	}
 
 }

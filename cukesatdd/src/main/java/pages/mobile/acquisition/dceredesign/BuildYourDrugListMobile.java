@@ -17,7 +17,9 @@ import com.itextpdf.text.Document;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 import io.appium.java_client.AppiumFluentWait;
+import pages.acquisition.ulayer.DrugCostEstimatorPage;
 import pages.mobile.acquisition.ulayer.ComparePlansPageMobile;
+import pages.mobile.acquisition.ulayer.DrugCostEstimatorPageMobile;
 
 public class BuildYourDrugListMobile extends UhcDriver {
 
@@ -92,22 +94,20 @@ public class BuildYourDrugListMobile extends UhcDriver {
 		} else
 			Assert.fail("Error Message displayed for Blank Drug search : " + BlankDrugError.getText());
 	}
-	
-	
 
 	public void addDrugs() {
 		validateNew(EnterDrugNameTxt);
-		
+
 	}
 
 	public void addDrugs(String drugName) throws InterruptedException {
 		// validate(EnterDrugNameTxt);
-	
-		//waitforElement(EnterDrugNameTxt);
-	
-//		EnterDrugNameTxt.click();
-//		jsClickNew(EnterDrugNameTxt);
-		//EnterDrugNameTxt.sendKeys(drugName);
+
+		// waitforElement(EnterDrugNameTxt);
+
+		// EnterDrugNameTxt.click();
+		// jsClickNew(EnterDrugNameTxt);
+		// EnterDrugNameTxt.sendKeys(drugName);
 		sendkeys(EnterDrugNameTxt, drugName);
 
 		Thread.sleep(5000);
@@ -126,9 +126,16 @@ public class BuildYourDrugListMobile extends UhcDriver {
 		// reviewDrugCost.click();
 	}
 
+	@FindBy(xpath = "//a[contains(text(),'Add Drugs')]")
+	private WebElement addrugs;
 	
+	public DrugCostEstimatorPageMobile addDrug() {
 
-
+		addrugs.click();
+		if (currentUrl().contains("/estimate-drug-costs.html"))
+			return new DrugCostEstimatorPageMobile(driver);
+		return null;
+	}
 
 	public void clickReviewDrugCostBtn() {
 		// reviewDrugCost.click();
