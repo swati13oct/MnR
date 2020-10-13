@@ -42,7 +42,7 @@ Feature: 1.10.1 DCE-REDESIGN UHC - To test ZipCode and Plan Year capture page in
       | path                     | pageName                   |drugName|zipCode|
       | health-plans/estimate-drug-costs.html/getstarted | DCE Redesign - Get Started |Lipitor|90210|
 
-  @DCE_ZipCodePlanYear_ErrorMessage_AEP_UHC @F443609
+  @DCE_ZipCodePlanYear_AEP_UHC @prodSanity
   Scenario Outline: Test to verify the error message when user does not enter or enter invalid zipcode and clicks on continue button
     Given the user is on the uhcmedicaresolutions site landing page
     When the user navigates to following UHC medicare solutions site page

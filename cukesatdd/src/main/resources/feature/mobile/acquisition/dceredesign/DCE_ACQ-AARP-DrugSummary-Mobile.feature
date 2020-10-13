@@ -23,7 +23,7 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
       | zipCode | plantype | county | isMultutiCounty | drugName | planname                                           |
       |   10001 | MAPD     | none   | no              | Emsam    | AARP Medicare Advantage SecureHorizons Focus (HMO) |
 
-  @DCE_DrugSummary_Page @prodSanity
+  @DCE_DrugSummary_ValidatePage_AARP @prodSanity
   Scenario Outline: Test to verify the Drug summary page
     Given the user is on medicare acquisition site landing page
       | Site | <site> |

@@ -16,7 +16,7 @@ import cucumber.api.CucumberOptions;
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.mobile.acquisition" }, monochrome = true, features = {
 		"src/main/resources/feature/mobile/acquisition/dceredesign" }, plugin = { "pretty", "html:reports/test-report",
 				"json:target/cucumber-RunMRATDDAcquisitionDCEZipCodeAndPlanYearCaptureMobileProdSanity.json" }, tags = {
-						"@prodSanity" })
+						"@DCE_ZipCodePlanYear_AEP_UHC", "@prodSanity" })
 
 public class RunMRATDDAcquisitionDCEZipCodeAndPlanYearCaptureMobileProdSanity {
 

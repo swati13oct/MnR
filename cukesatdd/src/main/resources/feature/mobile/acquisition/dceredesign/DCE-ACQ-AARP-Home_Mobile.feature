@@ -3,7 +3,7 @@ Feature: 1.10.1 DCE-REDISIGN AARP - To test Acq Home to NEW DCE Flows
 
   @DCE_HomeIcon @prodSanity
   Scenario Outline: To verify DCE REDESIGN flow from Ulayer home page
-    #Given the user is on AARP medicare acquisition site landing page
+    
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     When I access the acquisition DCE Redesign from home page
@@ -30,7 +30,6 @@ Feature: 1.10.1 DCE-REDISIGN AARP - To test Acq Home to NEW DCE Flows
     Then the user validates Your Drugs sections
     Then the user validates Monthly Drug Costs by Stage Section
     Then the user validates Important information section
-    #Then the user validates Disclaimers section
     Then the user validates link to Drug Summary Page
 
     @DCE_HomeIcon_AEP_AARP

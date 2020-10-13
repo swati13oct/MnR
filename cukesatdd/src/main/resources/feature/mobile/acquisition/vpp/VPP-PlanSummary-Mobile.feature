@@ -1,7 +1,7 @@
 @vppPlanSummaryUHC
 Feature: 2.01.1-Vpp to plan Summary UHC Scenarios
 
-  @vppPlanSummaryUHC01 @vppPlanSummaryUHCRun01 @vppPlanSummaryUHCRegression @prodSanity
+ @vppPlanSummaryUHCRegression @prodSanity
   Scenario Outline: TID: <TID> -plan type: <plantype> - Verify plan cards on plan summary page in <site> site
     Given the user is on medicare acquisition site landing page
     	|Site| <site>|
@@ -201,7 +201,7 @@ Feature: 2.01.1-Vpp to plan Summary UHC Scenarios
   #Examples:
   #| zipcode | plantype | planName                    |
   #|   55344 | MA       | UnitedHealthcare Sync (PPO) |
-  @vppPlanSummaryUHC07 @vppPlanSummaryUHCRun02 @vppPlanSummaryUHCRegression @prodSanity
+  @vppPlanSummaryUHCRegression @prodSanity
   Scenario Outline: UID: <UID>  - Verify Call sticky action menu on UHC site
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
@@ -275,7 +275,7 @@ Feature: 2.01.1-Vpp to plan Summary UHC Scenarios
       | 1598166 | Blayer | PDP      |   80001 | NO            | Jefferson County |
       | 1598166 | Blayer | SNP      |   80001 | NO            | Jefferson County |
 
-  @vppPlanSummaryUHC11 @vppPlanSummaryUHCRun02 @vppPlanSummaryUHCRegression @prodSanity
+  @vppPlanSummaryUHCRegression @prodSanity
   Scenario Outline: Verify Provider Search  in UHC site from plan summary page
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
@@ -437,7 +437,7 @@ Feature: 2.01.1-Vpp to plan Summary UHC Scenarios
       | TID       | zipcode | isMultutiCounty | county      | plantype | planName                                              |planyear|
       | US2567142 |   81501 | NO              | Mesa County | SNP      | Rocky Mountain Health Plans DualCare Plus (HMO D-SNP) |current|
 
-  @vppPlanSummaryUHC16 @vppPlanSummaryUHCRun02 @vppPlanSummaryUHCRegression
+  @vppPlanSummaryUHCRegression @prodSanity
   Scenario Outline: TID: <TID> -plan type: <plantype> -plan name: -<planName>- Verify People Health plans Learn More lands on Correct site from UHC site from plan summary page
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
