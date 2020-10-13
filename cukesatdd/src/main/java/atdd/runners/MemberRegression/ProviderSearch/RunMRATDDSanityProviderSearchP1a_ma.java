@@ -10,11 +10,11 @@ import cucumber.api.CucumberOptions;
 
 @RunWith(ExtendedCucumber.class)
 @ExtendedCucumberOptions(retryCount=1,screenShotSize="", screenShotLocation="/screenshots/",
-jsonReport = "target/cucumber-RunMRATDDSanityProviderSearch_MA_Individual.json",detailedReport = true, detailedAggregatedReport = true,
-overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDSanityProviderSearch_MA_Individual")
+jsonReport = "target/cucumber-RunMRATDDSanityProviderSearchP1a_ma.json",detailedReport = true, detailedAggregatedReport = true,
+overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDSanityProviderSearchP1a_ma")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberredesign" }, 
 features = { "src/main/resources/feature/memberredesign/providerSearch" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDSanityProviderSearch_MA_Individual.json" }, tags = { "@SanityStage_providerSearch_ma" })
-public class RunMRATDDSanityProviderSearch_MA_Individual {
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDSanityProviderSearchP1a_ma.json" }, tags = { "@sanity01","@sanity_providerSearch01_ma" })
+public class RunMRATDDSanityProviderSearchP1a_ma {
 
 }
