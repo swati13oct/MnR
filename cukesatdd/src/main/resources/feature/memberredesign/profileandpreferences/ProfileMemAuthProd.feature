@@ -5,6 +5,33 @@ Feature: 1.02.1 Member Profile page - Prod
   #   Given feature security flag must set to true when testing on stage env
   #    | Feature           | UCPProfileAndPreferences |
 
+  @prodSanity_MAPD_Groups
+  Scenario Outline: TID: <TID> -Plan Type: <planType> - To verify Profile page End to End test for MAPD and MA Members
+    Given the user is on member auth login flow page
+    When the member is able to login with correct username and password
+      | Username | <username> |
+      | Password | <password> |
+    And Member Enters the Username he wants to search
+      | MemUsername | <MemUserName> |
+    And user clicks on member to select
+    And user stores test input for validations
+      | Username    | <MemUserName> |
+      #| Plan Type   | <planType>    |
+      | Member Type | <memberType>  |
+    #-------------- navigate to the target test page for testing
+    When the user navigates to Profile and Preferences page
+    Then the user validates the Plan Name, Member name, Member ID and account section in UMS site
+    Then the user validates permanent address section
+    #Then the user validates the Phone section with iframe
+      #| Plan Type | <planType> |
+    Then the user validate the temporary address section for  member
+    And the user validates see more ways to contact us section
+    And the user validates on clicking contact us link it should route to contact us page
+
+    Examples:
+      | TID        | username | password | MemUserName       | planType | memberType         |
+      | Unknown_11 | ujethwa | 221Umang | WILLIAMGARRISON48 | MAPD     | MAPD_Group         |
+
   @prod_accountProfile01
   Scenario Outline: TID: <TID> -Plan Type: <planType> -Member Type: <memberType> - To test end to end regression scenario for account profile and preferences for a combo member
     #Removed from Regression as EPMP is still in the pipeline for development
@@ -113,7 +140,7 @@ Feature: 1.02.1 Member Profile page - Prod
       | TID        | username | password | MemUserName | planType | memberType        |
       | Unknown_15 | ujethwa | 221Umang | PJVANEKRIS65  | MAPD     | Terminated_AccPro |
 
-  @prod_accountProfile05
+  @prod_accountProfile05 @SHIP_ProfilePref
   Scenario Outline: TID: <TID> -Plan Type: <planType> - To verify Profile page End to End test for Ship Members
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
