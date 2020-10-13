@@ -330,7 +330,7 @@ public class HealthAndWellnessPage extends UhcDriver{
 		String expectedUrl="uhc.com/rewards";
 		String actUrlLink=getRewardLink.getAttribute("href");
 		Assert.assertTrue("PROBLEM - unable to locate expected href link from element.  Expect to contain '"+expectedUrl+"' | Actual='"+actUrlLink+"'",actUrlLink.contains(expectedUrl));
-		if (testThirdPartyPage) {
+		if (testThirdPartyPage && !MRScenario.environment.equals("offline")) {
 			getRewardLink.click();
 			CommonUtility.checkPageIsReady(driver);
 			sleepBySec(15);
@@ -418,7 +418,7 @@ public class HealthAndWellnessPage extends UhcDriver{
 			Assert.assertTrue("PROBLEM - unable to locate '"+targetElement+"'", hwValidate(renewActiveIconImg_ship));
 			String expectedHref="/active/overview";
 			//String expectedHref="https://member.int.uhc.com/active/overview";
-			if (testThirdPartyPage) {
+			if (testThirdPartyPage && !MRScenario.environment.equals("offline")) {
 				renewActiveIconImg_ship.click();
 				CommonUtility.checkPageIsReady(driver);
 				CommonUtility.waitForPageLoad(driver, generalHeader, 15);
@@ -444,7 +444,7 @@ public class HealthAndWellnessPage extends UhcDriver{
 			expectedHref="/active/overview";
 			String actualEleLnkHref=learnMoreBtn_ship.getAttribute("href");
 			Assert.assertTrue("PROBLEM - '"+targetElement+"' element href attribute value is not as expected. Expected='"+expectedHref+"' | Actual='"+actualEleLnkHref+"'", actualEleLnkHref.contains(expectedHref));
-			if (testThirdPartyPage) {
+			if (testThirdPartyPage && !MRScenario.environment.equals("offline")) {
 				renewActiveIconImg_ship.click();
 				CommonUtility.checkPageIsReady(driver);
 				CommonUtility.waitForPageLoad(driver, generalHeader, 15);
@@ -469,7 +469,7 @@ public class HealthAndWellnessPage extends UhcDriver{
 		//String expectedHref="https://member.int.uhc.com/active/fitness-location-search";
 		String actualEleLnkHref=gymElement.getAttribute("href");
 		Assert.assertTrue("PROBLEM - '"+targetElement+"' element href attribute value is not as expected. Expected='"+expectedHref+"' | Actual='"+actualEleLnkHref+"'", actualEleLnkHref.contains(expectedHref));
-		if (testThirdPartyPage) {
+		if (testThirdPartyPage && !MRScenario.environment.equals("offline")) {
 			gymElement.click();
 			CommonUtility.checkPageIsReady(driver);
 			CommonUtility.waitForPageLoad(driver, generalHeader, 15);
@@ -490,7 +490,7 @@ public class HealthAndWellnessPage extends UhcDriver{
 		expectedHref="/active/train-your-brain";
 		actualEleLnkHref=brainElement.getAttribute("href");
 		Assert.assertTrue("PROBLEM - '"+targetElement+"' element href attribute value is not as expected. Expected='"+expectedHref+"' | Actual='"+actualEleLnkHref+"'", actualEleLnkHref.contains(expectedHref));
-		if (testThirdPartyPage) {
+		if (testThirdPartyPage && !MRScenario.environment.equals("offline")) {
 			brainElement.click();
 			CommonUtility.checkPageIsReady(driver);
 			CommonUtility.waitForPageLoad(driver, generalHeader, 15);
@@ -551,7 +551,7 @@ public class HealthAndWellnessPage extends UhcDriver{
 		String expectedHref="active/terms";
 		String actualEleLnkHref=termsAndConditionsElement.getAttribute("href");
 		Assert.assertTrue("PROBLEM - '"+targetElement+"' element href attribute value is not as expected. Expected='"+expectedHref+"' | Actual='"+actualEleLnkHref+"'", actualEleLnkHref.contains(expectedHref));
-		if (testThirdPartyPage) {
+		if (testThirdPartyPage && !MRScenario.environment.equals("offline")) {
 			termsAndConditionsElement.click();
 			CommonUtility.checkPageIsReady(driver);
 			CommonUtility.waitForPageLoad(driver, generalHeader, 15);
