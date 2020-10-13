@@ -209,6 +209,12 @@ public class AREPlanRanking extends UhcDriver {
 	@FindBy(css = "#plan-summary-table tr:nth-child(7) div.text-small span")
 	private List<WebElement> estimateMedicalCostvalue;
 
+	@FindBy(css = "div#multiSelect label[for='estimated_medical_costs']")
+	private WebElement mceCheckLabel;
+
+	@FindBy(css = "div#multiSelect label[for='estimated_medical_costs']>input")
+	private WebElement mceCheck;
+	
 	public void validateUIElements() {
 		System.out.println("Validate ARE UI Elements : ");
 		String currentPageUrl = driver.getCurrentUrl();
@@ -305,6 +311,10 @@ public class AREPlanRanking extends UhcDriver {
 		if (checkOption.equalsIgnoreCase("doctor")) {
 			elemCheck = doctorCheck;
 			elemClick = doctorCheckLabel;
+		}
+		if (checkOption.equalsIgnoreCase("mce")) {
+			elemCheck = mceCheck;
+			elemClick = mceCheckLabel;
 		}
 
 		if (select && !elemCheck.isSelected()) {
@@ -1119,6 +1129,20 @@ public class AREPlanRanking extends UhcDriver {
 		}
 		else {
 			Assert.assertFalse(validate(estimateMedicalCost, 30), "Estimated Annual Medical Cost row is displayed for this MBI ID");
+		}
+	}
+	
+	public void optionCheck(String option,boolean visible) {
+		System.out.println("Verify Options..");
+		planRankingDropdown.click();
+		validate(applyBtn);
+		if(visible) {
+			if(option.equalsIgnoreCase("mce"))
+				Assert.assertTrue(validate(mceCheck,10), option+" is not visible");	
+		}
+		else {
+			if(option.equalsIgnoreCase("mce"))
+				Assert.assertFalse(validate(mceCheck,10), option+" is visible");	
 		}
 	}
 
