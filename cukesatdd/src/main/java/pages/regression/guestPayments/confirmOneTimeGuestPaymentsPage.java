@@ -288,9 +288,8 @@ public class confirmOneTimeGuestPaymentsPage extends UhcDriver {
 		driver.switchTo().window(driver.getWindowHandles().toArray()[1].toString());
 		
 		
-		
 		JavascriptExecutor executor = (JavascriptExecutor) driver;
-		executor.executeScript("return document.querySelector('print-preview-app').shadowRoot.querySelector('print-preview-sidebar').shadowRoot.querySelector('print-preview-destination-settings').shadowRoot.querySelector('cr-button.cancel-button').click();");
+		executor.executeScript("return document.querySelector('print-preview-app').shadowRoot.querySelector('print-preview-sidebar').shadowRoot.querySelector('print-preview-destination-settings').shadowRoot.querySelector('cr-button.cancel-button').click()");
 		driver.switchTo().defaultContent();
 
 	}
