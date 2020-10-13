@@ -108,7 +108,7 @@ Feature: 1.06.7 Member Guest Payments Page - Member Auth - PROD
 
   @prod_guestPayment06 @prod_ErrorsAndContentOneTimePayment @prod_otherAmountErrorAndContent
   Scenario Outline: TID: <TID> - To validate the One time payment page with different error scenarios
-
+  
     Given I am on the login screen of Guest Payments Portal
       | Site Name | <siteName> |
     Then I validate all the header and page elements
@@ -122,10 +122,11 @@ Feature: 1.06.7 Member Guest Payments Page - Member Auth - PROD
     Then I will entered other amount Due
       | Other Amount | 250000 |
     And I will get an error message Cannot exceed annual remaining amount
-
-    Examples:
-      | TID   | planType | memberID    | dob        | siteName |
-      | 10000 | MAPD     | 915516555-1 | 10/29/1947 | AARP     |
+    Then I select and entered other amount Due and choose a EFT Checking acc payment Method
+      | Other Amount | <otherAmountDue> |
+    Then I will click on Review and Submit button leaving EFT Account information blank
+    And I will get an error to enter valid Account EFT information
+  
 
   @prod_guestPayment07 @prod_makeOneTimePayment @prod_pastAmount @ccFLow
   Scenario Outline: TID: <TID> - To validate the Guest Payment home page with different brands
@@ -352,31 +353,3 @@ Feature: 1.06.7 Member Guest Payments Page - Member Auth - PROD
      # | 10002 | MAPD     | 915516555-1 | 10/29/1947 | RETIREE  | Guest     | C          | Payments3 | 1234512345 | 123123123 | 20.30          | CreditCardAutomation | 4111111111111111 | 04         | 2024      |
     #  | 10003 | MAPD     | 915516555-1 | 10/29/1947 | PCP      | Guest     | D          | Payments4 | 1234512345 | 123123123 | 11.000         | CreditCardAutomation | 4111111111111111 | 04         | 2024      |
     #  | 10004 | MAPD     | 915516555-1 | 10/29/1947 | MEDICA   | Guest     | E          | Payments5 | 1234512345 | 123123123 | 333.00         | CreditCardAutomation | 4111111111111111 | 04         | 2024      |
-
-
-
-  @prod_guestPayment14 @prod_ErrorsAndContentOneTimePayment @prod_eftErrorAndContent
-  Scenario Outline: TID: <TID> - To validate the One time payment page with different error scenarios
-
-    Given I am on the login screen of Guest Payments Portal
-      | Site Name | <siteName> |
-    Then I validate all the header and page elements
-    Then I will enter my Member ID and Date of birth
-      | Member ID         | <memberID> |
-      | Date of Birth     |  <dob>     |
-    And I will click Next to proceed to the Make a One-time payment page
-    Then I select and entered other amount Due and choose a EFT Checking acc payment Method
-      | Other Amount | <otherAmountDue> |
-    Then I will click on Review and Submit button leaving EFT Account information blank
-    And I will get an error to enter valid Account EFT information
-    Then I will enter EFT Checking Account Details
-    #middle name is not entered here which is a mandatory field
-      | AccountHoldersName | <FirstName> |
-      | AccountNumber      | <accountNo> |
-      | RoutingNumber      | <routingNo> |
-    Then I will click on Review and Submit button leaving EFT Account information blank
-    And I will get an error to enter valid Account EFT information
-
-    Examples:
-      | TID   | planType | memberID    | dob        | siteName | otherAmountDue |FirstName |accountNo  | routingNo |
-      | 10000 | MAPD     | 915516555-1 | 10/29/1947 | AARP     | 10.05          |Automation  |1234512345 | 123123123 |
