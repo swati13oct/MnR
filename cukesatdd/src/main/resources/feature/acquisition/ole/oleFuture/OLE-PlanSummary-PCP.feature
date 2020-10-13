@@ -59,7 +59,8 @@ Feature: 2.05.1.ACQ-OLE PCP
     Then the user validates TFN in Medicare Info OLE Right Rail
     Then the user validates the Plan details in Medicare Info OLE Right Rail
     #Then the user navigates to Preliminary Questions Page
-  Then the user validates Medicare Number and not required ESRD question on Medicare Info Page
+  #Then the user validates Medicare Number and not required ESRD question on Medicare Info Page
+  Then the user validates Medicaid Number in confirm Eligibility Page
       | MedicaidNumber | <medicaidnumber> |
      |Plan Year | <planYear> |
     #Then the user validates the Plan details in Preliminary Questions Pag OLE Right Rail
@@ -79,6 +80,7 @@ Feature: 2.05.1.ACQ-OLE PCP
        	|	Input Data					 | <inputdataType>   |
     	| PartA Date         | <partadate>         |
    		| PartB Date         | <partbdate>         |
+   		 | MedicaidNumber | <medicaidnumber> |
     Then the user validates the Plan details in SEP Page OLE Right Rail
     Then the user validates SEP options and Required Fields for PlanType in SEP Page
     Then the User validates RadioButtons option in SEP Page

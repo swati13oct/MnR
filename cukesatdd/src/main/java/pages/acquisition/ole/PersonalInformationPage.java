@@ -127,6 +127,9 @@ public class PersonalInformationPage extends UhcDriver{
 	
 	private WebElement specialElectionPage;
 	
+	@FindBy(xpath = "//*[contains(@id, 'medicaidNumber')]/parent::span/input")
+	private WebElement medicaidNumberField;
+	
 	 
 
 	public PersonalInformationPage(WebDriver driver) {
@@ -356,12 +359,13 @@ public class PersonalInformationPage extends UhcDriver{
 		
 		String PartAeffectiveDate = MedicareDetailsMap.get("PartA Date");
 		String PartBeffectiveDate = MedicareDetailsMap.get("PartB Date"); 
-		
+		String MedicaidNo = MedicareDetailsMap.get("MedicaidNumber"); 
 		if(validateNew(driver.findElement(By.xpath("//h1[contains(text(),'Confirm')]")))){
 			System.out.println("OLE Confirm your Eligibility is Displayed");
 		
 			sendkeysNew(partAStartDateField, PartAeffectiveDate);
-			sendkeysNew(partBStartDateField, PartBeffectiveDate);	 
+			sendkeysNew(partBStartDateField, PartBeffectiveDate);
+			sendkeysNew(medicaidNumberField,MedicaidNo);
 		}
 		
 		return new ConfirmYourEligibilityPage(driver);

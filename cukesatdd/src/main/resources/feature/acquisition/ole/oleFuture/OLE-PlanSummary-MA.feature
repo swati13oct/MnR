@@ -16,9 +16,9 @@ Feature: 1.05.1.ACQ-OLE common tool flow E2E MA
     Then the user clicks on Enroll Now for AARP site to start the OLE flow
       | Plan Name | <planName> |
     Then the user validates the Plan details on OLE
-    Then the user validates TFN in Welcome OLE Right Rail
-    Then the user validates Learn more modal for Welcome OLE
-    Then the user validates Leave OLE modal for Welcome OLE
+    #Then the user validates TFN in Welcome OLE Right Rail
+    #Then the user validates Learn more modal for Welcome OLE
+    #Then the user validates Leave OLE modal for Welcome OLE
     Then the user validates cancellation modal for Welcome OLE
     Then the user navigates to Personal Information Page
     Then the user enters following required information in Personal Information Page
@@ -51,7 +51,7 @@ Feature: 1.05.1.ACQ-OLE common tool flow E2E MA
     Then the user validates TFN in Medicare Info OLE Right Rail
     Then the user validates the Plan details in Medicare Info OLE Right Rail
 #    Then the user navigates to Preliminary Questions Page
-    Then the user validates Medicare Number and not required ESRD question on Medicare Info Page
+  	Then the user validates Medicaid Number in confirm Eligibility Page
       | MedicaidNumber | <medicaidnumber> |
      |Plan Year | <planYear> |
 #    Then the user validates the Plan details in Preliminary Questions Pag OLE Right Rail
@@ -68,6 +68,7 @@ Feature: 1.05.1.ACQ-OLE common tool flow E2E MA
     |  PD Group Number			 | <pdgroupnumber>  |
     | PD Member Number        | <pdmembernumber>   | 
     Then the user navigates to SEP Page
+     | MedicaidNumber | <medicaidnumber> |
       |	Input Data					 | <inputdataType>   |
     	| PartA Date         | <partadate>         |
    		| PartB Date         | <partbdate>         |

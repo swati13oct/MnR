@@ -1519,6 +1519,7 @@ public class oleStepDefinition {
 			
 		getLoginScenario().saveBean(oleCommonConstants.PARTA_EFFECTIVE, MedicareDetailsMap.get("PartA Date"));
 		getLoginScenario().saveBean(oleCommonConstants.PARTB_EFFECTIVE, MedicareDetailsMap.get("PartB Date"));
+		getLoginScenario().saveBean(oleCommonConstants.MEDICAID_NUMBER, MedicareDetailsMap.get("MedicaidNumber"));
 			Assert.assertTrue(true);
 		}
 		else
@@ -3063,5 +3064,24 @@ public void the_user_validates_the_online_Enrollment_details_on_Review_and_Submi
 		}
 	//}
 }
-
+@Then("^the user validates Medicaid Number in confirm Eligibility Page$")
+public void the_user_validates_Medicaid_Number_Confirm_Eligibility_Page(DataTable arg1) throws Throwable {
+List<DataTableRow> givenAttributesRow = arg1.getGherkinRows();
+Map<String, String> MemberDetailsMap = new HashMap<String, String>();
+for (int i = 0; i < givenAttributesRow.size(); i++) {
+	MemberDetailsMap.put(givenAttributesRow.get(i).getCells().get(0),
+			givenAttributesRow.get(i).getCells().get(1));
+}
+MedicareInformationPage medicareInfoPage = (MedicareInformationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE);
+boolean MedicaidInformationStatus = medicareInfoPage.validate_Medicaid_Number_CEP(MemberDetailsMap);
+if (MedicaidInformationStatus) {
+	getLoginScenario().saveBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE,
+			medicareInfoPage);
+	System.out.println("OLE Medicaid Questions in Medicare Information Page - Medicaid Details are entered");
+	getLoginScenario().saveBean(oleCommonConstants.MEDICAID_NUMBER, MemberDetailsMap.get("MedicaidNumber"));
+	Assert.assertTrue(true);
+}
+else
+	Assert.fail("OLE Medicaid Questions in Medicare Information Page -  Medicaid Member Details Failed");
+}
 	}
