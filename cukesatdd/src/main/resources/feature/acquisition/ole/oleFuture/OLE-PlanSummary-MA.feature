@@ -51,6 +51,7 @@ Feature: 1.05.1.ACQ-OLE common tool flow E2E MA
     Then the user validates TFN in Medicare Info OLE Right Rail
     Then the user validates the Plan details in Medicare Info OLE Right Rail
 #    Then the user navigates to Preliminary Questions Page
+  #Then the user validates Medicare Number and not required ESRD question on Medicare Info Page
   	Then the user validates Medicaid Number in confirm Eligibility Page
       | MedicaidNumber | <medicaidnumber> |
      |Plan Year | <planYear> |

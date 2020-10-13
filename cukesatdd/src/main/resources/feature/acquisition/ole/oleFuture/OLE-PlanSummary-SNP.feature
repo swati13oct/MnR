@@ -70,6 +70,7 @@ Feature: 1.05.4.ACQ-OLE  common tool flow E2E SNP
       	|	Input Data					 | <inputdataType>   |
     	| PartA Date         | <partadate>         |
    		| PartB Date         | <partbdate>         |
+   			 | MedicaidNumber | <medicaidnumber> |
     #Then the user validates SEP options and Required Fields for PlanType in SEP Page
     Then the user selects the following options for SEP Page
       | Select Options | <selectoptions> |
@@ -291,6 +292,7 @@ Feature: 1.05.4.ACQ-OLE  common tool flow E2E SNP
       |	Input Data					 | <inputdataType>   |
     	| PartA Date         | <partadate>         |
    		| PartB Date         | <partbdate>         |
+   			 | MedicaidNumber | <medicaidnumber> |
     Then the user validates the Plan details in SEP Page OLE Right Rail
     Then the user validates SEP options and Required Fields for PlanType in SEP Page
     #Then the user validates SEP options and Required Fields for PlanType in SEP Page
@@ -317,13 +319,13 @@ Feature: 1.05.4.ACQ-OLE  common tool flow E2E SNP
 		#Then the user validates the OLE Submission Details in GPS
     #| Plan Type | <plantype> |
     
-    @SNP_OLE_AARP_Future 
+    @SNP_OLE_AARP_Future1 
    		Examples: 
     Examples: 
      | TID   | site|PlanType |planyear|planYear|zipcode | isMultutiCounty | county            | plantype | planName                                             | cardtype | firstname | lastname | medicarenumber | ssnflag |SSNnumber   | partadate | partbdate | medicaidnumber | esrdflag | dob      | gender | permstreet    | permcity    | mailingaddressquestion | mailingstreet | mailingcity | mailingstate | mailingzip | email         | selectoptions                                                                                                                                                                                                                                       | optiondata              | pdpFlag | longTermFlag | riderflag | emailConfirmation | goGreen |healthinsurancename|groupnumber| membernumber|prescriptioncoveragename|pdgroupnumber|pdmembernumber|inputdataType|
      | 15576 | AARP|DSNP-MBI | future|future|  10001 | NO              | New York County | SNP      |  UnitedHealthcare Dual Complete (HMO D-SNP)             | MBI      | GOTTFRIED | GARRAND     | 5N69QY6ET34    | true| 123456789|    09011997 |  11012002 |     0123456789 | true     | 04261944 | Female | 123 Perm Rd   | Los Angeles | Yes                    | 876 MailingSt | Mailing LA  | NY           |      10001 | test@test.com | losing coverage/ moved outside of the service area                                                                                                                                                                                                  | 01012018/01012018       | yes     | no           | false     | NO                | NO      |HealthInsurance             |HI1562759    | ABC12345DEF     |PrescriptionCoverage            |PD5646136   | BCD12345EFG |Valid|
   
-     @SNP_OLE_UHC_Future
+     @SNP_OLE_UHC_Future1
      Examples: 
       | TID   | site|PlanType |planyear|planYear|zipcode | isMultutiCounty | county            | plantype | planName                                             | cardtype | firstname | lastname | medicarenumber | ssnflag |SSNnumber   | partadate | partbdate | medicaidnumber | esrdflag | dob      | gender | permstreet    | permcity    | mailingaddressquestion | mailingstreet | mailingcity | mailingstate | mailingzip | email         | selectoptions                                                                                                                                                                                                                                       | optiondata              | pdpFlag | longTermFlag | riderflag | emailConfirmation | goGreen |healthinsurancename|groupnumber| membernumber|prescriptioncoveragename|pdgroupnumber|pdmembernumber|inputdataType|
      | 15576 | UHC|DSNP-MBI | future|future|  10001 | NO              | New York County | SNP      |  UnitedHealthcare Dual Complete (HMO D-SNP)             | MBI      | GOTTFRIED | GARRAND     | 5N69QY6ET34    | true| 123456789|    09011997 |  11012002 |     0123456789 | true     | 04261944 | Female | 123 Perm Rd   | Los Angeles | Yes                    | 876 MailingSt | Mailing LA  | NY           |      10001 | test@test.com | losing coverage/ moved outside of the service area                                                                                                                                                                                                  | 01012018/01012018       | yes     | no           | false     | NO                | NO      |HealthInsurance             |HI1562759    | ABC12345DEF     |PrescriptionCoverage            |PD5646136   | BCD12345EFG |Valid|

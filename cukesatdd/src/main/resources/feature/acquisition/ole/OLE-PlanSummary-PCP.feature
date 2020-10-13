@@ -79,6 +79,7 @@ Feature: 2.05.1.ACQ-OLE PCP
        	|	Input Data					 | <inputdataType>   |
     	| PartA Date         | <partadate>         |
    		| PartB Date         | <partbdate>         |
+   			 | MedicaidNumber | <medicaidnumber> |
     Then the user validates the Plan details in SEP Page OLE Right Rail
     Then the user validates SEP options and Required Fields for PlanType in SEP Page
     Then the User validates RadioButtons option in SEP Page
