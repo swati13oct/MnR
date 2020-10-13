@@ -237,11 +237,11 @@ public class HealthRecordPage  extends HealthRecordBase {
 	public WebDriver navigateToPlanDocPage(String memberType) {
 		navigateToBenefitsPage(memberType);
 		System.out.println("Finished navigating to benefits page");
-		checkModelPopup(driver,1);
 		if (noWaitValidate(planDocHeaderTxt)) {
 			System.out.println("Already on PlanDoc page, no need to go any further");
 		} else {
 			if (noWaitValidate(planDocTopMenuLnk)) {
+				checkModelPopup(driver,1);
 				planDocTopMenuLnk.click();
 				CommonUtility.checkPageIsReadyNew(driver);
 			} else 	if (noWaitValidate(shadowRootHeader)) {
@@ -249,6 +249,7 @@ public class HealthRecordPage  extends HealthRecordBase {
 				WebElement root1 = expandRootElement(shadowRootHeader);
 				try {
 					WebElement benefitsTopMenuShadowRootLink = root1.findElement(By.cssSelector("a[data-testid*=nav-link-coverage]"));
+					planDocTopMenuLnk.click();
 					benefitsTopMenuShadowRootLink.click();
 					CommonUtility.waitForPageLoad(driver, planDocTopMenuLnk, 5);
 					planDocTopMenuLnk.click();

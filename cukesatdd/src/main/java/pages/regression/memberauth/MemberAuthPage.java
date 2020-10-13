@@ -371,15 +371,7 @@ public class MemberAuthPage extends UhcDriver {
 				}
 
 				System.out.println("Switched to new tab");
-				try {
-					CommonUtility.checkPageIsReadyNew(driver);
-				} catch (UnhandledAlertException ae) {  //if getting alert error, stop and fail the test
-					Alert alert = driver.switchTo().alert();
-					System.out.println("Alert text="+alert.getText());
-					if (alert.getText().contains("an error while processing your information")) {
-						Assert.assertTrue("***** Error in loading  Redesign Account Landing Page ***** username: "+username+" - Got Alert message: "+alert.getText(), false);
-					} 
-				}
+				CommonUtility.checkPageIsReadyNew(driver);
 				if (MRScenario.environment.equalsIgnoreCase("stage") || MRScenario.environment.equalsIgnoreCase("offline")
 						|| MRScenario.environment.equalsIgnoreCase("prod")
 						|| MRScenario.environment.equalsIgnoreCase("team-h")
