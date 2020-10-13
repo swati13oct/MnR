@@ -1,7 +1,7 @@
 @vppPlanSummaryUHC
 Feature: 2.01.1-Vpp to plan Summary UHC Scenarios
 
-  @vppPlanSummaryUHC01 @vppPlanSummaryUHCRun01 @vppPlanSummaryUHCRegression
+  @vppPlanSummaryUHC01 @vppPlanSummaryUHCRun01 @vppPlanSummaryUHCRegression @prodSanity
   Scenario Outline: TID: <TID> -plan type: <plantype> - Verify plan cards on plan summary page in <site> site
     Given the user is on medicare acquisition site landing page
     	|Site| <site>|
@@ -49,7 +49,7 @@ Feature: 2.01.1-Vpp to plan Summary UHC Scenarios
       | 15545 |   90210 | UHC| NO              | Los Angeles County | MAPD     | AARP Medicare Advantage SecureHorizons Plan 1 (HMO) | $0             | $0  copay            | $0  copay  | Yes              | $3,400.00          | $4  copay                                  |                  | current |
       | 15546 |   28105 | UHC| YES             | Mecklenburg County | SNP      | UnitedHealthcare Dual Complete (HMO-POS D-SNP)      | $0             | $0  copay            | $0  copay  | No               | $0 - $6,700.00     | $0, $1.25, $3.40 copay, or 15% coinsurance |                  |  current |
 
-    @prodRegression
+    @prodSanity
     Examples: 
       | TID   | zipcode | site|isMultutiCounty | county             | plantype | planName                                               | monthlyPremium | primaryCarePhysician | specialist | referralRequired | outOfPocketMaximum | prescriptionDrugsTier1 | annualDeductible                                      |planyear|
       | 15542 |   90210 | UHC|  NO              | Los Angeles County | MA       | AARP Medicare Advantage SecureHorizons Essential (HMO) | $0             | $5  copay            | $10  copay | Yes              | $4,900.00          | No drug coverage       |                                                       |current|
@@ -201,7 +201,7 @@ Feature: 2.01.1-Vpp to plan Summary UHC Scenarios
   #Examples:
   #| zipcode | plantype | planName                    |
   #|   55344 | MA       | UnitedHealthcare Sync (PPO) |
-  @vppPlanSummaryUHC07 @vppPlanSummaryUHCRun02 @vppPlanSummaryUHCRegression @prod
+  @vppPlanSummaryUHC07 @vppPlanSummaryUHCRun02 @vppPlanSummaryUHCRegression @prodSanity
   Scenario Outline: UID: <UID>  - Verify Call sticky action menu on UHC site
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
@@ -216,7 +216,7 @@ Feature: 2.01.1-Vpp to plan Summary UHC Scenarios
       | UID     | zipcode | isMultiCounty | county           |
       | F322478 |   80001 | NO            | Jefferson County |
 
-  @vppPlanSummaryUHC08 @vppPlanSummaryUHCRun02
+  @vppPlanSummaryUHC08 @vppPlanSummaryUHCRun02 
   Scenario Outline: UI8: <UID>  - Verify Chat sticky action menu on UHC site
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
@@ -275,7 +275,7 @@ Feature: 2.01.1-Vpp to plan Summary UHC Scenarios
       | 1598166 | Blayer | PDP      |   80001 | NO            | Jefferson County |
       | 1598166 | Blayer | SNP      |   80001 | NO            | Jefferson County |
 
-  @vppPlanSummaryUHC11 @vppPlanSummaryUHCRun02 @vppPlanSummaryUHCRegression
+  @vppPlanSummaryUHC11 @vppPlanSummaryUHCRun02 @vppPlanSummaryUHCRegression @prodSanity
   Scenario Outline: Verify Provider Search  in UHC site from plan summary page
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
@@ -417,7 +417,7 @@ Feature: 2.01.1-Vpp to plan Summary UHC Scenarios
       | 15550 |   90210 | NO            | Los Angeles County | MAPD     | 584 MAIN AVE NORWALK       | FAIRFIELD | CONNECTICUT | test      | test     | test@test.com | NO             | Fairfield County |current|
       | 15550 |   78006 | YES           | Bexar County       | MAPD     | 1750 EPPS BRIDGE RD ATHENS | OCONEE    | GEORGIA     | test      | test     | test@test.com | YES            | Clarke County    |current|
 
-  @vppPlanSummaryUHC15 @vppPlanSummaryUHCRun02 @vppPlanSummaryUHCRegression
+  @vppPlanSummaryUHC15 @vppPlanSummaryUHCRun02 @vppPlanSummaryUHCRegression 
   Scenario Outline: TID: <TID> -plan type: <plantype> - Verify Rocky Mountain Health Learn More lands on Correct site from UHC site from plan summary page
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site

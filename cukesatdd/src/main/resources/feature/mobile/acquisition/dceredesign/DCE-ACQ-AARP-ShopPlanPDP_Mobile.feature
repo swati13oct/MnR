@@ -1,7 +1,7 @@
 @dce_redesign_ShopPDP
 Feature: 1.10.1 DCE-REDISIGN AARP - To test Acq Shop Plans -> PDP page to NEW DCE Flows
 
-  @DCE_ShopForPlanPage_PDPpage @prod
+  @DCE_ShopForPlanPage_PDPpage @prodSanity
   Scenario Outline: To verify DCE REDESIGN flow from Shop PDP page on
     Given the user is on medicare acquisition site landing page
     		|Site| <site>|
@@ -26,7 +26,4 @@ Feature: 1.10.1 DCE-REDISIGN AARP - To test Acq Shop Plans -> PDP page to NEW DC
       | drug1   | drug2  | drug3   | drug4    | zipCode |site|
       | Orkambi | Fanapt | Humalog | Adderall |   80002 |AARP|
      
-     @dce_redesign_ShopPDP_UHC
-     Examples: 
-      | drug1   | drug2  | drug3   | drug4    | zipCode |site|
-      | Orkambi | Fanapt | Humalog | Adderall |   80002 |UHC| 
+  

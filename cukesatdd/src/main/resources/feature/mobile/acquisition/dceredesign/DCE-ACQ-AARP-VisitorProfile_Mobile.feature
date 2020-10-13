@@ -1,7 +1,7 @@
 @dce_redesign_VP
 Feature: 1.10.1 DCE-REDISIGN AARP - To test Acq Visitor Profile to NEW DCE Flows
 
-  @DCE_VisitorProfile @prod
+  @DCE_VisitorProfile @prodSanity
   Scenario Outline: To verify DCE REDESIGN flow from Ulayer home page
     Given the user is on medicare acquisition site landing page
     		|Site| <site>|
@@ -27,8 +27,4 @@ Feature: 1.10.1 DCE-REDISIGN AARP - To test Acq Visitor Profile to NEW DCE Flows
       | drug1   | drug2  | drug3   | drug4    | zipCode |site|
       | Orkambi | Fanapt | Humalog | Adderall |   80002 |AARP|
       
-      @DCE_VisitorProfile_UHC
-    Examples: 
-      | drug1   | drug2  | drug3   | drug4    | zipCode |site|
-      | Orkambi | Fanapt | Humalog | Adderall |   80002 |UHC|
-
+  

@@ -1,7 +1,7 @@
 @dce_redesign_zipcode_planyear_capture_AEP_UHC @F426582
 Feature: 1.10.1 DCE-REDESIGN UHC - To test ZipCode and Plan Year capture page in New DCE flow during AEP
 
-  @DCE_ZipCodePlanYear_AEP_UHC @prod
+  @DCE_ZipCodePlanYear_AEP_UHC @prodSanity
   Scenario Outline: Test to verify the new DCE redesign page displayed for ZipCode and Plan year capture page for AEP
      Given the user is on the uhcmedicaresolutions site landing page
     When the user navigates to following UHC medicare solutions site page

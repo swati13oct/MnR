@@ -1,7 +1,7 @@
 @vppPlanCompareUHC
 Feature: 2.01.3-Vpp to plan Compare UHC Scenarios
 
-  @vppPlanCompareUHC01 @vppPlanCompareUHCRun01New @vppPlanCompareUHCRegression @prod
+  @vppPlanCompareUHC01 @vppPlanCompareUHCRun01New @vppPlanCompareUHCRegression @prodSanity
   Scenario Outline: TID: <TID> - Plan Type: <plantype> -  Verify the checkbox for add to compare link is not visible for single plan.
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
@@ -21,7 +21,7 @@ Feature: 2.01.3-Vpp to plan Compare UHC Scenarios
       | 00003 |   90265 | YES           | Ventura County   | MAPD     |current|
       | 00004 |   70072 | NO            | Jefferson Parish | MAPD     |current|
 
-  @vppPlanCompareUHC02 @vppPlanCompareUHCRun01New @vppPlanCompareUHCRegression
+  @vppPlanCompareUHC02 @vppPlanCompareUHCRun01New @vppPlanCompareUHCRegression @prodSanity
   Scenario Outline: TID: <TID> - Verify Call sticky action menu on AARP site
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
@@ -319,7 +319,7 @@ Feature: 2.01.3-Vpp to plan Compare UHC Scenarios
       | TID   | zipcode | drugName1 | dosage   | plantype | county             | isMultiCounty | quantity | frequency     | branded | drugInitials2 | drugName2  | drugInitials3 | drugName3     | pharmacyType     | distance | pharmacyName   | plantype | planName                                           | quantity | frequency     | newPharmacyType | genericName1 | genricName3 | aep | currentyear | genericName1 |planyear|
       | 00015 |   90002 | Lipitor   | TAB 10MG | MAPD     | Los Angeles County | no            |       30 | Every 1 month | yes     | dron          | dronabinol | Adva          | Advair Diskus | Standard Network | 15 miles | BRAVO PHARMACY | MAPD     | AARP Medicare Advantage SecureHorizons Focus (HMO) |       30 | Every 1 month | Mail Order      | atorvastatin | fluticasone | no  | no          | atorvastatin |current|
 
-  @vppPlanCompareUHC13 @vppPlanCompareUHCRun02New @vppPlanCompareUHCRegression
+  @vppPlanCompareUHC13 @vppPlanCompareUHCRun02New @vppPlanCompareUHCRegression @prodSanity
   Scenario Outline: TID: <TID> - Navigation for plan comapre to OLE
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
@@ -337,7 +337,7 @@ Feature: 2.01.3-Vpp to plan Compare UHC Scenarios
       | TID   | zipcode | isMultiCounty | county             | MultiCOuntyzipcode | plantype | count |planyear|
       | 00016 |   90210 | No            | Los Angeles County |              80002 | MAPD     |     2 |current|
 
-  @vppPlanCompareUHC14 @vppPlanCompareUHCRun02New @vppPlanCompareUHCRegression
+  @vppPlanCompareUHC14 @vppPlanCompareUHCRun02New @vppPlanCompareUHCRegression @prodSanity
   Scenario Outline: TID: <TID> -  Navigation for plan comapre to Plan Detail
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site

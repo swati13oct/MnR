@@ -1,7 +1,7 @@
 @dce_redesign_Drug_summary_AARP @F426576
 Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
 
-  @DCE_DrugSummary_ValidatePage_AARP @prod
+  @DCE_DrugSummary_ValidatePage_AARP @prodSanity
   Scenario Outline: Test to verify the Drug summary page in AARP
     Given the user is on the AARP medicare site landing page
     When I access the acquisition DCE tool from home page
@@ -23,7 +23,7 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
       | zipCode | plantype | county | isMultutiCounty | drugName | planname                                           |
       |   10001 | MAPD     | none   | no              | Emsam    | AARP Medicare Advantage SecureHorizons Focus (HMO) |
 
-  @DCE_DrugSummary_Page
+  @DCE_DrugSummary_Page @prodSanity
   Scenario Outline: Test to verify the Drug summary page
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
@@ -49,10 +49,7 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
       | site | path                                             | pageName                   | drugName | zipCode |
       | AARP | health-plans/estimate-drug-costs.html/getstarted | DCE Redesign - Get Started | Lipitor  |   10001 |
 
-    @dce_DrugSummary_Page_UHC
-    Examples: 
-      | site | path                                             | pageName                   | drugName | zipCode |
-      | UHC  | health-plans/estimate-drug-costs.html/getstarted | DCE Redesign - Get Started | Lipitor  |   10001 |
+  
 
   @drugSummary_SAM_Icon_AARP
   Scenario Outline: Test to verify SAM icon is visible on Drug summary page
