@@ -1265,10 +1265,13 @@ try {
     			WebDriverWait wait = new WebDriverWait(driver, 10);
     			if(!CollectionUtils.isEmpty(loadingScreen)) {
     				System.out.println("Loading screen visible!!! Waiting till it disappears");
-    				ready = wait.ignoring(TimeoutException.class)
-    						.until(ExpectedConditions
-    						//.invisibilityOfElementLocated(By.xpath("//div[@id='overlay' or  @id='loading_fader' or @class='loading-block']")));
-    						.invisibilityOfAllElements(loadingScreen));
+    				try {
+    					ready = wait.until(ExpectedConditions
+    									//.invisibilityOfElementLocated(By.xpath("//div[@id='overlay' or  @id='loading_fader' or @class='loading-block']")));
+    									.invisibilityOfAllElements(loadingScreen));
+    				} catch(NoSuchElementException e) {
+    					ready = true;
+    				}
     				System.out.println("Loading screen disappeared, page is ready.");
     				break;
     			} else {
