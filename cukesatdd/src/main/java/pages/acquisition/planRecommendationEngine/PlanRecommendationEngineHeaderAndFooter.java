@@ -392,7 +392,7 @@ public class PlanRecommendationEngineHeaderAndFooter extends UhcDriver {
 		validateLinks("/health-plans.html?lookupZipcode");
 		backtoshopforaplan();
 		headerShopForaPlanRequestMoreHelp.click();
-		validateLinks("health-plans/shop/connect");
+		validateLinks("contact-us.html");
 		backtoshopforaplan();
 		headerShopLink.click();
 		validateLinks("/health-plans/shop.html");
@@ -404,13 +404,13 @@ public class PlanRecommendationEngineHeaderAndFooter extends UhcDriver {
 		validateLinks("/health-plans/resources.html");
 		backtoshopforaplan();
 		headerAdvantageplanLink.click();
-		validateLinks("/health-plans/shop/medicare-advantage-plans.html");
+		validateLinks("/shop/medicare-advantage-plans.html");
 		backtoshopforaplan();
 		headerMedicaresupplementplanLink.click();
-		validateLinks("/health-plans/shop/medicare-supplement-plans.html||health-plans.html?product=");
+		validateLinks("/shop/medicare-supplement-plans.html");
 		backtoshopforaplan();
 		headerPrescriptionLink.click();
-		validateLinks("/health-plans/shop/prescription-drug-plans.html"); 
+		validateLinks("/shop/prescription-drug-plans.html"); 
 		backtoshopforaplan();
 		headerGetaPlanRecommendationLink.click();
 		validateLinks("/plan-recommendation-engine.html");
@@ -418,7 +418,7 @@ public class PlanRecommendationEngineHeaderAndFooter extends UhcDriver {
 //		actions.clickAndHold(headerNavigationBarShopForaPlanTab).build().perform();
 		desktopCommonUtils.MouseOver(headerNavigationBarShopForaPlanTab, Browsername);
 		headerDrugcostLink.click();
-		validateLinks("health-plans/estimate-drug-costs.html");
+		validateLinks("/health-plans/estimate-drug-costs.html");
 		backtoshopforaplan();
 		headerPharmacysearchLink.click();
 		validateLinks("/health-plans/aarp-pharmacy.html");
@@ -552,14 +552,14 @@ public class PlanRecommendationEngineHeaderAndFooter extends UhcDriver {
 			UHClogoInHeader.click();
 		}
 		footerMedicareAdvantagePlansLink.click();
-		validateLinks("/health-plans/shop/medicare-advantage-plans");
+		validateLinks("/shop/medicare-advantage-plans.html");
 		browserBack();
 		footerMedicareSupplementInsurancePlansLink.click();
-		validateLinks("/health-plans/shop/medicare-supplement-plans||health-plans.html?product=");
+		validateLinks("/shop/medicare-supplement-plans.html");
 		browserBack();
 		
 		footerMedicarePrescriptionDrugPlansLink.click();
-		validateLinks("/health-plans/shop/prescription-drug-plans");
+		validateLinks("/shop/prescription-drug-plans.html");
 		browserBack();
 
 		footerMedicareEducationLink.click();
