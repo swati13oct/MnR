@@ -113,6 +113,12 @@ Feature: 1.10.1 DCE-REDISIGN AARP - To test Acq Visitor Profile to NEW DCE Flows
   Given the user is on medicare acquisition site landing page
     		|Site| <site>|
     When the user clicks on the shopping cart icon
+    And the user signs in with optum Id credentials in AARP site
+      | User Name | <userName> |
+      | Password  | <password> |
+    And user clears the existing drugs
+    And user clears the provider
+    And user removed existing saved plans
     And the user clicks on the add drugs button to navigate to DCE Redesign on the profile page
     Then the user validates Get Started Page
     Then the user clicks on Build Drug List to navigate to Build Drug List Page
@@ -143,5 +149,5 @@ Feature: 1.10.1 DCE-REDISIGN AARP - To test Acq Visitor Profile to NEW DCE Flows
       | Plan Name | <planName> |
     Then user should be able to see Return to profile link on details page
     Examples: 
-      | drug1   | zipCode |site|drug2|planType|planName|
-      | Orkambi | 80002 |AARP|Fanapt|MAPD|AARP Medicare Advantage SecureHorizons Plan 2 (HMO)|
+      | drug1   | zipCode |site|drug2|planType|planName|userName      | password    |
+      | Orkambi | 80002 |AARP|Fanapt|MAPD|AARP Medicare Advantage SecureHorizons Plan 2 (HMO)|chargersqa@23 | Password@23 |
