@@ -274,8 +274,8 @@ Feature: 1.25 Member Prepare For Next Year
     Then the user validates Prepare For Next Year tab display behavior on Benefits page
     Then the user validate bookmark behavior if tab hasn't met the condition to be displayed
 	Then the user navigate to Prepare For Next Year page via Prepare For Next Year tab
-	##note: skip on sanity run to shorten duration
-	##Then the user validates Prepare For Next Year page content
+	##note: will only valiate timeline box for sanity
+	Then the user validates Prepare For Next Year page content
 
 	@pfny_ind_mapd_aarp_sanity
     Examples: 
