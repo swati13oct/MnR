@@ -539,7 +539,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//input[@id='PhonePrimary']")
 	private WebElement phoneNumber;
 
-	@FindBy(xpath = "//a[@class='cancel-button modal-link inline-block']")
+	//@FindBy(xpath = "//a[@class='cancel-button modal-link inline-block']")
+	@FindBy(xpath = "//a[@class='cancel-button modal-link']")
 	private WebElement cancelButton;
 
 	@FindBy(xpath = "(//a[contains(text(),'Cancel Application')])[3]")
@@ -676,6 +677,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	
 	@FindBy(xpath = "//*[contains(@id, 'GoBtnText')]")
 	private WebElement  SelectYearGoBtn;
+	
+	@FindBy(xpath = "//input[@class='nextButton']")
+	private WebElement  Submit;
 
 	private static String NEXT_ACTION_MODAL_MSG_DRUG_COST = "How much will my drugs cost?";
 	private static String NEXT_ACTION_MODAL_MSG_PROVIDER_SEARCH = "Is my doctor covered?";
@@ -4696,6 +4700,29 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			return new GetStartedPage(driver);
 		return null;
 
+	}
+	public void RetrieveURL(String ExpectedsupplementURL) {
+		
+		CommonUtility.waitForPageLoad(driver, Submit, 20);
+		validate(Submit, 15);
+		Submit.click();
+		CommonUtility.checkPageIsReadyNew(driver);
+		String CurrentSupplementURL = driver.getCurrentUrl();
+		System.out.println("Submit application button has been clicked successfully after entering the data on resume application page : "+CurrentSupplementURL);
+		System.out.println("Expected Supplement URL: "+ExpectedsupplementURL);
+		System.out.println("Actual Supplement URL: "+CurrentSupplementURL);
+
+		if(ExpectedsupplementURL.equalsIgnoreCase(CurrentSupplementURL)) {
+			System.out.println("****************Submit application button has been clicked successfully after entering the data on resume application page  ***************");
+
+			Assert.assertTrue(true);
+		}
+		else {
+			Assert.fail("****************Submit application button is not clicked successfully and  resume application page is not loaded ***************");
+		}
+	
+		
+		
 	}
 
 }
