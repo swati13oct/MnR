@@ -99,7 +99,7 @@ public class ProviderSearchPage extends ProviderSearchBase {
 				CommonUtility.checkPageIsReady(driver);
 			}
 		}
-		sleepBySec(1);
+		//tbd sleepBySec(1);
 		return driver;
 	}
 
