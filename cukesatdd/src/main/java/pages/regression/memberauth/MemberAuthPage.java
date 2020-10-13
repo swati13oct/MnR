@@ -12,6 +12,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.TimeoutException;
+import org.openqa.selenium.UnhandledAlertException;
 import org.openqa.selenium.UnsupportedCommandException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -370,7 +371,15 @@ public class MemberAuthPage extends UhcDriver {
 				}
 
 				System.out.println("Switched to new tab");
-				CommonUtility.checkPageIsReadyNew(driver);
+				try {
+					CommonUtility.checkPageIsReadyNew(driver);
+				} catch (UnhandledAlertException ae) {  //if getting alert error, stop and fail the test
+					Alert alert = driver.switchTo().alert();
+					System.out.println("Alert text="+alert.getText());
+					if (alert.getText().contains("an error while processing your information")) {
+						Assert.assertTrue("***** Error in loading  Redesign Account Landing Page ***** username: "+username+" - Got Alert message: "+alert.getText(), false);
+					} 
+				}
 				if (MRScenario.environment.equalsIgnoreCase("stage") || MRScenario.environment.equalsIgnoreCase("offline")
 						|| MRScenario.environment.equalsIgnoreCase("prod")
 						|| MRScenario.environment.equalsIgnoreCase("team-h")
