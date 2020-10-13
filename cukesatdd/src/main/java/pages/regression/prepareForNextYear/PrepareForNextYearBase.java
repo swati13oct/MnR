@@ -486,8 +486,9 @@ public class PrepareForNextYearBase  extends PrepareForNextYearWebElements {
 
 		String actUrl=driver.getCurrentUrl();
 		String expUrl=".pdf";
-		if (!actUrl.contains(expUrl)) {
-			note.add("\t * FAILED - not getting expected destination URL.  Expect to contain '"+expUrl+"' | Actual URL='"+actUrl+"'");
+		String expUrl2="alphadog";
+		if (!actUrl.contains(expUrl) && !actUrl.contains(expUrl2)) {
+			note.add("\t * FAILED - not getting expected destination URL.  Expect to contain '"+expUrl+"' or '"+expUrl2+"' | Actual URL='"+actUrl+"'");
 			note.add("\t * FAILED - validating PDF content");
 			
 			driver.close();
