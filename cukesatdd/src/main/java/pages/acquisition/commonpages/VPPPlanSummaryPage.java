@@ -83,7 +83,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//div[@class='overview-tabs module-tabs-tabs']/div[2]//span[@class='ng-binding']")
 	private WebElement msPlansNumber;
 
-	@FindBy(xpath = "//*[@class='overview-tabs module-tabs-tabs']//*[contains(@ng-click,'MedSupp')]//*[@class='trigger-closed'][text()='View Plans']")
+	//@FindBy(xpath = "//*[@class='overview-tabs module-tabs-tabs']//*[contains(@ng-click,'MedSupp')]//*[@class='trigger-closed'][text()='View Plans']")
+	@FindBy(xpath="//*[@class='overview-tabs module-tabs-tabs']//*[contains(@ng-click,'MedSupp')]//*[@class='trigger-open']/following-sibling::a")
 	private WebElement msPlansViewLink;
 
 	@FindBy(xpath = "//div[@class='overview-tabs module-tabs-tabs']/div[3]//span[@class='ng-binding']")
@@ -368,7 +369,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	
 	//MedSupp Resume application
 
-		@FindBy(xpath = "(//*[contains(text(),'Start application')])[1]")
+		//@FindBy(xpath = "(//*[contains(text(),'Start application')])[1]")
+		@FindBy(xpath = "(//*[contains(@class,'swiper-content')]//*[contains(text(),'Start application')])[1]")
 		private WebElement Start_ApplicationBtn;
 
 		@FindBy(className = "loading-dialog")
@@ -437,13 +439,15 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		@FindBy(xpath = "//input[@id='PhonePrimary']")
 		private WebElement phoneNumber;
 
-		@FindBy(xpath = "//a[@class='cancel-button modal-link inline-block']")
+		//@FindBy(xpath = "//a[@class='cancel-button modal-link inline-block']")
+		@FindBy(xpath = "//a[@class='cancel-button modal-link']")
 		private WebElement cancelButton;
 
-		@FindBy(xpath = "(//a[contains(text(),'Cancel Application')])[2]")
+		@FindBy(xpath = "(//a[contains(text(),'Cancel Application')])[3]")
 		private WebElement cancelButtonPopUp;
 
-		@FindBy(xpath = "//a[contains(text(),'Enter your existing Application ID code')]")
+		//@FindBy(xpath = "//a[contains(text(),'Enter your existing Application ID code')]")
+		@FindBy(xpath="//a[contains(text(),'Resume Application')]")
 		private WebElement resumeApplication;
 
 
@@ -610,6 +614,11 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		@FindBy(xpath ="//div[contains(@class,'closeBg')]/*[contains (text() , 'Thank you for your interest')]")
 		private WebElement medicareGuidePopup;
 		
+		@FindBy(xpath = "//input[@class='nextButton']")
+		//@FindBy(xpath="//button[contains(text(),'Sign In')]")
+		private WebElement  Submit;
+		@FindBy(xpath = "//button[contains(@class,'optum_sign_in')]")
+		private WebElement signIn;
 		
 		public WebElement getValEstimatedAnnualDrugCostValue(String planName) {
 			//WebElement valEstimatedAnnualDrugCostValue = driver.findElement(By.xpath("//*[contains(text(),'"+planName+"')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//*[@ng-show='plan.network']"));
@@ -3254,6 +3263,65 @@ for (int i = 0; i < initialCount + 1; i++) {
 
 	
 	}
+	public void ResumeApplicationButton(String DateOfBirth) throws InterruptedException{
+		Thread.sleep(5000);
+		//String DateOfBirth ="11/13/1940";
+		//MedSupFormValidation(DateOfBirth);
+		//waitTillElementClickableInTime(Start_ApplicationBtn, 60);
+		//jsClickNew(Start_ApplicationBtn);
+		checkIfPageReadySafari();
+		CommonUtility.waitForPageLoadNew(driver, resumeApplication, 30);
+		resumeApplication.click();
+		System.out.println("Resume application link clicked successfully");
+	}
+public void RetrieveURL(String ExpectedsupplementURL) {
+		
+		CommonUtility.waitForPageLoad(driver, Submit, 20);
+		validate(Submit, 15);
+		Submit.click();
+		CommonUtility.checkPageIsReadyNew(driver);
+		String CurrentSupplementURL = driver.getCurrentUrl();
+		System.out.println("Submit application button has been clicked successfully after entering the data on resume application page : "+CurrentSupplementURL);
+		System.out.println("Expected Supplement URL: "+ExpectedsupplementURL);
+		System.out.println("Actual Supplement URL: "+CurrentSupplementURL);
+
+		if(ExpectedsupplementURL.equalsIgnoreCase(CurrentSupplementURL)) {
+			System.out.println("****************Submit application button has been clicked successfully after entering the data on resume application page  ***************");
+
+			Assert.assertTrue(true);
+		}
+		else {
+			Assert.fail("****************Submit application button is not clicked successfully and  resume application page is not loaded ***************");
+		}
+	}
+public void signInOptumId(String username, String password) {
+	try {
+		checkIfPageReadySafari();
+		signIn.click();
+		driver.findElement(By.cssSelector("input#userNameId_input")).sendKeys(username);
+		driver.findElement(By.cssSelector("input#passwdId_input")).sendKeys(password);
+		driver.findElement(By.cssSelector("input#SignIn")).click();
+		String Question = driver.findElement(By.cssSelector("label#challengeQuestionLabelId")).getText().trim();
+		WebElement securityAnswer = driver.findElement(By.cssSelector("div#challengeSecurityAnswerId >input"));
+		if (Question.equalsIgnoreCase("What is your best friend's name?")) {
+			System.out.println("Question is related to friendname");
+			securityAnswer.sendKeys("name1");
+		}
+
+		else if (Question.equalsIgnoreCase("What is your favorite color?")) {
+			System.out.println("Question is related to color");
+			securityAnswer.sendKeys("color1");
+		} else {
+			System.out.println("Question is related to phone");
+			securityAnswer.sendKeys("number1");
+		}
+		
+	} catch (Exception e) {
+		Assert.fail("###############Optum Id Sign In failed###############");
+	}
+	
+}
+
 	
 	public ArrayList<String> providerinforetreive(String planName){
 		CommonUtility.checkPageIsReadyNew(driver);

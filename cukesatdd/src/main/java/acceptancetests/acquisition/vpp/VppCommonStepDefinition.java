@@ -372,6 +372,100 @@ public class VppCommonStepDefinition {
 			}
 		}
 		
+		@Then("^the site user clicks on Start Application Button proceed to next pages$")
+		public void Start_application_button(DataTable givenAttributes) throws Throwable{
+			List<DataTableRow> memberAttributesRow = givenAttributes
+					.getGherkinRows();
+			Map<String, String> memberAttributesMap = new HashMap<String, String>();
+			for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+				memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+						memberAttributesRow.get(i).getCells().get(1));
+			}
+
+			String DateOfBirth = memberAttributesMap.get("DOB");
+			String FirstName = memberAttributesMap.get("Firstname");
+			String LastName = memberAttributesMap.get("Lastname");
+			VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario().getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+			plansummaryPage.MedSupFormValidation(DateOfBirth);
+			String resumeKey = plansummaryPage.StartApplicationButton(FirstName, LastName);
+			getLoginScenario().saveBean(VPPCommonConstants.RESUMEKEY, resumeKey);
+
+		}
+		@Then("^user clicks on resume application button$")
+		public void click_resume_application(DataTable givenAttributes) throws Throwable{
+			List<DataTableRow> memberAttributesRow = givenAttributes
+					.getGherkinRows();
+			Map<String, String> memberAttributesMap = new HashMap<String, String>();
+			for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+				memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+						memberAttributesRow.get(i).getCells().get(1));
+			}
+
+			String DateOfBirth = memberAttributesMap.get("DOB");
+			String FirstName = memberAttributesMap.get("Firstname");
+			String LastName = memberAttributesMap.get("Lastname");
+			//VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario().getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+			//plansummaryPage.MedSupFormValidation(DateOfBirth);
+			System.out.println("***the user clicks on resume application button***");
+			VPPPlanSummaryPage plansummaryPage1 = (VPPPlanSummaryPage) getLoginScenario().getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+			plansummaryPage1.ResumeApplicationButton(DateOfBirth);
+
+		}
+		@And("^the user signs in with optum Id$")
+		public void the_user_signs_in_with_optum_Id(DataTable credentials) {
+			List<DataTableRow> plannameAttributesRow = credentials.getGherkinRows();
+			Map<String, String> plannameAttributesMap = new HashMap<String, String>();
+			for (int i = 0; i < plannameAttributesRow.size(); i++) {
+		
+				plannameAttributesMap.put(plannameAttributesRow.get(i).getCells().get(0),
+						plannameAttributesRow.get(i).getCells().get(1));
+			}
+			String username = plannameAttributesMap.get("User Name");
+			String password = plannameAttributesMap.get("Password");
+			
+			VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario().getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+			plansummaryPage.signInOptumId(username, password);
+		}
+		/*@Then("^user validates the resume application URL$")
+		public void resume_application_processed(DataTable givenAttributes) throws Throwable{
+			System.out.println("***The user validates the resume application processed***");
+			List<DataTableRow> memberAttributesRow = givenAttributes
+					.getGherkinRows();
+			Map<String, String> memberAttributesMap = new HashMap<String, String>();
+			for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+				memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+						memberAttributesRow.get(i).getCells().get(1));
+			}
+			String FirstName = memberAttributesMap.get("Firstname");
+			String LastName = memberAttributesMap.get("Lastname");
+			VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario().getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+			plansummaryPage.ResumeApplicationButtonValidation(FirstName, LastName);
+
+		}*/
+		@Then("^the user validate retrieve application URL$")
+		public void the_user_retrieve_application_URL_in_AARPSite(DataTable arg1) throws InterruptedException {
+			Map<String, String> inputAttributesMap=parseInputArguments(arg1);
+			String AARPURL = inputAttributesMap.get("AARP URL");
+			String AARPURLSTG=inputAttributesMap.get("AARP URL STG");
+			VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario().getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+			if(getLoginScenario().environment.equals("stage")){
+				plansummaryPage.RetrieveURL(AARPURLSTG);
+			}else{
+				plansummaryPage.RetrieveURL(AARPURL);
+			}
+
+		}
+		public Map<String, String> parseInputArguments(DataTable memberAttributes) {
+			Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+			List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
+			for (int i = 0; i < memberAttributesRow.size(); i++) {
+				memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0), memberAttributesRow.get(i).getCells().get(1));
+			}
+			return memberAttributesMap;
+		}
 		@Then("^user validates plan count for all plan types on plan summary page$")
 		public void user_validates_following_benefits_ui_aarp() {
 
