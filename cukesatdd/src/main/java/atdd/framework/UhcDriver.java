@@ -1255,14 +1255,13 @@ try {
     				System.out.println("Waiting to check if Loading screen is present");
     				loadingScreen = fwait.until(new Function<WebDriver, List<WebElement>>() {
     					public List<WebElement> apply(WebDriver driver) {
-    						return driver.findElements(By.xpath("//div[@id='overlay' or  @id='loading_fader' or @class='loading-block']"));
+    						return driver.findElements(By.xpath("//body//div[(@id='overlay' and not(./ancestor::footer)) or  @id='loading_fader' or @class='loading-block']"));
     					}
     				});
     			} catch (Exception e) {}
 
     			// checking if loading indicator was found and if so we wait for it to
     			// disappear
-    			threadsleep(1);
     			WebDriverWait wait = new WebDriverWait(driver, 10);
     			if(!CollectionUtils.isEmpty(loadingScreen)) {
     				System.out.println("Loading screen visible!!! Waiting till it disappears");
