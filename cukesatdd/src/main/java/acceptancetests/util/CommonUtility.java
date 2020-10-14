@@ -450,17 +450,17 @@ public class CommonUtility {
 				try {
 					System.out.println(counter+" of 23 tries - wait 5 sec for document.readyState=complete... ");
 					Thread.sleep(5000);
-				} catch (UnhandledAlertException ae) {  //if getting alert error, stop and fail the test
-					Alert alert = driver.switchTo().alert();
-					System.out.println("Alert text="+alert.getText());
-					if (alert.getText().contains("an error while processing your information")) {
-						Assert.assertTrue("***** Got Alert message: "+alert.getText(), false);
-					} 
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}			
 			}
 			Assert.fail("TimeOut!!! Page not loaded");
+		} catch (UnhandledAlertException ae) {  //if getting alert error, stop and fail the test
+			Alert alert = driver.switchTo().alert();
+			System.out.println("Alert text="+alert.getText());
+			if (alert.getText().contains("an error while processing your information")) {
+				Assert.assertTrue("***** Got Alert message: "+alert.getText(), false);
+			} 
 		} catch (WebDriverException e) {
 			Assert.assertTrue("PROBLEM - got webdriver exception: "+e, false);
 			return false;

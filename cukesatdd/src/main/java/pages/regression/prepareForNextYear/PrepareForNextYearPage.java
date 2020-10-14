@@ -50,7 +50,7 @@ public class PrepareForNextYearPage extends PrepareForNextYearBase {
 			checkModelPopup(driver,3);
 			prepareForNextYearTab.click();
 		}
-		CommonUtility.checkPageIsReady(driver);
+		CommonUtility.checkPageIsReadyNew(driver);
 		CommonUtility.waitForPageLoad(driver, prepareForNextYearPgHeader, 10);
 		String actUrl=driver.getCurrentUrl();
 		String expUrl="/member/preparefornextyear/overview.html";
