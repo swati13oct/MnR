@@ -98,10 +98,10 @@ public class PlanDetailsPageMobile extends UhcDriver {
 	@FindBy(id = "estimateYourDrugsLink")
 	private WebElement estimateDrugBtn;
 
-	@FindBy(id = "plancosts")
+	@FindBy(xpath = "//*[contains(text(),'Plan Costs')]")
 	private WebElement planCostsTab;
 
-	@FindBy(id = "prescriptiondrug")
+	@FindBy(xpath = "//*[contains(text(),'Prescription Drug Benefits')]")
 	private WebElement prescriptiondrugTab;
 
 	// Right Rail Element - TFN
@@ -502,7 +502,8 @@ public class PlanDetailsPageMobile extends UhcDriver {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		presDrugTab.get(0).click();
+		//presDrugTab.get(0).click();
+		jsClickMobile(presDrugTab.get(0));
 		CommonUtility.waitForPageLoad(driver, estimateDrugBtn, 20);
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", estimateDrugBtn);
 		((JavascriptExecutor) driver).executeScript("arguments[0].click();", estimateDrugBtn);
