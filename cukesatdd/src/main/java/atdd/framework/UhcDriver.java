@@ -1267,9 +1267,13 @@ try {
     				System.out.println("Loading screen visible!!! Waiting till it disappears");
     				try {
     					ready = wait.until(ExpectedConditions
+    							.invisibilityOfAllElements(loadingScreen));
     									//.invisibilityOfElementLocated(By.xpath("//div[@id='overlay' or  @id='loading_fader' or @class='loading-block']")));
-    									.invisibilityOfAllElements(loadingScreen));
     				} catch(NoSuchElementException e) {
+    					//If no loading screen element found, page is ready
+    					ready = true;
+    				} catch(TimeoutException t) {
+    					//If script timed out finding loading screen element, page is ready
     					ready = true;
     				}
     				System.out.println("Loading screen disappeared, page is ready.");
