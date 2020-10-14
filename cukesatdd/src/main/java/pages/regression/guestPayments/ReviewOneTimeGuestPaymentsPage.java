@@ -70,10 +70,10 @@ public class ReviewOneTimeGuestPaymentsPage extends UhcDriver {
 	@FindBy(xpath = "//span[@class='generic-error'][contains(text(),'Only one payment request can be submitted per business day.')]")
 	private WebElement errorMessage;
 	
-	@FindBy(xpath = "//h1[contains(text(),'Make a One - time Payment')]")
+	@FindBy(id= "bannerId")
 	public WebElement guestPaymentsHeader;
 
-	
+
 	public ReviewOneTimeGuestPaymentsPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);

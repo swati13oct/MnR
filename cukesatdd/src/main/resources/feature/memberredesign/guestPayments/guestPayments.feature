@@ -120,7 +120,7 @@ Feature: 1.06.7 Member Guest Payments Page
       | Other Amount | 0.50 |
     And I will get an error message Amount must exceed 1.00
     Then I will entered other amount Due
-      | Other Amount | 250000 |
+      | Other Amount | 2 |
     And I will get an error message Cannot exceed annual remaining amount
     Then I select and entered other amount Due and choose a EFT Checking acc payment Method
       | Other Amount | <otherAmountDue> |
@@ -130,7 +130,7 @@ Feature: 1.06.7 Member Guest Payments Page
 
     Examples:
       | TID   | planType | memberID    | dob        | siteName | otherAmountDue |
-      | 10000 | MAPD     | 915516555-1 | 10/29/1947 | AARP     | 10.05          |
+      | 10000 | MAPD     | 915516555-1 | 10/29/1947 | AARP     | 1.50         |
     
     
 
