@@ -140,7 +140,7 @@ Feature: 1.02.1 Member Profile page - Prod
       | TID        | username | password | MemUserName | planType | memberType        |
       | Unknown_15 | ujethwa | 221Umang | PJVANEKRIS65  | MAPD     | Terminated_AccPro |
 
-  @prod_accountProfile05 @SHIP_ProfilePref
+  @prod_accountProfile05 @SHIP_ProfilePref  @prodSanity_Ship
   Scenario Outline: TID: <TID> -Plan Type: <planType> - To verify Profile page End to End test for Ship Members
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password

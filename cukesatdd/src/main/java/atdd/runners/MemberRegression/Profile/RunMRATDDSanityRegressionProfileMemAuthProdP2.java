@@ -18,9 +18,9 @@ import org.junit.runner.RunWith;
         overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDSanityRegressionProfileMemAuthProdP5")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberredesign" }, monochrome = true,
         features = { "src/main/resources/feature/memberredesign/profileandpreferences/" }, plugin = {
-        "pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDSanityRegressionProfileMemAuthProdP5.json" }, tags = { "@SHIP_ProfilePref" })
+        "pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDSanityRegressionProfileMemAuthProdP5.json" }, tags = { "@prodSanity_Ship" })
 
 
-public class RunMRATDDSanityRegressionProfileMemAuthProdP5 {
+public class RunMRATDDSanityRegressionProfileMemAuthProdP2 {
 
 }
