@@ -1241,7 +1241,7 @@ try {
     		
     		//Sets FluentWait Setup
     		for(; counter > 0; counter--) {
-    			threadsleep(3);
+//    			threadsleep(2);
     			List<WebElement> loadingScreen = null;
     			FluentWait<WebDriver> fwait = new FluentWait<WebDriver>(driver)
     					.withTimeout(Duration.ofSeconds(7))
@@ -1262,7 +1262,7 @@ try {
 
     			// checking if loading indicator was found and if so we wait for it to
     			// disappear
-    			WebDriverWait wait = new WebDriverWait(driver, 10);
+    			WebDriverWait wait = new WebDriverWait(driver, 7);
     			if(!CollectionUtils.isEmpty(loadingScreen)) {
     				System.out.println("Loading screen visible!!! Waiting till it disappears");
     				try {
