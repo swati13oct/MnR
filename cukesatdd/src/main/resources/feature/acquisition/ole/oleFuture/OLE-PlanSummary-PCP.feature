@@ -76,7 +76,7 @@ Feature: 2.05.1.ACQ-OLE PCP
     | Prescription Name			| <prescriptioncoveragename>  |
     |  PD Group Number			 | <pdgroupnumber>  |
     | PD Member Number        | <pdmembernumber>   | 
-    Then the user navigates to SEP Page
+    Then the user navigates to SEP Page for Medicaid and Effective date
        	|	Input Data					 | <inputdataType>   |
     	| PartA Date         | <partadate>         |
    		| PartB Date         | <partbdate>         |

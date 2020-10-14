@@ -3084,4 +3084,45 @@ if (MedicaidInformationStatus) {
 else
 	Assert.fail("OLE Medicaid Questions in Medicare Information Page -  Medicaid Member Details Failed");
 }
+
+@Then("^the user navigates to SEP Page for Medicaid and Effective date$")
+public void the_user_navigates_to_SEP_Page_Medicaid_Effective_Date(DataTable Medicareoptions) throws Throwable {
+	/*	
+	PersonalInformationPage personalInformationPage = (PersonalInformationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_PERSONAL_INFO_PAGE);
+		SpecialElectionPeriodPage specialElectionPeriodPage = personalInformationPage.navigate_to_SEP_page(arg1, null);
+
+
+		if (specialElectionPeriodPage != null) {
+
+			getLoginScenario().saveBean(OLE_PageConstants.OLE_SPECIAL_ELECTION_PERIOD_PAGE,
+					specialElectionPeriodPage);
+			System.out.println("OLE SEP Page is Displayed");
+			Assert.assertTrue(true);
+		}
+		else
+			Assert.fail("OLE SEP Page is NOT Displayed");
+	//}*/
+	
+	List<DataTableRow> givenAttributesRow = Medicareoptions.getGherkinRows();
+	Map<String, String> MedicareDetailsMap = new HashMap<String, String>();
+	for (int i = 0; i < givenAttributesRow.size(); i++) {
+
+		MedicareDetailsMap.put(givenAttributesRow.get(i).getCells().get(0),
+				givenAttributesRow.get(i).getCells().get(1));
+	}
+	PersonalInformationPage personalInformationPage = (PersonalInformationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_PERSONAL_INFO_PAGE);
+	SpecialElectionPeriodPage specialElectionPeriodPage = personalInformationPage.navigate_to_SEP_page_Medicaid(MedicareDetailsMap);
+	if (specialElectionPeriodPage != null) {
+		getLoginScenario().saveBean(OLE_PageConstants.OLE_SPECIAL_ELECTION_PERIOD_PAGE,
+				specialElectionPeriodPage);
+		System.out.println("OLE SEP Page is Displayed");
+		
+	getLoginScenario().saveBean(oleCommonConstants.PARTA_EFFECTIVE, MedicareDetailsMap.get("PartA Date"));
+	getLoginScenario().saveBean(oleCommonConstants.PARTB_EFFECTIVE, MedicareDetailsMap.get("PartB Date"));
+	getLoginScenario().saveBean(oleCommonConstants.MEDICAID_NUMBER, MedicareDetailsMap.get("MedicaidNumber"));
+		Assert.assertTrue(true);
+	}
+	else
+		Assert.fail("OLE SEP Page is NOT Displayed");
+	}
 	}

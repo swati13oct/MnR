@@ -359,6 +359,63 @@ public class PersonalInformationPage extends UhcDriver{
 		
 		String PartAeffectiveDate = MedicareDetailsMap.get("PartA Date");
 		String PartBeffectiveDate = MedicareDetailsMap.get("PartB Date"); 
+		//String MedicaidNo = MedicareDetailsMap.get("MedicaidNumber"); 
+		if(validateNew(driver.findElement(By.xpath("//h1[contains(text(),'Confirm')]")))){
+			System.out.println("OLE Confirm your Eligibility is Displayed");
+		
+			sendkeysNew(partAStartDateField, PartAeffectiveDate);
+			sendkeysNew(partBStartDateField, PartBeffectiveDate);
+			//sendkeysNew(medicaidNumberField,MedicaidNo);
+		}
+		
+		return new ConfirmYourEligibilityPage(driver);
+	}
+
+	public SpecialElectionPeriodPage navigate_to_SEP_page_Medicaid(Map<String, String> MedicareDetailsMap) throws InterruptedException {
+
+		validateNew(NextBtn);
+		jsClickNew(NextBtn);
+		/*JavascriptExecutor executor = (JavascriptExecutor)driver;
+		executor.executeScript("arguments[0].click();", NextBtn);*/
+		
+		/*if(validateNew(driver.findElement(By.xpath("//h1[contains(text(),'Special Election')]")))){
+			System.out.println("OLE SEP Page is Displayed");
+			return new SpecialElectionPeriodPage(driver);
+		}
+		*/
+		
+		Thread.sleep(3000);
+			if(driver.getCurrentUrl().contains("special")){
+			Assert.assertTrue(driver.getCurrentUrl().contains("special"), "OLE SEP Page is Displayed");
+			return new SpecialElectionPeriodPage(driver);
+			
+			}
+		else if(driver.getCurrentUrl().contains("eligibility"))
+
+			 {
+				
+				ConfirmYourEligibilityPage confirmYourEligibilityPage= enterConfirmEligibilityPageData1(MedicareDetailsMap);
+				if(confirmYourEligibilityPage!=null) {
+					
+					
+					 validateNew(NextBtn); 
+					 jsClickNew(NextBtn);
+					
+					 if(driver.getCurrentUrl().contains("special")){
+					  System.out.println("OLE SEP Page is Displayed"); } else {
+					  System.out.println("OLE SEP Page is not Displayed"); }
+					 return new SpecialElectionPeriodPage(driver);	
+				}
+			 }
+		return null;
+	}	
+
+
+
+	public ConfirmYourEligibilityPage enterConfirmEligibilityPageData1(Map<String, String> MedicareDetailsMap) {
+		
+		String PartAeffectiveDate = MedicareDetailsMap.get("PartA Date");
+		String PartBeffectiveDate = MedicareDetailsMap.get("PartB Date"); 
 		String MedicaidNo = MedicareDetailsMap.get("MedicaidNumber"); 
 		if(validateNew(driver.findElement(By.xpath("//h1[contains(text(),'Confirm')]")))){
 			System.out.println("OLE Confirm your Eligibility is Displayed");
