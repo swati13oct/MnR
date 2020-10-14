@@ -68,9 +68,9 @@ Feature: 1.15 Member pre-effective functionality
       | Technical TFN | <technicalTFN> |
 
     Examples: 
-      | planType | memberType          | copayCategory | technicalTFN   | segmentId | username | password | member      | planstartdate |
-      | IndPDP   | preeffectiveIndPDP  | NON LIS       | 1-888-980-8125 |       000 | jkuma14  | Brock@03 | hailey510   | 10/01/2020    |
-      | GroupMA  | preeffectiveGroupMA | NON LIS       | 1-888-980-8125 |       000 | jkuma14  | Brock@03 | Herschlebpo | 10/01/2020    |
+      | planType | memberType          | copayCategory | technicalTFN   | segmentId | username | password | member     | planstartdate |
+      | IndPDP   | preeffectiveIndPDP  | NON LIS       | 1-888-980-8125 |       000 | jkuma14  | Brock@03 | wahdey     | 11/01/2020    |
+      | GroupMA  | preeffectiveGroupMA | NON LIS       | 1-888-980-8125 |       000 | jkuma14  | Brock@03 | marklflynn | 11/01/2020    |
 
   @regressionMemberPROD3
   Scenario Outline: -planType: <planType> - Member Type: - <memberType> - Verify that correct links and messages are displayed on Dashboard and Secondary Page.
@@ -105,8 +105,8 @@ Feature: 1.15 Member pre-effective functionality
 
     Examples: 
       | planType  | memberType            | copayCategory | technicalTFN   | segmentId | username | password | member       | planstartdate |
-      | GroupMAPD | preeffectiveGroupMAPD | NON LIS       | 1-888-980-8125 |       000 | jkuma14  | Brock@03 | mburchyett   | 10/01/2020    |
-      | SHIP      | preeffectiveSHIPOnly  | NON LIS       | 1-866-254-3132 |       000 | jkuma14  | Brock@03 | STEVKOCH2001 | 10/01/2020    |
+      | GroupMAPD | preeffectiveGroupMAPD | NON LIS       | 1-888-980-8125 |       000 | jkuma14  | Brock@03 | CatnJack     | 12/01/2020    |
+      | SHIP      | preeffectiveSHIPOnly  | NON LIS       | 1-866-254-3132 |       000 | jkuma14  | Brock@03 | ludstevens91 | 11/01/2020    |
 
   @regressionMemberPROD4 @sanityMemberPROD1
   Scenario Outline: -planType: <planType> - Member Type: - <memberType> - Verify that correct links and messages are displayed on Dashboard and Secondary Page.
@@ -146,8 +146,8 @@ Feature: 1.15 Member pre-effective functionality
       | Technical TFN SHIP | <technicalTFNSHIP> |
 
     Examples: 
-      | planType | memberType               | copayCategory | technicalTFN   | segmentId | username | password | member               | planstartdate | technicalTFNSHIP |
-      | IndPDP   | preeffectivePDPSHIPCOMBO | NON LIS       | 1-888-980-8125 |       000 | jkuma14  | Brock@03 | Rickmehrer@Ymail.Com | 10/01/2020    | 1-866-254-3132   |
+      | planType | memberType               | copayCategory | technicalTFN   | segmentId | username | password | member         | planstartdate | technicalTFNSHIP |
+      | IndPDP   | preeffectivePDPSHIPCOMBO | NON LIS       | 1-888-980-8125 |       000 | jkuma14  | Brock@03 | daleandnancy20 | 12/01/2020    | 1-866-254-3132   |
 
   @regressionMemberPROD4 @sanityMemberPROD2
   Scenario Outline: -planType: <planType> - Member Type - <memberType> - Verify that correct links and messages are displayed on Dashboard and Secondary Page.

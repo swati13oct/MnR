@@ -4345,6 +4345,7 @@ public class AccountHomePage extends UhcDriver {
 				checkForIPerceptionModel(driver);
 				try {
 					EOBLINK.click(); 					
+					CommonUtility.checkPageIsReadyNew(driver);
 					System.out.println("*** EOB Link  clicked ***");
 					//agentstatusReady.click();
 					//System.out.println("*** agent status clicked ***");

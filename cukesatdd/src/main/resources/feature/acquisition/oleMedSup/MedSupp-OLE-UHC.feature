@@ -22,11 +22,12 @@ Feature: 2.06. ACQ-OLE Resume and Retrieve Application UMS
       # Then the user signs in with optum Id credentials to resume application in UHC site
       | User Name | <userName> |
       | Password  | <password> |	
-      Then the user signs in with optum Id in medsup flow
+      Then the user signs in with optum Id in medsup flow for uhc
      		|User Name | <username> |
      		|Password | <password>|
-      Then the user validate retrieve application URL in AARP Site
+      Then the user validate retrieve application URL in UHC Site
      | AARP URL    | <AARPUrl> |
+     |AARP URL STG|<AARPUrl-stg>|
     # Then the user enters data to resume the application
        | applicationType| <applicationType>|
       	| ApplicationID |<ApplicationID>|
@@ -38,8 +39,8 @@ Feature: 2.06. ACQ-OLE Resume and Retrieve Application UMS
       
       
        Examples: 
-      | zipcode | isMultutiCounty | AARPUrl																					| county             | plantype | DOB      | Firstname | Lastname|  ApplicationID | applicationType | username | password | 
-      |   90002 | NO              | aarpsupplementalhealth.com/ole/ms.olelaunch.html|Los Angeles County | MS       | 11/13/1940 | John      | Carry   |    ABCD        | Resume          |mnrqavd3 | Password@1|
+      | zipcode | isMultutiCounty | AARPUrl																					| county             | plantype | DOB      | Firstname | Lastname|  ApplicationID | applicationType | username | password |AARPUrl-stg|
+      |   90002 | NO              | aarpsupplementalhealth.com/ole/ms.olelaunch.html|Los Angeles County | MS       | 11/13/1940 | John      | Carry   |    ABCD        | Resume          |mnrqavd3 | Password@1|https://aarpsupplementalhealth-stg.uhc.com/content/aarpsupplementalhealth/ole/ms.olelaunch.html|
      
   
 @UHC_Retrive_App_UHC @oleMedSupBlayer
