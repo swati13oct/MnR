@@ -60,7 +60,7 @@ public class DrugDetailsPageMobile extends UhcDriver {
 	@FindBy(xpath = "//div[contains(text(), 'Annual Estimated')]//following-sibling::div[contains(text(), '$')]")
 	public WebElement DrugCosts_AnnualEstTotal_Amount;
 
-	@FindBy(xpath = "//button/span[contains(text(), 'View Plan Details')]")
+	@FindBy(xpath = "//span[contains(text(),'View Plan Details')]")
 	public WebElement DrugCosts_PlanDetailsBtn;
 
 	@FindBy(xpath = "//button/span[contains(text(), 'Save')]")

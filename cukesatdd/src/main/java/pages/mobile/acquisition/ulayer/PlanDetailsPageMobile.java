@@ -318,7 +318,8 @@ public class PlanDetailsPageMobile extends UhcDriver {
 			checkModelPopup(driver, 45);
 		else
 			checkModelPopup(driver, 10);
-		validateNew(planCostsTab);
+		//validateNew(planCostsTab);
+		scrollToView(planCostsTab);
 
 	}
 

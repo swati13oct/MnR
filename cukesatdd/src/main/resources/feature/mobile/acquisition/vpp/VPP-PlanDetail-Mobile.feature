@@ -1,7 +1,7 @@
 @vppPlanDetailsUHC
 Feature: 2.01.2-Vpp to plan Details UHC Scenarios
 
-  @vppPlanDetailsUHCRegressionMobile @prodSanity
+  @vppPlanDetailsUHCRegressionMobile @prodSanity @vppPlanDetailsUHCRegression
   Scenario Outline: UserStory: <TID> -plan type: <plantype> - Verify specific PDF Plan Documents in Plan Details Page for provided plan
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
@@ -25,7 +25,7 @@ Feature: 2.01.2-Vpp to plan Details UHC Scenarios
       | TID   | zipcode | isMultutiCounty | county      | plantype | planName                                       | pdfType               | docCode                 | planyear |
       | 00001 |   53503 | No              | Iowa County | MAPD     | UnitedHealthcare Medicare Advantage Open (PPO) | Step Therapy Criteria | Step_Therapy_MCORE_2020 | current  |
 
-  @vppPlanDetailsUHCRegressionMobile @prodSanity
+  @vppPlanDetailsUHCRegressionMobile @prodSanity @vppPlanDetailsUHCRegression
   Scenario Outline: UserStory: <TID> -plan type: <plantype> - Verify specific PDF Plan Documents in Plan Details Page for provided plan
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
@@ -97,7 +97,7 @@ Feature: 2.01.2-Vpp to plan Details UHC Scenarios
       | 15658 |   11516 | No              | Nassau County | MA       | UnitedHealthcare Medicare Advantage Essential (Regional PPO)     | Dental Platinum | $0             | $0            | current  |
       | 15662 |   11516 | No              | Nassau County | MAPD     | UnitedHealthcare Medicare Advantage Choice Plan 1 (Regional PPO) | Dental Platinum | $16            | $192          | current  |
 
-  @vppPlanDetailsUHCRegressionMobile @prodSanity
+  @vppPlanDetailsUHCRegressionMobile @prodSanity 
   Scenario Outline: TCID - <TID> - plan Type: <plantype> - TO click Back to all plans from Top and bottom of the page and verify redirection back to the VPP-Summary page UHC site
     Given the user is on the uhcmedicaresolutions site landing page
     When I access the vpp page
