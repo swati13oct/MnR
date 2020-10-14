@@ -1193,6 +1193,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	public boolean getSpecificPlanInfo(String planName) throws InterruptedException {
 		boolean isSpecificPlanInfoPresent = false;
+		Thread.sleep(5000);
 		if (planName.contains("SNP")) {
 			// ElementData elementData = new ElementData("id", "viewDetailsMA");
 			Thread.sleep(4000);

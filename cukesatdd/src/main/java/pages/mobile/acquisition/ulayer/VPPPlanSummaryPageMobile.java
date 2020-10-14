@@ -3500,7 +3500,8 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 
 		if (allMAPlans != null) {
 			for (int i = 0; i < allMAPlans.size(); i++) {
-				allMAPlans.get(i).click();
+				//allMAPlans.get(i).click();
+				jsClickNew(allMAPlans.get(0));
 				if (i == counter) {
 					break;
 				}
