@@ -2508,11 +2508,11 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 	}
 
-	public BuildYourDrugListMobile navigateToVisitorProfilePage() {
+	public VisitorProfilePageMobile navigateToVisitorProfilePage() {
 		waitforElement(shoppingCartIcon);
 		shoppingCartIcon.click();
 		if(driver.getCurrentUrl().contains("profile")) {
-			return new BuildYourDrugListMobile(driver);
+			return new VisitorProfilePageMobile(driver);
 		}else {
 			System.out.println("Navigation to visitor profile is failed");
 			return null;

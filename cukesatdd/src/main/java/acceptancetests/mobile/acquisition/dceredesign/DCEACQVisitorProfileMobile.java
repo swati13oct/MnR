@@ -15,12 +15,6 @@ import pages.mobile.acquisition.dceredesign.BuildYourDrugListMobile;
 import pages.mobile.acquisition.dceredesign.DrugSummaryPageMobile;
 import pages.mobile.acquisition.dceredesign.TellUsAboutDrugMobile;
 import pages.mobile.acquisition.dceredesign.ZipCodeAndPlanYearCapturePageMobile;
-import pages.mobile.acquisition.ulayer.DrugCostEstimatorPageMobile;
-import pages.acquisition.ulayer.DrugCostEstimatorPage;
-import pages.mobile.acquisition.commonpages.AcquisitionHomePageMobile;
-import pages.mobile.acquisition.commonpages.ComparePlansPageMobile;
-import pages.mobile.acquisition.commonpages.PlanDetailsPageMobile;
-import pages.mobile.acquisition.commonpages.VPPPlanSummaryPageMobile;
 //import pages.mobile.acquisition.ulayer.GetStartedPageMobile;
 import pages.mobile.acquisition.dceredesign.GetStartedPageMobile;
 import acceptancetests.data.CommonConstants;
@@ -29,7 +23,6 @@ import acceptancetests.acquisition.dceredesign.DCERedesignCommonConstants;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
 import cucumber.api.java.en.And;
-import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 
 /**
@@ -140,12 +133,15 @@ public class DCEACQVisitorProfileMobile {
 
 
 	@And("^the user clicks on the add drugs button to navigate to DCE Redesign on the profile page$")
-	public void the_user_clicks_on_the_add_drugs_button_in_the_profile_to_DCE_Redesign_in_AARP_site1() {
-		GetStartedPageMobile DCEgetStarted = (GetStartedPageMobile) getLoginScenario()
-				.getBean(PageConstants.DCE_Redesign_GetStarted);
+	public void the_user_clicks_on_the_add_drugs_button_in_the_profile_to_DCE_Redesign_in_AARP_site1() throws InterruptedException {
+		pages.mobile.acquisition.ulayer.VisitorProfilePageMobile visitorProfilePage = (pages.mobile.acquisition.ulayer.VisitorProfilePageMobile) getLoginScenario().
+				getBean(PageConstants.VISITOR_PROFILE_PAGE);
 
-		BuildYourDrugListMobile buildDrugList = DCEgetStarted.clickAddsDrugs();
-		getLoginScenario().saveBean(PageConstants.DCE_Redesign_BuildDrugList, buildDrugList);
+		GetStartedPageMobile getStartedPage = visitorProfilePage.addDrug_DCERedesign();
+		if (null != getStartedPage) {
+			getLoginScenario().saveBean(PageConstants.DCE_Redesign_GetStarted, getStartedPage);
+		} else
+			Assert.fail("DCE Redesign page object not loaded");
 
 	}	
 	

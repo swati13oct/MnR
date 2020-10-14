@@ -437,7 +437,7 @@ Feature: 2.01.1-Vpp to plan Summary UHC Scenarios
       | TID       | zipcode | isMultutiCounty | county      | plantype | planName                                              |planyear|
       | US2567142 |   81501 | NO              | Mesa County | SNP      | Rocky Mountain Health Plans DualCare Plus (HMO D-SNP) |current|
 
-  #@vppPlanSummaryUHCRegressionMobile @prodSanity
+  @vppPlanSummaryUHCRegressionMobile @prodSanity
   Scenario Outline: TID: <TID> -plan type: <plantype> -plan name: -<planName>- Verify People Health plans Learn More lands on Correct site from UHC site from plan summary page
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site

@@ -152,10 +152,15 @@ public class VisitorProfilePageMobile extends UhcDriver {
 		return null;
 	}
 
+	@FindBy(xpath="//h3[contains(text(),'Save your information')]")
+	private WebElement saveYourInformation;
 	
 	public GetStartedPageMobile addDrug_DCERedesign(){
 		
-		addrugs.click();
+		saveYourInformation.click();
+		scrollToView(addrugs);
+		
+		jsClickMobile(addrugs);
 		if (validateNew(AddMyDrugsBtn))
 			return new GetStartedPageMobile(driver);
 		return null;
