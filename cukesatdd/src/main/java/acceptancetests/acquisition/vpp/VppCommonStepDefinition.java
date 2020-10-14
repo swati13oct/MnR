@@ -36,7 +36,10 @@ import pages.acquisition.commonpages.AcquisitionHomePage;
 import pages.acquisition.commonpages.PlanDetailsPage;
 import pages.acquisition.commonpages.ProviderSearchPage;
 import pages.acquisition.commonpages.VPPPlanSummaryPage;
+import pages.acquisition.ole.MedicareInformationPage;
+import pages.acquisition.ole.PersonalInformationPage;
 import pages.acquisition.ole.WelcomePage;
+import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineResultsPage;
 import pages.acquisition.commonpages.VisitorProfilePage;
 import pages.acquisition.commonpages.ComparePlansPage;
 
@@ -741,23 +744,21 @@ public class VppCommonStepDefinition {
 			Assert.fail("Error Loading VPP plan summary page");
 		}
 	}
+	
 	@When("the user selects plan year for PRE Flow$")
 	public void user_selects_plan_year_for_PRE_Flow(DataTable givenAttributes) {
-	
-		List<DataTableRow> givenAttributesRow = givenAttributes
-				.getGherkinRows();
-		Map<String, String> givenAttributesMap = new HashMap<String, String>();
-		for (int i = 0; i < givenAttributesRow.size(); i++) {
-
-			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
-					givenAttributesRow.get(i).getCells().get(1));
-		}
-
-		String planYear = givenAttributesMap.get("Plan Year");
-
-		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
-				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		
-		plansummaryPage.handlePlanYearSelectionPopup(planYear);
-	}
+		   List<DataTableRow> givenAttributesRow = givenAttributes
+		         .getGherkinRows();
+		   Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		   for (int i = 0; i < givenAttributesRow.size(); i++) {
+		      givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+		            givenAttributesRow.get(i).getCells().get(1));
+		   }
+		   String planYear = givenAttributesMap.get("Plan Year");
+		   VPPPlanSummaryPage plansummaryPage = new VPPPlanSummaryPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+		   getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
+		   
+		   plansummaryPage.handlePlanYearSelectionPopup(planYear);
+		}
 }
