@@ -149,7 +149,8 @@ public class GlobalComponentsCommonStepDefinition {
 				AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
 						.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 				EnterZipCodePage enterZipCodePage=aquisitionhomepage.enterZipCode();
-				enterZipCodePage.validateZipComp(zipCode);
+				enterZipCodePage.shopMenuZipComp(zipCode);
+				//enterZipCodePage.validateZipComp(zipCode);
 	}
 	
 	@When("^user vaidates the state drop down link on the home page$")
