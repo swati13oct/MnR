@@ -235,15 +235,27 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(id = "gbqfbb")
 	private WebElement feelingluckyBtn;
 
+	@FindBy(xpath = "//*[@class='container meded-article-header']//span[contains(text(),'About UnitedHealthcare')]")
+	public WebElement aboutUsHeader;
+	
+	@FindBy(xpath = "//span[contains(@class,'heading') and contains(text(),'Connect with UnitedHealthcare')]")
+	public WebElement contactUsHeader;
+	
 	@FindBy(id = "medicareTitle")
 	public WebElement siteMapHeader;
 
 	@FindBy(xpath = "//*[contains(@dtmname,'Privacy')]//*[contains(text(),'Privacy Policy')]")
 	public WebElement privacyHeader;
 
+	@FindBy(xpath = "//*[@class='container meded-article-header']//span[contains(text(),'Terms of Use')]")
+	public WebElement termsOfUseHeader;
+	
+	@FindBy(xpath = "//*[@class='container meded-article-header']//span[contains(text(),'Disclaimers')]")
+	public WebElement disclaimersHeader;
+	
 	@FindBy(xpath = "//*[@class='container meded-article-header']//span[contains(text(),'Health Insurance Broker')]")
 	public WebElement brokerHeader;
-
+	
 	/* LearnAboutMedicare link */
 	@FindBy(xpath = "//*[@id='ghn_lnk_3']")
 	private WebElement lnkLearnAboutMedicare;
@@ -407,10 +419,6 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	@FindBy(xpath = "//a[@id='proceed-link']")
 	private WebElement proceedLink;
-	
-	@FindBy(xpath = "//body/div[@id='overlay']")
-	private WebElement overlayFilm;
-
 
    	//String ChatSamText= "Chat with a Licensed Insurance Agent";
 	String ChatSamText= "Chat Now";
@@ -1260,9 +1268,10 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	public AboutUsAARPPage aboutUsFooterClick() {
 		validateNew(footerAboutUsLink);
 //		footerAboutUsLink.click();
+		scrollToView(footerAboutUsLink);
 		jsClickNew(footerAboutUsLink);
 		CommonUtility.checkPageIsReadyNew(driver);
-		waitForPageLoadSafari();
+		validateNew(aboutUsHeader);
 		if (getTitle().contains("About UnitedHealthcare")) {
 			return new AboutUsAARPPage(driver);
 		}
@@ -1292,8 +1301,11 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	public ContactUsAARPPage contactUsFooterClick() {
 		validateNew(footerContactUsLink);
-		footerContactUsLink.click();
+		scrollToView(footerContactUsLink);
+		jsClickNew(footerContactUsLink);
+//		footerContactUsLink.click();
 		CommonUtility.checkPageIsReadyNew(driver);
+		validateNew(contactUsHeader);
 		if (driver.getCurrentUrl().contains("contact-us")) {
 			return new ContactUsAARPPage(driver);
 		}
@@ -1303,6 +1315,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	public SiteMapAARPPage siteMapFooterClick() {
 		validateNew(footerSiteMapLink);
 //		footerSiteMapLink.click();
+		scrollToView(footerSiteMapLink);
 		jsClickNew(footerSiteMapLink);
 		CommonUtility.checkPageIsReadyNew(driver);
 		validateNew(siteMapHeader);
@@ -1315,6 +1328,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	public PrivacyPolicyAARPPage privacypolicyFooterClick() {
 		validateNew(footerPrivacyPolicyLink);
 //		footerPrivacyPolicyLink.click();
+		scrollToView(footerPrivacyPolicyLink);
 		jsClickNew(footerPrivacyPolicyLink);
 		CommonUtility.checkPageIsReadyNew(driver);
 		validateNew(privacyHeader);
@@ -1327,8 +1341,10 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	public TermsnConditionsAARPPage termsnconditionsFooterClick() {
 		validate(footerTermsnConditionsLink);
 //		footerTermsnConditionsLink.click();
+		scrollToView(footerTermsnConditionsLink);
 		jsClickNew(footerTermsnConditionsLink);
 		CommonUtility.checkPageIsReadyNew(driver);
+		validateNew(termsOfUseHeader);
 		if (driver.getCurrentUrl().contains("terms-of-use")) {
 			return new TermsnConditionsAARPPage(driver);
 		}
@@ -1338,8 +1354,10 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	public DisclaimersAARPPage disclaimersFooterClick() {
 		validate(footerDisclaimersLink);
 //		footerDisclaimersLink.click();
+		scrollToView(footerDisclaimersLink);
 		jsClickNew(footerDisclaimersLink);
 		CommonUtility.checkPageIsReadyNew(driver);
+		validateNew(disclaimersHeader);
 		if (driver.getCurrentUrl().contains("disclaimer")) {
 			return new DisclaimersAARPPage(driver);
 		}
@@ -1349,6 +1367,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	public AgentsnBrokersAARPPage agentsnbrokersFooterClick() {
 		validate(footerAgentsnBrokersLink);
 //		footerAgentsnBrokersLink.click();
+		scrollToView(footerAgentsnBrokersLink);
 		jsClickNew(footerAgentsnBrokersLink);
 		CommonUtility.checkPageIsReadyNew(driver);
 		validateNew(brokerHeader);
@@ -1361,8 +1380,10 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	public AcquisitionHomePage homeFooterClick() {
 		validateNew(footerHomeLink);
 //		footerHomeLink.click();
+		scrollToView(footerHomeLink);
 		jsClickNew(footerHomeLink);
 		CommonUtility.checkPageIsReadyNew(driver);
+		waitForPageLoadSafari();
 		if (validateNew(zipCodeField)) {
 			return new AcquisitionHomePage(driver, true);
 		}

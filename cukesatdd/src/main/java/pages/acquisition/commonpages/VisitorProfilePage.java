@@ -153,7 +153,8 @@ public class VisitorProfilePage extends UhcDriver {
 	
 	public GetStartedPage addDrug_DCERedesign(){
 		
-		addrugs.click();
+//		addrugs.click();
+		jsClickNew(addrugs);
 		checkIfPageReadySafari();
 		if (validateNew(AddMyDrugsBtn))
 			return new GetStartedPage(driver);

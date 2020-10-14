@@ -1405,7 +1405,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	 */
 	public VisitorProfilePage navigateToVisitorProfilePage() {
 		waitforElement(shoppingCartIcon);
-		shoppingCartIcon.click();
+//		shoppingCartIcon.click();
+		jsClickNew(shoppingCartIcon);
 		if(driver.getCurrentUrl().contains("profile")) {
 			return new VisitorProfilePage(driver);
 		}else {

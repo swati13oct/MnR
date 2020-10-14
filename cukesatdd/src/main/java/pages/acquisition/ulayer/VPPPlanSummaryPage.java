@@ -1515,7 +1515,6 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	public int checkAllMAPlans(){
 		try {
 			Thread.sleep(5000);
-			waitForPageLoadSafari();
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -1528,7 +1527,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		}
 		if(allMAPlans !=null){
 			for(int i = 0; i<plansForCompare; i++){
-				allMAPlans.get(i).click();
+//				allMAPlans.get(i).click();
+				jsClickNew(allMAPlans.get(i));
 				System.out.println("Plan added to compare : "+i);
 			}
 		}
@@ -1539,7 +1539,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	public ComparePlansPage clickOnCompareLink(){
 		List<WebElement> compareLinks = driver
 				.findElements(By.xpath("//*[contains(@class,'multiple-added-text')]//button[contains(text(),'Compare plans')]"));
-		compareLinks.get(1).click();
+//		compareLinks.get(1).click();
+		jsClickNew(compareLinks.get(1));
+		waitForPageLoadSafari();
 		if(currentUrl().contains("/health-plans.html#/plan-compare"))
 			return new ComparePlansPage(driver);
 		return null;
@@ -1895,7 +1897,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		}
 		if(allPDPlans !=null){
 			for(int i = 0; i<plansForCompare; i++){
-				allPDPlans.get(i).click();
+//				allPDPlans.get(i).click();
+				jsClickNew(allPDPlans.get(i));
 				System.out.println("Plan added to compare : "+i);
 			}
 		}
@@ -2838,7 +2841,7 @@ for (int i = 0; i < initialCount + 1; i++) {
 			planTypePath="//div[@ng-show='showMaPlans']";
 		} else if (planType.equalsIgnoreCase("pdp")) {
 			planTypePath="//div[@ng-show='showPdpPlans']";
-//			driver.navigate().refresh();
+			driver.navigate().refresh();
 		} else if (planType.equalsIgnoreCase("snp")) {
 			planTypePath="//div[@ng-show='showSnpPlans']";
 		}
@@ -3777,7 +3780,8 @@ for (int i = 0; i < initialCount + 1; i++) {
 
 			if (allMAPlans != null) {
 				for (int i = 0; i < allMAPlans.size(); i++) {
-					allMAPlans.get(i).click();
+//					allMAPlans.get(i).click();
+					jsClickNew(allMAPlans.get(i));
 					if (i == counter) {
 						break;
 					}
