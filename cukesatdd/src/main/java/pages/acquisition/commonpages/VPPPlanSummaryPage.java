@@ -1303,7 +1303,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		}
 		if(allMAPlans !=null){
 			for(int i = 0; i<plansForCompare; i++){
-				allMAPlans.get(i).click();
+//				allMAPlans.get(i).click();
+				jsClickNew(allMAPlans.get(i));
 				System.out.println("Plan added to compare : "+i);
 			}
 		}
@@ -1315,7 +1316,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		if(planType.contains("MAPD")) {
 			List<WebElement> compareLinks = driver
 					.findElements(By.xpath("//*[contains(@class,'multiple-added-text')]//button[contains(text(),'Compare plans')]"));
-			compareLinks.get(1).click();
+//			compareLinks.get(1).click();
+			jsClickNew(compareLinks.get(1));
 		}else {
 			List<WebElement> compareLinks = driver
 					.findElements(By.xpath("//*[contains(@id,'plan-list-3')]//button[contains(text(),'Compare plans')]"));
@@ -1612,7 +1614,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		}else{
 			WebElement dceLink = driver.findElement
 					(By.xpath("//*[contains(text(),'"+planName+"')]/ancestor::div[contains(@class, 'module-plan-overview module swiper-slide pdpPlans ng-scope')]//descendant::a[contains(@id,'pdpDrugCostEstimatorLink')]"));
-			dceLink.click();
+			jsClickNew(dceLink);
+//			dceLink.click();
 		}
 		CommonUtility.checkPageIsReadyNew(driver);
 		checkModelPopup(driver, 30);
@@ -1687,7 +1690,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		}
 		if(allPDPlans !=null){
 			for(int i = 0; i<plansForCompare; i++){
-				allPDPlans.get(i).click();
+//				allPDPlans.get(i).click();
+				jsClickNew(allPDPlans.get(i));
 				System.out.println("Plan added to compare : "+i);
 			}
 		}

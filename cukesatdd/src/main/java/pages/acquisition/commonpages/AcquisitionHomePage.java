@@ -1567,7 +1567,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		
 		public GetStartedPage navigateToDCERedesignFromHome() throws InterruptedException {
 			validateNew(getStarted);
-			getStarted.click();
+//			getStarted.click();
+			jsClickNew(getStarted);
 			CommonUtility.checkPageIsReadyNew(driver);
 			checkModelPopup(driver, 30);
 			if (validateNew(AddMyDrugsBtn))
