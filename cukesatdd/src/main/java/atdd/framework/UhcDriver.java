@@ -569,7 +569,6 @@ try {
 	 */
 	public boolean validateNew(WebElement element, long timeoutInSec) {
 		//scrollToView(element);
-		CommonUtility.checkPageIsReady(driver);
 		JavascriptExecutor jse = (JavascriptExecutor) driver;
 		jse.executeScript("window.scrollBy(0,-50)", "");
 		try {
