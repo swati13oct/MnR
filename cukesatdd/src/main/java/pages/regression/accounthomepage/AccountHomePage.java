@@ -468,7 +468,7 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(xpath = "//div[@id='ui-view-page']//a[@track='EOB_SEARCH']")
 	private WebElement EOB_Dashboard;
 	
-	@FindBy(xpath="//header[contains(@class,'sub-nav-header')]//a[contains(@ng-href,'eob.html')]")
+	@FindBy(xpath="//header[contains(@class,'sub-nav-header')]//a[contains(@href,'eob.html')]")
 	protected WebElement eobTopMenuLink;
 	
 	//@FindBy(xpath="//a[contains(text(),'View Documents & Resources')]")

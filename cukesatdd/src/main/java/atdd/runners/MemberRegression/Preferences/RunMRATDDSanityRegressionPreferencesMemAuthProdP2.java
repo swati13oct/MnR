@@ -13,11 +13,11 @@ import org.junit.runner.RunWith;
 
 @RunWith(ExtendedCucumber.class)
 @ExtendedCucumberOptions(retryCount=1,screenShotSize="", screenShotLocation="/screenshots/",
-jsonReport = "target/cucumber-RunMRATDDSanityRegressionPreferencesMemAuthProdP1.json",detailedReport = true, detailedAggregatedReport = true,
-overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDSanityRegressionPreferencesMemAuthProdP1")
+jsonReport = "target/cucumber-RunMRATDDSanityRegressionPreferencesMemAuthProdP2.json",detailedReport = true, detailedAggregatedReport = true,
+overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDSanityRegressionPreferencesMemAuthProdP2")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberredesign" }, 
 features = { "src/main/resources/feature/memberredesign/profileandpreferences/" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDSanityRegressionPreferencesMemAuthProdP1.json" }, tags = {"@prodSanity_SHIP_ProfilePref" })
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDSanityRegressionPreferencesMemAuthProdP2.json" }, tags = {"@prodSanity_SHIP_ProfilePref" })
 public class RunMRATDDSanityRegressionPreferencesMemAuthProdP2 {
 
 }
