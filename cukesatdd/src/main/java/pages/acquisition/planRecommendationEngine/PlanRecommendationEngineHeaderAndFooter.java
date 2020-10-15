@@ -395,13 +395,13 @@ public class PlanRecommendationEngineHeaderAndFooter extends UhcDriver {
 		validateLinks("contact-us.html");
 		backtoshopforaplan();
 		headerShopLink.click();
-		validateLinks("/health-plans/shop.html");
+		validateLinks("/shop.html");
 		backtoshopforaplan();
 		headerEnrollLink.click();
-		validateLinks("/health-plans/enroll.html");
+		validateLinks("/enroll.html");
 		backtoshopforaplan();
 		headerResourcesLink.click();
-		validateLinks("/health-plans/resources.html");
+		validateLinks("/resources.html");
 		backtoshopforaplan();
 		headerAdvantageplanLink.click();
 		validateLinks("/shop/medicare-advantage-plans.html");
