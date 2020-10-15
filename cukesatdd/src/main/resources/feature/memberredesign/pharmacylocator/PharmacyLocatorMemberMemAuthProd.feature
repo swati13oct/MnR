@@ -30,14 +30,6 @@ Feature: 1.11 Member Pharmacy Locator tool Page- Member Auth - PROD
 			| Distance | 25 |
 		Then the user validates the pharmacies available
 			| Language | English |
-		When the user enters following details for pharmacy search
-			| Zip Code |            |
-			| Distance | <distance> |
-		Then the user verify error messages in pharmacy locator page
-		When the user enters following details for pharmacy search
-			| Zip Code | 9999       |
-			| Distance | <distance> |
-		Then the user verify error messages in pharmacy locator page
 		And the user enters following details for pharmacy search
 			| Zip Code | <zipcode>  |
 			| Distance | <distance> |

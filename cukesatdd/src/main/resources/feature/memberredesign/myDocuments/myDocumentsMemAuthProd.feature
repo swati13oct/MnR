@@ -23,14 +23,6 @@ Feature: 1.06.7 Member My Documents Page- Member Auth - PROD
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
     Then user validates header section content on My Documents Page
-	#----------------- Test for 90 days----------
-    And then the user searches documents for a valid Period on My documents page
-      | Search Range | Last 90 days |
-    Then I validate the Documents Table if present
-    #----------------- Test for 6 months----------
-    And then the user searches documents for a valid Period on My documents page
-      | Search Range | Last 6 months |
-    Then I validate the Documents Table if present
     #----------------- Test for 12 months----------
     And then the user searches documents for a valid Period on My documents page
       | Search Range | Last 12 months |
