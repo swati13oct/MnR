@@ -346,7 +346,7 @@ public class AepPlanDetailsPage extends UhcDriver {
 			benefitValueUI = benefitsMap.get(key);
 			tmpUIString1 = benefitValueUI; 												//storing the original benefit value before string manipulation
 			tmpKeyString = key; 														//storing the original key value (benefit name from the UI) before string manipulation
-			benefitValueUI = benefitValueUI.replace("\n", "").replaceAll("\\s+", ""); 	//replace all the next lines and spaces from the string
+			benefitValueUI = benefitValueUI.replace("\n", "").replaceAll("\\s+", "").replaceAll("\\*",""); 	//replace all the next lines and spaces from the string
 			benefitValue = benefitValue.replace("\n", "").replaceAll("\\s+", "").replaceAll("\\*",""); 		//replace all the next lines and spaces from the string
 			
 			if(key.contains("Passport"))
@@ -494,6 +494,8 @@ public class AepPlanDetailsPage extends UhcDriver {
 					else if(benefitValueUI.contains(".1"))
 						benefitValueUI = benefitValueUI.replace(".1", ".");
 				}
+				
+				benefitValue = benefitValue.replace("-opensinnewwindow", "");
 					if(key.equalsIgnoreCase(columnName)) {	
 						
 						benefitValueUI = benefitValueUI.replace("/", "");
@@ -527,7 +529,10 @@ public class AepPlanDetailsPage extends UhcDriver {
 						else if(benefitValueUI.contains("/") &&!benefitValueUI.contains("mydoctor")) 
 							benefitValueUI =benefitValueUI.replaceAll("/", "");
 				 
-						
+						if(key.equalsIgnoreCase("Walgreens – Preferred Retail Pharmacy")) {
+							if(benefitValueUI.endsWith("."))
+								benefitValueUI = StringUtils.trimTrailingCharacter(key, '.');
+						}
 						
 						//the following code is only needed for the specific benefit values where we have to remove the footnote values form the end
 						if( key.equalsIgnoreCase("Preferred Mail Home Delivery through OptumRx")) {

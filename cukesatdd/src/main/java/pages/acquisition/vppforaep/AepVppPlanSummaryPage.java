@@ -272,14 +272,19 @@ public class AepVppPlanSummaryPage extends UhcDriver {
 			key = key.toLowerCase().trim();
 			//key = key.replace(",", "");
 			columnName = columnName.toLowerCase().trim();
-			if(columnName.contains("tier"))
-				System.out.println();
-			
-			if((benefitValue.contains("NA")||benefitValue.contains("N/A")||benefitValue.equalsIgnoreCase("No coverage"))) {
+			if(columnName.contains("prescription")) {
+				if(key.contains("prescription"))
+					System.out.println();
+			}
+			if((benefitValue.contains("NA")||benefitValue.contains("N/A"))) {
 				counter++;
-				//if(key.contains(columnName)) {
-						flag= true;break;
-				//	}
+				if(key.contains(columnName)) {
+						flag= false;
+						tmpUIString2 = tmpUIString1;
+						break;
+				}
+				
+				
 			
 			}else if(key.contains(columnName)) {
 						counter++;
