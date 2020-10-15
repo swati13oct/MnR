@@ -882,7 +882,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		if (planType.equalsIgnoreCase("PDP")) {
 			validateNew(pdpPlansViewLink, 30);
 			 //note: add sleep for timing issue, tried increase timeout from waitForPageLoadNew but didn't work
-			pdpPlansViewLink.click();
+			jsClickNew(pdpPlansViewLink);
 			sleepBySec(2);
 			System.out.println("PDP Plan Type Clicked");
 			validateNew(planListContainer, 30);
@@ -890,7 +890,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			int maPlans = Integer.valueOf(maPlansCount.getText().replace(" Plans", ""));
 			if(maPlans == 0)
 			{
-				pdpPlansViewLink.click();
+				jsClickNew(pdpPlansViewLink);
 				sleepBySec(2);
 				validateNew(planListContainer, 30);
 				handlePlanYearSelectionPopup();
@@ -901,12 +901,12 @@ public class VPPPlanSummaryPage extends UhcDriver {
 				System.out.println("MA plans are available");
 			}
 			validateNew(maPlansViewLink, 30);
-			maPlansViewLink.click();
+			jsClickNew(maPlansViewLink);
 			sleepBySec(3);
 			validateNew(planListContainer, 30);
 		} else if (planType.equalsIgnoreCase("MS")) {
 			validateNew(msPlansViewLink, 30);
-			msPlansViewLink.click();
+			jsClickNew(msPlansViewLink);
 			sleepBySec(2);
 			validateNew(medSuppZipCode, 30);
 			/*msPlansViewLink.click();
@@ -914,7 +914,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		} else if (planType.equalsIgnoreCase("SNP")) {
 			
 			validateNew(snpPlansViewLink, 30);
-			snpPlansViewLink.click();
+			jsClickNew(snpPlansViewLink);
 			sleepBySec(3);
 			validateNew(planListContainer, 30);
 			/*
@@ -2800,7 +2800,8 @@ for (int i = 0; i < initialCount + 1; i++) {
 
 			System.out.println("Click to close on the create profile popup");
 			if (validate(closeProfilePopup))
-				closeProfilePopup.click();
+//				closeProfilePopup.click();
+				jsClickNew(closeProfilePopup);
 			CommonUtility.checkPageIsReady(driver);
 			
 			System.out.println("Proceed to validate 'Save Plan' link and icon disappeared after clicking it");
