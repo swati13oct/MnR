@@ -2892,10 +2892,11 @@ for (int i = 0; i < initialCount + 1; i++) {
 	public VPPPlanSummaryPage navagateToShopAPlanAndFindZipcode(String zipcode, String countyName, String isMultiCounty) {
 		System.out.println("Proceed to go to top menu to select 'Shop A Plan' option and enter zipcode '"+zipcode+"' to find plan");
 		waitForPageLoadSafari();
-		Actions builder = new Actions(driver);
+//		Actions builder = new Actions(driver);
 		scrollToView(topMenushopForAPlanOption);
-		Action mouseOverButton=builder.moveToElement(topMenushopForAPlanOption).build();
-		mouseOverButton.perform();
+		jsMouseOver(topMenushopForAPlanOption);
+		/*Action mouseOverButton=builder.moveToElement(topMenushopForAPlanOption).build();
+		mouseOverButton.perform();*/
 		waitforElement(shopForAPlanOptionZipcodeFieldBox);
 		shopForAPlanOptionZipcodeFieldBox.sendKeys(zipcode);
 		sleepBySec(1);
@@ -2910,7 +2911,8 @@ for (int i = 0; i < initialCount + 1; i++) {
 			CommonUtility.waitForPageLoadNew(driver, vppTop, 30);
 		}
 		  sleepBySec(2);
-		  moveMouseToElement(vppTop);
+//		  moveMouseToElement(vppTop);
+		  jsMouseOver(vppTop);
 			return new VPPPlanSummaryPage(driver);
 	}
 

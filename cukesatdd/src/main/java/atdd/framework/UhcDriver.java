@@ -1188,101 +1188,46 @@ try {
     public boolean waitForPageLoadSafari() {
     	int counter = 3;
     	boolean ready = false;
-//    	if(checkIfPageReadySafari()) {
-    		// Solution 1 - Check if overlay displayed
-    		/*do {
-    			try {
-    				threadsleep(2);
-    				WebElement overlay = driver.findElement(By.xpath("//body/div[@id='overlay']"));
-    				if(!overlay.isDisplayed()) {
-    					ready = true;
-    					break;
-    				}
-    			} catch(WebDriverException e) {*//**decrement counter and retry*//*}
+    	//Sets FluentWait Setup
+    	List<WebElement> loadingScreen = null;
+    	FluentWait<WebDriver> fwait = new FluentWait<WebDriver>(driver)
+    			.withTimeout(Duration.ofSeconds(10))
+    			.pollingEvery(Duration.ofMillis(100))
+    			.ignoring(NoSuchElementException.class)
+    			.ignoring(TimeoutException.class);
 
-    			System.out.println("Waiting for page to load");
-    			counter--;
-
-    		} while(counter > 0);*/
-    		
-    		
-			/*do {
-				try {
-					threadsleep(2);
-					// Solution 2 - get all elements of overlays and wait till css value of display is none
-					List<WebElement> overlays = driver.findElements(By.xpath("//div[@id='overlay' or  @id='loading_fader']"));
-					int overlayInvisible = 0;
-					if(overlays.size() > 0) {
-						for(WebElement overlay: overlays) {
-							String display = overlay.getCssValue("display");
-//							System.out.println("Overlay Display " +display);
-							if(display.equalsIgnoreCase("none")) {
-								overlayInvisible++;
-							}
-						}
-					}
-					if(overlays.size() == overlayInvisible) {
-						ready = true;
-						break;
-					}
-					
-					// Solution 3 - Using explicit wait to check if all overlays are invisible
-					WebDriverWait wait = new WebDriverWait(driver, 10);
-					List<WebElement> overlays = driver.findElements(By.xpath("//div[@id='overlay' or  @id='loading_fader']"));
-					ready = wait.until(ExpectedConditions.invisibilityOfAllElements(overlays));
-					if(ready) {
-						break;
-					}
-					
-				} catch (WebDriverException e) {*//**decrement counter and retry*//*}
-				System.out.println("Waiting for page to load");
-				counter--;
-			} while(counter > 0);*/
-    		
-    		//Sets FluentWait Setup
-    		for(; counter > 0; counter--) {
-    			threadsleep(3);
-    			List<WebElement> loadingScreen = null;
-    			FluentWait<WebDriver> fwait = new FluentWait<WebDriver>(driver)
-    					.withTimeout(Duration.ofSeconds(7))
-    					.pollingEvery(Duration.ofMillis(500))
-    					.ignoring(NoSuchElementException.class)
-    					.ignoring(TimeoutException.class);
-
-    			// First checking to see if the loading indicator is found
-    			// we catch and throw no exception here in case they aren't ignored
-    			try {
-    				System.out.println("Waiting to check if Loading screen is present");
-    				loadingScreen = fwait.until(new Function<WebDriver, List<WebElement>>() {
-    					public List<WebElement> apply(WebDriver driver) {
-    						return driver.findElements(By.xpath("//body//div[(@id='overlay' and not(./ancestor::footer)) or  @id='loading_fader' or @class='loading-block']"));
-    					}
-    				});
-    			} catch (Exception e) {}
-
-    			// checking if loading indicator was found and if so we wait for it to
-    			// disappear
-    			WebDriverWait wait = new WebDriverWait(driver, 7);
-    			if(!CollectionUtils.isEmpty(loadingScreen)) {
-    				System.out.println("Loading screen visible!!! Waiting till it disappears");
-    				try {
-    					ready = wait.until(ExpectedConditions
-    							.invisibilityOfAllElements(loadingScreen));
-    									//.invisibilityOfElementLocated(By.xpath("//div[@id='overlay' or  @id='loading_fader' or @class='loading-block']")));
-    				} catch(NoSuchElementException e) {
-    					//If no loading screen element found, page is ready
-    					ready = true;
-    				} catch(TimeoutException t) {
-    					//If script timed out finding loading screen element, page is ready
-    					ready = true;
-    				}
-    				System.out.println("Loading screen disappeared, page is ready.");
-    				break;
-    			} else {
-    				System.out.println("No loading screen element(s) found");
+    	// First checking to see if the loading indicator is found
+    	// we catch and throw no exception here in case they aren't ignored
+    	try {
+    		System.out.println("Waiting to check if Loading screen is present");
+    		loadingScreen = fwait.until(new Function<WebDriver, List<WebElement>>() {
+    			public List<WebElement> apply(WebDriver driver) {
+    				return driver.findElements(By.xpath("//body//div[(((@id='overlay' and not(./ancestor::footer)) or @id='loading_fader' or @class='loading-block') and not(contains(@style,'none')))]"));
     			}
+    		});
+    	} catch (Exception e) {}
+
+
+    	// checking if loading indicator was found and if so we wait for it to
+    	// disappear
+    	if(!CollectionUtils.isEmpty(loadingScreen)) {
+    		System.out.println("Loading screen visible!!! Waiting till it disappears");
+    		WebDriverWait wait = new WebDriverWait(driver, 7);
+    		try {
+    			ready = wait.until(ExpectedConditions
+    					.invisibilityOfAllElements(loadingScreen));
+    			//.invisibilityOfElementLocated(By.xpath("//div[@id='overlay' or  @id='loading_fader' or @class='loading-block']")));
+    		} catch(NoSuchElementException e) {
+    			//If no loading screen element found, page is ready
+    			ready = true;
+    		} catch(TimeoutException t) {
+    			//If script timed out finding loading screen element, page is ready
+    			ready = true;
     		}
-//    	}
+    		System.out.println("Loading screen disappeared, page is ready.");
+    	} else {
+    		System.out.println("No loading screen element(s) found");
+    	}
     	return ready;
     }
 
