@@ -404,9 +404,6 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	
 	@FindBy(xpath = "//button[contains(@id,'addDrug')]")
 	public WebElement AddMyDrugsBtn;
-	
-	@FindBy(xpath = "//body/div[@id='overlay']")
-	private WebElement overlayFilm;	
 
    	String ChatSamText= "Chat with a Licensed Insurance Agent";
 
@@ -1407,6 +1404,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		waitforElement(shoppingCartIcon);
 //		shoppingCartIcon.click();
 		jsClickNew(shoppingCartIcon);
+		waitForPageLoadSafari();
 		if(driver.getCurrentUrl().contains("profile")) {
 			return new VisitorProfilePage(driver);
 		}else {

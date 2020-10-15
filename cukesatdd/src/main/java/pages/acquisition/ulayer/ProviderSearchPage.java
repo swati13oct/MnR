@@ -281,11 +281,14 @@ public class ProviderSearchPage extends UhcDriver {
 		MRConstants.PROV_NAME=providerSaved;
 		
 		if(driver.findElements(By.xpath("//*[@data-test-id='button-view-saved-provider']")).size() > 0)
-			ViewsaveOldbtn.click();
+//			ViewsaveOldbtn.click();
+			jsClickNew(ViewsaveOldbtn);
 		else if(driver.findElements(By.xpath("//button[@data-test-id='button-close']")).size() > 0){
-			Viewsavebtn.click();
+//			Viewsavebtn.click();
+			jsClickNew(Viewsavebtn);
 		if(driver.findElements(By.xpath("//span[text()='Update This Provider']")).size() > 0){
-			ViewSavedProvidersLink.click();
+//			ViewSavedProvidersLink.click();
+			jsClickNew(ViewSavedProvidersLink);
 		}
 		else
 			System.out.println("New Rally page not displayed");

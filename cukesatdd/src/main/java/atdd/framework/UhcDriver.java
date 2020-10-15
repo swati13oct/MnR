@@ -1242,7 +1242,7 @@ try {
     		
     		//Sets FluentWait Setup
     		for(; counter > 0; counter--) {
-//    			threadsleep(2);
+    			threadsleep(3);
     			List<WebElement> loadingScreen = null;
     			FluentWait<WebDriver> fwait = new FluentWait<WebDriver>(driver)
     					.withTimeout(Duration.ofSeconds(7))

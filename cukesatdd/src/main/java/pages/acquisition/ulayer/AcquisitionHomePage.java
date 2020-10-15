@@ -1126,8 +1126,6 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		viewPlansButton.click();
 		// }
 		CommonUtility.checkPageIsReadyNew(driver);
-//		while(validate(overlayFilm, 10)) {/**wait*/}
-//		CommonUtility.waitForElementToDisappear(driver, overlayFilm, 75);
 		waitForPageLoadSafari();
 			
 		CommonUtility.waitForPageLoadNew(driver, zipcodeChangeLink, 30);
