@@ -319,7 +319,7 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(linkText = "Find Care & Costs")
 	private WebElement findCareCost;
 	
-	@FindBy(xpath = " //h1[@class='main-heading margin-none']")
+	@FindBy(xpath = "//h1[@class='main-heading margin-none']")
 	private WebElement EOBHeading;
 	
 	@FindBy(xpath= "//nav[@id='sub-nav']//a[contains(text(),'Explanation of Benefits')]")
@@ -4346,6 +4346,7 @@ public class AccountHomePage extends UhcDriver {
 				try {
 					EOBLINK.click(); 					
 					CommonUtility.checkPageIsReadyNew(driver);
+					Thread.sleep(1000);
 					System.out.println("*** EOB Link  clicked ***");
 					//agentstatusReady.click();
 					//System.out.println("*** agent status clicked ***");
