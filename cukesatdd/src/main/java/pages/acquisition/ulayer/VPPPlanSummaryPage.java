@@ -1700,7 +1700,6 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			jsClickNew(enrollForPlan);
 		}
 		CommonUtility.checkPageIsReadyNew(driver);
-		checkIfPageReadySafari();
 		CommonUtility.waitForPageLoadNew(driver, NextBtn, 30);
 		if(driver.getCurrentUrl().contains("welcome")){
 			System.out.println("OLE Welcome Page is Displayed");
@@ -2775,7 +2774,6 @@ for (int i = 0; i < initialCount + 1; i++) {
 			List<WebElement>  listOfPlans=driver.findElements(By.xpath(testPlanXpath));
 			int expMatch=1;
 			Assert.assertTrue("PROBLEM - unable to locate plan='"+plan+"'.  Expect number of match='"+expMatch+"' | Actual number of match='"+listOfPlans.size()+"'",listOfPlans.size()==expMatch);
-			scrollToView(driver.findElement(By.xpath(testPlanXpath))); //scrolling into view for Safari browser
 			
 			System.out.println("Proceed to validate 'Save Plan' icon appeared before clicking");
 			String initial_savePlanIconXpath="//*[contains(text(),'"+plan+"')]/ancestor::*[contains(@class,'module-plan-overview')]//*[contains(@aria-selected,'false')]"+savePlanImgXpath;
@@ -2796,6 +2794,7 @@ for (int i = 0; i < initialCount + 1; i++) {
 			System.out.println("Proceed to click to save plan");
 			WebDriverWait d=new WebDriverWait(driver, 20);
 			d.until(ExpectedConditions.elementToBeClickable(By.xpath(initial_savePlanIconXpath)));
+			scrollToView(listOfSavePlanIcons.get(0));	//scrolling into view for Safari browser
 			jsClickNew(listOfSavePlanIcons.get(0));
 
 			System.out.println("Click to close on the create profile popup");
@@ -2891,7 +2890,6 @@ for (int i = 0; i < initialCount + 1; i++) {
 
 	public VPPPlanSummaryPage navagateToShopAPlanAndFindZipcode(String zipcode, String countyName, String isMultiCounty) {
 		System.out.println("Proceed to go to top menu to select 'Shop A Plan' option and enter zipcode '"+zipcode+"' to find plan");
-		waitForPageLoadSafari();
 //		Actions builder = new Actions(driver);
 		scrollToView(topMenushopForAPlanOption);
 		jsMouseOver(topMenushopForAPlanOption);
@@ -2900,20 +2898,19 @@ for (int i = 0; i < initialCount + 1; i++) {
 		waitforElement(shopForAPlanOptionZipcodeFieldBox);
 		shopForAPlanOptionZipcodeFieldBox.sendKeys(zipcode);
 		sleepBySec(1);
-		shopForAPlanOptionFindPlanButton.click();
+//		shopForAPlanOptionFindPlanButton.click();
+		jsClickNew(shopForAPlanOptionFindPlanButton);
+		sleepBySec(2);
 		if (isMultiCounty.equalsIgnoreCase("yes")) {
 			System.out.println("Handle mutliple county");
 			CommonUtility.waitForPageLoad(driver, countyModal, 45);
-			driver.findElement(By.xpath("//div[@id='selectCounty']//a[text()='" + countyName + "']")).click();
-			CommonUtility.waitForPageLoadNew(driver, vppTop, 30);
-					
-		}else{
-			CommonUtility.waitForPageLoadNew(driver, vppTop, 30);
+			jsClickNew(driver.findElement(By.xpath("//div[@id='selectCounty']//a[text()='" + countyName + "']")));
 		}
-		  sleepBySec(2);
-//		  moveMouseToElement(vppTop);
-		  jsMouseOver(vppTop);
-			return new VPPPlanSummaryPage(driver);
+		
+		waitForPageLoadSafari();
+		CommonUtility.waitForPageLoadNew(driver, vppTop, 30);
+		sleepBySec(2);
+		return new VPPPlanSummaryPage(driver);
 	}
 
 	public VPPPlanSummaryPage navagateToChangeZipcodeOptionToChangeZipcode(String zipcode, String countyName, String isMultiCounty) {
@@ -2949,6 +2946,8 @@ for (int i = 0; i < initialCount + 1; i++) {
 		String headerPath=determineHeaderPath(planType);
 		driver.navigate().refresh();
 		sleepBySec(3);
+		waitForPageLoadSafari();
+		validate(planListContainer);
 		List<String> listOfTestPlans = Arrays.asList(savedPlans.split(","));
 		String unsavePlan=listOfTestPlans.get(0);
 		System.out.println("Proceed to unsave 1st plan from input '"+unsavePlan+"'");
@@ -2997,6 +2996,8 @@ for (int i = 0; i < initialCount + 1; i++) {
 		driver.navigate().refresh();
 		sleepBySec(3);
 		CommonUtility.checkPageIsReadyNew(driver);
+		waitForPageLoadSafari();
+		validate(planListContainer);
 		System.out.println("Validate first plan on list is saved and second plan on list is unsaved");
 		for (int i=0; i<listOfTestPlans.size(); i++) {
 			if (i==1) { //In the previous steps the plan 0 is unsaved so we will validate plan 1 is still saved
@@ -3411,7 +3412,6 @@ for (int i = 0; i < initialCount + 1; i++) {
 		//jsClickNew(Start_ApplicationBtn);
 		validateNew(resumeApplication, 30);
 		resumeApplication.click();
-		checkIfPageReadySafari();
 		System.out.println("Resume application link clicked successfully");
 	}
 	public void EnterDataForResumeApp(String ApplicationID,String DOB,String zipcode) throws InterruptedException{
