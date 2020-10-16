@@ -9,7 +9,7 @@
 
     <properties>
         <selenium.version>3.141.59</selenium.version>
-        <cucumber.version>2.4.0</cucumber.version>
+        <cucumber.version>1.2.5</cucumber.version>
         <project.build.sourceEncoding>ISO-8859-1</project.build.sourceEncoding>
         <project.reporting.outputEncoding>ISO-8859-1</project.reporting.outputEncoding>
     </properties>
