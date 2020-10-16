@@ -1269,7 +1269,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		scrollToView(footerAboutUsLink);
 		jsClickNew(footerAboutUsLink);
 		CommonUtility.checkPageIsReadyNew(driver);
-		validateNew(aboutUsHeader);
+		validateNew(aboutUsHeader, 30);
 		if (getTitle().contains("About UnitedHealthcare")) {
 			return new AboutUsAARPPage(driver);
 		}
@@ -2356,6 +2356,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		SecondarySearchInput.sendKeys(str);
 		CommonUtility.waitForPageLoadNewForClick(driver, SecondarySearchBtn, 30);
 		SecondarySearchBtn.click();
+		waitForPageLoadSafari();
 		CommonUtility.waitForPageLoadNew(driver, SearchResults, 60);
 
 	}

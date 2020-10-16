@@ -2917,23 +2917,29 @@ for (int i = 0; i < initialCount + 1; i++) {
 		System.out.println("Proceed to go to plan overview section to enter zipcode '"+zipcode+"' to find plan'");
 		try {
 			//if change zip code link is there then click it, once you used it then it will only display field box going forward.
-			planOverviewChangeZipCodeLink.click();
+//			planOverviewChangeZipCodeLink.click();
+			jsClickNew(planOverviewChangeZipCodeLink);
 		} catch (Exception e) {
 			System.out.println("Change ZipCode link already not on the page, proceed to update zipcode for search directly");
 		}
 		//if field box already there then clear it if left over text from prior run
-		planOverviewZipCodeFieldBox.sendKeys(Keys.CONTROL + "a");
-		planOverviewZipCodeFieldBox.sendKeys(Keys.DELETE);
+		validate(planOverviewZipCodeFieldBox);
+		planOverviewZipCodeFieldBox.clear();
+		/*planOverviewZipCodeFieldBox.sendKeys(Keys.CONTROL + "a");
+		planOverviewZipCodeFieldBox.sendKeys(Keys.DELETE);*/
 		//enter zipcode
 		planOverviewZipCodeFieldBox.sendKeys(zipcode);
-		planOverviewFindPlanButton.click();
+		sleepBySec(1);
+//		planOverviewFindPlanButton.click();
+		jsClickNew(planOverviewFindPlanButton);
 
 		if (isMultiCounty.equalsIgnoreCase("yes")) {
 			System.out.println("Handle mutliple county case");
 			CommonUtility.waitForPageLoad(driver, countyModal, 45);
-			driver.findElement(By.xpath("//div[@id='selectCounty']//a[text()='" + countyName + "']")).click();
+			jsClickNew(driver.findElement(By.xpath("//div[@id='selectCounty']//a[text()='" + countyName + "']")));
 		}
 		sleepBySec(3);
+		waitForPageLoadSafari();
 		scrollToView(vppTop);
 		if(driver.findElement(By.xpath("//*[contains(text(),'"+zipcode+" "+countyName+"')]")).isDisplayed()) {
 			return new VPPPlanSummaryPage(driver);
