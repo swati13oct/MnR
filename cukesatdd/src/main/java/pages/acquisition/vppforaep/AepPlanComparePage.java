@@ -78,7 +78,9 @@ public class AepPlanComparePage extends UhcDriver {
 					flag = true;
 					break;
 				}
-				flag = false;break;
+				flag = false;
+				tmpUIString2 = tmpUIString1;
+				break;
 
 			}else if(key.trim().equals(columnName.trim())) {
 				counter++;
