@@ -431,7 +431,8 @@ public class MemberAuthPage extends UhcDriver {
 					//temp 	Assert.assertTrue("PROBLEM - superuser dashboard banner still not showing after 2 min", validate(SuperUser_DashboardBanner,0));
 					//temp }
 					// waitforElement(SuperUser_DashboardBanner);
-					if (driver.getCurrentUrl().contains("/dashboard") && SuperUser_DashboardBanner.isDisplayed()) {
+					//temp if (driver.getCurrentUrl().contains("/dashboard") && SuperUser_DashboardBanner.isDisplayed()) {
+					if (driver.getCurrentUrl().contains("/dashboard")) {
 						System.out.println("CSR Dashboard Page is displayed for the Member");
 						checkModelPopup(driver,2);
 						return new AccountHomePage(driver);
