@@ -383,6 +383,10 @@ public class AepPlanDetailsPage extends UhcDriver {
 					benefitValueUI = benefitValueUI.replace("-opensinnewwindow", "");
 					benefitValueUI = benefitValueUI.replace("opensinanewwindow", "");
 				}
+				
+				if(columnName.contains("eye exam")&&benefitValue.endsWith("1")) {
+					benefitValue = 	StringUtils.trimTrailingCharacter(benefitValue, '1');
+				}
 			}
 			//removing footnote values from the end of the key values if any
 			
