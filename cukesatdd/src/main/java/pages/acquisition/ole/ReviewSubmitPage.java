@@ -15,6 +15,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 
 import acceptancetests.acquisition.ole.oleCommonConstants;
 import acceptancetests.util.CommonUtility;
@@ -516,7 +517,14 @@ public class ReviewSubmitPage extends UhcDriver{
 				System.out.println("OLE Enrollment Submission Confirmation Page is Displayed");
 				return new OLEconfirmationPage(driver);
 			}
-
+			else{	
+				String Url= driver.getCurrentUrl();
+				String urlTextArray[] = Url.split("/");
+				String actuaUrl = urlTextArray[urlTextArray.length-1];
+				String exp="confirmation";
+				Assert.assertTrue(actuaUrl.equalsIgnoreCase(exp), "Confirmation page is not displayed");
+			
+			}
 		}
 		return null;	
 		}
@@ -987,7 +995,7 @@ else {
     		} else if(driver.findElement(By.xpath("//*[contains(text(), 'Street Address')]//following-sibling::*"))!=null) {				
         	
         	String PermStreetDisplayed = StreetDisplay.getText();
-    		if(PermStreetDisplayed.contains(Perm_Street)){
+    		if(PermStreetDisplayed.equalsIgnoreCase(Perm_Street)){
     			flag = (!flag)?false:true;
     			System.out.println(Perm_Street+" : "+PermStreetDisplayed+" : "+flag);
     		}else flag =false;
@@ -1002,7 +1010,7 @@ else {
         	
     		String PermCityDisplayed = CityDisplay.getText();
     	
-    		if(PermCityDisplayed.contains(Perm_city)){
+    		if(PermCityDisplayed.equalsIgnoreCase(Perm_city)){
     			flag = (!flag)?false:true;
     			System.out.println(Perm_city+" : "+PermCityDisplayed+" : "+flag);
     		}else flag =false;
@@ -1055,7 +1063,7 @@ else {
         }
 
 		if(validate(Submit_Disclaimer) && validate(Enrollment_Disclaimer_Text)){
-			if(Enrollment_Disclaimer_Text.getText().contains("Submitting your enrollment application electronically")){
+			if(Enrollment_Disclaimer_Text.getText().equalsIgnoreCase("Submitting your enrollment application electronically")){
 				flag = (!flag)?false:true;
 				System.out.println("Submit Enrollment Disclaimer is Displayed  : "+flag);
 			}
@@ -1063,7 +1071,7 @@ else {
 		}else flag = false;
 
 		if(validate(SubmitApplicationBtn)){
-			if(SubmitApplicationBtn.isEnabled()){
+			if(SubmitApplicationBtn.isDisplayed()){
 				flag = (!flag)?false:true;
 				System.out.println("Submit Application Button is displayed and Enabled : "+flag);
 			}
