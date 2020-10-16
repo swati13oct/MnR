@@ -623,6 +623,7 @@ public class PlanRecommendationEngineStepDefinition {
 	@When("^user navigates to Zip Code page from vpp plans$")
 	public void user_navigates_to_zipcode_page_fromvpp_pdp() {
 		PlanRecommendationEngineResultsPage planSelectorResultspage =  new PlanRecommendationEngineResultsPage(wd);
+		checkpopup();
 		planSelectorResultspage.vppToPre();
 		PlanRecommendationEngineLandingAndZipcodePages planSelectorhomepage =  new PlanRecommendationEngineLandingAndZipcodePages(wd);
 		planSelectorhomepage.navigatezipcodepage();

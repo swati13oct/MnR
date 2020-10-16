@@ -186,19 +186,19 @@ public class PlanRecommendationEngineHeaderAndFooter extends UhcDriver {
     @FindBy(css = "#subnav_3 div[class$='content-1'] ul>li:nth-of-type(4)>a")
     private WebElement headerCostbasicsLink;
     
-    @FindBy(css = "#subnav_3 div[class$='content-2'] li:nth-of-type(1)>a")
+    @FindBy(css = "#subnav_3 div[class$='content-2'] ul:nth-of-type(1) li:nth-of-type(1)>a")
     private WebElement headerMedicareadvantageLink;
     
-    @FindBy(css = "#subnav_3 div[class$='content-2'] li:nth-of-type(2) a") //Geotargetting
+    @FindBy(css = "#subnav_3 div[class$='content-2'] ul:nth-of-type(1) li:nth-of-type(2)>a") //Geotargetting
     private WebElement headerMedicaresupplemnetLink;
     
-    @FindBy(css = "#subnav_3 div[class$='content-2'] li:nth-of-type(3)>a")
+    @FindBy(css = "#subnav_3 div[class$='content-2'] li:nth-of-type(3)>span>a")
     private WebElement headerMedicareprescriptionLink;
     
-    @FindBy(css = "#subnav_3 div[class$='content-3']>div ul>li a")
+    @FindBy(css = "#subnav_3 div[class$='content-2'] ul:nth-of-type(2) li:nth-of-type(1)>a")
     private WebElement headerEnrollment;
     
-    @FindBy(css = "#subnav_3 div[class$='content-3'] li:nth-of-type(1)>a")
+    @FindBy(css = "#subnav_3 div[class$='content-2'] ul:nth-of-type(2) li:nth-of-type(2)>a")
     private WebElement headerFAQLink;
 
 //'Get Help Choosing' is Inside Shop Menu
