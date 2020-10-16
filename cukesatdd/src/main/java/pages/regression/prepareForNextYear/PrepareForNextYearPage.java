@@ -44,6 +44,11 @@ public class PrepareForNextYearPage extends PrepareForNextYearBase {
 	PrepareForNextYearGroup pnfyGroup=new PrepareForNextYearGroup(driver);
 	PrepareForNextYearSars pnfySar=new PrepareForNextYearSars(driver);
 
+	public boolean hasPinkBar() {
+		checkModelPopup(driver,1);
+		return validate(superUserPinkBanner,0);
+	}
+	
 	public PrepareForNextYearPage fromBenefitsPgNavigateToPrepareForNextYearPage(String planType, String memberType, boolean expComboTab) {
 		System.out.println("TEST - attempt to click the PrepareForNextYear tab to go to the PrepareForNextYear page...");
 		if (noWaitValidate(prepareForNextYearTab)) {

@@ -155,6 +155,9 @@ public class PrepareForNextYearWebElements  extends UhcDriver {
 	@FindBy(xpath="//div[contains(@class,'loading-block') and contains(@style,'block')]")
 	protected WebElement loadingSpinner;
 
+	@FindBy(xpath="//div[contains(@data-ng-if,'superUser') and contains(@class,'alert-message')]")
+	protected WebElement superUserPinkBanner;
+	
 	@FindBy(xpath="//a[@id='preparefornextyear']")
 	protected WebElement prepareForNextYearTab;
 	
