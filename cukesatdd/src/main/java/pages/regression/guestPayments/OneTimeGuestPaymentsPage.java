@@ -217,7 +217,7 @@ public class OneTimeGuestPaymentsPage extends OneTimeGuestPaymentWebElements {
 		CommonUtility.checkPageIsReadyNew(driver);
 		CommonUtility.waitForPageLoadNew(driver, reviewAndSubmitPageHeader, 45);
 
-		if (driver.getCurrentUrl().contains("review-submit")) {
+		if (driver.getCurrentUrl().contains("review-and-submit")) {
 			System.out.println(">>>>>>>>>>Review Guest Payments page is displayed<<<<<<<<<<");
 			return new ReviewOneTimeGuestPaymentsPage(driver);
 		} else {
@@ -242,6 +242,28 @@ public class OneTimeGuestPaymentsPage extends OneTimeGuestPaymentWebElements {
 
 		pastAmountCurrentChargesRadioButton.click();
 		System.out.println(">>>>>>>>Past Amount and Current charges due radio button is clicked<<<<<<<<<<<");
+
+		eftCheckingRadioButton.click();
+		System.out.println(">>>>>>>>>>>EFT Checking Account Option is selected<<<<<<<<<<<<<<<<<<<<<<");
+
+		validateTheeftAccDetailsIframeforEFTAcc();
+	}
+	
+	public void selectAmountCurrentChargesAndCreditCard() {
+
+		CurrentChargesRadioButton.click();
+		System.out.println(">>>>>>>>Current charges due radio button is clicked<<<<<<<<<<<");
+
+		creditcardRadioButton.click();
+		System.out.println(">>>>>>>>>>>Credit Card Option is selected<<<<<<<<<<<<<<<<<<<<<<");
+
+		validateTheAddCardDetailsIframeforCreditCard();
+	}
+
+	public void selectAmountCurrentChargesAndEFTAcc() {
+
+		CurrentChargesRadioButton.click();
+		System.out.println(">>>>>>>>Current charges due radio button is clicked<<<<<<<<<<<");
 
 		eftCheckingRadioButton.click();
 		System.out.println(">>>>>>>>>>>EFT Checking Account Option is selected<<<<<<<<<<<<<<<<<<<<<<");

@@ -104,7 +104,7 @@ Feature: 1.06.7 Member Guest Payments Page - Member Auth - PROD
     # | 10000 | memberWithPD     |              |            | true   | false   | AARP      |
       | 10000 | memberWithoutPD   | 920736343-1 |  12/27/1953| false  | true   | UHC       |
       | 10000 | memberWithNoDues  | 904498840-1 | 06/03/1933 | false  | false  | RETIREE   |
-      | 10000 | memberWithBOTHDues| 966369983-1  | 09/20/1940 | true | true  | RETIREE   |
+    #  | 10000 | memberWithBOTHDues| 966369983-1  | 09/20/1940 | true | true  | RETIREE   |
 
   @prod_guestPayment06 @prod_ErrorsAndContentOneTimePayment @prod_otherAmountErrorAndContent
   Scenario Outline: TID: <TID> - To validate the One time payment page with different error scenarios
@@ -120,7 +120,7 @@ Feature: 1.06.7 Member Guest Payments Page - Member Auth - PROD
       | Other Amount | 0.50 |
     And I will get an error message Amount must exceed 1.00
     Then I will entered other amount Due
-      | Other Amount | 250000 |
+      | Other Amount | 1.00 |
     And I will get an error message Cannot exceed annual remaining amount
     Then I select and entered other amount Due and choose a EFT Checking acc payment Method
       | Other Amount | <otherAmountDue> |
@@ -143,7 +143,7 @@ Feature: 1.06.7 Member Guest Payments Page - Member Auth - PROD
       | Date of Birth     |  <dob>     |
     And I will click Next to proceed to the Make a One-time payment page
     And I validate all the header and page elements on One-time payment page
-    Then  I select Past Amount & current charges Due and choose a Credit Debit payment Method
+    Then  I select current charges Due and choose a Credit Debit payment Method
     Then I will enter Credit card Details
       | Name             | <Name>             |
       | CreditCardNumber | <CreditCardNumber> |
@@ -160,7 +160,7 @@ Feature: 1.06.7 Member Guest Payments Page - Member Auth - PROD
 
     Examples:
       | TID   | planType | memberID    | dob        | siteName | Name                 | CreditCardNumber | validMonth | validYear | Email          |
-      | 10000 | MAPD     |  966369983-1  | 09/20/1940  | AARP     | GuestPayCC        | 4121600170691201 |         01 |      2021    | test@optum.com |
+      | 10000 | MAPD     |  007311322-1  | 08/11/1949 | AARP     | GuestPayCC        | 4121600170691201 |         01 |      2021    | test@optum.com |
 
 
   @prod_guestPayment08 @prod_makeOneTimePayment @prod_pastAmount @eftCheckingFLow
@@ -174,7 +174,7 @@ Feature: 1.06.7 Member Guest Payments Page - Member Auth - PROD
       | Date of Birth     |  <dob>     |
     And I will click Next to proceed to the Make a One-time payment page
     And I validate all the header and page elements on One-time payment page
-    Then  I select Past Amount & current charges Due and choose a Credit Debit payment Method
+    Then  I select current charges Due and choose a EFT Checking acc payment Method
     Then I will enter EFT Checking Account Details
       | AccountHoldersFirstName  | <FirstName>  |
       | AccountHoldersMiddleName | <MiddleName> |
@@ -191,7 +191,7 @@ Feature: 1.06.7 Member Guest Payments Page - Member Auth - PROD
 
     Examples:
       | TID   | planType | memberID      | dob        | siteName | FirstName | MiddleName | LastName  | accountNo  | routingNo | Email          |
-      | 10000 | MAPD     |  966369983-1  | 09/20/1940 | AARP     | Guest     | A          | Payments1 | 1234512345 | 123123123 | test@optum.com |
+      | 10000 | MAPD     |  007311322-1  | 08/11/1949 | AARP     | Guest     | A          | Payments1 | 1234512345 | 123123123 | test@optum.com |
 
 
 
@@ -218,7 +218,7 @@ Feature: 1.06.7 Member Guest Payments Page - Member Auth - PROD
 
     Examples:
       | TID   | planType | memberID      | dob           | siteName    |Name                 | CreditCardNumber | validMonth | validYear |otherAmountDue    |
-      | 10000 | MAPD     | 007311322-1   | 08/11/1949   |   AARP      |CreditCardAutomation  | 4121600170691201 |         01 |      2021 |  10.05           |
+      | 10000 | MAPD     | 007311322-1   | 08/11/1949   |   AARP      |CreditCardAutomation | 4121600170691201 |         01 |      2021 |  10.05           |
 
 
   @prod_guestPayment10 @prod_makeOneTimePayment @prod_otherAmount @prod_eftCheckingFLow
@@ -279,4 +279,4 @@ Feature: 1.06.7 Member Guest Payments Page - Member Auth - PROD
 
     Examples:
       | TID   | planType | memberID    | dob        | siteName | FirstName | MiddleName | LastName  | accountNo  | routingNo | otherAmountDue | Name                 | CreditCardNumber | validMonth | validYear |
-      | 10000 | MAPD     | 944419140-1 | 07/13/1941 | AARP     | Guest     | A          | Payments1 | 1234512345 | 123123123 | 10.05          | CreditCardAutomation || 4121600170691201 |         01 |      2021 |   |
+      | 10000 | MAPD     | 944419140-1 | 07/13/1941 | AARP     | Guest     | A          | Payments1 | 1234512345 | 123123123 | 10.05          | CreditCardAutomation | 4111111111111111 | 04         | 2024      |

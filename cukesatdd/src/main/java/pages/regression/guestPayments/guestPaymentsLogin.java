@@ -203,7 +203,7 @@ public class guestPaymentsLogin extends guestPaymentsLoginWebElements{
 		checkModelPopup(driver,5);
 		CommonUtility.waitForPageLoad(driver, magnifyIcon, 5);
 		
-		if (driver.getCurrentUrl().contains("not-available")) {
+		if (driver.getCurrentUrl().contains("member-not-found")) {
 			return new guestPaymentsLogin(driver);
 		}
 		
@@ -241,7 +241,7 @@ public class guestPaymentsLogin extends guestPaymentsLoginWebElements{
 		System.out.println(">>>>>>Sign In button is clicked<<<<<<");
 		CommonUtility.checkPageIsReady(driver);
 		
-		if (driver.getCurrentUrl().contains("medicare.uhc.com")) {
+		if (driver.getCurrentUrl().contains("healthsafe")) {
 			return new  HSIDLoginPage(driver);
 		}
 		

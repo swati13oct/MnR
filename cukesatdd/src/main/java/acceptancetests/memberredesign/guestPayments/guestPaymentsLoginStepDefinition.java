@@ -332,7 +332,23 @@ public class guestPaymentsLoginStepDefinition {
 
 
 	}
+	
 
+	@Then("^I select current charges Due and choose a Credit Debit payment Method$")
+	public void validatecurrentchargesDueAndCC() {
+
+		OneTimeGuestPaymentsPage oneTimeGuestPaymentsPage = (OneTimeGuestPaymentsPage) getLoginScenario().getBean(PageConstants.One_Time_Guest_Payments_Page);
+		oneTimeGuestPaymentsPage.selectAmountCurrentChargesAndCreditCard();
+
+	}
+
+	@Then("^I select current charges Due and choose a EFT Checking acc payment Method$")
+	public void validatecurrentchargesDueAndEFT() {
+
+		OneTimeGuestPaymentsPage oneTimeGuestPaymentsPage = (OneTimeGuestPaymentsPage) getLoginScenario().getBean(PageConstants.One_Time_Guest_Payments_Page);
+		oneTimeGuestPaymentsPage.selectAmountCurrentChargesAndEFTAcc();
+
+	}
 	@Then("^I select Past Amount & current charges Due and choose a Credit Debit payment Method$")
 	public void validatePastAmountcurrentchargesDueAndCC() {
 
