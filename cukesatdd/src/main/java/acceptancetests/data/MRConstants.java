@@ -612,11 +612,11 @@ public class MRConstants {
 	public static final String AARP_CHAT_AGENT = "https://stg-wwe.uhc.com/ui/ad/v1/index.html";
 
 	public static String PROV_NAME = "";
-	public static String AARP_GUEST_PAYMENTS_PAGE_URL = "https://www."+ MRScenario.environment +"-paymyaarppremium."+ MRScenario.domain;
-	public static String UHC_GUEST_PAYMENTS_PAGE_URL = "https://www."+ MRScenario.environment +"-paymyuhcpremium."+ MRScenario.domain;
-	public static String RETIREE_GUEST_PAYMENTS_PAGE_URL ="https://www."+ MRScenario.environment +"-paymyuhcpremium."+ MRScenario.domain+"/retiree";
-	public static String PCP_GUEST_PAYMENTS_PAGE_URL = "https://www."+ MRScenario.environment +"-paymypcppremium."+ MRScenario.domain;
-	public static String MEDICA_GUEST_PAYMENTS_PAGE_URL = "https://www."+ MRScenario.environment +"-paymymedicapremium."+ MRScenario.domain;
+	public static String AARP_GUEST_PAYMENTS_PAGE_URL = "https://www."+ MRScenario.environment +"-paymyaarppremium."+ "uhc.com";
+	public static String UHC_GUEST_PAYMENTS_PAGE_URL = "https://www."+ MRScenario.environment +"-paymyuhcpremium."+ "uhc.com";
+	public static String RETIREE_GUEST_PAYMENTS_PAGE_URL ="https://www."+ MRScenario.environment +"-paymyuhcpremium."+ "uhc.com"+"/retiree";
+	public static String PCP_GUEST_PAYMENTS_PAGE_URL = "https://www."+ MRScenario.environment +"-paymypcppremium."+ "uhc.com";
+	public static String MEDICA_GUEST_PAYMENTS_PAGE_URL = "https://www."+ MRScenario.environment +"-paymymedicapremium."+ "uhc.com";
 	public static final String AARP_HAWL = "http://stage-myaarpmedicare.uhc.com/extras";
 	// public static final String
 	// AARP_HAWL="https://stage-medicare.uhc.com/?TARGET=SMSR/healthlineu/health/uhcarticle/hwal-introducing-at-your-best%3fdeeplink=true";
