@@ -1,331 +1,313 @@
-@vppPlanDetailsUHC
-Feature: 2.01.2-Vpp to plan Details UHC Scenarios
+@vppPlanDetailsAARP
+Feature: 1.01.2-Vpp to plan Details AARP Scenarios
 
-  @vppPlanDetailsUHCRegressionMobile @prodSanity @vppPlanDetailsUHCRegression
-  Scenario Outline: UserStory: <TID> -plan type: <plantype> - Verify specific PDF Plan Documents in Plan Details Page for provided plan
-    Given the user is on the uhcmedicaresolutions site landing page
-    When the user performs plan search using following information in UMS site
+  @vppPlanDetailsAARP01 @vppPlanDetailsAARPRun01 @vppPlanDetailsAARPRegression
+  Scenario Outline: TestCaseID: <TCID> - PDF Type: <pdfType> - Verify specific PDF Plan Documents in Plan Details Page for provided plan
+    Given the user is on AARP medicare acquisition site landing page
+    When the user performs plan search using following information in the AARP site
       | Zip Code        | <zipcode>         |
       | County Name     | <county>          |
       | Is Multi County | <isMultutiCounty> |
-    When user views plans of the below plan type in UMS site
+    And the user views the plans of the below plan type in AARP site
       | Plan Type | <plantype> |
-    And the user selects plan year for the UMS site
+    And the user selects plan year for the AARP site
       | Plan Year | <planyear> |
-    Then the user view plan details of the above selected plan in UMS site and validates
+    Then the user view plan details of the above selected plan in AARP site and validates
       | Plan Name | <planName> |
-    Then the user validates following PDF link is displayes with correct document code for UHC
+    Then the user validates following PDF link is displayes with correct document code
       | PDF type     | <pdfType> |
       | DocumentCode | <docCode> |
-    Then the user click on PDF link and validates document code in URL for UHC
+    Then the user click on PDF link and validates document code in URL
       | PDF type     | <pdfType> |
       | DocumentCode | <docCode> |
 
     Examples: 
-      | TID   | zipcode | isMultutiCounty | county      | plantype | planName                                       | pdfType               | docCode                 | planyear |
+      | TCID  | zipcode | isMultutiCounty | county      | plantype | planName                                       | pdfType               | docCode                 | planyear |
       | 00001 |   53503 | No              | Iowa County | MAPD     | UnitedHealthcare Medicare Advantage Open (PPO) | Step Therapy Criteria | Step_Therapy_MCORE_2020 | current  |
 
-  @vppPlanDetailsUHCRegressionMobile @prodSanity @vppPlanDetailsUHCRegression
-  Scenario Outline: UserStory: <TID> -plan type: <plantype> - Verify specific PDF Plan Documents in Plan Details Page for provided plan
-    Given the user is on the uhcmedicaresolutions site landing page
-    When the user performs plan search using following information in UMS site
+  @vppPlanDetailsAARP02 @vppPlanDetailsAARPRun01
+  Scenario Outline: Plan type: <plantype> - PDF Type: <pdfType> - Verify specific PDF Plan Documents in Plan Details Page for provided plan
+    Given the user is on AARP medicare acquisition site landing page
+    When the user performs plan search using following information in the AARP site
       | Zip Code        | <zipcode>         |
       | County Name     | <county>          |
       | Is Multi County | <isMultutiCounty> |
-    When user views plans of the below plan type in UMS site
+    And the user views the plans of the below plan type in AARP site
       | Plan Type | <plantype> |
-    And the user selects plan year for the UMS site
+    And the user selects plan year for the AARP site
       | Plan Year | <planyear> |
-    Then the user view plan details of the above selected plan in UMS site and validates
+    Then the user view plan details of the above selected plan in AARP site and validates
       | Plan Name | <planName> |
-    Then the user validates following PDF link is displayes with correct document code for UHC
+    Then the user validates following PDF link is displayes with correct document code
       | PDF type     | <pdfType> |
       | DocumentCode | <docCode> |
-    Then the user validates the document code is present in the PDF for UHC
+    Then the user validates the document code is present in the PDF
       | PDF type     | <pdfType> |
       | DocumentCode | <docCode> |
 
     Examples: 
-      | TID   | zipcode | isMultutiCounty | county         | plantype | planName                                | pdfType         | docCode             | planyear |
+      | TCID  | zipcode | isMultutiCounty | county         | plantype | planName                                | pdfType         | docCode             | planyear |
       | 00002 |   99210 | No              | Spokane County | MA       | AARP Medicare Advantage Essential (HMO) | Enrollment Form | AAWA20HM4522892_000 | current  |
 
-  @vppPlanDetailsUHC03 @vppPlanDetailsUHCRun01 @vppPlanDetailsUHCRegression
+  @vppPlanDetailsAARP03 @vppPlanDetailsAARPRun01 @vppPlanDetailsAARPRegression
   Scenario Outline: UserStory: <TID> -plan type: <plantype> - Verify Plan costs tab in Plan Details for provided plan
-    Given the user is on the uhcmedicaresolutions site landing page
-    When the user performs plan search using following information in UMS site
+    Given the user is on AARP medicare acquisition site landing page
+    When the user performs plan search using following information in the AARP site
       | Zip Code        | <zipcode>         |
       | County Name     | <county>          |
       | Is Multi County | <isMultutiCounty> |
-    When user views plans of the below plan type in UMS site
+    And the user views the plans of the below plan type in AARP site
       | Plan Type | <plantype> |
-    And the user selects plan year for the UMS site
+    And the user selects plan year for the AARP site
       | Plan Year | <planyear> |
-    Then the user view plan details of the above selected plan in UMS site and validates
+    Then the user view plan details of the above selected plan in AARP site and validates
       | Plan Name | <planName> |
-    Then the user click on Plan costs tab and validates
+    Then the user click on Plan costs tab and validates in AARP site
       | Monthly Premium | <monthlyPremium> |
       | Yearly Premium  | <yearlyPremium>  |
 
     Examples: 
       | TID   | zipcode | isMultutiCounty | county         | plantype | planName                                       | monthlyPremium | yearlyPremium | planyear |
       | 15638 |   53503 | No              | Iowa County    | MAPD     | UnitedHealthcare Medicare Advantage Open (PPO) | $47            | $564          | current  |
-      | 15640 |   99210 | No              | Spokane County | MA       | AARP Medicare Advantage Essential (HMO)        | $0             | $0            | current  |
-      | 15641 |   99210 | No              | Spokane County | SNP      | UnitedHealthcare Dual Complete (HMO D-SNP)     | $25            | $300          | current  |
+      #| 15640 |   99210 | No              | Spokane County | MA       | AARP Medicare Advantage Essential (HMO)        | $0             | $0            | current  |
+      #| 15641 |   99210 | No              | Spokane County | SNP      | UnitedHealthcare Dual Complete (HMO D-SNP)     | $25            | $300          | current  |
 
-  @vppPlanDetailsUHC04 @vppPlanDetailsUHCRun01 @vppPlanDetailsUHCRegression
+  @vppPlanDetailsAARP04 @vppPlanDetailsAARPRun01 @vppPlanDetailsAARPRegression
   Scenario Outline: UserStory: <TID> -plan type: <plantype> - Verify Optional Services tab in Plan Details for provided plan
-    Given the user is on the uhcmedicaresolutions site landing page
-    When the user performs plan search using following information in UMS site
+    Given the user is on AARP medicare acquisition site landing page
+    When the user performs plan search using following information in the AARP site
       | Zip Code        | <zipcode>         |
       | County Name     | <county>          |
       | Is Multi County | <isMultutiCounty> |
-    When user views plans of the below plan type in UMS site
+    And the user views the plans of the below plan type in AARP site
       | Plan Type | <plantype> |
-    And the user selects plan year for the UMS site
+    And the user selects plan year for the AARP site
       | Plan Year | <planyear> |
-    Then the user view plan details of the above selected plan in UMS site and validates
+    Then the user view plan details of the above selected plan in AARP site and validates
       | Plan Name | <planName> |
-    Then the user click on Optional Services tab and add the rider
+    Then the user click on Optional Services tab and add the rider in AARP site
       | Optional Rider  | <optionalRider>  |
       | Monthly Premium | <monthlyPremium> |
-    Then the user click on Plan costs tab and validates
+    Then the user click on Plan costs tab and validates in AARP site
       | Monthly Premium | <monthlyPremium> |
       | Yearly Premium  | <yearlyPremium>  |
 
     Examples: 
       | TID   | zipcode | isMultutiCounty | county        | plantype | planName                                                         | optionalRider   | monthlyPremium | yearlyPremium | planyear |
-      | 15658 |   11516 | No              | Nassau County | MA       | UnitedHealthcare Medicare Advantage Essential (Regional PPO)     | Dental Platinum | $0             | $0            | current  |
+      #| 15658 |   11516 | No              | Nassau County | MA       | UnitedHealthcare Medicare Advantage Essential (Regional PPO)     | Dental Platinum | $0             | $0            | current  |
       | 15662 |   11516 | No              | Nassau County | MAPD     | UnitedHealthcare Medicare Advantage Choice Plan 1 (Regional PPO) | Dental Platinum | $16            | $192          | current  |
 
-  @vppPlanDetailsUHCRegressionMobile @prodSanity 
-  Scenario Outline: TCID - <TID> - plan Type: <plantype> - TO click Back to all plans from Top and bottom of the page and verify redirection back to the VPP-Summary page UHC site
-    Given the user is on the uhcmedicaresolutions site landing page
-    When I access the vpp page
-      | Zip Code | <zipcode> |
-    When user views plans of the below plan type in UMS site
-      | Plan Type | <plantype> |
-    And the user selects plan year for the UMS site
-      | Plan Year | <planyear> |
-    And the user view plan details of the above selected plan in UMS site vpp
-      | Plan Name | <planName> |
-    Then the user clicks on both top and bottom back to plans link and validates its redirection
-
-    Examples: 
-      | TID   | zipcode | planName                                             | plantype | planyear |
-      | 00003 |   33012 | AARP Medicare Advantage Choice Plan 2 (Regional PPO) | MAPD     | current  |
-
-  @vppPlanDetailsUHC06 @vppPlanDetailsUHCRun02 @vppPlanDetailsUHCRegression
-  Scenario Outline: TCID - <TID> - plan Type: <plantype> - OLE Landing from UHC Acquisition site VPP Plan Details
-    Given the user is on the uhcmedicaresolutions site landing page
-    When the user performs plan search using following information in UMS site
+  @vppPlanDetailsAARP05 @vppPlanDetailsAARPRun02 @vppPlanDetailsAARPRegression
+  Scenario Outline: UserStory: <TCID> -plan type: <plantype> - To click Back to all plans from Top and bottom of the plan deatils page and verify redirection back to the VPP-Summary page AARP site
+    Given the user is on AARP medicare acquisition site landing page
+    When the user performs plan search using following information in the AARP site
       | Zip Code        | <zipcode>         |
       | County Name     | <county>          |
       | Is Multi County | <isMultutiCounty> |
-    When user views plans of the below plan type in UMS site
+    #Then user validates plan count for all plan types on plan summary page in the AARP site
+    And the user views the plans of the below plan type in AARP site
       | Plan Type | <plantype> |
-    And the user selects plan year for the UMS site
+    And the user selects plan year for the AARP site
       | Plan Year | <planyear> |
-    Then the user view plan details of the above selected plan in UMS site vpp
+    Then the user view plan details of the above selected plan in AARP site vpp
+      | Plan Name | <planName> |
+      | Plan Type | <plantype> |
+    Then the user clicks on both top and bottom back to plans link and validates its redirection AARP
+
+    Examples: 
+      | TCID  | zipcode | isMultiCounty | county             | plantype | planName                                               | planyear |
+      | 00004 |   90210 | NO            | Los Angeles County | MA       | AARP Medicare Advantage SecureHorizons Essential (HMO) | current  |
+
+  @vppPlanDetailsAARP06 @vppPlanDetailsAARPRun02 @vppPlanDetailsAARPRegression
+  Scenario Outline: <TCID> - Plan type: <plantype> - Verify OLE Landing from VPP Plan Details
+    Given the user lands on AARP medicare acquisition site page
+    When the user performs plan search using following information in the AARP site
+      | Zip Code        | <zipcode>         |
+      | County Name     | <county>          |
+      | Is Multi County | <isMultutiCounty> |
+    And the user views the plans of the below plan type in AARP site
+      | Plan Type | <plantype> |
+    And the user selects plan year for the AARP site
+      | Plan Year | <planyear> |
+    Then the user view plan details of the above selected plan in AARP site and validates
       | Plan Name | <planName> |
     Then the user clicks on Enroll Now in Plan Details Page to start the OLE flow
     Then the user validates the Plan details on OLE
 
     Examples: 
-      | TID   | zipcode | isMultutiCounty | county             | plantype | planName                                                   | planyear |
-      | 00004 |   90210 | NO              | Los Angeles County | MA       | AARP Medicare Advantage SecureHorizons Essential (HMO)     | current  |
-      | 00005 |   90210 | NO              | Los Angeles County | PDP      | AARP MedicareRx Walgreens (PDP)                            | current  |
-      | 00006 |   24571 | YES             | Bedford County     | MAPD     | Piedmont Select Medicare Option One (PPO)                  | current  |
-      | 00007 |   78006 | YES             | Bexar County       | SNP      | UnitedHealthcare Dual Complete Choice (Regional PPO D-SNP) | current  |
+      | TCID  | zipcode | isMultutiCounty | county             | plantype | planName                                                   | planyear |
+      | 00005 |   90210 | NO              | Los Angeles County | MAPD     | AARP Medicare Advantage SecureHorizons Plan 1 (HMO)        | current  |
+      | 00006 |   90210 | NO              | Los Angeles County | PDP      | AARP MedicareRx Walgreens (PDP)                            | current  |
+      | 00007 |   24571 | YES             | Bedford County     | MAPD     | Piedmont Select Medicare Option One (PPO)                  | current  |
+      | 00008 |   78006 | YES             | Bexar County       | SNP      | UnitedHealthcare Dual Complete (HMO D-SNP)								 | current  |
+#      | 00009 |   78006 | YES             | Bexar County       | SNP      | UnitedHealthcare Medicare Gold (Regional PPO C-SNP)        | current  |
 
-  #      | 00008 |   78006 | YES             | Bexar County       | SNP      | UnitedHealthcare Medicare Gold (Regional PPO C-SNP)        | current  |
-  @vppPlanDetailsUHC07 @vppPlanDetailsUHCRun02 @vppPlanDetailsUHCRegression
-  Scenario Outline: TCID - <TID> - plan Type: <plantype> - Verify Provider Search  in UHC site from Plan Details page
-    Given the user is on the uhcmedicaresolutions site landing page
-    When the user performs plan search using following information in UMS site
+  @vppPlanDetailsAARP07 @vppPlanDetailsAARPRun02 @vppPlanDetailsAARPRegression
+  Scenario Outline: UserStory: <TCID> -plan type: <plantype> - Verify Provider Search  in AARP site from Plan Details page
+    Given the user is on AARP medicare acquisition site landing page
+    When the user performs plan search using following information in the AARP site
       | Zip Code        | <zipcode>         |
       | County Name     | <county>          |
       | Is Multi County | <isMultutiCounty> |
-    When user views plans of the below plan type in UMS site
+    And the user views the plans of the below plan type in AARP site
       | Plan Type | <plantype> |
-    And the user selects plan year for the UMS site
+    And the user selects plan year for the AARP site
       | Plan Year | <planyear> |
-    Then the user view plan details of the above selected plan in UMS site and validates
+    Then the user navigates to the plan Details page
       | Plan Name | <planName> |
-    Then the user Click on Look up your Provider button in UMS site
-    When user selects a provider and retuns to VPP plan details page in blayer
-    Then Verify X out of Y provider covered information is displayed on Plan Details page blayer
+    Then the user Click on Look up your Provider button
+    When user selects a provider and retuns to VPP plan details page in ulayer
+    Then Verify X out of Y provider covered information is displayed on Plan Details page Ulayer
 
     Examples: 
-      | TID   | zipcode | isMultutiCounty | county             | plantype | planName                                               | planyear |
-      | 00009 |   90210 | NO              | Los Angeles County | MA       | AARP Medicare Advantage SecureHorizons Essential (HMO) | current  |
+      | TCID  | zipcode | isMultutiCounty | county       | plantype | planName                                               | planyear |
+      | 00010 |   78006 | YES             | Bexar County | MA       | AARP Medicare Advantage SecureHorizons Essential (HMO) | current  |
 
-  @vppPlanDetailsUHC08 @vppPlanDetailsUHCRun03 @vppPlanDetailsUHCRegression
-  Scenario Outline: TCID - <TID> - plan Type: <plantype> - To Verify the drug cost estimator flow for <plantype> through plan details page's Plan Costs tab
-    Given user is on blue layer landing page
-    When user performs plan search using following information in the UMS site
+  @vppPlanDetailsAARP08
+  Scenario Outline: UserStory: <TCID> -plan type: <plantype> -  To Verify the drug cost estimator flow for <plantype> through plan details page's Plan Costs tab
+    Given the user is on the AARP medicare site landing page
+    When user performs plan search using following information in the AARP site
       | Zip Code    | <zipcode>     |
       | County      | <county>      |
       | aep         | <aep>         |
       | currentyear | <currentyear> |
-    When user views plans of the below plan type in UMS site
+    And the user views the plans of the below plan type in AARP site
       | Plan Type | <plantype> |
-    And the user selects plan year for the UMS site
+    And the user selects plan year for the AARP site
       | Plan Year | <planyear> |
-    Then the user navigates to the plan details for the given plan type in UMS site
+    Then the user navigates to the plan details for the given plan type in AARP site
       | Plan Type | <plantype> |
       | Plan Name | <planName> |
-    Then the user navigates to Presciption Drug Benefits tab in UMS site
-    And I verify the plan name in UMS site
-      | PlanName | <planName> |
-    Then user adds drug to drug cost estimator flow for the given plan name in UMS site
+    Then the user navigates to Plan Costs tab in AARP site
+    Then user adds drug to drug cost estimator flow for the given plan name in AARP site
       | PlanName   | <planName>  |
       | Drug Name1 | <drugName1> |
-    And selects drug details in UMS site
+    And selects drug details in ums site
       | Drug Name1 | <drugName1> |
       | Quantity   | <quantity>  |
       | Frequency  | <frequency> |
-    When user successfully adds drug in the UMS site
+    When user successfully adds drug in the ums site
       | Drug Name1 | <drugName1> |
-    Then user adds drug to drug cost estimator flow for the given plan name in UMS site
-      | PlanName   | <planName>  |
-      | Drug Name2 | <drugName2> |
-    And selects drug details for other drugs in UMS site
-      | Drug Name2 | <drugName2> |
-      | Quantity   | <quantity>  |
-      | Frequency  | <frequency> |
-    Then user adds drug to drug cost estimator flow for the given plan name in UMS site
-      | PlanName   | <planName>  |
-      | Drug Name3 | <drugName3> |
-    And selects drug details in UMS site
-      | Drug Name3 | <drugName3> |
-      | Quantity   | <quantity>  |
-      | Frequency  | <frequency> |
-    When user successfully adds drug in the UMS site
-      | Drug Name3 | <drugName3> |
-    Then the user clicks on the Pick a pharmacy button in the DCE flow in UMS site
-    When the user selects the pharmacy type and distance in UMS site
+    Then the user clicks on the Pick a pharmacy button in the DCE flow in AARP site
+    When the user selects the pharmacy type and distance in AARP site
       | Pharmacy Type | <pharmacyType> |
       | Distance      | <distance>     |
-    Then the user selects a pharmacy from the list of pharmacies in UMS site
+    Then the user selects a pharmacy from the list of pharmacies in AARP site
       | Pharmacy Name | <pharmacyName> |
-    Then the user validates the added drugs on See your Estimated Costs page in UMS site
+    Then the user validates the added drugs on See your Estimated Costs page in AARP site
       | Drug Name1 | <drugName1> |
-      | Drug Name2 | <drugName2> |
-      | Drug Name3 | <drugName3> |
-    When the user clicks on Edit Drug List link in UMS site
-    Then Enter your drugs page is displayed to the user in UMS site
-    Then User click on Switch now to select the Generic of the Brand drug added in UMS site
-    Then the user clicks on the Pick a pharmacy button in the DCE flow in UMS site
-    Then the user change the pharmacy type and select new pharmacy in UMS site
+    When the user clicks on Edit Drug List link in AARP site
+    Then Enter your drugs page is displayed to the user in AARP site
+    Then User click on Switch now to select the Generic of the Brand drug added in AARP site
+    Then the user clicks on the Pick a pharmacy button in the DCE flow in AARP site
+    Then the user change the pharmacy type and select new pharmacy in AARP site
       | New Pharmacy Type | <newPharmacyType> |
-    Then the user validates the added drugs on See your Estimated Costs page in UMS site
+    Then the user validates the added drugs on See your Estimated Costs page in AARP site
       | Drug Name1 | <genericName1> |
-      | Drug Name2 | <drugName2>    |
-      | Drug Name3 | <genricName3>  |
-    And the user clicks on Back to Plans button on See Your Estimated Costs page in UMS site
-    And user verifies annual drug cost in the prescription drug tab of UMS site
+    And the user clicks on Back to Plans button on See Your Estimated Costs page in AARP site
+    And user verifies annual drug cost in the Plan Cost tab of AARP site
       | Plan Type | <plantype> |
-    And the user clicks on Back to All Plans button present on details page in UMS site
-    Then user validates Drug information is reflected on plan summary page in UMS site
+    And the user clicks on Back to All Plans button present on details page in AARP site
+    Then user validates Drug information is reflected on plan summary page in AARP site
       | PlanName | <planName> |
 
     Examples: 
-      | TID   | zipcode | county             | drugInitials1 | drugName1 | drugInitials2 | drugName2  | drugInitials3 | drugName3     | pharmacyType     | distance | pharmacyName | plantype | planName                                           | quantity | frequency     | newPharmacyType | genericName1 | genricName3 | aep | currentyear | planyear |
-      | 00010 |   90002 | Los Angeles County | lipi          | Lipitor   | dron          | dronabinol | Adva          | Advair Diskus | Standard Network | 15 miles | CVS PHARMACY | MAPD     | AARP Medicare Advantage SecureHorizons Focus (HMO) |       30 | Every 1 month | Mail Order      | atorvastatin | fluticasone | no  | no          | current  |
+      | TCID  | zipcode | county             | drugInitials1 | drugName1 | drugInitials2 | drugName2  | drugInitials3 | drugName3     | pharmacyType     | distance | pharmacyName                    | plantype | planName                        | quantity | frequency     | newPharmacyType | genericName1 | genricName3 | aep | currentyear | planyear |
+      | 00011 |   90210 | Los Angeles County | lipi          | Lipitor   | dron          | dronabinol | Adva          | Advair Diskus | Preferred Retail | 15 miles | COMMUNITY, A WALGREENS PHARMACY | PDP      | AARP MedicareRx Walgreens (PDP) |       30 | Every 1 month | Mail Order      | atorvastatin | fluticasone | no  | no          | current  |
 
-  @vppPlanDetailsUHCRegressionMobile @prodSanity
-  Scenario Outline: TCID - <TID> - plan Type: <plantype> - Verify Prescription Drug Benefits tab in Plan Details for provided plan
-    Given the user is on the uhcmedicaresolutions site landing page
-    When the user performs plan search using following information in UMS site
+	
+  @vppPlanDetailsAARP09 @vppPlanDetailsAARPRun03 @vppPlanDetailsAARPRegression
+  Scenario Outline: UserStory: <TCID> -plan type: <plantype> - Verify Prescription Drug Benefits tab in Plan Details for provided plan
+    Given the user is on AARP medicare acquisition site landing page
+    When the user performs plan search using following information in the AARP site
       | Zip Code        | <zipcode>         |
       | County Name     | <county>          |
       | Is Multi County | <isMultutiCounty> |
-    When user views plans of the below plan type in UMS site
+    And the user views the plans of the below plan type in AARP site
       | Plan Type | <plantype> |
-    And the user selects plan year for the UMS site
+    And the user selects plan year for the AARP site
       | Plan Year | <planyear> |
-    Then the user view plan details of the above selected plan in UMS site and validates
+    Then the user view plan details of the above selected plan in AARP site and validates
       | Plan Name | <planName> |
-    Then the user click on Prescription Drug Benefits and validates in UHC site
+    Then the user click on Prescription Drug Benefits and validates in AARP site
 
     Examples: 
-      | TID   | zipcode | isMultutiCounty | county             | plantype | planName                                            | planyear |
-      | 00011 |   90210 | NO              | Los Angeles County | MAPD     | AARP Medicare Advantage SecureHorizons Plan 1 (HMO) | current  |
-      | 00012 |   78006 | YES             | Bexar County       | PDP      | AARP MedicareRx Walgreens (PDP)                     | current  |
-      | 00013 |   78006 | YES             | Bexar County       | SNP      | UnitedHealthcare Chronic Complete (HMO C-SNP)       | current  |
+      | TCID  | zipcode | isMultutiCounty | county             | plantype | planName                                            | planyear |
+      | 00013 |   90210 | NO              | Los Angeles County | MAPD     | AARP Medicare Advantage SecureHorizons Plan 1 (HMO) | current  |
+      | 00014 |   78006 | YES             | Bexar County       | PDP      | AARP MedicareRx Walgreens (PDP)                     | current  |
+      | 00015 |   78006 | YES             | Bexar County       | SNP      | UnitedHealthcare Chronic Complete (HMO C-SNP)       | current  |
 
-  @vppPlanDetailsUHC10 @vppPlanDetailsUHCRun03
-  Scenario Outline: TID - <TID> - plan Type: <plantype> - To verify links displayed in Global footer section on plan details page in UMS site
-    Given the user is on the uhcmedicaresolutions site landing page
-    When the user performs plan search using following information in UMS site
+  @vppPlanDetailsAARP10 @vppPlanDetailsAARPRun03
+  Scenario Outline: UserStory: <TCID> -plan type: <plantype> - To verify links displayed in the global footer on plan details page for AARP site
+    Given the user is on AARP medicare acquisition site landing page
+    When the user performs plan search using following information in the AARP site
       | Zip Code        | <zipcode>         |
       | County Name     | <county>          |
       | Is Multi County | <isMultutiCounty> |
-    When user views plans of the below plan type in UMS site
+    And the user views the plans of the below plan type in AARP site
       | Plan Type | <plantype> |
-    And the user selects plan year for the UMS site
+    And the user selects plan year for the AARP site
       | Plan Year | <planyear> |
-    Then the user view plan details of the above selected plan in UMS site and validates
+    Then the user navigates to the plan Details page
       | Plan Name | <planName> |
-    And the user clicks on Aboutus link from home page footer UHC Medicaresolutions Site
-    And the user clicks on Contactus link from about us page footer UHC Medicaresolutions Site
-    And the user clicks on Sitemap link from home page footer UHC Medicaresolutions Site
-    And the user clicks on Privacy Policy link from Contactus page footer UHC Medicaresolutions Site
-    #And the user clicks on Terms of use link from Privacy Policy page footer UHC Medicaresolutions Site
-    And the user clicks on Disclaimers link from Terms of use page footer UHC Medicaresolutions Site
-    #And the user clicks on Agents & Brokers link from Disclaimers page footer UHC Medicaresolutions Site
-    #And user clicks on Request Assistance and validates modal window bluelayer
-    And user verifies home link of agents&brokers page bluelayer
+    And user clicks on Aboutus link from footer of the AARP Medicare Plans home page
+    And user clicks on contactus link of aboutus page
+    And user clicks on sitemap link of contactus page
+    And user clicks on privacypolicy link of sitemap page
+    #And user clicks on termsOfuse link of privacypolicy page
+    And user clicks on disclaimers link of terms&conditions page
+    And user clicks on agents&brokers link of disclaimers page
+    #And user clicks on Request Assistance and validates modal window ulayer
+    And user verifies home link of agents&brokers page ulayer
 
     Examples: 
-      | TID   | zipcode | isMultutiCounty | county       | plantype | planName                                            | planyear |
-      | 00014 |   80002 | YES             | Adams County | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) | current  |
+      | TCID  | zipcode | isMultutiCounty | county       | plantype | planName                                               | planyear |
+      | 00016 |   78006 | YES             | Bexar County | MA       | AARP Medicare Advantage SecureHorizons Essential (HMO) | current  |
 
-  @vppPlanDetailsUHC11 @vppPlanDetailsUHCRun03 @vppPlanDetailsUHCRegression
-  Scenario Outline: TCID - <TID> - plan Type: <plantype> - Verify plan details and back to summary and add to compare and uncheck in plan details and verify uncheck in plan summary
-    Given the user is on the uhcmedicaresolutions site landing page
-    When the user performs plan search using following information in UMS site
+  @vppPlanDetailsAARP11 @vppPlanDetailsAARPRun03 @vppPlanDetailsAARPRegression
+  Scenario Outline: UserStory: <TCID> -plan type: <plantype> - Verify plan details and back to summary and add to compare and uncheck in plan details and verify uncheck in plan summary
+    Given the user is on AARP medicare acquisition site landing page
+    When the user performs plan search using following information in the AARP site
       | Zip Code        | <zipcode>         |
       | County Name     | <county>          |
       | Is Multi County | <isMultutiCounty> |
-    Then user validates plan count for all plan types on plan summary page in the UMS site
-    When user views plans of the below plan type in UMS site
+    And the user views the plans of the below plan type in AARP site
       | Plan Type | <plantype> |
-    And the user selects plan year for the UMS site
+    And the user selects plan year for the AARP site
       | Plan Year | <planyear> |
-    Then the user view plan details of the above selected plan in UMS site and validates
+    Then the user navigates to the plan Details page
       | Plan Name | <planName> |
-    And the user validates the pdf section for uhc
-    Then User clicks on Back to Plans link and navigate back to plan summary in UMS site
-    Then User click on add to compare checkbox and click on view details link on UMS
-    Then I uncheck and go back to the vpp page to validate
+    And the user validates the pdf section
+    Then User clicks on Back to Plans link and navigate back to plan summary in AARP site
+    Then User click on add to compare checkbox and click on view details link on AARP
+    Then I uncheck and go back to the vpp page to validate for AARP
 
     Examples: 
-      | TID   | zipcode | isMultutiCounty | county       | plantype | planName                                            | planyear |
-      | 00015 |   80002 | YES             | Adams County | MAPD     | AARP Medicare Advantage SecureHorizons Plan 1 (HMO) | current  |
+      | TCID   | zipcode | isMultutiCounty | county       | plantype | planName                                               | planyear |
+      | 000017 |   78006 | YES             | Bexar County | MA       | AARP Medicare Advantage SecureHorizons Essential (HMO) | current  |
 
-  @vppPlanDetailsUHC12 @vppPlanDetailsUHCRun01 @vppPlanDetailsUHCRegression @F435191
+  @vppPlanDetailsAARP12 @vppPlanDetailsAARPRun03 @vppPlanDetailsAARPRegression
   Scenario Outline: UserStory: <TID> -plan type: <plantype> - Verify <optionalRider> in Plan Details for provided plan and validating Dental Directory link
-    Given the user is on the uhcmedicaresolutions site landing page
-    When the user performs plan search using following information in UMS site
+    Given the user is on AARP medicare acquisition site landing page
+    When the user performs plan search using following information in the AARP site
       | Zip Code        | <zipcode>         |
       | County Name     | <county>          |
       | Is Multi County | <isMultutiCounty> |
-    When user views plans of the below plan type in UMS site
+    And the user views the plans of the below plan type in AARP site
       | Plan Type | <plantype> |
-    And the user selects plan year for the UMS site
+    And the user selects plan year for the AARP site
       | Plan Year | <planyear> |
-    Then the user view plan details of the above selected plan in UMS site and validates
+    Then the user view plan details of the above selected plan in AARP site and validates
       | Plan Name | <planName> |
-    Then the user click on Dental Cover Popup he must be able to validate plan defaults in UHC
+    Then the user click on Dental Cover Popup he must be able to validate plan defaults in AARP
       | Optional Rider | <optionalRider> |
       | Plan Name      | <planName>      |
 
     Examples: 
       | TID        | zipcode | isMultutiCounty | county          | plantype | planName                                                         | optionalRider   | planyear |
       | F435191-01 |   11516 | No              | Nassau County   | MA       | UnitedHealthcare Medicare Advantage Essential (Regional PPO)     | Dental Platinum | current  |
-      | F435191-02 |   11516 | No              | Nassau County   | MAPD     | UnitedHealthcare Medicare Advantage Choice Plan 1 (Regional PPO) | Dental Platinum | current  |
-      | F435191-03 |   78006 | Yes             | Bexar County    | SNP      | UnitedHealthcare Medicare Gold (Regional PPO C-SNP)              | Dental Platinum | current  |
-      | F435191-04 |   55343 | No              | Hennepin County | MAPD     | AARP Medicare Advantage Headwaters (PPO)                         |                 | current  |
-      | F435191-05 |   55343 | No              | Hennepin County | SNP      | UnitedHealthcare Nursing Home Plan (PPO I-SNP)                   |                 | current  |
-      | F435191-06 |   11516 | No              | Nassau County   | MA       | UnitedHealthcare Medicare Advantage Essential (Regional PPO)     |                 | current  |
+      #| F435191-02 |   11516 | No              | Nassau County   | MAPD     | UnitedHealthcare Medicare Advantage Choice Plan 1 (Regional PPO) | Dental Platinum | current  |
+      #| F435191-03 |   78006 | Yes             | Bexar County    | SNP      | UnitedHealthcare Medicare Gold (Regional PPO C-SNP)              | Dental Platinum | current  |
+      #| F435191-04 |   55343 | No              | Hennepin County | MAPD     | AARP Medicare Advantage Headwaters (PPO)                         |                 | current  |
+      #| F435191-05 |   55343 | No              | Hennepin County | SNP      | UnitedHealthcare Nursing Home Plan (PPO I-SNP)                   |                 | current  |
+      #| F435191-06 |   11516 | No              | Nassau County   | MA       | UnitedHealthcare Medicare Advantage Essential (Regional PPO)     |                 | current  |

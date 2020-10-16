@@ -1377,10 +1377,9 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		CommonUtility.waitForPageLoadNew(driver, zipCodeField, 30);
 		sendkeys(zipCodeField, zipcode);
 		viewPlansButton.click();
-		
+
 		CommonUtility.checkPageIsReadyNew(driver);
 
-			
 		CommonUtility.waitForPageLoadNew(driver, zipcodeChangeLink, 30);
 		if (driver.getCurrentUrl().contains("health-plans")) {
 			return new VPPPlanSummaryPageMobile(driver);
@@ -2511,9 +2510,9 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	public VisitorProfilePageMobile navigateToVisitorProfilePage() {
 		waitforElement(shoppingCartIcon);
 		shoppingCartIcon.click();
-		if(driver.getCurrentUrl().contains("profile")) {
+		if (driver.getCurrentUrl().contains("profile")) {
 			return new VisitorProfilePageMobile(driver);
-		}else {
+		} else {
 			System.out.println("Navigation to visitor profile is failed");
 			return null;
 		}

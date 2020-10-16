@@ -42,6 +42,7 @@ import pages.acquisition.bluelayer.VPPPlanSummaryPage;
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.uhcretiree.Rallytool_Page;
 import pages.acquisition.ulayer.PageTitleConstants;
+import pages.mobile.acquisition.ole.WelcomePageMobile;
 import pages.mobile.acquisition.ulayer.VPPPlanSummaryPageMobile;
 
 
@@ -631,7 +632,7 @@ public class PlanDetailsPageMobile extends UhcDriver {
 	 * @return
 	 * @throws InterruptedException
 	 */
-	public WelcomePage Enroll_OLE_Plan(String planName) throws InterruptedException {
+	public WelcomePageMobile Enroll_OLE_Plan(String planName) throws InterruptedException {
 
 		try {
 			Thread.sleep(10000);
@@ -666,7 +667,7 @@ public class PlanDetailsPageMobile extends UhcDriver {
 		}
 		if (driver.getCurrentUrl().contains("welcome")) {
 			System.out.println("OLE Welcome Page is Displayed");
-			return new WelcomePage(driver);
+			return new WelcomePageMobile(driver);
 		}
 		return null;
 	}

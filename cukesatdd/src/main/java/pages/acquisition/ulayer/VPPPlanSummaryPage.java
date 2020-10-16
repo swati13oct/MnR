@@ -1633,6 +1633,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		} else
 			premiumForPlan = driver.findElement(By.xpath("//a[contains(text(), '" + PlanName
 					+ "')]//ancestor::div[contains(@class,'plan-card')]//ul[@class='benefits-table']/li[1]/span[@class='float-right']/span/span"));
+		scrollToView(premiumForPlan);
 		CommonUtility.waitForPageLoadNew(driver, premiumForPlan, 30);
 		String PlanPremium = premiumForPlan.getText();
 

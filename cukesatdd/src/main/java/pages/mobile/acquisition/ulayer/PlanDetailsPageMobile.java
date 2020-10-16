@@ -226,6 +226,9 @@ public class PlanDetailsPageMobile extends UhcDriver {
 	@FindBy(xpath = "//*[contains(@id, 'planDocuments')]")
 	private WebElement planDocs;
 
+	@FindBy(xpath = "//a[contains(normalize-space(),'Step Therapy Criteria (PDF)')]")
+	private WebElement PDFlinkURL;
+
 	@FindBy(xpath = "//h2[@class='ng-binding']")
 	private WebElement planNameValue;
 
@@ -318,7 +321,7 @@ public class PlanDetailsPageMobile extends UhcDriver {
 			checkModelPopup(driver, 45);
 		else
 			checkModelPopup(driver, 10);
-		//validateNew(planCostsTab);
+		// validateNew(planCostsTab);
 		scrollToView(planCostsTab);
 
 	}
@@ -371,9 +374,6 @@ public class PlanDetailsPageMobile extends UhcDriver {
 		}
 
 	}
-	
-	
-		
 
 	public org.json.JSONObject getActualPdfLinksData() {
 		// TODO Auto-generated method stub
@@ -503,7 +503,7 @@ public class PlanDetailsPageMobile extends UhcDriver {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		//presDrugTab.get(0).click();
+		// presDrugTab.get(0).click();
 		jsClickMobile(presDrugTab.get(0));
 		CommonUtility.waitForPageLoad(driver, estimateDrugBtn, 20);
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", estimateDrugBtn);
@@ -936,8 +936,10 @@ public class PlanDetailsPageMobile extends UhcDriver {
 	 */
 	public boolean clickAndValidatePlanCosts(String monthlyPremium, String yearlyPremium) throws Exception {
 		boolean bValidation = false;
-		validateNew(planCostsTab);
-		planCostsTab.click();
+		scrollToView(planCostsTab);
+		// validateNew(planCostsTab);
+		// planCostsTab.click();
+		jsClickNew(planCostsTab);
 		Thread.sleep(4000);
 		if (monthlyPremium.equals(planMonthlyPremium.getText().trim())
 				&& yearlyPremium.equals(planYearlyPremium.getText().trim()))
@@ -963,7 +965,8 @@ public class PlanDetailsPageMobile extends UhcDriver {
 	 * @return
 	 */
 	public String addOptionalRider(String optionalRider) {
-		optionalServicesTab.click();
+		// optionalServicesTab.click();
+		jsClickNew(optionalServicesTab);
 		WebElement rider = driver.findElement(By.xpath("//h3[text()='" + optionalRider + "']/following::label[1]"));
 		// rider.click();
 		jsClickNew(rider);
@@ -1065,6 +1068,25 @@ public class PlanDetailsPageMobile extends UhcDriver {
 		}
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	public boolean ClickValidatePDFlinkMobile(String pDFtype, String documentCode) {
+
+		//validate doc page is visible 
+		validateNew(planDocs);
+		System.out.println("PDF Page is available");
+		
+		// Validate required PDF document is available on page 
+		WebElement PDFlink = driver
+				.findElement(By.xpath("//*[contains(@id, 'planDocuments')]//a[contains(text(), '" + pDFtype + "')]"));
+		scrollToView(PDFlink);
+		
+		//Get document URL to validate document code in doc-URL
+		validateNew(PDFlinkURL);
+		System.out.println("PDF url has required document code");
+
+		return true;
+
 	}
 
 	public boolean ClickValidatePDFlink(String pDFtype, String documentCode) {
@@ -1318,17 +1340,15 @@ public class PlanDetailsPageMobile extends UhcDriver {
 	private WebElement compareBoxChecked;
 
 	public boolean validateCompareBox() {
-		if(validateNew(compareBoxChecked)){
+		if (validateNew(compareBoxChecked)) {
 			Assert.assertTrue("Message not changed to Add to Compare",
 					compareBoxMessage.getText().contains("1 plan added, please select another plan to continue"));
 			return true;
+		} else {
+			Assert.fail("Plan Added text not displayed. Please check if checkbox is checked or not");
+			return false;
 		}
-		 else {
-				Assert.fail("Plan Added text not displayed. Please check if checkbox is checked or not");
-				return false;
-			}
 	}
-	
 
 	public VPPPlanSummaryPageMobile navigateBackToPlanSummaryPage() {
 
@@ -1340,6 +1360,5 @@ public class PlanDetailsPageMobile extends UhcDriver {
 		}
 		return null;
 	}
-
 
 }
