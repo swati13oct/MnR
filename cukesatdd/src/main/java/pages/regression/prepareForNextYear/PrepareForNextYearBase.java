@@ -496,7 +496,7 @@ public class PrepareForNextYearBase  extends PrepareForNextYearWebElements {
 			
 			return note;
 		}
-		Assert.assertTrue("PROBLEM - not getting expected destination URL.  Expect to contain '"+expUrl+"' or '"+expUrl2+"' | Actual URL='"+actUrl+"'", actUrl.contains(expUrl)  && !actUrl.contains(expUrl2));
+		Assert.assertTrue("PROBLEM - not getting expected destination URL.  Expect to contain '"+expUrl+"' or '"+expUrl2+"' | Actual URL='"+actUrl+"'", actUrl.contains(expUrl)  || actUrl.contains(expUrl2));
 
 		for (String s: MRScenario.getTagList()) {
 			if (s.contains("sanity")) {
