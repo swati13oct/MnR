@@ -84,10 +84,10 @@ Feature: 1.10.1 DCE-REDISIGN AARP - To test Acq Visitor Profile to NEW DCE Flows
       | Plan Type  | <plantype>  |
       | Test Plans | <testPlans> |
     Then user gets a create profile prompt on AARP site
-    Then user click on continue as guest button on AARP site
-    And user validates the added plans on visitor profile page of AARP site
+    Then user click on view saved plans button on AARP site
+    And user validates the added plans on new visitor profile page of AARP site
       | Test Plans | <testPlans> |
-    And the user clicks on the add drugs button from plan card to navigate to DCE Redesign
+    And the user clicks on the enter drug information button from plan card to navigate to DCE Redesign
     Then the user validates Get Started Page
     Then the user clicks on Build Drug List to navigate to Build Drug List Page
     Then the user searches and adds the following Drug to Drug List
@@ -116,8 +116,8 @@ Feature: 1.10.1 DCE-REDISIGN AARP - To test Acq Visitor Profile to NEW DCE Flows
     And the user signs in with optum Id credentials in AARP site
       | User Name | <userName> |
       | Password  | <password> |
-    And user clears the existing drugs
-    And user clears the provider
+    #And user clears the existing drugs
+    #And user clears the provider
     And user removed existing saved plans
     And the user clicks on the add drugs button to navigate to DCE Redesign on the profile page
     Then the user validates Get Started Page

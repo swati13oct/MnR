@@ -351,6 +351,25 @@ public class VisitorProfileStepDefinition_AARP {
 		visitorProfile.clickEditDrugs();
 	}
 	
+	@And("^user validates the added plans on new visitor profile page of AARP site$")
+	public void user_validates_the_added_plans_on_new_visitor_profile_page_of_AARP_site(DataTable planNames) {
+		List<DataTableRow> givenAttributesRow = planNames.getGherkinRows();
+		Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < givenAttributesRow.size(); i++) {
+
+			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+					givenAttributesRow.get(i).getCells().get(1));
+		}
+		String savePlanNames = givenAttributesMap.get("Test Plans");
+		VisitorProfilePage visitorProfile = (VisitorProfilePage) getLoginScenario().getBean(PageConstants.VISITOR_PROFILE_PAGE);
+		visitorProfile.validateAddedPlansNew(savePlanNames);
+	}
+	
+	@Then("^the user clicks on the enter drug information button from plan card to navigate to DCE Redesign$")
+	public void the_user_clicks_on_the_enter_drug_information_button_from_plan_card_to_navigate_to_DCE_Redesign() {
+		VisitorProfilePage visitorProfile = (VisitorProfilePage) getLoginScenario().getBean(PageConstants.VISITOR_PROFILE_PAGE);
+		visitorProfile.clickAddDrugsPlancardNew();
+	}
 } 
 
 

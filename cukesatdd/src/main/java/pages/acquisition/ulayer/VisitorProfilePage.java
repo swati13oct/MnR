@@ -103,11 +103,14 @@ public class VisitorProfilePage extends UhcDriver {
 	@FindBy(xpath = "//a[contains(text(),'Back to Drug Cost Estimator')]")
 	public WebElement backToDrugCostEstimatorLink;
 	
-	@FindBy(xpath = "//*[@id='dashPlansContainer']//*[contains(@class,'drug-list-accordion')]/button")
+	@FindBy(xpath = "(//*[contains(@class,'uhc-coverage-dropdown-trigger d-flex align-items-center justify-content-between pr-20 p-20')])[2]")
 	public WebElement expandDrugsPlanCard;
 	
-	@FindBy(xpath = "//*[@id='dashPlansContainer']//*[@class='edit-drugs']")
+	@FindBy(xpath = "//*[text()='Edit Drugs']")
 	public WebElement editDrugsPlanCard;
+	
+	@FindBy(xpath = "//*[contains(@class,'add-drug')]")
+	public WebElement enterDrugInfoPlanCard;
 
 	
 	public VisitorProfilePage(WebDriver driver) {
@@ -474,4 +477,22 @@ public class VisitorProfilePage extends UhcDriver {
 		expandDrugsPlanCard.click();
 		editDrugsPlanCard.click();
 	}
+	
+	public void validateAddedPlansNew(String planNames) {
+		List<String> listOfTestPlans = Arrays.asList(planNames.split(","));
+		CommonUtility.checkPageIsReadyNew(driver);
+		for (String plan: listOfTestPlans) {
+			Assert.assertEquals(plan, driver.findElement(By.xpath("//h3[text()=' "+plan+" ']")).getText());
+			Assert.assertTrue(driver.findElement(By.xpath("//h3[text()=' "+plan+" ']/following::button[1]")).isDisplayed());
+			System.out.println("Verified plans are added on vistior profile page");
+		}
+	}
+	
+	/**
+	 * click add drugs from plan card
+	 */
+	public void clickAddDrugsPlancardNew() {
+		enterDrugInfoPlanCard.click();
+	}
+	
 }

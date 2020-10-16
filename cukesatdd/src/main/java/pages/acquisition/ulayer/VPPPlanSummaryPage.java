@@ -732,6 +732,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		
 		@FindBy(xpath = "//input[@class='nextButton']")
 		private WebElement  Submit;
+		
+		@FindBy(id="pop-btn-1")
+		private WebElement viewSavedPlans;
 
 		
 		public WebElement getValEstimatedAnnualDrugCostValue(String planName) {
@@ -4341,6 +4344,21 @@ for (int i = 0; i < initialCount + 1; i++) {
 		CommonUtility.waitForPageLoad(driver, driver.findElement(By.xpath("//header[contains(@class,'header')]")), 35);
 		System.out.println("Page Title : "+(driver.findElement(By.xpath("//title")).getText()));
 		//return NavigateToURL;
+	}
+	
+	/**
+	 * Click on View Saved plans button on Plan saved prompt
+	 * @return
+	 */
+	public VisitorProfilePage viewSavedPlans(){
+		viewSavedPlans.click();
+		if(driver.getCurrentUrl().contains("profile")) {
+			CommonUtility.checkPageIsReadyNew(driver);
+			return new VisitorProfilePage(driver);
+		}else {
+			System.out.println("Navigation to visitor profile is failed");
+			return null;
+		}
 	}
 
 }

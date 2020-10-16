@@ -3837,4 +3837,15 @@ public void the_user_validates_the_secondary_search_by_providing_newsearchvalue_
 			Assert.fail("Error Loading VPP plan summary page");
 		}
 	}
+	
+	@And("^user click on view saved plans button on AARP site$")
+	public void user_click_on_view_saved_plans_button_on_AARP_site() {
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+
+		VisitorProfilePage visitorProfilePage = plansummaryPage.viewSavedPlans();
+		
+		getLoginScenario().saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfilePage);
+		
+	}
 }
