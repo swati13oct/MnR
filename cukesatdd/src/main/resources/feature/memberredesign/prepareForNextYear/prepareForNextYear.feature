@@ -222,13 +222,14 @@ Feature: 1.25 Member Prepare For Next Year
     @pfny04_sars @devRegression
     Examples: 
 	    | index | FID     | planType | memberType              | showNxtYrPlan |  
-	 #  | 4-01  | F443004 | MAPD     | UHC_SARS_PFNY           | false         |
-	    | 4-01  | F443004 | MAPD     | SARS_PFNY           | false         |
+	    | 4-01  | F443004 | MA       | UHC_SARS_PFNY           | false         |
+	    | 4-02  | F443004 | MAPD     | SARS_PFNY               | false         |
 
-    @pfny04_sars
-    Examples: 
-	    | index | FID     | planType | memberType              | showNxtYrPlan |  
-	    | 4-02  | F443004 | PDP      | SARS_PFNY               | false         |
+	#note: don't have PDP SAR user for the time being
+    #@pfny04_sars
+    #Examples: 
+	#    | index | FID     | planType | memberType              | showNxtYrPlan |  
+	#    | 4-02  | F443004 | PDP      | SARS_PFNY               | false         |
 
 	    
 ##### end - cases for team env #################################################################
@@ -510,8 +511,8 @@ Feature: 1.25 Member Prepare For Next Year
     @pfny04_sars
     Examples: 
 	    | index | FID     | planType | memberType              | showNxtYrPlan |  
-	    | 4-01  | F443004 | MAPD     | UHC_SARS_PFNY           | false         |
-	    | 4-01  | F443004 | MAPD     | SARS_PFNY               | false         |
+	    | 4-01  | F443004 | MA       | UHC_SARS_PFNY           | false         |
+	    | 4-02  | F443004 | MAPD     | SARS_PFNY               | false         |
 
 	#note: don't have PDP SAR user for the time being
     #@pfny04_sars
