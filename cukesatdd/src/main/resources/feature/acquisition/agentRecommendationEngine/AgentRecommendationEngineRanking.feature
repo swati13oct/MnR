@@ -161,7 +161,7 @@ Feature: Agent Recommendation Engine - Verify ARE elements
       | qavgogine | qavgogine | ATDD2STG@MEMBERDD.COM | None          | current  | YES        |          10001 | mce,lowpremium | YES                | YES           |            |
 
   @ARE @PlansReorder @NOMCE @F487422
-  Scenario Outline: - <Email> To Verify agent login and validate Plans reorder in ARE for MCE
+  Scenario Outline: - <Email> To Verify agent login and validate Plans reorder in ARE for NoMCE
     Given the agent is on shopper profile login page
     When agent login to shopper profile
       | User Name | <User> |

@@ -70,7 +70,7 @@ Feature: Plan Recommendation Engine Ranking - Verify PRE flows functionalities w
       |   55419 | No            | Hennepin   | MAPD          | None         | None   | AcceptsMedicare |                   |               | No             | Yes,No,No,No                  | Higher               |
       |   15537 | NO            | Bedford    | MAPD          | None         | None   | UHGNetwork      |                   |               | NO             | No,No,No,No                   | Lower                |
 
-  @PRE @planrecommendation @APIRanking @MAFlowRanking @SanityTest @PRERegression6 @SanityPRE @F490733 @F511296
+  @PRE @planrecommendation @APIRanking @MAFlowRanking @SanityTest @PRERegression6 @SanityPRE
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds> , <travel> , <DoctorsName> , <Dental-Hearing-Vision-Fitness> , <costPreferenceOption> - To validate MA flow functions for MA and MS plans in PRE
     Given the user is on UHC medicare acquisition site landing page
     When user navigate to Plan Recommendation Engine and Checking Breadcrumbs
@@ -97,7 +97,7 @@ Feature: Plan Recommendation Engine Ranking - Verify PRE flows functionalities w
 
     Examples: 
       | Zipcode | isMultiCounty | county        | isCoverageOpt | specialNeeds     | travel   | doctors    | DoctorsName     | isMultiDoctor | Dental-Hearing-Vision-Fitness | costPreferenceOption |
-#      |   15537 | NO            | Bedford       | MA            | None             | withinUS | UHGNetwork |                 |               | Yes,No,No,No                  | Lower                |
+      |   15537 | NO            | Bedford       | MA            | None             | withinUS | UHGNetwork |                 |               | Yes,No,No,No                  | Lower                |
       |   30012 | YES           | Walton County | MA            | Medicaid,Nursing | withinUS | Lookup     | Emily Adams, NP | NO            | Yes,Yes,Yes,Yes               | Lower                |
 
   #      |   94203 | NO            | Sacramento  | MA            | None             | withinUS | AcceptsMedicare |             |               | Yes,Yes,Yes,Yes               | Lower                | -->Tie Scenario
