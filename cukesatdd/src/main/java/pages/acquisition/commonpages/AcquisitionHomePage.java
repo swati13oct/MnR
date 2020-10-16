@@ -940,7 +940,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			if (validate(countyModal))
 				driver.findElement(By.xpath("//div[@id='selectCounty']//a[text()='" + county + "']")).click();
 		}
-		checkIfPageReadySafari();
+		waitForPageLoadSafari();
 		CommonUtility.waitForPageLoadNew(driver, vppTop, 30);
 		if (driver.getCurrentUrl().contains("plan-summary")) {
 			return new VPPPlanSummaryPage(driver);

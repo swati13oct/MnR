@@ -1480,7 +1480,6 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			jsClickNew(enrollForPlan);
 //			enrollForPlan.click();
 		}
-		checkIfPageReadySafari();
 		CommonUtility.waitForPageLoadNew(driver, NextBtn, 30);
 		validate(NextBtn, 20);
 		if(driver.getCurrentUrl().contains("welcome")){
@@ -2096,7 +2095,6 @@ public class VPPPlanSummaryPage extends UhcDriver {
 }*/
 
 	public void validateMarketingBullets(String planType , String planName){
-		checkIfPageReadySafari();
 		if(!planType.equals("PDP")){
 			WebElement marketingBullets = driver.findElement(By.xpath("//*[contains(text(),\'" + planName + "\')]/ancestor::div[contains(@class, 'module-plan-overview')]//ul[contains(@class ,'highlight-list')]"));
 			validateNew(marketingBullets);
@@ -3285,7 +3283,6 @@ for (int i = 0; i < initialCount + 1; i++) {
 		//MedSupFormValidation(DateOfBirth);
 		//waitTillElementClickableInTime(Start_ApplicationBtn, 60);
 		//jsClickNew(Start_ApplicationBtn);
-		checkIfPageReadySafari();
 		CommonUtility.waitForPageLoadNew(driver, resumeApplication, 30);
 		resumeApplication.click();
 		System.out.println("Resume application link clicked successfully");
@@ -3312,7 +3309,6 @@ public void RetrieveURL(String ExpectedsupplementURL) {
 	}
 public void signInOptumId(String username, String password) {
 	try {
-		checkIfPageReadySafari();
 		signIn.click();
 		driver.findElement(By.cssSelector("input#userNameId_input")).sendKeys(username);
 		driver.findElement(By.cssSelector("input#passwdId_input")).sendKeys(password);

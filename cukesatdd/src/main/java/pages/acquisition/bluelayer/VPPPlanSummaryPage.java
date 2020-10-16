@@ -1292,7 +1292,6 @@ public class VPPPlanSummaryPage extends UhcDriver {
 				+ "\')]/ancestor::div[contains(@class,'module-plan-overview')]//*[contains(@class,'add-provider')]"));
 		validateNew(ProviderSearchLink);
 		switchToNewTabNew(ProviderSearchLink);
-		checkIfPageReadySafari();
 		if (driver.getCurrentUrl().contains("werally")) {
 			return new ProviderSearchPage(driver);
 		}
@@ -1796,7 +1795,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			validateNew(enrollForPlan);
 			jsClickNew(enrollForPlan);
 		}
-		checkIfPageReadySafari();
+		waitForPageLoadSafari();
 		CommonUtility.waitForPageLoadNew(driver, NextBtn, 30);
 		if (driver.getCurrentUrl().contains("enrollment")) {
 			System.out.println("OLE Welcome Page is Displayed");
@@ -3758,7 +3757,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		waitTillElementClickableInTime(Start_ApplicationBtn, 60);
 		jsClickNew(Start_ApplicationBtn);
 		System.out.println("Start application button is clicked on application page");
-		checkIfPageReadySafari();
+		waitForPageLoadSafari();
 		waitTillElementClickableInTime(insuredStatus, 60);
 		insuredStatus.click();
 		nextButton.click();

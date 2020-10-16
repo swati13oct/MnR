@@ -122,7 +122,6 @@ public class PlanRecommendationEngineCostPreferencesPage extends UhcDriver {
 		System.out.println("Cost Preferences Page Functional Operations");
 		costPreferencepageOptions(preference);
 		continueBtn.click();
-		checkIfPageReadySafari();
 		System.out.println("Validating " + page + " page Continue button functionality");	
 		}
 

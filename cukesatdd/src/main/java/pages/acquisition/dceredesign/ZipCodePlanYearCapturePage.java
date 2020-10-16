@@ -64,7 +64,6 @@ public class ZipCodePlanYearCapturePage extends UhcDriver {
 	public DrugSummaryPage clickContinueBtn() {
 		validateNew(continueBtn);
 		continueBtn.click();
-		checkIfPageReadySafari();
 		CommonUtility.waitForPageLoad(driver, reviewDrugCostPageHeading, 30);
 
 		if(validateNew(reviewDrugCostPageHeading)) {

@@ -102,7 +102,6 @@ public class BuildYourDrugList extends UhcDriver {
 		WebElement drugname = driver.findElement(By.xpath("//*[contains(@id,'"+drugName+"')]/div"));
 		
 		jsClickNew(drugname);
-		checkIfPageReadySafari();
 		/*
 		 * if(validate(SearchBtn)) SearchBtn.click(); if(validate(selectBtn))
 		 * selectBtn.click();

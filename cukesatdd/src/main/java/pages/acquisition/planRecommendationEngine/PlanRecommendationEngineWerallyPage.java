@@ -118,7 +118,6 @@ public class PlanRecommendationEngineWerallyPage extends UhcDriver {
 				searchBox.sendKeys(searchParameter);
 				threadsleep(2000);
 				searchButton.click();
-				checkIfPageReadySafari();
 				int actualResultscount = Integer.parseInt(serachResultsCount.getText().trim().split(" ")[0]);
 				if (actualResultscount >= count) {
 					for (int i = count - 1; i >= 0; i--) {
@@ -140,7 +139,6 @@ public class PlanRecommendationEngineWerallyPage extends UhcDriver {
 //						doctorsName.add(doctorNameinWerally.getText().trim());
 						chooseFirstLocation();
 						saveModalCloseContinueSearchbutton.click();
-						checkIfPageReadySafari();
 					}
 				} else {
 					System.out.println("Required search Results is not Returned");

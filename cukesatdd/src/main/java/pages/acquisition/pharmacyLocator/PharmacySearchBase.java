@@ -145,7 +145,6 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 		waitTllOptionsAvailableInDropdown(seletPlandropdown, 45);
 		seletPlandropdown.click();
 		sleepBySec(1);
-		checkIfPageReadySafari();
 		selectFromDropDownByText(driver, seletPlandropdown, planName);
 		sleepBySec(2);
 		if (!loadingBlock.isEmpty())

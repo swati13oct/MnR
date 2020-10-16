@@ -844,7 +844,6 @@ try {
 				break;
 			}
 		}
-		checkIfPageReadySafari();
 //		WebElement currentSysTimeElement=timeJson;
 		WebElement currentSysTimeElement=driver.findElement(By.xpath("//body/pre"));
 		String currentSysTimeStr=currentSysTimeElement.getText();
@@ -1186,82 +1185,53 @@ try {
 	}
     
     public boolean waitForPageLoadSafari() {
-    	int counter = 3;
     	boolean ready = false;
-    	//Sets FluentWait Setup
-    	List<WebElement> loadingScreen = null;
-    	FluentWait<WebDriver> fwait = new FluentWait<WebDriver>(driver)
-    			.withTimeout(Duration.ofSeconds(10))
-    			.pollingEvery(Duration.ofMillis(100))
-    			.ignoring(NoSuchElementException.class)
-    			.ignoring(TimeoutException.class);
-
-    	// First checking to see if the loading indicator is found
-    	// we catch and throw no exception here in case they aren't ignored
-    	try {
-    		System.out.println("Waiting to check if Loading screen is present");
-    		loadingScreen = fwait.until(new Function<WebDriver, List<WebElement>>() {
-    			public List<WebElement> apply(WebDriver driver) {
-    				return driver.findElements(By.xpath("//body//div[(((@id='overlay' and not(./ancestor::footer)) or @id='loading_fader' or @class='loading-block') and not(contains(@style,'none')))]"));
-    			}
-    		});
-    	} catch (Exception e) {}
-
-
-    	// checking if loading indicator was found and if so we wait for it to
-    	// disappear
-    	if(!CollectionUtils.isEmpty(loadingScreen)) {
-    		System.out.println("Loading screen visible!!! Waiting till it disappears");
-    		WebDriverWait wait = new WebDriverWait(driver, 7);
-    		try {
-    			ready = wait.until(ExpectedConditions
-    					.invisibilityOfAllElements(loadingScreen));
-    			//.invisibilityOfElementLocated(By.xpath("//div[@id='overlay' or  @id='loading_fader' or @class='loading-block']")));
-    		} catch(NoSuchElementException e) {
-    			//If no loading screen element found, page is ready
-    			ready = true;
-    		} catch(TimeoutException t) {
-    			//If script timed out finding loading screen element, page is ready
-    			ready = true;
-    		}
-    		System.out.println("Loading screen disappeared, page is ready.");
-    	} else {
-    		System.out.println("No loading screen element(s) found");
-    	}
-    	return ready;
-    }
-
-    
-    public boolean checkIfPageReadySafari() {
-    	int counter = 5;
-    	boolean ready = false;
-    	WebDriverWait wait = new WebDriverWait(driver, defaultTimeoutInSec);
     	if(MRScenario.browsername.equalsIgnoreCase("Safari")) {
-    		CommonUtility.checkPageIsReadyNew(driver);
-    		do {
+    		int counter = 3;
+    		//Sets FluentWait Setup
+    		List<WebElement> loadingScreen = null;
+    		FluentWait<WebDriver> fwait = new FluentWait<WebDriver>(driver)
+    				.withTimeout(Duration.ofSeconds(10))
+    				.pollingEvery(Duration.ofMillis(100))
+    				.ignoring(NoSuchElementException.class)
+    				.ignoring(TimeoutException.class);
+
+    		// First checking to see if the loading indicator is found
+    		// we catch and throw no exception here in case they aren't ignored
+    		try {
+    			System.out.println("Waiting to check if Loading screen is present");
+    			loadingScreen = fwait.until(new Function<WebDriver, List<WebElement>>() {
+    				public List<WebElement> apply(WebDriver driver) {
+    					return driver.findElements(By.xpath("//div[(((@id='overlay' and not(./ancestor::footer)) or @id='loading_fader' or @class='loading-block') and not(contains(@style,'none')))]"));
+    				}
+    			});
+    		} catch (Exception e) {}
+
+
+    		// checking if loading indicator was found and if so we wait for it to
+    		// disappear
+    		if(!CollectionUtils.isEmpty(loadingScreen)) {
+    			System.out.println("Loading screen visible!!! Waiting till it disappears");
+    			WebDriverWait wait = new WebDriverWait(driver, 7);
     			try {
-    				threadsleep(5);
-    				JavascriptExecutor js = (JavascriptExecutor) driver;
-    				if ((boolean) js.executeScript("return window.jQuery != undefined")) {
-    					Function<WebDriver, Boolean> pageLoadedWithAjax = new Function<WebDriver, Boolean>() {
-    						public Boolean apply(WebDriver driver) {
-    							return (Boolean) js
-    									.executeScript("return (document.readyState == 'complete' && jQuery.active == 0)");
-    						}
-    					};
-    					wait.until(pageLoadedWithAjax);
-    				}
-    				if(!driver.getPageSource().isEmpty()) {
-    					ready = true;
-    					break;
-    				}
-    			} catch(WebDriverException e) {/**decrement counter and retry*/}
-    			counter--;
-    		} while(counter > 0);
+    				ready = wait.until(ExpectedConditions
+    						.invisibilityOfAllElements(loadingScreen));
+    				//.invisibilityOfElementLocated(By.xpath("//div[@id='overlay' or  @id='loading_fader' or @class='loading-block']")));
+    			} catch(NoSuchElementException e) {
+    				//If no loading screen element found, page is ready
+    				ready = true;
+    			} catch(TimeoutException t) {
+    				//If script timed out finding loading screen element, page is ready
+    				ready = true;
+    			}
+    			System.out.println("Loading screen disappeared, page is ready.");
+    		} else {
+    			System.out.println("No loading screen element(s) found");
+    		}
     	}
     	return ready;
     }
-    
+
 	public boolean jsMouseOver(WebElement element) {
 		try {
 			/*String mouseOverScript = "if(document.createEvent){"
