@@ -1216,7 +1216,6 @@ try {
     			try {
     				ready = wait.until(ExpectedConditions
     						.invisibilityOfAllElements(loadingScreen));
-    				//.invisibilityOfElementLocated(By.xpath("//div[@id='overlay' or  @id='loading_fader' or @class='loading-block']")));
     			} catch(NoSuchElementException e) {
     				//If no loading screen element found, page is ready
     				ready = true;

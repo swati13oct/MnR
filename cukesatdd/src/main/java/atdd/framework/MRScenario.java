@@ -1088,7 +1088,7 @@ try {
 				
 				MutableCapabilities sauceOptions = new MutableCapabilities();
 				sauceOptions.setCapability("screenResolution", "1920x1440");
-				sauceOptions.setCapability("maxDuration", 3600);
+				sauceOptions.setCapability("maxDuration", 5400);
 				sauceOptions.setCapability("idleTimeout", 200);
 
 				SafariOptions browserOptions = new SafariOptions();

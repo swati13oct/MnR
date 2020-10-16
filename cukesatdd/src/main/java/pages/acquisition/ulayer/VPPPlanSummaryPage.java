@@ -3184,7 +3184,9 @@ for (int i = 0; i < initialCount + 1; i++) {
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 	    js.executeScript("window.open('about:blank','_blank');");
 		for(String winHandle : driver.getWindowHandles()){
-		    driver.switchTo().window(winHandle);
+			if(!winHandle.equals(winHandleBefore)) {
+				driver.switchTo().window(winHandle);
+			}
 		}
 		String winHandleTmp = driver.getWindowHandle();
 		System.out.println("Proceed to close the original tab that has plans saved, should left with a blank tab afterward");
@@ -3196,7 +3198,9 @@ for (int i = 0; i < initialCount + 1; i++) {
 	    js.executeScript("window.open('"+AARP_ACQISITION_PAGE_URL+"','_blank');");
 
 	    for(String winHandle : driver.getWindowHandles()){
-		    driver.switchTo().window(winHandle);
+	    	if(!winHandle.equals(winHandleTmp)) {
+	    		driver.switchTo().window(winHandle);
+	    	}
 		}
 		String winHandleNew = driver.getWindowHandle();
 
