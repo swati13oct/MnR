@@ -64,12 +64,12 @@ Feature: 1.06.7 Member Guest Payments Page - Member Auth - PROD
 
     Examples:
       | TID   | planType              | memberID      | dob           | siteName    |
-     #| 10007 | SHIP                  | 361857096-11  | 05/01/1954    |   AARP      |
-      | 10008 | TERMINATEDWithNODUE   | 958542476-1   | 03/28/1941    |   UHC       |
-      | 10009 | GroupWithSubsidy      | 925610646-1   | 04/27/1946    |   RETIREE   |
-      | 10011 | PreffectiveWithNoDue  | 020713181-1   | 09/06/1946    |   RETIREE   |
+      | 10007 | SHIP                  | 312137089-12  | 09/08/1946  |   AARP      |
+      | 10008 | TERMINATEDWithNODUE   | 000087616-01  | 11/12/1937    |   UHC       |
+      | 10009 | GroupWithSubsidy      | 925610646-1   | 04/18/1946    |   RETIREE   |
+      | 10011 | PreffectiveWithNoDue  | 977757984-1  | 12/14/1955   |   RETIREE   |
 
-
+### to review
   @prod_guestPayment04 @prod_C&SplanBLOCKED @M&RBlocked
   Scenario Outline: TID: <TID> - To validate the Guest Payment page for Blocked Members with No sign in Link
     Given I am on the login screen of Guest Payments Portal
@@ -83,8 +83,8 @@ Feature: 1.06.7 Member Guest Payments Page - Member Auth - PROD
 
     Examples:
       | TID   | planType              | memberID      | dob           | siteName    |
-      | 10010 | PremiumPayedToBank    | 952802197-1   | 07/22/1943    |   RETIREE   |
-      | 10011 | C&SBlocked            |112532945      | 02/17/1941    |   RETIREE   |
+     # | 10010 | PremiumPayedToBank    | 952802197-1   | 07/22/1943    |   RETIREE   |
+     # | 10011 | C&SBlocked            |112532945      | 02/17/1941    |   RETIREE   |
      # | 10012 | M&RBlocked            |936841418-1    | 08/31/1930   |   RETIREE    |no such member available
 
   @prod_guestPayment05 @prod_selectPaymentAmountValidations
@@ -101,10 +101,10 @@ Feature: 1.06.7 Member Guest Payments Page - Member Auth - PROD
 
     Examples:
       | TID   | memberType       | memberID    | dob        | hasPD  | hasCC  |siteName   |
-      | 10000 | memberWithPD     | 920736343-1  | 12/06/1953 | true   | false   | AARP      |
-   #  | 10000 | memberWithoutPD  | 915516555-1 | 10/29/1947 | false  | true   | UHC       |
-      | 10000 | memberWithNoDues | 904498840-1 | 06/19/1933 | false  | false  | RETIREE   |
-      | 10000 | memberWithBOTHDues | 978196889-1 | 10/19/1941 | true | true  | RETIREE   |
+    # | 10000 | memberWithPD     |              |            | true   | false   | AARP      |
+      | 10000 | memberWithoutPD   | 920736343-1 |  12/27/1953| false  | true   | UHC       |
+      | 10000 | memberWithNoDues  | 904498840-1 | 06/03/1933 | false  | false  | RETIREE   |
+      | 10000 | memberWithBOTHDues| 966369983-1  | 09/20/1940 | true | true  | RETIREE   |
 
   @prod_guestPayment06 @prod_ErrorsAndContentOneTimePayment @prod_otherAmountErrorAndContent
   Scenario Outline: TID: <TID> - To validate the One time payment page with different error scenarios
@@ -127,6 +127,10 @@ Feature: 1.06.7 Member Guest Payments Page - Member Auth - PROD
     Then I will click on Review and Submit button leaving EFT Account information blank
     And I will get an error to enter valid Account EFT information
   
+    Examples:
+      | TID   | planType | memberID    | dob        | siteName | otherAmountDue |
+      | 10000 | MAPD     | 920736343-1 | 12/27/1953 | AARP     | 1.50         |
+    
 
   @prod_guestPayment07 @prod_makeOneTimePayment @prod_pastAmount @ccFLow
   Scenario Outline: TID: <TID> - To validate the Guest Payment home page with different brands
@@ -139,7 +143,7 @@ Feature: 1.06.7 Member Guest Payments Page - Member Auth - PROD
       | Date of Birth     |  <dob>     |
     And I will click Next to proceed to the Make a One-time payment page
     And I validate all the header and page elements on One-time payment page
-    Then I select Past Amount Due and choose a Credit Debit payment Method
+    Then  I select Past Amount & current charges Due and choose a Credit Debit payment Method
     Then I will enter Credit card Details
       | Name             | <Name>             |
       | CreditCardNumber | <CreditCardNumber> |
@@ -156,11 +160,8 @@ Feature: 1.06.7 Member Guest Payments Page - Member Auth - PROD
 
     Examples:
       | TID   | planType | memberID    | dob        | siteName | Name                 | CreditCardNumber | validMonth | validYear | Email          |
-      | 10000 | MAPD     | 915516555-1 | 10/29/1947 | AARP     | GuestPayCC           | 4111111111111111 | 04         | 2024      | test@optum.com |
-     # | 10001 | PDP      | 915516555-1 | 10/29/1947 | UHC      | GuestPayCC           | 4111111111111111 | 04         | 2024      | test@optum.com |
-      #| 10002 | MA       | 915516555-1 | 10/29/1947 | RETIREE  | GuestPayCC           | 4111111111111111 | 04         | 2024      | test@optum.com |
-     # | 10003 | MAPD     | 915516555-1 | 10/29/1947 | PCP      | GuestPayCC           | 4111111111111111 | 04         | 2024      | test@optum.com |
-      #| 10004 | MAPD     | 915516555-1 | 10/29/1947 | MEDICA   | GuestPayCC           | 4111111111111111 | 04         | 2024      | test@optum.com |
+      | 10000 | MAPD     |  966369983-1  | 09/20/1940  | AARP     | GuestPayCC        | 4121600170691201 |         01 |      2021    | test@optum.com |
+
 
   @prod_guestPayment08 @prod_makeOneTimePayment @prod_pastAmount @eftCheckingFLow
   Scenario Outline: TID: <TID> - To validate the Guest Payment home page with different brands
@@ -173,7 +174,7 @@ Feature: 1.06.7 Member Guest Payments Page - Member Auth - PROD
       | Date of Birth     |  <dob>     |
     And I will click Next to proceed to the Make a One-time payment page
     And I validate all the header and page elements on One-time payment page
-    Then I select Past Amount Due and choose a EFT Checking acc payment Method
+    Then  I select Past Amount & current charges Due and choose a Credit Debit payment Method
     Then I will enter EFT Checking Account Details
       | AccountHoldersFirstName  | <FirstName>  |
       | AccountHoldersMiddleName | <MiddleName> |
@@ -189,73 +190,12 @@ Feature: 1.06.7 Member Guest Payments Page - Member Auth - PROD
    # Then I will click on Sign in and Register Now link to navigate to Member Portal
 
     Examples:
-      | TID   | planType | memberID    | dob        | siteName | FirstName | MiddleName | LastName  | accountNo  | routingNo | Email          |
-      | 10000 | MAPD     | 853026479-1 | 04/25/1942 | AARP     | Guest     | A          | Payments1 | 1234512345 | 123123123 | test@optum.com |
-      #| 10001 | PDP      | 016647204-1 | 06/12/1950 | AARP     | Guest     | B          | Payments2 | 1234512345 | 123123123 | test@optum.com |
-     # | 10002 | PDP      | 980958988-1 | 04/08/1933 | RETIREE  | Guest     | C          | Payments3 | 1234512345 | 123123123 | test@optum.com |
-     # | 10003 | MAPD     | 978196889   | 10/19/1941 | PCP      | Guest     | D          | Payments4 | 1234512345 | 123123123 | test@optum.com |
-    #  | 10004 | MAPD     | 911808274   | 09/06/1945 | MEDICA   | Guest     | E          | Payments5 | 1234512345 | 123123123 | test@optum.com |
+      | TID   | planType | memberID      | dob        | siteName | FirstName | MiddleName | LastName  | accountNo  | routingNo | Email          |
+      | 10000 | MAPD     |  966369983-1  | 09/20/1940 | AARP     | Guest     | A          | Payments1 | 1234512345 | 123123123 | test@optum.com |
 
 
-  @prod_guestPayment09 @prod_makeOneTimePayment @prod_pastAmount&currentCharges @prod_ccFLow
-  Scenario Outline: TID: <TID> - To validate the Guest Payment home page with different brands
 
-    Given I am on the login screen of Guest Payments Portal
-      | Site Name | <siteName> |
-    Then I validate all the header and page elements
-    Then I will enter my Member ID and Date of birth
-      | Member ID         | <memberID> |
-      | Date of Birth     |  <dob>     |
-    And I will click Next to proceed to the Make a One-time payment page
-    Then I select Past Amount & current charges Due and choose a Credit Debit payment Method
-    Then I will enter Credit card Details
-      | Name             | <Name>             |
-      | CreditCardNumber | <CreditCardNumber> |
-      | Month            | <validMonth>       |
-      | Year             | <validYear>        |
-    Then I validate header and and page elements on Review & Submit page
-    #When I click on Confirm and Pay
-    #And I navigate to Payment confirmation page and validate all the page elements
-
-    Examples:
-      | TID   | planType | memberID      | dob           | siteName    |Name                 | CreditCardNumber | validMonth | validYear |
-      | 10000 | MAPD     | 954458415-1   | 09/26/1941    |   AARP      |CreditCardAutomation | 4111111111111111 |         04 |      2024 |
-     # | 10001 | MAPD     | 915516555-1   | 10/29/1947    |   UHC       |CreditCardAutomation | 4111111111111111 |         04 |      2024 |
-     # | 10002 | MAPD     | 915516555-1   | 10/29/1947    |   RETIREE   |CreditCardAutomation | 4111111111111111 |         04 |      2024 |
-     # | 10003 | MAPD     | 915516555-1   | 10/29/1947    |   PCP       |CreditCardAutomation | 4111111111111111 |         04 |      2024 |
-     # | 10004 | MAPD     | 915516555-1   | 10/29/1947    |   MEDICA    |CreditCardAutomation | 4111111111111111 |         04 |      2024 |
-
-
-  @prod_guestPayment10 @prod_makeOneTimePayment @prod_pastAmount&currentCharges @prod_eftCheckingFLow
-  Scenario Outline: TID: <TID> - To validate the Guest Payment home page with different brands
-
-    Given I am on the login screen of Guest Payments Portal
-      | Site Name | <siteName> |
-    Then I validate all the header and page elements
-    Then I will enter my Member ID and Date of birth
-      | Member ID         | <memberID> |
-      | Date of Birth     |  <dob>     |
-    And I will click Next to proceed to the Make a One-time payment page
-    Then I select Past Amount & current charges Due and choose a EFT Checking acc payment Method
-    Then I will enter EFT Checking Account Details
-      | AccountHoldersFirstName  | <FirstName>  |
-      | AccountHoldersMiddleName | <MiddleName> |
-      | AccountHoldersLastName   | <LastName>   |
-      | AccountNumber            | <accountNo>  |
-      | RoutingNumber            | <routingNo>  |
-    Then I validate header and and page elements on Review & Submit page
-    #When I click on Confirm and Pay
-    #And I navigate to Payment confirmation page and validate all the page elements
-
-    Examples:
-      | TID   | planType | memberID    | dob        | siteName | FirstName | MiddleName | LastName  | accountNo  | routingNo |
-     # | 10000 | MAPD     | 979160486-1 | 03/16/1989 | AARP     | Guest     | A          | Payments1 | 1234512345 | 123123123 |
-      | 10001 | PDP      | 967617615-1  | 12/17/1952 | AARP     | Guest     | B          | Payments2 | 1234512345 | 123123123 |
-     # | 10002 | PDP      | 980958988-1 | 04/08/1933 | RETIREE  | Guest     | C          | Payments3 | 1234512345 | 123123123 |
-     # | 10003 | MAPD     | 978196889   | 10/19/1941 | PCP      | Guest     | D          | Payments4 | 1234512345 | 123123123 |
-    #  | 10004 | MAPD     | 911808274   | 09/06/1945 | MEDICA   | Guest     | E          | Payments5 | 1234512345 | 123123123 |
-
-  @prod_guestPayment11 @prod_makeOneTimePayment @prod_otherAmount @prod_ccFLow
+  @prod_guestPayment09 @prod_makeOneTimePayment @prod_otherAmount @prod_ccFLow
   Scenario Outline: TID: <TID> - To validate the Guest Payment home page with different brands
 
     Given I am on the login screen of Guest Payments Portal
@@ -278,14 +218,10 @@ Feature: 1.06.7 Member Guest Payments Page - Member Auth - PROD
 
     Examples:
       | TID   | planType | memberID      | dob           | siteName    |Name                 | CreditCardNumber | validMonth | validYear |otherAmountDue    |
-      | 10000 | MAPD     | 920736343-1   | 12/06/1953    |   AARP      |CreditCardAutomation | 4111111111111111 |         04 |      2024 |  10.05           |
-     # | 10001 | MAPD     | 915516555-1   | 10/29/1947    |   UHC       |CreditCardAutomation | 4111111111111111 |         04 |      2024 |  15.20           |
-     # | 10002 | MAPD     | 915516555-1   | 10/29/1947    |   RETIREE   |CreditCardAutomation | 4111111111111111 |         04 |      2024 |  20.30           |
-    #  | 10003 | MAPD     | 915516555-1   | 10/29/1947    |   PCP       |CreditCardAutomation | 4111111111111111 |         04 |      2024 |  11.000          |
-      #| 10004 | MAPD     | 915516555-1   | 10/29/1947    |   MEDICA    |CreditCardAutomation | 4111111111111111 |         04 |      2024 |  333.00          |
+      | 10000 | MAPD     | 007311322-1   | 08/11/1949   |   AARP      |CreditCardAutomation  | 4121600170691201 |         01 |      2021 |  10.05           |
 
 
-  @prod_guestPayment12 @prod_makeOneTimePayment @prod_otherAmount @prod_eftCheckingFLow
+  @prod_guestPayment10 @prod_makeOneTimePayment @prod_otherAmount @prod_eftCheckingFLow
   Scenario Outline: TID: <TID> - To validate the Guest Payment home page with different brands
 
     Given I am on the login screen of Guest Payments Portal
@@ -309,14 +245,9 @@ Feature: 1.06.7 Member Guest Payments Page - Member Auth - PROD
 
     Examples:
       | TID   | planType | memberID    | dob        | siteName | FirstName | MiddleName | LastName  | accountNo  | routingNo | otherAmountDue |
-    #  | 10000 | MAPD     | 979160486-1 | 03/16/1989 | AARP     | Guest     | A          | Payments1 | 1234512345 | 123123123 | 10.05          |
-     # | 10001 | PDP      | 016647204-1 | 06/12/1950 | AARP     | Guest     | B          | Payments2 | 1234512345 | 123123123 | 15.20          |
-      | 10002    | PDP      | 930341668-1 | 11/14/1954 | RETIREE  | Guest     | C          | Payments3 | 1234512345 | 123123123 | 20.30          |
-    #  | 10003 | MAPD     | 978196889   | 10/19/1941 | PCP      | Guest     | D          | Payments4 | 1234512345 | 123123123 | 11.000         |
-    #  | 10004 | MAPD     | 911808274   | 09/06/1945 | MEDICA   | Guest     | E          | Payments5 | 1234512345 | 123123123 | 333.00         |
+      | 10002    | PDP      |972288002-1 | 07/07/1954 | RETIREE  | Guest     | C          | Payments3 | 1234512345 | 123123123 | 20.30         |
 
-
-  @prod_guestPayment13 @prod_makeOneTimePayment @prod_changePaymentDetails
+  @prod_guestPayment11 @prod_makeOneTimePayment @prod_changePaymentDetails
   Scenario Outline: TID: <TID> - To validate the Guest Payment home page with different brands
 
     Given I am on the login screen of Guest Payments Portal
@@ -348,8 +279,4 @@ Feature: 1.06.7 Member Guest Payments Page - Member Auth - PROD
 
     Examples:
       | TID   | planType | memberID    | dob        | siteName | FirstName | MiddleName | LastName  | accountNo  | routingNo | otherAmountDue | Name                 | CreditCardNumber | validMonth | validYear |
-      | 10000 | MAPD     | 002613505-1 | 04/23/1941 | AARP     | Guest     | A          | Payments1 | 1234512345 | 123123123 | 10.05          | CreditCardAutomation | 4111111111111111 | 04         | 2024      |
-    #  | 10001 | MAPD     | 915516555-1 | 10/29/1947 | UHC      | Guest     | B          | Payments2 | 1234512345 | 123123123 | 15.20          | CreditCardAutomation | 4111111111111111 | 04         | 2024      |
-     # | 10002 | MAPD     | 915516555-1 | 10/29/1947 | RETIREE  | Guest     | C          | Payments3 | 1234512345 | 123123123 | 20.30          | CreditCardAutomation | 4111111111111111 | 04         | 2024      |
-    #  | 10003 | MAPD     | 915516555-1 | 10/29/1947 | PCP      | Guest     | D          | Payments4 | 1234512345 | 123123123 | 11.000         | CreditCardAutomation | 4111111111111111 | 04         | 2024      |
-    #  | 10004 | MAPD     | 915516555-1 | 10/29/1947 | MEDICA   | Guest     | E          | Payments5 | 1234512345 | 123123123 | 333.00         | CreditCardAutomation | 4111111111111111 | 04         | 2024      |
+      | 10000 | MAPD     | 944419140-1 | 07/13/1941 | AARP     | Guest     | A          | Payments1 | 1234512345 | 123123123 | 10.05          | CreditCardAutomation || 4121600170691201 |         01 |      2021 |   |

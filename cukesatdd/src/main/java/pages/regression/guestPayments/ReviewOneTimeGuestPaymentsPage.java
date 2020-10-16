@@ -119,6 +119,7 @@ public class ReviewOneTimeGuestPaymentsPage extends UhcDriver {
 
 
 		public void validateHeaderAndPageElementsOnReviewAndSubmitPage() {
+			
 			Assert.assertTrue("PROBLEM - unable to locate Review And Submit Header",guestPaymentsValidate(reviewAndSubmitHeader));
 			Assert.assertTrue("PROBLEM - unable to locate Review Payment Details Static Text",guestPaymentsValidate(reviewPaymentDetailsStaticText));
 			Assert.assertTrue("PROBLEM - unable to locate payment Details Header",guestPaymentsValidate(paymentDetailsHeader));
