@@ -3742,7 +3742,7 @@ for (int i = 0; i < initialCount + 1; i++) {
 	private Map<String, ArrayList<String>> dataMap;
 	
 	public ComparePlansPage clickFirstComparePlanBtn(String plantype){
-		firstComparePlanButton.click();
+		jsClickNew(firstComparePlanButton);
 		CommonUtility.waitForPageLoad(driver, comparePgnHeader, 5);
 		if(currentUrl().contains("/health-plans.html#/plan-compare"))
 			return new ComparePlansPage(driver);

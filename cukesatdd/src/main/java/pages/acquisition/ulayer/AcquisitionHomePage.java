@@ -1120,7 +1120,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	public VPPPlanSummaryPage searchPlansWithOutCounty(String zipcode) throws InterruptedException {
 
-//		waitForPageLoadSafari();
+		waitForPageLoadSafari();
 		CommonUtility.waitForPageLoadNew(driver, zipCodeField, 30);
 		sendkeys(zipCodeField, zipcode);
 		viewPlansButton.click();
@@ -1216,10 +1216,12 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	public PharmacySearchPage navigateToPharmacyLocator() {
 		// checkModelPopup(driver);
-		Actions action = new Actions(driver);
-		scrollToView(ourPlansHoverLink);
-		action.moveToElement(navigationSectionHomeLink).moveToElement(ourPlansHoverLink).build().perform();
+//		Actions action = new Actions(driver);
+//		action.moveToElement(navigationSectionHomeLink).moveToElement(ourPlansHoverLink).build().perform();
 //		pharmacylocator.click();
+		scrollToView(ourPlansHoverLink);
+		jsMouseOver(navigationSectionHomeLink);
+		jsMouseOver(ourPlansHoverLink);
 		jsClickNew(pharmacylocator);
 		CommonUtility.checkPageIsReadyNew(driver);
 		
@@ -2341,10 +2343,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		CommonUtility.waitForPageLoadNewForClick(driver, SubmitBtn, 60);
 		jsClickNew(SubmitBtn);
 		waitForPageLoadSafari();
-		validateNew(SearchResults, 60);
+		CommonUtility.waitForPageLoadNew(driver, SearchResults, 60);
 		checkModelPopup(driver, 20);
 		
-//		CommonUtility.waitForPageLoadNew(driver, SearchResults, 60);
 
 	}
 

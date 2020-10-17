@@ -1199,11 +1199,13 @@ try {
     		// First checking to see if the loading indicator is found
     		// we catch and throw no exception here in case they aren't ignored
     		try {
+    			threadsleep(2);
     			System.out.println("Waiting to check if Loading screen is present");
     			loadingScreen = fwait.until(new Function<WebDriver, List<WebElement>>() {
-    				public List<WebElement> apply(WebDriver driver) {
-    					return driver.findElements(By.xpath("//div[(((@id='overlay' and not(./ancestor::footer)) or @id='loading_fader' or @class='loading-block') and not(contains(@style,'none')))]"));
-    				}
+					public List<WebElement> apply(WebDriver driver) {
+						return driver.findElements(By.xpath(
+								"//div[(((@id='overlay' and not(./ancestor::footer)) or @id='loading_fader' or @class='loading-block' or @class='spinner') and not(contains(@style,'none')))]"));
+					}
     			});
     		} catch (Exception e) {}
 
