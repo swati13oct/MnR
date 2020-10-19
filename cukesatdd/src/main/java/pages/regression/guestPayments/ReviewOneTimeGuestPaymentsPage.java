@@ -169,7 +169,7 @@ public class ReviewOneTimeGuestPaymentsPage extends UhcDriver {
 			CommonUtility.waitForPageLoadNew(driver, guestPaymentsHeader, 45);
 			
 			
-			if (driver.getCurrentUrl().contains("payment-details")) {
+			if (driver.getCurrentUrl().contains("make-a-payment")) {
 				return new OneTimeGuestPaymentsPage(driver);
 			}
 			else {
