@@ -361,19 +361,25 @@ public class HealthRecordPage  extends HealthRecordBase {
 		String offprodUrl="internal-redirect?deepLink=https%3A%2F%2Fihr.bluesteel.werally.in";
 		String prodUrl="internal-redirect?deepLink=https%3A%2F%2Fihr.werally.com";
 		checkModelPopup(driver,1);
+		System.out.println("OMG - 1...");
 		if (expComboTab) {
 			if (targetPage.equalsIgnoreCase("payments"))
 				handlePaymentComboTabIfComboUser(planType, memberType);
 			else
 				handleComboTabIfComboUser(planType, memberType);
 		}
+		System.out.println("OMG - 2...");
 		checkModelPopup(driver,1);
 		CommonUtility.waitForPageLoad(driver, shadowRootHeader, 5);
 		sleepBySec(2);
+		scrollToTopOfPg();
+		System.out.println("OMG - 3...");
 		if (noWaitValidate(shadowRootHeader)) {
+			System.out.println("OMG - 4...");
 			System.out.println("located shadow-root element, attempt to process further...");
 			WebElement root1 = expandRootElement(shadowRootHeader);
 			try {
+				System.out.println("OMG - 5...");
 				WebElement acctSettingMenuShadowRootBtn = root1.findElement(By.cssSelector("button[id*=dropdown-toggle]"));
 				//WebElement acctSettingMenuShadowRootBtn = root1.findElement(By.cssSelector("#dropdown-toggle-2"));
 				checkModelPopup(driver,1);
@@ -384,6 +390,7 @@ public class HealthRecordPage  extends HealthRecordBase {
 					Assert.assertTrue("PROBLEM - 'Health Record' link should be the first link on the dropdown", firstLink.getText().toLowerCase().contains("health record"));
 				}
 			} catch (Exception e) {
+				System.out.println("OMG - 6...");
 				e.printStackTrace();
 				if (noWaitValidate(sorryError)) {
 					//note: try one more time before giving up
@@ -402,9 +409,12 @@ public class HealthRecordPage  extends HealthRecordBase {
 					}
 				} 
 			}
+			System.out.println("OMG - 7...");
 			try {
+				System.out.println("OMG - 8...");
 				WebElement healthRecordLink = root1.findElement(By.cssSelector("a[data-testid*=TARGET_AWARE_HEALTH_RECORD]"));
 				if (noWaitValidate(healthRecordLink)) {
+					System.out.println("OMG - 9...");
 					String expUrl=stageUrl;
 					if (MRScenario.environment.equalsIgnoreCase("offline"))
 						expUrl=offprodUrl;
@@ -413,14 +423,17 @@ public class HealthRecordPage  extends HealthRecordBase {
 					String actUrl=healthRecordLink.getAttribute("href");
 					Assert.assertTrue("PROBLEM - Health Record link href value not as expected.  Expect to contains: '"+expUrl+"' | Actual URL='"+actUrl+"'", actUrl.contains(expUrl));
 					return true;
-				} else 
+				} else {
+					System.out.println("OMG - 10...");
 					return false;
+				}
 			} catch (Exception e) {
 				System.out.println("unable to locate Account Profile link on Rally Dashboard top menu");
 				return false;
 			}
 		} else if (noWaitValidate(testHarn_AcctProfBtn)) {
-
+			System.out.println("OMG - 11...");
+			System.out.println("TEST - no shadowroot...");
 			checkModelPopup(driver,1);
 			Assert.assertTrue("PROBLEM - unable to locate Account Profile button on Rally Dashboard top menu", noWaitValidate(testHarn_AcctProfBtn));
 			JavascriptExecutor jse = (JavascriptExecutor) driver;
@@ -433,21 +446,27 @@ public class HealthRecordPage  extends HealthRecordBase {
 			WebElement ihrLnk=null;
 			List<WebElement> acctProfOptLst=null;
 			if (noWaitValidate(testHarn_desktop_AcctProf_IHRLnk)) {
+				System.out.println("OMG - 12...");
 				ihrLnk=testHarn_desktop_AcctProf_IHRLnk;
 				acctProfOptLst=testHarn_AcctProfDropdown;
 			} else if (noWaitValidate(testHarn_desktop_AcctProf_IHRLnk_react)) { //note: rally pages starting to use react
+				System.out.println("OMG - 13...");
 				ihrLnk=testHarn_desktop_AcctProf_IHRLnk_react;
 				acctProfOptLst=testHarn_AcctProfDropdown_react;
 			} else {
+				System.out.println("OMG - 14...");
 				return false;
 			}
+			System.out.println("OMG - 15...");
 			Assert.assertTrue("PROBLEM - 'Health Record' should be the first link in the dropdown", acctProfOptLst.get(0).getText().toLowerCase().contains("health record"));
 
+			System.out.println("OMG - 16...");
 			String expUrl=stageUrl;
 			if (MRScenario.environment.equalsIgnoreCase("offline"))
 				expUrl=offprodUrl;
 			else if (MRScenario.environment.equalsIgnoreCase("prod")) 
 				expUrl=prodUrl;
+			System.out.println("OMG - 17...");
 			String actUrl=ihrLnk.getAttribute("href");
 			Assert.assertTrue("PROBLEM - Health Record link href value not as expected.  Expect to contains: '"+expUrl+"' | Actual URL='"+actUrl+"'", actUrl.contains(expUrl));
 			return true;

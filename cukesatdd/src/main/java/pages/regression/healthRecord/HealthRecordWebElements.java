@@ -118,7 +118,8 @@ public class HealthRecordWebElements  extends UhcDriver {
 	@FindBy(xpath="//div[@class='deskHeaderContainer']//div[contains(@class,'dropdown') and contains(@class,'open')]//a[contains(@id,'ihr')]")
 	protected WebElement testHarn_desktop_AcctProf_IHRLnk;
 
-	@FindBy(xpath="//div[@data-testid='shared-header']//ul[@aria-expanded='true' and (@id='dropdown-options-3' or @id='dropdown-options-2')]//a[@data-testid='TARGET_AWARE_HEALTH_RECORD']")
+	//tbd @FindBy(xpath="//div[@data-testid='shared-header']//ul[@aria-expanded='true' and (@id='dropdown-options-3' or @id='dropdown-options-2')]//a[@data-testid='TARGET_AWARE_HEALTH_RECORD']")
+	@FindBy(xpath="//div[@data-testid='shared-header']//ul[@aria-expanded='true' and contains(@id,'dropdown-options')]//a[@data-testid='TARGET_AWARE_HEALTH_RECORD']")
 	protected WebElement testHarn_desktop_AcctProf_IHRLnk_react;
 	
 	@FindBy(xpath="//h1[contains(text(),'Welcome') and contains(text(),'Health Record')]")

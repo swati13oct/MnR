@@ -875,6 +875,9 @@ public class PrepareForNextYearWebElements  extends UhcDriver {
 	@FindBy(xpath="//button[contains(text(),'Exit')]")
 	protected WebElement acqPopupExit;
 	
+	@FindBy(xpath="//pre[contains(text(),'Sorry')]")
+	protected WebElement acqPgErrMsg;
+	
 	//=======================================================================================
 	//note: group - review plan documents
 	//note: should not have
