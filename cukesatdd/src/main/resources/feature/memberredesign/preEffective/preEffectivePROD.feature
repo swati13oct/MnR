@@ -183,4 +183,4 @@ Feature: 1.15 Member pre-effective functionality
 
     Examples: 
       | planType     | memberType                    | copayCategory | technicalTFN   | segmentId | username | password | member      | planstartdate |
-      | GroupPDPSSUP | preeffectiveGROUPPDPSSUPCOMBO | NON LIS       | 1-888-980-8125 |       000 | jkuma14  | Brock@03 | pmorris1148 | 09/01/2020    |
+      | GroupPDPSSUP | preeffectiveGROUPPDPSSUPCOMBO | NON LIS       | 1-888-980-8125 |       000 | jkuma14  | Brock@03 | Be7779311   | 11/01/2020    |
