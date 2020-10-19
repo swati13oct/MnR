@@ -756,9 +756,11 @@ public class VppCommonStepDefinition {
 		            givenAttributesRow.get(i).getCells().get(1));
 		   }
 		   String planYear = givenAttributesMap.get("Plan Year");
-		   VPPPlanSummaryPage plansummaryPage = new VPPPlanSummaryPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
-		   getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
+		   VPPPlanSummaryPage plansummaryPage = new VPPPlanSummaryPage(wd);
+		   //VPPPlanSummaryPage plansummaryPage = new VPPPlanSummaryPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+		  // getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
 		   
 		   plansummaryPage.handlePlanYearSelectionPopup(planYear);
+		   getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
 		}
 }
