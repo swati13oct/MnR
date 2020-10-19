@@ -30,8 +30,8 @@ Feature: 1.05.1 Member Footer validation - Member Auth - PROD
     And the user validates the footer section in Benefits page
     Then the user navigates to the Order Plan Materials page
     And the user validates the footer section in Order Plan Materials page
-    Then the user navigates to the Health and Wellness page
-    And the user validates the footer section in Health and Wellness page
+    #Then the user navigates to the Health and Wellness page
+    #And the user validates the footer section in Health and Wellness page
    # Then the user navigates to the Pharmacies and Prescriptions page
    # And the user validates the footer section in Pharmacies and Prescriptions page
 
