@@ -1095,4 +1095,9 @@ public class DCEStepDefinitionAARP {
 		visitorProfile.validateVisitorProfilePage();
 	}
 
+	@Then("^verify DCE NBA is displayed$")
+	public void verify_dce_NBA_is_displayed() throws Throwable {
+		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
+		drugSummaryPage.validateDCENBAModal();
+	}
 }
