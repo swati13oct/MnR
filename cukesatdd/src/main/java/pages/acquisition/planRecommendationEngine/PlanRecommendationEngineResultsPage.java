@@ -1347,6 +1347,7 @@ public boolean changePlanyear(String year) {
 		if (validate(currentPlanYear, 15)) {
 			currentPlanYear.click();
 			Assert.assertTrue(currentPlanYearSelected.getAttribute("id").length()>0,"Current Plan Year is not Selected");
+			threadsleep(5000);
 			return true;
 		}
 	}
@@ -1356,6 +1357,7 @@ public boolean changePlanyear(String year) {
 		if (validate(futurePlanYear, 15)) {
 			futurePlanYear.click();
 			Assert.assertTrue(futurePlanYearSelected.getAttribute("id").length()>0,"Future Plan Year is not Selected");
+			threadsleep(5000);
 			return true;
 		} else {
 			Assert.assertTrue(false, "Future Plan Year Toggle is Needed");

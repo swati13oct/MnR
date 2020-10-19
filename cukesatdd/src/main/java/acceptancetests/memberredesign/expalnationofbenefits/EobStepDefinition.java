@@ -524,6 +524,7 @@ public class EobStepDefinition {
 		} else {
 			AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
 					.getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
+			Assert.assertTrue("PROBLEM - unable to land on dashboard page successfully", accountHomePage!=null);
 			eobPage = accountHomePage.navigateDirectToEOBPag();
 		}
 

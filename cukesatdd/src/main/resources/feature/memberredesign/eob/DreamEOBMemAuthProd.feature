@@ -5,7 +5,32 @@ Feature: 1.04.2.2 To Test DREAM EOB for Members - E2E - Member Auth - PROD
   #   Given feature security flag must set to true when testing on stage env
   #    | Feature           | UCPEob |
 
+  #----- begin sanity
+  @prod_sanity
+  Scenario Outline: -index: <index> -planType: <planType> -memberType: <memberType> -To verify DREAM EOB page content and PDFs
+    Given the user is on member auth login flow page
+    When the member is able to login with correct username and password
+      | Username | <username> |
+      | Password | <password> |
+    And Member Enters the Username he wants to search
+      | MemUsername | <MemUserName> |
+    And user clicks on member to select
+    And user stores test input for validations
+      | Username | <MemUserName> |
+      | Plan Type    | <planType>    |
+      | Member Type  | <memberType>  |
+    #-------------- navigate to the target test page for testing
+    Then the user navigates to EOB page
+    #----- Validate Date Range Last 18 months ----  
+    And the user selects the desired date range
+      | Date Range | Last 18 months |
+    Then the user validates search result section content for DREAM EOB
 
+    Examples: 
+      | index | username  | password  | MemUserName             | planType | memberType        | flagZeroEob |
+      | S01   | kkumard   | mnrs786@  | WFBATES@GMAIL.COM       | MAPD     | COSMOS_DEOB       | true        |
+ 
+  #----- begin regression
   @prod_dreamEob01 @E2E
   Scenario Outline: -index: <index> -planType: <planType> -memberType: <memberType> -To verify DREAM EOB page content and PDFs
     Given the user is on member auth login flow page

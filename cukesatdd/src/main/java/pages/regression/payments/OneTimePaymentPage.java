@@ -596,7 +596,7 @@ public class OneTimePaymentPage extends UhcDriver {
 	public ConfirmOneTimePaymentPage selectAgreeAndClickOnSubmitPaymentsforOneTime() {
 		CommonUtility.waitForPageLoad(driver, EditPaymentInformation, 10);
 		TestHarness.checkForIPerceptionModel(driver);
-		System.out.println("User is on Review Review Your Automatic Payments Information Page");
+		System.out.println("User is on Review Your Automatic Payments Information Page");
 		PaymentsDataVerificationonReviewPage();
 		jsClickNew(AgreeCheckBox);
 		TestHarness.checkForIPerceptionModel(driver);

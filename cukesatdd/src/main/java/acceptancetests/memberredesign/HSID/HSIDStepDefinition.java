@@ -419,98 +419,6 @@ public class HSIDStepDefinition {
 		loginPage.switchToIperceptionSmileySurveyAndSubmit();
 
 	}
-	/* tbd 
-	//vvv note: added for 'sorry' login error workaround	
-	public boolean workaroundSorryErrorPage(WebDriver wd, String testDataType, String category, String planType) {
-		String bypassSorry = System.getProperty("bypassSorry");
-		if (bypassSorry==null) {
-			//System.out.println("bypassSorry not set, don't bother to handle Sorry page");
-			return false;
-		} else {
-			if (!bypassSorry.equalsIgnoreCase("yes") && !bypassSorry.equalsIgnoreCase("no")) {
-				//System.out.println("don't bother to handle Sorry page, bypassSorry can either be yes or no.  Actual="+bypassSorry);
-				return false;
-			} else if (bypassSorry.equalsIgnoreCase("no")) {
-				//System.out.println("don't bother to handle Sorry page, bypassSorry flag set to no");
-				return false;
-			}
-		}
-		String type="";
-		if ((testDataType==null) && (category!=null)) {
-			type=category.toLowerCase();
-		} else if ((testDataType!=null) && (category==null)) {
-			type=testDataType.toLowerCase();
-		} else if ((testDataType!=null) && (category!=null)) {
-			type=testDataType.toLowerCase();
-		} else if ((testDataType==null) && (category==null)) {
-			type=planType.toLowerCase();
-		}
-		System.out.println("type="+type);
-		//note: login failure is sorry error, check to see if it's candidate for workaround
-		if 	(type.contains("claims") ||type.contains("reward")
-				||type.contains("contactus")||type.contains("profilepref")
-				||type.contains("order") ||type.contains("header")
-				||type.contains("pharmacylocator") ||type.contains("needhelp")
-				||type.contains("pnp")
-				) {	//for now only doing workaround for the above features
-			String forType="claims";
-			if (type.contains("contactus")) {
-				forType="contactus";
-			} else if (type.contains("profilepref")) {
-				forType="profilepref";
-			} else if (type.contains("order")) {
-				forType="order";
-			} else if (type.contains("header")) {
-				forType="header";
-			} else if (type.contains("reward")) {
-				forType="reward";
-			} else if (type.contains("pharmacylocator")) {
-				forType="pharmacylocator";
-			} else if (type.contains("pnp")) {
-				forType="pnp";
-			} else if (type.contains("needhelp")) { //note: if for needhelp validation, just set it as claims
-				forType="claims";
-			}
-			System.out.println("*** bypassSorry is set to yes ***");
-			System.out.println("Got 'sorry' login error and this is test for "+type+", will attempt the workaround");
-			
-			if (planType==null) {
-				planType="NA";
-			}
-			AccountHomePage accountHomePage=new AccountHomePage(wd);
-			HashMap<String, String> workaroundInfoMap=new HashMap<String, String>();
-			workaroundInfoMap.put("needWorkaround","yes");
-			workaroundInfoMap.put("planType",planType);
-			workaroundInfoMap.put("testType", forType);
-			accountHomePage.setAttemptSorryWorkaround(workaroundInfoMap);
-			if (type.contains("reward")) { //proceed to switch page now
-				accountHomePage.workaroundAttempt("reward");
-			} 
-			getLoginScenario().saveBean(PageConstantsMnR.ACCOUNT_HOME_PAGE,accountHomePage);
-			return true;
-		} else {
-			String msg="not workaround candidate";
-			System.out.println(msg);
-			return false;
-		}
-	}
-	
-	public boolean isPotentialSorryWorkaroundCandidate(String planType){
-		boolean result=true;
-		List<String> tagsList=loginScenario.getTagList();
-		Iterator<String> it= tagsList.iterator();
-		while(it.hasNext()){
-			String tagName=it.next();
-			 if  (tagName.contains("NegativeScenario")){
-				 System.out.println("This scenario contains *NegativeScenario* tag");
-				 return false;
-			 }
-		}
-		System.out.println("This scenario does not contain *NegativeScenario* tag");
-		return result;
-    }
-	//^^^ note: added for 'sorry' login error workaround	
-	*/
 	
 	//----------- updated to handle microapp
 	@And("^login with following details logins in the member portal and validate elements$")
@@ -620,7 +528,6 @@ public class HSIDStepDefinition {
 
 		if ("YES".equalsIgnoreCase(MRScenario.isHSIDCompatible)) { //note: isHSIDCompatible=yes then only path is to dashboard
 			HSIDLoginPage loginPage = new HSIDLoginPage(wd);
-		
 
 			if (validateFooter!=null && validateFooter.equalsIgnoreCase("yes")) {
 				loginPage.validateFooter();
@@ -648,7 +555,6 @@ public class HSIDStepDefinition {
 			if (accountHomePage != null) {
 				getLoginScenario().saveBean(PageConstantsMnR.ACCOUNT_HOME_PAGE, accountHomePage);
 			} else {  
-				//tbd sorryWorkAroundAttempt(wd, testDataType, category, planType);
 				try {
 					WebElement sorry=wd.findElement(By.xpath("//h1[@translate='INTERNAL_ERROR_SORRY']")); 
 					Assert.assertTrue("***** Error in loading Redesign Account Landing Page ***** Got error for 'Sorry. it's not you, it's us'", !sorry.isDisplayed());
@@ -704,55 +610,6 @@ public class HSIDStepDefinition {
 		}
 	}
 	
-	/* tbd 
-	public void sorryWorkAroundAttempt(WebDriver wd, String testDataType, String category, String planType) throws InterruptedException {
-		// note: accountHomePage==null, instead of fail it right away, check to see if it is worth it go workaround it
-		if ((testDataType==null) && (category==null) && (planType==null)) {
-			System.out.println("not workaround candidate, don't have enough info to determine if woorkaround is possible, test doesn't have the 'Test Data Type' or 'Member Type' or 'Plan Type' input ");
-			Assert.assertTrue("***** Error in loading  Redesign Account Landing Page *****", false);
-		} else {
-			//System.out.println("accountHomePage==null, try one more check to see if workaround can be applied before calling it quit");
-			boolean hasSorryError=false;
-			boolean hasWentWrongError=false;
-			try { //check to see if it has sorry error
-				WebElement sorry=wd.findElement(By.xpath("//h1[@translate='INTERNAL_ERROR_SORRY']")); 
-				if (sorry.isDisplayed()) {
-					hasSorryError=true;
-				}
-			} catch (Exception e) {}
-			try { //check to see if it has something went wrong eeror
-				WebElement wentWrong=wd.findElement(By.xpath("//h1[contains(text(),'Something went wrong')]"));
-				if (wentWrong.isDisplayed()) {
-					hasWentWrongError=true;
-				}
-			} catch (Exception e) {}
-			if (hasSorryError && isPotentialSorryWorkaroundCandidate(planType)) {
-				//note: has the potential for sorry workaround if getting sorry error
-				Thread.sleep(1500);	//sometimes the sorry text take a bit longer to load
-				try {
-					boolean result=workaroundSorryErrorPage(wd, testDataType, category, planType);
-					Assert.assertTrue("***** Error in loading Redesign Account Landing Page ***** Got error for 'Sorry. it's not you, it's us'", result);
-				} catch (Exception e) {
-					System.out.println("Exception: "+e);
-					Assert.assertTrue("***** Error in loading  Redesign Account Landing Page *****", false);
-				}
-			} else if(hasWentWrongError) {
-				Assert.assertTrue("***** Error in loading Redesign Account Landing Page ***** Got error for 'Something went wrong'", false);
-			} else {
-				if (hasSorryError && !isPotentialSorryWorkaroundCandidate(planType)) {
-					System.out.println("not candidate for 'sorry' error work around");
-					Assert.assertTrue("***** Error in loading Redesign Account Landing Page *-*-* Got error that's NOT 'Sorry. it's not you, it's us' OR 'Something went wrong'", false);
-				} else {
-					System.out.println("Not the 'sorry' or 'something went wrong' login error, it's some other login error");
-					Assert.assertTrue("***** Error in loading Redesign Account Landing Page ***** Got error that's NOT 'Sorry. it's not you, it's us' OR 'Something went wrong'", false);
-				}
-			}
-		}
-
-	}
-	*/
-	
-
 	@And("^login with a deeplink in the member portal and validate elements$")
 	public void login_with_deeplink(DataTable memberAttributes)
 			throws Exception {
@@ -850,6 +707,7 @@ public class HSIDStepDefinition {
 
 	@Given("^feature security flag must set to true when testing on stage env$")
 	public void checkSecurityFlag(DataTable memberAttributes) {
+		boolean useStage3=false;
 		Map<String, String> memberAttributesMap=parseInputArguments(memberAttributes);
 		String feature=memberAttributesMap.get("Feature");
 		
@@ -867,31 +725,31 @@ public class HSIDStepDefinition {
 		
 		System.out.println("feature="+feature);
 		String securityFlagXpath="//td[text()='enableSecurity']/following-sibling::td";
-		String configPgUrl="";
-		if (feature.equals("ClaimsMicroApp")) {
-			configPgUrl="http://ucp-claims-mnr-ucp-stage-3.ocp-ctc-dmz-stg.optum.com/ClaimsMicroApp/wsConfig";
-		} else if (feature.equals("UCPEob")) {
-			configPgUrl="http://ucp-eob-mnr-ucp-stage-3.ocp-ctc-dmz-stg.optum.com/UCPEob/wsConfig";
-		} else if (feature.equals("UCPHealthWellness")) {
-			configPgUrl="http://ucp-health-wellness-mnr-ucp-stage-3.ocp-ctc-dmz-stg.optum.com/UCPHealthWellness/wsConfig";
-		} else if (feature.equals("UCPBenefits")) {
-			configPgUrl="http://ucp-benefits-mnr-ucp-stage-3.ocp-ctc-dmz-stg.optum.com/UCPBenefits/wsConfig";
-		} else if (feature.equals("UCPPlanDocuments")) {
-			configPgUrl="http://ucp-plan-documents-mnr-ucp-stage-3.ocp-ctc-dmz-stg.optum.com/UCPPlanDocuments/wsConfig";
-		} else if (feature.equals("UCPProfileAndPreferences")) {
-			configPgUrl="http://ucp-profile-preferences-mnr-ucp-stage-3.ocp-ctc-dmz-stg.optum.com/UCPProfileAndPreferences/wsConfig";
-		} else if (feature.equals("UCPOrderPlanMaterials")) {
-			configPgUrl="http://ucp-order-plan-materials-mnr-ucp-stage-3.ocp-ctc-dmz-stg.optum.com/UCPOrderPlanMaterials/wsConfig";
-		} else if (feature.equals("UCPMyDocuments")) {
-			configPgUrl="http://ucp-mydocuments-mnr-ucp-stage-3.ocp-ctc-dmz-stg.optum.com/UCPMyDocuments/wsConfig";
-		} else {
-			configPgUrl="https://www."+MRScenario.environment+"-medicare."+MRScenario.domain+"/"+feature+"/wsConfig";
-			if (MRScenario.environment.equals("stage")) 
-				configPgUrl="http://apsrs7260:8080/"+feature+"/wsConfig";
-			if (MRScenario.environment.contains("team-voc")) 
-				configPgUrl=configPgUrl.replace("www.", "");
+		String stageDomain="http://apsrs7260:8080";
+		if (useStage3) {
+			if (feature.equals("ClaimsMicroApp")) {
+				stageDomain="http://ucp-claims-mnr-ucp-stage-3.ocp-ctc-dmz-stg.optum.com";
+			} else if (feature.equals("UCPEob")) {
+				stageDomain="http://ucp-eob-mnr-ucp-stage-3.ocp-ctc-dmz-stg.optum.com";
+			} else if (feature.equals("UCPHealthWellness")) {
+				stageDomain="http://ucp-health-wellness-mnr-ucp-stage-3.ocp-ctc-dmz-stg.optum.com";
+			} else if (feature.equals("UCPBenefits")) {
+				stageDomain="http://ucp-benefits-mnr-ucp-stage-3.ocp-ctc-dmz-stg.optum.com";
+			} else if (feature.equals("UCPPlanDocuments")) {
+				stageDomain="http://ucp-plan-documents-mnr-ucp-stage-3.ocp-ctc-dmz-stg.optum.com";
+			} else if (feature.equals("UCPProfileAndPreferences")) {
+				stageDomain="http://ucp-profile-preferences-mnr-ucp-stage-3.ocp-ctc-dmz-stg.optum.com";
+			} else if (feature.equals("UCPOrderPlanMaterials")) {
+				stageDomain="http://ucp-order-plan-materials-mnr-ucp-stage-3.ocp-ctc-dmz-stg.optum.com";
+			} else if (feature.equals("UCPMyDocuments")) {
+				stageDomain="http://ucp-mydocuments-mnr-ucp-stage-3.ocp-ctc-dmz-stg.optum.com";
+			}
 		}
-		
+		//tbd configPgUrl="https://www."+MRScenario.environment+"-medicare."+MRScenario.domain+"/"+feature+"/wsConfig";
+		String configPgUrl=stageDomain+"/"+feature+"/wsConfig";
+		if (MRScenario.environment.contains("team-voc")) 
+			configPgUrl=configPgUrl.replace("www.", "");
+				
 		System.out.println("Config page URL="+configPgUrl);
 		MRScenario m=new MRScenario();
 		WebDriver d=m.getWebDriverNew();
@@ -935,6 +793,24 @@ public class HSIDStepDefinition {
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		PaymentsDeeplinkLoginPage paymentsDeeplinkLoginPage = new PaymentsDeeplinkLoginPage(wd);
 		paymentsDeeplinkLoginPage.navigateToLoginURL();
+		getLoginScenario().saveBean(PageConstants.STAGE_PAYMENT_DEEPLINK_lOGIN_PAGE,paymentsDeeplinkLoginPage );	
+	}	
+	
+	@Given("^user login with payment Overview link$")
+	public void user_login_with_payment_Overview_link() throws InterruptedException{
+		WebDriver wd = getLoginScenario().getWebDriver();
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+		PaymentsDeeplinkLoginPage paymentsDeeplinkLoginPage = new PaymentsDeeplinkLoginPage(wd);
+		paymentsDeeplinkLoginPage.navigateToLoginOverviewURL();
+		getLoginScenario().saveBean(PageConstants.STAGE_PAYMENT_DEEPLINK_lOGIN_PAGE,paymentsDeeplinkLoginPage );	
+	}
+	
+	@Given("^Member login with payment Overview-new link$")
+	public void Member_login_with_payment_Overview_New_link() throws InterruptedException{
+		WebDriver wd = getLoginScenario().getWebDriver();
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+		PaymentsDeeplinkLoginPage paymentsDeeplinkLoginPage = new PaymentsDeeplinkLoginPage(wd);
+		paymentsDeeplinkLoginPage.navigateToLoginOverviewNewURL();
 		getLoginScenario().saveBean(PageConstants.STAGE_PAYMENT_DEEPLINK_lOGIN_PAGE,paymentsDeeplinkLoginPage );	
 	}
 	/** 
