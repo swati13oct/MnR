@@ -20,7 +20,7 @@ Feature: 1.11 Member Pharmacy Locator tool Page- Member Auth - PROD
     #-------------- navigate to the target test page for testing
 		When the user navigates to pharmacy search page
     #------ English -----------------------------------
-		And the user validates header section content
+		#And the user validates header section content
 			| Member Type                                | <memberType>            |
 	#And the user validates tooltips on filters
 			| Member Type                                | <memberType>            |
