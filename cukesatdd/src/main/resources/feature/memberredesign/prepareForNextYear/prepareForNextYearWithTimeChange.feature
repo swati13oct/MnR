@@ -7,7 +7,7 @@ Feature: 1.25 Member Prepare For Next Year - With system time change test step
   # caution: should run it on team env only not as to impact other teams	
   # caution: examples in this scenario must be run sequential, no parallel    
   #------------------------------------------------------------------------------------------	    
-  @prepareForNextYear03 @withSystemTimeChange @teamEnv
+  @pfny03 @withSystemTimeChange @teamEnv
   Scenario Outline: -Index <index> -FID <FID> -Plan Type: <planType> -Member Type: <memberType> - To verify Prepare For Next Year tab and page display behavior throughout different milestones
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>         |
@@ -128,12 +128,12 @@ Feature: 1.25 Member Prepare For Next Year - With system time change test step
 	Then the user validates Prepare For Next Year page content
 	Then test setup rolls back system date to current date for clean up after test
 
-    @prepareForNextYear03_ind
+    @pfny03_ind
     Examples: 
 	    | index | FID     | planType | memberType         | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | co_us | co_es | co_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh | showNxtYrPlan |
 	    | 11    | F437767 | MAPD	 | IND_PFNY           | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true          |
 
-    #@prepareForNextYear03_grp
+    #@pfny03_grp
     #Examples: 
 	#    | index | FID     | planType | memberType         | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | co_us | co_es | co_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh | showNxtYrPlan |
 	#    | 13    | F437767 | MAPD	 | UHC_GRP_PFNY        | true  | true  | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false | true          |
