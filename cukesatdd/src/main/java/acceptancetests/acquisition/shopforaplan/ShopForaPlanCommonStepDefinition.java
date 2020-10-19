@@ -111,7 +111,8 @@ public class ShopForaPlanCommonStepDefinition {
 			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
 					givenAttributesRow.get(i).getCells().get(1));
 		}
-		String planyear = "2019"; 
+		//String planyear = "2019"; 
+		String PlanYear = (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_YEAR); 
 		String plantype = givenAttributesMap.get("Plan Type");
 		String planName = givenAttributesMap.get("Plan Name");
 		try {
@@ -127,7 +128,8 @@ public class ShopForaPlanCommonStepDefinition {
 		
 		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_TYPE, plantype);
 		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_NAME, planName);
-		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_YEAR, planyear);
+		//getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_YEAR, planyear);
+		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_YEAR, PlanYear);
 	}
 	
 	
