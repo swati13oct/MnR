@@ -196,6 +196,18 @@ public class DrugDetailsPage extends UhcDriver {
 	@FindBy(xpath = "//*[text()='Return to Profile ']")
 	public WebElement returnToProfileLink;
 	
+	@FindBy(xpath = "//*[@id='guest-flow-widget-head']/../..")
+	public WebElement dceNBAModal;
+
+	@FindBy(xpath = "//*[@id='guest-flow-widget-head' and text()='Save your work for later']")
+	public WebElement dceNBAModalMsg;
+
+	@FindBy(xpath = "//button/*[text()='Create Your Profile']")
+	public WebElement dceNBAModalBtn;
+	
+	@FindBy(id = "SignIn")
+	public WebElement signInBtn;
+	
 	public DrugDetailsPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -766,6 +778,17 @@ public class DrugDetailsPage extends UhcDriver {
 		}
 		catch(Exception e) {
 			Assert.fail("Return to profile not displayed");
+		}
+	}
+	
+	public void validateDCENBAModal() {
+		if (validateNew(dceNBAModal)) {
+			validateNew(dceNBAModalMsg);
+			validateNew(dceNBAModalBtn);
+			dceNBAModalBtn.click();
+			waitforElement(signInBtn);
+			Assert.assertTrue("user not navigated to login page",
+					driver.getCurrentUrl().contains("app/index.html#/login"));
 		}
 	}
 }

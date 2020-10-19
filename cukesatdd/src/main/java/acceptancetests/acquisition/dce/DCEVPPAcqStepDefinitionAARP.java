@@ -604,5 +604,4 @@ public class DCEVPPAcqStepDefinitionAARP {
 			getLoginScenario().saveBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE, dce);
 		}
 	}
-
 }

@@ -331,7 +331,7 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
     #Then load screen should be displayed in AARP
     And user should be navigated to Review drug cost estimate page
     And user should be able to see Medicare Advantage plan by default
-    And verify DCE NBA is displayed
+    And verify DCE NBA is displayed on drug summary page
 
     Examples: 
       | zipcode | county | isMultutiCounty | drug1   |

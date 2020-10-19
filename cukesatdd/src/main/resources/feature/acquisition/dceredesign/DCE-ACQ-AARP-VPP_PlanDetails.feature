@@ -270,13 +270,13 @@ Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanDetails AARP - To test DCE - VPP Plan De
     Then the user navigates to the plan details for the given plan type in AARP site
       | Plan Type | <plantype> |
       | Plan Name | <planname> |
-    And I access the DCE Redesign from Plan Details for the plan
+    And I access the DCE Redesign from Plan Details
     Then the user validates Get Started Page
     Then the user clicks on Build Drug List to navigate to Build Drug List Page
     Then the user searches and adds the following Drug to Drug List
       | DrugName | <drug1> |
     Then the user clicks on Review Drug Costs to Land on Drug DetailsP Page
-    And verify DCE NBA is displayed
+    And verify DCE NBA is displayed on drug details page
     
      Examples: 
       | zipcode | plantype | county       | isMultutiCounty | drug1 |planname|

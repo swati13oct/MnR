@@ -1095,9 +1095,25 @@ public class DCEStepDefinitionAARP {
 		visitorProfile.validateVisitorProfilePage();
 	}
 
-	@Then("^verify DCE NBA is displayed$")
-	public void verify_dce_NBA_is_displayed() throws Throwable {
+	@Then("^verify DCE NBA is displayed on drug summary page$")
+	public void verify_dce_NBA_is_displayed_on_summary_page() throws Throwable {
 		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
 		drugSummaryPage.validateDCENBAModal();
+	}
+	
+	@Then("^I access the DCE Redesign from Plan Details$")
+	public void the_user_navigates_plan_details() throws Throwable {
+		pages.acquisition.ulayer.PlanDetailsPage plandetailspage = (pages.acquisition.ulayer.PlanDetailsPage) getLoginScenario().getBean(PageConstants.PLAN_DETAILS_PAGE);
+		GetStartedPage getStartedPage = plandetailspage.navigateToDCERedesign();
+		if (null != getStartedPage) {
+			getLoginScenario().saveBean(PageConstants.DCE_Redesign_GetStarted, getStartedPage);
+		} else
+			Assert.fail("DCE Redesign page object not loaded");
+	}
+	
+	@Then("^verify DCE NBA is displayed on drug details page$")
+	public void verify_dce_NBA_is_displayed_on_drug_details_page() throws Throwable {
+		DrugDetailsPage drugDetailsPage = new DrugDetailsPage(driver);
+		drugDetailsPage.validateDCENBAModal();
 	}
 }
