@@ -79,7 +79,7 @@ Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanDetails AARP - To test DCE - VPP Plan De
     Then the user navigates to the plan details for the given plan type in AARP site
       | Plan Type | <plantype> |
       | Plan Name | <planname> |
-    And I access the DCE Redesign on aarp site from Plan Details for the plan
+    And I access the DCE Redesign from Plan Details
     Then the user validates Get Started Page
     Then the user clicks on Build Drug List to navigate to Build Drug List Page
     Then the user searches and adds the following Drug to Drug List
@@ -120,7 +120,7 @@ Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanDetails AARP - To test DCE - VPP Plan De
     Then the user navigates to the plan details for the given plan type in AARP site
       | Plan Type | <plantype> |
       | Plan Name | <planname> |
-    And I access the DCE Redesign on aarp site from Plan Details for the plan
+    And I access the DCE Redesign on aarp site from Plan Details for the plan 
     Then the user validates Get Started Page
     Then the user clicks on Build Drug List to navigate to Build Drug List Page
     Then the user searches and adds the following Drug to Drug List
@@ -137,7 +137,7 @@ Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanDetails AARP - To test DCE - VPP Plan De
      
       Examples: 
       | zipcode | plantype | county | isMultutiCounty | drug1     | drug2                | drug3      | drug4         | drug5            | drug6   | planname                                           |
-      |   90210 | MAPD     | none   | no              | meloxicam | diclofenac potassium | febuxostat | buprenorphine | fentanyl citrate | Lipitor | AARP Medicare Advantage SecureHorizons Focus (HMO) |
+      |   90210 | MAPD     | none   | no              | meloxicam | diclofenac potassium | febuxostat | buprenorphine | fentanyl citrate | Lipitor | AARP Medicare Advantage Freedom Plus (HMO-POS) |
       
        @DCE_Redesign_VPPSummary_to_Vpp_Details_PDP
        
@@ -281,3 +281,25 @@ Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanDetails AARP - To test DCE - VPP Plan De
      Examples: 
       | zipcode | plantype | county       | isMultutiCounty | drug1 |planname|
       |   78006 | SNP      | Bexar County | yes             | Emsam |UnitedHealthcare Dual Complete (HMO D-SNP)|
+      
+      @dceRedesing_PlanCost @F501519
+      Scenario Outline: Test to Verify Prescription Drug benefit and plan cost tab on vpp details 
+      Given the user is on AARP medicare acquisition site landing page
+    When the user performs plan search using following information in the AARP site
+      | Zip Code        | <zipcode>         |
+      | County Name     | <county>          |
+      | Is Multi County | <isMultutiCounty> |
+    And the user views the plans of the below plan type in AARP site
+      | Plan Type | <plantype> |
+    And the user selects plan year for the AARP site
+      | Plan Year | <planyear> |
+    Then the user view plan details of the above selected plan in AARP site and validates
+      | Plan Name | <planName> |
+    Then the user click on Prescription Drug Benefits and validates in AARP site
+    Then the user click on Plan costs tab and validates in AARP site
+      | Monthly Premium | <monthlyPremium> |
+      | Yearly Premium  | <yearlyPremium>  |
+
+    Examples: 
+      | TID   | zipcode | isMultutiCounty | county         | plantype | planName                                       | monthlyPremium | yearlyPremium | planyear |
+      | 15638 |   53503 | No              | Iowa County    | MAPD     | UnitedHealthcare Medicare Advantage Open (PPO) | $47            | $564          | current  |
