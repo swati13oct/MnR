@@ -256,12 +256,15 @@ public class MRScenario {
 				csvName = "MemberRedesign-VBF-Teamci.csv";
 
 			} else if ((environment.contains("team-a")
-					|| ((environment.equalsIgnoreCase("team-h")) || (environment.equalsIgnoreCase("team-e"))
+					|| (//(environment.equalsIgnoreCase("team-h")) || Team-h condition added separately to take username as login
+							(environment.equalsIgnoreCase("team-e"))
 							|| (environment.equalsIgnoreCase("team-f")) || (environment.equalsIgnoreCase("team-g"))
 							|| (environment.equalsIgnoreCase("team-c")) || (environment.equalsIgnoreCase("team-acme")) || (environment.equalsIgnoreCase("team-voc"))|| (environment.equalsIgnoreCase("team-t") || (environment.equalsIgnoreCase("team-chargers") ||(environment.equalsIgnoreCase("chargers-qa"))))))) {
 				csvName = "MemberRedesign-UUID.csv";
 			} else if (tagName.equalsIgnoreCase("@MemberVBF") && environment.contains("stage")) {
 				csvName = "MemberRedesign-VBF.csv";
+			} else if (environment.equalsIgnoreCase("team-h")) {
+				csvName = "UMS-Member-Type.csv";
 			}
 			/*
 			 * note: Dec2018 - comment out because this section caused stage run not to use
@@ -733,6 +736,7 @@ try {
 
 		
 		  
+		
 		  isSauceLabSelected = true; DesiredCapabilities capabilities =
 		  DesiredCapabilities.chrome();
 		  
@@ -757,6 +761,7 @@ try {
 		  (MalformedURLException e) { // TODO Auto-generated catch block
 		  e.printStackTrace(); } return webDriver;
 		 
+		
 		/*
 		 * File pathToBinary = new
 		 * File("C:/Program Files (x86)/Google/Chrome/Application/chrome.exe");
@@ -771,6 +776,7 @@ try {
 		 * new ChromeDriver(options); webDriver.manage().window().maximize(); return
 		 * webDriver;
 		 */
+		 
 	}
 
 	public WebDriver getIEDriver() {
@@ -1008,7 +1014,7 @@ try {
 				DesiredCapabilities capabilities = DesiredCapabilities.chrome();
 				capabilities.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
 				//System.setProperty("webdriver.chrome.driver", pathToBinary);
-				System.setProperty("webdriver.chrome.driver", "C:/chromedriver_win32/chromedriver.exe");
+				System.setProperty("webdriver.chrome.driver", "C:\\ProgramData\\Chrome_driver_80.0.3987.16\\chromedriver.exe");
 				webDriver = new ChromeDriver();
 				saveBean(CommonConstants.WEBDRIVER, webDriver);
 				return webDriver;

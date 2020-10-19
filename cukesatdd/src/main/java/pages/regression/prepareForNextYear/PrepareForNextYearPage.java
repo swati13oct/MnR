@@ -81,14 +81,14 @@ public class PrepareForNextYearPage extends PrepareForNextYearBase {
 		return driver;
 	}
 
-	public List<String> validateFindUpdatesSectionContent(String planType, String memberType, Date currentDate, boolean showNxtYrPlanName) {
+	public List<String> validateFindUpdatesSectionContent(String planType, String memberType, Date currentDate, boolean showNxtYrPlanName, boolean sanityRun) {
 		Assert.assertTrue("PROBLEM - NON-SARS member type will need to provide user input for document display expected behavior in feature file.  This memberType='"+memberType+"'", memberType.toUpperCase().contains("SARS"));
 		HashMap<String, Boolean> docDisplayMap=null;
-		return validateFindUpdatesSectionContent(planType, memberType, currentDate, docDisplayMap, showNxtYrPlanName);
+		return validateFindUpdatesSectionContent(planType, memberType, currentDate, docDisplayMap, showNxtYrPlanName, sanityRun);
 	}
 	
 	
-	public List<String> validateFindUpdatesSectionContent(String planType, String memberType, Date currentDate, HashMap<String, Boolean> docDisplayMap, boolean showNxtYrPlanName) {
+	public List<String> validateFindUpdatesSectionContent(String planType, String memberType, Date currentDate, HashMap<String, Boolean> docDisplayMap, boolean showNxtYrPlanName, boolean sanityRun) {
 		List<String> note=new ArrayList<String>();
 		//---------------------------------------------
 		if (memberType.contains("IND")) {
@@ -107,10 +107,10 @@ public class PrepareForNextYearPage extends PrepareForNextYearBase {
 			note.addAll(validateHaveItem(targetItem, targetElement));
 
 
-			note.addAll(pnfyIndividual.validateReviewPlanChangesSection_ind(planType, memberType, currentDate, docDisplayMap));
-			note.addAll(pnfyIndividual.validateReviewPlanMaterialsSection_ind(planType, memberType, currentDate, docDisplayMap));
-			note.addAll(pnfyIndividual.validateComparePlanSection_ind(planType, memberType, currentDate, docDisplayMap, showNxtYrPlanName));
-			note.addAll(pnfyIndividual.validateEnrollSection_ind(planType, memberType, currentDate, docDisplayMap, showNxtYrPlanName));
+			note.addAll(pnfyIndividual.validateReviewPlanChangesSection_ind(planType, memberType, currentDate, docDisplayMap, sanityRun));
+			note.addAll(pnfyIndividual.validateReviewPlanMaterialsSection_ind(planType, memberType, currentDate, docDisplayMap, sanityRun));
+			note.addAll(pnfyIndividual.validateComparePlanSection_ind(planType, memberType, currentDate, docDisplayMap, showNxtYrPlanName, sanityRun));
+			note.addAll(pnfyIndividual.validateEnrollSection_ind(planType, memberType, currentDate, docDisplayMap, showNxtYrPlanName, sanityRun));
 		} else if (memberType.contains("GRP")) {
 			String targetItem="Find updates to your plan benefits section";
 			WebElement targetElement=grp_findUpdatesSection;
@@ -134,7 +134,7 @@ public class PrepareForNextYearPage extends PrepareForNextYearBase {
 			targetElement=grp_enrollPlanSection;
 			note.addAll(validateDontHaveItem(targetItem, targetElement));
 
-			note.addAll(pnfyGroup.validateReviewPlanDocumentsSection_grp(planType, memberType, currentDate, docDisplayMap));
+			note.addAll(pnfyGroup.validateReviewPlanDocumentsSection_grp(planType, memberType, currentDate, docDisplayMap, sanityRun));
 		} else if (memberType.contains("SARS")) {
 			String targetItem="Find updates to your plan benefits section";
 			WebElement targetElement=sars_findUpdatesSection;
@@ -158,20 +158,20 @@ public class PrepareForNextYearPage extends PrepareForNextYearBase {
 			targetElement=sars_enrollPlanSection;
 			note.addAll(validateHaveItem(targetItem, targetElement));
 
-			note.addAll(pnfySar.validateComparePlanSection_ind(planType, memberType, currentDate, showNxtYrPlanName));
-			note.addAll(pnfySar.validateEnrollSection_ind(planType, memberType, currentDate, showNxtYrPlanName));
+			note.addAll(pnfySar.validateComparePlanSection_ind(planType, memberType, currentDate, showNxtYrPlanName, sanityRun));
+			note.addAll(pnfySar.validateEnrollSection_ind(planType, memberType, currentDate, showNxtYrPlanName, sanityRun));
 		}
 
 		return note;
 	}
 
-	public List<String> validateBefM1Content(String planType, String memberType, Date currentDate, boolean showNxtYrPlanName) {
+	public List<String> validateBefM1Content(String planType, String memberType, Date currentDate, boolean showNxtYrPlanName, boolean sanityRun) {
 		Assert.assertTrue("PROBLEM - NON-SARS member type will need to provide user input for document display expected behavior in feature file.  This memberType='"+memberType+"'", memberType.toUpperCase().contains("SARS"));
 		HashMap<String, Boolean> docDisplayMap=null;
-		return validateBefM1Content(planType, memberType, currentDate, docDisplayMap, showNxtYrPlanName);
+		return validateBefM1Content(planType, memberType, currentDate, docDisplayMap, showNxtYrPlanName, sanityRun);
 	}
 	
-	public List<String> validateBefM1Content(String planType, String memberType, Date currentDate, HashMap<String, Boolean> docDisplayMap, boolean showNxtYrPlanName) {
+	public List<String> validateBefM1Content(String planType, String memberType, Date currentDate, HashMap<String, Boolean> docDisplayMap, boolean showNxtYrPlanName, boolean sanityRun) {
 		List<String> sectionNote1=new ArrayList<String>();
 		if (memberType.toUpperCase().contains("IND")) {
 			//note: individual is on team-atest | online-stage | offline-prod | online-prod already
@@ -183,10 +183,10 @@ public class PrepareForNextYearPage extends PrepareForNextYearBase {
 			List<String> s1=pnfyTimeline_ind.validateTimeLineBoxContent(expNoBlue_t1, expNoBlue_t2, expNoBlue_t3, expNoBlue_t4, expNoBlue_t5);
 			sectionNote1.addAll(s1);
 
-			List<String> s2=validateFindUpdatesSectionContent(planType, memberType, currentDate, docDisplayMap, showNxtYrPlanName);
+			List<String> s2=validateFindUpdatesSectionContent(planType, memberType, currentDate, docDisplayMap, showNxtYrPlanName, sanityRun);
 			sectionNote1.addAll(s2);
 		} else if (memberType.toUpperCase().contains("GRP")) {
-			List<String> s2=validateFindUpdatesSectionContent(planType, memberType, currentDate, docDisplayMap, showNxtYrPlanName);
+			List<String> s2=validateFindUpdatesSectionContent(planType, memberType, currentDate, docDisplayMap, showNxtYrPlanName, sanityRun);
 			sectionNote1.addAll(s2);
 		} else if (memberType.toUpperCase().contains("SARS")) {
 			//note: individual is on team-atest | online-stage | offline-prod | online-prod already
@@ -196,7 +196,7 @@ public class PrepareForNextYearPage extends PrepareForNextYearBase {
 			List<String> s1=pnfyTimeline_sars.validateTimeLineBoxContent(expNoBlue_t1, expNoBlue_t2, expNoBlue_t3);
 			sectionNote1.addAll(s1);
 
-			List<String> s2=validateFindUpdatesSectionContent(planType, memberType, currentDate, showNxtYrPlanName);
+			List<String> s2=validateFindUpdatesSectionContent(planType, memberType, currentDate, showNxtYrPlanName, sanityRun);
 			sectionNote1.addAll(s2);
 
 		} else {
@@ -206,13 +206,13 @@ public class PrepareForNextYearPage extends PrepareForNextYearBase {
 		return sectionNote1;
 	}
 
-	public List<String> validateAftOrEqM1BefM2Content(String planType, String memberType, Date currentDate, boolean showNxtYrPlanName) {
+	public List<String> validateAftOrEqM1BefM2Content(String planType, String memberType, Date currentDate, boolean showNxtYrPlanName, boolean sanityRun) {
 		Assert.assertTrue("PROBLEM - NON-SARS member type will need to provide user input for document display expected behavior in feature file.  This memberType='"+memberType+"'", memberType.toUpperCase().contains("SARS"));
 		HashMap<String, Boolean> docDisplayMap=null;
-		return validateAftOrEqM1BefM2Content(planType, memberType, currentDate, docDisplayMap, showNxtYrPlanName);
+		return validateAftOrEqM1BefM2Content(planType, memberType, currentDate, docDisplayMap, showNxtYrPlanName, sanityRun);
 	}
 	
-	public List<String> validateAftOrEqM1BefM2Content(String planType, String memberType, Date currentDate, HashMap<String, Boolean> docDisplayMap, boolean showNxtYrPlanName) {
+	public List<String> validateAftOrEqM1BefM2Content(String planType, String memberType, Date currentDate, HashMap<String, Boolean> docDisplayMap, boolean showNxtYrPlanName, boolean sanityRun) {
 		List<String> sectionNote1=new ArrayList<String>();
 		if (memberType.toUpperCase().contains("IND")) {
 			//note: individual is on team-atest | online-stage | offline-prod | online-prod already
@@ -224,11 +224,11 @@ public class PrepareForNextYearPage extends PrepareForNextYearBase {
 			List<String> s1=pnfyTimeline_ind.validateTimeLineBoxContent(expNoBlue_t1, expNoBlue_t2, expNoBlue_t3, expNoBlue_t4, expNoBlue_t5);
 			sectionNote1.addAll(s1);
 
-			List<String> s2=validateFindUpdatesSectionContent(planType, memberType, currentDate, docDisplayMap, showNxtYrPlanName);
+			List<String> s2=validateFindUpdatesSectionContent(planType, memberType, currentDate, docDisplayMap, showNxtYrPlanName, sanityRun);
 			sectionNote1.addAll(s2);
 		} else if (memberType.toUpperCase().contains("GRP")) {
 			//note: group is on team-atest 
-			List<String> s2=validateFindUpdatesSectionContent(planType, memberType, currentDate, docDisplayMap, showNxtYrPlanName);
+			List<String> s2=validateFindUpdatesSectionContent(planType, memberType, currentDate, docDisplayMap, showNxtYrPlanName, sanityRun);
 			sectionNote1.addAll(s2);
 		} else if (memberType.toUpperCase().contains("SARS")) {
 			//note: individual is on team-atest | online-stage | offline-prod | online-prod already
@@ -238,7 +238,7 @@ public class PrepareForNextYearPage extends PrepareForNextYearBase {
 			List<String> s1=pnfyTimeline_sars.validateTimeLineBoxContent(expNoBlue_t1, expNoBlue_t2, expNoBlue_t3);
 			sectionNote1.addAll(s1);
 
-			List<String> s2=validateFindUpdatesSectionContent(planType, memberType, currentDate, showNxtYrPlanName);
+			List<String> s2=validateFindUpdatesSectionContent(planType, memberType, currentDate, showNxtYrPlanName, sanityRun);
 			sectionNote1.addAll(s2);
 
 		} else {
@@ -247,13 +247,13 @@ public class PrepareForNextYearPage extends PrepareForNextYearBase {
 		return sectionNote1;
 	}
 
-	public List<String> validateAftOrEqM2BefM3Content(String planType, String memberType, Date currentDate, boolean showNxtYrPlanName) {
+	public List<String> validateAftOrEqM2BefM3Content(String planType, String memberType, Date currentDate, boolean showNxtYrPlanName, boolean sanityRun) {
 		Assert.assertTrue("PROBLEM - NON-SARS member type will need to provide user input for document display expected behavior in feature file.  This memberType='"+memberType+"'", memberType.toUpperCase().contains("SARS"));
 		HashMap<String, Boolean> docDisplayMap=null;
-		return validateAftOrEqM2BefM3Content(planType, memberType, currentDate, docDisplayMap, showNxtYrPlanName);
+		return validateAftOrEqM2BefM3Content(planType, memberType, currentDate, docDisplayMap, showNxtYrPlanName, sanityRun);
 	}
 
-	public List<String> validateAftOrEqM2BefM3Content(String planType, String memberType, Date currentDate, HashMap<String, Boolean> docDisplayMap, boolean showNxtYrPlanName) {
+	public List<String> validateAftOrEqM2BefM3Content(String planType, String memberType, Date currentDate, HashMap<String, Boolean> docDisplayMap, boolean showNxtYrPlanName, boolean sanityRun) {
 		List<String> sectionNote1=new ArrayList<String>();
 		if (memberType.toUpperCase().contains("IND")) {
 			//note: individual is on team-atest | online-stage | offline-prod | online-prod already
@@ -265,10 +265,10 @@ public class PrepareForNextYearPage extends PrepareForNextYearBase {
 			List<String> s1=pnfyTimeline_ind.validateTimeLineBoxContent(expNoBlue_t1, expNoBlue_t2, expNoBlue_t3, expNoBlue_t4, expNoBlue_t5);
 			sectionNote1.addAll(s1);
 
-			List<String> s2=validateFindUpdatesSectionContent(planType, memberType, currentDate, docDisplayMap, showNxtYrPlanName);
+			List<String> s2=validateFindUpdatesSectionContent(planType, memberType, currentDate, docDisplayMap, showNxtYrPlanName, sanityRun);
 			sectionNote1.addAll(s2);
 		} else if (memberType.toUpperCase().contains("GRP")) {
-			List<String> s2=validateFindUpdatesSectionContent(planType, memberType, currentDate, docDisplayMap, showNxtYrPlanName);
+			List<String> s2=validateFindUpdatesSectionContent(planType, memberType, currentDate, docDisplayMap, showNxtYrPlanName, sanityRun);
 			sectionNote1.addAll(s2);
 		} else if (memberType.toUpperCase().contains("SARS")) {
 			//note: individual is on team-atest | online-stage | offline-prod | online-prod already
@@ -278,7 +278,7 @@ public class PrepareForNextYearPage extends PrepareForNextYearBase {
 			List<String> s1=pnfyTimeline_sars.validateTimeLineBoxContent(expNoBlue_t1, expNoBlue_t2, expNoBlue_t3);
 			sectionNote1.addAll(s1);
 
-			List<String> s2=validateFindUpdatesSectionContent(planType, memberType, currentDate, docDisplayMap, showNxtYrPlanName);
+			List<String> s2=validateFindUpdatesSectionContent(planType, memberType, currentDate, docDisplayMap, showNxtYrPlanName, sanityRun);
 			sectionNote1.addAll(s2);
 		} else {
 			Assert.assertTrue("NOTE: This is not IND or GRP or SARs case, not supported", false);
@@ -286,7 +286,7 @@ public class PrepareForNextYearPage extends PrepareForNextYearBase {
 		return sectionNote1;
 	}
 
-	public List<String> validateAftOrEqM3BefM4Content(String planType, String memberType, Date currentDate, HashMap<String, Boolean> docDisplayMap, boolean showNxtYrPlanName) {
+	public List<String> validateAftOrEqM3BefM4Content(String planType, String memberType, Date currentDate, HashMap<String, Boolean> docDisplayMap, boolean showNxtYrPlanName, boolean sanityRun) {
 		List<String> sectionNote1=new ArrayList<String>();
 		if (memberType.toUpperCase().contains("IND")) {
 			//note: individual is on team-atest | online-stage | offline-prod | online-prod already
@@ -298,11 +298,11 @@ public class PrepareForNextYearPage extends PrepareForNextYearBase {
 			List<String> s1=pnfyTimeline_ind.validateTimeLineBoxContent(expNoBlue_t1, expNoBlue_t2, expNoBlue_t3, expNoBlue_t4, expNoBlue_t5);
 			sectionNote1.addAll(s1);
 
-			List<String> s2=validateFindUpdatesSectionContent(planType, memberType, currentDate, docDisplayMap, showNxtYrPlanName);
+			List<String> s2=validateFindUpdatesSectionContent(planType, memberType, currentDate, docDisplayMap, showNxtYrPlanName, sanityRun);
 			sectionNote1.addAll(s2);
 		} else if (memberType.toUpperCase().contains("GRP")) {
 			//note: group is on team-atest 
-			List<String> s2=validateFindUpdatesSectionContent(planType, memberType, currentDate, docDisplayMap, showNxtYrPlanName);
+			List<String> s2=validateFindUpdatesSectionContent(planType, memberType, currentDate, docDisplayMap, showNxtYrPlanName, sanityRun);
 			sectionNote1.addAll(s2);
 		} else {
 			Assert.assertTrue("NOTE: This is not Individual or Gropu case, this method is not applicable", false);
@@ -310,7 +310,7 @@ public class PrepareForNextYearPage extends PrepareForNextYearBase {
 		return sectionNote1;
 	}
 
-	public List<String> validateAftOrEqM4BefM5Content(String planType, String memberType, Date currentDate, HashMap<String, Boolean> docDisplayMap, boolean showNxtYrPlanName) {
+	public List<String> validateAftOrEqM4BefM5Content(String planType, String memberType, Date currentDate, HashMap<String, Boolean> docDisplayMap, boolean showNxtYrPlanName, boolean sanityRun) {
 		List<String> sectionNote1=new ArrayList<String>();
 		if (memberType.toUpperCase().contains("IND")) {
 			//note: individual is on team-atest | online-stage | offline-prod | online-prod already
@@ -322,13 +322,13 @@ public class PrepareForNextYearPage extends PrepareForNextYearBase {
 			List<String> s1=pnfyTimeline_ind.validateTimeLineBoxContent(expNoBlue_t1, expNoBlue_t2, expNoBlue_t3, expNoBlue_t4, expNoBlue_t5);
 			sectionNote1.addAll(s1);
 
-			List<String> s2=validateFindUpdatesSectionContent(planType, memberType, currentDate, docDisplayMap, showNxtYrPlanName);
+			List<String> s2=validateFindUpdatesSectionContent(planType, memberType, currentDate, docDisplayMap, showNxtYrPlanName, sanityRun);
 			sectionNote1.addAll(s2);
 		} else if (memberType.toUpperCase().contains("GRP")) {
 			List<String> s1=pnfyTimeline_ind.validateNoTimeLineBoxContent();
 			sectionNote1.addAll(s1);
 
-			List<String> s2=validateFindUpdatesSectionContent(planType, memberType, currentDate, docDisplayMap, showNxtYrPlanName);
+			List<String> s2=validateFindUpdatesSectionContent(planType, memberType, currentDate, docDisplayMap, showNxtYrPlanName, sanityRun);
 			sectionNote1.addAll(s2);
 		} else {
 			Assert.assertTrue("NOTE: This is not Individual or Gropu case, this method is not applicable", false);
@@ -337,7 +337,7 @@ public class PrepareForNextYearPage extends PrepareForNextYearBase {
 	}
 
 	
-	public List<String>  validateAfterOrEqalM5Content(String planType, String memberType, Date currentDate, HashMap<String, Boolean> docDisplayMap, boolean showNxtYrPlanName) {
+	public List<String>  validateAfterOrEqalM5Content(String planType, String memberType, Date currentDate, HashMap<String, Boolean> docDisplayMap, boolean showNxtYrPlanName, boolean sanityRun) {
 		List<String> sectionNote1=new ArrayList<String>();
 		if (memberType.toUpperCase().contains("IND")) {
 			//note: individual is on team-atest | online-stage | offline-prod | online-prod already
@@ -349,11 +349,11 @@ public class PrepareForNextYearPage extends PrepareForNextYearBase {
 			List<String> s1=pnfyTimeline_ind.validateTimeLineBoxContent(expNoBlue_t1, expNoBlue_t2, expNoBlue_t3, expNoBlue_t4, expNoBlue_t5);
 			sectionNote1.addAll(s1);
 
-			List<String> s2=validateFindUpdatesSectionContent(planType, memberType, currentDate, docDisplayMap, showNxtYrPlanName);
+			List<String> s2=validateFindUpdatesSectionContent(planType, memberType, currentDate, docDisplayMap, showNxtYrPlanName, sanityRun);
 			sectionNote1.addAll(s2);
 		} else if (memberType.toUpperCase().contains("GRP")) {
 			//note: group is on team-atest 
-			List<String> s2=validateFindUpdatesSectionContent(planType, memberType, currentDate, docDisplayMap, showNxtYrPlanName);
+			List<String> s2=validateFindUpdatesSectionContent(planType, memberType, currentDate, docDisplayMap, showNxtYrPlanName, sanityRun);
 			sectionNote1.addAll(s2);
 		} else {
 			Assert.assertTrue("NOTE: This is not Individual or Gropu case, this method is not applicable", false);
@@ -361,7 +361,7 @@ public class PrepareForNextYearPage extends PrepareForNextYearBase {
 		return sectionNote1;
 	}
 
-	public List<String>  validateAfterOrEqalM3Content(String planType, String memberType, Date currentDate, boolean showNxtYrPlanName) {
+	public List<String>  validateAfterOrEqalM3Content(String planType, String memberType, Date currentDate, boolean showNxtYrPlanName, boolean sanityRun) {
 		List<String> sectionNote1=new ArrayList<String>();
 		if (memberType.toUpperCase().contains("SARS")) {
 			//note: individual is on team-atest | online-stage | offline-prod | online-prod already
@@ -371,7 +371,7 @@ public class PrepareForNextYearPage extends PrepareForNextYearBase {
 			List<String> s1=pnfyTimeline_sars.validateTimeLineBoxContent(expNoBlue_t1, expNoBlue_t2, expNoBlue_t3);
 			sectionNote1.addAll(s1);
 
-			List<String> s2=validateFindUpdatesSectionContent(planType, memberType, currentDate, showNxtYrPlanName);
+			List<String> s2=validateFindUpdatesSectionContent(planType, memberType, currentDate, showNxtYrPlanName, sanityRun);
 			sectionNote1.addAll(s2);
 		} else {
 			Assert.assertTrue("NOTE: This is not SARs case, this method is not applicable", false);

@@ -82,3 +82,35 @@ Feature: S1.1 To test Member Auth Sign for SSO Micro App.
     Examples: 
       | UID     | username | password | memUserName | planType | claimPeriod    | dateRange      |
       | F243897 | ashah120 | Mnrqa002 | DSOADY17    | MAPD     | Last 24 months | Last 18 months |
+      
+    @sanityMemberPROD1
+  Scenario Outline: Scenario- <Scenario> - Test Case_To test single signon using member auth - Search with Username
+    Given the user is on member auth login flow page
+    When the member is able to login with correct username and password
+      | Username | <username> |
+      | Password | <password> |
+    And Member Enters the Username he wants to search
+      | MemUsername | <member> |
+    And user clicks on member to select
+
+    Examples: 
+      | username | password | member                               | Scenario                                                                        |
+      | jkuma14  | Brock@03 | sandrakaye86                         | Scenario 8: Search using legacy username                                        |
+      
+@sanityMemberPROD2
+  Scenario Outline: Scenario- <Scenario> - Test Case_To test single signon using member auth - Search using memberid and dob
+    Given the user is on member auth login flow page
+    When the member is able to login with correct username and password
+      | Username | <username> |
+      | Password | <password> |
+    And Member Enters the memberid and dob he wants to search
+      | Member ID | <memberid> |
+      | Month     | <month>    |
+      | Day       | <day>      |
+      | Year      | <year>     |
+    And user clicks on member to select
+
+    Examples: 
+      | username | password | memberid     | month | day | year | Scenario                                                                   |
+      | jkuma14  | Brock@03 | 063246454-11 |    07 |  07 | 1949 | Scenario 2c: Search using member id and DOB – COMBO Member (PDP + MedSupp) |
+      
