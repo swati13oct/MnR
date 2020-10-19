@@ -333,11 +333,14 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//div[contains(@class,'component_info_wrap')]")
 	private WebElement nextBestActionModal;
 	
-	@FindBy(xpath = "//div[@class='component_title']")
+	@FindBy(xpath = "//*[contains(@class,'component_title')]")
 	private WebElement nextBestActionModalMsg;
 	
 	@FindBy(xpath = "//div[contains(@class,'component_info_wrap')]//button[text()='Get Started']")
 	private WebElement getStartedBtn;
+	
+	@FindBy(xpath = "//a[text()='View Saved Items']")
+	private WebElement viewSavedItems;
 
 	//@FindBy(xpath = "//div[contains(@class,'component_info_wrap')]//button[text()='Find My Doctors ']")
 	@FindBy(xpath = "//div[contains(@class,'component_info_wrap')]//button[contains(text(),'Find a Provider')]")
@@ -359,6 +362,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	private String savedPlanImgXpath="//img[contains(@src,'ic_favorite-filled.png')]";
 	private static String NEXT_ACTION_MODAL_MSG_PROVIDER_SEARCH="Is my doctor covered?";
 	private static String NEXT_ACTION_MODAL_MSG_ENROLL_PLAN="How do I enroll?";
+	private static String NEXT_ACTION_MODAL_MSG_DRUG_COST="How much will my drugs cost?";
 	
 	@FindBy(xpath = "//div[@id='emailPlanSummaryPopUp']")
 	private WebElement emailPlanSummaryPopupScreen;
@@ -733,9 +737,11 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		@FindBy(xpath = "//input[@class='nextButton']")
 		private WebElement  Submit;
 		
+		@FindBy(id = "enrollModalCloseBtn")
+		private WebElement enrollModalCloseBtn;
+		
 		@FindBy(id="pop-btn-1")
-		private WebElement viewSavedPlans;
-
+        private WebElement viewSavedPlans;
 		
 		public WebElement getValEstimatedAnnualDrugCostValue(String planName) {
 			//WebElement valEstimatedAnnualDrugCostValue = driver.findElement(By.xpath("//*[contains(text(),'"+planName+"')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//*[@ng-show='plan.network']"));
@@ -924,6 +930,23 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			 * Auto-generated catch block e.printStackTrace(); }
 			 */
 			
+		}
+	}
+	
+	public void getValidate() {
+		validate(getStartedBtn);
+		validate(viewSavedItems);
+	}
+	
+	public void validateProviderNBA() {
+		try {
+			if(nextBestActionModal.isDisplayed()) {
+				validate(nextBestActionModalFindMyDoctorsBtn);
+				Assert.assertTrue("The Provider NBA message is not displayed on NBA.../n Expected Message"+NEXT_ACTION_MODAL_MSG_PROVIDER_SEARCH+ "\n Actual message"+nextBestActionModalMsg.getText(), nextBestActionModalMsg.getText().equals(NEXT_ACTION_MODAL_MSG_PROVIDER_SEARCH));
+			}
+		}
+		catch(Exception ex) {
+			System.out.println("NBA modal not found");
 		}
 	}
 
@@ -2822,6 +2845,8 @@ for (int i = 0; i < initialCount + 1; i++) {
 		} else if (planType.equalsIgnoreCase("pdp")) {
 			planTypePath="//div[@ng-show='showPdpPlans']";
 			driver.navigate().refresh();
+			CommonUtility.checkPageIsReady(driver);
+			sleepBySec(5);
 		} else if (planType.equalsIgnoreCase("snp")) {
 			planTypePath="//div[@ng-show='showSnpPlans']";
 		}
@@ -4011,6 +4036,7 @@ for (int i = 0; i < initialCount + 1; i++) {
 				Collections.sort(actualPlanNames);
 				System.out.println(expectedPlanNames);
 				System.out.println(actualPlanNames);
+				enrollModalCloseBtn.click();
 				Assert.assertTrue("Saved plans not displayed in Enroll Popup.../n Expected plans" + expectedPlanNames
 						+ "\n Actual plans" + actualPlanNames, actualPlanNames.equals(expectedPlanNames));
 			}
@@ -4042,6 +4068,7 @@ for (int i = 0; i < initialCount + 1; i++) {
 					Collections.sort(actualPlanNames);
 					System.out.println(allPlanNames);
 					System.out.println(actualPlanNames);
+					jsClickNew(enrollModalCloseBtn);
 					Assert.assertTrue("All plans not displayed in Enroll Plan Popup.../n Expected plans" + allPlanNames
 							+ "\n Actual plans" + actualPlanNames, actualPlanNames.equals(allPlanNames));
 				}
@@ -4344,6 +4371,22 @@ for (int i = 0; i < initialCount + 1; i++) {
 		CommonUtility.waitForPageLoad(driver, driver.findElement(By.xpath("//header[contains(@class,'header')]")), 35);
 		System.out.println("Page Title : "+(driver.findElement(By.xpath("//title")).getText()));
 		//return NavigateToURL;
+	}
+
+	public void verifyNextBestActionModalForDrugCostAuthenticated() {
+		try {
+			if(nextBestActionModal.isDisplayed()) {
+				validate(getStartedBtn);
+				Assert.assertTrue("The Drug cost message is not displayed on NBA.../n Expected Message"+NEXT_ACTION_MODAL_MSG_DRUG_COST+ "\n Actual message"+nextBestActionModalMsg.getText(), nextBestActionModalMsg.getText().equals(NEXT_ACTION_MODAL_MSG_DRUG_COST));
+			}
+		}
+		catch(Exception ex) {
+			System.out.println("NBA modal not found");
+		}
+	}
+	
+	public void clickSavedItems() {
+		viewSavedItems.click();
 	}
 	
 	/**
