@@ -1617,8 +1617,6 @@ public class VPPPlanSummaryPage extends UhcDriver {
 //			dceLink.click();
 		}
 		CommonUtility.checkPageIsReadyNew(driver);
-		checkModelPopup(driver, 30);
-		validate(AddMyDrugsBtn, 10);
 		if (validateNew(AddMyDrugsBtn))
 			return new GetStartedPage(driver);
 		return null;
