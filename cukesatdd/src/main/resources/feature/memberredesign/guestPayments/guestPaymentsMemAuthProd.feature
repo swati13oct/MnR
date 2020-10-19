@@ -279,4 +279,4 @@ Feature: 1.06.7 Member Guest Payments Page - Member Auth - PROD
 
     Examples:
       | TID   | planType | memberID    | dob        | siteName | FirstName | MiddleName | LastName  | accountNo  | routingNo | otherAmountDue | Name                 | CreditCardNumber | validMonth | validYear |
-      | 10000 | MAPD     | 944419140-1 | 07/13/1941 | AARP     | Guest     | A          | Payments1 | 1234512345 | 123123123 | 10.05          | CreditCardAutomation | 4111111111111111 | 04         | 2024      |
+      | 10000 | MAPD     | 944419140-1 | 07/13/1941 | AARP     | Guest     | A          | Payments1 | 1234512345 | 123123123 | 10.05          | CreditCardAutomation | 4121600170691201 | 01        | 2021     |
