@@ -64,7 +64,7 @@ Feature: 1.06.7 Member Guest Payments Page - Member Auth - PROD
 
     Examples:
       | TID   | planType              | memberID      | dob           | siteName    |
-      | 10007 | SHIP                  | 312137089-12  | 09/08/1946  |   AARP      |
+    #  | 10007 | SHIP                  | 312137089-12  | 09/08/1946  |   AARP      |
       | 10008 | TERMINATEDWithNODUE   | 000087616-01  | 11/12/1937    |   UHC       |
       | 10009 | GroupWithSubsidy      | 925610646-1   | 04/18/1946    |   RETIREE   |
       | 10011 | PreffectiveWithNoDue  | 977757984-1  | 12/14/1955   |   RETIREE   |
@@ -122,10 +122,10 @@ Feature: 1.06.7 Member Guest Payments Page - Member Auth - PROD
     Then I will entered other amount Due
       | Other Amount | 1.00 |
     And I will get an error message Cannot exceed annual remaining amount
-    Then I select and entered other amount Due and choose a EFT Checking acc payment Method
-      | Other Amount | <otherAmountDue> |
-    Then I will click on Review and Submit button leaving EFT Account information blank
-    And I will get an error to enter valid Account EFT information
+    #Then I select and entered other amount Due and choose a EFT Checking acc payment Method
+     # | Other Amount | <otherAmountDue> |
+    #Then I will click on Review and Submit button leaving EFT Account information blank
+    #And I will get an error to enter valid Account EFT information
   
     Examples:
       | TID   | planType | memberID    | dob        | siteName | otherAmountDue |
