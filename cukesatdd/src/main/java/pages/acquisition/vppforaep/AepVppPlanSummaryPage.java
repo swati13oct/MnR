@@ -258,7 +258,15 @@ public class AepVppPlanSummaryPage extends UhcDriver {
 			  System.out.println("Key : "+keyValue+" Value: "+result.get(keyValue));
 			  System.out.println("_________________________________________________________________________________________________"); 
 		}
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);  
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+
+		//The below code refreshes the page and reads the benefits for the second time if the original reading of benefits fail
+		if(result.size() <2)
+		{
+			System.out.println("collectInfoVppPlanSummaryPg -  Result count - " +result.size() +", Plan - "+planName);
+			driver.navigate().refresh();
+			collectInfoVppPlanSummaryPg(planName);
+		}
 		return result;
 	}
 	
