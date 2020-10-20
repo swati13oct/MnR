@@ -343,6 +343,7 @@ public class HealthAndWellnessPage extends UhcDriver{
 			Assert.assertTrue("PROBLEM - not getting expected URL after clicking Get Reward link.  Expect to contain '"+expectedUrl+"' | Actual URL='"+actualUrl+"'", actualUrl.contains(expectedUrl));
 
 			if (hwValidate(notNowLnk,0)) {
+				checkModelPopup(driver,1);
 				notNowLnk.click();
 				sleepBySec(15);
 			}
