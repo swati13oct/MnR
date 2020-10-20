@@ -32,8 +32,6 @@ Feature: 1.11 Member Pharmacy Locator tool Page- Member Auth - PROD
 			| Has Preferred Retail Pharmacy network plan | <hasPrefRetailPharPlan> |
 		And the user validates show on map link
 		And the user validates get direction link
-		And the user validates more information content based on plan type
-		And the user validates view search PDF link
 
 		Examples:
 			| TID   | username | password | MemUserName   | planType | memberType                 | zipcode | distance | pharmacyType  | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |

@@ -4384,7 +4384,7 @@ public class AccountHomePage extends UhcDriver {
 		  }
 			else if (MRScenario.environment.contains("prod"))
 			{
-				driver.navigate().to("https://medicare.com/member/my-documents/overview.html");
+				driver.navigate().to("https://www.medicare.uhc.com/member/my-documents/overview.html");
 			}
 			else{
 				driver.navigate().to("https://stage-medicare.uhc.com/member/my-documents/overview.html");

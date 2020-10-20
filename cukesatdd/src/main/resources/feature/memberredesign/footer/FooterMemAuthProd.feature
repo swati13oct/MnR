@@ -20,8 +20,6 @@ Feature: 1.05.1 Member Footer validation - Member Auth - PROD
     Then the user navigates to payment history page
     Then the user navigates to the footer section
     And the user validates the footer section in payments page
-    Then the user navigates to profile and pref page
-    And the user validates the footer section in pref page
     Then the user navigates to Contact us page
     And the user validates the footer section in contact us page
     Then the user navigates to Benefits page
