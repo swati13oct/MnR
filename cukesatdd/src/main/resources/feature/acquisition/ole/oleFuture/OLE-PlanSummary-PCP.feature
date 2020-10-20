@@ -119,7 +119,7 @@ Feature: 2.05.1.ACQ-OLE PCP
         |authorizationZip|<authorizezip>|
         |authorizationPhoneNo|<authorizephonenumber>|
         |authorizationRelationship| <authorizeRelationship>|
-        |authorizationStateDisplay|<authorizestate>
+        |authorizationStateDisplay|<authorizestate>|
     Then the user navigates to Review and Submit Page
    Then the user validates the Online Enrollment details on Review and Submit Page
     Then the user clicks on Submit Enrollment to complete enrollment
