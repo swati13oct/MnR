@@ -64,7 +64,7 @@ Feature: 1.06.7 Member Guest Payments Page - Member Auth - PROD
 
     Examples:
       | TID   | planType              | memberID      | dob           | siteName    |
-    #  | 10007 | SHIP                  | 312137089-12  | 09/08/1946  |   AARP      |
+      | 10007 | SHIP                  |312835841-11  | 02/21/1950 |   AARP      |
       | 10008 | TERMINATEDWithNODUE   | 000087616-01  | 11/12/1937    |   UHC       |
       | 10009 | GroupWithSubsidy      | 925610646-1   | 04/18/1946    |   RETIREE   |
       | 10011 | PreffectiveWithNoDue  | 977757984-1  | 12/14/1955   |   RETIREE   |
