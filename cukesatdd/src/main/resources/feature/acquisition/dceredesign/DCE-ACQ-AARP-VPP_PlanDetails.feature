@@ -69,7 +69,7 @@ Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanDetails AARP - To test DCE - VPP Plan De
       |	UHC		|   78006 | SNP      | Bexar County | yes             | meloxicam | diclofenac potassium | febuxostat | buprenorphine | fentanyl citrate | Lipitor | UnitedHealthcare Dual Complete Choice (Regional PPO D-SNP) |
 
 
- @DCE_Redesign_DCE_Detail_to_Vpp_Details
+ @DCE_Redesign_DCE_Detail_to_Vpp_Details 
   Scenario Outline: Test to verify the Drug cost estimator and view plan summary from DCE to VPP detail page
    Given the user is on the AARP medicare site landing page
     When the user performs plan search using following information in the AARP site
@@ -91,11 +91,11 @@ Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanDetails AARP - To test DCE - VPP Plan De
     Then the user click on drug cost estimator on vpp plan detail page in AARP
     Then User validates planName matches plan Name in DCE detail page in AARP
     
-    @DCE_Redesign_DCE_Detail_to_Vpp_Details_MAPD
+    @DCE_Redesign_DCE_Detail_to_Vpp_Details_MAPD @F501519
       
       Examples: 
       | zipcode | plantype | county | isMultutiCounty | drug1     | drug2                | drug3      | drug4         | drug5            | drug6   | planname                                           |
-      |   90210 | MAPD     | none   | no              | meloxicam | diclofenac potassium | febuxostat | buprenorphine | fentanyl citrate | Lipitor | AARP Medicare Advantage SecureHorizons Focus (HMO) |
+      |   90210 | MAPD     | none   | no              | meloxicam | diclofenac potassium | febuxostat | buprenorphine | fentanyl citrate | Lipitor | AARP Medicare Advantage Freedom Plus (HMO-POS) |
       
      @DCE_Redesign_DCE_Detail_to_Vpp_Details_PDP
     Examples: 
@@ -137,7 +137,7 @@ Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanDetails AARP - To test DCE - VPP Plan De
      
       Examples: 
       | zipcode | plantype | county | isMultutiCounty | drug1     | drug2                | drug3      | drug4         | drug5            | drug6   | planname                                           |
-      |   90210 | MAPD     | none   | no              | meloxicam | diclofenac potassium | febuxostat | buprenorphine | fentanyl citrate | Lipitor | AARP Medicare Advantage Freedom Plus (HMO-POS) |
+      |   90210 | MAPD     | none   | no              | meloxicam | diclofenac potassium | febuxostat | buprenorphine | fentanyl citrate | Lipitor | AARP Medicare Advantage SecureHorizons Focus (HMO) |
       
        @DCE_Redesign_VPPSummary_to_Vpp_Details_PDP
        
