@@ -527,7 +527,7 @@ public class ReviewSubmitPage extends UhcDriver{
 			}
 		}
 		return null;	
-		}
+	}
 	
 	public boolean OnlineEnrollment_Review_Page_details(Map<String, String> detailsMap) {
 
@@ -700,15 +700,15 @@ else {
 		if (StringUtils.isEmpty(PrimaryPhoneNumber)) {
 			System.out.println("PrimaryNumber is Optinal. Hence Skiping this Verification !!!");
 		} else if(driver.findElement(By.xpath("//*[contains(text(), 'Primary Phone Number')]//following-sibling::*"))!=null) {
-			
+		*/	
 			String PrimaryNoDisplayed = PrimaryPhoneNo.getText();
 			if (PrimaryNoDisplayed.contains(PrimaryPhoneNumber)) {
 				flag = (!flag) ? false : true;
 				System.out.println(PrimaryPhoneNumber + " : " + PrimaryNoDisplayed + " : " + flag);
 			} else
 				flag = false;
-		}
-				//
+		/*}
+		
 		else {
 			System.out.println("PrimaryNumber is not present for User");
 		}
@@ -716,14 +716,14 @@ else {
 		if (StringUtils.isEmpty(MobilePhoneNumber)) {
 			System.out.println("MobileNumber is Optinal. Hence Skiping this Verification !!! ");
 		} else if(driver.findElement(By.xpath("//*[contains(text(), 'Mobile Phone Number')]//following-sibling::*"))!=null) {
-			
+			*/
 			String MobileNoDisplayed = MobilePhoneNo.getText();
 			if (MobileNoDisplayed.contains(MobilePhoneNumber)) {
 				flag = (!flag) ? false : true;
 				System.out.println(MobilePhoneNumber + " : " + MobileNoDisplayed + " : " + flag);
 			} else
 				flag = false;
-		}
+	/*	}
 				//
 		else {
 			System.out.println("MobileNumber is not present for User");
@@ -732,14 +732,14 @@ else {
 		if (StringUtils.isEmpty(EmailConfirmationNumber)) {
 			System.out.println("EmailConfirmation is Optinal. Hence Skiping this Verification !!!");
 		} else if(driver.findElement(By.xpath("//*[contains(text(), 'Would you like to get email confirmation')]//following-sibling::*"))!=null) {
-			
+			*/
 			String EmailConfirmationNumberDisplayed = EmailConfirmationNo.getText();
 			if (EmailConfirmationNumberDisplayed.contains(EmailConfirmationNumber)) {
 				flag = (!flag) ? false : true;
 				System.out.println(EmailConfirmationNumber + " : " +  EmailConfirmationNumberDisplayed + " : " + flag);
 			} else
 				flag = false;
-		}
+	/*	}
 				//
 		else {
 			System.out.println("EmailConfirmationNumber is not present for User");
@@ -748,20 +748,20 @@ else {
 		if (StringUtils.isEmpty(Paperless_Delivery)) {
 			System.out.println("PaperLess is Optinal. Hence Skiping this Verification !!!");
 		} else if(driver.findElement(By.xpath("//*[contains(text(), 'Would you like to sign up for paperless delivery of your plan materials?')]/following-sibling::*"))!=null) {
-			
+		*/	
 			String PaperlessDeliveryDisplayed = PaperlessDelivery.getText();
 			if (PaperlessDeliveryDisplayed.contains(Paperless_Delivery)) {
 				flag = (!flag) ? false : true;
 				System.out.println(Paperless_Delivery + " : " +  PaperlessDeliveryDisplayed + " : " + flag);
 			} else
 				flag = false;
-		}
+	/*	}
 				//
 		else {
 			System.out.println("PaperLess is not present for User");
 		}
 		
-		
+		*/
 		if (StringUtils.isEmpty(Email_Address)) {
 			System.out.println("EmailAddress is Optinal. Hence Skiping this Verification !!! ");
 		} else if(driver.findElement(By.xpath("//*[contains(text(), 'Mobile Phone Number')]//following-sibling::*"))!=null) {
@@ -778,7 +778,7 @@ else {
 			System.out.println("EmailAddress is not present for User");
 		}
 		
-		---------------------------------*/
+		/*---------------------------------*/
 		String DOBDisplayed = DOBDisplay.getText().replaceAll("-", "");
 		if(DOBDisplayed.contains(DOB)){
 			flag = (!flag)?false:true;
@@ -791,7 +791,7 @@ else {
 			System.out.println(Gender+" : "+GenderDisplayed+" : "+flag);
 		}else flag =false;
 		
-		/*------------------------Added for Authorization Page--------------------------------
+		/*------------------------Added for Authorization Page--------------------------------*/
 		String AuthLastNameDisplayed = AuthLastName.getText();
 		if(AuthLastNameDisplayed.contains(AuthLastNameDisplay)){
 			flag = (!flag)?false:true;
@@ -854,12 +854,12 @@ else {
 		}else flag =false;
 		
 		
-		------------------------------------------------------------*/
-		
+	//	------------------------------------------------------------*/
+		/*----------------------------------Health Insurance Radio Button ------------------------*/
 		if (StringUtils.isEmpty(healthInsurance)) {
 			System.out.println("healthInsurance Radio button is Optinal. Hence Skiping this Verification !!! for PDP Plans ");
 		} else if(driver.findElement(By.xpath("//*[contains(text(), 'Do you or your spouse have other health insurance')]//following-sibling::*"))!=null) {
-			
+			validateNew(HealthInsuranceRadio);
 			String HIDisplayed = HealthInsuranceRadio.getText();
 			if (HIDisplayed.contains(healthInsurance)) {
 				flag = (!flag) ? false : true;
@@ -872,8 +872,8 @@ else {
 		}
 		if (StringUtils.isEmpty(prescriptionDrug)) {
 			System.out.println("prescription drug Radio button is Optinal. Hence Skiping this Verification !!! for PDP Plans ");
-		} else if(driver.findElement(By.xpath("//*[contains(text(), 'Do you or your spouse have other health insurance')]//following-sibling::*"))!=null) {
-			
+		} else if(driver.findElement(By.xpath("//*[contains(text(), 'Do you have other insurance that will cover your prescription')]//following-sibling::*"))!=null) {
+			validateNew(PrescriptionDrugRadio);
 			String PDDisplayed = PrescriptionDrugRadio.getText();
 			if (PDDisplayed.contains(prescriptionDrug)) {
 				flag = (!flag) ? false : true;
@@ -884,6 +884,8 @@ else {
 			else {
 				System.out.println("PrescriptionDrug Radio button is not present for User");
 			}
+			
+		//----------------------------------Health Insurance Radio Button ------------------------	*/
 		if (StringUtils.isEmpty(healthInsuranceName)) {
 			System.out.println("healthInsuranceName is Optinal. Hence Skiping this Verification !!! for PDP Plans ");
 		} else if(driver.findElement(By.xpath("//*[contains(text(), 'Name of Health Insurance Company')]//following-sibling::*"))!=null) {
@@ -899,7 +901,7 @@ else {
 			System.out.println("healthInsuranceName is not present for User");
 		}
 		
-					if (StringUtils.isEmpty(healthInsuranceGroupNo)) {
+		if (StringUtils.isEmpty(healthInsuranceGroupNo)) {
 			System.out.println("healthInsuranceGroupNo is Optinal. Hence Skiping this Verification !!! for PDP Plans ");
 		} else if(driver.findElement(By.xpath("//*[contains(text(), 'Group Number')]//following-sibling::*"))!=null) {
 			
@@ -913,22 +915,23 @@ else {
 		else {
 			System.out.println("healthInsuranceGroupNo is not present for User");
 		}
-		
-					if (StringUtils.isEmpty(healthInsuranceMemberNo)) {
+	
+		if (StringUtils.isEmpty(healthInsuranceMemberNo)) {
 			System.out.println("healthInsuranceMemberNo is Optinal. Hence Skiping this Verification !!! for PDP Plans ");
 		} else if(driver.findElement(By.xpath("//*[contains(text(), 'Member Number')]//following-sibling::*"))!=null) {
-			
+			validateNew(HealthInsuranceMemberNo);
 			String HealthInsuranceMemberNoDisplayed = HealthInsuranceMemberNo.getText();
 			if (HealthInsuranceMemberNoDisplayed.contains(healthInsuranceMemberNo)) {
-				flag = (!flag) ? false : true;
-				System.out.println(healthInsuranceMemberNo + " : " + HealthInsuranceMemberNo + " : " + flag);
+				flag = (!flag)?false:true;
+				//flag = false;
+				System.out.println(healthInsuranceMemberNo + " : " + HealthInsuranceMemberNoDisplayed + " : " + flag);
 			} else
 				flag = false;
 		}
 		else {
 			System.out.println("healthInsuranceMemberNo is not present for User");
 		}
-		
+
 		String PrescriptionDrugName1 = PrescriptionDrugName.getText();
 		if(PrescriptionDrugName1.contains(prescriptionDrugName)){
 			flag = (!flag)?false:true;
@@ -942,82 +945,83 @@ else {
 			System.out.println(prescriptionGroupNumber+" : "+PrescriptionDrugGroupNo1+" : "+flag);
 			System.out.println("prescriptionDrug Group No is displayed for all the Plans ");
 		}else flag =false;
-		String PrescriptionDrugMemberNo1 = PrescriptionDrugMemberNo.getText();
+		
+	/*	String PrescriptionDrugMemberNo1 = PrescriptionDrugMemberNo.getText();
 		if(PrescriptionDrugMemberNo1.contains(prescriptionMemberNumber)){
 			flag = (!flag)?false:true;
 			System.out.println(prescriptionMemberNumber+" : "+PrescriptionDrugMemberNo1+" : "+flag);
 			System.out.println("prescriptionDrug Member No is displayed for all the Plans ");
-		}else flag =false;	
+		}else flag =false;	*/
+		validateNew(PrescriptionDrugMemberNo);
+		String PrescriptionDrugMemberNo1 = PrescriptionDrugMemberNo.getText();
+		if(PrescriptionDrugMemberNo1.contains(prescriptionMemberNumber)){
+			flag = false;
+			System.out.println("prescriptionDrug Member No is Validated : "+flag);
+		}else flag =false;
 		
+
 		if (StringUtils.isEmpty(PCP_Name)) {
 			System.out.println("PCP Name is Optinal. Hence Skiping this Verification !!! for PDP Plans ");
 		} else if(driver.findElement(By.xpath("//*[contains(text(), 'Provider or PCP Full Name')]//following-sibling::*"))!=null) {
-			String PCPNameDisplayed = PCPName.getText().trim();
+			validateNew(PCPName);
+			String PCPNameDisplayed = PCPName.getText();
 			if(PCPNameDisplayed.contains(PCP_Name)){
 				flag = (!flag)?false:true;
+				//flag = (flag==true)?false:true;
 				System.out.println(PCP_Name+" : "+PCPNameDisplayed+" : "+flag);
+				
 			}else flag =false;
-		}
+	}
 		else {
-			System.out.println("PCP Name is not present for PDP Plans");
-		}
+		System.out.println("PCP Name is not present for PDP Plans");
+	}
+		
 		if (StringUtils.isEmpty(PCP_Number)) {
-			System.out.println("PCP Number is Optinal. Hence Skiping this Verification !!! for PDP Plans ");
-		} else if(driver.findElement(By.xpath("//*[contains(text(), 'Provider/PCP Number')]//following-sibling::*"))!=null) {				
+		System.out.println("PCP Number is Optinal. Hence Skiping this Verification !!! for PDP Plans ");
+	} else if(driver.findElement(By.xpath("//*[contains(text(), 'Provider/PCP Number')]//following-sibling::*"))!=null) {
+			validateNew(PCPNumber);
 		String PCPNumberDisplayed = PCPNumber.getText();
 		if(PCPNumberDisplayed.contains(PCP_Number)){
-			flag = (!flag)?false:true;
+		flag = (!flag)?false:true;
 			System.out.println(PCP_Number+" : "+PCPNumberDisplayed+" : "+flag);
-		}else flag =false;
+		}else 
+			flag =false;
 		}
-		else {
-			System.out.println("PCP Number is not present for PDP Plans");
+	else {
+	System.out.println("PCP Number is not present for PDP Plans");
 		}
+		
 		if (StringUtils.isEmpty(PCP_recently_visited)) {
 			System.out.println("PCP recently visited doctor is Optinal. Hence Skiping this Verification !!! for PDP Plans ");
-		} else if(driver.findElement(By.xpath("//*[contains(text(), 'Are you now seeing')]//following-sibling::*"))!=null) {					
-		String PCPRecentlyVisitedDisplayed = PCPRecentlyVisited.getText();
+	} else if(driver.findElement(By.xpath("//*[contains(text(), 'Are you now seeing')]//following-sibling::*"))!=null) {					
+			validateNew(PCPRecentlyVisited);
+			String PCPRecentlyVisitedDisplayed = PCPRecentlyVisited.getText();
 		if(PCPRecentlyVisitedDisplayed.contains(PCP_recently_visited)){
 			flag = (!flag)?false:true;
+		
 			System.out.println(PCP_recently_visited+" : "+PCPRecentlyVisitedDisplayed+" : "+flag);
 		}else flag =false;
 		}
 		else {
 		System.out.println("PCPRecentlyVisited doctor is not present for PDP Plans");
-	}
+		}
+	
 	//---------------------------------------
 		if(Expected_PlanName.contains("Gold") || Expected_PlanName.contains("Chronic") || Expected_PlanName.contains("Silver")){
         	System.out.println("Adress and Email validation is skipped for CSNP plans due to Provider Address !!!");
         }else{
-        	
-        	if (StringUtils.isEmpty(Perm_Street)) {
-    			System.out.println("Perm Street is Optinal. Hence Skiping this Verification !!! ");
-    		} else if(driver.findElement(By.xpath("//*[contains(text(), 'Street Address')]//following-sibling::*"))!=null) {				
-        	
-        	String PermStreetDisplayed = StreetDisplay.getText();
-    		if(PermStreetDisplayed.equalsIgnoreCase(Perm_Street)){
+        	String PermStreetDisplayed = StreetDisplays.get(0).getText();
+    		if(PermStreetDisplayed.contains(Perm_Street)){
     			flag = (!flag)?false:true;
     			System.out.println(Perm_Street+" : "+PermStreetDisplayed+" : "+flag);
     		}else flag =false;
-    		}  		
-    		else {
-    			System.out.println("Perm Street is not present");
-    		}
-        	
-        	if (StringUtils.isEmpty(Perm_city)) {
-    			System.out.println("Permcity is Optinal. Hence Skiping this Verification !!! ");
-    		} else if(driver.findElement(By.xpath("//*[contains(text(), 'City')]//following-sibling::*"))!=null) {				
-        	
-    		String PermCityDisplayed = CityDisplay.getText();
-    	
-    		if(PermCityDisplayed.equalsIgnoreCase(Perm_city)){
+    		
+    		String PermCityDisplayed = CityDisplays.get(0).getText();
+    		if(PermCityDisplayed.contains(Perm_city)){
     			flag = (!flag)?false:true;
     			System.out.println(Perm_city+" : "+PermCityDisplayed+" : "+flag);
     		}else flag =false;
-    		}  		
-    		else {
-    			System.out.println("Perm City is not present");
-    		}
+
     		
     		String MailAddQuestionDisplayed = MailingQiuestionDisplay.getText();
     		if(MailAddQuestionDisplayed.contains(MailingQuestion)){
@@ -1055,15 +1059,12 @@ else {
     				flag = (!flag)?false:true;
     				System.out.println(Mailing_City+" : "+MailCityDisplayed+" : "+flag);
     			}else flag =false;
-
-    			
+    				
+  
     		}
-    		
-    		
         }
-
 		if(validate(Submit_Disclaimer) && validate(Enrollment_Disclaimer_Text)){
-			if(Enrollment_Disclaimer_Text.getText().equalsIgnoreCase("Submitting your enrollment application electronically")){
+			if(Enrollment_Disclaimer_Text.getText().contains("Submitting your enrollment application electronically")){
 				flag = (!flag)?false:true;
 				System.out.println("Submit Enrollment Disclaimer is Displayed  : "+flag);
 			}
@@ -1071,15 +1072,13 @@ else {
 		}else flag = false;
 
 		if(validate(SubmitApplicationBtn)){
-			if(SubmitApplicationBtn.isDisplayed()){
+			if(SubmitApplicationBtn.isEnabled()){
 				flag = (!flag)?false:true;
 				System.out.println("Submit Application Button is displayed and Enabled : "+flag);
 			}
 			else flag = false;
 		}else flag = false;
-
 		
 		return flag;
 	}
-
-}
+	}

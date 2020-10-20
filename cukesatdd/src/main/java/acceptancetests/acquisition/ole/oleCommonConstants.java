@@ -61,6 +61,7 @@ public class oleCommonConstants {
 	public static final String MOBILE_NUMBER = "mobilenumber";
 	public static final String EMAIL_CONFIRMATION = "emailconfirmation";
 	public static final String PAPERLESS_DELIVERY = "paperlessdelivery";
+	public static final String Go_Green = "gogreen";
 	
 	
 	

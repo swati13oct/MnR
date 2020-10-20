@@ -73,6 +73,30 @@ public class PersonalInformationPage extends UhcDriver{
 
 	@FindBy(id = "dob")
 	private WebElement DOBtxtFld;
+	
+	@FindBy(xpath = "//input[contains(@id,'homephnnum')]")
+	private WebElement HomephoneNumberField;
+	
+	@FindBy(xpath = "//input[contains(@id,'mobilephnnum')]")
+	private WebElement MobileNumberField;
+	
+	@FindBy(xpath = "//input[contains(@id,'emailAddressQuestion')]")
+	private WebElement emailAddressField;
+	
+	@FindBy(xpath = "//input[contains(@id,'goGreenYes')]")
+	private WebElement goGreenYesBtn;
+	
+	//@FindBy(id = "goGreenNo")
+	@FindBy(xpath = "//input[contains(@id,'goGreenNo')]")
+	private WebElement goGreenNoBtn;
+	
+	//@FindBy(id = "emailConfirmationNo")
+	@FindBy(xpath = "//input[contains(@id,'emailConfirmationNo')]")
+	private WebElement emailConfirmationNoBtn;
+	
+	//@FindBy(id = "emailConfirmationYes")
+	@FindBy(xpath = "//input[contains(@id,'emailConfirmationYes')]")
+	private WebElement emailConfirmationYesBtn;
 
 	@FindBy(id = "genderMale")
 	private WebElement GenderSelectMale;
@@ -183,6 +207,45 @@ public class PersonalInformationPage extends UhcDriver{
 			sendkeysNew(MailingAdd_Zip,Mailing_Zip);
 		}
 		sendkeys(Email,EmailAddress);
+		
+		if(NextBtn.isEnabled()){
+			System.out.println("Next Button is Enabled : All Required Details are entered");
+			return true;
+		}
+		return false;
+	}
+	
+	public boolean enter_member_details_Other(Map<String, String> memberDetailsMap) throws InterruptedException {
+
+		
+		String EmailAddress = memberDetailsMap.get("Email");
+		String emailConfirmation = memberDetailsMap.get("Email Confirmation");
+		String goGreen = memberDetailsMap.get("Go Green");
+		//String email = memberDetailsMap.get("Email");
+		String HomeNumber = memberDetailsMap.get("Home Number");
+		String MobileNumber =memberDetailsMap.get("Mobile Number");
+
+		sendkeysNew(HomephoneNumberField, HomeNumber);
+		sendkeysNew(MobileNumberField, MobileNumber);
+		
+		if(emailConfirmation.equalsIgnoreCase("YES")){
+			jsClickNew(emailConfirmationYesBtn);	//emailConfirmationYesBtn.click();
+		}else
+			jsClickNew(emailConfirmationNoBtn); //emailConfirmationNoBtn.click();
+		
+	if(goGreen.equalsIgnoreCase("YES")){
+		//goGreenYesBtn.click();
+		jsClickNew(goGreenYesBtn);
+	}else
+	//	goGreenNoBtn.click();
+	jsClickNew(goGreenNoBtn);
+	
+	//if(emailConfirmation.equalsIgnoreCase("YES") && goGreen.equalsIgnoreCase("YES"))
+	//sendkeysNew(emailAddressField, email);
+	
+		
+		sendkeys(Email,EmailAddress);
+		
 		if(NextBtn.isEnabled()){
 			System.out.println("Next Button is Enabled : All Required Details are entered");
 			return true;

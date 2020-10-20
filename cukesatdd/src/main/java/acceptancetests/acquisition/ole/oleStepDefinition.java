@@ -680,7 +680,6 @@ public class oleStepDefinition {
 		//	getLoginScenario().saveBean(oleCommonConstants.PARTB_EFFECTIVE, MedicareDetailsMap.get("PartB Date"));
 			getLoginScenario().saveBean(oleCommonConstants.SSN_FLAG, MedicareDetailsMap.get("SSN Flag"));
 			getLoginScenario().saveBean(oleCommonConstants.SSN_NUMBER, MedicareDetailsMap.get("SSN Number"));
-
 			getLoginScenario().saveBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE,
 					medicareInfoPage);
 			System.out.println("OLE Medicare Information Page, Medicare Info is entered and Next Button is enabled");
@@ -1281,6 +1280,44 @@ public class oleStepDefinition {
 				getLoginScenario().saveBean(oleCommonConstants.MAILING_STATE, MemberDetailsMap.get("Mailing_State"));
 				getLoginScenario().saveBean(oleCommonConstants.MAILING_ZIP, MemberDetailsMap.get("Mailing_Zip"));
 				getLoginScenario().saveBean(oleCommonConstants.EMAIL, MemberDetailsMap.get("Email"));
+				Assert.assertTrue(true);
+			}
+			else
+				Assert.fail("OLE Personal Information Page - Adding Member Details Failed");
+		//}
+	}
+	
+	@Then("^the user enters following information in Personal Information Page$")
+	public void the_user_enters_following__information_in_Personal_Information_Page(DataTable arg1) throws Throwable {
+		/*
+		 * String alreadyEnrolled = (String)
+		 * getLoginScenario().getBean(oleCommonConstants.ALREADY_ENROLLED_FLAG); boolean
+		 * alreadyEnrolled_Flag = (alreadyEnrolled.contentEquals("true"))?true:false;
+		 * if(alreadyEnrolled_Flag){ System.out.
+		 * println("Already Enrolled Error message is Displayed in OLE Medicare Information  PAGE : "
+		 * +alreadyEnrolled+"  :  "+alreadyEnrolled_Flag+" - Validation Passed");
+		 * getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG,"true");
+		 * Assert.assertTrue(true); } else{
+		 */
+			List<DataTableRow> givenAttributesRow = arg1.getGherkinRows();
+			Map<String, String> MemberDetailsMap = new HashMap<String, String>();
+			for (int i = 0; i < givenAttributesRow.size(); i++) {
+				MemberDetailsMap.put(givenAttributesRow.get(i).getCells().get(0),
+						givenAttributesRow.get(i).getCells().get(1));
+			}
+			PersonalInformationPage personalInformationPage = (PersonalInformationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_PERSONAL_INFO_PAGE);
+			boolean isFormFilled = personalInformationPage.enter_member_details_Other(MemberDetailsMap);
+			if (isFormFilled) {
+				getLoginScenario().saveBean(OLE_PageConstants.OLE_PERSONAL_INFO_PAGE,
+						personalInformationPage);
+				System.out.println("OLE Personal Information Page - All required Member Details are entered");
+				getLoginScenario().saveBean(oleCommonConstants.EMAIL, MemberDetailsMap.get("Email"));
+				getLoginScenario().saveBean(oleCommonConstants.PRIMARY_PHONE_NUMBER, MemberDetailsMap.get("Phone Number"));
+				getLoginScenario().saveBean(oleCommonConstants.MOBILE_NUMBER, MemberDetailsMap.get("Mobile Number"));
+				
+				getLoginScenario().saveBean(oleCommonConstants.EMAIL_CONFIRMATION, MemberDetailsMap.get("Email Confirmation"));
+				getLoginScenario().saveBean(oleCommonConstants.Go_Green, MemberDetailsMap.get("Go Green"));
+				
 				Assert.assertTrue(true);
 			}
 			else
@@ -2133,6 +2170,33 @@ public class oleStepDefinition {
 		 */
 			AuthorizationPage authorizationPage = (AuthorizationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_AUTHORIZATION_PAGE);
 			boolean Validation_Status = authorizationPage.validate_required_field();
+			if(Validation_Status){
+				System.out.println("Authorization Page : Required fields Validated, Required data entered");
+				getLoginScenario().saveBean(OLE_PageConstants.OLE_AUTHORIZATION_PAGE,
+						authorizationPage);
+				Assert.assertTrue(true);
+			}
+			else{
+				System.out.println("Authorization Page : Required fields NOT validated");
+				Assert.fail("Authorization Page : Required fields NOT validated");
+			}
+		//}
+	}
+	
+	@Then("^the user validates required fields for Authorization Page Representative$")
+	public void the_user_validates_required_fields_for_Authorization_Page_Representative() throws Throwable {
+		/*
+		 * String alreadyEnrolled = (String)
+		 * getLoginScenario().getBean(oleCommonConstants.ALREADY_ENROLLED_FLAG); boolean
+		 * alreadyEnrolled_Flag = (alreadyEnrolled.contentEquals("true"))?true:false;
+		 * if(alreadyEnrolled_Flag){ System.out.
+		 * println("Already Enrolled Error message is Displayed in OLE Medicare Information  PAGE : "
+		 * +alreadyEnrolled+"  :  "+alreadyEnrolled_Flag+" - Validation Passed");
+		 * getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG,"true");
+		 * Assert.assertTrue(true); } else{
+		 */
+			AuthorizationPage authorizationPage = (AuthorizationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_AUTHORIZATION_PAGE);
+			boolean Validation_Status = authorizationPage.validate_required_field_representative();
 			if(Validation_Status){
 				System.out.println("Authorization Page : Required fields Validated, Required data entered");
 				getLoginScenario().saveBean(OLE_PageConstants.OLE_AUTHORIZATION_PAGE,
