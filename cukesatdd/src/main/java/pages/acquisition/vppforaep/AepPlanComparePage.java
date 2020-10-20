@@ -37,6 +37,8 @@ public class AepPlanComparePage extends UhcDriver {
 	
 	@FindBy(xpath="//div[@id='topRowCopy']//div[@ng-repeat='i in count']")
 	private List<WebElement> listOfCmpPlansColumns;
+
+	int retryCnt = 1;
 	
 
 	public AepPlanComparePage(WebDriver driver) {
@@ -137,7 +139,7 @@ public class AepPlanComparePage extends UhcDriver {
 	}
 
 
-	public HashMap<String, String> collectInfoVppPlanComparePg(String planType, String network) {
+	public HashMap<String, String> collectInfoVppPlanComparePg(String planType, String network, String sheetName, int rowIndex) {
 
 	    threadsleep(5000);
 
@@ -162,28 +164,45 @@ public class AepPlanComparePage extends UhcDriver {
 			//Read Optional Services (Riders) data
 			result.putAll(readBenefitsData("optional-services-table",""));
 
-			//Read OON Benefits data
-			if(network.trim().startsWith("OON")) {
-				WebElement medicareBenefitsSlider = driver.findElement(By.id("medicareBenefitsSlider"));
-				WebElement additionalBenefitsStartSlider = driver.findElement(By.id("additionalBenefitsStartSlider"));
+			try {
+					//Read OON Benefits data
+					if (network.trim().startsWith("OON")) {
+						WebElement medicareBenefitsSlider = driver.findElement(By.id("medicareBenefitsSlider"));
+						WebElement additionalBenefitsStartSlider = driver.findElement(By.id("additionalBenefitsStartSlider"));
 
-				if (medicareBenefitsSlider != null && medicareBenefitsSlider.isDisplayed()) {
-					jsClickNew(medicareBenefitsSlider);
-					if (medicareBenefitsSlider.getAttribute("aria-checked").equals("true")) {
-						result.putAll(readBenefitsData("medical-benefits-table", "OON"));
+						if (medicareBenefitsSlider != null && medicareBenefitsSlider.isDisplayed()) {
+							jsClickNew(medicareBenefitsSlider);
+							if (medicareBenefitsSlider.getAttribute("aria-checked").equals("true")) {
+								result.putAll(readBenefitsData("medical-benefits-table", "OON"));
+							}
+						}
+
+						if (additionalBenefitsStartSlider != null && additionalBenefitsStartSlider.isDisplayed()) {
+							jsClickNew(additionalBenefitsStartSlider);
+							if (additionalBenefitsStartSlider.getAttribute("aria-checked").equals("true")) {
+								result.putAll(readBenefitsData("additional-benefits-table", "OON"));
+							}
+						}
 					}
 				}
-
-				if (additionalBenefitsStartSlider != null && additionalBenefitsStartSlider.isDisplayed()) {
-					jsClickNew(additionalBenefitsStartSlider);
-					if (additionalBenefitsStartSlider.getAttribute("aria-checked").equals("true")) {
-						result.putAll(readBenefitsData("additional-benefits-table", "OON"));
-					}
+				catch(Exception ex)
+				{
+					System.out.println(sheetName+"_"+rowIndex+ " - Exception - " +ex.getMessage());
 				}
-			}
+
+
 
 		}
 		System.out.println("Finished collecting the info on vpp compare page =====");
+
+		if(result.size()<10 && retryCnt <=5)
+		{
+			driver.navigate().refresh();
+			result = collectInfoVppPlanComparePg(planType, network, sheetName, rowIndex);
+			retryCnt++;
+			System.out.println(sheetName+"_"+rowIndex+" - Attempt - "+retryCnt+", Benefits Map count - " +result.size());
+
+		}
 		return result;
 	}
 

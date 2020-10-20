@@ -302,9 +302,9 @@ public class VppPlanValidationStepDefinition {
 
 									 try {
 										 if (sheetName.contains("PDP")) {
-											 benefitsMap = planComparePage.collectInfoVppPlanComparePg("PDP", "");
+											 benefitsMap = planComparePage.collectInfoVppPlanComparePg("PDP", "", sheetName, rowIndex);
 										 } else {
-											 benefitsMap = planComparePage.collectInfoVppPlanComparePg(row.getCell(4).getStringCellValue(), row.getCell(2).getStringCellValue());
+											 benefitsMap = planComparePage.collectInfoVppPlanComparePg(row.getCell(4).getStringCellValue(), row.getCell(2).getStringCellValue(), sheetName, rowIndex);
 										 }
 									 }
 									 catch(Exception ex)
