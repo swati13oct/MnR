@@ -2627,10 +2627,20 @@ public class OneTimePaymentAarpStepDefintion {
 	}
 	
 	@Then("^user validates data is present in billing history table$")
-	public void userValidatesDataInBillingHistoryTableFor90Days() {
+	public void userValidatesDataInBillingHistoryTableFor90Days(DataTable givenAttributes) {
+		
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		String planType = memberAttributesMap.get("Plan Type");
 		PaymentHistoryPage paymentHistoryPage = (PaymentHistoryPage) getLoginScenario()
 				.getBean(PageConstants.Payments_History_Page);
-		paymentHistoryPage.validateBillingHistoryTable();
+		paymentHistoryPage.validateBillingHistoryTable(planType);
 	}
 	
 	@Then("^user validates data is present in billing history table of Second Plan$")
@@ -2732,10 +2742,20 @@ public class OneTimePaymentAarpStepDefintion {
 	}
 	
 	@Then("^user validates data is present in Payment history table$")
-	public void userValidatesDataInPaymentHistoryTableFor90Days() {
+	public void userValidatesDataInPaymentHistoryTableFor90Days(DataTable givenAttributes) {
+		
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		String planType = memberAttributesMap.get("Plan Type");
 		PaymentHistoryPage paymentHistoryPage = (PaymentHistoryPage) getLoginScenario()
 				.getBean(PageConstants.Payments_History_Page);
-		paymentHistoryPage.validatePaymentHistoryTable();
+	    paymentHistoryPage.validatePaymentHistoryTable(planType);
 	}
 	
 	@Then("^user validates data is present in Payment history table of Second Plan$")
