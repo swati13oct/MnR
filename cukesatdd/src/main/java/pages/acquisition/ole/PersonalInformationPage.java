@@ -224,9 +224,12 @@ public class PersonalInformationPage extends UhcDriver{
 		//String email = memberDetailsMap.get("Email");
 		String HomeNumber = memberDetailsMap.get("Home Number");
 		String MobileNumber =memberDetailsMap.get("Mobile Number");
-
-		sendkeysNew(HomephoneNumberField, HomeNumber);
-		sendkeysNew(MobileNumberField, MobileNumber);
+		
+		
+		validateNew(HomephoneNumberField);
+		sendkeys(HomephoneNumberField, HomeNumber);
+		  validateNew(MobileNumberField);
+		sendkeys(MobileNumberField, MobileNumber);
 		
 		if(emailConfirmation.equalsIgnoreCase("YES")){
 			jsClickNew(emailConfirmationYesBtn);	//emailConfirmationYesBtn.click();

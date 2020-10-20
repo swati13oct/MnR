@@ -24,9 +24,9 @@ Feature: 2.05.1.ACQ-OLE PCP
 		Then the user validates the Plan details on OLE
 		Then the User Validates Marketing Bullets for Welcome OLE
    		| PlanName | <planName> |
-    Then the user validates TFN in Welcome OLE Right Rail
-    Then the user validates Learn more modal for Welcome OLE
-   	Then the user validates Leave OLE modal for Welcome OLE
+    #Then the user validates TFN in Welcome OLE Right Rail
+    #Then the user validates Learn more modal for Welcome OLE
+   	#Then the user validates Leave OLE modal for Welcome OLE
    	Then the user validates cancellation modal for Welcome OLE
     Then the user navigates to Personal Information Page
     Then the user enters following required information in Personal Information Page
@@ -56,12 +56,12 @@ Feature: 2.05.1.ACQ-OLE PCP
       | Email Confirmation | <emailConfirmation> |
       | Go Green           | <goGreen>           |
       | Email              | <email>             |
-     Then the user enters following information in Personal Information Page
-      | Email Confirmation | <emailConfirmation> |
-      | Go Green           | <goGreen>           |
-      | Email              | <email>             |
-      |Home Number             | <phoneno>       |
-      | Mobile Number          | <mobileno>      |
+    # Then the user enters following information in Personal Information Page
+     # | Email Confirmation | <emailConfirmation> |
+     # | Go Green           | <goGreen>           |
+     # | Email              | <email>             |
+     # |Home Number             | <phoneno>       |
+     # | Mobile Number          | <mobileno>      |
     Then the user validates TFN in Medicare Info OLE Right Rail
     Then the user validates the Plan details in Medicare Info OLE Right Rail
     #Then the user navigates to Preliminary Questions Page
@@ -108,8 +108,17 @@ Feature: 2.05.1.ACQ-OLE PCP
       | Rider Flag | <riderflag> |
     Then the user navigates to Authorization Page for plan as per following rider options
       | Rider Flag | <riderflag> |
-    #Then the user validates required fields for Authorization Page
-    Then the user validates required fields for Authorization Page Representative
+    Then the user validates required fields for Authorization Page
+    #Then the user validates required fields for Authorization Page Representative
+        #|authorizationFirstname|<authorizefirstN>|
+       #	|authorizationLastname|<authorizelastN>|
+       	#|authorizationAddress|<authorizeaddress>|
+       	#|authorizationApartmentSuite|<authorizeapartment>|
+       # |authorizationCity|<authorizecity>|
+       # |authorizationZip|<authorizezip>|
+       # |authorizationPhoneNo|<authorizephonenumber>|
+       # |authorizationRelationship| <authorizeRelationship>|
+       # |authorizationStateDisplay|<authorizestate>
     Then the user navigates to Review and Submit Page
    Then the user validates the Online Enrollment details on Review and Submit Page
     Then the user clicks on Submit Enrollment to complete enrollment

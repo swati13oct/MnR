@@ -2184,7 +2184,7 @@ public class oleStepDefinition {
 	}
 	
 	@Then("^the user validates required fields for Authorization Page Representative$")
-	public void the_user_validates_required_fields_for_Authorization_Page_Representative() throws Throwable {
+	public void the_user_validates_required_fields_for_Authorization_Page_Representative(DataTable arg1) throws Throwable {
 		/*
 		 * String alreadyEnrolled = (String)
 		 * getLoginScenario().getBean(oleCommonConstants.ALREADY_ENROLLED_FLAG); boolean
@@ -2195,14 +2195,32 @@ public class oleStepDefinition {
 		 * getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG,"true");
 		 * Assert.assertTrue(true); } else{
 		 */
-			AuthorizationPage authorizationPage = (AuthorizationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_AUTHORIZATION_PAGE);
-			boolean Validation_Status = authorizationPage.validate_required_field_representative();
-			if(Validation_Status){
-				System.out.println("Authorization Page : Required fields Validated, Required data entered");
-				getLoginScenario().saveBean(OLE_PageConstants.OLE_AUTHORIZATION_PAGE,
-						authorizationPage);
-				Assert.assertTrue(true);
-			}
+		List<DataTableRow> givenAttributesRow = arg1.getGherkinRows();
+		Map<String, String> MemberDetailsMap = new HashMap<String, String>();
+		for (int i = 0; i < givenAttributesRow.size(); i++) {
+			MemberDetailsMap.put(givenAttributesRow.get(i).getCells().get(0),
+					givenAttributesRow.get(i).getCells().get(1));
+		}
+		AuthorizationPage authorizationPage = (AuthorizationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_AUTHORIZATION_PAGE);
+		boolean Validation_Status = authorizationPage.validate_required_field_representative(MemberDetailsMap);
+		if(Validation_Status){
+			getLoginScenario().saveBean(OLE_PageConstants.OLE_AUTHORIZATION_PAGE,
+					authorizationPage);
+			getLoginScenario().saveBean(oleCommonConstants.AUTHORIZATION_FIRST_NAME, MemberDetailsMap.get("authorizationFirstname"));
+			getLoginScenario().saveBean(oleCommonConstants.AUTHORIZATION_LAST_NAME, MemberDetailsMap.get("authorizationLastname"));
+			getLoginScenario().saveBean(oleCommonConstants.AUTHORIZATION_ADDRESS, MemberDetailsMap.get("authorizationAddress"));
+			
+			getLoginScenario().saveBean(oleCommonConstants.AUTHORIZATION_APARTMENT_SUITE, MemberDetailsMap.get("authorizationApartmentSuite"));
+			getLoginScenario().saveBean(oleCommonConstants.AUTHORIZATION_CITY, MemberDetailsMap.get("authorizationCity"));
+			
+			getLoginScenario().saveBean(oleCommonConstants.AUTHORIZATION_ZIP, MemberDetailsMap.get("authorizationZip"));
+			
+			getLoginScenario().saveBean(oleCommonConstants.AUTHORIZATION_PHONE_NO, MemberDetailsMap.get("authorizationPhoneNo"));
+			getLoginScenario().saveBean(oleCommonConstants.AUTHORIZATION_STATE_DISPLAY, MemberDetailsMap.get("authorizationStateDisplay"));
+			getLoginScenario().saveBean(oleCommonConstants.AUTHORIZATION_RELATIONSHIP, MemberDetailsMap.get("authorizationRelationship"));
+			
+			Assert.assertTrue(true);
+		}		
 			else{
 				System.out.println("Authorization Page : Required fields NOT validated");
 				Assert.fail("Authorization Page : Required fields NOT validated");

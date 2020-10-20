@@ -71,6 +71,7 @@ public class oleCommonConstants {
 	public static final String AUTHORIZATION_APARTMENT_SUITE = "authorizationapartmentsuite";
 	public static final String AUTHORIZATION_CITY = "authorizationcity";
 	public static final String AUTHORIZATION_ZIP= "authorizationzip";
+	public static final String AUTHORIZATION_STATE_DISPLAY ="authstatedisplay";
 	public static final String AUTHORIZATION_PHONE_NO = "authorizationphoneno";
 	public static final String AUTHORIZATION_AGREE = "authorizationagree";
 	public static final String AUTHORIZATION_RELATIONSHIP = "authorizationrealtionship";

@@ -3,6 +3,8 @@
  */
 package pages.acquisition.ole;
 
+import java.util.Map;
+
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -79,6 +81,9 @@ public class AuthorizationPage extends UhcDriver{
 	
 	@FindBy(id = "city0")
 	private WebElement Authorized_City;
+	
+	@FindBy(id = "address20")
+	private WebElement Authorized_Apartment;
 	
 	@FindBy(id = "state0")
 	private WebElement Authorized_State;
@@ -170,7 +175,20 @@ public class AuthorizationPage extends UhcDriver{
 		return validation_Flag;
 	}
 	
-	public boolean validate_required_field_representative() throws InterruptedException {
+	public boolean validate_required_field_representative(Map<String, String> memberDetailsMap) throws InterruptedException {
+		
+		
+		String AuthorizationFirstname = memberDetailsMap.get("authorizationFirstname");
+		String AuthorizationLastname = memberDetailsMap.get("authorizationLastname");
+		String AuthorizationAddress = memberDetailsMap.get("authorizationAddress");
+		String AuthorizationApartmentSuite = memberDetailsMap.get("authorizationApartmentSuite");
+		String AuthorizationCity = memberDetailsMap.get("authorizationCity");
+		String AuthorizationZip = memberDetailsMap.get("authorizationZip");
+		String AuthorizationPhoneNo = memberDetailsMap.get("authorizationPhoneNo");
+		String AuthorizationRelationship = memberDetailsMap.get("authorizationRelationship");
+		String AuthorizationStateDisplay= memberDetailsMap.get("authorizationStateDisplay");
+		
+		
 		boolean validation_Flag = true;
 		if(NextBtn.isEnabled()){
 			System.out.println("Next Button is Enabled : Required fields present");
@@ -205,6 +223,18 @@ public class AuthorizationPage extends UhcDriver{
 			//CommonUtility.waitForPageLoad(driver, ApplicantRadio, 30);
 			Thread.sleep(6000);
 			//jsClickNew(ApplicantRadio);
+			
+			jsClickNew(AuthorizedRepresentativeRadio);
+			
+			sendkeys(Authorized_FirstName,AuthorizationFirstname);
+			sendkeys(Authorized_LastName,AuthorizationLastname);
+			sendkeys(Authorized_Relation,AuthorizationRelationship);
+			sendkeys(Authorized_Address,AuthorizationAddress);
+			sendkeys(Authorized_City,AuthorizationCity);
+			sendkeys(Authorized_State,AuthorizationStateDisplay);
+			sendkeys(Authorized_ZipCode,AuthorizationZip);
+			sendkeys(Authorized_PhNo,AuthorizationPhoneNo);
+			sendkeys(Authorized_Apartment, AuthorizationApartmentSuite);
 			if(NextBtn.isEnabled()){
 				validation_Flag = (!validation_Flag)?false:true;
 				System.out.println("Validation Passed : All required fields are entered");
