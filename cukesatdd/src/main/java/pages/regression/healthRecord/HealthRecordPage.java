@@ -369,7 +369,7 @@ public class HealthRecordPage  extends HealthRecordBase {
 		}
 		checkModelPopup(driver,1);
 		CommonUtility.waitForPageLoad(driver, shadowRootHeader, 5);
-		sleepBySec(2);
+		sleepBySec(3);
 		scrollToTopOfPg();
 		if (noWaitValidate(shadowRootHeader)) {
 			System.out.println("located shadow-root element, attempt to process further...");
