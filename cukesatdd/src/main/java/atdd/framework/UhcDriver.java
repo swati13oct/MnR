@@ -25,7 +25,6 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.html5.LocalStorage;
 import org.openqa.selenium.html5.SessionStorage;
@@ -844,8 +843,9 @@ try {
 				break;
 			}
 		}
-//		WebElement currentSysTimeElement=timeJson;
-		WebElement currentSysTimeElement=driver.findElement(By.xpath("//body/pre"));
+
+		threadsleep(2);
+		WebElement currentSysTimeElement=timeJson;
 		String currentSysTimeStr=currentSysTimeElement.getText();
 		System.out.println("currentSysTimeStr="+currentSysTimeStr);
 		JSONParser parser = new JSONParser();
@@ -1184,10 +1184,14 @@ try {
 		return ReturnValue;
 	}
     
+    /**
+     * Wait for page load in Safari browser, by checking the invisibility of loading spinners which show in different flows
+     *
+     * @return true, if successful
+     */
     public boolean waitForPageLoadSafari() {
     	boolean ready = false;
     	if(MRScenario.browsername.equalsIgnoreCase("Safari")) {
-    		int counter = 3;
     		//Sets FluentWait Setup
     		List<WebElement> loadingScreen = null;
     		FluentWait<WebDriver> fwait = new FluentWait<WebDriver>(driver)
@@ -1199,7 +1203,7 @@ try {
     		// First checking to see if the loading indicator is found
     		// we catch and throw no exception here in case they aren't ignored
     		try {
-    			threadsleep(2);
+    			threadsleep(5);			//Adding sleep since the loading spinner sometimes takes long to come up
     			System.out.println("Waiting to check if Loading screen is present");
     			loadingScreen = fwait.until(new Function<WebDriver, List<WebElement>>() {
 					public List<WebElement> apply(WebDriver driver) {
@@ -1210,11 +1214,11 @@ try {
     		} catch (Exception e) {}
 
 
-    		// checking if loading indicator was found and if so we wait for it to
+    		// checking if loading indicators were found and if so we wait for it to
     		// disappear
     		if(!CollectionUtils.isEmpty(loadingScreen)) {
     			System.out.println("Loading screen visible!!! Waiting till it disappears");
-    			WebDriverWait wait = new WebDriverWait(driver, 7);
+    			WebDriverWait wait = new WebDriverWait(driver, 10);
     			try {
     				ready = wait.until(ExpectedConditions
     						.invisibilityOfAllElements(loadingScreen));
@@ -1233,17 +1237,18 @@ try {
     	return ready;
     }
 
+	/**
+	 * mouse over using jQuery event, mouseover.
+	 *
+	 * @param element the element
+	 * @return true, if successful
+	 * 
+	 * Note: use the jsMouseOut if using jsMouseOver for tooltip
+	 */
 	public boolean jsMouseOver(WebElement element) {
 		try {
-			/*String mouseOverScript = "if(document.createEvent){"
-					+ "var evObj = document.createEvent('MouseEvents');"
-					+ "evObj.initEvent('mouseover',true, false); "
-					+ "arguments[0].dispatchEvent(evObj);} "
-					+ "else if(document.createEventObject) { "
-					+ "arguments[0].fireEvent('onmouseover');}";*/
 			JavascriptExecutor js = (JavascriptExecutor) driver;
 			js.executeScript("$(arguments[0]).mouseover();", element);
-//			js.executeScript(mouseOverScript, element);
 		} catch (Exception e) {
 			Assert.fail("The element " + element.getText() + "is not  found");
 			return false;
@@ -1251,5 +1256,26 @@ try {
 
 		return true;
 	}
-	    
+	
+	
+	/**
+	 * move mouse out from the element using jQuery event, mouseout.
+	 *
+	 * @param element the element
+	 * @return true, if successful
+	 * 
+	 * Note: Use in combination with jsMouseOver
+	 */
+	public boolean jsMouseOut(WebElement element) {
+		try {
+			JavascriptExecutor js = (JavascriptExecutor) driver;
+			js.executeScript("$(arguments[0]).mouseout();", element);
+		} catch (Exception e) {
+			Assert.fail("The element " + element.getText() + "is not  found");
+			return false;
+		}
+
+		return true;
+	}
+	
 }

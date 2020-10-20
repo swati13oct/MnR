@@ -49,7 +49,8 @@ public class PharmacySearchPage extends PharmacySearchBase {
 				pharmacyValidate(viewsearchpdf));
 		String winHandleBefore = driver.getWindowHandle();
 		ArrayList<String> beforeClicked_tabs = new ArrayList<String>(driver.getWindowHandles());
-		viewsearchpdf.click();
+//		viewsearchpdf.click();
+		jsClickNew(viewsearchpdf);
 		Thread.sleep(5000); //note: keep this for the page to load
 		if (MRScenario.environment.contains("team-a")) 
 			Thread.sleep(3000);
@@ -128,7 +129,8 @@ public class PharmacySearchPage extends PharmacySearchBase {
 	public void validateAllTooltips(String language, boolean hasPrefRetailPharmacyWidget) {
 		waitForPageLoadSafari();
 		scrollToView(mapToggleElement);
-		moveMouseToElement(mapToggleElement);
+//		moveMouseToElement(mapToggleElement);
+		jsMouseOver(mapToggleElement);
 		String targetTooltipName="Standard Network Pharmacy";
 		String testXpath="//input[@id='pharmacy-standard']/../span//*[local-name() = 'svg']";
 		String expTxt="Standard Network Pharmacy A pharmacy where you get the prescription drug benefits provided by your plan.";
@@ -183,7 +185,8 @@ public class PharmacySearchPage extends PharmacySearchBase {
 				pharmacyValidate(testTooltip));
 		System.out.println("Proceed to mouse over '"+targetTooltipName+"' element...");
 		scrollToView(testTooltip);
-		moveMouseToElement(testTooltip);//note: then move mouse over to target element
+//		moveMouseToElement(testTooltip);//note: then move mouse over to target element
+		jsMouseOver(testTooltip); //note: then move mouse over to target element
 		Assert.assertTrue("PROBLEM - unable to locate tooltip display after mouse over", pharmacyValidate(tooltip));
 		if (language.equalsIgnoreCase("English")) {
 			Pattern expectedTxt=Pattern.compile(expTxt);
@@ -194,8 +197,8 @@ public class PharmacySearchPage extends PharmacySearchBase {
 					+ "Expected to contain '"+expectedTxt+"' | Actual='"+actualTxt+"'", 
 					expectedTxt.matcher(actualTxt).find());
 		}
-		scrollToView(moveAwayFromTooltip);
-		moveMouseToElement(moveAwayFromTooltip); //note: move away for tooltip to disappear
+//		moveMouseToElement(moveAwayFromTooltip); //note: move away for tooltip to disappear
+		jsMouseOut(testTooltip);
 	}
 
 	public void validateHeaderSection() {
@@ -342,10 +345,12 @@ public class PharmacySearchPage extends PharmacySearchBase {
 	public void validateMoreInfoContent() {
 		CommonUtility.checkPageIsReady(driver);
 		CommonUtility.waitForPageLoad(driver, moreInfoLink, 5);
-		moreInfoLink.click();
+//		moreInfoLink.click();
+		jsClickNew(moreInfoLink);
 		Assert.assertTrue("PROBLEM - text is not displaying after clicking 'More Info' link", 
 				pharmacyValidate(moreInfoText_show));
-		moreInfoLink.click();
+//		moreInfoLink.click();
+		jsClickNew(moreInfoLink);
 		Assert.assertTrue("PROBLEM - text should NOT displaying after collapsing 'More Info' link again", 
 				!pharmacyValidate(moreInfoText_show));
 	}
