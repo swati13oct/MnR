@@ -369,7 +369,7 @@ public class HealthRecordPage  extends HealthRecordBase {
 		}
 		checkModelPopup(driver,1);
 		CommonUtility.waitForPageLoad(driver, shadowRootHeader, 5);
-		sleepBySec(3);
+		sleepBySec(2);
 		scrollToTopOfPg();
 		if (noWaitValidate(shadowRootHeader)) {
 			System.out.println("located shadow-root element, attempt to process further...");
@@ -423,6 +423,7 @@ public class HealthRecordPage  extends HealthRecordBase {
 			}
 		} else if (noWaitValidate(testHarn_AcctProfBtn)) {
 			System.out.println("TEST - no shadowroot...");
+			scrollToTopOfPg();
 			checkModelPopup(driver,1);
 			Assert.assertTrue("PROBLEM - unable to locate Account Profile button on Rally Dashboard top menu", noWaitValidate(testHarn_AcctProfBtn));
 			JavascriptExecutor jse = (JavascriptExecutor) driver;
@@ -434,16 +435,23 @@ public class HealthRecordPage  extends HealthRecordBase {
 			checkModelPopup(driver,1);
 			WebElement ihrLnk=null;
 			List<WebElement> acctProfOptLst=null;
-			if (noWaitValidate(testHarn_desktop_AcctProf_IHRLnk)) {
+			if (driver.getCurrentUrl().contains("claims") && noWaitValidate(testHarn_AcctProfBtn_claims)) {
+				System.out.println("TEST - This is on claims page");
+				ihrLnk=testHarn_desktop_AcctProf_IHRLnk_claims;
+				acctProfOptLst=testHarn_AcctProfDropdown_claims;
+			} else if (noWaitValidate(testHarn_desktop_AcctProf_IHRLnk)) {
+				System.out.println("TEST - This has the usual desktop stuf");
 				ihrLnk=testHarn_desktop_AcctProf_IHRLnk;
 				acctProfOptLst=testHarn_AcctProfDropdown;
 			} else if (noWaitValidate(testHarn_desktop_AcctProf_IHRLnk_react)) { //note: rally pages starting to use react
+				System.out.println("TEST - This has react stuff");
 				ihrLnk=testHarn_desktop_AcctProf_IHRLnk_react;
 				acctProfOptLst=testHarn_AcctProfDropdown_react;
 			} else {
+				System.out.println("TEST - Can't match anything");
 				return false;
 			}
-			Assert.assertTrue("PROBLEM - 'Health Record' should be the first link in the dropdown", acctProfOptLst.get(0).getText().toLowerCase().contains("health record"));
+			Assert.assertTrue("PROBLEM - 'Health Record' should be the first link in the dropdown.   first link on the list has text='"+ acctProfOptLst.get(0).getText()+"'", acctProfOptLst.get(0).getText().toLowerCase().contains("health record"));
 
 			String expUrl=stageUrl;
 			if (MRScenario.environment.equalsIgnoreCase("offline"))
