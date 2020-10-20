@@ -70,8 +70,6 @@ public class AepVppPlanSummaryPage extends UhcDriver {
 	private WebElement planListContainer;
 
     int retryCnt = 1;
-    String sheetName ="";
-    int rowIndex = 0;
 	
 	public AepVppPlanSummaryPage(WebDriver driver) {
 		super(driver);
@@ -271,13 +269,9 @@ public class AepVppPlanSummaryPage extends UhcDriver {
     public HashMap<String, String> collectInfoVppPlanSummaryPg(String planName, String countyName, String planYear, String sheetName, int rowIndex) {
         HashMap<String, String> result=new HashMap<String, String>();
 
-        this.sheetName = sheetName;
-        this.rowIndex = rowIndex;
-
-        if(checkForMultiCountyPopup(countyName)) {
-			selectYearOption(planYear);
-			result = collectInfoVppPlanSummaryPg(planName);
-		}
+        checkForMultiCountyPopup(countyName);
+        selectYearOption(planYear);
+        result = collectInfoVppPlanSummaryPg(planName);
 
         // Retry only for 5 times
         if(result.size() <1 && retryCnt <=5)
@@ -356,8 +350,6 @@ public class AepVppPlanSummaryPage extends UhcDriver {
 			flag = true;
 		}
 
-		System.out.println();
-		System.out.println(sheetName+"_"+rowIndex+" - Attempt - "+retryCnt+", "+countyName + " county selected - " + flag);
 		return flag;
 	}
 
