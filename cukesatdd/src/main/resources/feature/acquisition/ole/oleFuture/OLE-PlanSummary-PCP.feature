@@ -110,16 +110,16 @@ Feature: 2.05.1.ACQ-OLE PCP
     Then the user navigates to Authorization Page for plan as per following rider options
       | Rider Flag | <riderflag> |
     Then the user validates required fields for Authorization Page
-    #Then the user validates required fields for Authorization Page Representative
-        #|authorizationFirstname|<authorizefirstN>|
-       #	|authorizationLastname|<authorizelastN>|
-       	#|authorizationAddress|<authorizeaddress>|
-       	#|authorizationApartmentSuite|<authorizeapartment>|
-       # |authorizationCity|<authorizecity>|
-       # |authorizationZip|<authorizezip>|
-       # |authorizationPhoneNo|<authorizephonenumber>|
-       # |authorizationRelationship| <authorizeRelationship>|
-       # |authorizationStateDisplay|<authorizestate>
+    Then the user validates required fields for Authorization Page Representative
+        |authorizationFirstname|<authorizefirstN>|
+       	|authorizationLastname|<authorizelastN>|
+       	|authorizationAddress|<authorizeaddress>|
+       	|authorizationApartmentSuite|<authorizeapartment>|
+       |authorizationCity|<authorizecity>|
+        |authorizationZip|<authorizezip>|
+        |authorizationPhoneNo|<authorizephonenumber>|
+        |authorizationRelationship| <authorizeRelationship>|
+        |authorizationStateDisplay|<authorizestate>
     Then the user navigates to Review and Submit Page
    Then the user validates the Online Enrollment details on Review and Submit Page
     Then the user clicks on Submit Enrollment to complete enrollment

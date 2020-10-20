@@ -12,6 +12,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.Select;
 
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
@@ -231,7 +232,9 @@ public class AuthorizationPage extends UhcDriver{
 			sendkeys(Authorized_Relation,AuthorizationRelationship);
 			sendkeys(Authorized_Address,AuthorizationAddress);
 			sendkeys(Authorized_City,AuthorizationCity);
-			sendkeys(Authorized_State,AuthorizationStateDisplay);
+			Select SelectState = new Select(Authorized_State);
+			SelectState.selectByValue(AuthorizationStateDisplay);
+			//sendkeys(Authorized_State,AuthorizationStateDisplay);
 			sendkeys(Authorized_ZipCode,AuthorizationZip);
 			sendkeys(Authorized_PhNo,AuthorizationPhoneNo);
 			sendkeys(Authorized_Apartment, AuthorizationApartmentSuite);
