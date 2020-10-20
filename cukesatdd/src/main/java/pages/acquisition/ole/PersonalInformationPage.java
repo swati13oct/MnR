@@ -143,6 +143,10 @@ public class PersonalInformationPage extends UhcDriver{
 	@FindBy(xpath = "//*[@id='lastName' or @id = 'Last']")
 	private WebElement lastNameField;
 	
+	
+	@FindBy(xpath = "//*[@id='middleName' or @id = 'middle']")
+	private WebElement MiddleNameField;
+	
 	@FindBy(xpath = "//*[(contains(@id,'partAEffectiveDate') or contains(@id,'partAdate')) and contains(@class,'input-element')]")
 	private WebElement partAStartDateField;
 
@@ -171,7 +175,7 @@ public class PersonalInformationPage extends UhcDriver{
 	public boolean enter_member_details(Map<String, String> memberDetailsMap) throws InterruptedException {
 
 		String FirstName = memberDetailsMap.get("First Name");
-		String LastName = memberDetailsMap.get("Last Name");
+		String LastName = memberDetailsMap.get("Last Name");	
 		String DOB = memberDetailsMap.get("DOB");
 		String Gender = memberDetailsMap.get("Gender");
 		String Perm_Street = memberDetailsMap.get("Perm_Street");
@@ -185,6 +189,7 @@ public class PersonalInformationPage extends UhcDriver{
 
 		sendkeysNew(firstNameField, FirstName);
 		sendkeysNew(lastNameField, LastName);
+		
 		sendkeys(DOBtxtFld,DOB);
 		if(Gender.contains("Male")){
 			//GenderSelectMale.click();
@@ -217,20 +222,19 @@ public class PersonalInformationPage extends UhcDriver{
 	
 	public boolean enter_member_details_Other(Map<String, String> memberDetailsMap) throws InterruptedException {
 
-		
 		String EmailAddress = memberDetailsMap.get("Email");
 		String emailConfirmation = memberDetailsMap.get("Email Confirmation");
 		String goGreen = memberDetailsMap.get("Go Green");
 		//String email = memberDetailsMap.get("Email");
 		String HomeNumber = memberDetailsMap.get("Home Number");
 		String MobileNumber =memberDetailsMap.get("Mobile Number");
-		
+		String MiddleName = memberDetailsMap.get("Middle Name");
 		
 		validateNew(HomephoneNumberField);
 		sendkeys(HomephoneNumberField, HomeNumber);
 		  validateNew(MobileNumberField);
 		sendkeys(MobileNumberField, MobileNumber);
-		
+		sendkeysNew(MiddleNameField, MiddleName);
 		if(emailConfirmation.equalsIgnoreCase("YES")){
 			jsClickNew(emailConfirmationYesBtn);	//emailConfirmationYesBtn.click();
 		}else
