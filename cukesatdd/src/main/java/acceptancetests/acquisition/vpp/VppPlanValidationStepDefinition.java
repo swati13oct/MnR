@@ -547,20 +547,11 @@ public class VppPlanValidationStepDefinition {
 									  System.out.println("Validating "+sheetName+ " Plan "+rowIndex+" ************************************************************");
 									  new VppCommonPage(wd,siteType,currentCellValue);  //gets the partial deeplink fromt the excel and appends it with the environment URL and navigates to plan details page
 									  planSummaryPage = new AepVppPlanSummaryPage(wd);
-									  planSummaryPage.checkForMultiCountyPopup(countyName);
-									  planSummaryPage.selectYearOption(planYear);
-									  benefitsMap = planSummaryPage.collectInfoVppPlanSummaryPg(planName);
+									  //planSummaryPage.checkForMultiCountyPopup(countyName);
+									  //planSummaryPage.selectYearOption(planYear);
+									  //benefitsMap = planSummaryPage.collectInfoVppPlanSummaryPg(planName);
 
-									 //Retry one more time - The below code refreshes the page and reads the benefits for the second time if the original reading of benefits fail
-									  if(benefitsMap.size() <1)
-									  {
-										  System.out.println("Benefits Map count - " +benefitsMap.size() +", Plan - "+planName+", Sheet - " +sheetName+", Row - "+rowIndex);
-										  wd.navigate().refresh();
-										  planSummaryPage.checkForMultiCountyPopup(countyName);
-										  planSummaryPage.selectYearOption(planYear);
-										  benefitsMap = planSummaryPage.collectInfoVppPlanSummaryPg(planName);
-										  System.out.println("Benefits Map NEW count - " +benefitsMap.size() +", Plan - "+planName+", Sheet - " +sheetName+", Row - "+rowIndex);
-									  }
+                                      benefitsMap = planSummaryPage.collectInfoVppPlanSummaryPg(planName, countyName, planYear, sheetName, rowIndex);
 								 }
 
 								 if(!(currentColName.equalsIgnoreCase("plan year")||currentColName.equalsIgnoreCase("Error Count")||currentColName.equalsIgnoreCase("portal labels")||currentColName.equalsIgnoreCase("OON_IN")||currentColName.equalsIgnoreCase("plan type")||currentColName.equalsIgnoreCase("county")||currentColName.equalsIgnoreCase("Link parameters")||currentColName.equalsIgnoreCase("Contract PBP Segment ID")||currentColName.equalsIgnoreCase("product")||currentColName.equalsIgnoreCase("plan name")||currentColName.equalsIgnoreCase("zipcode")||currentColName.equalsIgnoreCase("fips"))) {	

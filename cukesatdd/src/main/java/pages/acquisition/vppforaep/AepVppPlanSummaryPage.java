@@ -263,6 +263,26 @@ public class AepVppPlanSummaryPage extends UhcDriver {
 
 		return result;
 	}
+
+    public HashMap<String, String> collectInfoVppPlanSummaryPg(String planName, String countyName, String planYear, String sheetName, int rowIndex) {
+        HashMap<String, String> result=new HashMap<String, String>();
+        int retryCnt = 1;
+
+        checkForMultiCountyPopup(countyName);
+        selectYearOption(planYear);
+        result = collectInfoVppPlanSummaryPg(planName);
+
+        if(result.size() <1)
+        {
+            System.out.println(sheetName+"_"+rowIndex+" - Attempt - "+retryCnt+", Benefits Map count - " +result.size() +", Plan - "+planName);
+            driver.navigate().refresh();
+            result = collectInfoVppPlanSummaryPg(planName, countyName, planYear, sheetName, rowIndex);
+            retryCnt++;
+            System.out.println(sheetName+"_"+rowIndex+" - Attempt - "+retryCnt+", Benefits Map count - " +result.size() +", Plan - "+planName);
+        }
+
+        return result;
+    }
 	
 	public HashMap<Boolean, String> compareBenefits(String columnName, String benefitValue, HashMap<String, String> benefitsMap) {
 		boolean flag = true; int counter =0;
