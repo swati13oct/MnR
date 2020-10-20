@@ -108,11 +108,13 @@ public class PlanRecommendationEngineCostPreferencesPageMobile extends UhcDriver
 		System.out.println("Cost Preferences option selection in Cost Preferences Page");
 		if (costpreferenceoption.equalsIgnoreCase("Lower")) {
 			validate(lowerPremium);
-			lowerPremium.click();
+			//lowerPremium.click();
+			jsClickNew(lowerPremium);
 			System.out.println("Cost Preferences Type " + costpreferenceoption + " Clicked");
 		} else if (costpreferenceoption.equalsIgnoreCase("Higher")) {
 			validate(higherPremium);
-			higherPremium.click();
+			//higherPremium.click();
+			jsClickNew(higherPremium);
 			System.out.println("Cost Preferences Type " + costpreferenceoption + " Clicked");
 		}
 	}

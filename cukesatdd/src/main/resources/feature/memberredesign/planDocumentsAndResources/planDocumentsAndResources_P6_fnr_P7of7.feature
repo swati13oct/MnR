@@ -98,4 +98,9 @@ Feature: 1.06.6 Member Plans and Documents - section: Forms And Resources Part 7
 	@active_ship_7of7 @devRegression
 	Examples: 
       | index  | TID         | planType | memberType            | fnr_sd | fnr_di |
-      | 19-120 | 15119,15304 | SHIP     | MULTI_IND_EFF_PDnR    | true   | false  |    
+      | 19-120 | 15119,15304 | SHIP     | MULTI_IND_EFF_PDnR    | true   | false  |  
+      
+	@preeffective_ship_7of7
+	Examples: 
+      | index  | TID         | planType | memberType            | fnr_sd | fnr_di  |
+      | 20-121 | xxxxx       | SHIP     | IND_PREEFF_PDnR       | true   | false   |        

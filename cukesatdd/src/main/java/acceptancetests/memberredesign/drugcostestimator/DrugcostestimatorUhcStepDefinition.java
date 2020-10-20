@@ -631,10 +631,11 @@ public class DrugcostestimatorUhcStepDefinition {
 		}
 
 		String zipcode = memberAttributesMap.get("Zipcode");
+		String radisu = memberAttributesMap.get("Radius");
 
 		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario().getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
 		//dce.validateZipcode(zipcode);
-		dce.selectRadius();
+		dce.selectRadius(radisu);
 		Thread.sleep(10000);
 		dce.selectZipcode(zipcode);
 		//dce.selectPharmacyType(Pharmacy_type);

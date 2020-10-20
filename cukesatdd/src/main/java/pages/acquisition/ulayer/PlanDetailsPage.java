@@ -1258,6 +1258,7 @@ public class PlanDetailsPage extends UhcDriver {
 				dentalPopupOptionalRidersLink.click();
 			else {
 				JavascriptExecutor jse = (JavascriptExecutor) driver;
+//				jse.executeScript("arguments[0].scrollIntoView(true);", dentalPopupLink);
 				jse.executeScript("arguments[0].click()", dentalPopupLink);
 			}
 			System.out.println("Plan Name is : " + planName);
@@ -1277,7 +1278,8 @@ public class PlanDetailsPage extends UhcDriver {
 					break;
 				}
 			}
-			
+			//checkIfPageReadySafari();
+			waitTillElementClickableInTime(driver.findElement(By.id("changeLocationBtn")), 10);
 			System.out.println(driver.getTitle());
 			Assert.assertTrue( "Title mismatch for dental directory",driver.getTitle().equals("Dental | Find Care"));
 			driver.close();

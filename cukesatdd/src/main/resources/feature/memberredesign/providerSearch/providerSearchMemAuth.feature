@@ -2,7 +2,7 @@
 Feature: 1.23.1 Member Provider Search - Member Auth
 
   @memAuth_providerSearch01
-  Scenario Outline: -Index <index> -Plan Type: <planType> -Member Type: <memberType> - To verify iHR link display for user that is not on the exclusion table
+  Scenario Outline: -Index <index> -Plan Type: <planType> -Member Type: <memberType> - To validate navigation from Provider Search page to other secondary pages
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
       | Username | <username> |
@@ -32,7 +32,7 @@ Feature: 1.23.1 Member Provider Search - Member Auth
 	@memAuth_providerSearch01_pdp
     Examples: 
 	    | index | username  | password  | MemUserName          | planType | memberType              | 
-	    | 03    | qavgogine | qavgogine | q2_jun_aarp0179      | PDP      | AARP_IND_ProviderSearch |
+	    | 03    | qavgogine | qavgogine | q2_jun_aarp0112      | PDP      | AARP_IND_ProviderSearch |
 
 	@memAuth_providerSearch01_ma
     Examples: 

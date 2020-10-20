@@ -78,7 +78,7 @@ Feature: 1.05.2.ACQ-OLE  common tool flow E2E MAPD AARP
     Then the user validates Proposed Effective Date is Displayed
     Then the user navigates to PCP Page and validates PCP page is not displayed for PDP
     Then the user validates PCP page for MA and MAPD PFFS plans
-    Then the user validates Look up Provider for MA MAPD and DSNP plans.
+    #Then the user validates Look up Provider for MA MAPD and DSNP plans.
     Then the user navigates to Monthly Plan Premium Page
     Then the user navigates to Optional Benefits Page for following plans with available Riders
       | Rider Flag | <riderflag> |
@@ -200,7 +200,7 @@ Feature: 1.05.2.ACQ-OLE  common tool flow E2E MAPD AARP
 		@MAPD_OLE_Ulayer_Future
 			Examples: 
       | TID   | PlanType        | Plan Year|planYear|zipcode | isMultutiCounty | county            | plantype | planName                                  | cardtype | firstname | lastname | medicarenumber | ssnflag | partadate | partbdate | medicaidnumber | esrdflag | dob      | gender | permstreet  | permcity    | mailingaddressquestion | mailingstreet | mailingcity | mailingstate | mailingzip | email         | selectoptions                     | optiondata | pdpFlag | longTermFlag | riderflag | emailConfirmation | goGreen |healthinsurancename|groupnumber| membernumber|prescriptioncoveragename|pdgroupnumber|pdmembernumber|inputdataType|
-      | 11118 | MAPD-PFFS-MBI   |  future|future | 85923| NO              | Navajo County     | MAPD     | UnitedHealthcare MedicareDirect Rx (PFFS) | MBI      | John      | Doe      | 3A33C22YK22    | false   |  01012010 |  01012010 |      231665465 | true     | 01011941 | Female | 123 Perm Rd | Los Angeles | Yes                    |               |             | AZ           |      66843 | test@test.com | None apply                        |            | yes     | no           | false     | NO                | NO      |HealthInsurance             |HI1562759    | ABC12345DEF     |PrescriptionCoverage            |PD5646136   | BCD12345EFG |Valid|
+     # | 11118 | MAPD-PFFS-MBI   |  future|future | 85923| NO              | Navajo County     | MAPD     | UnitedHealthcare MedicareDirect Rx (PFFS) | MBI      | John      | Doe      | 3A33C22YK22    | false   |  01012010 |  01012010 |      231665465 | true     | 01011941 | Female | 123 Perm Rd | Los Angeles | Yes                    |               |             | AZ           |      66843 | test@test.com | None apply                        |            | yes     | no           | false     | NO                | NO      |HealthInsurance             |HI1562759    | ABC12345DEF     |PrescriptionCoverage            |PD5646136   | BCD12345EFG |Valid|
       | 11119 | Medica-MAPD-MBI |  future|future | 33143 | NO              | Miami-Dade County | MAPD     | Medica HealthCare Plans MedicareMax (HMO) | MBI      | John      | Doe      | 3A33C22YK22    | false   |  01012010 |  01012010 |                | false    | 01011941 | Female | 123 Perm Rd | Los Angeles | Yes                    | 876 MailingSt | Mailing LA  | FL           |      33143 | test@test.com | moved outside of the service area |   01012018 | yes     | no           | false     | NO                | NO      |HealthInsurance             |HI1562759    | ABC12345DEF     |PrescriptionCoverage            |PD5646136   | BCD12345EFG |Valid|
 
   

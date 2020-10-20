@@ -24,6 +24,7 @@ import cucumber.api.java.en.When;
 
 import gherkin.formatter.model.DataTableRow;
 import io.appium.java_client.AppiumDriver;
+import pages.acquisition.bluelayer.AcquisitionHomePage;
 import pages.mobile.acquisition.bluelayer.AcquisitionHomePageMobile;
 import pages.mobile.acquisition.bluelayer.PlanSelectorNewPageMobile;
 import pages.mobile.acquisition.planrecommendationengine.PlanRecommendationEngineAdditionalServicesPageMobile;
@@ -67,8 +68,21 @@ public class PlanRecommendationStepDefinitionMobile {
 	}
 
 	boolean if_offline_prod = false, popup_clicked = false;
-
+	
+	
 	@Given("^the user is on UHC medicare acquisition site landing page$")
+	public void the_user_on_uhc_medicaresolutions_Site() {
+		wd = getLoginScenario().getMobileDriver();
+		AcquisitionHomePageMobile aquisitionhomepage = new AcquisitionHomePageMobile(wd,"PRE",true);
+		if_offline_prod = aquisitionhomepage.openMobileURL();
+//		aquisitionhomepage.fixPrivateConnection();
+		checkpopup();
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE,
+				aquisitionhomepage);
+	}
+
+	/*@Given("^the user is on UHC medicare acquisition site landing page$")
 	public void the_user_on_uhc_medicaresolutions_Site() {
 		wd = getLoginScenario().getMobileDriver();
 		AcquisitionHomePageMobile aquisitionhomepage = new AcquisitionHomePageMobile(wd);
@@ -78,7 +92,7 @@ public class PlanRecommendationStepDefinitionMobile {
 		aquisitionhomepage.fixPrivateConnectionMobile();
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, aquisitionhomepage);
-	}
+	}*/
 
 	@And("^clicks on get started button and runs questionnaire$")
 	public void clicks_on_get_started_button_and_directly_skip_to_results(DataTable givenAttributes) throws Throwable {

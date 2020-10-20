@@ -38,9 +38,9 @@ Feature: 1.06.1.2 Member Plans and Documents - section: Plan Materials - Member 
 	@prod_preeffective_ma_mapd
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | pm_sd | pm_op | pm_mi | pm_en | pm_es | pm_zh |
-      | 01-020 | xxxxx       | kkumard  | mnrs786@  | Ranch1955    | MA       | AARP_IND_PREEFF_PDnR  | false | false | false | false | false | false |
+#      | 01-020 | xxxxx       | kkumard  | mnrs786@  | Ranch1955    | MA       | AARP_IND_PREEFF_PDnR  | false | false | false | false | false | false |
 #      | 02-021 | xxxxx       | kkumard  | mnrs786@  | testusername    | MA       | GROUP_PREEFF_PDnR     | false | false | false | false | false | false |
-#      | 03-022 | xxxxx       | kkumard  | mnrs786@  | testusername    | MAPD     | AARP_IND_PREEFF_PDnR  | false | false | false | false | false | false |
+      | 03-022 | xxxxx       | kkumard  | mnrs786@  | Abayne01          | MAPD     | AARP_IND_PREEFF_PDnR  | false | false | false | false | false | false |
 
 #	@prod_preeffective_pdp
 #	Examples: 
@@ -109,6 +109,10 @@ Feature: 1.06.1.2 Member Plans and Documents - section: Plan Materials - Member 
       | 19-038 | 15119,15304 | kkumard  | mnrs786@  | Pramila1946    | SHIP     | IND_EFF_PDnR          | true  | true  | true  | true  | false | false |  
 #      | 20-116 | 15119,15304 | kkumard  | mnrs786@  | q1_feb_2020SHIP_001    | SHIP     | MULTI_IND_EFF_PDnR   | true  | true  | true  | true  | false | false |  
 
+	@prod_preeffective_ship
+	Examples: 
+      | index  | TID         | username  | password  | MemUserName  | planType | memberType            | pm_sd | pm_op | pm_mi | pm_en | pm_es | pm_zh |
+#     | 21-121 | xxxxx       | kkumard   | mnrs786@  | testusername | SHIP     | IND_PREEFF_PDnR       | true  | false | false | true  | false | false | 
 
 
     

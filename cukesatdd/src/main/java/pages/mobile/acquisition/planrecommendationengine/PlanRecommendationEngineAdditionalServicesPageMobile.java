@@ -157,7 +157,9 @@ public class PlanRecommendationEngineAdditionalServicesPageMobile extends UhcDri
 			System.out.println("additional Type Dental " + dental + " Clicked");
 		}
 		if (dental.equalsIgnoreCase("No")) {
-			dentalNo.click();
+			//dentalNo.click();
+			validate(dentalNo);
+			jsClickNew(dentalNo);
 			System.out.println("additional Type Dental " + dental + " Clicked");
 		}
 		if (hearing.equalsIgnoreCase("Yes")) {
@@ -165,7 +167,8 @@ public class PlanRecommendationEngineAdditionalServicesPageMobile extends UhcDri
 			System.out.println("additional Type Hearing " + hearing + " Clicked");
 		}
 		if (hearing.equalsIgnoreCase("No")) {
-			hearingNo.click();
+			//hearingNo.click();
+			jsClickNew(hearingNo);
 			System.out.println("additional Type Hearing " + hearing + " Clicked");
 		}
 		if (vision.equalsIgnoreCase("Yes")) {
@@ -173,7 +176,8 @@ public class PlanRecommendationEngineAdditionalServicesPageMobile extends UhcDri
 			System.out.println("additional Type Vision " + vision + " Clicked");
 		}
 		if (vision.equalsIgnoreCase("No")) {
-			visionNo.click();
+			//visionNo.click();
+			jsClickNew(visionNo);
 			System.out.println("additional Type Vision " + vision + " Clicked");
 		}
 		if (fitness.equalsIgnoreCase("Yes")) {
@@ -181,7 +185,8 @@ public class PlanRecommendationEngineAdditionalServicesPageMobile extends UhcDri
 			System.out.println("additional Type Fitness " + fitness + " Clicked");
 		}
 		if (fitness.equalsIgnoreCase("No")) {
-			fitnessNo.click();
+			//fitnessNo.click();
+			jsClickNew(fitnessNo);
 			System.out.println("additional Type Fitness " + fitness + " Clicked");
 		}
 	}
@@ -190,9 +195,10 @@ public class PlanRecommendationEngineAdditionalServicesPageMobile extends UhcDri
 	public void additionalpageFunctional(String additionalOptions) {
 		System.out.println("additional Page Functional Operations");
 		additionalpageOptions(additionalOptions.split(",")[0],additionalOptions.split(",")[1],additionalOptions.split(",")[2],additionalOptions.split(",")[3]);
-		continueBtn.click();
-		System.out.println("Validating " + page + " page Continue button functionality");
-		desktopCommonUtils.nextPageValidation(page.toUpperCase());
+		//continueBtn.click();
+		jsClickNew(continueBtn);
+		//System.out.println("Validating " + page + " page Continue button functionality");
+		//desktopCommonUtils.nextPageValidation(page.toUpperCase());
 	}
 
 //Additional Page Error Function Verification     

@@ -734,4 +734,6 @@ public static final String STAGE_PAYMENT_DEEPLINK_lOGIN_PAGE= "paymentdeeplinklo
 	public static final String AARP_HAWL="aarpHAWL";
 	public static final String STAGE_Pharmacy_DEEPLINK_lOGIN_PAGE="pharmacydeeplinklogin";
 	public static final String STAGE_VirtualVisit_DEEPLINK_lOGIN_PAGE="virtualVisitdeeplinklogin";
+
+	public static final String PLANDOCS_PAGE = "plandocs";
 }

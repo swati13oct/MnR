@@ -149,11 +149,19 @@ Feature: 1.19 Verify the premium payment flows on member portal - Part 3 - Test 
     Then User Scrolls down and validate Billing history Section and Payment History Section and scrolls up for Fed
     And user clicks on Update Automatic payments on payment overview page
     And user selects checking Account on Update Automatic recurring payments page and Click on Next
+    And user Enters all Mandatory fields on form page and click on Authorize button for Update Recurring
+      | Routing number             | <routingNo>        |
+      | Confirm routing number     | <confirmRoutingNo> |
+      | Account number             | <accountNo>        |
+      | Confirm account number     | <confirmAccountNo> |
+      | Account holder first name  | <firstName>        |
+      | Account holder middle name | <middleName>       |
+      | Account holder last name   | <lastName>         |
     And the user clicks on cancel button in One time EFT or Recurring EFT flow
 
     Examples: 
-      | UID       | planType | memberType                |
-      | US1463204 | MAPD     | UpdateRecurrStop_Payments |
+      | UID       | planType | memberType                | routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName |
+      | US1463204 | MAPD     | UpdateRecurrStop_Payments |123123123 |        123123123 |     12345 |            12345 | first     | second     | third    |
 
   #Test Case 19 - Fed Only Member with Recurring method already setup and with billing history
   @regressionMember
@@ -342,7 +350,7 @@ Feature: 1.19 Verify the premium payment flows on member portal - Part 3 - Test 
       | GroupPDPGroupSSUP | ACTIVEGroupPDPGroupSSUPPayment | NON LIS       |
       | FedPDPSHIP        | ACTIVEPDPSHIPPayment           | NON LIS       |
 
-  #Test Case 26 - This test case check the Make a Payment button on Coverage and Benefits page for fedreal plan member
+  #Test Case 26 - This test case check the Make a Payment button on Coverage and Benefits page for federal plan member
   @regressionMember
   Scenario Outline: Test Case 26 - Verify that member of <Test Scenario> is able to click on Make Payment button Coverage and Benefits page and navigate to Premium Payments page
     Given login with following details logins in the member portal and validate elements

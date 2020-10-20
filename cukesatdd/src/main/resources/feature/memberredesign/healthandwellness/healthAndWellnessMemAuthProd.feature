@@ -1,7 +1,10 @@
 @healthAndWellness
 Feature: 1.09.1 Member Health and Wellness Page - Member Auth - PROD
 
-  #----- beginning of test for non-regression------------------
+  #----- beginning of sanity ------------------
+  #note: look for scenarios w/ sanity tag
+  
+  #----- beginning of test for regression------------------
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - As an authenticated member on the new Member site, I want to validate health and wellness page content
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
@@ -22,10 +25,14 @@ Feature: 1.09.1 Member Health and Wellness Page - Member Auth - PROD
     And I should see RENEW ACTIVE tile if available and be able to click it
       | Has RenewActive | <hasRenewActive>   |
       
-    @prod_healthAndWellness01_ma_mapd
+    @prod_healthAndWellness01_ma_mapd @prod_sanity
     Examples: 
       | TID   | username  | password  | MemUserName     | planType | memberType        | hasReward | hasRenewActive |
       | 15340 | kkumard  | mnrs786@  | BILL.ROSNER123# | MAPD     | RewardsMember     | true      | true           |
+
+    @prod_healthAndWellness01_ma_mapd
+    Examples: 
+      | TID   | username  | password  | MemUserName     | planType | memberType        | hasReward | hasRenewActive |
       | 15341 | kkumard  | mnrs786@  | haradaty32      | MA       | AARP_RewardsMember| true      | true           |
       | 15341 | kkumard  | mnrs786@  | BNCSAUVE2       | MA       | UHC_RewardsMember | true      | true           |
 
@@ -33,6 +40,10 @@ Feature: 1.09.1 Member Health and Wellness Page - Member Auth - PROD
     Examples: 
       | TID   | username  | password  | MemUserName     | planType | memberType        | hasReward | hasRenewActive |
       | 15342 | kkumard  | mnrs786@  | nawal1215       | PDP      | RewardsMember     | false     | false          |
+
+    @prod_healthAndWellness01_pdp_ship @prod_sanity
+    Examples: 
+      | TID   | username  | password  | MemUserName     | planType | memberType        | hasReward | hasRenewActive |
       | xxxxx | kkumard  | mnrs786@  | vernajohnson19651 | SHIP   | RewardsMember     | false     | false           |
 
     @prod_healthAndWellness01_fedShipCombo_shipFedCombo

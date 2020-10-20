@@ -1,6 +1,3 @@
-/**
- * 
- */
 package atdd.framework;
 
 import java.text.DecimalFormat;
@@ -60,13 +57,37 @@ import java.util.regex.Pattern;
 public abstract class UhcDriver {
 
 	public WebDriver driver;
-	private long defaultTimeoutInSec = 40;
+	private long defaultTimeoutInSec = 45;
 
 	@FindBy(xpath = ".//iframe[contains(@id,'IPerceptionsEmbed')]")
 	public static WebElement IPerceptionsFrame;
 
 	@FindBy(xpath = "//*[contains(@class,'btn-no')]")
 	public static WebElement IPerceptionNoBtn;
+
+	@FindBy(xpath = "//div[@class='menu-text']")
+	public WebElement MenuMobile;
+
+	@FindBy(xpath = "//span[text()='Shop For a Plan']")
+	public WebElement MenuShopForPlanMobile;
+
+	@FindBy(xpath = "//a[text()='Get a Plan Recommendation']")
+	public WebElement GetPlanRecoMobile;
+
+	@FindBy(css = "#planTypesColumn h3:nth-of-type(1)>a")
+	public WebElement ShopTool;
+
+	public void MobileMenu() {
+		jsClickNew(MenuMobile);
+		jsClickNew(MenuShopForPlanMobile);
+		jsClickNew(GetPlanRecoMobile);
+	}
+
+	public void MobileMenuShopTool() {
+		jsClickNew(MenuMobile);
+		jsClickNew(MenuShopForPlanMobile);
+		jsClickNew(ShopTool);
+	}
 
 	public void start(String url) {
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
@@ -695,35 +716,35 @@ public abstract class UhcDriver {
 
 	@FindBy(xpath = ".//*[contains(@id,'singleLargeLayoutContainer')]")
 	public static WebElement IPerceptionsPopup;
-	
-	@FindBy(xpath="//*[contains(@id,'ip-no')]")
+
+	@FindBy(xpath = "//*[contains(@id,'ip-no')]")
 	public static WebElement IPerceptionPopuNoBtn;
-	
-	public void checkModelPopup(WebDriver driver,long timeoutInSec) {
-		
-		CommonUtility.waitForPageLoad(driver, IPerceptionsFrame,timeoutInSec);
-		CommonUtility.waitForPageLoad(driver, IPerceptionsPopup,timeoutInSec);
-		
-		try{
-			if(IPerceptionsPopup.isDisplayed())	{
-				//driver.switchTo().frame(IPerceptionsFrame);
+
+	public void checkModelPopup(WebDriver driver, long timeoutInSec) {
+
+		CommonUtility.waitForPageLoad(driver, IPerceptionsFrame, timeoutInSec);
+		CommonUtility.waitForPageLoad(driver, IPerceptionsPopup, timeoutInSec);
+
+		try {
+			if (IPerceptionsPopup.isDisplayed()) {
+				// driver.switchTo().frame(IPerceptionsFrame);
 				IPerceptionPopuNoBtn.click();
-				//driver.switchTo().defaultContent();
+				// driver.switchTo().defaultContent();
 			}
-		}catch(Exception e){
+		} catch (Exception e) {
 			System.out.println("IPerceptionsPopup not found");
 			try {
-				if(IPerceptionsFrame.isDisplayed())	{
+				if (IPerceptionsFrame.isDisplayed()) {
 					System.out.println("IPerceptionsFrame found");
 					driver.switchTo().frame(IPerceptionsFrame);
 					IPerceptionNoBtn.click();
 					driver.switchTo().defaultContent();
 				}
-			}catch(Exception e1) {
-			System.out.println("Iperceptions not found");
+			} catch (Exception e1) {
+				System.out.println("Iperceptions not found");
 			}
 		}
-}
+	}
 
 	/**
 	 * determine system time note: for prod no one would be changing the date, note:
@@ -1132,7 +1153,7 @@ public abstract class UhcDriver {
 
 	public void addDrugs() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }

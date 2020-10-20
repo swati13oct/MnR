@@ -168,6 +168,7 @@ public class PlanSelectorNewPageMobile extends UhcDriver {
 		openAndValidate();
 	}
 
+	
 	@Override
 	public void openAndValidate() {
 		checkModelPopup(driver);

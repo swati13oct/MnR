@@ -126,7 +126,8 @@ public class PlanRecommendationEngineCoverageOptionPageMobile extends UhcDriver 
 			plantypeNone.click();
 			System.out.println("Plan Type " + planType + " Clicked");
 		}
-		continueBtn.click();
+		//continueBtn.click();
+		jsClickNew(continueBtn);
 		System.out.println("Validating " + page + " page Continue button functionality");
 //		desktopCommonUtils.nextPageValidation(page.toUpperCase());
 	}

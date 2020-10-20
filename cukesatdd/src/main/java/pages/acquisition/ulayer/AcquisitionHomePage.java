@@ -20,7 +20,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
-
+import pages.acquisition.commonpages.PlanDocsPage;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.MRConstants;
 import acceptancetests.data.PageData;
@@ -43,6 +43,12 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	@FindBy(xpath = "//*[contains(@id,'cta-zipcode')]")
 	private WebElement zipCodeField;
+	
+	@FindBy(xpath = "//*[contains(@id,'zipcodemeded-0')]")
+	private WebElement zipCodeShopField;
+	
+	@FindBy(xpath = "//*[contains(@id,'zipcodemeded')][1]//following-sibling::button//*[contains(text(),'Shop Plans')]")
+	private WebElement viewShopPlansButton;
 
 	@FindBy(id = "zipcode")
 	private WebElement healthPlansZipcode;
@@ -137,7 +143,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = ".//*[contains(@id,'colhowdoesthiswork')]//*[@itemprop='significantLink']/*[contains(@class,'cta-button secondary')and contains(text(),'Get')]")
 	public WebElement getStarted;
 
-	@FindBy(xpath = ".//*[contains(@class, 'meded-article-content__section')]//*[contains(text(), 'Request an Appointment')]")
+	//@FindBy(xpath = ".//*[contains(@class, 'meded-article-content__section')]//*[contains(text(), 'Request an Appointment')]")
+	@FindBy(xpath = "//a[contains(text(),'Find an Agent')]")
 	private WebElement requestAgentApptDropdown;
 
 	@FindBy(xpath = "//*[@class='textalign']//p[2]/a")
@@ -179,7 +186,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "//*[@class='container meded-article-header']/h1']")
 	private WebElement MALandingHeading;
 
-	@FindBy(xpath = "//*[contains(@id,'zipcodebtn') or (contains(@class,'zip-button' ) and contains( text(),'Go'))]")
+	@FindBy(xpath = "//*[contains(@id,'zipcodebtn') or (@class='zip-button') and (contains(@dtmid,'plans'))]")
 	private WebElement viewPlansButton;
 
 	@FindBy(xpath = "//form[@id='zip-form']//button[@class='zip-button']")
@@ -281,7 +288,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	private WebElement callsam;
 
 	// @FindBy(xpath = "//*[@id='sam-call-button']/div/span[1]")
-	@FindBy(xpath = "//*[contains(@id,'sam-call-button')]//*[contains(@class,'sam__button__text')]")
+//	@FindBy(xpath = "//*[contains(@id,'sam-call-button')]//*[contains(@class,'sam__button__text')]")
+	@FindBy(xpath = "//*[contains(@id,'sam-call-button')]/span")
 	private WebElement callsamtooltip;
 
 	@FindBy(xpath = "//*[@id='sam-call-modal']/div/div")
@@ -405,7 +413,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
    	//String ChatSamText= "Chat with a Licensed Insurance Agent";
 	String ChatSamText= "Chat Now";
-	String CallSam= "Call a Licensed Insurance Agent";
+	String CallSam= "1-877";
+//	String CallSam= "Call a Licensed Insurance Agent";
 //	String CallSam= "Call UnitedHealthcare Ins. Co.";
 
 
@@ -1106,7 +1115,10 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		sendkeys(zipCodeField, zipcode);
 		viewPlansButton.click();
 		// }
-		while(validate(overlayFilm, 10)) {/**wait*/}
+		CommonUtility.checkPageIsReadyNew(driver);
+//		while(validate(overlayFilm, 10)) {/**wait*/}
+//		CommonUtility.waitForElementToDisappear(driver, overlayFilm, 75);
+		//waitForPageLoadSafari();
 			
 		CommonUtility.waitForPageLoadNew(driver, zipcodeChangeLink, 30);
 		if (driver.getCurrentUrl().contains("health-plans")) {
@@ -1197,9 +1209,13 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	public PharmacySearchPage navigateToPharmacyLocator() {
 		// checkModelPopup(driver);
 		Actions action = new Actions(driver);
+		scrollToView(ourPlansHoverLink);
 		action.moveToElement(navigationSectionHomeLink).moveToElement(ourPlansHoverLink).build().perform();
 		pharmacylocator.click();
 		CommonUtility.checkPageIsReadyNew(driver);
+		
+		//checkIfPageReadySafari();
+		
 		if (driver.getTitle().toLowerCase()
 				.contains((PageTitleConstants.BLAYER_LOCATE_A_PHARMACY_UNITEDHEALTHCARE).toLowerCase())) {
 			return new PharmacySearchPage(driver);
@@ -1615,6 +1631,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	}
 
 	public void selectState(String state) {
+		scrollToView(stateDropDown);
 		selectFromDropDownByValue(stateDropDown, state);
 	}
 
@@ -1689,7 +1706,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		System.out.println(toolTipText);
 		System.out.println("====================================================================");
 
-		if (CallSam.equalsIgnoreCase(toolTipText)) {
+		if (toolTipText.contains(CallSam)) {
 			System.out.println("Call sticky action menu roll out and contain the text Call a Licensed Insurance Agent");
 			// return new AcquisitionHomePage(driver);
 		} else
@@ -2489,27 +2506,63 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		}
 	}
 
-	public boolean validateChat() throws InterruptedException {
-		boolean present = false;
+	//Validate 
+	public boolean validateChatNonHours() throws InterruptedException {
+		boolean present = true;
 		try {
 			// validateNew(chatsam);
-			present = validateNew(samdiv);
-			if (present) {
-				List<WebElement> list = driver.findElements(By.xpath("//div[@class='sam']/button"));
-				String chatbtnid = "sam-button--chat";
-				for (WebElement element : list) {
-					if (element.getAttribute("id").equalsIgnoreCase(chatbtnid)) {
+			//present = validateNew(samdiv);
+			//if (present) {
+				//List<WebElement> list = driver.findElements(By.xpath("//div[@id='sam']/button"));
+				List<WebElement> list = driver.findElements(By.xpath("//button[contains(@id,'sam-button--chat')]"));
+				//String chatbtnid = "sam-button--chat";
+				//for (WebElement element : list) {
+					if (list.size() > 0)
+						//	("id").equalsIgnoreCase(chatbtnid)) 
+						{
 						present = false;
-						break;
+						//break;
 					}
 
-				}
-			}
+				
+			//}
 
 		} catch (NoSuchElementException e) {
 			e.printStackTrace();
 		}
 		return present;
 	}
+	public VPPPlanSummaryPage searchPlansWithOutCountyShop(String zipcode) throws InterruptedException {
 
+		CommonUtility.waitForPageLoadNew(driver, zipCodeShopField, 30);
+		sendkeys(zipCodeShopField, zipcode);
+		viewShopPlansButton.click();
+		// }
+		CommonUtility.waitForPageLoadNew(driver, zipcodeChangeLink, 30);
+		if (driver.getCurrentUrl().contains("health-plans")) {
+			return new VPPPlanSummaryPage(driver);
+		} else
+			return null;
+	}
+		public VPPPlanSummaryPage searchPlansShop(String zipcode, String countyName) {
+		CommonUtility.waitForPageLoadNew(driver, zipCodeShopField, 30);
+		sendkeys(zipCodeShopField, zipcode);
+		viewShopPlansButton.click();
+		CommonUtility.waitForPageLoad(driver, countyModal, 45);
+		if (validate(countyModal))
+			driver.findElement(By.xpath("//div[@id='selectCounty']//a[text()='" + countyName + "']")).click();
+		CommonUtility.waitForPageLoadNew(driver, vppTop, 30);
+		if (driver.getCurrentUrl().contains("plan-summary")) {
+			return new VPPPlanSummaryPage(driver);
+		}
+		return null;
+	}
+	
+	public PlanDocsPage navigateToPlanDocsFromHome() {
+     	navigateToMenuLinks(ShopForaplan, menuShop);
+     	
+     	driver.findElement(By.xpath("//*[@id='globalContentIdForSkipLink']/div/table/tbody/tr[2]/td/div[1]/div/div/div[3]/div/div/div/div[2]/div/div/div/div/div/div/div/a")).click();
+     	    	
+     		return new PlanDocsPage(driver);
+	 }
 }

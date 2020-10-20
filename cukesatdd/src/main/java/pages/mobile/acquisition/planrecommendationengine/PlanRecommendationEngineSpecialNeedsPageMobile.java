@@ -55,6 +55,11 @@ public class PlanRecommendationEngineSpecialNeedsPageMobile extends UhcDriver {
 	@FindBy(xpath = "//button[contains(text(),'Continue')]")
 	private WebElement continueBtn;
 	
+	@FindBy(xpath = "//label[@for='currentYear']")
+	private WebElement currentYearbtn;
+	
+	
+	
 	@FindBy(xpath = "//button[contains(text(),'Previous')]")
 	private WebElement previousBtn;
 	
@@ -172,7 +177,8 @@ public class PlanRecommendationEngineSpecialNeedsPageMobile extends UhcDriver {
 					for(String option:snpoptions) {
 					specialNeedspageFunctional(option);
 					}
-					continueBtn.click();
+					//continueBtn.click();
+					jsClickNew(continueBtn);
 					validate(errorMessage, 30);
 					Assert.assertTrue(errorMessage.getText().contains("Please"));
 				}
@@ -198,7 +204,9 @@ public class PlanRecommendationEngineSpecialNeedsPageMobile extends UhcDriver {
 				System.out.println("Plan Type "+SNPType +" Clicked");
 			}else if (SNPType.equalsIgnoreCase("None")) {
 				validate(snpNone);
-				snpNone.click();
+				scrollToView(snpNone);
+				jsClickNew(snpNone);
+				//snpNone.click();
 				System.out.println("Plan Type "+SNPType +" Clicked");
 			}			
 			
@@ -213,6 +221,7 @@ public class PlanRecommendationEngineSpecialNeedsPageMobile extends UhcDriver {
 					Assert.assertTrue(snpMedicaidAccordionMoreInfo.getText().contains("More"));
 //					Assert.assertTrue(snpMedicaidAccordionMoreInfo1stPara.getText().contains("D-SNP"));
 //					Assert.assertTrue(snpMedicareAccordionMoreInfo2ndPara.getText().contains("toll free"));
+					scrollToView(snpMedicaidAccordionCarrot);
 					snpMedicaidAccordionCarrot.click();
 				}else {
 					System.out.println("Accordion is not displayed for  "+SNPType+" .");
@@ -223,6 +232,7 @@ public class PlanRecommendationEngineSpecialNeedsPageMobile extends UhcDriver {
 					Assert.assertTrue(snpConditionsAccordionMoreInfo.getText().contains("More"));
 //					Assert.assertTrue(snpConditionsAccordionMoreInfo1stPara.getText().contains("C-SNP"));
 //					Assert.assertTrue(snpConditionsAccordionMoreInfo2ndPara.getText().contains("toll free"));
+					scrollToView(snpConditionsAccordionCarrot);
 					snpConditionsAccordionCarrot.click();
 				}else {
 					System.out.println("Accordion is not displayed for  "+SNPType+" .");
@@ -233,6 +243,7 @@ public class PlanRecommendationEngineSpecialNeedsPageMobile extends UhcDriver {
 					Assert.assertTrue(snpNursinghomeAccordionMoreInfo.getText().contains("More"));
 //					Assert.assertTrue(snpNursinghomeAccordionMoreInfo1stPara.getText().contains("I-SNP"));
 //					Assert.assertTrue(snpNursinghomeAccordionMoreInfo2ndPara.getText().contains("toll free"));
+					scrollToView(snpNursinghomeAccordionCarrot);
 					snpNursinghomeAccordionCarrot.click();
 				}else {
 					System.out.println("Accordion is not displayed for  "+SNPType+" .");

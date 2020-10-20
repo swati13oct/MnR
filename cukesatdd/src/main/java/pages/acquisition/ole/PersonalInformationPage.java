@@ -301,7 +301,8 @@ public class PersonalInformationPage extends UhcDriver{
 	public MedicareInformationPage navigate_to_medicare_info_page() {
 		
 		validateNew(NextBtn);
-		NextBtn.click();
+//		NextBtn.click();
+		jsClickNew(NextBtn);
 		CommonUtility.checkPageIsReadyNew(driver);
 		if(validateNew(driver.findElement(By.xpath("//h1[contains(text(),'Medicare')]")))){			
 			System.out.println("OLE Medicare Information Page is Displayed");
@@ -406,7 +407,7 @@ public class PersonalInformationPage extends UhcDriver{
 		 * System.out.println("Last Name Expected : "
 		 * +LastName+"       Displayed on page  - "+LastNameDisplayText);
 		 */
-		System.out.println("State Name Displayed on page  - "+StateDisplayText);
+		System.out.println("State Name Expected - "+ state +"\tState Name Displayed on page  - "+StateDisplayText);
 		System.out.println("Zip Code Name Expected : "+ZipCode+"       Displayed on page  - "+ZipDisplayText);
 		
 		if(StateDisplayText.contains(state) && ZipDisplayText.contains(ZipCode)){

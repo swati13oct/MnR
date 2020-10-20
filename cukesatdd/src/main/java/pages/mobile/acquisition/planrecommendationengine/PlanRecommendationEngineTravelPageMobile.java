@@ -110,17 +110,20 @@ public class PlanRecommendationEngineTravelPageMobile extends UhcDriver {
 					travelpageFunctional(option);
 
 				}
-				continueBtn.click();
+				//continueBtn.click();
+				jsClickNew(continueBtn);
 			}else {
 				if(options.isEmpty()){
-					continueBtn.click();
+					//continueBtn.click();
+					jsClickNew(continueBtn);
 					desktopCommonUtils.desktopErrorValidation(page);
 				}else if(options.contains("None")) {
 					String snpoptions[] = options.split(",");
 					for(String option:snpoptions) {
 						travelpageFunctional(option);
 					}
-					continueBtn.click();
+					//continueBtn.click();
+					jsClickNew(continueBtn);
 					desktopCommonUtils.desktopErrorValidation(page);
 				}
 			}			
