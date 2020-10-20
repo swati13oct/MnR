@@ -435,7 +435,7 @@ public class HealthRecordPage  extends HealthRecordBase {
 			checkModelPopup(driver,1);
 			WebElement ihrLnk=null;
 			List<WebElement> acctProfOptLst=null;
-			if (driver.getCurrentUrl().contains("claims") && noWaitValidate(testHarn_AcctProfBtn_claims)) {
+			if (driver.getCurrentUrl().contains("claims") && noWaitValidate(testHarn_desktop_AcctProf_IHRLnk_claims)) {
 				System.out.println("TEST - This is on claims page");
 				ihrLnk=testHarn_desktop_AcctProf_IHRLnk_claims;
 				acctProfOptLst=testHarn_AcctProfDropdown_claims;
@@ -451,6 +451,8 @@ public class HealthRecordPage  extends HealthRecordBase {
 				System.out.println("TEST - Can't match anything");
 				return false;
 			}
+			System.out.println("OMG - href= " + acctProfOptLst.get(0).getAttribute("href"));
+			System.out.println("OMG - innerHTML = "+ acctProfOptLst.get(0).getAttribute("innerHTML"));
 			Assert.assertTrue("PROBLEM - 'Health Record' should be the first link in the dropdown.   first link on the list has text='"+ acctProfOptLst.get(0).getText()+"'", acctProfOptLst.get(0).getText().toLowerCase().contains("health record"));
 
 			String expUrl=stageUrl;
