@@ -276,7 +276,6 @@ public class AepVppPlanSummaryPage extends UhcDriver {
         // Retry only for 5 times
         if(result.size() <1 && retryCnt <=5)
         {
-            System.out.println(sheetName+"_"+rowIndex+" - Attempt - "+retryCnt+", Benefits Map count - " +result.size() +", Plan - "+planName);
             driver.navigate().refresh();
             result = collectInfoVppPlanSummaryPg(planName, countyName, planYear, sheetName, rowIndex);
             retryCnt++;
