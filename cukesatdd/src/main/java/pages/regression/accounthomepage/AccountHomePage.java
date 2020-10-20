@@ -51,6 +51,7 @@ import pages.regression.explanationofbenefits.DreamEOBPage;
 import pages.regression.explanationofbenefits.EOBPage;
 import pages.regression.formsandresources.FormsAndResourcesPage;
 import pages.regression.healthandwellness.HealthAndWellnessPage;
+import pages.regression.myDocumentsPage.MyDocumentsPage;
 import pages.regression.ordermaterials.OrderMaterialsPage;
 import pages.regression.payments.PaymentHistoryPage;
 import pages.regression.pharmaciesandprescriptions.PharmaciesAndPrescriptionsPage;
@@ -508,6 +509,10 @@ public class AccountHomePage extends UhcDriver {
 	
 	@FindBy(xpath = "//*[contains(@onclick,'HSIDSignIn')]")
 	private WebElement mnrSignInButton;
+	
+	@FindBy(xpath = "//h3[contains(text(),'My Documents')]")
+	private WebElement myDocumentsHeader;
+
 	
 	private PageData myAccountHome;
 	
@@ -4370,5 +4375,25 @@ public class AccountHomePage extends UhcDriver {
 		CommonUtility.checkPageIsReadyNew(driver);
 		System.out.println("Driver title after logout=" + driver.getTitle());
 		validateNew(mnrSignInButton,5);
+	}
+
+	public MyDocumentsPage navigateDirectToMyDocumentsPage() {
+
+		if(MRScenario.environment.equalsIgnoreCase("offline")){
+			driver.navigate().to("https://offline.medicare.uhc.com/member/my-documents/overview.html");
+		  }
+			else if (MRScenario.environment.contains("prod"))
+			{
+				driver.navigate().to("https://medicare.com/member/my-documents/overview.html");
+			}
+			else{
+				driver.navigate().to("https://stage-medicare.uhc.com/member/my-documents/overview.html");
+			}
+			
+		if (validate(myDocumentsHeader,5)) {
+			return new MyDocumentsPage(driver);
+		}
+		
+    return null;
 	}
 }

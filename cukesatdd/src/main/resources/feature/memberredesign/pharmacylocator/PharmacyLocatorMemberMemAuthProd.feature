@@ -19,13 +19,6 @@ Feature: 1.11 Member Pharmacy Locator tool Page- Member Auth - PROD
 			| Member Type | <memberType>  |
     #-------------- navigate to the target test page for testing
 		When the user navigates to pharmacy search page
-    #------ English -----------------------------------
-		#And the user validates header section content
-			| Member Type                                | <memberType>            |
-	#And the user validates tooltips on filters
-			| Member Type                                | <memberType>            |
-			| Language                                   | English                 |
-			| Has Preferred Retail Pharmacy network plan | <hasPrefRetailPharPlan> |
 		And the user validates default zip is used when page first load
 			| Distance | 25 |
 		Then the user validates the pharmacies available

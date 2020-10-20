@@ -20,8 +20,6 @@ Feature: 1.05.1 Member Footer validation - Member Auth - PROD
     Then the user navigates to payment history page
     Then the user navigates to the footer section
     And the user validates the footer section in payments page
-    #Then the user navigates to claims page
-    #And the user validates the footer section in claims page
     Then the user navigates to profile and pref page
     And the user validates the footer section in pref page
     Then the user navigates to Contact us page
@@ -30,10 +28,7 @@ Feature: 1.05.1 Member Footer validation - Member Auth - PROD
     And the user validates the footer section in Benefits page
     Then the user navigates to the Order Plan Materials page
     And the user validates the footer section in Order Plan Materials page
-    #Then the user navigates to the Health and Wellness page
-    #And the user validates the footer section in Health and Wellness page
-   # Then the user navigates to the Pharmacies and Prescriptions page
-   # And the user validates the footer section in Pharmacies and Prescriptions page
+
 
     Examples:
       | TID   | username | password | MemUserName          | planType | memberType        |
