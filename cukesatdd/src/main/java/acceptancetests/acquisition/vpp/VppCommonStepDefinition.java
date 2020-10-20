@@ -537,9 +537,9 @@ public class VppCommonStepDefinition {
 			String planType = memberAttributesMap.get("Plan Type");
 
 			plansummaryPage.savePlans(savePlanNames, planType);
-			
-			
 		}
+			
+			
 		@Then("^user gets a create profile prompt$")
 		public void user_saves_two_plans_as_favorite_on_AARP_site() {
 			VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
@@ -560,5 +560,13 @@ public class VppCommonStepDefinition {
 			getLoginScenario().saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfilePage);
 			
 		}
+		
+		@Then("^the user validates the following Additional Benefits of Plan for the plan$")
+		public void the_user_validates_the_following_Additional_Benefits_of_Plan_for_the_plan_in_AARP(DataTable givenAttributes) throws Throwable {
+			List<DataTableRow> additionalBenefits = givenAttributes.getGherkinRows();
 
+			PlanDetailsPage vppPlanDetailsPage = (PlanDetailsPage) getLoginScenario()
+					.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
+			vppPlanDetailsPage.validatingAdditionalBenefitTextInPlanDetails(additionalBenefits);
+		}
 }
