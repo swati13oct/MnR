@@ -273,13 +273,15 @@ public class AepVppPlanSummaryPage extends UhcDriver {
         selectYearOption(planYear);
         result = collectInfoVppPlanSummaryPg(planName);
 
+        int benefitUICnt = result.size();
+
         // Retry only for 5 times
-        if(result.size() <1 && retryCnt <=5)
+        System.out.println(sheetName+"_"+rowIndex+" - Attempt - "+retryCnt+", Benefits Map count - " + benefitUICnt +", Plan - "+planName);
+        if(benefitUICnt <1 && retryCnt <=5)
         {
             driver.navigate().refresh();
 			retryCnt++;
             result = collectInfoVppPlanSummaryPg(planName, countyName, planYear, sheetName, rowIndex);
-            System.out.println(sheetName+"_"+rowIndex+" - Attempt - "+retryCnt+", Benefits Map count - " +result.size() +", Plan - "+planName);
         }
 
         return result;
