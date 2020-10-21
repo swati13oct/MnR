@@ -576,6 +576,31 @@ public class AepPlanDetailsPage extends UhcDriver {
 			return comparedResult;
 		
 	}
+
+	public HashMap<String, String> collectInfoVppPlanDetailPg(String sheetName, int rowIndex) {
+		HashMap<String, String> result=new HashMap<String, String>();
+
+		for (int i = 0; i < 5; i++) {
+			try {
+				result = collectInfoVppPlanDetailPg();
+				int benefitUICnt = result.size();
+				System.out.println(sheetName + "_" + rowIndex + " - Attempt - " + (i + 1) + ", Benefits Map count - " + benefitUICnt);
+				if (benefitUICnt < 1) {
+					driver.navigate().refresh();
+					System.out.println(sheetName + "_" + rowIndex + " - Attempt - " + (i + 1) + ", Page Refreshed");
+					continue;
+				} else {
+					return result;
+				}
+			} catch (Exception ex) {
+				driver.navigate().refresh();
+				System.out.println(sheetName + "_" + rowIndex + " - Attempt - " + (i + 1) + ", Page Refreshed after Exception");
+				continue;
+			}
+
+		}
+		return result;
+	}
 	
 	public HashMap<String, String> collectInfoVppPlanDetailPg() {
 		System.out.println("Proceed to collect the info on vpp detail page =====");

@@ -147,12 +147,12 @@ public class VppPlanValidationStepDefinition {
 									  if(sheetName.contains("PDP")) {
 										  if(!row.getCell(6).getStringCellValue().contains("NA")) {
 											  planDetailsPage.navigateToDCEandAddDrug(row.getCell(6).getStringCellValue());
-											  benefitsMap = planDetailsPage.collectInfoVppPlanDetailPg();
+											  benefitsMap = planDetailsPage.collectInfoVppPlanDetailPg(sheetName,rowIndex);
 											  planDetailsPage.editDrugListAndRemoveDrug();
 										  }else 
-											  benefitsMap = planDetailsPage.collectInfoVppPlanDetailPg();
+											  benefitsMap = planDetailsPage.collectInfoVppPlanDetailPg(sheetName,rowIndex);
 									  }else
-										  benefitsMap = planDetailsPage.collectInfoVppPlanDetailPg();              //  stores all the table info into hashmap
+										  benefitsMap = planDetailsPage.collectInfoVppPlanDetailPg(sheetName,rowIndex);              //  stores all the table info into hashmap
 
 								 }
 
@@ -325,12 +325,12 @@ public class VppPlanValidationStepDefinition {
 									 if(sheetName.contains("PDP")) {
 										 if(!row.getCell(7).getStringCellValue().contains("NA")) {
 											 //planDetailsPage.navigateToDCEandAddDrug(row.getCell(7).getStringCellValue()); //TODO
-											 benefitsDetailMap = planDetailsPage.collectInfoVppPlanDetailPg();
+											 benefitsDetailMap = planDetailsPage.collectInfoVppPlanDetailPg(sheetName,rowIndex);
 											 //planDetailsPage.editDrugListAndRemoveDrug();
 										 }else
-											 benefitsDetailMap = planDetailsPage.collectInfoVppPlanDetailPg();
+											 benefitsDetailMap = planDetailsPage.collectInfoVppPlanDetailPg(sheetName,rowIndex);
 									 }else
-										 benefitsDetailMap = planDetailsPage.collectInfoVppPlanDetailPg();             //  stores all the table info into hashmap
+										 benefitsDetailMap = planDetailsPage.collectInfoVppPlanDetailPg(sheetName,rowIndex);             //  stores all the table info into hashmap
 
 
 								 }
