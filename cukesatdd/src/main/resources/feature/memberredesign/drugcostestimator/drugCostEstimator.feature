@@ -1,4 +1,4 @@
- 
+@drugCostEstimator 
 Feature: 1.07 Member DCE Page
 
   @drugCostEstimator1 @Member_dce_not @NegativeScenario @dce_p1
