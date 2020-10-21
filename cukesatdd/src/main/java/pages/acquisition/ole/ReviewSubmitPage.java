@@ -85,7 +85,8 @@ public class ReviewSubmitPage extends UhcDriver{
 	@FindBy(xpath = "//*[contains(text(), 'mailing address')]/ancestor::*[contains(@class, 'review-step')]//*[contains(text(), 'Last Name')]//following-sibling::*")
 	private WebElement LastNameDisplay;
 
-	@FindBy(xpath = "//*[contains(text(), 'Medicare Claim Number') or contains(text(), 'Medicare (Claim) Number')]//following-sibling::*")
+	@FindBy(xpath = "//*[contains(text(), 'Medicare Number') or contains(text(), 'Medicare (Claim) Number')]//following-sibling::*")
+	//@FindBy(xpath = "//*[contains(text(), 'Medicare Claim Number') or contains(text(), 'Medicare (Claim) Number')]//following-sibling::*")
 	private WebElement MedicareClaimNumberDisplay;
 	
 	@FindBy(xpath = "//*[contains(text(), 'Medicare Number')]//following-sibling::*")
@@ -157,7 +158,7 @@ public class ReviewSubmitPage extends UhcDriver{
 	@FindBy(xpath ="//*[contains(text(), 'Would you like to sign up for paperless delivery of your plan materials?')]/following-sibling::*")
 	private WebElement PaperlessDelivery;
 	
-	@FindBy(xpath ="//span[contains(text(),'Email Address') or contains(text(),'Primary Email Address')]")
+	@FindBy(xpath ="//span[contains(text(),'Email Address') or contains(text(),'Primary Email Address')]//following-sibling::*")
 	private WebElement EmailAddress;
 	
 	//Submit Application Disclaimer
@@ -597,11 +598,13 @@ public class ReviewSubmitPage extends UhcDriver{
 		
 		
 		boolean flag = true;	
+		
 		flag=validateText(PlanYear_NameDisplay,Expected_PlanName);
 		flag&=validateText(PlanZipDisplay,Expected_ZipCode);
 		flag&=validateText(FirstNameDisplay,FirstName);
 		flag&=validateText(LastNameDisplay,LastName);
 		flag&=validateText(MiddleNameDisplay,MiddleName);
+		
 		flag&=validateText(MedicareClaimNumberDisplay,MedicareNumber);
 		flag&=validateText(PartADisplay,PartAeffectiveDate);
 		flag&=validateText(PartBDisplay,PartBeffectiveDate);
@@ -629,8 +632,7 @@ public class ReviewSubmitPage extends UhcDriver{
 		flag&=validateText(HealthInsuranceGroupNo,healthInsuranceGroupNo);
 		flag&=validateText(HealthInsuranceMemberNo,healthInsuranceMemberNo);
 		flag&=validateText(PrescriptionDrugName,prescriptionDrugName);
-		flag&=validateText( PrescriptionDrugGroupNo,prescriptionGroupNumber);
-		
+		flag&=validateText(PrescriptionDrugGroupNo,prescriptionGroupNumber);		
 		flag&=validateText(PrescriptionDrugMemberNo,prescriptionMemberNumber);
 		flag&=validateText(PCPName,PCP_Name);		
 		flag&=validateText(PCPNumber,PCP_Number);
@@ -638,6 +640,8 @@ public class ReviewSubmitPage extends UhcDriver{
 		flag&=validateText(StreetDisplay,Perm_Street);
 		flag&=validateText(CityDisplay,Perm_city);
 		flag&=validateText(MailingQiuestionDisplay,MailingQuestion);
+		//List<WebElement> list = driver.findElements(By.xpath("//*[contains(text(), 'mailing address')]/ancestor::*[contains(@class, 'review-step')]//*[contains(text(), 'State')]//following-sibling::*"));
+		//if(MailStateDisplay.getSize()>1)
 		flag&=validateText(MailStateDisplay,Mailing_State);
 		flag&=validateText(MailZipDisplay,Mailing_Zip);
 		flag&=validateText(MailStreetDisplays,Mailing_Street);		
@@ -646,7 +650,7 @@ public class ReviewSubmitPage extends UhcDriver{
 		
 		if(validate(Submit_Disclaimer) && validate(Enrollment_Disclaimer_Text)){
 			if(Enrollment_Disclaimer_Text.getText().contains("Submitting your enrollment application electronically")){
-				flag = (!flag)?false:true;
+				//flag = (!flag)?false:true;
 				System.out.println("Submit Enrollment Disclaimer is Displayed  : "+flag);
 			}
 			else flag = false;
@@ -654,7 +658,7 @@ public class ReviewSubmitPage extends UhcDriver{
 
 		if(validate(SubmitApplicationBtn)){
 			if(SubmitApplicationBtn.isEnabled()){
-				flag = (!flag)?false:true;
+				//flag = (!flag)?false:true;
 				System.out.println("Submit Application Button is displayed and Enabled : "+flag);
 			}
 			else flag = false;
@@ -667,8 +671,15 @@ public class ReviewSubmitPage extends UhcDriver{
 	
 	public boolean validateText(WebElement element,String expectedValue) {
 		boolean result = true;
-		if(StringUtils.isEmpty(expectedValue)) {
-		result&=element.getText().equalsIgnoreCase(expectedValue);
+		if(!StringUtils.isEmpty(expectedValue)) {
+			String actualText = element.getText();
+			if(actualText.contains("-"))
+			{
+				actualText=actualText.replaceAll("-", "");
+			}
+			
+		//result&=actualText.equalsIgnoreCase(expectedValue);
+		result&=actualText.contains(expectedValue);
 		System.out.println(expectedValue +" "+element.getText()+" "+result);
 		if(!result) {
 			System.out.println("FAILED FOR THIS VALUE-----------------------" +" "+element.getText());

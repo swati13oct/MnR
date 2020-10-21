@@ -755,12 +755,42 @@ public class VppCommonStepDefinition {
 		      givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
 		            givenAttributesRow.get(i).getCells().get(1));
 		   }
+		   
+		   
 		   String planYear = givenAttributesMap.get("Plan Year");
-		   VPPPlanSummaryPage plansummaryPage = new VPPPlanSummaryPage(wd);
-		   //VPPPlanSummaryPage plansummaryPage = new VPPPlanSummaryPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
-		  // getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
+		  // VPPPlanSummaryPage plansummaryPage = null;
+		 // VPPPlanSummaryPage plansummaryPage = new VPPPlanSummaryPage(wd);
+		  VPPPlanSummaryPage plansummaryPage = new VPPPlanSummaryPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+		   getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
 		   
 		   plansummaryPage.handlePlanYearSelectionPopup(planYear);
-		   getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
+		 // getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
+		  getLoginScenario().saveBean(VPPCommonConstants.PLAN_YEAR, planYear);
+
 		}
+	
+	@Then("^the user validates the available plans for selected plan types PRE$")
+	public void user_validates_available_plans_aarp_PRE(DataTable givenAttributes) {
+
+		List<DataTableRow> givenAttributesRow = givenAttributes
+		         .getGherkinRows();
+		   Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		   for (int i = 0; i < givenAttributesRow.size(); i++) {
+		      givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+		            givenAttributesRow.get(i).getCells().get(1));
+		   }
+		   
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		String planType = givenAttributesMap.get("Plan Type");
+		//String planType = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
+		if (plansummaryPage.validatePlanNames(planType)) {
+			//String SiteName = "AARP_ACQ";
+			//getLoginScenario().saveBean(oleCommonConstants.ACQ_SITE_NAME, SiteName);
+			  getLoginScenario().saveBean(VPPCommonConstants.PLAN_TYPE, planType);
+			Assert.assertTrue(true);
+		} else {
+			Assert.fail("Error validating availables plans for selected plantype in  VPP plan summary page");
+		}
+	}
 }
