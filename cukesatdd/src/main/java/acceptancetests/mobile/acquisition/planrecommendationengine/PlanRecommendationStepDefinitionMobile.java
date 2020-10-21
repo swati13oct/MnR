@@ -95,7 +95,9 @@ public class PlanRecommendationStepDefinitionMobile {
 
 	@And("^clicks on get started button and runs questionnaire$")
 	public void clicks_on_get_started_button_and_directly_skip_to_results(DataTable givenAttributes) throws Throwable {
+
 		readfeaturedata(givenAttributes);
+
 		String zipcode = inputValues.get("Zip Code");
 		System.out.println("Zipcode is:" + zipcode);
 		String county = inputValues.get("CountyDropDown");

@@ -234,7 +234,8 @@ public class PlanRecommendationEngineDoctorsPageMobile extends UhcDriver {
 	public void doctorModellookup(String search, int count) {
 		String curWindow = driver.getWindowHandle();
 		System.out.println(curWindow);
-		modalFinddoctors.click();
+		//modalFinddoctors.click();
+		jsClickNew(modalFinddoctors);
 		validateLinksanotherWindow(curWindow, "Doctors", search, count);
 		threadsleep(5000);
 		getConfimationPopupResults(count);
@@ -245,7 +246,8 @@ public class PlanRecommendationEngineDoctorsPageMobile extends UhcDriver {
 			count = count - 1;
 			confirmationProviderResults = getConfimationPopupResults(count);
 		}
-		modalContinuedoctors.click();
+		//modalContinuedoctors.click();
+		jsClickNew(modalContinuedoctors);
 
 	}
 

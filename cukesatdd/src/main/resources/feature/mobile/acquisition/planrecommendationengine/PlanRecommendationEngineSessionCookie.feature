@@ -162,7 +162,7 @@ Feature: Plan Recommendation Engine flow - Verify PRE flows functionalities with
       | Zipcode | isMultiCounty | county   | isCoverageOpt | specialNeeds | travel   | doctors | DoctorsName | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch | pharmacyoption | Dental-Hearing-Vision-Fitness | costPreferenceOption |
       |   10003 | NO            | New York | MAPD          | None         | withinUS | Lookup  | sue         | NO            | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,1,YES,NO                               | Retail         | Yes,No,No,Yes                 | Lower                |
 
-  @PRE @planrecommendation @startNowZipcode @F428517 @PRERegression1
+  @PRE @planrecommendation @startNowZipcode @F428517 @PRERegression1 @Start
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds> , <travel> , <doctors> , <DoctorsName> , <isMultiDoctor> , <Drug Selection> , <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch> , <pharmacyoption> , <Dental-Hearing-Vision-Fitness> , <costPreferenceOption> - - To validate Zipcode session from VPP to PRE Using StartNow
     Given the user is on UHC medicare acquisition site landing page
     Then user navigates to VPP Summary Page

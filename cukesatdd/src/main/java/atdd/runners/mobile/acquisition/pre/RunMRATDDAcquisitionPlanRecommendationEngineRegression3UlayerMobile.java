@@ -25,7 +25,7 @@ import cucumber.api.CucumberOptions;
 		glue = { "atdd.framework", "acceptancetests.mobile" }, 
 		features = { "src/main/resources/feature/mobile/acquisition/planrecommendationengine/" }, 
 		plugin = {"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionPlanRecommendationEngineRegression3UlayerMobile.json" }, 
-		tags = {"@PRERegressionMobile"}, dryRun=false)
+		tags = {"@PRERegression33"}, dryRun=false)
 public class RunMRATDDAcquisitionPlanRecommendationEngineRegression3UlayerMobile {
 
 }

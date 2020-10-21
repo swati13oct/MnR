@@ -3,7 +3,10 @@
  */
 package pages.mobile.acquisition.planrecommendationengine;
 
+import java.awt.AWTException;
+import java.awt.Robot;
 import java.awt.event.ActionEvent;
+import java.awt.event.InputEvent;
 
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -22,6 +25,7 @@ public class PlanRecommendationEngineAdditionalServicesPageMobile extends UhcDri
 	public PlanRecommendationEngineAdditionalServicesPageMobile(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
+
 	}
 
 	@Override
@@ -76,7 +80,8 @@ public class PlanRecommendationEngineAdditionalServicesPageMobile extends UhcDri
 	@FindBy(css = "div.ng-star-inserted:nth-of-type(1)>fieldset.radioGroupOpt:nth-of-type(1) uhc-radio:nth-child(2)")
 	private WebElement dentalNo;
 
-	// @FindBy(xpath = "//label[@for='radio-11-input']")
+	// @FindBy(xpath =
+	// "//input[@name='additional-dental']//following-sibling::span[contains(text(),'No')]")
 	// private WebElement dentalNo;
 
 	@FindBy(css = "div.ng-star-inserted:nth-of-type(1)>fieldset.radioGroupOpt:nth-of-type(1) uhc-alert")
@@ -171,17 +176,29 @@ public class PlanRecommendationEngineAdditionalServicesPageMobile extends UhcDri
 			System.out.println("additional Type Dental " + dental + " Clicked");
 		}
 		if (dental.equalsIgnoreCase("No")) {
+
+			scrollToView(dentalNo);
+			action.moveToElement(dentalNo).click().perform();
+			//action.moveToElement(dentalNo).click().build().perform();
+			// try {
+			// Robot robot = new Robot();
+			// robot.mouseMove(213, 616);
+			// robot.mousePress(InputEvent.BUTTON1_DOWN_MASK);
+			// robot.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
+			// } catch (AWTException e) {
+			// // TODO Auto-generated catch block
+			// e.printStackTrace();
+			// }
 			// jsClickNew(previousBtn);
 			// jsClickNew(continueBtn);
 			// scrollToView(dentalNo);
 
 			// jsClickNew(dentalNo);
-			//waitforElementVisibilityInTime(dentalNo, 5000);
+			// waitforElementVisibilityInTime(dentalNo, 5000);
 			// waitTillElementClickableInTime(dentalNo, 3000);
-			scrollToView(continueBtn);
-			action.moveToElement(dentalNo).click().perform();
 
 			System.out.println("additional Type Dental " + dental + " Clicked");
+
 		}
 		if (hearing.equalsIgnoreCase("Yes")) {
 			scrollToView(hearingYes);
@@ -203,8 +220,7 @@ public class PlanRecommendationEngineAdditionalServicesPageMobile extends UhcDri
 		if (vision.equalsIgnoreCase("No")) {
 			scrollToView(visionNo);
 			action.moveToElement(visionNo).click().perform();
-			// visionNo.click();
-			// jsClickNew(visionNo);
+
 			System.out.println("additional Type Vision " + vision + " Clicked");
 		}
 		if (fitness.equalsIgnoreCase("Yes")) {
@@ -215,8 +231,7 @@ public class PlanRecommendationEngineAdditionalServicesPageMobile extends UhcDri
 		if (fitness.equalsIgnoreCase("No")) {
 			scrollToView(fitnessNo);
 			action.moveToElement(fitnessNo).click().perform();
-			// fitnessNo.click();
-			// jsClickNew(fitnessNo);
+
 			System.out.println("additional Type Fitness " + fitness + " Clicked");
 		}
 	}
