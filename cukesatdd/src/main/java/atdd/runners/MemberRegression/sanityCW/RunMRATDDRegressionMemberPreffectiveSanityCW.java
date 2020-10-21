@@ -18,7 +18,7 @@ import cucumber.api.CucumberOptions;
 jsonReport = "target/cucumber-RunMRATDDRegressionMemberPreffectiveSanityCW.json", detailedReport = true, detailedAggregatedReport = true, 
 overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionMemberPreffectiveSanityCW")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberredesign" }, monochrome = true,
-features = { "src/main/resources/feature/memberredesign/cw5minTurnAround/pre-effectiveSanityCW.feature" }, plugin = {
+features = { "src/main/resources/feature/memberredesign/cwSanity/pre-effectiveSanityCW.feature" }, plugin = {
 		"pretty", "html:reports/test-report","json:target/cucumber-RunMRATDDRegressionMemberPreffectiveSanityCW.json" }, tags = { "@regressionMember" })
 public class RunMRATDDRegressionMemberPreffectiveSanityCW{
 

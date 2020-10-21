@@ -1921,6 +1921,15 @@ public class OneTimePaymentAarpStepDefintion {
 		}
 	}
 
+	@Then("^the user clicks on cancel button on cancel automatic payments page$")
+	public void userclicksoncanceloncancelAutomaticPaymentPage()
+			throws Throwable {
+		UpdateReviewPage updateReviewPage = (UpdateReviewPage) getLoginScenario()
+				.getBean(PageConstants.Update_Review_Page);
+		updateReviewPage.clickCancelOnCancelRecurringPaymentPage();
+	}
+	
+	
 	@Given("^user selects checking Account on Update Automatic recurring payments page and Click on Next$")
 	public void user_selects_checking_Account_on_Update_Automatic_recurring_payments_page_and_Click_on_Next()
 			throws Throwable {
@@ -2618,10 +2627,20 @@ public class OneTimePaymentAarpStepDefintion {
 	}
 	
 	@Then("^user validates data is present in billing history table$")
-	public void userValidatesDataInBillingHistoryTableFor90Days() {
+	public void userValidatesDataInBillingHistoryTableFor90Days(DataTable givenAttributes) {
+		
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		String planType = memberAttributesMap.get("Plan Type");
 		PaymentHistoryPage paymentHistoryPage = (PaymentHistoryPage) getLoginScenario()
 				.getBean(PageConstants.Payments_History_Page);
-		paymentHistoryPage.validateBillingHistoryTable();
+		paymentHistoryPage.validateBillingHistoryTable(planType);
 	}
 	
 	@Then("^user validates data is present in billing history table of Second Plan$")
@@ -2723,10 +2742,20 @@ public class OneTimePaymentAarpStepDefintion {
 	}
 	
 	@Then("^user validates data is present in Payment history table$")
-	public void userValidatesDataInPaymentHistoryTableFor90Days() {
+	public void userValidatesDataInPaymentHistoryTableFor90Days(DataTable givenAttributes) {
+		
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		String planType = memberAttributesMap.get("Plan Type");
 		PaymentHistoryPage paymentHistoryPage = (PaymentHistoryPage) getLoginScenario()
 				.getBean(PageConstants.Payments_History_Page);
-		paymentHistoryPage.validatePaymentHistoryTable();
+	    paymentHistoryPage.validatePaymentHistoryTable(planType);
 	}
 	
 	@Then("^user validates data is present in Payment history table of Second Plan$")

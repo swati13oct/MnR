@@ -66,8 +66,8 @@ Feature: 1.19 Verify the premium payment flows on member portal - Part 3 - Test 
     And the user is displayed with an error message on Edit Recurring EFT Review that he is not authorized
 
     Examples: 
-      | TID   | username  | password  | member     | routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName |
-      | 15118 | qavgogine | qavgogine | q3_sep_UAT4_AARP069	 | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    |
+      | TID   | username  | password  | member              | routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName |
+      | 15118 | qavgogine | qavgogine | q3_sep_UAT4_AARP069 | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    |
 
   #Test Case 16 - Any member will work - Member Auth - FED - Error message on submitting payment - One time EFT
   @regressionMember
@@ -105,7 +105,7 @@ Feature: 1.19 Verify the premium payment flows on member portal - Part 3 - Test 
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
     When the user clicks on Premium Payments on Header
-  # When the user navigates to Ship tab and validates the amount
+    # When the user navigates to Ship tab and validates the amount
     And user clicks on Setup Automatic payments on payment overview page for Ship
     And user Enters all Mandatory fields on form page and click on Electronic Signature and click on Contuine for Setup Recurring for Ship
       | Routing number             | <routingNo>        |
@@ -140,7 +140,7 @@ Feature: 1.19 Verify the premium payment flows on member portal - Part 3 - Test 
       | 15144 | COMBO    | COMBOAARPPayments2 | 123123123 |        123123123 |     12345 |            12345 | FIRSTNAME | MIDDLENAME | LASTNAME |   2.00 |     3760900 | OneTime     |
 
   #Test Case 18 -Fed Only Member with Recurring method already setup and with billing history (same as in test case #15)
-  @regressionMember1
+  @regressionMember
   Scenario Outline: UID: <UID> -plan: <planType> -memberType: <memberType> - Test Case 18 - Verify Payment Hisory Section and Cancel Model Popup for Fed Recurring EFT
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -149,11 +149,19 @@ Feature: 1.19 Verify the premium payment flows on member portal - Part 3 - Test 
     Then User Scrolls down and validate Billing history Section and Payment History Section and scrolls up for Fed
     And user clicks on Update Automatic payments on payment overview page
     And user selects checking Account on Update Automatic recurring payments page and Click on Next
+    And user Enters all Mandatory fields on form page and click on Authorize button for Update Recurring
+      | Routing number             | <routingNo>        |
+      | Confirm routing number     | <confirmRoutingNo> |
+      | Account number             | <accountNo>        |
+      | Confirm account number     | <confirmAccountNo> |
+      | Account holder first name  | <firstName>        |
+      | Account holder middle name | <middleName>       |
+      | Account holder last name   | <lastName>         |
     And the user clicks on cancel button in One time EFT or Recurring EFT flow
 
     Examples: 
-      | UID       | planType | memberType                |
-      | US1463204 | MAPD     | UpdateRecurrStop_Payments |
+      | UID       | planType | memberType                | routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName |
+      | US1463204 | MAPD     | UpdateRecurrStop_Payments | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    |
 
   #Test Case 19 - Fed Only Member with Recurring method already setup and with billing history
   @regressionMember
@@ -253,27 +261,36 @@ Feature: 1.19 Verify the premium payment flows on member portal - Part 3 - Test 
     Then user validates billing history section header exists
     Then Last 90 days is selected by default in the Billing History dropdown
     Then user validates data is present in billing history table
+    | Plan Type      | <planType>      |
     Then user selects Last 6 months in the Billing History dropdown
     Then user validates data is present in billing history table
+    | Plan Type      | <planType>      |
     Then user selects Last 12 months in the Billing History dropdown
     Then user validates data is present in billing history table
+    | Plan Type      | <planType>      |
     Then user selects Last 24 months in the Billing History dropdown
     Then user validates data is present in billing history table
+    | Plan Type      | <planType>      |
     Then User Scrolls down to the Payment history Section
     Then user validates Payment history section header exists
     Then Last 90 days is selected by default in the Payment History dropdown
     Then user validates data is present in Payment history table
+    | Plan Type      | <planType>      |
     Then user selects Last 6 months in the Payment History dropdown
     Then user validates data is present in Payment history table
+    | Plan Type      | <planType>      |
     Then user selects Last 12 months in the Payment History dropdown
     Then user validates data is present in Payment history table
+    | Plan Type      | <planType>      |
     Then user selects Last 24 months in the Payment History dropdown
     Then user validates data is present in Payment history table
+    | Plan Type      | <planType>      |
 
     Examples: 
-      | planType  | memberType         | copayCategory |
+      | planType   | memberType         | copayCategory |
       | IndMA     | ACTIVEIndPayment   | NON LIS       |
       | GroupMAPD | ACTIVEGroupPayment | NON LIS       |
+       
 
   #Test Case 25 - Billing and Payment history for Fed+Fed-Active Group PDP + Active Group SSUP, Active PDP+SHIP CPMBO member with billing and payment history in last 90 days
   @regressionMember
@@ -288,24 +305,31 @@ Feature: 1.19 Verify the premium payment flows on member portal - Part 3 - Test 
     Then user validates billing history section header exists
     Then Last 90 days is selected by default in the Billing History dropdown
     Then user validates data is present in billing history table
+    | Plan Type      | <planType>      |
     Then user selects Last 6 months in the Billing History dropdown
     Then user validates data is present in billing history table
+    | Plan Type      | <planType>      |
     Then user selects Last 12 months in the Billing History dropdown
     Then user validates data is present in billing history table
+    | Plan Type      | <planType>      |
     Then user selects Last 24 months in the Billing History dropdown
     Then user validates data is present in billing history table
+    | Plan Type      | <planType>      |
     Then user clicks to expand the payment hisory section of first plan
     Then user validates Payment history section header exists
     Then Last 90 days is selected by default in the Payment History dropdown
     Then user validates data is present in Payment history table
+     | Plan Type | <planType> |
     Then user selects Last 6 months in the Payment History dropdown
     Then user validates data is present in Payment history table
+     | Plan Type | <planType> |
     Then user selects Last 12 months in the Payment History dropdown
     Then user validates data is present in Payment history table
+     | Plan Type | <planType> |
     Then user selects Last 24 months in the Payment History dropdown
     Then user validates data is present in Payment history table
+     | Plan Type | <planType> |
     Then user selects Previous Calendar Year in the Payment History dropdown and views Payment History
-    Then user validates data is present in Payment history table
     Then User Scrolls down to the Billing history Section of Second Plan
     Then user clicks to expand the billing hisory section of Second plan
     Then user validates billing history section header exists of Second Plan
@@ -336,13 +360,14 @@ Feature: 1.19 Verify the premium payment flows on member portal - Part 3 - Test 
     Then user validates data is present in Payment history table of Second Plan
       | Plan Type | <planType> |
     Then user selects Previous Calendar Year in the Payment History dropdown of Second Plan and views Payment History
-
+    Then user validates data is present in Payment history table of Second Plan
+      | Plan Type | <planType> |
     Examples: 
       | planType          | memberType                     | copayCategory |
       | GroupPDPGroupSSUP | ACTIVEGroupPDPGroupSSUPPayment | NON LIS       |
       | FedPDPSHIP        | ACTIVEPDPSHIPPayment           | NON LIS       |
 
-  #Test Case 26 - This test case check the Make a Payment button on Coverage and Benefits page for fedreal plan member
+  #Test Case 26 - This test case check the Make a Payment button on Coverage and Benefits page for federal plan member
   @regressionMember
   Scenario Outline: Test Case 26 - Verify that member of <Test Scenario> is able to click on Make Payment button Coverage and Benefits page and navigate to Premium Payments page
     Given login with following details logins in the member portal and validate elements
@@ -401,3 +426,43 @@ Feature: 1.19 Verify the premium payment flows on member portal - Part 3 - Test 
     Examples: 
       | planType          | memberType                     | copayCategory | routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName | Amount | HouseholdID | paymentType |
       | GroupPDPGroupSSUP | ACTIVEGroupPDPGroupSSUPPayment | NON LIS       | 123123123 |        123123123 |     12345 |            12345 | FIRSTNAME | MIDDLENAME | LASTNAME |   1.12 | 50025629105 | OneTime     |
+  
+  #Test Case 28 - Active SHIP member with billing and payment history in last 90 days
+  @regressionMember
+  Scenario Outline: <planType> -memberType: <memberType> - Test Case 28 -Verify billing and payment history for Active SHIP member with billing and payment history in last 90 days
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type      | <planType>      |
+      | Member Type    | <memberType>    |
+    When the user clicks on Premium Payments on Header
+    Then User Scrolls down to the Billing history Section
+    Then user validates billing history section header exists
+    Then Last 90 days is selected by default in the Billing History dropdown
+    Then user validates data is present in billing history table
+     | Plan Type      | <planType>      |
+    Then user selects Last 6 months in the Billing History dropdown
+    Then user validates data is present in billing history table
+    | Plan Type      | <planType>      |
+    Then user selects Last 12 months in the Billing History dropdown
+    Then user validates data is present in billing history table
+    | Plan Type      | <planType>      |
+    Then user selects Last 24 months in the Billing History dropdown
+    Then user validates data is present in billing history table
+    | Plan Type      | <planType>      |
+    Then User Scrolls down to the Payment history Section
+    Then user validates Payment history section header exists
+    Then Last 90 days is selected by default in the Payment History dropdown
+    Then user validates data is present in Payment history table
+    | Plan Type      | <planType>      |
+    Then user selects Last 6 months in the Payment History dropdown
+    Then user validates data is present in Payment history table
+    | Plan Type      | <planType>      |
+    Then user selects Last 12 months in the Payment History dropdown
+    Then user validates data is present in Payment history table
+    | Plan Type      | <planType>      |
+    Then user selects Last 24 months in the Payment History dropdown
+    Then user validates data is present in Payment history table
+    | Plan Type      | <planType>      |
+
+    Examples: 
+      | planType   | memberType         | 
+      | SHIP       | SHIPSetup_Payments |          

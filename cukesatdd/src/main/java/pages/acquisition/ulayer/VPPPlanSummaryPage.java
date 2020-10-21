@@ -2819,6 +2819,8 @@ for (int i = 0; i < initialCount + 1; i++) {
 		} else if (planType.equalsIgnoreCase("pdp")) {
 			planTypePath="//div[@ng-show='showPdpPlans']";
 			driver.navigate().refresh();
+			CommonUtility.checkPageIsReady(driver);
+			sleepBySec(5);
 		} else if (planType.equalsIgnoreCase("snp")) {
 			planTypePath="//div[@ng-show='showSnpPlans']";
 		}
@@ -3547,6 +3549,7 @@ for (int i = 0; i < initialCount + 1; i++) {
 					}
 				}
 				waitForPageLoadSafari();
+				CommonUtility.checkPageIsReadyNew(driver);
 	/*	CommonUtility.checkPageIsReadyNew(driver);			
 		if(planYear.contains("current") && validate(CurrentYearPlansBtn, 20)) {				// if the scenario is for current year
 			//if(validate(NextYearPlansBtn, 20)) {

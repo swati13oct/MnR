@@ -22,10 +22,15 @@ Feature: 1.08. ACQ- Visitor profile AARP
     Then the user should be able to see the Drug information in the guest profile page
       | Drugname | <drug1> |
 
-		@addDrugs_aarp
+		@VisitorProfile_AARP
     Examples: 
       | state   | drug1   | zipCode |	site |
       | Alabama | Lipitor |   90210 |	AARP |
+      
+    @VisitorProfile_UHC
+    Examples: 
+      | state   | drug1   | zipCode |	site |
+      | Alabama | Lipitor |   90210 |	UHC	 |
 
   @addDrugsDCE1
   Scenario Outline: Verify user is able to add drug from DCE to the unauthenticated visitor profile - zip -<zipcode>
@@ -45,9 +50,15 @@ Feature: 1.08. ACQ- Visitor profile AARP
     Then the user should be able to see the Drug information in the guest profile page
       | Drugname | <drug1> |
 
+		@VisitorProfile_AARP
     Examples: 
       | state   | drug1   | zipCode |	site |
       | Alabama | Lipitor |   90210 |	AARP |
+      
+    @VisitorProfile_UHC
+    Examples: 
+      | state   | drug1   | zipCode |	site 	|
+      | Alabama | Lipitor |   90210 |	UHC 	|  
 
   @addPlans @addPlansULayerSmoke @visitorProfileRegressionAARP @prodRegression
   Scenario Outline: Verify user is able to add plans to the unauthenticated visitor profile - zip -<zipcode>
@@ -61,22 +72,32 @@ Feature: 1.08. ACQ- Visitor profile AARP
       | Zip Code        | <zipcode>       |
       | County Name     | <county>        |
       | Is Multi County | <isMultiCounty> |
-    Then user validates plan count for all plan types on plan summary page in the AARP site
-    Then user saves two plans as favorite on AARP site
+    Then user validates plan count for all plan types on plan summary page
+    And the user views the plans of the below plan type
+    	 | Plan Type  | <plantype>  |
+    And the user selects plan year
+    	|	Plan Year		| <planyear>	|
+    	| Plan Type  	| <plantype>  |
+    Then user saves two plans as favorite
+      | Test Plans | <testPlans> |
       | Plan Type  | <plantype>  |
+    Then user gets a create profile prompt
+    Then user click on continue as guest button
+    And user validates the added plans on visitor profile page
       | Test Plans | <testPlans> |
-    Then user gets a create profile prompt on AARP site
-    Then user click on continue as guest button on AARP site
-    And user validates the added plans on visitor profile page of AARP site
-      | Test Plans | <testPlans> |
-    And user delets the added plans on visitor profile page of AARP site
+    And user delets the added plans on visitor profile page
       | Test Plans | <testPlans> |
 
-    @addPlans_AARP
+    @VisitorProfile_AARP
     Examples: 
-      |	site	| state   | UID       | zipcode | isMultiCounty | county           | plantype | testPlans                                                                                              |
-      |	AARP	| Alabama | US1770330 |   90210 | NO            | Jefferson County | MAPD     | AARP Medicare Advantage SecureHorizons Focus (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO) |
+      |	site	| state   | UID       |	planyear	| zipcode | isMultiCounty | county           | plantype | testPlans                                                                                              |
+      |	AARP	| Alabama | US1770330 | current		| 90210 	| NO            | Jefferson County | MAPD     | AARP Medicare Advantage SecureHorizons Focus (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO) |
       #| Alabama | US1770330 |   53503 | NO            | Jefferson County | SNP      | UnitedHealthcare Dual Complete LP1 (HMO D-SNP),UnitedHealthcare Medicare Advantage Assist (PPO C-SNP)  |
+      
+    @VisitorProfile_UHC
+    Examples: 
+      |	site	| state   | UID       |	planyear	| zipcode | isMultiCounty | county           | plantype | testPlans                                                                                              |
+      |	UHC		| Alabama | US1770330 |  current	| 90210 | NO            | Jefferson County | MAPD     | AARP Medicare Advantage SecureHorizons Focus (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO) |
 
   @addPlansVPP
   Scenario Outline: Verify user is save plans from VPP to the unauthenticated visitor profile
@@ -97,25 +118,31 @@ Feature: 1.08. ACQ- Visitor profile AARP
     # The steps for this scenario are being covered by the next sceanrio, hence, commenting this one out
     Examples: 
       | state | UID | zipcode | isMultiCounty | county | plantype | testPlans |
-
   #      | Alabama | US1770330 |   90210 | NO            | Jefferson County | MAPD     | AARP Medicare Advantage SecureHorizons Focus (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO) |
+  
   @addPlansPlanDetail @visitorProfileRegressionAARP @prodRegression
-  Scenario Outline: Verify user is save plans from VPP to the unauthenticated visitor profile
-    Given the user is on AARP medicare acquisition site landing page
-    When the user does plan search using the following information in the AARP site
+  Scenario Outline: <UID> - Verify user is save plans from VPP to the unauthenticated visitor profile - zipcode - <zipcode> 
+    Given the user is on medicare acquisition site landing page
+    	|Site| <site>|
+    When the user performs plan search using following information
       | Zip Code        | <zipcode>       |
       | County Name     | <county>        |
       | Is Multi County | <isMultiCounty> |
-    Then user saves two plans as favorite on AARP site
+    And the user views the plans of the below plan type
+    	 | Plan Type  | <plantype>  |
+    And the user selects plan year
+    	|	Plan Year		| <planyear>	|
+    	| Plan Type  	| <plantype>  |
+    Then user saves two plans as favorite
       | Plan Type  | <plantype>  |
       | Test Plans | <testPlans> |
-    Then user gets a create profile prompt on AARP site
-    Then user click on continue as guest button on AARP site
-    And user validates the added plans on visitor profile page of AARP site
+    Then user gets a create profile prompt
+    Then user click on continue as guest button
+    And user validates the added plans on visitor profile page
       | Test Plans | <testPlans> |
-    And user clicks on plan name in AARP
+    And user clicks on plan name
       | Test Plans | <testPlans> |
-    Then the user validates the following Additional Benefits of Plan for the plan in AARP
+    Then the user validates the following Additional Benefits of Plan for the plan
       | Eye Wear Benefit Type                                     | <eyeWearBenefitType>                              |
       | Eye Wear Expected Text                                    | <eyeWearExpectedText>                             |
       | Eye Exam Benefit Type                                     | <eyeExamBenefitType>                              |
@@ -126,31 +153,43 @@ Feature: 1.08. ACQ- Visitor profile AARP
       | Hearing Exam Expected Text                                | <hearingExamExpectedText>                         |
       | Membership in Health Club / Fitness Classes Benefit Type  | <membershipinHealthClubFitnessClassesBenefitType> |
       | Membership in Health Club / Fitness Classes Expected Text | <membershipinHealthClubFitnessExpectedText>       |
-
+		
+		@VisitorProfile_AARP_1
     Examples: 
-      | state   | UID       | zipcode | isMultiCounty | plantype | county           | testPlans                                                                                               | eyeWearBenefitType | eyeWearExpectedText                                           | eyeExamBenefitType | eyeExamExpectedText | footCareRoutineBenefitType | footCareRoutineExpectedText | hearingExamBenefitType | hearingExamExpectedText | membershipinHealthClubFitnessClassesBenefitType | membershipinHealthClubFitnessExpectedText                                                                  |
-      | Alabama | US1770330 |   53503 | NO            | MAPD     | Jefferson County | UnitedHealthcare Medicare Advantage Open (PPO),UnitedHealthcare Medicare Advantage Open Essential (PPO) | Eyewear            | Eyewear has a plan benefit limit up to $100 per every 2 years | Eye Exam           | $0 copay            | Foot Care - Routine        | $50 copay                   | Hearing Exam           | $0 copay                | Fitness Program through Renew Active            | Fitness Membership Only: Basic membership in a fitness program at a network location at no additional cost |
+      |	site	| state   | UID       | zipcode | isMultiCounty | plantype |	planyear	|	county           | testPlans                                                                                               | eyeWearBenefitType | eyeWearExpectedText                                           | eyeExamBenefitType | eyeExamExpectedText | footCareRoutineBenefitType | footCareRoutineExpectedText | hearingExamBenefitType | hearingExamExpectedText | membershipinHealthClubFitnessClassesBenefitType | membershipinHealthClubFitnessExpectedText                                                                  |
+      |	AARP	| Alabama | US1770330 |   53503 | NO            | MAPD     |	current		|	Jefferson County | UnitedHealthcare Medicare Advantage Open (PPO),UnitedHealthcare Medicare Advantage Open Essential (PPO) | Eyewear            | Eyewear has a plan benefit limit up to $100 per every 2 years | Eye Exam           | $0 copay            | Foot Care - Routine        | $50 copay                   | Hearing Exam           | $0 copay                | Fitness Program through Renew Active            | Fitness Membership Only: Basic membership in a fitness program at a network location at no additional cost |
+      
+    @VisitorProfile_UHC
+    Examples: 
+      |	site	| state   | UID       | zipcode | isMultiCounty | plantype |	planyear	| county           | testPlans                                                                                               | eyeWearBenefitType | eyeWearExpectedText                                           | eyeExamBenefitType | eyeExamExpectedText | footCareRoutineBenefitType | footCareRoutineExpectedText | hearingExamBenefitType | hearingExamExpectedText | membershipinHealthClubFitnessClassesBenefitType | membershipinHealthClubFitnessExpectedText                                                                  |
+      |	UHC		| Alabama | US1770330 |   53503 | NO            | MAPD     | 	current		|	Jefferson County | UnitedHealthcare Medicare Advantage Open (PPO),UnitedHealthcare Medicare Advantage Open Essential (PPO) | Eyewear            | Eyewear has a plan benefit limit up to $100 per every 2 years | Eye Exam           | $0 copay            | Foot Care - Routine        | $50 copay                   | Hearing Exam           | $0 copay                | Fitness Program through Renew Active            | Fitness Membership Only: Basic membership in a fitness program at a network location at no additional cost |
 
   @vpOLE
-  Scenario Outline: Verify user is save plans from VPP to the unauthenticated visitor profile and complete OLE
-    Given the user is on AARP medicare acquisition site landing page
-    When the user performs plan search using following information in the AARP site
+  Scenario Outline: <UID> - Verify user is save plans from VPP to the unauthenticated visitor profile and complete OLE
+    Given the user is on medicare acquisition site landing page
+    		|Site| <site>|
+    When the user performs plan search using following information
       | Zip Code        | <zipcode>       |
       | County Name     | <county>        |
       | Is Multi County | <isMultiCounty> |
-    Then user validates plan count for all plan types on plan summary page in the AARP site
-    Then user saves two plans as favorite on AARP site
+    Then user validates plan count for all plan types on plan summary page
+    And the user views the plans of the below plan type
+    	 | Plan Type  | <plantype>  |
+    And the user selects plan year
+    	|	Plan Year		| <planyear>	|
+    	| Plan Type  	| <plantype>  |
+    Then user saves two plans as favorite
       | Plan Type  | <plantype>  |
       | Test Plans | <testPlans> |
-    Then user gets a create profile prompt on AARP site
-    Then user click on continue as guest button on AARP site
-    And user validates the added plans on visitor profile page of AARP site
+    Then user gets a create profile prompt
+    Then user click on continue as guest button
+    And user validates the added plans on visitor profile page
       | Test Plans | <testPlans> |
-    And the user navigates to clicks on Enroll Now from visitor profile to start the OLE flow
+    And the user navigates to clicks on Enroll Now from visitor profile to start OLE flow
       | Plan Name | <planName> |
       | Plan Type | <plantype> |
     Then the user validates the Plan details on OLE
-    #    Then the user validates TFN in Welcome OLE Right Rail
+    #Then the user validates TFN in Welcome OLE Right Rail
     Then the user validates Learn more modal for Welcome OLE
     Then the user validates Leave OLE modal for Welcome OLE
     Then the user validates cancellation modal for Welcome OLE
@@ -172,29 +211,40 @@ Feature: 1.08. ACQ- Visitor profile AARP
     Then the user validates the Plan details in Personal Information Page OLE Right Rail
     Then the user validates the Member details dynamic display in Personal Information Page
     Then the user navigates to Medicare Information Page
-    Then the user validates Medicare Information Page required fields
+    #Then the user validates Medicare Information Page required fields
     Then the user enters following required Medicare Information
       | Medicare Number    | <medicarenumber>    |
       | SSN Flag           | <ssnflag>           |
-      | PartA Date         | <partadate>         |
-      | PartB Date         | <partbdate>         |
+      #| PartA Date         | <partadate>         |
+      #| PartB Date         | <partbdate>         |
       | Card Type          | <cardtype>          |
       | Email Confirmation | <emailConfirmation> |
       | Go Green           | <goGreen>           |
       | Email              | <email>             |
-    #    Then the user validates TFN in Medicare Info OLE Right Rail
     Then the user validates the Plan details in Medicare Info OLE Right Rail
     #    Then the user navigates to Preliminary Questions Page
     Then the user validates requierd ESRD on Medicare Info Page
-      | MedicaidNumber | <medicaidnumber> |
+      | MedicaidNumber 	| <medicaidnumber> |
+      |	Plan Year 			| <planYear> |
     #    Then the user validates the Plan details in Preliminary Questions Pag OLE Right Rail
     Then the user validates the dispalyed sections for the Plan Type in Medicare Information Page
     Then the user answers following questions in Medicare Information Page
       | PDP Question      | <pdpFlag>      |
       | LongTerm Question | <longTermFlag> |
+    Then the user validates the long term questions in Medicare Information Page
+    	| Health Insurance Name| <healthinsurancename>  |
+    	| Group Number				 | <groupnumber>          |
+    	| Member Number        | <membernumber>         | 
+    Then the user validates the Prescription drug coverage questions in Medicare Information Page
+    	| Prescription Name			| <prescriptioncoveragename>  |
+    	| PD Group Number				| <pdgroupnumber>  						|
+    	| PD Member Number      | <pdmembernumber>   					|
     Then the user navigates to SEP Page
-    Then the user validates the Plan details in SEP Page OLE Right Rail
-    Then the user validates SEP options and Required Fields for PlanType in SEP Page
+    	|	Input Data				 | <inputdataType>   	|
+    	| PartA Date         | <partadate>        |
+   		| PartB Date         | <partbdate>        |
+    #Then the user validates the Plan details in SEP Page OLE Right Rail
+    #Then the user validates SEP options and Required Fields for PlanType in SEP Page
     #Then the user validates SEP options and Required Fields for PlanType in SEP Page
     Then the user selects the following options for SEP Page
       | Select Options | <selectoptions> |
@@ -215,14 +265,20 @@ Feature: 1.08. ACQ- Visitor profile AARP
     Then the user validates the Plan and Member details on Review and Submit Page
     Then the user clicks on Submit Enrollment to complete enrollment
     # Then the user validates Plan and Member Details on Confirmation Page
-    Then the user Validates Next Steps in Confirmation Page for the Plan Type.
+    #Then the user Validates Next Steps in Confirmation Page for the Plan Type.
 
+		@VisitorProfile_AARP
     Examples: 
-      | UID       | zipcode | isMultiCounty | county          | testPlans                                                                                            | PlanType | plantype | planName                                | cardtype | firstname | lastname | medicarenumber | ssnflag | partadate | partbdate | medicaidnumber | esrdflag | dob      | gender | permstreet    | permcity    | mailingaddressquestion | mailingstreet | mailingcity | mailingstate | mailingzip | email         | selectoptions                                                                                                                                                                                                                                       | optiondata              | pdpFlag | longTermFlag | riderflag | emailConfirmation | goGreen |
-      | US1770330 |   10001 | NO            | New York County | AARP Medicare Advantage Essential (HMO),UnitedHealthcare Medicare Advantage Essential (Regional PPO) | MA-MBI   | MA       | AARP Medicare Advantage Essential (HMO) | MBI      | John      | Doe      | 2n22C33YK33    | false   |  01012010 |  01012010 |      431665465 | true     | 01011903 | Male   | 003 Morris Rd | Los Angeles | Yes                    |               |             | NY           |      10001 | test@test.com | Medicare Advantage Open Enrollment Period (MA OEP)/change in my Medicaid (newly got Medicaid)/Medicare (or my state)/(or my state helps pay for my Medicare premiums)/major disaster (as declared by the Federal Emergency Management Agency (FEMA) | /12202018/12202018/ / / | yes     | no           | true      | NO                | NO      |
+      | UID       |	site	|	zipcode | isMultiCounty | county          | planyear	|	testPlans                                                                                            | PlanType | plantype | planName                                | cardtype | firstname | lastname | medicarenumber | ssnflag | partadate | partbdate | medicaidnumber | esrdflag | dob      | gender | permstreet    | permcity    | mailingaddressquestion | mailingstreet | mailingcity | mailingstate | mailingzip | email         | selectoptions                                                                                                                                                                                                                                       | optiondata              | pdpFlag | longTermFlag | riderflag | emailConfirmation | goGreen |	healthinsurancename	|	groupnumber	| membernumber	|	prescriptioncoveragename	|	pdgroupnumber	|	pdmembernumber	|	inputdataType	|
+      | US1770330 |	AARP	|  10001 	| NO            | New York County | current		|	AARP Medicare Advantage Essential (HMO),UnitedHealthcare Medicare Advantage Essential (Regional PPO) | MA-MBI   | MA       | AARP Medicare Advantage Essential (HMO) | MBI      | John      | Doe      | 2n22C33YK33    | false   |  09011997 |  11012002 |      431665465 | true     | 01011903 | Male   | 003 Morris Rd | Los Angeles | Yes                    |               |             | NY           |      10001 | test@test.com | Medicare Advantage Open Enrollment Period (MA OEP)/change in my Medicaid (newly got Medicaid)/Medicare (or my state)/(or my state helps pay for my Medicare premiums)/major disaster (as declared by the Federal Emergency Management Agency (FEMA) | /12202018/12202018/ / / | yes     | no           | true      | NO                | NO      |	HealthInsurance    	|	HI1562759   | ABC12345DEF   |	PrescriptionCoverage      |	PD5646136   	| BCD12345EFG			|	Valid					|
+     
+    @VisitorProfile_UHC
+    Examples: 
+      | UID       |	site	|	zipcode | isMultiCounty | county          | planyear	|	testPlans                                                                                            | PlanType | plantype | planName                                | cardtype | firstname | lastname | medicarenumber | ssnflag | partadate | partbdate | medicaidnumber | esrdflag | dob      | gender | permstreet    | permcity    | mailingaddressquestion | mailingstreet | mailingcity | mailingstate | mailingzip | email         | selectoptions                                                                                                                                                                                                                                       | optiondata              | pdpFlag | longTermFlag | riderflag | emailConfirmation | goGreen |	healthinsurancename	|	groupnumber	| membernumber	|	prescriptioncoveragename	|	pdgroupnumber	|	pdmembernumber	|	inputdataType	|
+      | US1770330 |	UHC		|  10001 	| NO            | New York County | current		|	AARP Medicare Advantage Essential (HMO),UnitedHealthcare Medicare Advantage Essential (Regional PPO) | MA-MBI   | MA       | AARP Medicare Advantage Essential (HMO) | MBI      | John      | Doe      | 2n22C33YK33    | false   |  09011997 |  11012002 |      431665465 | true     | 01011903 | Male   | 003 Morris Rd | Los Angeles | Yes                    |               |             | NY           |      10001 | test@test.com | Medicare Advantage Open Enrollment Period (MA OEP)/change in my Medicaid (newly got Medicaid)/Medicare (or my state)/(or my state helps pay for my Medicare premiums)/major disaster (as declared by the Federal Emergency Management Agency (FEMA) | /12202018/12202018/ / / | yes     | no           | true      | NO                | NO      |	HealthInsurance    	|	HI1562759   | ABC12345DEF   |	PrescriptionCoverage      |	PD5646136   	| BCD12345EFG			|	Valid					|
 
   @vpMSSavePlan
-  Scenario Outline: Verify user is save plans from VPP to the unauthenticated visitor profile
+  Scenario Outline: Verify user is save plans from VPP to the unauthenticated visitor profile - zipcode - <zipcode>
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site
       | Zip Code        | <zipcode>       |
@@ -242,6 +298,7 @@ Feature: 1.08. ACQ- Visitor profile AARP
     And user validate pdf link on AARP Site
       | MS Test Plans | <MS_testPlans> |
 
+    @VisitorProfile_AARP
     Examples: 
       | zipcode | isMultiCounty | plantype | DOB        | county           | MS_testPlans  |
       |   90210 | NO            | MS       | 11/11/1949 | Jefferson County | Plan G,Plan A |
@@ -272,18 +329,20 @@ Feature: 1.08. ACQ- Visitor profile AARP
     Then Verify X out of Y provider covered information is displayed on visitor profile page of AARP site
       | PlanName | <planname> |
 
+		@VisitorProfile_AARP
     Examples: 
       | zipcode | isMultutiCounty | county          | plantype | planname                             | testPlans                                                                 |
       |   10001 | NO              | New York County | MAPD     | AARP Medicare Advantage Plan 2 (HMO) | AARP Medicare Advantage Plan 1 (HMO),AARP Medicare Advantage Plan 2 (HMO) |
 
   @addDrugAuthenticated
   Scenario Outline: Verify user is able to add drug information to the authenticated visitor profile
-    Given the user is on the AARP medicare site landing page
-    And the user clicks on the shopping cart icon in AARP site
-    Then the user signs in with optum Id credentials in AARP site
+    Given the user is on medicare acquisition site landing page
+    		|Site| <site>|
+    And the user clicks on the shopping cart icon
+    Then the user signs in with optum Id credentials
       | User Name | <userName> |
       | Password  | <password> |
-    And the user clicks on the add drugs button in the profile in AARP site
+    And the user clicks on the add drugs button in the profile
     Then the user validates Get Started Page
     Then the user clicks on Build Drug List to navigate to Build Drug List Page
     Then the user searches and adds the following Drug to Drug List
@@ -292,17 +351,17 @@ Feature: 1.08. ACQ- Visitor profile AARP
     When user enters valid zipcode and county
       | ZipCode | <zipCode> |
     And user clicks on continue button in Zip Entry Page
-    And the user clicks on the shopping cart icon on DCE page in AARP
-    Then the user should be able to see the Drug information in the guest profile page on aarp
+    And the user clicks on the shopping cart icon on DCE page
+    Then the user should be able to see the Drug information in the guest profile page
       | Drugname | <drug1> |
-    And the user returns to the visitor profile page on aarp
-    Then the user should be able to see the Drug information in the guest profile page on aarp
+    And the user returns to the visitor profile page
+    Then the user should be able to see the Drug information in the guest profile page
       | Drugname | <drug1> |
-    And user delets all the added drugs on visitor profile page of AARP site
+    And user delets all the added drugs on visitor profile page
 
     Examples: 
-      | state   | userName  | password  | drug1   | zipCode |
-      | Alabama | mnrqavd3 | Password@1| Lipitor |   90210 |
+      |	site	| state   | userName  | password  | drug1   | zipCode |
+      |	AARP	| Alabama | mnrqavd3 | Password@1| Lipitor |   90210 |
 
   @providerFlowAuthenticated
   Scenario Outline: Verify Provider Search functional flow for authenticated Visitor Profile page
@@ -347,6 +406,7 @@ Feature: 1.08. ACQ- Visitor profile AARP
     Then verify the plans on plan compare page on AARP site
       | Test Plans | <testPlans> |
 
+		@VisitorProfile_AARP
     Examples: 
       | state   | UID       | zipcode | isMultiCounty | county           | plantype | testPlans                                                                                                                                                                                                                                                        |
       | Alabama | US1770330 |   90210 | NO            | Jefferson County | MAPD     | AARP Medicare Advantage SecureHorizons Focus (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO),AARP Medicare Advantage SecureHorizons Plan 2 (HMO),AARP Medicare Advantage SecureHorizons Premier (HMO),UnitedHealthcare Medicare Advantage Assure (HMO) |

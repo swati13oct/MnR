@@ -179,7 +179,7 @@ public class PlanRecommendationEngineResultsPage extends UhcDriver {
 	@FindBy(css = "#mainBody .swiper-container .module-plan-overview:nth-of-type(1) h2")
 	private WebElement MS1stPlanName;
 
-	@FindBy(css = "#mainBody .swiper-container .module-plan-overview:nth-of-type(2) .swiper-content>a")
+	@FindBy(css = "#mainBody .swiper-container .module-plan-overview:nth-of-type(2) .swiper-content .apply-button")
 	private WebElement MS1stPlanEnroll;
 	
 	@FindBy(css = "div[data-rel='#plan-list-3']")
@@ -613,6 +613,7 @@ public class PlanRecommendationEngineResultsPage extends UhcDriver {
     		threadsleep(8000);
 //    		drugcoveredsession();
     		pageloadcomplete();
+    		drugcoveredsession();
     		drugsCoveredInVPP(count-1);
     		int afterRemove = DrugsList.size();
     		if(beforeRemove!=afterRemove) {
@@ -696,22 +697,26 @@ public class PlanRecommendationEngineResultsPage extends UhcDriver {
 	public void validateDrugPage(String plan,boolean removedrug) {
 		System.out.println("Validating Drugs in Drug Page");
 		getStartedBtn.click();
+		threadsleep(2000);
 		int MAPD = 6;
 		int PDP = 3;
 		int None = 6;
 		if(plan.equalsIgnoreCase("MAPD")) {
 			for(int i=0;i<MAPD;i++) {
 				continueBtn.click();
+				threadsleep(2000);
 				pageloadcomplete();
 			}
 		}else if(plan.equalsIgnoreCase("None")) {
 			for(int i=0;i<None;i++) {
 				continueBtn.click();
+				threadsleep(2000);
 				pageloadcomplete();
 			}
 		}else if(plan.equalsIgnoreCase("PDP")) {
 			for(int i=0;i<PDP;i++) {
 				continueBtn.click();
+				threadsleep(2000);
 				pageloadcomplete();
 			}
 		}
@@ -734,16 +739,19 @@ public class PlanRecommendationEngineResultsPage extends UhcDriver {
 		if(plan.equalsIgnoreCase("MAPD")) {
 			for(int i=0;i<MAPD;i++) {
 				continueBtn.click();
+				threadsleep(2000);
 				pageloadcomplete();
 			}
 		}else if(plan.equalsIgnoreCase("None")) {
 			for(int i=0;i<None;i++) {
 				continueBtn.click();
+				threadsleep(2000);
 				pageloadcomplete();
 			}
 		}else if(plan.equalsIgnoreCase("PDP")) {
 			for(int i=0;i<PDP;i++) {
 				continueBtn.click();
+				threadsleep(2000);
 				pageloadcomplete();
 			}
 		}
@@ -1184,15 +1192,19 @@ public void checkVPP(boolean isPREVPP) {
 	}
 }
 
-public void validatePlanNamesSummaryAndDetails() {
-	System.out.println("Validating Plan Names in result pages : ");
+public void validateMAPlanNamesSummaryAndDetails() {
+	System.out.println("Validating MA Plan Names in result pages : ");
 	plansLoader();
 	int maPlanCount = Integer.parseInt(MAPlanCount.getText());
 	System.out.println(maPlanCount);
 	validate(MA1stPlanName, 60);
 	verifyPlanNames(MAPlansName, maPlanCount);
 	verifyviewplanDetails(MAPlansName, maPlanCount);
-	verifyEnrollDetails(MAPlansName, maPlanCount);
+	verifyEnrollDetails(MAPlansName, maPlanCount);	
+	}
+
+public void validatePDPPlanNamesSummaryAndDetails() {
+	System.out.println("Validating PDP Plan Names in result pages : ");
 	plansLoader();
 	PDPViewPlansLink.click();
 	int pdpPlanCount = Integer.parseInt(PDPPlanCount.getText());
@@ -1201,6 +1213,11 @@ public void validatePlanNamesSummaryAndDetails() {
 	verifyviewplanDetails(PDPPlansName, pdpPlanCount);
 	verifyEnrollDetails(PDPPlansName, pdpPlanCount);
 	plansLoader();
+}
+
+public void validateSNPPlanNamesSummaryAndDetails() {
+	System.out.println("Validating SNP Plan Names in result pages : ");
+	plansLoader();
 	SNPViewPlansLink.click();
 	int snpPlanCount = Integer.parseInt(SNPPlanCount.getText());
 	System.out.println(snpPlanCount);
@@ -1208,7 +1225,7 @@ public void validatePlanNamesSummaryAndDetails() {
 	verifyPlanNames(SNPPlansName, snpPlanCount);
 	verifyviewplanDetails(SNPPlansName, snpPlanCount);
 	verifyEnrollDetails(SNPPlansName, snpPlanCount);
-	}
+}
 
 
 public void verifyPlanNames(List<WebElement> plansName, int maPlanCount) {
@@ -1266,6 +1283,7 @@ public String verifyEnrollDetails(List<WebElement> plansName, int PlanCount) {
 	String actualplanName = "";
 	String exceptedplanName = "";
 	for(int i=0;i<PlanCount;i++) {
+		
 		if(i>=1) {
 			if(actualplanName.contains("PDP"))
 				PDPViewPlansLink.click();
@@ -1288,6 +1306,7 @@ public String verifyEnrollDetails(List<WebElement> plansName, int PlanCount) {
 	Assert.assertTrue(actualplanName.contains(exceptedplanName), "--- Plan name are not matches---");
 //	backtoPlanSummary.click();
 	browserBack();
+	threadsleep(10000);
 	try {
         WebDriverWait wait = new WebDriverWait(driver, 2);
         if(wait.until(ExpectedConditions.alertIsPresent())==null) 
@@ -1328,6 +1347,7 @@ public boolean changePlanyear(String year) {
 		if (validate(currentPlanYear, 15)) {
 			currentPlanYear.click();
 			Assert.assertTrue(currentPlanYearSelected.getAttribute("id").length()>0,"Current Plan Year is not Selected");
+			threadsleep(5000);
 			return true;
 		}
 	}
@@ -1337,6 +1357,7 @@ public boolean changePlanyear(String year) {
 		if (validate(futurePlanYear, 15)) {
 			futurePlanYear.click();
 			Assert.assertTrue(futurePlanYearSelected.getAttribute("id").length()>0,"Future Plan Year is not Selected");
+			threadsleep(5000);
 			return true;
 		} else {
 			Assert.assertTrue(false, "Future Plan Year Toggle is Needed");

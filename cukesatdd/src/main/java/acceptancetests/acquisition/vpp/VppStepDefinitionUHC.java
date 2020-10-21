@@ -1742,7 +1742,7 @@ public class VppStepDefinitionUHC {
 		System.out.println("***the user clicks on resume application button***");
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		plansummaryPage.MedSupFormValidation_2ndTime(DateOfBirth, zipcode);
+		//plansummaryPage.MedSupFormValidation_2ndTime(DateOfBirth, zipcode);
 		plansummaryPage.ResumeApplicationButton();
 
 	}
@@ -3282,6 +3282,19 @@ public void the_user_validates_pagination_and_results_displayed(DataTable inputv
 			plansummaryPage.signInOptumId(username, password);
 		}
 		
+		@Then("^the user validate retrieve application URL in UHC Site$")
+		public void the_user_retrieve_application_URL_in_AARPSite(DataTable arg1) throws InterruptedException {
+			Map<String, String> inputAttributesMap=parseInputArguments(arg1);
+			String AARPURL = inputAttributesMap.get("AARP URL");
+			String AARPURLSTG=inputAttributesMap.get("AARP URL STG");
+			VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario().getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+			if(getLoginScenario().environment.equals("stage")){
+				plansummaryPage.RetrieveURL(AARPURLSTG);
+			}else{
+				plansummaryPage.RetrieveURL(AARPURL);
+			}
+
+		}
 		@Then("^the user click on Dental Cover Popup he must be able to validate plan defaults in UHC$")
 		public void the_user_click_on_Optional_Services_tab_and_validate_PlanDefaults(DataTable givenAttributes)
 				throws Throwable {

@@ -68,6 +68,7 @@ public abstract class UhcDriver {
 	
 	@FindBy(xpath="//*[contains(@class,'btn-no')]")
 	public static WebElement IPerceptionNoBtn;
+
 	
 	public void start(String url) {
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
@@ -1205,7 +1206,7 @@ try {
     public boolean checkIfPageReadySafari() {
     	int counter = 10;
     	boolean ready = false;
-    	if(MRScenario.browserName.equalsIgnoreCase("Safari")) {
+    	if(MRScenario.browsername.equalsIgnoreCase("Safari")) {
     		CommonUtility.checkPageIsReadyNew(driver);
     		do {
     			try {

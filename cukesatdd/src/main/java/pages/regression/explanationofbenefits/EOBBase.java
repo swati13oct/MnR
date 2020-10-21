@@ -92,8 +92,10 @@ public class EOBBase extends EOBWebElements{
 			System.out.println("slept total of '"+(total)+"' seconds...");
 		}
 		System.out.println("waited total of '"+(total)+"' seconds for the eobLoadingimage to disappear...");
-		if (mayHaveEob)
-			sleepBySec(5); //note: keep to let the page settle down w/ the pdf loading in the background
+		if (mayHaveEob) {
+			System.out.println("sleep for 5 sec to let the page settle down w/ the pdf loading in the background");
+			sleepBySec(3); //note: keep to let the page settle down w/ the pdf loading in the background
+		}
 		return total;
 	}
 
@@ -217,7 +219,7 @@ public class EOBBase extends EOBWebElements{
 				e.printStackTrace();
 			}
 		}
-		sleepBySec(2);
+		sleepBySec(1);
 	}
 
 	/**
