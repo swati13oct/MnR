@@ -1,6 +1,68 @@
 @orderPlanMaterials @thePredators
 Feature: 1.10.1 Member  order materials Page - PROD
 
+  @prodSanity_UHC_Individual_order
+  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify order plan material functionality for different type of users
+    Given the user is on member auth login flow page
+    When the member is able to login with correct username and password
+      | Username | <username> |
+      | Password | <password> |
+    And Member Enters the Username he wants to search
+      | MemUsername | <MemUserName> |
+    And user clicks on member to select
+    And user stores test input for validations
+      | Username    | <MemUserName> |
+      | Plan Type   | <planType>    |
+      | Member Type | <memberType>  |
+    #-------------- navigate to the target test page for testing
+    When user navigates to order plan materials page
+      | Plan Type   | <planType>   |
+      | Member Type | <memberType> |
+    Then user validates header section of page content on order materials page
+    And user validates selection section of page content on order materials page
+    And user validates printable documentations section of page content on order materials page
+    #note: moved to footer feature
+    # And user validates need help section of page content on order materials page
+    # And user validates error message when submit without any selection
+    ###note: don't order on prod env
+    #Then user validates ability to submit order for each item individually for all available items
+
+    #-------------------
+    Examples:
+      | TID   | username | password | MemUserName         | planType | memberType            |
+      | 15288 | ujethwa | 221Umang | skho@roadrunner.com | MAPD     | UHC_Individual_order  |
+
+  @prodSanity_MEDSUPP_order
+  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify order plan material functionality for different type of users
+    Given the user is on member auth login flow page
+    When the member is able to login with correct username and password
+      | Username | <username> |
+      | Password | <password> |
+    And Member Enters the Username he wants to search
+      | MemUsername | <MemUserName> |
+    And user clicks on member to select
+    And user stores test input for validations
+      | Username    | <MemUserName> |
+      | Plan Type   | <planType>    |
+      | Member Type | <memberType>  |
+    #-------------- navigate to the target test page for testing
+    When user navigates to order plan materials page
+      | Plan Type   | <planType>   |
+      | Member Type | <memberType> |
+    Then user validates header section of page content on order materials page
+    And user validates selection section of page content on order materials page
+    And user validates printable documentations section of page content on order materials page
+    #note: moved to footer feature
+    # And user validates need help section of page content on order materials page
+    # And user validates error message when submit without any selection
+    ###note: don't order on prod env
+    #Then user validates ability to submit order for each item individually for all available items
+
+    #-------------------
+    Examples:
+      | TID   | username | password | MemUserName        | planType | memberType    |
+      | 15293 | ujethwa | 221Umang | rldf1942 | SHIP     | MEDSUPP_order |
+
   @prod_orderPlanMaterials01
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify order plan material functionality for different type of users
     Given the user is on member auth login flow page
