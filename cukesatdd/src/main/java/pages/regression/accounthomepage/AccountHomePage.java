@@ -51,6 +51,7 @@ import pages.regression.explanationofbenefits.DreamEOBPage;
 import pages.regression.explanationofbenefits.EOBPage;
 import pages.regression.formsandresources.FormsAndResourcesPage;
 import pages.regression.healthandwellness.HealthAndWellnessPage;
+import pages.regression.myDocumentsPage.MyDocumentsPage;
 import pages.regression.ordermaterials.OrderMaterialsPage;
 import pages.regression.payments.PaymentHistoryPage;
 import pages.regression.pharmaciesandprescriptions.PharmaciesAndPrescriptionsPage;
@@ -472,8 +473,7 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(xpath = "//div[@id='ui-view-page']//a[@track='EOB_SEARCH']")
 	private WebElement EOB_Dashboard;
 	
-	@FindBy(xpath="//header[contains(@class,'sub-nav-header')]//a[contains(@ng-href,'eob.html') or contains(@href,'eob.html')]")
-	protected WebElement eobTopMenuLink;
+     @FindBy(xpath="//header[contains(@class,'sub-nav-header')]//a[contains(@href,'eob.html')]")	protected WebElement eobTopMenuLink;
 	
 	//@FindBy(xpath="//a[contains(text(),'View Documents & Resources')]")
 	@FindBy(xpath="//div[contains(@class,'link-bar')]//a[contains(@href,'documents/overview.html')]")
@@ -512,6 +512,10 @@ public class AccountHomePage extends UhcDriver {
 	
 	@FindBy(xpath = "//*[contains(@onclick,'HSIDSignIn')]")
 	private WebElement mnrSignInButton;
+	
+	@FindBy(xpath = "//h3[contains(text(),'My Documents')]")
+	private WebElement myDocumentsHeader;
+
 	
 	private PageData myAccountHome;
 	
@@ -4404,5 +4408,25 @@ public class AccountHomePage extends UhcDriver {
 		CommonUtility.checkPageIsReadyNew(driver);
 		System.out.println("Driver title after logout=" + driver.getTitle());
 		validateNew(mnrSignInButton,5);
+	}
+
+	public MyDocumentsPage navigateDirectToMyDocumentsPage() {
+
+		if(MRScenario.environment.equalsIgnoreCase("offline")){
+			driver.navigate().to("https://offline.medicare.uhc.com/member/my-documents/overview.html");
+		  }
+			else if (MRScenario.environment.contains("prod"))
+			{
+				driver.navigate().to("https://www.medicare.uhc.com/member/my-documents/overview.html");
+			}
+			else{
+				driver.navigate().to("https://stage-medicare.uhc.com/member/my-documents/overview.html");
+			}
+			
+		if (validate(myDocumentsHeader,5)) {
+			return new MyDocumentsPage(driver);
+		}
+		
+    return null;
 	}
 }
