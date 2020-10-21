@@ -683,6 +683,7 @@ public class PlanRecommendationEngineStepDefinition {
 		String zip = inputValues.get("Zip Code");
 		String county = inputValues.get("County Name");
 		String isMultiCounty = inputValues.get("Is Multi County");
+		checkpopup();
 		planSelectorResultspage.vppToPre();
 		planSelectorResultspage.validateZipcodePage(zip,county,isMultiCounty);
    	}
@@ -695,6 +696,7 @@ public class PlanRecommendationEngineStepDefinition {
 		String zip = inputValues.get("Zip Code");
 		String county = inputValues.get("County Name");
 		String isMultiCounty = inputValues.get("Is Multi County");
+		checkpopup();
 		planSelectorResultspage.vppToPreStartOver();
 		planSelectorResultspage.validateZipcodePage(zip,county,isMultiCounty);
    	}
@@ -772,15 +774,15 @@ public class PlanRecommendationEngineStepDefinition {
 	
 	@Then("^user validate PDP Plan Names in VPP Summary VS Details in results page$")
    	public void verify_PDP_Plan_names_results_page() {
-		checkpopup();
 		PlanRecommendationEngineResultsPage planSelectorResultspage =  new PlanRecommendationEngineResultsPage(wd);
+		checkpopup();
 		planSelectorResultspage.validatePDPPlanNamesSummaryAndDetails();
 	}
 	
 	@Then("^user validate SNP Plan Names in VPP Summary VS Details in results page$")
    	public void verify_SNP_Plan_names_results_page() {
-		checkpopup();
 		PlanRecommendationEngineResultsPage planSelectorResultspage =  new PlanRecommendationEngineResultsPage(wd);
+		checkpopup();
 		planSelectorResultspage.validateSNPPlanNamesSummaryAndDetails();
 	}
 	
