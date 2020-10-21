@@ -68,8 +68,6 @@ public class AepVppPlanSummaryPage extends UhcDriver {
 	
 	@FindBy(xpath = "//div[contains(@id,'plan-list-') and not(contains(@class,'ng-hide'))]/div[contains(@class,'plan-list-content')]")
 	private WebElement planListContainer;
-
-    int retryCnt = 1;
 	
 	public AepVppPlanSummaryPage(WebDriver driver) {
 		super(driver);
@@ -269,19 +267,23 @@ public class AepVppPlanSummaryPage extends UhcDriver {
     public HashMap<String, String> collectInfoVppPlanSummaryPg(String planName, String countyName, String planYear, String sheetName, int rowIndex) {
         HashMap<String, String> result=new HashMap<String, String>();
 
-        checkForMultiCountyPopup(countyName);
-        selectYearOption(planYear);
-        result = collectInfoVppPlanSummaryPg(planName);
-
-        int benefitUICnt = result.size();
-
-        // Retry only for 5 times
-        System.out.println(sheetName+"_"+rowIndex+" - Attempt - "+retryCnt+", Benefits Map count - " + benefitUICnt +", Plan - "+planName);
-        if(benefitUICnt <1 && retryCnt <=5)
+        for(int i=0;i<5;i++)
         {
-            driver.navigate().refresh();
-			retryCnt++;
-            result = collectInfoVppPlanSummaryPg(planName, countyName, planYear, sheetName, rowIndex);
+            checkForMultiCountyPopup(countyName);
+            selectYearOption(planYear);
+            result = collectInfoVppPlanSummaryPg(planName);
+            int benefitUICnt = result.size();
+            System.out.println(sheetName+"_"+rowIndex+" - Attempt - "+(i+1)+", Benefits Map count - " + benefitUICnt +", Plan - "+planName);
+            if(benefitUICnt < 1 )
+            {
+                driver.navigate().refresh();
+                System.out.println(sheetName+"_"+rowIndex+" - Attempt - "+(i+1)+", Page Refreshed");
+                continue;
+            }
+            else
+            {
+                return result;
+            }
         }
 
         return result;
