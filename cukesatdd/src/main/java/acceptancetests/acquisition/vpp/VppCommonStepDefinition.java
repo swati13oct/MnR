@@ -569,4 +569,52 @@ public class VppCommonStepDefinition {
 					.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
 			vppPlanDetailsPage.validatingAdditionalBenefitTextInPlanDetails(additionalBenefits);
 		}
+		
+		@Then("^user saves two ms plans as favorite$")
+		public void user_saves_two_ms_plans_as_favorite_on_AARP_site(DataTable givenAttributes) {
+			VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+			
+			List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+			Map<String, String> memberAttributesMap = new HashMap<String, String>();
+			for (int i = 0; i < memberAttributesRow.size(); i++) {
+				memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+						.get(0), memberAttributesRow.get(i).getCells().get(1));
+			}
+
+//			Map<String, String> memberAttributesMap = prepareTestInput(givenAttributes);
+			String ms_savePlanNames = memberAttributesMap.get("MS Test Plans");
+
+			//----- MS plan type ----------------------------
+			plansummaryPage.saveMSPlans(ms_savePlanNames);
+
+		}
+		
+		@Then("^Navigate to Visitor Profile page$")
+		public void navigate_to_Visitor_Profile_page_on_AARP_site() {
+			VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+			VisitorProfilePage visitorProfilePage = plansummaryPage.navigateToVisitorProfilePage();
+			getLoginScenario().saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfilePage);
+		}
+		
+		@Then("^user saves all plans as favorite$")
+		public void user_saves_all_plans_as_favorite_on_AARP_site(DataTable givenAttributes) {
+			VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+			
+			List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+			Map<String, String> memberAttributesMap = new HashMap<String, String>();
+			for (int i = 0; i < memberAttributesRow.size(); i++) {
+				memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+						.get(0), memberAttributesRow.get(i).getCells().get(1));
+			}
+
+//			Map<String, String> memberAttributesMap = prepareTestInput(givenAttributes);
+			String savePlanNames = memberAttributesMap.get("Test Plans");
+			String planType = memberAttributesMap.get("Plan Type");
+			
+			plansummaryPage.saveAllPlans(savePlanNames, planType);
+		}
+		
 }

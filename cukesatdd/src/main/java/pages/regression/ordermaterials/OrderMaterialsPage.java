@@ -64,7 +64,7 @@ public class OrderMaterialsPage extends OrderMaterialsBase  {
 	 * @param planType
 	 */
 	public void validateSubHeaderSection(String planType) {
-		//takeCareiPerceptionPopUp();
+
 		if (planType.equalsIgnoreCase("SHIP") || planType.toUpperCase().contains("MEDSUPP")) {
 			Assert.assertTrue("PROBLEM - unable to locate the sub section text element on Order Plan Materials",orderValidate(subSectionText_ship));
 		} else {
@@ -80,6 +80,8 @@ public class OrderMaterialsPage extends OrderMaterialsBase  {
 	 * @throws InterruptedException
 	 */
 	public void validateSelectionSection(String planType, String memberType) throws InterruptedException {
+		
+		takeCareiPerceptionPopUp();
 		Assert.assertTrue("PROBLEM - unable to locate the selection section on Order Plan Materials",orderValidate(common_selectionSection));
 		if (planType.equalsIgnoreCase("SHIP") || planType.toUpperCase().contains("MEDSUPP")) {
 			CommonUtility.waitForPageLoad(driver, selectionInstruction_ship, 5);

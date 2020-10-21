@@ -6,6 +6,37 @@ Feature: 1.03.1 Member Preferences page -Member Auth - PROD
   #    | Feature           | UCPProfileAndPreferences |
 
   #----- beginning of non Regression preferences scenarios section ------------------------
+  @prodSanity_MAPD_UHC_GOGreen_Profilepref
+  Scenario Outline: TID: <TID> -Plan Type: <planType> - To verify Communication Preferences section
+    Given the user is on member auth login flow page
+    When the member is able to login with correct username and password
+      | Username | <username> |
+      | Password | <password> |
+    And Member Enters the Username he wants to search
+      | MemUsername | <MemUserName> |
+    And user clicks on member to select
+    And user stores test input for validations
+      | Username    | <MemUserName> |
+      | Plan Type   | <planType>    |
+      | Member Type | <memberType>  |
+    #-------------- navigate to the target test page for testing
+    When the user navigates to Profile and Preferences page
+    Then the user validates the Plan Name, Member name, Member ID and account section
+    Then the user validates Communication Preferences section
+    Then the user validates the presence of Communication preferences header
+    And the user clicks on edit preferences link
+    Then the user validates headers on Preferences page
+    Then the user validates the presence of Plan Name on Communication Preferences Page
+    And the user validates the iframe on Communication Preferences Page
+    Then the user validates the I have read checkbox and check it
+   # Then the user validates the Save Preferences Button
+    Then the user validates the Note Section on Preferences Page
+#    Then the user validates the presence of Back links on Preferences page
+
+    Examples:
+      | TID   | username | password | MemUserName       | userSelection | planType                       |
+      | 15314 | ujethwa | 221Umang | TEAKSAMPPALA1     | xxxxx         | MAPD_UHC_GOGreen_Profilepref   |
+
   @prod_CommunicationPreferences01
   Scenario Outline: TID: <TID> -Plan Type: <planType> - To verify Communication Preferences section
     Given the user is on member auth login flow page
@@ -47,7 +78,7 @@ Feature: 1.03.1 Member Preferences page -Member Auth - PROD
 
 
   #-----------------------  SHIP Preferences tests ---------------------------------------------------
-  @prod_CommunicationPreferences02
+  @prod_CommunicationPreferences02 @prodSanity_SHIP_ProfilePref
   Scenario Outline: TID: <TID> -Plan Type: <planType> - To verify Communication Preferences section for a SHIP member
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
