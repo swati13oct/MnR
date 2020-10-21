@@ -105,6 +105,12 @@ public class ACQDrugCostEstimatorPage extends UhcDriver {
 	
 	@FindBy(css = ".content-section button[type='submit']")
 	private WebElement addDrugButton;
+	
+	@FindBy(xpath = "//span[contains(text(),'Add to drug List')]")
+	private WebElement addToDrugList;
+	
+	@FindBy(xpath = "//span[contains(text(),'Add My Drugs')]")
+	private WebElement addMyDrug;
 
 	@FindBy(css = "uhc-radio[name='generic-switch']:nth-of-type(2)")
 	private WebElement genericSwitch;
@@ -157,7 +163,8 @@ public class ACQDrugCostEstimatorPage extends UhcDriver {
 				if (drugDetails[7].toUpperCase().equals("YES"))
 					switchGeneric = true;
 				threadsleep(2000);
-				drugAddBtn.click();
+				jsClickNew(drugAddBtn);
+				//drugAddBtn.click();
 				threadsleep(2000);
 				addDrugbySearchDCE(drugName, searchButtonClick, dosage, packageName, count, threeeMonthfrequency,
 						GenericDrug, switchGeneric);
@@ -180,12 +187,14 @@ public class ACQDrugCostEstimatorPage extends UhcDriver {
 	public void addDrugbySearchDCE(String drugName, boolean searchButtonClick, String dosage, String packageName,
 			String count, boolean threeeMonthfrequency, boolean GenericDrug, boolean switchGeneric) {
 		try {
+			jsClickNew(addMyDrug);
 			validate(drugsearchBox, 30);
 			threadsleep(2000);
 			drugsearchBox.clear();
 			drugsearchBox.sendKeys(drugName);
 			if (searchButtonClick) {
-			drugsearchButton.click();
+			//drugsearchButton.click();
+			jsClickNew(drugsearchButton);
 			//Select modal
 			validate(searchList.get(0), 30);
 			threadsleep(2000);
@@ -197,7 +206,7 @@ public class ACQDrugCostEstimatorPage extends UhcDriver {
 			}
 			threadsleep(2000);
 		} else {
-			threadsleep(10000);
+			threadsleep(5000);
 			drugsAutoList.get(0).click();
 		}
 
@@ -222,7 +231,8 @@ public class ACQDrugCostEstimatorPage extends UhcDriver {
 			dosage = dos.getFirstSelectedOption().getText().trim().split(" ")[1] + " "
 					+ dos.getFirstSelectedOption().getText().trim().split(" ")[2];
 			threadsleep(2000);
-			addDrugButton.click();
+			//addDrugButton.click();
+			jsClickNew(addToDrugList);
 			// Not Covered switch generic as it is not DD scope in DCE page
 		} catch (Exception e) {
 			System.out.println("Unable to add drug");

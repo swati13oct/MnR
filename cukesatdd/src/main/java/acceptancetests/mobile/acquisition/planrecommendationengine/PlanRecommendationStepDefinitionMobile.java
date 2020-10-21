@@ -68,31 +68,30 @@ public class PlanRecommendationStepDefinitionMobile {
 	}
 
 	boolean if_offline_prod = false, popup_clicked = false;
-	
-	
+
 	@Given("^the user is on UHC medicare acquisition site landing page$")
 	public void the_user_on_uhc_medicaresolutions_Site() {
 		wd = getLoginScenario().getMobileDriver();
-		AcquisitionHomePageMobile aquisitionhomepage = new AcquisitionHomePageMobile(wd,"PRE",true);
+		AcquisitionHomePageMobile aquisitionhomepage = new AcquisitionHomePageMobile(wd, "PRE", true);
 		if_offline_prod = aquisitionhomepage.openMobileURL();
-//		aquisitionhomepage.fixPrivateConnection();
+		// aquisitionhomepage.fixPrivateConnection();
 		checkpopup();
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
-		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE,
-				aquisitionhomepage);
+		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, aquisitionhomepage);
 	}
 
-	/*@Given("^the user is on UHC medicare acquisition site landing page$")
-	public void the_user_on_uhc_medicaresolutions_Site() {
-		wd = getLoginScenario().getMobileDriver();
-		AcquisitionHomePageMobile aquisitionhomepage = new AcquisitionHomePageMobile(wd);
-		// aquisitionhomepage.openPRE();
-		aquisitionhomepage.openMobileURL();
-		// aquisitionhomepage.openVPPPage();
-		aquisitionhomepage.fixPrivateConnectionMobile();
-		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
-		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, aquisitionhomepage);
-	}*/
+	/*
+	 * @Given("^the user is on UHC medicare acquisition site landing page$") public
+	 * void the_user_on_uhc_medicaresolutions_Site() { wd =
+	 * getLoginScenario().getMobileDriver(); AcquisitionHomePageMobile
+	 * aquisitionhomepage = new AcquisitionHomePageMobile(wd); //
+	 * aquisitionhomepage.openPRE(); aquisitionhomepage.openMobileURL(); //
+	 * aquisitionhomepage.openVPPPage();
+	 * aquisitionhomepage.fixPrivateConnectionMobile();
+	 * getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+	 * getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE,
+	 * aquisitionhomepage); }
+	 */
 
 	@And("^clicks on get started button and runs questionnaire$")
 	public void clicks_on_get_started_button_and_directly_skip_to_results(DataTable givenAttributes) throws Throwable {
@@ -148,8 +147,10 @@ public class PlanRecommendationStepDefinitionMobile {
 
 	@When("^user navigate to Plan Recommendation Engine and Checking Breadcrumbs$")
 	public void user_navigate_PRE_Breadcrumbs() throws InterruptedException {
-		PlanRecommendationEngineHeaderAndFooterMobile headerAndFooter = new PlanRecommendationEngineHeaderAndFooterMobile(wd);
+		PlanRecommendationEngineHeaderAndFooterMobile headerAndFooter = new PlanRecommendationEngineHeaderAndFooterMobile(
+				wd);
 		// headerAndFooter.navigationToPlanRecommendationEngine();
+		headerAndFooter.MobileMenu();
 		headerAndFooter.breadCrumbs();
 	}
 
@@ -162,7 +163,8 @@ public class PlanRecommendationStepDefinitionMobile {
 
 	@When("^user navigate Plan Recommendation Engine Using Shop From Home in Find Your Plan$")
 	public void navigate_Plan_Selector_tool() {
-		PlanRecommendationEngineHeaderAndFooterMobile headerAndFooter = new PlanRecommendationEngineHeaderAndFooterMobile(wd);
+		PlanRecommendationEngineHeaderAndFooterMobile headerAndFooter = new PlanRecommendationEngineHeaderAndFooterMobile(
+				wd);
 		PlanRecommendationEngineLandingAndZipcodeMobilePages planSelectorhomepage = new PlanRecommendationEngineLandingAndZipcodeMobilePages(
 				wd);
 		headerAndFooter.navigationToPlanRecommendationEngineViaShopTools();
@@ -171,14 +173,16 @@ public class PlanRecommendationStepDefinitionMobile {
 
 	@Then("^user validate Header elements and Link Validation of Plan Recommendation Engine$")
 	public void user_check_header_Plan_Selector_tool() {
-		PlanRecommendationEngineHeaderAndFooterMobile headerAndFooter = new PlanRecommendationEngineHeaderAndFooterMobile(wd);
+		PlanRecommendationEngineHeaderAndFooterMobile headerAndFooter = new PlanRecommendationEngineHeaderAndFooterMobile(
+				wd);
 		headerAndFooter.headerElements();
 		headerAndFooter.headerLinkvalidation();
 	}
 
 	@Then("^user validate Footer elements and Link Validation of Plan Recommendation Engine$")
 	public void user_check_header_footer_Plan_Selector_tool() throws Exception {
-		PlanRecommendationEngineHeaderAndFooterMobile headerAndFooter = new PlanRecommendationEngineHeaderAndFooterMobile(wd);
+		PlanRecommendationEngineHeaderAndFooterMobile headerAndFooter = new PlanRecommendationEngineHeaderAndFooterMobile(
+				wd);
 		headerAndFooter.footerElements();
 		headerAndFooter.footerLinkvalidation();
 	}
@@ -193,7 +197,8 @@ public class PlanRecommendationStepDefinitionMobile {
 		System.out.println("Email is:" + email);
 		String searchKey = inputValues.get("Search Key");
 		System.out.println("Entered Search Key is:" + searchKey);
-		PlanRecommendationEngineHeaderAndFooterMobile headerAndFooter = new PlanRecommendationEngineHeaderAndFooterMobile(wd);
+		PlanRecommendationEngineHeaderAndFooterMobile headerAndFooter = new PlanRecommendationEngineHeaderAndFooterMobile(
+				wd);
 		headerAndFooter.zipcodeFunctionInShopforaplan(zipcode);
 		Thread.sleep(5000);
 		headerAndFooter.emailFunctionInShopforaplan(email);
@@ -213,7 +218,8 @@ public class PlanRecommendationStepDefinitionMobile {
 		String isMultiCounty = inputValues.get("Is Multi County");
 		PlanRecommendationEngineLandingAndZipcodeMobilePages planSelectorhomepage = new PlanRecommendationEngineLandingAndZipcodeMobilePages(
 				wd);
-		PlanRecommendationEngineHeaderAndFooterMobile headerAndFooter = new PlanRecommendationEngineHeaderAndFooterMobile(wd);
+		PlanRecommendationEngineHeaderAndFooterMobile headerAndFooter = new PlanRecommendationEngineHeaderAndFooterMobile(
+				wd);
 		headerAndFooter.breadCrumbs();
 		if (isMultiCounty.equalsIgnoreCase("NO")) {
 			planSelectorhomepage.getStartedAndRunInvalidzipcode(zipcode);
@@ -227,7 +233,8 @@ public class PlanRecommendationStepDefinitionMobile {
 	public void elements_coverage_page() {
 		PlanRecommendationEngineCoverageOptionPageMobile planSelectorCoverageepage = new PlanRecommendationEngineCoverageOptionPageMobile(
 				wd);
-		PlanRecommendationEngineHeaderAndFooterMobile headerAndFooter = new PlanRecommendationEngineHeaderAndFooterMobile(wd);
+		PlanRecommendationEngineHeaderAndFooterMobile headerAndFooter = new PlanRecommendationEngineHeaderAndFooterMobile(
+				wd);
 		headerAndFooter.breadCrumbs();
 		planSelectorCoverageepage.coverageOptionpage();
 
@@ -298,14 +305,16 @@ public class PlanRecommendationStepDefinitionMobile {
 
 	@Then("^user validate elements in Travel page$")
 	public void elements_travel_page() {
-		PlanRecommendationEngineTravelPageMobile planSelectorTravelpage = new PlanRecommendationEngineTravelPageMobile(wd);
+		PlanRecommendationEngineTravelPageMobile planSelectorTravelpage = new PlanRecommendationEngineTravelPageMobile(
+				wd);
 		planSelectorTravelpage.travelPageElement();
 	}
 
 	@And("^user selects Travel options in Care Away From Home Page")
 	public void select_travel_page(DataTable givenAttributes) {
 		readfeaturedata(givenAttributes);
-		PlanRecommendationEngineTravelPageMobile planSelectorTravelpage = new PlanRecommendationEngineTravelPageMobile(wd);
+		PlanRecommendationEngineTravelPageMobile planSelectorTravelpage = new PlanRecommendationEngineTravelPageMobile(
+				wd);
 		String status = "Positive";
 		planSelectorTravelpage.travelpage(inputValues.get("Travel Options"), status);
 	}
@@ -313,15 +322,18 @@ public class PlanRecommendationStepDefinitionMobile {
 	@And("^user validating error scenario in Care Away From Home Page")
 	public void error_travel_page(DataTable givenAttributes) {
 		readfeaturedata(givenAttributes);
-		PlanRecommendationEngineTravelPageMobile planSelectorTravelpage = new PlanRecommendationEngineTravelPageMobile(wd);
+		PlanRecommendationEngineTravelPageMobile planSelectorTravelpage = new PlanRecommendationEngineTravelPageMobile(
+				wd);
 		String status = "Negative";
 		planSelectorTravelpage.travelpage(inputValues.get("Travel Options"), status);
 	}
 
 	@And("^user validate elements in doctors page$")
 	public void elements_doctor_page() {
-		PlanRecommendationEngineDoctorsPageMobile planSelectorDoctorspage = new PlanRecommendationEngineDoctorsPageMobile(wd);
-		PlanRecommendationEngineHeaderAndFooterMobile headerAndFooter = new PlanRecommendationEngineHeaderAndFooterMobile(wd);
+		PlanRecommendationEngineDoctorsPageMobile planSelectorDoctorspage = new PlanRecommendationEngineDoctorsPageMobile(
+				wd);
+		PlanRecommendationEngineHeaderAndFooterMobile headerAndFooter = new PlanRecommendationEngineHeaderAndFooterMobile(
+				wd);
 		headerAndFooter.breadCrumbs();
 		planSelectorDoctorspage.doctorspageElements();
 
@@ -330,7 +342,8 @@ public class PlanRecommendationStepDefinitionMobile {
 	@And("^user selects doctors in doctors page$")
 	public void select_plan_type_doctor_page(DataTable givenAttributes) throws Throwable {
 		readfeaturedata(givenAttributes);
-		PlanRecommendationEngineDoctorsPageMobile planSelectorDoctorspage = new PlanRecommendationEngineDoctorsPageMobile(wd);
+		PlanRecommendationEngineDoctorsPageMobile planSelectorDoctorspage = new PlanRecommendationEngineDoctorsPageMobile(
+				wd);
 		String doctor = inputValues.get("Doctors");
 		String status = "Positive_NextPageName";
 		if (!(doctor.isEmpty())) {
@@ -342,7 +355,8 @@ public class PlanRecommendationStepDefinitionMobile {
 	@And("^user not selects doctors in doctors page$")
 	public void notselect_doctor_type_doctor_page(DataTable givenAttributes) throws Throwable {
 		readfeaturedata(givenAttributes);
-		PlanRecommendationEngineDoctorsPageMobile planSelectorDoctorspage = new PlanRecommendationEngineDoctorsPageMobile(wd);
+		PlanRecommendationEngineDoctorsPageMobile planSelectorDoctorspage = new PlanRecommendationEngineDoctorsPageMobile(
+				wd);
 		String doctor = inputValues.get("Doctors");
 		if (doctor.isEmpty()) {
 			planSelectorDoctorspage.doctorspageerror();
@@ -353,7 +367,8 @@ public class PlanRecommendationStepDefinitionMobile {
 	public void previous_doctors_page(DataTable givenAttributes) throws Throwable {
 		readfeaturedata(givenAttributes);
 		String status = "Positive_NextPageName";
-		PlanRecommendationEngineDoctorsPageMobile planSelectorDoctorspage = new PlanRecommendationEngineDoctorsPageMobile(wd);
+		PlanRecommendationEngineDoctorsPageMobile planSelectorDoctorspage = new PlanRecommendationEngineDoctorsPageMobile(
+				wd);
 		planSelectorDoctorspage.doctorspageFunctional(inputValues.get("Doctors"),
 				inputValues.get("Doctors Search Text"), inputValues.get("Multi Doctor"), status);
 	}
@@ -361,21 +376,24 @@ public class PlanRecommendationStepDefinitionMobile {
 	@And("^user select doctors and Click previous button from Doctors to check previous page$")
 	public void previous_travel_page(DataTable givenAttributes) {
 		readfeaturedata(givenAttributes);
-		PlanRecommendationEngineDoctorsPageMobile planSelectorDoctorspage = new PlanRecommendationEngineDoctorsPageMobile(wd);
+		PlanRecommendationEngineDoctorsPageMobile planSelectorDoctorspage = new PlanRecommendationEngineDoctorsPageMobile(
+				wd);
 		planSelectorDoctorspage.doctorspagePreviousButton(inputValues.get("Doctors"));
 	}
 
 	@And("^user validating error scenario in doctors Page")
 	public void error_doctor_page(DataTable givenAttributes) {
 		readfeaturedata(givenAttributes);
-		PlanRecommendationEngineDoctorsPageMobile planSelectorDoctorspage = new PlanRecommendationEngineDoctorsPageMobile(wd);
+		PlanRecommendationEngineDoctorsPageMobile planSelectorDoctorspage = new PlanRecommendationEngineDoctorsPageMobile(
+				wd);
 		planSelectorDoctorspage.doctorspageerror();
 	}
 
 	@And("^user selects Doctors in Doctors page and cancels the selection$")
 	public void select_doctors_page_cancelvalidation(DataTable givenAttributes) {
 		readfeaturedata(givenAttributes);
-		PlanRecommendationEngineDoctorsPageMobile planSelectorDoctorspage = new PlanRecommendationEngineDoctorsPageMobile(wd);
+		PlanRecommendationEngineDoctorsPageMobile planSelectorDoctorspage = new PlanRecommendationEngineDoctorsPageMobile(
+				wd);
 		planSelectorDoctorspage.doctorspageCancel(inputValues.get("Doctors Search Text"),
 				inputValues.get("Multi Doctor"));
 	}
@@ -383,7 +401,8 @@ public class PlanRecommendationStepDefinitionMobile {
 	@And("^user validate elements in drugs page$")
 	public void elements_drugs_page() {
 		PlanRecommendationEngineDrugsPageMobile planSelectorDrugspage = new PlanRecommendationEngineDrugsPageMobile(wd);
-		PlanRecommendationEngineHeaderAndFooterMobile headerAndFooter = new PlanRecommendationEngineHeaderAndFooterMobile(wd);
+		PlanRecommendationEngineHeaderAndFooterMobile headerAndFooter = new PlanRecommendationEngineHeaderAndFooterMobile(
+				wd);
 		headerAndFooter.breadCrumbs();
 		planSelectorDrugspage.drugspage();
 
@@ -475,8 +494,10 @@ public class PlanRecommendationStepDefinitionMobile {
 
 	@And("^user validate elements in pharmacy page$")
 	public void elements_pharmacy_page() {
-		PlanRecommendationEnginePharmacyPageMobile planSelectorPharmacyepage = new PlanRecommendationEnginePharmacyPageMobile(wd);
-		PlanRecommendationEngineHeaderAndFooterMobile headerAndFooter = new PlanRecommendationEngineHeaderAndFooterMobile(wd);
+		PlanRecommendationEnginePharmacyPageMobile planSelectorPharmacyepage = new PlanRecommendationEnginePharmacyPageMobile(
+				wd);
+		PlanRecommendationEngineHeaderAndFooterMobile headerAndFooter = new PlanRecommendationEngineHeaderAndFooterMobile(
+				wd);
 		headerAndFooter.breadCrumbs();
 		planSelectorPharmacyepage.pharmacypage();
 
@@ -485,7 +506,8 @@ public class PlanRecommendationStepDefinitionMobile {
 	@And("^user selects pharmacy option in pharmacy page$")
 	public void select_pharmacy_option_pharmacy_page(DataTable givenAttributes) throws Throwable {
 		readfeaturedata(givenAttributes);
-		PlanRecommendationEnginePharmacyPageMobile planSelectorPharmacyepage = new PlanRecommendationEnginePharmacyPageMobile(wd);
+		PlanRecommendationEnginePharmacyPageMobile planSelectorPharmacyepage = new PlanRecommendationEnginePharmacyPageMobile(
+				wd);
 		String pharmacytype = inputValues.get("Pharmacy Type");
 		if (!(pharmacytype.isEmpty())) {
 			planSelectorPharmacyepage.doctorspageFunctional(pharmacytype);
@@ -495,7 +517,8 @@ public class PlanRecommendationStepDefinitionMobile {
 	@And("^user not selects pharmacy option in pharmacy page$")
 	public void notselect_pharmacy_option_pharmacy_page(DataTable givenAttributes) throws Throwable {
 		readfeaturedata(givenAttributes);
-		PlanRecommendationEnginePharmacyPageMobile planSelectorPharmacyepage = new PlanRecommendationEnginePharmacyPageMobile(wd);
+		PlanRecommendationEnginePharmacyPageMobile planSelectorPharmacyepage = new PlanRecommendationEnginePharmacyPageMobile(
+				wd);
 		String pharmacytype = inputValues.get("Pharmacy Type");
 		if (pharmacytype.isEmpty()) {
 			planSelectorPharmacyepage.pharmacypageerror();
@@ -505,7 +528,8 @@ public class PlanRecommendationStepDefinitionMobile {
 	@And("^user select pharmacy option and Click previous button to check previous page$")
 	public void previous_pharmacy_page(DataTable givenAttributes) {
 		readfeaturedata(givenAttributes);
-		PlanRecommendationEnginePharmacyPageMobile planSelectorPharmacyepage = new PlanRecommendationEnginePharmacyPageMobile(wd);
+		PlanRecommendationEnginePharmacyPageMobile planSelectorPharmacyepage = new PlanRecommendationEnginePharmacyPageMobile(
+				wd);
 		planSelectorPharmacyepage.pharmacypagePreviousButton(inputValues.get("Pharmacy Type"));
 	}
 
@@ -514,7 +538,8 @@ public class PlanRecommendationStepDefinitionMobile {
 		readfeaturedata(givenAttributes);
 		PlanRecommendationEngineAdditionalServicesPageMobile planSelectorAdditionalpage = new PlanRecommendationEngineAdditionalServicesPageMobile(
 				wd);
-		PlanRecommendationEngineHeaderAndFooterMobile headerAndFooter = new PlanRecommendationEngineHeaderAndFooterMobile(wd);
+		PlanRecommendationEngineHeaderAndFooterMobile headerAndFooter = new PlanRecommendationEngineHeaderAndFooterMobile(
+				wd);
 		headerAndFooter.breadCrumbs();
 		planSelectorAdditionalpage.additionalpage(inputValues.get("Drug Selection"));
 	}
@@ -539,7 +564,8 @@ public class PlanRecommendationStepDefinitionMobile {
 	public void elements_costpreferences_page() {
 		PlanRecommendationEngineCostPreferencesPageMobile planSelectorPreferencespage = new PlanRecommendationEngineCostPreferencesPageMobile(
 				wd);
-		PlanRecommendationEngineHeaderAndFooterMobile headerAndFooter = new PlanRecommendationEngineHeaderAndFooterMobile(wd);
+		PlanRecommendationEngineHeaderAndFooterMobile headerAndFooter = new PlanRecommendationEngineHeaderAndFooterMobile(
+				wd);
 		headerAndFooter.breadCrumbs();
 		planSelectorPreferencespage.costpreferencepage();
 	}
@@ -565,8 +591,10 @@ public class PlanRecommendationStepDefinitionMobile {
 
 	@Then("^user validate elements in loading results page$")
 	public void elements_results_page() {
-		PlanRecommendationEngineResultsPageMobile planSelectorResultspage = new PlanRecommendationEngineResultsPageMobile(wd);
-		PlanRecommendationEngineHeaderAndFooterMobile headerAndFooter = new PlanRecommendationEngineHeaderAndFooterMobile(wd);
+		PlanRecommendationEngineResultsPageMobile planSelectorResultspage = new PlanRecommendationEngineResultsPageMobile(
+				wd);
+		PlanRecommendationEngineHeaderAndFooterMobile headerAndFooter = new PlanRecommendationEngineHeaderAndFooterMobile(
+				wd);
 		headerAndFooter.breadCrumbs();
 		planSelectorResultspage.resultsloadingpage();
 	}
@@ -574,7 +602,8 @@ public class PlanRecommendationStepDefinitionMobile {
 	@Then("^user validate recommendations in results page$")
 	public void view_recommendations_results_page(DataTable givenAttributes) {
 		readfeaturedata(givenAttributes);
-		PlanRecommendationEngineResultsPageMobile planSelectorResultspage = new PlanRecommendationEngineResultsPageMobile(wd);
+		PlanRecommendationEngineResultsPageMobile planSelectorResultspage = new PlanRecommendationEngineResultsPageMobile(
+				wd);
 		String zip = inputValues.get("Zip Code");
 		String county = inputValues.get("County Name");
 		String r1 = inputValues.get("1st Recommendation");
@@ -586,7 +615,8 @@ public class PlanRecommendationStepDefinitionMobile {
 	@Then("^user validate tie recommendations in results page$")
 	public void view_tie_recommendations_results_page(DataTable givenAttributes) {
 		readfeaturedata(givenAttributes);
-		PlanRecommendationEngineResultsPageMobile planSelectorResultspage = new PlanRecommendationEngineResultsPageMobile(wd);
+		PlanRecommendationEngineResultsPageMobile planSelectorResultspage = new PlanRecommendationEngineResultsPageMobile(
+				wd);
 		String zip = inputValues.get("Zip Code");
 		String county = inputValues.get("County Name");
 		String r1 = inputValues.get("1st Recommendation");
@@ -597,39 +627,45 @@ public class PlanRecommendationStepDefinitionMobile {
 
 	@Then("^user validate drugs details from PRE to VPP page$")
 	public void view_drugs_PRE_VPP_page() {
-		PlanRecommendationEngineResultsPageMobile planSelectorResultspage = new PlanRecommendationEngineResultsPageMobile(wd);
+		PlanRecommendationEngineResultsPageMobile planSelectorResultspage = new PlanRecommendationEngineResultsPageMobile(
+				wd);
 		planSelectorResultspage.drugsDetailsPREtoVPP();
 	}
 
 	@Then("^user validate removed drugs details updated from VPP to PRE page$")
 	public void view_removed_drugs_VPP_PRE_page() {
-		PlanRecommendationEngineResultsPageMobile planSelectorResultspage = new PlanRecommendationEngineResultsPageMobile(wd);
+		PlanRecommendationEngineResultsPageMobile planSelectorResultspage = new PlanRecommendationEngineResultsPageMobile(
+				wd);
 		planSelectorResultspage.removedDrugsDetailsVPPtoPRE();
 	}
 
 	@Then("^user navigate to PRE using StartNow button and verify drugs details in PRE page$")
 	public void startnow_PRE_page() {
-		PlanRecommendationEngineResultsPageMobile planSelectorResultspage = new PlanRecommendationEngineResultsPageMobile(wd);
+		PlanRecommendationEngineResultsPageMobile planSelectorResultspage = new PlanRecommendationEngineResultsPageMobile(
+				wd);
 		planSelectorResultspage.startnowtilldrugs();
 	}
 
 	@Then("^user proceed page navigation till VPP page after Start Now button$")
 	public void view_VPP_StartNow_page(DataTable givenAttributes) {
 		readfeaturedata(givenAttributes);
-		PlanRecommendationEngineResultsPageMobile planSelectorResultspage = new PlanRecommendationEngineResultsPageMobile(wd);
+		PlanRecommendationEngineResultsPageMobile planSelectorResultspage = new PlanRecommendationEngineResultsPageMobile(
+				wd);
 		planSelectorResultspage.startNowFullFlow(inputValues.get("Plan Type"));
 	}
 
 	@Then("^user validate drugs details from DCE to VPP and PRE page$")
 	public void drugs_DCE_VPP_PRE_page() {
-		PlanRecommendationEngineResultsPageMobile planSelectorResultspage = new PlanRecommendationEngineResultsPageMobile(wd);
+		PlanRecommendationEngineResultsPageMobile planSelectorResultspage = new PlanRecommendationEngineResultsPageMobile(
+				wd);
 		planSelectorResultspage.DrugsDetailsVPPtoPRE();
 	}
 
 	@And("^user navigates to vpp summary page$")
 	public void navigate_vpp_summary_page(DataTable givenAttributes) {
 		readfeaturedata(givenAttributes);
-		PlanRecommendationEngineResultsPageMobile planSelectorResultspage = new PlanRecommendationEngineResultsPageMobile(wd);
+		PlanRecommendationEngineResultsPageMobile planSelectorResultspage = new PlanRecommendationEngineResultsPageMobile(
+				wd);
 		String zip = inputValues.get("Zip Code");
 		planSelectorResultspage.navigateVPP(zip);
 		checkpopup();
@@ -638,7 +674,8 @@ public class PlanRecommendationStepDefinitionMobile {
 	@Then("^user adds Doctors in vpp summary page$")
 	public void add_providers_vpp_summary_page(DataTable givenAttributes) {
 		readfeaturedata(givenAttributes);
-		PlanRecommendationEngineResultsPageMobile planSelectorResultspage = new PlanRecommendationEngineResultsPageMobile(wd);
+		PlanRecommendationEngineResultsPageMobile planSelectorResultspage = new PlanRecommendationEngineResultsPageMobile(
+				wd);
 		checkpopup();
 		planSelectorResultspage.addProviderVPP(inputValues.get("Doctors Search Text"), inputValues.get("Multi Doctor"));
 		planSelectorResultspage.vppToPre();
@@ -646,14 +683,16 @@ public class PlanRecommendationStepDefinitionMobile {
 
 	@Then("^user navigate Doctors lookup session in Doctors page$")
 	public void navigate_doctors_lookup_session() {
-		PlanRecommendationEngineDoctorsPageMobile planSelectorDoctorspage = new PlanRecommendationEngineDoctorsPageMobile(wd);
+		PlanRecommendationEngineDoctorsPageMobile planSelectorDoctorspage = new PlanRecommendationEngineDoctorsPageMobile(
+				wd);
 		planSelectorDoctorspage.navigateDoctorsmodalsession();
 	}
 
 	@And("^user verifies doctors session in Doctors page$")
 	public void verify_doctors_session_doctors_page(DataTable givenAttributes) {
 		readfeaturedata(givenAttributes);
-		PlanRecommendationEngineResultsPageMobile planSelectorResultspage = new PlanRecommendationEngineResultsPageMobile(wd);
+		PlanRecommendationEngineResultsPageMobile planSelectorResultspage = new PlanRecommendationEngineResultsPageMobile(
+				wd);
 		String multiDoctor = inputValues.get("Multi Doctor");
 		planSelectorResultspage.getProvidersPRE(multiDoctor);
 		planSelectorResultspage.verifyProvidersSession(multiDoctor);
@@ -661,7 +700,8 @@ public class PlanRecommendationStepDefinitionMobile {
 
 	@When("^user navigates to Zip Code page from vpp plans$")
 	public void user_navigates_to_zipcode_page_fromvpp_pdp() {
-		PlanRecommendationEngineResultsPageMobile planSelectorResultspage = new PlanRecommendationEngineResultsPageMobile(wd);
+		PlanRecommendationEngineResultsPageMobile planSelectorResultspage = new PlanRecommendationEngineResultsPageMobile(
+				wd);
 		planSelectorResultspage.vppToPre();
 		PlanRecommendationEngineLandingAndZipcodeMobilePages planSelectorhomepage = new PlanRecommendationEngineLandingAndZipcodeMobilePages(
 				wd);
@@ -679,7 +719,8 @@ public class PlanRecommendationStepDefinitionMobile {
 	@And("^user verifies Start Over doctors session in Doctors page$")
 	public void verify_StartOver_doctors_session_doctors_page(DataTable givenAttributes) {
 		readfeaturedata(givenAttributes);
-		PlanRecommendationEngineResultsPageMobile planSelectorResultspage = new PlanRecommendationEngineResultsPageMobile(wd);
+		PlanRecommendationEngineResultsPageMobile planSelectorResultspage = new PlanRecommendationEngineResultsPageMobile(
+				wd);
 		String multiDoctor = inputValues.get("Multi Doctor");
 		planSelectorResultspage.getProvidersPRE(multiDoctor);
 		planSelectorResultspage.verifyDoctorsSession(multiDoctor);
@@ -688,21 +729,24 @@ public class PlanRecommendationStepDefinitionMobile {
 	@Then("^user adds Providers in Doctors page$")
 	public void add_doctors_page(DataTable givenAttributes) {
 		readfeaturedata(givenAttributes);
-		PlanRecommendationEngineDoctorsPageMobile planSelectorDoctorspage = new PlanRecommendationEngineDoctorsPageMobile(wd);
+		PlanRecommendationEngineDoctorsPageMobile planSelectorDoctorspage = new PlanRecommendationEngineDoctorsPageMobile(
+				wd);
 		planSelectorDoctorspage.addProvidersPRE(inputValues.get("Doctors Search Text"),
 				inputValues.get("Multi Doctor"));
 	}
 
 	@And("^user verifies doctors session in VPP page$")
 	public void verify_doctors_session_vpp_page() {
-		PlanRecommendationEngineResultsPageMobile planSelectorResultspage = new PlanRecommendationEngineResultsPageMobile(wd);
+		PlanRecommendationEngineResultsPageMobile planSelectorResultspage = new PlanRecommendationEngineResultsPageMobile(
+				wd);
 		planSelectorResultspage.verifyProviderPREVPP();
 	}
 
 	@Then("^user edits Doctors in Doctors page$")
 	public void edit_doctors_page(DataTable givenAttributes) {
 		readfeaturedata(givenAttributes);
-		PlanRecommendationEngineDoctorsPageMobile planSelectorDoctorspage = new PlanRecommendationEngineDoctorsPageMobile(wd);
+		PlanRecommendationEngineDoctorsPageMobile planSelectorDoctorspage = new PlanRecommendationEngineDoctorsPageMobile(
+				wd);
 		planSelectorDoctorspage.editProvider(inputValues.get("Doctors Search Text1"), inputValues.get("Multi Doctor1"),
 				inputValues.get("Doctors Search Text2"), inputValues.get("Multi Doctor2"));
 	}
@@ -710,7 +754,8 @@ public class PlanRecommendationStepDefinitionMobile {
 	@Then("^user navigates to VPP Summary Page$")
 	public void startNow_vpp_summary_page(DataTable givenAttributes) {
 		readfeaturedata(givenAttributes);
-		PlanRecommendationEngineResultsPageMobile planSelectorResultspage = new PlanRecommendationEngineResultsPageMobile(wd);
+		PlanRecommendationEngineResultsPageMobile planSelectorResultspage = new PlanRecommendationEngineResultsPageMobile(
+				wd);
 		String zip = inputValues.get("Zip Code");
 		String county = inputValues.get("County Name");
 		String isMultiCounty = inputValues.get("Is Multi County");
@@ -720,7 +765,8 @@ public class PlanRecommendationStepDefinitionMobile {
 	@Then("^user validate zipcode and County in location page using StartNow$")
 	public void zipcode_location_page(DataTable givenAttributes) {
 		readfeaturedata(givenAttributes);
-		PlanRecommendationEngineResultsPageMobile planSelectorResultspage = new PlanRecommendationEngineResultsPageMobile(wd);
+		PlanRecommendationEngineResultsPageMobile planSelectorResultspage = new PlanRecommendationEngineResultsPageMobile(
+				wd);
 		String zip = inputValues.get("Zip Code");
 		String county = inputValues.get("County Name");
 		String isMultiCounty = inputValues.get("Is Multi County");
@@ -731,8 +777,10 @@ public class PlanRecommendationStepDefinitionMobile {
 	@Then("^user navigate to PRE and validate zipcode using Start Over$")
 	public void zipcode_Doc_Drug_pre(DataTable givenAttributes) {
 		readfeaturedata(givenAttributes);
-		PlanRecommendationEngineResultsPageMobile planSelectorResultspage = new PlanRecommendationEngineResultsPageMobile(wd);
-		PlanRecommendationEngineDoctorsPageMobile planSelectorDoctorspage = new PlanRecommendationEngineDoctorsPageMobile(wd);
+		PlanRecommendationEngineResultsPageMobile planSelectorResultspage = new PlanRecommendationEngineResultsPageMobile(
+				wd);
+		PlanRecommendationEngineDoctorsPageMobile planSelectorDoctorspage = new PlanRecommendationEngineDoctorsPageMobile(
+				wd);
 		String zip = inputValues.get("Zip Code");
 		String county = inputValues.get("County Name");
 		String isMultiCounty = inputValues.get("Is Multi County");
@@ -743,7 +791,8 @@ public class PlanRecommendationStepDefinitionMobile {
 	@Then("^user validate recommendation rankings in results page$")
 	public void verify_rankings_results_page(DataTable givenAttributes) {
 		readfeaturedata(givenAttributes);
-		PlanRecommendationEngineResultsPageMobile planSelectorResultspage = new PlanRecommendationEngineResultsPageMobile(wd);
+		PlanRecommendationEngineResultsPageMobile planSelectorResultspage = new PlanRecommendationEngineResultsPageMobile(
+				wd);
 		String recom = inputValues.get("Recommendation");
 		String plansorder = inputValues.get("Ranking plans Order");
 		planSelectorResultspage.validateRankingPlans(recom, plansorder);
@@ -758,7 +807,8 @@ public class PlanRecommendationStepDefinitionMobile {
 	@And("^user verifies existing PRE provider session using startnow$")
 	public void verify_exisitng_pre_doctors_session_doctors_startnow_page(DataTable givenAttributes) {
 		readfeaturedata(givenAttributes);
-		PlanRecommendationEngineDoctorsPageMobile planSelectorDoctorspage = new PlanRecommendationEngineDoctorsPageMobile(wd);
+		PlanRecommendationEngineDoctorsPageMobile planSelectorDoctorspage = new PlanRecommendationEngineDoctorsPageMobile(
+				wd);
 		String multiDoctor = inputValues.get("Multi Doctor");
 		planSelectorDoctorspage.verifyExisitngPREDoclist(multiDoctor);
 		planSelectorDoctorspage.nextPageNameValidationDoctor();
@@ -777,27 +827,31 @@ public class PlanRecommendationStepDefinitionMobile {
 		readfeaturedata(givenAttributes);
 		String recom = inputValues.get("Recommendation");
 		String email = inputValues.get("EmailID");
-		PlanRecommendationEngineResultsPageMobile planSelectorResultspage = new PlanRecommendationEngineResultsPageMobile(wd);
+		PlanRecommendationEngineResultsPageMobile planSelectorResultspage = new PlanRecommendationEngineResultsPageMobile(
+				wd);
 		planSelectorResultspage.sendEmail(recom, email);
 	}
 
 	@Then("^user selects Doctors in Doctors page and validate next page name$")
 	public void select_doctors_next_page_name() {
-		PlanRecommendationEngineDoctorsPageMobile planSelectorDoctorspage = new PlanRecommendationEngineDoctorsPageMobile(wd);
+		PlanRecommendationEngineDoctorsPageMobile planSelectorDoctorspage = new PlanRecommendationEngineDoctorsPageMobile(
+				wd);
 		planSelectorDoctorspage.navigateDoctorsmodalsession();
 	}
 
 	@Then("^user validate UI and API recommendation rankings in results page$")
 	public void verify_UI_API_rankings_results_page() {
 		checkpopup();
-		PlanRecommendationEngineResultsPageMobile planSelectorResultspage = new PlanRecommendationEngineResultsPageMobile(wd);
+		PlanRecommendationEngineResultsPageMobile planSelectorResultspage = new PlanRecommendationEngineResultsPageMobile(
+				wd);
 		planSelectorResultspage.validateUIAPIRecommendations();
 		planSelectorResultspage.validateUIAPIRankingPlans();
 	}
 
 	@Then("^user verifies \"([^\"]*)\" page$")
 	public void verify_vpp_summary_page_mobile(String VPP) {
-		PlanRecommendationEngineResultsPageMobile planSelectorResultspage = new PlanRecommendationEngineResultsPageMobile(wd);
+		PlanRecommendationEngineResultsPageMobile planSelectorResultspage = new PlanRecommendationEngineResultsPageMobile(
+				wd);
 		if (VPP.toUpperCase().contains("PRE"))
 			planSelectorResultspage.checkVPP(true);
 		else
@@ -807,28 +861,32 @@ public class PlanRecommendationStepDefinitionMobile {
 	@Then("^user validate MA Plan Names in VPP Summary VS Details in results page$")
 	public void verify_MA_Plan_names_results_page() {
 		checkpopup();
-		PlanRecommendationEngineResultsPageMobile planSelectorResultspage = new PlanRecommendationEngineResultsPageMobile(wd);
+		PlanRecommendationEngineResultsPageMobile planSelectorResultspage = new PlanRecommendationEngineResultsPageMobile(
+				wd);
 		planSelectorResultspage.validateMAPlanNamesSummaryAndDetails();
 	}
 
 	@Then("^user validate PDP Plan Names in VPP Summary VS Details in results page$")
 	public void verify_PDP_Plan_names_results_page() {
 		checkpopup();
-		PlanRecommendationEngineResultsPageMobile planSelectorResultspage = new PlanRecommendationEngineResultsPageMobile(wd);
+		PlanRecommendationEngineResultsPageMobile planSelectorResultspage = new PlanRecommendationEngineResultsPageMobile(
+				wd);
 		planSelectorResultspage.validatePDPPlanNamesSummaryAndDetails();
 	}
 
 	@Then("^user validate SNP Plan Names in VPP Summary VS Details in results page$")
 	public void verify_SNP_Plan_names_results_page() {
 		checkpopup();
-		PlanRecommendationEngineResultsPageMobile planSelectorResultspage = new PlanRecommendationEngineResultsPageMobile(wd);
+		PlanRecommendationEngineResultsPageMobile planSelectorResultspage = new PlanRecommendationEngineResultsPageMobile(
+				wd);
 		planSelectorResultspage.validateSNPPlanNamesSummaryAndDetails();
 	}
 
 	@Then("^user adds Drugs in vpp summary page$")
 	public void add_drugs_vpp_summary_page(DataTable givenAttributes) {
 		readfeaturedata(givenAttributes);
-		PlanRecommendationEngineResultsPageMobile planSelectorResultspage = new PlanRecommendationEngineResultsPageMobile(wd);
+		PlanRecommendationEngineResultsPageMobile planSelectorResultspage = new PlanRecommendationEngineResultsPageMobile(
+				wd);
 		checkpopup();
 		planSelectorResultspage.useraddDrugsVPP(inputValues.get("Drug Details"));
 	}
@@ -836,7 +894,8 @@ public class PlanRecommendationStepDefinitionMobile {
 	@Then("^user validate future vs current UI and API recommendation rankings in results page$")
 	public void verify_Future_UI_API_rankings_results_page() {
 		checkpopup();
-		PlanRecommendationEngineResultsPageMobile planSelectorResultspage = new PlanRecommendationEngineResultsPageMobile(wd);
+		PlanRecommendationEngineResultsPageMobile planSelectorResultspage = new PlanRecommendationEngineResultsPageMobile(
+				wd);
 		planSelectorResultspage.checkPlanyear("future");
 		planSelectorResultspage.validateUIAPIRecommendations();
 		planSelectorResultspage.validateUIAPIRankingPlans();

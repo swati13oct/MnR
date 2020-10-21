@@ -479,7 +479,7 @@ public class PlanRecommendationEngineHeaderAndFooterMobile extends UhcDriver {
 	// PRE BreadCrumbs in Header
 
 	public void breadCrumbs() {
-		MobileMenu();
+		
 		String preBreadcrumbs = (driver.findElement(By.cssSelector("div.breadcrumb"))).getText();
 		Assert.assertTrue(preBreadcrumbs.contains("Home / Plan Recommendation Engine"));
 		System.out.println(preBreadcrumbs);

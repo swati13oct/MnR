@@ -184,12 +184,12 @@ public class PlanRecommendationEngineLandingAndZipcodeMobilePages extends UhcDri
 		// switchToNewIframe(iframePst);
 		// waitTillElementClickableInTime(getStartedBtn, 30);
 		//AcquisitionHomePage.clickIfElementPresentInTime(driver, proactiveChatExitBtn,5);
-		waitTillElementClickableInTime(getStartedBtn, 45);
-		waitTillElementClickableInTime(getStartedBtn1, 45);
-		System.out.println("Before clicking GetStarted");
-		threadsleep(5000);
-		jsClickNew(getStartedBtn);
-		System.out.println("After clicking GetStarted");
+//		waitTillElementClickableInTime(getStartedBtn, 45);
+//		waitTillElementClickableInTime(getStartedBtn1, 45);
+//		System.out.println("Before clicking GetStarted");
+//		threadsleep(5000);
+//		jsClickNew(getStartedBtn);
+//		System.out.println("After clicking GetStarted");
 		zipcodePage();
 		waitforElementVisibilityInTime(zipCode, 45);
 		sendkeys(zipCode, zipcode);

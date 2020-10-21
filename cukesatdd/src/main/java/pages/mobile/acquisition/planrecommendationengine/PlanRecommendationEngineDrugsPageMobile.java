@@ -337,7 +337,8 @@ public class PlanRecommendationEngineDrugsPageMobile extends UhcDriver {
 	public void continueNextpageZeroDrug() {
 		validate(drugsearchBox, 30);
 		threadsleep(2000);
-		continueBtn.click();
+		jsClickNew(continueBtn);
+		//continueBtn.click();
 		System.out.println("Validating " + page + " page Continue button functionality");
 		desktopCommonUtils.nextPageValidation(page.toUpperCase() + "skip");
 	}

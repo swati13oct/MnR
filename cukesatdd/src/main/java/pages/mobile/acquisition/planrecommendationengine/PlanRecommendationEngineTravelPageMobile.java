@@ -136,19 +136,23 @@ public class PlanRecommendationEngineTravelPageMobile extends UhcDriver {
 			System.out.println("SNP Option "+TravelType+ " Selection");
 			if (TravelType.equalsIgnoreCase("withinUS")) {
 				validate(travelWithin);
-				travelWithin.click();
+				jsClickNew(travelWithin);
+				//travelWithin.click();
 				System.out.println("Plan Type "+TravelType +" Clicked");
 			}else if (TravelType.equalsIgnoreCase("outsideUS")) {
 				validate(travelAnotherpart);
-				travelAnotherpart.click();
+				jsClickNew(travelAnotherpart);
+				//travelAnotherpart.click();
 				System.out.println("Plan Type "+TravelType +" Clicked");
 			}else if (TravelType.equalsIgnoreCase("regular")) {
 				validate(travelPrimary);
-				travelPrimary.click();
+				jsClickNew(travelPrimary);
+				//travelPrimary.click();
 				System.out.println("Plan Type "+TravelType +" Clicked");
 			}else if (TravelType.equalsIgnoreCase("None")) {
 				validate(travelNone);
-				travelNone.click();
+				jsClickNew(travelNone);
+				//travelNone.click();
 				System.out.println("Plan Type "+TravelType +" Clicked");
 			}			
 			

@@ -275,7 +275,10 @@ public class PlanRecommendationEngineResultsPageMobile extends UhcDriver {
 	@FindBy(css = "#plan-list-1 div.module-plan-overview:nth-child(1) .drugs-list div[class*='drug-info-container']")
 	private  List<WebElement> DrugsNames;
 	
-	@FindBy(css = "a#selector")
+//	@FindBy(css = "a#selector")
+//	private  WebElement StartNowButton;
+	
+	@FindBy(xpath = "//button[text()='Get Started']")
 	private  WebElement StartNowButton;
 
 // Start Over Popup
@@ -552,10 +555,12 @@ public class PlanRecommendationEngineResultsPageMobile extends UhcDriver {
 		
 		public void navigateVPP(String zip) {
 			validate(headerNavigationBarHomeTab,20);
-			headerNavigationBarHomeTab.click();
+			jsClickNew(headerNavigationBarHomeTab);
+			//headerNavigationBarHomeTab.click();
 			validate(homePageZiptxt,60);
 			homePageZiptxt.sendKeys(zip);
-			homePageFindPlans.click();
+			//homePageFindPlans.click();
+			jsClickNew(homePageFindPlans);
 			validate(planZipInfo, 60);
 			waitforElementInvisibilityInTime(planLoaderscreen,60);
 			threadsleep(5000);// Plan loader
@@ -641,7 +646,8 @@ public class PlanRecommendationEngineResultsPageMobile extends UhcDriver {
 				validate(coveredIcon,20);
 			}
 			Collections.sort(DrugsList);
-			drugCoveredeVPP.click();
+			//drugCoveredeVPP.click();
+			jsClickNew(drugCoveredeVPP);
 			System.out.println("DrugsList Size is : "+DrugsList.size());
 			System.out.println("DrugList Content is : "+DrugsList);
 			return DrugsList;
@@ -649,7 +655,8 @@ public class PlanRecommendationEngineResultsPageMobile extends UhcDriver {
 		
 		public void drugcoveredsession() {
 			drugCoveredeVPP = MA1stPlanList.get(0).findElement(By.cssSelector("a[class*='drug-list-toggle']"));
-			drugCoveredeVPP.click();
+			//drugCoveredeVPP.click();
+			jsClickNew(drugCoveredeVPP);
 		}
 		
 		public void verifyConfirmationmodalResults(int count,ArrayList<String> drug,ArrayList<String> drugListVPP) {
@@ -686,8 +693,10 @@ public class PlanRecommendationEngineResultsPageMobile extends UhcDriver {
 		
 	public void vppToPre() {
 		System.out.println("Validating VPP to PRE Page");
+		MobileMenu();
 		validate(StartNowButton,20);
-		StartNowButton.click();
+		//StartNowButton.click();
+		jsClickNew(StartNowButton);
 		pageloadcomplete();
 	}
 	
@@ -1332,7 +1341,8 @@ public void browserBack() {
 public void useraddDrugsVPP(String drugDetails) {
 	threadsleep(10000);
 	validate(enterDrugsInfoMA1stPlan, 60);
-	enterDrugsInfoMA1stPlan.click();
+	//enterDrugsInfoMA1stPlan.click();
+	jsClickNew(enterDrugsInfoMA1stPlan);
 	ACQDrugCostEstimatorPage dce = new ACQDrugCostEstimatorPage(driver);
 	dce.drugsHandlerWithdetails(drugDetails);
 	dce.getDrugsDCE();
