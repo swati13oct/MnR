@@ -76,10 +76,10 @@ Feature: 1.11 Member Pharmacy Locator tool Page
 	  | Plan Type     | <planType>     |
 	  | Member Type   | <memberType>   |
 	When the user navigates to pharmacy search page
-    Then I can validate the segment ID value in localStorage for pharmacy locator page
-      | Plan Type   | <planType>   |
-      | Member Type | <memberType> |
-      | Segment ID  | <segmentId>  |
+  #Then I can validate the segment ID value in localStorage for pharmacy locator page
+      #| Plan Type   | <planType>   |
+     # | Member Type | <memberType> |
+     # | Segment ID  | <segmentId>  |
     #------ English -----------------------------------
 	And the user validates header section content
 	  | Member Type   | <memberType>   |
