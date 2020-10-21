@@ -46,6 +46,9 @@ public class ComparePlansPage extends UhcDriver {
 	@FindBy(id = "backtoplansummarypage")
 	private WebElement backToAllPlansLink;
 	
+	@FindBy(id = "backtoprofilepage")
+	private WebElement backToProfilePageLink;
+	
 	@FindBy(xpath=".//*[@id='printComparison']")
 	private WebElement validateprintbutton;
 	
@@ -262,10 +265,10 @@ public class ComparePlansPage extends UhcDriver {
 
 	@Override
 	public void openAndValidate() {
-		checkModelPopup(driver,20);
-		validateNew(backToAllPlansLink);
+		validateNew(backToProfilePageLink);
 		validateNew(validateprintbutton);
 		validateNew(validateemailbutton);
+		checkModelPopup(driver,20);
 	}
 	
 	public VPPPlanSummaryPage backToVPPPage(){
@@ -489,7 +492,7 @@ public class ComparePlansPage extends UhcDriver {
 	}
 	
 	public void validatePlansAddedonPlancompareforVisitorProfile() {
-		List<WebElement> allMAPlans = driver.findElements(By.xpath("//*[@class='planNameVisibility']//h3"));
+		List<WebElement> allMAPlans = driver.findElements(By.xpath("//button[contains(@dtmname,'Plan Compare:Remove')]/preceding-sibling::div"));
 		int plansForCompare = allMAPlans.size();
 		if (plansForCompare == 2) {
 			Assert.assertTrue(true);
