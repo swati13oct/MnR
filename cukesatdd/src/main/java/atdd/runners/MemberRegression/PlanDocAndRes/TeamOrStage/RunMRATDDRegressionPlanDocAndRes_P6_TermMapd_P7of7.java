@@ -19,6 +19,6 @@ jsonReport = "target/cucumber-RunMRATDDRegressionPlanDocAndRes_P6_TermMapd_P7of7
 overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionPlanDocAndRes_P6_TermMapd_P7of7")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberredesign" },
 features = { "src/main/resources/feature/memberredesign/planDocumentsAndResources" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionPlanDocAndRes_P6_TermMapd_P7of7.json" }, tags = { "@pra" })
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionPlanDocAndRes_P6_TermMapd_P7of7.json" }, tags = { "@planAndDocuments06_7of7","@terminated_mapd_7of7" })
 public class RunMRATDDRegressionPlanDocAndRes_P6_TermMapd_P7of7 {
 }
