@@ -347,7 +347,7 @@ public class PlanRecommendationEngineDoctorsPage extends UhcDriver {
 	public void verifyConfirmationmodalResults(int count, ArrayList<String> werally, ArrayList<String> confirm) {
 
 		if (werally.size() == confirm.size() && count == werally.size()) {
-			if (equalsname(werally, confirm)) {
+			if (containsname(werally, confirm)) {
 				System.out.println("Werally and Modal Result's Content matched");
 			} else {
 				System.out.println("Werally and Modal Result's Content mismatch");
@@ -377,6 +377,27 @@ public class PlanRecommendationEngineDoctorsPage extends UhcDriver {
 			}
 		}
 		System.out.println("Doctors Name validation Result " + result);
+		return result;
+	}
+
+	public boolean containsname(ArrayList<String> werallypreproviders, ArrayList<String> vppprovider) {
+		boolean result = true;
+		for (int i = 0; i < werallypreproviders.size(); i++) {
+			String wname[] = werallypreproviders.get(i).replace(",", "").replace(".", "").split(" ");
+			List<String> wnam = Arrays.asList(wname);
+			for (int j = 0; j < vppprovider.size(); j++) {
+				String dname[] = vppprovider.get(j).replace(",", "").replace(".", "").replace("\n", " ").split(" ");
+				List<String> dnam = Arrays.asList(dname);
+				if (wnam.containsAll(dnam) || dnam.containsAll(wnam)) {
+					result = true;
+					break;
+				} else {
+					result = false;
+				}
+			}
+		}
+		System.out.println("Doctors Name validation Result " + result);
+		Assert.assertTrue(result,"Providers name mismatch");
 		return result;
 	}
 
