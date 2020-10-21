@@ -47,7 +47,7 @@ Feature: 1.07.1 Member DCE Page - Member Auth - PROD
 
     Examples: 
       | TID   | username | password | MemUserName         | planType | memberType |drug1   | dosage1          | quantity1 | frequency1  |
-      | 15325 | kkumard | mnrs786@ | skho@roadrunner.com | MAPD     | MAPD_DCE   |Lipitor | Lipitor TAB 10MG |        31 | Every 1 month |
+      | 15325 | kkumard | mnrs786@ | LMHOCHSCHILD11 | MAPD     | MAPD_DCE   |Lipitor | Lipitor TAB 10MG |        31 | Every 1 month |
   
    @drugCostEstimator3 @prod @prod_dce_p2
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Pharmacy saver results
@@ -74,9 +74,9 @@ Feature: 1.07.1 Member DCE Page - Member Auth - PROD
     
     Examples: 
       | TID   | username | password | MemUserName | planType| memberType| zipcode| radius  | pharmacytype |
-      | 15325 | kkumard | mnrs786@ | SWISSCHARD26| MAPD    | MAPD_DCE  | 92260  | 25 miles| Pharmacy Saver|
+      | 15325 | kkumard | mnrs786@ | LMHOCHSCHILD11| MAPD    | MAPD_DCE  | 60081  | 25 miles| Pharmacy Saver|
   #   | 15325 | kkumard | mnrs786@ | BATLLOT@AOL.COM| PCP  | PCP_DCE  | 06450  | 25 miles| Pharmacy Saver|
-      | 15325 | kkumard | mnrs786@ | SUSICHAPMAN@GMAIL.COM | Medica | Medica_DCE  | 33155  | 25 miles| Pharmacy Saver|
+      | 15325 | kkumard | mnrs786@ | SUSICHAPMAN@GMAIL.COM | Medica | Medica_DCE  | 33174  | 10 miles| Pharmacy Saver|
       
    @prod_sanity_02
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Pharmacy saver results
@@ -102,8 +102,8 @@ Feature: 1.07.1 Member DCE Page - Member Auth - PROD
     
      Examples: 
       | TID   | username | password | MemUserName | planType| memberType| zipcode| radius  | pharmacytype |
-      | 15325 | kkumard | mnrs786@  | SWISSCHARD26| MAPD    | MAPD_DCE  | 92260  | 25 miles| Pharmacy Saver|
-      | 15325 | kkumard | mnrs786@  | SUSICHAPMAN@GMAIL.COM| Medica  | Medica_DCE  | 33155  | 25 miles| Pharmacy Saver|
+      | 15325 | kkumard | mnrs786@  | LMHOCHSCHILD11| MAPD    | MAPD_DCE  | 60081  | 25 miles| Pharmacy Saver|
+      | 15325 | kkumard | mnrs786@  | SUSICHAPMAN@GMAIL.COM| Medica  | Medica_DCE  | 33174  | 25 miles| Pharmacy Saver|
 
   @drugCostEstimator6  @Member_DCE_sso
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> -I1.3 To Verify MR portal group members DCE should redirect to optum rx sso landing page.
@@ -143,4 +143,4 @@ Feature: 1.07.1 Member DCE Page - Member Auth - PROD
   Then I will verify the Formulary pdf link
   Examples: 
       | username | password | MemUserName        | planType | memberType | drug   | dosage         | quantity | frequency     | Medicine | dose                 |quantity2 | frequency2    |
-      | kkumard | mnrs786@ | skho@roadrunner.com| MAPD     |MAPD_DCE    | FANAPT | FANAPT TAB 1MG |       60 | Every 1 month | AIMOVIG  | AIMOVIG INJ 70MG/ML  |  1       | Every 1 month |
+      | kkumard | mnrs786@ | LMHOCHSCHILD11      | MAPD     |MAPD_DCE    | FANAPT | FANAPT TAB 1MG |       60 | Every 1 month | AIMOVIG  | AIMOVIG INJ 70MG/ML  |  1       | Every 1 month |
