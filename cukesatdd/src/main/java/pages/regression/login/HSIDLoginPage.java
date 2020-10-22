@@ -133,7 +133,7 @@ public class HSIDLoginPage extends UhcDriver {
 	@FindBy(xpath="//img[@class='header__logo img_responsive']")
 	protected WebElement logoOnLoginPage;
 	
-	@FindBy(xpath="//button[contains(text(),'Sign In')]")
+	@FindBy(xpath="//button[@id='submitBtn']")
 	protected WebElement signInButton;
 	
 

@@ -9,8 +9,8 @@ Feature: 1.06.7 Member Guest Payments Page - Member Auth - PROD
     Then I validate all the header and page elements
     When I click on link Help me find my id link
     Then I click on the sign in link and navigate to Member Portal sign in page
-    #Then I will see the Logo specific to my plan and the Sign in button
-          #  | Site Name | <siteName> |
+    Then I will see the Logo specific to my plan and the Sign in button
+           | Site Name | <siteName> |
 
     Examples:
       | TID   | planType | siteName    |
