@@ -376,9 +376,15 @@ Feature: 1.08. ACQ- Visitor profile AARP
       | Drugname | <drug1> |
     And user delets all the added drugs on visitor profile page
 
+		@VisitorProfile_AARP
+    Examples: 
+      |	site	| state   | userName 	 | password  | drug1   | zipCode |
+      |	AARP	| Alabama | mnrqavd3	 | Password@1| Lipitor |   90210 |
+      
+    @VisitorProfile_UHC
     Examples: 
       |	site	| state   | userName  | password  | drug1   | zipCode |
-      |	AARP	| Alabama | mnrqavd3 | Password@1| Lipitor |   90210 |
+      |	UHC		| Alabama | mnrqavd3 	| Password@1| Lipitor |   90210 |
 
   @providerFlowAuthenticated
   Scenario Outline: Verify Provider Search functional flow for authenticated Visitor Profile page
@@ -401,6 +407,12 @@ Feature: 1.08. ACQ- Visitor profile AARP
       | PlanName | <planname> |
     And user delets all the added providers on visitor profile page of AARP site
 
+		@VisitorProfile_AARP
+    Examples: 
+      | zipcode | isMultutiCounty | county          | userName  | password  | plantype | planname                             | testPlans                                                                 |
+      |   10001 | NO              | New York County | mnrqavd3 | Password@1| MAPD     | AARP Medicare Advantage Plan 2 (HMO) | AARP Medicare Advantage Plan 1 (HMO),AARP Medicare Advantage Plan 2 (HMO) |
+      
+   	@VisitorProfile_UHC
     Examples: 
       | zipcode | isMultutiCounty | county          | userName  | password  | plantype | planname                             | testPlans                                                                 |
       |   10001 | NO              | New York County | mnrqavd3 | Password@1| MAPD     | AARP Medicare Advantage Plan 2 (HMO) | AARP Medicare Advantage Plan 1 (HMO),AARP Medicare Advantage Plan 2 (HMO) |
@@ -432,9 +444,9 @@ Feature: 1.08. ACQ- Visitor profile AARP
 		@VisitorProfile_AARP
     Examples: 
       |	site	| state   | UID       | zipcode | isMultiCounty | county           | plantype |	planyear	| testPlans                                                                                                                                                                                                                                                        |
-      |	AARP	| Alabama | US1770330 |   90210 | NO            | Jefferson County | MAPD     |	current		| AARP Medicare Advantage SecureHorizons Focus (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO),AARP Medicare Advantage SecureHorizons Plan 2 (HMO),AARP Medicare Advantage SecureHorizons Premier (HMO),AARP Medicare Advantage SecureHorizons Essential (HMO),UnitedHealthcare Medicare Advantage Assure (HMO) |
+      |	AARP	| Alabama | US1770330 |   90210 | NO            | Jefferson County | MAPD     |	current		| AARP Medicare Advantage SecureHorizons Focus (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO),AARP Medicare Advantage SecureHorizons Plan 2 (HMO),AARP Medicare Advantage SecureHorizons Premier (HMO),UnitedHealthcare Medicare Advantage Assure (HMO) |
       
    @VisitorProfile_UHC
     Examples: 
       |	site	| state   | UID       | zipcode | isMultiCounty | county           | plantype |	planyear	| testPlans                                                                                                                                                                                                                                                        |
-      |	UHC		| Alabama | US1770330 |   90210 | NO            | Jefferson County | MAPD     |	current		| AARP Medicare Advantage SecureHorizons Focus (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO),AARP Medicare Advantage SecureHorizons Plan 2 (HMO),AARP Medicare Advantage SecureHorizons Premier (HMO),AARP Medicare Advantage SecureHorizons Essential (HMO),UnitedHealthcare Medicare Advantage Assure (HMO) |
+      |	UHC		| Alabama | US1770330 |   90210 | NO            | Jefferson County | MAPD     |	current		| AARP Medicare Advantage SecureHorizons Focus (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO),AARP Medicare Advantage SecureHorizons Plan 2 (HMO),AARP Medicare Advantage SecureHorizons Premier (HMO),UnitedHealthcare Medicare Advantage Assure (HMO) |
