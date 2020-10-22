@@ -224,13 +224,13 @@ public class PaymentHistoryPage extends UhcDriver {
 	@FindBy(xpath="//span[@class='payment-method-btn']//a[@class='btn btn--primary'][contains(text(),'Set Up Recurring Payments')]")
 	private WebElement SetUpAutomaticPaymentsButton;
 
-	@FindBy(xpath = "//span[@class='payment-method-btn']//a[@class='btn btn--primary'][contains(text(),'Set Up Recurring Payments')]")
+	@FindBy(xpath = "(//span[@class='payment-method-btn']//a[@class='btn btn--primary'][contains(text(),'Set Up Recurring Payments')])[1]")
 	private WebElement SetUpRecurringPaymentsButtonShip;
 
 	@FindBy(xpath = "//a[text()='Edit Automatic Payments']")
 	private WebElement EditAutomaticPaymentsButton;
 
-	@FindBy(xpath = "//span[@class='payment-method-btn']//a[@class='btn btn--primary ng-scope'][contains(text(),'Edit Recurring Payments')]")
+	@FindBy(xpath = "//span[@class='payment-method-btn']//a[@class='btn btn--primary ng-scope'][contains(text(),'Manage Payment Method')]")
 	private WebElement EditRecurringPaymentsButton;
 
 	@FindBy(xpath = "//h2[text()='Helpful Reminders']")
@@ -665,6 +665,9 @@ public class PaymentHistoryPage extends UhcDriver {
 	
 	@FindBy(xpath = "//*[@id='loadingpayment1']/img")
 	private WebElement paymentHistoryTable2LoadingImage;
+	
+	@FindBy(xpath="//*[@class='btn btn--primary onetimepayment' or @class='btn btn--secondary onetimepayment']")
+	private WebElement MakeAPaymentButton;
 	
 	public PaymentHistoryPage(WebDriver driver) {
 		super(driver);
@@ -1300,8 +1303,10 @@ public class PaymentHistoryPage extends UhcDriver {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		Thread.sleep(20000);
+		CommonUtility.waitForPageLoad(driver, MakeAPaymentButton, 20);
+		TestHarness.checkForIPerceptionModel(driver);
 		waitforElement(EditRecurringPaymentsButton);
+		TestHarness.checkForIPerceptionModel(driver);
 		EditRecurringPaymentsButton.click();
 		System.out.println("User clicked on Update Automatic Button");
 		try {
@@ -2082,12 +2087,12 @@ public class PaymentHistoryPage extends UhcDriver {
 				JavascriptExecutor jse2 = (JavascriptExecutor)driver;
 				jse2.executeScript("arguments[0].scrollIntoView()", billingHistoryDateRangeDropdownForFed); 
 				try {
-					Thread.sleep(2000);
+					Thread.sleep(10000);
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-								
+				TestHarness.checkForIPerceptionModel(driver);				
 				System.out.println("Hovering mouse over daterange dropdown");	
 				Actions action = new Actions(driver);
 				action.moveToElement(billingHistoryDateRangeDropdownForFed).build().perform();
@@ -2121,7 +2126,7 @@ public class PaymentHistoryPage extends UhcDriver {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-								
+				TestHarness.checkForIPerceptionModel(driver);				
 				System.out.println("Hovering mouse over payment history daterange dropdown");	
 				Actions action1 = new Actions(driver);
 				action1.moveToElement(paymentHistoryDateRangeDropdownForFed).build().perform();
@@ -2942,16 +2947,16 @@ try {
 
 public void userSelects6MonthsInBillingHistoryDropdown() throws InterruptedException {
 
-System.out.println("Now Scrolling to daterange dropdown of Billing history section");
+System.out.println("Now Scrolling to Billing history section");
 JavascriptExecutor jse2 = (JavascriptExecutor)driver;
-jse2.executeScript("arguments[0].scrollIntoView()", billingHistoryDateRangeDropdownForFed); 
+jse2.executeScript("arguments[0].scrollIntoView()", billingHistorySectionHeader); 
 try {
 	Thread.sleep(2000);
 } catch (InterruptedException e) {
 	// TODO Auto-generated catch block
 	e.printStackTrace();
 }
-				
+TestHarness.checkForIPerceptionModel(driver);			
 System.out.println("Hovering mouse over daterange dropdown");	
 Actions action = new Actions(driver);
 action.moveToElement(billingHistoryDateRangeDropdownForFed).build().perform();
@@ -3023,16 +3028,16 @@ try {
 
 public void userSelects12MonthsInBillingHistoryDropdown() throws InterruptedException {
 
-System.out.println("Now Scrolling to daterange dropdown of Billing history section");
-JavascriptExecutor jse2 = (JavascriptExecutor)driver;
-jse2.executeScript("arguments[0].scrollIntoView()", billingHistoryDateRangeDropdownForFed); 
+	System.out.println("Now Scrolling to Billing history section");
+	JavascriptExecutor jse2 = (JavascriptExecutor)driver;
+	jse2.executeScript("arguments[0].scrollIntoView()", billingHistorySectionHeader);  
 try {
 	Thread.sleep(2000);
 } catch (InterruptedException e) {
 	// TODO Auto-generated catch block
 	e.printStackTrace();
 }
-				
+TestHarness.checkForIPerceptionModel(driver);				
 System.out.println("Hovering mouse over daterange dropdown");	
 Actions action = new Actions(driver);
 action.moveToElement(billingHistoryDateRangeDropdownForFed).build().perform();
@@ -3106,17 +3111,17 @@ try {
 
 
 public void userSelects24MonthsInBillingHistoryDropdown() throws InterruptedException {
-
-System.out.println("Now Scrolling to daterange dropdown of Billing history section");
-JavascriptExecutor jse2 = (JavascriptExecutor)driver;
-jse2.executeScript("arguments[0].scrollIntoView()", billingHistoryDateRangeDropdownForFed); 
+	
+	System.out.println("Now Scrolling to Billing history section");
+	JavascriptExecutor jse2 = (JavascriptExecutor)driver;
+	jse2.executeScript("arguments[0].scrollIntoView()", billingHistorySectionHeader);  
 try {
 	Thread.sleep(2000);
 } catch (InterruptedException e) {
 	// TODO Auto-generated catch block
 	e.printStackTrace();
 }
-				
+TestHarness.checkForIPerceptionModel(driver);				
 System.out.println("Hovering mouse over daterange dropdown");	
 Actions action = new Actions(driver);
 action.moveToElement(billingHistoryDateRangeDropdownForFed).build().perform();
