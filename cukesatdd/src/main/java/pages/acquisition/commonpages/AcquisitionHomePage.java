@@ -1497,7 +1497,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		}
 		
 		public AcquisitionHomePage  validateCallpopup() throws InterruptedException {
-//			CommonUtility.checkPageIsReady(driver);
+/*//			CommonUtility.checkPageIsReady(driver);
 			validate(callsamtooltip);
 			CheckiPerseptions();
 			System.out.println(pageheader.getText());
@@ -1505,6 +1505,16 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			Thread.sleep(3000);
 			jsClickNew(callsam);
 //			callsam.click();
+			System.out.println("@@@@@@@@@@@@@@@ Call Icon Clicked @@@@@@@@@@@@@@@");
+			driver.switchTo().activeElement();
+			System.out.println(CallSamTFN.getText());
+			CallSamTFNClose.click();
+			validateNew(callsam);		
+			return null;*/
+			
+			validate(callsamtooltip);
+			CheckiPerseptions();
+			callsam.click();
 			System.out.println("@@@@@@@@@@@@@@@ Call Icon Clicked @@@@@@@@@@@@@@@");
 			driver.switchTo().activeElement();
 			System.out.println(CallSamTFN.getText());
@@ -1530,7 +1540,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	       
 		}
 		
-		public void validateChatSamContent() throws InterruptedException {
+		/*public void validateChatSamContent() throws InterruptedException {
 			
 			Actions action = new Actions(driver);
 			WebElement element = chatsam;
@@ -1545,9 +1555,31 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	        }
 	        else
 	        	Assert.fail("No Chat sticky action menu didn't roll out and doesn't contain the text Chat with a Licensed Insurance Agent");
-		}
 		
-		public AcquisitionHomePage  validateChatpopup() throws InterruptedException {
+		}*/
+		
+		public void validateChatSamContent() throws InterruptedException {
+
+			Actions action = new Actions(driver);
+			WebElement element = chatsam;
+			action.moveToElement(element).perform();
+			String ChattoolTipText = chatsamtooltip.getText();
+			System.out.println("====================================================================");
+			System.out.println(ChattoolTipText);
+			System.out.println("====================================================================");
+
+			if (ChatSamText.equalsIgnoreCase(ChattoolTipText)) {
+				System.out.println(
+						"Chat sticky action menu roll out and contain the text Chat with a Licensed Insurance Agent");
+				// return new AcquisitionHomePage(driver);
+			} else
+				Assert.fail(
+						"No Chat sticky action menu didn't roll out and doesn't contain the text Chat with a Licensed Insurance Agent");
+			// return null;
+		}
+
+		
+		/*public AcquisitionHomePage  validateChatpopup() throws InterruptedException {
 			//CommonUtility.checkPageIsReady(driver);
 			chatsam.click();
 			System.out.println("@@@@@@@@@@@@@@@ Chat Icon Clicked @@@@@@@@@@@@@@@");	
@@ -1557,9 +1589,22 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			ChatSamTFNClose.click();
 			validateNew(chatsam);		
 			return null;
+		}*/
+		
+		public void validateChatpopup() throws InterruptedException {
+			// CommonUtility.checkPageIsReady(driver);
+			validateNew(chatsam);
+			System.out.println(chatsam.getText());
+			jsClickNew(chatsam);
+			System.out.println("@@@@@@@@@@@@@@@ Chat Icon Clicked @@@@@@@@@@@@@@@");
+			//validateandcloseChat();
+			/*
+			 * chatsamtooltip.click(); driver.switchTo().activeElement();
+			 * System.out.println(ChatSamHead.getText()); ChatSamTFNClose.click();
+			 * validateNew(chatsam);
+			 */
+			// return null;
 		}
-		
-		
 		
 		public PharmacySearchPage navigateFromTestharnessToPharmacySearch(String zipcode) {
 			//checkModelPopup(driver);
@@ -2306,6 +2351,32 @@ public class AcquisitionHomePage extends GlobalWebElements {
 						e.printStackTrace();
 					}
 					return present;
+				}
+				
+				
+
+				public void validateChatIcon() throws InterruptedException {
+					boolean present;
+					CommonUtility.waitForPageLoadNewForClick(driver, chatsam, 60);
+					if (chatsam.isDisplayed()) {
+						System.out.println("@@@@ Chat Icon window opened successfully@@@");
+						jsClickNew(chatsam);
+						Thread.sleep(5000);
+						// driver.switchTo().frame("sp-chat-iframe");
+						validate(ChatCancelBtn, 10);
+						present = true;
+						CommonUtility.waitForPageLoadNewForClick(driver, ChatCancelBtn, 30);
+						jsClickNew(ChatCancelBtn);
+						// ChatCancelBtn.click();
+						// driver.switchTo().defaultContent();
+						CommonUtility.waitForPageLoadNewForClick(driver, chatsam, 60);
+						System.out.println("@@@@ Chat Icon is displayed Successfully@@@");
+					}
+
+					else {
+						System.out.println("@@@@@@@@@ No Chat Window  @@@@@@@@@");
+						// assertTrue("Chat Icon not displayed on " + pageName + "", false);
+					}
 				}
 			
 }	

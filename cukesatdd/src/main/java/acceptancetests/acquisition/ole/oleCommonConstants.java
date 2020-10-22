@@ -75,6 +75,7 @@ public class oleCommonConstants {
 	public static final String AUTHORIZATION_PHONE_NO = "authorizationphoneno";
 	public static final String AUTHORIZATION_AGREE = "authorizationagree";
 	public static final String AUTHORIZATION_RELATIONSHIP = "authorizationrealtionship";
+	public static final String PROPOSED_EFF_DATE = "proposedeffectivedate";
 	
 
 }

@@ -367,6 +367,7 @@ public class PrimaryCarePhysicianPage extends UhcDriver{
 	//
 	public ArrayList<String> pcpinforetreive(String plantype){
 	
+		//WebElement PCPSearchLink = driver.findElement(By.xpath("//button[@class='view-more-btn-pcp']"));
 		WebElement PCPSearchLink = driver.findElement(By.xpath("//button[@class='view-more-btn-pcp']"));
 		String mPCPinfo=PCPSearchLink.getText();
 		System.out.println(mPCPinfo);
