@@ -571,29 +571,15 @@ public class VppCommonStepDefinition {
 		}
 			
 			
-		@Then("^user gets a create profile prompt$")
-		public void user_gets_a_create_profile_prompt() {
-			VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
-					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-
-		if (plansummaryPage != null) {
-			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
-
-		} else {
-			Assert.fail("Error Loading VPP plan summary page");
-		}
-	}
-
-	
 	@Then("^user gets a create profile prompt$")
-	public void user__gets_a_create_profile_prompt() {
+	public void user_saves_two_plans_as_favorite_on_AARP_site() {
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 
 		plansummaryPage.validateCreateProfilePrompt();
-
+		
 		getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
-
+		
 	}
 
 	@And("^user click on continue as guest button$")
