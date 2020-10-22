@@ -237,8 +237,12 @@ public class guestPaymentsLogin extends guestPaymentsLoginWebElements{
 
 	public HSIDLoginPage clickOnSignInLink() {
 		signInLink.click();
-		
+	
 		System.out.println(">>>>>>Sign In button is clicked<<<<<<");
+		
+		for(String winHandle : driver.getWindowHandles()){
+		    driver.switchTo().window(winHandle);
+		}
 		CommonUtility.checkPageIsReady(driver);
 		
 		if (driver.getCurrentUrl().contains("healthsafe")) {
