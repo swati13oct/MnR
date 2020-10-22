@@ -376,6 +376,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	@FindBy(xpath = "//input/parent::form//button[text()='Go']")
 	private WebElement thpharmacyGoButton;
+	
+	@FindBy(id="zipcodeTxt")
+	private WebElement pharmacyZipCodeTextBox;
 
 	@FindBy(id = "zipcode")
 	private WebElement zipCodeHealthPlans;
@@ -1224,9 +1227,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		jsMouseOver(ourPlansHoverLink);
 		jsClickNew(pharmacylocator);
 		CommonUtility.checkPageIsReadyNew(driver);
-		
-		waitForPageLoadSafari();
-		
+		validate(pharmacyZipCodeTextBox);
 		if (driver.getTitle().toLowerCase()
 				.contains((PageTitleConstants.BLAYER_LOCATE_A_PHARMACY_UNITEDHEALTHCARE).toLowerCase())) {
 			return new PharmacySearchPage(driver);
