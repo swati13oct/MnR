@@ -103,6 +103,22 @@ public class MyDocumentsStepDefinition {
 		}
 	}
 	
+	/**
+	 * This step will let the user navigate to My Documents Page using direct url
+	 */
+	@When("^the user navigates to my Documents Page using the direct url$")
+	public void user_navigates_to_MyDocuments_page_directly(DataTable memberAttributes) throws InterruptedException {
+		Map<String, String> memberAttributesMap=parseInputArguments(memberAttributes);
+		String planType=memberAttributesMap.get("Plan Type");
+		String memberType=memberAttributesMap.get("Member Type");
+		getLoginScenario().saveBean(PlanDocumentsAndResourcesCommonConstants.TEST_PLAN_TYPE, planType);
+		getLoginScenario().saveBean(PlanDocumentsAndResourcesCommonConstants.TEST_MEMBER_TYPE, memberType);
+
+			AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
+			MyDocumentsPage myDocumentsPage = accountHomePage.navigateDirectToMyDocumentsPage();
+			Assert.assertTrue("PROBLEM - Error in loading  my Documents Page",myDocumentsPage != null);
+			getLoginScenario().saveBean(PageConstantsMnR.My_Documents_PAGE,myDocumentsPage);
+		}
 	
 
 	/**
@@ -275,6 +291,8 @@ public class MyDocumentsStepDefinition {
 		myDocumentsPage.validateNeedHelpSection();
 	}
 
+	
+	
 }
 
 

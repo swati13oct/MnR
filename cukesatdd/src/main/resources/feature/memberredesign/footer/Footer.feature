@@ -88,7 +88,7 @@ Feature: 1.05 Member Footer validation
     Then the user navigates to profile and pref page
     Then user validates Need Help section content for account setting page
     Then the user navigates to Benefits page
-    Then user validates Need Help section content for benefits page
+    #Then user validates Need Help section content for benefits page
     Then the user navigates to the Order Plan Materials page
     Then user validates Need Help section content for order plan materials page
     Then the user navigates to the Health and Wellness page

@@ -16,6 +16,7 @@ import org.openqa.selenium.support.PageFactory;
 
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.ElementData;
+import acceptancetests.data.MRConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
@@ -65,7 +66,7 @@ public class ProviderSearchPage extends UhcDriver {
 	private WebElement Primary;
 	
 	
-	@FindBy(xpath="//button[contains(text(),'Primary Care Physician')]")
+	@FindBy(xpath="//*[contains(text(),'All Primary Care')]")
 	private WebElement Physician;
 
 	@FindBy(xpath="//div[contains(@class,'first')]//div[@class='hidden-phone']//button")
@@ -89,7 +90,7 @@ public class ProviderSearchPage extends UhcDriver {
 	@FindBy(xpath="//span[contains(@ng-switch-when, 'false') and contains(text(),'Save')]")
 	private WebElement saveBtn2;
 	
-	@FindBy(xpath="//*[contains(@class,'provider-card')]//*[contains(@class,'provider-name')]")
+	@FindBy(xpath="//*[contains(@class,'provider-name')]")
 	private WebElement providerNameText;
 	
 	@FindBy(xpath="//ul[contains(@class,'gs-options')]/li//div[contains(@class,'img')][contains(@src,'next')]")
@@ -97,6 +98,9 @@ public class ProviderSearchPage extends UhcDriver {
 	
 	@FindBy(xpath="//ul[contains(@class,'gs-options')]/li//div[contains(@class,'img')][contains(@src,'current')]")
 	private WebElement currentYrTile;
+	
+	@FindBy(xpath = "(//form[@data-ui-element-name='check-provider-coverage']//button[contains(@class,'action-btn')])[2]")
+	private WebElement FinishButton;
 	
 	public ProviderSearchPage(WebDriver driver) {
 		super(driver);
@@ -170,17 +174,36 @@ public class ProviderSearchPage extends UhcDriver {
 	jsClickNew(SaveBtn);
 	
 
-	if(validate(selectLocationOption)){
+	if(validate(selectLocationOption,10)){
 		selectLocationOption.click();
 		validateNew(saveBtn2);
 		saveBtn2.click();
 	}
-	CommonUtility.waitForPageLoadNew(driver, Viewsavebtn, 30);
-
-	jsClickNew(Viewsavebtn);
+	threadsleep(10);
+	
+		/*
+		 * CommonUtility.waitForPageLoadNew(driver, Viewsavebtn, 30);
+		 * jsClickNew(Viewsavebtn);
+		 */
+	
 	validateNew(providerNameText);
-	validateNew(Checkcoverage);
-	jsClickNew(Checkcoverage);
+	String providerSaved = providerNameText.getText().trim();
+	System.out.println("Provider Name is : " + providerSaved);
+	MRConstants.PROV_NAME=providerSaved;
+		/*
+		 * validateNew(Checkcoverage); jsClickNew(Checkcoverage);
+		 */
+	if(driver.findElements(By.xpath("(//button[contains(text(),'Check Provider Coverage')])[1]")).size() > 0){
+		System.out.println("OLD Rally page displayed");
+		Checkcoverage.click();
+	}	
+	else if(driver.findElements(By.xpath("(//form[@data-ui-element-name='check-provider-coverage']//button[contains(@class,'action-btn')])[1]")).size() > 0){
+		System.out.println("NEW Rally page displayed");
+		FinishButton.click();
+	}else
+		System.out.println("Issue with Xpath");
+	
+	threadsleep(3);
 	waitForCountDecrement(2);
 	driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
 

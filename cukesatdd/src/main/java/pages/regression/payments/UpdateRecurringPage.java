@@ -11,6 +11,7 @@ import org.openqa.selenium.support.PageFactory;
 
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
+import pages.regression.testharness.TestHarness;
 
 public class UpdateRecurringPage extends UhcDriver {
 
@@ -78,7 +79,6 @@ public class UpdateRecurringPage extends UhcDriver {
 	}
 	
 	public PaymentsFormPage selectCheckingAccountAndClickOnNext() {
-		checkForIPerceptionModel(driver);
 		CommonUtility.checkPageIsReadyNew(driver);
 		try {
 			Thread.sleep(2000);
@@ -87,6 +87,7 @@ public class UpdateRecurringPage extends UhcDriver {
 			e.printStackTrace();
 		}
 		System.out.println("User is on Update Automatic Payments Page");
+		TestHarness.checkForIPerceptionModel(driver);
 		CheckingAccountRadioButton.click();
 		System.out.println("clicked on Checking account radio button");
 		JavascriptExecutor jse = (JavascriptExecutor)driver;

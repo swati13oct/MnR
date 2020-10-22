@@ -56,7 +56,7 @@ public class medSuppOleStepDefinition {
 		}
 	}
 	
-	@Then("^user fills out medsup form and proceeds to next page")
+	@Then("^user fills out medsup form and proceeds to next page$")
 	public void fillOutMedSuppForm(DataTable givenAttributes) throws Throwable {
 		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
