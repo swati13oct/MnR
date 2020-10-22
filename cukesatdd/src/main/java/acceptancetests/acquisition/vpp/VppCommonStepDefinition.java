@@ -684,7 +684,7 @@ public class VppCommonStepDefinition {
 			Assert.fail("Error Loading VPP plan summary page");
 		}
 	}
-	@When("^the user Click on Is my Provider covered link$")
+	@When("^the user Click on Is my Provider covered links$")
 	public void clickonProvidercoveredlinks(DataTable Planname ){
 	{
 		List<DataTableRow> plannameAttributesRow = Planname

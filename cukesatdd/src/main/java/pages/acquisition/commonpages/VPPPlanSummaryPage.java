@@ -1890,7 +1890,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			                    break;
 			    }
 			    else {
-			    			validateclicksOnIsProviderCovered(planName);
+			    		validateclicksOnIsProviderCovered(planName);
 			                    break;
 			    }
 	        }catch(StaleElementReferenceException e) {

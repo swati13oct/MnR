@@ -13,7 +13,7 @@ Feature: 2.05.1.ACQ-OLE PCP
     And the user selects plan year
     	|Plan Year	| <planyear>|
        #New Changes
-    When the user Click on Is my Provider covered link
+    When the user Click on Is my Provider covered links
       | PlanName | <planName> |  
    	When user selects a multiple providers and retuns to VPP page
     Then User store the information provided from rally to vpp page 

@@ -2279,7 +2279,35 @@ public class AcquisitionHomePage extends GlobalWebElements {
 						e.printStackTrace();
 			}		
 
-				}					
+				}
+				
+				public boolean validateChatNonHours() throws InterruptedException {
+					
+					boolean present = true;
+					try {
+						// validateNew(chatsam);
+						//present = validateNew(samdiv);
+						//if (present) {
+							//List<WebElement> list = driver.findElements(By.xpath("//div[@id='sam']/button"));
+							List<WebElement> list = driver.findElements(By.xpath("//button[contains(@id,'sam-button--chat')]"));
+							//String chatbtnid = "sam-button--chat";
+							//for (WebElement element : list) {
+								if (list.size() > 0)
+									//	("id").equalsIgnoreCase(chatbtnid)) 
+									{
+									present = false;
+									//break;
+								}
+
+							
+						//}
+
+					} catch (NoSuchElementException e) {
+						e.printStackTrace();
+					}
+					return present;
+				}
+			
 }	
 				
 
