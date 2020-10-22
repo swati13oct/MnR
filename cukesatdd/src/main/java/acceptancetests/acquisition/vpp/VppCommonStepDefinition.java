@@ -494,6 +494,37 @@ public class VppCommonStepDefinition {
 		}
 	}
 
+// 	@When("^the user enters zipcode on health plans page$")
+// 	public void enters_zipcode_details_in_aarp_site(DataTable givenAttributes) throws InterruptedException {
+// 		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+// 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+// 		for (int i = 0; i < memberAttributesRow.size(); i++) {
+// 			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+// 					memberAttributesRow.get(i).getCells().get(1));
+// 		}
+// 		String zipcode = memberAttributesMap.get("Zip Code");
+// 		String county = memberAttributesMap.get("County Name");
+// 		String isMultiCounty = memberAttributesMap.get("Is Multi County");
+// 		getLoginScenario().saveBean(VPPCommonConstants.ZIPCODE, zipcode);
+// 		getLoginScenario().saveBean(VPPCommonConstants.COUNTY, county);
+// 		getLoginScenario().saveBean(VPPCommonConstants.IS_MULTICOUNTY, isMultiCounty);
+
+
+// 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+// 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+// 		VPPPlanSummaryPage plansummaryPage = null;
+// 		plansummaryPage = aquisitionhomepage.searchPlanOnHealthPlansPage(zipcode, county, isMultiCounty);
+
+// 			String planType = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
+// 			if (plansummaryPage.validatePlanNames(planType)) {
+// 				String SiteName = "AARP_ACQ";
+// 				getLoginScenario().saveBean(oleCommonConstants.ACQ_SITE_NAME, SiteName);
+// 				Assert.assertTrue(true);
+// 			} else {
+// 				Assert.fail("Error validating availables plans for selected plantype in  VPP plan summary page");
+// 			}
+// 		}
+		
 	@When("^the user enters zipcode on health plans page$")
 	public void enters_zipcode_details_in_aarp_site(DataTable givenAttributes) throws InterruptedException {
 		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
@@ -513,6 +544,37 @@ public class VppCommonStepDefinition {
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		VPPPlanSummaryPage plansummaryPage = null;
 		plansummaryPage = aquisitionhomepage.searchPlanOnHealthPlansPage(zipcode, county, isMultiCounty);
+
+			
+		if (plansummaryPage != null) {
+			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
+
+		} else {
+			Assert.fail("Error Loading VPP plan summary page");
+		}
+	}
+
+	@Then("^user saves two plans as favorite$")
+	public void user_saves_two_plans_as_favorite_on_AARP_site(DataTable givenAttributes) {
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+				memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+						.get(0), memberAttributesRow.get(i).getCells().get(1));
+			}
+			String savePlanNames = memberAttributesMap.get("Test Plans");
+			String planType = memberAttributesMap.get("Plan Type");
+
+			plansummaryPage.savePlans(savePlanNames, planType);
+		}
+			
+			
+		@Then("^user gets a create profile prompt$")
+		public void user_saves_two_plans_as_favorite_on_AARP_site() {
+			VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 
 		if (plansummaryPage != null) {
 			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
@@ -649,6 +711,16 @@ public class VppCommonStepDefinition {
 		}
 
 	}
+
+		@Then("^the user validates the following Additional Benefits of Plan for the plan$")
+		public void the_user_validates_the_following_Additional_Benefits_of_Plan_for_the_plan_in_AARP(DataTable givenAttributes) throws Throwable {
+			List<DataTableRow> additionalBenefits = givenAttributes.getGherkinRows();
+      
+      PlanDetailsPage vppPlanDetailsPage = (PlanDetailsPage) getLoginScenario()
+					.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
+			vppPlanDetailsPage.validatingAdditionalBenefitTextInPlanDetails(additionalBenefits);
+		}
+		
 
 	@Then("^the user validates the Cancel button for Multi County Pop-up lands on enter Zip code Page$")
 	public void the_user_validates_the_Cancel_button_for_Multi_COunty_Pop_up_lands_on_enter_Zip_code_Page() throws Throwable {
