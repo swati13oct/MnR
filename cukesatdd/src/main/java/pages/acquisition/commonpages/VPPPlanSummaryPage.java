@@ -39,8 +39,9 @@ import pages.acquisition.dceredesign.GetStartedPage;
 import pages.acquisition.isdecisionguide.IsDecisionGuideStep1;
 import pages.acquisition.medsuppole.MedSuppOLEPage;
 import pages.acquisition.ole.WelcomePage;
+import pages.acquisition.commonpages.VisitorProfilePage;
 import pages.acquisition.vppforaep.AepVppPlanSummaryPage;
-import pages.mobile.acquisition.ulayer.VPPRequestSendEmailPage;
+//import pages.mobile.acquisition.commonpages.VPPRequestSendEmailPage;
 
 /**
  * @author 
@@ -328,6 +329,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	@FindBy(xpath="//a[@id='popupClose']")
 	private WebElement closeProfilePopup;
+	
+	@FindBy(id="dupIconFlyOut")
+	private WebElement shoppingCartIcon;
 	
     private String savePlanLinkTextXpath= "//span[contains(text(),'Save Plan')]";
 	private String savePlanImgXpath="//img[contains(@src,'ic_favorite-unfilled.png')]";
@@ -1382,10 +1386,10 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	}
 
-	public VPPRequestSendEmailPage createVPPRequestSendEmailPage() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+//	public VPPRequestSendEmailPage createVPPRequestSendEmailPage() {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
 
 	public boolean validatePlanSummary(){
 		boolean flag = true;
@@ -2467,6 +2471,27 @@ for (int i = 0; i < initialCount + 1; i++) {
 
 		}
 	}
+	
+	/**
+	 * Save the given Medsupp plans
+	 * @param savePlanNames
+	 */
+	public void saveMSPlans(String savePlanNames) {
+		
+		try {
+			List<String> listOfTestPlans = Arrays.asList(savePlanNames.split(","));
+			System.out.println("Going to mark the following "+listOfTestPlans.size()+" number of test plans as favorite");
+			Thread.sleep(5000);
+			for (String plan: listOfTestPlans) {
+				WebElement savePlan = driver.findElement(By.xpath("//h2[text()='"+plan+"']/following::div[contains(@class,'save-icon')][1]//img[contains(@src,'unsaved-icon.png')]"));
+				((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(false);", savePlan);
+				((JavascriptExecutor) driver).executeScript("arguments[0].click();", savePlan);
+			}
+				
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 
 	public void validateAbilityToSavePlans(String savePlanNames, String planType) {
 		
@@ -3159,34 +3184,35 @@ for (int i = 0; i < initialCount + 1; i++) {
 		}
 	}
 	
-	public MedSuppOLEPage fillDetails(String zipCode, String DateOfBirth) throws InterruptedException {
+	public void fillDetails(String zipCode, String DateOfBirth) throws InterruptedException {
 		sendkeys(medSuppZipCode,zipCode); 
+		Thread.sleep(5000);
 		sendkeys(DOB, DateOfBirth);
 		System.out.println("Date of birth is entered");
 
 		//monthDrpDwn.click();
 		jsClickNew(monthDrpDwnPartA);
 		monthDrpDwnOptionPartA.click();
-		Thread.sleep(2000);
+		Thread.sleep(5000);
 		System.out.println("Effective date- month value selected");
 		medSuppOleMaleCheckbox.click();
 		yearDrpDwnPartA.click();
-		Thread.sleep(2000);
+		Thread.sleep(5000);
 		yearDrpDwnOptionPartA.click();
 
 		jsClickNew(monthDrpDwnPartB);
 		monthDrpDwnOptionPartB.click();
-		Thread.sleep(2000);
+		Thread.sleep(5000);
 		System.out.println("Effective date- month value selected");
 		
 		yearDrpDwnPartB.click();
-		Thread.sleep(2000);
+		Thread.sleep(5000);
 		yearDrpDwnOptionPartB.click();
 		
 		System.out.println("Effective date- year value selected");
-		Thread.sleep(2000);
+		Thread.sleep(5000);
 		startDrpDwn.click();
-		Thread.sleep(2000);
+		Thread.sleep(5000);
 		startDrpDwnOption.click();
 		
 		System.out.println("Plan to start date selected");
@@ -3195,11 +3221,11 @@ for (int i = 0; i < initialCount + 1; i++) {
 		
 		CommonUtility.checkPageIsReadyNew(driver);
 		CommonUtility.waitForPageLoadNew(driver, Start_ApplicationBtn, 45);
-		Start_ApplicationBtn.click();
-		if (driver.getCurrentUrl().contains("aarpsupplementalhealth"))
-			return new MedSuppOLEPage(driver);
-		else
-			return null;
+//		Start_ApplicationBtn.click();
+//		if (driver.getCurrentUrl().contains("aarpsupplementalhealth"))
+//			return new MedSuppOLEPage(driver);
+//		else
+//			return null;
 	}
 
 	public void handlePlanYearSelectionPopup() {
@@ -3320,8 +3346,110 @@ public void signInOptumId(String username, String password) {
 		Assert.fail("###############Optum Id Sign In failed###############");
 	}
 	
-}
+	}
 
+	/**
+	 * Navigate to Visitor Profile Page
+	 * @return
+	 */
+	public VisitorProfilePage navigateToVisitorProfilePage() {
+		shoppingCartIcon.click();
+		if(driver.getCurrentUrl().contains("profile")) {
+			CommonUtility.checkPageIsReadyNew(driver);
+			return new VisitorProfilePage(driver);
+		}else {
+			System.out.println("Navigation to visitor profile is failed");
+			return null;
+		}
+	}
+	
+	public void verifyproviderName(String planName)
+	{
+		sleepBySec(2);
+		String rallyProviderName = MRConstants.PROV_NAME;
+		WebElement ProviderSearchLink = driver.findElement
+				(By.xpath("//*[contains(text(),'"+planName+"')]/ancestor::div[contains(@class, 'module-plan-overview module')]//h4[contains(@ng-keydown,'dropDownCollapseCheck')]"));
+		ProviderSearchLink.click();
+		WebElement ProviderName = driver.findElement
+				(By.xpath("//*[contains(text(),'"+planName+"')]/ancestor::div[contains(@class, 'module-plan-overview module')]//div[contains(@id,'ProviderName')]"));
+
+		String mproviderName=ProviderName.getText().trim().split("\n")[0];
+		
+		  mproviderName = mproviderName.replaceAll(".", "").replaceAll(",", "");
+		  rallyProviderName =rallyProviderName.replaceAll(".", "").replaceAll(",", "");
+		 
+		Assert.assertTrue(mproviderName.contains(rallyProviderName));
+
+		System.out.println("Verified Hosptial Name matches " + mproviderName);
+	}
+	
+	public void saveAllPlans(String savePlanNames, String planType){
+		String testPlanXpath="";
+		String initial_savePlanIconXpath = "";
+		String savedPlanIconXpath = "";
+		List<String> listOfTestPlans = Arrays.asList(savePlanNames.split(","));
+		System.out.println("Going to mark the following "+listOfTestPlans.size()+" number of test plans as favorite");
+		
+		int savedPlanCount = 0;
+		
+		for (String plan: listOfTestPlans) {
+			
+			//Closing the create profile prompt after saving 2 plans
+			savedPlanCount++;
+			if(savedPlanCount==3) {
+				CommonUtility.waitForPageLoad(driver, btnClose, 20);
+				btnClose.click();
+			}
+			System.out.println("Proceed to locate plan="+plan);
+
+			if(planType.equalsIgnoreCase("MS")) {
+				 testPlanXpath="//h2[text()='"+plan+"']";
+			} else {
+			 testPlanXpath="//*[contains(text(),'"+plan+"') and contains(@class,'ng-binding')]";
+			}
+			System.out.println("TEST - textPlanXpath xpath="+testPlanXpath);
+			List<WebElement>  listOfPlans=driver.findElements(By.xpath(testPlanXpath));
+			int expMatch=1;
+			Assert.assertTrue("PROBLEM - unable to locate plan='"+plan+"'.  Expect number of match='"+expMatch+"' | Actual number of match='"+listOfPlans.size()+"'",listOfPlans.size()==expMatch);
+			
+			System.out.println("Proceed to validate 'Save Plan' icon appeared before clicking");
+			
+			if(planType.equalsIgnoreCase("MS")) {
+				//initial_savePlanIconXpath="//*[text(),'"+plan+"']/ancestor::*[contains(@class,'module-plan-overview')]//*[contains(@aria-selected,'false')]"+savePlanImgXpath;
+				initial_savePlanIconXpath="//*[contains(@class,'save-favorite-plan')][contains(@aria-selected,'false')][@aria-describedby='"+plan+"']";
+			}else {
+			initial_savePlanIconXpath="//a[contains(text(),'"+plan+"')]/following::a[contains(@aria-selected,'false')][1]"+savePlanImgXpath;
+			}
+			
+			System.out.println("TEST - initial_savePlanLIconXpath xpath="+initial_savePlanIconXpath);
+		
+			List<WebElement>  listOfSavePlanIcons=driver.findElements(By.xpath(initial_savePlanIconXpath));
+			expMatch=1;
+			Assert.assertTrue("PROBLEM - unable to locate Save Plan icon for ='"+plan+"'.  Expect number of match='"+expMatch+"' | Actual number of match='"+listOfSavePlanIcons.size()+"'",listOfSavePlanIcons.size()==expMatch);
+
+			System.out.println("Proceed to validate 'Saved Plan' icon will not appear before 'Save Plan' is clicked");
+			if(planType.equalsIgnoreCase("MS")) {
+				savedPlanIconXpath="//*[contains(@class,'save-favorite-plan')][contains(@aria-selected,'true')][@aria-describedby='"+plan+"']";
+						//"//*[text(),'"+plan+"']/ancestor::*[contains(@class,'module-plan-overview')]//*[contains(@class,'js-favorite-plan favorite-plan ng-scope added')]"+savedPlanImgXpath;
+					
+			}else {
+			savedPlanIconXpath="//a[contains(text(),'"+plan+"')]/following::a[contains(@aria-selected,'false')][1]"+savedPlanImgXpath;
+			}
+			System.out.println("TEST - savedPlanIconXpath xpath="+savedPlanIconXpath);
+			expMatch=0;
+			//----------------------------------------
+			System.out.println("Proceed to click to save plan");
+			((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(false);", listOfSavePlanIcons.get(0));
+			try {
+				Thread.sleep(3000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			((JavascriptExecutor) driver).executeScript("arguments[0].click();", listOfSavePlanIcons.get(0));
+
+		}
+	}
 	
 	public ArrayList<String> providerinforetreive(String planName){
 		CommonUtility.checkPageIsReadyNew(driver);

@@ -2631,7 +2631,7 @@ public void validatePaymentHistoryDateRageDefaultNewSecondPlan() {
 }
 
 
-public void validateBillingHistoryTable() {
+public void validateBillingHistoryTable(String planType) {
 try {
 	
 	CommonUtility.waitForPageLoad(driver, billingHistoryTableForFed, 20);
@@ -2658,19 +2658,28 @@ try {
 	String actual_billingHistoryTableRemainingAmountHeader=billingHistoryTableRemainingAmountHeader.getText();
 	Assert.assertTrue("PROBLEM - Billing history table header not as expected. Expected="+expected_billingHistoryTableRemainingAmountHeader+" | Actual="+actual_billingHistoryTableRemainingAmountHeader,expected_billingHistoryTableRemainingAmountHeader.equals(actual_billingHistoryTableRemainingAmountHeader));
 	System.out.println("Remaining Amount column heading has been validated and actual value retrieved from UI is : "+actual_billingHistoryTableRemainingAmountHeader);
-	
+	System.out.println("Value of plan type is  "+planType);
+	if (planType.contains("SHIP"))
+			{
+		System.out.println("Skipping validation of Bill Statements (PDF) for SHIP");
+			}
+	else
+	{
 	String expected_billingHistoryTableBillStatementsHeader="Bill Statements (PDF)";
 	String actual_billingHistoryTableBillStatementsHeader=billingHistoryTableBillStatementsHeader.getText();
 	Assert.assertTrue("PROBLEM - Billing history table header not as expected. Expected="+expected_billingHistoryTableBillStatementsHeader+" | Actual="+actual_billingHistoryTableBillStatementsHeader,expected_billingHistoryTableBillStatementsHeader.equals(actual_billingHistoryTableBillStatementsHeader));
 	System.out.println("Bill Statements (PDF) column heading has been validated and actual value retrieved from UI is : "+actual_billingHistoryTableBillStatementsHeader);
 	sleepBySec(2);
+	}
+
 	List<WebElement> tableRows = driver.findElements(By.xpath("//*[@id='resultscount_0']/tbody/tr"));
 	int expected_rows=1;
 	int actual_rows=tableRows.size();
 	System.out.println("Rows returned in result of Billing History Table are : "+actual_rows);
 	Assert.assertTrue("PROBLEM - Number of rows in Billing history Table is not equal to greater than 1. Expected="+expected_rows+" | Actual="+actual_rows,expected_rows<=actual_rows);
 	
-	} catch (Exception e) {
+	} 
+    catch (Exception e) {
 	System.out.println("Exception: "+e);
 	Assert.assertTrue("PROBLEM - unable to locate the Billing history table",false);
 	}
@@ -2769,7 +2778,7 @@ try {
 	}
 
 
-public void validatePaymentHistoryTable() {
+public void validatePaymentHistoryTable(String planType) {
 try {
 	
 	CommonUtility.waitForPageLoad(driver, paymentHistoryTableForFed, 20);
@@ -2797,6 +2806,12 @@ try {
 	Assert.assertTrue("PROBLEM - Payment history Table header not as expected. Expected="+expected_paymentHistoryTablePaymentMethodHeader+" | Actual="+actual_paymentHistoryTablePaymentMethodHeader,expected_paymentHistoryTablePaymentMethodHeader.equals(actual_paymentHistoryTablePaymentMethodHeader));
 	System.out.println("Payment Method column heading has been validated and actual value retrieved from UI is : "+actual_paymentHistoryTablePaymentMethodHeader);
 	
+	if (planType.contains("SHIP"))
+	{
+		System.out.println("Skipping the validation of confirmation number for SHIP");
+	}
+	else
+	{
 	String expected_paymentHistoryTableConfirmationHeader="Confirmation #";
 	String actual_paymentHistoryTableConfirmationHeader=paymentHistoryTableConfirmationHeader.getText();
 	Assert.assertTrue("PROBLEM - Payment history Table header not as expected. Expected="+expected_paymentHistoryTableConfirmationHeader+" | Actual="+actual_paymentHistoryTableConfirmationHeader,expected_paymentHistoryTableConfirmationHeader.equals(actual_paymentHistoryTableConfirmationHeader));
@@ -2807,8 +2822,9 @@ try {
 	int actual_rows=tableRows.size();
 	System.out.println("Rows returned in result of Payment History Table are : "+actual_rows);
 	Assert.assertTrue("PROBLEM - Number of rows in Payment history Table is not equal to greater than 1. Expected="+expected_rows+" | Actual="+actual_rows,expected_rows<=actual_rows);
-	
-	} catch (Exception e) {
+	}
+	}
+    catch (Exception e) {
 	System.out.println("Exception: "+e);
 	Assert.assertTrue("PROBLEM - unable to locate the Payment history table",false);
 	}
@@ -2829,10 +2845,16 @@ try {
 	System.out.println("Value displayed in 1st row of Payment Method is : "+valueofPaymentMethod.getText());
 	Assert.assertTrue("value of Payment Method is not displayed", valueofPaymentMethod.getText()!=null); 
 	
+	if (planType.contains("SHIP"))
+	{
+		System.out.println("Skipping the validation of confirmation number for SHIP");
+	}
+	else
+	{
 	WebElement valueofConfirmation = driver.findElement(By.xpath("//*[@id='paymentresultscount_0']/tbody/tr[1]/td[5]"));
 	System.out.println("Value displayed in 1st row of Confirmation# is : "+valueofConfirmation.getText());
 	Assert.assertTrue("value of Confirmation# is not displayed", valueofConfirmation.getText()!=null); 
-	
+	}
 	}
 	catch (Exception e1)
 	{
