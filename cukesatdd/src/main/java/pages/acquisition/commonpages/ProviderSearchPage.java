@@ -409,7 +409,7 @@ public class ProviderSearchPage extends UhcDriver {
 
 		
 		counter++;
-		if(counter==3)
+		if(counter==7)
 			{
 			break;			
 			}

@@ -140,7 +140,9 @@ public class ReviewSubmitPage extends UhcDriver{
 	@FindBy(xpath = "(//*[contains(text(), 'City')])[2]//following-sibling::*")
 	private WebElement MailCityDisplay;
 	
-	@FindBy(xpath = "//*[contains(text(), 'mailing address')]/ancestor::*[contains(@class, 'review-step')]//*[contains(text(), 'State')]//following-sibling::*")
+	//@FindBy(xpath = "//*[contains(text(), 'mailing address')]/ancestor::*[contains(@class, 'review-step')]//*[contains(text(), 'State')]//following-sibling::*")
+	
+	@FindBy(xpath = "//*[contains(text(), 'mailing address')]//..//following-sibling::*//*[contains(text(), 'State')]//following-sibling::*")
 	private WebElement MailStateDisplay;
 	
 	@FindBy(xpath = "//*[contains(text(), 'Zip Code')]//following-sibling::*")
@@ -207,7 +209,9 @@ public class ReviewSubmitPage extends UhcDriver{
 	@FindBy(xpath = "//*[contains(text(), 'Are you now seeing')]//following-sibling::*")
 	private WebElement PCPRecentlyVisited;
 	
-
+	@FindBy(xpath = "//*[contains(text(), 'Proposed Effective Date')]//following-sibling::*")
+	private WebElement ProposedEffectiveDate;
+			
 	@FindBy(xpath = "//*[contains(text(), 'Medicaid Member Number')]//following-sibling::*")
 	private WebElement MedicaidNo;
 	
@@ -501,7 +505,8 @@ public class ReviewSubmitPage extends UhcDriver{
 		
 
 		validateNew(SubmitApplicationBtn);
-		SubmitApplicationBtn.click();
+		jsClickNew(SubmitApplicationBtn);
+		//SubmitApplicationBtn.click();
 		CommonUtility.checkPageIsReadyNew(driver);
 		//waitforElementDisapper(By.xpath("//button[contains(@class,'confirm-button')]"), 60);
 		/*JavascriptExecutor executor = (JavascriptExecutor)driver;
@@ -510,11 +515,11 @@ public class ReviewSubmitPage extends UhcDriver{
 /*		WebDriverWait wait = new WebDriverWait(driver, 30);
 		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//*[@class = 'cta-button confirm-button']")));*/
 		
-		if(validate(confirmationForm,30)){
+		if(validateNew(confirmationForm,30)){
 			System.out.println("OLE Enrollment Submission Confirmation Page is Displayed");
 			return new OLEconfirmationPage(driver);
 		}
-		else if(validate(SubmitApplicationBtn)){
+		else if(validateNew(SubmitApplicationBtn)){
 			SubmitApplicationBtn.click();
 			if(driver.getCurrentUrl().contains("confirmation")){
 				System.out.println("OLE Enrollment Submission Confirmation Page is Displayed");
@@ -584,6 +589,7 @@ public class ReviewSubmitPage extends UhcDriver{
 		String PCP_Name = detailsMap.get("PCP Name");
 		String PCP_Number = detailsMap.get("PCP Number");
 		String PCP_recently_visited= detailsMap.get("PCP Recently");
+		String Proposed_Effective_date= detailsMap.get("Proposed Effective date");
 		
 		String AuthFirstNameDisplay= detailsMap.get("Auth FirstName Display");
 		String AuthLastNameDisplay = detailsMap.get("Auth LastName Display");
@@ -636,7 +642,8 @@ public class ReviewSubmitPage extends UhcDriver{
 		flag&=validateText(PrescriptionDrugMemberNo,prescriptionMemberNumber);
 		flag&=validateText(PCPName,PCP_Name);		
 		flag&=validateText(PCPNumber,PCP_Number);
-		flag&=validateText(PCPRecentlyVisited,PCP_recently_visited);		
+		flag&=validateText(PCPRecentlyVisited,PCP_recently_visited);	
+		flag&=validateText(ProposedEffectiveDate,Proposed_Effective_date);
 		flag&=validateText(StreetDisplay,Perm_Street);
 		flag&=validateText(CityDisplay,Perm_city);
 		flag&=validateText(MailingQiuestionDisplay,MailingQuestion);
@@ -663,8 +670,6 @@ public class ReviewSubmitPage extends UhcDriver{
 			}
 			else flag = false;
 		}else flag = false;
-		//flag=validateText(PlanYear_NameDisplay,Expected_PlanName);
-		//flag=validateText(PlanYear_NameDisplay,Expected_PlanName);
 
 		return flag;
 	}
@@ -682,7 +687,7 @@ public class ReviewSubmitPage extends UhcDriver{
 		result&=actualText.contains(expectedValue);
 		System.out.println(expectedValue +" "+element.getText()+" "+result);
 		if(!result) {
-			System.out.println("FAILED FOR THIS VALUE-----------------------" +" "+element.getText());
+			System.out.println("Review and Submit Pages validation failed for -----------------------" +" "+element.getText());
 		}
 		}
 		return result;
