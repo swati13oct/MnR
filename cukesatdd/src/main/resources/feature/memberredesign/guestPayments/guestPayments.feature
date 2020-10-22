@@ -9,8 +9,8 @@ Feature: 1.06.7 Member Guest Payments Page
     Then I validate all the header and page elements
     When I click on link Help me find my id link
     Then I click on the sign in link and navigate to Member Portal sign in page
-    #Then I will see the Logo specific to my plan and the Sign in button
-          #  | Site Name | <siteName> |
+    Then I will see the Logo specific to my plan and the Sign in button
+          | Site Name | <siteName> |
 
     Examples:
       | TID   | planType | siteName    |
@@ -191,8 +191,7 @@ Feature: 1.06.7 Member Guest Payments Page
     And I navigate to Payment confirmation page and validate all the page elements
     Then I entered my Email address and click send button to send receipt on my Email
       | Email             | <Email>             |
-    And I validate success Email receipt message and click send to another Email
-   # Then I will click on Sign in and Register Now link to navigate to Member Portal
+  And I validate success Email receipt message and click send to another Email
 
     Examples:
       | TID   | planType | memberID    | dob        | siteName | FirstName | MiddleName | LastName  | accountNo  | routingNo | Email          |
@@ -285,9 +284,9 @@ Feature: 1.06.7 Member Guest Payments Page
     Examples:
       | TID   | planType | memberID      | dob           | siteName    |Name                 | CreditCardNumber | validMonth | validYear |otherAmountDue    |
       | 10000 | MAPD     | 939838215-1   | 05/19/1937    |   AARP      |CreditCardAutomation | 4111111111111111 |         04 |      2024 |  1.05           |
-     # | 10001 | MAPD     | 915516555-1   | 10/29/1947    |   UHC       |CreditCardAutomation | 4111111111111111 |         04 |      2024 |  15.20           |
-     # | 10002 | MAPD     | 915516555-1   | 10/29/1947    |   RETIREE   |CreditCardAutomation | 4111111111111111 |         04 |      2024 |  20.30           |
-    #  | 10003 | MAPD     | 915516555-1   | 10/29/1947    |   PCP       |CreditCardAutomation | 4111111111111111 |         04 |      2024 |  11.000          |
+       | 10001 | MAPD     |907996890-1  | 10/09/1940   |   AARP       |CreditCardAutomation | 4111111111111111 |         04 |      2024 |  15.20           |
+     | 10002 | MAPD     | 005085470-1  | 03/04/1943    |   RETIREE   |CreditCardAutomation | 4111111111111111 |         04 |      2024 |  20.30           |	
+    #  | 10003 | MAPD     |005085470-1  | 10/29/1947    |   PCP       |CreditCardAutomation | 4111111111111111 |         04 |      2024 |  11.000          |
       #| 10004 | MAPD     | 915516555-1   | 10/29/1947    |   MEDICA    |CreditCardAutomation | 4111111111111111 |         04 |      2024 |  333.00          |
 
 
