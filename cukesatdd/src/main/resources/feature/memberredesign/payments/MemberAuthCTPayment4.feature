@@ -46,7 +46,7 @@ Feature: S1.1 To test Member Auth premium payment flows Micro App.
       | F243897 | jkuma14  | Brock@03 | Earlzietz@yahoo.com | Group    | Group      | ACTIVEGroupPayment | NON LIS |
 
   #Test Case 11 - Active SHIP member with billing and payment history in last 90 days
-  @regressionMemberPROD1
+  @regressionMemberPROD
   Scenario Outline: <planType> -memberType: <memberType> - Test Case 11 -Verify billing and payment history for Active SHIP member with billing and payment history in last 90 days
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
