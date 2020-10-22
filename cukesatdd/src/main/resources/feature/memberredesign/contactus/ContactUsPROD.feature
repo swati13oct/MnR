@@ -20,7 +20,7 @@ Scenario Outline: UID: <UID> -Plan Type: <planType> Verify labels and telephone 
     Examples:   
     | UID        | username | password | member            | planType      | techSupportTFN     | planSupportTFN    |
 	| TestCase1  | jkuma14  | Brock@03 | LMHOCHSCHILD11    |	MAPD       |	1-800-721-0627  |	1-844-876-6177  |
-	| TestCase2  | jkuma14  | Brock@03 | MOLAR1            |	PDP        |	1-800-721-0627  |	1-866-870-3470  |
+	| TestCase2  | jkuma14  | Brock@03 | ZEUSIFER81        |	PDP        |	1-800-721-0627  |	1-866-870-3470  |
 	
 #TestCasePCP2
  @regressionMemberPROD1
