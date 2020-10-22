@@ -68,7 +68,10 @@ public class AepVppPlanSummaryPage extends UhcDriver {
 	
 	@FindBy(xpath = "//div[contains(@id,'plan-list-') and not(contains(@class,'ng-hide'))]/div[contains(@class,'plan-list-content')]")
 	private WebElement planListContainer;
-	
+
+	String sheetName = "";
+	int rowIndex;
+
 	public AepVppPlanSummaryPage(WebDriver driver) {
 		super(driver);
 		
@@ -216,7 +219,7 @@ public class AepVppPlanSummaryPage extends UhcDriver {
 
 	public HashMap<String, String> collectInfoVppPlanSummaryPg(String planName) {
 		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
-		System.out.println("Proceed to collect the plan benefits info on vpp summary page");
+		System.out.println(sheetName+"_"+rowIndex+" - Proceed to collect the plan benefits info on vpp summary page");
 
 		HashMap<String, String> result=new HashMap<String, String>();
 		String planCard = "//*[contains(text(), '"+planName+"') and contains(@class,'ng-binding')]/ancestor::*[contains(@class,'module-plan-overview module')]";
@@ -253,19 +256,30 @@ public class AepVppPlanSummaryPage extends UhcDriver {
 			 result.put(key, value);
 			 
 		}
+
+		//commenting the below lines of coe to reduce the log on Jenkins job
 		
-		for(String keyValue : result.keySet()) {
-			  System.out.println("Key : "+keyValue+" Value: "+result.get(keyValue));
-			  System.out.println("_________________________________________________________________________________________________"); 
-		}
+//		for(String keyValue : result.keySet()) {
+//			  System.out.println("Key : "+keyValue+" Value: "+result.get(keyValue));
+//			  System.out.println("_________________________________________________________________________________________________");
+//		}
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 
-
+		System.out.println(sheetName+"_"+rowIndex+" - Finished to collect the plan benefits info on vpp summary page - Benefits Map count - " + result.size());
 		return result;
 	}
 
     public HashMap<String, String> collectInfoVppPlanSummaryPg(String planName, String countyName, String planYear, String sheetName, int rowIndex) {
+		this.sheetName = sheetName;
+		this.rowIndex = rowIndex;
+
         HashMap<String, String> result=new HashMap<String, String>();
+        int minBenefitListCnt = 5;
+
+        if(planName.contains("(PDP)"))
+		{
+			minBenefitListCnt = 2;
+		}
 
         for(int i=0;i<5;i++)
         {
@@ -274,7 +288,7 @@ public class AepVppPlanSummaryPage extends UhcDriver {
             result = collectInfoVppPlanSummaryPg(planName);
             int benefitUICnt = result.size();
             System.out.println(sheetName+"_"+rowIndex+" - Attempt - "+(i+1)+", Benefits Map count - " + benefitUICnt +", Plan - "+planName);
-            if(benefitUICnt < 1 )
+            if(benefitUICnt < minBenefitListCnt )
             {
                 driver.navigate().refresh();
                 System.out.println(sheetName+"_"+rowIndex+" - Attempt - "+(i+1)+", Page Refreshed");
@@ -327,7 +341,7 @@ public class AepVppPlanSummaryPage extends UhcDriver {
 							flag = true;break;
 						}else {
 							flag = false;
-							System.out.println("Values did not match for col:1 "+columnName+" Excel: "+benefitValue+" | UI: "+benefitValueUI);
+							System.out.println(sheetName+"_"+rowIndex+" - Values did not match for col:1 "+columnName+" Excel: "+benefitValue+" | UI: "+benefitValueUI);
 							tmpUIString2 = tmpUIString1;
 							break;
 						}
@@ -337,7 +351,7 @@ public class AepVppPlanSummaryPage extends UhcDriver {
 		
 		if(counter == 0) {
 			flag = false;
-			System.out.println("Values did not match for col:2 "+columnName+" Excel: "+benefitValue+" | UI: BENEFIT NOT FOUND");
+			System.out.println(sheetName+"_"+rowIndex+" - Values did not match for col:2 "+columnName+" Excel: "+benefitValue+" | UI: BENEFIT NOT FOUND");
 			tmpUIString2 = "BENEFIT NOT FOUND ON THE UI";
 		}
 		
