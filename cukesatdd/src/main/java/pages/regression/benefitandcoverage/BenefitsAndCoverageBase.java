@@ -1038,7 +1038,7 @@ public class BenefitsAndCoverageBase extends BenefitsAndCoverageWebElements {
 		System.out.println("Now clicking on Make a Payment button");
 		makePaymentButton.click();
 		CommonUtility.checkPageIsReadyNew(driver);
-			if (driver.getCurrentUrl().contains("content/medicare/member/payments/overview-new.html"))
+			if (driver.getCurrentUrl().contains("payments/overview.html"))
 			{
 				System.out.println("Payment Overview Page is displayed");	
 			}

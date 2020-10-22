@@ -105,7 +105,6 @@ Feature: 1.19 Verify the premium payment flows on member portal - Part 3 - Test 
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
     When the user clicks on Premium Payments on Header
-    # When the user navigates to Ship tab and validates the amount
     And user clicks on Setup Automatic payments on payment overview page for Ship
     And user Enters all Mandatory fields on form page and click on Electronic Signature and click on Contuine for Setup Recurring for Ship
       | Routing number             | <routingNo>        |
@@ -118,8 +117,7 @@ Feature: 1.19 Verify the premium payment flows on member portal - Part 3 - Test 
     And user navigates to Review Your Payment screen and selects agreements and click on Contuine Button for EFT Ship
     Then User navigates to payment confirmation page and verifies sucessful EFT for setup Recurring for Ship
     And the user moves to Go to Payment History Page button
-    #    And user clicks on Federal Plan Tab
-    And user clicks on Make one time payment on payment overview page
+    And user clicks on Make one time payment on payment overview page for plan 2
     And user selects other amount and enters "2.00" and selects Checking Account and click on Next button
     And user Enters all Mandatory fields on form page and click on Authorize button for Make one Time CA
       | Amount to be paid          | <Amount>           |
