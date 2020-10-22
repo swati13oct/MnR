@@ -1140,7 +1140,8 @@ public class DrugCostEstimatorPage extends UhcDriver {
 			CommonUtility.waitForPageLoad(driver, delDrgConfirm, 10);
 			delDrgConfirm.click();
 			System.out.println("Clicked delDrgConfirm");
-			Assert.assertTrue("PROBLEM - delDrgConfirm button should disappear after clicking", !validate(delDrgConfirm,5));
+			Thread.sleep(1000);
+			Assert.assertTrue("PROBLEM - delDrgConfirm button should disappear after clicking", !validate(delDrgConfirm));
 			CommonUtility.waitForPageLoad(driver, overlay_disappeared, 10);
 		}
 	}
