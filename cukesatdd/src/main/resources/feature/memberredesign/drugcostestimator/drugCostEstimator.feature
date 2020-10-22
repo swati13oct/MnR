@@ -61,7 +61,7 @@ Feature: 1.07 Member DCE Page
       | index | TID   | planType       | memberType |zipcode | radius   | pharmacytype   |drug1   | dosage1          | quantity1 | frequency1    |
       | 05    | 15325 | MAPD           | MAPD_DCE   |  06450 | 25 miles | Pharmacy Saver |Lipitor | Lipitor TAB 10MG |        31 | Every 1 month |
 
-  @drugCostEstimator4 @dce_p3
+  @drugCostEstimator4
   Scenario Outline: INDEX: <index> -TID: <TID> -plan: <planType> -memberType: <memberType> -I1.1 To Verify MR portal DCE flow covering step1 step 2 and step3 .
     Given login with following details logins in the member portal and validate elements
         | Plan Type   | <planType>   |
@@ -98,10 +98,19 @@ Feature: 1.07 Member DCE Page
     Then I should see cost of the drug
     Then I should see learn more about the drug tiers and learn more about the drug payment stages link
 
-    Examples: 
+     @dce_p3
+     Examples: 
       | index | TID   | planType |memberType | drug1   | dosage1          | quantity1 | frequency1    | dosage2          | brandeddrug      | genericdosage                 | zipcode | radius   | quantity2 | frequency2     | drug2 |dosage3        | 
       | 06    | 15325 | MAPD     |MAPD_DCE   | Lipitor | Lipitor TAB 10MG |        31 | Every 1 month | Lipitor TAB 20MG | Lipitor TAB 20MG | atorvastatin calcium TAB 20MG |   00820 | 25 miles |       100 | Every 3 months | FANAPT|Fanapt TAB 12MG|
+
+     @dce_p4
+     Examples: 
+      | index | TID   | planType |memberType | drug1   | dosage1          | quantity1 | frequency1    | dosage2          | brandeddrug      | genericdosage                 | zipcode | radius   | quantity2 | frequency2     | drug2 |dosage3        | 
       | 07    | 15325 | PCP      |PCP_DCE    | Lipitor | Lipitor TAB 10MG |        31 | Every 1 month | Lipitor TAB 20MG | Lipitor TAB 20MG | atorvastatin calcium TAB 20MG |   00820 | 25 miles |       100 | Every 3 months | FANAPT|Fanapt TAB 12MG|
+
+     @dce_p5
+     Examples: 
+      | index | TID   | planType |memberType | drug1   | dosage1          | quantity1 | frequency1    | dosage2          | brandeddrug      | genericdosage                 | zipcode | radius   | quantity2 | frequency2     | drug2 |dosage3        | 
 	  | 08    | 15325 | Medica   |Medica_DCE | Lipitor | Lipitor TAB 10MG |        31 | Every 1 month | Lipitor TAB 20MG | Lipitor TAB 20MG | atorvastatin calcium TAB 20MG |   00820 | 25 miles |       100 | Every 3 months | FANAPT|Fanapt TAB 12MG|
 	
   @Stage_Sanity02
@@ -153,7 +162,7 @@ Feature: 1.07 Member DCE Page
       | 10    | 15338 | PDP           |PDP_GROUP_DCE |
      #| xx    | 15329 | MAPD          |MAPD_GROUP_DCE|
 
-  @drugCostEstimator7 @switch_to_generic_case_1 @dce_p4
+  @drugCostEstimator7 @switch_to_generic_case_1 @dce_p6
   Scenario Outline: INDEX: <index> -TID: <TID> -plan: <planType> -memberType: <memberType> - To Verify MR portal members using DCE on a desktop device, I want to be able to switch from branded to generic drug, given that  pharmacy is selected and it suggests the user with an appropriate save money message.
     Given login with following details logins in the member portal and validate elements
         | Plan Type   | <planType>   |
@@ -200,7 +209,7 @@ Feature: 1.07 Member DCE Page
       | index | TID   | planType | memberType | drug    | dosage           | quantity | frequency     |
       | 12    | 15325 | MAPD     | MAPD_DCE   | Lipitor | Lipitor TAB 10MG |       31 | Every 1 month |
 
-  @vbfGate @MemberVBF @dce_p4
+  @vbfGate @MemberVBF @dce_p6
   Scenario Outline: INDEX: <index> -planType: <planType> -memberType: <memberType> - To Verify MR portal members end to end DCE flow for vbf
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -225,7 +234,7 @@ Feature: 1.07 Member DCE Page
       | 13    | MAPD     | UhcMapdInd | Lipitor | Lipitor TAB 10MG |       31 | Every 1 month |
       
       
-  @formualrypdflink @dce_p4
+  @formualrypdflink @dce_p6
   Scenario Outline:  INDEX: <index> -planType: <planType> -memberType: <memberType> - DCE Tool to search a plan for a drug that requires Prior Authorization or Step Therapy on the 2020 formulary
   Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
