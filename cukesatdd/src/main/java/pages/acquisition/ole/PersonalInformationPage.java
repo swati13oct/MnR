@@ -259,7 +259,26 @@ public class PersonalInformationPage extends UhcDriver{
 		}
 		return false;
 	}
+	public boolean enter_member_details_Other_dsnp(Map<String, String> memberDetailsMap) throws InterruptedException {
 
+		String EmailAddress = memberDetailsMap.get("Email");
+		String HomeNumber = memberDetailsMap.get("Home Number");
+		String MobileNumber =memberDetailsMap.get("Mobile Number");
+		String MiddleName = memberDetailsMap.get("Middle Name");
+		
+		validateNew(HomephoneNumberField);
+		sendkeys(HomephoneNumberField, HomeNumber);
+		  validateNew(MobileNumberField);
+		sendkeys(MobileNumberField, MobileNumber);
+		sendkeysNew(MiddleNameField, MiddleName);
+		sendkeys(Email,EmailAddress);
+		
+		if(NextBtn.isEnabled()){
+			System.out.println("Next Button is Enabled : All Required Details are entered");
+			return true;
+		}
+		return false;
+	}
 	public boolean validate_plan_details(Map<String, String> planDetailsMap) {
 		String PlanYear_PlanName_Text = PlanYear_PlanName.getText();
 		String Zip_County_Text = ZipCode_County.getText();

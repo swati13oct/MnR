@@ -43,13 +43,6 @@ Feature: 2.05.1.ACQ-OLE PCP
       | Mailing_Zip              | <mailingzip>             |
       | Email                    | <email>                  |
       | MedicaidNumber           | <medicaidnumber>         |
-    Then the user enters following information in Personal Information Page
-    	| Middle Name         | <middlename>         |
-      | Email Confirmation | <emailConfirmation> |
-      | Go Green           | <goGreen>           |
-      | Email              | <email>             |
-      |Home Number             | <phoneno>       |
-      | Mobile Number          | <mobileno>      |
     Then the user validates the Plan details in Personal Information Page OLE Right Rail
     Then the user validates the Member details dynamic display in Personal Information Page
     Then the user navigates to Medicare Information Page
@@ -110,18 +103,9 @@ Feature: 2.05.1.ACQ-OLE PCP
     Then the user navigates to Authorization Page for plan as per following rider options
       | Rider Flag | <riderflag> |
     Then the user validates required fields for Authorization Page
-    Then the user validates required fields for Authorization Page Representative
-        |authorizationFirstname|<authorizefirstN>|
-       	|authorizationLastname|<authorizelastN>|
-       	|authorizationAddress|<authorizeaddress>|
-       	|authorizationApartmentSuite|<authorizeapartment>|
-       |authorizationCity|<authorizecity>|
-        |authorizationZip|<authorizezip>|
-        |authorizationPhoneNo|<authorizephonenumber>|
-        |authorizationRelationship| <authorizeRelationship>|
-        |authorizationStateDisplay|<authorizestate>|
     Then the user navigates to Review and Submit Page
-   Then the user validates the Online Enrollment details on Review and Submit Page
+   #Then the user validates the Online Enrollment details on Review and Submit Page
+   Then the user validates the Plan and Member details on Review and Submit Page
     Then the user clicks on Submit Enrollment to complete enrollment
  		#Then the user validates Plan and Member Details on Confirmation Page
 #   Then the user Validates Next Steps in Confirmation Page for the Plan Type.

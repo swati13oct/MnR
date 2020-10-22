@@ -1325,6 +1325,41 @@ public class oleStepDefinition {
 		//}
 	}
 
+	@Then("^the user enters following information in Personal Information Page DSNP$")
+	public void the_user_enters_following__information_in_Personal_Information_Page_DSNP(DataTable arg1) throws Throwable {
+		/*
+		 * String alreadyEnrolled = (String)
+		 * getLoginScenario().getBean(oleCommonConstants.ALREADY_ENROLLED_FLAG); boolean
+		 * alreadyEnrolled_Flag = (alreadyEnrolled.contentEquals("true"))?true:false;
+		 * if(alreadyEnrolled_Flag){ System.out.
+		 * println("Already Enrolled Error message is Displayed in OLE Medicare Information  PAGE : "
+		 * +alreadyEnrolled+"  :  "+alreadyEnrolled_Flag+" - Validation Passed");
+		 * getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG,"true");
+		 * Assert.assertTrue(true); } else{
+		 */
+			List<DataTableRow> givenAttributesRow = arg1.getGherkinRows();
+			Map<String, String> MemberDetailsMap = new HashMap<String, String>();
+			for (int i = 0; i < givenAttributesRow.size(); i++) {
+				MemberDetailsMap.put(givenAttributesRow.get(i).getCells().get(0),
+						givenAttributesRow.get(i).getCells().get(1));
+			}
+			PersonalInformationPage personalInformationPage = (PersonalInformationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_PERSONAL_INFO_PAGE);
+			boolean isFormFilled = personalInformationPage.enter_member_details_Other_dsnp(MemberDetailsMap);
+			if (isFormFilled) {
+				getLoginScenario().saveBean(OLE_PageConstants.OLE_PERSONAL_INFO_PAGE,
+						personalInformationPage);
+				System.out.println("OLE Personal Information Page - All required Member Details are entered");
+				getLoginScenario().saveBean(oleCommonConstants.EMAIL, MemberDetailsMap.get("Email"));
+				getLoginScenario().saveBean(oleCommonConstants.PRIMARY_PHONE_NUMBER, MemberDetailsMap.get("Phone Number"));
+				getLoginScenario().saveBean(oleCommonConstants.MOBILE_NUMBER, MemberDetailsMap.get("Mobile Number"));
+				getLoginScenario().saveBean(oleCommonConstants.MIDDLE_NAME, MemberDetailsMap.get("Middle Name"));
+				
+				Assert.assertTrue(true);
+			}
+			else
+				Assert.fail("OLE Personal Information Page - Adding Member Details Failed");
+		//}
+	}
 	@Then("^the user validates the Plan details in Personal Information Page OLE Right Rail$")
 	public void the_user_validates_the_Plan_details_in_Personal_Information_Page_OLE_Right_Rail() throws Throwable {
 		/*
