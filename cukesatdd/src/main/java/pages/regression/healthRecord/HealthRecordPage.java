@@ -451,8 +451,6 @@ public class HealthRecordPage  extends HealthRecordBase {
 				System.out.println("TEST - Can't match anything");
 				return false;
 			}
-			System.out.println("OMG - href= " + acctProfOptLst.get(0).getAttribute("href"));
-			System.out.println("OMG - innerHTML = "+ acctProfOptLst.get(0).getAttribute("innerHTML"));
 			Assert.assertTrue("PROBLEM - 'Health Record' should be the first link in the dropdown.   first link on the list has text='"+ acctProfOptLst.get(0).getText()+"'", acctProfOptLst.get(0).getText().toLowerCase().contains("health record"));
 
 			String expUrl=stageUrl;
