@@ -41,6 +41,7 @@ import pages.acquisition.dceredesign.GetStartedPage;
 import pages.acquisition.isdecisionguide.IsDecisionGuideStep1;
 import pages.acquisition.medsuppole.MedSuppOLEPage;
 import pages.acquisition.ole.WelcomePage;
+import pages.acquisition.commonpages.PlanDetailsPage;
 import pages.acquisition.vppforaep.AepVppPlanSummaryPage;
 import pages.mobile.acquisition.ulayer.VPPRequestSendEmailPage;
 
@@ -627,9 +628,10 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	@FindBy(xpath = "//div[@class='et_pb_text_inner']//h1//strong")
 	private WebElement peoplesHealthPlanName;
+	
 	@FindBy(xpath = "//div[contains(@class,'container')]//img[@alt='Rocky Mountain']")
 	private WebElement rockyMountainLogo;
-
+	
 	public WebElement getValEstimatedAnnualDrugCostValue(String planName) {
 		// WebElement valEstimatedAnnualDrugCostValue =
 		// driver.findElement(By.xpath("//*[contains(text(),'"+planName+"')]/ancestor::div[@class='module-plan-overview
@@ -932,10 +934,14 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	}
 
 	public void clickCompareChkBox() {
-		if (validate(compareChkBox)) {
+		/*if (validate(compareChkBox)) {
 			waitforElement(compareChkBox);
 			compareChkBox.click();
-		}
+		}*/
+		WebElement Checkbox = driver.findElement(By
+				.xpath("//input[contains(@id,'compare-plan-1')]/ancestor::div[contains(@class,'compare-box')]//label"));
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript("arguments[0].click();", Checkbox);
 
 	}
 
@@ -3654,4 +3660,29 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 		}
 	}
+	
+	@FindBy(xpath = "//span[contains(@class,'single-added-text ng-binding show')]/following::a[contains(text(),'View Plan Details')][1]")
+	private WebElement ViewPlanLink_AddedToCompare;
+	
+	public PlanDetailsPage clickViewDetails_AddedToCompare() {
+
+		validateNew(ViewPlanLink_AddedToCompare);
+		ViewPlanLink_AddedToCompare.click();
+		CommonUtility.checkPageIsReadyNew(driver);
+		if (currentUrl().contains("#/details"))
+			return new PlanDetailsPage(driver);
+		return null;
+	}
+	@FindBy(xpath="//label[contains(@for,'compare-plan')]")
+	private WebElement planCompareCheckBox;
+	
+	public void verifyPlanComapreCheckboxIsUncheckedforFirstPlan() {
+		validate(planCompareCheckBox);
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		String CheckStatus = js.executeScript("return document.getElementById('compare-plan-1').checked;").toString();
+		System.out.println("Plan compare checkbox status:" + CheckStatus);
+		Assert.assertEquals("false", CheckStatus.trim());
+		System.out.println("Verified Plan Compare checkbox is unchecked");
+
+		}
 }

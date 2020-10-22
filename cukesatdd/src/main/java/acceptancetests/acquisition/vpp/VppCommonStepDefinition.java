@@ -35,6 +35,7 @@ import pages.acquisition.commonpages.AcquisitionHomePage;
 import pages.acquisition.commonpages.PlanDetailsPage;
 import pages.acquisition.commonpages.VPPPlanSummaryPage;
 import pages.acquisition.ole.WelcomePage;
+import pages.acquisition.commonpages.ProviderSearchPage;
 import pages.acquisition.commonpages.AgentsnBrokersAARPPage;
 import pages.acquisition.commonpages.DisclaimersAARPPage;
 import pages.acquisition.commonpages.PrivacyPolicyAARPPage;
@@ -232,6 +233,7 @@ public class VppCommonStepDefinition {
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		Assert.assertTrue("Error loading specific plan summary in VPP plan summary page",
 				planSummaryPage.getSpecificPlanInfo(planName));
+
 	}
 
 	@Then("^the user validates marketing bullets of the plan$")
@@ -274,9 +276,9 @@ public class VppCommonStepDefinition {
 		VPPPlanSummaryPage vppPlanSummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		String planType = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
-		String PlanPremium = vppPlanSummaryPage.getPlanPremium(PlanName, planType);
+		String PlanPremium = vppPlanSummaryPage.getPlanPremium(PlanName,planType);
 		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_PREMIUM, PlanPremium);
-
+		vppPlanSummaryPage.clickOnViewMoreForPlan(PlanName);
 		PlanDetailsPage vppPlanDetailsPage = vppPlanSummaryPage.navigateToPlanDetails(PlanName, planType);
 		if (vppPlanDetailsPage != null) {
 			getLoginScenario().saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE, vppPlanDetailsPage);
@@ -815,5 +817,232 @@ public class VppCommonStepDefinition {
 		VPPPlanSummaryPage planSummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		planSummaryPage.peopleLearnMoreButtonandValidate(planName);
+	}
+	@Then("^the user validates following PDF link is displayed with correct document code$")
+	public void the_user_validates_following_PDF_link_is_displayes_with_correct_document_code(DataTable givenAttributes) throws Throwable {
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		String PDFtype = memberAttributesMap.get("PDF type");
+		String DocumentCode = memberAttributesMap.get("DocumentCode");
+
+		PlanDetailsPage vppPlanDetailsPage = (PlanDetailsPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
+
+		boolean validationFlag = vppPlanDetailsPage.ValidatePDFlinkIsDisplayed(PDFtype,DocumentCode);
+		Assert.assertTrue("Validation failed : Expected text not displayed for riders monthly and yearly premium - ",validationFlag);
+	}
+	@Then("^the user click on PDF link and validates document code in site URL$")
+	public void the_user_click_on_PDF_link_and_validates_document_code_in_site_URL(DataTable givenAttributes) throws Throwable {
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		PlanDetailsPage vppPlanDetailsPage = (PlanDetailsPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
+		String PDFtype = memberAttributesMap.get("PDF type");
+
+		String DocumentCode = memberAttributesMap.get("DocumentCode");
+		boolean validationFlag = vppPlanDetailsPage.ClickValidatePDFlink(PDFtype, DocumentCode);
+		Assert.assertTrue("Validation failed : Expected Document Code is not Present in the PDF URL ",validationFlag);
+	}
+	@Then("^the user click on Plan costs tab and validates on site$")
+	public void the_user_click_on_Plan_costs_tab_and_validates_in_site(DataTable givenAttributes) throws Throwable {
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		String monthlyPremium = memberAttributesMap.get("Monthly Premium");
+		String yearlyPremium = memberAttributesMap.get("Yearly Premium");
+
+		PlanDetailsPage vppPlanDetailsPage = (PlanDetailsPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
+		boolean validationFlag = vppPlanDetailsPage.clickAndValidatePlanCosts(monthlyPremium,yearlyPremium);
+		Assert.assertTrue("Validation failed : Expected text not displayed for monthly and yearly premium - "+monthlyPremium+" "+yearlyPremium,validationFlag);
+	}
+	@Then("^the user click on Optional Services tab and add the rider on site$")
+	public void the_user_click_on_Optional_Services_tab_and_add_the_rider_in_AARP_site(DataTable givenAttributes) throws Throwable {
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		String optionalRider = memberAttributesMap.get("Optional Rider");
+
+		PlanDetailsPage vppPlanDetailsPage = (PlanDetailsPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
+
+		String optionalRiderPremium = vppPlanDetailsPage.addOptionalRider(optionalRider);
+	}
+	@Then("^the user clicks on both top and bottom back to plans link and validate its redirection$")
+	public void the_user_clicks_on_both_topand_bottom_back_to_plans_link_and_validate_its_redirection()
+			throws InterruptedException {
+		// getLoginScenario().saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE,
+		// vppPlanDetailsPage);
+		PlanDetailsPage vppPlanDetailsPage = (PlanDetailsPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
+		vppPlanDetailsPage.validatetopbacktoplanslink();
+		vppPlanDetailsPage.browserBack();
+		vppPlanDetailsPage.validatedownbacktoplanslink();
+
+	}
+
+	@Then("^the user view plan details of the above selected plan in site vpp$")
+	public void the_user_view_plan_details_of_the_above_selected_plan_in_UMS_site_vpp(DataTable givenAttributes) {
+
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		String planName = memberAttributesRow.get(0).getCells().get(1);
+		String planType = memberAttributesRow.get(1).getCells().get(1);
+		getLoginScenario().saveBean(VPPCommonConstants.PLAN_NAME, planName);
+		VPPPlanSummaryPage vppPlanSummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+
+		PlanDetailsPage vppPlanDetailsPage = vppPlanSummaryPage.navigateToPlanDetails(planName, planType);
+		if (vppPlanDetailsPage != null) {
+			getLoginScenario().saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE, vppPlanDetailsPage);
+			// if(vppPlanDetailsPage.validatePlanDetailsPage()){
+			// Assert.assertTrue(true);
+			// }else
+			// Assert.fail("Error in validating the Plan Details Page");
+
+		}
+	}
+
+	@Then("^the user click on Prescription Drug Benefits and validates$")
+	public void the_user_click_on_Prescription_Drug_Benefits_and_validates() throws Throwable {
+		PlanDetailsPage vppPlanDetailsPage = (PlanDetailsPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
+		vppPlanDetailsPage.clickAndValidatePrescriptionDrugBenefits();
+	}
+
+
+	@When("^the user validates the pdf section on site$")
+	public void userValidatesPDFSection() {
+		String planType = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
+		PlanDetailsPage vppPlanDetailsPage = (PlanDetailsPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
+		vppPlanDetailsPage.validatePdfSection(planType);
+	}
+	@Then("^User clicks on Back to Plans link and navigate back to plan summary$")
+	public void User_clicks_BackToPlansLink_and_navigate_back_to_plan_summary() {
+
+		PlanDetailsPage planDetailsPage = (PlanDetailsPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
+
+		VPPPlanSummaryPage plansummaryPage = planDetailsPage.navigateBackToPlanSummaryPageFromDetailsPage();
+		if (plansummaryPage != null) {
+			Assert.assertTrue(true);
+		} else
+			Assert.fail("Error in validating the Plan Summary Page");
+	}
+	
+	@And("^User click on add to compare checkbox and click on view details link$")
+	public void user_click_on_compare_checkbox_AARP() {
+		VPPPlanSummaryPage vppplansummarypage = (VPPPlanSummaryPage) loginScenario
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		vppplansummarypage.clickCompareChkBox();
+		PlanDetailsPage planDetailsPage = vppplansummarypage.clickViewDetails_AddedToCompare();
+		if (planDetailsPage != null) {
+			getLoginScenario().saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE, planDetailsPage);
+		}
+	}
+	
+	@Then("^I uncheck and go back to the vpp page to validate for site$")
+	public void uncheck_and_validate_vpp_page() {
+		PlanDetailsPage plandetailspage = (PlanDetailsPage) loginScenario.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
+		plandetailspage.clickCompareBox();
+		VPPPlanSummaryPage vppsummarypage = plandetailspage.navigateBackToPlanSummaryPageFromDetailsPage();
+			vppsummarypage.verifyPlanComapreCheckboxIsUncheckedforFirstPlan();
+	}
+	
+	
+	@Then("^the user click on Dental Cover Popup he must be able to validate plan defaults$")
+	public void the_user_click_on_Optional_Services_tab_and_validate_PlanDefaults(DataTable givenAttributes)
+			throws Throwable {
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		String planName = memberAttributesMap.get("Plan Name");
+
+		PlanDetailsPage vppPlanDetailsPage = (PlanDetailsPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
+		boolean optionalRiderFlag;
+				if(memberAttributesMap.get("Optional Rider").isEmpty())
+					optionalRiderFlag=false;
+				else {
+					String optionalRiderPremium = vppPlanDetailsPage.addOptionalRider(memberAttributesMap.get("Optional Rider"));
+					optionalRiderFlag=true;
+				}
+		vppPlanDetailsPage.validateDentalPopupDefaults(planName,optionalRiderFlag);
+	}
+	
+	@When("^the user navigates to the plan details page$")
+	public void user_navigates_to_plan_details_page(DataTable givenAttributes) {
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		String PlanName = memberAttributesRow.get(0).getCells().get(1);
+		getLoginScenario().saveBean(VPPCommonConstants.PLAN_NAME, PlanName);
+
+		VPPPlanSummaryPage vppPlanSummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+
+		String planType = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
+		System.out.println("Plan name is "+ PlanName+"Plan type is "+planType);
+		PlanDetailsPage vppPlanDetailsPage = vppPlanSummaryPage.navigateToPlanDetails(PlanName,planType);
+		if (vppPlanDetailsPage != null) {
+			getLoginScenario().saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE, vppPlanDetailsPage);
+			Assert.assertTrue(true);
+		} else
+			Assert.fail("Error in Loading the Plan Details Page");
+
+	}
+
+	@Then("^the user Click on Look up your Provider button on Plan Details Page$")
+	public void user_Clicks_on_Look_upyourProvider_button_on_PlanDetailsPage() {
+
+		PlanDetailsPage vppPlanDetailsPage = (PlanDetailsPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
+
+		ProviderSearchPage providerSearchPage = vppPlanDetailsPage.validateLookUpYourProviderButton();
+		if(providerSearchPage!=null) {
+			getLoginScenario().saveBean(PageConstants.PROVIDER_SEARCH_PAGE, providerSearchPage);
+		}
+
+	}
+	@Then("^the user click on Plan costs tab and validates in site$")
+	public void the_user_click_on_Plan_costs_tab_and_validates_in_AARP_site(DataTable givenAttributes) throws Throwable {
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		String monthlyPremium = memberAttributesMap.get("Monthly Premium");
+		String yearlyPremium = memberAttributesMap.get("Yearly Premium");
+
+		PlanDetailsPage vppPlanDetailsPage = (PlanDetailsPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
+		boolean validationFlag = vppPlanDetailsPage.clickAndValidatePlanCosts(monthlyPremium,yearlyPremium);
+		Assert.assertTrue("Validation failed : Expected text not displayed for monthly and yearly premium - "+monthlyPremium+" "+yearlyPremium,validationFlag);
 	}
 }
