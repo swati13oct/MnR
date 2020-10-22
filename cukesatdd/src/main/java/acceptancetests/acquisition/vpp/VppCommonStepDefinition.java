@@ -163,8 +163,10 @@ public class VppCommonStepDefinition {
 
 		String planYear = givenAttributesMap.get("Plan Year");
 
+		wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
-				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, (new VPPPlanSummaryPage(wd)));
 		
 		plansummaryPage.handlePlanYearSelectionPopup(planYear);
 	}
