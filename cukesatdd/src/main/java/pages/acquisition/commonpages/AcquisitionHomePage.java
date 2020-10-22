@@ -283,6 +283,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
    	
    	@FindBy(xpath ="//*[@id='sam-call-modal']/div/div")
    	private WebElement callSamPopup;
+   	
+   	@FindBy(xpath = "//*[contains(@class,'heading-1')]")
+   	private WebElement pageheader;
 
     
 	@FindBy(xpath = "//*[contains(@class,'proactive-offer')]")
@@ -1479,7 +1482,11 @@ public class AcquisitionHomePage extends GlobalWebElements {
 //			CommonUtility.checkPageIsReady(driver);
 			validate(callsamtooltip);
 			CheckiPerseptions();
-			callsam.click();
+			System.out.println(pageheader.getText());
+			jsClickNew(pageheader);
+			Thread.sleep(3000);
+			jsClickNew(callsam);
+//			callsam.click();
 			System.out.println("@@@@@@@@@@@@@@@ Call Icon Clicked @@@@@@@@@@@@@@@");
 			driver.switchTo().activeElement();
 			System.out.println(CallSamTFN.getText());

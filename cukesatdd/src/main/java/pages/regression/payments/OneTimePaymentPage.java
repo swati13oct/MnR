@@ -554,6 +554,7 @@ public class OneTimePaymentPage extends UhcDriver {
 
 	public CreditCardUPGPage clickOnNextButton() {
 		validate(otheramountfield);
+		TestHarness.checkForIPerceptionModel(driver);
 		NextButton.click();
 		System.out.println("User Click on Next button on one time page");
 		try {
