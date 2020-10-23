@@ -325,4 +325,50 @@ public class ProviderSearchCommonStepDefinition {
 //		VPPPlanSummaryPage plansummaryPage = providerSearchPage.MultipleselectsProvider();
 //		Assert.assertTrue("Not able to return to Plan Summary page", plansummaryPage != null);
 //	}
+
+
+
+
+	/**
+	 * @toDo:user Click on Is my Provider covered link
+	 */
+	
+	
+	/**
+	 * @toDo:Verify provider covered information is displayed on Plan Summary page
+	 */
+	@Then("^Verify provider name is displayed on Plan Summary page$")
+	public void verify_provider_covered_ulayer(DataTable Planname) {
+
+		List<DataTableRow> plannameAttributesRow = Planname.getGherkinRows();
+		Map<String, String> plannameAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < plannameAttributesRow.size(); i++) {
+
+			plannameAttributesMap.put(plannameAttributesRow.get(i).getCells().get(0),
+					plannameAttributesRow.get(i).getCells().get(1));
+		}
+		String planName = plannameAttributesMap.get("PlanName");
+
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		plansummaryPage.verifyproviderName(planName);
+	}
+
+	@When("^user selects a provider and retuns to VPP plan details page$")
+	public void user_selects_provider_and_return_vpp_Plan_details_page_ulayer() {
+		{
+			ProviderSearchPage providerSearchPage = (ProviderSearchPage) getLoginScenario()
+					.getBean(PageConstants.PROVIDER_SEARCH_PAGE);
+			PlanDetailsPage planDetailsPage = providerSearchPage.selectsProviderFromVppPlanDetailsPage();
+			Assert.assertTrue("Not able to return to Plan Details page", planDetailsPage != null);
+
+		}
+	}
+	@Then("^Verify X out of Y provider covered information is displayed on Plan Details page$")
+	public void verify_providers_covered_ulayer_planDetails() {
+		PlanDetailsPage vppPlanDetailsPage = (PlanDetailsPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
+		Assert.assertTrue("Provider coverage Info not updated", vppPlanDetailsPage.providerinfo());
+	}
 }
+
