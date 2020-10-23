@@ -482,17 +482,17 @@ Feature: 1.01 Member  benefits and Coverage page
   @devRegression @WaystoSave_walgreens
     Examples: 
       | TID   | planType | memberType             |
-     # | 15242 | PDP      | Wallgreens_BnC         |
+     | 15242 | PDP      | Wallgreens_BnC         |
 
   @devRegression @WaystoSave_mailOrder
     Examples: 
       | TID   | planType | memberType             |
-     # | 15243 | PDP      | MailOrderPharamacy_BnC |
+      | 15243 | PDP      | MailOrderPharamacy_BnC |
 
   @devRegression @noWaystoSave
     Examples: 
       | TID   | planType | memberType             |
-      | 15249 | MAPD     | withoutWaysToSave_BnC  |
+    #  | 15249 | MAPD     | withoutWaysToSave_BnC  |
       
   #TC20_Rider for Fed MA,MAPD plans only  
   # note: Due to timing that it takes for GPS to do the update (add or remove),

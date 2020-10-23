@@ -74,7 +74,7 @@ Feature: 1.24.a Member Individual Health Record - P1 - Dashboard, FindCare, Clai
 
   #----- begin regression
   @healthRecord01 @regressionMember @US2471601 @F424804
-  Scenario Outline: -Index <index> -FID <FID> -Plan Type: <planType> -Member Type: <memberType> - To verify iHR link display for user that is not on the exclusion table - P1 - Claims
+  Scenario Outline: -Index <index> -FID <FID> -Plan Type: <planType> -Member Type: <memberType> - To verify iHR link display for user that is not on the exclusion table - P1 - Dashboard, FindCare, Claims
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>         |
       | Member Type | <memberType>       |
