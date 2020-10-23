@@ -2132,9 +2132,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	public void toolTipForAnnualDeductible(String planName) {
 		WebElement toolTip = driver.findElement(By.xpath("(//*[contains(text(),\'" + planName + "\')]/ancestor::div[contains(@class, 'module-plan-overview')]//descendant :: span[contains(@class, 'standalone')]//*[name()='use'])[2]"));
 		WebElement tooltipContent = driver.findElement(By.xpath("(//*[contains(text(),\'" + planName + "\')]/ancestor::div[contains(@class, 'module-plan-overview')]//descendant :: span[contains(@class, 'standalone')]//span)[2]"));
-		/*Actions action = new Actions(driver);
-		action.moveToElement(toolTip).build().perform();*/
-		jsMouseOver(toolTip);
+		Actions action = new Actions(driver);
+		action.moveToElement(toolTip).build().perform();
 		String toolTipText = tooltipContent.getAttribute("textContent").trim();
 		if (toolTipText.contains("annual deductible")){
 			System.out.println("ToolTip text is " + toolTipText);
@@ -3161,12 +3160,12 @@ for (int i = 0; i < initialCount + 1; i++) {
 	
 	public void handlePlanYearSelectionPopup(String planYear) {
 
-		CommonUtility.checkPageIsReadyNew(driver);			
-			if(planYear.equalsIgnoreCase("current")) {				// if the scenario is for current year
-				if(validate(CurrentYearPlansBtn, 20)) {
-					System.out.println("*****CLICKING ON Current Year button*****: "+CurrentYearPlansBtn.getText());
-					jsClickNew(CurrentYearPlansBtn);
-					CommonUtility.checkPageIsReadyNew(driver);
+		CommonUtility.checkPageIsReadyNew(driver);
+		if (planYear.equalsIgnoreCase("current")) { // if the scenario is for current year
+			if (validate(CurrentYearPlansBtn, 20)) {
+				System.out.println("*****CLICKING ON Current Year button*****: " + CurrentYearPlansBtn.getText());
+				jsClickNew(CurrentYearPlansBtn);
+				CommonUtility.checkPageIsReadyNew(driver);
 					waitForPageLoadSafari();
 				}
 			}
@@ -3332,30 +3331,30 @@ public void RetrieveURL(String ExpectedsupplementURL) {
 		}
 	}
 public void signInOptumId(String username, String password) {
-	try {
-		signIn.click();
-		driver.findElement(By.cssSelector("input#userNameId_input")).sendKeys(username);
-		driver.findElement(By.cssSelector("input#passwdId_input")).sendKeys(password);
-		driver.findElement(By.cssSelector("input#SignIn")).click();
-		String Question = driver.findElement(By.cssSelector("label#challengeQuestionLabelId")).getText().trim();
-		WebElement securityAnswer = driver.findElement(By.cssSelector("div#challengeSecurityAnswerId >input"));
-		if (Question.equalsIgnoreCase("What is your best friend's name?")) {
-			System.out.println("Question is related to friendname");
-			securityAnswer.sendKeys("name1");
+		try {
+			signIn.click();
+			driver.findElement(By.cssSelector("input#userNameId_input")).sendKeys(username);
+			driver.findElement(By.cssSelector("input#passwdId_input")).sendKeys(password);
+			driver.findElement(By.cssSelector("input#SignIn")).click();
+			String Question = driver.findElement(By.cssSelector("label#challengeQuestionLabelId")).getText().trim();
+			WebElement securityAnswer = driver.findElement(By.cssSelector("div#challengeSecurityAnswerId >input"));
+			if (Question.equalsIgnoreCase("What is your best friend's name?")) {
+				System.out.println("Question is related to friendname");
+				securityAnswer.sendKeys("name1");
+			}
+
+			else if (Question.equalsIgnoreCase("What is your favorite color?")) {
+				System.out.println("Question is related to color");
+				securityAnswer.sendKeys("color1");
+			} else {
+				System.out.println("Question is related to phone");
+				securityAnswer.sendKeys("number1");
+			}
+
+		} catch (Exception e) {
+			Assert.fail("###############Optum Id Sign In failed###############");
 		}
 
-		else if (Question.equalsIgnoreCase("What is your favorite color?")) {
-			System.out.println("Question is related to color");
-			securityAnswer.sendKeys("color1");
-		} else {
-			System.out.println("Question is related to phone");
-			securityAnswer.sendKeys("number1");
-		}
-		
-	} catch (Exception e) {
-		Assert.fail("###############Optum Id Sign In failed###############");
-	}
-	
 	}
 
 	/**
