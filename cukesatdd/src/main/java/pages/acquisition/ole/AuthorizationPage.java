@@ -176,18 +176,18 @@ public class AuthorizationPage extends UhcDriver{
 		return validation_Flag;
 	}
 	
-	public boolean validate_required_field_representative(Map<String, String> memberDetailsMap) throws InterruptedException {
+	public boolean validate_required_field_representative(Map<String, String> MemberDetailsMap) throws InterruptedException {
 		
 		
-		String AuthorizationFirstname = memberDetailsMap.get("authorizationFirstname");
-		String AuthorizationLastname = memberDetailsMap.get("authorizationLastname");
-		String AuthorizationAddress = memberDetailsMap.get("authorizationAddress");
-		String AuthorizationApartmentSuite = memberDetailsMap.get("authorizationApartmentSuite");
-		String AuthorizationCity = memberDetailsMap.get("authorizationCity");
-		String AuthorizationZip = memberDetailsMap.get("authorizationZip");
-		String AuthorizationPhoneNo = memberDetailsMap.get("authorizationPhoneNo");
-		String AuthorizationRelationship = memberDetailsMap.get("authorizationRelationship");
-		String AuthorizationStateDisplay= memberDetailsMap.get("authorizationStateDisplay");
+		String AuthorizationFirstname = MemberDetailsMap.get("authorizationFirstname");
+		String AuthorizationLastname = MemberDetailsMap.get("authorizationLastname");
+		String AuthorizationAddress = MemberDetailsMap.get("authorizationAddress");
+		String AuthorizationApartmentSuite = MemberDetailsMap.get("authorizationApartmentSuite");
+		String AuthorizationCity = MemberDetailsMap.get("authorizationCity");
+		String AuthorizationZip = MemberDetailsMap.get("authorizationZip");
+		String AuthorizationPhoneNo = MemberDetailsMap.get("authorizationPhoneNo");
+		String AuthorizationRelationship = MemberDetailsMap.get("authorizationRelationship");
+		String AuthorizationStateDisplay= MemberDetailsMap.get("authorizationStateDisplay");
 		
 		
 		boolean validation_Flag = true;

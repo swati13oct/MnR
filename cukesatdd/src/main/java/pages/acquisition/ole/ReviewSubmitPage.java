@@ -528,7 +528,7 @@ public class ReviewSubmitPage extends UhcDriver{
 		String Expected_PlanPremium = detailsMap.get("Plan Premium");
 		String Medicaid_No = detailsMap.get("Medicaid");
 		String Mailing_AptNo = detailsMap.get("MailingAptNo");
-		String PrimaryPhoneNumber = detailsMap.get("Primary Phone Number");
+		String PrimaryPhoneNumber = detailsMap.get("Home Number");
 		String MobilePhoneNumber = detailsMap.get("Mobile Phone Number");
 		String EmailConfirmationNumber = detailsMap.get("Email Confirmation Number");
 		String Paperless_Delivery = detailsMap.get("Paperless Delivery");
@@ -617,7 +617,7 @@ public class ReviewSubmitPage extends UhcDriver{
 		flag&=validateText(MailStateDisplay,Mailing_State);
 		flag&=validateText(MailZipDisplay,Mailing_Zip);
 		flag&=validateText(MailStreetDisplays,Mailing_Street);		
-		flag&=validateText(MailApartmentSuite,Mailing_AptNo);
+		//flag&=validateText(MailApartmentSuite,Mailing_AptNo);
 		flag&=validateText(MailCityDisplay,Mailing_City);		
 		
 		if(validate(Submit_Disclaimer) && validate(Enrollment_Disclaimer_Text)){

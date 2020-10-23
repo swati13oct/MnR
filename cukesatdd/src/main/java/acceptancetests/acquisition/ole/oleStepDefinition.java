@@ -1312,7 +1312,7 @@ public class oleStepDefinition {
 						personalInformationPage);
 				System.out.println("OLE Personal Information Page - All required Member Details are entered");
 				getLoginScenario().saveBean(oleCommonConstants.EMAIL, MemberDetailsMap.get("Email"));
-				getLoginScenario().saveBean(oleCommonConstants.PRIMARY_PHONE_NUMBER, MemberDetailsMap.get("Phone Number"));
+				getLoginScenario().saveBean(oleCommonConstants.PRIMARY_PHONE_NUMBER, MemberDetailsMap.get("Home Number"));
 				getLoginScenario().saveBean(oleCommonConstants.MOBILE_NUMBER, MemberDetailsMap.get("Mobile Number"));
 				getLoginScenario().saveBean(oleCommonConstants.MIDDLE_NAME, MemberDetailsMap.get("Middle Name"));
 				getLoginScenario().saveBean(oleCommonConstants.EMAIL_CONFIRMATION, MemberDetailsMap.get("Email Confirmation"));
@@ -3151,7 +3151,7 @@ public void the_user_validates_the_online_Enrollment_details_on_Review_and_Submi
 
 		DetailsMap.put("Proposed Effective date", (String) getLoginScenario().getBean(oleCommonConstants.PROPOSED_EFF_DATE));
 		DetailsMap.put("Mailing Apartment Number", (String) getLoginScenario().getBean(oleCommonConstants.MAILING_APARTMENT_NUMBER));
-		DetailsMap.put("Primary Phone Number", (String) getLoginScenario().getBean(oleCommonConstants. PRIMARY_PHONE_NUMBER));
+		DetailsMap.put("Home Number", (String) getLoginScenario().getBean(oleCommonConstants. PRIMARY_PHONE_NUMBER));
 		DetailsMap.put("Mobile Number", (String) getLoginScenario().getBean(oleCommonConstants.MOBILE_NUMBER));
 		DetailsMap.put("Email Confirmation", (String) getLoginScenario().getBean(oleCommonConstants.EMAIL_CONFIRMATION));
 		DetailsMap.put("Paperless Delivery", (String) getLoginScenario().getBean(oleCommonConstants.PAPERLESS_DELIVERY));
