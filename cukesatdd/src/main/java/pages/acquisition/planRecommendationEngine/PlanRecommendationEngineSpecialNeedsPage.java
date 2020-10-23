@@ -161,10 +161,12 @@ public class PlanRecommendationEngineSpecialNeedsPage extends UhcDriver {
 					specialNeedspageFunctional(option);
 					specialNeedsOptionsMoreInfo(option);
 				}
-				continueBtn.click();
+//				continueBtn.click();
+				jsClickNew(continueBtn);
 			}else {
 				if(options.isEmpty()){
-					continueBtn.click();
+//					continueBtn.click();
+					jsClickNew(continueBtn);
 					validate(errorMessage, 30);
 					Assert.assertTrue(errorMessage.getText().contains("No"));
 				}else if(options.contains("None")) {
@@ -172,7 +174,8 @@ public class PlanRecommendationEngineSpecialNeedsPage extends UhcDriver {
 					for(String option:snpoptions) {
 					specialNeedspageFunctional(option);
 					}
-					continueBtn.click();
+//					continueBtn.click();
+					jsClickNew(continueBtn);
 					validate(errorMessage, 30);
 					Assert.assertTrue(errorMessage.getText().contains("Please"));
 				}
@@ -217,7 +220,8 @@ public class PlanRecommendationEngineSpecialNeedsPage extends UhcDriver {
 					Assert.assertTrue(snpMedicaidAccordionMoreInfo.getText().contains("More"));
 //					Assert.assertTrue(snpMedicaidAccordionMoreInfo1stPara.getText().contains("D-SNP"));
 //					Assert.assertTrue(snpMedicareAccordionMoreInfo2ndPara.getText().contains("toll free"));
-					snpMedicaidAccordionCarrot.click();
+//					snpMedicaidAccordionCarrot.click();
+					jsClickNew(snpMedicaidAccordionCarrot);
 				}else {
 					System.out.println("Accordion is not displayed for  "+SNPType+" .");
 				}
@@ -227,7 +231,8 @@ public class PlanRecommendationEngineSpecialNeedsPage extends UhcDriver {
 					Assert.assertTrue(snpConditionsAccordionMoreInfo.getText().contains("More"));
 //					Assert.assertTrue(snpConditionsAccordionMoreInfo1stPara.getText().contains("C-SNP"));
 //					Assert.assertTrue(snpConditionsAccordionMoreInfo2ndPara.getText().contains("toll free"));
-					snpConditionsAccordionCarrot.click();
+//					snpConditionsAccordionCarrot.click();
+					jsClickNew(snpConditionsAccordionCarrot);
 				}else {
 					System.out.println("Accordion is not displayed for  "+SNPType+" .");
 				}
@@ -237,7 +242,8 @@ public class PlanRecommendationEngineSpecialNeedsPage extends UhcDriver {
 					Assert.assertTrue(snpNursinghomeAccordionMoreInfo.getText().contains("More"));
 //					Assert.assertTrue(snpNursinghomeAccordionMoreInfo1stPara.getText().contains("I-SNP"));
 //					Assert.assertTrue(snpNursinghomeAccordionMoreInfo2ndPara.getText().contains("toll free"));
-					snpNursinghomeAccordionCarrot.click();
+//					snpNursinghomeAccordionCarrot.click();
+					jsClickNew(snpNursinghomeAccordionCarrot);
 				}else {
 					System.out.println("Accordion is not displayed for  "+SNPType+" .");
 				}

@@ -643,7 +643,8 @@ public class PlanRecommendationEngineResultsPage extends UhcDriver {
 				validate(coveredIcon,20);
 			}
 			Collections.sort(DrugsList);
-			drugCoveredeVPP.click();
+//			drugCoveredeVPP.click();
+			jsClickNew(drugCoveredeVPP);
 			System.out.println("DrugsList Size is : "+DrugsList.size());
 			System.out.println("DrugList Content is : "+DrugsList);
 			return DrugsList;
@@ -651,7 +652,8 @@ public class PlanRecommendationEngineResultsPage extends UhcDriver {
 		
 		public void drugcoveredsession() {
 			drugCoveredeVPP = MA1stPlanList.get(0).findElement(By.cssSelector("a[class*='drug-list-toggle']"));
-			drugCoveredeVPP.click();
+//			drugCoveredeVPP.click();
+			jsClickNew(drugCoveredeVPP);
 		}
 		
 		public void verifyConfirmationmodalResults(int count,ArrayList<String> drug,ArrayList<String> drugListVPP) {
@@ -689,33 +691,39 @@ public class PlanRecommendationEngineResultsPage extends UhcDriver {
 	public void vppToPre() {
 		System.out.println("Validating VPP to PRE Page");
 		validate(StartNowButton,20);
-		StartNowButton.click();
+//		StartNowButton.click();
+		jsClickNew(StartNowButton);
 		pageloadcomplete();
+		waitForPageLoadSafari();
 	}
 	
 
 	public void validateDrugPage(String plan,boolean removedrug) {
 		System.out.println("Validating Drugs in Drug Page");
-		getStartedBtn.click();
+//		getStartedBtn.click();
+		jsClickNew(getStartedBtn);
 		threadsleep(2000);
 		int MAPD = 6;
 		int PDP = 3;
 		int None = 6;
 		if(plan.equalsIgnoreCase("MAPD")) {
 			for(int i=0;i<MAPD;i++) {
-				continueBtn.click();
+//				continueBtn.click();
+				jsClickNew(continueBtn);
 				threadsleep(2000);
 				pageloadcomplete();
 			}
 		}else if(plan.equalsIgnoreCase("None")) {
 			for(int i=0;i<None;i++) {
-				continueBtn.click();
+//				continueBtn.click();
+				jsClickNew(continueBtn);
 				threadsleep(2000);
 				pageloadcomplete();
 			}
 		}else if(plan.equalsIgnoreCase("PDP")) {
 			for(int i=0;i<PDP;i++) {
-				continueBtn.click();
+//				continueBtn.click();
+				jsClickNew(continueBtn);
 				threadsleep(2000);
 				pageloadcomplete();
 			}
@@ -738,19 +746,22 @@ public class PlanRecommendationEngineResultsPage extends UhcDriver {
 		int None = 1;
 		if(plan.equalsIgnoreCase("MAPD")) {
 			for(int i=0;i<MAPD;i++) {
-				continueBtn.click();
+//				continueBtn.click();
+				jsClickNew(continueBtn);
 				threadsleep(2000);
 				pageloadcomplete();
 			}
 		}else if(plan.equalsIgnoreCase("None")) {
 			for(int i=0;i<None;i++) {
-				continueBtn.click();
+//				continueBtn.click();
+				jsClickNew(continueBtn);
 				threadsleep(2000);
 				pageloadcomplete();
 			}
 		}else if(plan.equalsIgnoreCase("PDP")) {
 			for(int i=0;i<PDP;i++) {
-				continueBtn.click();
+//				continueBtn.click();
+				jsClickNew(continueBtn);
 				threadsleep(2000);
 				pageloadcomplete();
 			}
@@ -763,7 +774,8 @@ public class PlanRecommendationEngineResultsPage extends UhcDriver {
 	public void addProviderVPP(String name,String multi) {
 //		MAViewPlansLink.click();
 		String curdriverhandle = driver.getWindowHandle();
-		enterProvidersInfoMA1stPlan.click();
+//		enterProvidersInfoMA1stPlan.click();
+		jsClickNew(enterProvidersInfoMA1stPlan);
 		if(multi.equalsIgnoreCase("Yes"))
 			count = 1;
 		werallyResults=docdesktop.validateLinksanotherWindow(curdriverhandle, "Doctors", name, count);	
@@ -774,7 +786,8 @@ public class PlanRecommendationEngineResultsPage extends UhcDriver {
 	public ArrayList<String> getProvidersVPP() {
 		threadsleep(5000);
 		pageloadcomplete();
-		providersInfoMA1stPlan.click();
+//		providersInfoMA1stPlan.click();
+		jsClickNew(providersInfoMA1stPlan);
 		vppProviderResults = new ArrayList<String>();
 		for(WebElement e:providersListMA1stPlan) {
 			vppProviderResults.add(e.getText().trim());
@@ -833,7 +846,8 @@ public class PlanRecommendationEngineResultsPage extends UhcDriver {
 	}
 	
 	public void navigatePRE() {
-		StartNowButton.click();
+//		StartNowButton.click();
+		jsClickNew(StartNowButton);
 		pageloadcomplete();
 		Assert.assertTrue(driver.getCurrentUrl().contains("plan-recommendation-engine.html"));
 		//driver.navigate().refresh();
