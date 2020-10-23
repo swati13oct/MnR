@@ -1483,7 +1483,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			System.out.println(path);
 			driver.navigate().to(testSiteUrl);
 			CommonUtility.checkPageIsReady(driver);
-			navigateToPath(path);
+			driver.navigate().to(path);
 			CheckiPerseptions();
 			validate(callsamtooltip);
 			jsClickNew(pageheader);
