@@ -94,6 +94,7 @@ public class PlanDocumentsAndResourcesUsersHelperProd {
 				targetTestDocList.add("Benefit Highlights");
 				targetTestDocList.add("Summary of Benefits");
 				targetTestDocList.add("Evidence of Coverage");
+				targetTestDocList.add("UnitedHealth Passport Program"); 
 				targetTestDocList.add("Comprehensive Formulary");
 				targetTestDocList.add("Alternative Drug List");
 				targetTestDocList.add("Prior Authorization Criteria");
@@ -107,6 +108,7 @@ public class PlanDocumentsAndResourcesUsersHelperProd {
 				targetTestDocList.add("Beneficios Importantes");
 				targetTestDocList.add("Resumen de Beneficios");
 				targetTestDocList.add("Comprobante de Cobertura");
+				targetTestDocList.add("Programa UnitedHealth Passport"); 
 				targetTestDocList.add("Comprehensive Formulary-Spanish");
 				targetTestDocList.add("Lista de Medicamentos Alternativos");
 				return targetTestDocList;
