@@ -1721,7 +1721,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		}
 		
 		public void signInheader() {
-			headerSignInLink.click();
+			jsClickNew(headerSignInLink);
 			validateNew(signIn);
 			if (driver.getCurrentUrl().contains("medicare.uhc.com")) {
 				Assert.assertTrue(true);
