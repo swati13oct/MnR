@@ -1157,7 +1157,7 @@ public class ComparePlansPageMobile extends UhcDriver {
 
 	}
 
-	@FindBy(xpath = "//*[contains(@id,'get-started')]")
+	@FindBy(xpath = "//span[contains(text(),'Previous: Get Started')]")
 	public WebElement getStartedTab;
 
 	@FindBy(xpath = "//body/div[@id='site-wrapper']/div[@id='globalContentIdForSkipLink']/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[4]/div[1]/div[1]/div[1]/div[1]/div[1]/div[10]/div[5]/div[1]/div[4]/div[1]/div[2]/div[2]/div[1]/div[2]/div[2]/div[2]/div[1]/div[1]/div[2]/div[1]/div[1]/h4[1]/a[1]")

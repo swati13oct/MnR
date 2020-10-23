@@ -1641,7 +1641,8 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 		}
 		if (allPDPlans != null) {
 			for (int i = 0; i < plansForCompare; i++) {
-				allPDPlans.get(i).click();
+				//allPDPlans.get(i).click();
+				jsClickNew(allPDPlans.get(i));
 				System.out.println("Plan added to compare : " + i);
 			}
 		}

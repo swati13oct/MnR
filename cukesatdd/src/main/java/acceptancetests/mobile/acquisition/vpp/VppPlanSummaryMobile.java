@@ -84,7 +84,7 @@ public class VppPlanSummaryMobile {
 
 		String planName = givenAttributesMap.get("Plan Name");
 		getLoginScenario().saveBean(VPPCommonConstants.PLAN_NAME, planName);
-		VPPPlanSummaryPage planSummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+		VPPPlanSummaryPageMobile planSummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		
 		Assert.assertTrue("Error loading specific plan summary in VPP plan summary page",
