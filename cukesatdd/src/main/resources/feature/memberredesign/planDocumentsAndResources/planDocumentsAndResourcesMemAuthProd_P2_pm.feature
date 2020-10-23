@@ -58,7 +58,7 @@ Feature: 1.06.1.2 Member Plans and Documents - section: Plan Materials - Member 
 	@prod_active_ma @prod_active_ma_ind
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | pm_sd | pm_op | pm_mi | pm_en | pm_es | pm_zh |
-      | 09-028 | 15129       | kkumard  | mnrs786@  | ERNIE2450 | MA       | AARP_IND_EFF_PDnR     | true  | true  | true  | true  | true  | false | 
+      | 09-028 | 15129       | kkumard   | mnrs786@  | haradaty32 | MA       | AARP_IND_EFF_PDnR     | true  | true  | true  | true  | true  | false | 
 
 	@prod_active_ma @prod_active_ma_grp
 	Examples: 
