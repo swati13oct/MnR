@@ -11,8 +11,8 @@ Feature: To test member Signin from various Deeplinks
     And user is navigated to the paymentDeeplink page
 
     Examples: 
-      | username | password   |
-      | Test_119 | Password@1 |
+      | username   | password   |
+      | q2_pay_002 | Password@1 |
 
   @regressionMember @claimsDeeplink @CodeTransformers
   Scenario Outline: Verify Member lands on the claims page after signing in from claims deeplink.
@@ -24,8 +24,8 @@ Feature: To test member Signin from various Deeplinks
     And user is navigated to the claimsDeeplink page
 
     Examples: 
-      | username | password   |
-      | Test_119 | Password@1 |
+      | username   | password   |
+      | q2_pay_002 | Password@1 |
 
   @regressionMember @eobDeeplink @CodeTransformers
   Scenario Outline: Verify Member lands on the eob page after signing in from eob deeplink.
@@ -37,8 +37,8 @@ Feature: To test member Signin from various Deeplinks
     And user is navigated to the eobDeeplink page
 
     Examples: 
-      | username | password   |
-      | Test_119 | Password@1 |
+      | username   | password   |
+      | q2_pay_002 | Password@1 |
 
   @regressionMember @accountProfileDeeplink @CodeTransformers
   Scenario Outline: Verify Member lands on the account Profile page after signing in from account profile deeplink.
@@ -50,8 +50,8 @@ Feature: To test member Signin from various Deeplinks
     And user is navigated to the accountProfile deep link page
 
     Examples: 
-      | username | password   |
-      | Test_119 | Password@1 |
+      | username   | password   |
+      | q2_pay_002 | Password@1 |
 
   @regressionMember @coverageandBenefitsDeeplink @CodeTransformers
   Scenario Outline: Verify Member lands on the coverageandBenefits page after signing in from coverageandBenefits deeplink.
@@ -63,8 +63,8 @@ Feature: To test member Signin from various Deeplinks
     And user is navigated to the coverageandBenefits deep link page
 
     Examples: 
-      | username | password   |
-      | Test_119 | Password@1 |
+      | username   | password   |
+      | q2_pay_002 | Password@1 |
 
   @regressionMember @healthwellnessDeepLink @CodeTransformers
   Scenario Outline: Verify Member lands on the healthwellness page after signing in from healthwellness deeplink.
@@ -76,8 +76,8 @@ Feature: To test member Signin from various Deeplinks
     And user is navigated to the healthwellness deep link page
 
     Examples: 
-      | username | password   |
-      | Test_119 | Password@1 |
+      | username   | password   |
+      | q2_pay_002 | Password@1 |
 
   @regressionMember @myDocumentsDeepLink @CodeTransformers
   Scenario Outline: Verify Member lands on the healthwellness page after signing in from healthwellness deeplink.
@@ -89,8 +89,8 @@ Feature: To test member Signin from various Deeplinks
     And user is navigated to the myDocuments deep link page
 
     Examples: 
-      | username | password   |
-      | Test_119 | Password@1 |
+      | username   | password   |
+      | q2_pay_002 | Password@1 |
 
   @regressionMember @deepLink @F444247
   Scenario Outline: Verify that user is able to navigate to member pages from Ping Federate Test Harness Page for canopy
@@ -130,3 +130,36 @@ Feature: To test member Signin from various Deeplinks
       | username            | password   |
       | q3_SEP_2020SHIP_019 | Password@1 |
       
+   @regressionMember @codeWarriors @F477221
+   Scenario Outline: Verify members lands on the pharmacy page after signing in from pharmacy deeplink.
+    Given member lands on the pharmacy deeplink page
+      | <brand> |
+    And the pharmacy deeplink login page is displayed with all the fields
+    And on pharmacy deeplink login page I enter the member details and click continue
+      | User Name | <username> |
+      | Password  | <password> |
+    And user is navigated to the pharmacy deep link page
+
+    Examples: 
+      | username            | password   | brand |
+      | q3_Sep_UAT4_Sofl022 | Password@1 | PCP 	 |
+      | q3_Sep_UAT4_Sofl015 | Password@1 | Medica|
+      | q2_apr_aarp0250 	| Password@1 | AARP	 |
+      | mapdtest1			| Password@1 | UHC	 |
+      
+   @regressionMember @codeWarriors @F477221
+   Scenario Outline: Verify members lands on the virtual visit page after signing in from virtual visit deeplink.
+    Given member lands on the virtual visit deeplink page
+      | <brand> |
+    And the virtual visit deeplink login page is displayed with all the fields
+    And on virtual visit deeplink login page I enter the member details and click continue
+      | User Name | <username> |
+      | Password  | <password> |
+    And user is navigated to the virtual visit deep link page
+
+    Examples: 
+      | username            | password   | brand |
+      | q2_jun_sofl0002 	| Password@1 | PCP 	 |
+      | q3_Sep_UAT4_Sofl017 | Password@1 | Medica|
+      | q2_apr_aarp0250		| Password@1 | AARP	 |
+      | mapdtest1			| Password@1 | UHC	 |

@@ -144,7 +144,7 @@ public class ComparePlansPageBlayer extends UhcDriver {
 	
    	String ChatSamText= "Chat with a Licensed Insurance Agent";
 	
-   	@FindBy(xpath="//div[text()='Your Hospitals']")
+   	@FindBy(xpath="//*[contains(@id,'yourhospitalsheading')]")
 	private WebElement yourHospitalsBanner;
 	
 	@FindBy(xpath="//a[text()='Add Hospitals']")
@@ -159,13 +159,13 @@ public class ComparePlansPageBlayer extends UhcDriver {
 	@FindBy(xpath="//*[normalize-space(text())='Hospital Summary']/ancestor::th/following::td[1]")
 	private WebElement HospitalSummaryCoverageHeader;
 
-	@FindBy(xpath="//*[normalize-space(text())='Hospital Summary']/ancestor::th/following::tr[1]//th//span[contains(@class,'provider-name')]")
+	@FindBy(xpath="/tr[contains(@ng-repeat,'hospital')]//th//*[contains(@class,'provider-name')]")
 	private WebElement HospitalProviderName;
 	
 	@FindBy(xpath="//*[normalize-space(text())='Hospital Summary']/ancestor::th/following::tr[1]//td[1]")
 	private WebElement HospitalProviderCoverageText;	
 	
-	@FindBy(xpath="//div[text()='Your Doctors']")
+	@FindBy(xpath="//*[contains(@id,'yourdoctorsheading')]")
 	private WebElement yourDoctorsBanner;
 	
 	@FindBy(xpath="//a[text()='Add Doctors']")
@@ -173,16 +173,17 @@ public class ComparePlansPageBlayer extends UhcDriver {
 	
 	@FindBy(xpath="//a[text()='Edit Doctors']")
 	private WebElement editDoctorsLink;
+	
 	@FindBy(xpath="//*[contains(@class,'provider') and text()='Summary']")
 	private WebElement providerSumamryHeader;
 	
 	@FindBy(xpath="//*[contains(@class,'provider') and text()='Summary']/ancestor::th/following::td[1]")
 	private WebElement providerSumamryHeaderCount;
 	
-	@FindBy(xpath="//*[contains(@class,'provider') and text()='Summary']/ancestor::th/following::tr[1]//th//div[contains(@class,'provider-name')]")
+	@FindBy(xpath="//th//*[contains(@class,'provider-name')]")
 	private WebElement FirstProviderName;
 	
-	@FindBy(xpath="//*[contains(@class,'provider') and text()='Summary']/ancestor::th/following::tr[1]//td[1]//a")
+	@FindBy(xpath="//*[contains(@id,'viewLocationLink-0')]")
 	private WebElement viewlocationsLink;	
 	
 	@FindBy(xpath="//div[text()='Your Drugs']")

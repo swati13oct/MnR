@@ -30,6 +30,7 @@ import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 import gherkin.formatter.model.DataTableRow;
+import pages.acquisition.dceredesign.GetStartedPage;
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.pharmacyLocator.PharmacySearchPage;
 
@@ -212,6 +213,9 @@ public class PlanDetailsPage extends UhcDriver {
 
 	@FindBy(id = "selectmultycounty_box")
 	private WebElement countyPopOut;
+	
+	@FindBy(xpath = "//button[contains(@id,'addDrug')]")
+	public WebElement AddMyDrugsBtn;
 
 	@FindBys(value = { @FindBy(xpath = "//div[@id='selectCounty']/p") })
 	private List<WebElement> countyList;
@@ -458,6 +462,30 @@ public class PlanDetailsPage extends UhcDriver {
 			return new DrugCostEstimatorPage(driver);
 		return null;
 	}
+	
+	public GetStartedPage navigateToDCERedesign() {
+
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		presDrugTab.get(0).click();
+		CommonUtility.waitForPageLoad(driver, estimateDrugBtn, 20);
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", estimateDrugBtn);
+		((JavascriptExecutor) driver).executeScript("arguments[0].click();", estimateDrugBtn);
+		try {
+			Thread.sleep(4000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if (validateNew(AddMyDrugsBtn))
+			return new GetStartedPage(driver);
+		return null;
+	}
+	
 
 	/*extracting cost from prescription tab*/
 	public String costComparisonPrescriptionDrugFromDCE() {
@@ -923,14 +951,6 @@ public class PlanDetailsPage extends UhcDriver {
 				Assert.fail("Exception!!! County does not exists");
 			}
 
-
-
-
-
-
-
-
-
 			CommonUtility.waitForPageLoad(driver, distanceDropownID, 45);
 
 			if(validateNew(distanceDropownID)){
@@ -939,22 +959,6 @@ public class PlanDetailsPage extends UhcDriver {
 			}else
 			{
 				System.out.println("Pharmacy locator page not loaded"); 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 			}
 
 			return null;

@@ -5,7 +5,23 @@ Feature: 1.04.2 To Test DREAM EOB for Members - E2E
      Given feature security flag must set to true when testing on stage env
       | Feature           | UCPEob |
 
+  #----- begin sanity
+  @sanity
+  Scenario Outline: -index: <index> -planType: <planType> -memberType: <memberType> -To verify DREAM EOB page content and PDFs
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type   | <planType>   |
+      | Member Type | <memberType> |
+    Then the user navigates to EOB page
+    #----- Validate Date Range Last 18 months ----  
+    And the user selects the desired date range
+      | Date Range | Last 18 months |
+    Then the user validates search result section content for DREAM EOB
 
+    Examples: 
+      | index | planType | memberType        | flagZeroEob |
+      | S01   | MAPD     | COSMOS_DEOB       | true        |
+
+  #----- begin regression
   @dreamEob01 @E2E @regressionMember 
   Scenario Outline: -index: <index> -planType: <planType> -memberType: <memberType> -To verify DREAM EOB page content and PDFs
     Given login with following details logins in the member portal and validate elements
@@ -82,7 +98,7 @@ Feature: 1.04.2 To Test DREAM EOB for Members - E2E
     @dreamEob01c 
     Examples: 
       | index | planType | memberType        | note                              | flagZeroEob |
-      | 05    | MA       | COSMOS_EOB_R      | old C                             | false       |
+      | 05    | MA       | COSMOS_EOB_R      | old C                             | true        |
 
     @dreamEob01c  @devRegression
     Examples: 
@@ -107,5 +123,4 @@ Feature: 1.04.2 To Test DREAM EOB for Members - E2E
     Examples: 
       | index | planType | memberType        | note                              | flagZeroEob |
       | 11    | MAPD     | ES_CnD_NICE_EOB   | 1 new CnD spanish, old M          | true        |
-      | 12    | MAPD     | ES_D_NICE_EOB     | 1 new D spanish, old M            | true        |
-      
+      | 12    | MAPD     | ES_D_NICE_EOB     | 1 new D spanish, old M            | true        |      

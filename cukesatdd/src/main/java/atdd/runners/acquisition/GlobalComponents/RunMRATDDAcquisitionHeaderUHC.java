@@ -16,7 +16,7 @@ jsonReport = "target/cucumber-RunMRATDDAcquisitionHeaderUHC.json",detailedReport
 detailedAggregatedReport = true, overviewReport = true, toPDF = true, 
 outputFolder = "target/RunMRATDDAcquisitionHeaderUHC")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.acquisition" }, features = { "src/main/resources/feature/acquisition/globalComponents" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionHeaderUHC.json" }, tags = { "@globalheaderBLayer" })
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionHeaderUHC.json" }, tags = { "@globalheader_UHC" })
 public class RunMRATDDAcquisitionHeaderUHC {
 
 }

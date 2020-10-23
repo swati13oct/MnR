@@ -16,7 +16,7 @@ import org.testng.Assert;
 
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
-import pages.acquisition.bluelayer.AcquisitionHomePage;
+import pages.acquisition.commonpages.AcquisitionHomePage;
 
 public class PlanRecommendationEngineHeaderAndFooter extends UhcDriver {
 	
@@ -140,9 +140,12 @@ public class PlanRecommendationEngineHeaderAndFooter extends UhcDriver {
     private WebElement headerShopLink;
     
     @FindBy(css = "#planTypesColumn h3:nth-of-type(2)>a")
-    private WebElement headerEnrollLink;
+    private WebElement headerNewExistingMemberLink;
     
     @FindBy(css = "#planTypesColumn h3:nth-of-type(3)>a")
+    private WebElement headerEnrollLink;
+    
+    @FindBy(css = "#planTypesColumn h3:nth-of-type(4)>a")
     private WebElement headerResourcesLink;
     
     @FindBy(css = "#subnav_2 div[class$='content-2']>h3:nth-of-type(1)>a")
@@ -151,13 +154,13 @@ public class PlanRecommendationEngineHeaderAndFooter extends UhcDriver {
     @FindBy(css = "#subnav_2 div[class$='content-2']>h3:nth-of-type(2)>a")
 	private WebElement headerDualSpecialLink;
 
-	@FindBy(css = "#subnav_2 div[class$='content-2']>h3:nth-of-type(3)>a")
+	@FindBy(css = "#subnav_2 div[class$='content-2']>h3 #_82nrmz9f2>a")
     private WebElement headerMedicaresupplementplanLink;
     
-	@FindBy(css = "#subnav_2 div[class$='content-2']>h3:nth-of-type(4)>a")
+	@FindBy(css = "#subnav_2 div[class$='content-2']>h3:nth-of-type(5)>a")
     private WebElement headerPrescriptionLink;
     
-    @FindBy(css = "#subnav_2 div[class='content content-2'] h3:nth-of-type(5)>a")
+    @FindBy(xpath = "//a[contains(text(),'Get a Plan Recommendation')]")
     private WebElement headerGetaPlanRecommendationLink;
     
     @FindBy(linkText = "Drug Cost Estimator")
@@ -200,8 +203,11 @@ public class PlanRecommendationEngineHeaderAndFooter extends UhcDriver {
 
 //'Get Help Choosing' is Inside Shop Menu
     
-    @FindBy(xpath = "//span[contains(text(),'Get Help Choosing')]")
-	private WebElement HeaderShopToolsGetHelpChoosingLink;
+    @FindBy(xpath = "//div[contains(@class,'aem-Grid')]/div[contains(@class,'aem-GridColumn')]//a[contains(text(),'Learn More')]")
+	private WebElement HeaderShopFromHomeInFindYourPlan;
+    
+    @FindBy(xpath = "//a[contains(text(),'Get Recommendations')]")
+	private WebElement HeaderGetRecommendationInShop;
 	
 //Footer Elements
 	
@@ -214,10 +220,10 @@ public class PlanRecommendationEngineHeaderAndFooter extends UhcDriver {
 	@FindBy(css = "#gfn_lnk_row2_1 > span")
 	private WebElement footerMedicareAdvantagePlansLink;
 		
-	@FindBy(css = "#_phmhwb3qf")
+	@FindBy(css = "#_9h82fwc49")
 	private WebElement footerMedicareSupplementInsurancePlansLink;
 	
-	@FindBy(css = "#gfn_lnk_row2_4 > span")
+	@FindBy(css = "#gfn_lnk_row2_5 > span")
 	private WebElement footerMedicarePrescriptionDrugPlansLink;
 	
 	@FindBy(css = "#gfn_lnk_row3_1 > span")
@@ -324,9 +330,11 @@ public class PlanRecommendationEngineHeaderAndFooter extends UhcDriver {
 		validate(headerShopForaPlanMedicareGuideText, 30);
 		validate(headerShopForaPlanEmailBox, 30);
 		validate(headerShopForaPlanEmailButton, 30);
-//2nd column in Shop for a plan		
+//2nd column in Shop for a plan		headerNewExistingMemberLink
 		validate(headerShopLink, 30);
 		Assert.assertTrue(headerShopLink.getText().contains("Shop"));
+		validate(headerNewExistingMemberLink, 30);
+		Assert.assertTrue(headerNewExistingMemberLink.getText().contains("New and Existing Members"));
 		validate(headerEnrollLink, 30);
 		Assert.assertTrue(headerEnrollLink.getText().contains("Enroll"));
 		validate(headerResourcesLink, 30);
@@ -487,6 +495,7 @@ public class PlanRecommendationEngineHeaderAndFooter extends UhcDriver {
 			validate(footerVisitAARPOrgLink, 30);
 			Assert.assertTrue(footerVisitAARPOrgLink.getText().contains("Visit AARP.org"));
 		}
+		scrollToView(footerSection);
 		validate(footerSection, 30);
 		validate(footerMedicareAdvantagePlansLink, 30);
 		Assert.assertTrue(footerMedicareAdvantagePlansLink.getText().contains("Medicare Advantage Plans"));
@@ -613,8 +622,10 @@ public class PlanRecommendationEngineHeaderAndFooter extends UhcDriver {
 //		actions.clickAndHold(headerNavigationBarShopForaPlanTab).build().perform();
 		desktopCommonUtils.MouseOver(headerNavigationBarShopForaPlanTab, Browsername);
 		headerShopLink.click();
-		validate(HeaderShopToolsGetHelpChoosingLink, 30);
-		HeaderShopToolsGetHelpChoosingLink.click();
+		validate(HeaderShopFromHomeInFindYourPlan, 30);
+		HeaderShopFromHomeInFindYourPlan.click();
+		validate(HeaderGetRecommendationInShop, 30);
+		HeaderGetRecommendationInShop.click();
 		validate(landingpageHeader, 30);
 		Assert.assertTrue(landingpageHeader.getText().contains("Plan"));
 	}
@@ -741,7 +752,7 @@ public class PlanRecommendationEngineHeaderAndFooter extends UhcDriver {
 		ArrayList<String> windows = new ArrayList<String> (driver.getWindowHandles());
 		System.out.println(windows);
 		if (windows.size() >= 2) {
-			driver.switchTo().window(windows.get(2)); 	
+			driver.switchTo().window(windows.get(1)); 	
 			System.out.println(driver.getCurrentUrl());
 			validateLinks(expURL);
 			driver.close();

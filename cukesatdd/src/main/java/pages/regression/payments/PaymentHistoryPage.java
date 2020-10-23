@@ -211,7 +211,7 @@ public class PaymentHistoryPage extends UhcDriver {
 	@FindBy(xpath = "//span[@ng-show='greyedoutError' and @class='errorcolor' and contains( .,'You are not authorized')]")
 	private WebElement notAuthorizedMsg;
 
-	@FindBy(xpath = "//*[@class='btn btn--primary onetimepayment' or @class='btn btn--secondary onetimepayment']")
+	@FindBy(xpath = "(//*[@class='btn btn--primary onetimepayment' or @class='btn btn--secondary onetimepayment'])[1]")
 	private WebElement MakeOneTimepaymentButton;
 
 	@FindBy(xpath = "(//*[@class='btn btn--primary onetimepayment' or @class='btn btn--secondary onetimepayment'])[1]")
@@ -224,13 +224,13 @@ public class PaymentHistoryPage extends UhcDriver {
 	@FindBy(xpath="//span[@class='payment-method-btn']//a[@class='btn btn--primary'][contains(text(),'Set Up Recurring Payments')]")
 	private WebElement SetUpAutomaticPaymentsButton;
 
-	@FindBy(xpath = "//span[@class='payment-method-btn']//a[@class='btn btn--primary'][contains(text(),'Set Up Recurring Payments')]")
+	@FindBy(xpath = "(//span[@class='payment-method-btn']//a[@class='btn btn--primary'][contains(text(),'Set Up Recurring Payments')])[1]")
 	private WebElement SetUpRecurringPaymentsButtonShip;
 
 	@FindBy(xpath = "//a[text()='Edit Automatic Payments']")
 	private WebElement EditAutomaticPaymentsButton;
 
-	@FindBy(xpath = "//span[@class='payment-method-btn']//a[@class='btn btn--primary ng-scope'][contains(text(),'Edit Recurring Payments')]")
+	@FindBy(xpath = "//span[@class='payment-method-btn']//a[@class='btn btn--primary ng-scope'][contains(text(),'Manage Payment Method')]")
 	private WebElement EditRecurringPaymentsButton;
 
 	@FindBy(xpath = "//h2[text()='Helpful Reminders']")
@@ -579,28 +579,28 @@ public class PaymentHistoryPage extends UhcDriver {
 	@FindBy(xpath = "//button[contains(text(),'Total Amount Due ')]")
 	private WebElement totalAmntDuelink;
 
-	@FindBy(xpath = "//div[@id='amount-due-content']")
+	@FindBy(xpath = "//h2[@id='amtDueHeader-0' or @id='amtDueHeader-1' or @id='amtDueHeader-2']")
 	private WebElement totalAmntDueToolTip;
 
-	@FindBy(xpath = "//div[@id='amount-due-content']//a[@class='link link--icon-right link--icon-circled align-right moreInfocloseIcon'][contains(text(),'Close')]")
+	@FindBy(xpath = "//div[@id='amount-due-content-0']//a[contains(text(),'Close')]")
 	private WebElement totalAmntDueCloseBtn;
 
 	@FindBy(xpath = "//button[contains(text(),'Next Premium Payment ')]")
 	private WebElement NextPremiumPaymentlink;
 
-	@FindBy(xpath = "//div[@id='next-payment-content']")
+	@FindBy(xpath = "//h2[@id='nextPremHeader-0' or @id='nextPremHeader-1' or @id='nextPremHeader-2']")
 	private WebElement NextPremiumPaymentToolTip;
 
-	@FindBy(xpath = "//div[@id='next-payment-content']//a[@class='link link--icon-right link--icon-circled align-right moreInfocloseIcon'][contains(text(),'Close')]")
+	@FindBy(xpath = "//div[@id='tentcon-ment-mium-0']//a[contains(text(),'Close')]")
 	private WebElement NextPremiumPaymentCloseBtn;
 
 	@FindBy(xpath = "//button[contains(text(),'Monthly Premium')]")
 	private WebElement MonthlyPremiumtlink;
 
-	@FindBy(xpath = "//div[@id='monthly-premium']")
+	@FindBy(xpath = "//h2[@id='heading-mon-h2-0' or @id='heading-mon-h2-1' or @id='heading-mon-h2-2']")
 	private WebElement MonthlyPremiumtToolTip;
 
-	@FindBy(xpath = "//div[@id='monthly-premium']//a[@class='link link--icon-right link--icon-circled align-right moreInfocloseIcon'][contains(text(),'Close')]")
+	@FindBy(xpath = "//div[@id='monthly-premium-0']//a[contains(text(),'Close')]")
 	private WebElement MonthlyPremiumtCloseBtn;
 
 	@FindBy(xpath = "(//button[contains(text(),'Learn about ways to pay ')])[2]")
@@ -629,6 +629,45 @@ public class PaymentHistoryPage extends UhcDriver {
 
 	@FindBy(xpath = "//div[@id='p-history-content-0']//a[@class='link link--icon-right link--icon-circled align-right moreInfocloseIcon'][contains(text(),'Close')]")
 	private WebElement LearnMoreAboutYourPaymentHistoryCloseBtn;
+	
+	@FindBy(xpath = "//table[@id='resultscount_0']")
+	private WebElement billingTable;
+	
+	@FindBy(xpath = "//button[contains(text(),'Print Billing History ')]")
+	private WebElement PrintBillingHistoryButton;
+	
+	@FindBy(xpath = "//table[@id='paymentresultscount_0']")
+	private WebElement paymentHistoryTable;
+	
+	@FindBy(xpath = "//button[contains(text(),'Print Payment History')]")
+	private WebElement PrintPaymentHistoryButton;
+	
+	@FindBy(xpath = "//button[contains(text(),'Download Payment History ')]")
+	private WebElement downloadPaymentHistory;
+	
+	@FindBy(id = "accountprofile")
+	private WebElement accountProfile;
+	
+	@FindBy(xpath="(//a[contains(text(),'Log Out')])[1]")
+	private WebElement logOutLink;
+
+	@FindBy(xpath = "//h1[contains(text(),'Premium Payments')]")
+	private WebElement premiumPaymentsHeading;
+	
+	@FindBy(xpath = "//*[@id='loadingbilling0']/img")
+	private WebElement billingHistoryTable1LoadingImage;
+	
+	@FindBy(xpath = "//*[@id='loadingbilling1']/img")
+	private WebElement billingHistoryTable2LoadingImage;
+	
+	@FindBy(xpath = "//*[@id='loadingpayment0']/img")
+	private WebElement paymentHistoryTable1LoadingImage;
+	
+	@FindBy(xpath = "//*[@id='loadingpayment1']/img")
+	private WebElement paymentHistoryTable2LoadingImage;
+	
+	@FindBy(xpath="//*[@class='btn btn--primary onetimepayment' or @class='btn btn--secondary onetimepayment']")
+	private WebElement MakeAPaymentButton;
 	
 	public PaymentHistoryPage(WebDriver driver) {
 		super(driver);
@@ -758,10 +797,10 @@ public class PaymentHistoryPage extends UhcDriver {
 
 	@Override
 	public void openAndValidate() {
-		CommonUtility.waitForPageLoad(driver, oneTimePaymentBtn,30);
+		CommonUtility.waitForPageLoad(driver, premiumPaymentsHeading,30);
 		if (!MRScenario.environment.contains("team-a")) { //note: team-atest still need to integrate w/ microapp payment
 			//validateNew(paymentHistoryApp);
-			validateNew(oneTimePaymentBtn);
+			validateNew(premiumPaymentsHeading);
 		}
 	}
 
@@ -1147,7 +1186,44 @@ public class PaymentHistoryPage extends UhcDriver {
 		TestHarness.checkForIPerceptionModel(driver);
 		try {
 			System.out.println("User is now clicking on Make one time payment button");
+			TestHarness.checkForIPerceptionModel(driver);
 			MakeOneTimepaymentButton.click();
+		} catch (Exception e) {
+			System.out.println("Make one time payment button could not be clicked");
+			Assert.fail();
+		}
+		System.out.println("User clicked on Make one time payment");
+		if (validate(OtherAmountButton)) {
+			System.out.println("Other amount radio button was visible");
+			return new OneTimePaymentPage(driver);
+		} else
+			return null;
+	}
+	
+	public OneTimePaymentPage clickOnMakeOneTimePaymentPlan1() throws Exception {
+		CommonUtility.waitForPageLoad(driver, MakeOneTimepaymentButtonPlan1, 20);
+		TestHarness.checkForIPerceptionModel(driver);
+		try {
+			System.out.println("User is now clicking on Make one time payment button");
+			MakeOneTimepaymentButtonPlan1.click();
+		} catch (Exception e) {
+			System.out.println("Make one time payment button could not be clicked");
+			Assert.fail();
+		}
+		System.out.println("User clicked on Make one time payment");
+		if (validate(OtherAmountButton)) {
+			System.out.println("Other amount radio button was visible");
+			return new OneTimePaymentPage(driver);
+		} else
+			return null;
+	}
+	
+	public OneTimePaymentPage clickOnMakeOneTimePaymentPlan2() throws Exception {
+		CommonUtility.waitForPageLoad(driver, MakeOneTimepaymentButtonPlan2, 20);
+		TestHarness.checkForIPerceptionModel(driver);
+		try {
+			System.out.println("User is now clicking on Make one time payment button");
+			MakeOneTimepaymentButtonPlan2.click();
 		} catch (Exception e) {
 			System.out.println("Make one time payment button could not be clicked");
 			Assert.fail();
@@ -1208,6 +1284,7 @@ public class PaymentHistoryPage extends UhcDriver {
 			System.out.println(driver.getCurrentUrl());
 			e.printStackTrace();
 		}
+		TestHarness.checkForIPerceptionModel(driver);
 		if (driver.getTitle().contains("Update Automatic Payments")) {
 			System.out.println("Navigated to Update Automatic Payments page");
 			return new UpdateRecurringPage(driver);
@@ -1226,8 +1303,10 @@ public class PaymentHistoryPage extends UhcDriver {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		Thread.sleep(20000);
+		CommonUtility.waitForPageLoad(driver, MakeAPaymentButton, 20);
+		TestHarness.checkForIPerceptionModel(driver);
 		waitforElement(EditRecurringPaymentsButton);
+		TestHarness.checkForIPerceptionModel(driver);
 		EditRecurringPaymentsButton.click();
 		System.out.println("User clicked on Update Automatic Button");
 		try {
@@ -1249,10 +1328,14 @@ public class PaymentHistoryPage extends UhcDriver {
 	public PaymentsFormPage clickOnsetupAutomaticPaymentforShip() throws Exception {
 		
 		CommonUtility.waitForPageLoad(driver, SetUpRecurringPaymentsButtonShip, 20);
-		SetUpRecurringPaymentsButtonShip.click();
+		TestHarness.checkForIPerceptionModel(driver);
+		SetUpAutomaticPaymentsButton.click();
 		System.out.println("User clicked on Setup Recurring Payment Button");
 		CommonUtility.checkPageIsReadyNew(driver);
-		if (driver.getTitle().contains("Set Up Recurring Payments")) {
+		Thread.sleep(5000);
+		System.out.println("Current URL is : "+driver.getCurrentUrl());
+		if (driver.getCurrentUrl().contains("recurring-eft-start") || driver.getTitle().contains("Set Up Recurring Payments")) 
+		{
 			System.out.println("Navigated to Set Up Recurring Payments page for ship");
 			return new PaymentsFormPage(driver);
 		} else {
@@ -1952,18 +2035,20 @@ public class PaymentHistoryPage extends UhcDriver {
 				
 				System.out.println("Hovering mouse over daterange dropdown");	
 				Actions action = new Actions(driver);
+				TestHarness.checkForIPerceptionModel(driver);
 				action.moveToElement(menubutton).build().perform();
 				
 				System.out.println("waiting for 5 seconds");	
 				Thread.sleep(5000);
 				System.out.println("Selecting the date from dropdown - Last 6 months ");
-				
+				TestHarness.checkForIPerceptionModel(driver);
 				driver.findElement(By.linkText("Last 6 months")).click();
-				
+				TestHarness.checkForIPerceptionModel(driver);
 				System.out.println("Last 6 months has been clicked in dropdown , waiting for Payment history table to load now ");
 			    CommonUtility.waitForPageLoad(driver, paymentTable, 20);
 			    
 			    try {
+			    	TestHarness.checkForIPerceptionModel(driver);
 					if (paymentTable.isDisplayed()) {
 						System.out.println("Payment History table is displayed");
 						Thread.sleep(2000);
@@ -2003,12 +2088,12 @@ public class PaymentHistoryPage extends UhcDriver {
 				JavascriptExecutor jse2 = (JavascriptExecutor)driver;
 				jse2.executeScript("arguments[0].scrollIntoView()", billingHistoryDateRangeDropdownForFed); 
 				try {
-					Thread.sleep(2000);
+					Thread.sleep(10000);
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-								
+				TestHarness.checkForIPerceptionModel(driver);				
 				System.out.println("Hovering mouse over daterange dropdown");	
 				Actions action = new Actions(driver);
 				action.moveToElement(billingHistoryDateRangeDropdownForFed).build().perform();
@@ -2016,7 +2101,7 @@ public class PaymentHistoryPage extends UhcDriver {
 				System.out.println("waiting for 2 seconds");	
 				Thread.sleep(2000);
 				System.out.println("Selecting the date from dropdown - Last 24 months ");
-				
+				TestHarness.checkForIPerceptionModel(driver);
 				driver.findElement(By.linkText("Last 24 months")).click();
 				
 				System.out.println("Last 24 months has been clicked in dropdown , waiting for Billing history table to load now ");
@@ -2042,7 +2127,7 @@ public class PaymentHistoryPage extends UhcDriver {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-								
+				TestHarness.checkForIPerceptionModel(driver);				
 				System.out.println("Hovering mouse over payment history daterange dropdown");	
 				Actions action1 = new Actions(driver);
 				action1.moveToElement(paymentHistoryDateRangeDropdownForFed).build().perform();
@@ -2050,7 +2135,7 @@ public class PaymentHistoryPage extends UhcDriver {
 				System.out.println("waiting for 2 seconds");	
 				Thread.sleep(2000);
 				System.out.println("Selecting the date from dropdown - Last 24 months ");
-				
+				TestHarness.checkForIPerceptionModel(driver);
 				driver.findElement(By.linkText("Last 24 months")).click();
 				
 				System.out.println("Last 24 months has been clicked in dropdown , waiting for Payment history table to load now ");
@@ -2103,19 +2188,21 @@ public class PaymentHistoryPage extends UhcDriver {
 		} catch (Exception e) {
 			System.out.println("iPerception Pop Up is not Present");
 		}
-//	waitforElement(logoutLink);
-    /*  validate(logoutLink);
-	if (validate(logoutLink)) {
-		System.out.println("logout link is displayed");
-		logoutLink.click();*/
 		/*navigating to signout */
-		driver.navigate().to("https://www.medicare.uhc.com/aarp/member/logout.html");
+		//driver.navigate().to("https://www.medicare.uhc.com/aarp/member/logout.html");
 		//https://www.medicare.uhc.com/aarp/member/logout.html
-		 System.out.println("title is: "+driver.getTitle());
-		 Assert.assertTrue(driver.getTitle().contains("UnitedHealthcare Medicare Member"));
-		 validate(logincontainer);
-		 if (validate(logincontainer)) {
-				System.out.println("Sign in  link is displayed");}
+		if (accountProfile.isDisplayed()) {
+			accountProfile.click();
+		}
+		if (validate(logOutLink,0)) {
+			logOutLink.click();
+			CommonUtility.checkPageIsReadyNew(driver);
+			validate(logincontainer);
+			System.out.println("title is: "+driver.getTitle());
+			Assert.assertTrue(driver.getTitle().contains("UnitedHealthcare Medicare Member Sign In"));
+		} else {
+			Assert.fail("Logout option not displayed");
+		}
 		 
 		return new ProfileandPreferencesPage(driver);
 	}
@@ -2269,7 +2356,42 @@ public void toolTipsValidation() throws InterruptedException {
 			Assert.fail("Monthly Premium popup is failing ");
 
 			}
+}
 
+public void billingPaymentAndDownloadButtons() throws InterruptedException {
+	Thread.sleep(5000);
+	TestHarness.checkForIPerceptionModel(driver);
+	try {
+		if(billingTable.isDisplayed()) {
+			Assert.assertTrue("Print Billing History Button is displaying", PrintBillingHistoryButton.isDisplayed());
+			System.out.println("Print Billing History Button is displaying");
+		}
+		else {
+			Assert.assertTrue("Print Billing History Button is displaying", !(PrintBillingHistoryButton.isDisplayed()));
+			System.out.println("Print Billing History Button is not displaying because there is not history available");
+		}
+	} catch (Exception e) {
+		System.err.println("Print Billing History Button is not displaying"); 
+		Assert.fail("Print Billing History Button is not displaying");	}
+
+try {
+	if(paymentHistoryTable.isDisplayed()) {
+		Assert.assertTrue("Print Payment History Button is displaying", PrintPaymentHistoryButton.isDisplayed());
+		Assert.assertTrue("download Payment History Button is displaying", downloadPaymentHistory.isDisplayed());
+		System.out.println("Print Payment History and download Buttons are displaying");
+	}
+	else {
+		Assert.assertTrue("Print Payment History Button is displaying",! (PrintPaymentHistoryButton.isDisplayed()));
+		Assert.assertTrue("download Payment History Button is displaying", !(downloadPaymentHistory.isDisplayed()));
+		System.out.println("Print payment History and download button are not displaying because there is not history available");
+	}
+} catch (Exception e) {
+	System.err.println("Print payment History and download button are not displaying"); 
+	Assert.fail("Print payment History and download button are not displaying");	}
+}
+public void billingPaymentHistorytoolTipsValidation() throws InterruptedException {
+	Thread.sleep(5000);
+	TestHarness.checkForIPerceptionModel(driver);
 	System.out.println("Validate Learn Moreh About Ways To Pay pop-up");
 	if(Learnaboutwaystopaylink.isDisplayed()) {
 		Learnaboutwaystopaylink.click() ;
@@ -2286,6 +2408,8 @@ public void toolTipsValidation() throws InterruptedException {
 
 	}
 	System.out.println("Validate Learn More About Your Billing History pop-up ");
+	JavascriptExecutor jse = (JavascriptExecutor)driver;
+	jse.executeScript("arguments[0].scrollIntoView()", LearnMoreAboutYourBillingHistorylink);
 	if(LearnMoreAboutYourBillingHistorylink.isDisplayed()) {
 		LearnMoreAboutYourBillingHistorylink.click() ;
 		Thread.sleep(2000);
@@ -2302,6 +2426,7 @@ public void toolTipsValidation() throws InterruptedException {
 	}
 
 	System.out.println("Validate Learn More About Your payment History pop-up ");
+	jse.executeScript("arguments[0].scrollIntoView()", LearnMoreAboutYourPaymentHistorylink);
 	if(LearnMoreAboutYourPaymentHistorylink.isDisplayed()) {
 		LearnMoreAboutYourPaymentHistorylink.click() ;
 		Thread.sleep(2000);
@@ -2316,9 +2441,8 @@ public void toolTipsValidation() throws InterruptedException {
 		Assert.fail("Learn More About Your Payment History popup is failing");
 
 	}
+
 }
-
-
 public PaymentHistoryPage verifyBillingAndPaymentHistoryDisabled() throws InterruptedException {
 	checkForIPerceptionModel(driver);
 	CommonUtility.checkPageIsReadyNew(driver);
@@ -2513,7 +2637,7 @@ public void validatePaymentHistoryDateRageDefaultNewSecondPlan() {
 }
 
 
-public void validateBillingHistoryTable() {
+public void validateBillingHistoryTable(String planType) {
 try {
 	
 	CommonUtility.waitForPageLoad(driver, billingHistoryTableForFed, 20);
@@ -2540,19 +2664,28 @@ try {
 	String actual_billingHistoryTableRemainingAmountHeader=billingHistoryTableRemainingAmountHeader.getText();
 	Assert.assertTrue("PROBLEM - Billing history table header not as expected. Expected="+expected_billingHistoryTableRemainingAmountHeader+" | Actual="+actual_billingHistoryTableRemainingAmountHeader,expected_billingHistoryTableRemainingAmountHeader.equals(actual_billingHistoryTableRemainingAmountHeader));
 	System.out.println("Remaining Amount column heading has been validated and actual value retrieved from UI is : "+actual_billingHistoryTableRemainingAmountHeader);
-	
+	System.out.println("Value of plan type is  "+planType);
+	if (planType.contains("SHIP"))
+			{
+		System.out.println("Skipping validation of Bill Statements (PDF) for SHIP");
+			}
+	else
+	{
 	String expected_billingHistoryTableBillStatementsHeader="Bill Statements (PDF)";
 	String actual_billingHistoryTableBillStatementsHeader=billingHistoryTableBillStatementsHeader.getText();
 	Assert.assertTrue("PROBLEM - Billing history table header not as expected. Expected="+expected_billingHistoryTableBillStatementsHeader+" | Actual="+actual_billingHistoryTableBillStatementsHeader,expected_billingHistoryTableBillStatementsHeader.equals(actual_billingHistoryTableBillStatementsHeader));
 	System.out.println("Bill Statements (PDF) column heading has been validated and actual value retrieved from UI is : "+actual_billingHistoryTableBillStatementsHeader);
 	sleepBySec(2);
+	}
+
 	List<WebElement> tableRows = driver.findElements(By.xpath("//*[@id='resultscount_0']/tbody/tr"));
 	int expected_rows=1;
 	int actual_rows=tableRows.size();
 	System.out.println("Rows returned in result of Billing History Table are : "+actual_rows);
 	Assert.assertTrue("PROBLEM - Number of rows in Billing history Table is not equal to greater than 1. Expected="+expected_rows+" | Actual="+actual_rows,expected_rows<=actual_rows);
 	
-	} catch (Exception e) {
+	} 
+    catch (Exception e) {
 	System.out.println("Exception: "+e);
 	Assert.assertTrue("PROBLEM - unable to locate the Billing history table",false);
 	}
@@ -2580,7 +2713,7 @@ try {
 	}
 	}
 
-public void validateBillingHistoryTableSecondPlan() {
+public void validateBillingHistoryTableSecondPlan(String planType) {
 try {
 	
 	CommonUtility.waitForPageLoad(driver, billingHistoryTableForFedSecondPlan, 20);
@@ -2608,10 +2741,13 @@ try {
 	Assert.assertTrue("PROBLEM - Billing history table header not as expected. Expected="+expected_billingHistoryTableRemainingAmountHeader+" | Actual="+actual_billingHistoryTableRemainingAmountHeader,expected_billingHistoryTableRemainingAmountHeader.equals(actual_billingHistoryTableRemainingAmountHeader));
 	System.out.println("Remaining Amount column heading has been validated and actual value retrieved from UI is : "+actual_billingHistoryTableRemainingAmountHeader);
 	
+	if (planType.equalsIgnoreCase("GroupPDPGroupSSUP"))
+	{
 	String expected_billingHistoryTableBillStatementsHeader="Bill Statements (PDF)";
 	String actual_billingHistoryTableBillStatementsHeader=billingHistoryTableBillStatementsHeaderSecondPlan.getText();
 	Assert.assertTrue("PROBLEM - Billing history table header not as expected. Expected="+expected_billingHistoryTableBillStatementsHeader+" | Actual="+actual_billingHistoryTableBillStatementsHeader,expected_billingHistoryTableBillStatementsHeader.equals(actual_billingHistoryTableBillStatementsHeader));
 	System.out.println("Bill Statements (PDF) column heading has been validated and actual value retrieved from UI is : "+actual_billingHistoryTableBillStatementsHeader);
+	}
 	sleepBySec(2);
 	List<WebElement> tableRows = driver.findElements(By.xpath("//*[@id='resultscount_1']/tbody/tr"));
 	int expected_rows=1;
@@ -2648,7 +2784,7 @@ try {
 	}
 
 
-public void validatePaymentHistoryTable() {
+public void validatePaymentHistoryTable(String planType) {
 try {
 	
 	CommonUtility.waitForPageLoad(driver, paymentHistoryTableForFed, 20);
@@ -2676,6 +2812,12 @@ try {
 	Assert.assertTrue("PROBLEM - Payment history Table header not as expected. Expected="+expected_paymentHistoryTablePaymentMethodHeader+" | Actual="+actual_paymentHistoryTablePaymentMethodHeader,expected_paymentHistoryTablePaymentMethodHeader.equals(actual_paymentHistoryTablePaymentMethodHeader));
 	System.out.println("Payment Method column heading has been validated and actual value retrieved from UI is : "+actual_paymentHistoryTablePaymentMethodHeader);
 	
+	if (planType.contains("SHIP"))
+	{
+		System.out.println("Skipping the validation of confirmation number for SHIP");
+	}
+	else
+	{
 	String expected_paymentHistoryTableConfirmationHeader="Confirmation #";
 	String actual_paymentHistoryTableConfirmationHeader=paymentHistoryTableConfirmationHeader.getText();
 	Assert.assertTrue("PROBLEM - Payment history Table header not as expected. Expected="+expected_paymentHistoryTableConfirmationHeader+" | Actual="+actual_paymentHistoryTableConfirmationHeader,expected_paymentHistoryTableConfirmationHeader.equals(actual_paymentHistoryTableConfirmationHeader));
@@ -2686,8 +2828,9 @@ try {
 	int actual_rows=tableRows.size();
 	System.out.println("Rows returned in result of Payment History Table are : "+actual_rows);
 	Assert.assertTrue("PROBLEM - Number of rows in Payment history Table is not equal to greater than 1. Expected="+expected_rows+" | Actual="+actual_rows,expected_rows<=actual_rows);
-	
-	} catch (Exception e) {
+	}
+	}
+    catch (Exception e) {
 	System.out.println("Exception: "+e);
 	Assert.assertTrue("PROBLEM - unable to locate the Payment history table",false);
 	}
@@ -2708,10 +2851,16 @@ try {
 	System.out.println("Value displayed in 1st row of Payment Method is : "+valueofPaymentMethod.getText());
 	Assert.assertTrue("value of Payment Method is not displayed", valueofPaymentMethod.getText()!=null); 
 	
-	WebElement valueofConfirmation = driver.findElement(By.xpath("//*[@id='paymentresultscount_0']/tbody/tr[1]/td[5]/span[2]"));
+	if (planType.contains("SHIP"))
+	{
+		System.out.println("Skipping the validation of confirmation number for SHIP");
+	}
+	else
+	{
+	WebElement valueofConfirmation = driver.findElement(By.xpath("//*[@id='paymentresultscount_0']/tbody/tr[1]/td[5]"));
 	System.out.println("Value displayed in 1st row of Confirmation# is : "+valueofConfirmation.getText());
 	Assert.assertTrue("value of Confirmation# is not displayed", valueofConfirmation.getText()!=null); 
-	
+	}
 	}
 	catch (Exception e1)
 	{
@@ -2720,7 +2869,7 @@ try {
 	}
 	}
 
-public void validatePaymentHistoryTableSecondPlan() {
+public void validatePaymentHistoryTableSecondPlan(String planType) {
 try {
 	
 	CommonUtility.waitForPageLoad(driver, paymentHistoryTableForFedSecondPlan, 20);
@@ -2748,10 +2897,13 @@ try {
 	Assert.assertTrue("PROBLEM - Payment history Table header not as expected. Expected="+expected_paymentHistoryTablePaymentMethodHeader+" | Actual="+actual_paymentHistoryTablePaymentMethodHeader,expected_paymentHistoryTablePaymentMethodHeader.equals(actual_paymentHistoryTablePaymentMethodHeader));
 	System.out.println("Payment Method column heading has been validated and actual value retrieved from UI is : "+actual_paymentHistoryTablePaymentMethodHeader);
 	
+	if (planType.equalsIgnoreCase("GroupPDPGroupSSUP"))
+	{
 	String expected_paymentHistoryTableConfirmationHeader="Confirmation #";
 	String actual_paymentHistoryTableConfirmationHeader=paymentHistoryTableConfirmationHeaderSecondPlan.getText();
 	Assert.assertTrue("PROBLEM - Payment history Table header not as expected. Expected="+expected_paymentHistoryTableConfirmationHeader+" | Actual="+actual_paymentHistoryTableConfirmationHeader,expected_paymentHistoryTableConfirmationHeader.equals(actual_paymentHistoryTableConfirmationHeader));
 	System.out.println("Confirmation # column heading has been validated and actual value retrieved from UI is : "+actual_paymentHistoryTableConfirmationHeader);
+	}
 	sleepBySec(2);
 	List<WebElement> tableRows = driver.findElements(By.xpath("//*[@id='paymentresultscount_1']/tbody/tr"));
 	int expected_rows=1;
@@ -2780,10 +2932,12 @@ try {
 	System.out.println("Value displayed in 1st row of Payment Method is : "+valueofPaymentMethod.getText());
 	Assert.assertTrue("value of Payment Method is not displayed", valueofPaymentMethod.getText()!=null); 
 	
-	WebElement valueofConfirmation = driver.findElement(By.xpath("//*[@id='paymentresultscount_1']/tbody/tr[1]/td[5]/span[2]"));
+	if (planType.equalsIgnoreCase("GroupPDPGroupSSUP"))
+	{
+	WebElement valueofConfirmation = driver.findElement(By.xpath("//*[@id='paymentresultscount_1']/tbody/tr[1]/td[5]"));
 	System.out.println("Value displayed in 1st row of Confirmation# is : "+valueofConfirmation.getText());
 	Assert.assertTrue("value of Confirmation# is not displayed", valueofConfirmation.getText()!=null); 
-	
+	}
 	}
 	catch (Exception e1)
 	{
@@ -2794,16 +2948,16 @@ try {
 
 public void userSelects6MonthsInBillingHistoryDropdown() throws InterruptedException {
 
-System.out.println("Now Scrolling to daterange dropdown of Billing history section");
+System.out.println("Now Scrolling to Billing history section");
 JavascriptExecutor jse2 = (JavascriptExecutor)driver;
-jse2.executeScript("arguments[0].scrollIntoView()", billingHistoryDateRangeDropdownForFed); 
+jse2.executeScript("arguments[0].scrollIntoView()", billingHistorySectionHeader); 
 try {
 	Thread.sleep(2000);
 } catch (InterruptedException e) {
 	// TODO Auto-generated catch block
 	e.printStackTrace();
 }
-				
+TestHarness.checkForIPerceptionModel(driver);			
 System.out.println("Hovering mouse over daterange dropdown");	
 Actions action = new Actions(driver);
 action.moveToElement(billingHistoryDateRangeDropdownForFed).build().perform();
@@ -2814,7 +2968,13 @@ System.out.println("Selecting the date from dropdown - Last 6 Months ");
 TestHarness.checkForIPerceptionModel(driver);
 CommonUtility.waitForPageLoad(driver, last6Months, 20);
 last6Months.click();
-
+try {
+	waitforElement(billingHistoryTable1LoadingImage);
+	new WebDriverWait(driver, 10).until(ExpectedConditions.invisibilityOf(billingHistoryTable1LoadingImage));
+} catch (Exception e1) {
+	System.out.println("Loading image issue, ignored !!");
+}
+Thread.sleep(2000);
 System.out.println("Last 6 months has been clicked in dropdown , waiting for Billing history table to load now ");
 CommonUtility.waitForPageLoad(driver, billingHistoryTableForFed, 20);
 
@@ -2852,9 +3012,11 @@ Thread.sleep(2000);
 System.out.println("Selecting the date from dropdown - Last 6 Months ");
 CommonUtility.waitForPageLoad(driver, last6Months, 20);
 last6Months.click();
-
+waitforElement(billingHistoryTable2LoadingImage);
+new WebDriverWait(driver, 10).until(ExpectedConditions.invisibilityOf(billingHistoryTable2LoadingImage));
 System.out.println("Last 6 months has been clicked in dropdown , waiting for Billing history table to load now ");
 CommonUtility.waitForPageLoad(driver, billingHistoryTableForFedSecondPlan, 20);
+Thread.sleep(2000);
 
 try {
 	if (billingHistoryTableForFedSecondPlan.isDisplayed()) {
@@ -2871,16 +3033,16 @@ try {
 
 public void userSelects12MonthsInBillingHistoryDropdown() throws InterruptedException {
 
-System.out.println("Now Scrolling to daterange dropdown of Billing history section");
-JavascriptExecutor jse2 = (JavascriptExecutor)driver;
-jse2.executeScript("arguments[0].scrollIntoView()", billingHistoryDateRangeDropdownForFed); 
+	System.out.println("Now Scrolling to Billing history section");
+	JavascriptExecutor jse2 = (JavascriptExecutor)driver;
+	jse2.executeScript("arguments[0].scrollIntoView()", billingHistorySectionHeader);  
 try {
 	Thread.sleep(2000);
 } catch (InterruptedException e) {
 	// TODO Auto-generated catch block
 	e.printStackTrace();
 }
-				
+TestHarness.checkForIPerceptionModel(driver);				
 System.out.println("Hovering mouse over daterange dropdown");	
 Actions action = new Actions(driver);
 action.moveToElement(billingHistoryDateRangeDropdownForFed).build().perform();
@@ -2891,9 +3053,15 @@ System.out.println("Selecting the date from dropdown - Last 12 months ");
 TestHarness.checkForIPerceptionModel(driver);
 CommonUtility.waitForPageLoad(driver, last12Months, 20);
 last12Months.click();
-
+try {
+waitforElement(billingHistoryTable1LoadingImage);
+new WebDriverWait(driver, 10).until(ExpectedConditions.invisibilityOf(billingHistoryTable1LoadingImage));
+} catch (Exception e1) {
+	System.out.println("Loading image issue, ignored !!");
+}
 System.out.println("Last 12 months has been clicked in dropdown , waiting for Billing history table to load now ");
 CommonUtility.waitForPageLoad(driver, billingHistoryTableForFed, 20);
+Thread.sleep(2000);
 
 try {
 	if (billingHistoryTableForFed.isDisplayed()) {
@@ -2929,9 +3097,12 @@ Thread.sleep(2000);
 System.out.println("Selecting the date from dropdown - Last 12 months ");
 CommonUtility.waitForPageLoad(driver, last12Months, 20);
 last12Months.click();
+waitforElement(billingHistoryTable2LoadingImage);
+new WebDriverWait(driver, 10).until(ExpectedConditions.invisibilityOf(billingHistoryTable2LoadingImage));
 
 System.out.println("Last 12 months has been clicked in dropdown , waiting for Billing history table to load now ");
 CommonUtility.waitForPageLoad(driver, billingHistoryTableForFedSecondPlan, 20);
+Thread.sleep(2000);
 
 try {
 	if (billingHistoryTableForFedSecondPlan.isDisplayed()) {
@@ -2948,17 +3119,17 @@ try {
 
 
 public void userSelects24MonthsInBillingHistoryDropdown() throws InterruptedException {
-
-System.out.println("Now Scrolling to daterange dropdown of Billing history section");
-JavascriptExecutor jse2 = (JavascriptExecutor)driver;
-jse2.executeScript("arguments[0].scrollIntoView()", billingHistoryDateRangeDropdownForFed); 
+	
+	System.out.println("Now Scrolling to Billing history section");
+	JavascriptExecutor jse2 = (JavascriptExecutor)driver;
+	jse2.executeScript("arguments[0].scrollIntoView()", billingHistorySectionHeader);  
 try {
 	Thread.sleep(2000);
 } catch (InterruptedException e) {
 	// TODO Auto-generated catch block
 	e.printStackTrace();
 }
-				
+TestHarness.checkForIPerceptionModel(driver);				
 System.out.println("Hovering mouse over daterange dropdown");	
 Actions action = new Actions(driver);
 action.moveToElement(billingHistoryDateRangeDropdownForFed).build().perform();
@@ -2969,10 +3140,15 @@ System.out.println("Selecting the date from dropdown - Last 24 months ");
 TestHarness.checkForIPerceptionModel(driver);
 CommonUtility.waitForPageLoad(driver, last24Months, 20);
 last24Months.click();
-
+try {
+waitforElement(billingHistoryTable1LoadingImage);
+new WebDriverWait(driver, 10).until(ExpectedConditions.invisibilityOf(billingHistoryTable1LoadingImage));
+} catch (Exception e1) {
+	System.out.println("Loading image issue, ignored !!");
+}
 System.out.println("Last 24 months has been clicked in dropdown , waiting for Billing history table to load now ");
 CommonUtility.waitForPageLoad(driver, billingHistoryTableForFed, 20);
-
+Thread.sleep(2000);
 try {
 	if (billingHistoryTableForFed.isDisplayed()) {
 		System.out.println("Billing History table is displayed");
@@ -3007,10 +3183,11 @@ Thread.sleep(2000);
 System.out.println("Selecting the date from dropdown - Last 24 months ");
 CommonUtility.waitForPageLoad(driver, last24Months, 20);
 last24Months.click();
-
+waitforElement(billingHistoryTable2LoadingImage);
+new WebDriverWait(driver, 10).until(ExpectedConditions.invisibilityOf(billingHistoryTable2LoadingImage));
 System.out.println("Last 24 months has been clicked in dropdown , waiting for Billing history table to load now ");
 CommonUtility.waitForPageLoad(driver, billingHistoryTableForFedSecondPlan, 20);
-
+Thread.sleep(2000);
 try {
 	if (billingHistoryTableForFedSecondPlan.isDisplayed()) {
 		System.out.println("Billing History table is displayed");
@@ -3048,10 +3225,15 @@ System.out.println("Selecting the date from dropdown - Last 6 Months ");
 TestHarness.checkForIPerceptionModel(driver);
 CommonUtility.waitForPageLoad(driver, last6Months, 20);
 last6Months.click();
-
+try {
+waitforElement(paymentHistoryTable1LoadingImage);
+new WebDriverWait(driver, 10).until(ExpectedConditions.invisibilityOf(paymentHistoryTable1LoadingImage));
+} catch (Exception e1) {
+	System.out.println("Loading image issue, ignored !!");
+}
 System.out.println("Last 6 months has been clicked in dropdown , waiting for Payment history table to load now ");
 CommonUtility.waitForPageLoad(driver, paymentHistoryTableForFed, 20);
-
+Thread.sleep(2000);
 try {
 	if (paymentHistoryTableForFed.isDisplayed()) {
 		System.out.println("Payment History table is displayed");
@@ -3086,9 +3268,11 @@ Thread.sleep(2000);
 System.out.println("Selecting the date from dropdown - Last 6 Months ");
 CommonUtility.waitForPageLoad(driver, last6Months, 20);
 last6Months.click();
-
+waitforElement(paymentHistoryTable2LoadingImage);
+new WebDriverWait(driver, 10).until(ExpectedConditions.invisibilityOf(paymentHistoryTable2LoadingImage));
 System.out.println("Last 6 months has been clicked in dropdown , waiting for Payment history table to load now ");
 CommonUtility.waitForPageLoad(driver, paymentHistoryTableForFedSecondPlan, 20);
+Thread.sleep(2000);
 
 try {
 	if (paymentHistoryTableForFedSecondPlan.isDisplayed()) {
@@ -3126,9 +3310,15 @@ TestHarness.checkForIPerceptionModel(driver);
 CommonUtility.waitForPageLoad(driver, last12Months, 20);
 last12Months.click();
 
+try {
+waitforElement(paymentHistoryTable1LoadingImage);
+new WebDriverWait(driver, 10).until(ExpectedConditions.invisibilityOf(paymentHistoryTable1LoadingImage));
+} catch (Exception e1) {
+	System.out.println("Loading image issue, ignored !!");
+}
 System.out.println("Last 12 months has been clicked in dropdown , waiting for Payment history table to load now ");
 CommonUtility.waitForPageLoad(driver, paymentHistoryTableForFed, 20);
-
+Thread.sleep(2000);
 try {
 	if (paymentHistoryTableForFed.isDisplayed()) {
 		System.out.println("Payment History table is displayed");
@@ -3163,10 +3353,12 @@ Thread.sleep(2000);
 System.out.println("Selecting the date from dropdown - Last 12 months ");
 CommonUtility.waitForPageLoad(driver, last12Months, 20);
 last12Months.click();
+waitforElement(paymentHistoryTable2LoadingImage);
+new WebDriverWait(driver, 10).until(ExpectedConditions.invisibilityOf(paymentHistoryTable2LoadingImage));
 
 System.out.println("Last 12 months has been clicked in dropdown , waiting for Payment history table to load now ");
 CommonUtility.waitForPageLoad(driver, paymentHistoryTableForFedSecondPlan, 20);
-
+Thread.sleep(2000);
 try {
 	if (paymentHistoryTableForFedSecondPlan.isDisplayed()) {
 		System.out.println("Payment History table is displayed");
@@ -3203,10 +3395,15 @@ System.out.println("Selecting the date from dropdown - Last 24 months ");
 TestHarness.checkForIPerceptionModel(driver);
 CommonUtility.waitForPageLoad(driver, last24Months, 20);
 last24Months.click();
-
+try {
+waitforElement(paymentHistoryTable1LoadingImage);
+new WebDriverWait(driver, 10).until(ExpectedConditions.invisibilityOf(paymentHistoryTable1LoadingImage));
+} catch (Exception e1) {
+	System.out.println("Loading image issue, ignored !!");
+}
 System.out.println("Last 24 months has been clicked in dropdown , waiting for Payment history table to load now ");
 CommonUtility.waitForPageLoad(driver, paymentHistoryTableForFed, 20);
-
+Thread.sleep(2000);
 try {
 	if (paymentHistoryTableForFed.isDisplayed()) {
 		System.out.println("Payment History table is displayed");
@@ -3235,10 +3432,11 @@ Thread.sleep(2000);
 System.out.println("Selecting the date from dropdown - Last 24 months ");
 CommonUtility.waitForPageLoad(driver, last24Months, 20);
 last24Months.click();
-
+waitforElement(paymentHistoryTable2LoadingImage);
+new WebDriverWait(driver, 10).until(ExpectedConditions.invisibilityOf(paymentHistoryTable2LoadingImage));
 System.out.println("Last 24 months has been clicked in dropdown , waiting for Payment history table to load now ");
 CommonUtility.waitForPageLoad(driver, paymentHistoryTableForFedSecondPlan, 20);
-
+Thread.sleep(2000);
 try {
 	if (paymentHistoryTableForFedSecondPlan.isDisplayed()) {
 		System.out.println("Payment History table is displayed");
@@ -3263,9 +3461,15 @@ Thread.sleep(2000);
 System.out.println("Selecting the date from dropdown - Previous Calendar Year ");
 CommonUtility.waitForPageLoad(driver, previousCalendarYear, 20);
 previousCalendarYear.click();
+try {
+waitforElement(paymentHistoryTable1LoadingImage);
+new WebDriverWait(driver, 10).until(ExpectedConditions.invisibilityOf(paymentHistoryTable1LoadingImage));
+} catch (Exception e1) {
+	System.out.println("Loading image issue, ignored !!");
+}
 
 System.out.println("Previous Calendar Year has been clicked in dropdown , waiting for Payment history table to load now ");
-
+Thread.sleep(2000);
 try {
 	if (paymentHistoryTableForFed.isDisplayed()) {
 		System.out.println("Payment History table is displayed");
@@ -3289,9 +3493,10 @@ Thread.sleep(2000);
 System.out.println("Selecting the date from dropdown - Previous Calendar Year ");
 CommonUtility.waitForPageLoad(driver, previousCalendarYear, 20);
 previousCalendarYear.click();
-
+waitforElement(paymentHistoryTable2LoadingImage);
+new WebDriverWait(driver, 10).until(ExpectedConditions.invisibilityOf(paymentHistoryTable2LoadingImage));
 System.out.println("Previous Calendar Year has been clicked in dropdown , waiting for Payment history table to load now ");
-
+Thread.sleep(2000);
 try {
 	if (paymentHistoryTableForFedSecondPlan.isDisplayed()) {
 		System.out.println("Payment History table is displayed");
@@ -3315,6 +3520,7 @@ public void userClicksToExpandBillingHistoryOfFirstPlan() throws InterruptedExce
 	System.out.println("Current State of Billing History Dropdown is : "+currentstate);
 	
 	showBillingHistoryFirstPlan.click();
+	Thread.sleep(3000);
 	String newstate = showBillingHistoryFirstPlan.getAttribute("aria-expanded");
 	System.out.println("New State of Billing History Dropdown is : "+newstate);
 	if(newstate.equals("true"))
@@ -3337,6 +3543,7 @@ public void userClicksToExpandBillingHistoryOfSecondPlan() throws InterruptedExc
 	System.out.println("Current State of second Billing History Dropdown is : "+currentstate);
 	
 	showBillingHistorySecondPlan.click();
+	Thread.sleep(3000);
 	String newstate = showBillingHistorySecondPlan.getAttribute("aria-expanded");
 	System.out.println("New State of Second Billing History Dropdown is : "+newstate);
 	if(newstate.equals("true"))
@@ -3363,6 +3570,7 @@ public void userClicksToExpandPaymentHistoryOfFirstPlan() throws InterruptedExce
 	String currentstate = showPaymentHistoryFirstPlan.getAttribute("aria-expanded");
 	System.out.println("Current State of Payment History Dropdown is : "+currentstate);
 	showPaymentHistoryFirstPlan.click();
+	Thread.sleep(3000);
 	String newstate = showPaymentHistoryFirstPlan.getAttribute("aria-expanded");
 	System.out.println("New State of Payment History Dropdown is : "+newstate);
 	if(newstate.equals("true"))
@@ -3386,6 +3594,7 @@ public void userClicksToExpandPaymentHistoryOfSecondPlan() throws InterruptedExc
 	String currentstate = showPaymentHistorySecondPlan.getAttribute("aria-expanded");
 	System.out.println("Current State of Payment History Dropdown is : "+currentstate);
 	showPaymentHistorySecondPlan.click();
+	Thread.sleep(3000);
 	String newstate = showPaymentHistorySecondPlan.getAttribute("aria-expanded");
 	System.out.println("New State of Payment History Dropdown is : "+newstate);
 	if(newstate.equals("true"))

@@ -1458,6 +1458,39 @@ public class OneTimePaymentAarpStepDefintion {
 		}
 	}
 
+	@When("^user clicks on Make one time payment on payment overview page for plan 1$")
+	public void user_clicks_on_Make_one_time_payment_on_payment_overview_page_plan1() throws Throwable {
+		PaymentHistoryPage paymentHistoryPage = (PaymentHistoryPage) getLoginScenario()
+				.getBean(PageConstants.Payments_History_Page);
+
+		OneTimePaymentPage oneTimePaymentPage=null;
+		if(null !=paymentHistoryPage){
+			
+			oneTimePaymentPage = paymentHistoryPage.clickOnMakeOneTimePaymentPlan1();
+		}
+
+		if (oneTimePaymentPage != null) {
+			getLoginScenario().saveBean(PageConstants.One_Time_Payments_Page, oneTimePaymentPage);
+			System.out.println("User is on Make one time payment screen");
+		}
+	}
+	
+	@When("^user clicks on Make one time payment on payment overview page for plan 2$")
+	public void user_clicks_on_Make_one_time_payment_on_payment_overview_page_plan2() throws Throwable {
+		PaymentHistoryPage paymentHistoryPage = (PaymentHistoryPage) getLoginScenario()
+				.getBean(PageConstants.Payments_History_Page);
+
+		OneTimePaymentPage oneTimePaymentPage=null;
+		if(null !=paymentHistoryPage){
+			
+			oneTimePaymentPage = paymentHistoryPage.clickOnMakeOneTimePaymentPlan2();
+		}
+
+		if (oneTimePaymentPage != null) {
+			getLoginScenario().saveBean(PageConstants.One_Time_Payments_Page, oneTimePaymentPage);
+			System.out.println("User is on Make one time payment screen");
+		}
+	}
 	@When("^user selects other amount and enters \"([^\"]*)\" and selects credit card and click on Next button$")
 	public void user_selects_other_amount_and_enters_and_selects_credit_card_and_click_on_Next_button(
 			String otherAmountvalue) throws Throwable {
@@ -1750,18 +1783,23 @@ public class OneTimePaymentAarpStepDefintion {
 
 			Assert.assertTrue(true);
 		} else {
+			Assert.fail();
+			
+			//boolean Validation_Status =updateReviewPage.validate_onlyOnePaymentRequest_Message();
 
-			boolean Validation_Status =updateReviewPage.validate_onlyOnePaymentRequest_Message();
-
-			if(Validation_Status) {
-				System.out.println("Only one payment request message is Displayed in review one time PAGE : " + Validation_Status + " - Validation Passed");
-				getLoginScenario().saveBean(PageConstants.Update_Review_Page, updateReviewPage);
-				getLoginScenario().saveBean(PageConstants.ALREADY_ENROLLED_FLAG, "true");
-				Assert.assertTrue(true);
-			}else{
-				System.out.println("Only one payment request message is NOT Displayed in review one time PAGE : "+Validation_Status);
-				Assert.fail();
-			}
+			/*
+			 * if(Validation_Status) { System.out.
+			 * println("Only one payment request message is Displayed in review one time PAGE : "
+			 * + Validation_Status + " - Validation Passed");
+			 * getLoginScenario().saveBean(PageConstants.Update_Review_Page,
+			 * updateReviewPage);
+			 * getLoginScenario().saveBean(PageConstants.ALREADY_ENROLLED_FLAG, "true");
+			 * Assert.assertTrue(true); }else{ System.out.
+			 * println("Only one payment request message is NOT Displayed in review one time PAGE : "
+			 * +Validation_Status);
+			 */
+				
+			
 
 		}
 	}
@@ -1771,7 +1809,7 @@ public class OneTimePaymentAarpStepDefintion {
 			throws Throwable {
 		UpdateReviewPage updateReviewPage = (UpdateReviewPage) getLoginScenario()
 				.getBean(PageConstants.Update_Review_Page);
-		UpdateConfirmationPage updateConfirmationPage = updateReviewPage.selectAgreeAndClickOnContinueforEFT();
+		UpdateConfirmationPage updateConfirmationPage = updateReviewPage.CSRselectAgreeAndClickOnContinueforEFT();
 		if (updateConfirmationPage != null) {
 			getLoginScenario().saveBean(PageConstants.Update_Confirmation_Page, updateConfirmationPage);
 			System.out.println("User is on Update confirmation page for Checking account");
@@ -1883,6 +1921,15 @@ public class OneTimePaymentAarpStepDefintion {
 		}
 	}
 
+	@Then("^the user clicks on cancel button on cancel automatic payments page$")
+	public void userclicksoncanceloncancelAutomaticPaymentPage()
+			throws Throwable {
+		UpdateReviewPage updateReviewPage = (UpdateReviewPage) getLoginScenario()
+				.getBean(PageConstants.Update_Review_Page);
+		updateReviewPage.clickCancelOnCancelRecurringPaymentPage();
+	}
+	
+	
 	@Given("^user selects checking Account on Update Automatic recurring payments page and Click on Next$")
 	public void user_selects_checking_Account_on_Update_Automatic_recurring_payments_page_and_Click_on_Next()
 			throws Throwable {
@@ -2031,7 +2078,7 @@ public class OneTimePaymentAarpStepDefintion {
 		UpdateRecurringPage updateRecurringPage = paymentHistoryPage.clickOnEditAutomaticPaymentforShip();
 		if (updateRecurringPage != null) {
 			getLoginScenario().saveBean(PageConstants.Update_Recurring_Page, updateRecurringPage);
-			System.out.println("User is on Setup Recurring Payments screen");
+			System.out.println("User is on Recurring Payments screen");
 		}
 	}
 	
@@ -2315,6 +2362,23 @@ public class OneTimePaymentAarpStepDefintion {
 		
 	}
 	
+	@And("^the user delete update recurring payment record from GPS$")
+	public void DeletePaymentRecordFromGPS(DataTable givenAttributes) throws InterruptedException{
+		System.out.println("******the user delete update recurring payment record from GPS*****");
+		List<DataTableRow> paymentTypeRow = givenAttributes.getGherkinRows();
+		Map<String, String> paymentTypeMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < paymentTypeRow.size(); i++) {
+			paymentTypeMap.put(paymentTypeRow.get(i).getCells().get(0),
+					paymentTypeRow.get(i).getCells().get(1));
+		}
+		Thread.sleep(2000); 
+		UpdateConfirmationPage updateConfirmationPage = (UpdateConfirmationPage) getLoginScenario()
+				.getBean(PageConstants.Update_Confirmation_Page);		
+		updateConfirmationPage.deletePaymetnRecordFromGPS(paymentTypeMap);
+
+		
+	}
+	
 	@And("^Exception the user delete recurring payment record from GPS so that he can run recurring payment again$")
 	public void DeletePaymentRecordforexception(DataTable givenAttributes) throws InterruptedException{
 		System.out.println("******Trying to delete recurring payment record from GPS so that he can run recurring payment again*****");
@@ -2494,14 +2558,29 @@ public class OneTimePaymentAarpStepDefintion {
 		 paymentHistoryPage.paidInFullFlag();
 		
 	}
-	@Then("^User validates tool tips on the page$")
+	@Then("User validates tool tips on the payments overview page$")
 	public void User_validates_tool_tips_on_the_page() throws Throwable {
-		System.out.println("******User validates tool tips on the page*****");
+		System.out.println("******User validates tool tips on the payments overview page*****");
 		PaymentHistoryPage paymentHistoryPage = (PaymentHistoryPage) getLoginScenario().getBean(PageConstants.Payments_History_Page);
 		 paymentHistoryPage.toolTipsValidation();
 		
 	}
+	@Then("^User validates billing and payment history table tool tips on the page$")
+	public void User_validates_tool_tips_on_billing_tablethe_page() throws Throwable {
+		System.out.println("******User validates billing and payment history table tool tips on the page*****");
+		PaymentHistoryPage paymentHistoryPage = (PaymentHistoryPage) getLoginScenario().getBean(PageConstants.Payments_History_Page);
+		 paymentHistoryPage.billingPaymentHistorytoolTipsValidation();
+		
+	}
 
+	
+	@Then("^validate print billing payment and download buttons on the UI$")
+	public void validatePrintBillingPaymentAndDownloadButtonsOnTheUI() throws Throwable {
+		System.out.println("******User validates billing and payment history table tool tips on the page*****");
+		PaymentHistoryPage paymentHistoryPage = (PaymentHistoryPage) getLoginScenario().getBean(PageConstants.Payments_History_Page);
+		 paymentHistoryPage.billingPaymentAndDownloadButtons();
+		 
+	}
 	@Then("^User Scrolls down to the Billing history Section$")
 	public void UserScrollsDownToTheBillingHistorySection() throws Throwable {
 		PaymentHistoryPage paymentHistoryPage = (PaymentHistoryPage) getLoginScenario().getBean(PageConstants.Payments_History_Page);
@@ -2548,17 +2627,37 @@ public class OneTimePaymentAarpStepDefintion {
 	}
 	
 	@Then("^user validates data is present in billing history table$")
-	public void userValidatesDataInBillingHistoryTableFor90Days() {
+	public void userValidatesDataInBillingHistoryTableFor90Days(DataTable givenAttributes) {
+		
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		String planType = memberAttributesMap.get("Plan Type");
 		PaymentHistoryPage paymentHistoryPage = (PaymentHistoryPage) getLoginScenario()
 				.getBean(PageConstants.Payments_History_Page);
-		paymentHistoryPage.validateBillingHistoryTable();
+		paymentHistoryPage.validateBillingHistoryTable(planType);
 	}
 	
 	@Then("^user validates data is present in billing history table of Second Plan$")
-	public void userValidatesDataInBillingHistoryTableFor90DaysSecondPlan() {
+    public void userValidatesDataInBillingHistoryTableFor90DaysSecondPlan(DataTable givenAttributes) {
+		
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		String planType = memberAttributesMap.get("Plan Type");
 		PaymentHistoryPage paymentHistoryPage = (PaymentHistoryPage) getLoginScenario()
 				.getBean(PageConstants.Payments_History_Page);
-		paymentHistoryPage.validateBillingHistoryTableSecondPlan();
+		paymentHistoryPage.validateBillingHistoryTableSecondPlan(planType);
 	}
 	
 	
@@ -2643,17 +2742,38 @@ public class OneTimePaymentAarpStepDefintion {
 	}
 	
 	@Then("^user validates data is present in Payment history table$")
-	public void userValidatesDataInPaymentHistoryTableFor90Days() {
+	public void userValidatesDataInPaymentHistoryTableFor90Days(DataTable givenAttributes) {
+		
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		String planType = memberAttributesMap.get("Plan Type");
 		PaymentHistoryPage paymentHistoryPage = (PaymentHistoryPage) getLoginScenario()
 				.getBean(PageConstants.Payments_History_Page);
-		paymentHistoryPage.validatePaymentHistoryTable();
+	    paymentHistoryPage.validatePaymentHistoryTable(planType);
 	}
 	
 	@Then("^user validates data is present in Payment history table of Second Plan$")
-	public void userValidatesDataInPaymentHistoryTableFor90DaysSecondPlan() {
+public void userValidatesDataInPaymentHistoryTableFor90DaysSecondPlan(DataTable givenAttributes) {
+		
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		String planType = memberAttributesMap.get("Plan Type");
+
 		PaymentHistoryPage paymentHistoryPage = (PaymentHistoryPage) getLoginScenario()
 				.getBean(PageConstants.Payments_History_Page);
-		paymentHistoryPage.validatePaymentHistoryTableSecondPlan();
+		paymentHistoryPage.validatePaymentHistoryTableSecondPlan(planType);
 	}
 	
 	@Then("^user selects Last 6 months in the Payment History dropdown$")

@@ -8,6 +8,7 @@ Feature: To test HSID member SignIn
       | Member Type    | <memberType>    |
       | Copay Category | <copayCategory> |
     Then I validate that login is successfull
+    And I click on logout and validate the login page
 
     Examples: 
       | planType        | memberType          | copayCategory |
@@ -15,5 +16,5 @@ Feature: To test HSID member SignIn
       | MAPre-effective | Individual          | NON LIS       |
       | GovtTermless    | Individual          | NON LIS       |
       | PDP             | PREFFECTIVE         | NON-LIS       |
-      | SSUP            | Terminated          | NON-LIS       |
+      | MAPD            | Terminated_PnP      | 	          |
       | MA-Medsup       | FEDSHIPPREEFFECTIVE | NON-LIS       |

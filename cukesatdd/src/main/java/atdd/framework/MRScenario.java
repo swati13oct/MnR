@@ -13,6 +13,8 @@ import java.net.URL;
 import java.nio.MappedByteBuffer;
 import java.nio.channels.FileChannel;
 import java.nio.charset.Charset;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -30,11 +32,15 @@ import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 
+import javax.crypto.Mac;
+import javax.crypto.spec.SecretKeySpec;
+
 import org.apache.commons.lang3.StringUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Assert;
 import org.openqa.selenium.Dimension;
+import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -49,6 +55,7 @@ import org.openqa.selenium.phantomjs.PhantomJSDriverService;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.safari.SafariOptions;
 import org.springframework.stereotype.Component;
 
 import acceptancetests.data.CommonConstants;
@@ -59,7 +66,6 @@ import io.appium.java_client.ios.IOSDriver;
 
 import java.security.*;
 import javax.crypto.*;
-import javax.crypto.spec.SecretKeySpec;
 
 /**
  * 
@@ -88,6 +94,7 @@ public class MRScenario {
 
 	public static String environment = System.getProperty("environment");
 	public static String browsername = "chrome";
+	public static String browserName;
 	public static String isTestHarness;
 	public static String environmentMedicare;
 	public static String isHSIDCompatible;
@@ -249,12 +256,15 @@ public class MRScenario {
 				csvName = "MemberRedesign-VBF-Teamci.csv";
 
 			} else if ((environment.contains("team-a")
-					|| ((environment.equalsIgnoreCase("team-h")) || (environment.equalsIgnoreCase("team-e"))
+					|| (//(environment.equalsIgnoreCase("team-h")) || Team-h condition added separately to take username as login
+							(environment.equalsIgnoreCase("team-e"))
 							|| (environment.equalsIgnoreCase("team-f")) || (environment.equalsIgnoreCase("team-g"))
 							|| (environment.equalsIgnoreCase("team-c")) || (environment.equalsIgnoreCase("team-acme")) || (environment.equalsIgnoreCase("team-voc"))|| (environment.equalsIgnoreCase("team-t") || (environment.equalsIgnoreCase("team-chargers")))))) {
 				csvName = "MemberRedesign-UUID.csv";
 			} else if (tagName.equalsIgnoreCase("@MemberVBF") && environment.contains("stage")) {
 				csvName = "MemberRedesign-VBF.csv";
+			} else if (environment.equalsIgnoreCase("team-h")) {
+				csvName = "UMS-Member-Type.csv";
 			}
 			/*
 			 * note: Dec2018 - comment out because this section caused stage run not to use
@@ -614,7 +624,7 @@ try {
 		}
 		return props;
 		}else{
-		if(environment.equals("stage")||environment.equals("offline-stage")||environment.equals("stage-aarp")||environment.equals("offline-stage-aarp"))
+		if(environment.contains("stage"))
 		domain = "uhc.com";
 		else if(environment.equals("team-atest") || environment.equals("team-e")||environment.equals("team-t")||environment.equals("team-v1")||environment.equals("team-acme")|| environment.equals("team-voc") ||environment.equals("team-acme") ||environment.contains("digital-uat") ||environment.equals("team-chargers") ||environment.contains("chargers"))
 		domain = "ocp-elr-core-nonprod.optum.com";
@@ -726,6 +736,7 @@ try {
 
 		
 		  
+		
 		  isSauceLabSelected = true; DesiredCapabilities capabilities =
 		  DesiredCapabilities.chrome();
 		  
@@ -750,6 +761,7 @@ try {
 		  (MalformedURLException e) { // TODO Auto-generated catch block
 		  e.printStackTrace(); } return webDriver;
 		 
+		
 		/*
 		 * File pathToBinary = new
 		 * File("C:/Program Files (x86)/Google/Chrome/Application/chrome.exe");
@@ -764,6 +776,7 @@ try {
 		 * new ChromeDriver(options); webDriver.manage().window().maximize(); return
 		 * webDriver;
 		 */
+		 
 	}
 
 	public WebDriver getIEDriver() {
@@ -847,6 +860,7 @@ try {
 
 	}
 
+	
 	public void DriverQuit()
 
 	{
@@ -942,7 +956,7 @@ try {
 
 		// if the browsername is passed in from Jenkins then use that, otherwise use the
 		// one from the CI config properties file
-		String browserName = (null == System.getProperty(CommonConstants.BROWSER_NAME) ? browsername
+		browserName = (null == System.getProperty(CommonConstants.BROWSER_NAME) ? browsername
 				: System.getProperty(CommonConstants.BROWSER_NAME));
 
 		// if the browser version is passed in from Jenkins then use that, otherwise use
@@ -1000,7 +1014,8 @@ try {
 				DesiredCapabilities capabilities = DesiredCapabilities.chrome();
 				capabilities.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
 				//System.setProperty("webdriver.chrome.driver", pathToBinary);
-				System.setProperty("webdriver.chrome.driver", "C:\\ProgramData\\Chrome_driver_79.0.3945.16\\chromedriver.exe");
+				System.setProperty("webdriver.chrome.driver", "C:\\ProgramData\\Chrome_driver_80.0.3987.16\\chromedriver.exe");
+
 				webDriver = new ChromeDriver();
 				saveBean(CommonConstants.WEBDRIVER, webDriver);
 				return webDriver;
@@ -1070,10 +1085,16 @@ try {
 			}else if (browserName.equalsIgnoreCase("safari")) {
 				System.out.println("Inside safari");
 				capabilities = DesiredCapabilities.safari();
-				capabilities.setCapability("platform", "Mac 10.15");
-				capabilities.setCapability("version", browserVersion);
-				capabilities.setCapability("screenResolution", "1920x1440");
-				capabilities.setCapability("maxDuration", "3600");
+				capabilities.setCapability("maxDuration", "10000");
+				
+				MutableCapabilities sauceOptions = new MutableCapabilities();
+				sauceOptions.setCapability("screenResolution", "1920x1440");
+
+				SafariOptions browserOptions = new SafariOptions();
+				browserOptions.setCapability("platformName", "macOS 10.14");
+				browserOptions.setCapability("browserVersion", browserVersion);
+				browserOptions.setCapability("sauce:options", sauceOptions);
+				capabilities.merge(browserOptions);
 			}
 			if (!(null == capabilities)) {
 				capabilities.setCapability("autoAcceptsAlerts", true);
@@ -1179,8 +1200,10 @@ try {
 		// capabilities.setCapability("testobject_test_name", mobileTestName);
 		// Offline prod and prod env. should not use tunnels
 		System.out.println("sauceLabsMobileTunnelIdentifier : "+sauceLabsMobileTunnelIdentifier);
-		if(!sauceLabsMobileTunnelIdentifier.equalsIgnoreCase("NONE"))
+		if(!sauceLabsMobileTunnelIdentifier.equalsIgnoreCase("NONE")) {
+			//capabilities.setCapability("parentTunnel", "optumtest");
 			capabilities.setCapability("tunnelIdentifier", sauceLabsMobileTunnelIdentifier);
+		}
 		capabilities.setCapability("nativeWebTap", true);
 		capabilities.setCapability("deviceName", mobileDeviceName);
 		capabilities.setCapability("platformName", mobileDeviceOSName);
@@ -1227,17 +1250,17 @@ try {
 			System.out.println("for class run");
 
 			String env = HSID_ENV;
-			String user = "UHG_001375809";  
-			String pwd = "Oracle@1234"; 
+			String user = "UHG_000611921";  
+			String pwd = "Passx&9e";
 			
 			//Below is GPS UAT URL (enable/disable based on GPS env that you want to connect)
 			//String url = "jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=dbslt0039.uhc.com)(PORT=1521))(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=gpsts14svc.uhc.com)))"; 
 			//Below is GPS UAT2 URL (enable/disable based on GPS env that you want to connect)
 			//String url = "jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=dbslt0041.uhc.com)(PORT=1521))(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=gpsts20svc.uhc.com)))"; 
 			//Below is GPS UAT3 URL (enable/disable based on GPS env that you want to connect)
-			//String url = "jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=dbslt0058.uhc.com)(PORT=1521))(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=gpsts18svc.uhc.com)))"; 
+			//  String url = "jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=dbslt0102)(PORT=1521))(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=gpsts18)))"; 
 			//Below is GPS UAT4 URL (enable/disable based on GPS env that you want to connect)
-			String url = "jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=dbslt0058.uhc.com)(PORT=1521))(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=gpsts19svc.uhc.com)))";  
+			String url = "jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=dbslt0103)(PORT=1521))(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=gpsts19)))"; 
 						
 			con = DriverManager.getConnection(url, user, pwd);
 			System.out.println("Oracle Database Connection established**********");

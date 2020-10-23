@@ -341,12 +341,13 @@ public class ProviderSearchStepDefinitionUHC {
 
 				String zipcode = memberAttributesMap.get("Zip Code");
 				String plancount = memberAttributesMap.get("Plancount");
-			
+				String planYear = memberAttributesMap.get("Year");
 
 			{
 				ProviderSearchPage providerSearchPage = (ProviderSearchPage) getLoginScenario()
 						.getBean(PageConstants.PROVIDER_SEARCH_PAGE);
-				 int intPlanCounts =providerSearchPage.entersZipcodeAndPlancountblayer(zipcode);
+				
+				 int intPlanCounts =providerSearchPage.entersZipcodeAndPlancountblayer(zipcode,planYear);
 				 int strplancount = Integer.parseInt(plancount);
 				 System.out.println("expected=="+strplancount +"===actual==" +intPlanCounts);
 				 if(intPlanCounts!=strplancount){
