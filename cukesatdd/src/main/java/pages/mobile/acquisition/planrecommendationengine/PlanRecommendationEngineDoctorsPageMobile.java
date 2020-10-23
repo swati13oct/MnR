@@ -192,11 +192,11 @@ public class PlanRecommendationEngineDoctorsPageMobile extends UhcDriver {
 				else
 					doctorModellookup(doctorsName, 1);
 			}
-			System.out.println("Validating " + page + " page Continue button functionality");
-			if (!status.toUpperCase().contains("NEXTPAGENAME"))
-				desktopCommonUtils.nextPageValidation(page.toUpperCase());
-			else
-				desktopCommonUtils.nextPageNameValidation(page.toUpperCase());
+//			System.out.println("Validating " + page + " page Continue button functionality");
+//			if (!status.toUpperCase().contains("NEXTPAGENAME"))
+//				desktopCommonUtils.nextPageValidation(page.toUpperCase());
+//			else
+//				desktopCommonUtils.nextPageNameValidation(page.toUpperCase());
 		} else {
 			if (doctor.isEmpty()) {
 				//continueBtn.click();

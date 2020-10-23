@@ -297,6 +297,8 @@ public class PlanRecommendationEngineCommonutilityMobile extends UhcDriver {
 				threadsleep(1000);
 				try {
 					WebDriverWait wait = new WebDriverWait(driver, 20);
+					//Added for mobile
+					scrollToView(pageStepsNumberName);
 					wait.until(ExpectedConditions.textToBePresentInElement(pageStepsNumberName, nextPageName));
 				} catch (Exception e) {
 					Assert.assertTrue(false, "Next page name validation failed");

@@ -8,6 +8,7 @@ import java.awt.Robot;
 import java.awt.event.ActionEvent;
 import java.awt.event.InputEvent;
 
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -80,9 +81,11 @@ public class PlanRecommendationEngineAdditionalServicesPageMobile extends UhcDri
 	@FindBy(css = "div.ng-star-inserted:nth-of-type(1)>fieldset.radioGroupOpt:nth-of-type(1) uhc-radio:nth-child(2)")
 	private WebElement dentalNo;
 
-	// @FindBy(xpath =
-	// "//input[@name='additional-dental']//following-sibling::span[contains(text(),'No')]")
+	// @FindBy(css = "label[for='radio-11-input']")
 	// private WebElement dentalNo;
+	//
+	// @FindBy(css = "label[for='radio-13-input']")
+	// private WebElement hearingNo;
 
 	@FindBy(css = "div.ng-star-inserted:nth-of-type(1)>fieldset.radioGroupOpt:nth-of-type(1) uhc-alert")
 	private WebElement dentalError;
@@ -172,31 +175,14 @@ public class PlanRecommendationEngineAdditionalServicesPageMobile extends UhcDri
 
 		if (dental.equalsIgnoreCase("Yes")) {
 			scrollToView(dentalYes);
-			dentalYes.click();
+			jsClickNew(dentalYes);
+			// dentalYes.click();
 			System.out.println("additional Type Dental " + dental + " Clicked");
 		}
 		if (dental.equalsIgnoreCase("No")) {
 
 			scrollToView(dentalNo);
-			action.moveToElement(dentalNo).click().perform();
-			//action.moveToElement(dentalNo).click().build().perform();
-			// try {
-			// Robot robot = new Robot();
-			// robot.mouseMove(213, 616);
-			// robot.mousePress(InputEvent.BUTTON1_DOWN_MASK);
-			// robot.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
-			// } catch (AWTException e) {
-			// // TODO Auto-generated catch block
-			// e.printStackTrace();
-			// }
-			// jsClickNew(previousBtn);
-			// jsClickNew(continueBtn);
-			// scrollToView(dentalNo);
-
-			// jsClickNew(dentalNo);
-			// waitforElementVisibilityInTime(dentalNo, 5000);
-			// waitTillElementClickableInTime(dentalNo, 3000);
-
+			jsClickNew(dentalNo);
 			System.out.println("additional Type Dental " + dental + " Clicked");
 
 		}

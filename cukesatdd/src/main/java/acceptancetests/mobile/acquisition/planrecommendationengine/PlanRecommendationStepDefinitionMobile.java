@@ -597,6 +597,7 @@ public class PlanRecommendationStepDefinitionMobile {
 				wd);
 		PlanRecommendationEngineHeaderAndFooterMobile headerAndFooter = new PlanRecommendationEngineHeaderAndFooterMobile(
 				wd);
+		
 		headerAndFooter.breadCrumbs();
 		planSelectorResultspage.resultsloadingpage();
 	}

@@ -1,7 +1,7 @@
 @PlanRecommendationEngine @PRERegression
 Feature: Plan Recommendation Engine Ranking - Verify PRE flows functionalities with recommendation and Ranking with API results
 
-  @PRE @APIRanking @MAPDFlowRanking @SanityTest 
+  @PRE @APIRanking @MAPDFlowRanking @SanityTest @PRERegression3
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds> , <travel> , <doctors> , <DoctorsName> , <isMultiDoctor> , <Drug Selection> , <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch> , <pharmacyoption> , <Dental-Hearing-Vision-Fitness> , <costPreferenceOption> - To validate API Ranking for MA plans in PRE
     Given the user is on UHC medicare acquisition site landing page
     When user navigate to Plan Recommendation Engine and Checking Breadcrumbs
@@ -38,7 +38,7 @@ Feature: Plan Recommendation Engine Ranking - Verify PRE flows functionalities w
 
   #      |   10001 | NO            | New York | MAPD          | None            | OutsideUS | Lookup  | Venegas-Pizarro, Marcelo F | NO            | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,3,YES,NO:morphine sulfate,NO,morphine sulfate CAP 10MG ER,,,1,NO,NO | Retail         | No,Yes,Yes,No                 | Lower                |
   #      |   10001 | NO            | New York | MAPD          | None            | OutsideUS | Lookup  | Venegas-Pizarro, Marcelo F | NO            | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,3,YES,NO:morphine sulfate,NO,morphine sulfate CAP 10MG ER,,,1,NO,NO | Retail         | No,Yes,Yes,No                 | Higher               |
-  @PRE @planrecommandonation @APIRanking @MAPDFlowRanking @SanityTest  @SanityPRE
+  @PRE @planrecommandonation @APIRanking @MAPDFlowRanking @SanityTest  @SanityPRE @PRERegression3
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds>, <travel>, <doctors>, <DoctorsName>, <Drug Selection> , <Dental-Hearing-Vision-Fitness>, <costPreferenceOption> - To validate SNP API ranking plans in PRE
     Given the user is on UHC medicare acquisition site landing page
     When user navigate to Plan Recommendation Engine and Checking Breadcrumbs

@@ -254,11 +254,13 @@ public class PlanRecommendationEngineDrugsPageMobile extends UhcDriver {
 		System.out.println("Drugs Page Functional Operations");
 		if (drug.equalsIgnoreCase("Yes")) {
 			validate(yesOption);
-			yesOption.click();
+			//yesOption.click();
+			jsClickNew(yesOption);
 			System.out.println("Prescription Type " + drug + " Clicked");
 		} else if (drug.equalsIgnoreCase("No")) {
 			validate(noOption);
-			noOption.click();
+			//noOption.click();
+			jsClickNew(noOption);
 			System.out.println("Prescription Type " + drug + " Clicked");
 		}
 	}
@@ -267,7 +269,8 @@ public class PlanRecommendationEngineDrugsPageMobile extends UhcDriver {
 
 	public void skipDrugs(String drugsSelection) {
 		drugpageOptions(drugsSelection);
-		continueBtn.click();
+		//continueBtn.click();
+		jsClickNew(continueBtn);
 		System.out.println("Validating " + page + " page Continue button functionality");
 		desktopCommonUtils.nextPageValidation(page.toUpperCase() + "skip");
 	}
