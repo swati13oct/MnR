@@ -561,7 +561,7 @@ public class PlanDocumentsAndResourcesUsersHelperProd {
 				targetTestDocList.add("Benefit Highlights");
 				targetTestDocList.add("Summary of Benefits");
 				targetTestDocList.add("Evidence of Coverage");
-				//targetTestDocList.add("UnitedHealth Passport Program"); 
+				targetTestDocList.add("UnitedHealth Passport Program"); 
 				return targetTestDocList;
 			} 
 			if (subSection.equals("ES")) {
@@ -569,7 +569,7 @@ public class PlanDocumentsAndResourcesUsersHelperProd {
 				targetTestDocList.add("Beneficios Importantes");
 				targetTestDocList.add("Resumen de Beneficios");
 				targetTestDocList.add("Comprobante de Cobertura");
-				//targetTestDocList.add("Programa UnitedHealth Passport"); 
+				targetTestDocList.add("Programa UnitedHealth Passport"); 
 				return targetTestDocList;
 			}
 			if (subSection.equals("ZH")) {
@@ -583,6 +583,7 @@ public class PlanDocumentsAndResourcesUsersHelperProd {
 				targetTestDocList.add("Quick Start Guide");
 				targetTestDocList.add("Benefit Highlights");
 				targetTestDocList.add("Evidence Of Coverage");
+				targetTestDocList.add("UnitedHealth Passport Program"); 
 				return targetTestDocList;
 			} 
 			if (subSection.equals("ES")) {
@@ -590,6 +591,7 @@ public class PlanDocumentsAndResourcesUsersHelperProd {
 				targetTestDocList.add("Gu.a R.pida para Comenzar"); //note: regex
 				targetTestDocList.add("Beneficios Importantes");
 				targetTestDocList.add("Comprobante de Cobertura");
+				targetTestDocList.add("Programa UnitedHealth Passport"); 
 				return targetTestDocList;
 			} 
 			if (subSection.equals("ZH")) {
@@ -679,7 +681,7 @@ public class PlanDocumentsAndResourcesUsersHelperProd {
 			}
 			if (subSection.equals("Reimbursement Forms")) {
 				targetTestDocList = new ArrayList<String>();
-				//targetTestDocList.add("Medical Reimbursement Form (Online)"); //note: this one is for COSMOS only
+				targetTestDocList.add("Medical Reimbursement Form (Online)"); //note: this one is for COSMOS only
 				targetTestDocList.add("Medical Reimbursement Form (PDF)");
 				return targetTestDocList;
 			}

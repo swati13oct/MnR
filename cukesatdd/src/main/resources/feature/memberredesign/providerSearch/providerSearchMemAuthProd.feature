@@ -119,7 +119,7 @@ Feature: 1.23.2 Member Provider Search - Member Auth - PROD
     Examples: 
 	    | index | username  | password  | MemUserName          | planType | memberType              | 
         | 04    | kkumard  | mnrs786@  | haradaty32           | MA       | UHC_IND_ProviderSearch  |
-	    | 05    | kkumard  | mnrs786@  | ERNIE2450            | MA       | AARP_IND_ProviderSearch |
+	    | 05    | kkumard  | mnrs786@  | haradaty32           | MA       | AARP_IND_ProviderSearch |
 
 	@prod_providerSearch01_medica_pcp
     Examples: 
