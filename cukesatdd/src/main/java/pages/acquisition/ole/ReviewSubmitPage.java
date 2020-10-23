@@ -440,42 +440,6 @@ public class ReviewSubmitPage extends UhcDriver{
     				System.out.println(Mailing_City+" : "+MailCityDisplayed+" : "+flag);
     			}else flag =false;
     			
-    					
-    			String HealthInsuranceName1 = HealthInsuranceName.getText();
-    			if(HealthInsuranceName1.contains(healthInsuranceName)){
-    				flag = (!flag)?false:true;
-    				System.out.println(healthInsuranceName+" : "+HealthInsuranceName1+" : "+flag);
-    			}else flag =false;
-    			
-    			String HealthInsuranceGroupNo1 = HealthInsuranceGroupNo.getText();
-    			if(HealthInsuranceGroupNo1.contains(healthInsuranceGroupNo)){
-    				flag = (!flag)?false:true;
-    				System.out.println(healthInsuranceGroupNo+" : "+HealthInsuranceGroupNo1+" : "+flag);
-    			}else flag =false;
-    			
-    			String HealthInsuranceMemberNo1 = HealthInsuranceMemberNo.getText();
-    			if(HealthInsuranceMemberNo1.contains(healthInsuranceMemberNo)){
-    				flag = (!flag)?false:true;
-    				System.out.println(Gender+" : "+HealthInsuranceMemberNo1+" : "+flag);
-    			}else flag =false;
-    			
-    			String PrescriptionDrugName1 = PrescriptionDrugName.getText();
-    			if(PrescriptionDrugName1.contains(prescriptionDrugName)){
-    				flag = (!flag)?false:true;
-    				System.out.println(prescriptionDrugName+" : "+PrescriptionDrugName1+" : "+flag);
-    			}else flag =false;
-    			
-    			String PrescriptionDrugGroupNo1 = PrescriptionDrugGroupNo.getText();
-    			if(PrescriptionDrugGroupNo1.contains(prescriptionGroupNumber)){
-    				flag = (!flag)?false:true;
-    				System.out.println(prescriptionGroupNumber+" : "+PrescriptionDrugGroupNo1+" : "+flag);
-    			}else flag =false;
-    			String PrescriptionDrugMemberNo1 = PrescriptionDrugMemberNo.getText();
-    			if(PrescriptionDrugMemberNo1.contains(prescriptionMemberNumber)){
-    				flag = (!flag)?false:true;
-    				System.out.println(prescriptionMemberNumber+" : "+PrescriptionDrugMemberNo1+" : "+flag);
-    			}else flag =false;		
-    			
     		}
     		
     		
@@ -515,12 +479,13 @@ public class ReviewSubmitPage extends UhcDriver{
 /*		WebDriverWait wait = new WebDriverWait(driver, 30);
 		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//*[@class = 'cta-button confirm-button']")));*/
 		
-		if(validateNew(confirmationForm,30)){
+		if(validateNew(confirmationForm)){
 			System.out.println("OLE Enrollment Submission Confirmation Page is Displayed");
 			return new OLEconfirmationPage(driver);
 		}
 		else if(validateNew(SubmitApplicationBtn)){
-			SubmitApplicationBtn.click();
+			//SubmitApplicationBtn.click();
+			jsClickNew(SubmitApplicationBtn);
 			if(driver.getCurrentUrl().contains("confirmation")){
 				System.out.println("OLE Enrollment Submission Confirmation Page is Displayed");
 				return new OLEconfirmationPage(driver);

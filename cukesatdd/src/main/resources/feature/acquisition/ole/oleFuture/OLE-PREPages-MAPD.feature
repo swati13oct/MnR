@@ -79,7 +79,7 @@ Feature: 2.05.1.ACQ-OLE PRE Through MAPD
     Then the user answers following questions in Medicare Information Page
       | PDP Question      | <pdpFlag>      |
       | LongTerm Question | <longTermFlag> |
-          Then the user validates the long term questions in Medicare Information Page
+     Then the user validates the long term questions in Medicare Information Page
     | Health Insurance Name| <healthinsurancename>  |
     |   Group Number			 | <groupnumber>          |
     | Member Number        | <membernumber>         | 
@@ -101,7 +101,7 @@ Feature: 2.05.1.ACQ-OLE PRE Through MAPD
     Then the user validates Proposed Effective Date is Displayed
     Then the user navigates to PCP Page and validates PCP page is not displayed for PDP
     Then the user validates PCP page for MA and MAPD PFFS plans
-    Then the user validates Look up Provider for MA MAPD and DSNP plans.
+    #Then the user validates Look up Provider for MA MAPD and DSNP plans.
     Then the user navigates to Monthly Plan Premium Page
     Then the user navigates to Optional Benefits Page for following plans with available Riders
       | Rider Flag | <riderflag> |
