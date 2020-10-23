@@ -274,7 +274,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
     @FindBy(id="dupIconFlyOut")
     private WebElement shoppingCartIcon;
     
-	@FindBy(xpath = "//*[@id='sam-call-button']//*[contains(@class,'sam__button__icon')]")
+	@FindBy(xpath = "//*[@id='sam-call-button']//*[contains(@class,'sam__button__text desktop')]")
    	private WebElement callsam;
    	
    	//@FindBy(xpath = "//*[@id='sam-call-button']/div/span[1]")
@@ -284,7 +284,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
    	@FindBy(xpath ="//*[@id='sam-call-modal']/div/div")
    	private WebElement callSamPopup;
    	
-   	@FindBy(xpath = "//*[contains(@class,'heading-1')]")
+   	@FindBy(xpath = "//*[contains(@class,'companyNameHeader')]/p")
    	private WebElement pageheader;
 
     
@@ -1479,9 +1479,15 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		}
 		
 		public AcquisitionHomePage  validateCallpopup() throws InterruptedException {
-//			CommonUtility.checkPageIsReady(driver);
-			validate(callsamtooltip);
+			String path = driver.getCurrentUrl();
+			System.out.println(path);
+			driver.navigate().to(testSiteUrl);
+			CommonUtility.checkPageIsReady(driver);
+			navigateToPath(path);
 			CheckiPerseptions();
+			validate(callsamtooltip);
+			jsClickNew(pageheader);
+			threadsleep(3000);
 			jsClickNew(callsam);
 //			callsam.click();
 			System.out.println("@@@@@@@@@@@@@@@ Call Icon Clicked @@@@@@@@@@@@@@@");
