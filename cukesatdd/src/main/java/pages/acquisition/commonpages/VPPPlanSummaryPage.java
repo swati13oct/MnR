@@ -2081,7 +2081,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	 */
 
 	public void validateMarketingBullets(String planType, String planName) {
-		checkIfPageReadySafari();
+		waitForPageLoadSafari();
 		if (!planType.equals("PDP")) {
 			WebElement marketingBullets = driver.findElement(By.xpath("//*[contains(text(),\'" + planName
 					+ "\')]/ancestor::div[contains(@class, 'module-plan-overview')]//ul[contains(@class ,'highlight-list')]"));
