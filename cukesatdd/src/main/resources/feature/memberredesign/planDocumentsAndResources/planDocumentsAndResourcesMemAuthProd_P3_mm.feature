@@ -56,7 +56,7 @@ Feature: 1.06.3.2 Member Plans and Documents - section: Membership Materials - M
 	@prod_active_ma @prod_active_ma_ind
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | mm_sd | mm_en | mm_es | mm_zh |
-      | 09-047 | 15129       | kkumard  | mnrs786@  | ERNIE2450    | MA       | AARP_IND_EFF_PDnR     | true  | true  | true  | false |
+      | 09-047 | 15129       | kkumard   | mnrs786@  | haradaty32    | MA       | AARP_IND_EFF_PDnR     | true  | true  | true  | false |
 
 	@prod_active_ma @prod_active_ma_grp
 	Examples: 

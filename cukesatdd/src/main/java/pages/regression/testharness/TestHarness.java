@@ -715,11 +715,11 @@ public class TestHarness extends UhcDriver {
 	 * @throws InterruptedException
 	 */
 	public DrugCostEstimatorPage navigateToDCEPageFromTestHarnessPage() throws InterruptedException {
-		checkModelPopup(driver,5);
+		checkModelPopup(driver,2);
 		validateNew(testHarnessDcePageLink);
 		testHarnessDcePageLink.click();
 		CommonUtility.checkPageIsReady(driver);
-		checkModelPopup(driver,5);
+		checkModelPopup(driver,2);
 		CommonUtility.waitForPageLoad(driver, dceHeaderTxt, CommonConstants.TIMEOUT_90);
 		if (driver.getTitle().contains("Overview")) {
     		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  

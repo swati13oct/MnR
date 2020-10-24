@@ -29,7 +29,7 @@ Feature: 1.24.2.e Member Individual Health Record - PROD - P5 - PharmacyLocator,
     @prod_ihr_p5_mapd_sanity
     Examples: 
 	    | index | FID     | username  | password  | MemUserName             | planType | memberType         | expectLink | 
-	    | S09   | F424804 | kkumard   | mnrs786@  | SHERMANJAFFE65          | MAPD     | NONBOA_GROUP_IHR   | true       |
+	    | S09   | F424804 | kkumard   | mnrs786@  | Grandmagrey123          | MAPD     | NONBOA_GROUP_IHR   | true       |
 
   @prod_sanity02
   Scenario Outline: -Index <index> -FID <FID> -Plan Type: <planType> -Member Type: <memberType> - To verify iHR link display for user that is not on the exclusion table - P5 - DCE
@@ -58,7 +58,7 @@ Feature: 1.24.2.e Member Individual Health Record - PROD - P5 - PharmacyLocator,
     @prod_ihr_p5_mapd_sanity
     Examples: 
 	    | index | FID     | username  | password  | MemUserName             | planType | memberType         | expectLink | 
-	    | S09   | F424804 | kkumard   | mnrs786@  | SHERMANJAFFE65          | MAPD     | NONBOA_GROUP_IHR   | true       |
+	    | S09   | F424804 | kkumard   | mnrs786@  | Grandmagrey123          | MAPD     | NONBOA_GROUP_IHR   | true       |
 
   #----- begin regression
   @prod_healthRecord01 @US2471601 @F424804
@@ -110,8 +110,8 @@ Feature: 1.24.2.e Member Individual Health Record - PROD - P5 - PharmacyLocator,
     @prod_ihr_p5_ma_mapd
     Examples: 
 	    | index | FID     | username  | password  | MemUserName             | planType | memberType         | expectLink | 
-	    | 08    | F424804 | kkumard   | mnrs786@  | ERNIE2450               | MA       | IHR                | true       |
-	    | 09    | F424804 | kkumard   | mnrs786@  | SHERMANJAFFE65          | MAPD     | NONBOA_GROUP_IHR   | true       |
+	    | 08    | F424804 | kkumard   | mnrs786@  | haradaty32              | MA       | IHR                | true       |
+	    | 09    | F424804 | kkumard   | mnrs786@  | Grandmagrey123          | MAPD     | NONBOA_GROUP_IHR   | true       |
 
     @prod_ihr_p5_pdp
     Examples: 

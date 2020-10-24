@@ -13,6 +13,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.PageFactory;
+
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 
@@ -20,6 +22,7 @@ public class PlanDocumentsAndResourcesBaseHelper extends PlanDocumentsAndResourc
 	
 	public PlanDocumentsAndResourcesBaseHelper(WebDriver driver) {
 		super(driver);
+		PageFactory.initElements(driver, this);
 		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
 	}
 
