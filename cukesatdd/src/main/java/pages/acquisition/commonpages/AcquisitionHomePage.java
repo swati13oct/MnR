@@ -1484,9 +1484,10 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			driver.navigate().to(testSiteUrl);
 			CommonUtility.checkPageIsReady(driver);
 			driver.navigate().to(path);
+			CommonUtility.checkPageIsReady(driver);
 			CheckiPerseptions();
 			validate(callsamtooltip);
-			jsClickNew(pageheader);
+//			jsClickNew(pageheader);
 			threadsleep(3000);
 			jsClickNew(callsam);
 //			callsam.click();

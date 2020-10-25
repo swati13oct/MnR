@@ -57,10 +57,10 @@ Feature: 1.12 ACQ - Global Components AARP
     Given the user navigates to following medicare acquisition site page
       | PageName | <pageName> |
       | PagePath | <path>     |
-    When user accesses global header of the Medicare Plans home page
-    When user accesses global footer of the Medicare Plans All page
-    Then the User validates Shop for a Plan Navigation link
-    Then the user validates Medicare Education Navigation link
+    #When user accesses global header of the Medicare Plans home page
+    #When user accesses global footer of the Medicare Plans All page
+    #Then the User validates Shop for a Plan Navigation link
+    #Then the user validates Medicare Education Navigation link
     Then the user validate ZipCode Components on the page using ZipCode "10001"
     Then the user validates TFN on the page
       | TFNxpath | <tfnXpath> |
