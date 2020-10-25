@@ -1487,8 +1487,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			CommonUtility.checkPageIsReady(driver);
 			CheckiPerseptions();
 			validate(callsamtooltip);
-//			jsClickNew(pageheader);
-			threadsleep(3000);
+			jsClickNew(pageheader);
+			threadsleep(5000);
 			jsClickNew(callsam);
 //			callsam.click();
 			System.out.println("@@@@@@@@@@@@@@@ Call Icon Clicked @@@@@@@@@@@@@@@");
