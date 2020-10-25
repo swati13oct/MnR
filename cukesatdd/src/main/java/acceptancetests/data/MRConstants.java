@@ -429,11 +429,11 @@ public static final String UHC_DEEPLINK_URL_Pharmacy = "http://stage-myuhcmedica
   public static String MEDICA_GUEST_PAYMENTS_PAGE_URL = "https://"+ MRScenario.environment +"-paymymedicapremium."+ "uhc.com"; 
   */
   
-  public static String AARP_GUEST_PAYMENTS_PAGE_URL = "www.paymyaarppremium.com";
-  public static String UHC_GUEST_PAYMENTS_PAGE_URL = "www.paymyuhcpremium.com";
-  public static String RETIREE_GUEST_PAYMENTS_PAGE_URL ="www.paymyuhcpremium.com/retiree";
-  public static String PCP_GUEST_PAYMENTS_PAGE_URL = "www.paymypcppremium.com";
-  public static String MEDICA_GUEST_PAYMENTS_PAGE_URL = "www.paymymedicapremium.com"; 
+  public static String AARP_GUEST_PAYMENTS_PAGE_URL = "https://www.medicare.uhc.com/aarp/premium-payment/#/";
+  public static String UHC_GUEST_PAYMENTS_PAGE_URL = "https://www.medicare.uhc.com/premium-payment/#/";
+  public static String RETIREE_GUEST_PAYMENTS_PAGE_URL ="https://www.medicare.uhc.com/retiree/premium-payment/#/";
+  public static String PCP_GUEST_PAYMENTS_PAGE_URL = "https://www.medicare.uhc.com/pcp/premium-payment/#/";
+  public static String MEDICA_GUEST_PAYMENTS_PAGE_URL = "https://www.medicare.uhc.com/medica/premium-payment/#/"; 
 }
 
 	    
