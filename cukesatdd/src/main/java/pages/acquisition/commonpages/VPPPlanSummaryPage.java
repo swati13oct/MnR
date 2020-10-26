@@ -35,6 +35,7 @@ import acceptancetests.data.MRConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
+import pages.acquisition.dceredesign.DrugDetailsPage;
 import pages.acquisition.dceredesign.GetStartedPage;
 import pages.acquisition.isdecisionguide.IsDecisionGuideStep1;
 import pages.acquisition.medsuppole.MedSuppOLEPage;
@@ -1208,28 +1209,26 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			WebElement MAmoreDetailsLink = driver.findElement(By.xpath("//*[contains(text(), '" + planName
 					+ "')]/ancestor::div[contains(@class,'module-plan-overview')]//div[contains(@class,'swiper-content')]//div[not (contains(@class,'ng-hide'))]/a[contains(text(),'View Plan')]"));
 			CommonUtility.waitForPageLoadNew(driver, MAmoreDetailsLink, 30);
-			MAmoreDetailsLink.click();
+			jsClickNew(MAmoreDetailsLink);
 			System.out.println("View Plan Details Link is clicked for MA plan"+planName);
 
 		} else if (planType.equalsIgnoreCase("PDP")) {
             WebElement PDPmoreDetailsLink = driver.findElement(By.xpath("//*[contains(text(), '" + planName
                     + "')]/ancestor::div[contains(@class,'module-plan-overview')]//*[contains(@id,'viewmoredetlinkpdp')]"));
 			CommonUtility.waitForPageLoadNew(driver, PDPmoreDetailsLink, 30);
-			PDPmoreDetailsLink.click();
+			jsClickNew(PDPmoreDetailsLink);
 			System.out.println("View Plan Details Link is clicked for PDP plan"+planName);
 
 		} else if (planType.equalsIgnoreCase("SNP")) {
 			WebElement SNPmoreDetailsLink = driver.findElement(By.xpath("//a[contains(text(), '" + planName
 					+ "')]/ancestor::div[contains(@class,'module-plan-overview')]//a[contains(text(),'View Plan')]"));
 			CommonUtility.waitForPageLoadNew(driver, SNPmoreDetailsLink, 30);
-			SNPmoreDetailsLink.click();
+			jsClickNew(SNPmoreDetailsLink);
 			System.out.println("View Plan Details Link is clicked for MA plan"+planName);
 		}
 		CommonUtility.checkPageIsReadyNew(driver);
-		if (driver.getCurrentUrl().contains("#/details")) {	
 			return new PlanDetailsPage(driver,planType);
-		}
-		return null;
+		
 	}
 
 	
@@ -3291,32 +3290,79 @@ public void RetrieveURL(String ExpectedsupplementURL) {
 			Assert.fail("****************Submit application button is not clicked successfully and  resume application page is not loaded ***************");
 		}
 	}
-public void signInOptumId(String username, String password) {
-	try {
-		checkIfPageReadySafari();
-		signIn.click();
-		driver.findElement(By.cssSelector("input#userNameId_input")).sendKeys(username);
-		driver.findElement(By.cssSelector("input#passwdId_input")).sendKeys(password);
-		driver.findElement(By.cssSelector("input#SignIn")).click();
-		String Question = driver.findElement(By.cssSelector("label#challengeQuestionLabelId")).getText().trim();
-		WebElement securityAnswer = driver.findElement(By.cssSelector("div#challengeSecurityAnswerId >input"));
-		if (Question.equalsIgnoreCase("What is your best friend's name?")) {
-			System.out.println("Question is related to friendname");
-			securityAnswer.sendKeys("name1");
-		}
-
-		else if (Question.equalsIgnoreCase("What is your favorite color?")) {
-			System.out.println("Question is related to color");
-			securityAnswer.sendKeys("color1");
-		} else {
-			System.out.println("Question is related to phone");
-			securityAnswer.sendKeys("number1");
+	public void signInOptumId(String username, String password) {
+		try {
+			checkIfPageReadySafari();
+			signIn.click();
+			driver.findElement(By.cssSelector("input#userNameId_input")).sendKeys(username);
+			driver.findElement(By.cssSelector("input#passwdId_input")).sendKeys(password);
+			driver.findElement(By.cssSelector("input#SignIn")).click();
+			String Question = driver.findElement(By.cssSelector("label#challengeQuestionLabelId")).getText().trim();
+			WebElement securityAnswer = driver.findElement(By.cssSelector("div#challengeSecurityAnswerId >input"));
+			if (Question.equalsIgnoreCase("What is your best friend's name?")) {
+				System.out.println("Question is related to friendname");
+				securityAnswer.sendKeys("name1");
+			}
+	
+			else if (Question.equalsIgnoreCase("What is your favorite color?")) {
+				System.out.println("Question is related to color");
+				securityAnswer.sendKeys("color1");
+			} else {
+				System.out.println("Question is related to phone");
+				securityAnswer.sendKeys("number1");
+			}
+			
+		} catch (Exception e) {
+			Assert.fail("###############Optum Id Sign In failed###############");
 		}
 		
-	} catch (Exception e) {
-		Assert.fail("###############Optum Id Sign In failed###############");
 	}
-	
-}
 
+	public boolean verifyAddedDrugName(String planName, String drugName) {
+	
+		WebElement drugLinkDropdown = driver.findElement(By.xpath("//*[contains(text(),'" + planName
+				+ "')]/ancestor::div[contains(@class, 'module-plan-overview module')]//*[contains(@id,'drug-list-title-')]"));
+		
+		jsClickNew(drugLinkDropdown);
+		
+		WebElement drugInfoDropdown = driver.findElement(By.xpath("//*[contains(text(),'" + planName
+				+ "')]/ancestor::div[contains(@class, 'module-plan-overview module')]//*[contains(@class,'collapse drug')]//*[contains(@id,'DrugName')]"));
+		
+		
+		String drugInfo=drugInfoDropdown.getText();
+	    System.out.println(drugInfo);
+		if (drugInfo.contains(drugName)) {
+			return true;
+		}
+		return false;
+	}
+
+
+	public boolean verifyAddedDrugCost(String planName, String capturedDrugCost) {
+		WebElement drugCost = driver.findElement(By.xpath("//*[contains(text(),'" + planName
+				+ "')]/ancestor::div[contains(@class, 'module-plan-overview module')]//ul[contains(@class,'benefits-table')]//*[contains(text(),'Estimated Annual')]/following-sibling::span[not(contains(@class,'ng-hide'))]"));
+		System.out.println("Captured drug cost: "+capturedDrugCost);
+		System.out.println("Drug cost on plan summary : "+drugCost.getText());
+		if(drugCost.getText().equals(capturedDrugCost))
+			return true;
+		return false;
+	}
+
+
+	public DrugDetailsPage navigateToDCEFromDrugDropdown(String planName) {
+		
+		List <WebElement> drugLinkDropdown = driver.findElements(By.xpath("//*[contains(text(),'" + planName
+				+ "')]/ancestor::div[contains(@class, 'module-plan-overview module')]//*[contains(@id,'drug-list-title-')and contains(@aria-expanded,'false')]"));
+		
+		if(drugLinkDropdown.size()>0)
+			drugLinkDropdown.get(0).click();
+		
+		WebElement drugSummaryLinkDropdown = driver.findElement(By.xpath("//*[contains(text(),'" + planName
+				+ "')]/ancestor::div[contains(@class, 'module-plan-overview module')]//*[contains(@class,'edit-drugs')]"));
+		
+		drugSummaryLinkDropdown.click();
+		
+		return new DrugDetailsPage(driver);
+		
+	}
 }

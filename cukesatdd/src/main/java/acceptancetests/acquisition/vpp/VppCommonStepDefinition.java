@@ -36,6 +36,7 @@ import pages.acquisition.commonpages.PlanDetailsPage;
 import pages.acquisition.commonpages.VPPPlanSummaryPage;
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.commonpages.VisitorProfilePage;
+import pages.acquisition.dceredesign.GetStartedPage;
 import pages.acquisition.commonpages.ComparePlansPage;
 
 
@@ -113,15 +114,15 @@ public class VppCommonStepDefinition {
 		List<DataTableRow> memberAttributesRow = data.getGherkinRows();
 		String planType = memberAttributesRow.get(0).getCells().get(1);
 		String planName=memberAttributesRow.get(1).getCells().get(1);
-		VPPPlanSummaryPage plansummaryPage =  new VPPPlanSummaryPage(wd);
-		plansummaryPage.viewPlanSummary(planType);
-		PlanDetailsPage plandetailspage= (PlanDetailsPage)plansummaryPage.navigateToPlanDetails(planName, planType);
-		if(plandetailspage!=null){
-			getLoginScenario().saveBean(PageConstants.PLAN_DETAILS_PAGE, plandetailspage);
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		//plansummaryPage.viewPlanSummary(planType);
+		PlanDetailsPage plandetailspage= plansummaryPage.navigateToPlanDetails(planName, planType);
+		
+			getLoginScenario().saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE, plandetailspage);
 			getLoginScenario().saveBean(DCERedesignCommonConstants.PLANTYPE, planType);
 			getLoginScenario().saveBean(DCERedesignCommonConstants.PLANNAME, planName);
 
-		}
 	}
 	
 	@And("^the user views the plans of the below plan type$")
@@ -560,5 +561,113 @@ public class VppCommonStepDefinition {
 			getLoginScenario().saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfilePage);
 			
 		}
+		@Then("^the user validates the added drug name on plan summary page for the selected plan$")
+		public void verify_drugs_covered_AARP(DataTable Planname) {
 
+			List<DataTableRow> plannameAttributesRow = Planname.getGherkinRows();
+			Map<String, String> plannameAttributesMap = new HashMap<String, String>();
+			for (int i = 0; i < plannameAttributesRow.size(); i++) {
+
+				plannameAttributesMap.put(plannameAttributesRow.get(i).getCells().get(0),
+						plannameAttributesRow.get(i).getCells().get(1));
+			}
+			String planName = plannameAttributesMap.get("Plan Name");
+			String drugName = plannameAttributesMap.get("DrugName");
+
+			VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+			Assert.assertTrue("Drugs coverage Info not updated", plansummaryPage.verifyAddedDrugName(planName,drugName));
+		}
+		
+		@Then("^the user clicks on drug dropdown on plan summary page and navigates to DCE$")
+		public void clickOnDrugDropdownAndNavigateToDCE(DataTable Planname) {
+
+			List<DataTableRow> plannameAttributesRow = Planname.getGherkinRows();
+			Map<String, String> plannameAttributesMap = new HashMap<String, String>();
+			for (int i = 0; i < plannameAttributesRow.size(); i++) {
+
+				plannameAttributesMap.put(plannameAttributesRow.get(i).getCells().get(0),
+						plannameAttributesRow.get(i).getCells().get(1));
+			}
+			String planName = plannameAttributesMap.get("Plan Name");
+			
+
+			VPPPlanSummaryPage planSummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+			planSummaryPage.navigateToDCEFromDrugDropdown(planName);
+		}
+		
+		@Then("^the user validates the drug cost on plan summary page for the selected plan$")
+		public void verify_drug_cost(DataTable Planname) {
+
+			List<DataTableRow> plannameAttributesRow = Planname.getGherkinRows();
+			Map<String, String> plannameAttributesMap = new HashMap<String, String>();
+			for (int i = 0; i < plannameAttributesRow.size(); i++) {
+
+				plannameAttributesMap.put(plannameAttributesRow.get(i).getCells().get(0),
+						plannameAttributesRow.get(i).getCells().get(1));
+			}
+			String annualDrugCost = (String) getLoginScenario().getBean(DCERedesignCommonConstants.ANNUAL_ESTIMATED_TOTAL);
+			String planName = plannameAttributesMap.get("Plan Name");
+
+			VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+			Assert.assertTrue("Drug cost is displayed incorrectly", plansummaryPage.verifyAddedDrugCost(planName,annualDrugCost));
+		}
+		@Then("^the user click on Prescription Drug Benefits tab on plan details$")
+		public void the_user_click_on_Prescription_Drug_Benefits_and_validates_in_AARP_site() throws Throwable {
+			PlanDetailsPage vppPlanDetailsPage = (PlanDetailsPage) getLoginScenario()
+					.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
+			vppPlanDetailsPage.clickAndValidatePrescriptionDrugBenefits();
+		}
+		
+		@Then("^the user verifies the drug information on prescription drug tab$")
+		public void the_user_verifies_drug_info_Prescription_Drug(DataTable Attributes) throws Throwable {
+			List<DataTableRow> plannameAttributesRow = Attributes.getGherkinRows();
+			Map<String, String> plannameAttributesMap = new HashMap<String, String>();
+			for (int i = 0; i < plannameAttributesRow.size(); i++) {
+
+				plannameAttributesMap.put(plannameAttributesRow.get(i).getCells().get(0),
+						plannameAttributesRow.get(i).getCells().get(1));
+			}
+			PlanDetailsPage vppPlanDetailsPage = (PlanDetailsPage) getLoginScenario()
+					.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
+			String annualDrugCost = (String) getLoginScenario().getBean(DCERedesignCommonConstants.ANNUAL_ESTIMATED_TOTAL);
+			String drugName = plannameAttributesMap.get("DrugName");
+			vppPlanDetailsPage.validateDrugInfoOnPrescriptionDrugTab(drugName, annualDrugCost);
+		}
+		
+		@Then("^the user clicks on Edit drug on plan details page and navigates to DCE$")
+		public void the_user_click_on_EdidDrugLink() throws Throwable {
+			PlanDetailsPage vppPlanDetailsPage = (PlanDetailsPage) getLoginScenario()
+					.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
+			GetStartedPage getStartedPage = (GetStartedPage) vppPlanDetailsPage.navigateToDCERedesign(); 
+			getLoginScenario().saveBean(PageConstants.DCE_Redesign_GetStarted, getStartedPage);
+		}
+		
+		@Then("^the user click on Plan costs tab$")
+		public void the_user_click_on_Plan_costs_tab_and_validates_in_AARP_site() throws Throwable {
+
+			PlanDetailsPage vppPlanDetailsPage = (PlanDetailsPage) getLoginScenario()
+					.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
+			vppPlanDetailsPage.clickPlanCosts();
+		}
+		
+		@Then("^the user click on Edit Drugs Link on plan costs tab$")
+		public void the_user_click_on_Edit_Drugs_on_Plan_costs_tabe() throws Throwable {
+
+			PlanDetailsPage vppPlanDetailsPage = (PlanDetailsPage) getLoginScenario()
+					.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
+			vppPlanDetailsPage.navigateToDCERedesignFromPlanCostTab();
+		}
+		
+		@Then("^the user verifies the drug information on plan costs tab$")
+		public void the_user_verifies_drug_info_on_Plan_Cost() throws Throwable {
+			
+			PlanDetailsPage vppPlanDetailsPage = (PlanDetailsPage) getLoginScenario()
+					.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
+			String annualDrugCost = (String) getLoginScenario().getBean(DCERedesignCommonConstants.ANNUAL_ESTIMATED_TOTAL);
+			vppPlanDetailsPage.validateDrugInfoOnPlanCostTab(annualDrugCost);
+		}
+		
 }
