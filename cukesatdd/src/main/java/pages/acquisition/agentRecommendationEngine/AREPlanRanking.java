@@ -157,6 +157,9 @@ public class AREPlanRanking extends UhcDriver {
 
 	@FindBy(css = "span[class*='multiple-added-text'] button[class*='cta-button']")
 	private List<WebElement> comparePlansBtninVpp;
+	
+	@FindBy(xpath = "//*[contains(@class,'compare-plans-next')]")
+	private WebElement viewMorePlansinPlanCompare;
 
 	@FindBy(css = ".segment h2")
 	private WebElement planNameEnrollPage;
@@ -402,8 +405,12 @@ public class AREPlanRanking extends UhcDriver {
 		int plan = 0;
 		if (plansName.size() != viewplandetails.size()) {
 			for (plan = 1; plan < PlanCount; plan++) {
-				for (int i = 0; i < viewplandetails.size(); i++)
+				for (int i = 0; i < viewplandetails.size(); i++) {
+					if (i > 3)
+						for(int j=0;j<i;j++)
+							jsClickNew(viewMorePlansinPlanCompare);
 					vppPlans.add(verifygetplanName(plansName.get(plan + i), viewplandetails.get(i)));
+				}
 			}
 			System.out.println("Plan Name compared Successful Clicks on Plan Name");
 		} else {
@@ -416,7 +423,7 @@ public class AREPlanRanking extends UhcDriver {
 	}
 
 	public String verifygetplanName(WebElement plan, WebElement planInPDP) {
-		String actualplanName = "";
+		String actualplanName = "";	
 		String exceptedplanName = plan.getText().trim();
 		String VIew = planInPDP.getText().trim();
 		System.out.println("Plan Name in VPP Summary Page: " + exceptedplanName);
