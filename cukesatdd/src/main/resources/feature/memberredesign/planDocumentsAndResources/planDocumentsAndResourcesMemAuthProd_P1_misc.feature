@@ -64,7 +64,7 @@ Feature: 1.06.2.2 Member Plans and Documents - section: header -and- My Document
 	@prod_active_ma @prod_active_ma_ind
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | md_sd | eob_sd | eob_m | eob_d | rm_sd |
-      | 09-009 | 15129       | kkumard  | mnrs786@  | ERNIE2450    | MA       | AARP_IND_EFF_PDnR     | true  | true   | true  | false | true  |
+      | 09-009 | 15129       | kkumard  | mnrs786@  | haradaty32   | MA       | AARP_IND_EFF_PDnR     | true  | true   | true  | false | true  |
 
 	@prod_active_ma @prod_active_ma_grp
 	Examples: 
