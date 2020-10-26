@@ -10,11 +10,11 @@ import cucumber.api.CucumberOptions;
 
 @RunWith(ExtendedCucumber.class)
 @ExtendedCucumberOptions(retryCount=1,screenShotSize="", screenShotLocation="/screenshots/",
-jsonReport = "target/cucumber-RunMRATDDRegressionDCE_MemAuthProdP1.json",detailedReport = true, detailedAggregatedReport = true,
-overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionDCE_MemAuthProdP1")
+jsonReport = "target/cucumber-RunMRATDDRegressionDCE_P6.json",detailedReport = true, detailedAggregatedReport = true,
+overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionDCE_P6")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberredesign" }, 
 features = { "src/main/resources/feature/memberredesign/drugcostestimator" },monochrome= true, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionDCE_MemAuthProdP1.json" }, tags = { "@prod_dce_p1" })
-public class RunMRATDDRegressionDCE_MemAuthProdP1 {
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionDCE_P6.json" }, tags = { "@dce_p6" })
+public class RunMRATDDRegressionDCE_P6 {
 
 }
