@@ -245,6 +245,7 @@ public class VisitorProfileStepDefinition_AARP {
 
 		VisitorProfilePage visitorProfile = (VisitorProfilePage) getLoginScenario()
 				.getBean(PageConstants.VISITOR_PROFILE_PAGE);
+		System.out.println("credentials"+username+ password);
 		visitorProfile.signIn(username, password);
 	}
 
@@ -429,5 +430,33 @@ public class VisitorProfileStepDefinition_AARP {
 		VisitorProfilePage visitorProfile = (VisitorProfilePage) getLoginScenario()
 				.getBean(PageConstants.VISITOR_PROFILE_PAGE);
 		visitorProfile.clickAddDrugsPlancardNew();
+	}
+	
+	@And("^the user navigates to Visitor profile page$")
+	public void the_user_navigates_to_visitor_profile_page() {
+		AcquisitionHomePage acqHomePage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+
+		VisitorProfilePage visitorProfilePage = acqHomePage.navigateToNewVisitorProfilePage();
+
+		getLoginScenario().saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfilePage);
+	}
+	
+	@And("^the user login with optum Id credentials$")
+	public void the_user_login_with_optum_Id_credentials(DataTable credentials) {
+		List<DataTableRow> plannameAttributesRow = credentials.getGherkinRows();
+		Map<String, String> plannameAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < plannameAttributesRow.size(); i++) {
+
+			plannameAttributesMap.put(plannameAttributesRow.get(i).getCells().get(0),
+					plannameAttributesRow.get(i).getCells().get(1));
+		}
+		String username = plannameAttributesMap.get("User Name");
+		String password = plannameAttributesMap.get("Password");
+
+		VisitorProfilePage visitorProfile = (VisitorProfilePage) getLoginScenario()
+				.getBean(PageConstants.VISITOR_PROFILE_PAGE);
+		System.out.println("credentials"+username+ password);
+		visitorProfile.logIn(username, password);
 	}
 }

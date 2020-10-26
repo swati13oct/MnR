@@ -409,6 +409,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	
 	@FindBy(xpath = "//body/div[@id='overlay']")
 	private WebElement overlayFilm;
+	
+	@FindBy(id = "logged-username")
+	private WebElement guestProfileLink;
 
 
    	//String ChatSamText= "Chat with a Licensed Insurance Agent";
@@ -2565,4 +2568,25 @@ public class AcquisitionHomePage extends GlobalWebElements {
      	    	
      		return new PlanDocsPage(driver);
 	 }
+	
+	/**
+	 * This method used to navigate to new visitor profile dashboard
+	 * 
+	 * @return
+	 */
+	public VisitorProfilePage navigateToNewVisitorProfilePage() {
+		waitforElement(shoppingCartIcon);
+		//shoppingCartIcon.click();
+		guestProfileLink.click();
+		//Actions actions = new Actions(driver);
+		//actions.moveToElement(guestProfileLink);
+		//actions.click().build().perform();
+		CommonUtility.checkPageIsReadyNew(driver);
+		if (driver.getCurrentUrl().contains("profile")) {
+			return new VisitorProfilePage(driver);
+		} else {
+			System.out.println("Navigation to visitor profile is failed");
+			return null;
+		}
+	}
 }

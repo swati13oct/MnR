@@ -130,6 +130,9 @@ public class VisitorProfilePage extends UhcDriver {
 	
 	@FindBy(xpath = "//*[contains(@class,'add-drug')]")
 	public WebElement enterDrugInfoPlanCard;
+	
+	@FindBy(xpath = "//a[text()='Log In']")
+	public WebElement loginLink;
 
 	public VisitorProfilePage(WebDriver driver) {
 		super(driver);
@@ -594,4 +597,37 @@ public class VisitorProfilePage extends UhcDriver {
 		enterDrugInfoPlanCard.click();
 	}
 	
+	public void logIn(String username, String password) {
+		try {
+
+			loginLink.click();
+			driver.findElement(By.cssSelector("input#userNameId_input")).sendKeys(username);
+			driver.findElement(By.cssSelector("input#passwdId_input")).sendKeys(password);
+			System.out.println("before signin");
+			driver.findElement(By.cssSelector("input#SignIn")).click();
+			System.out.println("before wait");
+			waitforElement(driver.findElement(By.cssSelector("#securityQues")));
+			System.out.println("after wait");
+			String Question = driver.findElement(By.cssSelector("#challengeQuestionLabelId")).getText().trim();
+			WebElement securityAnswer = driver.findElement(By.cssSelector("#UnrecognizedSecAns_input"));
+			if (Question.equalsIgnoreCase("What is your best friend's name?")) {
+				System.out.println("Question is related to friendname");
+				securityAnswer.sendKeys("name1");
+			}
+
+			else if (Question.equalsIgnoreCase("What is your favorite color?")) {
+				System.out.println("Question is related to color");
+				securityAnswer.sendKeys("color1");
+			} else {
+				System.out.println("Question is related to phone");
+				securityAnswer.sendKeys("number1");
+			}
+			driver.findElement(By.cssSelector("input#authQuesSubmitButton")).click();
+			CommonUtility.waitForPageLoadNew(driver, signOut, 20);
+
+		} catch (Exception e) {
+			Assert.fail("###############Optum Id Sign In failed###############");
+		}
+
+	}
 }
