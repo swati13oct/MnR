@@ -458,9 +458,11 @@ try {
 
 	public boolean scrollToView(WebElement element) {
 		try {
+
 			JavascriptExecutor js = (JavascriptExecutor) driver;
 			js.executeScript("arguments[0].scrollIntoView();", element);
 		} catch (Exception e) {
+
 			Assert.fail("The element " + element.getText() + "is not  found");
 			return false;
 		}
@@ -1203,7 +1205,7 @@ try {
     		// First checking to see if the loading indicator is found
     		// we catch and throw no exception here in case they aren't ignored
     		try {
-    			threadsleep(5);			//Adding sleep since the loading spinner sometimes takes long to come up
+    			threadsleep(5000);			//Adding sleep since the loading spinner sometimes takes long to come up
     			System.out.println("Waiting to check if Loading screen is present");
     			loadingScreen = fwait.until(new Function<WebDriver, List<WebElement>>() {
 					public List<WebElement> apply(WebDriver driver) {
@@ -1236,7 +1238,7 @@ try {
     	}
     	return ready;
     }
-
+    
 	/**
 	 * mouse over using jQuery event, mouseover.
 	 *

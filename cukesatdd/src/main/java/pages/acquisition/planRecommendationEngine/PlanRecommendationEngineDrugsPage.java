@@ -340,6 +340,7 @@ public class PlanRecommendationEngineDrugsPage extends UhcDriver {
                             		threadsleep(2000);
 //                            		continueBtn.click();
                             		jsClickNew(continueBtn);
+                            		waitForPageLoadSafari();
                             		System.out.println("Validating " + page + " page Continue button functionality");
                             		desktopCommonUtils.nextPageValidation(page.toUpperCase() + "skip");
                             	}
@@ -409,7 +410,7 @@ public class PlanRecommendationEngineDrugsPage extends UhcDriver {
                                 	for (int i = count-1; i >= 0; i--) {
                     					threadsleep(1000);
                     					drugNames.add(drugNameList.get(i).findElement(By.cssSelector("p:nth-child(1)")).getText().trim().toUpperCase() +" "
-                    							+drugNameList.get(i).findElement(By.cssSelector("p:nth-child(2)")).getText().toUpperCase());
+                    							+drugNameList.get(i).findElement(By.cssSelector("p:nth-child(2)")).getText().trim().toUpperCase());
                     					}
                                 	Collections.sort(drugNames);
                         			System.out.println("Drugs Name list is : "+drugNames);
