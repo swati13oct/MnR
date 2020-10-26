@@ -76,7 +76,7 @@ Feature: 1.04.2.1 To Test DREAM EOB for Members - E2E - Member Auth
     Examples: 
       | index | username  | password  | MemUserName             | planType | memberType        | note                              | flagZeroEob |
       | 01    | qavgogine | qavgogine | Dream_EOB_MAPD_007      | MAPD     | COSMOS_DEOB       | 1 new both, 1 old C, 1 or 2 old D overlap | true|
-      | 02    | qavgogine | qavgogine | q4_Nice_UAT4_004        | MAPD     | NICE_EOB_R        | old C and old D                   | true        |  
+      | 02    | qavgogine | qavgogine | q4_Nice_UAT4_004        | MAPD     | NICE_DEOB         | old C and old D                   | true        |  
 
     @memAuth_dreamEob01b 
     Examples: 
@@ -87,26 +87,24 @@ Feature: 1.04.2.1 To Test DREAM EOB for Members - E2E - Member Auth
     @memAuth_dreamEob01c 
     Examples: 
       | index | username  | password  | MemUserName             | planType | memberType        | note                              | flagZeroEob |
-      | 05    | qavgogine | qavgogine | q3_sep_UAT4_Group131    | MA       | COSMOS_EOB_R      | old C                             | false       |
+      | 05    | qavgogine | qavgogine | q3_sep_UAT4_Group131    | MA       | COSMOS_DEOB       | old C                             | false       |
       | 06    | qavgogine | qavgogine | Dream_EOB_MA_009        | MA       | MA_NICE_DEOB      | 1 new C, 1 old C                  | true        |
 
     @memAuth_dreamEob01d 
     Examples: 
       | index | username  | password  | MemUserName             | planType | memberType        | note                              | flagZeroEob |
       | 07    | qavgogine | qavgogine | q2_RxRetail_015         | PDP      | COMBO_SHIP_PDP_RX_DEOB  | na                          | false       |  
-     #| 08    | qavgogine | qavgogine | Dream_EOB_MA_002        | MA       | COMBO_SHIP_MA_NICE_DEOB | 1 new C, 2 old C            | true        | 
-      | 08    | qavgogine | qavgogine | q3_sept_UAT4_AARP_011   | MAPD     | COMBO_SHIP_MAPD_NICE_DEOB | NA                       | false       | 
-     #| 08    | qavgogine | qavgogine | q3_sep_UAT4_Group163    | MA       | COMBO_SHIP_MA_COSMOS_DEOB | NA                       | false       | 
+      | 08    | qavgogine | qavgogine | q3_sept_UAT4_AARP_011   | MAPD     | COMBO_SHIP_MAPD_NICE_DEOB | NA                        | false       | 
 
     @memAuth_dreamEob01e
     Examples: 
-      | index | username  | password  | MemUserName             | planType | memberType        | note                              | flagZeroEob |
-      | 09    | qavgogine | qavgogine | q2_jun_grp0255          | PDP      | PDP_SSP_COMBO_EOB | old D                             | false       |
-      | 10    | qavgogine | qavgogine | q3_sep_UAT4_AARP023     | PDP      | PDP_SHIP_COMBO_EOB| na                                | false       |
+      | index | username  | password  | MemUserName             | planType | memberType         | note                              | flagZeroEob |
+      | 09    | qavgogine | qavgogine | q2_jun_grp0255          | PDP      | PDP_SSP_COMBO_DEOB | old D                             | false       |
+      | 10    | qavgogine | qavgogine | q3_sep_UAT4_AARP023     | PDP      | PDP_SHIP_COMBO_DEOB| na                                | false       |
 
     @memAuth_dreamEob01f
     Examples: 
       | index | username  | password  | MemUserName             | planType | memberType        | note                              | flagZeroEob |
-      | 11    | qavgogine | qavgogine | q2_DreamEOB_0002        | MAPD     | ES_CnD_NICE_EOB   | 1 new CnD spanish, old M          | true        |
-      | 12    | qavgogine | qavgogine | q2_DreamEOB_0003        | MAPD     | ES_D_NICE_EOB     | 1 new D spanish, old M            | true        |
+      | 11    | qavgogine | qavgogine | q2_DreamEOB_0002        | MAPD     | ES_CnD_NICE_DEOB  | 1 new CnD spanish, old M          | true        |
+      | 12    | qavgogine | qavgogine | q2_DreamEOB_0003        | MAPD     | ES_D_NICE_DEOB    | 1 new D spanish, old M            | true        |
       
