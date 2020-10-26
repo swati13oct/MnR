@@ -274,7 +274,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
     @FindBy(id="dupIconFlyOut")
     private WebElement shoppingCartIcon;
     
-	@FindBy(xpath = "//*[@id='sam-call-button']//*[contains(@class,'sam__button__icon')]")
+	@FindBy(xpath = "//button[@id='sam-call-button']//*[contains(@class,'sam__button__text desktop')]")
    	private WebElement callsam;
    	
    	//@FindBy(xpath = "//*[@id='sam-call-button']/div/span[1]")
@@ -283,6 +283,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
    	
    	@FindBy(xpath ="//*[@id='sam-call-modal']/div/div")
    	private WebElement callSamPopup;
+   	
+   	@FindBy(xpath = "//*[contains(@class,'companyNameHeader')]/p")
+   	private WebElement pageheader;
 
     
 	@FindBy(xpath = "//*[contains(@class,'proactive-offer')]")
@@ -1476,12 +1479,22 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		}
 		
 		public AcquisitionHomePage  validateCallpopup() throws InterruptedException {
-//			CommonUtility.checkPageIsReady(driver);
-			validate(callsamtooltip);
-			CheckiPerseptions();
-			callsam.click();
-			System.out.println("@@@@@@@@@@@@@@@ Call Icon Clicked @@@@@@@@@@@@@@@");
-			driver.switchTo().activeElement();
+			int retry = 1;
+			do	{
+				driver.navigate().refresh();
+				CommonUtility.checkPageIsReady(driver);
+				CheckiPerseptions();
+				validate(callsamtooltip);
+				jsClickNew(callsam);
+				System.out.println("@@@@@@@@@@@@@@@ Call Icon Clicked @@@@@@@@@@@@@@@");
+				driver.switchTo().activeElement();
+//				System.out.println(CallSamTFN.getText());
+//				CallSamTFNClose.click();
+//				validateNew(callsam);
+				System.out.println("Call Sam checking for "+retry+" times");
+				retry++;
+			} while (!validate(CallSamTFN) && (retry<6));
+			
 			System.out.println(CallSamTFN.getText());
 			CallSamTFNClose.click();
 			validateNew(callsam);		

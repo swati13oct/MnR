@@ -256,8 +256,8 @@ Feature: 1.25.1 Member Prepare For Next Year - Member Auth
     @memAuth_pfny04_sars @devRegression
     Examples: 
 	    | index | FID     | username  | password  | MemUserName             | planType | memberType              | showNxtYrPlan |  
-	    | 4-01  | F443004 | qavgogine | qavgogine | q3_Sep_FedANOC_037     | MAPD     | UHC_SARS_PFNY           | false         |
-	    | 4-01  | F443004 | qavgogine | qavgogine | PerfCCM_07109           | MAPD     | SARS_PFNY           | false         |
+	    | 4-01  | F443004 | qavgogine | qavgogine | q3_Sep_FedANOC_037      | MA     | UHC_SARS_PFNY           | false         |
+	    | 4-02  | F443004 | qavgogine | qavgogine | PerfCCM_07109           | MAPD     | SARS_PFNY           | false         |
 
 	#note: don't have PDP SAR user for the time being
     #@memAuth_pfny04_sars

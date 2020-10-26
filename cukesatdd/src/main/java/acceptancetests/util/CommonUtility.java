@@ -16,14 +16,17 @@ import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.UnhandledAlertException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import acceptancetests.data.LoginCommonConstants;
 import acceptancetests.data.MRConstants;
 import acceptancetests.data.PageData;
 import atdd.framework.MRScenario;
@@ -437,21 +440,27 @@ public class CommonUtility {
 	 */
 	public static boolean checkPageIsReadyNew(WebDriver driver) {
 		try {
-		JavascriptExecutor js = (JavascriptExecutor) driver;
+			JavascriptExecutor js = (JavascriptExecutor) driver;
 
-		for (int counter = 0; counter <= 23; counter++) {
-			if (js.executeScript("return document.readyState").toString().equals("complete")) {
-				System.out.println("Browser Page -- " + driver.getTitle() + " -- Is loaded.");
-				return true;
+			for (int counter = 0; counter <= 23; counter++) {
+				if (js.executeScript("return document.readyState").toString().equals("complete")) {
+					System.out.println("Browser Page -- " + driver.getTitle() + " -- Is loaded.");
+					return true;
+				}
+				try {
+					System.out.println(counter+" of 23 tries - wait 5 sec for document.readyState=complete... ");
+					Thread.sleep(5000);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}			
 			}
-			try {
-				System.out.println(counter+" of 23 tries - wait 5 sec for document.readyState=complete... ");
-				Thread.sleep(5000);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}			
-		}
-		Assert.fail("TimeOut!!! Page not loaded");
+			Assert.fail("TimeOut!!! Page not loaded");
+		} catch (UnhandledAlertException ae) {  //if getting alert error, stop and fail the test
+			Alert alert = driver.switchTo().alert();
+			System.out.println("Alert text="+alert.getText());
+			if (alert.getText().contains("an error while processing your information")) {
+				Assert.assertTrue("***** Got Alert message: "+alert.getText(), false);
+			} 
 		} catch (WebDriverException e) {
 			Assert.assertTrue("PROBLEM - got webdriver exception: "+e, false);
 			return false;

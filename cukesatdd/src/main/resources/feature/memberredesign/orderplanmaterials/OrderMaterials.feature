@@ -134,7 +134,7 @@ Feature: 1.10 Member  order materials Page
     Examples:
       | TID   | planType | memberType            | segmentId |
       | 15281 | MAPD	 | COMBO_order           | 000       |
-      | 15281 | MEDSUPP	 | COMBO_order           | 000       |
+     # | 15281 | MEDSUPP	 | COMBO_order           | 000       |
 
     # note: keep SSUP case but skip the run for now, it requires specific data setup that doesn't always exist
     @ValidateHeaderComboTabs

@@ -44,13 +44,18 @@ public class PrepareForNextYearPage extends PrepareForNextYearBase {
 	PrepareForNextYearGroup pnfyGroup=new PrepareForNextYearGroup(driver);
 	PrepareForNextYearSars pnfySar=new PrepareForNextYearSars(driver);
 
+	public boolean hasPinkBar() {
+		checkModelPopup(driver,1);
+		return validate(superUserPinkBanner,0);
+	}
+	
 	public PrepareForNextYearPage fromBenefitsPgNavigateToPrepareForNextYearPage(String planType, String memberType, boolean expComboTab) {
 		System.out.println("TEST - attempt to click the PrepareForNextYear tab to go to the PrepareForNextYear page...");
 		if (noWaitValidate(prepareForNextYearTab)) {
 			checkModelPopup(driver,3);
 			prepareForNextYearTab.click();
 		}
-		CommonUtility.checkPageIsReady(driver);
+		CommonUtility.checkPageIsReadyNew(driver);
 		CommonUtility.waitForPageLoad(driver, prepareForNextYearPgHeader, 10);
 		String actUrl=driver.getCurrentUrl();
 		String expUrl="/member/preparefornextyear/overview.html";
@@ -182,9 +187,10 @@ public class PrepareForNextYearPage extends PrepareForNextYearBase {
 			boolean expNoBlue_t5=true;
 			List<String> s1=pnfyTimeline_ind.validateTimeLineBoxContent(expNoBlue_t1, expNoBlue_t2, expNoBlue_t3, expNoBlue_t4, expNoBlue_t5);
 			sectionNote1.addAll(s1);
-
+			if (!sanityRun) {
 			List<String> s2=validateFindUpdatesSectionContent(planType, memberType, currentDate, docDisplayMap, showNxtYrPlanName, sanityRun);
 			sectionNote1.addAll(s2);
+			}
 		} else if (memberType.toUpperCase().contains("GRP")) {
 			List<String> s2=validateFindUpdatesSectionContent(planType, memberType, currentDate, docDisplayMap, showNxtYrPlanName, sanityRun);
 			sectionNote1.addAll(s2);
@@ -196,9 +202,10 @@ public class PrepareForNextYearPage extends PrepareForNextYearBase {
 			List<String> s1=pnfyTimeline_sars.validateTimeLineBoxContent(expNoBlue_t1, expNoBlue_t2, expNoBlue_t3);
 			sectionNote1.addAll(s1);
 
+			if (!sanityRun) {
 			List<String> s2=validateFindUpdatesSectionContent(planType, memberType, currentDate, showNxtYrPlanName, sanityRun);
 			sectionNote1.addAll(s2);
-
+			}
 		} else {
 			Assert.assertTrue("NOTE: This is not IND or GRP or SARs case, not supported", false);
 		}
@@ -224,8 +231,10 @@ public class PrepareForNextYearPage extends PrepareForNextYearBase {
 			List<String> s1=pnfyTimeline_ind.validateTimeLineBoxContent(expNoBlue_t1, expNoBlue_t2, expNoBlue_t3, expNoBlue_t4, expNoBlue_t5);
 			sectionNote1.addAll(s1);
 
+			if (!sanityRun) {
 			List<String> s2=validateFindUpdatesSectionContent(planType, memberType, currentDate, docDisplayMap, showNxtYrPlanName, sanityRun);
 			sectionNote1.addAll(s2);
+			}
 		} else if (memberType.toUpperCase().contains("GRP")) {
 			//note: group is on team-atest 
 			List<String> s2=validateFindUpdatesSectionContent(planType, memberType, currentDate, docDisplayMap, showNxtYrPlanName, sanityRun);
@@ -238,9 +247,10 @@ public class PrepareForNextYearPage extends PrepareForNextYearBase {
 			List<String> s1=pnfyTimeline_sars.validateTimeLineBoxContent(expNoBlue_t1, expNoBlue_t2, expNoBlue_t3);
 			sectionNote1.addAll(s1);
 
+			if (!sanityRun) {
 			List<String> s2=validateFindUpdatesSectionContent(planType, memberType, currentDate, showNxtYrPlanName, sanityRun);
 			sectionNote1.addAll(s2);
-
+			}
 		} else {
 			Assert.assertTrue("NOTE: This is not IND or GRP or SARs case, not supported", false);
 		}
@@ -265,8 +275,10 @@ public class PrepareForNextYearPage extends PrepareForNextYearBase {
 			List<String> s1=pnfyTimeline_ind.validateTimeLineBoxContent(expNoBlue_t1, expNoBlue_t2, expNoBlue_t3, expNoBlue_t4, expNoBlue_t5);
 			sectionNote1.addAll(s1);
 
+			if (!sanityRun) {
 			List<String> s2=validateFindUpdatesSectionContent(planType, memberType, currentDate, docDisplayMap, showNxtYrPlanName, sanityRun);
 			sectionNote1.addAll(s2);
+			}
 		} else if (memberType.toUpperCase().contains("GRP")) {
 			List<String> s2=validateFindUpdatesSectionContent(planType, memberType, currentDate, docDisplayMap, showNxtYrPlanName, sanityRun);
 			sectionNote1.addAll(s2);
@@ -278,8 +290,10 @@ public class PrepareForNextYearPage extends PrepareForNextYearBase {
 			List<String> s1=pnfyTimeline_sars.validateTimeLineBoxContent(expNoBlue_t1, expNoBlue_t2, expNoBlue_t3);
 			sectionNote1.addAll(s1);
 
+			if (!sanityRun) {
 			List<String> s2=validateFindUpdatesSectionContent(planType, memberType, currentDate, docDisplayMap, showNxtYrPlanName, sanityRun);
 			sectionNote1.addAll(s2);
+			}
 		} else {
 			Assert.assertTrue("NOTE: This is not IND or GRP or SARs case, not supported", false);
 		}
@@ -298,8 +312,10 @@ public class PrepareForNextYearPage extends PrepareForNextYearBase {
 			List<String> s1=pnfyTimeline_ind.validateTimeLineBoxContent(expNoBlue_t1, expNoBlue_t2, expNoBlue_t3, expNoBlue_t4, expNoBlue_t5);
 			sectionNote1.addAll(s1);
 
+			if (!sanityRun) {
 			List<String> s2=validateFindUpdatesSectionContent(planType, memberType, currentDate, docDisplayMap, showNxtYrPlanName, sanityRun);
 			sectionNote1.addAll(s2);
+			}
 		} else if (memberType.toUpperCase().contains("GRP")) {
 			//note: group is on team-atest 
 			List<String> s2=validateFindUpdatesSectionContent(planType, memberType, currentDate, docDisplayMap, showNxtYrPlanName, sanityRun);
@@ -322,8 +338,10 @@ public class PrepareForNextYearPage extends PrepareForNextYearBase {
 			List<String> s1=pnfyTimeline_ind.validateTimeLineBoxContent(expNoBlue_t1, expNoBlue_t2, expNoBlue_t3, expNoBlue_t4, expNoBlue_t5);
 			sectionNote1.addAll(s1);
 
+			if (!sanityRun) {
 			List<String> s2=validateFindUpdatesSectionContent(planType, memberType, currentDate, docDisplayMap, showNxtYrPlanName, sanityRun);
 			sectionNote1.addAll(s2);
+			}
 		} else if (memberType.toUpperCase().contains("GRP")) {
 			List<String> s1=pnfyTimeline_ind.validateNoTimeLineBoxContent();
 			sectionNote1.addAll(s1);
@@ -349,8 +367,10 @@ public class PrepareForNextYearPage extends PrepareForNextYearBase {
 			List<String> s1=pnfyTimeline_ind.validateTimeLineBoxContent(expNoBlue_t1, expNoBlue_t2, expNoBlue_t3, expNoBlue_t4, expNoBlue_t5);
 			sectionNote1.addAll(s1);
 
+			if (!sanityRun) {
 			List<String> s2=validateFindUpdatesSectionContent(planType, memberType, currentDate, docDisplayMap, showNxtYrPlanName, sanityRun);
 			sectionNote1.addAll(s2);
+			}
 		} else if (memberType.toUpperCase().contains("GRP")) {
 			//note: group is on team-atest 
 			List<String> s2=validateFindUpdatesSectionContent(planType, memberType, currentDate, docDisplayMap, showNxtYrPlanName, sanityRun);
