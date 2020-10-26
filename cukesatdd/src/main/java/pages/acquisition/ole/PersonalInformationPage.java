@@ -186,7 +186,7 @@ public class PersonalInformationPage extends UhcDriver{
 		String DOB = memberDetailsMap.get("DOB");
 		String Gender = memberDetailsMap.get("Gender");
 		String Perm_Street = memberDetailsMap.get("Perm_Street");
-		String Perm_Aptno = memberDetailsMap.get("Perm_Aptno");
+		//String Perm_Aptno = memberDetailsMap.get("Perm_Aptno");
 		String Perm_city = memberDetailsMap.get("Perm_city");
 		String MailingQuestion = memberDetailsMap.get("Mailing Address Question");
 		String Mailing_Street = memberDetailsMap.get("Mailing_Street");
@@ -209,14 +209,14 @@ public class PersonalInformationPage extends UhcDriver{
 			jsClickNew(GenderSelectFemale);
 		}	
 		sendkeys(PermanentAdd_Street,Perm_Street);
-		sendkeys(PermanentAdd_Aptno,Perm_Aptno);
+		//sendkeys(PermanentAdd_Aptno,Perm_Aptno);
 		sendkeys(PermanentAdd_City,Perm_city);
 		System.out.println("Mailing Question : "+MailingQuestion);
 		if(MailingQuestion.equalsIgnoreCase("no")){
 			SameMailingAddressNo.click();
 			//CommonUtility.waitForPageLoadNew(driver,MailingAdd_Street, 30);
 			sendkeysNew(MailingAdd_Street,Mailing_Street);
-			sendkeysNew(MailingAdd_Aptno,Mailing_Aptno);
+			//sendkeysNew(MailingAdd_Aptno,Mailing_Aptno);
 			sendkeys(MailingAdd_City,Mailing_City);
 			Select SelectState = new Select(MailingAdd_State_DropDown);
 			SelectState.selectByValue(Mailing_State);
