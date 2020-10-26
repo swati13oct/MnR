@@ -1847,6 +1847,14 @@ public class TestHarness extends UhcDriver {
 			if (validate(logOut,0)) {
 				logOut.click();
 				CommonUtility.checkPageIsReadyNew(driver);
+				try {
+					if(driver.getTitle().contains("Signing off")) {
+						Thread.sleep(2000);
+						CommonUtility.checkPageIsReadyNew(driver);
+					}
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 				System.out.println("Title after logout-" + driver.getTitle());
 				if(MRScenario.environment.contains("team-h")) {
 					if (validate(accountProfile,0)) {
