@@ -47,3 +47,48 @@ Feature: ACQ-OLE Resume and Retrieve Application for MedSupp
       | zipcode | isMultutiCounty | AARPUrl																					| county             | plantype | DOB      | Firstname | Lastname|  ApplicationID | applicationType | username | password |AARPUrl-stg|site|
       |   90002 | NO              | aarpsupplementalhealth.com/ole/ms.olelaunch.html|Los Angeles County | MS       | 11/13/1940 | John      | Carry   |    ABCD        | Resume          |mnrqavd3 | Password@1|https://aarpsupplementalhealth-stg.uhc.com/content/aarpsupplementalhealth/ole/ms.olelaunch.html|UHC|
   
+  
+  @MedSupp_OLE_Common
+  Scenario Outline: MedSup Resume Application with Application ID on acq site -<site>
+   Given the user is on medicare acquisition site landing page
+   		|Site| <site>|
+   And click on Enroll Plan on shoppages for Medsupp plans
+		When the user views the plans of the below plan type
+      | Plan Type | <plantype> |
+		Then the site user clicks on Start Application Button proceed to next pages
+      | DOB           | <DOB>         |
+      | Firstname     | <Firstname>   |
+      | Lastname      | <Lastname>    |
+    Then user clicks on resume application button
+   	 	| DOB           | <DOB>         |
+   	 	| Firstname     | <Firstname>   |
+      | Lastname      | <Lastname>    |
+    #Then the user signs in with optum Id credentials to resume application in UHC site
+    #  | User Name | <userName> |
+    #  | Password  | <password> |
+    Then the user signs in with optum Id
+     	|User Name | <username>|
+     	|Password  | <password>|
+    Then the user validate retrieve application URL
+      | AARP URL    | <AARPUrl> 	|
+      |AARP URL STG |<AARPUrl-stg>|
+    #Then the user enters data to resume the application
+    #  | applicationType| <applicationType>|
+    #	 | ApplicationID |<ApplicationID>|
+    #  | DOB           | <DOB>         |
+    #  | Zipcode       | <zipcode>     |   
+    #Then The user validates the resume application processed
+    #  | Firstname     | <Firstname>   |
+    #  | Lastname      | <Lastname>    |
+   @MedSupp_OLE_Common_AARP   
+   Examples: 
+      | zipcode | isMultutiCounty | AARPUrl																					| county             | plantype | DOB      | Firstname | Lastname|  ApplicationID | applicationType | username | password |AARPUrl-stg|site|
+      |   90002 | NO              | aarpsupplementalhealth.com/ole/ms.olelaunch.html|Los Angeles County | MS       | 11/13/1940 | John      | Carry   |    ABCD        | Resume          |mnrqavd3 | Password@1|https://aarpsupplementalhealth-stg.uhc.com/content/aarpsupplementalhealth/ole/ms.olelaunch.html|AARP|
+	
+	@MedSupp_OLE_Common_UHC
+   Examples: 
+      | zipcode | isMultutiCounty | AARPUrl																					| county             | plantype | DOB      | Firstname | Lastname|  ApplicationID | applicationType | username | password |AARPUrl-stg|site|
+      |   90002 | NO              | aarpsupplementalhealth.com/ole/ms.olelaunch.html|Los Angeles County | MS       | 11/13/1940 | John      | Carry   |    ABCD        | Resume          |mnrqavd3 | Password@1|https://aarpsupplementalhealth-stg.uhc.com/content/aarpsupplementalhealth/ole/ms.olelaunch.html|UHC|
+  
+  
+  

@@ -132,6 +132,15 @@ public class ShopForaPlanCommonStepDefinition {
 		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_YEAR, PlanYear);
 	}
 	
-	
+	@Given("^click on Enroll Plan on shoppages for Medsupp plans$")
+	public void click_on_Enroll_Plan_on_shop_for_plan_for_Medicare_Avantage_plans() throws Throwable {
+		ShopforaplanAARPlayer shopaplan = (ShopforaplanAARPlayer) getLoginScenario()
+				.getBean(PageConstants.SHOP_FOR_A_PLAN_AARPLAYER);
+		ShopforaplanAARPlayer enrollPage = shopaplan.ShopLinkOnMedsuppPlan();
+		if (enrollPage != null)
+			getLoginScenario().saveBean(PageConstants.ENROLLMENT_BASICS_PAGE, enrollPage);
+		else
+			System.out.println("continue button is not displayed provider search page");
+	}
 }
 

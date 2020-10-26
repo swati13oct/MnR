@@ -1,7 +1,7 @@
 Feature: 2.13 ACQ UHC- To test SAM Icons in UHC site
 
 @samChatCall
-Scenario Outline: 1.19.1.1 To test the SAM icons on UHC site on <pagename> Homepage
+Scenario Outline: 1.19.1.1 To test the SAM icons on Acq site on <site> Homepage
  Given the user is on medicare acquisition site landing page
     	|Site| <site>|
 And user opens the page to validate M&R Sites
@@ -30,7 +30,7 @@ Scenario Outline: 1.19.1.2 To test the SAM icons on Visitor Profile Page to inti
 			|/|UHC|
 			
 @samChat
-Scenario Outline: 1.19.1.3 To test the SAM icons on UHC site on <pagename> chat agent not available hours
+Scenario Outline: 1.19.1.3 To test the SAM icons on Acq site on <site> chat agent not available hours
  Given the user is on medicare acquisition site landing page
     	|Site| <site>|
 And user opens the page to validate M&R Sites
@@ -174,7 +174,7 @@ Then user validates whether chat Agent is not Available
       | privacy-policy.html           |UHC|
 
 
-Scenario Outline: 1.19.1.4 To test the SAM icons on UHC site on <pagename>
+Scenario Outline: 1.19.1.4 To test the SAM icons on Acq site on <site>
  Given the user is on medicare acquisition site landing page
     	|Site| <site>|
 And user opens the page to validate M&R Sites
@@ -210,6 +210,7 @@ Examples:
       | shop/medicare-supplement-plans.html | AARP|
       | shop/prescription-drug-plans.html   | AARP|
       | shop/dual-special-needs-plans.html  |AARP|
+       |safe-shopping.html|AARP|
       | shop/compare/compare-pdp.html | AARP|
       | shop/compare/compare-ma.html  |AARP|
       | shop/estimate/ma-costs.html   | AARP|
@@ -218,10 +219,15 @@ Examples:
       | shop/medicare-advantage-plans/health-care-management.html | AARP|
       | shop/medicare-advantage-plans/ma-plan-benefits.html       | AARP|
       | shop/renew-active.html                                    | AARP|
+      |shop/medicare-advantage-veteran-plan.html     |AARP|
+      |shop/estimate/ms-costs.html      |AARP| 
+			|shop/compare/compare-ma-ms.html  |AARP| 
+			|shop/compare/compare-ms.html      |AARP| 
       | enroll.html                | AARP|
       | enroll/ma-enrollment.html  |AARP|
       | enroll/pdp-enrollment.html | AARP|
-      
+      |enroll/ms-apply.html        |AARP|
+
       @samChatCallRegressionAARP @samChatRegressionAARP3
 			Examples:
 			| pagename |site|
@@ -231,19 +237,22 @@ Examples:
       | resources/prescription-drug-costs-help.html          | AARP|
       | resources/healthcare-fraud.html                      | AARP|
       | resources/how-to-pay-your-premium.html               | AARP| 
-      | resources/pdp-resources-materials.html                                            | AARP|
-      | resources/pdp-resources-materials/pdp-information-forms.html                      | AARP|
-      | resources/pdp-resources-materials/pdp-information-forms/explanation-benefits.html | AARP|         
+    # | resources/pdp-resources-materials.html                                            | AARP|
+     #| resources/pdp-resources-materials/pdp-information-forms.html                      | AARP|
+    # | resources/pdp-resources-materials/pdp-information-forms/explanation-benefits.html | AARP|         
       | resources/mail-order-pharmacy.html                                                |AARP| 
       | resources/prescription-drug-appeals.html                                          | AARP|
       | resources/prescription-drug-transition.html                                       |AARP|
-      | resources/ma-resources-materials.html                                               |AARP| 
-      | resources/ma-resources-materials/ma-information-forms.html                          |AARP| 
-      | resources/ma-resources-materials/ma-information-forms/member-rights.html            |AARP|
-      | resources/ma-resources-materials/ma-information-forms/medicare-appeal.html          |AARP|
-      #| health-plans/resources/pdp-resources-materials/pdp-information-forms/medicare-disenrollment.html | 
+    # | resources/ma-resources-materials.html                                               |AARP| 
+    # | resources/ma-resources-materials/ma-information-forms.html                          |AARP| 
+    # | resources/ma-resources-materials/ma-information-forms/member-rights.html            |AARP|
+     #| resources/ma-resources-materials/ma-information-forms/medicare-appeal.html          |AARP|
+     #| health-plans/resources/pdp-resources-materials/pdp-information-forms/medicare-disenrollment.html | 
       | resources/disenrollment-information.html                                            | AARP|
-      
+      |resources/ma-pdp-information-forms.html                      |AARP|
+      |resources/ma-pdp-information-forms/member-rights.html        |AARP|
+      |resources/ma-pdp-information-forms/medicare-appeal.html      |AARP|
+      |resources/ma-pdp-information-forms/explanation-benefits.html |AARP|    
   @samChatCallRegressionAARP @samChatRegressionAARP4
 			Examples:
 			| pagename |site|
@@ -294,6 +303,7 @@ Examples:
       | shop/medicare-supplement-plans.html | UHC|
       | shop/prescription-drug-plans.html   | UHC|
       | shop/dual-special-needs-plans.html  |UHC|
+      |safe-shopping.html|UHC|
       | shop/compare/compare-pdp.html | UHC|
       | shop/compare/compare-ma.html  |UHC|
       | shop/estimate/ma-costs.html   | UHC|
@@ -302,9 +312,14 @@ Examples:
       | shop/medicare-advantage-plans/health-care-management.html | UHC|
       | shop/medicare-advantage-plans/ma-plan-benefits.html       | UHC|
       | shop/renew-active.html                                    | UHC|
+      |shop/medicare-advantage-veteran-plan.html     |UHC|
+      |shop/estimate/ms-costs.html      |UHC| 
+			|shop/compare/compare-ma-ms.html  |UHC| 
+			|shop/compare/compare-ms.html      |UHC|     
       | enroll.html                | UHC|
       | enroll/ma-enrollment.html  |UHC|
       | enroll/pdp-enrollment.html | UHC|
+      |enroll/ms-apply.html        |UHC|
       @samChatCallRegressionUHC @samChatRegressionUHC3
 			Examples:
 			| pagename |site|
@@ -314,19 +329,24 @@ Examples:
       | resources/prescription-drug-costs-help.html          | UHC|
       | resources/healthcare-fraud.html                      | UHC|
       | resources/how-to-pay-your-premium.html               | UHC| 
-      | resources/pdp-resources-materials.html                                            | UHC|
-      | resources/pdp-resources-materials/pdp-information-forms.html                      | UHC|
-      | resources/pdp-resources-materials/pdp-information-forms/explanation-benefits.html | UHC|         
+    # | resources/pdp-resources-materials.html                                            | UHC|
+     #| resources/pdp-resources-materials/pdp-information-forms.html                      | UHC|
+     #| resources/pdp-resources-materials/pdp-information-forms/explanation-benefits.html | UHC|         
       | resources/mail-order-pharmacy.html                                                |UHC| 
       | resources/prescription-drug-appeals.html                                          | UHC|
       | resources/prescription-drug-transition.html                                       |UHC|
-      | resources/ma-resources-materials.html                                               |UHC| 
-      | resources/ma-resources-materials/ma-information-forms.html                          |UHC| 
-      | resources/ma-resources-materials/ma-information-forms/member-rights.html            |UHC|
-      | resources/ma-resources-materials/ma-information-forms/medicare-appeal.html          |UHC|
-      #| health-plans/resources/pdp-resources-materials/pdp-information-forms/medicare-disenrollment.html | 
+     #| resources/ma-resources-materials.html                                               |UHC| 
+     #| resources/ma-resources-materials/ma-information-forms.html                          |UHC| 
+    # | resources/ma-resources-materials/ma-information-forms/member-rights.html            |UHC|
+    # | resources/ma-resources-materials/ma-information-forms/medicare-appeal.html          |UHC|
+    # | health-plans/resources/pdp-resources-materials/pdp-information-forms/medicare-disenrollment.html | 
       | resources/disenrollment-information.html                                            | UHC|
-      
+      |resources/ma-pdp-information-forms/member-rights.html       |UHC|
+      |resources/ma-pdp-information-forms/medicare-appeal.html     |UHC|
+      |resources/ma-pdp-information-forms/explanation-benefits.html|UHC|
+      |resources/ma-pdp-information-forms.html                     |UHC|
+
+        
       @samChatCallRegressionUHC @samChatRegressionUHC4
 			Examples:
 			| pagename |site|
@@ -347,5 +367,10 @@ Examples:
      # | health-insurance-brokers.html |
       | contact-us.html               | UHC|
       | privacy-policy.html           |UHC|
-
-   
+      
+      @samChatCallRegressionUHC @samChatRegressionUHC5 @samChatRegressionAARP5	
+		Examples:
+			| pagename                 |site|
+      |                         |  UHC|                            
+      |
+   	
