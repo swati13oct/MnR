@@ -37,12 +37,12 @@ Feature: ACQ-OLE Resume and Retrieve Application for MedSupp
     #Then The user validates the resume application processed
     #  | Firstname     | <Firstname>   |
     #  | Lastname      | <Lastname>    |
-   @MedSupp_OLE_Common_AARP   
+   @MedSupp_OLE_Common_AARP1  
    Examples: 
       | zipcode | isMultutiCounty | AARPUrl																					| county             | plantype | DOB      | Firstname | Lastname|  ApplicationID | applicationType | username | password |AARPUrl-stg|site|
       |   90002 | NO              | aarpsupplementalhealth.com/ole/ms.olelaunch.html|Los Angeles County | MS       | 11/13/1940 | John      | Carry   |    ABCD        | Resume          |mnrqavd3 | Password@1|https://aarpsupplementalhealth-stg.uhc.com/content/aarpsupplementalhealth/ole/ms.olelaunch.html|AARP|
 	
-	@MedSupp_OLE_Common_UHC
+	@MedSupp_OLE_Common_UHC1
    Examples: 
       | zipcode | isMultutiCounty | AARPUrl																					| county             | plantype | DOB      | Firstname | Lastname|  ApplicationID | applicationType | username | password |AARPUrl-stg|site|
       |   90002 | NO              | aarpsupplementalhealth.com/ole/ms.olelaunch.html|Los Angeles County | MS       | 11/13/1940 | John      | Carry   |    ABCD        | Resume          |mnrqavd3 | Password@1|https://aarpsupplementalhealth-stg.uhc.com/content/aarpsupplementalhealth/ole/ms.olelaunch.html|UHC|
@@ -52,9 +52,12 @@ Feature: ACQ-OLE Resume and Retrieve Application for MedSupp
   Scenario Outline: MedSup Resume Application with Application ID on acq site -<site>
    Given the user is on medicare acquisition site landing page
    		|Site| <site>|
+   And the user hovers screen over the shop for a plan
    And click on Enroll Plan on shoppages for Medsupp plans
-		When the user views the plans of the below plan type
-      | Plan Type | <plantype> |
+     When the user performs plan search using Shop Pages
+      | Zip Code        | <zipcode>         |
+      | County Name     | <county>          |
+      | Is Multi County | <isMultutiCounty> |
 		Then the site user clicks on Start Application Button proceed to next pages
       | DOB           | <DOB>         |
       | Firstname     | <Firstname>   |
