@@ -475,6 +475,12 @@ public class PlanDocumentsAndResourcesStepDefinition {
 		HashMap<String, String> yearsMap=(HashMap<String, String>) getLoginScenario().getBean(PlanDocumentsAndResourcesCommonConstants.TEST_YEARS_MAP);
 		PlanDocApiResponse api_planDocMap=(PlanDocApiResponse) getLoginScenario().getBean(PlanDocumentsAndResourcesCommonConstants.TEST_ACTUAL_DOC_LIST_MAP);
 		PlanDocumentsAndResourcesPage planDocumentsAndResourcesPage=(PlanDocumentsAndResourcesPage) getLoginScenario().getBean(PageConstants.PLAN_DOCUMENTS_AND_RESOURCES_PAGE);
+		
+		if (MRScenario.environment.equals("offline") && memberType.toUpperCase().contains("PREEFF")) {
+			System.out.println("TEST running for offline-prod and PREEFF user, load the page one more time to workaround the quick guide issue");
+			planDocumentsAndResourcesPage.reloadPgWorkaround_MM();
+		}
+		
 		//note: first go back to top of the page
 		planDocumentsAndResourcesPage.backToTopOfPage(planType, memberType);
 

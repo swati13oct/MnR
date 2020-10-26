@@ -123,7 +123,7 @@ Feature: 1.04.2.2 To Test DREAM EOB for Members - E2E - Member Auth - PROD
     @prod_dreamEob01e 
     Examples: 
       | index | username  | password  | MemUserName             | planType | memberType        | flagZeroEob |
-      | 06    | kkumard  | mnrs786@  | ERNIE2450               | MA       | MA_NICE_DEOB      | true        |
+      | 06    | kkumard  | mnrs786@  | haradaty32              | MA       | MA_NICE_DEOB      | true        |
 
     @prod_dreamEob01f 
     Examples: 

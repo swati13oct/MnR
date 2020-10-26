@@ -715,11 +715,11 @@ public class TestHarness extends UhcDriver {
 	 * @throws InterruptedException
 	 */
 	public DrugCostEstimatorPage navigateToDCEPageFromTestHarnessPage() throws InterruptedException {
-		checkModelPopup(driver,5);
+		checkModelPopup(driver,2);
 		validateNew(testHarnessDcePageLink);
 		testHarnessDcePageLink.click();
 		CommonUtility.checkPageIsReady(driver);
-		checkModelPopup(driver,5);
+		checkModelPopup(driver,2);
 		CommonUtility.waitForPageLoad(driver, dceHeaderTxt, CommonConstants.TIMEOUT_90);
 		if (driver.getTitle().contains("Overview")) {
     		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
@@ -1847,6 +1847,14 @@ public class TestHarness extends UhcDriver {
 			if (validate(logOut,0)) {
 				logOut.click();
 				CommonUtility.checkPageIsReadyNew(driver);
+				try {
+					if(driver.getTitle().contains("Signing off")) {
+						Thread.sleep(2000);
+						CommonUtility.checkPageIsReadyNew(driver);
+					}
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 				System.out.println("Title after logout-" + driver.getTitle());
 				if(MRScenario.environment.contains("team-h")) {
 					if (validate(accountProfile,0)) {
