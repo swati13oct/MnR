@@ -107,6 +107,9 @@ public class PersonalInformationPage extends UhcDriver{
 	@FindBy(id = "address1")
 	private WebElement PermanentAdd_Street;
 
+	@FindBy(id = "address2")
+	private WebElement PermanentAdd_Aptno;
+
 	@FindBy(id = "city")
 	private WebElement PermanentAdd_City;
 
@@ -124,6 +127,10 @@ public class PersonalInformationPage extends UhcDriver{
 
 	@FindBy(id = "address10")
 	private WebElement MailingAdd_Street;
+	
+	@FindBy(id = "address20")
+	private WebElement MailingAdd_Aptno;
+
 
 	@FindBy(id = "city0")
 	private WebElement MailingAdd_City;
@@ -179,9 +186,11 @@ public class PersonalInformationPage extends UhcDriver{
 		String DOB = memberDetailsMap.get("DOB");
 		String Gender = memberDetailsMap.get("Gender");
 		String Perm_Street = memberDetailsMap.get("Perm_Street");
+		String Perm_Aptno = memberDetailsMap.get("Perm_Aptno");
 		String Perm_city = memberDetailsMap.get("Perm_city");
 		String MailingQuestion = memberDetailsMap.get("Mailing Address Question");
 		String Mailing_Street = memberDetailsMap.get("Mailing_Street");
+		String Mailing_Aptno = memberDetailsMap.get("Mailing_Aptno");
 		String Mailing_City = memberDetailsMap.get("Mailing_City");
 		String Mailing_State = memberDetailsMap.get("Mailing_State");
 		String Mailing_Zip = memberDetailsMap.get("Mailing_Zip");
@@ -200,12 +209,14 @@ public class PersonalInformationPage extends UhcDriver{
 			jsClickNew(GenderSelectFemale);
 		}	
 		sendkeys(PermanentAdd_Street,Perm_Street);
+		sendkeys(PermanentAdd_Aptno,Perm_Aptno);
 		sendkeys(PermanentAdd_City,Perm_city);
 		System.out.println("Mailing Question : "+MailingQuestion);
 		if(MailingQuestion.equalsIgnoreCase("no")){
 			SameMailingAddressNo.click();
 			//CommonUtility.waitForPageLoadNew(driver,MailingAdd_Street, 30);
 			sendkeysNew(MailingAdd_Street,Mailing_Street);
+			sendkeysNew(MailingAdd_Aptno,Mailing_Aptno);
 			sendkeys(MailingAdd_City,Mailing_City);
 			Select SelectState = new Select(MailingAdd_State_DropDown);
 			SelectState.selectByValue(Mailing_State);

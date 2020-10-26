@@ -1273,9 +1273,11 @@ public class oleStepDefinition {
 				getLoginScenario().saveBean(oleCommonConstants.DOB, MemberDetailsMap.get("DOB"));
 				getLoginScenario().saveBean(oleCommonConstants.GENDER, MemberDetailsMap.get("Gender"));
 				getLoginScenario().saveBean(oleCommonConstants.PERM_STREET, MemberDetailsMap.get("Perm_Street"));
+				//getLoginScenario().saveBean(oleCommonConstants.PERM_APARTMENT_NUMBER, MemberDetailsMap.get("Perm_Aptno"));
 				getLoginScenario().saveBean(oleCommonConstants.PERM_CITY, MemberDetailsMap.get("Perm_city"));
 				getLoginScenario().saveBean(oleCommonConstants.MAILING_QUESTION, MemberDetailsMap.get("Mailing Address Question"));
 				getLoginScenario().saveBean(oleCommonConstants.MAILING_STREET, MemberDetailsMap.get("Mailing_Street"));
+				//getLoginScenario().saveBean(oleCommonConstants.MAILING_APARTMENT_NUMBER, MemberDetailsMap.get("Mailing_Aptno"));
 				getLoginScenario().saveBean(oleCommonConstants.MAILING_CITY, MemberDetailsMap.get("Mailing_City"));
 				getLoginScenario().saveBean(oleCommonConstants.MAILING_STATE, MemberDetailsMap.get("Mailing_State"));
 				getLoginScenario().saveBean(oleCommonConstants.MAILING_ZIP, MemberDetailsMap.get("Mailing_Zip"));
@@ -1903,17 +1905,14 @@ public class oleStepDefinition {
 						.getCells().get(0), personalAttributesRow.get(i)
 						.getCells().get(1));
 			}
-			/*		String PDPquestionFlag = QuestionMap.get("PDP Question");
-		String LongTermQuestionFlag = QuestionMap.get("LongTerm Question");
-			 */
+			String PDPquestionFlag = QuestionMap.get("PDP Question");
+		    String LongTermQuestionFlag = QuestionMap.get("LongTerm Question");
+			 
 			MedicareInformationPage medInformationPage = (MedicareInformationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE);
 			boolean areQuestionsAnswered = medInformationPage.answer_following_questions(QuestionMap);
 			if (areQuestionsAnswered) {
-
-			/*
-			 * getLoginScenario().saveBean(OLE_PageConstants.OLE_COVERAGE_INFO_PAGE,
-			 * medInformationPage);
-			 */
+				getLoginScenario().saveBean(oleCommonConstants.PRESCRIPTION_DRUG, PDPquestionFlag);
+				getLoginScenario().saveBean(oleCommonConstants.HEALTH_INSURANCE, LongTermQuestionFlag);
 				System.out.println("Coverage and Health Information Page : Data entered");
 			}
 			else
@@ -1925,16 +1924,7 @@ public class oleStepDefinition {
 
 	@Then("^the user navigates to Proposed Effective Date Page$")
 	public void the_user_navigates_to_Proposed_Effective_Date_Page() throws Throwable {
-		/*
-		 * String alreadyEnrolled = (String)
-		 * getLoginScenario().getBean(oleCommonConstants.ALREADY_ENROLLED_FLAG); boolean
-		 * alreadyEnrolled_Flag = (alreadyEnrolled.contentEquals("true"))?true:false;
-		 * if(alreadyEnrolled_Flag){ System.out.
-		 * println("Already Enrolled Error message is Displayed in OLE Medicare Information  PAGE : "
-		 * +alreadyEnrolled+"  :  "+alreadyEnrolled_Flag+" - Validation Passed");
-		 * getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG,"true");
-		 * Assert.assertTrue(true); } else{
-		 */
+		
 		SpecialElectionPeriodPage sepPage = (SpecialElectionPeriodPage) getLoginScenario().getBean(OLE_PageConstants.OLE_SPECIAL_ELECTION_PERIOD_PAGE);
 			ProposedEffectiveDatePage proposedEffectiveDatePage = sepPage.navigate_to_Proposed_Effective_Date_Page();
 			if (proposedEffectiveDatePage != null) {
@@ -1950,21 +1940,15 @@ public class oleStepDefinition {
 
 	@Then("^the user validates Proposed Effective Date is Displayed$")
 	public void the_user_validates_proposed_effective_date_display() throws Throwable {
-		/*
-		 * String alreadyEnrolled = (String)
-		 * getLoginScenario().getBean(oleCommonConstants.ALREADY_ENROLLED_FLAG); boolean
-		 * alreadyEnrolled_Flag = (alreadyEnrolled.contentEquals("true"))?true:false;
-		 * if(alreadyEnrolled_Flag){ System.out.
-		 * println("Already Enrolled Error message is Displayed in OLE Medicare Information  PAGE : "
-		 * +alreadyEnrolled+"  :  "+alreadyEnrolled_Flag+" - Validation Passed");
-		 * getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG,"true");
-		 * Assert.assertTrue(true); } else{
-		 */
 			ProposedEffectiveDatePage proposedEffectiveDatePage  = (ProposedEffectiveDatePage) getLoginScenario().getBean(OLE_PageConstants.OLE_PROPOSED_EFF_DATE_PAGE);
+					
 			boolean Validation_Status = proposedEffectiveDatePage.validate_proposed_effective_date_options();
 			if(Validation_Status){
 				System.out.println("Proposed Effective Date display : Validation Passed");
 				getLoginScenario().saveBean(OLE_PageConstants.OLE_PROPOSED_EFF_DATE_PAGE, proposedEffectiveDatePage);
+				String proposedEffectiveDate = proposedEffectiveDatePage.get_proposed_effective_date();
+			    getLoginScenario().saveBean(oleCommonConstants.PROPOSED_EFF_DATE, proposedEffectiveDate);
+				
 				Assert.assertTrue(true);
 			}
 			else{
@@ -2253,6 +2237,8 @@ public class oleStepDefinition {
 			getLoginScenario().saveBean(oleCommonConstants.AUTHORIZATION_PHONE_NO, MemberDetailsMap.get("authorizationPhoneNo"));
 			getLoginScenario().saveBean(oleCommonConstants.AUTHORIZATION_STATE_DISPLAY, MemberDetailsMap.get("authorizationStateDisplay"));
 			getLoginScenario().saveBean(oleCommonConstants.AUTHORIZATION_RELATIONSHIP, MemberDetailsMap.get("authorizationRelationship"));
+			
+			getLoginScenario().saveBean(oleCommonConstants.AUTHORIZATION_AGREE, MemberDetailsMap.get("authorizationAgree"));
 			
 			Assert.assertTrue(true);
 		}		
@@ -3127,6 +3113,7 @@ public void the_user_validates_the_online_Enrollment_details_on_Review_and_Submi
 		DetailsMap.put("DOB", (String) getLoginScenario().getBean(oleCommonConstants.DOB));
 		DetailsMap.put("Gender", (String) getLoginScenario().getBean(oleCommonConstants.GENDER));
 		DetailsMap.put("Perm_Street", (String) getLoginScenario().getBean(oleCommonConstants.PERM_STREET));
+		DetailsMap.put("Perm_Aptno", (String) getLoginScenario().getBean(oleCommonConstants.PERM_APARTMENT_NUMBER));
 		DetailsMap.put("Perm_city", (String) getLoginScenario().getBean(oleCommonConstants.PERM_CITY));
 		DetailsMap.put("MAILING_QUESTION", (String) getLoginScenario().getBean(oleCommonConstants.MAILING_QUESTION));
 		DetailsMap.put("Mailing_Street", (String) getLoginScenario().getBean(oleCommonConstants.MAILING_STREET));
@@ -3154,7 +3141,7 @@ public void the_user_validates_the_online_Enrollment_details_on_Review_and_Submi
 		DetailsMap.put("Home Number", (String) getLoginScenario().getBean(oleCommonConstants. PRIMARY_PHONE_NUMBER));
 		DetailsMap.put("Mobile Number", (String) getLoginScenario().getBean(oleCommonConstants.MOBILE_NUMBER));
 		DetailsMap.put("Email Confirmation", (String) getLoginScenario().getBean(oleCommonConstants.EMAIL_CONFIRMATION));
-		DetailsMap.put("Paperless Delivery", (String) getLoginScenario().getBean(oleCommonConstants.PAPERLESS_DELIVERY));
+		DetailsMap.put("Paperless Delivery", (String) getLoginScenario().getBean(oleCommonConstants.Go_Green));
 		
 		DetailsMap.put("Authorization First Name", (String) getLoginScenario().getBean(oleCommonConstants.AUTHORIZATION_FIRST_NAME));
 		DetailsMap.put("Authorization last Name", (String) getLoginScenario().getBean(oleCommonConstants.AUTHORIZATION_LAST_NAME));
@@ -3164,6 +3151,7 @@ public void the_user_validates_the_online_Enrollment_details_on_Review_and_Submi
 		DetailsMap.put("Authorization Phone No", (String) getLoginScenario().getBean(oleCommonConstants.AUTHORIZATION_PHONE_NO));
 		DetailsMap.put("Authorization Agree", (String) getLoginScenario().getBean(oleCommonConstants.AUTHORIZATION_AGREE));
 		DetailsMap.put("Authorization Relationship", (String) getLoginScenario().getBean(oleCommonConstants.AUTHORIZATION_RELATIONSHIP));
+		
 
 		
 		

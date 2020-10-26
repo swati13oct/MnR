@@ -107,9 +107,8 @@ public class ReviewSubmitPage extends UhcDriver{
 	//Permanent Address Display
 	@FindBy(xpath = "//*[contains(text(), 'Street Address')]//following-sibling::*")
 	//@FindBy(xpath = "//*[contains(text(), 'mailing address')]/ancestor::*[contains(@class, 'review-step')]//*[contains(text(), 'Street Address')]//following-sibling::*")
-	//private List <WebElement> StreetDisplays;
 	private List <WebElement> StreetDisplays;
-
+	
 	@FindBy(xpath = "//*[contains(text(), 'City')]//following-sibling::*")
 	//@FindBy(xpath = "//*[contains(text(), 'mailing address')]/ancestor::*[contains(@class, 'review-step')]//*[contains(text(), 'City')]//following-sibling::*")
 	private List <WebElement> CityDisplays;
@@ -118,8 +117,11 @@ public class ReviewSubmitPage extends UhcDriver{
 	@FindBy(xpath = "(//*[contains(text(), 'Street Address')])[1]//following-sibling::*")
 	//@FindBy(xpath = "//*[contains(text(), 'mailing address')]/ancestor::*[contains(@class, 'review-step')]//*[contains(text(), 'Street Address')]//following-sibling::*")
 	private WebElement StreetDisplay;
-	
 
+	@FindBy(xpath = "(//*[contains(text(), 'Apartment')])[1]//following-sibling::*")
+	//@FindBy(xpath = "//*[contains(text(), 'mailing address')]/ancestor::*[contains(@class, 'review-step')]//*[contains(text(), 'Street Address')]//following-sibling::*")
+	private WebElement ApartmentDisplay;
+	
 	//@FindBy(xpath = "//*[contains(text(), 'City')]//following-sibling::*")
 	@FindBy(xpath = "(//*[contains(text(), 'City')])[1]//following-sibling::*")
 	//@FindBy(xpath = "//*[contains(text(), 'mailing address')]/ancestor::*[contains(@class, 'review-step')]//*[contains(text(), 'City')]//following-sibling::*")
@@ -133,7 +135,7 @@ public class ReviewSubmitPage extends UhcDriver{
 	@FindBy(xpath = "(//*[contains(text(), 'Street Address')])[2]//following-sibling::*")
 	private WebElement MailStreetDisplays;
 	
-	@FindBy(xpath = "(//*[contains(text(), 'Apartment/Suite')])[1]//following-sibling::*")
+	@FindBy(xpath = "(//*[contains(text(), 'Apartment/Suite')])[2]//following-sibling::*")
 	private WebElement MailApartmentSuite;
 
 
@@ -507,6 +509,7 @@ public class ReviewSubmitPage extends UhcDriver{
 		String DOB = detailsMap.get("DOB");
 		String Gender = detailsMap.get("Gender");
 		String Perm_Street = detailsMap.get("Perm_Street");
+		String Perm_Aptno = detailsMap.get("Perm_Aptno");
 		String Perm_city = detailsMap.get("Perm_city");
 		String MailingQuestion = detailsMap.get("MAILING_QUESTION");
 		String Mailing_Street = detailsMap.get("Mailing_Street");
@@ -522,15 +525,16 @@ public class ReviewSubmitPage extends UhcDriver{
 		String PartBeffectiveDate = detailsMap.get("PartB Date");
 		String CardType = detailsMap.get("Card Type");
 		String Expected_PlanName = detailsMap.get("Plan Name");
-		String Expected_PlanYear = detailsMap.get("Plan Year");
+		//String Expected_PlanYear = detailsMap.get("Plan Year");
+		String Expected_PlanYear = "2021";
 		String Expected_ZipCode = detailsMap.get("Zip Code");
 		String Expected_County = detailsMap.get("County");
 		String Expected_PlanPremium = detailsMap.get("Plan Premium");
 		String Medicaid_No = detailsMap.get("Medicaid");
-		String Mailing_AptNo = detailsMap.get("MailingAptNo");
+		String Mailing_AptNo = detailsMap.get("Mailing Apartment Number");
 		String PrimaryPhoneNumber = detailsMap.get("Home Number");
 		String MobilePhoneNumber = detailsMap.get("Mobile Phone Number");
-		String EmailConfirmationNumber = detailsMap.get("Email Confirmation Number");
+		//String EmailConfirmationNumber = detailsMap.get("Email Confirmation Number");
 		String Paperless_Delivery = detailsMap.get("Paperless Delivery");
 		//String Email_Address = detailsMap.get("Email Address");
 	/*	HealthInsuranceName
@@ -548,24 +552,24 @@ public class ReviewSubmitPage extends UhcDriver{
 		String healthInsuranceGroupNo = detailsMap.get("Group Number");
 		String healthInsuranceMemberNo = detailsMap.get("Member Number");
 		String healthInsurance = detailsMap.get("Health Insurance");
-		String prescriptionDrug= detailsMap.get("PrescriptionDrug");
+		String prescriptionDrug= detailsMap.get("Prescription Drug");
 		
 	
 		String PCP_Name = detailsMap.get("PCP Name");
 		String PCP_Number = detailsMap.get("PCP Number");
-		String PCP_recently_visited= detailsMap.get("PCP Recently");
+		String PCP_recently_visited= detailsMap.get("PCP Recently Visited");
 		String Proposed_Effective_date= detailsMap.get("Proposed Effective date");
 		
-		String AuthFirstNameDisplay= detailsMap.get("Auth FirstName Display");
-		String AuthLastNameDisplay = detailsMap.get("Auth LastName Display");
-		String AuthAddressDisplay = detailsMap.get("Auth Address Display");
-		String AuthApartmentSuiteDisplay = detailsMap.get("Auth Apartment Suite Display");
-		String AuthCityDisplay = detailsMap.get("Auth City Display");
-		String AuthStateDisplay = detailsMap.get("Auth State Display");
+		String AuthFirstNameDisplay= detailsMap.get("Authorization First Name");
+		String AuthLastNameDisplay = detailsMap.get("Authorization last Name");
+		String AuthAddressDisplay = detailsMap.get("Authorization Address");
+		String AuthApartmentSuiteDisplay = detailsMap.get("Authorization Apartment Suite");
+		String AuthCityDisplay = detailsMap.get("Authorization City");
+		String AuthStateDisplay = detailsMap.get("Authorization Phone No");
 		String AuthZipDisplay = detailsMap.get("Auth Zip Display");
-		String AuthPhoneNumberDisplay= detailsMap.get("Auth PhoneNo Display");
-		String AuthAgreeDisplay = detailsMap.get("Auth Agree Display");
-		String AuthRelationshipDisplay= detailsMap.get("Auth Relationship Display");
+		String AuthPhoneNumberDisplay= detailsMap.get("Authorization Phone No");
+		String AuthAgreeDisplay = detailsMap.get("Authorization Agree");
+		String AuthRelationshipDisplay= detailsMap.get("Authorization Relationship");
 		
 		
 		boolean flag = true;	
@@ -582,7 +586,7 @@ public class ReviewSubmitPage extends UhcDriver{
 		flag&=validateText(MedicaidNo,Medicaid_No);
 		flag&=validateText(MobilePhoneNo,MobilePhoneNumber);
 		flag&=validateText(PrimaryPhoneNo,PrimaryPhoneNumber);
-		flag&=validateText(EmailConfirmationNo,EmailConfirmationNumber);
+		//flag&=validateText(EmailConfirmationNo,EmailConfirmationNumber);
 		flag&=validateText(PaperlessDelivery,Paperless_Delivery);
 		flag&=validateText(EmailAddress,Email_Address);
 		flag&=validateText(DOBDisplay,DOB);
@@ -599,17 +603,22 @@ public class ReviewSubmitPage extends UhcDriver{
 		flag&=validateText(AuthRelationship,AuthRelationshipDisplay);
 		flag&=validateText(HealthInsuranceRadio,healthInsurance);
 		flag&=validateText(PrescriptionDrugRadio,prescriptionDrug);
+		if(!Expected_PlanName.contains("PDP")) {
 		flag&=validateText(HealthInsuranceName,healthInsuranceName);
 		flag&=validateText(HealthInsuranceGroupNo,healthInsuranceGroupNo);
 		flag&=validateText(HealthInsuranceMemberNo,healthInsuranceMemberNo);
+		}
 		flag&=validateText(PrescriptionDrugName,prescriptionDrugName);
 		flag&=validateText(PrescriptionDrugGroupNo,prescriptionGroupNumber);		
 		flag&=validateText(PrescriptionDrugMemberNo,prescriptionMemberNumber);
+		if(!Expected_PlanName.contains("PDP")) {
 		flag&=validateText(PCPName,PCP_Name);		
 		flag&=validateText(PCPNumber,PCP_Number);
-		flag&=validateText(PCPRecentlyVisited,PCP_recently_visited);	
+		flag&=validateText(PCPRecentlyVisited,PCP_recently_visited);
+		}
 		flag&=validateText(ProposedEffectiveDate,Proposed_Effective_date);
 		flag&=validateText(StreetDisplay,Perm_Street);
+		//flag&=validateText(ApartmentDisplay,Perm_Aptno);
 		flag&=validateText(CityDisplay,Perm_city);
 		flag&=validateText(MailingQiuestionDisplay,MailingQuestion);
 		//List<WebElement> list = driver.findElements(By.xpath("//*[contains(text(), 'mailing address')]/ancestor::*[contains(@class, 'review-step')]//*[contains(text(), 'State')]//following-sibling::*"));

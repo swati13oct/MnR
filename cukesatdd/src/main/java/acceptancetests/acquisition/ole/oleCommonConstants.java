@@ -34,9 +34,11 @@ public class oleCommonConstants {
 	public static final String DOB = "dob";
 	public static final String GENDER = "gender";
 	public static final String PERM_STREET = "permstreet";
+	public static final String PERM_APARTMENT_NUMBER = "permaptno";
 	public static final String PERM_CITY = "permcity";
 	public static final String MAILING_QUESTION = "mailingquestion"; 
 	public static final String MAILING_STREET = "mailingstreet";
+	public static final String MAILING_APTNO = "mailingaptno";
 	public static final String MAILING_CITY = "mailingcity"; 
 	public static final String MAILING_STATE = "mailingstate"; 
 	public static final String MAILING_ZIP = "mailingzip";
