@@ -14,7 +14,7 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
     When user enters valid zipcode and county
       | ZipCode | <zipCode> |
     #And user selects plan year in AARP
-    And user clicks on continue button in Zip Entry Page in AARP
+    And user clicks on continue button in Zip Entry Page
     #Then load screen should be displayed in AARP
     And user should be navigated to Review drug cost estimate page
     And user verify the drug summary page
@@ -49,10 +49,10 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
       | site | path                                             | pageName                   | drugName | zipCode |
       | AARP | health-plans/estimate-drug-costs.html/getstarted | DCE Redesign - Get Started | Lipitor  |   90210 |
 
-    @dce_DrugSummary_Page_UHC
-    Examples: 
-      | site | path                                             | pageName                   | drugName | zipCode |
-      | UHC  | health-plans/estimate-drug-costs.html/getstarted | DCE Redesign - Get Started | Lipitor  |   90210 |
+    #@dce_DrugSummary_Page_UHC
+    #Examples: 
+     # | site | path                                             | pageName                   | drugName | zipCode |
+      #| UHC  | health-plans/estimate-drug-costs.html/getstarted | DCE Redesign - Get Started | Lipitor  |   90210 |
 
   @drugSummary_SAM_Icon_AARP
   Scenario Outline: Test to verify SAM icon is visible on Drug summary page
@@ -65,15 +65,15 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
     And adds drugs in drug list page
       | DrugName | <drugName> |
     And clicks on Review drug cost button
-    Then user should be navigated to zipcode and plan year capture page for AEP in AARP
-    When user enters valid zipcode and county in AARP
+    Then user should be navigated to zipcode and plan year capture page for AEP
+    When user enters valid zipcode and county
       | ZipCode | <zipCode> |
     #And user selects plan year in AARP
-    And user clicks on continue button in Zip Entry Page in AARP
+    And user clicks on continue button in Zip Entry Page
     #Then load screen should be displayed in AARP
-    And user should be navigated to Review drug cost estimate page in AARP
-    Then the user validates whether call icon is visible on AARP
-    Then the user validates whether chat icon is visible on AARP
+    And user should be navigated to Review drug cost estimate page
+    Then the user validates whether call icon is visible
+    Then the user validates whether chat icon is visible
 
     Examples: 
       | path                                             | pageName                   | drugName | zipCode |
@@ -115,13 +115,13 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
     And adds drugs in drug list page
       | DrugName | <drugName> |
     And clicks on Review drug cost button
-    Then user should be navigated to zipcode and plan year capture page for AEP in AARP
-    When user enters valid zipcode and county in AARP
+    Then user should be navigated to zipcode and plan year capture page for AEP
+    When user enters valid zipcode and county
       | ZipCode | <zipCode> |
     #And user selects plan year in AARP
-    And user clicks on continue button in Zip Entry Page in AARP
+    And user clicks on continue button in Zip Entry Page
     #Then load screen should be displayed in AARP
-    And user should be navigated to Review drug cost estimate page in AARP
+    And user should be navigated to Review drug cost estimate page
     And user should be able to see Medicare Advantage plan by default
     Then user saves plan as favorite on drug summary page AARP site
       | Test Plans | <testPlans> |
@@ -150,17 +150,17 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
     And adds drugs in drug list page
       | DrugName | <drugName> |
     And clicks on Review drug cost button
-    Then user should be navigated to zipcode and plan year capture page for AEP in AARP
-    When user enters valid zipcode and county in AARP
+    Then user should be navigated to zipcode and plan year capture page for AEP
+    When user enters valid zipcode and county
       | ZipCode | <zipCode> |
     #And user selects plan year in AARP
-    And user clicks on continue button in Zip Entry Page in AARP
+    And user clicks on continue button in Zip Entry Page
     #Then load screen should be displayed in AARP
-    And user should be navigated to Review drug cost estimate page in AARP
+    And user should be navigated to Review drug cost estimate page
     And user should be able to see Medicare Advantage plan by default
-    When user clicks on change pharmacy link from summary page in AARP
-    Then change pharmacy modal should be displayed in AARP
-    And user verify change pharmacy modal in AARP
+    When user clicks on change pharmacy link from summary page
+    Then change pharmacy modal should be displayed
+    And user verify change pharmacy modal
 
     Examples: 
       | path                                             | pageName                   | drugName | zipCode |
@@ -177,27 +177,27 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
     And adds drugs in drug list page
       | DrugName | <drug2> |
     And clicks on Review drug cost button
-    Then user should be navigated to zipcode and plan year capture page for AEP in AARP
-    When user enters valid zipcode and county in AARP
+    Then user should be navigated to zipcode and plan year capture page for AEP
+    When user enters valid zipcode and county
       | ZipCode | <zipCode> |
     #And user selects plan year in AARP
-    And user clicks on continue button in Zip Entry Page in AARP
+    And user clicks on continue button in Zip Entry Page
     #Then load screen should be displayed in AARP
-    And user should be navigated to Review drug cost estimate page in AARP
+    And user should be navigated to Review drug cost estimate page
     And user should be able to see Medicare Advantage plan by default
-    And user click on View Drug Pricing Modal in AARP
+    And user click on View Drug Pricing Modal
     And user click on lipitor Switch To Generic in AARP
-    And user should be navigated to Review drug cost estimate page in AARP
+    And user should be navigated to Review drug cost estimate page
     And user should be able to see Medicare Advantage plan by default
-    And user click on View Drug Pricing Modal in AARP
-    And user verify drug can switch to generic drug in AARP
+    And user click on View Drug Pricing Modal
+    And user verify drug can switch to generic drug
       | DrugName | <drugName2> |
     And user click on PDP plan to view drug pricing in AARP
-    And user click on Switch To Generic in AARP
-    And user should be navigated to Review drug cost estimate page in AARP
+    And user click on Switch To Generic
+    And user should be navigated to Review drug cost estimate page
     And user should be able to see Medicare Advantage plan by default
-    And user click on View Drug Pricing Modal in AARP
-    And user verify drug can switch to generic drug in AARP
+    And user click on View Drug Pricing Modal
+    And user verify drug can switch to generic drug
       | DrugName | <drugName3> |
 
     Examples: 
@@ -215,18 +215,18 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
     And adds drugs in drug list page
       | DrugName | <drugName> |
     And clicks on Review drug cost button
-    Then user should be navigated to zipcode and plan year capture page for AEP in AARP
-    When user enters valid zipcode and county in AARP
+    Then user should be navigated to zipcode and plan year capture page for AEP
+    When user enters valid zipcode and county
       | ZipCode | <zipCode> |
     #And user selects plan year in AARP
-    And user clicks on continue button in Zip Entry Page in AARP
+    And user clicks on continue button in Zip Entry Page
     #Then load screen should be displayed in AARP
-    And user should be navigated to Review drug cost estimate page in AARP
+    And user should be navigated to Review drug cost estimate page
     And user should be able to see Medicare Advantage plan by default
-    When user clicks view drug cost button in AARP
-    And user clicks on change pharmacy link from details page in AARP
-    Then details page change pharmacy modal should be displayed in AARP
-    And user verify details page change pharmacy modal in AARP
+    When user clicks view drug cost button
+    And user clicks on change pharmacy link from details page
+    Then details page change pharmacy modal should be displayed
+    And user verify details page change pharmacy modal
 
     Examples: 
       | path                                             | pageName                   | drugName | zipCode |
@@ -241,17 +241,17 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
     And adds drugs in drug list page
       | DrugName | <drugName> |
     And clicks on Review drug cost button
-    Then user should be navigated to zipcode and plan year capture page for AEP in AARP
-    When user enters valid zipcode and county in AARP
+    Then user should be navigated to zipcode and plan year capture page for AEP
+    When user enters valid zipcode and county
       | ZipCode | <zipCode> |
-    And user selects plan year in AARP
-    And user clicks on continue button in Zip Entry Page in AARP
+    #And user selects plan year in AARP
+    And user clicks on continue button in Zip Entry Page
     #Then load screen should be displayed in AARP
-    And user should be navigated to Review drug cost estimate page in AARP
+    And user should be navigated to Review drug cost estimate page
     And user should be able to see Medicare Advantage plan by default
-    And user should verify the Extra help in AARP
-    And user click on View Drug Pricing Modal in AARP
-    And user should verify the drug extra qualification in drug pricing popup in AARP
+    And user should verify the Extra help
+    And user click on View Drug Pricing Modal
+    And user should verify the drug extra qualification in drug pricing popup
 
     Examples: 
       | zipCode | plantype | county | isMultutiCounty | drugName | planname                                           |
@@ -266,13 +266,13 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
     And adds drugs in drug list page
       | DrugName | <drug1> |
     And clicks on Review drug cost button
-    Then user should be navigated to zipcode and plan year capture page for AEP in AARP
-    When user enters valid zipcode and county in AARP
+    Then user should be navigated to zipcode and plan year capture page for AEP
+    When user enters valid zipcode and county
       | ZipCode | <zipcode> |
     # And user selects plan year in AARP
-    And user clicks on continue button in Zip Entry Page in AARP
+    And user clicks on continue button in Zip Entry Page
     #Then load screen should be displayed in AARP
-    And user should be navigated to Review drug cost estimate page in AARP
+    And user should be navigated to Review drug cost estimate page
     And user should be able to see Medicare Advantage plan by default
     And user should be able to toggle between plan types
 
@@ -289,13 +289,13 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
     And adds drugs in drug list page
       | DrugName | <drug1> |
     And clicks on Review drug cost button
-    Then user should be navigated to zipcode and plan year capture page for AEP in AARP
-    When user enters valid zipcode and county in AARP
+    Then user should be navigated to zipcode and plan year capture page for AEP
+    When user enters valid zipcode and county
       | ZipCode | <zipCode> |
     #And user selects plan year in AARP
-    And user clicks on continue button in Zip Entry Page in AARP
+    And user clicks on continue button in Zip Entry Page
     #Then load screen should be displayed in AARP
-    And user should be navigated to Review drug cost estimate page in AARP
+    And user should be navigated to Review drug cost estimate page
     And user should be able to see Medicare Advantage plan by default
     Then user saves plan as favorite on drug summary page AARP site
       | Test Plans | <testPlans> |
