@@ -4405,6 +4405,14 @@ public class AccountHomePage extends UhcDriver {
 		//Click on logout under Account profile on Rally dashboard. Under shadow element
 		clickElementUnderShadowRootHeader("a[data-testid*=TARGET_AWARE_LOGOUT]");
 		CommonUtility.checkPageIsReadyNew(driver);
+		try {
+			if(driver.getTitle().contains("Signing off")) {
+				Thread.sleep(2000);
+				CommonUtility.checkPageIsReadyNew(driver);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		System.out.println("Driver title after logout=" + driver.getTitle());
 		validateNew(mnrSignInButton,5);
 	}
