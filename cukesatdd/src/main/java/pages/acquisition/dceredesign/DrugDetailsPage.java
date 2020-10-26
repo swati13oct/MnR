@@ -23,6 +23,7 @@ import atdd.framework.UhcDriver;
 import gherkin.formatter.model.DataTableRow;
 import pages.acquisition.ulayer.PageTitleConstants;
 import pages.acquisition.commonpages.PlanDetailsPage;
+import pages.acquisition.commonpages.VPPPlanSummaryPage;
 
 public class DrugDetailsPage extends UhcDriver {
 
@@ -187,11 +188,17 @@ public class DrugDetailsPage extends UhcDriver {
 	@FindBy(xpath = "//div/a[contains(text(),'View Plan Details')]")
 	public WebElement viewPlanBtn;
 	
+	@FindBy(xpath = "//*[contains(@dtmname,'step 3') and contains(text(),'Return to plan details')]")
+	public WebElement returnToDetailsLink;
+	
 	@FindBy(xpath = "//button[@ng-click='backToDceDrugDetailsOrSummary()']")
 	public WebElement backtoDrugEstBtn;
 	
 	@FindBy(xpath = "//button[@ng-click='backToPlanSummary()']")
 	public WebElement backtoSummaryBtn;
+	
+	@FindBy(xpath = "//*[contains(@id,'edityourdrug')]")
+	public WebElement editDrugListLink;
 	
 	public DrugDetailsPage(WebDriver driver) {
 		super(driver);
@@ -726,6 +733,13 @@ public class DrugDetailsPage extends UhcDriver {
 		viewPlanBtn.click();
 	}
 	
+	public PlanDetailsPage clickReturnToDetailsLink() {
+		validateNew(returnToDetailsLink);
+		jsClickNew(returnToDetailsLink);
+		
+		return new PlanDetailsPage(driver);
+	}
+	
 	public void validatePlanDrugDetails(String planName) {
 		WebElement PlanName_PlanDetails = driver.findElement(By.xpath("//h1[contains(text(), '"+planName+"')]"));
 		CommonUtility.waitForPageLoadNew(driver, PlanName_PlanDetails, 20);
@@ -741,5 +755,26 @@ public class DrugDetailsPage extends UhcDriver {
 		
 		validate(alertTextImg);
 		validate(viewProceBtn);
+	}
+	
+	public VPPPlanSummaryPage ClickReturnToBtnToVPPSummary() {
+		validateNew(LinktoExitScenario);
+		jsClickNew(LinktoExitScenario);
+		CommonUtility.checkPageIsReadyNew(driver);
+		
+//		while(validate(overlayFilm, 10)) {/**wait*/}
+		//CommonUtility.waitForElementToDisappear(driver, overlayFilm, 75);
+		
+		if (driver.getCurrentUrl().contains("plan-summary")) {
+			return new VPPPlanSummaryPage(driver);	
+		}
+		return null;
+	}
+
+	public GetStartedPage clickOnEditDrugListLink() {
+
+		jsClickNew(editDrugListLink);
+		
+		return new GetStartedPage(driver);
 	}
 }
