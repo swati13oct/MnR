@@ -77,6 +77,10 @@ public class PlanDocumentsAndResourcesPage extends PlanDocumentsAndResourcesBase
 	public void validateDefaultLangSelect_MM(boolean sectionDisplay) {
 		membershipMaterials.validateDefaultLangSelect_MM(sectionDisplay);
 	}
+	
+	public void reloadPgWorkaround_MM() {
+		membershipMaterials.reloadPgWorkaround_MM();
+	}
 
 	public void validateJumplink_ANOC(boolean sectionDisplay)  {
 		anoc.validateJumplink_ANOC(sectionDisplay);

@@ -14,7 +14,7 @@ import cucumber.api.CucumberOptions;
 @ExtendedCucumberOptions(retryCount=0,screenShotSize="", screenShotLocation="/screenshots/",jsonReport = "target/cucumber-RunMRATDDAcquisitionProdVisitorProfileUlayer.json",detailedReport = true,
  detailedAggregatedReport = true, overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDAcquisitionProdVisitorProfileUlayer")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.acquisition" }, features = { "src/main/resources/feature/acquisition/visitorProfile/visitorProfile_AARP.feature" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionProdVisitorProfileUlayer.json" }, tags = { "@prodRegression" })
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionProdVisitorProfileUlayer.json" }, tags = { "@prodRegression_AARP" })
 public class RunMRATDDAcquisitionProdVisitorProfileUlayer { 
  
 }
