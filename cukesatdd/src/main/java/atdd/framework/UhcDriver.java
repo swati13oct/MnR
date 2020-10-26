@@ -753,7 +753,7 @@ try {
 	public void checkModelPopup(WebDriver driver,long timeoutInSec) {
 		
 			CommonUtility.waitForPageLoad(driver, IPerceptionsFrame,timeoutInSec);
-			CommonUtility.waitForPageLoad(driver, IPerceptionsPopup,timeoutInSec);
+//			CommonUtility.waitForPageLoad(driver, IPerceptionsPopup,timeoutInSec);
 			
 			try{
 				if(IPerceptionsPopup.isDisplayed())	{
