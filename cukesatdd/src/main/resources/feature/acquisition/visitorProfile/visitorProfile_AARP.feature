@@ -3,7 +3,7 @@
 @Test @AARPvisitorprofile
 Feature: 1.08. ACQ- Visitor profile AARP
 
-  @addDrugs @addDrugsULayerSmoke @visitorProfileRegressionAARP @prodRegression @DCE_Regression_Ulayer_VisitorProfile @prodRegression
+  @addDrugs @addDrugsULayerSmoke @visitorProfileRegressionAARP @DCE_Regression_Ulayer_VisitorProfile
   Scenario Outline: Verify user is able to add drug information to the unauthenticated visitor profile - zip - <zipCode>
     Given the user is on medicare acquisition site landing page
     		|Site| <site>|
@@ -22,12 +22,12 @@ Feature: 1.08. ACQ- Visitor profile AARP
     Then the user should be able to see the Drug information in the guest profile page
       | Drugname | <drug1> |
 
-		@VisitorProfile_AARP
+		@VisitorProfile_AARP @prodRegression_AARP
     Examples: 
       | state   | drug1   | zipCode |	site |
       | Alabama | Lipitor |   90210 |	AARP |
       
-    @VisitorProfile_UHC
+    @VisitorProfile_UHC @prodRegression_UHC
     Examples: 
       | state   | drug1   | zipCode |	site |
       | Alabama | Lipitor |   90210 |	UHC	 |
@@ -60,7 +60,7 @@ Feature: 1.08. ACQ- Visitor profile AARP
       | state   | drug1   | zipCode |	site 	|
       | Alabama | Lipitor |   90210 |	UHC 	|  
 
-  @addPlans @addPlansULayerSmoke @visitorProfileRegressionAARP @prodRegression
+  @addPlans @addPlansULayerSmoke @visitorProfileRegressionAARP 
   Scenario Outline: Verify user is able to add plans to the unauthenticated visitor profile - zip -<zipcode>
     Given the user is on medicare acquisition site landing page
     		|Site| <site>|
@@ -88,13 +88,13 @@ Feature: 1.08. ACQ- Visitor profile AARP
     And user delets the added plans on visitor profile page
       | Test Plans | <testPlans> |
 
-    @VisitorProfile_AARP
+    @VisitorProfile_AARP @prodRegression_AARP
     Examples: 
       |	site	| state   | UID       |	planyear	| zipcode | isMultiCounty | county           | plantype | testPlans                                                                                              |
       |	AARP	| Alabama | US1770330 | current		| 90210 	| NO            | Jefferson County | MAPD     | AARP Medicare Advantage SecureHorizons Focus (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO) |
       #| Alabama | US1770330 |   53503 | NO            | Jefferson County | SNP      | UnitedHealthcare Dual Complete LP1 (HMO D-SNP),UnitedHealthcare Medicare Advantage Assist (PPO C-SNP)  |
       
-    @VisitorProfile_UHC
+    @VisitorProfile_UHC @prodRegression_UHC
     Examples: 
       |	site	| state   | UID       |	planyear	| zipcode | isMultiCounty | county           | plantype | testPlans                                                                                              |
       |	UHC		| Alabama | US1770330 |  current	| 90210 | NO            | Jefferson County | MAPD     | AARP Medicare Advantage SecureHorizons Focus (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO) |
@@ -120,7 +120,7 @@ Feature: 1.08. ACQ- Visitor profile AARP
       | state | UID | zipcode | isMultiCounty | county | plantype | testPlans |
   #      | Alabama | US1770330 |   90210 | NO            | Jefferson County | MAPD     | AARP Medicare Advantage SecureHorizons Focus (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO) |
   
-  @addPlansPlanDetail @visitorProfileRegressionAARP @prodRegression
+  @addPlansPlanDetail @visitorProfileRegressionAARP 
   Scenario Outline: <UID> - Verify user is save plans from VPP to the unauthenticated visitor profile - zipcode - <zipcode> 
     Given the user is on medicare acquisition site landing page
     	|Site| <site>|
@@ -154,12 +154,12 @@ Feature: 1.08. ACQ- Visitor profile AARP
       | Membership in Health Club / Fitness Classes Benefit Type  | <membershipinHealthClubFitnessClassesBenefitType> |
       | Membership in Health Club / Fitness Classes Expected Text | <membershipinHealthClubFitnessExpectedText>       |
 		
-		@VisitorProfile_AARP
+		@VisitorProfile_AARP @prodRegression_AARP
     Examples: 
       |	site	| state   | UID       | zipcode | isMultiCounty | plantype |	planyear	|	county           | testPlans                                                                                               | eyeWearBenefitType | eyeWearExpectedText                                           | eyeExamBenefitType | eyeExamExpectedText | footCareRoutineBenefitType | footCareRoutineExpectedText | hearingExamBenefitType | hearingExamExpectedText | membershipinHealthClubFitnessClassesBenefitType | membershipinHealthClubFitnessExpectedText                                                                  |
       |	AARP	| Alabama | US1770330 |   53503 | NO            | MAPD     |	current		|	Jefferson County | UnitedHealthcare Medicare Advantage Open (PPO),UnitedHealthcare Medicare Advantage Open Essential (PPO) | Eyewear            | Eyewear has a plan benefit limit up to $100 per every 2 years | Eye Exam           | $0 copay            | Foot Care - Routine        | $50 copay                   | Hearing Exam           | $0 copay                | Fitness Program through Renew Active            | Fitness Membership Only: Basic membership in a fitness program at a network location at no additional cost |
       
-    @VisitorProfile_UHC
+    @VisitorProfile_UHC @prodRegression_UHC
     Examples: 
       |	site	| state   | UID       | zipcode | isMultiCounty | plantype |	planyear	| county           | testPlans                                                                                               | eyeWearBenefitType | eyeWearExpectedText                                           | eyeExamBenefitType | eyeExamExpectedText | footCareRoutineBenefitType | footCareRoutineExpectedText | hearingExamBenefitType | hearingExamExpectedText | membershipinHealthClubFitnessClassesBenefitType | membershipinHealthClubFitnessExpectedText                                                                  |
       |	UHC		| Alabama | US1770330 |   53503 | NO            | MAPD     | 	current		|	Jefferson County | UnitedHealthcare Medicare Advantage Open (PPO),UnitedHealthcare Medicare Advantage Open Essential (PPO) | Eyewear            | Eyewear has a plan benefit limit up to $100 per every 2 years | Eye Exam           | $0 copay            | Foot Care - Routine        | $50 copay                   | Hearing Exam           | $0 copay                | Fitness Program through Renew Active            | Fitness Membership Only: Basic membership in a fitness program at a network location at no additional cost |
@@ -309,7 +309,7 @@ Feature: 1.08. ACQ- Visitor profile AARP
       |	site	| zipcode | isMultiCounty | plantype |	planyear	| DOB        | county           | MS_testPlans  |
       |	UHC		|   90210 | NO            | MS       |	current		| 11/11/1949 | Jefferson County | Plan G,Plan A |
 
-  @providerFlow @prodRegression
+  @providerFlow 
   Scenario Outline: Verify Provider Search functional flow for unauthenticated Visitor Profile page
     Given the user is on medicare acquisition site landing page
     	|Site| <site>|
@@ -341,12 +341,12 @@ Feature: 1.08. ACQ- Visitor profile AARP
     Then Verify X out of Y provider covered information is displayed on visitor profile page
       | PlanName | <planname> |
 
-		@VisitorProfile_AARP
+		@VisitorProfile_AARP @prodRegression_AARP
     Examples: 
       |	site	| zipcode | isMultutiCounty | county          | plantype |	planyear	| planname                             | testPlans                                                                 |
       |	AARP	|   10001 | NO              | New York County | MAPD     |	current		| AARP Medicare Advantage Plan 2 (HMO) | AARP Medicare Advantage Plan 1 (HMO),AARP Medicare Advantage Plan 2 (HMO) |
       
-    @VisitorProfile_UHC
+    @VisitorProfile_UHC @prodRegression_UHC
     Examples: 
       |	site	| zipcode | isMultutiCounty | county          | plantype |	planyear	| planname                             | testPlans                                                                 |
       |	UHC		|   10001 | NO              | New York County | MAPD     |	current		| AARP Medicare Advantage Plan 2 (HMO) | AARP Medicare Advantage Plan 1 (HMO),AARP Medicare Advantage Plan 2 (HMO) |
@@ -376,9 +376,15 @@ Feature: 1.08. ACQ- Visitor profile AARP
       | Drugname | <drug1> |
     And user delets all the added drugs on visitor profile page
 
+		@VisitorProfile_AARP
+    Examples: 
+      |	site	| state   | userName 	 | password  | drug1   | zipCode |
+      |	AARP	| Alabama | mnrqavd3	 | Password@1| Lipitor |   90210 |
+      
+    @VisitorProfile_UHC
     Examples: 
       |	site	| state   | userName  | password  | drug1   | zipCode |
-      |	AARP	| Alabama | mnrqavd3 | Password@1| Lipitor |   90210 |
+      |	UHC		| Alabama | mnrqavd3 	| Password@1| Lipitor |   90210 |
 
   @providerFlowAuthenticated
   Scenario Outline: Verify Provider Search functional flow for authenticated Visitor Profile page
@@ -401,6 +407,12 @@ Feature: 1.08. ACQ- Visitor profile AARP
       | PlanName | <planname> |
     And user delets all the added providers on visitor profile page of AARP site
 
+		@VisitorProfile_AARP
+    Examples: 
+      | zipcode | isMultutiCounty | county          | userName  | password  | plantype | planname                             | testPlans                                                                 |
+      |   10001 | NO              | New York County | mnrqavd3 | Password@1| MAPD     | AARP Medicare Advantage Plan 2 (HMO) | AARP Medicare Advantage Plan 1 (HMO),AARP Medicare Advantage Plan 2 (HMO) |
+      
+   	@VisitorProfile_UHC
     Examples: 
       | zipcode | isMultutiCounty | county          | userName  | password  | plantype | planname                             | testPlans                                                                 |
       |   10001 | NO              | New York County | mnrqavd3 | Password@1| MAPD     | AARP Medicare Advantage Plan 2 (HMO) | AARP Medicare Advantage Plan 1 (HMO),AARP Medicare Advantage Plan 2 (HMO) |
@@ -432,9 +444,9 @@ Feature: 1.08. ACQ- Visitor profile AARP
 		@VisitorProfile_AARP
     Examples: 
       |	site	| state   | UID       | zipcode | isMultiCounty | county           | plantype |	planyear	| testPlans                                                                                                                                                                                                                                                        |
-      |	AARP	| Alabama | US1770330 |   90210 | NO            | Jefferson County | MAPD     |	current		| AARP Medicare Advantage SecureHorizons Focus (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO),AARP Medicare Advantage SecureHorizons Plan 2 (HMO),AARP Medicare Advantage SecureHorizons Premier (HMO),AARP Medicare Advantage SecureHorizons Essential (HMO),UnitedHealthcare Medicare Advantage Assure (HMO) |
+      |	AARP	| Alabama | US1770330 |   90210 | NO            | Jefferson County | MAPD     |	current		| AARP Medicare Advantage SecureHorizons Focus (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO),AARP Medicare Advantage SecureHorizons Plan 2 (HMO),AARP Medicare Advantage SecureHorizons Premier (HMO),UnitedHealthcare Medicare Advantage Assure (HMO) |
       
    @VisitorProfile_UHC
     Examples: 
       |	site	| state   | UID       | zipcode | isMultiCounty | county           | plantype |	planyear	| testPlans                                                                                                                                                                                                                                                        |
-      |	UHC		| Alabama | US1770330 |   90210 | NO            | Jefferson County | MAPD     |	current		| AARP Medicare Advantage SecureHorizons Focus (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO),AARP Medicare Advantage SecureHorizons Plan 2 (HMO),AARP Medicare Advantage SecureHorizons Premier (HMO),AARP Medicare Advantage SecureHorizons Essential (HMO),UnitedHealthcare Medicare Advantage Assure (HMO) |
+      |	UHC		| Alabama | US1770330 |   90210 | NO            | Jefferson County | MAPD     |	current		| AARP Medicare Advantage SecureHorizons Focus (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO),AARP Medicare Advantage SecureHorizons Plan 2 (HMO),AARP Medicare Advantage SecureHorizons Premier (HMO),UnitedHealthcare Medicare Advantage Assure (HMO) |

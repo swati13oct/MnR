@@ -69,7 +69,7 @@ Feature: 1.06.6.2 Member Plans and Documents - section: Forms And Resources - Me
 	@prod_active_ma_ind @prod_active_ma
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | fnr_sd | fnr_pdmo | fnr_ppi | fnr_rf | fnr_af | fnr_maf | fnr_or | fnr_di |
-      | 09-104 | 15129       | kkumard  | mnrs786@  | ERNIE2450    | MA       | AARP_IND_EFF_PDnR     | true   | false    | true    | true   | true   | false   | true   | true   |
+      | 09-104 | 15129       | kkumard  | mnrs786@  | haradaty32   | MA       | AARP_IND_EFF_PDnR     | true   | false    | true    | true   | true   | false   | true   | true   |
 
 	@prod_active_ma_grp @prod_active_ma
 	Examples: 

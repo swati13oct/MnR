@@ -828,7 +828,8 @@ public class BenefitsAndCoverageWebElements extends UhcDriver {
 	@FindBy(xpath = "//*[@id='plan_benefit_documents']//*/h2")
 	protected WebElement PlanDocumentsAndResourcesSectionHeader;
 
-	@FindBy(xpath = "//*[@id='benefits-quickLinksParsys']//*[@class='jumplinks']//li[not(contains(@style,'none'))]")
+	//tbd @FindBy(xpath = "//*[@id='benefits-quickLinksParsys']//*[@class='jumplinks']//li[not(contains(@style,'none'))]")
+	@FindBy(xpath = "//*[@id='benefits-quickLinksParsys']//*[@class='jumplinks']//li")
 	protected List<WebElement> directorySection;
 
 	@FindBy(xpath = "//*[@id='benefits-quickLinksParsys']/div[1]//ul//li")
