@@ -1,13 +1,14 @@
 package pages.regression.pharmaciesandprescriptions;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
 import acceptancetests.memberredesign.pharmaciesandprescriptions.RefillCheckoutSummaryStepDefinition;
 import acceptancetests.util.CommonUtility;
 
@@ -165,14 +166,17 @@ public class CheckOutSummaryPage extends CheckOutSummaryWebElements {
 	}
 
 	public boolean validatePaymentSection() {
+		scrollToView(paymentSection);
 		return validate(paymentSection, 20);
 	}
 
 	public boolean validatePreferedPaymentLabel() {
+		scrollToView(paymentSection);
 		return validate(paymentPreferredLabel, 20) && !paymentPreferredLabel.getText().isEmpty();
 	}
 
 	public boolean validatePaymentCardType() {
+		scrollToView(paymentSection);
 		return validate(paymentCreditCardImage, 20)
 				&& paymentCreditCardImage.getAttribute("alt").trim().matches(cardTypeRegex);
 	}
@@ -428,4 +432,108 @@ public class CheckOutSummaryPage extends CheckOutSummaryWebElements {
 		}
 		return null;
 	}
+
+	public void clickOnAddPayment() {
+		addPaymentCTA.click();
+	}
+
+	public void clickOnChangePayment() {
+		changePaymentCTA.click();
+	}
+
+	public PaymentMethodPage navigateToAddPaymentMethodPage() {
+		CommonUtility.waitForPageLoad(driver, addPaymentPage, 50);
+		CommonUtility.checkPageIsReady(driver);
+		System.out.println("Current URL val : " + driver.getCurrentUrl());
+		if (driver.getCurrentUrl().contains("https://uhgpghpp-stg.optum.com/")) {
+			CommonUtility.checkPageIsReady(driver);
+			return new PaymentMethodPage(driver);
+		}
+		return null;
+	}
+
+	public boolean validateNoPaymentCard() {
+		return noPaymentMethod.isDisplayed();
+	}
+
+	public PaymentMethodPage navigateToChangePaymentMethodPage() {
+		CommonUtility.waitForPageLoad(driver, changePaymentPage, 50);
+		CommonUtility.checkPageIsReady(driver);
+		System.out.println("Current URL val before if condition inside navigateToChangePaymentMethodPage() is : "
+				+ driver.getCurrentUrl());
+		if (driver.getCurrentUrl().contains("pharmacy/overview.html#/medication-management")) {
+			System.out.println("Current URL val inside if condition inside navigateToChangePaymentMethodPage() is "
+					+ driver.getCurrentUrl());
+			CommonUtility.checkPageIsReady(driver);
+			return new PaymentMethodPage(driver);
+		}
+		return null;
+	}
+
+	public boolean validateNotDisplayedAsPreffered() {
+		try {
+			paymentPreferredLabel.isDisplayed();
+			return false;
+		} catch (NoSuchElementException e) {
+			return true;
+		}
+	}
+
+	public boolean validateAutoRefillField() {
+		return medicationEligibleForAutoRefillEnrollment.size() > 0;
+	}
+
+	public boolean validateAutoRefillOffUnCheckedBox() {
+		System.out.println("Auto Refill OFF Count :: " + autoRefillOffLabel.size());
+		return autoRefillOffLabel.size() > 0;
+	}
+
+	public boolean validateAutoRefillOnCheckedBox() {
+		System.out.println("Auto Refill ON Count :: " + autoRefillOnLabel.size());
+		return autoRefillOnLabel.size() > 0;
+	}
+	
+	public boolean validateAutoRefillOffCheckedBox() {
+		System.out.println("Auto Refill Off Count :: " + autoRefillOffLabel.size());
+		return autoRefillOffLabel.size() > 0;
+	}
+
+	public void deselectAutorefillCheckbox() {
+		if (validateAutoRefillOnCheckedBox()) {
+			autoRefillOnLabel.get(0).click();
+			System.out.println("Auto Refill On checkbox is deselected");
+		}
+	}
+	
+	//Kiran
+	public void selectAutorefillCheckbox() {
+		autoRefillOFFCheckbox.click();
+		/*if (validateAutoRefillOnCheckedBox()) {			
+			autoRefillOFFCheckbox.get(0).click();
+			
+			System.out.println("Auto Refill OFF checkbox is selected");
+		}*/
+	}
+
+	public boolean validateAutoRefillDisenrollmentPage() {
+		return validate(autoRefillDisenrollmentPage, 30);
+	}
+		
+	public boolean validateAutoRefillEnrollmentPage() {
+		return validate(autoRefillEnrollmentPage, 30);
+	}
+
+	public void ContinueOrCancelAutorefillOn() {
+		cancelAutoRefillPage.click();
+	}
+	
+	public void enrollAutorefillCheckbox() {
+		changeAutoRefillEnrollment.click();
+	}
+	
+	public void stopAutorefillCheckbox() {
+		changeAutoRefillEnrollment.click();
+	}
+	
+	
 }
