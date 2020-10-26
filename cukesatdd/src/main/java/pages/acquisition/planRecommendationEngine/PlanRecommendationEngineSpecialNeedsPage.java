@@ -82,13 +82,13 @@ public class PlanRecommendationEngineSpecialNeedsPage extends UhcDriver {
 	@FindBy(css = "uhc-checkbox-group>fieldset>div:nth-child(4)>uhc-accordion>div .accordion-header")
 	private WebElement snpNursinghomeAccordion;
 	
-	@FindBy(css = "uhc-checkbox-group>fieldset>div:nth-child(2)>uhc-accordion>div .accordion-header>div:nth-child(1)>svg")
+	@FindBy(css = "uhc-checkbox-group>fieldset>div:nth-child(2)>uhc-accordion>div .accordion-header>div:nth-child(1)")
 	private WebElement snpMedicaidAccordionCarrot;
 	
-	@FindBy(css = "uhc-checkbox-group>fieldset>div:nth-child(3)>uhc-accordion>div .accordion-header>div:nth-child(1)>svg")
+	@FindBy(css = "uhc-checkbox-group>fieldset>div:nth-child(3)>uhc-accordion>div .accordion-header>div:nth-child(1)")
 	private WebElement snpConditionsAccordionCarrot;
 	
-	@FindBy(css = "uhc-checkbox-group>fieldset>div:nth-child(4)>uhc-accordion>div .accordion-header>div:nth-child(1)>svg")
+	@FindBy(css = "uhc-checkbox-group>fieldset>div:nth-child(4)>uhc-accordion>div .accordion-header>div:nth-child(1)")
 	private WebElement snpNursinghomeAccordionCarrot;
 	
 	@FindBy(css = "uhc-checkbox-group>fieldset>div:nth-child(2)>uhc-accordion>div .accordion-header>div:nth-child(2)>span")
