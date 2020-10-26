@@ -123,7 +123,8 @@ public class PlanRecommendationEngineCostPreferencesPageMobile extends UhcDriver
 	public void costPreferencepageFunctional(String preference) {
 		System.out.println("Cost Preferences Page Functional Operations");
 		costPreferencepageOptions(preference);
-		continueBtn.click();
+		jsClickNew(continueBtn);
+		//continueBtn.click();
 		System.out.println("Validating " + page + " page Continue button functionality");	
 		}
 

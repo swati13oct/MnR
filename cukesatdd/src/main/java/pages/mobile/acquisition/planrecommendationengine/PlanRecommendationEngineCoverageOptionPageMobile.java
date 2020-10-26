@@ -115,11 +115,13 @@ public class PlanRecommendationEngineCoverageOptionPageMobile extends UhcDriver 
 			System.out.println("Plan Type " + planType + " Clicked");
 		} else if (planType.equalsIgnoreCase("MA")) {
 			validate(plantypeMA);
-			plantypeMA.click();
+			//plantypeMA.click();
+			jsClickNew(plantypeMA);
 			System.out.println("Plan Type " + planType + " Clicked");
 		} else if (planType.equalsIgnoreCase("PDP")) {
 			validate(plantypePDP);
-			plantypePDP.click();
+			//plantypePDP.click();
+			jsClickNew(plantypePDP);
 			System.out.println("Plan Type " + planType + " Clicked");
 		} else if (planType.equalsIgnoreCase("None")) {
 			validate(plantypeNone);

@@ -194,7 +194,7 @@ public class PlanRecommendationEngineLandingAndZipcodeMobilePages extends UhcDri
 		// waitTillElementClickableInTime(getStartedBtn, 45);
 		// waitTillElementClickableInTime(getStartedBtn1, 45);
 		System.out.println("Before clicking GetStarted");
-		// threadsleep(5000);
+		MobileMenu();
 		jsClickNew(getStartedBtn);
 		System.out.println("After clicking GetStarted");
 		zipcodePage();

@@ -75,17 +75,11 @@ public class PlanRecommendationEngineAdditionalServicesPageMobile extends UhcDri
 	@FindBy(css = "div.ng-star-inserted:nth-of-type(1)>fieldset.radioGroupOpt:nth-of-type(1)>legend.primary-question-tex")
 	private WebElement dentalQuestion;
 
-	@FindBy(css = "div.ng-star-inserted:nth-of-type(1)>fieldset.radioGroupOpt:nth-of-type(1) uhc-radio:nth-child(1)")
+	@FindBy(css = "div.ng-star-inserted:nth-of-type(1)>fieldset.radioGroupOpt:nth-of-type(1) uhc-radio:nth-child(1) span.radio-container")
 	private WebElement dentalYes;
 
-	@FindBy(css = "div.ng-star-inserted:nth-of-type(1)>fieldset.radioGroupOpt:nth-of-type(1) uhc-radio:nth-child(2)")
+	@FindBy(css = "div.ng-star-inserted:nth-of-type(1)>fieldset.radioGroupOpt:nth-of-type(1) uhc-radio:nth-child(2) span.radio-container")
 	private WebElement dentalNo;
-
-	// @FindBy(css = "label[for='radio-11-input']")
-	// private WebElement dentalNo;
-	//
-	// @FindBy(css = "label[for='radio-13-input']")
-	// private WebElement hearingNo;
 
 	@FindBy(css = "div.ng-star-inserted:nth-of-type(1)>fieldset.radioGroupOpt:nth-of-type(1) uhc-alert")
 	private WebElement dentalError;
@@ -93,10 +87,10 @@ public class PlanRecommendationEngineAdditionalServicesPageMobile extends UhcDri
 	@FindBy(css = "div.ng-star-inserted:nth-of-type(2)>fieldset.radioGroupOpt:nth-of-type(1)>legend.primary-question-tex")
 	private WebElement hearingQuestion;
 
-	@FindBy(css = "div.ng-star-inserted:nth-of-type(2)>fieldset.radioGroupOpt:nth-of-type(1) uhc-radio:nth-child(1)")
+	@FindBy(css = "div.ng-star-inserted:nth-of-type(2)>fieldset.radioGroupOpt:nth-of-type(1) uhc-radio:nth-child(1) span.radio-container")
 	private WebElement hearingYes;
 
-	@FindBy(css = "div.ng-star-inserted:nth-of-type(2)>fieldset.radioGroupOpt:nth-of-type(1) uhc-radio:nth-child(2)")
+	@FindBy(css = "div.ng-star-inserted:nth-of-type(2)>fieldset.radioGroupOpt:nth-of-type(1) uhc-radio:nth-child(2) span.radio-container")
 	private WebElement hearingNo;
 
 	@FindBy(css = "div.ng-star-inserted:nth-of-type(2)>fieldset.radioGroupOpt:nth-of-type(1) uhc-alert")
@@ -105,10 +99,10 @@ public class PlanRecommendationEngineAdditionalServicesPageMobile extends UhcDri
 	@FindBy(css = "div.ng-star-inserted:nth-of-type(3)>fieldset.radioGroupOpt:nth-of-type(1)>legend.primary-question-tex")
 	private WebElement visionQuestion;
 
-	@FindBy(css = "div.ng-star-inserted:nth-of-type(3)>fieldset.radioGroupOpt:nth-of-type(1) uhc-radio:nth-child(1)")
+	@FindBy(css = "div.ng-star-inserted:nth-of-type(3)>fieldset.radioGroupOpt:nth-of-type(1) uhc-radio:nth-child(1) span.radio-container")
 	private WebElement visionYes;
 
-	@FindBy(css = "div.ng-star-inserted:nth-of-type(3)>fieldset.radioGroupOpt:nth-of-type(1) uhc-radio:nth-child(2)")
+	@FindBy(css = "div.ng-star-inserted:nth-of-type(3)>fieldset.radioGroupOpt:nth-of-type(1) uhc-radio:nth-child(2) span.radio-container")
 	private WebElement visionNo;
 
 	@FindBy(css = "div.ng-star-inserted:nth-of-type(3)>fieldset.radioGroupOpt:nth-of-type(1) uhc-alert")
@@ -117,10 +111,10 @@ public class PlanRecommendationEngineAdditionalServicesPageMobile extends UhcDri
 	@FindBy(css = "div.ng-star-inserted:nth-of-type(4)>fieldset.radioGroupOpt:nth-of-type(1)>legend.primary-question-tex")
 	private WebElement fitnessQuestion;
 
-	@FindBy(css = "div.ng-star-inserted:nth-of-type(4)>fieldset.radioGroupOpt:nth-of-type(1) uhc-radio:nth-child(1)")
+	@FindBy(css = "div.ng-star-inserted:nth-of-type(4)>fieldset.radioGroupOpt:nth-of-type(1) uhc-radio:nth-child(1) span.radio-container")
 	private WebElement fitnessYes;
 
-	@FindBy(css = "div.ng-star-inserted:nth-of-type(4)>fieldset.radioGroupOpt:nth-of-type(1) uhc-radio:nth-child(2)")
+	@FindBy(css = "div.ng-star-inserted:nth-of-type(4)>fieldset.radioGroupOpt:nth-of-type(1) uhc-radio:nth-child(2) span.radio-container")
 	private WebElement fitnessNo;
 
 	@FindBy(css = "div.ng-star-inserted:nth-of-type(4)>fieldset.radioGroupOpt:nth-of-type(1) uhc-alert")
@@ -171,56 +165,49 @@ public class PlanRecommendationEngineAdditionalServicesPageMobile extends UhcDri
 		validate(hearingQuestion);
 		validate(visionQuestion);
 		validate(fitnessQuestion);
-		Actions action = new Actions(driver);
-
 		if (dental.equalsIgnoreCase("Yes")) {
-			scrollToView(dentalYes);
-			jsClickNew(dentalYes);
 			// dentalYes.click();
+			jsClickNew(dentalYes);
 			System.out.println("additional Type Dental " + dental + " Clicked");
 		}
 		if (dental.equalsIgnoreCase("No")) {
-
-			scrollToView(dentalNo);
+			// dentalNo.click();
 			jsClickNew(dentalNo);
 			System.out.println("additional Type Dental " + dental + " Clicked");
-
 		}
 		if (hearing.equalsIgnoreCase("Yes")) {
-			scrollToView(hearingYes);
-			hearingYes.click();
+			// hearingYes.click();
+			jsClickNew(hearingYes);
 			System.out.println("additional Type Hearing " + hearing + " Clicked");
 		}
 		if (hearing.equalsIgnoreCase("No")) {
-			scrollToView(hearingNo);
-			action.moveToElement(hearingNo).click().perform();
 			// hearingNo.click();
-			// jsClickNew(hearingNo);
+			jsClickNew(hearingNo);
 			System.out.println("additional Type Hearing " + hearing + " Clicked");
 		}
 		if (vision.equalsIgnoreCase("Yes")) {
-			scrollToView(visionYes);
-			visionYes.click();
+			// visionYes.click();
+			jsClickNew(visionYes);
 			System.out.println("additional Type Vision " + vision + " Clicked");
 		}
 		if (vision.equalsIgnoreCase("No")) {
-			scrollToView(visionNo);
-			action.moveToElement(visionNo).click().perform();
-
+			// visionNo.click();
+			jsClickNew(visionNo);
 			System.out.println("additional Type Vision " + vision + " Clicked");
 		}
 		if (fitness.equalsIgnoreCase("Yes")) {
-			scrollToView(fitnessYes);
-			fitnessYes.click();
+			// fitnessYes.click();
+			jsClickNew(fitnessYes);
 			System.out.println("additional Type Fitness " + fitness + " Clicked");
 		}
 		if (fitness.equalsIgnoreCase("No")) {
-			scrollToView(fitnessNo);
-			action.moveToElement(fitnessNo).click().perform();
-
+			// fitnessNo.click();
+			jsClickNew(fitnessNo);
 			System.out.println("additional Type Fitness " + fitness + " Clicked");
 		}
 	}
+	
+	
 	// Selecting additional options and processed to Additional Service Page
 
 	public void additionalpageFunctional(String additionalOptions) {

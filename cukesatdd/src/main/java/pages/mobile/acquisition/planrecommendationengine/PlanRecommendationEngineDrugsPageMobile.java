@@ -272,7 +272,7 @@ public class PlanRecommendationEngineDrugsPageMobile extends UhcDriver {
 		//continueBtn.click();
 		jsClickNew(continueBtn);
 		System.out.println("Validating " + page + " page Continue button functionality");
-		desktopCommonUtils.nextPageValidation(page.toUpperCase() + "skip");
+		//desktopCommonUtils.nextPageValidation(page.toUpperCase() + "skip");
 	}
 
 	// Drug option selects in Drug page
@@ -343,7 +343,7 @@ public class PlanRecommendationEngineDrugsPageMobile extends UhcDriver {
 		jsClickNew(continueBtn);
 		//continueBtn.click();
 		System.out.println("Validating " + page + " page Continue button functionality");
-		desktopCommonUtils.nextPageValidation(page.toUpperCase() + "skip");
+		//desktopCommonUtils.nextPageValidation(page.toUpperCase() + "skip");
 	}
 
 	// Fetch the drug details and compare with DCE

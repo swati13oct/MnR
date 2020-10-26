@@ -1718,7 +1718,8 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 			WebElement addToCompare = driver.findElement(By.xpath("//*[contains(text(),\'" + planName
 					+ "\')]/ancestor::div[contains(@class, 'module-plan-overview')]//div[contains(@class ,'compare-box')]//span[contains(@class ,'ng-scope')]/label"));
 			validateNew(addToCompare);
-			addToCompare.click();
+			//addToCompare.click();
+			jsClickNew(addToCompare);
 		}
 
 	}
@@ -2056,12 +2057,12 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 		if (!planType.equals("PDP")) {
 			WebElement marketingBullets = driver.findElement(By.xpath("//*[contains(text(),\'" + planName
 					+ "\')]/ancestor::div[contains(@class, 'module-plan-overview')]//ul[contains(@class ,'highlight-list')]"));
-			validateNew(marketingBullets);
+			validateNew(marketingBullets,5);
 		}
 		if (planType.equals("PDP")) {
 			WebElement marketingBullets = driver.findElement(By.xpath("(//*[contains(text(),\'" + planName
 					+ "\')]/ancestor::div[contains(@class, 'module-plan-overview')]//ul)[2]"));
-			validateNew(marketingBullets);
+			validateNew(marketingBullets,5);
 		}
 
 	}
