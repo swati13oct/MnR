@@ -412,6 +412,12 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	
 	@FindBy(id = "logged-username")
 	private WebElement guestProfileLink;
+	
+	@FindBy(xpath = "//*[@id='enrollmentPopup']/..")
+	private WebElement savedPlansPopup;
+	
+	@FindBy(xpath = "//*[@id='enrollmentPopup']/..//*[@class='uhc-modal__close']")
+	private WebElement savedPlansPopupCloseIcon;
 
 
    	//String ChatSamText= "Chat with a Licensed Insurance Agent";
@@ -2575,8 +2581,15 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	 * @return
 	 */
 	public VisitorProfilePage navigateToNewVisitorProfilePage() {
+		try{
+			if(savedPlansPopup.isDisplayed()) {
+				savedPlansPopupCloseIcon.click();
+			}
+		}catch(Exception e) {
+			System.out.println("Saved Plans modal not displayed");
+		}
 		waitforElement(shoppingCartIcon);
-		//shoppingCartIcon.click();
+		shoppingCartIcon.click();
 		guestProfileLink.click();
 		//Actions actions = new Actions(driver);
 		//actions.moveToElement(guestProfileLink);
