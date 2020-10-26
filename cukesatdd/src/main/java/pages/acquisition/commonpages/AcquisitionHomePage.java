@@ -274,7 +274,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
     @FindBy(id="dupIconFlyOut")
     private WebElement shoppingCartIcon;
     
-	@FindBy(xpath = "//*[@id='sam-call-button']//*[contains(@class,'sam__button__text desktop')]")
+	@FindBy(xpath = "//button[@id='sam-call-button']//*[contains(@class,'sam__button__text desktop')]")
    	private WebElement callsam;
    	
    	//@FindBy(xpath = "//*[@id='sam-call-button']/div/span[1]")
@@ -1479,20 +1479,22 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		}
 		
 		public AcquisitionHomePage  validateCallpopup() throws InterruptedException {
-			String path = driver.getCurrentUrl();
-			System.out.println(path);
-			driver.navigate().to(testSiteUrl);
-			CommonUtility.checkPageIsReady(driver);
-			driver.navigate().to(path);
-			CommonUtility.checkPageIsReady(driver);
-			CheckiPerseptions();
-			validate(callsamtooltip);
-//			jsClickNew(pageheader);
-			threadsleep(3000);
-			jsClickNew(callsam);
-//			callsam.click();
-			System.out.println("@@@@@@@@@@@@@@@ Call Icon Clicked @@@@@@@@@@@@@@@");
-			driver.switchTo().activeElement();
+			int retry = 1;
+			do	{
+				driver.navigate().refresh();
+				CommonUtility.checkPageIsReady(driver);
+				CheckiPerseptions();
+				validate(callsamtooltip);
+				jsClickNew(callsam);
+				System.out.println("@@@@@@@@@@@@@@@ Call Icon Clicked @@@@@@@@@@@@@@@");
+				driver.switchTo().activeElement();
+//				System.out.println(CallSamTFN.getText());
+//				CallSamTFNClose.click();
+//				validateNew(callsam);
+				System.out.println("Call Sam checking for "+retry+" times");
+				retry++;
+			} while (!validate(CallSamTFN) && (retry<6));
+			
 			System.out.println(CallSamTFN.getText());
 			CallSamTFNClose.click();
 			validateNew(callsam);		
