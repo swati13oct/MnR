@@ -866,6 +866,63 @@ Feature: 1.01 Member  benefits and Coverage page
     Examples: 
       | TID   | planType | memberType     | copayCategory | language | name       | memberid     | effectivedate | monthlypremium | extrahelp            | Identifier       | count | rider   |
       | 15245 | MAPD     | Individual_BnC | LIS 1         | ENGLISH  | DBAD ADFED | 919744565-00 | 01/01/2019    | Not Available  | Extra Help Level : 1 | IndEffectiveAARP |     7 | Rider   |
+      
+   @DSNP-C&S-M&R
+  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify PDF section is in place on Benefits and Coverage page for Lis user
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type      | <planType>      |
+      | Member Type    | <memberType>    |
+      | Copay Category | <copayCategory> |
+    Then The user navigates to Benefits and Coverage page
+      | Plan Type | <planType> |
+	Then user verifies presence of jump links
+      | Plan Type  | <planType>   |
+      | Rider      | <rider>      |
+      | MemberType | <memberType> |
+      | identifier | <Identifier> |
+    And user clicks on the jump links and checks respective sections
+      | Plan Type  | <planType>   |
+      | Rider      | <rider>      |
+      | MemberType | <memberType> |
+      | identifier | <Identifier> |
+    And verifies links irrelevant to the plan type are not displayed
+      | Plan Type  | <planType>   |
+      | Rider      | <rider>      |
+      | Count      | <count>      |
+      | MemberType | <memberType> |
+    And the user validates Lis member plan overview section
+      | Name            | <name>           |
+      | Member ID       | <memberid>       |
+      | Effective Date  | <effectivedate>  |
+      | Monthly premium | <monthlypremium> |
+      | Extra Help      | <extrahelp>      |
+    And the user validates headers on Bnc page for Dsnp indi members
+      | Plan Type | <planType> |
+    And the user validates the Out of Pocket Max section for Dsnp indi member
+    	 | Plan Type | <planType> |
+    And the user view the LIS Drug Copays & Discounts header
+    And the user validates Drug coverage header and text under the section
+    And the user validates text for the Look Up Drugs section
+    And the user validates Look Up Drugs button should be visible
+      | Plan Type | <planType> |
+    And the user validates text for the Locate a Pharmacy section
+    And the user validates Locate a Pharmacy button should be visible
+    And the user validates the Learn More section link for stage
+    And the user validates tier link should not display
+    And the user validates view and document label
+    And the user validates static links
+      | Plan Type | <planType> |
+    And the user validates the language dropdown and the value displayed by default and selects new value in dropdown successfully
+      | Language | <language> |
+    #note: moved to footer feature
+    #And the user validates Needhelp section
+    And the user clicks on More Information link
+    And the user validates contactus section
+
+    Examples: 
+      | TID | planType   | memberType         | copayCategory | language | name       | memberid     | effectivedate | monthlypremium | extrahelp            | Identifier       | count | 
+      | x01 | DSNP-MAPD  | Individual_Bnc_C&S | LIS 2         | ENGLISH  | DBAD ADFED | 919744565-00 | 01/01/2019    | Not Available  | Extra Help Level : 2 | IndEffectiveAARP |     6 | 
+      | x02 | DSNP-MAPD  | Individual_Bnc_M&R | LIS 2         | ENGLISH  | DBAD ADFED | 919744565-00 | 01/01/2019    | Not Available  | Extra Help Level : 2 | IndEffectiveAARP |     6 |   
 	
   #TC22_NON LIS Ind plan member(MAPD)- Drug Cost table
   @benefitsAndCoverage14 @CMFedDrugNonLis @deprecated
