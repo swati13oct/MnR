@@ -35,7 +35,7 @@ import pages.regression.benefitandcoverage.ValueAddedServicepage;
 import pages.regression.testharness.TestHarness;
 
 /**
- * Functionality: Benefits and Coverage page
+ * Functionality: Benefits and Coverage page 
  */
 public class BenefitsAndCoverageUmsStepDefinition {
 
