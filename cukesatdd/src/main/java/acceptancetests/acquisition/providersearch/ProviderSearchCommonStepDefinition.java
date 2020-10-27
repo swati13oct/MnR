@@ -370,5 +370,16 @@ public class ProviderSearchCommonStepDefinition {
 				.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
 		Assert.assertTrue("Provider coverage Info not updated", vppPlanDetailsPage.providerinfo());
 	}
+	
+	@When("^user selects a Hospitals and retuns to VPP page$")
+	public void user_selects_Hospitals_and_return_vpp_page() {
+		{
+			ProviderSearchPage providerSearchPage = (ProviderSearchPage) getLoginScenario()
+					.getBean(PageConstants.PROVIDER_SEARCH_PAGE);
+			VPPPlanSummaryPage plansummaryPage = providerSearchPage.selectsHospitals();
+			Assert.assertTrue("Not able to return to Plan Summary page", plansummaryPage != null);
+
+		}
+	}
 }
 
