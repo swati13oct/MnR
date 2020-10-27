@@ -565,7 +565,7 @@ public class ReviewSubmitPage extends UhcDriver{
 		String AuthAddressDisplay = detailsMap.get("Authorization Address");
 		String AuthApartmentSuiteDisplay = detailsMap.get("Authorization Apartment Suite");
 		String AuthCityDisplay = detailsMap.get("Authorization City");
-		String AuthStateDisplay = detailsMap.get("Authorization Phone No");
+		String AuthStateDisplay = detailsMap.get("Authorization State");
 		String AuthZipDisplay = detailsMap.get("Auth Zip Display");
 		String AuthPhoneNumberDisplay= detailsMap.get("Authorization Phone No");
 		String AuthAgreeDisplay = detailsMap.get("Authorization Agree");
@@ -657,8 +657,8 @@ public class ReviewSubmitPage extends UhcDriver{
 				actualText=actualText.replaceAll("-", "");
 			}
 			
-		//result&=actualText.equalsIgnoreCase(expectedValue);
-		result&=actualText.contains(expectedValue);
+		result&=actualText.equalsIgnoreCase(expectedValue);
+		//result&=actualText.contains(expectedValue);
 		System.out.println(expectedValue +" "+element.getText()+" "+result);
 		if(!result) {
 			System.out.println("Review and Submit Pages validation failed for -----------------------" +" "+element.getText());
