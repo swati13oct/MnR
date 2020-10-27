@@ -131,7 +131,7 @@ Feature: 1.03 Member Preferences page
 
     Examples: 
       | TID   | planType       | memberType              |
-   #  | 15310 | Combo_FED_SHIP | EPMPEnabled_ProfilePref |
+      | 15310 | Combo_FED_SHIP | EPMPEnabled_ProfilePref |
       | 15310 | Combo_PDP_SSUP | EPMPEnabled_ProfilePref |
       
   @CommunicationPreferences05 @NoEPMPpreferences @regressionMember
@@ -175,5 +175,5 @@ Feature: 1.03 Member Preferences page
     Examples: 
       | FID    | planType                 | memberType             | planName                      |
       | 276629 | SHIP                     | SHIP_ProfilePref       | AARP MEDICARE SUPPLEMENT PLAN |
-      | 276629 | SHIP                     | COMBO_SHIP_ProfilePref | AARP GROUP HOSPITAL PLAN      |
+      | 276629 | SHIP                     | COMBO_SHIP_ProfilePref | AARP MEDICARE SUPPLEMENT PLAN |
       

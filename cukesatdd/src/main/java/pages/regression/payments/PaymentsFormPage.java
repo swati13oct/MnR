@@ -250,6 +250,7 @@ checkForIPerceptionModel(driver);
 		lastNameField.sendKeys(lastName);
 		jsClickNew(ElectronicSignatureInput);
 		TestHarness.checkForIPerceptionModel(driver);
+		TestHarness.checkForIPerceptionModel(driver);
 		ContinueButton.click();
 		System.out.println("Clicked on Continue button");
 		try {

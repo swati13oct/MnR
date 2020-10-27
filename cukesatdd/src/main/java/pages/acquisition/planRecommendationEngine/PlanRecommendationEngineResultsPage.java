@@ -179,7 +179,7 @@ public class PlanRecommendationEngineResultsPage extends UhcDriver {
 	@FindBy(css = "#mainBody .swiper-container .module-plan-overview:nth-of-type(1) h2")
 	private WebElement MS1stPlanName;
 
-	@FindBy(css = "#mainBody .swiper-container .module-plan-overview:nth-of-type(2) .swiper-content>a")
+	@FindBy(css = "#mainBody .swiper-container .module-plan-overview:nth-of-type(2) .swiper-content .apply-button")
 	private WebElement MS1stPlanEnroll;
 	
 	@FindBy(css = "div[data-rel='#plan-list-3']")
@@ -1343,6 +1343,8 @@ public void useraddDrugsVPP(String drugDetails) {
 }
 
 public boolean changePlanyear(String year) {
+
+	jsClickNew(MAViewPlansLink);
 	// Checking and Changing to Current Year
 	if (year.equalsIgnoreCase("current")) {
 		if (validate(currentPlanYear, 15)) {
@@ -1370,7 +1372,8 @@ public boolean changePlanyear(String year) {
 public boolean checkPlanyear(String year) {
 	// Checking Current year selection
 	try {
-		MAViewPlansLink.click();
+		//MAViewPlansLink.click();
+		jsClickNew(MAViewPlansLink);
 	if (year.equalsIgnoreCase("current")) {
 		if (validate(currentPlanYear, 15) && currentPlanYearSelected.getAttribute("id").length()>0) {
 			return true;

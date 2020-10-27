@@ -39,7 +39,6 @@ Feature: S1.1 To test Member Auth premium payment flows Micro App.
       | MemUsername | <memUserName> |
     And user clicks on member to select
     And the user navigates to payments overview page
-    Then User Scrolls down and validate that Payment History Section and scrolls up
     And user clicks on Update Automatic payments on payment overview page for Ship
     And user selects checking Account on Update Automatic recurring payments page and Click on Next
     And the user clicks on cancel button in One time EFT or Recurring EFT flow
@@ -48,7 +47,7 @@ Feature: S1.1 To test Member Auth premium payment flows Micro App.
       | UID     | username | password | memUserName       | planType |
       | F243897 | jkuma14  | Brock@03 | vernajohnson19651 | SHIP     |
 
-  @regressionMemberPROD
+  @regressionMemberPROD @sanityMemberPROD2
   Scenario Outline: UID: <UID> -plan: <planType> - Test Case 09 - Verify SHIP Setup Recurring EFT flow
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
@@ -58,7 +57,6 @@ Feature: S1.1 To test Member Auth premium payment flows Micro App.
       | MemUsername | <memUserName> |
     And user clicks on member to select
     And the user navigates to payments overview page
-    Then User Scrolls down and validate that Payment History Section and scrolls up
     And user clicks on Setup Automatic payments on payment overview page for Ship
     And user Enters all Mandatory fields on form page and click on Electronic Signature and click on Contuine for Setup Recurring for Ship
       | Routing number             | <routingNo>        |

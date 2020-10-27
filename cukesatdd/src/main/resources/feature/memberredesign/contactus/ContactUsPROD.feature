@@ -20,7 +20,7 @@ Scenario Outline: UID: <UID> -Plan Type: <planType> Verify labels and telephone 
     Examples:   
     | UID        | username | password | member            | planType      | techSupportTFN     | planSupportTFN    |
 	| TestCase1  | jkuma14  | Brock@03 | LMHOCHSCHILD11    |	MAPD       |	1-800-721-0627  |	1-844-876-6177  |
-	| TestCase2  | jkuma14  | Brock@03 | MOLAR1            |	PDP        |	1-800-721-0627  |	1-866-870-3470  |
+	| TestCase2  | jkuma14  | Brock@03 | ZEUSIFER81        |	PDP        |	1-800-721-0627  |	1-866-870-3470  |
 	
 #TestCasePCP2
  @regressionMemberPROD1
@@ -166,4 +166,40 @@ Scenario Outline: UID: <UID> -Plan Type: <planType> Verify labels and telephone 
     Examples: 
       | UID   | planType | username | password | member         | phoneNumber |
       | 15224 | MAPD     |  jkuma14 | Brock@03 | LMHOCHSCHILD11 |  9999999999 |
+      
+  @sanityMemberPROD1
+Scenario Outline: UID: <UID> -Plan Type: <planType> Verify labels and telephone numbers for individual member on contactUs page 
+	Given the user is on member auth login flow page 
+	When the member is able to login with correct username and password 
+		| Username | <username> |
+		| Password | <password> |
+	And Member Enters the Username he wants to search 
+		| MemUsername | <member> |
+	And user clicks on member to select 
+    When the user navigates to contact us page in UHC site
+    Then On contactUs page the user should see Help With This Website and Help With Your Plan sections
+    | PlanType       | <planType>       |
+    | techSupportTFN | <techSupportTFN> |
+    | planSupportTFN | <planSupportTFN> |
+   
+    Examples:   
+    | UID        | username | password | member            | planType      | techSupportTFN     | planSupportTFN    |
+	| TestCase1  | jkuma14  | Brock@03 | LMHOCHSCHILD11    |	MAPD       |	1-800-721-0627  |	1-844-876-6177  |
+	
+  @sanityMemberPROD2
+Scenario Outline: UID: <UID> -Plan Type: <planType> Verify labels and telephone numbers for combo member on contactUs page
+	Given the user is on member auth login flow page 
+	When the member is able to login with correct username and password 
+		| Username | <username> |
+		| Password | <password> |
+	And Member Enters the Username he wants to search 
+		| MemUsername | <member> |
+	And user clicks on member to select 
+    When the user navigates to contact us page in UHC site
+    Then validate contactUs page for combo plan member
+    | PlanType       | <planType>       |
+   
+    Examples:   
+    | UID        | username | password | member            | planType      | 
+	| TestCase4  | jkuma14  | Brock@03 | OLGITA@68         | ComboPdpSHIP  |
     
