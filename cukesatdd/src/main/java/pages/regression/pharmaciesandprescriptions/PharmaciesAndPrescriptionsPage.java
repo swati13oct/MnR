@@ -739,11 +739,11 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 		}
 
 		// F436319 Drug Lookup
-		/*
-		 * public void validateDrugLookupCallToActionOnPnPPage() { Assert.
-		 * assertTrue("PROBLEM - unable to locate Drug Lookup call to action Tile element"
-		 * , validate(DrugLookupCallToActnBtn, 30)); }
-		 */
+		
+		 public void validateDrugLookupCallToActionOnPnPPage() { Assert.
+		 assertTrue("PROBLEM - unable to locate Drug Lookup call to action Tile element"
+		 , validate(DrugLookupCallToActnBtn, 30)); }
+		 
 
 		public void validateFindAndPriceAMedicationCallToActionOnPnPPage() {
 			Assert.assertTrue("PROBLEM - unable to locate Find and Price a Medication call to action Tile element",
@@ -887,6 +887,11 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 			Assert.assertTrue("PROBLEM - unable to locate Find And Price Call to Action at First Position",
 					FindAndPriceCallToActnBtn.getAttribute("data-cta-position").equals(position));
 		}
+		
+		public void validateFirstPositionOfDrugLookupCallToActionOnPnPPage(String position) {
+			Assert.assertTrue("PROBLEM - unable to locate Drug Lookup Call to Action at First Position",
+					FindAndPriceCallToActnBtn.getAttribute("data-cta-position").equals(position));
+		}
 
 		public void validateSecondPositionOfPharmacyLocatorCallToActionOnPnPPage(String position) {
 			Assert.assertTrue("PROBLEM - unable to locate Pharmacy Locator Call to Action at Second Position",
@@ -894,7 +899,7 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 		}
 
 		public void validateThirdPositionOfOrderPrescriptionCallToActionOnPnPPage(String position) {
-			Assert.assertTrue("PROBLEM - unable to locate Pharmacy Locator Call to Action at Third Position",
+			Assert.assertTrue("PROBLEM - unable to locate Order Prescription Call to Action at Third Position",
 					OrderPrescriptionCallToActnBtn.getAttribute("data-cta-position").equals(position));
 		}
 		
@@ -1168,17 +1173,32 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 			Assert.assertTrue("PROBLEM - unable to locate Find and Price call to action Image element",
 					pnpValidate(FindAndPriceCTAImg));
 		}
+		
+		public void validateImageDrugLookupCallToActionOnPnPPage() {
+			Assert.assertTrue("PROBLEM - unable to locate Drug Lookup call to action Image element",
+					pnpValidate(DrugLookupCTAImg));
+		}
 
 		// F436319
 		public void validateTitleFindAndPriceCallToActionOnPnPPage() {
 			Assert.assertTrue("PROBLEM - unable to locate Find and Price call to action Title element",
 					pnpValidate(FindAndPriceCTATitle));
 		}
+		
+		public void validateTitleDrugLookupCallToActionOnPnPPage() {
+			Assert.assertTrue("PROBLEM - unable to locate Drug Lookup call to action Title element",
+					pnpValidate(DrugLookupCTATitle));
+		}
 
 		// F436319
 		public void validateDescriptionFindAndPriceCallToActionOnPnPPage() {
 			Assert.assertTrue("PROBLEM - unable to locate Find and Price call to action Description element",
 					pnpValidate(FindAndPriceCTADescription));
+		}
+		
+		public void validateDescriptionDrugLookupCallToActionOnPnPPage() {
+			Assert.assertTrue("PROBLEM - unable to locate Drug Lookup call to action Description element",
+					pnpValidate(DrugLookupCTADescription));
 		}
 
 		// F436319 Refill Home Delivery Call To Action
@@ -1293,7 +1313,13 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 
 		public void validateSixActivePrescriptions() {
 
-			Assert.assertTrue("PROBLEM - unable to locate Current Medications Active Prescriptions text element",
+			Assert.assertTrue("PROBLEM - unable to validate 6 active medication on MedCab",
+					sixActivePrescription());
+		}
+		
+		public void validateTenActivePrescriptions() {
+
+			Assert.assertTrue("PROBLEM - unable to validate 10 active medication on My Medication Page",
 					tenActivePrescription());
 		}
 
@@ -2330,7 +2356,14 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 			js.executeScript("arguments[0].scrollIntoView(true);", nextPageArrow);
 			nextPageArrow.click();
 		}
-
+		
+		public void clickOnPreviousPageArrow() {
+			Assert.assertTrue("PROBLEM - Previous Page Navigation is disabled", validate(previousPageArrow, 30));
+			JavascriptExecutor js = (JavascriptExecutor) driver;
+			js.executeScript("arguments[0].scrollIntoView(true);", previousPageArrow);
+			previousPageArrow.click();
+		}
+	
 		public boolean verifyRemainingPrescriptions(String totalMedication) {
 			boolean flag = false;
 			int medicationOnPageTwo = Integer.parseInt(drugsAvailableOnMyMedication.getText());
@@ -3064,6 +3097,47 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 		
 		public boolean validateOrderNumber() {
 			return validate(orderNumber, 30) && orderNumber.getText().matches("^[0-9]*$");
+		}
+		
+		//View All Medication CTA
+		public void validateViewAllMedicationCallToActionOnPnPPage() {
+			Assert.assertTrue("PROBLEM - unable to locate View All Medication call to action button element",
+					pnpValidate(ViewAllMedicationCallToActnBtn));
+		}
+
+		// F436319
+		public void validateImageViewAllMedicationCallToActionOnPnPPage() {
+			Assert.assertTrue("PROBLEM - unable to locate View All Medication call to action Image element",
+					pnpValidate(ViewAllMedicationCTAImg));
+		}
+
+		// F436319
+		public void validateTitleViewAllMedicationCallToActionOnPnPPage() {
+			Assert.assertTrue("PROBLEM - unable to locate View All Medication call to action Title element",
+					pnpValidate(ViewAllMedicationCTATitle));
+		}
+
+		// F436319
+		public void validateDescriptionViewAllMedicationCallToActionOnPnPPage() {
+			Assert.assertTrue("PROBLEM - unable to locate View All Medication  call to action Description element",
+					pnpValidate(ViewAllMedicationCTADescription));
+		}
+		
+		public void validateThirdPositionOfViewAllMedicationCallToActionOnPnPPage(String position) {
+			Assert.assertTrue("PROBLEM - unable to locate View All Medication Call to Action at Third Position",
+					ViewAllMedicationCallToActnBtn.getAttribute("data-cta-position").equals(position));
+		}
+		
+		public void clickOnViewAllMedicationCallToAction() {
+			Assert.assertTrue("PROBLEM - unable to locate View All Medication call to Action element",
+					pnpValidate(ViewAllMedicationCallToActnBtn));
+			ViewAllMedicationCallToActnBtn.click();
+		}
+		
+		public void clickDrugLookupCallToActionOnPnPPage() {
+			Assert.assertTrue("PROBLEM - unable to locate Drug Lookup call to action Tile element",
+					validate(DrugLookupCallToActnBtn, 30));
+			DrugLookupCallToActnBtn.click();
 		}
 
 }

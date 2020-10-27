@@ -481,7 +481,7 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	@FindBy(xpath = "//*[@id='needhelpsectioncontactus']/div/section/div/div[2]/div/div/div[2]/div/div/p[3]")
 	protected WebElement technicalSupportHours;
 
-	@FindBy(xpath = "//div[contains(text(),'Medication appearance subject to change')]")
+	@FindBy(xpath = "//*[contains(text(),'Medication appearance subject to change')]")
 	protected List<WebElement> Disclaimer;
 
 	@FindBy(xpath = "//span[contains(text(),'Request received')]")
@@ -719,6 +719,9 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 
 	@FindBy(xpath = "//a[@data-testid='pagination-next']")
 	protected WebElement nextPageArrow;
+	
+	@FindBy(xpath = "//a[@data-testid='pagination-prev']") 
+	protected WebElement previousPageArrow;
 
 	@FindBy(xpath = "//div[contains(text(),'My Medications (')]")
 	protected WebElement myMedicationsHeader;
@@ -1480,17 +1483,17 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	protected WebElement MedicationCostSummaryExternalIcon;
 
 	// Drug Lookup Call to Action
-	/*@FindBy(xpath = "//div[@data-testid='price-drugs-CTA']")
-	protected WebElement DrugLookupCallToActnBtn;*/
+	@FindBy(xpath = "//div[@data-testid='price-drugs-CTA']")
+	protected WebElement DrugLookupCallToActnBtn;
 
-	/*@FindBy(xpath = "//div[@data-testid='price-drugs-CTA-icon']")
-	protected WebElement DrugLookupCTAImg;*/
+	@FindBy(xpath = "//div[@data-testid='price-drugs-CTA-icon']")
+	protected WebElement DrugLookupCTAImg;
 	
-	/*@FindBy(xpath = "//h2[@data-testid='price-drugs-CTA-title']")
-	protected WebElement DrugLookupCTATitle;*/
+	@FindBy(xpath = "//h2[@data-testid='price-drugs-CTA-title']")
+	protected WebElement DrugLookupCTATitle;
 	
-	/*@FindBy(xpath = "//p[@data-testid='price-drugs-CTA-description']")
-	protected WebElement DrugLookupCTADescription;*/
+	@FindBy(xpath = "//p[@data-testid='price-drugs-CTA-description']")
+	protected WebElement DrugLookupCTADescription;
 
 	
 	@FindBy(xpath = "//div[@data-testid='price-drugs-CTA-icon']")
@@ -1736,4 +1739,17 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	
 	@FindBy(xpath="//*[@data-testid='os__header__orderNumber']//span")
 	protected WebElement orderNumber;
+	
+	//View All Medication CTA
+	@FindBy(xpath = "//div[@data-testid='view-my-medications-CTA-button')")
+	protected WebElement ViewAllMedicationCallToActnBtn;
+
+	@FindBy(xpath = "//div[@data-testid='view-my-medications-CTA-icon']")
+	protected WebElement ViewAllMedicationCTAImg;
+
+	@FindBy(xpath = "//h2[@data-testid='view-my-medications-CTA-title' and contains(text(),'View My Medications')]")
+	protected WebElement ViewAllMedicationCTATitle;
+
+	@FindBy(xpath = "//p[@data-testid='view-my-medications-CTA-description' and contains(text(),'View and manage your active medications.')]")
+	protected WebElement ViewAllMedicationCTADescription;
 }
