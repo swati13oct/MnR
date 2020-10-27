@@ -149,7 +149,7 @@ Examples:
       | enroll/ma-enrollment.html  |
       | enroll/pdp-enrollment.html | 
       
-      @samChatCallRegressionUHC1 @samChatRegressionUHC31
+      @samChatCallRegressionUHC11 @samChatRegressionUHC31
 			Examples:
 			| pagename |
       | resources.html                                       |
