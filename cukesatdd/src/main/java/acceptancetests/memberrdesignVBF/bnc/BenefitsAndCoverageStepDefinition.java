@@ -1,5 +1,7 @@
 package acceptancetests.memberrdesignVBF.bnc;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
 import org.junit.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -148,6 +150,15 @@ public class BenefitsAndCoverageStepDefinition {
 				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE_VBF);
 		benefitsCoveragePage.validateHeaders();
 	}
+	
+	@And("the user validates headers on Bnc page for Dsnp indi members")
+	public void user_validate_Dsnp_Headers() {
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		String plantype = memberAttributesMap.get("Plan Type");
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE_VBF);
+		benefitsCoveragePage.validateHeaders(plantype);
+	}
 
 	/***
 	 * 
@@ -177,6 +188,15 @@ public class BenefitsAndCoverageStepDefinition {
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
 				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE_VBF);
 		benefitsCoveragePage.validateOutofPocketMax();
+	}
+	
+	@And ("the user validates the Out of Pocket Max section for Dsnp indi member")
+	public void user_validate_OutofPocketFor_DsnpIndiMember() {
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		String plantype = memberAttributesMap.get("Plan Type");		
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE_VBF);
+		benefitsCoveragePage.validateOutofPocketMax(plantype);
 	}
 
 	/***
