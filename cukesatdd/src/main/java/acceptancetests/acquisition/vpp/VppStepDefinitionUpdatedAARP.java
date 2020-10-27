@@ -3789,19 +3789,8 @@ public void the_user_validates_the_secondary_search_by_providing_newsearchvalue_
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		aquisitionhomepage.validateUrl(url);
+		
 	}
-	
-	
-	@Then("^the user enters and validate the fields and clicks on submit$")
-	public void the_user_enters_and_validate_the_fields_and_clicks_on_submit() throws Throwable {
-		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
-				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		aquisitionhomepage.enterAndvalidateEmail();
-	    
-	}
-
-	
-
 	
 	@Given("^the user is on AARP medicare acquisition site hits Campaign URL$")
 	public void the_user_on_aarpmedicareplans_hits_Campaign_landing_page(DataTable planAttributes) throws Throwable {
