@@ -120,3 +120,45 @@ Feature: 1.14 Member Branding functionality
       | 15156 | MAPD     | NCSHP_Branding          | NON LIS       | UHC                          | dam/UCP/Images/logo/UHC.svg      | NCSHP                          | dam/UCP/Images/Images/logos-cobranding/NCSHP_Logo.svg | TC_11_ Co-branding for Group Retiree Plans -NCSHP_Branding                  | jkuma14  | Brock@03 | BFSSO-073367811~~         |
 #     | 15156 | MAPD     | Calpers_Branding  | NON LIS       | UHC                          | dam/UCP/Images/logo/UHC.svg      | optum/MR12775/CalPERS.svg      | dam/UCP/Images/Images/logos-cobranding/CalPERS_Logo_Large.svg | TC_12_ Co-branding for Group Retiree Plans         |jkuma14  | Brock@03 | skho@roadrunner.com   |
 #     | 15154 | MAPD     | ALPEEHIP_Branding | NON LIS       | UHC                          | dam/UCP/Images/logo/UHC.svg      | optum/MR15500/alpeehip.svg     | dam/UCP/Images/Images/logos-cobranding/ALPEEHIP.svg   | TC_13_ Co-branding for AL PEEHIP Plan member               |jkuma14  | Brock@03 | skho@roadrunner.com   |
+
+ @sanityMemberPROD1
+  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify_<Test Case>
+    Given the user is on member auth login flow page
+    When the member is able to login with correct username and password
+      | Username | <username> |
+      | Password | <password> |
+    And Member Enters the Username he wants to search
+      | MemUsername | <member> |
+    And user clicks on member to select
+    And verify that correct logo is displayed on the home page or test harness page
+      | Dashboard Logo      | <logoToBeDisplayedOnDashboard>     |
+      | Secondary Page Logo | <logoToBeDisplayedOnSecondaryPage> |
+    And user clicks on benefits and coverage tab on home page or test harness page
+      | PlanType | <planType> |
+    And verify that correct logo is displayed on the secondary page
+      | Secondary Page Logo | <logoToBeDisplayedOnSecondaryPage> |
+
+    Examples: 
+      | TID   | planType | memberType              | copayCategory | logoToBeDisplayedOnDashboard | logoToBeDisplayedOnSecondaryPage | Test Case                                             | username | password | member                |
+      | 15147 | SHIP     | SHIPOnly_Branding       | NON LIS       | AARP                         | dam/UCP/Images/logo/AARP.svg     | TC_02_ Branding  for AARP Plan member - SHIP   Member | jkuma14  | Brock@03 | Pramila1946           |
+
+ @sanityMemberPROD2
+  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify_<Test Case>
+    Given the user is on member auth login flow page
+    When the member is able to login with correct username and password
+      | Username | <username> |
+      | Password | <password> |
+    And Member Enters the Username he wants to search
+      | MemUsername | <member> |
+    And user clicks on member to select
+    And verify that correct logo is displayed on the home page or test harness page
+      | Dashboard Logo      | <logoToBeDisplayedOnDashboard>     |
+      | Secondary Page Logo | <logoToBeDisplayedOnSecondaryPage> |
+    And user clicks on benefits and coverage tab on home page or test harness page
+      | PlanType | <planType> |
+    And verify that correct logo is displayed on the secondary page
+      | Secondary Page Logo | <logoToBeDisplayedOnSecondaryPage> |
+
+    Examples: 
+      | TID   | planType | memberType              | copayCategory | logoToBeDisplayedOnDashboard | logoToBeDisplayedOnSecondaryPage | Test Case                                             | username | password | member                |
+      | 15152 | PCP      | PCP_Branding            | NON LIS       | PCP                          | dam/UCP/Images/logo/PCP.svg      | TC_04_ Branding for Branding for PCP Plan member      | jkuma14  | Brock@03 | marylamb823           |

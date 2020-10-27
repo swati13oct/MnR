@@ -1,7 +1,7 @@
 @regressionMemberPROD
 Feature: S1.1 To test Member Auth CHAT functionality on PROD
 
-  @regressionMemberPROD @regressionMemberPRODChatSHIP
+  @regressionMemberPROD @regressionMemberPRODChatSHIP @sanityMemberPROD1
   Scenario Outline: <Scenario> - Verify member auth functionality for SHIP member CHAT
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
@@ -18,7 +18,7 @@ Feature: S1.1 To test Member Auth CHAT functionality on PROD
       | username | password | member      |
       | pminhas  | Mnrqa001 | Pramila1946 |
 
-  @regressionMemberPROD @regressionMemberPRODGroupChat
+  @regressionMemberPROD @regressionMemberPRODGroupChat @sanityMemberPROD2
   Scenario Outline: <Scenario> - Verify member auth functionality For Group member CHAT
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password

@@ -63,8 +63,8 @@ Feature: 1.24.2 Member Individual Health Record - PROD
     @prod_ihr_ma_mapd
     Examples: 
 	    | index | FID     | username  | password  | MemUserName             | planType | memberType         | expectLink | 
-	    | 08    | F424804 | kkumard   | mnrs786@  | ERNIE2450               | MA       | IHR                | true       |
-	    | 09    | F424804 | kkumard   | mnrs786@  | SHERMANJAFFE65          | MAPD     | NONBOA_GROUP_IHR   | true       |
+	    | 08    | F424804 | kkumard   | mnrs786@  | haradaty32              | MA       | IHR                | true       |
+	    | 09    | F424804 | kkumard   | mnrs786@  | Grandmagrey123          | MAPD     | NONBOA_GROUP_IHR   | true       |
 
     @prod_ihr_pdp
     Examples: 
@@ -76,7 +76,8 @@ Feature: 1.24.2 Member Individual Health Record - PROD
     @prod_ihr_preeff_term
     Examples: 
 	    | index | FID     | username  | password  | MemUserName             | planType | memberType         | expectLink | 
-	    | 11    | F424804 | kkumard   | mnrs786@  | Ranch1955               | MA       | PREEFF_IHR         | true       |
+	 #  | 11    | F424804 | kkumard   | mnrs786@  | Ranch1955               | MA       | PREEFF_IHR         | true       |
+	    | 11    | F424804 | kkumard   | mnrs786@  | Abayne01                | MAPD     | PREEFF_IHR         | true       |
 	    | 12    | F424804 | kkumard   | mnrs786@  | BEVERLY_BOB5            | MAPD     | TERM_IHR           | false      |
 
     @prod_ihr_pdpSspCombo

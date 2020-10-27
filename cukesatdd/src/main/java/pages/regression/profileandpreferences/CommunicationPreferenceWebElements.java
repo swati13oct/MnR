@@ -143,7 +143,7 @@ public class CommunicationPreferenceWebElements extends UhcDriver {
 	@FindBy(xpath="//span[@class='edit-remove-underline']")
 	protected WebElement emailEditButtonOnIframe;
 
-	@FindBy(id="primaryEmail_0")
+	@FindBy(id="primaryEmail")
 	protected WebElement newEmailTextfield;
 
 	@FindBy(id="updatedisable")

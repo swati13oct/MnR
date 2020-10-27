@@ -32,16 +32,16 @@ Feature: 1.06.6.2a Member Plans and Documents - section: Forms And Resources Par
 	  | Section Display                    | <fnr_sd>   | 
 	  | Other Resources                    | <fnr_or>   | 
 
-	@prod_preeffective_ma_6aof7
-	Examples: 
-      | index  | TID         | username  | password  | MemUserName     | planType | memberType            | fnr_sd | fnr_or |
-      | 01-096 | xxxxx       | kkumard  | mnrs786@  | Ranch1955    | MA       | AARP_IND_PREEFF_PDnR  | false  | false  |
-#      | 02-097 | xxxxx       | kkumard  | mnrs786@  | testusername    | MA       | GROUP_PREEFF_PDnR     | false  | false  |
-
-#	@prod_preeffective_mapd_6aof7
+#	@prod_preeffective_ma_6aof7
 #	Examples: 
 #      | index  | TID         | username  | password  | MemUserName     | planType | memberType            | fnr_sd | fnr_or |
-#      | 03-098 | xxxxx       | kkumard  | mnrs786@  | testusername    | MAPD     | AARP_IND_PREEFF_PDnR  | false  | false  |
+#      | 01-096 | xxxxx       | kkumard  | mnrs786@  | Ranch1955    | MA       | AARP_IND_PREEFF_PDnR  | false  | false  |
+#      | 02-097 | xxxxx       | kkumard  | mnrs786@  | testusername    | MA       | GROUP_PREEFF_PDnR     | false  | false  |
+
+	@prod_preeffective_mapd_6aof7
+	Examples: 
+      | index  | TID         | username  | password  | MemUserName     | planType | memberType            | fnr_sd | fnr_or |
+      | 03-098 | xxxxx       | kkumard  | mnrs786@  | Abayne01          | MAPD     | AARP_IND_PREEFF_PDnR  | false  | false  |
 
 #	@prod_preeffective_pdp_6aof7
 #	Examples: 
@@ -63,7 +63,7 @@ Feature: 1.06.6.2a Member Plans and Documents - section: Forms And Resources Par
 	@prod_active_ma_ind_6aof7 @prod_active_ma_6aof7
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | fnr_sd | fnr_or |
-      | 09-104 | 15129       | kkumard  | mnrs786@  | ERNIE2450       | MA       | AARP_IND_EFF_PDnR     | true   | true   |
+      | 09-104 | 15129       | kkumard  | mnrs786@  | haradaty32      | MA       | AARP_IND_EFF_PDnR     | true   | true   |
 
 	@prod_active_ma_grp_6aof7 @prod_active_ma_6aof7
 	Examples: 
@@ -113,4 +113,9 @@ Feature: 1.06.6.2a Member Plans and Documents - section: Forms And Resources Par
 	#Examples: 
     #  | index  | TID         | username  | password  | MemUserName     | planType | memberType            | fnr_sd | fnr_or |
     #  | 19-114 | 15119,15304 | kkumard  | mnrs786@  | Pramila1946     | SHIP     | IND_EFF_PDnR          | true   | false  |
-#     | 19-120 | 15119,15304 | kkumard  | mnrs786@  | q1_feb_2020SHIP_0   | SHIP | MULTI_IND_EFF_PDnR    | true   | false  |
+    #  | 19-120 | 15119,15304 | kkumard  | mnrs786@  | q1_feb_2020SHIP_0   | SHIP | MULTI_IND_EFF_PDnR    | true   | false  |
+    
+	#@prod_preeffective_ship_6aof7
+	#Examples: 
+    #   | index  | TID         | username  | password  | MemUserName  | planType | memberType            | fnr_sd | fnr_or  |
+    #   | 21-121 | xxxxx       | kkumard   | mnrs786@  | testusername | SHIP     | IND_PREEFF_PDnR       | true   | false   |

@@ -312,7 +312,7 @@ public class VisitorProfileStepDefinition {
 		String comparePlans = givenAttributesMap.get("Test Plans");
 		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
 				.getBean(PageConstants.PLAN_COMPARE_PAGE);
-		planComparePage.validatePlansAddedonPlancompareforVisitorProfile();
+		planComparePage.validatePlansAddedonPlancompareforVisitorProfile(comparePlans);
 	}
 	
 	@And("^the user back to VPP plan summary page$")

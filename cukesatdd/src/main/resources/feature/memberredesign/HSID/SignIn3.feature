@@ -16,5 +16,5 @@ Feature: To test HSID member SignIn
       | MAPre-effective | Individual          | NON LIS       |
       | GovtTermless    | Individual          | NON LIS       |
       | PDP             | PREFFECTIVE         | NON-LIS       |
-      | SSUP            | Terminated          | NON-LIS       |
+      | MAPD            | Terminated_PnP      |	NON LIS       |
       | MA-Medsup       | FEDSHIPPREEFFECTIVE | NON-LIS       |

@@ -7,6 +7,7 @@ import java.util.Map;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -386,6 +387,16 @@ public class PersonalInformationPage extends UhcDriver{
 		if(validate(StateDisplay) && validate(ZipDisplay)){
 			StateDisplayText = StateDisplay.getText();
 			ZipDisplayText = ZipDisplay.getText();
+			
+			System.out.println("State Name Expected - "+ state +"\tState Name Displayed on page  - "+StateDisplayText);
+			System.out.println("Zip Code Name Expected : "+ZipCode+"       Displayed on page  - "+ZipDisplayText);
+			
+			if(StateDisplayText.contains(state) && ZipDisplayText.contains(ZipCode)){
+				System.out.println("Member Details Validated on Personal Information Page");
+				Validation_Flag = true;
+			}
+			else
+				Validation_Flag = false;
 
 		}
 		else{
@@ -397,8 +408,17 @@ public class PersonalInformationPage extends UhcDriver{
 			WebElement EnterZip = driver.findElement(By.xpath("//input[contains(@id,'zipCode')]"));
 			EnterZip.sendKeys(ZipCode);
 			System.out.println("C&S DSNP Plan : State selected and Zip Entered");
-			StateDisplayText = state;
+			StateDisplayText = StateSelectNC.getText();
 			ZipDisplayText = EnterZip.getText();
+			System.out.println("State Name Expected - "+ state +"\tState Name Displayed on page  - "+StateDisplayText);
+			System.out.println("Zip Code Name Expected : "+ZipCode+"       Displayed on page  - "+ZipDisplayText);
+			
+			if(StateDisplayText.contains(state) ) {//&& ZipDisplayText.contains(ZipCode)){
+				System.out.println("Member Details Validated on Personal Information Page");
+				Validation_Flag = true;
+			}
+			else
+				Validation_Flag = false;
 		}
 		
 		/*
@@ -407,15 +427,7 @@ public class PersonalInformationPage extends UhcDriver{
 		 * System.out.println("Last Name Expected : "
 		 * +LastName+"       Displayed on page  - "+LastNameDisplayText);
 		 */
-		System.out.println("State Name Expected - "+ state +"\tState Name Displayed on page  - "+StateDisplayText);
-		System.out.println("Zip Code Name Expected : "+ZipCode+"       Displayed on page  - "+ZipDisplayText);
 		
-		if(StateDisplayText.contains(state) && ZipDisplayText.contains(ZipCode)){
-			System.out.println("Member Details Validated on Personal Information Page");
-			Validation_Flag = true;
-		}
-		else
-			Validation_Flag = false;
 		return Validation_Flag;
 	}
 

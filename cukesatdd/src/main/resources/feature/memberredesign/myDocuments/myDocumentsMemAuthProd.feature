@@ -5,6 +5,42 @@ Feature: 1.06.7 Member My Documents Page- Member Auth - PROD
   #   Given feature security flag must set to true when testing on stage env
   #    | Feature           | UCPMyDocuments |
 
+  @prodSanity_Individual_MyDocuments
+  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - To validate the My Documents page E2E Scenario
+    Given the user is on member auth login flow page
+    When the member is able to login with correct username and password
+      | Username | <username> |
+      | Password | <password> |
+    And Member Enters the Username he wants to search
+      | MemUsername | <MemUserName> |
+    And user clicks on member to select
+    And user stores test input for validations
+      | Username | <MemUserName> |
+      | Plan Type    | <planType>    |
+      | Member Type  | <memberType>  |
+    #-------------- navigate to the target test page for testing
+    Then the user navigates to my Documents Page using the direct url
+      | Plan Type   | <planType>   |
+      | Member Type | <memberType> |
+    Then user validates header section content on My Documents Page
+    #----------------- Test for 12 months----------
+    And then the user searches documents for a valid Period on My documents page
+      | Search Range | Last 12 months |
+    Then I validate the Documents Table if present
+    #----------------- Test for 24 months----------
+    And then the user searches documents for a valid Period on My documents page
+      | Search Range | Last 24 months |
+    And then the user validates the Documents Table if present in past twenty four months time frame
+      | Documents Expected | <documentsExpectedInPast24Months> |
+    #----------------- Test Misc--------------------------
+    And I validate the Note  text on my Documents Page
+    And I validate the disclaimer on my Documents Page
+    
+    #------------Pass documents expected flag as Y or N only--------------
+    Examples:
+      | TID   | username  | password  | MemUserName      | planType | memberType            | documentsExpectedInPast24Months  |
+      | 10000 | ujethwa  | 221Umang  | TEAKSAMPPALA1    | MAPD     | Individual_MyDocuments|           Y                      |
+
   @prod_myDocuments01
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - To validate the My Documents page E2E Scenario
     Given the user is on member auth login flow page

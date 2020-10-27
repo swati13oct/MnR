@@ -38,16 +38,16 @@ Feature: 1.06.6.2 Member Plans and Documents - section: Forms And Resources - Me
 	  | Other Resources                    | <fnr_or>   | 
 	  | Disenrollment Information          | <fnr_di>   | 
 
-	@prod_preeffective_ma
-	Examples: 
-      | index  | TID         | username  | password  | MemUserName     | planType | memberType            | fnr_sd | fnr_pdmo | fnr_ppi | fnr_rf | fnr_af | fnr_maf | fnr_or | fnr_di |
-      | 01-096 | xxxxx       | kkumard  | mnrs786@  | Ranch1955    | MA       | AARP_IND_PREEFF_PDnR  | false  | false    | false   | false  | false  | false   | false  | false  | 
-#      | 02-097 | xxxxx       | kkumard  | mnrs786@  | testusername    | MA       | GROUP_PREEFF_PDnR     | false  | false    | false   | false  | false  | false   | false  | false  |
-
-#	@prod_preeffective_mapd
+#	@prod_preeffective_ma
 #	Examples: 
 #      | index  | TID         | username  | password  | MemUserName     | planType | memberType            | fnr_sd | fnr_pdmo | fnr_ppi | fnr_rf | fnr_af | fnr_maf | fnr_or | fnr_di |
-#      | 03-098 | xxxxx       | kkumard  | mnrs786@  | testusername    | MAPD     | AARP_IND_PREEFF_PDnR  | false  | false    | false   | false  | false  | false   | false  | false  | 
+#      | 01-096 | xxxxx       | kkumard  | mnrs786@  | Ranch1955    | MA       | AARP_IND_PREEFF_PDnR  | false  | false    | false   | false  | false  | false   | false  | false  | 
+#      | 02-097 | xxxxx       | kkumard  | mnrs786@  | testusername    | MA       | GROUP_PREEFF_PDnR     | false  | false    | false   | false  | false  | false   | false  | false  |
+
+	@prod_preeffective_mapd
+	Examples: 
+      | index  | TID         | username  | password  | MemUserName     | planType | memberType            | fnr_sd | fnr_pdmo | fnr_ppi | fnr_rf | fnr_af | fnr_maf | fnr_or | fnr_di |
+      | 03-098 | xxxxx       | kkumard  | mnrs786@  | Abayne01          | MAPD     | AARP_IND_PREEFF_PDnR  | false  | false    | false   | false  | false  | false   | false  | false  | 
 
 #	@prod_preeffective_pdp
 #	Examples: 
@@ -69,7 +69,7 @@ Feature: 1.06.6.2 Member Plans and Documents - section: Forms And Resources - Me
 	@prod_active_ma_ind @prod_active_ma
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | fnr_sd | fnr_pdmo | fnr_ppi | fnr_rf | fnr_af | fnr_maf | fnr_or | fnr_di |
-      | 09-104 | 15129       | kkumard  | mnrs786@  | ERNIE2450    | MA       | AARP_IND_EFF_PDnR     | true   | false    | true    | true   | true   | false   | true   | true   |
+      | 09-104 | 15129       | kkumard  | mnrs786@  | haradaty32   | MA       | AARP_IND_EFF_PDnR     | true   | false    | true    | true   | true   | false   | true   | true   |
 
 	@prod_active_ma_grp @prod_active_ma
 	Examples: 
@@ -118,5 +118,11 @@ Feature: 1.06.6.2 Member Plans and Documents - section: Forms And Resources - Me
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | fnr_sd | fnr_pdmo | fnr_ppi | fnr_rf | fnr_af | fnr_maf | fnr_or | fnr_di |
       | 19-114 | 15119,15304 | kkumard  | mnrs786@  | Pramila1946    | SHIP     | IND_EFF_PDnR          | true   | false    | false   | false  | false  | false   | false  | false  |
-#      | 19-120 | 15119,15304 | kkumard  | mnrs786@  | q1_feb_2020SHIP_001    | SHIP     | MULTI_IND_EFF_PDnR    | true   | false    | false   | false  | false  | false   | false  | false  |
+   #  | 19-120 | 15119,15304 | kkumard  | mnrs786@  | q1_feb_2020SHIP_001    | SHIP     | MULTI_IND_EFF_PDnR    | true   | false    | false   | false  | false  | false   | false  | false  |
+
+
+	#@prod_preeffective_ship
+	#Examples: 
+    #   | index  | TID         | username  | password  | MemUserName  | planType | memberType            | fnr_sd | fnr_pdmo | fnr_ppi | fnr_rf | fnr_af | fnr_maf | fnr_or | fnr_di |
+    #   | 21-121 | xxxxx       | kkumard   | mnrs786@  | testusername | SHIP     | IND_PREEFF_PDnR       | true   | false    | false   | false  | false  | false   | false  | false  |
     

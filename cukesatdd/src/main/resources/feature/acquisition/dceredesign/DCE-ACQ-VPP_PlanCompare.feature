@@ -2,7 +2,7 @@
 Feature: 1.10.3 ACQ-DCERedesign-VPP_PlanCompare - To test DCE - VPP Plan Compare Integration
 
   @DCE_Redesign_VPP_PlanDetails1
-  Scenario Outline: 1.10.2.1 To test the DCE Redesignflow for PlanType :  <plantype> from vpp Plan Details
+  Scenario Outline: 1.10.3.1 To test the DCE Redesignflow for PlanType :  <plantype> from vpp Plan Compare
     Given the user is on medicare acquisition site landing page
     	|Site| <site>|
     When the user performs plan search using following information
