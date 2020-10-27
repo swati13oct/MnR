@@ -31,7 +31,7 @@ Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanDetails AARP - To test DCE - VPP Plan De
       | DrugName | <drug5> |
     Then the user searches and adds the following Drug to Drug List
       | DrugName | <drug6> |
-    Then the user clicks on Review Drug Costs to Land on Drug DetailsP Page
+    Then the user clicks on Review Drug Costs to Land on Drug Details Page
     Then the user validates planName matches plan Name in VPP
     Then the user Captures Drug costs on Drug Details Page
     Then the user validates Drug Costs section
@@ -88,7 +88,7 @@ Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanDetails AARP - To test DCE - VPP Plan De
     Then the user clicks on Build Drug List to navigate to Build Drug List Page
     Then the user searches and adds the following Drug to Drug List
       | DrugName | <drug1> | 
-     Then the user clicks on Review Drug Costs to Land on Drug DetailsP Page
+     Then the user clicks on Review Drug Costs to Land on Drug Details Page
    Then the user Clicks button to VPP Plan Details Page from Drug Details Page
     Then the user validates planName matches plan Name in VPP
     Then the user verify the drug cost estimator and view plan summary on VPP detail page in AARP
@@ -210,7 +210,7 @@ Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanDetails AARP - To test DCE - VPP Plan De
     Then the user clicks on Build Drug List to navigate to Build Drug List Page
     Then the user searches and adds the following Drug to Drug List
       | DrugName | <drug1> |
-    Then the user clicks on Review Drug Costs to Land on Drug DetailsP Page
+    Then the user clicks on Review Drug Costs to Land on Drug Details Page
     Then the user verify the extra help alert message on Drug Detail Page  
     Then the user validates Drug Costs section
     Then the user validates Your Drugs sections
@@ -242,7 +242,7 @@ Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanDetails AARP - To test DCE - VPP Plan De
     Then the user clicks on Build Drug List to navigate to Build Drug List Page
     Then the user searches and adds the following Drug to Drug List
       | DrugName | <drug1> |
-    Then the user clicks on Review Drug Costs to Land on Drug DetailsP Page
+    Then the user clicks on Review Drug Costs to Land on Drug Details Page
     Then the user verify the Retail chain pharmacy on detail page
     And user clicks on change pharmacy link from details page in AARP
     Then user clicks on Keep Using This Pharmacy on change pharmacy page
