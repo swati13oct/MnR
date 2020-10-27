@@ -1,7 +1,7 @@
 #Author: Danthoori shiva
 #created Date:2/12/2019
 @Test @AARPvisitorprofile
-Feature: 1.08. ACQ- Visitor profile AARP
+Feature: 1.08. ACQ- Visitor profile - <site>
 
   @addDrugs @addDrugsULayerSmoke @visitorProfileRegressionAARP @DCE_Regression_Ulayer_VisitorProfile
   Scenario Outline: Verify user is able to add drug information to the unauthenticated visitor profile - zip - <zipCode>
