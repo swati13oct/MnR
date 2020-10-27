@@ -63,10 +63,10 @@ public class PlanRecommendationEngineCostPreferencesPage extends UhcDriver {
 	@FindBy(css = "p.all-fields-marked-wi")
 	private WebElement pageRequiredInfo;
 
-	@FindBy(css = "#custom-radio-group>fieldset>uhc-radio:nth-child(2)>label>span.radio-label-content")
+	@FindBy(css = "#custom-radio-group>fieldset>uhc-radio:nth-child(2)>label>span.radio-container")
 	private WebElement lowerPremium;
 
-	@FindBy(css = "#custom-radio-group>fieldset>uhc-radio:nth-child(3)>label")
+	@FindBy(css = "#custom-radio-group>fieldset>uhc-radio:nth-child(3)>label span.radio-container")
 	private WebElement higherPremium;
 
 	@FindBy(css = "#errorMessage")

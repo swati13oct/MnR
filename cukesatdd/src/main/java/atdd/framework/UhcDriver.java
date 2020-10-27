@@ -846,7 +846,7 @@ try {
 			}
 		}
 
-		threadsleep(2);
+		threadsleep(2000);
 		WebElement currentSysTimeElement=timeJson;
 		String currentSysTimeStr=currentSysTimeElement.getText();
 		System.out.println("currentSysTimeStr="+currentSysTimeStr);
