@@ -9,7 +9,9 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.pdfbox.pdmodel.PDDocument;
@@ -33,6 +35,7 @@ import gherkin.formatter.model.DataTableRow;
 import pages.acquisition.dceredesign.GetStartedPage;
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.pharmacyLocator.PharmacySearchPage;
+import pages.acquisition.commonpages.VPPPlanSummaryPage;
 
 /**
  * @author gumeshna
@@ -83,7 +86,7 @@ public class PlanDetailsPage extends UhcDriver {
 	@FindBy(xpath = "//*[@id='detail-0']/div/div/div[1]")
 	private WebElement medBenefitsSection;
 
-	@FindBy(xpath="//a[@id='prescriptiondrug' and contains(@class,'active')]")
+	@FindBy(xpath="//*[contains(@id,'prescriptiondrug')]")
 	private List<WebElement> presDrugTab1;
 
 	@FindBy(id = "prescriptiondrug")
@@ -92,8 +95,14 @@ public class PlanDetailsPage extends UhcDriver {
 	@FindBy(xpath = ".//*[@id='drugBenefits']")
 	private WebElement drugBenefitsSection;
 
+	@FindBy(xpath = "//*[contains(@id,'DrugListDetails')]")
+	private WebElement editDrugLink;
+	
 	@FindBy(id = "estimateYourDrugsLink")
 	private WebElement estimateDrugBtn;
+	
+	@FindBy(xpath = "//*[contains(@class,'edit-drugs-link')]")
+	private WebElement editDrugLinkPlanCost;
 
 	@FindBy(id = "plancosts")
 	private WebElement planCostsTab;
@@ -102,7 +111,8 @@ public class PlanDetailsPage extends UhcDriver {
 	@FindBy(xpath = "//*[@class='tel ng-binding']")
 	private WebElement RightRail_TFN;
 
-	@FindBy(xpath = "//a[contains(text(), 'Enroll in plan')]")
+	//@FindBy(xpath = "//a[contains(text(), 'Enroll in plan')]")
+	@FindBy(xpath = "//*[not(contains(@class,'ng-hide')) and contains(text(), 'Enroll in plan')]")
 	private WebElement EnrollinPlan;
 
 	@FindBy(xpath = "//*[@id='medicalBenefits']/div[1]/table/tbody/tr[1]/td[4]/strong")
@@ -113,10 +123,16 @@ public class PlanDetailsPage extends UhcDriver {
 	@FindBy(xpath = "//*[@id='bf3dfe9a-aba6-449b-865c-b5628cb03a60']/a[6]")
 	private WebElement pdfLink;
 
-	@FindBy(xpath = "//div[@class='content-section plan-details-content mb-content ng-scope']/div[1]//a[@class='back-to-plans backtoplans-plandetail ng-scope']")
+	/*@FindBy(xpath = "//div[@class='content-section plan-details-content mb-content ng-scope']/div[1]//a[@class='back-to-plans backtoplans-plandetail ng-scope']")
 	private WebElement topbackToPlanslink;
 
 	@FindBy(xpath = "//div[@class='content-section plan-details-content mb-content ng-scope']/div[2]//a[@class='back-to-plans backtoplans-plandetail ng-scope']")
+	private WebElement downbackToPlanslink;*/
+	
+	@FindBy(xpath = "//a[@id='backToPlanSummaryTop']")
+	private WebElement topbackToPlanslink;
+
+	@FindBy(xpath = "//a[@id='backToPlanSummaryBottom']")
 	private WebElement downbackToPlanslink;
 
 	@FindBy(xpath = ".//*[@id='printdetails']")
@@ -216,9 +232,27 @@ public class PlanDetailsPage extends UhcDriver {
 	
 	@FindBy(xpath = "//button[contains(@id,'addDrug')]")
 	public WebElement AddMyDrugsBtn;
+	
+	@FindBy(id = "prescriptiondrug")
+	private WebElement prescriptiondrugTab;
 
 	@FindBys(value = { @FindBy(xpath = "//div[@id='selectCounty']/p") })
 	private List<WebElement> countyList;
+	
+	@FindBy(xpath = "//input[@id='compareone']/following-sibling::label")
+	private WebElement compareBox;
+	
+	@FindBy(xpath = "//table[contains(@class,'drug-list-table')]//tr[contains(@ng-repeat,'drug')]//td")
+	private WebElement presDrugTabDrugInfoCell;
+	
+	@FindBy(xpath = "//table[contains(@class,'drug-list-table')]//tr[contains(@class,'totals')]//td[2]")
+	private WebElement presDrugTabAnnualCostValueCell;
+	
+	@FindBy(xpath = "//*[contains(@id,'planCosts')]//tr[not(contains(@class,'ng-hide'))]//p[contains(text(),'Drug')]/ancestor::td/following-sibling::td/p[contains(text(),'Yearly')]/following-sibling::span[not(contains(@class,'ng-hide'))]")
+	private WebElement planCostTabDrugCostValueCell;
+	
+	@FindBy(xpath = "//h1[contains(text(),'Drug Cost Estimator')]")
+	private WebElement dceHeader;
 
 	public WebElement getValCostTabEstimatedTotalAnnualCost() {
 		return valCostTabYearlyCost;
@@ -253,6 +287,22 @@ public class PlanDetailsPage extends UhcDriver {
 
 	@FindBy(xpath = "//*[contains(text(),'Enter drug information')]")
 	private WebElement lnkEnterDrugInformation;
+
+	// Dental Directoy
+	@FindBy(xpath = "(//h3[text()='Dental Platinum'])//following::a[@id='dentalProviderlink']")
+	private WebElement dentalPopupOptionalRidersLink;
+		
+	@FindBy(xpath = "//table[contains(@id,'additional-medical-benefits')]//a[@id='dentalProviderlink']")
+	private WebElement dentalPopupLink;
+
+	@FindBy(xpath = "//button[contains(@ng-click,'dentalCoverRally')]/preceding::button[1]")
+	private WebElement dentalCoverPopupCancel;
+
+	@FindBy(xpath = "//button[@id='dentalCoverPopupContinue']")
+	private WebElement dentalCoverPopupContinue;
+
+	@FindBy(xpath = "//*[@id='dentalCoverPopup']//strong")
+	private WebElement dentalPopupPlanLabel;	
 
 	public WebElement getLnkEnterDrugInformation() {
 		return lnkEnterDrugInformation;
@@ -299,18 +349,26 @@ public class PlanDetailsPage extends UhcDriver {
 	}
 
 	public void openAndValidate(String planType) {
+		if (MRScenario.environment.equals("offline") || MRScenario.environment.equals("prod"))
+			checkModelPopup(driver,45);
+		else 
+			checkModelPopup(driver,10);
+		
 		if (planType.equalsIgnoreCase("MA")) {
 			CommonUtility.waitForPageLoadNew(driver, medBenefitsTab.get(0), 45);
 			org.testng.Assert.assertTrue(0 == presDrugTab1.size(), "Prescription Drug tab not displayed for MA plans");
 
-		} else if (planType.equalsIgnoreCase("PDP")) {
+		}  else if (planType.equalsIgnoreCase("MAPD")) {
+			CommonUtility.waitForPageLoadNew(driver, presDrugTab.get(0), 45);
+			org.testng.Assert.assertTrue(1 == presDrugTab1.size(), "Prescription Drug tab displayed for PDP plans");
+		}else if (planType.equalsIgnoreCase("PDP")) {
 			CommonUtility.waitForPageLoadNew(driver, presDrugTab.get(0), 45);
 			org.testng.Assert.assertTrue(0 == medBenefitsTab.size(), "Medical Benefit tab not displayed for PDP plans");
 		}else if(planType.equalsIgnoreCase("SNP")) {
 			CommonUtility.waitForPageLoadNew(driver, medBenefitsTab.get(0), 45);
 			org.testng.Assert.assertTrue(medBenefitsTab.get(0).isDisplayed(), "Medical Benefit tab not displayed for SNP plans");
 		}/*Added for SNP as well*/
-		validate(planCostsTab);
+		validateNew(planCostsTab);
 
 	}
 
@@ -449,9 +507,9 @@ public class PlanDetailsPage extends UhcDriver {
 			e.printStackTrace();
 		}
 		presDrugTab.get(0).click();
-		CommonUtility.waitForPageLoad(driver, estimateDrugBtn, 20);
-		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", estimateDrugBtn);
-		((JavascriptExecutor) driver).executeScript("arguments[0].click();", estimateDrugBtn);
+		CommonUtility.waitForPageLoad(driver, editDrugLink, 20);
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", editDrugLink);
+		((JavascriptExecutor) driver).executeScript("arguments[0].click();", editDrugLink);
 		try {
 			Thread.sleep(4000);
 		} catch (InterruptedException e) {
@@ -463,25 +521,24 @@ public class PlanDetailsPage extends UhcDriver {
 		return null;
 	}
 	
+	public GetStartedPage navigateToDCERedesignEditDrug() {
+
+		jsClickNew(presDrugTab.get(0));
+		validateNew(editDrugLink, 20);
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", editDrugLink);
+		((JavascriptExecutor) driver).executeScript("arguments[0].click();", editDrugLink);
+		if (validateNew(dceHeader))
+			return new GetStartedPage(driver);
+		return null;
+	}
+	
 	public GetStartedPage navigateToDCERedesign() {
 
-		try {
-			Thread.sleep(2000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		presDrugTab.get(0).click();
-		CommonUtility.waitForPageLoad(driver, estimateDrugBtn, 20);
+		jsClickNew(presDrugTab.get(0));
+		validateNew(estimateDrugBtn, 20);
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", estimateDrugBtn);
 		((JavascriptExecutor) driver).executeScript("arguments[0].click();", estimateDrugBtn);
-		try {
-			Thread.sleep(4000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		if (validateNew(AddMyDrugsBtn))
+		if (validateNew(dceHeader))
 			return new GetStartedPage(driver);
 		return null;
 	}
@@ -550,7 +607,7 @@ public class PlanDetailsPage extends UhcDriver {
 		return false;
 	}
 
-	public void validatetopbacktoplanslink() throws InterruptedException {
+/*	public void validatetopbacktoplanslink() throws InterruptedException {
 
 		waitforElement(topbackToPlanslink);
 		topbackToPlanslink.click();
@@ -576,8 +633,34 @@ public class PlanDetailsPage extends UhcDriver {
 		else
 			Assert.assertTrue(false);
 
+	}*/
+	public void validatetopbacktoplanslink() throws InterruptedException {
+
+		waitforElement(topbackToPlanslink);
+		jsClickNew(topbackToPlanslink);
+		Thread.sleep(3000);
+		if (driver.getCurrentUrl().contains("health-plans.html#/plan-summary")) {
+			Assert.assertTrue(true);
+		}
+
+		else
+			Assert.assertTrue(false);
+
 	}
 
+	public void validatedownbacktoplanslink() throws InterruptedException {
+		validateNew(downbackToPlanslink);
+		waitforElement(downbackToPlanslink);
+		jsClickNew(downbackToPlanslink);
+		Thread.sleep(3000);
+		if (driver.getCurrentUrl().contains("health-plans.html#/plan-summary")) {
+			Assert.assertTrue(true);
+		}
+
+		else
+			Assert.assertTrue(false);
+
+	}
 	public void browserBack() {
 
 		driver.navigate().back();
@@ -641,7 +724,8 @@ public class PlanDetailsPage extends UhcDriver {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		if (driver.getCurrentUrl().contains("enrollment")) {
+		//if (driver.getCurrentUrl().contains("enrollment"))
+			if (driver.getCurrentUrl().contains("welcome")){
 			System.out.println("OLE Welcome Page is Displayed");
 			return new WelcomePage(driver);
 		}
@@ -807,7 +891,16 @@ public class PlanDetailsPage extends UhcDriver {
 
 	public VPPPlanSummaryPage navigateBackToPlanSummaryPageFromDetailsPage() {
 
-		getLnkBackToAllPlans().click();
+		/*getLnkBackToAllPlans().click();
+		CommonUtility.checkPageIsReadyNew(driver);
+		if (driver.getCurrentUrl().contains("plan-summary")) {
+			return new VPPPlanSummaryPage(driver);
+
+		}
+		return null;*/
+		validateNew(getLnkBackToAllPlans());
+		jsClickNew(getLnkBackToAllPlans());
+		//getLnkBackToAllPlans().click();
 		CommonUtility.checkPageIsReadyNew(driver);
 		if (driver.getCurrentUrl().contains("plan-summary")) {
 			return new VPPPlanSummaryPage(driver);
@@ -886,7 +979,7 @@ public class PlanDetailsPage extends UhcDriver {
 	 */
 	public boolean clickAndValidatePlanCosts(String monthlyPremium,String yearlyPremium) {
 		boolean bValidation = false;
-		planCostsTab.click();
+		jsClickNew(planCostsTab);
 		if(monthlyPremium.equals(planMonthlyPremium.getText().trim()) && yearlyPremium.equals(planYearlyPremium.getText().trim()))	
 			bValidation = true;
 		else
@@ -1162,5 +1255,89 @@ public class PlanDetailsPage extends UhcDriver {
 		}
 		return Validation_Flag;
 	}
+	public void clickAndValidatePrescriptionDrugBenefits() {
+		jsClickNew(presDrugTab.get(0));
+		validateNew(drugBenefitsSection);
+		if(drugBenefitsSection.isDisplayed()){	
+				Assert.assertTrue(true);
+				System.out.println("We are on prescriptiondrugTab");
+		}
+		else
+				Assert.assertTrue(false);
+	}
+	public void clickCompareBox() {
+		validateNew(compareBox);
+		jsClickNew(compareBox);
+	}
+	public void validateDentalPopupDefaults(String planName, boolean optionalRider) {
+		try {
+			Thread.sleep(5000);
+			if (optionalRider)
+				dentalPopupOptionalRidersLink.click();
+			else {
+				JavascriptExecutor jse = (JavascriptExecutor) driver;
+//				jse.executeScript("arguments[0].scrollIntoView(true);", dentalPopupLink);
+				jse.executeScript("arguments[0].click()", dentalPopupLink);
+			}
+			System.out.println("Plan Name is : " + planName);
+			Assert.assertTrue("Expected=" + planName + " Actual=" + dentalPopupPlanLabel.getText(),dentalPopupPlanLabel.getText().contains(planName));
+			String parentWindow = driver.getWindowHandle();
+			dentalCoverPopupContinue.click();
+			Thread.sleep(5000);
+			System.out.println("Moved to dental directoy rally page");
 
+//			driver.switchTo().window(driver.getWindowHandles().toArray()[1].toString());
+			Set<String> tab_windows = driver.getWindowHandles();
+			Iterator<String> itr = tab_windows.iterator();
+			while(itr.hasNext()) {
+				String childWindow = itr.next();
+				if(!childWindow.equals(parentWindow)) {
+					driver.switchTo().window(childWindow);
+					break;
+				}
+			}
+			checkIfPageReadySafari();
+			waitTillElementClickableInTime(driver.findElement(By.id("changeLocationBtn")), 10);
+			System.out.println(driver.getTitle());
+			Assert.assertTrue( "Title mismatch for dental directory",driver.getTitle().equals("Dental | Find Care"));
+			driver.close();
+			driver.switchTo().window(parentWindow);
+			dentalCoverPopupCancel.click();
+
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+
+	}
+
+		public void validateDrugInfoOnPrescriptionDrugTab(String drug, String drugCost) {
+
+			if(!presDrugTabDrugInfoCell.getText().contains(drug))
+				Assert.fail("Drug name not displayed on the prescription drugs tab");
+
+			if(!presDrugTabAnnualCostValueCell.getText().equals(drugCost))
+				Assert.fail("Drug cost not displayed properly on prescription drugs tab");
+		}
+		
+		public void clickPlanCosts() {
+			jsClickNew(planCostsTab);
+			
+		}
+		
+		public GetStartedPage navigateToDCERedesignFromPlanCostTab() {
+
+			validateNew(editDrugLinkPlanCost, 20);
+			jsClickNew(editDrugLinkPlanCost);
+			
+			if (validateNew(dceHeader))
+				return new GetStartedPage(driver);
+			return null;
+		}
+
+		public void validateDrugInfoOnPlanCostTab(String annualDrugCost) {
+			
+			if(!planCostTabDrugCostValueCell.getText().equals(annualDrugCost))
+				Assert.fail("Drug cost not displayed properly on prescription drugs tab");
+			
+		}
 }

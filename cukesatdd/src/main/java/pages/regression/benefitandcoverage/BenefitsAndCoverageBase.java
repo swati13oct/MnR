@@ -971,10 +971,10 @@ public class BenefitsAndCoverageBase extends BenefitsAndCoverageWebElements {
 		CommonUtility.waitForPageLoad(driver, BenefitsInformationHeaderOptumRx, 40);
 		System.out.println("URL opened in new window is:   "+driver.getCurrentUrl());
 		System.out.println("Page title is:   "+driver.getTitle());
-		String getHeaderText = BenefitsInformationHeaderOptumRx.getText();
+		String getHeaderText = BenefitsInformationHeaderOptumRx.getAttribute("innerHTML");//getText() sometimes return blank value
 		System.out.println("Header text of page is  "+getHeaderText);
 		if (driver.getCurrentUrl().contains("optumrx.com/secure/benefits-and-claims/benefits-information") 
-				&& BenefitsInformationHeaderOptumRx.getText().contains("Benefits Information"))
+				&& BenefitsInformationHeaderOptumRx.getAttribute("innerHTML").contains("Benefits Information"))
 		{
 			System.out.println("Benefit Information Header was displayed on page and OptumRx SSO URL was correct");
 		}
@@ -991,10 +991,10 @@ public class BenefitsAndCoverageBase extends BenefitsAndCoverageWebElements {
 		CommonUtility.waitForPageLoad(driver, searchForADrugHeaderOptumRx, 40);
 		System.out.println("URL opened in new window is:   "+driver.getCurrentUrl());
 		System.out.println("Page title is:   "+driver.getTitle());
-		String getHeaderText = searchForADrugHeaderOptumRx.getText();
+		String getHeaderText = searchForADrugHeaderOptumRx.getAttribute("innerHTML");//getText() sometimes return blank value
 		System.out.println("Header text of page is  "+getHeaderText);
 		if (driver.getCurrentUrl().contains("optumrx.com/secure/member-tools/drug-search") 
-				&& searchForADrugHeaderOptumRx.getText().contains("Search for a drug"))
+				&& searchForADrugHeaderOptumRx.getAttribute("innerHTML").contains("Search for a drug"))
 		{
 			System.out.println("Search for a drug header was displayed on page and OptumRx SSO URL was correct");
 		}
@@ -1038,7 +1038,7 @@ public class BenefitsAndCoverageBase extends BenefitsAndCoverageWebElements {
 		System.out.println("Now clicking on Make a Payment button");
 		makePaymentButton.click();
 		CommonUtility.checkPageIsReadyNew(driver);
-			if (driver.getCurrentUrl().contains("content/medicare/member/payments/overview-new.html"))
+			if (driver.getCurrentUrl().contains("payments/overview.html"))
 			{
 				System.out.println("Payment Overview Page is displayed");	
 			}

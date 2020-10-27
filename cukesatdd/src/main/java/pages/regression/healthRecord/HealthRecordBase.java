@@ -33,6 +33,10 @@ public class HealthRecordBase  extends HealthRecordWebElements {
 		action.moveToElement(targetElement).build().perform(); 
 	}
 
+	public void scrollToTopOfPg() {
+		((JavascriptExecutor) driver).executeScript("window.scrollTo(document.body.scrollHeight, 0)");
+	}
+	
 	public void scrollElementToCenterScreen(WebElement element) {
 		String scrollElementIntoMiddle = "var viewPortHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);"
 				+ "var elementTop = arguments[0].getBoundingClientRect().top;"

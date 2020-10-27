@@ -1,4 +1,5 @@
 package pages.regression.drugcostestimator;
+import java.util.List;
 import java.util.Map;
 
 import org.json.JSONException;
@@ -45,6 +46,10 @@ public class AddDrugDetails extends UhcDriver {
 
 	@FindBy(id = "frequency")
 	public WebElement selectYourFrequencyDropdown;
+	
+	@FindBy(xpath="//div[contains(@class,'detailCard')]//h3")
+	List<WebElement> listOfTiles;
+
 	public AddDrugDetails(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -137,9 +142,23 @@ public class AddDrugDetails extends UhcDriver {
 	 * returns new DrugCostEstimatorPage
 	 */
 	public DrugCostEstimatorPage continueAddDrugDetailsGeneric() throws InterruptedException{
+		int origNumTile=listOfTiles.size();
 		CommonUtility.waitForPageLoad(driver, continueButton, 20);
 		continueButton.click();
-		Thread.sleep(12000);
+		int maxTry=12;
+		int count=0;
+		while (count<=maxTry) {
+			int newNumTile=listOfTiles.size();
+			if (newNumTile>origNumTile) {
+				System.out.println("TEST - drug tile added, moving on...");
+				break;
+			} else {
+				count=count+1;
+				Thread.sleep(1000);
+				System.out.println("TEST - sleep waited for "+count+" seconds");
+			}
+		}
+		//tbd Thread.sleep(12000);
 		return new DrugCostEstimatorPage(driver);
 	}
 

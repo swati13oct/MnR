@@ -62,7 +62,7 @@ Feature: 1.06.5.2 Member Plans and Documents - section: Provider Directory -or- 
 	@prod_active_ma @prod_active_ma_ind
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | pd_sd | pd_ps | pd_pl | pd_en_cy | pd_es_cy | pd_zh_cy | pd_en_ny | pd_es_ny | pd_zh_ny |
-      | 09-085 | 15129       | kkumard   | mnrs786@  | ERNIE2450       | MA       | AARP_IND_EFF_PDnR     | true  | true  | false | true     | true     | false    | true     | true     | false    |
+      | 09-085 | 15129       | kkumard   | mnrs786@  | haradaty32      | MA       | AARP_IND_EFF_PDnR     | true  | true  | false | true     | true     | false    | true     | true     | false    |
 
 	@prod_active_ma @prod_active_ma_grp
 	Examples: 

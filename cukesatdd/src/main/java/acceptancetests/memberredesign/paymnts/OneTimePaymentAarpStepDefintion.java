@@ -2078,7 +2078,7 @@ public class OneTimePaymentAarpStepDefintion {
 		UpdateRecurringPage updateRecurringPage = paymentHistoryPage.clickOnEditAutomaticPaymentforShip();
 		if (updateRecurringPage != null) {
 			getLoginScenario().saveBean(PageConstants.Update_Recurring_Page, updateRecurringPage);
-			System.out.println("User is on Setup Recurring Payments screen");
+			System.out.println("User is on Recurring Payments screen");
 		}
 	}
 	

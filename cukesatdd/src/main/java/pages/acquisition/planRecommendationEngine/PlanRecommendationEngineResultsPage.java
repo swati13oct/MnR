@@ -524,7 +524,8 @@ public class PlanRecommendationEngineResultsPage extends UhcDriver {
 			for (int i = 0; i < 5; i++) {
 				try {
 					validate(enrollButton, 5);
-					enrollButton.click();
+					//enrollButton.click();
+					jsClickNew(enrollButton);
 					click = true;
 					break;
 				} catch (Exception e) {
@@ -1342,6 +1343,8 @@ public void useraddDrugsVPP(String drugDetails) {
 }
 
 public boolean changePlanyear(String year) {
+
+	jsClickNew(MAViewPlansLink);
 	// Checking and Changing to Current Year
 	if (year.equalsIgnoreCase("current")) {
 		if (validate(currentPlanYear, 15)) {
@@ -1369,7 +1372,8 @@ public boolean changePlanyear(String year) {
 public boolean checkPlanyear(String year) {
 	// Checking Current year selection
 	try {
-		MAViewPlansLink.click();
+		//MAViewPlansLink.click();
+		jsClickNew(MAViewPlansLink);
 	if (year.equalsIgnoreCase("current")) {
 		if (validate(currentPlanYear, 15) && currentPlanYearSelected.getAttribute("id").length()>0) {
 			return true;

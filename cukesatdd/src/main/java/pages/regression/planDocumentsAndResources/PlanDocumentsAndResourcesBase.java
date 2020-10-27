@@ -901,10 +901,10 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 	 */
 	public HashMap<String, Document> validateDoc(HashMap<String, String> testInputInfoMap, String expDocName) {
 		int count=0;
-		int maxRetry=1;
+		int maxRetry=2;
 		while (true) { 
 			try {
-				System.out.println("Proceed to validate expected document="+expDocName+" against what is showing on UI");
+				System.out.println("Proceed to validate expected document="+expDocName+" against what is showing on UI. count="+count);
 				String section=testInputInfoMap.get("section");
 				String targetLang=testInputInfoMap.get("targetLang");
 				String targetYr=testInputInfoMap.get("targetYr");
@@ -1040,10 +1040,11 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 				String planType=testInputInfoMap.get("planType");
 				String memberType=testInputInfoMap.get("memberType");
 				refreshPage(planType, memberType, origUrlBeforeClick);
-				if (++count == maxRetry) {
+				if (count >= maxRetry) {
 					Assert.assertTrue("PROBLEM: Got StaleElementReferenceException and already reload page and retried once, giving up", false);
 					throw e;
 				}
+				count=count+1;
 			}
 		}
 	}
