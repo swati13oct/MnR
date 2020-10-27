@@ -171,43 +171,18 @@ public class AcquisitionHomePageMobile extends GlobalWebElementsMobile {
 
 	/**
 	 * @author Rathulya This method is used to open the URL on the mobile device
-	 * @return
 	 */
-	public boolean openMobileURL() {
-		boolean offline_prod = false;
-		if (!(MRScenario.getProps() == null)) {// If running from local
-			if (MRScenario.environment.equalsIgnoreCase("stage")) {
-				startNewMobile(AARP_ACQISITION_PAGE_URL);
-
-			} else if (MRScenario.environment.equalsIgnoreCase("offline")) {
-				startNewMobile(AARP_ACQISITION_OFFLINE_PAGE_URL);
-
-			} else if (MRScenario.environment.equalsIgnoreCase("prod")) {
-				startNewMobile(AARP_ACQISITION_PROD_PAGE_URL);
-			}
-		} else { // For jenkins job
-			String jenkinsRunnerFiles = MRScenario.runnerFiles;
-
-			if (MRScenario.environment.equalsIgnoreCase("stage")) {
-				for (String rname : jenkinsRunnerFiles.split(",")) {
-					startNewMobile(AARP_ACQISITION_PAGE_URL);
-				}
-			}
-
-			if (MRScenario.environment.equalsIgnoreCase("offline")) {
-				for (String rname : jenkinsRunnerFiles.split(",")) {
-					startNewMobile(AARP_ACQISITION_OFFLINE_PAGE_URL);
-
-				}
-			}
-			if (MRScenario.environment.equalsIgnoreCase("prod")) {
-				for (String rname : jenkinsRunnerFiles.split(",")) {
-					startNewMobile(AARP_ACQISITION_PROD_PAGE_URL);
-				}
-			}
-		}
+	public void openMobileURL() {
+		//boolean offline_prod = false;
+		if (MRScenario.environment.equalsIgnoreCase("prod")) {
+			startNewMobile(AARP_ACQISITION_PROD_PAGE_URL);
+		} else if (MRScenario.environment.equalsIgnoreCase("offline")) {
+			startNewMobile(AARP_ACQISITION_OFFLINE_PAGE_URL);
+		} else
+			startNewMobile(AARP_ACQISITION_PAGE_URL);
 		System.out.println("Current mobile page URL: " + driver.getCurrentUrl());
-		return offline_prod;
+
+		//return offline_prod;
 
 		// startNewMobile(AARP_ACQISITION_PAGE_URL);
 		// System.out.println("Current mobile page URL: " + driver.getCurrentUrl());

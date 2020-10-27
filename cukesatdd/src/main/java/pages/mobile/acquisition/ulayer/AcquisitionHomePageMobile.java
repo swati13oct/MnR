@@ -2221,10 +2221,12 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	}
 
 	public void openMobileURL() {
-		if(MRScenario.environment.equalsIgnoreCase("prod")) {
+		if (MRScenario.environment.equalsIgnoreCase("prod")) {
 			startNewMobile(AARP_ACQISITION_PROD_PAGE_URL);
-		}else
-			startNewMobile(AARP_ACQISITION_PAGE_URL);
+		} else if (MRScenario.environment.equalsIgnoreCase("offline")) {
+			startNewMobile(AARP_ACQISITION_OFFLINE_PAGE_URL);
+		} else
+		startNewMobile(AARP_ACQISITION_PAGE_URL);
 		System.out.println("Current mobile page URL: " + driver.getCurrentUrl());
 	}
 

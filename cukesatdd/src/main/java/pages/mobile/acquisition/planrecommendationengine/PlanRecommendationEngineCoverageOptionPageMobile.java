@@ -111,7 +111,8 @@ public class PlanRecommendationEngineCoverageOptionPageMobile extends UhcDriver 
 		System.out.println("Functional Operations");
 		if (planType.equalsIgnoreCase("MAPD")) {
 			validate(plantypeMAPD);
-			plantypeMAPD.click();
+			//plantypeMAPD.click();
+			jsClickNew(plantypeMAPD);
 			System.out.println("Plan Type " + planType + " Clicked");
 		} else if (planType.equalsIgnoreCase("MA")) {
 			validate(plantypeMA);
@@ -125,7 +126,8 @@ public class PlanRecommendationEngineCoverageOptionPageMobile extends UhcDriver 
 			System.out.println("Plan Type " + planType + " Clicked");
 		} else if (planType.equalsIgnoreCase("None")) {
 			validate(plantypeNone);
-			plantypeNone.click();
+			//plantypeNone.click();
+			jsClickNew(plantypeNone);
 			System.out.println("Plan Type " + planType + " Clicked");
 		}
 		//continueBtn.click();

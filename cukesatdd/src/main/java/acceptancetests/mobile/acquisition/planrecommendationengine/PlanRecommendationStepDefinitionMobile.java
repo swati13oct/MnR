@@ -72,8 +72,10 @@ public class PlanRecommendationStepDefinitionMobile {
 	@Given("^the user is on UHC medicare acquisition site landing page$")
 	public void the_user_on_uhc_medicaresolutions_Site() {
 		wd = getLoginScenario().getMobileDriver();
-		AcquisitionHomePageMobile aquisitionhomepage = new AcquisitionHomePageMobile(wd, "PRE", true);
-		if_offline_prod = aquisitionhomepage.openMobileURL();
+		AcquisitionHomePageMobile aquisitionhomepage = new AcquisitionHomePageMobile(wd);
+		//AcquisitionHomePageMobile aquisitionhomepage = new AcquisitionHomePageMobile(wd, "PRE", true);
+		//if_offline_prod = aquisitionhomepage.openMobileURL();
+		aquisitionhomepage.openMobileURL();
 		// aquisitionhomepage.fixPrivateConnection();
 		checkpopup();
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);

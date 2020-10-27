@@ -248,8 +248,8 @@ public class PlanRecommendationEngineSpecialNeedsPageMobile extends UhcDriver {
 //					Assert.assertTrue(snpNursinghomeAccordionMoreInfo1stPara.getText().contains("I-SNP"));
 //					Assert.assertTrue(snpNursinghomeAccordionMoreInfo2ndPara.getText().contains("toll free"));
 					scrollToView(snpNursinghomeAccordionCarrot);
-					//snpNursinghomeAccordionCarrot.click();
-					jsClickNew(snpNursinghomeAccordionCarrot);
+					snpNursinghomeAccordionCarrot.click();
+					//jsClickNew(snpNursinghomeAccordionCarrot);
 				}else {
 					System.out.println("Accordion is not displayed for  "+SNPType+" .");
 				}
