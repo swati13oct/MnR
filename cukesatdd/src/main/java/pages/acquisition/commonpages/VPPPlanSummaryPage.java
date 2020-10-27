@@ -19,6 +19,7 @@ import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -37,10 +38,12 @@ import acceptancetests.data.MRConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
+import pages.acquisition.dceredesign.DrugDetailsPage;
 import pages.acquisition.dceredesign.GetStartedPage;
 import pages.acquisition.isdecisionguide.IsDecisionGuideStep1;
 import pages.acquisition.medsuppole.MedSuppOLEPage;
 import pages.acquisition.ole.WelcomePage;
+import pages.acquisition.commonpages.ComparePlansPage;
 import pages.acquisition.commonpages.VisitorProfilePage;
 import pages.acquisition.commonpages.PlanDetailsPage;
 import pages.acquisition.vppforaep.AepVppPlanSummaryPage;
@@ -712,19 +715,19 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	public void viewPlanSummary(String planType) {
 		if (planType.equalsIgnoreCase("PDP")) {
 			CommonUtility.waitForPageLoadNew(driver, pdpPlansViewLink, 30);
-			sleepBySec(2); // note: add sleep for timing issue, tried increase timeout from
+			//sleepBySec(2); // note: add sleep for timing issue, tried increase timeout from
 							// waitForPageLoadNew but didn't work
 			pdpPlansViewLink.click();
 			System.out.println("PDP Plan Type Clicked");
 			CommonUtility.waitForPageLoadNew(driver, planListContainer, 30);
 		} else if (planType.equalsIgnoreCase("MA") || planType.equalsIgnoreCase("MAPD")) {
 			CommonUtility.waitForPageLoadNew(driver, maPlansViewLink, 30);
-			sleepBySec(2);
+			//sleepBySec(2);
 			maPlansViewLink.click();
 			CommonUtility.waitForPageLoadNew(driver, planListContainer, 30);
 		} else if (planType.equalsIgnoreCase("MS")) {
 			CommonUtility.waitForPageLoadNew(driver, msPlansViewLink, 30);
-			sleepBySec(2);
+			//sleepBySec(2);
 			msPlansViewLink.click();
 			CommonUtility.waitForPageLoadNew(driver, medSuppZipCode, 30);
 			/*
@@ -732,7 +735,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			 * medSuppPlanList.get(0), 30);
 			 */
 		} else if (planType.equalsIgnoreCase("SNP")) {
-			sleepBySec(5);
+			//sleepBySec(5);
 			CommonUtility.waitForPageLoadNew(driver, snpPlansViewLink, 30);
 			snpPlansViewLink.click();
 			CommonUtility.waitForPageLoadNew(driver, planListContainer, 30);
@@ -1209,29 +1212,28 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			WebElement MAmoreDetailsLink = driver.findElement(By.xpath("//*[contains(text(), '" + planName
 					+ "')]/ancestor::div[contains(@class,'module-plan-overview')]//div[contains(@class,'swiper-content')]//div[not (contains(@class,'ng-hide'))]/a[contains(text(),'View Plan')]"));
 			CommonUtility.waitForPageLoadNew(driver, MAmoreDetailsLink, 30);
-			MAmoreDetailsLink.click();
+			jsClickNew(MAmoreDetailsLink);
 			System.out.println("View Plan Details Link is clicked for MA plan" + planName);
 
 		} else if (planType.equalsIgnoreCase("PDP")) {
 			WebElement PDPmoreDetailsLink = driver.findElement(By.xpath("//*[contains(text(), '" + planName
 					+ "')]/ancestor::div[contains(@class,'module-plan-overview')]//*[contains(@id,'viewmoredetlinkpdp')]"));
 			CommonUtility.waitForPageLoadNew(driver, PDPmoreDetailsLink, 30);
-			PDPmoreDetailsLink.click();
+			jsClickNew(PDPmoreDetailsLink);
 			System.out.println("View Plan Details Link is clicked for PDP plan" + planName);
 
 		} else if (planType.equalsIgnoreCase("SNP")) {
 			WebElement SNPmoreDetailsLink = driver.findElement(By.xpath("//a[contains(text(), '" + planName
 					+ "')]/ancestor::div[contains(@class,'module-plan-overview')]//a[contains(text(),'View Plan')]"));
 			CommonUtility.waitForPageLoadNew(driver, SNPmoreDetailsLink, 30);
-			SNPmoreDetailsLink.click();
+			jsClickNew(SNPmoreDetailsLink);
 			System.out.println("View Plan Details Link is clicked for MA plan" + planName);
 		}
 		CommonUtility.checkPageIsReadyNew(driver);
-		if (driver.getCurrentUrl().contains("#/details")) {
+		
 			return new PlanDetailsPage(driver, planType);
+		
 		}
-		return null;
-	}
 
 	public void clickonViewPlans() {
 		try {
@@ -3795,4 +3797,109 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		System.out.println("Verified Plan Compare checkbox is unchecked");
 
 		}
+		
+
+	public boolean verifyAddedDrugName(String planName, String drugName) {
+	
+		WebElement drugLinkDropdown = driver.findElement(By.xpath("//*[contains(text(),'" + planName
+				+ "')]/ancestor::div[contains(@class, 'module-plan-overview module')]//*[contains(@id,'drug-list-title-')]"));
+		
+		jsClickNew(drugLinkDropdown);
+		
+		WebElement drugInfoDropdown = driver.findElement(By.xpath("//*[contains(text(),'" + planName
+				+ "')]/ancestor::div[contains(@class, 'module-plan-overview module')]//*[contains(@class,'collapse drug')]//*[contains(@id,'DrugName')]"));
+		
+		
+		String drugInfo=drugInfoDropdown.getText();
+	    System.out.println(drugInfo);
+		if (drugInfo.contains(drugName)) {
+			return true;
+		}
+		return false;
+	}
+
+
+	public boolean verifyAddedDrugCost(String planName, String capturedDrugCost) {
+		WebElement drugCost = driver.findElement(By.xpath("//*[contains(text(),'" + planName
+				+ "')]/ancestor::div[contains(@class, 'module-plan-overview module')]//ul[contains(@class,'benefits-table')]//*[contains(text(),'Estimated Annual')]/following-sibling::span[not(contains(@class,'ng-hide'))]"));
+		System.out.println("Captured drug cost: "+capturedDrugCost);
+		System.out.println("Drug cost on plan summary : "+drugCost.getText());
+		if(drugCost.getText().equals(capturedDrugCost))
+			return true;
+		return false;
+	}
+
+
+	public DrugDetailsPage navigateToDCEFromDrugDropdown(String planName) {
+		
+		List <WebElement> drugLinkDropdown = driver.findElements(By.xpath("//*[contains(text(),'" + planName
+				+ "')]/ancestor::div[contains(@class, 'module-plan-overview module')]//*[contains(@id,'drug-list-title-')and contains(@aria-expanded,'false')]"));
+		
+		if(drugLinkDropdown.size()>0)
+			drugLinkDropdown.get(0).click();
+		
+		WebElement drugSummaryLinkDropdown = driver.findElement(By.xpath("//*[contains(text(),'" + planName
+				+ "')]/ancestor::div[contains(@class, 'module-plan-overview module')]//*[contains(@class,'edit-drugs')]"));
+		
+		drugSummaryLinkDropdown.click();
+		
+		return new DrugDetailsPage(driver);
+		
+	}
+	public boolean verifyPlanCompareCheckboxNotVisible() {
+		try {
+			boolean blnDisplay = planCompareCheckBox.isDisplayed();
+			System.out.println("Plan compare checkbox is Displayed");
+			return blnDisplay;
+		} catch (NoSuchElementException ex) {
+			System.out.println("Plan compare checkbox is Not Displayed");
+			return false;
+		}
+
+	}
+	public void verifyPlanComapreCheckboxIsUnchecked() {
+		validate(planCompareCheckBox);
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		String CheckStatus = js.executeScript("return document.getElementById('compare-plan-4').checked;").toString();
+		System.out.println("Plan compare checkbox status:" + CheckStatus);
+		Assert.assertEquals("false", CheckStatus.trim());
+		System.out.println("Verified Plan Compare checkbox is unchecked");
+
+		}
+	public void checkMAPlansOnly(int counter) {
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		List<WebElement> allMAPlans = driver
+				.findElements(By.xpath(".//*[@id='plan-list-1']//div[contains(@class,'compare-box')]//label"));
+
+		if (allMAPlans != null) {
+			for (int i = 0; i < allMAPlans.size(); i++) {
+				allMAPlans.get(i).click();
+				if (i == counter) {
+					break;
+				}
+			}
+		}
+
+	}
+	public ComparePlansPage clickOnCompareLink(){
+		List<WebElement> compareLinks = driver
+				.findElements(By.xpath("//*[contains(@class,'multiple-added-text')]//button[contains(text(),'Compare plans')]"));
+		compareLinks.get(1).click();
+		if(currentUrl().contains("/health-plans.html#/plan-compare"))
+			return new ComparePlansPage(driver);
+		return null;
+	}
+	public void clickon3rdPlan() {
+		WebElement Checkbox = driver.findElement(By
+				.xpath("//input[contains(@id,'compare-plan-3')]/ancestor::div[contains(@class,'compare-box')]//label"));
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript("arguments[0].click();", Checkbox);
+		// js.executeScript("document.getElementById('compare-plan-3').click;");
+		System.out.println("checked third plan for plan compare");
+	}
 }

@@ -235,6 +235,9 @@ public class GlobalWebElements  extends UhcDriver{
 	@FindBy(xpath = "//*[contains(@onclick,'jumpToHSIDSignIn()')]")
 	public static WebElement signIn;
 	
+	@FindBy(xpath="//*[@id='planTypesColumn']/h3[4]/a")
+	public static WebElement menuShop;
+	
 	public void ourPlansHover() {
 		Actions actions = new Actions(driver);
 		PageFactory.initElements(driver, this);
