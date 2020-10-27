@@ -1992,7 +1992,8 @@ public class BenefitsAndCoverageUmsStepDefinition {
 			planId=4;
 		if(planType.equalsIgnoreCase("SSUP"))
 			planId=5;
-
+		if(planType.equalsIgnoreCase("DSNP-MAPD"))
+			planId=6;
 
 		switch (planId) { 
 		case 1: 
@@ -2015,7 +2016,9 @@ public class BenefitsAndCoverageUmsStepDefinition {
 			benefitsCoveragePage.verifyPresenceOfJumpLinksSSUP(rider,planType,memberType);
 			break;
 
-
+	    case 6: 
+			benefitsCoveragePage.verifyPresenceOfJumpLinksDSNP(planType,memberType);
+			break;
 		default: 
 			System.out.println("Plan Not Found");
 			break;
@@ -2060,7 +2063,9 @@ public class BenefitsAndCoverageUmsStepDefinition {
 			planId=4;
 		if(planType.equalsIgnoreCase("SSUP"))
 			planId=5;
-
+		if(planType.equalsIgnoreCase("DSNP-MAPD"))
+			planId=6; 
+		
 		switch (planId) { 
 		case 1: 
 			benefitsCoveragePage.clicksOnJumpLinksAndCheckRespectiveSectionsMAPD(rider,planType,memberType);
@@ -2080,6 +2085,10 @@ public class BenefitsAndCoverageUmsStepDefinition {
 
 		case 5: 
 			benefitsCoveragePage.clicksOnJumpLinksAndCheckRespectiveSectionsSSUP(rider,planType,memberType);
+			break;
+			
+		case 6: 
+			benefitsCoveragePage.clicksOnJumpLinksAndCheckRespectiveSectionsDSNP(planType,memberType);
 			break;
 
 		default: 
