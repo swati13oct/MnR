@@ -121,6 +121,9 @@ public class AREPlanRanking extends UhcDriver {
 
 	@FindBy(css = "#compare-table-header th[class*='uhc-slide-table'] div[class*='text-dark']")
 	private List<WebElement> plancards;
+	
+	@FindBy(xpath = "//*[contains(@class,'compare-plans-next')]")
+    private WebElement viewMorePlansinPlanCompare;
 
 	@FindBy(css = "#compare-table-header th[class*='uhc-slide-table'] a[dtmname*='View Details']")
 	private List<WebElement> viewplandetailslink;
@@ -157,9 +160,6 @@ public class AREPlanRanking extends UhcDriver {
 
 	@FindBy(css = "span[class*='multiple-added-text'] button[class*='cta-button']")
 	private List<WebElement> comparePlansBtninVpp;
-	
-	@FindBy(xpath = "//*[contains(@class,'compare-plans-next')]")
-	private WebElement viewMorePlansinPlanCompare;
 
 	@FindBy(css = ".segment h2")
 	private WebElement planNameEnrollPage;
@@ -212,6 +212,12 @@ public class AREPlanRanking extends UhcDriver {
 	@FindBy(css = "#plan-summary-table tr:nth-child(7) div.text-small span")
 	private List<WebElement> estimateMedicalCostvalue;
 
+	@FindBy(css = "div#multiSelect label[for='estimated_medical_costs']")
+	private WebElement mceCheckLabel;
+
+	@FindBy(css = "div#multiSelect label[for='estimated_medical_costs']>input")
+	private WebElement mceCheck;
+	
 	public void validateUIElements() {
 		System.out.println("Validate ARE UI Elements : ");
 		String currentPageUrl = driver.getCurrentUrl();
@@ -309,6 +315,10 @@ public class AREPlanRanking extends UhcDriver {
 			elemCheck = doctorCheck;
 			elemClick = doctorCheckLabel;
 		}
+		if (checkOption.equalsIgnoreCase("mce")) {
+			elemCheck = mceCheck;
+			elemClick = mceCheckLabel;
+		}
 
 		if (select && !elemCheck.isSelected()) {
 			elemClick.click();
@@ -404,26 +414,29 @@ public class AREPlanRanking extends UhcDriver {
 		System.out.println(viewplandetails.size());
 		int plan = 0;
 		if (plansName.size() != viewplandetails.size()) {
-			for (plan = 1; plan < PlanCount; plan++) {
+			plan = 1;
 				for (int i = 0; i < viewplandetails.size(); i++) {
-					if (i > 3)
-						for(int j=0;j<i;j++)
-							jsClickNew(viewMorePlansinPlanCompare);
+					 if(i>3) {
+						 for(int k=0; k<i; k++)
+							 jsClickNew(viewMorePlansinPlanCompare);
+					 }
 					vppPlans.add(verifygetplanName(plansName.get(plan + i), viewplandetails.get(i)));
 				}
-			}
 			System.out.println("Plan Name compared Successful Clicks on Plan Name");
 		} else {
-			for (plan = 0; plan < PlanCount; plan++) {
-				for (int i = 0; i < viewplandetails.size(); i++)
+				for (int i = 0; i < viewplandetails.size(); i++) {
+					if(i>3) {
+						 for(int k=0; k<i; k++)
+							 jsClickNew(viewMorePlansinPlanCompare);
+					 }
 					vppPlans.add(verifygetplanName(plansName.get(i), viewplandetails.get(i)));
-			}
+				}
 			System.out.println("Plan Name compared Successful Clicks on Enroll Button");
 		}
 	}
 
 	public String verifygetplanName(WebElement plan, WebElement planInPDP) {
-		String actualplanName = "";	
+		String actualplanName = "";
 		String exceptedplanName = plan.getText().trim();
 		String VIew = planInPDP.getText().trim();
 		System.out.println("Plan Name in VPP Summary Page: " + exceptedplanName);
@@ -1126,6 +1139,20 @@ public class AREPlanRanking extends UhcDriver {
 		}
 		else {
 			Assert.assertFalse(validate(estimateMedicalCost, 30), "Estimated Annual Medical Cost row is displayed for this MBI ID");
+		}
+	}
+	
+	public void optionCheck(String option,boolean visible) {
+		System.out.println("Verify Options..");
+		planRankingDropdown.click();
+		validate(applyBtn);
+		if(visible) {
+			if(option.equalsIgnoreCase("mce"))
+				Assert.assertTrue(validate(mceCheck,10), option+" is not visible");	
+		}
+		else {
+			if(option.equalsIgnoreCase("mce"))
+				Assert.assertFalse(validate(mceCheck,10), option+" is visible");	
 		}
 	}
 
