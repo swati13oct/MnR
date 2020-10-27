@@ -221,7 +221,7 @@ public class ProviderSearchPage extends UhcDriver {
 			validateNew(saveBtn2);
 			saveBtn2.click();
 		}
-		
+		threadsleep(10);
 		validateNew(providerNameText);
 		String providerSaved = providerNameText.getText().trim();
 		System.out.println("Provider Name is : " + providerSaved);

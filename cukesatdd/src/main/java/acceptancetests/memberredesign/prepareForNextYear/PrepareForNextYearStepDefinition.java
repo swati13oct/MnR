@@ -437,6 +437,13 @@ public class PrepareForNextYearStepDefinition {
 		boolean showNxtYrPlanName=(Boolean) getLoginScenario().getBean(PrepareForNextYearCommonConstants.SHOW_NEXT_YEAR_PLANNAME);
 		String testPlanName=(String) getLoginScenario().getBean(PrepareForNextYearCommonConstants.EXPECT_PLAN_NAME);
 
+		boolean sanityRun=false;
+		for (String s: MRScenario.getTagList()) {
+			if (s.contains("sanity")) {
+				sanityRun=true;
+			}
+		}
+		
 		if (!expPrepareForNextYearTab) {
 			List<String> testNote=(List<String>) getLoginScenario().getBean(PrepareForNextYearCommonConstants.TEST_NOTE);
 			if (testNote==null)
@@ -489,22 +496,22 @@ public class PrepareForNextYearStepDefinition {
 		List<String> sectionNote=new ArrayList<String>();
 		if (currentDate.before(milestone1Date)) {
 			testNote.add("\n\tValidation for current date '"+pfnyPg.convertDateToStrFormat_MMDDYYYY(currentDate)+"' < milestone 1 '"+pfnyPg.convertDateToStrFormat_MMDDYYYY(milestone1Date)+"'");
-			sectionNote=pfnyPg.validateBefM1Content(planType, memberType, currentDate, docDisplayMap, showNxtYrPlanName);
+			sectionNote=pfnyPg.validateBefM1Content(planType, memberType, currentDate, docDisplayMap, showNxtYrPlanName, sanityRun);
 		} else if ((currentDate.after(milestone1Date) || currentDate.equals(milestone1Date)) && currentDate.before(milestone2Date)) {
 			testNote.add("\tValidation for milestone 1 '"+pfnyPg.convertDateToStrFormat_MMDDYYYY(milestone1Date)+"' <= current date '"+pfnyPg.convertDateToStrFormat_MMDDYYYY(currentDate)+"' < milestone 2 '"+pfnyPg.convertDateToStrFormat_MMDDYYYY(milestone2Date)+"'");
-			sectionNote=pfnyPg.validateAftOrEqM1BefM2Content(planType, memberType, currentDate, docDisplayMap, showNxtYrPlanName);
+			sectionNote=pfnyPg.validateAftOrEqM1BefM2Content(planType, memberType, currentDate, docDisplayMap, showNxtYrPlanName, sanityRun);
 		} else if ((currentDate.after(milestone2Date) || currentDate.equals(milestone2Date)) && currentDate.before(milestone3Date)) {
 			testNote.add("\n\tValidation for milestone 2 '"+pfnyPg.convertDateToStrFormat_MMDDYYYY(milestone2Date)+"' <= current date '"+pfnyPg.convertDateToStrFormat_MMDDYYYY(currentDate)+"' < milestone 3 '"+pfnyPg.convertDateToStrFormat_MMDDYYYY(milestone3Date)+"'");
-			sectionNote=pfnyPg.validateAftOrEqM2BefM3Content(planType, memberType, currentDate, docDisplayMap, showNxtYrPlanName);
+			sectionNote=pfnyPg.validateAftOrEqM2BefM3Content(planType, memberType, currentDate, docDisplayMap, showNxtYrPlanName, sanityRun);
 		} else if ((currentDate.after(milestone3Date) || currentDate.equals(milestone3Date)) && currentDate.before(milestone4Date)) {
 			testNote.add("\n\tValidation for milestone 3 '"+pfnyPg.convertDateToStrFormat_MMDDYYYY(milestone3Date)+"'<= current date '"+pfnyPg.convertDateToStrFormat_MMDDYYYY(currentDate)+"' < milestone 4 '"+pfnyPg.convertDateToStrFormat_MMDDYYYY(milestone4Date)+"'");
-			sectionNote=pfnyPg.validateAftOrEqM3BefM4Content(planType, memberType, currentDate, docDisplayMap, showNxtYrPlanName);
+			sectionNote=pfnyPg.validateAftOrEqM3BefM4Content(planType, memberType, currentDate, docDisplayMap, showNxtYrPlanName, sanityRun);
 		} else if ((currentDate.after(milestone4Date) || currentDate.equals(milestone4Date)) && currentDate.before(milestone5Date)) {
 			testNote.add("\n\tValidation for milestone 4 '"+pfnyPg.convertDateToStrFormat_MMDDYYYY(milestone4Date)+"' <= current date '"+pfnyPg.convertDateToStrFormat_MMDDYYYY(currentDate)+"' < milestone 5 '"+pfnyPg.convertDateToStrFormat_MMDDYYYY(milestone5Date)+"'");
-			sectionNote=pfnyPg.validateAftOrEqM4BefM5Content(planType, memberType, currentDate, docDisplayMap, showNxtYrPlanName);
+			sectionNote=pfnyPg.validateAftOrEqM4BefM5Content(planType, memberType, currentDate, docDisplayMap, showNxtYrPlanName, sanityRun);
 		} else if (currentDate.after(milestone5Date) || currentDate.equals(milestone5Date)) {
 			testNote.add("\n\tValidation for milestone 5 '"+pfnyPg.convertDateToStrFormat_MMDDYYYY(milestone5Date)+"' <= current date '"+pfnyPg.convertDateToStrFormat_MMDDYYYY(currentDate)+"'");
-			sectionNote=pfnyPg.validateAfterOrEqalM5Content(planType, memberType, currentDate, docDisplayMap, showNxtYrPlanName);
+			sectionNote=pfnyPg.validateAfterOrEqalM5Content(planType, memberType, currentDate, docDisplayMap, showNxtYrPlanName, sanityRun);
 		} else {
 			Assert.assertTrue("PROBLEM - shouldn't be here, please check whether the milestone input dates are corrected...", false);
 		}
@@ -523,6 +530,15 @@ public class PrepareForNextYearStepDefinition {
 		else 
 			testNote.add("\t * FAILED - page content validation");
 			
+		getLoginScenario().saveBean(PrepareForNextYearCommonConstants.TEST_NOTE, testNote);
+
+		if (MRScenario.environment.equals("offline") || MRScenario.environment.equals("prod")) {
+			String testEnv="offline-prod";
+			if (MRScenario.environment.equals("prod"))
+				testEnv="online-prod";
+			Assert.assertTrue("PROBLEM - super user pink banner is missing for this env '"+testEnv+"'", pfnyPg.hasPinkBar());
+			testNote.add("\n\tPASSED - super user pink banner validation");
+		}
 		getLoginScenario().saveBean(PrepareForNextYearCommonConstants.TEST_NOTE, testNote);
 		
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
@@ -548,6 +564,15 @@ public class PrepareForNextYearStepDefinition {
 			getLoginScenario().saveBean(PrepareForNextYearCommonConstants.TEST_NOTE, testNote);
 			return;
 		}
+		
+		//note: if the run is for sanity, will skip clicking on links
+		boolean sanityRun=false;
+		for (String s: MRScenario.getTagList()) {
+			if (s.contains("sanity")) {
+				sanityRun=true;
+			}
+		}
+
 		//note: if able to get to this point means the page should exist
 		WebDriver wd=(WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
@@ -586,16 +611,16 @@ public class PrepareForNextYearStepDefinition {
 		List<String> sectionNote=new ArrayList<String>();
 		if (currentDate.before(milestone1Date)) {
 			testNote.add("\n\tValidation for current date '"+pfnyPg.convertDateToStrFormat_MMDDYYYY(currentDate)+"' < milestone 1 '"+pfnyPg.convertDateToStrFormat_MMDDYYYY(milestone1Date)+"'");
-			sectionNote=pfnyPg.validateBefM1Content(planType, memberType, currentDate, showNxtYrPlanName);
+			sectionNote=pfnyPg.validateBefM1Content(planType, memberType, currentDate, showNxtYrPlanName, sanityRun);
 		} else if ((currentDate.after(milestone1Date) || currentDate.equals(milestone1Date)) && currentDate.before(milestone2Date)) {
 			testNote.add("\tValidation for milestone 1 '"+pfnyPg.convertDateToStrFormat_MMDDYYYY(milestone1Date)+"' <= current date '"+pfnyPg.convertDateToStrFormat_MMDDYYYY(currentDate)+"' < milestone 2 '"+pfnyPg.convertDateToStrFormat_MMDDYYYY(milestone2Date)+"'");
-			sectionNote=pfnyPg.validateAftOrEqM1BefM2Content(planType, memberType, currentDate, showNxtYrPlanName);
+			sectionNote=pfnyPg.validateAftOrEqM1BefM2Content(planType, memberType, currentDate, showNxtYrPlanName, sanityRun);
 		} else if ((currentDate.after(milestone2Date) || currentDate.equals(milestone2Date)) && currentDate.before(milestone3Date)) {
 			testNote.add("\n\tValidation for milestone 2 '"+pfnyPg.convertDateToStrFormat_MMDDYYYY(milestone2Date)+"' <= current date '"+pfnyPg.convertDateToStrFormat_MMDDYYYY(currentDate)+"' < milestone 3 '"+pfnyPg.convertDateToStrFormat_MMDDYYYY(milestone3Date)+"'");
-			sectionNote=pfnyPg.validateAftOrEqM2BefM3Content(planType, memberType, currentDate, showNxtYrPlanName);
+			sectionNote=pfnyPg.validateAftOrEqM2BefM3Content(planType, memberType, currentDate, showNxtYrPlanName, sanityRun);
 		} else if (currentDate.after(milestone3Date) || currentDate.equals(milestone3Date)) {
 			testNote.add("\n\tValidation for milestone 3 '"+pfnyPg.convertDateToStrFormat_MMDDYYYY(milestone3Date)+"' <= current date '"+pfnyPg.convertDateToStrFormat_MMDDYYYY(currentDate)+"'");
-			sectionNote=pfnyPg.validateAfterOrEqalM3Content(planType, memberType, currentDate, showNxtYrPlanName);
+			sectionNote=pfnyPg.validateAfterOrEqalM3Content(planType, memberType, currentDate, showNxtYrPlanName, sanityRun);
 		} else {
 			Assert.assertTrue("PROBLEM - shouldn't be here, please check whether the milestone input dates are corrected...", false);
 		}
@@ -615,7 +640,16 @@ public class PrepareForNextYearStepDefinition {
 			testNote.add("\t * FAILED - page content validation");
 			
 		getLoginScenario().saveBean(PrepareForNextYearCommonConstants.TEST_NOTE, testNote);
-		
+
+		if (MRScenario.environment.equals("offline") || MRScenario.environment.equals("prod")) {
+			String testEnv="offline-prod";
+			if (MRScenario.environment.equals("prod"))
+				testEnv="online-prod";
+			Assert.assertTrue("PROBLEM - super user pink banner is missing for this env '"+testEnv+"'", pfnyPg.hasPinkBar());
+			testNote.add("\n\tPASSED - super user pink banner validation");
+		}
+		getLoginScenario().saveBean(PrepareForNextYearCommonConstants.TEST_NOTE, testNote);
+
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		Assert.assertTrue("PROBLEM - encountered FAILED validation during test, please review TEST NOTE for detail", finalCheck);
 	}	

@@ -151,6 +151,9 @@ public class DrugCostEstimatorPage extends UhcDriver {
 
 	@FindBy(xpath = "//div[@id='pharmacy-results']//span[contains(@class,'pharmacy-name')]")
 	public List<WebElement> pharmacies;
+	
+	@FindBy(xpath = "//li[@id='leftArrowId']/preceding-sibling::li")
+	public WebElement zipcodeSearchresults;
 
 	@FindBy(xpath = "//div[@id='pharmacy-results']/div[1]/ul[1]/li[1]/div/div[2]/a") 
 	public WebElement select_btn_first; 
@@ -857,6 +860,8 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	 */
 	public void validatePharmacylist() {
 		//Assert.assertEquals(3, pharmacies.size());
+		Assert.assertTrue(pharmacies.size()>0);
+		System.out.println("Number of pharmacies search results value is : "  + zipcodeSearchresults.getText());
 	}
 
 	/** 
@@ -1135,7 +1140,8 @@ public class DrugCostEstimatorPage extends UhcDriver {
 			CommonUtility.waitForPageLoad(driver, delDrgConfirm, 10);
 			delDrgConfirm.click();
 			System.out.println("Clicked delDrgConfirm");
-			Assert.assertTrue("PROBLEM - delDrgConfirm button should disappear after clicking", !validate(delDrgConfirm,5));
+			Thread.sleep(1000);
+			Assert.assertTrue("PROBLEM - delDrgConfirm button should disappear after clicking", !validate(delDrgConfirm));
 			CommonUtility.waitForPageLoad(driver, overlay_disappeared, 10);
 		}
 	}

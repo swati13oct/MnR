@@ -13,6 +13,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.PageFactory;
+
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 
@@ -20,6 +22,7 @@ public class PlanDocumentsAndResourcesBaseHelper extends PlanDocumentsAndResourc
 	
 	public PlanDocumentsAndResourcesBaseHelper(WebDriver driver) {
 		super(driver);
+		PageFactory.initElements(driver, this);
 		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
 	}
 
@@ -63,7 +66,7 @@ public class PlanDocumentsAndResourcesBaseHelper extends PlanDocumentsAndResourc
 			System.out.println("Element '"+element.toString()+"' not found/not visible. Exception");
 		}
 		//note: default in UhcDriver is 10
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);  
+		//tbd driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);  
 		return false;
 	} 
 	
@@ -83,7 +86,7 @@ public class PlanDocumentsAndResourcesBaseHelper extends PlanDocumentsAndResourc
 			System.out.println("Element with xpath='"+inputXpath+"' not found/not visible. Exception");
 		}
 		//note: default in UhcDriver is 10
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);  
+		//tbd driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);  
 		return false;
 	} 
 	
@@ -143,8 +146,7 @@ public class PlanDocumentsAndResourcesBaseHelper extends PlanDocumentsAndResourc
 			goToSpecificComboTab(planType, false);
 		}
 		
-		
-		checkModelPopup(driver, 5);
+		checkModelPopup(driver, 1);
 		StopWatch pageLoad = new StopWatch();
 		pageLoad.start();
 		try {
@@ -195,7 +197,7 @@ public class PlanDocumentsAndResourcesBaseHelper extends PlanDocumentsAndResourc
 			goToSpecificComboTab(planType, false);
 		}
 		
-		checkModelPopup(driver, 5);
+		checkModelPopup(driver, 1);
 		StopWatch pageLoad = new StopWatch();
 		pageLoad.start();
 		try {
@@ -320,7 +322,7 @@ public class PlanDocumentsAndResourcesBaseHelper extends PlanDocumentsAndResourc
 
 	public void planDocCheckModelPopup(WebDriver driver) {
 		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS); 
-		checkModelPopup(driver,5);
+		checkModelPopup(driver,1);
 		//note: UhcDriver default is 10
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS); 
 
@@ -328,12 +330,13 @@ public class PlanDocumentsAndResourcesBaseHelper extends PlanDocumentsAndResourc
 	
 	public void backToTopOfPage(String planType, String memberType) {
 		//moveMouseToElement(pageHeader);
-		checkModelPopup(driver, 5);
+		checkModelPopup(driver, 1);
 		if (!planDocValidate(backToTopLink)) {
 			String origUrlBeforeClick=driver.getCurrentUrl();
 			refreshPage(planType, memberType, origUrlBeforeClick);
 		}
 		CommonUtility.waitForPageLoad(driver, backToTopLink, 5);
+		checkModelPopup(driver, 1);
 		backToTopLink.click();  //note: validation should already been done for this if invoking to use this at this point
 		if (memberType.toLowerCase().contains("combo")) { 
 			System.out.println("This test is for combo plans, select the tab accordingly");

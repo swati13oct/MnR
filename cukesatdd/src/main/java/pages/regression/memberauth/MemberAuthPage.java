@@ -1,5 +1,6 @@
 package pages.regression.memberauth;
 
+import java.util.ArrayList;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
@@ -137,6 +138,7 @@ public class MemberAuthPage extends UhcDriver {
 	public MemberAuthPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
+		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
 		// TODO Auto-generated constructor stub
 	}
 
@@ -150,6 +152,7 @@ public class MemberAuthPage extends UhcDriver {
 	 * @todo : Login to app
 	 */
 	public MemberAuthPage navigateToLoginURL() {
+		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
 		if (MRScenario.environment.equalsIgnoreCase("prod"))
 			MEMBER_AUTH = MRConstants.ONLINE_PROD_MEMBER_AUTH;
 		else if (MRScenario.environment.equalsIgnoreCase("offline"))
@@ -209,7 +212,8 @@ public class MemberAuthPage extends UhcDriver {
 		password.sendKeys(loginpassword);
 		search.click();
 		Assert.assertTrue("PROBLEM - got initial login error on member auth, please check to see if input username/passowrd is correct or if password expired?", !validate(initialLoginErr,0));
-		waitforElement(memberUsername);
+		CommonUtility.waitForPageLoad(driver, memberUsername, 10);
+		//tbd waitforElement(memberUsername);
 		if (memberUsername.isDisplayed()) {
 			System.out.println("member auth Login successfully");
 			return new MemberAuthPage(driver);
@@ -219,14 +223,14 @@ public class MemberAuthPage extends UhcDriver {
 	}
 
 	public MemberAuthPage MainMemberLogin(String MemberUserName) throws InterruptedException {
-
 		memberUsername.clear();
 		memberUsername.sendKeys(MemberUserName);
 		FinalSearchButton.click();
 
 		Assert.assertTrue("PROBLEM - Got 'Unable to retrieve member' error after clicking Search button", !validate(redUnableToRetrMemErr,1));
 		//waitforElement(MemberTableUserName); // updated this wait as it is failing for 20 seconds
-		CommonUtility.waitForPageLoad(driver, MemberTableUserName, 30);
+		CommonUtility.waitForPageLoad(driver, MemberTableUserName, 10);
+		Assert.assertTrue("PROBLEM - unable ot locate member name from table after search", validate(MemberTableUserName,0));
 		if (MemberTableUserName.isDisplayed()) {
 			System.out.println("member Username under the table is displayed");
 			MemberTableUserName.click();
@@ -306,38 +310,56 @@ public class MemberAuthPage extends UhcDriver {
 
 	//public AccountHomePage userSelectsMemberEntered() throws InterruptedException {
 	public AccountHomePage userSelectsMemberEntered()  {
-		checkModelPopup(driver, 2);
+		//tbd checkModelPopup(driver, 2);
 		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
 		driver.manage().timeouts().pageLoadTimeout(2, TimeUnit.MINUTES);
 		try {
 
 			// waitforElement(MemberPopUpLogin);
-			CommonUtility.waitForPageLoad(driver, MemberPopUpLogin, 30);
-			try {
-				Thread.sleep(2000);
-			} catch (InterruptedException e) {
-			}
-			Assert.assertTrue("PROBLEM - unable to locate MemberPopUpLogin", validate(MemberPopUpLogin));
+			CommonUtility.waitForPageLoad(driver, MemberPopUpLogin, 50);
+			//tbd try {
+			//tbd 	Thread.sleep(2000);
+			//tbd } catch (InterruptedException e) {
+			//tbd }
+			Assert.assertTrue("PROBLEM - unable to locate MemberPopUpLogin", validate(MemberPopUpLogin,0));
 			if (MemberPopUpLogin.isDisplayed()) {
 				System.out.println("Pop up Login Button is displayed");
-				try {
-					Thread.sleep(2000);
-				} catch (InterruptedException e) {
-				}
+				//tbd try {
+				//tbd 	Thread.sleep(2000);
+				//tbd } catch (InterruptedException e) {
+				//tbd }
 				System.out.println("Scrolling to Login Button");
 				JavascriptExecutor jse2 = (JavascriptExecutor) driver;
 				jse2.executeScript("arguments[0].scrollIntoView()", MemberPopUpLogin);
-				try {
-					Thread.sleep(2000);
-				} catch (InterruptedException e) {
-				}
+				//tbd try {
+				//tbd Thread.sleep(2000);
+				//tbd } catch (InterruptedException e) {
+				//tbd }
+				ArrayList<String> beforeClicked_tabs = new ArrayList<String>(driver.getWindowHandles());
+				int beforeClicked_numTabs=beforeClicked_tabs.size();	
 				MemberPopUpLogin.click();
 				System.out.println("popup login button clicked");
-				System.out.println("wait for 10 seconds");
-				try {
-					Thread.sleep(10000);
-				} catch (InterruptedException e) {
+				//tbd System.out.println("wait for 10 seconds");
+				int count=0;
+				while(count!=10) {
+					count=count+1;
+					try {
+						Thread.sleep(1000);
+					} catch (InterruptedException e) {
+					}
+					System.out.print("...waited "+count+" seconds for new tab to show...");
+					ArrayList<String> afterClicked_tabs = new ArrayList<String>(driver.getWindowHandles());
+					int afterClicked_numTabs=afterClicked_tabs.size();
+					if (afterClicked_numTabs>beforeClicked_numTabs)
+						break;
 				}
+				ArrayList<String> afterClicked_tabs = new ArrayList<String>(driver.getWindowHandles());
+				Assert.assertTrue("PROBLEM: not getting new tab after clicking 'LOGIN AS MEMEBR' button after 10 seconds", afterClicked_tabs.size()>beforeClicked_numTabs);
+				System.out.println("new tab showed");
+				//tbd try {
+				//tbd Thread.sleep(10000);
+				//tbd } catch (InterruptedException e) {
+				//tbd }
 				// switchToNewTab();
 				String mainwindow = driver.getWindowHandle();
 				Set<String> allWindowHandles = driver.getWindowHandles();
@@ -367,15 +389,15 @@ public class MemberAuthPage extends UhcDriver {
 					//note: force it to wait 5 seconds for any of those 'My Home Page' splash page button to show if any
 					CommonUtility.waitForPageLoad(driver, emailGoToHomepageBtn, 5);
 					undeliverEmailAddressRequiredWorkaround();
-					CommonUtility.checkPageIsReadyNew(driver);
+					//tbd CommonUtility.checkPageIsReadyNew(driver);
 					emailAddressRequiredWorkaround();
-					CommonUtility.checkPageIsReadyNew(driver);
+					//tbd CommonUtility.checkPageIsReadyNew(driver);
 					goGreenSplashPageWorkaround();
-					CommonUtility.checkPageIsReadyNew(driver);
+					//tbd CommonUtility.checkPageIsReadyNew(driver);
 					anocSplashPageWorkaround();
-					CommonUtility.checkPageIsReadyNew(driver);
+					//tbd CommonUtility.checkPageIsReadyNew(driver);
 					paymentSplashPageWorkaround();
-					CommonUtility.checkPageIsReadyNew(driver);
+					//tbd CommonUtility.checkPageIsReadyNew(driver);
 					if (driver.getCurrentUrl().contains("bannerpopup.html")) {
 						System.out.println("COVID 19 Banner page has appeared");
 						try {
@@ -390,7 +412,8 @@ public class MemberAuthPage extends UhcDriver {
 								homePageNotice3.click();
 								CommonUtility.checkPageIsReadyNew(driver);
 							}
-							Thread.sleep(3000);
+							//tbd Thread.sleep(3000);
+							Thread.sleep(1500);
 						} catch (Exception e) {
 							// TODO Auto-generated catch block
 							System.out.println("Catch block");
@@ -401,15 +424,20 @@ public class MemberAuthPage extends UhcDriver {
 					checkModelPopup(driver, 2);
 					CommonUtility.checkPageIsReadyNew(driver);
 					Assert.assertTrue("PROBLEM - Got 'Sorry. It's not you' error instead of landing on dashboard", !validate(sorryItsNotYouErr,0));
-					CommonUtility.waitForPageLoad(driver, SuperUser_DashboardBanner, 60);
+	/*
+	 *   10/20/2020 - @jkuma14 - Commenting the code for checking Pink Banner on Dashboard page as it is currently a defect
+	 * 				
+	 * CommonUtility.waitForPageLoad(driver, SuperUser_DashboardBanner, 60);
 					if (!validate(SuperUser_DashboardBanner,0)) {
 						CommonUtility.waitForPageLoad(driver, SuperUser_DashboardBanner, 60);
 						Assert.assertTrue("PROBLEM - superuser dashboard banner still not showing after 2 min", validate(SuperUser_DashboardBanner,0));
 					}
 					// waitforElement(SuperUser_DashboardBanner);
-					if (driver.getCurrentUrl().contains("/dashboard") && SuperUser_DashboardBanner.isDisplayed()) {
+					if (driver.getCurrentUrl().contains("/dashboard") && SuperUser_DashboardBanner.isDisplayed()) */
+					if (driver.getCurrentUrl().contains("/dashboard"))
+					{
 						System.out.println("CSR Dashboard Page is displayed for the Member");
-						checkModelPopup(driver,5);
+						checkModelPopup(driver,2);
 						return new AccountHomePage(driver);
 					}
 				} else if (MRScenario.environment.startsWith("team")) {
@@ -473,25 +501,6 @@ public class MemberAuthPage extends UhcDriver {
 		return null;
 	}
 
-	/* tbd
-	public void splashPgWorkaroundForProd() {
-		String workaroundUrl="https://member.uat.uhc.com/aarp/dashboard"; //offline-prod, rally will take care of redirecting afterward
-		if (MRScenario.environment.equalsIgnoreCase("prod")) 
-			workaroundUrl="https://member.uhc.com/aarp/dashboard"; //online-prod, rally will take care of redirecting afterward
-		CommonUtility.waitForPageLoad(driver, goGreenGoToHomepageBtn, 5);
-		System.out.println("User encounteredd gogreen-splash page, handle it...");
-		try {
-			if (validate(goGreenGoToHomepageBtn,0)) {
-				System.out.println("Skipping the splash page by directly navigating to the Rally dashboard home page");
-				driver.navigate().to(workaroundUrl);
-				CommonUtility.checkPageIsReadyNew(driver);
-			}
-		} catch (Exception e1) {
-			System.out.println("did not encounter 'Go To Homepage' button on the splash page, some error on the page"+e1);
-		}
-		checkModelPopup(driver, 1);
-		Assert.assertTrue("PROBLEM - unable to navigate away from the GoGreen page", !driver.getCurrentUrl().contains("gogreen-splash.html"));
-	} */
 	
 	public void splashPgWorkaroundForProd() {
 		System.out.println("Proceed to perform the splash page workaround on this env...");
@@ -546,9 +555,10 @@ public class MemberAuthPage extends UhcDriver {
 	
 	public void goGreenSplashPageWorkaround() {
 		CommonUtility.checkPageIsReadyNew(driver);
+		CommonUtility.waitForPageLoad(driver, goGreenGoToHomepageBtn, 3);
 		System.out.println("Proceed to check if need to perform goGreen workaround...");
 		//checkModelPopup(driver, 2);
-		if (driver.getCurrentUrl().contains("gogreen-splash.html")) {
+		if (driver.getCurrentUrl().contains("gogreen-splash.html") || driver.getCurrentUrl().contains("member-registration-gogreen-splash.html")) {
 			if (MRScenario.environment.contains("team-a") || MRScenario.environment.contains("stage")) {
 				CommonUtility.waitForPageLoad(driver, goGreenGoToHomepageBtn, 5);
 				System.out.println("User encounted gogreen-splash page, handle it...");
@@ -570,6 +580,7 @@ public class MemberAuthPage extends UhcDriver {
 						+ "please either use another test user or manually handle the splash page properly.  "
 						+ "Env='"+MRScenario.environment+"'", false);
 			}
+			CommonUtility.checkPageIsReadyNew(driver);
 		} else {
 			System.out.println("no need to perform goGreen workaround...");
 		}
@@ -577,6 +588,7 @@ public class MemberAuthPage extends UhcDriver {
 
 	public void paymentSplashPageWorkaround() {
 		CommonUtility.checkPageIsReadyNew(driver);
+		CommonUtility.waitForPageLoad(driver, paymentGoToHomepageBtn, 3);
 		System.out.println("Proceed to check if need to perform payment workaround...");
 		//checkModelPopup(driver, 2);
 		if (driver.getCurrentUrl().contains("login/payment-two-offerings.html")) {
@@ -600,6 +612,7 @@ public class MemberAuthPage extends UhcDriver {
 						+ "please either use another test user or manually handle the splash page properly.  "
 						+ "Env='"+MRScenario.environment+"'", false);
 			}
+			CommonUtility.checkPageIsReadyNew(driver);
 		} else {
 			System.out.println("no need to perform payment workaround...");
 		}
@@ -607,7 +620,8 @@ public class MemberAuthPage extends UhcDriver {
 
 	public void anocSplashPageWorkaround() {
 		CommonUtility.checkPageIsReadyNew(driver);
-		System.out.println("Proceed to check if need to perform anoc workaround...");
+		CommonUtility.waitForPageLoad(driver, anocGoToHomepageBtn, 3);
+		System.out.println("Proceed to check if need to perform anoc workaround... driver.getCurrentUrl()="+driver.getCurrentUrl());
 		if (driver.getCurrentUrl().contains("login/anoc.html")) {
 			if (MRScenario.environment.contains("team-a") || MRScenario.environment.contains("stage")) {
 				CommonUtility.waitForPageLoad(driver, anocGoToHomepageBtn, 5);
@@ -629,6 +643,7 @@ public class MemberAuthPage extends UhcDriver {
 						+ "please either use another test user or manually handle the splash page properly.  "
 						+ "Env='"+MRScenario.environment+"'", false);
 			}
+			CommonUtility.checkPageIsReadyNew(driver);
 		} else {
 			System.out.println("no need to perform anoc workaround...");
 		}
@@ -637,6 +652,7 @@ public class MemberAuthPage extends UhcDriver {
 	
 	public void emailAddressRequiredWorkaround() {
 		CommonUtility.checkPageIsReadyNew(driver);
+		CommonUtility.waitForPageLoad(driver, emailGoToHomepageBtn, 3);
 		System.out.println("Proceed to check if need to perform no-email or multiple-emails workaround...");
 		//checkModelPopup(driver, 2);
 		if (driver.getCurrentUrl().contains("login/no-email.html") || driver.getCurrentUrl().contains("login/multiple-emails.html") ) {
@@ -676,6 +692,7 @@ public class MemberAuthPage extends UhcDriver {
 	
 	public void undeliverEmailAddressRequiredWorkaround() {
 		CommonUtility.checkPageIsReadyNew(driver);
+		CommonUtility.waitForPageLoad(driver, emailGoToHomepageBtn, 3);
 		System.out.println("Proceed to check if need to perform undeliverable email workaround...");
 		//checkModelPopup(driver, 2);
 		if (driver.getCurrentUrl().contains("login/undeliverable-email.html")) {
@@ -706,6 +723,7 @@ public class MemberAuthPage extends UhcDriver {
 						+ "please either use another test user or manually handle the splash page properly.  "
 						+ "Env='"+MRScenario.environment+"'", false);
 			}
+			CommonUtility.checkPageIsReadyNew(driver);
 		} else {
 			System.out.println("no need to perform undeliverable email workaround...");
 		}

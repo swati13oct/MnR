@@ -31,9 +31,9 @@ Feature: Plan Recommendation Engine Ranking - Verify Future PRE flows functional
     Then user validate elements in loading results page
     Then user validate future vs current UI and API recommendation rankings in results page
 
-    Examples: 
-      | Zipcode | isMultiCounty | county      | isCoverageOpt | specialNeeds | travel   | doctors | DoctorsName           | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch                              | pharmacyoption | Dental-Hearing-Vision-Fitness | costPreferenceOption |
-      |   90210 | NO            | Los Angeles | MAPD          | Nursing      | withinUS | Lookup  | Jennifer T. Dixon, NP | NO            | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,1,YES,NO:morphine sulfate,NO,morphine sulfate CAP 10MG ER,,,1,NO,NO | Online         | Yes,Yes,Yes,Yes               | Lower                |
+    Examples:
+     | site | Zipcode | isMultiCounty | county    | isCoverageOpt | specialNeeds | travel   | doctors | DoctorsName           | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch                              | pharmacyoption | Dental-Hearing-Vision-Fitness | costPreferenceOption |
+     | UHC | 13673   | NO            | Jefferson | MAPD          | Nursing      | withinUS | Lookup  | Jennifer              | NO            | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,1,YES,NO:morphine sulfate,NO,morphine sulfate CAP 10MG ER,,,1,NO,NO | Online         | Yes,Yes,Yes,Yes               | Lower                |
 
   @PRE @planrecommandonation @APIRanking @MAPDFlowRanking
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds>, <travel>, <doctors>, <DoctorsName>, <Drug Selection> , <Dental-Hearing-Vision-Fitness>, <costPreferenceOption> - To validate SNP API ranking plans in PRE
@@ -64,7 +64,7 @@ Feature: Plan Recommendation Engine Ranking - Verify Future PRE flows functional
 
     Examples: 
       | Zipcode | isMultiCounty | county     | isCoverageOpt | specialNeeds | travel | doctors         | DoctorsName      | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption |
-      |   33143 | No            | Miami-Dade | MAPD          | None         | None   | Lookup          | David B. Auerbach |               | No             | Yes,No,No,No                  | Higher               |
+#      |   33143 | No            | Miami-Dade | MAPD          | None         | None   | Lookup          | David B. Auerbach |               | No             | Yes,No,No,No                  | Higher               |
       |   55419 | No            | Hennepin   | MAPD          | None         | None   | AcceptsMedicare |                  |               | No             | Yes,No,No,No                  | Higher               |
 
   @PRE @planrecommendation @APIRanking @MAFutureFlowRanking
@@ -112,7 +112,7 @@ Feature: Plan Recommendation Engine Ranking - Verify Future PRE flows functional
     Then user validate elements in loading results page
     Then user validate future vs current UI and API recommendation rankings in results page
 
-    Examples: 
+    Examples:
       | Zipcode | isMultiCounty | county   | isCoverageOpt | Drug Selection |
       |   10001 | NO            | New York | PDP           | No             |
 

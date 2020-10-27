@@ -554,6 +554,7 @@ public class OneTimePaymentPage extends UhcDriver {
 
 	public CreditCardUPGPage clickOnNextButton() {
 		validate(otheramountfield);
+		TestHarness.checkForIPerceptionModel(driver);
 		NextButton.click();
 		System.out.println("User Click on Next button on one time page");
 		try {
@@ -596,7 +597,7 @@ public class OneTimePaymentPage extends UhcDriver {
 	public ConfirmOneTimePaymentPage selectAgreeAndClickOnSubmitPaymentsforOneTime() {
 		CommonUtility.waitForPageLoad(driver, EditPaymentInformation, 10);
 		TestHarness.checkForIPerceptionModel(driver);
-		System.out.println("User is on Review Review Your Automatic Payments Information Page");
+		System.out.println("User is on Review Your Automatic Payments Information Page");
 		PaymentsDataVerificationonReviewPage();
 		jsClickNew(AgreeCheckBox);
 		TestHarness.checkForIPerceptionModel(driver);

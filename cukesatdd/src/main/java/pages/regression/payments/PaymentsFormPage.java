@@ -53,7 +53,7 @@ public class PaymentsFormPage extends UhcDriver {
 	@FindBy(xpath = "//button[@class='btn btn--primary']")
 	private WebElement ContinueButton;
 	
-	@FindBy(xpath = "//button[@class='btn btn--secondary cancelbutton cancel-wcag']")
+	@FindBy(xpath = "(//button[@class='btn btn--secondary cancelbutton cancel-wcag' or @class='btn btn--secondary cancelbutton'])[1]")
 	private WebElement cancelButton;
 	
 	@FindBy(xpath = "//a[@class='btn btn--primary cancel-btn-modal']")
@@ -240,7 +240,7 @@ checkForIPerceptionModel(driver);
 		String firstName = accountAttributessMap.get("Account holder first name");
 		String middleName = accountAttributessMap.get("Account holder middle name");
 		String lastName = accountAttributessMap.get("Account holder last name");
-
+		TestHarness.checkForIPerceptionModel(driver);
 		routingNumberField.sendKeys(routingNumber);
 		confirmRoutingNumberField.sendKeys(confirmRoutingNumber);
 		accountNumberField.sendKeys(accountNumber);
@@ -249,6 +249,8 @@ checkForIPerceptionModel(driver);
 		middleNameField.sendKeys(middleName);
 		lastNameField.sendKeys(lastName);
 		jsClickNew(ElectronicSignatureInput);
+		TestHarness.checkForIPerceptionModel(driver);
+		TestHarness.checkForIPerceptionModel(driver);
 		ContinueButton.click();
 		System.out.println("Clicked on Continue button");
 		try {

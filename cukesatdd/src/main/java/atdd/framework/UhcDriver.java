@@ -68,6 +68,7 @@ public abstract class UhcDriver {
 	
 	@FindBy(xpath="//*[contains(@class,'btn-no')]")
 	public static WebElement IPerceptionNoBtn;
+
 	
 	public void start(String url) {
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
@@ -751,7 +752,7 @@ try {
 	public void checkModelPopup(WebDriver driver,long timeoutInSec) {
 		
 			CommonUtility.waitForPageLoad(driver, IPerceptionsFrame,timeoutInSec);
-			CommonUtility.waitForPageLoad(driver, IPerceptionsPopup,timeoutInSec);
+//			CommonUtility.waitForPageLoad(driver, IPerceptionsPopup,timeoutInSec);
 			
 			try{
 				if(IPerceptionsPopup.isDisplayed())	{
