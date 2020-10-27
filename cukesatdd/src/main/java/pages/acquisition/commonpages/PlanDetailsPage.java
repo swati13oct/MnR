@@ -98,6 +98,9 @@ public class PlanDetailsPage extends UhcDriver {
 	@FindBy(xpath = "//*[contains(@id,'DrugListDetails')]")
 	private WebElement editDrugLink;
 	
+	@FindBy(id = "estimateYourDrugsLink")
+	private WebElement estimateDrugBtn;
+	
 	@FindBy(xpath = "//*[contains(@class,'edit-drugs-link')]")
 	private WebElement editDrugLinkPlanCost;
 
@@ -518,12 +521,23 @@ public class PlanDetailsPage extends UhcDriver {
 		return null;
 	}
 	
-	public GetStartedPage navigateToDCERedesign() {
+	public GetStartedPage navigateToDCERedesignEditDrug() {
 
 		jsClickNew(presDrugTab.get(0));
 		validateNew(editDrugLink, 20);
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", editDrugLink);
 		((JavascriptExecutor) driver).executeScript("arguments[0].click();", editDrugLink);
+		if (validateNew(dceHeader))
+			return new GetStartedPage(driver);
+		return null;
+	}
+	
+	public GetStartedPage navigateToDCERedesign() {
+
+		jsClickNew(presDrugTab.get(0));
+		validateNew(estimateDrugBtn, 20);
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", estimateDrugBtn);
+		((JavascriptExecutor) driver).executeScript("arguments[0].click();", estimateDrugBtn);
 		if (validateNew(dceHeader))
 			return new GetStartedPage(driver);
 		return null;
