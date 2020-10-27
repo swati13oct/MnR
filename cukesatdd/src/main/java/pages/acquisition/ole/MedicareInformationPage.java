@@ -189,7 +189,8 @@ public class MedicareInformationPage extends UhcDriver{
 	@FindBy(xpath = "//*[contains(text(), 'Do you or your spouse have other health insurance that will cover medical services?')]")
 	private WebElement OtherIns_Question;
 	
-	@FindBy(id = "hasLongTermCareFacilityYes")
+	//@FindBy(id = "hasLongTermCareFacilityYes")
+	@FindBy(id = "hasHealthInsuranceYes")
 	private WebElement LongTerm_Question_Yes;
 	
 	@FindBy(xpath = "//*[contains(@id,'hasHealthInsuranceYes')]")

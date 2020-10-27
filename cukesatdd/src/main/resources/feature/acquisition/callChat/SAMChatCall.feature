@@ -183,12 +183,11 @@ Then the user validates whether call icon is visible
 #Then the user validates whether chat icon is visible on UHC
 Then the user validates whether chat icon is visible
 
-@samChatCallRegressionAARP @samChatRegressionAARP1
+@samChatRegressionAARP1
 Examples: 
 			| pagename |site|
-			|/| 
-    #  | medicare-education.html                                  |
-    | medicare-education/medicare-eligibility.html             |AARP|
+			|/| AARP|
+  		| medicare-education/medicare-eligibility.html             |AARP|
       | medicare-education/medicare-parts-and-medigap-plans.html | AARP|
       | medicare-education/medicare-benefits.html                |AARP|
       | medicare-education/medicare-advantage-plans.html  |AARP|
@@ -198,7 +197,7 @@ Examples:
       | medicare-education/enrollment-and-changing-plans.html | AARP|
       | medicare-education/medicare-faq.html                  | AARP|
      
-       @samChatCallRegressionAARP @samChatRegressionAARP2
+@samChatRegressionAARP2
 			Examples:
 			| pagename |site|
       | shop.html          | AARP|
@@ -228,7 +227,7 @@ Examples:
       | enroll/pdp-enrollment.html | AARP|
       |enroll/ms-apply.html        |AARP|
 
-      @samChatCallRegressionAARP @samChatRegressionAARP3
+@samChatRegressionAARP3
 			Examples:
 			| pagename |site|
       | resources.html                                       |AARP|
@@ -237,23 +236,15 @@ Examples:
       | resources/prescription-drug-costs-help.html          | AARP|
       | resources/healthcare-fraud.html                      | AARP|
       | resources/how-to-pay-your-premium.html               | AARP| 
-    # | resources/pdp-resources-materials.html                                            | AARP|
-     #| resources/pdp-resources-materials/pdp-information-forms.html                      | AARP|
-    # | resources/pdp-resources-materials/pdp-information-forms/explanation-benefits.html | AARP|         
-      | resources/mail-order-pharmacy.html                                                |AARP| 
+     | resources/mail-order-pharmacy.html                                                |AARP| 
       | resources/prescription-drug-appeals.html                                          | AARP|
       | resources/prescription-drug-transition.html                                       |AARP|
-    # | resources/ma-resources-materials.html                                               |AARP| 
-    # | resources/ma-resources-materials/ma-information-forms.html                          |AARP| 
-    # | resources/ma-resources-materials/ma-information-forms/member-rights.html            |AARP|
-     #| resources/ma-resources-materials/ma-information-forms/medicare-appeal.html          |AARP|
-     #| health-plans/resources/pdp-resources-materials/pdp-information-forms/medicare-disenrollment.html | 
-      | resources/disenrollment-information.html                                            | AARP|
+    | resources/disenrollment-information.html                                            | AARP|
       |resources/ma-pdp-information-forms.html                      |AARP|
       |resources/ma-pdp-information-forms/member-rights.html        |AARP|
       |resources/ma-pdp-information-forms/medicare-appeal.html      |AARP|
       |resources/ma-pdp-information-forms/explanation-benefits.html |AARP|    
-  @samChatCallRegressionAARP @samChatRegressionAARP4
+ @samChatRegressionAARP4
 			Examples:
 			| pagename |site|
       | health-plans.html?zipcode=90210&deepLink=favPlansDeepLink&plantype=MA&year=2020&planId=H0543168000&planYear=2020&systemYear=2020&zipcode=90210&fipsCode=037&product=MAPD&yearDisclaimer=undefined&month=2&yearToggle=undefined&deepLink=plandetail&WT.mc_id=8016371&mrcid=em:Acq:MR%7cFederal%7cEGEM3011%7c::8016371!/details |  AARP|                            
@@ -262,26 +253,21 @@ Examples:
       | health-plans.html?zipcode=10011&deepLink=favPlansDeepLink&plantype=MA&year=2020&planId=H3307018000&planYear=2020&systemYear=2020&zipcode=10011&fipsCode=061&product=MAPD&yearDisclaimer=undefined&month=2&yearToggle=undefined&deepLink=plandetail&WT.mc_id=897749&mrcid=em:Acq:MR%7cFederal%7cEGEM3011%7c::897749!/details   |AARP| 
       | health-plans.html?gclid=EAIaIQobChMI3PKJmZKJ3QIVBqZpCh2ROgj7EAAYAiAAEgKDjPD_BwE&mrcid=ps%253Agoogle%253Aportfolio+ma+ma%257CCofund%257CBrand%253AUHC%253A07.26.18%253A8004731&zipcode=63043&WT.mc_id=8004731!/plan-summary                                                                                                    |AARP|
       | health-plans/medicare-advantage-plans/available-plans.html?WT.mc_id=897506&zipcode=96795&county=020&state=12&originatingSite=https%3A%2F%2Fwww.myuhcplans.com%2Featon&subdomain=eaton!/plan-summary                                                                                                                           | AARP|
-      #| health-plans/estimate-drug-costs.html!/drug-cost-estimator |
-      #| health-plans/aarp-pharmacy.html!/Pharmacy-Search-English   | 
-      #| medicare-plans.html                                        | 
       | profile/guest                                              | AARP|
       | about-us.html                 |AARP|
       | sitemap.html                  | AARP|
       | terms-of-use.html             | AARP|
       | disclaimer.html               | AARP|
-     # | health-insurance-brokers.html |
       | contact-us.html               | AARP|
       | privacy-policy.html           |AARP|
 
-   ###-------------------------------------------------------UHC Site--------------------------------------
+  
    
-   @samChatCallRegressionUHC @samChatRegressionUHC1
+  @samChatRegressionUHC1
 		Examples: 
 			| pagename |site|
-			|/| 
-    #  | medicare-education.html                                  |
-    | medicare-education/medicare-eligibility.html             |UHC|
+			|/| UHC|   
+      | medicare-education/medicare-eligibility.html             |UHC|
       | medicare-education/medicare-parts-and-medigap-plans.html | UHC|
       | medicare-education/medicare-benefits.html                |UHC|
       | medicare-education/medicare-advantage-plans.html  |UHC|
@@ -291,7 +277,7 @@ Examples:
       | medicare-education/enrollment-and-changing-plans.html | UHC|
       | medicare-education/medicare-faq.html                  | UHC|
      
-      @samChatCallRegressionUHC @samChatRegressionUHC2
+@samChatRegressionUHC2
 			Examples:
 			| pagename |site|
       | shop.html          | UHC|
@@ -320,7 +306,7 @@ Examples:
       | enroll/ma-enrollment.html  |UHC|
       | enroll/pdp-enrollment.html | UHC|
       |enroll/ms-apply.html        |UHC|
-      @samChatCallRegressionUHC @samChatRegressionUHC3
+    @samChatRegressionUHC3
 			Examples:
 			| pagename |site|
       | resources.html                                       |UHC|
@@ -329,25 +315,17 @@ Examples:
       | resources/prescription-drug-costs-help.html          | UHC|
       | resources/healthcare-fraud.html                      | UHC|
       | resources/how-to-pay-your-premium.html               | UHC| 
-    # | resources/pdp-resources-materials.html                                            | UHC|
-     #| resources/pdp-resources-materials/pdp-information-forms.html                      | UHC|
-     #| resources/pdp-resources-materials/pdp-information-forms/explanation-benefits.html | UHC|         
-      | resources/mail-order-pharmacy.html                                                |UHC| 
+    | resources/mail-order-pharmacy.html                                                |UHC| 
       | resources/prescription-drug-appeals.html                                          | UHC|
       | resources/prescription-drug-transition.html                                       |UHC|
-     #| resources/ma-resources-materials.html                                               |UHC| 
-     #| resources/ma-resources-materials/ma-information-forms.html                          |UHC| 
-    # | resources/ma-resources-materials/ma-information-forms/member-rights.html            |UHC|
-    # | resources/ma-resources-materials/ma-information-forms/medicare-appeal.html          |UHC|
-    # | health-plans/resources/pdp-resources-materials/pdp-information-forms/medicare-disenrollment.html | 
-      | resources/disenrollment-information.html                                            | UHC|
+     | resources/disenrollment-information.html                                            | UHC|
       |resources/ma-pdp-information-forms/member-rights.html       |UHC|
       |resources/ma-pdp-information-forms/medicare-appeal.html     |UHC|
       |resources/ma-pdp-information-forms/explanation-benefits.html|UHC|
       |resources/ma-pdp-information-forms.html                     |UHC|
 
         
-      @samChatCallRegressionUHC @samChatRegressionUHC4
+  @samChatRegressionUHC4
 			Examples:
 			| pagename |site|
       | health-plans.html?zipcode=90210&deepLink=favPlansDeepLink&plantype=MA&year=2020&planId=H0543168000&planYear=2020&systemYear=2020&zipcode=90210&fipsCode=037&product=MAPD&yearDisclaimer=undefined&month=2&yearToggle=undefined&deepLink=plandetail&WT.mc_id=8016371&mrcid=em:Acq:MR%7cFederal%7cEGEM3011%7c::8016371!/details |  UHC|                            
@@ -356,21 +334,12 @@ Examples:
       | health-plans.html?zipcode=10011&deepLink=favPlansDeepLink&plantype=MA&year=2020&planId=H3307018000&planYear=2020&systemYear=2020&zipcode=10011&fipsCode=061&product=MAPD&yearDisclaimer=undefined&month=2&yearToggle=undefined&deepLink=plandetail&WT.mc_id=897749&mrcid=em:Acq:MR%7cFederal%7cEGEM3011%7c::897749!/details   |UHC| 
       | health-plans.html?gclid=EAIaIQobChMI3PKJmZKJ3QIVBqZpCh2ROgj7EAAYAiAAEgKDjPD_BwE&mrcid=ps%253Agoogle%253Aportfolio+ma+ma%257CCofund%257CBrand%253AUHC%253A07.26.18%253A8004731&zipcode=63043&WT.mc_id=8004731!/plan-summary                                                                                                    |UHC|
       | health-plans/medicare-advantage-plans/available-plans.html?WT.mc_id=897506&zipcode=96795&county=020&state=12&originatingSite=https%3A%2F%2Fwww.myuhcplans.com%2Featon&subdomain=eaton!/plan-summary                                                                                                                           | UHC|
-      #| health-plans/estimate-drug-costs.html!/drug-cost-estimator |
-      #| health-plans/UHC-pharmacy.html!/Pharmacy-Search-English   | 
-      #| medicare-plans.html                                        | 
       | profile/guest                                              | UHC|
       | about-us.html                 |UHC|
       | sitemap.html                  | UHC|
       | terms-of-use.html             | UHC|
       | disclaimer.html               | UHC|
-     # | health-insurance-brokers.html |
-      | contact-us.html               | UHC|
+     | contact-us.html               | UHC|
       | privacy-policy.html           |UHC|
-      
-      @samChatCallRegressionUHC @samChatRegressionUHC5 @samChatRegressionAARP5	
-		Examples:
-			| pagename                 |site|
-      |                         |  UHC|                            
-      |
+    
    	
