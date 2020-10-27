@@ -265,32 +265,7 @@ Examples:
       | contact-us.html               | AARP|
       | privacy-policy.html           |AARP|
 
-  @samChatRegressionAARP5
-			Examples:
-			| pagename |site|
-			|medicare-articles.html                                 |AARP|
-			|medicare-articles/medicare-made-clear.html             |AARP|
-      |medicare-articles/eligibility-and-enrollment.html      |AARP|
-      |medicare-articles/medicare-benefits-and-coverage.html  |AARP|
-      |medicare-articles/medicare-costs.html                  |AARP|
-      |medicare-articles/shopping-for-medicare.html           |AARP|
-      |medicare-articles/medicare-when-working-past-65.html   |AARP|
-      |medicare-articles/medicare-tips-and-faqs.html          |AARP|
-      |medicare-articles/how-to-avoid-the-medicare-part-b-late-penalty                                          |AARP|
-      |medicare-articles/unintended-part-d-gotcha-could-getcha-if-you-enroll-after-age-65                       | AARP|
-      |medicare-articles/9-good-reasons-why-a-medicare-advantage-plan-might-be-right-for-you                     |AARP|
-      |medicare-articles/caregiver-corner-helping-your-loved-one-prepare-for-the-medicare-annual-enrollment-period|AARP|
-      |medicare-articles/your-5-point-checklist-choosing-medicare-part-d-plan           |AARP|
-      |medicare-articles/6-tips-to-protect-yourself-from-medicare-fraud                 |AARP|
-      |medicare-articles/what-will-medicare-cost-in-2020                                | AARP|
-      |medicare-articles/what-is-retiree-health-coverage                                | AARP|
-      |medicare-articles/medicare-plan-annual-notice-of-change-what-to-look-for          |AARP|
-      |medicare-articles/need-eyeglasses-or-eye-care-coverage-check-your-medicare-options|AARP|
-      |medicare-articles/medicare-doesnt-cover-everything-what-you-need-know             |AARP|
-      |medicare-articles/6-timely-medicare-tips-for-turning-65      |AARP|
-      
-			
-   
+  
   @samChatRegressionUHC1
 		Examples: 
 			| pagename |site|
@@ -374,27 +349,4 @@ Examples:
      | contact-us.html               | UHC|
       | privacy-policy.html           |UHC|
     
-   	@samChatRegressionUHC5
-   	Examples:
-			| pagename |site|
-			|medicare-articles.html                                 |UHC|
-			|medicare-articles/medicare-made-clear.html             |UHC|
-      |medicare-articles/eligibility-and-enrollment.html      |UHC|
-      |medicare-articles/medicare-benefits-and-coverage.html  |UHC|
-      |medicare-articles/medicare-costs.html                  |UHC|
-      |medicare-articles/shopping-for-medicare.html           |UHC|
-      |medicare-articles/medicare-when-working-past-65.html   |UHC|
-      |medicare-articles/medicare-tips-and-faqs.html          |UHC|
-      |medicare-articles/how-to-avoid-the-medicare-part-b-late-penalty                                          |UHC|
-      |medicare-articles/unintended-part-d-gotcha-could-getcha-if-you-enroll-after-age-65                       | UHC|
-      |medicare-articles/9-good-reasons-why-a-medicare-advantage-plan-might-be-right-for-you                     |UHC|
-      |medicare-articles/caregiver-corner-helping-your-loved-one-prepare-for-the-medicare-annual-enrollment-period|UHC|
-      |medicare-articles/your-5-point-checklist-choosing-medicare-part-d-plan           |UHC|
-      |medicare-articles/6-tips-to-protect-yourself-from-medicare-fraud                 |UHC|
-      |medicare-articles/what-will-medicare-cost-in-2020                                | UHC|
-      |medicare-articles/what-is-retiree-health-coverage                                | UHC|
-      |medicare-articles/medicare-plan-annual-notice-of-change-what-to-look-for          |UHC|
-      |medicare-articles/need-eyeglasses-or-eye-care-coverage-check-your-medicare-options|UHC|
-      |medicare-articles/medicare-doesnt-cover-everything-what-you-need-know             |UHC|
-      |medicare-articles/6-timely-medicare-tips-for-turning-65      |UHC|
-			
+   
