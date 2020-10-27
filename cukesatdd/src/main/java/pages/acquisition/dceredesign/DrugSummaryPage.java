@@ -153,6 +153,24 @@ public class DrugSummaryPage extends UhcDriver {
 	
 	@FindBy(id = "SignIn")
 	public WebElement signInBtn;
+	
+	@FindBy(xpath = "//*[@id='enrollmentPopup']/..")
+	private WebElement savedPlansPopup;
+	
+	@FindBy(xpath = "//*[@id='enrollmentPopup']/..//*[@class='uhc-modal__close']")
+	private WebElement savedPlansPopupCloseIcon;
+	
+	@FindBy(id = "selectPharmacyBtn0")
+	private WebElement firstPharmacySelectBtn;
+	
+	@FindBy(xpath = "//button/span[text()='Save and Update Drug Costs']")
+	private WebElement saveAndUpdateDrugCostBtn;
+	
+	@FindBy(xpath = "//*[@id='selectPharmacyBtn0']/..//p/span")
+	private WebElement pharmacyNameSelected;
+	
+	@FindBy(xpath = "//*[@class='pharmacy-plan-desc']")
+	private WebElement pharmacyName;
 
 	@Override
 	public void openAndValidate() {
@@ -211,6 +229,13 @@ public class DrugSummaryPage extends UhcDriver {
 	public WebElement returnToHomeBtn;
 
 	public void clickOnReturnToHome() {
+		try{
+			if(savedPlansPopup.isDisplayed()) {
+				savedPlansPopupCloseIcon.click();
+			}
+		}catch(Exception e) {
+			System.out.println("Saved Plans modal not displayed");
+		}
 		validateNew(returnToHomeBtn);
 		returnToHomeBtn.click();
 	}
@@ -503,5 +528,19 @@ public class DrugSummaryPage extends UhcDriver {
 					driver.getCurrentUrl().contains("app/index.html#/login"));
 		}
 	}
-
+	
+	public static String selectedPharmacyName;
+	public void saveAndUpdatePharmacy() {
+		firstPharmacySelectBtn.click();
+		selectedPharmacyName=pharmacyNameSelected.getText();
+		System.out.println(selectedPharmacyName);
+		saveAndUpdateDrugCostBtn.click();	
+	}
+	
+	public void validateSelectedPharmacy() {
+		String pharmacy=pharmacyName.getText().substring(9).trim();
+		System.out.println(selectedPharmacyName);
+		System.out.println(pharmacy);
+		Assert.assertTrue("Pharmacy not updated", selectedPharmacyName.contains(pharmacy));
+	}
 }

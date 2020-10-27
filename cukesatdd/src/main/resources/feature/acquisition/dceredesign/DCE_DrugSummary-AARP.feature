@@ -72,8 +72,8 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
     And user clicks on continue button in Zip Entry Page
     #Then load screen should be displayed in AARP
     And user should be navigated to Review drug cost estimate page
-    Then the user validates whether call icon is visible
-    Then the user validates whether chat icon is visible
+    Then the user validates whether call icon is visible on AARP
+    Then the user validates whether chat Agent is Available on AARP
 
     Examples: 
       | path                                             | pageName                   | drugName | zipCode |
@@ -161,10 +161,12 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
     When user clicks on change pharmacy link from summary page
     Then change pharmacy modal should be displayed
     And user verify change pharmacy modal
+    When user saves and updates pharmacy from list
+    Then the pharmacy name should be updated on summary page
 
     Examples: 
       | path                                             | pageName                   | drugName | zipCode |
-      | health-plans/estimate-drug-costs.html/getstarted | DCE Redesign - Get Started | lipitor  |   90001 |
+      | health-plans/estimate-drug-costs.html/getstarted | DCE Redesign - Get Started | Lipitor  |   90001 |
 
   @dceRedesignSwitchToGenericDrug @F484185 @F495366
   Scenario Outline: Test to Verify that user can switch to generic drug when no drug covered
@@ -227,6 +229,8 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
     And user clicks on change pharmacy link from details page
     Then details page change pharmacy modal should be displayed
     And user verify details page change pharmacy modal
+    When user saves and updates pharmacy from list on details page
+    Then the pharmacy name should be updated on details page
 
     Examples: 
       | path                                             | pageName                   | drugName | zipCode |
@@ -277,8 +281,8 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
     And user should be able to toggle between plan types
 
     Examples: 
-      | zipcode | plantype | county           | isMultutiCounty | drug1   | drug2                | drug3      | drug4         | drug5            | drug6   | planname                        |
-      |   96799 | PDP      | Western District | no              | Orkambi | diclofenac potassium | febuxostat | buprenorphine | fentanyl citrate | Lipitor | AARP MedicareRx Walgreens (PDP) |
+      | zipcode | plantype | county           | isMultutiCounty | drug1   |planname                        |
+      |   96799 | PDP      | Western District | no              | Orkambi |AARP MedicareRx Walgreens (PDP) |
 
   @dceSaveplanandBacktoplans @F492270
   Scenario Outline: Test to verify that user can Save plan on DCE summary page and navigating back to homepage to retain the cart value
@@ -304,7 +308,7 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
     Then user save SNP plan as favorite on drug summary page AARP site
       | SNP Plans | <snptestPlans> |
     And user click on return to home on drug summary in AARP site
-    Then the user clicks on the shopping cart icon in AARP site
+    Then the user navigates to Visitor profile page
     And user validates the added plans on visitor profile page of AARP site
       | Test Plans | <testPlans>    |
       | PDP Plans  | <pdptestPlans> |

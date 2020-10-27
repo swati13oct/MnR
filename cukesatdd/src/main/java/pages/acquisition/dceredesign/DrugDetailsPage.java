@@ -157,7 +157,8 @@ public class DrugDetailsPage extends UhcDriver {
 	@FindBy(xpath = "//a[text()='Keep using this pharmacy.']")
 	public WebElement keepUsingPharmBtn;
 	
-	@FindBy(xpath = "//a[text()='Change Pharmacy']/ancestor::div/div/span']")
+	//@FindBy(xpath = "//a[text()='Change Pharmacy']/ancestor::div/div/span']")
+	@FindBy(xpath = "//button[text()='Change Pharmacy']/ancestor::div/div/span")
 	public WebElement pharmacyName;
 	
 	@FindBy(xpath = "//button[contains(@aria-label,'Select ROCK PHARMACY -')]")
@@ -207,6 +208,15 @@ public class DrugDetailsPage extends UhcDriver {
 	
 	@FindBy(id = "SignIn")
 	public WebElement signInBtn;
+	
+	@FindBy(id = "selectPharmacyBtn0")
+	private WebElement firstPharmacySelectBtn;
+	
+	@FindBy(xpath = "//button/span[text()='Save and Update Drug Costs']")
+	private WebElement saveAndUpdateDrugCostBtn;
+	
+	@FindBy(xpath = "//*[@id='selectPharmacyBtn0']/..//p/span")
+	private WebElement pharmacyNameSelected;
 	
 	public DrugDetailsPage(WebDriver driver) {
 		super(driver);
@@ -796,5 +806,20 @@ public class DrugDetailsPage extends UhcDriver {
 			Assert.assertTrue("user not navigated to login page",
 					driver.getCurrentUrl().contains("app/index.html#/login"));
 		}
+	}
+	
+	public static String selectedPharmacyName;
+	public void saveAndUpdatePharmacy() {
+		firstPharmacySelectBtn.click();
+		selectedPharmacyName=pharmacyNameSelected.getText();
+		System.out.println(selectedPharmacyName);
+		saveAndUpdateDrugCostBtn.click();	
+	}
+	
+	public void validateSelectedPharmacy() {
+		String pharmacy=pharmacyName.getText().trim();
+		System.out.println(selectedPharmacyName);
+		System.out.println(pharmacy);
+		Assert.assertTrue("Pharmacy not updated", selectedPharmacyName.contains(pharmacy));
 	}
 }

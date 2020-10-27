@@ -1116,4 +1116,29 @@ public class DCEStepDefinitionAARP {
 		DrugDetailsPage drugDetailsPage = new DrugDetailsPage(driver);
 		drugDetailsPage.validateDCENBAModal();
 	}
+	
+	@When("^user saves and updates pharmacy from list$")
+	public void user_saves_and_updates_pharmacy_from_list() throws Throwable {
+		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
+		drugSummaryPage.saveAndUpdatePharmacy();
+	}
+
+	@Then("^the pharmacy name should be updated on summary page$")
+	public void the_pharmacy_name_should_be_updated_on_summary_page() throws Throwable {
+		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
+		drugSummaryPage.validateSelectedPharmacy();
+	}
+	
+	@Then("^the pharmacy name should be updated on details page$")
+	public void the_pharmacy_name_should_be_updated_on_details_page() throws Throwable {
+		DrugDetailsPage drugDetailsPage = new DrugDetailsPage(driver);
+		drugDetailsPage.validateSelectedPharmacy();
+	}
+	
+	@When("^user saves and updates pharmacy from list on details page$")
+	public void user_saves_and_updates_pharmacy_from_list_on_details_page() throws Throwable {
+		DrugDetailsPage drugDetailsPage = new DrugDetailsPage(driver);
+		drugDetailsPage.saveAndUpdatePharmacy();
+	}
+
 }
