@@ -238,7 +238,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "//*[@class='container meded-article-header']//span[contains(text(),'About UnitedHealthcare')]")
 	public WebElement aboutUsHeader;
 	
-	@FindBy(xpath = "//span[contains(@class,'heading') and contains(text(),'Connect with UnitedHealthcare')]")
+	@FindBy(xpath = "//span[contains(@class,'heading')]/parent::h1")
 	public WebElement contactUsHeader;
 	
 	@FindBy(id = "medicareTitle")

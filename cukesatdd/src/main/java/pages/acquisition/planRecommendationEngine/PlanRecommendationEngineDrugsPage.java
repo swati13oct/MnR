@@ -253,12 +253,10 @@ public class PlanRecommendationEngineDrugsPage extends UhcDriver {
                                     System.out.println("Drugs Page Functional Operations");
                                     if (drug.equalsIgnoreCase("Yes")) {
                                                     validate(yesOption);
-//                                                    yesOption.click();
                                                     jsClickNew(yesOption);
                                                     System.out.println("Prescription Type "+ drug +" Clicked");
                                     }else if (drug.equalsIgnoreCase("No")) {
                                                     validate(noOption);
-//                                                    noOption.click();
                                                     jsClickNew(noOption);
                                                     System.out.println("Prescription Type "+ drug +" Clicked");
                                     }                                    
@@ -278,7 +276,6 @@ public class PlanRecommendationEngineDrugsPage extends UhcDriver {
                                 
                                 public void drugsInitiate(String drugSelection) {
                                 	drugpageOptions(drugSelection);
-//                                	continueBtn.click();
                                 	jsClickNew(continueBtn);
                                 	validate(drugsearchBox);
                             	}
@@ -338,9 +335,7 @@ public class PlanRecommendationEngineDrugsPage extends UhcDriver {
                                 public void continueNextpageZeroDrug() {
                             		validate(drugsearchBox,30);
                             		threadsleep(2000);
-//                            		continueBtn.click();
                             		jsClickNew(continueBtn);
-                            		waitForPageLoadSafari();
                             		System.out.println("Validating " + page + " page Continue button functionality");
                             		desktopCommonUtils.nextPageValidation(page.toUpperCase() + "skip");
                             	}

@@ -108,12 +108,10 @@ public class PlanRecommendationEngineCostPreferencesPage extends UhcDriver {
 		System.out.println("Cost Preferences option selection in Cost Preferences Page");
 		if (costpreferenceoption.equalsIgnoreCase("Lower")) {
 			validate(lowerPremium);
-//			lowerPremium.click();
 			jsClickNew(lowerPremium);
 			System.out.println("Cost Preferences Type " + costpreferenceoption + " Clicked");
 		} else if (costpreferenceoption.equalsIgnoreCase("Higher")) {
 			validate(higherPremium);
-//			higherPremium.click();
 			jsClickNew(higherPremium);
 			System.out.println("Cost Preferences Type " + costpreferenceoption + " Clicked");
 		}
@@ -123,7 +121,6 @@ public class PlanRecommendationEngineCostPreferencesPage extends UhcDriver {
 	public void costPreferencepageFunctional(String preference) {
 		System.out.println("Cost Preferences Page Functional Operations");
 		costPreferencepageOptions(preference);
-//		continueBtn.click();
 		jsClickNew(continueBtn);
 		System.out.println("Validating " + page + " page Continue button functionality");	
 		}
@@ -132,7 +129,6 @@ public class PlanRecommendationEngineCostPreferencesPage extends UhcDriver {
 
 	public void costPreferencepageerror() {
 		System.out.println("Cost Preference type is not selected - Error Scenario in Cost Preference Page");
-//		continueBtn.click();
 		jsClickNew(continueBtn);
 		desktopCommonUtils.desktopErrorValidation(page);
 	}

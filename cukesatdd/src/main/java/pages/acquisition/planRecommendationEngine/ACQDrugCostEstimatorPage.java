@@ -158,7 +158,6 @@ public class ACQDrugCostEstimatorPage extends UhcDriver {
 				if (drugDetails[7].toUpperCase().equals("YES"))
 					switchGeneric = true;
 				threadsleep(2000);
-//				drugAddBtn.click();
 				jsClickNew(drugAddBtn);
 				threadsleep(2000);
 				addDrugbySearchDCE(drugName, searchButtonClick, dosage, packageName, count, threeeMonthfrequency,
@@ -169,15 +168,14 @@ public class ACQDrugCostEstimatorPage extends UhcDriver {
 
     public void choosePharmacyandBacktoPlans() {
     	validate(drugpageButtons.get(0));
-//		drugpageButtons.get(0).click();
 		jsClickNew(drugpageButtons.get(0));
 		pageloadcomplete();
 		threadsleep(2000);
 		validate(backtoPlansButton.get(0));
-//		backtoPlansButton.get(0).click();
 		jsClickNew(backtoPlansButton.get(0));
 		pageloadcomplete();
 		threadsleep(2000);
+		waitForPageLoadSafari();
 }
 	
 	
@@ -189,14 +187,12 @@ public class ACQDrugCostEstimatorPage extends UhcDriver {
 			drugsearchBox.clear();
 			drugsearchBox.sendKeys(drugName);
 			if (searchButtonClick) {
-//			drugsearchButton.click();
 			jsClickNew(drugsearchButton);
 			//Select modal
 			validate(searchList.get(0), 30);
 			threadsleep(2000);
 			for(WebElement elm:searchList) {
 				if(elm.findElement(By.cssSelector("span")).getText().trim().equalsIgnoreCase(drugName)) {
-//					elm.findElement(By.cssSelector("button")).click();
 					jsClickNew(elm.findElement(By.cssSelector("button")));
 					break;
 				}
@@ -204,7 +200,6 @@ public class ACQDrugCostEstimatorPage extends UhcDriver {
 			threadsleep(2000);
 		} else {
 			threadsleep(10000);
-//			drugsAutoList.get(0).click();
 			jsClickNew(drugsAutoList.get(0));
 		}
 
@@ -229,7 +224,6 @@ public class ACQDrugCostEstimatorPage extends UhcDriver {
 			dosage = dos.getFirstSelectedOption().getText().trim().split(" ")[1] + " "
 					+ dos.getFirstSelectedOption().getText().trim().split(" ")[2];
 			threadsleep(2000);
-//			addDrugButton.click();
 			jsClickNew(addDrugButton);
 			// Not Covered switch generic as it is not DD scope in DCE page
 		} catch (Exception e) {

@@ -138,7 +138,7 @@ public abstract class UhcDriver {
 	public void selectFromDropDown(List<WebElement> elementList, String value) {
 		for (WebElement element : elementList) {
 			if (element.getText().contains(value)) {
-				element.click();
+				jsClickNew(element);
 				break;
 			}
 		}
