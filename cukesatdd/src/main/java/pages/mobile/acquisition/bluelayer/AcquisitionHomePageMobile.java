@@ -185,41 +185,27 @@ public class AcquisitionHomePageMobile extends GlobalWebElementsMobile {
 			} else if (MRScenario.environment.equalsIgnoreCase("prod")) {
 				startNewMobile(AARP_ACQISITION_PROD_PAGE_URL);
 			}
-		} /*else { // For jenkins job
+		} else { // For jenkins job
 			String jenkinsRunnerFiles = MRScenario.runnerFiles;
 
 			if (MRScenario.environment.equalsIgnoreCase("stage")) {
 				for (String rname : jenkinsRunnerFiles.split(",")) {
-					if (rname.toUpperCase().contains("PLANRECOMMENDATIONENGINE")
-							&& rname.toUpperCase().contains("ULAYER"))
-						startNewMobile(AARP_ACQISITION_PAGE_URL);
-					if (rname.toUpperCase().contains("PLANRECOMMENDATIONENGINE")
-							&& rname.toUpperCase().contains("BLAYER"))
-						startNewMobile(AARP_ACQISITION_PAGE_URL);
+					startNewMobile(AARP_ACQISITION_PAGE_URL);
 				}
 			}
 
 			if (MRScenario.environment.equalsIgnoreCase("offline")) {
 				for (String rname : jenkinsRunnerFiles.split(",")) {
-					if (rname.toUpperCase().contains("PLANRECOMMENDATIONENGINE")
-							&& rname.toUpperCase().contains("ULAYER"))
-						startNewMobile(AARP_ACQISITION_OFFLINE_PAGE_URL);
-					if (rname.toUpperCase().contains("PLANRECOMMENDATIONENGINE")
-							&& rname.toUpperCase().contains("BLAYER"))
-						startNewMobile(AARP_ACQISITION_OFFLINE_PAGE_URL);
+					startNewMobile(AARP_ACQISITION_OFFLINE_PAGE_URL);
+
 				}
 			}
 			if (MRScenario.environment.equalsIgnoreCase("prod")) {
 				for (String rname : jenkinsRunnerFiles.split(",")) {
-					if (rname.toUpperCase().contains("PLANRECOMMENDATIONENGINE")
-							&& rname.toUpperCase().contains("ULAYER"))
-						startNewMobile(AARP_ACQISITION_PROD_PAGE_URL);
-					if (rname.toUpperCase().contains("PLANRECOMMENDATIONENGINE")
-							&& rname.toUpperCase().contains("BLAYER"))
-						startNewMobile(AARP_ACQISITION_PROD_PAGE_URL);
+					startNewMobile(AARP_ACQISITION_PROD_PAGE_URL);
 				}
 			}
-		}*/
+		}
 		System.out.println("Current mobile page URL: " + driver.getCurrentUrl());
 		return offline_prod;
 

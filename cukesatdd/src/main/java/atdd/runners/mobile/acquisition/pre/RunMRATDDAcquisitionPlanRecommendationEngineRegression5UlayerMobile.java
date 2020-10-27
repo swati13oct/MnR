@@ -15,18 +15,18 @@ import cucumber.api.CucumberOptions;
 		retryCount=1, 
 		screenShotSize="", 
 		screenShotLocation="/screenshots/",
-		jsonReport = "target/cucumber-RunMRATDDAcquisitionPlanRecommendationEngineRegression6Ulayer.json",
+		jsonReport = "target/cucumber-RunMRATDDAcquisitionPlanRecommendationEngineRegression5UlayerMobile.json",
 		detailedReport = true, 
 		detailedAggregatedReport = true, 
 		overviewReport = true, 
 		toPDF = true, 
-		outputFolder = "target/RunMRATDDAcquisitionPlanRecommendationEngineRegression6Ulayer")
+		outputFolder = "target/RunMRATDDAcquisitionPlanRecommendationEngineRegression5UlayerMobile")
 @CucumberOptions(
 		glue = { "atdd.framework", "acceptancetests.mobile" }, 
 		features = { "src/main/resources/feature/mobile/acquisition/planrecommendationengine/" }, 
-		plugin = {"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionPlanRecommendationEngineRegression6Ulayer.json" }, 
-		tags = {"@PRERegression6"}, dryRun=false)
-public class RunMRATDDAcquisitionPlanRecommendationEngineRegression6Ulayer {
+		plugin = {"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionPlanRecommendationEngineRegression5UlayerMobile.json" }, 
+		tags = {"@PRERegression5"}, dryRun=false)
+public class RunMRATDDAcquisitionPlanRecommendationEngineRegression5UlayerMobile {
 
 }
 

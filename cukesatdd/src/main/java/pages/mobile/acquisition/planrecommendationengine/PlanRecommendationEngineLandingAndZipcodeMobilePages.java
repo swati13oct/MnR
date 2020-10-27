@@ -42,7 +42,7 @@ public class PlanRecommendationEngineLandingAndZipcodeMobilePages extends UhcDri
 
 	// Landing page Elements
 
-	@FindBy(css = "div[class*='get-started-banner'] button")
+	@FindBy(xpath = "//button[@class='button button-primary button-orange' and @xpath=1]")
 	private WebElement getStartedBtn;
 
 	@FindBy(css = "div[class*='get-started-main-inner'] button")
@@ -195,6 +195,7 @@ public class PlanRecommendationEngineLandingAndZipcodeMobilePages extends UhcDri
 		// waitTillElementClickableInTime(getStartedBtn1, 45);
 		System.out.println("Before clicking GetStarted");
 		MobileMenu();
+		Thread.sleep(3000);
 		jsClickNew(getStartedBtn);
 		System.out.println("After clicking GetStarted");
 		zipcodePage();
