@@ -1132,10 +1132,10 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 			BackButtonOnPharmacyLocatorPageByRally.click();
 		}
 
-		public void clickBackButtonOnTransferToHD() {
-			Assert.assertTrue("PROBLEM - unable to locate Back Button On Transfer to HD page By Rally ",
-					validate(backButtonOnTransfer2HD));
-			backButtonOnTransfer2HD.click();
+		public void clickBackButton() {
+			Assert.assertTrue("PROBLEM - unable to locate Back Button ",
+					validate(backButton));
+			backButton.click();
 		}
 
 

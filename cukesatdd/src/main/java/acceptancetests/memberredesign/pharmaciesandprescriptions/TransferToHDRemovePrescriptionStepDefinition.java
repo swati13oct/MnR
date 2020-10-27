@@ -97,12 +97,12 @@ public class TransferToHDRemovePrescriptionStepDefinition {
 
 	}
 
-	@When("^user returns to the My Medications page$")
-	public void user_returns_to_the_My_Medications_page() throws Throwable {
+	@When("^user clicks on the back button$")
+	public void user_clicks_on_the_back_button() throws Throwable {
 
 		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
-		pnpPg.clickBackButtonOnTransferToHD();
+		pnpPg.clickBackButton();
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
 
 	}

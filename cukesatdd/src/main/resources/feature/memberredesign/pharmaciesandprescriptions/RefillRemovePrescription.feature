@@ -46,7 +46,7 @@ Feature: Refill - Remove prescription
     Then user will see the number of medications in my order indicated in the header
     And a message confirming my medication was removed
     And a message indicating there are no prescriptions
-    When user returns to the My Medications page
+    When user clicks on the back button
 
     Examples:
       | FID     | planType | memberType             |
