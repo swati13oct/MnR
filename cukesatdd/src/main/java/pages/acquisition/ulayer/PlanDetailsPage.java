@@ -9,7 +9,9 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.pdfbox.pdmodel.PDDocument;
@@ -1255,6 +1257,7 @@ public class PlanDetailsPage extends UhcDriver {
 				dentalPopupOptionalRidersLink.click();
 			else {
 				JavascriptExecutor jse = (JavascriptExecutor) driver;
+//				jse.executeScript("arguments[0].scrollIntoView(true);", dentalPopupLink);
 				jse.executeScript("arguments[0].click()", dentalPopupLink);
 			}
 			System.out.println("Plan Name is : " + planName);
@@ -1264,7 +1267,18 @@ public class PlanDetailsPage extends UhcDriver {
 			Thread.sleep(5000);
 			System.out.println("Moved to dental directoy rally page");
 
-			driver.switchTo().window(driver.getWindowHandles().toArray()[1].toString());
+//			driver.switchTo().window(driver.getWindowHandles().toArray()[1].toString());
+			Set<String> tab_windows = driver.getWindowHandles();
+			Iterator<String> itr = tab_windows.iterator();
+			while(itr.hasNext()) {
+				String childWindow = itr.next();
+				if(!childWindow.equals(parentWindow)) {
+					driver.switchTo().window(childWindow);
+					break;
+				}
+			}
+			checkIfPageReadySafari();
+			waitTillElementClickableInTime(driver.findElement(By.id("changeLocationBtn")), 10);
 			System.out.println(driver.getTitle());
 			Assert.assertTrue( "Title mismatch for dental directory",driver.getTitle().equals("Dental | Find Care"));
 			driver.close();

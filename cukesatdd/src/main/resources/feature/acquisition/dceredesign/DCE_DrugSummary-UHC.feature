@@ -58,25 +58,25 @@ Feature: 1.10.1 DCE-REDESIGN UHC - To test Drug summary page in New DCE flow
     When the user navigates to following UHC medicare solutions site page
       | PageName | <pageName> |
       | PagePath | <path>     |
-    Then the user validates Get Started Page for UHC
-    When the user clicks on Add drugs button on UHC
-    And adds drugs in drug list page on UHC
+    Then the user validates Get Started Page
+    When the user clicks on Add drugs button
+    And adds drugs in drug list page
     | DrugName | <drugName> |
-    And clicks on Review drug cost button on UHC
-    #Then user should be navigated to zipcode and plan year capture page for AEP on UHC
-    Then user should be navigated to UHC, zipcode and plan year capture page for Non AEP
-    When user enters valid zipcode and county on UHC
+    And clicks on Review drug cost button
+    Then user should be navigated to zipcode and plan year capture page for AEP
+    #Then user should be navigated to UHC, zipcode and plan year capture page for Non AEP
+    When user enters valid zipcode and county
       | ZipCode | <zipCode> |
    # And user selects plan year on UHC
-    And user clicks on continue button on UHC
-    Then load screen should be displayed on UHC
-    And user should be navigated to Review drug cost estimate page on UHC
-    And user should be able to see Medicare Advantage plan by default on UHC
-    And user should be able to toggle between plan types on UHC
+    And user clicks on continue button in Zip Entry Page
+    #Then load screen should be displayed on UHC
+    And user should be navigated to Review drug cost estimate page
+    And user should be able to see Medicare Advantage plan by default
+    And user should be able to toggle between plan types
     
     Examples: 
       | path                     | pageName                   |drugName|zipCode |
-      | health-plans/estimate-drug-costs.html/getstarted | DCE Redesign - Get Started |lipitor|  10001 |
+      | health-plans/estimate-drug-costs.html/getstarted | DCE Redesign - Get Started |Lipitor|  10001 |
   
        @dCERedesign_PlanSaveUHC @F476042   
      Scenario Outline: Test to verify unauthenticated user save the plan on drug summary page and see the saved plan on guest profile 

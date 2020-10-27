@@ -206,7 +206,7 @@ Feature: 1.08. ACQ- Shopper Profile
       | Plan Type  | <plantype>  |
       | Test Plans | <testPlans> |
     Then Navigate to Visitor Profile page on AARP site
-    And enroll In Plan should not be clickable on Visitor Profile page in Agent mode
+    And enroll In Plan should not be clickable on Visitor Profile page in Agent mode on aarp
     And user delets the added plans on visitor profile page of AARP site
       | Test Plans | <testPlans> |
 
@@ -251,7 +251,7 @@ Feature: 1.08. ACQ- Shopper Profile
       | qavgogine | qavgogine | !!AURORA | SHEPLEY__ |
 
   @createProfileMember
-  Scenario Outline: Telesales agent searching for the Creating a profile
+  Scenario Outline: Telesales agent searching for the Creating a profile - email - <email>
     Given I am an agent logged into the cloak in tool
       | User Name | <username> |
       | Password  | <password> |
@@ -291,7 +291,7 @@ Feature: 1.08. ACQ- Shopper Profile
       | qavgogine | qavgogine | LEONEL@MEMBER.COM        | 08/23/1940 |               | LEONEL  | DREHMER    |   10010 |                                           | UnitedHealthcare Medicare Advantage Choice Plan 1 (Regional PPO) | No        | No                                                              |
 
   @createProfileNonMember
-  Scenario Outline: Telesales agent Creating a Non Member Profile
+  Scenario Outline: Telesales agent Creating a Non Member Profile - email - <email>
     Given I am an agent logged into the cloak in tool
       | User Name | <username> |
       | Password  | <password> |

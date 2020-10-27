@@ -151,3 +151,76 @@ Feature: ACQ-Plan benefits validation
       Examples: 
       | excelPath                | workSheet | site |
       | Plan Details Benefits_Data | PDPSheet2  | UHC |
+      
+# 2021 plans examples seen below
+
+		@planDetailsBenefitsAARP01_NextYear  
+    	Examples: 
+      | excelPath                | workSheet | site |
+      | Plan Details Benefits_Data | Sheet1_21  | AARP |
+      
+      @planDetailsBenefitsAARP02_NextYear
+      Examples: 
+      | excelPath                | workSheet | site |
+      | Plan Details Benefits_Data | Sheet2_21  | AARP |
+      
+      @planDetailsBenefitsAARP03_NextYear
+      Examples: 
+      | excelPath                | workSheet | site |
+      | Plan Details Benefits_Data | Sheet3_21  | AARP |
+      
+      @planDetailsBenefitsAARP04_NextYear
+      Examples: 
+      | excelPath                | workSheet | site |
+      | Plan Details Benefits_Data | Sheet4_21  | AARP |
+      
+      @planDetailsBenefitsAARP05_NextYear
+      Examples: 
+      | excelPath                | workSheet | site |
+      | Plan Details Benefits_Data | Sheet5_21  | AARP |
+      
+      @planDetailsBenefitsAARP06_NextYear
+      Examples: 
+      | excelPath                | workSheet | site |
+      | Plan Details Benefits_Data | Sheet6_21  | AARP |
+      
+      @planDetailsBenefitsAARP07_NextYear
+    	Examples: 
+      | excelPath                | workSheet | site |
+      | Plan Details Benefits_Data | Sheet7_21  | AARP |
+      
+      @planDetailsBenefitsAARP08_NextYear
+      Examples: 
+      | excelPath                | workSheet | site |
+      | Plan Details Benefits_Data | Sheet8_21  | AARP |
+      
+      @planDetailsBenefitsAARP09_NextYear
+      Examples: 
+      | excelPath                | workSheet | site |
+      | Plan Details Benefits_Data | Sheet9_21  | AARP |
+      
+      @planDetailsBenefitsAARP10_NextYear
+      Examples: 
+      | excelPath                | workSheet | site |
+      | Plan Details Benefits_Data | Sheet10_21  | AARP |
+      
+      @planDetailsBenefitsAARP11_NextYear
+      Examples: 
+      | excelPath                | workSheet | site |
+      | Plan Details Benefits_Data | Sheet11_21 | AARP |
+      
+      @planDetailsBenefitsAARP12_NextYear
+      Examples: 
+      | excelPath                | workSheet | site |
+      | Plan Details Benefits_Data | Sheet12_21  | AARP |
+      
+      @planDetailsBenefitsAARP13_NextYear
+      Examples: 
+      | excelPath                | workSheet | site |
+      | Plan Details Benefits_Data | Sheet13_21  | AARP |
+      
+       @planDetailsBenefitsAARP14_NextYear
+      Examples: 
+      | excelPath                | workSheet | site |
+      | Plan Details Benefits_Data | Sheet14_21  | AARP |
+      

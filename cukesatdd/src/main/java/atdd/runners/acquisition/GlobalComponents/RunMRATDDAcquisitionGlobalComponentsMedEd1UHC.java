@@ -16,7 +16,7 @@ jsonReport = "target/cucumber-RunMRATDDAcquisitionGlobalComponentsMedEd1UHC.json
 detailedReport = true, detailedAggregatedReport = true, overviewReport = true, toPDF = true, 
 outputFolder = "target/RunMRATDDAcquisitionGlobalComponentsMedEd1UHC")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.acquisition" }, 
-features = { "src/main/resources/feature/acquisition/globalComponents" }, plugin = {
+features = { "src/main/resources/feature/acquisition/globalComponents/GlobalComponents-AARP.feature" }, plugin = {
 		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionGlobalComponentsMedEd1UHC.json" }, tags = { "@MedEdPages_1_GlobalCompsUHC" })
 public class RunMRATDDAcquisitionGlobalComponentsMedEd1UHC {
 

@@ -2,6 +2,7 @@ package acceptancetests.memberredesign.planDocumentsAndResources;
 
 import gherkin.formatter.model.DataTableRow;
 import pages.regression.accounthomepage.AccountHomePage;
+import pages.regression.planDocumentsAndResources.Document;
 import pages.regression.planDocumentsAndResources.PlanDocApiResponse;
 import pages.regression.planDocumentsAndResources.PlanDocumentsAndResourcesFnRDocsHelper;
 import pages.regression.planDocumentsAndResources.PlanDocumentsAndResourcesPage;
@@ -86,14 +87,21 @@ public class PlanDocumentsAndResourcesStepDefinition {
 	 *       | Skip Link Destination Validation | true |
 	 * @param memberAttributes
 	 */
+	@SuppressWarnings("unchecked")
 	@And("^I want to customize test setup$")
 	public void customTestSetup(DataTable memberAttributes) {
+		//note: take the input from user
 		Map<String, String> memberAttributesMap=parseInputArguments(memberAttributes);
 		validateApi=Boolean.valueOf(memberAttributesMap.get("Validate API"));
-		skipLnkDestCheck=Boolean.valueOf(memberAttributesMap.get("Skip Click and Check Link Destination URL Validation"));
+		//tbd skipLnkDestCheck=Boolean.valueOf(memberAttributesMap.get("Skip Click and Check Link Destination URL Validation"));
+		skipLnkDestCheck=Boolean.valueOf(memberAttributesMap.get("Skip Link Destination Validation"));
 		getLoginScenario().saveBean(PlanDocumentsAndResourcesCommonConstants.TEST_VALIDATE_API, validateApi);
 		getLoginScenario().saveBean(PlanDocumentsAndResourcesCommonConstants.TEST_SKIP_LINK_DEST_CHECK, skipLnkDestCheck);
-		//System.out.println("TEST - at setup - customizing with validateApi='"+validateApi+"' | skipLnkDestCheck="+skipLnkDestCheck);
+		System.out.println("TEST - at setup - customizing with validateApi='"+validateApi+"' | skipLnkDestCheck="+skipLnkDestCheck);
+		
+		HashMap<String, String> testInputInfoMap=(HashMap<String, String>) getLoginScenario().getBean(PlanDocumentsAndResourcesCommonConstants.TEST_INPUT_INFO);
+		testInputInfoMap.put("skipLnkDestCheck", String.valueOf(skipLnkDestCheck));
+		getLoginScenario().saveBean(PlanDocumentsAndResourcesCommonConstants.TEST_INPUT_INFO,testInputInfoMap);
 	}
 
 	@And("^user navigates to plan documents and resources page validation$")
@@ -102,15 +110,15 @@ public class PlanDocumentsAndResourcesStepDefinition {
 		wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		//note: control the default test setup if no input specified
-		this.validateApi=false;
-		this.skipLnkDestCheck=false; 
+		this.validateApi=false; //note: default = false
 		Boolean v=(Boolean) getLoginScenario().getBean(PlanDocumentsAndResourcesCommonConstants.TEST_VALIDATE_API);
 		if (v!=null)
 			this.validateApi=v;
+		this.skipLnkDestCheck=true; //note: default = true    
 		Boolean s=(Boolean) getLoginScenario().getBean(PlanDocumentsAndResourcesCommonConstants.TEST_SKIP_LINK_DEST_CHECK);
 		if (s!=null)
 			this.skipLnkDestCheck=s;
-		//System.out.println("TEST - at navigation -  customizing with validateApi='"+validateApi+"' | skipLnkDestCheck="+skipLnkDestCheck);
+		System.out.println("TEST - at navigation -  default: validateApi='"+validateApi+"' | skipLnkDestCheck="+skipLnkDestCheck);
 
 		Map<String, String> memberAttributesMap=parseInputArguments(memberAttributes);
 		String planType=memberAttributesMap.get("Plan Type");
@@ -153,7 +161,7 @@ public class PlanDocumentsAndResourcesStepDefinition {
 		yearsMap.put("nextYear", String.valueOf(nextYear));
 		getLoginScenario().saveBean(PlanDocumentsAndResourcesCommonConstants.TEST_YEARS_MAP, yearsMap);
 		getLoginScenario().saveBean(PlanDocumentsAndResourcesCommonConstants.TEST_INPUT_INFO,testInputInfoMap);
-		planDocumentsAndResourcesPage.sleepBySec(15);
+		//tbd planDocumentsAndResourcesPage.sleepBySec(15);
 		getLoginScenario().saveBean(PageConstants.PLAN_DOCUMENTS_AND_RESOURCES_PAGE,planDocumentsAndResourcesPage);
 	}
 
@@ -170,10 +178,22 @@ public class PlanDocumentsAndResourcesStepDefinition {
 		String planDocAndResources_apiResponse_url=planDocumentsAndResourcesPage.getApiRequestUrl(testInputInfoMap);
 		System.out.println("TEST - planDocAndResources_apiResponse_url="+planDocAndResources_apiResponse_url);
 
+		String planDocAndResources_apiResponse_url2="none";
+		if (planType.toUpperCase().contains("SHIP")) {
+			if (planDocAndResources_apiResponse_url.contains("TESTING")) {
+				String[] url=planDocAndResources_apiResponse_url.split("TESTING");
+				planDocAndResources_apiResponse_url=url[0];
+				planDocAndResources_apiResponse_url2=url[1];
+				System.out.println("TEST - planDocAndResources_apiResponse_url="+planDocAndResources_apiResponse_url);
+				System.out.println("TEST - planDocAndResources_apiResponse_url2="+planDocAndResources_apiResponse_url2);
+			}
+		}
+		
 		String apiResponseStr=planDocumentsAndResourcesPage.getApiResponse(planType, memberType, planDocAndResources_apiResponse_url);
 		System.out.println("TEST - apiResponseStr="+apiResponseStr);
-		HashMap<String, String> yearsMap=(HashMap<String, String>) getLoginScenario().getBean(PlanDocumentsAndResourcesCommonConstants.TEST_YEARS_MAP);
 
+		
+		HashMap<String, String> yearsMap=(HashMap<String, String>) getLoginScenario().getBean(PlanDocumentsAndResourcesCommonConstants.TEST_YEARS_MAP);
 		String currentYear = yearsMap.get("currentYear");
 		String nextYear = yearsMap.get("nextYear");
 		getLoginScenario().saveBean(PlanDocumentsAndResourcesCommonConstants.TEST_YEARS_MAP, yearsMap);
@@ -182,6 +202,14 @@ public class PlanDocumentsAndResourcesStepDefinition {
 		boolean apiSuccess=planDocMap.buildDocListMap(testInputInfoMap, apiResponseStr);
 		Assert.assertTrue("PROBLEM - unable to get a successful API response", apiSuccess);
 		getLoginScenario().saveBean(PlanDocumentsAndResourcesCommonConstants.TEST_ACTUAL_DOC_LIST_MAP, planDocMap);
+
+		String apiResponseStr2="none";
+		if (planType.toUpperCase().contains("SHIP") && !planDocAndResources_apiResponse_url2.equals("none")) {
+			apiResponseStr2=planDocumentsAndResourcesPage.getApiResponse(planType, memberType, planDocAndResources_apiResponse_url2);
+			System.out.println("TEST - apiResponseStr2="+apiResponseStr2);
+			//note: if plan document exist then add it to the map
+			planDocMap=planDocumentsAndResourcesPage.updatePlanDocMapWithShipDoc(apiResponseStr2, planDocMap, String.valueOf(currentYear), planDocAndResources_apiResponse_url2);
+		}
 
 		List<String> noteList=planDocMap.printPlanDocDetail();
 		getLoginScenario().saveBean(PlanDocumentsAndResourcesCommonConstants.TEST_RESULT_NOTE, noteList);
@@ -447,6 +475,12 @@ public class PlanDocumentsAndResourcesStepDefinition {
 		HashMap<String, String> yearsMap=(HashMap<String, String>) getLoginScenario().getBean(PlanDocumentsAndResourcesCommonConstants.TEST_YEARS_MAP);
 		PlanDocApiResponse api_planDocMap=(PlanDocApiResponse) getLoginScenario().getBean(PlanDocumentsAndResourcesCommonConstants.TEST_ACTUAL_DOC_LIST_MAP);
 		PlanDocumentsAndResourcesPage planDocumentsAndResourcesPage=(PlanDocumentsAndResourcesPage) getLoginScenario().getBean(PageConstants.PLAN_DOCUMENTS_AND_RESOURCES_PAGE);
+		
+		if (MRScenario.environment.equals("offline") && memberType.toUpperCase().contains("PREEFF")) {
+			System.out.println("TEST running for offline-prod and PREEFF user, load the page one more time to workaround the quick guide issue");
+			planDocumentsAndResourcesPage.reloadPgWorkaround_MM();
+		}
+		
 		//note: first go back to top of the page
 		planDocumentsAndResourcesPage.backToTopOfPage(planType, memberType);
 

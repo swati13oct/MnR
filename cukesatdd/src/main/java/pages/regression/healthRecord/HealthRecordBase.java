@@ -33,6 +33,10 @@ public class HealthRecordBase  extends HealthRecordWebElements {
 		action.moveToElement(targetElement).build().perform(); 
 	}
 
+	public void scrollToTopOfPg() {
+		((JavascriptExecutor) driver).executeScript("window.scrollTo(document.body.scrollHeight, 0)");
+	}
+	
 	public void scrollElementToCenterScreen(WebElement element) {
 		String scrollElementIntoMiddle = "var viewPortHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);"
 				+ "var elementTop = arguments[0].getBoundingClientRect().top;"
@@ -171,7 +175,7 @@ public class HealthRecordBase  extends HealthRecordWebElements {
 						comboTab_MA.click();
 					else if (noWaitValidate(comboTab_MA_planDoc)) 
 						comboTab_MA_planDoc.click();
-				} else if (planType.equalsIgnoreCase("ship")) {
+				} else if (planType.toLowerCase().contains("ship")) {
 					if (noWaitValidate(comboTab_SHIP)) 
 						comboTab_SHIP.click();
 					else if (noWaitValidate(comboTab_SHIP_planDoc)) 
@@ -214,11 +218,15 @@ public class HealthRecordBase  extends HealthRecordWebElements {
 				else if (noWaitValidate(comboTab_MA_planDoc)) 
 					comboTab_MA_planDoc.click();
 			} else if (planType.toLowerCase().contains("ship_hip")) {
-				Assert.assertTrue("PROBLEM - unable to locate combo tab for SHIP_HIP", noWaitValidate(comboTab_SHIP_HIP) || noWaitValidate(comboTab_SHIP_HIP_planDoc));
+				Assert.assertTrue("PROBLEM - unable to locate combo tab for SHIP_HIP", noWaitValidate(comboTab_SHIP_HIP) || noWaitValidate(comboTab_SHIP_HIP_planDoc) || noWaitValidate(comboTab_SHIP) || noWaitValidate(comboTab_SHIP_planDoc));
 				if (noWaitValidate(comboTab_SHIP_HIP)) 
 					comboTab_SHIP_HIP.click();
 				else if (noWaitValidate(comboTab_SHIP_HIP_planDoc)) 
 					comboTab_SHIP_HIP_planDoc.click();
+				if (noWaitValidate(comboTab_SHIP)) 
+					comboTab_SHIP.click();
+				else if (noWaitValidate(comboTab_SHIP_planDoc)) 
+					comboTab_SHIP_planDoc.click();
 			} else if (planType.toLowerCase().contains("ship")) {
 				Assert.assertTrue("PROBLEM - unable to locate combo tab for SHIP", noWaitValidate(comboTab_SHIP) || noWaitValidate(comboTab_SHIP_planDoc));
 				if (noWaitValidate(comboTab_SHIP)) 
@@ -266,7 +274,7 @@ public class HealthRecordBase  extends HealthRecordWebElements {
 
 
 	public boolean getPremiumPaymentInConsumerDetails(boolean isComboUser, String lookForPlanCategory, String consumerDetails) {
-		//System.out.println("TEST - consumerDetails="+consumerDetails);
+		System.out.println("TEST - consumerDetails="+consumerDetails);
 		boolean actualPremiumPayment=false;
 		try {
 			JSONParser parser = new JSONParser();

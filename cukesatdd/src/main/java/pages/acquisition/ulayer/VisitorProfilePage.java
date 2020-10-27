@@ -228,11 +228,16 @@ public class VisitorProfilePage extends UhcDriver {
 		
 		try {
 			if(driver.findElements(By.xpath("//div[@class='title dropdown-open']")).size()>0){
-				List<String> listOfTestPlans = Arrays.asList(plans.split(","));
-				for (String plan: listOfTestPlans) {
-					driver.findElement(By.xpath("//h4[text()='"+plan+"']/preceding::button[1]")).click();
-					Thread.sleep(5000);
-				}
+				if(driver.findElements(By.xpath("//div[@class='title dropdown-open']")).size()==1)
+					driver.findElement(By.xpath("//div[@class='multi-year-select']/button[contains(@class,'js-select-year select-year')][2]/following::button[2]")).click();
+				else {
+					List<String> listOfTestPlans = Arrays.asList(plans.split(","));
+					for (String plan: listOfTestPlans) {
+						driver.findElement(By.xpath("//h4[text()='"+plan+"']/preceding::button[1]")).click();
+						Thread.sleep(5000);
+						}
+					}
+				System.out.println("##############All saved plans deleted##############");
 				}
 				else
 					System.out.println("##############No saved plans available here##############");

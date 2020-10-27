@@ -18,7 +18,7 @@ import org.testng.Assert;
 import acceptancetests.acquisition.planRecommendationEngine.PlanRecommendationEngineStepDefinition;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
-import pages.acquisition.bluelayer.AcquisitionHomePage;
+import pages.acquisition.commonpages.AcquisitionHomePage;
 
 public class PlanRecommendationEngineCommonutility extends UhcDriver {
 	
@@ -150,22 +150,9 @@ public class PlanRecommendationEngineCommonutility extends UhcDriver {
 				if (currentPageName.contains("DRUG")) {
 					previousPageName = "Coverage";
 					previousPagePercentage = "20%";
-					nextPageName = "Pharmacy";
-					nextPagePercentage = "53%";
-					currrentPagePercentage = "20%";
-					if (currentPageName.contains("SKIP")) {
-						nextPageName = "NULL";
-						nextPagePercentage = "NULL";
-						return;
-					}
-				}
-				if (currentPageName.contains("PHARMACY")) {
-					previousPageName = "Drug";
-					previousPagePercentage = "53%";
 					nextPageName = "NULL";
 					nextPagePercentage = "NULL";
-					currrentPagePercentage = "53%";
-					return;
+					currrentPagePercentage = "20%";
 				}
 			} else {
 				if (currentPageName.contains("COVERAGE")) {
@@ -209,23 +196,25 @@ public class PlanRecommendationEngineCommonutility extends UhcDriver {
 				} else if (currentPageName.contains("DRUG")) {
 					previousPageName = "Doctor";
 					previousPagePercentage = "50%";
-					nextPageName = "Pharmacy";
-					nextPagePercentage = "60%";
+//					nextPageName = "Pharmacy";
+//					nextPagePercentage = "60%";
 					currrentPagePercentage = "50%";
-					if (currentPageName.contains("SKIP"))
-						if ((flow.equalsIgnoreCase("MAPD") || flow.equalsIgnoreCase("NONE"))) {
+//					if (currentPageName.contains("SKIP"))
+//						if ((flow.equalsIgnoreCase("MAPD") || flow.equalsIgnoreCase("NONE"))) {
 							nextPageName = "Additional";
 							nextPagePercentage = "70%";
-						}
+				}
+/*						}
 				} else if (currentPageName.contains("PHARMACY")) {
 					previousPageName = "Drug";
 					previousPagePercentage = "60%";
 					nextPageName = "Additional";
 					nextPagePercentage = "70%";
 					currrentPagePercentage = "60%";
-				} else if (currentPageName.contains("ADDITIONAL")) {
-					previousPageName = "Pharmacy";
-					previousPagePercentage = "70%";
+				} */
+				else if (currentPageName.contains("ADDITIONAL")) {
+					previousPageName = "Drug";
+					previousPagePercentage = "60%";
 					nextPageName = "Cost";
 					nextPagePercentage = "80%";
 					currrentPagePercentage = "70%";
@@ -235,10 +224,10 @@ public class PlanRecommendationEngineCommonutility extends UhcDriver {
 						nextPagePercentage = "72%";
 						currrentPagePercentage = "59%";
 					}
-					if (currentPageName.contains("SKIP")) {
+/*					if (currentPageName.contains("SKIP")) {
 						previousPageName = "Drug";
 						previousPagePercentage = "60%";
-					}
+					}*/
 				} else if (currentPageName.contains("COST")) {
 					previousPageName = "Additional";
 					previousPagePercentage = "80%";

@@ -485,9 +485,14 @@ public class BenefitsAndCoverageBase extends BenefitsAndCoverageWebElements {
 
 	public FormsAndResourcesPage clickViewPlanDocumentsButton() throws InterruptedException 
 	{
-		CommonUtility.waitForPageLoadNew(driver, viewPlanDocumentsButton, 45);
+		//CommonUtility.waitForPageLoadNew(driver, viewPlanDocumentsButton, 45);
+		CommonUtility.checkPageIsReadyNew(driver);
 		System.out.println("Now clicking the View Plan Documents Button");
-		viewPlanDocumentsButton.click();
+		if(validate(viewPlanDocumentsButton)) {
+			viewPlanDocumentsButton.click();
+		} else {
+			planDocumentsLink.click();
+		}
 		CommonUtility.checkPageIsReadyNew(driver);
 		return new FormsAndResourcesPage(driver);
 	}
@@ -1033,7 +1038,7 @@ public class BenefitsAndCoverageBase extends BenefitsAndCoverageWebElements {
 		System.out.println("Now clicking on Make a Payment button");
 		makePaymentButton.click();
 		CommonUtility.checkPageIsReadyNew(driver);
-			if (driver.getCurrentUrl().contains("content/medicare/member/payments/overview-new.html"))
+			if (driver.getCurrentUrl().contains("payments/overview.html"))
 			{
 				System.out.println("Payment Overview Page is displayed");	
 			}

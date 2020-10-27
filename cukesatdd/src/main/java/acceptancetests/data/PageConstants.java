@@ -732,12 +732,16 @@ public static final String STAGE_PAYMENT_DEEPLINK_lOGIN_PAGE= "paymentdeeplinklo
 	public static final String DCE_Redesign_DrugSummary="dcedrugsummary";
 
 	public static final String AARP_HAWL="aarpHAWL";
+	public static final String STAGE_Pharmacy_DEEPLINK_lOGIN_PAGE="pharmacydeeplinklogin";
+	public static final String STAGE_VirtualVisit_DEEPLINK_lOGIN_PAGE="virtualVisitdeeplinklogin";
 
-	public static final String CHECKOUT_SUMMARY_PAGE = "checkoutsummaryPage";
+	public static final String PLANDOCS_PAGE = "plandocs";
+    public static final String CHECKOUT_SUMMARY_PAGE = "checkoutsummaryPage";
 	
 	public static final String  ORDER_CONFIRMATION_PAGE ="orderConfirmationPage";
 	public static final String CHANGE_SHIPPING_ADDRESS_PAGE = "changeShippingAddressPage";
 	public static final String CHANGE_PAYMENT_METHOD_PAGE = "changePaymentMethodPage";
+
 
 }
 

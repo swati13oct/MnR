@@ -22,7 +22,7 @@ Feature: 1.01 Member  benefits and Coverage page
       | 15084 | MAPD      | providerTier_BNC |
 
   #TC02_Primarycareprovider_specialist_withprovidertiering
-  @benefitsAndCoverage7 @primarycareproviderspecialist @thepredators @regressionprimarycareprovider @BnC_Part1_regressionMember
+  @benefitsAndCoverage7 @primarycareproviderspecialist @thepredators @regressionprimarycareprovider @deprecated
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify the Office visits widget for a member witprovidertiering
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -35,7 +35,7 @@ Feature: 1.01 Member  benefits and Coverage page
       | 15085 | MAPD     | COSMOSOfficevisit_BnC |
 
   #TC04_OutpatientSurgeryCentervisits_withoutprovidertiering
-  @benefitsAndCoverage8 @outpatientcenterwithoutprovidertier @thepredators @regressionoutpatientwithoutprovider @BnC_Part1_regressionMember
+  @benefitsAndCoverage8 @outpatientcenterwithoutprovidertier @thepredators @regressionoutpatientwithoutprovider  @deprecated
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify the outpatient widget for a member withoutprovidertiering
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -61,7 +61,7 @@ Feature: 1.01 Member  benefits and Coverage page
       | 15088 | MAPD     | memberWithoutProviderTiering_BnC |
 
   #TC07_Copay_Coinsurance_in_DrugCostsTable
-  @benefitsAndCoverage11 @CopayCoinsuranceInDrugCostTable @regression @BnC_Part2_regressionMember
+  @benefitsAndCoverage11 @CopayCoinsuranceInDrugCostTable @regression @deprecated
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify the copay coinsurance in drugcosts table
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -119,7 +119,7 @@ Feature: 1.01 Member  benefits and Coverage page
 
   #TC11_Benefits_for_Ship_member
   #note: this scenario covers multiple testcases TID 15094,15240
-  @benefitsAndCoverage22 @CMShip @BnC_Part3_regressionMember
+  @benefitsAndCoverage22 @CMShip @BnC_Part3_regressionMember @bnc_Stage_sanity_ship
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify that Page Headers are in place on Benefits and Coverage page
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -167,7 +167,7 @@ Feature: 1.01 Member  benefits and Coverage page
       | 15094 | SHIP      | SHIP_BnC         | ENGLISH  |  5                   | EffectiveShipMedSupp |     3 | NoRider |
 
  #TC12_Benefits_for_MedicaMember
-  @benefitsAndCoverage12_1 @CMFedDrugNonLis  @BnC_Part3_regressionMember @kottu
+  @benefitsAndCoverage12_1 @CMFedDrugNonLis @deprecated
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> -language: <language> - Verify all sections for Ind NonLIS member on Benefits and Coverage page
     Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>      |
@@ -250,7 +250,7 @@ Feature: 1.01 Member  benefits and Coverage page
       | 15095 | Medica   | Individual_BnC | NON LIS       | ENGLISH  | Summary of Benefits | Evidence of Coverage | Comprehensive Formulary - Drug List | Alternative Drug List | 1         | Resumen de Beneficios    | Comprobante de Cobertura  | Formulario Completo                    | Lista de Medicamentos Alternativos | 2         |                          |                           |                                        |                             | AADECDC FEDFACEDBACBB | 954283936-00 | 04/01/2018    | Not Available  | Tier 2          | true        | IndEffectiveMedica | 6     | NoRider |
 
   #TC13_Benefits_for_MA_SSUP_MEDSUPMember
-  @benefitsAndCoverage10 @BenefitsForMAMedsupSSUPMember @regression  @BnC_Part4_regressionMember
+  @benefitsAndCoverage10 @BenefitsForMAMedsupSSUPMember @regression  @deprecated
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify the Benefits for a  MA Member
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -277,10 +277,38 @@ Feature: 1.01 Member  benefits and Coverage page
     Examples: 
       | TID   | planType | memberType     | Identifier      | count | rider   |
       | 15096 | MA       | Individual_BnC | IndEffectiveUHC | 5     | Rider   |
+      
+   #TC13_Benefits_for_MA_SSUP_MEDSUPMember
+  @benefitsAndCoverage10 @BenefitsForMAMedsupSSUPMember @regression  @BnC_Part4_regressionMember
+  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify the Benefits for a  MA Member
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type   | <planType>   |
+      | Member Type | <memberType> |
+    Then The user navigate to Benefits and Coverage page
+    Then user verifies presence of jump links
+      | Plan Type  | <planType>   |
+      | Rider      | <rider>      |
+      | MemberType | <memberType> |
+      | identifier | <Identifier> |
+    And user clicks on the jump links and checks respective sections
+      | Plan Type  | <planType>   |
+      | Rider      | <rider>      |
+      | MemberType | <memberType> |
+      | identifier | <Identifier> |
+    And verifies links irrelevant to the plan type are not displayed
+      | Plan Type  | <planType>   |
+      | Rider      | <rider>      |
+      | Count      | <count>      |
+      | MemberType | <memberType> |
+    And the user validates the Benefits for MA member
+      | Plan Type | <planType> |
+
+    Examples: 
+      | TID   | planType | memberType     | Identifier      | count | rider   |
       | 15098 | SSUP     | COMBO_Group_BnC| GrpEffectiveSSUP| 4     | NoRider |
 
   #TC14_Benefits_for_PCPMember
-  @benefitsAndCoverage14_2 @CMFedDrugNonLis  @BnC_Part4_regressionMember
+  @benefitsAndCoverage14_2 @CMFedDrugNonLis  @deprecated
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> -language: <language> - Verify all sections for Ind NonLIS member on Benefits and Coverage page
     Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>      |
@@ -410,6 +438,36 @@ Feature: 1.01 Member  benefits and Coverage page
     Examples: 
       | TID   | planType | memberType     | copayCategory | Identifier       | count | rider   |
       | 15239 | PDP      | Group_BnC      | NON LIS       | GrpEffectiveUHC  | 3     | NoRider | 
+      
+    #TC16-Part1_Ancilliary Benefits for Group member(PDP and other than Group members)
+  @benefitsAndCoverage32_1 @ancillarybenefitnegativescenarioscodemonkeys @deprecated
+  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify ancillary benefits are not displayed other than Group nonLis memnbers
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type      | <planType>      |
+      | Member Type    | <memberType>    |
+      | Copay Category | <copayCategory> |
+    Then The user navigates to Benefits and Coverage page
+      | Plan Type | <planType> |
+   Then user verifies presence of jump links
+      | Plan Type  | <planType>   |
+      | Rider      | <rider>      |
+      | MemberType | <memberType> |
+      | identifier | <Identifier> |
+    And user clicks on the jump links and checks respective sections
+      | Plan Type  | <planType>   |
+      | Rider      | <rider>      |
+      | MemberType | <memberType> |
+      | identifier | <Identifier> |
+    And verifies links irrelevant to the plan type are not displayed
+      | Plan Type  | <planType>   |
+      | Rider      | <rider>      |
+      | Count      | <count>      |
+      | MemberType | <memberType> |
+    Then verify ancillary benefit section is not displayed
+    And the user validates the Vas section on benefits and coverage page is not displayed
+
+    Examples: 
+      | TID   | planType | memberType     | copayCategory | Identifier       | count | rider   | 
       | 15238 | MAPD     | Individual_BnC | NON LIS       | IndEffectiveAARP | 7     | Rider   |
 
   #TC19_Ways To Save should come only for PDP members (Saver,Walgreen,Preferred, Symphonix)
@@ -424,7 +482,7 @@ Feature: 1.01 Member  benefits and Coverage page
   @devRegression @WaystoSave_walgreens
     Examples: 
       | TID   | planType | memberType             |
-      | 15242 | PDP      | Wallgreens_BnC         |
+     | 15242 | PDP      | Wallgreens_BnC         |
 
   @devRegression @WaystoSave_mailOrder
     Examples: 
@@ -434,7 +492,7 @@ Feature: 1.01 Member  benefits and Coverage page
   @devRegression @noWaystoSave
     Examples: 
       | TID   | planType | memberType             |
-      | 15249 | MAPD     | withoutWaysToSave_BnC  |
+    #  | 15249 | MAPD     | withoutWaysToSave_BnC  |
       
   #TC20_Rider for Fed MA,MAPD plans only  
   # note: Due to timing that it takes for GPS to do the update (add or remove),
@@ -491,8 +549,40 @@ Feature: 1.01 Member  benefits and Coverage page
       | TID   | planType | memberType | copayCategory | SummaryofBenefits   | EvidenceofCoverage   | ComprehensiveFormularyDrug List | AlternativeDrugList   |
       | 15248 | PDP      | PDPLIS_Bnc  | LIS 3         | Summary of Benefits | Evidence of Coverage | Comprehensive Formulary         | Alternative Drug List |
       
+   #TC21_PDP_LIS(3,4)- Retail Drug Cost Table
+  @benefitsAndCoverage1  @PDPLIS3member @BnC_Part5_regressionMember  @bnc_Stage_sanity_pdp
+  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify Group LIS 3/4 on Benefits and Coverage page
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type      | <planType>      |
+      | Member Type    | <memberType>    |
+      | Copay Category | <copayCategory> |
+    Then The user navigate to Benefits and Coverage page
+    And the user validates plan overview section for individual
+    And the user view the LIS Drug Copays & Discounts header
+   And the user validates the Learn More section link for stage
+    And the user validates tier link should not display
+    And the user view the Drug Cost header and text
+    And the user validated the Look up Drugs link
+    And the user validates Locate a Pharmacy button should be visible
+      | Plan Type | <planType> |
+    And the drugcost dropdown should not display
+    And the user validates tier link should not display
+    And the PDP individual user should see drug cost table for Lis members
+    And the user validates static links
+      | Plan Type | <planType> |
+    And the user validates view and document label
+    And the user validates spanish and chinese should not display in dropdown
+    #note: moved to footer feature
+    #And the user validates Needhelp section
+    And the user clicks on More Information link
+    And the user validates contactus section
+
+    Examples: 
+      | TID   | planType | memberType | copayCategory |
+      | 15248 | PDP      | PDPLIS_Bnc  | LIS 3        |
+      
   #TC25_Group members_MAPD_LIS(3,4)
-  @benefitsAndCoverage1 @BnC_Part6_regressionMember @CMGroupmembersTC25 
+  @benefitsAndCoverage1 @BnC_Part6_regressionMember @CMGroupmembersTC25 @bnc_Stage_Sanity_mapd
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify Group LIS 3/4 on Benefits and Coverage page
     Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>      |
@@ -652,7 +742,7 @@ Feature: 1.01 Member  benefits and Coverage page
 
 
 #TC21_MAPD_LIS(1,2)- Retail Drug Cost Table
- @benefitsAndCoverage23Indi @CMmapdindlis @BnC_Part7_regressionMember 
+ @benefitsAndCoverage23Indi @CMmapdindlis @BnC_Part7_regressionMember  
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify PDF section is in place on Benefits and Coverage page for Lis user
     Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>      |
@@ -718,8 +808,67 @@ Feature: 1.01 Member  benefits and Coverage page
       | TID   | planType | memberType     | copayCategory | language | SummaryofBenefits   | EvidenceofCoverage   |  ComprehensiveFormularyDrug List     | AlternativeDrugList   | name       | memberid     | effectivedate | monthlypremium | extrahelp            | Identifier       | count | rider   |
       | 15245 | MAPD     | Individual_BnC | LIS 1         | ENGLISH  | Summary of Benefits | Evidence of Coverage | Comprehensive Formulary - Drug List | Alternative Drug List | DBAD ADFED | 919744565-00 | 01/01/2019    | Not Available  | Extra Help Level : 1 | IndEffectiveAARP |     7 | Rider   |
 
+	#TC21_MAPD_LIS(1,2)- Retail Drug Cost Table
+   @bnc_Stage_Sanity_mapdIndividual  
+  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify PDF section is in place on Benefits and Coverage page for Lis user
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type      | <planType>      |
+      | Member Type    | <memberType>    |
+      | Copay Category | <copayCategory> |
+    Then The user navigates to Benefits and Coverage page
+      | Plan Type | <planType> |
+	Then user verifies presence of jump links
+      | Plan Type  | <planType>   |
+      | Rider      | <rider>      |
+      | MemberType | <memberType> |
+      | identifier | <Identifier> |
+    And user clicks on the jump links and checks respective sections
+      | Plan Type  | <planType>   |
+      | Rider      | <rider>      |
+      | MemberType | <memberType> |
+      | identifier | <Identifier> |
+    And verifies links irrelevant to the plan type are not displayed
+      | Plan Type  | <planType>   |
+      | Rider      | <rider>      |
+      | Count      | <count>      |
+      | MemberType | <memberType> |
+    And the user validates Lis member plan overview section
+      | Name            | <name>           |
+      | Member ID       | <memberid>       |
+      | Effective Date  | <effectivedate>  |
+      | Monthly premium | <monthlypremium> |
+      | Extra Help      | <extrahelp>      |
+    And the user validates headers on Bnc page for indi members
+      | Plan Type | <planType> |
+  #  And the user validates the Primarycare Provider section
+      | Plan Type | <planType> |
+    And the user validates the Out of Pocket Max section
+    And the user view the LIS Drug Copays & Discounts header
+    And the user MAPD LIS should see drug cost table for Lis members
+    And the user validates Drug coverage header and text under the section
+    And the user validates text for the Look Up Drugs section
+    And the user validates Look Up Drugs button should be visible
+      | Plan Type | <planType> |
+    And the user validates text for the Locate a Pharmacy section
+    And the user validates Locate a Pharmacy button should be visible
+      | Plan Type | <planType> |
+    And the drugcost dropdown should not display
+    And the user validates the Learn More section link for stage
+    And the user validates tier link should not display
+    And the user validates view and document label
+    And the user validates static links
+      | Plan Type | <planType> |
+    #note: moved to footer feature
+    #And the user validates Needhelp section
+    And the user clicks on More Information link
+    And the user validates contactus section
+
+    Examples: 
+      | TID   | planType | memberType     | copayCategory | language | name       | memberid     | effectivedate | monthlypremium | extrahelp            | Identifier       | count | rider   |
+      | 15245 | MAPD     | Individual_BnC | LIS 1         | ENGLISH  | DBAD ADFED | 919744565-00 | 01/01/2019    | Not Available  | Extra Help Level : 1 | IndEffectiveAARP |     7 | Rider   |
+	
   #TC22_NON LIS Ind plan member(MAPD)- Drug Cost table
-  @benefitsAndCoverage14 @CMFedDrugNonLis @BnC_Part7_regressionMember
+  @benefitsAndCoverage14 @CMFedDrugNonLis @deprecated
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> -language: <language> - Verify all sections for Ind NonLIS member on Benefits and Coverage page
     Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>      |
@@ -927,10 +1076,10 @@ Feature: 1.01 Member  benefits and Coverage page
 
     Examples: 
       | TID   | planType | memberType     | copayCategory | language | SummaryofBenefits   | EvidenceofCoverage   | ComprehensiveFormularyDrug List     | AlternativeDrugList   | name        | memberid   | effectivedate | monthlypremium | extrahelp            |
-      | 15244 | PDP      | Individual_BnC | LIS 1         | ENGLISH  | Summary of Benefits | Evidence of Coverage | Comprehensive Formulary - Drug List | Alternative Drug List | ECADEA DCAA | 0197331001 | 05/01/2018    | Not Available  | Extra Help Level : 1 |
+      | 15244 | PDP      | Individual_BnC | LIS 1         | ENGLISH  | Summary of Benefits | Evidence of Coverage | Comprehensive Formulary - Drug List | Alternative Drug List | RABI' MALORY | 0182197901 | 01/01/2019    | Not Available  | Extra Help Level : 1 |
     
       #TC22_NON LIS Ind Village_member_ Drug Cost table
-  @benefitsAndCoverage18 @CMFedNonLisVillage  @BnC_Part8_regressionMember
+  @benefitsAndCoverage18 @CMFedNonLisVillage  @deprecated
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify the Village nonLis member validates text in table
     Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>      |

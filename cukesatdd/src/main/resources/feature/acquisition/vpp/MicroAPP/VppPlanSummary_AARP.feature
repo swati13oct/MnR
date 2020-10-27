@@ -2,25 +2,26 @@
 Feature: 1.01.1-Vpp to plan Summary AARP Scenarios
 
   @vppPlanSummaryAARP01 @vppPlanSummaryAARPRun01 @vppPlanSummaryAARPRegression
-  Scenario Outline: TID: <TID> -plan type: <plantype> - Verify plan cards on plan summary page in AARP site
-    Given the user is on the AARP medicare acquisition site landing page
-    When the user does plan search using the following information in the AARP site
+  Scenario Outline: TID: <TID> -plan type: <plantype> - Verify plan cards on plan summary page in <site> site
+    Given the user is on medicare acquisition site landing page
+    	|Site| <site>|
+    When the user performs plan search using following information
       | Zip Code        | <zipcode>         |
       | Is Multi County | <isMultutiCounty> |
       | County Name     | <county>          |
-    And the user views the plans of the below plan type in AARP site
+    And the user views the plans of the below plan type
       | Plan Type | <plantype> |
-    And the user selects plan year for the AARP site
+    And the user selects plan year
     	|Plan Year	| <planyear>|
     #    And the user validates available plans for selected plan types in the AARP site
-    And the user validates plan summary for the below plan in AARP site
+    And the user validates plan summary for the below plan
       | Plan Name | <planName> |
-    Then the user validates marketing bullets of the plan in AARP site
-    Then the user validates and clicks Add to compare checkbox for the above selected plan in the AARP site for MA, MAPD , PDP Plans
-    Then the user view plan details of the above selected plan in AARP site and validate
+    Then the user validates marketing bullets of the plan
+    Then the user validates and clicks Add to compare checkbox for the above selected plan for MA, MAPD , PDP Plans
+    Then the user views plan details of the above selected plan and validates
       | Plan Name | <planName> |
-    Then the user clicks on back to all plans link and validates its redirection to Plan Summary in AARP site
-    Then the user validates below plan benefit values for the above selected plan in AARP site for MA , DSNP and MAPD Plans
+    Then the user clicks on back to all plans link and validates its redirection to Plan Summary
+    Then the user validates below plan benefit values for the above selected plan
       | Monthly Premium            | <monthlyPremium>         |
       | Primary Care Physician     | <primaryCarePhysician>   |
       | Specialist                 | <specialist>             |
@@ -28,14 +29,10 @@ Feature: 1.01.1-Vpp to plan Summary AARP Scenarios
       | Out Of Pocket Maximum      | <outOfPocketMaximum>     |
       | Prescription Drugs, Tier 1 | <prescriptionDrugsTier1> |
       | Plan Type                  | <plantype>               |
-    Then the user validates below plan benefit values for the above selected plan in AARP site for PDP  Plans
-      | Monthly Premium            | <monthlyPremium>         |
       | Annual Deductible          | <annualDeductible>       |
-      | Prescription Drugs, Tier 1 | <prescriptionDrugsTier1> |
-    Then the user hover overs the tool tip for Why is my premium 0 and validates the text for MAPD Plan , MA Plan in AARP Site
-    Then the user hovers over the tool tip for Annual Deductible and validates the ext for PDP Plan in AARP Site
+    Then the user hover overs the tool tip for Why is my premium 0 and validates the text
     # New steps for DCE Redesign
-    And I access the DCE Redesign on aarp site from Plan Summary for mentioned plan
+    And I access the DCE Redesign from Plan Summary for mentioned plan
       | Plan Type | <plantype> |
       | Plan Name | <planName> |
     Then the user validates Get Started Page
@@ -44,14 +41,13 @@ Feature: 1.01.1-Vpp to plan Summary AARP Scenarios
     #Then the user clicks on Return to Plan Summary link and validates its redirection to Plan Summary Page for MAPD, PDP , DSNP Plan in AARP Site
     #    Then the user validates and clicks learn more about Extra help link for MAPD , PDP , DSNP Plans and it should not be displayed for MA Plans in AARP site
     #    Then the user validates the modal pop up for learn more about Extra help link for MAPD, PDP,DSNP Plans in AARP site
-    Then the user validates Is my provider covered link for MA , MAPD and DSNP Plans and it should not be displayed for PDP Plans
-    Then the user clicks on Is my provider covered link and validates Provider Search Page for MA , MAPD and DSNP Plans
-    Then the user clicks on Enroll Now for AARP site and validates the Welcome to OLE Page
+    Then the user validates Is my provider covered link
+    Then the user clicks on Enroll Now and validates the Welcome to OLE Page
 
     Examples: 
-      | TID   | zipcode | isMultutiCounty | county             | plantype | planName                                            | monthlyPremium | primaryCarePhysician | specialist | referralRequired | outOfPocketMaximum | prescriptionDrugsTier1                     | annualDeductible | planyear |
-      | 15545 |   90210 | NO              | Los Angeles County | MAPD     | AARP Medicare Advantage SecureHorizons Plan 1 (HMO) | $0             | $0  copay            | $0  copay  | Yes              | $3,400.00          | $4  copay                                  |                  | current |
-      | 15546 |   28105 | YES             | Mecklenburg County | SNP      | UnitedHealthcare Dual Complete (HMO-POS D-SNP)      | $0             | $0  copay            | $0  copay  | No               | $0 - $6,700.00     | $0, $1.25, $3.40 copay, or 15% coinsurance |                  |  current |
+      | TID   | zipcode | site| isMultutiCounty | county             | plantype | planName                                            | monthlyPremium | primaryCarePhysician | specialist | referralRequired | outOfPocketMaximum | prescriptionDrugsTier1                     | annualDeductible | planyear |
+      | 15545 |   90210 | AARP| NO              | Los Angeles County | MAPD     | AARP Medicare Advantage SecureHorizons Plan 1 (HMO) | $0             | $0  copay            | $0  copay  | Yes              | $3,400.00          | $4  copay                                  |                  | current |
+      | 15546 |   28105 | AARP| YES             | Mecklenburg County | SNP      | UnitedHealthcare Dual Complete (HMO-POS D-SNP)      | $0             | $0  copay            | $0  copay  | No               | $0 - $6,700.00     | $0, $1.25, $3.40 copay, or 15% coinsurance |                  |  current |
 
   @vppPlanSummaryAARP02 @vppPlanSummaryAARPRun01 @vppPlanSummaryAARPRegression
   Scenario Outline: TID: <TID> -plan type: <plantype> - Verify right rail on plan summary page in AARP site
@@ -175,25 +171,26 @@ Feature: 1.01.1-Vpp to plan Summary AARP Scenarios
       | UID     | zipcode | isMultiCounty | county           | MA_testPlans                                                                                               | PDP_testPlans                                                    | SNP_testPlans                              |planyear|
       | 1598162 |   80001 | NO            | Jefferson County | AARP Medicare Advantage SecureHorizons Essential (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO) | AARP MedicareRx Preferred (PDP),AARP MedicareRx Saver Plus (PDP) | UnitedHealthcare Dual Complete (HMO D-SNP) |current|
 
-  @vppPlanSummaryAARP05 @vppPlanSummaryAARPRun01 @vppPlanSummaryAARPRegression
-  Scenario Outline: Verify plan summary for SNP plan ty pes in AARP site
-    Given the user is on AARP medicare acquisition site landing page
-    When the user performs plan search using following information in the AARP site
+  @vppPlanSummaryAARP05
+  Scenario Outline: Zipcode: <zipcode> -plan type: <plantype> - Verify plan summary for SNP plan types in AARP site
+    Given the user is on medicare acquisition site landing page
+    	|Site| <site>|
+    When the user performs plan search using following information
       | Zip Code        | <zipcode>         |
       #| County Name | <county>  |
       | Is Multi County | <isMultutiCounty> |
-    Then user validates plan count for all plan types on plan summary page in the AARP site
-    And the user views the plans of the below plan type in AARP site
+    Then user validates plan count for all plan types on plan summary page
+    And the user views the plans of the below plan type
       | Plan Type | <plantype> |
-    And the user selects plan year for the AARP site
+    And the user selects plan year
     	|Plan Year	| <planyear>|
-    And the user validates the available plans for selected plan types in the AARP site
-    Then the user validates plan summary for the below plan in the AARP site
+    And the user validates the available plans for selected plan types
+    Then the user validates plan summary for the below plan
       | Plan Name | <planName> |
 
     Examples: 
-      | zipcode | isMultiCounty | county             | plantype | planName                                       |planyear|
-      |   80001 | NO            | Los Angeles County | SNP      | UnitedHealthcare Nursing Home Plan (PPO I-SNP) |current|
+      |	site	| zipcode | isMultiCounty | county             | plantype | planName                                       |planyear|
+      |	AARP	|   80001 | NO            | Los Angeles County | SNP      | UnitedHealthcare Nursing Home Plan (PPO I-SNP) |current|
 
   @vppPlanSummaryAARP06 @vppPlanSummaryAARPRun02 @vppPlanSummaryAARPRegression
   Scenario Outline: Validate Cancel button for Multi Cunty Pop-up on VPP for Change Location
@@ -320,7 +317,7 @@ Feature: 1.01.1-Vpp to plan Summary AARP Scenarios
       | zipcode | isMultutiCounty | county             | plantype | planname                                            |planyear|
       |   90210 | NO              | Los Angeles County | MA       | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) |current|
 
-  @vppPlanSummaryAARP13 @vppPlanSummaryAARPRun02 @vppPlanSummaryAARPRegression
+  @vppPlanSummaryAARP13 @vppPlanSummaryAARPRun02 
   Scenario Outline: To Verify the drug cost estimator flow for <plantype> through plan details page's Plan Costs tab
     Given the user is on the AARP medicare site landing page
     When user performs plan search using following information in the AARP site
@@ -443,7 +440,7 @@ Feature: 1.01.1-Vpp to plan Summary AARP Scenarios
       | 15550 |   78006 | YES           | Bexar County       | MAPD     | 1750 EPPS BRIDGE RD ATHENS | OCONEE    | GEORGIA     | test      | test     | test@test.com | YES            | Clarke County    |
 
   @vppPlanSummaryAARP16 @vppPlanSummaryAARPRun02 @vppPlanSummaryAARPRegression
-  Scenario Outline: TID: <TID> -plan type: <plantype> - Verify plan cards on plan summary page in AARP site
+  Scenario Outline: TID: <TID> -plan type: <plantype> - Verify Rocky Mountain Health Learn More lands on Correct site from AARP site from plan summary page
     Given the user is on the AARP medicare acquisition site landing page
     When the user does plan search using the following information in the AARP site
       | Zip Code        | <zipcode>         |
@@ -483,7 +480,7 @@ Feature: 1.01.1-Vpp to plan Summary AARP Scenarios
     Examples: 
       | TID       | zipcode | isMultutiCounty | county        | plantype | planName                                 |planyear|
       | US2567133 |   70515 | YES             | Acadia Parish | MAPD     | Peoples Health Choices Gold (HMO-POS)    |current|
-      | US2567133 |   70515 | YES             | Acadia Parish | MAPD     | Peoples Health Choices Value (HMO)       |current|
-      | US2567133 |   70515 | YES             | Acadia Parish | SNP      | Peoples Health Secure Health (HMO D-SNP) |current|
+      #| US2567133 |   70515 | YES             | Acadia Parish | MAPD     | Peoples Health Choices Value (HMO)       |current|
+      #| US2567133 |   70515 | YES             | Acadia Parish | SNP      | Peoples Health Secure Health (HMO D-SNP) |current|
       #| US2567133 |   70718 | YES             | Ascension Parish | MAPD     | Peoples Health Choices 65 "#14 (HMO)"    |
       #| US2567133 |   70420 | YES             | Ascension Parish | MAPD     | Peoples Health Choices 65 "#14 (HMO)"    |

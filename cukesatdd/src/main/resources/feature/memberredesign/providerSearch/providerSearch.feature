@@ -1,8 +1,70 @@
 @providerSearch
 Feature: 1.23 Member Provider Search
 
+  #----- begin sanity
+  @sanity01
+  Scenario Outline: -Index <index> -Plan Type: <planType> -Member Type: <memberType> - To validate navigation from Provider Search page to other secondary pages - claims, benefits, payment
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type   | <planType>         |
+      | Member Type | <memberType>       |
+    Then the user navigates to Provider Search page
+	Then the user navigates to Claims page from Provider Search page
+	Then the user navigates to Benefits page from Provider Search page
+	Then the user navigates to Payments page from Provider Search page
+
+    @sanity_providerSearch01_mapd
+    Examples: 
+	    | index | planType | memberType              | 
+	    | S02   | MAPD     | UHC_IND_ProviderSearch  |
+
+	@sanity_providerSearch01_pdp
+    Examples: 
+	    | index | planType | memberType              | 
+	    | S03   | PDP      | AARP_IND_ProviderSearch |
+
+	@sanity_providerSearch01_ma
+    Examples: 
+	    | index | planType | memberType              | 
+	    | S05   | MA       | AARP_IND_ProviderSearch |
+
+    @sanity_providerSearch01_medica_pcp
+    Examples: 
+	    | index | planType | memberType              | 
+	    | S06   | MEDICA   | MEDICA_IND_ProviderSearch |
+
+  @sanity02
+  Scenario Outline: -Index <index> -Plan Type: <planType> -Member Type: <memberType> - To validate navigation from Provider Search page to other secondary pages - pharmacies and prescriptions, health and wellness, account setting
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type   | <planType>         |
+      | Member Type | <memberType>       |
+    Then the user navigates to Provider Search page
+	Then the user navigates to Pharmacies and Prescriptions page from Provider Search page
+	Then the user navigates to Health and Wellness page from Provider Search page
+	Then the user navigates to Account Settings page from Provider Search page
+
+    @sanity_providerSearch01_mapd
+    Examples: 
+	    | index | planType | memberType              | 
+	    | S02   | MAPD     | UHC_IND_ProviderSearch  |
+
+	@sanity_providerSearch01_pdp
+    Examples: 
+	    | index | planType | memberType              | 
+	    | S03   | PDP      | AARP_IND_ProviderSearch |
+
+	@sanity_providerSearch01_ma
+    Examples: 
+	    | index | planType | memberType              | 
+	    | S05   | MA       | AARP_IND_ProviderSearch |
+
+    @sanity_providerSearch01_medica_pcp
+    Examples: 
+	    | index | planType | memberType              | 
+	    | S06   | MEDICA   | MEDICA_IND_ProviderSearch |
+
+  #----- begin regression
   @providerSearch01 @regressionMember
-  Scenario Outline: -Index <index> -Plan Type: <planType> -Member Type: <memberType> - To verify iHR link display for user that is not on the exclusion table
+  Scenario Outline: -Index <index> -Plan Type: <planType> -Member Type: <memberType> - To validate navigation from Provider Search page to other secondary pages
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>         |
       | Member Type | <memberType>       |
@@ -14,27 +76,30 @@ Feature: 1.23 Member Provider Search
 	Then the user navigates to Health and Wellness page from Provider Search page
 	Then the user navigates to Account Settings page from Provider Search page
 	
-	@providerSearch01a
+	@providerSearch01_mapd
     Examples: 
 	    | index | planType | memberType              | 
-	    | 01    | MAPD     | GRP_ProviderSearch      |
+	    | 01    | MAPD     | AARP_IND_ProviderSearch |
 	    | 02    | MAPD     | UHC_IND_ProviderSearch  |
 
-	@providerSearch01b
+	@providerSearch01_pdp
     Examples: 
 	    | index | planType | memberType              | 
-	    | 03    | MAPD     | AARP_IND_ProviderSearch |
-	    | 04    | PDP      | AARP_IND_ProviderSearch |
+	    | 03    | PDP      | AARP_IND_ProviderSearch |
 
-	@providerSearch01c
+	@providerSearch01_ma
     Examples: 
 	    | index | planType | memberType              | 
-        | 05    | MA       | UHC_IND_ProviderSearch  |
-	    | 06    | MA       | AARP_IND_ProviderSearch |
+        | 04    | MA       | UHC_IND_ProviderSearch  |
+	    | 05    | MA       | AARP_IND_ProviderSearch |
 
-	@providerSearch01d
+	@providerSearch01_medica_pcp
+    Examples: 
+	    | index | planType | memberType              |
+	    | 07    | PCP      | PCP_IND_ProviderSearch  |
+	    | 06    | MEDICA   | MEDICA_IND_ProviderSearch |
+
+	@providerSearch01_grp
     Examples: 
 	    | index | planType | memberType              | 
-	    | 07    | MEDICA   | MEDICA_IND_ProviderSearch |
-	    | 08    | PCP      | PCP_IND_ProviderSearch  |
-
+	    | 08    | PDP      | AARP_IND_ProviderSearch |

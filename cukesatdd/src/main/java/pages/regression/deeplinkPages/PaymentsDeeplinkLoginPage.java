@@ -70,10 +70,37 @@ public class PaymentsDeeplinkLoginPage extends UhcDriver {
 	}
 	//page from MR constants 	
 			private static String STAGE_DEEPLINK_URL_payments = MRConstants.STAGE_DEEPLINK_URL_payments;
-			
+			private static String STAGE_DEEPLINK_URL_payments_overview = MRConstants.STAGE_DEEPLINK_URL_payments_overview;
+			private static String STAGE_DEEPLINK_URL_payments_overview_new = MRConstants.STAGE_DEEPLINK_URL_payments_overview_new;
 			 /*This method will open payments deep link page */
 			public PaymentsDeeplinkLoginPage navigateToLoginURL(){
 				start(STAGE_DEEPLINK_URL_payments);
+				driver.manage().deleteAllCookies();
+
+				try {
+					Thread.sleep(10000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}		
+				return null;
+				}
+			 /*This method will open payments overview.html deep link page */
+			public PaymentsDeeplinkLoginPage navigateToLoginOverviewURL(){
+				start(STAGE_DEEPLINK_URL_payments_overview);
+				driver.manage().deleteAllCookies();
+
+				try {
+					Thread.sleep(10000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}		
+				return null;
+				}
+			/*This method will open payments overview-new.html deep link page */
+			public PaymentsDeeplinkLoginPage navigateToLoginOverviewNewURL(){
+				start(STAGE_DEEPLINK_URL_payments_overview_new);
 				driver.manage().deleteAllCookies();
 
 				try {
@@ -190,6 +217,15 @@ public class PaymentsDeeplinkLoginPage extends UhcDriver {
 							} else {
 								System.out.println("NO emmail page did not appear");
 							}
+							if (driver.getCurrentUrl().contains("/anoc.html")) {
+								System.out.println("annual notice of changes page has appeared");
+								if (validate(homePageNotice, 0)) {
+									homePageNotice.click();
+									CommonUtility.checkPageIsReady(driver);
+								}
+							} else {
+								System.out.println("annual notice of changes page did not appear");
+							}
 											
 					return;
 						}}}
@@ -237,9 +273,9 @@ public class PaymentsDeeplinkLoginPage extends UhcDriver {
 					System.out.println("*** Page URL ***" + driver.getCurrentUrl());
 					System.out.println("*** Page URL ***" + driver.getTitle());
 					//if (driver.getCurrentUrl().contains("payments/overview.html?deeplink=true")) {
-					if (driver.getCurrentUrl().contains("payments/overview")) {
+					if (driver.getCurrentUrl().contains("payments/overview.html")) {
 						System.out.println("*** Page URL ***" + driver.getCurrentUrl());
-						System.out.println("** User landed on Payments deeplink Page **");
+						System.out.println("** User landed on Payments overview.html deeplink Page **");
 						System.out.println("*** PageTitle ***" + driver.getTitle());
 						Assert.assertTrue(driver.getTitle().contains("Premium Payments"));
 						return true;

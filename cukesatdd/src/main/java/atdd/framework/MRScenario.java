@@ -13,6 +13,8 @@ import java.net.URL;
 import java.nio.MappedByteBuffer;
 import java.nio.channels.FileChannel;
 import java.nio.charset.Charset;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -30,11 +32,15 @@ import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 
+import javax.crypto.Mac;
+import javax.crypto.spec.SecretKeySpec;
+
 import org.apache.commons.lang3.StringUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Assert;
 import org.openqa.selenium.Dimension;
+import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -49,6 +55,7 @@ import org.openqa.selenium.phantomjs.PhantomJSDriverService;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.safari.SafariOptions;
 import org.springframework.stereotype.Component;
 
 import acceptancetests.data.CommonConstants;
@@ -59,7 +66,6 @@ import io.appium.java_client.ios.IOSDriver;
 
 import java.security.*;
 import javax.crypto.*;
-import javax.crypto.spec.SecretKeySpec;
 
 /**
  * 
@@ -88,6 +94,7 @@ public class MRScenario {
 
 	public static String environment = System.getProperty("environment");
 	public static String browsername = "chrome";
+	public static String browserName;
 	public static String isTestHarness;
 	public static String environmentMedicare;
 	public static String isHSIDCompatible;
@@ -247,13 +254,17 @@ public class MRScenario {
 
 			if (environment.contains("team-ci")) {
 				csvName = "MemberRedesign-VBF-Teamci.csv";
+
 			} else if ((environment.contains("team-a")
-					|| ((environment.equalsIgnoreCase("team-h")) || (environment.equalsIgnoreCase("team-e"))
+					|| (//(environment.equalsIgnoreCase("team-h")) || Team-h condition added separately to take username as login
+							(environment.equalsIgnoreCase("team-e"))
 							|| (environment.equalsIgnoreCase("team-f")) || (environment.equalsIgnoreCase("team-g"))
 							|| (environment.equalsIgnoreCase("team-c")) || (environment.equalsIgnoreCase("team-acme")) || (environment.equalsIgnoreCase("team-voc"))|| (environment.equalsIgnoreCase("team-t") || (environment.equalsIgnoreCase("team-chargers") || (environment.equalsIgnoreCase("team-uhc-rx"))))))) {
 				csvName = "MemberRedesign-UUID.csv";
 			} else if (tagName.equalsIgnoreCase("@MemberVBF") && environment.contains("stage")) {
 				csvName = "MemberRedesign-VBF.csv";
+			} else if (environment.equalsIgnoreCase("team-h")) {
+				csvName = "UMS-Member-Type.csv";
 			}
 			/*
 			 * note: Dec2018 - comment out because this section caused stage run not to use
@@ -370,7 +381,7 @@ public class MRScenario {
 		String url = HSIDDB_URL;
 		try {
 			con = DriverManager.getConnection(url, user, pwd);
-			System.out.println("Con established*********");
+System.out.println("Con established*********");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -383,38 +394,38 @@ public class MRScenario {
 	}
 
 	public static void getRecordsFrom_mbr_table(String firstName, String lastName) throws SQLException {
-		// Connection con = getPDBDBConnection(props);
+	//	Connection con = getPDBDBConnection(props);
 		Connection con = getPDBDBConnection();
 		Statement stmt = null;
 		stmt = con.createStatement();
 		String sql;
-		ResultSet rs1 = null;
+		ResultSet rs1=null;
 		try {
-			sql = "SELECT HLTHSF_ID FROM mbr where MDM_FST_NM = '" + firstName + "' and MDM_LST_NM = '" + lastName
-					+ "'";
+			sql = "SELECT HLTHSF_ID FROM mbr where MDM_FST_NM = '" + firstName + "' and MDM_LST_NM = '" + lastName + "'";
 			rs1 = stmt.executeQuery(sql);
 			rs1.first();
 			String HLTHSF_ID = rs1.getString("HLTHSF_ID");
 			System.out.println(HLTHSF_ID);
 		} catch (Exception e) {
-			System.out.println("Already data not available in the mbr DB");
-		} finally {
+		System.out.println("Already data not available in the mbr DB");
+		}
+		finally {
 			rs1.close();
 			stmt.close();
-			con.close();
+			con.close();	
 		}
-
+		
 	}
 
 	public static void deleteRecordsFrom_mbr_table(String firstName, String lastName) throws SQLException {
-		// Connection con = getPDBDBConnection(props);
+		//Connection con = getPDBDBConnection(props);
 		Connection con = getPDBDBConnection();
 		Statement stmt = null;
 		ResultSet rs = null;
 		stmt = con.createStatement();
 		try {
-			rs = stmt.executeQuery("SELECT COUNT(*) FROM mbr where MDM_FST_NM = '" + firstName + "' and MDM_LST_NM = '"
-					+ lastName + "'");
+			rs = stmt.executeQuery(
+					"SELECT COUNT(*) FROM mbr where MDM_FST_NM = '" + firstName + "' and MDM_LST_NM = '" + lastName + "'");
 			int initialrowcount = 0;
 			while (rs.next()) {
 				initialrowcount = rs.getInt(1);
@@ -423,8 +434,8 @@ public class MRScenario {
 			stmt.executeUpdate(
 					"delete from mbr where MDM_FST_NM = '" + firstName + "' and MDM_LST_NM = '" + lastName + "'");
 
-			rs = stmt.executeQuery("SELECT COUNT(*) FROM mbr where MDM_FST_NM = '" + firstName + "' and MDM_LST_NM = '"
-					+ lastName + "'");
+			rs = stmt.executeQuery(
+					"SELECT COUNT(*) FROM mbr where MDM_FST_NM = '" + firstName + "' and MDM_LST_NM = '" + lastName + "'");
 			int finalrowcount = 0;
 			while (rs.next()) {
 				finalrowcount = rs.getInt(1);
@@ -444,7 +455,7 @@ public class MRScenario {
 
 		// The following steps will return no. of selected records based on
 		// first name and last name
-		// Connection con = getPDBDBConnection(props);
+		//Connection con = getPDBDBConnection(props);
 		Connection con = getPDBDBConnection();
 		Statement stmt = null;
 		ResultSet rs = null;
@@ -458,8 +469,8 @@ public class MRScenario {
 			}
 			System.out.println("Total selected records to delete from mbr_prtl table are: " + initialrowcount);
 
-			stmt.executeUpdate("delete from mbr_prtl where MBR_PRTL_FST_NM = '" + firstName
-					+ "' and MBR_PRTL_LST_NM = '" + lastName + "'");
+			stmt.executeUpdate("delete from mbr_prtl where MBR_PRTL_FST_NM = '" + firstName + "' and MBR_PRTL_LST_NM = '"
+					+ lastName + "'");
 			rs = stmt.executeQuery("SELECT COUNT(*) FROM mbr_prtl where MBR_PRTL_FST_NM = '" + firstName
 					+ "' and MBR_PRTL_LST_NM = '" + lastName + "'");
 			int finalrowcount = 0;
@@ -472,52 +483,54 @@ public class MRScenario {
 			} else {
 				System.out.println("Still Records exist in the table: mbr_prtl");
 			}
-
+			
 		} catch (Exception e) {
 			System.out.println("Nothing to delete from the mbr_portal DB");
 		}
-
+	
+		
+		
 	}
 
 	public static void deleteRecordsFrom_mbr_extrm_scl_dtl_table(String firstName, String lastName)
 			throws SQLException {
 		// The following steps will return no. of selected records based on
 		// first name and last name
-		// Connection con = getPDBDBConnection(props);
+		//Connection con = getPDBDBConnection(props);
 		Connection con = getPDBDBConnection();
 		Statement stmt = null;
 		ResultSet rs = null;
 		stmt = con.createStatement();
 		String sql;
-		try {
-			sql = "SELECT HLTHSF_ID FROM mbr where MDM_FST_NM = '" + firstName + "' and MDM_LST_NM = '" + lastName
-					+ "'";
-			ResultSet rs1 = stmt.executeQuery(sql);
-			rs1.first();
-			String HLTHSF_ID = rs1.getString("HLTHSF_ID");
-			System.out.println(HLTHSF_ID);
-			rs = stmt.executeQuery("SELECT COUNT(*) FROM mbr_extrm_scl_dtl where HLTHSF_ID = '" + HLTHSF_ID + "'");
-			int initialrowcount = 0;
-			while (rs.next()) {
-				initialrowcount = rs.getInt(1);
-			}
-			System.out.println("Total selected records to delete from mbr_extrm_scl_dtl table are: " + initialrowcount);
-			stmt.executeUpdate("delete from mbr_extrm_scl_dtl where HLTHSF_ID = '" + HLTHSF_ID + "'");
-			rs = stmt.executeQuery("SELECT COUNT(*) FROM mbr_extrm_scl_dtl where HLTHSF_ID = '" + HLTHSF_ID + "'");
-			int finalrowcount = 0;
-			while (rs.next()) {
-				finalrowcount = rs.getInt(1);
-			}
-			System.out.println("Total selected records to delete from mbr_extrm_scl_dtl table are: " + finalrowcount);
-			if (finalrowcount == 0) {
-				System.out.println("Records deleted successfully from table: mbr_extrm_scl_dtl");
-			} else {
-				System.out.println("Still Records exist in the table: mbr_extrm_scl_dtl");
-			}
+try {
+	sql = "SELECT HLTHSF_ID FROM mbr where MDM_FST_NM = '" + firstName + "' and MDM_LST_NM = '" + lastName + "'";
+	ResultSet rs1 = stmt.executeQuery(sql);
+	rs1.first();
+	String HLTHSF_ID = rs1.getString("HLTHSF_ID");
+	System.out.println(HLTHSF_ID);
+	rs = stmt.executeQuery("SELECT COUNT(*) FROM mbr_extrm_scl_dtl where HLTHSF_ID = '" + HLTHSF_ID + "'");
+	int initialrowcount = 0;
+	while (rs.next()) {
+		initialrowcount = rs.getInt(1);
+	}
+	System.out.println("Total selected records to delete from mbr_extrm_scl_dtl table are: " + initialrowcount);
+	stmt.executeUpdate("delete from mbr_extrm_scl_dtl where HLTHSF_ID = '" + HLTHSF_ID + "'");
+	rs = stmt.executeQuery("SELECT COUNT(*) FROM mbr_extrm_scl_dtl where HLTHSF_ID = '" + HLTHSF_ID + "'");
+	int finalrowcount = 0;
+	while (rs.next()) {
+		finalrowcount = rs.getInt(1);
+	}
+	System.out.println("Total selected records to delete from mbr_extrm_scl_dtl table are: " + finalrowcount);
+	if (finalrowcount == 0) {
+		System.out.println("Records deleted successfully from table: mbr_extrm_scl_dtl");
+	} else {
+		System.out.println("Still Records exist in the table: mbr_extrm_scl_dtl");
+	}	
 		} catch (Exception e) {
 			System.out.println("Nothing to delete from the DB");
 		}
-
+		
+		
 	}
 
 	public void removeMember() {
@@ -580,37 +593,40 @@ public class MRScenario {
 		Map<String, String> props = new HashMap<String, String>();
 		Properties prop = new Properties();
 		String propertiesFileToPick = environment;
-		System.out.println("Using properties for environment ...." + propertiesFileToPick);
+		System.out.println("Using properties for environment ...."
+		+ propertiesFileToPick);
 		if (StringUtils.isBlank(propertiesFileToPick)) {
-			System.out.println("Using CI as default since environment was not passed in !!!");
-			propertiesFileToPick = CommonConstants.DEFAULT_ENVIRONMENT_CI;
+		System.out
+		.println("Using CI as default since environment was not passed in !!!");
+		propertiesFileToPick = CommonConstants.DEFAULT_ENVIRONMENT_CI;
 
-			// Read properties from classpath
-			StringBuffer propertyFilePath = new StringBuffer(CommonConstants.PROPERTY_FILE_FOLDER);
-			propertyFilePath.append("/").append(propertiesFileToPick).append("/")
-					.append(CommonConstants.PROPERTY_FILE_NAME);
-			InputStream is = ClassLoader.class.getResourceAsStream(propertyFilePath.toString());
-			try {
-				prop.load(is);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-			for (String key : prop.stringPropertyNames()) {
-				String value = prop.getProperty(key);
-				props.put(key, value);
-			}
+		// Read properties from classpath
+		StringBuffer propertyFilePath = new StringBuffer(
+		CommonConstants.PROPERTY_FILE_FOLDER);
+		propertyFilePath.append("/").append(propertiesFileToPick).append("/")
+		.append(CommonConstants.PROPERTY_FILE_NAME);
+		InputStream is = ClassLoader.class.getResourceAsStream(propertyFilePath
+		.toString());
+		try {
+		prop.load(is);
+		} catch (IOException e) {
+		e.printStackTrace();
+		}
+		for (String key : prop.stringPropertyNames()) {
+		String value = prop.getProperty(key);
+		props.put(key, value);
+		}
 
-			if (props.containsKey("Domain")) {
-				domain = props.get("Domain");
-			} else {
-				
+		if (props.containsKey("Domain")) {
+		domain = props.get("Domain");
+		} else {
 		domain = null;
 		}
 		return props;
 		}else{
-		if(environment.equals("stage")||environment.equals("offline-stage")||environment.equals("stage-aarp")||environment.equals("offline-stage-aarp"))
+		if(environment.contains("stage"))
 		domain = "uhc.com";
-		else if(environment.equals("team-atest") || environment.equals("team-e")||environment.equals("team-t")||environment.equals("team-v1")||environment.equals("team-acme")|| environment.equals("team-voc") ||environment.equals("team-acme") ||environment.contains("digital-uat") ||environment.equals("team-chargers") ||environment.contains("team-uhc-rx"))
+		else if(environment.equals("team-atest") || environment.equals("team-e")||environment.equals("team-t")||environment.equals("team-v1")||environment.equals("team-acme")|| environment.equals("team-voc") ||environment.equals("team-acme") ||environment.contains("digital-uat") ||environment.equals("team-chargers") ||environment.contains("chargers") ||environment.contains("team-uhc-rx"))
 		domain = "ocp-elr-core-nonprod.optum.com";
 		else if(environment.contains("mnr-acq"))
 			domain = "origin-elr-dmz.optum.com";
@@ -618,9 +634,11 @@ public class MRScenario {
 		domain = "ocp-ctc-dmz-nonprod.optum.com";
 		System.out.println("env chosen is: "+ environment);
 		System.out.println("domain chosen is: "+ domain);
-			return null;
+
+		return null;
 		}
 	}
+
 
 	public Map<String, String> getAMPMemberWithDesiredAttributes(List<String> desiredAttributes) {
 		formCompositeDesiredAttributes(desiredAttributes);
@@ -716,33 +734,34 @@ public class MRScenario {
 
 	public WebDriver getWebDriver() {
 
-		isSauceLabSelected = true;
-		DesiredCapabilities capabilities = DesiredCapabilities.chrome();
-
-		capabilities.setCapability("platform", "Windows 7");
-		capabilities.setCapability("version", "66.0");
-		capabilities.setCapability("screenResolution", "1920x1080");
-		// capabilities.setCapability("parent-tunnel", "sauce_admin");
-		capabilities.setCapability("parent-tunnel", "optumtest");
-		capabilities.setCapability("tunnelIdentifier", sauceLabsTunnelIdentifier);
-		// capabilities.setCapability("tunnelIdentifier", "OptumSharedTunnel-Prd");
-		// capabilities.setCapability("name", "MRATDD-TestSuite");
-		// capabilities.setCapability("tunnelIdentifier", "Optum-Prd");
-		capabilities.setCapability("build", System.getenv("JOB_NAME") + "__" + System.getenv("RUNNER_NUMBER"));
-		String jobName = "VBF Execution - Using " + capabilities.getBrowserName() + " in  "
-				+ System.getProperty("environment") + " environment";
-		capabilities.setCapability("name", jobName);
-		capabilities.setCapability("recordMp4", true);
-		try {
-			webDriver = new RemoteWebDriver(new URL(URL), capabilities);
-			MRScenario.sessionId = ((RemoteWebDriver) webDriver).getSessionId().toString();
-			System.out.println("Session ID:" + (((RemoteWebDriver) webDriver).getSessionId()).toString());
-			getJobURL(getSessionId());
-		} catch (MalformedURLException e) { // TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return webDriver;
-
+		
+		  
+		
+		  isSauceLabSelected = true; DesiredCapabilities capabilities =
+		  DesiredCapabilities.chrome();
+		  
+		  capabilities.setCapability("platform", "Windows 7");
+		  capabilities.setCapability("version", "66.0");
+		  capabilities.setCapability("screenResolution", "1920x1080");
+		  //capabilities.setCapability("parent-tunnel", "sauce_admin");
+		  capabilities.setCapability("parent-tunnel", "optumtest");
+		  capabilities.setCapability("tunnelIdentifier", sauceLabsTunnelIdentifier);
+		  //capabilities.setCapability("tunnelIdentifier", "OptumSharedTunnel-Prd");
+		  //capabilities.setCapability("name", "MRATDD-TestSuite");
+		  //capabilities.setCapability("tunnelIdentifier", "Optum-Prd");
+		  capabilities.setCapability("build", System.getenv("JOB_NAME") + "__" +
+		  System.getenv("RUNNER_NUMBER")); String jobName = "VBF Execution - Using " +
+		  capabilities.getBrowserName() + " in  " + System.getProperty("environment")
+		  +" environment"; capabilities.setCapability("name", jobName);
+		  capabilities.setCapability("recordMp4", true); try { webDriver = new
+		  RemoteWebDriver(new URL(URL), capabilities); MRScenario.sessionId =
+		  ((RemoteWebDriver) webDriver).getSessionId().toString();
+		  System.out.println("Session ID:" + (((RemoteWebDriver)
+		  webDriver).getSessionId()).toString()); getJobURL(getSessionId()); } catch
+		  (MalformedURLException e) { // TODO Auto-generated catch block
+		  e.printStackTrace(); } return webDriver;
+		 
+		
 		/*
 		 * File pathToBinary = new
 		 * File("C:/Program Files (x86)/Google/Chrome/Application/chrome.exe");
@@ -757,6 +776,7 @@ public class MRScenario {
 		 * new ChromeDriver(options); webDriver.manage().window().maximize(); return
 		 * webDriver;
 		 */
+		 
 	}
 
 	public WebDriver getIEDriver() {
@@ -840,6 +860,7 @@ public class MRScenario {
 
 	}
 
+	
 	public void DriverQuit()
 
 	{
@@ -935,7 +956,7 @@ public class MRScenario {
 
 		// if the browsername is passed in from Jenkins then use that, otherwise use the
 		// one from the CI config properties file
-		String browserName = (null == System.getProperty(CommonConstants.BROWSER_NAME) ? browsername
+		browserName = (null == System.getProperty(CommonConstants.BROWSER_NAME) ? browsername
 				: System.getProperty(CommonConstants.BROWSER_NAME));
 
 		// if the browser version is passed in from Jenkins then use that, otherwise use
@@ -987,16 +1008,17 @@ public class MRScenario {
 
 			webDriver.get("google.com");
 
-		} else if (browser.equalsIgnoreCase(CommonConstants.CHROME_BROWSER)) {
-			Map<String, Object> chromeOptions = new HashMap<String, Object>();
-			// chromeOptions.put("binary", pathToBinary);
-			DesiredCapabilities capabilities = DesiredCapabilities.chrome();
-			capabilities.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
-			// System.setProperty("webdriver.chrome.driver", pathToBinary);
-			System.setProperty("webdriver.chrome.driver", "C:\\ProgramData\\chromedriver_win32\\chromedriver.exe");
-			webDriver = new ChromeDriver();
-			saveBean(CommonConstants.WEBDRIVER, webDriver);
-			return webDriver;
+			} else if (browser.equalsIgnoreCase(CommonConstants.CHROME_BROWSER)) {
+				Map<String, Object> chromeOptions = new HashMap<String, Object>();
+				//chromeOptions.put("binary", pathToBinary);
+				DesiredCapabilities capabilities = DesiredCapabilities.chrome();
+				capabilities.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
+				//System.setProperty("webdriver.chrome.driver", pathToBinary);
+				System.setProperty("webdriver.chrome.driver", "C:\\ProgramData\\Chrome_driver_80.0.3987.16\\chromedriver.exe");
+
+				webDriver = new ChromeDriver();
+				saveBean(CommonConstants.WEBDRIVER, webDriver);
+				return webDriver;
 
 		} else if (browser.equalsIgnoreCase(CommonConstants.CHROME_BROWSER)) {
 			Map<String, Object> chromeOptions = new HashMap<String, Object>();
@@ -1063,10 +1085,16 @@ public class MRScenario {
 			}else if (browserName.equalsIgnoreCase("safari")) {
 				System.out.println("Inside safari");
 				capabilities = DesiredCapabilities.safari();
-				capabilities.setCapability("platform", "Mac 10.15");
-				capabilities.setCapability("version", browserVersion);
-				capabilities.setCapability("screenResolution", "1920x1440");
-				capabilities.setCapability("maxDuration", "3600");
+				capabilities.setCapability("maxDuration", "10000");
+				
+				MutableCapabilities sauceOptions = new MutableCapabilities();
+				sauceOptions.setCapability("screenResolution", "1920x1440");
+
+				SafariOptions browserOptions = new SafariOptions();
+				browserOptions.setCapability("platformName", "macOS 10.14");
+				browserOptions.setCapability("browserVersion", browserVersion);
+				browserOptions.setCapability("sauce:options", sauceOptions);
+				capabilities.merge(browserOptions);
 			}
 			if (!(null == capabilities)) {
 				capabilities.setCapability("autoAcceptsAlerts", true);
@@ -1172,8 +1200,10 @@ public class MRScenario {
 		// capabilities.setCapability("testobject_test_name", mobileTestName);
 		// Offline prod and prod env. should not use tunnels
 		System.out.println("sauceLabsMobileTunnelIdentifier : "+sauceLabsMobileTunnelIdentifier);
-		if(!sauceLabsMobileTunnelIdentifier.equalsIgnoreCase("NONE"))
+		if(!sauceLabsMobileTunnelIdentifier.equalsIgnoreCase("NONE")) {
+			//capabilities.setCapability("parentTunnel", "optumtest");
 			capabilities.setCapability("tunnelIdentifier", sauceLabsMobileTunnelIdentifier);
+		}
 		capabilities.setCapability("nativeWebTap", true);
 		capabilities.setCapability("deviceName", mobileDeviceName);
 		capabilities.setCapability("platformName", mobileDeviceOSName);
@@ -1210,7 +1240,7 @@ public class MRScenario {
 		}
 		return mobileDriver;
 	}
-
+	
 	public static Connection getGPSuat3Connection() throws SQLException {
 
 		Connection con = null;
@@ -1220,17 +1250,18 @@ public class MRScenario {
 			System.out.println("for class run");
 
 			String env = HSID_ENV;
-			String user = "UHG_001375809";  
-			String pwd = "Oracle@1234"; 
+			String user = "UHG_000611921";  
+			String pwd = "Passx&9e";
 			
 			//Below is GPS UAT URL (enable/disable based on GPS env that you want to connect)
 			//String url = "jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=dbslt0039.uhc.com)(PORT=1521))(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=gpsts14svc.uhc.com)))"; 
 			//Below is GPS UAT2 URL (enable/disable based on GPS env that you want to connect)
 			//String url = "jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=dbslt0041.uhc.com)(PORT=1521))(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=gpsts20svc.uhc.com)))"; 
 			//Below is GPS UAT3 URL (enable/disable based on GPS env that you want to connect)
-			//String url = "jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=dbslt0058.uhc.com)(PORT=1521))(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=gpsts18svc.uhc.com)))"; 
+			//  String url = "jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=dbslt0102)(PORT=1521))(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=gpsts18)))"; 
 			//Below is GPS UAT4 URL (enable/disable based on GPS env that you want to connect)
-			String url = "jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=dbslt0058.uhc.com)(PORT=1521))(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=gpsts19svc.uhc.com)))";  
+			String url = "jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=dbslt0103)(PORT=1521))(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=gpsts19)))"; 
+						
 			con = DriverManager.getConnection(url, user, pwd);
 			System.out.println("Oracle Database Connection established**********");
 			
@@ -1240,7 +1271,7 @@ public class MRScenario {
 			System.out.println("Oracle Database Connection not established");
 		}
 
-		// System.out.println("Connected to: " + env.toUpperCase() + " database");
+	//	System.out.println("Connected to: " + env.toUpperCase() + " database");
 
 		return con;
 

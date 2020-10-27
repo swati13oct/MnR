@@ -189,7 +189,7 @@ public class PharmacySearchWebElements extends UhcDriver {
 	@FindBy(xpath="//div[contains(@ng-show,'pharmacyModel') and not(contains(@class,'ng-hide'))]//a[contains(@href,'contact-us.html')]")
 	protected WebElement contactUnitedHealthCare;
 
-	@FindBy(xpath="//ol[@class='pharmacy-list']//a[contains(@href,'contact-us.html')]")
+	@FindBy(xpath="//ol[@class='pharmacy-list']//a[contains(@href,'contact-us')]")
 	protected WebElement contactUnitedHealthCare_ol;
 	
 	@FindBy(xpath="//div[not(contains(@class,'ng-hide'))]/p/a[contains(@href,'LTC_HI_ITU_Pharmacies_Other.pdf')]")
@@ -246,7 +246,7 @@ public class PharmacySearchWebElements extends UhcDriver {
 	@FindBy(xpath="//a[contains(@aria-label,'Next')]")
 	protected WebElement rightArrow;
 
-	@FindBy(xpath="//nav[@aria-label='Search results navigation']/../div[2]//span[@role='tooltip']")
+	@FindBy(xpath="//nav[@aria-label='Search results navigation']/../div[2]//span[@role='tooltip']//*[name()='svg']")
 	protected WebElement resultNavTooltip;
 
 	@FindBy(xpath="//a[@id='showHideMap']")
