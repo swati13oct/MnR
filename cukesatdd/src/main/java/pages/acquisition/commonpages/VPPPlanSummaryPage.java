@@ -1204,25 +1204,22 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			WebElement MAmoreDetailsLink = driver.findElement(By.xpath("//*[contains(text(), '" + planName
 					+ "')]/ancestor::div[contains(@class,'module-plan-overview')]//div[contains(@class,'swiper-content')]//div[not (contains(@class,'ng-hide'))]/a[contains(text(),'View Plan')]"));
 			CommonUtility.waitForPageLoadNew(driver, MAmoreDetailsLink, 30);
-			jsClickNew(MAmoreDetailsLink);	//added for safari
-//			MAmoreDetailsLink.click();
-			System.out.println("View Plan Details Link is clicked for MA plan"+planName);
+			jsClickNew(MAmoreDetailsLink);
+			System.out.println("View Plan Details Link is clicked for MA plan" + planName);
 
 		} else if (planType.equalsIgnoreCase("PDP")) {
 			WebElement PDPmoreDetailsLink = driver.findElement(By.xpath("//*[contains(text(), '" + planName
 					+ "')]/ancestor::div[contains(@class,'module-plan-overview')]//*[contains(@id,'viewmoredetlinkpdp')]"));
 			CommonUtility.waitForPageLoadNew(driver, PDPmoreDetailsLink, 30);
-//			PDPmoreDetailsLink.click();
-			jsClickNew(PDPmoreDetailsLink);	//added for safari
-			System.out.println("View Plan Details Link is clicked for PDP plan"+planName);
+			jsClickNew(PDPmoreDetailsLink);
+			System.out.println("View Plan Details Link is clicked for PDP plan" + planName);
 
 		} else if (planType.equalsIgnoreCase("SNP")) {
 			WebElement SNPmoreDetailsLink = driver.findElement(By.xpath("//a[contains(text(), '" + planName
 					+ "')]/ancestor::div[contains(@class,'module-plan-overview')]//a[contains(text(),'View Plan')]"));
 			CommonUtility.waitForPageLoadNew(driver, SNPmoreDetailsLink, 30);
-//			SNPmoreDetailsLink.click();
-			jsClickNew(SNPmoreDetailsLink);	//added for safari
-			System.out.println("View Plan Details Link is clicked for MA plan"+planName);
+			jsClickNew(SNPmoreDetailsLink);
+			System.out.println("View Plan Details Link is clicked for MA plan" + planName);
 		}
 		CommonUtility.checkPageIsReadyNew(driver);
 		if (driver.getCurrentUrl().contains("#/details")) {

@@ -35,6 +35,7 @@ import pages.acquisition.commonpages.AcquisitionHomePage;
 import pages.acquisition.commonpages.PlanDetailsPage;
 import pages.acquisition.commonpages.VPPPlanSummaryPage;
 import pages.acquisition.ole.WelcomePage;
+import pages.acquisition.commonpages.FindCarePage;
 import pages.acquisition.commonpages.ProviderSearchPage;
 import pages.acquisition.commonpages.AgentsnBrokersAARPPage;
 import pages.acquisition.commonpages.DisclaimersAARPPage;
@@ -43,6 +44,7 @@ import pages.acquisition.commonpages.SiteMapAARPPage;
 import pages.acquisition.commonpages.ContactUsAARPPage;
 import pages.acquisition.commonpages.AboutUsAARPPage;
 import pages.acquisition.commonpages.VisitorProfilePage;
+import pages.acquisition.dceredesign.GetStartedPage;
 import pages.acquisition.commonpages.ComparePlansPage;
 import pages.acquisition.commonpages.MultiCountyModalPage;
 
@@ -120,16 +122,16 @@ public class VppCommonStepDefinition {
 		List<DataTableRow> memberAttributesRow = data.getGherkinRows();
 		String planType = memberAttributesRow.get(0).getCells().get(1);
 		String planName = memberAttributesRow.get(1).getCells().get(1);
-		VPPPlanSummaryPage plansummaryPage = new VPPPlanSummaryPage(wd);
-		plansummaryPage.viewPlanSummary(planType);
-		PlanDetailsPage plandetailspage = (PlanDetailsPage) plansummaryPage.navigateToPlanDetails(planName, planType);
-		if (plandetailspage != null) {
-			getLoginScenario().saveBean(PageConstants.PLAN_DETAILS_PAGE, plandetailspage);
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		//plansummaryPage.viewPlanSummary(planType);
+		PlanDetailsPage plandetailspage= plansummaryPage.navigateToPlanDetails(planName, planType);
+		
+			getLoginScenario().saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE, plandetailspage);
 			getLoginScenario().saveBean(DCERedesignCommonConstants.PLANTYPE, planType);
 			getLoginScenario().saveBean(DCERedesignCommonConstants.PLANNAME, planName);
 
 		}
-	}
 
 	@And("^the user views the plans of the below plan type$")
 	public void user_performs_planSearch_in_aarp_site(DataTable givenAttributes) {
@@ -1135,4 +1137,366 @@ public class VppCommonStepDefinition {
 		boolean validationFlag = vppPlanDetailsPage.clickAndValidatePlanCosts(monthlyPremium,yearlyPremium);
 		Assert.assertTrue("Validation failed : Expected text not displayed for monthly and yearly premium - "+monthlyPremium+" "+yearlyPremium,validationFlag);
 	}
+		@Then("^the user validates the added drug name on plan summary page for the selected plan$")
+		public void verify_drugs_covered_AARP(DataTable Planname) {
+
+			List<DataTableRow> plannameAttributesRow = Planname.getGherkinRows();
+			Map<String, String> plannameAttributesMap = new HashMap<String, String>();
+			for (int i = 0; i < plannameAttributesRow.size(); i++) {
+
+				plannameAttributesMap.put(plannameAttributesRow.get(i).getCells().get(0),
+						plannameAttributesRow.get(i).getCells().get(1));
+			}
+			String planName = plannameAttributesMap.get("Plan Name");
+			String drugName = plannameAttributesMap.get("DrugName");
+
+			VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+			Assert.assertTrue("Drugs coverage Info not updated", plansummaryPage.verifyAddedDrugName(planName,drugName));
+		}
+		
+		@Then("^the user clicks on drug dropdown on plan summary page and navigates to DCE$")
+		public void clickOnDrugDropdownAndNavigateToDCE(DataTable Planname) {
+
+			List<DataTableRow> plannameAttributesRow = Planname.getGherkinRows();
+			Map<String, String> plannameAttributesMap = new HashMap<String, String>();
+			for (int i = 0; i < plannameAttributesRow.size(); i++) {
+
+				plannameAttributesMap.put(plannameAttributesRow.get(i).getCells().get(0),
+						plannameAttributesRow.get(i).getCells().get(1));
+			}
+			String planName = plannameAttributesMap.get("Plan Name");
+			
+
+			VPPPlanSummaryPage planSummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+			planSummaryPage.navigateToDCEFromDrugDropdown(planName);
+		}
+		
+		@Then("^the user validates the drug cost on plan summary page for the selected plan$")
+		public void verify_drug_cost(DataTable Planname) {
+
+			List<DataTableRow> plannameAttributesRow = Planname.getGherkinRows();
+			Map<String, String> plannameAttributesMap = new HashMap<String, String>();
+			for (int i = 0; i < plannameAttributesRow.size(); i++) {
+
+				plannameAttributesMap.put(plannameAttributesRow.get(i).getCells().get(0),
+						plannameAttributesRow.get(i).getCells().get(1));
+			}
+			String annualDrugCost = (String) getLoginScenario().getBean(DCERedesignCommonConstants.ANNUAL_ESTIMATED_TOTAL);
+			String planName = plannameAttributesMap.get("Plan Name");
+
+			VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+			Assert.assertTrue("Drug cost is displayed incorrectly", plansummaryPage.verifyAddedDrugCost(planName,annualDrugCost));
+		}
+		@Then("^the user click on Prescription Drug Benefits tab on plan details$")
+		public void the_user_click_on_Prescription_Drug_Benefits_and_validates_in_AARP_site() throws Throwable {
+			PlanDetailsPage vppPlanDetailsPage = (PlanDetailsPage) getLoginScenario()
+					.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
+			vppPlanDetailsPage.clickAndValidatePrescriptionDrugBenefits();
+		}
+		
+		@Then("^the user verifies the drug information on prescription drug tab$")
+		public void the_user_verifies_drug_info_Prescription_Drug(DataTable Attributes) throws Throwable {
+			List<DataTableRow> plannameAttributesRow = Attributes.getGherkinRows();
+			Map<String, String> plannameAttributesMap = new HashMap<String, String>();
+			for (int i = 0; i < plannameAttributesRow.size(); i++) {
+
+				plannameAttributesMap.put(plannameAttributesRow.get(i).getCells().get(0),
+						plannameAttributesRow.get(i).getCells().get(1));
+			}
+			PlanDetailsPage vppPlanDetailsPage = (PlanDetailsPage) getLoginScenario()
+					.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
+			String annualDrugCost = (String) getLoginScenario().getBean(DCERedesignCommonConstants.ANNUAL_ESTIMATED_TOTAL);
+			String drugName = plannameAttributesMap.get("DrugName");
+			vppPlanDetailsPage.validateDrugInfoOnPrescriptionDrugTab(drugName, annualDrugCost);
+		}
+		
+		@Then("^the user clicks on Edit drug on plan details page and navigates to DCE$")
+		public void the_user_click_on_EdidDrugLink() throws Throwable {
+			PlanDetailsPage vppPlanDetailsPage = (PlanDetailsPage) getLoginScenario()
+					.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
+			GetStartedPage getStartedPage = (GetStartedPage) vppPlanDetailsPage.navigateToDCERedesign(); 
+			getLoginScenario().saveBean(PageConstants.DCE_Redesign_GetStarted, getStartedPage);
+		}
+		
+		@Then("^the user click on Plan costs tab$")
+		public void the_user_click_on_Plan_costs_tab_and_validates_in_AARP_site() throws Throwable {
+
+			PlanDetailsPage vppPlanDetailsPage = (PlanDetailsPage) getLoginScenario()
+					.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
+			vppPlanDetailsPage.clickPlanCosts();
+		}
+		
+		@Then("^the user click on Edit Drugs Link on plan costs tab$")
+		public void the_user_click_on_Edit_Drugs_on_Plan_costs_tabe() throws Throwable {
+
+			PlanDetailsPage vppPlanDetailsPage = (PlanDetailsPage) getLoginScenario()
+					.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
+			vppPlanDetailsPage.navigateToDCERedesignFromPlanCostTab();
+		}
+		
+		@Then("^the user verifies the drug information on plan costs tab$")
+		public void the_user_verifies_drug_info_on_Plan_Cost() throws Throwable {
+			
+			PlanDetailsPage vppPlanDetailsPage = (PlanDetailsPage) getLoginScenario()
+					.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
+			String annualDrugCost = (String) getLoginScenario().getBean(DCERedesignCommonConstants.ANNUAL_ESTIMATED_TOTAL);
+			vppPlanDetailsPage.validateDrugInfoOnPlanCostTab(annualDrugCost);
+		}
+		
+	@Then("^verify plan compare checkbox is not visible on plan summary$")
+	public void verify_plan_compare_checkbox_is_not_visible_on_plan_summary() throws Throwable {
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		boolean validationFlag = plansummaryPage.verifyPlanCompareCheckboxNotVisible();
+		Assert.assertFalse("Validation failed : UnExpected Plan Compare check is Visible - ", validationFlag);
+
+	}
+	@When("^verify Call SAM icon is visible or not on Plan Comapare Page$")
+	public void verify_Call_SAM_icon_is_visible_or_not_PlanCompare_Page() throws InterruptedException {
+		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario().getBean(PageConstants.PLAN_COMPARE_PAGE);
+		planComparePage.validateCallSam();
+		getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
+		Assert.assertTrue(true);
+		System.out.println("TFN Widget is Displayed");
+	}
+	@And("^verify Call SAM roll out and contain the text Call a Licensed Insurance Agent on Plan Comapare Page$")
+	public void verify_Call_SAM_roll_out_and_contain_the_text_Call_a_Licensed_Insurance_Agent_PlanCompare_Page() throws InterruptedException {
+				
+		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario().getBean(PageConstants.PLAN_COMPARE_PAGE);
+		planComparePage.validateCallSamContent();
+		
+	}
+	@Then("^user verify the popup and content on Plan Comapare Page$")
+	public void user_verify_the_popup_and_content_PlanCompare_Page() throws InterruptedException {
+				
+		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario().getBean(PageConstants.PLAN_COMPARE_PAGE);
+		planComparePage.validateCallpopup();	
+	}
+	@Then("^the user clicks on back on all plan link in Plan Compare page")
+	  public void user_clicks_back_to_all_plan_PlanCompare_page() throws InterruptedException{
+		  ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario().getBean(PageConstants.PLAN_COMPARE_PAGE); 
+		  VPPPlanSummaryPage plansummaryPage = planComparePage.navigateBackToAllPlans();
+			if (plansummaryPage != null) {
+					getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
+					Assert.assertTrue(true);
+					plansummaryPage.handlePlanYearSelectionPopup();
+				} 
+			else
+				Assert.fail("Error in navigating back to Plan Summary Page");
+		
+	  }
+	@Then("^remove one plan from new plan compare page$")
+	public void remove_one_plan_from_new_plan_compare_page() throws Throwable {
+		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		planComparePage.clickOnNewRemoveLink();
+	}
+	@Then("^click on back to plans on plan compare page$")
+	public void click_on_back_to_plans_on_plan_compare_page() throws Throwable {
+		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		planComparePage.clickOnBacktoPlans();
+	}
+	@Then("^Verify the Plan compare checkbox should be unchecked for the removed plan$")
+	public void verify_the_Plan_compare_checkbox_should_be_unchecked_for_the_removed_plan() throws Throwable {
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		plansummaryPage.verifyPlanComapreCheckboxIsUnchecked();
+	}
+	
+	@Given("^I select \"([^\"]*)\" plans and \"([^\"]*)\" plans to compare and click on compare plan link$")
+	public void i_select_plans_and_plans_to_compare_and_click_on_compare_plan_link(String planType,
+			String Counter) throws Throwable {
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		int counter = Integer.parseInt(Counter);
+		if (planType.equals("MAPD")) {
+			//plansummaryPage.clickonViewPlans();
+			plansummaryPage.checkMAPlansOnly(counter);
+			System.out.println("Selected All MAPD plans for Plan Compare");
+		}
+
+		ComparePlansPage planComparePage = plansummaryPage.clickOnCompareLink();
+		if (planComparePage != null) {
+			getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
+			// comparePlansPage.backToVPPPage();
+		} else
+			Assert.fail("Error in loading the compare plans page");
+	}
+
+	@Then("^Click on Add Icon on new Plan Compare and verify it navigates to plan summary page$")
+	public void click_on_Add_Icon_newPlanCompare_and_verify_it_navigates_to_plan_summary_page() throws Throwable {
+		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		planComparePage.clickOnNewAddIcon();
+	}
+	
+	@Then("^Verify newly added plan displayed on new plan compare page$")
+	public void verify_newly_added_plan_displayed_on_new_plan_compare_page() throws Throwable {
+		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		planComparePage.validatenewlyAddPlanonNewPlanComapre();
+	}
+
+	@Then("^verify Your doctors is loaded with doctor summary on Plan Compare page$")
+	public void verify_doctors_covered() {
+		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		planComparePage.validateDoctors();
+	}
+	@And("^click on Edit your doctors link and Navigate to Rally page$")
+	public void clickONEdityourdocits() throws Exception {
+		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);		
+		FindCarePage findCarePage = planComparePage.clickonEditYourDoctors();
+		if (findCarePage != null) {
+			getLoginScenario().saveBean(PageConstants.FIND_CARE_PAGE, findCarePage);
+		} else
+			Assert.fail("Error in loading the compare plans page");
+	}	
+	
+	@And("^user selects a provider from medical group and retuns to plan compare page$")
+	public void selectsproviderfrommedicalGroup() throws Exception {
+		FindCarePage findCarePage = (FindCarePage) getLoginScenario().getBean(PageConstants.FIND_CARE_PAGE);
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		ComparePlansPage planComparePage = findCarePage.providerfromMedicalGroup();
+		if (planComparePage != null) {
+			getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
+			// comparePlansPage.backToVPPPage();
+		} else
+			Assert.fail("Error in loading the compare plans page");
+	}
+	@Then("^verify Add doctors is loaded with doctor summary on Plan Compare page$")
+	public void verify_Add_doctors_covered() {
+		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		planComparePage.validateAddDoctors();
+	}
+	@And("^click on Add your doctors link and Navigate to Rally page$")
+	public void clickOnAddyourdocits() throws Exception {
+		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);		
+		FindCarePage findCarePage = planComparePage.clickonAddYourDoctors();
+		if (findCarePage != null) {
+			getLoginScenario().saveBean(PageConstants.FIND_CARE_PAGE, findCarePage);
+		} else
+			Assert.fail("Error in loading the compare plans page");
+	}
+	
+	//New plan compare related
+		@And("^I click on Get Started on and Add PrimaryCare PCP from find care page$")
+		public void I_click_on_Get_Started_and_Add_PrimaryCarePCP_find_care_page() throws Exception {
+			FindCarePage findCarePage = (FindCarePage) getLoginScenario().getBean(PageConstants.FIND_CARE_PAGE);
+			try {
+				Thread.sleep(3000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			ComparePlansPage planComparePage = findCarePage.providerfromPrimaryCare();
+			if (planComparePage != null) {
+				getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
+				// comparePlansPage.backToVPPPage();
+			} else
+				Assert.fail("Error in loading the compare plans page");
+		}
+		@Then("^verify Your Hospital is loaded with doctor summary on Plan Compare page$")
+		public void verify_Hospital_covered() {
+			ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
+					.getBean(PageConstants.PLAN_COMPARE_PAGE);
+			planComparePage.validateEditHospitals();
+		}
+		
+		@And("^click on Edit your Hospitals link and Navigate to Rally page$")
+		public void clickONEdityourHospitals() throws Exception {
+			ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
+					.getBean(PageConstants.PLAN_COMPARE_PAGE);		
+			FindCarePage findCarePage = planComparePage.clickonEditYourHosptials();
+			if (findCarePage != null) {
+				getLoginScenario().saveBean(PageConstants.FIND_CARE_PAGE, findCarePage);
+			} else
+				Assert.fail("Error in loading the compare plans page");
+		}	
+		
+		@And("^user selects a Hospitals from Clinical and retuns to plan compare page$")
+		public void selectsproviderfromPrimaryCareClinic() throws Exception {
+			FindCarePage findCarePage = (FindCarePage) getLoginScenario().getBean(PageConstants.FIND_CARE_PAGE);
+			try {
+				Thread.sleep(3000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			ComparePlansPage planComparePage = findCarePage.providerfromPrimaryCareClinicButton();
+			if (planComparePage != null) {
+				getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
+				// comparePlansPage.backToVPPPage();
+			} else
+				Assert.fail("Error in loading the compare plans page");
+		}
+		
+		@Then("^verify Add Hospitals is loaded without summary on Plan Compare page$")
+		public void verify_Add_Hospitals_covered() {
+			ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
+					.getBean(PageConstants.PLAN_COMPARE_PAGE);
+			planComparePage.validateAddHospitals();
+		}
+		
+		@And("^click on Add your Hospitals link and Navigate to Rally page$")
+		public void clickOnAddyourHospitals() throws Exception {
+			ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
+					.getBean(PageConstants.PLAN_COMPARE_PAGE);		
+			FindCarePage findCarePage = planComparePage.clickonAddYourHospitals();
+			if (findCarePage != null) {
+				getLoginScenario().saveBean(PageConstants.FIND_CARE_PAGE, findCarePage);
+			} else
+				Assert.fail("Error in loading the compare plans page");
+		}
+		
+		@And("^I click on Get Started on and Add Places from Hospitals find care page$")
+		public void I_click_on_Get_Started_and_Add_PlacesfromHospitals_find_care_page() throws Exception {
+			FindCarePage findCarePage = (FindCarePage) getLoginScenario().getBean(PageConstants.FIND_CARE_PAGE);
+			try {
+				Thread.sleep(3000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			ComparePlansPage planComparePage = findCarePage.placesfromHospital();
+			if (planComparePage != null) {
+				getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
+				// comparePlansPage.backToVPPPage();
+			} else
+				Assert.fail("Error in loading the compare plans page");
+		}
+		@Then("^the user clicks on Enroll in plan and validates the Welcome to OLE Page on new Plan Compare page$")
+		  public void user_clicks_enrollInPlan_newPlanCompare_AARP() throws InterruptedException{
+			  ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario().getBean(PageConstants.PLAN_COMPARE_PAGE); 
+			  WelcomePage  welcomeOLEPage = planComparePage.Enroll_OLE_Plancompare();
+		   if (welcomeOLEPage != null) {
+				getLoginScenario().saveBean(PageConstants.OLE_WELCOME_PAGE, welcomeOLEPage);
+			} else {
+				Assert.fail("Error Loading Welcome Page for OLE");
+			}
+		  }
+		@Then("^check one plan and add it to plancompare")
+		public void check_one_plan_and_add_it_to_plancompare() throws Throwable {
+			VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+			plansummaryPage.clickon3rdPlan();
+			ComparePlansPage planComparePage = plansummaryPage.clickOnCompareLink();
+			if (planComparePage != null) {
+				getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
+				// comparePlansPage.backToVPPPage();
+			} else
+				Assert.fail("Error in loading the compare plans page");
+		}
 }

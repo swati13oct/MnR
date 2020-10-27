@@ -1373,6 +1373,8 @@ public void useraddDrugsVPP(String drugDetails) {
 }
 
 public boolean changePlanyear(String year) {
+
+	jsClickNew(MAViewPlansLink);
 	// Checking and Changing to Current Year
 	if (year.equalsIgnoreCase("current")) {
 		if (validate(currentPlanYear, 15)) {
@@ -1400,7 +1402,8 @@ public boolean changePlanyear(String year) {
 public boolean checkPlanyear(String year) {
 	// Checking Current year selection
 	try {
-		MAViewPlansLink.click();
+		//MAViewPlansLink.click();
+		jsClickNew(MAViewPlansLink);
 	if (year.equalsIgnoreCase("current")) {
 		if (validate(currentPlanYear, 15) && currentPlanYearSelected.getAttribute("id").length()>0) {
 			return true;
