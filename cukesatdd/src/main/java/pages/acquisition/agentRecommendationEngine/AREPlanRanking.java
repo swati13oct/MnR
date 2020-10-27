@@ -412,15 +412,13 @@ public class AREPlanRanking extends UhcDriver {
 		List<String> vppPlans = new ArrayList<String>();
 		System.out.println(plansName.size());
 		System.out.println(viewplandetails.size());
-		int plan = 0;
 		if (plansName.size() != viewplandetails.size()) {
-			plan = 1;
-				for (int i = 0; i < viewplandetails.size(); i++) {
+			for (int i = 0; i < viewplandetails.size(); i++) {
 					 if(i>3) {
 						 for(int k=0; k<i; k++)
 							 jsClickNew(viewMorePlansinPlanCompare);
 					 }
-					vppPlans.add(verifygetplanName(plansName.get(plan + i), viewplandetails.get(i)));
+					vppPlans.add(verifygetplanName(plansName.get(i+1), viewplandetails.get(i)));
 				}
 			System.out.println("Plan Name compared Successful Clicks on Plan Name");
 		} else {
