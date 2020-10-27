@@ -30,6 +30,7 @@ import pages.acquisition.dce.DCETestHarnessPage;
 import pages.acquisition.dceredesign.GetStartedPage;
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.pharmacyLocator.PharmacySearchPage;
+import pages.acquisition.commonpages.VisitorProfilePage;
 
 /**
  * @author pperugu
@@ -409,6 +410,15 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	
 	@FindBy(xpath = "//body/div[@id='overlay']")
 	private WebElement overlayFilm;	
+	
+	@FindBy(id = "logged-username")
+	private WebElement guestProfileLink;
+	
+	@FindBy(xpath = "//*[@id='enrollmentPopup']/..")
+	private WebElement savedPlansPopup;
+	
+	@FindBy(xpath = "//*[@id='enrollmentPopup']/..//*[@class='uhc-modal__close']")
+	private WebElement savedPlansPopupCloseIcon;
 
    	String ChatSamText= "Chat with a Licensed Insurance Agent";
 
@@ -472,6 +482,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			} else {
 				startNew(UMS_ACQISITION_PAGE_URL);
 				testSiteUrl=UMS_ACQISITION_PAGE_URL;
+				checkForSecurityPage();
+				checkModelPopup(driver,20);
 			}
 			
 		} else if("health-plans".equalsIgnoreCase(site)){
@@ -2124,5 +2136,33 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			}
 
 			System.out.println("Current page URL: " + driver.getCurrentUrl());
+		}
+		
+		/**
+		 * This method used to navigate to new visitor profile dashboard
+		 * 
+		 * @return
+		 */
+		public VisitorProfilePage navigateToNewVisitorProfilePage() {
+			try{
+				if(savedPlansPopup.isDisplayed()) {
+					savedPlansPopupCloseIcon.click();
+				}
+			}catch(Exception e) {
+				System.out.println("Saved Plans modal not displayed");
+			}
+			waitforElement(shoppingCartIcon);
+			shoppingCartIcon.click();
+			guestProfileLink.click();
+			//Actions actions = new Actions(driver);
+			//actions.moveToElement(guestProfileLink);
+			//actions.click().build().perform();
+			CommonUtility.checkPageIsReadyNew(driver);
+			if (driver.getCurrentUrl().contains("profile")) {
+				return new VisitorProfilePage(driver);
+			} else {
+				System.out.println("Navigation to visitor profile is failed");
+				return null;
+			}
 		}
 }

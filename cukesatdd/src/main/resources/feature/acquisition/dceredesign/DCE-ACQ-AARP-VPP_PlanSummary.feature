@@ -148,3 +148,33 @@ Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanSummary AARP - To test VPP Plan Details 
       | zipcode | plantype | county       | isMultutiCounty | drug1   | planname                                              |
       |   78006 | SNP      | Bexar County | yes             | Orkambi | UnitedHealthcare Medicare Silver (Regional PPO C-SNP) |
       
+      @dceSavePlanDifferentZipcode @F519020
+   Scenario Outline: Test to Verify the Plan saved correctly in visitor profile through differnt zipcodes
+   Given the user is on medicare acquisition site landing page
+    	|Site| <site>|
+    When the user performs plan search using following information
+      | Zip Code        | <zipcode>         |
+      | County Name     | <county>          |
+      | Is Multi County | <isMultutiCounty> |
+    And the user views the plans of the below plan type and select Next year
+      | Plan Type | <plantype> |
+      And user saves below plan
+      | Plan Type | <plantype> |
+      | Plan Name | <planname> |
+    And I access the DCE Redesign from Plan Summary for mentioned plan
+      | Plan Type | <plantype> |
+      | Plan Name | <planname> |
+    Then the user validates Get Started Page
+    Then the user clicks on Build Drug List to navigate to Build Drug List Page
+    Then the user searches and adds the following Drug to Drug List
+      | DrugName | <drug1> |
+    Then the user clicks on Review Drug Costs to Land on Drug DetailsP Page
+    Then the user validates planName matches plan Name in VPP
+    When the user navigate to Visitor profile page
+    And user validates the plans on new visitor profile page of AARP site
+      | MAPD Plans  |<mapdtestPlans> |
+    
+     Examples: 
+      |	site	| zipcode | plantype | county | isMultutiCounty | drug1   | planname                                           |mapdtestPlans|
+      |	AARP	|   90210 | MAPD     | none   | no              | Orkambi | AARP Medicare Advantage SecureHorizons Focus (HMO) |AARP Medicare Advantage SecureHorizons Focus (HMO)|
+      

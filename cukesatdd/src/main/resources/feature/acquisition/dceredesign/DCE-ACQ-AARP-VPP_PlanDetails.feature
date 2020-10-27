@@ -260,7 +260,7 @@ Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanDetails AARP - To test DCE - VPP Plan De
       
       
       @dceNBADetailPage @F509520
-   Scenario Outline: Test to Verify that EDCE NBA on drug detail page
+   Scenario Outline: Test to Verify the DCE NBA on drug detail page
     Given the user is on the AARP medicare site landing page
     When the user performs plan search using following information in the AARP site
       | Zip Code        | <zipcode>         |

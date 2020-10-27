@@ -1028,7 +1028,7 @@ public class DCEStepDefinitionAARP {
 	}
 
 	@Then("^the user verifies the coverage gap message$")
-	public void the_user_verifies_the_coverage_gap_message(DataTable givenAttributes) throws Throwable {
+	public void the_user_verifies_the_coverage_gap_message(DataTable givenAttributes) {
 		DrugDetailsPage drugDetailsPage = new DrugDetailsPage(driver);
 		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
@@ -1096,7 +1096,7 @@ public class DCEStepDefinitionAARP {
 	}
 
 	@Then("^verify DCE NBA is displayed on drug summary page$")
-	public void verify_dce_NBA_is_displayed_on_summary_page() throws Throwable {
+	public void verify_dce_NBA_is_displayed_on_summary_page()  {
 		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
 		drugSummaryPage.validateDCENBAModal();
 	}
@@ -1112,33 +1112,73 @@ public class DCEStepDefinitionAARP {
 	}
 	
 	@Then("^verify DCE NBA is displayed on drug details page$")
-	public void verify_dce_NBA_is_displayed_on_drug_details_page() throws Throwable {
+	public void verify_dce_NBA_is_displayed_on_drug_details_page() {
 		DrugDetailsPage drugDetailsPage = new DrugDetailsPage(driver);
 		drugDetailsPage.validateDCENBAModal();
 	}
 	
 	@When("^user saves and updates pharmacy from list$")
-	public void user_saves_and_updates_pharmacy_from_list() throws Throwable {
+	public void user_saves_and_updates_pharmacy_from_list()  {
 		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
 		drugSummaryPage.saveAndUpdatePharmacy();
 	}
 
 	@Then("^the pharmacy name should be updated on summary page$")
-	public void the_pharmacy_name_should_be_updated_on_summary_page() throws Throwable {
+	public void the_pharmacy_name_should_be_updated_on_summary_page()  {
 		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
 		drugSummaryPage.validateSelectedPharmacy();
 	}
 	
 	@Then("^the pharmacy name should be updated on details page$")
-	public void the_pharmacy_name_should_be_updated_on_details_page() throws Throwable {
+	public void the_pharmacy_name_should_be_updated_on_details_page() {
 		DrugDetailsPage drugDetailsPage = new DrugDetailsPage(driver);
 		drugDetailsPage.validateSelectedPharmacy();
 	}
 	
 	@When("^user saves and updates pharmacy from list on details page$")
-	public void user_saves_and_updates_pharmacy_from_list_on_details_page() throws Throwable {
+	public void user_saves_and_updates_pharmacy_from_list_on_details_page(){
 		DrugDetailsPage drugDetailsPage = new DrugDetailsPage(driver);
 		drugDetailsPage.saveAndUpdatePharmacy();
 	}
+	
+	@When("^user saves below plan$")
+	public void user_saves_below_plan(DataTable givenAttributes)  {
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		String savePlanNames = memberAttributesMap.get("Plan Name");
+		String planType=memberAttributesMap.get("Plan Type");
+		plansummaryPage.savePlans(savePlanNames,planType);
+	}
+	
+	@And("^the user navigate to Visitor profile page$")
+	public void the_user_navigate_to_visitor_profile_page() {
+		AcquisitionHomePage acqHomePage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+
+		VisitorProfilePage visitorProfilePage = acqHomePage.navigateToNewVisitorProfilePage();
+
+		getLoginScenario().saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfilePage);
+	}
+
+	@And("^user validates the plans on new visitor profile page of AARP site$")
+	public void user_validates_the_plans_on_new_visitor_profile_page_of_AARP_site(DataTable planNames) {
+		List<DataTableRow> givenAttributesRow = planNames.getGherkinRows();
+		Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < givenAttributesRow.size(); i++) {
+
+			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+					givenAttributesRow.get(i).getCells().get(1));
+		}
+		String savePlanNames = givenAttributesMap.get("Test Plans");
+		VisitorProfilePage visitorProfile = (VisitorProfilePage) getLoginScenario()
+				.getBean(PageConstants.VISITOR_PROFILE_PAGE);
+		visitorProfile.validateAddedPlansNew(savePlanNames);
+	}
 }

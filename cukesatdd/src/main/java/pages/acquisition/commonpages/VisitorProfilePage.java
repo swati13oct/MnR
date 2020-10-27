@@ -418,5 +418,14 @@ public class VisitorProfilePage extends UhcDriver {
 		return null;
 	}
 	
+	public void validateAddedPlansNew(String planNames) {
+		List<String> listOfTestPlans = Arrays.asList(planNames.split(","));
+		CommonUtility.checkPageIsReadyNew(driver);
+		for (String plan: listOfTestPlans) {
+			Assert.assertEquals(plan, driver.findElement(By.xpath("//h3[text()=' "+plan+" ']")).getText());
+			Assert.assertTrue(driver.findElement(By.xpath("//h3[text()=' "+plan+" ']/following::button[1]")).isDisplayed());
+			System.out.println("Verified plans are added on vistior profile page");
+		}
+	}
 	
 }
