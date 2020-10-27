@@ -121,6 +121,9 @@ public class AREPlanRanking extends UhcDriver {
 
 	@FindBy(css = "#compare-table-header th[class*='uhc-slide-table'] div[class*='text-dark']")
 	private List<WebElement> plancards;
+	
+	@FindBy(xpath = "//*[contains(@class,'compare-plans-next')]")
+    private WebElement viewMorePlansinPlanCompare;
 
 	@FindBy(css = "#compare-table-header th[class*='uhc-slide-table'] a[dtmname*='View Details']")
 	private List<WebElement> viewplandetailslink;
@@ -412,8 +415,13 @@ public class AREPlanRanking extends UhcDriver {
 		int plan = 0;
 		if (plansName.size() != viewplandetails.size()) {
 			for (plan = 1; plan < PlanCount; plan++) {
-				for (int i = 0; i < viewplandetails.size(); i++)
+				for (int i = 0; i < viewplandetails.size(); i++) {
+					 if(i>3) {
+						 for(int k=0; k<i; k++)
+							 jsClickNew(viewMorePlansinPlanCompare);
+					 }
 					vppPlans.add(verifygetplanName(plansName.get(plan + i), viewplandetails.get(i)));
+				}
 			}
 			System.out.println("Plan Name compared Successful Clicks on Plan Name");
 		} else {
