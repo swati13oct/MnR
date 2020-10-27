@@ -414,7 +414,7 @@ public class AREPlanRanking extends UhcDriver {
 		System.out.println(viewplandetails.size());
 		int plan = 0;
 		if (plansName.size() != viewplandetails.size()) {
-			for (plan = 1; plan < PlanCount; plan++) {
+			plan = 1;
 				for (int i = 0; i < viewplandetails.size(); i++) {
 					 if(i>3) {
 						 for(int k=0; k<i; k++)
@@ -422,13 +422,15 @@ public class AREPlanRanking extends UhcDriver {
 					 }
 					vppPlans.add(verifygetplanName(plansName.get(plan + i), viewplandetails.get(i)));
 				}
-			}
 			System.out.println("Plan Name compared Successful Clicks on Plan Name");
 		} else {
-			for (plan = 0; plan < PlanCount; plan++) {
-				for (int i = 0; i < viewplandetails.size(); i++)
+				for (int i = 0; i < viewplandetails.size(); i++) {
+					if(i>3) {
+						 for(int k=0; k<i; k++)
+							 jsClickNew(viewMorePlansinPlanCompare);
+					 }
 					vppPlans.add(verifygetplanName(plansName.get(i), viewplandetails.get(i)));
-			}
+				}
 			System.out.println("Plan Name compared Successful Clicks on Enroll Button");
 		}
 	}
