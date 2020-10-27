@@ -2064,6 +2064,17 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 
 	}
 
+	public void verifyPresenceOfJumpLinksDSNP(String planType, String memberType) {
+		
+		CommonUtility.waitForPageLoad(driver, logoImage, 15); 
+		Assert.assertTrue("jmpLinkTo Medical Copays Or Coinsurance isn't displayed", getJmpLinkToMedicalCopaysOrCoinsurance().isDisplayed());
+		Assert.assertTrue("jmpLinkTo OutofPocketMaximum isn't displayed", getJmpLinkToOutofPocketMaximum().isDisplayed());
+		Assert.assertTrue("jmpLinkTo PrimaryCareProvider isn't displayed", getJmpLinkToPrimaryCareProvider().isDisplayed());
+		Assert.assertTrue("jmpLinkTo DrugCopays&Discounts isn't displayed", getJmpLinkToDrugCopaysAndDiscounts().isDisplayed());
+		Assert.assertTrue("jmpLinkTo DrugCoverage isn't displayed", getJmpLinkToDrugCoverage().isDisplayed());
+		Assert.assertTrue("jmpLinkTo PlanDocumentsAndResources isn't displayed", getJmpLinkToPlanDocumentsAndResources().isDisplayed());
+		
+	}
 
 	public void verifyPresenceOfJumpLinksMAPD(String rider, String planType, String memberType) {
 		CommonUtility.waitForPageLoad(driver, logoImage, 15);
