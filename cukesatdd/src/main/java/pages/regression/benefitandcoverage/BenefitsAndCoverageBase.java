@@ -426,6 +426,18 @@ public class BenefitsAndCoverageBase extends BenefitsAndCoverageWebElements {
 		System.out.println("All sections are present for the MAPD Plan");
 	}
 
+	public void clicksOnJumpLinksAndCheckRespectiveSectionsDSNP(String planType, String memberType) {
+		
+		clicksOnLinkAndBackToTop(getJmpLinkToMedicalCopaysOrCoinsurance(), getCopayscoinsuranceheader());
+		clicksOnLinkAndBackToTop(getJmpLinkToOutofPocketMaximum(), getOutOfPocketSectionHeader());
+		clicksOnLinkAndBackToTop(getJmpLinkToPrimaryCareProvider(), getPrimaryCareProviderHeaderInd());
+		clicksOnLinkAndBackToTop(getJmpLinkToDrugCopaysAndDiscounts(), getDrugCopaysAndDiscountsSectionHeader());
+		clicksOnLinkAndBackToTop(getJmpLinkToDrugCoverage(), getDrugCoverageSectionHeader());
+		clicksOnLinkAndBackToTop(getJmpLinkToPlanDocumentsAndResources(),getPlanDocumentsAndResourcesSectionHeader());
+		
+		System.out.println("All sections are present for the DSNP  Plan");
+	}
+
 	public void clicksOnJumpLinksAndCheckRespectiveSectionsMedSupp(String rider, String planType, String memberType) {
 		clicksOnLinkAndBackToTop(getJmpLinkToBenefitSummaryMedSupp(), getBenefitsSummarySectionHeader());
 		clicksOnLinkAndBackToTop(getJmpLinkToDiscountsAndServicesMedSupp(), getTextdiscountservices());
@@ -504,8 +516,8 @@ public class BenefitsAndCoverageBase extends BenefitsAndCoverageWebElements {
 
 	public void directoryLinksCount(int linkCount, String rider, String planType, String memberType) {
 		int count = 0;
-		if (planType.equals("MA") || planType.equals("MAPD")) {
-			if (memberType.equalsIgnoreCase("Individual")) {
+		if (planType.equals("MA") || planType.equals("MAPD") || planType.equals("DSNP-MAPD")) {
+			if (memberType.equalsIgnoreCase("Individual")|| memberType.contains("Individual_Bnc")) {
 				count = getDirectorySection(planType, memberType).size() - 1;
 				if (rider.toString().trim().equals("Rider"))
 					count += 1;
