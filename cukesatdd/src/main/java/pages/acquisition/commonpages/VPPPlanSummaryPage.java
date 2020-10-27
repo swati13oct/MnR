@@ -19,6 +19,7 @@ import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -41,6 +42,7 @@ import pages.acquisition.dceredesign.GetStartedPage;
 import pages.acquisition.isdecisionguide.IsDecisionGuideStep1;
 import pages.acquisition.medsuppole.MedSuppOLEPage;
 import pages.acquisition.ole.WelcomePage;
+import pages.acquisition.commonpages.ComparePlansPage;
 import pages.acquisition.commonpages.VisitorProfilePage;
 import pages.acquisition.commonpages.PlanDetailsPage;
 import pages.acquisition.vppforaep.AepVppPlanSummaryPage;
@@ -3795,4 +3797,60 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		System.out.println("Verified Plan Compare checkbox is unchecked");
 
 		}
+	public boolean verifyPlanCompareCheckboxNotVisible() {
+		try {
+			boolean blnDisplay = planCompareCheckBox.isDisplayed();
+			System.out.println("Plan compare checkbox is Displayed");
+			return blnDisplay;
+		} catch (NoSuchElementException ex) {
+			System.out.println("Plan compare checkbox is Not Displayed");
+			return false;
+		}
+
+	}
+	public void verifyPlanComapreCheckboxIsUnchecked() {
+		validate(planCompareCheckBox);
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		String CheckStatus = js.executeScript("return document.getElementById('compare-plan-4').checked;").toString();
+		System.out.println("Plan compare checkbox status:" + CheckStatus);
+		Assert.assertEquals("false", CheckStatus.trim());
+		System.out.println("Verified Plan Compare checkbox is unchecked");
+
+		}
+	public void checkMAPlansOnly(int counter) {
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		List<WebElement> allMAPlans = driver
+				.findElements(By.xpath(".//*[@id='plan-list-1']//div[contains(@class,'compare-box')]//label"));
+
+		if (allMAPlans != null) {
+			for (int i = 0; i < allMAPlans.size(); i++) {
+				allMAPlans.get(i).click();
+				if (i == counter) {
+					break;
+				}
+			}
+		}
+
+	}
+	public ComparePlansPage clickOnCompareLink(){
+		List<WebElement> compareLinks = driver
+				.findElements(By.xpath("//*[contains(@class,'multiple-added-text')]//button[contains(text(),'Compare plans')]"));
+		compareLinks.get(1).click();
+		if(currentUrl().contains("/health-plans.html#/plan-compare"))
+			return new ComparePlansPage(driver);
+		return null;
+	}
+	public void clickon3rdPlan() {
+		WebElement Checkbox = driver.findElement(By
+				.xpath("//input[contains(@id,'compare-plan-3')]/ancestor::div[contains(@class,'compare-box')]//label"));
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript("arguments[0].click();", Checkbox);
+		// js.executeScript("document.getElementById('compare-plan-3').click;");
+		System.out.println("checked third plan for plan compare");
+	}
 }
