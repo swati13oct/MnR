@@ -185,7 +185,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElementsMobile {
 			} else if (MRScenario.environment.equalsIgnoreCase("prod")) {
 				startNewMobile(AARP_ACQISITION_PROD_PAGE_URL);
 			}
-		} else { // For jenkins job
+		} /*else { // For jenkins job
 			String jenkinsRunnerFiles = MRScenario.runnerFiles;
 
 			if (MRScenario.environment.equalsIgnoreCase("stage")) {
@@ -219,7 +219,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElementsMobile {
 						startNewMobile(AARP_ACQISITION_PROD_PAGE_URL);
 				}
 			}
-		}
+		}*/
 		System.out.println("Current mobile page URL: " + driver.getCurrentUrl());
 		return offline_prod;
 
