@@ -524,7 +524,8 @@ public class PlanRecommendationEngineResultsPage extends UhcDriver {
 			for (int i = 0; i < 5; i++) {
 				try {
 					validate(enrollButton, 5);
-					enrollButton.click();
+					//enrollButton.click();
+					jsClickNew(enrollButton);
 					click = true;
 					break;
 				} catch (Exception e) {
