@@ -172,7 +172,7 @@ Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanSummary AARP - To test VPP Plan Details 
     Then the user validates planName matches plan Name in VPP
     When the user navigate to Visitor profile page
     And user validates the plans on new visitor profile page of AARP site
-      | MAPD Plans  |<mapdtestPlans> |
+      | Test Plans  |<mapdtestPlans> |
     
      Examples: 
       |	site	| zipcode | plantype | county | isMultutiCounty | drug1   | planname                                           |mapdtestPlans|
