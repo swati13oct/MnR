@@ -4,6 +4,7 @@
 package pages.memberrdesignVBF;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import org.junit.Assert;
 import org.openqa.selenium.JavascriptExecutor;
@@ -11,8 +12,11 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 
+import acceptancetests.data.CommonConstants;
 import acceptancetests.util.CommonUtility;
+import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 
 /**
@@ -20,6 +24,13 @@ import atdd.framework.UhcDriver;
  *
  */
 public class BenefitsAndCoveragePage extends UhcDriver {
+	
+	@Autowired
+	MRScenario loginScenario;
+
+	public MRScenario getLoginScenario() {
+		return loginScenario;
+	}
 
 	@FindBy(className = "atdd-need-help")
 	private WebElement NeedHelpHeader;
@@ -85,6 +96,9 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	private WebElement HospitalVisits;
 	@FindBy(className = "atdd-officevisits-title")
 	private WebElement OfficeVisits;
+	
+	@FindBy(xpath = "//*[contains(@class,'tdd-hospitalvisits-title')]")
+	private WebElement InPatientHospitalCare;
 
 	@FindBy(className = "atdd-outpatientsurgery-title")
 	private WebElement OutpatientSurgeryCenter;
@@ -166,6 +180,12 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 
 	@FindBy(xpath = "//table[@class='table-white atdd-bnc-standrdretailpharmcytable']/tbody/tr[2]/td[3]")
 	private WebElement federalValueIC;
+	
+	@FindBy(xpath="//p[text()='To view more details regarding your plan benefits, you may view your Benefits Highlights ']")
+	private WebElement medCopayText;
+	
+	@FindBy(xpath="//p[text()='To view more details regarding your plan benefits, you may view your Benefits Highlights ']/a")
+	private WebElement medCopayBenefitsLink;
 
 	public BenefitsAndCoveragePage(WebDriver driver) {
 		super(driver);
@@ -313,6 +333,34 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	/***
 	 * 
 	 */
+	
+	public void validateHeaders(String planType) {
+		String ExpectedUrl="member/documents/overview.html";
+		WebDriver wd=(WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		try {
+			if(planType.equals("DSNP-MAPD")) {
+				
+				validateNew(BenefitsSummaryHeader);
+				validateNew(Copayscoinsuranceheader);
+				Assert.assertTrue("'To view more details regarding----'  text is expected to display", medCopayText.isDisplayed());
+				medCopayBenefitsLink.click();
+				wd.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);  
+				String actualUrl=wd.getCurrentUrl();
+				Assert.assertTrue("'Original Url & Expected URL did n't Matched'", actualUrl.contains(ExpectedUrl));
+				System.out.println("actualUrl is " + actualUrl);
+				System.out.println("ExpectedUrl is " + ExpectedUrl);
+				wd.navigate().back();
+				wd.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+				
+					Assert.assertTrue("'OfficeVisits' is not expected to display", !OfficeVisits.isDisplayed());
+					Assert.assertTrue("'InPatientHospitalCare' is not expected to display", !InPatientHospitalCare.isDisplayed());
+					Assert.assertTrue("'OutpatientSurgeryCenter' is not expected to display", !OutpatientSurgeryCenter.isDisplayed());
+				
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
 	public void validatePrimaryCareProvider() {
 
 		validateNew(PrimaryCareProviderHeader);
@@ -340,7 +388,20 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	//	validateTextUsingRegex(INNETWORKValue, "([NA]{1})|(\\$\\d{1,3}\\,\\d+\\.\\d{2})");
 		//validateTextUsingRegex(OUTOFNETWORKValue, "([NA]{1})|(\\$\\d{1,3}\\,\\d+\\.\\d{2})");
 	}
-
+	
+	public void validateOutofPocketMax(String planType) {
+		try {
+			if(planType.equals("DSNP-MAPD")) {
+									
+					Assert.assertTrue("'INNETWORK' is not expected to display", !INNETWORK.isDisplayed());
+					Assert.assertTrue("'OUTOFNETWORK' is not expected to display", !OUTOFNETWORK.isDisplayed());
+			}
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
 	public void ValidatesBenefitsForCombo() {
 		int numberOfTabsForCombo;
 		numberOfTabsForCombo = tabsForComboMember.size();
