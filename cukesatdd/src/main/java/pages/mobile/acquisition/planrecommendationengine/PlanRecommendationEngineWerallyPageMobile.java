@@ -117,7 +117,7 @@ public class PlanRecommendationEngineWerallyPageMobile extends UhcDriver {
 							scrollToView(serachResultsCount);
 					}
 					jsClickNew(saveButton);
-					threadsleep(3000);
+					threadsleep(4000);
 					String text = saveModalCloseContinueSearchbutton.getText();
 					if (text.toUpperCase().contains("CONTINUE"))
 						newRally = true;

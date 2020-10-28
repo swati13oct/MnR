@@ -34,7 +34,7 @@ Feature: Plan Recommendation Engine Ranking - Verify PRE flows functionalities w
     Examples: 
       | Zipcode | isMultiCounty | county      | isCoverageOpt | specialNeeds | travel    | doctors    | DoctorsName         | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch | pharmacyoption | Dental-Hearing-Vision-Fitness | costPreferenceOption |
       |   12345 | NO            | Schenectady | MAPD          | None         | withinUS  | UHGNetwork |                     |               | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,1,YES,NO                               | Online         | No,No,No,No                   | Lower                |
-      |   12345 | NO            | Schenectady | MAPD          | None         | outsideUS | Lookup     | Sherrie L Murray NP | NO            | Yes            | Lipitor,NO,Lipitor TAB 10MG,,,1,YES,NO                               | Retail         | Yes,Yes,Yes,Yes               | Higher               |
+      |   12345 | NO            | Schenectady | MAPD          | None         | outsideUS | Lookup     | Sherrie L Murray NP | Yes            | Yes            | Lipitor,NO,Lipitor TAB 10MG,,,1,YES,NO                               | Retail         | Yes,Yes,Yes,Yes               | Higher               |
 
   @PRE @Ranking @MAPlansRanking @F358846 @PRERegression1
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds> , <travel> , <doctors> , <DoctorsName> , <isMultiDoctor> , <Drug Selection> , <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch> , <pharmacyoption> , <Dental-Hearing-Vision-Fitness> , <costPreferenceOption> - To validate Ranking for MA plans in PRE
