@@ -478,7 +478,7 @@ try {
 	 */
 	public void startNewPRE(String url, String browser) {
 		System.out.println("Browser Name: "+browser);
-		if(browser.equals("safari")) 
+		if(browser.equalsIgnoreCase("safari")) 
 			driver.get(url);
 		else {
 			driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);

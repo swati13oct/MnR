@@ -657,7 +657,6 @@ public class PlanRecommendationEngineResultsPage extends UhcDriver {
 		
 		public void drugcoveredsession() {
 			drugCoveredeVPP = MA1stPlanList.get(0).findElement(By.cssSelector("a[class*='drug-list-toggle']"));
-//			drugCoveredeVPP.click();
 			jsClickNew(drugCoveredeVPP);
 		}
 		
