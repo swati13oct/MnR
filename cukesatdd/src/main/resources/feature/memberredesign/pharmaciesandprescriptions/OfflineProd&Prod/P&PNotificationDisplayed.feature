@@ -10,10 +10,12 @@ Feature: P&P Notification is Displayed
     And Member Enters the Username he wants to search
       | MemUsername | <memUserName> |
     And user clicks on member to select
-    When user navigates to the pharmacies and prescriptions page from testharness page
+    When now user navigates to the pharmacies and prescriptions page from dashboard or testharness page
+      | PlanType    | <planType>   |
+      | Member Type | <memberType> |
     When a PnP notification is activated
     Then user must see that message at the top of the PnP page
 
     Examples: 
-      | username | password | memUserName |
-      | kjadha10 | Free@123 | Berniewb    |
+      | username | password | memUserName | planType | memberType |
+      | kjadha10 | Free@123 | Berniewb    | PDP      | Individual |

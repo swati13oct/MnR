@@ -10,7 +10,9 @@ Feature: Drug Name and Get Pricing
     And Member Enters the Username he wants to search
       | MemUsername | <memUserName> |
     And user clicks on member to select
-    When user navigates to the pharmacies and prescriptions page from testharness page
+    When now user navigates to the pharmacies and prescriptions page from dashboard or testharness page
+      | PlanType    | <planType>   |
+      | Member Type | <memberType> |
     Then user views the Current Medications
     When user clicks on the name of a drug
     Then user views the Prices page for that medication
@@ -20,5 +22,5 @@ Feature: Drug Name and Get Pricing
     Then user views the Prices page for that medication
 
     Examples: 
-      | username | password | memUserName |
-      | kjadha10 | Free@123 | Berniewb    |
+      | username | password | memUserName | planType | memberType |
+      | kjadha10 | Free@123 | Berniewb    | PDP      | Individual |

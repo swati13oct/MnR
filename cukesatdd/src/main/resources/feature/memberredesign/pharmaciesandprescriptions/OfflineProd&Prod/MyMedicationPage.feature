@@ -10,12 +10,14 @@ Feature: My Medication Page
     And Member Enters the Username he wants to search
       | MemUsername | <memUserName> |
     And user clicks on member to select
-    When user navigates to the pharmacies and prescriptions page from testharness page
+    When now user navigates to the pharmacies and prescriptions page from dashboard or testharness page
+      | PlanType    | <planType>   |
+      | Member Type | <memberType> |
     And user clicks View all medications link to view the My Medications page
     Then user validates the disclaimer Medication appearance subject to change
     Then user validates first ten of his active prescriptions
     And user advance and reverse through the pages
 
     Examples: 
-      | username | password | memUserName |
-      | kjadha10 | Free@123 | Berniewb    |
+      | username | password | memUserName | planType | memberType |
+      | kjadha10 | Free@123 | Berniewb    | PDP      | Individual |

@@ -10,7 +10,9 @@ Feature: Auto Refill NE
     And Member Enters the Username he wants to search
       | MemUsername | <memUserName> |
     And user clicks on member to select
-    When user navigates to the pharmacies and prescriptions page from testharness page
+    When now user navigates to the pharmacies and prescriptions page from dashboard or testharness page
+      | PlanType    | <planType>   |
+      | Member Type | <memberType> |
     And user clicks View all medications link to view the My Medications page
     Then user will view the Refill All Medications CTA on MY Medications Page
     When user select the Refill All Medications CTA
@@ -18,5 +20,5 @@ Feature: Auto Refill NE
     Then user will not view the Auto Refill display
 
     Examples: 
-      | username | password | memUserName |
-      | kjadha10 | Free@123 |             |
+      | username | password | memUserName | planType | memberType |
+      | kjadha10 | Free@123 | Berniewb    | PDP      | Individual |

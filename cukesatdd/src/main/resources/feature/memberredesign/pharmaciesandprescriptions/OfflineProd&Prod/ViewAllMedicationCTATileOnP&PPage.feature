@@ -10,7 +10,9 @@ Feature: View All Medication CTA Tile on P&P page
     And Member Enters the Username he wants to search
       | MemUsername | <memUserName> |
     And user clicks on member to select
-    When user navigates to the pharmacies and prescriptions page from testharness page
+    When now user navigates to the pharmacies and prescriptions page from dashboard or testharness page
+      | PlanType    | <planType>   |
+      | Member Type | <memberType> |
     And user view MedCab load successfully on PnP page
     Then user view View All Medication Call To Action
     Then user validates the View All Medication text content displayed third within that section
@@ -21,5 +23,5 @@ Feature: View All Medication CTA Tile on P&P page
     Then user will be directed to My Medications page
 
     Examples: 
-      | username | password | memUserName |
-      | kjadha10 | Free@123 | Berniewb    |
+      | username | password | memUserName | planType | memberType |
+      | kjadha10 | Free@123 | Berniewb    | PDP      | Individual |

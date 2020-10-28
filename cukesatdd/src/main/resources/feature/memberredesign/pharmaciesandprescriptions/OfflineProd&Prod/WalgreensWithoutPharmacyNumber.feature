@@ -10,11 +10,13 @@ Feature: Walgreen without Pharmacy Number (Contact Pharmacy)
     And Member Enters the Username he wants to search
       | MemUsername | <memUserName> |
     And user clicks on member to select
-    When user navigates to the pharmacies and prescriptions page from testharness page
+    When now user navigates to the pharmacies and prescriptions page from dashboard or testharness page
+      | PlanType    | <planType>   |
+      | Member Type | <memberType> |
     And user clicks View all medications link to view the My Medications page
     When user has a Walgreens drug without store numbers
     Then user sees the contact pharmacy button if it has no store number
 
     Examples: 
-      | username | password | memUserName |
-      | yaihemai | Yusufu6$ | Berniewb    |
+      | username | password | memUserName | planType | memberType |
+      | yaihemai | Yusufu6$ | Berniewb    | PDP      | Individual |
