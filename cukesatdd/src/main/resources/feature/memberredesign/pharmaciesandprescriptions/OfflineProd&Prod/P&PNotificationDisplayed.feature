@@ -14,7 +14,6 @@ Feature: P&P Notification is Displayed
       | PlanType    | <planType>   |
       | Member Type | <memberType> |
     When a PnP notification is activated
-    Then user must see that message at the top of the PnP page
 
     Examples: 
       | username | password | memUserName | planType | memberType |
