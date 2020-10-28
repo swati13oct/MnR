@@ -5,11 +5,10 @@ Feature: Drug Name and Get Pricing
   Scenario Outline: To verify user has access to Drug Name and Get Pricing
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
-      | Username | yaihemai |
-      | Password | Yusufu6$ |
+      | Username | <username> |
+      | Password | <password> |
     And Member Enters the Username he wants to search
-      | Member   |
-      | Berniewb |
+      | MemUsername | <memUserName> |
     And user clicks on member to select
     When user navigates to the pharmacies and prescriptions page from testharness page
     Then user views the Current Medications
@@ -19,3 +18,7 @@ Feature: Drug Name and Get Pricing
     Then user views the Current Medications
     When user select the Get Pricing button on a drug card
     Then user views the Prices page for that medication
+
+    Examples: 
+      | username | password | memUserName |
+      | kjadha10 | Free@123 | Berniewb    |

@@ -5,11 +5,10 @@ Feature: Auto Refill Off
   Scenario Outline: To verify Auto Refill checkbox is unchecked
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
-      | Username | kjadha10 |
-      | Password | Free@123 |
+      | Username | <username> |
+      | Password | <password> |
     And Member Enters the Username he wants to search
-      | Member |
-      |        |
+      | MemUsername | <memUserName> |
     And user clicks on member to select
     When user navigates to the pharmacies and prescriptions page from testharness page
     And user clicks View all medications link to view the My Medications page
@@ -21,3 +20,7 @@ Feature: Auto Refill Off
     Then user will view auto refill enrollment page asking for enroll auto refill
     When user select Cancel
     Then user will see "Complete Your Refill" Page
+
+    Examples: 
+      | username | password | memUserName |
+      | kjadha10 | Free@123 |             |

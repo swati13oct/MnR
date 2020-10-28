@@ -5,11 +5,10 @@ Feature: Auto Refill NE
   Scenario Outline: To verify Auto refill filled not displayed
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
-      | Username | kjadha10 |
-      | Password | Free@123 |
+      | Username | <username> |
+      | Password | <password> |
     And Member Enters the Username he wants to search
-      | Member |
-      |        |
+      | MemUsername | <memUserName> |
     And user clicks on member to select
     When user navigates to the pharmacies and prescriptions page from testharness page
     And user clicks View all medications link to view the My Medications page
@@ -17,3 +16,7 @@ Feature: Auto Refill NE
     When user select the Refill All Medications CTA
     Then user will be brought to the "Complete Your Refill" page for that medication
     Then user will not view the Auto Refill display
+
+    Examples: 
+      | username | password | memUserName |
+      | kjadha10 | Free@123 |             |
