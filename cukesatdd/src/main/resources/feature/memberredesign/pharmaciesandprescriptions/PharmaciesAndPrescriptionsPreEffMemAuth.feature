@@ -17,6 +17,7 @@ Feature: 1.18.1.1 Member Pharamcies And Prescriptions page - Pre-Effective - Mem
       | Plan Type    | <planType>    |
       | Member Type  | <memberType>  |
     #-------------- navigate to the target test page for testing
+    Then check if user is a preeffective user
     Then user should see Pharmacies and Prescription link on dashboard
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
@@ -80,9 +81,19 @@ Feature: 1.18.1.1 Member Pharamcies And Prescriptions page - Pre-Effective - Mem
 
   @memAuth_pnpPreEff02
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> - Verify member will not have access to Pharmacies and Prescriptions Page
-    Given login with following details logins in the member portal and validate elements
-      | Plan Type   | <planType>   |
-      | Member Type | <memberType> |
+    Given the user is on member auth login flow page
+    When the member is able to login with correct username and password
+      | Username | <username> |
+      | Password | <password> |
+    And Member Enters the Username he wants to search
+      | MemUsername | <MemUserName> |
+    And user clicks on member to select
+    And user stores test input for validations
+      | Username | <MemUserName> |
+      | Plan Type    | <planType>    |
+      | Member Type  | <memberType>  |
+    #-------------- navigate to the target test page for testing
+    Then check if user is a preeffective user
     Then user should not see Pharmacies and Prescription link on dashboard
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |

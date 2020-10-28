@@ -196,6 +196,12 @@ public class VirtualVisitDeeplinkLoginPage extends UhcDriver {
 								}
 							} else {
 								System.out.println("COVID 19 Banner page did not appear");
+								try {
+									Thread.sleep(15000);
+								} catch (InterruptedException e) {
+									// TODO Auto-generated catch block
+									e.printStackTrace();
+								}
 								System.out.println(driver.getCurrentUrl());	
 							}
 							if (driver.getCurrentUrl().contains("/no-email.html")) {
