@@ -634,7 +634,7 @@ public class DCEStepDefinitionAARP {
 		drugDetailsPage.clickOnvppPlan();
 	}
 
-	@Then("^Then user click on veiw plan details on summary page in AARP$")
+	@Then("^user click on view plan details on summary page in AARP$")
 	public void the_user_click_on_view_plan_details() throws Throwable {
 		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario()
 				.getBean(PageConstants.DCE_Redesign_DrugDetails);

@@ -94,18 +94,18 @@ Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanDetails AARP - To test DCE - VPP Plan De
     @DCE_Redesign_DCE_Detail_to_Vpp_Details_MAPD @F501519
       
       Examples: 
-      | zipcode | plantype | county | isMultutiCounty | drug1     | drug2                | drug3      | drug4         | drug5            | drug6   | planname                                           |
-      |   90210 | MAPD     | none   | no              | meloxicam | diclofenac potassium | febuxostat | buprenorphine | fentanyl citrate | Lipitor | AARP Medicare Advantage Freedom Plus (HMO-POS) |
+      | zipcode | plantype | county | isMultutiCounty | drug1     | planname                                       |
+      |   90210 | MAPD     | none   | no              | meloxicam | AARP Medicare Advantage Freedom Plus (HMO-POS) |
       
      @DCE_Redesign_DCE_Detail_to_Vpp_Details_PDP
     Examples: 
-      | zipcode | plantype | county       | isMultutiCounty | drug1     | drug2                | drug3      | drug4         | drug5            | drug6   | planname                        |
-      |   80002 | PDP      | Adams County | yes             | meloxicam | diclofenac potassium | febuxostat | buprenorphine | fentanyl citrate | Lipitor | AARP MedicareRx Walgreens (PDP) |
+      | zipcode | plantype | county       | isMultutiCounty | drug1     | planname                        |
+      |   80002 | PDP      | Adams County | yes             | meloxicam | AARP MedicareRx Walgreens (PDP) |
 
     @DCE_Redesign_DCE_Detail_to_Vpp_Details_SNP
     Examples: 
-      | zipcode | plantype | county       | isMultutiCounty | drug1     | drug2                | drug3      | drug4         | drug5            | drug6   | planname                                              |  |
-      |   78006 | SNP      | Bexar County | yes             | meloxicam | diclofenac potassium | febuxostat | buprenorphine | fentanyl citrate | Lipitor | UnitedHealthcare Medicare Silver (Regional PPO C-SNP) |  |
+      | zipcode | plantype | county       | isMultutiCounty | drug1     | planname                                              |
+      |   78006 | SNP      | Bexar County | yes             | meloxicam | UnitedHealthcare Medicare Silver (Regional PPO C-SNP) |
       
      
       @DCE_Redesign_VPPSummary_to_Vpp_Details
@@ -120,7 +120,7 @@ Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanDetails AARP - To test DCE - VPP Plan De
     Then the user navigates to the plan details for the given plan type in AARP site
       | Plan Type | <plantype> |
       | Plan Name | <planname> |
-    And I access the DCE Redesign on aarp site from Plan Details for the plan 
+    And I access the DCE Redesign from Plan Details
     Then the user validates Get Started Page
     Then the user clicks on Build Drug List to navigate to Build Drug List Page
     Then the user searches and adds the following Drug to Drug List
@@ -130,7 +130,7 @@ Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanDetails AARP - To test DCE - VPP Plan De
     Then the user validates planName matches plan Name in VPP
     Then the user verify the drug cost estimator and view plan summary on VPP detail page in AARP
     Then the user click on view plan summary on vpp detail page in AARP
-    Then user click on veiw plan details on summary page in AARP
+    Then user click on view plan details on summary page in AARP
     #Then user verifiy drug cost estomator and view plan summary is not exist in vpp detail page in ARRP
      
       @DCE_Redesign_VPPSummary_to_Vpp_Details_MAPD
@@ -162,31 +162,31 @@ Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanDetails AARP - To test DCE - VPP Plan De
     Then the user navigates to the plan details for the given plan type in AARP site
       | Plan Type | <plantype> |
       | Plan Name | <planname> |
-    And I access the DCE Redesign on aarp site from Plan Details for the plan
+    And I access the DCE Redesign from Plan Details
     Then the user validates Get Started Page
     Then the user clicks on Build Drug List to navigate to Build Drug List Page
     Then the user searches and adds the following Drug to Drug List
       | DrugName | <drug1> | 
      And clicks on Review drug cost button  
     #Then the user Clicks button to VPP Plan Details Page from Drug Details Page
-     And user clicks on change pharmacy link from details page in AARP
+     And user clicks on change pharmacy link from details page
      Then user change the pharmacy to view no prescription coverage
      
      @noPrescriptionCoverge_MAPD
      
       Examples: 
-      | zipcode | plantype | county       | isMultutiCounty | drug1     | drug2                | drug3      | drug4         | drug5            | drug6   | planname                                              |  |
-      |   78006 | MAPD      | Bexar County | yes             | Lipitor | diclofenac potassium | febuxostat | buprenorphine | fentanyl citrate | Lipitor |  AARP Medicare Advantage Choice (PPO)  |  |
+      | zipcode | plantype | county       | isMultutiCounty | drug1     |planname                                              | 
+      |   78006 | MAPD      | Bexar County | yes             | Lipitor | AARP Medicare Advantage Choice (PPO)  |
       
-   # @noPrescriptionCoverge_SNP
-    #  Examples: 
-     # | zipcode | plantype | county       | isMultutiCounty | drug1     | drug2                | drug3      | drug4         | drug5            | drug6   | planname                                              |  |
-      #|   78006 | SNP      | Bexar County | yes             | Lipitor | diclofenac potassium | febuxostat | buprenorphine | fentanyl citrate | Lipitor | UnitedHealthcare Dual Complete (HMO D-SNP) |  |
+   	@noPrescriptionCoverge_SNP
+      Examples: 
+      | zipcode | plantype | county       | isMultutiCounty | drug1     | planname                                              |
+      |   78006 | SNP      | Bexar County | yes             | Lipitor | UnitedHealthcare Dual Complete (HMO D-SNP) |
       
-     # @noPrescriptionCoverge_PDP
-    #  Examples: 
-     # | zipcode | plantype | county       | isMultutiCounty | drug1     | drug2                | drug3      | drug4         | drug5            | drug6   | planname                                              |  |
-      #|   78006 | PDP      | Bexar County | yes             | Lipitor | diclofenac potassium | febuxostat | buprenorphine | fentanyl citrate | Lipitor |  AARP MedicareRx Walgreens (PDP) |  |
+      @noPrescriptionCoverge_PDP
+      Examples: 
+      | zipcode | plantype | county       | isMultutiCounty | drug1     | planname                                              |
+      |   78006 | PDP      | Bexar County | yes             | Lipitor | AARP MedicareRx Walgreens (PDP) |
       
      
      
@@ -239,24 +239,24 @@ Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanDetails AARP - To test DCE - VPP Plan De
       | DrugName | <drug1> |
     Then the user clicks on Review Drug Costs to Land on Drug DetailsP Page
     Then the user verify the Retail chain pharmacy on detail page
-    And user clicks on change pharmacy link from details page in AARP
+    And user clicks on change pharmacy link from details page
     Then user clicks on Keep Using This Pharmacy on change pharmacy page
     Then User validate Walgreens pharmacy on detail page 
     
         @dceRetailChain_MAPD
       Examples: 
-      | zipcode | plantype | county       | isMultutiCounty | drug1     | drug2                | drug3      | drug4         | drug5            | drug6   | planname                                              |  
-      |   10001 | MAPD      | Bexar County | yes             | meloxicam | diclofenac potassium | febuxostat | buprenorphine | fentanyl citrate | Lipitor | UnitedHealthcare Medicare Silver (Regional PPO C-SNP) | 
+      | zipcode | plantype | county       | isMultutiCounty | drug1     | planname                                              |  
+      |   10001 | MAPD      | Bexar County | yes             | meloxicam | UnitedHealthcare Medicare Silver (Regional PPO C-SNP)| 
     
        @dceRetailChain_PDP
       Examples: 
-      | zipcode | plantype | county       | isMultutiCounty | drug1     | drug2                | drug3      | drug4         | drug5            | drug6   | planname                        |
-      |   10001 | PDP      | Adams County | yes             | meloxicam | diclofenac potassium | febuxostat | buprenorphine | fentanyl citrate | Lipitor | AARP MedicareRx Walgreens (PDP) |
+      | zipcode | plantype | county       | isMultutiCounty | drug1     | planname                        |
+      |   10001 | PDP      | Adams County | yes             | meloxicam | AARP MedicareRx Walgreens (PDP) |
 
       @dceRetailChain_SNP
       Examples: 
-      | zipcode | plantype | county       | isMultutiCounty | drug1     | drug2                | drug3      | drug4         | drug5            | drug6   | planname                        |
-      |   10001 | SNP      | Adams County | yes             | meloxicam | diclofenac potassium | febuxostat | buprenorphine | fentanyl citrate | Lipitor | AARP MedicareRx Walgreens (PDP) |
+      | zipcode | plantype | county       | isMultutiCounty | drug1     | planname                        |
+      |   10001 | SNP      | Adams County | yes             | meloxicam | AARP MedicareRx Walgreens (PDP) |
       
       
       @dceNBADetailPage @F509520
