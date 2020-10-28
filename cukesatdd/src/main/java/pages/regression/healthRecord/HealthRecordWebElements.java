@@ -108,9 +108,16 @@ public class HealthRecordWebElements  extends UhcDriver {
 
 	@FindBy(xpath= "//button[@id='accountprofile' or @id='dropdown-toggle-3' or @id='dropdown-toggle-2']")
 	protected WebElement testHarn_AcctProfBtn;
+
+	@FindBy(xpath= "//button[@id='accountprofile' or contains(@id,'dropdown-toggle')]/*[contains(text(),'Account')]")
+	protected WebElement testHarn_AcctProfBtn_claims;
+
 	
 	@FindBy(xpath="//ul[contains(@class,'dropdown-menu')]//li")
 	protected List<WebElement> testHarn_AcctProfDropdown;
+
+	@FindBy(xpath="//div[contains(@class,'account-btn')]//ul[contains(@class,'dropdown-menu') or contains(@id,'dropdown-options')]//a")
+	protected List<WebElement> testHarn_AcctProfDropdown_claims;
 
 	@FindBy(xpath="//ul[contains(@id,'dropdown-options-3') or contains(@id,'dropdown-options-2')]//a")
 	protected List<WebElement> testHarn_AcctProfDropdown_react;
@@ -118,7 +125,11 @@ public class HealthRecordWebElements  extends UhcDriver {
 	@FindBy(xpath="//div[@class='deskHeaderContainer']//div[contains(@class,'dropdown') and contains(@class,'open')]//a[contains(@id,'ihr')]")
 	protected WebElement testHarn_desktop_AcctProf_IHRLnk;
 
-	@FindBy(xpath="//div[@data-testid='shared-header']//ul[@aria-expanded='true' and (@id='dropdown-options-3' or @id='dropdown-options-2')]//a[@data-testid='TARGET_AWARE_HEALTH_RECORD']")
+	@FindBy(xpath="//div[contains(@class,'account-btn')]//ul[contains(@class,'dropdown-menu') or contains(@id,'dropdown-options')]//a[contains(@href,'ihr')]")
+	protected WebElement testHarn_desktop_AcctProf_IHRLnk_claims;
+
+	//tbd @FindBy(xpath="//div[@data-testid='shared-header']//ul[@aria-expanded='true' and (@id='dropdown-options-3' or @id='dropdown-options-2')]//a[@data-testid='TARGET_AWARE_HEALTH_RECORD']")
+	@FindBy(xpath="//div[@data-testid='shared-header']//ul[@aria-expanded='true' and contains(@id,'dropdown-options')]//a[@data-testid='TARGET_AWARE_HEALTH_RECORD']")
 	protected WebElement testHarn_desktop_AcctProf_IHRLnk_react;
 	
 	@FindBy(xpath="//h1[contains(text(),'Welcome') and contains(text(),'Health Record')]")

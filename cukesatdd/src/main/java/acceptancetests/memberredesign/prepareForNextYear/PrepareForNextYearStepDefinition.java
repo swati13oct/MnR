@@ -531,6 +531,15 @@ public class PrepareForNextYearStepDefinition {
 			testNote.add("\t * FAILED - page content validation");
 			
 		getLoginScenario().saveBean(PrepareForNextYearCommonConstants.TEST_NOTE, testNote);
+
+		if (MRScenario.environment.equals("offline") || MRScenario.environment.equals("prod")) {
+			String testEnv="offline-prod";
+			if (MRScenario.environment.equals("prod"))
+				testEnv="online-prod";
+			Assert.assertTrue("PROBLEM - super user pink banner is missing for this env '"+testEnv+"'", pfnyPg.hasPinkBar());
+			testNote.add("\n\tPASSED - super user pink banner validation");
+		}
+		getLoginScenario().saveBean(PrepareForNextYearCommonConstants.TEST_NOTE, testNote);
 		
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		Assert.assertTrue("PROBLEM - encountered FAILED validation during test, please review TEST NOTE for detail", finalCheck);
@@ -631,7 +640,16 @@ public class PrepareForNextYearStepDefinition {
 			testNote.add("\t * FAILED - page content validation");
 			
 		getLoginScenario().saveBean(PrepareForNextYearCommonConstants.TEST_NOTE, testNote);
-		
+
+		if (MRScenario.environment.equals("offline") || MRScenario.environment.equals("prod")) {
+			String testEnv="offline-prod";
+			if (MRScenario.environment.equals("prod"))
+				testEnv="online-prod";
+			Assert.assertTrue("PROBLEM - super user pink banner is missing for this env '"+testEnv+"'", pfnyPg.hasPinkBar());
+			testNote.add("\n\tPASSED - super user pink banner validation");
+		}
+		getLoginScenario().saveBean(PrepareForNextYearCommonConstants.TEST_NOTE, testNote);
+
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		Assert.assertTrue("PROBLEM - encountered FAILED validation during test, please review TEST NOTE for detail", finalCheck);
 	}	

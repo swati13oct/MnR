@@ -224,13 +224,13 @@ public class PaymentHistoryPage extends UhcDriver {
 	@FindBy(xpath="//span[@class='payment-method-btn']//a[@class='btn btn--primary'][contains(text(),'Set Up Recurring Payments')]")
 	private WebElement SetUpAutomaticPaymentsButton;
 
-	@FindBy(xpath = "//span[@class='payment-method-btn']//a[@class='btn btn--primary'][contains(text(),'Set Up Recurring Payments')]")
+	@FindBy(xpath = "(//span[@class='payment-method-btn']//a[@class='btn btn--primary'][contains(text(),'Set Up Recurring Payments')])[1]")
 	private WebElement SetUpRecurringPaymentsButtonShip;
 
 	@FindBy(xpath = "//a[text()='Edit Automatic Payments']")
 	private WebElement EditAutomaticPaymentsButton;
 
-	@FindBy(xpath = "//span[@class='payment-method-btn']//a[@class='btn btn--primary ng-scope'][contains(text(),'Edit Recurring Payments')]")
+	@FindBy(xpath = "//span[@class='payment-method-btn']//a[@class='btn btn--primary ng-scope'][contains(text(),'Manage Payment Method')]")
 	private WebElement EditRecurringPaymentsButton;
 
 	@FindBy(xpath = "//h2[text()='Helpful Reminders']")
@@ -665,6 +665,9 @@ public class PaymentHistoryPage extends UhcDriver {
 	
 	@FindBy(xpath = "//*[@id='loadingpayment1']/img")
 	private WebElement paymentHistoryTable2LoadingImage;
+	
+	@FindBy(xpath="//*[@class='btn btn--primary onetimepayment' or @class='btn btn--secondary onetimepayment']")
+	private WebElement MakeAPaymentButton;
 	
 	public PaymentHistoryPage(WebDriver driver) {
 		super(driver);
@@ -1300,8 +1303,10 @@ public class PaymentHistoryPage extends UhcDriver {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		Thread.sleep(20000);
+		CommonUtility.waitForPageLoad(driver, MakeAPaymentButton, 20);
+		TestHarness.checkForIPerceptionModel(driver);
 		waitforElement(EditRecurringPaymentsButton);
+		TestHarness.checkForIPerceptionModel(driver);
 		EditRecurringPaymentsButton.click();
 		System.out.println("User clicked on Update Automatic Button");
 		try {
@@ -1323,6 +1328,7 @@ public class PaymentHistoryPage extends UhcDriver {
 	public PaymentsFormPage clickOnsetupAutomaticPaymentforShip() throws Exception {
 		
 		CommonUtility.waitForPageLoad(driver, SetUpRecurringPaymentsButtonShip, 20);
+		TestHarness.checkForIPerceptionModel(driver);
 		SetUpAutomaticPaymentsButton.click();
 		System.out.println("User clicked on Setup Recurring Payment Button");
 		CommonUtility.checkPageIsReadyNew(driver);
@@ -2082,12 +2088,12 @@ public class PaymentHistoryPage extends UhcDriver {
 				JavascriptExecutor jse2 = (JavascriptExecutor)driver;
 				jse2.executeScript("arguments[0].scrollIntoView()", billingHistoryDateRangeDropdownForFed); 
 				try {
-					Thread.sleep(2000);
+					Thread.sleep(10000);
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-								
+				TestHarness.checkForIPerceptionModel(driver);				
 				System.out.println("Hovering mouse over daterange dropdown");	
 				Actions action = new Actions(driver);
 				action.moveToElement(billingHistoryDateRangeDropdownForFed).build().perform();
@@ -2121,7 +2127,7 @@ public class PaymentHistoryPage extends UhcDriver {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-								
+				TestHarness.checkForIPerceptionModel(driver);				
 				System.out.println("Hovering mouse over payment history daterange dropdown");	
 				Actions action1 = new Actions(driver);
 				action1.moveToElement(paymentHistoryDateRangeDropdownForFed).build().perform();
@@ -2942,16 +2948,16 @@ try {
 
 public void userSelects6MonthsInBillingHistoryDropdown() throws InterruptedException {
 
-System.out.println("Now Scrolling to daterange dropdown of Billing history section");
+System.out.println("Now Scrolling to Billing history section");
 JavascriptExecutor jse2 = (JavascriptExecutor)driver;
-jse2.executeScript("arguments[0].scrollIntoView()", billingHistoryDateRangeDropdownForFed); 
+jse2.executeScript("arguments[0].scrollIntoView()", billingHistorySectionHeader); 
 try {
 	Thread.sleep(2000);
 } catch (InterruptedException e) {
 	// TODO Auto-generated catch block
 	e.printStackTrace();
 }
-				
+TestHarness.checkForIPerceptionModel(driver);			
 System.out.println("Hovering mouse over daterange dropdown");	
 Actions action = new Actions(driver);
 action.moveToElement(billingHistoryDateRangeDropdownForFed).build().perform();
@@ -2962,8 +2968,12 @@ System.out.println("Selecting the date from dropdown - Last 6 Months ");
 TestHarness.checkForIPerceptionModel(driver);
 CommonUtility.waitForPageLoad(driver, last6Months, 20);
 last6Months.click();
-waitforElement(billingHistoryTable1LoadingImage);
-new WebDriverWait(driver, 10).until(ExpectedConditions.invisibilityOf(billingHistoryTable1LoadingImage));
+try {
+	waitforElement(billingHistoryTable1LoadingImage);
+	new WebDriverWait(driver, 10).until(ExpectedConditions.invisibilityOf(billingHistoryTable1LoadingImage));
+} catch (Exception e1) {
+	System.out.println("Loading image issue, ignored !!");
+}
 Thread.sleep(2000);
 System.out.println("Last 6 months has been clicked in dropdown , waiting for Billing history table to load now ");
 CommonUtility.waitForPageLoad(driver, billingHistoryTableForFed, 20);
@@ -3023,16 +3033,16 @@ try {
 
 public void userSelects12MonthsInBillingHistoryDropdown() throws InterruptedException {
 
-System.out.println("Now Scrolling to daterange dropdown of Billing history section");
-JavascriptExecutor jse2 = (JavascriptExecutor)driver;
-jse2.executeScript("arguments[0].scrollIntoView()", billingHistoryDateRangeDropdownForFed); 
+	System.out.println("Now Scrolling to Billing history section");
+	JavascriptExecutor jse2 = (JavascriptExecutor)driver;
+	jse2.executeScript("arguments[0].scrollIntoView()", billingHistorySectionHeader);  
 try {
 	Thread.sleep(2000);
 } catch (InterruptedException e) {
 	// TODO Auto-generated catch block
 	e.printStackTrace();
 }
-				
+TestHarness.checkForIPerceptionModel(driver);				
 System.out.println("Hovering mouse over daterange dropdown");	
 Actions action = new Actions(driver);
 action.moveToElement(billingHistoryDateRangeDropdownForFed).build().perform();
@@ -3043,9 +3053,12 @@ System.out.println("Selecting the date from dropdown - Last 12 months ");
 TestHarness.checkForIPerceptionModel(driver);
 CommonUtility.waitForPageLoad(driver, last12Months, 20);
 last12Months.click();
-
+try {
 waitforElement(billingHistoryTable1LoadingImage);
 new WebDriverWait(driver, 10).until(ExpectedConditions.invisibilityOf(billingHistoryTable1LoadingImage));
+} catch (Exception e1) {
+	System.out.println("Loading image issue, ignored !!");
+}
 System.out.println("Last 12 months has been clicked in dropdown , waiting for Billing history table to load now ");
 CommonUtility.waitForPageLoad(driver, billingHistoryTableForFed, 20);
 Thread.sleep(2000);
@@ -3106,17 +3119,17 @@ try {
 
 
 public void userSelects24MonthsInBillingHistoryDropdown() throws InterruptedException {
-
-System.out.println("Now Scrolling to daterange dropdown of Billing history section");
-JavascriptExecutor jse2 = (JavascriptExecutor)driver;
-jse2.executeScript("arguments[0].scrollIntoView()", billingHistoryDateRangeDropdownForFed); 
+	
+	System.out.println("Now Scrolling to Billing history section");
+	JavascriptExecutor jse2 = (JavascriptExecutor)driver;
+	jse2.executeScript("arguments[0].scrollIntoView()", billingHistorySectionHeader);  
 try {
 	Thread.sleep(2000);
 } catch (InterruptedException e) {
 	// TODO Auto-generated catch block
 	e.printStackTrace();
 }
-				
+TestHarness.checkForIPerceptionModel(driver);				
 System.out.println("Hovering mouse over daterange dropdown");	
 Actions action = new Actions(driver);
 action.moveToElement(billingHistoryDateRangeDropdownForFed).build().perform();
@@ -3127,10 +3140,12 @@ System.out.println("Selecting the date from dropdown - Last 24 months ");
 TestHarness.checkForIPerceptionModel(driver);
 CommonUtility.waitForPageLoad(driver, last24Months, 20);
 last24Months.click();
-
+try {
 waitforElement(billingHistoryTable1LoadingImage);
 new WebDriverWait(driver, 10).until(ExpectedConditions.invisibilityOf(billingHistoryTable1LoadingImage));
-
+} catch (Exception e1) {
+	System.out.println("Loading image issue, ignored !!");
+}
 System.out.println("Last 24 months has been clicked in dropdown , waiting for Billing history table to load now ");
 CommonUtility.waitForPageLoad(driver, billingHistoryTableForFed, 20);
 Thread.sleep(2000);
@@ -3210,10 +3225,12 @@ System.out.println("Selecting the date from dropdown - Last 6 Months ");
 TestHarness.checkForIPerceptionModel(driver);
 CommonUtility.waitForPageLoad(driver, last6Months, 20);
 last6Months.click();
-
+try {
 waitforElement(paymentHistoryTable1LoadingImage);
 new WebDriverWait(driver, 10).until(ExpectedConditions.invisibilityOf(paymentHistoryTable1LoadingImage));
-
+} catch (Exception e1) {
+	System.out.println("Loading image issue, ignored !!");
+}
 System.out.println("Last 6 months has been clicked in dropdown , waiting for Payment history table to load now ");
 CommonUtility.waitForPageLoad(driver, paymentHistoryTableForFed, 20);
 Thread.sleep(2000);
@@ -3292,9 +3309,13 @@ System.out.println("Selecting the date from dropdown - Last 12 months ");
 TestHarness.checkForIPerceptionModel(driver);
 CommonUtility.waitForPageLoad(driver, last12Months, 20);
 last12Months.click();
+
+try {
 waitforElement(paymentHistoryTable1LoadingImage);
 new WebDriverWait(driver, 10).until(ExpectedConditions.invisibilityOf(paymentHistoryTable1LoadingImage));
-
+} catch (Exception e1) {
+	System.out.println("Loading image issue, ignored !!");
+}
 System.out.println("Last 12 months has been clicked in dropdown , waiting for Payment history table to load now ");
 CommonUtility.waitForPageLoad(driver, paymentHistoryTableForFed, 20);
 Thread.sleep(2000);
@@ -3374,9 +3395,12 @@ System.out.println("Selecting the date from dropdown - Last 24 months ");
 TestHarness.checkForIPerceptionModel(driver);
 CommonUtility.waitForPageLoad(driver, last24Months, 20);
 last24Months.click();
-
+try {
 waitforElement(paymentHistoryTable1LoadingImage);
 new WebDriverWait(driver, 10).until(ExpectedConditions.invisibilityOf(paymentHistoryTable1LoadingImage));
+} catch (Exception e1) {
+	System.out.println("Loading image issue, ignored !!");
+}
 System.out.println("Last 24 months has been clicked in dropdown , waiting for Payment history table to load now ");
 CommonUtility.waitForPageLoad(driver, paymentHistoryTableForFed, 20);
 Thread.sleep(2000);
@@ -3437,8 +3461,13 @@ Thread.sleep(2000);
 System.out.println("Selecting the date from dropdown - Previous Calendar Year ");
 CommonUtility.waitForPageLoad(driver, previousCalendarYear, 20);
 previousCalendarYear.click();
+try {
 waitforElement(paymentHistoryTable1LoadingImage);
 new WebDriverWait(driver, 10).until(ExpectedConditions.invisibilityOf(paymentHistoryTable1LoadingImage));
+} catch (Exception e1) {
+	System.out.println("Loading image issue, ignored !!");
+}
+
 System.out.println("Previous Calendar Year has been clicked in dropdown , waiting for Payment history table to load now ");
 Thread.sleep(2000);
 try {

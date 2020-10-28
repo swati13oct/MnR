@@ -254,6 +254,9 @@ public class ComparePlansPage extends UhcDriver {
 
 	@FindBy(xpath = "//*[contains(@id,'get-started')]")
 	public WebElement getStartedTab;
+	
+	@FindBy(xpath="//button[contains(@class,'button-primary proactive-offer__button main-background-color second-color proactive-offer__close')]")
+	public static WebElement proactiveChatExitBtn;
 
 
 	public ComparePlansPage(WebDriver driver) {
@@ -265,10 +268,20 @@ public class ComparePlansPage extends UhcDriver {
 
 	@Override
 	public void openAndValidate() {
-		validateNew(backToProfilePageLink);
+		if (currentUrl().contains("profile=true"))
+			validateNew(backToProfilePageLink);
+		else
+			validateNew(backToAllPlansLink);
 		validateNew(validateprintbutton);
 		validateNew(validateemailbutton);
 		checkModelPopup(driver,20);
+		
+		try {
+			if (proactiveChatExitBtn.isDisplayed())
+				jsClickNew(proactiveChatExitBtn);
+		} catch (Exception e) {
+			System.out.println("Proactive chat popup not displayed");
+		}
 	}
 	
 	public VPPPlanSummaryPage backToVPPPage(){
@@ -715,7 +728,7 @@ public class ComparePlansPage extends UhcDriver {
 		}
 	
 	public void validatePlansAddedonPlancompareforVisitorProfile(String plans) {
-		List<WebElement> allMAPlans = driver.findElements(By.xpath("//*[@class='planNameVisibility']//h3"));
+		List<WebElement> allMAPlans = driver.findElements(By.xpath("//button[contains(@dtmname,'Plan Compare:Remove')]/preceding-sibling::div"));
 		String[] plan = plans.split(",");
 		for(int i=0;i<allMAPlans.size();i++) {
 			Assert.assertEquals(plan[i], allMAPlans.get(i).getText().trim());

@@ -629,7 +629,7 @@ public class ReviewSubmitPage extends UhcDriver{
 		//flag&=validateText(MailApartmentSuite,Mailing_AptNo);
 		flag&=validateText(MailCityDisplay,Mailing_City);		
 		
-		if(validate(Submit_Disclaimer) && validate(Enrollment_Disclaimer_Text)){
+		/*if(validate(Submit_Disclaimer) && validate(Enrollment_Disclaimer_Text)){
 			if(Enrollment_Disclaimer_Text.getText().contains("Submitting your enrollment application electronically")){
 				//flag = (!flag)?false:true;
 				System.out.println("Submit Enrollment Disclaimer is Displayed  : "+flag);
@@ -644,7 +644,7 @@ public class ReviewSubmitPage extends UhcDriver{
 			}
 			else flag = false;
 		}else flag = false;
-
+*/
 		return flag;
 	}
 	

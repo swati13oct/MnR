@@ -228,5 +228,12 @@ public class AgentRecommendationEngineStepDefinition {
 		AREPlanRanking planRank = new AREPlanRanking(wd);
 		planRank.estimateMedicalCost(inputValues.get("Estimate MedicalCost"));
 	}
+	
+	@Then("^agent validates ranking option is not present in plan ranking drop down$")
+	public void agent_verifies_Option(DataTable givenAttributes) {
+		readfeaturedata(givenAttributes);
+		AREPlanRanking planRank = new AREPlanRanking(wd);
+		planRank.optionCheck(inputValues.get("Ranking Options"),false);
+	}
 
 }

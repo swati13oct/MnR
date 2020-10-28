@@ -15,10 +15,10 @@ Feature: 1.05.4.ACQ-OLE  common tool flow E2E SNP
 		And the user validates the available plans for selected plan types
     Then the user clicks on Enroll Now for AARP site to start the OLE flow
       | Plan Name | <planName> |
-    Then the user validates the Plan details on OLE
-    Then the user validates TFN in Welcome OLE Right Rail
-    Then the user validates Learn more modal for Welcome OLE
-    Then the user validates Leave OLE modal for Welcome OLE
+    #Then the user validates the Plan details on OLE
+    #Then the user validates TFN in Welcome OLE Right Rail
+    #Then the user validates Learn more modal for Welcome OLE
+    #Then the user validates Leave OLE modal for Welcome OLE
     Then the user validates cancellation modal for Welcome OLE
      Then the user navigates to Personal Information Page
     Then the user enters following required information in Personal Information Page

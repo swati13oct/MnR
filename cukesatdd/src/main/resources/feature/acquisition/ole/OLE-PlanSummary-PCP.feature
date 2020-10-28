@@ -1,6 +1,4 @@
-Feature: 2.05.1.ACQ-OLE PCP
- 
-  
+
   Scenario Outline: TID: <TID> - plan type: <PlanType> - OLE Landing from AARP Acquisition site VPP Plan Summary
   Given the user is on medicare acquisition site landing page
     	|Site| <site>|

@@ -104,37 +104,37 @@ Feature: 1.25 Member Prepare For Next Year
 	@pfny02_ind_mapd_aarp @devRegression
     Examples: 
 	    | index | FID     | planType | memberType | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | co_us | co_es | co_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh | showNxtYrPlan |  
-	    | 2-01  | F437767 | MAPD	 | IND_PFNY   | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true          |
+	    | 2-01  | F437767 | MAPD	 | IND_PFNY   | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | false | false | false | true          |
 
 	@pfny02_ind_mapd_uhc 
     Examples: 
 	    | index | FID     | planType | memberType | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | co_us | co_es | co_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh | showNxtYrPlan |  
-	    | 2-02  | F437767 | MAPD	 | UHC_IND_PFNY| true | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true          |
+	    | 2-02  | F437767 | MAPD	 | UHC_IND_PFNY| true | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | false | false | false | true          |
 
 	@pfny02_ind_pdp
     Examples: 
 	    | index | FID     | planType | memberType | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | co_us | co_es | co_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh | showNxtYrPlan | 
-	    | 2-03  | F437767 | PDP	     | IND_PFNY   | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | false | false | false | true  | true  | false | true          |
+	    | 2-03  | F437767 | PDP	     | IND_PFNY   | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | false | false | false | false | false | false | true          |
 
 	@pfny02_ind_ma
     Examples: 
 	    | index | FID     | planType | memberType | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | co_us | co_es | co_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh | showNxtYrPlan | 
-	    | 2-04  | F437767 | MA	     | UHC_IND_PFNY| true | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true          |
+	    | 2-04  | F437767 | MA	     | UHC_IND_PFNY| true | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | false | false | false | true          |
 
 	@pfny02_ind_medica
     Examples: 
 	    | index | FID     | planType | memberType | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | co_us | co_es | co_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh | showNxtYrPlan |  
-	    | 2-05  | F437767 | MEDICA	 | IND_PFNY   | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true          |
+	    | 2-05  | F437767 | MEDICA	 | IND_PFNY   | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | false | false | false | true          |
 
 	@pfny02_ind_pcp
     Examples: 
 	    | index | FID     | planType | memberType | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | co_us | co_es | co_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh | showNxtYrPlan |  
-	    | 2-06  | F437767 | PCP	     | IND_PFNY   | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true          |
+	    | 2-06  | F437767 | PCP	     | IND_PFNY   | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | false | false | false | true          |
 
 	@pfny02_grp_mapd @devRegression
     Examples: 
 	    | index | FID     | planType | memberType | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | co_us | co_es | co_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh | showNxtYrPlan |
-	    | 2-07  | F443004 | MAPD	 | UHC_GRP_PFNY   | true  | false | false | true  | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false         |
+	    | 2-07  | F443004 | MAPD	 | UHC_GRP_PFNY| true | false | false | true  | false | false | false | false | false | false | false | false | false | false | false | false | false | false | false         |
 
 	@pfny02_grp_pdp
     Examples: 
@@ -149,24 +149,24 @@ Feature: 1.25 Member Prepare For Next Year
     @pfny02_ind_zh
     Examples: 
 	    | index | FID     | planType | memberType           | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | co_us | co_es | co_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh | showNxtYrPlan |  
-        | 2-10  | F437767 | MAPD	 | IND_ESZH_PFNY        | true  | true  | true  | true  | true  | true  | true  | true  | true  | true  | true  | true  | true  | true  | true  | true  | true  | true  | true          |
+        | 2-10  | F437767 | MAPD	 | IND_ESZH_PFNY        | true  | true  | true  | true  | true  | true  | true  | true  | true  | true  | true  | true  | true  | true  | true  | false | false | false | true          |
 
 	# note: re-enable when user available
     #@pfny02_ind_1act
     #Examples: 
 	#    | index | FID     | planType | memberType           | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | co_us | co_es | co_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh | showNxtYrPlan |  
-    #    | 2-11  | F437767 | MAPD	 | UHC_IND_1ACT_PFNY    | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true          |
+    #    | 2-11  | F437767 | MAPD	  | UHC_IND_1ACT_PFNY    | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | false | false | false | true          |
 
     #note: this user doesn't have anoc, re-enable this when finding a user that has it
     #@pfny02_combo_ship_fed
     #Examples: 
 	#    | index | FID     | planType | memberType              | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | co_us | co_es | co_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh | showNxtYrPlan |  
-	#    | 2-12  | F443004 | MAPD	 | COMBO_SHIP_MAPD_IND_PFNY| true  | true  | false | true  | true  | false | true  | true  | false | false | false | false | true  | true  | true  | true  | true  | false | true          |
+	#    | 2-12  | F443004 | MAPD	  | COMBO_SHIP_MAPD_IND_PFNY| true  | true  | false | true  | true  | false | true  | true  | false | false | false | false | true  | true  | true  | false | false | false | true          |
 
     @pfny02_combo_fed_ship @devRegression
     Examples: 
 	    | index | FID     | planType | memberType              | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | co_us | co_es | co_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh | showNxtYrPlan |  
-	    | 2-13  | F443004 | PDP	     | COMBO_PDP_IND_SHIP_PFNY | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true          |
+	    | 2-13  | F443004 | PDP	     | COMBO_PDP_IND_SHIP_PFNY | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | false | false | false | true          |
 
 
   @pfny03 @hasTab @noCombTabOnPfny @regressionMember @teamEnv
@@ -222,13 +222,14 @@ Feature: 1.25 Member Prepare For Next Year
     @pfny04_sars @devRegression
     Examples: 
 	    | index | FID     | planType | memberType              | showNxtYrPlan |  
-	 #  | 4-01  | F443004 | MAPD     | UHC_SARS_PFNY           | false         |
-	    | 4-01  | F443004 | MAPD     | SARS_PFNY           | false         |
+	    | 4-01  | F443004 | MA       | UHC_SARS_PFNY           | false         |
+	    | 4-02  | F443004 | MAPD     | SARS_PFNY               | false         |
 
-    @pfny04_sars
-    Examples: 
-	    | index | FID     | planType | memberType              | showNxtYrPlan |  
-	    | 4-02  | F443004 | PDP      | SARS_PFNY               | false         |
+	#note: don't have PDP SAR user for the time being
+    #@pfny04_sars
+    #Examples: 
+	#    | index | FID     | planType | memberType              | showNxtYrPlan |  
+	#    | 4-02  | F443004 | PDP      | SARS_PFNY               | false         |
 
 	    
 ##### end - cases for team env #################################################################
@@ -274,6 +275,7 @@ Feature: 1.25 Member Prepare For Next Year
     Then the user validates Prepare For Next Year tab display behavior on Benefits page
     Then the user validate bookmark behavior if tab hasn't met the condition to be displayed
 	Then the user navigate to Prepare For Next Year page via Prepare For Next Year tab
+	##note: will only valiate timeline box for sanity
 	Then the user validates Prepare For Next Year page content
 
 	@pfny_ind_mapd_aarp_sanity
@@ -432,7 +434,7 @@ Feature: 1.25 Member Prepare For Next Year
 	#@pfny02_grp_ma
     #Examples: 
 	#    | index | FID     | planType | memberType   | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | co_us | co_es | co_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh | showNxtYrPlan |
-	#   | 2-09  | F443004 | MA	     | UHC_GRP_PFNY | true  | false | false | true  | false | false | false | false | false | false | false | false | false | false | false | false | false | false | true           |
+	#    | 2-09  | F443004 | MA	      | UHC_GRP_PFNY | true  | false | false | true  | false | false | false | false | false | false | false | false | false | false | false | false | false | false | true          |
 
     @pfny02_ind_zh
     Examples: 
@@ -443,13 +445,13 @@ Feature: 1.25 Member Prepare For Next Year
     #@pfny02_ind_1act
     #Examples: 
 	#    | index | FID     | planType | memberType        | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | co_us | co_es | co_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh | showNxtYrPlan | 
-    #    | 2-11  | F437767 | MAPD	 | UHC_IND_1ACT_PFNY | false | false | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true        |
+    #    | 2-11  | F437767 | MAPD	  | UHC_IND_1ACT_PFNY | false | false | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | false | false | false | true          |
 
     #note: this user doesn't have anoc, re-enable this when finding a user that has it
     #@pfny02_combo_ship_fed
     #Examples: 
 	#    | index | FID     | planType | memberType              | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | co_us | co_es | co_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh | showNxtYrPlan |  
-	#    | 2-12  | F443004 | MAPD	 | COMBO_SHIP_MAPD_IND_PFNY| true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | true  | true  | true  | false | true          |
+	#    | 2-12  | F443004 | MAPD	  | COMBO_SHIP_MAPD_IND_PFNY| true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | true  | false | false | false | true          |
 
     @pfny02_combo_fed_ship
     Examples: 
@@ -509,8 +511,8 @@ Feature: 1.25 Member Prepare For Next Year
     @pfny04_sars
     Examples: 
 	    | index | FID     | planType | memberType              | showNxtYrPlan |  
-	    | 4-01  | F443004 | MAPD     | UHC_SARS_PFNY           | false         |
-	    | 4-01  | F443004 | MAPD     | SARS_PFNY               | false         |
+	    | 4-01  | F443004 | MA       | UHC_SARS_PFNY           | false         |
+	    | 4-02  | F443004 | MAPD     | SARS_PFNY               | false         |
 
 	#note: don't have PDP SAR user for the time being
     #@pfny04_sars

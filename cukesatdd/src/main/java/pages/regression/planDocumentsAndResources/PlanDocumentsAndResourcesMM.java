@@ -2,10 +2,13 @@ package pages.regression.planDocumentsAndResources;
 
 import java.util.concurrent.TimeUnit;
 
+import org.apache.commons.lang.time.StopWatch;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import acceptancetests.util.CommonUtility;
+
 import org.openqa.selenium.support.ui.Select;
 
 public class PlanDocumentsAndResourcesMM extends PlanDocumentsAndResourcesBase  {
@@ -76,5 +79,34 @@ public class PlanDocumentsAndResourcesMM extends PlanDocumentsAndResourcesBase  
 		Assert.assertTrue("PROBLEM - not getting expected default option for language dropdown for '"+section+"'. "
 				+ "Expected='"+expectedDefaultText+"' | Actual='"+actualDefaultOptionText+"'", 
 				expectedDefaultText.equals(actualDefaultOptionText));
+	}
+	
+	public void reloadPgWorkaround_MM() {
+		StopWatch pageLoad = new StopWatch();
+		pageLoad.start();
+		try {
+			driver.manage().timeouts().pageLoadTimeout((forceTimeoutInMin*60), TimeUnit.SECONDS);
+			System.out.println("Set pageLoadTimeout to "+forceTimeoutInMin+" min");
+
+			driver.navigate().refresh();
+			CommonUtility.checkPageIsReadyNew(driver);
+		} catch (org.openqa.selenium.TimeoutException e) {
+			System.out.println("waited "+forceTimeoutInMin+" min for the page to finish loading, give up now");
+			driver.quit(); //force the test to fail instead of waiting time
+			Assert.assertTrue("PROBLEM - page still laoding after "+forceTimeoutInMin+" min, probably stuck, kill test now. Exception: "+e.getMessage(),false);
+		} catch (WebDriverException we) {
+			System.out.println("Got driver exception while waiting for page to finish loading, give up now");
+			driver.quit(); //force the test to fail instead of waiting time
+			Assert.assertTrue("PROBLEM - Got driver exception while waiting for page to finish loading. Exception: "+we.getMessage(),false);
+		}
+
+		System.out.println("page load should stopped loading now, give it 2 more sec to settle down");
+		sleepBySec(3);// note: give it a bit more time to settle down
+		pageLoad.stop();
+		long pageLoadTime_ms = pageLoad.getTime();
+		long pageLoadTime_Seconds = pageLoadTime_ms / 1000;
+		System.out.println("Total Page Load Time: " + pageLoadTime_ms + " milliseconds");
+		System.out.println("Total Page Load Time: " + pageLoadTime_Seconds + " seconds");
+		checkModelPopup(driver, 2);
 	}
 }

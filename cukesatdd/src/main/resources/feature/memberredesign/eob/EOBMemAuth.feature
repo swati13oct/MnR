@@ -65,23 +65,27 @@ Feature: 1.04.1.1 To Test NON-DREAM EOB for Members - E2E - Member Auth
     #  | Flag Zero EOB User | <flagZeroEob> |
 
     # note: to correctly validate for SHIP, planType must be in this format: SHIP_<planCategory>
-    @memAuth_SHIP_EOBs @memAuth_SHIP_EOBs1
+    @memAuth_SHIP_EOBs @memAuth_SHIP_EOBs1_multiShip
     Examples: 
       | index | username  | password  | MemUserName             | planType                 | memberType           | eobType | realEob | flagZeroEob |
       | 11    | qavgogine | qavgogine | q3_SEP_2020SHIP_012     | SHIP_MEDICARE SUPPLEMENT | COMBO_MULTI_SHIP_EOB | Medical | false   | true        | 
+
+    @memAuth_SHIP_EOBs @memAuth_SHIP_EOBs2_singleShip
+    Examples: 
+      | index | username  | password  | MemUserName             | planType                 | memberType           | eobType | realEob | flagZeroEob |
       | 18    | qavgogine | qavgogine | Ship_EOB_Sep_002        | SHIP_MEDICARE SUPPLEMENT | SHIP_EOB             | Medical | true    | true        | 
 
-    @memAuth_SHIP_EOBs @memAuth_SHIP_EOBs2
+    @memAuth_SHIP_EOBs @memAuth_SHIP_EOBs3_shipComboFedShip
     Examples: 
       | index | username  | password  | MemUserName             | planType                 | memberType         | eobType | realEob | flagZeroEob |
       | 12    | qavgogine | qavgogine | q3_sep_UAT4_AARP023     | SHIP_MEDICARE SUPPLEMENT | PDP_SHIP_COMBO_EOB | Medical | false   | false       |
 
-    @memAuth_SHIP_EOBs @memAuth_SHIP_EOBs3
+    @memAuth_SHIP_EOBs @memAuth_SHIP_EOBs4_shipComboShipMapd
     Examples: 
       | index | username  | password  | MemUserName             | planType                 | memberType               | eobType | realEob | flagZeroEob |
       | 13    | qavgogine | qavgogine | q3_sept_UAT4_AARP_011   | SHIP_MEDICARE SUPPLEMENT | COMBO_SHIP_MAPD_NICE_DEOB| Medical | false   | true        | 
 
-    @memAuth_SHIP_EOBs @memAuth_SHIP_EOBs4
+    @memAuth_SHIP_EOBs @memAuth_SHIP_EOBs5_shipComboShipPdp
     Examples: 
       | index | username  | password  | MemUserName             | planType                 | memberType              | eobType | realEob | flagZeroEob |
       | 14    | qavgogine | qavgogine | q2_RxRetail_015         | SHIP_MEDICARE SUPPLEMENT | COMBO_SHIP_PDP_RX_DEOB  | Medical | false   | true        |  
