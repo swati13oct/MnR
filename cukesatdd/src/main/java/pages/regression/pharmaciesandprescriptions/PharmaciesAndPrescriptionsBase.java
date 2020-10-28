@@ -271,7 +271,7 @@ public class PharmaciesAndPrescriptionsBase extends PharmaciesAndPrescriptionsWe
 			lookForPlanCategory=planType;
 
 		String consumerDetails=getConsumerDetailsFromlocalStorage();
-		System.out.println("TEST - consumerDetails="+consumerDetails);
+		//keepForDebug System.out.println("TEST - consumerDetails="+consumerDetails);
 		//note: if first / last name, no need to go into planProfiles - infoType: firstName | lastName 
 		//note: LIS and segmentID needs to get within planProfiles - infoType: segmentId | planCategoryId 
 		Assert.assertTrue("PROBLEM - code only support locating the following info "
