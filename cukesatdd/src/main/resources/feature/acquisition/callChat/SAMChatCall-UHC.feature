@@ -1,7 +1,7 @@
-Feature: 2.13 ACQ UHC- To test SAM Icons in UHC site
+Feature: 2.13 ACQ UHC- To test SAM Icons in M&R site
 
 @samChatCall1
-Scenario Outline: 1.19.1.1 To test the SAM icons on UHC site on <pagename> Homepage
+Scenario Outline: 1.19.1.1 To test the SAM icons on M&R site on <pagename> Homepage
 Given user is on blue layer landing page
 And user opens the page to validate on UHC
  | pagename | <pagename> |

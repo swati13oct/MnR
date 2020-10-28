@@ -1,4 +1,4 @@
-Feature: 2.13 ACQ UHC- To test SAM Icons in Blog Pages
+Feature: 2.13 ACQ M&R- To test SAM Icons in Blog Pages
 
 Scenario Outline: 1.19.1.4 To test the SAM icons on Acq site on <site>
  Given the user is on medicare acquisition site landing page
@@ -9,10 +9,7 @@ Then the user validates whether call icon is visible
 #Then the user validates whether chat icon is visible on UHC
 Then the user validates whether chat icon is visible
 
-@samChatRegressionAARPblog1   @samChatRegressionAARPblog4 @samChatRegressionAARPblog5
-
-@samChatRegressionUHCblog1 @samChatRegressionUHCblog2 @samChatRegressionUHCblog3 @samChatRegressionUHCblog4 @samChatRegressionUHCblog5
-  @samChatRegressionAARPblog1
+ @samChatRegressionAARPblog1
 			Examples:
 			| pagename |site|
 			|medicare-articles.html                                 |AARP|

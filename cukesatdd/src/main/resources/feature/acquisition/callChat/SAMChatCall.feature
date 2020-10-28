@@ -1,4 +1,4 @@
-Feature: 2.13 ACQ UHC- To test SAM Icons 
+Feature: 2.13 ACQ M&R- To test SAM Icons 
 
 @samChatCall
 Scenario Outline: 1.19.1.1 To test the SAM icons on Acq site on <site> Homepage
