@@ -411,5 +411,21 @@ public class PrimaryCarePhysicianPage extends UhcDriver{
 			return pcp;
 		}
 		
-
+		public ArrayList<String> pcpinforetreive(String plantype){
+			
+			//WebElement PCPSearchLink = driver.findElement(By.xpath("//button[@class='view-more-btn-pcp']"));
+			WebElement PCPSearchLink = driver.findElement(By.xpath("//button[@class='view-more-btn-pcp']"));
+			String mPCPinfo=PCPSearchLink.getText();
+			System.out.println(mPCPinfo);
+			PCPSearchLink.click();
+	        ArrayList<String> PCPproviderNames = new ArrayList<String>();
+			List<WebElement> pcpproviders = driver.findElements(By.xpath("//*[contains(@class,'ole-provider-list')]//ul[@class='ul-pcp-list']//div[@class='provider-desc']//p[2]"));
+			for(WebElement element:pcpproviders)
+			{
+				String provider = element.getText();
+				PCPproviderNames.add(provider.trim());
+			}
+				
+			return PCPproviderNames;
+		}
 }
