@@ -151,15 +151,6 @@ public class BenefitsAndCoverageStepDefinition {
 		benefitsCoveragePage.validateHeaders();
 	}
 	
-	@And("the user validates headers on Bnc page for Dsnp indi members")
-	public void user_validate_Dsnp_Headers() {
-		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
-		String plantype = memberAttributesMap.get("Plan Type");
-		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
-				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE_VBF);
-		benefitsCoveragePage.validateHeaders(plantype);
-	}
-
 	/***
 	 * 
 	 */
@@ -190,15 +181,6 @@ public class BenefitsAndCoverageStepDefinition {
 		benefitsCoveragePage.validateOutofPocketMax();
 	}
 	
-	@And ("the user validates the Out of Pocket Max section for Dsnp indi member")
-	public void user_validate_OutofPocketFor_DsnpIndiMember() {
-		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
-		String plantype = memberAttributesMap.get("Plan Type");		
-		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
-				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE_VBF);
-		benefitsCoveragePage.validateOutofPocketMax(plantype);
-	}
-
 	/***
 	 * 
 	 * @throws InterruptedException

@@ -763,7 +763,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	/** 
 	 * @toDo : Validates the Locate a Pharmacy button 
 	 */
-	@And("^the user validates Locate a Pharmacy button should be visible")
+	@And("^the user validates Locate a Pharmacy button should be visible$")
 	public void user_validate_locatepharmacybutton(DataTable memberAttributes) {
 		System.out.println("***the user validates Locate a Pharmacy button should be visible***");
 		List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
@@ -1220,7 +1220,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	 */
 
 
-	@And("the user validates the Out of Pocket Max section")
+	@And("^the user validates the Out of Pocket Max section$")
 	public void user_validate_OutofPocket() {
 		System.out.println("***the user validates the Out of Pocket Max section***");
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
@@ -2189,11 +2189,45 @@ public class BenefitsAndCoverageUmsStepDefinition {
 		benefitsCoveragePage.validate_provider_search_link();
 	}
 
-	@And("the user just validates the fields in Primarycare Provider section")
+	@And("^the user just validates the fields in Primarycare Provider section$")
 	public void validatePrimaryCareProviderSection() {
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
 				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
 		benefitsCoveragePage.validatePrimaryCareProviderSection();
 	}
 
+	@And("^the user validates headers on Bnc page for Dsnp indi members$")
+	public void user_validate_Dsnp_Headers(DataTable memberAttributes) {
+		List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		String plantype = memberAttributesMap.get("Plan Type");
+		System.out.println("TEST - "+plantype);
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+		if (benefitsCoveragePage==null) {
+			System.out.println("TEST - page is null");
+		}
+		benefitsCoveragePage.validateHeaders(plantype);
+	}
+
+	@And ("^the user validates the Out of Pocket Max section for Dsnp indi member$")
+	public void user_validate_OutofPocketFor_DsnpIndiMember(DataTable memberAttributes) {
+		List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		String plantype = memberAttributesMap.get("Plan Type");
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+		benefitsCoveragePage.validateOutofPocketMax(plantype);
+	}
+
+	
+	
 }//end of class

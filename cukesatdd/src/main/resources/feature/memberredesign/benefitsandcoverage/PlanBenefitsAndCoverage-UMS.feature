@@ -69,7 +69,6 @@ Feature: 1.01 Member  benefits and Coverage page
     Then The user navigate to Benefits and Coverage page
     And the user validates the copay coinsurance in drug costs table
     
-    @devRegression
     Examples: 
       | TID   | planType | memberType     | copayCategory |
       | 15090 | MAPD     | Individual_BnC | NON LIS       |
@@ -867,7 +866,7 @@ Feature: 1.01 Member  benefits and Coverage page
       | TID   | planType | memberType     | copayCategory | language | name       | memberid     | effectivedate | monthlypremium | extrahelp            | Identifier       | count | rider   |
       | 15245 | MAPD     | Individual_BnC | LIS 1         | ENGLISH  | DBAD ADFED | 919744565-00 | 01/01/2019    | Not Available  | Extra Help Level : 1 | IndEffectiveAARP |     7 | Rider   |
       
-   @DSNP-C&S-M&R
+   @DSNP-CnS-MnR
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify PDF section is in place on Benefits and Coverage page for Lis user
     Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>      |
@@ -907,6 +906,7 @@ Feature: 1.01 Member  benefits and Coverage page
       | Plan Type | <planType> |
     And the user validates text for the Locate a Pharmacy section
     And the user validates Locate a Pharmacy button should be visible
+      | Plan Type | <planType> |
     And the user validates the Learn More section link for stage
     And the user validates tier link should not display
     And the user validates view and document label
@@ -914,15 +914,13 @@ Feature: 1.01 Member  benefits and Coverage page
       | Plan Type | <planType> |
     And the user validates the language dropdown and the value displayed by default and selects new value in dropdown successfully
       | Language | <language> |
-    #note: moved to footer feature
-    #And the user validates Needhelp section
     And the user clicks on More Information link
     And the user validates contactus section
 
     Examples: 
-      | TID | planType   | memberType         | copayCategory | language | name       | memberid     | effectivedate | monthlypremium | extrahelp            | Identifier       | count | 
-      | x01 | DSNP-MAPD  | Individual_Bnc_C&S | LIS 2         | ENGLISH  | DBAD ADFED | 919744565-00 | 01/01/2019    | Not Available  | Extra Help Level : 2 | IndEffectiveAARP |     6 | 
-      | x02 | DSNP-MAPD  | Individual_Bnc_M&R | LIS 2         | ENGLISH  | DBAD ADFED | 919744565-00 | 01/01/2019    | Not Available  | Extra Help Level : 2 | IndEffectiveAARP |     6 |   
+      | TID | planType   | memberType         | copayCategory | language | name          | memberid     | effectivedate | monthlypremium | extrahelp            | Identifier       | count |rider   | 
+      | x01 | DSNP_MAPD  | Individual_Bnc_CnS | LIS 2         | ENGLISH  | DREENA KIMURA | 971949191-00 | 01/01/2020    | Not Available  | Extra Help Level : 2 | IndEffectiveAARP |     6 | NoRider|
+ #     | x02 | DSNP_MAPD  | Individual_Bnc_MnR | LIS 2         | ENGLISH  | DBAD ADFED | 919744565-00 | 01/01/2019    | Not Available  | Extra Help Level : 2 | IndEffectiveAARP |     6 |  NoRider|  
 	
   #TC22_NON LIS Ind plan member(MAPD)- Drug Cost table
   @benefitsAndCoverage14 @CMFedDrugNonLis @deprecated
@@ -990,7 +988,6 @@ Feature: 1.01 Member  benefits and Coverage page
     And the user clicks on More Information link
     And the user validates contactus section
     
-   @devRegression
     Examples: 
       | TID   | planType | memberType     | copayCategory | language | SummaryofBenefits   | EvidenceofCoverage   | UnitedHealth Passport Program | ComprehensiveFormularyDrug List     | AlternativeDrug List  | language1 | SummaryofBenefitsSpanish | EvidenceofCoverageSpanish | UnitedHealth Passport ProgramSpanish | ComprehensiveFormularyDrug ListSpanish | AlternativeDrug ListSpanish        | language2 | SummaryofBenefitsChinies | EvidenceofCoverageChinies | UnitedHealth Passport ProgramChinies | ComprehensiveFormularyDrug ListChinies | AlternativeDrug ListChinies | name        | memberid     | effectivedate | monthlypremium | UpdatedLanguage | DisplayFlag |
       | 15378 | MAPD     | Individual_BnC | NON LIS       | ENGLISH  | Summary of Benefits | Evidence of Coverage | UnitedHealth Passport Program | Comprehensive Formulary - Drug List | Alternative Drug List | 1         | Resumen de Beneficios    | Comprobante de Cobertura  | Programa UnitedHealth Passport       | Formulario Completo                    | Lista de Medicamentos Alternativos | 2         |                          |                           |                                      |                                        |                             | DDCEE DAADF | 954016383-00 | 01/01/2018    | Not Available  | Tier 2          | true        |

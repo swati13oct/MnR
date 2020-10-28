@@ -7,6 +7,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 import java.util.regex.Pattern;
 
 import org.apache.commons.lang.StringUtils;
@@ -647,8 +648,26 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 	 */
 
 	public void validateHeaders(String planType) {
-		//note: for PDP user, there will be NO Benefits Summary Header section
-		if (planType.equalsIgnoreCase("PDP")) {
+		if(planType.equals("DSNP_MAPD")) {
+			String ExpectedUrl="member/documents/overview.html";
+			validateNew(BenefitsSummaryHeader);
+			validateNew(Copayscoinsuranceheader);
+			Assert.assertTrue("'To view more details regarding----'  text is expected to display", medCopayText.isDisplayed());
+			medCopayBenefitsLink.click();
+			driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);  
+			String actualUrl=driver.getCurrentUrl();
+			Assert.assertTrue("'Original Url & Expected URL did n't Matched'", actualUrl.contains(ExpectedUrl));
+			System.out.println("actualUrl is " + actualUrl);
+			System.out.println("ExpectedUrl is " + ExpectedUrl);
+			driver.navigate().back();
+			driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+
+			Assert.assertTrue("'OfficeVisits' is not expected to display", !OfficeVisits.isDisplayed());
+			Assert.assertTrue("'InPatientHospitalCare' is not expected to display", !InPatientHospitalCare.isDisplayed());
+			Assert.assertTrue("'OutpatientSurgeryCenter' is not expected to display", !OutpatientSurgeryCenter.isDisplayed());
+			
+		} else if (planType.equalsIgnoreCase("PDP")) {
+			//note: for PDP user, there will be NO Benefits Summary Header section
 			System.out.println("User has planType=PDP, validate should not have Benefits Summary section at all");
 			validateNotDisplay("Benefits Summary Header", BenefitsSummaryHeader);
 			validateNotDisplay("Copays coinsurance header",Copayscoinsuranceheader);
@@ -3272,5 +3291,19 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 			Assert.fail("SSUP Plan Tab was not displayed");
 		}
 	}	
+	
+	public void validateOutofPocketMax(String planType) {
+		try {
+			if(planType.equals("DSNP-MAPD")) {
+									
+					Assert.assertTrue("'INNETWORK' is not expected to display", !INNETWORK.isDisplayed());
+					Assert.assertTrue("'OUTOFNETWORK' is not expected to display", !OUTOFNETWORK.isDisplayed());
+			}
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
 }
 

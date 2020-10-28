@@ -136,7 +136,7 @@ public class BenefitsAndCoverageBase extends BenefitsAndCoverageWebElements {
 	}
 
 	public List<WebElement> getDirectorySection(String planType, String memberType) {
-		if(planType.equalsIgnoreCase("MAPD") || planType.equalsIgnoreCase("MA") 
+		if(planType.equalsIgnoreCase("MAPD") || planType.equalsIgnoreCase("MA") || planType.equalsIgnoreCase("DSNP_MAPD")
 				|| planType.equalsIgnoreCase("PDP") || planType.equalsIgnoreCase("SSUP"))
 			return directorySection;
 		else if(planType.equalsIgnoreCase("ship")||planType.equalsIgnoreCase("MedSupp")||planType.equalsIgnoreCase("HIP"))
@@ -516,7 +516,7 @@ public class BenefitsAndCoverageBase extends BenefitsAndCoverageWebElements {
 
 	public void directoryLinksCount(int linkCount, String rider, String planType, String memberType) {
 		int count = 0;
-		if (planType.equals("MA") || planType.equals("MAPD") || planType.equals("DSNP-MAPD")) {
+		if (planType.equals("MA") || planType.equals("MAPD") || planType.equals("DSNP_MAPD")) {
 			if (memberType.equalsIgnoreCase("Individual")|| memberType.contains("Individual_Bnc")) {
 				count = getDirectorySection(planType, memberType).size() - 1;
 				if (rider.toString().trim().equals("Rider"))
