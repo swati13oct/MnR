@@ -15,7 +15,6 @@ Feature: View All Medication CTA Tile on P&P page
       | Member Type | <memberType> |
     And user view MedCab load successfully on PnP page
     Then user view View All Medication Call To Action
-    Then user validates the View All Medication text content displayed third within that section
     Then user validates an image for View All Medication Call To Action
     Then user validates a title for View All Medication Call To Action
     Then user validates a description for View All Medication Call To Action

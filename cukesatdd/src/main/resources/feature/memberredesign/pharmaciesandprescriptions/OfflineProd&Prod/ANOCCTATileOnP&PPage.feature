@@ -14,7 +14,6 @@ Feature: ANOC CTA Tile on P&P page
       | PlanType    | <planType>   |
       | Member Type | <memberType> |
     Then user view ANOC Call To Action
-    Then user validates the ANOC text content displayed fourth within that section
     Then user validates an image for ANOC Call To Action
     Then user validates a title for ANOC Call To Action
     Then user validates a description for ANOC Call To Action

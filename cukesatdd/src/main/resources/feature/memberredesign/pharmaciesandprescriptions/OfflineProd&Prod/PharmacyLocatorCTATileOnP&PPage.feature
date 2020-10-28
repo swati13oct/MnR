@@ -14,7 +14,6 @@ Feature: Pharmacy Locator CTA Tile on P&P page
       | PlanType    | <planType>   |
       | Member Type | <memberType> |
     Then user view Pharmacy Locator Call To Action
-    Then user validates the Pharmacy Locator text content displayed second within that section
     Then user validates an image for Pharmacy Locator Call To Action
     Then user validates a title for Pharmacy Locator Call To Action
     Then user validates a description for Pharmacy Locator Call To Action
