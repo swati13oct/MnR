@@ -15,7 +15,7 @@ import cucumber.api.CucumberOptions;
 @ExtendedCucumberOptions(retryCount = 0, screenShotSize = "", screenShotLocation = "/screenshots/", jsonReport = "target/cucumber-RunMRATDDAcquisitionDCEVPPPlanCompareMobileProdSanity.json", detailedReport = true, detailedAggregatedReport = true, overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDAcquisitionDCEVPPPlanCompareMobileProdSanity")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.mobile.acquisition" }, monochrome = true, features = {
 		"src/main/resources/feature/mobile/acquisition/dceredesign" }, plugin = { "pretty", "html:reports/test-report",
-				"json:target/cucumber-RunMRATDDAcquisitionDCEVPPPlanCompareMobileProdSanity.json" }, tags = { "@DCE_Redesign_VPP_PlanCompare", "@prodSanity" })
+				"json:target/cucumber-RunMRATDDAcquisitionDCEVPPPlanCompareMobileProdSanity.json" }, tags = { "@DCE_Redesign_VPP_PlanCompare", "@OnlyProd" })
 
 public class RunMRATDDAcquisitionDCEVPPPlanCompareMobileProdSanity {
 

@@ -112,4 +112,10 @@ Feature: 1.06.6.1 Member Plans and Documents - section: Forms And Resources Part
 	#Examples: 
     #  | index  | TID         | username  | password  | MemUserName     | planType | memberType            | fnr_sd | fnr_di |
     #  | 19-114 | 15119,15304 | qavgogine | qavgogine | PaidInFullShip0011 | SHIP  | IND_EFF_PDnR          | true   | false  |
-    #  | 19-120 | 15119,15304 | qavgogine | qavgogine | q3_SEP_2020SHIP_001| SHIP  | MULTI_IND_EFF_PDnR    | true   | false  |    
+    #  | 19-120 | 15119,15304 | qavgogine | qavgogine | q3_SEP_2020SHIP_012| SHIP  | MULTI_IND_EFF_PDnR    | true   | false  |    
+
+	#@memAuth_preeffective_ship_7bf7
+	#Examples: 
+    #  | index  | TID         | username  | password  | MemUserName         | planType | memberType            | fnr_sd | fnr_di  |
+    #  | 21-121 | xxxxx       | qavgogine | qavgogine | shipPreeffective707 | SHIP     | IND_PREEFF_PDnR       | true   | false   |
+    

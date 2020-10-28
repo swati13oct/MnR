@@ -84,8 +84,9 @@ public class VppPlanSummaryMobile {
 
 		String planName = givenAttributesMap.get("Plan Name");
 		getLoginScenario().saveBean(VPPCommonConstants.PLAN_NAME, planName);
-		VPPPlanSummaryPage planSummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+		VPPPlanSummaryPageMobile planSummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		
 		Assert.assertTrue("Error loading specific plan summary in VPP plan summary page",
 				planSummaryPage.getSpecificPlanInfo(planName));
 	}
@@ -115,7 +116,7 @@ public class VppPlanSummaryMobile {
 	}
 
 	@Then("^the user views plan details of the above selected plan and validates$")
-	public void user_views_plandetails_selected_plan_aarp(DataTable givenAttributes) {
+	public void user_views_plandetails_selected_plan_aarp(DataTable givenAttributes) throws InterruptedException {
 		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		String PlanName = memberAttributesRow.get(0).getCells().get(1);
 		getLoginScenario().saveBean(VPPCommonConstants.PLAN_NAME, PlanName);

@@ -89,5 +89,9 @@ Feature: 1.06.3 Member Plans and Documents - section: Membership Materials
       | index  | TID         | planType | memberType            | mm_sd | mm_en | mm_es | mm_zh |
       | 20-117 | 15119,15304 | SHIP     | MULTI_IND_EFF_PDnR    | false | false | false | false |
 
+	@preeffective_ship
+	Examples: 
+      | index  | TID         | planType | memberType            | mm_sd | mm_en | mm_es | mm_zh |
+      | 21-123 | xxxxx       | SHIP     | IND_PREEFF_PDnR       | false | false | false | false |
 
      

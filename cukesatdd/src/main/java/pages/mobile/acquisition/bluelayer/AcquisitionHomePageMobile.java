@@ -1,3 +1,4 @@
+
 package pages.mobile.acquisition.bluelayer;
 
 import org.openqa.selenium.By;
@@ -14,6 +15,17 @@ import acceptancetests.data.MRConstants;
 import atdd.framework.MRScenario;
 import pages.acquisition.dceredesign.GetStartedPage;
 import pages.mobile.acquisition.dceredesign.GetStartedPageMobile;
+
+import org.junit.Assert;
+import org.openqa.selenium.*;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
+
+/*@author pagarwa5*/
+
+import acceptancetests.data.MRConstants;
+import atdd.framework.MRScenario;
 
 public class AcquisitionHomePageMobile extends GlobalWebElementsMobile {
 	private static String UMS_ACQISITION_PAGE_URL = MRConstants.UHC_URL;
@@ -40,6 +52,9 @@ public class AcquisitionHomePageMobile extends GlobalWebElementsMobile {
 	 * @FindBy(xpath = "//*[@id='sam-call-modal']/div/div/div[2]/p[1]/a[1]") private
 	 * WebElement CallSamTFN;
 	 */
+
+	@FindBy(xpath = "//button[contains(@class,'proactive-offer__close')]")
+	public static WebElement proactiveChatExitBtn;
 
 	@FindBy(xpath = "//*[@id='sam-call-modal']/div/div/div[1]/a")
 	private WebElement CallSamTFNClose;
@@ -158,7 +173,29 @@ public class AcquisitionHomePageMobile extends GlobalWebElementsMobile {
 	 * @author Rathulya This method is used to open the URL on the mobile device
 	 */
 	public void openMobileURL() {
-		startNewMobile(AARP_ACQISITION_PAGE_URL);
+		//boolean offline_prod = false;
+		if (MRScenario.environment.equalsIgnoreCase("prod")) {
+			startNewMobile(AARP_ACQISITION_PROD_PAGE_URL);
+		} else if (MRScenario.environment.equalsIgnoreCase("offline")) {
+			startNewMobile(AARP_ACQISITION_OFFLINE_PAGE_URL);
+		} else
+			startNewMobile(AARP_ACQISITION_PAGE_URL);
+		System.out.println("Current mobile page URL: " + driver.getCurrentUrl());
+
+		//return offline_prod;
+
+		// startNewMobile(AARP_ACQISITION_PAGE_URL);
+		// System.out.println("Current mobile page URL: " + driver.getCurrentUrl());
+		// return offline_prod;
+	}
+
+	public AcquisitionHomePageMobile(WebDriver driver, String planType, boolean details) {
+		super(driver);
+		PageFactory.initElements(driver, this);
+	}
+
+	public void openUHCURLOnMobile() {
+		startNewMobile(UMS_ACQISITION_PAGE_URL);
 		System.out.println("Current mobile page URL: " + driver.getCurrentUrl());
 	}
 
@@ -173,6 +210,13 @@ public class AcquisitionHomePageMobile extends GlobalWebElementsMobile {
 		System.out.println("==pageURL==" + pageURL);
 		driver.navigate().to(pageURL);
 		return null;
+	}
+
+	public void navigateToPath(String page) {
+		String pageURL = driver.getCurrentUrl() + page;
+		System.out.println("==pageURL==" + pageURL);
+		driver.navigate().to(pageURL);
+
 	}
 
 	public AcquisitionHomePageMobile validateCallSamOnTablet() throws InterruptedException {
@@ -271,33 +315,43 @@ public class AcquisitionHomePageMobile extends GlobalWebElementsMobile {
 		return null;
 	}
 
-	/* LearnAboutMedicare link */
-	@FindBy(xpath = "//*[@id='ghn_lnk_3']")
-	private WebElement lnkLearnAboutMedicare;
+	public void validateTFN(String tfnXpath) {
 
-	public void navigateToMedEdPresDrugPage() {
-		waitforElement(lnkLearnAboutMedicare);
-		if (lnkLearnAboutMedicare.isDisplayed()) {
-			Actions actions = new Actions(driver);
-			actions.moveToElement(lnkLearnAboutMedicare);
-			actions.build().perform();
-			System.out.println("Hover over Learn about Medicare completed");
+		WebElement TFNelement = driver.findElement(By.xpath(tfnXpath));
+		validateNew(TFNelement, 45);
+		if (validateNew(TFNelement) && TFNelement.isDisplayed()) {
+			System.out.println("TFN is Displayed on Page : " + TFNelement.getText());
+			scrollToView(TFNelement);
+			jsClickMobile(TFNelement);
+			System.out.println("@@@@@@@@@@@@@@@ TFN Clicked @@@@@@@@@@@@@@@");
+			threadsleep(3000);
+			verifyTFNPopUp(TFNelement);
+		} else {
+			org.testng.Assert.fail("TFN elemnet is not found / displayed on page : " + tfnXpath);
 		}
-		WebElement PresProvidersBenefitsLink = driver.findElement(
-				By.xpath("//*[contains(@class, 'nav-col nav-col-3')]//a[contains(@href,'medicare-benefits')]"));
-		jsClickNew(PresProvidersBenefitsLink);
+
 	}
 
-	@FindBy(xpath = "//button[contains(@id,'addDrug')]")
-	public WebElement AddMyDrugsBtn;
+	public void verifyTFNPopUp(WebElement TFNelement) {
+		Alert alert;
+		try {
+			alert = driver.switchTo().alert();
+			System.out.println("Alert message : " + alert.getText());
+			String TFN = driver.switchTo().alert().getText().replace(" (", "-").replace(") ", "-");
+			System.out.println(TFN);
+			if (TFN.contains(TFNelement.getText())) {
+				System.out.println("The Call Alert is displayed with correct TFN : VALIDATION PASSED");
+				alert.dismiss();
+			} else {
 
-	public GetStartedPageMobile clickDCERedesignLinkonMedEdPage() {
-		WebElement DCELink = driver.findElement(By
-				.xpath("//a[contains(@href,'drug-cost-estimator') and contains(@class,'contentRow__mededcontainer')]"));
-		validateNew(DCELink);
-		jsClickNew(DCELink);
-		if (validateNew(AddMyDrugsBtn))
-			return new GetStartedPageMobile(driver);
-		return null;
+				System.out.println("The Call Alert is displayed with INCORRECT TFN : Validation FAILED");
+				alert.dismiss();
+			}
+
+		} catch (Exception e) {
+
+			System.out.println("TFN Call pop-up NOT Displayed");
+		}
 	}
+
 }

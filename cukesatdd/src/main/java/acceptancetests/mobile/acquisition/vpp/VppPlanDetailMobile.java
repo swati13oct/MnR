@@ -81,11 +81,44 @@ public class VppPlanDetailMobile {
 	public void the_user_on_UHC_Medicaresolutions_Site() {
 		wd = getLoginScenario().getMobileDriver();
 		AcquisitionHomePageMobile aquisitionhomepage = new AcquisitionHomePageMobile(wd);
-		//aquisitionhomepage.openPRE();
+		// aquisitionhomepage.openPRE();
 		aquisitionhomepage.openMobileURL();
 		aquisitionhomepage.fixPrivateConnectionMobile();
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, aquisitionhomepage);
+	}
+
+	@Given("^the user lands on AARP medicare acquisition site page$")
+	public void the_user_lands_AARP_medicares_Site() {
+		wd = getLoginScenario().getMobileDriver();
+		AcquisitionHomePageMobile aquisitionhomepage = new AcquisitionHomePageMobile(wd);
+		// aquisitionhomepage.openPRE();
+		aquisitionhomepage.openMobileURL();
+		aquisitionhomepage.fixPrivateConnectionMobile();
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, aquisitionhomepage);
+	}
+
+	@When("^user selects a provider and retuns to VPP plan details page in ulayer$")
+	public void user_selects_provider_and_return_vpp_Plan_details_page_ulayer() {
+		{
+			ProviderSearchPageMobile providerSearchPage = (ProviderSearchPageMobile) getLoginScenario()
+					.getBean(PageConstants.PROVIDER_SEARCH_PAGE);
+			PlanDetailsPageMobile planDetailsPage = providerSearchPage.selectsProviderFromVppPlanDetailsPage();
+			Assert.assertTrue("Not able to return to Plan Details page", planDetailsPage != null);
+
+		}
+	}
+
+	/**
+	 * @toDo:Verify X out of Y provider covered information is displayed on Plan
+	 *              Summary page
+	 */
+	@Then("^Verify X out of Y provider covered information is displayed on Plan Details page Ulayer$")
+	public void verify_providers_covered_ulayer_planDetails() {
+		PlanDetailsPageMobile vppPlanDetailsPage = (PlanDetailsPageMobile) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
+		Assert.assertTrue("Provider coverage Info not updated", vppPlanDetailsPage.providerinfo());
 	}
 
 	@Given("^the user navigates to following UHC medicare solutions site page$")
@@ -117,10 +150,13 @@ public class VppPlanDetailMobile {
 		String SiteName;
 		SiteName = (String) getLoginScenario().getBean(oleCommonConstants.ACQ_SITE_NAME);
 
+		
+		String PlanPremium = (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_PREMIUM);
+
 		WelcomePageMobile welcomePage;
 		if (SiteName.contains("UHC_ACQ")) {
 
-			PlanDetailsPageMobile vppPlanDetailsPage = (PlanDetailsPageMobile) getLoginScenario()
+			pages.mobile.acquisition.bluelayer.PlanDetailsPageMobile vppPlanDetailsPage = (pages.mobile.acquisition.bluelayer.PlanDetailsPageMobile) getLoginScenario()
 					.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
 			TFN = vppPlanDetailsPage.GetTFNforPlanType();
 			welcomePage = vppPlanDetailsPage.Enroll_OLE_Plan(PlanName);
@@ -130,7 +166,7 @@ public class VppPlanDetailMobile {
 			TFN = vppPlanDetailsPage.GetTFNforPlanType();
 			welcomePage = vppPlanDetailsPage.Enroll_OLE_Plan(PlanName);
 		}
-		String PlanPremium = (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_PREMIUM);
+		//String PlanPremium = (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_PREMIUM);
 		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_NAME, PlanName);
 		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_TYPE, PlanType);
 		getLoginScenario().saveBean(oleCommonConstants.OLE_ZIPCODE, ZipCode);
@@ -483,7 +519,7 @@ public class VppPlanDetailMobile {
 	}
 
 	@When("the user selects plan year for the UMS site$")
-	public void user_selects_plan_year(DataTable givenAttributes) {
+	public void user_selects_plan_year(DataTable givenAttributes) throws InterruptedException {
 
 		List<DataTableRow> givenAttributesRow = givenAttributes.getGherkinRows();
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
@@ -499,8 +535,7 @@ public class VppPlanDetailMobile {
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 
 		plansummaryPage.handlePlanYearSelectionPopup(planYear);
-		
-		
+
 	}
 
 	@Then("^the user validates the Enroll Now Button present for the plan type$")
@@ -2892,6 +2927,24 @@ public class VppPlanDetailMobile {
 		VPPTestHarnessPageMobile vppTestHarnessPage = (VPPTestHarnessPageMobile) loginScenario
 				.getBean(PageConstants.VPP_TESTHARNESS_PAGE);
 		vppTestHarnessPage.validateMedSupSpecificPlanInfo(planName);
+	}
+
+	@When("^the user selects plan year for the AARP site$")
+	public void user_select_plan_year(DataTable givenAttributes) throws InterruptedException {
+		List<DataTableRow> givenAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < givenAttributesRow.size(); i++) {
+
+			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+					givenAttributesRow.get(i).getCells().get(1));
+		}
+
+		String planYear = givenAttributesMap.get("Plan Year");
+
+		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		plansummaryPage.handlePlanYearSelectionPopup(planYear);
+		// plansummaryPage.handlePlanYearFutureSelectionPopup(planYear);
 	}
 
 	@And("^the user enters Mandatory fields on ProviderSearch Navigates to provider Page for UHC$")

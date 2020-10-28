@@ -1377,10 +1377,9 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		CommonUtility.waitForPageLoadNew(driver, zipCodeField, 30);
 		sendkeys(zipCodeField, zipcode);
 		viewPlansButton.click();
-		
+
 		CommonUtility.checkPageIsReadyNew(driver);
 
-			
 		CommonUtility.waitForPageLoadNew(driver, zipcodeChangeLink, 30);
 		if (driver.getCurrentUrl().contains("health-plans")) {
 			return new VPPPlanSummaryPageMobile(driver);
@@ -2222,6 +2221,11 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	}
 
 	public void openMobileURL() {
+		if (MRScenario.environment.equalsIgnoreCase("prod")) {
+			startNewMobile(AARP_ACQISITION_PROD_PAGE_URL);
+		} else if (MRScenario.environment.equalsIgnoreCase("offline")) {
+			startNewMobile(AARP_ACQISITION_OFFLINE_PAGE_URL);
+		} else
 		startNewMobile(AARP_ACQISITION_PAGE_URL);
 		System.out.println("Current mobile page URL: " + driver.getCurrentUrl());
 	}
@@ -2508,12 +2512,12 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 	}
 
-	public BuildYourDrugListMobile navigateToVisitorProfilePage() {
+	public VisitorProfilePageMobile navigateToVisitorProfilePage() {
 		waitforElement(shoppingCartIcon);
 		shoppingCartIcon.click();
-		if(driver.getCurrentUrl().contains("profile")) {
-			return new BuildYourDrugListMobile(driver);
-		}else {
+		if (driver.getCurrentUrl().contains("profile")) {
+			return new VisitorProfilePageMobile(driver);
+		} else {
 			System.out.println("Navigation to visitor profile is failed");
 			return null;
 		}

@@ -212,6 +212,16 @@ public class PrepareForNextYearStepDefinition {
 		Assert.assertTrue("PROBLEM - input '"+inputField+"' value should either be 'true' or 'false' | Actual='"+tmp+"', please correct and retry",tmp.equalsIgnoreCase("true") || tmp.equalsIgnoreCase("false"));
 		boolean showNxtYrPlanName=Boolean.valueOf(tmp);
 		getLoginScenario().saveBean(PrepareForNextYearCommonConstants.SHOW_NEXT_YEAR_PLANNAME,showNxtYrPlanName);
+
+		String planType=(String) getLoginScenario().getBean(LoginCommonConstants.PLANTYPE);
+		String memberType=(String) getLoginScenario().getBean(LoginCommonConstants.CATOGERY);
+
+		boolean expPlnChgLangDropdown_en=true; //note: dropdown default is english
+		boolean expPlnChgLangDropdown_es=false;
+		boolean expPlnChgLangDropdown_zh=false;
+		boolean expPlnMatLangDropdown_en=true; //note: dropdown default is english
+		boolean expPlnMatLangDropdown_es=false;
+		boolean expPlnMatLangDropdown_zh=false;
 		
 		HashMap<String, Boolean> docDisplayMap=new HashMap<String, Boolean>();
 		//----------------------------------
@@ -227,12 +237,16 @@ public class PrepareForNextYearStepDefinition {
 		Assert.assertTrue("PROBLEM - input '"+inputField+"' value should either be 'true' or 'false' | Actual='"+tmp+"', please correct and retry",tmp.equalsIgnoreCase("true") || tmp.equalsIgnoreCase("false"));
 		display=Boolean.valueOf(tmp);
 		docDisplayMap.put(inputField, display);
-	
+		if (display)
+			expPlnChgLangDropdown_es=true;
+		
 		inputField=docName+" Chinese";
 		tmp=memberAttributesMap.get(inputField);
 		Assert.assertTrue("PROBLEM - input '"+inputField+"' value should either be 'true' or 'false' | Actual='"+tmp+"', please correct and retry",tmp.equalsIgnoreCase("true") || tmp.equalsIgnoreCase("false"));
 		display=Boolean.valueOf(tmp);
 		docDisplayMap.put(inputField, display);
+		if (display)
+			expPlnChgLangDropdown_zh=true;
 
 		//----------------------------------
 		docName="Evidence of Coverage";
@@ -241,18 +255,29 @@ public class PrepareForNextYearStepDefinition {
 		Assert.assertTrue("PROBLEM - input '"+inputField+"' value should either be 'true' or 'false' | Actual='"+tmp+"', please correct and retry",tmp.equalsIgnoreCase("true") || tmp.equalsIgnoreCase("false"));
 		display=Boolean.valueOf(tmp);
 		docDisplayMap.put(inputField, display);
-
+		if (display) 
+		
 		inputField=docName+" Spanish";
 		tmp=memberAttributesMap.get(inputField);
 		Assert.assertTrue("PROBLEM - input '"+inputField+"' value should either be 'true' or 'false' | Actual='"+tmp+"', please correct and retry",tmp.equalsIgnoreCase("true") || tmp.equalsIgnoreCase("false"));
 		display=Boolean.valueOf(tmp);
 		docDisplayMap.put(inputField, display);
+		if (display) 
+			if (memberType.toUpperCase().contains("_GRP_"))
+				expPlnChgLangDropdown_es=true;
+			else if (memberType.toUpperCase().contains("_IND_"))
+				expPlnMatLangDropdown_es=true;
 	
 		inputField=docName+" Chinese";
 		tmp=memberAttributesMap.get(inputField);
 		Assert.assertTrue("PROBLEM - input '"+inputField+"' value should either be 'true' or 'false' | Actual='"+tmp+"', please correct and retry",tmp.equalsIgnoreCase("true") || tmp.equalsIgnoreCase("false"));
 		display=Boolean.valueOf(tmp);
 		docDisplayMap.put(inputField, display);
+		if (display) 
+			if (memberType.toUpperCase().contains("_GRP_"))
+				expPlnChgLangDropdown_zh=true;
+			else if (memberType.toUpperCase().contains("_IND_"))
+				expPlnMatLangDropdown_zh=true;
 
 		//----------------------------------
 		docName="Comprehensive Formulary";
@@ -267,13 +292,16 @@ public class PrepareForNextYearStepDefinition {
 		Assert.assertTrue("PROBLEM - input '"+inputField+"' value should either be 'true' or 'false' | Actual='"+tmp+"', please correct and retry",tmp.equalsIgnoreCase("true") || tmp.equalsIgnoreCase("false"));
 		display=Boolean.valueOf(tmp);
 		docDisplayMap.put(inputField, display);
+		if (display) 
+			expPlnMatLangDropdown_es=true;
 
 		inputField=docName+" Chinese";
 		tmp=memberAttributesMap.get(inputField);
 		Assert.assertTrue("PROBLEM - input '"+inputField+"' value should either be 'true' or 'false' | Actual='"+tmp+"', please correct and retry",tmp.equalsIgnoreCase("true") || tmp.equalsIgnoreCase("false"));
 		display=Boolean.valueOf(tmp);
 		docDisplayMap.put(inputField, display);
-		
+		if (display) 
+			expPlnMatLangDropdown_zh=true;
 
 		//----------------------------------
 		docName="Provider Directory";
@@ -288,12 +316,16 @@ public class PrepareForNextYearStepDefinition {
 		Assert.assertTrue("PROBLEM - input '"+inputField+"' value should either be 'true' or 'false' | Actual='"+tmp+"', please correct and retry",tmp.equalsIgnoreCase("true") || tmp.equalsIgnoreCase("false"));
 		display=Boolean.valueOf(tmp);
 		docDisplayMap.put(inputField, display);
+		if (display) 
+			expPlnMatLangDropdown_es=true;
 
 		inputField=docName+" Chinese";
 		tmp=memberAttributesMap.get(inputField);
 		Assert.assertTrue("PROBLEM - input '"+inputField+"' value should either be 'true' or 'false' | Actual='"+tmp+"', please correct and retry",tmp.equalsIgnoreCase("true") || tmp.equalsIgnoreCase("false"));
 		display=Boolean.valueOf(tmp);
 		docDisplayMap.put(inputField, display);
+		if (display) 
+			expPlnMatLangDropdown_zh=true;
 		
 		//----------------------------------
 		docName="Vendor Information Sheet";
@@ -308,12 +340,16 @@ public class PrepareForNextYearStepDefinition {
 		Assert.assertTrue("PROBLEM - input '"+inputField+"' value should either be 'true' or 'false' | Actual='"+tmp+"', please correct and retry",tmp.equalsIgnoreCase("true") || tmp.equalsIgnoreCase("false"));
 		display=Boolean.valueOf(tmp);
 		docDisplayMap.put(inputField, display);
+		if (display) 
+			expPlnMatLangDropdown_es=true;
 
 		inputField=docName+" Chinese";
 		tmp=memberAttributesMap.get(inputField);
 		Assert.assertTrue("PROBLEM - input '"+inputField+"' value should either be 'true' or 'false' | Actual='"+tmp+"', please correct and retry",tmp.equalsIgnoreCase("true") || tmp.equalsIgnoreCase("false"));
 		display=Boolean.valueOf(tmp);
 		docDisplayMap.put(inputField, display);
+		if (display) 
+			expPlnMatLangDropdown_zh=true;
 		
 		//----------------------------------
 		docName="Pharmacy Directory Information";
@@ -328,13 +364,23 @@ public class PrepareForNextYearStepDefinition {
 		Assert.assertTrue("PROBLEM - input '"+inputField+"' value should either be 'true' or 'false' | Actual='"+tmp+"', please correct and retry",tmp.equalsIgnoreCase("true") || tmp.equalsIgnoreCase("false"));
 		display=Boolean.valueOf(tmp);
 		docDisplayMap.put(inputField, display);
+		if (display) 
+			expPlnMatLangDropdown_es=true;
 
 		inputField=docName+" Chinese";
 		tmp=memberAttributesMap.get(inputField);
 		Assert.assertTrue("PROBLEM - input '"+inputField+"' value should either be 'true' or 'false' | Actual='"+tmp+"', please correct and retry",tmp.equalsIgnoreCase("true") || tmp.equalsIgnoreCase("false"));
 		display=Boolean.valueOf(tmp);
 		docDisplayMap.put(inputField, display);
+		if (display) 
+			expPlnMatLangDropdown_zh=true;
 
+		docDisplayMap.put("expPlnChgLangDropdown_en", expPlnChgLangDropdown_en);
+		docDisplayMap.put("expPlnChgLangDropdown_es", expPlnChgLangDropdown_es);
+		docDisplayMap.put("expPlnChgLangDropdown_zh", expPlnChgLangDropdown_zh);
+		docDisplayMap.put("expPlnMatLangDropdown_en", expPlnMatLangDropdown_en);
+		docDisplayMap.put("expPlnMatLangDropdown_es", expPlnMatLangDropdown_es);
+		docDisplayMap.put("expPlnMatLangDropdown_zh", expPlnMatLangDropdown_zh);
 		getLoginScenario().saveBean(PrepareForNextYearCommonConstants.DOC_DISPLAY_MAP, docDisplayMap);
 		
 	}
@@ -391,6 +437,13 @@ public class PrepareForNextYearStepDefinition {
 		boolean showNxtYrPlanName=(Boolean) getLoginScenario().getBean(PrepareForNextYearCommonConstants.SHOW_NEXT_YEAR_PLANNAME);
 		String testPlanName=(String) getLoginScenario().getBean(PrepareForNextYearCommonConstants.EXPECT_PLAN_NAME);
 
+		boolean sanityRun=false;
+		for (String s: MRScenario.getTagList()) {
+			if (s.contains("sanity")) {
+				sanityRun=true;
+			}
+		}
+		
 		if (!expPrepareForNextYearTab) {
 			List<String> testNote=(List<String>) getLoginScenario().getBean(PrepareForNextYearCommonConstants.TEST_NOTE);
 			if (testNote==null)
@@ -443,22 +496,22 @@ public class PrepareForNextYearStepDefinition {
 		List<String> sectionNote=new ArrayList<String>();
 		if (currentDate.before(milestone1Date)) {
 			testNote.add("\n\tValidation for current date '"+pfnyPg.convertDateToStrFormat_MMDDYYYY(currentDate)+"' < milestone 1 '"+pfnyPg.convertDateToStrFormat_MMDDYYYY(milestone1Date)+"'");
-			sectionNote=pfnyPg.validateBefM1Content(planType, memberType, currentDate, docDisplayMap, showNxtYrPlanName);
+			sectionNote=pfnyPg.validateBefM1Content(planType, memberType, currentDate, docDisplayMap, showNxtYrPlanName, sanityRun);
 		} else if ((currentDate.after(milestone1Date) || currentDate.equals(milestone1Date)) && currentDate.before(milestone2Date)) {
 			testNote.add("\tValidation for milestone 1 '"+pfnyPg.convertDateToStrFormat_MMDDYYYY(milestone1Date)+"' <= current date '"+pfnyPg.convertDateToStrFormat_MMDDYYYY(currentDate)+"' < milestone 2 '"+pfnyPg.convertDateToStrFormat_MMDDYYYY(milestone2Date)+"'");
-			sectionNote=pfnyPg.validateAftOrEqM1BefM2Content(planType, memberType, currentDate, docDisplayMap, showNxtYrPlanName);
+			sectionNote=pfnyPg.validateAftOrEqM1BefM2Content(planType, memberType, currentDate, docDisplayMap, showNxtYrPlanName, sanityRun);
 		} else if ((currentDate.after(milestone2Date) || currentDate.equals(milestone2Date)) && currentDate.before(milestone3Date)) {
 			testNote.add("\n\tValidation for milestone 2 '"+pfnyPg.convertDateToStrFormat_MMDDYYYY(milestone2Date)+"' <= current date '"+pfnyPg.convertDateToStrFormat_MMDDYYYY(currentDate)+"' < milestone 3 '"+pfnyPg.convertDateToStrFormat_MMDDYYYY(milestone3Date)+"'");
-			sectionNote=pfnyPg.validateAftOrEqM2BefM3Content(planType, memberType, currentDate, docDisplayMap, showNxtYrPlanName);
+			sectionNote=pfnyPg.validateAftOrEqM2BefM3Content(planType, memberType, currentDate, docDisplayMap, showNxtYrPlanName, sanityRun);
 		} else if ((currentDate.after(milestone3Date) || currentDate.equals(milestone3Date)) && currentDate.before(milestone4Date)) {
 			testNote.add("\n\tValidation for milestone 3 '"+pfnyPg.convertDateToStrFormat_MMDDYYYY(milestone3Date)+"'<= current date '"+pfnyPg.convertDateToStrFormat_MMDDYYYY(currentDate)+"' < milestone 4 '"+pfnyPg.convertDateToStrFormat_MMDDYYYY(milestone4Date)+"'");
-			sectionNote=pfnyPg.validateAftOrEqM3BefM4Content(planType, memberType, currentDate, docDisplayMap, showNxtYrPlanName);
+			sectionNote=pfnyPg.validateAftOrEqM3BefM4Content(planType, memberType, currentDate, docDisplayMap, showNxtYrPlanName, sanityRun);
 		} else if ((currentDate.after(milestone4Date) || currentDate.equals(milestone4Date)) && currentDate.before(milestone5Date)) {
 			testNote.add("\n\tValidation for milestone 4 '"+pfnyPg.convertDateToStrFormat_MMDDYYYY(milestone4Date)+"' <= current date '"+pfnyPg.convertDateToStrFormat_MMDDYYYY(currentDate)+"' < milestone 5 '"+pfnyPg.convertDateToStrFormat_MMDDYYYY(milestone5Date)+"'");
-			sectionNote=pfnyPg.validateAftOrEqM4BefM5Content(planType, memberType, currentDate, docDisplayMap, showNxtYrPlanName);
+			sectionNote=pfnyPg.validateAftOrEqM4BefM5Content(planType, memberType, currentDate, docDisplayMap, showNxtYrPlanName, sanityRun);
 		} else if (currentDate.after(milestone5Date) || currentDate.equals(milestone5Date)) {
 			testNote.add("\n\tValidation for milestone 5 '"+pfnyPg.convertDateToStrFormat_MMDDYYYY(milestone5Date)+"' <= current date '"+pfnyPg.convertDateToStrFormat_MMDDYYYY(currentDate)+"'");
-			sectionNote=pfnyPg.validateAfterOrEqalM5Content(planType, memberType, currentDate, docDisplayMap, showNxtYrPlanName);
+			sectionNote=pfnyPg.validateAfterOrEqalM5Content(planType, memberType, currentDate, docDisplayMap, showNxtYrPlanName, sanityRun);
 		} else {
 			Assert.assertTrue("PROBLEM - shouldn't be here, please check whether the milestone input dates are corrected...", false);
 		}
@@ -502,6 +555,15 @@ public class PrepareForNextYearStepDefinition {
 			getLoginScenario().saveBean(PrepareForNextYearCommonConstants.TEST_NOTE, testNote);
 			return;
 		}
+		
+		//note: if the run is for sanity, will skip clicking on links
+		boolean sanityRun=false;
+		for (String s: MRScenario.getTagList()) {
+			if (s.contains("sanity")) {
+				sanityRun=true;
+			}
+		}
+
 		//note: if able to get to this point means the page should exist
 		WebDriver wd=(WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
@@ -540,16 +602,16 @@ public class PrepareForNextYearStepDefinition {
 		List<String> sectionNote=new ArrayList<String>();
 		if (currentDate.before(milestone1Date)) {
 			testNote.add("\n\tValidation for current date '"+pfnyPg.convertDateToStrFormat_MMDDYYYY(currentDate)+"' < milestone 1 '"+pfnyPg.convertDateToStrFormat_MMDDYYYY(milestone1Date)+"'");
-			sectionNote=pfnyPg.validateBefM1Content(planType, memberType, currentDate, showNxtYrPlanName);
+			sectionNote=pfnyPg.validateBefM1Content(planType, memberType, currentDate, showNxtYrPlanName, sanityRun);
 		} else if ((currentDate.after(milestone1Date) || currentDate.equals(milestone1Date)) && currentDate.before(milestone2Date)) {
 			testNote.add("\tValidation for milestone 1 '"+pfnyPg.convertDateToStrFormat_MMDDYYYY(milestone1Date)+"' <= current date '"+pfnyPg.convertDateToStrFormat_MMDDYYYY(currentDate)+"' < milestone 2 '"+pfnyPg.convertDateToStrFormat_MMDDYYYY(milestone2Date)+"'");
-			sectionNote=pfnyPg.validateAftOrEqM1BefM2Content(planType, memberType, currentDate, showNxtYrPlanName);
+			sectionNote=pfnyPg.validateAftOrEqM1BefM2Content(planType, memberType, currentDate, showNxtYrPlanName, sanityRun);
 		} else if ((currentDate.after(milestone2Date) || currentDate.equals(milestone2Date)) && currentDate.before(milestone3Date)) {
 			testNote.add("\n\tValidation for milestone 2 '"+pfnyPg.convertDateToStrFormat_MMDDYYYY(milestone2Date)+"' <= current date '"+pfnyPg.convertDateToStrFormat_MMDDYYYY(currentDate)+"' < milestone 3 '"+pfnyPg.convertDateToStrFormat_MMDDYYYY(milestone3Date)+"'");
-			sectionNote=pfnyPg.validateAftOrEqM2BefM3Content(planType, memberType, currentDate, showNxtYrPlanName);
+			sectionNote=pfnyPg.validateAftOrEqM2BefM3Content(planType, memberType, currentDate, showNxtYrPlanName, sanityRun);
 		} else if (currentDate.after(milestone3Date) || currentDate.equals(milestone3Date)) {
 			testNote.add("\n\tValidation for milestone 3 '"+pfnyPg.convertDateToStrFormat_MMDDYYYY(milestone3Date)+"' <= current date '"+pfnyPg.convertDateToStrFormat_MMDDYYYY(currentDate)+"'");
-			sectionNote=pfnyPg.validateAfterOrEqalM3Content(planType, memberType, currentDate, showNxtYrPlanName);
+			sectionNote=pfnyPg.validateAfterOrEqalM3Content(planType, memberType, currentDate, showNxtYrPlanName, sanityRun);
 		} else {
 			Assert.assertTrue("PROBLEM - shouldn't be here, please check whether the milestone input dates are corrected...", false);
 		}

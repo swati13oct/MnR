@@ -162,7 +162,7 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth Prod
         
   #TC11_Benefits_for_Ship_member
   #note: this scenario covers multiple testcases TID 15094,15240
-  @memAuth_benefitsAndCoverage22 @CMShip @prod_BnC_Part3
+  @memAuth_benefitsAndCoverage22 @CMShip @prod_BnC_Part3  @bnc_sanity_ship
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify that Page Headers are in place on Benefits and Coverage page
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
@@ -530,10 +530,12 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth Prod
     Then verify ancillary benefit section is not displayed
     And the user validates the Vas section on benefits and coverage page is not displayed
 
-    Examples: 
-      | TID   |username |password  |MemUserName| planType| memberType| copayCategory |Identifier      | count | rider   |
-     | 15239 | kkumard| mnrs786@|BIGDADDY0808|PDP  | Group_BnC  | NON LIS     |GrpEffectiveUHC | 3     | NoRider |
-      | 15238 | kkumard| mnrs786@|APRILSSPACE1 |MAPD| Individual_BnC | NON LIS |IndEffectiveAARP | 7   | Rider |
+    Examples:  
+      | TID   |username |password  |MemUserName | planType| memberType| copayCategory |Identifier      | count | rider   |
+      | 15239 | kkumard | mnrs786@ |BIGDADDY0808|PDP      | Group_BnC | NON LIS       |GrpEffectiveUHC | 3     | NoRider |
+    
+     #15238 is deprecated 
+     # | 15238 | kkumard| mnrs786@|APRILSSPACE1 |MAPD| Individual_BnC | NON LIS |IndEffectiveAARP | 7   | Rider |
       
   #TC19_Ways To Save should come only for PDP members (Saver,Walgreen,Preferred, Symphonix)
   @benefitsAndCoverage5 @WaystoSaveforPdp @regression @SavePdpWidget
@@ -579,7 +581,7 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth Prod
       | 15249 |kkumard| mnrs786@| mwsotak1963      |MAPD      | withoutWaysToSave_BnC  |  
       
 #TC21_PDP_LIS(3,4)- Retail Drug Cost Table
-  @memAuth_benefitsAndCoverage1  @PDPLIS3member @prod_BnC_Part5
+  @memAuth_benefitsAndCoverage1  @PDPLIS3member @prod_BnC_Part5 @bnc_sanity_pdp
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify Group LIS 3/4 on Benefits and Coverage page
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
@@ -622,7 +624,7 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth Prod
       | 15248 |kkumard|  mnrs786@|Melw4344|PDP | PDPLIS_Bnc | LIS 3  | Summary of Benefits | Evidence of Coverage | Comprehensive Formulary         | Alternative Drug List |
             
    #TC25_Group members_MAPD_LIS(3,4)
-  @memAuth_benefitsAndCoverage1  @CMGroupmembersTC25  @prod_BnC_Part6 
+  @memAuth_benefitsAndCoverage1  @CMGroupmembersTC25  @prod_BnC_Part6 @bnc_sanity_mapd
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify Group LIS 3/4 on Benefits and Coverage page
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
@@ -872,6 +874,71 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth Prod
     Examples: 
       | TID   |username |password  |MemUserName| planType | memberType| copayCategory | language | SummaryofBenefits   | EvidenceofCoverage | ComprehensiveFormularyDrug List| AlternativeDrugList| name| memberid| effectivedate| monthlypremium | extrahelp|Identifier | count | rider   |
       | 15245 |kkumard| mnrs786@|JamesRShuler1| MAPD| Individual_BnC | LIS 1| ENGLISH | Summary of Benefits | Evidence of Coverage |Comprehensive Formulary - Drug List | Alternative Drug List | DBAD ADFED | 919744565-00 | 01/01/2019| Not Available| Extra Help Level : 1 |IndEffectiveAARP |7|Rider |     
+      
+     #TC21_MAPD_LIS(1,2)- Retail Drug Cost Table
+   @bnc_sanityMapd_Individual
+  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify PDF section is in place on Benefits and Coverage page for Lis user
+    Given the user is on member auth login flow page
+    When the member is able to login with correct username and password
+      | Username | <username> |
+      | Password | <password> |
+    And Member Enters the Username he wants to search
+      | MemUsername | <MemUserName> |
+    And user clicks on member to select
+    And user stores test input for validations
+      | Username | <MemUserName> |
+      | Plan Type    | <planType>    |
+      | Member Type  | <memberType>  |
+      | Copay Category | <copayCategory> |
+    Then The user navigates to Benefits and Coverage page
+      | Plan Type | <planType> |
+      Then user verifies presence of jump links
+      | Plan Type  | <planType>   |
+      | Rider      | <rider>      |
+      | MemberType | <memberType> |
+      | identifier | <Identifier> |
+    And user clicks on the jump links and checks respective sections
+      | Plan Type  | <planType>   |
+      | Rider      | <rider>      |
+      | MemberType | <memberType> |
+      | identifier | <Identifier> |
+    And verifies links irrelevant to the plan type are not displayed
+      | Plan Type  | <planType>   |
+      | Rider      | <rider>      |
+      | Count      | <count>      |
+      | MemberType | <memberType> |
+    And the user validates Lis member plan overview section
+      | Name            | <name>           |
+      | Member ID       | <memberid>       |
+      | Effective Date  | <effectivedate>  |
+      | Monthly premium | <monthlypremium> |
+      | Extra Help      | <extrahelp>      |
+    And the user validates headers on Bnc page for indi members
+      | Plan Type | <planType> |
+  #  And the user validates the Primarycare Provider section
+     # | Plan Type | <planType> |
+    And the user validates the Out of Pocket Max section
+    And the user view the LIS Drug Copays & Discounts header
+    And the user MAPD LIS should see drug cost table for Lis members
+    And the user validates Drug coverage header and text under the section
+    And the user validates text for the Look Up Drugs section
+    And the user validates Look Up Drugs button should be visible
+      | Plan Type | <planType> |
+    And the user validates text for the Locate a Pharmacy section
+    And the user validates Locate a Pharmacy button should be visible
+      | Plan Type | <planType> |
+    And the drugcost dropdown should not display
+    And the user validates the Learn More section link for stage
+    And the user validates tier link should not display
+    And the user validates view and document label
+    And the user validates static links
+      | Plan Type | <planType> |
+    And the user clicks on More Information link
+    And the user validates contactus section
+
+    Examples: 
+      | TID   |username |password  |MemUserName  | planType | memberType     | copayCategory |  name        |memberid      | effectivedate| monthlypremium | extrahelp            |Identifier       | count | rider   |
+      | 15245 |kkumard  | mnrs786@ |JamesRShuler1| MAPD     | Individual_BnC | LIS 1         |   DBAD ADFED | 919744565-00 | 01/01/2019   | Not Available  | Extra Help Level : 1 |IndEffectiveAARP |7       |Rider |
       
   #TC22_NON LIS Ind plan member(MAPD)- Drug Cost table
   @memAuth_benefitsAndCoverage14 @CMFedDrugNonLis @deprecated

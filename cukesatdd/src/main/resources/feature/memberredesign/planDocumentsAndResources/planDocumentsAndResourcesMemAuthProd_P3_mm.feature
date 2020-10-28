@@ -36,9 +36,9 @@ Feature: 1.06.3.2 Member Plans and Documents - section: Membership Materials - M
 	@prod_preeffective_ma_mapd
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | mm_sd | mm_en | mm_es | mm_zh |
-      | 01-039 | xxxxx       | kkumard  | mnrs786@  | Ranch1955    | MA       | AARP_IND_PREEFF_PDnR  | true  | true  | true  | false |
+#      | 01-039 | xxxxx       | kkumard  | mnrs786@  | Ranch1955    | MA       | AARP_IND_PREEFF_PDnR  | true  | true  | true  | false |
 #      | 02-040 | xxxxx       | kkumard  | mnrs786@  | testusername    | MA       | GROUP_PREEFF_PDnR     | true  | false | false | false |
-#      | 03-041 | xxxxx       | kkumard  | mnrs786@  | testusername    | MAPD     | AARP_IND_PREEFF_PDnR  | true  | true  | true  | false |
+      | 03-041 | xxxxx       | kkumard  | mnrs786@  | Abayne01          | MAPD     | AARP_IND_PREEFF_PDnR  | true  | true  | true  | false |
 
 #	@prod_preeffective_pdp
 #	Examples: 
@@ -107,5 +107,9 @@ Feature: 1.06.3.2 Member Plans and Documents - section: Membership Materials - M
       | 19-057 | 15119,15304 | kkumard  | mnrs786@  | Pramila1946    | SHIP     | IND_EFF_PDnR          | false | false | false | false |
 #      | 20-117 | 15119,15304 | kkumard  | mnrs786@  | q1_feb_2020SHIP_001    | SHIP     | MULTI_IND_EFF_PDnR    | false | false | false | false |
 
+	@prod_preeffective_ship
+	Examples: 
+      | index  | TID         | username  | password  | MemUserName  | planType | memberType            | mm_sd | mm_en | mm_es | mm_zh |
+#     | 21-121 | xxxxx       | kkumard   | mnrs786@  | testusername | SHIP     | IND_PREEFF_PDnR       | false | false | false | false |
 
      

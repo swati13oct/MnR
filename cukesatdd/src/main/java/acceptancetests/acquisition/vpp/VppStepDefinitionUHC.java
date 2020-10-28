@@ -1742,7 +1742,7 @@ public class VppStepDefinitionUHC {
 		System.out.println("***the user clicks on resume application button***");
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		plansummaryPage.MedSupFormValidation_2ndTime(DateOfBirth, zipcode);
+		//plansummaryPage.MedSupFormValidation_2ndTime(DateOfBirth, zipcode);
 		plansummaryPage.ResumeApplicationButton();
 
 	}
@@ -3282,6 +3282,19 @@ public void the_user_validates_pagination_and_results_displayed(DataTable inputv
 			plansummaryPage.signInOptumId(username, password);
 		}
 		
+		@Then("^the user validate retrieve application URL in UHC Site$")
+		public void the_user_retrieve_application_URL_in_AARPSite(DataTable arg1) throws InterruptedException {
+			Map<String, String> inputAttributesMap=parseInputArguments(arg1);
+			String AARPURL = inputAttributesMap.get("AARP URL");
+			String AARPURLSTG=inputAttributesMap.get("AARP URL STG");
+			VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario().getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+			if(getLoginScenario().environment.equals("stage")){
+				plansummaryPage.RetrieveURL(AARPURLSTG);
+			}else{
+				plansummaryPage.RetrieveURL(AARPURL);
+			}
+
+		}
 		@Then("^the user click on Dental Cover Popup he must be able to validate plan defaults in UHC$")
 		public void the_user_click_on_Optional_Services_tab_and_validate_PlanDefaults(DataTable givenAttributes)
 				throws Throwable {
@@ -3305,4 +3318,37 @@ public void the_user_validates_pagination_and_results_displayed(DataTable inputv
 					}
 			vppPlanDetailsPage.validateDentalPopupDefaults(planName,optionalRiderFlag);
 		}
-} 
+	
+		@When("^the user performs plan search using Standalone information in the UHC site$")
+	public void Standalone_Shop_details_in_aarp_site(DataTable givenAttributes) throws InterruptedException {
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		String zipcode = memberAttributesMap.get("Zip Code");
+		String county = memberAttributesMap.get("County Name");
+		String isMultiCounty = memberAttributesMap.get("Is Multi County");
+		getLoginScenario().saveBean(VPPCommonConstants.ZIPCODE, zipcode);
+		getLoginScenario().saveBean(VPPCommonConstants.COUNTY, county);
+		getLoginScenario().saveBean(VPPCommonConstants.IS_MULTICOUNTY, isMultiCounty);
+
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		VPPPlanSummaryPage plansummaryPage = null;
+		if (("NO").equalsIgnoreCase(isMultiCounty.trim())) {
+			plansummaryPage = aquisitionhomepage.searchPlansWithOutCountyShop(zipcode);
+		} else {
+			plansummaryPage = aquisitionhomepage.searchPlansShop(zipcode, county);
+		}
+		
+		if (plansummaryPage != null) {
+			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
+
+		} else {
+			Assert.fail("Error Loading VPP plan summary page");
+		}
+	}
+}
+

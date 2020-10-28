@@ -171,25 +171,26 @@ Feature: 1.01.1-Vpp to plan Summary AARP Scenarios
       | UID     | zipcode | isMultiCounty | county           | MA_testPlans                                                                                               | PDP_testPlans                                                    | SNP_testPlans                              |planyear|
       | 1598162 |   80001 | NO            | Jefferson County | AARP Medicare Advantage SecureHorizons Essential (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO) | AARP MedicareRx Preferred (PDP),AARP MedicareRx Saver Plus (PDP) | UnitedHealthcare Dual Complete (HMO D-SNP) |current|
 
-  @vppPlanSummaryAARP05 @vppPlanSummaryAARPRun01 @vppPlanSummaryAARPRegression
-  Scenario Outline: Verify plan summary for SNP plan ty pes in AARP site
-    Given the user is on AARP medicare acquisition site landing page
-    When the user performs plan search using following information in the AARP site
+  @vppPlanSummaryAARP05
+  Scenario Outline: Zipcode: <zipcode> -plan type: <plantype> - Verify plan summary for SNP plan types in AARP site
+    Given the user is on medicare acquisition site landing page
+    	|Site| <site>|
+    When the user performs plan search using following information
       | Zip Code        | <zipcode>         |
       #| County Name | <county>  |
       | Is Multi County | <isMultutiCounty> |
-    Then user validates plan count for all plan types on plan summary page in the AARP site
-    And the user views the plans of the below plan type in AARP site
+    Then user validates plan count for all plan types on plan summary page
+    And the user views the plans of the below plan type
       | Plan Type | <plantype> |
-    And the user selects plan year for the AARP site
+    And the user selects plan year
     	|Plan Year	| <planyear>|
-    And the user validates the available plans for selected plan types in the AARP site
-    Then the user validates plan summary for the below plan in the AARP site
+    And the user validates the available plans for selected plan types
+    Then the user validates plan summary for the below plan
       | Plan Name | <planName> |
 
     Examples: 
-      | zipcode | isMultiCounty | county             | plantype | planName                                       |planyear|
-      |   80001 | NO            | Los Angeles County | SNP      | UnitedHealthcare Nursing Home Plan (PPO I-SNP) |current|
+      |	site	| zipcode | isMultiCounty | county             | plantype | planName                                       |planyear|
+      |	AARP	|   80001 | NO            | Los Angeles County | SNP      | UnitedHealthcare Nursing Home Plan (PPO I-SNP) |current|
 
   @vppPlanSummaryAARP06 @vppPlanSummaryAARPRun02 @vppPlanSummaryAARPRegression
   Scenario Outline: Validate Cancel button for Multi Cunty Pop-up on VPP for Change Location
@@ -439,7 +440,7 @@ Feature: 1.01.1-Vpp to plan Summary AARP Scenarios
       | 15550 |   78006 | YES           | Bexar County       | MAPD     | 1750 EPPS BRIDGE RD ATHENS | OCONEE    | GEORGIA     | test      | test     | test@test.com | YES            | Clarke County    |
 
   @vppPlanSummaryAARP16 @vppPlanSummaryAARPRun02 @vppPlanSummaryAARPRegression
-  Scenario Outline: TID: <TID> -plan type: <plantype> - Verify plan cards on plan summary page in AARP site
+  Scenario Outline: TID: <TID> -plan type: <plantype> - Verify Rocky Mountain Health Learn More lands on Correct site from AARP site from plan summary page
     Given the user is on the AARP medicare acquisition site landing page
     When the user does plan search using the following information in the AARP site
       | Zip Code        | <zipcode>         |
@@ -479,7 +480,7 @@ Feature: 1.01.1-Vpp to plan Summary AARP Scenarios
     Examples: 
       | TID       | zipcode | isMultutiCounty | county        | plantype | planName                                 |planyear|
       | US2567133 |   70515 | YES             | Acadia Parish | MAPD     | Peoples Health Choices Gold (HMO-POS)    |current|
-      | US2567133 |   70515 | YES             | Acadia Parish | MAPD     | Peoples Health Choices Value (HMO)       |current|
-      | US2567133 |   70515 | YES             | Acadia Parish | SNP      | Peoples Health Secure Health (HMO D-SNP) |current|
+      #| US2567133 |   70515 | YES             | Acadia Parish | MAPD     | Peoples Health Choices Value (HMO)       |current|
+      #| US2567133 |   70515 | YES             | Acadia Parish | SNP      | Peoples Health Secure Health (HMO D-SNP) |current|
       #| US2567133 |   70718 | YES             | Ascension Parish | MAPD     | Peoples Health Choices 65 "#14 (HMO)"    |
       #| US2567133 |   70420 | YES             | Ascension Parish | MAPD     | Peoples Health Choices 65 "#14 (HMO)"    |

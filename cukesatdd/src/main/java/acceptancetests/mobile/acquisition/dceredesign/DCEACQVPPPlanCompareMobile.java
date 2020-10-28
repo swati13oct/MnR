@@ -78,11 +78,10 @@ public class DCEACQVPPPlanCompareMobile {
 		AcquisitionHomePageMobile acqHomePage = (AcquisitionHomePageMobile) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 
-		BuildYourDrugListMobile buildDrugList = acqHomePage.navigateToVisitorProfilePage();
+		VisitorProfilePageMobile visitorProfilePage = acqHomePage.navigateToVisitorProfilePage();
 		
-		getLoginScenario().saveBean(PageConstants.VISITOR_PROFILE_PAGE, buildDrugList );
-		
-		
+		getLoginScenario().saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfilePage);
+	
 		
 		
 	}

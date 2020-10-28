@@ -11,7 +11,7 @@ public class MRConstants {
 	public static final String AARPM_URL_OFFLINE = "https://member.offline.aarpmedicareplans.com";
 	//public static final String UHCM_URL = "https://member."+MRScenario.environment+"-uhcmedicaresolutions." + getDomain() + "/guest/home.html";
 	//public static final String AARP_URL = "https://www.awe-"+MRScenario.environment+"-aarpmedicareplans." + getDomain() + "/";
-	public static final String AARP_URL = "https://offline.aarpmedicareplans.com/";
+	public static final String AARP_URL = "https://www."+MRScenario.environment+"-aarpmedicareplans." + getDomain() + "/";
 			//"https://www.aarpmedicareplans.com/";
 			//"https://offline.aarpmedicareplans.com/";
 			//"https://www."+MRScenario.environment+"-aarpmedicareplans." + getDomain() + "/";
@@ -348,6 +348,10 @@ public class MRConstants {
   
   public static String AARP_TELESALES_AGENT_TEAM_E_PAGE_URL = "https://www.team-e-aarpmedicareplans.ocp-elr-core-nonprod.optum.com/admin/shopper-profile.html/login";
 
+  public static String AARP_TELESALES_AGENT_PAGE_URL_Team = "https://www."+MRScenario.environment+"-aarpmedicareplans.ocp-elr-core-nonprod.optum.com/admin/shopper-profile.html/login";
+  
+  public static final String Team_H_NEW_URL_TESTHARNESS = "https://www.team-h-medicare.ocp-ctc-dmz-nonprod.optum.com/content/login/overview.html?testharness=true";
+  
   public static String getDomain() {
 		return (MRScenario.domain == null || MRScenario.domain.equals("")) ? "uhc.com" : MRScenario.domain;
 	}
@@ -407,6 +411,8 @@ public class MRConstants {
   public static final String STAGE_DEEPLINK_URL_health_and_wellness = "https://stage-medicare.uhc.com/?TARGET=SMSR/member/health-and-wellness.html%3fdeeplink=true";
   public static final String STAGE_DEEPLINK_URL_my_Documents = "https://stage-medicare.uhc.com/?TARGET=SMSR/member/documents/overview.html%3fdeeplink=true";
   public static final String AARP_CHAT_AGENT = "https://stg-wwe.uhc.com/ui/ad/v1/index.html";
+  public static final String STAGE_DEEPLINK_URL_payments_overview = "https://stage-medicare.uhc.com/member/payments/overview.html";
+  public static final String STAGE_DEEPLINK_URL_payments_overview_new = "https://stage-medicare.uhc.com/member/payments/overview-new.html";
   
   public static String PROV_NAME = "";
   public static final String AARP_HAWL= "http://stage-myaarpmedicare.uhc.com/extras";

@@ -27,7 +27,7 @@ public class PrepareForNextYearSars extends PrepareForNextYearBase {
 	}
 
 
-	public List<String> validateComparePlanSection_ind(String planType, String memberType, Date currentDate, boolean showNxtYrPlanName) {
+	public List<String> validateComparePlanSection_ind(String planType, String memberType, Date currentDate, boolean showNxtYrPlanName, boolean sanityRun) {
 		List<String> note=new ArrayList<String>();
 		note.add("\t==============================================================");
 		String section="Compare plans online";
@@ -67,7 +67,7 @@ System.out.println("TEST - currentDate.after(showDocDate1)="+currentDate.after(s
 			note.addAll(validateHaveItem(targetItem, targetElement));
 
 			System.out.println("TEST - planType='"+planType+"' - Proceed to validate 'Learn about other plan choices' section");
-			note.addAll(validateLearnOtherPlans(section, planType, memberType, currentDate, showNxtYrPlanName));
+			note.addAll(validateLearnOtherPlans(section, planType, memberType, currentDate, showNxtYrPlanName, sanityRun));
 
 		} else {
 			if (validateAsMuchAsPossible) {
@@ -83,7 +83,7 @@ System.out.println("TEST - currentDate.after(showDocDate1)="+currentDate.after(s
 		return note;
 	}
 
-	public List<String> validateLearnOtherPlans(String section, String planType, String memberType, Date currentDate, boolean showNxtYrPlanName) {
+	public List<String> validateLearnOtherPlans(String section, String planType, String memberType, Date currentDate, boolean showNxtYrPlanName, boolean sanityRun) {
 		List<String> note=new ArrayList<String>();
 		note.add("\t=================");
 		String subSection=" - Learn about other plan choices";
@@ -118,8 +118,9 @@ System.out.println("TEST - currentDate.after(showDocDate1)="+currentDate.after(s
 		if (showSection) {
 			note.addAll(validateHaveItem(targetItem, targetElement));
 
+			if (!sanityRun) {
 			//note - validate link destination
-			String expUrl="/health-plans.html#/plan-summary";
+			String expUrl="/health-plans.html";
 			if (memberType.toUpperCase().contains("UHC"))
 				if (MRScenario.environment.contains("stage"))
 					expUrl="uhcmedicaresolutions.uhc.com"+expUrl;
@@ -142,6 +143,7 @@ System.out.println("TEST - currentDate.after(showDocDate1)="+currentDate.after(s
 			targetItem=section+" - green circle";
 			targetElement=sars_compPlnsSec_circle_green;
 			note.addAll(validateHaveItem(targetItem, targetElement));
+			}
 		} else {
 			if (validateAsMuchAsPossible) {
 				if (!noWaitValidate(targetElement)) {
@@ -158,7 +160,7 @@ System.out.println("TEST - currentDate.after(showDocDate1)="+currentDate.after(s
 		return note;
 	}
 
-	public List<String> validateEnrollSection_ind(String planType, String memberType, Date currentDate, boolean showNxtYrPlanName) {
+	public List<String> validateEnrollSection_ind(String planType, String memberType, Date currentDate, boolean showNxtYrPlanName, boolean sanityRun) {
 		List<String> note=new ArrayList<String>();
 		note.add("\t==============================================================");
 		String section="Enroll in the plan that works for you";
@@ -196,7 +198,7 @@ System.out.println("TEST - currentDate.after(showDocDate1)="+currentDate.after(s
 			note.addAll(validateHaveItem(targetItem, targetElement));
 
 			System.out.println("TEST - planType='"+planType+"' - Proceed to validate 'Choose your plan");
-			note.addAll(validateChoosePlan(section, planType, memberType, currentDate, showNxtYrPlanName));
+			note.addAll(validateChoosePlan(section, planType, memberType, currentDate, showNxtYrPlanName, sanityRun));
 
 		} else {
 			if (validateAsMuchAsPossible) {
@@ -214,7 +216,7 @@ System.out.println("TEST - currentDate.after(showDocDate1)="+currentDate.after(s
 		return note;
 	}
 
-	public List<String> validateChoosePlan(String section, String planType, String memberType, Date currentDate, boolean showNxtYrPlanName) {
+	public List<String> validateChoosePlan(String section, String planType, String memberType, Date currentDate, boolean showNxtYrPlanName, boolean sanityRun) {
 		List<String> note=new ArrayList<String>();
 		note.add("\t=================");
 		String subSection=" - Choose your plan";
@@ -242,8 +244,9 @@ System.out.println("TEST - currentDate.after(showDocDate1)="+currentDate.after(s
 		if (showSection) {
 			note.addAll(validateHaveItem(targetItem, targetElement));
 
+			if (!sanityRun) {
 			//note - validate link destination
-			String expUrl="/health-plans.html#/plan-summary";
+			String expUrl="/health-plans.html";
 			if (memberType.toUpperCase().contains("UHC"))
 				if (MRScenario.environment.contains("stage"))
 					expUrl="uhcmedicaresolutions.uhc.com"+expUrl;
@@ -255,8 +258,9 @@ System.out.println("TEST - currentDate.after(showDocDate1)="+currentDate.after(s
 				else
 					expUrl="aarpmedicareplans.com"+expUrl;
 
-			WebElement expElement=acqPlanOverviewBox;
-			note.addAll(validateLnkBehavior(planType, memberType, targetItem, targetElement, expUrl, expElement));
+				WebElement expElement=acqPlanOverviewBox;
+				note.addAll(validateLnkBehavior(planType, memberType, targetItem, targetElement, expUrl, expElement));
+			}
 
 			targetItem=section+subSection+" - Compare New Plans Link Arrow";
 			targetElement=sars_enrolPlnSec_choYurPlnSec_stayInPln_compNewPlnsLnk_arrow;

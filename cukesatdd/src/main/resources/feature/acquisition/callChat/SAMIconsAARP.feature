@@ -1,28 +1,31 @@
 @acq_CALLCHAT_AARP
 Feature: 1.13 ACQ AARP- To test SAM Icons in AARP site
-@samChatCall
-Scenario Outline: 1.19.1.1 To test the SAM icons on AARP site on <pagename>
-Given the user is on medicare acquisition site landing page
-  | Site | <site>	|
-And user opens the page to validate
- | pagename | <pagename> |
-#Then the user validates whether chat icon is visible on AARP
-Then the user validates whether chat Agent is Available on AARP	
-@header_1 @samChatCall_1 @samChatRegression @samChatRegression_AARP
-Examples: 
-|	site	| pagename 															|
-|	AARP	|	/																			|
-|	AARP	|	plan-recommendation-engine.html				|
-|	AARP	|	health-plans/estimate-drug-costs.html	|
-|	AARP	|	health-plans/aarp-pharmacy.html				|
 
-@header_1 @samChatCall_1 @samChatRegression @samChatRegression_UHC
-Examples: 
-|	site	| pagename 															|
-|	UHC		|	/				 															|
-|	UHC		|	plan-recommendation-engine.html				|
-|	UHC		|	health-plans/estimate-drug-costs.html	|
-|	UHC		|	health-plans/aarp-pharmacy.html				|
+	@samChatCall
+	Scenario Outline: 1.19.1.1 To test the SAM icons on AARP site on <pagename>
+		Given the user is on medicare acquisition site landing page
+  		| Site | <site>	|
+		And user opens the page to validate
+			| pagename | <pagename> |
+		Then the user validates whether call icon is visible
+		Then the user validates whether chat icon is visible
+		#Then the user validates whether chat Agent is Available on AARP	
+
+	@header_1 @samChatCall_1 @samChatRegression @samChatRegression_AARP
+	Examples: 
+		|	site	| pagename 															|
+		|	AARP	|	/																			|
+		|	AARP	|	plan-recommendation-engine.html				|
+		|	AARP	|	health-plans/estimate-drug-costs.html	|
+		|	AARP	|	health-plans/aarp-pharmacy.html				|
+
+	@header_1 @samChatCall_1 @samChatRegression @samChatRegression_UHC
+	Examples: 
+		|	site	| pagename 															|
+		|	UHC		|	/				 															|
+		|	UHC		|	plan-recommendation-engine.html				|
+		|	UHC		|	health-plans/estimate-drug-costs.html	|
+		|	UHC		|	health-plans/aarp-pharmacy.html				|
 
 @header_2 @samChatCall_1
 Examples: 

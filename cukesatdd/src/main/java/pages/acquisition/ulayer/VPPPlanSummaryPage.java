@@ -462,6 +462,10 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(id = "FirstName")
 	private WebElement firstName;
 
+	// @FindBy(xpath = "//a[@class='cancel-button modal-link inline-block']")
+	@FindBy(xpath = "//a[@class='cancel-button modal-link']")
+	private WebElement cancelButton;
+
 	@FindBy(id = "LastName")
 	private WebElement lastName;
 
@@ -479,9 +483,6 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	@FindBy(xpath = "//input[@id='PhonePrimary']")
 	private WebElement phoneNumber;
-
-	@FindBy(xpath = "//a[@class='cancel-button modal-link inline-block']")
-	private WebElement cancelButton;
 
 	@FindBy(xpath = "(//a[contains(text(),'Cancel Application')])[3]")
 	private WebElement cancelButtonPopUp;
@@ -506,6 +507,37 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	@FindBy(xpath = "//p[contains(text(),'Return to this application using the code below')]/following-sibling::span")
 	private WebElement resumeKey;
+
+	@FindBy(xpath = "//div[contains(@class,'container')]//img[@alt='Rocky Mountain']")
+	private WebElement rockyMountainLogo;
+
+	@FindBy(xpath = "//div[contains(@class,'container')]//img[@alt='Peoples Health']")
+	private WebElement peoplesHealthLogo;
+
+	@FindBy(xpath = "//div[@class='et_pb_text_inner']//h1//strong")
+	private WebElement peoplesHealthPlanName;
+
+	@FindBy(xpath = "//button[contains(@class,'optum_sign_in')]")
+	private WebElement signIn;
+
+	@FindBy(xpath = "//button[contains(@class,'action_attempt_app_retrieval')]")
+	private WebElement submitApplicationBtn;
+
+	@FindBy(xpath = "//label[contains(@for, 'futureYear')]")
+	private WebElement NextYearPlansBtn;
+
+	// @FindBy(xpath = "//*[contains(@for, 'currentYear')]")
+	// @FindBy(xpath = "//div[@class='switch-field
+	// ng-scope']//label[@class='ng-binding'][contains(text(),'Shop for 2020
+	// plans')]")
+	@FindBy(xpath = "//div[@class='switch-field ng-scope']//label[@class='ng-binding'][contains(text(),'2020 plans')]")
+	private WebElement CurrentYearPlansBtn;
+
+	@FindBy(xpath = "//*[contains(@id, 'GoBtnText')]")
+	private WebElement SelectYearGoBtn;
+
+	@FindBy(xpath = "//input[@class='nextButton']")
+	private WebElement Submit;
 
 	@FindBy(xpath = "//span[contains(text(),'Welcome to Online Enrollment')]")
 	private WebElement welcomeHeader;
@@ -707,34 +739,6 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(css = "div#newProvidersBanner>div")
 	private WebElement numberOfProviders;
 
-	@FindBy(xpath = "//div[contains(@class,'container')]//img[@alt='Rocky Mountain']")
-	private WebElement rockyMountainLogo;
-
-	@FindBy(xpath = "//div[contains(@class,'container')]//img[@alt='Peoples Health']")
-	private WebElement peoplesHealthLogo;
-
-	@FindBy(xpath = "//div[@class='et_pb_text_inner']//h1//strong")
-	private WebElement peoplesHealthPlanName;
-
-	@FindBy(xpath = "//button[contains(@class,'optum_sign_in')]")
-	private WebElement signIn;
-
-	@FindBy(xpath = "//button[contains(@class,'action_attempt_app_retrieval')]")
-	private WebElement submitApplicationBtn;
-
-	@FindBy(xpath = "//label[contains(@for, 'futureYear')]")
-	private WebElement NextYearPlansBtn;
-
-	// @FindBy(xpath = "//*[contains(@for, 'currentYear')]")
-	@FindBy(xpath = "//div[@class='switch-field ng-scope']//label[@class='ng-binding'][contains(text(),'Shop for 2020 plans')]")
-	private WebElement CurrentYearPlansBtn;
-
-	@FindBy(xpath = "//*[contains(@id, 'GoBtnText')]")
-	private WebElement SelectYearGoBtn;
-
-	@FindBy(xpath = "//input[@class='nextButton']")
-	private WebElement Submit;
-
 	public WebElement getValEstimatedAnnualDrugCostValue(String planName) {
 		// WebElement valEstimatedAnnualDrugCostValue =
 		// driver.findElement(By.xpath("//*[contains(text(),'"+planName+"')]/ancestor::div[@class='module-plan-overview
@@ -890,6 +894,16 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			System.out.println("PDP Plan Type Clicked");
 			CommonUtility.waitForPageLoadNew(driver, planListContainer, 30);
 		} else if (planType.equalsIgnoreCase("MA") || planType.equalsIgnoreCase("MAPD")) {
+			int maPlans = Integer.valueOf(maPlansCount.getText().replace(" Plans", ""));
+			if (maPlans == 0) {
+				pdpPlansViewLink.click();
+				sleepBySec(2);
+				CommonUtility.waitForPageLoadNew(driver, planListContainer, 30);
+				handlePlanYearSelectionPopup();
+				sleepBySec(5);
+			} else {
+				System.out.println("MA plans are available");
+			}
 			validateNew(maPlansViewLink, 30);
 			maPlansViewLink.click();
 			sleepBySec(3);
@@ -1193,6 +1207,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	public boolean getSpecificPlanInfo(String planName) throws InterruptedException {
 		boolean isSpecificPlanInfoPresent = false;
+		Thread.sleep(5000);
 		if (planName.contains("SNP")) {
 			// ElementData elementData = new ElementData("id", "viewDetailsMA");
 			Thread.sleep(4000);
@@ -1474,6 +1489,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	public int checkAllMAPlans() {
 		try {
 			Thread.sleep(5000);
+			// waitForPageLoadSafari();
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -1584,6 +1600,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			e.printStackTrace();
 		}
 		maPlansViewLink.click();
+
 		/*
 		 * if(validate(allPlansSize)){ // allPlans =
 		 * Integer.valueOf(allPlansSize.getText().split(" ")[2]); }else{
@@ -1595,24 +1612,37 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		if (validate(maPlansCount)) {
 			// maPlans = Integer.valueOf(maPlansCount.getText());
 		} else {
-			Assert.assertTrue("This scenario is for AEP period", true);
 
+			/*
+			 * if(validate(allPlansSize)){ // allPlans =
+			 * Integer.valueOf(allPlansSize.getText().split(" ")[2]); }else{
+			 * Assert.assertTrue("This scenario is for AEP period", true); }
+			 */
+
+			if (validate(maPlansCount)) {
+				// maPlans = Integer.valueOf(maPlansCount.getText());
+			} else {
+
+				Assert.assertTrue("This scenario is for AEP period", true);
+
+			}
+
+			if (validate(msPlansCount)) {
+				// msPlans = Integer.valueOf(msPlansCount.getText());
+			} else {
+				Assert.assertTrue("This scenario is for AEP period", true);
+
+			}
+
+			if (validate(pdpPlansCount)) {
+				// pdpPlans = Integer.valueOf(pdpPlansCount.getText());
+			} else {
+				Assert.assertTrue("This scenario is for AEP period", true);
+
+			}
+
+			return flag;
 		}
-
-		if (validate(msPlansCount)) {
-			// msPlans = Integer.valueOf(msPlansCount.getText());
-		} else {
-			Assert.assertTrue("This scenario is for AEP period", true);
-
-		}
-
-		if (validate(pdpPlansCount)) {
-			// pdpPlans = Integer.valueOf(pdpPlansCount.getText());
-		} else {
-			Assert.assertTrue("This scenario is for AEP period", true);
-
-		}
-
 		return flag;
 	}
 
@@ -1632,6 +1662,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		} else
 			premiumForPlan = driver.findElement(By.xpath("//a[contains(text(), '" + PlanName
 					+ "')]//ancestor::div[contains(@class,'plan-card')]//ul[@class='benefits-table']/li[1]/span[@class='float-right']/span/span"));
+		scrollToView(premiumForPlan);
 		CommonUtility.waitForPageLoadNew(driver, premiumForPlan, 30);
 		String PlanPremium = premiumForPlan.getText();
 
@@ -1663,6 +1694,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			jsClickNew(enrollForPlan);
 		}
 		CommonUtility.checkPageIsReadyNew(driver);
+		//// checkIfPageReadySafari();
 		CommonUtility.waitForPageLoadNew(driver, NextBtn, 30);
 		if (driver.getCurrentUrl().contains("welcome")) {
 			System.out.println("OLE Welcome Page is Displayed");
@@ -1835,6 +1867,16 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		 * 
 		 * SelectYearGoBtn.click();
 		 */
+
+		// System.out.println("AEP Year Toggle link is displayed on VPP Page :
+		// "+CurrentYearRadio.getText());
+		/*
+		 * System.out.println("*****CLICKING ON NEXT YEAR Radio*****");
+		 * NextYearRadio.click();
+		 * System.out.println("*****CLICKING ON Year Toggle Go button*****");
+		 * SelectYearGoBtn.click();
+		 */
+
 		WebElement CurrentYearLink = driver.findElement(By.xpath("//label[contains(@for, 'currentYear')]"));
 		WebElement NextYearLink = driver.findElement(By.xpath("//label[contains(@for, 'futureYear')]"));
 		System.out.println("Current Year link on VPP Page : " + CurrentYearLink.getText());
@@ -1868,6 +1910,21 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		 * 
 		 * // TODO Auto-generated method stub return null;
 		 */
+
+		/*
+		 * System.out.println("Next Year : "+nextYear);
+		 * System.out.println("Current Year : "+currentYear); WebElement CurrentYearLink
+		 * = driver.findElement(By.xpath("//a[contains(text(), '"+currentYear+"')]"));
+		 * System.out.println("Current Year link on VPP Page : "+CurrentYearLink.getText
+		 * ()); List <WebElement> NextYearHeadings =
+		 * driver.findElements(By.xpath("//*[contains(text(), '"+nextYear+"')]")); if(
+		 * validate(CurrentYearLink) && NextYearHeadings.size()>0){
+		 * System.out.println("Current and Next year toggle displayed for AEP"); return
+		 * new AepVppPlanSummaryPage(driver); } else{
+		 * System.out.println("Current and Next year toggle NOT displayed for AEP"); }
+		 * // TODO Auto-generated method stub return null;
+		 */
+
 	}
 
 	public int checkAllPDPlans() {
@@ -1955,7 +2012,13 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 		CommonUtility.checkPageIsReadyNew(driver);
 		if (countyModal.isDisplayed()) {
-			return new MultiCountyModalPage(driver);
+
+			CommonUtility.checkPageIsReadyNew(driver);
+			if (validate(countyModal, 15)) {
+
+				return new MultiCountyModalPage(driver);
+			}
+			return null;
 		}
 		return null;
 	}
@@ -2306,6 +2369,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		WebElement AnnualDeductibleForPlan = driver.findElement(By.xpath("(//*[contains(text(),\'" + planName
 				+ "\')]/ancestor::div[contains(@class, 'module-plan-overview')]//*[contains(text(), 'Annual Deductible')]/span)[2]"));
 		String planDeductible = AnnualDeductibleForPlan.getAttribute("textContent").trim();
+
 		/*
 		 * try {
 		 * 
@@ -2318,9 +2382,21 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		 */
 		if (annualDeductible.equalsIgnoreCase(planDeductible)) {
 			System.out.println("Annual Deductible for the plan is " + planDeductible);
-			Assert.assertTrue(true);
-		} else
-			Assert.fail("Annual Deductible for the plan is incorrect : " + planName);
+
+			/*
+			 * try { System.out.println(" The text is "
+			 * +AnnualDeductibleForPlan.getAttribute("textContent").trim());
+			 * System.out.println(" The text from feature file is " +annualDeductible); }
+			 * catch (Exception e) { System.out.println(" The text is"
+			 * +AnnualDeductibleForPlan.getText()); }
+			 */
+			if (annualDeductible.equalsIgnoreCase(planDeductible)) {
+				System.out.println("Annual Deductible for the plan is " + planDeductible);
+
+				Assert.assertTrue(true);
+			} else
+				Assert.fail("Annual Deductible for the plan is incorrect : " + planName);
+		}
 	}
 
 	/*
@@ -2341,10 +2417,17 @@ public class VPPPlanSummaryPage extends UhcDriver {
 					+ "\')]/ancestor::div[contains(@class, 'module-plan-overview')]//ul[contains(@class ,'highlight-list')]"));
 			validateNew(marketingBullets);
 		}
+
 		if (planType.equals("PDP")) {
 			WebElement marketingBullets = driver.findElement(By.xpath("(//*[contains(text(),\'" + planName
 					+ "\')]/ancestor::div[contains(@class, 'module-plan-overview')]//ul)[2]"));
-			validateNew(marketingBullets);
+
+			if (planType.equals("PDP")) {
+				WebElement marketingBullet = driver.findElement(By.xpath("(//*[contains(text(),\'" + planName
+						+ "\')]/ancestor::div[contains(@class, 'module-plan-overview')]//ul[@class='ng-scope'])[2]"));
+
+				validateNew(marketingBullets);
+			}
 		}
 
 	}
@@ -2355,11 +2438,26 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	 * 
 	 * }
 	 */
+	/*
+	 * public void toolTipForPremium0(String planName) { WebElement toolTip =
+	 * driver.findElement(By.xpath("//*[contains(text(),\'" + planName +
+	 * "\')]/ancestor::div[contains(@class, 'module-plan-overview')]//descendant :: span[contains(@class, 'standalone')]//*[name()='use']"
+	 * )); WebElement tooltipContent =
+	 * driver.findElement(By.xpath("//*[contains(text(),\'" + planName +
+	 * "\')]/ancestor::div[contains(@class, 'module-plan-overview')]//descendant :: span[contains(@class, 'standalone')]//span"
+	 * ));
+	 */
+
+	/*
+	 * public void validatePrimaryCarePhysicianBenefit (String planName , String
+	 * primaryCarePhysician) { }
+	 */
 	public void toolTipForPremium0(String planName) {
 		WebElement toolTip = driver.findElement(By.xpath("//*[contains(text(),\'" + planName
 				+ "\')]/ancestor::div[contains(@class, 'module-plan-overview')]//descendant :: span[contains(@class, 'standalone')]//*[name()='use']"));
 		WebElement tooltipContent = driver.findElement(By.xpath("//*[contains(text(),\'" + planName
 				+ "\')]/ancestor::div[contains(@class, 'module-plan-overview')]//descendant :: span[contains(@class, 'standalone')]//span"));
+
 		Actions action = new Actions(driver);
 		action.moveToElement(toolTip).build().perform();
 		String toolTipText = tooltipContent.getAttribute("textContent").trim();
@@ -2532,6 +2630,19 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		 * driver.getWindowHandle(); int initialCount =
 		 * driver.getWindowHandles().size(); ChooseAVideo.click();
 		 * 
+		 * waitForCountIncrement(initialCount); ArrayList<String> tabs = new
+		 * ArrayList<String>(driver.getWindowHandles()); String currentHandle = null;
+		 * for (int i = 0; i < initialCount + 1; i++) {
+		 * driver.switchTo().window(tabs.get(i)); currentHandle =
+		 * driver.getWindowHandle(); if (!currentHandle.contentEquals(parentHandle))
+		 * break; }
+		 */
+
+		/*
+		 * validateNew(ChooseAVideo); // CommonUtility.waitForPageLoadNew(driver,
+		 * RightRail_AgentInYourArea, 30); String parentHandle =
+		 * driver.getWindowHandle(); int initialCount =
+		 * driver.getWindowHandles().size(); ChooseAVideo.click();
 		 * waitForCountIncrement(initialCount); ArrayList<String> tabs = new
 		 * ArrayList<String>(driver.getWindowHandles()); String currentHandle = null;
 		 * for (int i = 0; i < initialCount + 1; i++) {
@@ -2928,6 +3039,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		} else if (planType.equalsIgnoreCase("pdp")) {
 			planTypePath = "//div[@ng-show='showPdpPlans']";
 			driver.navigate().refresh();
+			CommonUtility.checkPageIsReady(driver);
+			sleepBySec(5);
 		} else if (planType.equalsIgnoreCase("snp")) {
 			planTypePath = "//div[@ng-show='showSnpPlans']";
 		}
@@ -3383,7 +3496,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		startDrpDwnOption.click();
 		System.out.println("Plan to start date selected");
 		Thread.sleep(2000);
-		ViewPlanMedSupPage.click();
+		// ViewPlanMedSupPage.click();
+		jsClickNew(ViewPlanMedSupPage);
 	}
 
 	public Map<String, String> CapturePreEntryPageInfo(String DateOfBirth) {
@@ -3507,11 +3621,14 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		waitTillElementClickableInTime(Start_ApplicationBtn, 60);
 		jsClickNew(Start_ApplicationBtn);
 		System.out.println("Start application button is clicked on application page");
+		CommonUtility.checkPageIsReadyNew(driver);
+		validate(insuredStatus, 15);
 		waitTillElementClickableInTime(insuredStatus, 60);
 		insuredStatus.click();
 		nextButton.click();
-		validateNew(nextButton);
+		validate(nextButton, 15);
 		jsClickNew(nextButton);
+
 		waitforElementVisibilityInTime(medSuppImpDoc_PlanOverview, 30);
 		nextButton.click();
 		waitforElementVisibilityInTime(medSuppOleAarpCardImg, 30);
@@ -3520,6 +3637,23 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		sendkeysNew(firstName, FirstName);
 		sendkeysNew(lastName, LastName);
 		nextButton.click();
+
+		validate(medSuppImpDoc_PlanOverview, 15);
+		waitforElementVisibilityInTime(medSuppImpDoc_PlanOverview, 30);
+		// nextButton.click();
+		jsClickNew(nextButton);
+		validate(medSuppOleAarpCardImg, 15);
+		waitforElementVisibilityInTime(medSuppOleAarpCardImg, 30);
+		// nextButton.click();
+		jsClickNew(nextButton);
+		validate(firstName, 15);
+		waitforElementVisibilityInTime(firstName, 30);
+		sendkeysNew(firstName, FirstName);
+		sendkeysNew(lastName, LastName);
+		// nextButton.click();
+		jsClickNew(nextButton);
+		validate(address1, 15);
+
 		waitforElementVisibilityInTime(address1, 30);
 		address1.sendKeys("TestAddress1");
 		cityName.sendKeys("TestCity");
@@ -3527,24 +3661,42 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		emailAddress.sendKeys("John_Kerry@test.com");
 		phoneNumber.sendKeys("1234567890");
 		nextButton.click();
-		validateNew(medSuppOleDobHeading);
+		validate(medSuppOleDobHeading, 15);
 		nextButton.click();
+
 		waitforElementVisibilityInTime(medSuppOleHospitalPartA, 30);
 		String ResumeKey = resumeKey.getText();
 		System.out.println("The return to the application code is- " + ResumeKey);
 		cancelButton.click();
+
+		waitforElementVisibilityInTime(medSuppOleHospitalPartA, 30);
+		String ResumeKey1 = resumeKey.getText();
+		System.out.println("The return to the application code is- " + ResumeKey1);
+		// cancelButton.click();
+		validate(cancelButton, 15);
+		jsClickNew(cancelButton);
+
 		CommonUtility.waitForPageLoad(driver, cancelButtonPopUp, 30);
+		validate(cancelButtonPopUp, 15);
 		cancelButtonPopUp.click();
 		System.out.println("Cancel application has been clicked on the pop up");
-		return ResumeKey;
+		return ResumeKey1;
 	}
 
 	public void ResumeApplicationButton(String DateOfBirth) throws InterruptedException {
 		Thread.sleep(5000);
+
 		// String DateOfBirth ="11/13/1940";
 		// MedSupFormValidation(DateOfBirth);
 		// waitTillElementClickableInTime(Start_ApplicationBtn, 60);
 		// jsClickNew(Start_ApplicationBtn);
+
+		// String DateOfBirth ="11/13/1940";
+		// MedSupFormValidation(DateOfBirth);
+		// waitTillElementClickableInTime(Start_ApplicationBtn, 60);
+		// jsClickNew(Start_ApplicationBtn);
+		//// checkIfPageReadySafari();
+
 		CommonUtility.waitForPageLoadNew(driver, resumeApplication, 30);
 		resumeApplication.click();
 		System.out.println("Resume application link clicked successfully");
@@ -3716,12 +3868,32 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			if (validate(CurrentYearPlansBtn, 20)) {
 				System.out.println("*****CLICKING ON Current Year button*****: " + CurrentYearPlansBtn.getText());
 				jsClickNew(CurrentYearPlansBtn);
+
+				CommonUtility.checkPageIsReadyNew(driver);
+				if (planYear.equalsIgnoreCase("current")) { // if the scenario is for current year
+					if (validate(CurrentYearPlansBtn, 20)) {
+						System.out
+								.println("*****CLICKING ON Current Year button*****: " + CurrentYearPlansBtn.getText());
+						jsClickNew(CurrentYearPlansBtn);
+					}
+				}
+				// waitForPageLoadSafari();
+				CommonUtility.checkPageIsReadyNew(driver);
 			}
 		}
 		/*
 		 * CommonUtility.checkPageIsReadyNew(driver); if(planYear.contains("current") &&
 		 * validate(CurrentYearPlansBtn, 20)) { // if the scenario is for current year
 		 * //if(validate(NextYearPlansBtn, 20)) {
+		 * System.out.println("*****CLICKING ON Current Year button*****: "
+		 * +CurrentYearPlansBtn.getText()); jsClickNew(CurrentYearPlansBtn); } else{
+		 * //if(validate(NextYearPlansBtn, 20)) {
+		 * System.out.println("*****CLICKING ON Current Year button*****: "
+		 * +NextYearPlansBtn.getText()); jsClickNew(NextYearPlansBtn);
+		 * 
+		 * } } /* CommonUtility.checkPageIsReadyNew(driver);
+		 * if(planYear.contains("current") && validate(CurrentYearPlansBtn, 20)) { // if
+		 * the scenario is for current year //if(validate(NextYearPlansBtn, 20)) {
 		 * System.out.println("*****CLICKING ON Current Year button*****: "
 		 * +CurrentYearPlansBtn.getText()); jsClickNew(CurrentYearPlansBtn); } else{
 		 * //if(validate(NextYearPlansBtn, 20)) {
@@ -3829,6 +4001,24 @@ public class VPPPlanSummaryPage extends UhcDriver {
 				jsClickNew(CurrentYearPlansBtn);
 				validateNew(AARPlogo, 10);
 			}
+
+			if (validate(planYearPopup, 20)) { // if plan year popup is displayed
+				System.out.println("Popup is present for AEP : ");
+				if (validate(currentYearSelection)) {
+					currentYearSelection.click();
+				}
+				// waitForPageLoadSafari();
+				validateNew(planYearPopupGoButton);
+				planYearPopupGoButton.click();
+			} else { // if the plan year popup is not displayed
+				if (validate(CurrentYearPlansBtn, 20)) {
+					System.out.println("*****CLICKING ON Current Year button*****: " + CurrentYearPlansBtn.getText());
+					jsClickNew(CurrentYearPlansBtn);
+					// waitForPageLoadSafari();
+					validateNew(AARPlogo, 10);
+				}
+
+			}
 		}
 	}
 
@@ -3872,10 +4062,17 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	public void clickOnViewMoreForPlan(String planName) {
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+
 		List<WebElement> viewMoreLink = driver.findElements(By.xpath("//*[contains(text(),'" + planName
 				+ "')]//ancestor::div[contains(@class, 'plan-card')]//a[@class='accordion-arrow collapsed']"));
 		if (viewMoreLink.size() > 0) // if it finds the that the View More is shown then it will click on it
 			viewMoreLink.get(0).click();
+
+		// waitForPageLoadSafari();
+		List<WebElement> viewMoreLink1 = driver.findElements(By.xpath("//*[contains(text(),'" + planName
+				+ "')]//ancestor::div[contains(@class, 'plan-card')]//a[@class='accordion-arrow collapsed']"));
+		if (viewMoreLink1.size() > 0) // if it finds the that the View More is shown then it will click on it
+			viewMoreLink1.get(0).click();
 
 	}
 
@@ -4001,6 +4198,33 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		}
 	}
 
+	public ArrayList<String> providerinforetreive(String planName){
+			CommonUtility.checkPageIsReadyNew(driver);
+			try {
+				Thread.sleep(2000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			WebElement ProviderSearchLink = driver.findElement(By.xpath("//*[contains(text(),'" + planName
+					+ "')]/ancestor::div[contains(@class, 'module-plan-overview module')]//*[contains(@class,'provider-list added')]"));
+			String mproviderinfo=ProviderSearchLink.getText();
+			System.out.println(mproviderinfo);
+	        ProviderSearchLink.click();
+	        ArrayList<String> providerNames = new ArrayList<String>();
+			List<WebElement> providers = driver.findElements(By.xpath("//*[contains(text(),'" + planName
+					+ "')]/ancestor::div[contains(@class, 'module-plan-overview module')]//*[contains(@class,'provider-list added')]//div[@class='providers-list']//ul//li//span"));
+			for(WebElement element:providers)
+			{
+				String providername = element.getText();
+				providerNames.add(providername);
+			}
+			
+			return providerNames;
+
+		}
+	
+
 	public boolean druginfo(String planName) {
 
 		WebElement EdidrugLink = driver.findElement(By.xpath("//*[contains(text(),'" + planName
@@ -4008,12 +4232,29 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		String mpdruginfo = EdidrugLink.getText();
 		System.out.println(mpdruginfo);
 		if (mpdruginfo.toLowerCase().contains("drugs covered")) {
-			return true;
+			return true;}
+		return false;}
+
+		//
+/*		public void setStringList(ArrayList<String> stringList) {
+			
+		    this.stringList = stringList;
+
 		}
+
 		return false;
 	}
 
 	public ArrayList<String> providerinforetreive(String planName) {
+
+		
+		public ArrayList<String> getStringList() {
+		    return stringList;
+		}*/
+
+/*	public void setMap(Map<String, ArrayList<String>> dataMap) {
+
+		this.dataMap = dataMap;
 
 		try {
 			Thread.sleep(2000);
@@ -4035,7 +4276,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		}
 
 		return providerNames;
-	}
+	}*/
 	//
 	/*
 	 * public void setStringList(ArrayList<String> stringList) {
@@ -4506,6 +4747,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	public void signInOptumId(String username, String password) {
 		try {
 
+			//// checkIfPageReadySafari();
+
 			signIn.click();
 			driver.findElement(By.cssSelector("input#userNameId_input")).sendKeys(username);
 			driver.findElement(By.cssSelector("input#passwdId_input")).sendKeys(password);
@@ -4534,7 +4777,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	public void RetrieveURL(String ExpectedsupplementURL) {
 
 		CommonUtility.waitForPageLoad(driver, Submit, 20);
+		validate(Submit, 15);
 		Submit.click();
+		CommonUtility.checkPageIsReadyNew(driver);
 		String CurrentSupplementURL = driver.getCurrentUrl();
 		System.out.println(
 				"Submit application button has been clicked successfully after entering the data on resume application page : "

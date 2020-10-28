@@ -16,7 +16,7 @@ public class PrepareForNextYearGroup extends PrepareForNextYearBase {
 	protected static final String m2="10/01/";
 	protected static final String m3="10/15/";
 	protected static final String m4="12/07/";
-	
+
 	protected static String cookiePlnDocsSection="reviewPlandocuments_grp";
 	protected static String cookiePlnDocsSection_revPlnChg="anoc_group";
 	protected static String cookiePharInfoSection="reviewplanId";
@@ -34,7 +34,7 @@ public class PrepareForNextYearGroup extends PrepareForNextYearBase {
 
 
 
-	public List<String> validateReviewPlanDocumentsSection_grp(String planType, String memberType, Date currentDate, HashMap<String, Boolean> docDisplayMap) {
+	public List<String> validateReviewPlanDocumentsSection_grp(String planType, String memberType, Date currentDate, HashMap<String, Boolean> docDisplayMap, boolean sanityRun) {
 		List<String> note=new ArrayList<String>();
 		String section="Review plan documents";
 		String targetItem=section+" - section";
@@ -62,29 +62,34 @@ public class PrepareForNextYearGroup extends PrepareForNextYearBase {
 		targetElement=grp_reviewPlanDocs_docSection;
 		note.addAll(validateHaveItem(targetItem, targetElement));
 
-		note.addAll(validateLanguageDropdown(section, grp_reviewPlanDocs_docSection_langDropdown, grp_reviewPlanDocs_lang_en, grp_reviewPlanDocs_lang_es, grp_reviewPlanDocs_lang_zh));
+		note.addAll(validateLanguageDropdown(section, grp_reviewPlanDocs_docSection_langDropdown, grp_reviewPlanDocs_lang_en, grp_reviewPlanDocs_lang_es, grp_reviewPlanDocs_lang_zh, sanityRun));
 
-		note.addAll(validateReviewPlanChangesSection(section, planType, memberType, currentDate, docDisplayMap));
+		note.addAll(validateReviewPlanChangesSection(section, planType, memberType, currentDate, docDisplayMap, sanityRun));
 
 		if (planType.equalsIgnoreCase("MAPD") || planType.equalsIgnoreCase("PDP")) {
 			System.out.println("TEST - planType='"+planType+"' - Proceed to validate 'Review pharmacy information for next year' section");
-			note.addAll(validateReviewPharmacyInfo(planType, memberType, currentDate, docDisplayMap));
+			note.addAll(validateReviewPharmacyInfo(planType, memberType, currentDate, docDisplayMap, sanityRun));
 		} else {
 			System.out.println("TEST - planType='"+planType+"' - Proceed to validate NO 'Review pharmacy information for next year' section");
 			note.addAll(validateNoReviewPharmacyInfo());
 		}
 
-		//note: after link click, section circle should turn green
-		note.add("\n\tValidate after all subsection links turned green");
-		targetItem=section+" - green circle";
-		targetElement=grp_reviewPlanDocs_circle_green;
-		note.addAll(validateHaveItem(targetItem, targetElement));
-
+		if (!sanityRun) {
+			//note: after link click, section circle should turn green
+			note.add("\n\tValidate after all subsection links turned green");
+			targetItem=section+" - green circle";
+			targetElement=grp_reviewPlanDocs_circle_green;
+			note.addAll(validateHaveItem(targetItem, targetElement));
+		}
 		return note;		
 
 	}
 
-	public List<String> validateReviewPlanChangesSection(String section, String planType, String memberType, Date currentDate, HashMap<String, Boolean> docDisplayMap) {
+	public List<String> validateReviewPlanChangesSection(String section, String planType, String memberType, Date currentDate, HashMap<String, Boolean> docDisplayMap, boolean sanityRun) {
+		boolean expPlnChgLangDropdown_en=docDisplayMap.get("expPlnChgLangDropdown_en");
+		boolean expPlnChgLangDropdown_es=docDisplayMap.get("expPlnChgLangDropdown_es");
+		boolean expPlnChgLangDropdown_zh=docDisplayMap.get("expPlnChgLangDropdown_zh");
+
 		System.out.println("Proceed to validate Review plan documents - Review your plan changes for next year section content...");
 		List<String> note=new ArrayList<String>();
 		note.add("\t=================");
@@ -112,21 +117,21 @@ public class PrepareForNextYearGroup extends PrepareForNextYearBase {
 		WebElement subSecChkmrkgreen1=grp_revPlnDocsSec_plnChngSec_checkMark_green;
 		WebElement subSecChkmrkgreen2=null;
 		boolean willDeleteCookie=false;
-		note.addAll(validatePdInSubSection(planType, 
+		note.addAll(validatePdfInSubSection(planType, 
 				docDisplayMap, 
 				section, subSection, 
 				docName, targetLang, 
 				langDropdownElement1, langDropdown1_targetLangOptionElement, 
-				langDropdownElement2, 
+				langDropdownElement2, expPlnChgLangDropdown_en,
 				pdfElement, arrowAftPdfElement, svgAftPdfElement, 
 				subSecCookie, subSecChkmrkgreen1, subSecChkmrkgreen2,
-				willDeleteCookie));
+				willDeleteCookie, sanityRun));
 
 		note.add("\n\tValidate after cookie remove for '"+subSection+"' subSection cookie");
 		deleteCookieAndReloadPgn(cookiePlnDocsSection_revPlnChg);
 		targetElement=grp_revPlnDocsSec_plnChngSec_checkMark_green;
 		note.addAll(validateDontHaveItem(targetItem, targetElement));
-		
+
 		note.add("\n\tValidate after cookie remove for '"+section+"' section cookie");
 		deleteCookieAndReloadPgn(cookiePlnDocsSection);
 		targetElement=grp_revPlnDocsSec_plnChngSec_checkMark_green;
@@ -146,18 +151,18 @@ public class PrepareForNextYearGroup extends PrepareForNextYearBase {
 		subSecChkmrkgreen1=grp_revPlnDocsSec_plnChngSec_checkMark_green;
 		subSecChkmrkgreen2=null; //note: some section has inconsistent way to locate the green chkmrk xpath...
 		willDeleteCookie=false;
-		note.addAll(validatePdInSubSection(planType, 
+		note.addAll(validatePdfInSubSection(planType, 
 				docDisplayMap, 
 				section, subSection, 
 				docName, targetLang, 
 				langDropdownElement1, langDropdown1_targetLangOptionElement, 
-				langDropdownElement2, 
+				langDropdownElement2, expPlnChgLangDropdown_en,
 				pdfElement, arrowAftPdfElement, svgAftPdfElement, 
 				subSecCookie, subSecChkmrkgreen1, subSecChkmrkgreen2,
-				willDeleteCookie));
+				willDeleteCookie, sanityRun));
 		return note;
 	}
-	
+
 	public List<String> validateNoReviewPharmacyInfo() {
 		System.out.println("Proceed to validate NO Pharmacy section content...");
 		List<String> note=new ArrayList<String>();
@@ -169,7 +174,7 @@ public class PrepareForNextYearGroup extends PrepareForNextYearBase {
 		return note;
 	}
 
-	public List<String> validateReviewPharmacyInfo(String planType, String memberType, Date currentDate, HashMap<String, Boolean> docDisplayMap) {
+	public List<String> validateReviewPharmacyInfo(String planType, String memberType, Date currentDate, HashMap<String, Boolean> docDisplayMap, boolean sanityRun) {
 		System.out.println("Proceed to validate Pharmacy section content...");
 		List<String> note=new ArrayList<String>();
 		note.add("\t=================");
@@ -201,14 +206,15 @@ public class PrepareForNextYearGroup extends PrepareForNextYearBase {
 		targetElement=grp_reviewPharInfo_docSection;
 		if (showSection) {
 			note.addAll(validateHaveItem(targetItem, targetElement));
-			
+
 			targetItem=section+" - Find a Pharmacy";
 			targetElement=grp_revPlnDocsSec_pharInfoSec_pharSrchLnk;
 			note.addAll(validateHaveItem(targetItem, targetElement));
-			String expUrl="/member/pharmacy-locator/overview.html";
-			WebElement expElement=pharmacyHeader;
-			note.addAll(validateLnkBehavior(planType, memberType, targetItem, targetElement, expUrl, expElement));
-
+			if (!sanityRun) {
+				String expUrl="/member/pharmacy-locator/overview.html";
+				WebElement expElement=pharmacyHeader;
+				note.addAll(validateLnkBehavior(planType, memberType, targetItem, targetElement, expUrl, expElement));
+			}
 			//note: this arrow xpath is not the same between team-atest and stage...check for both 
 			targetItem=section+" - arrow after Find a Pharmacy link";
 			targetElement=grp_revPlnDocsSec_pharInfoSec_pharSrchLnk_arrow;
@@ -226,14 +232,13 @@ public class PrepareForNextYearGroup extends PrepareForNextYearBase {
 			targetElement=grp_revPlnDocsSec_pharInfoSec_pharSrchLnk_svg;
 			note.addAll(validateHaveItem(targetItem, targetElement));
 
-			//note: after link click, section circle should turn green
-			note.add("\n\tValidate after link clicked, circle turned green");
-			targetItem=section+" - green circle";
-			targetElement=grp_reviewPharInfo_circle_green;
-			note.addAll(validateHaveItem(targetItem, targetElement));
-
-			
-
+			if (!sanityRun) {
+				//note: after link click, section circle should turn green
+				note.add("\n\tValidate after link clicked, circle turned green");
+				targetItem=section+" - green circle";
+				targetElement=grp_reviewPharInfo_circle_green;
+				note.addAll(validateHaveItem(targetItem, targetElement));
+			}
 		} else {
 			if (validateAsMuchAsPossible) {
 				if (!noWaitValidate(targetElement))

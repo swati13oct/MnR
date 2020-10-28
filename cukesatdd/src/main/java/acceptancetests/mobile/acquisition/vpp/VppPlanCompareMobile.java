@@ -774,11 +774,12 @@ public class VppPlanCompareMobile {
 	}
 
 	/**
+	 * @throws InterruptedException 
 	 * @toDo:user view plan details of the above selected plan in AARP site and
 	 *            validates
 	 */
 	@When("^the user view plan details of the above selected plan in AARP site and validates$")
-	public void user_views_plandetails_selected_plan_aarp(DataTable givenAttributes) {
+	public void user_views_plandetails_selected_plan_aarp(DataTable givenAttributes) throws InterruptedException {
 		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		String PlanName = memberAttributesRow.get(0).getCells().get(1);
 		getLoginScenario().saveBean(VPPCommonConstants.PLAN_NAME, PlanName);
@@ -2478,7 +2479,7 @@ public class VppPlanCompareMobile {
 		String PDFtype = memberAttributesMap.get("PDF type");
 
 		String DocumentCode = memberAttributesMap.get("DocumentCode");
-		boolean validationFlag = vppPlanDetailsPage.ClickValidatePDFlink(PDFtype, DocumentCode);
+		boolean validationFlag = vppPlanDetailsPage.ClickValidatePDFlinkMobile(PDFtype, DocumentCode);
 		Assert.assertTrue("Validation failed : Expected Document Code is not Present in the PDF URL ", validationFlag);
 
 	}
