@@ -310,8 +310,6 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 		} else {
 			String expedYearText=currentYear;
 			String testPath=curYr_xpath;
-			if (planDocValidate(testPath))
-				sleepBySec(5);  //note: in case it takes time for the item to disappear on page
 			Assert.assertTrue("PROBLEM - UI is showing current year '"+expedYearText+"' sub-section in section '"+section+"', input expect not to see it",!planDocValidate(testPath));
 		}
 		if (doc_en_nxtYr) {
