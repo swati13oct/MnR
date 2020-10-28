@@ -298,10 +298,11 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 		//note: validate number of sections
 		String currentYear=yearsMap.get("currentYear");
 		String nextYear=yearsMap.get("nextYear");
-
 		boolean doc_en_curYr=expectedDocTypeDisplayMap.get("doc_en_curYr");
 		boolean doc_en_nxtYr=expectedDocTypeDisplayMap.get("doc_en_nxtYr");
-
+		if (!doc_en_curYr && !doc_en_curYr) {
+			sleepBySec(2);
+		}
 		if (doc_en_curYr) {
 			String expedYearText=currentYear;
 			String testPath=curYr_xpath;
