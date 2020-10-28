@@ -1603,6 +1603,9 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	protected WebElement BackButtonOnPharmacyLocatorPageByRally;
 
 	@FindBy(xpath = "//div[contains(@data-testid,'header__icon__left')]/button")
+	protected WebElement backButtonOnRemove;
+
+	@FindBy(xpath = "//button[contains(@title,'Go back to Get Pricing')]")
 	protected WebElement backButton;
 
 	@FindBy(xpath = "//button[@data-component='SearchBarSubmitButton']")
