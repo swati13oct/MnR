@@ -612,7 +612,7 @@ Feature: 1.01 Member  benefits and Coverage page
     #And the user validates Needhelp section
     And the user clicks on More Information link
     And the user validates contactus section
-@abc
+
     Examples: 
       | TID   | planType | memberType | copayCategory | SummaryofBenefits   | EvidenceofCoverage   | ComprehensiveFormularyDrug List |
       | 15247 | MAPD     | Group_BnC  | LIS 4         | Summary Of Benefits | Evidence of Coverage | Comprehensive Formulary         |
