@@ -1922,7 +1922,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	public boolean openPRE() {
 		boolean offline_prod = false;
-		String browser = MRScenario.browsername;
+		String browser = MRScenario.browserName;
 		if (!(MRScenario.getProps() == null)) {// If running from local
 			if (MRScenario.environment.equalsIgnoreCase("digital-uatv2-aarp")) {
 				startNewPRE(AARP_ACQISITION_PAGE_URL.replace("digital-uatv2-aarp", "digital-uatv2")
