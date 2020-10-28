@@ -1193,7 +1193,7 @@ try {
      */
     public boolean waitForPageLoadSafari() {
     	boolean ready = false;
-    	if(MRScenario.browsername.equalsIgnoreCase("Safari")) {
+    	if(MRScenario.browserName.equalsIgnoreCase("Safari")) {
     		//Sets FluentWait Setup
     		List<WebElement> loadingScreen = null;
     		FluentWait<WebDriver> fwait = new FluentWait<WebDriver>(driver)
