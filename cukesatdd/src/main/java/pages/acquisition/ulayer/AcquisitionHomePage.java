@@ -235,23 +235,14 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(id = "gbqfbb")
 	private WebElement feelingluckyBtn;
 
-	@FindBy(xpath = "//*[@class='container meded-article-header']//span[contains(text(),'About UnitedHealthcare')]")
-	public WebElement aboutUsHeader;
-	
-	@FindBy(xpath = "//span[contains(@class,'heading')]/parent::h1")
-	public WebElement contactUsHeader;
+	@FindBy(xpath = "//tr[@id='contentRow']//h1")
+	public WebElement footerLinkHeader;
 	
 	@FindBy(id = "medicareTitle")
 	public WebElement siteMapHeader;
 
 	@FindBy(xpath = "//*[contains(@dtmname,'Privacy')]//*[contains(text(),'Privacy Policy')]")
 	public WebElement privacyHeader;
-
-	@FindBy(xpath = "//*[@class='container meded-article-header']//span[contains(text(),'Terms of Use')]")
-	public WebElement termsOfUseHeader;
-	
-	@FindBy(xpath = "//*[@class='container meded-article-header']//span[contains(text(),'Disclaimers')]")
-	public WebElement disclaimersHeader;
 	
 	@FindBy(xpath = "//*[@class='container meded-article-header']//span[contains(text(),'Health Insurance Broker')]")
 	public WebElement brokerHeader;
@@ -1268,11 +1259,10 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	public AboutUsAARPPage aboutUsFooterClick() {
 		validateNew(footerAboutUsLink);
-//		footerAboutUsLink.click();
 		scrollToView(footerAboutUsLink);
 		jsClickNew(footerAboutUsLink);
 		CommonUtility.checkPageIsReadyNew(driver);
-		validateNew(aboutUsHeader, 30);
+		validateNew(footerLinkHeader, 30);
 		if (getTitle().contains("About UnitedHealthcare")) {
 			return new AboutUsAARPPage(driver);
 		}
@@ -1304,9 +1294,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		validateNew(footerContactUsLink);
 		scrollToView(footerContactUsLink);
 		jsClickNew(footerContactUsLink);
-//		footerContactUsLink.click();
 		CommonUtility.checkPageIsReadyNew(driver);
-		validateNew(contactUsHeader);
+		validateNew(footerLinkHeader);
 		if (driver.getCurrentUrl().contains("contact-us")) {
 			return new ContactUsAARPPage(driver);
 		}
@@ -1315,7 +1304,6 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	public SiteMapAARPPage siteMapFooterClick() {
 		validateNew(footerSiteMapLink);
-//		footerSiteMapLink.click();
 		scrollToView(footerSiteMapLink);
 		jsClickNew(footerSiteMapLink);
 		CommonUtility.checkPageIsReadyNew(driver);
@@ -1328,7 +1316,6 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	public PrivacyPolicyAARPPage privacypolicyFooterClick() {
 		validateNew(footerPrivacyPolicyLink);
-//		footerPrivacyPolicyLink.click();
 		scrollToView(footerPrivacyPolicyLink);
 		jsClickNew(footerPrivacyPolicyLink);
 		CommonUtility.checkPageIsReadyNew(driver);
@@ -1341,11 +1328,10 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	public TermsnConditionsAARPPage termsnconditionsFooterClick() {
 		validate(footerTermsnConditionsLink);
-//		footerTermsnConditionsLink.click();
 		scrollToView(footerTermsnConditionsLink);
 		jsClickNew(footerTermsnConditionsLink);
 		CommonUtility.checkPageIsReadyNew(driver);
-		validateNew(termsOfUseHeader);
+		validateNew(footerLinkHeader);
 		if (driver.getCurrentUrl().contains("terms-of-use")) {
 			return new TermsnConditionsAARPPage(driver);
 		}
@@ -1354,11 +1340,10 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	public DisclaimersAARPPage disclaimersFooterClick() {
 		validate(footerDisclaimersLink);
-//		footerDisclaimersLink.click();
 		scrollToView(footerDisclaimersLink);
 		jsClickNew(footerDisclaimersLink);
 		CommonUtility.checkPageIsReadyNew(driver);
-		validateNew(disclaimersHeader);
+		validateNew(footerLinkHeader);
 		if (driver.getCurrentUrl().contains("disclaimer")) {
 			return new DisclaimersAARPPage(driver);
 		}
@@ -1367,7 +1352,6 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	public AgentsnBrokersAARPPage agentsnbrokersFooterClick() {
 		validate(footerAgentsnBrokersLink);
-//		footerAgentsnBrokersLink.click();
 		scrollToView(footerAgentsnBrokersLink);
 		jsClickNew(footerAgentsnBrokersLink);
 		CommonUtility.checkPageIsReadyNew(driver);
