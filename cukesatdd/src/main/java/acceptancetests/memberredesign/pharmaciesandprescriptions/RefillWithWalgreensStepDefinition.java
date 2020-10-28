@@ -9,6 +9,7 @@ import gherkin.formatter.model.DataTableRow;
 import org.springframework.beans.factory.annotation.Autowired;
 import pages.regression.pharmaciesandprescriptions.PharmaciesAndPrescriptionsPage;
 
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,6 +17,9 @@ import java.util.Map;
 public class RefillWithWalgreensStepDefinition {
 
 	private static String activeMedicineName;
+	public static List<Object> listOfMedicationDetail = new ArrayList<>();
+	public static String MedicationName = "";
+	public static String MedicatioNameToBeSearchedOnP_P;
 
 	@Autowired
 	MRScenario loginScenario;
@@ -48,10 +52,35 @@ public class RefillWithWalgreensStepDefinition {
 	@When("^user has a Walgreens drug without store numbers$")
 	public void user_has_a_Walgreens_drug_without_store_numbers() throws Throwable {
 
+
 		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
 		pnpPg.validateWalgreensDrugWithoutStoreNumbers();
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
+
+
+	}
+
+	@When("^user has a Walgreens drug without store numbers on My Medications page$")
+	public void user_has_a_Walgreens_drug_without_store_numbers_on_My_Medications_page() throws Throwable {
+
+		/*
+		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
+				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
+		pnpPg.validateWalgreensDrugWithoutStoreNumbers();
+		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
+     */
+		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
+				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
+		List<Integer> indexOfWalgreensWithoutNumber = pnpPg.getListOfIndexForWalgreensWithoutNumberOnMyMed();
+		while (indexOfWalgreensWithoutNumber.size() == 0) {
+			pnpPg.clickOnNextPageArrow();
+			indexOfWalgreensWithoutNumber = pnpPg.getListOfIndexForWalgreensWithoutNumberOnMyMed();
+		}
+		System.out.println("Validating walgreens without pharmcy number element");
+		pnpPg.validateWalgreensWithoutStoreNumbers();
+		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
+
 
 	}
 

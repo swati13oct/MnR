@@ -125,7 +125,7 @@ Feature: MVP - Call to Action
       | Member Type | <memberType> |
     When user navigates to the pharmacies and prescriptions page from testharness page
     And user clicks View all medications link to view the My Medications page
-    When user has a Walgreens drug without store numbers
+    When user has a Walgreens drug without store numbers on My Medications page
     Then user sees the contact pharmacy button if it has no store number
 
 
