@@ -1428,7 +1428,7 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 
 	// walgreens related
 
-	@FindBy(xpath = "//button[@data-testid='medication-action-refill']/ancestor::div[@data-testid]//div[@data-testid='walgreens']")
+	@FindBy(xpath = "//div[contains(@data-testid,'medication-data-pharmacy-name')]")
 	protected List<WebElement> walgreens;
 
 	@FindBy(xpath = "//*[contains(@data-testid,'csa__address__successMessage')]")
@@ -1633,7 +1633,6 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	
 	@FindBy(xpath = "//a[@data-testid='medication-action-refill']/ancestor::div[@data-testid]//*[@data-testid='medication-data-name']")
 	protected List<WebElement> listOfMedicationEligibleFrRefill;
-	
 	@FindBy(xpath = "//a[@data-testid='medication-action-renew']/ancestor::div[@data-testid]//*[@data-testid='medication-data-name']")
 	protected List<WebElement> listOfMedicationEligibleFrRenew;
 
