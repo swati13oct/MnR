@@ -30,6 +30,8 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import gherkin.formatter.model.DataTableRow;
+import pages.acquisition.dceredesign.DrugDetailsPage;
+import pages.acquisition.dceredesign.GetStartedPage;
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.pharmacyLocator.PharmacySearchPage;
 import pages.acquisition.tfn.CampaignTFNPage;
@@ -3880,6 +3882,28 @@ public void the_user_validates_the_secondary_search_by_providing_newsearchvalue_
 		VisitorProfilePage visitorProfile = (VisitorProfilePage) getLoginScenario()
 				.getBean(PageConstants.VISITOR_PROFILE_PAGE);
 		visitorProfile.validateVisitorProfilePageDisplayed();
+	}
+	
+	@Then("^user changes the new zipcode on vpp summary page$")
+	public void user_changes_the_new_zipcode_on_vpp_summary_page(DataTable givenAttributes) {
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+
+		Map<String, String> memberAttributesMap = prepareTestInput(givenAttributes);
+		String zipCode = memberAttributesMap.get("New Zip Code");
+		
+		plansummaryPage.enternewZip(zipCode);
+	}
+	@Then("^user navigate to Drug Summary page$")
+	public void user_navigate_to_Drug_Summary_page() {
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		
+		DrugDetailsPage drugDetails= plansummaryPage.clickonDrugSummary();
+		if (null != drugDetails) {
+			getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetails);
+		} else
+			Assert.fail("DCE Redesign page object not loaded");		
 	}
 	
 	@And("^user click on view saved plans button on AARP site$")

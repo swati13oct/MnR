@@ -591,6 +591,14 @@ public class DCEStepDefinitionAARP {
 		String PlanName = (String) getLoginScenario().getBean(DCERedesignCommonConstants.PLANNAME);
 		drugDetailsPage.validatePlanName(PlanName);
 	}
+	
+	@Then("^user save the plan on drug detail page$")
+	public void user_save_the_plan_on_drug_detail_page () throws Throwable {
+		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario()
+				.getBean(PageConstants.DCE_Redesign_DrugDetails);
+
+		drugDetailsPage.savePlan();
+	}
 
 	@Then("^the user verify the drug cost estimator and view plan summary on VPP detail page in AARP$")
 	public void the_user_verify_the_drug_cost_estimator() throws Throwable {
@@ -1069,7 +1077,7 @@ public class DCEStepDefinitionAARP {
 		} else
 			Assert.fail("DCE Redesign page object not loaded");
 	}
-
+	
 	@When("^user clicks on Back to profile button$")
 	public void user_clicks_on_Back_to_profile_button() {
 		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);

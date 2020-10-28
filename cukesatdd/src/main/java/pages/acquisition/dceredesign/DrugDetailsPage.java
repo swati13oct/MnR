@@ -244,6 +244,16 @@ public class DrugDetailsPage extends UhcDriver {
 		else
 		Assert.fail("Plan Name validation Failed for Drug Details Page");
 	}
+	
+	@FindBy(xpath = "//*[@class='uhc-button__text'][text()='Save ']")
+	public WebElement saveBtn;
+	@FindBy(xpath = "//*[@class='uhc-button__text'][text()='Saved ']")
+	public WebElement savedBtn;
+	public void savePlan() {
+		validate(saveBtn);
+		saveBtn.click();
+		validate(savedBtn);
+	}
 
 	public void validateDrugCosts() {
 		validateNew(DrugDetails_DrugCostsHeading);

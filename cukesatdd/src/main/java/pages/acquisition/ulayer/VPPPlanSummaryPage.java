@@ -37,6 +37,7 @@ import acceptancetests.data.MRConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
+import pages.acquisition.dceredesign.DrugDetailsPage;
 import pages.acquisition.dceredesign.GetStartedPage;
 import pages.acquisition.isdecisionguide.IsDecisionGuideStep1;
 import pages.acquisition.isinsuranceagent.IsInsuranceAgent;
@@ -725,6 +726,12 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		
 		@FindBy(xpath = "//label[contains(@for, 'futureYear')]")
 		private WebElement  NextYearPlansBtn;
+		
+		@FindBy(xpath = "//*[@class='drug-list-toggle accordion-arrow drug-list-title collapsed ng-binding']")
+		private WebElement drugInfo;
+		
+		@FindBy(xpath = "//a[text()='Drug Summary']")
+		private WebElement drugSummaryBtn;
 		
 		//@FindBy(xpath = "//*[contains(@for, 'currentYear')]")
 //		@FindBy(xpath = "//div[@class='switch-field ng-scope']//label[@class='ng-binding'][contains(text(),'Shop for 2020 plans')]")
@@ -4384,9 +4391,28 @@ for (int i = 0; i < initialCount + 1; i++) {
 			System.out.println("NBA modal not found");
 		}
 	}
-	
+	public void enternewZip(String zipCode) {
+		ChangeLocationLink.click();
+		validate(ZipCodeTxtBx);
+		ZipCodeTxtBx.click();
+		ZipCodeTxtBx.clear();
+		ZipCodeTxtBx.sendKeys(zipCode);
+		validate(FIndPlansButton);
+		FIndPlansButton.click();
+		
+		CommonUtility.checkPageIsReadyNew(driver);
+	}
 	public void clickSavedItems() {
 		viewSavedItems.click();
+	}
+	public DrugDetailsPage clickonDrugSummary() {
+		validate(drugInfo);
+		drugInfo.click();		
+		validate(drugSummaryBtn);
+		drugSummaryBtn.click();	
+		if (validateNew(driver.findElement(By.id("changePharmacyLink"))))
+			return new DrugDetailsPage(driver);
+		return null;
 	}
 	
 	/**
