@@ -91,7 +91,7 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth
 
     Examples: 
       | TID   |username  | password  | MemUserName | planType | memberType       |
-      | 15088 |qavgogine | qavgogine |ucpaarpmapd01| MAPD     | memberWithoutProviderTiering_BnC |
+      | 15088 |qavgogine | qavgogine |q3_Sep_FedANOC_033| MAPD     | memberWithoutProviderTiering_BnC |
       
       #TC07_Copay_Coinsurance_in_DrugCostsTable
   @benefitsAndCoverage11 @CopayCoinsuranceInDrugCostTable @regression @BnC_Part2_memAuth @deprecated
@@ -673,7 +673,7 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth
 
     Examples: 
       | TID   | username |password  |MemUserName    |planType |memberType | copayCategory | SummaryofBenefits   | EvidenceofCoverage   | ComprehensiveFormularyDrug List |
-      | 15247 |qavgogine | qavgogine|q2_jun_grp0019 | MAPD    |Group_BnC  | LIS 4         |Summary Of Benefits  |Evidence of Coverage  | Comprehensive Formulary         |
+      | 15247 |qavgogine | qavgogine|q3_sep_UAT4_Group075 | MAPD    |Group_BnC  | LIS 4         |Summary Of Benefits  |Evidence of Coverage  | Comprehensive Formulary         |
 
   #TC26_Group members_PDP_LIS(1,2)
   @memAuth_benefitsAndCoverage2 @BnC_Part6_memAuth @CMGroupmembersPDPLIS_TC26
