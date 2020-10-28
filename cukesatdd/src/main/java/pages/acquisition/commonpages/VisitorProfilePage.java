@@ -110,7 +110,8 @@ public class VisitorProfilePage extends UhcDriver {
 	}
 	
 	public AcquisitionHomePage addPlan() {
-		addPlans.click();
+//		addPlans.click();
+		jsClickNew(addPlans);
 		CommonUtility.checkPageIsReadyNew(driver);
 		if(driver.getCurrentUrl().contains("plan-summary")){
 			String page = "health-plans";
@@ -152,7 +153,8 @@ public class VisitorProfilePage extends UhcDriver {
 	
 	public GetStartedPage addDrug_DCERedesign(){
 		
-		addrugs.click();
+//		addrugs.click();
+		jsClickNew(addrugs);
 		if (validateNew(AddMyDrugsBtn))
 			return new GetStartedPage(driver);
 		return null;
@@ -166,6 +168,7 @@ public class VisitorProfilePage extends UhcDriver {
 		if(validate(profileMultiYear, 10))
 		{
 			profileNxtYrPlans.click();
+			waitForPageLoadSafari();
 			if(driver.findElements(By.xpath("//div[@class='title dropdown-open']")).size()>0)
 				driver.findElement(By.xpath("//div[@class='multi-year-select']/button[contains(@class,'js-select-year select-year')][2]/following::button[2]")).click();
 			else

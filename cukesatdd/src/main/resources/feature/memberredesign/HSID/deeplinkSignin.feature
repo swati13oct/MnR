@@ -63,8 +63,8 @@ Feature: To test member Signin from various Deeplinks
     And user is navigated to the coverageandBenefits deep link page
 
     Examples: 
-      | username   | password   |
-      | q2_pay_002 | Password@1 |
+      | username		  | password   |
+      | premiumpayment011 | Password@1 |
 
   @regressionMember @healthwellnessDeepLink @CodeTransformers
   Scenario Outline: Verify Member lands on the healthwellness page after signing in from healthwellness deeplink.

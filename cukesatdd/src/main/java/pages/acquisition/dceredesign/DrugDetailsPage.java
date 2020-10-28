@@ -585,7 +585,7 @@ public class DrugDetailsPage extends UhcDriver {
 	public PlanDetailsPage ClickandNavigate_VPPPlanDetails(String planName) {
 		validateNew(DrugCosts_PlanDetailsBtn);
 		jsClickNew(DrugCosts_PlanDetailsBtn);
-		checkIfPageReadySafari();
+		waitForPageLoadSafari();
 		WebElement PlanName_PlanDetails = driver.findElement(By.xpath("//h2[contains(text(), '"+planName+"')]"));
 		CommonUtility.waitForPageLoadNew(driver, PlanName_PlanDetails, 20);
 		if (driver.getCurrentUrl().contains("details") && validateNew(PlanName_PlanDetails)) {
