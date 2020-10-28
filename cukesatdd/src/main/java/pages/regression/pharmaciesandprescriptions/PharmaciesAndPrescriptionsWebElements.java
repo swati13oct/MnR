@@ -1488,7 +1488,7 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	@FindBy(xpath = "//div[@data-testid='price-drugs-CTA']")
 	protected WebElement DrugLookupCallToActnBtn;
 
-	@FindBy(xpath = "//div[@data-testid='price-drugs-CTA-icon']")
+	@FindBy(xpath = "//*[@data-testid='price-drugs-CTA-icon']")
 	protected WebElement DrugLookupCTAImg;
 	
 	@FindBy(xpath = "//h2[@data-testid='price-drugs-CTA-title']")
@@ -1498,7 +1498,7 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	protected WebElement DrugLookupCTADescription;
 
 	
-	@FindBy(xpath = "//div[@data-testid='price-drugs-CTA-icon']")
+	@FindBy(xpath = "//*[@data-testid='price-drugs-CTA-icon']")
 	protected WebElement FindAndPriceCTAImg;
 
 	@FindBy(xpath = "//h2[@data-testid='price-drugs-CTA-title' and contains(text(),'Find & Price a Medication')]")
@@ -1512,7 +1512,7 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	@FindBy(xpath = "//div[@data-testid='find-pharmacy-CTA']")
 	protected WebElement PharmacyLocatorCallToActnBtn;
 
-	@FindBy(xpath = "//div[@data-testid='find-pharmacy-CTA-icon']")
+	@FindBy(xpath = "//*[@data-testid='find-pharmacy-CTA-icon']")
 	protected WebElement PharmacyLocatorCTAImg;
 
 	@FindBy(xpath = "//h2[@data-testid='find-pharmacy-CTA-title' and contains(text(),'Pharmacy Locator')]")
@@ -1547,16 +1547,16 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	@FindBy(xpath = "//p[@data-testid='medication-cost-summary-CTA-description']")
 	protected WebElement DrugCostSummaryCTADescription;
 	
-	@FindBy(xpath = "//div[@data-testid='ANOC-CTA']")
+	@FindBy(xpath = "//div[@data-testid='annual-notice-change-CTA']")
 	protected WebElement ANOCCallToActnBtn;
 
-	@FindBy(xpath = "//div[@data-testid='ANOC-CTA-icon']")
+	@FindBy(xpath = "//*[@data-testid='annual-notice-change-CTA-icon']")
 	protected WebElement ANOCCTAImg;	
 
-	@FindBy(xpath = "//h2[@data-testid='ANOC-CTA-title']")
+	@FindBy(xpath = "//h2[@data-testid='annual-notice-change-CTA-title']")
 	protected WebElement ANOCCTATitle;
 	
-	@FindBy(xpath = "//p[@data-testid='ANOC-CTA-description']")
+	@FindBy(xpath = "//p[@data-testid='annual-notice-change-CTA-description']")
 	protected WebElement ANOCCTADescription;	
 
 	@FindBy(xpath = "//h2[text()='Prepare for Next Year']")
