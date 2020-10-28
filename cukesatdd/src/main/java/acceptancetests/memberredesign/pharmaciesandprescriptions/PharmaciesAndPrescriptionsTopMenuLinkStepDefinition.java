@@ -178,6 +178,10 @@ public class PharmaciesAndPrescriptionsTopMenuLinkStepDefinition {
 
 	@Then("^user navigates to the payment page to validate Pharamcies and Prescriptions link$")
 	public void validate_payment_page() throws InterruptedException { 
+		if (MRScenario.environment.contains("team-a")) {
+			System.out.println("Skip payment page validation on lower env due to page not up on team-atest");
+			return;
+		}
 		String memberType=(String) getLoginScenario().getBean(LoginCommonConstants.CATOGERY);
 		String expectLink=(String) getLoginScenario().getBean(PharmaciesAndPrescriptionsCommonConstants.TEST_EXPECT_LINK);
 		String page="payment";
