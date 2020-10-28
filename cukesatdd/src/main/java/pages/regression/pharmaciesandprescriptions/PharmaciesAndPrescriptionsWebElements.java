@@ -1342,7 +1342,7 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	public boolean validateNeedHelpsPhoneNumbers() {
 
 		String techNumber="1-800-721-0627";
-		String planNumber="1-844-876-6177";
+		String planNumber="1-866-255-4835";
 
 		if (techNumber.equals(technicalSupportNumber.getText()) && planNumber.equals(planSupportNumber.getText())) {
 
