@@ -2051,6 +2051,10 @@ public class oleStepDefinition {
 					System.out.println("Provider Look Up : Validation Passed for PlanType - "+planType);
 					getLoginScenario().saveBean(OLE_PageConstants.OLE_PRIMARY_CARE_PHYSICIAN_PAGE,
 							pcpPage);
+					ArrayList<String> pcp_Info = pcpPage.getPCPInfo() ;
+					getLoginScenario().saveBean(oleCommonConstants.PCP_NAME,pcp_Info.get(0));
+					getLoginScenario().saveBean(oleCommonConstants.PCP_NUMBER,pcp_Info.get(1));
+					getLoginScenario().saveBean(oleCommonConstants.PCP_RECENTLY_VISITED,pcp_Info.get(2));
 					Assert.assertTrue(true);
 				}
 				else{

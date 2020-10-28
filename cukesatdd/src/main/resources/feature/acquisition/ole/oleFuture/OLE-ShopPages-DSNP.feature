@@ -132,10 +132,10 @@ Feature: 1.5.ACQ-OLE common tool flow E2E Shop Pages
     Then the user clicks on Enroll Now for AARP site to start the OLE flow
       | Plan Name | <planName> |
     Then the user validates the Plan details on OLE
-    Then the user validates TFN in Welcome OLE Right Rail
-    Then the user validates Learn more modal for Welcome OLE
-    Then the user validates Leave OLE modal for Welcome OLE
-    Then the user validates cancellation modal for Welcome OLE
+    #Then the user validates TFN in Welcome OLE Right Rail
+    #Then the user validates Learn more modal for Welcome OLE
+    #Then the user validates Leave OLE modal for Welcome OLE
+    #Then the user validates cancellation modal for Welcome OLE
     Then the user navigates to Personal Information Page
     Then the user enters following required information in Personal Information Page
       | First Name         | <firstname>         |
@@ -143,9 +143,11 @@ Feature: 1.5.ACQ-OLE common tool flow E2E Shop Pages
       | DOB                      | <dob>                    |
       | Gender                   | <gender>                 |
       | Perm_Street              | <permstreet>             |
+      #| Perm_Aptno              | <permaptno>             |
       | Perm_city                | <permcity>               |
       | Mailing Address Question | <mailingaddressquestion> |
       | Mailing_Street           | <mailingstreet>          |
+      #| Mailing_Aptno            | <mailingaptno>          |
       | Mailing_City             | <mailingcity>            |
       | Mailing_State            | <mailingstate>           |
       | Mailing_Zip              | <mailingzip>             |
@@ -168,9 +170,9 @@ Feature: 1.5.ACQ-OLE common tool flow E2E Shop Pages
      # | PartA Date         | <partadate>         |
      # | PartB Date         | <partbdate>         |
       | Card Type          | <cardtype>          |
-      | Email Confirmation | <emailConfirmation> |
-      | Go Green           | <goGreen>           |
-      | Email              | <email>             |
+     # | Email Confirmation | <emailConfirmation> |
+      #| Go Green           | <goGreen>           |
+      #| Email              | <email>             |
     Then the user validates TFN in Medicare Info OLE Right Rail
     Then the user validates the Plan details in Medicare Info OLE Right Rail
 #    Then the user navigates to Preliminary Questions Page
@@ -216,8 +218,8 @@ Feature: 1.5.ACQ-OLE common tool flow E2E Shop Pages
         |authorizationZip|<authorizezip>|
         |authorizationPhoneNo|<authorizephonenumber>|
         |authorizationRelationship| <authorizeRelationship>|
-        |authorizationStateDisplay|<authorizestate>|  
-         |authorizationAgree  |<authorizationagree>|   
+        |authorizationStateDisplay|<authorizestate>|
+        |authorizationAgree|<authorizationagree>|
     Then the user navigates to Review and Submit Page
     #Then the user validates the Plan and Member details on Review and Submit Page
     Then the user validates the Online Enrollment details on Review and Submit Page
@@ -229,11 +231,11 @@ Feature: 1.5.ACQ-OLE common tool flow E2E Shop Pages
     #Then the user Validates Next Steps in Confirmation Page for the Plan Type
     @ShopPage_OLE_Future 
     Examples: 
-      | TID   | site|PlanType |planyear|planYear| zipcode | isMultutiCounty | county             | plantype | planName                         | cardtype | firstname | lastname | medicarenumber | ssnflag | partadate | partbdate | medicaidnumber          | esrdflag | dob      | gender | permstreet    | permcity    | mailingaddressquestion | mailingstreet | mailingcity | mailingstate | mailingzip | email         | selectoptions                                                                                                                                                                                                                                       | optiondata              | pdpFlag | longTermFlag | riderflag | DentalFlag | VisionFlag | FitnessFlag | HearingFlag | emailConfirmation | goGreen |healthinsurancename|groupnumber  | membernumber    |prescriptioncoveragename|pdgroupnumber|pdmembernumber|inputdataType|phoneno   | mobileno |middlename        |authorizefirstN|authorizelastN|authorizeaddress|authorizeapartment|authorizecity|authorizezip|authorizephonenumber|authorizeRelationship|authorizestate|authorizationagree|permaptno|mailingaptno|
-      | 11115 | AARP|PDP-MBI  | future |future  |   90210 | NO              | Los Angeles County | PDP      | AARP MedicareRx Walgreens (PDP)  | MBI      | John      | Doe      | 3A33C22YK22    | false   |  11012015 |  11012015 |431665465                | false    | 01011988 | Female | 002 Morris Rd | Los Angeles | No                    | 802 MailingSt | Mailing LA  | CA           |      90210 | test@test.com | Medicare Advantage Open Enrollment Period (MA OEP)/change in my Medicaid (newly got Medicaid)/Medicare (or my state)/(or my state helps pay for my Medicare premiums)/major disaster (as declared by the Federal Emergency Management Agency (FEMA) | /12202018/12202018/ / / | yes     | no           | false     | NA         | NA         | NA          | NA          | NO                | NO      |                   |             |                 |PrescriptionCoverage            |PD5646136   | BCD12345EFG |InValid |1234567890|2345678901| S                |Test_K         |Test_M        |122 2ND AVE     |655               |MINNEAPOLIS  |55455       |1235678901          |FRIEND               |MN|Agree|566|677|
+      | TID   | site|PlanType |planyear|planYear| zipcode | isMultutiCounty | county             | plantype | planName                         | cardtype | firstname | lastname | medicarenumber | ssnflag | partadate | partbdate | medicaidnumber          | esrdflag | dob      | gender | permstreet    | permcity    | mailingaddressquestion | mailingstreet | mailingcity | mailingstate | mailingzip | email         | selectoptions                                                                                                                                                                                                                                       | optiondata              | pdpFlag | longTermFlag | riderflag | DentalFlag | VisionFlag | FitnessFlag | HearingFlag | emailConfirmation | goGreen |healthinsurancename|groupnumber  | membernumber    |prescriptioncoveragename|pdgroupnumber|pdmembernumber|inputdataType|phoneno   | mobileno |middlename        |authorizefirstN|authorizelastN|authorizeaddress|authorizeapartment|authorizecity|authorizezip|authorizephonenumber|authorizeRelationship|authorizestate|
+      | 11115 | AARP|PDP-MBI  | future |future  |   90210 | NO              | Los Angeles County | PDP      | AARP MedicareRx Walgreens (PDP)  | MBI      | John      | Doe      | 3A33C22YK22    | false   |  11012015 |  11012015 |431665465                | false    | 01011988 | Female | 002 Morris Rd | Los Angeles | Yes                    | 802 MailingSt | Mailing LA  | CA           |      90210 | test@test.com | Medicare Advantage Open Enrollment Period (MA OEP)/change in my Medicaid (newly got Medicaid)/Medicare (or my state)/(or my state helps pay for my Medicare premiums)/major disaster (as declared by the Federal Emergency Management Agency (FEMA) | /12202018/12202018/ / / | yes     | no           | false     | NA         | NA         | NA          | NA          | NO                | NO      |                   |             |                 |PrescriptionCoverage            |PD5646136   | BCD12345EFG |InValid |1234567890|2345678901| S                |Test_K         |Test_M        |122 2ND AVE     |655               |MINNEAPOLIS  |55455       |1235678901          |FRIEND               |MN|
      
      @ShopPage_OLE_Future 
     Examples: 
-      | TID   | site|PlanType |planyear|planYear| zipcode | isMultutiCounty | county             | plantype | planName                         | cardtype | firstname | lastname | medicarenumber | ssnflag | partadate | partbdate | medicaidnumber          | esrdflag | dob      | gender | permstreet    | permcity    | mailingaddressquestion | mailingstreet | mailingcity | mailingstate | mailingzip | email         | selectoptions                                                                                                                                                                                                                                       | optiondata              | pdpFlag | longTermFlag | riderflag | DentalFlag | VisionFlag | FitnessFlag | HearingFlag | emailConfirmation | goGreen |healthinsurancename|groupnumber  | membernumber    |prescriptioncoveragename|pdgroupnumber|pdmembernumber|inputdataType|phoneno   | mobileno |middlename        |authorizefirstN|authorizelastN|authorizeaddress|authorizeapartment|authorizecity|authorizezip|authorizephonenumber|authorizeRelationship|authorizestate|authorizationagree|permaptno|mailingaptno|
-      | 11116 | UHC |PDP-MBI  | future|future   |   90210 | NO              | Los Angeles County | PDP      | AARP MedicareRx Walgreens (PDP)  | MBI      | John      | Doe      | 3A33C22YK22    | false   |  11012015 |  11012015 |431665465                | false    | 01011988 | Female | 002 Morris Rd | Los Angeles | No                    | 802 MailingSt | Mailing LA  | CA           |      90210 | test@test.com | Medicare Advantage Open Enrollment Period (MA OEP)/change in my Medicaid (newly got Medicaid)/Medicare (or my state)/(or my state helps pay for my Medicare premiums)/major disaster (as declared by the Federal Emergency Management Agency (FEMA) | /12202018/12202018/ / / | yes     | no           | false     | NA         | NA         | NA          | NA          | NO                | NO      |                   |             |                 |PrescriptionCoverage    |PD5646136   | BCD12345EFG |InValid |1234567890|2345678901| S                |Test_K         |Test_M        |122 2ND AVE     |655               |MINNEAPOLIS  |55455       |1235678901          |FRIEND               |MN|Agree|566|677|
+      | TID   | site|PlanType |planyear|planYear| zipcode | isMultutiCounty | county             | plantype | planName                         | cardtype | firstname | lastname | medicarenumber | ssnflag | partadate | partbdate | medicaidnumber          | esrdflag | dob      | gender | permstreet    | permaptno    | permcity    | mailingaddressquestion | mailingstreet |mailingaptno| mailingcity | mailingstate | mailingzip | email         | selectoptions                                                                                                                                                                                                                                       | optiondata              | pdpFlag | longTermFlag | riderflag | DentalFlag | VisionFlag | FitnessFlag | HearingFlag | emailConfirmation | goGreen |healthinsurancename|groupnumber  | membernumber    |prescriptioncoveragename|pdgroupnumber|pdmembernumber|inputdataType|phoneno   | mobileno |middlename        |authorizefirstN|authorizelastN|authorizeaddress|authorizeapartment|authorizecity|authorizezip|authorizephonenumber|authorizeRelationship|authorizestate|authorizationagree|
+      | 11116 | UHC |PDP-MBI  | future|future   |   90210 | NO              | Los Angeles County | PDP      | AARP MedicareRx Walgreens (PDP)  | MBI      | John      | Doe      | 3A33C22YK22    | false   |  11012015 |  11012015 |431665465                | false    | 01011988 | Female | 002 Morris Rd | 85           | Los Angeles | no                     | 802 MailingSt | 30         | Mailing LA  | CA           |      90210 | test@test.com | Medicare Advantage Open Enrollment Period (MA OEP)/change in my Medicaid (newly got Medicaid)/Medicare (or my state)/(or my state helps pay for my Medicare premiums)/major disaster (as declared by the Federal Emergency Management Agency (FEMA) | /12202018/12202018/ / / | yes     | no           | false     | NA         | NA         | NA          | NA          | NO                | NO      |                   |             |                 |PrescriptionCoverage    |PD5646136   | BCD12345EFG |InValid |1234567890|2345678901| S                |Test_K         |Test_M        |122 2ND AVE     |655               |MINNEAPOLIS  |55455       |1235678901          |FRIEND               |MN|Agree|
      

@@ -572,10 +572,12 @@ public class ReviewSubmitPage extends UhcDriver{
 		String AuthRelationshipDisplay= detailsMap.get("Authorization Relationship");
 		
 		
-		boolean flag = true;	
+		boolean flag = true;
 		
-		flag=validateText(PlanYear_NameDisplay,Expected_PlanName);
-		flag&=validateText(PlanZipDisplay,Expected_ZipCode);
+		String Expected_PlanYear_PlanName = Expected_PlanYear+" "+Expected_PlanName;
+		flag=validateText(PlanYear_NameDisplay,Expected_PlanYear_PlanName);
+		String Zip = "ZIP: "+Expected_ZipCode;
+		flag&=validateText(PlanZipDisplay,Zip);
 		flag&=validateText(FirstNameDisplay,FirstName);
 		flag&=validateText(LastNameDisplay,LastName);
 		flag&=validateText(MiddleNameDisplay,MiddleName);
@@ -601,9 +603,9 @@ public class ReviewSubmitPage extends UhcDriver{
 		flag&=validateText(AuthPhoneNo,AuthPhoneNumberDisplay);
 		flag&=validateText(AuthAgree,AuthAgreeDisplay);
 		flag&=validateText(AuthRelationship,AuthRelationshipDisplay);
-		flag&=validateText(HealthInsuranceRadio,healthInsurance);
 		flag&=validateText(PrescriptionDrugRadio,prescriptionDrug);
 		if(!Expected_PlanName.contains("PDP")) {
+		flag&=validateText(HealthInsuranceRadio,healthInsurance);
 		flag&=validateText(HealthInsuranceName,healthInsuranceName);
 		flag&=validateText(HealthInsuranceGroupNo,healthInsuranceGroupNo);
 		flag&=validateText(HealthInsuranceMemberNo,healthInsuranceMemberNo);
@@ -644,14 +646,39 @@ public class ReviewSubmitPage extends UhcDriver{
 			}
 			else flag = false;
 		}else flag = false;
-*/
+	*/
+		if (flag) {
+			String expected_EnrollText = "Submitting your enrollment application electronically";
+			String actual_EnrollText = Enrollment_Disclaimer_Text.getText();
+			if (validate(Submit_Disclaimer) && validate(Enrollment_Disclaimer_Text)
+					&& actual_EnrollText.contains(expected_EnrollText)) {
+				System.out.println("Submit Enrollment Disclaimer is Displayed  : " + flag);
+				if (flag) {
+					if (validate(SubmitApplicationBtn)) {
+						if (SubmitApplicationBtn.isEnabled()) {
+							System.out.println("Submit Application Button is displayed and Enabled : " + flag);
+						} else {
+							flag = false;
+						}
+					} else {
+						flag = false;
+					}
+				} else {
+					flag = false;
+				}
+			}
+			else {
+				flag =false;
+			}
+		}
+
 		return flag;
 	}
 	
 	public boolean validateText(WebElement element,String expectedValue) {
 		boolean result = true;
 		if(!StringUtils.isEmpty(expectedValue)) {
-			String actualText = element.getText();
+			String actualText = element.getText().trim();
 			if(actualText.contains("-"))
 			{
 				actualText=actualText.replaceAll("-", "");
