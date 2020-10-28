@@ -1795,7 +1795,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			validateNew(enrollForPlan);
 			jsClickNew(enrollForPlan);
 		}
-
+		waitForPageLoadSafari();
 		CommonUtility.waitForPageLoadNew(driver, NextBtn, 30);
 		if (driver.getCurrentUrl().contains("enrollment")) {
 			System.out.println("OLE Welcome Page is Displayed");
@@ -2260,6 +2260,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 					WebElement learnMoreAboutExtraHelp = driver.findElement(By.xpath("//*[contains(text(), '" + planName
 							+ "')]/ancestor::div[contains(@class, 'module-plan-overview')]//li//span[1]//a[contains(@id, 'S5921413000Link')]"));
 					validateNew(learnMoreAboutExtraHelp);
+					scrollToView(learnMoreAboutExtraHelp);
 					learnMoreAboutExtraHelp.click();
 					break;
 				} catch (StaleElementReferenceException e) {
@@ -2983,6 +2984,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 						+ savedPlanImgXpath;
 			}
 			System.out.println("TEST - savedPlanIconXpath xpath=" + savedPlanIconXpath);
+			scrollToView(driver.findElement(By.xpath("//*[contains(text(),'" + plan + "')]/ancestor::*[contains(@class,'module-plan-overview')]")));
 			List<WebElement> listOfSavedPlanIcons = driver.findElements(By.xpath(savedPlanIconXpath));
 			expMatch = 0;
 			Assert.assertTrue(
@@ -3755,6 +3757,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		waitTillElementClickableInTime(Start_ApplicationBtn, 60);
 		jsClickNew(Start_ApplicationBtn);
 		System.out.println("Start application button is clicked on application page");
+		waitForPageLoadSafari();
 		waitTillElementClickableInTime(insuredStatus, 60);
 		insuredStatus.click();
 		nextButton.click();
@@ -4101,6 +4104,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	// note: end - added for deeplink validaton
 	// --------------------------------------------
 	public void clickOnViewMoreForPlan(String planName) {
+		scrollToView(driver.findElement(By.xpath("//*[contains(text(),'" + planName +"')]/ancestor::div[contains(@class, 'module-plan-overview module')]")));
 		List<WebElement> viewMoreLink = driver.findElements(By.xpath("//*[contains(text(),'" + planName
 				+ "')]/ancestor::div[contains(@class, 'module-plan-overview module')]//*[contains(@class,'accordion-arrow collapsed')]"));
 

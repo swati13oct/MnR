@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -481,9 +482,13 @@ public class PlanRecommendationEngineHeaderAndFooter extends UhcDriver {
 // PRE BreadCrumbs in Header	
 		
 		public void breadCrumbs() {
-			String preBreadcrumbs = (driver.findElement(By.cssSelector("div.breadcrumb"))).getText();
-			Assert.assertTrue(preBreadcrumbs.contains("Home / Plan Recommendation Engine"));
-			System.out.println(preBreadcrumbs);
+			try {
+				String preBreadcrumbs = (driver.findElement(By.cssSelector("div.breadcrumb"))).getText();
+				Assert.assertTrue(preBreadcrumbs.contains("Home / Plan Recommendation Engine"));
+				System.out.println(preBreadcrumbs);
+			} catch(StaleElementReferenceException e) {
+
+			}
 		}
 		
 //	Footer Element Verification Method
