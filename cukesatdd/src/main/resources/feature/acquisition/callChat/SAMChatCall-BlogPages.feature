@@ -60,6 +60,10 @@ Then the user validates whether chat icon is visible
 |medicare-articles/safe-medicare-enrollment-during-COVID |AARP|
 |medicare-articles/what-is-the-medicare-annual-enrollment-period |AARP|
 |medicare-articles/aep-change-or-renew |AARP|
+
+@samChatRegressionAARPblog3
+Examples:
+| pagename |site|
 |medicare-articles/can-you-switch-between-original-medicare-and-medicare-advantage-during-the-annual-enrollment-period |AARP|
 |medicare-articles/2-ways-to-prescription-drug-coverage |AARP|
 |medicare-articles/good-reasons-to-shop-for-a-new-medicare-plan |AARP|
@@ -82,7 +86,7 @@ Then the user validates whether chat icon is visible
 |medicare-articles/how-do-tricare-and-medicare-work-together |AARP|
 |medicare-articles/youre-65-working-medicare |AARP|
 
-@samChatRegressionAARPblog3
+@samChatRegressionAARPblog4
 	Examples:
 | pagename |site|
 |medicare-articles/how-to-get-dental-and-vision-care-coverage-when-you-have-medicare |AARP|
@@ -110,7 +114,7 @@ Then the user validates whether chat icon is visible
 |medicare-articles/whats-the-difference-between-a-skilled-nursing-facility-and-a-nursing-home |AARP|
 |medicare-articles/what-s-the-difference-between-medicare-and-medicaid |AARP|
 |medicare-articles/how-to-appeal-a-medicare-decision |AARP|
-   @samChatRegressionAARPblog4
+   @samChatRegressionAARPblog5
    	Examples:
 			| pagename |site| 
 |medicare-articles/how-avoid-paying-more-prescription-drug-coverage |AARP|
@@ -134,6 +138,10 @@ Then the user validates whether chat icon is visible
 |medicare-articles/whats-the-difference-between-a-physical-exam-and-a-medicare-wellness-visit |AARP|
 |medicare-articles/what-medicare-medical-savings-account-plan |AARP|
 |medicare-articles/copd-medicare |AARP|
+
+   @samChatRegressionAARPblog6
+   	Examples:
+| pagename |site|
 |medicare-articles/decoding-medicare |AARP|
 |medicare-articles/does-medicare-cover-a-colonoscopy |AARP|
 |medicare-articles/does-medicare-cover-blood-tests-for-cholesterol |AARP|
@@ -150,6 +158,10 @@ Then the user validates whether chat icon is visible
 |medicare-articles/new-to-medicare-schedule-your-welcome-to-medicare-visit |AARP|
 |medicare-articles/how-to-become-a-medicare-authorized-representative |AARP|
 |medicare-articles/what-is-a-transition-refill |AARP|
+
+ @samChatRegressionAARPblog7
+ Examples:
+| pagename |site| 
 |medicare-articles/got-coverage-for-the-new-year |AARP|
 |medicare-articles/medicare-and-your-private-medical-information |AARP|
 |medicare-articles/medicare-memo-what-are-advance-directives |AARP|
@@ -166,13 +178,13 @@ Then the user validates whether chat icon is visible
 |medicare-articles/does-medicare-cover-allergy-testing |AARP|
 |medicare-articles/medicare-part-b-may-not-cover-hearing-aid-part-c-might |AARP|
 |medicare-articles/medicare-part-b-basics |AARP|
-
-   @samChatRegressionAARPblog5 
- Examples:
-| pagename |site| 
 |medicare-articles/medicare-part-d-basics |AARP|
 |medicare-articles/medicare-part-a-the-basics |AARP|
 |medicare-articles/medicare-part-c-basics |AARP|
+
+ @samChatRegressionAARPblog8
+ Examples:
+| pagename |site| 
 |medicare-articles/does-medicare-cover-a-chiropractor |AARP|
 |medicare-articles/what-does-medicare-cover-after-a-stroke |AARP|
 |medicare-articles/dual-special-needs-plans |AARP|
@@ -279,6 +291,10 @@ Then the user validates whether chat icon is visible
 |medicare-articles/what-is-the-medicare-special-enrollment-period |UHC|
 |medicare-articles/wheres-my-original-medicare-card |UHC|
 |medicare-articles/the-truth-your-medicare-part-b-premium |UHC|
+
+@samChatRegressionUHCblog4
+   	Examples:
+			| pagename |site|  
 |medicare-articles/dos-and-donts-cancelling-a-marketplace-health-plan |UHC|
 |medicare-articles/outpatient-mental-health-care-services |UHC|
 |medicare-articles/medicare-increases-coverage-mental-health-care |UHC|
@@ -287,7 +303,7 @@ Then the user validates whether chat icon is visible
 |medicare-articles/saving-on-medicare-when-self-employed |UHC|
 |medicare-articles/concrete-answers-10-common-medicare-questions |UHC|
 |medicare-articles/is-your-medicare-plan-the-best-one-for-you-this-checklist-can-help-you-decide |UHC|
-|medicare-articles/what-telehealth-services-does-medicare-offer |UHC|
+|medicare-articles/what-telehealth-services-does-medicare-offer |UHC|  
 |medicare-articles/7-popular-medicare-questions-asked-during-national-medicare-education-week |UHC|
 |medicare-articles/whats-the-difference-between-a-skilled-nursing-facility-and-a-nursing-home |UHC|
 |medicare-articles/what-s-the-difference-between-medicare-and-medicaid |UHC|
@@ -297,10 +313,6 @@ Then the user validates whether chat icon is visible
 |medicare-articles/what-is-a-tiered-formulary-and-what-does-it-mean-for-me |UHC|
 |medicare-articles/good-news-medicare-part-b-covers-cataract-surgery |UHC|
 |medicare-articles/heart-healthy-help-medicare |UHC|
-
-@samChatRegressionUHCblog4
-   	Examples:
-			| pagename |site|
 |medicare-articles/what-can-i-do-during-the-medicare-advantage-open-enrollment-period |UHC|
 |medicare-articles/medicare-coverage-for-same-sex-couples |UHC|
 |medicare-articles/how-to-evaluate-medicare-plan-costs |UHC|
@@ -310,6 +322,10 @@ Then the user validates whether chat icon is visible
 |medicare-articles/how-to-save-on-prescription-drugs-with-medicare |UHC|
 |medicare-articles/10-tips-choosing-primary-care-doctor |UHC|
 |medicare-articles/avoid-sticker-shock-medicare-billing |UHC|
+
+@samChatRegressionUHCblog5
+   	Examples:
+			| pagename |site|
 |medicare-articles/does-medicare-part-a-cost-anything |UHC|
 |medicare-articles/how-much-does-medicare-part-b-cost |UHC|
 |medicare-articles/what-is-co-insurance |UHC|
@@ -318,7 +334,7 @@ Then the user validates whether chat icon is visible
 |medicare-articles/what-medicare-medical-savings-account-plan |UHC|
 |medicare-articles/copd-medicare |UHC|
 |medicare-articles/decoding-medicare |UHC|
-|medicare-articles/does-medicare-cover-a-colonoscopy |UHC|
+|medicare-articles/does-medicare-cover-a-colonoscopy |UHC|   
 |medicare-articles/does-medicare-cover-blood-tests-for-cholesterol |UHC|
 |medicare-articles/does-medicare-cover-diabetes-prevention-program |UHC|
 |medicare-articles/does-medicare-cover-emergency-room-visits |UHC|
@@ -327,6 +343,10 @@ Then the user validates whether chat icon is visible
 |medicare-articles/home-health-care-those-medicare-who-cant-leave-home |UHC|
 |medicare-articles/how-often-should-a-woman-over-65-have-a-pap-smear |UHC|
 |medicare-articles/medicare-transportation-services |UHC|
+
+@samChatRegressionUHCblog6
+   	Examples:
+			| pagename |site| 
 |medicare-articles/are-you-living-with-chronic-heart-failure |UHC|
 |medicare-articles/how-prepare-your-medicare-wellness-visit |UHC|
 |medicare-articles/will-medicare-cover-a-cpap-machine |UHC|
@@ -343,7 +363,7 @@ Then the user validates whether chat icon is visible
 |medicare-articles/medicare-beneficiaries-needing-hospice-care-may-be-covered |UHC|
 |medicare-articles/medicare-coverage-for-inpatient-rehabilitation |UHC|
 
-@samChatRegressionUHCblog5
+@samChatRegressionUHCblog7
    	Examples:
 			| pagename |site|
 |medicare-articles/medicare-coverage-for-outpatient-rehabilitation-therapy |UHC|
@@ -359,6 +379,10 @@ Then the user validates whether chat icon is visible
 |medicare-articles/does-medicare-cover-a-chiropractor |UHC|
 |medicare-articles/what-does-medicare-cover-after-a-stroke |UHC|
 |medicare-articles/dual-special-needs-plans |UHC|
+
+@samChatRegressionUHCblog8
+   	Examples:
+			| pagename |site|    
 |medicare-articles/cual-es-la-diferencia-entre-medicare-y-medicaid |UHC|
 |medicare-articles/cuatro-programas-de-asistencia-para-pagar-sus-costos-de-medicare |UHC|
 |medicare-articles/guia-paso-paso-para-inscribirse-en-medicare-los-65-anos |UHC|
