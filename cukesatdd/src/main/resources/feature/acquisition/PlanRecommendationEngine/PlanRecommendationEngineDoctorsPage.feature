@@ -1,7 +1,7 @@
 @PlanRecommendationEngine
 Feature: Plan Recommendation Engine flow - Verify doctors page in plan Recommendation Engine
 
-  @PRE @planrecommendation @doctorspage @doctorelementValidation @F372731
+  @PRE @planrecommendation @doctorspage @doctorelementValidation @F372731 @F374231
   Scenario Outline: <Zipcode>, <isMultiCounty> , <isCoverageOpt> , <specialNeeds> , <travel> - To validate doctors page Elements in Plan Recommendation Engine
     Given the user is on UHC medicare acquisition site landing page
     When user navigate to Plan Recommendation Engine and Checking Breadcrumbs
@@ -140,7 +140,7 @@ Feature: Plan Recommendation Engine flow - Verify doctors page in plan Recommend
       |   10001 | NO            | New York    | None          | None         | withinUS |             |               |
       |   35034 | YES           | Bibb County | None          | None         | withinUS | robert      | NO            |
 
-  @PRE @planrecommandonation @doctorspage @editprovider @F427538
+  @PRE @planrecommandonation @doctorspage @editprovider @F427538 @F510483
   Scenario Outline: <Zipcode>, <isMultiCounty> , <isCoverageOpt> , <specialNeeds> , <travel> , <doctor> - To validate Doctors page fucntions with lookup in Plan Recommendation Engine
     Given the user is on UHC medicare acquisition site landing page
     When user navigate to Plan Recommendation Engine and Checking Breadcrumbs
