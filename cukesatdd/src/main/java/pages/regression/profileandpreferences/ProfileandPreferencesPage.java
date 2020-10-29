@@ -2013,18 +2013,18 @@ private WebElement editEmailAddressArrowbutton;
 		validateNew(hsidPasswordLink);
 		hsidPasswordLink.click();
 		Thread.sleep(10000);
-		System.out.println("PageTitle " + driver.getTitle());
-		Assert.assertTrue(driver.getTitle().contains("identity"));
-		ConfirmSecurityQuestion cs = new ConfirmSecurityQuestion(driver);
-		try {
-			cs.enterValidSecurityAnswer();
-			System.out.println(driver.getCurrentUrl());
-			System.out.println("Check to see if document.readyState is ready...");
-			CommonUtility.checkPageIsReadyNew(driver); 
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		System.out.println("PageTitle " + driver.getCurrentUrl());
+		Assert.assertTrue(driver.getTitle().contains("settings"));
+//		ConfirmSecurityQuestion cs = new ConfirmSecurityQuestion(driver);
+//		try {
+//			cs.enterValidSecurityAnswer();
+//			System.out.println(driver.getCurrentUrl());
+//			System.out.println("Check to see if document.readyState is ready...");
+//			CommonUtility.checkPageIsReadyNew(driver);
+//		} catch (Exception e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 		
 		CommonUtility.waitForPageLoadNew(driver, usernameText, 30);
 		if (validateNew(passwordEditLink))
