@@ -1,6 +1,6 @@
 Feature: To test Transfer To HD Checkout Summary Page
 
-  @Regression
+  @Regression @Sanity
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Transfer to Home Delivery Page Functionality
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password

@@ -10,7 +10,7 @@ import org.junit.runner.RunWith;
 jsonReport = "target/cucumber-RunMRATDDRegressionTransferToHDCheckOutSummaryRegressionPROD.json",detailedReport = true, detailedAggregatedReport = true,
 overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionTransferToHDCheckOutSummaryRegressionPROD")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberredesign" }, 
-features = { "src/main/resources/feature/memberredesign/pharmaciesandprescriptions/OfflineProd&Prod/RefillCheckOutSummary.feature" }, plugin = {
+features = { "src/main/resources/feature/memberredesign/pharmaciesandprescriptions/OfflineProd&Prod/TransferToHDCheckOutSummary.feature" }, plugin = {
 		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionTransferToHDCheckOutSummaryRegressionPROD.json" }, tags = { "@Regression" }, monochrome=true)
 
 public class RunMRATDDRegressionTransferToHDCheckOutSummaryRegressionPROD {
