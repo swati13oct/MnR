@@ -94,6 +94,27 @@ public class ProposedEffectiveDatePage extends UhcDriver{
 		return validation_Flag;
 	}
 	
+	public String get_proposed_effective_date(){
+		String proposedEfDate = null;
+		try {
+			Thread.sleep(6000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		int count = ProposedEffectiveDateOptions.size();
+		if(count>0){
+			System.out.println("Proposed Effective Date displayed");
+			proposedEfDate= ProposedEffectiveDateOptions.get(0).getText();
+		 }
+		else{
+			System.out.println("Proposed Effective Date is NOT displayed");
+			
+		}
+		return proposedEfDate;
+	}
+	
+	
 	public Object navigate_to_PCP_Page(String planType) {
 
 		validateNew(NextBtn);

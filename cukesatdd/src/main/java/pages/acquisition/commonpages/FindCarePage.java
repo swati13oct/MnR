@@ -295,7 +295,6 @@ public ComparePlansPage providerfromPrimaryCare() throws Exception {
 		FinishButton.click();
 	}else
 		System.out.println("Issue with Xpath");
-	checkIfPageReadySafari();
 	driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
 	if (currentUrl().contains("/health-plans.html#/plan-compare"))
 		return new ComparePlansPage(driver);
@@ -405,7 +404,6 @@ public ComparePlansPage placesfromHospital() throws Exception {
 	}else
 		System.out.println("Issue with Xpath");
 
-	checkIfPageReadySafari();
 	driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
 	if (currentUrl().contains("/health-plans.html#/plan-compare"))
 		return new ComparePlansPage(driver);

@@ -157,11 +157,25 @@ public class MRScenario {
 	public Object getBean(String id) {
 		Object result = scenarioObjectMap.get(id);
 		if (result == null) {
-			System.out.println("Object not initialized");
+			System.out.println("Object not initialized - " + id);
 		}
 		return result;
 
 	}
+
+	public Object getBean(String id, Object defaultValue)
+	{
+		Object result = getBean(id);
+
+		if(result == null)
+		{
+			return defaultValue;
+		}
+		return result;
+
+	}
+
+
 
 	static {
 
@@ -1085,13 +1099,14 @@ try {
 			}else if (browserName.equalsIgnoreCase("safari")) {
 				System.out.println("Inside safari");
 				capabilities = DesiredCapabilities.safari();
-				capabilities.setCapability("maxDuration", "10000");
 				
 				MutableCapabilities sauceOptions = new MutableCapabilities();
 				sauceOptions.setCapability("screenResolution", "1920x1440");
+				sauceOptions.setCapability("maxDuration", 5400);
+				sauceOptions.setCapability("idleTimeout", 200);
 
 				SafariOptions browserOptions = new SafariOptions();
-				browserOptions.setCapability("platformName", "macOS 10.14");
+				browserOptions.setCapability("platformName", "macOS 10.15");
 				browserOptions.setCapability("browserVersion", browserVersion);
 				browserOptions.setCapability("sauce:options", sauceOptions);
 				capabilities.merge(browserOptions);

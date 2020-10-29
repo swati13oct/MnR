@@ -189,7 +189,8 @@ public class MedicareInformationPage extends UhcDriver{
 	@FindBy(xpath = "//*[contains(text(), 'Do you or your spouse have other health insurance that will cover medical services?')]")
 	private WebElement OtherIns_Question;
 	
-	@FindBy(id = "hasLongTermCareFacilityYes")
+	//@FindBy(id = "hasLongTermCareFacilityYes")
+	@FindBy(id = "hasHealthInsuranceYes")
 	private WebElement LongTerm_Question_Yes;
 	
 	@FindBy(xpath = "//*[contains(@id,'hasHealthInsuranceYes')]")
@@ -224,6 +225,9 @@ public class MedicareInformationPage extends UhcDriver{
 
 	@FindBy(xpath= "//*[contains(@id,'memberIdNumber0')]")
 	private WebElement PrescriptionCoveragememberNumberField;
+	
+	@FindBy(xpath = "//*[contains(@id, 'medicaidNumber')]/parent::span/input")
+	private WebElement medicaidNumberField;
 	
 
 	//=============================================================================	
@@ -813,6 +817,7 @@ public boolean validate_notRequired_ESRD_Fields(String planType, String medicaid
 		return validation_Flag;
 	
 }
+
 public boolean validate_Required_Fields_CSNP( String medicaidNumber, String PlanName) {
 	//System.out.println("plantype : "+plantype+" Medicare Number : "+medicaidNumber);
 	
@@ -1180,4 +1185,41 @@ public boolean validate_MedicaidNumberField(String planType, String medicaidNumb
 		return validation_Flag;
 	
 }
+
+public boolean validate_Medicaid_Number_CEP(Map<String, String> memberDetailsMap) {
+boolean Validation_Flag = true;
+	
+	try
+	{
+
+	if(medicaiddno.isDisplayed()) {
+		jsClickNew(medicaiddno);
+		if(!validate(medicaidnumTxtBx)){
+			System.out.println("Medicaid Options is yes : Validation Passed");	
+			Validation_Flag = true;	
+		}
+		else {
+			System.out.println("Medicaid Options  :Validation Failed");
+			Validation_Flag = false;
+		}
+	}
+	
+	medicaiddyes.isDisplayed();
+	jsClickNew(medicaiddyes);	
+	
+	String MedicaidNumber = memberDetailsMap.get("MedicaidNumber");
+	
+	sendkeysNew(medicaidNumberField, MedicaidNumber);
+	}catch(Exception e) {
+		
+		System.out.println("Failed Due To-------"+e.getMessage());
+		}
+
+	if(NextBtn.isEnabled()){
+		System.out.println("Medicaid options selected :  Next button is enabled");
+	}
+	return true;
+
+}
+
 }

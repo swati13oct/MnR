@@ -301,11 +301,13 @@ public class VisitorProfilePage extends UhcDriver {
 	 */
 	public void signIn(String username,String password) {
 		try {
-			
+			validate(signIn, 5);
 			signIn.click();
+			waitForPageLoadSafari();
 			driver.findElement(By.cssSelector("input#userNameId_input")).sendKeys(username);
 			driver.findElement(By.cssSelector("input#passwdId_input")).sendKeys(password);
 			driver.findElement(By.cssSelector("input#SignIn")).click();
+			waitForPageLoadSafari();
 			String Question = driver.findElement(By.cssSelector("label#challengeQuestionLabelId")).getText().trim();
 			WebElement securityAnswer = driver.findElement(By.cssSelector("div#challengeSecurityAnswerId >input"));
 			if (Question.equalsIgnoreCase("What is your best friend's name?")) {

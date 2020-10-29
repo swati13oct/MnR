@@ -13,6 +13,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 
+import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 import pages.acquisition.commonpages.AcquisitionHomePage;
 
@@ -326,11 +327,13 @@ public void getStartedAndRunzipcodeWithCounty(String zip_code, String County) th
 			if(validate(popupFrame, 5))
 				driver.switchTo().frame(popupFrame);
 			threadsleep(1000);
-			popupNo.click();
+//			popupNo.click();
+			jsClickNew(popupNo);
 			threadsleep(1000);
 			popup_presents = true;
 		}
 		driver.switchTo().defaultContent();
 		return popup_presents;
 	}
+	
 }

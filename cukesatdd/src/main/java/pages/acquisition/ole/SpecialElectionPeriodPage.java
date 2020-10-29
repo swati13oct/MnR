@@ -436,6 +436,7 @@ public ProposedEffectiveDatePage navigate_to_Proposed_Effective_Date_Page() {
 
 	validateNew(NextBtn);
 	jsClickNew(NextBtn);
+	waitForPageLoadSafari();
 	/*JavascriptExecutor executor = (JavascriptExecutor)driver;
 	executor.executeScript("arguments[0].click();", NextBtn);*/
 	
