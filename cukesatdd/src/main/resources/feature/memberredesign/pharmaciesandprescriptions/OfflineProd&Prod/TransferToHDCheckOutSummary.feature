@@ -12,7 +12,7 @@ Feature: To test Transfer To HD Checkout Summary Page
     And now user navigates to the pharmacies and prescriptions page from dashboard or testharness page
       | PlanType    | <planType>   |
       | Member Type | <memberType> |
-    And user fetches medication informations and clicks on Transfer To HD call to action button
+    And user fetches medication informations and clicks on Transfer To HD call to action button on My Medication Page
     Then user will see "Transfer to Home Delivery" Page
     When user views the Medications section
     Then user will see the number of medications in my order indicated in the header
@@ -53,5 +53,5 @@ Feature: To test Transfer To HD Checkout Summary Page
     And disclaimer will remind the user that "OptumRx" is fulfilling the order
 
     Examples: 
-      | FID     | username | password | MemUserName  | planType | memberType     |
-      | F484057 | ntalesha | pass@123 | Davisald1944 | MPDP     | Individual_PnP |
+      | FID     | username | password | MemUserName | planType | memberType     |
+      | F484057 | ntalesha | pass@123 | DorisJean27 | MPDP     | Individual_PnP |

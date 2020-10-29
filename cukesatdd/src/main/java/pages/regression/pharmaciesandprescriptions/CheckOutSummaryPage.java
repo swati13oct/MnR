@@ -101,13 +101,14 @@ public class CheckOutSummaryPage extends CheckOutSummaryWebElements {
 		 * shippingDrpDownVal.getText(); count++; if (count > 10) { break; } }
 		 */
 		if (wait.until(ExpectedConditions.textToBePresentInElement(shippingDrpDownVal, "Standard"))) {
+			System.out.println("Inside the Shipping Fee Method");
 			String shippingMethod = shippingDrpDownVal.getText();
 			String shippingFee = orderSummaryShippingFee.getText();
 			String[] arry = shippingMethod.split("-");
-			if (!arry[1].trim().equals("Free")) {
+			if (!arry[1].trim().equalsIgnoreCase("Free")) {
 				return shippingFee.equals(arry[1].trim()) && shippingFee.matches(dollarAmntRegex);
 			}
-			return shippingFee.equals(arry[1].trim());
+			return shippingFee.equalsIgnoreCase(arry[1].trim());
 		}
 		return false;
 	}
@@ -120,13 +121,13 @@ public class CheckOutSummaryPage extends CheckOutSummaryWebElements {
 		String medicationPrice = orderSummaryMedicationPrice.getText();
 		String shippingPrice = orderSummaryShippingFee.getText();
 		String totalPrice = orderSummaryTotalPrice.getText();
-		if (!shippingPrice.trim().equals("Free") && !(medicationPrice.equalsIgnoreCase("N/A"))) {
+		if (!shippingPrice.trim().equalsIgnoreCase("Free") && !(medicationPrice.equalsIgnoreCase("N/A"))) {
 			return Integer.parseInt(totalPrice.substring(1)) == (Integer.parseInt(medicationPrice.substring(1))
 					+ Integer.parseInt(shippingPrice.substring(1))) && totalPrice.matches(dollarAmntRegex);
-		} else if (shippingPrice.trim().equals("Free") && !medicationPrice.equalsIgnoreCase("N/A")) {
+		} else if (shippingPrice.trim().equalsIgnoreCase("Free") && !medicationPrice.equalsIgnoreCase("N/A")) {
 			return totalPrice.trim().equals(medicationPrice.trim()) && totalPrice.matches(dollarAmntRegex);
 
-		} else if (!shippingPrice.trim().equals("Free") && medicationPrice.equalsIgnoreCase("N/A")) {
+		} else if (!shippingPrice.trim().equalsIgnoreCase("Free") && medicationPrice.equalsIgnoreCase("N/A")) {
 			return totalPrice.trim().equals(shippingPrice.trim()) && totalPrice.matches(dollarAmntRegex);
 		}
 		return totalPrice.trim().equals(medicationPrice.trim());
@@ -297,12 +298,15 @@ public class CheckOutSummaryPage extends CheckOutSummaryWebElements {
 
 	public boolean validateDaySupply() {
 		String daySupply = RefillCheckoutSummaryStepDefinition.listOfMedicationDetail.get(2).toString();
-		return listOfDaySupply.get(listOfDaySupply.size() - 1).getText().trim().contains(daySupply.trim());
+		String [] array=daySupply.split("\n");
+		return listOfDaySupply.get(listOfDaySupply.size() - 1).getText().trim().contains(array[0].trim());
 	}
 
 	public boolean validateRefillsRemaining() {
 		String refillRemainings = RefillCheckoutSummaryStepDefinition.listOfMedicationDetail.get(1).toString();
-		int refillRemainingsFromMedCab = Integer.parseInt(refillRemainings);
+		String [] array=refillRemainings.split("\n");
+		//int refillRemainingsFromMedCab = Integer.parseInt(refillRemainings);
+		int refillRemainingsFromMedCab = Integer.parseInt(array[0]);
 		String refillRemainingFrmCheckOutPage = listOfRefillRemaining.get(listOfRefillRemaining.size() - 1).getText();
 		String[] arrayVal = refillRemainingFrmCheckOutPage.split(":");
 		int refillRemainingsOnCheckOutPage = Integer.parseInt(arrayVal[1].trim());
@@ -345,7 +349,8 @@ public class CheckOutSummaryPage extends CheckOutSummaryWebElements {
 
 	public boolean validateDaySupplyForRenew() {
 		String daySupply = RefillCheckoutSummaryStepDefinition.listOfMedicationDetail.get(1).toString();
-		return listOfDaySupply.get(listOfDaySupply.size() - 1).getText().trim().contains(daySupply.trim());
+		String [] array=daySupply.split("\n");
+		return listOfDaySupply.get(listOfDaySupply.size() - 1).getText().trim().contains(array[0].trim());
 	}
 
 	public boolean validateShippingAlternateDate() {
@@ -394,10 +399,10 @@ public class CheckOutSummaryPage extends CheckOutSummaryWebElements {
 			String shippingMethod = shippingMethodForRenew.getText();
 			String shippingFee = orderSummaryShippingFee.getText();
 			String[] arry = shippingMethod.split("-");
-			if (!arry[1].trim().equals("Free")) {
-				return shippingFee.equals(arry[1].trim()) && shippingFee.matches(dollarAmntRegex);
+			if (!arry[1].trim().equalsIgnoreCase("Free")) {
+				return shippingFee.equalsIgnoreCase(arry[1].trim()) && shippingFee.matches(dollarAmntRegex);
 			}
-			return shippingFee.equals(arry[1].trim());
+			return shippingFee.equalsIgnoreCase(arry[1].trim());
 		}
 		return false;
 	}

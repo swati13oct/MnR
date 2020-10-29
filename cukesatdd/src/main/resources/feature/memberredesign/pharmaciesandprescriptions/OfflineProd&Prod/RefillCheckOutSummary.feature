@@ -9,6 +9,7 @@ Feature: To test Refill Checkout Summary Page
     And Member Enters the Username he wants to search
       | MemUsername | <MemUserName> |
     And user clicks on member to select
+    #When user navigates to the pharmacies and prescriptions page from testharness page
     And now user navigates to the pharmacies and prescriptions page from dashboard or testharness page
       | PlanType    | <planType>   |
       | Member Type | <memberType> |

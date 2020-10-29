@@ -1373,10 +1373,12 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 
 		// F392596
 		public void clickOnViewAllMedicationsLink() {
+			TestHarness.checkForIPerceptionModel(driver);
 			Assert.assertTrue("PROBLEM - unable to locate Medicine Cabinet View All Medications link text element",
 					validate(ViewAllMedications, 50));
-			ViewAllMedications.click();
-
+			checkModelPopup(driver);
+			jsClickNew(ViewAllMedications);
+			//ViewAllMedications.click();
 		}
 
 		public void clickOnRefillAllMedications() {
@@ -2617,12 +2619,14 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 		}
 
 		public CheckOutSummaryPage navigateToCheckOutSummaryPage() {
+			TestHarness.checkForIPerceptionModel(driver);
 			CommonUtility.waitForPageLoad(driver, orderCheckoutPageHeader, 40);
 			CommonUtility.waitForPageLoad(driver, drugNameOnCheckOutPage, 60);
 			/*CommonUtility.waitForPageLoad(driver, drugNameOnCheckOutPage, 60);*/
 			CommonUtility.checkPageIsReady(driver);
 			if (driver.getCurrentUrl().contains("/pharmacy/overview.html#/medication-management")) {
 				CommonUtility.checkPageIsReady(driver);
+                checkModelPopup(driver);
 				return new CheckOutSummaryPage(driver);
 			}
 			return null;
@@ -2648,8 +2652,22 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 				text = text.replaceFirst(child.getText(), "");
 			}
 			listOfVal.add(text);
-			// listOfVal.add(listOfMedicationEligibleFrRefill.get(rand_int).getText());
+			
+			/*String text2 = listOfRefillLeftEligibleFrRefill.get(rand_int).getText();
+			for (WebElement child : listOfRefillLeftEligibleFrRefill.get(rand_int).findElements(By.xpath("./*"))) {
+				text = text.replaceFirst(child.getText(), "");
+			}
+			System.out.println("Refills Remaining "+text2);
+			
+			listOfVal.add(text2);*/
+			//listOfVal.add(listOfMedicationEligibleFrRefill.get(rand_int).getText());
 			listOfVal.add(listOfRefillLeftEligibleFrRefill.get(rand_int).getText());
+			
+			/*String text1 = listOfDaySupplyEligibleFrRefill.get(rand_int).getText();
+			for (WebElement child : listOfDaySupplyEligibleFrRefill.get(rand_int).findElements(By.xpath("./*"))) {
+				text = text.replaceFirst(child.getText(), "");
+			}
+			listOfVal.add(text1);*/
 			listOfVal.add(listOfDaySupplyEligibleFrRefill.get(rand_int).getText());
 			// listOfVal.add(listOfAmntPaidEligibleFrRefill.get(rand_int).getText());
 			listOfVal.add(rand_int);
@@ -2737,6 +2755,7 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 		}
 
 		public void clickOnRefillMedicationCTABasedOnIndex(int index) {
+			checkModelPopup(driver);
 			listOfRefillMedication.get(rand_int).click();
 		}
 
@@ -2779,6 +2798,7 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 		}
 
 		public void waitTillMedCabLoads() {
+			TestHarness.checkForIPerceptionModel(driver);
 			if (!validate(ViewAllMedications, 60)) {
 				System.out.println("Inside waitTillMedCabLoads");
 				tryAgainMedCabTimeOut.click();

@@ -4207,6 +4207,7 @@ public class AccountHomePage extends UhcDriver {
 					if (driver.getCurrentUrl().contains("pharmacy")) {
 						System.out.println(
 								"Current URL contains pharmacy text in it, returning PharmaciesAndPrescriptionsPage");
+                        checkModelPopup(driver);
 						return new PharmaciesAndPrescriptionsPage(driver);
 					} else {
 						Assert.fail(

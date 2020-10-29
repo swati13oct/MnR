@@ -25,7 +25,7 @@ public class CheckOutSummaryWebElements extends UhcDriver {
 
 	// ***************Order Summary Section*****************//
 
-	@FindBy(xpath = "//*[text()='Order summary']/..")
+	@FindBy(xpath = "//*[text()='Order Summary']/..")
 	protected WebElement orderSummarySection;
 
 	@FindBy(xpath = "//*[@data-testid='os__summary__medicationsLabel_count']")

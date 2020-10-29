@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import acceptancetests.data.PageConstants;
 import pages.regression.pharmaciesandprescriptions.CheckOutSummaryPage;
 import pages.regression.pharmaciesandprescriptions.PharmaciesAndPrescriptionsPage;
+import pages.regression.testharness.TestHarness;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -587,5 +588,28 @@ public class RefillCheckoutSummaryStepDefinition {
 				checkoutSumaryPg.validateOptumRxDisclaimerMessage(expectedMsg));
 		getLoginScenario().saveBean(PageConstants.CHECKOUT_SUMMARY_PAGE, checkoutSumaryPg);
 	}
+	
+	@When("^user fetches medication informations and clicks on Transfer To HD call to action button on My Medication Page$")
+	public void user_fetches_medication_informations_and_clicks_on_Transfer_To_HD_call_to_action_button_on_My_Medication_Page()
+			throws Throwable {
+		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
+				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
+		pnpPg.waitTillMedCabLoads();
+		pnpPg.clickOnViewAllMedicationsLink();
+		List<Integer> indexOfTransferMedication = pnpPg.getListOfIndexForRetailTransferToHDOnMyMed();
+		int countOfPage = Integer.parseInt(pnpPg.getCountOfMyMedPage());
+		for (int i = 0; i < countOfPage; i++) {
+			if (indexOfTransferMedication.size() == 0 && i != countOfPage - 1) {
+				pnpPg.clickOnNextPageArrow();
+				indexOfTransferMedication = pnpPg.getListOfIndexForRetailTransferToHDOnMyMed();
+			}
+		}
+		listOfMedicationDetail = pnpPg.fetchesMedicationInformationFrTransferToHD();
+		int medicationToBeClicked = (int) listOfMedicationDetail.get(listOfMedicationDetail.size() - 1);
+		MedicatioNameToBeSearchedOnP_P = listOfMedicationDetail.get(0).toString().trim();
+		pnpPg.clickOnTransferToHDCTABasedOnIndex(medicationToBeClicked);
+		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
+	}
+	
 
 }
