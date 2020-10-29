@@ -4186,6 +4186,7 @@ public class AccountHomePage extends UhcDriver {
 								.findElement(By.cssSelector("#sticky-main-nav > div > div > div > a:nth-child(5)"));
 						System.out.println(
 								"shadow-root element has been located, now clicking on Pharmacies And Prescriptions tab");
+						checkModelPopup(driver);//----> DRex Team Kiran 
 						TestHarness.checkForIPerceptionModel(driver);
 						PharmaciesAndPrescriptionsTab.click();
 						System.out.println("Now waiting for Drug Look up on Pharmacies And Prescriptions page to show up");
