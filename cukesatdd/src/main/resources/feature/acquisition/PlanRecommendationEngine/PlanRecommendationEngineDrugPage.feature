@@ -282,7 +282,7 @@ Feature: Plan Recommendation Engine flow - Verify Drug page in plan Recommendati
       | Zipcode | isMultiCounty | county | isCoverageOpt | specialNeeds             | travel                     | doctors    | DoctorsName | isMultiDoctor | Drug Selection |
       |   90201 | NO            |        | MAPD          | Medicaid,chronic,nursing | withinUS,outsideUS,regular | UHGNetwork |             |               | Yes            |
 
-  @PRE @planrecommendation @drugpage @drugpage @switchdrug @F374225 @F520144
+  @PRE @planrecommendation @drugpage @drugpage @switchdrug @F374225
   Scenario Outline: <Zipcode>, <isMultiCounty> , <isCoverageOpt> , <specialNeeds> , <travel> , <doctors> , <Drug Selection> - To validate switch drug function in PRE
     Given the user is on UHC medicare acquisition site landing page
     When user navigate to Plan Recommendation Engine and Checking Breadcrumbs
