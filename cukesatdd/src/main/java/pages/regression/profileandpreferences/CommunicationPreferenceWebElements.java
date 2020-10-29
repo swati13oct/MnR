@@ -149,7 +149,7 @@ public class CommunicationPreferenceWebElements extends UhcDriver {
 	@FindBy(id="updatedisable")
 	protected WebElement saveButtonOnEmailUpdatePopup;
 
-	@FindBy(id="cancelUpdateEmailBtn_P")
+	@FindBy(id="cancelUpdateEmailBtn")
 	protected WebElement cancelButtonOnEmailUpdatePopup;
 
 	@FindBy(xpath="//div[2]/div[2]/p")
@@ -187,6 +187,9 @@ public class CommunicationPreferenceWebElements extends UhcDriver {
 
 	@FindBy(xpath="//*[@id='profileTabHeader']//div[@class='tabs-desktop']//li//a[contains(.,'Senior Supplement Plan')]") 
 	protected WebElement comboTab_SSUP;
+	
+	@FindBy(xpath="//*[@id='accordiongroup-18-2999-tab']/div/a")
+	protected WebElement paperlessSettingsAccordian;
 
 	public CommunicationPreferenceWebElements(WebDriver driver) {
 		super(driver);

@@ -83,6 +83,10 @@ public class CommunicationPreferencePage extends CommunicationPreferenceWebEleme
 		System.out.println("frame validated");
 		driver.switchTo().frame(iframeEPMP);
 		System.out.println("switched to frame");
+		
+		//Click to expand the accordian
+          paperlessSettingsAccordian.click();
+		
 		if (!prefValidate(paperlessOptionActive)) {
 		waitTillElementClickableInTime(paperlessOptionInactive, 2);
 			paperlessOptionInactive.click();
