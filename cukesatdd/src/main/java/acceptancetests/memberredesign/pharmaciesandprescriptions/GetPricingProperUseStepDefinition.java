@@ -57,8 +57,8 @@ public class GetPricingProperUseStepDefinition {
 
 	}
 
-	@When("^user select the Get Pricing button on a drug card$")
-	public void user_select_the_Get_Pricing_button_on_a_drug_card() throws Throwable {
+	@When("^user clicks the Get Pricing button on a drug card$")
+	public void user_clicks_the_Get_Pricing_button_on_a_drug_card() throws Throwable {
 
 		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
