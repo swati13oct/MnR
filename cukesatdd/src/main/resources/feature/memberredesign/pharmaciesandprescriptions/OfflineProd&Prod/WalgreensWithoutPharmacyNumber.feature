@@ -19,4 +19,4 @@ Feature: Walgreen without Pharmacy Number (Contact Pharmacy)
 
     Examples: 
       | username | password | memUserName | planType | memberType |
-      | yaihemai | Yusufu6$ | Berniewb    | PDP      | Individual |
+      | yaihemai | Yusufu6$ | Tippie01    | HMO      | Individual |
