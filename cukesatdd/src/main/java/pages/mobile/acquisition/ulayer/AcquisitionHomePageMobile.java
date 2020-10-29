@@ -1910,7 +1910,9 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	 */
 	public ZipcodeLookupHomePageMobile looksupforZipcodes() {
 
-		lookzip.click();
+		//lookzip.click();
+		validate(lookzip);
+		jsClickNew(lookzip);
 
 		CommonUtility.waitForPageLoad(driver, zipCodeSearchPopup, CommonConstants.TIMEOUT_30);
 		if (zipCodeSearchPopupHeading.getText().equalsIgnoreCase("Find a ZIP code")) {
@@ -2478,7 +2480,8 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 	public AboutUsPageMobile aboutUsClick() {
 		validateNew(footerAboutUsLink);
-		footerAboutUsLink.click();
+		//footerAboutUsLink.click();
+		jsClickNew(footerAboutUsLink);
 		CommonUtility.checkPageIsReadyNew(driver);
 		if (getTitle().contains("About")) {
 			return new AboutUsPageMobile(driver);

@@ -178,7 +178,9 @@ public class ZipCodeAndPlanYearCapturePageMobile extends UhcDriver {
 
 	public void selectPlanYear() {
 		if (validate(planYearDropdown)) {
-			planYearDropdown.click();
+			scrollToView(planYearDropdown);
+			//planYearDropdown.click();
+			jsClickNew(planYearDropdown);
 			Select planYear = new Select(planYearDropdown);
 			planYear.selectByIndex(1);
 		}

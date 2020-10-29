@@ -218,12 +218,12 @@ public class PlanRecommendationEngineSpecialNeedsPageMobile extends UhcDriver {
 		public void specialNeedsOptionsMoreInfo(String SNPType) {
 			if (SNPType.equalsIgnoreCase("Medicaid")) {
 				if(snpMedicaidAccordion.isDisplayed()) {
-					validate(snpMedicaidAccordionCarrot, 30);
+					validate(snpMedicaidAccordionCarrot, 40);
 					Assert.assertTrue(snpMedicaidAccordionMoreInfo.getText().contains("More"));
 //					Assert.assertTrue(snpMedicaidAccordionMoreInfo1stPara.getText().contains("D-SNP"));
 //					Assert.assertTrue(snpMedicareAccordionMoreInfo2ndPara.getText().contains("toll free"));
 					scrollToView(snpMedicaidAccordionCarrot);
-					validate(snpMedicaidAccordionCarrot, 30);
+					validate(snpMedicaidAccordionCarrot, 40);
 					snpMedicaidAccordionCarrot.click();
 					//jsClickNew(snpMedicaidAccordionCarrot);
 				}else {
@@ -231,7 +231,7 @@ public class PlanRecommendationEngineSpecialNeedsPageMobile extends UhcDriver {
 				}
 			}else if (SNPType.equalsIgnoreCase("chronic")) {
 				if(snpConditionsAccordion.isDisplayed()) {
-					validate(snpConditionsAccordionCarrot, 30);
+					validate(snpConditionsAccordionCarrot, 40);
 					Assert.assertTrue(snpConditionsAccordionMoreInfo.getText().contains("More"));
 //					Assert.assertTrue(snpConditionsAccordionMoreInfo1stPara.getText().contains("C-SNP"));
 //					Assert.assertTrue(snpConditionsAccordionMoreInfo2ndPara.getText().contains("toll free"));
@@ -243,7 +243,7 @@ public class PlanRecommendationEngineSpecialNeedsPageMobile extends UhcDriver {
 				}
 			}else if (SNPType.equalsIgnoreCase("nursing")) {
 				if(snpNursinghomeAccordion.isDisplayed()) {
-					validate(snpNursinghomeAccordionCarrot, 30);
+					validate(snpNursinghomeAccordionCarrot, 40);
 					Assert.assertTrue(snpNursinghomeAccordionMoreInfo.getText().contains("More"));
 //					Assert.assertTrue(snpNursinghomeAccordionMoreInfo1stPara.getText().contains("I-SNP"));
 //					Assert.assertTrue(snpNursinghomeAccordionMoreInfo2ndPara.getText().contains("toll free"));
