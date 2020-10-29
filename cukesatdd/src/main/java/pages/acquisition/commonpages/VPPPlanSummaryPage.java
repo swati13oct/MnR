@@ -770,6 +770,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 				+ "\')]/ancestor::div[contains(@class,'module-plan-overview')]//*[contains(@dtmname,'Provider Search')]"));
 		validateNew(ProviderSearchLink);
 		switchToNewTabNew(ProviderSearchLink);
+		sleepBySec(15);
 		if (driver.getCurrentUrl().contains("werally")) {
 			return new ProviderSearchPage(driver);
 		}
@@ -3638,6 +3639,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	}
 	@FindBy(xpath="//label[contains(@for,'compare-plan')]")
 	private WebElement planCompareCheckBox;
+
+	private Map<String, ArrayList<String>> dataMap;
 	
 	public void verifyPlanComapreCheckboxIsUncheckedforFirstPlan() {
 		validate(planCompareCheckBox);
@@ -3752,5 +3755,89 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		js.executeScript("arguments[0].click();", Checkbox);
 		// js.executeScript("document.getElementById('compare-plan-3').click;");
 		System.out.println("checked third plan for plan compare");
+	}
+	
+	public ArrayList<String> providerinforetreive(String planName){
+		CommonUtility.checkPageIsReadyNew(driver);
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		WebElement ProviderSearchLink = driver.findElement(By.xpath("//*[contains(text(),'" + planName
+				+ "')]/ancestor::div[contains(@class, 'module-plan-overview module')]//*[contains(@class,'provider-list added')]"));
+		String mproviderinfo=ProviderSearchLink.getText();
+		System.out.println(mproviderinfo);
+        ProviderSearchLink.click();
+        ArrayList<String> providerNames = new ArrayList<String>();
+		List<WebElement> providers = driver.findElements(By.xpath("//*[contains(text(),'" + planName
+				+ "')]/ancestor::div[contains(@class, 'module-plan-overview module')]//*[contains(@class,'provider-list added')]//div[@class='providers-list']//ul//li//span"));
+		for(WebElement element:providers)
+		{
+			String providername = element.getText();
+			providerNames.add(providername);
+		}
+		
+		return providerNames;
+	}
+	//
+/*		public void setStringList(ArrayList<String> stringList) {
+		
+	    this.stringList = stringList;
+	}
+	
+	public ArrayList<String> getStringList() {
+	    return stringList;
+	}*/
+	
+	public void setMap(Map<String, ArrayList<String>> dataMap) {
+		
+	    this.dataMap = dataMap;
+
+	}
+	
+	public  Map<String, ArrayList<String>> getMap(){
+	    return dataMap;
+
+	}
+	public ArrayList<String> validate_marketing_details(String planName) {
+		
+        ArrayList<String> marketingBulletDetails = new ArrayList<String>();
+		List<WebElement> vppmarketingBullets = driver.findElements(By.xpath("//*[contains(text(),'" + planName
+				+ "')]/ancestor::div[contains(@class, 'module-plan-overview module')]//*[@class='content-cols']//div//ul[@class='highlight-list']//li"));
+		
+		for(WebElement element:vppmarketingBullets)
+		{
+			String marketingDetails = element.getText();
+			marketingBulletDetails.add(marketingDetails);
+		}
+			
+		return marketingBulletDetails;
+		
+	}
+	public WelcomePage Enroll_OLE_Plan_campaign_uhc(String planName, String planType) throws InterruptedException {
+
+		WebElement enrollForPlan = null;
+		System.out.println("Enroll in Plan for Plan : " + planName);
+
+		if (planType.equalsIgnoreCase("PDP"))
+			enrollForPlan = driver.findElement(By.xpath("//*[contains(text(), '" + planName
+					+ "')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class,'enrollment')]//*[contains(@class,'cta-button')]"));
+		else
+			enrollForPlan = driver.findElement(By.xpath(
+					"//*[contains(text(), '" + planName + "')]/following::a[contains(text(),'Enroll in Plan')][2]"));
+
+		if (enrollForPlan != null) {
+			validateNew(enrollForPlan);
+			enrollForPlan.click();
+		}
+
+		CommonUtility.waitForPageLoadNew(driver, NextBtn, 30);
+		if (driver.getCurrentUrl().contains("enrollment")) {
+			System.out.println("OLE Welcome Page is Displayed");
+			return new WelcomePage(driver);
+		}
+		return null;
 	}
 }
