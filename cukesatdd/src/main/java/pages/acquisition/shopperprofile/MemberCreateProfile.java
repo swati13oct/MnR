@@ -90,8 +90,10 @@ public class MemberCreateProfile extends UhcDriver {
 			sendkeys(dob, DOB);
 			if(Strings.isNullOrEmpty(MBI))
 				sendkeys(zipCode, zipcode);
-			else
+			else {
 				sendkeys(mbi, MBI);
+				sendkeys(zipCode, zipcode);
+			}
 			String winHandleBefore = driver.getWindowHandle();
 			btnCreateProfile.click();
 			waitforElementNew(successMessage);
