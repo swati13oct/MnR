@@ -817,7 +817,8 @@ public class BenefitsAndCoverageUmsStepDefinition {
 				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
 		// JSONObject
 		// benefitsandcoverageExectedJson=(JSONObject)loginScenario.getBean(PlanBenefitsAndCoverageCommonConstants.BENEFITS_AND_COVERAGE_EXPECTED);
-		benefitsCoveragePage.validate_drugCostDropdownoptions();
+		String memberType = (String) getLoginScenario().getBean(LoginCommonConstants.CATOGERY);
+		benefitsCoveragePage.validate_drugCostDropdownoptions(memberType);
 	}
 
 
@@ -881,7 +882,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	/** 
 	 * @toDo : Validates the Drug costs table  for  a Non Lis member
 	 */
-	@And("the user should see drug copay and discount table")
+	@And("^the user should see drug copay and discount table$")
 	public void user_validate_drugcopaydiscounttable(DataTable givenAttributes ) {
 		List<DataTableRow> memberAttributesRow = givenAttributes
 				.getGherkinRows();
