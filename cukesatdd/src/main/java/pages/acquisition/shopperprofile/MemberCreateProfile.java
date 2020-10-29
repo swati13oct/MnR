@@ -3,6 +3,7 @@ package pages.acquisition.shopperprofile;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -17,7 +18,6 @@ import atdd.framework.UhcDriver;
 import cucumber.api.DataTable;
 import gherkin.formatter.model.DataTableRow;
 import pages.acquisition.ulayer.ComparePlansPage;
-import pages.acquisition.ulayer.VPPPlanSummaryPage;
 
 public class MemberCreateProfile extends UhcDriver {
 	
@@ -92,9 +92,17 @@ public class MemberCreateProfile extends UhcDriver {
 				sendkeys(zipCode, zipcode);
 			else
 				sendkeys(mbi, MBI);
+			String winHandleBefore = driver.getWindowHandle();
 			btnCreateProfile.click();
 			waitforElementNew(successMessage);
-			switchToNewTab();
+			Set<String> tabs = driver.getWindowHandles();
+			for(String tab : tabs) {
+				if(!tab.equals(winHandleBefore)) {
+					driver.switchTo().window(tab);
+					break;
+				}
+			}
+			
 			CommonUtility.checkPageIsReadyNew(driver);
 			if(driver.getCurrentUrl().contains("health-plans.html")) {
 				return new ComparePlansPage(driver);
