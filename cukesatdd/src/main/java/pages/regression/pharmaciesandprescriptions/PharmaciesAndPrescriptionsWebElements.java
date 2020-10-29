@@ -469,10 +469,10 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	@FindBy(xpath = "//h2[@data-testid='section__header']")
 	protected List<WebElement> NumberInParenthesisRefillAll;
 
-	@FindBy(xpath = "//p[contains(text(),'1-800-721-0627')]")
+	@FindBy(xpath = "//*[contains(text(),'1-800-721-0627')]")
 	protected WebElement technicalSupportNumber;
 
-	@FindBy(xpath = "//p[contains(text(),'1-844-876-6177')]")
+	@FindBy(xpath = "//*[contains(text(),'1-866-255-4835')]")
 	protected WebElement planSupportNumber;
 
 	@FindBy(xpath = "//*[@id='needhelpsectioncontactus']/div/section/div/div[2]/div/div/div[1]/div/div/p[3]")
@@ -1358,7 +1358,7 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	public boolean validateNeedHelpsHoursOfOperations() {
 
 		String Hours1="7 a.m. - 10 p.m. CT, 7 days a week";
-		String Hours2="8 a.m. - 8 p.m. local time, Monday - Friday";
+		String Hours2="8 a.m. - 8 p.m. local time, 7 days a week";
 
 		if (planSupportHours.getText().equals(Hours1) && technicalSupportHours.getText().equals(Hours2)) {
 
