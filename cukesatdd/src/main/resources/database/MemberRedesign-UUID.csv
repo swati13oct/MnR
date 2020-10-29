@@ -568,5 +568,12 @@ a67e1596-5686-44c6-b447-7b73982f7046/Password@1,MA,GRP_PREEFF_PnP
 70056509-1876-4886-bb2b-3049c42e3603/Password@1,MAPD,GRP_LGHIB_PREEFF_PnP
 2539fa0b-738c-4500-b4d9-aabd7f66c048/Password@1,MAPD,GRP_SEIB_PREEFF_PnP
 f9314008-edcb-4b40-b4a5-8ad28d769115/Password@1,PDP,GRP_PREEFF_PnP
-ad1804fc-3cce-4fab-9905-8196defc5ab5/Password@1,DSNP_MAPD,Individual_Bnc_CnS,LIS 2,
-587f453f-6f05-4ff8-ba04-b83036e70db5/Password@1,DSNP_MAPD,Individual_Bnc_MnR,LIS 2,
+ad1804fc-3cce-4fab-9905-8196defc5ab5/Password@1,DSNP_MAPD,Individual_Bnc_CnS01,LIS 2,
+bd147126-55f5-49e3-bd00-897e41407ce3/Password@1,DSNP_MAPD,Individual_Bnc_CnS02,LIS 3,
+4214f593-9acf-4faa-aa0f-cdc7fa9f5c49/Password@1,DSNP_MAPD,Individual_Bnc_CnS03,LIS 1,
+451426bf-7974-41c2-9c87-dd73d01d4cf7/Password@1,DSNP_MAPD,Individual_Bnc_CnS04,LIS 2,
+1c51fed5-0264-4f5b-ba45-02e893e561c0/Password@1,DSNP_MAPD,Individual_Bnc_CnS05,LIS 2,
+653ea7c3-3835-4822-9445-d3397369710a/Password@1,DSNP_MAPD,Individual_Bnc_MnR01,LIS 1,
+38e26e4e-eca1-4d48-bad2-9935f2e4dadf/Password@1,DSNP_MAPD,Individual_Bnc_MnR02,LIS 1,
+276ff6dd-9a86-4c02-9a54-e00e31b02607/Password@1,DSNP_MAPD,Individual_Bnc_MnR03,LIS 1,
+587f453f-6f05-4ff8-ba04-b83036e70db5/Password@1,DSNP_MAPD,Individual_Bnc_MnR04,LIS 3,
