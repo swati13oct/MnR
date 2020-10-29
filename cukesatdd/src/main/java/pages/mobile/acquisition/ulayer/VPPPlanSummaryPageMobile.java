@@ -1737,15 +1737,16 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 		}
 	}
 
-	public void deselectAddToCompareinAARP(String planName){
-		try{
-	    	WebElement addToCompareCheck = driver.findElement(By.xpath("//*[contains(text(),\'" + planName + "\')]/ancestor::div[contains(@class, 'module-plan-overview')]//div[contains(@class ,'compare-box')]//span[contains(@class ,'ng-scope')]/label"));
-			//WebElement addToCompareCheck = driver.findElement(By.xpath("//*[contains(@class,'added-num')]/ancestor::div[contains(@class,'compare-add')]//label[contains(@for,'compare-plan')]"));
+	public void deselectAddToCompareinAARP(String planName) {
+		try {
+			WebElement addToCompareCheck = driver.findElement(By.xpath("//*[contains(text(),\'" + planName
+					+ "\')]/ancestor::div[contains(@class, 'module-plan-overview')]//div[contains(@class ,'compare-box')]//span[contains(@class ,'ng-scope')]/label"));
+			// WebElement addToCompareCheck =
+			// driver.findElement(By.xpath("//*[contains(@class,'added-num')]/ancestor::div[contains(@class,'compare-add')]//label[contains(@for,'compare-plan')]"));
 			jsClickNew(addToCompareCheck);
 			System.out.println("Add to compare checkbox has been deselected");
 			Assert.assertTrue("deselected add to compare ", true);
-		}
-		catch (Exception e){	
+		} catch (Exception e) {
 			Assert.fail("Unable to deselect Add to compare");
 		}
 	}
@@ -4246,7 +4247,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 		ZipCodeTxtBx.clear();
 		ZipCodeTxtBx.sendKeys(zipcode);
 		scrollToView(FIndPlansButton);
-		validate(FIndPlansButton,30);
+		validate(FIndPlansButton, 30);
 		FIndPlansButton.click();
 
 		CommonUtility.checkPageIsReadyNew(driver);
@@ -4513,27 +4514,28 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 		if (planType.equalsIgnoreCase("MA") || planType.equalsIgnoreCase("MAPD")) {
 			WebElement MAmoreDetailsLink = driver.findElement(By.xpath("//*[contains(text(), '" + planName
 					+ "')]/ancestor::div[contains(@class,'module-plan-overview')]//div[contains(@class,'swiper-content')]//div[not (contains(@class,'ng-hide'))]/a[contains(text(),'View Plan')]"));
-			// scrollToView(MAmoreDetailsLink);
-			CommonUtility.waitForPageLoadNew(driver, MAmoreDetailsLink, 30);
+			mobileswipeHorizantal("50", true);
+			// CommonUtility.waitForPageLoadNew(driver, MAmoreDetailsLink, 30);
+			scrollToView(MAmoreDetailsLink);
 			jsClickNew(MAmoreDetailsLink);
 			System.out.println("View Plan Details Link is clicked for MA plan" + planName);
 
 		} else if (planType.equalsIgnoreCase("PDP")) {
 			WebElement PDPmoreDetailsLink = driver.findElement(By.xpath("//*[contains(text(), '" + planName
 					+ "')]/ancestor::div[contains(@class,'module-plan-overview')]//*[contains(@id,'viewmoredetlinkpdp')]"));
-			// scrollToView(PDPmoreDetailsLink);
-			CommonUtility.waitForPageLoadNew(driver, PDPmoreDetailsLink, 30);
-			// PDPmoreDetailsLink.click();
-			jsClickNew(PDPmoreDetailsLink);
+			// CommonUtility.waitForPageLoadNew(driver, PDPmoreDetailsLink, 30);
+			mobileswipeHorizantal("50", true);
+			scrollToView(PDPmoreDetailsLink);
+			PDPmoreDetailsLink.click();
 			System.out.println("View Plan Details Link is clicked for PDP plan" + planName);
 
 		} else if (planType.equalsIgnoreCase("SNP")) {
 			WebElement SNPmoreDetailsLink = driver.findElement(By.xpath("//*[contains(text(), '" + planName
 					+ "')]/ancestor::h3/ancestor::*[contains(@class,'module-plan-overview')]//*[contains(text(),'View Plan')]"));
+			// CommonUtility.waitForPageLoadNew(driver, SNPmoreDetailsLink, 30);
+			mobileswipeHorizantal("50", true);
 			scrollToView(SNPmoreDetailsLink);
-			CommonUtility.waitForPageLoadNew(driver, SNPmoreDetailsLink, 30);
-			// SNPmoreDetailsLink.click();
-			jsClickNew(SNPmoreDetailsLink);
+			SNPmoreDetailsLink.click();
 			System.out.println("View Plan Details Link is clicked for MA plan" + planName);
 		}
 		CommonUtility.checkPageIsReadyNew(driver);

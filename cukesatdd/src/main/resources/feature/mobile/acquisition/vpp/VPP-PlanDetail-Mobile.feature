@@ -118,7 +118,7 @@ Feature: 1.01.2-Vpp to plan Details AARP Scenarios
       | TCID  | zipcode | isMultiCounty | county             | plantype | planName                                               | planyear |
       | 00004 |   90210 | NO            | Los Angeles County | MA       | AARP Medicare Advantage SecureHorizons Essential (HMO) | current  |
 
-  @vppPlanDetailsAARP06 @vppPlanDetailsAARPRun02 @vppPlanDetailsAARPRegression
+  @vppPlanDetailsAARP06 @vppPlanDetailsAARPRun02 @vppPlanDetailsAARPRegression @swipe
   Scenario Outline: <TCID> - Plan type: <plantype> - Verify OLE Landing from VPP Plan Details
     Given the user lands on AARP medicare acquisition site page
     When the user performs plan search using following information in the AARP site

@@ -140,6 +140,8 @@ public class VppPlanDetailMobile {
 
 	@Then("^the user clicks on Enroll Now in Plan Details Page to start the OLE flow$")
 	public void the_user_clicks_on_Enroll_Now_in_Plan_Details_Page_to_start_the_OLE_flow() throws Throwable {
+		
+		getLoginScenario().getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
 		String PlanName = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_NAME);
 		String PlanYear = (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_YEAR);
 
@@ -150,7 +152,6 @@ public class VppPlanDetailMobile {
 		String SiteName;
 		SiteName = (String) getLoginScenario().getBean(oleCommonConstants.ACQ_SITE_NAME);
 
-		
 		String PlanPremium = (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_PREMIUM);
 
 		WelcomePageMobile welcomePage;
@@ -166,7 +167,8 @@ public class VppPlanDetailMobile {
 			TFN = vppPlanDetailsPage.GetTFNforPlanType();
 			welcomePage = vppPlanDetailsPage.Enroll_OLE_Plan(PlanName);
 		}
-		//String PlanPremium = (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_PREMIUM);
+		// String PlanPremium = (String)
+		// getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_PREMIUM);
 		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_NAME, PlanName);
 		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_TYPE, PlanType);
 		getLoginScenario().saveBean(oleCommonConstants.OLE_ZIPCODE, ZipCode);
