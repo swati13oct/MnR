@@ -53,5 +53,5 @@ Feature: To test Transfer To HD Checkout Summary Page
     And disclaimer will remind the user that "OptumRx" is fulfilling the order
 
     Examples: 
-      | FID     | username | password | MemUserName | planType | memberType     |
-      | F484057 | ntalesha | pass@123 | DSOADY17    | MPDP     | Individual_PnP |
+      | FID     | username | password | MemUserName  | planType | memberType     |
+      | F484057 | ntalesha | pass@123 | Davisald1944 | MPDP     | Individual_PnP |
