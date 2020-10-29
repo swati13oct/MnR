@@ -950,7 +950,9 @@ public class PlanDetailsPageMobile extends UhcDriver {
 	}
 
 	public void clickAndValidatePrescriptionDrugBenefits() {
-		prescriptiondrugTab.click();
+		//prescriptiondrugTab.click();
+		scrollToView(prescriptiondrugTab);
+		jsClickNew(prescriptiondrugTab);
 		validateNew(drugBenefitsSection);
 		if (drugBenefitsSection.isDisplayed()) {
 			Assert.assertTrue(true);

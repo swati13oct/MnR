@@ -791,9 +791,16 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 		else
 			checkModelPopup(driver, 10);
 		handleChatPopup();
+		scrollToView(maPlansCount);
 		validateNew(maPlansCount);
+		
+		scrollToView(msPlansCount);
 		validateNew(msPlansCount);
+		
+		scrollToView(pdpPlansCount);
 		validateNew(pdpPlansCount);
+		
+		scrollToView(snpPlansCount);
 		validateNew(snpPlansCount);
 	}
 

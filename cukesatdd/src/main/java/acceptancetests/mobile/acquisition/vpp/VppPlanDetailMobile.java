@@ -155,9 +155,9 @@ public class VppPlanDetailMobile {
 		String PlanPremium = (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_PREMIUM);
 
 		WelcomePageMobile welcomePage;
-		if (SiteName.contains("ACQ_Si")) {
+		if (SiteName.contains("UHC_ACQ")) {
 
-			pages.mobile.acquisition.bluelayer.PlanDetailsPageMobile vppPlanDetailsPage = (pages.mobile.acquisition.bluelayer.PlanDetailsPageMobile) getLoginScenario()
+			pages.mobile.acquisition.ulayer.PlanDetailsPageMobile vppPlanDetailsPage = (pages.mobile.acquisition.ulayer.PlanDetailsPageMobile) getLoginScenario()
 					.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
 			TFN = vppPlanDetailsPage.GetTFNforPlanType();
 			welcomePage = vppPlanDetailsPage.Enroll_OLE_Plan(PlanName);
