@@ -866,8 +866,8 @@ Feature: 1.01 Member  benefits and Coverage page
       | TID   | planType | memberType     | copayCategory | language | name       | memberid     | effectivedate | monthlypremium | extrahelp            | Identifier       | count | rider   |
       | 15245 | MAPD     | Individual_BnC | LIS 1         | ENGLISH  | DBAD ADFED | 919744565-00 | 01/01/2019    | Not Available  | Extra Help Level : 1 | IndEffectiveAARP |     7 | Rider   |
       
-   @DSNP-CnS-MnR
-  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify PDF section is in place on Benefits and Coverage page for Lis user
+ 
+  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify  Medical copays or coinsurance section and Out-of-pocket maximum section for DSNP members
     Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>      |
       | Member Type    | <memberType>    |
@@ -917,10 +917,29 @@ Feature: 1.01 Member  benefits and Coverage page
     And the user clicks on More Information link
     And the user validates contactus section
 
-    Examples: 
-      | TID | planType   | memberType         | copayCategory | language | name          | memberid     | effectivedate | monthlypremium | extrahelp            | Identifier       | count |rider   | 
-      | x01 | DSNP_MAPD  | Individual_Bnc_CnS | LIS 2         | ENGLISH  | DREENA KIMURA | 971949191-00 | 01/01/2020    | Not Available  | Extra Help Level : 2 | IndEffectiveAARP |     6 | NoRider|
- #     | x02 | DSNP_MAPD  | Individual_Bnc_MnR | LIS 2         | ENGLISH  | DBAD ADFED | 919744565-00 | 01/01/2019    | Not Available  | Extra Help Level : 2 | IndEffectiveAARP |     6 |  NoRider|  
+   Examples: 
+ 	@DSNP_CnS01
+      | TID   | planType   | memberType           | copayCategory | language | name         | memberid     | effectivedate | monthlypremium | extrahelp            | Identifier       | count | H-PBP    | rider  |
+      | C&S01 | DSNP_MAPD  | Individual_Bnc_CnS01 | LIS 2         | ENGLISH  | DREENA KIMURA| 971949191-00 | 01/01/2020    | Not Available  | Extra Help Level : 2 | IndEffectiveAARP |     6 | H0624-001| NoRider|
+      | C&S02 | DSNP-MAPD  | Individual_Bnc_CnS02 | LIS 3         | ENGLISH  | EBER KRYSTEK| 903010063-00 | 01/01/2020    | Not Available  | Extra Help Level : 3 | IndEffectiveAARP |     6 | H2228-045| NoRider|
+   Examples:       
+      @DSNP_CnS02
+       | TID   | planType   | memberType           | copayCategory | language | name         | memberid     | effectivedate | monthlypremium | extrahelp            | Identifier       | count | H-PBP    | rider  |
+      | C&S03 | DSNP_MAPD  | Individual_Bnc_CnS03 | LIS 1         | ENGLISH  | HULDIBERAH KINIRY | 967076552-1 | 01/01/2020 | Not Available  | Extra Help Level : 1 | IndEffectiveAARP |     6 | H3113-110| NoRider|
+      | C&S04 | DSNP_MAPD  | Individual_Bnc_CnS04 | LIS 1         | ENGLISH  | BLAIS OWEN        | 912002942-1 | 01/01/2020 | Not Available  | Extra Help Level : 1 | IndEffectiveAARP |     6 | H4527-003| NoRider|
+      | C&S05 | DSNP_MAPD  | Individual_Bnc_CnS05 | LIS 2         | ENGLISH  | KUMARI FROEHNER   | 006644986-1 | 01/01/2020 | Not Available  | Extra Help Level : 2 | IndEffectiveAARP |     6 | H4590-033| NoRider|
+    	
+  Examples:       
+      @DSNP_MnR01
+       | TID   | planType   | memberType           | copayCategory | language | name         | memberid     | effectivedate | monthlypremium | extrahelp            | Identifier       | count | H-PBP    | rider  |
+       | M&R01 | DSNP_MAPD  | Individual_Bnc_MnR01 | LIS 1         | ENGLISH  | OFER MCLEON  | 937024725-1| 01/01/2020    | Not Available  | Extra Help Level : 1 | IndEffectiveAARP |     6 |  H0271-005 |  NoRider|
+       | M&R02 | DSNP_MAPD  | Individual_Bnc_MnR02 | LIS 1         | ENGLISH  | DBAD ADFED | 919744565-00 | 01/01/2020    | Not Available  | Extra Help Level : 1 | IndEffectiveAARP |     6 |  H5253-041 | NoRider |
+   Examples:      
+      @DSNP_MnR02
+       | TID   | planType   | memberType           | copayCategory | language | name         | memberid     | effectivedate | monthlypremium | extrahelp            | Identifier       | count | H-PBP    | rider  |
+       | M&R03 | DSNP_MAPD  | Individual_Bnc_MnR03 | LIS 1         | ENGLISH  | DBAD ADFED | 919744565-00 | 01/01/2020   | Not Available   | Extra Help Level : 1 | IndEffectiveAARP |     6 |  R2604-004 | NoRider|
+       | M&R04 | DSNP_MAPD  | Individual_Bnc_MnR04 | LIS 3         | ENGLISH  | DBAD ADFED | 919744565-00 | 01/01/2020    | Not Available  | Extra Help Level : 3 | IndEffectiveAARP |     6 |  H0271-006 | NoRider|
+	  
 	
   #TC22_NON LIS Ind plan member(MAPD)- Drug Cost table
   @benefitsAndCoverage14 @CMFedDrugNonLis @deprecated
