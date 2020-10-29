@@ -10,9 +10,10 @@ Feature: ANOC CTA Tile on P&P page
     And Member Enters the Username he wants to search
       | MemUsername | <memUserName> |
     And user clicks on member to select
-    When user navigates to the pharmacies and prescriptions page from testharness page
+    When now user navigates to the pharmacies and prescriptions page from dashboard or testharness page
+      | PlanType    | <planType>   |
+      | Member Type | <memberType> |
     Then user view ANOC Call To Action
-    Then user validates the ANOC text content displayed fourth within that section
     Then user validates an image for ANOC Call To Action
     Then user validates a title for ANOC Call To Action
     Then user validates a description for ANOC Call To Action
@@ -20,5 +21,5 @@ Feature: ANOC CTA Tile on P&P page
     Then user will be redirected to the prepare for Next Year page in a new tab
 
     Examples: 
-      | username | password | memUserName |
-      | kjadha10 | Free@123 | Berniewb    |
+      | username | password | memUserName | planType | memberType |
+      | kjadha10 | Free@123 | Berniewb    | PDP      | Individual |

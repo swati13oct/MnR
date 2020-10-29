@@ -12,7 +12,7 @@ import org.junit.runner.RunWith;
 		overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionDrugLookupCTATileOnPnPPageRegressionPROD")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberredesign" },
 		features = { "src/main/resources/feature/memberredesign/pharmaciesandprescriptions/OfflineProd&Prod/DrugLookupCTATileOnP&PPage.feature" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionDrugLookupCTATileOnPnPPageRegressionPROD.json" }, tags = { "@Sanity" }, monochrome=true)
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionDrugLookupCTATileOnPnPPageRegressionPROD.json" }, tags = { "@Regression" }, monochrome=true)
 public class RunMRATDDRegressionDrugLookupCTATileOnPnPPageRegressionPROD {
 	
 }

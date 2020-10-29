@@ -10,10 +10,12 @@ Feature: Need Help Phone Numbers on PnP Page
     And Member Enters the Username he wants to search
       | MemUsername | <memUserName> |
     And user clicks on member to select
-    When user navigates to the pharmacies and prescriptions page from testharness page
+    When now user navigates to the pharmacies and prescriptions page from dashboard or testharness page
+      | PlanType    | <planType>   |
+      | Member Type | <memberType> |
     Then user validates Need Help section phone numbers
     Then user validates Need Help section hours of operations
 
     Examples: 
-      | username | password | memUserName |
-      | yaihemai | Yusufu6$ | Berniewb    |
+      | username | password | memUserName | planType | memberType |
+      | yaihemai | Yusufu6$ | Berniewb    | PDP      | Individual |
