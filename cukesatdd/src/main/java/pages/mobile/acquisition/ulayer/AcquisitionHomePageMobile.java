@@ -35,6 +35,7 @@ import pages.mobile.acquisition.bluelayer.ContactUsUmsPageMobile;
 import pages.mobile.acquisition.bluelayer.DisclaimersPageMobile;
 import pages.mobile.acquisition.bluelayer.PrivacyPolicyUmsPageMobile;
 import pages.mobile.acquisition.bluelayer.SiteMapUMSPageMobile;
+import pages.mobile.acquisition.commonpages.PharmacySearchPageMobile;
 import pages.mobile.acquisition.dce.bluelayer.DCETestHarnessPageMobile;
 import pages.mobile.acquisition.planrecommendationengine.CommonutilitiesMobile;
 import pages.mobile.acquisition.ulayer.AcquisitionHomePageMobile;
@@ -51,6 +52,7 @@ import pages.acquisition.commonpages.VisitorProfilePage;
 import pages.acquisition.commonpages.keywordSearchAARP;
 import pages.acquisition.dceredesign.GetStartedPage;
 import pages.acquisition.ole.WelcomePage;
+import pages.acquisition.ulayer.PageTitleConstants;
 import pages.mobile.acquisition.dceredesign.BuildYourDrugListMobile;
 import pages.mobile.acquisition.dceredesign.GetStartedPageMobile;
 import pages.mobile.acquisition.ole.WelcomePageMobile;
@@ -64,6 +66,9 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	@FindBy(xpath = "//*[contains(@id,'cta-zipcode')]")
 	private WebElement zipCodeField;
 
+	@FindBy(id="pharmacylocatorheader_id")
+	private WebElement locatePharmacy;
+	
 	@FindBy(xpath = "//*[contains(@id,'zipcodemeded-0')]")
 	private WebElement zipCodeShopField;
 
@@ -231,6 +236,9 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	@FindBy(xpath = "//*[@id='ghn_lnk_2']")
 	private WebElement OurPlans;
 
+	@FindBy(xpath="//div[@aria-label='menu navigation']")
+	private WebElement menu;
+	
 	@FindBy(id = "nav-zipcode")
 	private WebElement OurPlans_zipfield;
 
@@ -1226,6 +1234,29 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		}
 
 		return false;
+	}
+	
+	public PharmacySearchPageMobile navigateToPharmacySearchMobile() {
+		waitforElement(menu);
+		if(menu.isDisplayed()) {
+			jsClickMobile(menu);
+			if(OurPlans.isDisplayed()) {
+				jsClickMobile(OurPlans);
+				while(!pharmacylocator.isDisplayed()) {
+				JavascriptExecutor jse = (JavascriptExecutor) driver;
+				jse.executeScript("window.scrollBy(0,100)", "");
+				}
+				jsClickMobile(pharmacylocator);
+			}
+		}
+
+		if (locatePharmacy.getText()
+				.contains((PageTitleConstants.BLAYER_LOCATE_A_PHARMACY_UNITEDHEALTHCARE))) {
+			return new PharmacySearchPageMobile(driver);
+		}
+		else{
+		return null;
+		}
 	}
 
 	public Boolean alreadyMemberActiveValid() {

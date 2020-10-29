@@ -16,6 +16,7 @@ import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
+import pages.acquisition.ole.OLEconfirmationPage;
 
 /**
  * @author pperugu
@@ -295,5 +296,10 @@ public class ReviewAndSubmitPageMobile extends UhcDriver{
 		if(validate(submitPageErrMsg))
 			return true;
 		return false;
+	}
+
+	public OLEconfirmationPage submitEnrollment() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
