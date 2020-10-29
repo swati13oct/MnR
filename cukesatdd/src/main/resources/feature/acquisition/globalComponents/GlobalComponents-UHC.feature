@@ -1,4 +1,4 @@
-@GlobalComponentsUHC
+@GlobalComponentsUHC @F448210
 Feature: 2.12 ACQ - Global Components UHC
 
   @globalfooterBLayer
@@ -174,24 +174,74 @@ Feature: 2.12 ACQ - Global Components UHC
       | contact-us.html               | Footer: Contact Us         | //a[contains(@href ,'tel')]  | false   |
       | privacy-policy.html           | Footer: Privacy Policy     | //a[contains(@href ,'tel')]  | false   |
 
-  @GlobalComponentsUHCPages_ISonlyPages
-  Scenario Outline: To verify Global Components for the page mentioned of AARP site <pageName> : <path>
-    Given the user is on the uhcmedicaresolutions site landing page
-    Given the user navigates to following UHC medicare acquisition site page
+  #@GlobalComponentsUHCPages_ISonlyPages
+  #Scenario Outline: To verify Global Components for the page mentioned of AARP site <pageName> : <path>
+    #Given the user is on the uhcmedicaresolutions site landing page
+    #Given the user navigates to following UHC medicare acquisition site page
+      #| PageName | <pageName> |
+      #| PagePath | <path>     |
+    #When user accesses global header of the UHC Medicare Solutions home page
+    #When user accesses global footer of the UHC Medicare Solutions All page
+    #Then the USer validates Shop for a Plan Navigation links on UHC site
+    #Then the user validates Medicare Education Navigation links on UHC site
+    #Then the user validate ZipCode Components on UHC page using ZipCode "90210"
+    #Then the user validates TFN on page on UHC site
+      #| TFNxpath | <tfnXpath> |
+      #| TFNflag  | <tfnFlag>  |
+    #Then the user validates SAM Call Icon on UHC site
+#
+    #@MedSuppOnlyPages_GlobalCompsUHC
+    #Examples: 
+      #| path                                                                      | pageName          | tfnXpath       | tfnFlag |
+      #| medicare-supplement-plans/medicare-information.html?vpp=true              | Decision Guide    | //*[@id='tfn'] | true    |
+      #| medicare-supplement-plans/agent-appointment.html                          | Agent Appointment | //*[@id='tfn'] | true    |
+      
+    @GlobalComponentsUHC_NewShopPages   @NewpagesSepUHC
+  Scenario Outline: To verify Global Components for the page mentioned on UHC site<pageName> : <path>
+     Given the user is on the uhcmedicaresolutions site landing page
+     Given the user navigates to following UHC medicare acquisition site page
       | PageName | <pageName> |
       | PagePath | <path>     |
-    When user accesses global header of the UHC Medicare Solutions home page
-    When user accesses global footer of the UHC Medicare Solutions All page
-    Then the USer validates Shop for a Plan Navigation links on UHC site
-    Then the user validates Medicare Education Navigation links on UHC site
-    Then the user validate ZipCode Components on UHC page using ZipCode "90210"
-    Then the user validates TFN on page on UHC site
-      | TFNxpath | <tfnXpath> |
-      | TFNflag  | <tfnFlag>  |
-    Then the user validates SAM Call Icon on UHC site
-
-    @MedSuppOnlyPages_GlobalCompsUHC
-    Examples: 
-      | path                                                                      | pageName          | tfnXpath       | tfnFlag |
-      | medicare-supplement-plans/medicare-information.html?vpp=true              | Decision Guide    | //*[@id='tfn'] | true    |
-      | medicare-supplement-plans/agent-appointment.html                          | Agent Appointment | //*[@id='tfn'] | true    |
+    Then the user validate ZipCode Components on UHC page using ZipCode "55416"
+    
+    
+     @GlobalComponentsUHC_NewShopPages    @NewpagesSepUHC
+     Examples: 
+      | path                                                                      | pageName      | 
+      | contact-us.html                                                           | Contact us    |
+      | shop/estimate/ma-costs.html                                               | Estimate MA  | 
+      | shop/estimate/pdp-costs.html                                              | Estimate PDP  |
+      | shop/switch.html                                                          | Switch        |
+      | shop/renew-active.html                                                    | Renew Active  |
+      | shop/medicare-advantage-plans/ma-plan-benefits.html                       | MA Plan benefits|
+      | shop/compare/compare-ma.html                                              | Compare MA    |
+      | shop/compare/compare-pdp.html                                             | Compare PDP   |
+      | shop/medicare-advantage-veteran-plan.html                                 | MA Veteran Plan|
+      | enroll/ma-enrollment.html                                                 | MA Enrollment |
+      | enroll/pdp-enrollment.html                                                | PDP Enrollment|
+      |medicare-articles/eligibility-and-enrollment.html                          | Sample Category Page   |
+            
+    
+   @GlobalComponentsUHC_BlogPages    @NewpagesSepUHC
+  Scenario Outline: To verify Global Components for the page mentioned on UHC site <pageName> : <path>
+     Given the user is on the uhcmedicaresolutions site landing page
+     Given the user navigates to following UHC medicare acquisition site page
+      | PageName | <pageName> |
+      | PagePath | <path>     |
+    Then the user enters and validate the fields and clicks on submit on UHC site
+    Then the user validate ZipCode Components on UHC page using ZipCode "55424"
+    
+    
+   @GlobalComponentsUHC_BlogPages    @NewpagesSepUHC
+     Examples: 
+      |path                                                                                          | pageName               |
+      |medicare-articles.html                                                                        | Medicare Articles Home |
+      |medicare-articles/medicare-made-clear.html                                                    | About MMC              |
+      |medicare-articles/what-is-retiree-health-coverage.html                                        | Sample Article Page 2  |
+      |medicare-articles/unintended-part-d-gotcha-could-getcha-if-you-enroll-after-age-65.html       | Sample Article Page 1  |
+   
+        
+	
+     
+     
+      

@@ -409,6 +409,10 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	
 	@FindBy(xpath = "//body/div[@id='overlay']")
 	private WebElement overlayFilm;	
+	
+	@FindBy(xpath = "//p[contains(text(),'UnitedHealthcare Insurance Company (UnitedHealthcare)')]")
+	private WebElement UHCICSubTiltle;
+
 
    	String ChatSamText= "Chat with a Licensed Insurance Agent";
 
@@ -2133,4 +2137,10 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	     	    	
 	     		return new PlanDocsPage(driver);
 		 }
+		
+		public void validateSubtitle() {
+			threadsleep(5);
+			System.out.println("validating the sub header");
+	Assert.assertEquals(UHCICSubTiltle.getText(), "UnitedHealthcare Insurance Company (UnitedHealthcare)");
+}
 }

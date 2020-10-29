@@ -1,4 +1,4 @@
-@GlobalComponentsAARP @F486437
+@GlobalComponentsAARP @F448210
 Feature: 1.12 ACQ - Global Components AARP
 
   @globalfooterULayer
@@ -377,7 +377,7 @@ Feature: 1.12 ACQ - Global Components AARP
       #| shop/medicare-advantage-plans.html  | ShopPlan: Shop MA Plan  | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[1] | true   |
      #
      
-    @GlobalComponentsAARP_NewShopPages
+    @GlobalComponentsAARP_NewShopPages  @NewpagesSepAARP
   Scenario Outline: To verify Global Components for the page mentioned of AARP site <pageName> : <path>
     Given the user is on AARP medicare acquisition site landing page
     Given the user navigates to following AARP medicare acquisition site page
@@ -386,7 +386,7 @@ Feature: 1.12 ACQ - Global Components AARP
     Then the user validate ZipCode Components on page using ZipCode "55410"
     
     
-     @GlobalComponentsAARP_NewShopPages
+     @GlobalComponentsAARP_NewShopPages  @NewpagesSepAARP
      Examples: 
       | path                                                                      | pageName      | 
       | contact-us.html                                                           | Contact us    |
@@ -403,17 +403,17 @@ Feature: 1.12 ACQ - Global Components AARP
       |medicare-articles/eligibility-and-enrollment.html                          | Sample Category Page   |
             
     
-   @GlobalComponentsAARP_BlogPages
+   @GlobalComponentsAARP_BlogPages    @NewpagesSepAARP
   Scenario Outline: To verify Global Components for the page mentioned of AARP site <pageName> : <path>
     Given the user is on AARP medicare acquisition site landing page
     Given the user navigates to following AARP medicare acquisition site page
       | PageName | <pageName> |
       | PagePath | <path>     |
-    Then the user enters and validate the fields and clicks on submit
+    Then the user enters and validate the fields and clicks on submit 
     Then the user validate ZipCode Components on page using ZipCode "55410"
     
     
-   @GlobalComponentsAARP_BlogPages
+   @GlobalComponentsAARP_BlogPages   @NewpagesSepAARP
      Examples: 
       |path                                                                                          | pageName               |
       |medicare-articles.html                                                                        | Medicare Articles Home |

@@ -143,14 +143,6 @@ public class GlobalComponentsCommonStepDefinition {
 		}
 	}
 	
-	@Then("^the user validate ZipCode Components on the page using ZipCode \"([^\"]*)\"$") 
-	public void the_user_validate_ZipCode_Components_on_page_using_ZipCode(String zipCode) throws Throwable {
-		//EnterZipCodePage enterZipCodePage= new EnterZipCodePage(driver);
-				AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
-						.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-				EnterZipCodePage enterZipCodePage=aquisitionhomepage.enterZipCode();
-				enterZipCodePage.validateZipComp(zipCode);
-	}
 	
 	@When("^user vaidates the state drop down link on the home page$")
 	public void user_vaidates_the_state_drop_down_link_on_home_page() throws Throwable {
