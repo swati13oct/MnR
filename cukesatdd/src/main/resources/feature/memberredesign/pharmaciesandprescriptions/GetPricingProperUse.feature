@@ -55,7 +55,7 @@ Feature: Get Pricing Proper Use - Current Medications
     When user navigates to the pharmacies and prescriptions page from testharness page
     And user clicks View all medications link
     Then user views the Medicine Cabinet on the My Medications page
-    When user select the Get Pricing button on a drug card
+    When user clicks the Get Pricing button on a drug card
     Then user views the Prices page for that medication
 
     Examples:

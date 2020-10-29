@@ -795,9 +795,11 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 
 	public boolean properUseTab() {
 
-		if (properUseTab.getText().contains("Proper Use")) {
+		if (validate(properUseTab, 60)) {
+			System.out.println("Proper Use tab is displayed");
 			return true;
 		} else {
+			System.out.println("Proper Use tab is not displayed");
 			return false;
 		}
 	}
@@ -807,20 +809,20 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 		Random rand = new Random();
 		rand_int = rand.nextInt(listOfIndex.size());
 		listOfDrugName.get(listOfIndex.get(rand_int)).click();
-		DrugName = listOfDrugName.get(listOfIndex.get(rand_int)).getText();
-		System.out.println("Clicked on Active Medication :: " + DrugName);
+//		DrugName = listOfDrugName.get(listOfIndex.get(rand_int)).getText();
+	//	System.out.println("Clicked on Active Medication :: " + DrugName);
 	}
 
-	public List<Integer> getListOfIndexForLearnMore() {
+	public List<Integer> getListOfIndexForGetPricing() {
 		List<Integer> listOfIndex = new ArrayList<>();
-		for (int i = 0; i < listOfLearnMore.size(); i++) {
+		for (int i = 0; i < listOfGetPricing.size(); i++) {
 			listOfIndex.add(i);
 		}
 		return listOfIndex;
 	}
 
 	public void clickOnLearnMoreButtonDisplayedOnCurrentMedications() {
-		List<Integer> listOfIndex = getListOfIndexForLearnMore();
+		List<Integer> listOfIndex = getListOfIndexForGetPricing();
 		Random rand = new Random();
 		rand_int = rand.nextInt(listOfIndex.size());
 		listOfLearnMore.get(listOfIndex.get(rand_int)).click();
@@ -829,7 +831,7 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	}
 
 	public void clickOnGetPricingButtonDisplayedOnCurrentMedications() {
-		List<Integer> listOfIndex = getListOfIndexForLearnMore();
+		List<Integer> listOfIndex = getListOfIndexForGetPricing();
 		Random rand = new Random();
 		rand_int = rand.nextInt(listOfIndex.size());
 		listOfGetPricing.get(listOfIndex.get(rand_int)).click();
@@ -1423,7 +1425,7 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	@FindBy(xpath = "//button[@data-testid='medication-action-resolve-hold']/ancestor::div[@data-testid]//div[@data-testid='medication-data-pharmacy-name']")
 	protected List<WebElement> listOfPharmacyEligibleFrHold;
 
-	@FindBy(xpath = "//span[text()='Proper Use']")
+	@FindBy(xpath = "//*[contains(text(),'Proper Use')]")
 	protected WebElement properUseTab;
 
 	// walgreens related
@@ -1607,7 +1609,7 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	@FindBy(xpath = "//div[contains(@data-testid,'header__icon__left')]/button")
 	protected WebElement backButtonOnRemove;
 
-	@FindBy(xpath = "//button[contains(@title,'Go back to Get Pricing')]")
+	@FindBy(xpath = "//button[contains(@class,'rx-back-button rx-button-basic')]")
 	protected WebElement backButton;
 
 	@FindBy(xpath = "//button[@data-component='SearchBarSubmitButton']")
