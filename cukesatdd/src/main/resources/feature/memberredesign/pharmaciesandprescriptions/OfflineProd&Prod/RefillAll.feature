@@ -13,6 +13,7 @@ Feature: Refill All Medications CTA - My Medications
     When now user navigates to the pharmacies and prescriptions page from dashboard or testharness page
       | PlanType    | <planType>   |
       | Member Type | <memberType> |
+    Then user views the Current Medications
     And user clicks View all medications link to view the My Medications page
     Then user will view the Refill All Medications CTA on MY Medications Page
     And user will view an explanation of the Refill All Medications CTA
@@ -35,6 +36,7 @@ Feature: Refill All Medications CTA - My Medications
     When now user navigates to the pharmacies and prescriptions page from dashboard or testharness page
       | PlanType    | <planType>   |
       | Member Type | <memberType> |
+    Then user views the Current Medications
     And user clicks View all medications link to view the My Medications page
     And user DO NOT have home delivery medications currently eligible for refill
     Then user will NOT view the Refill All Medications CTA on MY Medications Page
