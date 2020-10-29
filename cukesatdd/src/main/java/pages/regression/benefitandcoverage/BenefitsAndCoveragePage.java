@@ -1451,20 +1451,25 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 		}
 	}
 
-	public void validatedrugCostSectionTexas() {
+	public void validatedrugCostSectionTexas(String memberType) {
 		//note Dec2018 - wait for element to load before validation
 		CommonUtility.waitForPageLoad(driver, pharmacyDropdownTexas, 5);
 		JavascriptExecutor jse = (JavascriptExecutor) driver;
 		jse.executeScript("window.scrollBy(0,-500)", "");
-		validateNew(pharmacyDropdownTexas);
+		if (MRScenario.environment.contains("team-a") && memberType.toUpperCase().contains("GROUP"))
+			Assert.assertTrue("PROBLEM - do not expect drug cost dropdown for group user", !validate(pharmacyDropdownTexas));
+		else 
+			validateNew(pharmacyDropdownTexas);
 	}
 
-	public void validateRetailCostSharingdrugtable() {
-		Select drpPharmacy = new Select(pharmacyDropdownTexas);
-		drpPharmacy.selectByValue("Retail Cost Sharing");
-		System.out.println("Retail Cost Sharing dropdown value selected");
-		validateNew(retailTable);
-		String TableData= "Annual Prescription Deductible Initial Coverage Stage Coverage Gap Stage Catastrophic Coverage Stage\n"
+	public void validateRetailCostSharingdrugtable(String memberType) {
+		if (!(MRScenario.environment.contains("team-a") && memberType.toLowerCase().contains("group"))) {
+			Select drpPharmacy = new Select(pharmacyDropdownTexas);
+			drpPharmacy.selectByValue("Retail Cost Sharing");
+			System.out.println("Retail Cost Sharing dropdown value selected");
+			validateNew(retailTable);
+		}
+		String TableData_2020= "Annual Prescription Deductible Initial Coverage Stage Coverage Gap Stage Catastrophic Coverage Stage\n"
 				+"30-day supply (non-maintenance drugs) 30-day supply (maintenance drugs*) 31- to 60-day supply** 61- to 90-day supply**\n"
 				+"Tier 1\n"
 				+"You pay 100% of costs until $50 deductible is met*\n"
@@ -1485,7 +1490,10 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 				+"$75 copay\n"
 				+"$120 copay\n"
 				+"$180 copay";
-
+		String TableData=TableData_2020;
+		if (MRScenario.environment.contains("team-a"))
+			//TableData=TableData_2021;
+			
 		System.out.println("Expected table  is >>>>>>>>>>>>>"+"\n"+TableData.toString());
 		System.out.println("Actual table value is >>>>>>>>>> "+"\n"+retailTable.getText());
 
@@ -1500,14 +1508,18 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 	}
 
 
-	public void validateMailOrderCostSharing_Drugtable() {
-		JavascriptExecutor jse = (JavascriptExecutor) driver;
-		jse.executeScript("window.scrollBy(0,+200)", "");
-		Select drpPharmacy = new Select(pharmacyDropdownTexas);
-		drpPharmacy.selectByValue("Mail Order Cost Sharing");
-		sleepBySec(5);
-		waitforElementNew(MailOrderTable);
-		String TableData= "Annual Prescription Deductible Initial Coverage Stage Coverage Gap Stage Catastrophic Coverage Stage\n"
+	public void validateMailOrderCostSharing_Drugtable(String memberType) {
+		if (MRScenario.environment.contains("team-a") && memberType.toLowerCase().contains("group")) {
+			//TODO
+			System.out.println("TEMPERARY - skip this validation");
+		} else {
+			JavascriptExecutor jse = (JavascriptExecutor) driver;
+			jse.executeScript("window.scrollBy(0,+200)", "");
+			Select drpPharmacy = new Select(pharmacyDropdownTexas);
+			drpPharmacy.selectByValue("Mail Order Cost Sharing");
+			sleepBySec(5);
+			waitforElementNew(MailOrderTable);
+			String TableData= "Annual Prescription Deductible Initial Coverage Stage Coverage Gap Stage Catastrophic Coverage Stage\n"
 				+"31- to 60-day supply 61- to 90-day supply\n"
 				+"Tier 1 :\n"
 				+"You pay 100% of costs until $50 deductible is met*\n"
@@ -1534,6 +1546,7 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 		else{
 			System.err.println("The data in the drug cost table is not displaying correctly");
 			Assert.fail("The data in the drug cost table is not displaying correctly");
+		}
 		}
 	}
 

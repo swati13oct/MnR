@@ -516,7 +516,8 @@ public class BenefitsAndCoverageBase extends BenefitsAndCoverageWebElements {
 	public void directoryLinksCount(int linkCount, String rider, String planType, String memberType) {
 		int count = 0;
 		if (planType.equals("MA") || planType.equals("MAPD") || planType.equals("DSNP_MAPD")) {
-			if (memberType.equalsIgnoreCase("Individual")|| memberType.contains("Individual_Bnc")) {
+			//tbd if (memberType.equalsIgnoreCase("Individual")) {
+			if (memberType.toLowerCase().contains("individual")) {
 				count = getDirectorySection(planType, memberType).size() - 1;
 				if (rider.toString().trim().equals("Rider"))
 					count += 1;

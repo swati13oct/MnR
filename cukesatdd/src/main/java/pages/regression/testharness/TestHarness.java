@@ -343,7 +343,7 @@ public class TestHarness extends UhcDriver {
 			CommonUtility.waitForPageLoad(driver, panelHome, 30);
 		}	
 		//validateNew(panelHome);
-		validateNew(panelClaims);
+		//validateNew(panelClaims);
 		if (category.contains(CommonConstants.CATEGORY_TERMIATED)) {
 			if (panelHealthWellness.isEmpty() && panelFindcarecost.isEmpty()) {
 				Assert.assertTrue("Terminated view is present", true);

@@ -1802,7 +1802,8 @@ public class BenefitsAndCoverageUmsStepDefinition {
 
 		BenefitsAndCoveragePage planBenefitsCoverage = (BenefitsAndCoveragePage) getLoginScenario()
 				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
-		planBenefitsCoverage.validatedrugCostSectionTexas();
+		String memberType=(String) getLoginScenario().getBean(LoginCommonConstants.CATOGERY);
+		planBenefitsCoverage.validatedrugCostSectionTexas(memberType);
 
 	}
 	@And("the user verifies the Retail Cost sharing table")
@@ -1811,7 +1812,8 @@ public class BenefitsAndCoverageUmsStepDefinition {
 
 		BenefitsAndCoveragePage planBenefitsCoverage = (BenefitsAndCoveragePage) getLoginScenario()
 				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
-		planBenefitsCoverage.validateRetailCostSharingdrugtable();
+		String memberType=(String) getLoginScenario().getBean(LoginCommonConstants.CATOGERY);
+		planBenefitsCoverage.validateRetailCostSharingdrugtable(memberType);
 
 	}
 	@And("the user verifies the Mail Order Cost sharing table")
@@ -1820,7 +1822,8 @@ public class BenefitsAndCoverageUmsStepDefinition {
 
 		BenefitsAndCoveragePage planBenefitsCoverage = (BenefitsAndCoveragePage) getLoginScenario()
 				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
-		planBenefitsCoverage.validateMailOrderCostSharing_Drugtable();
+		String memberType=(String) getLoginScenario().getBean(LoginCommonConstants.CATOGERY);
+		planBenefitsCoverage.validateMailOrderCostSharing_Drugtable(memberType);
 
 	}
 
