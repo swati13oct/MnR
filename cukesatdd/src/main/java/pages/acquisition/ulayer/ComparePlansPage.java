@@ -1091,6 +1091,7 @@ public class ComparePlansPage extends UhcDriver {
 		}
 		
 		if(!drugs.equalsIgnoreCase("no")) {
+			waitforElementDisapper(By.xpath("//span[@class='drugsLoad ng-scope']/following::img[1]"), 20);
 			validate(editDrugsLink);
 			JavascriptExecutor executor = (JavascriptExecutor) driver;
 			executor.executeScript("arguments[0].scrollIntoView(true);", editDrugsLink);

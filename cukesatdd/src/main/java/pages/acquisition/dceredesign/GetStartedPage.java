@@ -16,6 +16,7 @@ import pages.acquisition.dceredesign.BuildYourDrugList;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
+import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 import pages.acquisition.ulayer.PageTitleConstants;
 import pages.acquisition.commonpages.VPPPlanSummaryPage;
@@ -53,12 +54,17 @@ public class GetStartedPage extends UhcDriver {
 
 	@Override
 	public void openAndValidate() {
+		if (MRScenario.environment.equals("offline") || MRScenario.environment.equals("prod"))
+			checkModelPopup(driver,45);
+		else 
+			checkModelPopup(driver,10);
 		validateNew(getStartedTab);
 	}
 
 	public BuildYourDrugList clickAddsDrugs() {
 		if(validate(AddMyDrugsBtn))
-			AddMyDrugsBtn.click();
+//			AddMyDrugsBtn.click();
+			jsClickNew(AddMyDrugsBtn);
 		CommonUtility.waitForPageLoad(driver, BuildDrugPage_EnterDrugNameTxt, 30);
 		if (validateNew(BuildDrugPage_EnterDrugNameTxt)) {
 			Assert.assertTrue("Naviagted to Build Drug List Page", true);
@@ -87,7 +93,8 @@ public class GetStartedPage extends UhcDriver {
 		CommonUtility.checkPageIsReadyNew(driver);
 		
 //		while(validate(overlayFilm, 10)) {/**wait*/}
-		CommonUtility.waitForElementToDisappear(driver, overlayFilm, 75);
+//		CommonUtility.waitForElementToDisappear(driver, overlayFilm, 75);
+		waitForPageLoadSafari();
 		
 		if (driver.getCurrentUrl().contains("plan-summary")) {
 			return new VPPPlanSummaryPage(driver);	
@@ -112,6 +119,21 @@ public class GetStartedPage extends UhcDriver {
 			System.out.println("Navigation to visitor profile is failed");
 			return null;
 		}
+	}
+
+	public TellUsAboutDrug clickOnEditButton(String drug) {
+
+		WebElement editLink = driver.findElement(By.xpath("//*[contains(@aria-label,'Edit "+drug+"')]"));
+		jsClickNew(editLink);
+		
+		return new TellUsAboutDrug(driver);
+		
+	}
+
+	public void clickOnRemoveButton(String drug) {
+		WebElement removeLink = driver.findElement(By.xpath("//*[contains(@aria-label,'Remove "+drug+"')]"));
+		jsClickNew(removeLink);
+		
 	}
 		
 

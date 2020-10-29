@@ -7,6 +7,7 @@ Feature: 1.18.1 Member Pharamcies And Prescriptions page - Pre-Effective
     Given login with following details logins in the member portal and validate elements
 	  | Plan Type   | <planType>   |
 	  | Member Type | <memberType> |
+    Then check if user is a preeffective user
     Then user should see Pharmacies and Prescription link on dashboard
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
@@ -36,6 +37,7 @@ Feature: 1.18.1 Member Pharamcies And Prescriptions page - Pre-Effective
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
       | Expect Link | <expectLink> |
+    Then check if user is a preeffective user
     Then user navigates to the payment page to validate Pharamcies and Prescriptions link
     Then user navigates to the health and wellness page to validate Pharamcies and Prescriptions link
     Then user navigates to the eob page to validate Pharamcies and Prescriptions link
@@ -98,6 +100,7 @@ Feature: 1.18.1 Member Pharamcies And Prescriptions page - Pre-Effective
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
+    Then check if user is a preeffective user
     Then user should not see Pharmacies and Prescription link on dashboard
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
