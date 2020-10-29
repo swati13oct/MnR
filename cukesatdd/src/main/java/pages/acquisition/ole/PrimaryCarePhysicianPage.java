@@ -401,7 +401,7 @@ public class PrimaryCarePhysicianPage extends UhcDriver{
 		public ArrayList<String> getPCPInfo(){
 			ArrayList<String> pcp = new ArrayList<String>();
 			
-			String pcp_name=ProviderNameDisplay_PCPpage.getText().trim();
+			String pcp_name=ProviderNameDisplay_PCPpage.getText().replaceAll("-", "").trim();
 			String pcp_number=ProviderNumberDisplay_PCPpage.getText().trim();
 			CurrentPCP_Question_Yes.click();
 			String pcp_question_text = "Yes";
