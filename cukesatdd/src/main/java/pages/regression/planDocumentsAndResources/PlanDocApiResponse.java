@@ -433,12 +433,18 @@ public class PlanDocApiResponse {
 					String docCategory="UnitedHealth Passport Program";
 					docObjMap.put(docCategory, docObj);
 					if (docObj.getLanguage().equals("en_us")) {
-						if (!isDuplicate(docCategory, memMatl_en_curYr_docList))
+						if (!isDuplicate(docCategory, planMatl_en_curYr_docList)) 
+							planMatl_en_curYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, memMatl_en_curYr_docList)) 
 							memMatl_en_curYr_docList.add(docObjMap);
 					} else if (docObj.getLanguage().equals("es")) {
+						if (!isDuplicate(docCategory, planMatl_es_curYr_docList))
+							planMatl_es_curYr_docList.add(docObjMap);
 						if (!isDuplicate(docCategory, memMatl_es_curYr_docList))
 							memMatl_es_curYr_docList.add(docObjMap);
 					} else if (docObj.getLanguage().equals("zh")) {
+						if (!isDuplicate(docCategory, planMatl_zh_curYr_docList))
+							planMatl_zh_curYr_docList.add(docObjMap);
 						if (!isDuplicate(docCategory, memMatl_zh_curYr_docList))
 							memMatl_zh_curYr_docList.add(docObjMap);
 					}

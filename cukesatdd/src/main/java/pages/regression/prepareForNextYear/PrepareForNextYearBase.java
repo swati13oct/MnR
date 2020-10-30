@@ -486,8 +486,9 @@ public class PrepareForNextYearBase  extends PrepareForNextYearWebElements {
 
 		String actUrl=driver.getCurrentUrl();
 		String expUrl=".pdf";
-		if (!actUrl.contains(expUrl)) {
-			note.add("\t * FAILED - not getting expected destination URL.  Expect to contain '"+expUrl+"' | Actual URL='"+actUrl+"'");
+		String expUrl2="alphadog";
+		if (!actUrl.contains(expUrl) && !actUrl.contains(expUrl2)) {
+			note.add("\t * FAILED - not getting expected destination URL.  Expect to contain '"+expUrl+"' or '"+expUrl2+"' | Actual URL='"+actUrl+"'");
 			note.add("\t * FAILED - validating PDF content");
 			
 			driver.close();
@@ -495,7 +496,7 @@ public class PrepareForNextYearBase  extends PrepareForNextYearWebElements {
 			
 			return note;
 		}
-		Assert.assertTrue("PROBLEM - not getting expected destination URL.  Expect to contain '"+expUrl+"' | Actual URL='"+actUrl+"'", actUrl.contains(expUrl));
+		Assert.assertTrue("PROBLEM - not getting expected destination URL.  Expect to contain '"+expUrl+"' or '"+expUrl2+"' | Actual URL='"+actUrl+"'", actUrl.contains(expUrl)  || actUrl.contains(expUrl2));
 
 		for (String s: MRScenario.getTagList()) {
 			if (s.contains("sanity")) {
@@ -691,16 +692,22 @@ public class PrepareForNextYearBase  extends PrepareForNextYearWebElements {
 			if (noWaitValidate(expElement))
 				note.add("\tPASSED - validation for link target page loading for "+targetItem);
 			else {
-				//tbd if (targetItem.contains("Drug Search link") && MRScenario.environment.contains("stage"))
-				//tbd 	note.add("\t * SKIP - validation for link target page loading for "+targetItem+" - acqusition DCE page has problem loading on stage");
-				//tbd else
-				note.add("\t * FAILED, unable to locate expected element on the destination page");
+				if (noWaitValidate(acqPgErrMsg) && MRScenario.environment.equals("offline")
+						&& (targetItem.contains("Drug Search link") || targetItem.contains("Compare New Plans Link"))) { 
+					//note: for acquisition link, during AEP the link will be pointed to prod, there is no offline acq site, so it is exepcted to land on error page
+					note.add("\tPASSED - validation for link target page loading for "+targetItem+", expected error msg in this case");
+				} else
+					note.add("\t * FAILED, unable to locate expected element on the destination page");
 			}
 		} else {
-			//tbd if (targetItem.contains("Drug Search link") && MRScenario.environment.contains("stage"))
-			//tbd 	note.add("\t * SKIP - validation for link target page loading for "+targetItem+" - acqusition DCE page has problem loading on stage");
-			//tbd else
-			Assert.assertTrue("PROBLEM, unable to locate expected element on the destination page", noWaitValidate(expElement));
+			if (!noWaitValidate(expElement) ) {
+				if (noWaitValidate(acqPgErrMsg) && MRScenario.environment.equals("offline")
+						&& (targetItem.contains("Drug Search link") || targetItem.contains("Compare New Plans Link"))) {
+					//note: for acquisition link, during AEP the link will be pointed to prod, there is no offline acq site, so it is exepcted to land on error page
+					note.add("\tPASSED - validation for link target page loading for "+targetItem+", expected error msg in this case");
+				} else 
+					Assert.assertTrue("PROBLEM, unable to locate expected element '"+targetItem+"' on the destination page", noWaitValidate(expElement));
+			}
 			note.add("\tPASSED - validation for link target page loading for "+targetItem);
 		}
 

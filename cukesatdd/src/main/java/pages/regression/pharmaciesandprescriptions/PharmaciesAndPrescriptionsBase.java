@@ -1,6 +1,10 @@
 package pages.regression.pharmaciesandprescriptions;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.TimeZone;
 import java.util.concurrent.TimeUnit;
 
 import org.json.JSONArray;
@@ -17,6 +21,7 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.remote.html5.RemoteWebStorage;
 import org.openqa.selenium.support.PageFactory;
 import acceptancetests.util.CommonUtility;
+import atdd.framework.MRScenario;
 
 /**
  * Functionality : validations for Pharmacies & Prescriptions page
@@ -430,5 +435,50 @@ public class PharmaciesAndPrescriptionsBase extends PharmaciesAndPrescriptionsWe
 		}
 		System.out.println("TEST - Switched back to prior page");
 	}	
+
+	public Boolean getPreEffInConsumerDetails(String consumerDetails) {
+		boolean actualPreEffFlag=false;
+		try {
+			JSONObject jsonObj = new JSONObject(consumerDetails);
+			actualPreEffFlag=jsonObj.getBoolean("preEffective");
+		} catch (Exception e) {
+			Assert.assertTrue("PROBLEM - unable to get preEffective field value from consumerDetail to determine if user is pre-effective user", false);
+		}
+		return actualPreEffFlag;
+	}
 	
+	public Date getCurrentSystemDate() {
+		if (MRScenario.environment.equalsIgnoreCase("offline") || MRScenario.environment.equalsIgnoreCase("prod")) {
+			//note: offline-prod and online-prod should always have current date anyway...
+			return new Date();
+		} else {
+			String dateTimeStr=getMemTestEnvSysTime();
+			String[] tmp=dateTimeStr.split(" ");
+			String month=tmp[1];
+			String day=tmp[2];
+			String year=tmp[5];
+			String s=month+" "+day+","+year;		
+			DateFormat df = new SimpleDateFormat("MMM dd,yyyy"); 
+			df.setTimeZone(TimeZone.getTimeZone("UTC"));
+			Date targetDate;
+			try {
+				targetDate = df.parse(s);
+				String newDateString = df.format(targetDate);
+				System.out.println("currentSystemDate="+newDateString);
+				return targetDate;
+			} catch (java.text.ParseException e) {
+				e.printStackTrace();
+				return null;
+			}
+		}
+	}
+	
+	public String convertDateToStrFormat_MMDDYYYY(Date d) {
+		String pattern = "MM/dd/yyyy";
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+		simpleDateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
+		return simpleDateFormat.format(d);
+	}
+	
+
 }

@@ -93,7 +93,7 @@ public class ProviderSearchStepDefinition {
 			testNote.add("===================================================");
 			testNote.add("\tValidation for page '"+targetPage+"' landing from Provider Search page");
 			ProviderSearchPage ProviderSearchPage = new ProviderSearchPage(wd);
-			ProviderSearchPage.sleepBySec(5);
+			//tbd ProviderSearchPage.sleepBySec(5);
 			String originalUrl=wd.getCurrentUrl();
 			wd=ProviderSearchPage.navigateToClaimsPage();
 			String actUrl=wd.getCurrentUrl();

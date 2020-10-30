@@ -12,6 +12,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
 import java.util.regex.Pattern;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -21,8 +22,9 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Cookie;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.html5.LocalStorage;
 import org.openqa.selenium.html5.SessionStorage;
@@ -136,7 +138,7 @@ public abstract class UhcDriver {
 	public void selectFromDropDown(List<WebElement> elementList, String value) {
 		for (WebElement element : elementList) {
 			if (element.getText().contains(value)) {
-				element.click();
+				jsClickNew(element);
 				break;
 			}
 		}
@@ -445,7 +447,7 @@ try {
 	public void jsClickNew(WebElement element) {
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("arguments[0].click();", element);
-		System.out.println("The WebElement ===  " +getidentifier(element) + "  : is Clicked");
+//		System.out.println("The WebElement ===  " +getidentifier(element) + "  : is Clicked");
 	}
 	
 	public static String getidentifier(WebElement element) {
@@ -476,7 +478,7 @@ try {
 	 */
 	public void startNewPRE(String url, String browser) {
 		System.out.println("Browser Name: "+browser);
-		if(browser.equals("safari")) 
+		if(browser.equalsIgnoreCase("safari")) 
 			driver.get(url);
 		else {
 			driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
@@ -617,6 +619,7 @@ try {
 	}
 	
 	public void selectFromDropDownByValue(WebElement dropdownElement, String value) {
+		scrollToView(dropdownElement);
 		Select dropdown = new Select(dropdownElement);
 		waitUntilSelectOptionsPopulated(dropdown);
 		dropdown.selectByValue(value);
@@ -752,7 +755,7 @@ try {
 	public void checkModelPopup(WebDriver driver,long timeoutInSec) {
 		
 			CommonUtility.waitForPageLoad(driver, IPerceptionsFrame,timeoutInSec);
-			CommonUtility.waitForPageLoad(driver, IPerceptionsPopup,timeoutInSec);
+//			CommonUtility.waitForPageLoad(driver, IPerceptionsPopup,timeoutInSec);
 			
 			try{
 				if(IPerceptionsPopup.isDisplayed())	{
@@ -766,7 +769,10 @@ try {
 					if(IPerceptionsFrame.isDisplayed())	{
 						System.out.println("IPerceptionsFrame found");
 						driver.switchTo().frame(IPerceptionsFrame);
-						IPerceptionNoBtn.click();
+//						IPerceptionNoBtn.click();
+						threadsleep(1);
+						jsClickNew(IPerceptionNoBtn);
+						threadsleep(1);
 						driver.switchTo().defaultContent();
 					}
 				}catch(Exception e1) {
@@ -839,9 +845,9 @@ try {
 				break;
 			}
 		}
-		checkIfPageReadySafari();
-//		WebElement currentSysTimeElement=timeJson;
-		WebElement currentSysTimeElement=driver.findElement(By.xpath("//body/pre"));
+
+		threadsleep(2000);
+		WebElement currentSysTimeElement=timeJson;
 		String currentSysTimeStr=currentSysTimeElement.getText();
 		System.out.println("currentSysTimeStr="+currentSysTimeStr);
 		JSONParser parser = new JSONParser();
@@ -1180,47 +1186,98 @@ try {
 		return ReturnValue;
 	}
     
+    /**
+     * Wait for page load in Safari browser, by checking the invisibility of loading spinners which show in different flows
+     *
+     * @return true, if successful
+     */
     public boolean waitForPageLoadSafari() {
-    	int counter = 5;
     	boolean ready = false;
-    	if(checkIfPageReadySafari()) {
-    		do {
+    	if(MRScenario.browserName.equalsIgnoreCase("Safari")) {
+    		//Sets FluentWait Setup
+    		List<WebElement> loadingScreen = null;
+    		FluentWait<WebDriver> fwait = new FluentWait<WebDriver>(driver)
+    				.withTimeout(Duration.ofSeconds(10))
+    				.pollingEvery(Duration.ofMillis(100))
+    				.ignoring(NoSuchElementException.class)
+    				.ignoring(TimeoutException.class);
+
+    		// First checking to see if the loading indicator is found
+    		// we catch and throw no exception here in case they aren't ignored
+    		try {
+    			threadsleep(5000);			//Adding sleep since the loading spinner sometimes takes long to come up
+    			System.out.println("Waiting to check if Loading screen is present");
+    			loadingScreen = fwait.until(new Function<WebDriver, List<WebElement>>() {
+					public List<WebElement> apply(WebDriver driver) {
+						return driver.findElements(By.xpath(
+								"//div[(((@id='overlay' and not(./ancestor::footer)) or @id='loading_fader' or @class='loading-block' or @class='spinner') and not(contains(@style,'none')))]"));
+					}
+    			});
+    		} catch (Exception e) {}
+
+
+    		// checking if loading indicators were found and if so we wait for it to
+    		// disappear
+    		if(!CollectionUtils.isEmpty(loadingScreen)) {
+    			System.out.println("Loading screen visible!!! Waiting till it disappears");
+    			WebDriverWait wait = new WebDriverWait(driver, 10);
     			try {
-    				WebElement overlay = driver.findElement(By.xpath("//body/div[@id='overlay']"));
-    				if(!overlay.isDisplayed()) {
-    					ready = true;
-    					break;
-    				}
-    			} catch(WebDriverException e) {/**decrement counter and retry*/}
-
-    			System.out.println("Waiting for page to load");
-    			counter--;
-
-    		} while(counter > 0);
-
-    	}
-    	return ready;
-    }
-
-    
-    public boolean checkIfPageReadySafari() {
-    	int counter = 10;
-    	boolean ready = false;
-    	if(MRScenario.browsername.equalsIgnoreCase("Safari")) {
-    		CommonUtility.checkPageIsReadyNew(driver);
-    		do {
-    			try {
-    				threadsleep(5);
-    				if(!driver.getPageSource().isEmpty()) {
-    					ready = true;
-    					break;
-    				}
-    			} catch(WebDriverException e) {/**decrement counter and retry*/}
-    			counter--;
+    				ready = wait.until(ExpectedConditions
+    						.invisibilityOfAllElements(loadingScreen));
+    			} catch(NoSuchElementException e) {
+    				//If no loading screen element found, page is ready
+    				ready = true;
+    			} catch(TimeoutException t) {
+    				//If script timed out finding loading screen element, page is ready
+    				ready = true;
+    			}
+    			System.out.println("Loading screen disappeared, page is ready.");
+    		} else {
+    			System.out.println("No loading screen element(s) found");
     		}
-    		while(counter > 0);
     	}
     	return ready;
     }
     
+	/**
+	 * mouse over using jQuery event, mouseover.
+	 *
+	 * @param element the element
+	 * @return true, if successful
+	 * 
+	 * Note: use the jsMouseOut if using jsMouseOver for tooltip
+	 */
+	public boolean jsMouseOver(WebElement element) {
+		try {
+			JavascriptExecutor js = (JavascriptExecutor) driver;
+			js.executeScript("$(arguments[0]).mouseover();", element);
+		} catch (Exception e) {
+			Assert.fail("The element " + element.getText() + "is not  found");
+			return false;
+		}
+
+		return true;
+	}
+	
+	
+	/**
+	 * move mouse out from the element using jQuery event, mouseout.
+	 *
+	 * @param element the element
+	 * @return true, if successful
+	 * 
+	 * Note: Use in combination with jsMouseOver
+	 */
+	public boolean jsMouseOut(WebElement element) {
+		try {
+			JavascriptExecutor js = (JavascriptExecutor) driver;
+			js.executeScript("$(arguments[0]).mouseout();", element);
+		} catch (Exception e) {
+			Assert.fail("The element " + element.getText() + "is not  found");
+			return false;
+		}
+
+		return true;
+	}
+	
 }

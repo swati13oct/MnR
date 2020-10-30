@@ -2,6 +2,48 @@
 Feature: 1.08.1 Member Header/Navigation validation - PROD
 
   # note: if system is in future date, some testcases may fail due to expected tab(s) not showing up on page depending on user's data setup
+  @header_prodSanity_IndividualGroup
+  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - To check that the Premium Payments Tab is not displayed in the header
+    Given the user is on member auth login flow page
+    When the member is able to login with correct username and password
+      | Username | <username> |
+      | Password | <password> |
+    And Member Enters the Username he wants to search
+      | MemUsername | <MemUserName> |
+    And user clicks on member to select
+    And user stores test input for validations
+      | Username    | <MemUserName> |
+      | Plan Type   | <planType>    |
+      | Member Type | <memberType>  |
+    #-------------- navigate to the target test page for testing
+    Then I should not be able to see the Premium Payments tab Header
+
+    @headerRegression
+    Examples:
+      | TID   | username | password | MemUserName         | planType | memberType             |
+      | 15253 | ujethwa | 221Umang | skho@roadrunner.com | MAPD     | IndividualGroup_header |
+
+  @header_prodSanity_SHIP
+  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - To check that the Find Care and Costs Tab is not displayed in the header
+    Given the user is on member auth login flow page
+    When the member is able to login with correct username and password
+      | Username | <username> |
+      | Password | <password> |
+    And Member Enters the Username he wants to search
+      | MemUsername | <MemUserName> |
+    And user clicks on member to select
+    And user stores test input for validations
+      | Username    | <MemUserName> |
+      | Plan Type   | <planType>    |
+      | Member Type | <memberType>  |
+    #-------------- navigate to the target test page for testing
+	    #And I view the global navigation Header
+    Then I should not be able to see the Find Care & Costs tab Header
+
+    Examples:
+      | TID   | username | password | MemUserName | planType | memberType | flow   |
+      | 15251 | ujethwa | 221Umang | kataz2525 | SHIP     | Medsupp    | header |
+
   @prod_header01
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - To validate via member authorization access for header
     Given the user is on member auth login flow page
@@ -141,7 +183,7 @@ Feature: 1.08.1 Member Header/Navigation validation - PROD
       | TID   | username | password | MemUserName | planType | memberType | flow   |
       | 15251 | ujethwa | 221Umang | kataz2525 | SHIP     | Medsupp    | header |
 
-  @prodAuth_header06
+  @prodAuth_header06 @header_prodSanity_Terminated
   Scenario Outline: TID: <TID> -plan: Any -memberType: <memberType> - To check that the Find Care and Costs Tab is not displayed in the header for terminated user
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password

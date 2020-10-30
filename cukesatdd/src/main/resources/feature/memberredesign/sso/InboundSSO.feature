@@ -97,22 +97,26 @@ Feature: 1.13 Member Inbound SSO functionality tested from TestHarness page for 
     Given User lands on the ping federate SSO test harness page
     And testharness page is displayed with all the fields
     And User enter details on ping federate test harness page
-      | SAML_SUBJECT  | <samlsubject>   |
-      | First Name    | <firstName>     |
-      | Last Name     | <lastName>      |
-      | DOB           | <dateOfBirth>   |
-      | MBI           | <mbi>           |
-      | APPLANDINGURLSTAGE | <applandingurlStage> |
-      | APPLANDINGURLTEAHH | <applandingurlteamh> |
+      | SAML_SUBJECT              | <samlsubject>               |
+      | First Name                | <firstName>                 |
+      | Last Name                 | <lastName>                  |
+      | DOB                       | <dateOfBirth>               |
+      | MBI                       | <mbi>                       |
+      | APPLANDINGURLSTAGE        | <applandingurlStage>        |
+      | APPLANDINGURLTEAHH        | <applandingurlteamh>        |
       | APPLANDINGURLOFFLINESTAGE | <applandingurlofflinestage> |
-      | UHC_ID        | <uhcid>         |
+      | UHC_ID                    | <uhcid>                     |
     And user clicks on submit button on the Ping Federate Test Harness Page
     Then user should be navigated to home page of rally dashboard
     And user clicks on account setting link
 
     Examples: 
-      | samlsubject   | firstName | lastName   | dateOfBirth | mbi         | applandingurlStage                                             | Scenario           | uhcid    | applandingurlteamh                                                                   | applandingurlofflinestage                                         |
-      | bswift        | NARDA     | HAGERTY    |    09101939 | 6RE3H79NH60 | https://stage-medicare.uhc.com/sso/inbound/bswift         | CenterPoint Energy |          | https://www.team-h-medicare.ocp-ctc-dmz-nonprod.optum.com/sso/inbound/bswift         | https://offline-stage-medicare.uhc.com/sso/inbound/bswift         |
-      | Bristol Myers | DIMITRIOS | FELLENBAUM |    08161935 | 5KP7H08MG55 | https://stage-medicare.uhc.com/sso/inbound/morneaushepell | Bristol Myers      |          | https://www.team-h-medicare.ocp-ctc-dmz-nonprod.optum.com/sso/inbound/morneaushepell | https://offline-stage-medicare.uhc.com/sso/inbound/morneaushepell |
-      | canopyhealth  | MARYBETH  | NEUBURGER  |    05281938 | 2EE1V96VD04 | https://stage-medicare.uhc.com/sso/inbound/canopy         | Canopy Health      |          | https://www.team-h-medicare.ocp-ctc-dmz-nonprod.optum.com/sso/inbound/canopy         | https://offline-stage-medicare.uhc.com/sso/inbound/canopy         |
-      | MCHCP         | MARGERY   | HOLWAY     |    09091955 |             | https://stage-medicare.uhc.com/sso/inbound/mchcp          | State of MO        | RC443160 | https://www.team-h-medicare.ocp-ctc-dmz-nonprod.optum.com/sso/inbound/mchcp          | https://offline-stage-medicare.uhc.com/sso/inbound/mchcp          |
+      | samlsubject   | firstName | lastName   | dateOfBirth | mbi         | applandingurlStage                                        | Scenario           | uhcid | applandingurlteamh                                                                   | applandingurlofflinestage                                         |
+     # | bswift        | CIPRIANA  | REVERA     |    02091953 | 5YA7W74DG34 | https://stage-medicare.uhc.com/sso/inbound/bswift         | CenterPoint Energy |       | https://www.team-h-medicare.ocp-ctc-dmz-nonprod.optum.com/sso/inbound/bswift         | https://offline-stage-medicare.uhc.com/sso/inbound/bswift         |
+    #  | Bristol Myers | DIMITRIOS | FELLENBAUM |    08161935 | 5KP7H08MG55 | https://stage-medicare.uhc.com/sso/inbound/morneaushepell | Bristol Myers      |       | https://www.team-h-medicare.ocp-ctc-dmz-nonprod.optum.com/sso/inbound/morneaushepell | https://offline-stage-medicare.uhc.com/sso/inbound/morneaushepell |
+       | canopyhealth  | MARYBETH  | NEUBURGER  |    05281938 | 2EE1V96VD04 | https://stage-medicare.uhc.com/sso/inbound/canopy         | Canopy Health      |          | https://www.team-h-medicare.ocp-ctc-dmz-nonprod.optum.com/sso/inbound/canopy         | https://offline-stage-medicare.uhc.com/sso/inbound/canopy         |
+      # | MCHCP         | MARGERY   | HOLWAY     |    09091955 |             | https://stage-medicare.uhc.com/sso/inbound/mchcp          | State of MO        | RC443160 | https://www.team-h-medicare.ocp-ctc-dmz-nonprod.optum.com/sso/inbound/mchcp          | https://offline-stage-medicare.uhc.com/sso/inbound/mchcp          |
+      | bswift        | CIPRIANA  | REVERA     |    02091953 | 5YA7W74DG34 | https://stage-medicare.uhc.com/sso/inbound/bswift         | CenterPoint Energy |       | https://www.team-h-medicare.ocp-ctc-dmz-nonprod.optum.com/sso/inbound/bswift         | https://offline-stage-medicare.uhc.com/sso/inbound/bswift         |
+      | Bristol Myers | BEATRIS   | HEFFRON    |    12041954 | 1U76JH6HD60 | https://stage-medicare.uhc.com/sso/inbound/morneaushepell | Bristol Myers      |       | https://www.team-h-medicare.ocp-ctc-dmz-nonprod.optum.com/sso/inbound/morneaushepell | https://offline-stage-medicare.uhc.com/sso/inbound/morneaushepell |
+      #| MCHCP         | KARENE    | AIKENS     |    07081948 | 3AT4J01YN92 | https://stage-medicare.uhc.com/sso/inbound/mchcp          | State of MO        |       | https://www.team-h-medicare.ocp-ctc-dmz-nonprod.optum.com/sso/inbound/mchcp          | https://offline-stage-medicare.uhc.com/sso/inbound/mchcp          |
+      | MCHCP         | XIU       | LOWELL    |    09121941 | 5V61DH2HX33 | https://stage-medicare.uhc.com/sso/inbound/mchcp          | State of MO        |       | https://www.team-h-medicare.ocp-ctc-dmz-nonprod.optum.com/sso/inbound/mchcp          | https://offline-stage-medicare.uhc.com/sso/inbound/mchcp          |
