@@ -35,7 +35,7 @@ Feature: 1.01 Member  benefits and Coverage page
       | 02    | 15088 | MAPD     | memberWithoutProviderTiering_BnC |
 
   #TC08_BenefitsFor_ComboMembers
-  @benefitsAndCoverage03 @BenefitsForCombo @regression @BnC_Part1_regressionMember
+  @benefitsAndCoverage03 @BenefitsForCombo @regression @BnC_Part2_regressionMember
   Scenario Outline: Index: <index> -TID: <TID> -plan: <planType> -memberType: <memberType> - Verify the Benefits for a combo member
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -49,7 +49,7 @@ Feature: 1.01 Member  benefits and Coverage page
 
 
   #TC10_Benefits_for_TexasERSMember
-  @benefitsAndCoverage04 @BenefitsforTexasERSMember @regression @BnC_Part1_regressionMember
+  @benefitsAndCoverage04 @BenefitsforTexasERSMember @regression @BnC_Part2_regressionMember
   Scenario Outline: Index: <index> -TID: <TID> -plan: <planType> -memberType: <memberType> - Verify the Benefits for TexasERSMember
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -66,7 +66,7 @@ Feature: 1.01 Member  benefits and Coverage page
 
   #TC11_Benefits_for_Ship_member
   #note: this scenario covers multiple testcases TID 15094,15240
-  @benefitsAndCoverage05 @CMShip @BnC_Part2_regressionMember 
+  @benefitsAndCoverage05 @CMShip @BnC_Part3_regressionMember 
   Scenario Outline: Index: <index> -TID: <TID> -plan: <planType> -memberType: <memberType> - Verify that Page Headers are in place on Benefits and Coverage page
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -114,7 +114,7 @@ Feature: 1.01 Member  benefits and Coverage page
       | 05    | 15094 | SHIP      | SHIP_BnC         | ENGLISH  |  5                    | EffectiveShipMedSupp |     3 | NoRider |
 
   #TC13_Benefits_for_MA_SSUP_MEDSUPMember
-  @benefitsAndCoverage06 @BenefitsForMAMedsupSSUPMember @regression  @BnC_Part2_regressionMember
+  @benefitsAndCoverage06 @BenefitsForMAMedsupSSUPMember @regression  @BnC_Part3_regressionMember
   Scenario Outline: Index: <index> -TID: <TID> -plan: <planType> -memberType: <memberType> - Verify the Benefits for a  MA Member
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -143,7 +143,7 @@ Feature: 1.01 Member  benefits and Coverage page
       | 06    | 15098 | SSUP     | COMBO_Group_BnC| GrpEffectiveSSUP| 4     | NoRider |
 
   #TC15_Ancilliary Benefits for Group member(MA,MAPD)
-  @benefitsAndCoverage07 @CMAncillarysection2  @BnC_Part2_regressionMember
+  @benefitsAndCoverage07 @CMAncillarysection2  @BnC_Part4_regressionMember
   Scenario Outline: Index: <index> -TID: <TID> -plan: <planType> -memberType: <memberType> - Verify CMAncillarysection2 section is in place on Benefits and Coverage page for nonLis member
     Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>      |
@@ -165,7 +165,7 @@ Feature: 1.01 Member  benefits and Coverage page
       | 07    | 15238 | MAPD     | Group_Ancillary_BnC | NON LIS       |
 
   #TC16-Part1_Ancilliary Benefits for Group member(PDP and other than Group members)
-  @benefitsAndCoverage08 @ancillarybenefitnegativescenarioscodemonkeys @BnC_Part3_regressionMember
+  @benefitsAndCoverage08 @ancillarybenefitnegativescenarioscodemonkeys @BnC_Part4_regressionMember
   Scenario Outline: Index: <index> -TID: <TID> -plan: <planType> -memberType: <memberType> - Verify ancillary benefits are not displayed other than Group nonLis memnbers
     Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>      |
@@ -196,7 +196,7 @@ Feature: 1.01 Member  benefits and Coverage page
       | 08    | 15239 | PDP      | Group_BnC      | NON LIS       | GrpEffectiveUHC  | 3     | NoRider | 
       
   #TC19_Ways To Save should come only for PDP members (Saver,Walgreen,Preferred, Symphonix)
-  @benefitsAndCoverage09 @WaystoSaveforPdp @regression  @BnC_Part3_regressionMember
+  @benefitsAndCoverage09 @WaystoSaveforPdp @regression  @BnC_Part5_regressionMember
   Scenario Outline: Index: <index> -TID: <TID> -plan: <planType> -memberType: <memberType> - Verify the ways to save  widget for a PDP member
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -238,7 +238,7 @@ Feature: 1.01 Member  benefits and Coverage page
     
       
   #TC21_PDP_LIS(3,4)- Retail Drug Cost Table
-  @benefitsAndCoverage11  @PDPLIS3member @BnC_Part3_regressionMember
+  @benefitsAndCoverage11  @PDPLIS3member @BnC_Part5_regressionMember
   Scenario Outline: Index: <index> -TID: <TID> -plan: <planType> -memberType: <memberType> - Verify Group LIS 3/4 on Benefits and Coverage page
     Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>      |
@@ -275,7 +275,7 @@ Feature: 1.01 Member  benefits and Coverage page
       | 13    | 15248 | PDP      | PDPLIS_BnC | LIS 3         | Summary of Benefits | Evidence of Coverage | Comprehensive Formulary         | Alternative Drug List |
       
   #TC21_PDP_LIS(3,4)- Retail Drug Cost Table
-  @benefitsAndCoverage12  @PDPLIS3member @BnC_Part4_regressionMember  
+  @benefitsAndCoverage12  @PDPLIS3member @BnC_Part6_regressionMember  
   Scenario Outline: Index: <index> -TID: <TID> -plan: <planType> -memberType: <memberType> - Verify Group LIS 3/4 on Benefits and Coverage page
     Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>      |
@@ -308,7 +308,7 @@ Feature: 1.01 Member  benefits and Coverage page
       | 14    | 15248 | PDP      | PDPLIS_BnC  | LIS 3        |
       
   #TC25_Group members_MAPD_LIS(3,4)
-  @benefitsAndCoverage13 @CMGroupmembersTC25 @BnC_Part4_regressionMember 
+  @benefitsAndCoverage13 @CMGroupmembersTC25 @BnC_Part6_regressionMember 
   Scenario Outline: Index: <index> -TID: <TID> -plan: <planType> -memberType: <memberType> - Verify Group LIS 3/4 on Benefits and Coverage page
     Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>      |
@@ -345,7 +345,7 @@ Feature: 1.01 Member  benefits and Coverage page
       | 15    | 15247 | MAPD     | Group_BnC  | LIS 4         | Summary Of Benefits | Evidence of Coverage | Comprehensive Formulary         |
 
   #TC26_Group members_PDP_LIS(1,2)
-  @benefitsAndCoverage14 @CMGroupmembersPDPLIS_TC26 @BnC_Part5_regressionMember 
+  @benefitsAndCoverage14 @CMGroupmembersPDPLIS_TC26 @BnC_Part7_regressionMember 
   Scenario Outline: Index: <index> -TID: <TID> -plan: <planType> -memberType: <memberType> - Verify Group LIS 1/2 values on Benefits and Coverage page
     Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>      |
@@ -381,7 +381,7 @@ Feature: 1.01 Member  benefits and Coverage page
       | 16    | 15369 | PDP      | Group_BnC  | LIS 1         | Summary Of Benefits | Evidence of Coverage | Comprehensive Formulary         |
 
   #TC23_Group NON LIS_MAPD
-  @benefitsAndCoverage15 @CMMapdGroupNonLis @BnC_Part5_regressionMember
+  @benefitsAndCoverage15 @CMMapdGroupNonLis @BnC_Part7_regressionMember
   Scenario Outline: Index: <index> -TID: <TID> -plan: <planType> -memberType: <memberType> - Verify all sections for Group NonLIS member on Benefits and Coverage page
     Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>      |
@@ -423,7 +423,7 @@ Feature: 1.01 Member  benefits and Coverage page
       | 17    | 15246 | MAPD     | Group_BnC  | NON LIS       | ENGLISH  | Summary Of Benefits | Evidence of Coverage | Comprehensive Formulary         | EFADDB CDEEFFCDC | 978095497-00 | 01/01/2018    | Not Available  | Tier 2          | true        |
 
   #TC24_Group NON LIS_PDP
-  @benefitsAndCoverage16 @CMPDPGroupNonLis @BnC_Part6_regressionMember
+  @benefitsAndCoverage16 @CMPDPGroupNonLis @BnC_Part8_regressionMember
   Scenario Outline: Index: <index> -TID: <TID> -plan: <planType> -memberType: <memberType> - Verify all sections for PDP Group NonLIS member on Benefits and Coverage page
     Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>      |
@@ -466,7 +466,7 @@ Feature: 1.01 Member  benefits and Coverage page
 
 
   #TC21_MAPD_LIS(1,2)- Retail Drug Cost Table
-  @benefitsAndCoverage17 @CMmapdindlis @BnC_Part6_regressionMember  
+  @benefitsAndCoverage17 @CMmapdindlis @BnC_Part8_regressionMember  
   Scenario Outline: Index: <index> -TID: <TID> -plan: <planType> -memberType: <memberType> - Verify PDF section is in place on Benefits and Coverage page for Lis user
     Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>      |
@@ -590,7 +590,7 @@ Feature: 1.01 Member  benefits and Coverage page
       | 20    | 15245 | MAPD     | Individual_BnC | LIS 1         | ENGLISH  | DBAD ADFED | 919744565-00 | 01/01/2019    | Not Available  | Extra Help Level : 1 | IndEffectiveAARP |     7 | Rider   |
       
   #TC22_NON LIS Ind plan member(PDP)- Drug Cost table
-  @benefitsAndCoverage19 @CMFedPDPNonLis @BnC_Part7_regressionMember
+  @benefitsAndCoverage19 @CMFedPDPNonLis @BnC_Part9_regressionMember
   Scenario Outline: Index: <index> -TID: <TID> -plan: <planType> -memberType: <memberType> -language: <language> - Verify all sections for PDP Ind NonLIS member on Benefits and Coverage page
     Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>      |
@@ -652,7 +652,7 @@ Feature: 1.01 Member  benefits and Coverage page
       | 21    | 15377 | PDP      | Individual_BnC | NON LIS       | ENGLISH  | Summary of Benefits | Evidence of Coverage | Comprehensive Formulary - Drug List | Alternative Drug List | ECADEA DCAA | 0197331001 | 05/01/2018    | Not Available  | Tier 2          | true        | EffectivePDPAARP | 4     | NoRider |
 
 
-  @benefitsAndCoverage20  @hartfordprescriptionDrugBenefit @BnC_Part7_regressionMember
+  @benefitsAndCoverage20  @hartfordprescriptionDrugBenefit @BnC_Part9_regressionMember
   Scenario Outline: Index: <index> -TID: <TID> -plan: <planType> -memberType: <memberType> - Verify city of Hartford Prescription Drug Benefits
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -666,7 +666,7 @@ Feature: 1.01 Member  benefits and Coverage page
       | 22    | 15367 | MAPD     | Hartford_BnC |
     # | xx    | 15367 | PDP      | Hartford_BnC |
 
-  @benefitsAndCoverage21 @TownOfGreenwichprescriptionDrugBenefit @BnC_Part8_regressionMember
+  @benefitsAndCoverage21 @TownOfGreenwichprescriptionDrugBenefit @BnC_Part10_regressionMember
   Scenario Outline: Index: <index> -TID: <TID> -plan: <planType> -memberType: <memberType> - Verify town of greenwich Prescription Drug Benefits
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -679,7 +679,7 @@ Feature: 1.01 Member  benefits and Coverage page
       | index | TID   | planType | memberType    |
       | 23    | 15367 | MAPD     | Greenwich_BnC |
       
-  @benefitsAndCoverage22 @CMpdpindlis @BnC_Part8_regressionMember
+  @benefitsAndCoverage22 @CMpdpindlis @BnC_Part10_regressionMember
   Scenario Outline: Index: <index> -TID: <TID> -plan: <planType> -memberType: <memberType> - Verify all sections for Ind LIS1 member on Benefits and Coverage page
     Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>      |

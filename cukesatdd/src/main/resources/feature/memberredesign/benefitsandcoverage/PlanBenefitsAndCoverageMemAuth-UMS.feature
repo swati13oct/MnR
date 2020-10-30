@@ -50,7 +50,7 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth
       | 02    | 15088 |qavgogine | qavgogine |q3_Sep_FedANOC_033| MAPD     | memberWithoutProviderTiering_BnC |
       
   #TC08_BenefitsFor_ComboMembers
-  @memAuth_benefitsAndCoverage12 @BenefitsForCombo @regression @BnC_Part1_memAuth
+  @memAuth_benefitsAndCoverage12 @BenefitsForCombo @regression @BnC_Part2_memAuth
   Scenario Outline: Index: <index> -TID: <TID> -plan: <planType> -memberType: <memberType> - Verify the Benefits for a combo member
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
@@ -95,7 +95,7 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth
 
   #TC11_Benefits_for_Ship_member
   #note: this scenario covers multiple testcases TID 15094,15240
-  @memAuth_benefitsAndCoverage22 @CMShip @BnC_Part2_memAuth 
+  @memAuth_benefitsAndCoverage22 @CMShip @BnC_Part3_memAuth 
   Scenario Outline: Index: <index> -TID: <TID> -plan: <planType> -memberType: <memberType> - Verify that Page Headers are in place on Benefits and Coverage page
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
@@ -147,7 +147,7 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth
       | 05    |15094|qavgogine|qavgogine|q3_sep_UAT4_AARP013| SHIP   |SHIP_BnC  | ENGLISH| 5                  |EffectiveShipMedSupp|   3  | NoRider |
       
 
-  @memAuth_benefitsAndCoverage10 @BenefitsForMAMedsupSSUPMember  @BnC_Part2_memAuth 
+  @memAuth_benefitsAndCoverage10 @BenefitsForMAMedsupSSUPMember  @BnC_Part3_memAuth 
   Scenario Outline: Index: <index> -TID: <TID> -plan: <planType> -memberType: <memberType> - Verify the Benefits for a  MA Member
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
@@ -185,7 +185,7 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth
       
 
   #TC15_Ancilliary Benefits for Group member(MA,MAPD)
-  @memAuth_benefitsAndCoverage21 @CMAncillarysection2  @BnC_Part3_memAuth
+  @memAuth_benefitsAndCoverage21 @CMAncillarysection2  @BnC_Part4_memAuth
   Scenario Outline: Index: <index> -TID: <TID> -plan: <planType> -memberType: <memberType> - Verify CMAncillarysection2 section is in place on Benefits and Coverage page for nonLis member
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
@@ -213,7 +213,7 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth
       | 07    | 15238 |qavgogine| qavgogine| mapd_group_user|MAPD     | Group_Ancillary_BnC | NON LIS       |
 
   #TC16-Part1_Ancilliary Benefits for Group member(PDP and other than Group members)
-  @memAuth_benefitsAndCoverage32_1 @ancillarybenefitnegativescenarioscodemonkeys @BnC_Part3_memAuth 
+  @memAuth_benefitsAndCoverage32_1 @ancillarybenefitnegativescenarioscodemonkeys @BnC_Part4_memAuth 
   Scenario Outline: Index: <index> -TID: <TID> -plan: <planType> -memberType: <memberType> - Verify ancillary benefits are not displayed other than Group nonLis memnbers
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
@@ -253,7 +253,7 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth
       
 
   #TC19_Ways To Save should come only for PDP members (Saver,Walgreen,Preferred, Symphonix)
-  @memAuth_benefitsAndCoverage5 @WaystoSaveforPdp @regression  @BnC_Part4_memAuth
+  @memAuth_benefitsAndCoverage5 @WaystoSaveforPdp @regression  @BnC_Part5_memAuth
   Scenario Outline: Index: <index> -TID: <TID> -plan: <planType> -memberType: <memberType> - Verify the ways to save  widget for a PDP member
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
@@ -276,7 +276,7 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth
       | 11    | 15249 |qavgogine| qavgogine| q2_jun_aarp00042|MAPD  | withoutWaysToSave_BnC  |
         
   #TC21_PDP_LIS(3,4)- Retail Drug Cost Table
-  @memAuth_benefitsAndCoverage1  @PDPLIS3member @BnC_Part4_memAuth
+  @memAuth_benefitsAndCoverage1  @PDPLIS3member @BnC_Part5_memAuth
   Scenario Outline: Index: <index> -TID: <TID> -plan: <planType> -memberType: <memberType> - Verify Group LIS 3/4 on Benefits and Coverage page
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
@@ -319,7 +319,7 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth
       | 12    | 15248 | qavgogine| qavgogine|q2_jun_aarp0179|PDP | PDPLIS_BnC | LIS 3  | Summary of Benefits | Evidence of Coverage | Comprehensive Formulary         | Alternative Drug List |
       
   #TC25_Group members_MAPD_LIS(3,4)
-  @memAuth_benefitsAndCoverage1  @CMGroupmembersTC25 @BnC_Part4_memAuth
+  @memAuth_benefitsAndCoverage1  @CMGroupmembersTC25 @BnC_Part6_memAuth
   Scenario Outline: Index: <index> -TID: <TID> -plan: <planType> -memberType: <memberType> - Verify Group LIS 3/4 on Benefits and Coverage page
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
@@ -361,7 +361,7 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth
       | 13    | 15247 |qavgogine | qavgogine|q3_sep_UAT4_Group075 | MAPD    |Group_BnC  | LIS 4         |Summary Of Benefits  |Evidence of Coverage  | Comprehensive Formulary         |
 
   #TC26_Group members_PDP_LIS(1,2)
-  @memAuth_benefitsAndCoverage2 @CMGroupmembersPDPLIS_TC26 @BnC_Part5_memAuth 
+  @memAuth_benefitsAndCoverage2 @CMGroupmembersPDPLIS_TC26 @BnC_Part6_memAuth 
   Scenario Outline: Index: <index> -TID: <TID> -plan: <planType> -memberType: <memberType> - Verify Group LIS 1/2 values on Benefits and Coverage page
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
@@ -401,7 +401,7 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth
       | 14    | 15369 | qavgogine| qavgogine|Auto20200408191555_3|PDP | Group_BnC | LIS 1 | Summary Of Benefits | Evidence of Coverage | Comprehensive Formulary |
 
   #TC23_Group NON LIS_MAPD
-  @memAuth_benefitsAndCoverage23 @CMMapdGroupNonLis @BnC_Part5_memAuth
+  @memAuth_benefitsAndCoverage23 @CMMapdGroupNonLis @BnC_Part7_memAuth
   Scenario Outline: Index: <index> -TID: <TID> -plan: <planType> -memberType: <memberType> - Verify all sections for Group NonLIS member on Benefits and Coverage page
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
@@ -450,7 +450,7 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth
       | 15    | 15246 |qavgogine| qavgogine| q3_sep_UAT4_Group224|MAPD     | Group_BnC  | NON LIS       | ENGLISH  | Summary Of Benefits | Evidence of Coverage | Comprehensive Formulary         | EFADDB CDEEFFCDC | 978095497-00 | 01/01/2018    | Not Available  | Tier 2  | true        |
 
   #TC24_Group NON LIS_PDP
-  @memAuth_benefitsAndCoverage27 @CMPDPGroupNonLis @BnC_Part6_memAuth
+  @memAuth_benefitsAndCoverage27 @CMPDPGroupNonLis @BnC_Part7_memAuth
   Scenario Outline: Index: <index> -TID: <TID> -plan: <planType> -memberType: <memberType> - Verify all sections for PDP Group NonLIS member on Benefits and Coverage page
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
@@ -499,7 +499,7 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth
 
 
   #TC21_MAPD_LIS(1,2)- Retail Drug Cost Table
-  @memAuth_benefitsAndCoverage23Indi @CMmapdindlis @BnC_Part6_memAuth
+  @memAuth_benefitsAndCoverage23Indi @CMmapdindlis @BnC_Part8_memAuth
   Scenario Outline: Index: <index> -TID: <TID> -plan: <planType> -memberType: <memberType> - Verify PDF section is in place on Benefits and Coverage page for Lis user
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
@@ -573,7 +573,7 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth
 
   
   #TC22_NON LIS Ind plan member(PDP)- Drug Cost table
-  @memAuth_benefitsAndCoverage15 @CMFedPDPNonLis @BnC_Part7_memAuth
+  @memAuth_benefitsAndCoverage15 @CMFedPDPNonLis @BnC_Part8_memAuth
   Scenario Outline: Index: <index> -TID: <TID> -plan: <planType> -memberType: <memberType> -language: <language> - Verify all sections for PDP Ind NonLIS member on Benefits and Coverage page
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
@@ -643,7 +643,7 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth
       | 18    | 15377 |qavgogine| qavgogine|q2_jun_aarp0112| PDP      | Individual_BnC | NON LIS       | ENGLISH  | Summary of Benefits | Evidence of Coverage | Comprehensive Formulary - Drug List | Alternative Drug List | ECADEA DCAA | 0197331001 | 05/01/2018    | Not Available  | Tier 2          | true |EffectivePDPAARP | 4     | NoRider |
 
 
-  @memAuth_benefitsAndCoverage30  @hartfordprescriptionDrugBenefit @BnC_Part7_memAuth
+  @memAuth_benefitsAndCoverage30  @hartfordprescriptionDrugBenefit @BnC_Part9_memAuth
   Scenario Outline: Index: <index> -TID: <TID> -plan: <planType> -memberType: <memberType> - Verify city of Hartford Prescription Drug Benefits
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
@@ -664,7 +664,7 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth
       | index | TID   |username |password  |MemUserName| planType | memberType   |
       | 19    | 15367 |qavgogine| qavgogine|q3_sep_UAT4_Group233| MAPD | Hartford_BnC |
 
-  @memAuth_benefitsAndCoverage31 @TownOfGreenwichprescriptionDrugBenefit @BnC_Part8_memAuth
+  @memAuth_benefitsAndCoverage31 @TownOfGreenwichprescriptionDrugBenefit @BnC_Part10_memAuth
   Scenario Outline: Index: <index> -TID: <TID> -plan: <planType> -memberType: <memberType> - Verify town of greenwich Prescription Drug Benefits
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
@@ -685,7 +685,7 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth
       | index | TID   |username |password  |MemUserName| planType | memberType    |
       | 20    | 15367 |qavgogine| qavgogine| q3_sep_UAT4_Group029| MAPD| Greenwich_BnC |
       
-  @memAuth_benefitsAndCoverage24 @CMpdpindlis @BnC_Part8_memAuth
+  @memAuth_benefitsAndCoverage24 @CMpdpindlis @BnC_Part11_memAuth
   Scenario Outline: Index: <index> -TID: <TID> -plan: <planType> -memberType: <memberType> - Verify all sections for Ind LIS1 member on Benefits and Coverage page
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
