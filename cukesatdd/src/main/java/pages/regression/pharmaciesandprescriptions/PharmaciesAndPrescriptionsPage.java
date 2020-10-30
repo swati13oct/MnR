@@ -722,6 +722,23 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 				Assert.assertTrue("PROBLEM - Drug Estimator Tool page is opened in new browser window", false);
 			}
 		}
+		
+		public void validateDrugEstimatorToolPageOpensInSameWindow_memAuth() {
+			pageloadcomplete();
+			int size = countOfNewWindowTab();
+			System.out.println("Number of windows opened when user click on Find & Price a Medication CTA is :: " + size);
+			if (size == 2) {
+				pageloadcomplete();
+				//Assert.assertTrue("PROBLEM - No new bowser window is opened", true);
+				Assert.assertTrue("PROBLEM - Drug Estimator Tool Page is NOT displayed successfully",
+						pnpValidate(DrugEstimatorToolPageSearchBar, 30));
+			} else {
+				pageloadcomplete();
+				Assert.assertTrue("PROBLEM - Drug Estimator Tool Page Search bar is NOT displayed successfully",
+						pnpValidate(DrugEstimatorToolPageSearchBar, 30));
+				Assert.assertTrue("PROBLEM - Drug Estimator Tool page is opened in new browser window", false);
+			}
+		}
 
 		// F436319
 		public void closePharmacies_PrescriptionNotification() {

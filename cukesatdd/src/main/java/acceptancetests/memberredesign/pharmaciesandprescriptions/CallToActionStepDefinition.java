@@ -413,6 +413,16 @@ public class CallToActionStepDefinition {
 		pnpPg.validateDrugEstimatorToolPageOpensInSameWindow();
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
 	}
+	
+	
+	@Then("^user will be directed to the Drug Estimator tool developed by Rally in the same window using memAuth$")
+	public void user_will_be_directed_to_the_Drug_Estimator_tool_developed_by_Rally_in_the_same_window_using_memAuth()
+			throws Throwable {
+		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
+				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
+		pnpPg.validateDrugEstimatorToolPageOpensInSameWindow_memAuth();
+		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
+	}
 
 	@Then("^user navigates to Optum Rx Drug pricing Page using Single Sign On SSO on new tab$")
 	public void user_navigates_to_Optum_Rx_Drug_pricing_Page_using_Single_Sign_On_SSO_on_new_tab() throws Throwable {
