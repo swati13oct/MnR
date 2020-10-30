@@ -27,8 +27,10 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
 import acceptancetests.acquisition.planRecommendationEngine.PlanRecommendationEngineStepDefinition;
+import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 import pages.acquisition.commonpages.AcquisitionHomePage;
+import pages.acquisition.commonpages.VPPPlanSummaryPage;
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineDoctorsPage;
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineDrugsPage;
 import pages.mobile.acquisition.planrecommendationengine.DoctorsMobilePage;
@@ -1412,4 +1414,21 @@ public boolean checkPlanyear(String year) {
 	return false;
 }
 
+
+@FindBy(xpath = "//div[@class='switch-field ng-scope']//label[@class='ng-binding'][contains(text(),'2020 plans')]")
+private WebElement  CurrentYearPlansBtn;
+
+public VPPPlanSummaryPage handlePlanYearSelectionPRE(String planYear) {
+
+	CommonUtility.checkPageIsReadyNew(driver);			
+		if(planYear.equalsIgnoreCase("current")) {				// if the scenario is for current year
+			if(validate(CurrentYearPlansBtn, 20)) {
+				System.out.println("*****CLICKING ON Current Year button*****: "+CurrentYearPlansBtn.getText());
+				jsClickNew(CurrentYearPlansBtn);
+				CommonUtility.checkPageIsReadyNew(driver);
+			}
+		}
+		return null;
+		
+}
 }

@@ -487,7 +487,7 @@ public class PlanRecommendationEngineDoctorsPage extends UhcDriver {
 		else
 			providerlookup(doctorsName, 1);
 		System.out.println("Validating " + page + " page Continue button functionality");
-		modalContinuedoctors.click();
+		//modalContinuedoctors.click();
 		jsClickNew(modalContinuedoctors);
 		desktopCommonUtils.nextPageValidation(page.toUpperCase());
 
