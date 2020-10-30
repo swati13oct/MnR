@@ -24,5 +24,5 @@ Feature: Auto Refill Off
     Then user will see "Complete Your Refill" Page
 
     Examples: 
-      | username | password | memUserName | planType | memberType |
-      | kjadha10 | Free@123 | Berniewb    | PDP      | Individual |
+      | username | password | memUserName                          | planType | memberType |
+      | kjadha10 | Free@123 | a4d33641-81eb-4323-8a22-179030e70977 | PDP      | Individual |
