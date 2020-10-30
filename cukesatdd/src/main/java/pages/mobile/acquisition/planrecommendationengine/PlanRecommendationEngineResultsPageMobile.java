@@ -905,7 +905,8 @@ public class PlanRecommendationEngineResultsPageMobile extends UhcDriver {
 	public void vppToPreStartOver() {
 		System.out.println("Validating VPP to PRE Page Clicking on Start Over Button");
 		validate(StartOverButton, 20);
-		StartOverButton.click();
+		//StartOverButton.click();
+		jsClickNew(StartOverButton);
 		startOverPopup();
 		pageloadcomplete();
 	}
@@ -916,7 +917,8 @@ public class PlanRecommendationEngineResultsPageMobile extends UhcDriver {
 		validate(StartOverContent, 20);
 		validate(closeButton, 20);
 		validate(startOverButtoninPopup, 20);
-		startOverButtoninPopup.click();
+		jsClickNew(startOverButtoninPopup);
+		//startOverButtoninPopup.click();
 	}
 
 	public void validateRankingPlans(String Recom, String plans) {
@@ -984,12 +986,15 @@ public class PlanRecommendationEngineResultsPageMobile extends UhcDriver {
 		System.out.println("Email Plan list from VPP : ");
 		plansLoader();
 		if (plan.equalsIgnoreCase("PDP")) {
+			scrollToView(pdpemailList);
 			pdpemailList.click();
 		} else if (plan.equalsIgnoreCase("MA")) {
+			scrollToView(maemailList);
 			maemailList.click();
 
 		} else if (plan.equalsIgnoreCase("SNP")) {
-			snpemailList.click();
+			scrollToView(snpemailList);
+			jsClickNew(snpemailList);
 
 		} else {
 			Assert.assertTrue(false, "Print Email is not configured for the given Plan :" + plan);

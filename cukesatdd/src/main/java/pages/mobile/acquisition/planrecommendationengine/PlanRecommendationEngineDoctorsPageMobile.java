@@ -459,9 +459,11 @@ public class PlanRecommendationEngineDoctorsPageMobile extends UhcDriver {
 	static ArrayList<String> confirmationProviderResults = new ArrayList<String>();
 
 	public void addProvidersPRE(String doctorsName, String multiDoctor) {
-		doctorLookupOption.click();
+		//doctorLookupOption.click();
+		jsClickNew(doctorLookupOption);
 		System.out.println("Lookup Type Clicked");
 		continueBtn.click();
+	
 		if (multiDoctor.equalsIgnoreCase("YES"))
 			providerlookup(doctorsName, 3);
 		else
