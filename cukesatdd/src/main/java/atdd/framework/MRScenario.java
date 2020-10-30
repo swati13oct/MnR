@@ -157,11 +157,25 @@ public class MRScenario {
 	public Object getBean(String id) {
 		Object result = scenarioObjectMap.get(id);
 		if (result == null) {
-			System.out.println("Object not initialized");
+			System.out.println("Object not initialized - " + id);
 		}
 		return result;
 
 	}
+
+	public Object getBean(String id, Object defaultValue)
+	{
+		Object result = getBean(id);
+
+		if(result == null)
+		{
+			return defaultValue;
+		}
+		return result;
+
+	}
+
+
 
 	static {
 

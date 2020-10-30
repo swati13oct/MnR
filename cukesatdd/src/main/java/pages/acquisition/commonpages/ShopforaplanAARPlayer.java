@@ -57,9 +57,26 @@ public class ShopforaplanAARPlayer extends UhcDriver {
 
 	@FindBy(xpath = "//div[@id='planTypesColumn']//a[text()='Enroll']")
 	private WebElement enrollLink;
+	
+	@FindBy(xpath = "//div[@id='planTypesColumn']//a[text()='Shop']")
+	private WebElement enrollShopLink;
 
 	@FindBy(xpath = "//a[contains(@href,'ma-enrollment')]")
 	private WebElement maLeanHowToEnrollLink;
+	
+	@FindBy(xpath = "(//a[contains(@href,'/shop/dual-special-needs-plans.html')])[2]")
+	private WebElement dsnpLeanHowToEnrollShopLink;
+	
+	@FindBy(xpath = "(//a[contains(@href,'/shop/prescription-drug-plans.html')])[2]")
+	private WebElement pdpLeanHowToEnrollShopLink;
+	@FindBy(xpath = "(//a[contains(@href,'/shop/medicare-advantage-plans')])[2]")
+	private WebElement maLeanHowToEnrollShopLink;
+	
+	@FindBy(xpath = "(//a[contains(@href,'/shop/medicare-supplement-plans.html')])[2]")
+	private WebElement msLeanHowToEnrollShopLink;
+	
+	@FindBy(xpath = "//div[@id='accordion2']//h3[text()='Enrollment']")
+	private WebElement EnrollmentLink;
 
 	public ShopforaplanAARPlayer(WebDriver driver) {
 		super(driver);
@@ -85,4 +102,50 @@ public class ShopforaplanAARPlayer extends UhcDriver {
 		return null;
 	}
 
+	public ShopforaplanAARPlayer ShopLinkOnShopPlan() throws Exception {
+		waitforElement(enrollShopLink);
+		enrollShopLink.click();
+		Thread.sleep(4000);
+		if (validate(dsnpLeanHowToEnrollShopLink)) {
+			waitforElement(dsnpLeanHowToEnrollShopLink);
+			System.out.println("Shop Page Plan is Displayed");
+			return new ShopforaplanAARPlayer(driver);
+		}
+		return null;
+	}
+	
+	
+	
+	public void clickONEnrollShopLink(String plantype, String planName) throws Exception{
+		if(plantype.equals("SNP")){
+			waitforElement(dsnpLeanHowToEnrollShopLink);
+			dsnpLeanHowToEnrollShopLink.click();
+			Thread.sleep(5000);
+		
+		}
+		else if(plantype.equals("PDP")){
+			waitforElement(pdpLeanHowToEnrollShopLink);
+			pdpLeanHowToEnrollShopLink.click();
+			Thread.sleep(5000);
+		}	
+		
+		else if(plantype.equals("MAPD") || plantype.equals("MA")){
+			waitforElement(maLeanHowToEnrollShopLink);
+			maLeanHowToEnrollShopLink.click();
+			Thread.sleep(5000);
+		}	
+	}
+
+	public ShopforaplanAARPlayer ShopLinkOnMedsuppPlan() throws Exception {
+		waitforElement(enrollShopLink);
+		enrollShopLink.click();
+		Thread.sleep(4000);
+		if (validate(msLeanHowToEnrollShopLink)) {
+			waitforElement(msLeanHowToEnrollShopLink);
+			msLeanHowToEnrollShopLink.click();
+			System.out.println("Shop Page Medsupp Plan is Displayed");
+			return new ShopforaplanAARPlayer(driver);
+		}
+		return null;
+	}
 }
