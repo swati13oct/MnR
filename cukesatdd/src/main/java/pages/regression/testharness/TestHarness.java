@@ -1444,7 +1444,8 @@ public class TestHarness extends UhcDriver {
     	public PharmaciesAndPrescriptionsPage navigateToPharAndPresFromTestHarnessPage(String memberType) {
     		CommonUtility.checkPageIsReady(driver);
 			checkForIPerceptionModel(driver);
-			if (MRScenario.environment.contains("team-a") && memberType.toUpperCase().contains("PREEFF")) {
+			if ((MRScenario.environment.contains("team-a") || MRScenario.environment.contains("stage"))
+					&& memberType.toUpperCase().contains("PREEFF")) {
 				testHarnessTopMenuPhaPresLink_preeff.click();
 			} else {
 	    		try{
@@ -1475,6 +1476,7 @@ public class TestHarness extends UhcDriver {
     	private WebElement shadowRootHeader;
 
     	public boolean findPnPLinksExistOnPg(String memberType) {
+    		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
     		System.out.println("user is on '" + MRScenario.environmentMedicare + "' dashboard page, attempt to navigate to secondary page to see if PnP link exists");
     		checkForIPerceptionModel(driver);
     		if (noWaitValidate(preEffPnpMenuLnk) && memberType.contains("PREEFF")) 

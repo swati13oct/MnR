@@ -488,14 +488,14 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 
 		String expUrl="/health-plans/estimate-drug-costs.html";
 		if (memberType.toUpperCase().contains("UHC"))
-			if (MRScenario.environment.contains("stage")) 
-				expUrl="uhcmedicaresolutions.uhc.com"+expUrl;
-			else
+			//tbd if (MRScenario.environment.contains("stage")) 
+			//tbd 	expUrl="uhcmedicaresolutions.uhc.com"+expUrl;
+			//tbd else
 				expUrl="uhcmedicaresolutions.com"+expUrl;
 		else 
-			if (MRScenario.environment.contains("stage")) 
-				expUrl="aarpmedicareplans.uhc.com"+expUrl;
-			else 
+			//tbd if (MRScenario.environment.contains("stage")) 
+			//tbd 	expUrl="aarpmedicareplans.uhc.com"+expUrl;
+			//tbd else 
 				expUrl="aarpmedicareplans.com"+expUrl;
 		WebElement expElement=dceHeader;
 		validateLnkBehaviorNewTab(planType, memberType, targetItem, targetElement, expUrl, expElement);
@@ -519,14 +519,14 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 
 		expUrl="/health-plans/aarp-pharmacy.html";
 		if (memberType.toUpperCase().contains("UHC"))
-			if (MRScenario.environment.contains("stage")) 
-				expUrl="uhcmedicaresolutions.uhc.com"+expUrl;
-			else
+			//tbd if (MRScenario.environment.contains("stage")) 
+			//tbd 	expUrl="uhcmedicaresolutions.uhc.com"+expUrl;
+			//tbd else
 				expUrl="uhcmedicaresolutions.com"+expUrl;
 		else 
-			if (MRScenario.environment.contains("stage")) 
-				expUrl="aarpmedicareplans.uhc.com"+expUrl;
-			else 
+			//tbd if (MRScenario.environment.contains("stage")) 
+			//tbd 	expUrl="aarpmedicareplans.uhc.com"+expUrl;
+			//tbd else 
 				expUrl="aarpmedicareplans.com"+expUrl;
 		expElement=phaLocHeader;
 		validateLnkBehaviorNewTab(planType, memberType, targetItem, targetElement, expUrl, expElement);
