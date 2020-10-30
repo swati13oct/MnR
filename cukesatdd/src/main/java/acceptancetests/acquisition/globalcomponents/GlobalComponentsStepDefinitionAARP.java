@@ -51,6 +51,7 @@ public class GlobalComponentsStepDefinitionAARP {
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE,
 				aquisitionhomepage);
+		aquisitionhomepage.validateSubtitle();
 	}
 
 	/**

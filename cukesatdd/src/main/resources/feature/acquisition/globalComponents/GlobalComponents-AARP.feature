@@ -1,4 +1,4 @@
-@GlobalComponentsAARP @F294024
+@GlobalComponentsAARP 
 Feature: 1.12 ACQ - Global Components AARP
 
   @globalfooterULayer
@@ -321,16 +321,16 @@ Feature: 1.12 ACQ - Global Components AARP
       |	AARP	| contact-us.html               | Footer: Contact Us         | //a[contains(@href ,'tel')]  | false   |
       |	AARP	| privacy-policy.html           | Footer: Privacy Policy     | //a[contains(@href ,'tel')]  | false   |
 
-	@FooterLinks_GlobalCompsUHC
-    Examples: 
-      |	site	| path                          | pageName                   | tfnXpath                     | tfnFlag |
-      |	UHC		| about-us.html                 | Footer: About Us           | //a[contains(@class, 'tel')] | false   |
-      |	UHC		| sitemap.html                  | Footer: Site Map           | //a[contains(@href ,'tel')]  | false   |
-      |	UHC		| terms-of-use.html             | Footer: Terms of Use       | //a[contains(@href ,'tel')]  | false   |
-      |	UHC		| disclaimer.html               | Footer: Disclaimers        | //a[contains(@href ,'tel')]  | false   |
-      |	UHC		| health-insurance-brokers.html | Footer: Agents and Brokers | //a[contains(@href ,'tel')]  | false   |
-      |	UHC		| contact-us.html               | Footer: Contact Us         | //a[contains(@href ,'tel')]  | false   |
-      |	UHC		| privacy-policy.html           | Footer: Privacy Policy     | //a[contains(@href ,'tel')]  | false   |
+#	@FooterLinks_GlobalCompsUHC
+    #Examples: 
+      #|	site	| path                          | pageName                   | tfnXpath                     | tfnFlag |
+      #|	UHC		| about-us.html                 | Footer: About Us           | //a[contains(@class, 'tel')] | false   |
+      #|	UHC		| sitemap.html                  | Footer: Site Map           | //a[contains(@href ,'tel')]  | false   |
+      #|	UHC		| terms-of-use.html             | Footer: Terms of Use       | //a[contains(@href ,'tel')]  | false   |
+      #|	UHC		| disclaimer.html               | Footer: Disclaimers        | //a[contains(@href ,'tel')]  | false   |
+      #|	UHC		| health-insurance-brokers.html | Footer: Agents and Brokers | //a[contains(@href ,'tel')]  | false   |
+      #|	UHC		| contact-us.html               | Footer: Contact Us         | //a[contains(@href ,'tel')]  | false   |
+      #|	UHC		| privacy-policy.html           | Footer: Privacy Policy     | //a[contains(@href ,'tel')]  | false   |
 
   @GlobalComponentsAARP_ISonlyPages
   Scenario Outline: To verify Global Components for the page mentioned of AARP site <pageName> : <path>

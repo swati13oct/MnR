@@ -409,6 +409,11 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	
 	@FindBy(xpath = "//body/div[@id='overlay']")
 	private WebElement overlayFilm;
+	
+	@FindBy(xpath = "//p[contains(text(),'UnitedHealthcare Insurance Company (UnitedHealthcare)')]")
+	private WebElement UHCICSubTiltle;
+	
+	
 
 
    	//String ChatSamText= "Chat with a Licensed Insurance Agent";
@@ -467,6 +472,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		super(driver);
 		PageFactory.initElements(driver, this);
 		openAndValidate();
+		validateSubtitle();
+		
 	}
 
 	public AcquisitionHomePage(WebDriver driver, boolean alreadyOnSite) {
@@ -535,6 +542,12 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		} catch (Exception e) {
 			System.out.println("Proactive chat popup not displayed");
 		}
+	}
+	
+	public void validateSubtitle() {
+		threadsleep(5);
+		System.out.println("validating the sub header");
+		Assert.assertEquals(UHCICSubTiltle.getText(), "UnitedHealthcare Insurance Company (UnitedHealthcare)");
 	}
 
 	public void openAndValidate(String siteOrPage) {
