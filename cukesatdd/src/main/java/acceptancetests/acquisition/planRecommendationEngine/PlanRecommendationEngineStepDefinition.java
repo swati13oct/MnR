@@ -28,6 +28,7 @@ import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineCostPr
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineCoverageOptionPage;
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineDoctorsPage;
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineDrugsPage;
+import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineEditResponsePage;
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineHeaderAndFooter;
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineLandingAndZipcodePages;
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEnginePharmacyPage;
@@ -814,4 +815,11 @@ public class PlanRecommendationEngineStepDefinition {
 			popup_clicked = planSelectorhomepage.close_Popup();
 		}
 	}
+	
+	@Then("^user validate saved values in edit response page$")
+   	public void check_saved_value_editResponse_page(DataTable givenAttributes) {
+		readfeaturedata(givenAttributes);
+		PlanRecommendationEngineEditResponsePage preEditpage =  new PlanRecommendationEngineEditResponsePage(wd);
+		preEditpage.editResponsepage(inputValues);
+   	}
 }
