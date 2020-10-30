@@ -731,11 +731,11 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 				pageloadcomplete();
 				//Assert.assertTrue("PROBLEM - No new bowser window is opened", true);
 				Assert.assertTrue("PROBLEM - Drug Estimator Tool Page is NOT displayed successfully",
-						pnpValidate(DrugEstimatorToolPageSearchBar, 30));
+						pnpValidate(DrugEstimatorToolPageSearchBar, 60));
 			} else {
 				pageloadcomplete();
 				Assert.assertTrue("PROBLEM - Drug Estimator Tool Page Search bar is NOT displayed successfully",
-						pnpValidate(DrugEstimatorToolPageSearchBar, 30));
+						pnpValidate(DrugEstimatorToolPageSearchBar, 60));
 				Assert.assertTrue("PROBLEM - Drug Estimator Tool page is opened in new browser window", false);
 			}
 		}

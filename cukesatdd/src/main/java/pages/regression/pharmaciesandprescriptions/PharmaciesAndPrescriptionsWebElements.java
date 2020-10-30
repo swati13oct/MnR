@@ -1573,7 +1573,7 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	@FindBy(xpath = "")
 	protected WebElement OptumRxDrugPricePageHeader;
 
-	@FindBy(xpath = "//div[text()='Choose a plan year to find in-network pharmacies.']")
+	@FindBy(xpath = "//*[text()='Choose a plan year to find in-network pharmacies.']")
 	protected WebElement HeaderOnChoosePlanYearPage;
 
 	@FindBy(xpath = "//main/div[2]/div[1]/div/div/div[1]/div/div[2]/button[@data-testid='back-button']")
@@ -1750,7 +1750,7 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	@FindBy(xpath = "//div[@data-testid='view-my-medications-CTA-button']")
 	protected WebElement ViewAllMedicationCallToActnBtn;
 
-	@FindBy(xpath = "//div[@data-testid='view-my-medications-CTA-icon']")
+	@FindBy(xpath = "//*[@data-testid='view-my-medications-CTA-icon']")
 	protected WebElement ViewAllMedicationCTAImg;
 
 	@FindBy(xpath = "//h2[@data-testid='view-my-medications-CTA-title' and contains(text(),'View My Medications')]")
