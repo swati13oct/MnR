@@ -633,6 +633,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//div[contains(@class,'container')]//img[@alt='Rocky Mountain']")
 	private WebElement rockyMountainLogo;
 	
+	@FindBy(id = "aarpSVGLogo")
+	public static WebElement AARPlogo;
+	
 	public WebElement getValEstimatedAnnualDrugCostValue(String planName) {
 		// WebElement valEstimatedAnnualDrugCostValue =
 		// driver.findElement(By.xpath("//*[contains(text(),'"+planName+"')]/ancestor::div[@class='module-plan-overview
@@ -2662,13 +2665,18 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	}
 
 	public void validatePlansAreSaved(String savePlanNames, String planType) {
-		String planTypePath = "";
+		String planTypePath="";
+		driver.navigate().refresh();
+		sleepBySec(3);
 		if (planType.equalsIgnoreCase("ma") || planType.equalsIgnoreCase("mapd")) {
-			planTypePath = "//div[@ng-show='showMaPlans']";
+			planTypePath="//div[@ng-show='showMaPlans']";
 		} else if (planType.equalsIgnoreCase("pdp")) {
-			planTypePath = "//div[@ng-show='showPdpPlans']";
+			planTypePath="//div[@ng-show='showPdpPlans']";
+			driver.navigate().refresh();
+			CommonUtility.checkPageIsReady(driver);
+			sleepBySec(5);
 		} else if (planType.equalsIgnoreCase("snp")) {
-			planTypePath = "//div[@ng-show='showSnpPlans']";
+			planTypePath="//div[@ng-show='showSnpPlans']";
 		}
 		List<String> listOfTestPlans = Arrays.asList(savePlanNames.split(","));
 		
@@ -2804,10 +2812,11 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	}
 
 	public void validateOnePlanSavedOnePlanUnsaved(String savePlanNames, String planType) {
-		String subPath = determineSubpath(planType);
-		String headerPath = determineHeaderPath(planType);
+		String subPath=determineSubpath(planType);
+		String headerPath=determineHeaderPath(planType);
 		List<String> listOfTestPlans = Arrays.asList(savePlanNames.split(","));
-
+		driver.navigate().refresh();
+		sleepBySec(3);
 		System.out.println("Validate first plan on list is saved and second plan on list is unsaved");
 		for (int i=0; i<listOfTestPlans.size(); i++) {
 			if (i==1) { //In the previous steps the plan 0 is unsaved so we will validate plan 1 is still saved
@@ -3323,16 +3332,24 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	public void handlePlanYearSelectionPopup() {
 		CommonUtility.checkPageIsReady(driver);
-		CommonUtility.waitForPageLoad(driver, planYearPopup, 5);
-		if (validate(planYearPopup)) {
-			if (validate(nextYearSelection)) {
-				nextYearSelection.click();
-				CommonUtility.waitForPageLoadNew(driver, planYearPopupGoButton, 10);
+		
+		if (validate(planYearPopup, 20)) {							//if plan year popup is displayed
+			System.out.println("Popup is present for AEP : ");	
+				if (validate(currentYearSelection)) {
+					currentYearSelection.click();
+				}
+				waitForPageLoadSafari();
+				validateNew(planYearPopupGoButton);
 				planYearPopupGoButton.click();
-
-			}
+		}else {														// if the plan year popup is not displayed
+				if(validate(CurrentYearPlansBtn, 20)) {
+					System.out.println("*****CLICKING ON Current Year button*****: "+CurrentYearPlansBtn.getText());
+					jsClickNew(CurrentYearPlansBtn);
+					waitForPageLoadSafari();
+					//validateNew(AARPlogo, 10);
+				}
 		}
-	}
+	}	
 
 	public void selectCurrentYearPlanYearSelectionPopup() {
 		CommonUtility.checkPageIsReady(driver);
@@ -3639,7 +3656,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	}
 	@FindBy(xpath="//label[contains(@for,'compare-plan')]")
 	private WebElement planCompareCheckBox;
-
+	
 	private Map<String, ArrayList<String>> dataMap;
 	
 	public void verifyPlanComapreCheckboxIsUncheckedforFirstPlan() {
