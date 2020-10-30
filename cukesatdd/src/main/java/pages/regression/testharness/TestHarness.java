@@ -560,7 +560,7 @@ public class TestHarness extends UhcDriver {
 		WebElement heading_e=heading;
 		if (memberType.contains("PREEFF"))
 			heading_e=preEffBnfHeading;
-		CommonUtility.waitForPageLoad(driver, heading_e, 60);
+		CommonUtility.waitForPageLoad(driver, heading_e, 10);
 		System.out.println(driver.getTitle());
 		if (!driver.getTitle().contains("Benefits")) { //note: in case timing issue, one more try
 			try {
