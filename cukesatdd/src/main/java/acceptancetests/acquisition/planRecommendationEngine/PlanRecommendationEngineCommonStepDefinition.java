@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import acceptancetests.acquisition.ole.oleCommonConstants;
+import acceptancetests.acquisition.vpp.VPPCommonConstants;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -83,7 +85,11 @@ public class PlanRecommendationEngineCommonStepDefinition {
 			System.out.println("Email is:"+county);
 			String isMultiCounty = givenAttributesMap.get("Is Multi County");
 			System.out.println("Entered Search Key is:"+isMultiCounty);
-			
+
+		getLoginScenario().saveBean(oleCommonConstants.OLE_ZIPCODE, zipcode);
+		getLoginScenario().saveBean(oleCommonConstants.OLE_COUNTY, county);
+
+
 		PlanRecommendationEngineLandingAndZipcodePages planSelectorhomepage =  new PlanRecommendationEngineLandingAndZipcodePages((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
 		if (isMultiCounty.equalsIgnoreCase("NO")) {
 			planSelectorhomepage.quizStartAndRunQuestionnaire(zipcode);
@@ -104,6 +110,7 @@ public class PlanRecommendationEngineCommonStepDefinition {
 		
 		PlanRecommendationEngineCoverageOptionPage planSelectorCoverageepage =  new PlanRecommendationEngineCoverageOptionPage(wd);
 		String plantype = givenAttributesMap.get("Plan Type");
+		getLoginScenario().saveBean(VPPCommonConstants.PLAN_TYPE, plantype);
 		if (!(plantype.isEmpty())) {
 			planSelectorCoverageepage.coverageOptionpageFunctional(plantype);
 		}
