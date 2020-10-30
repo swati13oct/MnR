@@ -726,10 +726,13 @@ try {
 	/* logic to simulate hover over functionality*/
 	public void navigateToMenuLinks(WebElement hdrMenuElement, WebElement menuDropListItem) {
 
-		Actions actions = new Actions(driver);
-		actions.moveToElement(hdrMenuElement);
-		actions.moveToElement(menuDropListItem);
-		actions.click().build().perform();
+//		Actions actions = new Actions(driver);
+//		actions.moveToElement(hdrMenuElement);
+//		actions.moveToElement(menuDropListItem);
+//		actions.click().build().perform();
+		jsMouseOver(hdrMenuElement);
+		jsMouseOver(menuDropListItem);
+		jsClickNew(menuDropListItem);
 		CommonUtility.checkPageIsReadyNew(driver);
 
 	}
