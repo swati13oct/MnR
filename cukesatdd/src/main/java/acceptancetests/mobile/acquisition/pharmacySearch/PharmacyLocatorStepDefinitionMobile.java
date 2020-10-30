@@ -184,7 +184,7 @@ public class PharmacyLocatorStepDefinitionMobile {
 	@SuppressWarnings("unchecked")
 	@And("^the user chooses a plan from dropdown mobile$")
 	public void user_chooses_plan_dropdown_aarp(DataTable inputAttributes) {
-		System.out.println("testing inside dropdown");
+		
 		Map<String, String> inputAttributesMap = parseInputArguments(inputAttributes);
 		String cy_planName = inputAttributesMap.get("Current Year Plan Name");
 		String cy_planYear = inputAttributesMap.get("Current Year Plan Year");
@@ -194,12 +194,12 @@ public class PharmacyLocatorStepDefinitionMobile {
 		getLoginScenario().saveBean(PharmacySearchCommonConstants.TEST_INPUT_CURRENT_YEAR_PLAN_YEAR, cy_planYear);
 		getLoginScenario().saveBean(PharmacySearchCommonConstants.TEST_INPUT_NEXT_YEAR_PLAN_NAME, ny_planName);
 		getLoginScenario().saveBean(PharmacySearchCommonConstants.TEST_INPUT_NEXT_YEAR_PLAN_YEAR, ny_planYear);
-		System.out.println("testing inside dropdown");
+		
 		PharmacySearchPageMobile pharmacySearchPage = (PharmacySearchPageMobile) getLoginScenario()
 				.getBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE);
 
 		//List<String> noteList=(ArrayList<String>) getLoginScenario().getBean(PharmacySearchCommonConstants.TEST_RESULT_NOTE);
-		System.out.println("testing inside dropdown");
+		
 		//String envTimeYear=(String) getLoginScenario().getBean(PharmacySearchCommonConstants.TEST_SYSTEM_YEAR);
 		//int envTimeYearValue=Integer.valueOf(envTimeYear);
 		int actualYearValue = Calendar.getInstance().get(Calendar.YEAR); 
@@ -216,17 +216,12 @@ public class PharmacyLocatorStepDefinitionMobile {
 			pharmacySearchPage.selectsPlanYear(testPlanYear);
 			//noteList.add("Has plan year dropdown, testing for year="+testPlanYear+" and plan name="+testPlanName);
 			getLoginScenario().saveBean(PharmacySearchCommonConstants.HAS_PLAN_YEAR_DROPDOWN, true);
-			System.out.println("testing inside dropdown1");
+			
 		}
 		getLoginScenario().saveBean(PharmacySearchCommonConstants.PLAN_NAME, testPlanName);
 		getLoginScenario().saveBean(PharmacySearchCommonConstants.PLAN_YEAR, testPlanYear);
 		getLoginScenario().saveBean(PharmacySearchCommonConstants.TEST_PDF_LINK_TEXT_DATE, testPdfLinkTextDate);
-		System.out.println("testing inside dropdown2");
-		//List<String> testNote=pharmacySearchPage.getListOfAvailablePlanNames();
-	//	noteList.addAll(testNote);
-	//	getLoginScenario().saveBean(PharmacySearchCommonConstants.TEST_RESULT_NOTE, noteList);
-	//	String testSiteUrl=(String) getLoginScenario().getBean(PageConstants.TEST_SITE_URL);
-		System.out.println("testing inside dropdown3");
+
 		pharmacySearchPage.selectsPlanName(testPlanName);
 	}
 

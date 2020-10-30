@@ -187,12 +187,15 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 	}
 
 	public void selectsPlanName(String planName) {
+		System.out.println("is it reaching here or not lets check that");
 		waitTllOptionsAvailableInDropdown(seletPlandropdown, 45);
 	//	seletPlandropdown.click();
+
 		jsClickMobile(seletPlandropdown);
 		sleepBySec(1); 
 		selectFromDropDownByText(driver, seletPlandropdown, planName);
 		sleepBySec(2);
+		
 		if (!loadingBlock.isEmpty())
 			waitforElementDisapper(By.className("loading-block"), 90);
 		if (!loadingBlock.isEmpty())	//note: if still not done, give it another 30 second
