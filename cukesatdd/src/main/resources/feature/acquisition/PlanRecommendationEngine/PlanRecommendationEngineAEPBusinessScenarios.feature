@@ -22,8 +22,8 @@ Feature: Plan Recommendation Engine Ranking - Verify Future PRE flows functional
     Then user selects add drug option in Drug page
       | Drug Selection | <Drug Selection>                                                       |
       | Drug Details   | <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch> |
-#    And user selects pharmacy option in pharmacy page
-#      | Pharmacy Type | <pharmacyoption> |
+    #    And user selects pharmacy option in pharmacy page
+    #      | Pharmacy Type | <pharmacyoption> |
     And user selects additional services option in additional services page
       | Additional Option | <Dental-Hearing-Vision-Fitness> |
     Then user selects cost preferences option in cost preferences page
@@ -31,9 +31,9 @@ Feature: Plan Recommendation Engine Ranking - Verify Future PRE flows functional
     Then user validate elements in loading results page
     Then user validate future vs current UI and API recommendation rankings in results page
 
-    Examples:
-     | site | Zipcode | isMultiCounty | county    | isCoverageOpt | specialNeeds | travel   | doctors | DoctorsName           | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch                              | pharmacyoption | Dental-Hearing-Vision-Fitness | costPreferenceOption |
-     | UHC | 13673   | NO            | Jefferson | MAPD          | Nursing      | withinUS | Lookup  | Jennifer              | NO            | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,1,YES,NO:morphine sulfate,NO,morphine sulfate CAP 10MG ER,,,1,NO,NO | Online         | Yes,Yes,Yes,Yes               | Lower                |
+    Examples: 
+      | site | Zipcode | isMultiCounty | county    | isCoverageOpt | specialNeeds | travel   | doctors | DoctorsName | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch                              | pharmacyoption | Dental-Hearing-Vision-Fitness | costPreferenceOption |
+      | UHC  |   13673 | NO            | Jefferson | MAPD          | Nursing      | withinUS | Lookup  | Jennifer    | NO            | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,1,YES,NO:morphine sulfate,NO,morphine sulfate CAP 10MG ER,,,1,NO,NO | Online         | Yes,Yes,Yes,Yes               | Lower                |
 
   @PRE @planrecommandonation @APIRanking @MAPDFlowRanking
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds>, <travel>, <doctors>, <DoctorsName>, <Drug Selection> , <Dental-Hearing-Vision-Fitness>, <costPreferenceOption> - To validate SNP API ranking plans in PRE
@@ -63,9 +63,9 @@ Feature: Plan Recommendation Engine Ranking - Verify Future PRE flows functional
     Then user validate future vs current UI and API recommendation rankings in results page
 
     Examples: 
-      | Zipcode | isMultiCounty | county     | isCoverageOpt | specialNeeds | travel | doctors         | DoctorsName      | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption |
-#      |   33143 | No            | Miami-Dade | MAPD          | None         | None   | Lookup          | David B. Auerbach |               | No             | Yes,No,No,No                  | Higher               |
-      |   55419 | No            | Hennepin   | MAPD          | None         | None   | AcceptsMedicare |                  |               | No             | Yes,No,No,No                  | Higher               |
+      | Zipcode | isMultiCounty | county   | isCoverageOpt | specialNeeds | travel | doctors         | DoctorsName | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption |
+      #      |   33143 | No            | Miami-Dade | MAPD          | None         | None   | Lookup          | David B. Auerbach |               | No             | Yes,No,No,No                  | Higher               |
+      |   55419 | No            | Hennepin | MAPD          | None         | None   | AcceptsMedicare |             |               | No             | Yes,No,No,No                  | Lower                |
 
   @PRE @planrecommendation @APIRanking @MAFutureFlowRanking
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds> , <travel> , <DoctorsName> , <Dental-Hearing-Vision-Fitness> , <costPreferenceOption> - To validate MA flow functions for MA and MS plans in PRE
@@ -94,7 +94,7 @@ Feature: Plan Recommendation Engine Ranking - Verify Future PRE flows functional
 
     Examples: 
       | Zipcode | isMultiCounty | county        | isCoverageOpt | specialNeeds     | travel   | doctors    | DoctorsName                      | isMultiDoctor | Dental-Hearing-Vision-Fitness | costPreferenceOption |
-      |   15537 | NO            | Bedford       | MA            | None             | withinUS | UHGNetwork |                                  |               | Yes,No,No,No                  | Lower                |
+      |   10001 | NO            | New York      | MA            | None             | withinUS | UHGNetwork |                                  |               | Yes,No,No,No                  | Lower                |
       |   30012 | YES           | Walton County | MA            | Medicaid,Nursing | withinUS | Lookup     | Emily Adams, NP:Azizul Hoque, MD | NO            | Yes,Yes,Yes,Yes               | Lower                |
 
   @PRE @planrecommendation @APIRanking @PDPFlowRanking @PDPFuture
@@ -112,11 +112,11 @@ Feature: Plan Recommendation Engine Ranking - Verify Future PRE flows functional
     Then user validate elements in loading results page
     Then user validate future vs current UI and API recommendation rankings in results page
 
-    Examples:
+    Examples: 
       | Zipcode | isMultiCounty | county   | isCoverageOpt | Drug Selection |
       |   10001 | NO            | New York | PDP           | No             |
 
-  @PRE @planrecommendation @APIRanking @PDPFlowRanking 
+  @PRE @planrecommendation @APIRanking @PDPFlowRanking
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <Drug Selection> , <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch> , <pharmacyoption> - To validate PDP API ranking plans in PRE
     Given the user is on UHC medicare acquisition site landing page
     When user navigate to Plan Recommendation Engine and Checking Breadcrumbs
@@ -129,15 +129,15 @@ Feature: Plan Recommendation Engine Ranking - Verify Future PRE flows functional
     And user selects add drug option in Drug page
       | Drug Selection | <Drug Selection>                                                       |
       | Drug Details   | <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch> |
-#    And user selects pharmacy option in pharmacy page
-#      | Pharmacy Type | <pharmacyoption> |
+    #    And user selects pharmacy option in pharmacy page
+    #      | Pharmacy Type | <pharmacyoption> |
     Then user validate elements in loading results page
     Then user validate future vs current UI and API recommendation rankings in results page
 
     Examples: 
       | Zipcode | isMultiCounty | county   | isCoverageOpt | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch                              | pharmacyoption |
       |   10001 | NO            | New York | PDP           | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,1,YES,NO:morphine sulfate,NO,morphine sulfate CAP 10MG ER,,,1,NO,NO | Retail         |
-      
+
   @PRE @planrecommendation @MAflowTieFuture @F432670
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds> , <travel> , <doctors> , <DoctorsName> , <isMultiDoctor> , <Dental-Hearing-Vision-Fitness> , <costPreferenceOption> , <1stRecommendation> , <2ndRecommendation> - To validate MA flow functions in PRE
     Given the user is on UHC medicare acquisition site landing page
@@ -164,5 +164,5 @@ Feature: Plan Recommendation Engine Ranking - Verify Future PRE flows functional
     Then user validate future vs current UI and API recommendation rankings in results page
 
     Examples: 
-      | Zipcode | isMultiCounty | county   | isCoverageOpt | specialNeeds | travel   | doctors         | DoctorsName | isMultiDoctor | Dental-Hearing-Vision-Fitness | costPreferenceOption | 
-      |   10003 | NO            | New York | MA            | None         | withinUS | AcceptsMedicare |             |               | Yes,No,No,No                  | Lower                | 
+      | Zipcode | isMultiCounty | county        | isCoverageOpt | specialNeeds     | travel   | doctors | DoctorsName                      | isMultiDoctor | Dental-Hearing-Vision-Fitness | costPreferenceOption |
+      |   30012 | YES           | Walton County | MA            | Medicaid,nursing | withinUS | Lookup  | Emily Adams, NP:Azizul Hoque, MD | NO            | Yes,Yes,Yes,Yes               | Lower                |

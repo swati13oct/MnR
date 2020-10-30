@@ -218,6 +218,13 @@ public class AREPlanRanking extends UhcDriver {
 	@FindBy(css = "div#multiSelect label[for='estimated_medical_costs']>input")
 	private WebElement mceCheck;
 	
+	// Feedback PopUp
+		@FindBy(css = "iframe[title*=' Survey']")
+		private WebElement popupFrame;
+		
+		@FindBy(css = "button[id*='no']")
+		private WebElement popupNo;
+	
 	public void validateUIElements() {
 		System.out.println("Validate ARE UI Elements : ");
 		String currentPageUrl = driver.getCurrentUrl();
@@ -449,6 +456,7 @@ public class AREPlanRanking extends UhcDriver {
 			comparePlanlink.click();
 		} else {
 			scrollToView(planInPDP);
+			close_Popup();
 			planInPDP.click();
 			pageloadcomplete();
 			actualplanName = planNameEnrollPage.getText().trim();
@@ -1152,6 +1160,21 @@ public class AREPlanRanking extends UhcDriver {
 			if(option.equalsIgnoreCase("mce"))
 				Assert.assertFalse(validate(mceCheck,10), option+" is visible");	
 		}
+	}
+	
+	public boolean close_Popup() {
+		boolean popup_presents = false;
+		System.out.println("Checking Popup Status...");
+		if(validate(popupNo, 20)) {
+			if(validate(popupFrame, 5))
+				driver.switchTo().frame(popupFrame);
+			threadsleep(1000);
+			popupNo.click();
+			threadsleep(1000);
+			popup_presents = true;
+		}
+		driver.switchTo().defaultContent();
+		return popup_presents;
 	}
 
 }
