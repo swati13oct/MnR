@@ -28,6 +28,7 @@ Feature: 1.18.1 Member Pharamcies And Prescriptions page - Pre-Effective
 	  
 	  
   #----- being regression section --------------------
+  # note: pre-eff user has no EOB, skip eob page validation
   @pnpPreEff01 @regressionMember
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify the behavior of the pharmacies and prescriptions page
     Given login with following details logins in the member portal and validate elements
