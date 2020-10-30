@@ -1090,7 +1090,7 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	@FindBy(xpath = "//*[@data-testid='price-drugs-CTA-external-icon']")
 	protected WebElement FindAndPriceExternalIcon;
 
-	@FindBy(xpath = "//input[@data-component=\"SearchBarInput\"]")
+	@FindBy(xpath = "//input[@data-component='SearchBarInput']")
 	protected WebElement DrugEstimatorToolPageSearchBar;
 
 	@FindBy(xpath = "//*[@data-testid='order-prescription-CTA-external-icon']")
