@@ -1116,8 +1116,9 @@ public class AREPlanRanking extends UhcDriver {
 	}
 
 	public void actionMoveTo(WebElement elem) {
-		Actions action = new Actions(driver);
-		action.moveToElement(elem).perform();
+//		Actions action = new Actions(driver);
+//		action.moveToElement(elem).perform();
+		jsMouseOver(elem);
 		threadsleep(1000);
 	}
 	

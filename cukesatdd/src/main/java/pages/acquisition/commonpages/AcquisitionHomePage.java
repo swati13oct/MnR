@@ -1685,9 +1685,10 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		{
 			waitforElement(ShopForaplan);
 			if (ShopForaplan.isDisplayed()) {
-				Actions actions = new Actions(driver);
-				actions.moveToElement(ShopForaplan);
-				actions.build().perform();
+//				Actions actions = new Actions(driver);
+//				actions.moveToElement(ShopForaplan);
+//				actions.build().perform();
+				jsMouseOver(ShopForaplan);
 				System.out.println("Hover over Shop for a Plan completed");
 		    }
 			WebElement PDPplansLink = driver.findElement(By.xpath("//*[contains(@class, 'nav-col nav-col-1')]//a[contains(@href,'prescription-drug-plans.html')]"));
@@ -1962,9 +1963,10 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 			waitforElement(ShopForaplan);
 			if (ShopForaplan.isDisplayed()) {
-				Actions actions = new Actions(driver);
-				actions.moveToElement(ShopForaplan);
-				actions.build().perform();
+//				Actions actions = new Actions(driver);
+//				actions.moveToElement(ShopForaplan);
+//				actions.build().perform();
+				jsMouseOver(ShopForaplan);
 				System.out.println("Hover over Shop for a Plan completed");
 
 //					waitforElementNew(driver.findElement(By.xpath("//input[@id='nav-zipcode']")));
@@ -2021,9 +2023,10 @@ public class AcquisitionHomePage extends GlobalWebElements {
 					&& ProviderSearchLink.isDisplayed()) {
 				Assert.assertTrue(true);
 				System.out.println("Sub Nav - Shop for a Plan - All links and element displayed on Page : ");
-				Actions actions = new Actions(driver);
-				actions.moveToElement(AARPlogo);
-				actions.build().perform();
+//				Actions actions = new Actions(driver);
+//				actions.moveToElement(AARPlogo);
+//				actions.build().perform();
+				jsMouseOver(AARPlogo);
 			} else {
 				Assert.fail("Sub Nav - Shop for a Plan - All links and element not found / displayed on page : ");
 			}
@@ -2227,7 +2230,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		public PlanDocsPage navigateToPlanDocsFromHome() {
 	     	navigateToMenuLinks(ShopForaplan, menuShop);
 	     	
-	     	driver.findElement(By.xpath("//*[@id='globalContentIdForSkipLink']/div/table/tbody/tr[2]/td/div[1]/div/div/div[3]/div/div/div/div[2]/div/div/div/div/div/div/div/a")).click();
+	     	//driver.findElement(By.xpath("//*[@id='globalContentIdForSkipLink']/div/table/tbody/tr[2]/td/div[1]/div/div/div[3]/div/div/div/div[2]/div/div/div/div/div/div/div/a")).click();
+			jsClickNew(driver.findElement(By.xpath("//*[@id='globalContentIdForSkipLink']/div/table/tbody/tr[2]/td/div[1]/div/div/div[3]/div/div/div/div[2]/div/div/div/div/div/div/div/a")));
 	     	    	
 	     		return new PlanDocsPage(driver);
 		 }
