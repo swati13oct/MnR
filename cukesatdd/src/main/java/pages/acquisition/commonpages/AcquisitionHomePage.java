@@ -1,5 +1,7 @@
 package pages.acquisition.commonpages;
 
+import static org.junit.Assert.assertTrue;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -13,6 +15,7 @@ import org.json.JSONObject;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
@@ -423,7 +426,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	
 	@FindBy(xpath = "//button[contains(@id,'addDrug')]")
 	public WebElement AddMyDrugsBtn;
-	
+
 	@FindBy(xpath="//a[contains(@href,'https://www.myuhcagent.com/')]")
 	private WebElement RightRail_FindAnAgent; 
 
@@ -1597,7 +1600,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 						"No Chat sticky action menu didn't roll out and doesn't contain the text Chat with a Licensed Insurance Agent");
 			// return null;
 		}
-
+		
 		
 		/*public AcquisitionHomePage  validateChatpopup() throws InterruptedException {
 			//CommonUtility.checkPageIsReady(driver);
@@ -1682,9 +1685,10 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		{
 			waitforElement(ShopForaplan);
 			if (ShopForaplan.isDisplayed()) {
-				Actions actions = new Actions(driver);
-				actions.moveToElement(ShopForaplan);
-				actions.build().perform();
+//				Actions actions = new Actions(driver);
+//				actions.moveToElement(ShopForaplan);
+//				actions.build().perform();
+				jsMouseOver(ShopForaplan);
 				System.out.println("Hover over Shop for a Plan completed");
 		    }
 			WebElement PDPplansLink = driver.findElement(By.xpath("//*[contains(@class, 'nav-col nav-col-1')]//a[contains(@href,'prescription-drug-plans.html')]"));
@@ -1959,9 +1963,10 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 			waitforElement(ShopForaplan);
 			if (ShopForaplan.isDisplayed()) {
-				Actions actions = new Actions(driver);
-				actions.moveToElement(ShopForaplan);
-				actions.build().perform();
+//				Actions actions = new Actions(driver);
+//				actions.moveToElement(ShopForaplan);
+//				actions.build().perform();
+				jsMouseOver(ShopForaplan);
 				System.out.println("Hover over Shop for a Plan completed");
 
 //					waitforElementNew(driver.findElement(By.xpath("//input[@id='nav-zipcode']")));
@@ -2018,9 +2023,10 @@ public class AcquisitionHomePage extends GlobalWebElements {
 					&& ProviderSearchLink.isDisplayed()) {
 				Assert.assertTrue(true);
 				System.out.println("Sub Nav - Shop for a Plan - All links and element displayed on Page : ");
-				Actions actions = new Actions(driver);
-				actions.moveToElement(AARPlogo);
-				actions.build().perform();
+//				Actions actions = new Actions(driver);
+//				actions.moveToElement(AARPlogo);
+//				actions.build().perform();
+				jsMouseOver(AARPlogo);
 			} else {
 				Assert.fail("Sub Nav - Shop for a Plan - All links and element not found / displayed on page : ");
 			}
@@ -2139,7 +2145,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 					startNewPRE(AARP_ACQISITION_PAGE_URL.replace("stage-aarp", "stage").replace(".com/",
 							".com/plan-recommendation-engine.html"), browser);
 				} else if (MRScenario.environment.equalsIgnoreCase("stage")) {
-					startNewPRE(UMS_ACQISITION_PAGE_URL.replace(".com/", ".com/plan-recommendation-engine.html"), browser);
+						startNewPRE(UMS_ACQISITION_PAGE_URL.replace(".com/", ".com/plan-recommendation-engine.html"), browser);
 				} else if (MRScenario.environment.equalsIgnoreCase("offline-prod-aarp")) {
 					startNewPRE(AARP_ACQISITION_OFFLINE_PAGE_URL.replace(".com", ".com/plan-recommendation-engine.html"),
 							browser);
@@ -2224,7 +2230,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		public PlanDocsPage navigateToPlanDocsFromHome() {
 	     	navigateToMenuLinks(ShopForaplan, menuShop);
 	     	
-	     	driver.findElement(By.xpath("//*[@id='globalContentIdForSkipLink']/div/table/tbody/tr[2]/td/div[1]/div/div/div[3]/div/div/div/div[2]/div/div/div/div/div/div/div/a")).click();
+	     	//driver.findElement(By.xpath("//*[@id='globalContentIdForSkipLink']/div/table/tbody/tr[2]/td/div[1]/div/div/div[3]/div/div/div/div[2]/div/div/div/div/div/div/div/a")).click();
+			jsClickNew(driver.findElement(By.xpath("//*[@id='globalContentIdForSkipLink']/div/table/tbody/tr[2]/td/div[1]/div/div/div[3]/div/div/div/div[2]/div/div/div/div/div/div/div/a")));
 	     	    	
 	     		return new PlanDocsPage(driver);
 		 }
@@ -2427,4 +2434,98 @@ public class AcquisitionHomePage extends GlobalWebElements {
 					}
 				}
 			
-}	
+	
+		
+		public void enterSearchtextvalue(String inputvalue) {
+			// driver.switchTo().defaultContent();
+			CommonUtility.waitForPageLoad(driver, EnterSearch, 60);
+			EnterSearch.sendKeys(inputvalue);
+			CommonUtility.waitForPageLoadNewForClick(driver, SubmitBtn, 60);
+			jsClickNew(SubmitBtn);
+			waitForPageLoadSafari();
+			CommonUtility.waitForPageLoadNew(driver, SearchResults, 60);
+			checkModelPopup(driver, 20);
+			
+
+		}
+		public void validateFifteenResults() {
+			System.out.println("@@@@@Inside fifteen results validation@@@");
+			int sizeofResults = driver.findElements(By.xpath("//div[@class='list-heading']")).size();
+			System.out.println("number of results displayed on UI" + sizeofResults);
+			if (sizeofResults <= 15) {
+				System.out.println("@@@Inside results displayed less than or equal to 15");
+				Assert.assertTrue(true);
+			} else {
+				System.out.println("@@@Inside results displayed Incorrectly");
+				Assert.assertTrue(false);
+			}
+			
+		}
+		
+		public void validatePaginationofSearchResults() {
+			System.out.println("Inside the pagination validation@@@@");
+			int sizeofpages = driver.findElements(By.xpath("//*[@class='pagination']/li/a")).size();
+			System.out.println("size of pages" + sizeofpages);
+			for (int i = 2; i < sizeofpages; i++) {
+				System.out.println("@@Inside pagination click@@@");
+				threadsleep(5);
+				driver.findElement(By.xpath("(//*[@class='pagination']/li/a)[" + i + "]")).click();
+				CommonUtility.waitForPageLoadNew(driver, SearchResultsCount, 30);
+				this.validateFifteenResults();
+				threadsleep(5);
+				int sizeofNext = driver.findElements(By.xpath("//a[@dtmname='pagination:next']")).size();
+				System.out.println("sizeofNext" + sizeofNext);
+				if (!NextBtn.isDisplayed()) {
+					System.out.println("@@@@Inside next button disappear loop");
+					CommonUtility.waitForPageLoadNewForClick(driver, PreviousBtn, 30);
+					PreviousBtn.click();
+					this.validateFifteenResults();
+					break;
+				}
+
+			}
+			// driver.navigate().back();
+
+		}
+		public void enterSecondarySearchValue(String str) {
+			System.out.println("@@@inside secondary search validation method@@@");
+			CommonUtility.waitForPageLoadNewForClick(driver, SecondaryClearBtn, 30);
+			SecondaryClearBtn.click();
+			CommonUtility.waitForPageLoad(driver, SecondarySearchInput, 30);
+			SecondarySearchInput.sendKeys(str);
+			CommonUtility.waitForPageLoadNewForClick(driver, SecondarySearchBtn, 30);
+			SecondarySearchBtn.click();
+			waitForPageLoadSafari();
+			CommonUtility.waitForPageLoadNew(driver, SearchResults, 60);
+
+		}
+		
+		public void insertValueIntoSecondSearchBox(String inputValue) {
+			System.out.println("Click on clear button");
+			driver.findElement(By.className("clear-button")).click();
+			System.out.println("Insert value into secondary searchbox");
+			driver.findElement(By.id("secondarySearchInput")).sendKeys(inputValue);
+			driver.findElement(By.id("secondarySearchInput")).sendKeys(Keys.ENTER);
+		}
+		
+		public void validateErrorMsg(String inputValue, String newSearchValue) {
+			switch (inputValue) {
+			case "Empty":
+				System.out.println("Varify Error message for " + inputValue + "");
+				String errMessage = driver.findElement(By.id("searchErrorMessage")).getText();
+				assertTrue(errMessage.contains("Your search box was empty. Please enter some text in the search box"));
+				break;
+			case "InvalidCharacter":
+				System.out.println("Validating invalid character message");
+				String invalidSearch = driver.findElement(By.xpath("//div[@class='invalid-search']")).getText().replaceAll("\\s+", " ");
+				System.out.println("invalidSearch : >>>>> " + invalidSearch);
+				assertTrue(invalidSearch.contains("Your search - " + newSearchValue + " - did not match any documents."));
+				// assertTrue(invalidSearch.contains("No pages were found containing
+				// "+newSearchValue+"."));
+				break;
+			case "Numbers":
+				System.out.println("Numbers");
+				break;
+			}
+		}
+}
