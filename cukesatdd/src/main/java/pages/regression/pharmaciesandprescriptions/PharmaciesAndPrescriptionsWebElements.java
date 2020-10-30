@@ -300,10 +300,10 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	@FindBy(xpath = "//h2[@data-testid='price-drugs-CTA-title' and contains(text(),'Find and Price a Medication')]")
 	protected WebElement findPrescriptionTitle;
 
-	@FindBy(xpath = "//a[@data-testid='medication-action-learn-more']")
+	@FindBy(xpath = "//a[@data-testid='medication-action-get-pricing']")
 	protected List<WebElement> sixMedications;
 
-	@FindBy(xpath = "//a[contains(text(),'LEARN MORE')]")
+	@FindBy(xpath = "//a[@data-testid='medication-action-get-pricing']")
 	protected List<WebElement> tenMedications;
 
 	@FindBy(xpath = "//p[@data-testid='price-drugs-CTA-description' and contains(text(),'Find out if your drugs are covered, estimate costs and ways to help save money.')]")
@@ -1080,7 +1080,7 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	}
 
 	public boolean sixActivePrescription() {
-		if (sixMedications.size() == 6) {
+		if (!(sixMedications.size() > 6)) {
 			return true;
 		} else {
 			return false;
@@ -1100,7 +1100,7 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 
 		System.out.println(tenMedications.size() + "lllllllllllllllllllllllllllllllllllll");
 
-		if (tenMedications.size() == 10) {
+		if (!(tenMedications.size() < 10)) {
 			return true;
 		} else {
 			return false;
@@ -1747,7 +1747,7 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	protected WebElement orderNumber;
 	
 	//View All Medication CTA
-	@FindBy(xpath = "//div[@data-testid='view-my-medications-CTA-button')")
+	@FindBy(xpath = "//div[@data-testid='view-my-medications-CTA-button']")
 	protected WebElement ViewAllMedicationCallToActnBtn;
 
 	@FindBy(xpath = "//div[@data-testid='view-my-medications-CTA-icon']")
