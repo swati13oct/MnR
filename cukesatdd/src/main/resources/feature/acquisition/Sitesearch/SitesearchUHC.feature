@@ -1,7 +1,7 @@
 @SiteSearchResultsUHC @F448210
 Feature:2.03 Acq-To verify Sitesearch results in UMS site
 
-@SiteSearchUHC @SiteSearchRegressionUHC
+@SiteSearchUHC123 @SiteSearchRegressionUHC
  Scenario Outline: Verify search results in UHC site - search value -<newsearchvalue>
    Given the user is on the uhcmedicaresolutions site landing page
    Then the user enter the searchValue in the search text box and hits enter on UHC Site
@@ -29,7 +29,7 @@ Feature:2.03 Acq-To verify Sitesearch results in UMS site
     #Then the user view plan details of the above selected plan in UMS site and validates
      # | Plan Name | <planName> |
       
-      Then the user enter the searchValue in the search text box and hits enter on UHC Site
+   Then the user enter the searchValue in the search text box and hits enter on UHC Site
        |search Value|<searchValue>| 
    Then the user should see fifteen results before pagination on UHC Site
    Then the user validates count of results aganist the total shown at top of the page on UHC Site

@@ -420,6 +420,163 @@ Feature: 1.12 ACQ - Global Components AARP
       |medicare-articles/medicare-made-clear.html                                                    | About MMC              |
       |medicare-articles/what-is-retiree-health-coverage.html                                        | Sample Article Page 2  |
       |medicare-articles/unintended-part-d-gotcha-could-getcha-if-you-enroll-after-age-65.html       | Sample Article Page 1  |
+      |medicare-articles/medicare-benefits-and-coverage.html                                                   |Category page|
+      |medicare-articles/medicare-costs.html                                                                   |Category page|
+      |medicare-articles/shopping-for-medicare.html                                                            |Category page|
+      |medicare-articles/medicare-when-working-past-65.html                                                    |Category page|
+      |medicare-articles/medicare-tips-and-faqs.html                                                           |Category page|
+      |medicare-articles/how-to-avoid-the-medicare-part-b-late-penalty                                         |Category page|
+      |medicare-articles/9-good-reasons-why-a-medicare-advantage-plan-might-be-right-for-you                    |Article page|
+      |medicare-articles/caregiver-corner-helping-your-loved-one-prepare-for-the-medicare-annual-enrollment-period |Article page|
+      |medicare-articles/your-5-point-checklist-choosing-medicare-part-d-plan  |Article page|
+      |medicare-articles/6-tips-to-protect-yourself-from-medicare-fraud
+      |medicare-articles/what-will-medicare-cost-in-2020
+|medicare-articles/medicare-plan-annual-notice-of-change-what-to-look-for
+|medicare-articles/need-eyeglasses-or-eye-care-coverage-check-your-medicare-options
+|medicare-articles/medicare-doesnt-cover-everything-what-you-need-know
+|medicare-articles/6-timely-medicare-tips-for-turning-65
+|medicare-articles/should-i-get-part-b-if-im-working-past-65
+|medicare-articles/try-to-avoid-medicare-late-enrollment-premium-penalties
+|medicare-articles/what-is-the-difference-between-original-medicare-and-medicare-advantage
+|medicare-articles/do-i-need-medicare-with-spouses-employer-plan
+|medicare-articles/5-ways-to-pay-your-medicare-part-b-premium
+|medicare-articles/5-medicare-myths-set-straight
+|medicare-articles/when-can-you-start-getting-medicare
+|medicare-articles/is-medicare-mandatory
+|medicare-articles/can-i-change-my-medicare-plan
+|medicare-articles/medicare-coverage-for-non-working-spouses
+|medicare-articles/5-tips-for-enrolling-in-medicare-for-the-first-time
+|medicare-articles/decide-change-plan
+|medicare-articles/medicare-coverage-for-mammograms
+|medicare-articles/have-diabetes-medicare-parts-b-and-d-have-you-covered
+|medicare-articles/how-to-get-ready-for-the-medicare-annual-enrollment-period
+|medicare-articles/what-does-original-medicare-include
+|medicare-articles/what-is-creditable-drug-coverage
+medicare-articles/safe-medicare-enrollment-during-COVID
+medicare-articles/what-is-the-medicare-annual-enrollment-period
+medicare-articles/aep-change-or-renew
+medicare-articles/can-you-switch-between-original-medicare-and-medicare-advantage-during-the-annual-enrollment-period
+medicare-articles/2-ways-to-prescription-drug-coverage
+medicare-articles/good-reasons-to-shop-for-a-new-medicare-plan
+medicare-articles/the-difference-between-medicare-hmo-and-ppo-plans
+medicare-articles/medicare-mistakes-that-could-be-costly
+medicare-articles/5-savvy-shopper-tips-help-get-medicare
+medicare-articles/which-vaccines-does-medicare-cover
+medicare-articles/what-if-i-missed-my-initial-enrollment-period
+medicare-articles/4-basic-questions-to-ask-about-medicare-part-d-coverage
+medicare-articles/turn-65-retire-sign-up-for-medicare-or-not
+medicare-articles/7-inside-tips-to-help-you-make-a-smooth-move-to-medicare
+medicare-articles/medicare-individuals-who-divorced-widowed
+medicare-articles/medicare-and-durable-medical-equipment-dme
+medicare-articles/3-simple-ways-to-change-medicare-plans
+medicare-articles/prescription-discount-cards-other-money-saving-medicare-tips
+medicare-articles/does-medicare-coverage-change-if-you-return-to-work
+medicare-articles/medicare-enrollment-for-veterans
+medicare-articles/retiring-in-2020-what-to-know-about-medicare
+medicare-articles/like-to-travel-it-may-affect-which-medicare-plan-you-choose
+medicare-articles/how-do-tricare-and-medicare-work-together
+medicare-articles/youre-65-working-medicare
+medicare-articles/how-to-get-dental-and-vision-care-coverage-when-you-have-medicare
+medicare-articles/pharmacists-answering-your-medicare-prescription-drug-questions
+medicare-articles/why-you-and-your-spouse-might-need-different-medicare-plans
+medicare-articles/born-in-1955-or-later-you-may-have-to-work-until-youre-67
+medicare-articles/renew-medicare-plan-open-enrollment
+medicare-articles/medicare-enrollment-checklist-helping-you-prepare-for-an-important-decision
+medicare-articles/should-you-change-your-medicare-plan
+medicare-articles/what-happens-to-your-medicare-plan-if-you-move
+medicare-articles/help-i-have-a-disability-and-i-want-to-enroll-in-medicare
+medicare-articles/what-is-the-medicare-special-enrollment-period
+medicare-articles/wheres-my-original-medicare-card
+medicare-articles/the-truth-your-medicare-part-b-premium
+medicare-articles/dos-and-donts-cancelling-a-marketplace-health-plan
+medicare-articles/outpatient-mental-health-care-services
+medicare-articles/medicare-increases-coverage-mental-health-care
+medicare-articles/how-to-transition-from-the-health-marketplace-to-medicare
+medicare-articles/what-should-i-look-for-in-a-medicare-prescription-drug-plan
+medicare-articles/saving-on-medicare-when-self-employed
+medicare-articles/concrete-answers-10-common-medicare-questions
+medicare-articles/is-your-medicare-plan-the-best-one-for-you-this-checklist-can-help-you-decide
+medicare-articles/what-telehealth-services-does-medicare-offer
+medicare-articles/7-popular-medicare-questions-asked-during-national-medicare-education-week
+medicare-articles/whats-the-difference-between-a-skilled-nursing-facility-and-a-nursing-home
+medicare-articles/what-s-the-difference-between-medicare-and-medicaid
+medicare-articles/how-to-appeal-a-medicare-decision
+medicare-articles/how-avoid-paying-more-prescription-drug-coverage
+medicare-articles/3-ways-to-dispose-of-your-old-unused-medications-safely
+medicare-articles/what-is-a-tiered-formulary-and-what-does-it-mean-for-me
+medicare-articles/good-news-medicare-part-b-covers-cataract-surgery
+medicare-articles/heart-healthy-help-medicare
+medicare-articles/what-can-i-do-during-the-medicare-advantage-open-enrollment-period
+medicare-articles/medicare-coverage-for-same-sex-couples
+medicare-articles/how-to-evaluate-medicare-plan-costs
+medicare-articles/6-point-checklist-to-rate-your-new-medicare-advantage-plan
+medicare-articles/replacing-your-medicare-card-just-got-a-whole-lot-easier
+medicare-articles/understanding-your-medicare-plan
+medicare-articles/how-to-save-on-prescription-drugs-with-medicare
+medicare-articles/10-tips-choosing-primary-care-doctor
+medicare-articles/avoid-sticker-shock-medicare-billing
+medicare-articles/does-medicare-part-a-cost-anything
+medicare-articles/how-much-does-medicare-part-b-cost
+medicare-articles/what-is-co-insurance
+medicare-articles/what-is-the-medicare-advantage-open-enrollment-period
+medicare-articles/whats-the-difference-between-a-physical-exam-and-a-medicare-wellness-visit
+medicare-articles/what-medicare-medical-savings-account-plan
+medicare-articles/copd-medicare
+medicare-articles/decoding-medicare
+medicare-articles/does-medicare-cover-a-colonoscopy
+medicare-articles/does-medicare-cover-blood-tests-for-cholesterol
+medicare-articles/does-medicare-cover-diabetes-prevention-program
+medicare-articles/does-medicare-cover-emergency-room-visits
+medicare-articles/does-medicare-cover-home-blood-pressure-monitors
+medicare-articles/does-medicare-cover-melanoma-screenings
+medicare-articles/home-health-care-those-medicare-who-cant-leave-home
+medicare-articles/how-often-should-a-woman-over-65-have-a-pap-smear
+medicare-articles/medicare-transportation-services
+medicare-articles/are-you-living-with-chronic-heart-failure
+medicare-articles/how-prepare-your-medicare-wellness-visit
+medicare-articles/will-medicare-cover-a-cpap-machine
+medicare-articles/new-to-medicare-schedule-your-welcome-to-medicare-visit
+medicare-articles/how-to-become-a-medicare-authorized-representative
+medicare-articles/what-is-a-transition-refill
+medicare-articles/got-coverage-for-the-new-year
+medicare-articles/medicare-and-your-private-medical-information
+medicare-articles/medicare-memo-what-are-advance-directives
+medicare-articles/getting-a-knee-replaced-with-Medicare
+medicare-articles/2-ways-save-on-blood-sugar-test-strips
+medicare-articles/are-glaucoma-screenings-covered-by-medicare
+medicare-articles/colon-cancer-screening-tests-without-the-ouch
+medicare-articles/medicare-beneficiaries-needing-hospice-care-may-be-covered
+medicare-articles/medicare-coverage-for-inpatient-rehabilitation
+medicare-articles/medicare-coverage-for-outpatient-rehabilitation-therapy
+medicare-articles/medicare-coverage-for-prostate-cancer-screening
+medicare-articles/medicare-part-benefit-periods-deductibles
+medicare-articles/reasons-you-should-schedule-an-annual-medicare-wellness-visit
+medicare-articles/does-medicare-cover-allergy-testing
+medicare-articles/medicare-part-b-may-not-cover-hearing-aid-part-c-might
+medicare-articles/medicare-part-b-basics
+medicare-articles/medicare-part-d-basics
+medicare-articles/medicare-part-a-the-basics
+medicare-articles/medicare-part-c-basics
+medicare-articles/does-medicare-cover-a-chiropractor
+medicare-articles/what-does-medicare-cover-after-a-stroke
+medicare-articles/dual-special-needs-plans
+medicare-articles/cual-es-la-diferencia-entre-medicare-y-medicaid
+medicare-articles/cuatro-programas-de-asistencia-para-pagar-sus-costos-de-medicare
+medicare-articles/guia-paso-paso-para-inscribirse-en-medicare-los-65-anos
+medicare-articles/medicare-parte-c-conceptos-basicos
+medicare-articles/parte-a-de-medicare-conceptos-basicos
+medicare-articles/parte-b-de-medicare-conceptos-basicos
+medicare-articles/parte-d-de-medicare-conceptos-basicos
+medicare-articles/what-is-a-pdp-prescription-drug-plan
+medicare-articles/4-assistance-programs-could-help-pay-your-medicare-costs
+medicare-articles/4-types-of-medicare-savings-programs-and-what-they-cover
+medicare-articles/what-is-the-medicare-part-d-coverage-gap
+medicare-articles/4surefire-tips-for-picking-a-medicare-plan-that-fits-your-health-needs-and-budget
+medicare-articles/medicare-part-d-costs-you-may-not-know-about
+medicare-articles/new-medicare-follow-checklist-successful-start
+medicare-articles/medicare-coverage-for-cancer-screenings-chemo-and-radiation
+medicare-articles/how-to-compare-medicare-advantage-plan-costs
+      
    
         
 	
