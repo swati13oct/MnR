@@ -21,6 +21,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import acceptancetests.acquisition.dceredesign.DCERedesignCommonConstants;
 import acceptancetests.acquisition.ole.oleCommonConstants;
+import acceptancetests.acquisition.pharmacylocator.PharmacySearchCommonConstants;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.OLE_PageConstants;
 import acceptancetests.data.PageConstants;
@@ -35,6 +36,7 @@ import pages.acquisition.commonpages.AcquisitionHomePage;
 import pages.acquisition.commonpages.PlanDetailsPage;
 import pages.acquisition.commonpages.VPPPlanSummaryPage;
 import pages.acquisition.ole.WelcomePage;
+import pages.acquisition.pharmacyLocator.PharmacySearchPage;
 import pages.acquisition.commonpages.FindCarePage;
 import pages.acquisition.commonpages.ProviderSearchPage;
 import pages.acquisition.commonpages.AgentsnBrokersAARPPage;
@@ -1920,5 +1922,122 @@ public class VppCommonStepDefinition {
 //			plansummaryPage.viewPlanSummary(planType);
 //			plansummaryPage.handlePlanYearSelectionPopup();
 //			plansummaryPage.validatePlansAreSaved(snp_savePlanNames, planType);
+		}
+		
+		@Then("^the user enter the searchvalue in the search text box and hits enter$")
+		public void the_user_enter_the_searchValue_in_the_search_text_box_and_hits_enter(DataTable inputvalue)
+				throws Throwable {
+			AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+					.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+			List<DataTableRow> AttributesRow = inputvalue.getGherkinRows();
+			Map<String, String> urlAttributesMap = new HashMap<String, String>();
+
+			for (int i = 0; i < AttributesRow.size(); i++) {
+
+				urlAttributesMap.put(AttributesRow.get(i).getCells().get(0), AttributesRow.get(i).getCells().get(1));
+			}
+			String InputValue = urlAttributesMap.get("search Value");
+			System.out.println("Search value" + InputValue);
+			Thread.sleep(3000);
+
+			aquisitionhomepage.enterSearchtextvalue(InputValue);
+
+		}
+		@Then("^the user should see fifteen results before the pagination$")
+		public void the_user_should_see_fifteen_results_before_pagination() throws Throwable {
+			AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+					.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+			aquisitionhomepage.validateFifteenResults();
+
+		}
+		@Then("^the user validates pagination and results displayed on page$")
+		public void the_user_validates_pagination_and_results_displayed() throws Throwable {
+			AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+					.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+			aquisitionhomepage.validatePaginationofSearchResults();
+		}
+		@Then("^the user validates the secondary search by providing new searchvalue in the text box$")
+		public void the_user_validates_the_secondary_search_by_providing_newsearchvalue_in_the_text_box(DataTable inputvalue) throws Throwable {
+			AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+					.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+			List<DataTableRow> AttributesRow = inputvalue.getGherkinRows();
+			Map<String, String> urlAttributesMap = new HashMap<String, String>();
+
+			for (int i = 0; i < AttributesRow.size(); i++) {
+
+				urlAttributesMap.put(AttributesRow.get(i).getCells().get(0), AttributesRow.get(i).getCells().get(1));
+			}
+			String InputValue = urlAttributesMap.get("NewSearchValue");
+			System.out.println("NewSearchValue" + InputValue);
+			Thread.sleep(3000);
+			
+			aquisitionhomepage.enterSecondarySearchValue(InputValue);
+		 
+		}
+
+		@Then("^the user clear secondary search box and insert new searchvalue$")
+		public void the_user_clea_seacondary_search_box_and_insert_new_search_value(DataTable inputvalue) throws Exception {
+			AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+					.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+
+			List<DataTableRow> AttributesRow = inputvalue.getGherkinRows();
+			Map<String, String> urlAttributesMap = new HashMap<String, String>();
+
+			for (int i = 0; i < AttributesRow.size(); i++) {
+
+				urlAttributesMap.put(AttributesRow.get(i).getCells().get(0), AttributesRow.get(i).getCells().get(1));
+			}
+			String InputValue = urlAttributesMap.get("New Search Value");
+			System.out.println("New Search Value" + InputValue);
+			Thread.sleep(3000);
+			aquisitionhomepage.insertValueIntoSecondSearchBox(InputValue);
+
+		}
+		
+		@Then("^the user validates Error message on page$")
+		public void the_user_validates_pagination_and_results_displayed(DataTable inputvalue) throws Throwable {
+
+			AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+					.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+			
+
+			List<DataTableRow> AttributesRow = inputvalue.getGherkinRows();
+			Map<String, String> urlAttributesMap = new HashMap<String, String>();
+
+			for (int i = 0; i < AttributesRow.size(); i++) {
+
+				urlAttributesMap.put(AttributesRow.get(i).getCells().get(0), AttributesRow.get(i).getCells().get(1));
+			}
+			String error = urlAttributesMap.get("Error");
+			String newSearchValue=urlAttributesMap.get("NewSearchValue");
+			System.out.println("Error : " + error);
+			Thread.sleep(3000);
+			aquisitionhomepage.validateErrorMsg(error,newSearchValue);
+		}
+		/** user is on the AARP Medicare Site landing page */
+		@Given("^the user is on Acquisition Site landing page and navigate to pharmacy search page$")
+		public void validateUserIsOnAcquisitionSiteNavToPharmacySearch(DataTable givenAttributes) {
+			wd = getLoginScenario().getWebDriverNew();
+			List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+			Map<String, String> memberAttributesMap = new HashMap<String, String>();
+			for (int i = 0; i < memberAttributesRow.size(); i++) {
+				memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+						memberAttributesRow.get(i).getCells().get(1));
+			}
+			String site = memberAttributesMap.get("Site");
+			AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd, site);
+			String testSiteUrl=aquisitionhomepage.getTestSiteUrl();
+			System.out.println("TEST - testSiteUrl="+testSiteUrl);
+			getLoginScenario().saveBean(PageConstants.TEST_SITE_URL,testSiteUrl);
+			
+			aquisitionhomepage.selectState("Select State"); //note: default it to no state selected for predictable result
+			System.out.println("Unselected state on home page for more predictable result");
+			getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+			getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE,
+					aquisitionhomepage);
+			PharmacySearchPage pharmacySearchPage= aquisitionhomepage.navigateToPharmacyLocator();
+			//PharmacySearchPage pharmacySearchPage=new PharmacySearchPage(aquisitionhomepage.driver);
+			getLoginScenario().saveBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE,
+					pharmacySearchPage);
 		}
 }
