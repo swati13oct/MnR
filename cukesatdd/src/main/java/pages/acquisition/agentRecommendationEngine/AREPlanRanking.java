@@ -321,10 +321,10 @@ public class AREPlanRanking extends UhcDriver {
 		}
 
 		if (select && !elemCheck.isSelected()) {
-			elemClick.click();
+			jsClickNew(elemClick);
 		}
 		if (!select && elemCheck.isSelected()) {
-			elemClick.click();
+			jsClickNew(elemClick);
 		}
 
 		if (select)
@@ -337,7 +337,7 @@ public class AREPlanRanking extends UhcDriver {
 		pageloadcomplete();
 		System.out.println("Validate Adding Drugs from Plan Compare page : ");
 		validate(AddDrugsLink);
-		AddDrugsLink.click();
+		jsClickNew(AddDrugsLink);
 		DCEPage dceobj = new DCEPage(driver);
 		dceobj.drugsHandlerWithdetails(drugDetails);
 		returnToPlanCompare();
@@ -491,11 +491,11 @@ public class AREPlanRanking extends UhcDriver {
 			planStartCount = 1;
 			Assert.assertTrue(plansDetails.get(0).contains("CURRENTPLAN"), "Current Plan is not displayed by default");
 		}
-		planRankingDropdown.click();
+		jsClickNew(planRankingDropdown);
 		validate(applyBtn);
 		optionSelection("dental,vision,hearing,fitness,lowpremium,travel,drug,doctor", false);
 		optionSelection(rankOptions, true);
-		applyBtn.click();
+		jsClickNew(applyBtn);
 		threadsleep(3000);
 		// Validate Success message
 		Assert.assertTrue(successMsg.getText().toUpperCase().contains("SUCCESS"), "No Sucess message");
@@ -534,10 +534,10 @@ public class AREPlanRanking extends UhcDriver {
 		}
 
 		// Uncheck all and validate original order
-		planRankingDropdown.click();
+		jsClickNew(planRankingDropdown);
 		validate(applyBtn);
 		optionSelection(rankOptions, false);
-		applyBtn.click();
+		jsClickNew(applyBtn);
 		threadsleep(3000);
 		;
 		boolean msg = validate(successMsg, 10); // Validate message disappear
