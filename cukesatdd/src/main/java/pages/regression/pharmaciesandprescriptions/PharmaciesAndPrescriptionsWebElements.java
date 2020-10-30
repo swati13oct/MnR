@@ -996,8 +996,8 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	}
 
 	// F436319
-	//@FindBy(xpath = "//*[@data-testid='global-alert-banner-Expanded Access to Care, Support and Resources for COVID-19']")
-	@FindBy(xpath = "//*[@data-testid='global-alert-banner-title']")
+	@FindBy(xpath = "//*[@data-testid='global-alert-banner-Expanded Access to Care, Support and Resources for COVID-19']")
+	//@FindBy(xpath = "//*[@data-testid='global-alert-banner-title']")
 	protected WebElement PnPNotification;
 
 	public List<Integer> getListOfIndexForManageAtWalgreens() {
@@ -1008,8 +1008,8 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 		return listOfIndex;
 	}
 
-	//@FindBy(xpath = "//*[@data-testid='global-alert-banner-Expanded Access to Care, Support and Resources for COVID-19']//div//div//button[@data-testid='global-alert-banner--close-button']")
-	@FindBy(xpath = "//*[@data-testid='global-alert-banner-close-button']")
+	@FindBy(xpath = "//*[@data-testid='global-alert-banner-Expanded Access to Care, Support and Resources for COVID-19']//div//div//button[@data-testid='global-alert-banner--close-button']")
+	//@FindBy(xpath = "//*[@data-testid='global-alert-banner-close-button']")
 	protected WebElement PnPNotificationCloseBtn;
 
 	public List<Integer> getListOfIndexForTransferToWalgreens() {
