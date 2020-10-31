@@ -1477,8 +1477,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			jsClickNew(enrollForPlan);
 //			enrollForPlan.click();
 		}
+		CommonUtility.checkPageIsReadyNew(driver);
 		CommonUtility.waitForPageLoadNew(driver, NextBtn, 30);
-		validate(NextBtn, 20);
 		if (driver.getCurrentUrl().contains("welcome")) {
 			System.out.println("OLE Welcome Page is Displayed");
 			return new WelcomePage(driver);
@@ -1614,15 +1614,14 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			CommonUtility.checkPageIsReadyNew(driver);
 			if(validate(dceLink))
 				jsClickNew(dceLink);
-//				dceLink.click();
 
 		}else{
 			WebElement dceLink = driver.findElement
 					(By.xpath("//*[contains(text(),'"+planName+"')]/ancestor::div[contains(@class, 'module-plan-overview module swiper-slide pdpPlans ng-scope')]//descendant::a[contains(@id,'pdpDrugCostEstimatorLink')]"));
 			jsClickNew(dceLink);
-//			dceLink.click();
 		}
 		CommonUtility.checkPageIsReadyNew(driver);
+		waitForPageLoadSafari();
 		if (validateNew(AddMyDrugsBtn))
 			return new GetStartedPage(driver);
 		return null;
@@ -2154,22 +2153,24 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			Assert.assertTrue(true);
 		} else
 			Assert.fail("Tool Tip is not working");
+		jsMouseOut(toolTip);
 	}
 
 	public void toolTipForAnnualDeductible(String planName) {
 		WebElement toolTip = driver.findElement(By.xpath("(//*[contains(text(),\'" + planName
 				+ "\')]/ancestor::div[contains(@class, 'module-plan-overview')]//descendant :: span[contains(@class, 'standalone')]//*[name()='use'])[2]"));
+		/*Actions action = new Actions(driver);
+		action.moveToElement(toolTip).build().perform();*/
+		jsMouseOver(toolTip);
 		WebElement tooltipContent = driver.findElement(By.xpath("(//*[contains(text(),\'" + planName
 				+ "\')]/ancestor::div[contains(@class, 'module-plan-overview')]//descendant :: span[contains(@class, 'standalone')]//span)[2]"));
-//		Actions action = new Actions(driver);
-//		action.moveToElement(toolTip).build().perform();
-		jsMouseOver(toolTip);
 		String toolTipText = tooltipContent.getAttribute("textContent").trim();
 		if (toolTipText.contains("annual deductible")) {
 			System.out.println("ToolTip text is " + toolTipText);
 			Assert.assertTrue(true);
 		} else
 			Assert.fail("Tool Tip is not working");
+		jsMouseOut(toolTip);
 	}
 
 	public pages.acquisition.dce.ulayer.DrugCostEstimatorPage navigatetoDCEPage(String planName) {
