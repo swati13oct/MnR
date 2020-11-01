@@ -299,7 +299,7 @@ public class PlanRecommendationEngineResultsPageMobile extends UhcDriver {
 	@FindBy(css = "#startoverPopUp button[class*='cta-button sendbtn']")
 	private WebElement startOverButtoninPopup;
 
-	@FindBy(xpath = "//button[text()='Get Started' and @xpath='1']")
+	@FindBy(xpath = "//button[text()='Get Started']")
 	private WebElement getStartedBtn;
 
 	@FindBy(xpath = "//button[contains(text(),'Continue')]")
@@ -709,7 +709,8 @@ public class PlanRecommendationEngineResultsPageMobile extends UhcDriver {
 
 	public void validateDrugPage(String plan, boolean removedrug) {
 		System.out.println("Validating Drugs in Drug Page");
-		getStartedBtn.click();
+		// getStartedBtn.click();
+		jsClickNew(getStartedBtn);
 		threadsleep(2000);
 		int MAPD = 6;
 		int PDP = 3;
@@ -889,6 +890,8 @@ public class PlanRecommendationEngineResultsPageMobile extends UhcDriver {
 		// validate(getStartedBtn);
 		// jsClickNew(getStartedBtn);
 		pageloadcomplete();
+		scrollToView(getStartedBtn);
+		jsClickNew(getStartedBtn);
 		Assert.assertTrue(zipCode.getAttribute("ng-reflect-model").contains(zip), "Invalid Zip");
 		if (isMultiCounty.equalsIgnoreCase("NO")) {
 			validate(countyInfo, 20);
@@ -905,7 +908,7 @@ public class PlanRecommendationEngineResultsPageMobile extends UhcDriver {
 	public void vppToPreStartOver() {
 		System.out.println("Validating VPP to PRE Page Clicking on Start Over Button");
 		validate(StartOverButton, 20);
-		//StartOverButton.click();
+		// StartOverButton.click();
 		jsClickNew(StartOverButton);
 		startOverPopup();
 		pageloadcomplete();
@@ -918,7 +921,7 @@ public class PlanRecommendationEngineResultsPageMobile extends UhcDriver {
 		validate(closeButton, 20);
 		validate(startOverButtoninPopup, 20);
 		jsClickNew(startOverButtoninPopup);
-		//startOverButtoninPopup.click();
+		// startOverButtoninPopup.click();
 	}
 
 	public void validateRankingPlans(String Recom, String plans) {
@@ -945,7 +948,7 @@ public class PlanRecommendationEngineResultsPageMobile extends UhcDriver {
 	public void plansLoader() {
 		pageloadcomplete();
 		validate(planLoaderscreen, 60);
-		//waitforElementInvisibilityInTime(planLoaderscreen, 60);
+		// waitforElementInvisibilityInTime(planLoaderscreen, 60);
 		threadsleep(5000);// Plan loader
 	}
 
@@ -986,13 +989,16 @@ public class PlanRecommendationEngineResultsPageMobile extends UhcDriver {
 		System.out.println("Email Plan list from VPP : ");
 		plansLoader();
 		if (plan.equalsIgnoreCase("PDP")) {
+			validate(pdpemailList, 10);
 			scrollToView(pdpemailList);
-			pdpemailList.click();
+			jsClickNew(pdpemailList);
 		} else if (plan.equalsIgnoreCase("MA")) {
+			validate(maemailList, 10);
 			scrollToView(maemailList);
-			maemailList.click();
+			jsClickNew(maemailList);
 
 		} else if (plan.equalsIgnoreCase("SNP")) {
+			validate(snpemailList, 10);
 			scrollToView(snpemailList);
 			jsClickNew(snpemailList);
 

@@ -73,8 +73,9 @@ public class PlanRecommendationStepDefinitionMobile {
 	public void the_user_on_uhc_medicaresolutions_Site() {
 		wd = getLoginScenario().getMobileDriver();
 		AcquisitionHomePageMobile aquisitionhomepage = new AcquisitionHomePageMobile(wd);
-		//AcquisitionHomePageMobile aquisitionhomepage = new AcquisitionHomePageMobile(wd, "PRE", true);
-		//if_offline_prod = aquisitionhomepage.openMobileURL();
+		// AcquisitionHomePageMobile aquisitionhomepage = new
+		// AcquisitionHomePageMobile(wd, "PRE", true);
+		// if_offline_prod = aquisitionhomepage.openMobileURL();
 		aquisitionhomepage.openMobileURL();
 		// aquisitionhomepage.fixPrivateConnection();
 		checkpopup();
@@ -599,8 +600,8 @@ public class PlanRecommendationStepDefinitionMobile {
 				wd);
 		PlanRecommendationEngineHeaderAndFooterMobile headerAndFooter = new PlanRecommendationEngineHeaderAndFooterMobile(
 				wd);
-		//headerAndFooter.MobileMenu();
-		//headerAndFooter.breadCrumbs();
+		// headerAndFooter.MobileMenu();
+		// headerAndFooter.breadCrumbs();
 		planSelectorResultspage.resultsloadingpage();
 	}
 
@@ -739,6 +740,7 @@ public class PlanRecommendationStepDefinitionMobile {
 				wd);
 		planSelectorDoctorspage.addProvidersPRE(inputValues.get("Doctors Search Text"),
 				inputValues.get("Multi Doctor"));
+
 	}
 
 	@And("^user verifies doctors session in VPP page$")

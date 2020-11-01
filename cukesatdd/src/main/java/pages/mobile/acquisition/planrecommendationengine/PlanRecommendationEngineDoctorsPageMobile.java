@@ -17,6 +17,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 
+import acceptancetests.data.CommonConstants;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 import pages.acquisition.bluelayer.AcquisitionHomePage;
@@ -127,6 +128,9 @@ public class PlanRecommendationEngineDoctorsPageMobile extends UhcDriver {
 
 	@FindBy(css = "#modal div[class*='edit']>button")
 	private WebElement modalEditdoctors;
+	
+	@FindBy(xpath = "//button[@id='finishAndReturnButton']")
+	private WebElement finishandReturnBtn;
 
 	// Doctors Page Element Verification Method
 
@@ -327,7 +331,6 @@ public class PlanRecommendationEngineDoctorsPageMobile extends UhcDriver {
 	}
 
 	public ArrayList<String> getConfimationPopupResults(int count) {
-		waitforElement(modalDoctorsCount);
 		int confirmationSize = Integer.parseInt(modalDoctorsCount.getText().trim().split(" ")[2]);
 		if (count == modalDoctorsList.size() && count == confirmationSize) {
 			confirmationResults = new ArrayList<String>();
@@ -451,9 +454,11 @@ public class PlanRecommendationEngineDoctorsPageMobile extends UhcDriver {
 	}
 
 	public void navigateDoctorsmodalsession() {
-		doctorLookupOption.click();
+		//doctorLookupOption.click();
+		jsClickNew(doctorLookupOption);
 		System.out.println("Doctor Lookup Type Clicked");
-		continueBtn.click();
+		//continueBtn.click();
+		jsClickNew(continueBtn);
 	}
 
 	static ArrayList<String> confirmationProviderResults = new ArrayList<String>();
@@ -462,21 +467,29 @@ public class PlanRecommendationEngineDoctorsPageMobile extends UhcDriver {
 		//doctorLookupOption.click();
 		jsClickNew(doctorLookupOption);
 		System.out.println("Lookup Type Clicked");
-		continueBtn.click();
+		//continueBtn.click();
+		jsClickNew(continueBtn);
 	
 		if (multiDoctor.equalsIgnoreCase("YES"))
 			providerlookup(doctorsName, 3);
 		else
 			providerlookup(doctorsName, 1);
 		System.out.println("Validating " + page + " page Continue button functionality");
-		modalContinuedoctors.click();
+		//modalContinuedoctors.click();
+		jsClickMobile(modalContinuedoctors);
+		//jsClickNew(finishandReturnBtn);
+		
+		//driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
+		jsClickNew(continueBtn);
 		desktopCommonUtils.nextPageValidation(page.toUpperCase());
+		
 
 	}
 
 	public void providerlookup(String search, int count) {
 		String curdriverhandle = driver.getWindowHandle();
-		modalFinddoctors.click();
+		//modalFinddoctors.click();
+		jsClickNew(modalFinddoctors);
 		validateLinksanotherWindow(curdriverhandle, "Doctors", search, count);
 		confirmationProviderResults = getConfimationPopupResults(count);
 		verifyConfirmationmodalResults(count, werallyResults, confirmationProviderResults);

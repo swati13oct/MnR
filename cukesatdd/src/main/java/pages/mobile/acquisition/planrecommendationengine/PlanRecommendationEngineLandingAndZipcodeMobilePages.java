@@ -180,7 +180,9 @@ public class PlanRecommendationEngineLandingAndZipcodeMobilePages extends UhcDri
 
 	public void navigatezipcodepage() {
 		pageloadcomplete();
-		getStartedBtn.click();
+		scrollToView(getStartedBtn);
+		jsClickNew(getStartedBtn);
+		//getStartedBtn.click();
 		validate(zipCode, 30);
 	}
 
