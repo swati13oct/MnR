@@ -377,7 +377,7 @@ Feature: 1.12 ACQ - Global Components AARP
       #| shop/medicare-advantage-plans.html  | ShopPlan: Shop MA Plan  | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[1] | true   |
      #
      
-    @GlobalComponentsAARP_NewShopPages  @NewpagesSepAARP
+    @GlobalComponentsAARP_NewShopPages  @NewpagesAARP
   Scenario Outline: To verify Global Components for the page mentioned of AARP site <pageName> : <path>
     Given the user is on AARP medicare acquisition site landing page
     Given the user navigates to following AARP medicare acquisition site page
@@ -386,7 +386,7 @@ Feature: 1.12 ACQ - Global Components AARP
     Then the user validate ZipCode Components on page using ZipCode "55410"
     
     
-     @GlobalComponentsAARP_NewShopPages  @NewpagesSepAARP
+     @GlobalComponentsAARP_NewShopPages  @NewpagesAARP
      Examples: 
       | path                                                                      | pageName      | 
       | contact-us.html                                                           | Contact us    |
@@ -403,7 +403,7 @@ Feature: 1.12 ACQ - Global Components AARP
       |medicare-articles/eligibility-and-enrollment.html                          | Sample Category Page   |
             
     
-   @GlobalComponentsAARP_BlogPages    @NewpagesSepAARP
+   @GlobalComponentsAARP_BlogPages    @NewpagesAARP
   Scenario Outline: To verify Global Components for the page mentioned of AARP site <pageName> : <path>
     Given the user is on AARP medicare acquisition site landing page
     Given the user navigates to following AARP medicare acquisition site page
@@ -413,7 +413,7 @@ Feature: 1.12 ACQ - Global Components AARP
     Then the user validate ZipCode Components on page using ZipCode "55410"
     
     
-   @GlobalComponentsAARP_BlogPages   @NewpagesSepAARP
+   @GlobalComponentsAARP_BlogPages   @NewpagesAARP
      Examples: 
       |path                                          |site                                               | pageName               |
       |medicare-articles.html                        |AARP                                                | Medicare Articles Home |

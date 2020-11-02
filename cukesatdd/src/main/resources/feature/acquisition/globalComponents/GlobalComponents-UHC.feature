@@ -196,7 +196,7 @@ Feature: 2.12 ACQ - Global Components UHC
       #| medicare-supplement-plans/medicare-information.html?vpp=true              | Decision Guide    | //*[@id='tfn'] | true    |
       #| medicare-supplement-plans/agent-appointment.html                          | Agent Appointment | //*[@id='tfn'] | true    |
       
-    @GlobalComponentsUHC_NewShopPages   @NewpagesSepUHC
+    @GlobalComponentsUHC_NewShopPages   @NewpagesUHC
   Scenario Outline: To verify Global Components for the page mentioned on UHC site<pageName> : <path>
      Given the user is on the uhcmedicaresolutions site landing page
      Given the user navigates to following UHC medicare acquisition site page
@@ -205,7 +205,7 @@ Feature: 2.12 ACQ - Global Components UHC
     Then the user validate ZipCode Components on UHC page using ZipCode "55416"
     
     
-     @GlobalComponentsUHC_NewShopPages    @NewpagesSepUHC
+     @GlobalComponentsUHC_NewShopPages    @NewpagesUHC
      Examples: 
       | path                                                                      | pageName      | 
       | contact-us.html                                                           | Contact us    |
@@ -222,7 +222,7 @@ Feature: 2.12 ACQ - Global Components UHC
       |medicare-articles/eligibility-and-enrollment.html                          | Sample Category Page   |
             
     
-   @GlobalComponentsUHC_BlogPages    @NewpagesSepUHC
+   @GlobalComponentsUHC_BlogPages    @NewpagesUHC
   Scenario Outline: To verify Global Components for the page mentioned on UHC site <pageName> : <path>
      Given the user is on the uhcmedicaresolutions site landing page
      Given the user navigates to following UHC medicare acquisition site page
@@ -232,14 +232,14 @@ Feature: 2.12 ACQ - Global Components UHC
     Then the user validate ZipCode Components on UHC page using ZipCode "55424"
     
     
-   @GlobalComponentsUHC_BlogPages    @NewpagesSepUHC
+   @GlobalComponentsUHC_BlogPages    @NewpagesUHC
      Examples: 
       |path                               |site                                                         | pageName               |
       |medicare-articles.html    |UHC                                                                   | Medicare Articles Home |
       |medicare-articles/medicare-made-clear.html      |UHC                                                | About MMC              |
       |medicare-articles/what-is-retiree-health-coverage.html      |UHC                                   | Sample Article Page 2  |
       |medicare-articles/unintended-part-d-gotcha-could-getcha-if-you-enroll-after-age-65.html  |UHC       | Sample Article Page 1  |
-      medicare-articles/medicare-benefits-and-coverage.html |UHC
+      |medicare-articles/medicare-benefits-and-coverage.html |UHC|Article page|
 |medicare-articles/medicare-costs.html |UHC|Article page|
 |medicare-articles/shopping-for-medicare.html |UHC|Article page|
 |medicare-articles/medicare-when-working-past-65.html |UHC|Article page|
