@@ -369,7 +369,7 @@ public class PlanRecommendationEngineDrugsPage extends UhcDriver {
                             		if (drugsList.size() == confirmationSize) {
                             			System.out.println("Resutls and Count matched");
                             		} else {
-                            			System.out.println("Resutls and Count mismatch");
+                            			System.out.println("Results and Count mismatch");
                             			Assert.assertTrue(false);
                             		}
                             	}

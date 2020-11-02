@@ -60,7 +60,7 @@ Feature: PRE_VPP_DCERedesign - Verify end-to-end PRE flows functionalities with 
       |	UHC	|   33143 | No            | Miami-Dade | MAPD          | None         | None   | Lookup          | John             |               | No             | Yes,No,No,No                  | Higher               |	MAPD     | Orkambi | AARP Medicare Advantage Choice Plan 2 (Regional PPO) |
       
    	@PRE_VppPlanSummaryCard_DCE
-		Scenario Outline: <Zipcode> - To validate integration of DCE DCE with PRE in Vpp Plan Summary
+		Scenario Outline: <Zipcode> - To validate integration of DCE with PRE in Vpp Plan Summary
     Given the user is on medicare acquisition site landing page for PRE
     	|Site| <site>|
     When user navigate to Plan Recommendation Engine and Check Breadcrumbs
@@ -86,14 +86,35 @@ Feature: PRE_VPP_DCERedesign - Verify end-to-end PRE flows functionalities with 
     Then user selects cost preferences option on cost preferences page
       | Preference Option | <costPreferenceOption> |
     Then user validate elements on loading results page
-    Then user validate UI and API recommendation rankings in results page
+    Then user validate UI and API recommendation rankings on results page
     And the user selects plan year
     	|Plan Year	| <planyear>|
-    And the user validates the drug cost on plan summary page for the selected plan
-    	| Plan Name | <planname> |
+    And the user validates the added drug name on plan summary page for a selected plan
+   		| Plan Name | <planname> |
+   		| DrugName 	| <drugname> |
+   	And the user clicks on drug dropdown on plan summary page and navigates to DCE
+  	  | Plan Name | <planname> |
+   	And the user Captures Drug costs on Drug Details Page
+   	And the user clicks on Edit your drug list link on drug details page
+  	Then the user searches and adds the following Drug to Drug List
+      | DrugName | <drug1> |
+    Then the user clicks on Review Drug Costs to Land on Drug Details Page
+    Then the user Captures Drug costs on Drug Details Page
+    Then user saves plan as favorite on drug details page
+      | Test Plans | <planname> |
+    Then the user clicks on the heart icon on Drug Details page
+    And user validates the added plans on visitor profile page
+      | Test Plans | <planname> |
+    Then the user should be able to see all the added Drugs information in the guest profile page
+    	| Drugs Added | <drugsadded> |
     
     
   	@PRE_VppPlanSummaryCard_DCE_AARP
     Examples: 
-      |	site	| Zipcode | isMultiCounty | county     | isCoverageOpt | specialNeeds | travel | doctors         | DoctorsName  | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch																|	Dental-Hearing-Vision-Fitness | costPreferenceOption |	plantype | drug1   | planname                                           	|	planyear	|	planname															|
-      |	AARP	|   33143 | No            | Miami-Dade | MAPD          | None         | None   | UHGNetwork      |              |               | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,1,YES,NO:morphine sulfate,NO,morphine sulfate CAP 10MG ER,,,1,NO,NO	|	Yes,No,No,No                  | Higher               |	MAPD     | Orkambi | AARP Medicare Advantage Choice Plan 2 (Regional PPO) |	current		|	AARP Medicare Advantage Choice (PPO)	|
+      |	site	| Zipcode | isMultiCounty | county     | isCoverageOpt | specialNeeds | travel | doctors         | DoctorsName  | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch																|	Dental-Hearing-Vision-Fitness | costPreferenceOption |	plantype | planname                                           	|	planyear	|	planname															|	drugname									|	drug1		|	drugsadded															|
+      |	AARP	|   33143 | No            | Miami-Dade | MAPD          | None         | None   | UHGNetwork      |              |               | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,1,YES,NO:morphine sulfate,NO,morphine sulfate CAP 10MG ER,,,1,NO,NO	|	Yes,No,No,No                  | Higher               |	MAPD     | AARP Medicare Advantage Choice Plan 2 (Regional PPO) |	current		|	AARP Medicare Advantage Choice (PPO)	|	Lipitor:morphine sulfate	|	Orkambi	|	Lipitor:morphine sulfate:Orkambi	|
+      
+    @PRE_VppPlanSummaryCard_DCE_UHC
+    Examples: 
+      |	site	| Zipcode | isMultiCounty | county     | isCoverageOpt | specialNeeds | travel | doctors         | DoctorsName  | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch																|	Dental-Hearing-Vision-Fitness | costPreferenceOption |	plantype | planname                                           	|	planyear	|	planname															|	drugname									|	drug1		|	drugsadded															|
+      |	UHC		|   33143 | No            | Miami-Dade | MAPD          | None         | None   | UHGNetwork      |              |               | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,1,YES,NO:morphine sulfate,NO,morphine sulfate CAP 10MG ER,,,1,NO,NO	|	Yes,No,No,No                  | Higher               |	MAPD     | AARP Medicare Advantage Choice Plan 2 (Regional PPO) |	current		|	AARP Medicare Advantage Choice (PPO)	|	Lipitor:morphine sulfate	|	Orkambi	|	Lipitor:morphine sulfate:Orkambi	|

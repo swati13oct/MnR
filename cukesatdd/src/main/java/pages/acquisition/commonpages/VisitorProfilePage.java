@@ -133,6 +133,30 @@ public class VisitorProfilePage extends UhcDriver {
 			Assert.assertEquals(plan, driver.findElement(By.xpath("//h4[text()='"+plan+"']")).getText());
 			Assert.assertTrue(driver.findElement(By.xpath("//h4[text()='"+plan+"']/following::button[1]")).isDisplayed());
 			Assert.assertTrue(driver.findElement(By.xpath("//h4[text()='"+plan+"']/following::div[@class='provider-list'][1]/a")).isDisplayed());
+			System.out.println(driver.findElement(By.xpath("//h4[text()='"+plan+"']")).getText());
+		}
+	}
+	
+	public void validateAddedDrugs(String druglist) {
+		expandDrugBlock.click();
+		
+		String[] DrugListItems = druglist.split(":");
+		System.out.println("Added Drug Count : "+DrugListItems.length);
+		for(String currentDrug : DrugListItems) {
+			System.out.println("Current Added Drug Name : "+currentDrug);
+			List<WebElement> DrugName = driver.findElements(By.xpath("//div[contains(@class,'drug-list-accordion')]//button[contains(@class,'add-drugs')]/following-sibling::div//*[contains(@id,'DrugName')]"));
+
+			
+			for (int j = 0; j < DrugName.size(); j++) {
+				String drugInfo = DrugName.get(j).getText();
+				System.out.println("Drug name seen on Plan Summary: "+drugInfo);
+				if (drugInfo.contains(currentDrug))
+					System.out.println(currentDrug+": Drug name matched");
+				else if (j > DrugName.size()) {
+					System.out.println("========Drug name not matched=====");
+					Assert.fail("Drug List Validation FAILED for Drug : "+currentDrug);
+				}
+			}
 		}
 	}
 	

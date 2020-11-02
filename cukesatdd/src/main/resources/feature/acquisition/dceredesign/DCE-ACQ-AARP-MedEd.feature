@@ -22,6 +22,12 @@ Feature: 1.10.1 DCE-REDISIGN AARP - To test Acq Medicare Education Prescriotion 
       | ZipCode | <zipCode> |
     And user clicks on continue button in Zip Entry Page
 
+		@DCE_MedEdPage_AARP
     Examples: 
-      |site| drug1   | drug2  | drug3   | drug4    | zipCode |
-      | AARP| Orkambi | Fanapt | Humalog | Adderall |   80002 |
+      |	site	| drug1   | drug2  | drug3   | drug4    | zipCode |
+      | AARP	| Orkambi | Fanapt | Humalog | Adderall |   80002 |
+
+    @DCE_MedEdPage_UHC
+    Examples: 
+      |	site	| drug1   | drug2  | drug3   | drug4    | zipCode |
+      | UHC		| Orkambi | Fanapt | Humalog | Adderall |   80002 |
