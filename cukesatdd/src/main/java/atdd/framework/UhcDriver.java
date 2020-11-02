@@ -1208,7 +1208,7 @@ try {
     		// First checking to see if the loading indicator is found
     		// we catch and throw no exception here in case they aren't ignored
     		try {
-    			threadsleep(5000);			//Adding sleep since the loading spinner sometimes takes long to come up
+//    			threadsleep(5000);			//Adding sleep since the loading spinner sometimes takes long to come up
     			System.out.println("Waiting to check if Loading screen is present");
     			loadingScreen = fwait.until(new Function<WebDriver, List<WebElement>>() {
 					public List<WebElement> apply(WebDriver driver) {
@@ -1261,7 +1261,6 @@ try {
 
 		return true;
 	}
-	
 	
 	/**
 	 * move mouse out from the element using jQuery event, mouseout.
