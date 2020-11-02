@@ -1874,7 +1874,7 @@ public class AccountHomePage extends UhcDriver {
 							locateAndClickElementWithinShadowRoot(shadowRootHeader, secondTopMenuItemCssStr);
 						} else {
 							locateAndClickElementWithinShadowRoot(shadowRootHeader,	thirdTopMenuItemCssStr);
-						}
+						} 
 					}
 				}
 				CommonUtility.checkPageIsReadyNew(driver);
@@ -3862,6 +3862,9 @@ public class AccountHomePage extends UhcDriver {
 	}	
 
 	public void attemptShadowRootTopMenuLinkNavigationForPnP() {
+		String linkXpath="a[data-testid*=nav-link-pharmacies]";
+		locateAndClickElementWithinShadowRoot(shadowRootHeader, linkXpath);
+		/* tbd 
 		//note: use the 2nd menu link as the base and determine which one I really need
 		// if 2 is FIND CARE then 6 is PnP
 		// if 2 is CARE then 5 is PnP
@@ -3880,7 +3883,7 @@ public class AccountHomePage extends UhcDriver {
 					pnpTopMenuItemCssStr);
 			if (isPnpLink(pnpTopMenuLink.getText())) 
 				locateAndClickElementWithinShadowRoot(shadowRootHeader, pnpTopMenuItemCssStr);
-		} 
+		} */
 	}
 
 	public boolean findShadowRootTopMenuLinkForPnP() {

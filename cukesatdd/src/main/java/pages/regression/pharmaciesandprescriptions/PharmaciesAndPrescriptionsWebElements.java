@@ -199,7 +199,7 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	@FindBy(xpath="//div/p[contains(@class,'date')]")
 	protected WebElement planStartDate;
 	
-	@FindBy(xpath="//div[@class='plan-links']//div[@class='links-section'][1]//div[contains(@class,'pre-pharmacies')]//p")
+	@FindBy(xpath="//div[@class='plan-links']//div[@class='links-section'][1]//div[contains(@class,'pre-pharmacies')]//p//a")
 	protected WebElement drugCostLnk;
 
 	@FindBy(xpath="//div[@class='plan-links']//div[@class='links-section'][1]//div[contains(@class,'pre-pharmacies')]//img")
@@ -279,6 +279,15 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	
 	@FindBy(xpath="//h1[contains(text(),'Get the most')]")
 	protected WebElement pnpHeader_preeff;
+	
+	@FindBy(xpath="//div[@id='ErrorModalHeading']")
+	protected WebElement rallyDceSorryPgHeading;
+
+	@FindBy(xpath="//div[@data-component='ErrorModal']//button[text()='Close']")
+	protected WebElement rallyDceSorryPgBtnClose;
+
+	@FindBy(xpath="//h1[contains(text(),'What medication')]")
+	protected WebElement rallyDcePgHeading;
 	
 	public PharmaciesAndPrescriptionsWebElements(WebDriver driver) {
 		super(driver);

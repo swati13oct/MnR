@@ -486,18 +486,18 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 				+ "Expected to contain '"+expText+"' | Actual='"+actText+"'", 
 				actText.contains(expText));
 
-		String expUrl="/health-plans/estimate-drug-costs.html";
-		if (memberType.toUpperCase().contains("UHC"))
-			//tbd if (MRScenario.environment.contains("stage")) 
-			//tbd 	expUrl="uhcmedicaresolutions.uhc.com"+expUrl;
-			//tbd else
-				expUrl="uhcmedicaresolutions.com"+expUrl;
-		else 
-			//tbd if (MRScenario.environment.contains("stage")) 
-			//tbd 	expUrl="aarpmedicareplans.uhc.com"+expUrl;
-			//tbd else 
-				expUrl="aarpmedicareplans.com"+expUrl;
-		WebElement expElement=dceHeader;
+		String expUrl="/pharmacy-uhc/drugs";
+		if (MRScenario.environment.contains("stage")) 
+			expUrl="https://member.int.uhc.com";
+		else if (MRScenario.environment.equalsIgnoreCase("offline")) 
+			expUrl="https://member.uat.uhc.com";
+		else if (MRScenario.environment.equalsIgnoreCase("prod")) 
+			expUrl="https://member.uhc.com";
+		WebElement expElement=rallyDcePgHeading;
+		String expHref=expUrl;
+		String actHref=targetElement.getAttribute("href");
+		Assert.assertTrue("PROBLEM - '"+targetText+"' element href value is not as expected.  "
+				+ "Expected to contains '"+expHref+"' | Actual = '"+actHref+"'", actHref.contains(expHref));
 		validateLnkBehaviorNewTab(planType, memberType, targetItem, targetElement, expUrl, expElement);
 		
 		//=================================
