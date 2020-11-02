@@ -2531,4 +2531,46 @@ public class AcquisitionHomePage extends GlobalWebElements {
 				break;
 			}
 		}
+
+
+		@FindBy(xpath="(//*[contains(text(),'Sign in')])[1]")
+		private WebElement memberSignInPage;
+
+		@FindBy(xpath="//a[contains(@href,'https://www.aarpmedicareplans.com/health-plans.html?WT.mc_id=8009508')]")
+		private WebElement ViewMedicareplanlinks;
+
+		public void clickonmemberSignInlink(String ExpectedmemberSigninURL) {
+			validateNew(memberSignInPage);
+			CommonUtility.waitForPageLoadNew(driver, memberSignInPage, 30);
+			String parentWindow = driver.getWindowHandle();
+			memberSignInPage.click();
+			sleepBySec(3);
+			Set<String> tabs_windows = driver.getWindowHandles();
+			Iterator<String> itr = tabs_windows.iterator();
+			while(itr.hasNext()) {
+				String window = itr.next();
+				if(!parentWindow.equals(window)) {
+					driver.switchTo().window(window);
+				}
+			}
+
+			CommonUtility.checkPageIsReadyNew(driver);
+			String CurrentmemberSigninURL = driver.getCurrentUrl();
+			String ActualmemberSigninURL=CurrentmemberSigninURL.substring(0, 27).trim();
+			System.out.println("memberSignin Page is displayed : "+ActualmemberSigninURL);
+			System.out.println("Expected member signin URL: "+ExpectedmemberSigninURL);
+			System.out.println("Actual member signin URL: "+ActualmemberSigninURL);
+
+			if(ExpectedmemberSigninURL.equalsIgnoreCase(ActualmemberSigninURL)) {
+				System.out.println("****************member signin Page is displayed  ***************");
+
+				Assert.assertTrue(true);
+			}
+			else {
+				Assert.fail("****************member signin Page is not loaded ***************");
+			}
+
+			ViewMedicareplanlinks.click();
+
+		}
 }

@@ -3349,7 +3349,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 					jsClickNew(CurrentYearPlansBtn);
 					waitForPageLoadSafari();
 					//validateNew(AARPlogo, 10);
-				}
+			}
 		}
 	}	
 
@@ -3689,6 +3689,35 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			return true;
 		}
 		return false;
+	}
+
+	public boolean verifyAllAddedDrugName(String planName, String drugName) {
+		WebElement drugLinkDropdown = driver.findElement(By.xpath("//*[contains(text(),'" + planName
+				+ "')]/ancestor::div[contains(@class, 'module-plan-overview module')]//*[contains(@id,'drug-list-title-')]"));
+
+		scrollToView(drugLinkDropdown);
+		jsClickNew(drugLinkDropdown);
+
+		String drug = "";
+		String[] drugslist = drugName.split(":");
+		for (int i = 0; i < drugslist.length; i++) {
+			drug = drugslist[i];
+
+			List<WebElement> drugInfoDropdown = driver.findElements(By.xpath("//*[contains(text(),'" + planName
+					+ "')]/ancestor::div[contains(@class, 'module-plan-overview module')]//*[contains(@class,'collapse drug')]//*[contains(@id,'DrugName')]"));
+
+			for (int j = 0; j < drugInfoDropdown.size(); j++) {
+				String drugInfo = drugInfoDropdown.get(j).getText();
+				System.out.println("Drug name seen on Plan Summary: "+drugInfo);
+				if (drugInfo.contains(drug))
+					System.out.println(drug+": Drug name matched");
+				else if (j > drugInfoDropdown.size()) {
+					System.out.println("========Drug name not matched=====");
+					return false;
+				}
+			}
+		}
+		return true;
 	}
 
 
