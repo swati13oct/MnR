@@ -822,4 +822,10 @@ public class PlanRecommendationEngineStepDefinition {
 		PlanRecommendationEngineEditResponsePage preEditpage =  new PlanRecommendationEngineEditResponsePage(wd);
 		preEditpage.editResponsepage(inputValues);
    	}
+	
+	@Then("^user return to vpp page using \"([^\"]*)\" from edit response page$")
+   	public void check_saved_value_editResponse_page(String button) {
+		PlanRecommendationEngineEditResponsePage preEditpage =  new PlanRecommendationEngineEditResponsePage(wd);
+		preEditpage.returnVPP(button);
+   	}
 }
