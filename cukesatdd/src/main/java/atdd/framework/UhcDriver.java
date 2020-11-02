@@ -860,11 +860,12 @@ try {
 				jsonObj = (org.json.simple.JSONObject) parser.parse(currentSysTimeStr);
 				org.json.simple.JSONObject sysTimeJsonObj = (org.json.simple.JSONObject) jsonObj;
 
-			org.json.simple.JSONObject dataObj = (org.json.simple.JSONObject) sysTimeJsonObj.get("data"); 
-			timeStr=(String) dataObj.get("systemDate"); 
-		} catch (ParseException e) {
-			e.printStackTrace();
-			Assert.assertTrue("PROBLEM - unable to find out the system time", false);
+				org.json.simple.JSONObject dataObj = (org.json.simple.JSONObject) sysTimeJsonObj.get("data");
+				timeStr = (String) dataObj.get("systemDate");
+			} catch (ParseException e) {
+				e.printStackTrace();
+				Assert.assertTrue("PROBLEM - unable to find out the system time", false);
+			}
 		}
 		else
 		{
