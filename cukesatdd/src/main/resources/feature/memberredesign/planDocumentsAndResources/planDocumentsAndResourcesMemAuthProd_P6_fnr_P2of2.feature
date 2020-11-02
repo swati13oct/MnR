@@ -43,7 +43,7 @@ Feature: 1.06.6.2 Member Plans and Documents - section: Forms And Resources Part
 	@prod_preeffective_mapd_2of2
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | fnr_sd | fnr_maf | fnr_or | fnr_di |
-      | 03-098 | xxxxx       | kkumard  | mnrs786@  | Abayne01          | MAPD     | AARP_IND_PREEFF_PDnR  | false  | false   | false  | false  | 
+      | 03-098 | xxxxx       | kkumard  | mnrs786@  | Teripappas          | MAPD     | AARP_IND_PREEFF_PDnR  | false  | false   | false  | false  | 
 
 #	@prod_preeffective_pdp_2of2
 #	Examples: 
