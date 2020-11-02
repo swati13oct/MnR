@@ -200,7 +200,7 @@ Feature: To test Organic Search Campaign TFN on UHC site
    Examples: 
       | site   | Precedence1PSC | Precedence2PSC |memberSignIn| SAMiconTFN |
    		#| blayer |         880180 |         8009508 |https://www.medicare.uhc.com/  |//*[contains(@class,'sam__button__text desktop-tfn-text')]  | 
-      | blayer |         880180 |         880180 |https://www.medicare.uhc.com/  |//button[@id='sam-call-button']//*[contains(@class,'sam__button__text desktop')]  | 
+      | blayer |         880180 |         8009508 |https://www.medicare.uhc.com/  |//button[@id='sam-call-button']//*[contains(@class,'sam__button__text desktop')]  | 
   
   
   @Scenario4_7Campaign_Trafic_Member_UHC
@@ -266,8 +266,8 @@ Feature: To test Organic Search Campaign TFN on UHC site
       | TFN Xpath | <SAMiconTFN> |   
        Examples:
       | TID   | site   | zipcode | plantype | isMultutiCounty |planyear |  pscCode1 | pscCode2         |SAMiconTFN                                                 |
-      | 15531 | blayer | 80001   | MA       | No              |future  |  810027  |  880180          |//button[@id='sam-call-button']//*[contains(@class,'sam__button__text desktop')] |
-      | 15531 | blayer | 80001   | PDP      | No              |future  | 880180  |  880180          |//button[@id='sam-call-button']//*[contains(@class,'sam__button__text desktop')] |
+      | 15531 | blayer | 80001   | MA       | No              |future  |  880180  |  8013925         |//button[@id='sam-call-button']//*[contains(@class,'sam__button__text desktop')] |
+      | 15531 | blayer | 80001   | PDP      | No              |future  | 880180  |  8013925          |//button[@id='sam-call-button']//*[contains(@class,'sam__button__text desktop')] |
       
     
       

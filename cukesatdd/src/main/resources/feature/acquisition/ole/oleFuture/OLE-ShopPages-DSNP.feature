@@ -70,7 +70,7 @@ Feature: 1.5.ACQ-OLE common tool flow E2E Shop Pages
     | Prescription Name			| <prescriptioncoveragename>  |
     |  PD Group Number			 | <pdgroupnumber>  |
     | PD Member Number        | <pdmembernumber>   | 
-    Then the user navigates to SEP Page for Medicaid and Effective date
+    Then the user navigates to SEP Page
       |	Input Data					 | <inputdataType>   |
     	| PartA Date         | <partadate>         |
    		| PartB Date         | <partbdate>         |
@@ -188,7 +188,7 @@ Feature: 1.5.ACQ-OLE common tool flow E2E Shop Pages
     | Prescription Name			| <prescriptioncoveragename>  |
     |  PD Group Number			 | <pdgroupnumber>  |
     | PD Member Number        | <pdmembernumber>   | 
-    Then the user navigates to SEP Page for Medicaid and Effective date
+    Then the user navigates to SEP Page
        |	Input Data					 | <inputdataType>   |
     	| PartA Date         | <partadate>         |
    		| PartB Date         | <partbdate>         |

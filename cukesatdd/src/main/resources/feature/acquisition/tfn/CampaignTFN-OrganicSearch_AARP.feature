@@ -226,5 +226,41 @@ Feature: To test Organic SearchCampaign TFN on AARP site
       | TFN Xpath | <SAMiconTFN> |
        Examples: 
       | pscCode1 | pscCode2         |SAMiconTFN                                                 |
-      |  880180  |  880188          |//button[@id='sam-call-button']//*[contains(@class,'sam__button__text desktop')] |
+      |  810027  |  810106         |//button[@id='sam-call-button']//*[contains(@class,'sam__button__text desktop')] |
+      
+       @Scenario4_7Campaign_Trafic_Member_AARP1
+       Scenario Outline: 4.7.1 Verify email referral plan functionalities on Plan Details page in UHC site
+    Given the user is on AARP medicare acquisition site landing page
+    And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
+    Then the user validates PSC code
+      | PSC Code | <pscCode1> |
+      Then the user validate the sam icons tfn with federal TFN on Acquistion page
+      | TFN Xpath | <SAMiconTFN> |
+    When the user performs plan search using following information in the AARP site
+      | Zip Code        | <zipcode>         |
+      | Is Multi County | <isMultutiCounty> |
+      | County Name     | <county>          |
+    And the user views the plans of the below plan type on test site
+      | Plan Type | <plantype> |
+      | Site      | <site>     |
+    And the user selects plan year for the AARP site
+      | Plan Year | <planyear> |
+    Then the user view plan details of the first plan in the given plan type and perform validation in test site
+    Then the user validate the print link on the plan Details Page on test site
+    Then the user validates the functionality of print button on the plan Details Page in test site
+    Then the user validate the email link on the plan Details Page on test site
+    Then the user validates the functionality of email button on the plan Details Page in test site
+    Then user loads page using email deeplink and validate vpp detail page content on test site
+    And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
+    Then the user validates PSC code
+      | PSC Code | <pscCode2> |
+      Then the user validate the sam icons tfn with federal TFN on Acquistion page
+      | TFN Xpath | <SAMiconTFN> |   
+       Examples:
+      | TID   | site   | zipcode | plantype | isMultutiCounty |planyear |  pscCode1 | pscCode2         |SAMiconTFN                                                 |
+      | 15531 | ulayer | 80001   | MA       | No              |future  |  810027  |  8013925         |//button[@id='sam-call-button']//*[contains(@class,'sam__button__text desktop')] |
+      | 15531 | ulayer | 80001   | PDP      | No              |future  | 810027 |  8013925          |//button[@id='sam-call-button']//*[contains(@class,'sam__button__text desktop')] |
+      
+    
+      
       

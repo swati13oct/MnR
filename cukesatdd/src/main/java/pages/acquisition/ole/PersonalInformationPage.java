@@ -517,13 +517,13 @@ public class PersonalInformationPage extends UhcDriver{
 		
 		String PartAeffectiveDate = MedicareDetailsMap.get("PartA Date");
 		String PartBeffectiveDate = MedicareDetailsMap.get("PartB Date"); 
-		//String MedicaidNo = MedicareDetailsMap.get("MedicaidNumber"); 
+		String MedicaidNo = MedicareDetailsMap.get("MedicaidNumber"); 
 		if(validateNew(driver.findElement(By.xpath("//h1[contains(text(),'Confirm')]")))){
 			System.out.println("OLE Confirm your Eligibility is Displayed");
 		
 			sendkeysNew(partAStartDateField, PartAeffectiveDate);
 			sendkeysNew(partBStartDateField, PartBeffectiveDate);
-			//sendkeysNew(medicaidNumberField,MedicaidNo);
+			sendkeysNew(medicaidNumberField,MedicaidNo);
 		}
 		
 		return new ConfirmYourEligibilityPage(driver);

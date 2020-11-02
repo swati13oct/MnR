@@ -59,7 +59,7 @@
     Then the user answers following questions in Medicare Information Page
       | PDP Question      | <pdpFlag>      |
       | LongTerm Question | <longTermFlag> |
-    Then the user navigates to SEP Page for Medicaid and Effective date
+    Then the user navigates to SEP Page
         	|	Input Data					 | <inputdataType>   |
     	| PartA Date         | <partadate>         |
    		| PartB Date         | <partbdate>         |
@@ -160,7 +160,7 @@
     | Prescription Name			| <prescriptioncoveragename>  |
     |  PD Group Number			 | <pdgroupnumber>  |
     | PD Member Number        | <pdmembernumber>   | 
-    Then the user navigates to SEP Page for Medicaid and Effective date
+    Then the user navigates to SEP Page
        |	Input Data					 | <inputdataType>   |
     	| PartA Date         | <partadate>         |
    		| PartB Date         | <partbdate>         |
