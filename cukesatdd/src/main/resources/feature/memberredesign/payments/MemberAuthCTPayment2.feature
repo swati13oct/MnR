@@ -27,7 +27,7 @@ Feature: S1.1 To test Member Auth premium payment flows Micro App.
 
     Examples: 
       | UID     | username | password | memUserName | planType | claimPeriod    | dateRange      | routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName | paymentType |
-      | F243897 | jkuma14  | Brock@03 | Pramila1946 | SHIP     | Last 24 months | Last 18 months | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    | Recurring   |
+      | F243897 | jkuma14  | Brock@04 | Pramila1946 | SHIP     | Last 24 months | Last 18 months | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    | Recurring   |
 
   @regressionMemberPROD
   Scenario Outline: UID: <UID> -plan: <planType> - Test Case 07 - Verify SHIP Update Recurring EFT flow
@@ -45,7 +45,7 @@ Feature: S1.1 To test Member Auth premium payment flows Micro App.
 
     Examples: 
       | UID     | username | password | memUserName       | planType |
-      | F243897 | jkuma14  | Brock@03 | vernajohnson19651 | SHIP     |
+      | F243897 | jkuma14  | Brock@04 | vernajohnson19651 | SHIP     |
 
   @regressionMemberPROD @sanityMemberPROD2
   Scenario Outline: UID: <UID> -plan: <planType> - Test Case 09 - Verify SHIP Setup Recurring EFT flow
@@ -70,4 +70,4 @@ Feature: S1.1 To test Member Auth premium payment flows Micro App.
 
     Examples: 
       | UID     | username | password | memUserName | planType | routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName |
-      | F243897 | jkuma14  | Brock@03 | Pramila1946 | SHIP     | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    |
+      | F243897 | jkuma14  | Brock@04 | Pramila1946 | SHIP     | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    |
