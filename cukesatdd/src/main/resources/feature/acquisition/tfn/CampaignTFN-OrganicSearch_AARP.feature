@@ -194,3 +194,22 @@ Feature: To test Organic SearchCampaign TFN on AARP site
      # | ulayer |         810027 |         810106 |         810105 | /health-plans/shop/medicare-advantage-plans?WT.mc_id=8001533 |        8001533 | health-plans/enroll/ma-enrollment.html | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | health-plans/medicare-supplement-plans/medicare-information.html?vpp=true | //*[@id='tfn'] |
    | ulayer |         810027 |         810106 |         810105 | /shop/medicare-advantage-plans?WT.mc_id=8001533 |        8001533 | enroll/ma-enrollment.html | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | health-plans/medicare-supplement-plans/medicare-information.html?vpp=true | //*[@id='tfn'] |
       
+      
+      @Scenario4_7Campaign_Trafic_Member_AARP
+   Scenario Outline: 4.7 Campaign traffic from Member page to Acquisition Portals for AARP
+  Given the user is on AARP medicare acquisition site landing page
+    And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
+    Then the user validates PSC code
+      | PSC Code | <Precedence1PSC> |
+     Then the user navigates to following memeber signin page and navigate to view medicare plans link AARP
+     | Member Signin URL |<memberSignIn>     |
+     Then the user validates PSC code
+      | PSC Code | <Precedence2PSC> |
+      Then the user validate the sam icons tfn with federal TFN on Acquistion page
+      | TFN Xpath | <SAMiconTFN> |
+  
+   Examples: 
+      | site   | Precedence1PSC | Precedence2PSC |memberSignIn| SAMiconTFN |
+   		| ulayer |         810027 |         8009508 |https://www.medicare.uhc.com/  |//*[contains(@class,'sam__button__text desktop-tfn-text')]  | 
+  
+  

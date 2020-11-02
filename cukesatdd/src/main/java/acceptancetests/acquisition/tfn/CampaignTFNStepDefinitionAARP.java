@@ -378,6 +378,32 @@ public void the_user_navigates_to_Medsupp_VPP_and_validates_Medsupp_TFN() throws
 			
 		
 }
+
+@Then("^the user navigates to following memeber signin page and navigate to view medicare plans link AARP$")
+public void the_user_navigates_to_following_memeber_signin_page_AARP(DataTable arg1) throws Throwable {
+	Map<String, String> inputAttributesMap=parseInputArguments(arg1);
+	String memberSignINURL = inputAttributesMap.get("Member Signin URL");
+	AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage)getLoginScenario().getBean(PageConstants.ACQUISITION_HOME_PAGE);
+	
+	
+	if(memberSignINURL!=null){
+		aquisitionhomepage.clickonmemberSignInlink(memberSignINURL);
+		Assert.assertTrue(true);
+	}else
+		Assert.fail("Error in loading the UHC Agent Page");
+	//tfnPage.validateFederalTFN(TFN_Xpath);
+
+}
+
+@Then("^the user validate the sam icons tfn with federal TFN on Acquistion page$")
+public void the_user_validate_sam_icons_tfn_with_Federal_TFN(DataTable arg1) throws Throwable {
+	Map<String, String> inputAttributesMap=parseInputArguments(arg1);
+	String TFN_Xpath = inputAttributesMap.get("TFN Xpath");
+	CampaignTFNPage tfnPage = (CampaignTFNPage) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE);
+	//tfnPage.navigateToUrl(URLpath);
+	tfnPage.validateFederalTFN(TFN_Xpath);
+}
+
 }
 
 

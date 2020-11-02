@@ -81,6 +81,7 @@ Feature: To test Organic Search Campaign TFN on UHC site
     And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
     Then the user validates PSC code
       | PSC Code | <Precedence2PSC> |
+      
     Then the user navigates to following MA Plan Page URL and validate Federal TFN
       | MA URL    | <maUrl> |
       | TFN Xpath | <maTFN> |
@@ -181,4 +182,24 @@ Feature: To test Organic Search Campaign TFN on UHC site
       | site   | Precedence1PSC | Precedence2PSC | Precedence3PSC | campaign2Url      | Precedence4PSC | maUrl                                  | maTFN                                                          | medSuppUrl                                                                | medSuppTFN     |
      # | ulayer |         880180 |         880188 |         880189 | /?WT.mc_id=800086 |         800086 | health-plans/enroll/ma-enrollment.html | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | health-plans/medicare-supplement-plans/medicare-information.html?vpp=true | //*[@id='tfn'] |
 | ulayer |         880180 |         880188 |         880189 | /?WT.mc_id=800086 |         800086 | enroll/ma-enrollment.html | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | health-plans/medicare-supplement-plans/medicare-information.html?vpp=true | //*[@id='tfn'] |
-      
+     
+     
+   @Scenario4_7Campaign_Trafic_Member_UHC
+   Scenario Outline: 4.7 Campaign traffic from Member page to Acquisition Portals for UHC
+   Given the user is on the uhcmedicaresolutions site landing page
+    And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
+    Then the user validates PSC code
+      | PSC Code | <Precedence1PSC> |
+     Then the user navigates to following memeber signin page and navigate to view medicare plans link UHC
+     | Member Signin URL |<memberSignIn>     |
+     Then the user validates PSC code
+      | PSC Code | <Precedence2PSC> |
+      Then the user validate the sam icons tfn with federal TFN on Acquistion page
+      | TFN Xpath | <SAMiconTFN> |
+  
+   Examples: 
+      | site   | Precedence1PSC | Precedence2PSC |memberSignIn| SAMiconTFN |
+   		| blayer |         880180 |         8009508 |https://www.medicare.uhc.com/  |//*[contains(@class,'sam__button__text desktop-tfn-text')]  | 
+  
+  
+   
