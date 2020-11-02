@@ -583,9 +583,10 @@ public class ComparePlansPage extends UhcDriver {
 	
 	public void validateCallSamContent() throws InterruptedException {
 		
-		Actions action = new Actions(driver);
-		WebElement element = callsam;
-		action.moveToElement(element).perform();
+//		Actions action = new Actions(driver);
+//		WebElement element = callsam;
+//		action.moveToElement(element).perform();
+		jsMouseOver(callsam);
 		String toolTipText = callsamtooltip.getText();
 		System.out.println("====================================================================");
 		System.out.println(toolTipText);
