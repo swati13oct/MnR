@@ -155,7 +155,7 @@ public class CommunicationPreferenceWebElements extends UhcDriver {
 	@FindBy(xpath="//div[2]/div[2]/p")
 	protected WebElement updatedEmailAfterSave;
 
-	@FindBy(xpath="//div[@id='mail-preferences-selector-SHIP']//div[contains(@class,'prefs-confirm')]//span[contains(text(),'Thank you for updating your delivery preferences')]")
+	@FindBy(xpath="//div[contains(@class,'prefs-confirm')]//span[contains(text(),'Thank you for updating your delivery preferences')]")
 	protected WebElement shipSuccMsg;
 
 	@FindBy(id="claims_1")

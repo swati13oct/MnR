@@ -408,7 +408,7 @@ public class CommunicationPreferencePage extends CommunicationPreferenceWebEleme
 	}
 
 	public void validateSuccessText() {
-		CommonUtility.waitForPageLoad(driver, shipSuccMsg, 5);
+		CommonUtility.waitForPageLoad(driver, shipSuccMsg, 10);
 		Assert.assertTrue("PROBLEM - unable to locate success message after submit", validate(shipSuccMsg));		
 	}
 
