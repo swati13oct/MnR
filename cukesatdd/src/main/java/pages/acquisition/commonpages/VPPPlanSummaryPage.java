@@ -714,25 +714,25 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			CommonUtility.waitForPageLoadNew(driver, pdpPlansViewLink, 30);
 			//sleepBySec(2); // note: add sleep for timing issue, tried increase timeout from
 							// waitForPageLoadNew but didn't work
-			pdpPlansViewLink.click();
+			jsClickNew(pdpPlansViewLink);
 			System.out.println("PDP Plan Type Clicked");
 			CommonUtility.waitForPageLoadNew(driver, planListContainer, 30);
 		} else if (planType.equalsIgnoreCase("MA") || planType.equalsIgnoreCase("MAPD")) {
 			CommonUtility.waitForPageLoadNew(driver, maPlansViewLink, 30);
 			//sleepBySec(2);
-			maPlansViewLink.click();
+			jsClickNew(maPlansViewLink);
 			CommonUtility.waitForPageLoadNew(driver, planListContainer, 30);
 		} else if (planType.equalsIgnoreCase("MS")) {
 			CommonUtility.waitForPageLoadNew(driver, msPlansViewLink, 30);
 			//sleepBySec(2);
-			msPlansViewLink.click();
+			jsClickNew(msPlansViewLink);
 			CommonUtility.waitForPageLoadNew(driver, medSuppZipCode, 30);
 			/*msPlansViewLink.click();
 			CommonUtility.waitForPageLoadNew(driver, medSuppPlanList.get(0), 30);*/
 		} else if (planType.equalsIgnoreCase("SNP")) {
 			//sleepBySec(5);
 			CommonUtility.waitForPageLoadNew(driver, snpPlansViewLink, 30);
-			snpPlansViewLink.click();
+			jsClickNew(snpPlansViewLink);
 			CommonUtility.waitForPageLoadNew(driver, planListContainer, 30);
 			try {
 				Thread.sleep(5000);
@@ -747,7 +747,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	public VPPPlanSummaryPage viewPlanSummaryButton(String planType) {
 		if (planType.equalsIgnoreCase("PDP")) {
 			if (validate(showPdpPlans)) {
-				showPdpPlans.click();
+				jsClickNew(showPdpPlans);
 			}
 			if (validate(hidePdpPlans)) {
 				validate(hidePdpPlans);
@@ -759,7 +759,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 		} else if (planType.equalsIgnoreCase("MS")) {
 			if (validate(showMsPlans)) {
-				showMsPlans.click();
+				jsClickNew(showMsPlans);
 			}
 		}
 		return new VPPPlanSummaryPage(driver, planType);
@@ -845,13 +845,13 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	public boolean selectPlanType(String planType) {
 		if (planType.equalsIgnoreCase("PDP")) {
-			showPdpPlans.click();
+			jsClickNew(showPdpPlans);
 			return validate(hidePdpPlans);
 		} else if (planType.equalsIgnoreCase("MA") || planType.equalsIgnoreCase("MAPD")) {
-			showMaPlans.click();
+			jsClickNew(showMaPlans);
 			return validate(hideMaPlans);
 		} else if (planType.equalsIgnoreCase("MS")) {
-			showMsPlans.click();
+			jsClickNew(showMsPlans);
 		}
 		return false;
 		// return new VPPPlanSummaryPage(driver, planType);
@@ -868,7 +868,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			validate(toggleplanYear);
 		}
 		if (toggleplanYear != null) {
-			toggleplanYear.click();
+			jsClickNew(toggleplanYear);
 			try {
 				Thread.sleep(2000);
 			} catch (InterruptedException e) {
@@ -886,17 +886,17 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			validate(toggleplanYear);
 		}
 		if (toggleplanYear != null) {
-			toggleplanYear.click();
+			jsClickNew(toggleplanYear);
 		}
 		return new VPPPlanSummaryPage(driver, planType);
 	}
 
 	public boolean clicksOnMAProviderCoveredLink() {
 		if (validate(previousYearLink)) {
-			previousYearLink.click();
+			jsClickNew(previousYearLink);
 		}
 		validate(MaProviderLink);
-		MaProviderLink.click();
+		jsClickNew(MaProviderLink);
 		ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
 		driver.switchTo().window(tabs.get(1));
 		if (getTitle().equalsIgnoreCase("Welcome")) {
@@ -1229,7 +1229,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			System.out.println("View Plan Details Link is clicked for MA plan" + planName);
 		}
 		CommonUtility.checkPageIsReadyNew(driver);
-		waitForPageLoadSafari();
+		sleepBySec(3);
+//		waitForPageLoadSafari();
 			return new PlanDetailsPage(driver, planType);
 		
 		}
@@ -1296,7 +1297,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		}
 		if (allMAPlans != null) {
 			for (int i = 0; i < plansForCompare; i++) {
-				allMAPlans.get(i).click();
+				jsClickNew(allMAPlans.get(i));
 				System.out.println("Plan added to compare : " + i);
 			}
 		}
@@ -1308,13 +1309,13 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		if(planType.contains("MAPD")) {
 			List<WebElement> compareLinks = driver
 					.findElements(By.xpath("//*[contains(@class,'multiple-added-text')]//button[contains(text(),'Compare plans')]"));
-//			compareLinks.get(1).click();
 			jsClickNew(compareLinks.get(1));
 		}else {
 			List<WebElement> compareLinks = driver
 					.findElements(By.xpath("//*[contains(@id,'plan-list-3')]//button[contains(text(),'Compare plans')]"));
 			jsClickNew(compareLinks.get(1));
 		}
+		waitForPageLoadSafari();
 		if (currentUrl().contains("/health-plans.html#/plan-compare"))
 			return new ComparePlansPage(driver);
 		return null;
@@ -1693,7 +1694,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		}
 		if (allPDPlans != null) {
 			for (int i = 0; i < plansForCompare; i++) {
-				allPDPlans.get(i).click();
+				jsClickNew(allPDPlans.get(i));
 				System.out.println("Plan added to compare : " + i);
 			}
 		}
@@ -3651,7 +3652,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	public PlanDetailsPage clickViewDetails_AddedToCompare() {
 
 		validateNew(ViewPlanLink_AddedToCompare);
-		ViewPlanLink_AddedToCompare.click();
+		jsClickNew(ViewPlanLink_AddedToCompare);
 		CommonUtility.checkPageIsReadyNew(driver);
 		if (currentUrl().contains("#/details"))
 			return new PlanDetailsPage(driver);
@@ -3763,7 +3764,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	public ComparePlansPage clickOnCompareLink(){
 		List<WebElement> compareLinks = driver
 				.findElements(By.xpath("//*[contains(@class,'multiple-added-text')]//button[contains(text(),'Compare plans')]"));
-		compareLinks.get(1).click();
+		jsClickNew(compareLinks.get(1));
+		waitForPageLoadSafari();
 		if(currentUrl().contains("/health-plans.html#/plan-compare"))
 			return new ComparePlansPage(driver);
 		return null;

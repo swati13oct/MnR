@@ -445,9 +445,11 @@ try {
     }
 
 	public void jsClickNew(WebElement element) {
-		JavascriptExecutor js = (JavascriptExecutor) driver;
-		js.executeScript("arguments[0].click();", element);
+		if(validate(element, 1)) {
+			JavascriptExecutor js = (JavascriptExecutor) driver;
+			js.executeScript("arguments[0].click();", element);
 //		System.out.println("The WebElement ===  " +getidentifier(element) + "  : is Clicked");
+		}
 	}
 	
 	public static String getidentifier(WebElement element) {
@@ -1250,17 +1252,19 @@ try {
 	 * 
 	 * Note: use the jsMouseOut if using jsMouseOver for tooltip
 	 */
-	public boolean jsMouseOver(WebElement element) {
-		try {
-			JavascriptExecutor js = (JavascriptExecutor) driver;
-			js.executeScript("$(arguments[0]).mouseover();", element);
-		} catch (Exception e) {
-			Assert.fail("The element " + element.getText() + "is not  found");
-			return false;
-		}
+    public boolean jsMouseOver(WebElement element) {
+    	try {
+    		if(validate(element, 1)) {
+    			JavascriptExecutor js = (JavascriptExecutor) driver;
+    			js.executeScript("$(arguments[0]).mouseover();", element);
+    		}
+    	} catch (Exception e) {
+    		Assert.fail("The element " + element.getText() + "is not  found");
+    		return false;
+    	}
 
-		return true;
-	}
+    	return true;
+    }
 	
 	/**
 	 * move mouse out from the element using jQuery event, mouseout.

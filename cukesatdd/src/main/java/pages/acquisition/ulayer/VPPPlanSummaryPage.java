@@ -3270,21 +3270,21 @@ for (int i = 0; i < initialCount + 1; i++) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}		
-		part_A_monthDrpDwn.click();
+		jsClickNew(part_A_monthDrpDwn);
 		try {
 			Thread.sleep(2000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		Part_A_monthDrpDwnOption.click();
+		jsClickNew(Part_A_monthDrpDwnOption);
 		try {
 			Thread.sleep(2000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}		System.out.println("Effective date- month value selected");
-		part_A_yearDrpDwn.click();
+		jsClickNew(part_A_yearDrpDwn);
 		try {
 			Thread.sleep(2000);
 		} catch (InterruptedException e) {
@@ -3298,42 +3298,42 @@ for (int i = 0; i < initialCount + 1; i++) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}		
-		part_B_monthDrpDwn.click();
+		jsClickNew(part_B_monthDrpDwn);
 		try {
 			Thread.sleep(2000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		Part_B_monthDrpDwnOption.click();
+		jsClickNew(Part_B_monthDrpDwnOption);
 		try {
 			Thread.sleep(2000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}		
-		part_B_yearDrpDwn.click();
+		jsClickNew(part_B_yearDrpDwn);
 		try {
 			Thread.sleep(2000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}		
-		Part_B_yearDrpDwnOption.click();
+		jsClickNew(Part_B_yearDrpDwnOption);
 		try {
 			Thread.sleep(2000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}		
-		startDrpDwn.click();	
+		jsClickNew(startDrpDwn);
 		try {
 			Thread.sleep(2000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}		
-		startDrpDwnOption.click();
+		jsClickNew(startDrpDwnOption);
 		System.out.println("Plan to start date selected");
 
 		validateNew(DOB,30);
@@ -3359,7 +3359,7 @@ for (int i = 0; i < initialCount + 1; i++) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}		
-		ViewPlanMedSupPage.click();
+		jsClickNew(ViewPlanMedSupPage);
 		return EnteredData;
 		
 	}
@@ -3506,7 +3506,7 @@ for (int i = 0; i < initialCount + 1; i++) {
 	private WebElement DecisionGuideLink;
 	public IsDecisionGuideStep1 clickOnRequestADecisionGuide() {
 		Assert.assertTrue("Decision Guide Link is not displayed on Med Supp VPP Plan Summary Page", validate(DecisionGuideLink));
-		DecisionGuideLink.click();
+		jsClickNew(DecisionGuideLink);
 		CommonUtility.checkPageIsReadyNew(driver);
 		if (driver.getCurrentUrl().contains("medicare-information.html"))
 			return new IsDecisionGuideStep1(driver);
@@ -3528,7 +3528,7 @@ for (int i = 0; i < initialCount + 1; i++) {
 	 * @return
 	 */
 	public VisitorProfilePage continueAsGuest(){
-		continueAsGuest.click();
+		jsClickNew(continueAsGuest);
 		if(driver.getCurrentUrl().contains("profile")) {
 			CommonUtility.checkPageIsReadyNew(driver);
 			return new VisitorProfilePage(driver);

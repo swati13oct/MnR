@@ -940,7 +940,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			waitForPageLoadSafari();
 			CommonUtility.waitForPageLoadNew(driver, zipCodeField, 30);
 			sendkeys(zipCodeField, zipcode);
-			viewPlansButton.click();
+			jsClickNew(viewPlansButton);
 	//	}
 //			while(validate(overlayFilm, 10)) {/**wait*/}
 //			CommonUtility.waitForElementToDisappear(driver, overlayFilm, 75);
@@ -958,7 +958,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	public VPPPlanSummaryPage searchPlanOnHealthPlansPage(String zipcode, String county, String isMultiCounty){
 		CommonUtility.waitForPageLoadNew(driver, healthPlansZipcode, 30);
 		sendkeys(healthPlansZipcode, zipcode);
-		viewPlansButton.click();
+		jsClickNew(viewPlansButton);
 		waitForPageLoadSafari();
 		if(isMultiCounty.equalsIgnoreCase("YES")){
 			CommonUtility.waitForPageLoad(driver, countyModal, 45);
@@ -1113,9 +1113,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	public ContactUsAARPPage contactUsFooterClick() {
 		validateNew(footerContactUsLink);
-		footerContactUsLink.click();
+		jsClickNew(footerContactUsLink);
+		sleepBySec(2);
 		CommonUtility.checkPageIsReadyNew(driver);
-		waitForPageLoadSafari();
 		if (driver.getCurrentUrl().contains("contact-us")) {
 			return new ContactUsAARPPage(driver);
 		}
@@ -1124,8 +1124,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	
 	public SiteMapAARPPage siteMapFooterClick() {
 		validateNew(footerSiteMapLink);
-//		footerSiteMapLink.click();
 		jsClickNew(footerSiteMapLink);
+		sleepBySec(2);
 		CommonUtility.checkPageIsReadyNew(driver);
 		validateNew(siteMapHeader);
 		if (driver.getCurrentUrl().contains("sitemap.html")){
@@ -1138,8 +1138,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	
 	public PrivacyPolicyAARPPage privacypolicyFooterClick() {
 		validateNew(footerPrivacyPolicyLink);
-//		footerPrivacyPolicyLink.click();
 		jsClickNew(footerPrivacyPolicyLink);
+		sleepBySec(2);
 		CommonUtility.checkPageIsReadyNew(driver);
 		validateNew(privacyHeader);
 		if (driver.getCurrentUrl().contains("privacy-policy.html")) {
@@ -1150,8 +1150,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	public TermsnConditionsAARPPage termsnconditionsFooterClick() {
 		validate(footerTermsnConditionsLink);
-//		footerTermsnConditionsLink.click();
 		jsClickNew(footerTermsnConditionsLink);
+		sleepBySec(2);
 		CommonUtility.checkPageIsReadyNew(driver);
 		if (driver.getCurrentUrl().contains("terms-of-use")) {
 			return new TermsnConditionsAARPPage(driver);
@@ -1161,8 +1161,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	
 	public DisclaimersAARPPage disclaimersFooterClick() {
 		validate(footerDisclaimersLink);
-//		footerDisclaimersLink.click();
 		jsClickNew(footerDisclaimersLink);
+		sleepBySec(2);
 		CommonUtility.checkPageIsReadyNew(driver);
 		if (driver.getCurrentUrl().contains("disclaimer")) {
 			return new DisclaimersAARPPage(driver);
@@ -1172,8 +1172,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	
 	public AgentsnBrokersAARPPage agentsnbrokersFooterClick() {
 		validate(footerAgentsnBrokersLink);
-//		footerAgentsnBrokersLink.click();
 		jsClickNew(footerAgentsnBrokersLink);
+		sleepBySec(2);
 		CommonUtility.checkPageIsReadyNew(driver);
 		validateNew(brokerHeader);
 		if(driver.getCurrentUrl().contains("health-insurance-brokers")){
@@ -1184,8 +1184,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	
 	public AcquisitionHomePage homeFooterClick() {
 		validateNew(footerHomeLink);
-//		footerHomeLink.click();
 		jsClickNew(footerHomeLink);
+		sleepBySec(2);
 		CommonUtility.checkPageIsReadyNew(driver);
 		if (validateNew(zipCodeField)) {
 			return new AcquisitionHomePage(driver, true);
