@@ -35,7 +35,7 @@ Feature: 1.11 Member Pharmacy Locator tool Page- Member Auth - PROD
 
 		Examples:
 			| TID   | username | password | MemUserName   | planType | memberType                 | zipcode | distance | pharmacyType  | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
-			| 15294 | ujethwa  | 221Umang | TEAKSAMPPALA1 | MAPD     | IndMAPDUHC_Pharmacylocator | 29148   | 10       | E-Prescribing | False                 | False            | True                 |
+			| 15294 | ujethwa  | Member22 | TEAKSAMPPALA1 | MAPD     | IndMAPDUHC_Pharmacylocator | 29148   | 10       | E-Prescribing | False                 | False            | True                 |
 
 	@prod_pharmacylocator1 @E2E @English @PharmacyDistanceDefaultZip @ValidateLanguageandZIPcode @ZipCodeErrorMessages
 	Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Part 1 of 2 - To verify end-to-end behavior for pharmacy locator English page on member site
@@ -86,25 +86,25 @@ Feature: 1.11 Member Pharmacy Locator tool Page- Member Auth - PROD
 	@prod_pharmacylocator1a
 	Examples: 
 	  | TID 	| username  | password  | MemUserName     | planType | memberType         		   | zipcode | distance | pharmacyType                | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
-	  | 15273	| ujethwa | 221Umang | DSOADY17             | MAPD     | IndAARPMAPD_Pharmacylocator | 85215   | 15       | Open 24 hours               | False                 | False            | True                 |
-	  | 15296	| ujethwa | 221Umang | WILLIAMGARRISON48    | MAPD     | GroupMAPD_Pharmacylocator   | 61443   | 15       | E-Prescribing               | False                 | False            | False                |
+	  | 15273	| ujethwa | Member22 | DSOADY17             | MAPD     | IndAARPMAPD_Pharmacylocator | 85215   | 15       | Open 24 hours               | False                 | False            | True                 |
+	  | 15296	| ujethwa | Member22 | WILLIAMGARRISON48    | MAPD     | GroupMAPD_Pharmacylocator   | 61443   | 15       | E-Prescribing               | False                 | False            | False                |
 		
 		@prod_pharmacylocator1b
 	Examples: 
 	  | TID 	| username  | password  | MemUserName     | planType | memberType         		   | zipcode | distance | pharmacyType                | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |  
-	  | 15279	| ujethwa | 221Umang | ALREALESTATE@AOL.COM | MAPD     | Medica_Pharmacylocator	   | 33321   | 10       | Home Infusion and Specialty | False                 | False            | True                 |
-	  | 15280	| ujethwa | 221Umang | BATLLOT@AOL.COM      | MAPD     | PCP_Pharmacylocator		   | 33174   | 10       | Retail Pharmacy             | False                 | False            | True                 |
+	  | 15279	| ujethwa | Member22 | ALREALESTATE@AOL.COM | MAPD     | Medica_Pharmacylocator	   | 33321   | 10       | Home Infusion and Specialty | False                 | False            | True                 |
+	  | 15280	| ujethwa | Member22 | BATLLOT@AOL.COM      | MAPD     | PCP_Pharmacylocator		   | 33174   | 10       | Retail Pharmacy             | False                 | False            | True                 |
 
 	@prod_pharmacylocator1c
 	Examples: 
 	  | TID 	| username  | password  | MemUserName     | planType | memberType         		   | zipcode | distance | pharmacyType                | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
-	  | 15295	| ujethwa | 221Umang | LSLOMSKI777    | PDP      | IndAARPPDP_Pharmacylocator  | 10980   | 15       | E-Prescribing               | True                  | False            | True                 |
+	  | 15295	| ujethwa | Member22 | LSLOMSKI777    | PDP      | IndAARPPDP_Pharmacylocator  | 10980   | 15       | E-Prescribing               | True                  | False            | True                 |
 
 	@prod_pharmacylocator1d
 	Examples: 
 	  | TID 	| username  | password  | MemUserName     | planType | memberType         		   | zipcode | distance | pharmacyType                | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
-	  | 15294	| ujethwa | 221Umang | TEAKSAMPPALA1  | MAPD     | IndMAPDUHC_Pharmacylocator  | 29148   | 10       | E-Prescribing               | False                 | False            | True                 |
-	  | 15274	| ujethwa | 221Umang | DMURRAY911       | PDP      | Walgreen_Pharmacylocator    | 80001   | 10       | Long-term care              | True                  | True             | True                 |
+	  | 15294	| ujethwa | Member22 | TEAKSAMPPALA1  | MAPD     | IndMAPDUHC_Pharmacylocator  | 29148   | 10       | E-Prescribing               | False                 | False            | True                 |
+	  | 15274	| ujethwa | Member22 | DMURRAY911       | PDP      | Walgreen_Pharmacylocator    | 80001   | 10       | Long-term care              | True                  | True             | True                 |
 
 
   @prod_pharmacylocator2 @E2E @English @PharmacyDistanceDefaultZip @ValidateLanguageandZIPcode @ZipCodeErrorMessages
@@ -142,25 +142,25 @@ Feature: 1.11 Member Pharmacy Locator tool Page- Member Auth - PROD
 	@prod_pharmacylocator2a
 	Examples: 
 	  | TID 	| username  | password  | MemUserName     | planType | memberType         		   | zipcode | distance | pharmacyType                | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
-	  | 15273	| ujethwa | 221Umang | DSOADY17          | MAPD     | IndAARPMAPD_Pharmacylocator | 85215   | 15       | Open 24 hours               | False                 | False            | True                 |
-	  | 15296	| ujethwa | 221Umang | WILLIAMGARRISON48 | MAPD     | GroupMAPD_Pharmacylocator   | 61443   | 15       | E-Prescribing               | False                 | False            | False                |
+	  | 15273	| ujethwa | Member22 | DSOADY17          | MAPD     | IndAARPMAPD_Pharmacylocator | 85215   | 15       | Open 24 hours               | False                 | False            | True                 |
+	  | 15296	| ujethwa | Member22 | WILLIAMGARRISON48 | MAPD     | GroupMAPD_Pharmacylocator   | 61443   | 15       | E-Prescribing               | False                 | False            | False                |
 	  
 	  @prod_pharmacylocator2b
 	Examples: 
 	  | TID 	| username  | password  | MemUserName     | planType | memberType         		   | zipcode | distance | pharmacyType                | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
-	  | 15279	| ujethwa | 221Umang |ALREALESTATE@AOL.COM| MAPD     | Medica_Pharmacylocator	   | 33321   | 10       | Home Infusion and Specialty | False                 | False            | True                 |
-	  | 15280	| ujethwa | 221Umang | BATLLOT@AOL.COM    | MAPD     | PCP_Pharmacylocator		   | 33174   | 10       | Retail Pharmacy             | False                 | False            | True                 |
+	  | 15279	| ujethwa | Member22 |ALREALESTATE@AOL.COM| MAPD     | Medica_Pharmacylocator	   | 33321   | 10       | Home Infusion and Specialty | False                 | False            | True                 |
+	  | 15280	| ujethwa | Member22 | BATLLOT@AOL.COM    | MAPD     | PCP_Pharmacylocator		   | 33174   | 10       | Retail Pharmacy             | False                 | False            | True                 |
 
 	@prod_pharmacylocator2c
 	Examples: 
 	  | TID 	| username  | password  | MemUserName     | planType | memberType         		   | zipcode | distance | pharmacyType                | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
-	  | 15295	| ujethwa | 221Umang | LSLOMSKI777    | PDP      | IndAARPPDP_Pharmacylocator  | 10980   | 15       | E-Prescribing               | False             | True            | True                 |
+	  | 15295	| ujethwa | Member22 | LSLOMSKI777    | PDP      | IndAARPPDP_Pharmacylocator  | 10980   | 15       | E-Prescribing               | False             | True            | True                 |
 
 	@prod_pharmacylocator2d
 	Examples: 
 	  | TID 	| username  | password  | MemUserName     | planType | memberType         		   | zipcode | distance | pharmacyType                | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
-	  | 15294	| ujethwa | 221Umang | TEAKSAMPPALA1    | MAPD     | IndMAPDUHC_Pharmacylocator  | 29148   | 10       | E-Prescribing               | False                 | False            | True                 |
-	  | 15274	| ujethwa | 221Umang | DMURRAY911    | PDP      | Walgreen_Pharmacylocator    | 80001   | 10       | Long-term care                   | False                  | True             | True                 |
+	  | 15294	| ujethwa | Member22 | TEAKSAMPPALA1    | MAPD     | IndMAPDUHC_Pharmacylocator  | 29148   | 10       | E-Prescribing               | False                 | False            | True                 |
+	  | 15274	| ujethwa | Member22 | DMURRAY911    | PDP      | Walgreen_Pharmacylocator    | 80001   | 10       | Long-term care                   | False                  | True             | True                 |
 
 
   @prod_pharmacylocator3 @E2E @Chinese @PharmacyDistanceDefaultZip @ValidateLanguageandZIPcode @ZipCodeErrorMessages
@@ -212,8 +212,8 @@ Feature: 1.11 Member Pharmacy Locator tool Page- Member Auth - PROD
 
 	Examples: 
 	  | TID 	| username  | password  | MemUserName     | planType | memberType         		 | zipcode | distance | pharmacyType                | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
-	  | 15273	| ujethwa | 221Umang | DSOADY17    | MAPD     | IndAARPMAPD_Pharmacylocator | 85215   | 15       | Open 24 hours               | False                 | False            | True                 |
-	  | 15295	| ujethwa | 221Umang | DMURRAY911    | PDP      | Walgreen_Pharmacylocator  	 | 80001   | 10       | Long-term care              | True                  | True             | True                 |
+	  | 15273	| ujethwa | Member22 | DSOADY17    | MAPD     | IndAARPMAPD_Pharmacylocator | 85215   | 15       | Open 24 hours               | False                 | False            | True                 |
+	  | 15295	| ujethwa | Member22 | DMURRAY911    | PDP      | Walgreen_Pharmacylocator  	 | 80001   | 10       | Long-term care              | True                  | True             | True                 |
 
   @prod_pharmacylocator4 @E2E @Chinese @PharmacyDistanceDefaultZip @ValidateLanguageandZIPcode @ZipCodeErrorMessages
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Part 2 of 2 - To verify end-to-end behavior for pharmacy locator Chinese page on member site
@@ -250,8 +250,8 @@ Feature: 1.11 Member Pharmacy Locator tool Page- Member Auth - PROD
 
 	Examples: 
 	  | TID 	| username  | password  | MemUserName     | planType | memberType         		 | zipcode | distance | pharmacyType                | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
-	  | 15273	| ujethwa | 221Umang | DSOADY17    | MAPD     | IndAARPMAPD_Pharmacylocator | 85215   | 15       | Open 24 hours               | False                 | False            | True                 |
-	  | 15295	| ujethwa | 221Umang | DMURRAY911   | PDP      | Walgreen_Pharmacylocator  	 | 80001   | 10       | Long-term care              | False                  | True             | True                 |
+	  | 15273	| ujethwa | Member22 | DSOADY17    | MAPD     | IndAARPMAPD_Pharmacylocator | 85215   | 15       | Open 24 hours               | False                 | False            | True                 |
+	  | 15295	| ujethwa | Member22 | DMURRAY911   | PDP      | Walgreen_Pharmacylocator  	 | 80001   | 10       | Long-term care              | False                  | True             | True                 |
 
 
   @prod_pharmacylocator5 @E2E @Spanish @PharmacyDistanceDefaultZip @ValidateLanguageandZIPcode @ZipCodeErrorMessages
@@ -303,8 +303,8 @@ Feature: 1.11 Member Pharmacy Locator tool Page- Member Auth - PROD
 
 	Examples: 
 	  | TID 	| username  | password  | MemUserName     | planType | memberType         		 | zipcode | distance | pharmacyType                | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
-	  | 15273	| ujethwa | 221Umang | DSOADY17    | MAPD     | IndAARPMAPD_Pharmacylocator | 85215   | 15       | Open 24 hours               | False                 | False            | True                 |
-	  | 15295	| ujethwa | 221Umang | DMURRAY911    | PDP      | Walgreen_Pharmacylocator  	 | 80001   | 10       | Long-term care              | True                  | False             | True                 |
+	  | 15273	| ujethwa | Member22 | DSOADY17    | MAPD     | IndAARPMAPD_Pharmacylocator | 85215   | 15       | Open 24 hours               | False                 | False            | True                 |
+	  | 15295	| ujethwa | Member22 | DMURRAY911    | PDP      | Walgreen_Pharmacylocator  	 | 80001   | 10       | Long-term care              | True                  | False             | True                 |
 
 
   @prod_pharmacylocator6 @E2E @Spanish @PharmacyDistanceDefaultZip @ValidateLanguageandZIPcode @ZipCodeErrorMessages
@@ -342,8 +342,8 @@ Feature: 1.11 Member Pharmacy Locator tool Page- Member Auth - PROD
 
 	Examples: 
 	  | TID 	| username  | password  | MemUserName     | planType | memberType         		 | zipcode | distance | pharmacyType                | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
-	  | 15273	| ujethwa | 221Umang | DSOADY17    | MAPD     | IndAARPMAPD_Pharmacylocator | 85215   | 15       | Open 24 hours               | False                 | False            | True                 |
-	  | 15295	| ujethwa | 221Umang | DMURRAY911   | PDP      | Walgreen_Pharmacylocator  	 | 80001   | 10       | Long-term care              | False                  | True             | True                 |
+	  | 15273	| ujethwa | Member22 | DSOADY17    | MAPD     | IndAARPMAPD_Pharmacylocator | 85215   | 15       | Open 24 hours               | False                 | False            | True                 |
+	  | 15295	| ujethwa | Member22 | DMURRAY911   | PDP      | Walgreen_Pharmacylocator  	 | 80001   | 10       | Long-term care              | False                  | True             | True                 |
 
 
   @prod_pharmacylocator7 @NegativeScenario 
@@ -364,5 +364,5 @@ Feature: 1.11 Member Pharmacy Locator tool Page- Member Auth - PROD
 
 	Examples: 
 	  | TID   | username  | password  | MemUserName     | planType | memberType        		 |
-	  | 15272 | ujethwa | 221Umang | TOMIKOARMER2    | MA       | IndAARPMA_Pharmacylocator |
-	  | 15272 | ujethwa | 221Umang | kataz2525    | SHIP     | IndSHIP_Pharmacylocator   |
+	  | 15272 | ujethwa | Member22 | TOMIKOARMER2    | MA       | IndAARPMA_Pharmacylocator |
+	  | 15272 | ujethwa | Member22 | kataz2525    | SHIP     | IndSHIP_Pharmacylocator   |
