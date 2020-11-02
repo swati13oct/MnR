@@ -86,22 +86,18 @@ Then user validates whether chat Agent is not Available
       | resources/ma-resources-materials/ma-information-forms/member-rights.html            |AARP|
       | resources/ma-resources-materials/ma-information-forms/medicare-appeal.html          |AARP|
       #| health-plans/resources/pdp-resources-materials/pdp-information-forms/medicare-disenrollment.html | 
-      | resources/disenrollment-information.html                                            | 
+      | resources/disenrollment-information.html                                            | AARP|
       | health-plans.html?zipcode=90210&deepLink=favPlansDeepLink&plantype=MA&year=2020&planId=H0543168000&planYear=2020&systemYear=2020&zipcode=90210&fipsCode=037&product=MAPD&yearDisclaimer=undefined&month=2&yearToggle=undefined&deepLink=plandetail&WT.mc_id=8016371&mrcid=em:Acq:MR%7cFederal%7cEGEM3011%7c::8016371!/details |   AARP|                           
       | health-plans.html?zipcode=28035&deepLink=favPlansDeepLink&plantype=MA&year=2020&planId=H5253041000&planYear=2020&systemYear=2020&zipcode=28035&fipsCode=119&product=MAPD&yearDisclaimer=undefined&month=2&yearToggle=undefined&deepLink=plandetail&WT.mc_id=897749&mrcid=em:Acq:MR%7cFederal%7cEGEM3011%7c::897749!/details   | AARP|
       | health-plans.html?zipcode=55344&deepLink=favPlansDeepLink&plantype=MA&year=2020&planId=S5921370000&planYear=2020&systemYear=2020&zipcode=55344&fipsCode=053&product=MAPD&yearDisclaimer=undefined&month=2&yearToggle=undefined&deepLink=plandetail&WT.mc_id=8016371&mrcid=em:Acq:MR%7cFederal%7cEGEM3011%7c::8016371!/details | AARP|
       | health-plans.html?zipcode=10011&deepLink=favPlansDeepLink&plantype=MA&year=2020&planId=H3307018000&planYear=2020&systemYear=2020&zipcode=10011&fipsCode=061&product=MAPD&yearDisclaimer=undefined&month=2&yearToggle=undefined&deepLink=plandetail&WT.mc_id=897749&mrcid=em:Acq:MR%7cFederal%7cEGEM3011%7c::897749!/details   | AARP|
       | health-plans.html?gclid=EAIaIQobChMI3PKJmZKJ3QIVBqZpCh2ROgj7EAAYAiAAEgKDjPD_BwE&mrcid=ps%253Agoogle%253Aportfolio+ma+ma%257CCofund%257CBrand%253AUHC%253A07.26.18%253A8004731&zipcode=63043&WT.mc_id=8004731!/plan-summary                                                                                                    |AARP|
       | health-plans/medicare-advantage-plans/available-plans.html?WT.mc_id=897506&zipcode=96795&county=020&state=12&originatingSite=https%3A%2F%2Fwww.myuhcplans.com%2Featon&subdomain=eaton!/plan-summary                                                                                                                           | AARP|
-      #| health-plans/estimate-drug-costs.html!/drug-cost-estimator |AARP|
-      #| health-plans/aarp-pharmacy.html!/Pharmacy-Search-English   | AARP|
-      #| medicare-plans.html                                        | AARP|
       | profile/guest                                              | AARP|
       | about-us.html                 |AARP|
       | sitemap.html                  | AARP|
       | terms-of-use.html             | AARP|
       | disclaimer.html               | AARP|
-     # | health-insurance-brokers.html |
       | contact-us.html               | AARP|
       | privacy-policy.html           |AARP|
 			
@@ -154,7 +150,7 @@ Then user validates whether chat Agent is not Available
       | resources/ma-resources-materials/ma-information-forms/member-rights.html            |UHC|
       | resources/ma-resources-materials/ma-information-forms/medicare-appeal.html          |UHC|
       #| health-plans/resources/pdp-resources-materials/pdp-information-forms/medicare-disenrollment.html | 
-      | resources/disenrollment-information.html                                            | 
+      | resources/disenrollment-information.html                                            | UHC|
       | health-plans.html?zipcode=90210&deepLink=favPlansDeepLink&plantype=MA&year=2020&planId=H0543168000&planYear=2020&systemYear=2020&zipcode=90210&fipsCode=037&product=MAPD&yearDisclaimer=undefined&month=2&yearToggle=undefined&deepLink=plandetail&WT.mc_id=8016371&mrcid=em:Acq:MR%7cFederal%7cEGEM3011%7c::8016371!/details |   UHC|                           
       | health-plans.html?zipcode=28035&deepLink=favPlansDeepLink&plantype=MA&year=2020&planId=H5253041000&planYear=2020&systemYear=2020&zipcode=28035&fipsCode=119&product=MAPD&yearDisclaimer=undefined&month=2&yearToggle=undefined&deepLink=plandetail&WT.mc_id=897749&mrcid=em:Acq:MR%7cFederal%7cEGEM3011%7c::897749!/details   | UHC|
       | health-plans.html?zipcode=55344&deepLink=favPlansDeepLink&plantype=MA&year=2020&planId=S5921370000&planYear=2020&systemYear=2020&zipcode=55344&fipsCode=053&product=MAPD&yearDisclaimer=undefined&month=2&yearToggle=undefined&deepLink=plandetail&WT.mc_id=8016371&mrcid=em:Acq:MR%7cFederal%7cEGEM3011%7c::8016371!/details | UHC|
