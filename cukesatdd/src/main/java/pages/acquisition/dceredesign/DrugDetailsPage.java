@@ -2,7 +2,6 @@ package pages.acquisition.dceredesign;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,10 +10,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Assert;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
@@ -27,7 +24,6 @@ import gherkin.formatter.model.DataTableRow;
 import pages.acquisition.ulayer.PageTitleConstants;
 import pages.acquisition.commonpages.PlanDetailsPage;
 import pages.acquisition.commonpages.VPPPlanSummaryPage;
-import pages.acquisition.commonpages.VisitorProfilePage;
 
 public class DrugDetailsPage extends UhcDriver {
 
@@ -203,12 +199,6 @@ public class DrugDetailsPage extends UhcDriver {
 	
 	@FindBy(xpath = "//*[contains(@id,'edityourdrug')]")
 	public WebElement editDrugListLink;
-	
-	@FindBy(id="dupIconFlyOut")
-	private WebElement favoriteIcon;
-	
-	@FindBy(xpath="//*[@class='flyout']//div[contains(@class,'success')]")
-	private WebElement favoriteSuccess;
 	
 	public DrugDetailsPage(WebDriver driver) {
 		super(driver);
@@ -781,38 +771,10 @@ public class DrugDetailsPage extends UhcDriver {
 		return null;
 	}
 
-	public BuildYourDrugList clickOnEditDrugListLink() {
+	public GetStartedPage clickOnEditDrugListLink() {
 
 		jsClickNew(editDrugListLink);
 		
-		return new BuildYourDrugList(driver);
-	}
-	
-	public void savePlan(String planName)
-	{
-		WebElement savePlan = driver
-				.findElement(By.xpath("//button[contains(@id,'saveBtn')]"));
-		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(false);", savePlan);
-		((JavascriptExecutor) driver).executeScript("arguments[0].click();", savePlan);
-		
-		Actions action = new Actions(driver);
-		WebElement element = favoriteIcon;
-		action.moveToElement(element).perform();
-		waitforElementNew(favoriteSuccess,30);
-		System.out.println(favoriteSuccess.getText());
-		
-	}
-	
-	public VisitorProfilePage navigateToVisitorProfilePage() {
-		waitforElement(favoriteIcon);
-//		shoppingCartIcon.click();
-		jsClickNew(favoriteIcon);
-		waitForPageLoadSafari();
-		if(driver.getCurrentUrl().contains("profile")) {
-			return new VisitorProfilePage(driver);
-		}else {
-			System.out.println("Navigation to visitor profile is failed");
-			return null;
-		}
+		return new GetStartedPage(driver);
 	}
 }

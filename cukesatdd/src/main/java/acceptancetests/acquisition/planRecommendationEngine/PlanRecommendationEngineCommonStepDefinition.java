@@ -231,22 +231,6 @@ public class PlanRecommendationEngineCommonStepDefinition {
 		
 		getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
    	}
-	
-	@Then("^user selects add drug option on Drug page$")
-   	public void add_drugs_page(DataTable givenAttributes) {
-		List<DataTableRow> givenAttributesRow = givenAttributes.getGherkinRows();
-		Map<String, String> givenAttributesMap = new HashMap<String, String>();
-		for (int i = 0; i < givenAttributesRow.size(); i++) {
-
-			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
-					givenAttributesRow.get(i).getCells().get(1));
-		}
-		
-   		PlanRecommendationEngineDrugsPage planSelectorDrugspage =  new PlanRecommendationEngineDrugsPage(wd);
-   		planSelectorDrugspage.drugsInitiate(givenAttributesMap.get("Drug Selection"));
-   		planSelectorDrugspage.drugsHandlerWithdetails(givenAttributesMap.get("Drug Details"));
-   		planSelectorDrugspage.continueNextpage();
-   	}
 
 }
 	

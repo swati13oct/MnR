@@ -575,17 +575,7 @@ public class ReviewSubmitPage extends UhcDriver{
 		boolean flag = true;
 		
 		String Expected_PlanYear_PlanName = Expected_PlanYear+" "+Expected_PlanName;
-		
-		validateNew(PlanYear_NameDisplay);
-		String PlanNameDisplayed = PlanYear_NameDisplay.getText();
-		if(PlanNameDisplayed.contains(Expected_PlanYear_PlanName)){
-			flag = (!flag)?false:true;
-			System.out.println(Expected_PlanYear_PlanName+" : "+PlanNameDisplayed+" : "+flag);
-		}else flag =false;
-		
-		//flag=validateText(PlanYear_NameDisplay,Expected_PlanYear_PlanName);
-		//String PlanYear_NameDisplayed = PlanYear_NameDisplay.getText().replaceAll("-", "");
-		//flag=validateText(PlanYear_NameDisplayed,Expected_PlanYear_PlanName);
+		flag=validateText(PlanYear_NameDisplay,Expected_PlanYear_PlanName);
 		String Zip = "ZIP: "+Expected_ZipCode;
 		flag&=validateText(PlanZipDisplay,Zip);
 		flag&=validateText(FirstNameDisplay,FirstName);

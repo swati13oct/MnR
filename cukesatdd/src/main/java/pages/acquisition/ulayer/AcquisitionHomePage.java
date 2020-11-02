@@ -4,9 +4,7 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
 import java.util.concurrent.TimeUnit;
 import java.io.File;
 import org.json.JSONException;
@@ -2591,63 +2589,4 @@ public class AcquisitionHomePage extends GlobalWebElements {
      	    	
      		return new PlanDocsPage(driver);
 	 }
-
-	@FindBy(xpath="(//*[contains(text(),'Sign in')])[1]")
-	private WebElement memberSignInPage; 
-	
-	@FindBy(xpath="//a[contains(@href,'https://www.aarpmedicareplans.com/health-plans.html?WT.mc_id=8009508')]")
-	private WebElement ViewMedicareplanlinks; 
-	
-	public void clickonmemberSignInlink(String ExpectedmemberSigninURL) {
-		validateNew(memberSignInPage);
-		CommonUtility.waitForPageLoadNew(driver, memberSignInPage, 30);
-		String parentWindow = driver.getWindowHandle();
-		memberSignInPage.click();
-		sleepBySec(3);
-		Set<String> tabs_windows = driver.getWindowHandles();
-		Iterator<String> itr = tabs_windows.iterator();
-		while(itr.hasNext()) {
-			String window = itr.next();
-			if(!parentWindow.equals(window)) {
-				driver.switchTo().window(window);
-			}
-		}
-		
-		CommonUtility.checkPageIsReadyNew(driver);
-		String CurrentmemberSigninURL = driver.getCurrentUrl();
-		String ActualmemberSigninURL=CurrentmemberSigninURL.substring(0, 29).trim();
-		System.out.println("memberSignin Page is displayed : "+ActualmemberSigninURL);
-		System.out.println("Expected member signin URL: "+ExpectedmemberSigninURL);
-		System.out.println("Actual member signin URL: "+ActualmemberSigninURL);
-
-		if(ExpectedmemberSigninURL.equalsIgnoreCase(ActualmemberSigninURL)) {
-			System.out.println("****************member signin Page is displayed  ***************");
-
-			Assert.assertTrue(true);
-		}
-		else {
-			Assert.fail("****************member signin Page is not loaded ***************");
-		}
-	
-	//	ViewMedicareplanlinks.click();	
-		CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
-		validateNew(ViewMedicareplanlinks);
-		switchToNewTabNew(ViewMedicareplanlinks);
-		sleepBySec(15);
-		if (driver.getCurrentUrl().contains("plan-summary")) {
-			//return new ProviderSearchPage(driver);
-		}
-		//return null;
-		
-	}
-
-	public void sleepBySec(int sec) {
-					try {
-						Thread.sleep(sec*1000);
-					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-			}		
-
-				}	
 }

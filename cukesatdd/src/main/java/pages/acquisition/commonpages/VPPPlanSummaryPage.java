@@ -2721,9 +2721,10 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	public VPPPlanSummaryPage navagateToShopAPlanAndFindZipcode(String zipcode, String countyName, String isMultiCounty) {
 		System.out.println("Proceed to go to top menu to select 'Shop A Plan' option and enter zipcode '"+zipcode+"' to find plan");
-		Actions builder = new Actions(driver);
-		Action mouseOverButton = builder.moveToElement(topMenushopForAPlanOption).build();
-		mouseOverButton.perform();
+//		Actions builder = new Actions(driver);
+//		Action mouseOverButton = builder.moveToElement(topMenushopForAPlanOption).build();
+//		mouseOverButton.perform();
+		jsMouseOver(topMenushopForAPlanOption);
 		shopForAPlanOptionZipcodeFieldBox.sendKeys(zipcode);
 		sleepBySec(1);
 		shopForAPlanOptionFindPlanButton.click();
@@ -3689,7 +3690,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		}
 		return false;
 	}
-	
+
 	public boolean verifyAllAddedDrugName(String planName, String drugName) {
 		WebElement drugLinkDropdown = driver.findElement(By.xpath("//*[contains(text(),'" + planName
 				+ "')]/ancestor::div[contains(@class, 'module-plan-overview module')]//*[contains(@id,'drug-list-title-')]"));
