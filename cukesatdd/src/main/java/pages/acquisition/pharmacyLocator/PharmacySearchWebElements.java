@@ -2,6 +2,7 @@ package pages.acquisition.pharmacyLocator;
 
 import java.util.List;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -227,6 +228,8 @@ public class PharmacySearchWebElements extends UhcDriver {
 
 	@FindBy(className = "loading-block")
 	protected WebElement loadingImage;
+	
+	protected By loadingSpinner = By.className("loading-block");
 
 	@FindBy(xpath="//a[@id='filter_toggle_id']")
 	protected WebElement moveAwayFromTooltip;
