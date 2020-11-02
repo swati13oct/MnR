@@ -212,4 +212,19 @@ Feature: To test Organic SearchCampaign TFN on AARP site
       | site   | Precedence1PSC | Precedence2PSC |memberSignIn| SAMiconTFN |
    		| ulayer |         810027 |         8009508 |https://www.medicare.uhc.com/  |//*[contains(@class,'sam__button__text desktop-tfn-text')]  | 
   
-  
+   @Scenario4_7Campaign_Trafic_Member_AARP
+   Scenario Outline: 4.7 Campaign traffic from Member page to Acquisition Portals for AARP
+  Given the user is on AARP medicare acquisition site landing page
+    And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
+    Then the user validates PSC code
+      | PSC Code | <pscCode1> |
+      Given user is on Google and search AARP Medicare Advantage Plan to navigate to AARP page
+   And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
+    Then the user validates PSC code
+      | PSC Code | <pscCode2> |
+      Then the user validate the sam icons tfn with federal TFN on Acquistion page
+      | TFN Xpath | <SAMiconTFN> |
+       Examples: 
+      | pscCode1 | pscCode2         |SAMiconTFN                                                 |
+      |  880180  |  880188          |//button[@id='sam-call-button']//*[contains(@class,'sam__button__text desktop')] |
+      
