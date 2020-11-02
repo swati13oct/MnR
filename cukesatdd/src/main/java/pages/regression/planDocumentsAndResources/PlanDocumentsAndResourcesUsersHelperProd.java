@@ -3332,16 +3332,16 @@ public class PlanDocumentsAndResourcesUsersHelperProd {
 		if (section.equals("Provider and Pharmacy Directories") || section.equals("Provider Directory") || section.equals("Pharmacy Directory")) {//note: PD
 			if (subSection.equals("EN-currentYear")) {
 				targetTestDocList = new ArrayList<String>();
-				targetTestDocList.add("Provider Directory");
-				targetTestDocList.add("Vendor Information Sheet");
-				targetTestDocList.add("Pharmacy Directory Information");
+				//targetTestDocList.add("Provider Directory");
+				//targetTestDocList.add("Vendor Information Sheet");
+				//targetTestDocList.add("Pharmacy Directory Information");
 				return targetTestDocList;
 			} 
 			if (subSection.equals("ES-currentYear")) {
 				targetTestDocList = new ArrayList<String>();
-				targetTestDocList.add("Directorio de Proveedores");
-				targetTestDocList.add("Vendor Information Sheet"); 
-				targetTestDocList.add("Informaci.n del Directorio de Farmacia"); //note: regex
+				//targetTestDocList.add("Directorio de Proveedores");
+				//targetTestDocList.add("Vendor Information Sheet"); 
+				//targetTestDocList.add("Informaci.n del Directorio de Farmacia"); //note: regex
 				return targetTestDocList;
 			} 
 			if (subSection.equals("ZH-currentYear")) {
