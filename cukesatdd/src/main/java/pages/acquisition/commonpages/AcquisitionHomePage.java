@@ -2083,9 +2083,10 @@ public class AcquisitionHomePage extends GlobalWebElements {
 				// && FAQLink.isDisplayed()
 				Assert.assertTrue(true);
 				System.out.println("Sub Nav - Learn about Medicare - All links and element displayed on Page");
-				Actions actions = new Actions(driver);
-				actions.moveToElement(AARPlogo);
-				actions.build().perform();
+//				Actions actions = new Actions(driver);
+//				actions.moveToElement(AARPlogo);
+//				actions.build().perform();
+				jsMouseOver(AARPlogo);
 			} else {
 				Assert.fail("Sub Nav - Learn about Medicare - All links and element not found / displayed on page");
 			}
