@@ -625,7 +625,9 @@ public class PlanRecommendationEngineHeaderAndFooter extends UhcDriver {
 	public void navigationToPlanRecommendationEngineViaShopTools() {
 		validate(headerNavigationBarShopForaPlanTab, 45);
 //		actions.clickAndHold(headerNavigationBarShopForaPlanTab).build().perform();
-		desktopCommonUtils.MouseOver(headerNavigationBarShopForaPlanTab, Browsername);
+		//desktopCommonUtils.MouseOver(headerNavigationBarShopForaPlanTab, Browsername);
+		jsMouseOver(headerNavigationBarShopForaPlanTab);
+		jsClickNew(headerNavigationBarShopForaPlanTab);
 		headerShopLink.click();
 		validate(HeaderShopFromHomeInFindYourPlan, 30);
 		HeaderShopFromHomeInFindYourPlan.click();
