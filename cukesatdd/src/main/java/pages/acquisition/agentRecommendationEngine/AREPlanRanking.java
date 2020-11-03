@@ -449,7 +449,8 @@ public class AREPlanRanking extends UhcDriver {
 			comparePlanlink.click();
 		} else {
 			scrollToView(planInPDP);
-			planInPDP.click();
+			//planInPDP.click();
+			jsClickNew(planInPDP);
 			pageloadcomplete();
 			actualplanName = planNameEnrollPage.getText().trim();
 			System.out.println("Plan Name in Plan Enroll Page: " + actualplanName);
