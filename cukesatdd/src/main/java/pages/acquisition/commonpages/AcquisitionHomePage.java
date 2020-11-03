@@ -2472,7 +2472,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			for (int i = 2; i < sizeofpages; i++) {
 				System.out.println("@@Inside pagination click@@@");
 				threadsleep(5);
-				driver.findElement(By.xpath("(//*[@class='pagination']/li/a)[" + i + "]")).click();
+				//driver.findElement(By.xpath("(//*[@class='pagination']/li/a)[" + i + "]")).click();
+				jsClickNew(driver.findElement(By.xpath("(//*[@class='pagination']/li/a)[" + i + "]")));
 				CommonUtility.waitForPageLoadNew(driver, SearchResultsCount, 30);
 				this.validateFifteenResults();
 				threadsleep(5);
