@@ -287,6 +287,7 @@ public ComparePlansPage providerfromPrimaryCare() throws Exception {
 	 * }
 	 */
 	
+	driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);		//Added because below findelements throws timeout exception if element not found
 	if(driver.findElements(By.xpath("(//button[contains(text(),'Check Provider Coverage')])[1]")).size() > 0){
 		System.out.println("OLD Rally page displayed");
 		ParentWindow = driver.getTitle();
@@ -298,6 +299,9 @@ public ComparePlansPage providerfromPrimaryCare() throws Exception {
 		FinishButton.click();
 	}else
 		System.out.println("Issue with Xpath");
+	//note: setting the implicit wait back to default value - 10
+	driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+	
 	driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
 	if (currentUrl().contains("/health-plans.html#/plan-compare"))
 		return new ComparePlansPage(driver);
