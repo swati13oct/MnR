@@ -1273,7 +1273,8 @@ public class PlanDetailsPage extends UhcDriver {
 		try {
 			Thread.sleep(5000);
 			if (optionalRider)
-				dentalPopupOptionalRidersLink.click();
+				//dentalPopupOptionalRidersLink.click();
+				jsClickNew(dentalPopupOptionalRidersLink);
 			else {
 				JavascriptExecutor jse = (JavascriptExecutor) driver;
 //				jse.executeScript("arguments[0].scrollIntoView(true);", dentalPopupLink);
