@@ -1049,13 +1049,15 @@ public class AREPlanRanking extends UhcDriver {
 
 	public void disableDrugOriginalPlans(String curPlan, String changeOrder, String rankOptions, String planOrders) {
 		System.out.println("Verify Drug option disabled after deleting drugs in DCE");
-		Actions action = new Actions(driver);
+		//Actions action = new Actions(driver);
 		scrollToView(print);
 		scrollToView(AddDoctorsLink);
 		threadsleep(3000);
 		scrollToView(Logo);
-		action.moveToElement(planRankingDropdown).perform();
-		action.moveToElement(planRankingDropdown).click().perform();
+		//action.moveToElement(planRankingDropdown).perform();
+		//action.moveToElement(planRankingDropdown).click().perform();
+		jsMouseOver(planRankingDropdown);
+		jsClickNew(planRankingDropdown);
 		drugDocDisable(rankOptions, false);
 		compareCurrentOriginalPlan(curPlan, changeOrder, planOrders);
 	}
