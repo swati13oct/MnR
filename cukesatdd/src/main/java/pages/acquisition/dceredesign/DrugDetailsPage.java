@@ -865,7 +865,7 @@ public class DrugDetailsPage extends UhcDriver {
 		System.out.println("Preferred Retail Pharmacy Modal Text : "+WhytheseAmountsText);
 		validateNew(ModalClose);
 		jsClickNew(ModalClose);
-		if(WhytheseAmountsText.contains("Preferred Retail")) {
+		if(WhytheseAmountsText.contains("Preferred Pharmacy Network")) {
 			Assert.assertTrue("Preferred Retail Pharmacy Copay and Modals validated", true);
 		}
 		else
@@ -881,7 +881,7 @@ public class DrugDetailsPage extends UhcDriver {
 		System.out.println("Standard Retail Pharmacy Modal Text : "+WhytheseAmountsText);
 		validateNew(ModalClose);
 		jsClickNew(ModalClose);
-		if(WhytheseAmountsText.contains("Standard Retail")) {
+		if(WhytheseAmountsText.contains("Standard Pharmacy Network")) {
 			Assert.assertTrue("Standard Retail Pharmacy Copay and Modals validated", true);
 		}
 		else
