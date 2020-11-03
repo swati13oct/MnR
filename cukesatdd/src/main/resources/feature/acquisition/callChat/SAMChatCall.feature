@@ -365,7 +365,7 @@ Examples:
 			| pagename |site|
       | shop.html          | AARP|
       | shop/connect       | AARP|
-      | shop/compare.html  | AARP|
+   #   | shop/compare.html  | AARP|
       | shop/estimate.html | AARP|
       | shop/switch.html   |  AARP|
       | shop/medicare-advantage-plans.html  | AARP|
@@ -380,7 +380,7 @@ Examples:
       | enroll.html                | AARP|
       | enroll/ma-enrollment.html  |AARP|
       | enroll/pdp-enrollment.html | AARP|
-      | resources.html                                       |AARP|
+    #  | resources.html                                       |AARP|
       | resources/medication-therapy-management-program.html |AARP| 
       | resources/how-to-appoint-a-representative.html       | AARP|
       | resources/prescription-drug-costs-help.html          | AARP|
@@ -412,10 +412,10 @@ Examples:
 			|medicare-articles.html                                 |AARP|
 			|medicare-articles/medicare-made-clear.html             |AARP|
       |medicare-articles/eligibility-and-enrollment.html      |AARP|
-      |medicare-articles/medicare-benefits-and-coverage.html  |AARP|
+     # |medicare-articles/medicare-benefits-and-coverage.html  |AARP|
       |medicare-articles/medicare-costs.html                  |AARP|
-      |medicare-articles/shopping-for-medicare.html           |AARP|
-      |medicare-articles/medicare-when-working-past-65.html   |AARP|
+    #  |medicare-articles/shopping-for-medicare.html           |AARP|
+    #  |medicare-articles/medicare-when-working-past-65.html   |AARP|
       
        @samChatRegressionUHC7
       Examples: 
@@ -436,9 +436,9 @@ Examples:
 			| pagename |site|
       | shop.html          | UHC|
       | shop/connect       | UHC|
-      | shop/compare.html  | UHC|
+     # | shop/compare.html  | UHC|
       | shop/estimate.html | UHC|
-      | shop/switch.html   |  UHC|
+    #  | shop/switch.html   |  UHC|
       | shop/medicare-advantage-plans.html  | UHC|
       | shop/medicare-supplement-plans.html | UHC|
       | shop/prescription-drug-plans.html   |UHC| 
@@ -451,7 +451,7 @@ Examples:
       | enroll.html                | UHC|
       | enroll/ma-enrollment.html  |UHC|
       | enroll/pdp-enrollment.html | UHC|
-      | resources.html                                       |UHC|
+    #  | resources.html                                       |UHC|
       | resources/medication-therapy-management-program.html |UHC| 
       | resources/how-to-appoint-a-representative.html       | UHC|
       | resources/prescription-drug-costs-help.html          | UHC|
@@ -483,8 +483,8 @@ Examples:
 			|medicare-articles.html                                 |UHC|
 			|medicare-articles/medicare-made-clear.html             |UHC|
       |medicare-articles/eligibility-and-enrollment.html      |UHC|
-      |medicare-articles/medicare-benefits-and-coverage.html  |UHC|
+    #  |medicare-articles/medicare-benefits-and-coverage.html  |UHC|
       |medicare-articles/medicare-costs.html                  |UHC|
-      |medicare-articles/shopping-for-medicare.html           |UHC|
-      |medicare-articles/medicare-when-working-past-65.html   |UHC|
+   #   |medicare-articles/shopping-for-medicare.html           |UHC|
+     # |medicare-articles/medicare-when-working-past-65.html   |UHC|
    
