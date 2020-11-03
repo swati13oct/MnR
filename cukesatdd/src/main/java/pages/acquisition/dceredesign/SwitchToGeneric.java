@@ -75,7 +75,6 @@ public class SwitchToGeneric extends UhcDriver {
 		validateNew(SwitchPageCloseBtn);
 		validateNew(AddDrugBtn);
 		validateNew(supplyLengthDrpDwn);
-		validateNew(FrequentyDrpDwn);
 		validateNew(QuantityTxt);
 	}
 

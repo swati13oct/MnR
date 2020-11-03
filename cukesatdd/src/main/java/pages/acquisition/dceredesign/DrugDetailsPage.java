@@ -861,19 +861,32 @@ public class DrugDetailsPage extends UhcDriver {
 		validateNew(WhytheseAmountsLink);
 		jsClickNew(WhytheseAmountsLink);
 		validateNew(WhytheseAmountsModal);
-		System.out.println("Preferred Retail Modal Text : "+ModalBodyText.getText());
+		String WhytheseAmountsText = ModalBodyText.getText();
+		System.out.println("Preferred Retail Pharmacy Modal Text : "+WhytheseAmountsText);
 		validateNew(ModalClose);
 		jsClickNew(ModalClose);
+		if(WhytheseAmountsText.contains("Preferred Retail")) {
+			Assert.assertTrue("Preferred Retail Pharmacy Copay and Modals validated", true);
+		}
+		else
+			Assert.fail("Preferred Retail Pharmacy Copay and Modals NOT validated");
+
 	}
 	
 	public void validateStandardRetailCopaySection() {
 		validateNew(CopaySection);
 		validateNew(WhytheseAmountsLink);
 		jsClickNew(WhytheseAmountsLink);
-		validateNew(WhytheseAmountsModal);
-		System.out.println("Standard Retail Pharmacy Modal Text : "+ModalBodyText.getText());
+		String WhytheseAmountsText = ModalBodyText.getText();
+		System.out.println("Standard Retail Pharmacy Modal Text : "+WhytheseAmountsText);
 		validateNew(ModalClose);
 		jsClickNew(ModalClose);
+		if(WhytheseAmountsText.contains("Standard Retail")) {
+			Assert.assertTrue("Standard Retail Pharmacy Copay and Modals validated", true);
+		}
+		else
+			Assert.fail("Standard Retail Pharmacy Copay and Modals NOT validated");
+
 	}
 
 	public void validateStandardMailCopaySection() {
@@ -881,16 +894,22 @@ public class DrugDetailsPage extends UhcDriver {
 		validateNew(WhytheseAmountsLink);
 		jsClickNew(WhytheseAmountsLink);
 		validateNew(WhytheseAmountsModal);
-		System.out.println("Standard Retail Pharmacy Modal Text : "+ModalBodyText.getText());
+		String WhytheseAmountsText = ModalBodyText.getText();
+		System.out.println("Standard Mail Pharmacy Modal Text : "+WhytheseAmountsText);
 		validateNew(ModalClose);
 		jsClickNew(ModalClose);
-	
 		validateNew(WhyNAlink);
 		jsClickNew(WhyNAlink);
 		validateNew(WhyNAModal);
-		System.out.println("Standard Retail Pharmacy Modal Text : "+ModalBodyText.getText());
+		String WhyNAText = ModalBodyText.getText();
+		System.out.println("Standard Mail Pharmacy Modal Text : "+WhyNAText);
 		validateNew(ModalClose);
 		jsClickNew(ModalClose);
+		if(WhytheseAmountsText.contains("Standard Mail Service") && WhyNAText.contains("Mail Service")) {
+			Assert.assertTrue("Standard Mail Pharmacy Copay and Modals validated", true);
+		}
+		else
+			Assert.fail("Standard Mail Pharmacy Copay and Modals NOT validated");
 
 	}
 	
@@ -900,17 +919,24 @@ public class DrugDetailsPage extends UhcDriver {
 		validateNew(WhytheseAmountsLink);
 		jsClickNew(WhytheseAmountsLink);
 		validateNew(WhytheseAmountsModal);
-		System.out.println("Standard Retail Pharmacy Modal Text : "+ModalBodyText.getText());
+		String WhytheseAmountsText = ModalBodyText.getText();
+		System.out.println("Preferred Mail Pharmacy Modal Text : "+WhytheseAmountsText);
 		validateNew(ModalClose);
 		jsClickNew(ModalClose);
 	
 		validateNew(WhyNAlink);
 		jsClickNew(WhyNAlink);
 		validateNew(WhyNAModal);
-		System.out.println("Standard Retail Pharmacy Modal Text : "+ModalBodyText.getText());
+		String WhyNAText = ModalBodyText.getText();
+
+		System.out.println("Preferred Mail Pharmacy Modal Text : "+WhyNAText);
 		validateNew(ModalClose);
 		jsClickNew(ModalClose);
-
+		if(WhytheseAmountsText.contains("Preferred Mail Service") && WhyNAText.contains("Mail Service")) {
+			Assert.assertTrue("Preferred Mail Pharmacy Copay and Modals validated", true);
+		}
+		else
+			Assert.fail("Preferred Mail Pharmacy Copay and Modals NOT validated");
 	}
 
 	@FindBy(xpath = "//*[contains(text(), 'Pharmacy:')]/span")
