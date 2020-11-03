@@ -81,7 +81,6 @@ Feature: To test Organic Search Campaign TFN on UHC site
     And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
     Then the user validates PSC code
       | PSC Code | <Precedence2PSC> |
-      
     Then the user navigates to following MA Plan Page URL and validate Federal TFN
       | MA URL    | <maUrl> |
       | TFN Xpath | <maTFN> |

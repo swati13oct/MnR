@@ -1356,8 +1356,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
     {             
            waitforElement(ShopForaplan);
      if (ShopForaplan.isDisplayed()) {
-            Actions action = new Actions(driver);
-            action.moveToElement(ShopForaplan).build().perform();
+//            Actions action = new Actions(driver);
+//            action.moveToElement(ShopForaplan).build().perform();
+		    jsMouseOver(ShopForaplan);
             return new ShopforaplanAARPlayer(driver);
      }
            else {
@@ -2039,9 +2040,10 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 			waitforElement(lnkLearnAboutMedicare);
 			if (lnkLearnAboutMedicare.isDisplayed()) {
-				Actions actions = new Actions(driver);
-				actions.moveToElement(lnkLearnAboutMedicare);
-				actions.build().perform();
+//				Actions actions = new Actions(driver);
+//				actions.moveToElement(lnkLearnAboutMedicare);
+//				actions.build().perform();
+				jsMouseOver(lnkLearnAboutMedicare);
 				System.out.println("Hover over Learn about Medicare completed");
 			}
 			WebElement EligibilityTxt = driver.findElement(
@@ -2081,9 +2083,10 @@ public class AcquisitionHomePage extends GlobalWebElements {
 				// && FAQLink.isDisplayed()
 				Assert.assertTrue(true);
 				System.out.println("Sub Nav - Learn about Medicare - All links and element displayed on Page");
-				Actions actions = new Actions(driver);
-				actions.moveToElement(AARPlogo);
-				actions.build().perform();
+//				Actions actions = new Actions(driver);
+//				actions.moveToElement(AARPlogo);
+//				actions.build().perform();
+				jsMouseOver(AARPlogo);
 			} else {
 				Assert.fail("Sub Nav - Learn about Medicare - All links and element not found / displayed on page");
 			}
@@ -2528,14 +2531,14 @@ public class AcquisitionHomePage extends GlobalWebElements {
 				break;
 			}
 		}
-		
-		
+
+
 		@FindBy(xpath="(//*[contains(text(),'Sign in')])[1]")
-		private WebElement memberSignInPage; 
-		
+		private WebElement memberSignInPage;
+
 		@FindBy(xpath="//a[contains(@href,'https://www.aarpmedicareplans.com/health-plans.html?WT.mc_id=8009508')]")
-		private WebElement ViewMedicareplanlinks; 
-		
+		private WebElement ViewMedicareplanlinks;
+
 		public void clickonmemberSignInlink(String ExpectedmemberSigninURL) {
 			validateNew(memberSignInPage);
 			CommonUtility.waitForPageLoadNew(driver, memberSignInPage, 30);
@@ -2550,7 +2553,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 					driver.switchTo().window(window);
 				}
 			}
-			
+
 			CommonUtility.checkPageIsReadyNew(driver);
 			String CurrentmemberSigninURL = driver.getCurrentUrl();
 			String ActualmemberSigninURL=CurrentmemberSigninURL.substring(0, 27).trim();
@@ -2566,8 +2569,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			else {
 				Assert.fail("****************member signin Page is not loaded ***************");
 			}
-		
-			ViewMedicareplanlinks.click();		
-			
+
+			ViewMedicareplanlinks.click();
+
 		}
 }
