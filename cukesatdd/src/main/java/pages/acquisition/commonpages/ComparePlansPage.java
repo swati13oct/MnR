@@ -381,6 +381,7 @@ public class ComparePlansPage extends UhcDriver {
 		JavascriptExecutor executor = (JavascriptExecutor) driver;
 		executor.executeScript("arguments[0].scrollIntoView(true);", addDrugsLink);
 		jsClickNew(addDrugsLink);
+		waitForPageLoadSafari();
 		if (validateNew(getStartedTab)) {
 			System.out.println("User is on DCE Get started Page");
 			return new GetStartedPage(driver);
