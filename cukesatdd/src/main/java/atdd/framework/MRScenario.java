@@ -1028,7 +1028,8 @@ try {
 				DesiredCapabilities capabilities = DesiredCapabilities.chrome();
 				capabilities.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
 				//System.setProperty("webdriver.chrome.driver", pathToBinary);
-				System.setProperty("webdriver.chrome.driver", "C:\\ProgramData\\Chrome_driver_80.0.3987.16\\chromedriver.exe");
+//				System.setProperty("webdriver.chrome.driver", "C:\\ProgramData\\Chrome_driver_80.0.3987.16\\chromedriver.exe");
+				System.setProperty("webdriver.chrome.driver", "C:\\Users\\amahale\\Driver\\chromedriver.exe");
 
 				webDriver = new ChromeDriver();
 				saveBean(CommonConstants.WEBDRIVER, webDriver);
@@ -1102,7 +1103,7 @@ try {
 				
 				MutableCapabilities sauceOptions = new MutableCapabilities();
 				sauceOptions.setCapability("screenResolution", "1920x1440");
-				sauceOptions.setCapability("maxDuration", 5400);
+				sauceOptions.setCapability("maxDuration", 7200);
 				sauceOptions.setCapability("idleTimeout", 200);
 
 				SafariOptions browserOptions = new SafariOptions();
