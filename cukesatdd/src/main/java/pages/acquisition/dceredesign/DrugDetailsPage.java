@@ -905,7 +905,7 @@ public class DrugDetailsPage extends UhcDriver {
 		System.out.println("Standard Mail Pharmacy Modal Text : "+WhyNAText);
 		validateNew(ModalClose);
 		jsClickNew(ModalClose);
-		if(WhytheseAmountsText.contains("Standard Mail Service") && WhyNAText.contains("Mail Service")) {
+		if(WhytheseAmountsText.contains("Standard Mail Service") && WhyNAText.contains("Tier 5 drugs cannot be filled with a mail service pharmacy")) {
 			Assert.assertTrue("Standard Mail Pharmacy Copay and Modals validated", true);
 		}
 		else
@@ -932,7 +932,7 @@ public class DrugDetailsPage extends UhcDriver {
 		System.out.println("Preferred Mail Pharmacy Modal Text : "+WhyNAText);
 		validateNew(ModalClose);
 		jsClickNew(ModalClose);
-		if(WhytheseAmountsText.contains("Preferred Mail Service") && WhyNAText.contains("Mail Service")) {
+		if(WhytheseAmountsText.contains("Preferred Mail Service") && WhyNAText.contains("Tier 5 drugs cannot be filled with a mail service pharmacy")) {
 			Assert.assertTrue("Preferred Mail Pharmacy Copay and Modals validated", true);
 		}
 		else
