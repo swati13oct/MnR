@@ -850,20 +850,26 @@ try {
 		}
 
 		threadsleep(2000);
-		WebElement currentSysTimeElement=timeJson;
-		String currentSysTimeStr=currentSysTimeElement.getText();
-		System.out.println("currentSysTimeStr="+currentSysTimeStr);
-		JSONParser parser = new JSONParser();
-		org.json.simple.JSONObject jsonObj;
-		try {
-			jsonObj = (org.json.simple.JSONObject) parser.parse(currentSysTimeStr);
-			org.json.simple.JSONObject sysTimeJsonObj = (org.json.simple.JSONObject) jsonObj; 
+		if(!MRScenario.browserName.equalsIgnoreCase("firefox")) {
+			WebElement currentSysTimeElement = timeJson;
+			String currentSysTimeStr = currentSysTimeElement.getText();
+			System.out.println("currentSysTimeStr=" + currentSysTimeStr);
+			JSONParser parser = new JSONParser();
+			org.json.simple.JSONObject jsonObj;
+			try {
+				jsonObj = (org.json.simple.JSONObject) parser.parse(currentSysTimeStr);
+				org.json.simple.JSONObject sysTimeJsonObj = (org.json.simple.JSONObject) jsonObj;
 
-			org.json.simple.JSONObject dataObj = (org.json.simple.JSONObject) sysTimeJsonObj.get("data"); 
-			timeStr=(String) dataObj.get("systemDate"); 
-		} catch (ParseException e) {
-			e.printStackTrace();
-			Assert.assertTrue("PROBLEM - unable to find out the system time", false);
+				org.json.simple.JSONObject dataObj = (org.json.simple.JSONObject) sysTimeJsonObj.get("data");
+				timeStr = (String) dataObj.get("systemDate");
+			} catch (ParseException e) {
+				e.printStackTrace();
+				Assert.assertTrue("PROBLEM - unable to find out the system time", false);
+			}
+		}
+		else
+		{
+			timeStr = driver.findElement(By.xpath("//tbody/tr[5]/td[2]")).getText();
 		}
 		driver.close();
 		driver.switchTo().window(winHandleBefore);

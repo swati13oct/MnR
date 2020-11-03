@@ -16,7 +16,7 @@ import cucumber.api.CucumberOptions;
 @ExtendedCucumberOptions(retryCount=1,screenShotSize="", screenShotLocation="/screenshots/",jsonReport = "target/cucumber-RunMRATDDAcqDCEMedEdAARP.json",detailedReport = true,
  detailedAggregatedReport = true, overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDAcqDCEMedEdAARP")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.acquisition" }, features = { "src/main/resources/feature/acquisition" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcqDCEMedEdAARP.json" }, tags = { "@DCE_MedEdPage_AARP" })
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcqDCEMedEdAARP.json" }, tags = { "@DCE_MedEdPage" })
 
 public class RunMRATDDAcqDCEMedEdAARP {
 
