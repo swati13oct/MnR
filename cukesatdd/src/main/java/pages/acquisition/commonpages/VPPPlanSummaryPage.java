@@ -2634,7 +2634,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 			System.out.println("Click to close on the create profile popup");
 			if (validate(closeProfilePopup))
-				closeProfilePopup.click();
+				jsClickNew(closeProfilePopup);
 			CommonUtility.checkPageIsReady(driver);
 			
 			System.out.println("Proceed to validate 'Save Plan' link and icon disappeared after clicking it");
@@ -2747,21 +2747,24 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		System.out.println("Proceed to go to plan overview section to enter zipcode '"+zipcode+"' to find plan'");
 		try {
 			//if change zip code link is there then click it, once you used it then it will only display field box going forward.
-			planOverviewChangeZipCodeLink.click();
+			jsClickNew(planOverviewChangeZipCodeLink);
 		} catch (Exception e) {
 			System.out.println("Change ZipCode link already not on the page, proceed to update zipcode for search directly");
 		}
 		// if field box already there then clear it if left over text from prior run
-		planOverviewZipCodeFieldBox.sendKeys(Keys.CONTROL + "a");
-		planOverviewZipCodeFieldBox.sendKeys(Keys.DELETE);
+		//Commenting since there is no Control key on a Mac machine
+		/*planOverviewZipCodeFieldBox.sendKeys(Keys.CONTROL + "a");
+		planOverviewZipCodeFieldBox.sendKeys(Keys.DELETE);*/
+		planOverviewZipCodeFieldBox.clear();
+		
 		// enter zipcode
 		planOverviewZipCodeFieldBox.sendKeys(zipcode);
-		planOverviewFindPlanButton.click();
+		jsClickNew(planOverviewFindPlanButton);
 
 		if (isMultiCounty.equalsIgnoreCase("yes")) {
 			System.out.println("Handle mutliple county case");
 			CommonUtility.waitForPageLoad(driver, countyModal, 45);
-			driver.findElement(By.xpath("//div[@id='selectCounty']//a[text()='" + countyName + "']")).click();
+			jsClickNew(driver.findElement(By.xpath("//div[@id='selectCounty']//a[text()='" + countyName + "']")));
 		}
 		sleepBySec(3);
 		if (driver.findElement(By.xpath("//*[contains(text(),'" + zipcode + " " + countyName + "')]")).isDisplayed()) {
@@ -2999,7 +3002,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("window.open('about:blank','_blank');");
 		for (String winHandle : driver.getWindowHandles()) {
-			driver.switchTo().window(winHandle);
+			if(!winHandle.equals(winHandleBefore)) {
+				driver.switchTo().window(winHandle);
+			}
 		}
 		String winHandleTmp = driver.getWindowHandle();
 		System.out.println("Proceed to close the original tab that has plans saved, should left with a blank tab afterward");
@@ -3011,7 +3016,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		js.executeScript("window.open('" + AARP_ACQISITION_PAGE_URL + "','_blank');");
 
 		for (String winHandle : driver.getWindowHandles()) {
-			driver.switchTo().window(winHandle);
+	    	if(!winHandle.equals(winHandleTmp)) {
+	    		driver.switchTo().window(winHandle);
+	    	}
 		}
 		String winHandleNew = driver.getWindowHandle();
 
