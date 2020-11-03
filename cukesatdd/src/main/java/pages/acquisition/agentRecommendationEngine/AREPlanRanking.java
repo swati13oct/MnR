@@ -869,7 +869,8 @@ public class AREPlanRanking extends UhcDriver {
 	public void OriginalPlanOrder(String rankOptions) {
 		System.out.println("Fetching Original PlanOrder in plancompare page");
 		actionMoveTo(planRankingDropdown);
-		planRankingDropdown.click();
+		//planRankingDropdown.click();
+		jsClickNew(planRankingDropdown);
 		drugDocDisable(rankOptions, false);
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		for (WebElement elem : planNamesOnly) {
