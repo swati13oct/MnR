@@ -166,9 +166,11 @@ public class TellUsAboutDrug extends UhcDriver {
 
 	public void selectSupplyLength(String SupplyLength) {
 		validateNew(supplyLengthDrpDwn);
-		jsClickNew(supplyLengthDrpDwn);
-		WebElement element = driver.findElement(By.xpath("//select[@id='new-drug-refill']//option[contains(text(), '"+SupplyLength+"')]"));
-		jsClickNew(element);
+		supplyLengthDrpDwn.click();
+//		jsClickNew(supplyLengthDrpDwn);
+		WebElement SupplyLengthelement = driver.findElement(By.xpath("//select[@id='new-drug-refill']//option[contains(text(), '"+SupplyLength+"')]"));
+//		jsClickNew(SupplyLengthelement);
+		SupplyLengthelement.click();
 		System.out.println("Selected Supply Length : "+supplyLengthDrpDwn.getText());
 	
 	}

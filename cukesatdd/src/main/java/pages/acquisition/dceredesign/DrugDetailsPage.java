@@ -354,10 +354,10 @@ public class DrugDetailsPage extends UhcDriver {
 		for(String currentDrug : DrugListItems) {
 			System.out.println("Current Added Drug Name : "+currentDrug);
 			WebElement DrugName = driver.findElement(By.xpath("//caption[contains(text(), 'Your Drugs')]/ancestor::table//span[contains(text(), '"+currentDrug+"')]"));
-			WebElement DrugIntlCoverText = driver.findElement(By.xpath("//caption[contains(text(), 'Your Drugs')]/ancestor::table//span[contains(text(), '"+currentDrug+"')]//ancestor::td//following-sibling::td[contains(text(), 'Initial Coverage Cost')]"));
+			//WebElement DrugIntlCoverText = driver.findElement(By.xpath("//caption[contains(text(), 'Your Drugs')]/ancestor::table//span[contains(text(), '"+currentDrug+"')]//ancestor::td//following-sibling::td[contains(text(), 'Initial Coverage Cost')]"));
 			WebElement DrugYouPay = driver.findElement(By.xpath("//caption[contains(text(), 'Your Drugs')]/ancestor::table//span[contains(text(), '"+currentDrug+"')]//ancestor::td//following-sibling::td//*[contains(text(), '$')]"));
 
-			if(validateNew(DrugName) && validateNew(DrugIntlCoverText) && validateNew(DrugYouPay)) {
+			if(validateNew(DrugName) && validateNew(DrugYouPay)) {
 				System.out.println("Drug Details Page, Validated Drug List for Drug, Initial Coverage Cost text and You Pay : "+currentDrug);
 			}
 			else
@@ -368,8 +368,6 @@ public class DrugDetailsPage extends UhcDriver {
 		}
 		else
 			Assert.fail("Drug Details Page, Validated Total Added Drug Count NOT Displayed in Your Drug Section: "+TotalDrugCount.getText());
-		
-
 	}
 
 	public void ValidatesDrugsTier_LimitsDisplayed() {
@@ -649,7 +647,9 @@ public class DrugDetailsPage extends UhcDriver {
 	}
 	
 	public void  clickChangePharmacyLinkDetailsPage() {
+		validateNew(DrugDetails_ChangePharmacyLnk);
 		DrugDetails_ChangePharmacyLnk.click();
+		CommonUtility.waitForPageLoadNew(driver, pharmacyZipcodeSearch, 20);
 	}
 	
 	public void  changePharmacyAndSave() {
@@ -834,20 +834,83 @@ public class DrugDetailsPage extends UhcDriver {
 		saveDrugBtn.click();		
 	}
 
+	@FindBy(xpath = "//*[@id='plancopaydetail']")
+	public WebElement CopaySection;
+	
+	@FindBy(xpath = "//*[@id='plancopaydetail']//button[contains(text(), 'Why These Amounts')]")
+	public WebElement WhytheseAmountsLink;
+
+	@FindBy(xpath = "//h3[contains(text(), 'Copays and Coinsurance')][@id='modal-label']")
+	public WebElement WhytheseAmountsModal;
+
+	@FindBy(xpath = "//button[@id='cancelicon']")
+	public WebElement ModalClose;
+
+	@FindBy(xpath = "//*[@id='plancopaydetail']//button[contains(text(), 'Why N/A')]")
+	public WebElement WhyNAlink;
+
+	@FindBy(xpath = "//h3[contains(text(), 'Tier 5 ')][@id='modal-label']")
+	public WebElement WhyNAModal;
+	
+	@FindBy(xpath = "//p[contains(@class,'text-normal')]")
+	public WebElement ModalBodyText;
+
+	
 	public void validatePreferredRetailCopaySection() {
-		
+		validateNew(CopaySection);
+		validateNew(WhytheseAmountsLink);
+		jsClickNew(WhytheseAmountsLink);
+		validateNew(WhytheseAmountsModal);
+		System.out.println("Preferred Retail Modal Text : "+ModalBodyText.getText());
+		validateNew(ModalClose);
+		jsClickNew(ModalClose);
 	}
 	
 	public void validateStandardRetailCopaySection() {
-		
+		validateNew(CopaySection);
+		validateNew(WhytheseAmountsLink);
+		jsClickNew(WhytheseAmountsLink);
+		validateNew(WhytheseAmountsModal);
+		System.out.println("Standard Retail Pharmacy Modal Text : "+ModalBodyText.getText());
+		validateNew(ModalClose);
+		jsClickNew(ModalClose);
 	}
 
 	public void validateStandardMailCopaySection() {
-		
+		validateNew(CopaySection);
+		validateNew(WhytheseAmountsLink);
+		jsClickNew(WhytheseAmountsLink);
+		validateNew(WhytheseAmountsModal);
+		System.out.println("Standard Retail Pharmacy Modal Text : "+ModalBodyText.getText());
+		validateNew(ModalClose);
+		jsClickNew(ModalClose);
+	
+		validateNew(WhyNAlink);
+		jsClickNew(WhyNAlink);
+		validateNew(WhyNAModal);
+		System.out.println("Standard Retail Pharmacy Modal Text : "+ModalBodyText.getText());
+		validateNew(ModalClose);
+		jsClickNew(ModalClose);
+
 	}
+	
 
 	public void validatePreferredMailCopaySection() {
-		
+		validateNew(CopaySection);
+		validateNew(WhytheseAmountsLink);
+		jsClickNew(WhytheseAmountsLink);
+		validateNew(WhytheseAmountsModal);
+		System.out.println("Standard Retail Pharmacy Modal Text : "+ModalBodyText.getText());
+		validateNew(ModalClose);
+		jsClickNew(ModalClose);
+	
+		validateNew(WhyNAlink);
+		jsClickNew(WhyNAlink);
+		validateNew(WhyNAModal);
+		System.out.println("Standard Retail Pharmacy Modal Text : "+ModalBodyText.getText());
+		validateNew(ModalClose);
+		jsClickNew(ModalClose);
+
 	}
 
 	@FindBy(xpath = "//*[contains(text(), 'Pharmacy:')]/span")

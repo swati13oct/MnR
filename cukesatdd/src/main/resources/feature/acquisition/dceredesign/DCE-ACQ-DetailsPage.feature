@@ -83,23 +83,23 @@ Feature: 1.10.1 DCE-REDISIGN AARP - To test Acq Home to NEW DCE Flows
     Then the user validates the Drug list on Drug Details Page
     Then the user validates Important information section
    # Then the user validates Disclaimers section
-    Then the user validates link to Drug Summary Page
-    #Then the user validates Dynamic Copay Section for following Pharmacy selection
-   #   | Pharmacy Selection | <DefaultSelected> |
+    Then the user validates Dynamic Copay Section for following Pharmacy selection
+     | Pharmacy Selection | <DefaultSelected> |
     And user clicks on change pharmacy link from details page
     Then the user selects Mail Pharmacy and returns to DCE Details page
-#    Then the user validates Dynamic Copay Section for following Pharmacy selection
- #     | Pharmacy Selection | <MailPharSelected> |
+    Then the user validates Dynamic Copay Section for following Pharmacy selection
+      | Pharmacy Selection | <MailPharSelected> |
     And user clicks on change pharmacy link from details page
     Then the user selects following Standard pharmacy and returns to DCE Details page
       | SelectStandardPharmacy | <SelectStandardPharmacy> |
-  #  Then the user validates Dynamic Copay Section for following Pharmacy selection
-   #   | Pharmacy Selection | <StandardPharSelected> |
+    Then the user validates Dynamic Copay Section for following Pharmacy selection
+      | Pharmacy Selection | <StandardPharSelected> |
+    Then the user validates link to Drug Summary Page
 
     @DCE_DrugDetailsCopay_AARP
     Examples: 
-      | drug1      | drug2  | zipCode | planType | planName                        | site | DefaultSelected  | MailPharSelected | SelectStandardPharmacy |
-      | vigabatrin | Fanapt |   80001 | PDP      | AARP MedicareRx Walgreens (PDP) | AARP | Preferred Retail | Preferred Mail   |  KING SOOPERS PHARMACY |
+      | drug1      | drug2  | zipCode | planType | planName                        | site | DefaultSelected  | MailPharSelected | SelectStandardPharmacy | StandardPharSelected |
+      | vigabatrin | Fanapt |   80001 | PDP      | AARP MedicareRx Walgreens (PDP) | AARP | Preferred Retail | Preferred Mail   |  KING SOOPERS PHARMACY | Standard Retail |
 
     @DCE_DrugDetailsCopay_UHC
     Examples: 
