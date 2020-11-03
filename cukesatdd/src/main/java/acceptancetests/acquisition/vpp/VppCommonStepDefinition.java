@@ -1,21 +1,11 @@
 package acceptancetests.acquisition.vpp;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +14,6 @@ import acceptancetests.acquisition.dceredesign.DCERedesignCommonConstants;
 import acceptancetests.acquisition.ole.oleCommonConstants;
 import acceptancetests.acquisition.pharmacylocator.PharmacySearchCommonConstants;
 import acceptancetests.data.CommonConstants;
-import acceptancetests.data.OLE_PageConstants;
 import acceptancetests.data.PageConstants;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
@@ -37,13 +26,10 @@ import pages.acquisition.commonpages.AcquisitionHomePage;
 import pages.acquisition.commonpages.PlanDetailsPage;
 import pages.acquisition.commonpages.ProviderSearchPage;
 import pages.acquisition.commonpages.VPPPlanSummaryPage;
-import pages.acquisition.ole.MedicareInformationPage;
-import pages.acquisition.ole.PersonalInformationPage;
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineResultsPage;
 import pages.acquisition.pharmacyLocator.PharmacySearchPage;
 import pages.acquisition.commonpages.FindCarePage;
-import pages.acquisition.commonpages.ProviderSearchPage;
 import pages.acquisition.commonpages.AgentsnBrokersAARPPage;
 import pages.acquisition.commonpages.DisclaimersAARPPage;
 import pages.acquisition.commonpages.PrivacyPolicyAARPPage;
@@ -51,6 +37,7 @@ import pages.acquisition.commonpages.SiteMapAARPPage;
 import pages.acquisition.commonpages.ContactUsAARPPage;
 import pages.acquisition.commonpages.AboutUsAARPPage;
 import pages.acquisition.commonpages.VisitorProfilePage;
+import pages.acquisition.dceredesign.DrugDetailsPage;
 import pages.acquisition.dceredesign.GetStartedPage;
 import pages.acquisition.commonpages.ComparePlansPage;
 import pages.acquisition.commonpages.MultiCountyModalPage;
@@ -1408,7 +1395,8 @@ public class VppCommonStepDefinition {
 
 			VPPPlanSummaryPage planSummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-			planSummaryPage.navigateToDCEFromDrugDropdown(planName);
+			DrugDetailsPage drugDetailsPage = planSummaryPage.navigateToDCEFromDrugDropdown(planName);
+			getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetailsPage);
 		}
 		
 		@Then("^the user validates the drug cost on plan summary page for the selected plan$")
@@ -1428,6 +1416,26 @@ public class VppCommonStepDefinition {
 					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 			Assert.assertTrue("Drug cost is displayed incorrectly", plansummaryPage.verifyAddedDrugCost(planName,annualDrugCost));
 		}
+		
+		@Then("^the user validates the added drug name on plan summary page for a selected plan$")
+		public void verify_drugs_added_VPP(DataTable Planname) {
+
+			List<DataTableRow> plannameAttributesRow = Planname.getGherkinRows();
+			Map<String, String> plannameAttributesMap = new HashMap<String, String>();
+			for (int i = 0; i < plannameAttributesRow.size(); i++) {
+
+				plannameAttributesMap.put(plannameAttributesRow.get(i).getCells().get(0),
+						plannameAttributesRow.get(i).getCells().get(1));
+			}
+			String planName = plannameAttributesMap.get("Plan Name");
+			String drugName = plannameAttributesMap.get("DrugName");
+
+			VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+			Assert.assertTrue("Drugs coverage Info not updated",
+					plansummaryPage.verifyAllAddedDrugName(planName, drugName));
+		}
+		
 		@Then("^the user click on Prescription Drug Benefits tab on plan details$")
 		public void the_user_click_on_Prescription_Drug_Benefits_and_validates_in_AARP_site() throws Throwable {
 			PlanDetailsPage vppPlanDetailsPage = (PlanDetailsPage) getLoginScenario()
