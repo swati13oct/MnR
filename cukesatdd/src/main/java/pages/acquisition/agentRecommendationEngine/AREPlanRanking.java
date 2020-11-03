@@ -840,7 +840,7 @@ public class AREPlanRanking extends UhcDriver {
 		System.out.println("Appling Ranking after adding Drugs");
 		threadsleep(3000);
 		pageloadcomplete();
-		Actions action = new Actions(driver);
+//		Actions action = new Actions(driver);
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 //		DocName.click();
 //		scrollToView(planRankingDropdown);
@@ -848,8 +848,10 @@ public class AREPlanRanking extends UhcDriver {
 		scrollToView(AddDrugsLink);
 		threadsleep(3000);
 		scrollToView(Logo);
-		action.moveToElement(planRankingDropdown).perform();
-		action.moveToElement(planRankingDropdown).click().perform();
+//		action.moveToElement(planRankingDropdown).perform();
+//		action.moveToElement(planRankingDropdown).click().perform();
+		jsMouseOver(planRankingDropdown);
+		jsClickNew(planRankingDropdown);
 		optionSelection(rankOptions, true);
 		applyBtn.click();
 		threadsleep(3000);
@@ -1116,8 +1118,9 @@ public class AREPlanRanking extends UhcDriver {
 	}
 
 	public void actionMoveTo(WebElement elem) {
-		Actions action = new Actions(driver);
-		action.moveToElement(elem).perform();
+//		Actions action = new Actions(driver);
+//		action.moveToElement(elem).perform();
+		jsMouseOver(elem);
 		threadsleep(1000);
 	}
 	
