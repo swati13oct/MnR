@@ -1872,8 +1872,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		
 		public void validatevisitorprofile() {
 			if (visitorprofileicon.isDisplayed()) {
-				Actions actions = new Actions(driver);
-				actions.moveToElement(visitorprofileicon).perform();
+//				Actions actions = new Actions(driver);
+//				actions.moveToElement(visitorprofileicon).perform();
+				jsMouseOver(visitorprofileicon);
 				System.out.println("Hover over visitor profile completed");
 			}
 			WebElement CreateProfile = driver.findElement(By.xpath("//a[contains(text(), 'Create Profile')]"));
@@ -2096,7 +2097,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		public void validateStateDropDown() {
 			validateNew(stateDropDown);
 			selectFromDropDownByValue(stateDropDown, "California");
-			String StateSessionStorage = ReturnDriverStorage(driver, "sessionStorage", "ucp_geotrackingState");
+			String StateSessionStorage =  returnDriverStorageJS("sessionStorage", "ucp_geotrackingState");
+					//ReturnDriverStorage(driver, "sessionStorage", "ucp_geotrackingState");
 			System.out.println("State selected : California");
 			System.out.println("State GeoSessionStorage value : " + StateSessionStorage);
 			Assert.assertTrue(StateSessionStorage.equalsIgnoreCase("CA"), "Geolocation State validation Failed ");
