@@ -1,6 +1,7 @@
 package pages.acquisition.commonpages;
 
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -226,18 +227,20 @@ public ComparePlansPage providerfromMedicalGroup() throws Exception {
 		 * 
 		 * }
 		 */
-		
+		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);		//Added because below findelements throws timeout exception if element not found
 		if(driver.findElements(By.xpath("(//button[contains(text(),'Check Provider Coverage')])[1]")).size() > 0){
 			System.out.println("OLD Rally page displayed");
 			//ParentWindow = driver.getTitle();
-			CheckProviderCoverageButton.click();
+			jsClickNew(CheckProviderCoverageButton);
 		}	
 		else if(driver.findElements(By.xpath("(//form[@data-ui-element-name='check-provider-coverage']//button[contains(@class,'action-btn')])[2]")).size() > 0){
 			System.out.println("NEW Rally page displayed");
 			//ParentWindow = driver.getTitle();
-			FinishButton.click();
+			jsClickNew(FinishButton);
 		}else
 			System.out.println("Issue with Xpath");
+		//note: setting the implicit wait back to default value - 10
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS); 
 	
 		driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
 		if (currentUrl().contains("/health-plans.html#/plan-compare"))

@@ -354,6 +354,8 @@ public class PlanDetailsPage extends UhcDriver {
 		else 
 			checkModelPopup(driver,10);
 		
+		//note: setting the implicit wait to 0 as it fails because of TimeoutException while finding List<WebElement> of the different tabs on Plan detail page 
+		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
 		if (planType.equalsIgnoreCase("MA")) {
 			CommonUtility.waitForPageLoadNew(driver, medBenefitsTab.get(0), 45);
 			org.testng.Assert.assertTrue(0 == presDrugTab1.size(), "Prescription Drug tab not displayed for MA plans");
@@ -369,6 +371,8 @@ public class PlanDetailsPage extends UhcDriver {
 			org.testng.Assert.assertTrue(medBenefitsTab.get(0).isDisplayed(), "Medical Benefit tab not displayed for SNP plans");
 		}/*Added for SNP as well*/
 		validateNew(planCostsTab);
+		//note: setting the implicit wait back to default value - 10
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);  
 
 	}
 

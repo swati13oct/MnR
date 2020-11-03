@@ -1229,8 +1229,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			System.out.println("View Plan Details Link is clicked for MA plan" + planName);
 		}
 		CommonUtility.checkPageIsReadyNew(driver);
-		sleepBySec(3);
-//		waitForPageLoadSafari();
+		waitForPageLoadSafari();
 			return new PlanDetailsPage(driver, planType);
 		
 		}
@@ -3783,7 +3782,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 		if (allMAPlans != null) {
 			for (int i = 0; i < allMAPlans.size(); i++) {
-				allMAPlans.get(i).click();
+				jsClickNew(allMAPlans.get(i));
 				if (i == counter) {
 					break;
 				}
