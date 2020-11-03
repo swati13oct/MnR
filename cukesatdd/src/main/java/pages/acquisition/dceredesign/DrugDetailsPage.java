@@ -243,7 +243,7 @@ public class DrugDetailsPage extends UhcDriver {
 		validateNew(YourDrugs_Table);
 		validateNew(YourDrugs_DrugsTxt);
 		validateNew(YourDrugs_YouPayTxt);
-		validateNew(YourDrugs_InitlCoverageTxt);
+		//validateNew(YourDrugs_InitlCoverageTxt);
 		validateNew(LinktoEditDrugList);
 	}
 
@@ -777,4 +777,90 @@ public class DrugDetailsPage extends UhcDriver {
 		
 		return new GetStartedPage(driver);
 	}
+
+	@FindBy(xpath = "//*[@id='modal-label' and contains(text(), 'Switch to Generic')]")
+	public WebElement SwitchPageHeader;
+	
+	@FindBy(xpath = "//img[contains(@class,'uhc-modal__close')]")
+	public WebElement SwitchPageCloseBtn;
+	
+	public SwitchToGeneric clickSwitchGeneric(String brandDrug) {
+		WebElement SwitchLink = driver.findElement(By.xpath("//*[contains(text(), '"+brandDrug+"')]//following-sibling::*[contains(text(), 'Switch')]"));
+		jsClickNew(SwitchLink);
+		CommonUtility.waitForPageLoadNew(driver, SwitchPageHeader, 20);
+		if(validateNew(SwitchPageHeader) && validateNew(SwitchPageCloseBtn)) {
+			return new SwitchToGeneric(driver);
+		}
+		Assert.fail("Did not Navigate to Switch To Generic Page");
+		return null;
+	}
+	
+	@FindBy(xpath = "//input[contains(@id, 'drugsearch')]")
+	public WebElement EnterDrugNameTxt;
+	
+	@FindBy(xpath = "//button[(@id= 'search')]")
+	public WebElement SearchBtn;
+	
+	public BuildYourDrugList clickEditDrugs() {
+		jsClickNew(editDrugListLink);
+		CommonUtility.waitForPageLoadNew(driver, EnterDrugNameTxt, 20);
+		if(validateNew(EnterDrugNameTxt) && validateNew(SearchBtn)) {
+			return new BuildYourDrugList(driver);
+		}
+		Assert.fail("Did not Navigate to Build Drug List Page");
+		return null;
+
+	}
+	
+	@FindBy(xpath = "//*[contains(@class, 'uhc-filter')]//*[contains(text(), ' Standard Pharmacies ')]")
+	public WebElement StandardPharmacyFilter;
+
+	public void SelectStandardPharmacy(String standardPharmacytoSelect) {
+		validateNew(StandardPharmacyFilter);
+		jsClickNew(StandardPharmacyFilter);
+		WebElement PharmacyName = driver.findElement(By.xpath("//button[contains(@id, 'selectPharmacyBtn') and contains(@aria-label, 'Select "+standardPharmacytoSelect+"')]"));
+		jsClickNew(PharmacyName);
+		// TODO Auto-generated method stub
+		validateNew(saveDrugBtn);
+		saveDrugBtn.click();		
+	}
+
+	@FindBy(xpath = "//button[contains(@id, 'mailSelectPharmacy')][contains(@aria-label, 'Select Preferred Mail Service Pharmacy')]")
+	public WebElement MailPharmacy;
+
+	public void SelectMailPharmacy() {
+		jsClickNew(MailPharmacy);
+		validateNew(saveDrugBtn);
+		saveDrugBtn.click();		
+	}
+
+	public void validatePreferredRetailCopaySection() {
+		
+	}
+	
+	public void validateStandardRetailCopaySection() {
+		
+	}
+
+	public void validateStandardMailCopaySection() {
+		
+	}
+
+	public void validatePreferredMailCopaySection() {
+		
+	}
+
+	@FindBy(xpath = "//*[contains(text(), 'Pharmacy:')]/span")
+	private WebElement PharmacyNameText;
+
+	public void validatePharmacyName(String PharmacyName) {
+
+		if(validateNew(PharmacyNameText) && PharmacyNameText.getText().contains(PharmacyName)) {
+			Assert.assertTrue("Correct Pharmacy Name is Displayed : "+PharmacyNameText.getText(),true);
+		}
+		else {
+			Assert.fail("Correct Pharmacy Name is NOT Displayed : "+PharmacyNameText.getText());
+		}
+	}
+
 }
