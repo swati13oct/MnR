@@ -24,7 +24,7 @@ import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineAdditi
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineCostPreferencesPage;
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineCoverageOptionPage;
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineDoctorsPage;
-import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineDrugsPage;
+import pages.acquisition.commonpages.PlanRecommendationEngineDrugsPage;
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineHeaderAndFooter;
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineLandingAndZipcodePages;
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineResultsPage;
@@ -114,6 +114,12 @@ public class PlanRecommendationEngineCommonStepDefinition {
 		if (!(plantype.isEmpty())) {
 			planSelectorCoverageepage.coverageOptionpageFunctional(plantype);
 		}
+		
+		String temp = givenAttributesMap.get("Plan Type");
+		if (temp != null && PREflow != temp) {
+			PREflow = temp;
+			System.out.println("Current PRE Flow : "+PREflow);
+		}
 	}
 	
 	@And("^user selects SNP options on Special Needs Page")
@@ -173,11 +179,6 @@ public class PlanRecommendationEngineCommonStepDefinition {
 			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
 					givenAttributesRow.get(i).getCells().get(1));
 		}
-		String temp = givenAttributesMap.get("Plan Type");
-		if (temp != null && PREflow != temp) {
-			PREflow = temp;
-			System.out.println("Current PRE Flow : "+PREflow);
-		}
 		
         PlanRecommendationEngineDrugsPage planSelectorDrugspage =  new PlanRecommendationEngineDrugsPage(wd);
         String drug = givenAttributesMap.get("Drug Selection");
@@ -230,6 +231,22 @@ public class PlanRecommendationEngineCommonStepDefinition {
 		planSelectorResultspage.validateUIAPIRankingPlans();
 		
 		getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
+   	}
+	
+	@Then("^user selects add drug option on Drug page$")
+   	public void add_drugs_page(DataTable givenAttributes) {
+		List<DataTableRow> givenAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < givenAttributesRow.size(); i++) {
+
+			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+					givenAttributesRow.get(i).getCells().get(1));
+		}
+
+   		PlanRecommendationEngineDrugsPage planSelectorDrugspage =  new PlanRecommendationEngineDrugsPage(wd);
+   		planSelectorDrugspage.drugsInitiate(givenAttributesMap.get("Drug Selection"));
+   		planSelectorDrugspage.drugsHandlerWithdetails(givenAttributesMap.get("Drug Details"));
+   		planSelectorDrugspage.continueNextpage();
    	}
 
 }

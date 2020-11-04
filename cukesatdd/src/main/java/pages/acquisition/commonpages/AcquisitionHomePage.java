@@ -1356,8 +1356,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
     {             
            waitforElement(ShopForaplan);
      if (ShopForaplan.isDisplayed()) {
-            Actions action = new Actions(driver);
-            action.moveToElement(ShopForaplan).build().perform();
+//            Actions action = new Actions(driver);
+//            action.moveToElement(ShopForaplan).build().perform();
+		    jsMouseOver(ShopForaplan);
             return new ShopforaplanAARPlayer(driver);
      }
            else {
@@ -1663,9 +1664,10 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		{
 			waitforElement(lnkLearnAboutMedicare);
 			if (lnkLearnAboutMedicare.isDisplayed()) {
-				Actions actions = new Actions(driver);
-				actions.moveToElement(lnkLearnAboutMedicare);
-				actions.build().perform();
+//				Actions actions = new Actions(driver);
+//				actions.moveToElement(lnkLearnAboutMedicare);
+//				actions.build().perform();
+				jsMouseOver(lnkLearnAboutMedicare);
 				System.out.println("Hover over Learn about Medicare completed");
 		    }
 			WebElement PresProvidersBenefitsLink = driver.findElement(By.xpath("//*[contains(@class, 'nav-col nav-col-3')]//a[contains(@href,'medicare-benefits')]"));
@@ -1870,8 +1872,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		
 		public void validatevisitorprofile() {
 			if (visitorprofileicon.isDisplayed()) {
-				Actions actions = new Actions(driver);
-				actions.moveToElement(visitorprofileicon).perform();
+//				Actions actions = new Actions(driver);
+//				actions.moveToElement(visitorprofileicon).perform();
+				jsMouseOver(visitorprofileicon);
 				System.out.println("Hover over visitor profile completed");
 			}
 			WebElement CreateProfile = driver.findElement(By.xpath("//a[contains(text(), 'Create Profile')]"));
@@ -2039,9 +2042,10 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 			waitforElement(lnkLearnAboutMedicare);
 			if (lnkLearnAboutMedicare.isDisplayed()) {
-				Actions actions = new Actions(driver);
-				actions.moveToElement(lnkLearnAboutMedicare);
-				actions.build().perform();
+//				Actions actions = new Actions(driver);
+//				actions.moveToElement(lnkLearnAboutMedicare);
+//				actions.build().perform();
+				jsMouseOver(lnkLearnAboutMedicare);
 				System.out.println("Hover over Learn about Medicare completed");
 			}
 			WebElement EligibilityTxt = driver.findElement(
@@ -2081,9 +2085,10 @@ public class AcquisitionHomePage extends GlobalWebElements {
 				// && FAQLink.isDisplayed()
 				Assert.assertTrue(true);
 				System.out.println("Sub Nav - Learn about Medicare - All links and element displayed on Page");
-				Actions actions = new Actions(driver);
-				actions.moveToElement(AARPlogo);
-				actions.build().perform();
+//				Actions actions = new Actions(driver);
+//				actions.moveToElement(AARPlogo);
+//				actions.build().perform();
+				jsMouseOver(AARPlogo);
 			} else {
 				Assert.fail("Sub Nav - Learn about Medicare - All links and element not found / displayed on page");
 			}
@@ -2092,7 +2097,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		public void validateStateDropDown() {
 			validateNew(stateDropDown);
 			selectFromDropDownByValue(stateDropDown, "California");
-			String StateSessionStorage = ReturnDriverStorage(driver, "sessionStorage", "ucp_geotrackingState");
+			String StateSessionStorage =  returnDriverStorageJS("sessionStorage", "ucp_geotrackingState");
+					//ReturnDriverStorage(driver, "sessionStorage", "ucp_geotrackingState");
 			System.out.println("State selected : California");
 			System.out.println("State GeoSessionStorage value : " + StateSessionStorage);
 			Assert.assertTrue(StateSessionStorage.equalsIgnoreCase("CA"), "Geolocation State validation Failed ");
@@ -2469,7 +2475,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			for (int i = 2; i < sizeofpages; i++) {
 				System.out.println("@@Inside pagination click@@@");
 				threadsleep(5);
-				driver.findElement(By.xpath("(//*[@class='pagination']/li/a)[" + i + "]")).click();
+				//driver.findElement(By.xpath("(//*[@class='pagination']/li/a)[" + i + "]")).click();
+				jsClickNew(driver.findElement(By.xpath("(//*[@class='pagination']/li/a)[" + i + "]")));
 				CommonUtility.waitForPageLoadNew(driver, SearchResultsCount, 30);
 				this.validateFifteenResults();
 				threadsleep(5);
@@ -2527,5 +2534,47 @@ public class AcquisitionHomePage extends GlobalWebElements {
 				System.out.println("Numbers");
 				break;
 			}
+		}
+
+
+		@FindBy(xpath="(//*[contains(text(),'Sign in')])[1]")
+		private WebElement memberSignInPage;
+
+		@FindBy(xpath="//a[contains(@href,'https://www.aarpmedicareplans.com/health-plans.html?WT.mc_id=8009508')]")
+		private WebElement ViewMedicareplanlinks;
+
+		public void clickonmemberSignInlink(String ExpectedmemberSigninURL) {
+			validateNew(memberSignInPage);
+			CommonUtility.waitForPageLoadNew(driver, memberSignInPage, 30);
+			String parentWindow = driver.getWindowHandle();
+			memberSignInPage.click();
+			sleepBySec(3);
+			Set<String> tabs_windows = driver.getWindowHandles();
+			Iterator<String> itr = tabs_windows.iterator();
+			while(itr.hasNext()) {
+				String window = itr.next();
+				if(!parentWindow.equals(window)) {
+					driver.switchTo().window(window);
+				}
+			}
+
+			CommonUtility.checkPageIsReadyNew(driver);
+			String CurrentmemberSigninURL = driver.getCurrentUrl();
+			String ActualmemberSigninURL=CurrentmemberSigninURL.substring(0, 27).trim();
+			System.out.println("memberSignin Page is displayed : "+ActualmemberSigninURL);
+			System.out.println("Expected member signin URL: "+ExpectedmemberSigninURL);
+			System.out.println("Actual member signin URL: "+ActualmemberSigninURL);
+
+			if(ExpectedmemberSigninURL.equalsIgnoreCase(ActualmemberSigninURL)) {
+				System.out.println("****************member signin Page is displayed  ***************");
+
+				Assert.assertTrue(true);
+			}
+			else {
+				Assert.fail("****************member signin Page is not loaded ***************");
+			}
+
+			ViewMedicareplanlinks.click();
+
 		}
 }

@@ -142,6 +142,14 @@ public class VisitorProfileStepDefinition {
 		visitorProfile.validateAddedMsPlans(savePlanNames);
 	}
 	
+	@And("^the user should be able to see all the added Drugs information in the guest profile page$")
+	public void the_user_should_be_able_to_see_all_the_added_Drugs_information_in_the_guest_profile_page(DataTable data) {
+		List<DataTableRow> memberAttributesRow = data.getGherkinRows();
+		String drugList = memberAttributesRow.get(0).getCells().get(1);
+		VisitorProfilePage visitorProfile = (VisitorProfilePage) getLoginScenario().getBean(PageConstants.VISITOR_PROFILE_PAGE);
+		visitorProfile.validateAddedDrugs(drugList);
+	}
+	
 	@And("^user validate pdf link$")
 	public void user_validate_pdf_link_on_AARP_Site(DataTable planNames) {
 		List<DataTableRow> givenAttributesRow = planNames.getGherkinRows();
