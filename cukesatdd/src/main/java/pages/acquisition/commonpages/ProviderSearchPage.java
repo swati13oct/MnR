@@ -4,6 +4,7 @@
 package pages.acquisition.commonpages;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -240,6 +241,8 @@ public class ProviderSearchPage extends UhcDriver {
 		 * 
 		 * }
 		 */
+		//note: setting the implicit wait to 0 as it fails because of TimeoutException while finding List<WebElement>
+		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
 		if(driver.findElements(By.xpath("(//button[contains(text(),'Check Provider Coverage')])[1]")).size() > 0){
 			System.out.println("OLD Rally page displayed");
 			jsClickNew(Checkcoverage);
@@ -253,6 +256,9 @@ public class ProviderSearchPage extends UhcDriver {
 		threadsleep(3);
 		waitForCountDecrement(2);
 		driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
+		
+		//note: setting the implicit wait back to default value - 10
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS); 
 
 		return new VPPPlanSummaryPage(driver);
 	}

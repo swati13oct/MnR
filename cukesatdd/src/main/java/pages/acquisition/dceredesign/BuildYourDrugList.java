@@ -264,7 +264,7 @@ public class BuildYourDrugList extends UhcDriver {
 	public ComparePlansPage returnToPlanComparePage() {
 		
 		validateNew(returnToCompareBtn);
-		returnToCompareBtn.click();
+		jsClickNew(returnToCompareBtn);
 		return new ComparePlansPage(driver);
 	}
 
