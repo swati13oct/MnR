@@ -254,12 +254,12 @@ public class PlanRecommendationEngineDrugsPageMobile extends UhcDriver {
 		System.out.println("Drugs Page Functional Operations");
 		if (drug.equalsIgnoreCase("Yes")) {
 			validate(yesOption);
-			//yesOption.click();
+			// yesOption.click();
 			jsClickNew(yesOption);
 			System.out.println("Prescription Type " + drug + " Clicked");
 		} else if (drug.equalsIgnoreCase("No")) {
 			validate(noOption);
-			//noOption.click();
+			// noOption.click();
 			jsClickNew(noOption);
 			System.out.println("Prescription Type " + drug + " Clicked");
 		}
@@ -269,10 +269,10 @@ public class PlanRecommendationEngineDrugsPageMobile extends UhcDriver {
 
 	public void skipDrugs(String drugsSelection) {
 		drugpageOptions(drugsSelection);
-		//continueBtn.click();
+		// continueBtn.click();
 		jsClickNew(continueBtn);
 		System.out.println("Validating " + page + " page Continue button functionality");
-		//desktopCommonUtils.nextPageValidation(page.toUpperCase() + "skip");
+		// desktopCommonUtils.nextPageValidation(page.toUpperCase() + "skip");
 	}
 
 	// Drug option selects in Drug page
@@ -329,10 +329,11 @@ public class PlanRecommendationEngineDrugsPageMobile extends UhcDriver {
 		validate(drugsearchBox, 30);
 		threadsleep(2000);
 		drugnamesList();
-		//continueBtn.click();
+		// continueBtn.click();
 		jsClickNew(continueBtn);
-		//System.out.println("Validating " + page + " page Continue button functionality");
-		//desktopCommonUtils.nextPageValidation(page.toUpperCase());
+		// System.out.println("Validating " + page + " page Continue button
+		// functionality");
+		// desktopCommonUtils.nextPageValidation(page.toUpperCase());
 	}
 
 	// Continue with ZeroDrug Function
@@ -341,20 +342,21 @@ public class PlanRecommendationEngineDrugsPageMobile extends UhcDriver {
 		validate(drugsearchBox, 30);
 		threadsleep(2000);
 		jsClickNew(continueBtn);
-		//continueBtn.click();
+		// continueBtn.click();
 		System.out.println("Validating " + page + " page Continue button functionality");
-		//desktopCommonUtils.nextPageValidation(page.toUpperCase() + "skip");
+		// desktopCommonUtils.nextPageValidation(page.toUpperCase() + "skip");
 	}
 
 	// Fetch the drug details and compare with DCE
 
-	public void comparingDrugwithDCE() {
-		System.out.println("Validating " + page + " page druglist with VPP drugs");
-		DrugsInDCE = ACQDrugCostEstimatorPage.DCEDrugsList;
-		threadsleep(2000);
-		drugnamesList();
-		verifyConfirmationmodalResults(DrugsInDCE.size(), DrugsInDCE, drugNames);
-	}
+	  public void comparingDrugwithDCE() {
+  		System.out.println("Validating " + page + " page druglist with VPP drugs");
+  		ACQDrugCostEstimatorPage dce = new ACQDrugCostEstimatorPage(driver);
+			DrugsInDCE = dce.vppDrugsResults;
+  		threadsleep(2000);
+  		drugnamesList();
+  		verifyConfirmationmodalResults(DrugsInDCE.size(), DrugsInDCE, drugNames);
+  	}
 
 	// Compare the drug details and compare with DCE
 
@@ -406,14 +408,15 @@ public class PlanRecommendationEngineDrugsPageMobile extends UhcDriver {
 		drugNames = new ArrayList<String>();
 		for (int i = count - 1; i >= 0; i--) {
 			threadsleep(1000);
-			drugNames.add(
-					drugNameList.get(i).findElement(By.cssSelector("p:nth-child(1)")).getText().trim().toUpperCase()
-							+ " " + drugNameList.get(i).findElement(By.cssSelector("p:nth-child(2)")).getText());
+			drugNames.add(drugNameList.get(i).findElement(By.cssSelector("p:nth-child(1)")).getText().trim()
+					.toUpperCase() + " "
+					+ drugNameList.get(i).findElement(By.cssSelector("p:nth-child(2)")).getText().trim().toUpperCase());
 		}
 		Collections.sort(drugNames);
 		System.out.println("Drugs Name list is : " + drugNames);
 		return drugNames;
 	}
+
 	// Canceling the Model in Drug Page
 
 	public void drugspageCancel(String drugInfo) {
@@ -490,7 +493,7 @@ public class PlanRecommendationEngineDrugsPageMobile extends UhcDriver {
 			drugsearchBox.clear();
 			drugsearchBox.sendKeys(drugName);
 			if (searchButtonClick) {
-				//drugsearchButton.click();
+				// drugsearchButton.click();
 				jsClickNew(drugsearchButton);
 				threadsleep(6000);
 				validate(modalSelcetedDrug, 30);
@@ -499,7 +502,7 @@ public class PlanRecommendationEngineDrugsPageMobile extends UhcDriver {
 						"Drug name is not Matched :" + drugName);
 				// Select modal
 				threadsleep(2000);
-				//modalcontinue.click();
+				// modalcontinue.click();
 				jsClickNew(modalcontinue);
 				threadsleep(2000);
 			} else {
@@ -525,7 +528,7 @@ public class PlanRecommendationEngineDrugsPageMobile extends UhcDriver {
 				freq.selectByVisibleText("Every 3 Months");
 
 			threadsleep(4000);
-			//modalcontinue.click();
+			// modalcontinue.click();
 			jsClickNew(modalcontinue);
 
 			if (GenericDrug) {
@@ -537,7 +540,7 @@ public class PlanRecommendationEngineDrugsPageMobile extends UhcDriver {
 					drugName = modalGenericDrug.getText();
 				}
 				threadsleep(2000);
-				//modalcontinue.click();
+				// modalcontinue.click();
 				jsClickNew(modalcontinue);
 			}
 

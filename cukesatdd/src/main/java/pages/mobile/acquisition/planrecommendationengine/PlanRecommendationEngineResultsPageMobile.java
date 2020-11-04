@@ -883,6 +883,29 @@ public class PlanRecommendationEngineResultsPageMobile extends UhcDriver {
 		pageloadcomplete();
 	}
 
+	public void validateZipAndCounty(String zip, String county, String isMultiCounty) {
+		System.out.println("Validating Zipcode and County in location Page");
+		// getStartedBtn.click();
+		// MobileMenu();
+		// validate(getStartedBtn);
+		// jsClickNew(getStartedBtn);
+		pageloadcomplete();
+//		scrollToView(getStartedBtn);
+//		jsClickNew(getStartedBtn);
+		Assert.assertTrue(zipCode.getAttribute("ng-reflect-model").contains(zip), "Invalid Zip");
+		if (isMultiCounty.equalsIgnoreCase("NO")) {
+			validate(countyInfo, 20);
+			Assert.assertTrue(countyInfo.getText().toUpperCase().contains(county.toUpperCase()), "Invalid County");
+		} else {
+			validate(multiCountyInfo, 20);
+			Assert.assertTrue(multiCountyInfo.getText().toUpperCase().contains(county.toUpperCase()), "Invalid County");
+		}
+		// continueBtn.click();
+		jsClickNew(continueBtn);
+
+	}
+	
+	
 	public void validateZipcodePage(String zip, String county, String isMultiCounty) {
 		System.out.println("Validating Zipcode and County in location Page");
 		// getStartedBtn.click();

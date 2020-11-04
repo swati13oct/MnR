@@ -1,7 +1,7 @@
 @PlanRecommendationEngine @PRERegression
 Feature: Plan Recommendation Engine Ranking - Verify PRE flows functionalities with recommendation and Ranking
 
-  @PRE @Ranking @MAPlansRanking1 @F358846 @PRERegression1
+  @PRE @Ranking @MAPlansRanking1 @F358846 @PRERegression1 @Choice1
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds> , <travel> , <doctors> , <DoctorsName> , <isMultiDoctor> , <Drug Selection> , <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch> , <pharmacyoption> , <Dental-Hearing-Vision-Fitness> , <costPreferenceOption> - To validate Ranking for MA plans in PRE
     Given the user is on UHC medicare acquisition site landing page
     When user navigate to Plan Recommendation Engine and Checking Breadcrumbs

@@ -111,7 +111,7 @@ public class PlanRecommendationStepDefinitionMobile {
 		PlanRecommendationEngineLandingAndZipcodeMobilePages planSelectorhomepage = new PlanRecommendationEngineLandingAndZipcodeMobilePages(
 				(WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
 		if (isMultiCounty.equalsIgnoreCase("NO")) {
-			planSelectorhomepage.quizStartAndRunQuestionnaire(zipcode);
+			planSelectorhomepage.quizStartsAndRunQuestionnaire(zipcode);
 		} else {
 			planSelectorhomepage.quizStartAndRunQuestionnaireWithCounty(zipcode, county);
 		}
@@ -779,7 +779,7 @@ public class PlanRecommendationStepDefinitionMobile {
 		String county = inputValues.get("County Name");
 		String isMultiCounty = inputValues.get("Is Multi County");
 		planSelectorResultspage.vppToPre();
-		planSelectorResultspage.validateZipcodePage(zip, county, isMultiCounty);
+		planSelectorResultspage.validateZipAndCounty(zip, county, isMultiCounty);
 	}
 
 	@Then("^user navigate to PRE and validate zipcode using Start Over$")

@@ -182,8 +182,24 @@ public class PlanRecommendationEngineLandingAndZipcodeMobilePages extends UhcDri
 		pageloadcomplete();
 		scrollToView(getStartedBtn);
 		jsClickNew(getStartedBtn);
-		//getStartedBtn.click();
+		// getStartedBtn.click();
 		validate(zipCode, 30);
+	}
+
+	// SingleCounty Method Mobile
+	public void quizStartsAndRunQuestionnaire(String zipcode) throws InterruptedException {
+		
+		jsClickNew(getStartedBtn);
+		System.out.println("After clicking GetStarted");
+		zipcodePage();
+		waitforElementVisibilityInTime(zipCode, 45);
+		sendkeys(zipCode, zipcode);
+		waitforElementVisibilityInTime(countyInfo, 45);
+		threadsleep(5000);
+		jsClickNew(continueBtn);
+		waitforElementVisibilityInTime(coverageTitle, 30);
+		Assert.assertTrue(coverageTitle.getText().contains("coverage"));
+
 	}
 
 	// SingleCounty Method
@@ -196,7 +212,7 @@ public class PlanRecommendationEngineLandingAndZipcodeMobilePages extends UhcDri
 		// waitTillElementClickableInTime(getStartedBtn, 45);
 		// waitTillElementClickableInTime(getStartedBtn1, 45);
 		System.out.println("Before clicking GetStarted");
-		//MobileMenu();
+		// MobileMenu();
 		scrollToView(getStartedBtn);
 		jsClickNew(getStartedBtn);
 		System.out.println("After clicking GetStarted");
