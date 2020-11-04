@@ -245,6 +245,9 @@ public class PlanDetailsPageMobile extends UhcDriver {
 
 	@FindBy(xpath = "//input[@id='compareone']/following-sibling::label")
 	private WebElement compareBox;
+	
+	@FindBy(xpath = "//a[contains(text(),'Back to plan results')]")
+	private WebElement BackToMainPlanList;
 
 	// Dental Directoy
 	@FindBy(xpath = "(//h3[text()='Dental Platinum'])//following::a[@id='dentalProviderlink']")
@@ -842,8 +845,11 @@ public class PlanDetailsPageMobile extends UhcDriver {
 		validateNew(getLnkBackToAllPlans());
 		jsClickNew(getLnkBackToAllPlans());
 		// getLnkBackToAllPlans().click();
+		jsClickNew(BackToMainPlanList);
 		CommonUtility.checkPageIsReadyNew(driver);
+	
 		if (driver.getCurrentUrl().contains("plan-summary")) {
+			jsClickNew(BackToMainPlanList);
 			return new VPPPlanSummaryPageMobile(driver);
 
 		}

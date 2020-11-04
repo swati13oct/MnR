@@ -264,7 +264,7 @@ Feature: 1.01.2-Vpp to plan Details AARP Scenarios
       | TCID  | zipcode | isMultutiCounty | county       | plantype | planName                                               | planyear |
       | 00016 |   78006 | YES             | Bexar County | MA       | AARP Medicare Advantage SecureHorizons Essential (HMO) | current  |
 
-  @vppPlanDetailsAARP11 @vppPlanDetailsAARPRun03 @vppPlanDetailsAARPRegression
+  @vppPlanDetailsAARP11 @vppPlanDetailsAARPRun03 @vppPlanDetailsAARPRegression @Choice
   Scenario Outline: UserStory: <TCID> -plan type: <plantype> - Verify plan details and back to summary and add to compare and uncheck in plan details and verify uncheck in plan summary
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site

@@ -710,7 +710,7 @@ public class PlanRecommendationEngineResultsPageMobile extends UhcDriver {
 	public void validateDrugPage(String plan, boolean removedrug) {
 		System.out.println("Validating Drugs in Drug Page");
 		// getStartedBtn.click();
-		jsClickNew(getStartedBtn);
+		//jsClickNew(getStartedBtn);
 		threadsleep(2000);
 		int MAPD = 6;
 		int PDP = 3;

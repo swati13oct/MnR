@@ -4213,8 +4213,10 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 
 	public PlanDetailsPageMobile clickViewDetails_AddedToCompare() {
 
-		validateNew(ViewPlanLink_AddedToCompare);
-		ViewPlanLink_AddedToCompare.click();
+		scrollToView(ViewPlanLink_AddedToCompare);
+		//validateNew(ViewPlanLink_AddedToCompare);
+		//ViewPlanLink_AddedToCompare.click();
+		jsClickNew(ViewPlanLink_AddedToCompare);
 		CommonUtility.checkPageIsReadyNew(driver);
 		if (currentUrl().contains("#/details"))
 			return new PlanDetailsPageMobile(driver);

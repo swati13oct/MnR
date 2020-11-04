@@ -1154,8 +1154,11 @@ public class MRScenario {
 	}
 
 	public static String returnJobURL() {
+		if(MRScenario.environment.equalsIgnoreCase(JobURLVD)) {
+			return JobURLVD;
+		} else
 		return JobURL;
-		// return JobURLVD;
+		
 	}
 
 	public void getJobURL(String jobID) {

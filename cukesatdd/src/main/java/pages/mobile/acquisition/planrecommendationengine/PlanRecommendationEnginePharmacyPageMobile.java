@@ -108,11 +108,13 @@ public class PlanRecommendationEnginePharmacyPageMobile extends UhcDriver {
                                 	System.out.println("Pharmacy option selection in Pharmacy Page");
                                     if (pharmacyoption.equalsIgnoreCase("Online")) {
                                                     validate(onlinePharmacy);
-                                                    onlinePharmacy.click();
+                                                    //onlinePharmacy.click();
+                                                    jsClickNew(onlinePharmacy);
                                                     System.out.println("Pharmacy Type "+ pharmacyoption +" Clicked");
                                     }else if (pharmacyoption.equalsIgnoreCase("Retail")) {
                                                     validate(retailPharmacy);
-                                                    retailPharmacy.click();
+                                                    //retailPharmacy.click();
+                                                    jsClickNew(retailPharmacy);
                                                     System.out.println("Pharmacy Type "+ pharmacyoption +" Clicked");
                                     } 
                                 }
@@ -121,7 +123,8 @@ public class PlanRecommendationEnginePharmacyPageMobile extends UhcDriver {
                                 public void doctorspageFunctional(String pharmacy) {
                                 	System.out.println("Pharmacy Page Functional Operations");
                                 	pharmacypageOptions(pharmacy);
-                                    continueBtn.click();
+                                    //continueBtn.click();
+                                    jsClickNew(continueBtn);
                                     System.out.println("Validating " + page + " page Continue button functionality");
                                     desktopCommonUtils.nextPageValidation(page.toUpperCase());
                                 }  
