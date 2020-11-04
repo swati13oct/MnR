@@ -81,10 +81,10 @@ Feature: 1.18.1.2 Member Pharamcies And Prescriptions page - Pre-Effective - PRO
 	  | FID     | username  | password  | MemUserName               | planType | memberType          | expectLink |
 	  | F493942 | kkumard   | mnrs786@  | Webfan50                  | MAPD     | GRP_PREEFF_PnP      | yes        |
 
-	#@prod_pnpPreEff_mapd_grp_lghib
-    #Examples: 
-	#  | FID     | username  | password  | MemUserName               | planType | memberType          | expectLink |
-	#  | F493942 | kkumard   | mnrs786@  | testUserName              | MAPD     | GRP_LGHIB_PREEFF_PnP| yes        |
+	@prod_pnpPreEff_mapd_grp_lghib
+    Examples: 
+	  | FID     | username  | password  | MemUserName               | planType | memberType          | expectLink |
+	  | F493942 | kkumard   | mnrs786@  | Chief2302                 | MAPD     | GRP_LGHIB_PREEFF_PnP| yes        |
 
 	#@prod_pnpPreEff_mapd_grp_seib
     #Examples: 
@@ -138,10 +138,10 @@ Feature: 1.18.1.2 Member Pharamcies And Prescriptions page - Pre-Effective - PRO
     Then user navigates to the account setting to validate Pharamcies and Prescriptions link
     Then user navigates to the Notices and Disclosures to validate Pharamcies and Prescriptions link
 
-	@prod_pnpPreEff_ma_ind
-    Examples: 
-	  | FID     | username  | password  | MemUserName             | planType | memberType          | expectLink |
-	  | F493942 | kkumard   | mnrs786@  | Cindyrose1218@Gmail.Com | MA       | IND_PREEFF_PnP      | no         |
+	#@prod_pnpPreEff_ma_ind
+    #Examples: 
+	#  | FID     | username  | password  | MemUserName             | planType | memberType          | expectLink |
+	#  | F493942 | kkumard   | mnrs786@  | testUserName            | MA       | IND_PREEFF_PnP      | no         |
 
 	#@prod_pnpPreEff_ma_grp
     #Examples: 

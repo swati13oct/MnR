@@ -466,6 +466,9 @@ public class AccountHomePage extends UhcDriver {
 
 	@FindBy(xpath = "//a[@id='pharmacies_5']")
 	private WebElement pharPresDashboardLinkAlternative;
+	
+	@FindBy(xpath = "//a[@id='preeffectivepharmacies_6']")
+	private WebElement pharPresDashboardLink_preEff;
 
 	@FindBy(xpath="//div[@id='ui-view-modal']/div/activate-covid-modal/div/div/div/div/button[2]")
 	protected WebElement dashboardCovideModalDismissLink;
@@ -905,7 +908,8 @@ public class AccountHomePage extends UhcDriver {
 						System.out.println("located shadow-root element, attempt to process further...");
 						WebElement root1 = expandRootElement(shadowRootHeader);
 						try {
-							WebElement acctSettingMenuShadowRootBtn = root1.findElement(By.cssSelector("#dropdown-toggle-2,#dropdown-toggle-4"));
+							//tbd WebElement acctSettingMenuShadowRootBtn = root1.findElement(By.cssSelector("#dropdown-toggle-2,#dropdown-toggle-4,#dropdown-toggle-0"));
+							WebElement acctSettingMenuShadowRootBtn = root1.findElement(By.cssSelector("button[id*='dropdown-toggle']"));
 							acctSettingMenuShadowRootBtn.click();
 						} catch (Exception e) {
 							Assert.assertTrue("PROBLEM - unable to locate Account Profile button on Rally Dashboard top menu", false);
@@ -1528,6 +1532,44 @@ public class AccountHomePage extends UhcDriver {
 		}
 		return null;
 	}
+	
+	public ContactUsPage navigateToContactUsPage(String memberType) {
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		try {
+			feebackpopupClose();
+			if (MRScenario.environmentMedicare.equals("team-ci1") || MRScenario.environmentMedicare.equals("team-h")
+					|| MRScenario.environmentMedicare.equals("test-a")
+					|| MRScenario.environmentMedicare.equals("team-e")) {
+				js.executeScript("arguments[0].click();", helpAndContactUslink);
+			} else if ("YES".equalsIgnoreCase(MRScenario.isTestHarness) && !(MRScenario.environment.equalsIgnoreCase("PROD")|| 
+					MRScenario.environment.equalsIgnoreCase("offline"))) {
+				JavascriptExecutor jse = (JavascriptExecutor) driver;
+				jse.executeScript("window.scrollBy(0,-500)", "");
+				validateNew(contactUsPageLink);
+				contactUsPageLink.click();
+				CommonUtility.checkPageIsReadyNew(driver);
+				CommonUtility.waitForPageLoadNew(driver, headingContactUs, CommonConstants.TIMEOUT_60);
+				Thread.sleep(3000L);
+			} else {
+				if (validate(linkContactUs)) {
+					linkContactUs.click();
+				} else {
+					System.out.println(
+							"Unable to locate Contact Us on dashboard, will attempt to see if it's in shadow-root");
+					locateAndClickElementWithinShadowRoot(shadowRootFooter,
+							"div > span > footer > div:nth-child(2) > div:nth-child(2) > ul > li:nth-child(1) > a",
+							true);
+				}
+			}
+			CommonUtility.waitForPageLoad(driver, headingContactUs, 10);
+			if (driver.getTitle().contains("Contact Us")) {
+				return new ContactUsPage(driver,memberType);
+			}
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 
 	public WebElement expandRootElement1(WebElement element) {
 		WebElement ele = (WebElement) ((JavascriptExecutor) driver).executeScript("return arguments[0].shadowRoot",
@@ -1866,6 +1908,9 @@ public class AccountHomePage extends UhcDriver {
 						claimsDashboardLink.click();
 					} else {
 						System.out.println("Check for shadow-root before giving up");
+						String cssStr="a[data-testid*=nav-link-claims]";
+						locateAndClickElementWithinShadowRoot(shadowRootHeader, cssStr);
+						/* tbd 
 						String secondTopMenuItemCssStr="#main-nav > div > div > div > a:nth-child(2)";
 						String thirdTopMenuItemCssStr="#main-nav > div > div > div > a:nth-child(3)";
 						WebElement tmp = locateElementWithinShadowRoot(shadowRootHeader,
@@ -1874,7 +1919,7 @@ public class AccountHomePage extends UhcDriver {
 							locateAndClickElementWithinShadowRoot(shadowRootHeader, secondTopMenuItemCssStr);
 						} else {
 							locateAndClickElementWithinShadowRoot(shadowRootHeader,	thirdTopMenuItemCssStr);
-						} 
+						} */
 					}
 				}
 				CommonUtility.checkPageIsReadyNew(driver);
@@ -3166,6 +3211,9 @@ public class AccountHomePage extends UhcDriver {
 				coverageBenefits.click();
 			else {
 				System.out.println("Check for shadow-root before giving up");
+				String cssStr="a[data-testid*=nav-link-coverage]";
+				locateAndClickElementWithinShadowRoot(shadowRootHeader, cssStr);
+				/* tbd 
 				String secondTopMenuItemCssStr="#main-nav > div > div > div > a:nth-child(2)";
 				String thirdTopMenuItemCssStr="#main-nav > div > div > div > a:nth-child(3)";
 				String forthTopMenuItemCssStr="#main-nav > div > div > div > a:nth-child(4)";
@@ -3176,6 +3224,7 @@ public class AccountHomePage extends UhcDriver {
 				} else {
 					locateAndClickElementWithinShadowRoot(shadowRootHeader,	forthTopMenuItemCssStr);
 				}
+				*/
 			}
 			System.out.println(driver.getCurrentUrl());
 			CommonUtility.waitForPageLoad(driver, heading, 30);
@@ -3842,12 +3891,14 @@ public class AccountHomePage extends UhcDriver {
 		checkForIPerceptionModel(driver);
 		if (driver.getCurrentUrl().contains("/dashboard")) {
 			System.out.println("User is on dashboard page and URL is ====>" + driver.getCurrentUrl());
-			if (validate(pharPresDashboardLink))
+			if (validate(pharPresDashboardLink,0))
 				pharPresDashboardLink.click();
-			else if (validate(pharPresDashboardLinkAlternative))
+			else if (validate(pharPresDashboardLinkAlternative,0))
 				pharPresDashboardLinkAlternative.click();
+			else if (validate(pharPresDashboardLink_preEff,0))  //note: should only be available for pre-eff user
+				pharPresDashboardLink_preEff.click();
 			else {
-				if (validate(shadowRootHeader)) {
+				if (validate(shadowRootHeader,0)) {
 					System.out.println("Check for shadow-root before giving up");
 					attemptShadowRootTopMenuLinkNavigationForPnP();
 				} else {
@@ -3896,16 +3947,20 @@ public class AccountHomePage extends UhcDriver {
 	}
 
 	public PharmaciesAndPrescriptionsPage navigateToPharmaciesAndPrescriptionsFromSecondaryPg() {
+		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
 		System.out.println("user is on '" + MRScenario.environmentMedicare + "' dashboard page, attempt secondary page navigaton to reach PnP page");
-		checkForIPerceptionModel(driver);
+		checkModelPopup(driver,1);
 		if (driver.getCurrentUrl().contains("/dashboard")) {
 			System.out.println("User is on dashboard page and URL is ====>" + driver.getCurrentUrl());
-			ClaimsSummaryPage claimsPg=navigateToClaimsSummaryPage();
-			Assert.assertTrue("PROBLEM - unable to go to secondary page claims first", claimsPg!=null);
+			BenefitsAndCoveragePage bncPg=navigateToBenefitAndCoveragePage();
+			//tbd ClaimsSummaryPage claimsPg=navigateToClaimsSummaryPage();
+			Assert.assertTrue("PROBLEM - unable to go to secondary page benefits first", bncPg!=null);
 			if (validate(pharPresDashboardLink)) 
 				pharPresDashboardLink.click();
 			else if (validate(pharPresDashboardLinkAlternative))
 				pharPresDashboardLinkAlternative.click();
+			else if (validate(pharPresDashboardLink_preEff,0))  //note: should only be available for pre-eff user
+				pharPresDashboardLink_preEff.click();
 			else {
 				if (validate(shadowRootHeader)) {
 					System.out.println("Check for shadow-root before giving up");
@@ -3930,8 +3985,9 @@ public class AccountHomePage extends UhcDriver {
 	}
 
 	public boolean findPnPLinksExistOnPg(String memberType) {
+		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
 		System.out.println("user is on '" + MRScenario.environmentMedicare + "' dashboard page, attempt to navigate to secondary page to see if PnP link exists");
-		checkForIPerceptionModel(driver);
+		checkModelPopup(driver,1);
 		if (noWaitValidate(preEffPnpMenuLnk) && memberType.contains("PREEFF")) 
 			return true;
 		if (noWaitValidate(pharPresDashboardLink)) {

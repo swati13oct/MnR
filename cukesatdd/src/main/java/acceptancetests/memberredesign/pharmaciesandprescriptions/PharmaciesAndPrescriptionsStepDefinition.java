@@ -66,9 +66,13 @@ public class PharmaciesAndPrescriptionsStepDefinition {
 			AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
 					.getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
 			//note: rally data not yet sync up so dashboard will not have pnp link, just go through secondary page
-			pnpPg = accountHomePage.navigateToPharmaciesAndPrescriptions();
-			if (pnpPg==null) //note: try secondary page before giving up
+			if (memberType.contains("PREEFF")) { //note: temp workaround till dashboard link is ready
 				pnpPg = accountHomePage.navigateToPharmaciesAndPrescriptionsFromSecondaryPg();
+			} else {
+				pnpPg = accountHomePage.navigateToPharmaciesAndPrescriptions();
+				if (pnpPg==null) //note: try secondary page before giving up
+					pnpPg = accountHomePage.navigateToPharmaciesAndPrescriptionsFromSecondaryPg();
+			}
 		}
 		Assert.assertTrue("PROBLEM - unable to navigate to Pharmacies & Prescriptions page", 
 				pnpPg != null);

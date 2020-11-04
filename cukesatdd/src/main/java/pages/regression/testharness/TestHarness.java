@@ -1478,7 +1478,7 @@ public class TestHarness extends UhcDriver {
     	public boolean findPnPLinksExistOnPg(String memberType) {
     		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
     		System.out.println("user is on '" + MRScenario.environmentMedicare + "' dashboard page, attempt to navigate to secondary page to see if PnP link exists");
-    		checkForIPerceptionModel(driver);
+    		checkModelPopup(driver,1);
     		if (noWaitValidate(preEffPnpMenuLnk) && memberType.contains("PREEFF")) 
     			return true;
     		if (noWaitValidate(pharPresDashboardLink)) {

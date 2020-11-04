@@ -494,6 +494,14 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 		else if (MRScenario.environment.equalsIgnoreCase("prod")) 
 			expUrl="https://member.uhc.com";
 		WebElement expElement=rallyDcePgHeading;
+		if (MRScenario.environment.equalsIgnoreCase("offline") || MRScenario.environment.equalsIgnoreCase("prod")) {
+			expUrl="/health-plans/estimate-drug-costs.html";
+			if (memberType.toUpperCase().contains("UHC"))
+					expUrl="uhcmedicaresolutions.com"+expUrl;
+			else 
+					expUrl="aarpmedicareplans.com"+expUrl;
+			expElement=dceHeader;
+		}
 		String expHref=expUrl;
 		String actHref=targetElement.getAttribute("href");
 		Assert.assertTrue("PROBLEM - '"+targetText+"' element href value is not as expected.  "
