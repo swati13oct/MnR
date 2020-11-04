@@ -50,12 +50,11 @@ Feature: 1.08. ACQ- Visitor profile
     Then the user should be able to see the Drug information in the guest profile page
       | Drugname | <drug1> |
 
-		@VisitorProfile_AARP
-    Examples: 
+		@VisitorProfile
       | state   | drug1   | zipCode |	site |
       | Alabama | Lipitor |   90210 |	AARP |
       
-    @VisitorProfile_UHC
+    @VisitorProfile
     Examples: 
       | state   | drug1   | zipCode |	site 	|
       | Alabama | Lipitor |   90210 |	UHC 	|  
@@ -88,14 +87,13 @@ Feature: 1.08. ACQ- Visitor profile
     And user delets the added plans on visitor profile page
       | Test Plans | <testPlans> |
 
-    @VisitorProfile_AARP @prodRegression_AARP
+    @VisitorProfil
     Examples: 
       |	site	| state   | UID       |	planyear	| zipcode | isMultiCounty | county           | plantype | testPlans                                                                                              |
       |	AARP	| Alabama | US1770330 | current		| 90210 	| NO            | Jefferson County | MAPD     | AARP Medicare Advantage SecureHorizons Focus (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO) |
       #| Alabama | US1770330 |   53503 | NO            | Jefferson County | SNP      | UnitedHealthcare Dual Complete LP1 (HMO D-SNP),UnitedHealthcare Medicare Advantage Assist (PPO C-SNP)  |
       
-    @VisitorProfile_UHC @prodRegression_UHC
-    Examples: 
+    @VisitorProfile
       |	site	| state   | UID       |	planyear	| zipcode | isMultiCounty | county           | plantype | testPlans                                                                                              |
       |	UHC		| Alabama | US1770330 |  current	| 90210 | NO            | Jefferson County | MAPD     | AARP Medicare Advantage SecureHorizons Focus (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO) |
 
@@ -341,12 +339,12 @@ Feature: 1.08. ACQ- Visitor profile
     Then Verify X out of Y provider covered information is displayed on visitor profile page
       | PlanName | <planname> |
 
-		@VisitorProfile_AARP @prodRegression_AARP
+		@VisitorProfile
     Examples: 
       |	site	| zipcode | isMultutiCounty | county          | plantype |	planyear	| planname                             | testPlans                                                                 |
       |	AARP	|   10001 | NO              | New York County | MAPD     |	current		| AARP Medicare Advantage Plan 2 (HMO) | AARP Medicare Advantage Plan 1 (HMO),AARP Medicare Advantage Plan 2 (HMO) |
       
-    @VisitorProfile_UHC @prodRegression_UHC
+    @VisitorProfile
     Examples: 
       |	site	| zipcode | isMultutiCounty | county          | plantype |	planyear	| planname                             | testPlans                                                                 |
       |	UHC		|   10001 | NO              | New York County | MAPD     |	current		| AARP Medicare Advantage Plan 2 (HMO) | AARP Medicare Advantage Plan 1 (HMO),AARP Medicare Advantage Plan 2 (HMO) |

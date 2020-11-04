@@ -1,7 +1,6 @@
-Feature: 2.05.1.ACQ-OLE PCP
+Feature: 1.05.6. OLE PCP Flow
  
-  
-  Scenario Outline: TID: <TID> - plan type: <PlanType> - OLE Landing from AARP Acquisition site VPP Plan Summary
+ Scenario Outline: TID: <TID> - plan type: <PlanType> - OLE Landing from AARP Acquisition site VPP Plan Summary
   Given the user is on medicare acquisition site landing page
     	|Site| <site>|
     When the user performs plan search using following information
