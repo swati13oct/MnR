@@ -1,5 +1,5 @@
 @F499650
-Feature: HD Order Status - Order Received
+Feature: HD Order Status - Request Placed
 
   Order Received status will be displayed when a refill order is placed or when a new prescription has been submitted in response to a renewal or transfer request. 
 
