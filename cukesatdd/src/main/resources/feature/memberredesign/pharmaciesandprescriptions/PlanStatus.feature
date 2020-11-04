@@ -15,7 +15,7 @@ Feature: Plan Status
     Examples:
       | planType        | memberType          |
       | PDP             | PREFFECTIVE        |
-      | MAPD            | PREFFECTIVE         |
+    #  | MAPD            | PREFFECTIVE         |
 
 
 
@@ -34,4 +34,4 @@ Feature: Plan Status
     Examples:
       | planType        | memberType          |
       | PDP             | Terminated          |
-      | MAPD            | Terminated          |
+     # | MAPD            | Terminated          |
