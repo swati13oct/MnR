@@ -799,7 +799,7 @@ public class DrugDetailsPage extends UhcDriver {
 //		WebElement element = favoriteIcon;
 //		action.moveToElement(element).perform();
 		jsMouseOver(favoriteIcon);
-		waitforElementNew(favoriteSuccess,30);
+//		waitforElementNew(favoriteSuccess,5);
 		System.out.println(favoriteSuccess.getText());
 
 	}
