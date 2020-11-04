@@ -34,7 +34,7 @@ Feature: 1.09.1 Member Health and Wellness Page - Member Auth - PROD
     Examples: 
       | TID   | username  | password  | MemUserName     | planType | memberType        | hasReward | hasRenewActive |
       | 15341 | kkumard   | mnrs786@  | haradaty32      | MA       | AARP_RewardsMember| true      | true           |
-      | 15341 | kkumard   | mnrs786@  | BNCSAUVE2       | MA       | UHC_RewardsMember | true      | true           |
+      | 15341 | kkumard   | mnrs786@  | ExDesertrat     | MA       | UHC_RewardsMember | true      | false          |
 
     @prod_healthAndWellness01_pdp_ship
     Examples: 
