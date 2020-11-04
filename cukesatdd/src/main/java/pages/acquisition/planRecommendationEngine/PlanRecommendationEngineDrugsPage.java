@@ -367,7 +367,7 @@ public class PlanRecommendationEngineDrugsPage extends UhcDriver {
                                 public void validateResultsCount() {
                             		int confirmationSize = Integer.parseInt(modaldrugsCount.getText().trim().split(" ")[2]);
                             		if (drugsList.size() == confirmationSize) {
-                            			System.out.println("Resutls and Count matched");
+                            			System.out.println("Results and Count matched");
                             		} else {
                             			System.out.println("Results and Count mismatch");
                             			Assert.assertTrue(false);

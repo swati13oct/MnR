@@ -139,14 +139,14 @@ public class VisitorProfilePage extends UhcDriver {
 	
 	public void validateAddedDrugs(String druglist) {
 		expandDrugBlock.click();
-		
+
 		String[] DrugListItems = druglist.split(":");
 		System.out.println("Added Drug Count : "+DrugListItems.length);
 		for(String currentDrug : DrugListItems) {
 			System.out.println("Current Added Drug Name : "+currentDrug);
 			List<WebElement> DrugName = driver.findElements(By.xpath("//div[contains(@class,'drug-list-accordion')]//button[contains(@class,'add-drugs')]/following-sibling::div//*[contains(@id,'DrugName')]"));
 
-			
+
 			for (int j = 0; j < DrugName.size(); j++) {
 				String drugInfo = DrugName.get(j).getText();
 				System.out.println("Drug name seen on Plan Summary: "+drugInfo);

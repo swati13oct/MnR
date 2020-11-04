@@ -10,7 +10,7 @@ import com.github.mkolisnyk.cucumber.runner.ExtendedCucumberOptions;
 import cucumber.api.CucumberOptions;
 
 /**
- * this file is to run test cases for RunMRATDDAcquisitionDCERegressionUlayerHome - Scenario for VPP Page
+ * this file is to run test cases for RunMRATDDAcquisitionDCERegressionBlayerHome - Scenario for VPP Page
  */
 @RunWith(ExtendedCucumber.class)
 @ExtendedCucumberOptions(retryCount=1,screenShotSize="", screenShotLocation="/screenshots/",jsonReport = "target/cucumber-RunMRATDDAcqDCEMedEdUHC.json",detailedReport = true,

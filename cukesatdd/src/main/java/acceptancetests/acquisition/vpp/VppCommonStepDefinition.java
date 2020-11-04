@@ -56,6 +56,7 @@ public class VppCommonStepDefinition {
 	}
 
 	WebDriver wd;
+	public static String PREflow="";
 
 	/**
 	 * @toDo:user is on medicare acquisition site landing page
@@ -1389,12 +1390,13 @@ public class VppCommonStepDefinition {
 				plannameAttributesMap.put(plannameAttributesRow.get(i).getCells().get(0),
 						plannameAttributesRow.get(i).getCells().get(1));
 			}
+			String planType = plannameAttributesMap.get("Plan Type");
 			String planName = plannameAttributesMap.get("Plan Name");
 			
 
 			VPPPlanSummaryPage planSummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-			DrugDetailsPage drugDetailsPage = planSummaryPage.navigateToDCEFromDrugDropdown(planName);
+			DrugDetailsPage drugDetailsPage = planSummaryPage.navigateToDCEFromDrugDropdown(planType,planName);
 			getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetailsPage);
 		}
 		
@@ -1415,6 +1417,33 @@ public class VppCommonStepDefinition {
 					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 			Assert.assertTrue("Drug cost is displayed incorrectly", plansummaryPage.verifyAddedDrugCost(planName,annualDrugCost));
 		}
+		
+		@Then("^the user validates the added drug name on plan summary page for a selected plan$")
+		public void verify_drugs_added_VPP(DataTable givenAttributes) {
+
+			List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+			Map<String, String> memberAttributesMap = new HashMap<String, String>();
+			for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+				memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+						memberAttributesRow.get(i).getCells().get(1));
+			}
+			String planType = memberAttributesMap.get("Plan Type");
+			String planName = memberAttributesMap.get("Plan Name");
+			String drugName = memberAttributesMap.get("DrugName");
+			
+			String temp = memberAttributesMap.get("Plan Type");
+			if (temp != null && PREflow != temp) {
+				PREflow = temp;
+				System.out.println("Current PRE Flow : "+PREflow);
+			}
+
+			VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+			Assert.assertTrue("Drugs coverage Info not updated",
+					plansummaryPage.verifyAllAddedDrugName(planType, planName, drugName));
+		}
+		
 		@Then("^the user click on Prescription Drug Benefits tab on plan details$")
 		public void the_user_click_on_Prescription_Drug_Benefits_and_validates_in_AARP_site() throws Throwable {
 			PlanDetailsPage vppPlanDetailsPage = (PlanDetailsPage) getLoginScenario()
@@ -2263,23 +2292,21 @@ public class VppCommonStepDefinition {
 			getLoginScenario().saveBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE,
 					pharmacySearchPage);
 		}
-
-	@Then("^the user validates the added drug name on plan summary page for a selected plan$")
-	public void verify_drugs_added_VPP(DataTable Planname) {
-
-		List<DataTableRow> plannameAttributesRow = Planname.getGherkinRows();
-		Map<String, String> plannameAttributesMap = new HashMap<String, String>();
-		for (int i = 0; i < plannameAttributesRow.size(); i++) {
-
-			plannameAttributesMap.put(plannameAttributesRow.get(i).getCells().get(0),
-					plannameAttributesRow.get(i).getCells().get(1));
+		
+		@When("^the user clicks on NBA to navigate to DCE Redesign page$")
+		public void the_user_clicks_on_NBA_to_navigate_to_DCE_Redesign_page(DataTable givenAttributes) throws Throwable {
+			List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+			Map<String, String> memberAttributesMap = new HashMap<String, String>();
+			for (int i = 0; i < memberAttributesRow.size(); i++) {
+				memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+						memberAttributesRow.get(i).getCells().get(1));
+			}
+			String planType = memberAttributesMap.get("Plan Type");
+			String planName = memberAttributesMap.get("Plan Name");
+			
+			VPPPlanSummaryPage planSummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+			GetStartedPage getStartedPage = planSummaryPage.navigateToDCEFromNBA(planType,planName);
+			getLoginScenario().saveBean(PageConstants.DCE_Redesign_GetStarted, getStartedPage);
 		}
-		String planName = plannameAttributesMap.get("Plan Name");
-		String drugName = plannameAttributesMap.get("DrugName");
-
-		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
-				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		Assert.assertTrue("Drugs coverage Info not updated",
-				plansummaryPage.verifyAllAddedDrugName(planName, drugName));
-	}
 }

@@ -1,8 +1,8 @@
 package pages.acquisition.dceredesign;
+
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,7 +24,6 @@ import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 import gherkin.formatter.model.DataTableRow;
-import pages.acquisition.ulayer.PageTitleConstants;
 import pages.acquisition.commonpages.PlanDetailsPage;
 import pages.acquisition.commonpages.VPPPlanSummaryPage;
 import pages.acquisition.commonpages.VisitorProfilePage;
@@ -206,9 +205,10 @@ public class DrugDetailsPage extends UhcDriver {
 	
 	@FindBy(id="dupIconFlyOut")
 	private WebElement favoriteIcon;
-	
+
 	@FindBy(xpath="//*[@class='flyout']//div[contains(@class,'success')]")
 	private WebElement favoriteSuccess;
+
 	
 	public DrugDetailsPage(WebDriver driver) {
 		super(driver);
@@ -794,18 +794,18 @@ public class DrugDetailsPage extends UhcDriver {
 				.findElement(By.xpath("//button[contains(@id,'saveBtn')]"));
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(false);", savePlan);
 		((JavascriptExecutor) driver).executeScript("arguments[0].click();", savePlan);
-		
-		Actions action = new Actions(driver);
-		WebElement element = favoriteIcon;
-		action.moveToElement(element).perform();
-		waitforElementNew(favoriteSuccess,30);
+
+//		Actions action = new Actions(driver);
+//		WebElement element = favoriteIcon;
+//		action.moveToElement(element).perform();
+		jsMouseOver(favoriteIcon);
+//		waitforElementNew(favoriteSuccess,5);
 		System.out.println(favoriteSuccess.getText());
-		
+
 	}
 	
 	public VisitorProfilePage navigateToVisitorProfilePage() {
 		waitforElement(favoriteIcon);
-//		shoppingCartIcon.click();
 		jsClickNew(favoriteIcon);
 		waitForPageLoadSafari();
 		if(driver.getCurrentUrl().contains("profile")) {
