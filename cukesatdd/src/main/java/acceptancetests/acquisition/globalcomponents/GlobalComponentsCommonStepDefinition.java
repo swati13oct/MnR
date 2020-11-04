@@ -316,5 +316,12 @@ public class GlobalComponentsCommonStepDefinition {
 		  Assert.assertTrue("home page not found", aquisitionHomePageReload!= null); 
 	  }
 
+	  @And("^the user clicks on browser back button$")
+	  public void click_browser_Back_Button() { 
+		  AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage)
+		  getLoginScenario() .getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		  aquisitionhomepage.clickBrowserBackButton();
+		  
+	  }
 
 }
