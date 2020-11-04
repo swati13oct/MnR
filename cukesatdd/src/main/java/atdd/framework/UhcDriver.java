@@ -444,13 +444,11 @@ try {
             return jsonObject;
     }
 
-	public void jsClickNew(WebElement element) {
-		if(validate(element, 1)) {
-			JavascriptExecutor js = (JavascriptExecutor) driver;
-			js.executeScript("arguments[0].click();", element);
-//		System.out.println("The WebElement ===  " +getidentifier(element) + "  : is Clicked");
-		}
-	}
+    public void jsClickNew(WebElement element) {
+    	JavascriptExecutor js = (JavascriptExecutor) driver;
+    	js.executeScript("arguments[0].click();", element);
+    	//		System.out.println("The WebElement ===  " +getidentifier(element) + "  : is Clicked");
+    }
 	
 	public static String getidentifier(WebElement element) {
 	      String elementStr = element.toString();
@@ -581,7 +579,6 @@ try {
 				//System.out.println("@@@The element " + element.getText() + "is found@@@");
 			}
 		} catch (Exception e) {
-
 			Assert.fail("The element " + element.getText() + "is not  found");
 			return false;
 		}
@@ -1260,12 +1257,10 @@ try {
 	 */
     public boolean jsMouseOver(WebElement element) {
     	try {
-    		if(validate(element, 1)) {
-    			JavascriptExecutor js = (JavascriptExecutor) driver;
-    			js.executeScript("$(arguments[0]).mouseover();", element);
-    		}
+    		JavascriptExecutor js = (JavascriptExecutor) driver;
+    		js.executeScript("$(arguments[0]).mouseover();", element);
     	} catch (Exception e) {
-    		Assert.fail("The element " + element.getText() + "is not  found");
+    		Assert.fail("Could not complete mouse over action, reason "+e.getMessage());
     		return false;
     	}
 
@@ -1285,7 +1280,7 @@ try {
 			JavascriptExecutor js = (JavascriptExecutor) driver;
 			js.executeScript("$(arguments[0]).mouseout();", element);
 		} catch (Exception e) {
-			Assert.fail("The element " + element.getText() + "is not  found");
+			Assert.fail("Could not complete mouse out action, reason "+e.getMessage());
 			return false;
 		}
 

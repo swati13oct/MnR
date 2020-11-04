@@ -214,7 +214,7 @@ public class PersonalInformationPage extends UhcDriver{
 		sendkeys(PermanentAdd_City,Perm_city);
 		System.out.println("Mailing Question : "+MailingQuestion);
 		if(MailingQuestion.equalsIgnoreCase("no")){
-			SameMailingAddressNo.click();
+			jsClickNew(SameMailingAddressNo);
 			//CommonUtility.waitForPageLoadNew(driver,MailingAdd_Street, 30);
 			sendkeysNew(MailingAdd_Street,Mailing_Street);
 			//sendkeysNew(MailingAdd_Aptno,Mailing_Aptno);
