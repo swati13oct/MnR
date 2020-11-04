@@ -530,7 +530,7 @@ public class ReviewSubmitPage extends UhcDriver{
 		String Expected_ZipCode = detailsMap.get("Zip Code");
 		String Expected_County = detailsMap.get("County");
 		String Expected_PlanPremium = detailsMap.get("Plan Premium");
-		String Medicaid_No = detailsMap.get("Medicaid");
+		String Medicaid_No = detailsMap.get("Medicaid Number");
 		String Mailing_AptNo = detailsMap.get("Mailing Apartment Number");
 		String PrimaryPhoneNumber = detailsMap.get("Home Number");
 		String MobilePhoneNumber = detailsMap.get("Mobile Phone Number");

@@ -486,8 +486,9 @@ public class PersonalInformationPage extends UhcDriver{
 		*/
 		
 		Thread.sleep(3000);
-			if(driver.getCurrentUrl().contains("special")){
-			Assert.assertTrue(driver.getCurrentUrl().contains("special"), "OLE SEP Page is Displayed");
+			//if(driver.getCurrentUrl().contains("special")){
+			if(driver.getCurrentUrl().contains("special-election-period")){
+			Assert.assertTrue(driver.getCurrentUrl().contains("special-election-period"), "OLE SEP Page is Displayed");
 			return new SpecialElectionPeriodPage(driver);
 			
 			}
@@ -502,7 +503,7 @@ public class PersonalInformationPage extends UhcDriver{
 					 validateNew(NextBtn); 
 					 jsClickNew(NextBtn);
 					
-					 if(driver.getCurrentUrl().contains("special")){
+					 if(driver.getCurrentUrl().contains("special-election-period")){
 					  System.out.println("OLE SEP Page is Displayed"); } else {
 					  System.out.println("OLE SEP Page is not Displayed"); }
 					 return new SpecialElectionPeriodPage(driver);	
