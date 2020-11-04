@@ -1456,9 +1456,9 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 		CommonUtility.waitForPageLoad(driver, pharmacyDropdownTexas, 5);
 		JavascriptExecutor jse = (JavascriptExecutor) driver;
 		jse.executeScript("window.scrollBy(0,-500)", "");
-		if (MRScenario.environment.contains("team-a") && memberType.toUpperCase().contains("GROUP"))
-			Assert.assertTrue("PROBLEM - do not expect drug cost dropdown for group user", !validate(pharmacyDropdownTexas));
-		else 
+		//tbd if (MRScenario.environment.contains("team-a") && memberType.toUpperCase().contains("GROUP"))
+		//tbd 	Assert.assertTrue("PROBLEM - do not expect drug cost dropdown for group user", !validate(pharmacyDropdownTexas));
+		//tbd else 
 			validateNew(pharmacyDropdownTexas);
 	}
 
