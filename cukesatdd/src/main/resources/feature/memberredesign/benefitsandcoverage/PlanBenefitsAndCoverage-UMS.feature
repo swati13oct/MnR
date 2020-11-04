@@ -778,10 +778,14 @@ Feature: 1.01 Member  benefits and Coverage page
     And the user clicks on More Information link
     And the user validates contactus section
 	
-    @DSNP_CnS01
+    @DSNP_CnS01 @devRegression
     Examples: 
       | index | FID             | planType   | memberType           | copayCategory | language | name         | memberid     | effectivedate | monthlypremium | extrahelp            | Identifier       | count | H-PBP    | rider  |
       | 25-c1 | F494433,F506320 | DSNP_MAPD  | Individual_CnS01_BnC | LIS 2         | ENGLISH  | DREENA KIMURA| 971949191-00 | 01/01/2020    | Not Available  | Extra Help Level : 2 | IndEffectiveAARP |     6 | H0624-001| NoRider|
+
+    @DSNP_CnS01
+    Examples: 
+      | index | FID             | planType   | memberType           | copayCategory | language | name         | memberid     | effectivedate | monthlypremium | extrahelp            | Identifier       | count | H-PBP    | rider  |
       | 26-c2 | F494433,F506320 | DSNP_MAPD  | Individual_CnS02_BnC | LIS 3         | ENGLISH  | EBER KRYSTEK| 903010063-00 | 01/01/2020    | Not Available  | Extra Help Level : 3 | IndEffectiveAARP |     6 | H2228-045| NoRider|
     
     @DSNP_CnS02
