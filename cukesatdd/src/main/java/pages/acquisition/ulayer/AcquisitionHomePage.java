@@ -2592,7 +2592,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
      		return new PlanDocsPage(driver);
 	 }
 	
-	public void navigateToISPath(String path) {
+	public IsInsuranceAgent navigateToISPath(String path) {
 
 		String CurrentURL = driver.getCurrentUrl();
 		System.out.println("Current URL : " + CurrentURL);
@@ -2600,10 +2600,17 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		String NavigateToURL = CurrentURL + path;
 		System.out.println("Navigating to URL : " + NavigateToURL);
 		driver.navigate().to(NavigateToURL);
-		CommonUtility.waitForPageLoad(driver, driver.findElement(By.xpath("//header[contains(@class,'header')]")), 30);
+		//CommonUtility.waitForPageLoad(driver, driver.findElement(By.xpath("//header[contains(@class,'header')]")), 30);
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		System.out.println("Page Title : " + (driver.findElement(By.xpath("//title")).getText()));
 		//return IsInsuranceAgent;
-		//return new IsInsuranceAgent(driver);
+		return new IsInsuranceAgent(driver);
 	
 
 	}

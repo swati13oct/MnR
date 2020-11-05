@@ -179,10 +179,10 @@ public class isInsuranceAgentStepDefenition    {
  //  IsInsuranceAgent licenseInsuranceAgent =(IsInsuranceAgent) getLoginScenario().getBean(PageConstants.IS_INSURANCE_AGENT_PAGE);
 	
 //	licenseInsuranceAgent.navigateToISPath(path);
-		aquisitionhomepage.navigateToISPath(path);
-		IsInsuranceAgent LicenseInsuranceAgentPage = new  IsInsuranceAgent(wd);
-		if (LicenseInsuranceAgentPage != null) {
-			getLoginScenario().saveBean(PageConstants.IS_INSURANCE_AGENT_PAGE, LicenseInsuranceAgentPage);
+		IsInsuranceAgent lispage = aquisitionhomepage.navigateToISPath(path);
+
+		if (lispage != null) {
+			getLoginScenario().saveBean(PageConstants.IS_INSURANCE_AGENT_PAGE, lispage);
 
 		} else {
 			Assert.fail("Error Loading Insurance Agent page");
