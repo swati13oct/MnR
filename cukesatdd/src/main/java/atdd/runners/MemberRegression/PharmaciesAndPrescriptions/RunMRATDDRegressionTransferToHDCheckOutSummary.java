@@ -9,11 +9,11 @@ import cucumber.api.CucumberOptions;
 
 @RunWith(ExtendedCucumber.class)
 @ExtendedCucumberOptions(retryCount=0,screenShotSize="", screenShotLocation="/screenshots/",
-jsonReport = "target/cucumber-RunMRATDDRegressionTransferToHDCheckoutSummary.json",detailedReport = true, detailedAggregatedReport = true,
-overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionTransferToHDCheckoutSummary")
+jsonReport = "target/cucumber-RunMRATDDRegressionTransferToHDCheckOutSummary.json",detailedReport = true, detailedAggregatedReport = true,
+overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionTransferToHDCheckOutSummary")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberredesign" }, 
-features = { "src/main/resources/feature/memberredesign/pharmaciesandprescriptions/TransferToHDCheckoutSummary.feature" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionTransferToHDCheckoutSummary.json" }, tags = { "@Regression" }, monochrome=true)
+features = { "src/main/resources/feature/memberredesign/pharmaciesandprescriptions/TransferToHDCheckOutSummary.feature" }, plugin = {
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionTransferToHDCheckOutSummary.json" }, tags = { "@Regression" }, monochrome=true)
 public class RunMRATDDRegressionTransferToHDCheckOutSummary {
 
 }
