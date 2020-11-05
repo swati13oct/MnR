@@ -1082,6 +1082,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		validateNew(footerAboutUsLink);
 //		footerAboutUsLink.click();
 		jsClickNew(footerAboutUsLink);
+		sleepBySec(2);
 		CommonUtility.checkPageIsReadyNew(driver);
 		waitForPageLoadSafari();
 		if (getTitle().contains("About UnitedHealthcare")) {
@@ -2276,7 +2277,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 				CommonUtility.waitForPageLoadNew(driver, zipCodeShopField, 30);
 				sendkeys(zipCodeShopField, zipcode);
-				ShopEnrollButton.click();
+				jsClickNew(ShopEnrollButton);
+				waitForPageLoadSafari();
 				// }
 				CommonUtility.waitForPageLoadNew(driver, zipcodeChangeLink, 30);
 				if (driver.getCurrentUrl().contains("health-plans")) {
@@ -2287,10 +2289,10 @@ public class AcquisitionHomePage extends GlobalWebElements {
 				public VPPPlanSummaryPage searchPlansShopEnroll(String zipcode, String countyName) {
 				CommonUtility.waitForPageLoadNew(driver, zipCodeShopField, 30);
 				sendkeys(zipCodeShopField, zipcode);
-				ShopEnrollButton.click();
+				jsClickNew(ShopEnrollButton);
 				CommonUtility.waitForPageLoad(driver, countyModal, 45);
 				if (validate(countyModal))
-					driver.findElement(By.xpath("//div[@id='selectCounty']//a[text()='" + countyName + "']")).click();
+					jsClickNew(driver.findElement(By.xpath("//div[@id='selectCounty']//a[text()='" + countyName + "']")));
 				CommonUtility.waitForPageLoadNew(driver, vppTop, 30);
 				if (driver.getCurrentUrl().contains("plan-summary")) {
 					return new VPPPlanSummaryPage(driver);

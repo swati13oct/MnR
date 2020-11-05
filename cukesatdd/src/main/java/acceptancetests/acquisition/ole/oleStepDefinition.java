@@ -2787,7 +2787,7 @@ public class oleStepDefinition {
 	            vppmarketingBullets = entry.getValue();
 	            }
 		}
-		
+		vppmarketingBullets.replaceAll(String::trim);
 		
 		System.out.println("List of MarketingBullets in VPP page is: "+ vppmarketingBullets);
 		

@@ -700,14 +700,14 @@ public class ComparePlansPage extends UhcDriver {
 	
 	public void clickOnBacktoPlans(){
 		validateNew(backToAllPlansLink);
-		backToAllPlansLink.click();
+		jsClickNew(backToAllPlansLink);
 		System.out.println("Clicked on Back to plans");
 	}
 	
 	public VPPPlanSummaryPage clickOnNewAddIcon(){
     	 
     	 validateNew(addPlanButton);
-    	 addPlanButton.click();
+    	 jsClickNew(addPlanButton);
  		try {
  			Thread.sleep(4000);
  		} catch (InterruptedException e) {

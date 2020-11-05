@@ -3048,14 +3048,14 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		DOB.sendKeys(DateOfBirth);
 		System.out.println("Date of birth is entered");
 		Thread.sleep(2000);
-		MaleGender.click();
+		jsClickNew(MaleGender);
 		Thread.sleep(2000);
 		part_A_monthDrpDwn.click();
 		Thread.sleep(2000);
 		Part_A_monthDrpDwnOption.click();
 		Thread.sleep(2000);
 		System.out.println("Effective date- month value selected");
-		part_A_yearDrpDwn.click();
+		jsClickNew(part_A_yearDrpDwn);
 		Thread.sleep(2000);
 		Part_A_yearDrpDwnOption.click();
 		System.out.println("Effective date- year value selected");
@@ -3073,13 +3073,13 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		startDrpDwnOption.click();
 		System.out.println("Plan to start date selected");
 		Thread.sleep(2000);
-		ViewPlanMedSupPage.click();
+		jsClickNew(ViewPlanMedSupPage);
 	}
 
 	public String StartApplicationButton(String FirstName, String LastName) throws InterruptedException {
 		Thread.sleep(4000);
 		CommonUtility.waitForPageLoadNew(driver, Start_ApplicationBtn, 20);
-		Start_ApplicationBtn.click();
+		jsClickNew(Start_ApplicationBtn);
 		System.out.println("Start application button is clicked on application page");
 		Thread.sleep(4000);
 		CommonUtility.waitForPageLoadNew(driver, insuredStatus, 20);
@@ -3087,30 +3087,30 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		Thread.sleep(2000);
 		nextButton.click();
 		Thread.sleep(2000);
-		nextButton.click();
+		jsClickNew(nextButton);
 		Thread.sleep(2000);
-		nextButton.click();
+		jsClickNew(nextButton);
 		Thread.sleep(2000);
-		nextButton.click();
+		jsClickNew(nextButton);
 		Thread.sleep(2000);
 		firstName.sendKeys(FirstName);
 		lastName.sendKeys(LastName);
-		nextButton.click();
+		jsClickNew(nextButton);
 		CommonUtility.waitForPageLoadNew(driver, address1, 20);
 		address1.sendKeys("TestAddress1");
 		cityName.sendKeys("TestCity");
-		alternatemailingAddressBtn.click();
+		jsClickNew(alternatemailingAddressBtn);
 		emailAddress.sendKeys("John_Kerry@test.com");
 		phoneNumber.sendKeys("1234567890");
-		nextButton.click();
+		jsClickNew(nextButton);
 		Thread.sleep(2000);
-		nextButton.click();
+		jsClickNew(nextButton);
 		Thread.sleep(2000);
 		String ResumeKey = resumeKey.getText();
 		System.out.println("The return to the application code is- " + ResumeKey);
-		cancelButton.click();
+		jsClickNew(cancelButton);
 		CommonUtility.waitForPageLoad(driver, cancelButtonPopUp, 30);
-		cancelButtonPopUp.click();
+		jsClickNew(cancelButtonPopUp);
 		System.out.println("Cancel application has been clicked on the pop up");
 		return ResumeKey;
 	}
@@ -3423,7 +3423,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		// waitTillElementClickableInTime(Start_ApplicationBtn, 60);
 		// jsClickNew(Start_ApplicationBtn);
 		CommonUtility.waitForPageLoadNew(driver, resumeApplication, 30);
-		resumeApplication.click();
+		jsClickNew(resumeApplication);
+		waitForPageLoadSafari();
 		System.out.println("Resume application link clicked successfully");
 	}
 
@@ -3431,7 +3432,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 		CommonUtility.waitForPageLoad(driver, Submit, 20);
 		validate(Submit, 15);
-		Submit.click();
+		jsClickNew(Submit);
+		waitForPageLoadSafari();
 		CommonUtility.checkPageIsReadyNew(driver);
 		String CurrentSupplementURL = driver.getCurrentUrl();
 		System.out.println(
@@ -3453,10 +3455,12 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	public void signInOptumId(String username, String password) {
 		try {
-			signIn.click();
+			jsClickNew(signIn);
+			waitForPageLoadSafari();
 			driver.findElement(By.cssSelector("input#userNameId_input")).sendKeys(username);
 			driver.findElement(By.cssSelector("input#passwdId_input")).sendKeys(password);
-			driver.findElement(By.cssSelector("input#SignIn")).click();
+			jsClickNew(driver.findElement(By.cssSelector("input#SignIn")));
+			waitForPageLoadSafari();
 			String Question = driver.findElement(By.cssSelector("label#challengeQuestionLabelId")).getText().trim();
 			WebElement securityAnswer = driver.findElement(By.cssSelector("div#challengeSecurityAnswerId >input"));
 			if (Question.equalsIgnoreCase("What is your best friend's name?")) {

@@ -332,7 +332,7 @@ public ArrayList<String> validate_marketing_details(String planName) {
 		
 		for(WebElement element:marketingBullets)
 		{
-			String marketingDetails = element.getText();
+			String marketingDetails = element.getText().trim();
 			marketingBulletDetails.add(marketingDetails);
 		}
 			
