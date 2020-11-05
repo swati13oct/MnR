@@ -14,7 +14,7 @@ import cucumber.api.CucumberOptions;
 @RunWith(ExtendedCucumber.class)
 @ExtendedCucumberOptions(retryCount=1,screenShotSize="", screenShotLocation="/screenshots/",jsonReport = "target/cucumber-RunMRATDDAcquisitionTFNBlayer.json",detailedReport = true, detailedAggregatedReport = true, overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDAcquisitionTFNBlayer")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.acquisition" },monochrome = true, features = { "src/main/resources/feature/acquisition/tfn" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionTFNBlayer.json" }, tags = { "@tfn_uhc" })
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionTFNBlayer.json" }, tags = { "@ConnectorModelPlus" })
 
 
 public class RunMRATDDAcquisitionTFNBlayer {

@@ -34,7 +34,7 @@ Then user navigates to MA VPP tab to vaify TFN
 		
 @Scenario2b @campaign_traffic  @tfn_uhc 
 Scenario Outline:  2.2 Varify all TAB TFn by landing on campaign specific url 8003728
-Given user is landing on UHC via campaign url
+Given 
 	|  URL     | <url>  |
 Then user navigates to MA VPP tab to vaify TFN from this specific url
 	|MA TFN |<maTabTfn>|
@@ -124,8 +124,22 @@ Then navigate from yahoo via uhc site to MedSup to varify TFN
 	 	    | 1-800-850-8659    |1-888-378-0849 |https://www.yahoo.com   |	
 		
 		
-		
-		
-		
+	@Scenario5A @ConnectorModelPlus 
+Scenario Outline:  2.2 Verify TFN and PSC code from External links to portal landing
+Given user is landing from Externallinks
+	  |  URL     | <url>  |
+Then user clicks on learn about Medicare"<learnMoreurl>"
+Then user verify TFN
+    			   |TFN	|<TFN>|
+Then user clicks on Get Help Finding a Plan"<GetHelpurl>"
+ Then user enters zipcode "<zipcode>"	and user navigates to page"<Pageurl>"
+Then user verify VPP TFN
+    			   |VPPTFN	|<VPPTFN>|
+
+ 
+			
+	Examples:
+	| url 								 						| TFN  				|VPPTFN|learnMoreurl                                                                                                                                                                 |  GetHelpurl| zipcode|Pageurl|
+	|https://www.myuhcplans.com/eaton| 1-844-462-9435|1-888-270-6995|https://eaton.stage-uhcmedicaresolutions.uhc.com/medicare-education.html?WT.mc_id=8006890&originatingSite=https%3A%2F%2Fwww.myuhcplans.com%2Featon&subdomain=eaton|https://eaton.stage-uhcmedicaresolutions.uhc.com/plan-recommendation-engine.html|37211|https://eaton.stage-uhcmedicaresolutions.uhc.com/health-plans/medicare-advantage-plans/available-plans.html?zipcode=37211&WT.mc_id=897576&county=180&state=47&coveragePerson=M&originatingSite=https%253A%252F%252Fwww.myuhcplans.com%252Featon&subdomain=eaton#/plan-summary|
 		
 		
