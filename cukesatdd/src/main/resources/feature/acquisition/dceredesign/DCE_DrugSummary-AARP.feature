@@ -79,7 +79,7 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
       | path                                             | pageName                   | drugName | zipCode |
       | health-plans/estimate-drug-costs.html/getstarted | DCE Redesign - Get Started | Lipitor  |   90210 |
 
-  @drugSummary_PlanToggle @F477157 @F472327
+  @drugSummary_PlanToggle @F477157 @F472327 @F493728
   Scenario Outline: Test to verify plan toggle functionality on Drug summary page
     Given the user is on AARP medicare acquisition site landing page
     When the user navigates to following AARP medicare acquisition site page
@@ -261,14 +261,14 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
       | zipCode | plantype | county | isMultutiCounty | drugName | planname                                           |
       |   10001 | MAPD     | none   | no              | Emsam    | AARP Medicare Advantage SecureHorizons Focus (HMO) |
 
-  @dceNoDefaultMAPDplan @F492296
+  @dceNoDefaultMAPDplan @F492296 @F493728
   Scenario Outline: Test to Verify that user can Handle Zip Codes with No Pharmacies Returned
     Given the user is on the AARP medicare site landing page
     When I access the acquisition DCE tool from home page
     Then the user validates Get Started Page
     When the user clicks on Add drugs button
-    And adds drugs in drug list page
-      | DrugName | <drug1> |
+     And adds drugs in drug list page
+      | DrugName | <drugName> |
     And clicks on Review drug cost button
     Then user should be navigated to zipcode and plan year capture page for AEP
     When user enters valid zipcode and county
@@ -277,11 +277,11 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
     And user clicks on continue button in Zip Entry Page
     #Then load screen should be displayed in AARP
     And user should be navigated to Review drug cost estimate page
-    And user should be able to see Medicare Advantage plan by default
+    #And user should be able to see Medicare Advantage plan by default
     And user should be able to toggle between plan types
-
+    
     Examples: 
-      | zipcode | plantype | county           | isMultutiCounty | drug1   |planname                        |
+      | zipcode | plantype | county           | isMultutiCounty | drugName   |planname                        |
       |   96799 | PDP      | Western District | no              | Orkambi |AARP MedicareRx Walgreens (PDP) |
 
   @dceSaveplanandBacktoplans @F492270
