@@ -188,8 +188,8 @@ public class PlanRecommendationEngineLandingAndZipcodeMobilePages extends UhcDri
 
 	// SingleCounty Method Mobile
 	public void quizStartsAndRunQuestionnaire(String zipcode) throws InterruptedException {
-		
-		jsClickNew(getStartedBtn);
+
+	
 		System.out.println("After clicking GetStarted");
 		zipcodePage();
 		waitforElementVisibilityInTime(zipCode, 45);
@@ -258,18 +258,12 @@ public class PlanRecommendationEngineLandingAndZipcodeMobilePages extends UhcDri
 	public void zipcodePage() {
 		boolean hidden;
 		System.out.println("Validating ZipcodePage Elements");
-		/*
-		 * String preBreadcrumbs =
-		 * (driver.findElement(By.cssSelector("div.breadcrumb"))).getText();
-		 * Assert.assertTrue(preBreadcrumbs.contains("Home / Plan Recommendation Engine"
-		 * ));
-		 */
+/*		String preBreadcrumbs = (driver.findElement(By.cssSelector("div.breadcrumb"))).getText();
+		Assert.assertTrue(preBreadcrumbs.contains("Home / Plan Recommendation Engine"));*/
 		validate(planSelectorPageTilte);
-		// Assert.assertTrue(planSelectorPageTilte.getText().contains("Get help finding
-		// a plan"));
+//		Assert.assertTrue(planSelectorPageTilte.getText().contains("Get help finding a plan"));
 		validate(pageStepsNumberName, 30);
-		// Assert.assertTrue(pageStepsNumberName.getText().contains("Step 1:
-		// Location"));
+//		Assert.assertTrue(pageStepsNumberName.getText().contains("Step 1: Location"));
 		validate(pageProgressPercentage, 30);
 		Assert.assertTrue(pageProgressPercentage.getText().contains("0% Complete"));
 		validate(pageRequiredInfo);
@@ -280,12 +274,10 @@ public class PlanRecommendationEngineLandingAndZipcodeMobilePages extends UhcDri
 		Assert.assertTrue(zipcodePageQuestion.getText().contains("ZIP"));
 		validate(zipcodePageQuestionMark);
 		Assert.assertTrue(zipcodePageQuestionMark.getText().contains("*"));
-		hidden = (driver.findElement(By.xpath("//*[@id='zip-code']")).getAttribute("placeholder") == "Enter ZIP Code")
-				? true
-				: false;
-		System.out.println("Value of Enter Zipcode field is : " + hidden + " in Zip Code page");
+		hidden = (driver.findElement(By.xpath("//*[@id='zip-code']")).getAttribute("placeholder") == "Enter ZIP Code") ? true : false;
+		System.out.println("Value of Enter Zipcode field is : "+ hidden +" in Zip Code page");
 		System.out.println((hidden != true) ? "Ener Zip Code Text is displayed" : "Ener Zip Code Text not displaying");
-
+		
 	}
 
 	public void zipcodePagemultiCounty() {
