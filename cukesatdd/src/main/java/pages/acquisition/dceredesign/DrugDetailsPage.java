@@ -233,7 +233,7 @@ public class DrugDetailsPage extends UhcDriver {
 		validateNew(DrugCosts_MonthlyPremium);
 		validateNew(DrugCosts_AnnualEstTotal);
 		validateNew(DrugCosts_PlanDetailsBtn);
-		validateNew(DrugCosts_SaveBtn);
+		//validateNew(DrugCosts_SaveBtn);
 		validateNew(DrugCosts_TFN);
 	}
 
