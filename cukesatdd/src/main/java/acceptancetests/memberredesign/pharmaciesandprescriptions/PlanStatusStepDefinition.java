@@ -123,6 +123,16 @@ public class PlanStatusStepDefinition {
 
 	}
 
+	@Then("^I will see the PnPPage for preeffective members$")
+	public void I_will_see_the_PnPPage_for_preeffective_members() throws Throwable {
+
+		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
+				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
+		pnpPg.validatePreeffectivePnPPage();
+		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
+
+	}
+
 
 
 

@@ -386,6 +386,9 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	@FindBy(xpath = "//a[@data-testid='view-all-meds-CTA' and contains(text(),'View All Medications')]")
 	protected WebElement ViewAllMedications;
 
+	@FindBy(xpath = "//*[contains(text(),'Your plan will become effective')]")
+	protected WebElement becomeEffective;
+
 	@FindBy(xpath = "//span[contains(text(),'Remove Item from Order')]")
 	protected WebElement removeItemFromOrderLink;
 

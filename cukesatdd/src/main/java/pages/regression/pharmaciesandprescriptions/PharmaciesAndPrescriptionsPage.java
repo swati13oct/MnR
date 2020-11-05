@@ -2824,6 +2824,11 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 			}
 		}
 
+	public void validatePreeffectivePnPPage() {
+		Assert.assertTrue("PROBLEM - unable to locate become effective text element",
+				pnpValidate(becomeEffective));
+	}
+
 		public boolean validateRetailMedNotHavingRefillLeftField() {
 			for (WebElement ele : listOfMedicationSectionNotFrmOptum) {
 				if (!ele.getAttribute("data-is-refill-eligible").equals("false")) {
