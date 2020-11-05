@@ -34,6 +34,7 @@ import pages.acquisition.ole.OLETestHarnessPage;
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.pharmacyLocator.PharmacySearchPage;
 import pages.acquisition.dceredesign.GetStartedPage;
+import pages.acquisition.isinsuranceagent.IsInsuranceAgent;
 
 /**
  * @author pperugu
@@ -2002,6 +2003,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		System.out.println("Page Title : " + (driver.findElement(By.xpath("//title")).getText()));
 
 	}
+	
 
 	public void validateGlobalFooterLinks() {
 		validateNew(footerHomeLink);
@@ -2589,4 +2591,20 @@ public class AcquisitionHomePage extends GlobalWebElements {
      	    	
      		return new PlanDocsPage(driver);
 	 }
+	
+	public void navigateToISPath(String path) {
+
+		String CurrentURL = driver.getCurrentUrl();
+		System.out.println("Current URL : " + CurrentURL);
+
+		String NavigateToURL = CurrentURL + path;
+		System.out.println("Navigating to URL : " + NavigateToURL);
+		driver.navigate().to(NavigateToURL);
+		CommonUtility.waitForPageLoad(driver, driver.findElement(By.xpath("//header[contains(@class,'header')]")), 30);
+		System.out.println("Page Title : " + (driver.findElement(By.xpath("//title")).getText()));
+		//return IsInsuranceAgent;
+		//return new IsInsuranceAgent(driver);
+	
+
+	}
 }
