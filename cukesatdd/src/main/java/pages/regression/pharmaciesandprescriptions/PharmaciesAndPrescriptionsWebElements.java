@@ -475,7 +475,7 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	@FindBy(xpath = "//*[contains(text(),'1-800-721-0627')]")
 	protected WebElement technicalSupportNumber;
 
-	@FindBy(xpath = "//*[contains(text(),'1-866-255-4835')]")
+	@FindBy(xpath = "//*[contains(text(),'1-844-876-6177')]")
 	protected WebElement planSupportNumber;
 
 	@FindBy(xpath = "//*[@id='needhelpsectioncontactus']/div/section/div/div[2]/div/div/div[1]/div/div/p[3]")
@@ -1347,7 +1347,7 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	public boolean validateNeedHelpsPhoneNumbers() {
 
 		String techNumber="1-800-721-0627";
-		String planNumber="1-866-255-4835";
+		String planNumber="1-844-876-6177";
 
 		if (techNumber.equals(technicalSupportNumber.getText()) && planNumber.equals(planSupportNumber.getText())) {
 
@@ -1360,10 +1360,10 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 
 	public boolean validateNeedHelpsHoursOfOperations() {
 
-		String Hours1="7 a.m. - 10 p.m. CT, 7 days a week";
-		String Hours2="8 a.m. - 8 p.m. local time, 7 days a week";
+		String Hours1="7 a.m. - 10 p.m. CT,";
+		String Hours2="8 a.m. - 8 p.m. local time,";
 
-		if (planSupportHours.getText().equals(Hours1) && technicalSupportHours.getText().equals(Hours2)) {
+		if (planSupportHours.getText().contains(Hours1) && technicalSupportHours.getText().contains(Hours2)) {
 
 			return true;
 		} else {
