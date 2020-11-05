@@ -5,7 +5,32 @@ Feature: 1.04.2.2 To Test DREAM EOB for Members - E2E - Member Auth - PROD
   #   Given feature security flag must set to true when testing on stage env
   #    | Feature           | UCPEob |
 
+  #----- begin sanity
+  @prod_sanity
+  Scenario Outline: -index: <index> -planType: <planType> -memberType: <memberType> -To verify DREAM EOB page content and PDFs
+    Given the user is on member auth login flow page
+    When the member is able to login with correct username and password
+      | Username | <username> |
+      | Password | <password> |
+    And Member Enters the Username he wants to search
+      | MemUsername | <MemUserName> |
+    And user clicks on member to select
+    And user stores test input for validations
+      | Username | <MemUserName> |
+      | Plan Type    | <planType>    |
+      | Member Type  | <memberType>  |
+    #-------------- navigate to the target test page for testing
+    Then the user navigates to EOB page
+    #----- Validate Date Range Last 18 months ----  
+    And the user selects the desired date range
+      | Date Range | Last 18 months |
+    Then the user validates search result section content for DREAM EOB
 
+    Examples: 
+      | index | username  | password  | MemUserName             | planType | memberType        | flagZeroEob |
+      | S01   | kkumard   | mnrs786@  | WFBATES@GMAIL.COM       | MAPD     | COSMOS_DEOB       | true        |
+ 
+  #----- begin regression
   @prod_dreamEob01 @E2E
   Scenario Outline: -index: <index> -planType: <planType> -memberType: <memberType> -To verify DREAM EOB page content and PDFs
     Given the user is on member auth login flow page
@@ -73,52 +98,51 @@ Feature: 1.04.2.2 To Test DREAM EOB for Members - E2E - Member Auth - PROD
       | Flag Zero EOB User | <flagZeroEob> |
 
     #note: WFBATES has partC n D EOB
-    @prod_dreamEob01a
+    @prod_dreamEob01a_mapdCosmos
     Examples: 
       | index | username  | password  | MemUserName             | planType | memberType        | flagZeroEob |
-    # | 01    | kkumard  | mnrs786@  | billrosner1             | MAPD     | COSMOS_DEOB       | true        |
-      | 01    | kkumard  | mnrs786@  | WFBATES@GMAIL.COM       | MAPD     | COSMOS_DEOB       | true        |
+      | 01    | kkumard   | mnrs786@  | WFBATES@GMAIL.COM       | MAPD     | COSMOS_DEOB       | true        |
 
-    @prod_dreamEob01b
+    @prod_dreamEob01b_mapdNice
+    Examples: 
+      | index | username  | password  | MemUserName             | planType | memberType         | flagZeroEob |
+      | 02    | kkumard   | mnrs786@  | sandrakaye86            | MAPD     | NICE_DEOB          | true        |  
+
+    @prod_dreamEob01c_pdp 
     Examples: 
       | index | username  | password  | MemUserName             | planType | memberType        | flagZeroEob |
-      | 02    | kkumard  | mnrs786@  | sandrakaye86            | MAPD     | NICE_EOB_R        | true        |  
+#     | 03    | kkumard   | mnrs786@  | testuserTBD             | MAPD     | MULTIEOB_NICE_DEOB| true        |  
+      | 04    | kkumard   | mnrs786@  | JAN06ARY                | PDP      | PDP_RX_DEOB       | true        |  
 
-    @prod_dreamEob01c 
+    @prod_dreamEob01d_maCosmos 
     Examples: 
-      | index | username  | password  | MemUserName             | planType | memberType        | flagZeroEob |
-#     | 03    | kkumard  | mnrs786@  | testuserTBD             | MAPD     | MULTIEOB_NICE_DEOB| true        |  
-      | 04    | kkumard  | mnrs786@  | JAN06ARY                | PDP      | PDP_RX_DEOB       | true        |  
+      | index | username  | password  | MemUserName             | planType | memberType         | flagZeroEob |
+      | 05    | kkumard   | mnrs786@  | haradaty32              | MA       | COSMOS_DEOB        | true        |
 
-    @prod_dreamEob01d 
+    @prod_dreamEob01e_maNice 
     Examples: 
-      | index | username  | password  | MemUserName             | planType | memberType        | flagZeroEob |
-      | 05    | kkumard  | mnrs786@  | haradaty32              | MA       | COSMOS_EOB_R      | true        |
+      | index | username  | password  | MemUserName             | planType | memberType         | flagZeroEob |
+      | 06    | kkumard   | mnrs786@  | haradaty32              | MA       | MA_NICE_DEOB       | true        |
 
-    @prod_dreamEob01e 
-    Examples: 
-      | index | username  | password  | MemUserName             | planType | memberType        | flagZeroEob |
-      | 06    | kkumard  | mnrs786@  | ERNIE2450               | MA       | MA_NICE_DEOB      | true        |
-
-    @prod_dreamEob01f 
+    @prod_dreamEob01f_fedComboShipFed 
     Examples: 
       | index | username  | password  | MemUserName             | planType | memberType              | flagZeroEob |
-#     | 07    | kkumard  | mnrs786@  | testuserTBD             | PDP      | COMBO_SHIP_PDP_RX_DEOB  | true        |  
-      | 08    | kkumard  | mnrs786@  | phleauxdailles43        | MA       | COMBO_SHIP_MA_NICE_DEOB | true        | 
+#     | 07    | kkumard   | mnrs786@  | testuserTBD             | PDP      | COMBO_SHIP_PDP_RX_DEOB  | true        |  
+      | 08    | kkumard   | mnrs786@  | phleauxdailles43        | MA       | COMBO_SHIP_MA_NICE_DEOB | true        | 
 
-    @prod_dreamEob01g
+    @prod_dreamEob01g_pdpComboPdpSsp
     Examples: 
-      | index | username  | password  | MemUserName             | planType | memberType        | flagZeroEob |
-      | 09    | kkumard  | mnrs786@  | rldf1942                | PDP      | PDP_SSP_COMBO_EOB | true        |
+      | index | username  | password  | MemUserName             | planType | memberType         | flagZeroEob |
+      | 09    | kkumard   | mnrs786@  | rldf1942                | PDP      | PDP_SSP_COMBO_DEOB | true        |
 
-    @prod_dreamEob01h
+    @prod_dreamEob01h_fedComboFedShip
     Examples: 
-      | index | username  | password  | MemUserName             | planType | memberType        | flagZeroEob |
-      | 10    | kkumard  | mnrs786@  | Norm749                 | PDP      | PDP_SHIP_COMBO_EOB| true        |
+      | index | username  | password  | MemUserName             | planType | memberType         | flagZeroEob |
+      | 10    | kkumard   | mnrs786@  | Norm749                 | PDP      | PDP_SHIP_COMBO_DEOB| true        |
 
     @prod_dreamEob01i
     Examples: 
-      | index | username  | password  | MemUserName             | planType | memberType        | flagZeroEob |
-#     | 11    | kkumard  | mnrs786@  | testuserTBD             | MAPD     | ES_CnD_NICE_EOB   | true        |
-#     | 12    | kkumard  | mnrs786@  | testuserTBD             | MAPD     | ES_D_NICE_EOB     | true        |
+      | index | username  | password  | MemUserName             | planType | memberType         | flagZeroEob |
+#     | 11    | kkumard   | mnrs786@  | testuserTBD             | MAPD     | ES_CnD_NICE_DEOB   | true        |
+#     | 12    | kkumard   | mnrs786@  | testuserTBD             | MAPD     | ES_D_NICE_DEOB     | true        |
       

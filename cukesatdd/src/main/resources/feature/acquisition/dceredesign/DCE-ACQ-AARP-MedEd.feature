@@ -3,7 +3,8 @@ Feature: 1.10.1 DCE-REDISIGN AARP - To test Acq Medicare Education Prescriotion 
 
   @DCE_MedEdPage
   Scenario Outline: To verify DCE REDESIGN flow from Med Ed page
-    Given the user is on AARP medicare acquisition site landing page
+    Given the user is on medicare acquisition site landing page
+    	|Site| <site>|
     Then the user navigates to Med Ed - Prescription Drugs Page
     Then the uset clicks on Estimate Drug Costs Link to land on DCE Redesign
     Then the user validates Get Started Page
@@ -17,10 +18,16 @@ Feature: 1.10.1 DCE-REDISIGN AARP - To test Acq Medicare Education Prescriotion 
     Then the user searches and adds the following Drug to Drug List
       | DrugName | <drug4> |
     Then the user clicks on Review Drug Costs to Land on Zip Entry Page
-    When user enters valid zipcode and county in AARP
+    When user enters valid zipcode and county
       | ZipCode | <zipCode> |
-    And user clicks on continue button in Zip Entry Page in AARP
+    And user clicks on continue button in Zip Entry Page
 
+		@DCE_MedEdPage_AARP
     Examples: 
-      | drug1   | drug2  | drug3   | drug4    | zipCode |
-      | Orkambi | Fanapt | Humalog | Adderall |   80002 |
+      |	site	| drug1   | drug2  | drug3   | drug4    | zipCode |
+      | AARP	| Orkambi | Fanapt | Humalog | Adderall |   80002 |
+    
+    @DCE_MedEdPage_UHC  
+    Examples: 
+      |	site	| drug1   | drug2  | drug3   | drug4    | zipCode |
+      | UHC		| Orkambi | Fanapt | Humalog | Adderall |   80002 |

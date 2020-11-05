@@ -3,6 +3,8 @@
  */
 package pages.acquisition.ole;
 
+import java.util.Map;
+
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -10,6 +12,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.Select;
 
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
@@ -79,6 +82,9 @@ public class AuthorizationPage extends UhcDriver{
 	
 	@FindBy(id = "city0")
 	private WebElement Authorized_City;
+	
+	@FindBy(id = "address20")
+	private WebElement Authorized_Apartment;
 	
 	@FindBy(id = "state0")
 	private WebElement Authorized_State;
@@ -154,6 +160,84 @@ public class AuthorizationPage extends UhcDriver{
 			//CommonUtility.waitForPageLoad(driver, ApplicantRadio, 30);
 			Thread.sleep(6000);
 			jsClickNew(ApplicantRadio);
+			if(NextBtn.isEnabled()){
+				validation_Flag = (!validation_Flag)?false:true;
+				System.out.println("Validation Passed : All required fields are entered");
+			}
+			else{
+				System.out.println("All required Fields are entered : Next Button is disabled");
+				validation_Flag = false;
+			}
+		}
+		else{
+			System.out.println("Next Button is enabled : Required Field Validation Failed");
+			validation_Flag = false;
+		}
+		return validation_Flag;
+	}
+	
+	public boolean validate_required_field_representative(Map<String, String> MemberDetailsMap) throws InterruptedException {
+		
+		
+		String AuthorizationFirstname = MemberDetailsMap.get("authorizationFirstname");
+		String AuthorizationLastname = MemberDetailsMap.get("authorizationLastname");
+		String AuthorizationAddress = MemberDetailsMap.get("authorizationAddress");
+		String AuthorizationApartmentSuite = MemberDetailsMap.get("authorizationApartmentSuite");
+		String AuthorizationCity = MemberDetailsMap.get("authorizationCity");
+		String AuthorizationZip = MemberDetailsMap.get("authorizationZip");
+		String AuthorizationPhoneNo = MemberDetailsMap.get("authorizationPhoneNo");
+		String AuthorizationRelationship = MemberDetailsMap.get("authorizationRelationship");
+		String AuthorizationStateDisplay= MemberDetailsMap.get("authorizationStateDisplay");
+		
+		
+		boolean validation_Flag = true;
+		if(NextBtn.isEnabled()){
+			System.out.println("Next Button is Enabled : Required fields present");
+			//validateNew(SoU_DisagreeRadio);
+			jsClickNew(SoU_DisagreeRadio);
+			if(validateNew(SoU_DisagreeError) && validateNew(CancelEnrollButton)){
+				System.out.println("Error message and Cancel Enrollment Button are displaeyd for Disagree to SoU selection");
+				validation_Flag = true;
+			}
+			else{
+				System.out.println("Error message and Cancel Enrollment Button are NOT displaeyd for Disagree to SoU selection : Validation Failed");
+				validation_Flag = false;
+			}
+/*			if(validate(SoU_AgreeRadio)){
+				SoU_AgreeRadio.click();
+			}
+			if(validate(AuthorizedRepresentativeRadio)){
+				AuthorizedRepresentativeRadio.click();
+			}*/
+			jsClickNew(SoU_AgreeRadio);
+			AuthorizedRepresentativeRadio.click();
+			if(NextBtn.isEnabled() && validate(Authorized_FirstName) && validate(Authorized_LastName) 
+					&& validate(Authorized_Relation) && validate(Authorized_Address) && validate(Authorized_City) && validate(Authorized_State)
+					&& validate(Authorized_ZipCode) && validate(Authorized_PhNo)){
+				System.out.println("Required Fields are displayed for Authorized Representative Details entry : Next Button is enabled");
+				validation_Flag = (!validation_Flag)?false:true;
+			}
+			else{
+				System.out.println("Next Button is enabled : Required Field Validation Failed");
+				validation_Flag = false;
+			}
+			//CommonUtility.waitForPageLoad(driver, ApplicantRadio, 30);
+			Thread.sleep(6000);
+			//jsClickNew(ApplicantRadio);
+			
+			jsClickNew(AuthorizedRepresentativeRadio);
+			
+			sendkeys(Authorized_FirstName,AuthorizationFirstname);
+			sendkeys(Authorized_LastName,AuthorizationLastname);
+			sendkeys(Authorized_Relation,AuthorizationRelationship);
+			sendkeys(Authorized_Address,AuthorizationAddress);
+			sendkeys(Authorized_City,AuthorizationCity);
+			Select SelectState = new Select(Authorized_State);
+			SelectState.selectByValue(AuthorizationStateDisplay);
+			//sendkeys(Authorized_State,AuthorizationStateDisplay);
+			sendkeys(Authorized_ZipCode,AuthorizationZip);
+			sendkeys(Authorized_PhNo,AuthorizationPhoneNo);
+			sendkeys(Authorized_Apartment, AuthorizationApartmentSuite);
 			if(NextBtn.isEnabled()){
 				validation_Flag = (!validation_Flag)?false:true;
 				System.out.println("Validation Passed : All required fields are entered");

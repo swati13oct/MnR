@@ -1,6 +1,7 @@
 package pages.regression.planDocumentsAndResources;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import org.junit.Assert;
@@ -193,4 +194,24 @@ public class PlanDocumentsAndResourcesPM extends PlanDocumentsAndResourcesBase  
 		Assert.assertTrue("PROBLEM - '"+item+"' link is not having expected destination URL.  Expected to contain='"+expectedUrl+"' | Actual='"+actualUrl+"'", actualUrl.contains(expectedUrl));
 		
 	}
+	
+	public PlanDocApiResponse updatePlanDocMapWithShipDoc(String apiResponseStr2, PlanDocApiResponse planDocMap, String currentYear, String link) {
+		if (apiResponseStr2.contains("200 -- Documents found")) {
+			List<HashMap<String, Document>>	tmpPM_docList=planDocMap.getPlanMatl_en_curYr_docList();
+			HashMap<String, Document> docObjMap=new HashMap<String, Document>();
+			Document docObj=new Document();
+			docObj.setName("Plan Documents");
+			docObj.setLanguage("en_us");
+			docObj.setCheckDestUrl(false);
+			docObj.setSwitchTab(true);
+			docObj.setYear(currentYear);
+			docObj.setLink(link);
+			docObj.setType("dunno");
+			docObjMap.put("Plan Documents",docObj);
+			tmpPM_docList.add(docObjMap);
+			planDocMap.setPlanMatl_en_curYr_docList(tmpPM_docList);
+		}
+		return planDocMap;
+	}
+	
 }

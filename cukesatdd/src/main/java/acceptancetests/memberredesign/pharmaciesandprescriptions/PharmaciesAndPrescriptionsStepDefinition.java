@@ -1,13 +1,19 @@
 package acceptancetests.memberredesign.pharmaciesandprescriptions;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.junit.Assert;
+import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import acceptancetests.data.CommonConstants;
+import acceptancetests.data.PageConstants;
 import acceptancetests.data.PageConstantsMnR;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
@@ -15,6 +21,7 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import gherkin.formatter.model.DataTableRow;
 import pages.regression.accounthomepage.AccountHomePage;
+import pages.regression.footer.FooterPage;
 import pages.regression.pharmaciesandprescriptions.PharmaciesAndPrescriptionsPage;
 import pages.regression.testharness.TestHarness;
 
@@ -54,14 +61,18 @@ public class PharmaciesAndPrescriptionsStepDefinition {
 		if ("YES".equalsIgnoreCase(MRScenario.isTestHarness)) {
 			TestHarness testHarness = (TestHarness) getLoginScenario()
 					.getBean(PageConstantsMnR.TEST_HARNESS_PAGE);
-			pnpPg = testHarness.navigateToPharAndPresFromTestHarnessPage();
+			pnpPg = testHarness.navigateToPharAndPresFromTestHarnessPage(memberType);
 		} else {
 			AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
 					.getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
 			//note: rally data not yet sync up so dashboard will not have pnp link, just go through secondary page
-			pnpPg = accountHomePage.navigateToPharmaciesAndPrescriptions();
-			if (pnpPg==null) //note: try secondary page before giving up
+			if (memberType.contains("PREEFF")) { //note: temp workaround till dashboard link is ready
 				pnpPg = accountHomePage.navigateToPharmaciesAndPrescriptionsFromSecondaryPg();
+			} else {
+				pnpPg = accountHomePage.navigateToPharmaciesAndPrescriptions();
+				if (pnpPg==null) //note: try secondary page before giving up
+					pnpPg = accountHomePage.navigateToPharmaciesAndPrescriptionsFromSecondaryPg();
+			}
 		}
 		Assert.assertTrue("PROBLEM - unable to navigate to Pharmacies & Prescriptions page", 
 				pnpPg != null);
@@ -70,8 +81,28 @@ public class PharmaciesAndPrescriptionsStepDefinition {
 		String userFirstName=pnpPg.getInfoInConsumerDetails(planType, memberType, "firstName");
 		String userLastName=pnpPg.getInfoInConsumerDetails(planType, memberType, "lastName");
 		String userPlanCategoryId=pnpPg.getInfoInConsumerDetails(planType, memberType, "planCategoryId");
+		String planStartDate=pnpPg.getInfoInConsumerDetails(planType, memberType, "planStartDate");
+		System.out.println("TEST - userFirstName="+userFirstName);
+		System.out.println("TEST - userLastName="+userLastName);
+		System.out.println("TEST - userPlanCategoryId="+userPlanCategoryId);
+		System.out.println("TEST - planStartDate="+planStartDate);
+		
+		try {
+			SimpleDateFormat inputFormt = new SimpleDateFormat("MM/dd/yyyy"); //note: example 12/01/2020
+			SimpleDateFormat outputFormat = new SimpleDateFormat("EEEE, MMMM d, yyyy"); //note: example Friday, January 1, 2021
+			Date date;
+			date = inputFormt.parse(planStartDate);
+			String displayDateStr=outputFormat.format(date);
+			System.out.println("TEST - displayDateStr="+displayDateStr);
+			getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.TEST_MEMBER_PLANSTARTDATE, displayDateStr);
+		} catch (ParseException e) {
+			Assert.assertTrue("PROBLEM - unable to convert the planStartDate from consumerDetails to expected display format. planStartDate='"+planStartDate+"'. exception="+e.getMessage(), false);
+			e.printStackTrace();
+		}
 		
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
+		FooterPage footerPg=new FooterPage(pnpPg.driver);
+		getLoginScenario().saveBean(PageConstants.footer_page, footerPg); //note: used for need help or footer validation
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.TEST_PLAN_TYPE, planType);
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.TEST_MEMBER_TYPE, memberType);
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.TEST_MEMBER_FIRSTNAME, userFirstName);
@@ -285,5 +316,80 @@ public class PharmaciesAndPrescriptionsStepDefinition {
 		pnpPg.clickFindAndPriceAMedicationCallToActionOnPnPPage();
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
 	}
-	 
+	
+	@Then("^user validate preeffective content for plan start date and links section$")
+	public void preEff_planStartDateAndLinksSection() throws Throwable {
+		String  planType=(String) getLoginScenario()
+				.getBean(PharmaciesAndPrescriptionsCommonConstants.TEST_PLAN_TYPE);
+		String memberType= (String) getLoginScenario()
+				.getBean(PharmaciesAndPrescriptionsCommonConstants.TEST_MEMBER_TYPE);
+		String planStartDate=(String) getLoginScenario()
+				.getBean(PharmaciesAndPrescriptionsCommonConstants.TEST_MEMBER_PLANSTARTDATE);
+		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
+				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
+		pnpPg.validatePlanStartDateAndLinks_preff(planType, memberType, planStartDate);
+		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
+	}	 
+	
+	@Then("^user validate preeffective content for important note section$")
+	public void preEff_importantNote()  {
+		String  planType=(String) getLoginScenario()
+				.getBean(PharmaciesAndPrescriptionsCommonConstants.TEST_PLAN_TYPE);
+		String memberType= (String) getLoginScenario()
+				.getBean(PharmaciesAndPrescriptionsCommonConstants.TEST_MEMBER_TYPE);
+		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
+				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
+		pnpPg.validateImportNote_preff(planType, memberType);
+		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
+	}
+	
+	@Then("^user validates footer section content for pharmacies and prescriptions page$")
+	public void preEff_footer() throws Throwable {
+		String  planType=(String) getLoginScenario()
+				.getBean(PharmaciesAndPrescriptionsCommonConstants.TEST_PLAN_TYPE);
+		String memberType= (String) getLoginScenario()
+				.getBean(PharmaciesAndPrescriptionsCommonConstants.TEST_MEMBER_TYPE);
+		
+		FooterPage footerPg=(FooterPage) getLoginScenario().getBean(PageConstants.footer_page); 
+		if (memberType.toLowerCase().contains("combo") && memberType.toLowerCase().startsWith("ship_")) 
+			footerPg.validateNeedHelpSection("SHIP", memberType);
+		else
+			footerPg.validateNeedHelpSection(planType, memberType);
+	}
+	
+	@Then("^user validates preeffective content for header section$")
+	public void preEff_header() {
+		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
+				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
+		pnpPg.validateHeader_preff();
+	}
+	
+	@Then("^check if user is a preeffective user")
+	public void checkPreEffFlag() {
+		WebDriver wd=(WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		if ("YES".equalsIgnoreCase(MRScenario.isTestHarness)) {
+			TestHarness testHarness = (TestHarness) getLoginScenario()
+					.getBean(PageConstantsMnR.TEST_HARNESS_PAGE);
+			wd=testHarness.driver;
+		} else {
+			AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
+					.getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
+			accountHomePage.navigateDirectToBnCPag(); //note: can't rely on dasboard info, go to benefits to get consumerDetail
+			wd=accountHomePage.driver;
+		}
+
+		PharmaciesAndPrescriptionsPage pnpPg=new PharmaciesAndPrescriptionsPage(wd);
+		boolean preEffFlag=pnpPg.getPreEffInConsumerDetails(pnpPg.getConsumerDetailsFromlocalStorage());
+
+		Date currentDate=pnpPg.getCurrentSystemDate();
+		String currentDateStr=pnpPg.convertDateToStrFormat_MMDDYYYY(currentDate);
+
+		Assert.assertTrue("PROBLEM - test user not suitable for pre-eff testing. user preeffective field value is '"+preEffFlag+"' in consumerDetail, current system date='"+currentDateStr+"'", preEffFlag);
+
+		if (!"YES".equalsIgnoreCase(MRScenario.isTestHarness)) { //note: go back to dashboard to get read for rest of steps
+			wd.navigate().back();
+		}
+		System.out.println("TEST - user is pre-effective, suitable for this testing, moving on...");
+	}
+	
 }

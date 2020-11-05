@@ -41,12 +41,13 @@ Feature: 1.06.2.2 Member Plans and Documents - section: header -and- My Document
     #note: moved to footer feature
 	#Then user validate Need Help section
 
+	#note: Teripappas is MAPD IND with plan 2021
 	@prod_preeffective_ma_mapd
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | md_sd | eob_sd | eob_m | eob_d | rm_sd |
-      | 01-001 | xxxxx       | kkumard  | mnrs786@  | Ranch1955       | MA       | AARP_IND_PREEFF_PDnR  | true  | false  | false | false | false |
+#      | 01-001 | xxxxx       | kkumard  | mnrs786@  | Ranch1955       | MA       | AARP_IND_PREEFF_PDnR  | true  | false  | false | false | false |
 #      | 02-002 | xxxxx       | kkumard  | mnrs786@  | testusername    | MA       | GROUP_PREEFF_PDnR     | true  | false  | false | false | false |
-#      | 03-003 | xxxxx       | kkumard  | mnrs786@  | testusername    | MAPD     | AARP_IND_PREEFF_PDnR  | true  | false  | false | false | false |
+      | 03-003 | xxxxx       | kkumard  | mnrs786@  | UHCjanicejohn          | MAPD     | AARP_IND_PREEFF_PDnR  | true  | false  | false | false | false |
 
 #	@prod_preeffective_pdp
 #	Examples: 
@@ -64,7 +65,7 @@ Feature: 1.06.2.2 Member Plans and Documents - section: header -and- My Document
 	@prod_active_ma @prod_active_ma_ind
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | md_sd | eob_sd | eob_m | eob_d | rm_sd |
-      | 09-009 | 15129       | kkumard  | mnrs786@  | ERNIE2450    | MA       | AARP_IND_EFF_PDnR     | true  | true   | true  | false | true  |
+      | 09-009 | 15129       | kkumard  | mnrs786@  | haradaty32   | MA       | AARP_IND_EFF_PDnR     | true  | true   | true  | false | true  |
 
 	@prod_active_ma @prod_active_ma_grp
 	Examples: 
@@ -113,8 +114,12 @@ Feature: 1.06.2.2 Member Plans and Documents - section: header -and- My Document
 	Examples: 
       | index  | TID         | username  | password  | MemUserName      | planType | memberType            | md_sd | eob_sd | eob_m | eob_d | rm_sd |
       | 19-019 | 15119,15304 | kkumard  | mnrs786@  | Pramila1946| SHIP     | IND_EFF_PDnR          | false | true   | true  | false | false |
-#      | 20-115 | 15119,15304 | kkumard  | mnrs786@  | testusername    | SHIP     | MULTI_IND_EFF_PDnR    | false | true   | true  | false | false |
+#     | 20-115 | 15119,15304 | kkumard  | mnrs786@  | testusername    | SHIP     | MULTI_IND_EFF_PDnR    | false | true   | true  | false | false |
 
+	@prod_preeffective_ship
+	Examples: 
+      | index  | TID         | username  | password  | MemUserName  | planType | memberType            | md_sd | eob_sd | eob_m | eob_d | rm_sd |
+#     | 21-121 | xxxxx       | kkumard   | mnrs786@  | testusername | SHIP     | IND_PREEFF_PDnR       | false | false  | false | false | false |
 
 
     

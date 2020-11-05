@@ -35,7 +35,7 @@ import pages.regression.benefitandcoverage.ValueAddedServicepage;
 import pages.regression.testharness.TestHarness;
 
 /**
- * Functionality: Benefits and Coverage page
+ * Functionality: Benefits and Coverage page 
  */
 public class BenefitsAndCoverageUmsStepDefinition {
 
@@ -110,6 +110,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 
 	@Then("^The user navigates to Benefits and Coverage page$")
 	public void user_views_BenefitsAndCoveragejenkins1(DataTable memberAttributes) {
+		String memberType=(String) getLoginScenario().getBean(LoginCommonConstants.CATOGERY);
 		WebDriver wd=(WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
@@ -138,7 +139,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 		//Sardar Start
 		if ("YES".equalsIgnoreCase(MRScenario.isTestHarness)) {
 			TestHarness testHarness = (TestHarness) getLoginScenario().getBean(PageConstantsMnR.TEST_HARNESS_PAGE);
-			benefitsCoveragePage= testHarness.navigateDirectToBnCPagFromTestharnessPage();
+			benefitsCoveragePage= testHarness.navigateDirectToBnCPagFromTestharnessPage(memberType);
 		}else {
 			//Sardar end
 			AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
@@ -762,7 +763,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	/** 
 	 * @toDo : Validates the Locate a Pharmacy button 
 	 */
-	@And("^the user validates Locate a Pharmacy button should be visible")
+	@And("^the user validates Locate a Pharmacy button should be visible$")
 	public void user_validate_locatepharmacybutton(DataTable memberAttributes) {
 		System.out.println("***the user validates Locate a Pharmacy button should be visible***");
 		List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
@@ -816,7 +817,8 @@ public class BenefitsAndCoverageUmsStepDefinition {
 				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
 		// JSONObject
 		// benefitsandcoverageExectedJson=(JSONObject)loginScenario.getBean(PlanBenefitsAndCoverageCommonConstants.BENEFITS_AND_COVERAGE_EXPECTED);
-		benefitsCoveragePage.validate_drugCostDropdownoptions();
+		String memberType = (String) getLoginScenario().getBean(LoginCommonConstants.CATOGERY);
+		benefitsCoveragePage.validate_drugCostDropdownoptions(memberType);
 	}
 
 
@@ -880,7 +882,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	/** 
 	 * @toDo : Validates the Drug costs table  for  a Non Lis member
 	 */
-	@And("the user should see drug copay and discount table")
+	@And("^the user should see drug copay and discount table$")
 	public void user_validate_drugcopaydiscounttable(DataTable givenAttributes ) {
 		List<DataTableRow> memberAttributesRow = givenAttributes
 				.getGherkinRows();
@@ -1219,7 +1221,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	 */
 
 
-	@And("the user validates the Out of Pocket Max section")
+	@And("^the user validates the Out of Pocket Max section$")
 	public void user_validate_OutofPocket() {
 		System.out.println("***the user validates the Out of Pocket Max section***");
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
@@ -1800,7 +1802,8 @@ public class BenefitsAndCoverageUmsStepDefinition {
 
 		BenefitsAndCoveragePage planBenefitsCoverage = (BenefitsAndCoveragePage) getLoginScenario()
 				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
-		planBenefitsCoverage.validatedrugCostSectionTexas();
+		String memberType=(String) getLoginScenario().getBean(LoginCommonConstants.CATOGERY);
+		planBenefitsCoverage.validatedrugCostSectionTexas(memberType);
 
 	}
 	@And("the user verifies the Retail Cost sharing table")
@@ -1809,7 +1812,8 @@ public class BenefitsAndCoverageUmsStepDefinition {
 
 		BenefitsAndCoveragePage planBenefitsCoverage = (BenefitsAndCoveragePage) getLoginScenario()
 				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
-		planBenefitsCoverage.validateRetailCostSharingdrugtable();
+		String memberType=(String) getLoginScenario().getBean(LoginCommonConstants.CATOGERY);
+		planBenefitsCoverage.validateRetailCostSharingdrugtable(memberType);
 
 	}
 	@And("the user verifies the Mail Order Cost sharing table")
@@ -1818,7 +1822,8 @@ public class BenefitsAndCoverageUmsStepDefinition {
 
 		BenefitsAndCoveragePage planBenefitsCoverage = (BenefitsAndCoveragePage) getLoginScenario()
 				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
-		planBenefitsCoverage.validateMailOrderCostSharing_Drugtable();
+		String memberType=(String) getLoginScenario().getBean(LoginCommonConstants.CATOGERY);
+		planBenefitsCoverage.validateMailOrderCostSharing_Drugtable(memberType);
 
 	}
 
@@ -1991,7 +1996,8 @@ public class BenefitsAndCoverageUmsStepDefinition {
 			planId=4;
 		if(planType.equalsIgnoreCase("SSUP"))
 			planId=5;
-
+		if(planType.equalsIgnoreCase("DSNP-MAPD"))
+			planId=6;
 
 		switch (planId) { 
 		case 1: 
@@ -2014,7 +2020,9 @@ public class BenefitsAndCoverageUmsStepDefinition {
 			benefitsCoveragePage.verifyPresenceOfJumpLinksSSUP(rider,planType,memberType);
 			break;
 
-
+	    case 6: 
+			benefitsCoveragePage.verifyPresenceOfJumpLinksDSNP(planType,memberType);
+			break;
 		default: 
 			System.out.println("Plan Not Found");
 			break;
@@ -2059,7 +2067,9 @@ public class BenefitsAndCoverageUmsStepDefinition {
 			planId=4;
 		if(planType.equalsIgnoreCase("SSUP"))
 			planId=5;
-
+		if(planType.equalsIgnoreCase("DSNP-MAPD"))
+			planId=6; 
+		
 		switch (planId) { 
 		case 1: 
 			benefitsCoveragePage.clicksOnJumpLinksAndCheckRespectiveSectionsMAPD(rider,planType,memberType);
@@ -2079,6 +2089,10 @@ public class BenefitsAndCoverageUmsStepDefinition {
 
 		case 5: 
 			benefitsCoveragePage.clicksOnJumpLinksAndCheckRespectiveSectionsSSUP(rider,planType,memberType);
+			break;
+			
+		case 6: 
+			benefitsCoveragePage.clicksOnJumpLinksAndCheckRespectiveSectionsDSNP(planType,memberType);
 			break;
 
 		default: 
@@ -2179,11 +2193,45 @@ public class BenefitsAndCoverageUmsStepDefinition {
 		benefitsCoveragePage.validate_provider_search_link();
 	}
 
-	@And("the user just validates the fields in Primarycare Provider section")
+	@And("^the user just validates the fields in Primarycare Provider section$")
 	public void validatePrimaryCareProviderSection() {
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
 				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
 		benefitsCoveragePage.validatePrimaryCareProviderSection();
 	}
 
+	@And("^the user validates headers on Bnc page for Dsnp indi members$")
+	public void user_validate_Dsnp_Headers(DataTable memberAttributes) {
+		List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		String plantype = memberAttributesMap.get("Plan Type");
+		System.out.println("TEST - "+plantype);
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+		if (benefitsCoveragePage==null) {
+			System.out.println("TEST - page is null");
+		}
+		benefitsCoveragePage.validateHeaders(plantype);
+	}
+
+	@And ("^the user validates the Out of Pocket Max section for Dsnp indi member$")
+	public void user_validate_OutofPocketFor_DsnpIndiMember(DataTable memberAttributes) {
+		List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		String plantype = memberAttributesMap.get("Plan Type");
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+		benefitsCoveragePage.validateOutofPocketMax(plantype);
+	}
+
+	
+	
 }//end of class

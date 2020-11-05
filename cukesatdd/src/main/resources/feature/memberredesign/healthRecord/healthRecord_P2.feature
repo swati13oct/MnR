@@ -1,6 +1,66 @@
 @healthRecord
 Feature: 1.24.b Member Individual Health Record - P2 - Benefits, Payments, PlanDoc, MyDoc
 
+  #----- begin sanity
+  @sanity01
+  Scenario Outline: -Index <index> -FID <FID> -Plan Type: <planType> -Member Type: <memberType> - To verify iHR link display for user that is not on the exclusion table - P2 - Benefits
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type   | <planType>         |
+      | Member Type | <memberType>       |
+    Then the user store expected link behavior
+      | Expect Link | <expectLink>       |
+	Then the user navigates to Benefits page and validate Health Record link display behavior
+
+    @no_ihr_p2_ship_sanity
+    Examples: 
+	    | index | FID     | planType                 | memberType         | expectLink  | 
+	    | S01   | F424804 | SHIP_MEDICARE SUPPLEMENT | NO_IHR             | false       |
+
+    @ihr_p2_mapd_sanity
+    Examples: 
+	    | index | FID     | planType | memberType         | expectLink | 
+	    | S09   | F424804 | MAPD     | NONBOA_GROUP_IHR   | true       |
+
+  @sanity02
+  Scenario Outline: -Index <index> -FID <FID> -Plan Type: <planType> -Member Type: <memberType> - To verify iHR link display for user that is not on the exclusion table - P2 - Payments
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type   | <planType>         |
+      | Member Type | <memberType>       |
+    Then the user store expected link behavior
+      | Expect Link | <expectLink>       |
+	Then the user navigates to Payments page and validate Health Record link display behavior
+
+    @no_ihr_p2_ship_sanity
+    Examples: 
+	    | index | FID     | planType                 | memberType         | expectLink  | 
+	    | S01   | F424804 | SHIP_MEDICARE SUPPLEMENT | NO_IHR             | false       |
+
+    @ihr_p2_mapd_sanity
+    Examples: 
+	    | index | FID     | planType | memberType         | expectLink | 
+	    | S09   | F424804 | MAPD     | NONBOA_GROUP_IHR   | true       |
+
+  @sanity03
+  Scenario Outline: -Index <index> -FID <FID> -Plan Type: <planType> -Member Type: <memberType> - To verify iHR link display for user that is not on the exclusion table - P2 - PlanDoc, MyDoc
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type   | <planType>         |
+      | Member Type | <memberType>       |
+    Then the user store expected link behavior
+      | Expect Link | <expectLink>       |
+	Then the user navigates to Plan Documents and Resources page and My Documents page and validate Health Record link display behavior
+
+    @no_ihr_p2_ship_sanity
+    Examples: 
+	    | index | FID     | planType                 | memberType         | expectLink  | 
+	    | S01   | F424804 | SHIP_MEDICARE SUPPLEMENT | NO_IHR             | false       |
+
+    @ihr_p2_mapd_sanity
+    Examples: 
+	    | index | FID     | planType | memberType         | expectLink | 
+	    | S09   | F424804 | MAPD     | NONBOA_GROUP_IHR   | true       |
+
+
+  #----- begin regression
   @healthRecord01 @regressionMember @US2471601 @F424804
   Scenario Outline: -Index <index> -FID <FID> -Plan Type: <planType> -Member Type: <memberType> - To verify iHR link display for user that is not on the exclusion table - P2 - Benefits, Payments, PlanDoc, MyDoc
     Given login with following details logins in the member portal and validate elements

@@ -269,7 +269,7 @@ public class PlanRecommendationEngineCommonutility extends UhcDriver {
 		System.out.println("Clicking continue from page : "+page);
 		threadsleep(1000);
 		validate(continueBtn);
-		continueBtn.click();
+		jsClickNew(continueBtn);
 		System.out.println("Validating " + page + " page Continue button functionality");
 		if(percentageValidation)
 			nextPageValidation(page.toUpperCase());

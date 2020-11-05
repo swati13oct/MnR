@@ -14,6 +14,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
+import acceptancetests.acquisition.pharmacylocator.PharmacySearchCommonConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 
@@ -49,7 +50,8 @@ public class PharmacySearchPage extends PharmacySearchBase {
 				pharmacyValidate(viewsearchpdf));
 		String winHandleBefore = driver.getWindowHandle();
 		ArrayList<String> beforeClicked_tabs = new ArrayList<String>(driver.getWindowHandles());
-		viewsearchpdf.click();
+//		viewsearchpdf.click();
+		jsClickNew(viewsearchpdf);
 		Thread.sleep(5000); //note: keep this for the page to load
 		if (MRScenario.environment.contains("team-a")) 
 			Thread.sleep(3000);
@@ -112,11 +114,13 @@ public class PharmacySearchPage extends PharmacySearchBase {
 
 	public boolean validateNoPharmaciesErrorMessage(){
 		CommonUtility.waitForPageLoadNewForClick(driver, indian_tribal_label_filter, 60);
-		indian_tribal_label_filter.click();
+//		indian_tribal_label_filter.click();
+		jsClickNew(indian_tribal_label_filter);
 		CommonUtility.waitForPageLoad(driver, noPharmaciesErrorMessage, 60);
 		if(!noPharmaciesErrorMessage.isDisplayed()) {
 			CommonUtility.waitForPageLoadNewForClick(driver, indian_tribal_label_filter, 60);
-			indian_tribal_label_filter.click();
+//			indian_tribal_label_filter.click();
+			jsClickNew(indian_tribal_label_filter);
 		}
 		sleepBySec(5);
 		CommonUtility.waitForPageLoad(driver, noPharmaciesErrorMessage, 60);
@@ -126,9 +130,10 @@ public class PharmacySearchPage extends PharmacySearchBase {
 
 
 	public void validateAllTooltips(String language, boolean hasPrefRetailPharmacyWidget) {
-		checkIfPageReadySafari();
+		waitForPageLoadSafari();
 		scrollToView(mapToggleElement);
-		moveMouseToElement(mapToggleElement);
+//		moveMouseToElement(mapToggleElement);
+		jsMouseOver(mapToggleElement);
 		String targetTooltipName="Standard Network Pharmacy";
 		String testXpath="//input[@id='pharmacy-standard']/../span//*[local-name() = 'svg']";
 		String expTxt="Standard Network Pharmacy A pharmacy where you get the prescription drug benefits provided by your plan.";
@@ -183,7 +188,8 @@ public class PharmacySearchPage extends PharmacySearchBase {
 				pharmacyValidate(testTooltip));
 		System.out.println("Proceed to mouse over '"+targetTooltipName+"' element...");
 		scrollToView(testTooltip);
-		moveMouseToElement(testTooltip);//note: then move mouse over to target element
+//		moveMouseToElement(testTooltip);//note: then move mouse over to target element
+		jsMouseOver(testTooltip); //note: then move mouse over to target element
 		Assert.assertTrue("PROBLEM - unable to locate tooltip display after mouse over", pharmacyValidate(tooltip));
 		if (language.equalsIgnoreCase("English")) {
 			Pattern expectedTxt=Pattern.compile(expTxt);
@@ -194,8 +200,8 @@ public class PharmacySearchPage extends PharmacySearchBase {
 					+ "Expected to contain '"+expectedTxt+"' | Actual='"+actualTxt+"'", 
 					expectedTxt.matcher(actualTxt).find());
 		}
-		scrollToView(moveAwayFromTooltip);
-		moveMouseToElement(moveAwayFromTooltip); //note: move away for tooltip to disappear
+//		moveMouseToElement(moveAwayFromTooltip); //note: move away for tooltip to disappear
+		jsMouseOut(testTooltip);
 	}
 
 	public void validateHeaderSection() {
@@ -342,10 +348,12 @@ public class PharmacySearchPage extends PharmacySearchBase {
 	public void validateMoreInfoContent() {
 		CommonUtility.checkPageIsReady(driver);
 		CommonUtility.waitForPageLoad(driver, moreInfoLink, 5);
-		moreInfoLink.click();
+//		moreInfoLink.click();
+		jsClickNew(moreInfoLink);
 		Assert.assertTrue("PROBLEM - text is not displaying after clicking 'More Info' link", 
 				pharmacyValidate(moreInfoText_show));
-		moreInfoLink.click();
+//		moreInfoLink.click();
+		jsClickNew(moreInfoLink);
 		Assert.assertTrue("PROBLEM - text should NOT displaying after collapsing 'More Info' link again", 
 				!pharmacyValidate(moreInfoText_show));
 	}
@@ -374,13 +382,15 @@ public class PharmacySearchPage extends PharmacySearchBase {
 	public void validateWidget(String linkType, String widgetName, WebElement learnMoreElement, String expUrl, 
 			HashMap<String, String> inputMap, String testSiteUrl) throws InterruptedException {
 		String planName=inputMap.get("planName");
+		String planYear = inputMap.get("planYear");
 		String zipcode=inputMap.get("zipcode");
 		String distance=inputMap.get("distance");
 		String county=inputMap.get("county");
 		Assert.assertTrue("PROBLEM - '"+linkType+"' link should show for '"+widgetName+"' widget", 
 				pharmacyValidate(learnMoreElement));
 		CommonUtility.waitForPageLoadNewForClick(driver, learnMoreElement, 60);
-		learnMoreElement.click();
+//		learnMoreElement.click();
+		jsClickNew(learnMoreElement);
 		sleepBySec(8);
 		CommonUtility.checkPageIsReady(driver);
 		String actUrl=driver.getCurrentUrl();
@@ -389,6 +399,7 @@ public class PharmacySearchPage extends PharmacySearchBase {
 				actUrl.contains(expUrl));
 		driver.navigate().back(); //note: use driver back to go back to pharmacy locator page
 		//tbd Thread.sleep(2000); //note: keep for timing issue
+		driver.navigate().refresh(); //note: added refresh since Safari has issues locating elements after navigate back
 		CommonUtility.checkPageIsReady(driver);
 		expUrl="/Pharmacy-Search-";
 		actUrl=driver.getCurrentUrl();
@@ -396,6 +407,7 @@ public class PharmacySearchPage extends PharmacySearchBase {
 				+ "Expected url contains '"+expUrl+"' Actual URL='"+actUrl+"'", 
 				actUrl.contains(expUrl));
 		enterZipDistanceDetails(zipcode, distance, county);
+		selectsPlanYear(planYear);
 		selectsPlanName(planName, testSiteUrl);
 		CommonUtility.checkPageIsReady(driver);
 	}
@@ -534,7 +546,8 @@ public class PharmacySearchPage extends PharmacySearchBase {
 				if (!pharmacyValidate(contactUnitedHealthCare)) 
 					contactUsLink=contactUnitedHealthCare_ol;
 				scrollToView(contactUsLink);
-				moveMouseToElement(contactUsLink);
+//				moveMouseToElement(contactUsLink);
+				jsMouseOver(contactUsLink);
 				sleepBySec(3);
 				Assert.assertTrue("PROBLEM - unable to locate the pagination element", 
 						pharmacyValidate(pagination));
@@ -547,10 +560,12 @@ public class PharmacySearchPage extends PharmacySearchBase {
 				try {
 					sleepBySec(2);
 					CommonUtility.waitForPageLoadNewForClick(driver, rightArrow, 60);
-					rightArrow.click();
+//					rightArrow.click();
+					jsClickNew(rightArrow);
 					CommonUtility.checkPageIsReady(driver);
 					CommonUtility.waitForPageLoadNewForClick(driver, leftArrow, 60); 
-					leftArrow.click();
+//					leftArrow.click();
+					jsClickNew(leftArrow);
 					sleepBySec(5);
 					CommonUtility.checkPageIsReady(driver);
 				} catch (Exception e) {
@@ -561,7 +576,8 @@ public class PharmacySearchPage extends PharmacySearchBase {
 				Assert.assertTrue("PROBLEM - unable to locate the search result navigation tooltip element", 
 						pharmacyValidate(resultNavTooltip));
 				scrollToView(resultNavTooltip);
-				moveMouseToElement(resultNavTooltip); //note: then move mouse over to target element
+//				moveMouseToElement(resultNavTooltip); //note: then move mouse over to target element
+				jsMouseOver(resultNavTooltip);
 				Assert.assertTrue("PROBLEM - unable to locate tooltip display after mouse over", 
 						pharmacyValidate(tooltip));
 				if (language.equalsIgnoreCase("English")) {
@@ -578,8 +594,9 @@ public class PharmacySearchPage extends PharmacySearchBase {
 							+ "Expected='"+expTxt2+"' | "
 							+ "Actual-'"+actualTxt2+"'", expTxt2.equals(actualTxt2));
 				}
-				scrollToView(moveAwayFromTooltip);
-				moveMouseToElement(moveAwayFromTooltip); //note: move away from tooltip for it to disappear
+				jsMouseOut(resultNavTooltip);	//note: mouse out from tooltip for it to disappear
+//				scrollToView(moveAwayFromTooltip);
+//				moveMouseToElement(moveAwayFromTooltip); //note: move away from tooltip for it to disappear
 			} else {
 				Assert.assertTrue("PROBLEM - total < 10, should not find the pagination element",
 						!pharmacyValidate(pagination));

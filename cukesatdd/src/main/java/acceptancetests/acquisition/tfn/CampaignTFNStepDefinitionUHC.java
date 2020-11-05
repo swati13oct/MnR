@@ -263,6 +263,7 @@ public void the_user_navigates_to_MA_OLE_Page_and_validates_Federal_TFN_in_UHC()
 	tfnPage.HomepagePlanSearch(Zip);
 	String PlanType = "MA";
 	tfnPage.ViewPlanSummary(PlanType);
+	tfnPage.handlePlanYearSelectionPopup();
 	tfnPage.NavigateToOLE(PlanType);
 	String TFNXpath_PlanDetails = "//a[contains(@class, 'tel') and contains(@href, 'tel')]";
 	tfnPage.validateFederalTFN(TFNXpath_PlanDetails);
@@ -276,6 +277,7 @@ public void the_user_navigates_to_PDP_OLE_Page_and_validates_Federal_TFN_in_UHC(
 	tfnPage.HomepagePlanSearch(Zip);
 	String PlanType = "PDP";
 	tfnPage.ViewPlanSummary(PlanType);
+	tfnPage.handlePlanYearSelectionPopup();
 	tfnPage.NavigateToOLE(PlanType);
 	String TFNXpath_PlanDetails = "//a[contains(@class, 'tel') and contains(@href, 'tel')]";
 	tfnPage.validateFederalTFN(TFNXpath_PlanDetails);

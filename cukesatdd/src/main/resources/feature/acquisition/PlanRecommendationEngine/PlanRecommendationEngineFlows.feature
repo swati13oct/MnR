@@ -201,7 +201,7 @@ Feature: Plan Recommendation Engine flow - Verify PRE flows functionalities with
 
     Examples: 
       | Zipcode | isMultiCounty | county      | isCoverageOpt | specialNeeds | travel    | doctors | DoctorsName | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption | 1stRecommendation | 2ndRecommendation |
-      |   35034 | YES           | Bibb County | MAPD          | None         | outsideUS | Lookup  | john        | No            | No             | No,No,No,Yes                  | Higher               | MS                | MA                |
+      |   35034 | YES           | Bibb County | MAPD          | None         | outsideUS | Lookup  | Julie       | No            | No             | No,No,No,Yes                  | Higher               | MS                | MA                |
 
   @PRE @planrecommendation @MAPDFlow @MAPDzerodrug @F358830 @PRERegression5
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds> , <travel> , <doctors> , <DoctorsName> , <isMultiDoctor> ,<Drug Selection> , <Dental-Hearing-Vision-Fitness> , <costPreferenceOption> - To validate MAPD flow functions with zero drug in PRE
@@ -382,5 +382,41 @@ Feature: Plan Recommendation Engine flow - Verify PRE flows functionalities with
       |   10002 | NO            | New York | MA            | None         | None     | UHGNetwork      |             |               | No,No,No,No                   | Lower                | MA                |                   |
       |   25813 | NO            | Raleigh  | MA            | Medicaid     | regular  | AcceptsMedicare |             |               | No,No,No,No                   | Higher               | MS                |                   |
       |   00501 | NO            | Suffolk  | MA            | chronic      | withinUS | AcceptsMedicare |             |               | Yes,No,No,No                  | Lower                | MA                | MS                |
-      |   15537 | NO            | Bedford  | MA            | None         | None     | UHGNetwork      |             |               | No,No,No,No                   | Lower                | MA                |                   |
-      |   15537 | NO            | Bedford  | MA            | None         | withinUS | AcceptsMedicare |             |               | Yes,No,No,No                  | Lower                |                   |                   |
+      |   00610 | NO            | Anasco   | MA            | None         | withinUS | AcceptsMedicare |             |               | Yes,No,No,No                  | Lower                | MS                |                   |
+      |   00610 | NO            | Anasco   | MA            | None         | None     | UHGNetwork      |             |               | No,No,No,No                   | Lower                |                   |                   |
+
+  @PRE @planrecommendation @MAPDFlowTie @PRERegression5
+  Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds> , <travel> , <doctors> , <DoctorsName> , <isMultiDoctor> ,<Drug Selection> , <Dental-Hearing-Vision-Fitness> , <costPreferenceOption> - To validate MAPD flow functions with zero drug in PRE
+    Given the user is on UHC medicare acquisition site landing page
+    When user navigate to Plan Recommendation Engine and Checking Breadcrumbs
+    And clicks on get started button and runs questionnaire
+      | Zip Code        | <Zipcode>       |
+      | Is Multi County | <isMultiCounty> |
+      | CountyDropDown  | <county>        |
+    And user selects plan type in coverage options page
+      | Plan Type | <isCoverageOpt> |
+    And user selects SNP options in Special Needs Page
+      | SNP Options | <specialNeeds> |
+    And user selects Travel options in Care Away From Home Page
+      | Travel Options | <travel> |
+    And user selects doctors in doctors page
+      | Doctors             | <doctors>       |
+      | Doctors Search Text | <DoctorsName>   |
+      | Multi Doctor        | <isMultiDoctor> |
+    And user selects skip option in Drug page
+      | Drug Selection | <Drug Selection> |
+    And user selects additional services option in additional services page
+      | Additional Option | <Dental-Hearing-Vision-Fitness> |
+    Then user selects cost preferences option in cost preferences page
+      | Preference Option | <costPreferenceOption> |
+    Then user validate elements in loading results page
+    Then user validate tie recommendations in results page
+      | Zip Code           | <Zipcode>           |
+      | County Name        | <county>            |
+      | 1st Recommendation | <1stRecommendation> |
+      | 2nd Recommendation | <2ndRecommendation> |
+
+    Examples: 
+      | Zipcode | isMultiCounty | county  | isCoverageOpt | specialNeeds | travel   | doctors         | DoctorsName | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption | 1stRecommendation | 2ndRecommendation |
+      |   15537 | NO            | Bedford | MAPD          | None         | withinUS | AcceptsMedicare |             |               | No             | Yes,No,No,No                  | Lower                | MA                | MS                |
+      |   59933 | NO            | Lincoln | MAPD          | None         | None     | UHGNetwork      |             |               | No             | No,No,No,No                   | Lower                |                   |                   |

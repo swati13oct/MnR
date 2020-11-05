@@ -1,6 +1,96 @@
 @healthRecord
 Feature: 1.24.2.d Member Individual Health Record - PROD - P4 - HealthAndWellness, AccountSettings, ContactUs
 
+  #----- begin sanity
+  @prod_sanity01
+  Scenario Outline: -Index <index> -FID <FID> -Plan Type: <planType> -Member Type: <memberType> - To verify iHR link display for user that is not on the exclusion table - P4 - HealthAndWellness
+    Given the user is on member auth login flow page
+    When the member is able to login with correct username and password
+      | Username | <username> |
+      | Password | <password> |
+    And Member Enters the Username he wants to search
+      | MemUsername | <MemUserName> |
+    And user clicks on member to select
+    And user stores test input for validations
+      | Username | <MemUserName> |
+      | Plan Type    | <planType>    |
+      | Member Type  | <memberType>  |
+    #-------------- navigate to the target test page for testing
+    Then the user store expected link behavior
+      | Expect Link | <expectLink>       |
+	Then the user navigates to Health and Wellness page and validate Health Record link display behavior
+
+    #----------- begin - cases with NO IHR link
+    @prod_no_ihr_p4_ship_sanity
+    Examples: 
+	    | index | FID     | username  | password  | MemUserName             | planType                 | memberType         | expectLink  | 
+	    | S01   | F424804 | kkumard   | mnrs786@  | Pramila1946             | SHIP_MEDICARE SUPPLEMENT | NO_IHR             | false       |
+
+    @prod_ihr_p4_mapd_sanity
+    Examples: 
+	    | index | FID     | username  | password  | MemUserName             | planType | memberType         | expectLink | 
+	    | S09   | F424804 | kkumard   | mnrs786@  | Grandmagrey123          | MAPD     | NONBOA_GROUP_IHR   | true       |
+
+  @prod_sanity02
+  Scenario Outline: -Index <index> -FID <FID> -Plan Type: <planType> -Member Type: <memberType> - To verify iHR link display for user that is not on the exclusion table - P4 - AccountSettings
+    Given the user is on member auth login flow page
+    When the member is able to login with correct username and password
+      | Username | <username> |
+      | Password | <password> |
+    And Member Enters the Username he wants to search
+      | MemUsername | <MemUserName> |
+    And user clicks on member to select
+    And user stores test input for validations
+      | Username | <MemUserName> |
+      | Plan Type    | <planType>    |
+      | Member Type  | <memberType>  |
+    #-------------- navigate to the target test page for testing
+    Then the user store expected link behavior
+      | Expect Link | <expectLink>       |
+	Then the user navigates to Account Settings page and validate Health Record link display behavior
+
+    #----------- begin - cases with NO IHR link
+    @prod_no_ihr_p4_ship_sanity
+    Examples: 
+	    | index | FID     | username  | password  | MemUserName             | planType                 | memberType         | expectLink  | 
+	    | S01   | F424804 | kkumard   | mnrs786@  | Pramila1946             | SHIP_MEDICARE SUPPLEMENT | NO_IHR             | false       |
+
+    @prod_ihr_p4_mapd_sanity
+    Examples: 
+	    | index | FID     | username  | password  | MemUserName             | planType | memberType         | expectLink | 
+	    | S09   | F424804 | kkumard   | mnrs786@  | Grandmagrey123          | MAPD     | NONBOA_GROUP_IHR   | true       |
+
+  @prod_sanity03
+  Scenario Outline: -Index <index> -FID <FID> -Plan Type: <planType> -Member Type: <memberType> - To verify iHR link display for user that is not on the exclusion table - P4 - ContactUs
+    Given the user is on member auth login flow page
+    When the member is able to login with correct username and password
+      | Username | <username> |
+      | Password | <password> |
+    And Member Enters the Username he wants to search
+      | MemUsername | <MemUserName> |
+    And user clicks on member to select
+    And user stores test input for validations
+      | Username | <MemUserName> |
+      | Plan Type    | <planType>    |
+      | Member Type  | <memberType>  |
+    #-------------- navigate to the target test page for testing
+    Then the user store expected link behavior
+      | Expect Link | <expectLink>       |
+	Then the user navigates to Contact Us page and validate Health Record link display behavior
+
+    #----------- begin - cases with NO IHR link
+    @prod_no_ihr_p4_ship_sanity
+    Examples: 
+	    | index | FID     | username  | password  | MemUserName             | planType                 | memberType         | expectLink  | 
+	    | S01   | F424804 | kkumard   | mnrs786@  | Pramila1946             | SHIP_MEDICARE SUPPLEMENT | NO_IHR             | false       |
+
+    @prod_ihr_p4_mapd_sanity
+    Examples: 
+	    | index | FID     | username  | password  | MemUserName             | planType | memberType         | expectLink | 
+	    | S09   | F424804 | kkumard   | mnrs786@  | Grandmagrey123          | MAPD     | NONBOA_GROUP_IHR   | true       |
+
+
+  #----- begin regression
   @prod_healthRecord01 @US2471601 @F424804
   Scenario Outline: -Index <index> -FID <FID> -Plan Type: <planType> -Member Type: <memberType> - To verify iHR link display for user that is not on the exclusion table - P4 - HealthAndWellness, AccountSettings, ContactUs
     Given the user is on member auth login flow page
@@ -22,7 +112,7 @@ Feature: 1.24.2.d Member Individual Health Record - PROD - P4 - HealthAndWellnes
 	Then the user navigates to Contact Us page and validate Health Record link display behavior
 
     #----------- begin - cases with NO IHR link
-    @prod_no_ihr_p4_ship_exclude
+    @prod_no_ihr_p4_ship_exclude @sanity
     Examples: 
 	    | index | FID     | username  | password  | MemUserName             | planType                 | memberType         | expectLink  | 
 	    | 01    | F424804 | kkumard   | mnrs786@  | Pramila1946             | SHIP_MEDICARE SUPPLEMENT | NO_IHR             | false       |
@@ -51,8 +141,8 @@ Feature: 1.24.2.d Member Individual Health Record - PROD - P4 - HealthAndWellnes
     @prod_ihr_p4_ma_mapd
     Examples: 
 	    | index | FID     | username  | password  | MemUserName             | planType | memberType         | expectLink | 
-	    | 08    | F424804 | kkumard   | mnrs786@  | ERNIE2450               | MA       | IHR                | true       |
-	    | 09    | F424804 | kkumard   | mnrs786@  | SHERMANJAFFE65          | MAPD     | NONBOA_GROUP_IHR   | true       |
+	    | 08    | F424804 | kkumard   | mnrs786@  | haradaty32              | MA       | IHR                | true       |
+	    | 09    | F424804 | kkumard   | mnrs786@  | Grandmagrey123          | MAPD     | NONBOA_GROUP_IHR   | true       |
 
     @prod_ihr_p4_pdp
     Examples: 
@@ -64,7 +154,8 @@ Feature: 1.24.2.d Member Individual Health Record - PROD - P4 - HealthAndWellnes
     @prod_ihr_p4_preeff_term
     Examples: 
 	    | index | FID     | username  | password  | MemUserName             | planType | memberType         | expectLink | 
-	    | 11    | F424804 | kkumard   | mnrs786@  | Ranch1955               | MA       | PREEFF_IHR         | true       |
+	  # | 11    | F424804 | kkumard   | mnrs786@  | Ranch1955               | MA       | PREEFF_IHR         | true       |
+	    | 11    | F424804 | kkumard   | mnrs786@  | Teripappas                | MAPD     | PREEFF_IHR         | true       |
 	    | 12    | F424804 | kkumard   | mnrs786@  | BEVERLY_BOB5            | MAPD     | TERM_IHR           | false      |
 
     @prod_ihr_p4_pdpSspCombo

@@ -6,7 +6,6 @@ import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import org.junit.Assert;
-import org.openqa.selenium.By;
 import org.openqa.selenium.ElementClickInterceptedException;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -136,7 +135,7 @@ public class BenefitsAndCoverageBase extends BenefitsAndCoverageWebElements {
 	}
 
 	public List<WebElement> getDirectorySection(String planType, String memberType) {
-		if(planType.equalsIgnoreCase("MAPD") || planType.equalsIgnoreCase("MA") 
+		if(planType.equalsIgnoreCase("MAPD") || planType.equalsIgnoreCase("MA") || planType.equalsIgnoreCase("DSNP_MAPD")
 				|| planType.equalsIgnoreCase("PDP") || planType.equalsIgnoreCase("SSUP"))
 			return directorySection;
 		else if(planType.equalsIgnoreCase("ship")||planType.equalsIgnoreCase("MedSupp")||planType.equalsIgnoreCase("HIP"))
@@ -426,6 +425,18 @@ public class BenefitsAndCoverageBase extends BenefitsAndCoverageWebElements {
 		System.out.println("All sections are present for the MAPD Plan");
 	}
 
+	public void clicksOnJumpLinksAndCheckRespectiveSectionsDSNP(String planType, String memberType) {
+		
+		clicksOnLinkAndBackToTop(getJmpLinkToMedicalCopaysOrCoinsurance(), getCopayscoinsuranceheader());
+		clicksOnLinkAndBackToTop(getJmpLinkToOutofPocketMaximum(), getOutOfPocketSectionHeader());
+		clicksOnLinkAndBackToTop(getJmpLinkToPrimaryCareProvider(), getPrimaryCareProviderHeaderInd());
+		clicksOnLinkAndBackToTop(getJmpLinkToDrugCopaysAndDiscounts(), getDrugCopaysAndDiscountsSectionHeader());
+		clicksOnLinkAndBackToTop(getJmpLinkToDrugCoverage(), getDrugCoverageSectionHeader());
+		clicksOnLinkAndBackToTop(getJmpLinkToPlanDocumentsAndResources(),getPlanDocumentsAndResourcesSectionHeader());
+		
+		System.out.println("All sections are present for the DSNP  Plan");
+	}
+
 	public void clicksOnJumpLinksAndCheckRespectiveSectionsMedSupp(String rider, String planType, String memberType) {
 		clicksOnLinkAndBackToTop(getJmpLinkToBenefitSummaryMedSupp(), getBenefitsSummarySectionHeader());
 		clicksOnLinkAndBackToTop(getJmpLinkToDiscountsAndServicesMedSupp(), getTextdiscountservices());
@@ -488,7 +499,7 @@ public class BenefitsAndCoverageBase extends BenefitsAndCoverageWebElements {
 		//CommonUtility.waitForPageLoadNew(driver, viewPlanDocumentsButton, 45);
 		CommonUtility.checkPageIsReadyNew(driver);
 		System.out.println("Now clicking the View Plan Documents Button");
-		if(validate(viewPlanDocumentsButton)) {
+		if(validate(viewPlanDocumentsButton,0)) {
 			viewPlanDocumentsButton.click();
 		} else {
 			planDocumentsLink.click();
@@ -498,14 +509,15 @@ public class BenefitsAndCoverageBase extends BenefitsAndCoverageWebElements {
 	}
 	
 	public void verifyElementPresence(WebElement element) {
-		Assert.assertTrue("Section/Link isn't displayed",element.isDisplayed());
+		Assert.assertTrue("Section/Link isn't displayed",validate(element,0));
 		System.out.println(element.getText());     
 	}
 
 	public void directoryLinksCount(int linkCount, String rider, String planType, String memberType) {
 		int count = 0;
-		if (planType.equals("MA") || planType.equals("MAPD")) {
-			if (memberType.equalsIgnoreCase("Individual")) {
+		if (planType.equals("MA") || planType.equals("MAPD") || planType.equals("DSNP_MAPD")) {
+			//tbd if (memberType.equalsIgnoreCase("Individual")) {
+			if (memberType.toLowerCase().contains("individual")) {
 				count = getDirectorySection(planType, memberType).size() - 1;
 				if (rider.toString().trim().equals("Rider"))
 					count += 1;
@@ -524,7 +536,11 @@ public class BenefitsAndCoverageBase extends BenefitsAndCoverageWebElements {
 		System.out.println("No irrelevant links found");
 	}
 
-	public boolean validateWithValue(String value, WebElement element) {
+	//tbd public boolean validateWithValue(String value, WebElement element) {
+	public void validateWithValue(String value, WebElement element) {
+		Assert.assertTrue("Element " +value+ " not found!!!!", validate(element,0));
+		System.out.println("Element " +value+ " found!!!!");
+		/* tbd 
 		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
 		try {
 			if (element.isDisplayed()) {
@@ -539,12 +555,15 @@ public class BenefitsAndCoverageBase extends BenefitsAndCoverageWebElements {
 			System.err.println("Exception: Element " +value+ "  not found/not visible");
 			Assert.fail("Element " +value+ " not found/not visible");
 		}
-		//note: default in UhcDriver is 10
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);  
-		return false;
+		return false; 
+		*/
 	}
 
-	public boolean validateNotDisplay(String value, WebElement element) {
+	//tbd public boolean validateNotDisplay(String value, WebElement element) {
+	public void validateNotDisplay(String value, WebElement element) {
+		Assert.assertTrue("Element " +value+ " not found!!!!", !validate(element,0));
+		System.out.println("Element " +value+ " not found!!!!");
+		/* tbd 
 		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
 		//note: validate element doesn't exist/display on the page
 		try {
@@ -559,24 +578,31 @@ public class BenefitsAndCoverageBase extends BenefitsAndCoverageWebElements {
 			System.err.println("Exception: Element " +value+ "  not found/not visible");
 			Assert.assertTrue("Element " +value+ " found/not visible", true);
 		}
-		//note: default in UhcDriver is 10
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);  
 		return false;
+		*/
 	}
 
 	/**
 	 * The user checks the view label in Documents section
 	 */
+	public void getview_label() {
+		validateWithValue("View label",view_label);
+	}
+	/* tbd 
 	public boolean getview_label() {
 		return validateWithValue("View label",view_label);
-	}
+	} */
 
 	/**
 	 * The user checks the get Document label in Documents section
 	 */
+	public void getdocuments_label() {
+		validateWithValue("Header- Plan Material", documents_label);
+	} 
+	/* tbd 
 	public boolean getdocuments_label() {
 		return validateWithValue("Header- Plan Material", documents_label);
-	}
+	} */
 
 	public void languagevalidation() {
 		if (langdropdown.isDisplayed()) {
@@ -785,12 +811,12 @@ public class BenefitsAndCoverageBase extends BenefitsAndCoverageWebElements {
 		System.out.println("Scrolling to Access Your Drug Benefits Header for Express Scripts Link");
 		JavascriptExecutor jse2 = (JavascriptExecutor)driver;
 		jse2.executeScript("arguments[0].scrollIntoView()", accessYourDrugBenefitsHeader); 
-		try {
-			Thread.sleep(2000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		//tbd try {
+		//tbd 	Thread.sleep(2000);
+		//tbd } catch (InterruptedException e) {
+		//tbd 	// TODO Auto-generated catch block
+		//tbd 	e.printStackTrace();
+		//tbd }
 		
 	}
 
@@ -799,12 +825,13 @@ public class BenefitsAndCoverageBase extends BenefitsAndCoverageWebElements {
 		System.out.println("Clicking on Express Scripts Link");
 		expressScriptsLink.click();   	
 		System.out.println("Now clicking on proceed button of site leaving popup");
-		try {
-			Thread.sleep(4000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		CommonUtility.waitForPageLoad(driver, proceedButtonExpressScriptsSSOSiteLeavingPopup, 5);
+		//tbd try {
+		//tbd 	Thread.sleep(4000);
+		//tbd } catch (InterruptedException e) {
+		//tbd 	// TODO Auto-generated catch block
+		//tbd 	e.printStackTrace();
+		//tbd }
 		proceedButtonExpressScriptsSSOSiteLeavingPopup.click();
 		try {
 			Thread.sleep(4000);
@@ -821,12 +848,12 @@ public class BenefitsAndCoverageBase extends BenefitsAndCoverageWebElements {
 				driver.switchTo().window(currentWindowHandle);
 			}
 		}
-		try {
-			Thread.sleep(10000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		//tbd try {
+		//tbd 	Thread.sleep(10000);
+		//tbd } catch (InterruptedException e) {
+		//tbd 	// TODO Auto-generated catch block
+		//tbd 	e.printStackTrace();
+		//tbd }
 		CommonUtility.checkPageIsReadyNew(driver);
 		System.out.println("URL opened in new window is:   "+driver.getCurrentUrl());
 		if (MRScenario.environment.equalsIgnoreCase("stage") || MRScenario.environment.equalsIgnoreCase("offline-stage"))
@@ -868,26 +895,26 @@ public class BenefitsAndCoverageBase extends BenefitsAndCoverageWebElements {
 		System.out.println("Scrolling to section containing VIEW YOUR CURRENT PRESCRIPTION DRUG COST SUMMARY AT OPTUMRX.COM");
 		JavascriptExecutor jse2 = (JavascriptExecutor)driver;
 		jse2.executeScript("arguments[0].scrollIntoView()", lisDrugCopayHeader); 
-		try {
-			Thread.sleep(2000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		//tbd try {
+		//tbd 	Thread.sleep(2000);
+		//tbd } catch (InterruptedException e) {
+		//tbd 	// TODO Auto-generated catch block
+		//tbd 	e.printStackTrace();
+		//tbd }
 		
 		if (linktobetested.equalsIgnoreCase("LookUpDrugsButton"))
 		{
 		System.out.println("Scrolling to LookUpDrugs Button Section");
 		JavascriptExecutor jse3 = (JavascriptExecutor)driver;
 		jse3.executeScript("arguments[0].scrollIntoView()", LookUpDrugsButtonSection); 
-		try {
-			Thread.sleep(2000);
-		    } 
-		catch (InterruptedException e) 
-		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		//tbd try {
+		//tbd 	Thread.sleep(2000);
+		//tbd     } 
+		//tbd catch (InterruptedException e) 
+		//tbd {
+		//tbd 	// TODO Auto-generated catch block
+		//tbd 	e.printStackTrace();
+		//tbd }
 		
 		}
 		}
@@ -897,14 +924,14 @@ public class BenefitsAndCoverageBase extends BenefitsAndCoverageWebElements {
 		System.out.println("Scrolling to section conytaining view Details At Optumrx Link");
 		JavascriptExecutor jse4 = (JavascriptExecutor)driver;
 		jse4.executeScript("arguments[0].scrollIntoView()", viewDetailsAtOptumrxLinkSection); 
-		try {
-			Thread.sleep(2000);
-		    } 
-		catch (InterruptedException e) 
-		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		//tbd try {
+		//tbd 	Thread.sleep(2000);
+		//tbd     } 
+		//tbd catch (InterruptedException e) 
+		//tbd {
+		//tbd 	// TODO Auto-generated catch block
+		//tbd 	e.printStackTrace();
+		//tbd }
 		
 		}
 		
@@ -971,10 +998,10 @@ public class BenefitsAndCoverageBase extends BenefitsAndCoverageWebElements {
 		CommonUtility.waitForPageLoad(driver, BenefitsInformationHeaderOptumRx, 40);
 		System.out.println("URL opened in new window is:   "+driver.getCurrentUrl());
 		System.out.println("Page title is:   "+driver.getTitle());
-		String getHeaderText = BenefitsInformationHeaderOptumRx.getText();
+		String getHeaderText = BenefitsInformationHeaderOptumRx.getAttribute("innerHTML");//getText() sometimes return blank value
 		System.out.println("Header text of page is  "+getHeaderText);
 		if (driver.getCurrentUrl().contains("optumrx.com/secure/benefits-and-claims/benefits-information") 
-				&& BenefitsInformationHeaderOptumRx.getText().contains("Benefits Information"))
+				&& BenefitsInformationHeaderOptumRx.getAttribute("innerHTML").contains("Benefits Information"))
 		{
 			System.out.println("Benefit Information Header was displayed on page and OptumRx SSO URL was correct");
 		}
@@ -991,10 +1018,10 @@ public class BenefitsAndCoverageBase extends BenefitsAndCoverageWebElements {
 		CommonUtility.waitForPageLoad(driver, searchForADrugHeaderOptumRx, 40);
 		System.out.println("URL opened in new window is:   "+driver.getCurrentUrl());
 		System.out.println("Page title is:   "+driver.getTitle());
-		String getHeaderText = searchForADrugHeaderOptumRx.getText();
+		String getHeaderText = searchForADrugHeaderOptumRx.getAttribute("innerHTML");//getText() sometimes return blank value
 		System.out.println("Header text of page is  "+getHeaderText);
 		if (driver.getCurrentUrl().contains("optumrx.com/secure/member-tools/drug-search") 
-				&& searchForADrugHeaderOptumRx.getText().contains("Search for a drug"))
+				&& searchForADrugHeaderOptumRx.getAttribute("innerHTML").contains("Search for a drug"))
 		{
 			System.out.println("Search for a drug header was displayed on page and OptumRx SSO URL was correct");
 		}
@@ -1038,7 +1065,7 @@ public class BenefitsAndCoverageBase extends BenefitsAndCoverageWebElements {
 		System.out.println("Now clicking on Make a Payment button");
 		makePaymentButton.click();
 		CommonUtility.checkPageIsReadyNew(driver);
-			if (driver.getCurrentUrl().contains("content/medicare/member/payments/overview-new.html"))
+			if (driver.getCurrentUrl().contains("payments/overview.html"))
 			{
 				System.out.println("Payment Overview Page is displayed");	
 			}

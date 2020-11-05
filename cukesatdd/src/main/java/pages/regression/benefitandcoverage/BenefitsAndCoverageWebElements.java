@@ -651,7 +651,7 @@ public class BenefitsAndCoverageWebElements extends UhcDriver {
 	@FindBy(xpath = "//*[contains(@class, 'document-list-new margin-none')]//*[contains(text(),'View other documents')]")
 	protected WebElement viewDocsAndResourcesLinkShip;
 
-	@FindBy(id = "benefitsSummary")
+	@FindBy(xpath = "//*[@id='benefitssummary']")
 	protected WebElement benefitsSummarySection;
 
 	@FindBy(id = "formsandresourcesC1")
@@ -828,7 +828,8 @@ public class BenefitsAndCoverageWebElements extends UhcDriver {
 	@FindBy(xpath = "//*[@id='plan_benefit_documents']//*/h2")
 	protected WebElement PlanDocumentsAndResourcesSectionHeader;
 
-	@FindBy(xpath = "//*[@id='benefits-quickLinksParsys']//*[@class='jumplinks']//li[not(contains(@style,'none'))]")
+	//tbd @FindBy(xpath = "//*[@id='benefits-quickLinksParsys']//*[@class='jumplinks']//li[not(contains(@style,'none'))]")
+	@FindBy(xpath = "//*[@id='benefits-quickLinksParsys']//*[@class='jumplinks']//li")
 	protected List<WebElement> directorySection;
 
 	@FindBy(xpath = "//*[@id='benefits-quickLinksParsys']/div[1]//ul//li")
@@ -1104,6 +1105,15 @@ public class BenefitsAndCoverageWebElements extends UhcDriver {
 	
 	@FindBy(xpath = "//h1[text()='Benefit Summary']")
 	protected WebElement coverageBenefitsNewHeader;
+	
+	@FindBy(xpath="//p[text()='To view more details regarding your plan benefits, you may view your Benefits Highlights ']/a")
+	protected WebElement medCopayBenefitsLink;
+
+	@FindBy(xpath="//p[text()='To view more details regarding your plan benefits, you may view your Benefits Highlights ']")
+	protected WebElement medCopayText;
+	
+	@FindBy(xpath = "//*[contains(@class,'tdd-hospitalvisits-title')]")
+	protected WebElement InPatientHospitalCare;
 	
 	public BenefitsAndCoverageWebElements(WebDriver driver) {
 		super(driver);

@@ -21,15 +21,15 @@ Feature: 1.01.1-Vpp to plan Summary AARP Scenarios
     Then the user views plan details of the above selected plan and validates
       | Plan Name | <planName> |
     Then the user clicks on back to all plans link and validates its redirection to Plan Summary
-    Then the user validates below plan benefit values for the above selected plan
-      | Monthly Premium            | <monthlyPremium>         |
-      | Primary Care Physician     | <primaryCarePhysician>   |
-      | Specialist                 | <specialist>             |
-      | Referral Required          | <referralRequired>       |
-      | Out Of Pocket Maximum      | <outOfPocketMaximum>     |
-      | Prescription Drugs, Tier 1 | <prescriptionDrugsTier1> |
-      | Plan Type                  | <plantype>               |
-      | Annual Deductible          | <annualDeductible>       |
+#    Then the user validates below plan benefit values for the above selected plan
+#      | Monthly Premium            | <monthlyPremium>         |
+#      | Primary Care Physician     | <primaryCarePhysician>   |
+#      | Specialist                 | <specialist>             |
+#      | Referral Required          | <referralRequired>       |
+#      | Out Of Pocket Maximum      | <outOfPocketMaximum>     |
+#      | Prescription Drugs, Tier 1 | <prescriptionDrugsTier1> |
+#     | Plan Type                  | <plantype>               |
+#      | Annual Deductible          | <annualDeductible>       |
     Then the user hover overs the tool tip for Why is my premium 0 and validates the text
     # New steps for DCE Redesign
     And I access the DCE Redesign from Plan Summary for mentioned plan
@@ -46,8 +46,8 @@ Feature: 1.01.1-Vpp to plan Summary AARP Scenarios
 
     Examples: 
       | TID   | zipcode | site| isMultutiCounty | county             | plantype | planName                                            | monthlyPremium | primaryCarePhysician | specialist | referralRequired | outOfPocketMaximum | prescriptionDrugsTier1                     | annualDeductible | planyear |
-      | 15545 |   90210 | AARP| NO              | Los Angeles County | MAPD     | AARP Medicare Advantage SecureHorizons Plan 1 (HMO) | $0             | $0  copay            | $0  copay  | Yes              | $3,400.00          | $4  copay                                  |                  | current |
-      | 15546 |   28105 | AARP| YES             | Mecklenburg County | SNP      | UnitedHealthcare Dual Complete (HMO-POS D-SNP)      | $0             | $0  copay            | $0  copay  | No               | $0 - $6,700.00     | $0, $1.25, $3.40 copay, or 15% coinsurance |                  |  current |
+      | 15545 |   90210 | AARP| NO              | Los Angeles County | MAPD     | AARP Medicare Advantage SecureHorizons Plan 1 (HMO) | $0             | $0  copay            | $0  copay  | Yes              | $3,400.00          | $4  copay                                  |                  | next |
+      | 15546 |   28105 | AARP| YES             | Mecklenburg County | SNP      | UnitedHealthcare Dual Complete RP (Regional PPO D-SNP)      | $0             | $0  copay            | $0  copay  | No               | $0 - $6,700.00     | $0, $1.25, $3.40 copay, or 15% coinsurance |                  |  next |
 
   @vppPlanSummaryAARP02 @vppPlanSummaryAARPRun01 @vppPlanSummaryAARPRegression
   Scenario Outline: TID: <TID> -plan type: <plantype> - Verify right rail on plan summary page in AARP site
@@ -171,7 +171,7 @@ Feature: 1.01.1-Vpp to plan Summary AARP Scenarios
       | UID     | zipcode | isMultiCounty | county           | MA_testPlans                                                                                               | PDP_testPlans                                                    | SNP_testPlans                              |planyear|
       | 1598162 |   80001 | NO            | Jefferson County | AARP Medicare Advantage SecureHorizons Essential (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO) | AARP MedicareRx Preferred (PDP),AARP MedicareRx Saver Plus (PDP) | UnitedHealthcare Dual Complete (HMO D-SNP) |current|
 
-  @vppPlanSummaryAARP05 @vppPlanSummaryAARPRun01 @vppPlanSummaryAARPRegression
+  @vppPlanSummaryAARP05
   Scenario Outline: Zipcode: <zipcode> -plan type: <plantype> - Verify plan summary for SNP plan types in AARP site
     Given the user is on medicare acquisition site landing page
     	|Site| <site>|
@@ -440,7 +440,7 @@ Feature: 1.01.1-Vpp to plan Summary AARP Scenarios
       | 15550 |   78006 | YES           | Bexar County       | MAPD     | 1750 EPPS BRIDGE RD ATHENS | OCONEE    | GEORGIA     | test      | test     | test@test.com | YES            | Clarke County    |
 
   @vppPlanSummaryAARP16 @vppPlanSummaryAARPRun02 @vppPlanSummaryAARPRegression
-  Scenario Outline: TID: <TID> -plan type: <plantype> - Verify plan cards on plan summary page in AARP site
+  Scenario Outline: TID: <TID> -plan type: <plantype> - Verify Rocky Mountain Health Learn More lands on Correct site from AARP site from plan summary page
     Given the user is on the AARP medicare acquisition site landing page
     When the user does plan search using the following information in the AARP site
       | Zip Code        | <zipcode>         |
@@ -480,7 +480,7 @@ Feature: 1.01.1-Vpp to plan Summary AARP Scenarios
     Examples: 
       | TID       | zipcode | isMultutiCounty | county        | plantype | planName                                 |planyear|
       | US2567133 |   70515 | YES             | Acadia Parish | MAPD     | Peoples Health Choices Gold (HMO-POS)    |current|
-      | US2567133 |   70515 | YES             | Acadia Parish | MAPD     | Peoples Health Choices Value (HMO)       |current|
-      | US2567133 |   70515 | YES             | Acadia Parish | SNP      | Peoples Health Secure Health (HMO D-SNP) |current|
+      #| US2567133 |   70515 | YES             | Acadia Parish | MAPD     | Peoples Health Choices Value (HMO)       |current|
+      #| US2567133 |   70515 | YES             | Acadia Parish | SNP      | Peoples Health Secure Health (HMO D-SNP) |current|
       #| US2567133 |   70718 | YES             | Ascension Parish | MAPD     | Peoples Health Choices 65 "#14 (HMO)"    |
       #| US2567133 |   70420 | YES             | Ascension Parish | MAPD     | Peoples Health Choices 65 "#14 (HMO)"    |
