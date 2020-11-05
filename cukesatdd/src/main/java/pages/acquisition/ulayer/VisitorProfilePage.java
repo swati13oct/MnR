@@ -131,8 +131,11 @@ public class VisitorProfilePage extends UhcDriver {
 	@FindBy(xpath = "//*[contains(@class,'add-drug')]")
 	public WebElement enterDrugInfoPlanCard;
 	
-	@FindBy(xpath = "//a[text()='Log In']")
+	@FindBy(xpath = "//*[@id='globalContentIdForSkipLink']/..//a[text()='Sign In']")
 	public WebElement loginLink;
+	
+	@FindBy(xpath = "//*[@id='globalContentIdForSkipLink']/..//a[text()='Sign Out']")
+	public WebElement signOutLink;
 
 	public VisitorProfilePage(WebDriver driver) {
 		super(driver);
@@ -623,7 +626,7 @@ public class VisitorProfilePage extends UhcDriver {
 				securityAnswer.sendKeys("number1");
 			}
 			driver.findElement(By.cssSelector("input#authQuesSubmitButton")).click();
-			CommonUtility.waitForPageLoadNew(driver, signOut, 20);
+			CommonUtility.waitForPageLoadNew(driver, signOutLink, 20);
 
 		} catch (Exception e) {
 			Assert.fail("###############Optum Id Sign In failed###############");

@@ -1,5 +1,7 @@
 package pages.acquisition.ulayer;
 
+import static org.junit.Assert.fail;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -349,7 +351,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	
 	@FindBy(xpath = "//div[contains(@class,'component_info_wrap')]//button[text()='Select a Plan']")
 	//@FindBy(xpath = "//div[contains(@class,'component_info_wrap')]//button[text()='Continue Enrollment']")
-	private WebElement nextBestActionModalContinueEnrollmentBtn;
+	private WebElement nextBestActionModalSelectPlanBtn;
 	
 	@FindBy(xpath = "button[ng-click='getProviders()']")
 	private WebElement findMyDoctorBtn;
@@ -364,6 +366,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	private static String NEXT_ACTION_MODAL_MSG_PROVIDER_SEARCH="Is my doctor covered?";
 	private static String NEXT_ACTION_MODAL_MSG_ENROLL_PLAN="How do I enroll?";
 	private static String NEXT_ACTION_MODAL_MSG_DRUG_COST="How much will my drugs cost?";
+	private static String NEXT_ACTION_MODAL_MSG_CONTINUE_ENROLLMENT="Continue my enrollment";
 	
 	@FindBy(xpath = "//div[@id='emailPlanSummaryPopUp']")
 	private WebElement emailPlanSummaryPopupScreen;
@@ -750,6 +753,12 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		@FindBy(id="pop-btn-1")
         private WebElement viewSavedPlans;
 		
+		@FindBy(xpath = "//div[contains(@class,'component_info_wrap')]//button[text()='Continue Enrollment']")
+		private WebElement nextBestActionModalContinueEnrollmentBtn;
+		
+		@FindBy(id = "enrollAlertTitle")
+		private WebElement nextBestActionModalMsgAuthenticated;
+		
 		public WebElement getValEstimatedAnnualDrugCostValue(String planName) {
 			//WebElement valEstimatedAnnualDrugCostValue = driver.findElement(By.xpath("//*[contains(text(),'"+planName+"')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//*[@ng-show='plan.network']"));
 			WebElement valEstimatedAnnualDrugCostValue = driver.findElement(By.xpath("//*[contains(text(),'"+planName+"')]/ancestor::*[contains(@class,'module-plan-overview module')]//span[contains(text(),'Estimated Annual Drug Cost:')]/following-sibling::span[not(contains(@class,'ng-hide'))]"));
@@ -888,8 +897,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	}
 	
 	public void clickContinueEnrollmentBtn() {
-		waitTillElementClickableInTime(nextBestActionModalContinueEnrollmentBtn,15);
-		nextBestActionModalContinueEnrollmentBtn.click();
+		waitTillElementClickableInTime(nextBestActionModalSelectPlanBtn,15);
+		nextBestActionModalSelectPlanBtn.click();
 	}
 	
 	public void viewPlanSummary(String planType) {
@@ -4429,5 +4438,29 @@ for (int i = 0; i < initialCount + 1; i++) {
 			return null;
 		}
 	}
+	
+	public void verifyNextBestActionModalForContinueEnrollment() {
+		try {
+			if(nextBestActionModal.isDisplayed()) {
+				Assert.assertTrue("The Continue Enrollment message is not displayed.../n Expected Message"+NEXT_ACTION_MODAL_MSG_CONTINUE_ENROLLMENT+ "\n Actual message"+nextBestActionModalMsgAuthenticated.getText(), nextBestActionModalMsgAuthenticated.getText().equals(NEXT_ACTION_MODAL_MSG_CONTINUE_ENROLLMENT));
+			}
+		}
+		catch(Exception ex) {
+			System.out.println("NBA modal not found");
+		}
+	}
 
+	public void clickNextBestActionModalContinueEnrollmentBtn() {
+		waitTillElementClickableInTime(nextBestActionModalContinueEnrollmentBtn,15);
+		nextBestActionModalContinueEnrollmentBtn.click();
+	}
+	
+	public void verifyNavigationToOLEPage() {
+		if(driver.getTitle().contains("Online Enrollment")){
+			System.out.println("OLE Welcome Page is Displayed");
+		}
+		else {
+			Assert.fail("User not navigates to OLE page");
+		}
+	}
 }

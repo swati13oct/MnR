@@ -5,8 +5,10 @@ import java.util.List;
 import java.util.Map;
 
 import org.junit.Assert;
+import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstants;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
@@ -453,10 +455,10 @@ public class VisitorProfileStepDefinition_AARP {
 		}
 		String username = plannameAttributesMap.get("User Name");
 		String password = plannameAttributesMap.get("Password");
-
-		VisitorProfilePage visitorProfile = (VisitorProfilePage) getLoginScenario()
-				.getBean(PageConstants.VISITOR_PROFILE_PAGE);
+		WebDriver driver = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		VisitorProfilePage visitorProfile = new VisitorProfilePage(driver);
 		System.out.println("credentials"+username+ password);
 		visitorProfile.logIn(username, password);
+		getLoginScenario().saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfile);
 	}
 }
