@@ -1319,9 +1319,11 @@ public class TestHarness extends UhcDriver {
     			if (IPerceptionsFrame.isEmpty()) {
     				try {
     					Thread.sleep(1500);
-    				} catch (InterruptedException e) {
-    					System.out.println(e.getMessage());
-    				}
+    					driver.findElement(By.xpath("//*[@id='ip-close']")).click();
+    					System.out.println("Clicked Close on special popup");
+    				} catch (Exception e) {
+    					System.out.println("Special popup not found");
+    									}
     			} else {
     				driver.switchTo().frame(IPerceptionsFrame.get(0));
     				driver.findElement(By.className("btn-no")).click();

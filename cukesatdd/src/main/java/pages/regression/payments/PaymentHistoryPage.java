@@ -29,7 +29,7 @@ import pages.regression.contactus.ContactUsPage;
 import pages.regression.footer.FooterPage;
 import pages.regression.profileandpreferences.ProfileandPreferencesPage;
 import pages.member_deprecated.ulayer.SetupAutoPaymentPage;
-import pages.memberrdesignVBF.TestHarness;
+import pages.regression.testharness.*;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
