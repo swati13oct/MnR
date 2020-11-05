@@ -188,7 +188,7 @@ public class CommunicationPreferenceWebElements extends UhcDriver {
 	@FindBy(xpath="//*[@id='profileTabHeader']//div[@class='tabs-desktop']//li//a[contains(.,'Senior Supplement Plan')]") 
 	protected WebElement comboTab_SSUP;
 	
-	@FindBy(xpath="//*[@id='accordiongroup-18-2999-tab']/div/a")
+	@FindBy(xpath="//a[@class='accordion-toggle']/span//div//p[contains(text(),'plan or benefits')]")
 	protected WebElement paperlessSettingsAccordian;
 
 	public CommunicationPreferenceWebElements(WebDriver driver) {

@@ -76,6 +76,8 @@ public class CommunicationPreferencePage extends CommunicationPreferenceWebEleme
 	}
 
 	public boolean changeAndVerifyOnlinePreference() {
+		
+		
 		driver.switchTo().defaultContent(); //note: make sure not on iframe first
 		CommonUtility.waitForPageLoad(driver, iframeEPMP, 15);
 		System.out.println("validating frame");

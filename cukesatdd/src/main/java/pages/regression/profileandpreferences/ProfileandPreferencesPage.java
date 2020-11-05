@@ -488,10 +488,10 @@ public class ProfileandPreferencesPage extends UhcDriver {
 	@FindBy(xpath = "//*[@class='section main-view ng-scope']//*[@id='phoneview']/div[@class='go-to-icon test']/i")
 	private WebElement phoneSectionArrowIframe;
 
-	@FindBy(xpath = "//div[@class='phone']/p[1]")
+	@FindBy(xpath = "//*[@id='phoneview']/div[1]/div[2]/div/div[1]/p/span[1]")
 	private WebElement updatedHomePhoneAfterSave;
 	
-	@FindBy(xpath = "//*[@id='phone']/div[2]/div[1]/div[2]/div/span[2]")
+	@FindBy(xpath = "//*[@id='phoneview']/div[1]/div[2]/div/div[4]/p/span[1]")
 	private WebElement updatedMobilePhoneAfterSave;
 
 	@FindBy(id = "main")

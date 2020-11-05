@@ -313,21 +313,7 @@ Feature: 1.02 Member Profile page
      | TID			  | planType | memberType        | copayCategory   |
      | Unknown_15 | MAPD     | Terminated_AccPro | NON LIS_ProfilePref |
      
-    @accountProfile16 @AP_Part5_Regression
-    Scenario Outline: TID: <TID> -Plan Type: <planType> -Member Type: <memberType> -To test end to end regression scenario for account profile  page for a terminated member
-    Given login with following details logins in the member portal and validate elements
-      | Plan Type   | <planType>   |
-      | Member Type | <memberType> |
-      | Copay Category | <copayCategory> |
-    Then the user navigates to Profile and Preferences page
-   # Then the user validates permanent address section
-	 # And the user verifies the Temporary Address Link on the Account settings page
-	  And the user validates the address sectioning
-     
-	    Examples:      
-      | TID			   | planType | memberType        | copayCategory   |
-      | Unknown_16 | GOVT     | AP_ADDRESS        | NON LIS_ProfilePref         |
-      
+ 
    @accountProfile17 @HsidLogin @codetransformers  @AP_Part5_Regression
    Scenario Outline: TID: <TID> -Plan Type: <planType> -Member Type: <memberType> -Verify HSID login functionality.
    Given login with following details logins in the member portal and validate elements
