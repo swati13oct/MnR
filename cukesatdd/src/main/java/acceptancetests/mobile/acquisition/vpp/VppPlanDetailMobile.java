@@ -2429,7 +2429,7 @@ public class VppPlanDetailMobile {
 
 	@Then("^user select and unselect one plan for plan compare and verify second plan checkbox autoselected and click on plan compare$")
 	public void user_select_and_unselect_one_plan_for_plan_compare() throws Throwable {
-		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		plansummaryPage.checkOneCheckboxVerifyAutoSelection("true");
 		plansummaryPage.checkOneCheckboxVerifyAutoSelection("false");

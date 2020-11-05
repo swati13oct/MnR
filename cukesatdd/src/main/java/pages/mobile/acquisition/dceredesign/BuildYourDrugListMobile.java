@@ -283,7 +283,8 @@ public class BuildYourDrugListMobile extends UhcDriver {
 	public ComparePlansPageMobile returnToPlanComparePage() {
 
 		validateNew(returnToCompareBtn);
-		returnToCompareBtn.click();
+		//returnToCompareBtn.click();
+		jsClickNew(returnToCompareBtn);
 		return new ComparePlansPageMobile(driver);
 	}
 

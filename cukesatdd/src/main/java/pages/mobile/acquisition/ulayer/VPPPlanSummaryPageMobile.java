@@ -793,13 +793,13 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 		handleChatPopup();
 		scrollToView(maPlansCount);
 		validateNew(maPlansCount);
-		
+
 		scrollToView(msPlansCount);
 		validateNew(msPlansCount);
-		
+
 		scrollToView(pdpPlansCount);
 		validateNew(pdpPlansCount);
-		
+
 		scrollToView(snpPlansCount);
 		validateNew(snpPlansCount);
 	}
@@ -2073,7 +2073,6 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 					+ "\')]/ancestor::div[contains(@class, 'module-plan-overview')]//ul[@class='ng-scope'])[2]"));
 			validateNew(marketingBullets);
 		}
-
 	}
 
 	/*
@@ -4214,8 +4213,8 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 	public PlanDetailsPageMobile clickViewDetails_AddedToCompare() {
 
 		scrollToView(ViewPlanLink_AddedToCompare);
-		//validateNew(ViewPlanLink_AddedToCompare);
-		//ViewPlanLink_AddedToCompare.click();
+		// validateNew(ViewPlanLink_AddedToCompare);
+		// ViewPlanLink_AddedToCompare.click();
 		jsClickNew(ViewPlanLink_AddedToCompare);
 		CommonUtility.checkPageIsReadyNew(driver);
 		if (currentUrl().contains("#/details"))
@@ -4432,7 +4431,8 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 	public ComparePlansPageBlayerMobile clickOnCompareLink() {
 		List<WebElement> compareLinks = driver.findElements(
 				By.xpath("//*[contains(@class,'multiple-added-text')]//button[contains(text(),'Compare plans')]"));
-		compareLinks.get(1).click();
+		// compareLinks.get(1).click();
+		jsClickNew(compareLinks.get(1));
 
 		if (currentUrl().contains("/health-plans.html#/plan-compare"))
 			return new ComparePlansPageBlayerMobile(driver);
@@ -4535,7 +4535,8 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 			// CommonUtility.waitForPageLoadNew(driver, PDPmoreDetailsLink, 30);
 			mobileswipeHorizantal("50", true);
 			scrollToView(PDPmoreDetailsLink);
-			PDPmoreDetailsLink.click();
+			// PDPmoreDetailsLink.click();
+			jsClickNew(PDPmoreDetailsLink);
 			System.out.println("View Plan Details Link is clicked for PDP plan" + planName);
 
 		} else if (planType.equalsIgnoreCase("SNP")) {
@@ -4544,7 +4545,8 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 			// CommonUtility.waitForPageLoadNew(driver, SNPmoreDetailsLink, 30);
 			mobileswipeHorizantal("50", true);
 			scrollToView(SNPmoreDetailsLink);
-			SNPmoreDetailsLink.click();
+			// SNPmoreDetailsLink.click();
+			jsClickNew(SNPmoreDetailsLink);
 			System.out.println("View Plan Details Link is clicked for MA plan" + planName);
 		}
 		CommonUtility.checkPageIsReadyNew(driver);
