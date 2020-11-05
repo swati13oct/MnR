@@ -585,7 +585,9 @@ public class ReviewSubmitPage extends UhcDriver{
 		flag&=validateText(MedicareClaimNumberDisplay,MedicareNumber);
 		flag&=validateText(PartADisplay,PartAeffectiveDate);
 		flag&=validateText(PartBDisplay,PartBeffectiveDate);
+		if(Expected_PlanName.contains("DSNP")) {
 		flag&=validateText(MedicaidNo,Medicaid_No);
+		}
 		flag&=validateText(MobilePhoneNo,MobilePhoneNumber);
 		flag&=validateText(PrimaryPhoneNo,PrimaryPhoneNumber);
 		//flag&=validateText(EmailConfirmationNo,EmailConfirmationNumber);
