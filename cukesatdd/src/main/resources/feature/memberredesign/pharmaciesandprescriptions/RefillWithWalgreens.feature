@@ -1,4 +1,4 @@
-Feature: MVP - Call to Action
+Feature: Refill with Walgreens
   I am a user of the M&R Portal with Rx benefits I must have the ability for members to refill medications with Walgreens by using the Refill with Walgreens CTA
 
   @RefillWithWalgreens @F482427 @US2508876 @Scenario1
