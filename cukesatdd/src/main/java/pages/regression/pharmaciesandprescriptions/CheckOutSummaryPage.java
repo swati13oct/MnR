@@ -25,6 +25,7 @@ public class CheckOutSummaryPage extends CheckOutSummaryWebElements {
 	String cardDetailNameRegex = "^[a-zA-Z]*$";
 	String cardDetailRegex = "^[0-9]{4}$";
 	String cardTypeRegex = "^[a-zA-Z]*$";
+	String cardTypeRegexWithSpace = "^[a-zA-Z]*\\s[a-zA-Z]*$";
 	String medicationsRegex = "^[a-zA-Z]*\\s[(][0-9]*[)]$";
 
 	public boolean validateCheckoutPageHeader(String expectedVal) {
@@ -179,7 +180,8 @@ public class CheckOutSummaryPage extends CheckOutSummaryWebElements {
 	public boolean validatePaymentCardType() {
 		scrollToView(paymentSection);
 		return validate(paymentCreditCardImage, 20)
-				&& paymentCreditCardImage.getAttribute("alt").trim().matches(cardTypeRegex);
+				&& paymentCreditCardImage.getAttribute("alt").trim().matches(cardTypeRegex)
+				|| paymentCreditCardImage.getAttribute("alt").trim().matches(cardTypeRegexWithSpace);
 	}
 
 	public boolean validateChangePaymentBtn() {
@@ -298,14 +300,14 @@ public class CheckOutSummaryPage extends CheckOutSummaryWebElements {
 
 	public boolean validateDaySupply() {
 		String daySupply = RefillCheckoutSummaryStepDefinition.listOfMedicationDetail.get(2).toString();
-		String [] array=daySupply.split("\n");
+		String[] array = daySupply.split("\n");
 		return listOfDaySupply.get(listOfDaySupply.size() - 1).getText().trim().contains(array[0].trim());
 	}
 
 	public boolean validateRefillsRemaining() {
 		String refillRemainings = RefillCheckoutSummaryStepDefinition.listOfMedicationDetail.get(1).toString();
-		String [] array=refillRemainings.split("\n");
-		//int refillRemainingsFromMedCab = Integer.parseInt(refillRemainings);
+		String[] array = refillRemainings.split("\n");
+		// int refillRemainingsFromMedCab = Integer.parseInt(refillRemainings);
 		int refillRemainingsFromMedCab = Integer.parseInt(array[0]);
 		String refillRemainingFrmCheckOutPage = listOfRefillRemaining.get(listOfRefillRemaining.size() - 1).getText();
 		String[] arrayVal = refillRemainingFrmCheckOutPage.split(":");
@@ -349,7 +351,7 @@ public class CheckOutSummaryPage extends CheckOutSummaryWebElements {
 
 	public boolean validateDaySupplyForRenew() {
 		String daySupply = RefillCheckoutSummaryStepDefinition.listOfMedicationDetail.get(1).toString();
-		String [] array=daySupply.split("\n");
+		String[] array = daySupply.split("\n");
 		return listOfDaySupply.get(listOfDaySupply.size() - 1).getText().trim().contains(array[0].trim());
 	}
 
@@ -497,7 +499,7 @@ public class CheckOutSummaryPage extends CheckOutSummaryWebElements {
 		System.out.println("Auto Refill ON Count :: " + autoRefillOnLabel.size());
 		return autoRefillOnLabel.size() > 0;
 	}
-	
+
 	public boolean validateAutoRefillOffCheckedBox() {
 		System.out.println("Auto Refill Off Count :: " + autoRefillOffLabel.size());
 		return autoRefillOffLabel.size() > 0;
@@ -509,21 +511,21 @@ public class CheckOutSummaryPage extends CheckOutSummaryWebElements {
 			System.out.println("Auto Refill On checkbox is deselected");
 		}
 	}
-	
-	//Kiran
+
+	// Kiran
 	public void selectAutorefillCheckbox() {
 		autoRefillOFFCheckbox.click();
-		/*if (validateAutoRefillOnCheckedBox()) {			
-			autoRefillOFFCheckbox.get(0).click();
-			
-			System.out.println("Auto Refill OFF checkbox is selected");
-		}*/
+		/*
+		 * if (validateAutoRefillOnCheckedBox()) { autoRefillOFFCheckbox.get(0).click();
+		 * 
+		 * System.out.println("Auto Refill OFF checkbox is selected"); }
+		 */
 	}
 
 	public boolean validateAutoRefillDisenrollmentPage() {
 		return validate(autoRefillDisenrollmentPage, 30);
 	}
-		
+
 	public boolean validateAutoRefillEnrollmentPage() {
 		return validate(autoRefillEnrollmentPage, 30);
 	}
@@ -531,14 +533,13 @@ public class CheckOutSummaryPage extends CheckOutSummaryWebElements {
 	public void ContinueOrCancelAutorefillOn() {
 		cancelAutoRefillPage.click();
 	}
-	
+
 	public void enrollAutorefillCheckbox() {
 		changeAutoRefillEnrollment.click();
 	}
-	
+
 	public void stopAutorefillCheckbox() {
 		changeAutoRefillEnrollment.click();
 	}
-	
-	
+
 }
