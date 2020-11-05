@@ -855,7 +855,7 @@ public class DrugDetailsPage extends UhcDriver {
 	@FindBy(xpath = "//p[contains(@class,'text-normal')]")
 	public WebElement ModalBodyText;
 
-	@FindBy(xpath = "//*[contains(@id, 'coveredtable')]//*[contains(text(), 'Tier 5 drugs cannot be filled with a')][contains(text(), '90-day supply')]")
+	@FindBy(xpath = "//*[contains(@id, 'coveredtable')]//*[contains(text(), '90-day supply')]")
 	public WebElement Tier5_90Day_Text;
 
 	@FindBy(xpath = "//*[contains(@id, 'coveredtable')]//*[contains(text(), 'Tier 5 drugs cannot be filled with a')][contains(text(), 'mail service pharmacy')]")
