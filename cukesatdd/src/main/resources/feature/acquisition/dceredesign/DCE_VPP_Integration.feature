@@ -71,15 +71,40 @@ Feature: 1.10.3 DCE-REDESIGN- To test integration flows between DCE and VPP from
 		
     @DCE_Redesign_VPP_PlanSummary_Integration_MAPD_AARP
     Examples: 
-      |	site	| zipcode | planyear|plantype | county | isMultutiCounty | drug1   |drug2| planname                                           |supplyLength|
-      |	AARP	|   90210 | current| MAPD     | none   | no              | Orkambi | Lipichol 540|AARP Medicare Advantage SecureHorizons Focus (HMO) |Every 3 Months|
+      |	site	| zipcode | planyear|plantype | county | isMultutiCounty | drug1   |	drug2		| planname                                           |supplyLength|
+      |	AARP	|   90210 | current| MAPD     | none   | no              | Orkambi | Lipitor	|AARP Medicare Advantage SecureHorizons Focus (HMO) |Every 3 Months|
 
 		@DCE_Redesign_VPP_PlanSummary_MAPD_UHC
     Examples: 
-      |	site	| zipcode | planyear|plantype | county | isMultutiCounty | drug1   |drug2|planname                                           |supplyLength|
-      |	UHC	|   90210 | current| MAPD     | none   | no              | Orkambi |Lipichol 540| AARP Medicare Advantage SecureHorizons Focus (HMO) |Every 3 Months|
+      |	site	| zipcode | planyear|plantype | county | isMultutiCounty | drug1   |	drug2		|planname                                           |supplyLength|
+      |	UHC		|   90210 | current| MAPD     | none   | no              | Orkambi |	Lipitor	| AARP Medicare Advantage SecureHorizons Focus (HMO) |Every 3 Months|
        
-      
      
-      
+    Scenario Outline: To test the NBA - to -DCE Redesign flow for PlanType :  <plantype> from vpp Plan Summary
+    Given the user is on medicare acquisition site landing page
+    	|	Site	| <site>|
+    When the user performs plan search using following information
+      | Zip Code        | <zipcode>         |
+      | County Name     | <county>          |
+      | Is Multi County | <isMultutiCounty> |
+    And the user views the plans of the below plan type
+      | Plan Type | <plantype>	|
+    And the user selects plan year
+    	|	Plan Year	| <planyear>	| 
+    And the user clicks on NBA to navigate to DCE Redesign page
+    	| Plan Type | <plantype>	|
+    	| Plan Name | <planname>	|
+    And the user clicks on Build Drug List to navigate to Build Drug List Page
+    And the user searches and adds the following Drug to Drug List
+      | DrugName | <drug1> |
+    And clicks on Review drug cost button
+    And user navigates to Review drug costs page
+    And user verify the drug summary page
+    And user click on view plan details on drug summary page
+    
+     
+   @VPP_NBA_DCE_Redesign_Integration_AARP   
+   Examples: 
+      |	site	| zipcode | planyear	|	plantype | county | isMultutiCounty |	planname															|	drug1		|
+      |	AARP	|   10001 | current		| MAPD     | none   | no              | AARP Medicare Advantage Plan 1 (HMO)	|	Orkambi	|
       

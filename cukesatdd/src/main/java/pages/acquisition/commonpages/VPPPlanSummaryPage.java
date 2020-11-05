@@ -636,6 +636,15 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(id = "aarpSVGLogo")
 	public static WebElement AARPlogo;
 	
+	@FindBy(id = "addDrugComponentWrap")
+	public static WebElement addDrugComponentWrap;
+	
+	@FindBy(xpath = "//*[@id='addDrugComponentWrap']//button[text()='Get Started']")
+	public static WebElement getStartedAddDrugNBA;
+	
+	@FindBy(id = "findProvidersComponentWrap")
+	public static WebElement findProvidersComponentWrap;
+	
 	public WebElement getValEstimatedAnnualDrugCostValue(String planName) {
 		// WebElement valEstimatedAnnualDrugCostValue =
 		// driver.findElement(By.xpath("//*[contains(text(),'"+planName+"')]/ancestor::div[@class='module-plan-overview
@@ -3700,7 +3709,11 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		return false;
 	}
 
-	public boolean verifyAllAddedDrugName(String planName, String drugName) {
+	public boolean verifyAllAddedDrugName(String planType, String planName, String drugName) {
+		
+		if (planType == "PDP")
+			return true;
+		
 		WebElement drugLinkDropdown = driver.findElement(By.xpath("//*[contains(text(),'" + planName
 				+ "')]/ancestor::div[contains(@class, 'module-plan-overview module')]//*[contains(@id,'drug-list-title-')]"));
 
@@ -3741,21 +3754,27 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	}
 
 
-	public DrugDetailsPage navigateToDCEFromDrugDropdown(String planName) {
-		
-		List <WebElement> drugLinkDropdown = driver.findElements(By.xpath("//*[contains(text(),'" + planName
-				+ "')]/ancestor::div[contains(@class, 'module-plan-overview module')]//*[contains(@id,'drug-list-title-')and contains(@aria-expanded,'false')]"));
-		
-		if(drugLinkDropdown.size()>0)
-			drugLinkDropdown.get(0).click();
-		
-		WebElement drugSummaryLinkDropdown = driver.findElement(By.xpath("//*[contains(text(),'" + planName
-				+ "')]/ancestor::div[contains(@class, 'module-plan-overview module')]//*[contains(@class,'edit-drugs')]"));
-		
-		drugSummaryLinkDropdown.click();
-		
+	public DrugDetailsPage navigateToDCEFromDrugDropdown(String planType, String planName) {
+		if (planType.equals("MA") || planType.equals("MAPD") || planType.equalsIgnoreCase("SNP")) {
+			List<WebElement> drugLinkDropdown = driver.findElements(By.xpath("//*[contains(text(),'" + planName
+					+ "')]/ancestor::div[contains(@class, 'module-plan-overview module')]//*[contains(@id,'drug-list-title-')and contains(@aria-expanded,'false')]"));
+
+			if (drugLinkDropdown.size() > 0)
+				drugLinkDropdown.get(0).click();
+
+			WebElement drugSummaryLinkDropdown = driver.findElement(By.xpath("//*[contains(text(),'" + planName
+					+ "')]/ancestor::div[contains(@class, 'module-plan-overview module')]//*[contains(@class,'edit-drugs')]"));
+
+			drugSummaryLinkDropdown.click();
+		} else {
+			WebElement drugSummaryLink = driver.findElement(By.xpath("//*[contains(text(),'" + planName
+					+ "')]/ancestor::div[contains(@class, 'module-plan-overview module swiper-slide pdpPlans ng-scope')]//descendant::a[contains(@class,'edit-drugs-link editLink')]"));
+			jsClickNew(drugSummaryLink);
+
+		}
+
 		return new DrugDetailsPage(driver);
-		
+
 	}
 	public boolean verifyPlanCompareCheckboxNotVisible() {
 		try {
@@ -3897,5 +3916,55 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			return new WelcomePage(driver);
 		}
 		return null;
+	}
+	
+	public GetStartedPage navigateToDCEFromNBA(String planType,String planName) {
+
+		if (planType.equalsIgnoreCase("MA") || planType.equalsIgnoreCase("MAPD")) {
+			if (validate(addDrugComponentWrap)) {
+				((JavascriptExecutor) driver).executeScript("arguments[0].click();", getStartedAddDrugNBA);
+			}
+			else if (validateNew(findProvidersComponentWrap)) {
+				removeAddedDrugs(planType,planName);
+				validateNew(addDrugComponentWrap);
+				((JavascriptExecutor) driver).executeScript("arguments[0].click();", getStartedAddDrugNBA);				
+			}
+
+		} else if (planType.equalsIgnoreCase("PDP")) {
+			if (validate(addDrugComponentWrap)) {
+				((JavascriptExecutor) driver).executeScript("arguments[0].click();", getStartedAddDrugNBA);
+			}
+			if (validateNew(findProvidersComponentWrap)) {
+				removeAddedDrugs(planType,planName);
+				validateNew(addDrugComponentWrap);
+				((JavascriptExecutor) driver).executeScript("arguments[0].click();", getStartedAddDrugNBA);				
+			}
+		} else if (planType.equalsIgnoreCase("MS") || planType.equalsIgnoreCase("SNP")) {
+			Assert.fail("NBA is not available for the Plantype: "+planType);
+			
+		}
+		return new GetStartedPage(driver);
+	}
+
+	public void removeAddedDrugs(String planType,String planName) {
+		List <WebElement> drugLinkDropdown = driver.findElements(By.xpath("//div[contains(@class, 'module-plan-overview module')]//*[contains(@id,'drug-list-title-')and contains(@aria-expanded,'false')]"));
+		
+		if(drugLinkDropdown.size()>0)
+			drugLinkDropdown.get(0).click();
+		
+		List<WebElement> addedDrugs = driver.findElements(By.xpath("//*[contains(text(),\'"+ planName + "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class,'remove-icon')]"));
+		int noOfDrugs = addedDrugs.size();
+
+		if(addedDrugs != null){
+			for(int i=0; i < noOfDrugs; i++){
+				addedDrugs.get(i).click();
+				threadsleep(5);
+				System.out.println("Drug removed:"+ (i+1));
+				}
+			}
+		
+		
+		
+		
 	}
 }

@@ -2577,4 +2577,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			ViewMedicareplanlinks.click();
 
 		}
+		
+		public void clickBrowserBackButton() {
+			driver.navigate().back();
+		}
 }
