@@ -178,7 +178,7 @@ Feature: 1.25.1 Member Prepare For Next Year - Member Auth
     #@memAuth_pfny02_combo_ship_fed
     #Examples: 
 	#    | index | FID     | username  | password  | MemUserName          | planType | memberType              | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | co_us | co_es | co_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh | showNxtYrPlan |  
-	#    | 2-11  | F443004 | qavgogine | qavgogine | q3_sept_UAT4_AARP_011| MAPD	 | COMBO_SHIP_MAPD_IND_PFNY| true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | true  | true  | true  | false | true          |
+	#    | 2-11  | F443004 | qavgogine | qavgogine | GENARO_Q4_COMBO      | MAPD	 | COMBO_SHIP_MAPD_IND_PFNY| true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | true  | true  | true  | false | true          |
 
     @memAuth_pfny02_combo_fed_ship
     Examples: 
@@ -217,7 +217,7 @@ Feature: 1.25.1 Member Prepare For Next Year - Member Auth
 	@memAuth_pfny03a
     Examples: 
 	    | index | FID     | username  | password  | MemUserName             | planType | memberType              |
-	    | 3-01  | F437767 | qavgogine | qavgogine | q3_sept_UAT4_AARP_011   | SHIP	   | COMBO_SHIP_MAPD_IND_PFNY|
+	    | 3-01  | F437767 | qavgogine | qavgogine | GENARO_Q4_COMBO         | SHIP	   | COMBO_SHIP_MAPD_IND_PFNY|
 			
 	@memAuth_pfny03b
     Examples: 

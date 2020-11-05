@@ -33,7 +33,7 @@ Feature: 1.12.2 Member Rally claims - Member Auth - PROD
    @prod_rallyClaims01_ma             @claims_prodsanityMA_Group
      Examples: 
       | TID   | username   | password  | MemUserName  | planType | memberType          | claimSystem     |
-      | xxxxx | kkumard   | mnrs786@  | BNCSAUVE2    | MA       | UHC_GROUP           | COSMOS_CLAIMS   | 
+      | xxxxx | kkumard   | mnrs786@  | ExDesertrat    | MA       | UHC_GROUP           | COSMOS_CLAIMS   | 
    
 
     @prod_rallyClaims01_medica_pcp          @claims_prodsanityPcp

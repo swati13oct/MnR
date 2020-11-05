@@ -808,7 +808,8 @@ public class DCEStepDefinitionAARP {
 
 	@When("^user verify the drug summary page$")
 	public void user_verify_the_drug_summary_page() throws InterruptedException {
-		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
+		DrugSummaryPage drugSummaryPage = (DrugSummaryPage) getLoginScenario()
+				.getBean(PageConstants.DCE_Redesign_DrugSummary);
 		drugSummaryPage.validateDrugSummaryPage();
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
 	}
@@ -822,7 +823,8 @@ public class DCEStepDefinitionAARP {
 	
 	@When("^user click on view plan details on drug summary page$")
 	public void user_click_on_view_plan_details_on_drug_summary_page() throws Throwable {
-		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
+		DrugSummaryPage drugSummaryPage = (DrugSummaryPage) getLoginScenario()
+				.getBean(PageConstants.DCE_Redesign_DrugSummary);
 		drugSummaryPage.clickOnViewPlan();
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
 	}
@@ -1073,6 +1075,17 @@ public class DCEStepDefinitionAARP {
 		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugDetails);
 		VisitorProfilePage visitorProfilePage = drugDetailsPage.navigateToVisitorProfilePage();
 		getLoginScenario().saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfilePage);
+	}
+	
+	@Then("^user navigates to Review drug costs page$")
+	public void user_navigates_to_Review_drug_costs_page() {
+		BuildYourDrugList buildDrugList = (BuildYourDrugList) getLoginScenario()
+				.getBean(PageConstants.DCE_Redesign_BuildDrugList);
+		DrugSummaryPage drugSummaryPage = buildDrugList.verifyReviewDrugCostPage();
+		if (null != drugSummaryPage) {
+			getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
+		} else
+			Assert.fail("DCE Redesign page object not loaded");
 	}
 
 }
