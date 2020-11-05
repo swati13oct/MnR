@@ -714,7 +714,16 @@ public class DCEStepDefinitionAARP {
 				.getBean(PageConstants.DCE_Redesign_DrugDetails);
 		drugDetailsPage.validateMonthlyCostStage();
 	}
-
+	
+//	MonthlyDrugCost Changes Start
+	@Then("^the user validates Monthly Drug Costs$")
+	public void the_user_validates_Monthly_Drug_Costs() throws Throwable {
+		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario()
+				.getBean(PageConstants.DCE_Redesign_DrugDetails);
+		drugDetailsPage.validateMonthlyCost();
+	}
+//	MonthlyDrugCost Changes End
+	
 	@Then("^the user validates Monthly Drug Costs by Stage Info Modals$")
 	public void the_user_validates_Monthly_Drug_Costs_by_Stage_Info_Modals() throws Throwable {
 		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario()
