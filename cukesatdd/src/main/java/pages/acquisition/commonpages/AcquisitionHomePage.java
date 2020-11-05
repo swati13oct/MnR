@@ -1664,9 +1664,10 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		{
 			waitforElement(lnkLearnAboutMedicare);
 			if (lnkLearnAboutMedicare.isDisplayed()) {
-				Actions actions = new Actions(driver);
-				actions.moveToElement(lnkLearnAboutMedicare);
-				actions.build().perform();
+//				Actions actions = new Actions(driver);
+//				actions.moveToElement(lnkLearnAboutMedicare);
+//				actions.build().perform();
+				jsMouseOver(lnkLearnAboutMedicare);
 				System.out.println("Hover over Learn about Medicare completed");
 		    }
 			WebElement PresProvidersBenefitsLink = driver.findElement(By.xpath("//*[contains(@class, 'nav-col nav-col-3')]//a[contains(@href,'medicare-benefits')]"));
@@ -1871,8 +1872,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		
 		public void validatevisitorprofile() {
 			if (visitorprofileicon.isDisplayed()) {
-				Actions actions = new Actions(driver);
-				actions.moveToElement(visitorprofileicon).perform();
+//				Actions actions = new Actions(driver);
+//				actions.moveToElement(visitorprofileicon).perform();
+				jsMouseOver(visitorprofileicon);
 				System.out.println("Hover over visitor profile completed");
 			}
 			WebElement CreateProfile = driver.findElement(By.xpath("//a[contains(text(), 'Create Profile')]"));
@@ -2095,7 +2097,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		public void validateStateDropDown() {
 			validateNew(stateDropDown);
 			selectFromDropDownByValue(stateDropDown, "California");
-			String StateSessionStorage = ReturnDriverStorage(driver, "sessionStorage", "ucp_geotrackingState");
+			String StateSessionStorage =  returnDriverStorageJS("sessionStorage", "ucp_geotrackingState");
+					//ReturnDriverStorage(driver, "sessionStorage", "ucp_geotrackingState");
 			System.out.println("State selected : California");
 			System.out.println("State GeoSessionStorage value : " + StateSessionStorage);
 			Assert.assertTrue(StateSessionStorage.equalsIgnoreCase("CA"), "Geolocation State validation Failed ");
@@ -2472,7 +2475,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			for (int i = 2; i < sizeofpages; i++) {
 				System.out.println("@@Inside pagination click@@@");
 				threadsleep(5);
-				driver.findElement(By.xpath("(//*[@class='pagination']/li/a)[" + i + "]")).click();
+				//driver.findElement(By.xpath("(//*[@class='pagination']/li/a)[" + i + "]")).click();
+				jsClickNew(driver.findElement(By.xpath("(//*[@class='pagination']/li/a)[" + i + "]")));
 				CommonUtility.waitForPageLoadNew(driver, SearchResultsCount, 30);
 				this.validateFifteenResults();
 				threadsleep(5);
@@ -2572,5 +2576,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 			ViewMedicareplanlinks.click();
 
+		}
+		
+		public void clickBrowserBackButton() {
+			driver.navigate().back();
 		}
 }

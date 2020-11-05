@@ -1,4 +1,4 @@
-Feature: 1.05.4.ACQ-OLE  common tool flow E2E SNP
+Feature: 1.05.4 OLE common tool flow E2E SNP
 
  # @SNP_OLE_AARP @acquisitionRegression @junerelease2018 @september_release_2018 @december_release_2018 @OLE_DNSP_AARP @MACRAvalidation @OEP_CHANGES @OLE_Regression_Ulayer
   Scenario Outline: TID: <TID> -plan type: <PlanType> - OLE End to end from AARP Acquisition site VPP Plan Summary

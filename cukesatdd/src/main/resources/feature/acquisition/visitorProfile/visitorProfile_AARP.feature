@@ -1,7 +1,7 @@
 #Author: Danthoori shiva
 #created Date:2/12/2019
 @Test @AARPvisitorprofile
-Feature: 1.08. ACQ- Visitor profile - <site>
+Feature: 1.08. ACQ- Visitor profile
 
   @addDrugs @addDrugsULayerSmoke @visitorProfileRegressionAARP @DCE_Regression_Ulayer_VisitorProfile
   Scenario Outline: Verify user is able to add drug information to the unauthenticated visitor profile - zip - <zipCode>
@@ -51,7 +51,7 @@ Feature: 1.08. ACQ- Visitor profile - <site>
       | Drugname | <drug1> |
 
 		@VisitorProfile_AARP
-    Examples: 
+		Examples:
       | state   | drug1   | zipCode |	site |
       | Alabama | Lipitor |   90210 |	AARP |
       
@@ -95,7 +95,7 @@ Feature: 1.08. ACQ- Visitor profile - <site>
       #| Alabama | US1770330 |   53503 | NO            | Jefferson County | SNP      | UnitedHealthcare Dual Complete LP1 (HMO D-SNP),UnitedHealthcare Medicare Advantage Assist (PPO C-SNP)  |
       
     @VisitorProfile_UHC @prodRegression_UHC
-    Examples: 
+    Examples:
       |	site	| state   | UID       |	planyear	| zipcode | isMultiCounty | county           | plantype | testPlans                                                                                              |
       |	UHC		| Alabama | US1770330 |  current	| 90210 | NO            | Jefferson County | MAPD     | AARP Medicare Advantage SecureHorizons Focus (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO) |
 

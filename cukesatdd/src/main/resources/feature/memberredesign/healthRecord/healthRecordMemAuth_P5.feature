@@ -30,9 +30,9 @@ Feature: 1.24.1.e Member Individual Health Record - Member Auth - P5 - PharmacyL
     @memAuth_no_ihr_p5_shipCombo
     Examples: 
 	    | index | FID     | username  | password  | MemUserName             | planType                 | memberType         | expectLink | 
-	    | 03    | F424804 | qavgogine | qavgogine | q3_sep_UAT4_AARP023 | SHIP_MEDICARE SUPPLEMENT | COMBO_PDP_SHIP_IHR | false      |
+	    | 03    | F424804 | qavgogine | qavgogine | q3_sep_UAT4_AARP023     | SHIP_MEDICARE SUPPLEMENT | COMBO_PDP_SHIP_IHR | false      |
 	 #  | 04    | F424804 | qavgogine | qavgogine | Dream_EOB_PDP_001       | SHIP_MEDICARE SUPPLEMENT | COMBO_SHIP_PDP_IHR | false      |
-	    | 04    | F424804 | qavgogine | qavgogine | q3_sept_UAT4_AARP_011   | SHIP_MEDICARE SUPPLEMENT | COMBO_SHIP_MAPD_IHR | false      |
+	    | 04    | F424804 | qavgogine | qavgogine | GENARO_Q4_COMBO         | SHIP_MEDICARE SUPPLEMENT | COMBO_SHIP_MAPD_IHR | false      |
 
     @memAuth_no_ihr_p5_boaGrp1
     Examples: 
@@ -75,8 +75,8 @@ Feature: 1.24.1.e Member Individual Health Record - Member Auth - P5 - PharmacyL
     @memAuth_ihr_p5_fedShipCombo_shipFedCombo
     Examples: 
 	    | index | FID     | username  | password  | MemUserName             | planType | memberType         | expectLink | 
-	    | 15    | F424804 | qavgogine | qavgogine | q3_sep_UAT4_AARP023 | PDP      | COMBO_PDP_SHIP_IHR | true       |
-	    | 16    | F424804 | qavgogine | qavgogine | q3_sept_UAT4_AARP_011       | MAPD       | COMBO_SHIP_MAPD_IHR  | true       |
+	    | 15    | F424804 | qavgogine | qavgogine | q3_sep_UAT4_AARP023     | PDP      | COMBO_PDP_SHIP_IHR | true       |
+	    | 16    | F424804 | qavgogine | qavgogine | GENARO_Q4_COMBO         | MAPD       | COMBO_SHIP_MAPD_IHR  | true       |
 
     @memAuth_ihr_p5_medica_pcp
     Examples: 
