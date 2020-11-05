@@ -86,7 +86,8 @@ public class PlanDetailsPage extends UhcDriver {
 	@FindBy(xpath = "//*[@id='detail-0']/div/div/div[1]")
 	private WebElement medBenefitsSection;
 
-	@FindBy(xpath="//*[contains(@id,'prescriptiondrug')]")
+	//@FindBy(xpath="//*[contains(@id,'prescriptiondrug')]")
+	@FindBy(xpath="//a[@id='prescriptiondrug' and contains(@class,'active')]")
 	private List<WebElement> presDrugTab1;
 
 	@FindBy(id = "prescriptiondrug")
