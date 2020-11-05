@@ -52,6 +52,7 @@ import pages.acquisition.commonpages.VisitorProfilePage;
 import pages.acquisition.commonpages.keywordSearchAARP;
 import pages.acquisition.dceredesign.GetStartedPage;
 import pages.acquisition.ole.WelcomePage;
+import pages.acquisition.pharmacyLocator.PharmacySearchPage;
 import pages.acquisition.ulayer.PageTitleConstants;
 import pages.mobile.acquisition.dceredesign.BuildYourDrugListMobile;
 import pages.mobile.acquisition.dceredesign.GetStartedPageMobile;
@@ -1836,9 +1837,12 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		threadsleep(5);
 		// driver.switchTo().defaultContent();
 		// CommonUtility.waitForPageLoad(driver, EnterSearch, 60);
-		EnterSearch.sendKeys(sv);
-		CommonUtility.waitForPageLoadNewForClick(driver, SubmitBtn, 60);
-		SubmitBtn.click();
+		//EnterSearch.sendKeys(sv);
+		jsSendkeys(EnterSearch, sv);
+		//CommonUtility.waitForPageLoadNewForClick(driver, SubmitBtn, 60);
+		scrollToView(SubmitBtn);
+		//SubmitBtn.click();
+		jsClickNew(SubmitBtn);
 		CommonUtility.waitForPageLoadNew(driver, SearchResults, 60);
 
 	}
@@ -2064,6 +2068,25 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		validateNew(medicareSpecialNeedsPlansLink);
 		validateNew(learnAboutMedicareLink);
 	}
+	
+	public PharmacySearchPageMobile navigateToPharmacyLocator() {
+		// checkModelPopup(driver);
+		Actions action = new Actions(driver);
+		scrollToView(ourPlansHoverLink);
+		action.moveToElement(navigationSectionHomeLink).moveToElement(ourPlansHoverLink).build().perform();
+		pharmacylocator.click();
+		CommonUtility.checkPageIsReadyNew(driver);
+		
+		//checkIfPageReadySafari();
+		
+		if (driver.getTitle().toLowerCase()
+				.contains((PageTitleConstants.BLAYER_LOCATE_A_PHARMACY_UNITEDHEALTHCARE).toLowerCase())) {
+			return new PharmacySearchPageMobile(driver);
+		}
+		return null;
+
+	}
+
 
 	public void validateTFNelement(String tfnXpath) {
 		WebElement TFNelement = driver.findElement(By.xpath(tfnXpath));

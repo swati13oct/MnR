@@ -1156,6 +1156,7 @@ public class MRScenario {
 	public static String returnJobURL() {
 		if(MRScenario.environment.equalsIgnoreCase(JobURLVD)) {
 			return JobURLVD;
+					
 		} else
 		return JobURL;
 		
@@ -1260,7 +1261,7 @@ public class MRScenario {
 				System.out.println(mobileDriver.getContext());
 			} else {
 
-				JobURLVD = ("SEE LIVE EXECUTION -->" + "https://app.saucelabs.com/tests/"
+				JobURLVD = ("https://app.saucelabs.com/tests/"
 						+ mobileDriver.getSessionId());
 				System.out.println(JobURLVD);
 			}
