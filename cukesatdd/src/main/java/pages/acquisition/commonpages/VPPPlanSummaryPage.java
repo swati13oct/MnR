@@ -3216,7 +3216,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	 * @return
 	 */
 	public VisitorProfilePage continueAsGuest() {
-		continueAsGuest.click();
+		jsClickNew(continueAsGuest);
+		sleepBySec(2);
 		if (driver.getCurrentUrl().contains("profile")) {
 			return new VisitorProfilePage(driver);
 		} else {

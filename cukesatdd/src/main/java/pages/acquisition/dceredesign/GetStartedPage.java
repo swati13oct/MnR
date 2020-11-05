@@ -39,9 +39,6 @@ public class GetStartedPage extends UhcDriver {
 	@FindBy(xpath = "//*[contains(@id,'get-started')]")
 	public WebElement getStartedTab;
 	
-	@FindBy(xpath = "//body/div[@id='overlay']")
-	private WebElement overlayFilm;
-	
 	@FindBy(id = "dupIconFlyOut")
 	private WebElement shoppingCartIcon;
 
@@ -76,7 +73,7 @@ public class GetStartedPage extends UhcDriver {
 
 	public void clickAddDrugsBtn() {
 		validateNew(AddMyDrugsBtn);
-		AddMyDrugsBtn.click();
+		jsClickNew(AddMyDrugsBtn);
 		//return new ZipCodePlanYearCapturePage(driver);
 		/*
 		 * CommonUtility.waitForPageLoad(driver, BuildDrugPage_verificationTxt, 30); if
@@ -112,7 +109,8 @@ public class GetStartedPage extends UhcDriver {
 	}
 	
 	public VisitorProfilePage clickOnShoppingCart() {
-		shoppingCartIcon.click();
+		jsClickNew(shoppingCartIcon);
+		threadsleep(2000);
 		if (driver.getCurrentUrl().contains("profile")) {
 			return new VisitorProfilePage(driver);
 		} else {

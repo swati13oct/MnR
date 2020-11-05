@@ -113,6 +113,7 @@ public class VisitorProfilePage extends UhcDriver {
 //		addPlans.click();
 		jsClickNew(addPlans);
 		CommonUtility.checkPageIsReadyNew(driver);
+		waitForPageLoadSafari();
 		if(driver.getCurrentUrl().contains("plan-summary")){
 			String page = "health-plans";
 			return new AcquisitionHomePage(driver,page);

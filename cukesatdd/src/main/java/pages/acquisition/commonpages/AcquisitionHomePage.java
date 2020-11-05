@@ -664,21 +664,22 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	}
 	
 	public VPPPlanSummaryPage searchPlans(String zipcode, String countyName) {
+		waitForPageLoadSafari();
 		if (isHealthPlan) {
 			CommonUtility.waitForPageLoadNew(driver, zipCode, 30);
 			sendkeys(zipCode, zipcode);
 
-			btnGO.click();
+			jsClickNew(btnGO);
 		} else {
 			CommonUtility.waitForPageLoadNew(driver, zipCodeField, 30);
 			sendkeys(zipCodeField, zipcode);
 
-			viewPlansButton.click();
+			jsClickNew(viewPlansButton);
 		}
 
 		CommonUtility.waitForPageLoad(driver, countyModal, 45);
 		if (validate(countyModal))
-			driver.findElement(By.xpath("//div[@id='selectCounty']//a[text()='" + countyName + "']")).click();
+			jsClickNew(driver.findElement(By.xpath("//div[@id='selectCounty']//a[text()='" + countyName + "']")));
 		CommonUtility.waitForPageLoadNew(driver, vppTop, 30);
 		if (driver.getCurrentUrl().contains("plan-summary")) {
 			return new VPPPlanSummaryPage(driver);
