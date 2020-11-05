@@ -1,7 +1,7 @@
 Feature: Plan Status
   As a termed or pre-effective member using the M&R member portal, I don't want to be able to access the Pharmacies & Prescriptions page by bookmark or URL, so that I do not see capabilities that are not available to me.  
 
-  @PlanStatus @F480452 @US2627388 @Scenario1 @Scenario2 @kewlll
+  @PlanStatus @F480452 @US2627388 @Scenario1 @Scenario2 
   Scenario Outline: Verify HSID login functionality for <planType> <memberType> To verify deep link for preefective member
     Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>      |

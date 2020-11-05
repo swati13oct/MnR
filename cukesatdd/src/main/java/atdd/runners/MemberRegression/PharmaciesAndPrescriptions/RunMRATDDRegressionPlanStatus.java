@@ -11,7 +11,7 @@ import org.junit.runner.RunWith;
 		overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionPlanStatus")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberredesign" },
 		features = { "src/main/resources/feature/memberredesign/pharmaciesandprescriptions" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionPlanStatus.json" }, tags = { "@kewlll" }, monochrome=true)
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionPlanStatus.json" }, tags = { "@US2627388" }, monochrome=true)
 public class RunMRATDDRegressionPlanStatus {
 
 }
