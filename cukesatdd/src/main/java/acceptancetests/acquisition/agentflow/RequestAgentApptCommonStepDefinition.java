@@ -19,7 +19,9 @@ import gherkin.formatter.model.DataTableRow;
 import pages.acquisition.commonpages.AcquisitionHomePage;
 import pages.acquisition.commonpages.RequestAgentAppointmentPage;
 import pages.acquisition.commonpages.RequestHelpAndInformationPage;
+import pages.acquisition.ulayer.EnrollmentBasicsPage;
 import pages.acquisition.ulayer.ProviderSearchPage;
+import pages.acquisition.ulayer.ShopforaplanAARPlayer;
 import pages.acquisition.ulayer.VPPPlanSummaryPage;
 
 
@@ -65,7 +67,7 @@ public class RequestAgentApptCommonStepDefinition {
 	public void navigates_request_more_help_information()
 	{
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage)getLoginScenario().getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		RequestHelpAndInformationPage requestHelpAndInformationPage = aquisitionhomepage.navigateToMaMoreHelpAndInfo();
+		RequestHelpAndInformationPage requestHelpAndInformationPage = aquisitionhomepage.navigateToRequestmoreHelp();
 		
 		if(requestHelpAndInformationPage!=null){
 			getLoginScenario().saveBean(PageConstants.REQUEST_MORE_HELP_INFORMATION_PAGE, requestHelpAndInformationPage);
@@ -114,4 +116,16 @@ public class RequestAgentApptCommonStepDefinition {
 		
 			
 	}
+	
+	@Then("^the user click on Request more Information$")
+	public void click_on_Request_more_information() throws Throwable {
+		AcquisitionHomePage requestAgentAppointmentPage = (AcquisitionHomePage)getLoginScenario().getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		RequestHelpAndInformationPage ContactusPage =requestAgentAppointmentPage.RequestLinkOnShopPlan();
+	//	RequestAgentAppointmentPage ContactusPage = requestAgentAppointmentPage.RequestLinkOnShopPlan();
+		if (ContactusPage != null)
+			getLoginScenario().saveBean(PageConstants.REQUEST_MORE_HELP_INFORMATION_PAGE, ContactusPage);
+		else
+			System.out.println("Error in loading requestAgentAppointmentPage");
+	}
+	
 }

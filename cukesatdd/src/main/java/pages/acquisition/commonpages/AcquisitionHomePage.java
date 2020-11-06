@@ -430,6 +430,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	@FindBy(xpath="//a[contains(@href,'https://www.myuhcagent.com/')]")
 	private WebElement RightRail_FindAnAgent; 
+	
+	@FindBy(xpath="//a[contains(@href,'/shop/connect.html')]")
+	private WebElement RequestMoreInformationLink;
 
    	String ChatSamText= "Chat with a Licensed Insurance Agent";
 
@@ -2574,4 +2577,38 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			ViewMedicareplanlinks.click();
 
 		}
+		
+		public RequestHelpAndInformationPage RequestLinkOnShopPlan() throws Exception {
+			//Thread.sleep(4000);
+			if (validate(RequestMoreInformationLink)) {
+				waitforElement(RequestMoreInformationLink);
+				System.out.println("Contact Us Page is Displayed");
+				return new RequestHelpAndInformationPage(driver);
+			}
+			return null;
+		}
+		
+		
+		public RequestHelpAndInformationPage navigateToRequestmoreHelp() {
+
+			waitforElement(ShopForaplan);
+			if (ShopForaplan.isDisplayed()) {
+				Actions action = new Actions(driver);
+				action.moveToElement(ShopForaplan).build().perform();
+				try {
+					Thread.sleep(4000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				validateNew(RequestMoreInformationLink);
+				RequestMoreInformationLink.click();
+				return new  RequestHelpAndInformationPage(driver);
+			} else {
+				return null;		
+			}
+		}
+		
+		
+		
 }
