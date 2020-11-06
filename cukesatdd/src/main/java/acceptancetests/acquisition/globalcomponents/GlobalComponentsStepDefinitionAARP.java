@@ -364,6 +364,14 @@ public class GlobalComponentsStepDefinitionAARP {
 				EnterZipCodePage enterZipCodePage=aquisitionhomepage.enterZipCode();
 				enterZipCodePage.validateZipComp(zipCode);
 	}
+	
+	@Then("^the user enters and validate the fields and clicks on submit$")
+	public void the_user_enters_and_validate_the_fields_and_clicks_on_submit() throws Throwable {
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		aquisitionhomepage.enterAndvalidateEmail();
+	}
+	
 	@Then("^the user validates Pro-active Chat$")
 	public void the_user_validates_Pro_active_Chat() throws Throwable {
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
