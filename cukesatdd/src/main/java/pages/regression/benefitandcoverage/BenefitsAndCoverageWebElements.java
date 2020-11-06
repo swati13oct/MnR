@@ -1106,6 +1106,15 @@ public class BenefitsAndCoverageWebElements extends UhcDriver {
 	@FindBy(xpath = "//h1[text()='Benefit Summary']")
 	protected WebElement coverageBenefitsNewHeader;
 	
+	@FindBy(xpath="//p[text()='To view more details regarding your plan benefits, you may view your Benefits Highlights ']/a")
+	protected WebElement medCopayBenefitsLink;
+
+	@FindBy(xpath="//p[text()='To view more details regarding your plan benefits, you may view your Benefits Highlights ']")
+	protected WebElement medCopayText;
+	
+	@FindBy(xpath = "//*[contains(@class,'tdd-hospitalvisits-title')]")
+	protected WebElement InPatientHospitalCare;
+	
 	public BenefitsAndCoverageWebElements(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);

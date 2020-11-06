@@ -795,10 +795,11 @@ public class DrugDetailsPage extends UhcDriver {
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(false);", savePlan);
 		((JavascriptExecutor) driver).executeScript("arguments[0].click();", savePlan);
 
-		Actions action = new Actions(driver);
-		WebElement element = favoriteIcon;
-		action.moveToElement(element).perform();
-		waitforElementNew(favoriteSuccess,30);
+//		Actions action = new Actions(driver);
+//		WebElement element = favoriteIcon;
+//		action.moveToElement(element).perform();
+		jsMouseOver(favoriteIcon);
+//		waitforElementNew(favoriteSuccess,5);
 		System.out.println(favoriteSuccess.getText());
 
 	}

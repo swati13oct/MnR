@@ -3298,7 +3298,8 @@ for (int i = 0; i < initialCount + 1; i++) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}		
-		part_B_monthDrpDwn.click();
+		//part_B_monthDrpDwn.click();
+		jsClickNew(part_B_monthDrpDwn);
 		try {
 			Thread.sleep(2000);
 		} catch (InterruptedException e) {

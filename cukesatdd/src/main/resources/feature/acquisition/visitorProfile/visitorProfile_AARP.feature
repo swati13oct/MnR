@@ -51,7 +51,7 @@ Feature: 1.08. ACQ- Visitor profile
       | Drugname | <drug1> |
 
 		@VisitorProfile_AARP
-    Examples: 
+		Examples:
       | state   | drug1   | zipCode |	site |
       | Alabama | Lipitor |   90210 |	AARP |
       
@@ -95,7 +95,7 @@ Feature: 1.08. ACQ- Visitor profile
       #| Alabama | US1770330 |   53503 | NO            | Jefferson County | SNP      | UnitedHealthcare Dual Complete LP1 (HMO D-SNP),UnitedHealthcare Medicare Advantage Assist (PPO C-SNP)  |
       
     @VisitorProfile_UHC @prodRegression_UHC
-    Examples: 
+    Examples:
       |	site	| state   | UID       |	planyear	| zipcode | isMultiCounty | county           | plantype | testPlans                                                                                              |
       |	UHC		| Alabama | US1770330 |  current	| 90210 | NO            | Jefferson County | MAPD     | AARP Medicare Advantage SecureHorizons Focus (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO) |
 
