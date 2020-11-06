@@ -2110,7 +2110,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 			String StateSessionStorage = ReturnDriverStorage(driver, "sessionStorage", "ucp_geotrackingState");
 
-			String StateSessionStorage =  returnDriverStorageJS("sessionStorage", "ucp_geotrackingState");
+//			String StateSessionStorage =  returnDriverStorageJS("sessionStorage", "ucp_geotrackingState");
 					//ReturnDriverStorage(driver, "sessionStorage", "ucp_geotrackingState");
 
 			System.out.println("State selected : California");

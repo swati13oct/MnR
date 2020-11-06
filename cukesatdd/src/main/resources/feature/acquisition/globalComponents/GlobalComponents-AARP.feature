@@ -1,7 +1,7 @@
 @GlobalComponentsAARP @F448210
 Feature: 1.12 ACQ - Global Components AARP
 
-  @globalfooterULayer
+  @globalfooterULayer   @globalfooter_AARP
   Scenario Outline: To verify links displayed in the global footer of AARP site
     Given the user is on medicare acquisition site landing page
     	|Site| <site>|
@@ -19,7 +19,7 @@ Feature: 1.12 ACQ - Global Components AARP
     And user verifies home link of agents&brokers page
     Then user clicks on back to top link of home page
 
-	@globalfooter
+	@globalfooter_AARP
   Examples: 
        |	site	|
        |	AARP	|
@@ -111,7 +111,7 @@ Feature: 1.12 ACQ - Global Components AARP
 #      |	AARP	| medicare-education/enrollment-and-changing-plans.html | Medicare Enrollment Basics | AARP Medicare Plans      | //div[contains(@style,'display: block')]//a[contains(@class, 'tel')]		| true    |
       |	AARP	| medicare-education/medicare-faq.html                  | Medicare FAQ | AARP Medicare Plans	                  | //div[contains(@style,'display: block')]//a[contains(@class, 'tel')] 		| true    |
       
-<
+
     @MedEdPages_3_GlobalCompsUHC
     Examples: 
       |	site	| path                                                  | pageName                    											| tfnXpath                                      													| tfnFlag |
@@ -316,7 +316,7 @@ Feature: 1.12 ACQ - Global Components AARP
       #|	UHC		| medicare-plans.html                                           | ShopPlan: Plan Selector | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | false   |
       #|	UHC		| profile/guest                                                 | Visitor Profile: Guest  | //*[contains(@class,'tel')]                                              | true    |
 		
-    @FooterLinks_GlobalCompsAARP
+    @FooterLinks_GlobalCompsAARP @globalfooterULayer
     Examples: 
       |	site	| path                          | pageName                   | tfnXpath                     | tfnFlag |
       |	AARP	| about-us.html                 | Footer: About Us           | //a[contains(@class, 'tel')] | false   |
