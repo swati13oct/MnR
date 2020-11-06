@@ -420,6 +420,7 @@ public class RefillCheckoutSummaryStepDefinition {
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
 		pnpPg.waitTillMedCabLoads();
 		pnpPg.clickOnViewAllMedicationsLink();
+		pnpPg.waitTillMyMedLoads();
 		List<Integer> indexOfRefillMedication = pnpPg.getListOfIndexForRefillMedicationOnMyMed();
 		int countOfPage = Integer.parseInt(pnpPg.getCountOfMyMedPage());
 		for (int i = 0; i < countOfPage; i++) {
@@ -523,6 +524,7 @@ public class RefillCheckoutSummaryStepDefinition {
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
 		pnpPg.waitTillMedCabLoads();
 		pnpPg.clickOnViewAllMedicationsLink();
+		pnpPg.waitTillMyMedLoads();
 		List<Integer> indexOfRenewMedication = pnpPg.getListOfIndexForRenewMedicationOnMyMed();
 		int countOfPage = Integer.parseInt(pnpPg.getCountOfMyMedPage());
 		for (int i = 0; i < countOfPage; i++) {
@@ -596,6 +598,7 @@ public class RefillCheckoutSummaryStepDefinition {
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
 		pnpPg.waitTillMedCabLoads();
 		pnpPg.clickOnViewAllMedicationsLink();
+		pnpPg.waitTillMyMedLoads();
 		List<Integer> indexOfTransferMedication = pnpPg.getListOfIndexForRetailTransferToHDOnMyMed();
 		int countOfPage = Integer.parseInt(pnpPg.getCountOfMyMedPage());
 		for (int i = 0; i < countOfPage; i++) {

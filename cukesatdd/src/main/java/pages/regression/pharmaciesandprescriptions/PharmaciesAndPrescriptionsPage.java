@@ -3197,6 +3197,15 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 					validate(DrugLookupCallToActnBtn, 30));
 			DrugLookupCallToActnBtn.click();
 		}
+		
+		public void waitTillMyMedLoads() {
+			if (!validate(MyMedicationsPageHeader, 60)) {
+				System.out.println("Inside waitTillMyMedLoads");
+				tryAgainMedCabTimeOut.click();
+				CommonUtility.checkPageIsReady(driver);
+				CommonUtility.waitForPageLoad(driver, MyMedicationsPageHeader, 80);
+			}
+		}
 
 }
 
