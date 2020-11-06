@@ -263,7 +263,7 @@ public class TestHarness extends UhcDriver {
 	@FindBy(xpath="//h1[contains(text(),'Pharmacies')]")
 	private WebElement pharmaciesHeader;
 	
-	@FindBy(id="healthwellness_6")
+	@FindBy(id="healthwellness_7")
 	private WebElement healthAndWellnessTab;
 	
 	@FindBy(xpath="//h1//*[contains(text(),'Health & Wellness')]")
