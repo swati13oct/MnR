@@ -2283,4 +2283,25 @@ public class VppCommonStepDefinition {
 			getLoginScenario().saveBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE,
 					pharmacySearchPage);
 		}
+		
+		@Then("^the site user clicks on Start Application Button and proceed Next$")
+		public void Start_application_button_proceed_next(DataTable givenAttributes) throws Throwable {
+			List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+			Map<String, String> memberAttributesMap = new HashMap<String, String>();
+			for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+				memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+						memberAttributesRow.get(i).getCells().get(1));
+			}
+
+			String DateOfBirth = memberAttributesMap.get("DOB");
+			String FirstName = memberAttributesMap.get("Firstname");
+			String LastName = memberAttributesMap.get("Lastname");
+			VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+			plansummaryPage.MedSupFormValidation(DateOfBirth);
+			String resumeKey = plansummaryPage.StartApplication(FirstName, LastName);
+			getLoginScenario().saveBean(VPPCommonConstants.RESUMEKEY, resumeKey);
+
+		}
 }

@@ -49,7 +49,7 @@ Feature: ACQ-OLE Resume and Retrieve Application for MedSupp
   
   
   @MedSupp_OLE_Common
-  Scenario Outline: <scenario> MedSup Resume Application with Application ID through Shop Pages
+  Scenario Outline: <scenario> MedSup E2E Flow through Shop Pages
    Given the user is on medicare acquisition site landing page
    		|Site| <site>|
    And the user hovers screen over the shop for a plan
@@ -58,31 +58,11 @@ Feature: ACQ-OLE Resume and Retrieve Application for MedSupp
       | Zip Code        | <zipcode>         |
       | County Name     | <county>          |
       | Is Multi County | <isMultutiCounty> |
-		Then the site user clicks on Start Application Button proceed to next pages
+		Then tthe site user clicks on Start Application Button and proceed Next
       | DOB           | <DOB>         |
       | Firstname     | <Firstname>   |
       | Lastname      | <Lastname>    |
-    Then user clicks on resume application button
-   	 	| DOB           | <DOB>         |
-   	 	| Firstname     | <Firstname>   |
-      | Lastname      | <Lastname>    |
-    #Then the user signs in with optum Id credentials to resume application in UHC site
-    #  | User Name | <userName> |
-    #  | Password  | <password> |
-    Then the user signs in with optum Id
-     	|User Name | <username>|
-     	|Password  | <password>|
-    Then the user validate retrieve application URL
-      | AARP URL    | <AARPUrl> 	|
-      |AARP URL STG |<AARPUrl-stg>|
-    #Then the user enters data to resume the application
-    #  | applicationType| <applicationType>|
-    #	 | ApplicationID |<ApplicationID>|
-    #  | DOB           | <DOB>         |
-    #  | Zipcode       | <zipcode>     |   
-    #Then The user validates the resume application processed
-    #  | Firstname     | <Firstname>   |
-    #  | Lastname      | <Lastname>    |
+    
    @MedSupp_OLE_Common_AARP   
    Examples: 
     |scenario  | zipcode | isMultutiCounty | AARPUrl																					| county             | plantype | DOB      | Firstname | Lastname|  ApplicationID | applicationType | username | password |AARPUrl-stg|site|

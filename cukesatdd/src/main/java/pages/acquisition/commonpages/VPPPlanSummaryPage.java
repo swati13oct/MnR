@@ -448,6 +448,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	@FindBy(xpath = "(//a[contains(text(),'Cancel Application')])[3]")
 	private WebElement cancelButtonPopUp;
+	
+	@FindBy(xpath = "(//a[contains(text(),'Return to Application')])[3]")
+	private WebElement ReturntoApplicationButton;
 
 	// @FindBy(xpath = "//a[contains(text(),'Enter your existing Application ID
 	// code')]")
@@ -3096,7 +3099,145 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		System.out.println("Cancel application has been clicked on the pop up");
 		return ResumeKey;
 	}
+	@FindBy(xpath = "//*[@id='MedicareClaimNum']")
+	private WebElement MedicareNumber;
+	
+	@FindBy(xpath = "(//*[@class='radio_choice']/parent::span)[1]")
+	private WebElement Gender;
+	
+	@FindBy(xpath = "(//*[@class='radio_choice']/parent::span)[2]")
+	private WebElement CoverageMedicaid;
+	
+	@FindBy(xpath = "(//*[@class='radio_choice']/parent::span)[2]")
+	private WebElement CoveragePartc;
+	@FindBy(xpath = "(//*[@class='radio_choice']/parent::span)[2]")
+	private WebElement CoverageSupplementPlans;
+	@FindBy(xpath = "(//*[@class='radio_choice']/parent::span)[2]")
+	private WebElement CoverageotherInsurance;
+	
+	
+	@FindBy(xpath = "//*[@class='right']/parent::span")
+	private WebElement CoverageVerification;
+	
+	@FindBy(xpath = "(//*[@class='radio_choice']/parent::span)[1]")
+	private WebElement paymentOption;
+	@FindBy(xpath = "(//*[@class='radio_choice']/parent::span)[1]")
+	private WebElement DocumentDelivery;
+	
+	@FindBy(xpath = "(//*[@class='radio_choice']/parent::span)[1]")
+	private WebElement EmailAddressNo;
+	
+	@FindBy(xpath = "(//*[@class='radio_choice']/parent::span)[1]")
+	private WebElement ReadAgreement;
+	
+	@FindBy(xpath = "(//*[contains(text(),'Confirm Your Responses and Proceed to Authorization')])[2]/parent::button")
+	private WebElement ProceedAuthorization;
+	
+	@FindBy(xpath = "(//*[@class='radio_choice']/parent::span)[1]")
+	private WebElement VerificationAgree;
+	
+	@FindBy(xpath = "(//*[contains(text(),'Submit application')])[1]")
+	private WebElement SubmitApplication;
+	@FindBy(xpath = "(//*[contains(text(),'Submission Confirmation')])[1]")
+	private WebElement submitconfirmation;
+	@FindBy(xpath = "//*[contains(text(),'View Prescription Drug Plans')]")
+	private WebElement ViewPrescriptionDrugPlans;
+	public String StartApplication(String FirstName, String LastName) throws InterruptedException {
+		Thread.sleep(4000);
+		CommonUtility.waitForPageLoadNew(driver, Start_ApplicationBtn, 20);
+		Start_ApplicationBtn.click();
+		System.out.println("Start application button is clicked on application page");
+		Thread.sleep(4000);
+		CommonUtility.waitForPageLoadNew(driver, insuredStatus, 20);
+		insuredStatus.click();
+		Thread.sleep(2000);
+		nextButton.click();
+		Thread.sleep(2000);
+		nextButton.click();
+		Thread.sleep(2000);
+		nextButton.click();
+		Thread.sleep(2000);
+		nextButton.click();
+		Thread.sleep(2000);
+		firstName.sendKeys(FirstName);
+		lastName.sendKeys(LastName);
+		nextButton.click();
+		CommonUtility.waitForPageLoadNew(driver, address1, 20);
+		address1.sendKeys("TestAddress1");
+		cityName.sendKeys("TestCity");
+		alternatemailingAddressBtn.click();
+		emailAddress.sendKeys("test123@test.com");
+		phoneNumber.sendKeys("1234567890");
+		nextButton.click();
+		Thread.sleep(2000);
+		nextButton.click();
+		Thread.sleep(2000);
+		cancelButton.click();
+		CommonUtility.waitForPageLoad(driver, ReturntoApplicationButton, 30);
+		ReturntoApplicationButton.click();
+		Thread.sleep(2000);
+		nextButton.click();
+		MedicareNumber.sendKeys("1EG1TE1MK12");
+		jsClickNew(Gender);
+		nextButton.click();
+		Thread.sleep(2000);
+		nextButton.click();
+		Thread.sleep(2000);
+		nextButton.click();
+		Thread.sleep(2000);
+		nextButton.click();
+		Thread.sleep(2000);
+		nextButton.click();
+		jsClickNew(CoverageMedicaid);
+		nextButton.click();
+		Thread.sleep(2000);
+		jsClickNew(CoveragePartc);
+		nextButton.click();
+		Thread.sleep(2000);
+		jsClickNew(CoverageSupplementPlans);
+		nextButton.click();
+		Thread.sleep(2000);
+		jsClickNew(CoverageotherInsurance);
+		nextButton.click();
+		Thread.sleep(2000);
+		jsClickNew(CoverageVerification);
+		nextButton.click();
+		Thread.sleep(2000);
+		jsClickNew(paymentOption);
+		nextButton.click();
+		Thread.sleep(2000);
+		jsClickNew(DocumentDelivery);
+		nextButton.click();
+		Thread.sleep(2000);
+		
+		///////////--------------Need to check from here----------
+		jsClickNew(EmailAddressNo);
+		nextButton.click();
+		Thread.sleep(2000);
 
+		jsClickNew(ReadAgreement);
+		nextButton.click();
+		Thread.sleep(2000);
+		jsClickNew(ProceedAuthorization);
+		Thread.sleep(2000);
+		jsClickNew(VerificationAgree);
+		nextButton.click();
+		Thread.sleep(2000);
+		
+		jsClickNew(VerificationAgree);
+		nextButton.click();
+		Thread.sleep(2000);
+		jsClickNew(SubmitApplication);
+		Thread.sleep(2000);
+		
+		String SubmitConfirmation = submitconfirmation.getText();
+		System.out.println("The return to the application code is- " + SubmitConfirmation);
+		Thread.sleep(2000);
+		
+		//jsClickNew(ViewPrescriptionDrugPlans);
+		//Thread.sleep(2000);
+		return LastName; 
+	}
 	public void ResumeApplicationButton() throws InterruptedException {
 		Thread.sleep(5000);
 		String DateOfBirth = "11131950";
