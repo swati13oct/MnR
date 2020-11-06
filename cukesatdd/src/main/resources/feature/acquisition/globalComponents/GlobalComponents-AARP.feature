@@ -40,7 +40,7 @@ Feature: 1.12 ACQ - Global Components AARP
     And user clicks on register link on home page
     Then user validates visitor profile on home page
   
-  @globalheader
+  @globalheader   @globalheaderULayer
   Examples: 
        |	site	|
        |	AARP	| 
