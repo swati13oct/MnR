@@ -2218,7 +2218,7 @@ public class VppPlanDetailMobile {
 
 	@When("^verify Call SAM icon is visible or not on Plan Comapare on UHC site$")
 	public void verify_Call_SAM_icon_is_visible_or_not_PlanCompare_UHC_Site() throws InterruptedException {
-		ComparePlansPageBlayer planComparePage = (ComparePlansPageBlayer) getLoginScenario()
+		ComparePlansPageBlayerMobile planComparePage = (ComparePlansPageBlayerMobile) getLoginScenario()
 				.getBean(PageConstants.PLAN_COMPARE_PAGE);
 		planComparePage.validateCallSam();
 	}
@@ -2227,7 +2227,7 @@ public class VppPlanDetailMobile {
 	public void verify_Call_SAM_roll_out_and_contain_the_text_Call_a_Licensed_Insurance_Agent_PlanCompare_UHC()
 			throws InterruptedException {
 
-		ComparePlansPageBlayer planComparePage = (ComparePlansPageBlayer) getLoginScenario()
+		ComparePlansPageBlayerMobile planComparePage = (ComparePlansPageBlayerMobile) getLoginScenario()
 				.getBean(PageConstants.PLAN_COMPARE_PAGE);
 		planComparePage.validateCallSamContent();
 
@@ -2236,7 +2236,7 @@ public class VppPlanDetailMobile {
 	@Then("^user verify the popup and content on Plan Comapare on UHC site$")
 	public void user_verify_the_popup_and_content_PlanCompare_UHC() throws InterruptedException {
 
-		ComparePlansPageBlayer planComparePage = (ComparePlansPageBlayer) getLoginScenario()
+		ComparePlansPageBlayerMobile planComparePage = (ComparePlansPageBlayerMobile) getLoginScenario()
 				.getBean(PageConstants.PLAN_COMPARE_PAGE);
 		planComparePage.validateCallpopup();
 	}
@@ -2244,9 +2244,9 @@ public class VppPlanDetailMobile {
 	@When("^verify Chat SAM icon is visible or not on Plan Comapare on UHC site$")
 	public void verify_Chat_SAM_icon_is_visible_or_not_PlanCompare_UHC() throws InterruptedException {
 
-		ComparePlansPageBlayer planComparePage = (ComparePlansPageBlayer) getLoginScenario()
+		ComparePlansPageBlayerMobile planComparePage = (ComparePlansPageBlayerMobile) getLoginScenario()
 				.getBean(PageConstants.PLAN_COMPARE_PAGE);
-		ComparePlansPageBlayer ChatIcon = planComparePage.validateChatSam();
+		ComparePlansPageBlayerMobile ChatIcon = planComparePage.validateChatSam();
 		if (ChatIcon != null) {
 			getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, ChatIcon);
 			Assert.assertTrue(true);
@@ -2260,7 +2260,7 @@ public class VppPlanDetailMobile {
 	public void verify_Chat_SAM_roll_out_and_contain_the_text_Call_a_Licensed_Insurance_Agent_PlanCompare_UHC()
 			throws InterruptedException {
 
-		ComparePlansPageBlayer planComparePage = (ComparePlansPageBlayer) getLoginScenario()
+		ComparePlansPageBlayerMobile planComparePage = (ComparePlansPageBlayerMobile) getLoginScenario()
 				.getBean(PageConstants.PLAN_COMPARE_PAGE);
 		planComparePage.validateChatSamContent();
 
@@ -2269,7 +2269,7 @@ public class VppPlanDetailMobile {
 	@Then("^user verify the Chat original state on UHC site$")
 	public void user_verify_the_Chat_original_state_PlanCompare_UHC() throws InterruptedException {
 
-		ComparePlansPageBlayer planComparePage = (ComparePlansPageBlayer) getLoginScenario()
+		ComparePlansPageBlayerMobile planComparePage = (ComparePlansPageBlayerMobile) getLoginScenario()
 				.getBean(PageConstants.PLAN_COMPARE_PAGE);
 		planComparePage.validateChatSam();
 	}
@@ -2318,7 +2318,7 @@ public class VppPlanDetailMobile {
 
 	@Then("^the user click on Prescription Drug Benefits and validates in UHC site$")
 	public void the_user_click_on_Prescription_Drug_Benefits_and_validates_in_UHC_site() throws Throwable {
-		PlanDetailsPage vppPlanDetailsPage = (PlanDetailsPage) getLoginScenario()
+		PlanDetailsPageMobile vppPlanDetailsPage = (PlanDetailsPageMobile) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
 		vppPlanDetailsPage.clickAndValidatePrescriptionDrugBenefits();
 	}
@@ -2355,7 +2355,7 @@ public class VppPlanDetailMobile {
 		String monthlyPremium = memberAttributesMap.get("Monthly Premium");
 		String yearlyPremium = memberAttributesMap.get("Yearly Premium");
 
-		PlanDetailsPage vppPlanDetailsPage = (PlanDetailsPage) getLoginScenario()
+		PlanDetailsPageMobile vppPlanDetailsPage = (PlanDetailsPageMobile) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
 
 		boolean validationFlag = vppPlanDetailsPage.clickAndValidateOptionalRiderPremiums(monthlyPremium,
@@ -2367,7 +2367,7 @@ public class VppPlanDetailMobile {
 	@When("^the user checks for AEP CUrrent year plans link and clicks to view current year plans on UHC$")
 	public void the_user_views_currentyearlink_clicksLink() throws Throwable {
 
-		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 
 		plansummaryPage.CheckClick_CurrentYear_Plans();
@@ -2375,21 +2375,21 @@ public class VppPlanDetailMobile {
 
 	@Then("^verify plan compare page is loaded on UHC$")
 	public void verify_plan_compare_page_is_loaded_on_UHC() throws Throwable {
-		ComparePlansPageBlayer planComparePage = (ComparePlansPageBlayer) getLoginScenario()
+		ComparePlansPageBlayerMobile planComparePage = (ComparePlansPageBlayerMobile) getLoginScenario()
 				.getBean(PageConstants.PLAN_COMPARE_PAGE);
 		planComparePage.validatePlanComparePage();
 	}
 
 	@Then("^click on back to plans on plan compare page for UHC$")
 	public void click_on_back_to_plans_on_plan_compare_page_for_UHC() throws Throwable {
-		ComparePlansPageBlayer planComparePage = (ComparePlansPageBlayer) getLoginScenario()
+		ComparePlansPageBlayerMobile planComparePage = (ComparePlansPageBlayerMobile) getLoginScenario()
 				.getBean(PageConstants.PLAN_COMPARE_PAGE);
 		planComparePage.clickOnBacktoPlans();
 	}
 
 	@Then("^Verify the Plan compare checkbox should be unchecked for the removed plan for UHC$")
 	public void verify_the_Plan_compare_checkbox_should_be_unchecked_for_the_removed_plan_for_UHC() throws Throwable {
-		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		plansummaryPage.verifyPlanComapreCheckboxIsUnchecked();
 	}
@@ -2416,10 +2416,10 @@ public class VppPlanDetailMobile {
 
 	@Then("^check one plan and add it to plancompare for UHC$")
 	public void check_one_plan_and_add_it_to_plancompare_for_UHC() throws Throwable {
-		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		plansummaryPage.clickon3rdPlan();
-		ComparePlansPageBlayer planComparePage = plansummaryPage.clickOnCompareLink();
+		ComparePlansPageBlayerMobile planComparePage = plansummaryPage.clickOnCompareLink();
 		if (planComparePage != null) {
 			getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
 			// comparePlansPage.backToVPPPage();
@@ -2447,9 +2447,9 @@ public class VppPlanDetailMobile {
 
 	@Then("^the user clicks on Enroll in plan for UHC site and validates the Welcome to OLE Page on new Plan Compare")
 	public void user_clicks_enrollInPlan_newPlanCompare_UHC() throws InterruptedException {
-		ComparePlansPageBlayer planComparePage = (ComparePlansPageBlayer) getLoginScenario()
+		ComparePlansPageBlayerMobile planComparePage = (ComparePlansPageBlayerMobile) getLoginScenario()
 				.getBean(PageConstants.PLAN_COMPARE_PAGE);
-		WelcomePage welcomeOLEPage = planComparePage.Enroll_OLE_newPlancompare_UHC();
+		WelcomePageMobile welcomeOLEPage = planComparePage.Enroll_OLE_newPlancompare_UHC();
 		if (welcomeOLEPage != null) {
 			getLoginScenario().saveBean(PageConstants.OLE_WELCOME_PAGE, welcomeOLEPage);
 		} else {
@@ -2459,9 +2459,9 @@ public class VppPlanDetailMobile {
 
 	@Then("^the user clicks on Plan details link in new Plan Compare page on UHC")
 	public void user_clicks_planDetails_newPlanCompare_UHC() throws InterruptedException {
-		ComparePlansPageBlayer planComparePage = (ComparePlansPageBlayer) getLoginScenario()
+		ComparePlansPageBlayerMobile planComparePage = (ComparePlansPageBlayerMobile) getLoginScenario()
 				.getBean(PageConstants.PLAN_COMPARE_PAGE);
-		ComparePlansPageBlayer vppPlanDetailsPage = planComparePage.navigateToPlanDetailfromplanCompare();
+		ComparePlansPageBlayerMobile vppPlanDetailsPage = planComparePage.navigateToPlanDetailfromplanCompare();
 		if (vppPlanDetailsPage != null) {
 			getLoginScenario().saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE, vppPlanDetailsPage);
 			Assert.assertTrue(true);

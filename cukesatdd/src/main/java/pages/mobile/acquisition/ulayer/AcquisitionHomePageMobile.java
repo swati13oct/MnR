@@ -2549,7 +2549,8 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 	public ContactUsUmsPageMobile contactUsClick() {
 		validateNew(footerContactUsLink);
-		footerContactUsLink.click();
+		//footerContactUsLink.click();
+		jsClickNew(footerContactUsLink);
 		CommonUtility.checkPageIsReadyNew(driver);
 		if (driver.getCurrentUrl().contains("contact-us")) {
 			return new ContactUsUmsPageMobile(driver);
@@ -2560,7 +2561,8 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 	public AgentsAndBrokersPageMobile agentsAndBrokersClick() {
 		validateNew(footerAgentsnBrokersLink);
-		footerAgentsnBrokersLink.click();
+		//footerAgentsnBrokersLink.click();
+		jsClickNew(footerAgentsnBrokersLink);
 		CommonUtility.checkPageIsReadyNew(driver);
 		if (driver.getCurrentUrl().contains("health-insurance-brokers")) {
 			return new AgentsAndBrokersPageMobile(driver);
@@ -2571,7 +2573,8 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 	public VisitorProfilePageMobile navigateToVisitorProfilePage() {
 		waitforElement(shoppingCartIcon);
-		shoppingCartIcon.click();
+		//shoppingCartIcon.click();
+		jsClickNew(shoppingCartIcon);
 		if (driver.getCurrentUrl().contains("profile")) {
 			return new VisitorProfilePageMobile(driver);
 		} else {

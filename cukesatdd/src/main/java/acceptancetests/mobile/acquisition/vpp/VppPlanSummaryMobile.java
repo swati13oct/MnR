@@ -11,23 +11,6 @@ import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import pages.acquisition.bluelayer.AboutUsPage;
-import pages.acquisition.bluelayer.AcquisitionHomePage;
-import pages.acquisition.bluelayer.AddDrugDetails;
-import pages.acquisition.bluelayer.ContactUsUmsPage;
-import pages.acquisition.bluelayer.DisclaimersPage;
-import pages.acquisition.bluelayer.DrugCostEstimatorPage;
-import pages.acquisition.bluelayer.PrivacyPolicyUmsPage;
-import pages.acquisition.bluelayer.ProviderSearchPage;
-import pages.acquisition.bluelayer.SavingsOppurtunity;
-import pages.acquisition.bluelayer.SiteMapUMSPage;
-import pages.acquisition.commonpages.PlanDetailsPage;
-import pages.acquisition.dceredesign.GetStartedPage;
-import pages.acquisition.emailAndPrint.EmailAndPrintUtil;
-import pages.acquisition.ole.WelcomePage;
-import pages.acquisition.ulayer.VPPPlanSummaryPage;
-import pages.acquisition.ulayer.VPPTestHarnessPage;
-import pages.acquisition.ulayer.keywordSearchAARP;
 import pages.mobile.acquisition.bluelayer.AboutUsPageMobile;
 import pages.mobile.acquisition.bluelayer.ContactUsUmsPageMobile;
 import pages.mobile.acquisition.bluelayer.DisclaimersPageMobile;
@@ -43,7 +26,6 @@ import pages.mobile.acquisition.emailAndPrint.EmailAndPrintUtilMobile;
 import pages.mobile.acquisition.ole.WelcomePageMobile;
 import pages.mobile.acquisition.ulayer.AcquisitionHomePageMobile;
 import pages.mobile.acquisition.ulayer.VPPPlanSummaryPageMobile;
-import pages.mobile.acquisition.ulayer.VPPTestHarnessPageMobile;
 //import pages.acquisition.ulayer.keywordSearch;
 import acceptancetests.acquisition.ole.oleCommonConstants;
 import acceptancetests.data.CommonConstants;
@@ -52,7 +34,6 @@ import acceptancetests.util.CommonUtility;
 import acceptancetests.acquisition.vpp.VPPCommonConstants;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
-import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -84,7 +65,7 @@ public class VppPlanSummaryMobile {
 
 		String planName = givenAttributesMap.get("Plan Name");
 		getLoginScenario().saveBean(VPPCommonConstants.PLAN_NAME, planName);
-		VPPPlanSummaryPage planSummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+		VPPPlanSummaryPageMobile planSummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		Assert.assertTrue("Error loading specific plan summary in VPP plan summary page",
 				planSummaryPage.getSpecificPlanInfo(planName));
@@ -452,7 +433,7 @@ public class VppPlanSummaryMobile {
 		getLoginScenario().saveBean(VPPCommonConstants.PLAN_TYPE, plantype);
 		getLoginScenario().saveBean(PageConstants.ACQ_PAGE_TYPE, site);
 		if (site.equalsIgnoreCase("ulayer")) {
-			pages.acquisition.ulayer.VPPPlanSummaryPage plansummaryPage = (pages.acquisition.ulayer.VPPPlanSummaryPage) getLoginScenario()
+			VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
 					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 			plansummaryPage.viewPlanSummary(plantype);
 			EmailAndPrintUtilMobile util = new EmailAndPrintUtilMobile(plansummaryPage.driver);

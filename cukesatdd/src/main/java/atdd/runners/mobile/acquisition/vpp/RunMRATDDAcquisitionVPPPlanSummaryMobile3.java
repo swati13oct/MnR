@@ -8,18 +8,18 @@ import com.github.mkolisnyk.cucumber.runner.ExtendedCucumberOptions;
 import cucumber.api.CucumberOptions;
 
 /**
- * this file is to run test cases for RunMRATDDAcquisitionVPPPlanSummaryMobile2
+ * this file is to run test cases for RunMRATDDAcquisitionVPPPlanSummaryMobile3
  */
 @RunWith(ExtendedCucumber.class)
 @ExtendedCucumberOptions(retryCount=1,screenShotSize="", screenShotLocation="/screenshots/",
-jsonReport = "target/cucumber-RunMRATDDAcquisitionVPPPlanSummaryMobile2.json",detailedReport = true,
+jsonReport = "target/cucumber-RunMRATDDAcquisitionVPPPlanSummaryMobile3.json",detailedReport = true,
  detailedAggregatedReport = true, overviewReport = true, toPDF = true, 
- outputFolder = "target/RunMRATDDAcquisitionVPPPlanSummaryMobile2")
+ outputFolder = "target/RunMRATDDAcquisitionVPPPlanSummaryMobile3")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.mobile" }, 
 features = { "src/main/resources/feature/mobile/acquisition/vpp/" }, 
 plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionVPPPlanSummaryMobile2.json" }, 
-tags = {"@vppPlanSummaryUHCRun02","@vppPlanSummaryUHC10","@vppPlanSummaryUHC"}, dryRun=false)
-public class RunMRATDDAcquisitionVPPPlanSummaryMobile2 { 
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionVPPPlanSummaryMobile3.json" }, 
+tags = {"@vppPlanSummaryUHC", "@vppPlanSummaryUHCRun02", "@vppPlanSummaryUHCRegression"}, dryRun=false)
+public class RunMRATDDAcquisitionVPPPlanSummaryMobile3 { 
  
 }

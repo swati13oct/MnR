@@ -21,6 +21,7 @@ import atdd.framework.UhcDriver;
 import pages.acquisition.ole.WelcomePage;
 import pages.mobile.acquisition.commonpages.DrugCostEstimatorPage;
 import pages.mobile.acquisition.commonpages.FindCarePage;
+import pages.mobile.acquisition.ole.WelcomePageMobile;
 import pages.mobile.acquisition.ulayer.VPPPlanSummaryPageMobile;
 
 public class ComparePlansPageBlayerMobile extends UhcDriver {
@@ -271,7 +272,7 @@ public class ComparePlansPageBlayerMobile extends UhcDriver {
 		return null;
 	}
    	
-   	public WelcomePage Enroll_OLE_newPlancompare_UHC() throws InterruptedException {
+   	public WelcomePageMobile Enroll_OLE_newPlancompare_UHC() throws InterruptedException {
    		WebElement enrollForPlan = null;
    		enrollForPlan = driver.findElement(By.xpath("//*[@id='enrollbtnplancompare0']//button//span[text()='Enroll']"));
    		if(enrollForPlan!=null){
@@ -283,7 +284,7 @@ public class ComparePlansPageBlayerMobile extends UhcDriver {
    		if(driver.getCurrentUrl().contains("welcome"))
    		{
    			System.out.println("OLE Welcome Page is Displayed");
-   			return new WelcomePage(driver);
+   			return new WelcomePageMobile(driver);
    		}
    		return null;
    	  	}
