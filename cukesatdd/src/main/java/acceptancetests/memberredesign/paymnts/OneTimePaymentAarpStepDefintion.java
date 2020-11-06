@@ -1740,6 +1740,19 @@ public class OneTimePaymentAarpStepDefintion {
 		}
 	}
 
+	@Given("^Updated user navigates to Review Your One-Time Payment Information and selects agreement$")
+	public void Updated_user_navigates_to_Review_Your_One_Time_Payment_Information_and_selects_agreements_and_click_on_Submit_Button_for_Make_One_Time()
+			throws Throwable {
+		OneTimePaymentPage oneTimePaymentPage = (OneTimePaymentPage) getLoginScenario()
+				.getBean(PageConstants.ONE_TIME_PAYMENT_PAGE);
+		ConfirmOneTimePaymentPage confirmOneTimePaymentPage = oneTimePaymentPage
+				.selectAgreeAndClickOnSubmitPaymentsforOneTime_Updated();
+		if (confirmOneTimePaymentPage != null) {
+			getLoginScenario().saveBean(PageConstants.CONFIRM_ONE_TIME_PAYMENT_PAGE, confirmOneTimePaymentPage);
+			System.out.println("User is on One time confirmation page for Checking account");
+		}
+	}
+	
 	@Given("^user navigates to review your Automatic screen and selects agreements and click on Authorize Monthly payments Button for EFT$")
 	public void user_navigates_to_review_your_Automatic_screen_and_selects_agreements_and_click_on_Authorize_Monthly_payments_Button_for_EFT()
 			throws Throwable {
@@ -2116,6 +2129,18 @@ public class OneTimePaymentAarpStepDefintion {
 		if (updateConfirmationPage != null) {
 			getLoginScenario().saveBean(PageConstants.Update_Confirmation_Page, updateConfirmationPage);
 			System.out.println("User is on recurring confirmation page for Checking account");
+		}
+	}
+	
+	@Given("^user navigates to Review Payment Method Update screen and selects agreements and do not click on Contuine Button for EFT Ship$")
+	public void user_navigates_to_Review_Payment_Method_Update_screen_and_selects_agreements_and_do_not_click_on_Contuine_Button_for_EFT_Ship()
+			throws Throwable {
+		UpdateReviewPage updateReviewPage = (UpdateReviewPage) getLoginScenario()
+				.getBean(PageConstants.Update_Review_Page);
+		UpdateConfirmationPage updateConfirmationPage = updateReviewPage.selectAgreeAndClickOnContinueforEFTForShipUpdated();
+		if (updateConfirmationPage != null) {
+			getLoginScenario().saveBean(PageConstants.Update_Confirmation_Page, updateConfirmationPage);
+			
 		}
 	}
 	

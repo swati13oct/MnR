@@ -171,6 +171,32 @@ public class UpdateReviewPage extends UhcDriver {
 			return null;
 		}
 	}
+	
+	
+	public UpdateConfirmationPage selectAgreeAndClickOnContinueforEFTForShipUpdated() {
+		validate(EditPaymentInformation);
+		PaymentsDataVerificationOnUpdateReviewPage();
+		System.out.println("User is on Payment Method Update Page");
+		System.out.println("Going to scroll down");
+		JavascriptExecutor jse = (JavascriptExecutor) driver;
+		jse.executeScript("window.scrollBy(0,650)", "");
+		jsClickNew(AgreeCheckBox);
+		//AuthorizeMonthlyPaymentstButton.click();
+		//System.out.println("Clicked on Continue button");
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			System.out.println(driver.getCurrentUrl());
+			e.printStackTrace();
+		}
+		if (driver.getCurrentUrl().contains("member/payments/recurring/setup-recurring/overview")) {
+			System.out.println("User is on Confirmation Page for Update Recurring for ship");
+			return new UpdateConfirmationPage(driver);
+		} else {
+			System.out.println("Confirmation Page for Update recurring not displayed for ship");
+			return null;
+		}
+	}
 
 	public UpdateConfirmationPage selectAgreeAndClickOnContinueforStopForShip() {
 		System.out.println("User is on Cancel recurring Page for ship");
