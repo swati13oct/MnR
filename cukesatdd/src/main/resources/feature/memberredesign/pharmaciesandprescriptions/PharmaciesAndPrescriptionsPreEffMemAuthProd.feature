@@ -33,7 +33,7 @@ Feature: 1.18.1.2 Member Pharamcies And Prescriptions page - Pre-Effective - PRO
 	@prod_pnpPreEff_mapd_ind_sanity
     Examples: 
 	  | FID     | username  | password  | MemUserName               | planType | memberType          | expectLink |
-	  | F493942 | kkumard   | mnrs786@  | Abayne01                  | MAPD     | IND_PREEFF_PnP      | yes        |
+	  | F493942 | kkumard   | mnrs786@  | Teripappas                | MAPD     | IND_PREEFF_PnP      | yes        |
 
   #----- being regression section --------------------
   @prod_pnpPreEff01
@@ -57,7 +57,6 @@ Feature: 1.18.1.2 Member Pharamcies And Prescriptions page - Pre-Effective - PRO
       | Expect Link | <expectLink> |
     Then user navigates to the payment page to validate Pharamcies and Prescriptions link
     Then user navigates to the health and wellness page to validate Pharamcies and Prescriptions link
-    Then user navigates to the eob page to validate Pharamcies and Prescriptions link
     Then user navigates to the benefit and coverage page to validate Pharamcies and Prescriptions link
     Then user navigates to the plan documents and resources page to validate Pharamcies and Prescriptions link
     Then user navigates to the contact us page to validate Pharamcies and Prescriptions link
@@ -75,37 +74,37 @@ Feature: 1.18.1.2 Member Pharamcies And Prescriptions page - Pre-Effective - PRO
 	@prod_pnpPreEff_mapd_ind
     Examples: 
 	  | FID     | username  | password  | MemUserName               | planType | memberType          | expectLink |
-	  | F493942 | kkumard   | mnrs786@  | Abayne01                  | MAPD     | IND_PREEFF_PnP      | yes        |
+	  | F493942 | kkumard   | mnrs786@  | Teripappas                | MAPD     | IND_PREEFF_PnP      | yes        |
 
-	#@prod_pnpPreEff_mapd_grp
-    #Examples: 
-	#  | FID     | username  | password  | MemUserName               | planType | memberType          | expectLink |
-	#  | F493942 | kkumard   | mnrs786@  | testUserName              | MAPD     | GRP_PREEFF_PnP      | yes        |
+	@prod_pnpPreEff_mapd_grp
+    Examples: 
+	  | FID     | username  | password  | MemUserName               | planType | memberType          | expectLink |
+	  | F493942 | kkumard   | mnrs786@  | Webfan50                  | MAPD     | GRP_PREEFF_PnP      | yes        |
 
-	#@prod_pnpPreEff_mapd_grp_lghib
-    #Examples: 
-	#  | FID     | username  | password  | MemUserName               | planType | memberType          | expectLink |
-	#  | F493942 | kkumard   | mnrs786@  | testUserName              | MAPD     | GRP_LGHIB_PREEFF_PnP| yes        |
+	@prod_pnpPreEff_mapd_grp_lghib
+    Examples: 
+	  | FID     | username  | password  | MemUserName               | planType | memberType          | expectLink |
+	  | F493942 | kkumard   | mnrs786@  | Chief2302                 | MAPD     | GRP_LGHIB_PREEFF_PnP| yes        |
 
 	#@prod_pnpPreEff_mapd_grp_seib
     #Examples: 
 	#  | FID     | username  | password  | MemUserName               | planType | memberType          | expectLink |
 	#  | F493942 | kkumard   | mnrs786@  | testUserName              | MAPD     | GRP_SEIB_PREEFF_PnP | yes        |
 
-	#@prod_pnpPreEff_pdp_ind
-    #Examples: 
-	#  | FID     | username  | password  | MemUserName               | planType | memberType          | expectLink |
-	#  | F493942 | kkumard   | mnrs786@  | Medicare1977              | PDP      | IND_PREEFF_PnP      | yes        |
+	@prod_pnpPreEff_pdp_ind
+    Examples: 
+	  | FID     | username  | password  | MemUserName               | planType | memberType          | expectLink |
+	  | F493942 | kkumard   | mnrs786@  | Lelabos1952               | PDP      | IND_PREEFF_PnP      | yes        |
 
 	#@prod_pnpPreEff_pdp_grp
     #Examples: 
 	#  | FID     | username  | password  | MemUserName               | planType | memberType          | expectLink |
 	#  | F493942 | kkumard   | mnrs786@  | testUserName              | PDP      | GRP_PREEFF_PnP      | yes        |
 
-	#@prod_pnpPreEff_snp_ind
-    #Examples: 
-	#  | FID     | username  | password  | MemUserName               | planType | memberType          | expectLink |
-	#  | F493942 | kkumard   | mnrs786@  | Mino77003                 | SNP      | IND_PREEFF_PnP      | yes        |
+	@prod_pnpPreEff_snp_ind
+    Examples: 
+	  | FID     | username  | password  | MemUserName               | planType | memberType          | expectLink |
+	  | F493942 | kkumard   | mnrs786@  | Sadiekennedy50@Yahoo.Com  | SNP      | IND_PREEFF_PnP      | yes        |
 
 	#@prod_pnpPreEff_ssp_grp
     #Examples: 
@@ -133,7 +132,6 @@ Feature: 1.18.1.2 Member Pharamcies And Prescriptions page - Pre-Effective - PRO
       | Expect Link | <expectLink> |
     Then user navigates to the payment page to validate Pharamcies and Prescriptions link
     Then user navigates to the health and wellness page to validate Pharamcies and Prescriptions link
-    Then user navigates to the eob page to validate Pharamcies and Prescriptions link
     Then user navigates to the benefit and coverage page to validate Pharamcies and Prescriptions link
     Then user navigates to the plan documents and resources page to validate Pharamcies and Prescriptions link
     Then user navigates to the contact us page to validate Pharamcies and Prescriptions link
@@ -150,8 +148,8 @@ Feature: 1.18.1.2 Member Pharamcies And Prescriptions page - Pre-Effective - PRO
 	#  | FID     | username  | password  | MemUserName             | planType | memberType          | expectLink |
 	#  | F493942 | kkumard   | mnrs786@  | testUserName            | MA       | GRP_PREEFF_PnP      | no         |
 
-	#@prod_pnpPreEff_ship_ind
-    #Examples: 
-	#  | FID     | username  | password  | MemUserName             | planType | memberType          | expectLink |
-	#  | F493942 | kkumard   | mnrs786@  | testUserName            | SHIP     | IND_PREEFF_PnP      | no         |
+	@prod_pnpPreEff_ship_ind
+    Examples: 
+	  | FID     | username  | password  | MemUserName             | planType | memberType          | expectLink |
+	  | F493942 | kkumard   | mnrs786@  | Travelynn1              | SHIP     | IND_PREEFF_PnP      | no         |
 	  

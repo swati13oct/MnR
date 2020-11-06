@@ -70,8 +70,8 @@ Feature: 1.15 Member pre-effective functionality
 
     Examples: 
       | planType | memberType          | copayCategory | technicalTFN   | segmentId | username | password | member     | planstartdate |
-      | IndPDP   | preeffectiveIndPDP  | NON LIS       | 1-888-980-8125 |       000 | jkuma14  | Brock@04 | wahdey     | 11/01/2020    |
-      | GroupMA  | preeffectiveGroupMA | NON LIS       | 1-888-980-8125 |       000 | jkuma14  | Brock@04 | marklflynn | 11/01/2020    |
+      | IndPDP   | preeffectiveIndPDP  | NON LIS       | 1-888-980-8125 |       000 | jkuma14  | Brock@04 | glandheim  | 01/01/2021    |
+      | GroupMA  | preeffectiveGroupMA | NON LIS       | 1-888-980-8125 |       000 | jkuma14  | Brock@04 | Muellerja  | 01/01/2021    |
 
   @regressionMemberPROD3
   Scenario Outline: -planType: <planType> - Member Type: - <memberType> - Verify that correct links and messages are displayed on Dashboard and Secondary Page.
@@ -107,7 +107,7 @@ Feature: 1.15 Member pre-effective functionality
     Examples: 
       | planType  | memberType            | copayCategory | technicalTFN   | segmentId | username | password | member       | planstartdate |
       | GroupMAPD | preeffectiveGroupMAPD | NON LIS       | 1-888-980-8125 |       000 | jkuma14  | Brock@04 | CatnJack     | 12/01/2020    |
-      | SHIP      | preeffectiveSHIPOnly  | NON LIS       | 1-866-254-3132 |       000 | jkuma14  | Brock@04 | ludstevens91 | 11/01/2020    |
+      | SHIP      | preeffectiveSHIPOnly  | NON LIS       | 1-866-254-3132 |       000 | jkuma14  | Brock@04 | JoEsCo       | 01/01/2021    |
 
   @regressionMemberPROD4 @sanityMemberPROD1
   Scenario Outline: -planType: <planType> - Member Type: - <memberType> - Verify that correct links and messages are displayed on Dashboard and Secondary Page.
@@ -150,7 +150,7 @@ Feature: 1.15 Member pre-effective functionality
       | planType | memberType               | copayCategory | technicalTFN   | segmentId | username | password | member         | planstartdate | technicalTFNSHIP |
       | IndPDP   | preeffectivePDPSHIPCOMBO | NON LIS       | 1-888-980-8125 |       000 | jkuma14  | Brock@04 | daleandnancy20 | 12/01/2020    | 1-866-254-3132   |
 
-  @regressionMemberPROD4 @sanityMemberPROD2
+  #Commenting tag due to unavailability of prod data - Jitesh 11/05/2020 @regressionMemberPROD4 @sanityMemberPROD2
   Scenario Outline: -planType: <planType> - Member Type - <memberType> - Verify that correct links and messages are displayed on Dashboard and Secondary Page.
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password

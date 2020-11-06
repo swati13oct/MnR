@@ -45,8 +45,8 @@ Feature: S1.1 To test Member Auth premium payment flows Micro App.
       | Account holder first name  | <firstName>        |
       | Account holder middle name | <middleName>       |
       | Account holder last name   | <lastName>         |
-   And user navigates to Review Your One-Time Payment Information and selects agreements and click on Submit Button for Make One Time
-   And the user is displayed with an error message that he is not authorized
+   And Updated user navigates to Review Your One-Time Payment Information and selects agreement
+   #Removed 11/5/2020 - And the user is displayed with an error message that he is not authorized
 
     Examples: 
       | TID     | username | password | memUserName    | planType | claimPeriod    | dateRange      | routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName | paymentType |

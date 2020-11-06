@@ -44,7 +44,7 @@ Feature: 1.14 Member Branding functionality
     Examples: 
       | TID   | planType | memberType              | copayCategory | logoToBeDisplayedOnDashboard | logoToBeDisplayedOnSecondaryPage | Test Case                                             | username | password | member                |
       | 15152 | PCP      | PCP_Branding            | NON LIS       | PCP                          | dam/UCP/Images/logo/PCP.svg      | TC_04_ Branding for Branding for PCP Plan member      | jkuma14  | Brock@04 | marylamb823           |
-      | 15148 | MAPD     | Individual_Branding     | NON LIS       | UHC                          | dam/UCP/Images/logo/UHC.svg      | TC_05_ Branding for Branding for UHC Plan member      | jkuma14  | Brock@04 | TEAKSAMPPALA1         |
+      | 15148 | MAPD     | Individual_Branding     | NON LIS       | UHC                          | dam/UCP/Images/logo/UHC.svg      | TC_05_ Branding for Branding for UHC Plan member      | jkuma14  | Brock@04 | mgcirolia@gmail.com   |
 
 
   @regressionMemberPROD2

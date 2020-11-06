@@ -24,7 +24,7 @@ import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineAdditi
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineCostPreferencesPage;
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineCoverageOptionPage;
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineDoctorsPage;
-import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineDrugsPage;
+import pages.acquisition.commonpages.PlanRecommendationEngineDrugsPage;
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineHeaderAndFooter;
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineLandingAndZipcodePages;
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineResultsPage;
@@ -114,6 +114,12 @@ public class PlanRecommendationEngineCommonStepDefinition {
 		if (!(plantype.isEmpty())) {
 			planSelectorCoverageepage.coverageOptionpageFunctional(plantype);
 		}
+		
+		String temp = givenAttributesMap.get("Plan Type");
+		if (temp != null && PREflow != temp) {
+			PREflow = temp;
+			System.out.println("Current PRE Flow : "+PREflow);
+		}
 	}
 	
 	@And("^user selects SNP options on Special Needs Page")
@@ -172,11 +178,6 @@ public class PlanRecommendationEngineCommonStepDefinition {
 
 			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
 					givenAttributesRow.get(i).getCells().get(1));
-		}
-		String temp = givenAttributesMap.get("Plan Type");
-		if (temp != null && PREflow != temp) {
-			PREflow = temp;
-			System.out.println("Current PRE Flow : "+PREflow);
 		}
 		
         PlanRecommendationEngineDrugsPage planSelectorDrugspage =  new PlanRecommendationEngineDrugsPage(wd);
