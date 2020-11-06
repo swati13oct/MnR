@@ -258,7 +258,7 @@ Feature: Transfer - Checkout summary
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
     When user navigates to the pharmacies and prescriptions page from testharness page
-    And user fetches medication informations and clicks on Transfer To HD call to action button
+    And user fetches medication informations and clicks on Transfer To HD call to action button on My Medication Page
     Then user will see "Transfer to Home Delivery" Page
     When user views the Medications section
     Then user will see the number of medications in my order indicated in the header
