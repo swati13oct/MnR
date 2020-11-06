@@ -60,4 +60,58 @@ public class RequestAgentApptCommonStepDefinition {
 		}
 		return memberAttributesMap;
 	}
+	
+	@When("^the user navigates to request more help and information$")
+	public void navigates_request_more_help_information()
+	{
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage)getLoginScenario().getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		RequestHelpAndInformationPage requestHelpAndInformationPage = aquisitionhomepage.navigateToMaMoreHelpAndInfo();
+		
+		if(requestHelpAndInformationPage!=null){
+			getLoginScenario().saveBean(PageConstants.REQUEST_MORE_HELP_INFORMATION_PAGE, requestHelpAndInformationPage);
+				Assert.assertTrue(true);
+
+		}else
+			Assert.fail("Error in loading the Request Help and Info Page");
+	}
+	
+	/**
+	 * @todo : user navigates to request appointment with an agent in 
+	 */
+	@And("^the user navigates to request appointment with an agent and validates page is loaded$")
+	public void request_appointment()
+	{
+		RequestHelpAndInformationPage requestHelpAndInformationPage = (RequestHelpAndInformationPage) getLoginScenario().getBean(PageConstants.REQUEST_MORE_HELP_INFORMATION_PAGE);
+		RequestAgentAppointmentPage requestAgentAppointmentPage = requestHelpAndInformationPage.navigateToAgentAppointmentRequest();
+		if(requestAgentAppointmentPage!=null){
+			getLoginScenario().saveBean(PageConstants.REQUEST_AGENT_APPOINTMENT_PAGE, requestAgentAppointmentPage);
+		}else{
+			Assert.fail("Error in loading requestAgentAppointmentPage");
+		}
+		
+	}
+	
+	
+	@Then("^the user fills the form out and submits the agent appointment$")
+	public void fillOutAndSubmitFormappointment(DataTable attributes) {
+		
+			RequestAgentAppointmentPage requestAgentAppointmentPage = (RequestAgentAppointmentPage) getLoginScenario()
+					.getBean(PageConstants.REQUEST_AGENT_APPOINTMENT_PAGE);
+			List<DataTableRow> givenAttributesRow = attributes.getGherkinRows();
+			Map<String, String> givenAttributesMap = new HashMap<String, String>();
+			for (int i = 0; i < givenAttributesRow.size(); i++) {
+
+				givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+						givenAttributesRow.get(i).getCells().get(1));
+			}
+			boolean isFormSubmitted = requestAgentAppointmentPage.submitAgentAppointment(givenAttributesMap);
+			if (isFormSubmitted) {
+				System.out.println("Successfully submitted the Appointment form");
+				Assert.assertTrue(true);
+			} else {
+				Assert.fail("Error submitting the form or loading the Confirmation page");
+			}
+		
+			
+	}
 }

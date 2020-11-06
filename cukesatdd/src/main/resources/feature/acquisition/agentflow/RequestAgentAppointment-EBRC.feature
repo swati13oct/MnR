@@ -103,19 +103,37 @@ When the user navigates to EBRC links
       |	UHC		| shop/dual-special-needs-plans.html               | ShopPlan: Shop DSNP Plan     |  https://www.myuhcagent.com/|     
 			|	UHC		| shop/dual-special-needs-plans.html               | ShopPlan: Shop DSNP Plan     |  https://www.myuhcagent.com/|   		
 
+
       
-@agentAppointmentAgentUlayerSmoke
-Scenario Outline: TID:<TCID> Verify request an appointment with an agent flow for Agent name in AARP site
-Given the user is on AARP medicare acquisition site landing page
-When the user navigates to request more help and information in AARP site
-When the user navigates to request appointment with an agent in AARP site and validates page is loaded
-Then the user fills the form out and submits the agent appointment application
+@agentAppointmentUAT
+Scenario Outline: <scenario> Verify request an appointment with an agent flow for Agent name
+Given the user is on medicare acquisition site landing page
+    	|Site| <site>|
+When the user navigates to request more help and information
+When the user navigates to request appointment with an agent and validates page is loaded
+Then the user fills the form out and submits the agent appointment
 | First Name | <firstName> |
 | Last Name  | <lastName>  |
 | State  	 | <state>  |
 
 
-@agentAppointmentAARP
+
 Examples: 
-| TCID    | firstName 	   | lastName | state |
-| F266872 | CHRISTINE      | LEE      | CA    | 
+| scenario            | firstName 	   | lastName | state    |site|
+| E2E Scenario 3_UMS     | CHRISTINE      | LEE      | CA    | UHC|
+| E2E Scenario 3_AMS     | CHRISTINE      | LEE      | CA    | AARP|
+
+@agentAppointmentUAT
+Scenario Outline: <scenario> Verify request an appointment with an agent flow for zipcode
+Given the user is on medicare acquisition site landing page
+    	|Site| <site>|
+When the user navigates to request more help and information
+When the user navigates to request appointment with an agent and validates page is loaded
+Then the user fills the form out and submits the agent appointment
+| Zipcode    | <zipcode>   |
+
+
+Examples: 
+| scenario           | zipcode    | site|
+| E2E Scenario 3_UMS |  90002     |  UHC|
+| E2E Scenario 3_AMS |  90002     |  AARP|
