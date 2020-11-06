@@ -2609,4 +2609,5 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			driver.navigate().back();
 		}
 
+
 }
