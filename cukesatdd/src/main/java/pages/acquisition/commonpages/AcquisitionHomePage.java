@@ -430,6 +430,11 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath="//a[contains(@href,'https://www.myuhcagent.com/')]")
 	private WebElement RightRail_FindAnAgent; 
 
+	
+	@FindBy(xpath = "//p[contains(text(),'UnitedHealthcare Insurance Company (UnitedHealthcare)')]")
+    private WebElement UHCICSubTiltle;
+
+
    	String ChatSamText= "Chat with a Licensed Insurance Agent";
 
 	private static String TeamC_ACQUISITION_PAGE_URL = MRConstants.TeamC_UHC_URL;
@@ -2099,8 +2104,12 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		public void validateStateDropDown() {
 			validateNew(stateDropDown);
 			selectFromDropDownByValue(stateDropDown, "California");
-			String StateSessionStorage =  returnDriverStorageJS("sessionStorage", "ucp_geotrackingState");
+
+			String StateSessionStorage = ReturnDriverStorage(driver, "sessionStorage", "ucp_geotrackingState");
+
+//			String StateSessionStorage =  returnDriverStorageJS("sessionStorage", "ucp_geotrackingState");
 					//ReturnDriverStorage(driver, "sessionStorage", "ucp_geotrackingState");
+
 			System.out.println("State selected : California");
 			System.out.println("State GeoSessionStorage value : " + StateSessionStorage);
 			Assert.assertTrue(StateSessionStorage.equalsIgnoreCase("CA"), "Geolocation State validation Failed ");
@@ -2478,8 +2487,12 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			for (int i = 2; i < sizeofpages; i++) {
 				System.out.println("@@Inside pagination click@@@");
 				threadsleep(5);
+
+				driver.findElement(By.xpath("(//*[@class='pagination']/li/a)[" + i + "]")).click();
+
 				//driver.findElement(By.xpath("(//*[@class='pagination']/li/a)[" + i + "]")).click();
 				jsClickNew(driver.findElement(By.xpath("(//*[@class='pagination']/li/a)[" + i + "]")));
+
 				CommonUtility.waitForPageLoadNew(driver, SearchResultsCount, 30);
 				this.validateFifteenResults();
 				threadsleep(5);
@@ -2581,7 +2594,17 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 		}
 		
+
+		public void validateSubtitle() {
+        threadsleep(5);
+        System.out.println("validating the sub header");
+        Assert.assertEquals(UHCICSubTiltle.getText(), "UnitedHealthcare Insurance Company (UnitedHealthcare)");
+
+}
+		
+
 		public void clickBrowserBackButton() {
 			driver.navigate().back();
 		}
+
 }

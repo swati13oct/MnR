@@ -1742,7 +1742,7 @@ public class VppStepDefinitionUHC {
 		System.out.println("***the user clicks on resume application button***");
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		//plansummaryPage.MedSupFormValidation_2ndTime(DateOfBirth, zipcode);
+		plansummaryPage.MedSupFormValidation_2ndTime(DateOfBirth, zipcode);
 		plansummaryPage.ResumeApplicationButton();
 
 	}
@@ -2917,8 +2917,8 @@ public class VppStepDefinitionUHC {
 			Assert.fail("Error Loading on visitor Profile page");
 		}
 	}
-	@Then("^the user enter the searchValue in the search text box and hits enter on UHC Site$")
-	public void the_user_enter_the_searchValue_in_the_search_text_box_and_hits_enter(DataTable inputvalue) throws Throwable {
+	@Then("^the user enter the searchValue in the search text box and hits enter on UHC site$")
+	public void the_user_enter_the_searchValue_in_the_search_text_box_and_hits_enter_on_UHC_site(DataTable inputvalue) throws Throwable {
 	/*	VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);*/
 
@@ -3024,6 +3024,23 @@ public void the_user_validates_pagination_and_results_displayed(DataTable inputv
 	Thread.sleep(3000);
 	aquisitionhomepage.validateErrorMsg(error,newSearchValue);
 }
+
+
+@Then("^the user clicks on the united health care medicare solutions link on UHC site$")
+public void the_user_clicks_on_the_united_health_care_medicare_solutions_link_on_UHC_site() throws Throwable {
+	AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+			.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+	aquisitionhomepage.clickUnitedHealthcareMedicareSolutions();
+    
+}
+
+@Then("^ther user validates the \"([^\"]*)\" on UHC site$")
+public void ther_user_validates_the_on_UHC_site(String url) throws Throwable {
+	AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+			.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+	aquisitionhomepage.validateUrl(url);
+}
+
 
 	@Then("^user saves all plans as favorite on UHC site$")
 	public void user_saves_all_plans_as_favorite_on_AARP_site(DataTable givenAttributes) {
@@ -3282,19 +3299,6 @@ public void the_user_validates_pagination_and_results_displayed(DataTable inputv
 			plansummaryPage.signInOptumId(username, password);
 		}
 		
-		@Then("^the user validate retrieve application URL in UHC Site$")
-		public void the_user_retrieve_application_URL_in_AARPSite(DataTable arg1) throws InterruptedException {
-			Map<String, String> inputAttributesMap=parseInputArguments(arg1);
-			String AARPURL = inputAttributesMap.get("AARP URL");
-			String AARPURLSTG=inputAttributesMap.get("AARP URL STG");
-			VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario().getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-			if(getLoginScenario().environment.equals("stage")){
-				plansummaryPage.RetrieveURL(AARPURLSTG);
-			}else{
-				plansummaryPage.RetrieveURL(AARPURL);
-			}
-
-		}
 		@Then("^the user click on Dental Cover Popup he must be able to validate plan defaults in UHC$")
 		public void the_user_click_on_Optional_Services_tab_and_validate_PlanDefaults(DataTable givenAttributes)
 				throws Throwable {
