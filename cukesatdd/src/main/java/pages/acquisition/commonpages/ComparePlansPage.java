@@ -675,7 +675,7 @@ public class ComparePlansPage extends UhcDriver {
 		validateNew(Newremove4thplan);
 		String PlanName=Newremove4thplanName.getText();
 		System.out.println("4th plan name is : " + PlanName );
-		Newremove4thplan.click();
+		jsClickNew(Newremove4thplan);
 		System.out.println("Clicked on Remove Link on plan Compare page");
 
 	}

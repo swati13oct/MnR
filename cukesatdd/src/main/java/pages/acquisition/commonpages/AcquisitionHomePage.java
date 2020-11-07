@@ -1661,6 +1661,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			validateNew(getStarted);
 //			getStarted.click();
 			jsClickNew(getStarted);
+			waitForPageLoadSafari();
 			CommonUtility.checkPageIsReadyNew(driver);
 			if (validateNew(AddMyDrugsBtn))
 				return new GetStartedPage(driver);

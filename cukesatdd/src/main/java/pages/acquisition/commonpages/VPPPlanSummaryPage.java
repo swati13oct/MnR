@@ -3314,16 +3314,18 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		System.out.println("Date of birth is entered");
 
 		// monthDrpDwn.click();
-		jsClickNew(monthDrpDwnPartA);
+		monthDrpDwnPartA.click();
 		monthDrpDwnOptionPartA.click();
 		Thread.sleep(5000);
 		System.out.println("Effective date- month value selected");
-		medSuppOleMaleCheckbox.click();
+		jsClickNew(medSuppOleMaleCheckbox);
+		Thread.sleep(5000);
 		yearDrpDwnPartA.click();
 		Thread.sleep(5000);
 		yearDrpDwnOptionPartA.click();
 
-		jsClickNew(monthDrpDwnPartB);
+		Thread.sleep(5000);
+		monthDrpDwnPartB.click();
 		monthDrpDwnOptionPartB.click();
 		Thread.sleep(5000);
 		System.out.println("Effective date- month value selected");
@@ -3340,8 +3342,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 		System.out.println("Plan to start date selected");
 
-		viewPlansBtnMedSupp.click();
-
+		jsClickNew(viewPlansBtnMedSupp);
+		waitForPageLoadSafari();
 		CommonUtility.checkPageIsReadyNew(driver);
 		CommonUtility.waitForPageLoadNew(driver, Start_ApplicationBtn, 45);
 //		Start_ApplicationBtn.click();
@@ -3488,7 +3490,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	 * @return
 	 */
 	public VisitorProfilePage navigateToVisitorProfilePage() {
-		shoppingCartIcon.click();
+		jsClickNew(shoppingCartIcon);
+		waitForPageLoadSafari();
 		if(driver.getCurrentUrl().contains("profile")) {
 			CommonUtility.checkPageIsReadyNew(driver);
 			return new VisitorProfilePage(driver);

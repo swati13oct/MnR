@@ -163,7 +163,7 @@ public class VisitorProfilePage extends UhcDriver {
 	
 	public PlanDetailsPage navigateToPlanDetails(String planName) {
 		try {
-			driver.findElement(By.xpath("//h4[text()='"+planName+"']")).click();
+			jsClickNew(driver.findElement(By.xpath("//h4[text()='"+planName+"']")));
 			Thread.sleep(20000);
 			if (driver.getCurrentUrl().contains("#/details")) {	
 				return new PlanDetailsPage(driver);
@@ -180,6 +180,7 @@ public class VisitorProfilePage extends UhcDriver {
 		
 //		addrugs.click();
 		jsClickNew(addrugs);
+		waitForPageLoadSafari();
 		if (validateNew(AddMyDrugsBtn))
 			return new GetStartedPage(driver);
 		return null;
@@ -192,14 +193,14 @@ public class VisitorProfilePage extends UhcDriver {
 	public void deletePlans(String plans) {
 		if(validate(profileMultiYear, 10))
 		{
-			profileNxtYrPlans.click();
+			jsClickNew(profileNxtYrPlans);
 			waitForPageLoadSafari();
 			if(driver.findElements(By.xpath("//div[@class='title dropdown-open']")).size()>0)
-				driver.findElement(By.xpath("//div[@class='multi-year-select']/button[contains(@class,'js-select-year select-year')][2]/following::button[2]")).click();
+				jsClickNew(driver.findElement(By.xpath("//div[@class='multi-year-select']/button[contains(@class,'js-select-year select-year')][2]/following::button[2]")));
 			else
 				System.out.println("##############No saved plans available for 2021##############");
 			
-			profileCrntYrPlans.click();
+			jsClickNew(profileCrntYrPlans);
 		}
 		else {
 			System.out.println("##############MultiYear not displayed##############");
@@ -209,7 +210,7 @@ public class VisitorProfilePage extends UhcDriver {
 			if(driver.findElements(By.xpath("//div[@class='title dropdown-open']")).size()>0){
 				List<String> listOfTestPlans = Arrays.asList(plans.split(","));
 				for (String plan: listOfTestPlans) {
-					driver.findElement(By.xpath("//h4[text()='"+plan+"']/preceding::button[1]")).click();
+					jsClickNew(driver.findElement(By.xpath("//h4[text()='"+plan+"']/preceding::button[1]")));
 					Thread.sleep(5000);
 				}
 				}
@@ -226,7 +227,7 @@ public class VisitorProfilePage extends UhcDriver {
 	 */
 	public void deleteAllDrugs() {
 		CommonUtility.waitForPageLoadNew(driver, savedDrugs.get(0), 45);
-		driver.findElement(By.xpath("//li[@class='drug']//button")).click();
+		jsClickNew(driver.findElement(By.xpath("//li[@class='drug']//button")));
 		/*for (WebElement drug: savedDrugs) {
 			drug.findElement(By.xpath("//button")).click();
 		}*/
@@ -275,11 +276,12 @@ public class VisitorProfilePage extends UhcDriver {
 	 */
 	public void signIn(String username,String password) {
 		try {
-			
-			signIn.click();
+			jsClickNew(signIn);
+			waitForPageLoadSafari();
 			driver.findElement(By.cssSelector("input#userNameId_input")).sendKeys(username);
 			driver.findElement(By.cssSelector("input#passwdId_input")).sendKeys(password);
-			driver.findElement(By.cssSelector("input#SignIn")).click();
+			jsClickNew(driver.findElement(By.cssSelector("input#SignIn")));
+			waitForPageLoadSafari();
 			String Question = driver.findElement(By.cssSelector("label#challengeQuestionLabelId")).getText().trim();
 			WebElement securityAnswer = driver.findElement(By.cssSelector("div#challengeSecurityAnswerId >input"));
 			if (Question.equalsIgnoreCase("What is your best friend's name?")) {
@@ -294,7 +296,8 @@ public class VisitorProfilePage extends UhcDriver {
 				System.out.println("Question is related to phone");
 				securityAnswer.sendKeys("number1");
 			}
-			driver.findElement(By.cssSelector("input#authQuesSubmitButton")).click();
+			jsClickNew(driver.findElement(By.cssSelector("input#authQuesSubmitButton")));
+			waitForPageLoadSafari();
 			CommonUtility.waitForPageLoadNew(driver, signOut, 15);
 			
 		} catch (Exception e) {
@@ -314,6 +317,7 @@ public class VisitorProfilePage extends UhcDriver {
 		if(enrollForPlan!=null){
 			jsClickNew(enrollForPlan);
 		}
+		waitForPageLoadSafari();
 		validateNew(NextBtn);
 		if(driver.getCurrentUrl().contains("welcome")){
 			System.out.println("OLE Welcome Page is Displayed");
@@ -370,7 +374,8 @@ public class VisitorProfilePage extends UhcDriver {
 	 */
 	public ComparePlansPage planCompare(String plans) {
 	
-		comparePlans.click();
+		jsClickNew(comparePlans);
+		waitForPageLoadSafari();
 		/*CommonUtility.waitForPageLoad(driver, comparePlansOnPopup, 20);
 		String[] plan = plans.split(",");
 		for(int i=0;i<4;i++) {
@@ -378,6 +383,7 @@ public class VisitorProfilePage extends UhcDriver {
 		}
 		comparePlansOnPopup.click();*/
 		validateNew(enrollBtn);
+		waitForPageLoadSafari();
 		if (driver.getCurrentUrl().contains("/plan-compare")) {
 			System.out.println("Navigation to Plan Compare page is Passed");
 			return new ComparePlansPage(driver);
