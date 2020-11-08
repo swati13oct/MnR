@@ -285,8 +285,8 @@ public class VisitorProfilePage extends UhcDriver {
 	public void deleteAllProviders() {
 		if(!(driver.findElements(By.cssSelector("div.no-providers")).size()>0)) {
 			CommonUtility.waitForPageLoadNew(driver, expandProviderBlock, 20);
-			expandProviderBlock.click();
-			driver.findElement(By.xpath("//li[@class='provider']//button")).click();
+			jsClickNew(expandProviderBlock);
+			jsClickNew(driver.findElement(By.xpath("//li[@class='provider']//button")));
 			waitforElementDisapper(By.xpath("//div[contains(@class,'provider--block card')]//button[contains(@class,'provider-title')][contains(@class,'collapsed')]"), 5);
 			Assert.assertTrue(validateNonPresenceOfElement(expandProviderBlock));
 		}else {

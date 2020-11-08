@@ -556,7 +556,7 @@ try {
 	 */
 	public void sendkeysNew(WebElement element, String message) {
 		validateNew(element);
-		element.click();
+		jsClickNew(element);
 		element.clear();
 		element.sendKeys(message);
 

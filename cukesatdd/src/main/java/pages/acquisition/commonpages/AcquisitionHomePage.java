@@ -1680,6 +1680,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		    }
 			WebElement PresProvidersBenefitsLink = driver.findElement(By.xpath("//*[contains(@class, 'nav-col nav-col-3')]//a[contains(@href,'medicare-benefits')]"));
 			jsClickNew(PresProvidersBenefitsLink);
+			waitForPageLoadSafari();
 		}
 
 		public GetStartedPage clickDCERedesignLinkonMedEdPage() {

@@ -141,6 +141,7 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 	}
 
 	public void selectsPlanName(String planName, String testSiteUrl) {
+		scrollToView(seletPlandropdown);
 		waitTllOptionsAvailableInDropdown(seletPlandropdown, 45);
 //		seletPlandropdown.click();
 		jsClickNew(seletPlandropdown);
@@ -182,6 +183,7 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 
 	public void selectsPlanYear(String planYear) {
 		CommonUtility.checkPageIsReadyNew(driver);
+		scrollToView(yearDropdown);
 		waitTllOptionsAvailableInDropdown(yearDropdown, 45);
 //		yearDropdown.click();
 		Select yearList=new Select(yearDropdown);
@@ -293,6 +295,7 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 				if (isPlanYear()) {
 					System.out.println("Year dropdown is displayed, proceed to select '"+testPlanYear+"' year");
 					selectsPlanYear(testPlanYear);
+					sleepBySec(2);
 					CommonUtility.checkPageIsReady(driver);
 				}
 				selectsPlanName(planName, testSiteUrl);
