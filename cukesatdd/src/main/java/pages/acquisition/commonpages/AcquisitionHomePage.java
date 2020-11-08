@@ -38,7 +38,7 @@ import pages.acquisition.dce.DCETestHarnessPage;
 import pages.acquisition.dceredesign.GetStartedPage;
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.pharmacyLocator.PharmacySearchPage;
-import pages.acquisition.ulayer.ProviderSearchPage;
+import pages.acquisition.commonpages.ProviderSearchPage;
 
 
 /**
