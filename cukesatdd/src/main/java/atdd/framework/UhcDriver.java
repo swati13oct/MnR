@@ -608,6 +608,7 @@ try {
 	}
 	
 	public void selectFromDropDownByText(WebDriver driver, WebElement dropdownElement, String value) {
+		scrollToView(dropdownElement);
 		Select dropdown = new Select(dropdownElement);
 		waitUntilSelectOptionsPopulated(dropdown);
 		dropdown.selectByVisibleText(value);
