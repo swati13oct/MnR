@@ -6,7 +6,7 @@ Given the user is on medicare acquisition site landing page
 Given the user navigates to following medicare acquisition site page
       | PageName | <pageName> |
       | PagePath | <path>     |
-When the user navigates to EBRC links
+When the user clicks on Agent link and validates the correct URL is loaded
       |UHC Agent URL|  <UHCUrl>  |
    @agentFlowEBRCBlayer
     Examples: 

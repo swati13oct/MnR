@@ -1,12 +1,12 @@
-Feature: 1.06-VBF-Acq-To test request an appointment with an agent flow(GATED)
+Feature: 1.06-To test request an appointment with an agent flow
 
-Scenario Outline: TID:<TCID> Verify request an appointment with an agent flow for zipcode in AARP site
+Scenario Outline: Verify request an appointment with an agent flow for <pageName>
 Given the user is on medicare acquisition site landing page
     	|Site| <site>|
-Given the user navigates to following medicare acquisition site page
+And the user navigates to following medicare acquisition site page
       | PageName | <pageName> |
       | PagePath | <path>     |
-When the user navigates to EBRC links
+When the user clicks on Agent link and validates the correct URL is loaded
       |UHC Agent URL|  <UHCUrl>          |
 
    @agentFlowEBRCUlayer
@@ -84,7 +84,7 @@ When the user navigates to EBRC links
     @agentFlowEBRCUlayer
     Examples: 
       |	site	| path                                             | pageName                     |UHCUrl|
-      |	AARP	| shop/medicare-advantage-plans.html               | ShopPlan: Shop MA Plan       |  https://www.myuhcagent.com/| 
+#      |	AARP	| shop/medicare-advantage-plans.html               | ShopPlan: Shop MA Plan       |  https://www.myuhcagent.com/| 
       |	AARP	| shop/medicare-supplement-plans.html              | ShopPlan: Shop Med Supp Plan | https://www.myuhcagent.com/| 
       |	AARP	| shop/medicare-supplement-plans.html              | ShopPlan: Shop Med Supp Plan |	 https://www.myuhcagent.com/| 		
       |	AARP	| shop/prescription-drug-plans.html                | ShopPlan: Shop PDP Plan      |  https://www.myuhcagent.com/| 		 
@@ -95,7 +95,7 @@ When the user navigates to EBRC links
 		@agentFlowEBRCBlayer
     Examples: 
       |	site	| path                                             | pageName                     | UHCUrl|
-      |	UHC		| shop/medicare-advantage-plans.html               | ShopPlan: Shop MA Plan       | https://www.myuhcagent.com/| 
+#      |	UHC		| shop/medicare-advantage-plans.html               | ShopPlan: Shop MA Plan       | https://www.myuhcagent.com/| 
       |	UHC		| shop/medicare-supplement-plans.html              | ShopPlan: Shop Med Supp Plan |  https://www.myuhcagent.com/| 
       |	UHC		| shop/medicare-supplement-plans.html              | ShopPlan: Shop Med Supp Plan |  https://www.myuhcagent.com/| 
       |	UHC		| shop/prescription-drug-plans.html                | ShopPlan: Shop PDP Plan      | https://www.myuhcagent.com/| 
