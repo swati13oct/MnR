@@ -81,7 +81,7 @@ Feature: 1.04.2.2 To Test DREAM EOB for Members - E2E - Member Auth - PROD
     #----- Validate Date Range Last 18 months ----  
     And the user selects the desired date range
       | Date Range | Last 18 months |
-    #Then the user obtains API response info for validation
+    Then the user obtains API response info for validation
     Then the user validates search result section content for DREAM EOB
     Then the user clicks on each eob on first page to validate pdf for DREAM EOB
     #Then the user validates EOB count between API and UI are the same
@@ -90,7 +90,7 @@ Feature: 1.04.2.2 To Test DREAM EOB for Members - E2E - Member Auth - PROD
       | Date Range | Custom Search |
     #Then the user obtains API response info for validation
     Then the user validates search result section content for DREAM EOB
-    #Then the user clicks on each eob on first page to validate pdf for DREAM EOB
+    Then the user clicks on each eob on first page to validate pdf for DREAM EOB
     Then the user validates the right rail section content
     #Then the user validates EOB count between API and UI are the same
     #----- Final validation ----  
@@ -119,10 +119,10 @@ Feature: 1.04.2.2 To Test DREAM EOB for Members - E2E - Member Auth - PROD
       | index | username  | password  | MemUserName             | planType | memberType         | flagZeroEob |
       | 05    | kkumard   | mnrs786@  | haradaty32              | MA       | COSMOS_DEOB        | true        |
 
-    @prod_dreamEob01e_maNice 
-    Examples: 
-      | index | username  | password  | MemUserName             | planType | memberType         | flagZeroEob |
-      | 06    | kkumard   | mnrs786@  | haradaty32              | MA       | MA_NICE_DEOB       | true        |
+    #@prod_dreamEob01e_maNice 
+    #Examples: 
+    #  | index | username  | password  | MemUserName             | planType | memberType         | flagZeroEob |
+    #  | 06    | kkumard   | mnrs786@  | haradaty32              | MA       | MA_NICE_DEOB       | true        |
 
     @prod_dreamEob01f_fedComboShipFed 
     Examples: 
