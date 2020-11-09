@@ -1,4 +1,5 @@
 
+
 package pages.acquisition.commonpages;
 
 import static org.junit.Assert.assertTrue;
@@ -38,7 +39,7 @@ import pages.acquisition.dce.DCETestHarnessPage;
 import pages.acquisition.dceredesign.GetStartedPage;
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.pharmacyLocator.PharmacySearchPage;
-import pages.acquisition.ulayer.ProviderSearchPage;
+import pages.acquisition.commonpages.ProviderSearchPage;
 
 
 /**
@@ -154,7 +155,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = ".//*[contains(@id,'colhowdoesthiswork')]//*[@itemprop='significantLink']/*[contains(@class,'cta-button secondary')and contains(text(),'Get')]")
 	public WebElement getStarted;
 
-	@FindBy(xpath = ".//*[contains(@class, 'meded-article-content__section')]//*[contains(text(), 'Request an Appointment')]")
+	//@FindBy(xpath = ".//*[contains(@class, 'meded-article-content__section')]//*[contains(text(), 'Request an Appointment')]")
+	@FindBy(xpath = "//a[contains(text(),'Find an Agent')]")
 	private WebElement requestAgentApptDropdown;
 
 	@FindBy(xpath = "//*[@class='textalign']//p[2]/a")
@@ -498,6 +500,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			} else {
 				startNew(UMS_ACQISITION_PAGE_URL);
 				testSiteUrl=UMS_ACQISITION_PAGE_URL;
+				checkModelPopup(driver,10);
 			}
 			
 		} else if("health-plans".equalsIgnoreCase(site)){
@@ -535,7 +538,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 				start(AARP_ACQISITION_PAGE_URL);
 				testSiteUrl=AARP_ACQISITION_PAGE_URL;
 				checkForSecurityPage();
-				checkModelPopup(driver,20);		
+				checkModelPopup(driver,10);		
 			}
 		}
 		
@@ -2608,6 +2611,5 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		public void clickBrowserBackButton() {
 			driver.navigate().back();
 		}
-
 
 }
