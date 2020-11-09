@@ -640,6 +640,71 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(id = "aarpSVGLogo")
 	public static WebElement AARPlogo;
 	
+	
+	@FindBy(xpath = "//*[@id='MedicareClaimNum']")
+	private WebElement MedicareNumber;
+	
+	@FindBy(xpath = "(//*[@class='radio_choice']/parent::span)[1]")
+	private WebElement Gender;
+	
+	@FindBy(xpath = "(//*[@class='radio_choice']/parent::span)[2]")
+	private WebElement CoverageMedicaid;
+	
+	@FindBy(xpath = "(//*[@class='radio_choice']/parent::span)[2]")
+	private WebElement CoveragePartc;
+	@FindBy(xpath = "(//*[@class='radio_choice']/parent::span)[2]")
+	private WebElement CoverageSupplementPlans;
+	@FindBy(xpath = "(//*[@class='radio_choice']/parent::span)[2]")
+	private WebElement CoverageotherInsurance;
+	
+	
+	@FindBy(xpath = "(//label[text()='No'])[1]")
+	private WebElement CoverageVerification;
+	
+	@FindBy(xpath = "(//label[text()='No'])[1]")
+	private WebElement CoverageVerification1;
+	
+	@FindBy(xpath = "(//label[text()='No'])[1]")
+	private WebElement CoverageVerification2;
+	@FindBy(xpath = "//label[@for='CpaSignatureInd']")
+	private WebElement CoverageVerificationAcknowledge;
+	
+	@FindBy(xpath = "//label[@for='PaymentChoice_1']")
+	private WebElement paymentOption;
+	@FindBy(xpath = "//label[@for='ElectronicDeliveryInd_1']")
+	private WebElement DocumentDelivery;
+	
+	@FindBy(xpath = "//label[@for='EmailChange_2']")
+	private WebElement EmailAddressNo;
+	
+	@FindBy(xpath = "//label[@for='OnlinePreferenceSignatureInd']")
+	private WebElement ReadAgreement;
+	
+	//@FindBy(xpath = "(//span[contains(text(),'Confirm Your Responses and Proceed')])[2]/parent::button")
+//	@FindBy(xpath = "//button[contains(@class,'centerElement cta')]")
+	@FindBy(xpath = "//div[@class='actionbar parbase']//button[1]/span")
+	private WebElement ProceedAuthorization;
+	
+	@FindBy(xpath = "//label[@for='SignatureInd']")
+	private WebElement VerificationAgree;
+	
+	@FindBy(xpath = "//label[@for='MedicalReleaseAuthSignatureInd']")
+	private WebElement VerificationAgree2;
+	
+	@FindBy(xpath = "//label[@for='MedicalReleaseClaimsSignatureInd']")
+  private WebElement VerificationAgree3;
+	
+	@FindBy(xpath = "(//button[contains(text(),'Submit application')])[1]")
+	private WebElement SubmitApplication;
+	
+	@FindBy(xpath = "//span[contains(text(),'Submission Confirmation')]")
+	private WebElement submitconfirmation;
+	
+	@FindBy(xpath = "//*[contains(text(),'View Prescription Drug Plans')]")
+	private WebElement ViewPrescriptionDrugPlans;
+	
+
+	
 	public WebElement getValEstimatedAnnualDrugCostValue(String planName) {
 		// WebElement valEstimatedAnnualDrugCostValue =
 		// driver.findElement(By.xpath("//*[contains(text(),'"+planName+"')]/ancestor::div[@class='module-plan-overview
@@ -3100,64 +3165,6 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		System.out.println("Cancel application has been clicked on the pop up");
 		return ResumeKey;
 	}
-	@FindBy(xpath = "//*[@id='MedicareClaimNum']")
-	private WebElement MedicareNumber;
-	
-	@FindBy(xpath = "(//*[@class='radio_choice']/parent::span)[1]")
-	private WebElement Gender;
-	
-	@FindBy(xpath = "(//*[@class='radio_choice']/parent::span)[2]")
-	private WebElement CoverageMedicaid;
-	
-	@FindBy(xpath = "(//*[@class='radio_choice']/parent::span)[2]")
-	private WebElement CoveragePartc;
-	@FindBy(xpath = "(//*[@class='radio_choice']/parent::span)[2]")
-	private WebElement CoverageSupplementPlans;
-	@FindBy(xpath = "(//*[@class='radio_choice']/parent::span)[2]")
-	private WebElement CoverageotherInsurance;
-	
-	
-	@FindBy(xpath = "(//label[text()='No'])[1]")
-	private WebElement CoverageVerification;
-	
-	@FindBy(xpath = "(//label[text()='No'])[1]")
-	private WebElement CoverageVerification1;
-	
-	@FindBy(xpath = "(//label[text()='No'])[1]")
-	private WebElement CoverageVerification2;
-	@FindBy(xpath = "//label[@for='CpaSignatureInd']")
-	private WebElement CoverageVerificationAcknowledge;
-	
-	@FindBy(xpath = "//label[@for='PaymentChoice_1']")
-	private WebElement paymentOption;
-	@FindBy(xpath = "//label[@for='ElectronicDeliveryInd_1']")
-	private WebElement DocumentDelivery;
-	
-	@FindBy(xpath = "//label[@for='EmailChange_2']")
-	private WebElement EmailAddressNo;
-	
-	@FindBy(xpath = "//label[@for='OnlinePreferenceSignatureInd']")
-	private WebElement ReadAgreement;
-	
-	//@FindBy(xpath = "(//span[contains(text(),'Confirm Your Responses and Proceed')])[2]/parent::button")
-//	@FindBy(xpath = "//button[contains(@class,'centerElement cta')]")
-	@FindBy(xpath = "//div[@class='actionbar parbase']//button[1]/span")
-	private WebElement ProceedAuthorization;
-	
-	@FindBy(xpath = "//label[@for='SignatureInd']")
-	private WebElement VerificationAgree;
-	
-	@FindBy(xpath = "//label[@for='MedicalReleaseAuthSignatureInd']")
-	private WebElement VerificationAgree2;
-	@FindBy(xpath = "//label[@for='MedicalReleaseClaimsSignatureInd']")
-  private WebElement VerificationAgree3;
-	@FindBy(xpath = "(//button[contains(text(),'Submit application')])[1]")
-	private WebElement SubmitApplication;
-	@FindBy(xpath = "//span[contains(text(),'Submission Confirmation')]")
-	private WebElement submitconfirmation;
-	@FindBy(xpath = "//*[contains(text(),'View Prescription Drug Plans')]")
-	private WebElement ViewPrescriptionDrugPlans;
-	
 
 	
 	public String StartApplication(String FirstName, String LastName) throws InterruptedException {
