@@ -33,6 +33,7 @@ public class guestPaymentsLogin extends guestPaymentsLoginWebElements{
 	private static String  MEDICA_GUEST_PAYMENTS_PAGE_URL_PROD= MRConstants.MEDICA_GUEST_PAYMENTS_PAGE_URL_PROD;
 	
 
+
 	public guestPaymentsLogin(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -265,7 +266,7 @@ public class guestPaymentsLogin extends guestPaymentsLoginWebElements{
 	
 
 
-	public HSIDLoginPage clickOnSignInLink() {
+	public void clickOnSignInLink() {
 		signInLink.click();
 	
 		System.out.println(">>>>>>Sign In button is clicked<<<<<<");
@@ -274,14 +275,30 @@ public class guestPaymentsLogin extends guestPaymentsLoginWebElements{
 		    driver.switchTo().window(winHandle);
 		}
 		CommonUtility.checkPageIsReady(driver);
-		
-		if (driver.getCurrentUrl().contains("healthsafe")) {
-			return new  HSIDLoginPage(driver);
-		}
-		
-		return null;
+
 		
 	}
+	
+	public void validateBrand(String siteName) {
+		
+		validateNew(logoOnLoginPage);
+		String brandSource =logoOnLoginPage.getAttribute("src");
+		if(siteName=="RETIREE")
+			//logo for retiree site also have UHC on the dashboard
+			siteName="UHC";
+		
+	  
+		Assert.assertTrue("PROBLEM - unable to locate correct logo on HSID login page", brandSource.contains(siteName));
+		
+		
+	}
+
+	public void validateSignInButton() {
+
+		Assert.assertTrue("PROBLEM - unable to locate Sign In Button on HSID login page", validate(signInButton));
+		
+		
+	} 
 
 }
 

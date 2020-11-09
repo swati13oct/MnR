@@ -94,7 +94,11 @@ public class guestPaymentsLoginWebElements extends UhcDriver{
 	public static WebElement magnifyIcon;
 	
 	
+	@FindBy(xpath="//img[@class='header__logo img_responsive']")
+	public  WebElement logoOnLoginPage;
 	
+	@FindBy(xpath="//button[@id='submitBtn']")
+	public  WebElement signInButton;
 	
 
 	

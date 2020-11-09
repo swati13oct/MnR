@@ -110,20 +110,18 @@ public class guestPaymentsLoginStepDefinition {
 	public void the_user_clicks_SignIn() {
 
 		guestPaymentsLogin guestPaymentsLogin = (guestPaymentsLogin) getLoginScenario().getBean(PageConstants.GUEST_PAYMENTS_HOME_PAGE);
-		HSIDLoginPage HSIDLoginPage = guestPaymentsLogin.clickOnSignInLink();
-		getLoginScenario().saveBean(PageConstants.HSID_LOGIN_PAGE, HSIDLoginPage);
+		guestPaymentsLogin.clickOnSignInLink();
 
 	}
 
 	@Then("^I will see the Logo specific to my plan and the Sign in button$")
 
 	public void verify_logo_and_signIn(DataTable givenAttributes) {
-
+		guestPaymentsLogin guestPaymentsLogin = (guestPaymentsLogin) getLoginScenario().getBean(PageConstants.GUEST_PAYMENTS_HOME_PAGE);
 		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		String siteName = memberAttributesRow.get(0).getCells().get(1);
-		HSIDLoginPage HSIDLoginPage = (HSIDLoginPage) getLoginScenario().getBean(PageConstants.HSID_LOGIN_PAGE);
-		HSIDLoginPage.validateBrand(siteName);
-		HSIDLoginPage.validateSignInButton();
+		guestPaymentsLogin.validateBrand(siteName);
+		guestPaymentsLogin.validateSignInButton();
 
 	}
 

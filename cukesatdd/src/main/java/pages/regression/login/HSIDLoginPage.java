@@ -130,12 +130,6 @@ public class HSIDLoginPage extends UhcDriver {
 	@FindBy(xpath="//header//button[contains(@ng-click,'goToHomePage()')]")
 	protected WebElement anocGoToHomepageBtn;
 	
-	@FindBy(xpath="//img[@class='header__logo img_responsive']")
-	protected WebElement logoOnLoginPage;
-	
-	@FindBy(xpath="//button[@id='submitBtn']")
-	protected WebElement signInButton;
-	
 
 	@FindBy(xpath="//*[@id='main-message']/h1")
 	protected WebElement privacyNotice;
@@ -167,6 +161,9 @@ public class HSIDLoginPage extends UhcDriver {
 		PageFactory.initElements(driver, this);
 		openAndValidate(deepLinkUrl);
 	}
+	
+	
+
 	
 	public void validateFooter() {
 		FooterPage footerPg=new FooterPage(driver);
@@ -1053,25 +1050,6 @@ public class HSIDLoginPage extends UhcDriver {
 		return false;
 	}
 
-	public void validateBrand(String siteName) {
-		
-		validateNew(logoOnLoginPage);
-		String brandSource =logoOnLoginPage.getAttribute("src");
-		if(siteName=="RETIREE")
-			//logo for retiree site also have UHC on the dashboard
-			siteName="UHC";
-		
-	  
-		Assert.assertTrue("PROBLEM - unable to locate correct logo on HSID login page", brandSource.contains(siteName));
-		
-		
-	}
 
-	public void validateSignInButton() {
-
-		Assert.assertTrue("PROBLEM - unable to locate Sign In Button on HSID login page", validate(signInButton));
-		
-		
-	} 
 
 }
