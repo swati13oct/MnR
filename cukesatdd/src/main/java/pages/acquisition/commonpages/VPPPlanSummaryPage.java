@@ -699,13 +699,13 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//label[@for='MedicalReleaseAuthSignatureInd']")
 	private WebElement VerificationAgree2;
 	
-	@FindBy(xpath = "//label[@for='MedicalReleaseAuthSignatureInd']")
+	@FindBy(xpath = "//label[@for='MedicalReleaseClaimsSignatureInd']")
 	private WebElement VerificationAgree3;
 	
 	@FindBy(xpath = "(//button[contains(text(),'Submit application')])[1]")
 	private WebElement SubmitApplication;
 	
-	@FindBy(xpath = "(//*[contains(text(),'Submission Confirmation')])[1]")
+	@FindBy(xpath = "//span[contains(text(),'Submission Confirmation')]")
 	private WebElement submitconfirmation;
 	
 	@FindBy(xpath = "//*[contains(text(),'View Prescription Drug Plans')]")
@@ -4060,7 +4060,25 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		ReturntoApplicationButton.click();
 		Thread.sleep(2000);
 		nextButton.click();
-		MedicareNumber.sendKeys("1EG1TE1MK12");
+		return LastName;
+
+	}
+	
+	public void clickGender() throws InterruptedException {
+		ArrayList<String>values=new ArrayList<String>();
+		values.add("Male");values.add("Female");
+	int number=ThreadLocalRandom.current().nextInt(0,values.size());
+	WebElement gender=driver.findElement(By.xpath("(//label[text()='"+values.get(number)+"'])[1]"));
+	Thread.sleep(2000);
+	gender.click();
+		
+		
+	}
+	
+	public String continueApplicationuntilSubmitPage(String Medicarenumber) throws InterruptedException {
+		
+		//CommonUtility.waitForPageLoadNew(driver, MedicareNumber, 20);
+		MedicareNumber.sendKeys(Medicarenumber);
 		clickGender();
 //		Gender.click();
 		//jsClickNew(Gender);
@@ -4141,17 +4159,6 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		
 		//jsClickNew(ViewPrescriptionDrugPlans);
 		//Thread.sleep(2000);
-		return SubmitConfirmation; 
-	}
-	
-	public void clickGender() throws InterruptedException {
-		ArrayList<String>values=new ArrayList<String>();
-		values.add("Male");values.add("Female");
-	int number=ThreadLocalRandom.current().nextInt(0,values.size());
-	WebElement gender=driver.findElement(By.xpath("(//label[text()='"+values.get(number)+"'])[1]"));
-	Thread.sleep(2000);
-	gender.click();
-		
-		
+		return SubmitConfirmation;
 	}
 }
