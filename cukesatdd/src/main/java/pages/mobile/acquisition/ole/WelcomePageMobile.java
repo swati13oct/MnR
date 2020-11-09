@@ -179,14 +179,14 @@ public class WelcomePageMobile extends UhcDriver{
 		return false;
 	}
 
-	public PersonalInformationPage navigate_to_Personal_Information_page() {
+	public PersonalInformationPageMobile navigate_to_Personal_Information_page() {
 		
 		validateNew(NextBtn);
 		NextBtn.click();
 		CommonUtility.checkPageIsReadyNew(driver);
 		if(validateNew(driver.findElement(By.xpath("//h1[contains(text(),'Personal')]")))){			
 			System.out.println("OLE Personal Information Page is Displayed");
-			return new PersonalInformationPage(driver);
+			return new PersonalInformationPageMobile(driver);
 		}
 		return null;
 	}
@@ -203,10 +203,11 @@ public class WelcomePageMobile extends UhcDriver{
 		return null;
 	}
 
-	public LearnMoreModal OpenLearnMore() {
+	public LearnMoreModalMobile OpenLearnMore() {
 		checkModelPopup(driver);
 		validate(LearnMoreButton);
-		LearnMoreButton.click();
+		jsClickMobile(LearnMoreButton);
+		//LearnMoreButton.click();
 		try {
 			Thread.sleep(6000);
 		} catch (InterruptedException e) {
@@ -215,12 +216,12 @@ public class WelcomePageMobile extends UhcDriver{
 		}
 		if(validate(LearnMore_Modal)){
 			System.out.println("OLE Learn More Modal is Displayed");
-			return new LearnMoreModal(driver);
+			return new LearnMoreModalMobile(driver);
 		}
 		return null;
 	}
 
-	public CancelOLEModal OpenCancelOLE() {
+	public CancelOLEModalMobile OpenCancelOLE() {
 		validate(CancelEnrollmentLink);
 		JavascriptExecutor executor = (JavascriptExecutor)driver;
 		executor.executeScript("arguments[0].click();", CancelEnrollmentLink);
@@ -235,12 +236,12 @@ public class WelcomePageMobile extends UhcDriver{
 		}
 		if(validate(CancellationModal)){
 			System.out.println("OLE Cancel Enrollment Modal is Displayed");
-			return new CancelOLEModal(driver);
+			return new CancelOLEModalMobile(driver);
 		}
 		return null;
 	}
 
-	public LeavingOLEmodal OpenLeaveOLEmodal() {
+	public LeavingOLEmodalMobile OpenLeaveOLEmodal() {
 		validate(SiteLogo);
 		JavascriptExecutor executor = (JavascriptExecutor)driver;
 		executor.executeScript("arguments[0].click();", SiteLogo);
@@ -252,7 +253,7 @@ public class WelcomePageMobile extends UhcDriver{
 		}
 		if(validate(LeavingOLEmodal)){
 			System.out.println("Leaving OLE modal is Displayed");
-			return new LeavingOLEmodal(driver);
+			return new LeavingOLEmodalMobile(driver);
 		}
 		return null;
 	}
