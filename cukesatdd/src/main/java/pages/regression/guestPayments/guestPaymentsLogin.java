@@ -26,6 +26,12 @@ public class guestPaymentsLogin extends guestPaymentsLoginWebElements{
 	private static String RETIREE_GUEST_PAYMENTS_PAGE_URL = MRConstants.RETIREE_GUEST_PAYMENTS_PAGE_URL;
 	private static String PCP_GUEST_PAYMENTS_PAGE_URL = MRConstants.PCP_GUEST_PAYMENTS_PAGE_URL;
 	private static String  MEDICA_GUEST_PAYMENTS_PAGE_URL= MRConstants.MEDICA_GUEST_PAYMENTS_PAGE_URL;
+	private static String AARP_GUEST_PAYMENTS_PAGE_URL_PROD  = MRConstants.AARP_GUEST_PAYMENTS_PAGE_URL_PROD;
+	private static String UHC_GUEST_PAYMENTS_PAGE_URL_PROD = MRConstants.UHC_GUEST_PAYMENTS_PAGE_URL_PROD;
+	private static String RETIREE_GUEST_PAYMENTS_PAGE_URL_PROD = MRConstants.RETIREE_GUEST_PAYMENTS_PAGE_URL_PROD;
+	private static String PCP_GUEST_PAYMENTS_PAGE_URL_PROD = MRConstants.PCP_GUEST_PAYMENTS_PAGE_URL_PROD;
+	private static String  MEDICA_GUEST_PAYMENTS_PAGE_URL_PROD= MRConstants.MEDICA_GUEST_PAYMENTS_PAGE_URL_PROD;
+	
 
 	public guestPaymentsLogin(WebDriver driver) {
 		super(driver);
@@ -84,34 +90,58 @@ public class guestPaymentsLogin extends guestPaymentsLoginWebElements{
 		}
 	}
 	private void openAndValidate(String siteName) {
+		
+		if (MRScenario.environment.equalsIgnoreCase("prod")){
 		if ("AARP".equalsIgnoreCase(siteName)) {
-				startNew(AARP_GUEST_PAYMENTS_PAGE_URL);
+				startNew(AARP_GUEST_PAYMENTS_PAGE_URL_PROD);
 			
 			}
 		
 		else if ("UHC".equalsIgnoreCase(siteName)) {
-			startNew(UHC_GUEST_PAYMENTS_PAGE_URL);
+			startNew(UHC_GUEST_PAYMENTS_PAGE_URL_PROD);
 			
 		}
 		
 		else if ("RETIREE".equalsIgnoreCase(siteName)) {
-			startNew(RETIREE_GUEST_PAYMENTS_PAGE_URL);
+			startNew(RETIREE_GUEST_PAYMENTS_PAGE_URL_PROD);
 			
 		}
 		
 		else if ("PCP".equalsIgnoreCase(siteName)) {
-			startNew(PCP_GUEST_PAYMENTS_PAGE_URL);
+			startNew(PCP_GUEST_PAYMENTS_PAGE_URL_PROD);
 			
 		}
 		
 		else if ("MEDICA".equalsIgnoreCase(siteName)) {
-			startNew(MEDICA_GUEST_PAYMENTS_PAGE_URL);
+			startNew(MEDICA_GUEST_PAYMENTS_PAGE_URL_PROD);
 			
 		}
-
-		 else {
-			Assert.assertTrue(">>>>>>>>Guest Payments url is incorrectly formed. Please check<<<<<<<<<<<<<<<", false);
+	}
+		else{
+			
+			if ("AARP".equalsIgnoreCase(siteName)) {
+				startNew(AARP_GUEST_PAYMENTS_PAGE_URL);
+			}
+		
+		else if ("UHC".equalsIgnoreCase(siteName)) {
+			startNew(UHC_GUEST_PAYMENTS_PAGE_URL);		
 		}
+		
+		else if ("RETIREE".equalsIgnoreCase(siteName)) {
+			startNew(RETIREE_GUEST_PAYMENTS_PAGE_URL);	
+		}
+		
+		else if ("PCP".equalsIgnoreCase(siteName)) {
+			startNew(PCP_GUEST_PAYMENTS_PAGE_URL);
+		}
+		
+		else if ("MEDICA".equalsIgnoreCase(siteName)) {
+			startNew(MEDICA_GUEST_PAYMENTS_PAGE_URL);
+		}
+			
+	}
+
+		
 		CommonUtility.checkPageIsReadyNew(driver);
 		System.out.println(">>>>>>>>>Current page URL: " + driver.getCurrentUrl());
 		checkModelPopup(driver, 45);
