@@ -740,7 +740,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		@FindBy(xpath = "//span[@class='title']//span")
 		public List<WebElement>  planCount;
 		
-		@FindBy(xpath = "//span[@class='title']//span")
+		@FindBy(xpath = "//span[@class='title']//span")//
 		public WebElement  titleCount;
 
 
