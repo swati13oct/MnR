@@ -310,13 +310,11 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
     And user click on return to home on drug summary in AARP site
     Then the user navigates to Visitor profile page
     And user validates the added plans on visitor profile page of AARP site
-      | Test Plans | <testPlans>    |
-      | PDP Plans  | <pdptestPlans> |
-      | SNP Plans  | <snptestPlans> |
+      | Test Plans | <testPlansName>    |
 
     Examples: 
-      | drug1   | zipCode | testPlans                                                        | pdptestPlans                    | snptestPlans                               |
-      | Orkambi |   10001 | UnitedHealthcare Medicare Advantage Choice Plan 4 (Regional PPO) | AARP MedicareRx Preferred (PDP) | UnitedHealthcare Dual Complete (HMO D-SNP) |
+      | drug1   | zipCode | testPlans                                                        | pdptestPlans                    | snptestPlans                               |testPlansName|
+      | Orkambi |   10001 | UnitedHealthcare Medicare Advantage Choice Plan 4 (Regional PPO) | AARP MedicareRx Preferred (PDP) | UnitedHealthcare Dual Complete (HMO D-SNP) |UnitedHealthcare Medicare Advantage Choice Plan 4 (Regional PPO),AARP MedicareRx Preferred (PDP),UnitedHealthcare Dual Complete (HMO D-SNP)|
 
   @dceNBADrugSummaryPage @F465679
   Scenario Outline: Test to Verify that DCE NBA on Drug summary page
