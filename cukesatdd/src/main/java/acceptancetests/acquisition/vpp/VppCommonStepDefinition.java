@@ -73,9 +73,10 @@ public class VppCommonStepDefinition {
 		}
 		String site = memberAttributesMap.get("Site");
 		AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd, site);
-
+ 
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, aquisitionhomepage);
+		aquisitionhomepage.validateSubtitle();
 	}
 
 	@When("^the user performs plan search using following information$")
