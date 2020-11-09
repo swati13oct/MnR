@@ -14,6 +14,7 @@ import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import acceptancetests.acquisition.retiree.RetireeCommonConstants;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.LoginCommonConstants;
 import acceptancetests.data.PageConstants;
@@ -25,6 +26,7 @@ import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import gherkin.formatter.model.DataTableRow;
+import pages.acquisition.uhcretiree.RetireeAcquisitionHomePage;
 import pages.member_deprecated.bluelayer.LoginPage2;
 import pages.redesign_deprecated.BenefitsCoveragePage;
 import pages.redesign_deprecated.RedesignLoginPage;
@@ -2232,6 +2234,32 @@ public class BenefitsAndCoverageUmsStepDefinition {
 		benefitsCoveragePage.validateOutofPocketMax(plantype);
 	}
 
+	@Given("^user access retiree pre-enrollment site$")
+	public void access_retiree_preenrollment_site() {
+		MRScenario m=new MRScenario();
+		WebDriver wd=m.getWebDriverNew();
+
+		String testUrl="";
+		if (MRScenario.environment.contains("stage")) {
+			testUrl="https://www.stage-uhcretiree.uhc.com/fehbp";
+		} else if (MRScenario.environment.equalsIgnoreCase("offline")) {
+			testUrl="https://offline.uhcretiree.com/fehbp/home.html";
+		} else if (MRScenario.environment.equalsIgnoreCase("prod")) {
+			testUrl="https://uhcretiree.com/fehbp/home.html";
+		} else {
+			Assert.assertTrue("PROBLEM - Aborting test, this test can only be validate on stage, or offline-prod, or online-prod.  current env='"+MRScenario.environment+"'", false);
+		}
+		wd.get(testUrl);
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+	}
 	
+	@Then("^user validate retiree pre-enrollment destination url$")
+	public void validate_retiree_preenrollment_url() {
+		WebDriver wd = getLoginScenario().getWebDriver();
+		String expUrl="/fehbra/home.html";
+		String actUrl=wd.getCurrentUrl();
+		Assert.assertTrue("PROBLEM - retiree pre-enrollment destination url is not as expected. "
+				+ "Expect to contains '"+expUrl+"' | Actual='"+actUrl+"'", actUrl.contains(expUrl));
+	}
 	
 }//end of class
