@@ -4174,7 +4174,7 @@ public class AccountHomePage extends UhcDriver {
 
 		}
 
-		if (MRScenario.environment.equals("prod") || MRScenario.environment.equals("offline")) {
+		if (MRScenario.environment.equalsIgnoreCase("prod") || MRScenario.environment.equalsIgnoreCase("offline")) {
 			if (validate(shadowRootHeader)) {
 				System.out.println("located shadow-root element, attempt to process further...");
 				WebElement root1 = expandRootElement(shadowRootHeader);
