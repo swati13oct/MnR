@@ -2300,8 +2300,8 @@ public class VppCommonStepDefinition {
 			VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 			plansummaryPage.MedSupFormValidation(DateOfBirth);
-			String resumeKey = plansummaryPage.StartApplication(FirstName, LastName);
-			getLoginScenario().saveBean(VPPCommonConstants.RESUMEKEY, resumeKey);
+			String submitconfirmation = plansummaryPage.StartApplication(FirstName, LastName);
+			getLoginScenario().saveBean(VPPCommonConstants.SUBMITCONFIRMATION, submitconfirmation);
 
 		}
 }

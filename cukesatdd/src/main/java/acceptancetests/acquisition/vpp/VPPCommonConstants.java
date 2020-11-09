@@ -72,6 +72,7 @@ public static final String PRIMARYCARE = "primarycare";
 
 	public static final String NEXT_YEAR = "2019";
 	public static final String RESUMEKEY = "resumeKey";
+	public static final String SUBMITCONFIRMATION ="submitconfirmation";
 
 	//--------------------------------------------
 	//note: begin - added for deeplink validaton

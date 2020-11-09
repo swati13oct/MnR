@@ -10,6 +10,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.TimeUnit;
 
 import org.json.simple.JSONObject;
@@ -3116,32 +3117,49 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	private WebElement CoverageotherInsurance;
 	
 	
-	@FindBy(xpath = "//*[@class='right']/parent::span")
+	@FindBy(xpath = "(//label[text()='No'])[1]")
 	private WebElement CoverageVerification;
 	
-	@FindBy(xpath = "(//*[@class='radio_choice']/parent::span)[1]")
+	@FindBy(xpath = "(//label[text()='No'])[1]")
+	private WebElement CoverageVerification1;
+	
+	@FindBy(xpath = "(//label[text()='No'])[1]")
+	private WebElement CoverageVerification2;
+	@FindBy(xpath = "//label[@for='CpaSignatureInd']")
+	private WebElement CoverageVerificationAcknowledge;
+	
+	@FindBy(xpath = "//label[@for='PaymentChoice_1']")
 	private WebElement paymentOption;
-	@FindBy(xpath = "(//*[@class='radio_choice']/parent::span)[1]")
+	@FindBy(xpath = "//label[@for='ElectronicDeliveryInd_1']")
 	private WebElement DocumentDelivery;
 	
-	@FindBy(xpath = "(//*[@class='radio_choice']/parent::span)[1]")
+	@FindBy(xpath = "//label[@for='EmailChange_2']")
 	private WebElement EmailAddressNo;
 	
-	@FindBy(xpath = "(//*[@class='radio_choice']/parent::span)[1]")
+	@FindBy(xpath = "//label[@for='OnlinePreferenceSignatureInd']")
 	private WebElement ReadAgreement;
 	
-	@FindBy(xpath = "(//*[contains(text(),'Confirm Your Responses and Proceed to Authorization')])[2]/parent::button")
+	//@FindBy(xpath = "(//span[contains(text(),'Confirm Your Responses and Proceed')])[2]/parent::button")
+//	@FindBy(xpath = "//button[contains(@class,'centerElement cta')]")
+	@FindBy(xpath = "//div[@class='actionbar parbase']//button[1]/span")
 	private WebElement ProceedAuthorization;
 	
-	@FindBy(xpath = "(//*[@class='radio_choice']/parent::span)[1]")
+	@FindBy(xpath = "//label[@for='SignatureInd']")
 	private WebElement VerificationAgree;
 	
-	@FindBy(xpath = "(//*[contains(text(),'Submit application')])[1]")
+	@FindBy(xpath = "//label[@for='MedicalReleaseAuthSignatureInd']")
+	private WebElement VerificationAgree2;
+	@FindBy(xpath = "(//label[text()='No'])[1]")
+  private WebElement VerificationAgree3;
+	@FindBy(xpath = "(//button[contains(text(),'Submit application')])[1]")
 	private WebElement SubmitApplication;
 	@FindBy(xpath = "(//*[contains(text(),'Submission Confirmation')])[1]")
 	private WebElement submitconfirmation;
 	@FindBy(xpath = "//*[contains(text(),'View Prescription Drug Plans')]")
 	private WebElement ViewPrescriptionDrugPlans;
+	
+
+	
 	public String StartApplication(String FirstName, String LastName) throws InterruptedException {
 		Thread.sleep(4000);
 		CommonUtility.waitForPageLoadNew(driver, Start_ApplicationBtn, 20);
@@ -3178,7 +3196,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		Thread.sleep(2000);
 		nextButton.click();
 		MedicareNumber.sendKeys("1EG1TE1MK12");
-		jsClickNew(Gender);
+		clickGender();
+//		Gender.click();
+		//jsClickNew(Gender);
 		nextButton.click();
 		Thread.sleep(2000);
 		nextButton.click();
@@ -3203,41 +3223,75 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		jsClickNew(CoverageVerification);
 		nextButton.click();
 		Thread.sleep(2000);
+		jsClickNew(CoverageVerification1);
+		nextButton.click();
+		Thread.sleep(2000);
+		jsClickNew(CoverageVerification2);
+		nextButton.click();
+		Thread.sleep(2000);
+		jsClickNew(CoverageVerification2);
+		nextButton.click();
+		Thread.sleep(2000);
+		jsClickNew(CoverageVerification);
+		nextButton.click();
+		Thread.sleep(2000);
+		jsClickNew(CoverageVerificationAcknowledge);
+		nextButton.click();
+		Thread.sleep(2000);
 		jsClickNew(paymentOption);
 		nextButton.click();
 		Thread.sleep(2000);
 		jsClickNew(DocumentDelivery);
 		nextButton.click();
-		Thread.sleep(2000);
 		
-		///////////--------------Need to check from here----------
+		/////////////////////////New to add another Method
+		validateNew(EmailAddressNo);
 		jsClickNew(EmailAddressNo);
 		nextButton.click();
-		Thread.sleep(2000);
-
+		validateNew(ReadAgreement);
 		jsClickNew(ReadAgreement);
 		nextButton.click();
-		Thread.sleep(2000);
-		jsClickNew(ProceedAuthorization);
-		Thread.sleep(2000);
+
+		validateNew(ProceedAuthorization);
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);",ProceedAuthorization);
+		ProceedAuthorization.click();
+		validateNew(VerificationAgree);
 		jsClickNew(VerificationAgree);
 		nextButton.click();
-		Thread.sleep(2000);
-		
-		jsClickNew(VerificationAgree);
+	
+		validateNew(VerificationAgree2);
+		jsClickNew(VerificationAgree2);
 		nextButton.click();
-		Thread.sleep(2000);
-		jsClickNew(SubmitApplication);
-		Thread.sleep(2000);
-		
+		validateNew(VerificationAgree2);
+		Thread.sleep(3000);
+	VerificationAgree3.click();
+		nextButton.click();
+		validateNew(SubmitApplication);
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);",SubmitApplication);
+		Thread.sleep(3000);
+		SubmitApplication.click();
+		validateNew(submitconfirmation);
 		String SubmitConfirmation = submitconfirmation.getText();
 		System.out.println("The return to the application code is- " + SubmitConfirmation);
 		Thread.sleep(2000);
 		
 		//jsClickNew(ViewPrescriptionDrugPlans);
 		//Thread.sleep(2000);
-		return LastName; 
+		return SubmitConfirmation; 
 	}
+	
+	
+	
+public void clickGender() throws InterruptedException {
+	ArrayList<String>values=new ArrayList<String>();
+	values.add("Male");values.add("Female");
+int number=ThreadLocalRandom.current().nextInt(0,values.size());
+WebElement gender=driver.findElement(By.xpath("(//label[text()='"+values.get(number)+"'])[1]"));
+Thread.sleep(2000);
+gender.click();
+	
+	
+}
 	public void ResumeApplicationButton() throws InterruptedException {
 		Thread.sleep(5000);
 		String DateOfBirth = "11131950";
@@ -4029,4 +4083,6 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		}
 		return null;
 	}
+	
+	
 }
