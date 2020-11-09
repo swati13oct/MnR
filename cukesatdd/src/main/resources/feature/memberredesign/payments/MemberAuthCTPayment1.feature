@@ -18,7 +18,7 @@ Feature: S1.1 To test Member Auth premium payment flows Micro App.
       | CreditCardNumber | <CreditCardNumber> |
       | Month            | <validMonth>       |
       | Year             | <validYear>        |
-    And user navigates to payment overview screen
+    And user validates the information on Payment Review page
 
     Examples: 
       | UID     | username | password | memUserName | planType | claimPeriod    | dateRange      | Name         | CreditCardNumber | validMonth | validYear | paymentType |
