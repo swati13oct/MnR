@@ -4141,7 +4141,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		
 		//jsClickNew(ViewPrescriptionDrugPlans);
 		//Thread.sleep(2000);
-		return LastName; 
+		return SubmitConfirmation; 
 	}
 	
 	public void clickGender() throws InterruptedException {
