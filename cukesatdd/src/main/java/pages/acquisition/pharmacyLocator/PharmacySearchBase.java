@@ -8,6 +8,7 @@ import java.util.regex.Pattern;
 
 import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -63,7 +64,7 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 					System.out.println("This is either the first time entering zip for multicounty or changing to zip that's multicounty, expect selection popup");
 					Assert.assertTrue("PROBLEM - expects zipcode '"+zipcode+"' with multi-county but county selection popup is NOT showing", 
 							pharmacyValidate(countyModal));
-					driver.findElement(By.xpath("//div[@id='selectCounty']//a[text()='" + county + "']")).click();
+					jsClickNew(driver.findElement(By.xpath("//div[@id='selectCounty']//a[text()='" + county + "']")));
 					CommonUtility.checkPageIsReadyNew(driver);
 					CommonUtility.waitForPageLoadNew(driver, pharmacylocatorheader, 10); //note: should be on vpp page afterward
 				} else {
@@ -81,11 +82,14 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 	public void validateNoresultsZipcodeError(String zipcode) {
 		zipcodeField.clear();
 		sleepBySec(8);
-		
+
 		zipcodeField.sendKeys(zipcode);
 		if(zipcode.length()!=5){
+			zipcodeField.sendKeys(Keys.TAB);
+			sleepBySec(2);
+			/*jsMouseOver(distanceDropDownField);
 			distanceDropDownField.click();
-			distanceOption_15miles.click();
+			distanceOption_15miles.click();*/
 		}
 		//searchbtn.click();
 		//CommonUtility.waitForPageLoadNew(driver, zipcodeErrorMessage, 10);
