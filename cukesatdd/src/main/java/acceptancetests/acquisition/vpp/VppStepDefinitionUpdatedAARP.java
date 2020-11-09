@@ -5,6 +5,8 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -17,6 +19,7 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acceptancetests.acquisition.ole.oleCommonConstants;
@@ -3837,4 +3840,67 @@ public void the_user_validates_the_secondary_search_by_providing_newsearchvalue_
 			Assert.fail("Error Loading VPP plan summary page");
 		}
 	}
+	
+	@And("^the user view below plans on vpp page and matches plan count for all plans$")
+	public void the_user_view_below_plans_on_vpp_page_and_matches_plan_count_for_all_plans(DataTable givenAttributes) {
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		
+		System.out.println("Validating Plan Name---------------------------------------------------------------");
+		
+		List<String> planNameListExpected = givenAttributes.asList(String.class);
+		System.out.println("Expected Plan Name---------------------------------------------------------------"+planNameListExpected);
+		List<WebElement> planNameListElement=plansummaryPage.planTypes;
+		
+		List<String> planNameListActual = new ArrayList<String>();
+		for(WebElement planName : planNameListElement ){
+			String text = planName.getText().trim();
+			planNameListActual.add(text);
+		}
+		
+		System.out.println("Actual Plan Name---------------------------------------------------------------"+planNameListActual);
+		
+		
+
+        Collections.sort(planNameListExpected);
+        Collections.sort(planNameListActual);
+		
+        if (planNameListExpected.equals(planNameListActual)) {
+			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
+
+		} else {
+			Assert.fail("Plan name did not match ");
+		}
+
+		System.out.println("Validating Plan Count---------------------------------------------------------------");
+		String planCountExpected = plansummaryPage.titleCount.getText();
+		String [] planArray = planCountExpected.split(" ");
+		planCountExpected = planArray[2];
+		System.out.println("Expected Plan Count---------------------------------------------------------------"+planCountExpected);
+		List<WebElement> planCountElement=plansummaryPage.planCount;
+		
+		int total = 0;
+		
+		for(WebElement planCount : planCountElement ){
+		
+			String text = planCount.getText().trim();
+			total = total+ Integer.parseInt(text);
+		}
+		System.out.println("Actual Plan Count---------------------------------------------------------------"+total);
+		
+	
+		if (planCountExpected.equals(total)) {
+			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
+
+		} else {
+			Assert.fail("Plan count did not match ");
+		}
+
+	
+	
+	
+	
+	
+	}
+
 }

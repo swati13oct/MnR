@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import pages.acquisition.ulayer.AcquisitionHomePage;
 import pages.acquisition.ulayer.RequestAgentAppointmentPage;
 import pages.acquisition.ulayer.RequestHelpAndInformationPage;
+import pages.acquisition.ulayer.VPPPlanSummaryPage;
 import acceptancetests.data.PageConstants;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
@@ -85,6 +86,29 @@ public class RequestAgentAppttStepDefinitionAARP {
 				Assert.fail("Error submitting the form or loading the Confirmation page");
 			}
 		
+	}
+			@Then("^the user clicks on View plan details link for each plan type and validate find agent link for all plans$")
+			public void the_user_clicks_on_View_plan_details_link_for_each_plan_type_and_validate_find_agent_link_for_allplans(DataTable attributes) {
+				
+				VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+						.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+				
+					List<String> planNameList = attributes.asList(String.class);
+					//click on ma view plan
+					//click on plan detail
+					//click on contact agent
+					//click on back to vpp
+					//click on back to all plan
+					//click on next plan
+					boolean isContactAgentPageDisplayed = plansummaryPage.validateContactAgentPage(planNameList);
+					if (isContactAgentPageDisplayed) {
+						System.out.println("Successfully validated contact agent page for all plan types");
+						Assert.assertTrue(true);
+					} else {
+						Assert.fail("Error in validating contact agent page for all plan types");
+					}
+			}				
+
 			
 	}
 	

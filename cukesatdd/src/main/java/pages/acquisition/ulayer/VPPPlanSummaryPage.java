@@ -733,6 +733,18 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		
 		@FindBy(xpath = "//input[@class='nextButton']")
 		private WebElement  Submit;
+		
+		@FindBy(xpath = "//span[@class='title']//small")
+		public List<WebElement>  planTypes;
+		
+		@FindBy(xpath = "//span[@class='title']//span")
+		public List<WebElement>  planCount;
+		
+		@FindBy(xpath = "//span[@class='title']//span")
+		public WebElement  titleCount;
+
+
+
 
 		
 		public WebElement getValEstimatedAnnualDrugCostValue(String planName) {
@@ -4401,5 +4413,29 @@ for (int i = 0; i < initialCount + 1; i++) {
 		System.out.println("Page Title : "+(driver.findElement(By.xpath("//title")).getText()));
 		//return NavigateToURL;
 	}
+
+	public boolean validateContactAgentPage(List <String> planName) {
+		boolean flag = false;
+		for (int i = 0; i < planName.size(); i++) {
+			
+			driver.findElement(By.xpath("//a[contains(@aria-label,"+"'"+planName+"'"+")]")).click();
+			try {
+				Thread.sleep(5000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			if(planName.get(i).contains("Drug")) {
+			driver.findElement(By.xpath("(//a[contains(text(),'View plan and drug')])[1]")).click();	
+			}
+			else {
+			driver.findElement(By.xpath("(//a[contains(text(),'View Plan Details')])[1]")).click();
+			}
+			
+		}
+			
+		return flag;
+	}
+		
 
 }
