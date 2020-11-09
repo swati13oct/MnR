@@ -58,7 +58,7 @@ Feature: ACQ-OLE Resume and Retrieve Application for MedSupp
       | Zip Code        | <zipcode>         |
       | County Name     | <county>          |
       | Is Multi County | <isMultutiCounty> |
-  Then the site user clicks on Start Application Button and proceed Next until confirmaion page
+  Then the site user clicks on Start Application Button and proceed Next 
       | DOB           | <DOB>         |
       | Firstname     | <Firstname>   |
       | Lastname      | <Lastname>    |
