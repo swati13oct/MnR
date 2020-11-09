@@ -18,7 +18,7 @@ jsonReport = "target/cucumber-RunMRATDDAcquisitionMobileOLESNP.json",detailedRep
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.mobile" },monochrome=true, 
 features = { "src/main/resources/feature/mobile/acquisition/ole" }, plugin = {
 		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionMobileOLESNP.json" }, 
-tags = { "@SNP_OLE_Mobile" })
+tags = { "@SNP_OLE_AARP_mobile" })
 
 
 public class RunMRATDDAcquisitionMobileOLESNP {
