@@ -102,9 +102,9 @@ Feature: 1.06.7 Member Guest Payments Page
     Examples:
       | TID   | memberType         | memberID    | dob        | hasPD | hasCC | siteName |
       | 10000 | memberWithPD       | 907996890-1 | 10/09/1940 | true  | false | AARP     |
-      | 10000 | memberWithoutPD    | 002076763-1 | 05/22/1925 | false | true  | UHC      |
+      #| 10000 | memberWithoutPD    | 002076763-1 | 05/22/1925 | false | true  | UHC      |
       | 10000 | memberWithNoDues   | 980958988-1 | 04/08/1933 | false | false | RETIREE  |
-      | 10000 | memberWithBOTHDues | 008402998-1 | 12/08/1937 | true  | true  | RETIREE  |
+      | 10000 | memberWithBOTHDues | 929500524-1   | 07/15/1932    | true  | true  | RETIREE  |
 
   @guestPayment06 @ErrorsAndContentOneTimePayment @otherAmountErrorAndContent
   Scenario Outline: TID: <TID> - To validate the One time payment page with different error scenarios
@@ -162,9 +162,9 @@ Feature: 1.06.7 Member Guest Payments Page
 
     Examples:
       | TID   | planType | memberID    | dob        | siteName | Name                 | CreditCardNumber | validMonth | validYear | Email          |
-      | 10000 | MAPD     | 818302655-1	  | 02/12/1936| AARP     | GuestPayCC           | 4111111111111111 | 04         | 2024      | test@optum.com |
+      | 10000 | MAPD     | 005085470-1	  | 03/04/1943| AARP     | GuestPayCC           | 4111111111111111 | 04         | 2024      | test@optum.com |
       | 10001 | PDP      | 013019914-1	 | 02/12/1948 | UHC      | GuestPayCC           | 4111111111111111 | 04         | 2024      | test@optum.com |
-      | 10002 | MA       | 917617123-1 | 06/09/1951 | RETIREE  | GuestPayCC           | 4111111111111111 | 04         | 2024      | test@optum.com |
+     # | 10002 | MA       | 917617123-1 | 06/09/1951 | RETIREE  | GuestPayCC           | 4111111111111111 | 04         | 2024      | test@optum.com |
      # | 10003 | MAPD     | 915516555-1 | 10/29/1947 | PCP      | GuestPayCC           | 4111111111111111 | 04         | 2024      | test@optum.com |
       #| 10004 | MAPD     | 915516555-1 | 10/29/1947 | MEDICA   | GuestPayCC           | 4111111111111111 | 04         | 2024      | test@optum.com |
 
@@ -196,8 +196,8 @@ Feature: 1.06.7 Member Guest Payments Page
     Examples:
       | TID   | planType | memberID    | dob        | siteName | FirstName | MiddleName | LastName  | accountNo  | routingNo | Email          |
       | 10000 | MAPD     | 934177770-1 | 03/24/1946| AARP     | Guest     | A          | Payments1 | 1234512345 | 123123123 | test@optum.com |
-      | 10001 | MAPD      | 008611870-1 | 07/09/1963| AARP     | Guest     | B          | Payments2 | 1234512345 | 123123123 | test@optum.com |
-      | 10002 | PDP      | 955488517-1 | 06/17/1952| RETIREE  | Guest     | C          | Payments3 | 1234512345 | 123123123 | test@optum.com |
+      | 10001 | PDP      | 000088707-1 | 02/01/1931| AARP     | Guest     | B          | Payments2 | 1234512345 | 123123123 | test@optum.com |
+      | 10002 | PDP      | 006738639-1 | 06/27/1937| RETIREE  | Guest     | C          | Payments3 | 1234512345 | 123123123 | test@optum.com |
      # | 10003 | MAPD     | 978196889   | 10/19/1941 | PCP      | Guest     | D          | Payments4 | 1234512345 | 123123123 | test@optum.com |
     #  | 10004 | MAPD     | 911808274   | 09/06/1945 | MEDICA   | Guest     | E          | Payments5 | 1234512345 | 123123123 | test@optum.com |
 
@@ -224,7 +224,7 @@ Feature: 1.06.7 Member Guest Payments Page
 
     Examples:
        | TID   | planType | memberID      | dob           | siteName    |Name                 | CreditCardNumber | validMonth | validYear |
-       | 10000 | MAPD     | 865411460-1  | 02/25/1946     |   AARP      |CreditCardAutomation | 4111111111111111 |         04 |      2024 |
+       | 10000 | MAPD     | 977065719-1  | 07/19/1946     |   AARP      |CreditCardAutomation | 4111111111111111 |         04 |      2024 |
        | 10001 | MAPD     | 956465000-1   | 01/12/1960    |   UHC       |CreditCardAutomation | 4111111111111111 |         04 |      2024 |
        | 10002 | MAPD     | 929500524-1   | 07/15/1932    |   RETIREE   |CreditCardAutomation | 4111111111111111 |         04 |      2024 |
      # | 10003 | MAPD     | 915516555-1   | 10/29/1947    |   PCP       |CreditCardAutomation | 4111111111111111 |         04 |      2024 |
@@ -256,7 +256,7 @@ Feature: 1.06.7 Member Guest Payments Page
       | TID   | planType | memberID    | dob        | siteName | FirstName | MiddleName | LastName  | accountNo  | routingNo |
       | 10000 | MAPD     | 906641323-1 | 07/21/1944 | AARP     | Guest     | A          | Payments1 | 1234512345 | 123123123 |
       | 10001 | MAPD      | 932125737-1 | 05/02/1939 | UHC     | Guest     | B          | Payments2 | 1234512345 | 123123123 |
-      | 10002 | MAPD      | 955961712-1 | 10/30/1945 | RETIREE  | Guest     | C          | Payments3 | 1234512345 | 123123123 |
+     # | 10002 | MAPD      | 955961712-1 | 10/30/1945 | RETIREE  | Guest     | C          | Payments3 | 1234512345 | 123123123 |
      # | 10003 | MAPD     | 978196889   | 10/19/1941 | PCP      | Guest     | D          | Payments4 | 1234512345 | 123123123 |
     #  | 10004 | MAPD     | 911808274   | 09/06/1945 | MEDICA   | Guest     | E          | Payments5 | 1234512345 | 123123123 |
 
@@ -285,7 +285,7 @@ Feature: 1.06.7 Member Guest Payments Page
       | TID   | planType | memberID      | dob           | siteName    |Name                 | CreditCardNumber | validMonth | validYear |otherAmountDue    |
       | 10000 | MAPD     | 939838215-1   | 05/19/1937    |   AARP      |CreditCardAutomation | 4111111111111111 |         04 |      2024 |  1.05           |
        | 10001 | MAPD     |007973219-1  | 05/12/1943   |   UHC       |CreditCardAutomation | 4111111111111111 |         04 |      2024 |  15.20           |
-     | 10002 | MAPD     | 825012105-1  | 08/24/1939    |   RETIREE   |CreditCardAutomation | 4111111111111111 |         04 |      2024 |  20.30           |
+     | 10002 | MAPD     | 006738298-1  | 12/18/1938   |   RETIREE   |CreditCardAutomation | 4111111111111111 |         04 |      2024 |  20.30           |
     #  | 10003 | MAPD     |005085470-1  | 10/29/1947    |   PCP       |CreditCardAutomation | 4111111111111111 |         04 |      2024 |  11.000          |
       #| 10004 | MAPD     | 915516555-1   | 10/29/1947    |   MEDICA    |CreditCardAutomation | 4111111111111111 |         04 |      2024 |  333.00          |
 
@@ -315,7 +315,7 @@ Feature: 1.06.7 Member Guest Payments Page
     Examples:
       | TID   | planType | memberID    | dob        | siteName | FirstName | MiddleName | LastName  | accountNo  | routingNo | otherAmountDue |
     #  | 10000 | MAPD     | 979160486-1 | 03/16/1989 | AARP     | Guest     | A          | Payments1 | 1234512345 | 123123123 | 10.05          |
-      | 10001 | PDP      | 004046597-1 | 07/20/1930	 | UHC     | Guest     | B          | Payments2 | 1234512345 | 123123123 | 15.20          |
+      | 10001 | PDP      |858698922-1   | 04/30/1945	 | UHC     | Guest     | B          | Payments2 | 1234512345 | 123123123 | 15.20          |
     #| 10002    | PDP      |926312971-1 | 10/19/1948 | RETIREE  | Guest     | C          | Payments3 | 1234512345 | 123123123 | 20.30          |
     #  | 10003 | MAPD     | 978196889   | 10/19/1941 | PCP      | Guest     | D          | Payments4 | 1234512345 | 123123123 | 11.000         |
     #  | 10004 | MAPD     | 911808274   | 09/06/1945 | MEDICA   | Guest     | E          | Payments5 | 1234512345 | 123123123 | 333.00         |

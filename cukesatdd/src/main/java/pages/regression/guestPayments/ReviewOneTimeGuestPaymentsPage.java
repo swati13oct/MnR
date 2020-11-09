@@ -143,7 +143,7 @@ public class ReviewOneTimeGuestPaymentsPage extends UhcDriver {
 			CommonUtility.checkPageIsReadyNew(driver);
 			CommonUtility.waitForPageLoadNew(driver, confirmationPageHeader, 45);
 			
-			if (driver.getCurrentUrl().contains("payment-submit")) {
+			if (driver.getCurrentUrl().contains("payment-confirmed")) {
 				System.out.println(">>>>>>>>>>>>>>>User is on Confirmation Page<<<<<<<<<<<<<<<<<<");
 				return new confirmOneTimeGuestPaymentsPage(driver);
 				
