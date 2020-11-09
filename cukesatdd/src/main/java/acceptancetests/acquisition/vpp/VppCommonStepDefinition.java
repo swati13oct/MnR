@@ -2284,8 +2284,8 @@ public class VppCommonStepDefinition {
 					pharmacySearchPage);
 		}
 		
-		@Then("^the site user clicks on Start Application Button and proceed Next$")
-		public void Start_application_button_proceed_next(DataTable givenAttributes) throws Throwable {
+		@Then("^the site user clicks on Start Application Button and proceed Next until confirmaion page$")
+		public void Start_application_button_proceed_next_until_confirmation_page(DataTable givenAttributes) throws Throwable {
 			List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 			Map<String, String> memberAttributesMap = new HashMap<String, String>();
 			for (int i = 0; i < memberAttributesRow.size(); i++) {
@@ -2304,4 +2304,6 @@ public class VppCommonStepDefinition {
 			getLoginScenario().saveBean(VPPCommonConstants.SUBMITCONFIRMATION, submitconfirmation);
 
 		}
+		
+		
 }

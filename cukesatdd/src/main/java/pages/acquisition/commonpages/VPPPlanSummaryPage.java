@@ -3149,11 +3149,11 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	
 	@FindBy(xpath = "//label[@for='MedicalReleaseAuthSignatureInd']")
 	private WebElement VerificationAgree2;
-	@FindBy(xpath = "(//label[text()='No'])[1]")
+	@FindBy(xpath = "//label[@for='MedicalReleaseClaimsSignatureInd']")
   private WebElement VerificationAgree3;
 	@FindBy(xpath = "(//button[contains(text(),'Submit application')])[1]")
 	private WebElement SubmitApplication;
-	@FindBy(xpath = "(//*[contains(text(),'Submission Confirmation')])[1]")
+	@FindBy(xpath = "//span[contains(text(),'Submission Confirmation')]")
 	private WebElement submitconfirmation;
 	@FindBy(xpath = "//*[contains(text(),'View Prescription Drug Plans')]")
 	private WebElement ViewPrescriptionDrugPlans;
@@ -3262,10 +3262,14 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		validateNew(VerificationAgree2);
 		jsClickNew(VerificationAgree2);
 		nextButton.click();
-		validateNew(VerificationAgree2);
-		Thread.sleep(3000);
-	VerificationAgree3.click();
+		
+		validateNew(VerificationAgree3);
+		
+	//	((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);",VerificationAgree3);
+		jsClickNew(VerificationAgree3);
+		//VerificationAgree3.click();
 		nextButton.click();
+		
 		validateNew(SubmitApplication);
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);",SubmitApplication);
 		Thread.sleep(3000);
