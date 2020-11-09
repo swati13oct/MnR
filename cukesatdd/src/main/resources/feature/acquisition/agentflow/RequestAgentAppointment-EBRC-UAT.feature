@@ -1,4 +1,4 @@
-Feature: UAT Scripts to test Federal Agent Link and request an appointment with an agent flow on Shop Pages(GATED)
+Feature: 1.06 - UAT Scripts to test Federal Agent Link and request an appointment with an agent flow on Shop Pages
 
 Scenario Outline: <scenario> Verify request an appointment through shop pages MA Plans
 Given the user is on medicare acquisition site landing page
@@ -8,16 +8,16 @@ Given the user navigates to following medicare acquisition site page
       | PagePath | <path>     |
 When the user navigates to EBRC links
       |UHC Agent URL|  <UHCUrl>  |
-   @agentFlowEBRCBlayerUAT
+   @agentFlowEBRCBlayer
     Examples: 
       |scenario               |	site	| path                                                        | pageName                     | UHCUrl                     | 
-      |E2E Scenario 3_UMS     |	UHC		| shop/medicare-advantage-plans.html                          | ShopPlan: Shop MA Plan       | https://www.myuhcagent.com/| 
+      |E2E Scenario 2_UMS     |	UHC		| shop/medicare-advantage-plans.html                          | ShopPlan: Shop MA Plan       | https://www.myuhcagent.com/| 
    
-   @agentFlowEBRCUlayerUAT
+   @agentFlowEBRCUlayer
     Examples: 
       |scenario               |	site	| path                                                        | pageName                     | UHCUrl                     | 
       
-      |E2E Scenario 3_AMP     |	AARP    | shop/medicare-advantage-plans.html                          | ShopPlan: Shop MA Plan       | https://www.myuhcagent.com/| 
+      |E2E Scenario 2_AMP     |	AARP    | shop/medicare-advantage-plans.html                          | ShopPlan: Shop MA Plan       | https://www.myuhcagent.com/| 
       
       
 
@@ -29,7 +29,7 @@ When the user navigates to request appointment with an agent in AARP site and va
 Then the user fills the form out and submits the agent appointment application
 | Zipcode    | <zipcode>   |
 
-@agentAppointmentBlayerUAT
+@agentFlowEBRCBlayer
 Examples: 
 | scenario           | zipcode    | site|
 | E2E Scenario 3_UMS |  90002     |  UHC|
@@ -42,7 +42,7 @@ When the user navigates to request appointment with an agent in AARP site and va
 Then the user fills the form out and submits the agent appointment application
 | Zipcode    | <zipcode>   |
 
-@agentAppointmentUlayerUAT
+@agentFlowEBRCUlayer
 Examples: 
 | scenario           | zipcode    | site|
 | E2E Scenario 3_AMP |  90002     |  AARP|
