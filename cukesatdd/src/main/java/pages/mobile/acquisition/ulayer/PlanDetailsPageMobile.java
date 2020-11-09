@@ -242,6 +242,9 @@ public class PlanDetailsPageMobile extends UhcDriver {
 
 	@FindBy(id = "backToPlanSummaryTop")
 	private WebElement lnkBackToAllPlans;
+	
+	@FindBy(xpath = "//a[contains(text(),'Back to plan results')]")
+	private WebElement ReturnToMainPlanList;
 
 	@FindBy(xpath = "//input[@id='compareone']/following-sibling::label")
 	private WebElement compareBox;
@@ -841,15 +844,16 @@ public class PlanDetailsPageMobile extends UhcDriver {
 
 	}
 
+
 	public VPPPlanSummaryPageMobile navigateBackToPlanSummaryPageFromDetailsPage() {
 		validateNew(getLnkBackToAllPlans());
 		jsClickNew(getLnkBackToAllPlans());
-		// getLnkBackToAllPlans().click();
-		jsClickNew(BackToMainPlanList);
+		//getLnkBackToAllPlans().click();
 		CommonUtility.checkPageIsReadyNew(driver);
-	
+		//waitForPageLoadSafari();
 		if (driver.getCurrentUrl().contains("plan-summary")) {
-			jsClickNew(BackToMainPlanList);
+			jsClickNew(ReturnToMainPlanList);
+			
 			return new VPPPlanSummaryPageMobile(driver);
 
 		}

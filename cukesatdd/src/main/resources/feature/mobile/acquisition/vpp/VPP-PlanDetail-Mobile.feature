@@ -280,7 +280,7 @@ Feature: 1.01.2-Vpp to plan Details AARP Scenarios
     And the user validates the pdf section
     Then User clicks on Back to Plans link and navigate back to plan summary in AARP site
     Then User click on add to compare checkbox and click on view details link on AARP
-    Then I uncheck and go back to the vpp page to validate for AARP
+    #Then I uncheck and go back to the vpp page to validate for AARP
 
     Examples: 
       | TCID   | zipcode | isMultutiCounty | county       | plantype | planName                                               | planyear |

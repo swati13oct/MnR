@@ -1144,6 +1144,7 @@ public class ComparePlansPageMobile extends UhcDriver {
 
 	public void validateDrugInfo(String drug) {
 		validateNew(backToAllPlansLink);
+		scrollToView(yourDrugsBanner);
 		validateNew(yourDrugsBanner);
 		validateNew(editDrugsLink);
 		validateNew(DrugSummaryHeader);

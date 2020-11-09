@@ -265,6 +265,7 @@ public class PlanRecommendationEngineLandingAndZipcodeMobilePages extends UhcDri
 		validate(pageStepsNumberName, 30);
 //		Assert.assertTrue(pageStepsNumberName.getText().contains("Step 1: Location"));
 		validate(pageProgressPercentage, 30);
+		scrollToView(pageProgressPercentage);
 		Assert.assertTrue(pageProgressPercentage.getText().contains("0% Complete"));
 		validate(pageRequiredInfo);
 		Assert.assertTrue(pageRequiredInfo.getText().contains("All fields marked with "), " are required");

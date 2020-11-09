@@ -1154,7 +1154,7 @@ public class MRScenario {
 	}
 
 	public static String returnJobURL() {
-		if(MRScenario.environment.equalsIgnoreCase(JobURLVD)) {
+		if(MRScenario.environment.equalsIgnoreCase(VirtualDeviceURL)) {
 			return JobURLVD;
 					
 		} else

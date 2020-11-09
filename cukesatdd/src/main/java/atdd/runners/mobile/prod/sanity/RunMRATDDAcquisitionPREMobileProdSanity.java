@@ -9,15 +9,15 @@ import cucumber.api.CucumberOptions;
 
 /**
  * this file is to run test cases for
- * RunMRATDDAcquisitionPREMobile
+ * RunMRATDDAcquisitionPREMobileProdSanity
  */
 @RunWith(ExtendedCucumber.class)
-@ExtendedCucumberOptions(retryCount = 0, screenShotSize = "", screenShotLocation = "/screenshots/", jsonReport = "target/cucumber-RunMRATDDAcquisitionPREMobile.json", detailedReport = true, detailedAggregatedReport = true, overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDAcquisitionPREMobile")
+@ExtendedCucumberOptions(retryCount = 0, screenShotSize = "", screenShotLocation = "/screenshots/", jsonReport = "target/cucumber-RunMRATDDAcquisitionPREMobileProdSanity.json", detailedReport = true, detailedAggregatedReport = true, overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDAcquisitionPREMobileProdSanity")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.mobile" }, monochrome = true, features = {
 		"src/main/resources/feature/mobile/acquisition/planrecommendationengine" }, plugin = { "pretty", "html:reports/test-report",
-				"json:target/cucumber-RunMRATDDAcquisitionPREMobile.json" }, tags = {
+				"json:target/cucumber-RunMRATDDAcquisitionPREMobileProdSanity.json" }, tags = {
 						"@OnlyProd","@landingpage"}, dryRun=false)
 
-public class RunMRATDDAcquisitionPREMobile {
+public class RunMRATDDAcquisitionPREMobileProdSanity {
 
 }
