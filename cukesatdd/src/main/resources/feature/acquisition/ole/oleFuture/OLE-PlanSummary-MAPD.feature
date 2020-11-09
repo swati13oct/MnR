@@ -1,4 +1,4 @@
-Feature: 1.05.2.ACQ-OLE  common tool flow E2E MAPD
+Feature: 1.05.2 OLE common tool flow E2E MAPD
 
 
   Scenario Outline: TID: <TID> -plan type: <PlanType> - OLE End to end from AARP Acquisition site VPP Plan Summary

@@ -71,6 +71,9 @@ public class BuildYourDrugList extends UhcDriver {
 	
 	@FindBy(xpath = "(//button[contains(@class,'uhc-button')]//*[contains(text(),'Return to Compare')])[2]")
 	public WebElement returnToCompareBtn;
+	
+	@FindBy(xpath = "//h2[contains(text(),'Your estimated')]")
+	public WebElement reviewDrugCostPageHeading;
 
 
 	public BuildYourDrugList(WebDriver driver) {
@@ -257,15 +260,25 @@ public class BuildYourDrugList extends UhcDriver {
 				Assert.assertTrue("Validated Drug List for Drug : "+currentDrug, true);
 			}
 			else
-				Assert.fail("Drug List Validation FAILED for Drug : "+currentDrug);
+				Assert.fail("Drug List Validation FAILED for Drug : " + currentDrug);
 		}
 	}
-	
+
 	public ComparePlansPage returnToPlanComparePage() {
-		
+
 		validateNew(returnToCompareBtn);
 		returnToCompareBtn.click();
 		return new ComparePlansPage(driver);
+	}
+
+	public DrugSummaryPage verifyReviewDrugCostPage() {
+		CommonUtility.waitForPageLoad(driver, reviewDrugCostPageHeading, 30);
+		if (validateNew(reviewDrugCostPageHeading)) {
+			return new DrugSummaryPage(driver);
+		} else {
+			Assert.fail("Review drug cost page not displayed");
+			return null;
+		}
 	}
 
 }

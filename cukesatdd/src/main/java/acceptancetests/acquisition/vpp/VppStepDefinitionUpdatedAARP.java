@@ -71,7 +71,7 @@ public class VppStepDefinitionUpdatedAARP {
 	public void the_user_on_aarp_medicaresolutions_Site() {
 		WebDriver wd = getLoginScenario().getWebDriverNew();
 		AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd);
-
+		aquisitionhomepage.validateSubtitle();
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, aquisitionhomepage);
 	}
@@ -3778,6 +3778,21 @@ public void the_user_validates_the_secondary_search_by_providing_newsearchvalue_
 					optionalRiderFlag=true;
 				}
 		vppPlanDetailsPage.validateDentalPopupDefaults(planName,optionalRiderFlag);
+	}
+	@Then("^the user clicks on the united health care medicare solutions link$")
+	public void the_user_clicks_on_the_united_health_care_medicare_solutions_link() throws Throwable {
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		aquisitionhomepage.clickUnitedHealthcareMedicareSolutions();
+	    
+	}
+	
+	@Then("^ther user validates the \"([^\"]*)\"$")
+	public void ther_user_validates_the(String url) throws Throwable {
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		aquisitionhomepage.validateUrl(url);
+		
 	}
 	
 	@Given("^the user is on AARP medicare acquisition site hits Campaign URL$")

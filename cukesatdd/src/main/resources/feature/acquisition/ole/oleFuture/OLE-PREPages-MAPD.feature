@@ -1,5 +1,4 @@
-
-Feature: 2.05.1.ACQ-OLE PRE Through MAPD
+Feature: 1.05.8. OLE PRE Integration Flow
 
 	Scenario Outline: To validate MA plans through PRE
     Given the user is on medicare acquisition site landing page for PRE

@@ -196,12 +196,17 @@ public class PlanRecommendationEngineAdditionalServicesPage extends UhcDriver {
 // Selecting additional options and processed to Additional Service Page
 
 	public void additionalpageFunctional(String additionalOptions) {
-		System.out.println("additional Page Functional Operations");
-		additionalpageOptions(additionalOptions.split(",")[0],additionalOptions.split(",")[1],additionalOptions.split(",")[2],additionalOptions.split(",")[3]);
+		if (!(additionalOptions.isEmpty())) {
+			System.out.println("additional Page Functional Operations");
+			additionalpageOptions(additionalOptions.split(",")[0], additionalOptions.split(",")[1],
+					additionalOptions.split(",")[2], additionalOptions.split(",")[3]);
 //		continueBtn.click();
-		jsClickNew(continueBtn);
-		System.out.println("Validating " + page + " page Continue button functionality");
-		desktopCommonUtils.nextPageValidation(page.toUpperCase());
+			jsClickNew(continueBtn);
+			System.out.println("Validating " + page + " page Continue button functionality");
+			desktopCommonUtils.nextPageValidation(page.toUpperCase());
+		} else {
+			System.out.println("Additional Page Functional Operations is not needed for PDP");
+		}
 	}
 
 //Additional Page Error Function Verification     

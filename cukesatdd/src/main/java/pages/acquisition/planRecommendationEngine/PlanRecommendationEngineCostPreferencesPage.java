@@ -119,11 +119,15 @@ public class PlanRecommendationEngineCostPreferencesPage extends UhcDriver {
 // Selecting Cost Preference options and processed to Cost Preference Page
 
 	public void costPreferencepageFunctional(String preference) {
-		System.out.println("Cost Preferences Page Functional Operations");
-		costPreferencepageOptions(preference);
-		jsClickNew(continueBtn);
-		System.out.println("Validating " + page + " page Continue button functionality");	
+		if (!(preference.isEmpty())) {
+			System.out.println("Cost Preferences Page Functional Operations");
+			costPreferencepageOptions(preference);
+			jsClickNew(continueBtn);
+			System.out.println("Validating " + page + " page Continue button functionality");
+		} else {
+			System.out.println("Cost Preferences Page Functional Operations is not needed for PDP");
 		}
+	}
 
 //Cost Preference Page Error Function Verification     
 
