@@ -2311,8 +2311,8 @@ public class VppCommonStepDefinition {
 			getLoginScenario().saveBean(PageConstants.DCE_Redesign_GetStarted, getStartedPage);
 		}
 		
-		@Then("^the site user clicks on Start Application Button and proceed Next until confirmaion page$")
-		public void Start_application_button_proceed_next_until_confirmation_page(DataTable givenAttributes) throws Throwable {
+		@Then("^the site user clicks on Start Application Button and proceed Next$")
+		public void Start_application_button_proceed_next(DataTable givenAttributes) throws Throwable {
 			List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 			Map<String, String> memberAttributesMap = new HashMap<String, String>();
 			for (int i = 0; i < memberAttributesRow.size(); i++) {
@@ -2332,5 +2332,22 @@ public class VppCommonStepDefinition {
 
 		}
 		
-		
+		@Then("^the site user clicks on continue application until confirmaion page$")
+		public void conitnue_application_until_confirmation_page(DataTable givenAttributes) throws Throwable {
+			List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+			Map<String, String> memberAttributesMap = new HashMap<String, String>();
+			for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+				memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+						memberAttributesRow.get(i).getCells().get(1));
+			}
+
+			String Medicarenumber = memberAttributesMap.get("MedicareNumber");
+			String DateOfBirth = memberAttributesMap.get("DOB");			
+			VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+			String submitconfirmation = plansummaryPage.continueApplicationuntilSubmitPage(Medicarenumber);
+			getLoginScenario().saveBean(VPPCommonConstants.SUBMITCONFIRMATION, submitconfirmation);
+
+		}
 }

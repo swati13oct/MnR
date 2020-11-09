@@ -40,7 +40,7 @@ public class RequestAgentApptCommonStepDefinition {
 	/**
 	 * @toDo: user navigates to request more help and information in 
 	 */
-	@When("^the user navigates to EBRC links$")
+	@When("^the user clicks on Agent link and validates the correct URL is loaded$")
 	public void User_navigate_EBRC_Links(DataTable arg1) throws InterruptedException {
 		Map<String, String> inputAttributesMap=parseInputArguments(arg1);
 		String myUHCAgentURL = inputAttributesMap.get("UHC Agent URL");

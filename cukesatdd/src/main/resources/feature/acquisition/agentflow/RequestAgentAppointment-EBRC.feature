@@ -1,12 +1,12 @@
-Feature: 1.06-VBF-Acq-To test request an appointment with an agent flow(GATED)
+Feature: 1.06-To test request an appointment with an agent flow
 
-Scenario Outline: TID:<TCID> Verify request an appointment with an agent flow for zipcode in AARP site
+Scenario Outline: Verify request an appointment with an agent flow for <pageName>
 Given the user is on medicare acquisition site landing page
     	|Site| <site>|
-Given the user navigates to following medicare acquisition site page
+And the user navigates to following medicare acquisition site page
       | PageName | <pageName> |
       | PagePath | <path>     |
-When the user navigates to EBRC links
+When the user clicks on Agent link and validates the correct URL is loaded
       |UHC Agent URL|  <UHCUrl>          |
 
    @agentFlowEBRCUlayer
@@ -84,7 +84,7 @@ When the user navigates to EBRC links
     @agentFlowEBRCUlayer
     Examples: 
       |	site	| path                                             | pageName                     |UHCUrl|
-      |	AARP	| shop/medicare-advantage-plans.html               | ShopPlan: Shop MA Plan       |  https://www.myuhcagent.com/| 
+#      |	AARP	| shop/medicare-advantage-plans.html               | ShopPlan: Shop MA Plan       |  https://www.myuhcagent.com/| 
       |	AARP	| shop/medicare-supplement-plans.html              | ShopPlan: Shop Med Supp Plan | https://www.myuhcagent.com/| 
       |	AARP	| shop/medicare-supplement-plans.html              | ShopPlan: Shop Med Supp Plan |	 https://www.myuhcagent.com/| 		
       |	AARP	| shop/prescription-drug-plans.html                | ShopPlan: Shop PDP Plan      |  https://www.myuhcagent.com/| 		 
@@ -95,67 +95,12 @@ When the user navigates to EBRC links
 		@agentFlowEBRCBlayer
     Examples: 
       |	site	| path                                             | pageName                     | UHCUrl|
-      |	UHC		| shop/medicare-advantage-plans.html               | ShopPlan: Shop MA Plan       | https://www.myuhcagent.com/| 
+#      |	UHC		| shop/medicare-advantage-plans.html               | ShopPlan: Shop MA Plan       | https://www.myuhcagent.com/| 
       |	UHC		| shop/medicare-supplement-plans.html              | ShopPlan: Shop Med Supp Plan |  https://www.myuhcagent.com/| 
       |	UHC		| shop/medicare-supplement-plans.html              | ShopPlan: Shop Med Supp Plan |  https://www.myuhcagent.com/| 
       |	UHC		| shop/prescription-drug-plans.html                | ShopPlan: Shop PDP Plan      | https://www.myuhcagent.com/| 
       |	UHC		| shop/prescription-drug-plans.html                | ShopPlan: Shop PDP Plan      |  https://www.myuhcagent.com/| 
       |	UHC		| shop/dual-special-needs-plans.html               | ShopPlan: Shop DSNP Plan     |  https://www.myuhcagent.com/|     
-			|	UHC		| shop/dual-special-needs-plans.html               | ShopPlan: Shop DSNP Plan     |  https://www.myuhcagent.com/|   		
+			|	UHC		| shop/dual-special-needs-plans.html               | ShopPlan: Shop DSNP Plan     |  https://www.myuhcagent.com/|
+			
 
-
- 
- @AgentAppointmentEBRC_UAT1
-Scenario Outline: <scenario> Verify request an appointment through shop pages MA Plans
-Given the user is on medicare acquisition site landing page
-    	|Site| <site>|
-Given the user navigates to following medicare acquisition site page
-      | PageName | <pageName> |
-      | PagePath | <path>     |
-When the user navigates to EBRC links
-      |UHC Agent URL|  <UHCUrl>  |
-      
-      Examples: 
-      |scenario               |	site	| path                                                        | pageName                     | UHCUrl                     | 
-      |E2E Scenario 3_UMS     |	UHC		| shop/medicare-advantage-plans.html                          | ShopPlan: Shop MA Plan       | https://www.myuhcagent.com/| 
-      |E2E Scenario 3_UMS     |	AARP    | shop/medicare-advantage-plans.html                          | ShopPlan: Shop MA Plan       | https://www.myuhcagent.com/|      
-
-
-@agentAppointmentUAT
-Scenario Outline: <scenario> Verify request an appointment with an agent flow for Agent name
-Given the user is on medicare acquisition site landing page
-    	|Site| <site>|
-When the user navigates to request more help and information
-When the user click on Request more Information
-When the user navigates to EBRC links
-      |UHC Agent URL|  <UHCUrl>  |
-#When the user navigates to request appointment with an agent and validates page is loaded
-Then the user fills the form out and submits the agent appointment
-| First Name | <firstName> |
-| Last Name  | <lastName>  |
-| State  	 | <state>  |
-
-
-
-Examples: 
-| scenario            | firstName 	   | lastName | state    |site|UHCUrl|
-#| E2E Scenario 3_UMS     | CHRISTINE      | LEE      | CA    | UHC|https://www.myuhcagent.com/| 
-| E2E Scenario 3_AMS     | CHRISTINE      | LEE      | CA    | AARP|https://www.myuhcagent.com/| 
-
-@agentAppointmentUAT
-Scenario Outline: <scenario> Verify request an appointment with an agent flow for zipcode
-Given the user is on medicare acquisition site landing page
-    	|Site| <site>|
-When the user navigates to request more help and information
-#When the user click on Request more Information
-When the user navigates to EBRC links
-      |UHC Agent URL|  <UHCUrl>  |
-#When the user navigates to request appointment with an agent and validates page is loaded
-Then the user fills the form out and submits the agent appointment
-| Zipcode    | <zipcode>   |
-
-
-Examples: 
-| scenario           | zipcode    | site|UHCUrl|
-#| E2E Scenario 3_UMS |  90002     |  UHC|https://www.myuhcagent.com/| 
-| E2E Scenario 3_AMS |  90002     |  AARP|https://www.myuhcagent.com/| 
