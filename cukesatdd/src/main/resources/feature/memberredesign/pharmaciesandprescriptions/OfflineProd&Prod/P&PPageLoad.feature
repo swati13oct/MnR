@@ -13,6 +13,7 @@ Feature: P&P Page is Loaded
     When now user navigates to the pharmacies and prescriptions page from dashboard or testharness page
       | PlanType    | <planType>   |
       | Member Type | <memberType> |
+    And user view MedCab load successfully on PnP page
 
     Examples: 
       | username | password | memUserName | planType | memberType |

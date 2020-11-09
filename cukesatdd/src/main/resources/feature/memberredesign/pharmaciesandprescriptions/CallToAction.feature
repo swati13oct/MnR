@@ -527,7 +527,7 @@ Feature: MVP - Call to Action
       | Member Type | <memberType> |
     When user navigates to the pharmacies and prescriptions page from testharness page
     Then user view ANOC Call To Action
-    And user view external link icon for ANOC CTA
+    #And user view external link icon for ANOC CTA
     When user clicks on ANOC Call To Action
     Then user will be redirected to the prepare for Next Year page in a new tab
 
