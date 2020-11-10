@@ -107,3 +107,28 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test ZipCode and Plan Year capture page i
      Examples: 
       |drugName|site|
       |Lipitor| UHC|
+      
+      
+    @dcePreviousButton @F477541
+    Scenario Outline: Test to Verify Previous button for Zip Code entry
+    Given the user is on the AARP medicare site landing page
+    When I access the acquisition DCE tool from home page
+    Then the user validates Get Started Page
+    When the user clicks on Add drugs button
+     And adds drugs in drug list page
+      | DrugName | <drugName> |
+    And clicks on Review drug cost button
+    Then user should be navigated to zipcode and plan year capture page for AEP
+    When user enters valid zipcode and county
+      | ZipCode | <zipcode> |
+    # And user selects plan year in AARP
+    And user verify and click on previous button on zip code enter page 
+    And clicks on Review drug cost button
+    Then user should be navigated to zipcode and plan year capture page for AEP
+    
+    Examples: 
+      | zipcode | plantype | county           | isMultutiCounty | drugName   |
+      |   10001 | MAPD      | Western District | no              | Orkambi|
+    
+    
+    

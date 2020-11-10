@@ -151,6 +151,15 @@ public class DCEStepDefinitionAARP {
 		zipCodePlanYearPage.validateZipCodePlanYearCapturePageNonAEP();
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_ZipCodePlanYearCapture, zipCodePlanYearPage);
 	}
+	
+	@When("^user verify and click on previous button on zip code enter page$")
+	public void user_clicks_on_Previous_button_ZipENtryPage_in_AARP() {
+		ZipCodePlanYearCapturePage zipCodePlanYearPage = (ZipCodePlanYearCapturePage) getLoginScenario()
+				.getBean(PageConstants.DCE_Redesign_ZipCodePlanYearCapture);
+		BuildYourDrugList DCEbuildDrugList = zipCodePlanYearPage.clickPreviousBtn();
+		// zipCodePlanYearPage.verifyLoadScreen();
+		getLoginScenario().saveBean(PageConstants.DCE_Redesign_BuildDrugList, DCEbuildDrugList);
+	}
 
 	@Then("^the user validates No Drug found error message for search$")
 	public void the_user_validates_No_Drug_found_error_message_for_search() throws Throwable {
