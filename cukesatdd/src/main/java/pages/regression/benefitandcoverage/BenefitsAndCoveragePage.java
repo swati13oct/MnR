@@ -815,6 +815,13 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 		validateWithValue("Out-Network text",OUTOFNETWORKTEXT);
 	}
 
+	public void validatePreventiveCare() {
+		validateWithValue("Preventive Care section ", PreventiveCare);
+		validateWithValue("Preventive Care Wellness Visit Male",WellnessVisitMale);
+		validateWithValue("Preventive Care Colonoscopy",Colonoscopy);
+		validateWithValue("Preventive Care Shingrix Vaccine",ShingrixVaccine);
+	}
+
 	/**
 	 * Validates the Benefits page
 	 */

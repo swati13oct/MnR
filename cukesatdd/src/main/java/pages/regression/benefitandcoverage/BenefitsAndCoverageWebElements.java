@@ -351,8 +351,14 @@ public class BenefitsAndCoverageWebElements extends UhcDriver {
 	@FindBy(xpath = "//div[@class='col-md-8 margin-small']//div[@class='benefitsSummary parbase']//h3//span")
 	protected WebElement OutofPocketMaximum;
 
+	@FindBy(xpath = "//*[@id='preventiveCareSection']/h4/span")
+	protected WebElement PreventiveCare;
+
 	@FindBy(xpath = "//span[contains(text(),'Out-of-Pocket Maximum')]")
 	protected WebElement OutofPocketMaximumText;
+
+	@FindBy(xpath = "//*[@id='preventiveCareSection']/div/div/div/div[1]/div/p/a")
+	protected WebElement WellnessVisitMale;
 
 	@FindBy(id = "oopInNetowrk")
 	protected WebElement INNETWORK;
@@ -363,8 +369,14 @@ public class BenefitsAndCoverageWebElements extends UhcDriver {
 	@FindBy(xpath = "//*[contains(text(),'IN-NETWORK')]")
 	protected WebElement INNETWORKTEXT;
 
+	@FindBy(xpath = "//*[@id='preventiveCareSection']/div/div/div/div[3]/div/p/a")
+	protected WebElement Colonoscopy;
+
 	@FindBy(xpath = "//*[contains(text(),'OUT-OF-NETWORK')]")
 	protected WebElement OUTOFNETWORKTEXT;
+
+	@FindBy(xpath = "//*[@id='preventiveCareSection']/div/div/div/div[5]/div/p/a")
+	protected WebElement ShingrixVaccine;
 
 	@FindBy(xpath = "//button[@id='dropdown-toggle--1']/span[contains(text(),'Profile')]")
 	protected WebElement accountToggleDropdown;

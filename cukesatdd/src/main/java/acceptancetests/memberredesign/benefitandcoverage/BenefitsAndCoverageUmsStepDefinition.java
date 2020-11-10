@@ -1229,6 +1229,14 @@ public class BenefitsAndCoverageUmsStepDefinition {
 		benefitsCoveragePage.validateOutofPocketMax();
 	}
 
+	@And("^the user validates the Preventive Care section$")
+	public void user_validate_PreventiveCare() {
+		System.out.println("***the user validates the Preventive Care section***");
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
+		benefitsCoveragePage.validatePreventiveCare();
+	}
+
 	
 
 	/** 
