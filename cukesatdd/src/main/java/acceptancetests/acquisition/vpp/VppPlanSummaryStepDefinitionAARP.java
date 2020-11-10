@@ -1089,4 +1089,25 @@ public class VppPlanSummaryStepDefinitionAARP {
 			getLoginScenario().saveBean(PageConstants.PROVIDER_SEARCH_PAGE, providerSearchPage);
 		}
 	}
+	
+	@Then("^user should be able to see the continue enrollment modal$")
+	public void user_should_be_able_to_see_the_continue_enrollment_modal() {
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		plansummaryPage.verifyNextBestActionModalForContinueEnrollment();
+	}
+
+	@When("^user clicks on continue enrollment button$")
+	public void user_clicks_on_continue_enrollment_button() {
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		plansummaryPage.clickNextBestActionModalContinueEnrollmentBtn();
+	}
+
+	@Then("^user should navigated to enrollment page$")
+	public void user_should_navigated_to_enrollment_page() {
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		plansummaryPage.verifyNavigationToOLEPage();
+	}
 }
