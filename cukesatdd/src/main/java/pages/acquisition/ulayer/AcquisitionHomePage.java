@@ -235,15 +235,20 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(id = "gbqfbb")
 	private WebElement feelingluckyBtn;
 
+	
+	
+		@FindBy(xpath = "//tr[@id='contentRow']//h1")
+	public WebElement footerLinkHeader;
+	
 	@FindBy(id = "medicareTitle")
 	public WebElement siteMapHeader;
 
 	@FindBy(xpath = "//*[contains(@dtmname,'Privacy')]//*[contains(text(),'Privacy Policy')]")
 	public WebElement privacyHeader;
-
+	
 	@FindBy(xpath = "//*[@class='container meded-article-header']//span[contains(text(),'Health Insurance Broker')]")
 	public WebElement brokerHeader;
-
+	
 	/* LearnAboutMedicare link */
 	@FindBy(xpath = "//*[@id='ghn_lnk_3']")
 	private WebElement lnkLearnAboutMedicare;
@@ -364,6 +369,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	@FindBy(xpath = "//input/parent::form//button[text()='Go']")
 	private WebElement thpharmacyGoButton;
+	
+	@FindBy(id="zipcodeTxt")
+	private WebElement pharmacyZipCodeTextBox;
 
 	@FindBy(id = "zipcode")
 	private WebElement zipCodeHealthPlans;
@@ -378,6 +386,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	private WebElement SubmitBtn;
 
 	@FindBy(xpath = "//h1[contains(text(),'Search Results')]")
+//	@FindBy(xpath = "//h1[contains(@class,'search-results-title')]")
 	private WebElement SearchResults;
 
 	@FindBy(xpath = "//h2[@class='search-results-count']")
@@ -407,9 +416,43 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "//a[@id='proceed-link']")
 	private WebElement proceedLink;
 	
+	@FindBy(xpath = "//*[contains(text(),'UnitedHealthcare Medicare Solutions | Provider Search')]")
+	private WebElement UnitedHealthcareMedicareSolutions;
+	
+	@FindBy(xpath = "//span[contains(text(),'Submit')]")
+	private WebElement SubmitEmail;
+	
+	@FindBy(xpath = "//span[contains(text(),'SignUp')]")
+	private WebElement SignUpEmail;
+		
+	@FindBy(xpath = "//*[contains(text(),'Please enter First Name')]")
+	private WebElement ErrorFirstName;
+	
+	@FindBy(xpath = "//*[contains(text(),'Please enter Last Name')]")
+	private WebElement ErrorLastName;
+	
+	@FindBy(xpath = "(//*[contains(text(),'Please enter a valid email address')])[3]")
+	private WebElement ErrorEmailAddress;
+	
+	@FindBy(xpath = "//input[@name='newsletter-input1']")
+	private WebElement EmailFirstName;
+	
+	@FindBy(xpath = "//input[@name='newsletter-input2']")
+	private WebElement EmailLastName;
+	
+	@FindBy(xpath = "//input[@name='newsletter-input3']")
+	private WebElement EmailAddress;
+	
+	@FindBy(xpath = "//div[@class='confirmationtext']/p[1]/b")
+	private WebElement Thankyou;
+	
+	
+	
 	@FindBy(xpath = "//body/div[@id='overlay']")
 	private WebElement overlayFilm;
-
+	
+	@FindBy(xpath = "//p[contains(text(),'UnitedHealthcare Insurance Company (UnitedHealthcare)')]")
+    private WebElement UHCICSubTiltle;
 
    	//String ChatSamText= "Chat with a Licensed Insurance Agent";
 	String ChatSamText= "Chat Now";
@@ -1111,14 +1154,13 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	public VPPPlanSummaryPage searchPlansWithOutCounty(String zipcode) throws InterruptedException {
 
+		waitForPageLoadSafari();
 		CommonUtility.waitForPageLoadNew(driver, zipCodeField, 30);
 		sendkeys(zipCodeField, zipcode);
 		viewPlansButton.click();
 		// }
 		CommonUtility.checkPageIsReadyNew(driver);
-//		while(validate(overlayFilm, 10)) {/**wait*/}
-//		CommonUtility.waitForElementToDisappear(driver, overlayFilm, 75);
-		//waitForPageLoadSafari();
+		waitForPageLoadSafari();
 			
 		CommonUtility.waitForPageLoadNew(driver, zipcodeChangeLink, 30);
 		if (driver.getCurrentUrl().contains("health-plans")) {
@@ -1208,14 +1250,15 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	public PharmacySearchPage navigateToPharmacyLocator() {
 		// checkModelPopup(driver);
-		Actions action = new Actions(driver);
+//		Actions action = new Actions(driver);
+//		action.moveToElement(navigationSectionHomeLink).moveToElement(ourPlansHoverLink).build().perform();
+//		pharmacylocator.click();
 		scrollToView(ourPlansHoverLink);
-		action.moveToElement(navigationSectionHomeLink).moveToElement(ourPlansHoverLink).build().perform();
-		pharmacylocator.click();
+		jsMouseOver(navigationSectionHomeLink);
+		jsMouseOver(ourPlansHoverLink);
+		jsClickNew(pharmacylocator);
 		CommonUtility.checkPageIsReadyNew(driver);
-		
-		//checkIfPageReadySafari();
-		
+		validate(pharmacyZipCodeTextBox);
 		if (driver.getTitle().toLowerCase()
 				.contains((PageTitleConstants.BLAYER_LOCATE_A_PHARMACY_UNITEDHEALTHCARE).toLowerCase())) {
 			return new PharmacySearchPage(driver);
@@ -1256,8 +1299,10 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	public AboutUsAARPPage aboutUsFooterClick() {
 		validateNew(footerAboutUsLink);
-		footerAboutUsLink.click();
+		scrollToView(footerAboutUsLink);
+		jsClickNew(footerAboutUsLink);
 		CommonUtility.checkPageIsReadyNew(driver);
+		validateNew(footerLinkHeader, 30);
 		if (getTitle().contains("About UnitedHealthcare")) {
 			return new AboutUsAARPPage(driver);
 		}
@@ -1287,8 +1332,10 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	public ContactUsAARPPage contactUsFooterClick() {
 		validateNew(footerContactUsLink);
-		footerContactUsLink.click();
+		scrollToView(footerContactUsLink);
+		jsClickNew(footerContactUsLink);
 		CommonUtility.checkPageIsReadyNew(driver);
+		validateNew(footerLinkHeader);
 		if (driver.getCurrentUrl().contains("contact-us")) {
 			return new ContactUsAARPPage(driver);
 		}
@@ -1297,7 +1344,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	public SiteMapAARPPage siteMapFooterClick() {
 		validateNew(footerSiteMapLink);
-		footerSiteMapLink.click();
+		scrollToView(footerSiteMapLink);
+		jsClickNew(footerSiteMapLink);
 		CommonUtility.checkPageIsReadyNew(driver);
 		validateNew(siteMapHeader);
 		if (driver.getCurrentUrl().contains("sitemap.html")) {
@@ -1308,7 +1356,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	public PrivacyPolicyAARPPage privacypolicyFooterClick() {
 		validateNew(footerPrivacyPolicyLink);
-		footerPrivacyPolicyLink.click();
+		scrollToView(footerPrivacyPolicyLink);
+		jsClickNew(footerPrivacyPolicyLink);
 		CommonUtility.checkPageIsReadyNew(driver);
 		validateNew(privacyHeader);
 		if (driver.getCurrentUrl().contains("privacy-policy.html")) {
@@ -1319,8 +1368,10 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	public TermsnConditionsAARPPage termsnconditionsFooterClick() {
 		validate(footerTermsnConditionsLink);
-		footerTermsnConditionsLink.click();
+		scrollToView(footerTermsnConditionsLink);
+		jsClickNew(footerTermsnConditionsLink);
 		CommonUtility.checkPageIsReadyNew(driver);
+		validateNew(footerLinkHeader);
 		if (driver.getCurrentUrl().contains("terms-of-use")) {
 			return new TermsnConditionsAARPPage(driver);
 		}
@@ -1329,8 +1380,10 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	public DisclaimersAARPPage disclaimersFooterClick() {
 		validate(footerDisclaimersLink);
-		footerDisclaimersLink.click();
+		scrollToView(footerDisclaimersLink);
+		jsClickNew(footerDisclaimersLink);
 		CommonUtility.checkPageIsReadyNew(driver);
+		validateNew(footerLinkHeader);
 		if (driver.getCurrentUrl().contains("disclaimer")) {
 			return new DisclaimersAARPPage(driver);
 		}
@@ -1339,7 +1392,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	public AgentsnBrokersAARPPage agentsnbrokersFooterClick() {
 		validate(footerAgentsnBrokersLink);
-		footerAgentsnBrokersLink.click();
+		scrollToView(footerAgentsnBrokersLink);
+		jsClickNew(footerAgentsnBrokersLink);
 		CommonUtility.checkPageIsReadyNew(driver);
 		validateNew(brokerHeader);
 		if (driver.getCurrentUrl().contains("health-insurance-brokers")) {
@@ -1350,8 +1404,11 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	public AcquisitionHomePage homeFooterClick() {
 		validateNew(footerHomeLink);
-		footerHomeLink.click();
+//		footerHomeLink.click();
+		scrollToView(footerHomeLink);
+		jsClickNew(footerHomeLink);
 		CommonUtility.checkPageIsReadyNew(driver);
+		waitForPageLoadSafari();
 		if (validateNew(zipCodeField)) {
 			return new AcquisitionHomePage(driver, true);
 		}
@@ -1497,8 +1554,10 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	public ProviderSearchPage clicksOnRallyToolFromGlobalHeader() {
 
-		Actions action = new Actions(driver);
-		action.moveToElement(navigationSectionHomeLink).moveToElement(ourPlansHoverLink).build().perform();
+//		Actions action = new Actions(driver);
+//		action.moveToElement(navigationSectionHomeLink).moveToElement(ourPlansHoverLink).build().perform();
+		jsMouseOver(navigationSectionHomeLink);
+		jsMouseOver(ourPlansHoverLink);
 		validateNew(providerSearchFromGlobalHeader);
 
 		switchToNewTabNew(providerSearchFromGlobalHeader);
@@ -1644,7 +1703,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		waitforElement(shoppingCartIcon);
 		shoppingCartIcon.click();
 		CommonUtility.checkPageIsReadyNew(driver);
-		if (driver.getCurrentUrl().contains("profile")) {
+		waitForPageLoadSafari();
+ 		if (driver.getCurrentUrl().contains("profile")) {
 			return new VisitorProfilePage(driver);
 		} else {
 			System.out.println("Navigation to visitor profile is failed");
@@ -2308,8 +2368,11 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		CommonUtility.waitForPageLoad(driver, EnterSearch, 60);
 		EnterSearch.sendKeys(inputvalue);
 		CommonUtility.waitForPageLoadNewForClick(driver, SubmitBtn, 60);
-		SubmitBtn.click();
+		jsClickNew(SubmitBtn);
+		waitForPageLoadSafari();
 		CommonUtility.waitForPageLoadNew(driver, SearchResults, 60);
+		checkModelPopup(driver, 20);
+		
 
 	}
 
@@ -2321,6 +2384,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		SecondarySearchInput.sendKeys(str);
 		CommonUtility.waitForPageLoadNewForClick(driver, SecondarySearchBtn, 30);
 		SecondarySearchBtn.click();
+		waitForPageLoadSafari();
 		CommonUtility.waitForPageLoadNew(driver, SearchResults, 60);
 
 	}
@@ -2414,7 +2478,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			break;
 		case "InvalidCharacter":
 			System.out.println("Validating invalid character message");
-			String invalidSearch = driver.findElement(By.xpath("//div[@class='invalid-search']")).getText();
+			String invalidSearch = driver.findElement(By.xpath("//div[@class='invalid-search']")).getText().replaceAll("\\s+", " ");
 			System.out.println("invalidSearch : >>>>> " + invalidSearch);
 			assertTrue(invalidSearch.contains("Your search - " + newSearchValue + " - did not match any documents."));
 			// assertTrue(invalidSearch.contains("No pages were found containing
@@ -2532,7 +2596,68 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		}
 		return present;
 	}
-	public VPPPlanSummaryPage searchPlansWithOutCountyShop(String zipcode) throws InterruptedException {
+	
+	public void clickUnitedHealthcareMedicareSolutions() {
+		threadsleep(8);
+		UnitedHealthcareMedicareSolutions.click();
+	}
+	
+	public void validateUrl(String url) {
+		threadsleep(6);
+		String parentWindow = driver.getWindowHandle();
+		driver.switchTo().window(driver.getWindowHandles().toArray()[1].toString());
+		System.out.println(driver.getTitle());
+		String str=driver.getTitle();
+		//Assert.assertTrue( "Title mismatch for dental directory",driver.getTitle().equals(url));
+		if(str.equals(url)) {
+			assertTrue(true);
+		}
+		
+	}
+	
+	public void enterAndvalidateEmail() {
+		
+		threadsleep(8);
+		
+		//if(SubmitEmail.isDisplayed()) {
+		int size=driver.findElements(By.xpath("//span[contains(text(),'Sign Up')]")).size();
+		System.out.println("size of sign up"+size);
+		if(size>0){
+			driver.findElement(By.xpath("//span[contains(text(),'Sign Up')]")).click();
+			threadsleep(4);
+			Assert.assertEquals(ErrorEmailAddress.getText(), "Please enter a valid email address");
+			threadsleep(4);
+			EmailFirstName.sendKeys("abc");
+			EmailLastName.sendKeys("def");
+			EmailAddress.sendKeys("a@gmail.com");
+			driver.findElement(By.xpath("//span[contains(text(),'Sign Up')]")).click();
+		}else {
+			SubmitEmail.click();
+			threadsleep(4);
+			Assert.assertEquals(ErrorFirstName.getText(), "Please enter First Name");
+			threadsleep(2);
+			Assert.assertEquals(ErrorLastName.getText(), "Please enter Last Name");
+			threadsleep(2);
+			Assert.assertEquals(ErrorEmailAddress.getText(), "Please enter a valid email address");
+			threadsleep(4);
+			EmailFirstName.sendKeys("abc");
+			EmailLastName.sendKeys("def");
+			EmailAddress.sendKeys("a@gmail.com");
+			SubmitEmail.click();
+		}
+		
+			threadsleep(4);
+			if(Thankyou.getText().equalsIgnoreCase("Thank you!")) {
+				assertTrue(true);
+			}
+			
+			
+						
+		}
+		
+	
+		public VPPPlanSummaryPage searchPlansWithOutCountyShop(String zipcode) throws InterruptedException {
+
 
 		CommonUtility.waitForPageLoadNew(driver, zipCodeShopField, 30);
 		sendkeys(zipCodeShopField, zipcode);
@@ -2565,4 +2690,11 @@ public class AcquisitionHomePage extends GlobalWebElements {
      	    	
      		return new PlanDocsPage(driver);
 	 }
+	
+	public void validateSubtitle() {
+		threadsleep(5);
+		System.out.println("validating the sub header");
+     Assert.assertEquals(UHCICSubTiltle.getText(), "UnitedHealthcare Insurance Company (UnitedHealthcare)");
+}
+
 }

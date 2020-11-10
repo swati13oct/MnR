@@ -382,8 +382,13 @@ Feature: Plan Recommendation Engine flow - Verify PRE flows functionalities with
       |   10002 | NO            | New York | MA            | None         | None     | UHGNetwork      |             |               | No,No,No,No                   | Lower                | MA                |                   |
       |   25813 | NO            | Raleigh  | MA            | Medicaid     | regular  | AcceptsMedicare |             |               | No,No,No,No                   | Higher               | MS                |                   |
       |   00501 | NO            | Suffolk  | MA            | chronic      | withinUS | AcceptsMedicare |             |               | Yes,No,No,No                  | Lower                | MA                | MS                |
+<<<<<<< HEAD
       |   00610 | NO            | Anasco   | MA            | None         | None     | UHGNetwork      |             |               | No,No,No,No                   | Lower                | MA                |                   |
       |   00610 | NO            | Anasco   | MA            | None         | withinUS | AcceptsMedicare |             |               | Yes,No,No,No                  | Lower                |                   |                   |
+=======
+      |   00610 | NO            | Anasco   | MA            | None         | withinUS | AcceptsMedicare |             |               | Yes,No,No,No                  | Lower                | MS                |                   |
+      |   00610 | NO            | Anasco   | MA            | None         | None     | UHGNetwork      |             |               | No,No,No,No                   | Lower                |                   |                   |
+>>>>>>> branch 'develop' of https://github.optum.com/Consumer-Portals/MRATDD
 
   @PRE @planrecommendation @MAPDFlowTie @PRERegression5
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds> , <travel> , <doctors> , <DoctorsName> , <isMultiDoctor> ,<Drug Selection> , <Dental-Hearing-Vision-Fitness> , <costPreferenceOption> - To validate MAPD flow functions with zero drug in PRE

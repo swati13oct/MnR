@@ -40,7 +40,11 @@ Feature: 1.06.1.2 Member Plans and Documents - section: Plan Materials - Member 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | pm_sd | pm_op | pm_mi | pm_en | pm_es | pm_zh |
 #      | 01-020 | xxxxx       | kkumard  | mnrs786@  | Ranch1955    | MA       | AARP_IND_PREEFF_PDnR  | false | false | false | false | false | false |
 #      | 02-021 | xxxxx       | kkumard  | mnrs786@  | testusername    | MA       | GROUP_PREEFF_PDnR     | false | false | false | false | false | false |
+<<<<<<< HEAD
       | 03-022 | xxxxx       | kkumard  | mnrs786@  | Abayne01          | MAPD     | AARP_IND_PREEFF_PDnR  | false | false | false | false | false | false |
+=======
+      | 03-022 | xxxxx       | kkumard  | mnrs786@  | UHCjanicejohn          | MAPD     | AARP_IND_PREEFF_PDnR  | false | false | false | false | false | false |
+>>>>>>> branch 'develop' of https://github.optum.com/Consumer-Portals/MRATDD
 
 #	@prod_preeffective_pdp
 #	Examples: 
@@ -58,7 +62,7 @@ Feature: 1.06.1.2 Member Plans and Documents - section: Plan Materials - Member 
 	@prod_active_ma @prod_active_ma_ind
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | pm_sd | pm_op | pm_mi | pm_en | pm_es | pm_zh |
-      | 09-028 | 15129       | kkumard  | mnrs786@  | ERNIE2450 | MA       | AARP_IND_EFF_PDnR     | true  | true  | true  | true  | true  | false | 
+      | 09-028 | 15129       | kkumard   | mnrs786@  | haradaty32 | MA       | AARP_IND_EFF_PDnR     | true  | true  | true  | true  | true  | false | 
 
 	@prod_active_ma @prod_active_ma_grp
 	Examples: 

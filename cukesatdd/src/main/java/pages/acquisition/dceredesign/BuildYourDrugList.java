@@ -49,8 +49,8 @@ public class BuildYourDrugList extends UhcDriver {
 	@FindBy(xpath = "//uhc-menu-item")
 	public List <WebElement> AutoCompleteitems;
 
-//	@FindBy(xpath = "//*[@id='drugPopHeading']")
-	@FindBy(id="modal-label")
+	@FindBy(xpath = "//*[@id='drugPopHeading' or @id='modal-label']")
+//	@FindBy(id="modal-label")
 	public WebElement TellUsABoutHeader;
 	
 	@FindBy(xpath = "//img[contains(@class,'uhc-modal__close')]")
@@ -71,6 +71,9 @@ public class BuildYourDrugList extends UhcDriver {
 	
 	@FindBy(xpath = "(//button[contains(@class,'uhc-button')]//*[contains(text(),'Return to Compare')])[2]")
 	public WebElement returnToCompareBtn;
+	
+	@FindBy(xpath = "//h2[contains(text(),'Your estimated')]")
+	public WebElement reviewDrugCostPageHeading;
 
 
 	public BuildYourDrugList(WebDriver driver) {
@@ -182,6 +185,7 @@ public class BuildYourDrugList extends UhcDriver {
 		WebElement SelectDrug = driver.findElement(By.xpath("//uhc-list-item//button[contains(@aria-label, 'Select "+drugName+"')]"));
 		validateNew(SelectDrug);
 		jsClickNew(SelectDrug);
+		CommonUtility.checkPageIsReadyNew(driver);
 		CommonUtility.waitForPageLoadNew(driver, TellUsABoutHeader, 20);
 		if(validateNew(TellUsABoutHeader) && validateNew(TellUsABoutCloseBtn))
 		{
@@ -256,15 +260,25 @@ public class BuildYourDrugList extends UhcDriver {
 				Assert.assertTrue("Validated Drug List for Drug : "+currentDrug, true);
 			}
 			else
-				Assert.fail("Drug List Validation FAILED for Drug : "+currentDrug);
+				Assert.fail("Drug List Validation FAILED for Drug : " + currentDrug);
 		}
 	}
-	
+
 	public ComparePlansPage returnToPlanComparePage() {
-		
+
 		validateNew(returnToCompareBtn);
 		returnToCompareBtn.click();
 		return new ComparePlansPage(driver);
+	}
+
+	public DrugSummaryPage verifyReviewDrugCostPage() {
+		CommonUtility.waitForPageLoad(driver, reviewDrugCostPageHeading, 30);
+		if (validateNew(reviewDrugCostPageHeading)) {
+			return new DrugSummaryPage(driver);
+		} else {
+			Assert.fail("Review drug cost page not displayed");
+			return null;
+		}
 	}
 
 }

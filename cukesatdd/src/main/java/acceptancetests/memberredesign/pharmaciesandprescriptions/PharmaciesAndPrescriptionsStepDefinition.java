@@ -9,7 +9,11 @@ import java.util.List;
 import java.util.Map;
 
 import org.junit.Assert;
+import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
+
+
+import acceptancetests.data.CommonConstants;
 
 import acceptancetests.data.PageConstants;
 import acceptancetests.data.PageConstantsMnR;
@@ -64,9 +68,13 @@ public class PharmaciesAndPrescriptionsStepDefinition {
 			AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
 					.getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
 			//note: rally data not yet sync up so dashboard will not have pnp link, just go through secondary page
-			pnpPg = accountHomePage.navigateToPharmaciesAndPrescriptions();
-			if (pnpPg==null) //note: try secondary page before giving up
+			if (memberType.contains("PREEFF")) { //note: temp workaround till dashboard link is ready
 				pnpPg = accountHomePage.navigateToPharmaciesAndPrescriptionsFromSecondaryPg();
+			} else {
+				pnpPg = accountHomePage.navigateToPharmaciesAndPrescriptions();
+				if (pnpPg==null) //note: try secondary page before giving up
+					pnpPg = accountHomePage.navigateToPharmaciesAndPrescriptionsFromSecondaryPg();
+			}
 		}
 		Assert.assertTrue("PROBLEM - unable to navigate to Pharmacies & Prescriptions page", 
 				pnpPg != null);
@@ -358,4 +366,34 @@ public class PharmaciesAndPrescriptionsStepDefinition {
 		pnpPg.validateHeader_preff();
 	}
 	
+
+	@Then("^check if user is a preeffective user")
+	public void checkPreEffFlag() {
+		WebDriver wd=(WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		if ("YES".equalsIgnoreCase(MRScenario.isTestHarness)) {
+			TestHarness testHarness = (TestHarness) getLoginScenario()
+					.getBean(PageConstantsMnR.TEST_HARNESS_PAGE);
+			wd=testHarness.driver;
+		} else {
+			AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
+					.getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
+			accountHomePage.navigateDirectToBnCPag(); //note: can't rely on dasboard info, go to benefits to get consumerDetail
+			wd=accountHomePage.driver;
+		}
+
+		PharmaciesAndPrescriptionsPage pnpPg=new PharmaciesAndPrescriptionsPage(wd);
+		boolean preEffFlag=pnpPg.getPreEffInConsumerDetails(pnpPg.getConsumerDetailsFromlocalStorage());
+
+		Date currentDate=pnpPg.getCurrentSystemDate();
+		String currentDateStr=pnpPg.convertDateToStrFormat_MMDDYYYY(currentDate);
+
+		Assert.assertTrue("PROBLEM - test user not suitable for pre-eff testing. user preeffective field value is '"+preEffFlag+"' in consumerDetail, current system date='"+currentDateStr+"'", preEffFlag);
+
+		if (!"YES".equalsIgnoreCase(MRScenario.isTestHarness)) { //note: go back to dashboard to get read for rest of steps
+			wd.navigate().back();
+		}
+		System.out.println("TEST - user is pre-effective, suitable for this testing, moving on...");
+	}
+	
+
 }

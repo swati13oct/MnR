@@ -74,24 +74,44 @@ Feature: 1.04.1 To Test NON-DREAM EOB for Members - E2E
       | Flag Zero EOB User | <flagZeroEob> |
 
     # note: to correctly validate for SHIP, planType must be in this format: SHIP_<planCategory>
-    @SHIP_EOBs @SHIP_EOBs1 @devRegression
+    @SHIP_EOBs @devRegression @SHIP_EOBs1_multiShip
     Examples: 
       | index | planType                 | memberType          | eobType | realEob | flagZeroEob |
       | 11    | SHIP_MEDICARE SUPPLEMENT | COMBO_MULTI_SHIP_EOB| Medical | false   | true        | 
+<<<<<<< HEAD
       | 18    | SHIP_MEDICARE SUPPLEMENT | SHIP_EOB            | Medical | true    | true        | 
+=======
+>>>>>>> branch 'develop' of https://github.optum.com/Consumer-Portals/MRATDD
 
-    @SHIP_EOBs @SHIP_EOBs2
+    @SHIP_EOBs @devRegression @SHIP_EOBs2_singleShip
     Examples: 
       | index | planType                 | memberType          | eobType | realEob | flagZeroEob |
+<<<<<<< HEAD
       | 12    | SHIP_MEDICARE SUPPLEMENT | PDP_SHIP_COMBO_EOB  | Medical | false   |  false      |
+=======
+      | 18    | SHIP_MEDICARE SUPPLEMENT | SHIP_EOB            | Medical | true    | true        | 
+>>>>>>> branch 'develop' of https://github.optum.com/Consumer-Portals/MRATDD
 
-    @SHIP_EOBs @SHIP_EOBs3
+    @SHIP_EOBs @SHIP_EOBs3_shipComboFedShip
     Examples: 
+<<<<<<< HEAD
+      | index | planType                 | memberType                | eobType | realEob | flagZeroEob |
+      | 13    | SHIP_MEDICARE SUPPLEMENT | COMBO_SHIP_MAPD_NICE_DEOB | Medical | false   |  true       | 
+=======
+      | index | planType                 | memberType          | eobType | realEob | flagZeroEob |
+      | 12    | SHIP_MEDICARE SUPPLEMENT | PDP_SHIP_COMBO_EOB  | Medical | false   |  false      |
+>>>>>>> branch 'develop' of https://github.optum.com/Consumer-Portals/MRATDD
+
+    @SHIP_EOBs @SHIP_EOBs4_shipComboShipMapd
+    Examples: 
+<<<<<<< HEAD
+=======
       | index | planType                 | memberType                | eobType | realEob | flagZeroEob |
       | 13    | SHIP_MEDICARE SUPPLEMENT | COMBO_SHIP_MAPD_NICE_DEOB | Medical | false   |  true       | 
 
-    @SHIP_EOBs @SHIP_EOBs4
+    @SHIP_EOBs @SHIP_EOBs5_shipComboShipPdp
     Examples: 
+>>>>>>> branch 'develop' of https://github.optum.com/Consumer-Portals/MRATDD
       | index | planType                 | memberType              | eobType | realEob | flagZeroEob |
       | 14    | SHIP_MEDICARE SUPPLEMENT | COMBO_SHIP_PDP_RX_DEOB  | Medical | false   |  true       |  
 

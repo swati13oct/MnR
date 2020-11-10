@@ -26,8 +26,17 @@ Feature: 1.09.1 Member Health and Wellness Page - Member Auth - PROD
       | Has RenewActive | <hasRenewActive>   |
       
     @prod_healthAndWellness01_ma_mapd @prod_sanity
+<<<<<<< HEAD
+=======
     Examples: 
       | TID   | username  | password  | MemUserName     | planType | memberType        | hasReward | hasRenewActive |
+      | 15340 | kkumard   | mnrs786@  | BILL.ROSNER123# | MAPD     | RewardsMember     | true      | true           |
+
+    @prod_healthAndWellness01_ma_mapd
+>>>>>>> branch 'develop' of https://github.optum.com/Consumer-Portals/MRATDD
+    Examples: 
+      | TID   | username  | password  | MemUserName     | planType | memberType        | hasReward | hasRenewActive |
+<<<<<<< HEAD
       | 15340 | kkumard  | mnrs786@  | BILL.ROSNER123# | MAPD     | RewardsMember     | true      | true           |
 
     @prod_healthAndWellness01_ma_mapd
@@ -35,22 +44,35 @@ Feature: 1.09.1 Member Health and Wellness Page - Member Auth - PROD
       | TID   | username  | password  | MemUserName     | planType | memberType        | hasReward | hasRenewActive |
       | 15341 | kkumard  | mnrs786@  | haradaty32      | MA       | AARP_RewardsMember| true      | true           |
       | 15341 | kkumard  | mnrs786@  | BNCSAUVE2       | MA       | UHC_RewardsMember | true      | true           |
+=======
+      | 15341 | kkumard   | mnrs786@  | haradaty32      | MA       | AARP_RewardsMember| true      | true           |
+      | 15341 | kkumard   | mnrs786@  | ExDesertrat     | MA       | UHC_RewardsMember | true      | false          |
+>>>>>>> branch 'develop' of https://github.optum.com/Consumer-Portals/MRATDD
 
     @prod_healthAndWellness01_pdp_ship
     Examples: 
       | TID   | username  | password  | MemUserName     | planType | memberType        | hasReward | hasRenewActive |
+<<<<<<< HEAD
       | 15342 | kkumard  | mnrs786@  | nawal1215       | PDP      | RewardsMember     | false     | false          |
 
     @prod_healthAndWellness01_pdp_ship @prod_sanity
     Examples: 
       | TID   | username  | password  | MemUserName     | planType | memberType        | hasReward | hasRenewActive |
       | xxxxx | kkumard  | mnrs786@  | vernajohnson19651 | SHIP   | RewardsMember     | false     | false           |
+=======
+      | 15342 | kkumard   | mnrs786@  | nawal1215       | PDP      | RewardsMember     | false     | false          |
+
+    @prod_healthAndWellness01_pdp_ship @prod_sanity
+    Examples: 
+      | TID   | username  | password  | MemUserName     | planType | memberType        | hasReward | hasRenewActive |
+      | xxxxx | kkumard   | mnrs786@  | vernajohnson19651 | SHIP   | RewardsMember     | false     | false          |
+>>>>>>> branch 'develop' of https://github.optum.com/Consumer-Portals/MRATDD
 
     @prod_healthAndWellness01_fedShipCombo_shipFedCombo
     Examples: 
       | TID   | username  | password  | MemUserName     | planType | memberType        | hasReward | hasRenewActive |
-      | 15343 | kkumard  | mnrs786@  | rldf1942        | FED_SHIP_COMBO | RewardsMember | false   | true           |
+      | 15343 | kkumard   | mnrs786@  | rldf1942        | FED_SHIP_COMBO | RewardsMember | false   | true           |
 	#note: can't find a prod combo user w/ SHIP priority yet
-    # | 15343 | kkumard  | mnrs786@  | testuserTBD     | SHIP_FED_COMBO | RewardsMember | false   | true           |
+    # | 15343 | kkumard   | mnrs786@  | testuserTBD     | SHIP_FED_COMBO | RewardsMember | false   | true           |
  
  

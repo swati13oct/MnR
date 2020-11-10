@@ -33,7 +33,7 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
 /**
- * Functionality:DCE Acquisition
+ *Functionality:DCE Acquisition
  */
 public class DCEVPPAcqStepDefinitionAARP {
 
@@ -43,18 +43,18 @@ public class DCEVPPAcqStepDefinitionAARP {
 	public MRScenario getLoginScenario() {
 		return loginScenario;
 	}
-
+	
 	WebDriver wd;
 
-	/* DCE cost Estimator */
+	/* DCE cost Estimator*/
 	String cost;
-
-	/* Prescription Drug tab */
+	
+	/* Prescription Drug tab*/
 	String estimatedTotalAnnualCost;
-
-	/* Plan Cost tab */
+	
+	/*Plan Cost tab*/
 	String planCostTabEstimatedTotalAnnualCost;
-
+	
 	/**
 	 * @toDo:user is on AARP medicare acquisition site landing page
 	 */

@@ -63,6 +63,7 @@ Feature: 1.24.2 Member Individual Health Record - PROD
     @prod_ihr_ma_mapd
     Examples: 
 	    | index | FID     | username  | password  | MemUserName             | planType | memberType         | expectLink | 
+<<<<<<< HEAD
 	    | 08    | F424804 | kkumard   | mnrs786@  | ERNIE2450               | MA       | IHR                | true       |
 	    | 09    | F424804 | kkumard   | mnrs786@  | SHERMANJAFFE65          | MAPD     | NONBOA_GROUP_IHR   | true       |
 
@@ -78,6 +79,23 @@ Feature: 1.24.2 Member Individual Health Record - PROD
 	    | index | FID     | username  | password  | MemUserName             | planType | memberType         | expectLink | 
 	 #  | 11    | F424804 | kkumard   | mnrs786@  | Ranch1955               | MA       | PREEFF_IHR         | true       |
 	    | 11    | F424804 | kkumard   | mnrs786@  | Abayne01                | MAPD     | PREEFF_IHR         | true       |
+=======
+	    | 08    | F424804 | kkumard   | mnrs786@  | haradaty32              | MA       | IHR                | true       |
+	    | 09    | F424804 | kkumard   | mnrs786@  | Grandmagrey123          | MAPD     | NONBOA_GROUP_IHR   | true       |
+
+    @prod_ihr_pdp
+    Examples: 
+	    | index | FID     | username  | password  | MemUserName             | planType | memberType         | expectLink | 
+	    | 10    | F424804 | kkumard   | mnrs786@  | nawal1215               | PDP      | IHR                | true       |
+
+	#note: MA user was having new Benefits UI and not behaving the same as prior PREEFF user
+	#note: term user will have IHR link suppressed
+    @prod_ihr_preeff_term
+    Examples: 
+	    | index | FID     | username  | password  | MemUserName             | planType | memberType         | expectLink | 
+	 #  | 11    | F424804 | kkumard   | mnrs786@  | Ranch1955               | MA       | PREEFF_IHR         | true       |
+	    | 11    | F424804 | kkumard   | mnrs786@  | Teripappas                | MAPD     | PREEFF_IHR         | true       |
+>>>>>>> branch 'develop' of https://github.optum.com/Consumer-Portals/MRATDD
 	    | 12    | F424804 | kkumard   | mnrs786@  | BEVERLY_BOB5            | MAPD     | TERM_IHR           | false      |
 
     @prod_ihr_pdpSspCombo

@@ -17,7 +17,7 @@ import cucumber.api.java.en.Then;
 import gherkin.formatter.model.DataTableRow;
 import pages.acquisition.commonpages.AcquisitionHomePage;
 /**
- *Functionality:Global Header Footer 
+ *Functionality:Global Header Foote
  */
 public class SAMIconsStepDefinitionAARP {
 

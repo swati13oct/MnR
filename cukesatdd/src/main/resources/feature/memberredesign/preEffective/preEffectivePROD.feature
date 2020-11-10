@@ -32,9 +32,10 @@ Feature: 1.15 Member pre-effective functionality
       | Technical TFN | <technicalTFN> |
 
     Examples: 
-      | planType | memberType          | copayCategory | technicalTFN   | segmentId | username | password | member               | planstartdate |
-      | IndMA    | preeffectiveIndMA   | NON LIS       | 1-888-980-8125 |       000 | jkuma14  | Brock@03 | Ranch1955            | 10/01/2020    |
-      | IndMAPD  | preeffectiveIndMAPD | NON LIS       | 1-888-980-8125 |       000 | jkuma14  | Brock@03 | Judy@JudyWalling.com | 10/01/2020    |
+      | planType | memberType          | copayCategory | technicalTFN   | segmentId | username | password | member                  | planstartdate |
+      # | IndMA    | preeffectiveIndMA   | NON LIS       | 1-888-980-8125 |       000 | jkuma14  | Brock@04 | Ranch1955            | 10/01/2020    |
+      | IndMAPD  | preeffectiveIndMAPD | NON LIS       | 1-888-980-8125 |       000 | jkuma14  | Brock@04 | Mino77003               | 01/01/2021    |
+      | IndPDP   | preeffectiveIndMA   | NON LIS       | 1-888-980-8125 |       000 | jkuma14  | Brock@04 | Cindyrose1218@Gmail.Com | 12/01/2020    |
 
   @regressionMemberPROD2
   Scenario Outline: -planType: <planType> - Member Type: - <memberType> - Verify that correct links and messages are displayed on Dashboard and Secondary Page.
@@ -69,8 +70,13 @@ Feature: 1.15 Member pre-effective functionality
 
     Examples: 
       | planType | memberType          | copayCategory | technicalTFN   | segmentId | username | password | member     | planstartdate |
+<<<<<<< HEAD
       | IndPDP   | preeffectiveIndPDP  | NON LIS       | 1-888-980-8125 |       000 | jkuma14  | Brock@03 | wahdey     | 11/01/2020    |
       | GroupMA  | preeffectiveGroupMA | NON LIS       | 1-888-980-8125 |       000 | jkuma14  | Brock@03 | marklflynn | 11/01/2020    |
+=======
+      | IndPDP   | preeffectiveIndPDP  | NON LIS       | 1-888-980-8125 |       000 | jkuma14  | Brock@04 | glandheim  | 01/01/2021    |
+      | GroupMA  | preeffectiveGroupMA | NON LIS       | 1-888-980-8125 |       000 | jkuma14  | Brock@04 | Muellerja  | 01/01/2021    |
+>>>>>>> branch 'develop' of https://github.optum.com/Consumer-Portals/MRATDD
 
   @regressionMemberPROD3
   Scenario Outline: -planType: <planType> - Member Type: - <memberType> - Verify that correct links and messages are displayed on Dashboard and Secondary Page.
@@ -105,8 +111,13 @@ Feature: 1.15 Member pre-effective functionality
 
     Examples: 
       | planType  | memberType            | copayCategory | technicalTFN   | segmentId | username | password | member       | planstartdate |
+<<<<<<< HEAD
       | GroupMAPD | preeffectiveGroupMAPD | NON LIS       | 1-888-980-8125 |       000 | jkuma14  | Brock@03 | CatnJack     | 12/01/2020    |
       | SHIP      | preeffectiveSHIPOnly  | NON LIS       | 1-866-254-3132 |       000 | jkuma14  | Brock@03 | ludstevens91 | 11/01/2020    |
+=======
+      | GroupMAPD | preeffectiveGroupMAPD | NON LIS       | 1-888-980-8125 |       000 | jkuma14  | Brock@04 | CatnJack     | 12/01/2020    |
+      | SHIP      | preeffectiveSHIPOnly  | NON LIS       | 1-866-254-3132 |       000 | jkuma14  | Brock@04 | JoEsCo       | 01/01/2021    |
+>>>>>>> branch 'develop' of https://github.optum.com/Consumer-Portals/MRATDD
 
   @regressionMemberPROD4 @sanityMemberPROD1
   Scenario Outline: -planType: <planType> - Member Type: - <memberType> - Verify that correct links and messages are displayed on Dashboard and Secondary Page.
@@ -138,18 +149,26 @@ Feature: 1.15 Member pre-effective functionality
       | Member Type | <memberType> |
     And user clicks on the Premium Payment tab from Forms and Resources Page
       | Member Type | <memberType> |
-    And verify that correct phone number is displayed in technical support section of Payments page
-      | Member Type   | <memberType>   |
-      | Technical TFN | <technicalTFN> |
-    And user clicks on SHIP Plan Tab on Payments page
-    And verify that correct SHIP phone number is displayed in technical support section of payments page
-      | Technical TFN SHIP | <technicalTFNSHIP> |
 
+    # And verify that correct phone number is displayed in technical support section of Payments page
+    #    | Member Type   | <memberType>   |
+    #   | Technical TFN | <technicalTFN> |
+    #   And user clicks on SHIP Plan Tab on Payments page
+    #   And verify that correct SHIP phone number is displayed in technical support section of payments page
+    #    | Technical TFN SHIP | <technicalTFNSHIP> |
     Examples: 
       | planType | memberType               | copayCategory | technicalTFN   | segmentId | username | password | member         | planstartdate | technicalTFNSHIP |
+<<<<<<< HEAD
       | IndPDP   | preeffectivePDPSHIPCOMBO | NON LIS       | 1-888-980-8125 |       000 | jkuma14  | Brock@03 | daleandnancy20 | 12/01/2020    | 1-866-254-3132   |
+=======
+      | IndPDP   | preeffectivePDPSHIPCOMBO | NON LIS       | 1-888-980-8125 |       000 | jkuma14  | Brock@04 | daleandnancy20 | 12/01/2020    | 1-866-254-3132   |
+>>>>>>> branch 'develop' of https://github.optum.com/Consumer-Portals/MRATDD
 
+<<<<<<< HEAD
   @regressionMemberPROD4 @sanityMemberPROD2
+=======
+  #Commenting tag due to unavailability of prod data - Jitesh 11/05/2020 @regressionMemberPROD4 @sanityMemberPROD2
+>>>>>>> branch 'develop' of https://github.optum.com/Consumer-Portals/MRATDD
   Scenario Outline: -planType: <planType> - Member Type - <memberType> - Verify that correct links and messages are displayed on Dashboard and Secondary Page.
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
@@ -182,5 +201,5 @@ Feature: 1.15 Member pre-effective functionality
       | Technical TFN | <technicalTFN> |
 
     Examples: 
-      | planType     | memberType                    | copayCategory | technicalTFN   | segmentId | username | password | member      | planstartdate |
-      | GroupPDPSSUP | preeffectiveGROUPPDPSSUPCOMBO | NON LIS       | 1-888-980-8125 |       000 | jkuma14  | Brock@03 | pmorris1148 | 09/01/2020    |
+      | planType     | memberType                    | copayCategory | technicalTFN   | segmentId | username | password | member    | planstartdate |
+      | GroupPDPSSUP | preeffectiveGROUPPDPSSUPCOMBO | NON LIS       | 1-888-980-8125 |       000 | jkuma14  | Brock@04 | Be7779311 | 11/01/2020    |

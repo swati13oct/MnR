@@ -21,10 +21,13 @@ Feature: 1.12.1 Member Rally claims
     @rallyClaims01_ma @devRegression
     Examples: 
       | TID   | planType | memberType          | claimSystem     |
-      | 15234 | MA       | UHC_Individual      | COSMOS_CLAIMS   |
       | xxxxx | MA       | UHC_GROUP           | COSMOS_CLAIMS   |
 
+<<<<<<< HEAD
 	@Stage_Sanity_rallyClaimsMA
+=======
+	@rallyClaims01_ma   @devRegression         @Stage_Sanity_rallyClaimsMA
+>>>>>>> branch 'develop' of https://github.optum.com/Consumer-Portals/MRATDD
     Examples: 
       | TID   | planType | memberType          | claimSystem     |
       | 15234 | MA       | UHC_Individual      | COSMOS_CLAIMS   |
@@ -52,10 +55,13 @@ Feature: 1.12.1 Member Rally claims
     @rallyClaims01_pdp
     Examples: 
       | TID   | planType | memberType          | claimSystem     | 
-      | 15299 | PDP      | Individual          | RX_CLAIMS       | 
       | 15300 | PDP      | GROUP               | RX_CLAIMS       | 
       
+<<<<<<< HEAD
      @Stage_Sanity_rallyClaims_PdpIndividual
+=======
+     @rallyClaims01_pdp        @Stage_Sanity_rallyClaims_PdpIndividual
+>>>>>>> branch 'develop' of https://github.optum.com/Consumer-Portals/MRATDD
     Examples: 
       | TID   | planType | memberType          | claimSystem     | 
       | 15299 | PDP      | Individual          | RX_CLAIMS       | 

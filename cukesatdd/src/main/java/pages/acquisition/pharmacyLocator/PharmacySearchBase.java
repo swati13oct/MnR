@@ -1,7 +1,6 @@
 package pages.acquisition.pharmacyLocator;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
@@ -143,9 +142,11 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 
 	public void selectsPlanName(String planName, String testSiteUrl) {
 		waitTllOptionsAvailableInDropdown(seletPlandropdown, 45);
-		seletPlandropdown.click();
+
+//		seletPlandropdown.click();
+		jsClickNew(seletPlandropdown);
 		sleepBySec(1);
-		//checkIfPageReadySafari();
+
 		selectFromDropDownByText(driver, seletPlandropdown, planName);
 		sleepBySec(2);
 		if (!loadingBlock.isEmpty())
@@ -153,7 +154,8 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 		if (!loadingBlock.isEmpty())	//note: if still not done, give it another 30 second
 			waitforElementDisapper(By.className("loading-block"), 30);
 		sleepBySec(1); //note: let the page settle down
-		searchbtn.click();
+//		searchbtn.click();
+		jsClickNew(searchbtn);
 		sleepBySec(50);
 		Assert.assertTrue("PROBLEM - Pharmacies not displayed", pharmacyValidate(pharmacyCount));
 		if (!pharmacyValidate(pharmacyCount)) {
@@ -249,8 +251,9 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 	
 	public void searchesPharmacy(String language, String planName, String testPlanYear, String testSiteUrl, String testPdfLinkTextDate) throws InterruptedException {
 		int total=0;
+		
 		CommonUtility.checkPageIsReadyNew(driver);
-		CommonUtility.waitForElementToDisappear(driver, loadingImage, 90);
+		waitforElementDisapper(loadingSpinner, 90);
 		int PharmacyCount = 0;
 		if (!pharmacyValidate(noResultMsg)) {
 			PharmacyCount = PharmacyResultList.size();
@@ -271,7 +274,7 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 				Assert.assertTrue("PROBLEM - unable to locate the 'CONTACT UNITEDHELATHCARE' link "
 						+ "in 'pharmacies with India/Tribal/Urbal...' section", 
 						pharmacyValidate(contactUsLink));
-				contactUsLink.click();
+				jsClickNew(contactUsLink);
 				Thread.sleep(2000); //note: keep this for the page to load
 				CommonUtility.checkPageIsReadyNew(driver);
 				String currentURL=driver.getCurrentUrl();
@@ -280,8 +283,9 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 						+ "Expect to contain '"+expectedURL+"' | Actual URL='"+currentURL+"'",
 						currentURL.contains(expectedURL));
 				driver.navigate().back();
+				driver.navigate().refresh();	//Added since select plan dropdown element was not located after navigating back from contact us page
 				CommonUtility.checkPageIsReadyNew(driver);
-				CommonUtility.waitForElementToDisappear(driver, loadingImage, 90);
+				waitforElementDisapper(loadingSpinner, 90);
 				currentURL=driver.getCurrentUrl();
 				//System.out.println(currentURL);
 				expectedURL="Pharmacy-Search";
@@ -301,7 +305,9 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 				pdfElement=pdf_WalgreenPlans;
 				validateLtcPdfDoc(pdfType, testPlanYear, pdfElement, testPdfLinkTextDate);
 				scrollToView(contactUsLink);
-				moveMouseToElement(contactUsLink);
+
+				jsMouseOver(contactUsLink);
+
 				Assert.assertTrue("PROBLEM - unable to locate the pagination element", 
 						pharmacyValidate(pagination));
 				Assert.assertTrue("PROBLEM - unable to locate the left arrow element", 
@@ -309,9 +315,9 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 				Assert.assertTrue("PROBLEM - unable to locate the right arrow element", 
 						pharmacyValidate(rightArrow));
 				try {
-					rightArrow.click();
+					jsClickNew(rightArrow);
 					CommonUtility.checkPageIsReady(driver);
-					leftArrow.click();
+					jsClickNew(leftArrow);
 					CommonUtility.checkPageIsReady(driver);
 				} catch (Exception e) {
 					Assert.assertTrue("PROBLEM - something wrong with the arrow", false);
@@ -423,8 +429,9 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 		else if (planType.equalsIgnoreCase("SNP"))
 			testElementList=listOfSnpPlans;
 		Assert.assertTrue("PROBLEM - unable to locate plan for planType='"+planType+"'", testElementList.size()>0);
-		testElementList.get(0).click();
+		jsClickNew(testElementList.get(0));
 		CommonUtility.checkPageIsReady(driver);
+		waitForPageLoadSafari();
 	}
 
 	/**
@@ -438,7 +445,10 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 	public void clickDirectoryLnk(String isMultiCounty, String countyName) {
 		CommonUtility.waitForPageLoad(driver, vpp_onlinePharmacyDirectoryLnk, 5);
 		scrollToView(vpp_onlinePharmacyDirectoryLnk);
-		moveMouseToElement(vppDetailSectionHeader);
+
+//		moveMouseToElement(vppDetailSectionHeader);
+		jsMouseOver(vppDetailSectionHeader);
+
 		Assert.assertTrue("PROBLEM - unable to locate the Online Pharmacy Directory link on VPP page",
 				pharmacyValidate(vpp_onlinePharmacyDirectoryLnk));
 		switchToNewTabNew(vpp_onlinePharmacyDirectoryLnk);

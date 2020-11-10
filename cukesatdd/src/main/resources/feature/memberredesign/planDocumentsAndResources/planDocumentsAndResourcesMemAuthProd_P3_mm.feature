@@ -38,7 +38,11 @@ Feature: 1.06.3.2 Member Plans and Documents - section: Membership Materials - M
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | mm_sd | mm_en | mm_es | mm_zh |
 #      | 01-039 | xxxxx       | kkumard  | mnrs786@  | Ranch1955    | MA       | AARP_IND_PREEFF_PDnR  | true  | true  | true  | false |
 #      | 02-040 | xxxxx       | kkumard  | mnrs786@  | testusername    | MA       | GROUP_PREEFF_PDnR     | true  | false | false | false |
+<<<<<<< HEAD
       | 03-041 | xxxxx       | kkumard  | mnrs786@  | Abayne01          | MAPD     | AARP_IND_PREEFF_PDnR  | true  | true  | true  | false |
+=======
+      | 03-041 | xxxxx       | kkumard  | mnrs786@  | UHCjanicejohn          | MAPD     | AARP_IND_PREEFF_PDnR  | true  | true  | true  | false |
+>>>>>>> branch 'develop' of https://github.optum.com/Consumer-Portals/MRATDD
 
 #	@prod_preeffective_pdp
 #	Examples: 
@@ -56,7 +60,7 @@ Feature: 1.06.3.2 Member Plans and Documents - section: Membership Materials - M
 	@prod_active_ma @prod_active_ma_ind
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | mm_sd | mm_en | mm_es | mm_zh |
-      | 09-047 | 15129       | kkumard  | mnrs786@  | ERNIE2450    | MA       | AARP_IND_EFF_PDnR     | true  | true  | true  | false |
+      | 09-047 | 15129       | kkumard   | mnrs786@  | haradaty32    | MA       | AARP_IND_EFF_PDnR     | true  | true  | true  | false |
 
 	@prod_active_ma @prod_active_ma_grp
 	Examples: 

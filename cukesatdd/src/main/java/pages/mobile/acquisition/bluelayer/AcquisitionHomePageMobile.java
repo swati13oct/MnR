@@ -1,4 +1,3 @@
-
 package pages.mobile.acquisition.bluelayer;
 
 import org.openqa.selenium.By;

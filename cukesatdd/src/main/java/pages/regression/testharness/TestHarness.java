@@ -343,7 +343,7 @@ public class TestHarness extends UhcDriver {
 			CommonUtility.waitForPageLoad(driver, panelHome, 30);
 		}	
 		//validateNew(panelHome);
-		validateNew(panelClaims);
+		//validateNew(panelClaims);
 		if (category.contains(CommonConstants.CATEGORY_TERMIATED)) {
 			if (panelHealthWellness.isEmpty() && panelFindcarecost.isEmpty()) {
 				Assert.assertTrue("Terminated view is present", true);
@@ -560,7 +560,9 @@ public class TestHarness extends UhcDriver {
 		WebElement heading_e=heading;
 		if (memberType.contains("PREEFF"))
 			heading_e=preEffBnfHeading;
-		CommonUtility.waitForPageLoad(driver, heading_e, 60);
+
+		CommonUtility.waitForPageLoad(driver, heading_e, 10);
+
 		System.out.println(driver.getTitle());
 		if (!driver.getTitle().contains("Benefits")) { //note: in case timing issue, one more try
 			try {
@@ -715,11 +717,11 @@ public class TestHarness extends UhcDriver {
 	 * @throws InterruptedException
 	 */
 	public DrugCostEstimatorPage navigateToDCEPageFromTestHarnessPage() throws InterruptedException {
-		checkModelPopup(driver,5);
+		checkModelPopup(driver,2);
 		validateNew(testHarnessDcePageLink);
 		testHarnessDcePageLink.click();
 		CommonUtility.checkPageIsReady(driver);
-		checkModelPopup(driver,5);
+		checkModelPopup(driver,2);
 		CommonUtility.waitForPageLoad(driver, dceHeaderTxt, CommonConstants.TIMEOUT_90);
 		if (driver.getTitle().contains("Overview")) {
     		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
@@ -1319,9 +1321,11 @@ public class TestHarness extends UhcDriver {
     			if (IPerceptionsFrame.isEmpty()) {
     				try {
     					Thread.sleep(1500);
-    				} catch (InterruptedException e) {
-    					System.out.println(e.getMessage());
-    				}
+    					driver.findElement(By.xpath("//*[@id='ip-close']")).click();
+    					System.out.println("Clicked Close on special popup");
+    				} catch (Exception e) {
+    					System.out.println("Special popup not found");
+    									}
     			} else {
     				driver.switchTo().frame(IPerceptionsFrame.get(0));
     				driver.findElement(By.className("btn-no")).click();
@@ -1444,7 +1448,10 @@ public class TestHarness extends UhcDriver {
     	public PharmaciesAndPrescriptionsPage navigateToPharAndPresFromTestHarnessPage(String memberType) {
     		CommonUtility.checkPageIsReady(driver);
 			checkForIPerceptionModel(driver);
-			if (MRScenario.environment.contains("team-a") && memberType.toUpperCase().contains("PREEFF")) {
+
+			if ((MRScenario.environment.contains("team-a") || MRScenario.environment.contains("stage"))
+					&& memberType.toUpperCase().contains("PREEFF")) {
+
 				testHarnessTopMenuPhaPresLink_preeff.click();
 			} else {
 	    		try{
@@ -1475,8 +1482,13 @@ public class TestHarness extends UhcDriver {
     	private WebElement shadowRootHeader;
 
     	public boolean findPnPLinksExistOnPg(String memberType) {
+
+    		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
+
     		System.out.println("user is on '" + MRScenario.environmentMedicare + "' dashboard page, attempt to navigate to secondary page to see if PnP link exists");
-    		checkForIPerceptionModel(driver);
+
+    		checkModelPopup(driver,1);
+
     		if (noWaitValidate(preEffPnpMenuLnk) && memberType.contains("PREEFF")) 
     			return true;
     		if (noWaitValidate(pharPresDashboardLink)) {
@@ -1847,6 +1859,16 @@ public class TestHarness extends UhcDriver {
 			if (validate(logOut,0)) {
 				logOut.click();
 				CommonUtility.checkPageIsReadyNew(driver);
+
+				try {
+					if(driver.getTitle().contains("Signing off")) {
+						Thread.sleep(2000);
+						CommonUtility.checkPageIsReadyNew(driver);
+					}
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+
 				System.out.println("Title after logout-" + driver.getTitle());
 				if(MRScenario.environment.contains("team-h")) {
 					if (validate(accountProfile,0)) {

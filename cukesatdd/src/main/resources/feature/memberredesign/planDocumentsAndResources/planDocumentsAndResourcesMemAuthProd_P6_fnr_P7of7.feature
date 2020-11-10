@@ -41,7 +41,11 @@ Feature: 1.06.6.2 Member Plans and Documents - section: Forms And Resources Part
 	@prod_preeffective_mapd_7of7
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | fnr_sd | fnr_di |
+<<<<<<< HEAD
       | 03-098 | xxxxx       | kkumard  | mnrs786@  | Abayne01          | MAPD     | AARP_IND_PREEFF_PDnR  | false  | false  | 
+=======
+      | 03-098 | xxxxx       | kkumard  | mnrs786@  | UHCjanicejohn          | MAPD     | AARP_IND_PREEFF_PDnR  | false  | false  | 
+>>>>>>> branch 'develop' of https://github.optum.com/Consumer-Portals/MRATDD
 
 #	@prod_preeffective_pdp_7of7
 #	Examples: 
@@ -63,7 +67,7 @@ Feature: 1.06.6.2 Member Plans and Documents - section: Forms And Resources Part
 	@prod_active_ma_ind_7of7 @prod_active_ma_7of7
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | fnr_sd | fnr_di |
-      | 09-104 | 15129       | kkumard  | mnrs786@  | ERNIE2450       | MA       | AARP_IND_EFF_PDnR     | true   | true   |
+      | 09-104 | 15129       | kkumard  | mnrs786@  | haradaty32      | MA       | AARP_IND_EFF_PDnR     | true   | true   |
 
 	@prod_active_ma_grp_7of7 @prod_active_ma_7of7
 	Examples: 

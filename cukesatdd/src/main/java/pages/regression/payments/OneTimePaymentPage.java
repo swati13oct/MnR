@@ -554,6 +554,7 @@ public class OneTimePaymentPage extends UhcDriver {
 
 	public CreditCardUPGPage clickOnNextButton() {
 		validate(otheramountfield);
+		TestHarness.checkForIPerceptionModel(driver);
 		NextButton.click();
 		System.out.println("User Click on Next button on one time page");
 		try {
@@ -624,6 +625,25 @@ public class OneTimePaymentPage extends UhcDriver {
 			return null;
 		}
 	}
+	
+	public ConfirmOneTimePaymentPage selectAgreeAndClickOnSubmitPaymentsforOneTime_Updated() {
+		CommonUtility.waitForPageLoad(driver, EditPaymentInformation, 10);
+		TestHarness.checkForIPerceptionModel(driver);
+		System.out.println("User is on Review Your Automatic Payments Information Page");
+		PaymentsDataVerificationonReviewPage();
+		 JavascriptExecutor jse = (JavascriptExecutor)driver;
+		 jse.executeScript("window.scrollBy(0,650)", "");
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		jsClickNew(AgreeCheckBox);
+		TestHarness.checkForIPerceptionModel(driver);
+		return null;
+		}
+	
 	
 	public ConfirmOneTimePaymentPage selectAgreeAndClickOnContinueforEFTForShip() {
 		validate(EditPaymentInformation);

@@ -41,12 +41,17 @@ Feature: 1.06.2.2 Member Plans and Documents - section: header -and- My Document
     #note: moved to footer feature
 	#Then user validate Need Help section
 
+	#note: Teripappas is MAPD IND with plan 2021
 	@prod_preeffective_ma_mapd
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | md_sd | eob_sd | eob_m | eob_d | rm_sd |
 #      | 01-001 | xxxxx       | kkumard  | mnrs786@  | Ranch1955       | MA       | AARP_IND_PREEFF_PDnR  | true  | false  | false | false | false |
 #      | 02-002 | xxxxx       | kkumard  | mnrs786@  | testusername    | MA       | GROUP_PREEFF_PDnR     | true  | false  | false | false | false |
+<<<<<<< HEAD
       | 03-003 | xxxxx       | kkumard  | mnrs786@  | Abayne01          | MAPD     | AARP_IND_PREEFF_PDnR  | true  | false  | false | false | false |
+=======
+      | 03-003 | xxxxx       | kkumard  | mnrs786@  | UHCjanicejohn          | MAPD     | AARP_IND_PREEFF_PDnR  | true  | false  | false | false | false |
+>>>>>>> branch 'develop' of https://github.optum.com/Consumer-Portals/MRATDD
 
 #	@prod_preeffective_pdp
 #	Examples: 
@@ -64,7 +69,7 @@ Feature: 1.06.2.2 Member Plans and Documents - section: header -and- My Document
 	@prod_active_ma @prod_active_ma_ind
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | md_sd | eob_sd | eob_m | eob_d | rm_sd |
-      | 09-009 | 15129       | kkumard  | mnrs786@  | ERNIE2450    | MA       | AARP_IND_EFF_PDnR     | true  | true   | true  | false | true  |
+      | 09-009 | 15129       | kkumard  | mnrs786@  | haradaty32   | MA       | AARP_IND_EFF_PDnR     | true  | true   | true  | false | true  |
 
 	@prod_active_ma @prod_active_ma_grp
 	Examples: 

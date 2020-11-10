@@ -16,5 +16,9 @@ Feature: To test HSID member SignIn
       | MAPre-effective | Individual          | NON LIS       |
       | GovtTermless    | Individual          | NON LIS       |
       | PDP             | PREFFECTIVE         | NON-LIS       |
+<<<<<<< HEAD
       | MAPD            | Terminated_PnP      | 	          |
+=======
+      | MAPD            | Terminated_PnP      |	NON LIS       |
+>>>>>>> branch 'develop' of https://github.optum.com/Consumer-Portals/MRATDD
       | MA-Medsup       | FEDSHIPPREEFFECTIVE | NON-LIS       |

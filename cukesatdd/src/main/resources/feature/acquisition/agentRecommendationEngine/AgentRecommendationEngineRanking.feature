@@ -135,3 +135,51 @@ Feature: Agent Recommendation Engine - Verify ARE elements
     Examples: 
       | User      | Pass      | Email                 | IfMultiCounty | PlanYear | PlanCompareZIP | RankingOptions     | DisplayCurrentPlan | ChangeInOrder | PlansOrder |
       | qavgogine | qavgogine | ATDD5STG@MEMBERDD.COM | None          | current  |          10001 | fitness,lowpremium | YES                | YES           |            |
+<<<<<<< HEAD
+=======
+
+  @ARE @PlansReorder @MCE @F487422
+  Scenario Outline: - <Email> To Verify agent login and validate Plans reorder in ARE for MCE
+    Given the agent is on shopper profile login page
+    When agent login to shopper profile
+      | User Name | <User> |
+      | Password  | <Pass> |
+    And agent is looking for an profile and cloaksIn
+      | Email | <Email> |
+    And agent selects county and plan year in plancompare page
+      | Multi County | <IfMultiCounty> |
+      | Plan Year    | <PlanYear>      |
+    Then agent validates Estimated Annual Medical Cost in plancompare page
+      | Estimate MedicalCost | <EstimateMC> |
+    Then agent validates ranking plans order in plancompare page
+      | ZIP                  | <PlanCompareZIP>     |
+      | Ranking Options      | <RankingOptions>     |
+      | Current Plan         | <DisplayCurrentPlan> |
+      | ChangeIn Order       | <ChangeInOrder>      |
+      | Expected Plans Order | <PlansOrder>         |
+
+    Examples: 
+      | User      | Pass      | Email                 | IfMultiCounty | PlanYear | EstimateMC | PlanCompareZIP | RankingOptions | DisplayCurrentPlan | ChangeInOrder | PlansOrder |
+      | qavgogine | qavgogine | ATDD2STG@MEMBERDD.COM | None          | current  | YES        |          10001 | mce,lowpremium | YES                | YES           |            |
+
+  @ARE @PlansReorder @NOMCE @F487422
+  Scenario Outline: - <Email> To Verify agent login and validate Plans reorder in ARE for NoMCE
+    Given the agent is on shopper profile login page
+    When agent login to shopper profile
+      | User Name | <User> |
+      | Password  | <Pass> |
+    And agent is looking for an profile and cloaksIn
+      | Email | <Email> |
+    And agent selects county and plan year in plancompare page
+      | Multi County | <IfMultiCounty> |
+      | Plan Year    | <PlanYear>      |
+    Then agent validates Estimated Annual Medical Cost in plancompare page
+      | Estimate MedicalCost | <EstimateMC> |
+    Then agent validates ranking option is not present in plan ranking drop down
+      | Ranking Options | <RankingOptions> |
+
+    Examples: 
+      | User      | Pass      | Email                    | IfMultiCounty | PlanYear | EstimateMC | RankingOptions |
+      | qavgogine | qavgogine | ATDD3STG@MEMBERDD.COM    | None          | current  | NO         | mce            |
+      | qavgogine | qavgogine | ATDD2STG@NONMEMBERDD.COM | None          | current  | NO         | mce            |
+>>>>>>> branch 'develop' of https://github.optum.com/Consumer-Portals/MRATDD

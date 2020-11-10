@@ -49,7 +49,7 @@ Feature: 1.10.1 DCE-REDISIGN AARP - To test Acq Home to NEW DCE Flows
       | ativ                 | Ativan        | Lorazepam    | buprenorphine |   90210 | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) |UHC|
 
   @DCE_DrugListTiersLimits
-  Scenario Outline: To verify DCE REDESIGN Drug Cabinet Limit from Ulayer home page
+  Scenario Outline: To verify DCE REDESIGN Drug Cabinet Limit from home page
     #Given the user is on AARP medicare acquisition site landing page
     Given the user is on medicare acquisition site landing page
    		|Site| <site>|
@@ -142,7 +142,7 @@ Feature: 1.10.1 DCE-REDISIGN AARP - To test Acq Home to NEW DCE Flows
 
 
   @DCE_AllTiers_DrugLimits_Validation
-  Scenario Outline: To verify DCE REDESIGN flow from Ulayer home page
+  Scenario Outline: To verify DCE REDESIGN flow from home page sub nav
     Given the user is on AARP medicare acquisition site landing page
     When I click on DCE Redesign link from Shop for a plan hover over for AARP site
     Then the user validates Get Started Page

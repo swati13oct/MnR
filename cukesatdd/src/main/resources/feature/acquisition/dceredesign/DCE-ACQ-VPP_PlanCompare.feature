@@ -2,7 +2,7 @@
 Feature: 1.10.3 ACQ-DCERedesign-VPP_PlanCompare - To test DCE - VPP Plan Compare Integration
 
   @DCE_Redesign_VPP_PlanDetails1
-  Scenario Outline: 1.10.2.1 To test the DCE Redesignflow for PlanType :  <plantype> from vpp Plan Details
+  Scenario Outline: 1.10.3.1 To test the DCE Redesignflow for PlanType :  <plantype> from vpp Plan Compare
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     When the user performs plan search using following information
@@ -26,13 +26,19 @@ Feature: 1.10.3 ACQ-DCERedesign-VPP_PlanCompare - To test DCE - VPP Plan Compare
     @DCE_Redesign_VPP_PlanCompare_AARP
     Examples: 
 <<<<<<< HEAD
+<<<<<<< HEAD
       | site | zipcode | plantype | county | isMultutiCounty | drug1 | planname |
 =======
       |	site	| zipcode | plantype | county | isMultutiCounty | drug1        | planname                                           |
       |	AARP	|   90210 | MAPD     | none   | no              | meloxicam  | AARP Medicare Advantage SecureHorizons Focus (HMO) |
+=======
+      |	site	| zipcode | plantype |	planyear	| county | isMultutiCounty | drug1        | planname                                           |
+      |	AARP	|   90210 | MAPD     |	current		| none   | no              | meloxicam  | AARP Medicare Advantage SecureHorizons Focus (HMO) |
+>>>>>>> branch 'develop' of https://github.optum.com/Consumer-Portals/MRATDD
       
       @DCE_Redesign_VPP_PlanCompare_UHC
     Examples: 
+<<<<<<< HEAD
       |	site	| zipcode | plantype | county | isMultutiCounty | drug1     | drug2                | drug3      | drug4         | drug5            | drug6   | planname                                           |
       |	UHC		|   90210 | MAPD     | none   | no              | meloxicam | diclofenac potassium | febuxostat | buprenorphine | fentanyl citrate | Lipitor | AARP Medicare Advantage SecureHorizons Focus (HMO) |
 >>>>>>> branch 'develop' of https://github.optum.com/Consumer-Portals/MRATDD
@@ -42,13 +48,30 @@ Feature: 1.10.3 ACQ-DCERedesign-VPP_PlanCompare - To test DCE - VPP Plan Compare
     Examples: 
       | site | zipcode | plantype | county | isMultutiCounty | drug1     | drug2                | drug3      | drug4         | drug5            | drug6   | planname                                           |
       | UHC  |   90210 | MAPD     | none   | no              | meloxicam | diclofenac potassium | febuxostat | buprenorphine | fentanyl citrate | Lipitor | AARP Medicare Advantage SecureHorizons Focus (HMO) |
+=======
+      |	site	| zipcode | plantype |	planyear	| county | isMultutiCounty | drug1     | drug2                | drug3      | drug4         | drug5            | drug6   | planname                                           |
+      |	UHC		|   90210 | MAPD     |	current		| none   | no              | meloxicam | diclofenac potassium | febuxostat | buprenorphine | fentanyl citrate | Lipitor | AARP Medicare Advantage SecureHorizons Focus (HMO) |
+>>>>>>> branch 'develop' of https://github.optum.com/Consumer-Portals/MRATDD
 
     @DCE_Redesign_VPP_PlanCompare_AARP
     Examples: 
+<<<<<<< HEAD
       | site | zipcode | plantype | county       | isMultutiCounty | drug1     | drug2                | drug3      | drug4         | drug5            | drug6   | planname                        |
       | AARP |   80002 | PDP      | Adams County | yes             | meloxicam | diclofenac potassium | febuxostat | buprenorphine | fentanyl citrate | Lipitor | AARP MedicareRx Walgreens (PDP) |
 
+=======
+      |	site	| zipcode | plantype |	planyear	| county       | isMultutiCounty | drug1     | drug2                | drug3      | drug4         | drug5            | drug6   | planname                        |
+      |	AARP	|   80002 | PDP      |	current		| Adams County | yes             | meloxicam | diclofenac potassium | febuxostat | buprenorphine | fentanyl citrate | Lipitor | AARP MedicareRx Walgreens (PDP) |
+      
+>>>>>>> branch 'develop' of https://github.optum.com/Consumer-Portals/MRATDD
     @DCE_Redesign_VPP_PlanCompare_UHC
     Examples: 
+<<<<<<< HEAD
       | site | zipcode | plantype | county       | isMultutiCounty | drug1     | drug2                | drug3      | drug4         | drug5            | drug6   | planname                        |
       | UHC  |   80002 | PDP      | Adams County | yes             | meloxicam | diclofenac potassium | febuxostat | buprenorphine | fentanyl citrate | Lipitor | AARP MedicareRx Walgreens (PDP) |
+=======
+      |	site	| zipcode | plantype |	planyear	| county       | isMultutiCounty | drug1     | drug2                | drug3      | drug4         | drug5            | drug6   | planname                        |
+      |	UHC		|   80002 | PDP      |	current		| Adams County | yes             | meloxicam | diclofenac potassium | febuxostat | buprenorphine | fentanyl citrate | Lipitor | AARP MedicareRx Walgreens (PDP) |  
+
+    
+>>>>>>> branch 'develop' of https://github.optum.com/Consumer-Portals/MRATDD

@@ -1,5 +1,7 @@
 package acceptancetests.memberrdesignVBF.bnc;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
 import org.junit.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -148,7 +150,7 @@ public class BenefitsAndCoverageStepDefinition {
 				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE_VBF);
 		benefitsCoveragePage.validateHeaders();
 	}
-
+	
 	/***
 	 * 
 	 */
@@ -178,7 +180,7 @@ public class BenefitsAndCoverageStepDefinition {
 				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE_VBF);
 		benefitsCoveragePage.validateOutofPocketMax();
 	}
-
+	
 	/***
 	 * 
 	 * @throws InterruptedException

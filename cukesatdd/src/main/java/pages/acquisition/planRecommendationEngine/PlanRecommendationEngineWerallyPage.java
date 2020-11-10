@@ -105,7 +105,8 @@ public class PlanRecommendationEngineWerallyPage extends UhcDriver {
 		ArrayList<String> doctorsSPecialtyName = new ArrayList<String>();
 		try {
 			validate(welcomeTilte, 30);
-			getStarted.click();
+//			getStarted.click();
+			jsClickNew(getStarted);
 		} catch (Exception e) {
 			System.out.println("No Get Started button available in werally");
 		}
@@ -117,7 +118,11 @@ public class PlanRecommendationEngineWerallyPage extends UhcDriver {
 			if (type.toUpperCase().contains("DOCTORS")) {
 				searchBox.sendKeys(searchParameter);
 				threadsleep(2000);
-				searchButton.click();
+
+//				searchButton.click();
+				jsClickNew(searchButton);
+				validate(serachResultsCount, 30);
+
 				int actualResultscount = Integer.parseInt(serachResultsCount.getText().trim().split(" ")[0]);
 				if (actualResultscount >= count) {
 					for (int i = count - 1; i >= 0; i--) {
@@ -138,7 +143,10 @@ public class PlanRecommendationEngineWerallyPage extends UhcDriver {
 						threadsleep(3000);
 //						doctorsName.add(doctorNameinWerally.getText().trim());
 						chooseFirstLocation();
-						saveModalCloseContinueSearchbutton.click();
+
+//						saveModalCloseContinueSearchbutton.click();
+						jsClickNew(saveModalCloseContinueSearchbutton);
+
 					}
 				} else {
 					System.out.println("Required search Results is not Returned");
@@ -146,11 +154,19 @@ public class PlanRecommendationEngineWerallyPage extends UhcDriver {
 				}
 
 			}
-			desktopLogo.click();
+
+//			desktopLogo.click();
+			jsClickNew(desktopLogo);
+
 		}
-		viewSavedbutton.click();
+
+//		viewSavedbutton.click();
+		jsClickNew(viewSavedbutton);
 		threadsleep(3000);
-		savedFinishReturnButton.click();
+//		savedFinishReturnButton.click();
+		jsClickNew(savedFinishReturnButton);
+		waitForPageLoadSafari();
+
 		try {
 			WebDriverWait wait = new WebDriverWait(driver, 2);
 			if (wait.until(ExpectedConditions.alertIsPresent()) == null) {
@@ -173,7 +189,10 @@ public class PlanRecommendationEngineWerallyPage extends UhcDriver {
 
 	public void chooseFirstLocation() {
 		if (validate(firstLocation, 5)) {
-			firstLocation.click();
+
+//			firstLocation.click();
+			jsClickNew(firstLocation);
+
 			threadsleep(1000);
 			jsClickNew(locationSave);
 			threadsleep(2000);

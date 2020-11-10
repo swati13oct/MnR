@@ -1,4 +1,23 @@
+
 package acceptancetests.acquisition.tfn;
+
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.openqa.selenium.WebDriver;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import acceptancetests.data.CommonConstants;
+import acceptancetests.data.PageConstants;
+import atdd.framework.MRScenario;
+import cucumber.api.DataTable;
+import cucumber.api.java.en.Given;
+import cucumber.api.java.en.Then;
+import gherkin.formatter.model.DataTableRow;
+import pages.acquisition.bluelayer.AcquisitionHomePage;
+import pages.acquisition.tfn.CampaignTFNPage;
+
 
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -263,6 +282,7 @@ public void the_user_navigates_to_MA_OLE_Page_and_validates_Federal_TFN_in_UHC()
 	tfnPage.HomepagePlanSearch(Zip);
 	String PlanType = "MA";
 	tfnPage.ViewPlanSummary(PlanType);
+	tfnPage.handlePlanYearSelectionPopup();
 	tfnPage.NavigateToOLE(PlanType);
 	String TFNXpath_PlanDetails = "//a[contains(@class, 'tel') and contains(@href, 'tel')]";
 	tfnPage.validateFederalTFN(TFNXpath_PlanDetails);
@@ -276,6 +296,7 @@ public void the_user_navigates_to_PDP_OLE_Page_and_validates_Federal_TFN_in_UHC(
 	tfnPage.HomepagePlanSearch(Zip);
 	String PlanType = "PDP";
 	tfnPage.ViewPlanSummary(PlanType);
+	tfnPage.handlePlanYearSelectionPopup();
 	tfnPage.NavigateToOLE(PlanType);
 	String TFNXpath_PlanDetails = "//a[contains(@class, 'tel') and contains(@href, 'tel')]";
 	tfnPage.validateFederalTFN(TFNXpath_PlanDetails);

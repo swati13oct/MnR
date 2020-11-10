@@ -43,7 +43,11 @@ Feature: 1.06.5.2 Member Plans and Documents - section: Provider Directory -or- 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | pd_sd | pd_ps | pd_pl | pd_en_cy | pd_es_cy | pd_zh_cy | pd_en_ny | pd_es_ny | pd_zh_ny |
 #     | 01-077 | xxxxx       | kkumard   | mnrs786@  | Ranch1955       | MA       | AARP_IND_PREEFF_PDnR  | true  | true  | false | true     | true     | false    | false    | false    | false    |
 #     | 02-078 | xxxxx       | kkumard   | mnrs786@  | testusername    | MA       | GROUP_PREEFF_PDnR     | true  | true  | false | false    | false    | false    | false    | false    | false    |
+<<<<<<< HEAD
       | 03-079 | xxxxx       | kkumard   | mnrs786@  | Abayne01        | MAPD     | AARP_IND_PREEFF_PDnR  | true  | true  | true  | true     | true     | false    | false    | false    | false    |
+=======
+      | 03-079 | xxxxx       | kkumard   | mnrs786@  | UHCjanicejohn   | MAPD     | AARP_IND_PREEFF_PDnR  | true  | true  | true  | true     | true     | false    | false    | false    | false    |
+>>>>>>> branch 'develop' of https://github.optum.com/Consumer-Portals/MRATDD
 
 #	@prod_preeffective_pdp
 #	Examples: 
@@ -62,7 +66,11 @@ Feature: 1.06.5.2 Member Plans and Documents - section: Provider Directory -or- 
 	@prod_active_ma @prod_active_ma_ind
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | pd_sd | pd_ps | pd_pl | pd_en_cy | pd_es_cy | pd_zh_cy | pd_en_ny | pd_es_ny | pd_zh_ny |
+<<<<<<< HEAD
       | 09-085 | 15129       | kkumard   | mnrs786@  | ERNIE2450       | MA       | AARP_IND_EFF_PDnR     | true  | true  | false | true     | true     | false    | true     | true     | false    |
+=======
+      | 09-085 | 15129       | kkumard   | mnrs786@  | haradaty32      | MA       | AARP_IND_EFF_PDnR     | true  | true  | false | true     | true     | false    | true     | true     | false    |
+>>>>>>> branch 'develop' of https://github.optum.com/Consumer-Portals/MRATDD
 
 	@prod_active_ma @prod_active_ma_grp
 	Examples: 

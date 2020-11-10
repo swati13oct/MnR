@@ -60,8 +60,8 @@ Feature: Plan Recommendation Engine flow - Verify PRE flows functionalities with
     And user selects add drug option in Drug page mobile
       | Drug Selection | <DrugSelection>                                                        |
       | Drug Details   | <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch> |
-    When user selects Pharmacy in Pharmacy page mobile
-      | Pharmacy Selection | <PharmacySelection> |
+    #When user selects Pharmacy in Pharmacy page mobile
+    #  | Pharmacy Selection | <PharmacySelection> |
     And user validate elements in loading page mobile
     Then user validate recommendations in results page mobile
       | Zip Code           | <Zipcode>           |
@@ -128,8 +128,8 @@ Feature: Plan Recommendation Engine flow - Verify PRE flows functionalities with
     And user selects add drug option in Drug page mobile
       | Drug Selection | <DrugSelection>                                                        |
       | Drug Details   | <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch> |
-    And user selects Pharmacy in Pharmacy page mobile
-      | Pharmacy Selection | <PharmacySelection> |
+    #And user selects Pharmacy in Pharmacy page mobile
+    #  | Pharmacy Selection | <PharmacySelection> |
     And user selects additional services option in additional services page mobile
       | Additional Option | <Dental-Hearing-Vision-Fitness> |
     And user selects cost preferences option in cost preferences page mobile
@@ -236,8 +236,8 @@ Feature: Plan Recommendation Engine flow - Verify PRE flows functionalities with
     And user selects add drug option in Drug page mobile
       | Drug Selection | <DrugSelection>                                                        |
       | Drug Details   | <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch> |
-    And user selects Pharmacy in Pharmacy page mobile
-      | Pharmacy Selection | <PharmacySelection> |
+    #And user selects Pharmacy in Pharmacy page mobile
+    #  | Pharmacy Selection | <PharmacySelection> |
     And user selects additional services option in additional services page mobile
       | Additional Option | <Dental-Hearing-Vision-Fitness> |
     And user selects cost preferences option in cost preferences page mobile
@@ -359,5 +359,6 @@ Feature: Plan Recommendation Engine flow - Verify PRE flows functionalities with
       |   10002 | NO            | New York | MA            | None         | None         | UHCNetwork       |             |               | No,No,No,No                   | Lower                | MA                |                   |
       |   25813 | NO            | Raleigh  | MA            | Medicaid     | Regular      | AcceptsMedicare  |             |               | No,No,No,No                   | Higher               | MS                |                   |
       |   00501 | NO            | Suffolk  | MA            | Chronic      | WithinUS     | AcceptsMedicare  |             |               | Yes,No,No,No                  | Lower                | MA                | MS                |
-      |   15537 | NO            | Bedford  | MA            | None         | None         | UHCNetwork       |             |               | No,No,No,No                   | Lower                |                   |                   |
-      |   15537 | NO            | Bedford  | MA            | None         | WithinUS     | AcceptsMedicare  |             |               | Yes,No,No,No                  | Lower                | MS                |                   |
+      |   00610 | NO            | Anasco   | MA            | None         | withinUS     | AcceptsMedicare  |             |               | Yes,No,No,No                  | Lower                | MS                |                   |
+      |   00610 | NO            | Anasco   | MA            | None         | None         | UHGNetwork       |             |               | No,No,No,No                   | Lower                |                   |                   |
+      

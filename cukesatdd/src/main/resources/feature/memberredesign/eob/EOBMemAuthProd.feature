@@ -89,26 +89,43 @@ Feature: 1.04.1.1 To Test NON-DREAM EOB for Members - E2E - Member Auth - PROD
       | Flag Zero EOB User | <flagZeroEob> |
 
     # note: to correctly validate for SHIP, planType must be in this format: SHIP_<planCategory>
-    @prod_SHIP_EOBs @prod_SHIP_EOBs1
+    @prod_SHIP_EOBs @prod_SHIP_EOBs1_multiShip
     Examples: 
       | index | username  | password  | MemUserName            | planType                 | memberType         | eobType | realEob | flagZeroEob |
+<<<<<<< HEAD
       | 11    | kkumard  | mnrs786@  | gingerdrais46           | SHIP_HOSPITAL INDEMNITY  | MULTI_SHIP_EOB     | Medical | true    | false       | 
+=======
+      | 11    | kkumard   | mnrs786@  | gingerdrais46          | SHIP_HOSPITAL INDEMNITY  | MULTI_SHIP_EOB     | Medical | true    | false       | 
+>>>>>>> branch 'develop' of https://github.optum.com/Consumer-Portals/MRATDD
 
-    @prod_SHIP_EOBs @prod_SHIP_EOBs2
+    @prod_SHIP_EOBs @prod_SHIP_EOBs2_singleShip
     Examples: 
       | index | username  | password  | MemUserName            | planType                 | memberType         | eobType | realEob | flagZeroEob |
+<<<<<<< HEAD
       | 12    | kkumard  | mnrs786@  | Norm749                 | SHIP_MEDICARE SUPPLEMENT | PDP_SHIP_COMBO_EOB | Medical | true    | true       |
+=======
+      | 12    | kkumard   | mnrs786@  | cdgatling-2            | SHIP_MEDICARE SUPPLEMENT | SHIP_EOB           | Medical | true    | true       |
+>>>>>>> branch 'develop' of https://github.optum.com/Consumer-Portals/MRATDD
 
-    @prod_SHIP_EOBs @prod_SHIP_EOBs3
+    @prod_SHIP_EOBs @prod_SHIP_EOBs3_shipComboShipFed
     Examples: 
       | index | username  | password  | MemUserName            | planType                 | memberType              | eobType | realEob | flagZeroEob |
+<<<<<<< HEAD
       | 13    | kkumard  | mnrs786@  | phleauxdailles43        | SHIP_HOSPITAL INDEMNITY  | COMBO_SHIP_MA_NICE_DEOB | Medical | true    | false   | 
+=======
+      | 13    | kkumard   | mnrs786@  | phleauxdailles43       | SHIP_HOSPITAL INDEMNITY  | COMBO_SHIP_MA_NICE_DEOB | Medical | true    | false   | 
+>>>>>>> branch 'develop' of https://github.optum.com/Consumer-Portals/MRATDD
 
-    @prod_SHIP_EOBs @prod_SHIP_EOBs4
+    @prod_SHIP_EOBs @prod_SHIP_EOBs4_shipComboFedShip
     Examples: 
       | index | username  | password  | MemUserName            | planType                 | memberType              | eobType | realEob | flagZeroEob |
+<<<<<<< HEAD
     # | 14    | kkumard  | mnrs786@  | testusername            | SHIP_MEDICARE SUPPLEMENT | COMBO_SHIP_PDP_RX_DEOB  | Medical | true    | true   |  
       | 14    | kkumard  | mnrs786@  | MaryLouMichels2         | SHIP_MEDICARE SUPPLEMENT | COMBO_PDP_SHIP_RX_DEOB  | Medical | true    | true   |  
+=======
+    # | 14    | kkumard   | mnrs786@  | testusername           | SHIP_MEDICARE SUPPLEMENT | COMBO_SHIP_PDP_RX_DEOB  | Medical | true    | true   |  
+      | 14    | kkumard   | mnrs786@  | MaryLouMichels2        | SHIP_MEDICARE SUPPLEMENT | COMBO_PDP_SHIP_RX_DEOB  | Medical | true    | true   |  
+>>>>>>> branch 'develop' of https://github.optum.com/Consumer-Portals/MRATDD
 
 
   @prod_eob02 @regression_06_06_18FnF

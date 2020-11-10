@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -28,6 +29,9 @@ import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineLandin
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineResultsPage;
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineSpecialNeedsPage;
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineTravelPage;
+
+import acceptancetests.acquisition.ole.oleCommonConstants;
+import acceptancetests.acquisition.vpp.VPPCommonConstants;
 
 public class PlanRecommendationEngineCommonStepDefinition {
 	
@@ -83,7 +87,11 @@ public class PlanRecommendationEngineCommonStepDefinition {
 			System.out.println("Email is:"+county);
 			String isMultiCounty = givenAttributesMap.get("Is Multi County");
 			System.out.println("Entered Search Key is:"+isMultiCounty);
-			
+
+		getLoginScenario().saveBean(oleCommonConstants.OLE_ZIPCODE, zipcode);
+		getLoginScenario().saveBean(oleCommonConstants.OLE_COUNTY, county);
+
+
 		PlanRecommendationEngineLandingAndZipcodePages planSelectorhomepage =  new PlanRecommendationEngineLandingAndZipcodePages((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
 		if (isMultiCounty.equalsIgnoreCase("NO")) {
 			planSelectorhomepage.quizStartAndRunQuestionnaire(zipcode);
@@ -104,8 +112,15 @@ public class PlanRecommendationEngineCommonStepDefinition {
 		
 		PlanRecommendationEngineCoverageOptionPage planSelectorCoverageepage =  new PlanRecommendationEngineCoverageOptionPage(wd);
 		String plantype = givenAttributesMap.get("Plan Type");
+		getLoginScenario().saveBean(VPPCommonConstants.PLAN_TYPE, plantype);
 		if (!(plantype.isEmpty())) {
 			planSelectorCoverageepage.coverageOptionpageFunctional(plantype);
+		}
+		
+		String temp = givenAttributesMap.get("Plan Type");
+		if (temp != null && PREflow != temp) {
+			PREflow = temp;
+			System.out.println("Current PRE Flow : "+PREflow);
 		}
 	}
 	
@@ -166,11 +181,6 @@ public class PlanRecommendationEngineCommonStepDefinition {
 			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
 					givenAttributesRow.get(i).getCells().get(1));
 		}
-		String temp = givenAttributesMap.get("Plan Type");
-		if (temp != null && PREflow != temp) {
-			PREflow = temp;
-			System.out.println("Current PRE Flow : "+PREflow);
-		}
 		
         PlanRecommendationEngineDrugsPage planSelectorDrugspage =  new PlanRecommendationEngineDrugsPage(wd);
         String drug = givenAttributesMap.get("Drug Selection");
@@ -223,6 +233,23 @@ public class PlanRecommendationEngineCommonStepDefinition {
 		planSelectorResultspage.validateUIAPIRankingPlans();
 		
 		getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
+   	}
+	
+	@Then("^user selects add drug option on Drug page$")
+   	public void add_drugs_page(DataTable givenAttributes) {
+		List<DataTableRow> givenAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < givenAttributesRow.size(); i++) {
+
+			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+					givenAttributesRow.get(i).getCells().get(1));
+		}
+
+   		PlanRecommendationEngineDrugsPage planSelectorDrugspage =  new PlanRecommendationEngineDrugsPage(wd);
+   		planSelectorDrugspage.drugsInitiate(givenAttributesMap.get("Drug Selection"));
+   		planSelectorDrugspage.drugsHandlerWithdetails(givenAttributesMap.get("Drug Details"));
+   		planSelectorDrugspage.continueNextpage();
+
    	}
 
 }

@@ -178,7 +178,11 @@ Feature: 1.25.1 Member Prepare For Next Year - Member Auth
     #@memAuth_pfny02_combo_ship_fed
     #Examples: 
 	#    | index | FID     | username  | password  | MemUserName          | planType | memberType              | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | co_us | co_es | co_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh | showNxtYrPlan |  
+<<<<<<< HEAD
 	#    | 2-11  | F443004 | qavgogine | qavgogine | q3_sept_UAT4_AARP_011| MAPD	 | COMBO_SHIP_MAPD_IND_PFNY| true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | true  | true  | true  | false | true          |
+=======
+	#    | 2-11  | F443004 | qavgogine | qavgogine | GENARO_Q4_COMBO      | MAPD	 | COMBO_SHIP_MAPD_IND_PFNY| true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | true  | true  | true  | false | true          |
+>>>>>>> branch 'develop' of https://github.optum.com/Consumer-Portals/MRATDD
 
     @memAuth_pfny02_combo_fed_ship
     Examples: 
@@ -217,7 +221,7 @@ Feature: 1.25.1 Member Prepare For Next Year - Member Auth
 	@memAuth_pfny03a
     Examples: 
 	    | index | FID     | username  | password  | MemUserName             | planType | memberType              |
-	    | 3-01  | F437767 | qavgogine | qavgogine | q3_sept_UAT4_AARP_011   | SHIP	   | COMBO_SHIP_MAPD_IND_PFNY|
+	    | 3-01  | F437767 | qavgogine | qavgogine | GENARO_Q4_COMBO         | SHIP	   | COMBO_SHIP_MAPD_IND_PFNY|
 			
 	@memAuth_pfny03b
     Examples: 
@@ -256,8 +260,13 @@ Feature: 1.25.1 Member Prepare For Next Year - Member Auth
     @memAuth_pfny04_sars @devRegression
     Examples: 
 	    | index | FID     | username  | password  | MemUserName             | planType | memberType              | showNxtYrPlan |  
+<<<<<<< HEAD
 	    | 4-01  | F443004 | qavgogine | qavgogine | q3_Sep_FedANOC_037     | MAPD     | UHC_SARS_PFNY           | false         |
 	    | 4-01  | F443004 | qavgogine | qavgogine | PerfCCM_07109           | MAPD     | SARS_PFNY           | false         |
+=======
+	    | 4-01  | F443004 | qavgogine | qavgogine | q3_Sep_FedANOC_037      | MA     | UHC_SARS_PFNY           | false         |
+	    | 4-02  | F443004 | qavgogine | qavgogine | PerfCCM_07109           | MAPD     | SARS_PFNY           | false         |
+>>>>>>> branch 'develop' of https://github.optum.com/Consumer-Portals/MRATDD
 
 	#note: don't have PDP SAR user for the time being
     #@memAuth_pfny04_sars

@@ -51,7 +51,7 @@ public class PharmacyDeeplinkLoginPage extends UhcDriver {
 	
 	@FindBy(xpath = "//button[@class='btn btn-outline-primary text-transform-none home-btn']")
 	protected WebElement homePageNotice4;
-
+	
 	@FindBy(id = "details-button")
 	protected WebElement proxyPageAdvancedButton;
 	
@@ -193,6 +193,13 @@ public class PharmacyDeeplinkLoginPage extends UhcDriver {
 								}
 							} else {
 								System.out.println("COVID 19 Banner page did not appear");
+							
+								try {
+									Thread.sleep(15000);
+								} catch (InterruptedException e) {
+									// TODO Auto-generated catch block
+									e.printStackTrace();
+								}
 								System.out.println(driver.getCurrentUrl());	
 							}
 							if (driver.getCurrentUrl().contains("/no-email.html")) {
@@ -213,7 +220,9 @@ public class PharmacyDeeplinkLoginPage extends UhcDriver {
 							}
 							if (driver.getCurrentUrl().contains("/anoc.html")) {
 								System.out.println("annual notice of changes page has appeared");
-								if (validate(homePageNotice, 0)) {
+
+								if (validate(homePageNotice, 0)) {									
+
 									homePageNotice.click();
 									CommonUtility.checkPageIsReady(driver);
 								}

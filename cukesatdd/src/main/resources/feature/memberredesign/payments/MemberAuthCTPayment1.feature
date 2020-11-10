@@ -18,11 +18,11 @@ Feature: S1.1 To test Member Auth premium payment flows Micro App.
       | CreditCardNumber | <CreditCardNumber> |
       | Month            | <validMonth>       |
       | Year             | <validYear>        |
-    And user navigates to payment overview screen
+    And user validates the information on Payment Review page
 
     Examples: 
       | UID     | username | password | memUserName | planType | claimPeriod    | dateRange      | Name         | CreditCardNumber | validMonth | validYear | paymentType |
-      | F243897 | jkuma14  | Brock@03 | DSOADY17    | MAPD     | Last 24 months | Last 18 months | Pooja Minhas | 4121600170691201 |         01 |      2021 | OneTime     |
+      | F243897 | jkuma14  | Brock@04 | DSOADY17    | MAPD     | Last 24 months | Last 18 months | Pooja Minhas | 4121600170691201 |         01 |      2021 | OneTime     |
 
   @regressionMemberPROD
   Scenario Outline: TID: <TID> -  Test Case 02-Verify One time EFT payment flow for federal member
@@ -45,12 +45,21 @@ Feature: S1.1 To test Member Auth premium payment flows Micro App.
       | Account holder first name  | <firstName>        |
       | Account holder middle name | <middleName>       |
       | Account holder last name   | <lastName>         |
+<<<<<<< HEAD
    And user navigates to Review Your One-Time Payment Information and selects agreements and click on Submit Button for Make One Time
    And the user is displayed with an error message that he is not authorized
+=======
+   And Updated user navigates to Review Your One-Time Payment Information and selects agreement
+   #Removed 11/5/2020 - And the user is displayed with an error message that he is not authorized
+>>>>>>> branch 'develop' of https://github.optum.com/Consumer-Portals/MRATDD
 
     Examples: 
       | TID     | username | password | memUserName    | planType | claimPeriod    | dateRange      | routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName | paymentType |
+<<<<<<< HEAD
       | TC002   | jkuma14  | Brock@03 | mleroy@mcn.org | MAPD     | Last 24 months | Last 18 months | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    | Recurring   |
+=======
+      | TC002   | jkuma14  | Brock@04 | mleroy@mcn.org | MAPD     | Last 24 months | Last 18 months | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    | Recurring   |
+>>>>>>> branch 'develop' of https://github.optum.com/Consumer-Portals/MRATDD
 
   @regressionMemberPROD
   Scenario Outline: TID: <TID> -  Test Case 04 -Verify cancel button on Update Recurring EFT flow for federal member
@@ -76,4 +85,8 @@ Feature: S1.1 To test Member Auth premium payment flows Micro App.
 
     Examples: 
       | TID     | username | password | memUserName    | planType |  routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName |
+<<<<<<< HEAD
       | TC004   | jkuma14  | Brock@03 | mleroy@mcn.org | MAPD     | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    |
+=======
+      | TC004   | jkuma14  | Brock@04 | mleroy@mcn.org | MAPD     | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    |
+>>>>>>> branch 'develop' of https://github.optum.com/Consumer-Portals/MRATDD
