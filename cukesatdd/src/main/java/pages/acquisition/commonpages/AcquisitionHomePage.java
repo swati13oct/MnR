@@ -1,5 +1,4 @@
 
-
 package pages.acquisition.commonpages;
 
 import static org.junit.Assert.assertTrue;
@@ -1325,8 +1324,11 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	
 	public ProviderSearchPage clicksOnRallyToolFromGlobalHeader() {
 
-		Actions action = new Actions(driver);
-		action.moveToElement(navigationSectionHomeLink).moveToElement(ourPlansHoverLink).build().perform();
+//		Actions action = new Actions(driver);
+//		action.moveToElement(navigationSectionHomeLink).moveToElement(ourPlansHoverLink).build().perform();
+		jsMouseOver(navigationSectionHomeLink);
+		jsMouseOver(ourPlansHoverLink);
+
 		validateNew(providerSearchFromGlobalHeader);
 
 		switchToNewTabNew(providerSearchFromGlobalHeader);
@@ -1674,9 +1676,10 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			waitforElement(lnkLearnAboutMedicare);
 			if (lnkLearnAboutMedicare.isDisplayed()) {
 
-				Actions actions = new Actions(driver);
-				actions.moveToElement(lnkLearnAboutMedicare);
-				actions.build().perform();
+//				Actions actions = new Actions(driver);
+//				actions.moveToElement(lnkLearnAboutMedicare);
+//				actions.build().perform();
+
 				jsMouseOver(lnkLearnAboutMedicare);
 
 				System.out.println("Hover over Learn about Medicare completed");
