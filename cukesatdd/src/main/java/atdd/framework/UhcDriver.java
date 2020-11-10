@@ -447,7 +447,7 @@ try {
 	public void jsClickNew(WebElement element) {
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("arguments[0].click();", element);
-		System.out.println("The WebElement ===  " +getidentifier(element) + "  : is Clicked");
+//		System.out.println("The WebElement ===  " +getidentifier(element) + "  : is Clicked");
 	}
 	
 	public static String getidentifier(WebElement element) {
@@ -726,10 +726,13 @@ try {
 	/* logic to simulate hover over functionality*/
 	public void navigateToMenuLinks(WebElement hdrMenuElement, WebElement menuDropListItem) {
 
-		Actions actions = new Actions(driver);
-		actions.moveToElement(hdrMenuElement);
-		actions.moveToElement(menuDropListItem);
-		actions.click().build().perform();
+//		Actions actions = new Actions(driver);
+//		actions.moveToElement(hdrMenuElement);
+//		actions.moveToElement(menuDropListItem);
+//		actions.click().build().perform();
+		jsMouseOver(hdrMenuElement);
+		jsMouseOver(menuDropListItem);
+		jsClickNew(menuDropListItem);
 		CommonUtility.checkPageIsReadyNew(driver);
 
 	}
@@ -847,20 +850,26 @@ try {
 		}
 
 		threadsleep(2000);
-		WebElement currentSysTimeElement=timeJson;
-		String currentSysTimeStr=currentSysTimeElement.getText();
-		System.out.println("currentSysTimeStr="+currentSysTimeStr);
-		JSONParser parser = new JSONParser();
-		org.json.simple.JSONObject jsonObj;
-		try {
-			jsonObj = (org.json.simple.JSONObject) parser.parse(currentSysTimeStr);
-			org.json.simple.JSONObject sysTimeJsonObj = (org.json.simple.JSONObject) jsonObj; 
+		if(!MRScenario.browserName.equalsIgnoreCase("firefox")) {
+			WebElement currentSysTimeElement = timeJson;
+			String currentSysTimeStr = currentSysTimeElement.getText();
+			System.out.println("currentSysTimeStr=" + currentSysTimeStr);
+			JSONParser parser = new JSONParser();
+			org.json.simple.JSONObject jsonObj;
+			try {
+				jsonObj = (org.json.simple.JSONObject) parser.parse(currentSysTimeStr);
+				org.json.simple.JSONObject sysTimeJsonObj = (org.json.simple.JSONObject) jsonObj;
 
-			org.json.simple.JSONObject dataObj = (org.json.simple.JSONObject) sysTimeJsonObj.get("data"); 
-			timeStr=(String) dataObj.get("systemDate"); 
-		} catch (ParseException e) {
-			e.printStackTrace();
-			Assert.assertTrue("PROBLEM - unable to find out the system time", false);
+				org.json.simple.JSONObject dataObj = (org.json.simple.JSONObject) sysTimeJsonObj.get("data");
+				timeStr = (String) dataObj.get("systemDate");
+			} catch (ParseException e) {
+				e.printStackTrace();
+				Assert.assertTrue("PROBLEM - unable to find out the system time", false);
+			}
+		}
+		else
+		{
+			timeStr = driver.findElement(By.xpath("//tbody/tr[5]/td[2]")).getText();
 		}
 		driver.close();
 		driver.switchTo().window(winHandleBefore);
@@ -1205,7 +1214,7 @@ try {
     		// First checking to see if the loading indicator is found
     		// we catch and throw no exception here in case they aren't ignored
     		try {
-//    			threadsleep(5000);			//Adding sleep since the loading spinner sometimes takes long to come up
+    			threadsleep(5000);			//Adding sleep since the loading spinner sometimes takes long to come up
     			System.out.println("Waiting to check if Loading screen is present");
     			loadingScreen = fwait.until(new Function<WebDriver, List<WebElement>>() {
 					public List<WebElement> apply(WebDriver driver) {

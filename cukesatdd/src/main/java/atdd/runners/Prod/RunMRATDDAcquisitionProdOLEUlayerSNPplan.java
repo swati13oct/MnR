@@ -14,7 +14,7 @@ import cucumber.api.CucumberOptions;
 @RunWith(ExtendedCucumber.class)
 @ExtendedCucumberOptions(retryCount=0,screenShotSize="", screenShotLocation="/screenshots/",jsonReport = "target/cucumber-RunMRATDDAcquisitionProdOLEUlayerSNPplan.json",detailedReport = true,
  detailedAggregatedReport = true, overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDAcquisitionProdOLEUlayerSNPplan")
-@CucumberOptions(glue = { "atdd.framework", "acceptancetests.acquisition" },monochrome=true, features = { "src/main/resources/feature/acquisition/ole/OLE-AARP-SNP.feature" }, plugin = {
+@CucumberOptions(glue = { "atdd.framework", "acceptancetests.acquisition" },monochrome=true, features = { "src/main/resources/feature/acquisition/ole/oleFuture/OLE-PlanSummary-SNP.feature" }, plugin = {
 		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionProdOLEUlayerSNPplan.json" }, tags = { "@prodRegression" })
 
 

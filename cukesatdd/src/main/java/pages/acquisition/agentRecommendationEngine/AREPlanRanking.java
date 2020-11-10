@@ -321,10 +321,10 @@ public class AREPlanRanking extends UhcDriver {
 		}
 
 		if (select && !elemCheck.isSelected()) {
-			elemClick.click();
+			jsClickNew(elemClick);
 		}
 		if (!select && elemCheck.isSelected()) {
-			elemClick.click();
+			jsClickNew(elemClick);
 		}
 
 		if (select)
@@ -337,7 +337,7 @@ public class AREPlanRanking extends UhcDriver {
 		pageloadcomplete();
 		System.out.println("Validate Adding Drugs from Plan Compare page : ");
 		validate(AddDrugsLink);
-		AddDrugsLink.click();
+		jsClickNew(AddDrugsLink);
 		DCEPage dceobj = new DCEPage(driver);
 		dceobj.drugsHandlerWithdetails(drugDetails);
 		returnToPlanCompare();
@@ -449,7 +449,8 @@ public class AREPlanRanking extends UhcDriver {
 			comparePlanlink.click();
 		} else {
 			scrollToView(planInPDP);
-			planInPDP.click();
+			//planInPDP.click();
+			jsClickNew(planInPDP);
 			pageloadcomplete();
 			actualplanName = planNameEnrollPage.getText().trim();
 			System.out.println("Plan Name in Plan Enroll Page: " + actualplanName);
@@ -491,11 +492,11 @@ public class AREPlanRanking extends UhcDriver {
 			planStartCount = 1;
 			Assert.assertTrue(plansDetails.get(0).contains("CURRENTPLAN"), "Current Plan is not displayed by default");
 		}
-		planRankingDropdown.click();
+		jsClickNew(planRankingDropdown);
 		validate(applyBtn);
 		optionSelection("dental,vision,hearing,fitness,lowpremium,travel,drug,doctor", false);
 		optionSelection(rankOptions, true);
-		applyBtn.click();
+		jsClickNew(applyBtn);
 		threadsleep(3000);
 		// Validate Success message
 		Assert.assertTrue(successMsg.getText().toUpperCase().contains("SUCCESS"), "No Sucess message");
@@ -534,10 +535,10 @@ public class AREPlanRanking extends UhcDriver {
 		}
 
 		// Uncheck all and validate original order
-		planRankingDropdown.click();
+		jsClickNew(planRankingDropdown);
 		validate(applyBtn);
 		optionSelection(rankOptions, false);
-		applyBtn.click();
+		jsClickNew(applyBtn);
 		threadsleep(3000);
 		;
 		boolean msg = validate(successMsg, 10); // Validate message disappear
@@ -840,7 +841,7 @@ public class AREPlanRanking extends UhcDriver {
 		System.out.println("Appling Ranking after adding Drugs");
 		threadsleep(3000);
 		pageloadcomplete();
-		Actions action = new Actions(driver);
+//		Actions action = new Actions(driver);
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 //		DocName.click();
 //		scrollToView(planRankingDropdown);
@@ -848,8 +849,10 @@ public class AREPlanRanking extends UhcDriver {
 		scrollToView(AddDrugsLink);
 		threadsleep(3000);
 		scrollToView(Logo);
-		action.moveToElement(planRankingDropdown).perform();
-		action.moveToElement(planRankingDropdown).click().perform();
+//		action.moveToElement(planRankingDropdown).perform();
+//		action.moveToElement(planRankingDropdown).click().perform();
+		jsMouseOver(planRankingDropdown);
+		jsClickNew(planRankingDropdown);
 		optionSelection(rankOptions, true);
 		applyBtn.click();
 		threadsleep(3000);
@@ -866,7 +869,8 @@ public class AREPlanRanking extends UhcDriver {
 	public void OriginalPlanOrder(String rankOptions) {
 		System.out.println("Fetching Original PlanOrder in plancompare page");
 		actionMoveTo(planRankingDropdown);
-		planRankingDropdown.click();
+		//planRankingDropdown.click();
+		jsClickNew(planRankingDropdown);
 		drugDocDisable(rankOptions, false);
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		for (WebElement elem : planNamesOnly) {
@@ -1046,13 +1050,15 @@ public class AREPlanRanking extends UhcDriver {
 
 	public void disableDrugOriginalPlans(String curPlan, String changeOrder, String rankOptions, String planOrders) {
 		System.out.println("Verify Drug option disabled after deleting drugs in DCE");
-		Actions action = new Actions(driver);
+		//Actions action = new Actions(driver);
 		scrollToView(print);
 		scrollToView(AddDoctorsLink);
 		threadsleep(3000);
 		scrollToView(Logo);
-		action.moveToElement(planRankingDropdown).perform();
-		action.moveToElement(planRankingDropdown).click().perform();
+		//action.moveToElement(planRankingDropdown).perform();
+		//action.moveToElement(planRankingDropdown).click().perform();
+		jsMouseOver(planRankingDropdown);
+		jsClickNew(planRankingDropdown);
 		drugDocDisable(rankOptions, false);
 		compareCurrentOriginalPlan(curPlan, changeOrder, planOrders);
 	}
@@ -1116,8 +1122,9 @@ public class AREPlanRanking extends UhcDriver {
 	}
 
 	public void actionMoveTo(WebElement elem) {
-		Actions action = new Actions(driver);
-		action.moveToElement(elem).perform();
+//		Actions action = new Actions(driver);
+//		action.moveToElement(elem).perform();
+		jsMouseOver(elem);
 		threadsleep(1000);
 	}
 	

@@ -27,8 +27,10 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
 import acceptancetests.acquisition.planRecommendationEngine.PlanRecommendationEngineStepDefinition;
+import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 import pages.acquisition.commonpages.AcquisitionHomePage;
+import pages.acquisition.commonpages.VPPPlanSummaryPage;
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineDoctorsPage;
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineDrugsPage;
 import pages.mobile.acquisition.planrecommendationengine.DoctorsMobilePage;
@@ -888,7 +890,7 @@ public class PlanRecommendationEngineResultsPage extends UhcDriver {
 	
 	public void validateZipcodePage(String zip,String county, String isMultiCounty) {
 		System.out.println("Validating Zipcode and County in location Page");
-		getStartedBtn.click();
+		jsClickNew(getStartedBtn);
 		pageloadcomplete();
 		Assert.assertTrue(zipCode.getAttribute("ng-reflect-model").contains(zip),"Invalid Zip");
 		if (isMultiCounty.equalsIgnoreCase("NO")) {
@@ -898,16 +900,17 @@ public class PlanRecommendationEngineResultsPage extends UhcDriver {
 			validate(multiCountyInfo,20);
 			Assert.assertTrue(multiCountyInfo.getText().toUpperCase().contains(county.toUpperCase()),"Invalid County");
 		}
-		continueBtn.click();
+		jsClickNew(continueBtn);
 		
 	}
 	
 	public void vppToPreStartOver() {
 		System.out.println("Validating VPP to PRE Page Clicking on Start Over Button");
 		validate(StartOverButton,20);
-		StartOverButton.click();
+		jsClickNew(StartOverButton);
 		startOverPopup();
 		pageloadcomplete();
+		waitForPageLoadSafari();
 	}
 	
 	public void startOverPopup() {
@@ -916,7 +919,7 @@ public class PlanRecommendationEngineResultsPage extends UhcDriver {
 		validate(StartOverContent,20);
 		validate(closeButton,20);
 		validate(startOverButtoninPopup,20);
-		startOverButtoninPopup.click();
+		jsClickNew(startOverButtoninPopup);
 	}
 	
 	public void validateRankingPlans(String Recom,String plans) {
@@ -984,20 +987,20 @@ public void sendEmail(String plan, String email) {
 	System.out.println("Email Plan list from VPP : ");
 	plansLoader();
 	if (plan.equalsIgnoreCase("PDP")) {
-		pdpemailList.click();
+		jsClickNew(pdpemailList);
 	} else if (plan.equalsIgnoreCase("MA")) {
-		maemailList.click();
+		jsClickNew(maemailList);
 
 	} else if (plan.equalsIgnoreCase("SNP")) {
-		snpemailList.click();
+		jsClickNew(snpemailList);
 
 	} else {
 		Assert.assertTrue(false, "Print Email is not configured for the given Plan :" + plan);
 	}
 	emailText.sendKeys(email);
-	emailSendButton.click();
+	jsClickNew(emailSendButton);
 	validate(emailSuccess,15);
-	emailCloseButton.click();
+	jsClickNew(emailCloseButton);
 }
 
 public void validateUIAPIRecommendations() {
@@ -1367,7 +1370,7 @@ public boolean changePlanyear(String year) {
 	// Checking and Changing to Current Year
 	if (year.equalsIgnoreCase("current")) {
 		if (validate(currentPlanYear, 15)) {
-			currentPlanYear.click();
+			jsClickNew(currentPlanYear);
 			Assert.assertTrue(currentPlanYearSelected.getAttribute("id").length()>0,"Current Plan Year is not Selected");
 			threadsleep(5000);
 			return true;
@@ -1377,7 +1380,7 @@ public boolean changePlanyear(String year) {
 	// Checking and Changing Future Year
 	if (year.equalsIgnoreCase("future")) {
 		if (validate(futurePlanYear, 15)) {
-			futurePlanYear.click();
+			jsClickNew(futurePlanYear);
 			Assert.assertTrue(futurePlanYearSelected.getAttribute("id").length()>0,"Future Plan Year is not Selected");
 			threadsleep(5000);
 			return true;
@@ -1411,4 +1414,21 @@ public boolean checkPlanyear(String year) {
 	return false;
 }
 
+
+@FindBy(xpath = "//div[@class='switch-field ng-scope']//label[@class='ng-binding'][contains(text(),'2020 plans')]")
+private WebElement  CurrentYearPlansBtn;
+
+public VPPPlanSummaryPage handlePlanYearSelectionPRE(String planYear) {
+
+	CommonUtility.checkPageIsReadyNew(driver);			
+		if(planYear.equalsIgnoreCase("current")) {				// if the scenario is for current year
+			if(validate(CurrentYearPlansBtn, 20)) {
+				System.out.println("*****CLICKING ON Current Year button*****: "+CurrentYearPlansBtn.getText());
+				jsClickNew(CurrentYearPlansBtn);
+				CommonUtility.checkPageIsReadyNew(driver);
+			}
+		}
+		return null;
+		
+}
 }

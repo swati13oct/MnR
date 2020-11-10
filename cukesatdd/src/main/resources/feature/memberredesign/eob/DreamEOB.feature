@@ -102,7 +102,7 @@ Feature: 1.04.2 To Test DREAM EOB for Members - E2E
     @dreamEob01e_maCosmos 
     Examples: 
       | index | planType | memberType        | note                              | flagZeroEob |
-      | 05    | MA       | COSMOS_DEOB       | old C                             | true        |
+      | 05    | MA       | COSMOS_DEOB       | old C                             | false       |
 
     @dreamEob01f_maNice  @devRegression
     Examples: 
