@@ -75,16 +75,16 @@ public class PlanDocsStepDefinition {
 	/**
 	 * @toDo:access the acquisition DCE tool from home page
 	 */
-	@When("^I access the acquisition Plan docs tool from home page on uhc$")
-	public void I_access_the_plandocs_tool_home_page_uhc() throws InterruptedException {
-
-		pages.acquisition.bluelayer.AcquisitionHomePage acquisitionHomePage = (pages.acquisition.bluelayer.AcquisitionHomePage) loginScenario.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		PlanDocsPage plandocsPage= (PlanDocsPage) acquisitionHomePage.navigateToPlanDocsFromHome();
-		if(null!=plandocsPage){
-			loginScenario.saveBean(PageConstants.PLANDOCS_PAGE, plandocsPage);
-		}else
-			Assert.fail("Plan docs page object is not loaded");
-	}
+//	@When("^I access the acquisition Plan docs tool from home page on uhc$")
+//	public void I_access_the_plandocs_tool_home_page_uhc() throws InterruptedException {
+//
+//		pages.acquisition.bluelayer.AcquisitionHomePage acquisitionHomePage = (pages.acquisition.bluelayer.AcquisitionHomePage) loginScenario.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+//		PlanDocsPage plandocsPage= (PlanDocsPage) acquisitionHomePage.navigateToPlanDocsFromHome();
+//		if(null!=plandocsPage){
+//			loginScenario.saveBean(PageConstants.PLANDOCS_PAGE, plandocsPage);
+//		}else
+//			Assert.fail("Plan docs page object is not loaded");
+//	}
 	
 
 	

@@ -1,4 +1,4 @@
-@UAT_Regression
+@UATRegression
 Feature:1.10.4 UAT-DCE-To test UAT DCE E2E Regression Scenarios
 
   @DCE_ShopForPlanPage_PDPpage 
