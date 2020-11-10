@@ -54,7 +54,6 @@ public class ZipCodePlanYearCapturePage extends UhcDriver {
 	public void openAndValidate() {
 		validateNew(zipCodeTxtbox);
 	}
-
 	public void enterZipCode(String zipcode) {
 		zipCodeTxtbox.clear();
 		zipCodeTxtbox.sendKeys(zipcode);
