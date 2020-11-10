@@ -1675,9 +1675,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			waitforElement(lnkLearnAboutMedicare);
 			if (lnkLearnAboutMedicare.isDisplayed()) {
 
-				Actions actions = new Actions(driver);
-				actions.moveToElement(lnkLearnAboutMedicare);
-				actions.build().perform();
+//				Actions actions = new Actions(driver);
+//				actions.moveToElement(lnkLearnAboutMedicare);
+//				actions.build().perform();
 				jsMouseOver(lnkLearnAboutMedicare);
 
 				System.out.println("Hover over Learn about Medicare completed");
