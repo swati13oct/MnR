@@ -358,8 +358,11 @@ public class HealthRecordPage  extends HealthRecordBase {
 	public boolean isHeathRecordLnkOnAcctProfDropdownOption(String planType, String memberType, boolean expComboTab, String targetPage, boolean expectIhrLnk) {
 		System.out.println("Proceed to validate if IHR link is included in the dropdown...");
 		String stageUrl="ihr.int.werally.in";
-		String offprodUrl="internal-redirect?deepLink=https%3A%2F%2Fihr.bluesteel.werally.in";
+		//note: bluesteel is the link for offline-prod but env can only point at one url at a time
+		//note: to avoid update link for every offline-prod deployment, keeping offline-prod link as prod link
+		//keep String offprodUrl="internal-redirect?deepLink=https%3A%2F%2Fihr.bluesteel.werally.in";
 		String prodUrl="internal-redirect?deepLink=https%3A%2F%2Fihr.werally.com";
+		String offprodUrl=prodUrl;
 		checkModelPopup(driver,1);
 		if (expComboTab) {
 			if (targetPage.equalsIgnoreCase("payments"))

@@ -235,7 +235,7 @@ public class HealthRecordStepDefinition {
 		}
 
 		boolean sanityRun=(Boolean) getLoginScenario().getBean(HealthRecordCommonConstants.SANITY_RUN);	
-		if (!sanityRun) {
+		if (!sanityRun && !MRScenario.environment.equals("offline")) {
 			healthRecordPage.navigateFromDashboardToHeathRecordPageAndThenCloseTab();
 			healthRecordPage.backToOriginalLinkToPrepNextStep(planType, memberType, originalUrl);
 		}
@@ -312,7 +312,7 @@ public class HealthRecordStepDefinition {
 		}
 
 		boolean sanityRun=(Boolean) getLoginScenario().getBean(HealthRecordCommonConstants.SANITY_RUN);	
-		if (!sanityRun) {
+		if (!sanityRun && !MRScenario.environment.equals("offline")) {
 			healthRecordPage.navigateFromDashboardToHeathRecordPageAndThenCloseTab();
 			healthRecordPage.backToOriginalLinkToPrepNextStep(planType, memberType, originalUrl);
 		}
@@ -371,7 +371,7 @@ public class HealthRecordStepDefinition {
 		}
 
 		boolean sanityRun=(Boolean) getLoginScenario().getBean(HealthRecordCommonConstants.SANITY_RUN);	
-		if (!sanityRun) {
+		if (!sanityRun && !MRScenario.environment.equals("offline")) {
 			//note: already on secondary page, no need to deal with rally dashboard navigation
 			healthRecordPage.navigateFromTestHarnessToHeathRecordPage();
 			healthRecordPage.backToOriginalLinkToPrepNextStep(planType, memberType, originalUrl);
@@ -436,7 +436,7 @@ public class HealthRecordStepDefinition {
 		}
 
 		boolean sanityRun=(Boolean) getLoginScenario().getBean(HealthRecordCommonConstants.SANITY_RUN);	
-		if (!sanityRun) {
+		if (!sanityRun && !MRScenario.environment.equals("offline")) {
 			healthRecordPage.navigateFromTestHarnessToHeathRecordPage();
 			healthRecordPage.backToOriginalLinkToPrepNextStep(planType, memberType, originalUrl);
 		}
@@ -492,7 +492,7 @@ public class HealthRecordStepDefinition {
 			String planDocUrl=wd.getCurrentUrl();
 			//note: already on secondary page, no need to deal with rally dashboard navigation
 			boolean sanityRun=(Boolean) getLoginScenario().getBean(HealthRecordCommonConstants.SANITY_RUN);	
-			if (!sanityRun) {
+			if (!sanityRun && !MRScenario.environment.equals("offline")) {
 				healthRecordPage.navigateFromTestHarnessToHeathRecordPage();
 				healthRecordPage.backToOriginalLinkToPrepNextStep(planType, memberType, planDocUrl);
 			}
@@ -539,7 +539,7 @@ public class HealthRecordStepDefinition {
 		}
 
 		boolean sanityRun=(Boolean) getLoginScenario().getBean(HealthRecordCommonConstants.SANITY_RUN);	
-		if (!sanityRun) {
+		if (!sanityRun && !MRScenario.environment.equals("offline")) {
 			//note: already on secondary page, no need to deal with rally dashboard navigation
 			healthRecordPage.navigateFromTestHarnessToHeathRecordPage();
 			healthRecordPage.backToOriginalLinkToPrepNextStep(planType, memberType, originalUrl);
@@ -603,7 +603,7 @@ public class HealthRecordStepDefinition {
 		}
 
 		boolean sanityRun=(Boolean) getLoginScenario().getBean(HealthRecordCommonConstants.SANITY_RUN);	
-		if (!sanityRun) {
+		if (!sanityRun && !MRScenario.environment.equals("offline")) {
 			//note: already on secondary page, no need to deal with rally dashboard navigation
 			healthRecordPage.navigateFromTestHarnessToHeathRecordPage();
 			healthRecordPage.backToOriginalLinkToPrepNextStep(planType, memberType, originalUrl);
@@ -688,7 +688,7 @@ public class HealthRecordStepDefinition {
 		}
 
 		boolean sanityRun=(Boolean) getLoginScenario().getBean(HealthRecordCommonConstants.SANITY_RUN);	
-		if (!sanityRun) {
+		if (!sanityRun && !MRScenario.environment.equals("offline")) {
 			healthRecordPage.navigateFromTestHarnessToHeathRecordPage();
 			healthRecordPage.backToOriginalLinkToPrepNextStep(planType, memberType, originalUrl);
 		}
@@ -756,7 +756,7 @@ public class HealthRecordStepDefinition {
 		}
 
 		boolean sanityRun=(Boolean) getLoginScenario().getBean(HealthRecordCommonConstants.SANITY_RUN);	
-		if (!sanityRun) {
+		if (!sanityRun && !MRScenario.environment.equals("offline")) {
 			healthRecordPage.navigateFromTestHarnessToHeathRecordPage();
 			healthRecordPage.backToOriginalLinkToPrepNextStep(planType, memberType, originalUrl);
 		}
@@ -828,7 +828,7 @@ public class HealthRecordStepDefinition {
 		}
 
 		boolean sanityRun=(Boolean) getLoginScenario().getBean(HealthRecordCommonConstants.SANITY_RUN);	
-		if (!sanityRun) {
+		if (!sanityRun && !MRScenario.environment.equals("offline")) {
 			//note: already on secondary page, no need to deal with rally dashboard navigation
 			healthRecordPage.navigateFromTestHarnessToHeathRecordPage();
 			healthRecordPage.backToOriginalLinkToPrepNextStep(planType, memberType, originalUrl);
@@ -877,7 +877,7 @@ public class HealthRecordStepDefinition {
 		}
 
 		boolean sanityRun=(Boolean) getLoginScenario().getBean(HealthRecordCommonConstants.SANITY_RUN);	
-		if (!sanityRun) {
+		if (!sanityRun && !MRScenario.environment.equals("offline")) {
 			//note: already on secondary page, no need to deal with rally dashboard navigation
 			healthRecordPage.navigateFromTestHarnessToHeathRecordPage();
 			healthRecordPage.backToOriginalLinkToPrepNextStep(planType, memberType, originalUrl);
@@ -941,7 +941,7 @@ public class HealthRecordStepDefinition {
 		}
 
 		boolean sanityRun=(Boolean) getLoginScenario().getBean(HealthRecordCommonConstants.SANITY_RUN);	
-		if (!sanityRun) {
+		if (!sanityRun && !MRScenario.environment.equals("offline")) {
 			//note: already on secondary page, no need to deal with rally dashboard navigation
 			healthRecordPage.navigateFromTestHarnessToHeathRecordPage();
 			healthRecordPage.backToOriginalLinkToPrepNextStep(planType, memberType, originalUrl);
@@ -1005,7 +1005,7 @@ public class HealthRecordStepDefinition {
 		}
 
 		boolean sanityRun=(Boolean) getLoginScenario().getBean(HealthRecordCommonConstants.SANITY_RUN);	
-		if (!sanityRun) {
+		if (!sanityRun && !MRScenario.environment.equals("offline")) {
 			//note: already on secondary page, no need to deal with rally dashboard navigation
 			healthRecordPage.navigateFromTestHarnessToHeathRecordPage();
 			healthRecordPage.backToOriginalLinkToPrepNextStep(planType, memberType, originalUrl);
@@ -1054,7 +1054,7 @@ public class HealthRecordStepDefinition {
 		}
 
 		boolean sanityRun=(Boolean) getLoginScenario().getBean(HealthRecordCommonConstants.SANITY_RUN);	
-		if (!sanityRun) {
+		if (!sanityRun && !MRScenario.environment.equals("offline")) {
 			//note: already on secondary page, no need to deal with rally dashboard navigation
 			healthRecordPage.navigateFromTestHarnessToHeathRecordPage();
 			healthRecordPage.backToOriginalLinkToPrepNextStep(planType, memberType, originalUrl);
