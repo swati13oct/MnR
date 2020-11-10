@@ -528,6 +528,7 @@ public class OneTimePaymentPage extends UhcDriver {
 		validate(otherAmountRadioButton);
 		otherAmountRadioButton.click();
 		otherAmountInput.clear();
+		TestHarness.checkForIPerceptionModel(driver);
 		otherAmountInput.sendKeys(otherAmount);
 		System.out.println("User selected Other amount option and Entered amount : " + otherAmount);
 	}
@@ -546,6 +547,7 @@ public class OneTimePaymentPage extends UhcDriver {
 	}
 	
 	public void selectCheckingAccountOption() {
+		TestHarness.checkForIPerceptionModel(driver);
 		validate(CheckingAccountRadioButton);
 		CheckingAccountRadioButton.click();
 		System.out.println("User selects Checking Account Option");
@@ -574,6 +576,7 @@ public class OneTimePaymentPage extends UhcDriver {
 	
 	
 	public PaymentsFormPage clickOnContuineButton() {
+		TestHarness.checkForIPerceptionModel(driver);
 		validate(otheramountfield);
 		TestHarness.checkForIPerceptionModel(driver);
 		NextButton.click();
