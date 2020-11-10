@@ -87,8 +87,8 @@ public class PlanDetailsPage extends UhcDriver {
 	@FindBy(xpath = "//*[@id='detail-0']/div/div/div[1]")
 	private WebElement medBenefitsSection;
 
-	//@FindBy(xpath="//*[contains(@id,'prescriptiondrug')]")
-	@FindBy(xpath="//a[@id='prescriptiondrug' and contains(@class,'active')]")
+	@FindBy(xpath="//*[contains(@id,'prescriptiondrug')]")
+	//@FindBy(xpath="//a[contains(@id,'prescriptiondrug') and contains(@class,'active')]")
 	private List<WebElement> presDrugTab1;
 
 	@FindBy(id = "prescriptiondrug")
@@ -362,7 +362,7 @@ public class PlanDetailsPage extends UhcDriver {
 
 		}  else if (planType.equalsIgnoreCase("MAPD")) {
 			CommonUtility.waitForPageLoadNew(driver, presDrugTab.get(0), 45);
-			org.testng.Assert.assertTrue(1 == presDrugTab1.size(), "Prescription Drug tab displayed for PDP plans");
+			org.testng.Assert.assertTrue(1 == presDrugTab1.size(), "Prescription Drug tab displayed for MAPD plans");
 		}else if (planType.equalsIgnoreCase("PDP")) {
 			CommonUtility.waitForPageLoadNew(driver, presDrugTab.get(0), 45);
 			org.testng.Assert.assertTrue(0 == medBenefitsTab.size(), "Medical Benefit tab not displayed for PDP plans");

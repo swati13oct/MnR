@@ -528,6 +528,7 @@ public class OneTimePaymentPage extends UhcDriver {
 		validate(otherAmountRadioButton);
 		otherAmountRadioButton.click();
 		otherAmountInput.clear();
+		TestHarness.checkForIPerceptionModel(driver);
 		otherAmountInput.sendKeys(otherAmount);
 		System.out.println("User selected Other amount option and Entered amount : " + otherAmount);
 	}
@@ -546,6 +547,7 @@ public class OneTimePaymentPage extends UhcDriver {
 	}
 	
 	public void selectCheckingAccountOption() {
+		TestHarness.checkForIPerceptionModel(driver);
 		validate(CheckingAccountRadioButton);
 		CheckingAccountRadioButton.click();
 		System.out.println("User selects Checking Account Option");
@@ -574,6 +576,7 @@ public class OneTimePaymentPage extends UhcDriver {
 	
 	
 	public PaymentsFormPage clickOnContuineButton() {
+		TestHarness.checkForIPerceptionModel(driver);
 		validate(otheramountfield);
 		TestHarness.checkForIPerceptionModel(driver);
 		NextButton.click();
@@ -625,6 +628,25 @@ public class OneTimePaymentPage extends UhcDriver {
 			return null;
 		}
 	}
+	
+	public ConfirmOneTimePaymentPage selectAgreeAndClickOnSubmitPaymentsforOneTime_Updated() {
+		CommonUtility.waitForPageLoad(driver, EditPaymentInformation, 10);
+		TestHarness.checkForIPerceptionModel(driver);
+		System.out.println("User is on Review Your Automatic Payments Information Page");
+		PaymentsDataVerificationonReviewPage();
+		 JavascriptExecutor jse = (JavascriptExecutor)driver;
+		 jse.executeScript("window.scrollBy(0,650)", "");
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		jsClickNew(AgreeCheckBox);
+		TestHarness.checkForIPerceptionModel(driver);
+		return null;
+		}
+	
 	
 	public ConfirmOneTimePaymentPage selectAgreeAndClickOnContinueforEFTForShip() {
 		validate(EditPaymentInformation);
