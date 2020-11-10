@@ -10,6 +10,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.TimeUnit;
 
 import org.json.simple.JSONObject;
@@ -445,6 +446,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	// @FindBy(xpath = "//a[@class='cancel-button modal-link inline-block']")
 	@FindBy(xpath = "//a[@class='cancel-button modal-link']")
 	private WebElement cancelButton;
+	
+	@FindBy(xpath = "(//a[contains(text(),'Return to Application')])[3]")
+	private WebElement ReturntoApplicationButton;
 
 	@FindBy(xpath = "(//a[contains(text(),'Cancel Application')])[3]")
 	private WebElement cancelButtonPopUp;
@@ -644,6 +648,70 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	
 	@FindBy(id = "findProvidersComponentWrap")
 	public static WebElement findProvidersComponentWrap;
+	
+	@FindBy(xpath = "//*[@id='MedicareClaimNum']")
+	private WebElement MedicareNumber;
+	
+	@FindBy(xpath = "(//*[@class='radio_choice']/parent::span)[1]")
+	private WebElement Gender;
+	
+	@FindBy(xpath = "(//*[@class='radio_choice']/parent::span)[2]")
+	private WebElement CoverageMedicaid;
+	
+	@FindBy(xpath = "(//*[@class='radio_choice']/parent::span)[2]")
+	private WebElement CoveragePartc;
+	@FindBy(xpath = "(//*[@class='radio_choice']/parent::span)[2]")
+	private WebElement CoverageSupplementPlans;
+	@FindBy(xpath = "(//*[@class='radio_choice']/parent::span)[2]")
+	private WebElement CoverageotherInsurance;
+	
+	
+	@FindBy(xpath = "(//label[text()='No'])[1]")
+	private WebElement CoverageVerification;
+	
+	@FindBy(xpath = "(//label[text()='No'])[1]")
+	private WebElement CoverageVerification1;
+	
+	@FindBy(xpath = "(//label[text()='No'])[1]")
+	private WebElement CoverageVerification2;
+	@FindBy(xpath = "//label[@for='CpaSignatureInd']")
+	private WebElement CoverageVerificationAcknowledge;
+	
+	@FindBy(xpath = "//label[@for='PaymentChoice_1']")
+	private WebElement paymentOption;
+	@FindBy(xpath = "//label[@for='ElectronicDeliveryInd_1']")
+	private WebElement DocumentDelivery;
+	
+	@FindBy(xpath = "//label[@for='EmailChange_2']")
+	private WebElement EmailAddressNo;
+	
+	@FindBy(xpath = "//label[@for='OnlinePreferenceSignatureInd']")
+	private WebElement ReadAgreement;
+	
+	//@FindBy(xpath = "(//span[contains(text(),'Confirm Your Responses and Proceed')])[2]/parent::button")
+//	@FindBy(xpath = "//button[contains(@class,'centerElement cta')]")
+	@FindBy(xpath = "//div[@class='actionbar parbase']//button[1]/span")
+	private WebElement ProceedAuthorization;
+	
+	@FindBy(xpath = "//label[@for='SignatureInd']")
+	private WebElement VerificationAgree;
+	
+	@FindBy(xpath = "//label[@for='MedicalReleaseAuthSignatureInd']")
+	private WebElement VerificationAgree2;
+	
+	@FindBy(xpath = "//label[@for='MedicalReleaseClaimsSignatureInd']")
+	private WebElement VerificationAgree3;
+	
+	@FindBy(xpath = "(//button[contains(text(),'Submit application')])[1]")
+	private WebElement SubmitApplication;
+	
+	@FindBy(xpath = "//span[contains(text(),'Submission Confirmation')]")
+	private WebElement submitconfirmation;
+	
+	@FindBy(xpath = "//*[contains(text(),'View Prescription Drug Plans')]")
+	private WebElement ViewPrescriptionDrugPlans;
+	
+
 	
 	public WebElement getValEstimatedAnnualDrugCostValue(String planName) {
 		// WebElement valEstimatedAnnualDrugCostValue =
@@ -3970,9 +4038,145 @@ public class VPPPlanSummaryPage extends UhcDriver {
 				System.out.println("Drug removed:"+ (i+1));
 				}
 			}
+				
+	}
+	
+
+	
+	public String StartApplication(String FirstName, String LastName) throws InterruptedException {
+		Thread.sleep(4000);
+		CommonUtility.waitForPageLoadNew(driver, Start_ApplicationBtn, 20);
+		Start_ApplicationBtn.click();
+		System.out.println("Start application button is clicked on application page");
+		Thread.sleep(4000);
+		CommonUtility.waitForPageLoadNew(driver, insuredStatus, 20);
+		insuredStatus.click();
+		Thread.sleep(2000);
+		nextButton.click();
+		Thread.sleep(2000);
+		nextButton.click();
+		Thread.sleep(2000);
+		nextButton.click();
+		Thread.sleep(2000);
+		nextButton.click();
+		Thread.sleep(2000);
+		firstName.sendKeys(FirstName);
+		lastName.sendKeys(LastName);
+		nextButton.click();
+		CommonUtility.waitForPageLoadNew(driver, address1, 20);
+		address1.sendKeys("TestAddress1");
+		cityName.sendKeys("TestCity");
+		alternatemailingAddressBtn.click();
+		emailAddress.sendKeys("test123@test.com");
+		phoneNumber.sendKeys("1234567890");
+		nextButton.click();
+		Thread.sleep(2000);
+		nextButton.click();
+		Thread.sleep(2000);
+		cancelButton.click();
+		CommonUtility.waitForPageLoad(driver, ReturntoApplicationButton, 30);
+		ReturntoApplicationButton.click();
+		Thread.sleep(2000);
+		nextButton.click();
+		return LastName;
+
+	}
+	
+	public void clickGender() throws InterruptedException {
+		ArrayList<String>values=new ArrayList<String>();
+		values.add("Male");values.add("Female");
+	int number=ThreadLocalRandom.current().nextInt(0,values.size());
+	WebElement gender=driver.findElement(By.xpath("(//label[text()='"+values.get(number)+"'])[1]"));
+	Thread.sleep(2000);
+	gender.click();
 		
 		
+	}
+	
+	public String continueApplicationuntilSubmitPage(String Medicarenumber) throws InterruptedException {
 		
+		//CommonUtility.waitForPageLoadNew(driver, MedicareNumber, 20);
+		MedicareNumber.sendKeys(Medicarenumber);
+		clickGender();
+//		Gender.click();
+		//jsClickNew(Gender);
+		nextButton.click();
+		Thread.sleep(2000);
+		nextButton.click();
+		Thread.sleep(2000);
+		nextButton.click();
+		Thread.sleep(2000);
+		nextButton.click();
+		Thread.sleep(2000);
+		nextButton.click();
+		jsClickNew(CoverageMedicaid);
+		nextButton.click();
+		Thread.sleep(2000);
+		jsClickNew(CoveragePartc);
+		nextButton.click();
+		Thread.sleep(2000);
+		jsClickNew(CoverageSupplementPlans);
+		nextButton.click();
+		Thread.sleep(2000);
+		jsClickNew(CoverageotherInsurance);
+		nextButton.click();
+		Thread.sleep(2000);
+		jsClickNew(CoverageVerification);
+		nextButton.click();
+		Thread.sleep(2000);
+		jsClickNew(CoverageVerification1);
+		nextButton.click();
+		Thread.sleep(2000);
+		jsClickNew(CoverageVerification2);
+		nextButton.click();
+		Thread.sleep(2000);
+		jsClickNew(CoverageVerification2);
+		nextButton.click();
+		Thread.sleep(2000);
+		jsClickNew(CoverageVerification);
+		nextButton.click();
+		Thread.sleep(2000);
+		jsClickNew(CoverageVerificationAcknowledge);
+		nextButton.click();
+		Thread.sleep(2000);
+		jsClickNew(paymentOption);
+		nextButton.click();
+		Thread.sleep(2000);
+		jsClickNew(DocumentDelivery);
+		nextButton.click();
 		
+		/////////////////////////New to add another Method
+		validateNew(EmailAddressNo);
+		jsClickNew(EmailAddressNo);
+		nextButton.click();
+		validateNew(ReadAgreement);
+		jsClickNew(ReadAgreement);
+		nextButton.click();
+
+		validateNew(ProceedAuthorization);
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);",ProceedAuthorization);
+		ProceedAuthorization.click();
+		validateNew(VerificationAgree);
+		jsClickNew(VerificationAgree);
+		nextButton.click();
+	
+		validateNew(VerificationAgree2);
+		jsClickNew(VerificationAgree2);
+		nextButton.click();
+		validateNew(VerificationAgree3);
+		Thread.sleep(3000);
+	   VerificationAgree3.click();
+		nextButton.click();
+		validateNew(SubmitApplication);
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);",SubmitApplication);
+		SubmitApplication.click();
+		validateNew(submitconfirmation);
+		String SubmitConfirmation = submitconfirmation.getText();
+		System.out.println("The return to the application code is- " + SubmitConfirmation);
+		Thread.sleep(2000);
+		
+		//jsClickNew(ViewPrescriptionDrugPlans);
+		//Thread.sleep(2000);
+		return SubmitConfirmation;
 	}
 }
