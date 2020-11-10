@@ -154,9 +154,11 @@ public class PlanRecommendationStepDefinitionMobile {
 	public void user_navigate_PRE_Breadcrumbs() throws InterruptedException {
 		PlanRecommendationEngineHeaderAndFooterMobile headerAndFooter = new PlanRecommendationEngineHeaderAndFooterMobile(
 				wd);
-		// headerAndFooter.navigationToPlanRecommendationEngine();
-		headerAndFooter.MobileMenu();
+		//headerAndFooter.navigationToPlanRecommendationEngine();
+		headerAndFooter.MobileMenuAndGetStarted();
 		headerAndFooter.breadCrumbs();
+		
+	
 	}
 
 	@Then("^user validate elements on landing page of Plan Recommendation Engine$")
@@ -779,7 +781,7 @@ public class PlanRecommendationStepDefinitionMobile {
 		String county = inputValues.get("County Name");
 		String isMultiCounty = inputValues.get("Is Multi County");
 		planSelectorResultspage.vppToPre();
-		planSelectorResultspage.validateZipAndCounty(zip, county, isMultiCounty);
+		planSelectorResultspage.validateZipcodePage(zip, county, isMultiCounty);
 	}
 
 	@Then("^user navigate to PRE and validate zipcode using Start Over$")

@@ -791,15 +791,19 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 		else
 			checkModelPopup(driver, 10);
 		handleChatPopup();
+		waitforElement(maPlansCount);
 		scrollToView(maPlansCount);
 		validateNew(maPlansCount);
-
+		
+		waitforElement(msPlansCount);
 		scrollToView(msPlansCount);
 		validateNew(msPlansCount);
 
+		waitforElement(pdpPlansCount);
 		scrollToView(pdpPlansCount);
 		validateNew(pdpPlansCount);
 
+		waitforElement(snpPlansCount);
 		scrollToView(snpPlansCount);
 		validateNew(snpPlansCount);
 	}
@@ -1883,6 +1887,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 			premiumForPlan = driver.findElement(By.xpath("(//*[contains(text(),\'" + planName
 					+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class, 'mabenefittable')]//li//*[contains(text(),'Monthly Premium')])"));
 
+		scrollToView(premiumForPlan);
 		validateNew(premiumForPlan);
 		/*
 		 * String PlanPremium = PremiumForPlan.getText();
@@ -2066,11 +2071,14 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 		if (!planType.equals("PDP")) {
 			WebElement marketingBullets = driver.findElement(By.xpath("//*[contains(text(),\'" + planName
 					+ "\')]/ancestor::div[contains(@class, 'module-plan-overview')]//ul[contains(@class ,'highlight-list')]"));
+			scrollToView(marketingBullets);
 			validateNew(marketingBullets);
+
 		}
 		if (planType.equals("PDP")) {
 			WebElement marketingBullets = driver.findElement(By.xpath("(//*[contains(text(),\'" + planName
 					+ "\')]/ancestor::div[contains(@class, 'module-plan-overview')]//ul[@class='ng-scope'])[2]"));
+			scrollToView(marketingBullets);
 			validateNew(marketingBullets);
 		}
 	}

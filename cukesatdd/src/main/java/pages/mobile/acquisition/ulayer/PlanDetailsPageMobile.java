@@ -242,13 +242,13 @@ public class PlanDetailsPageMobile extends UhcDriver {
 
 	@FindBy(id = "backToPlanSummaryTop")
 	private WebElement lnkBackToAllPlans;
-	
+
 	@FindBy(xpath = "//a[contains(text(),'Back to plan results')]")
 	private WebElement ReturnToMainPlanList;
 
 	@FindBy(xpath = "//input[@id='compareone']/following-sibling::label")
 	private WebElement compareBox;
-	
+
 	@FindBy(xpath = "//a[contains(text(),'Back to plan results')]")
 	private WebElement BackToMainPlanList;
 
@@ -544,7 +544,7 @@ public class PlanDetailsPageMobile extends UhcDriver {
 	}
 
 	//
-	public DrugCostEstimatorPage navigateToDCEThroughPlanCost() {
+	public pages.mobile.acquisition.bluelayer.DrugCostEstimatorPageMobile navigateToDCEThroughPlanCost() {
 
 		try {
 			Thread.sleep(2000);
@@ -563,7 +563,7 @@ public class PlanDetailsPageMobile extends UhcDriver {
 			e.printStackTrace();
 		}
 		if (currentUrl().contains("/estimate-drug-costs.html"))
-			return new DrugCostEstimatorPage(driver);
+			return new pages.mobile.acquisition.bluelayer.DrugCostEstimatorPageMobile(driver);
 		return null;
 	}
 
@@ -844,16 +844,14 @@ public class PlanDetailsPageMobile extends UhcDriver {
 
 	}
 
-
 	public VPPPlanSummaryPageMobile navigateBackToPlanSummaryPageFromDetailsPage() {
 		validateNew(getLnkBackToAllPlans());
 		jsClickNew(getLnkBackToAllPlans());
-		//getLnkBackToAllPlans().click();
+		// getLnkBackToAllPlans().click();
 		CommonUtility.checkPageIsReadyNew(driver);
-		//waitForPageLoadSafari();
+		// waitForPageLoadSafari();
 		if (driver.getCurrentUrl().contains("plan-summary")) {
 			jsClickNew(ReturnToMainPlanList);
-			
 			return new VPPPlanSummaryPageMobile(driver);
 
 		}
@@ -960,7 +958,7 @@ public class PlanDetailsPageMobile extends UhcDriver {
 	}
 
 	public void clickAndValidatePrescriptionDrugBenefits() {
-		//prescriptiondrugTab.click();
+		// prescriptiondrugTab.click();
 		scrollToView(prescriptiondrugTab);
 		jsClickNew(prescriptiondrugTab);
 		validateNew(drugBenefitsSection);
@@ -1084,16 +1082,16 @@ public class PlanDetailsPageMobile extends UhcDriver {
 
 	public boolean ClickValidatePDFlinkMobile(String pDFtype, String documentCode) {
 
-		//validate doc page is visible 
+		// validate doc page is visible
 		validateNew(planDocs);
 		System.out.println("PDF Page is available");
-		
-		// Validate required PDF document is available on page 
+
+		// Validate required PDF document is available on page
 		WebElement PDFlink = driver
 				.findElement(By.xpath("//*[contains(@id, 'planDocuments')]//a[contains(text(), '" + pDFtype + "')]"));
 		scrollToView(PDFlink);
-		
-		//Get document URL to validate document code in doc-URL
+
+		// Get document URL to validate document code in doc-URL
 		validateNew(PDFlinkURL);
 		System.out.println("PDF url has required document code");
 

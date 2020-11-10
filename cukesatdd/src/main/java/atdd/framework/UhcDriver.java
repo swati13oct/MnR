@@ -77,10 +77,20 @@ public abstract class UhcDriver {
 	@FindBy(css = "#planTypesColumn h3:nth-of-type(1)>a")
 	public WebElement ShopTool;
 
+	@FindBy(css = "div[class*='get-started-banner'] button")
+	private WebElement getStartedBtn;
+
 	public void MobileMenu() {
 		jsClickNew(MenuMobile);
 		jsClickNew(MenuShopForPlanMobile);
 		jsClickNew(GetPlanRecoMobile);
+	}
+
+	public void MobileMenuAndGetStarted() {
+		jsClickNew(MenuMobile);
+		jsClickNew(MenuShopForPlanMobile);
+		jsClickNew(GetPlanRecoMobile);
+		jsClickNew(getStartedBtn);
 	}
 
 	public void MobileMenuShopTool() {
@@ -414,7 +424,8 @@ public abstract class UhcDriver {
 	public void jsClickNew(WebElement element) {
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("arguments[0].click();", element);
-		//System.out.println("The WebElement ===  " + getidentifier(element) + "  : is Clicked");
+		// System.out.println("The WebElement === " + getidentifier(element) + " : is
+		// Clicked");
 	}
 
 	public static String getidentifier(WebElement element) {

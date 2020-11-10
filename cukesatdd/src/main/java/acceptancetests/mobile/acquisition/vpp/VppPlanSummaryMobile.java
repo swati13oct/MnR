@@ -11,11 +11,12 @@ import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import pages.acquisition.commonpages.VPPPlanSummaryPage;
 import pages.mobile.acquisition.bluelayer.AboutUsPageMobile;
 import pages.mobile.acquisition.bluelayer.ContactUsUmsPageMobile;
 import pages.mobile.acquisition.bluelayer.DisclaimersPageMobile;
 import pages.mobile.acquisition.bluelayer.DrugCostEstimatorPageMobile;
-import pages.mobile.acquisition.bluelayer.PlanDetailsPageMobile;
+//import pages.mobile.acquisition.bluelayer.PlanDetailsPageMobile;
 import pages.mobile.acquisition.bluelayer.PrivacyPolicyUmsPageMobile;
 import pages.mobile.acquisition.bluelayer.ProviderSearchPageMobile;
 import pages.mobile.acquisition.bluelayer.SiteMapUMSPageMobile;
@@ -25,6 +26,7 @@ import pages.mobile.acquisition.dceredesign.GetStartedPageMobile;
 import pages.mobile.acquisition.emailAndPrint.EmailAndPrintUtilMobile;
 import pages.mobile.acquisition.ole.WelcomePageMobile;
 import pages.mobile.acquisition.ulayer.AcquisitionHomePageMobile;
+import pages.mobile.acquisition.ulayer.PlanDetailsPageMobile;
 import pages.mobile.acquisition.ulayer.VPPPlanSummaryPageMobile;
 //import pages.acquisition.ulayer.keywordSearch;
 import acceptancetests.acquisition.ole.oleCommonConstants;
@@ -128,40 +130,39 @@ public class VppPlanSummaryMobile {
 		} else
 			Assert.fail("Error in validating the Plan Summary Page");
 	}
-
 	@Then("^the user validates below plan benefit values for the above selected plan$")
 	public void user_validates_planBenefitValues_inAARP(DataTable givenAttributes) {
 		String planType = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
+		
+			List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+			Map<String, String> memberAttributesMap = new HashMap<String, String>();
+			for (int i = 0; i < memberAttributesRow.size(); i++) {
 
-		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		Map<String, String> memberAttributesMap = new HashMap<String, String>();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}
-		String monthlyPremium = memberAttributesMap.get("Monthly Premium");
-		String primaryCarePhysician = memberAttributesMap.get("Primary Care Physician");
-		String specialist = memberAttributesMap.get("Specialist");
-		String referralRequired = memberAttributesMap.get("Referral Required");
-		String outOfPocketMaximum = memberAttributesMap.get("Out Of Pocket Maximum");
-		String prescriptionDrugsTier1 = memberAttributesMap.get("Prescription Drugs, Tier 1");
-		String annualDeductible = memberAttributesMap.get("Annual Deductible");
-		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
-				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		String planName = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_NAME);
-		plansummaryPage.clickOnViewMoreForPlan(planName);
-		plansummaryPage.validatePlanPremium(planName, monthlyPremium);
-		plansummaryPage.validatePrescriptionDrugsTier1(planName, planType, prescriptionDrugsTier1);
-		if (!planType.equals("PDP")) {
+				memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+						memberAttributesRow.get(i).getCells().get(1));
+			}
+			String monthlyPremium = memberAttributesMap.get("Monthly Premium");
+			String primaryCarePhysician = memberAttributesMap.get("Primary Care Physician");
+			String specialist = memberAttributesMap.get("Specialist");
+			String referralRequired = memberAttributesMap.get("Referral Required");
+			String outOfPocketMaximum = memberAttributesMap.get("Out Of Pocket Maximum");
+			String prescriptionDrugsTier1 = memberAttributesMap.get("Prescription Drugs, Tier 1");
+			String annualDeductible = memberAttributesMap.get("Annual Deductible");
+			VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
+					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+			String planName = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_NAME);
+			plansummaryPage.clickOnViewMoreForPlan(planName);
+			plansummaryPage.validatePlanPremium(planName, monthlyPremium);
+			plansummaryPage.validatePrescriptionDrugsTier1(planName, planType, prescriptionDrugsTier1);
+		 if (!planType.equals("PDP")) {
 			plansummaryPage.validatePrimaryCarePhysicianBenefit(planType, planName, primaryCarePhysician);
 			plansummaryPage.validateSpecialistBenefit(planType, planName, specialist);
 			plansummaryPage.validateReferrralRequiredBenefit(planName, referralRequired);
 			plansummaryPage.validatesOutOfPocketMaximum(planName, outOfPocketMaximum);
-
+			
 		} else {
 			plansummaryPage.validateAnnualDeductible(planName, annualDeductible);
-
+			
 		}
 	}
 
@@ -662,7 +663,7 @@ public class VppPlanSummaryMobile {
 	public void the_user_navigates_to_Plan_Costs_tab_in_UMS_site() throws Throwable {
 		PlanDetailsPageMobile planDetailsPage = (PlanDetailsPageMobile) getLoginScenario()
 				.getBean(PageConstants.PLAN_DETAILS_PAGE);
-		DrugCostEstimatorPageMobile dce = (DrugCostEstimatorPageMobile) planDetailsPage.navigateToDCEThroughPlanCost();
+		DrugCostEstimatorPageMobile dce = planDetailsPage.navigateToDCEThroughPlanCost();
 		if (dce != null) {
 			getLoginScenario().saveBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE, dce);
 		}
