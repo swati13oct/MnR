@@ -385,30 +385,30 @@ public class DrugSummaryPage extends UhcDriver {
 			validateNew(mapdPlanToggle);
 			jsClickNew(mapdPlanToggle);
 			System.out.println("MAPD Plan Toggle Clicked");
-			WebElement DrugDetailsLinkforPlan = driver.findElement(By.xpath("//button[contains(@aria-label, 'View Drug Costs') and contains(@aria-label, '"+planName+"')]"));
-			validateNew(DrugDetailsLinkforPlan);
-			jsClickNew(DrugDetailsLinkforPlan);
-			System.out.println("View Drug Details Clicked for MAPD Plan : "+planName);
+			WebElement DrugCostsLinkforPlan = driver.findElement(By.xpath("//button[contains(@aria-label, 'View Drug Costs') and contains(@aria-label, '"+planName+"')]"));
+			validateNew(DrugCostsLinkforPlan);
+			jsClickNew(DrugCostsLinkforPlan);
+			System.out.println("View Drug Costs Clicked for MAPD Plan : "+planName);
 
 		}
 		else if(plantype.equalsIgnoreCase("PDP")){
 			validateNew(pdpPlanToggle);
 			jsClickNew(pdpPlanToggle);
 			System.out.println("PDP Plan Toggle Clicked");
-			WebElement DrugDetailsLinkforPlan = driver.findElement(By.xpath("//button[contains(@aria-label, 'View Drug Costs') and contains(@aria-label, '"+planName+"')]"));
-			validateNew(DrugDetailsLinkforPlan);
-			jsClickNew(DrugDetailsLinkforPlan);
-			System.out.println("View Drug Details Clicked for PDP Plan : "+planName);
+			WebElement DrugCostsLinkforPlan = driver.findElement(By.xpath("//button[contains(@aria-label, 'View Drug Costs') and contains(@aria-label, '"+planName+"')]"));
+			validateNew(DrugCostsLinkforPlan);
+			jsClickNew(DrugCostsLinkforPlan);
+			System.out.println("View Drug Costs Clicked for PDP Plan : "+planName);
 
 		}
 		else{
 			validateNew(snpPlanToggle);
 			jsClickNew(snpPlanToggle);
 			System.out.println("SNP Plan Toggle Clicked");
-			WebElement DrugDetailsLinkforPlan = driver.findElement(By.xpath("//button[contains(@aria-label, 'View Drug Costs') and contains(@aria-label, '"+planName+"')]"));
-			validateNew(DrugDetailsLinkforPlan);
-			jsClickNew(DrugDetailsLinkforPlan);
-			System.out.println("View Drug Details Clicked for SNP Plan : "+planName);
+			WebElement DrugCostsLinkforPlan = driver.findElement(By.xpath("//button[contains(@aria-label, 'View Drug Costs') and contains(@aria-label, '"+planName+"')]"));
+			validateNew(DrugCostsLinkforPlan);
+			jsClickNew(DrugCostsLinkforPlan);
+			System.out.println("View Drug Costs Clicked for SNP Plan : "+planName);
 
 		}
 		CommonUtility.waitForPageLoadNew(driver, DrugDetails_DrugCostsHeading, 30);
