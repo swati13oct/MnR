@@ -225,7 +225,7 @@ Feature: 1.06.7 Member Guest Payments Page
     Examples:
        | TID   | planType | memberID      | dob           | siteName    |Name                 | CreditCardNumber | validMonth | validYear |
        | 10000 | MAPD     | 977065719-1  | 07/19/1946     |   AARP      |CreditCardAutomation | 4111111111111111 |         04 |      2024 |
-       | 10001 | MAPD     | 956465000-1   | 01/12/1960    |   UHC       |CreditCardAutomation | 4111111111111111 |         04 |      2024 |
+    #   | 10001 | MAPD     | 956465000-1   | 01/12/1960    |   UHC       |CreditCardAutomation | 4111111111111111 |         04 |      2024 |
        | 10002 | MAPD     | 929500524-1   | 07/15/1932    |   RETIREE   |CreditCardAutomation | 4111111111111111 |         04 |      2024 |
      # | 10003 | MAPD     | 915516555-1   | 10/29/1947    |   PCP       |CreditCardAutomation | 4111111111111111 |         04 |      2024 |
      # | 10004 | MAPD     | 915516555-1   | 10/29/1947    |   MEDICA    |CreditCardAutomation | 4111111111111111 |         04 |      2024 |
@@ -284,8 +284,8 @@ Feature: 1.06.7 Member Guest Payments Page
     Examples:
       | TID   | planType | memberID      | dob           | siteName    |Name                 | CreditCardNumber | validMonth | validYear |otherAmountDue    |
       | 10000 | MAPD     | 939838215-1   | 05/19/1937    |   AARP      |CreditCardAutomation | 4111111111111111 |         04 |      2024 |  1.05           |
-       | 10001 | MAPD     |007973219-1  | 05/12/1943   |   UHC       |CreditCardAutomation | 4111111111111111 |         04 |      2024 |  15.20           |
-     | 10002 | MAPD     | 006738298-1  | 12/18/1938   |   RETIREE   |CreditCardAutomation | 4111111111111111 |         04 |      2024 |  20.30           |
+       | 10001 | MAPD     |007973219-1  | 05/12/1943   |   UHC       |CreditCardAutomation | 4111111111111111 |         04 |      2024 |  1.20           |
+     | 10002 | MAPD     | 006738298-1  | 12/18/1938   |   RETIREE   |CreditCardAutomation | 4111111111111111 |         04 |      2024 |  1.30           |
     #  | 10003 | MAPD     |005085470-1  | 10/29/1947    |   PCP       |CreditCardAutomation | 4111111111111111 |         04 |      2024 |  11.000          |
       #| 10004 | MAPD     | 915516555-1   | 10/29/1947    |   MEDICA    |CreditCardAutomation | 4111111111111111 |         04 |      2024 |  333.00          |
 

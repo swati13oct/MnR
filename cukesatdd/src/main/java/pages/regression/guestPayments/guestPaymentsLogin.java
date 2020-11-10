@@ -20,7 +20,7 @@ import acceptancetests.data.MRConstants;
 import acceptancetests.util.CommonUtility;
 
 public class guestPaymentsLogin extends guestPaymentsLoginWebElements{
-	
+
 	private static String AARP_GUEST_PAYMENTS_PAGE_URL  = MRConstants.AARP_GUEST_PAYMENTS_PAGE_URL;
 	private static String UHC_GUEST_PAYMENTS_PAGE_URL = MRConstants.UHC_GUEST_PAYMENTS_PAGE_URL;
 	private static String RETIREE_GUEST_PAYMENTS_PAGE_URL = MRConstants.RETIREE_GUEST_PAYMENTS_PAGE_URL;
@@ -31,7 +31,9 @@ public class guestPaymentsLogin extends guestPaymentsLoginWebElements{
 	private static String RETIREE_GUEST_PAYMENTS_PAGE_URL_PROD = MRConstants.RETIREE_GUEST_PAYMENTS_PAGE_URL_PROD;
 	private static String PCP_GUEST_PAYMENTS_PAGE_URL_PROD = MRConstants.PCP_GUEST_PAYMENTS_PAGE_URL_PROD;
 	private static String  MEDICA_GUEST_PAYMENTS_PAGE_URL_PROD= MRConstants.MEDICA_GUEST_PAYMENTS_PAGE_URL_PROD;
-	
+	private static String  GUEST_PAYMENTS_PAGE_URL_TEAM_A_TEST= MRConstants.GUEST_PAYMENTS_PAGE_URL_TEAM_A_TEST;
+
+
 
 
 	public guestPaymentsLogin(WebDriver driver) {
@@ -46,16 +48,16 @@ public class guestPaymentsLogin extends guestPaymentsLoginWebElements{
 		PageFactory.initElements(driver, this);
 		openAndValidate(siteName);
 	}
-	
-    public void openAndValidate() { 
-		
+
+	public void openAndValidate() { 
+
 	}
 
 	public boolean guestPaymentsValidate(WebElement element) {
 		long timeoutInSec=0;
 		return guestPaymentsValidate(element, timeoutInSec);
 	} 
-	
+
 	/**
 	 * to validate whether element exists with input timeout value control
 	 * note: use this instead of the one from UhcDriver which takes up to 30 sec to timeout
@@ -91,72 +93,75 @@ public class guestPaymentsLogin extends guestPaymentsLoginWebElements{
 		}
 	}
 	private void openAndValidate(String siteName) {
-		
-		if (MRScenario.environment.equalsIgnoreCase("prod")){
-		if ("AARP".equalsIgnoreCase(siteName)) {
+		if (MRScenario.environment.equalsIgnoreCase("team-atest")){
+			startNew(GUEST_PAYMENTS_PAGE_URL_TEAM_A_TEST);
+		}
+
+		else if (MRScenario.environment.equalsIgnoreCase("prod")){
+			if ("AARP".equalsIgnoreCase(siteName)) {
 				startNew(AARP_GUEST_PAYMENTS_PAGE_URL_PROD);
-			
+
 			}
-		
-		else if ("UHC".equalsIgnoreCase(siteName)) {
-			startNew(UHC_GUEST_PAYMENTS_PAGE_URL_PROD);
-			
+
+			else if ("UHC".equalsIgnoreCase(siteName)) {
+				startNew(UHC_GUEST_PAYMENTS_PAGE_URL_PROD);
+
+			}
+
+			else if ("RETIREE".equalsIgnoreCase(siteName)) {
+				startNew(RETIREE_GUEST_PAYMENTS_PAGE_URL_PROD);
+
+			}
+
+			else if ("PCP".equalsIgnoreCase(siteName)) {
+				startNew(PCP_GUEST_PAYMENTS_PAGE_URL_PROD);
+
+			}
+
+			else if ("MEDICA".equalsIgnoreCase(siteName)) {
+				startNew(MEDICA_GUEST_PAYMENTS_PAGE_URL_PROD);
+
+			}
 		}
-		
-		else if ("RETIREE".equalsIgnoreCase(siteName)) {
-			startNew(RETIREE_GUEST_PAYMENTS_PAGE_URL_PROD);
-			
-		}
-		
-		else if ("PCP".equalsIgnoreCase(siteName)) {
-			startNew(PCP_GUEST_PAYMENTS_PAGE_URL_PROD);
-			
-		}
-		
-		else if ("MEDICA".equalsIgnoreCase(siteName)) {
-			startNew(MEDICA_GUEST_PAYMENTS_PAGE_URL_PROD);
-			
-		}
-	}
 		else{
-			
+
 			if ("AARP".equalsIgnoreCase(siteName)) {
 				startNew(AARP_GUEST_PAYMENTS_PAGE_URL);
 			}
-		
-		else if ("UHC".equalsIgnoreCase(siteName)) {
-			startNew(UHC_GUEST_PAYMENTS_PAGE_URL);		
-		}
-		
-		else if ("RETIREE".equalsIgnoreCase(siteName)) {
-			startNew(RETIREE_GUEST_PAYMENTS_PAGE_URL);	
-		}
-		
-		else if ("PCP".equalsIgnoreCase(siteName)) {
-			startNew(PCP_GUEST_PAYMENTS_PAGE_URL);
-		}
-		
-		else if ("MEDICA".equalsIgnoreCase(siteName)) {
-			startNew(MEDICA_GUEST_PAYMENTS_PAGE_URL);
-		}
-			
-	}
 
-		
+			else if ("UHC".equalsIgnoreCase(siteName)) {
+				startNew(UHC_GUEST_PAYMENTS_PAGE_URL);		
+			}
+
+			else if ("RETIREE".equalsIgnoreCase(siteName)) {
+				startNew(RETIREE_GUEST_PAYMENTS_PAGE_URL);	
+			}
+
+			else if ("PCP".equalsIgnoreCase(siteName)) {
+				startNew(PCP_GUEST_PAYMENTS_PAGE_URL);
+			}
+
+			else if ("MEDICA".equalsIgnoreCase(siteName)) {
+				startNew(MEDICA_GUEST_PAYMENTS_PAGE_URL);
+			}
+
+		}
+
+
 		CommonUtility.checkPageIsReadyNew(driver);
 		System.out.println(">>>>>>>>>Current page URL: " + driver.getCurrentUrl());
 		checkModelPopup(driver, 45);
 		CommonUtility.waitForPageLoadNew(driver, guestPaymentsHeader, 45);
-		
+
 	}
 
-	
+
 	/**
 	 * method to validate the page Elements
 	 */
 
 	public void validateHeaderAndBody() {
-		
+
 		Assert.assertTrue("PROBLEM - unable to locate the Guest payments Header",guestPaymentsValidate(guestPaymentsHeader));
 		Assert.assertTrue("PROBLEM - unable to locate the static content below header ",guestPaymentsValidate(staticContentBelowHeader));
 		Assert.assertTrue("PROBLEM - unable to locate the sign in link ",guestPaymentsValidate(signInLink));
@@ -170,10 +175,10 @@ public class guestPaymentsLogin extends guestPaymentsLoginWebElements{
 
 	public void validateFindMyID() {
 		helpMeFindMyIdLink.click();
-		
+
 		Assert.assertTrue("PROBLEM - unable to locate Image on the Find my Id link",guestPaymentsValidate(memberIdCardImage));
 		Assert.assertTrue("PROBLEM - unable to locate text on the Find my Id link",guestPaymentsValidate(textOnFindMyIdPopup));
-		
+
 		CancelButtononID.click();
 
 	}
@@ -182,22 +187,22 @@ public class guestPaymentsLogin extends guestPaymentsLoginWebElements{
 		memberIdTextfield.clear();
 		memberIdTextfield.sendKeys(memberID);
 		dobTextfield.sendKeys(dob);
-        Actions action = new Actions(driver);
-        action.sendKeys(Keys.ENTER).build().perform();
+		Actions action = new Actions(driver);
+		action.sendKeys(Keys.ENTER).build().perform();
 
 
 
 	}
 
 	public OneTimeGuestPaymentsPage clickNext() {
-		
+
 		nextButton.click();
 		System.out.println(">>>>>>Next button is clicked<<<<<<");
-		
+
 		CommonUtility.checkPageIsReady(driver);
 		checkModelPopup(driver,5);
 		CommonUtility.waitForPageLoad(driver, makeAPaymentsHeader, 5);
-		
+
 		if (validate(makeAPaymentsHeader)) {
 			return new OneTimeGuestPaymentsPage(driver);
 		}
@@ -205,99 +210,99 @@ public class guestPaymentsLogin extends guestPaymentsLoginWebElements{
 	}
 
 	public void clicksNextButton() {
-	
+
 		nextButton.click();
 		System.out.println(">>>>>>Next button is clicked<<<<<<");
 		CommonUtility.checkPageIsReady(driver);
-		
-		
-		
+
+
+
 	}
 
 	public void checkErrorMessage() {
-		
+
 		Assert.assertTrue("PROBLEM - unable to locate error message on the Page",guestPaymentsValidate(errorMessage));
-		
+
 	}
 
 	public void checkErrorMessageFromGPS() {
-		
+
 		Assert.assertTrue("PROBLEM - unable to locate error message on the Page",guestPaymentsValidate(errorMessageFromGPS));
-		
+
 	}
 
 	public guestPaymentsLogin clickAndLandOnErrorPage() {
 		nextButton.click();
 		System.out.println(">>>>>>Next button is clicked<<<<<<");
-		
+
 		CommonUtility.checkPageIsReady(driver);
 		checkModelPopup(driver,5);
 		CommonUtility.waitForPageLoad(driver, magnifyIcon, 5);
-		
+
 		if (driver.getCurrentUrl().contains("member-not-found")) {
 			return new guestPaymentsLogin(driver);
 		}
-		
+
 		return null;
-	
+
 	}
 
 	public void verifyDetailsOnErrorPage() {
-		
+
 		Assert.assertTrue("PROBLEM - unable to locate error message on the Page",guestPaymentsValidate(errorMessageOnErrorPage));
 
 		Assert.assertTrue("PROBLEM - unable to locate error text on the Page",errorMessageOnErrorPage.getText().contains("not available"));
 
-		
-		
+
+
 	}
 
 	public void verifySignInLinkShouldNotBePresent() {
 		Assert.assertTrue("PROBLEM - unable to locate signIn Page message on the Page",!guestPaymentsValidate(signInLinkOnErrorPage));
-		
-		
+
+
 	}
-	
+
 	public void verifySignInLinkShouldBePresent() {
 		Assert.assertTrue("PROBLEM - unable to locate signIn Page message on the Page",guestPaymentsValidate(signInLinkOnErrorPage));
-		
-		
+
+
 	}
-	
+
 
 
 	public void clickOnSignInLink() {
 		signInLink.click();
-	
+
 		System.out.println(">>>>>>Sign In button is clicked<<<<<<");
-		
+
 		for(String winHandle : driver.getWindowHandles()){
-		    driver.switchTo().window(winHandle);
+			driver.switchTo().window(winHandle);
 		}
 		CommonUtility.checkPageIsReady(driver);
 
-		
+
 	}
-	
+
 	public void validateBrand(String siteName) {
-		
+
 		validateNew(logoOnLoginPage);
 		String brandSource =logoOnLoginPage.getAttribute("src");
 		if(siteName=="RETIREE")
 			//logo for retiree site also have UHC on the dashboard
 			siteName="UHC";
-		
-	  
+
+
 		Assert.assertTrue("PROBLEM - unable to locate correct logo on HSID login page", brandSource.contains(siteName));
-		
-		
+
+
 	}
 
 	public void validateSignInButton() {
 
 		Assert.assertTrue("PROBLEM - unable to locate Sign In Button on HSID login page", validate(signInButton));
-		
-		
+
+
 	} 
 
 }
