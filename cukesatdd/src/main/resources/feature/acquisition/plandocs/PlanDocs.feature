@@ -1,5 +1,5 @@
 @acq_plandocs
-Feature: 2.13 ACQ AARP- To test plandocs in AARP and UHC Site
+Feature: 1.13 ACQ AARP- To test plandocs in AARP and UHC Site
 
   Scenario Outline: TID: <TID> - To test the plandocs on AARP site
     Given the user is on medicare acquisition site landing page
