@@ -396,7 +396,7 @@ public SpecialElectionPeriodPage select_option_and_enter_data(String selectoptio
 		}*/
 		try {
 			WebElement currentOptionChkBx = driver.findElement(By.xpath("//*[contains(text(), '"+currentOption+"')]//..//preceding-sibling::input"));
-			currentOptionChkBx.click();
+			jsClickNew(currentOptionChkBx);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			System.out.println("Not able to select option");

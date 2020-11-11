@@ -207,6 +207,7 @@ public class BuildYourDrugList extends UhcDriver {
 	public DrugDetailsPage navigateToDrugDetailsPage() {
 		validateNew(reviewDrugCost);
 		jsClickNew(reviewDrugCost);
+		threadsleep(2000);
 		CommonUtility.waitForPageLoadNew(driver, DrugDetails_DrugCostsHeading, 20);
 		if(validateNew(DrugDetails_ChangePharmacyLnk) && validateNew(DrugDetails_DrugCostsHeading))
 		{

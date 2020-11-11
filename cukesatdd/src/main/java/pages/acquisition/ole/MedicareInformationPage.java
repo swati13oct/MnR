@@ -549,7 +549,7 @@ public boolean ValidateTFNMedicareInfo(String MedicaretFN) {
 
 public LearnMoreModal OpenLearnMore() {
 	validate(RightRail_LearnMoreLink);
-	RightRail_LearnMoreLink.click();
+	jsClickNew(RightRail_LearnMoreLink);
 	try {
 		Thread.sleep(6000);
 	} catch (InterruptedException e) {

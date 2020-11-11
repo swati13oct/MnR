@@ -104,7 +104,7 @@ public class ShopforaplanAARPlayer extends UhcDriver {
 
 	public ShopforaplanAARPlayer ShopLinkOnShopPlan() throws Exception {
 		waitforElement(enrollShopLink);
-		enrollShopLink.click();
+		jsClickNew(enrollShopLink);
 		Thread.sleep(4000);
 		if (validate(dsnpLeanHowToEnrollShopLink)) {
 			waitforElement(dsnpLeanHowToEnrollShopLink);
@@ -119,30 +119,30 @@ public class ShopforaplanAARPlayer extends UhcDriver {
 	public void clickONEnrollShopLink(String plantype, String planName) throws Exception{
 		if(plantype.equals("SNP")){
 			waitforElement(dsnpLeanHowToEnrollShopLink);
-			dsnpLeanHowToEnrollShopLink.click();
+			jsClickNew(dsnpLeanHowToEnrollShopLink);
 			Thread.sleep(5000);
 		
 		}
 		else if(plantype.equals("PDP")){
 			waitforElement(pdpLeanHowToEnrollShopLink);
-			pdpLeanHowToEnrollShopLink.click();
+			jsClickNew(pdpLeanHowToEnrollShopLink);
 			Thread.sleep(5000);
 		}	
 		
 		else if(plantype.equals("MAPD") || plantype.equals("MA")){
 			waitforElement(maLeanHowToEnrollShopLink);
-			maLeanHowToEnrollShopLink.click();
+			jsClickNew(maLeanHowToEnrollShopLink);
 			Thread.sleep(5000);
 		}	
 	}
 
 	public ShopforaplanAARPlayer ShopLinkOnMedsuppPlan() throws Exception {
 		waitforElement(enrollShopLink);
-		enrollShopLink.click();
+		jsClickNew(enrollShopLink);
 		Thread.sleep(4000);
 		if (validate(msLeanHowToEnrollShopLink)) {
 			waitforElement(msLeanHowToEnrollShopLink);
-			msLeanHowToEnrollShopLink.click();
+			jsClickNew(msLeanHowToEnrollShopLink);
 			System.out.println("Shop Page Medsupp Plan is Displayed");
 			return new ShopforaplanAARPlayer(driver);
 		}

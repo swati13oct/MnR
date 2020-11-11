@@ -501,7 +501,7 @@ public class PersonalInformationPage extends UhcDriver{
 					
 					 validateNew(NextBtn); 
 					 jsClickNew(NextBtn);
-					
+					 waitForPageLoadSafari();
 					 if(driver.getCurrentUrl().contains("special")){
 					  System.out.println("OLE SEP Page is Displayed"); } else {
 					  System.out.println("OLE SEP Page is not Displayed"); }
@@ -557,7 +557,7 @@ public class PersonalInformationPage extends UhcDriver{
 
 		}
 		else{
-			
+			scrollToView(State_DropDown);
 			Select SelectState = new Select(State_DropDown);
 			SelectState.selectByValue(Mailing_State);
 			sendkeysNew(EnterZipCode,ZipCode);

@@ -721,7 +721,7 @@ public class PlanDetailsPage extends UhcDriver {
 			System.out.println("Enroll in Plan Button is Not Displayed ");
 		}
 
-		EnrollinPlan.click();
+		jsClickNew(EnrollinPlan);
 
 		try {
 			Thread.sleep(5000);
