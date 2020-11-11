@@ -76,7 +76,8 @@ public class VppCommonStepDefinition {
  
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, aquisitionhomepage);
-		aquisitionhomepage.validateSubtitle();
+		if(site.equalsIgnoreCase("AARP"))
+			aquisitionhomepage.validateSubtitle();
 	}
 
 	@When("^the user performs plan search using following information$")

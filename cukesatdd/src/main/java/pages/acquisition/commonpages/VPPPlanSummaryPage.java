@@ -3814,7 +3814,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 
 	public DrugDetailsPage navigateToDCEFromDrugDropdown(String planType, String planName) {
-		if (planType.equals("MA") || planType.equals("MAPD") || planType.equalsIgnoreCase("SNP")) {
+		if (planType.equalsIgnoreCase("MA") || planType.equalsIgnoreCase("MAPD") || planType.equalsIgnoreCase("SNP")) {
 			List<WebElement> drugLinkDropdown = driver.findElements(By.xpath("//*[contains(text(),'" + planName
 					+ "')]/ancestor::div[contains(@class, 'module-plan-overview module')]//*[contains(@id,'drug-list-title-')and contains(@aria-expanded,'false')]"));
 

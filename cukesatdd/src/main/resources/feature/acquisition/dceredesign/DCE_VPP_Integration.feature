@@ -25,11 +25,12 @@ Feature: 1.10.3 DCE-REDESIGN- To test integration flows between DCE and VPP from
     Then the user Captures Drug costs on Drug Details Page
     And the user click on return to plan summary from Drug Details Page to return to VPP Plan Summary
     And the user validates the added drug name on plan summary page for the selected plan
-   		 | Plan Name | <planname> |
+   		 	| Plan Name | <planname> |
    		  | DrugName | <drug1> |
     And the user validates the drug cost on plan summary page for the selected plan
     		| Plan Name | <planname> |
     And the user clicks on drug dropdown on plan summary page and navigates to DCE
+    	| Plan Type | <plantype> |
   	  | Plan Name | <planname> |
   	And the user clicks on Edit your drug list link on drug details page	  
     And the user clicks on Edit button on Get Started page on DCE

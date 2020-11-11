@@ -1,23 +1,23 @@
 Feature: 1.06 - UAT Scripts to test Federal Agent Link and request an appointment with an agent flow on Shop Pages
 
 Scenario Outline: <scenario> Verify request an appointment through shop pages MA Plans
-Given the user is on medicare acquisition site landing page
+		Given the user is on medicare acquisition site landing page
     	|Site| <site>|
-Given the user navigates to following medicare acquisition site page
+		Given the user navigates to following medicare acquisition site page
       | PageName | <pageName> |
       | PagePath | <path>     |
-When the user clicks on Agent link and validates the correct URL is loaded
+		When the user clicks on Agent link and validates the correct URL is loaded
       |UHC Agent URL|  <UHCUrl>  |
-   @agentFlowEBRCBlayer
+   	
+   	@agentFlowEBRCBlayer
     Examples: 
-      |scenario               |	site	| path                                                        | pageName                     | UHCUrl                     | 
-      |E2E Scenario 2_UMS     |	UHC		| shop/medicare-advantage-plans.html                          | ShopPlan: Shop MA Plan       | https://www.myuhcagent.com/| 
+      |scenario               |	site	| path                                                        | pageName                     | UHCUrl                     	| 
+      |E2E Scenario 2_UMS     |	UHC		| shop/medicare-advantage-plans.html                          | ShopPlan: Shop MA Plan       | https://www.myuhcagent.com/	| 
    
-   @agentFlowEBRCUlayer
+   	@agentFlowEBRCUlayer
     Examples: 
-      |scenario               |	site	| path                                                        | pageName                     | UHCUrl                     | 
-      
-      |E2E Scenario 2_AMP     |	AARP    | shop/medicare-advantage-plans.html                          | ShopPlan: Shop MA Plan       | https://www.myuhcagent.com/| 
+      |scenario               |	site	| path                                                        | pageName                     | UHCUrl                     	|   
+      |E2E Scenario 2_AMP     |	AARP  | shop/medicare-advantage-plans.html                          | ShopPlan: Shop MA Plan       | https://www.myuhcagent.com/	| 
       
       
 
