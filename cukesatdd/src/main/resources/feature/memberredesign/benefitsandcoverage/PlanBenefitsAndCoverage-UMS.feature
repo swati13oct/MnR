@@ -871,7 +871,7 @@ Feature: 1.01 Member  benefits and Coverage page
     @nonInsulin_mapd_T12345
     Examples: 
       | index  | FID    | planType  | memberType     | copayCategory | deductible   | insulin      |
-      | 34-I08 | 478830 | MAPD      | Individual_BnC | NON LIS       | T12345       | nonInsulin   | 
+      | 34-I09 | 478830 | MAPD      | Individual_BnC | NON LIS       | T12345       | nonInsulin   | 
 
 
 
