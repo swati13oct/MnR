@@ -8,7 +8,7 @@ Feature: 1.01 Member  benefits and Coverage page
 ###############################Regression Scenarios Begin Here ########################################
   #TO BE DEPRECATED
   #TC01_OutpatientSurgeryCentervisits_withprovidertiering
-  @benefitsAndCoverage01 @outpatientcenterwithprovidertier @thepredators @regressionoutpatient @BnC_Part1_regressionMember
+  #@benefitsAndCoverage01 @outpatientcenterwithprovidertier @thepredators @regressionoutpatient @BnC_Part1_regressionMember
   Scenario Outline: Index: <index> -TID: <TID> -plan: <planType> -memberType: <memberType> - Verify the outpatient widget for a member withprovidertiering
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -24,7 +24,7 @@ Feature: 1.01 Member  benefits and Coverage page
 
   #TO BE DEPRECATED
   #TC05_Primarycareprovider_specialist_withoutprovidertiering
-  @benefitsAndCoverage02 @OfficeVisitswithoutprovidertiering @regression @BnC_Part1_regressionMember
+  #@benefitsAndCoverage02 @OfficeVisitswithoutprovidertiering @regression @BnC_Part1_regressionMember
   Scenario Outline: Index: <index> -TID: <TID> -plan: <planType> -memberType: <memberType> - Verify the Office visits widget for a member withoutprovidertiering
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -469,7 +469,7 @@ Feature: 1.01 Member  benefits and Coverage page
 
   #TO BE DEPRECATED
   #TC21_MAPD_LIS(1,2)- Retail Drug Cost Table
-  @benefitsAndCoverage17 @CMmapdindlis @BnC_Part8_regressionMember  
+  #@benefitsAndCoverage17 @CMmapdindlis @BnC_Part8_regressionMember  
   Scenario Outline: Index: <index> -TID: <TID> -plan: <planType> -memberType: <memberType> - Verify PDF section is in place on Benefits and Coverage page for Lis user
     Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>      |
