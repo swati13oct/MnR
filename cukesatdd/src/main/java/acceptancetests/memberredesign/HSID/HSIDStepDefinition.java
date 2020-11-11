@@ -707,6 +707,10 @@ public class HSIDStepDefinition {
 
 	@Given("^feature security flag must set to true when testing on stage env$")
 	public void checkSecurityFlag(DataTable memberAttributes) {
+		if (MRScenario.environment.contains("team-a")) {
+			System.out.println("SKIP security test for team env");
+			return;
+		}
 		boolean useStage3=false;
 		Map<String, String> memberAttributesMap=parseInputArguments(memberAttributes);
 		String feature=memberAttributesMap.get("Feature");

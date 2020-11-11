@@ -564,3 +564,10 @@ q2_AmWell_008/Password@1,DSNP_MAPD,Individual_MnR01_BnC,LIS 1,
 q4_dec_evercare_013/Password@1,DSNP_MAPD,Individual_MnR02_BnC,LIS 1,
 q4_DSNP_087/Password@1,DSNP_MAPD,Individual_MnR03_BnC,LIS 1,
 q4_DSNP_056/Password@1,DSNP_MAPD,Individual_MnR04_BnC,LIS 3,
+q4_insulinDemo_005/Password@1,MAPD,Individual_BnC,NON LIS,NoD,hasInsulin
+q4_insulinDemo_003/Password@1,MAPD,Individual_BnC,NON LIS,T12NoD_T345D,hasInsulin
+Q4_insulinDemo_100/Password@1,MAPD,Individual_BnC,NON LIS,T123NoD_T45D,hasInsulin
+q4_insulinDemo_011/Password@1,PDP,Individual_BnC,NON LIS,NoD,hasInsulin
+q4_insulinDemo_017/Password@1,CSNP_PCP,Individual_BnC,NON LIS,NoD,hasInsulin
+Q4_insulinDemo_109/Password@1,CSNP_MAPD,Individual_BnC,NON LIS,T12NoD_T345D,hasInsulin
+q4_dec_preISNP/Password@1,ISNP_MAPD,Individual_BnC,NON LIS,T123NoD_T45D,hasInsulin

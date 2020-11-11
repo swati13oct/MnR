@@ -5,8 +5,9 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth Prod
   #   Given feature security flag must set to true when testing on stage env
   #    | Feature           | UCPBenefits |
 
+  #TO BE DEPRECATED
   #TC05_Primarycareprovider_specialist_withoutprovidertiering
-  @prod_benefitsAndCoverage4 @OfficeVisitswithoutprovidertiering @regression @prod_BnC_Part2 
+  #@prod_benefitsAndCoverage4 @OfficeVisitswithoutprovidertiering @regression @prod_BnC_Part2 
   Scenario Outline: Index: <index> -TID: <TID> -plan: <planType> -memberType: <memberType> - Verify the Office visits widget for a member withoutprovidertiering
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
@@ -455,8 +456,9 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth Prod
       | index | TID   |username |password  |MemUserName| planType | memberType | copayCategory | language | SummaryofBenefits   | EvidenceofCoverage   | ComprehensiveFormularyDrug List | name           | memberid   | effectivedate | monthlypremium | UpdatedLanguage | DisplayFlag |
       | 13    | 15366 |kkumard| mnrs786@|padawson |PDP| Group_BnC| NON LIS | ENGLISH | Summary Of Benefits | Evidence of Coverage | Comprehensive Formulary         | PETER DAWSON | 0108537701 | 01/01/2013    | Not Available  | Tier 2          | true        |     
       
+ #TO BE DEPRECATED    
  #TC21_MAPD_LIS(1,2)- Retail Drug Cost Table
- @prod__benefitsAndCoverage23Indi @CMmapdindlis @pdf_Verification_Lis_Mapd
+ #@prod__benefitsAndCoverage23Indi @CMmapdindlis @pdf_Verification_Lis_Mapd
   Scenario Outline: Index: <index> -TID: <TID> -plan: <planType> -memberType: <memberType> - Verify PDF section is in place on Benefits and Coverage page for Lis user
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
@@ -842,4 +844,61 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth Prod
        | 27-m3 | F494433,F506320 |kkumard  | mnrs786@ |testUserName| DSNP_MAPD  | Individual_MnR03_BnC | LIS 1         | ENGLISH  | DBAD ADFED | 919744565-00 | 01/01/2020   | Not Available   | Extra Help Level : 1 | IndEffectiveAARP |     6 |  R2604-004 | NoRider|
        | 28-m4 | F494433,F506320 |kkumard  | mnrs786@ |testUserName| DSNP_MAPD  | Individual_MnR04_BnC | LIS 3         | ENGLISH  | DBAD ADFED | 919744565-00 | 01/01/2020    | Not Available  | Extra Help Level : 3 | IndEffectiveAARP |     6 |  H0271-006 | NoRider|
 
+  @prod_benefitsAndCoverage19 @insulin
+  Scenario Outline: Index: <index> -FID: <TID> -plan: <planType> -memberType: <memberType> -copayCategory: <copayCategory> -insulin: <insulin> - Verify Insulin Demo display on drug table for NON-LIS user
+    Given the user is on member auth login flow page
+    When the member is able to login with correct username and password
+      | Username | <username> |
+      | Password | <password> |
+    And Member Enters the Username he wants to search
+      | MemUsername | <MemUserName> |
+    And user clicks on member to select
+    And user stores test input for validations
+      | Username | <MemUserName> |
+      | Plan Type    | <planType>    |
+      | Member Type  | <memberType>  |
+      | Copay Category | <copayCategory> |
+    Then The user navigates to Benefits and Coverage page
+      | Plan Type | <planType> |
+	And the user validate drug cost table display behavior
+      | Plan Type      | <planType>      |
+      | Member Type    | <memberType>    |
+      | Copay Category | <copayCategory> |
+      | Deductible | <deductible> |
+      | Insulin | <insulin> |
+	
+    @prod_hasInsulin_mapd_NoD
+    Examples: 
+      | index  | FID    | username | password  | MemUserName        | planType  | memberType     | copayCategory | deductible   | insulin      |
+      | 31-I01 | 478830 | kkumard  | mnrs786@  | q4_insulinDemo_005 | MAPD      | Individual_BnC | NON LIS       | NoD          | hasInsulin   | 
+
+    @prod_hasInsulin_mapd_T12NoD_T345D
+    Examples: 
+      | index  | FID    | username | password  | MemUserName        | planType  | memberType     | copayCategory | deductible   | insulin      |
+      | 31-I02 | 478830 | kkumard  | mnrs786@  | q4_insulinDemo_003 | MAPD      | Individual_BnC | NON LIS       | T12NoD_T345D | hasInsulin   | 
+
+    @prod_hasInsulin_mapd_T123NoD_T45D
+    Examples: 
+      | index  | FID    | username | password  | MemUserName        | planType  | memberType     | copayCategory | deductible   | insulin      |
+      | 31-I03 | 478830 | kkumard  | mnrs786@  | Q4_insulinDemo_100 | MAPD      | Individual_BnC | NON LIS       | T123NoD_T45D | hasInsulin   | 
+     
+    @prod_hasInsulin_pdp_NoD
+    Examples: 
+      | index  | FID    | username | password  | MemUserName        | planType  | memberType     | copayCategory | deductible   | insulin      |
+      | 31-I04 | 478830 | kkumard  | mnrs786@  | q4_insulinDemo_011 | PDP       | Individual_BnC | NON LIS       | NoD          | hasInsulin   | 
+
+    @prod_hasInsulin_csnpPcp_NoD
+    Examples: 
+      | index  | FID    | username | password  | MemUserName        | planType  | memberType     | copayCategory | deductible   | insulin      |
+      | 31-I05 | 478830 | kkumard  | mnrs786@  | q4_insulinDemo_017 | CSNP_PCP  | Individual_BnC | NON LIS       | NoD          | hasInsulin   | 
+
+    @prod_hasInsulin_csnpMapd_T12NoD_T345D
+    Examples: 
+      | index  | FID    | username | password  | MemUserName        | planType  | memberType     | copayCategory | deductible   | insulin      |
+      | 31-I06 | 478830 | kkumard  | mnrs786@  | Q4_insulinDemo_109 | CSNP_MAPD | Individual_BnC | NON LIS       | T12NoD_T345D | hasInsulin   | 
+
+    @prod_hasInsulin_isnpMapd_T123NoD_T45D
+    Examples: 
+      | index  | FID    | username | password  | MemUserName        | planType  | memberType     | copayCategory | deductible   | insulin      |
+      | 31-I07 | 478830 | kkumard  | mnrs786@  | q4_dec_preISNP     | ISNP_MAPD | Individual_BnC | NON LIS       | T123NoD_T45D | hasInsulin   |     
       

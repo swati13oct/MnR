@@ -2,6 +2,7 @@ package acceptancetests.memberredesign.benefitandcoverage;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -14,7 +15,6 @@ import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import acceptancetests.acquisition.retiree.RetireeCommonConstants;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.LoginCommonConstants;
 import acceptancetests.data.PageConstants;
@@ -26,7 +26,6 @@ import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import gherkin.formatter.model.DataTableRow;
-import pages.acquisition.uhcretiree.RetireeAcquisitionHomePage;
 import pages.member_deprecated.bluelayer.LoginPage2;
 import pages.redesign_deprecated.BenefitsCoveragePage;
 import pages.redesign_deprecated.RedesignLoginPage;
@@ -2260,6 +2259,221 @@ public class BenefitsAndCoverageUmsStepDefinition {
 		String actUrl=wd.getCurrentUrl();
 		Assert.assertTrue("PROBLEM - retiree pre-enrollment destination url is not as expected. "
 				+ "Expect to contains '"+expUrl+"' | Actual='"+actUrl+"'", actUrl.contains(expUrl));
+	}
+
+	public static Map<String, String> parseInputArguments(DataTable memberAttributes) {
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0), 
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		return memberAttributesMap;
+	}
+	
+	@Then("^the user validate drug cost table display behavior$")
+	public void vaoidateDrugCostTblBehavior(DataTable memberAttributes) throws InterruptedException {
+		
+		Map<String, String> memberAttributesMap=parseInputArguments(memberAttributes);
+		String planType=memberAttributesMap.get("Plan Type");
+		String memberType=memberAttributesMap.get("Member Type");
+		String copayCategory=memberAttributesMap.get("Copay Category");
+		String insulin=memberAttributesMap.get("Insulin");
+		String deductible=memberAttributesMap.get("Deductible");
+		getLoginScenario().saveBean(BenefitsAndCoverageCommonConstants.TEST_PLAN_TYPE, planType);
+		getLoginScenario().saveBean(BenefitsAndCoverageCommonConstants.TEST_MEMBER_TYPE, memberType);
+		getLoginScenario().saveBean(BenefitsAndCoverageCommonConstants.TEST_COPAY_CATEGORY, copayCategory);
+		getLoginScenario().saveBean(BenefitsAndCoverageCommonConstants.TEST_INSULIN, insulin);
+		getLoginScenario().saveBean(BenefitsAndCoverageCommonConstants.TEST_DEDUCTIBLE, deductible);
+
+		BenefitsAndCoveragePage bncPg = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
+
+		Date currentDate=bncPg.getCurrentSystemDate();
+		String dateStr=bncPg.convertDateToStrFormat_MMDDYYYY(currentDate);
+		Assert.assertTrue("SKIP - scenario is for 2021 validation, current env is on system date='"+dateStr+"'", dateStr.contains("2021"));
+
+		Assert.assertTrue("PROBLEM - this step doesn't support planType '"+planType+"'.  Only support 'MAPD' related plan or 'PDP'", 
+				planType.toUpperCase().contains("MAPD") || planType.toUpperCase().equals("PDP") 
+				|| planType.toUpperCase().equals("CSNP_PCP")
+				|| planType.toUpperCase().equals("CSNP_MAPD")
+				|| planType.toUpperCase().equals("ISNP_MAPD"));
+		
+		Assert.assertTrue("PROBLEM - testing is for 'NON LIS' only.  current copayCategory input='"+copayCategory+"'", 
+				copayCategory.equalsIgnoreCase("NON LIS"));
+		
+		Assert.assertTrue("TODO - need to code behavior for deductible type="+deductible, 
+				deductible.equals("NoD")||deductible.equals("T12NoD_T345D")||deductible.equals("T123NoD_T45D"));
+		
+		Assert.assertTrue("TODO - need to code behavior for insulin type="+insulin, 
+				insulin.equals("hasInsulin")||insulin.equals("nonInsulin"));
+		
+		if (insulin.equals("hasInsulin")) {
+			
+		} else if (insulin.equals("nonInsulin")) {
+			
+		}
+		if (planType.toUpperCase().equals("MAPD")) {
+			List<String> options=bncPg.getDrugDropDownOptions();
+			for (int i=0; i<options.size(); i++) {
+				String optionTxt=options.get(i);
+				if (optionTxt.equals("Standard Retail Pharmacy")) {
+					bncPg.selectDrugTblDropDownOption(optionTxt);
+					if (deductible.equals("NoD")) 
+						bncPg.validateDrgTbl_stdRetPha_mapd_noD_hasInsulin();
+					else if (deductible.equals("T12NoD_T345D")) 
+						bncPg.validateDrgTbl_stdRetPha_mapd_T12noD_T345D_hasInsulin();
+					else if (deductible.equals("T123NoD_T45D")) 
+						bncPg.validateDrgTbl_stdRetPha_mapd_T123NoD_T45D_hasInsulin();
+				} else if (optionTxt.equals("Preferred Mail Service Pharmacy")) {
+					bncPg.selectDrugTblDropDownOption(optionTxt);
+					if (deductible.equals("NoD")) 
+						bncPg.validateDrgTbl_preMaiSerPha_mapd_noD_hasInsulin();
+					else if (deductible.equals("T12NoD_T345D")) 
+						bncPg.validateDrgTbl_preMaiSerPha_mapd_T12noD_T345D_hasInsulin();
+					else if (deductible.equals("T123NoD_T45D")) 
+						bncPg.validateDrgTbl_preMaiSerPha_mapd_T123NoD_T45D_hasInsulin();
+				} else if (optionTxt.equals("Preferred Retail Pharmacy")) {
+					bncPg.selectDrugTblDropDownOption(optionTxt);
+					if (deductible.equals("NoD")) 
+						bncPg.validateDrgTbl_preRetail_mapd_noD_hasInsulin();
+					else if (deductible.equals("T12NoD_T345D")) 
+						bncPg.validateDrgTbl_preRetail_mapd_T12noD_T345D_hasInsulin();
+					else if (deductible.equals("T123NoD_T45D")) 
+						bncPg.validateDrgTbl_preRetail_mapd_T123NoD_T45D_hasInsulin();
+				} else {
+					Assert.assertTrue("TODO - optionTxt="+optionTxt, false);
+				}
+			}
+		} else if (planType.toUpperCase().equals("PDP")) {
+			List<String> options=bncPg.getDrugDropDownOptions();
+			for (int i=0; i<options.size(); i++) {
+				String optionTxt=options.get(i);
+				if (optionTxt.equals("Standard Retail Pharmacy")) {
+					bncPg.selectDrugTblDropDownOption(optionTxt);
+					if (deductible.equals("NoD")) 
+						bncPg.validateDrgTbl_stdRetPha_pdp_noD_hasInsulin();
+					else if (deductible.equals("T12NoD_T345D")) 
+						bncPg.validateDrgTbl_stdRetPha_pdp_T12noD_T345D_hasInsulin();
+					else if (deductible.equals("T123NoD_T45D")) 
+						bncPg.validateDrgTbl_stdRetPha_pdp_T123NoD_T45D_hasInsulin();
+				} else if (optionTxt.equals("Preferred Mail Service Pharmacy")) {
+					bncPg.selectDrugTblDropDownOption(optionTxt);
+					if (deductible.equals("NoD")) 
+						bncPg.validateDrgTbl_preMaiSerPha_pdp_noD_hasInsulin();
+					else if (deductible.equals("T12NoD_T345D")) 
+						bncPg.validateDrgTbl_preMaiSerPha_pdp_T12noD_T345D_hasInsulin();
+					else if (deductible.equals("T123NoD_T45D")) 
+						bncPg.validateDrgTbl_preMaiSerPha_pdp_T123NoD_T45D_hasInsulin();
+				} else if (optionTxt.equals("Preferred Retail Pharmacy")) {
+					bncPg.selectDrugTblDropDownOption(optionTxt);
+					if (deductible.equals("NoD")) 
+						bncPg.validateDrgTbl_preRetail_pdp_noD_hasInsulin();
+					else if (deductible.equals("T12NoD_T345D")) 
+						bncPg.validateDrgTbl_preRetail_pdp_T12noD_T345D_hasInsulin();
+					else if (deductible.equals("T123NoD_T45D")) 
+						bncPg.validateDrgTbl_preRetail_pdp_T123NoD_T45D_hasInsulin();
+				} else {
+					Assert.assertTrue("TODO - optionTxt="+optionTxt, false);
+				}
+			}
+		} else if (planType.toUpperCase().equals("CSNP_PCP")) {
+			List<String> options=bncPg.getDrugDropDownOptions();
+			for (int i=0; i<options.size(); i++) {
+				String optionTxt=options.get(i);
+				if (optionTxt.equals("Standard Retail Pharmacy")) {
+					bncPg.selectDrugTblDropDownOption(optionTxt);
+					if (deductible.equals("NoD")) 
+						bncPg.validateDrgTbl_stdRetPha_csnppcp_noD_hasInsulin();
+					else if (deductible.equals("T12NoD_T345D")) 
+						bncPg.validateDrgTbl_stdRetPha_csnppcp_T12noD_T345D_hasInsulin();
+					else if (deductible.equals("T123NoD_T45D")) 
+						bncPg.validateDrgTbl_stdRetPha_csnppcp_T123NoD_T45D_hasInsulin();
+				} else if (optionTxt.equals("Preferred Mail Service Pharmacy")) {
+					bncPg.selectDrugTblDropDownOption(optionTxt);
+					if (deductible.equals("NoD")) 
+						bncPg.validateDrgTbl_preMaiSerPha_csnppcp_noD_hasInsulin();
+					else if (deductible.equals("T12NoD_T345D")) 
+						bncPg.validateDrgTbl_preMaiSerPha_csnppcp_T12noD_T345D_hasInsulin();
+					else if (deductible.equals("T123NoD_T45D")) 
+						bncPg.validateDrgTbl_preMaiSerPha_csnppcp_T123NoD_T45D_hasInsulin();
+				} else if (optionTxt.equals("Preferred Retail Pharmacy")) {
+					bncPg.selectDrugTblDropDownOption(optionTxt);
+					if (deductible.equals("NoD")) 
+						bncPg.validateDrgTbl_preRetail_csnppcp_noD_hasInsulin();
+					else if (deductible.equals("T12NoD_T345D")) 
+						bncPg.validateDrgTbl_preRetail_csnppcp_T12noD_T345D_hasInsulin();
+					else if (deductible.equals("T123NoD_T45D")) 
+						bncPg.validateDrgTbl_preRetail_csnppcp_T123NoD_T45D_hasInsulin();
+				} else {
+					Assert.assertTrue("TODO - optionTxt="+optionTxt, false);
+				}
+			}
+		} else if (planType.toUpperCase().equals("CSNP_MAPD")) {
+			List<String> options=bncPg.getDrugDropDownOptions();
+			for (int i=0; i<options.size(); i++) {
+				String optionTxt=options.get(i);
+				if (optionTxt.equals("Standard Retail Pharmacy")) {
+					bncPg.selectDrugTblDropDownOption(optionTxt);
+					if (deductible.equals("NoD")) 
+						bncPg.validateDrgTbl_stdRetPha_csnpmsap_noD_hasInsulin();
+					else if (deductible.equals("T12NoD_T345D")) 
+						bncPg.validateDrgTbl_stdRetPha_csnpmsap_T12noD_T345D_hasInsulin();
+					else if (deductible.equals("T123NoD_T45D")) 
+						bncPg.validateDrgTbl_stdRetPha_csnpmsap_T123NoD_T45D_hasInsulin();
+				} else if (optionTxt.equals("Preferred Mail Service Pharmacy")) {
+					bncPg.selectDrugTblDropDownOption(optionTxt);
+					if (deductible.equals("NoD")) 
+						bncPg.validateDrgTbl_preMaiSerPha_csnpmsap_noD_hasInsulin();
+					else if (deductible.equals("T12NoD_T345D")) 
+						bncPg.validateDrgTbl_preMaiSerPha_csnpmsap_T12noD_T345D_hasInsulin();
+					else if (deductible.equals("T123NoD_T45D")) 
+						bncPg.validateDrgTbl_preMaiSerPha_csnpmsap_T123NoD_T45D_hasInsulin();
+				} else if (optionTxt.equals("Preferred Retail Pharmacy")) {
+					bncPg.selectDrugTblDropDownOption(optionTxt);
+					if (deductible.equals("NoD")) 
+						bncPg.validateDrgTbl_preRetail_csnpmsap_noD_hasInsulin();
+					else if (deductible.equals("T12NoD_T345D")) 
+						bncPg.validateDrgTbl_preRetail_csnpmsap_T12noD_T345D_hasInsulin();
+					else if (deductible.equals("T123NoD_T45D")) 
+						bncPg.validateDrgTbl_preRetail_csnpmsap_T123NoD_T45D_hasInsulin();
+				} else {
+					Assert.assertTrue("PROBLEM - DO NOT recognize this dropdown option. optionTxt="+optionTxt, false);
+				}
+			}
+		} else if (planType.toUpperCase().equals("ISNP_MAPD")) {
+			List<String> options=bncPg.getDrugDropDownOptions();
+			for (int i=0; i<options.size(); i++) {
+				String optionTxt=options.get(i);
+				if (optionTxt.equals("Standard Retail Pharmacy")) {
+					bncPg.selectDrugTblDropDownOption(optionTxt);
+					if (deductible.equals("NoD")) 
+						bncPg.validateDrgTbl_stdRetPha_isnpmsap_noD_hasInsulin();
+					else if (deductible.equals("T12NoD_T345D")) 
+						bncPg.validateDrgTbl_stdRetPha_isnpmsap_T12noD_T345D_hasInsulin();
+					else if (deductible.equals("T123NoD_T45D")) 
+						bncPg.validateDrgTbl_stdRetPha_isnpmsap_T123NoD_T45D_hasInsulin();
+				} else if (optionTxt.equals("Preferred Mail Service Pharmacy")) {
+					bncPg.selectDrugTblDropDownOption(optionTxt);
+					if (deductible.equals("NoD")) 
+						bncPg.validateDrgTbl_preMaiSerPha_isnpmsap_noD_hasInsulin();
+					else if (deductible.equals("T12NoD_T345D")) 
+						bncPg.validateDrgTbl_preMaiSerPha_isnpmsap_T12noD_T345D_hasInsulin();
+					else if (deductible.equals("T123NoD_T45D")) 
+						bncPg.validateDrgTbl_preMaiSerPha_isnpmsap_T123NoD_T45D_hasInsulin();
+				} else if (optionTxt.equals("Preferred Retail Pharmacy")) {
+					bncPg.selectDrugTblDropDownOption(optionTxt);
+					if (deductible.equals("NoD")) 
+						bncPg.validateDrgTbl_preRetail_isnpmsap_noD_hasInsulin();
+					else if (deductible.equals("T12NoD_T345D")) 
+						bncPg.validateDrgTbl_preRetail_isnpmsap_T12noD_T345D_hasInsulin();
+					else if (deductible.equals("T123NoD_T45D")) 
+						bncPg.validateDrgTbl_preRetail_isnpmsap_T123NoD_T45D_hasInsulin();
+				} else {
+					Assert.assertTrue("TODO - optionTxt="+optionTxt, false);
+				}
+			}
+		} 	
 	}
 	
 }//end of class

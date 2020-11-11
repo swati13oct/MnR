@@ -128,6 +128,9 @@ public class HSIDLoginPage extends UhcDriver {
 	protected WebElement paymentGoToHomepageBtn;
 
 	@FindBy(xpath="//header//button[contains(@ng-click,'goToHomePage()')]")
+	protected WebElement otcGoToHomepageBtn;
+		
+	@FindBy(xpath="//header//button[contains(@ng-click,'goToHomePage()')]")
 	protected WebElement anocGoToHomepageBtn;
 
 	@FindBy(xpath="//*[@id='main-message']/h1")
@@ -345,6 +348,7 @@ public class HSIDLoginPage extends UhcDriver {
 			//CommonUtility.checkPageIsReadyNew(driver);
 			paymentSplashPageWorkaround();
 			//CommonUtility.checkPageIsReadyNew(driver);
+			otcSplashPageWorkaround();
 		} else if (currentUrl().contains("login/undeliverable-email.html") 
 				|| currentUrl().contains("login/no-email.html")
 				|| currentUrl().contains("login/multiple-emails.html")
@@ -352,12 +356,14 @@ public class HSIDLoginPage extends UhcDriver {
 				|| currentUrl().contains("member-registration-gogreen-splash.html")
 				|| currentUrl().contains("login/anoc.html")
 				|| currentUrl().contains("login/payment-two-offerings.html")
+				|| currentUrl().contains("login/otc.html")
 				) {
 			undeliverEmailAddressRequiredWorkaround(username);
 			emailAddressRequiredWorkaround(username);
 			goGreenSplashPageWorkaround();
 			anocSplashPageWorkaround();
 			paymentSplashPageWorkaround();
+			otcSplashPageWorkaround();
 		} else if (currentUrl().contains("/dashboard")) {
 			System.out.println(driver.getCurrentUrl());
 			return new AccountHomePage(driver);
@@ -715,7 +721,8 @@ public class HSIDLoginPage extends UhcDriver {
 				}
 
 				List<WebElement> header=driver.findElements(By.xpath("//h1"));
-				if (header.size() > 0) {
+				List<WebElement> dashboardMemberId=driver.findElements(By.xpath("//span[@class='account-info-label']"));
+				if (header.size() > 0 || dashboardMemberId.size()>0) {
 					System.out.println("Located some sort of header, assume page is comming");
 					Thread.sleep(2000); //just in case, let page settle down
 					break;
@@ -785,6 +792,35 @@ public class HSIDLoginPage extends UhcDriver {
 			}
 		}
 	}
+	
+	public void otcSplashPageWorkaround() {
+		if (driver.getCurrentUrl().contains("login/otc.html")) {
+			if (MRScenario.environment.contains("team-a")) {
+				String tmpUrl=driver.getCurrentUrl().replace("login/otc.html", "member/testharness.html");
+				driver.get(tmpUrl);
+				CommonUtility.checkPageIsReadyNew(driver);
+				checkModelPopup(driver, 1);
+			} else if (MRScenario.environment.contains("stage") || MRScenario.environment.contains("team-h")) {
+				//keepThisWhenOtcPgIsReady if (MRScenario.environment.contains("team-a") || MRScenario.environment.contains("stage") || MRScenario.environment.contains("team-h")) {
+				CommonUtility.waitForPageLoad(driver, otcGoToHomepageBtn, 5);
+			}
+			System.out.println("User encounted OTC splash page, handle it...");
+			try {
+				if (validate(otcGoToHomepageBtn,0)) {
+					System.out.println("'Go To Homepage' button showed up, click it");
+					otcGoToHomepageBtn.click();
+				}
+			} catch (Exception e1) {
+				System.out.println("did not encounter 'Go To Homepage', moving on. "+e1);
+			}
+			checkModelPopup(driver, 1);
+		} else {
+			Assert.assertTrue("PROBLEM - will only workaround the splash page on team-atest or stage env, "
+					+ "please either use another test user or manually handle the splash page properly.  "
+					+ "Env='"+MRScenario.environment+"'", false);
+		} 
+	}
+
 
 	public void anocSplashPageWorkaround() {
 		if (driver.getCurrentUrl().contains("login/anoc.html")) {
