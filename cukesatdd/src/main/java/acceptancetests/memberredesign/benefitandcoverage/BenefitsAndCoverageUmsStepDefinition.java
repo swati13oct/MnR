@@ -1230,11 +1230,20 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	}
 
 	@And("^the user validates the Preventive Care section$")
-	public void user_validate_PreventiveCare() {
+	public void user_validate_PreventiveCare(DataTable memberAttributes) {
 		System.out.println("***the user validates the Preventive Care section***");
+		List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		String UserGender = memberAttributesMap.get("UserGender");
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
 				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
-		benefitsCoveragePage.validatePreventiveCare();
+		benefitsCoveragePage.validatePreventiveCare(UserGender);
 	}
 
 	

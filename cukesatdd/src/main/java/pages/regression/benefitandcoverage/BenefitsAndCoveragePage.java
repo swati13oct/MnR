@@ -815,11 +815,19 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 		validateWithValue("Out-Network text",OUTOFNETWORKTEXT);
 	}
 
-	public void validatePreventiveCare() {
+	public void validatePreventiveCare(String userGender) {
+		
 		validateWithValue("Preventive Care section ", PreventiveCare);
-		validateWithValue("Preventive Care Wellness Visit Male",WellnessVisitMale);
-		validateWithValue("Preventive Care Colonoscopy",Colonoscopy);
-		validateWithValue("Preventive Care Shingrix Vaccine",ShingrixVaccine);
+		if(userGender.equalsIgnoreCase("M"))
+		{
+		validateWithValue("Preventive Care Wellness Visit Male ",WellnessVisitMale);
+		} else{
+			validateWithValue("Preventive Care Wellness Visit Male ",WellnessVisitFemale);
+		}
+		validateWithValue("Preventive Care Colonoscopy ",Colonoscopy);
+		validateWithValue("Preventive Care Shingrix Vaccine ",ShingrixVaccine);
+		if(userGender.equalsIgnoreCase("F"))
+		validateWithValue("Preventive Care Mammo ",Mammogram);
 	}
 
 	/**

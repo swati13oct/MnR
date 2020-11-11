@@ -356,10 +356,7 @@ public class BenefitsAndCoverageWebElements extends UhcDriver {
 
 	@FindBy(xpath = "//span[contains(text(),'Out-of-Pocket Maximum')]")
 	protected WebElement OutofPocketMaximumText;
-
-	@FindBy(xpath = "//*[@id='preventiveCareSection']/div/div/div/div[1]/div/p/a")
-	protected WebElement WellnessVisitMale;
-
+	
 	@FindBy(id = "oopInNetowrk")
 	protected WebElement INNETWORK;
 
@@ -368,16 +365,25 @@ public class BenefitsAndCoverageWebElements extends UhcDriver {
 
 	@FindBy(xpath = "//*[contains(text(),'IN-NETWORK')]")
 	protected WebElement INNETWORKTEXT;
-
-	@FindBy(xpath = "//*[@id='preventiveCareSection']/div/div/div/div[3]/div/p/a")
-	protected WebElement Colonoscopy;
-
+	
 	@FindBy(xpath = "//*[contains(text(),'OUT-OF-NETWORK')]")
 	protected WebElement OUTOFNETWORKTEXT;
 
-	@FindBy(xpath = "//*[@id='preventiveCareSection']/div/div/div/div[5]/div/p/a")
-	protected WebElement ShingrixVaccine;
+	@FindBy(xpath = "//*[@id='preventiveCareSection']//a[normalize-space(text()) = 'Wellness Visit male']")
+	protected WebElement WellnessVisitMale;
+    
+	@FindBy(xpath = "//*[@id='preventiveCareSection']//a[normalize-space(text()) = 'Wellness Visit Female']")
+	protected WebElement WellnessVisitFemale;
+	
+	@FindBy(xpath = "//*[@id='preventiveCareSection']//a[normalize-space(text()) = 'Colonoscopy']")
+	protected WebElement Colonoscopy;
 
+	@FindBy(xpath = "//*[@id='preventiveCareSection']//a[normalize-space(text()) = 'Shingrix Vaccine']")
+	protected WebElement ShingrixVaccine;
+	
+	@FindBy(xpath = "//*[@id='preventiveCareSection']//a[normalize-space(text()) = 'Mammogram']")
+	protected WebElement Mammogram;
+	
 	@FindBy(xpath = "//button[@id='dropdown-toggle--1']/span[contains(text(),'Profile')]")
 	protected WebElement accountToggleDropdown;
 
