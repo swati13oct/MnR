@@ -625,12 +625,17 @@ public class PlanRecommendationEngineHeaderAndFooter extends UhcDriver {
 	public void navigationToPlanRecommendationEngineViaShopTools() {
 		validate(headerNavigationBarShopForaPlanTab, 45);
 //		actions.clickAndHold(headerNavigationBarShopForaPlanTab).build().perform();
-		desktopCommonUtils.MouseOver(headerNavigationBarShopForaPlanTab, Browsername);
-		headerShopLink.click();
+		//desktopCommonUtils.MouseOver(headerNavigationBarShopForaPlanTab, Browsername);
+		jsMouseOver(headerNavigationBarShopForaPlanTab);
+		jsClickNew(headerNavigationBarShopForaPlanTab);
+		//headerShopLink.click();
+		jsClickNew(headerShopLink);
 		validate(HeaderShopFromHomeInFindYourPlan, 30);
-		HeaderShopFromHomeInFindYourPlan.click();
+		//HeaderShopFromHomeInFindYourPlan.click();
+		jsClickNew(HeaderShopFromHomeInFindYourPlan);
 		validate(HeaderGetRecommendationInShop, 30);
-		HeaderGetRecommendationInShop.click();
+		//HeaderGetRecommendationInShop.click();
+		jsClickNew(HeaderGetRecommendationInShop);
 		validate(landingpageHeader, 30);
 		Assert.assertTrue(landingpageHeader.getText().contains("Plan"));
 	}

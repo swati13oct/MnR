@@ -365,6 +365,14 @@ public void user_clicks_on_View_all_disclaimer_information_link_on_home_page_in_
 				enterZipCodePage.validateZipComp(zipCode);
 	}
 	
+	@Then("^the user enters and validate the fields and clicks on submit on UHC site$")
+	public void the_user_enters_and_validate_the_fields_and_clicks_on_submit_on_UHC_site() throws Throwable {
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		aquisitionhomepage.enterAndvalidateEmail();
+		
+	}
+	
 	@Then("^the user validates Pro-active Chat on UHC site$")
 	public void the_user_validates_Pro_active_Chat_uhc() throws Throwable {
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
