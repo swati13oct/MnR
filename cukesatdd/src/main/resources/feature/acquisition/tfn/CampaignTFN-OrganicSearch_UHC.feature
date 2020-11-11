@@ -181,6 +181,94 @@ Feature: To test Organic Search Campaign TFN on UHC site
       | site   | Precedence1PSC | Precedence2PSC | Precedence3PSC | campaign2Url      | Precedence4PSC | maUrl                                  | maTFN                                                          | medSuppUrl                                                                | medSuppTFN     |
      # | ulayer |         880180 |         880188 |         880189 | /?WT.mc_id=800086 |         800086 | health-plans/enroll/ma-enrollment.html | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | health-plans/medicare-supplement-plans/medicare-information.html?vpp=true | //*[@id='tfn'] |
 | ulayer |         880180 |         880188 |         880189 | /?WT.mc_id=800086 |         800086 | enroll/ma-enrollment.html | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | health-plans/medicare-supplement-plans/medicare-information.html?vpp=true | //*[@id='tfn'] |
+      
+     
+    @Scenario4_7Campaign_Trafic_Member_UHC 
+   Scenario Outline: 4.7 Campaign traffic from Member page to Acquisition Portals for UHC
+   Given the user is on the uhcmedicaresolutions site landing page
+    And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
+    Then the user validates PSC code
+      | PSC Code | <Precedence1PSC> |
+     Then the user navigates to following memeber signin page and navigate to view medicare plans link UHC
+     | Member Signin URL |<memberSignIn>     |
+     Then the user validates PSC code
+      | PSC Code | <Precedence2PSC> |
+      Then the user validate the sam icons tfn with federal TFN on Acquistion page
+      | TFN Xpath | <SAMiconTFN> |
+  
+   Examples: 
+      | site   | Precedence1PSC | Precedence2PSC |memberSignIn| SAMiconTFN |
+   		#| blayer |         880180 |         8009508 |https://www.medicare.uhc.com/  |//*[contains(@class,'sam__button__text desktop-tfn-text')]  | 
+      | blayer |         880180 |         8009508 |https://www.medicare.uhc.com/  |//button[@id='sam-call-button']//*[contains(@class,'sam__button__text desktop')]  | 
+  
+  
+  @Scenario4_7Campaign_Trafic_Member_UHC
+  Scenario Outline: 4.7.1 Direct traffic and then through Google & search UHC Medicare Advantage Plan
+   Given the user is on the uhcmedicaresolutions site landing page
+    And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
+    Then the user validates PSC code
+      | PSC Code | <pscCode1> |
+     Then the user validate the sam icons tfn with federal TFN on Acquistion page
+      | TFN Xpath | <SAMiconTFN> |
+      Given user is on Google and search UHC Medicare Advantage Plan to navigate to UHC page
+    And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
+    Then the user validates PSC code
+      | PSC Code | <pscCode2> |
+      Then the user validate the sam icons tfn with federal TFN on Acquistion page
+      | TFN Xpath | <SAMiconTFN> |
+      
+    Examples: 
+      | pscCode1 | pscCode2         |SAMiconTFN                                                 |
+      |  880180  |  880188          |//button[@id='sam-call-button']//*[contains(@class,'sam__button__text desktop')] |
+      
+      @Scenario3_4_GoogleSearch_UHC1
+  Scenario Outline: 4.7.2 Google and search UHC Medicare Advantage Plan
+   Given the user is on the uhcmedicaresolutions site landing page
+    And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
+    Then the user validates PSC code
+      | PSC Code | <pscCode1> |
+     Then the user validate the sam icons tfn with federal TFN on Acquistion page
+      | TFN Xpath | <SAMiconTFN> |
+      
+      Examples: 
+      | pscCode1 | pscCode2         |SAMiconTFN                                                 |
+      |  880180  |  880180          |//button[@id='sam-call-button']//*[contains(@class,'sam__button__text desktop')] |
+      
+      
+     @Scenario4_7Campaign_Trafic_Member_UHC1
+  Scenario Outline: 4.7.1 Verify email referral plan functionalities on Plan Details page in UHC site
+    Given the user is on AARP medicare acquisition site landing page
+    And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
+    Then the user validates PSC code
+      | PSC Code | <pscCode1> |
+      Then the user validate the sam icons tfn with federal TFN on Acquistion page
+      | TFN Xpath | <SAMiconTFN> |
+    When the user performs plan search using following information in the AARP site
+      | Zip Code        | <zipcode>         |
+      | Is Multi County | <isMultutiCounty> |
+      | County Name     | <county>          |
+    And the user views the plans of the below plan type on test site
+      | Plan Type | <plantype> |
+      | Site      | <site>     |
+    And the user selects plan year for the AARP site
+      | Plan Year | <planyear> |
+    Then the user view plan details of the first plan in the given plan type and perform validation in test site
+    Then the user validate the print link on the plan Details Page on test site
+    Then the user validates the functionality of print button on the plan Details Page in test site
+    Then the user validate the email link on the plan Details Page on test site
+    Then the user validates the functionality of email button on the plan Details Page in test site
+    Then user loads page using email deeplink and validate vpp detail page content on test site
+    And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
+    Then the user validates PSC code
+      | PSC Code | <pscCode2> |
+      Then the user validate the sam icons tfn with federal TFN on Acquistion page
+      | TFN Xpath | <SAMiconTFN> |   
+       Examples:
+      | TID   | site   | zipcode | plantype | isMultutiCounty |planyear |  pscCode1 | pscCode2         |SAMiconTFN                                                 |
+      | 15531 | blayer | 80001   | MA       | No              |future  |  880180  |  8013925         |//button[@id='sam-call-button']//*[contains(@class,'sam__button__text desktop')] |
+      | 15531 | blayer | 80001   | PDP      | No              |future  | 880180  |  8013925          |//button[@id='sam-call-button']//*[contains(@class,'sam__button__text desktop')] |
+      
+    
      
      
    @Scenario4_7Campaign_Trafic_Member_UHC 

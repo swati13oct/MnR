@@ -194,8 +194,8 @@ Feature: To test Organic SearchCampaign TFN on AARP site
      # | ulayer |         810027 |         810106 |         810105 | /health-plans/shop/medicare-advantage-plans?WT.mc_id=8001533 |        8001533 | health-plans/enroll/ma-enrollment.html | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | health-plans/medicare-supplement-plans/medicare-information.html?vpp=true | //*[@id='tfn'] |
    | ulayer |         810027 |         810106 |         810105 | /shop/medicare-advantage-plans?WT.mc_id=8001533 |        8001533 | enroll/ma-enrollment.html | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | health-plans/medicare-supplement-plans/medicare-information.html?vpp=true | //*[@id='tfn'] |
       
-      
-      @Scenario4_7Campaign_Trafic_Member_AARP
+
+   @Scenario4_7Campaign_Trafic_Member_AARP
    Scenario Outline: 4.7 Campaign traffic from Member page to Acquisition Portals for AARP
   Given the user is on AARP medicare acquisition site landing page
     And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
@@ -262,5 +262,4 @@ Feature: To test Organic SearchCampaign TFN on AARP site
       | 15531 | ulayer | 80001   | PDP      | No              |future  | 810027 |  8013925          |//button[@id='sam-call-button']//*[contains(@class,'sam__button__text desktop')] |
       
     
-      
       

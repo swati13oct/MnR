@@ -18,7 +18,6 @@ outputFolder = "target/RunMRATDDAcquisitionOrganicSearchMemberTFNUHC")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.acquisition" }, monochrome = true, features = { "src/main/resources/feature/acquisition/tfn" }, plugin = {
 		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionOrganicSearchMemberTFNUHC.json" }, tags = {"@Scenario4_7Campaign_Trafic_Member_UHC"})
 
-//@Scenario6B_GoogleSearch_AARP,@Scenario6G_YahooSearch_AARP
 public class RunMRATDDAcquisitionOrganicSearchMemberTFNUHC {
 
 }

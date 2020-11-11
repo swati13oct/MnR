@@ -628,11 +628,14 @@ public class PlanRecommendationEngineHeaderAndFooter extends UhcDriver {
 		//desktopCommonUtils.MouseOver(headerNavigationBarShopForaPlanTab, Browsername);
 		jsMouseOver(headerNavigationBarShopForaPlanTab);
 		jsClickNew(headerNavigationBarShopForaPlanTab);
-		headerShopLink.click();
+		//headerShopLink.click();
+		jsClickNew(headerShopLink);
 		validate(HeaderShopFromHomeInFindYourPlan, 30);
-		HeaderShopFromHomeInFindYourPlan.click();
+		//HeaderShopFromHomeInFindYourPlan.click();
+		jsClickNew(HeaderShopFromHomeInFindYourPlan);
 		validate(HeaderGetRecommendationInShop, 30);
-		HeaderGetRecommendationInShop.click();
+		//HeaderGetRecommendationInShop.click();
+		jsClickNew(HeaderGetRecommendationInShop);
 		validate(landingpageHeader, 30);
 		Assert.assertTrue(landingpageHeader.getText().contains("Plan"));
 	}
