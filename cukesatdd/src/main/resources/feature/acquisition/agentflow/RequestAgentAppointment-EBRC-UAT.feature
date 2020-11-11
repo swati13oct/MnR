@@ -73,7 +73,7 @@ Given the user is on medicare acquisition site landing page
 @agentFlowEBRCBlayer   		
   Examples: 
     |scenario            | zipcode | isMultutiCounty |  county             | plantype | DOB      | Firstname | Lastname|  site|UHCUrl                     |
-    |E2E Scenario 4_AMP  |   90002 | NO              | Los Angeles County | MS       | 11/13/1940 | John      | Carry   |  AARP  |https://www.myuhcagent.com/|   
+    |E2E Scenario 4_UMS  |   90002 | NO              | Los Angeles County | MS       | 11/13/1940 | John      | Carry   |  AARP  |https://www.myuhcagent.com/|   
 	
 @agentFlowEBRCUlayer
    Examples: 
