@@ -845,7 +845,7 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth Prod
        | 28-m4 | F494433,F506320 |kkumard  | mnrs786@ |testUserName| DSNP_MAPD  | Individual_MnR04_BnC | LIS 3         | ENGLISH  | DBAD ADFED | 919744565-00 | 01/01/2020    | Not Available  | Extra Help Level : 3 | IndEffectiveAARP |     6 |  H0271-006 | NoRider|
 
   @prod_benefitsAndCoverage19 @insulin
-  Scenario Outline: Index: <index> -FID: <TID> -plan: <planType> -memberType: <memberType> -copayCategory: <copayCategory> -insulin: <insulin> - Verify Insulin Demo display on drug table for NON-LIS user
+  Scenario Outline: Index: <index> -FID: <FID> -plan: <planType> -memberType: <memberType> -copayCategory: <copayCategory> -insulin: <insulin> - Verify Insulin Demo display on drug table for NON-LIS user
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
       | Username | <username> |
@@ -901,4 +901,14 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth Prod
     Examples: 
       | index  | FID    | username | password  | MemUserName        | planType  | memberType     | copayCategory | deductible   | insulin      |
       | 31-I07 | 478830 | kkumard  | mnrs786@  | q4_dec_preISNP     | ISNP_MAPD | Individual_BnC | NON LIS       | T123NoD_T45D | hasInsulin   |     
+
+    @prod_nonInsulin_mapd_NoT
+    Examples: 
+      | index  | FID    | username | password  | MemUserName        | planType  | memberType     | copayCategory | deductible   | insulin      |
+      | 34-I08 | 478830 | kkumard  | mnrs786@  | q4_insulinDemo_002 | MAPD      | Individual_BnC | LIS 4         | NoTier       | nonInsulin   | 
+
+    @prod_nonInsulin_mapd_T12345
+    Examples: 
+      | index  | FID    | username | password  | MemUserName        | planType  | memberType     | copayCategory | deductible   | insulin      |
+      | 34-I09 | 478830 | kkumard  | mnrs786@  | q4_insulinDemo_019 | MAPD      | Individual_BnC | NON LIS       | T12345       | nonInsulin   | 
       

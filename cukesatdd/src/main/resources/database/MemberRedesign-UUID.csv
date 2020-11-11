@@ -584,3 +584,5 @@ bd147126-55f5-49e3-bd00-897e41407ce3/Password@1,DSNP_MAPD,Individual_CnS02_BnC,L
 0d89d0d1-8f80-4baf-b0f7-90a977703b18/Password@1,CSNP_PCP,Individual_BnC,NON LIS,NoD,hasInsulin
 a09a118c-0dfd-447f-8e7c-42c8391df4ce/Password@1,CSNP_MAPD,Individual_BnC,NON LIS,T123NoD_T45D,hasInsulin
 474cb580-e9d9-4013-8609-1b07bbec66aa/Password@1,ISNP_MAPD,Individual_BnC,NON LIS,T123NoD_T45D,hasInsulin
+fa88fdee-5dd1-446a-9da5-514500ad995b/Password@1,MAPD,Individual_BnC,LIS 4,NoTier,nonInsulin
+d5970b4f-c7bf-475f-8dfc-309d8dee95c7/Password@1,MAPD,Individual_BnC,NON LIS,T12345,nonInsulin

@@ -812,7 +812,7 @@ Feature: 1.01 Member  benefits and Coverage page
 
 
   @benefitsAndCoverage23 @insulin
-  Scenario Outline: Index: <index> -FID: <TID> -plan: <planType> -memberType: <memberType> -copayCategory: <copayCategory> -insulin: <insulin> - Verify Insulin Demo display on drug table for NON-LIS user
+  Scenario Outline: Index: <index> -FID: <FID> -plan: <planType> -memberType: <memberType> -copayCategory: <copayCategory> -insulin: <insulin> - Verify Insulin Demo display on drug table for NON-LIS user
     Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>      |
       | Member Type    | <memberType>    |
@@ -862,6 +862,21 @@ Feature: 1.01 Member  benefits and Coverage page
     Examples: 
       | index  | FID    | planType  | memberType     | copayCategory | deductible   | insulin      |
       | 34-I07 | 478830 | ISNP_MAPD | Individual_BnC | NON LIS       | T123NoD_T45D | hasInsulin   | 
+
+    @nonInsulin_mapd_NoT
+    Examples: 
+      | index  | FID    | planType  | memberType     | copayCategory | deductible   | insulin      |
+      | 34-I08 | 478830 | MAPD      | Individual_BnC | LIS 4         | NoTier       | nonInsulin   | 
+
+    @nonInsulin_mapd_T12345
+    Examples: 
+      | index  | FID    | planType  | memberType     | copayCategory | deductible   | insulin      |
+      | 34-I08 | 478830 | MAPD      | Individual_BnC | NON LIS       | T12345       | nonInsulin   | 
+
+
+
+
+
 
 #TBD      | 34-I01 | 478830 | MAPD | Individual_BnC | NON LIS       | NoD | nonInsulin   | 
 #TBD      | 34-I01 | 478830 | PDP | Individual_BnC | NON LIS       | NoD | nonInsulin   | 

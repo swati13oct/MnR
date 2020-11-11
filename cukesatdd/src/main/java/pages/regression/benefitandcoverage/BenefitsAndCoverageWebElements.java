@@ -257,6 +257,9 @@ public class BenefitsAndCoverageWebElements extends UhcDriver {
 	@FindBy(id = "mapdPageNonLisForPRetail")
 	protected WebElement preferredRetail_DrugTable;
 
+	@FindBy(id="mapdPageLis")
+	protected WebElement Lis_DrugTable;
+	
 	@FindBy(id = "waystosave")
 	protected WebElement waysToSave;
 
