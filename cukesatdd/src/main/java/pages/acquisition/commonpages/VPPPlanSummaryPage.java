@@ -712,6 +712,20 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	private WebElement ViewPrescriptionDrugPlans;
 	
 
+	@FindBy(xpath="//a[contains(@href,'//aarpsupplementalhealth-stg.uhc.com/content/dam/ole/MedSuppDocs/YourGuide/')]")
+	private WebElement RightRail_yourGuide;
+	
+	@FindBy(xpath="//a[contains(@href,'//aarpsupplementalhealth-stg.uhc.com/content/dam/ole/MedSuppDocs/GuideToHealth')]")
+	private WebElement RightRail_Guidetoyourhealth;
+	@FindBy(xpath="//a[contains(@href,'//aarpsupplementalhealth-stg.uhc.com/content/dam/ole/MedSuppDocs/OutlineOfCoverage')]")
+	private WebElement RightRail_outlinecoverage;
+	@FindBy(xpath="//a[contains(@href,'//aarpsupplementalhealth-stg.uhc.com/content/dam/ole/MedSuppDocs/PlanOverview')]")
+	private WebElement RightRail_Planoverview;
+	@FindBy(xpath="//a[contains(@href,'//aarpsupplementalhealth-stg.uhc.com/content/dam/ole/MedSuppDocs/RulesAndDisclosures')]")
+	private WebElement RightRail_RulesandDisclosure;
+	
+	@FindBy(xpath="//a[contains(@href,'//aarpsupplementalhealth-stg.uhc.com/content/dam/ole/MedSuppDocs/EnrollmentDiscount')]")
+	private WebElement EnrollmentDiscount;
 	
 	public WebElement getValEstimatedAnnualDrugCostValue(String planName) {
 		// WebElement valEstimatedAnnualDrugCostValue =
@@ -4179,4 +4193,201 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		//Thread.sleep(2000);
 		return SubmitConfirmation;
 	}
+	
+	public void medsuppOLERightRail() throws InterruptedException {
+		validateNew(RightRail_yourGuide);
+		CommonUtility.waitForPageLoadNew(driver, RightRail_yourGuide, 30);
+		String parentWindow = driver.getWindowHandle();
+		RightRail_yourGuide.click();
+		sleepBySec(3);
+		Set<String> tabs_windows = driver.getWindowHandles();
+		Iterator<String> itr = tabs_windows.iterator();
+		while(itr.hasNext()) {
+			String window = itr.next();
+			if(!parentWindow.equals(window)) {
+				driver.switchTo().window(window);
+			}
+		}
+
+		CommonUtility.checkPageIsReadyNew(driver);
+		String CurrentRailURL = driver.getCurrentUrl();
+		//String ExpectedCurrentRailURL1 =  new String("https://aarpsupplementalhealth-stg.uhc.com/content/dam/ole/MedSuppDocs/YourGuide/StateVariations/WR10001CA_09-16_wc.pdf");
+		//String ActualCurrentRailURL=CurrentRailURL.
+				//.substring(0, 27).trim();
+		System.out.println(" Page is displayed : "+CurrentRailURL);
+	//	System.out.println("Expected  URL: "+ExpectedCurrentRailURL1);
+		System.out.println("Actual  URL: "+CurrentRailURL);
+
+		if(CurrentRailURL.contains("https://aarpsupplementalhealth-stg.uhc.com/") && CurrentRailURL.contains(".pdf")) {
+			System.out.println("****************Rail Rail is displayed  ***************");
+
+			Assert.assertTrue(true);
+		}
+		else {
+			Assert.fail("****************Rail Rail is not loaded ***************");
+		}
+		driver.switchTo().window(parentWindow);
+		
+	}	
+	public void medsuppOLERightRailGuideourhealth() throws InterruptedException {
+		validateNew(RightRail_Guidetoyourhealth);
+		CommonUtility.waitForPageLoadNew(driver, RightRail_Guidetoyourhealth, 30);
+		String parentWindow = driver.getWindowHandle();
+		RightRail_Guidetoyourhealth.click();
+		sleepBySec(3);
+		Set<String> tabs_windows = driver.getWindowHandles();
+		Iterator<String> itr = tabs_windows.iterator();
+		while(itr.hasNext()) {
+			String window = itr.next();
+			if(!parentWindow.equals(window)) {
+				driver.switchTo().window(window);
+			}
+		}
+
+		CommonUtility.checkPageIsReadyNew(driver);
+		String CurrentRailURL = driver.getCurrentUrl();
+		//String ExpectedCurrentRailURL1 =  new String("https://aarpsupplementalhealth-stg.uhc.com/content/dam/ole/MedSuppDocs/GuideToHealth/StateVariations/GU25114ST.pdf");
+		//String ActualCurrentRailURL=CurrentRailURL.
+				//.substring(0, 27).trim();
+		System.out.println(" Page is displayed : "+CurrentRailURL);
+		//System.out.println("Expected  URL: "+ExpectedCurrentRailURL1);
+		System.out.println("Actual  URL: "+CurrentRailURL);
+
+		if(CurrentRailURL.contains("https://aarpsupplementalhealth-stg.uhc.com/") && CurrentRailURL.contains(".pdf")) {
+			System.out.println("****************Rail Rail is displayed  ***************");
+
+			Assert.assertTrue(true);
+		}
+		else {
+			Assert.fail("****************Rail Rail is not loaded ***************");
+		}
+		driver.switchTo().window(parentWindow);
+		
+	}	
+	public void medsuppOLERightRailoutlinecoverage() throws InterruptedException {
+		validateNew(RightRail_outlinecoverage);
+		CommonUtility.waitForPageLoadNew(driver, RightRail_outlinecoverage, 30);
+		String parentWindow = driver.getWindowHandle();
+		RightRail_outlinecoverage.click();
+		sleepBySec(3);
+		Set<String> tabs_windows = driver.getWindowHandles();
+		Iterator<String> itr = tabs_windows.iterator();
+		while(itr.hasNext()) {
+			String window = itr.next();
+			if(!parentWindow.equals(window)) {
+				driver.switchTo().window(window);
+			}
+		}
+
+		CommonUtility.checkPageIsReadyNew(driver);
+		String CurrentRailURL = driver.getCurrentUrl();
+		System.out.println("Actual  URL: "+CurrentRailURL);
+
+		if(CurrentRailURL.contains("https://aarpsupplementalhealth-stg.uhc.com/") && CurrentRailURL.contains(".pdf")) {
+			System.out.println("****************Rail Rail is displayed  ***************");
+
+			Assert.assertTrue(true);
+		}
+		else {
+			Assert.fail("****************Rail Rail is not loaded ***************");
+		}
+		driver.switchTo().window(parentWindow);
+		
+	}	
+
+	public void medsuppOLERightRailplanoverview() throws InterruptedException {
+		validateNew(RightRail_Planoverview);
+		CommonUtility.waitForPageLoadNew(driver, RightRail_Planoverview, 30);
+		String parentWindow = driver.getWindowHandle();
+		RightRail_Planoverview.click();
+		sleepBySec(3);
+		Set<String> tabs_windows = driver.getWindowHandles();
+		Iterator<String> itr = tabs_windows.iterator();
+		while(itr.hasNext()) {
+			String window = itr.next();
+			if(!parentWindow.equals(window)) {
+				driver.switchTo().window(window);
+			}
+		}
+
+		CommonUtility.checkPageIsReadyNew(driver);
+		String CurrentRailURL = driver.getCurrentUrl();
+		System.out.println("Actual  URL: "+CurrentRailURL);
+
+		if(CurrentRailURL.contains("https://aarpsupplementalhealth-stg.uhc.com/") && CurrentRailURL.contains(".pdf")) {
+			System.out.println("****************Rail Rail is displayed  ***************");
+
+			Assert.assertTrue(true);
+		}
+		else {
+			Assert.fail("****************Rail Rail is not loaded ***************");
+		}
+		driver.switchTo().window(parentWindow);
+		
+	}	
+	
+	public void medsuppOLERightRailRulesDisclose() throws InterruptedException {
+		validateNew(RightRail_RulesandDisclosure);
+		CommonUtility.waitForPageLoadNew(driver, RightRail_RulesandDisclosure, 30);
+		String parentWindow = driver.getWindowHandle();
+		RightRail_RulesandDisclosure.click();
+		sleepBySec(3);
+		Set<String> tabs_windows = driver.getWindowHandles();
+		Iterator<String> itr = tabs_windows.iterator();
+		while(itr.hasNext()) {
+			String window = itr.next();
+			if(!parentWindow.equals(window)) {
+				driver.switchTo().window(window);
+			}
+		}
+
+		CommonUtility.checkPageIsReadyNew(driver);
+		String CurrentRailURL = driver.getCurrentUrl();
+		System.out.println("Actual  URL: "+CurrentRailURL);
+
+		if(CurrentRailURL.contains("https://aarpsupplementalhealth-stg.uhc.com/") && CurrentRailURL.contains(".pdf")) {
+			System.out.println("****************Rail Rail is displayed  ***************");
+
+			Assert.assertTrue(true);
+		}
+		else {
+			Assert.fail("****************Rail Rail is not loaded ***************");
+		}
+		driver.switchTo().window(parentWindow);
+		
+	}	
+	
+	public void medsuppOLERightRailEnrollmentDiscount() throws InterruptedException {
+		validateNew(EnrollmentDiscount);
+		CommonUtility.waitForPageLoadNew(driver, EnrollmentDiscount, 30);
+		String parentWindow = driver.getWindowHandle();
+		EnrollmentDiscount.click();
+		sleepBySec(3);
+		Set<String> tabs_windows = driver.getWindowHandles();
+		Iterator<String> itr = tabs_windows.iterator();
+		while(itr.hasNext()) {
+			String window = itr.next();
+			if(!parentWindow.equals(window)) {
+				driver.switchTo().window(window);
+			}
+		}
+
+		CommonUtility.checkPageIsReadyNew(driver);
+		String CurrentRailURL = driver.getCurrentUrl();
+		System.out.println("Actual  URL: "+CurrentRailURL);
+
+		if(CurrentRailURL.contains("https://aarpsupplementalhealth-stg.uhc.com/") && CurrentRailURL.contains(".pdf")) {
+			System.out.println("****************Rail Rail is displayed  ***************");
+
+			Assert.assertTrue(true);
+		}
+		else {
+			Assert.fail("****************Rail Rail is not loaded ***************");
+		}
+		driver.switchTo().window(parentWindow);
+		
+	}	
+	
+	
+	
 }

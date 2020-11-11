@@ -1325,8 +1325,10 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	
 	public ProviderSearchPage clicksOnRallyToolFromGlobalHeader() {
 
-		Actions action = new Actions(driver);
-		action.moveToElement(navigationSectionHomeLink).moveToElement(ourPlansHoverLink).build().perform();
+//		Actions action = new Actions(driver);
+//		action.moveToElement(navigationSectionHomeLink).moveToElement(ourPlansHoverLink).build().perform();
+		jsMouseOver(navigationSectionHomeLink);
+		jsMouseOver(ourPlansHoverLink);
 		validateNew(providerSearchFromGlobalHeader);
 
 		switchToNewTabNew(providerSearchFromGlobalHeader);
@@ -2264,8 +2266,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 			CommonUtility.waitForPageLoadNew(driver, zipCodeShopField, 30);
 			sendkeys(zipCodeShopField, zipcode);
-			viewShopPlansButton.click();
+			jsClickNew(viewShopPlansButton);
 			// }
+			waitForPageLoadSafari();
 			CommonUtility.waitForPageLoadNew(driver, zipcodeChangeLink, 30);
 			if (driver.getCurrentUrl().contains("health-plans")) {
 				return new VPPPlanSummaryPage(driver);
