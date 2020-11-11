@@ -90,6 +90,10 @@ public class PlanDetailsPage extends UhcDriver {
 	//@FindBy(xpath="//a[contains(@id,'prescriptiondrug') and contains(@class,'active')]")
 	private List<WebElement> presDrugTab1;
 
+	//@FindBy(xpath="//*[contains(@id,'prescriptiondrug')]")
+	@FindBy(xpath="//a[contains(@id,'prescriptiondrug') and contains(@class,'active')]")
+	private List<WebElement> presDrugTab2;
+	
 	@FindBy(id = "prescriptiondrug")
 	private List<WebElement> presDrugTab;
 
@@ -359,7 +363,7 @@ public class PlanDetailsPage extends UhcDriver {
 		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
 		if (planType.equalsIgnoreCase("MA")) {
 			CommonUtility.waitForPageLoadNew(driver, medBenefitsTab.get(0), 45);
-			org.testng.Assert.assertTrue(0 == presDrugTab1.size(), "Prescription Drug tab not displayed for MA plans");
+			org.testng.Assert.assertTrue(0 == presDrugTab2.size(), "Prescription Drug tab not displayed for MA plans");
 
 		}  else if (planType.equalsIgnoreCase("MAPD")) {
 			CommonUtility.waitForPageLoadNew(driver, presDrugTab.get(0), 45);
