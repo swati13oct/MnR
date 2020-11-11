@@ -2917,12 +2917,10 @@ public class VppStepDefinitionUHC {
 			Assert.fail("Error Loading on visitor Profile page");
 		}
 	}
+	
 	@Then("^the user enter the searchValue in the search text box and hits enter on UHC site$")
 	public void the_user_enter_the_searchValue_in_the_search_text_box_and_hits_enter_on_UHC_site(DataTable inputvalue) throws Throwable {
-	/*	VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
-				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);*/
-
-		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+			AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		List<DataTableRow> AttributesRow = inputvalue
 				.getGherkinRows();
