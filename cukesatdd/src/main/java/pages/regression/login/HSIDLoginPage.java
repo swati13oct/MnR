@@ -795,32 +795,25 @@ public class HSIDLoginPage extends UhcDriver {
 	
 	public void otcSplashPageWorkaround() {
 		if (driver.getCurrentUrl().contains("login/otc.html")) {
-			if (MRScenario.environment.contains("team-a")) {
-				String tmpUrl=driver.getCurrentUrl().replace("login/otc.html", "member/testharness.html");
-				driver.get(tmpUrl);
-				CommonUtility.checkPageIsReadyNew(driver);
-				checkModelPopup(driver, 1);
-			} else if (MRScenario.environment.contains("stage") || MRScenario.environment.contains("team-h")) {
-				//keepThisWhenOtcPgIsReady if (MRScenario.environment.contains("team-a") || MRScenario.environment.contains("stage") || MRScenario.environment.contains("team-h")) {
+			if (MRScenario.environment.contains("team-a") || MRScenario.environment.contains("stage") || MRScenario.environment.contains("team-h")) {
 				CommonUtility.waitForPageLoad(driver, otcGoToHomepageBtn, 5);
-			}
-			System.out.println("User encounted OTC splash page, handle it...");
-			try {
-				if (validate(otcGoToHomepageBtn,0)) {
-					System.out.println("'Go To Homepage' button showed up, click it");
-					otcGoToHomepageBtn.click();
+				System.out.println("User encounted otc splash page, handle it...");
+				try {
+					if (validate(otcGoToHomepageBtn,0)) {
+						System.out.println("'Go To Homepage' button showed up, click it");
+						otcGoToHomepageBtn.click();
+					}
+				} catch (Exception e1) {
+					System.out.println("did not encounter 'Go To Homepage', moving on. "+e1);
 				}
-			} catch (Exception e1) {
-				System.out.println("did not encounter 'Go To Homepage', moving on. "+e1);
+				checkModelPopup(driver, 1);
+			} else {
+				Assert.assertTrue("PROBLEM - will only workaround the splash page on team-atest or stage env, "
+						+ "please either use another test user or manually handle the splash page properly.  "
+						+ "Env='"+MRScenario.environment+"'", false);
 			}
-			checkModelPopup(driver, 1);
-		} else {
-			Assert.assertTrue("PROBLEM - will only workaround the splash page on team-atest or stage env, "
-					+ "please either use another test user or manually handle the splash page properly.  "
-					+ "Env='"+MRScenario.environment+"'", false);
-		} 
+		}
 	}
-
 
 	public void anocSplashPageWorkaround() {
 		if (driver.getCurrentUrl().contains("login/anoc.html")) {
