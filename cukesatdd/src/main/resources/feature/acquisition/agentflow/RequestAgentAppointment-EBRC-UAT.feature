@@ -56,4 +56,29 @@ Examples:
 
 
 
+Scenario Outline: <scenario> Verify request an appointment for Medsupp flows
+Given the user is on medicare acquisition site landing page
+   		|Site| <site>|
+		When the user performs plan search using following information
+      | Zip Code        | <zipcode>         |
+      | County Name     | <county>          |
+      | Is Multi County | <isMultutiCounty> |
+		When the user views the plans of the below plan type
+      | Plan Type | <plantype> |
+    Then the site user fills all the details in MedsuppPage
+   		| DOB           | <DOB>         |  		
+   		When the user clicks on Agent link and validates the correct URL is loaded for Medsupp page
+      |UHC Agent URL|  <UHCUrl>  |
+
+@agentFlowEBRCBlayer   		
+  Examples: 
+    |scenario            | zipcode | isMultutiCounty |  county             | plantype | DOB      | Firstname | Lastname|  site|UHCUrl                     |
+    |E2E Scenario 4_AMP  |   90002 | NO              | Los Angeles County | MS       | 11/13/1940 | John      | Carry   |  AARP  |https://www.myuhcagent.com/|   
+	
+@agentFlowEBRCUlayer
+   Examples: 
+   |scenario            | zipcode | isMultutiCounty |  county             | plantype | DOB      | Firstname | Lastname|  site|UHCUrl                     |
+    |E2E Scenario 4_AMP  |   90002 | NO              | Los Angeles County | MS       | 11/13/1940 | John      | Carry   |  AARP  |https://www.myuhcagent.com/|   
+			
+
 
