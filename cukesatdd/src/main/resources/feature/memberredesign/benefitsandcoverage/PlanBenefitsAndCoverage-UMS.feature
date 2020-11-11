@@ -569,7 +569,7 @@ Feature: 1.01 Member  benefits and Coverage page
     And the user validates the Out of Pocket Max section
     And the user validates the Preventive Care section
      | UserGender| <userGender> |
-    And  user view the LIS Drug Copays & Discounts header
+    And the user view the LIS Drug Copays & Discounts header
     And the user MAPD LIS should see drug cost table for Lis members
     And the user validates Drug coverage header and text under the section
     And the user validates text for the Look Up Drugs section
