@@ -1,5 +1,5 @@
 @DCE_Redesign_VPP_Details
-Feature: 1.10.3 ACQ-DCERedesign-VPP_PlanCompare - To test DCE - VPP Plan Compare Integration
+Feature: 1.10.3 DCE-Redesign-VPP_PlanCompare - To test DCE - VPP Plan Compare Integration
 
   @DCE_Redesign_VPP_PlanDetails1
   Scenario Outline: 1.10.3.1 To test the DCE Redesignflow for PlanType :  <plantype> from vpp Plan Compare
