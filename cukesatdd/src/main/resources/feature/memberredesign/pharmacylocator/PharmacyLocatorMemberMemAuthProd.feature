@@ -35,7 +35,7 @@ Feature: 1.11 Member Pharmacy Locator tool Page- Member Auth - PROD
 
 		Examples:
 			| TID   | username | password | MemUserName   | planType | memberType                 | zipcode | distance | pharmacyType  | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
-			| 15294 | ujethwa  | Member22 | TEAKSAMPPALA1 | MAPD     | IndMAPDUHC_Pharmacylocator | 29148   | 10       | E-Prescribing | False                 | False            | True                 |
+			| 15294 | ujethwa  | Member22 | LMHOCHSCHILD11 | MAPD     | IndMAPDUHC_Pharmacylocator | 29148   | 10       | E-Prescribing | False                 | False            | True                 |
 
 	@prod_pharmacylocator1 @E2E @English @PharmacyDistanceDefaultZip @ValidateLanguageandZIPcode @ZipCodeErrorMessages
 	Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Part 1 of 2 - To verify end-to-end behavior for pharmacy locator English page on member site
@@ -103,7 +103,7 @@ Feature: 1.11 Member Pharmacy Locator tool Page- Member Auth - PROD
 	@prod_pharmacylocator1d
 	Examples: 
 	  | TID 	| username  | password  | MemUserName     | planType | memberType         		   | zipcode | distance | pharmacyType                | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
-	  | 15294	| ujethwa | Member22 | TEAKSAMPPALA1  | MAPD     | IndMAPDUHC_Pharmacylocator  | 29148   | 10       | E-Prescribing               | False                 | False            | True                 |
+	  | 15294	| ujethwa | Member22 | LMHOCHSCHILD11  | MAPD     | IndMAPDUHC_Pharmacylocator  | 29148   | 10       | E-Prescribing               | False                 | False            | True                 |
 	  | 15274	| ujethwa | Member22 | DMURRAY911       | PDP      | Walgreen_Pharmacylocator    | 80001   | 10       | Long-term care              | True                  | True             | True                 |
 
 
@@ -159,7 +159,7 @@ Feature: 1.11 Member Pharmacy Locator tool Page- Member Auth - PROD
 	@prod_pharmacylocator2d
 	Examples: 
 	  | TID 	| username  | password  | MemUserName     | planType | memberType         		   | zipcode | distance | pharmacyType                | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
-	  | 15294	| ujethwa | Member22 | TEAKSAMPPALA1    | MAPD     | IndMAPDUHC_Pharmacylocator  | 29148   | 10       | E-Prescribing               | False                 | False            | True                 |
+	  | 15294	| ujethwa | Member22 | LMHOCHSCHILD11    | MAPD     | IndMAPDUHC_Pharmacylocator  | 29148   | 10       | E-Prescribing               | False                 | False            | True                 |
 	  | 15274	| ujethwa | Member22 | DMURRAY911    | PDP      | Walgreen_Pharmacylocator    | 80001   | 10       | Long-term care                   | False                  | True             | True                 |
 
 

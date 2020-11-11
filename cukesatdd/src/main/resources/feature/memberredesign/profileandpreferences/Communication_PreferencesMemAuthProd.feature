@@ -35,7 +35,7 @@ Feature: 1.03.1 Member Preferences page -Member Auth - PROD
 
     Examples:
       | TID   | username | password | MemUserName       | userSelection | planType                       |
-      | 15314 | ujethwa | Member22 | TEAKSAMPPALA1     | xxxxx         | MAPD_UHC_GOGreen_Profilepref   |
+      | 15314 | ujethwa | Member22 | LMHOCHSCHILD11     | xxxxx         | MAPD_UHC_GOGreen_Profilepref   |
 
   @prod_CommunicationPreferences01
   Scenario Outline: TID: <TID> -Plan Type: <planType> - To verify Communication Preferences section
@@ -73,7 +73,7 @@ Feature: 1.03.1 Member Preferences page -Member Auth - PROD
     Examples:
       | TID   | username | password | MemUserName       | userSelection | planType                       |
       | 15313 | ujethwa | Member22 | LSLOMSKI777       | xxxxx         | PDP_AARP_GOGreen_Profilepref   |
-      | 15314 | ujethwa | Member22 | TEAKSAMPPALA1     | xxxxx         | MAPD_UHC_GOGreen_Profilepref   |
+      | 15314 | ujethwa | Member22 | LMHOCHSCHILD11     | xxxxx         | MAPD_UHC_GOGreen_Profilepref   |
       | 15316 | ujethwa | Member22 | WILLIAMGARRISON48 | xxxxx         | MAPD_GROUP_GOGreen_Profilepref |
 
 

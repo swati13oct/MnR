@@ -94,7 +94,7 @@ Feature: 1.10.1 Member  order materials Page - PROD
     Examples:
       | TID   | username | password | MemUserName         | planType | memberType            |
       | 15288 | ujethwa | Member22 | skho@roadrunner.com | MAPD     | UHC_Individual_order  |
-      | 15288 | ujethwa | Member22 | TEAKSAMPPALA1       | MAPD     | AARP_Individual_order |
+      | 15288 | ujethwa | Member22 | LMHOCHSCHILD11       | MAPD     | AARP_Individual_order |
 
       @prod_orderPlanMaterials1a @ma
     Examples:
