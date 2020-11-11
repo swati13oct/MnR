@@ -15,11 +15,11 @@ import cucumber.api.CucumberOptions;
 
 @RunWith(ExtendedCucumber.class)
 @ExtendedCucumberOptions(retryCount=1,screenShotSize="", screenShotLocation="/screenshots/",
-jsonReport = "target/cucumber-RunMRATDDRegressionBenefitNCoverage_Insulin_csnpMapd_T12NoD_T345DMemAuth.json",detailedReport = true, detailedAggregatedReport = true,
-overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionBenefitNCoverage_Insulin_csnpMapd_T12NoD_T345DMemAuth")
+jsonReport = "target/cucumber-RunMRATDDRegressionBenefitNCoverage_Insulin_csnpMapd_T123NoD_T45D.json",detailedReport = true, detailedAggregatedReport = true,
+overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionBenefitNCoverage_Insulin_csnpMapd_T123NoD_T45D")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberredesign" }, 
 features = { "src/main/resources/feature/memberredesign/benefitsandcoverage" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionBenefitNCoverage_Insulin_csnpMapd_T12NoD_T345DMemAuth.json" }, tags = { "@memAuth_hasInsulin_csnpMapd_T12NoD_T345D" })
-public class RunMRATDDRegressionBenefitNCoverage_Insulin_csnpMapd_T12NoD_T345DMemAuth {
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionBenefitNCoverage_Insulin_csnpMapd_T123NoD_T45D.json" }, tags = { "@hasInsulin_csnpMapd_T123NoD_T45D" })
+public class RunMRATDDRegressionBenefitNCoverage_Insulin_csnpMapd_T123NoD_T45D {
 
 }

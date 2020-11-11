@@ -853,10 +853,10 @@ Feature: 1.01 Member  benefits and Coverage page
       | index  | FID    | planType  | memberType     | copayCategory | deductible   | insulin      |
       | 34-I05 | 478830 | CSNP_PCP  | Individual_BnC | NON LIS       | NoD          | hasInsulin   | 
 
-    @hasInsulin_csnpMapd_T12NoD_T345D
+    @hasInsulin_csnpMapd_T123NoD_T45D
     Examples: 
       | index  | FID    | planType  | memberType     | copayCategory | deductible   | insulin      |
-      | 34-I06 | 478830 | CSNP_MAPD | Individual_BnC | NON LIS       | T12NoD_T345D | hasInsulin   | 
+      | 34-I06 | 478830 | CSNP_MAPD | Individual_BnC | NON LIS       | T123NoD_T45D | hasInsulin   | 
 
     @hasInsulin_isnpMapd_T123NoD_T45D
     Examples: 

@@ -3617,8 +3617,8 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 		}
 	}
 	
-	public void validateDrgTbl_preMaiSerPha_mapd_T12noD_T345D_hasInsulin() {
-		String type="MAPD - T1,2 No Deductible - T3,4 Deductible";
+	public void validateDrgTbl_preMaiSerPha_mapd_T12NoD_T345D_hasInsulin() {
+		String type="MAPD - T1,2 No Deductible - T3,4,5 Deductible";
 		String tblName="Preferred Mail Service Pharmacy";
 		String tbl= "Annual Deductible Stage\n"
 				+"Initial Coverage Stage\n"
@@ -3659,8 +3659,8 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 		}
 	}
 	
-	public void validateDrgTbl_stdRetPha_mapd_T12noD_T345D_hasInsulin() {
-		String type="MAPD - T1,2 No Deductible - T3,4 Deductible";
+	public void validateDrgTbl_stdRetPha_mapd_T12NoD_T345D_hasInsulin() {
+		String type="MAPD - T1,2 No Deductible - T3,4,5 Deductible";
 		String tblName="Standard Retail Pharmacy";
 		String tbl= "Annual Deductible Stage\n"
 				+"Initial Coverage Stage\n"
@@ -3704,8 +3704,8 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 		}
 	}
 	
-	public void validateDrgTbl_preRetail_mapd_T12noD_T345D_hasInsulin() {
-		String type="MAPD - T1,2 No Deductible - T3,4 Deductible";
+	public void validateDrgTbl_preRetail_mapd_T12NoD_T345D_hasInsulin() {
+		String type="MAPD - T1,2 No Deductible - T3,4,5 Deductible";
 		String tblName="Preferred Retail Pharmacy";
 		String tbl= "Annual Deductible Stage\n"
 				+"Initial Coverage Stage\n"
@@ -3750,7 +3750,7 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 	}
 	
 	public void validateDrgTbl_preMaiSerPha_mapd_T123NoD_T45D_hasInsulin() {
-		String type="MAPD - T1,2 No Deductible - T3,4 Deductible";
+		String type="MAPD - T1,2,3 No Deductible - T4,5 Deductible";
 		String tblName="Preferred Mail Service Pharmacy";
 		String tbl= "Annual Deductible Stage\n"
 				+"Initial Coverage Stage\n"
@@ -3792,7 +3792,7 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 	}
 	
 	public void validateDrgTbl_stdRetPha_mapd_T123NoD_T45D_hasInsulin() {
-		String type="MAPD - T1,2 No Deductible - T3,4 Deductible";
+		String type="MAPD - T1,2,3 No Deductible - T4,5 Deductible";
 		String tblName="Standard Retail Pharmacy";
 		String tbl= "Annual Deductible Stage\n"
 				+"Initial Coverage Stage\n"
@@ -3837,7 +3837,7 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 	}
 	
 	public void validateDrgTbl_preRetail_mapd_T123NoD_T45D_hasInsulin() {
-		String type="MAPD - T1,2 No Deductible - T3,4 Deductible";
+		String type="MAPD - T1,2,3 No Deductible - T4,5 Deductible";
 		String tblName="Preferred Retail Pharmacy";
 		String tbl= "TBD";
 		WebElement drugTblElement=preferredRetail_DrugTable;
@@ -3996,8 +3996,8 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 		} 
 	}
 	
-	public void validateDrgTbl_preMaiSerPha_pdp_T12noD_T345D_hasInsulin() {
-		String type="PDP - T1,2 No Deductible - T3,4 Deductible";
+	public void validateDrgTbl_preMaiSerPha_pdp_T12NoD_T345D_hasInsulin() {
+		String type="PDP - T1,2 No Deductible - T3,4,5 Deductible";
 		String tblName="Preferred Mail Service Pharmacy";
 		String tbl= "TBD";
 		WebElement drugTblElement=preferedMail_DrugTable;
@@ -4019,8 +4019,8 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 		} */
 	}
 	
-	public void validateDrgTbl_stdRetPha_pdp_T12noD_T345D_hasInsulin() {
-		String type="PDP - T1,2 No Deductible - T3,4 Deductible";
+	public void validateDrgTbl_stdRetPha_pdp_T12NoD_T345D_hasInsulin() {
+		String type="PDP - T1,2 No Deductible - T3,4,5 Deductible";
 		String tblName="Standard Retail Pharmacy";
 		String tbl= "TBD";
 		WebElement drugTblElement=standardRetail_DrugTable;
@@ -4042,8 +4042,8 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 		} */
 	}
 	
-	public void validateDrgTbl_preRetail_pdp_T12noD_T345D_hasInsulin() {
-		String type="PDP - T1,2 No Deductible - T3,4 Deductible";
+	public void validateDrgTbl_preRetail_pdp_T12NoD_T345D_hasInsulin() {
+		String type="PDP - T1,2 No Deductible - T3,4,5 Deductible";
 		String tblName="Preferred Retail Pharmacy";
 		String tbl= "TBD";
 		WebElement drugTblElement=preferredRetail_DrugTable;
@@ -4066,7 +4066,7 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 	}
 	
 	public void validateDrgTbl_preMaiSerPha_pdp_T123NoD_T45D_hasInsulin() {
-		String type="PDP - T1,2 No Deductible - T3,4 Deductible";
+		String type="PDP - T1,2,3 No Deductible - T4,5 Deductible";
 		String tblName="Preferred Mail Service Pharmacy";
 		String tbl= "TBD";
 		WebElement drugTblElement=preferedMail_DrugTable;
@@ -4089,7 +4089,7 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 	}
 	
 	public void validateDrgTbl_stdRetPha_pdp_T123NoD_T45D_hasInsulin() {
-		String type="PDP - T1,2 No Deductible - T3,4 Deductible";
+		String type="PDP - T1,2,3 No Deductible - T4,5 Deductible";
 		String tblName="Standard Retail Pharmacy";
 		String tbl= "TBD";
 		WebElement drugTblElement=standardRetail_DrugTable;
@@ -4112,7 +4112,7 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 	}
 	
 	public void validateDrgTbl_preRetail_pdp_T123NoD_T45D_hasInsulin() {
-		String type="PDP - T1,2 No Deductible - T3,4 Deductible";
+		String type="PDP - T1,2,3 No Deductible - T4,5 Deductible";
 		String tblName="Preferred Retail Pharmacy";
 		String tbl= "TBD";
 		WebElement drugTblElement=preferredRetail_DrugTable;
@@ -4204,8 +4204,8 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 		} */
 	}
 	
-	public void validateDrgTbl_preMaiSerPha_csnppcp_T12noD_T345D_hasInsulin() {
-		String type="PCP CSNP - T1,2 No Deductible - T3,4 Deductible";
+	public void validateDrgTbl_preMaiSerPha_csnppcp_T12NoD_T345D_hasInsulin() {
+		String type="PCP CSNP - T1,2 No Deductible - T3,4,5 Deductible";
 		String tblName="Preferred Mail Service Pharmacy";
 		String tbl= "TBD";
 		WebElement drugTblElement=preferedMail_DrugTable;
@@ -4227,8 +4227,8 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 		} */
 	}
 	
-	public void validateDrgTbl_stdRetPha_csnppcp_T12noD_T345D_hasInsulin() {
-		String type="PCP CSNP - T1,2 No Deductible - T3,4 Deductible";
+	public void validateDrgTbl_stdRetPha_csnppcp_T12NoD_T345D_hasInsulin() {
+		String type="PCP CSNP - T1,2 No Deductible - T3,4,5 Deductible";
 		String tblName="Standard Retail Pharmacy";
 		String tbl= "TBD";
 		WebElement drugTblElement=standardRetail_DrugTable;
@@ -4250,8 +4250,8 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 		} */
 	}
 	
-	public void validateDrgTbl_preRetail_csnppcp_T12noD_T345D_hasInsulin() {
-		String type="PCP CSNP - T1,2 No Deductible - T3,4 Deductible";
+	public void validateDrgTbl_preRetail_csnppcp_T12NoD_T345D_hasInsulin() {
+		String type="PCP CSNP - T1,2 No Deductible - T3,4,5 Deductible";
 		String tblName="Preferred Retail Pharmacy";
 		String tbl= "TBD";
 		WebElement drugTblElement=preferredRetail_DrugTable;
@@ -4274,7 +4274,7 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 	}
 	
 	public void validateDrgTbl_preMaiSerPha_csnppcp_T123NoD_T45D_hasInsulin() {
-		String type="PCP CSNP - T1,2 No Deductible - T3,4 Deductible";
+		String type="PCP CSNP - T1,2,3 No Deductible - T4,5 Deductible";
 		String tblName="Preferred Mail Service Pharmacy";
 		String tbl= "TBD";
 		WebElement drugTblElement=preferedMail_DrugTable;
@@ -4297,7 +4297,7 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 	}
 	
 	public void validateDrgTbl_stdRetPha_csnppcp_T123NoD_T45D_hasInsulin() {
-		String type="PCP CSNP - T1,2 No Deductible - T3,4 Deductible";
+		String type="PCP CSNP - T1,2,3 No Deductible - T4,5 Deductible";
 		String tblName="Standard Retail Pharmacy";
 		String tbl= "TBD";
 		WebElement drugTblElement=standardRetail_DrugTable;
@@ -4320,7 +4320,7 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 	}
 	
 	public void validateDrgTbl_preRetail_csnppcp_T123NoD_T45D_hasInsulin() {
-		String type="PCP CSNP - T1,2 No Deductible - T3,4 Deductible";
+		String type="PCP CSNP - T1,2,3 No Deductible - T4,5 Deductible";
 		String tblName="Preferred Retail Pharmacy";
 		String tbl= "TBD";
 		WebElement drugTblElement=preferredRetail_DrugTable;
@@ -4456,8 +4456,8 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 		}
 	}
 	
-	public void validateDrgTbl_preMaiSerPha_csnpmsap_T12noD_T345D_hasInsulin() {
-		String type="CSNP MAPD - T1,2 No Deductible - T3,4 Deductible";
+	public void validateDrgTbl_preMaiSerPha_csnpmsap_T123NoD_T45D_hasInsulin() {
+		String type="CSNP MAPD - T1,2,3 No Deductible - T4,5 Deductible";
 		String tblName="Preferred Mail Service Pharmacy";
 		String tbl= "Annual Deductible Stage\n"
 				+"Initial Coverage Stage\n"
@@ -4485,7 +4485,7 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 				+"no more than 25% for generic drugs or 25% for brand name drugs\n"
 				+"*Once you reach the Coverage Gap Stage, you pay copays or coinsurance defined by your plan for all Tier 1 through Tier 5 drugs regardless of whether your full deductible has been met.";
 		WebElement drugTblElement=preferedMail_DrugTable;
-		System.out.println("--------------------validateDrgTbl_preMaiSerPha_csnpmsap_T12noD_T345D_hasInsulin");
+		System.out.println("--------------------validateDrgTbl_preMaiSerPha_csnpmsap_T123NoD_T45D_hasInsulin");
 		System.out.println(drugTblElement.getText());
 		System.out.println("--------------------");
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", drugTblElement);
@@ -4501,8 +4501,8 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 		}
 	}
 	
-	public void validateDrgTbl_stdRetPha_csnpmsap_T12noD_T345D_hasInsulin() {
-		String type="CSNP MAPD - T1,2 No Deductible - T3,4 Deductible";
+	public void validateDrgTbl_stdRetPha_csnpmsap_T123NoD_T45D_hasInsulin() {
+		String type="CSNP MAPD - T1,2,3 No Deductible - T4,5 Deductible";
 		String tblName="Standard Retail Pharmacy";
 		String tbl= "Annual Deductible Stage\n"
 				+"Initial Coverage Stage\n"
@@ -4533,7 +4533,7 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 				+"no more than 25% for generic drugs or 25% for brand name drugs\n"
 				+"*Once you reach the Coverage Gap Stage, you pay copays or coinsurance defined by your plan for all Tier 1 through Tier 5 drugs regardless of whether your full deductible has been met.";
 		WebElement drugTblElement=standardRetail_DrugTable;
-		System.out.println("--------------------validateDrgTbl_stdRetPha_csnpmsap_T12noD_T345D_hasInsulin");
+		System.out.println("--------------------validateDrgTbl_stdRetPha_csnpmsap_T123NoD_T45D_hasInsulin");
 		System.out.println(drugTblElement.getText());
 		System.out.println("--------------------");
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", drugTblElement);
@@ -4549,8 +4549,8 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 		}
 	}
 	
-	public void validateDrgTbl_preRetail_csnpmsap_T12noD_T345D_hasInsulin() {
-		String type="CSNP MAPD - T1,2 No Deductible - T3,4 Deductible";
+	public void validateDrgTbl_preRetail_csnpmsap_T123NoD_T45D_hasInsulin() {
+		String type="CSNP MAPD - T1,2,3 No Deductible - T4,5 Deductible";
 		String tblName="Preferred Retail Pharmacy";
 		String tbl= "Annual Deductible Stage\n"
 				+"Initial Coverage Stage\n"
@@ -4579,9 +4579,9 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 				+"Tier 5\n"
 				+"30%\n"
 				+"no more than 25% for generic drugs or 25% for brand name drugs\n"
-				+"*Once you reach validateDrgTbl_stdRetPha_isnpmsap_T123NoD_T45D_hasInsulin Coverage Gap Stage, you pay co-pays or co-insurance defined by your plan for all Tier 1 through Tier 5 drugs regardless of whether your full deductible has been met.";
+				+"*Once you reach the Coverage Gap Stage, you pay co-pays or co-insurance defined by your plan for all Tier 1 through Tier 5 drugs regardless of whether your full deductible has been met.";
 		WebElement drugTblElement=preferredRetail_DrugTable;
-		System.out.println("--------------------validateDrgTbl_preRetail_csnpmsap_T12noD_T345D_hasInsulin");
+		System.out.println("--------------------validateDrgTbl_preRetail_csnpmsap_T123NoD_T45D_hasInsulin");
 		System.out.println(drugTblElement.getText());
 		System.out.println("--------------------");
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", drugTblElement);
@@ -4597,12 +4597,12 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 		} 
 	}
 	
-	public void validateDrgTbl_preMaiSerPha_csnpmsap_T123NoD_T45D_hasInsulin() {
-		String type="CSNP MAPD - T1,2 No Deductible - T3,4 Deductible";
+	public void validateDrgTbl_preMaiSerPha_csnpmsap_T12NoD_T345D_hasInsulin() {
+		String type="CSNP MAPD - T1,2 No Deductible - T3,4,5 Deductible";
 		String tblName="Preferred Mail Service Pharmacy";
 		String tbl= "TBD";
 		WebElement drugTblElement=preferedMail_DrugTable;
-		System.out.println("--------------------validateDrgTbl_preMaiSerPha_csnpmsap_T123NoD_T45D_hasInsulin");
+		System.out.println("--------------------validateDrgTbl_preMaiSerPha_csnpmsap_T12NoD_T345D_hasInsulin");
 		System.out.println(drugTblElement.getText());
 		System.out.println("--------------------");
 		Assert.assertTrue("TODO - drug table='"+tblName+"' | type='"+type+"'", false);
@@ -4620,12 +4620,12 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 		} */
 	}
 	
-	public void validateDrgTbl_stdRetPha_csnpmsap_T123NoD_T45D_hasInsulin() {
-		String type="CSNP MAPD - T1,2 No Deductible - T3,4 Deductible";
+	public void validateDrgTbl_stdRetPha_csnpmsap_T12NoD_T345D_hasInsulin() {
+		String type="CSNP MAPD - T1,2 No Deductible - T3,4,5 Deductible";
 		String tblName="Standard Retail Pharmacy";
 		String tbl= "TBD";
 		WebElement drugTblElement=standardRetail_DrugTable;
-		System.out.println("--------------------validateDrgTbl_stdRetPha_csnpmsap_T123NoD_T45D_hasInsulin");
+		System.out.println("--------------------validateDrgTbl_stdRetPha_csnpmsap_T12NoD_T345D_hasInsulin");
 		System.out.println(drugTblElement.getText());
 		System.out.println("--------------------");
 		Assert.assertTrue("TODO - drug table='"+tblName+"' | type='"+type+"'", false);
@@ -4643,12 +4643,12 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 		} */
 	}
 	
-	public void validateDrgTbl_preRetail_csnpmsap_T123NoD_T45D_hasInsulin() {
-		String type="CSNP MAPD - T1,2 No Deductible - T3,4 Deductible";
+	public void validateDrgTbl_preRetail_csnpmsap_T12NoD_T345D_hasInsulin() {
+		String type="CSNP MAPD - T1,2 3 No Deductible - T4,5 Deductible";
 		String tblName="Preferred Retail Pharmacy";
 		String tbl= "TBD";
 		WebElement drugTblElement=preferredRetail_DrugTable;
-		System.out.println("--------------------validateDrgTbl_preRetail_csnpmsap_T123NoD_T45D_hasInsulin");
+		System.out.println("--------------------validateDrgTbl_preRetail_csnpmsap_T12NoD_T345D_hasInsulin");
 		System.out.println(drugTblElement.getText());
 		System.out.println("--------------------");
 		Assert.assertTrue("TODO - drug table='"+tblName+"' | type='"+type+"'", false);
@@ -4736,8 +4736,8 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 		} */
 	}
 	
-	public void validateDrgTbl_preMaiSerPha_isnpmsap_T12noD_T345D_hasInsulin() {
-		String type="ISNP MAPD - T1,2 No Deductible - T3,4 Deductible";
+	public void validateDrgTbl_preMaiSerPha_isnpmsap_T12NoD_T345D_hasInsulin() {
+		String type="ISNP MAPD - T1,2 No Deductible - T3,4,5 Deductible";
 		String tblName="Preferred Mail Service Pharmacy";
 		String tbl= "TBD";
 		WebElement drugTblElement=preferedMail_DrugTable;
@@ -4759,8 +4759,8 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 		} */
 	}
 	
-	public void validateDrgTbl_stdRetPha_isnpmsap_T12noD_T345D_hasInsulin() {
-		String type="ISNP MAPD - T1,2 No Deductible - T3,4 Deductible";
+	public void validateDrgTbl_stdRetPha_isnpmsap_T12NoD_T345D_hasInsulin() {
+		String type="ISNP MAPD - T1,2 No Deductible - T3,4,5 Deductible";
 		String tblName="Standard Retail Pharmacy";
 		String tbl= "TBD";
 		WebElement drugTblElement=standardRetail_DrugTable;
@@ -4782,8 +4782,8 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 		} */
 	}
 	
-	public void validateDrgTbl_preRetail_isnpmsap_T12noD_T345D_hasInsulin() {
-		String type="ISNP MAPD - T1,2 No Deductible - T3,4 Deductible";
+	public void validateDrgTbl_preRetail_isnpmsap_T12NoD_T345D_hasInsulin() {
+		String type="ISNP MAPD - T1,2 No Deductible - T3,4,5 Deductible";
 		String tblName="Preferred Retail Pharmacy";
 		String tbl= "TBD";
 		WebElement drugTblElement=preferredRetail_DrugTable;
@@ -4806,7 +4806,7 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 	}
 	
 	public void validateDrgTbl_preMaiSerPha_isnpmsap_T123NoD_T45D_hasInsulin() {
-		String type="ISNP MAPD - T1,2 No Deductible - T3,4 Deductible";
+		String type="ISNP MAPD - T1,2,3 No Deductible - T4,5 Deductible";
 		String tblName="Preferred Mail Service Pharmacy";
 		String tbl= "Annual Deductible Stage\n"
 				+"Initial Coverage Stage\n"
@@ -4851,7 +4851,7 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 	}
 	
 	public void validateDrgTbl_stdRetPha_isnpmsap_T123NoD_T45D_hasInsulin() {
-		String type="ISNP MAPD - T1,2 No Deductible - T3,4 Deductible";
+		String type="ISNP MAPD - T1,2,3 No Deductible - T4,5 Deductible";
 		String tblName="Standard Retail Pharmacy";
 		String tbl= "Annual Deductible Stage\n"
 				+"Initial Coverage Stage\n"
@@ -4899,7 +4899,7 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 	}
 	
 	public void validateDrgTbl_preRetail_isnpmsap_T123NoD_T45D_hasInsulin() {
-		String type="ISNP MAPD - T1,2 No Deductible - T3,4 Deductible";
+		String type="ISNP MAPD - T1,2,3 No Deductible - T4,5 Deductible";
 		String tblName="Preferred Retail Pharmacy";
 		String tbl= "TBD";
 		WebElement drugTblElement=preferredRetail_DrugTable;

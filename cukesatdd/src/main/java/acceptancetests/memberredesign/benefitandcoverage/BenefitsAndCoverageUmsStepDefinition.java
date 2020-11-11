@@ -2322,7 +2322,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 					if (deductible.equals("NoD")) 
 						bncPg.validateDrgTbl_stdRetPha_mapd_noD_hasInsulin();
 					else if (deductible.equals("T12NoD_T345D")) 
-						bncPg.validateDrgTbl_stdRetPha_mapd_T12noD_T345D_hasInsulin();
+						bncPg.validateDrgTbl_stdRetPha_mapd_T12NoD_T345D_hasInsulin();
 					else if (deductible.equals("T123NoD_T45D")) 
 						bncPg.validateDrgTbl_stdRetPha_mapd_T123NoD_T45D_hasInsulin();
 				} else if (optionTxt.equals("Preferred Mail Service Pharmacy")) {
@@ -2330,7 +2330,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 					if (deductible.equals("NoD")) 
 						bncPg.validateDrgTbl_preMaiSerPha_mapd_noD_hasInsulin();
 					else if (deductible.equals("T12NoD_T345D")) 
-						bncPg.validateDrgTbl_preMaiSerPha_mapd_T12noD_T345D_hasInsulin();
+						bncPg.validateDrgTbl_preMaiSerPha_mapd_T12NoD_T345D_hasInsulin();
 					else if (deductible.equals("T123NoD_T45D")) 
 						bncPg.validateDrgTbl_preMaiSerPha_mapd_T123NoD_T45D_hasInsulin();
 				} else if (optionTxt.equals("Preferred Retail Pharmacy")) {
@@ -2338,7 +2338,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 					if (deductible.equals("NoD")) 
 						bncPg.validateDrgTbl_preRetail_mapd_noD_hasInsulin();
 					else if (deductible.equals("T12NoD_T345D")) 
-						bncPg.validateDrgTbl_preRetail_mapd_T12noD_T345D_hasInsulin();
+						bncPg.validateDrgTbl_preRetail_mapd_T12NoD_T345D_hasInsulin();
 					else if (deductible.equals("T123NoD_T45D")) 
 						bncPg.validateDrgTbl_preRetail_mapd_T123NoD_T45D_hasInsulin();
 				} else {
@@ -2354,7 +2354,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 					if (deductible.equals("NoD")) 
 						bncPg.validateDrgTbl_stdRetPha_pdp_noD_hasInsulin();
 					else if (deductible.equals("T12NoD_T345D")) 
-						bncPg.validateDrgTbl_stdRetPha_pdp_T12noD_T345D_hasInsulin();
+						bncPg.validateDrgTbl_stdRetPha_pdp_T12NoD_T345D_hasInsulin();
 					else if (deductible.equals("T123NoD_T45D")) 
 						bncPg.validateDrgTbl_stdRetPha_pdp_T123NoD_T45D_hasInsulin();
 				} else if (optionTxt.equals("Preferred Mail Service Pharmacy")) {
@@ -2362,7 +2362,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 					if (deductible.equals("NoD")) 
 						bncPg.validateDrgTbl_preMaiSerPha_pdp_noD_hasInsulin();
 					else if (deductible.equals("T12NoD_T345D")) 
-						bncPg.validateDrgTbl_preMaiSerPha_pdp_T12noD_T345D_hasInsulin();
+						bncPg.validateDrgTbl_preMaiSerPha_pdp_T12NoD_T345D_hasInsulin();
 					else if (deductible.equals("T123NoD_T45D")) 
 						bncPg.validateDrgTbl_preMaiSerPha_pdp_T123NoD_T45D_hasInsulin();
 				} else if (optionTxt.equals("Preferred Retail Pharmacy")) {
@@ -2370,7 +2370,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 					if (deductible.equals("NoD")) 
 						bncPg.validateDrgTbl_preRetail_pdp_noD_hasInsulin();
 					else if (deductible.equals("T12NoD_T345D")) 
-						bncPg.validateDrgTbl_preRetail_pdp_T12noD_T345D_hasInsulin();
+						bncPg.validateDrgTbl_preRetail_pdp_T12NoD_T345D_hasInsulin();
 					else if (deductible.equals("T123NoD_T45D")) 
 						bncPg.validateDrgTbl_preRetail_pdp_T123NoD_T45D_hasInsulin();
 				} else {
@@ -2386,7 +2386,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 					if (deductible.equals("NoD")) 
 						bncPg.validateDrgTbl_stdRetPha_csnppcp_noD_hasInsulin();
 					else if (deductible.equals("T12NoD_T345D")) 
-						bncPg.validateDrgTbl_stdRetPha_csnppcp_T12noD_T345D_hasInsulin();
+						bncPg.validateDrgTbl_stdRetPha_csnppcp_T12NoD_T345D_hasInsulin();
 					else if (deductible.equals("T123NoD_T45D")) 
 						bncPg.validateDrgTbl_stdRetPha_csnppcp_T123NoD_T45D_hasInsulin();
 				} else if (optionTxt.equals("Preferred Mail Service Pharmacy")) {
@@ -2394,7 +2394,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 					if (deductible.equals("NoD")) 
 						bncPg.validateDrgTbl_preMaiSerPha_csnppcp_noD_hasInsulin();
 					else if (deductible.equals("T12NoD_T345D")) 
-						bncPg.validateDrgTbl_preMaiSerPha_csnppcp_T12noD_T345D_hasInsulin();
+						bncPg.validateDrgTbl_preMaiSerPha_csnppcp_T12NoD_T345D_hasInsulin();
 					else if (deductible.equals("T123NoD_T45D")) 
 						bncPg.validateDrgTbl_preMaiSerPha_csnppcp_T123NoD_T45D_hasInsulin();
 				} else if (optionTxt.equals("Preferred Retail Pharmacy")) {
@@ -2402,7 +2402,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 					if (deductible.equals("NoD")) 
 						bncPg.validateDrgTbl_preRetail_csnppcp_noD_hasInsulin();
 					else if (deductible.equals("T12NoD_T345D")) 
-						bncPg.validateDrgTbl_preRetail_csnppcp_T12noD_T345D_hasInsulin();
+						bncPg.validateDrgTbl_preRetail_csnppcp_T12NoD_T345D_hasInsulin();
 					else if (deductible.equals("T123NoD_T45D")) 
 						bncPg.validateDrgTbl_preRetail_csnppcp_T123NoD_T45D_hasInsulin();
 				} else {
@@ -2418,7 +2418,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 					if (deductible.equals("NoD")) 
 						bncPg.validateDrgTbl_stdRetPha_csnpmsap_noD_hasInsulin();
 					else if (deductible.equals("T12NoD_T345D")) 
-						bncPg.validateDrgTbl_stdRetPha_csnpmsap_T12noD_T345D_hasInsulin();
+						bncPg.validateDrgTbl_stdRetPha_csnpmsap_T12NoD_T345D_hasInsulin();
 					else if (deductible.equals("T123NoD_T45D")) 
 						bncPg.validateDrgTbl_stdRetPha_csnpmsap_T123NoD_T45D_hasInsulin();
 				} else if (optionTxt.equals("Preferred Mail Service Pharmacy")) {
@@ -2426,7 +2426,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 					if (deductible.equals("NoD")) 
 						bncPg.validateDrgTbl_preMaiSerPha_csnpmsap_noD_hasInsulin();
 					else if (deductible.equals("T12NoD_T345D")) 
-						bncPg.validateDrgTbl_preMaiSerPha_csnpmsap_T12noD_T345D_hasInsulin();
+						bncPg.validateDrgTbl_preMaiSerPha_csnpmsap_T12NoD_T345D_hasInsulin();
 					else if (deductible.equals("T123NoD_T45D")) 
 						bncPg.validateDrgTbl_preMaiSerPha_csnpmsap_T123NoD_T45D_hasInsulin();
 				} else if (optionTxt.equals("Preferred Retail Pharmacy")) {
@@ -2434,7 +2434,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 					if (deductible.equals("NoD")) 
 						bncPg.validateDrgTbl_preRetail_csnpmsap_noD_hasInsulin();
 					else if (deductible.equals("T12NoD_T345D")) 
-						bncPg.validateDrgTbl_preRetail_csnpmsap_T12noD_T345D_hasInsulin();
+						bncPg.validateDrgTbl_preRetail_csnpmsap_T12NoD_T345D_hasInsulin();
 					else if (deductible.equals("T123NoD_T45D")) 
 						bncPg.validateDrgTbl_preRetail_csnpmsap_T123NoD_T45D_hasInsulin();
 				} else {
@@ -2450,7 +2450,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 					if (deductible.equals("NoD")) 
 						bncPg.validateDrgTbl_stdRetPha_isnpmsap_noD_hasInsulin();
 					else if (deductible.equals("T12NoD_T345D")) 
-						bncPg.validateDrgTbl_stdRetPha_isnpmsap_T12noD_T345D_hasInsulin();
+						bncPg.validateDrgTbl_stdRetPha_isnpmsap_T12NoD_T345D_hasInsulin();
 					else if (deductible.equals("T123NoD_T45D")) 
 						bncPg.validateDrgTbl_stdRetPha_isnpmsap_T123NoD_T45D_hasInsulin();
 				} else if (optionTxt.equals("Preferred Mail Service Pharmacy")) {
@@ -2458,7 +2458,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 					if (deductible.equals("NoD")) 
 						bncPg.validateDrgTbl_preMaiSerPha_isnpmsap_noD_hasInsulin();
 					else if (deductible.equals("T12NoD_T345D")) 
-						bncPg.validateDrgTbl_preMaiSerPha_isnpmsap_T12noD_T345D_hasInsulin();
+						bncPg.validateDrgTbl_preMaiSerPha_isnpmsap_T12NoD_T345D_hasInsulin();
 					else if (deductible.equals("T123NoD_T45D")) 
 						bncPg.validateDrgTbl_preMaiSerPha_isnpmsap_T123NoD_T45D_hasInsulin();
 				} else if (optionTxt.equals("Preferred Retail Pharmacy")) {
@@ -2466,7 +2466,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 					if (deductible.equals("NoD")) 
 						bncPg.validateDrgTbl_preRetail_isnpmsap_noD_hasInsulin();
 					else if (deductible.equals("T12NoD_T345D")) 
-						bncPg.validateDrgTbl_preRetail_isnpmsap_T12noD_T345D_hasInsulin();
+						bncPg.validateDrgTbl_preRetail_isnpmsap_T12NoD_T345D_hasInsulin();
 					else if (deductible.equals("T123NoD_T45D")) 
 						bncPg.validateDrgTbl_preRetail_isnpmsap_T123NoD_T45D_hasInsulin();
 				} else {

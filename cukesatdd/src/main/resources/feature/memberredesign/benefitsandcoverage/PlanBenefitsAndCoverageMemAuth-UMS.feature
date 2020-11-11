@@ -872,10 +872,10 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth
       | index  | FID    | username | password  | MemUserName        | planType  | memberType     | copayCategory | deductible   | insulin      |
       | 31-I05 | 478830 | qavgogine| qavgogine | q4_insulinDemo_017 | CSNP_PCP  | Individual_BnC | NON LIS       | NoD          | hasInsulin   | 
 
-    @memAuth_hasInsulin_csnpMapd_T12NoD_T345D
+    @memAuth_hasInsulin_csnpMapd_T123NoD_T45D
     Examples: 
       | index  | FID    | username | password  | MemUserName        | planType  | memberType     | copayCategory | deductible   | insulin      |
-      | 31-I06 | 478830 | qavgogine| qavgogine | Q4_insulinDemo_109 | CSNP_MAPD | Individual_BnC | NON LIS       | T12NoD_T345D | hasInsulin   | 
+      | 31-I06 | 478830 | qavgogine| qavgogine | Q4_insulinDemo_109 | CSNP_MAPD | Individual_BnC | NON LIS       | T123NoD_T45D | hasInsulin   | 
 
     @memAuth_hasInsulin_isnpMapd_T123NoD_T45D
     Examples: 

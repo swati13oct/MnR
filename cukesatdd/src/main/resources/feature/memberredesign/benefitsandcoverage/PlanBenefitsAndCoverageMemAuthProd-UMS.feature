@@ -892,10 +892,10 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth Prod
       | index  | FID    | username | password  | MemUserName        | planType  | memberType     | copayCategory | deductible   | insulin      |
       | 31-I05 | 478830 | kkumard  | mnrs786@  | q4_insulinDemo_017 | CSNP_PCP  | Individual_BnC | NON LIS       | NoD          | hasInsulin   | 
 
-    @prod_hasInsulin_csnpMapd_T12NoD_T345D
+    @prod_hasInsulin_csnpMapd_T123NoD_T45D
     Examples: 
       | index  | FID    | username | password  | MemUserName        | planType  | memberType     | copayCategory | deductible   | insulin      |
-      | 31-I06 | 478830 | kkumard  | mnrs786@  | Q4_insulinDemo_109 | CSNP_MAPD | Individual_BnC | NON LIS       | T12NoD_T345D | hasInsulin   | 
+      | 31-I06 | 478830 | kkumard  | mnrs786@  | Q4_insulinDemo_109 | CSNP_MAPD | Individual_BnC | NON LIS       | T123NoD_T45D | hasInsulin   | 
 
     @prod_hasInsulin_isnpMapd_T123NoD_T45D
     Examples: 
