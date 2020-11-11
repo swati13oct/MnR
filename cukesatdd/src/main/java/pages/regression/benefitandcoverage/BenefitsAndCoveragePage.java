@@ -3463,7 +3463,7 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 	
 	public List<String> getDrugDropDownOptions() {
 		List<String> optionsList=new ArrayList<String>();
-		Assert.assertTrue("PROBLEM - unable to locakte drug costs dropdown", validate(drugCostDropdown,0));
+		Assert.assertTrue("PROBLEM - unable to locate drug costs dropdown", validate(drugCostDropdown,0));
 		Select s= new Select(drugCostDropdown);
 		List <WebElement> op=s.getOptions();
 		for (int i=0; i<op.size(); i++) {
