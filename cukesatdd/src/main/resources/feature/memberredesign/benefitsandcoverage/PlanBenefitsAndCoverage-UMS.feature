@@ -589,7 +589,7 @@ Feature: 1.01 Member  benefits and Coverage page
 
     Examples: 
       | index | TID   | planType | memberType     | copayCategory | language | name       | memberid     | effectivedate | monthlypremium | extrahelp            | Identifier       | count | rider   |userGender|
-      | 20    | 15245 | MAPD     | Individual_BnC | LIS 1         | ENGLISH  | DBAD ADFED | 919744565-00 | 01/01/2019    | Not Available  | Extra Help Level : 1 | IndEffectiveAARP |     7 | Rider   | M        |
+      | 20    | 15245 | MAPD     | Individual_BnC | LIS 1         | ENGLISH  | DBAD ADFED | 919744565-00 | 01/01/2019    | Not Available  | Extra Help Level : 1 | IndEffectiveAARP |     7 | Rider   | F        |
       
   #TC22_NON LIS Ind plan member(PDP)- Drug Cost table
   @benefitsAndCoverage19 @CMFedPDPNonLis @BnC_Part9_regressionMember
