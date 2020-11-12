@@ -28,7 +28,8 @@ Feature: Renew Order Confirmation
     And user will view rx price in the Medication Price field
     And user will view the Rx number
     And user will view the provider
-    When user select the Go to Pharmacies and Prescriptions button
+    When user select the Stop Gap Go to Pharmacies and Prescriptions button
+    #When user select the Go to Pharmacies and Prescriptions button
     Then user will view the PnP page
     And the page should be refreshed so that the status of this renew and CTA are updated per this renew transaction
 

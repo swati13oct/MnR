@@ -29,7 +29,8 @@ Feature: Transfer Order Confirmation
     And user will view the Rx number
     And user will view the provider
     And user will see disclaimer related to OptumRx pharamcy and prescription services
-    When user select the Go to Pharmacies and Prescriptions button
+    When user select the Stop Gap Go to Pharmacies and Prescriptions button
+    #When user select the Go to Pharmacies and Prescriptions button
     Then user will view the PnP page
     And the page should be refreshed so that the status of this transfer request is updated per this transfer transaction
 
