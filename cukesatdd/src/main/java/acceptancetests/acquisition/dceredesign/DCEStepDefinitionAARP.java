@@ -1170,9 +1170,7 @@ public class DCEStepDefinitionAARP {
 		AcquisitionHomePage acqHomePage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 
-		VisitorProfilePage visitorProfilePage = acqHomePage.navigateToNewVisitorProfilePage();
-
-		getLoginScenario().saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfilePage);
+		acqHomePage.navigateToNewVisitorProfilePage();
 	}
 
 	@And("^user validates the plans on new visitor profile page of AARP site$")
@@ -1185,8 +1183,7 @@ public class DCEStepDefinitionAARP {
 					givenAttributesRow.get(i).getCells().get(1));
 		}
 		String savePlanNames = givenAttributesMap.get("Test Plans");
-		VisitorProfilePage visitorProfile = (VisitorProfilePage) getLoginScenario()
-				.getBean(PageConstants.VISITOR_PROFILE_PAGE);
+		VisitorProfilePage visitorProfile = new VisitorProfilePage(driver);
 		visitorProfile.validateAddedPlansNew(savePlanNames);
 	}
 }

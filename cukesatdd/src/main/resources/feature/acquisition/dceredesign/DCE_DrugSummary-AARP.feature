@@ -309,7 +309,7 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
       | SNP Plans | <snptestPlans> |
     And user click on return to home on drug summary in AARP site
     Then the user navigates to Visitor profile page
-    And user validates the added plans on visitor profile page of AARP site
+    And user validates the plans on new visitor profile page of AARP site
       | Test Plans | <testPlansName>    |
 
     Examples: 
@@ -338,3 +338,5 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
     Examples: 
       | zipcode | county | isMultutiCounty | drug1   |
       |   10001 | none   | no              | Orkambi |
+      
+  

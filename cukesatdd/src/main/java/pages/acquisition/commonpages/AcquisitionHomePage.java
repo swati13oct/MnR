@@ -2143,7 +2143,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		 * 
 		 * @return
 		 */
-		public VisitorProfilePage navigateToNewVisitorProfilePage() {
+		public void navigateToNewVisitorProfilePage() {
 			try{
 				if(savedPlansPopup.isDisplayed()) {
 					savedPlansPopupCloseIcon.click();
@@ -2158,11 +2158,11 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			//actions.moveToElement(guestProfileLink);
 			//actions.click().build().perform();
 			CommonUtility.checkPageIsReadyNew(driver);
-			if (driver.getCurrentUrl().contains("profile")) {
-				return new VisitorProfilePage(driver);
+			if (driver.getCurrentUrl().contains("guest")) {
+				System.out.println("Navigated to Visitor profile page");
 			} else {
 				System.out.println("Navigation to visitor profile is failed");
-				return null;
+				Assert.fail("User not navigated to Visitor profile page");
 			}
 		}
 }
