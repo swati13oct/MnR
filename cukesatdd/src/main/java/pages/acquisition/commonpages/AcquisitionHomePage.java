@@ -546,7 +546,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		
 		CommonUtility.checkPageIsReadyNew(driver);
 		System.out.println("Current page URL: "+driver.getCurrentUrl());
-		checkModelPopup(driver,15);
+		//checkModelPopup(driver,15);
 		CommonUtility.waitForPageLoadNew(driver, navigationSectionHomeLink, 25);
 		CommonUtility.waitForPageLoad(driver, proactiveChatExitBtn,20); // do not change this to waitForPageLoadNew as we're not trying to fail the test if it isn't found
 		try{
@@ -1365,14 +1365,14 @@ public class AcquisitionHomePage extends GlobalWebElements {
      		return new DrugCostEstimatorPage(driver);
 	 }
 	
-	public ShopforaplanAARPlayer Hoveronaplan() throws InterruptedException
+	public ShopForPlanNavigationPage Hoveronaplan() throws InterruptedException
     {             
            waitforElement(ShopForaplan);
      if (ShopForaplan.isDisplayed()) {
 //            Actions action = new Actions(driver);
 //            action.moveToElement(ShopForaplan).build().perform();
 		    jsMouseOver(ShopForaplan);
-            return new ShopforaplanAARPlayer(driver);
+            return new ShopForPlanNavigationPage(driver);
      }
            else {
                   return null;}
@@ -2651,5 +2651,13 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		
 			
 			
+		}
+
+		public void hoverOverShopForPlan() {
+			waitforElement(ShopForaplan);
+			if (ShopForaplan.isDisplayed()) {			
+				jsMouseOver(ShopForaplan);
+				System.out.println("Hover over Shop for a Plan completed");
+			}
 		}		
 }
