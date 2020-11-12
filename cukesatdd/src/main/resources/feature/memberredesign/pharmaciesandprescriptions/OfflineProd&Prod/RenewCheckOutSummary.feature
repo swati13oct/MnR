@@ -54,4 +54,4 @@ Feature: To test Renew Checkout Summary Page
 
     Examples: 
       | FID     | username | password | MemUserName | planType | memberType     |
-      | F484041 | ntalesha | pass@123 | DorisJean27 | MPDP     | Individual_PnP |
+      | F484041 | ntalesha | pass@123 | Jaewoo34 | MPDP     | Individual_PnP |
