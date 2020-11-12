@@ -1102,5 +1102,27 @@ public class DCEStepDefinitionAARP {
 		
 		
 	}
+	
+	@Then("^the user selects View plan details for following plantype and PlanName$")
+	public void the_user_selects_View_plan_details_for_following_plantype_and_PlanName(DataTable attributes)
+			throws Throwable {
+		List<DataTableRow> memberAttributesRow = attributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		String plantype = memberAttributesMap.get("Plan Type");
+		String planName = memberAttributesMap.get("Plan Name");
+		DrugSummaryPage plansummaryPage = (DrugSummaryPage) getLoginScenario()
+				.getBean(PageConstants.DCE_Redesign_DrugSummary);
+		VPPPlanSummaryPage plandetailspage= plansummaryPage.clickViewplanDetailsForPlan(plantype, planName);
+		//getLoginScenario().saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE, plandetailspage);
+		getLoginScenario().saveBean(DCERedesignCommonConstants.PLANTYPE, plantype);
+		getLoginScenario().saveBean(DCERedesignCommonConstants.PLANNAME, planName);
+		getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plandetailspage);
+		
+	}
 
 }
