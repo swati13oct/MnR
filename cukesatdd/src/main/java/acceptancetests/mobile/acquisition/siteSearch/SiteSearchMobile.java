@@ -197,7 +197,7 @@ public class SiteSearchMobile {
 		AcquisitionHomePageMobile acquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 
-		pages.mobile.acquisition.ulayer.ProviderSearchPageMobile providerSearchPage = acquisitionhomepage
+		pages.mobile.acquisition.bluelayer.ProviderSearchPageMobile providerSearchPage = acquisitionhomepage
 				.clicksOnRallyToolFromHomePage();
 
 		if (providerSearchPage != null) {
@@ -421,7 +421,7 @@ public class SiteSearchMobile {
 			AcquisitionHomePageMobile acquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
 					.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 			
-			pages.mobile.acquisition.ulayer.ProviderSearchPageMobile providerSearchPage = acquisitionhomepage.clicksOnRallyToolFromHomePage();
+			pages.mobile.acquisition.bluelayer.ProviderSearchPageMobile providerSearchPage = acquisitionhomepage.clicksOnRallyToolFromHomePage();
 
 			if (providerSearchPage != null) {
 				getLoginScenario().saveBean(PageConstants.PROVIDER_SEARCH_PAGE, providerSearchPage);

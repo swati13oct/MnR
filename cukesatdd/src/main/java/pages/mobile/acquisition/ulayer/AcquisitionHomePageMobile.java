@@ -1683,7 +1683,9 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	public ProviderSearchPageMobile clicksOnRallyToolFromGlobalHeader() {
 
 		Actions action = new Actions(driver);
-		action.moveToElement(navigationSectionHomeLink).moveToElement(ourPlansHoverLink).build().perform();
+//		action.moveToElement(navigationSectionHomeLink).moveToElement(ourPlansHoverLink).build().perform();
+		jsMouseOver(navigationSectionHomeLink);
+		jsMouseOver(ourPlansHoverLink);
 		validateNew(providerSearchFromGlobalHeader);
 
 		switchToNewTabNew(providerSearchFromGlobalHeader);
@@ -1697,7 +1699,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		return null;
 	}
 
-	public ProviderSearchPageMobile clicksOnRallyToolFromHomePage() {
+	public pages.mobile.acquisition.bluelayer.ProviderSearchPageMobile clicksOnRallyToolFromHomePage() {
 		validateNew(providerSearchFromHomeScreen);
 
 		switchToNewTabNew(providerSearchFromHomeScreen);
@@ -1705,7 +1707,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		CommonUtility.checkPageIsReadyNew(driver);
 		if (driver.getCurrentUrl().contains("werally")) {
 
-			return new ProviderSearchPageMobile(driver);
+			return new pages.mobile.acquisition.bluelayer.ProviderSearchPageMobile(driver);
 
 		}
 		return null;
