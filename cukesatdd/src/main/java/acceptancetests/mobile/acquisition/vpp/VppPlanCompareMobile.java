@@ -248,7 +248,7 @@ public class VppPlanCompareMobile {
 	public void click_sitemap() {
 		AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		SiteMapUMSPageMobile siteMapAARPPage = aquisitionhomepage.siteMapFooterClick();
+		SiteMapAARPPageMobile siteMapAARPPage = aquisitionhomepage.siteMapFooterClick();
 		if (siteMapAARPPage != null) {
 			getLoginScenario().saveBean(PageConstants.AARP_SITE_MAP_PAGE, siteMapAARPPage);
 

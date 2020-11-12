@@ -27,6 +27,7 @@ import pages.mobile.acquisition.emailAndPrint.EmailAndPrintUtilMobile;
 import pages.mobile.acquisition.ole.WelcomePageMobile;
 import pages.mobile.acquisition.ulayer.AcquisitionHomePageMobile;
 import pages.mobile.acquisition.ulayer.PlanDetailsPageMobile;
+import pages.mobile.acquisition.ulayer.SiteMapAARPPageMobile;
 import pages.mobile.acquisition.ulayer.VPPPlanSummaryPageMobile;
 //import pages.acquisition.ulayer.keywordSearch;
 import acceptancetests.acquisition.ole.oleCommonConstants;
@@ -369,7 +370,7 @@ public class VppPlanSummaryMobile {
 
 		AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		SiteMapUMSPageMobile siteMapUMSPage = aquisitionhomepage.siteMapFooterClick();
+		SiteMapAARPPageMobile siteMapUMSPage = aquisitionhomepage.siteMapFooterClick();
 		if (siteMapUMSPage != null) {
 			getLoginScenario().saveBean(PageConstants.SITE_MAP_PAGE, siteMapUMSPage);
 			Assert.assertTrue(true);
