@@ -92,7 +92,7 @@ public class ShopforaplanAARPlayer extends UhcDriver {
 
 	public EnrollmentBasicsPage enrollLinkOnShopPlan() throws Exception {
 		waitforElement(enrollLink);
-		enrollLink.click();
+		jsClickNew(enrollLink);
 		Thread.sleep(4000);
 		if (validate(maLeanHowToEnrollLink)) {
 			waitforElement(maLeanHowToEnrollLink);
@@ -143,6 +143,7 @@ public class ShopforaplanAARPlayer extends UhcDriver {
 		if (validate(msLeanHowToEnrollShopLink)) {
 			waitforElement(msLeanHowToEnrollShopLink);
 			jsClickNew(msLeanHowToEnrollShopLink);
+			threadsleep(2000);
 			System.out.println("Shop Page Medsupp Plan is Displayed");
 			return new ShopforaplanAARPlayer(driver);
 		}

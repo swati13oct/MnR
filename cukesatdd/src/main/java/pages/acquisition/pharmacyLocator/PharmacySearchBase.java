@@ -189,7 +189,7 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 		CommonUtility.checkPageIsReadyNew(driver);
 		scrollToView(yearDropdown);
 		waitTllOptionsAvailableInDropdown(yearDropdown, 45);
-//		yearDropdown.click();
+		//		yearDropdown.click();
 		Select yearList=new Select(yearDropdown);
 		yearList.selectByVisibleText(planYear);
 		System.out.println("Selected year='"+planYear+"' from year dropdown");

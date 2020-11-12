@@ -408,7 +408,9 @@ public class PharmacySearchPage extends PharmacySearchBase {
 				+ "Expected url contains '"+expUrl+"' Actual URL='"+actUrl+"'", 
 				actUrl.contains(expUrl));
 		enterZipDistanceDetails(zipcode, distance, county);
-		selectsPlanYear(planYear);
+		if(isPlanYear()) {
+			selectsPlanYear(planYear);
+		}
 		selectsPlanName(planName, testSiteUrl);
 		CommonUtility.checkPageIsReady(driver);
 	}
