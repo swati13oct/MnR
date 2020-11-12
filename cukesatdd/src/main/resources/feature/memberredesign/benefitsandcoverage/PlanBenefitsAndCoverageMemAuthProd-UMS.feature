@@ -870,45 +870,45 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth Prod
     @prod_hasInsulin_mapd_NoD
     Examples: 
       | index  | FID    | username | password  | MemUserName        | planType  | memberType     | copayCategory | deductible   | insulin      |
-      | 31-I01 | 478830 | kkumard  | mnrs786@  | q4_insulinDemo_005 | MAPD      | Individual_BnC | NON LIS       | NoD          | hasInsulin   | 
+      | 31-I01 | 478830 | kkumard  | mnrs786@  | gulture            | MAPD      | Individual_BnC | NON LIS       | NoD          | hasInsulin   | 
 
     @prod_hasInsulin_mapd_T12NoD_T345D
     Examples: 
       | index  | FID    | username | password  | MemUserName        | planType  | memberType     | copayCategory | deductible   | insulin      |
-      | 31-I02 | 478830 | kkumard  | mnrs786@  | q4_insulinDemo_003 | MAPD      | Individual_BnC | NON LIS       | T12NoD_T345D | hasInsulin   | 
+      | 31-I02 | 478830 | kkumard  | mnrs786@  | Adamsg1802         | MAPD      | Individual_BnC | NON LIS       | T12NoD_T345D | hasInsulin   | 
 
-    @prod_hasInsulin_mapd_T123NoD_T45D
-    Examples: 
-      | index  | FID    | username | password  | MemUserName        | planType  | memberType     | copayCategory | deductible   | insulin      |
-      | 31-I03 | 478830 | kkumard  | mnrs786@  | Q4_insulinDemo_100 | MAPD      | Individual_BnC | NON LIS       | T123NoD_T45D | hasInsulin   | 
+    #@prod_hasInsulin_mapd_T123NoD_T45D
+    #Examples: 
+    #  | index  | FID    | username | password  | MemUserName        | planType  | memberType     | copayCategory | deductible   | insulin      |
+    #  | 31-I03 | 478830 | kkumard  | mnrs786@  | testUserName       | MAPD      | Individual_BnC | NON LIS       | T123NoD_T45D | hasInsulin   | 
      
     @prod_hasInsulin_pdp_NoD
     Examples: 
       | index  | FID    | username | password  | MemUserName        | planType  | memberType     | copayCategory | deductible   | insulin      |
-      | 31-I04 | 478830 | kkumard  | mnrs786@  | q4_insulinDemo_011 | PDP       | Individual_BnC | NON LIS       | NoD          | hasInsulin   | 
+      | 31-I04 | 478830 | kkumard  | mnrs786@  | DEBBERNARDO@55     | PDP       | Individual_BnC | NON LIS       | NoD          | hasInsulin   | 
 
-    @prod_hasInsulin_csnpPcp_NoD
-    Examples: 
-      | index  | FID    | username | password  | MemUserName        | planType  | memberType     | copayCategory | deductible   | insulin      |
-      | 31-I05 | 478830 | kkumard  | mnrs786@  | q4_insulinDemo_017 | CSNP_PCP  | Individual_BnC | NON LIS       | NoD          | hasInsulin   | 
+    #@prod_hasInsulin_csnpPcp_NoD
+    #Examples: 
+    #  | index  | FID    | username | password  | MemUserName        | planType  | memberType     | copayCategory | deductible   | insulin      |
+    #  | 31-I05 | 478830 | kkumard  | mnrs786@  | testUserName       | CSNP_PCP  | Individual_BnC | NON LIS       | NoD          | hasInsulin   | 
 
     @prod_hasInsulin_csnpMapd_T123NoD_T45D
     Examples: 
       | index  | FID    | username | password  | MemUserName        | planType  | memberType     | copayCategory | deductible   | insulin      |
-      | 31-I06 | 478830 | kkumard  | mnrs786@  | Q4_insulinDemo_109 | CSNP_MAPD | Individual_BnC | NON LIS       | T123NoD_T45D | hasInsulin   | 
+      | 31-I06 | 478830 | kkumard  | mnrs786@  | Louysehardy65@yahaoo.com | CSNP_MAPD | Individual_BnC | NON LIS       | T123NoD_T45D | hasInsulin   | 
 
-    @prod_hasInsulin_isnpMapd_T123NoD_T45D
-    Examples: 
-      | index  | FID    | username | password  | MemUserName        | planType  | memberType     | copayCategory | deductible   | insulin      |
-      | 31-I07 | 478830 | kkumard  | mnrs786@  | q4_dec_preISNP     | ISNP_MAPD | Individual_BnC | NON LIS       | T123NoD_T45D | hasInsulin   |     
+    #@prod_hasInsulin_isnpMapd_T123NoD_T45D
+    #Examples: 
+    #  | index  | FID    | username | password  | MemUserName        | planType  | memberType     | copayCategory | deductible   | insulin      |
+    #  | 31-I07 | 478830 | kkumard  | mnrs786@  | testUserName       | ISNP_MAPD | Individual_BnC | NON LIS       | T123NoD_T45D | hasInsulin   |     
 
-    @prod_nonInsulin_mapd_NoT
-    Examples: 
-      | index  | FID    | username | password  | MemUserName        | planType  | memberType     | copayCategory | deductible   | insulin      |
-      | 34-I08 | 478830 | kkumard  | mnrs786@  | q4_insulinDemo_002 | MAPD      | Individual_BnC | LIS 4         | NoTier       | nonInsulin   | 
+    #@prod_nonInsulin_mapd_NoT
+    #Examples: 
+    #  | index  | FID    | username | password  | MemUserName        | planType  | memberType     | copayCategory | deductible   | insulin      |
+    #  | 34-I08 | 478830 | kkumard  | mnrs786@  | testUserName       | MAPD      | Individual_BnC | LIS 4         | NoTier       | nonInsulin   | 
 
-    @prod_nonInsulin_mapd_T12345
-    Examples: 
-      | index  | FID    | username | password  | MemUserName        | planType  | memberType     | copayCategory | deductible   | insulin      |
-      | 34-I09 | 478830 | kkumard  | mnrs786@  | q4_insulinDemo_019 | MAPD      | Individual_BnC | NON LIS       | T12345       | nonInsulin   | 
+    #@prod_nonInsulin_mapd_T12345
+    #Examples: 
+    #  | index  | FID    | username | password  | MemUserName        | planType  | memberType     | copayCategory | deductible   | insulin      |
+    #  | 34-I09 | 478830 | kkumard  | mnrs786@  | testUserName       | MAPD      | Individual_BnC | NON LIS       | T12345       | nonInsulin   | 
       
