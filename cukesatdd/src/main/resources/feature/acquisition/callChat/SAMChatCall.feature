@@ -9,13 +9,17 @@ And user opens the page to validate M&R Sites
 Then the user validates whether call icon is visible  
 #Then the user validates whether chat icon is visible on UHC
 Then the user validates whether chat icon is visible
+		@samChatCallULayer
 		Examples: 
 			| pagename |site|
 			|/|AARP|
+		@samChatCallBLayer	
+			Examples: 
+			| pagename |site|
 			|/|UHC|
 			
 			
-@samChatVPULayer
+
 Scenario Outline: 1.19.1.2 To test the SAM icons on Visitor Profile Page to intiate a chat
 	 Given the user is on medicare acquisition site landing page
     	|Site| <site>|
@@ -24,9 +28,14 @@ Scenario Outline: 1.19.1.2 To test the SAM icons on Visitor Profile Page to inti
   Then user validates visitor profile on home page site
 	Then the user validates whether call icon is visible  
 	Then the user validates whether chat icon is visible
+	
+	@samChatVPULayer
 		Examples: 
 			| pagename |site|
 			|/|AARP|
+	@samChatVPBLayer	
+			Examples: 
+			| pagename |site|
 			|/|UHC|
 			
 @samChat
