@@ -2722,8 +2722,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	
 
 	}
-}
-	
+
 
 	@FindBy(xpath="(//*[contains(text(),'Sign in')])[1]")
 	private WebElement memberSignInPage; 
