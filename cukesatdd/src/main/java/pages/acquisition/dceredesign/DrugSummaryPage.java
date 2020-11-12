@@ -46,7 +46,7 @@ public class DrugSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//*[text()='Monthly Premium']/following-sibling::div")
 	public WebElement monthlyPremium;
 
-	@FindBy(xpath = "//div[contains(text(), 'Annual Estimated')]//following-sibling::div")
+	@FindBy(xpath = "//h5[contains(text(), 'Annual Estimated')]//following-sibling::div")
 	public WebElement annualEstimatedTotal;
 
 	@FindBy(xpath = "//*[text()='Drugs Covered']/following-sibling::div")
@@ -271,7 +271,7 @@ public class DrugSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//table/tbody/tr/td[1]")
 	private WebElement drugNames;
 
-	@FindBy(id = "drugPricingClose")
+	@FindBy(id = "cancelicon")
 	private WebElement drugClose;
 
 	@FindBy(xpath = "//label/span[contains(text(),'Medicare Prescription Drug Plans')]")

@@ -73,7 +73,7 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
     #Then load screen should be displayed in AARP
     And user should be navigated to Review drug cost estimate page
     Then the user validates whether call icon is visible on AARP
-    Then the user validates whether chat Agent is Available on AARP
+    #Then the user validates whether chat Agent is Available on AARP
 
     Examples: 
       | path                                             | pageName                   | drugName | zipCode |
@@ -130,13 +130,13 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
     Then user save SNP plan as favorite on drug summary page AARP site
       | SNP Plans | <snptestPlans> |
     Then the user navigates to Visitor profile page
-    And user validates the added plans on visitor profile page of AARP site
+    And user validates the plans on new visitor profile page of AARP site
       | Test Plans | <testPlans>    |
       | PDP Plans  | <pdptestPlans> |
       | SNP Plans  | <snptestPlans> |
 
     Examples: 
-      | path                                             | pageName                   | drugName | zipCode | testPlans                                                                                             | pdptestPlans                    | snptestPlans                               |
+      | path                                             | pageName                   | drugName | zipCode | testPlans                                                                                       | pdptestPlans                    | snptestPlans                               |
       | health-plans/estimate-drug-costs.html/getstarted | DCE Redesign - Get Started | Emsam    |   10001 | UnitedHealthcare Medicare Advantage Choice Plan 4 (Regional PPO) | AARP MedicareRx Preferred (PDP) | UnitedHealthcare Dual Complete (HMO D-SNP) |
 
   @dCERedesign_ChangePharmacy_AARP @F426569
