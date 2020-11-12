@@ -431,6 +431,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	@FindBy(xpath="//a[contains(@href,'https://www.myuhcagent.com/')]")
 	private WebElement RightRail_FindAnAgent; 
+	
+	@FindBy(xpath="(//a[contains(@href,'https://www.myuhcagent.com/')])[1]")
+	private WebElement RightRail_FindAnAgentMedsupp;
 
 	
 	@FindBy(xpath = "//p[contains(text(),'UnitedHealthcare Insurance Company (UnitedHealthcare)')]")
@@ -543,7 +546,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		
 		CommonUtility.checkPageIsReadyNew(driver);
 		System.out.println("Current page URL: "+driver.getCurrentUrl());
-		checkModelPopup(driver,15);
+		//checkModelPopup(driver,15);
 		CommonUtility.waitForPageLoadNew(driver, navigationSectionHomeLink, 25);
 		CommonUtility.waitForPageLoad(driver, proactiveChatExitBtn,20); // do not change this to waitForPageLoadNew as we're not trying to fail the test if it isn't found
 		try{
@@ -1362,14 +1365,14 @@ public class AcquisitionHomePage extends GlobalWebElements {
      		return new DrugCostEstimatorPage(driver);
 	 }
 	
-	public ShopforaplanAARPlayer Hoveronaplan() throws InterruptedException
+	public ShopForPlanNavigationPage Hoveronaplan() throws InterruptedException
     {             
            waitforElement(ShopForaplan);
      if (ShopForaplan.isDisplayed()) {
 //            Actions action = new Actions(driver);
 //            action.moveToElement(ShopForaplan).build().perform();
 		    jsMouseOver(ShopForaplan);
-            return new ShopforaplanAARPlayer(driver);
+            return new ShopForPlanNavigationPage(driver);
      }
            else {
                   return null;}
@@ -2613,4 +2616,48 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			driver.navigate().back();
 		}
 
+		
+		public void clickonFindanAgentlinkMedsupp(String ExpectedUHCAgentURL ) {
+			
+			validateNew(RightRail_FindAnAgentMedsupp);
+			CommonUtility.waitForPageLoadNew(driver, RightRail_FindAnAgentMedsupp, 30);
+			String parentWindow = driver.getWindowHandle();
+			RightRail_FindAnAgentMedsupp.click();
+			sleepBySec(3);
+			Set<String> tabs_windows = driver.getWindowHandles();
+			Iterator<String> itr = tabs_windows.iterator();
+			while(itr.hasNext()) {
+				String window = itr.next();
+				if(!parentWindow.equals(window)) {
+					driver.switchTo().window(window);
+				}
+			}
+			
+			CommonUtility.checkPageIsReadyNew(driver);
+			String CurrentUHCAgentURL = driver.getCurrentUrl();
+			String ActualCurrentUHCAgentURL=CurrentUHCAgentURL.substring(0, 27).trim();
+			System.out.println("myuhcagent Page is displayed : "+ActualCurrentUHCAgentURL);
+			System.out.println("Expected myuhcagent URL: "+ExpectedUHCAgentURL);
+			System.out.println("Actual myuhcagent URL: "+ActualCurrentUHCAgentURL);
+
+			if(ExpectedUHCAgentURL.equalsIgnoreCase(ActualCurrentUHCAgentURL)) {
+				System.out.println("****************myuhcagent Page is displayed  ***************");
+
+				Assert.assertTrue(true);
+			}
+			else {
+				Assert.fail("****************myuhcagent Page is not loaded ***************");
+			}
+		
+			
+			
+		}
+
+		public void hoverOverShopForPlan() {
+			waitforElement(ShopForaplan);
+			if (ShopForaplan.isDisplayed()) {			
+				jsMouseOver(ShopForaplan);
+				System.out.println("Hover over Shop for a Plan completed");
+			}
+		}		
 }
