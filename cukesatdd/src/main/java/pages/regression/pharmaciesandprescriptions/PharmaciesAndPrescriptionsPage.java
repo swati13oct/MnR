@@ -1560,10 +1560,10 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 
 		public boolean validateNoRefillAllMedicationsBtn() {
 
-			if(validate(refillAllMedications,30)){
-				 return false;
+			if(validate(refillAllMedications)){
+				 return true;
 			}else {
-				return true;
+				return false;
 			}
 		}
 
