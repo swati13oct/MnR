@@ -4137,13 +4137,37 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 	public void validateDrgTbl_stdRetPha_csnppcp_noD_hasInsulin() {
 		String type="PCP CSNP - No Deductible for All Tiers";
 		String tblName="Standard Retail Pharmacy";
-		String tbl= "TBD";
+		String tbl= "Additional Drug Coverage\n"
+		+"Annual Deductible Stage\n"
+		+"Initial Coverage Stage\n"
+		+"Coverage Gap Stage\n"
+		+"Catastrophic Coverage Stage\n"
+		+"Tier 1\n"
+		+"No Deductible\n"
+		+"$0.00\n"
+		+"$0.00\n"
+		+"Your share of the cost for a covered drug will be either coinsurance or a copayment whichever is the larger amount:\n"
+		+"-either- coinsurance of 5% of the cost of the drug\n"
+		+"-or- $3.60 for a generic drug or a drug that is treated like a generic and $8.95 for all other drugs.\n"
+		+"Tier 2\n"
+		+"$0.00\n"
+		+"$0.00\n"
+		+"Select Insulin Drugs\n"
+		+"$15.00\n"
+		+"$15.00\n"
+		+"Tier 3\n"
+		+"$15.00\n"
+		+"$15.00\n"
+		+"Tier 4\n"
+		+"$45.00\n"
+		+"no more than 25% for generic drugs or 25% for brand name drugs\n"
+		+"Tier 5\n"
+		+"33%\n"
+		+"no more than 25% for generic drugs or 25% for brand name drugs";
 		WebElement drugTblElement=standardRetail_DrugTable;
 		System.out.println("--------------------validateDrgTbl_stdRetPha_csnppcp_noD_hasInsulin");
 		System.out.println(drugTblElement.getText());
 		System.out.println("--------------------");
-		Assert.assertTrue("TODO - drug table='"+tblName+"' | type='"+type+"'", false);
-		/* keep
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", drugTblElement);
 		validateWithValue("Drug cost table - '"+tblName+"' - '"+type+"'", drugTblElement);
 		if(drugTblElement.getText().equals(tbl.toString())){
@@ -4154,8 +4178,7 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 			System.out.println(">>>>>>>>>>>>>The Actual Table value is<<<<<<<<<<<<<<<<<<<< \n"+drugTblElement.getText());
 			System.err.println("The data in the drug cost table is not displaying correctly");
 			Assert.fail("The data in the drug cost table is not displaying correctly. table='"+tblName+"' | type='"+type+"'");
-		} */
-
+		} 
 	}
 
 	public void validateDrgTbl_preRetail_csnppcp_noD_hasInsulin() {
@@ -4184,13 +4207,33 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 	public void validateDrgTbl_preMaiSerPha_csnppcp_noD_hasInsulin() {
 		String type="PCP CSNP - No Deductible for All Tiers";
 		String tblName="Preferred Mail Service Pharmacy";
-		String tbl= "TBD";
+		String tbl= "Annual Deductible Stage\n"
+				+"Initial Coverage Stage\n"
+				+"Coverage Gap Stage\n"
+				+"Catastrophic Coverage Stage\n"
+				+"Tier 1\n"
+				+"No Deductible\n"
+				+"$0.00\n"
+				+"$0.00\n"
+				+"Your share of the cost for a covered drug will be either coinsurance or a copayment whichever is the larger amount:\n"
+				+"-either- coinsurance of 5% of the cost of the drug\n"
+				+"-or- $3.60 for a generic drug or a drug that is treated like a generic and $8.95 for all other drugs.\n"
+				+"Tier 2\n"
+				+"$0.00\n"
+				+"$0.00\n"
+				+"Select Insulin Drugs\n"
+				+"$35.00\n"
+				+"$35.00\n"
+				+"Tier 3\n"
+				+"$35.00\n"
+				+"$35.00\n"
+				+"Tier 4\n"
+				+"$125.00\n"
+				+"no more than 25% for generic drugs or 25% for brand name drugs";
 		WebElement drugTblElement=preferedMail_DrugTable;
 		System.out.println("--------------------validateDrgTbl_preMaiSerPha_csnppcp_noD_hasInsulin");
 		System.out.println(drugTblElement.getText());
 		System.out.println("--------------------");
-		Assert.assertTrue("TODO - drug table='"+tblName+"' | type='"+type+"'", false);
-		/* keep
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", drugTblElement);
 		validateWithValue("Drug cost table - '"+tblName+"' - '"+type+"'", drugTblElement);
 		if(drugTblElement.getText().equals(tbl.toString())){
@@ -4201,7 +4244,7 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 			System.out.println(">>>>>>>>>>>>>The Actual Table value is<<<<<<<<<<<<<<<<<<<< \n"+drugTblElement.getText());
 			System.err.println("The data in the drug cost table is not displaying correctly");
 			Assert.fail("The data in the drug cost table is not displaying correctly. table='"+tblName+"' | type='"+type+"'");
-		} */
+		}
 	}
 	
 	public void validateDrgTbl_preMaiSerPha_csnppcp_T12NoD_T345D_hasInsulin() {
