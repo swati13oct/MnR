@@ -14,7 +14,7 @@ import cucumber.api.CucumberOptions;
 @ExtendedCucumberOptions(retryCount=2,screenShotSize="", screenShotLocation="/screenshots/",jsonReport = "target/cucumber-RunMRATDDAcquisitionDecisionGuideBlayer.json",detailedReport = true,
  detailedAggregatedReport = true, overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDAcquisitionDecisionGuideBlayer")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.acquisition" }, features = { "src/main/resources/feature/acquisition/IsDecisionGuide" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionDecisionGuideBlayer.json" }, tags = { "@IS_DecisionGuide_UHC" })
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionDecisionGuideBlayer.json" }, tags = { "@IS_DecisionGuide_Common_UHC"})//"@IS_DecisionGuide_UHC" })
 public class RunMRATDDAcquisitionDecisionGuideBlayer{ 
  
 }

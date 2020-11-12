@@ -1,6 +1,6 @@
 Feature: 1.06-UAT Scripts to test Federal Agent Link and request an appointment with an agent flow on Shop Pages
 
-Scenario Outline: <scenario> Verify request an appointment through shop pages MA Plans
+Scenario Outline: <scenario> Verify request an appointment through <pageName>
 		Given the user is on medicare acquisition site landing page
     	|Site| <site>|
 		Given the user navigates to following medicare acquisition site page
@@ -57,5 +57,30 @@ Examples:
 | E2E Scenario 3_AMP |  90002     |  AARP|
 
 
+
+Scenario Outline: <scenario> Verify request an appointment for Medsupp flows
+Given the user is on medicare acquisition site landing page
+   		|Site| <site>|
+		When the user performs plan search using following information
+      | Zip Code        | <zipcode>         |
+      | County Name     | <county>          |
+      | Is Multi County | <isMultutiCounty> |
+		When the user views the plans of the below plan type
+      | Plan Type | <plantype> |
+    Then the site user fills all the details in MedsuppPage
+   		| DOB           | <DOB>         |  		
+   		When the user clicks on Agent link and validates the correct URL is loaded for Medsupp page
+      |UHC Agent URL|  <UHCUrl>  |
+
+@agentFlowEBRCBlayer   		
+  Examples: 
+    |scenario            | zipcode | isMultutiCounty |  county             | plantype | DOB      | Firstname | Lastname|  site|UHCUrl                     |
+    |E2E Scenario 4_UMS  |   90002 | NO              | Los Angeles County | MS       | 11/13/1940 | John      | Carry   |  AARP  |https://www.myuhcagent.com/|   
+	
+@agentFlowEBRCUlayer
+   Examples: 
+   |scenario            | zipcode | isMultutiCounty |  county             | plantype | DOB      | Firstname | Lastname|  site|UHCUrl                     |
+    |E2E Scenario 4_AMP  |   90002 | NO              | Los Angeles County | MS       | 11/13/1940 | John      | Carry   |  AARP  |https://www.myuhcagent.com/|   
+			
 
 

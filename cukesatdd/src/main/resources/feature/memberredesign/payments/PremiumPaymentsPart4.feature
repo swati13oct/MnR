@@ -1,5 +1,10 @@
 Feature: 1.19 Verify the premium payment flows on member portal - Part 4 - Test case 27 to 32
 
+Background: Feature security flag needs to be true before ATDD script execution
+     Given First check if feature security flag is set to true
+      | Feature           | UCPPayments |
+###############################Regression Scenarios Begin Here ########################################
+
   #Test Case 27 - Pre-effective federal member with no billing and no payment history
   @regressionMember
   Scenario Outline: FID: <FID> -plan: <planType> -memberType: <memberType> - Test Case 27 -Verify payments for Pre-effective Federal member with no billing and no payment history
