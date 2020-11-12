@@ -39,13 +39,13 @@ Feature: 1.12 UAT - Header and Footer flows
 
 	@globalfooter_AARP
   Examples: 
-     |Scenario  |	site	|
-      |E2E Scenario_3 AMP |	AARP	|
+     |Scenario  					|	site	|zipcode | isMultutiCounty | county        |
+      |E2E Scenario_3 AMP |	AARP	|80001	| No								|Jefferson|
  
  @globalfooter_UHC
   Examples: 
-       |Scenario|	site	|
-      |E2E Scenario_3 UMS |	UHC	|      
+       |Scenario					|	site|zipcode | isMultutiCounty | county        |
+      |E2E Scenario_3 UMS |	UHC	| 10001	| No							 | New York|				     
        
 	@globalfooterULayer
   Scenario Outline: <Scenario> : To verify links displayed in the global footer on DCE page.
@@ -54,8 +54,7 @@ Feature: 1.12 UAT - Header and Footer flows
     When I click on DCE Redesign link from Shop for a plan hover over
     When user accesses global footer of the Medicare Plans All page
 #    And user vaidates the state drop down link on the home page
-    And user clicks on View all disclaimer information link on the home page
-    And the user clicks on browser back button
+#    And user clicks on View all disclaimer information link on the home page
     And user verifies visit aarp.org link on home page
     And the user clicks on browser back button
     And user clicks on Aboutus link from footer of the Medicare Plans home page
