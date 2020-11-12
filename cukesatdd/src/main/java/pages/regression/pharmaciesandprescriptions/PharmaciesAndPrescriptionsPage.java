@@ -712,11 +712,13 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 			System.out.println("Number of windows opened when user click on Find & Price a Medication CTA is :: " + size);
 			if (size == 1) {
 				pageloadcomplete();
+				waitforElementVisibilityInTime(DrugEstimatorToolPageSearchBar, 50);
 				//Assert.assertTrue("PROBLEM - No new bowser window is opened", true);
 				Assert.assertTrue("PROBLEM - Drug Estimator Tool Page is NOT displayed successfully",
 						pnpValidate(DrugEstimatorToolPageSearchBar, 30));
 			} else {
 				pageloadcomplete();
+				waitforElementVisibilityInTime(DrugEstimatorToolPageSearchBar, 50);
 				Assert.assertTrue("PROBLEM - Drug Estimator Tool Page Search bar is NOT displayed successfully",
 						pnpValidate(DrugEstimatorToolPageSearchBar, 30));
 				Assert.assertTrue("PROBLEM - Drug Estimator Tool page is opened in new browser window", false);
@@ -729,13 +731,15 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 			System.out.println("Number of windows opened when user click on Find & Price a Medication CTA is :: " + size);
 			if (size == 2) {
 				pageloadcomplete();
+				waitforElementVisibilityInTime(DrugEstimatorToolPageSearchBar, 50);
 				//Assert.assertTrue("PROBLEM - No new bowser window is opened", true);
 				Assert.assertTrue("PROBLEM - Drug Estimator Tool Page is NOT displayed successfully",
-						pnpValidate(DrugEstimatorToolPageSearchBar, 60));
+						pnpValidate(DrugEstimatorToolPageSearchBar, 30));
 			} else {
 				pageloadcomplete();
+				waitforElementVisibilityInTime(DrugEstimatorToolPageSearchBar, 50);
 				Assert.assertTrue("PROBLEM - Drug Estimator Tool Page Search bar is NOT displayed successfully",
-						pnpValidate(DrugEstimatorToolPageSearchBar, 60));
+						pnpValidate(DrugEstimatorToolPageSearchBar, 30));
 				Assert.assertTrue("PROBLEM - Drug Estimator Tool page is opened in new browser window", false);
 			}
 		}
