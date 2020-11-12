@@ -873,23 +873,4 @@ Feature: 1.01 Member  benefits and Coverage page
       | index  | FID    | planType  | memberType     | copayCategory | deductible   | insulin      |
       | 34-I09 | 478830 | MAPD      | Individual_BnC | NON LIS       | T12345       | nonInsulin   | 
 
-
-
-
-
-
-#TBD      | 34-I01 | 478830 | MAPD | Individual_BnC | NON LIS       | NoD | nonInsulin   | 
-#TBD      | 34-I01 | 478830 | PDP | Individual_BnC | NON LIS       | NoD | nonInsulin   | 
-#TBD      | 34-I01 | 478830 | ISNP_MAPD | Individual_BnC | NON LIS       | NoD | nonInsulin   | 
-#TBD      | 34-I01 | 478830 | CSNP_MAPD | Individual_BnC | NON LIS       | NoD | nonInsulin   | 
-#TBD
-#q4_NoninsulinDemo_002/Password@1,MAPD,Individual_BnC,NON LIS,nonInsulin
-#q2_BPE_026/Password@1,PDP,Individual_BnC,NON LIS,nonInsulin
-#q4_NoninsulinDemo_012/Password@1,ISNP_MAPD,Individual_BnC,NON LIS,nonInsulin
-#q4_NoninsulinDemo_016/Password@1,CSNP_MAPD,Individual_BnC,NON LIS,nonInsulin
-#ba5f2fea-8921-4754-9ebb-0933a3df3c12/Password@1,MAPD,Individual_BnC,NON LIS,nonInsulin
-#e997e94b-79b5-4a9f-a114-ebc4e062613d/Password@1,PDP,Individual_BnC,NON LIS,nonInsulin
-#ce3fecd3-6570-441b-b54e-6507c0107f55/Password@1,ISNP_MAPD,Individual_BnC,NON LIS,nonInsulin
-#08c5adce-595f-47e3-bbca-2da01c822e6f/Password@1,CSNP_MAPD,Individual_BnC,NON LIS,nonInsulin
-
  ###############################Regression Scenarios END Here ########################################

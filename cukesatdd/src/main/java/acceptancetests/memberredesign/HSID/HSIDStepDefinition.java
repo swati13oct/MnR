@@ -707,8 +707,8 @@ public class HSIDStepDefinition {
 
 	@Given("^feature security flag must set to true when testing on stage env$")
 	public void checkSecurityFlag(DataTable memberAttributes) {
-		if (MRScenario.environment.contains("team-a")) {
-			System.out.println("SKIP security test for team env");
+		if (MRScenario.environment.contains("team-a") || MRScenario.environment.equals("offline") || MRScenario.environment.equals("prod")) {
+			System.out.println("SKIP security test for team env (doesn't matter) and offline/online-prod (is through memAuth access so it doesn't matter)");
 			return;
 		}
 		boolean useStage3=false;
