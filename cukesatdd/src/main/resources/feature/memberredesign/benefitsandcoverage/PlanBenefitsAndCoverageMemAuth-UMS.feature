@@ -818,7 +818,7 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth
        | 27-m1 | F494433,F506320 |qavgogine| qavgogine|q2_AmWell_008| DSNP_MAPD  | Individual_MnR01_BnC | LIS 1         | ENGLISH  | OFER MCLEON  | 937024725-1| 01/01/2020    | Not Available  | Extra Help Level : 1 | IndEffectiveAARP |     6 |  H0271-005 |  NoRider|
        | 28-m2 | F494433,F506320 |qavgogine| qavgogine|q4_dec_evercare_013| DSNP_MAPD  | Individual_MnR02_BnC | LIS 1         | ENGLISH  | DBAD ADFED | 919744565-00 | 01/01/2020    | Not Available  | Extra Help Level : 1 | IndEffectiveAARP |     6 |  H5253-041 | NoRider |
 
-    @memAuthDSNP_MnR02
+    @memAuth_DSNP_MnR02
     Examples:      
        | index | FID             |username |password  |MemUserName| planType   | memberType           | copayCategory | language | name         | memberid     | effectivedate | monthlypremium | extrahelp            | Identifier       | count | H-PBP    | rider  |
        | 29-m3 | F494433,F506320 |qavgogine| qavgogine|q4_DSNP_087| DSNP_MAPD  | Individual_MnR03_BnC | LIS 1         | ENGLISH  | DBAD ADFED | 919744565-00 | 01/01/2020   | Not Available   | Extra Help Level : 1 | IndEffectiveAARP |     6 |  R2604-004 | NoRider|
