@@ -11,7 +11,7 @@ import cucumber.api.CucumberOptions;
  * this file is to run test cases for RunMRATDDAcquisitionFooterAARPMobile
  */
 @RunWith(ExtendedCucumber.class)
-@ExtendedCucumberOptions(retryCount=2,screenShotSize="", screenShotLocation="/screenshots/",
+@ExtendedCucumberOptions(retryCount=1,screenShotSize="", screenShotLocation="/screenshots/",
 jsonReport = "target/cucumber-RunMRATDDAcquisitionFooterAARPMobile.json",detailedReport = true,
 detailedAggregatedReport = true, overviewReport = true, toPDF = true, 
 outputFolder = "target/RunMRATDDAcquisitionFooterAARPMobile")
@@ -19,7 +19,7 @@ outputFolder = "target/RunMRATDDAcquisitionFooterAARPMobile")
 features = { "src/main/resources/feature/mobile/acquisition/globalComponents" }, 
 plugin = {
 		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionFooterAARPMobile.json" }, 
-tags = { "@globalfooter_AARP" }, dryRun=false)
+tags = { "@Choice" }, dryRun=false)
 public class RunMRATDDAcquisitionFooterAARPMobile {
 
 }

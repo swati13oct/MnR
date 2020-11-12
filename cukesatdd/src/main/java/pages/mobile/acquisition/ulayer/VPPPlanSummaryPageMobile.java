@@ -858,7 +858,8 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 	}
 
 	public ProviderSearchPageMobile clickNextBestActionModalFindMyDoctorsBtn() {
-		nextBestActionModalFindMyDoctorsBtn.click();
+		//nextBestActionModalFindMyDoctorsBtn.click();
+		jsClickNew(nextBestActionModalFindMyDoctorsBtn);
 		CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
 		int initialCount = driver.getWindowHandles().size();
 		ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
@@ -871,7 +872,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 		}
 		if (driver.getCurrentUrl().contains("werally")) {
 			return new ProviderSearchPageMobile(driver);
-		}
+				}
 		return null;
 	}
 
@@ -1874,28 +1875,25 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 		}
 	}
 
-	public void validatePlanPremium(String planName, String monthlyPremium) {
-
+public void validatePlanPremium (String planName , String monthlyPremium){
+		
 		WebElement premiumForPlan = null;
-		if (planName.contains("SNP")) {
-			premiumForPlan = driver.findElement(By.xpath("(//*[contains(text(),\'" + planName
-					+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//li[contains(@id, 'linkforsnp')]//*[contains(text(),'Monthly Premium')])"));
-		} else if (planName.contains("PDP")) {
-			premiumForPlan = driver.findElement(By.xpath("(//*[contains(text(),\'" + planName
-					+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class, 'pdpbenefittable')]//li[contains(text(),'Monthly Premium')])"));
-		} else
-			premiumForPlan = driver.findElement(By.xpath("(//*[contains(text(),\'" + planName
-					+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class, 'mabenefittable')]//li//*[contains(text(),'Monthly Premium')])"));
-
+		if(planName.contains("SNP")){
+			 premiumForPlan = driver.findElement(By.xpath("(//*[contains(text(),\'" + planName + "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//li[contains(@id, 'linkforsnp')]//*[contains(text(),'Monthly Premium')])"));
+		}else if(planName.contains("PDP")){
+			 premiumForPlan = driver.findElement(By.xpath("(//*[contains(text(),\'" + planName + "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class, 'pdpbenefittable')]//li[contains(text(),'Monthly Premium')])"));
+		}else
+			 premiumForPlan = driver.findElement(By.xpath("(//*[contains(text(),\'" + planName + "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class, 'mabenefittable')]//li//*[contains(text(),'Monthly Premium')])"));
+		
 		scrollToView(premiumForPlan);
 		validateNew(premiumForPlan);
-		/*
-		 * String PlanPremium = PremiumForPlan.getText();
-		 * if(PlanPremium.equals(monthlyPremium)){
-		 * System.out.println("Premium for the plan is " + PlanPremium);
-		 * Assert.assertTrue(true); } else
-		 * Assert.fail("Premium for the plan is incorrect : "+planName);
-		 */
+		/*String PlanPremium = PremiumForPlan.getText();
+		if(PlanPremium.equals(monthlyPremium)){
+			System.out.println("Premium for the plan is " + PlanPremium);               
+			Assert.assertTrue(true);
+		}
+		else
+			Assert.fail("Premium for the plan is incorrect : "+planName);*/ 
 	}
 
 	public void validatePrimaryCarePhysicianBenefit(String planType, String planName, String primaryCarePhysician) {

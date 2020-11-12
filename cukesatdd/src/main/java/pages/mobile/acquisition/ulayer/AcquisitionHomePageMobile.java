@@ -881,7 +881,8 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 	public SiteMapAARPPageMobile siteMapFooterClick() {
 		validateNew(footerSiteMapLink);
-		footerSiteMapLink.click();
+		// footerSiteMapLink.click();
+		jsClickNew(footerSiteMapLink);
 		CommonUtility.checkPageIsReadyNew(driver);
 		validateNew(siteMapHeader);
 		if (driver.getCurrentUrl().contains("sitemap.html")) {
@@ -1000,7 +1001,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 			CommonUtility.waitForPageLoadNew(driver, zipCodeField, 30);
 			scrollToView(zipCode1);
 			jsSendkeys(zipCodeField, zipcode);
-			//sendkeys(zipCodeField, zipcode);
+			// sendkeys(zipCodeField, zipcode);
 
 			// viewPlansButton.click();
 			jsClickNew(viewPlansButton);
@@ -1009,7 +1010,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		CommonUtility.waitForPageLoad(driver, countyModal, 45);
 		if (validate(countyModal))
 			driver.findElement(By.xpath("//div[@id='selectCounty']//a[text()='" + countyName + "']")).click();
-		//CommonUtility.waitForPageLoadNew(driver, vppTop, 30);
+		// CommonUtility.waitForPageLoadNew(driver, vppTop, 30);
 		if (driver.getCurrentUrl().contains("plan-summary")) {
 			return new VPPPlanSummaryPageMobile(driver);
 		}
@@ -1683,7 +1684,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	public ProviderSearchPageMobile clicksOnRallyToolFromGlobalHeader() {
 
 		Actions action = new Actions(driver);
-//		action.moveToElement(navigationSectionHomeLink).moveToElement(ourPlansHoverLink).build().perform();
+		// action.moveToElement(navigationSectionHomeLink).moveToElement(ourPlansHoverLink).build().perform();
 		jsMouseOver(navigationSectionHomeLink);
 		jsMouseOver(ourPlansHoverLink);
 		validateNew(providerSearchFromGlobalHeader);
@@ -2071,7 +2072,9 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	// }
 
 	public void signInheader() {
-		headerSignInLink.click();
+		MobileMenuMain();
+		// headerSignInLink.click();
+		jsClickNew(headerSignInLink);
 		validateNew(signIn);
 		if (driver.getCurrentUrl().contains("medicare.uhc.com/aarp")) {
 			Assert.assertTrue(true);
@@ -2314,9 +2317,12 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	}
 
 	public void headerRegisterLink() {
+		MobileMenuMain();
 		if (headerRegisterLink.isDisplayed() && headerRegisterLink.isEnabled()) {
 			Assert.assertTrue(true);
 			System.out.println("Register link is displayed on home page");
+//			scrollToView(MenuCrossMobile);
+//			jsClickNew(MenuCrossMobile);
 		} else {
 			Assert.fail("Register link is not found/ displayed on home page");
 		}
@@ -2442,9 +2448,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 	public GetStartedPageMobile navigateToDCERedesignFromHome() throws InterruptedException {
 		validateNew(getStarted);
-		JavascriptExecutor js = (JavascriptExecutor) driver;
-		js.executeScript("arguments[0].click();", getStarted);
-		// getStarted.click();
+		jsClickNew(getStarted);
 
 		if (validateNew(AddMyDrugsBtn))
 			return new GetStartedPageMobile(driver);
@@ -2780,15 +2784,19 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	}
 
 	public void validatevisitorprofile() {
+		
 		if (visitorprofileicon.isDisplayed()) {
-			Actions actions = new Actions(driver);
-			actions.moveToElement(visitorprofileicon).perform();
+//			Actions actions = new Actions(driver);
+//			actions.moveToElement(visitorprofileicon).perform();
+			jsClickNew(visitorprofileicon);
 			System.out.println("Hover over visitor profile completed");
 		}
-		WebElement CreateProfile = driver.findElement(By.xpath("//a[contains(text(), 'Create Profile')]"));
+		WebElement CreateProfile = driver.findElement(By.xpath("//div/a[contains(text(),'Create a profile')]"));
 		WebElement VPSignIn = driver.findElement(
-				By.xpath("//a[contains(text(), 'Sign In') and not(contains(@aria-labelledby ,'VPSignIn'))]"));
+				By.xpath("//a[.='Sign In ']"));
+		scrollToView(CreateProfile);
 		validateNew(CreateProfile);
+		scrollToView(VPSignIn);
 		validateNew(VPSignIn);
 		if (CreateProfile.isEnabled() && VPSignIn.isEnabled()) {
 			Assert.assertTrue(true);
@@ -2796,22 +2804,25 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		} else {
 			Assert.fail("Visitor Profile elements are not present on home page");
 		}
-		visitorprofileicon.click();
+		//visitorprofileicon.click();
+		jsClickNew(visitorprofileicon);
 		WebElement GuestProfile = driver.findElement(By.xpath("//*[contains(text(), 'Your Guest Profile')]"));
 		CheckPageLoad();
 		CheckiPerseptions();
 		CommonUtility.waitForPageLoadNew(driver, GuestProfile, 30);
-		if (driver.getCurrentUrl().contains("profile/guest")) {
+		if (driver.getCurrentUrl().contains("profile")) {
 			Assert.assertTrue(true);
 			System.out.println("Visitor Profile Page opens successsfully");
 		} else {
 			Assert.fail("Visitor Profile page is not opening up");
 		}
-		driver.navigate().back();
-		CheckPageLoad();
-		CheckiPerseptions();
+//		clickBrowserBackButton();
+//		CheckPageLoad();
+//		CheckiPerseptions();
+		jsClickNew(AARPlogo);
+		validate(findPlansButton);
 
-		CommonUtility.waitForPageLoadNew(driver, findPlansButton, 30);
+//		CommonUtility.waitForPageLoadNew(driver, findPlansButton, 30);
 	}
 
 	public void validateLogo() {
@@ -2840,7 +2851,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	}
 
 	public GetStartedPageMobile navigateToDCERedesignFromSubNav() {
-		navigateToMenuLinks(ShopForaplan, headerDrugCostEstimatorLink);
+		// navigateToMenuLinks(ShopForaplan, headerDrugCostEstimatorLink);
 
 		if (validateNew(AddMyDrugsBtn))
 			return new GetStartedPageMobile(driver);
@@ -2917,8 +2928,13 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	}
 
 	public void validateHeaderLinks() {
-		validateNew(headerSignInLink);
-		validateNew(headerRegisterLink);
+		MobileMenuMain();
+		scrollToView(headerSignInLink);
+		// validateNew(headerSignInLink);
+		// validateNew(headerRegisterLink);
+		scrollToView(headerRegisterLink);
+		jsClickNew(headerRegisterLink);
+		clickBrowserBackButton();
 		validateNew(visitAARPLink);
 		validateNew(AARPlogo);
 		validateNew(visitorprofileicon);

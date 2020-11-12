@@ -96,6 +96,8 @@ public class GlobalComponentsCommonStepDefinition {
 	public void the_user_validates_visitor_profile_aarp() throws Throwable {
 		AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		aquisitionhomepage.MenuCrossMobile.click();
+		
 		aquisitionhomepage.validatevisitorprofile();
 	}
 	
@@ -105,6 +107,7 @@ public class GlobalComponentsCommonStepDefinition {
 	public void i_click_on_DCE_Redesign_link_from_Shop_for_a_plan_hover_over_for_ums_site() {
 		AcquisitionHomePageMobile acquisitionHomePage = (AcquisitionHomePageMobile) loginScenario
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		acquisitionHomePage.MobileMenuAccessDCE();
 		GetStartedPageMobile getStartedPage = acquisitionHomePage.navigateToDCERedesignFromSubNav();
 		if (null != getStartedPage) {
 			getLoginScenario().saveBean(PageConstants.DCE_Redesign_GetStarted, getStartedPage);

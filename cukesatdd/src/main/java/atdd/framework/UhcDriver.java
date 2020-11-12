@@ -74,6 +74,9 @@ public abstract class UhcDriver {
 	@FindBy(xpath = "//span[text()='Shop For a Plan']")
 	public WebElement MenuShopForPlanMobile;
 
+	@FindBy(xpath = "//a[contains(text(),'Drug Cost Estimator')]")
+	public WebElement DCERedesignLink;
+
 	@FindBy(xpath = "//a[text()='Get a Plan Recommendation']")
 	public WebElement GetPlanRecoMobile;
 
@@ -89,6 +92,12 @@ public abstract class UhcDriver {
 		jsClickNew(GetPlanRecoMobile);
 	}
 
+	public void MobileMenuMain() {
+		scrollToView(MenuMobile);
+		jsClickNew(MenuMobile);
+
+	}
+
 	public void MobileMenuAndGetStarted() {
 		jsClickNew(MenuMobile);
 		jsClickNew(MenuShopForPlanMobile);
@@ -100,6 +109,12 @@ public abstract class UhcDriver {
 		jsClickNew(MenuMobile);
 		jsClickNew(MenuShopForPlanMobile);
 		jsClickNew(ShopTool);
+	}
+
+	public void MobileMenuAccessDCE() {
+		jsClickNew(MenuMobile);
+		jsClickNew(MenuShopForPlanMobile);
+		jsClickNew(DCERedesignLink);
 	}
 
 	public void start(String url) {
@@ -851,8 +866,6 @@ public abstract class UhcDriver {
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		driver.get(url);
 	}
-	
-	
 
 	/**
 	 * @author Murali - mmurugas This method will perform vertical swipe on mobile
@@ -1171,67 +1184,66 @@ public abstract class UhcDriver {
 		// TODO Auto-generated method stub
 
 	}
-	
-	  /**
-     * Wait for page load in Safari browser, by checking the invisibility of loading spinners which show in different flows
-     *
-     * @return true, if successful
-     */
-    public boolean waitForPageLoadSafari() {
-    	boolean ready = false;
-    	if(MRScenario.browsername.equalsIgnoreCase("Safari")) {
-    		//Sets FluentWait Setup
-    		List<WebElement> loadingScreen = null;
-    		FluentWait<WebDriver> fwait = new FluentWait<WebDriver>(driver)
-    				.withTimeout(Duration.ofSeconds(10))
-    				.pollingEvery(Duration.ofMillis(100))
-    				.ignoring(NoSuchElementException.class)
-    				.ignoring(TimeoutException.class);
 
-    		// First checking to see if the loading indicator is found
-    		// we catch and throw no exception here in case they aren't ignored
-    		try {
-    			threadsleep(5000);			//Adding sleep since the loading spinner sometimes takes long to come up
-    			System.out.println("Waiting to check if Loading screen is present");
-    			loadingScreen = fwait.until(new Function<WebDriver, List<WebElement>>() {
+	/**
+	 * Wait for page load in Safari browser, by checking the invisibility of loading
+	 * spinners which show in different flows
+	 *
+	 * @return true, if successful
+	 */
+	public boolean waitForPageLoadSafari() {
+		boolean ready = false;
+		if (MRScenario.browsername.equalsIgnoreCase("Safari")) {
+			// Sets FluentWait Setup
+			List<WebElement> loadingScreen = null;
+			FluentWait<WebDriver> fwait = new FluentWait<WebDriver>(driver).withTimeout(Duration.ofSeconds(10))
+					.pollingEvery(Duration.ofMillis(100)).ignoring(NoSuchElementException.class)
+					.ignoring(TimeoutException.class);
+
+			// First checking to see if the loading indicator is found
+			// we catch and throw no exception here in case they aren't ignored
+			try {
+				threadsleep(5000); // Adding sleep since the loading spinner sometimes takes long to come up
+				System.out.println("Waiting to check if Loading screen is present");
+				loadingScreen = fwait.until(new Function<WebDriver, List<WebElement>>() {
 					public List<WebElement> apply(WebDriver driver) {
 						return driver.findElements(By.xpath(
 								"//div[(((@id='overlay' and not(./ancestor::footer)) or @id='loading_fader' or @class='loading-block' or @class='spinner') and not(contains(@style,'none')))]"));
 					}
-    			});
-    		} catch (Exception e) {}
+				});
+			} catch (Exception e) {
+			}
 
+			// checking if loading indicators were found and if so we wait for it to
+			// disappear
+			if (!CollectionUtils.isEmpty(loadingScreen)) {
+				System.out.println("Loading screen visible!!! Waiting till it disappears");
+				WebDriverWait wait = new WebDriverWait(driver, 10);
+				try {
+					ready = wait.until(ExpectedConditions.invisibilityOfAllElements(loadingScreen));
+				} catch (NoSuchElementException e) {
+					// If no loading screen element found, page is ready
+					ready = true;
+				} catch (TimeoutException t) {
+					// If script timed out finding loading screen element, page is ready
+					ready = true;
+				}
+				System.out.println("Loading screen disappeared, page is ready.");
+			} else {
+				System.out.println("No loading screen element(s) found");
+			}
+		}
+		return ready;
+	}
 
-    		// checking if loading indicators were found and if so we wait for it to
-    		// disappear
-    		if(!CollectionUtils.isEmpty(loadingScreen)) {
-    			System.out.println("Loading screen visible!!! Waiting till it disappears");
-    			WebDriverWait wait = new WebDriverWait(driver, 10);
-    			try {
-    				ready = wait.until(ExpectedConditions
-    						.invisibilityOfAllElements(loadingScreen));
-    			} catch(NoSuchElementException e) {
-    				//If no loading screen element found, page is ready
-    				ready = true;
-    			} catch(TimeoutException t) {
-    				//If script timed out finding loading screen element, page is ready
-    				ready = true;
-    			}
-    			System.out.println("Loading screen disappeared, page is ready.");
-    		} else {
-    			System.out.println("No loading screen element(s) found");
-    		}
-    	}
-    	return ready;
-    }
-    
-    /**
+	/**
 	 * move mouse out from the element using jQuery event, mouseout.
 	 *
-	 * @param element the element
+	 * @param element
+	 *            the element
 	 * @return true, if successful
 	 * 
-	 * Note: Use in combination with jsMouseOver
+	 *         Note: Use in combination with jsMouseOver
 	 */
 	public boolean jsMouseOut(WebElement element) {
 		try {
@@ -1244,14 +1256,15 @@ public abstract class UhcDriver {
 
 		return true;
 	}
-	
+
 	/**
 	 * mouse over using jQuery event, mouseover.
 	 *
-	 * @param element the element
+	 * @param element
+	 *            the element
 	 * @return true, if successful
 	 * 
-	 * Note: use the jsMouseOut if using jsMouseOver for tooltip
+	 *         Note: use the jsMouseOut if using jsMouseOver for tooltip
 	 */
 	public boolean jsMouseOver(WebElement element) {
 		try {
@@ -1264,8 +1277,5 @@ public abstract class UhcDriver {
 
 		return true;
 	}
-    
-    
-    
 
 }
