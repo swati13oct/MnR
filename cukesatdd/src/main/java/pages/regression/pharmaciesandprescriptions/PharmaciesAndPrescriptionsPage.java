@@ -1400,8 +1400,8 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 
 		public void clickOnRefillAllMedications() {
 			Assert.assertTrue("PROBLEM - unable to locate Refill All Medications link text element",
-					validate(refillAllMedications.get(0), 50));
-			refillAllMedications.get(0).click();
+					validate(refillAllMedications, 50));
+			refillAllMedications.click();
 
 		}
 
