@@ -31,7 +31,8 @@ Feature: Refill Order Confirmation
     And user will view the Rx number
     And user will view the provider
     And user will view the remaining refills
-    When user select the Go to Pharmacies and Prescriptions button
+    When user select the Stop Gap Go to Pharmacies and Prescriptions button
+    #When user select the Go to Pharmacies and Prescriptions button
     Then user will view the PnP page
     And the page should be refreshed so that the status of this refill and CTA are updated per this refill transaction
 

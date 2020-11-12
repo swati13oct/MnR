@@ -27,15 +27,18 @@ public class OrderConfirmationWebElements extends UhcDriver {
 	protected WebElement ThankyouMessageOrderConfirmation;
 	
 	//@FindBy(xpath = "//div[@data-testid='oc__header__orderNumber']/div[text()='Order #']")
-	@FindBy(xpath = "//*[@data-testid='oc__header__orderNumber' and text()[1]='Order #']")
+	//@FindBy(xpath = "//*[@data-testid='oc__header__orderNumber' and text()[1]='Order #']")
+	@FindBy(xpath = "//*[@data-testid='oc__header__orderNumber']")
 	protected WebElement OrderNumberOrderConfirmation;
 	
 	//@FindBy(xpath = "//div[@data-testid='oc__header__orderDate']/div[text()='Placed on']")
-	@FindBy(xpath = "//p[@data-testid='oc__header__orderDate' and text()[1]='Placed on']")
+	//@FindBy(xpath = "//p[@data-testid='oc__header__orderDate' and text()[1]='Placed on']")
+	@FindBy(xpath = "//*[@data-testid='oc__header__orderDate']")
 	protected WebElement OrderPlacedDateOrderConfirmation;
 	
 	//@FindBy(xpath = "//div[@data-testid='oc__header__orderDate']/div[text()='Placed on']")
 	@FindBy(xpath = "//p[@data-testid='oc__header__orderDate' and text()[1]='Placed on']")
+	
 	protected WebElement OrderDateOrderConfirmation;
 	
 	@FindBy(xpath = "//div[@data-testid='oc__stepper__container']/div[@aria-current='true']/span[@data-testid='step__label']//span[text()='Order Received']")
@@ -54,7 +57,7 @@ public class OrderConfirmationWebElements extends UhcDriver {
 	@FindBy(xpath = "//p[@data-testid='oc__confirm__shippingMethod']")
 	protected WebElement ShippingMethodValueOrderConfirmation;
 	
-	@FindBy(xpath = "//p[@data-testid='oc__confirm__shippingAddress']")
+	@FindBy(xpath = "//*[@data-testid='oc__confirm__shippingAddress']")
 	protected WebElement ShippingAddressOrderConfirmation;
 	
 	@FindBy(xpath = "//p[@data-testid='oc__confirm__payment']")
@@ -104,6 +107,9 @@ public class OrderConfirmationWebElements extends UhcDriver {
 	
 	@FindBy(xpath = "//a[@data-testid='oc__navigate__pharmaRx']")
 	protected WebElement GoBackToPnPPageOrderConfirmation;
+	
+	@FindBy(xpath = "(//a[@data-testid='oc__navigate__pharmaRx'])[1]")
+	protected WebElement stopGap_GoBackToPnPPageOrderConfirmation;
 	
 	@FindBy(xpath = "//p[@data-testid='oc__shipping__estimatedDate__alternate__message']/span[text()='We will contact your provider for a new prescription and update you with a delivery date.']")
 	protected WebElement EstimationDateAlertMessage;

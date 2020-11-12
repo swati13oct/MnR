@@ -176,7 +176,7 @@ public class CheckOutSummaryWebElements extends UhcDriver {
 	@FindBy(xpath = "//ul[@aria-labelledby='select-shipping-method']/li")
 	protected List<WebElement> listOfShippingMethodDrpDwnVal;
 
-	@FindBy(xpath = "//span[@data-testid='oc__header__thanksMessage']")
+	@FindBy(xpath = "//*[@data-testid='oc__header__thanksMessage']")
 	protected WebElement orderConfirmationPageHeader;
 
 	@FindBy(xpath = "//*[@data-testid='os__rx__prescriptionsContainer']")

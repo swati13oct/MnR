@@ -19,11 +19,32 @@ public class OrderConfirmationPage extends OrderConfirmationWebElements {
 	}
 
 	public boolean validateOrderNumber() {
-		return validate(OrderNumberOrderConfirmation);
+		if (validate(OrderNumberOrderConfirmation)) {
+			String orderNumber = OrderNumberOrderConfirmation.getText()
+					.substring(OrderNumberOrderConfirmation.getText().indexOf("-") + 1);
+			System.out.println("Order Number :: " + orderNumber);
+			boolean flag = orderNumber.isEmpty();
+			if (flag) {
+				return false;
+			}
+			return true;
+		}
+		return false;
 	}
 
 	public boolean validateOrderPlacedDate() {
-		return validate(OrderPlacedDateOrderConfirmation);
+		if (validate(OrderPlacedDateOrderConfirmation)) {
+			String orderPlacementDate = OrderPlacedDateOrderConfirmation.getText()
+					.substring(OrderPlacedDateOrderConfirmation.getText().indexOf("-") + 1);
+			System.out.println("Order Placement Date :: " + orderPlacementDate);
+			boolean flag = orderPlacementDate.isEmpty();
+			if (flag) {
+				return false;
+			}
+			return true;
+		}
+		return false;		
+		//return validate(OrderPlacedDateOrderConfirmation);
 	}
 
 	public boolean validateOrderReceivedTracker() {
@@ -177,6 +198,11 @@ public class OrderConfirmationPage extends OrderConfirmationWebElements {
 	public void clickGoToPnPPage() {
 		scrollToView(GoBackToPnPPageOrderConfirmation);
 		GoBackToPnPPageOrderConfirmation.click();
+	}
+	
+	public void clickGoToPnPPageStopGap() {
+		scrollToView(stopGap_GoBackToPnPPageOrderConfirmation);
+		stopGap_GoBackToPnPPageOrderConfirmation.click();
 	}
 	
 	public boolean validateEstimationDateAlertMsg() {

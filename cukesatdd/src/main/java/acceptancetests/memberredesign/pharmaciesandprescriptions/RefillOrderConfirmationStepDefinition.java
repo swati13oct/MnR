@@ -224,6 +224,13 @@ public class RefillOrderConfirmationStepDefinition {
 				.getBean(PageConstants.ORDER_CONFIRMATION_PAGE);
 		orderConfirmationPage.clickGoToPnPPage();
 	}
+	
+	@When("^user select the Stop Gap Go to Pharmacies and Prescriptions button$")
+	public void user_select_the_Stop_Gap_Go_to_Pharmacies_and_Prescriptions_button() throws Throwable {
+		OrderConfirmationPage orderConfirmationPage = (OrderConfirmationPage) getLoginScenario()
+				.getBean(PageConstants.ORDER_CONFIRMATION_PAGE);
+		orderConfirmationPage.clickGoToPnPPageStopGap();
+	}
 
 	@Then("^user will view the PnP page$")
 	public void user_will_view_the_PnP_page() throws Throwable {
