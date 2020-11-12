@@ -20,5 +20,5 @@ Feature: Auto Refill NE
     Then user will not view the Auto Refill display
 
     Examples: 
-      | username | password | memUserName | planType | memberType |
-      | kjadha10 | Free@123 |             | PDP      | Individual |
+      | username | password | memUserName   | planType | memberType |
+      | kjadha10 | Free@123 | Everett123fish| PDP      | Individual |
