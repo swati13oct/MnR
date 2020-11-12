@@ -25,11 +25,12 @@ Feature: 1.10.3 DCE-REDESIGN- To test integration flows between DCE and VPP from
     Then the user Captures Drug costs on Drug Details Page
     And the user click on return to plan summary from Drug Details Page to return to VPP Plan Summary
     And the user validates the added drug name on plan summary page for the selected plan
-   		 | Plan Name | <planname> |
+   		 	| Plan Name | <planname> |
    		  | DrugName | <drug1> |
     And the user validates the drug cost on plan summary page for the selected plan
     		| Plan Name | <planname> |
     And the user clicks on drug dropdown on plan summary page and navigates to DCE
+    	| Plan Type | <plantype> |
   	  | Plan Name | <planname> |
   	And the user clicks on Edit your drug list link on drug details page	  
     And the user clicks on Edit button on Get Started page on DCE
@@ -100,11 +101,19 @@ Feature: 1.10.3 DCE-REDESIGN- To test integration flows between DCE and VPP from
     And clicks on Review drug cost button
     And user navigates to Review drug costs page
     And user verify the drug summary page
-    And user click on view plan details on drug summary page
-    
+    Then the user selects View Drug details for following plantype and PlanName
+      | Plan Type | <plantype> |
+      | Plan Name | <planname> |
+    Then user validates planName matches plan Name in Drug Details pages
+    Then the user validates Drug Costs section
+    Then the user validates Your Drugs sections
+    Then the user validates Monthly Drug Costs by Stage Section
+    Then the user validates Important information section
+    Then the user Clicks button to VPP Plan Details Page from Drug Details Page
+    And the user clicks on DCE button to return to Review Drug cost page
      
    @VPP_NBA_DCE_Redesign_Integration_AARP   
    Examples: 
-      |	site	| zipcode | planyear	|	plantype | county | isMultutiCounty |	planname															|	drug1		|
-      |	AARP	|   10001 | current		| MAPD     | none   | no              | AARP Medicare Advantage Plan 1 (HMO)	|	Orkambi	|
+      |	site	| zipcode | planyear	|	plantype | county | isMultutiCounty |	planname																													|	drug1		|
+      |	AARP	|   10001 | current		| MAPD     | none   | no              | UnitedHealthcare Medicare Advantage Choice Plan 1 (Regional PPO)	|	Orkambi	|
       
