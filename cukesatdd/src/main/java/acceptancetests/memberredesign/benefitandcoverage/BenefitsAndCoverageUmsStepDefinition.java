@@ -12,7 +12,9 @@ import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import org.junit.Assert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acceptancetests.data.CommonConstants;
@@ -20,6 +22,7 @@ import acceptancetests.data.LoginCommonConstants;
 import acceptancetests.data.PageConstants;
 import acceptancetests.data.PageConstantsMnR;
 import acceptancetests.memberredesign.claims.ClaimsCommonConstants;
+import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
 import cucumber.api.java.en.And;
@@ -2234,7 +2237,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	}
 
 	@Given("^user access retiree pre-enrollment site$")
-	public void access_retiree_preenrollment_site() {
+	public void access_retiree_preenrollment_site() throws InterruptedException {
 		MRScenario m=new MRScenario();
 		WebDriver wd=m.getWebDriverNew();
 
@@ -2249,12 +2252,13 @@ public class BenefitsAndCoverageUmsStepDefinition {
 			Assert.assertTrue("PROBLEM - Aborting test, this test can only be validate on stage, or offline-prod, or online-prod.  current env='"+MRScenario.environment+"'", false);
 		}
 		wd.get(testUrl);
+		CommonUtility.checkPageIsReadyNew(wd);
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 	}
 	
 	@Then("^user validate retiree pre-enrollment destination url$")
 	public void validate_retiree_preenrollment_url() {
-		WebDriver wd = getLoginScenario().getWebDriver();
+		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		String expUrl="/fehbra/home.html";
 		String actUrl=wd.getCurrentUrl();
 		Assert.assertTrue("PROBLEM - retiree pre-enrollment destination url is not as expected. "
