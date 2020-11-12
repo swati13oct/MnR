@@ -3845,17 +3845,17 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 
 	public DrugDetailsPage navigateToDCEFromDrugDropdown(String planType, String planName) {
-		if (planType.equals("MA") || planType.equals("MAPD") || planType.equalsIgnoreCase("SNP")) {
+		if (planType.equalsIgnoreCase("MA") || planType.equalsIgnoreCase("MAPD") || planType.equalsIgnoreCase("SNP")) {
 			List<WebElement> drugLinkDropdown = driver.findElements(By.xpath("//*[contains(text(),'" + planName
 					+ "')]/ancestor::div[contains(@class, 'module-plan-overview module')]//*[contains(@id,'drug-list-title-')and contains(@aria-expanded,'false')]"));
 
 			if (drugLinkDropdown.size() > 0)
-				jsClickNew(drugLinkDropdown.get(0));
+				drugLinkDropdown.get(0).click();
 
 			WebElement drugSummaryLinkDropdown = driver.findElement(By.xpath("//*[contains(text(),'" + planName
 					+ "')]/ancestor::div[contains(@class, 'module-plan-overview module')]//*[contains(@class,'edit-drugs')]"));
 
-			jsClickNew(drugSummaryLinkDropdown);
+			drugSummaryLinkDropdown.click();
 		} else {
 			WebElement drugSummaryLink = driver.findElement(By.xpath("//*[contains(text(),'" + planName
 					+ "')]/ancestor::div[contains(@class, 'module-plan-overview module swiper-slide pdpPlans ng-scope')]//descendant::a[contains(@class,'edit-drugs-link editLink')]"));
@@ -4060,38 +4060,38 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	public String StartApplication(String FirstName, String LastName) throws InterruptedException {
 		Thread.sleep(4000);
 		CommonUtility.waitForPageLoadNew(driver, Start_ApplicationBtn, 20);
-		jsClickNew(Start_ApplicationBtn);
+		Start_ApplicationBtn.click();
 		System.out.println("Start application button is clicked on application page");
 		Thread.sleep(4000);
 		CommonUtility.waitForPageLoadNew(driver, insuredStatus, 20);
-		jsClickNew(insuredStatus);
+		insuredStatus.click();
 		Thread.sleep(2000);
-		jsClickNew(nextButton);
+		nextButton.click();
 		Thread.sleep(2000);
-		jsClickNew(nextButton);
+		nextButton.click();
 		Thread.sleep(2000);
-		jsClickNew(nextButton);
+		nextButton.click();
 		Thread.sleep(2000);
-		jsClickNew(nextButton);
+		nextButton.click();
 		Thread.sleep(2000);
 		firstName.sendKeys(FirstName);
 		lastName.sendKeys(LastName);
-		jsClickNew(nextButton);
+		nextButton.click();
 		CommonUtility.waitForPageLoadNew(driver, address1, 20);
 		address1.sendKeys("TestAddress1");
 		cityName.sendKeys("TestCity");
-		jsClickNew(alternatemailingAddressBtn);
+		alternatemailingAddressBtn.click();
 		emailAddress.sendKeys("test123@test.com");
 		phoneNumber.sendKeys("1234567890");
-		jsClickNew(nextButton);
+		nextButton.click();
 		Thread.sleep(2000);
-		jsClickNew(nextButton);
+		nextButton.click();
 		Thread.sleep(2000);
-		jsClickNew(cancelButton);
+		cancelButton.click();
 		CommonUtility.waitForPageLoad(driver, ReturntoApplicationButton, 30);
-		jsClickNew(ReturntoApplicationButton);
+		ReturntoApplicationButton.click();
 		Thread.sleep(2000);
-		jsClickNew(nextButton);
+		nextButton.click();
 		return LastName;
 
 	}
@@ -4198,7 +4198,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		validateNew(RightRail_yourGuide);
 		CommonUtility.waitForPageLoadNew(driver, RightRail_yourGuide, 30);
 		String parentWindow = driver.getWindowHandle();
-		jsClickNew(RightRail_yourGuide);
+		RightRail_yourGuide.click();
 		sleepBySec(3);
 		Set<String> tabs_windows = driver.getWindowHandles();
 		Iterator<String> itr = tabs_windows.iterator();

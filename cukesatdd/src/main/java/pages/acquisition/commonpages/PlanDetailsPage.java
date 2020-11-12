@@ -32,6 +32,7 @@ import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 import gherkin.formatter.model.DataTableRow;
+import pages.acquisition.dceredesign.DrugDetailsPage;
 import pages.acquisition.dceredesign.GetStartedPage;
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.pharmacyLocator.PharmacySearchPage;
@@ -1347,5 +1348,10 @@ public class PlanDetailsPage extends UhcDriver {
 			if(!planCostTabDrugCostValueCell.getText().equals(annualDrugCost))
 				Assert.fail("Drug cost not displayed properly on prescription drugs tab");
 			
+		}
+
+		public DrugDetailsPage returnToReviewDrugCost() {
+			// TODO Auto-generated method stub
+			return null;
 		}
 }
