@@ -2243,7 +2243,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 
 		String testUrl="";
 		if (MRScenario.environment.contains("stage")) {
-			testUrl="https://www.stage-uhcretiree.uhc.com/fehbp";
+			testUrl="https://www.stage-uhcretiree.uhc.com/fehbp/home.html";
 		} else if (MRScenario.environment.equalsIgnoreCase("offline")) {
 			testUrl="https://offline.uhcretiree.com/fehbp/home.html";
 		} else if (MRScenario.environment.equalsIgnoreCase("prod")) {
