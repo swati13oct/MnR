@@ -304,7 +304,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	@FindBy(xpath = "//a[contains(@class, 'back-to-top')]")
 	private WebElement backToTop;
 
-	@FindBy(xpath = "//a[contains(@class, 'viewLink disclaimer')]")
+	@FindBy(xpath = "//a[contains(@class, 'viewLink disclaimer') and @onclick='showFooterDisclaimer();']")
 	private WebElement disclaimerInformation;
 
 	@FindBy(css = ".icon-search")
@@ -2065,6 +2065,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	}
 
 	public void validateDisclaimer() {
+		scrollToView(disclaimerInformation);
 		validateNew(disclaimerInformation);
 		// disclaimerInformation.click();
 		jsClickNew(disclaimerInformation);

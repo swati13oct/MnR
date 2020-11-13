@@ -1000,7 +1000,8 @@ public void sendEmail(String plan, String email) {
 	} else {
 		Assert.assertTrue(false, "Print Email is not configured for the given Plan :" + plan);
 	}
-	emailText.sendKeys(email);
+	//emailText.sendKeys(email);
+	jsSendkeys(emailText, email);
 	jsClickNew(emailSendButton);
 	validate(emailSuccess,15);
 	jsClickNew(emailCloseButton);

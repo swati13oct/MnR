@@ -317,6 +317,7 @@ public class DCEACQVPPPlanSummaryMobile {
 		String plantype = memberAttributesMap.get("Plan Type");
 		String planName = memberAttributesMap.get("Plan Name");
 		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario().getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		plansummaryPage.handlePlanYearSelectionPopup("current");
 		GetStartedPageMobile getStartedPage = plansummaryPage.navigateToDCERedesignFromVPPPlanCard(plantype, planName);
 		getLoginScenario().saveBean(DCERedesignCommonConstants.PLANTYPE, plantype);
 		getLoginScenario().saveBean(DCERedesignCommonConstants.PLANNAME, planName);

@@ -12,51 +12,18 @@ import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import pages.acquisition.bluelayer.AboutUsPage;
-import pages.acquisition.bluelayer.AcquisitionHomePage;
-import pages.acquisition.bluelayer.AddDrugDetails;
-import pages.acquisition.bluelayer.ContactUsUmsPage;
-import pages.acquisition.bluelayer.DisclaimersPage;
-import pages.acquisition.bluelayer.DrugCostEstimatorPage;
-import pages.acquisition.bluelayer.PrivacyPolicyUmsPage;
-import pages.acquisition.bluelayer.ProviderSearchPage;
-import pages.acquisition.bluelayer.SavingsOppurtunity;
-import pages.acquisition.bluelayer.SiteMapUMSPage;
-import pages.acquisition.commonpages.PlanDetailsPage;
-import pages.acquisition.dceredesign.GetStartedPage;
-import pages.acquisition.emailAndPrint.EmailAndPrintUtil;
-import pages.acquisition.ole.WelcomePage;
-import pages.acquisition.pharmacyLocator.PharmacySearchPage;
-import pages.acquisition.ulayer.VPPPlanSummaryPage;
-import pages.acquisition.ulayer.VPPTestHarnessPage;
-import pages.acquisition.ulayer.keywordSearchAARP;
-import pages.mobile.acquisition.bluelayer.AboutUsPageMobile;
-import pages.mobile.acquisition.bluelayer.ContactUsUmsPageMobile;
-import pages.mobile.acquisition.bluelayer.DisclaimersPageMobile;
-import pages.mobile.acquisition.bluelayer.DrugCostEstimatorPageMobile;
 import pages.mobile.acquisition.bluelayer.PlanDetailsPageMobile;
-import pages.mobile.acquisition.bluelayer.PrivacyPolicyUmsPageMobile;
-import pages.mobile.acquisition.bluelayer.ProviderSearchPageMobile;
-import pages.mobile.acquisition.bluelayer.SiteMapUMSPageMobile;
+//import pages.mobile.acquisition.bluelayer.ProviderSearchPageMobile;
+import pages.mobile.acquisition.ulayer.ProviderSearchPageMobile;
 import pages.mobile.acquisition.commonpages.PharmacySearchPageMobile;
-import pages.mobile.acquisition.dce.bluelayer.AddDrugDetailsMobile;
-import pages.mobile.acquisition.dce.bluelayer.SavingsOppurtunityMobile;
-import pages.mobile.acquisition.dceredesign.GetStartedPageMobile;
-import pages.mobile.acquisition.emailAndPrint.EmailAndPrintUtilMobile;
-import pages.mobile.acquisition.ole.WelcomePageMobile;
 import pages.mobile.acquisition.ulayer.AcquisitionHomePageMobile;
 import pages.mobile.acquisition.ulayer.VPPPlanSummaryPageMobile;
-import pages.mobile.acquisition.ulayer.VPPTestHarnessPageMobile;
-//import pages.acquisition.ulayer.keywordSearch;
-import acceptancetests.acquisition.ole.oleCommonConstants;
 import acceptancetests.acquisition.pharmacylocator.PharmacySearchCommonConstants;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstants;
-import acceptancetests.util.CommonUtility;
 import acceptancetests.acquisition.vpp.VPPCommonConstants;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
-import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -245,7 +212,7 @@ public class SiteSearchMobile {
 		String year = memberAttributesMap.get("Year");
 
 		{
-			ProviderSearchPageMobile providerSearchPage = (ProviderSearchPageMobile) getLoginScenario()
+			pages.mobile.acquisition.ulayer.ProviderSearchPageMobile providerSearchPage = (pages.mobile.acquisition.ulayer.ProviderSearchPageMobile) getLoginScenario()
 					.getBean(PageConstants.PROVIDER_SEARCH_PAGE);
 			providerSearchPage.entersZipcodeAndSelectPlanName(zipcode, planName, year);
 
@@ -258,7 +225,7 @@ public class SiteSearchMobile {
 	@When("^user select a provider and save it$")
 	public void user_selects_provider_and_saves_it1() {
 		{
-			ProviderSearchPageMobile providerSearchPage = (ProviderSearchPageMobile) getLoginScenario()
+			pages.mobile.acquisition.ulayer.ProviderSearchPageMobile providerSearchPage = (pages.mobile.acquisition.ulayer.ProviderSearchPageMobile) getLoginScenario()
 					.getBean(PageConstants.PROVIDER_SEARCH_PAGE);
 			providerSearchPage.selectsProviderFromGlobaHeader();
 
@@ -308,7 +275,7 @@ public class SiteSearchMobile {
 			
 		@When("^user selects a provider and retuns to VPP page$")
 		public void user_selects_provider_and_return_vpp_page_ulayer() {
-			ProviderSearchPageMobile providerSearchPage = (ProviderSearchPageMobile) getLoginScenario()
+			pages.mobile.acquisition.ulayer.ProviderSearchPageMobile providerSearchPage = (pages.mobile.acquisition.ulayer.ProviderSearchPageMobile) getLoginScenario()
 					.getBean(PageConstants.PROVIDER_SEARCH_PAGE);
 			VPPPlanSummaryPageMobile plansummaryPage = providerSearchPage.selectsProvider();
 			Assert.assertTrue("Not able to return to Plan Summary page", plansummaryPage != null);

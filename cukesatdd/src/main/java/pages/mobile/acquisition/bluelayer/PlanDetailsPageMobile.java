@@ -1021,13 +1021,13 @@ public class PlanDetailsPageMobile extends UhcDriver {
 	}
 
 
-	public ProviderSearchPageMobile validateLookUpYourProviderButton() {
+	public pages.mobile.acquisition.ulayer.ProviderSearchPageMobile validateLookUpYourProviderButton() {
 		// TODO Auto-generated method stub
 		validateNew(lookUpYourProviderButton);
 		CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
 		switchToNewTabNew(lookUpYourProviderButton);
 		if (driver.getCurrentUrl().contains("werally")) {
-			return new ProviderSearchPageMobile(driver);
+			return new pages.mobile.acquisition.ulayer.ProviderSearchPageMobile(driver);
 		}
 		return null;
 

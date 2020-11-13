@@ -742,7 +742,8 @@ public class PlanRecommendationEngineDrugsPageMobile extends UhcDriver {
 	public void clickDrugContinue() {
 		validate(drugsearchBox, 30);
 		threadsleep(2000);
-		continueBtn.click();
+		//continueBtn.click();
+		jsClickNew(continueBtn);
 		System.out.println("Validating " + page + " page Continue button functionality");
 	}
 }
