@@ -1370,6 +1370,8 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	}
 
 	public boolean disclaimer() {
+		WebElement element = Disclaimer.get(1);
+		waitforElementVisibilityInTime(element, 50);
 		if (Disclaimer.get(Disclaimer.size() - 1).isDisplayed()) {
 			return true;
 		} else {
