@@ -76,6 +76,7 @@ public class VppCommonStepDefinition {
  
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, aquisitionhomepage);
+		getLoginScenario().saveBean(oleCommonConstants.ACQ_SITE_NAME,site);
 		if(site.equalsIgnoreCase("AARP"))
 			aquisitionhomepage.validateSubtitle();
 	}

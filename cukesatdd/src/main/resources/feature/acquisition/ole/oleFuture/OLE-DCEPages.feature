@@ -15,9 +15,8 @@ Feature: 1.05.1.E2E for DCE to OLE Flows
     Then the user selects View plan details for following plantype and PlanName
       | Plan Type | <planType> |
       | Plan Name | <planName> |
-    Then the user clicks on Enroll Now for AARP site to start the OLE flow
-      | Plan Name | <planName> |
-    Then the user validates the Plan details on OLE
+    Then the user clicks on Enroll Now in Plan Details Page to start the OLE flow on the site
+    Then The User validates the Plan details on OLE page
     Then the user validates TFN in Welcome OLE Right Rail
     Then the user validates Learn more modal for Welcome OLE
     Then the user validates Leave OLE modal for Welcome OLE

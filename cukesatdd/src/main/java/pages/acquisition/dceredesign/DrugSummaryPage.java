@@ -13,6 +13,7 @@ import org.openqa.selenium.support.PageFactory;
 
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
+import pages.acquisition.commonpages.PlanDetailsPage;
 import pages.acquisition.commonpages.VPPPlanSummaryPage;
 
 public class DrugSummaryPage extends UhcDriver {
@@ -456,7 +457,7 @@ public class DrugSummaryPage extends UhcDriver {
 		viewDrugCostBtn.click();
 	}
 
-	public VPPPlanSummaryPage clickViewplanDetailsForPlan(String plantype, String planName) {
+	public PlanDetailsPage clickViewplanDetailsForPlan(String plantype, String planName) {
 		// TODO Auto-generated method stub
 		if (plantype.equalsIgnoreCase("MAPD")) {
 			validateNew(mapdPlanToggle);
@@ -487,9 +488,8 @@ public class DrugSummaryPage extends UhcDriver {
 			jsClickNew(PlanDetailsLinkforPlan);
 			System.out.println("View Plan details Clicked for SNP Plan : "+planName);
 
-		}
-		
-			return new VPPPlanSummaryPage(driver);
+		}		
+			return new PlanDetailsPage(driver);
 		
 	}
 }

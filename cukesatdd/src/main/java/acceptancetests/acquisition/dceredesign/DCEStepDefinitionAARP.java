@@ -22,6 +22,7 @@ import pages.acquisition.commonpages.ComparePlansPage;
 import pages.acquisition.commonpages.PlanDetailsPage;
 import pages.acquisition.commonpages.VPPPlanSummaryPage;
 import pages.acquisition.commonpages.VisitorProfilePage;
+import acceptancetests.acquisition.ole.oleCommonConstants;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstants;
 import atdd.framework.MRScenario;
@@ -1117,11 +1118,15 @@ public class DCEStepDefinitionAARP {
 		String planName = memberAttributesMap.get("Plan Name");
 		DrugSummaryPage plansummaryPage = (DrugSummaryPage) getLoginScenario()
 				.getBean(PageConstants.DCE_Redesign_DrugSummary);
-		VPPPlanSummaryPage plandetailspage= plansummaryPage.clickViewplanDetailsForPlan(plantype, planName);
+		PlanDetailsPage plandetailspage= plansummaryPage.clickViewplanDetailsForPlan(plantype, planName);
 		//getLoginScenario().saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE, plandetailspage);
 		getLoginScenario().saveBean(DCERedesignCommonConstants.PLANTYPE, plantype);
 		getLoginScenario().saveBean(DCERedesignCommonConstants.PLANNAME, planName);
-		getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plandetailspage);
+		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_NAME, planName);
+		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_TYPE, plantype);
+
+		
+		getLoginScenario().saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE, plandetailspage);
 		
 	}
 
