@@ -184,19 +184,25 @@ public class PersonalInformationPageMobile extends UhcDriver{
 			//GenderSelectFemale.click();
 			jsClickNew(GenderSelectFemale);
 		}	
-		jsSendkeys(PermanentAdd_Street,Perm_Street);
-		jsSendkeys(PermanentAdd_City,Perm_city);
+		//jsSendkeys(PermanentAdd_Street,Perm_Street);
+		PermanentAdd_Street.sendKeys(Perm_Street);
+		
+		//jsSendkeys(PermanentAdd_City,Perm_city);
+		
+		PermanentAdd_City.sendKeys(Perm_city);
 		System.out.println("Mailing Question : "+MailingQuestion);
 		if(MailingQuestion.equalsIgnoreCase("no")){
 			SameMailingAddressNo.click();
 			//CommonUtility.waitForPageLoadNew(driver,MailingAdd_Street, 30);
-			jsSendkeys(MailingAdd_Street,Mailing_Street);
-			jsSendkeys(MailingAdd_City,Mailing_City);
-			Select SelectState = new Select(MailingAdd_State_DropDown);
-			SelectState.selectByValue(Mailing_State);
-			jsSendkeys(MailingAdd_Zip,Mailing_Zip);
+			MailingAdd_Street.sendKeys(Mailing_Street);
+			MailingAdd_City.sendKeys(Mailing_City);
+			selectFromDropDownByValue(MailingAdd_State_DropDown,Mailing_State);
+			//Select SelectState = new Select(MailingAdd_State_DropDown);
+			//SelectState.selectByValue(Mailing_State);
+			
+			MailingAdd_Zip.sendKeys(Mailing_Zip);
 		}
-		jsSendkeys(Email,EmailAddress);
+		Email.sendKeys(EmailAddress);
 		if(NextBtn.isEnabled()){
 			System.out.println("Next Button is Enabled : All Required Details are entered");
 			return true;
