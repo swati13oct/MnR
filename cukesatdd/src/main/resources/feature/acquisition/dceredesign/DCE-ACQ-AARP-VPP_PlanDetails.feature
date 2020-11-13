@@ -302,3 +302,29 @@ Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanDetails AARP - To test DCE - VPP Plan De
     Examples: 
       | TID   | zipcode | isMultutiCounty | county         | plantype | planName                                       | monthlyPremium | yearlyPremium | planyear |
       | 15638 |   53503 | No              | Iowa County    | MAPD     | UnitedHealthcare Medicare Advantage Open (PPO) | $47            | $564          | current  |
+      
+      @dceSwitchtoGenericNBA @F505210
+      
+         Scenario Outline: Test to verify Switch to generic NBA on DCE Details Page
+   Given the user is on the AARP medicare site landing page
+    When the user performs plan search using following information in the AARP site
+      | Zip Code        | <zipcode>         |
+      | County Name     | <county>          |
+      | Is Multi County | <isMultutiCounty> |
+    Then the user navigates to the plan details for the given plan type in AARP site
+      | Plan Type | <plantype> |
+      | Plan Name | <planname> |
+    And I access the DCE Redesign from Plan Details
+    Then the user validates Get Started Page
+    Then the user clicks on Build Drug List to navigate to Build Drug List Page
+    Then the user searches and adds the following Drug to Drug List
+      | DrugName | <drug1> | 
+     And clicks on Review drug cost button  
+     Then user verify and click on switch to generic NBA on drug detail page
+     Then verify drug is switched to generic on detail page
+     
+      Examples: 
+      | zipcode | plantype | county       | isMultutiCounty | drug1     |drug2|planname                                              | 
+      |   78006 | MAPD      | Bexar County | yes             | Lipitor | orfadin|AARP Medicare Advantage Choice (PPO)  |
+      
+      

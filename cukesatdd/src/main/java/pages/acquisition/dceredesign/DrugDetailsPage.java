@@ -218,6 +218,21 @@ public class DrugDetailsPage extends UhcDriver {
 	@FindBy(xpath = "//*[@id='selectPharmacyBtn0']/..//p/span")
 	private WebElement pharmacyNameSelected;
 	
+	@FindBy(xpath = "//*[@id='switch_1N1V3S593B_widget']")
+	private WebElement switchToGenericNBABtn;
+	
+	
+	
+	@FindBy(xpath = "//span[contains(text(),'Lipitor')]/following::a[contains(@id,'switchToGenericLink')]")
+	private WebElement lipitorSwitchToGenericBtn;
+
+	@FindBy(xpath = "//button[@type='submit']//span[text()='Switch to Generic']")
+	private WebElement switchToGenericSubmitBtn;
+	
+	
+	@FindBy(id = "drugPricingTitleTxt")
+	private WebElement drugTitle;
+	
 	public DrugDetailsPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -832,4 +847,33 @@ public class DrugDetailsPage extends UhcDriver {
 		System.out.println(pharmacy);
 		Assert.assertTrue("Pharmacy not updated", selectedPharmacyName.contains(pharmacy));
 	}
+	
+	public void clickswitchToGeneric() throws InterruptedException {
+		Thread.sleep(6000);
+		validate(drugTitle);
+		validate(switchToGenericNBABtn);
+		switchToGenericNBABtn.click();
+		validate(switchToGenericSubmitBtn);
+		switchToGenericSubmitBtn.click();
+	}
+	
+	@FindBy(xpath = "//table/tbody/tr/td[1]/div/div/img[contains(@src,'check-icon@2x.png')]")
+	private WebElement switchToGenericIcon;
+	
+	@FindBy(id = "cancelicon")
+	private WebElement drugClose;
+	
+
+	public void verifyDrugisSwitchedtoGeneric() throws InterruptedException {
+		Thread.sleep(6000);
+		//validate(drugTitle);
+		/*
+		 * for(int i=0;i<drugNames.size();i++) {
+		 * System.out.println(drugNames.get(i).getText()); }
+		 */
+		validate(switchToGenericIcon);
+		
+		Assert.assertTrue("Drug not switched to generic", switchToGenericIcon.isDisplayed());
+	}	
 }
+
