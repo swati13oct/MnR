@@ -136,7 +136,7 @@ public class SiteSearchMobile {
 		String year = memberAttributesMap.get("Year");
 
 		{
-			ProviderSearchPageMobile providerSearchPage = (ProviderSearchPageMobile) getLoginScenario()
+			pages.mobile.acquisition.ulayer.ProviderSearchPageMobile providerSearchPage = (pages.mobile.acquisition.ulayer.ProviderSearchPageMobile) getLoginScenario()
 					.getBean(PageConstants.PROVIDER_SEARCH_PAGE);
 			providerSearchPage.entersZipcodeAndSelectPlanName(zipcode, planName, year);
 
@@ -149,7 +149,7 @@ public class SiteSearchMobile {
 	@When("^user selects a provider and saves it$")
 	public void user_selects_provider_and_saves_it() {
 		{
-			ProviderSearchPageMobile providerSearchPage = (ProviderSearchPageMobile) getLoginScenario()
+			pages.mobile.acquisition.ulayer.ProviderSearchPageMobile providerSearchPage = (pages.mobile.acquisition.ulayer.ProviderSearchPageMobile) getLoginScenario()
 					.getBean(PageConstants.PROVIDER_SEARCH_PAGE);
 			providerSearchPage.selectsProviderFromGlobaHeader();
 
@@ -175,7 +175,7 @@ public class SiteSearchMobile {
 		String planYear = memberAttributesMap.get("Year");
 
 		{
-			ProviderSearchPageMobile providerSearchPage = (ProviderSearchPageMobile) getLoginScenario()
+			pages.mobile.acquisition.ulayer.ProviderSearchPageMobile providerSearchPage = (pages.mobile.acquisition.ulayer.ProviderSearchPageMobile) getLoginScenario()
 					.getBean(PageConstants.PROVIDER_SEARCH_PAGE);
 
 			int intPlanCounts = providerSearchPage.entersZipcodeAndPlancountblayer(zipcode, planYear);
@@ -197,8 +197,8 @@ public class SiteSearchMobile {
 		AcquisitionHomePageMobile acquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 
-		pages.mobile.acquisition.bluelayer.ProviderSearchPageMobile providerSearchPage = acquisitionhomepage
-				.clicksOnRallyToolFromHomePage();
+		pages.mobile.acquisition.ulayer.ProviderSearchPageMobile providerSearchPage = acquisitionhomepage
+				.clicksOnRallyToolFromHomePages();
 
 		if (providerSearchPage != null) {
 			getLoginScenario().saveBean(PageConstants.PROVIDER_SEARCH_PAGE, providerSearchPage);

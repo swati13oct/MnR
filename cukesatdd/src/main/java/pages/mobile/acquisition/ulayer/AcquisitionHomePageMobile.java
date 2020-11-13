@@ -1687,7 +1687,10 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		// action.moveToElement(navigationSectionHomeLink).moveToElement(ourPlansHoverLink).build().perform();
 		jsMouseOver(navigationSectionHomeLink);
 		jsMouseOver(ourPlansHoverLink);
-		validateNew(providerSearchFromGlobalHeader);
+		MobileMenuShopTool();
+		scrollToView(providerSearchFromGlobalHeader);
+		jsClickNew(providerSearchFromGlobalHeader);
+		//(providerSearchFromGlobalHeader);
 
 		switchToNewTabNew(providerSearchFromGlobalHeader);
 
@@ -1699,6 +1702,23 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		}
 		return null;
 	}
+	
+	
+
+	public pages.mobile.acquisition.ulayer.ProviderSearchPageMobile clicksOnRallyToolFromHomePages() {
+		validateNew(providerSearchFromHomeScreen);
+
+		switchToNewTabNew(providerSearchFromHomeScreen);
+
+		CommonUtility.checkPageIsReadyNew(driver);
+		if (driver.getCurrentUrl().contains("werally")) {
+
+			return new pages.mobile.acquisition.ulayer.ProviderSearchPageMobile(driver);
+
+		}
+		return null;
+	}
+	
 
 	public pages.mobile.acquisition.bluelayer.ProviderSearchPageMobile clicksOnRallyToolFromHomePage() {
 		validateNew(providerSearchFromHomeScreen);
@@ -1713,6 +1733,8 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		}
 		return null;
 	}
+	
+	
 
 	public AcquisitionHomePageMobile hovershopaplan() throws InterruptedException {
 

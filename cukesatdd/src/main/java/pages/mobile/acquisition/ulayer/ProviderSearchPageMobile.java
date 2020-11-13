@@ -187,7 +187,34 @@ public class ProviderSearchPageMobile extends UhcDriver {
 		return null;
 
 	}
+	
 
+	public int entersZipcodeAndPlancountblayer(String zipcode, String planYear) {
+
+		validateNew(zipCodeTextfield);	
+		zipCodeTextfield.sendKeys(zipcode);
+		validateNew(continueButton);
+		continueButton.click();
+		selectYear(planYear);
+	    List<WebElement> topicDropDownValues = driver.findElements(By.xpath("//li//button[attribute::data-ui-element-name]"));
+	   
+	    return topicDropDownValues.size();
+	}
+	
+	public void selectYear(String year) {
+		if (year.contains("current")) {
+			if (validate(currentYrTile)) {
+				currentYrTile.click();
+			} else {
+				System.out.println("Current year tile is not present");
+			}
+		} else if (year.contains("next")) {
+			if (validate(nextYrTile))
+				nextYrTile.click();
+		}
+		
+	}
+	
 	@FindBy(xpath = "(//button[contains(@class,'saved-provider-button')])[1]")
 	private WebElement SaveBtn;
 
@@ -380,8 +407,10 @@ public class ProviderSearchPageMobile extends UhcDriver {
 		CommonUtility.waitForPageLoadNew(driver, PrimaryCarePhysician, 30);
 		PrimaryCarePhysician.click();
 
-		CommonUtility.waitForPageLoadNew(driver, selectProviderBtn, 45);
-		selectProviderBtn.click();
+		//CommonUtility.waitForPageLoadNew(driver, selectProviderBtn, 45);
+		scrollToView(selectProviderBtn);
+		//selectProviderBtn.click();
+		jsClickNew(selectProviderBtn);
 
 		if (validate(selectLocationOption)) {
 			selectLocationOption.click();

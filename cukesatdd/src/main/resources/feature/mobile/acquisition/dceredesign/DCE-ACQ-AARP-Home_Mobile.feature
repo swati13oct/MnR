@@ -2,9 +2,8 @@
 Feature: 1.10.1 DCE-REDISIGN AARP - To test Acq Home to NEW DCE Flows
 
   @DCE_HomeIcon @OnlyProd
-  Scenario Outline: To verify DCE REDESIGN flow from Ulayer home page
-    
-    Given the user is on medicare acquisition site landing page
+  Scenario Outline: To verify DCE REDESIGN flow from <site> home page
+    Given the user is on medicare acquisition site landing page 
       | Site | <site> |
     When I access the acquisition DCE Redesign from home page
     Then the user validates Get Started Page
@@ -30,12 +29,18 @@ Feature: 1.10.1 DCE-REDISIGN AARP - To test Acq Home to NEW DCE Flows
     Then the user validates Your Drugs sections
     Then the user validates Monthly Drug Costs by Stage Section
     Then the user validates Important information section
+    #Then the user validates Disclaimers section
     Then the user validates link to Drug Summary Page
 
     @DCE_HomeIcon_AEP_AARP
     Examples: 
       | drug1   | drug2  | drug3   | drug4    | zipCode | planType | planName                                            | site |
       | Orkambi | Fanapt | Humalog | Adderall |   80002 | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) | AARP |
+
+    #@DCE_HomeIcon_AEP_UHC
+    #Examples: 
+      #| drug1   | drug2  | drug3   | drug4    | zipCode | planType | planName                                            | site |
+      #| Orkambi | Fanapt | Humalog | Adderall |   80002 | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) | UHC  |
 
   @DCE_HomeSubNav @DCE_HomeSubNav_AEP
   Scenario Outline: To verify DCE REDESIGN flow from Ulayer home page
@@ -61,3 +66,8 @@ Feature: 1.10.1 DCE-REDISIGN AARP - To test Acq Home to NEW DCE Flows
     Examples: 
       | drug1   | drug2  | drug3   | drug4    | zipCode | site |
       | Orkambi | Fanapt | Humalog | Adderall |   80002 | AARP |
+
+    #@DCE_HomeSubNav_AEP_UHC
+    #Examples: 
+      #| drug1   | drug2  | drug3   | drug4    | zipCode | site |
+      #| Orkambi | Fanapt | Humalog | Adderall |   80002 | UHC  |
