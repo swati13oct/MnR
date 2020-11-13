@@ -195,12 +195,11 @@ public class PlanRecommendationEngineLandingAndZipcodeMobilePages extends UhcDri
 		zipcodePage();
 		waitforElementVisibilityInTime(zipCode, 45);
 
-		// ((AppiumDriver) driver).getKeyboard();
-		// sendkeys(zipCode, zipcode);
+		sendkeys(zipCode, zipcode);
 
 		// zipCode.sendKeys(Keys.ENTER);
 		// getkeypad();
-		jsSendkeys(zipCode, zipcode);
+		// jsSendkeys(zipCode, zipcode);
 
 		waitforElementVisibilityInTime(countyInfo, 45);
 		threadsleep(5000);
@@ -278,7 +277,7 @@ public class PlanRecommendationEngineLandingAndZipcodeMobilePages extends UhcDri
 		validate(pageStepsNumberName, 30);
 		// Assert.assertTrue(pageStepsNumberName.getText().contains("Step 1:
 		// Location"));
-		//validate(pageProgressPercentage, 30);
+		// validate(pageProgressPercentage, 30);
 		scrollToView(pageProgressPercentage);
 		Assert.assertTrue(pageProgressPercentage.getText().contains("0% Complete"));
 		validate(pageRequiredInfo);

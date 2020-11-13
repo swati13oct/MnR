@@ -1,10 +1,10 @@
-@vppPlanSummaryUHC
-Feature: 2.01.1-Vpp to plan Summary UHC Scenarios
+@vppPlanSummaryAARP
+Feature: 1.01.1-Vpp to plan Summary AARP Scenarios
 
-  @vppPlanSummaryUHCRegressionMobile @OnlyProd @vppPlanSummaryUHCRegression
+  @vppPlanSummaryAARP01 @vppPlanSummaryAARPRun01 @vppPlanSummaryAARPRegression
   Scenario Outline: TID: <TID> -plan type: <plantype> - Verify plan cards on plan summary page in <site> site
     Given the user is on medicare acquisition site landing page
-      | Site | <site> |
+    	|Site| <site>|
     When the user performs plan search using following information
       | Zip Code        | <zipcode>         |
       | Is Multi County | <isMultutiCounty> |
@@ -12,7 +12,7 @@ Feature: 2.01.1-Vpp to plan Summary UHC Scenarios
     And the user views the plans of the below plan type
       | Plan Type | <plantype> |
     And the user selects plan year
-      | Plan Year | <planyear> |
+    	|Plan Year	| <planyear>|
     #    And the user validates available plans for selected plan types in the AARP site
     And the user validates plan summary for the below plan
       | Plan Name | <planName> |
@@ -21,15 +21,15 @@ Feature: 2.01.1-Vpp to plan Summary UHC Scenarios
     Then the user views plan details of the above selected plan and validates
       | Plan Name | <planName> |
     Then the user clicks on back to all plans link and validates its redirection to Plan Summary
-    Then the user validates below plan benefit values for the above selected plan
-      | Monthly Premium            | <monthlyPremium>         |
-      | Primary Care Physician     | <primaryCarePhysician>   |
-      | Specialist                 | <specialist>             |
-      | Referral Required          | <referralRequired>       |
-      | Out Of Pocket Maximum      | <outOfPocketMaximum>     |
-      | Prescription Drugs, Tier 1 | <prescriptionDrugsTier1> |
-      | Plan Type                  | <plantype>               |
-      | Annual Deductible          | <annualDeductible>       |
+#    Then the user validates below plan benefit values for the above selected plan
+#      | Monthly Premium            | <monthlyPremium>         |
+#      | Primary Care Physician     | <primaryCarePhysician>   |
+#      | Specialist                 | <specialist>             |
+#      | Referral Required          | <referralRequired>       |
+#      | Out Of Pocket Maximum      | <outOfPocketMaximum>     |
+#      | Prescription Drugs, Tier 1 | <prescriptionDrugsTier1> |
+#     | Plan Type                  | <plantype>               |
+#      | Annual Deductible          | <annualDeductible>       |
     Then the user hover overs the tool tip for Why is my premium 0 and validates the text
     # New steps for DCE Redesign
     And I access the DCE Redesign from Plan Summary for mentioned plan
@@ -44,219 +44,239 @@ Feature: 2.01.1-Vpp to plan Summary UHC Scenarios
     Then the user validates Is my provider covered link
     Then the user clicks on Enroll Now and validates the Welcome to OLE Page
 
-    @OnlyProd
     Examples: 
-      | TID   | zipcode | site | isMultutiCounty | county             | plantype | planName                                            | monthlyPremium | primaryCarePhysician | specialist | referralRequired | outOfPocketMaximum | prescriptionDrugsTier1 | annualDeductible | planyear |
-      | 15545 |   90210 | UHC  | NO              | Los Angeles County | MAPD     | AARP Medicare Advantage SecureHorizons Plan 1 (HMO) | $0             | $0  copay            | $0  copay  | Yes              | $3,400.00          | $4  copay              |                  | current  |
+      | TID   | zipcode | site| isMultutiCounty | county             | plantype | planName                                            | monthlyPremium | primaryCarePhysician | specialist | referralRequired | outOfPocketMaximum | prescriptionDrugsTier1                     | annualDeductible | planyear |
+      | 15545 |   90210 | AARP| NO              | Los Angeles County | MAPD     | AARP Medicare Advantage SecureHorizons Plan 1 (HMO) | $0             | $0  copay            | $0  copay  | Yes              | $3,400.00          | $4  copay                                  |                  | next |
+      | 15546 |   28105 | AARP| YES             | Mecklenburg County | SNP      | UnitedHealthcare Dual Complete RP (Regional PPO D-SNP)      | $0             | $0  copay            | $0  copay  | No               | $0 - $6,700.00     | $0, $1.25, $3.40 copay, or 15% coinsurance |                  |  next |
 
-    #     | 15546 |   28105 | UHC| YES             | Mecklenburg County | SNP      | UnitedHealthcare Dual Complete (HMO-POS D-SNP)      | $0             | $0  copay            | $0  copay  | No               | $0 - $6,700.00     | $0, $1.25, $3.40 copay, or 15% coinsurance |                  |  current |
-    Examples: 
-      | TID   | zipcode | site | isMultutiCounty | county             | plantype | planName                                               | monthlyPremium | primaryCarePhysician | specialist | referralRequired | outOfPocketMaximum | prescriptionDrugsTier1 | annualDeductible                                      | planyear |
-      | 15542 |   90210 | UHC  | NO              | Los Angeles County | MA       | AARP Medicare Advantage SecureHorizons Essential (HMO) | $0             | $5  copay            | $10  copay | Yes              | $4,900.00          | No drug coverage       |                                                       | current  |
-      | 15543 |   90210 | UHC  | NO              | Los Angeles County | PDP      | AARP MedicareRx Walgreens (PDP)                        | $0             |                      |            |                  |                    | $0  copay              | $0 for Tier 1, Tier 2 $415 for Tier 3, Tier 4, Tier 5 | current  |
-
-  @vppPlanSummaryUHC02 @vppPlanSummaryUHCRun01 @vppPlanSummaryUHCRegression
-  Scenario Outline: TID: <TID> -plan type: <plantype> - Verify right rail on plan summary page in UMS site
-    Given the user is on uhcmedicaresolutions site landing page
-    When the user does plan search using the following information in UMS site
+  @vppPlanSummaryAARP02 @vppPlanSummaryAARPRun01 @vppPlanSummaryAARPRegression
+  Scenario Outline: TID: <TID> -plan type: <plantype> - Verify right rail on plan summary page in AARP site
+    Given the user is on AARP medicare acquisition site landing page
+    When the user does plan search using the following information in the AARP site
       | Zip Code        | <zipcode>         |
       | Is Multi County | <isMultutiCounty> |
       | County Name     | <county>          |
-    When user views plans of the below plan type in UMS site
+    And the user views the plans of the below plan type in AARP site
       | Plan Type | <plantype> |
-    And the user selects plan year for the UMS site
-      | Plan Year | <planyear> |
-    Then the user validates the right rail in UMS Site
-    Then the user validates the Need Help Section in the right rail in ums Site
-    Then the user validates the TFN in the Need Help Section in ums Site
-    And the user validates and clicks on Find an agent in your area link in ums Site
-    Then the user validates Get a free medicare Guide section in the right rail in ums Site
-    Then the user enters the following information in the Get a free medicare Guide section in ums Site
+    And the user selects plan year for the AARP site
+    	|Plan Year	| <planyear>|
+    Then the user validates the right rail in AARP Site
+    Then the user validates the Need Help Section in the right rail in aarp Site
+    Then the user validates the TFN in the Need Help Section in aarp Site
+    And the user validates and clicks on Find an agent in your area link in aarp Site
+    Then the user validates Get a free medicare Guide section in the right rail in aarp Site
+    Then the user enters the following information in the Get a free medicare Guide section in aarp Site
       | First Name    | <firstName>    |
       | Last Name     | <lastName>     |
       | Email Address | <emailAddress> |
-    Then the user validates Plan Selector Tool section in the right rail in ums Site
-    Then the user validates Plan Selector Page after clicking on Start Plan Selector button in ums Site
-
-    # Then the user validates Need More Information section in the right rail in ums Site
-    # Then the user validates Medicare Plans Video Guide Page after clicking Choose a video link in ums Site
-    Examples: 
-      | TID   | zipcode | isMultutiCounty | county             | plantype | firstName | lastName | emailAddress  | planyear |
-      | 15549 |   90210 | NO              | Los Angeles County | MAPD     | test      | test     | test@test.com | current  |
-
-  @vppPlanSummaryUHC03 @vppPlanSummaryUHCRun01
-  Scenario Outline: UD: <UID> -zipcode: <zipcode> - Verify user can save and unsave favorite plans on view plan preview page on UHC site
-    Given the user is on the uhcmedicaresolutions site landing page
-    When the user performs plan search using following information in UMS site
-      | Zip Code        | <zipcode>       |
-      | County Name     | <county>        |
-      | Is Multi County | <isMultiCounty> |
-    Then user validates plan count for all plan types on plan summary page in the UMS site
-    Then user validates selected plans can be saved as favorite on UHC site
-      | MA Test Plans  | <MA_testPlans>  |
-      | PDP Test Plans | <PDP_testPlans> |
-      | SNP Test Plans | <SNP_testPlans> |
-    Then user validates saved favorite plans will be stored within same session after zipcode change from Home on UHC site
-      | Zip Code        | <zipcode>       |
-      | County Name     | <county>        |
-      | Is Multi County | <isMultiCounty> |
-      | MA Test Plans   | <MA_testPlans>  |
-      | PDP Test Plans  | <PDP_testPlans> |
-      | SNP Test Plans  | <SNP_testPlans> |
-    Then user validates saved favorite plans will be stored within same session after zipcode change from Shop For a Plan on UHC site
-      | Zip Code        | <zipcode>       |
-      | County Name     | <county>        |
-      | Is Multi County | <isMultiCounty> |
-      | MA Test Plans   | <MA_testPlans>  |
-      | PDP Test Plans  | <PDP_testPlans> |
-      | SNP Test Plans  | <SNP_testPlans> |
-    Then user validates saved favorite plans will be stored within same session after zipcode change within VPP page on UHC site
-      | Zip Code        | <zipcode>       |
-      | County Name     | <county>        |
-      | Is Multi County | <isMultiCounty> |
-      | MA Test Plans   | <MA_testPlans>  |
-      | PDP Test Plans  | <PDP_testPlans> |
-      | SNP Test Plans  | <SNP_testPlans> |
-    Then user validates ability to unsave a saved plan on UHC site
-      | MA Test Plans  | <MA_testPlans>  |
-      | PDP Test Plans | <PDP_testPlans> |
-      | SNP Test Plans | <SNP_testPlans> |
-    Then user validates unsave favorite plans will be stored within same session after zipcode change from Home on UHC site
-      | Zip Code        | <zipcode>       |
-      | County Name     | <county>        |
-      | Is Multi County | <isMultiCounty> |
-      | MA Test Plans   | <MA_testPlans>  |
-      | PDP Test Plans  | <PDP_testPlans> |
-      | SNP Test Plans  | <SNP_testPlans> |
-    Then user validates unsave favorite plans will be stored within same session after zipcode change from Shop For a Plan on UHC site
-      | Zip Code        | <zipcode>       |
-      | County Name     | <county>        |
-      | Is Multi County | <isMultiCounty> |
-      | MA Test Plans   | <MA_testPlans>  |
-      | PDP Test Plans  | <PDP_testPlans> |
-      | SNP Test Plans  | <SNP_testPlans> |
-    Then user validates unsave favorite plans will be stored within same session after zipcode change within VPP page on UHC site
-      | Zip Code        | <zipcode>       |
-      | County Name     | <county>        |
-      | Is Multi County | <isMultiCounty> |
-      | MA Test Plans   | <MA_testPlans>  |
-      | PDP Test Plans  | <PDP_testPlans> |
-      | SNP Test Plans  | <SNP_testPlans> |
+    # Then the user validates Need More Information section in the right rail in aarp Site
+    # Then the user validates Medicare Plans Video Guide Page after clicking Choose a video link in aarp Site
+    Then the user validates Plan Selector Tool section in the right rail in aarp Site
+    Then the user validates Plan Selector Page after clicking on Start Plan Selector button in aarp Site
 
     Examples: 
-      | UID | zipcode | isMultiCounty | county | MA_testPlans | PDP_testPlans | SNP_testPlans |
+      | TID   | zipcode | isMultutiCounty | county             | plantype | firstName | lastName | emailAddress  |planyear|
+      | 15550 |   90210 | NO              | Los Angeles County | MAPD     | test      | test     | test@test.com |current|
 
-  #      | 1598162 |   80001 | NO            | Jefferson County | AARP Medicare Advantage SecureHorizons Plan 1 (HMO),AARP Medicare Advantage SecureHorizons Plan 2 (HMO)| AARP MedicareRx Preferred (PDP),AARP MedicareRx Saver Plus (PDP) | UnitedHealthcare Dual Complete (HMO D-SNP) |
-  @vppPlanSummaryUHC04
-  Scenario Outline: UID: <UID> -zipcode: <zipcode> - Verify user can favorite plans will be saved within session on view plan preview page on UHC site
-    Given the user is on the uhcmedicaresolutions site landing page
-    When the user performs plan search using following information in UMS site
+  @vppPlanSummaryAARP03 @vppPlanSummaryAARPRun01 @vppPlanSummaryAARPRegression
+  Scenario Outline: 7UID: <UID> -zipcode: <zipcode> - Verify user can save and unsave favorite plans on view plan preview page on AARP site
+    Given the user is on AARP medicare acquisition site landing page
+    When the user performs plan search using following information in the AARP site
       | Zip Code        | <zipcode>       |
       | County Name     | <county>        |
       | Is Multi County | <isMultiCounty> |
-    Then user validates plan count for all plan types on plan summary page in the UMS site
-    Then user validates selected plans can be saved as favorite on UHC site
+    Then user validates plan count for all plan types on plan summary page in the AARP site
+    Then user validates selected plans can be saved as favorite on AARP site
       | MA Test Plans  | <MA_testPlans>  |
       | PDP Test Plans | <PDP_testPlans> |
       | SNP Test Plans | <SNP_testPlans> |
-    Then user closes the original tab and open new tab for UHC site
-    Then the user performs plan search using following information in UMS site
+    Then user validates saved favorite plans will be stored within same session after zipcode change from Home on AARP site
       | Zip Code        | <zipcode>       |
       | County Name     | <county>        |
       | Is Multi County | <isMultiCounty> |
-    Then user validates plans remain saved within same session for UHC site
+      | MA Test Plans   | <MA_testPlans>  |
+      | PDP Test Plans  | <PDP_testPlans> |
+      | SNP Test Plans  | <SNP_testPlans> |
+    Then user validates saved favorite plans will be stored within same session after zipcode change from Shop For a Plan on AARP site
+      | Zip Code        | <zipcode>       |
+      | County Name     | <county>        |
+      | Is Multi County | <isMultiCounty> |
+      | MA Test Plans   | <MA_testPlans>  |
+      | PDP Test Plans  | <PDP_testPlans> |
+      | SNP Test Plans  | <SNP_testPlans> |
+    Then user validates saved favorite plans will be stored within same session after zipcode change within VPP page on AARP site
+      | Zip Code        | <zipcode>       |
+      | County Name     | <county>        |
+      | Is Multi County | <isMultiCounty> |
+      | MA Test Plans   | <MA_testPlans>  |
+      | PDP Test Plans  | <PDP_testPlans> |
+      | SNP Test Plans  | <SNP_testPlans> |
+    Then user validates ability to unsave a saved plan on AARP site
       | MA Test Plans  | <MA_testPlans>  |
       | PDP Test Plans | <PDP_testPlans> |
       | SNP Test Plans | <SNP_testPlans> |
+    Then user validates unsave favorite plans will be stored within same session after zipcode change from Home on AARP site
+      | Zip Code        | <zipcode>       |
+      | County Name     | <county>        |
+      | Is Multi County | <isMultiCounty> |
+      | MA Test Plans   | <MA_testPlans>  |
+      | PDP Test Plans  | <PDP_testPlans> |
+      | SNP Test Plans  | <SNP_testPlans> |
+    Then user validates unsave favorite plans will be stored within same session after zipcode change from Shop For a Plan on AARP site
+      | Zip Code        | <zipcode>       |
+      | County Name     | <county>        |
+      | Is Multi County | <isMultiCounty> |
+      | MA Test Plans   | <MA_testPlans>  |
+      | PDP Test Plans  | <PDP_testPlans> |
+      | SNP Test Plans  | <SNP_testPlans> |
+    Then user validates unsave favorite plans will be stored within same session after zipcode change within VPP page on AARP site
+      | Zip Code        | <zipcode>       |
+      | County Name     | <county>        |
+      | Is Multi County | <isMultiCounty> |
+      | MA Test Plans   | <MA_testPlans>  |
+      | PDP Test Plans  | <PDP_testPlans> |
+      | SNP Test Plans  | <SNP_testPlans> |
 
     Examples: 
       | UID     | zipcode | isMultiCounty | county           | MA_testPlans                                                                                               | PDP_testPlans                                                    | SNP_testPlans                              |
-      | 1598162 |   80001 | NO            | Jefferson County | AARP Medicare Advantage SecureHorizons Essential (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO) | AARP MedicareRx Preferred (PDP),AARP MedicareRx Saver Plus (PDP) | UnitedHealthcare Dual Complete (HMO D-SNP) |
+#      | 1598162 |   80001 | NO            | Jefferson County | AARP Medicare Advantage SecureHorizons Essential (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO) | AARP MedicareRx Preferred (PDP),AARP MedicareRx Saver Plus (PDP) | UnitedHealthcare Dual Complete (HMO D-SNP) |
 
-  @vppPlanSummaryUHC05 @vppPlanSummaryUHCRun01 @vppPlanSummaryUHCRegression
+  @vppPlanSummaryAARP04
+  Scenario Outline: UID: <UID> -zipcode: <zipcode> - Verify user can favorite plans will be saved within session on view plan preview page on AARP site
+    Given the user is on AARP medicare acquisition site landing page
+    When the user performs plan search using following information in the AARP site
+      | Zip Code        | <zipcode>       |
+      | County Name     | <county>        |
+      | Is Multi County | <isMultiCounty> |
+      And the user views the plans of the below plan type in AARP site
+      | Plan Type | <plantype> |
+    And the user selects plan year for the AARP site
+    	|Plan Year	| <planyear>|
+    Then user validates plan count for all plan types on plan summary page in the AARP site
+    Then user validates selected plans can be saved as favorite on AARP site
+      | MA Test Plans  | <MA_testPlans>  |
+      | PDP Test Plans | <PDP_testPlans> |
+      | SNP Test Plans | <SNP_testPlans> |
+    Then user closes the original tab and open new tab for AARP site
+    Then the user performs plan search using following information in the AARP site
+      | Zip Code        | <zipcode>       |
+      | County Name     | <county>        |
+      | Is Multi County | <isMultiCounty> |
+    Then user validates plans remain saved within same session for AARP site
+      | MA Test Plans  | <MA_testPlans>  |
+      | PDP Test Plans | <PDP_testPlans> |
+      | SNP Test Plans | <SNP_testPlans> |
+
+    Examples: 
+      | UID     | zipcode | isMultiCounty | county           | MA_testPlans                                                                                               | PDP_testPlans                                                    | SNP_testPlans                              |planyear|
+      | 1598162 |   80001 | NO            | Jefferson County | AARP Medicare Advantage SecureHorizons Essential (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO) | AARP MedicareRx Preferred (PDP),AARP MedicareRx Saver Plus (PDP) | UnitedHealthcare Dual Complete (HMO D-SNP) |current|
+
+  @vppPlanSummaryAARP05
+  Scenario Outline: Zipcode: <zipcode> -plan type: <plantype> - Verify plan summary for SNP plan types in AARP site
+    Given the user is on medicare acquisition site landing page
+    	|Site| <site>|
+    When the user performs plan search using following information
+      | Zip Code        | <zipcode>         |
+      #| County Name | <county>  |
+      | Is Multi County | <isMultutiCounty> |
+    Then user validates plan count for all plan types on plan summary page
+    And the user views the plans of the below plan type
+      | Plan Type | <plantype> |
+    And the user selects plan year
+    	|Plan Year	| <planyear>|
+    And the user validates the available plans for selected plan types
+    Then the user validates plan summary for the below plan
+      | Plan Name | <planName> |
+
+    Examples: 
+      |	site	| zipcode | isMultiCounty | county             | plantype | planName                                       |planyear|
+      |	AARP	|   80001 | NO            | Los Angeles County | SNP      | UnitedHealthcare Nursing Home Plan (PPO I-SNP) |current|
+
+  @vppPlanSummaryAARP06 @vppPlanSummaryAARPRun02 @vppPlanSummaryAARPRegression
   Scenario Outline: Validate Cancel button for Multi Cunty Pop-up on VPP for Change Location
-    Given the user is on the uhcmedicaresolutions site landing page
-    When the user performs plan search using following information in UMS site
-      | Zip Code        | <zipcode>       |
-      | County Name     | <county>        |
-      | Is Multi County | <isMultiCounty> |
-    When the user performs Change Location on Plan Summary Page using following MultiCounty Zip information in the UHC site
+    Given the user is on AARP medicare acquisition site landing page
+    When the user performs plan search using following information in the AARP site
+      | Zip Code        | <zipcode>         |
+      | County Name     | <county>          |
+      | Is Multi County | <isMultutiCounty> |
+    When the user performs Change Location on Plan Summary Page using following MultiCounty Zip information in the AARP site
       | Zip Code | <MultiCOuntyzipcode> |
-    Then the user validates the Cancel button for Multi COunty Pop-up lands on enter Zip code Page in UHC
-
-    Examples: 
-      | zipcode | isMultiCounty | county             | MultiCOuntyzipcode |
-      |   90210 | NO            | Los Angeles County |              80002 |
-
-  #@vppPlanSummaryUHC06
-  #Scenario Outline: Vaidate the Right Rail Promo Widget
-  #Given the user is on the uhcmedicaresolutions site landing page
-  #When I access the vpp page
-  #| Zip Code | <zipcode> |
-  #When user views plans of the below plan type in UMS site
-  #| Plan Type | <plantype> |
-  #Then the user validates the VPP Promo right rail widjet
-  #| Plan Name | <planName> |
-  #
-  #Examples:
-  #| zipcode | plantype | planName                    |
-  #|   55344 | MA       | UnitedHealthcare Sync (PPO) |
-  @vppPlanSummaryUHCRegressionMobile @OnlyProd @vppPlanSummaryUHCRegression
-  Scenario Outline: UID: <UID>  - Verify Call sticky action menu on UHC site
-    Given the user is on the uhcmedicaresolutions site landing page
-    When the user performs plan search using following information in UMS site
-      | Zip Code        | <zipcode>       |
-      | County Name     | <county>        |
-      | Is Multi County | <isMultiCounty> |
-    When verify Call sticky action menu icon is visible or not
-    And verify Call sticky action menu roll out and contain the text Call a Licensed Insurance Agent
-    Then user verify the popup and content in popup
-
-    Examples: 
-      | UID     | zipcode | isMultiCounty | county           |
-      | F322478 |   80001 | NO            | Jefferson County |
-
-  @vppPlanSummaryUHC08 @vppPlanSummaryUHCRun02
-  Scenario Outline: UI8: <UID>  - Verify Chat sticky action menu on UHC site
-    Given the user is on the uhcmedicaresolutions site landing page
-    When the user performs plan search using following information in UMS site
-      | Zip Code        | <zipcode>       |
-      | County Name     | <county>        |
-      | Is Multi County | <isMultiCounty> |
-    When verify Chat sticky action menu icon is visible or not
-    And verify Chat sticky action menu roll out and contain the text Call a Licensed Insurance Agent
-    Then user verify the Chat at its original state
-
-    Examples: 
-      | UID     | zipcode | isMultiCounty | county           |
-      | F322478 |   80001 | NO            | Jefferson County |
-
-  @vppPlanSummaryUHC09 @vppPlanSummaryUHCRun02 @vppPlanSummaryUHCRegression
-  Scenario Outline: To verify links displayed in Global footer section in UMS site on vpp
-    Given the user is on the uhcmedicaresolutions site landing page
-    When the user performs plan search using following information in UMS site
-      | Zip Code        | <zipcode>       |
-      | County Name     | <county>        |
-      | Is Multi County | <isMultiCounty> |
-    #When user accesses global footer UHC Medicaresolutions Site
-    And the user clicks on Aboutus link from home page footer UHC Medicaresolutions Site
-    And the user clicks on Contactus link from about us page footer UHC Medicaresolutions Site
-    And the user clicks on Sitemap link from home page footer UHC Medicaresolutions Site
-    And the user clicks on Privacy Policy link from Contactus page footer UHC Medicaresolutions Site
-    #And the user clicks on Terms of use link from Privacy Policy page footer UHC Medicaresolutions Site
-    And the user clicks on Disclaimers link from Terms of use page footer UHC Medicaresolutions Site
-    #And the user clicks on Agents & Brokers link from Disclaimers page footer UHC Medicaresolutions Site
-    #And user clicks on Request Assistance and validates modal window bluelayer
-    And user verifies home link of agents&brokers page bluelayer
+    Then the user validates the Cancel button for Multi COunty Pop-up lands on enter Zip code Page
 
     Examples: 
       | zipcode | isMultutiCounty | county             | MultiCOuntyzipcode |
       |   90210 | No              | Los Angeles County |              80002 |
 
-  @vppPlanSummaryUHC10 @vppPlanSummaryUHCRun02
-  Scenario Outline: UID: <UID> -plantype: <plantype> - Verify user can invoke the email button and the print button on view plan summary page on UHC site
-    Given the user is on the uhcmedicaresolutions site landing page
-    When the user performs plan search using following information in UMS site
+  #@vppPlanSummaryAARP07
+  #Scenario Outline: To check Plan Summary for specific to sync plan
+  #Given the user is on AARP medicare acquisition site landing page
+  #When the user performs plan search using following information in the AARP site
+  #| Zip Code        | <zipcode>         |
+  #| Is Multi County | <isMultutiCounty> |
+  #And the user views the plans of the below plan type in AARP site
+  #| Plan Type | <plantype> |
+  #Then User validates the VPP promowidjet for specifc plans
+  #| Plan Name | <planName> |
+  #
+  #Examples:
+  #| zipcode | isMultutiCounty | plantype | planName                    |
+  #|   55344 | NO              | MA       | UnitedHealthcare Sync (PPO) |
+  @vppPlanSummaryAARP08 @vppPlanSummaryAARPRun02 @vppPlanSummaryAARPRegression
+  Scenario Outline: UID: <UID>  - Verify Call sticky action menu on AARP site
+    Given the user is on AARP medicare acquisition site landing page
+    When the user does plan search using the following information in the AARP site
+      | Zip Code        | <zipcode>         |
+      | Is Multi County | <isMultutiCounty> |
+      | County Name     | <county>          |
+    When verify Call SAM icon is visible or not
+    And verify Call SAM roll out and contain the text Call a Licensed Insurance Agent
+    Then user verify the popup and content
+
+    Examples: 
+      | UID     | zipcode | isMultutiCounty | county             |
+      | F322478 |   90210 | NO              | Los Angeles County |
+
+  @vppPlanSummaryAARP09 @vppPlanSummaryAARPRun02
+  Scenario Outline: UID: <UID>  - Verify Chat sticky action menu on AARP site
+    Given the user is on AARP medicare acquisition site landing page
+    When the user does plan search using the following information in the AARP site
+      | Zip Code        | <zipcode>         |
+      | Is Multi County | <isMultutiCounty> |
+      | County Name     | <county>          |
+    When verify Chat SAM icon is visible or not
+    And verify Chat SAM roll out and contain the text Call a Licensed Insurance Agent
+    Then user verify the Chat original state
+
+    Examples: 
+      | UID     | zipcode | isMultutiCounty | county             |
+      | F322478 |   90210 | NO              | Los Angeles County |
+
+  @vppPlanSummaryAARP10 @vppPlanSummaryAARPRun02 @vppPlanSummaryAARPRegression
+  Scenario Outline: To verify links displayed in the global footer of AARP site on vpp
+    Given the user is on AARP medicare acquisition site landing page
+    When the user performs plan search using following information in the AARP site
+      | Zip Code        | <zipcode>         |
+      | County Name     | <county>          |
+      | Is Multi County | <isMultutiCounty> |
+    #When user accesses global footer of the AARP Medicare Plans home page
+    And user clicks on Aboutus link from footer of the AARP Medicare Plans home page
+    And user clicks on contactus link of aboutus page
+    And user clicks on sitemap link of contactus page
+    And user clicks on privacypolicy link of sitemap page
+    #And user clicks on termsOfuse link of privacypolicy page
+    And user clicks on disclaimers link of terms&conditions page
+    And user clicks on agents&brokers link of disclaimers page
+    #And user clicks on Request Assistance and validates modal window ulayer
+    And user verifies home link of agents&brokers page ulayer
+
+    Examples: 
+      | zipcode | isMultutiCounty | county             | MultiCOuntyzipcode |
+      |   90210 | No              | Los Angeles County |              80002 |
+
+  @vppPlanSummaryAARP11 @vppPlanSummaryAARPRun02
+  Scenario Outline: UID: <UID> -plantype: <plantype> - Verify user can invoke the email button and the print button on view plan preview page on AARP site
+    Given the user is on AARP medicare acquisition site landing page
+    When the user performs plan search using following information in the AARP site
       | Zip Code        | <zipcode>       |
       | County Name     | <county>        |
       | Is Multi County | <isMultiCounty> |
@@ -272,188 +292,195 @@ Feature: 2.01.1-Vpp to plan Summary UHC Scenarios
 
     Examples: 
       | UID     | site   | plantype | zipcode | isMultiCounty | county           |
-      | 1598166 | Blayer | PDP      |   80001 | NO            | Jefferson County |
-      | 1598166 | Blayer | SNP      |   80001 | NO            | Jefferson County |
+      | 1598166 | Ulayer | PDP      |   80001 | NO            | Jefferson County |
+      | 1598166 | Ulayer | SNP      |   80001 | NO            | Jefferson County |
 
-  @vppPlanSummaryUHCRegressionMobile @vppPlanSummaryUHCRegression
-  Scenario Outline: Verify Provider Search  in UHC site from plan summary page
-    Given the user is on the uhcmedicaresolutions site landing page
-    When the user performs plan search using following information in UMS site
+  @vppPlanSummaryAARP12 @vppPlanSummaryAARPRun02 @vppPlanSummaryAARPRegression
+  Scenario Outline: Verify Provider Search  in AARP site from plan summary page
+    Given the user is on AARP medicare acquisition site landing page
+    When the user performs plan search using following information in the AARP site
       | Zip Code        | <zipcode>         |
       | County Name     | <county>          |
       | Is Multi County | <isMultutiCounty> |
-    When user views plans of the below plan type in UMS site
+    And the user views the plans of the below plan type in AARP site
       | Plan Type | <plantype> |
-    And the user selects plan year for the UMS site
-      | Plan Year | <planyear> |
-    When user Click on Is my Provider covered link ums
-      | PlanName | <planName> |
-    When user selects a provider and retuns to VPP page in ums
-    Then Verify X out of Y provider covered information is displayed on Plan Summary page ums
-      | PlanName | <planName> |
-    Then Verify provider name is displayed on Plan Summary page ums
-      | PlanName | <planName> |
-
+    And the user selects plan year for the AARP site
+    	|Plan Year	| <planyear>|
+    When the user Click on Is my Provider covered link Ulayer
+      | PlanName | <planname> |
+   When user selects a provider and retuns to VPP page in ulayer
+    Then Verify X out of Y provider covered information is displayed on Plan Summary page Ulayer
+      | PlanName | <planname> |
+		Then Verify provider name is displayed on Plan Summary page Ulayer
+      | PlanName | <planname> |
     Examples: 
-      | zipcode | isMultutiCounty | county             | plantype | planName                                            | planyear |
-      |   90210 | NO              | Los Angeles County | MA       | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) | current  |
+      | zipcode | isMultutiCounty | county             | plantype | planname                                            |planyear|
+      |   90210 | NO              | Los Angeles County | MA       | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) |current|
 
-  @vppPlanSummaryUHC12 @vppPlanSummaryUHCRun02
+  @vppPlanSummaryAARP13 @vppPlanSummaryAARPRun02 
   Scenario Outline: To Verify the drug cost estimator flow for <plantype> through plan details page's Plan Costs tab
-    Given user is on blue layer landing page
-    When user performs plan search using following information in the UMS site
+    Given the user is on the AARP medicare site landing page
+    When user performs plan search using following information in the AARP site
       | Zip Code    | <zipcode>     |
       | County      | <county>      |
       | aep         | <aep>         |
       | currentyear | <currentyear> |
-    When user views plans of the below plan type in UMS site
+    And the user views the plans of the below plan type in AARP site
       | Plan Type | <plantype> |
-    And the user selects plan year for the UMS site
-      | Plan Year | <planyear> |
-    Then the user navigates to the plan details for the given plan type in UMS site
+    And the user selects plan year for the AARP site
+    	|Plan Year	| <planyear>|
+    Then the user navigates to the plan details for the given plan type in AARP site
       | Plan Type | <plantype> |
       | Plan Name | <planName> |
-    Then the user navigates to Plan Costs tab in UMS site
-    Then user adds drug to drug cost estimator flow for the given plan name in UMS site
+    Then the user navigates to Plan Costs tab in AARP site
+    Then user adds drug to drug cost estimator flow for the given plan name in AARP site
       | PlanName   | <planName>  |
       | Drug Name1 | <drugName1> |
-    And selects drug details in UMS site
+    And selects drug details in ums site
       | Drug Name1 | <drugName1> |
       | Quantity   | <quantity>  |
       | Frequency  | <frequency> |
-    When user successfully adds drug in the UMS site
+    When user successfully adds drug in the ums site
       | Drug Name1 | <drugName1> |
-    Then the user clicks on the Pick a pharmacy button in the DCE flow in UMS site
-    When the user selects the pharmacy type and distance in UMS site
+    Then the user clicks on the Pick a pharmacy button in the DCE flow in AARP site
+    When the user selects the pharmacy type and distance in AARP site
       | Pharmacy Type | <pharmacyType> |
       | Distance      | <distance>     |
-    Then the user selects a pharmacy from the list of pharmacies in UMS site
+    Then the user selects a pharmacy from the list of pharmacies in AARP site
       | Pharmacy Name | <pharmacyName> |
-    Then the user validates the added drugs on See your Estimated Costs page in UMS site
+    Then the user validates the added drugs on See your Estimated Costs page in AARP site
       | Drug Name1 | <drugName1> |
-    When the user clicks on Edit Drug List link in UMS site
-    Then Enter your drugs page is displayed to the user in UMS site
-    Then User click on Switch now to select the Generic of the Brand drug added in UMS site
-    Then the user clicks on the Pick a pharmacy button in the DCE flow in UMS site
-    Then the user change the pharmacy type and select new pharmacy in UMS site
+    When the user clicks on Edit Drug List link in AARP site
+    Then Enter your drugs page is displayed to the user in AARP site
+    Then User click on Switch now to select the Generic of the Brand drug added in AARP site
+    Then the user clicks on the Pick a pharmacy button in the DCE flow in AARP site
+    Then the user change the pharmacy type and select new pharmacy in AARP site
       | New Pharmacy Type | <newPharmacyType> |
-    Then the user validates the added drugs on See your Estimated Costs page in UMS site
+    Then the user validates the added drugs on See your Estimated Costs page in AARP site
       | Drug Name1 | <genericName1> |
-    And the user clicks on Back to Plans button on See Your Estimated Costs page in UMS site
-    And user verifies annual drug cost in the Plan Cost tab of UMS site
+    And the user clicks on Back to Plans button on See Your Estimated Costs page in AARP site
+    And user verifies annual drug cost in the Plan Cost tab of AARP site
       | Plan Type | <plantype> |
-    And the user clicks on Back to All Plans button present on details page in UMS site
-    Then user validates Drug information is reflected on plan summary page in UMS site
+    And the user clicks on Back to All Plans button present on details page in AARP site
+    Then user validates Drug information is reflected on plan summary page in AARP site
       | PlanName | <planName> |
 
     Examples: 
-      | zipcode | county             | drugInitials1 | drugName1 | drugInitials2 | drugName2  | drugInitials3 | drugName3     | pharmacyType     | distance | pharmacyName                    | plantype | planName                        | quantity | frequency     | newPharmacyType | genericName1 | genricName3 | aep | currentyear | planyear |
-      |   90210 | Los Angeles County | lipi          | Lipitor   | dron          | dronabinol | Adva          | Advair Diskus | Preferred Retail | 15 miles | COMMUNITY, A WALGREENS PHARMACY | PDP      | AARP MedicareRx Walgreens (PDP) |       30 | Every 1 month | Mail Order      | atorvastatin | fluticasone | no  | no          | current  |
+      | zipcode | county             | drugInitials1 | drugName1 | drugInitials2 | drugName2  | drugInitials3 | drugName3     | pharmacyType     | distance | pharmacyName                    | plantype | planName                        | quantity | frequency     | newPharmacyType | genericName1 | genricName3 | aep | currentyear |planyear|
+      |   90210 | Los Angeles County | lipi          | Lipitor   | dron          | dronabinol | Adva          | Advair Diskus | Preferred Retail | 15 miles | COMMUNITY, A WALGREENS PHARMACY | PDP      | AARP MedicareRx Walgreens (PDP) |       30 | Every 1 month | Mail Order      | atorvastatin | fluticasone | no  | no          |current|
 
-  @vppPlanSummaryUHC13 @vppPlanSummaryUHCRun02 @vppPlanSummaryUHCRegression
-  Scenario Outline: TID: <TID>- zipcode -<zipcode> -plan type: <plantype> - Verify Loopup Zipcode is navigation to VPP page
-    Given the user is on the uhcmedicaresolutions site landing page
-    When the user clicks on Lookup zipcode on UHC
-    Then verify find a zipcode popup displpayed and Enter values and click on LookupZipcode on uhc
+  @vppPlanSummaryAARP14 @vppPlanSummaryAARPRun02
+  Scenario Outline: TID: <TID> -plan type: <plantype> - TID: <TID> -plan type: <plantype> - Verify Loopup Zipcode is navigation to VPP page
+    Given the user is on AARP medicare acquisition site landing page
+    When the user clicks on Lookup zipcode on AARP
+    Then verify find a zipcode popup displpayed and Enter values and click on LookupZipcode on AARP
       | Address | <address> |
       | City    | <city>    |
       | State   | <state>   |
-    When the user performs plan search using following information in the uhc site
+    When the user performs plan search using following information in the aarp site
       | County Name     | <county>        |
       | Is Multi County | <isMultiCounty> |
-    When user views plans of the below plan type in UMS site
+    And the user views the plans of the below plan type in AARP site
       | Plan Type | <plantype> |
-    And the user selects plan year for the UMS site
-      | Plan Year | <planyear> |
-    Then the user validates the right rail in UMS Site
-    Then the user validates the Need Help Section in the right rail in ums Site
-    Then the user validates the TFN in the Need Help Section in ums Site
-    And the user validates and clicks on Find an agent in your area link in ums Site
-    Then the user validates Get a free medicare Guide section in the right rail in ums Site
-    Then the user enters the following information in the Get a free medicare Guide section in ums Site
+    And the user selects plan year for the AARP site
+    	|Plan Year	| <planyear>|
+    Then the user validates the right rail in AARP Site
+    Then the user validates the Need Help Section in the right rail in aarp Site
+    Then the user validates the TFN in the Need Help Section in aarp Site
+    And the user validates and clicks on Find an agent in your area link in aarp Site
+    Then the user validates Get a free medicare Guide section in the right rail in aarp Site
+    Then the user enters the following information in the Get a free medicare Guide section in aarp Site
       | First Name    | <firstName>    |
       | Last Name     | <lastName>     |
       | Email Address | <emailAddress> |
-    Then the user validates Plan Selector Tool section in the right rail in ums Site
-    Then the user validates Plan Selector Page after clicking on Start Plan Selector button in ums Site
+    # Then the user validates Need More Information section in the right rail in aarp Site
+    # Then the user validates Medicare Plans Video Guide Page after clicking Choose a video link in aarp Site
+    Then the user validates Plan Selector Tool section in the right rail in aarp Site
+    Then the user validates Plan Selector Page after clicking on Start Plan Selector button in aarp Site
 
     Examples: 
-      | TID   | zipcode | isMultiCounty | county             | plantype | address                    | city      | state       | firstName | lastName | emailAddress  | planyear |
-      | 15550 |   90210 | NO            | Los Angeles County | MAPD     | 584 MAIN AVE NORWALK       | FAIRFIELD | CONNECTICUT | test      | test     | test@test.com | current  |
-      | 15550 |   30606 | YES           | Clarke County      | MAPD     | 1750 EPPS BRIDGE RD ATHENS | OCONEE    | GEORGIA     | test      | test     | test@test.com | current  |
+      | TID   | zipcode | isMultiCounty | county             | plantype | address                    | city      | state       | firstName | lastName | emailAddress  |planyear|
+      | 15550 |   90210 | NO            | Los Angeles County | MAPD     | 584 MAIN AVE NORWALK       | FAIRFIELD | CONNECTICUT | test      | test     | test@test.com |current|
+      | 15550 |   30606 | YES           | Clarke County      | MAPD     | 1750 EPPS BRIDGE RD ATHENS | OCONEE    | GEORGIA     | test      | test     | test@test.com |current|
 
-  @vppPlanSummaryUHC14 @vppPlanSummaryUHCRun02 @vppPlanSummaryUHCRegression
-  Scenario Outline: TID: <TID> -zipcode -<zipcode> -plan type: <plantype> - Verify Change Zipcode on VPP using Search By Address
-    Given the user is on uhcmedicaresolutions site landing page
-    When the user does plan search using the following information in UMS site
+  @vppPlanSummaryAARP15 @vppPlanSummaryAARPRun02
+  Scenario Outline: TID: <TID> -plan type: <plantype> - TID: <TID> -plan type: <plantype> - Verify Loopup Zipcode is navigation to VPP page
+    Given the user is on AARP medicare acquisition site landing page
+    When the user performs plan search using following information in the AARP site
       | Zip Code        | <zipcode>       |
-      | Is Multi County | <isMultiCounty> |
       | County Name     | <county>        |
-    Then user clicks on Change Zip code link in UMS site
-    Then user clicks on Select by Address and Enter fileds in UMS Site
+      | Is Multi County | <isMultiCounty> |
+    Then user clicks on Change Zip code link in AARP site
+    Then user clicks on Select by Address and Enter fileds in AARP Site
       | Address | <address> |
       | City    | <city>    |
       | State   | <state>   |
-    When the user clicks on Find plans on vpp using following information in the UMS site
+    When the user clicks on Find plans on vpp using following information in the AARP site
       | County Name2     | <county2>        |
       | Is Multi County2 | <isMultiCounty2> |
-    When user views plans of the below plan type in UMS site
+    And the user views the plans of the below plan type in AARP site and select Next year
       | Plan Type | <plantype> |
-    And the user selects plan year for the UMS site
-      | Plan Year | <planyear> |
-    Then the user validates the right rail in UMS Site
-    Then the user validates the Need Help Section in the right rail in ums Site
-    Then the user validates the TFN in the Need Help Section in ums Site
-    And the user validates and clicks on Find an agent in your area link in ums Site
-    Then the user validates Get a free medicare Guide section in the right rail in ums Site
-    Then the user enters the following information in the Get a free medicare Guide section in ums Site
+    Then the user validates the right rail in AARP Site
+    Then the user validates the Need Help Section in the right rail in aarp Site
+    Then the user validates the TFN in the Need Help Section in aarp Site
+    And the user validates and clicks on Find an agent in your area link in aarp Site
+    Then the user validates Get a free medicare Guide section in the right rail in aarp Site
+    Then the user enters the following information in the Get a free medicare Guide section in aarp Site
       | First Name    | <firstName>    |
       | Last Name     | <lastName>     |
       | Email Address | <emailAddress> |
-    Then the user validates Plan Selector Tool section in the right rail in ums Site
-    Then the user validates Plan Selector Page after clicking on Start Plan Selector button in ums Site
+    # Then the user validates Need More Information section in the right rail in aarp Site
+    # Then the user validates Medicare Plans Video Guide Page after clicking Choose a video link in aarp Site
+    Then the user validates Plan Selector Tool section in the right rail in aarp Site
+    Then the user validates Plan Selector Page after clicking on Start Plan Selector button in aarp Site
 
     Examples: 
-      | TID   | zipcode | isMultiCounty | county             | plantype | address                    | city      | state       | firstName | lastName | emailAddress  | isMultiCounty2 | county2          | planyear |
-      | 15550 |   90210 | NO            | Los Angeles County | MAPD     | 584 MAIN AVE NORWALK       | FAIRFIELD | CONNECTICUT | test      | test     | test@test.com | NO             | Fairfield County | current  |
-      | 15550 |   78006 | YES           | Bexar County       | MAPD     | 1750 EPPS BRIDGE RD ATHENS | OCONEE    | GEORGIA     | test      | test     | test@test.com | YES            | Clarke County    | current  |
+      | TID   | zipcode | isMultiCounty | county             | plantype | address                    | city      | state       | firstName | lastName | emailAddress  | isMultiCounty2 | county2          |
+      | 15550 |   90210 | NO            | Los Angeles County | MAPD     | 584 MAIN AVE NORWALK       | FAIRFIELD | CONNECTICUT | test      | test     | test@test.com | NO             | Fairfield County |
+      | 15550 |   78006 | YES           | Bexar County       | MAPD     | 1750 EPPS BRIDGE RD ATHENS | OCONEE    | GEORGIA     | test      | test     | test@test.com | YES            | Clarke County    |
 
-  @vppPlanSummaryUHC15 @vppPlanSummaryUHCRun02 @vppPlanSummaryUHCRegression
-  Scenario Outline: TID: <TID> -plan type: <plantype> - Verify Rocky Mountain Health Learn More lands on Correct site from UHC site from plan summary page
-    Given the user is on the uhcmedicaresolutions site landing page
-    When the user performs plan search using following information in UMS site
+  @vppPlanSummaryAARP16 @vppPlanSummaryAARPRun02 @vppPlanSummaryAARPRegression
+  Scenario Outline: TID: <TID> -plan type: <plantype> - Verify Rocky Mountain Health Learn More lands on Correct site from AARP site from plan summary page
+    Given the user is on the AARP medicare acquisition site landing page
+    When the user does plan search using the following information in the AARP site
       | Zip Code        | <zipcode>         |
-      | County Name     | <county>          |
       | Is Multi County | <isMultutiCounty> |
-    When user views plans of the below plan type in UMS site
+      | County Name     | <county>          |
+    And the user views the plans of the below plan type in AARP site
       | Plan Type | <plantype> |
-    And the user selects plan year for the UMS site
-      | Plan Year | <planyear> |
-    And the user validates plan summary for the below plan in UMS site
+    And the user selects plan year for the AARP site
+    	|Plan Year	| <planyear>|
+    #And the user validates available plans for selected plan types in the AARP site
+    And the user validates plan summary for the below plan in AARP site
       | Plan Name | <planName> |
-    Then the user clicks on Learn More UMS for Rocky Mountain plans
+    Then the user clicks on Learn More AARP for Rocky Mountain plans
       | Plan Name | <planName> |
 
     Examples: 
-      | TID       | zipcode | isMultutiCounty | county      | plantype | planName                                              | planyear |
-      | US2567142 |   81501 | NO              | Mesa County | SNP      | Rocky Mountain Health Plans DualCare Plus (HMO D-SNP) | current  |
+      | TID       | zipcode | isMultutiCounty | county      | plantype | planName                                              |planyear|
+      | US2567142 |   81501 | NO              | Mesa County | SNP      | Rocky Mountain Health Plans DualCare Plus (HMO D-SNP) |current|
 
-  @vppPlanSummaryUHCRegressionMobile @vppPlanSummaryUHCRegression
-  Scenario Outline: TID: <TID> -plan type: <plantype> -plan name: -<planName>- Verify People Health plans Learn More lands on Correct site from UHC site from plan summary page
-    Given the user is on the uhcmedicaresolutions site landing page
-    When the user performs plan search using following information in UMS site
+  @vppPlanSummaryAARP17 @vppPlanSummaryAARPRun02 @vppPlanSummaryAARPRegression
+  Scenario Outline: TID: <TID> -plan type: <plantype> - plan name: -<planName> - Verify People Health plans Learn More lands on Correct site from UHC site from plan summary page
+    Given the user is on the AARP medicare acquisition site landing page
+    When the user does plan search using the following information in the AARP site
       | Zip Code        | <zipcode>         |
-      | County Name     | <county>          |
       | Is Multi County | <isMultutiCounty> |
-    When user views plans of the below plan type in UMS site
+      | County Name     | <county>          |
+   And the user views the plans of the below plan type in AARP site
       | Plan Type | <plantype> |
-    And the user selects plan year for the UMS site
-      | Plan Year | <planyear> |
-    And the user validates plan summary for the below plan in UMS site
+    And the user selects plan year for the AARP site
+    	|Plan Year	| <planyear>|
+    #And the user validates available plans for selected plan types in the AARP site
+    And the user validates plan summary for the below plan in AARP site
       | Plan Name | <planName> |
-    Then the user clicks on Learn More UMS for people Health plans
+    Then the user clicks on Learn More AARP for people Health plans
       | Plan Name | <planName> |
 
     Examples: 
-      | TID       | zipcode | isMultutiCounty | county        | plantype | planName                              | planyear |
-      | US2567133 |   70515 | YES             | Acadia Parish | MAPD     | Peoples Health Choices Gold (HMO-POS) | current  |
+      | TID       | zipcode | isMultutiCounty | county        | plantype | planName                                 |planyear|
+      | US2567133 |   70515 | YES             | Acadia Parish | MAPD     | Peoples Health Choices Gold (HMO-POS)    |current|
+      #| US2567133 |   70515 | YES             | Acadia Parish | MAPD     | Peoples Health Choices Value (HMO)       |current|
+      #| US2567133 |   70515 | YES             | Acadia Parish | SNP      | Peoples Health Secure Health (HMO D-SNP) |current|
+      #| US2567133 |   70718 | YES             | Ascension Parish | MAPD     | Peoples Health Choices 65 "#14 (HMO)"    |
+      #| US2567133 |   70420 | YES             | Ascension Parish | MAPD     | Peoples Health Choices 65 "#14 (HMO)"    |

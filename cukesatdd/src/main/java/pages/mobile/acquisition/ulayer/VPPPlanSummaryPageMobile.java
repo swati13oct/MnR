@@ -69,6 +69,10 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 
 	@FindBy(xpath = "//span[(text()='4 of 4 Plans') and @xpath='1']")
 	WebElement plan;
+	
+	@FindBy(xpath = "//div/label[@for='currentYear']")
+	WebElement currentYearTab;
+	
 
 	@FindBy(xpath = "//*[@id='togglecurrentYear']/a")
 	private WebElement YearToggle;
@@ -783,6 +787,10 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 			return false;
 		}
 	}
+	
+	public void clickCurrentYearTab() {
+		jsClickNew(currentYearTab);
+	}
 
 	@Override
 	public void openAndValidate() {
@@ -1196,14 +1204,12 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 			// element = getSpecificPlanSummary(findChildElements(elementData, snpPlanList),
 			// planName);
 		} else if (planName.contains("HMO")) {
-			Thread.sleep(4000);
 			isSpecificPlanInfoPresent = getSpecificPlanSummary(maPlanList, planName);
 
 		} else if (planName.contains("PDP")) {
 			// ElementData elementData = new ElementData("id", "viewDetailsPDP");
 			// element = getSpecificPlanSummary(findChildElements(elementData, pdpPlanList),
 			// planName);
-			Thread.sleep(4000);
 			isSpecificPlanInfoPresent = getSpecificPlanSummary(pdpPlanList, planName);
 		}
 		/*
@@ -4502,6 +4508,10 @@ public void validatePlanPremium (String planName , String monthlyPremium){
 	@FindBy(xpath = "//button[contains(@id,'addDrug')]")
 	public WebElement AddMyDrugsBtn;
 
+
+	@FindBy(xpath = "//span[contains(text(),'Add My Drugs')]")
+	public WebElement AddMyDrugsBtnDCE;
+	
 	public GetStartedPageMobile navigateToDCERedesignFromVPPPlanCard(String plantype, String planName) {
 		if (plantype.equals("MA") || plantype.equals("MAPD") || plantype.equalsIgnoreCase("SNP")) {
 			WebElement dceLink = driver.findElement(By.xpath("//*[contains(text(),'" + planName
@@ -4516,6 +4526,8 @@ public void validatePlanPremium (String planName , String monthlyPremium){
 			jsClickMobile(dceLink);
 			// dceLink.click();
 		}
+		scrollToView(AddMyDrugsBtn);
+		
 		if (validateNew(AddMyDrugsBtn))
 			return new GetStartedPageMobile(driver);
 		return null;

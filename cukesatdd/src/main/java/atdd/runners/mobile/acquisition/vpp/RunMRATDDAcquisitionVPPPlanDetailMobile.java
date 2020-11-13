@@ -12,13 +12,13 @@ import cucumber.api.CucumberOptions;
  */
 @RunWith(ExtendedCucumber.class)
 @ExtendedCucumberOptions(retryCount=1,screenShotSize="", screenShotLocation="/screenshots/",
-jsonReport = "target/cucumber-RunMRATDDAcquisitionVppPlanDetailMobile.json",detailedReport = true,
+jsonReport = "target/cucumber-RunMRATDDAcquisitionVPPPlanDetailMobile.json",detailedReport = true,
  detailedAggregatedReport = true, overviewReport = true, toPDF = true, 
- outputFolder = "target/RunMRATDDAcquisitionVppPlanDetailMobile")
+ outputFolder = "target/RunMRATDDAcquisitionVPPPlanDetailMobile")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.mobile" }, 
 features = { "src/main/resources/feature/mobile/acquisition/vpp" },
 plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionVppPlanDetailMobile.json" }, 
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionVPPPlanDetailMobile.json" }, 
 tags = {"@vppPlanDetailsAARPRegression"}, dryRun=false)
 public class RunMRATDDAcquisitionVPPPlanDetailMobile { 
  
