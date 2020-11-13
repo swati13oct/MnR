@@ -422,8 +422,8 @@ public class VisitorProfilePage extends UhcDriver {
 		List<String> listOfTestPlans = Arrays.asList(planNames.split(","));
 		CommonUtility.checkPageIsReadyNew(driver);
 		for (String plan: listOfTestPlans) {
-			Assert.assertEquals(plan, driver.findElement(By.xpath("//h4[contains(text(),'"+plan+"')]")).getText());
-			Assert.assertTrue(driver.findElement(By.xpath("//h4[contains(text(),'"+plan+"')]/following::button[1]")).isDisplayed());
+			Assert.assertEquals(plan, driver.findElement(By.xpath("//*[contains(text(),'"+plan+"')]")).getText());
+			Assert.assertTrue(driver.findElement(By.xpath("//*[contains(text(),'"+plan+"')]/following::button[1]")).isDisplayed());
 			System.out.println("Verified plans are added on vistior profile page");
 		}
 	}
