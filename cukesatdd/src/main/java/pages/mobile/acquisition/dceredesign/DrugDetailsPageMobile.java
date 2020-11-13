@@ -87,7 +87,7 @@ public class DrugDetailsPageMobile extends UhcDriver {
 	@FindBy(xpath = "//h2[contains(text(), 'Monthly Drug Costs By Stage')]")
 	public WebElement MonthlyDrugStage_Header;
 
-	@FindBy(xpath = "//div[contains(text(), 'Initial Coverage Stage')]")
+	@FindBy(xpath = "//caption[contains(text(), 'Initial Coverage')]")
 	public WebElement MonthlyDrugStage_InitialCoverageStagerTbl;
 
 	@FindBy(xpath = "//button[contains(@id, 'table_initial_coverage')]")
