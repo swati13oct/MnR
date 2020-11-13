@@ -347,6 +347,7 @@ public class DCEStepDefinitionAARP {
 		buildDrugList.clickReviewDrugCostBtn();
 	}
 
+	
 	@Then("^load screen should be displayed$")
 	public void load_screen_should_be_displayed_in_AARP() {
 		ZipCodePlanYearCapturePage zipCodePlanYearPage = (ZipCodePlanYearCapturePage) getLoginScenario()
@@ -1195,5 +1196,19 @@ public class DCEStepDefinitionAARP {
 		String savePlanNames = givenAttributesMap.get("Test Plans");
 		VisitorProfilePage visitorProfile = new VisitorProfilePage(driver);
 		visitorProfile.validateAddedPlansNew(savePlanNames);
+	}
+	
+	@Then("^user verify and click on switch to generic NBA on drug detail page$")
+	public void user_verify_and_click_on_switch_to_generic_NBA_on_drug_detail_page() throws Throwable {
+				DrugDetailsPage drugDetailsPage = new DrugDetailsPage(driver);
+				drugDetailsPage.clickswitchToGeneric();
+	}
+	
+	@Then("^verify drug is switched to generic on detail page$")
+	public void verify_drug_is_switched_to_generic_on_detail_page() throws Throwable {
+		DrugDetailsPage drugDetailsPage = new DrugDetailsPage(driver);
+		
+		drugDetailsPage.verifyDrugisSwitchedtoGeneric();
+		getLoginScenario().saveBean(PageConstants.DCE_Redesign_GetStarted, drugDetailsPage);
 	}
 }
