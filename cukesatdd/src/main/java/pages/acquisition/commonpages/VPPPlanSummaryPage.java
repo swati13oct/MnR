@@ -727,6 +727,30 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath="//a[contains(@href,'//aarpsupplementalhealth-stg.uhc.com/content/dam/ole/MedSuppDocs/EnrollmentDiscount')]")
 	private WebElement EnrollmentDiscount;
 	
+	@FindBy(xpath = "//*[contains(@id,'mpaed-month')]")
+	private WebElement monthDrpDwn_PartA;
+
+	@FindBy(id = "mpaed-year")
+	private WebElement yearDrpDwn_PartA;
+
+	@FindBy(id = "mpbed-month")
+	private WebElement monthBDrpDwn;
+
+	@FindBy(id = "mpbed-year")
+	private WebElement yearBDrpDwn;
+
+	@FindBy(xpath = "//*[@id='mpaed-month']/option[2]")
+	private WebElement monthDrpDwnOption;
+
+	@FindBy(xpath = "//*[@id='mpaed-year']/option[3]")
+	private WebElement yearDrpDwnOption;
+
+	@FindBy(xpath = "//*[@id='mpbed-month']/option[2]")
+	private WebElement monthBDrpDwnOption;
+
+	@FindBy(xpath = "//*[@id='mpbed-year']/option[3]")
+	private WebElement yearBDrpDwnOption;
+	
 	public WebElement getValEstimatedAnnualDrugCostValue(String planName) {
 		// WebElement valEstimatedAnnualDrugCostValue =
 		// driver.findElement(By.xpath("//*[contains(text(),'"+planName+"')]/ancestor::div[@class='module-plan-overview
@@ -3828,7 +3852,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 
 	public DrugDetailsPage navigateToDCEFromDrugDropdown(String planType, String planName) {
-		if (planType.equals("MA") || planType.equals("MAPD") || planType.equalsIgnoreCase("SNP")) {
+		if (planType.equalsIgnoreCase("MA") || planType.equalsIgnoreCase("MAPD") || planType.equalsIgnoreCase("SNP")) {
 			List<WebElement> drugLinkDropdown = driver.findElements(By.xpath("//*[contains(text(),'" + planName
 					+ "')]/ancestor::div[contains(@class, 'module-plan-overview module')]//*[contains(@id,'drug-list-title-')and contains(@aria-expanded,'false')]"));
 
@@ -4370,6 +4394,121 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		
 	}	
 	
+	public Map<String, String> CapturePreEntryPageInfo(String DateOfBirth) {
+
+		validateNew(DOB, 30);
+		System.out.println("MedSup page form is displayed");
+		jsClickNew(DOB);
+		DOB.sendKeys(DateOfBirth);
+		System.out.println("Date of birth is entered");
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		jsClickNew(MaleGender);
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		monthDrpDwn_PartA.click();
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		monthDrpDwnOption.click();
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println("Effective date- month value selected");
+		yearDrpDwn_PartA.click();
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		yearDrpDwnOption.click();
+		System.out.println("Effective date- year value selected");
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		monthBDrpDwn.click();
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		monthBDrpDwnOption.click();
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		yearBDrpDwn.click();
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		yearBDrpDwnOption.click();
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		startDrpDwn.click();
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		startDrpDwnOption.click();
+		System.out.println("Plan to start date selected");
+
+		validateNew(DOB, 30);
+		Map<String, String> EnteredData = new HashMap<String, String>();
+		String DOBEntered = DOB.getAttribute("value");
+		System.out.println("Enetered DOB" + DOBEntered);
+		EnteredData.put("DOB", DOBEntered);
+		String part_A_Month_Entered = monthDrpDwn_PartA.getAttribute("value");
+		EnteredData.put("part_A_Month_Entered", part_A_Month_Entered);
+		String part_A_Year_Entered = yearDrpDwn_PartA.getAttribute("value");
+		EnteredData.put("part_A_Year_Entered", part_A_Year_Entered);
+		String part_B_Month_Entered = monthBDrpDwn.getAttribute("value");
+		EnteredData.put("part_B_Month_Entered", part_B_Month_Entered);
+		String part_B_Year_Entered = yearBDrpDwn.getAttribute("value");
+		EnteredData.put("part_B_Year_Entered", part_B_Year_Entered);
+		String startDateEntered = startDrpDwn.getAttribute("value");
+		EnteredData.put("startDateEntered", startDateEntered);
+		System.out.println("Enetered Info" + EnteredData.toString());
+		System.out.println("Expected info" + EnteredData.toString());
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		ViewPlanMedSupPage.click();
+		return EnteredData;
+
+	}
 	
 	
 }
