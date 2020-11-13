@@ -86,7 +86,8 @@ public class DrugDetailsPage extends UhcDriver {
 	@FindBy(xpath = "//div[@id='coveredtable']//th[contains(text(), 'You Pay')]")
 	public WebElement YourDrugs_YouPayTxt;
 
-	@FindBy(xpath = "(//div[@id='coveredtable']//td[contains(text(), 'Initial Coverage Cost')])[1]")
+	//@FindBy(xpath = "(//div[@id='coveredtable']//td[contains(text(), 'Initial Coverage Cost')])[1]")
+	@FindBy(xpath="(//div[@id='coveredtable']//div[contains(text(), 'Initial Coverage Cost')])")
 	public WebElement YourDrugs_InitlCoverageTxt;
 
 	@FindBy(xpath = "//h2[contains(text(), 'Monthly Drug Costs By Stage')]")

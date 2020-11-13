@@ -43,7 +43,8 @@ public class DrugSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//*[text()='Monthly Premium']/following-sibling::div")
 	public WebElement monthlyPremium;
 	
-	@FindBy(xpath = "//div[contains(text(), 'Annual Estimated')]//following-sibling::div")
+	//@FindBy(xpath = "//div[contains(text(), 'Annual Estimated')]//following-sibling::div")
+	@FindBy(xpath="(//div//h5[contains(text(), 'Annual Estimated')])[1]")
 	public WebElement annualEstimatedTotal;
 	
 	@FindBy(xpath = "//*[text()='Drugs Covered']/following-sibling::div")

@@ -1,5 +1,11 @@
 Feature: 1.19 Verify the premium payment flows on member portal - Part 3 - Test case 19 to 26
 
+Background: Feature security flag needs to be true before ATDD script execution
+     Given First check if feature security flag is set to true
+      | Feature           | UCPPayments |
+      
+###############################Regression Scenarios Begin Here ########################################
+
   #Test Case 19 - Test data needed - Any AARP MAPD Plan member - Error message for multiple payments in a day
   @regressionMember
   Scenario Outline: TID: <TID> - Test Case 19 - Verify More Than one Payment Per day error message
@@ -193,7 +199,7 @@ Feature: 1.19 Verify the premium payment flows on member portal - Part 3 - Test 
       | UID       | planType | memberType                |
       | US1449078 | MAPD     | UpdateRecurrStop_Payments |
 
-  #Test Case 26 -Fed - Any member will work
+  #Test Case 26 -Fed - member with single federal plan and Next payment Due amount and date
   @regressionMember
   Scenario Outline: UID: <UID> -plan: <planType> -memberType: <memberType> - Test Case 26 - Verify Payment Summary for OneTime payment Flow
     Given login with following details logins in the member portal and validate elements
@@ -205,8 +211,8 @@ Feature: 1.19 Verify the premium payment flows on member portal - Part 3 - Test 
     And the user validates the Payment Summary option on New page OTP
 
     Examples: 
-      | UID       | planType | memberType                |
-      | US1448800 | MAPD     | UpdateRecurrStop_Payments |
+      | UID       | planType | memberType                    |
+      | US1448800 | MAPD     | UpdateRecurrStop_Payments_new |
 
 
 

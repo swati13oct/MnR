@@ -8,7 +8,7 @@ import org.openqa.selenium.support.PageFactory;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 
-public class ShopforaplanAARPlayer extends UhcDriver {
+public class ShopForPlanNavigationPage extends UhcDriver {
 
 	@FindBy(xpath = "//*[@id='ghn_lnk_2']")
 	private WebElement ShopForaplan;
@@ -58,27 +58,27 @@ public class ShopforaplanAARPlayer extends UhcDriver {
 	@FindBy(xpath = "//div[@id='planTypesColumn']//a[text()='Enroll']")
 	private WebElement enrollLink;
 	
-	@FindBy(xpath = "//div[@id='planTypesColumn']//a[text()='Shop']")
-	private WebElement enrollShopLink;
+	@FindBy(xpath = "//*[contains(@id,'planTypesColumn')]//*[contains(text(),'Shop')]")
+	private WebElement shopLink;
 
 	@FindBy(xpath = "//a[contains(@href,'ma-enrollment')]")
 	private WebElement maLeanHowToEnrollLink;
 	
 	@FindBy(xpath = "(//a[contains(@href,'/shop/dual-special-needs-plans.html')])[2]")
-	private WebElement dsnpLeanHowToEnrollShopLink;
+	private WebElement dsnpLeanHowToshopLink;
 	
 	@FindBy(xpath = "(//a[contains(@href,'/shop/prescription-drug-plans.html')])[2]")
-	private WebElement pdpLeanHowToEnrollShopLink;
+	private WebElement pdpLeanHowToshopLink;
 	@FindBy(xpath = "(//a[contains(@href,'/shop/medicare-advantage-plans')])[2]")
-	private WebElement maLeanHowToEnrollShopLink;
+	private WebElement maLeanHowToshopLink;
 	
 	@FindBy(xpath = "(//a[contains(@href,'/shop/medicare-supplement-plans.html')])[2]")
-	private WebElement msLeanHowToEnrollShopLink;
+	private WebElement msLeanHowToshopLink;
 	
 	@FindBy(xpath = "//div[@id='accordion2']//h3[text()='Enrollment']")
 	private WebElement EnrollmentLink;
 
-	public ShopforaplanAARPlayer(WebDriver driver) {
+	public ShopForPlanNavigationPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
 		openAndValidate();
@@ -102,50 +102,46 @@ public class ShopforaplanAARPlayer extends UhcDriver {
 		return null;
 	}
 
-	public ShopforaplanAARPlayer ShopLinkOnShopPlan() throws Exception {
-		waitforElement(enrollShopLink);
-		jsClickNew(enrollShopLink);
+	public ShopPage ShopLinkOnShopPlan() throws Exception {
+		waitforElement(shopLink);
+		jsClickNew(shopLink);
 		Thread.sleep(4000);
-		if (validate(dsnpLeanHowToEnrollShopLink)) {
-			waitforElement(dsnpLeanHowToEnrollShopLink);
-			System.out.println("Shop Page Plan is Displayed");
-			return new ShopforaplanAARPlayer(driver);
-		}
-		return null;
+		return new ShopPage(driver);
+		
 	}
 	
 	
 	
-	public void clickONEnrollShopLink(String plantype, String planName) throws Exception{
+	public void clickONshopLink(String plantype, String planName) throws Exception{
 		if(plantype.equals("SNP")){
-			waitforElement(dsnpLeanHowToEnrollShopLink);
-			jsClickNew(dsnpLeanHowToEnrollShopLink);
+			waitforElement(dsnpLeanHowToshopLink);
+			jsClickNew(dsnpLeanHowToshopLink);
 			Thread.sleep(5000);
 		
 		}
 		else if(plantype.equals("PDP")){
-			waitforElement(pdpLeanHowToEnrollShopLink);
-			jsClickNew(pdpLeanHowToEnrollShopLink);
+			waitforElement(pdpLeanHowToshopLink);
+			jsClickNew(pdpLeanHowToshopLink);
 			Thread.sleep(5000);
 		}	
 		
 		else if(plantype.equals("MAPD") || plantype.equals("MA")){
-			waitforElement(maLeanHowToEnrollShopLink);
-			jsClickNew(maLeanHowToEnrollShopLink);
+			waitforElement(maLeanHowToshopLink);
+			jsClickNew(maLeanHowToshopLink);
 			Thread.sleep(5000);
 		}	
 	}
 
-	public ShopforaplanAARPlayer ShopLinkOnMedsuppPlan() throws Exception {
-		waitforElement(enrollShopLink);
-		jsClickNew(enrollShopLink);
+	public ShopPage ShopLinkOnMedsuppPlan() throws Exception {
+		waitforElement(shopLink);
+		jsClickNew(shopLink);
 		Thread.sleep(4000);
-		if (validate(msLeanHowToEnrollShopLink)) {
-			waitforElement(msLeanHowToEnrollShopLink);
-			jsClickNew(msLeanHowToEnrollShopLink);
+		if (validate(msLeanHowToshopLink)) {
+			waitforElement(msLeanHowToshopLink);
+			jsClickNew(msLeanHowToshopLink);
 			threadsleep(2000);
 			System.out.println("Shop Page Medsupp Plan is Displayed");
-			return new ShopforaplanAARPlayer(driver);
+			return new ShopPage(driver);
 		}
 		return null;
 	}
