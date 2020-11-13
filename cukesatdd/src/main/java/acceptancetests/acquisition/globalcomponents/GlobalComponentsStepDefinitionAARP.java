@@ -67,6 +67,24 @@ public class GlobalComponentsStepDefinitionAARP {
 			Assert.fail("Home page not found");
 		}
 	}
+	
+//	@Given("^the user is on medicare acquisition site landing page$")
+//	public void the_user_on__medicare_acquisition_Site(DataTable givenAttributes) {
+//		WebDriver wd = getLoginScenario().getWebDriverNew();
+//		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+//		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+//		for (int i = 0; i < memberAttributesRow.size(); i++) {
+//			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+//					memberAttributesRow.get(i).getCells().get(1));
+//		}
+//		String site = memberAttributesMap.get("Site");
+//		AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd, site);
+// 
+//		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+//		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, aquisitionhomepage);
+//		aquisitionhomepage.validateSubtitle();
+//	}
+	
 
 	/**
 	 * @toDo:user clicks on Aboutus link from footer 
@@ -356,22 +374,22 @@ public class GlobalComponentsStepDefinitionAARP {
 			aquisitionhomepage.validateTFNelement(tfnXpath);
 		}
 	}
-	@Then("^the user validate ZipCode Components on page using ZipCode \"([^\"]*)\"$") 
-	public void the_user_validate_ZipCode_Components_on_page_using_ZipCode(String zipCode) throws Throwable {
-		//EnterZipCodePage enterZipCodePage= new EnterZipCodePage(driver);
-				AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
-						.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-				EnterZipCodePage enterZipCodePage=aquisitionhomepage.enterZipCode();
-				enterZipCodePage.validateZipComp(zipCode);
-	}
+//	@Then("^the user validate ZipCode Components on page using ZipCode \"([^\"]*)\"$") 
+//	public void the_user_validate_ZipCode_Components_on_page_using_ZipCode(String zipCode) throws Throwable {
+//		//EnterZipCodePage enterZipCodePage= new EnterZipCodePage(driver);
+//				AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+//						.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+//				EnterZipCodePage enterZipCodePage=aquisitionhomepage.enterZipCode();
+//				enterZipCodePage.validateZipComp(zipCode);
+//	}
 	
-	@Then("^the user enters and validate the fields and clicks on submit$")
-	public void the_user_enters_and_validate_the_fields_and_clicks_on_submit() throws Throwable {
-		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
-				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		aquisitionhomepage.enterAndvalidateEmail();
-	}
-	
+//	@Then("^the user enters and validate the fields and clicks on submit$")
+//	public void the_user_enters_and_validate_the_fields_and_clicks_on_submit() throws Throwable {
+//		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+//				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+//		aquisitionhomepage.enterAndvalidateEmail();
+//	}
+//	
 	@Then("^the user validates Pro-active Chat$")
 	public void the_user_validates_Pro_active_Chat() throws Throwable {
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()

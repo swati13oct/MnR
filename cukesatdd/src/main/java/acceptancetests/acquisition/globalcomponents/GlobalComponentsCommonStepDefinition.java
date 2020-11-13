@@ -5,8 +5,10 @@ import java.util.List;
 import java.util.Map;
 
 import org.junit.Assert;
+import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstants;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
@@ -34,6 +36,7 @@ public class GlobalComponentsCommonStepDefinition {
 		return loginScenario;
 	}
 	
+	
 	@When("^user accesses global header of the Medicare Plans home page$")
 	public void access_global_header_aarp() {
 
@@ -44,6 +47,23 @@ public class GlobalComponentsCommonStepDefinition {
 		} else {
 			Assert.fail("Home page not found");
 		}
+	}
+	
+	@Given("^the user is on medicare acquisition site landing page$")
+	public void the_user_on__medicare_acquisition_Site(DataTable givenAttributes) {
+		WebDriver wd = getLoginScenario().getWebDriverNew();
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		String site = memberAttributesMap.get("Site");
+		AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd, site);
+ 
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, aquisitionhomepage);
+		aquisitionhomepage.validateSubtitle();
 	}
 	
 	@When("^user accesses global footer of the Medicare Plans All page$")
@@ -86,8 +106,26 @@ public class GlobalComponentsCommonStepDefinition {
 		aquisitionhomepage.validatevisitorprofile();
 	}
 	
+	@Then("^user validates Subtitle$")
+	public void user_validates_Subtitle(DataTable givenAttributes) throws Throwable {
+		WebDriver wd = getLoginScenario().getWebDriverNew();
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		String site = memberAttributesMap.get("Site");
+		AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd, site);
+       if(site.equalsIgnoreCase("AARP")) {
+		aquisitionhomepage.validateSubtitle();
+       }
+	}
+	
+		
+	
 	@Given("^the user navigates to following medicare acquisition site page$")
-	public void the_user_navigates_to_following_AARP_medicare_acquisition_site_page(DataTable givenAttributes) throws Throwable {
+	public void the_user_navigates_to_following_medicare_acquisition_site_page(DataTable givenAttributes) throws Throwable {
 		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
@@ -143,13 +181,20 @@ public class GlobalComponentsCommonStepDefinition {
 		}
 	}
 	
-	@Then("^the user validate ZipCode Components on the page using ZipCode \"([^\"]*)\"$") 
+	@Then("^the user validate ZipCode Components on page using ZipCode \"([^\"]*)\"$")
 	public void the_user_validate_ZipCode_Components_on_page_using_ZipCode(String zipCode) throws Throwable {
-		//EnterZipCodePage enterZipCodePage= new EnterZipCodePage(driver);
+	   		//EnterZipCodePage enterZipCodePage= new EnterZipCodePage(driver);
 				AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
 						.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 				EnterZipCodePage enterZipCodePage=aquisitionhomepage.enterZipCode();
 				enterZipCodePage.validateZipComp(zipCode);
+	}
+	
+	@Then("^the user enters and validate the fields and clicks on submit$")
+	public void the_user_enters_and_validate_the_fields_and_clicks_on_submit() throws Throwable {
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		aquisitionhomepage.enterAndvalidateEmail();
 	}
 	
 	@When("^user vaidates the state drop down link on the home page$")

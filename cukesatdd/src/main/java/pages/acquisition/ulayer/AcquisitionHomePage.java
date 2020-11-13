@@ -444,8 +444,6 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "//div[@class='confirmationtext']/p[1]/b")
 	private WebElement Thankyou;
 	
-	
-	
 	@FindBy(xpath = "//body/div[@id='overlay']")
 	private WebElement overlayFilm;
 	
@@ -2614,45 +2612,45 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		
 	}
 	
-	public void enterAndvalidateEmail() {
-		
-		threadsleep(8);
-		
-		//if(SubmitEmail.isDisplayed()) {
-		int size=driver.findElements(By.xpath("//span[contains(text(),'Sign Up')]")).size();
-		System.out.println("size of sign up"+size);
-		if(size>0){
-			driver.findElement(By.xpath("//span[contains(text(),'Sign Up')]")).click();
-			threadsleep(4);
-			Assert.assertEquals(ErrorEmailAddress.getText(), "Please enter a valid email address");
-			threadsleep(4);
-			EmailFirstName.sendKeys("abc");
-			EmailLastName.sendKeys("def");
-			EmailAddress.sendKeys("a@gmail.com");
-			driver.findElement(By.xpath("//span[contains(text(),'Sign Up')]")).click();
-		}else {
-			SubmitEmail.click();
-			threadsleep(4);
-			Assert.assertEquals(ErrorFirstName.getText(), "Please enter First Name");
-			threadsleep(2);
-			Assert.assertEquals(ErrorLastName.getText(), "Please enter Last Name");
-			threadsleep(2);
-			Assert.assertEquals(ErrorEmailAddress.getText(), "Please enter a valid email address");
-			threadsleep(4);
-			EmailFirstName.sendKeys("abc");
-			EmailLastName.sendKeys("def");
-			EmailAddress.sendKeys("a@gmail.com");
-			SubmitEmail.click();
-		}
-		
-			threadsleep(4);
-			if(Thankyou.getText().equalsIgnoreCase("Thank you!")) {
-				assertTrue(true);
-			}
-			
-			
-						
-		}
+//	public void enterAndvalidateEmail() {
+//		
+//		threadsleep(8);
+//		
+//		//if(SubmitEmail.isDisplayed()) {
+//		int size=driver.findElements(By.xpath("//span[contains(text(),'Sign Up')]")).size();
+//		System.out.println("size of sign up"+size);
+//		if(size>0){
+//			driver.findElement(By.xpath("//span[contains(text(),'Sign Up')]")).click();
+//			threadsleep(4);
+//			Assert.assertEquals(ErrorEmailAddress.getText(), "Please enter a valid email address");
+//			threadsleep(4);
+//			EmailFirstName.sendKeys("abc");
+//			EmailLastName.sendKeys("def");
+//			EmailAddress.sendKeys("a@gmail.com");
+//			driver.findElement(By.xpath("//span[contains(text(),'Sign Up')]")).click();
+//		}else {
+//			SubmitEmail.click();
+//			threadsleep(4);
+//			Assert.assertEquals(ErrorFirstName.getText(), "Please enter First Name");
+//			threadsleep(2);
+//			Assert.assertEquals(ErrorLastName.getText(), "Please enter Last Name");
+//			threadsleep(2);
+//			Assert.assertEquals(ErrorEmailAddress.getText(), "Please enter a valid email address");
+//			threadsleep(4);
+//			EmailFirstName.sendKeys("abc");
+//			EmailLastName.sendKeys("def");
+//			EmailAddress.sendKeys("a@gmail.com");
+//			SubmitEmail.click();
+//		}
+//		
+//			threadsleep(4);
+//			if(Thankyou.getText().equalsIgnoreCase("Thank you!")) {
+//				assertTrue(true);
+//			}
+//			
+//			
+//						
+//		}
 		
 	
 		public VPPPlanSummaryPage searchPlansWithOutCountyShop(String zipcode) throws InterruptedException {
