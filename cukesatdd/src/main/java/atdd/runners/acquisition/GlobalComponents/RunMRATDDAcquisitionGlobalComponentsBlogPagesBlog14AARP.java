@@ -8,7 +8,7 @@ import com.github.mkolisnyk.cucumber.runner.ExtendedCucumberOptions;
 import cucumber.api.CucumberOptions;
 
 /**
- * this file is to run test cases for RunMRATDDAcquisitionGlobalComponentsBlogPagesBlog1AARP
+ * this file is to run test cases for RunMRATDDAcquisitionGlobalComponentsBlogPagesBlog14AARP
  */
 @RunWith(ExtendedCucumber.class)
 @ExtendedCucumberOptions(retryCount=1,screenShotSize="", screenShotLocation="/screenshots/",
