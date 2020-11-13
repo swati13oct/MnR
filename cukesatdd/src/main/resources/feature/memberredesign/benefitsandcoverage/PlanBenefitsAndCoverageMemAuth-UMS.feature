@@ -70,7 +70,7 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth
 
     Examples: 
       | index | TID   |username  | password  | MemUserName | planType | memberType       |
-      | 03    | 15091 |qavgogine | qavgogine| q3_SEP_2020SHIP_001|SHIP_HIP    | ComboFEDShip_BnC |
+      | 03    | 15091 |qavgogine | qavgogine| q3_SEP_2020SHIP_002|SHIP_HIP    | ComboFEDShip_BnC |
       
   #TC10_Benefits_for_TexasERSMember
   @memAuth_benefitsAndCoverage3 @BenefitsforTexasERSMember @regression @BnC_Part2_memAuth
