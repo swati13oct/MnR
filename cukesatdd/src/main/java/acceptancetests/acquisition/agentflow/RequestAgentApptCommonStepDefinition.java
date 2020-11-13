@@ -54,6 +54,20 @@ public class RequestAgentApptCommonStepDefinition {
 			Assert.fail("Error in loading the UHC Agent Page");
 	}
 	
+	@When("^the user clicks on Agent link and validates the correct URL is loaded for Medsupp page$")
+	public void User_navigate_EBRC_Links_through_Medsupp(DataTable arg1) throws InterruptedException {
+		Map<String, String> inputAttributesMap=parseInputArguments(arg1);
+		String myUHCAgentURL = inputAttributesMap.get("UHC Agent URL");
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage)getLoginScenario().getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		
+		
+		if(myUHCAgentURL!=null){
+			aquisitionhomepage.clickonFindanAgentlinkMedsupp(myUHCAgentURL);
+			Assert.assertTrue(true);
+		}else
+			Assert.fail("Error in loading the UHC Agent Page");
+	}
+	
 	public Map<String, String> parseInputArguments(DataTable memberAttributes) {
 		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
 		List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
