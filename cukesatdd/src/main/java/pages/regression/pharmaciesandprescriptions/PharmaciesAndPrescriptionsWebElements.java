@@ -834,7 +834,7 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 		List<Integer> listOfIndex = getListOfIndexForGetPricing();
 		Random rand = new Random();
 		rand_int = rand.nextInt(listOfIndex.size());
-		listOfGetPricing.get(listOfIndex.get(rand_int)).click();
+		jsClickNew(listOfGetPricing.get(listOfIndex.get(rand_int)));
 
 	}
 
