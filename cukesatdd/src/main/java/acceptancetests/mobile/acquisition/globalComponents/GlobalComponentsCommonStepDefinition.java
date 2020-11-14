@@ -66,6 +66,7 @@ public class GlobalComponentsCommonStepDefinition {
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		if (aquisitionhomepage != null) {
 			aquisitionhomepage.validateGlobalFooterLinks();
+			aquisitionhomepage.clickBrowserBackButton();
 		} else {
 			Assert.fail("Home Page not Loading");
 		}

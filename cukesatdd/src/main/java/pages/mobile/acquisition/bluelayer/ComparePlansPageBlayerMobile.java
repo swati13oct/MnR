@@ -21,7 +21,9 @@ import atdd.framework.UhcDriver;
 import pages.acquisition.ole.WelcomePage;
 import pages.mobile.acquisition.commonpages.DrugCostEstimatorPage;
 import pages.mobile.acquisition.commonpages.FindCarePage;
+import pages.mobile.acquisition.dce.ulayer.DrugCostEstimatorPageMobile;
 import pages.mobile.acquisition.ole.WelcomePageMobile;
+import pages.mobile.acquisition.ulayer.FindCarePageMobile;
 import pages.mobile.acquisition.ulayer.VPPPlanSummaryPageMobile;
 
 public class ComparePlansPageBlayerMobile extends UhcDriver {
@@ -353,7 +355,7 @@ public class ComparePlansPageBlayerMobile extends UhcDriver {
     	else Assert.assertTrue(false);
 	}
 
-	public DrugCostEstimatorPage clickonDCE() {
+	public DrugCostEstimatorPageMobile clickonDCE() {
 
 		try {
 			Thread.sleep(5000);
@@ -368,12 +370,12 @@ public class ComparePlansPageBlayerMobile extends UhcDriver {
 		waitforElement(addDrug);
 		if (validate(addDrug)) {
 			System.out.println("User is on DCE Page");
-			return new DrugCostEstimatorPage(driver);
+			return new DrugCostEstimatorPageMobile(driver);
 		} else
 			return null;
 	}
 
-	public FindCarePage clickonLookUpYourDoctor() throws InterruptedException {
+	public FindCarePageMobile clickonLookUpYourDoctor() throws InterruptedException {
 
 		try {
 			Thread.sleep(5000);
@@ -410,7 +412,7 @@ public class ComparePlansPageBlayerMobile extends UhcDriver {
 		waitforElement(FindCareLink);
 		if (validate(FindCareLink)) {
 			System.out.println("User is on Find care Page");
-			return new FindCarePage(driver);
+			return new FindCarePageMobile(driver);
 		} else
 			return null;
 	}
@@ -662,7 +664,7 @@ public VPPPlanSummaryPageMobile clickOnNewAddIcon(){
 		
 	}	
  	
- 	public FindCarePage clickonAddYourDoctors() throws InterruptedException {
+ 	public FindCarePageMobile clickonAddYourDoctors() throws InterruptedException {
 
 		try {
 			Thread.sleep(5000);
@@ -690,7 +692,7 @@ public VPPPlanSummaryPageMobile clickOnNewAddIcon(){
 		waitforElement(FindCareLink);
 		if (validate(FindCareLink)) {
 			System.out.println("User is on Find care Page");
-			return new FindCarePage(driver);
+			return new FindCarePageMobile(driver);
 		} else
 			return null;
 	}
@@ -703,7 +705,7 @@ public VPPPlanSummaryPageMobile clickOnNewAddIcon(){
 		}
 	}
  	
- 	public FindCarePage clickonAddYourHospitals() throws InterruptedException {
+ 	public FindCarePageMobile clickonAddYourHospitals() throws InterruptedException {
 
 		try {
 			Thread.sleep(5000);
@@ -731,12 +733,12 @@ public VPPPlanSummaryPageMobile clickOnNewAddIcon(){
 		waitforElement(FindCareLink);
 		if (validate(FindCareLink)) {
 			System.out.println("User is on Find care Page");
-			return new FindCarePage(driver);
+			return new FindCarePageMobile(driver);
 		} else
 			return null;
 	}
  	
- 	public FindCarePage clickonEditYourDoctors() throws InterruptedException {
+ 	public FindCarePageMobile clickonEditYourDoctors() throws InterruptedException {
 
 		try {
 			Thread.sleep(5000);
@@ -765,12 +767,12 @@ public VPPPlanSummaryPageMobile clickOnNewAddIcon(){
 		waitforElement(FindCareLink);
 		if (validate(FindCareLink)) {
 			System.out.println("User is on Find care Page");
-			return new FindCarePage(driver);
+			return new FindCarePageMobile(driver);
 		} else
 			return null;
 	}
  	
- 	public FindCarePage clickonEditYourHosptials() throws InterruptedException {
+ 	public FindCarePageMobile clickonEditYourHosptials() throws InterruptedException {
 
 		try {
 			Thread.sleep(5000);
@@ -799,12 +801,12 @@ public VPPPlanSummaryPageMobile clickOnNewAddIcon(){
 		waitforElement(FindCareLink);
 		if (validate(FindCareLink)) {
 			System.out.println("User is on Find care Page");
-			return new FindCarePage(driver);
+			return new FindCarePageMobile(driver);
 		} else
 			return null;
 	}
  	
- 	public DrugCostEstimatorPage clickonEdityourDrugs() {
+ 	public DrugCostEstimatorPageMobile clickonEdityourDrugs() {
 
 		try {
 			Thread.sleep(5000);
@@ -819,7 +821,7 @@ public VPPPlanSummaryPageMobile clickOnNewAddIcon(){
 		waitforElement(addDrug);
 		if (validate(addDrug)) {
 			System.out.println("User is on DCE Page");
-			return new DrugCostEstimatorPage(driver);
+			return new DrugCostEstimatorPageMobile(driver);
 		} else
 			return null;
 	}

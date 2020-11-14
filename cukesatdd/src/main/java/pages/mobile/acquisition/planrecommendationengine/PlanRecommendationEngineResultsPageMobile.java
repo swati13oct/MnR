@@ -525,7 +525,8 @@ public class PlanRecommendationEngineResultsPageMobile extends UhcDriver {
 // Filling MS form with default value
 		public void submitMSform() {
 			//Zip value is pre-populated by default
-			MSPlanDOB.sendKeys("01/06/1940");
+			//MSPlanDOB.sendKeys("01/06/1940");
+			jsSendkeys(MSPlanDOB, "01/06/1940");
 			jsClickNew(MSPlanGender);
 			threadsleep(8000);
 			jsClickNew(MSPlanGender);
@@ -715,6 +716,7 @@ public class PlanRecommendationEngineResultsPageMobile extends UhcDriver {
 		System.out.println("Validating VPP to PRE Page");
 		validate(StartNowButton,20);
 		jsClickNew(StartNowButton);
+		validateNew(continueBtn, 5);
 		pageloadcomplete();
 	
 	}
