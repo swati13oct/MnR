@@ -67,7 +67,7 @@ public class PlanRecommendationEnginePharmacyPageMobile extends UhcDriver {
                 @FindBy(css = "#custom-radio-group>fieldset>uhc-radio:nth-child(2)>label>span.radio-label-content")
                 private WebElement onlinePharmacy;
                 
-                @FindBy(css = "#custom-radio-group>fieldset>uhc-radio:nth-child(3)>label>span.radio-label-content")
+                @FindBy(css = "#custom-radio-group>fieldset>uhc-radio:nth-child(3)>label")
                 private WebElement retailPharmacy;
                 
                 @FindBy(css = "#errorMessage")

@@ -2065,13 +2065,11 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	}
 
 	public void validateDisclaimer() {
-		
 		scrollToView(disclaimerInformation);
 		validateNew(disclaimerInformation);
 		// disclaimerInformation.click();
 		jsClickNew(disclaimerInformation);
 		validateNew(backToTop_Disclaimer);
-	
 	}
 
 	public void validateVisitAarpOrglink() {

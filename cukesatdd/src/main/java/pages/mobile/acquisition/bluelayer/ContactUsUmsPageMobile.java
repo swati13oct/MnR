@@ -41,8 +41,7 @@ public class ContactUsUmsPageMobile extends UhcDriver{
 
 	@Override
 	public void openAndValidate() {
-		scrollToView(header);
-		//CommonUtility.waitForPageLoadNew(driver, header, 40);
+		CommonUtility.waitForPageLoadNew(driver, header, 30);
 		validateNew(rightRailSection_ProvidersOnly);
 		//validateNew(ma_AccordialCollapsed);
 		//validateNew(disclaimerBox_Para);

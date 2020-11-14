@@ -680,7 +680,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 	@FindBy(xpath = "//label[contains(@for,'compare-plan')]")
 	private WebElement planCompareCheckBox;
 
-	@FindBy(xpath = "//span[contains(@class,'multiple-added-text ng-binding show')]")
+	@FindBy(xpath = "//span[@class='multiple-added-text show']")
 	private WebElement multipleCompareText;
 
 	@FindBy(xpath = "//div[contains(@class,'plan-list show active')]//*[@class='segment-title oon-benefit-padding']//h3")
@@ -4440,14 +4440,14 @@ public void validatePlanPremium (String planName , String monthlyPremium){
 		}
 	}
 
-	public ComparePlansPageMobile clickOnCompareLink() {
+	public ComparePlansPageBlayerMobile clickOnCompareLink() {
 		List<WebElement> compareLinks = driver.findElements(
 				By.xpath("//*[contains(@class,'multiple-added-text')]//button[contains(text(),'Compare plans')]"));
 		// compareLinks.get(1).click();
 		jsClickNew(compareLinks.get(1));
 
 		if (currentUrl().contains("/health-plans.html#/plan-compare"))
-			return new ComparePlansPageMobile(driver);
+			return new ComparePlansPageBlayerMobile(driver);
 		return null;
 	}
 
@@ -4597,19 +4597,11 @@ public void validatePlanPremium (String planName , String monthlyPremium){
 	public pages.mobile.acquisition.bluelayer.ProviderSearchPageMobile clicksOnIsProviderCoveredUms(String planName) {
 
 		CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
-		
-		try {
-			Thread.sleep(3000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 
 		WebElement ProviderSearchLink = driver.findElement(By.xpath("//*[contains(text(),\'" + planName
 				+ "\')]/ancestor::div[contains(@class,'module-plan-overview')]//*[contains(@dtmname,'Provider Search')]"));
-		scrollToView(ProviderSearchLink);
 		validateNew(ProviderSearchLink);
-		//scrollToView(ProviderSearchLink);
+		scrollToView(ProviderSearchLink);
 		switchToNewTabNew(ProviderSearchLink);
 		sleepBySec(3);
 		if (driver.getCurrentUrl().contains("werally")) {
@@ -4659,91 +4651,6 @@ public void validatePlanPremium (String planName , String monthlyPremium){
 			Assert.fail("Provider Search Page is not displayed");
 	}
 
-	public void clickCompareChkBoxPDP() {
-		try {
-			Thread.sleep(3000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		List<WebElement> allPDPPlans = driver
-				.findElements(By.xpath(".//*[@id='plan-list-3']//div[contains(@class,'compare-box')]//label"));
-
-		if (allPDPPlans != null) {
-			for (int i = 0; i < allPDPPlans.size(); i++) {
-				allPDPPlans.get(i).click();
-				if (i == 3) {
-					break;
-				}
-			}
-		}
-
-	}
-	
-	@FindBy(xpath = "//*[contains(@id,'mpaed-month')]")
-	private WebElement monthDrpDwn_PartA;
-
-	@FindBy(id = "mpaed-year")
-	private WebElement yearDrpDwn_PartA;
-
-	@FindBy(id = "mpbed-month")
-	private WebElement monthBDrpDwn;
-
-	@FindBy(id = "mpbed-year")
-	private WebElement yearBDrpDwn;
-
-	@FindBy(xpath = "//*[@id='mpaed-month']/option[2]")
-	private WebElement monthDrpDwnOption;
-
-	@FindBy(xpath = "//*[@id='mpaed-year']/option[3]")
-	private WebElement yearDrpDwnOption;
-
-	@FindBy(xpath = "//*[@id='mpbed-month']/option[2]")
-	private WebElement monthBDrpDwnOption;
-
-	@FindBy(xpath = "//*[@id='mpbed-year']/option[3]")
-	private WebElement yearBDrpDwnOption;
-
-	
-	
-	public void MedSupFormValidation_2ndTime(String DateOfBirth, String zipcode) throws InterruptedException {
-		checkModelPopup(driver, 25);
-		System.out.println("MedSup page form is displayed");
-		// medSupZipcode.sendKeys(zipcode);
-		DOB.click();
-		DOB.sendKeys(DateOfBirth);
-		System.out.println("Date of birth is entered");
-		jsClickNew(MaleGender);
-		jsClickNew(monthDrpDwn_PartA);
-		monthDrpDwnOption.click();
-		Thread.sleep(2000);
-		System.out.println("Effective date- month value selected");
-		yearDrpDwn_PartA.click();
-		yearDrpDwnOption.click();
-		System.out.println("Effective date- year value selected");
-		Thread.sleep(2000);
-		monthBDrpDwn.click();
-		monthBDrpDwnOption.click();
-		Thread.sleep(2000);
-		yearBDrpDwn.click();
-		yearBDrpDwnOption.click();
-		Thread.sleep(2000);
-		startDrpDwn.click();
-		Thread.sleep(2000);
-		startDrpDwnOption.click();
-		Thread.sleep(3000);
-		System.out.println("Plan to start date selected");
-		ViewPlanMedSupPage.click();
-	}
-
-	
-	public void ResumeApplicationButton() throws InterruptedException {
-		Thread.sleep(5000);
-		//Start_ApplicationBtn.click();
-		CommonUtility.waitForPageLoadNew(driver, resumeApplication, 30);
-		resumeApplication.click();
-		System.out.println("Resume application link clicked successfully");
-	}
 	/*
 	 * public boolean waitForJStoLoad () {
 	 * 

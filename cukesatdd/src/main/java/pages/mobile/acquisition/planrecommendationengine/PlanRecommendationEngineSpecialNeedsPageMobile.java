@@ -196,13 +196,11 @@ public class PlanRecommendationEngineSpecialNeedsPageMobile extends UhcDriver {
 		System.out.println("SNP Option " + SNPType + " Selection");
 		if (SNPType.equalsIgnoreCase("Medicaid")) {
 			validate(snpMedicaid);
-			//snpMedicaid.click();
-			jsClickNew(snpMedicaid);
+			snpMedicaid.click();
 			System.out.println("Plan Type " + SNPType + " Clicked");
 		} else if (SNPType.equalsIgnoreCase("chronic")) {
 			validate(snpConditions);
-			//snpConditions.click();
-			jsClickNew(snpConditions);
+			snpConditions.click();
 			System.out.println("Plan Type " + SNPType + " Clicked");
 		} else if (SNPType.equalsIgnoreCase("nursing")) {
 			validate(snpNursinghome);

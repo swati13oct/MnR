@@ -27,10 +27,14 @@ import gherkin.formatter.model.DataTableRow;
 import io.appium.java_client.AppiumDriver;
 import pages.acquisition.bluelayer.AcquisitionHomePage;
 import pages.acquisition.bluelayer.AddDrugDetails;
+import pages.acquisition.bluelayer.ComparePlansPageBlayer;
 import pages.acquisition.bluelayer.DrugCostEstimatorPage;
 import pages.acquisition.bluelayer.FindCarePage;
 import pages.acquisition.bluelayer.MultiCountyModalPage;
 import pages.acquisition.bluelayer.PlanComparePage;
+import pages.acquisition.bluelayer.PlanDetailsPage;
+import pages.acquisition.bluelayer.ProviderSearchPage;
+import pages.acquisition.bluelayer.VPPPlanSummaryPage;
 import pages.acquisition.bluelayer.VPPTestHarnessPage;
 import pages.acquisition.bluelayer.VisitorProfilePage;
 import pages.acquisition.bluelayer.VisitorProfileTestHarnessPage;
@@ -429,7 +433,7 @@ public class VppPlanDetailMobile {
 		 */
 		AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		// VPPPlanSummaryPageMobile plansummaryPage =
+		// VPPPlanSummaryPage plansummaryPage =
 		// aquisitionhomepage.searchPlans(zipcode, county);
 		VPPPlanSummaryPageMobile plansummaryPage = aquisitionhomepage.searchPlans(zipcode, county);
 		if (plansummaryPage != null) {
@@ -883,7 +887,7 @@ public class VppPlanDetailMobile {
 	 */
 	@And("^I select all 3 plans to compare in MA and click on compare plan link in UHS site$")
 	public void I_select_all_3_plans_to_compare() {
-		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		plansummaryPage.clickonViewPlans();
 		plansummaryPage.handlePlanYearSelectionPopup();
@@ -894,7 +898,7 @@ public class VppPlanDetailMobile {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		ComparePlansPageMobile comparePlansPageblayer = plansummaryPage.clickOnCompareLink();
+		ComparePlansPageBlayer comparePlansPageblayer = plansummaryPage.clickOnCompareLink();
 		if (comparePlansPageblayer != null) {
 			getLoginScenario().saveBean(PageConstants.TeamC_Plan_Compare_Page, comparePlansPageblayer);
 			// comparePlansPage.backToVPPPage();
@@ -908,7 +912,7 @@ public class VppPlanDetailMobile {
 	@When("^the user validate the print and email link option in plan compare in UHS site$")
 	public void user_validate_print_and_email_link_option_in_plan_compare() {
 
-		ComparePlansPageBlayerMobile comparePlansPage = (ComparePlansPageBlayerMobile) getLoginScenario()
+		ComparePlansPageBlayer comparePlansPage = (ComparePlansPageBlayer) getLoginScenario()
 				.getBean(PageConstants.TeamC_Plan_Compare_Page);
 		comparePlansPage.validateprintandemail();
 	}
@@ -919,7 +923,7 @@ public class VppPlanDetailMobile {
 	@Then("^the user validating email and print option in plan compare in UHS site$")
 	public void user_validating_print_and_email_option_in_plan_compare() {
 
-		ComparePlansPageBlayerMobile comparePlansPage = (ComparePlansPageBlayerMobile) getLoginScenario()
+		ComparePlansPageBlayer comparePlansPage = (ComparePlansPageBlayer) getLoginScenario()
 				.getBean(PageConstants.TeamC_Plan_Compare_Page);
 		comparePlansPage.validatingprintandemail();
 	}
@@ -930,7 +934,7 @@ public class VppPlanDetailMobile {
 	@When("^the user validate thank you message in plan compare in UHS site$")
 	public void user_validate_thank_you_message_in_plan_compare() {
 
-		ComparePlansPageBlayerMobile comparePlansPage = (ComparePlansPageBlayerMobile) getLoginScenario()
+		ComparePlansPageBlayer comparePlansPage = (ComparePlansPageBlayer) getLoginScenario()
 				.getBean(PageConstants.TeamC_Plan_Compare_Page);
 		comparePlansPage.validatingthankyoumessage();
 	}
@@ -943,7 +947,7 @@ public class VppPlanDetailMobile {
 	@Then("^the user clicks on back to all plans link and validates all three plans are selected$")
 	public void the_user_clicks_on_back_to_plans_link_and_validates_plans_are_selected() {
 
-		ComparePlansPageBlayerMobile comparePlansPage = (ComparePlansPageBlayerMobile) getLoginScenario()
+		ComparePlansPageBlayer comparePlansPage = (ComparePlansPageBlayer) getLoginScenario()
 				.getBean(PageConstants.TeamC_Plan_Compare_Page);
 		comparePlansPage.validatetopbacktoplanslink();
 	}
@@ -985,7 +989,7 @@ public class VppPlanDetailMobile {
 		String expectedText = memberAttributesMap.get("Expected Text");
 		System.out.println("Validating the following Medical benefits : " + benefitType);
 
-		PlanDetailsPageMobile vppPlanDetailsPage = (PlanDetailsPageMobile) getLoginScenario()
+		PlanDetailsPage vppPlanDetailsPage = (PlanDetailsPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
 		boolean validationFlag = vppPlanDetailsPage.validatingMedicalBenefitTextInPlanDetails(benefitType,
 				expectedText);
@@ -1015,10 +1019,10 @@ public class VppPlanDetailMobile {
 	@Then("^User clicks on Back to Plans link and navigate back to plan summary in UMS site$")
 	public void User_clicks_BackToPlansLink_and_navigate_back_to_plan_summary_in_UMS_site() {
 
-		PlanDetailsPageMobile planDetailsPage = (PlanDetailsPageMobile) getLoginScenario()
+		PlanDetailsPage planDetailsPage = (PlanDetailsPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
 
-		VPPPlanSummaryPageMobile plansummaryPage = planDetailsPage.navigateBackToPlanSummaryPage();
+		VPPPlanSummaryPage plansummaryPage = planDetailsPage.navigateBackToPlanSummaryPage();
 		if (plansummaryPage != null) {
 			Assert.assertTrue(true);
 		} else
@@ -1030,10 +1034,10 @@ public class VppPlanDetailMobile {
 	 */
 	@And("^User click on add to compare checkbox and click on view details link on UMS$")
 	public void user_click_on_compare_checkbox_ums() {
-		VPPPlanSummaryPageMobile vppplansummarypage = (VPPPlanSummaryPageMobile) loginScenario
+		VPPPlanSummaryPage vppplansummarypage = (VPPPlanSummaryPage) loginScenario
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		vppplansummarypage.clickCompareChkBox();
-		PlanDetailsPageMobile plandetailspage = vppplansummarypage.clickViewDetails_AddedToCompare();
+		PlanDetailsPage plandetailspage = vppplansummarypage.clickViewDetails_AddedToCompare();
 		if (plandetailspage != null) {
 			getLoginScenario().saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE, plandetailspage);
 			plandetailspage.clickCompareBox();
@@ -1132,12 +1136,12 @@ public class VppPlanDetailMobile {
 		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		String planName = memberAttributesRow.get(0).getCells().get(1);
 		getLoginScenario().saveBean(VPPCommonConstantsMobile.PLAN_NAME, planName);
-		VPPPlanSummaryPageMobile vppPlanSummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
+		VPPPlanSummaryPage vppPlanSummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 
 		// String planType = (String)
 		// getLoginScenario().getBean(VPPCommonConstantsMobile.PLAN_TYPE);
-		VPPPlanSummaryPageMobile vppPlanDetailsPage = vppPlanSummaryPage.validatePromoWidjetAArp(planName);
+		PlanDetailsPage vppPlanDetailsPage = vppPlanSummaryPage.validatePromoWidjet(planName);
 		if (vppPlanDetailsPage != null) {
 			getLoginScenario().saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE, vppPlanDetailsPage);
 		} else
@@ -1149,7 +1153,7 @@ public class VppPlanDetailMobile {
 	 */
 	@And("^I select all 3 plans to compare and click on compare plan link in UHC$")
 	public void I_select_all_3_plans_to_compare_UHC() {
-		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 
 		plansummaryPage.checkAllMAPlans();
@@ -1159,7 +1163,7 @@ public class VppPlanDetailMobile {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		ComparePlansPageMobile planComparePage = plansummaryPage.clickOnCompareLink();
+		ComparePlansPageBlayer planComparePage = plansummaryPage.clickOnCompareLink();
 		if (planComparePage != null) {
 			getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
 			// comparePlansPage.backToVPPPage();
@@ -1169,7 +1173,7 @@ public class VppPlanDetailMobile {
 
 	@Given("^I select \"([^\"]*)\" plans to compare and click on compare plan link in UHC$")
 	public void i_select_plans_to_compare_and_click_on_compare_plan_link_in_UHC(String planType) throws Throwable {
-		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		if (planType.equals("MAPD")) {
 			// plansummaryPage.clickonViewPlans();
@@ -1181,7 +1185,7 @@ public class VppPlanDetailMobile {
 			System.out.println("Selected All PDP plans for Plan Compare");
 		}
 
-		ComparePlansPageMobile planComparePage = plansummaryPage.clickOnCompareLink();
+		ComparePlansPageBlayer planComparePage = plansummaryPage.clickOnCompareLink();
 		if (planComparePage != null) {
 			getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
 			// comparePlansPage.backToVPPPage();
@@ -1191,7 +1195,7 @@ public class VppPlanDetailMobile {
 
 	@And("^I Click on DCE link on Plan compare$")
 	public void I_Click_On_DCE_link_on_Plan_Compare() {
-		ComparePlansPageBlayerMobile planComparePage = (ComparePlansPageBlayerMobile) getLoginScenario()
+		ComparePlansPageBlayer planComparePage = (ComparePlansPageBlayer) getLoginScenario()
 				.getBean(PageConstants.PLAN_COMPARE_PAGE);
 		try {
 			Thread.sleep(3000);
@@ -1199,7 +1203,7 @@ public class VppPlanDetailMobile {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		DrugCostEstimatorPageMobile drugCostEstimatorPage = planComparePage.clickonDCE();
+		DrugCostEstimatorPage drugCostEstimatorPage = planComparePage.clickonDCE();
 		if (drugCostEstimatorPage != null) {
 			getLoginScenario().saveBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE, drugCostEstimatorPage);
 			// comparePlansPage.backToVPPPage();
@@ -1209,7 +1213,7 @@ public class VppPlanDetailMobile {
 
 	@And("^I Click on Look up your doctor link on Plan compare$")
 	public void I_Click_on_Look_up_your_doctor_link_on_Plan_compare() throws InterruptedException {
-		ComparePlansPageBlayerMobile planComparePage = (ComparePlansPageBlayerMobile) getLoginScenario()
+		ComparePlansPageBlayer planComparePage = (ComparePlansPageBlayer) getLoginScenario()
 				.getBean(PageConstants.PLAN_COMPARE_PAGE);
 		try {
 			Thread.sleep(3000);
@@ -1217,7 +1221,7 @@ public class VppPlanDetailMobile {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		FindCarePageMobile findCarePage = planComparePage.clickonLookUpYourDoctor();
+		FindCarePage findCarePage = planComparePage.clickonLookUpYourDoctor();
 		if (findCarePage != null) {
 			getLoginScenario().saveBean(PageConstants.FIND_CARE_PAGE, findCarePage);
 			// comparePlansPage.backToVPPPage();
@@ -1227,14 +1231,14 @@ public class VppPlanDetailMobile {
 
 	@And("^I click on Get Started on and Add Provider from find care page$")
 	public void I_click_on_Get_Started_and_Add_Provider_from_find_care_page() throws Exception {
-		FindCarePageMobile findCarePage = (FindCarePageMobile) getLoginScenario().getBean(PageConstants.FIND_CARE_PAGE);
+		FindCarePage findCarePage = (FindCarePage) getLoginScenario().getBean(PageConstants.FIND_CARE_PAGE);
 		try {
 			Thread.sleep(3000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		ComparePlansPageMobile planComparePage = findCarePage.getstarted();
+		ComparePlansPageBlayer planComparePage = findCarePage.getstarted();
 		if (planComparePage != null) {
 			getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
 			// comparePlansPage.backToVPPPage();
@@ -1244,7 +1248,7 @@ public class VppPlanDetailMobile {
 
 	@Then("^Verify provider is count is updated on plan compare page$")
 	public void Verify_provider_is_count_is_updated_on_plan_compare_page() throws Exception {
-		ComparePlansPageBlayerMobile planComparePage = (ComparePlansPageBlayerMobile) getLoginScenario()
+		ComparePlansPageBlayer planComparePage = (ComparePlansPageBlayer) getLoginScenario()
 				.getBean(PageConstants.PLAN_COMPARE_PAGE);
 		try {
 			Thread.sleep(3000);
@@ -1278,7 +1282,7 @@ public class VppPlanDetailMobile {
 		WebDriver wd = getLoginScenario().getWebDriverNew();
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 
-		VPPPlanSummaryPageMobile vppPlanSummaryPage = new VPPPlanSummaryPageMobile(wd, OLE_Campaign_URL, true);
+		VPPPlanSummaryPage vppPlanSummaryPage = new VPPPlanSummaryPage(wd, OLE_Campaign_URL, true);
 		if (vppPlanSummaryPage != null) {
 			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, vppPlanSummaryPage);
 			System.out.println("OLE Campaign Landing Page Displayed");
@@ -1305,7 +1309,7 @@ public class VppPlanDetailMobile {
 		WebDriver wd = getLoginScenario().getWebDriverNew();
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 
-		VPPPlanSummaryPageMobile vppPlanSummaryPage = new VPPPlanSummaryPageMobile(wd, OLE_Campaign_URL, true);
+		VPPPlanSummaryPage vppPlanSummaryPage = new VPPPlanSummaryPage(wd, OLE_Campaign_URL, true);
 		if (vppPlanSummaryPage != null) {
 			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, vppPlanSummaryPage);
 			System.out.println("OLE Campaign Landing Page Displayed");
@@ -1353,7 +1357,7 @@ public class VppPlanDetailMobile {
 
 	@Then("^user validates selected plans can be saved as favorite on UHC site$")
 	public void user_validates_selected_plan_can_be_saved_as_favorite_on_AARP_site(DataTable givenAttributes) {
-		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 
 		Map<String, String> memberAttributesMap = prepareTestInput(givenAttributes);
@@ -1384,7 +1388,7 @@ public class VppPlanDetailMobile {
 
 	@Then("^user saves two plans as favorite on UHC site$")
 	public void user_saves_two_plans_as_favorite_on_UHC_site(DataTable givenAttributes) {
-		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 
 		Map<String, String> memberAttributesMap = prepareTestInput(givenAttributes);
@@ -1417,7 +1421,7 @@ public class VppPlanDetailMobile {
 
 	@Then("^user saves two MS plans as favorite on UHC site$")
 	public void user_saves_two_MS_plans_as_favorite_on_UHC_site(DataTable givenAttributes) {
-		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 
 		Map<String, String> memberAttributesMap = prepareTestInput(givenAttributes);
@@ -1429,7 +1433,7 @@ public class VppPlanDetailMobile {
 
 	@Then("^user gets a create profile prompt on UHC site$")
 	public void user_saves_two_plans_as_favorite_on_UHC_site() {
-		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 
 		plansummaryPage.validateCreateProfilePrompt();
@@ -1440,10 +1444,10 @@ public class VppPlanDetailMobile {
 
 	@And("^user click on continue as guest button on UHC site$")
 	public void user_click_on_continue_as_guest_button_on_UHC_site() {
-		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 
-		VisitorProfilePageMobile visitorProfilePage = plansummaryPage.continueAsGuest();
+		VisitorProfilePage visitorProfilePage = plansummaryPage.continueAsGuest();
 
 		getLoginScenario().saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfilePage);
 
@@ -1529,7 +1533,7 @@ public class VppPlanDetailMobile {
 	@Then("^user validates saved favorite plans will be stored within same session after zipcode change from Shop For a Plan on UHC site$")
 	public void user_validates_saved_favorite_plans_will_be_stored_within_same_session_after_zipcode_change_from_Shop_For_a_Plan_on_AARP_site(
 			DataTable givenAttributes) {
-		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		Map<String, String> memberAttributesMap = prepareTestInput(givenAttributes);
 		String zipcode = memberAttributesMap.get("Zip Code");
@@ -1585,7 +1589,7 @@ public class VppPlanDetailMobile {
 	@Then("^user validates saved favorite plans will be stored within same session after zipcode change within VPP page on UHC site$")
 	public void user_validates_saved_favorite_plans_will_be_stored_within_same_session_after_zipcode_change_within_VPP_page_on_AARP_site(
 			DataTable givenAttributes) {
-		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		Map<String, String> memberAttributesMap = prepareTestInput(givenAttributes);
 		String zipcode = memberAttributesMap.get("Zip Code");
@@ -1631,7 +1635,7 @@ public class VppPlanDetailMobile {
 
 	@Then("^user validates ability to unsave a saved plan on UHC site$")
 	public void user_validates_ability_to_unsave_a_saved_plan_on_AARP_site(DataTable givenAttributes) {
-		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		Map<String, String> memberAttributesMap = prepareTestInput(givenAttributes);
 		String ma_plans = memberAttributesMap.get("MA Test Plans");
@@ -1723,7 +1727,7 @@ public class VppPlanDetailMobile {
 	@Then("^user validates unsave favorite plans will be stored within same session after zipcode change from Shop For a Plan on UHC site$")
 	public void user_validates_unsave_favorite_plans_will_be_stored_within_same_session_after_zipcode_change_from_Shop_For_a_Plan_on_AARP_site(
 			DataTable givenAttributes) {
-		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		Map<String, String> memberAttributesMap = prepareTestInput(givenAttributes);
 		String zipcode = memberAttributesMap.get("Zip Code");
@@ -1768,7 +1772,7 @@ public class VppPlanDetailMobile {
 	@Then("^user validates unsave favorite plans will be stored within same session after zipcode change within VPP page on UHC site$")
 	public void user_validates_unsave_favorite_plans_will_be_stored_within_same_session_after_zipcode_change_within_VPP_page_on_AARP_site(
 			DataTable givenAttributes) {
-		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		Map<String, String> memberAttributesMap = prepareTestInput(givenAttributes);
 		String zipcode = memberAttributesMap.get("Zip Code");
@@ -1817,7 +1821,7 @@ public class VppPlanDetailMobile {
 
 	@Then("^user validates email option on UHC site$")
 	public void user_validates_email_option_on_AARP_site() {
-		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		// ----- MA plan type -----------------------------
 		String planType = "MA";
@@ -1838,7 +1842,7 @@ public class VppPlanDetailMobile {
 
 	@Then("^user validates print option on UHC site$")
 	public void user_validates_print_option_on_AARP_site() {
-		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		// ----- MA plan type -----------------------------
 		String planType = "MA";
@@ -1859,7 +1863,7 @@ public class VppPlanDetailMobile {
 
 	@Then("^user validates email functionality with invalid and valid email address on UHC site$")
 	public void user_validates_email_functionality_on_AARP_site() {
-		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		// ----- MA plan type -----------------------------
 		String planType = "MA";
@@ -1880,7 +1884,7 @@ public class VppPlanDetailMobile {
 
 	@Then("^user validates print functionality on UHC site$")
 	public void user_validates_print_functionality_on_AARP_site() {
-		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		// ----- MA plan type -----------------------------
 		String planType = "MA";
@@ -1901,14 +1905,14 @@ public class VppPlanDetailMobile {
 
 	@Then("^user closes the original tab and open new tab for UHC site$")
 	public void user_closes_the_original_tab_and_open_new_tab_for_AARP_site() {
-		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		plansummaryPage.closeOriginalTabAndOpenNewTab();
 	}
 
 	@Then("^user validates plans remain saved within same session for UHC site$")
 	public void user_validates_plans_remain_saved_within_same_session(DataTable givenAttributes) {
-		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 
 		Map<String, String> memberAttributesMap = prepareTestInput(givenAttributes);
@@ -1953,7 +1957,7 @@ public class VppPlanDetailMobile {
 		String FirstName = memberAttributesMap.get("Firstname");
 		String LastName = memberAttributesMap.get("Lastname");
 		String zipcode = memberAttributesMap.get("Zipcode");
-		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		plansummaryPage.MedSupFormValidation(DateOfBirth);
 		String resumeKey = plansummaryPage.StartApplicationButton(FirstName, LastName);
@@ -1965,7 +1969,7 @@ public class VppPlanDetailMobile {
 	public void click_resume_application() throws Throwable {
 
 		System.out.println("***the user clicks on resume application button***");
-		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		plansummaryPage.ResumeApplicationButton();
 
@@ -1984,7 +1988,7 @@ public class VppPlanDetailMobile {
 		String DateOfBirth = memberAttributesMap.get("DOB");
 		String zipcode = memberAttributesMap.get("Zipcode");
 		System.out.println("***the user clicks on resume application button***");
-		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		plansummaryPage.MedSupFormValidation_2ndTime(DateOfBirth, zipcode);
 		plansummaryPage.ResumeApplicationButton();
@@ -2003,7 +2007,7 @@ public class VppPlanDetailMobile {
 		String username = plannameAttributesMap.get("User Name");
 		String password = plannameAttributesMap.get("Password");
 
-		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		// plansummaryPage.signIn(username, password);
 	}
@@ -2021,7 +2025,7 @@ public class VppPlanDetailMobile {
 		String DateOfBirth = memberAttributesMap.get("DOB");
 		String zipcode = memberAttributesMap.get("Zipcode");
 		System.out.println("***the user clicks on resume application button***");
-		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		plansummaryPage.MedSupFormValidation(DateOfBirth);
 		plansummaryPage.ResumeApplicationButton();
@@ -2040,7 +2044,7 @@ public class VppPlanDetailMobile {
 
 		String DateOfBirth = memberAttributesMap.get("DOB");
 		String zipcode = memberAttributesMap.get("Zip Code");
-		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		plansummaryPage.MedSupFormValidation(DateOfBirth);
 
@@ -2063,7 +2067,7 @@ public class VppPlanDetailMobile {
 
 		String ApplicationID = (String) getLoginScenario().getBean(VPPCommonConstantsMobile.RESUMEKEY);
 
-		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 
 		/*
@@ -2086,7 +2090,7 @@ public class VppPlanDetailMobile {
 		}
 		String FirstName = memberAttributesMap.get("Firstname");
 		String LastName = memberAttributesMap.get("Lastname");
-		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		plansummaryPage.ResumeApplicationButtonValidation(FirstName, LastName);
 
@@ -2104,7 +2108,7 @@ public class VppPlanDetailMobile {
 		}
 		String ApplicationID = memberAttributesMap.get("ApplicationID");
 
-		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		plansummaryPage.RetrieveApplicationButtonValidation(ApplicationID);
 
@@ -2112,7 +2116,7 @@ public class VppPlanDetailMobile {
 
 	@And("^I Click on DCE link on Plan compare for UHC$")
 	public void I_Click_On_DCE_link_on_Plan_Compare_for_UHC() {
-		ComparePlansPageBlayerMobile planComparePage = (ComparePlansPageBlayerMobile) getLoginScenario()
+		ComparePlansPageBlayer planComparePage = (ComparePlansPageBlayer) getLoginScenario()
 				.getBean(PageConstants.PLAN_COMPARE_PAGE);
 		try {
 			Thread.sleep(3000);
@@ -2120,7 +2124,7 @@ public class VppPlanDetailMobile {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		DrugCostEstimatorPageMobile drugCostEstimatorPage = planComparePage.clickonDCE();
+		DrugCostEstimatorPage drugCostEstimatorPage = planComparePage.clickonDCE();
 		if (drugCostEstimatorPage != null) {
 			getLoginScenario().saveBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE, drugCostEstimatorPage);
 			// comparePlansPage.backToVPPPage();
@@ -2131,7 +2135,7 @@ public class VppPlanDetailMobile {
 	@Then("^the user validate the print and email links on the plan Details Page on uhc site")
 	public void user_validate_print_and_email_links_on_the_plan_Details_Page() {
 
-		PlanDetailsPageMobile vppPlanDetailsPage = (PlanDetailsPageMobile) getLoginScenario()
+		PlanDetailsPage vppPlanDetailsPage = (PlanDetailsPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
 		vppPlanDetailsPage.validatePrintandEmailOnPlanDetails();
 	}
@@ -2143,7 +2147,7 @@ public class VppPlanDetailMobile {
 	@Then("^the user validates the functionality of email and print buttons on the plan Details Page on uhc site$")
 	public void user_validates_the_functionality_of_emailandprintbuttons_on_the_plan_Details_Page() {
 
-		PlanDetailsPageMobile vppPlanDetailsPage = (PlanDetailsPageMobile) getLoginScenario()
+		PlanDetailsPage vppPlanDetailsPage = (PlanDetailsPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
 		vppPlanDetailsPage.validatingFunctionalityOfPrintandEmailOnPlanDetails();
 
@@ -2152,9 +2156,9 @@ public class VppPlanDetailMobile {
 	@Then("^the user Click on Look up your Provider button in UMS site$")
 	public void user_Clicks_on_Look_upyourProvider_button_on_PlanDetailsPage() {
 
-		PlanDetailsPageMobile vppPlanDetailsPage = (PlanDetailsPageMobile) getLoginScenario()
+		PlanDetailsPage vppPlanDetailsPage = (PlanDetailsPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
-		ProviderSearchPageMobile providerSearchPage = vppPlanDetailsPage.validateLookUpYourProviderButton();
+		ProviderSearchPage providerSearchPage = vppPlanDetailsPage.validateLookUpYourProviderButton();
 		if (providerSearchPage != null) {
 			getLoginScenario().saveBean(PageConstants.PROVIDER_SEARCH_PAGE, providerSearchPage);
 		}
@@ -2162,7 +2166,7 @@ public class VppPlanDetailMobile {
 
 	@Then("^user validates Drug information is reflected on plan compare page in UHC$")
 	public void user_validates_Drug_information_is_reflected_on_plan_compare_page_in_UHC() throws Exception {
-		ComparePlansPageBlayerMobile planComparePage = (ComparePlansPageBlayerMobile) getLoginScenario()
+		ComparePlansPageBlayer planComparePage = (ComparePlansPageBlayer) getLoginScenario()
 				.getBean(PageConstants.PLAN_COMPARE_PAGE);
 		try {
 			Thread.sleep(3000);
@@ -2402,10 +2406,10 @@ public class VppPlanDetailMobile {
 			System.out.println("Selected All MAPD plans for Plan Compare");
 		}
 
-		ComparePlansPageMobile planComparePage = plansummaryPage.clickOnCompareLink();
+		ComparePlansPageBlayerMobile planComparePage = plansummaryPage.clickOnCompareLink();
 		if (planComparePage != null) {
 			getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
-			 //planComparePage.backToVPPPage();
+			// comparePlansPage.backToVPPPage();
 		} else
 			Assert.fail("Error in loading the compare plans page");
 	}
@@ -2415,10 +2419,10 @@ public class VppPlanDetailMobile {
 		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		plansummaryPage.clickon3rdPlan();
-		ComparePlansPageMobile planComparePage = plansummaryPage.clickOnCompareLink();
+		ComparePlansPageBlayerMobile planComparePage = plansummaryPage.clickOnCompareLink();
 		if (planComparePage != null) {
 			getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
-			//planComparePage.backToVPPPage();
+			// comparePlansPage.backToVPPPage();
 		} else
 			Assert.fail("Error in loading the compare plans page");
 	}
@@ -3230,7 +3234,7 @@ public class VppPlanDetailMobile {
 	public void the_user_enter_the_searchValue_in_the_search_text_box_and_hits_enter(DataTable inputvalue)
 			throws Throwable {
 		/*
-		 * VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
+		 * VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 		 * .getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		 */
 
