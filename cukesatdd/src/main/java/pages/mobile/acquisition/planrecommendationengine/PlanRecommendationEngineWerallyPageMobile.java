@@ -99,6 +99,9 @@ public class PlanRecommendationEngineWerallyPageMobile extends UhcDriver {
 
 	@FindBy(css = "a[track='Saved']")
 	private WebElement viewSavedbutton;
+	
+	
+	
 	public ArrayList<String> werallySearch(String type, String searchParameter, int count) {
 		System.out.println("Werally " + type + " Search Operation");
 		ArrayList<String> doctorsName = new ArrayList<String>();
@@ -158,7 +161,7 @@ public class PlanRecommendationEngineWerallyPageMobile extends UhcDriver {
 		threadsleep(3000);
 //		savedFinishReturnButton.click();
 		jsClickNew(savedFinishReturnButton);
-		//waitForPageLoadSafari();
+		waitForPageLoadSafari();
 		try {
 			WebDriverWait wait = new WebDriverWait(driver, 2);
 			if (wait.until(ExpectedConditions.alertIsPresent()) == null) {
@@ -178,8 +181,6 @@ public class PlanRecommendationEngineWerallyPageMobile extends UhcDriver {
 		System.out.println("Specialty Name in werally Content is : " + doctorsSPecialtyName);
 		return doctorsName;
 	}
-	
-	
 	public void chooseFirstLocation() {
 		if (validate(firstLocation, 5)) {
 //			firstLocation.click();

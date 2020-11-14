@@ -200,6 +200,7 @@ public class PlanRecommendationEngineSpecialNeedsPageMobile extends UhcDriver {
 			jsClickNew(snpMedicaid);
 			System.out.println("Plan Type " + SNPType + " Clicked");
 		} else if (SNPType.equalsIgnoreCase("chronic")) {
+			scrollToView(snpConditions);
 			validate(snpConditions);
 			//snpConditions.click();
 			jsClickNew(snpConditions);
