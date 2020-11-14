@@ -4144,10 +4144,10 @@ public class VppPlanCompareMobile {
 		String plantype = memberAttributesMap.get("Plan Type");
 		String planName = memberAttributesMap.get("PlanName");
 
-		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		//plansummaryPage.viewPlanSummary(plantype);
-		DrugCostEstimatorPage dce = plansummaryPage.navigatetoDCEPage(planName);
+		pages.mobile.acquisition.dce.ulayer.DrugCostEstimatorPageMobile dce = plansummaryPage.navigatetoDCEPage(planName);
 		 
 		if (dce != null) {
 			getLoginScenario().saveBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE, dce);

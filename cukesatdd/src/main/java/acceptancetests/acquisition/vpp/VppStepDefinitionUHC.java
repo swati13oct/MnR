@@ -25,8 +25,6 @@ import cucumber.api.java.en.When;
 import gherkin.formatter.model.DataTableRow;
 import pages.acquisition.bluelayer.AcquisitionHomePage;
 import pages.acquisition.bluelayer.ComparePlansPageBlayer;
-import pages.acquisition.bluelayer.DrugCostEstimatorPage;
-import pages.acquisition.bluelayer.FindCarePage;
 import pages.acquisition.bluelayer.MultiCountyModalPage;
 import pages.acquisition.bluelayer.PlanComparePage;
 import pages.acquisition.bluelayer.PlanDetailsPage;
@@ -39,6 +37,11 @@ import pages.acquisition.bluelayer.ZipcodeLookupHomePage;
 import pages.acquisition.dce.bluelayer.DCETestHarnessPage;
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.ulayer.ComparePlansPage;
+import pages.mobile.acquisition.bluelayer.ComparePlansPageBlayerMobile;
+import pages.mobile.acquisition.dce.ulayer.DrugCostEstimatorPageMobile;
+import pages.mobile.acquisition.ole.WelcomePageMobile;
+import pages.mobile.acquisition.ulayer.ComparePlansPageMobile;
+import pages.mobile.acquisition.ulayer.FindCarePageMobile;
 
 /**
  * Functionality: VPP UHC site
@@ -648,7 +651,7 @@ public class VppStepDefinitionUHC {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		ComparePlansPageBlayer comparePlansPageblayer = plansummaryPage.clickOnCompareLink();
+		ComparePlansPageBlayerMobile comparePlansPageblayer = plansummaryPage.clickOnCompareLink();
 		if (comparePlansPageblayer != null) {
 			getLoginScenario().saveBean(PageConstants.TeamC_Plan_Compare_Page, comparePlansPageblayer);
 			// comparePlansPage.backToVPPPage();
@@ -662,7 +665,7 @@ public class VppStepDefinitionUHC {
 	@When("^the user validate the print and email link option in plan compare in UHS site$")
 	public void user_validate_print_and_email_link_option_in_plan_compare() {
 
-		ComparePlansPageBlayer comparePlansPage = (ComparePlansPageBlayer) getLoginScenario()
+		ComparePlansPageBlayerMobile comparePlansPage = (ComparePlansPageBlayerMobile) getLoginScenario()
 				.getBean(PageConstants.TeamC_Plan_Compare_Page);
 		comparePlansPage.validateprintandemail();
 	}
@@ -673,7 +676,7 @@ public class VppStepDefinitionUHC {
 	@Then("^the user validating email and print option in plan compare in UHS site$")
 	public void user_validating_print_and_email_option_in_plan_compare() {
 
-		ComparePlansPageBlayer comparePlansPage = (ComparePlansPageBlayer) getLoginScenario()
+		ComparePlansPageBlayerMobile comparePlansPage = (ComparePlansPageBlayerMobile) getLoginScenario()
 				.getBean(PageConstants.TeamC_Plan_Compare_Page);
 		comparePlansPage.validatingprintandemail();
 	}
@@ -684,7 +687,7 @@ public class VppStepDefinitionUHC {
 	@When("^the user validate thank you message in plan compare in UHS site$")
 	public void user_validate_thank_you_message_in_plan_compare() {
 
-		ComparePlansPageBlayer comparePlansPage = (ComparePlansPageBlayer) getLoginScenario()
+		ComparePlansPageBlayerMobile comparePlansPage = (ComparePlansPageBlayerMobile) getLoginScenario()
 				.getBean(PageConstants.TeamC_Plan_Compare_Page);
 		comparePlansPage.validatingthankyoumessage();
 	}
@@ -697,7 +700,7 @@ public class VppStepDefinitionUHC {
 	@Then("^the user clicks on back to all plans link and validates all three plans are selected$")
 	public void the_user_clicks_on_back_to_plans_link_and_validates_plans_are_selected() {
 
-		ComparePlansPageBlayer comparePlansPage = (ComparePlansPageBlayer) getLoginScenario()
+		ComparePlansPageBlayerMobile comparePlansPage = (ComparePlansPageBlayerMobile) getLoginScenario()
 				.getBean(PageConstants.TeamC_Plan_Compare_Page);
 		comparePlansPage.validatetopbacktoplanslink();
 	}
@@ -912,7 +915,7 @@ public class VppStepDefinitionUHC {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		ComparePlansPageBlayer planComparePage = plansummaryPage.clickOnCompareLink();
+		ComparePlansPageBlayerMobile planComparePage = plansummaryPage.clickOnCompareLink();
 		if (planComparePage != null) {
 			getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
 			// comparePlansPage.backToVPPPage();
@@ -934,7 +937,7 @@ public class VppStepDefinitionUHC {
 			System.out.println("Selected All PDP plans for Plan Compare");
 		}
 		
-		ComparePlansPageBlayer planComparePage = plansummaryPage.clickOnCompareLink();
+		ComparePlansPageBlayerMobile planComparePage = plansummaryPage.clickOnCompareLink();
 		if (planComparePage != null) {
 			getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
 			// comparePlansPage.backToVPPPage();
@@ -944,7 +947,7 @@ public class VppStepDefinitionUHC {
 
 	@And("^I Click on DCE link on Plan compare$")
 	public void I_Click_On_DCE_link_on_Plan_Compare() {
-		ComparePlansPageBlayer planComparePage = (ComparePlansPageBlayer) getLoginScenario()
+		ComparePlansPageBlayerMobile planComparePage = (ComparePlansPageBlayerMobile) getLoginScenario()
 				.getBean(PageConstants.PLAN_COMPARE_PAGE);
 		try {
 			Thread.sleep(3000);
@@ -952,7 +955,7 @@ public class VppStepDefinitionUHC {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		DrugCostEstimatorPage drugCostEstimatorPage = planComparePage.clickonDCE();
+		DrugCostEstimatorPageMobile drugCostEstimatorPage = planComparePage.clickonDCE();
 		if (drugCostEstimatorPage != null) {
 			getLoginScenario().saveBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE, drugCostEstimatorPage);
 			// comparePlansPage.backToVPPPage();
@@ -962,7 +965,7 @@ public class VppStepDefinitionUHC {
 
 	@And("^I Click on Look up your doctor link on Plan compare$")
 	public void I_Click_on_Look_up_your_doctor_link_on_Plan_compare() throws InterruptedException {
-		ComparePlansPageBlayer planComparePage = (ComparePlansPageBlayer) getLoginScenario()
+		ComparePlansPageBlayerMobile planComparePage = (ComparePlansPageBlayerMobile) getLoginScenario()
 				.getBean(PageConstants.PLAN_COMPARE_PAGE);
 		try {
 			Thread.sleep(3000);
@@ -970,7 +973,7 @@ public class VppStepDefinitionUHC {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		FindCarePage findCarePage = planComparePage.clickonLookUpYourDoctor();
+		FindCarePageMobile findCarePage = planComparePage.clickonLookUpYourDoctor();
 		if (findCarePage != null) {
 			getLoginScenario().saveBean(PageConstants.FIND_CARE_PAGE, findCarePage);
 			// comparePlansPage.backToVPPPage();
@@ -980,14 +983,14 @@ public class VppStepDefinitionUHC {
 
 	@And("^I click on Get Started on and Add Provider from find care page$")
 	public void I_click_on_Get_Started_and_Add_Provider_from_find_care_page() throws Exception {
-		FindCarePage findCarePage = (FindCarePage) getLoginScenario().getBean(PageConstants.FIND_CARE_PAGE);
+		FindCarePageMobile findCarePage = (FindCarePageMobile) getLoginScenario().getBean(PageConstants.FIND_CARE_PAGE);
 		try {
 			Thread.sleep(3000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		ComparePlansPageBlayer planComparePage = findCarePage.getstarted();
+		ComparePlansPageMobile planComparePage = findCarePage.getstarted();
 		if (planComparePage != null) {
 			getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
 			// comparePlansPage.backToVPPPage();
@@ -997,7 +1000,7 @@ public class VppStepDefinitionUHC {
 
 	@Then("^Verify provider is count is updated on plan compare page$")
 	public void Verify_provider_is_count_is_updated_on_plan_compare_page() throws Exception {
-		ComparePlansPageBlayer planComparePage = (ComparePlansPageBlayer) getLoginScenario()
+		ComparePlansPageBlayerMobile planComparePage = (ComparePlansPageBlayerMobile) getLoginScenario()
 				.getBean(PageConstants.PLAN_COMPARE_PAGE);
 		try {
 			Thread.sleep(3000);
@@ -1870,7 +1873,7 @@ public class VppStepDefinitionUHC {
 
 	@And("^I Click on DCE link on Plan compare for UHC$")
 	public void I_Click_On_DCE_link_on_Plan_Compare_for_UHC() {
-		ComparePlansPageBlayer planComparePage = (ComparePlansPageBlayer) getLoginScenario()
+		ComparePlansPageBlayerMobile planComparePage = (ComparePlansPageBlayerMobile) getLoginScenario()
 				.getBean(PageConstants.PLAN_COMPARE_PAGE);
 		try {
 			Thread.sleep(3000);
@@ -1878,7 +1881,7 @@ public class VppStepDefinitionUHC {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		DrugCostEstimatorPage drugCostEstimatorPage = planComparePage.clickonDCE();
+		DrugCostEstimatorPageMobile drugCostEstimatorPage = planComparePage.clickonDCE();
 		if (drugCostEstimatorPage != null) {
 			getLoginScenario().saveBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE, drugCostEstimatorPage);
 			// comparePlansPage.backToVPPPage();
@@ -1920,7 +1923,7 @@ public class VppStepDefinitionUHC {
 
 	@Then("^user validates Drug information is reflected on plan compare page in UHC$")
 	public void user_validates_Drug_information_is_reflected_on_plan_compare_page_in_UHC() throws Exception {
-		ComparePlansPageBlayer planComparePage = (ComparePlansPageBlayer) getLoginScenario()
+		ComparePlansPageBlayerMobile planComparePage = (ComparePlansPageBlayerMobile) getLoginScenario()
 				.getBean(PageConstants.PLAN_COMPARE_PAGE);
 		try {
 			Thread.sleep(3000);
@@ -1974,7 +1977,7 @@ public class VppStepDefinitionUHC {
 	
 	@When("^verify Call SAM icon is visible or not on Plan Comapare on UHC site$")
 	public void verify_Call_SAM_icon_is_visible_or_not_PlanCompare_UHC_Site() throws InterruptedException {
-		ComparePlansPageBlayer planComparePage = (ComparePlansPageBlayer) getLoginScenario().getBean(PageConstants.PLAN_COMPARE_PAGE);
+		ComparePlansPageBlayerMobile planComparePage = (ComparePlansPageBlayerMobile) getLoginScenario().getBean(PageConstants.PLAN_COMPARE_PAGE);
 		planComparePage.validateCallSam();
 	}
 	
@@ -1982,7 +1985,7 @@ public class VppStepDefinitionUHC {
 	@And("^verify Call SAM roll out and contain the text Call a Licensed Insurance Agent on Plan Comapare on UHC site$")
 	public void verify_Call_SAM_roll_out_and_contain_the_text_Call_a_Licensed_Insurance_Agent_PlanCompare_UHC() throws InterruptedException {
 				
-		ComparePlansPageBlayer planComparePage = (ComparePlansPageBlayer) getLoginScenario().getBean(PageConstants.PLAN_COMPARE_PAGE);
+		ComparePlansPageBlayerMobile planComparePage = (ComparePlansPageBlayerMobile) getLoginScenario().getBean(PageConstants.PLAN_COMPARE_PAGE);
 		planComparePage.validateCallSamContent();
 		
 	}
@@ -1991,15 +1994,15 @@ public class VppStepDefinitionUHC {
 	@Then("^user verify the popup and content on Plan Comapare on UHC site$")
 	public void user_verify_the_popup_and_content_PlanCompare_UHC() throws InterruptedException {
 				
-		ComparePlansPageBlayer planComparePage = (ComparePlansPageBlayer) getLoginScenario().getBean(PageConstants.PLAN_COMPARE_PAGE);
+		ComparePlansPageBlayerMobile planComparePage = (ComparePlansPageBlayerMobile) getLoginScenario().getBean(PageConstants.PLAN_COMPARE_PAGE);
 		planComparePage.validateCallpopup();	
 	}
 	
 	@When("^verify Chat SAM icon is visible or not on Plan Comapare on UHC site$")
 	public void verify_Chat_SAM_icon_is_visible_or_not_PlanCompare_UHC() throws InterruptedException {
 				
-		ComparePlansPageBlayer planComparePage = (ComparePlansPageBlayer) getLoginScenario().getBean(PageConstants.PLAN_COMPARE_PAGE);
-		ComparePlansPageBlayer ChatIcon  = planComparePage.validateChatSam();
+		ComparePlansPageBlayerMobile planComparePage = (ComparePlansPageBlayerMobile) getLoginScenario().getBean(PageConstants.PLAN_COMPARE_PAGE);
+		ComparePlansPageBlayerMobile ChatIcon  = planComparePage.validateChatSam();
 		if (ChatIcon != null) {
 			getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, ChatIcon);
 			Assert.assertTrue(true);
@@ -2013,7 +2016,7 @@ public class VppStepDefinitionUHC {
 	@And("^verify Chat SAM roll out and contain the text Call a Licensed Insurance Agent on Plan Comapare on UHC site$")
 	public void verify_Chat_SAM_roll_out_and_contain_the_text_Call_a_Licensed_Insurance_Agent_PlanCompare_UHC() throws InterruptedException {
 				
-		ComparePlansPageBlayer planComparePage = (ComparePlansPageBlayer) getLoginScenario().getBean(PageConstants.PLAN_COMPARE_PAGE);
+		ComparePlansPageBlayerMobile planComparePage = (ComparePlansPageBlayerMobile) getLoginScenario().getBean(PageConstants.PLAN_COMPARE_PAGE);
 		planComparePage.validateChatSamContent();
 		
 	}
@@ -2022,7 +2025,7 @@ public class VppStepDefinitionUHC {
 	@Then("^user verify the Chat original state on UHC site$")
 	public void user_verify_the_Chat_original_state_PlanCompare_UHC() throws InterruptedException {
 				
-		ComparePlansPageBlayer planComparePage = (ComparePlansPageBlayer) getLoginScenario().getBean(PageConstants.PLAN_COMPARE_PAGE);
+		ComparePlansPageBlayerMobile planComparePage = (ComparePlansPageBlayerMobile) getLoginScenario().getBean(PageConstants.PLAN_COMPARE_PAGE);
 		planComparePage.validateChatSam();
 	}
 	@Then("^the user validates the following Additional Benefits of Plan for the plan in UMS$")
@@ -2127,14 +2130,14 @@ public class VppStepDefinitionUHC {
 	
 	@Then("^verify plan compare page is loaded on UHC$")
 	public void verify_plan_compare_page_is_loaded_on_UHC() throws Throwable {
-		ComparePlansPageBlayer planComparePage = (ComparePlansPageBlayer) getLoginScenario()
+		ComparePlansPageBlayerMobile planComparePage = (ComparePlansPageBlayerMobile) getLoginScenario()
 				.getBean(PageConstants.PLAN_COMPARE_PAGE);
 		planComparePage.validatePlanComparePage();
 	}
 	
 	@Then("^click on back to plans on plan compare page for UHC$")
 	public void click_on_back_to_plans_on_plan_compare_page_for_UHC() throws Throwable {
-		ComparePlansPageBlayer planComparePage = (ComparePlansPageBlayer) getLoginScenario()
+		ComparePlansPageBlayerMobile planComparePage = (ComparePlansPageBlayerMobile) getLoginScenario()
 				.getBean(PageConstants.PLAN_COMPARE_PAGE);
 		planComparePage.clickOnBacktoPlans();
 	}
@@ -2157,7 +2160,7 @@ public class VppStepDefinitionUHC {
 		System.out.println("Selected All MAPD plans for Plan Compare");
 	} 
 	
-	ComparePlansPageBlayer planComparePage = plansummaryPage.clickOnCompareLink();
+	ComparePlansPageBlayerMobile planComparePage = plansummaryPage.clickOnCompareLink();
 	if (planComparePage != null) {
 		getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
 		// comparePlansPage.backToVPPPage();
@@ -2170,7 +2173,7 @@ public class VppStepDefinitionUHC {
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		plansummaryPage.clickon3rdPlan();
-		ComparePlansPageBlayer planComparePage = plansummaryPage.clickOnCompareLink();
+		ComparePlansPageBlayerMobile planComparePage = plansummaryPage.clickOnCompareLink();
 		if (planComparePage != null) {
 			getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
 			// comparePlansPage.backToVPPPage();
@@ -2198,8 +2201,8 @@ public class VppStepDefinitionUHC {
 	
 	@Then("^the user clicks on Enroll in plan for UHC site and validates the Welcome to OLE Page on new Plan Compare")
 	  public void user_clicks_enrollInPlan_newPlanCompare_UHC() throws InterruptedException{
-		ComparePlansPageBlayer planComparePage = (ComparePlansPageBlayer) getLoginScenario().getBean(PageConstants.PLAN_COMPARE_PAGE); 
-		  WelcomePage  welcomeOLEPage = planComparePage.Enroll_OLE_newPlancompare_UHC();
+		ComparePlansPageBlayerMobile planComparePage = (ComparePlansPageBlayerMobile) getLoginScenario().getBean(PageConstants.PLAN_COMPARE_PAGE); 
+		  WelcomePageMobile  welcomeOLEPage = planComparePage.Enroll_OLE_newPlancompare_UHC();
 	   if (welcomeOLEPage != null) {
 			getLoginScenario().saveBean(PageConstants.OLE_WELCOME_PAGE, welcomeOLEPage);
 		} else {
@@ -2209,8 +2212,8 @@ public class VppStepDefinitionUHC {
 	
 	@Then("^the user clicks on Plan details link in new Plan Compare page on UHC")
 	  public void user_clicks_planDetails_newPlanCompare_UHC() throws InterruptedException{
-		  ComparePlansPageBlayer planComparePage = (ComparePlansPageBlayer) getLoginScenario().getBean(PageConstants.PLAN_COMPARE_PAGE); 
-		  ComparePlansPageBlayer vppPlanDetailsPage=planComparePage.navigateToPlanDetailfromplanCompare();
+		  ComparePlansPageBlayerMobile planComparePage = (ComparePlansPageBlayerMobile) getLoginScenario().getBean(PageConstants.PLAN_COMPARE_PAGE); 
+		  ComparePlansPageBlayerMobile vppPlanDetailsPage=planComparePage.navigateToPlanDetailfromplanCompare();
 			if (vppPlanDetailsPage != null) {
 					getLoginScenario().saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE, vppPlanDetailsPage);
 					Assert.assertTrue(true);
@@ -2829,7 +2832,7 @@ public class VppStepDefinitionUHC {
 
 	@Then("^verify plans added in plan compare on visitor Profile for UHC$")
 	public void verify_plans_addedin_plan_compare_on_visitor_Profile_forUHC() throws Throwable {
-		ComparePlansPageBlayer planComparePage = (ComparePlansPageBlayer) getLoginScenario()
+		ComparePlansPageBlayerMobile planComparePage = (ComparePlansPageBlayerMobile) getLoginScenario()
 				.getBean(PageConstants.PLAN_COMPARE_PAGE);
 		planComparePage.validatePlansAddedonPlancompareforVisitorProfile();
 	}
@@ -3073,14 +3076,14 @@ public void the_user_validates_pagination_and_results_displayed(DataTable inputv
 	//New plan compare related
 		@And("^I click on Get Started on and Add PrimaryCare PCP from find care page in UHC$")
 		public void I_click_on_Get_Started_and_Add_PrimaryCarePCP_find_care_page_in_UHC() throws Exception {
-			FindCarePage findCarePage = (FindCarePage) getLoginScenario().getBean(PageConstants.FIND_CARE_PAGE);
+			FindCarePageMobile findCarePage = (FindCarePageMobile) getLoginScenario().getBean(PageConstants.FIND_CARE_PAGE);
 			try {
 				Thread.sleep(3000);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			ComparePlansPageBlayer planComparePage = findCarePage.providerfromPrimaryCare();
+			ComparePlansPageBlayerMobile planComparePage = findCarePage.providerfromPrimaryCare();
 			if (planComparePage != null) {
 				getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
 				// comparePlansPage.backToVPPPage();
@@ -3090,58 +3093,58 @@ public void the_user_validates_pagination_and_results_displayed(DataTable inputv
 		
 		@Then("^remove one plan from new plan compare page for UHC$")
 		public void remove_one_plan_from_new_plan_compare_page_for_UHC() throws Throwable {
-			ComparePlansPageBlayer planComparePage = (ComparePlansPageBlayer) getLoginScenario()
+			ComparePlansPageBlayerMobile planComparePage = (ComparePlansPageBlayerMobile) getLoginScenario()
 					.getBean(PageConstants.PLAN_COMPARE_PAGE);
 			planComparePage.clickOnNewRemoveLink();
 		}
 		
 		@Then("^Click on Add Icon on new Plan Compare and verify it navigates to plan summary page for UHC$")
 		public void click_on_Add_Icon_newPlanCompare_and_verify_it_navigates_to_plan_summary_page_for_UHC() throws Throwable {
-			ComparePlansPageBlayer planComparePage = (ComparePlansPageBlayer) getLoginScenario()
+			ComparePlansPageBlayerMobile planComparePage = (ComparePlansPageBlayerMobile) getLoginScenario()
 					.getBean(PageConstants.PLAN_COMPARE_PAGE);
 			planComparePage.clickOnNewAddIcon();
 		}
 		
 		@Then("^Verify newly added plan displayed on new plan compare page for UHC$")
 		public void verify_newly_added_plan_displayed_on_new_plan_compare_page_for_UHC() throws Throwable {
-			ComparePlansPageBlayer planComparePage = (ComparePlansPageBlayer) getLoginScenario()
+			ComparePlansPageBlayerMobile planComparePage = (ComparePlansPageBlayerMobile) getLoginScenario()
 					.getBean(PageConstants.PLAN_COMPARE_PAGE);
 			planComparePage.validatenewlyAddPlanonNewPlanComapre();
 		}
 		
 		@Then("^verify Your doctors is loaded with doctor summary on Plan Compare page UHC$")
 		public void verify_doctors_covered_uhc() {
-			ComparePlansPageBlayer planComparePage = (ComparePlansPageBlayer) getLoginScenario()
+			ComparePlansPageBlayerMobile planComparePage = (ComparePlansPageBlayerMobile) getLoginScenario()
 					.getBean(PageConstants.PLAN_COMPARE_PAGE);
 			planComparePage.validateDoctors();
 		}
 		
 		@Then("^verify Your Hospital is loaded with doctor summary on Plan Compare page UHC$")
 		public void verify_Hospital_covered_uhc() {
-			ComparePlansPageBlayer planComparePage = (ComparePlansPageBlayer) getLoginScenario()
+			ComparePlansPageBlayerMobile planComparePage = (ComparePlansPageBlayerMobile) getLoginScenario()
 					.getBean(PageConstants.PLAN_COMPARE_PAGE);
 			planComparePage.validateEditHospitals();
 		}
 		
 		@Then("^verify Add doctors is loaded with doctor summary on Plan Compare page UHC$")
 		public void verify_Add_doctors_covered_uhc() {
-			ComparePlansPageBlayer planComparePage = (ComparePlansPageBlayer) getLoginScenario()
+			ComparePlansPageBlayerMobile planComparePage = (ComparePlansPageBlayerMobile) getLoginScenario()
 					.getBean(PageConstants.PLAN_COMPARE_PAGE);
 			planComparePage.validateAddDoctors();
 		}
 		
 		@Then("^verify Add Hospitals is loaded without summary on Plan Compare page UHC$")
 		public void verify_Add_Hospitals_covered_uhc() {
-			ComparePlansPageBlayer planComparePage = (ComparePlansPageBlayer) getLoginScenario()
+			ComparePlansPageBlayerMobile planComparePage = (ComparePlansPageBlayerMobile) getLoginScenario()
 					.getBean(PageConstants.PLAN_COMPARE_PAGE);
 			planComparePage.validateAddHospitals();
 		}
 		
 		@And("^click on Add your doctors link and Navigate to Rally page for UHC$")
 		public void clickOnAddyourdocits_UHC() throws Exception {
-			ComparePlansPageBlayer planComparePage = (ComparePlansPageBlayer) getLoginScenario()
+			ComparePlansPageBlayerMobile planComparePage = (ComparePlansPageBlayerMobile) getLoginScenario()
 					.getBean(PageConstants.PLAN_COMPARE_PAGE);		
-			FindCarePage findCarePage = planComparePage.clickonAddYourDoctors();
+			FindCarePageMobile findCarePage = planComparePage.clickonAddYourDoctors();
 			if (findCarePage != null) {
 				getLoginScenario().saveBean(PageConstants.FIND_CARE_PAGE, findCarePage);
 			} else
@@ -3150,9 +3153,9 @@ public void the_user_validates_pagination_and_results_displayed(DataTable inputv
 		
 		@And("^click on Add your Hospitals link and Navigate to Rally page for UHC$")
 		public void clickOnAddyourHospitals_UHC() throws Exception {
-			ComparePlansPageBlayer planComparePage = (ComparePlansPageBlayer) getLoginScenario()
+			ComparePlansPageBlayerMobile planComparePage = (ComparePlansPageBlayerMobile) getLoginScenario()
 					.getBean(PageConstants.PLAN_COMPARE_PAGE);		
-			FindCarePage findCarePage = planComparePage.clickonAddYourHospitals();
+			FindCarePageMobile findCarePage = planComparePage.clickonAddYourHospitals();
 			if (findCarePage != null) {
 				getLoginScenario().saveBean(PageConstants.FIND_CARE_PAGE, findCarePage);
 			} else
@@ -3161,9 +3164,9 @@ public void the_user_validates_pagination_and_results_displayed(DataTable inputv
 		
 		@And("^click on Edit your doctors link and Navigate to Rally page for UHC$")
 		public void clickONEdityourdocits_UHC() throws Exception {
-			ComparePlansPageBlayer planComparePage = (ComparePlansPageBlayer) getLoginScenario()
+			ComparePlansPageBlayerMobile planComparePage = (ComparePlansPageBlayerMobile) getLoginScenario()
 					.getBean(PageConstants.PLAN_COMPARE_PAGE);		
-			FindCarePage findCarePage = planComparePage.clickonEditYourDoctors();
+			FindCarePageMobile findCarePage = planComparePage.clickonEditYourDoctors();
 			if (findCarePage != null) {
 				getLoginScenario().saveBean(PageConstants.FIND_CARE_PAGE, findCarePage);
 			} else
@@ -3172,9 +3175,9 @@ public void the_user_validates_pagination_and_results_displayed(DataTable inputv
 		
 		@And("^click on Edit your Hospitals link and Navigate to Rally page for UHC$")
 		public void clickONEdityourHospitals_UHC() throws Exception {
-			ComparePlansPageBlayer planComparePage = (ComparePlansPageBlayer) getLoginScenario()
+			ComparePlansPageBlayerMobile planComparePage = (ComparePlansPageBlayerMobile) getLoginScenario()
 					.getBean(PageConstants.PLAN_COMPARE_PAGE);		
-			FindCarePage findCarePage = planComparePage.clickonEditYourHosptials();
+			FindCarePageMobile findCarePage = planComparePage.clickonEditYourHosptials();
 			if (findCarePage != null) {
 				getLoginScenario().saveBean(PageConstants.FIND_CARE_PAGE, findCarePage);
 			} else
@@ -3183,14 +3186,14 @@ public void the_user_validates_pagination_and_results_displayed(DataTable inputv
 		
 		@And("^user selects a provider from medical group and retuns to plan compare page in UHC$")
 		public void selectsproviderfrommedicalGroupforUHC() throws Exception {
-			FindCarePage findCarePage = (FindCarePage) getLoginScenario().getBean(PageConstants.FIND_CARE_PAGE);
+			FindCarePageMobile findCarePage = (FindCarePageMobile) getLoginScenario().getBean(PageConstants.FIND_CARE_PAGE);
 			try {
 				Thread.sleep(3000);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			ComparePlansPageBlayer planComparePage = findCarePage.providerfromMedicalGroup();
+			ComparePlansPageBlayerMobile planComparePage = findCarePage.providerfromMedicalGroup();
 			if (planComparePage != null) {
 				getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
 				// comparePlansPage.backToVPPPage();
@@ -3200,14 +3203,14 @@ public void the_user_validates_pagination_and_results_displayed(DataTable inputv
 		
 		@And("^user selects a Hospitals from Clinical and retuns to plan compare page in UHC$")
 		public void selectsproviderfromPrimaryCareClinicforUHC() throws Exception {
-			FindCarePage findCarePage = (FindCarePage) getLoginScenario().getBean(PageConstants.FIND_CARE_PAGE);
+			FindCarePageMobile findCarePage = (FindCarePageMobile) getLoginScenario().getBean(PageConstants.FIND_CARE_PAGE);
 			try {
 				Thread.sleep(3000);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			ComparePlansPageBlayer planComparePage = findCarePage.providerfromPrimaryCareClinicButton();
+			ComparePlansPageBlayerMobile planComparePage = findCarePage.providerfromPrimaryCareClinicButton();
 			if (planComparePage != null) {
 				getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
 				// comparePlansPage.backToVPPPage();
@@ -3217,14 +3220,14 @@ public void the_user_validates_pagination_and_results_displayed(DataTable inputv
 		
 		@And("^I click on Get Started on and Add Places from Hospitals find care page in UHC$")
 		public void I_click_on_Get_Started_and_Add_PlacesfromHospitals_find_care_page_in_UHC() throws Exception {
-			FindCarePage findCarePage = (FindCarePage) getLoginScenario().getBean(PageConstants.FIND_CARE_PAGE);
+			FindCarePageMobile findCarePage = (FindCarePageMobile) getLoginScenario().getBean(PageConstants.FIND_CARE_PAGE);
 			try {
 				Thread.sleep(3000);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			ComparePlansPageBlayer planComparePage = findCarePage.placesfromHospital();
+			ComparePlansPageBlayerMobile planComparePage = findCarePage.placesfromHospital();
 			if (planComparePage != null) {
 				getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
 				// comparePlansPage.backToVPPPage();
@@ -3234,14 +3237,14 @@ public void the_user_validates_pagination_and_results_displayed(DataTable inputv
 		
 		@Then("^verify Edit your Drugs is loaded with Drugs summary on Plan Compare page UHC$")
 		public void verify_Edit_your_Drugswithsummary_covered_uhc() {
-			ComparePlansPageBlayer planComparePage = (ComparePlansPageBlayer) getLoginScenario()
+			ComparePlansPageBlayerMobile planComparePage = (ComparePlansPageBlayerMobile) getLoginScenario()
 					.getBean(PageConstants.PLAN_COMPARE_PAGE);
 			planComparePage.validateEditDrugs();
 		}
 		
 		@And("^click on Edit Drug link on plan compare for UHC site$")
 		public void clickonEditDruglinkonplancompareforUHCsite() {
-			ComparePlansPageBlayer planComparePage = (ComparePlansPageBlayer) getLoginScenario()
+			ComparePlansPageBlayerMobile planComparePage = (ComparePlansPageBlayerMobile) getLoginScenario()
 					.getBean(PageConstants.PLAN_COMPARE_PAGE);
 			try {
 				Thread.sleep(3000);
@@ -3249,7 +3252,7 @@ public void the_user_validates_pagination_and_results_displayed(DataTable inputv
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			DrugCostEstimatorPage drugCostEstimatorPage = planComparePage.clickonEdityourDrugs();
+			DrugCostEstimatorPageMobile drugCostEstimatorPage = planComparePage.clickonEdityourDrugs();
 			if (drugCostEstimatorPage != null) {
 				getLoginScenario().saveBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE, drugCostEstimatorPage);
 				// comparePlansPage.backToVPPPage();
@@ -3259,14 +3262,14 @@ public void the_user_validates_pagination_and_results_displayed(DataTable inputv
 		
 		@Then("^Click on view more plans for right navigaton on UHC$")
 		public void ClickonviewmoreplansforrightnavigatononUHC() throws Throwable {
-			ComparePlansPageBlayer planComparePage = (ComparePlansPageBlayer) getLoginScenario()
+			ComparePlansPageBlayerMobile planComparePage = (ComparePlansPageBlayerMobile) getLoginScenario()
 					.getBean(PageConstants.PLAN_COMPARE_PAGE);
 			planComparePage.validateViewMoreplansComparePage();
 		}
 		
 		@Then("^Click on view less plans for left navigaton on UHC$")
 		public void ClickonviewlessplansforrightnavigatononUHC() throws Throwable {
-			ComparePlansPageBlayer planComparePage = (ComparePlansPageBlayer) getLoginScenario()
+			ComparePlansPageBlayerMobile planComparePage = (ComparePlansPageBlayerMobile) getLoginScenario()
 					.getBean(PageConstants.PLAN_COMPARE_PAGE);
 			planComparePage.validateViewlessplansComparePage();
 		}
@@ -3469,14 +3472,14 @@ public void ther_user_validates_the_on_UHC_site(String url) throws Throwable {
 	//New plan compare related
 		@And("^I click on Get Started on and Add PrimaryCare PCP from find care page in UHC$")
 		public void I_click_on_Get_Started_and_Add_PrimaryCarePCP_find_care_page_in_UHC() throws Exception {
-			FindCarePage findCarePage = (FindCarePage) getLoginScenario().getBean(PageConstants.FIND_CARE_PAGE);
+			FindCarePageMobile findCarePage = (FindCarePageMobile) getLoginScenario().getBean(PageConstants.FIND_CARE_PAGE);
 			try {
 				Thread.sleep(3000);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			ComparePlansPageBlayer planComparePage = findCarePage.providerfromPrimaryCare();
+			ComparePlansPageMobile planComparePage = findCarePage.providerfromPrimaryCare();
 			if (planComparePage != null) {
 				getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
 				// comparePlansPage.backToVPPPage();
@@ -3486,58 +3489,58 @@ public void ther_user_validates_the_on_UHC_site(String url) throws Throwable {
 		
 		@Then("^remove one plan from new plan compare page for UHC$")
 		public void remove_one_plan_from_new_plan_compare_page_for_UHC() throws Throwable {
-			ComparePlansPageBlayer planComparePage = (ComparePlansPageBlayer) getLoginScenario()
+			ComparePlansPageBlayerMobile planComparePage = (ComparePlansPageBlayerMobile) getLoginScenario()
 					.getBean(PageConstants.PLAN_COMPARE_PAGE);
 			planComparePage.clickOnNewRemoveLink();
 		}
 		
 		@Then("^Click on Add Icon on new Plan Compare and verify it navigates to plan summary page for UHC$")
 		public void click_on_Add_Icon_newPlanCompare_and_verify_it_navigates_to_plan_summary_page_for_UHC() throws Throwable {
-			ComparePlansPageBlayer planComparePage = (ComparePlansPageBlayer) getLoginScenario()
+			ComparePlansPageBlayerMobile planComparePage = (ComparePlansPageBlayerMobile) getLoginScenario()
 					.getBean(PageConstants.PLAN_COMPARE_PAGE);
 			planComparePage.clickOnNewAddIcon();
 		}
 		
 		@Then("^Verify newly added plan displayed on new plan compare page for UHC$")
 		public void verify_newly_added_plan_displayed_on_new_plan_compare_page_for_UHC() throws Throwable {
-			ComparePlansPageBlayer planComparePage = (ComparePlansPageBlayer) getLoginScenario()
+			ComparePlansPageBlayerMobile planComparePage = (ComparePlansPageBlayerMobile) getLoginScenario()
 					.getBean(PageConstants.PLAN_COMPARE_PAGE);
 			planComparePage.validatenewlyAddPlanonNewPlanComapre();
 		}
 		
 		@Then("^verify Your doctors is loaded with doctor summary on Plan Compare page UHC$")
 		public void verify_doctors_covered_uhc() {
-			ComparePlansPageBlayer planComparePage = (ComparePlansPageBlayer) getLoginScenario()
+			ComparePlansPageBlayerMobile planComparePage = (ComparePlansPageBlayerMobile) getLoginScenario()
 					.getBean(PageConstants.PLAN_COMPARE_PAGE);
 			planComparePage.validateDoctors();
 		}
 		
 		@Then("^verify Your Hospital is loaded with doctor summary on Plan Compare page UHC$")
 		public void verify_Hospital_covered_uhc() {
-			ComparePlansPageBlayer planComparePage = (ComparePlansPageBlayer) getLoginScenario()
+			ComparePlansPageBlayerMobile planComparePage = (ComparePlansPageBlayerMobile) getLoginScenario()
 					.getBean(PageConstants.PLAN_COMPARE_PAGE);
 			planComparePage.validateEditHospitals();
 		}
 		
 		@Then("^verify Add doctors is loaded with doctor summary on Plan Compare page UHC$")
 		public void verify_Add_doctors_covered_uhc() {
-			ComparePlansPageBlayer planComparePage = (ComparePlansPageBlayer) getLoginScenario()
+			ComparePlansPageBlayerMobile planComparePage = (ComparePlansPageBlayerMobile) getLoginScenario()
 					.getBean(PageConstants.PLAN_COMPARE_PAGE);
 			planComparePage.validateAddDoctors();
 		}
 		
 		@Then("^verify Add Hospitals is loaded without summary on Plan Compare page UHC$")
 		public void verify_Add_Hospitals_covered_uhc() {
-			ComparePlansPageBlayer planComparePage = (ComparePlansPageBlayer) getLoginScenario()
+			ComparePlansPageBlayerMobile planComparePage = (ComparePlansPageBlayerMobile) getLoginScenario()
 					.getBean(PageConstants.PLAN_COMPARE_PAGE);
 			planComparePage.validateAddHospitals();
 		}
 		
 		@And("^click on Add your doctors link and Navigate to Rally page for UHC$")
 		public void clickOnAddyourdocits_UHC() throws Exception {
-			ComparePlansPageBlayer planComparePage = (ComparePlansPageBlayer) getLoginScenario()
+			ComparePlansPageBlayerMobile planComparePage = (ComparePlansPageBlayerMobile) getLoginScenario()
 					.getBean(PageConstants.PLAN_COMPARE_PAGE);		
-			FindCarePage findCarePage = planComparePage.clickonAddYourDoctors();
+			FindCarePageMobile findCarePage = planComparePage.clickonAddYourDoctors();
 			if (findCarePage != null) {
 				getLoginScenario().saveBean(PageConstants.FIND_CARE_PAGE, findCarePage);
 			} else
@@ -3546,9 +3549,9 @@ public void ther_user_validates_the_on_UHC_site(String url) throws Throwable {
 		
 		@And("^click on Add your Hospitals link and Navigate to Rally page for UHC$")
 		public void clickOnAddyourHospitals_UHC() throws Exception {
-			ComparePlansPageBlayer planComparePage = (ComparePlansPageBlayer) getLoginScenario()
+			ComparePlansPageBlayerMobile planComparePage = (ComparePlansPageBlayerMobile) getLoginScenario()
 					.getBean(PageConstants.PLAN_COMPARE_PAGE);		
-			FindCarePage findCarePage = planComparePage.clickonAddYourHospitals();
+			FindCarePageMobile findCarePage = planComparePage.clickonAddYourHospitals();
 			if (findCarePage != null) {
 				getLoginScenario().saveBean(PageConstants.FIND_CARE_PAGE, findCarePage);
 			} else
@@ -3557,9 +3560,9 @@ public void ther_user_validates_the_on_UHC_site(String url) throws Throwable {
 		
 		@And("^click on Edit your doctors link and Navigate to Rally page for UHC$")
 		public void clickONEdityourdocits_UHC() throws Exception {
-			ComparePlansPageBlayer planComparePage = (ComparePlansPageBlayer) getLoginScenario()
+			ComparePlansPageBlayerMobile planComparePage = (ComparePlansPageBlayerMobile) getLoginScenario()
 					.getBean(PageConstants.PLAN_COMPARE_PAGE);		
-			FindCarePage findCarePage = planComparePage.clickonEditYourDoctors();
+			FindCarePageMobile findCarePage = planComparePage.clickonEditYourDoctors();
 			if (findCarePage != null) {
 				getLoginScenario().saveBean(PageConstants.FIND_CARE_PAGE, findCarePage);
 			} else
@@ -3568,9 +3571,9 @@ public void ther_user_validates_the_on_UHC_site(String url) throws Throwable {
 		
 		@And("^click on Edit your Hospitals link and Navigate to Rally page for UHC$")
 		public void clickONEdityourHospitals_UHC() throws Exception {
-			ComparePlansPageBlayer planComparePage = (ComparePlansPageBlayer) getLoginScenario()
+			ComparePlansPageBlayerMobile planComparePage = (ComparePlansPageBlayerMobile) getLoginScenario()
 					.getBean(PageConstants.PLAN_COMPARE_PAGE);		
-			FindCarePage findCarePage = planComparePage.clickonEditYourHosptials();
+			FindCarePageMobile findCarePage = planComparePage.clickonEditYourHosptials();
 			if (findCarePage != null) {
 				getLoginScenario().saveBean(PageConstants.FIND_CARE_PAGE, findCarePage);
 			} else
@@ -3579,14 +3582,14 @@ public void ther_user_validates_the_on_UHC_site(String url) throws Throwable {
 		
 		@And("^user selects a provider from medical group and retuns to plan compare page in UHC$")
 		public void selectsproviderfrommedicalGroupforUHC() throws Exception {
-			FindCarePage findCarePage = (FindCarePage) getLoginScenario().getBean(PageConstants.FIND_CARE_PAGE);
+			FindCarePageMobile findCarePage = (FindCarePageMobile) getLoginScenario().getBean(PageConstants.FIND_CARE_PAGE);
 			try {
 				Thread.sleep(3000);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			ComparePlansPageBlayer planComparePage = findCarePage.providerfromMedicalGroup();
+			ComparePlansPageMobile planComparePage = findCarePage.providerfromMedicalGroup();
 			if (planComparePage != null) {
 				getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
 				// comparePlansPage.backToVPPPage();
@@ -3596,14 +3599,14 @@ public void ther_user_validates_the_on_UHC_site(String url) throws Throwable {
 		
 		@And("^user selects a Hospitals from Clinical and retuns to plan compare page in UHC$")
 		public void selectsproviderfromPrimaryCareClinicforUHC() throws Exception {
-			FindCarePage findCarePage = (FindCarePage) getLoginScenario().getBean(PageConstants.FIND_CARE_PAGE);
+			FindCarePageMobile findCarePage = (FindCarePageMobile) getLoginScenario().getBean(PageConstants.FIND_CARE_PAGE);
 			try {
 				Thread.sleep(3000);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			ComparePlansPageBlayer planComparePage = findCarePage.providerfromPrimaryCareClinicButton();
+			ComparePlansPageMobile planComparePage = findCarePage.providerfromPrimaryCareClinicButton();
 			if (planComparePage != null) {
 				getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
 				// comparePlansPage.backToVPPPage();
@@ -3613,14 +3616,14 @@ public void ther_user_validates_the_on_UHC_site(String url) throws Throwable {
 		
 		@And("^I click on Get Started on and Add Places from Hospitals find care page in UHC$")
 		public void I_click_on_Get_Started_and_Add_PlacesfromHospitals_find_care_page_in_UHC() throws Exception {
-			FindCarePage findCarePage = (FindCarePage) getLoginScenario().getBean(PageConstants.FIND_CARE_PAGE);
+			FindCarePageMobile findCarePage = (FindCarePageMobile) getLoginScenario().getBean(PageConstants.FIND_CARE_PAGE);
 			try {
 				Thread.sleep(3000);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			ComparePlansPageBlayer planComparePage = findCarePage.placesfromHospital();
+			ComparePlansPageMobile planComparePage = findCarePage.placesfromHospital();
 			if (planComparePage != null) {
 				getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
 				// comparePlansPage.backToVPPPage();
@@ -3630,14 +3633,14 @@ public void ther_user_validates_the_on_UHC_site(String url) throws Throwable {
 		
 		@Then("^verify Edit your Drugs is loaded with Drugs summary on Plan Compare page UHC$")
 		public void verify_Edit_your_Drugswithsummary_covered_uhc() {
-			ComparePlansPageBlayer planComparePage = (ComparePlansPageBlayer) getLoginScenario()
+			ComparePlansPageBlayerMobile planComparePage = (ComparePlansPageBlayerMobile) getLoginScenario()
 					.getBean(PageConstants.PLAN_COMPARE_PAGE);
 			planComparePage.validateEditDrugs();
 		}
 		
 		@And("^click on Edit Drug link on plan compare for UHC site$")
 		public void clickonEditDruglinkonplancompareforUHCsite() {
-			ComparePlansPageBlayer planComparePage = (ComparePlansPageBlayer) getLoginScenario()
+			ComparePlansPageBlayerMobile planComparePage = (ComparePlansPageBlayerMobile) getLoginScenario()
 					.getBean(PageConstants.PLAN_COMPARE_PAGE);
 			try {
 				Thread.sleep(3000);
@@ -3645,7 +3648,7 @@ public void ther_user_validates_the_on_UHC_site(String url) throws Throwable {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			DrugCostEstimatorPage drugCostEstimatorPage = planComparePage.clickonEdityourDrugs();
+			DrugCostEstimatorPageMobile drugCostEstimatorPage = planComparePage.clickonEdityourDrugs();
 			if (drugCostEstimatorPage != null) {
 				getLoginScenario().saveBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE, drugCostEstimatorPage);
 				// comparePlansPage.backToVPPPage();
@@ -3655,14 +3658,14 @@ public void ther_user_validates_the_on_UHC_site(String url) throws Throwable {
 		
 		@Then("^Click on view more plans for right navigaton on UHC$")
 		public void ClickonviewmoreplansforrightnavigatononUHC() throws Throwable {
-			ComparePlansPageBlayer planComparePage = (ComparePlansPageBlayer) getLoginScenario()
+			ComparePlansPageBlayerMobile planComparePage = (ComparePlansPageBlayerMobile) getLoginScenario()
 					.getBean(PageConstants.PLAN_COMPARE_PAGE);
 			planComparePage.validateViewMoreplansComparePage();
 		}
 		
 		@Then("^Click on view less plans for left navigaton on UHC$")
 		public void ClickonviewlessplansforrightnavigatononUHC() throws Throwable {
-			ComparePlansPageBlayer planComparePage = (ComparePlansPageBlayer) getLoginScenario()
+			ComparePlansPageBlayerMobile planComparePage = (ComparePlansPageBlayerMobile) getLoginScenario()
 					.getBean(PageConstants.PLAN_COMPARE_PAGE);
 			planComparePage.validateViewlessplansComparePage();
 		}
