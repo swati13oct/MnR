@@ -279,7 +279,7 @@ public class PlanRecommendationEngineLandingAndZipcodeMobilePages extends UhcDri
 		// Location"));
 		// validate(pageProgressPercentage, 30);
 		scrollToView(pageProgressPercentage);
-		//Assert.assertTrue(pageProgressPercentage.getText().contains("0% Complete"));
+		Assert.assertTrue(pageProgressPercentage.getText().contains("0% Complete"));
 		validate(pageRequiredInfo);
 		Assert.assertTrue(pageRequiredInfo.getText().contains("All fields marked with "), " are required");
 		validate(pageRequiredInfoMark);

@@ -152,6 +152,10 @@ public class PlanRecommendationEngineResultsPageMobile extends UhcDriver {
 
 	@FindBy(css = "#msVppDOB")
 	private WebElement MSPlanDOB;
+	
+	@FindBy(xpath = "//a[@aria-describedby='recommendation_ms']")
+	private WebElement msPlanview;
+	
 
 	@FindBy(xpath = "//form/div/div[@class='inputcomponent section'][3]//label[contains(text(),'Female')]")
 	private WebElement MSPlanGender;
@@ -278,8 +282,10 @@ public class PlanRecommendationEngineResultsPageMobile extends UhcDriver {
 	@FindBy(css = "#plan-list-1 div.module-plan-overview:nth-child(1) .drugs-list div[class*='drug-info-container']")
 	private  List<WebElement> DrugsNames;
 	
-	@FindBy(css = "a#selector")
+	@FindBy(xpath = "//button[@class='button button-primary button-orange' and text()='Get Started']")
 	private  WebElement StartNowButton;
+	
+	
 
 // Start Over Popup
 	
@@ -526,6 +532,7 @@ public class PlanRecommendationEngineResultsPageMobile extends UhcDriver {
 		public void submitMSform() {
 			//Zip value is pre-populated by default
 			//MSPlanDOB.sendKeys("01/06/1940");
+			msPlanview.click();
 			jsSendkeys(MSPlanDOB, "01/06/1940");
 			jsClickNew(MSPlanGender);
 			threadsleep(8000);
