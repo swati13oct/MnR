@@ -48,7 +48,7 @@ public class ProviderSearchPageMobile extends UhcDriver {
 	@FindBy(id = "pageHeader")
 	private WebElement pageHeader;
 
-	@FindBy(xpath = "(//*[@data-test-id='saved-provider-button'])[1]")
+	@FindBy(xpath = "(//*[@data-test-id='saved-provider-button'][1]")
 	private WebElement selectProviderBtn;
 
 	@FindBys(value = {
@@ -271,6 +271,7 @@ public class ProviderSearchPageMobile extends UhcDriver {
 		CommonUtility.waitForPageLoadNew(driver, Physician, 30);
 
 		Physician.click();
+		scrollToView(selectProviderBtn);
 		CommonUtility.waitForPageLoadNew(driver, selectProviderBtn, 30);
 		jsClickNew(selectProviderBtn);
 
