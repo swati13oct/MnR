@@ -999,7 +999,7 @@ public class EOBPage extends EOBBase{
 		System.out.println("TEST - uuid="+getUuid());
 		String targetUuid=getUuid();
 		//note: skip SHIP user for now because test data issue, pdf won't load for SHIP
-		if (MRScenario.environment.contains("stage")) {
+		if (MRScenario.environment.contains("stage") || MRScenario.environment.contains("prod")) {
 
 			try {
 				URL TestURL = new URL(pdfUrl);
@@ -1174,7 +1174,7 @@ public class EOBPage extends EOBBase{
 				String pdfUrl = driver.getCurrentUrl();
 				System.out.println(" pdf url: '" + pdfUrl+"'");
 				Assert.assertTrue("PROBLEM - actual URL doesn't contain '.pdf'.  Actual URL='"+pdfUrl+"'", pdfUrl.contains(".pdf"));
-				if (MRScenario.environment.contains("stage")) {
+				if (MRScenario.environment.contains("stage") || MRScenario.environment.contains("prod")) {
 					String result=validatePdfContent_dream(pdfUrl, targetUuid, memberId);
 					testNote.add("\tEOB number "+(i)+" PDF content validation result: "+result);
 				}

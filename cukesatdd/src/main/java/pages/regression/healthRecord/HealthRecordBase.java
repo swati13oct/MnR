@@ -254,6 +254,7 @@ public class HealthRecordBase  extends HealthRecordWebElements {
 	}	
 
 	public WebDriver backToOriginalLinkToPrepNextStep(String planType, String memberType, String originalUrl) {
+		System.out.println("TEST - will go back to this URL to prep for next step testing: "+originalUrl);
 		driver.get(originalUrl);
 		CommonUtility.checkPageIsReady(driver);
 		checkModelPopup(driver,1);
