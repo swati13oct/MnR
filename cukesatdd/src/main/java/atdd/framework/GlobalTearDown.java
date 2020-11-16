@@ -97,8 +97,8 @@ public class GlobalTearDown {
 				scenario.write("USER NAME USED : " + getLoginScenario().getBean(LoginCommonConstants.USERNAME));
 				//tbd Assert.assertTrue("Got WebDriverException. USER NAME USED : " + getLoginScenario().getBean(LoginCommonConstants.USERNAME)+" | "+"SauceLab video link for the job='"+MRScenario.returnJobURL()+"' | exception: "+e, false);
 			} 
-			scenario.write("SauceLab video link for the job='"+MRScenario.returnJobURL());
-			scenario.write("Got exception='"+e.getMessage());
+			scenario.write("SauceLab video link for the job | "+MRScenario.returnJobURL());
+			scenario.write("Got exception:\n"+e.getMessage());
 			Assert.assertTrue("Got WebDriverException", false);
 		}
 	}
