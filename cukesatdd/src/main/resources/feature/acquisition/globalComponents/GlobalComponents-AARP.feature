@@ -1,7 +1,8 @@
-@GlobalComponentsAARP @F448210
+
+@GlobalComponentsAARP 
 Feature: 1.12 ACQ - Global Components AARP
 
-  @globalfooterULayer   @globalfooter_AARP
+  @globalfooterULayer
   Scenario Outline: To verify links displayed in the global footer of AARP site
     Given the user is on medicare acquisition site landing page
     	|Site| <site>|
@@ -19,37 +20,32 @@ Feature: 1.12 ACQ - Global Components AARP
     And user verifies home link of agents&brokers page
     Then user clicks on back to top link of home page
 
-	@globalfooter_AARP
+	@globalfooter
   Examples: 
        |	site	|
        |	AARP	|
  
-
  @globalfooter
   Examples: 
        |	site	|
        |	UHC	|      
-
        
+
   @globalheaderULayer
   Scenario Outline: To verify links displayed in the global header of AARP site
-  
     Given the user is on medicare acquisition site landing page
     	|Site| <site>|
-    #	Then user validates Subtitle
-    #	|Site| <site>|
     When user accesses global header of the Medicare Plans home page
-     And user verifies the logo on home page
+    And user verifies the logo on home page
     And user clicks on Sign in link on home page
     And user clicks on register link on home page
     Then user validates visitor profile on home page
   
-  @globalheader
+  @globalheader   @globalheaderULayer
   Examples: 
        |	site	|
        |	AARP	| 
        
-
   @globalheader
   Examples: 
        |	site	|
@@ -79,49 +75,45 @@ Feature: 1.12 ACQ - Global Components AARP
       |	site	| path                                                     | pageName                                   										| tfnXpath                                      													 | tfnFlag |
       |	AARP	| medicare-education.html                                  | Understanding Medicare | AARP Medicare Plans   								| //div[contains(@style,'display: block')]//a[contains(@class, 'tel')] 		 | true    |
       |	AARP	| medicare-education/medicare-eligibility.html             | Medicare Eligibility | AARP Medicare Plans     								| //*[@class='amp']//a[contains(@class, 'tel')] 													 | true    |
-      |	AARP	| medicare-education/medicare-parts-and-medigap-plans.html | Medicare and Medigap Coverage Options | AARP Medicare Plans    | //div[contains(@style,'display: block')]//a[contains(@class, 'tel')]		 | true    |
+#      |	AARP	| medicare-education/medicare-parts-and-medigap-plans.html | Medicare and Medigap Coverage Options | AARP Medicare Plans    | //div[contains(@style,'display: block')]//a[contains(@class, 'tel')]		 | true    |
       |	AARP	| medicare-education/medicare-benefits.html                | Prescriptions, Providers & Benefits | AARP Medicare Plans			| //div[contains(@style,'display: block')]//a[contains(@class, 'tel')]		 | true    |
-
 
 		@MedEdPages_1_GlobalCompsUHC
     Examples: 
       |	site	| path                                                     | pageName                                   											| tfnXpath                                      														| tfnFlag |
       |	UHC		| medicare-education.html                                  | Understanding Medicare | UnitedHealthcare  											| //div[contains(@style,'display: block')]//a[contains(@class, 'tel')]			| true    |
       |	UHC		| medicare-education/medicare-eligibility.html             | Medicare Eligibility | UnitedHealthcare    											| //*[@class='ums']//a[contains(@class, 'tel')] 														| true    |
-      |	UHC		| medicare-education/medicare-parts-and-medigap-plans.html | Medicare and Medigap Coverage Choices | UnitedHealthcare					| //div[contains(@style,'display: block')]//a[contains(@class, 'tel')]		 	| true    |
+#      |	UHC		| medicare-education/medicare-parts-and-medigap-plans.html | Medicare and Medigap Coverage Choices | UnitedHealthcare					| //div[contains(@style,'display: block')]//a[contains(@class, 'tel')]		 	| true    |
       |	UHC		| medicare-education/medicare-benefits.html                | Medicare Prescriptions, Providers & Benefits | UnitedHealthcare 	| //div[contains(@style,'display: block')]//a[contains(@class, 'tel')] 			| true    |
-
-
+		
+		
     @MedEdPages_2_GlobalCompsAARP
     Examples: 
       |	site	| path                                              | pageName              																					| tfnXpath                                      													| tfnFlag |
-      |	AARP	| medicare-education/medicare-advantage-plans.html  | Learn about Medicare Advantage Plans | AARP Medicare Plans      | //div[contains(@style,'display: block')]//a[contains(@class, 'tel')] 		| true    |
+#      |	AARP	| medicare-education/medicare-advantage-plans.html  | Learn about Medicare Advantage Plans | AARP Medicare Plans      | //div[contains(@style,'display: block')]//a[contains(@class, 'tel')] 		| true    |
       |	AARP	| medicare-education/medicare-supplement-plans.html | Learn about Medicare Supplement Plans | AARP Medicare Plans 		| //div[contains(@style,'display: block')]//a[contains(@class, 'tel')] 		| true   	|
       |	AARP	| medicare-education/medicare-part-d.html           | Medicare Prescription Drug Plans | AARP Medicare Plans      		| //div[contains(@style,'display: block')]//a[contains(@class, 'tel')] 		| true    |
-
 
     @MedEdPages_2_GlobalCompsUHC
     Examples: 
       |	site	| path                                              | pageName              																			| tfnXpath                                      													| tfnFlag |
-      |	UHC		| medicare-education/medicare-advantage-plans.html  | Medicare Advantage (Part C) Plans | UnitedHealthcare       	| //div[contains(@style,'display: block')]//a[contains(@class, 'tel')] 		| true    |
+#      |	UHC		| medicare-education/medicare-advantage-plans.html  | Medicare Advantage (Part C) Plans | UnitedHealthcare       	| //div[contains(@style,'display: block')]//a[contains(@class, 'tel')] 		| true    |
       |	UHC		| medicare-education/medicare-supplement-plans.html | Medicare Supplement Insurance Plans | UnitedHealthcare 			| //div[contains(@style,'display: block')]//a[contains(@class, 'tel')]		| true    |
       |	UHC		| medicare-education/medicare-part-d.html           | Medicare Prescription Drug Plans | UnitedHealthcare		      | //div[contains(@style,'display: block')]//a[contains(@class, 'tel')]		| true    |
-
+    
     @MedEdPages_3_GlobalCompsAARP
     Examples: 
       |	site	| path                                                  | pageName                    													| tfnXpath                                      													| tfnFlag |
-      |	AARP	| medicare-education/medicare-costs.html                | Medicare Cost Basics | AARP Medicare Plans 						| //span[contains(@style,'inline')]//a[contains(@class, 'tel')] 					| true    |
-      |	AARP	| medicare-education/enrollment-and-changing-plans.html | Medicare Enrollment Basics | AARP Medicare Plans      | //div[contains(@style,'display: block')]//a[contains(@class, 'tel')]		| true    |
+#      |	AARP	| medicare-education/medicare-costs.html                | Medicare Cost Basics | AARP Medicare Plans 						| //span[contains(@style,'inline')]//a[contains(@class, 'tel')] 					| true    |
+#      |	AARP	| medicare-education/enrollment-and-changing-plans.html | Medicare Enrollment Basics | AARP Medicare Plans      | //div[contains(@style,'display: block')]//a[contains(@class, 'tel')]		| true    |
       |	AARP	| medicare-education/medicare-faq.html                  | Medicare FAQ | AARP Medicare Plans	                  | //div[contains(@style,'display: block')]//a[contains(@class, 'tel')] 		| true    |
       
-
     @MedEdPages_3_GlobalCompsUHC
     Examples: 
       |	site	| path                                                  | pageName                    											| tfnXpath                                      													| tfnFlag |
-      |	UHC		| medicare-education/medicare-costs.html                | Medicare Cost Basics | UnitedHealthcare						| //span[contains(@style,'inline')]//a[contains(@class, 'tel')] 					| true    |
-      |	UHC		| medicare-education/enrollment-and-changing-plans.html | Medicare Enrollment Basics | UnitedHealthcare    	| //div[contains(@style,'display: block')]//a[contains(@class, 'tel')]		| true    |
+#      |	UHC		| medicare-education/medicare-costs.html                | Medicare Cost Basics | UnitedHealthcare						| //span[contains(@style,'inline')]//a[contains(@class, 'tel')] 					| true    |
+#      |	UHC		| medicare-education/enrollment-and-changing-plans.html | Medicare Enrollment Basics | UnitedHealthcare    	| //div[contains(@style,'display: block')]//a[contains(@class, 'tel')]		| true    |
       |	UHC		| medicare-education/medicare-faq.html                  | Medicare FAQ | UnitedHealthcare	                  | //div[contains(@style,'display: block')]//a[contains(@class, 'tel')] 		| true    |  
-
 
     @ShopPlan_Shop1_GlobalCompsAARP
     Examples: 
@@ -319,7 +311,7 @@ Feature: 1.12 ACQ - Global Components AARP
       |	UHC		| medicare-plans.html                                           | ShopPlan: Plan Selector | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | false   |
       |	UHC		| profile/guest                                                 | Visitor Profile: Guest  | //*[contains(@class,'tel')]                                              | true    |
 		
-    @FooterLinks_GlobalCompsAARP @globalfooterULayer
+    @FooterLinks_GlobalCompsAARP
     Examples: 
       |	site	| path                          | pageName                   | tfnXpath                     | tfnFlag |
       |	AARP	| about-us.html                 | Footer: About Us           | //a[contains(@class, 'tel')] | false   |
@@ -330,16 +322,16 @@ Feature: 1.12 ACQ - Global Components AARP
       |	AARP	| contact-us.html               | Footer: Contact Us         | //a[contains(@href ,'tel')]  | false   |
       |	AARP	| privacy-policy.html           | Footer: Privacy Policy     | //a[contains(@href ,'tel')]  | false   |
 
-	@FooterLinks_GlobalCompsUHC
-    Examples: 
-      |	site	| path                          | pageName                   | tfnXpath                     | tfnFlag |
-      |	UHC		| about-us.html                 | Footer: About Us           | //a[contains(@class, 'tel')] | false   |
-      |	UHC		| sitemap.html                  | Footer: Site Map           | //a[contains(@href ,'tel')]  | false   |
-      |	UHC		| terms-of-use.html             | Footer: Terms of Use       | //a[contains(@href ,'tel')]  | false   |
-      |	UHC		| disclaimer.html               | Footer: Disclaimers        | //a[contains(@href ,'tel')]  | false   |
-      |	UHC		| health-insurance-brokers.html | Footer: Agents and Brokers | //a[contains(@href ,'tel')]  | false   |
-      |	UHC		| contact-us.html               | Footer: Contact Us         | //a[contains(@href ,'tel')]  | false   |
-      |	UHC		| privacy-policy.html           | Footer: Privacy Policy     | //a[contains(@href ,'tel')]  | false   |
+#	@FooterLinks_GlobalCompsUHC
+    #Examples: 
+      #|	site	| path                          | pageName                   | tfnXpath                     | tfnFlag |
+      #|	UHC		| about-us.html                 | Footer: About Us           | //a[contains(@class, 'tel')] | false   |
+      #|	UHC		| sitemap.html                  | Footer: Site Map           | //a[contains(@href ,'tel')]  | false   |
+      #|	UHC		| terms-of-use.html             | Footer: Terms of Use       | //a[contains(@href ,'tel')]  | false   |
+      #|	UHC		| disclaimer.html               | Footer: Disclaimers        | //a[contains(@href ,'tel')]  | false   |
+      #|	UHC		| health-insurance-brokers.html | Footer: Agents and Brokers | //a[contains(@href ,'tel')]  | false   |
+      #|	UHC		| contact-us.html               | Footer: Contact Us         | //a[contains(@href ,'tel')]  | false   |
+      #|	UHC		| privacy-policy.html           | Footer: Privacy Policy     | //a[contains(@href ,'tel')]  | false   |
 
   @GlobalComponentsAARP_ISonlyPages
   Scenario Outline: To verify Global Components for the page mentioned of AARP site <pageName> : <path>
@@ -373,7 +365,7 @@ Feature: 1.12 ACQ - Global Components AARP
       
       @GlobalComponentsAARPNewShopPages
   Scenario Outline: To verify Global Components for the page mentioned of AARP site <pageName> : <path>
-    Given  the user is on medicare acquisition site landing page
+    Given the user is on AARP medicare acquisition site landing page
     Given the user navigates to following AARP medicare acquisition site page
       | PageName | <pageName> |
       | PagePath | <path>     |
@@ -387,6 +379,7 @@ Feature: 1.12 ACQ - Global Components AARP
       | path                          | pageName                   | tfnXpath                     | tfnFlag |
       | shop/medicare-advantage-plans.html  | ShopPlan: Shop MA Plan  | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[1] | true   |
      
+   
      
     @GlobalComponentsAARPShopPages 
   Scenario Outline: To verify Global Components for the page mentioned of AARP site <pageName> : <path>
@@ -441,6 +434,7 @@ Feature: 1.12 ACQ - Global Components AARP
     Then the user validate ZipCode Components on page using ZipCode "55410"
     
     
+
   @BlogPages_Blog1_GlobalCompsAARP
      Examples: 
    |site   |path                                                                                     | pageName               |
