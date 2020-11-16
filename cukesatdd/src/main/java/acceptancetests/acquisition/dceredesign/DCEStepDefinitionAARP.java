@@ -536,7 +536,7 @@ public class DCEStepDefinitionAARP {
 		String PlanName = (String) getLoginScenario().getBean(DCERedesignCommonConstants.PLANNAME);
 		PlanDetailsPage plandetailspage = drugDetailsPage.ClickandNavigate_VPPPlanDetails(PlanName);
 		if (null != plandetailspage) {
-			getLoginScenario().saveBean(PageConstants.PLAN_DETAILS_PAGE, plandetailspage);
+			getLoginScenario().saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE, plandetailspage);
 		} else
 			Assert.fail("VPP Plan Details not loaded");	
 	}
@@ -1116,6 +1116,21 @@ public class DCEStepDefinitionAARP {
 			getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
 		} else
 			Assert.fail("DCE Redesign page object not loaded");
+	}
+	
+	@Then("^user validates planName matches plan Name in Drug Details pages$")
+	public void the_user_validates_matches_planname_in_Drug_Details() throws Throwable {
+		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugDetails);
+		String PlanName = (String) getLoginScenario().getBean(DCERedesignCommonConstants.PLANNAME);
+		drugDetailsPage.validatePlanDrugDetails(PlanName);
+	}
+	
+	@And("^the user clicks on DCE button to return to Review Drug cost page$")
+	public void the_user_clicks_on_DCE_return_Review_Drug_cost_page() throws Throwable {
+		PlanDetailsPage plandetailspage = (PlanDetailsPage) getLoginScenario().getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
+		DrugDetailsPage drugDetailsPage = plandetailspage.returnToReviewDrugCost();
+		
+		
 	}
 
 	

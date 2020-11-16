@@ -4,7 +4,9 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 import java.io.File;
 import org.json.JSONException;
@@ -413,6 +415,44 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	@FindBy(xpath = "//a[@id='proceed-link']")
 	private WebElement proceedLink;
+	
+	@FindBy(xpath = "//*[contains(text(),'UnitedHealthcare Medicare Solutions | Provider Search')]")
+	private WebElement UnitedHealthcareMedicareSolutions;
+	
+	@FindBy(xpath = "//span[contains(text(),'Submit')]")
+	private WebElement SubmitEmail;
+	
+	@FindBy(xpath = "//span[contains(text(),'SignUp')]")
+	private WebElement SignUpEmail;
+		
+	@FindBy(xpath = "//*[contains(text(),'Please enter First Name')]")
+	private WebElement ErrorFirstName;
+	
+	@FindBy(xpath = "//*[contains(text(),'Please enter Last Name')]")
+	private WebElement ErrorLastName;
+	
+	@FindBy(xpath = "(//*[contains(text(),'Please enter a valid email address')])[3]")
+	private WebElement ErrorEmailAddress;
+	
+	@FindBy(xpath = "//input[@name='newsletter-input1']")
+	private WebElement EmailFirstName;
+	
+	@FindBy(xpath = "//input[@name='newsletter-input2']")
+	private WebElement EmailLastName;
+	
+	@FindBy(xpath = "//input[@name='newsletter-input3']")
+	private WebElement EmailAddress;
+	
+	@FindBy(xpath = "//div[@class='confirmationtext']/p[1]/b")
+	private WebElement Thankyou;
+	
+	
+	
+	@FindBy(xpath = "//body/div[@id='overlay']")
+	private WebElement overlayFilm;
+	
+	@FindBy(xpath = "//p[contains(text(),'UnitedHealthcare Insurance Company (UnitedHealthcare)')]")
+    private WebElement UHCICSubTiltle;
 
    	//String ChatSamText= "Chat with a Licensed Insurance Agent";
 	String ChatSamText= "Chat Now";
@@ -2388,7 +2428,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		for (int i = 2; i < sizeofpages; i++) {
 			System.out.println("@@Inside pagination click@@@");
 			threadsleep(5);
-			driver.findElement(By.xpath("(//*[@class='pagination']/li/a)[" + i + "]")).click();
+			//driver.findElement(By.xpath("(//*[@class='pagination']/li/a)[" + i + "]")).click();
+			jsClickNew(driver.findElement(By.xpath("(//*[@class='pagination']/li/a)[" + i + "]")));
 			CommonUtility.waitForPageLoadNew(driver, SearchResultsCount, 30);
 			this.validateFifteenResults();
 			threadsleep(5);
@@ -2556,7 +2597,68 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		}
 		return present;
 	}
-	public VPPPlanSummaryPage searchPlansWithOutCountyShop(String zipcode) throws InterruptedException {
+	
+	public void clickUnitedHealthcareMedicareSolutions() {
+		threadsleep(8);
+		UnitedHealthcareMedicareSolutions.click();
+	}
+	
+	public void validateUrl(String url) {
+		threadsleep(6);
+		String parentWindow = driver.getWindowHandle();
+		driver.switchTo().window(driver.getWindowHandles().toArray()[1].toString());
+		System.out.println(driver.getTitle());
+		String str=driver.getTitle();
+		//Assert.assertTrue( "Title mismatch for dental directory",driver.getTitle().equals(url));
+		if(str.equals(url)) {
+			assertTrue(true);
+		}
+		
+	}
+	
+	public void enterAndvalidateEmail() {
+		
+		threadsleep(8);
+		
+		//if(SubmitEmail.isDisplayed()) {
+		int size=driver.findElements(By.xpath("//span[contains(text(),'Sign Up')]")).size();
+		System.out.println("size of sign up"+size);
+		if(size>0){
+			driver.findElement(By.xpath("//span[contains(text(),'Sign Up')]")).click();
+			threadsleep(4);
+			Assert.assertEquals(ErrorEmailAddress.getText(), "Please enter a valid email address");
+			threadsleep(4);
+			EmailFirstName.sendKeys("abc");
+			EmailLastName.sendKeys("def");
+			EmailAddress.sendKeys("a@gmail.com");
+			driver.findElement(By.xpath("//span[contains(text(),'Sign Up')]")).click();
+		}else {
+			SubmitEmail.click();
+			threadsleep(4);
+			Assert.assertEquals(ErrorFirstName.getText(), "Please enter First Name");
+			threadsleep(2);
+			Assert.assertEquals(ErrorLastName.getText(), "Please enter Last Name");
+			threadsleep(2);
+			Assert.assertEquals(ErrorEmailAddress.getText(), "Please enter a valid email address");
+			threadsleep(4);
+			EmailFirstName.sendKeys("abc");
+			EmailLastName.sendKeys("def");
+			EmailAddress.sendKeys("a@gmail.com");
+			SubmitEmail.click();
+		}
+		
+			threadsleep(4);
+			if(Thankyou.getText().equalsIgnoreCase("Thank you!")) {
+				assertTrue(true);
+			}
+			
+			
+						
+		}
+		
+	
+		public VPPPlanSummaryPage searchPlansWithOutCountyShop(String zipcode) throws InterruptedException {
+
 
 		CommonUtility.waitForPageLoadNew(driver, zipCodeShopField, 30);
 		sendkeys(zipCodeShopField, zipcode);
@@ -2589,4 +2691,70 @@ public class AcquisitionHomePage extends GlobalWebElements {
      	    	
      		return new PlanDocsPage(driver);
 	 }
+	
+	public void validateSubtitle() {
+		threadsleep(5);
+		System.out.println("validating the sub header");
+     Assert.assertEquals(UHCICSubTiltle.getText(), "UnitedHealthcare Insurance Company (UnitedHealthcare)");
+}
+	
+
+	@FindBy(xpath="(//*[contains(text(),'Sign in')])[1]")
+	private WebElement memberSignInPage; 
+	
+	@FindBy(xpath="//a[contains(@href,'https://www.aarpmedicareplans.com/health-plans.html?WT.mc_id=8009508')]")
+	private WebElement ViewMedicareplanlinks; 
+	
+	public void clickonmemberSignInlink(String ExpectedmemberSigninURL) {
+		validateNew(memberSignInPage);
+		CommonUtility.waitForPageLoadNew(driver, memberSignInPage, 30);
+		String parentWindow = driver.getWindowHandle();
+		memberSignInPage.click();
+		sleepBySec(3);
+		Set<String> tabs_windows = driver.getWindowHandles();
+		Iterator<String> itr = tabs_windows.iterator();
+		while(itr.hasNext()) {
+			String window = itr.next();
+			if(!parentWindow.equals(window)) {
+				driver.switchTo().window(window);
+			}
+		}
+		
+		CommonUtility.checkPageIsReadyNew(driver);
+		String CurrentmemberSigninURL = driver.getCurrentUrl();
+		String ActualmemberSigninURL=CurrentmemberSigninURL.substring(0, 29).trim();
+		System.out.println("memberSignin Page is displayed : "+ActualmemberSigninURL);
+		System.out.println("Expected member signin URL: "+ExpectedmemberSigninURL);
+		System.out.println("Actual member signin URL: "+ActualmemberSigninURL);
+
+		if(ExpectedmemberSigninURL.equalsIgnoreCase(ActualmemberSigninURL)) {
+			System.out.println("****************member signin Page is displayed  ***************");
+
+			Assert.assertTrue(true);
+		}
+		else {
+			Assert.fail("****************member signin Page is not loaded ***************");
+		}
+	
+	//	ViewMedicareplanlinks.click();	
+		CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
+		validateNew(ViewMedicareplanlinks);
+		switchToNewTabNew(ViewMedicareplanlinks);
+		sleepBySec(15);
+		if (driver.getCurrentUrl().contains("plan-summary")) {
+			//return new ProviderSearchPage(driver);
+		}
+		//return null;
+		
+	}
+
+	public void sleepBySec(int sec) {
+					try {
+						Thread.sleep(sec*1000);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+			}		
+
+				}	
 }

@@ -32,6 +32,7 @@ import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 import gherkin.formatter.model.DataTableRow;
+import pages.acquisition.dceredesign.DrugDetailsPage;
 import pages.acquisition.dceredesign.GetStartedPage;
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.pharmacyLocator.PharmacySearchPage;
@@ -86,10 +87,14 @@ public class PlanDetailsPage extends UhcDriver {
 	@FindBy(xpath = "//*[@id='detail-0']/div/div/div[1]")
 	private WebElement medBenefitsSection;
 
-	//@FindBy(xpath="//*[contains(@id,'prescriptiondrug')]")
-	@FindBy(xpath="//a[@id='prescriptiondrug' and contains(@class,'active')]")
+	@FindBy(xpath="//*[contains(@id,'prescriptiondrug')]")
+	//@FindBy(xpath="//a[contains(@id,'prescriptiondrug') and contains(@class,'active')]")
 	private List<WebElement> presDrugTab1;
 
+	//@FindBy(xpath="//*[contains(@id,'prescriptiondrug')]")
+	@FindBy(xpath="//a[contains(@id,'prescriptiondrug') and contains(@class,'active')]")
+	private List<WebElement> presDrugTab2;
+	
 	@FindBy(id = "prescriptiondrug")
 	private List<WebElement> presDrugTab;
 
@@ -357,11 +362,11 @@ public class PlanDetailsPage extends UhcDriver {
 		
 		if (planType.equalsIgnoreCase("MA")) {
 			CommonUtility.waitForPageLoadNew(driver, medBenefitsTab.get(0), 45);
-			org.testng.Assert.assertTrue(0 == presDrugTab1.size(), "Prescription Drug tab not displayed for MA plans");
+			org.testng.Assert.assertTrue(0 == presDrugTab2.size(), "Prescription Drug tab not displayed for MA plans");
 
 		}  else if (planType.equalsIgnoreCase("MAPD")) {
 			CommonUtility.waitForPageLoadNew(driver, presDrugTab.get(0), 45);
-			org.testng.Assert.assertTrue(1 == presDrugTab1.size(), "Prescription Drug tab displayed for PDP plans");
+			org.testng.Assert.assertTrue(1 == presDrugTab1.size(), "Prescription Drug tab displayed for MAPD plans");
 		}else if (planType.equalsIgnoreCase("PDP")) {
 			CommonUtility.waitForPageLoadNew(driver, presDrugTab.get(0), 45);
 			org.testng.Assert.assertTrue(0 == medBenefitsTab.size(), "Medical Benefit tab not displayed for PDP plans");
@@ -1340,5 +1345,10 @@ public class PlanDetailsPage extends UhcDriver {
 			if(!planCostTabDrugCostValueCell.getText().equals(annualDrugCost))
 				Assert.fail("Drug cost not displayed properly on prescription drugs tab");
 			
+		}
+
+		public DrugDetailsPage returnToReviewDrugCost() {
+			// TODO Auto-generated method stub
+			return null;
 		}
 }

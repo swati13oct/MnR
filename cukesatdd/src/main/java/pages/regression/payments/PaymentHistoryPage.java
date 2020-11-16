@@ -2235,7 +2235,9 @@ public class PaymentHistoryPage extends UhcDriver {
 		checkForIPerceptionModel(driver);
 	       // clicking on contact us 
 		Thread.sleep(2000);
+		TestHarness.checkForIPerceptionModel(driver);
 			waitforElement(contactus);
+			TestHarness.checkForIPerceptionModel(driver);
 			contactus.click();			
 			System.out.println(driver.getTitle());
 			System.out.println(driver.getCurrentUrl());			

@@ -1,4 +1,4 @@
-@UAT_Regression
+@UATRegression
 Feature:1.10.4 UAT-DCE-To test UAT DCE E2E Regression Scenarios
 
   @DCE_ShopForPlanPage_PDPpage 
@@ -55,11 +55,11 @@ Feature:1.10.4 UAT-DCE-To test UAT DCE E2E Regression Scenarios
 
 		@DCE_MedEdPage_AARP
     Examples: 
-     |Scenario  |	site	| drug1   | drug2  | drug3   | drug4    | zipCode |
-      |E2E Scenario 4_AMP| AARP	| Orkambi | Fanapt | Humalog | Adderall |   80002 |
+    	|Scenario  					|	site	| drug1   | drug2  | drug3   | drug4    | zipCode |
+     	|E2E Scenario 4_AMP	| AARP	| Orkambi | Fanapt | Humalog | Adderall |   80002 |
 
     @DCE_MedEdPage_UHC
     Examples: 
-    |Scenario   |	site	| drug1   | drug2  | drug3   | drug4    | zipCode |
-    |E2E Scenario 4_UMS  | UHC		| Orkambi | Fanapt | Humalog | Adderall |   80002 |
+    	|Scenario   				|	site	| drug1   | drug2  | drug3   | drug4    | zipCode |
+    	|E2E Scenario 4_UMS | UHC		| Orkambi | Fanapt | Humalog | Adderall |   80002 |
          

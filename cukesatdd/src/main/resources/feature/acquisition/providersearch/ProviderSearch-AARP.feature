@@ -44,7 +44,7 @@ Feature: 1.07 .ACQ- Provider Search Flow in AARP
       | Plancount | <plancount> |
       | Year      | <year>     |
 
-    @AcqRegressionProviderSearchUlayer
+    #@AcqRegressionProviderSearchUlayer
     Examples: 
       | zipcode | plancount | year|
       |   10001 |        12 |current|
@@ -63,7 +63,7 @@ Feature: 1.07 .ACQ- Provider Search Flow in AARP
       | Plancount | <plancount> |
       | Year      | <year>     |
 
-	@AcqRegressionProviderSearchUlayer
+	#@AcqRegressionProviderSearchUlayer
     Examples: 
       | zipcode | plancount | year|
       |   10001 |        12 |current|

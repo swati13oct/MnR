@@ -86,7 +86,8 @@ public class DrugDetailsPage extends UhcDriver {
 	@FindBy(xpath = "//div[@id='coveredtable']//th[contains(text(), 'You Pay')]")
 	public WebElement YourDrugs_YouPayTxt;
 
-	@FindBy(xpath = "(//div[@id='coveredtable']//td[contains(text(), 'Initial Coverage Cost')])[1]")
+	//@FindBy(xpath = "(//div[@id='coveredtable']//td[contains(text(), 'Initial Coverage Cost')])[1]")
+	@FindBy(xpath="(//div[@id='coveredtable']//div[contains(text(), 'Initial Coverage Cost')])")
 	public WebElement YourDrugs_InitlCoverageTxt;
 
 	@FindBy(xpath = "//h2[contains(text(), 'Monthly Drug Costs By Stage')]")
@@ -877,9 +878,15 @@ public class DrugDetailsPage extends UhcDriver {
 	}
 	
 	public void validatePlanDrugDetails(String planName) {
-		WebElement PlanName_PlanDetails = driver.findElement(By.xpath("//h1[contains(text(), '"+planName+"')]"));
-		CommonUtility.waitForPageLoadNew(driver, PlanName_PlanDetails, 20);
-		validateNew(PlanName_PlanDetails);
+		System.out.println("Plan Name : " + planName);
+		WebElement PlanName_PlanDetails = driver.findElement(By.xpath("//h1[contains(text(), '" + planName + "')]"));
+//		CommonUtility.waitForPageLoadNew(driver, PlanName_PlanDetails, 20);
+//		validateNew(PlanName_PlanDetails);
+
+		if (validateNew(PlanName_PlanDetails))
+			Assert.assertTrue("Plan Name is correct for Drug Details Page" + PlanName_PlanDetails.getText(), true);
+		else
+			Assert.fail("Plan Name validation Failed for Drug Details Page");
 	}
 	
 	@FindBy(xpath = "//div[@class='d-flex align-items-lg-center flex-lg-row']")
