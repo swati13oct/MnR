@@ -37,7 +37,7 @@ Feature: 1.02-Favorite Plans in vpp flow AARP
     @VppFavoritePlanCommon_AARP_1
     Examples: 
       | UID     | site | zipcode | isMultiCounty | county           | MA_testPlans                                                                                               | PDP_testPlans                                                    | SNP_testPlans                              | planyear |
-      | 1598162 | AARP |   80001 | NO            | Jefferson County | AARP Medicare Advantage SecureHorizons Essential (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO) | AARP MedicareRx Preferred (PDP),AARP MedicareRx Saver Plus (PDP) | UnitedHealthcare Dual Complete (HMO D-SNP) | current  |
+      | 1598162 | AARP |   80001 | NO            | Jefferson County | AARP Medicare Advantage SecureHorizons Essential (HMO),AARP Medicare Advantage SecureHorizons Plan 2 (HMO) | AARP MedicareRx Preferred (PDP),AARP MedicareRx Saver Plus (PDP) | UnitedHealthcare Dual Complete (HMO D-SNP) | current  |
 
     @VppFavoritePlanCommon_UHC_1
     Examples: 
