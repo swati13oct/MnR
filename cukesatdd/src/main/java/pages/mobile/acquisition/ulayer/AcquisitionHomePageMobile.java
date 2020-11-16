@@ -292,7 +292,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	@FindBy(xpath = ".//*[@id='updates-mobile-form']/div/div[2]/button")
 	private WebElement submit;
 
-	@FindBy(id = "state-select")
+	@FindBy(xpath = "//label[@for='state-select' and @class='select-label']")
 	private WebElement stateDropDown;
 
 	@FindBy(xpath = "//a[contains(@class, 'backtotop1')]")
@@ -2071,6 +2071,12 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		// disclaimerInformation.click();
 		jsClickNew(disclaimerInformation);
 		validateNew(backToTop_Disclaimer);
+		try {
+			wait(3000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	
 	}
 

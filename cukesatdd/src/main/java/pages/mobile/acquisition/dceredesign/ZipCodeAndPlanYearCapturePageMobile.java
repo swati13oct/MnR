@@ -35,6 +35,9 @@ public class ZipCodeAndPlanYearCapturePageMobile extends UhcDriver {
 	@FindBy(xpath = "//button[@dtmid='cta_dce']")
 	public WebElement continueBtn;
 
+	@FindBy(xpath = "//button[contains(text(),'Return to page')]")
+	public WebElement ReturnToPagePopup;
+
 	@FindBy(xpath = "//h2[contains(text(),'Your estimated')]")
 	public WebElement reviewDrugCostPageHeading;
 
@@ -49,11 +52,9 @@ public class ZipCodeAndPlanYearCapturePageMobile extends UhcDriver {
 
 	@FindBy(xpath = "//h3[contains(text(), 'Almost there')]")
 	public WebElement BuildDrugPage_verificationTxt;
-	
+
 	@FindBy(xpath = "//h2[@id='zipinfo']")
 	public WebElement AlmostThereHeader;
-	
-	
 
 	public ZipCodeAndPlanYearCapturePageMobile(WebDriver driver) {
 		super(driver);
@@ -179,7 +180,7 @@ public class ZipCodeAndPlanYearCapturePageMobile extends UhcDriver {
 	public void selectPlanYear() {
 		if (validate(planYearDropdown)) {
 			scrollToView(planYearDropdown);
-			//planYearDropdown.click();
+			// planYearDropdown.click();
 			jsClickNew(planYearDropdown);
 			Select planYear = new Select(planYearDropdown);
 			planYear.selectByIndex(1);
@@ -197,17 +198,28 @@ public class ZipCodeAndPlanYearCapturePageMobile extends UhcDriver {
 		validateNew(zipCodeTxtbox);
 		// sendkeys(zipCodeTxtbox, zipcode);
 		validateNew(continueBtn);
+
 		jsClickNew(continueBtn);
-		//continueBtn.click();
+		// continueBtn.click();
 		// countyDropdown.click();
-		CommonUtility.waitForPageLoad(driver, zipCodeErrorMsg, 30);
-		if (validateNew(zipCodeErrorMsg)) {
+		CommonUtility.waitForPageLoad(driver, ReturnToPagePopup, 30);
+		if (validateNew(ReturnToPagePopup)) {
 			System.out.println("Error message is Displaying");
-			//For Mobile 
-			jsClickNew(AlmostThereHeader);
+			// For Mobile
+			jsClickNew(ReturnToPagePopup);
 			zipCodeTxtbox.clear();
 			return new ZipCodeAndPlanYearCapturePageMobile(driver);
 		}
+
+		//
+		// CommonUtility.waitForPageLoad(driver, zipCodeErrorMsg, 30);
+		// if (validateNew(zipCodeErrorMsg)) {
+		// System.out.println("Error message is Displaying");
+		// // For Mobile
+		// jsClickNew(AlmostThereHeader);
+		// zipCodeTxtbox.clear();
+		// return new ZipCodeAndPlanYearCapturePageMobile(driver);
+		// }
 		Assert.fail("Error Message is not displaying for invalid zipcode");
 		return null;
 	}

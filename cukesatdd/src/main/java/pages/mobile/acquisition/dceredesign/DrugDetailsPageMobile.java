@@ -79,10 +79,10 @@ public class DrugDetailsPageMobile extends UhcDriver {
 	@FindBy(xpath = "//div[@id='coveredtable']")
 	public WebElement YourDrugs_Table;
 	
-	@FindBy(xpath = "//div[@id='coveredtable']//th[contains(text(), 'Drug')]")
+	@FindBy(xpath = "//h2[@id='yourdrug']")
 	public WebElement YourDrugs_DrugsTxt;
 
-	@FindBy(xpath = "//div[@id='coveredtable']//th[contains(text(), 'You Pay')]")
+	@FindBy(xpath = "//div[@class='text-semibold mt-10' and contains(text(), 'You Pay')]")
 	public WebElement YourDrugs_YouPayTxt;
 
 	//@FindBy(xpath = "(//div[@id='coveredtable']//td[contains(text(), 'Initial Coverage Cost')])[1]")
@@ -249,11 +249,17 @@ public class DrugDetailsPageMobile extends UhcDriver {
 
 	
 	public void validateYourDrugs() {
+		scrollToView(YourDrugs_Header);
 		validateNew(YourDrugs_Header);
+		scrollToView(YourDrugs_Table);
 		validateNew(YourDrugs_Table);
+		scrollToView(YourDrugs_DrugsTxt);
 		validateNew(YourDrugs_DrugsTxt);
+		scrollToView(YourDrugs_YouPayTxt);
 		validateNew(YourDrugs_YouPayTxt);
+		scrollToView(YourDrugs_InitlCoverageTxt);
 		validateNew(YourDrugs_InitlCoverageTxt);
+		scrollToView(LinktoEditDrugList);
 		validateNew(LinktoEditDrugList);
 	}
 
