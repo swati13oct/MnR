@@ -91,10 +91,14 @@ public class GlobalTearDown {
 			
 		}
 		} catch (WebDriverException e) {
+		    WebDriver wd  =(WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		    wd.quit();
 			if(null != getLoginScenario().getBean(LoginCommonConstants.USERNAME)){
 				scenario.write("USER NAME USED : " + getLoginScenario().getBean(LoginCommonConstants.USERNAME));
+				scenario.write("SauceLab video link for the job='"+MRScenario.returnJobURL());
 				Assert.assertTrue("Got WebDriverException. USER NAME USED : " + getLoginScenario().getBean(LoginCommonConstants.USERNAME)+" | "+"SauceLab video link for the job='"+MRScenario.returnJobURL()+"' | exception: "+e, false);
 			} else {
+				scenario.write("SauceLab video link for the job='"+MRScenario.returnJobURL());
 				Assert.assertTrue("Got WebDriverException. SauceLab video link for the job='"+MRScenario.returnJobURL()+"' | exception: "+e, false);
 			}
 		}

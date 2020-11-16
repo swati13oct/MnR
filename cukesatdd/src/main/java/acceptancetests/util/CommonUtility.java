@@ -459,6 +459,7 @@ public class CommonUtility {
 			Alert alert = driver.switchTo().alert();
 			System.out.println("Alert text="+alert.getText());
 			if (alert.getText().contains("an error while processing your information")) {
+				driver.quit();
 				Assert.assertTrue("***** Got Alert message: "+alert.getText(), false);
 			} 
 		} catch (WebDriverException e) {
