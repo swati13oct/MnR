@@ -4,6 +4,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import org.junit.Assert;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -16,7 +17,6 @@ import cucumber.api.Scenario;
 // To be added
 import cucumber.api.java.After;
 import io.appium.java_client.AppiumDriver;
-import junit.framework.Assert;
 
 /**
  * This class will take a screen shot of the last screen executed by cucumber
@@ -95,12 +95,11 @@ public class GlobalTearDown {
 		    wd.quit();
 			if(null != getLoginScenario().getBean(LoginCommonConstants.USERNAME)){
 				scenario.write("USER NAME USED : " + getLoginScenario().getBean(LoginCommonConstants.USERNAME));
-				scenario.write("SauceLab video link for the job='"+MRScenario.returnJobURL());
-				Assert.assertTrue("Got WebDriverException. USER NAME USED : " + getLoginScenario().getBean(LoginCommonConstants.USERNAME)+" | "+"SauceLab video link for the job='"+MRScenario.returnJobURL()+"' | exception: "+e, false);
-			} else {
-				scenario.write("SauceLab video link for the job='"+MRScenario.returnJobURL());
-				Assert.assertTrue("Got WebDriverException. SauceLab video link for the job='"+MRScenario.returnJobURL()+"' | exception: "+e, false);
-			}
+				//tbd Assert.assertTrue("Got WebDriverException. USER NAME USED : " + getLoginScenario().getBean(LoginCommonConstants.USERNAME)+" | "+"SauceLab video link for the job='"+MRScenario.returnJobURL()+"' | exception: "+e, false);
+			} 
+			scenario.write("SauceLab video link for the job='"+MRScenario.returnJobURL());
+			scenario.write("Got exception='"+e.getMessage());
+			Assert.assertTrue("Got WebDriverException", false);
 		}
 	}
 	// to be added
