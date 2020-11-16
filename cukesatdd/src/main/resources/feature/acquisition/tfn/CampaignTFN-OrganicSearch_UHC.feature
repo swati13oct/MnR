@@ -183,7 +183,7 @@ Feature: To test Organic Search Campaign TFN on UHC site
 | ulayer |         880180 |         880188 |         880189 | /?WT.mc_id=800086 |         800086 | enroll/ma-enrollment.html | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | health-plans/medicare-supplement-plans/medicare-information.html?vpp=true | //*[@id='tfn'] |
       
           
-   @Scenario4_7Campaign_Trafic_Member_UHC 
+   @Scenario4_7Campaign_Trafic_Member_UHC1
    Scenario Outline: 4.7 Campaign traffic from Member page to Acquisition Portals for UHC
    Given the user is on the uhcmedicaresolutions site landing page
     And the user retrieves TFNSessionCookie and Federal and MedSupp TFN

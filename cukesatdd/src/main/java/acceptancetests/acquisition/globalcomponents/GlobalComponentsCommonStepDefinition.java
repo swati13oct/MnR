@@ -1,3 +1,4 @@
+
 package acceptancetests.acquisition.globalcomponents;
 
 import java.util.HashMap;
