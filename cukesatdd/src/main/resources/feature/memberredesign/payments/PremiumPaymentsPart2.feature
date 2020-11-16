@@ -1,5 +1,10 @@
 Feature: 1.19 Verify the premium payment flows on member portal - Part 2 - Test cases 13 to 18
 
+Background: Feature security flag needs to be true before ATDD script execution
+     Given First check if feature security flag is set to true
+      | Feature           | UCPPayments |
+###############################Regression Scenarios Begin Here ########################################
+
   #Test Case 13
   @regressionMember
   Scenario Outline: TID: <TID> - Test Case 13 -Verify Setup Recurring payment for Checking Account for Ship Member a) normal user b)terminated and active ship
@@ -106,7 +111,7 @@ Feature: 1.19 Verify the premium payment flows on member portal - Part 2 - Test 
 
   #Test Case 18
   @regressionMember
-  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Test Case 18 - Verify if the user is able to make one time Total Amount payment for Ship
+  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Test Case 18 - Verify if the user is able to make one time EFT payment for Ship
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |

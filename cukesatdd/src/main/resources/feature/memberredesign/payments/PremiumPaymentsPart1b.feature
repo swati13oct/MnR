@@ -1,5 +1,10 @@
 Feature: 1.19 Verify the premium payment flows on member portal - Part 1b - Test cases 7 to 12
 
+Background: Feature security flag needs to be true before ATDD script execution
+     Given First check if feature security flag is set to true
+      | Feature           | UCPPayments |
+###############################Regression Scenarios Begin Here ########################################
+
   #Test Case 07
   @regressionMember
   Scenario Outline: TID: <memberType> - Test Case 07 -Verify the overPayment credit flag and verbiage

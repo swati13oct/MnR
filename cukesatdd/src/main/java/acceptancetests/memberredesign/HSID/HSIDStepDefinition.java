@@ -1407,4 +1407,71 @@ public class HSIDStepDefinition {
 												accountHomePage.clickLogoutDashboardAndCheckLoginPage();												
 											}
 										}
-}
+
+										@Given("^First check if feature security flag is set to true$")
+										public void checkSecurityFlagCTCW(DataTable memberAttributes) {
+										  String stageDomain = null;
+										  Map < String,
+										  String > memberAttributesMap = parseInputArguments(memberAttributes);
+										  String feature = memberAttributesMap.get("Feature");
+										  if (!feature.equals("UCPPayments")
+										  && !feature.equals("UCPContactus")
+										  && !feature.equals("UCPUserManagement")
+										  && !feature.equals("UCPSSOMemberAuth")
+										  ) {
+										    Assert.assertTrue("PROBLEM - ATDD code doesn't support security flag check for feature '" + feature + "' yet or make sure it's spelled correctly", false);
+										  }
+										  System.out.println("feature=" + feature);
+										  String securityFlagXpath = "//td[text()='enableSecurity']/following-sibling::td";
+										  if (MRScenario.environment.equalsIgnoreCase("stage"))
+										  {
+										    stageDomain = "http://apsrs7260.uhc.com:8080";
+										  }
+										  else if (MRScenario.environment.equalsIgnoreCase("team-h")) {
+										    if (feature.equals("UCPPayments")) {
+										      stageDomain = "http://ucp-payments-team-h.ocp-ctc-dmz-nonprod.optum.com";
+										    } else if (feature.equals("UCPUserManagement")) {
+										      stageDomain = "http://ucp-user-management-team-h.ocp-ctc-dmz-nonprod.optum.com";
+										    } else if (feature.equals("UCPContactus")) {
+										      stageDomain = "http://ucp-contactus-team-h.ocp-ctc-dmz-nonprod.optum.com/";
+										    } else if (feature.equals("UCPSSOMemberAuth")) {
+										      stageDomain = "http://ucp-benefits-mnr-ucp-stage-3.ocp-ctc-dmz-stg.optum.com";
+										    }
+										  }
+										  //tbd configPgUrl="https://www."+MRScenario.environment+"-medicare."+MRScenario.domain+"/"+feature+"/wsConfig";
+										  String configPgUrl = stageDomain + "/" + feature + "/wsConfig";
+										  System.out.println("Config page URL=" + configPgUrl);
+										  MRScenario m = new MRScenario();
+										  WebDriver d = m.getWebDriverNew();
+										  d.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+										  d.get(configPgUrl);
+										  d.navigate().refresh();
+										  CommonUtility.checkPageIsReady(d);
+										  try {
+										    WebElement e = d.findElement(By.xpath(securityFlagXpath));
+										    CommonUtility.waitForPageLoad(d, e, 5);
+										    if (e.isDisplayed()) {
+										      System.out.println("Element '" + e.toString() + "' found!!!!");
+										      String value = e.getText();
+										      if (value.equalsIgnoreCase("false")) {
+										        if (MRScenario.environment.toLowerCase().contains("stage"))
+										        Assert.assertTrue("PROBLEM - " + MRScenario.environment + " environment should have feature '" + feature + "' security flag = true, right now it is set to " + value + " | configPgUrl=" + configPgUrl + ", stopping all tests now. | saurcelab session=" + MRScenario.returnJobURL(), false);
+										        else
+										        System.out.println("feature '" + feature + "' security flag is false on env '" + MRScenario.environment + "' configPgUrl=" + configPgUrl + ", not on stage, okay to move on...");
+										      } else {
+										        System.out.println("feature '" + feature + "' security flag is true on env '" + MRScenario.environment + "' configPgUrl=" + configPgUrl + ", okay to move on...");
+										      }
+										    } else {
+										      Assert.assertTrue("PROBLEM - unable to locate security flag in the config URL='" + configPgUrl + "' page, stopping all tests now. | saurcelab session=" + MRScenario.returnJobURL(), false);
+										    }
+										  } catch(Exception e) {
+										    if (MRScenario.environment.toLowerCase().contains("stage")) {
+										      e.printStackTrace();
+										      Assert.assertTrue("PROBLEM - unable to locate security flag in the config URL='" + configPgUrl + "' page, stopping all tests now. | saurcelab session=" + MRScenario.returnJobURL(), false);
+										    } else {
+										      System.out.println("unable to locate security flag in the config URL='" + configPgUrl + "' page, not on stage, okay to move on...");
+										    }
+										  }
+										  d.quit();
+										}
+										}

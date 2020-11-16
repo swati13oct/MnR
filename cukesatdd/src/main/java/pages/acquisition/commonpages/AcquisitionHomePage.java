@@ -440,7 +440,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	
 	@FindBy(xpath = "//p[contains(text(),'UnitedHealthcare Insurance Company (UnitedHealthcare)')]")
-    private WebElement UHCICSubTiltle;
+    private WebElement UHCICSubTitle;
 	
 	@FindBy(xpath = "//*[contains(@id, 'piFirstName')]")
 	private WebElement registerFirstName;
@@ -2616,7 +2616,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		public void validateSubtitle() {
         threadsleep(5);
         System.out.println("validating the sub header");
-        Assert.assertEquals(UHCICSubTiltle.getText(), "UnitedHealthcare Insurance Company (UnitedHealthcare)");
+        Assert.assertEquals(UHCICSubTitle.getText(), "UnitedHealthcare Insurance Company (UnitedHealthcare)");
 
 }
 		
@@ -2686,4 +2686,5 @@ public class AcquisitionHomePage extends GlobalWebElements {
 					Assert.fail("Visit AARP link did not lead to the right page");
 			}
 		}
+
 }
