@@ -1,9 +1,9 @@
 @benefitsAndCoverage @thePredators @codeMonkeys
 Feature: 1.01 Member  benefits and Coverage page  - Member Auth Prod
 
-  #Background: If run on stage then feature security flag needs to be true
-  #   Given feature security flag must set to true when testing on stage env
-  #    | Feature           | UCPBenefits |
+  Background: If run on stage then feature security flag needs to be true
+     Given feature security flag must set to true when testing on test env
+      | Feature           | UCPBenefits |
 
   #TO BE DEPRECATED
   #TC05_Primarycareprovider_specialist_withoutprovidertiering

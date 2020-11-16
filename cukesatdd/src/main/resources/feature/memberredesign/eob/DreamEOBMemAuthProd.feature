@@ -1,9 +1,9 @@
 @Dreameob
 Feature: 1.04.2.2 To Test DREAM EOB for Members - E2E - Member Auth - PROD
 
-  #Background: If run on stage then feature security flag needs to be true
-  #   Given feature security flag must set to true when testing on stage env
-  #    | Feature           | UCPEob |
+  Background: If run on stage then feature security flag needs to be true
+     Given feature security flag must set to true when testing on test env
+      | Feature           | UCPEob |
 
   #----- begin sanity
   @prod_sanity
