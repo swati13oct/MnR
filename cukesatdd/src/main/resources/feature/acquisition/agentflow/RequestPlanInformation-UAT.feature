@@ -20,7 +20,7 @@ Scenario Outline: <scenario> Verify request an appointment through <pageName>
     Examples: 
       |scenario               |	site	|PlanType |planyear|planYear|zipcode    | isMultutiCounty | county          | plantype |planyear|Firstname|Lastname|email|
       |E2E Scenario 1_AMP			|	AARP	|MA-MBI   |future  |future  |			10001 | NO              | New York County | MA       | future |Test_Portals_J|Test_Portals_K|venkata.kanagala@optum.com|
-   @requestPlanInformationBlayer
+   @requestPlanInformationUlayer
     Examples: 
      
 
