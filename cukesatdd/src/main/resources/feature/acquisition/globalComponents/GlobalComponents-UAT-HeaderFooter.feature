@@ -10,8 +10,6 @@ Feature: 1.12 UAT - Header and Footer flows
       | Is Multi County | <isMultutiCounty> |
       | County Name     | <county>          |
     When user accesses global footer of the Medicare Plans All page
-#    And user vaidates the state drop down link on the home page
-#    And user clicks on View all disclaimer information link on the home page
     And user clicks on Aboutus link from footer of the Medicare Plans home page
     And the user clicks on browser back button
     And user clicks on contactus link on aboutus page
@@ -54,9 +52,6 @@ Feature: 1.12 UAT - Header and Footer flows
     	|Site| <site>|
     When I click on DCE Redesign link from Shop for a plan hover over
     When user accesses global footer of the Medicare Plans All page
-#    And user vaidates the state drop down link on the home page
-#    And user clicks on View all disclaimer information link on the home page
-    And the user clicks on browser back button
     And user clicks on Aboutus link from footer of the Medicare Plans home page
     And the user clicks on browser back button
     And user clicks on contactus link on aboutus page
@@ -92,7 +87,7 @@ Feature: 1.12 UAT - Header and Footer flows
       |E2E Scenario_4 UMS |	UHC	| 
       
       	@globalfooterULayer
-  Scenario Outline: <Scenario> : To verify links displayed in the global header and footer on DCE page.
+  Scenario Outline: <Scenario> : To verify links displayed in the global header and footer on home page.
     Given the user is on medicare acquisition site landing page
     	|Site| <site>|
     When user accesses global footer of the Medicare Plans All page
@@ -134,14 +129,11 @@ Feature: 1.12 UAT - Header and Footer flows
       |E2E Scenario_1 UMS |	UHC	| 
     
    @globalfooterULayer
-  Scenario Outline: <Scenario> : To verify links displayed in the global header and footer on DCE page.
+  Scenario Outline: <Scenario> : To verify links displayed in the global header and footer on Pharmacy page.
     Given the user is on medicare acquisition site landing page
     	|Site| <site>|
     When the user navigate to pharmacy search page from the navigation bar
     When user accesses global footer of the Medicare Plans All page
-     And user vaidates the state drop down link on the home page
-    And user clicks on View all disclaimer information link on the home page
-    And the user clicks on browser back button
     And user clicks on Aboutus link from footer of the Medicare Plans home page
     And the user clicks on browser back button
     And user clicks on contactus link on aboutus page
