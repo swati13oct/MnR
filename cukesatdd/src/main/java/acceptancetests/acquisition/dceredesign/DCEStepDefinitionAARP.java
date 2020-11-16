@@ -796,7 +796,7 @@ public class DCEStepDefinitionAARP {
 
 	@Then("^the user validates Estimated Annual Drug Costs on Prescription Drug Costs Tab on Plan Details Page$")
 	public void the_user_validates_Estimated_Drug_Costs_on_Prescription_Drug_Costs_Tab_on_Plan_Details_Page() throws Throwable {
-		PlanDetailsPage plandetailspage = (PlanDetailsPage) getLoginScenario().getBean(PageConstants.PLAN_DETAILS_PAGE);
+		PlanDetailsPage plandetailspage = (PlanDetailsPage) getLoginScenario().getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
 		String EstimatedDrugCosts = plandetailspage.costComparisonPrescriptionDrugFromDCE();
 		String cost = (String) getLoginScenario().getBean(DCERedesignCommonConstants.ANNUAL_ESTIMATED_TOTAL);
 		if(cost.trim().contains(EstimatedDrugCosts))
