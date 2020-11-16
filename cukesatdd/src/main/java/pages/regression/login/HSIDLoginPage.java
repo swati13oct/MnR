@@ -737,7 +737,6 @@ public class HSIDLoginPage extends UhcDriver {
 				Alert alert = driver.switchTo().alert();
 				System.out.println("Alert text="+alert.getText());
 				if (alert.getText().contains("an error while processing your information")) {
-					driver.quit();
 					Assert.assertTrue("***** Error in loading  Redesign Account Landing Page ***** username: "+username+" - Got Alert message: "+alert.getText(), false);
 				} else {
 					alert.accept();
