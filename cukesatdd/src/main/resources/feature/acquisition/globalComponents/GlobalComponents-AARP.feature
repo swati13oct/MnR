@@ -37,9 +37,9 @@ Feature: 1.12 ACQ - Global Components AARP
     	|Site| <site>|
     When user accesses global header of the Medicare Plans home page
     And user verifies the logo on home page
-    And user clicks on Sign in link on home page
-    And user clicks on register link on home page
-    Then user validates visitor profile on home page
+    And user clicks on Sign in link in the header
+    And user clicks on register link in the header
+    Then user clicks on the heart icon in the header
   
   @globalheader
   Examples: 

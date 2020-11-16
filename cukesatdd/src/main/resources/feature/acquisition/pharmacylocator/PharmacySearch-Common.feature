@@ -5,7 +5,7 @@ Feature: 1.11. ACQ-Pharmacy Locator AARP
   Scenario Outline: TID: <TID> -zipcode: <zipcode> - Part 1 of 2 - To verify end-to-end behavior for pharmacy locator page in English on acquisition <site> site
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
-    And the user navigate to pharmacy search page
+    And the user navigate to pharmacy search page from the navigation bar
     #------ English -----------------------------------
     And the user validates header section content on site
     When the user enters following details for the pharmacy search
@@ -87,7 +87,7 @@ Feature: 1.11. ACQ-Pharmacy Locator AARP
   Scenario Outline: TID: <TID> -zipcode: <zipcode> - Part 2 of 2 - To verify end-to-end behavior for pharmacy locator page in English on acquisition <site> site
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
-    And the user navigate to pharmacy search page
+    And the user navigate to pharmacy search page from the navigation bar
     #------ English -----------------------------------
     And the user validates header section content
     And the user enters following details for the pharmacy search
@@ -161,7 +161,7 @@ Feature: 1.11. ACQ-Pharmacy Locator AARP
   Scenario Outline: TID: <TID> -zipcode: <zipcode> -countyName: <countyName> - Part 1 of 2 - To verify end-to-end behavior for pharmacy locator page in Chinese on acquisition <site> site
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
-    And the user navigate to pharmacy search page
+    And the user navigate to pharmacy search page from the navigation bar
     #------ Chinese -----------------------------------
     When the user selects Chinese Language to translate
     And the user validates header section content on site
@@ -224,7 +224,7 @@ Feature: 1.11. ACQ-Pharmacy Locator AARP
   Scenario Outline: TID: <TID> -zipcode: <zipcode> -countyName: <countyName> - Part 2 of 2 - To verify end-to-end behavior for pharmacy locator page in Chinese on acquisition <site> site
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
-    And the user navigate to pharmacy search page
+    And the user navigate to pharmacy search page from the navigation bar
     #------ Chinese -----------------------------------
     When the user selects Chinese Language to translate
     And the user enters following details for the pharmacy search
@@ -266,7 +266,7 @@ Feature: 1.11. ACQ-Pharmacy Locator AARP
   Scenario Outline: TID: <TID> -zipcode: <zipcode> -countyName: <countyName> - Part 1 of 2 - To verify end-to-end behavior for pharmacy locator page in Spanish on acquisition <site> site
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
-    And the user navigate to pharmacy search page
+    And the user navigate to pharmacy search page from the navigation bar
     #------ Spanish -----------------------------------
     When the user selects Spanish Language to translate
     And the user validates header section content on site
@@ -318,7 +318,7 @@ Feature: 1.11. ACQ-Pharmacy Locator AARP
   Scenario Outline: TID: <TID> -zipcode: <zipcode> -countyName: <countyName> - Part 2 of 2 - To verify end-to-end behavior for pharmacy locator page in Spanish on acquisition <site> site
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
-    And the user navigate to pharmacy search page
+    And the user navigate to pharmacy search page from the navigation bar
     #------ Spanish -----------------------------------
     When the user selects Spanish Language to translate
     And the user enters following details for the pharmacy search
