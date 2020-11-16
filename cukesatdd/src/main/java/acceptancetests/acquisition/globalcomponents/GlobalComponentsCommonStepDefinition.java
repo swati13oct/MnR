@@ -370,18 +370,18 @@ public class GlobalComponentsCommonStepDefinition {
 		  
 	  }
 	  
-	  @And("^user clicks on visit aarp.org link in the header$")
-	  public void click_visitAARP_Link_in_the_header() { 
-		  AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage)getLoginScenario() .getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		  aquisitionhomepage.clickVisitAARPHeaderLink();
-		  
+//	  @And("^user clicks on visit aarp.org link in the header$")
+//	  public void click_visitAARP_Link_in_the_header() { 
+//		  AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage)getLoginScenario() .getBean(PageConstants.ACQUISITION_HOME_PAGE);
+//		  aquisitionhomepage.clickVisitAARPHeaderLink();
+//		  
+//	  }
+//	  
+//	  @And("^user clicks on visit aarp.org link in the footer$")
+//	  public void click_visitAARP_Link_in_the_footer() { 
+//		  AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage)getLoginScenario() .getBean(PageConstants.ACQUISITION_HOME_PAGE);
+//		  aquisitionhomepage.clickVisitAARPFooterLink();
+//		  
 	  }
-	  
-	  @And("^user clicks on visit aarp.org link in the footer$")
-	  public void click_visitAARP_Link_in_the_footer() { 
-		  AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage)getLoginScenario() .getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		  aquisitionhomepage.clickVisitAARPFooterLink();
-		  
-	  }
-}
+
 
