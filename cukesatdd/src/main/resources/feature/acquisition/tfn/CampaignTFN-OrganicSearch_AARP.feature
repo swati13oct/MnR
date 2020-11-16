@@ -203,6 +203,7 @@ Feature: To test Organic SearchCampaign TFN on AARP site
       | PSC Code | <Precedence1PSC> |
      Then the user navigates to following memeber signin page and navigate to view medicare plans link AARP
      | Member Signin URL |<memberSignIn>     |
+     And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
      Then the user validates PSC code
       | PSC Code | <Precedence2PSC> |
       Then the user validate the sam icons tfn with federal TFN on Acquistion page

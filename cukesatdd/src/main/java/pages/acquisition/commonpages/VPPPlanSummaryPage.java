@@ -4511,5 +4511,92 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	}
 	
+	@FindBy(xpath = "//input[@id='updates-first-name']")
+	private WebElement requestfirstName;
+
+	@FindBy(xpath = "//input[@id='updates-last-name']")
+	private WebElement requestlastName;
 	
+	@FindBy(xpath = "(//input[@id='updates-email'])[2]")
+	private WebElement requestemailaddress;
+	
+	@FindBy(xpath = "//p[contains(text(),'Submit')]")
+	private WebElement requestplaninformationsubmit;
+	
+	@FindBy(xpath = "//p[contains(text(),'Your information has been submitted')]")
+	private WebElement requestplaninformationsubmitpopup;
+	
+	@FindBy(xpath = "//a[contains(@class,'emailsubmit_close')]")
+	private WebElement requestplaninformationclose;
+	
+	@FindBy(xpath = "//*[contains(@id, 'email-error-id')]")
+	private WebElement RequestPlanInformation_ErrorMessage;
+	
+	public boolean RequestPlanIInformation(String FirstName, String LastName, String EmailAddress) throws InterruptedException {
+		
+		boolean validation_Flag = true;
+		boolean RequestPlanIInformation_Validation = true;
+		
+		
+		if(validate(RequestPlanInformation_ErrorMessage)){
+			System.out.println("Email address is not entered : Error Message is Disabled");
+			RequestPlanIInformation_Validation = true;
+			validateNew(requestemailaddress);
+			requestemailaddress.sendKeys(EmailAddress);
+			System.out.println("Email Address is enetered : "+EmailAddress);
+			CommonUtility.waitForPageLoadNew(driver, requestfirstName, 20);
+			requestfirstName.sendKeys(FirstName);
+			CommonUtility.waitForPageLoadNew(driver, requestlastName, 20);
+			requestlastName.sendKeys(LastName);
+			//CommonUtility.waitForPageLoadNew(driver, requestemailaddress, 20);
+		//	requestemailaddress.sendKeys(EmailAddress);
+			validateNew(requestplaninformationsubmit);
+			requestplaninformationsubmit.click();
+			validateNew(requestplaninformationclose);
+			requestplaninformationclose.click();
+			
+			if(requestplaninformationsubmitpopup.getText().contains("Your information has been submitted. You should start getting your Medicare updates soon.")) {
+				System.out.println("****************Request  information is displayed  ***************");
+
+				Assert.assertTrue(true);
+				validateNew(requestplaninformationclose);
+				requestplaninformationclose.click();
+			}else {
+				System.out.println("****************Request information is displayed  ***************");
+			}
+			if(validateNonPresenceOfElement(RequestPlanInformation_ErrorMessage))
+			{
+				System.out.println("Error Message is not Displayed when Email address is entered");
+				RequestPlanIInformation_Validation = true;
+			}
+		}
+		else{
+			System.out.println("Email Address : Error Message is NOT Disabled");
+			RequestPlanIInformation_Validation = false;
+		}
+	/*	
+		CommonUtility.waitForPageLoadNew(driver, requestfirstName, 20);
+		requestfirstName.sendKeys(FirstName);
+		CommonUtility.waitForPageLoadNew(driver, requestlastName, 20);
+		requestlastName.sendKeys(LastName);
+		CommonUtility.waitForPageLoadNew(driver, requestemailaddress, 20);
+		requestemailaddress.sendKeys(EmailAddress);
+		validateNew(requestplaninformationsubmit);
+		requestplaninformationsubmit.click();
+		validateNew(requestplaninformationclose);
+		requestplaninformationclose.click();
+		
+		if(requestplaninformationsubmitpopup.getText().contains("Your information has been submitted. You should start getting your Medicare updates soon.")) {
+			System.out.println("****************Request information is displayed  ***************");
+
+			Assert.assertTrue(true);
+			validateNew(requestplaninformationclose);
+			requestplaninformationclose.click();
+		}else {
+			System.out.println("****************Request information is displayed  ***************");
+		}
+*/
+	return RequestPlanIInformation_Validation;
+
+	}
 }

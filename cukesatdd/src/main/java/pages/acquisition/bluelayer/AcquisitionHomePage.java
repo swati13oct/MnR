@@ -2934,9 +2934,14 @@ public void enterAndvalidateEmail() {
 		switchToNewTabNew(ViewMedicareplanlinks);
 		sleepBySec(15);
 		if (driver.getCurrentUrl().contains("plan-summary")) {
-			//return new ProviderSearchPage(driver);
+			try {
+				Thread.sleep(2000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			System.out.println("****AARP Page is displayed ******");
 		}
-		//return null;
 		
 	}
 	
