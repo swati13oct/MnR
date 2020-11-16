@@ -125,7 +125,7 @@ Then navigate from yahoo via uhc site to MedSup to varify TFN
 		
 		
 	@Scenario5A    @ConnectorModelPlus_UHC
-Scenario Outline:  2.2 Verify TFN and PSC code from External links to portal landing
+Scenario Outline: Verify TFN and PSC code from External links to portal landing
 Given user is landing from Externallinks
 	  |  URL     | <url>  |
 Then user clicks on learn about Medicare"<learnMoreurl>"
@@ -144,7 +144,7 @@ Then user verify VPP TFN
   |https://myuhcplans.com/retiree|1-844-462-9434|8006895|1-877-776-1458|897580|https://retiree.stage-uhcmedicaresolutions.uhc.com/medicare-education.html?WT.mc_id=8006895&originatingSite=https%3A%2F%2Fwww.myuhcplans.com%2Fretiree&subdomain=retiree|https://retiree.stage-uhcmedicaresolutions.uhc.com/plan-recommendation-engine.html|37211|https://retiree.stage-uhcmedicaresolutions.uhc.com/health-plans/medicare-advantage-plans/available-plans.html?zipcode=37211&WT.mc_id=897580&county=180&state=47&coveragePerson=M&originatingSite=https%253A%252F%252Fwww.myuhcplans.com%252Fretiree&subdomain=retiree#/plan-summary|
  #|https://myuhcplans.com/midwestregion|1-844-462-9438|8006892|1-855-373-7415|897578|https://midwestregion.stage-uhcmedicaresolutions.uhc.com/medicare-education.html?WT.mc_id=8006892&originatingSite=https%3A%2F%2Fwww.myuhcplans.com%2Fmidwestregion&subdomain=midwestregion|https://midwestregion.stage-uhcmedicaresolutions.uhc.com/plan-recommendation-engine.html|https://midwestregion.stage-uhcmedicaresolutions.uhc.com/health-plans/medicare-advantage-plans/available-plans.html?zipcode=37211&WT.mc_id=897578&county=180&state=47&coveragePerson=M&originatingSite=https%253A%252F%252Fwww.myuhcplans.com%252Fmidwestregion&subdomain=midwestregion#/plan-summary|
  #|https://myuhcplans.com/steelcase|1-844-481-8818|8006894|1-877-751-8918|897581|https://steelcase.stage-uhcmedicaresolutions.uhc.com/medicare-education.html?WT.mc_id=8006894&originatingSite=https%3A%2F%2Fwww.myuhcplans.com%2FSteelcase&subdomain=steelcase|https://steelcase.stage-uhcmedicaresolutions.uhc.com/plan-recommendation-engine.html|https://steelcase.stage-uhcmedicaresolutions.uhc.com/health-plans/medicare-advantage-plans/available-plans.html?zipcode=37211&WT.mc_id=897581&county=180&state=47&coveragePerson=M&originatingSite=https%253A%252F%252Fwww.myuhcplans.com%252Fsteelcase&subdomain=steelcase#/plan-summary|
- # |https://myuhcplans.com/wels|1-844-481-8819|8006893|1-877-893-7234|897582|https://wels.stage-uhcmedicaresolutions.uhc.com/medicare-education.html?WT.mc_id=8006893&originatingSite=https%3A%2F%2Fwww.myuhcplans.com%2FWels&subdomain=wels|https://wels.stage-uhcmedicaresolutions.uhc.com/plan-recommendation-engine.html|https://wels.stage-uhcmedicaresolutions.uhc.com/health-plans/medicare-advantage-plans/available-plans.html?zipcode=37211&WT.mc_id=897582&county=180&state=47&coveragePerson=M&originatingSite=https%253A%252F%252Fwww.myuhcplans.com%252Fwels&subdomain=wels#/plan-summary|
+  #|https://myuhcplans.com/wels|1-844-481-8819|8006893|1-877-893-7234|897582|https://wels.stage-uhcmedicaresolutions.uhc.com/medicare-education.html?WT.mc_id=8006893&originatingSite=https%3A%2F%2Fwww.myuhcplans.com%2FWels&subdomain=wels|https://wels.stage-uhcmedicaresolutions.uhc.com/plan-recommendation-engine.html|https://wels.stage-uhcmedicaresolutions.uhc.com/health-plans/medicare-advantage-plans/available-plans.html?zipcode=37211&WT.mc_id=897582&county=180&state=47&coveragePerson=M&originatingSite=https%253A%252F%252Fwww.myuhcplans.com%252Fwels&subdomain=wels#/plan-summary|
 
 	
 	
