@@ -18,9 +18,12 @@ Scenario Outline: <scenario> Verify request an appointment through <pageName>
    	
    	@requestPlanInformationBlayer
     Examples: 
-      |scenario               |	site	|PlanType |planyear|planYear|zipcode    | isMultutiCounty | county          | plantype |planyear|Firstname|Lastname|email|
-      |E2E Scenario 1_AMP			|	AARP	|MA-MBI   |future  |future  |			10001 | NO              | New York County | MA       | future |Test_Portals_J|Test_Portals_K|venkata.kanagala@optum.com|
+      |scenario                                       |	site	|PlanType |planyear|planYear|zipcode    | isMultutiCounty | county          | plantype |planyear|Firstname|Lastname|email|
+      |Request plan information scenario 1 _AARP			|	AARP	|MA-MBI   |future  |future  |			10001 | NO              | New York County | MA       | future |Test_Portals_J|Test_Portals_K|venkata.kanagala@optum.com|
+   
    @requestPlanInformationUlayer
     Examples: 
-     
+      |scenario                                       |	site	|PlanType |planyear|planYear|zipcode    | isMultutiCounty | county          | plantype |planyear|Firstname|Lastname|email|
+      |Request plan information scenario 1 _UHCMS			|	AARP	|MA-MBI   |future  |future  |			10001 | NO              | New York County | MA       | future |Test_Portals_J|Test_Portals_K|venkata.kanagala@optum.com|
+    
 
