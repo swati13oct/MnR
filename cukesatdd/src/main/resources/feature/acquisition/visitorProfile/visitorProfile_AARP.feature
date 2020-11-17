@@ -379,12 +379,12 @@ Feature: 1.08. ACQ- Visitor profile
     @VisitorProfile_AARP
     Examples: 
       | site | state   | userName | password   | drug1   | zipCode |
-      | AARP | Alabama | mnrqavd3 | Password@1 | Lipitor |   90210 |
+      | AARP | Alabama | mnrqavd3 | Password@2 | Lipitor |   90210 |
 
     @VisitorProfile_UHC
     Examples: 
       | site | state   | userName | password   | drug1   | zipCode |
-      | UHC  | Alabama | mnrqavd3 | Password@1 | Lipitor |   90210 |
+      | UHC  | Alabama | mnrqavd3 | Password@2 | Lipitor |   90210 |
 
   @providerFlowAuthenticated
   Scenario Outline: Verify Provider Search functional flow for authenticated Visitor Profile page
@@ -411,12 +411,12 @@ Feature: 1.08. ACQ- Visitor profile
     @VisitorProfile_AARP
     Examples: 
       | site | zipcode | isMultutiCounty | county          | userName | password   | plantype | planname                             |
-      | AARP |   10001 | NO              | New York County | mnrqavd3 | Password@1 | MAPD     | AARP Medicare Advantage Plan 2 (HMO) | 
+      | AARP |   10001 | NO              | New York County | mnrqavd3 | Password@2 | MAPD     | AARP Medicare Advantage Plan 2 (HMO) | 
 
     @VisitorProfile_UHC
     Examples: 
       | site | zipcode | isMultutiCounty | county          | userName | password   | plantype | planname                             | 
-      | UHC  |   10001 | NO              | New York County | mnrqavd3 | Password@1 | MAPD     | AARP Medicare Advantage Plan 2 (HMO) | 
+      | UHC  |   10001 | NO              | New York County | mnrqavd3 | Password@2 | MAPD     | AARP Medicare Advantage Plan 2 (HMO) | 
 
   @planCompare @planCompareULayerSmoke @visitorProfileRegressionAARP
   Scenario Outline: Verify user is able to Plan compare to the unauthenticated visitor profile
