@@ -22,7 +22,7 @@ Feature: 1.10.3 DCE-Redesign-VPP_PlanCompare - To test DCE - VPP Plan Compare In
     Then the user clicks on return to compare link on build drug list page to returns to plan compare
     Then the user validates drug is displayed on the plan compare page
     	|DrugName	|<drug1>|
-		Then the user clicks on Edit Drug link and validates user lands on DCE Build Drug List Page
+		#Then the user clicks on Edit Drug link and validates user lands on DCE Build Drug List Page
 
     @DCE_Redesign_VPP_PlanCompare_AARP
     Examples: 

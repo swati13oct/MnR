@@ -55,7 +55,7 @@ Feature: 1.10.1 DCE-REDISIGN AARP - To test Acq Home to NEW DCE Flows
       | drug1   | drug2  | drug3   | drug4    | zipCode | planType | planName                                            | site | brundDrug | genericDrug                   | deleteDrug | addDrug |
       | Orkambi | Fanapt | Humalog | Adderall |   80002 | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) | UHC  | Adderall  | amphetamine/dextroamphetamine | Humalog    | Lipitor |
 
-  @DCE_DrugDetailsDynamicCopay_Preferred 
+  @DCE_DrugDetailsDynamicCopay_Preferred
   Scenario Outline: To verify DCE REDESIGN Details Page for Dynamic copay section from <site> home page
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
@@ -146,15 +146,15 @@ Feature: 1.10.1 DCE-REDISIGN AARP - To test Acq Home to NEW DCE Flows
     Examples: 
       | drug1      | drug2  | zipCode | planType | planName                                            | site | DefaultSelected | MailPharSelected |
       | vigabatrin | Fanapt |   80001 | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) | AARP | Standard Retail | Standard Mail    |
-      | vigabatrin | Fanapt |   78006 | SNP     | UnitedHealthcare Chronic Complete (HMO C-SNP)       | AARP | Standard Retail | Standard Mail    |
+      | vigabatrin | Fanapt |   78006 | SNP      | UnitedHealthcare Chronic Complete (HMO C-SNP)       | AARP | Standard Retail | Standard Mail    |
 
     @DCE_DrugDetailsCopay_Standard_UHC
     Examples: 
       | drug1      | drug2  | zipCode | planType | planName                                            | site | DefaultSelected | MailPharSelected |
       | vigabatrin | Fanapt |   80001 | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) | UHC  | Standard Retail | Standard Mail    |
-      | vigabatrin | Fanapt |   78006 | SNP     | UnitedHealthcare Chronic Complete (HMO C-SNP)       | UHC  | Standard Retail | Standard Mail    |
+      | vigabatrin | Fanapt |   78006 | SNP      | UnitedHealthcare Chronic Complete (HMO C-SNP)       | UHC  | Standard Retail | Standard Mail    |
 
-    @DCE_DrugDetailsValidation @DCE_DrugDetailsPremiumValidation_AARP
+  @DCE_DrugDetailsPremiumValidation_AARP
   Scenario Outline: To verify DCE REDESIGN Details Page for Zero or Range Premium from <site> home page
     #Given the user is on AARP medicare acquisition site landing page
     Given the user is on medicare acquisition site landing page
@@ -175,15 +175,26 @@ Feature: 1.10.1 DCE-REDISIGN AARP - To test Acq Home to NEW DCE Flows
     Then the user validates planName matches plan Name in VPP
     Then the user validates following expected Premium on DCE Details Page
       | Premium | <premium> |
+    Then the user validates link to Drug Summary Page
+    Then the user validates following premium for the following plan on DCE Summary Page
+      | Plan Type | <planType> |
+      | Plan Name | <planName> |
+      | Premium   | <premium>  |
 
     @DCE_DrugDetailsPremiumValidation_AARP
     Examples: 
-      | drug1   | zipCode | planType | planName                                            | site | premium |
-      | Orkambi | 80002 | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) | AARP |  |
+      | drug1   | zipCode | planType | planName                                                   | site | premium |
+      | Orkambi |   90210 | MAPD     | UnitedHealthcare Medicare Advantage Assure (HMO)           | AARP | $0 - $  |
+      | Orkambi |   75002 | SNP      | UnitedHealthcare Medicare Silver (Regional PPO C-SNP)      | AARP | $0 - $  |
+      | Orkambi |   75002 | SNP      | UnitedHealthcare Dual Complete Choice (Regional PPO D-SNP) | AARP | $0      |
+      | Orkambi |   75002 | SNP      | UnitedHealthcare Dual Complete (HMO D-SNP)                 | AARP | $0 - $  |
+      | Orkambi |   66032 | SNP      | UnitedHealthcare Dual Complete LP1 (HMO-POS D-SNP)         | AARP | $0 - $  |
 
     @DCE_DrugDetailsPremiumValidation_UHC
     Examples: 
-    
       | drug1   | zipCode | planType | planName                                            | site | premium |
-      | Orkambi |  80002 | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) | UHC  |  |
-      
+      | Orkambi |   90210 | MAPD     | UnitedHealthcare Medicare Advantage Assure (HMO)           | AARP | $0 - $  |
+      | Orkambi |   75002 | SNP      | UnitedHealthcare Medicare Silver (Regional PPO C-SNP)      | AARP | $0 - $  |
+      | Orkambi |   75002 | SNP      | UnitedHealthcare Dual Complete Choice (Regional PPO D-SNP) | AARP | $0      |
+      | Orkambi |   75002 | SNP      | UnitedHealthcare Dual Complete (HMO D-SNP)                 | AARP | $0 - $  |
+      | Orkambi |   66032 | SNP      | UnitedHealthcare Dual Complete LP1 (HMO-POS D-SNP)         | AARP | $0 - $  |
