@@ -70,7 +70,7 @@ public class VisitorProfilePage extends UhcDriver {
 	@FindBy(id = "header-number")
 	private WebElement shoppingCartNumber;
 	
-	@FindBy(xpath = "//div[contains(@class,'compare')]/button")
+	@FindBy(xpath = "//a[text()='Compare Plans']")
 	private WebElement comparePlans;
 	
 	@FindBy(css = "button.cta-button.create-profile")
@@ -175,7 +175,7 @@ public class VisitorProfilePage extends UhcDriver {
 	
 	public PlanDetailsPage navigateToPlanDetails(String planName) {
 		try {
-			driver.findElement(By.xpath("//h3[contains(text(),'"+planName+"')]")).click();
+			driver.findElement(By.xpath("//button[contains(@class,'remove')]/following::h3[contains(text(),'"+planName+"')]")).click();
 			Thread.sleep(20000);
 			if (driver.getCurrentUrl().contains("#/details")) {	
 				return new PlanDetailsPage(driver);
@@ -254,7 +254,7 @@ public class VisitorProfilePage extends UhcDriver {
 	public boolean providerinfo(String planName)
 	{
 		WebElement ProviderSearchLink = driver.findElement
-				(By.xpath("//*[contains(text(),'"+planName+"')]/following::div[contains(@class, 'providers--drugs')][1]//div[contains(@class,'provider-list added')]/div/button"));
+				(By.xpath("//button[contains(@class,'remove')]/following::h3[contains(text(),'"+planName+"')]/following::button[contains(@aria-controls, 'plan-providers')][1]/span/span"));
 		String mproviderinfo=ProviderSearchLink.getText();
 		System.out.println(mproviderinfo);
 		if(mproviderinfo.toLowerCase().contains("providers covered"))
