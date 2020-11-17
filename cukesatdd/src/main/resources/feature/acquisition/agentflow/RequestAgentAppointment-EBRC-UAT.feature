@@ -29,7 +29,7 @@ Scenario Outline: <scenario> Verify request an appointment through <pageName>
       |E2E Scenario 1_AMP			|	AARP	| health-plans.html?zipcode=55344&deepLink=favPlansDeepLink&plantype=MA&year=2020&planId=S5921370000&planYear=2020&systemYear=2020&zipcode=55344&fipsCode=053&product=MAPD&yearDisclaimer=undefined&month=2&yearToggle=undefined&deepLink=plandetail&WT.mc_id=8016371&mrcid=em:Acq:MR%7cFederal%7cEGEM3011%7c::8016371!/details | VPP: Plan Details PDP  |  https://www.myuhcagent.com/|                              
       |E2E Scenario 1_AMP			|	AARP	| health-plans.html?zipcode=10011&deepLink=favPlansDeepLink&plantype=MA&year=2020&planId=H3307018000&planYear=2020&systemYear=2020&zipcode=10011&fipsCode=061&product=MAPD&yearDisclaimer=undefined&month=2&yearToggle=undefined&deepLink=plandetail&WT.mc_id=897749&mrcid=em:Acq:MR%7cFederal%7cEGEM3011%7c::897749!/details   | VPP: Plan Details MA   |   https://www.myuhcagent.com/|
       |E2E Scenario 2_AMP          |	AARP  | shop/medicare-advantage-plans.html                          | ShopPlan: Shop MA Plan       | https://www.myuhcagent.com/| 
-	  |E2E Scenario 2_AMP	       |AARP	| shop/medicare-supplement-plans.html              | ShopPlan: Shop Med Supp Plan |	 https://www.myuhcagent.com/| 		
+	  |E2E Scenario 2_AMP	    |AARP	| shop/medicare-supplement-plans.html              | ShopPlan: Shop Med Supp Plan |	 https://www.myuhcagent.com/| 		
       |E2E Scenario 2_AMP       |  	AARP	| shop/prescription-drug-plans.html                | ShopPlan: Shop PDP Plan      |  https://www.myuhcagent.com/| 		 
        |E2E Scenario 2_AMP      |  	AARP	| shop/dual-special-needs-plans.html               | ShopPlan: Shop Medsupp Plan      |  https://www.myuhcagent.com/| 		 
       
