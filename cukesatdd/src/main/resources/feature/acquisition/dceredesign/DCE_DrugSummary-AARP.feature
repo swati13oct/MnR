@@ -97,7 +97,7 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
     And user clicks on continue button in Zip Entry Page
     #Then load screen should be displayed in AARP
     And user should be navigated to Review drug cost estimate page
-    And user should be able to see Medicare Advantage plan by default
+    And user should be able to see "Medicare Advantage Plans" by default
     And user should be able to toggle between plan types
 
     Examples: 
@@ -122,7 +122,7 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
     And user clicks on continue button in Zip Entry Page
     #Then load screen should be displayed in AARP
     And user should be navigated to Review drug cost estimate page
-    And user should be able to see Medicare Advantage plan by default
+    And user should be able to see "Medicare Advantage Plans" by default
     Then user saves plan as favorite on drug summary page AARP site
       | Test Plans | <testPlans> |
     Then user save PDP plan as favorite on drug summary page AARP site
@@ -157,7 +157,7 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
     And user clicks on continue button in Zip Entry Page
     #Then load screen should be displayed in AARP
     And user should be navigated to Review drug cost estimate page
-    And user should be able to see Medicare Advantage plan by default
+    And user should be able to see "Medicare Advantage Plans" by default
     When user clicks on change pharmacy link from summary page
     Then change pharmacy modal should be displayed
     And user verify change pharmacy modal
@@ -186,18 +186,18 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
     And user clicks on continue button in Zip Entry Page
     #Then load screen should be displayed in AARP
     And user should be navigated to Review drug cost estimate page
-    And user should be able to see Medicare Advantage plan by default
+    And user should be able to see "Medicare Advantage Plans" by default
     And user click on View Drug Pricing Modal
     And user click on lipitor Switch To Generic in AARP
     And user should be navigated to Review drug cost estimate page
-    And user should be able to see Medicare Advantage plan by default
+    And user should be able to see "Medicare Advantage Plans" by default
     And user click on View Drug Pricing Modal
     And user verify drug can switch to generic drug
       | DrugName | <drugName2> |
     And user click on PDP plan to view drug pricing in AARP
     And user click on Switch To Generic
     And user should be navigated to Review drug cost estimate page
-    And user should be able to see Medicare Advantage plan by default
+    And user should be able to see "Medicare Prescription Drug Plans" by default
     And user click on View Drug Pricing Modal
     And user verify drug can switch to generic drug
       | DrugName | <drugName3> |
@@ -224,7 +224,7 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
     And user clicks on continue button in Zip Entry Page
     #Then load screen should be displayed in AARP
     And user should be navigated to Review drug cost estimate page
-    And user should be able to see Medicare Advantage plan by default
+    And user should be able to see "Medicare Advantage Plans" by default
     When user clicks view drug cost button
     And user clicks on change pharmacy link from details page
     Then details page change pharmacy modal should be displayed
@@ -252,7 +252,7 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
     And user clicks on continue button in Zip Entry Page
     #Then load screen should be displayed in AARP
     And user should be navigated to Review drug cost estimate page
-    And user should be able to see Medicare Advantage plan by default
+    And user should be able to see "Medicare Advantage Plans" by default
     And user should verify the Extra help
     And user click on View Drug Pricing Modal
     And user should verify the drug extra qualification in drug pricing popup
@@ -277,7 +277,7 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
     And user clicks on continue button in Zip Entry Page
     #Then load screen should be displayed in AARP
     And user should be navigated to Review drug cost estimate page
-    #And user should be able to see Medicare Advantage plan by default
+    #And user should be able to see "Medicare Advantage Plans" by default
     And user should be able to toggle between plan types
     
     Examples: 
@@ -300,7 +300,7 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
     And user clicks on continue button in Zip Entry Page
     #Then load screen should be displayed in AARP
     And user should be navigated to Review drug cost estimate page
-    And user should be able to see Medicare Advantage plan by default
+    And user should be able to see "Medicare Advantage Plans" by default
     Then user saves plan as favorite on drug summary page AARP site
       | Test Plans | <testPlans> |
     Then user save PDP plan as favorite on drug summary page AARP site
@@ -332,11 +332,46 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
     And user clicks on continue button in Zip Entry Page
     #Then load screen should be displayed in AARP
     And user should be navigated to Review drug cost estimate page
-    And user should be able to see Medicare Advantage plan by default
+    And user should be able to see "Medicare Advantage Plans" by default
     And verify DCE NBA is displayed on drug summary page
 
     Examples: 
       | zipcode | county | isMultutiCounty | drug1   |
       |   10001 | none   | no              | Orkambi |
       
+  @dceRedesignSwitchToGenericDrug1 @F484185 @F495366
+  Scenario Outline: Test to Verify that user can update dosage, quantity and supply length in switch to generic modal
+    Given the user is on the AARP medicare site landing page
+    When I access the acquisition DCE tool from home page
+    Then the user validates Get Started Page
+    When the user clicks on Add drugs button
+    And adds drugs in drug list page
+      | DrugName | <drug1> |
+    And clicks on Review drug cost button
+    Then user should be navigated to zipcode and plan year capture page for AEP
+    When user enters valid zipcode and county
+      | ZipCode | <zipCode> |
+    #And user selects plan year in AARP
+    And user clicks on continue button in Zip Entry Page
+    #Then load screen should be displayed in AARP
+    And user should be navigated to Review drug cost estimate page
+    And user should be able to see "Medicare Advantage Plans" by default
+    And user click on View Drug Pricing Modal
+    And user click on lipitor Switch To Generic in AARP
+    And user should be navigated to Review drug cost estimate page
+    And user should be able to see "Medicare Advantage Plans" by default
+    And user click on View Drug Pricing Modal
+    And user verify drug can switch to generic drug
+      | DrugName | <drugName2> |
+    And user click on PDP plan to view drug pricing in AARP
+    And user click on Switch To Generic
+    And user should be navigated to Review drug cost estimate page
+    And user should be able to see "Medicare Prescription Drug Plans" by default
+    And user click on View Drug Pricing Modal
+    And user verify drug can switch to generic drug
+      | DrugName | <drugName3> |
+
+    Examples: 
+      | zipCode | drug1   | drug2     | drugName2                     | drugName3                    |
+      |   10001 | Lipitor | Lopressor | atorvastatin calcium TAB 10MG | metoprolol tartrate TAB 50MG |
   
