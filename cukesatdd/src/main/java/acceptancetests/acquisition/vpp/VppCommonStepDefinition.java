@@ -2372,6 +2372,10 @@ public class VppCommonStepDefinition {
 					plansummaryPage.medsuppOLERightRailplanoverview();
 					plansummaryPage.medsuppOLERightRailRulesDisclose();
 					plansummaryPage.medsuppOLERightRailEnrollmentDiscount();
+					plansummaryPage.medsuppOLERightRailLearnmore();
+					
+					
+					
 					//Assert.assertTrue(true);
 			//	}else
 				//	Assert.fail("Error in loading the yourguide Page");
@@ -2396,6 +2400,22 @@ public class VppCommonStepDefinition {
 			String submitconfirmation = plansummaryPage.StartApplication(FirstName, LastName);
 			getLoginScenario().saveBean(VPPCommonConstants.SUBMITCONFIRMATION, submitconfirmation);
 
+		}
+		
+		@Then("^user validate the plandetails on medsupp plans$")
+		public void user_validate_plandetails_medsupp_page() throws Throwable {
+			
+			VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+			
+			plansummaryPage.medsuppOLEplandetails();
+			plansummaryPage.medsuppOLERightRail();
+			plansummaryPage.medsuppOLERightRailGuideourhealth();
+			//plansummaryPage.medsuppOLERightRailoutlinecoverage();
+			plansummaryPage.medsuppOLERightRailplanoverview();
+			plansummaryPage.medsuppOLERightRailRulesDisclose();
+			plansummaryPage.medsuppOLERightRailEnrollmentDiscount();
+			plansummaryPage.medsuppOLERightRailLearnmore();
 		}
 }
 		

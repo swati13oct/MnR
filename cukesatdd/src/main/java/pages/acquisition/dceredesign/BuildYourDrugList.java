@@ -102,7 +102,7 @@ public class BuildYourDrugList extends UhcDriver {
 
 	public void addDrugs(String drugName) {
 		EnterDrugNameTxt.sendKeys(drugName);
-		WebElement drugname = driver.findElement(By.xpath("//*[contains(@id,'"+drugName+"')]/div"));
+		WebElement drugname = driver.findElement(By.xpath("//*[contains(@id,'"+drugName+"')]"));
 		
 		jsClickNew(drugname);
 		/*
