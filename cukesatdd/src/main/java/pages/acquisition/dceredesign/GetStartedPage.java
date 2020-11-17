@@ -62,7 +62,7 @@ public class GetStartedPage extends UhcDriver {
 		else 
 			checkModelPopup(driver,10);
 		validateNew(getStartedTab);
-		validateNew(AddMyDrugsBtn);
+		//validateNew(AddMyDrugsBtn);
 	}
 
 	public BuildYourDrugList clickAddsDrugs() {

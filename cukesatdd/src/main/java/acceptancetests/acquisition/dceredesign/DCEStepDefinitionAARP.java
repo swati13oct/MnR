@@ -350,21 +350,19 @@ public class DCEStepDefinitionAARP {
 		zipCodePlanYearPage.validateZipCodeErrorMessage();
 	}
 
-	@When("^adds drugs in drug list page$")
-	public void adds_drugs_in_drug_list_page(DataTable givenAttributes) {
-		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		Map<String, String> memberAttributesMap = new HashMap<String, String>();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}
-		String drugName = memberAttributesMap.get("DrugName");
-		System.out.println("zipcode" + drugName);
-		BuildYourDrugList buildDrugList = new BuildYourDrugList(driver);
-		getLoginScenario().saveBean(PageConstants.DCE_Redesign_BuildDrugList, buildDrugList);
-		buildDrugList.addDrugs(drugName);
-	}
-
+	
+	  @When("^adds drugs in drug list page$") public void
+	  adds_drugs_in_drug_list_page(DataTable givenAttributes) { List<DataTableRow>
+	  memberAttributesRow = givenAttributes.getGherkinRows(); Map<String, String>
+	  memberAttributesMap = new HashMap<String, String>(); for (int i = 0; i <
+	  memberAttributesRow.size(); i++) {
+	  memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+	  memberAttributesRow.get(i).getCells().get(1)); } String drugName =
+	  memberAttributesMap.get("DrugName"); System.out.println("zipcode" +
+	  drugName); BuildYourDrugList buildDrugList = new BuildYourDrugList(driver);
+	  getLoginScenario().saveBean(PageConstants.DCE_Redesign_BuildDrugList,
+	  buildDrugList); buildDrugList.addDrugs(drugName); }
+	 
 	@When("^user should verify the Extra help$")
 	public void user_should_verify_the_Extra_help_in_AARP() {
 		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);

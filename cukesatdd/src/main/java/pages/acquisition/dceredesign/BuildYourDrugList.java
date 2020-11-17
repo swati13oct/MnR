@@ -148,7 +148,7 @@ public class BuildYourDrugList extends UhcDriver {
 
 	public TellUsAboutDrug SelectDrugfromList(String drugName) {
 		validateNew(AutoCompleteList);
-		WebElement Drug = driver.findElement(By.xpath("//uhc-menu-item[@id='"+drugName+"']"));
+		WebElement Drug = driver.findElement(By.xpath("//*[@id='"+drugName+"']"));
 		jsClickNew(Drug);
 		CommonUtility.waitForPageLoadNew(driver, TellUsABoutHeader, 20);
 		if(validateNew(TellUsABoutHeader) && validateNew(TellUsABoutCloseBtn))

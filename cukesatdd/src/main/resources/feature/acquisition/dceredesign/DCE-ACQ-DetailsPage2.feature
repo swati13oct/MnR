@@ -1,7 +1,7 @@
-@dce_redesign_DrugDetailsValidation
+@dce_redesign_DrugDetailsValidation2
 Feature: 1.10.1 DCE-REDISIGN AARP - To test Acq Home to NEW DCE Flows
 
-  @DCE_DrugDetailsValidation @DCE_DrugDetailsValidation_AARP
+  @DCE_DrugDetailsValidation @DCE_DrugDetailsPremium_AARP
   Scenario Outline: To verify DCE REDESIGN Details Page from <site> home page
     #Given the user is on AARP medicare acquisition site landing page
     Given the user is on medicare acquisition site landing page
