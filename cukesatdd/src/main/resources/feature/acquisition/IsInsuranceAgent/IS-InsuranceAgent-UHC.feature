@@ -1,6 +1,6 @@
 Feature: 2.14 Med Supp Plans (IS) Insurance Agent flow in UHC site
 
-@IS_InsuranceAgent_UHC
+@IS_InsuranceAgent_UHC1
   Scenario Outline: UID: <UID> - To Test IS Insurance Agent flow E2E on UHC site
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
@@ -30,4 +30,24 @@ Feature: 2.14 Med Supp Plans (IS) Insurance Agent flow in UHC site
       |     |   90210 | NO              | Los Angeles County | MS       | test-mnr-first | test-mnr-last | email              | test@test.com | 08/09/1940 | January    |      2020 | 0321323215 | 3216549871 | N          | February  | 2020     |   June    | male  |
 
     
-   
+       
+   @IS_InsuranceAgent_UHC
+     Scenario Outline: UID: <UID>- To Test IS Insurance Agent E2E on UHC site
+    Given the user is on the uhcmedicaresolutions site landing page
+    Given the user clicks on Request a Free Insurance Agent on UHC site
+      | PagePath | <path>     |
+      Then the user enters valid information on Licensed Insurance Agentfor the following fields on AARP site
+      | FirstName          | <firstname>          |
+      | LastName           | <lastname>           |
+      | DistributionMethod | <distributionmethod> |
+      | Email              | <email>              |
+    Then the user validates address autocomplete on Licensed Agent on AARP site
+    Then the user provides DOB and Phone Number on AARP site
+    | DOB        | <dob>        |
+     | PhNo       | <phNo>       |
+    Then the user clicks Submit to submit Licensed Insurance Agent on AARP site and validates Thank You Page
+    
+    Examples: 
+      | UID | zipcode | isMultutiCounty | county             | plantype | firstname      | lastname      | distributionmethod | email         | dob        | partBmonth | partByear | aarpNo     | phNo       | mobileFlag | partAmonth| partAyear| startDate | gender|path                                | 
+      | 11111    |   90210 | NO              | Los Angeles County | MS       | test-mnr-first | test-mnr-last | mail               |               | 01/01/1945 | January    |      2020 | 0321323215 | 3216549871 | N          | February  | 2020     |   June    | male  |health-plans/medicare-supplement-plans/agent-appointment.html| 
+    #
