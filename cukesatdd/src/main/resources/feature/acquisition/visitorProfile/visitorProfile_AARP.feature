@@ -296,8 +296,9 @@ Feature: 1.08. ACQ- Visitor profile
     Then user click on continue as guest button
     And user validates the added Ms plans on visitor profile page
       | MS Test Plans | <MS_testPlans> |
-    And user validate pdf link
-      | MS Test Plans | <MS_testPlans> |
+		#No pdf link is avialable now    
+    #And user validate pdf link
+      #| MS Test Plans | <MS_testPlans> |
 
     @VisitorProfile_AARP
     Examples: 

@@ -25,7 +25,7 @@ public class VisitorProfilePage extends UhcDriver {
 	@FindBy(id = "dupIconFlyOut")
 	private WebElement shoppingCartIcon;
 	
-	@FindBy(css = "div.signupCTA a:first-child")
+	@FindBy(xpath = "//h2/following-sibling::a[text()='Sign In']")
 	private WebElement signIn;
 	
 	@FindBy(css = "div.signupCTA a.profileBtn")
@@ -79,7 +79,7 @@ public class VisitorProfilePage extends UhcDriver {
 	@FindBy(xpath = "//*[contains(@id,'enrollbtnplancompare0')]")
 	private WebElement enrollBtn;
 	
-	@FindBy(css="div.print-back>a:first-child")
+	@FindBy(css="div#navLinks>a:first-child")
 	private WebElement backToPlans;
 	
 	@FindBy(xpath = "//div[@class='multi-year-select']")
@@ -221,7 +221,7 @@ public class VisitorProfilePage extends UhcDriver {
 			if(driver.findElements(By.xpath("//div[@class='title dropdown-open']")).size()>0){
 				List<String> listOfTestPlans = Arrays.asList(plans.split(","));
 				for (String plan: listOfTestPlans) {
-					driver.findElement(By.xpath("//h4[text()='"+plan+"']/preceding::button[1]")).click();
+					driver.findElement(By.xpath("//h3[contains(text(),'"+plan+"')]/preceding::button[contains(@class,'remove')][1]")).click();
 					Thread.sleep(5000);
 				}
 				}
@@ -292,8 +292,8 @@ public class VisitorProfilePage extends UhcDriver {
 			driver.findElement(By.cssSelector("input#userNameId_input")).sendKeys(username);
 			driver.findElement(By.cssSelector("input#passwdId_input")).sendKeys(password);
 			driver.findElement(By.cssSelector("input#SignIn")).click();
-			String Question = driver.findElement(By.cssSelector("label#challengeQuestionLabelId")).getText().trim();
-			WebElement securityAnswer = driver.findElement(By.cssSelector("div#challengeSecurityAnswerId >input"));
+			String Question = driver.findElement(By.cssSelector("span#challengeQuestionLabelId")).getText().trim();
+			WebElement securityAnswer = driver.findElement(By.cssSelector("input#UnrecognizedSecAns_input"));
 			if (Question.equalsIgnoreCase("What is your best friend's name?")) {
 				System.out.println("Question is related to friendname");
 				securityAnswer.sendKeys("name1");
@@ -322,7 +322,7 @@ public class VisitorProfilePage extends UhcDriver {
 	public WelcomePage Enroll_OLE_Plan(String planName) {
 		WebElement enrollForPlan = null;
 		
-		enrollForPlan = driver.findElement(By.xpath("//*[contains(text(), '"+planName+"')]/ancestor::*[contains(@class,'title-container')]//*[contains(@class,'btn') and contains(@dtmname,'Enroll in Plan')]"));
+		enrollForPlan = driver.findElement(By.xpath("//button[contains(@class,'remove')]/following::h3[contains(text(),'"+planName+"')]/following::button[contains(@dtmname,'Enroll in Plan')][1]"));
 		if(enrollForPlan!=null){
 			jsClickNew(enrollForPlan);
 		}
@@ -432,7 +432,8 @@ public class VisitorProfilePage extends UhcDriver {
 			Thread.sleep(20000);
 			for (String plan: listOfTestPlans) {
 				Assert.assertEquals(plan, driver.findElement(By.xpath("//h2[text()='"+plan+"']")).getText());
-				Assert.assertTrue(driver.findElement(By.xpath("//div/a[contains(@aria-describedby,'"+plan+"')] [contains(@class,'pdf-link')]")).isDisplayed());
+				//No pdf link is availbel now
+				//Assert.assertTrue(driver.findElement(By.xpath("//div/a[contains(@aria-describedby,'"+plan+"')] [contains(@class,'pdf-link')]")).isDisplayed());
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
