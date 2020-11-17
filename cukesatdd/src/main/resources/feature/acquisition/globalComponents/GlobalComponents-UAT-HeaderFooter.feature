@@ -195,7 +195,7 @@ Feature: 1.12 UAT - Header and Footer flows
        |Scenario 					|	site|zipcode | isMultutiCounty | county        |
        |E2E Scenario_3 UMS|	UHC	|90210  |No								| Los Angeles County|
        
-         @globalheaderULayer
+ @globalheaderULayer
   Scenario Outline: <Scenario> : To verify links displayed in the global header from DCE 
     Given the user is on medicare acquisition site landing page
     	|Site| <site>|
