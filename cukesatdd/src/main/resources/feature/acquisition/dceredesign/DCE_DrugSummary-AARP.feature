@@ -339,4 +339,37 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
       | zipcode | county | isMultutiCounty | drug1   |
       |   10001 | none   | no              | Orkambi |
       
+      
+     @dcecovereduncoveredDrugSummayPage @F531892
+     Scenario Outline: To verify drug pricing modal popup for covered/noncovered drug for DSNP on drug summary page 
+     
+     Given the user is on the AARP medicare site landing page
+    When I access the acquisition DCE tool from home page
+    Then the user validates Get Started Page
+    When the user clicks on Add drugs button
+    And adds drugs in drug list page
+      | DrugName | <drug1> |
+    And adds drugs in drug list page
+      | DrugName | <drug2> |
+    And clicks on Review drug cost button
+    Then user should be navigated to zipcode and plan year capture page for AEP
+    When user enters valid zipcode and county
+      | ZipCode | <zipCode> |
+    #And user selects plan year in AARP
+    And user clicks on continue button in Zip Entry Page
+    #Then load screen should be displayed in AARP
+    And user should be navigated to Review drug cost estimate page
+    And user should be able to see Medicare Advantage plan by default
+    And user should verify the Extra help
+    And user click on View Drug Pricing Modal
+    And user should verify the drug extra qualification in drug pricing popup
+    And user should verify drug coverage and you pay value for not covered drug in drug pricing popup
+   And user should verify drug coverage and you pay value for covered drug in drug pricing popup
+
+    Examples: 
+      | zipCode | plantype | county | isMultutiCounty | drug1 | drug2| planname                                           |
+      |   10001 | MAPD     | none   | no              | Emsam   | Lipitor | AARP Medicare Advantage SecureHorizons Focus (HMO) |
+     
+     
+     
   
