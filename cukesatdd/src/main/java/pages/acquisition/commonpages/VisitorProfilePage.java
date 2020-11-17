@@ -85,10 +85,10 @@ public class VisitorProfilePage extends UhcDriver {
 	@FindBy(xpath = "//div[@class='multi-year-select']")
 	private WebElement profileMultiYear;
 	
-	@FindBy(xpath = "//div[@class='multi-year-select']/button[contains(@class,'js-select-year select-year')][2]")
+	@FindBy(xpath = "//div[@class='multi-year-select']/button[contains(@class,'select-year')][2]")
 	private WebElement profileNxtYrPlans;
 	
-	@FindBy(xpath = "//div[@class='multi-year-select']/button[contains(@class,'js-select-year select-year')][1]")
+	@FindBy(xpath = "//div[@class='multi-year-select']/button[contains(@class,'select-year')][1]")
 	private WebElement profileCrntYrPlans;
 	
 	@FindBy(xpath = "//button[contains(@id,'addDrug')]")
