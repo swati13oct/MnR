@@ -271,6 +271,25 @@ public class BuildYourDrugList extends UhcDriver {
 		return new ComparePlansPage(driver);
 	}
 
+	public void deleteDrug(String deleteDrug) {
+		WebElement removeLink = driver.findElement(By.xpath("//*[contains(@aria-label,'Remove "+deleteDrug+"')]"));
+		jsClickNew(removeLink);
+		
+	}
+
+	public TellUsAboutDrug EditDrug(String drugName) {
+		WebElement removeLink = driver.findElement(By.xpath("//*[contains(@aria-label,'Edit "+drugName+"')]"));
+		jsClickNew(removeLink);
+		CommonUtility.waitForPageLoadNew(driver, TellUsABoutHeader, 20);
+		if(validateNew(TellUsABoutHeader) && validateNew(TellUsABoutCloseBtn))
+		{
+			return new TellUsAboutDrug(driver);
+		}
+		else {
+			Assert.fail("Tell Us About Drug Page is NOT Displayed");
+			return null;
+		}	}
+
 	public DrugSummaryPage verifyReviewDrugCostPage() {
 		CommonUtility.waitForPageLoad(driver, reviewDrugCostPageHeading, 30);
 		if (validateNew(reviewDrugCostPageHeading)) {

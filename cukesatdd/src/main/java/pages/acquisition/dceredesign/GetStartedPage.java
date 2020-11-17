@@ -62,10 +62,11 @@ public class GetStartedPage extends UhcDriver {
 		else 
 			checkModelPopup(driver,10);
 		validateNew(getStartedTab);
+		validateNew(AddMyDrugsBtn);
 	}
 
 	public BuildYourDrugList clickAddsDrugs() {
-		if(validate(AddMyDrugsBtn))
+		if(validateNew(AddMyDrugsBtn))
 //			AddMyDrugsBtn.click();
 			jsClickNew(AddMyDrugsBtn);
 		CommonUtility.waitForPageLoad(driver, BuildDrugPage_EnterDrugNameTxt, 30);
