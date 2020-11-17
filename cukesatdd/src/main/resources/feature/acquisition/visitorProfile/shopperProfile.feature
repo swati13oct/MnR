@@ -92,10 +92,10 @@ Feature: 1.08. ACQ- Shopper Profile
     Then agent saves two plans as favorite on AARP site for user
       | Plan Type  | <plantype>  |
       | Test Plans | <testPlans> |
-    Then Navigate to Visitor Profile page on AARP site
-    And user validates the added plans on visitor profile page of AARP site
+    Then Navigate to Visitor Profile page
+    And user validates the added plans on visitor profile page
       | Test Plans | <testPlans> |
-    And user delets the added plans on visitor profile page of AARP site
+    And user delets the added plans on visitor profile page
       | Test Plans | <testPlans> |
 
     Examples: 
@@ -153,25 +153,25 @@ Feature: 1.08. ACQ- Shopper Profile
       | DOB                | <dob>              |
       | MBI                | <mbi>              |
     Then the user clicks on back on all plan linnk in Plan Compare page
-    Then Navigate to Visitor Profile page on AARP site
-    And user delets the added plans on visitor profile page of AARP site
+    Then Navigate to Visitor Profile page
+    And user delets all the added providers on visitor profile page
       | Test Plans | <testPlans> |
-    And user delets all the added providers on visitor profile page of AARP site
-    And the user clicks on the add plans button in the profile in agent mode in AARP site
+    And the user clicks on the add plans button in the profile
     Then agent saves two plans as favorite on AARP site for user
       | Plan Type  | <plantype>  |
       | Test Plans | <testPlans> |
     When the user Click on Is my Provider covered link Ulayer
       | PlanName | <planname> |
     When user selects a provider and retuns to VPP page in ulayer
-    Then Verify X out of Y provider covered information is displayed on Plan Summary page Ulayer
+    Then Verify X out of Y provider covered information is displayed on Plan Summary page
       | PlanName | <planname> |
-    Then Navigate to Visitor Profile page on AARP site
-    Then Verify X out of Y provider covered information is displayed on visitor profile page of AARP site
+    Then Navigate to Visitor Profile page
+    Then Verify X out of Y provider covered information is displayed on visitor profile page
       | PlanName | <planname> |
-    And user delets the added plans on visitor profile page of AARP site
+    And user delets the added plans on visitor profile page
       | Test Plans | <testPlans> |
-    And user delets all the added providers on visitor profile page of AARP site
+    And user delets all the added providers on visitor profile page
+      | Test Plans | <testPlans> |
 
     Examples: 
       | username  | password  | email             | fname  | lname   | mbi           | dob        | plantype | enrolledplanName                                    | planname                                | drugNames | providers | testPlans                                                                                   |
@@ -205,9 +205,9 @@ Feature: 1.08. ACQ- Shopper Profile
     Then agent saves two plans as favorite on AARP site for user
       | Plan Type  | <plantype>  |
       | Test Plans | <testPlans> |
-    Then Navigate to Visitor Profile page on AARP site
-    And enroll In Plan should not be clickable on Visitor Profile page in Agent mode on aarp
-    And user delets the added plans on visitor profile page of AARP site
+    Then Navigate to Visitor Profile page
+    And enroll In Plan should not be clickable on Visitor Profile page in Agent mode
+    And user delets the added plans on visitor profile page
       | Test Plans | <testPlans> |
 
     Examples: 
