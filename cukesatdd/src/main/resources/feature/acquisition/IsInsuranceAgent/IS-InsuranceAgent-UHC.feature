@@ -31,7 +31,7 @@ Feature: 2.14 Med Supp Plans (IS) Insurance Agent flow in UHC site
 
     
    @IS_InsuranceAgent_UHC
-     Scenario Outline: UID: <UID> - To Test IS Insurance Agent E2E on AARP site
+     Scenario Outline: UID: <UID> - To Test IS Insurance Agent E2E on UHC site
     Given the user is on the uhcmedicaresolutions site landing page
     Given the user clicks on Request a Free Insurance Agent on UHC site
       | PagePath | <path>     |
