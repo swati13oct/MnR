@@ -61,7 +61,7 @@ public class PharmacySearchCommonStepDefinition {
 	}*/
 
 	/** user is on the AARP Medicare Site landing page */
-	@And("^the user navigate to pharmacy search page$")
+	@And("^the user navigate to pharmacy search page from the navigation bar$")
 	public void userNavigatesToPharmacySearchPage() {
 		AcquisitionHomePage aquisitionhomepage= (AcquisitionHomePage)getLoginScenario().getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		WebDriver wd = ( WebDriver)getLoginScenario().getBean(CommonConstants.WEBDRIVER);
@@ -69,10 +69,7 @@ public class PharmacySearchCommonStepDefinition {
 		System.out.println("Unselected state on home page for more predictable result");
 		String testSiteUrl = aquisitionhomepage.getTestSiteUrl();
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
-		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, aquisitionhomepage);
 		PharmacySearchPage pharmacySearchPage = aquisitionhomepage.navigateToPharmacyLocator();
-		// PharmacySearchPage pharmacySearchPage=new
-		// PharmacySearchPage(aquisitionhomepage.driver);
 		getLoginScenario().saveBean(PageConstants.TEST_SITE_URL, testSiteUrl);
 		getLoginScenario().saveBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE, pharmacySearchPage);
 

@@ -7,6 +7,8 @@ import java.util.Map;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
 import cucumber.api.java.en.Given;
@@ -388,6 +390,8 @@ public void user_is_landing_on_UHC_via_campaign_url(DataTable givenAttributes) t
 	//tfnPage.popupCheck();	
 }
 
+
+
 @Then("^user navigates to MA VPP tab to vaify TFN$")
 public void user_navigates_to_MA_VPP_tab_to_vaify_TFN(DataTable givenAttributes) throws Throwable {
 	List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
@@ -407,25 +411,7 @@ public void user_navigates_to_MA_VPP_tab_to_vaify_TFN(DataTable givenAttributes)
 		Assert.fail("MA Tab TFN is not displaying the right number  "+ maVPPTabTFN_UI);
 	}
 }
-@Then("^user navigates to MA VPP tab to vaify TFN from this specific url$")
-public void user_navigates_to_MA_VPP_tab_to_vaify_TFN_from_this_specific_url(DataTable givenAttributes) throws Throwable {
-	List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-	Map<String, String> memberAttributesMap = new HashMap<String, String>();
-	for (int i = 0; i < memberAttributesRow.size(); i++) {
-		memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-				memberAttributesRow.get(i).getCells().get(1));
-	}
-	String maVPPTabTFN = memberAttributesMap.get("MA TFN");
-	System.out.println("This is the TFN for MA Tab Right Rail TFN from Feature file:  "+maVPPTabTFN);
-	tfnPage = new UlayerTFNPage(wd);
-	String maVPPTabTFN_UI = tfnPage.ma_VPP_TFN_UHC_2();
-	if(maVPPTabTFN_UI.equalsIgnoreCase(maVPPTabTFN)){
-		System.out.println("MA TAB displaying correct TFN on UI  "+maVPPTabTFN_UI);
-	}
-	else{
-		Assert.fail("MA Tab TFN is not displaying the right number  "+ maVPPTabTFN_UI);
-	}
-}
+
 
 @Then("^user varifies Med Sup tab TFN from this specific url$")
 public void user_varifies_Med_Sup_tab_TFN_from_this_specific_url(DataTable givenAttributes) throws Throwable {
@@ -541,7 +527,105 @@ public void navigate_from_yahoo_via_uhc_site_to_MedSup_to_varify_TFN(DataTable g
 	}
 }
 
+@Then("^user clicks on learn about Medicare\"([^\"]*)\"$")
+public void user_clicks_on_learn_about_Medicare(String url) throws Throwable {
+	UlayerTFNPage tfnPage=new UlayerTFNPage(wd);
+	tfnPage.clickonLearnAboutMedicare(url);
+    
+}
 
+@Then("^user clicks on Get Help Finding a Plan\"([^\"]*)\"$")
+public void user_clicks_on_Get_Help_Finding_a_Plan(String url) throws Throwable {
+
+	UlayerTFNPage tfnPage=new UlayerTFNPage(wd);
+	tfnPage.clickonGetHelpFindingaPlan(url);
+}
+
+@Then("^user enters zipcode \"([^\"]*)\"	and user navigates to page\"([^\"]*)\"$")
+public void user_enters_zipcode_and_user_navigates_to_page(String zip, String url) throws Throwable {
+	UlayerTFNPage tfnPage=new UlayerTFNPage(wd);
+	tfnPage.medicalSupTFN_FromDeepLink1(zip,url);
+}
+
+@Given("^user is landing from Externallinks$")
+public void user_is_landing_from_Externallinks(DataTable givenAttributes) throws Throwable {
+	List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+	Map<String, String> memberAttributesMap = new HashMap<String, String>();
+	for (int i = 0; i < memberAttributesRow.size(); i++) {
+		memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+				memberAttributesRow.get(i).getCells().get(1));
+	}
+	String url = memberAttributesMap.get("URL");
+	mr = new MRScenario();
+	wd = mr.getWebDriverNew();
+	tfnPage = new UlayerTFNPage(wd);
+	tfnPage.openUrl(url);
+	//tfnPage.popupCheck();	
+}
+
+@Then("^user navigates to MA VPP tab to vaify TFN from this specific url$")
+public void user_navigates_to_MA_VPP_tab_to_vaify_TFN_from_this_specific_url(DataTable givenAttributes) throws Throwable {
+	List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+	Map<String, String> memberAttributesMap = new HashMap<String, String>();
+	for (int i = 0; i < memberAttributesRow.size(); i++) {
+		memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+				memberAttributesRow.get(i).getCells().get(1));
+	}
+	String maVPPTabTFN = memberAttributesMap.get("MA TFN");
+	System.out.println("This is the TFN for MA Tab Right Rail TFN from Feature file:  "+maVPPTabTFN);
+	tfnPage = new UlayerTFNPage(wd);
+	String maVPPTabTFN_UI = tfnPage.ma_VPP_TFN_UHC_2();
+	if(maVPPTabTFN_UI.equalsIgnoreCase(maVPPTabTFN)){
+		System.out.println("MA TAB displaying correct TFN on UI  "+maVPPTabTFN_UI);
+	}
+	else{
+		Assert.fail("MA Tab TFN is not displaying the right number  "+ maVPPTabTFN_UI);
+	}
+	
+	
+}
+@Then("^user verify TFN$")
+public void user_verify_TFN(DataTable givenAttributes) throws Throwable {
+	List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+	Map<String, String> memberAttributesMap = new HashMap<String, String>();
+	for (int i = 0; i < memberAttributesRow.size(); i++) {
+		memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+				memberAttributesRow.get(i).getCells().get(1));
+	}
+	String maVPPTabTFN = memberAttributesMap.get("TFN");
+	System.out.println("This is the TFN for MA Tab Right Rail TFN from Feature file:  "+maVPPTabTFN);
+	tfnPage = new UlayerTFNPage(wd);
+	String maVPPTabTFN_UI = tfnPage.getTfnOneatOn();
+	System.out.println("maVPPTabTFN_UI"+maVPPTabTFN_UI);
+	if(maVPPTabTFN_UI.equalsIgnoreCase(maVPPTabTFN)){
+		System.out.println("TAB displaying correct TFN on UI  "+maVPPTabTFN_UI);
+	}
+	else{
+		Assert.fail("TFN is not displaying the right number  "+ maVPPTabTFN_UI);
+	}
+	
+}
+@Then("^user verify VPP TFN$")
+public void user_verify_VPP_TFN(DataTable givenAttributes) throws Throwable {
+	List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+	Map<String, String> memberAttributesMap = new HashMap<String, String>();
+	for (int i = 0; i < memberAttributesRow.size(); i++) {
+		memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+				memberAttributesRow.get(i).getCells().get(1));
+	}
+	String maVPPTabTFN = memberAttributesMap.get("VPPTFN");
+	System.out.println("This is the TFN for MA Tab Right Rail TFN from Feature file:  "+maVPPTabTFN);
+	tfnPage = new UlayerTFNPage(wd);
+	String maVPPTabTFN_UI = tfnPage.getTfnOnVPP();
+	System.out.println("maVPPTabTFN_UI"+maVPPTabTFN_UI);
+	if(maVPPTabTFN_UI.equalsIgnoreCase(maVPPTabTFN)){
+		System.out.println("TAB displaying correct TFN on UI  "+maVPPTabTFN_UI);
+	}
+	else{
+		Assert.fail("TFN is not displaying the right number  "+ maVPPTabTFN_UI);
+	}
+	
+}
 
 
 
