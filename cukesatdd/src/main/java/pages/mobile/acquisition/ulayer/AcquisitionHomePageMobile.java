@@ -292,10 +292,10 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	@FindBy(xpath = ".//*[@id='updates-mobile-form']/div/div[2]/button")
 	private WebElement submit;
 
-	@FindBy(xpath = "//label[@for='state-select' and @class='select-label']")
+	@FindBy(xpath = "//select[@id='state-select']")
 	private WebElement stateDropDown;
 
-	@FindBy(xpath = "//a[contains(@class, 'backtotop1')]")
+	@FindBy(xpath = "//a[contains(@class, 'back-to-top')]")
 	private WebElement backToTop_Disclaimer;
 
 	@FindBy(xpath = "//a[contains(@dtmname, 'Footer:Visit AARP')]")
@@ -854,7 +854,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	}
 
 	public AboutUsAARPPageMobile aboutUsFooterClick() {
-		validateNew(footerAboutUsLink);
+		validateNew(footerAboutUsLink,3);
 		// footerAboutUsLink.click();
 		jsClickNew(footerAboutUsLink);
 		CommonUtility.checkPageIsReadyNew(driver);
@@ -2056,6 +2056,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	}
 
 	public void validateStateDropDown() {
+		scrollToView(stateDropDown);
 		validateNew(stateDropDown);
 		selectFromDropDownByValue(stateDropDown, "California");
 		String StateSessionStorage = returnDriverStorageJS("sessionStorage", "ucp_geotrackingState");
@@ -2070,13 +2071,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		validateNew(disclaimerInformation);
 		// disclaimerInformation.click();
 		jsClickNew(disclaimerInformation);
-		validateNew(backToTop_Disclaimer);
-		try {
-			wait(3000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		validateNew(backToTop_Disclaimer,3);
 	
 	}
 

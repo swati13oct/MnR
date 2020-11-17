@@ -9,7 +9,6 @@ import org.junit.Assert;
 import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.support.ui.Sleeper;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acceptancetests.acquisition.ole.oleCommonConstants;
@@ -25,19 +24,6 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import gherkin.formatter.model.DataTableRow;
 import io.appium.java_client.AppiumDriver;
-import pages.acquisition.bluelayer.AcquisitionHomePage;
-import pages.acquisition.bluelayer.AddDrugDetails;
-import pages.acquisition.bluelayer.DrugCostEstimatorPage;
-import pages.acquisition.bluelayer.FindCarePage;
-import pages.acquisition.bluelayer.MultiCountyModalPage;
-import pages.acquisition.bluelayer.PlanComparePage;
-import pages.acquisition.bluelayer.VPPTestHarnessPage;
-import pages.acquisition.bluelayer.VisitorProfilePage;
-import pages.acquisition.bluelayer.VisitorProfileTestHarnessPage;
-import pages.acquisition.bluelayer.ZipcodeLookupHomePage;
-import pages.acquisition.dce.bluelayer.DCETestHarnessPage;
-import pages.acquisition.ole.WelcomePage;
-import pages.acquisition.ulayer.ComparePlansPage;
 import pages.mobile.acquisition.bluelayer.ComparePlansPageBlayerMobile;
 import pages.mobile.acquisition.bluelayer.PlanComparePageMobile;
 import pages.mobile.acquisition.dce.bluelayer.AddDrugDetailsMobile;
@@ -136,7 +122,7 @@ public class VppPlanDetailMobile {
 
 	@Then("^the user clicks on Enroll Now in Plan Details Page to start the OLE flow$")
 	public void the_user_clicks_on_Enroll_Now_in_Plan_Details_Page_to_start_the_OLE_flow() throws Throwable {
-		
+
 		getLoginScenario().getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
 		String PlanName = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_NAME);
 		String PlanYear = (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_YEAR);
@@ -1069,7 +1055,7 @@ public class VppPlanDetailMobile {
 	@Then("^the user validates the Cancel button for Multi COunty Pop-up lands on enter Zip code Page in UHC$")
 	public void the_user_validates_the_Cancel_button_for_Multi_COunty_Pop_up_lands_on_enter_Zip_code_Page()
 			throws Throwable {
-		MultiCountyModalPage multiCountyModalPage = (MultiCountyModalPage) getLoginScenario()
+		MultiCountyModalPageMobile multiCountyModalPage = (MultiCountyModalPageMobile) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		boolean Validation_Flag = multiCountyModalPage.validateMultiCounty_CancelButton();
 		Assert.assertTrue("Validation failed : Cancel button Validation for Multi County Pop-up Failed ",
@@ -1331,7 +1317,7 @@ public class VppPlanDetailMobile {
 		String PlanName = memberAttributesMap.get("Plan Name");
 		System.out.println("Validating the following Medical benefits on Plan Compare Page : " + benefitType);
 
-		PlanComparePage comparePlansPage = (PlanComparePage) getLoginScenario()
+		PlanComparePageMobile comparePlansPage = (PlanComparePageMobile) getLoginScenario()
 				.getBean(PageConstants.PLAN_COMPARE_PAGE);
 		boolean validationFlag = comparePlansPage.validatingMedicalBenefitTextInPlanDetails(benefitType, expectedText,
 				PlanName);
@@ -1459,7 +1445,7 @@ public class VppPlanDetailMobile {
 					givenAttributesRow.get(i).getCells().get(1));
 		}
 		String savePlanNames = givenAttributesMap.get("MS Test Plans");
-		VisitorProfilePage visitorProfile = (VisitorProfilePage) getLoginScenario()
+		VisitorProfilePageMobile visitorProfile = (VisitorProfilePageMobile) getLoginScenario()
 				.getBean(PageConstants.VISITOR_PROFILE_PAGE);
 		visitorProfile.validateAddedPlansPDFLinks(savePlanNames);
 	}
@@ -2214,7 +2200,7 @@ public class VppPlanDetailMobile {
 
 	@When("^verify Call SAM icon is visible or not on Plan Comapare on UHC site$")
 	public void verify_Call_SAM_icon_is_visible_or_not_PlanCompare_UHC_Site() throws InterruptedException {
-		ComparePlansPageBlayerMobile planComparePage = (ComparePlansPageBlayerMobile) getLoginScenario()
+		ComparePlansPageMobile planComparePage = (ComparePlansPageMobile) getLoginScenario()
 				.getBean(PageConstants.PLAN_COMPARE_PAGE);
 		planComparePage.validateCallSam();
 	}
@@ -2371,14 +2357,14 @@ public class VppPlanDetailMobile {
 
 	@Then("^verify plan compare page is loaded on UHC$")
 	public void verify_plan_compare_page_is_loaded_on_UHC() throws Throwable {
-		ComparePlansPageBlayerMobile planComparePage = (ComparePlansPageBlayerMobile) getLoginScenario()
+		ComparePlansPageMobile planComparePage = (ComparePlansPageMobile) getLoginScenario()
 				.getBean(PageConstants.PLAN_COMPARE_PAGE);
 		planComparePage.validatePlanComparePage();
 	}
 
 	@Then("^click on back to plans on plan compare page for UHC$")
 	public void click_on_back_to_plans_on_plan_compare_page_for_UHC() throws Throwable {
-		ComparePlansPageBlayerMobile planComparePage = (ComparePlansPageBlayerMobile) getLoginScenario()
+		ComparePlansPageMobile planComparePage = (ComparePlansPageMobile) getLoginScenario()
 				.getBean(PageConstants.PLAN_COMPARE_PAGE);
 		planComparePage.clickOnBacktoPlans();
 	}
@@ -2405,7 +2391,7 @@ public class VppPlanDetailMobile {
 		ComparePlansPageMobile planComparePage = plansummaryPage.clickOnCompareLink();
 		if (planComparePage != null) {
 			getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
-			 //planComparePage.backToVPPPage();
+			// planComparePage.backToVPPPage();
 		} else
 			Assert.fail("Error in loading the compare plans page");
 	}
@@ -2418,7 +2404,7 @@ public class VppPlanDetailMobile {
 		ComparePlansPageMobile planComparePage = plansummaryPage.clickOnCompareLink();
 		if (planComparePage != null) {
 			getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
-			//planComparePage.backToVPPPage();
+			// planComparePage.backToVPPPage();
 		} else
 			Assert.fail("Error in loading the compare plans page");
 	}
@@ -3230,8 +3216,8 @@ public class VppPlanDetailMobile {
 	public void the_user_enter_the_searchValue_in_the_search_text_box_and_hits_enter(DataTable inputvalue)
 			throws Throwable {
 		/*
-		 * VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
-		 * .getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		 * VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile)
+		 * getLoginScenario() .getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		 */
 
 		AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()

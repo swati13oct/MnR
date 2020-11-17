@@ -17,7 +17,7 @@ import atdd.framework.UhcDriver;
  */
 public class ContactUsUmsPageMobile extends UhcDriver{
 	
-	@FindBy(xpath = "//*[contains(@class,'header') and contains(text(),'Contact')]")
+	@FindBy(xpath = "//div[contains(text(),'Contact Us')]")
 	public static WebElement header;
 	
 	@FindBy(xpath = "//*[contains(text(),'PROVIDERS ONLY')]")

@@ -111,7 +111,7 @@ public class BuildYourDrugListMobile extends UhcDriver {
 		sendkeys(EnterDrugNameTxt, drugName);
 
 		Thread.sleep(5000);
-		WebElement drugname = driver.findElement(By.xpath("//*[contains(@id,'" + drugName + "')]/div"));
+		WebElement drugname = driver.findElement(By.xpath("//*[contains(@id,'" + drugName + "')]"));
 
 		jsClickNew(drugname);
 		/*

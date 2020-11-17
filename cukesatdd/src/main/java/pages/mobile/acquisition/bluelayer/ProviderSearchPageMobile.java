@@ -219,7 +219,8 @@ public class ProviderSearchPageMobile extends UhcDriver {
 		CommonUtility.waitForPageLoadNew(driver, Physician, 30);
 
 		Physician.click();
-		CommonUtility.waitForPageLoadNew(driver, selectProviderBtn, 30);
+		scrollToView(selectProviderBtn);
+		//CommonUtility.waitForPageLoadNew(driver, selectProviderBtn, 30);
 		jsClickNew(selectProviderBtn);
 
 		if (validate(selectLocationOption,10)) {

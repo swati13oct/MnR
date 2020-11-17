@@ -2138,7 +2138,8 @@ public void validatePlanPremium (String planName , String monthlyPremium){
 
 		Actions action = new Actions(driver);
 		action.moveToElement(DCELink).build().perform();
-		DCELink.click();
+		//DCELink.click();
+		jsClickNew(DCELink);
 		CommonUtility.checkPageIsReadyNew(driver);
 		if (driver.getCurrentUrl().contains("drug-costs")) {
 			System.out.println("DCE Page is loaded");
@@ -4594,7 +4595,7 @@ public void validatePlanPremium (String planName , String monthlyPremium){
 		}
 	}
 
-	public pages.mobile.acquisition.bluelayer.ProviderSearchPageMobile clicksOnIsProviderCoveredUms(String planName) {
+	public ProviderSearchPageMobile clicksOnIsProviderCoveredUms(String planName) {
 
 		CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
 		
@@ -4613,7 +4614,7 @@ public void validatePlanPremium (String planName , String monthlyPremium){
 		switchToNewTabNew(ProviderSearchLink);
 		sleepBySec(3);
 		if (driver.getCurrentUrl().contains("werally")) {
-			return new pages.mobile.acquisition.bluelayer.ProviderSearchPageMobile(driver);
+			return new ProviderSearchPageMobile(driver);
 		}
 		return null;
 	}

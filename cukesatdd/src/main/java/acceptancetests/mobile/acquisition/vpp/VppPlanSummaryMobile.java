@@ -11,15 +11,13 @@ import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import pages.acquisition.commonpages.VPPPlanSummaryPage;
 import pages.mobile.acquisition.bluelayer.AboutUsPageMobile;
 import pages.mobile.acquisition.bluelayer.ContactUsUmsPageMobile;
 import pages.mobile.acquisition.bluelayer.DisclaimersPageMobile;
 import pages.mobile.acquisition.bluelayer.DrugCostEstimatorPageMobile;
 //import pages.mobile.acquisition.bluelayer.PlanDetailsPageMobile;
 import pages.mobile.acquisition.bluelayer.PrivacyPolicyUmsPageMobile;
-import pages.mobile.acquisition.bluelayer.ProviderSearchPageMobile;
-import pages.mobile.acquisition.bluelayer.SiteMapUMSPageMobile;
+import pages.mobile.acquisition.ulayer.ProviderSearchPageMobile;
 import pages.mobile.acquisition.dce.bluelayer.AddDrugDetailsMobile;
 import pages.mobile.acquisition.dce.bluelayer.SavingsOppurtunityMobile;
 import pages.mobile.acquisition.dceredesign.GetStartedPageMobile;
