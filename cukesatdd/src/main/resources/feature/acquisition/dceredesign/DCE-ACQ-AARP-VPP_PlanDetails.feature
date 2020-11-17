@@ -224,24 +224,24 @@ Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanDetails AARP - To test DCE - VPP Plan De
         @dceRedesignDefaultPharmacy @F497405
         
         Scenario Outline: Test to Verify default Retail chain pharmacy on detail page  
-    Given the user is on the AARP medicare site landing page
-    When the user performs plan search using following information in the AARP site
-      | Zip Code        | <zipcode>         |
-      | County Name     | <county>          |
-      | Is Multi County | <isMultutiCounty> |
-    Then the user navigates to the plan details for the given plan type in AARP site
-      | Plan Type | <plantype> |
-      | Plan Name | <planname> |
-    And I access the DCE Redesign on aarp site from Plan Details for the plan
-    Then the user validates Get Started Page
-    Then the user clicks on Build Drug List to navigate to Build Drug List Page
-    Then the user searches and adds the following Drug to Drug List
-      | DrugName | <drug1> |
-    Then the user clicks on Review Drug Costs to Land on Drug DetailsP Page
-    Then the user verify the Retail chain pharmacy on detail page
-    And user clicks on change pharmacy link from details page
-    Then user clicks on Keep Using This Pharmacy on change pharmacy page
-    Then User validate Walgreens pharmacy on detail page 
+            Given the user is on the AARP medicare site landing page
+            When the user performs plan search using following information in the AARP site
+                   | Zip Code        | <zipcode>         |
+                   | County Name     | <county>          |
+                   | Is Multi County | <isMultutiCounty> |
+           Then the user navigates to the plan details for the given plan type in AARP site
+                   | Plan Type | <plantype> |
+                   | Plan Name | <planname> |
+           And I access the DCE Redesign on aarp site from Plan Details for the plan
+           Then the user validates Get Started Page
+           Then the user clicks on Build Drug List to navigate to Build Drug List Page
+           Then the user searches and adds the following Drug to Drug List
+                  | DrugName | <drug1> |
+           Then the user clicks on Review Drug Costs to Land on Drug DetailsP Page
+           Then the user verify the Retail chain pharmacy on detail page
+           And user clicks on change pharmacy link from details page
+           Then user clicks on Keep Using This Pharmacy on change pharmacy page
+           Then User validate Walgreens pharmacy on detail page 
     
         @dceRetailChain_MAPD
       Examples: 
@@ -306,7 +306,7 @@ Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanDetails AARP - To test DCE - VPP Plan De
       @dceSwitchtoGenericNBA @F505210
       
          Scenario Outline: Test to verify Switch to generic NBA on DCE Details Page
-   Given the user is on the AARP medicare site landing page
+    Given the user is on the AARP medicare site landing page
     When the user performs plan search using following information in the AARP site
       | Zip Code        | <zipcode>         |
       | County Name     | <county>          |
@@ -323,8 +323,35 @@ Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanDetails AARP - To test DCE - VPP Plan De
      Then user verify and click on switch to generic NBA on drug detail page
      Then verify drug is switched to generic on detail page
      
-      Examples: 
+    Examples: 
       | zipcode | plantype | county       | isMultutiCounty | drug1     |drug2|planname                                              | 
-      |   78006 | MAPD      | Bexar County | yes             | Lipitor | orfadin|AARP Medicare Advantage Choice (PPO)  |
+      |   78006 | MAPD      | Bexar County | yes             | Lipitor | orfadin|AARP Medicare Advantage Choice (PPO)                |
+      
+      
+     @detailPageDefaultPharmacy
+      Scenario Outline: Test to verify default distance and zip code, miles dropdown for pharmacy from vpp detail page
+            Given the user is on the AARP medicare site landing page
+            When the user performs plan search using following information in the AARP site
+                   | Zip Code        | <zipcode>         |
+                   | County Name     | <county>          |
+                   | Is Multi County | <isMultutiCounty> |
+            Then the user navigates to the plan details for the given plan type in AARP site
+                   | Plan Type | <plantype> |
+                   | Plan Name | <planname> |
+           And I access the DCE Redesign from Plan Details
+           Then the user validates Get Started Page
+           Then the user clicks on Build Drug List to navigate to Build Drug List Page
+           Then the user searches and adds the following Drug to Drug List
+                   | DrugName | <drug1> | 
+           And clicks on Review drug cost button  
+          #Then the user Clicks button to VPP Plan Details Page from Drug Details Page
+           And user clicks on change pharmacy link from details page
+           Then user verify details page change pharmacy modal
+     
+     @noPrescriptionCoverge_MAPD
+     
+      Examples: 
+      | zipcode | plantype | county       | isMultutiCounty | drug1     |planname                                              | 
+      |   78006 | MAPD      | Bexar County | yes             | Lipitor | AARP Medicare Advantage Choice (PPO)  |
       
       

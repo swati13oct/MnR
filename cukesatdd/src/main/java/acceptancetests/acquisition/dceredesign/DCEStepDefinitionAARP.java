@@ -955,6 +955,7 @@ public void user_should_verify_you_pay_value_for_not_covered_drug_in_drug_pricin
 	public void user_verify_details_page_change_pharmacy_modal_in_AARP() throws InterruptedException {
 		DrugDetailsPage drugDetailsPage = new DrugDetailsPage(driver);
 		drugDetailsPage.validateSelectPharmacyPage();
+		drugDetailsPage.clickDistanceMiledropdown();
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetailsPage);
 	}
 
