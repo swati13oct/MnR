@@ -174,16 +174,16 @@ Feature: 1.10.1 DCE-REDISIGN AARP - To test Acq Home to NEW DCE Flows
       | Plan Name | <planName> |
     Then the user validates planName matches plan Name in VPP
     Then the user validates following expected Premium on DCE Details Page
-      | Premium | <premium>
+      | Premium | <premium> |
 
     @DCE_DrugDetailsPremiumValidation_AARP
     Examples: 
-      | drug1   | zipCode | planType | planName                                            | site |
-      | Orkambi | 80002 | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) | AARP |
+      | drug1   | zipCode | planType | planName                                            | site | premium |
+      | Orkambi | 80002 | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) | AARP |  |
 
     @DCE_DrugDetailsPremiumValidation_UHC
     Examples: 
     
-      | drug1   | zipCode | planType | planName                                            | site |
-      | Orkambi |  80002 | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) | UHC  |
+      | drug1   | zipCode | planType | planName                                            | site | premium |
+      | Orkambi |  80002 | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) | UHC  |  |
       
