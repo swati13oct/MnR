@@ -1253,10 +1253,30 @@ public class DCEStepDefinitionAARP {
 
 	@Then("^the user validates following expected Premium on DCE Details Page$")
 	public void the_user_validates_following_expected_Premium_on_DCE_Details_Page(DataTable arg1) throws Throwable {
+		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugDetails);
+		List<DataTableRow> memberAttributesRow = arg1.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		String Premium = memberAttributesMap.get("Premium");
+		drugDetailsPage.validatePremium(Premium);
 	}
 
 	@Then("^the user validates following premium for the following plan on DCE Summary Page$")
 	public void the_user_validates_following_premium_for_the_following_plan_on_DCE_Summary_Page(DataTable arg1) throws Throwable {
+		List<DataTableRow> memberAttributesRow = arg1.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		String Premium = memberAttributesMap.get("Premium");
+		String PlanType = memberAttributesMap.get("Plan Type");
+		String PlanName = memberAttributesMap.get("Plan Name");
+		DrugSummaryPage drugSummaryPage = (DrugSummaryPage) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugSummary);
+		drugSummaryPage.validatePremiumForPlan(Premium,PlanType,PlanName );
 	}
 
 }

@@ -1134,4 +1134,14 @@ public class DrugDetailsPage extends UhcDriver {
 		}
 	}
 
+	public void validatePremium(String premium) {
+		WebElement PremiumforPlan = driver.findElement(By.xpath("//div[contains(text(), 'Monthly Premium')]//following-sibling::*[contains(text(), '$')]"));
+		validateNew(PremiumforPlan);
+		String PremiumDisplayed	= PremiumforPlan.getText();
+		System.out.println("Premium Displayed for Plan : "+PremiumDisplayed);
+		if(!PremiumDisplayed.contains(premium)) {
+			Assert.fail("Expected Premium not displayed, Expected : "+premium+"    Actual Displayed : "+PremiumDisplayed);
+		}
+	}
+
 }

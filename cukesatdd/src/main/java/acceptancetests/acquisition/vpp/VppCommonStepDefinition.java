@@ -1474,8 +1474,8 @@ public class VppCommonStepDefinition {
 		public void the_user_click_on_EdidDrugLink() throws Throwable {
 			PlanDetailsPage vppPlanDetailsPage = (PlanDetailsPage) getLoginScenario()
 					.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
-			GetStartedPage getStartedPage = (GetStartedPage) vppPlanDetailsPage.navigateToDCERedesignEditDrug(); 
-			getLoginScenario().saveBean(PageConstants.DCE_Redesign_GetStarted, getStartedPage);
+			BuildYourDrugList DCEbuildDrugList = (BuildYourDrugList) vppPlanDetailsPage.navigateToDCERedesignEditDrug(); 
+			getLoginScenario().saveBean(PageConstants.DCE_Redesign_BuildDrugList, DCEbuildDrugList);
 		}
 		
 		@Then("^the user click on Plan costs tab$")

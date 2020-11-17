@@ -528,16 +528,19 @@ public class PlanDetailsPage extends UhcDriver {
 		return null;
 	}
 	
-	public GetStartedPage navigateToDCERedesignEditDrug() {
+	public BuildYourDrugList navigateToDCERedesignEditDrug() {
 
 		jsClickNew(presDrugTab.get(0));
 		validateNew(editDrugLink, 20);
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", editDrugLink);
 		((JavascriptExecutor) driver).executeScript("arguments[0].click();", editDrugLink);
-		if (validateNew(dceHeader))
-			return new GetStartedPage(driver);
-		return null;
-	}
+		CommonUtility.waitForPageLoad(driver, BuildDrugPage_EnterDrugNameTxt, 30);
+		if (validateNew(BuildDrugPage_EnterDrugNameTxt)) {
+			Assert.assertTrue("Naviagted to Build Drug List Page", true);
+			return new BuildYourDrugList(driver);
+		}
+		Assert.fail("Did not Navigate to Build Drug List Page");
+		return null;	}
 	
 	public GetStartedPage navigateToDCERedesign() {
 
