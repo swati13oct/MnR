@@ -3,7 +3,6 @@ Feature: 1.10.1 DCE-REDISIGN AARP - To test Acq Home to NEW DCE Flows
 
   @DCE_DrugDetailsValidation @DCE_DrugDetailsValidation_AARP
   Scenario Outline: To verify DCE REDESIGN Details Page from <site> home page
-    #Given the user is on AARP medicare acquisition site landing page
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     When I access the acquisition DCE Redesign from home page
@@ -29,6 +28,7 @@ Feature: 1.10.1 DCE-REDISIGN AARP - To test Acq Home to NEW DCE Flows
     Then the user validates Drug Costs section
     Then the user validates Your Drugs sections
     Then the user validates Monthly Drug Costs by Stage Section
+    Then the user validates Monthly Drug Costs by Stage Info Modals
     Then the user validates Monthly Drug Costs
     Then the user validates Switch to generic for following Brand Drug and validate Generic drug on Details Page
       | Brand Drug   | <brundDrug>   |
@@ -45,19 +45,18 @@ Feature: 1.10.1 DCE-REDISIGN AARP - To test Acq Home to NEW DCE Flows
     #Then the user validates Disclaimers section
     Then the user validates link to Drug Summary Page
 
-#    @DCE_DrugDetailsValidation_AARP
+    @DCE_DrugDetailsValidation_AARP
     Examples: 
       | drug1   | drug2  | drug3   | drug4    | zipCode | planType | planName                                            | site | brundDrug | genericDrug                   | deleteDrug | addDrug |
       | Orkambi | Fanapt | Humalog | Adderall |   80002 | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) | AARP | Adderall  | amphetamine/dextroamphetamine | Humalog    | Lipitor |
 
-#    @DCE_DrugDetailsValidation_UHC
-#    Examples: 
-#      | drug1   | drug2  | drug3   | drug4    | zipCode | planType | planName                                            | site | brundDrug | genericDrug                   | deleteDrug | addDrug |
-#      | Orkambi | Fanapt | Humalog | Adderall |   80002 | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) | UHC  | Adderall  | amphetamine/dextroamphetamine | Humalog    | Lipitor |
+    @DCE_DrugDetailsValidation_UHC
+    Examples: 
+      | drug1   | drug2  | drug3   | drug4    | zipCode | planType | planName                                            | site | brundDrug | genericDrug                   | deleteDrug | addDrug |
+      | Orkambi | Fanapt | Humalog | Adderall |   80002 | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) | UHC  | Adderall  | amphetamine/dextroamphetamine | Humalog    | Lipitor |
 
-  @DCE_DrugDetailsDynamicCopay_Preferred @F506354_Preferred
+  @DCE_DrugDetailsDynamicCopay_Preferred 
   Scenario Outline: To verify DCE REDESIGN Details Page for Dynamic copay section from <site> home page
-    #Given the user is on AARP medicare acquisition site landing page
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     When I access the acquisition DCE Redesign from home page
@@ -97,19 +96,18 @@ Feature: 1.10.1 DCE-REDISIGN AARP - To test Acq Home to NEW DCE Flows
       | Pharmacy Selection | <StandardPharSelected> |
     Then the user validates link to Drug Summary Page
 
-#    @DCE_DrugDetailsCopay_Preferred_AARP
+    @DCE_DrugDetailsCopay_Preferred_AARP
     Examples: 
       | drug1      | drug2  | zipCode | planType | planName                        | site | DefaultSelected  | MailPharSelected | SelectStandardPharmacy | StandardPharSelected |
       | vigabatrin | Fanapt |   80001 | PDP      | AARP MedicareRx Walgreens (PDP) | AARP | Preferred Retail | Preferred Mail   | KING SOOPERS PHARMACY  | Standard Retail      |
 
-#    @DCE_DrugDetailsCopay_Preferred_UHC
-#    Examples: 
-#      | drug1      | drug2  | zipCode | planType | planName                        | site | DefaultSelected  | MailPharSelected | SelectStandardPharmacy | StandardPharSelected |
-#      | vigabatrin | Fanapt |   80001 | PDP      | AARP MedicareRx Walgreens (PDP) | UHC  | Preferred Retail | Preferred Mail   | KING SOOPERS PHARMACY  | Standard Retail      |
+    @DCE_DrugDetailsCopay_Preferred_UHC
+    Examples: 
+      | drug1      | drug2  | zipCode | planType | planName                        | site | DefaultSelected  | MailPharSelected | SelectStandardPharmacy | StandardPharSelected |
+      | vigabatrin | Fanapt |   80001 | PDP      | AARP MedicareRx Walgreens (PDP) | UHC  | Preferred Retail | Preferred Mail   | KING SOOPERS PHARMACY  | Standard Retail      |
 
   @DCE_DrugDetailsDynamicCopay_Standard @F506354_Standard
   Scenario Outline: To verify DCE REDESIGN Details Page for Dynamic copay section from <site> home page
-    #Given the user is on AARP medicare acquisition site landing page
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     When I access the acquisition DCE Redesign from home page
@@ -144,14 +142,48 @@ Feature: 1.10.1 DCE-REDISIGN AARP - To test Acq Home to NEW DCE Flows
       | Pharmacy Selection | <MailPharSelected> |
     Then the user validates link to Drug Summary Page
 
-#    @DCE_DrugDetailsCopay_Standard_AARP
+    @DCE_DrugDetailsCopay_Standard_AARP
     Examples: 
       | drug1      | drug2  | zipCode | planType | planName                                            | site | DefaultSelected | MailPharSelected |
       | vigabatrin | Fanapt |   80001 | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) | AARP | Standard Retail | Standard Mail    |
       | vigabatrin | Fanapt |   78006 | SNP     | UnitedHealthcare Chronic Complete (HMO C-SNP)       | AARP | Standard Retail | Standard Mail    |
 
-#    @DCE_DrugDetailsCopay_Standard_UHC
-#    Examples: 
-#      | drug1      | drug2  | zipCode | planType | planName                                            | site | DefaultSelected | MailPharSelected |
-#      | vigabatrin | Fanapt |   80001 | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) | UHC  | Standard Retail | Standard Mail    |
-#      | vigabatrin | Fanapt |   78006 | SNP     | UnitedHealthcare Chronic Complete (HMO C-SNP)       | UHC  | Standard Retail | Standard Mail    |
+    @DCE_DrugDetailsCopay_Standard_UHC
+    Examples: 
+      | drug1      | drug2  | zipCode | planType | planName                                            | site | DefaultSelected | MailPharSelected |
+      | vigabatrin | Fanapt |   80001 | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) | UHC  | Standard Retail | Standard Mail    |
+      | vigabatrin | Fanapt |   78006 | SNP     | UnitedHealthcare Chronic Complete (HMO C-SNP)       | UHC  | Standard Retail | Standard Mail    |
+
+    @DCE_DrugDetailsValidation @DCE_DrugDetailsPremiumValidation_AARP
+  Scenario Outline: To verify DCE REDESIGN Details Page for Zero or Range Premium from <site> home page
+    #Given the user is on AARP medicare acquisition site landing page
+    Given the user is on medicare acquisition site landing page
+      | Site | <site> |
+    When I access the acquisition DCE Redesign from home page
+    Then the user validates Get Started Page
+    Then the user clicks on Build Drug List to navigate to Build Drug List Page
+    Then the user searches and adds the following Drug to Drug List
+      | DrugName | <drug1> |
+    Then the user validates all added drugs in DrugList
+    Then the user clicks on Review Drug Costs to Land on Zip Entry Page
+    When user enters valid zipcode and county
+      | ZipCode | <zipCode> |
+    And user clicks on continue button in Zip Entry Page
+    Then the user selects View Drug details for following plantype and PlanName
+      | Plan Type | <planType> |
+      | Plan Name | <planName> |
+    Then the user validates planName matches plan Name in VPP
+    Then the user validates following expected Premium on DCE Details Page
+      | Premium | <premium>
+
+    @DCE_DrugDetailsPremiumValidation_AARP
+    Examples: 
+      | drug1   | zipCode | planType | planName                                            | site |
+      | Orkambi | 80002 | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) | AARP |
+
+    @DCE_DrugDetailsPremiumValidation_UHC
+    Examples: 
+    
+      | drug1   | zipCode | planType | planName                                            | site |
+      | Orkambi |  80002 | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) | UHC  |
+      

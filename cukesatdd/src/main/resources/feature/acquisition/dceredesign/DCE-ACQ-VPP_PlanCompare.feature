@@ -1,4 +1,4 @@
-@DCE_Redesign_VPP_Details
+@DCE_Redesign_VPP_Compare
 Feature: 1.10.3 DCE-Redesign-VPP_PlanCompare - To test DCE - VPP Plan Compare Integration
 
   @DCE_Redesign_VPP_PlanCompare1
@@ -46,7 +46,7 @@ Feature: 1.10.3 DCE-Redesign-VPP_PlanCompare - To test DCE - VPP Plan Compare In
 
  
    @DCE_Redesign_VPP_PlanCompare2
-  Scenario Outline: 1.10.3.1 To test the DCE Redesignflow for PlanType :  <plantype> from vpp Plan Compare
+  Scenario Outline: 1.10.3.1 To test the DCE Redesignflow for PlanType :  <plantype> from vpp Plan Compare from vpp Plan Compare View Drug Info Modal
     Given the user is on medicare acquisition site landing page
     	|Site| <site>|
     When the user performs plan search using following information
@@ -93,7 +93,7 @@ Feature: 1.10.3 DCE-Redesign-VPP_PlanCompare - To test DCE - VPP Plan Compare In
 
 
    @DCE_Redesign_VPP_PlanCompare3
-  Scenario Outline: 1.10.3.1 To test the DCE Redesignflow for PlanType :  <plantype> from vpp Plan Compare
+  Scenario Outline: 1.10.3.1 To test the DCE Redesignflow for PlanType :  <plantype> from vpp Plan Compare View Drug Info Modal
     Given the user is on medicare acquisition site landing page
     	|Site| <site>|
     When the user performs plan search using following information

@@ -89,7 +89,7 @@ public class DCEStepDefinitionAARP {
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_BuildDrugList, DCEbuildDrugList);
 	}
 	
-	@Then("^the user clicks on Edit button on Get Started page on DCE$")
+	@Then("^the user clicks on Edit button on Drug List page on DCE$")
 	public void the_user_clicks_on_EditButton(DataTable Attributes) throws Throwable {
 		List<DataTableRow> plannameAttributesRow = Attributes.getGherkinRows();
 		Map<String, String> plannameAttributesMap = new HashMap<String, String>();
@@ -99,14 +99,15 @@ public class DCEStepDefinitionAARP {
 					plannameAttributesRow.get(i).getCells().get(1));
 		}
 		String drug = plannameAttributesMap.get("DrugName");
-		GetStartedPage DCEgetStarted = (GetStartedPage) getLoginScenario()
-				.getBean(PageConstants.DCE_Redesign_GetStarted);
-		TellUsAboutDrug tellUsAboutDrugPage = DCEgetStarted.clickOnEditButton(drug);
+		BuildYourDrugList DCEbuildDrugList = (BuildYourDrugList) getLoginScenario()
+				.getBean(PageConstants.DCE_Redesign_BuildDrugList);
+		
+		TellUsAboutDrug tellUsAboutDrugPage = DCEbuildDrugList.clickOnEditButton(drug);
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_TellUsAboutDrug,tellUsAboutDrugPage);
 		
 	}
 	
-	@Then("^the user clicks on Remove button on Get Started page on DCE to delete drug$")
+	@Then("^the user clicks on Remove button on Drug List page on DCE to delete drug$")
 	public void the_user_clicks_on_RemoveBtn(DataTable Attributes) throws Throwable {
 		List<DataTableRow> plannameAttributesRow = Attributes.getGherkinRows();
 		Map<String, String> plannameAttributesMap = new HashMap<String, String>();
@@ -116,9 +117,11 @@ public class DCEStepDefinitionAARP {
 					plannameAttributesRow.get(i).getCells().get(1));
 		}
 		String drug = plannameAttributesMap.get("DrugName");
-		GetStartedPage DCEgetStarted = (GetStartedPage) getLoginScenario()
-				.getBean(PageConstants.DCE_Redesign_GetStarted);
-		 DCEgetStarted.clickOnRemoveButton(drug);
+		BuildYourDrugList DCEbuildDrugList = (BuildYourDrugList) getLoginScenario()
+				.getBean(PageConstants.DCE_Redesign_BuildDrugList);
+		
+		
+		DCEbuildDrugList.clickOnRemoveButton(drug);
 		
 	}
 	
@@ -350,19 +353,25 @@ public class DCEStepDefinitionAARP {
 		zipCodePlanYearPage.validateZipCodeErrorMessage();
 	}
 
+	/*
+	 * Need to be removed. Instead, please use  - 
+	 *     Then the user searches and adds the following Drug to Drug List
+      | DrugName | <drug1> |
+
+
+	 * @When("^adds drugs in drug list page$") public void
+	 * adds_drugs_in_drug_list_page(DataTable givenAttributes) { List<DataTableRow>
+	 * memberAttributesRow = givenAttributes.getGherkinRows(); Map<String, String>
+	 * memberAttributesMap = new HashMap<String, String>(); for (int i = 0; i <
+	 * memberAttributesRow.size(); i++) {
+	 * memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+	 * memberAttributesRow.get(i).getCells().get(1)); } String drugName =
+	 * memberAttributesMap.get("DrugName"); System.out.println("zipcode" +
+	 * drugName); BuildYourDrugList buildDrugList = new BuildYourDrugList(driver);
+	 * getLoginScenario().saveBean(PageConstants.DCE_Redesign_BuildDrugList,
+	 * buildDrugList); buildDrugList.addDrugs(drugName); }
+	 */	 
 	
-	  @When("^adds drugs in drug list page$") public void
-	  adds_drugs_in_drug_list_page(DataTable givenAttributes) { List<DataTableRow>
-	  memberAttributesRow = givenAttributes.getGherkinRows(); Map<String, String>
-	  memberAttributesMap = new HashMap<String, String>(); for (int i = 0; i <
-	  memberAttributesRow.size(); i++) {
-	  memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-	  memberAttributesRow.get(i).getCells().get(1)); } String drugName =
-	  memberAttributesMap.get("DrugName"); System.out.println("zipcode" +
-	  drugName); BuildYourDrugList buildDrugList = new BuildYourDrugList(driver);
-	  getLoginScenario().saveBean(PageConstants.DCE_Redesign_BuildDrugList,
-	  buildDrugList); buildDrugList.addDrugs(drugName); }
-	 
 	@When("^user should verify the Extra help$")
 	public void user_should_verify_the_Extra_help_in_AARP() {
 		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);

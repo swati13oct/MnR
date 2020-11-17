@@ -299,5 +299,20 @@ public class BuildYourDrugList extends UhcDriver {
 			return null;
 		}
 	}
+	
+	public TellUsAboutDrug clickOnEditButton(String drug) {
+
+		WebElement editLink = driver.findElement(By.xpath("//*[contains(@aria-label,'Edit "+drug+"')]"));
+		jsClickNew(editLink);
+		
+		return new TellUsAboutDrug(driver);
+		
+	}
+
+	public void clickOnRemoveButton(String drug) {
+		WebElement removeLink = driver.findElement(By.xpath("//*[contains(@aria-label,'Remove "+drug+"')]"));
+		jsClickNew(removeLink);
+		
+	}
 
 }
