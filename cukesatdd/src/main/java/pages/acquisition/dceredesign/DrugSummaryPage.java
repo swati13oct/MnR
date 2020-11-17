@@ -225,9 +225,9 @@ public class DrugSummaryPage extends UhcDriver {
 		validateNew(PlanName_PlanDetails);
 	}
 
-	public DrugSummaryPage verifyDefaultPlanType() {
+	public DrugSummaryPage verifyDefaultPlanType(String planType) {
 		validateNew(planTypeHeading);
-		if (planTypeHeading.getText().contains("Medicare Advantage Plans")) {
+		if (planTypeHeading.getText().contains(planType)) {
 			return new DrugSummaryPage(driver);
 		}
 		return null;

@@ -347,7 +347,7 @@ Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanDetails AARP - To test DCE - VPP Plan De
           #Then the user Clicks button to VPP Plan Details Page from Drug Details Page
            And user clicks on change pharmacy link from details page
            Then user verify details page change pharmacy modal
-     
+   
      
       Examples: 
       | zipcode | plantype | county       | isMultutiCounty | drug1     |planname                                              | 

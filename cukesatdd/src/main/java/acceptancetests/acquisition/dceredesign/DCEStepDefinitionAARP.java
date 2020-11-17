@@ -842,7 +842,7 @@ public void user_should_verify_you_pay_value_for_not_covered_drug_in_drug_pricin
 	@When("^user should be able to see Medicare Advantage plan by default$")
 	public void user_should_be_able_to_see_Medicare_Advantage_plan_by_default() throws Throwable {
 		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
-		drugSummaryPage.verifyDefaultPlanType();
+		//drugSummaryPage.verifyDefaultPlanType();
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
 	}
 
@@ -1226,5 +1226,12 @@ public void user_should_verify_you_pay_value_for_not_covered_drug_in_drug_pricin
 		
 		drugDetailsPage.verifyDrugisSwitchedtoGeneric();
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_GetStarted, drugDetailsPage);
+	}
+	
+	@When("^user should be able to see \"([^\"]*)\" by default$")
+	public void user_should_be_able_to_see_by_default(String planType) throws Throwable {
+		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
+		drugSummaryPage.verifyDefaultPlanType(planType);
+		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
 	}
 }
