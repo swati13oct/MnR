@@ -161,7 +161,6 @@ public class PlanDocumentsAndResourcesStepDefinition {
 		yearsMap.put("nextYear", String.valueOf(nextYear));
 		getLoginScenario().saveBean(PlanDocumentsAndResourcesCommonConstants.TEST_YEARS_MAP, yearsMap);
 		getLoginScenario().saveBean(PlanDocumentsAndResourcesCommonConstants.TEST_INPUT_INFO,testInputInfoMap);
-		//tbd planDocumentsAndResourcesPage.sleepBySec(15);
 		getLoginScenario().saveBean(PageConstants.PLAN_DOCUMENTS_AND_RESOURCES_PAGE,planDocumentsAndResourcesPage);
 	}
 
@@ -476,7 +475,7 @@ public class PlanDocumentsAndResourcesStepDefinition {
 		PlanDocApiResponse api_planDocMap=(PlanDocApiResponse) getLoginScenario().getBean(PlanDocumentsAndResourcesCommonConstants.TEST_ACTUAL_DOC_LIST_MAP);
 		PlanDocumentsAndResourcesPage planDocumentsAndResourcesPage=(PlanDocumentsAndResourcesPage) getLoginScenario().getBean(PageConstants.PLAN_DOCUMENTS_AND_RESOURCES_PAGE);
 		
-		if (MRScenario.environment.equals("offline") && memberType.toUpperCase().contains("PREEFF")) {
+		if ((MRScenario.environment.equals("offline") || MRScenario.environment.equals("prod")) && memberType.toUpperCase().contains("PREEFF")) {
 			System.out.println("TEST running for offline-prod and PREEFF user, load the page one more time to workaround the quick guide issue");
 			planDocumentsAndResourcesPage.reloadPgWorkaround_MM();
 		}

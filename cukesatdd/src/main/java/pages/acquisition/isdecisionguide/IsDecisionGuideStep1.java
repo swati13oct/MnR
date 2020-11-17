@@ -446,13 +446,16 @@ public class IsDecisionGuideStep1 extends UhcDriver{
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		Actions action = new Actions(driver);
-		action.sendKeys(Keys.DOWN).perform(); 
-		String AutoCompleteAddress = HomeAddressTxt.getAttribute("value");
-		action.sendKeys(Keys.TAB).perform(); 
-		action.sendKeys(Keys.TAB).perform(); 
-		action.sendKeys(Keys.TAB).perform(); 
-		action.sendKeys(Keys.TAB).perform(); 
+//		Actions action = new Actions(driver);
+//		action.sendKeys(Keys.DOWN).perform();
+//		String AutoCompleteAddress = HomeAddressTxt.getAttribute("value");
+//		action.sendKeys(Keys.TAB).perform();
+//		action.sendKeys(Keys.TAB).perform();
+//		action.sendKeys(Keys.TAB).perform();
+//		action.sendKeys(Keys.TAB).perform();
+
+		HomeAddressTxt.sendKeys(Keys.DOWN, Keys.TAB, Keys.TAB, Keys.TAB, Keys.TAB);
+
 		try {
 			Thread.sleep(2000);
 		} catch (InterruptedException e) {

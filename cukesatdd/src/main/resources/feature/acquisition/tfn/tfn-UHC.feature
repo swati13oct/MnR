@@ -1,4 +1,4 @@
-@tfn_blayer
+@tfn_blayer  @F513647
 Feature: To test TFN in all flows on UHC site
 
 @Scenario1  @tfn_Direct_Traffic_old @tfn_uhc 
@@ -34,7 +34,7 @@ Then user navigates to MA VPP tab to vaify TFN
 		
 @Scenario2b @campaign_traffic  @tfn_uhc 
 Scenario Outline:  2.2 Varify all TAB TFn by landing on campaign specific url 8003728
-Given user is landing on UHC via campaign url
+Given 
 	|  URL     | <url>  |
 Then user navigates to MA VPP tab to vaify TFN from this specific url
 	|MA TFN |<maTabTfn>|
@@ -124,8 +124,28 @@ Then navigate from yahoo via uhc site to MedSup to varify TFN
 	 	    | 1-800-850-8659    |1-888-378-0849 |https://www.yahoo.com   |	
 		
 		
-		
-		
-		
-		
-		
+	@Scenario5A    @ConnectorModelPlus_UHC
+Scenario Outline: Verify TFN and PSC code from External links to portal landing
+Given user is landing from Externallinks
+	  |  URL     | <url>  |
+Then user clicks on learn about Medicare"<learnMoreurl>"
+Then user verify TFN
+    			   |TFN	|<TFN>|
+Then user clicks on Get Help Finding a Plan"<GetHelpurl>"
+ Then user enters zipcode "<zipcode>"	and user navigates to page"<Pageurl>"
+Then user verify VPP TFN
+    			   |VPPTFN	|<VPPTFN>|
+ 	
+  Examples: 
+	| url 								 						| TFN  				  |PSC   |VPPTFN        |VPPPSC|learnMoreurl                                                                                                                                                     |  GetHelpurl                                                                    | zipcode|Pageurl|
+  |https://myuhcplans.com/eaton| 1-844-462-9435|8006890|1-888-270-6995|897576|https://eaton.stage-uhcmedicaresolutions.uhc.com/medicare-education.html?WT.mc_id=8006890&originatingSite=https%3A%2F%2Fwww.myuhcplans.com%2Featon&subdomain=eaton|https://eaton.stage-uhcmedicaresolutions.uhc.com/plan-recommendation-engine.html|37211|https://eaton.stage-uhcmedicaresolutions.uhc.com/health-plans/medicare-advantage-plans/available-plans.html?zipcode=37211&WT.mc_id=897576&county=180&state=47&coveragePerson=M&originatingSite=https%253A%252F%252Fwww.myuhcplans.com%252Featon&subdomain=eaton#/plan-summary|
+  |https://myuhcplans.com/options  |1-844-462-9433| 8006889|1-800-425-0721|897579|https://options.stage-uhcmedicaresolutions.uhc.com/medicare-education.html?WT.mc_id=8006889&originatingSite=https%3A%2F%2Fwww.myuhcplans.com%2Foptions&subdomain=options|https://options.stage-uhcmedicaresolutions.uhc.com/plan-recommendation-engine.html|37211|https://options.stage-uhcmedicaresolutions.uhc.com/health-plans/medicare-advantage-plans/available-plans.html?zipcode=37211&WT.mc_id=897579&county=180&state=47&coveragePerson=M&originatingSite=https%253A%252F%252Fwww.myuhcplans.com%252Foptions&subdomain=options#/plan-summary|
+  |https://myuhcplans.com/kohler|1-844-462-9437|8006891|1-866-658-9431|897577|https://kohler.stage-uhcmedicaresolutions.uhc.com/medicare-education.html?WT.mc_id=8006891&originatingSite=https%3A%2F%2Fwww.myuhcplans.com%2Fkohler&subdomain=kohler|https://kohler.stage-uhcmedicaresolutions.uhc.com/plan-recommendation-engine.html|37211|https://kohler.stage-uhcmedicaresolutions.uhc.com/health-plans/medicare-advantage-plans/available-plans.html?zipcode=37211&WT.mc_id=897577&county=180&state=47&coveragePerson=M&originatingSite=https%253A%252F%252Fwww.myuhcplans.com%252Fkohler&subdomain=kohler#/plan-summary|
+  |https://myuhcplans.com/retiree|1-844-462-9434|8006895|1-877-776-1458|897580|https://retiree.stage-uhcmedicaresolutions.uhc.com/medicare-education.html?WT.mc_id=8006895&originatingSite=https%3A%2F%2Fwww.myuhcplans.com%2Fretiree&subdomain=retiree|https://retiree.stage-uhcmedicaresolutions.uhc.com/plan-recommendation-engine.html|37211|https://retiree.stage-uhcmedicaresolutions.uhc.com/health-plans/medicare-advantage-plans/available-plans.html?zipcode=37211&WT.mc_id=897580&county=180&state=47&coveragePerson=M&originatingSite=https%253A%252F%252Fwww.myuhcplans.com%252Fretiree&subdomain=retiree#/plan-summary|
+ #|https://myuhcplans.com/midwestregion|1-844-462-9438|8006892|1-855-373-7415|897578|https://midwestregion.stage-uhcmedicaresolutions.uhc.com/medicare-education.html?WT.mc_id=8006892&originatingSite=https%3A%2F%2Fwww.myuhcplans.com%2Fmidwestregion&subdomain=midwestregion|https://midwestregion.stage-uhcmedicaresolutions.uhc.com/plan-recommendation-engine.html|https://midwestregion.stage-uhcmedicaresolutions.uhc.com/health-plans/medicare-advantage-plans/available-plans.html?zipcode=37211&WT.mc_id=897578&county=180&state=47&coveragePerson=M&originatingSite=https%253A%252F%252Fwww.myuhcplans.com%252Fmidwestregion&subdomain=midwestregion#/plan-summary|
+ #|https://myuhcplans.com/steelcase|1-844-481-8818|8006894|1-877-751-8918|897581|https://steelcase.stage-uhcmedicaresolutions.uhc.com/medicare-education.html?WT.mc_id=8006894&originatingSite=https%3A%2F%2Fwww.myuhcplans.com%2FSteelcase&subdomain=steelcase|https://steelcase.stage-uhcmedicaresolutions.uhc.com/plan-recommendation-engine.html|https://steelcase.stage-uhcmedicaresolutions.uhc.com/health-plans/medicare-advantage-plans/available-plans.html?zipcode=37211&WT.mc_id=897581&county=180&state=47&coveragePerson=M&originatingSite=https%253A%252F%252Fwww.myuhcplans.com%252Fsteelcase&subdomain=steelcase#/plan-summary|
+  #|https://myuhcplans.com/wels|1-844-481-8819|8006893|1-877-893-7234|897582|https://wels.stage-uhcmedicaresolutions.uhc.com/medicare-education.html?WT.mc_id=8006893&originatingSite=https%3A%2F%2Fwww.myuhcplans.com%2FWels&subdomain=wels|https://wels.stage-uhcmedicaresolutions.uhc.com/plan-recommendation-engine.html|https://wels.stage-uhcmedicaresolutions.uhc.com/health-plans/medicare-advantage-plans/available-plans.html?zipcode=37211&WT.mc_id=897582&county=180&state=47&coveragePerson=M&originatingSite=https%253A%252F%252Fwww.myuhcplans.com%252Fwels&subdomain=wels#/plan-summary|
+
+	
+	
+	

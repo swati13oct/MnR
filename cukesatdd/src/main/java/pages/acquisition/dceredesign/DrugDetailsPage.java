@@ -1,4 +1,5 @@
 package pages.acquisition.dceredesign;
+
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
@@ -10,8 +11,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
@@ -21,9 +24,9 @@ import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 import gherkin.formatter.model.DataTableRow;
-import pages.acquisition.ulayer.PageTitleConstants;
 import pages.acquisition.commonpages.PlanDetailsPage;
 import pages.acquisition.commonpages.VPPPlanSummaryPage;
+import pages.acquisition.commonpages.VisitorProfilePage;
 
 public class DrugDetailsPage extends UhcDriver {
 
@@ -83,7 +86,8 @@ public class DrugDetailsPage extends UhcDriver {
 	@FindBy(xpath = "//div[@id='coveredtable']//th[contains(text(), 'You Pay')]")
 	public WebElement YourDrugs_YouPayTxt;
 
-	@FindBy(xpath = "(//div[@id='coveredtable']//td[contains(text(), 'Initial Coverage Cost')])[1]")
+	//@FindBy(xpath = "(//div[@id='coveredtable']//td[contains(text(), 'Initial Coverage Cost')])[1]")
+	@FindBy(xpath="(//div[@id='coveredtable']//div[contains(text(), 'Initial Coverage Cost')])")
 	public WebElement YourDrugs_InitlCoverageTxt;
 
 	@FindBy(xpath = "//h2[contains(text(), 'Monthly Drug Costs By Stage')]")
@@ -199,6 +203,13 @@ public class DrugDetailsPage extends UhcDriver {
 	
 	@FindBy(xpath = "//*[contains(@id,'edityourdrug')]")
 	public WebElement editDrugListLink;
+	
+	@FindBy(id="dupIconFlyOut")
+	private WebElement favoriteIcon;
+
+	@FindBy(xpath="//*[@class='flyout']//div[contains(@class,'success')]")
+	private WebElement favoriteSuccess;
+
 	
 	public DrugDetailsPage(WebDriver driver) {
 		super(driver);
@@ -585,7 +596,7 @@ public class DrugDetailsPage extends UhcDriver {
 	public PlanDetailsPage ClickandNavigate_VPPPlanDetails(String planName) {
 		validateNew(DrugCosts_PlanDetailsBtn);
 		jsClickNew(DrugCosts_PlanDetailsBtn);
-		checkIfPageReadySafari();
+		waitForPageLoadSafari();
 		WebElement PlanName_PlanDetails = driver.findElement(By.xpath("//h2[contains(text(), '"+planName+"')]"));
 		CommonUtility.waitForPageLoadNew(driver, PlanName_PlanDetails, 20);
 		if (driver.getCurrentUrl().contains("details") && validateNew(PlanName_PlanDetails)) {
@@ -741,9 +752,15 @@ public class DrugDetailsPage extends UhcDriver {
 	}
 	
 	public void validatePlanDrugDetails(String planName) {
-		WebElement PlanName_PlanDetails = driver.findElement(By.xpath("//h1[contains(text(), '"+planName+"')]"));
-		CommonUtility.waitForPageLoadNew(driver, PlanName_PlanDetails, 20);
-		validateNew(PlanName_PlanDetails);
+		System.out.println("Plan Name : " + planName);
+		WebElement PlanName_PlanDetails = driver.findElement(By.xpath("//h1[contains(text(), '" + planName + "')]"));
+//		CommonUtility.waitForPageLoadNew(driver, PlanName_PlanDetails, 20);
+//		validateNew(PlanName_PlanDetails);
+
+		if (validateNew(PlanName_PlanDetails))
+			Assert.assertTrue("Plan Name is correct for Drug Details Page" + PlanName_PlanDetails.getText(), true);
+		else
+			Assert.fail("Plan Name validation Failed for Drug Details Page");
 	}
 	
 	@FindBy(xpath = "//div[@class='d-flex align-items-lg-center flex-lg-row']")
@@ -771,10 +788,38 @@ public class DrugDetailsPage extends UhcDriver {
 		return null;
 	}
 
-	public GetStartedPage clickOnEditDrugListLink() {
+	public BuildYourDrugList clickOnEditDrugListLink() {
 
 		jsClickNew(editDrugListLink);
 		
-		return new GetStartedPage(driver);
+		return new BuildYourDrugList(driver);
+	}
+	
+	public void savePlan(String planName)
+	{
+		WebElement savePlan = driver
+				.findElement(By.xpath("//button[contains(@id,'saveBtn')]"));
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(false);", savePlan);
+		((JavascriptExecutor) driver).executeScript("arguments[0].click();", savePlan);
+
+//		Actions action = new Actions(driver);
+//		WebElement element = favoriteIcon;
+//		action.moveToElement(element).perform();
+		jsMouseOver(favoriteIcon);
+//		waitforElementNew(favoriteSuccess,5);
+		System.out.println(favoriteSuccess.getText());
+
+	}
+	
+	public VisitorProfilePage navigateToVisitorProfilePage() {
+		waitforElement(favoriteIcon);
+		jsClickNew(favoriteIcon);
+		waitForPageLoadSafari();
+		if(driver.getCurrentUrl().contains("profile")) {
+			return new VisitorProfilePage(driver);
+		}else {
+			System.out.println("Navigation to visitor profile is failed");
+			return null;
+		}
 	}
 }

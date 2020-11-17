@@ -1,9 +1,9 @@
 @planAndDocuments @thePredators @E2E @feature-F368974
 Feature: 1.06.4.2 Member Plans and Documents - section: Annual Notice of Changes Documents - Member Auth - PROD
 
-  #Background: If run on stage then feature security flag needs to be true
-  #   Given feature security flag must set to true when testing on stage env
-  #    | Feature           | UCPPlanDocuments |
+  Background: If run on stage then feature security flag needs to be true
+     Given feature security flag must set to true when testing on test env
+      | Feature           | UCPPlanDocuments |
 
   #------------------------------------------
   @prod_planAndDocuments04 @anoc 
@@ -41,7 +41,7 @@ Feature: 1.06.4.2 Member Plans and Documents - section: Annual Notice of Changes
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | an_sd | an_en_cy | an_es_cy | an_zh_cy | an_en_ny | an_es_ny | an_zh_ny |
 #     | 01-058 | xxxxx       | kkumard   | mnrs786@  | Ranch1955       | MA       | AARP_IND_PREEFF_PDnR  | false | false    | false    | false    | false    | false    | false    |
 #     | 02-059 | xxxxx       | kkumard   | mnrs786@  | testusername    | MA       | GROUP_PREEFF_PDnR     | false | false    | false    | false    | false    | false    | false    |
-      | 03-060 | xxxxx       | kkumard   | mnrs786@  | Abayne01        | MAPD     | AARP_IND_PREEFF_PDnR  | false | false    | false    | false    | false    | false    | false    |
+      | 03-060 | xxxxx       | kkumard   | mnrs786@  | UHCjanicejohn        | MAPD     | AARP_IND_PREEFF_PDnR  | false | false    | false    | false    | false    | false    | false    |
 
 #	@prod_preeffective_pdp
 #	Examples: 

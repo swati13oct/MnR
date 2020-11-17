@@ -32,6 +32,7 @@ import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 import gherkin.formatter.model.DataTableRow;
+import pages.acquisition.dceredesign.DrugDetailsPage;
 import pages.acquisition.dceredesign.GetStartedPage;
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.pharmacyLocator.PharmacySearchPage;
@@ -87,8 +88,13 @@ public class PlanDetailsPage extends UhcDriver {
 	private WebElement medBenefitsSection;
 
 	@FindBy(xpath="//*[contains(@id,'prescriptiondrug')]")
+	//@FindBy(xpath="//a[contains(@id,'prescriptiondrug') and contains(@class,'active')]")
 	private List<WebElement> presDrugTab1;
 
+	//@FindBy(xpath="//*[contains(@id,'prescriptiondrug')]")
+	@FindBy(xpath="//a[contains(@id,'prescriptiondrug') and contains(@class,'active')]")
+	private List<WebElement> presDrugTab2;
+	
 	@FindBy(id = "prescriptiondrug")
 	private List<WebElement> presDrugTab;
 
@@ -97,6 +103,9 @@ public class PlanDetailsPage extends UhcDriver {
 
 	@FindBy(xpath = "//*[contains(@id,'DrugListDetails')]")
 	private WebElement editDrugLink;
+	
+	@FindBy(id = "estimateYourDrugsLink")
+	private WebElement estimateDrugBtn;
 	
 	@FindBy(xpath = "//*[contains(@class,'edit-drugs-link')]")
 	private WebElement editDrugLinkPlanCost;
@@ -353,11 +362,11 @@ public class PlanDetailsPage extends UhcDriver {
 		
 		if (planType.equalsIgnoreCase("MA")) {
 			CommonUtility.waitForPageLoadNew(driver, medBenefitsTab.get(0), 45);
-			org.testng.Assert.assertTrue(0 == presDrugTab1.size(), "Prescription Drug tab not displayed for MA plans");
+			org.testng.Assert.assertTrue(0 == presDrugTab2.size(), "Prescription Drug tab not displayed for MA plans");
 
 		}  else if (planType.equalsIgnoreCase("MAPD")) {
 			CommonUtility.waitForPageLoadNew(driver, presDrugTab.get(0), 45);
-			org.testng.Assert.assertTrue(1 == presDrugTab1.size(), "Prescription Drug tab displayed for PDP plans");
+			org.testng.Assert.assertTrue(1 == presDrugTab1.size(), "Prescription Drug tab displayed for MAPD plans");
 		}else if (planType.equalsIgnoreCase("PDP")) {
 			CommonUtility.waitForPageLoadNew(driver, presDrugTab.get(0), 45);
 			org.testng.Assert.assertTrue(0 == medBenefitsTab.size(), "Medical Benefit tab not displayed for PDP plans");
@@ -518,12 +527,23 @@ public class PlanDetailsPage extends UhcDriver {
 		return null;
 	}
 	
-	public GetStartedPage navigateToDCERedesign() {
+	public GetStartedPage navigateToDCERedesignEditDrug() {
 
 		jsClickNew(presDrugTab.get(0));
 		validateNew(editDrugLink, 20);
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", editDrugLink);
 		((JavascriptExecutor) driver).executeScript("arguments[0].click();", editDrugLink);
+		if (validateNew(dceHeader))
+			return new GetStartedPage(driver);
+		return null;
+	}
+	
+	public GetStartedPage navigateToDCERedesign() {
+
+		jsClickNew(presDrugTab.get(0));
+		validateNew(estimateDrugBtn, 20);
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", estimateDrugBtn);
+		((JavascriptExecutor) driver).executeScript("arguments[0].click();", estimateDrugBtn);
 		if (validateNew(dceHeader))
 			return new GetStartedPage(driver);
 		return null;
@@ -1259,7 +1279,8 @@ public class PlanDetailsPage extends UhcDriver {
 		try {
 			Thread.sleep(5000);
 			if (optionalRider)
-				dentalPopupOptionalRidersLink.click();
+				//dentalPopupOptionalRidersLink.click();
+				jsClickNew(dentalPopupOptionalRidersLink);
 			else {
 				JavascriptExecutor jse = (JavascriptExecutor) driver;
 //				jse.executeScript("arguments[0].scrollIntoView(true);", dentalPopupLink);
@@ -1282,7 +1303,6 @@ public class PlanDetailsPage extends UhcDriver {
 					break;
 				}
 			}
-			checkIfPageReadySafari();
 			waitTillElementClickableInTime(driver.findElement(By.id("changeLocationBtn")), 10);
 			System.out.println(driver.getTitle());
 			Assert.assertTrue( "Title mismatch for dental directory",driver.getTitle().equals("Dental | Find Care"));
@@ -1325,5 +1345,10 @@ public class PlanDetailsPage extends UhcDriver {
 			if(!planCostTabDrugCostValueCell.getText().equals(annualDrugCost))
 				Assert.fail("Drug cost not displayed properly on prescription drugs tab");
 			
+		}
+
+		public DrugDetailsPage returnToReviewDrugCost() {
+			// TODO Auto-generated method stub
+			return null;
 		}
 }

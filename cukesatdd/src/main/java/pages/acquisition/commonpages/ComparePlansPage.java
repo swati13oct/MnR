@@ -268,7 +268,10 @@ public class ComparePlansPage extends UhcDriver {
 
 	@Override
 	public void openAndValidate() {
-		validateNew(backToAllPlansLink);
+		if (currentUrl().contains("profile=true"))
+			validateNew(backToProfilePageLink);
+		else
+			validateNew(backToAllPlansLink);
 		validateNew(validateprintbutton);
 		validateNew(validateemailbutton);
 		checkModelPopup(driver,20);
@@ -580,9 +583,10 @@ public class ComparePlansPage extends UhcDriver {
 	
 	public void validateCallSamContent() throws InterruptedException {
 		
-		Actions action = new Actions(driver);
-		WebElement element = callsam;
-		action.moveToElement(element).perform();
+//		Actions action = new Actions(driver);
+//		WebElement element = callsam;
+//		action.moveToElement(element).perform();
+		jsMouseOver(callsam);
 		String toolTipText = callsamtooltip.getText();
 		System.out.println("====================================================================");
 		System.out.println(toolTipText);
@@ -596,9 +600,10 @@ public class ComparePlansPage extends UhcDriver {
 	
 	public void  validateCallpopup() throws InterruptedException {
 		//CommonUtility.checkPageIsReady(driver);
-		callsam.click();
+		jsClickNew(callsam);
 		System.out.println("@@@@@@@@@@@@@@@ Call Icon Clicked @@@@@@@@@@@@@@@");		
 		driver.switchTo().activeElement();
+		validateNew(CallSamTFN);
 		if (CallSamTFN.getText().isEmpty()) {
 			// return null;
 			Assert.fail("TFN number was not found on the SAM call Popup");

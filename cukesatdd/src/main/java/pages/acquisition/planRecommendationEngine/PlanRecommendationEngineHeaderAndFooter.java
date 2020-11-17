@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -186,19 +187,19 @@ public class PlanRecommendationEngineHeaderAndFooter extends UhcDriver {
     @FindBy(css = "#subnav_3 div[class$='content-1'] ul>li:nth-of-type(4)>a")
     private WebElement headerCostbasicsLink;
     
-    @FindBy(css = "#subnav_3 div[class$='content-2'] li:nth-of-type(1)>a")
+    @FindBy(css = "#subnav_3 div[class$='content-2'] ul:nth-of-type(1) li:nth-of-type(1)>a")
     private WebElement headerMedicareadvantageLink;
     
-    @FindBy(css = "#subnav_3 div[class$='content-2'] li:nth-of-type(2) a") //Geotargetting
+    @FindBy(css = "#subnav_3 div[class$='content-2'] ul:nth-of-type(1) li:nth-of-type(2)>a") //Geotargetting
     private WebElement headerMedicaresupplemnetLink;
     
-    @FindBy(css = "#subnav_3 div[class$='content-2'] li:nth-of-type(3)>a")
+    @FindBy(css = "#subnav_3 div[class$='content-2'] li:nth-of-type(3)>span>a")
     private WebElement headerMedicareprescriptionLink;
     
-    @FindBy(css = "#subnav_3 div[class$='content-3']>div ul>li a")
+    @FindBy(css = "#subnav_3 div[class$='content-2'] ul:nth-of-type(2) li:nth-of-type(1)>a")
     private WebElement headerEnrollment;
     
-    @FindBy(css = "#subnav_3 div[class$='content-3'] li:nth-of-type(1)>a")
+    @FindBy(css = "#subnav_3 div[class$='content-2'] ul:nth-of-type(2) li:nth-of-type(2)>a")
     private WebElement headerFAQLink;
 
 //'Get Help Choosing' is Inside Shop Menu
@@ -392,25 +393,25 @@ public class PlanRecommendationEngineHeaderAndFooter extends UhcDriver {
 		validateLinks("/health-plans.html?lookupZipcode");
 		backtoshopforaplan();
 		headerShopForaPlanRequestMoreHelp.click();
-		validateLinks("health-plans/shop/connect");
+		validateLinks("contact-us.html");
 		backtoshopforaplan();
 		headerShopLink.click();
-		validateLinks("/health-plans/shop.html");
+		validateLinks("/shop.html");
 		backtoshopforaplan();
 		headerEnrollLink.click();
-		validateLinks("/health-plans/enroll.html");
+		validateLinks("/enroll.html");
 		backtoshopforaplan();
 		headerResourcesLink.click();
-		validateLinks("/health-plans/resources.html");
+		validateLinks("/resources.html");
 		backtoshopforaplan();
 		headerAdvantageplanLink.click();
-		validateLinks("/health-plans/shop/medicare-advantage-plans.html");
+		validateLinks("/shop/medicare-advantage-plans.html");
 		backtoshopforaplan();
 		headerMedicaresupplementplanLink.click();
-		validateLinks("/health-plans/shop/medicare-supplement-plans.html||health-plans.html?product=");
+		validateLinks("/shop/medicare-supplement-plans.html");
 		backtoshopforaplan();
 		headerPrescriptionLink.click();
-		validateLinks("/health-plans/shop/prescription-drug-plans.html"); 
+		validateLinks("/shop/prescription-drug-plans.html"); 
 		backtoshopforaplan();
 		headerGetaPlanRecommendationLink.click();
 		validateLinks("/plan-recommendation-engine.html");
@@ -418,7 +419,7 @@ public class PlanRecommendationEngineHeaderAndFooter extends UhcDriver {
 //		actions.clickAndHold(headerNavigationBarShopForaPlanTab).build().perform();
 		desktopCommonUtils.MouseOver(headerNavigationBarShopForaPlanTab, Browsername);
 		headerDrugcostLink.click();
-		validateLinks("health-plans/estimate-drug-costs.html");
+		validateLinks("/health-plans/estimate-drug-costs.html");
 		backtoshopforaplan();
 		headerPharmacysearchLink.click();
 		validateLinks("/health-plans/aarp-pharmacy.html");
@@ -481,9 +482,13 @@ public class PlanRecommendationEngineHeaderAndFooter extends UhcDriver {
 // PRE BreadCrumbs in Header	
 		
 		public void breadCrumbs() {
-			String preBreadcrumbs = (driver.findElement(By.cssSelector("div.breadcrumb"))).getText();
-			Assert.assertTrue(preBreadcrumbs.contains("Home / Plan Recommendation Engine"));
-			System.out.println(preBreadcrumbs);
+			try {
+				String preBreadcrumbs = (driver.findElement(By.cssSelector("div.breadcrumb"))).getText();
+				Assert.assertTrue(preBreadcrumbs.contains("Home / Plan Recommendation Engine"));
+				System.out.println(preBreadcrumbs);
+			} catch(StaleElementReferenceException e) {
+
+			}
 		}
 		
 //	Footer Element Verification Method
@@ -552,14 +557,14 @@ public class PlanRecommendationEngineHeaderAndFooter extends UhcDriver {
 			UHClogoInHeader.click();
 		}
 		footerMedicareAdvantagePlansLink.click();
-		validateLinks("/health-plans/shop/medicare-advantage-plans");
+		validateLinks("/shop/medicare-advantage-plans.html");
 		browserBack();
 		footerMedicareSupplementInsurancePlansLink.click();
-		validateLinks("/health-plans/shop/medicare-supplement-plans||health-plans.html?product=");
+		validateLinks("/shop/medicare-supplement-plans.html");
 		browserBack();
 		
 		footerMedicarePrescriptionDrugPlansLink.click();
-		validateLinks("/health-plans/shop/prescription-drug-plans");
+		validateLinks("/shop/prescription-drug-plans.html");
 		browserBack();
 
 		footerMedicareEducationLink.click();
@@ -620,12 +625,17 @@ public class PlanRecommendationEngineHeaderAndFooter extends UhcDriver {
 	public void navigationToPlanRecommendationEngineViaShopTools() {
 		validate(headerNavigationBarShopForaPlanTab, 45);
 //		actions.clickAndHold(headerNavigationBarShopForaPlanTab).build().perform();
-		desktopCommonUtils.MouseOver(headerNavigationBarShopForaPlanTab, Browsername);
-		headerShopLink.click();
+		//desktopCommonUtils.MouseOver(headerNavigationBarShopForaPlanTab, Browsername);
+		jsMouseOver(headerNavigationBarShopForaPlanTab);
+		jsClickNew(headerNavigationBarShopForaPlanTab);
+		//headerShopLink.click();
+		jsClickNew(headerShopLink);
 		validate(HeaderShopFromHomeInFindYourPlan, 30);
-		HeaderShopFromHomeInFindYourPlan.click();
+		//HeaderShopFromHomeInFindYourPlan.click();
+		jsClickNew(HeaderShopFromHomeInFindYourPlan);
 		validate(HeaderGetRecommendationInShop, 30);
-		HeaderGetRecommendationInShop.click();
+		//HeaderGetRecommendationInShop.click();
+		jsClickNew(HeaderGetRecommendationInShop);
 		validate(landingpageHeader, 30);
 		Assert.assertTrue(landingpageHeader.getText().contains("Plan"));
 	}

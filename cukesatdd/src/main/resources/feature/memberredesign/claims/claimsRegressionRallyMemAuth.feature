@@ -2,7 +2,7 @@
 Feature: 1.12.2 Member Rally claims - Member Auth
 
   #Background: If run on stage then feature security flag needs to be true
-  #   Given feature security flag must set to true when testing on stage env
+  #   Given feature security flag must set to true when testing on test env
   #    | Feature           | ClaimsMicroApp |
 
   #----- beginning of Non Regression claims scenarios section ------------------------
@@ -28,8 +28,8 @@ Feature: 1.12.2 Member Rally claims - Member Auth
     @memAuth_rallyClaims01_ma
     Examples: 
       | TID   | username   | password  | MemUserName  | planType | memberType          | claimSystem     |
-      | 15234 | qavgogine  | qavgogine | q1_uhc_ma001 | MA       | UHC_Individual      | COSMOS_CLAIMS   |
-      | xxxxx | qavgogine  | qavgogine | q3_sep_UAT4_Group289 | MA | UHC_GROUP         | COSMOS_CLAIMS   |
+      | 15234 | qavgogine  | qavgogine | q3_sep_UAT4_UHC053 | MA       | UHC_Individual      | COSMOS_CLAIMS   |
+      | xxxxx | qavgogine  | qavgogine | q2_may_rally032 | MA | UHC_GROUP         | COSMOS_CLAIMS   |
 
     @memAuth_rallyClaims01_medica_pcp
     Examples: 
@@ -39,8 +39,8 @@ Feature: 1.12.2 Member Rally claims - Member Auth
     @memAuth_rallyClaims01_mapd
     Examples: 
       | TID   | username   | password  | MemUserName  | planType | memberType          | claimSystem     | 
-      | 15230 | qavgogine  | qavgogine | q2_apr_aarp0250 | MAPD  | AARP_Individual     | COSMOS_CLAIMS   | 
-      | xxxxx | qavgogine  | qavgogine | Dream_EOB_MAPD_007 | MAPD  | UHC_GROUP        | COSMOS_CLAIMS   | 
+      | 15230 | qavgogine  | qavgogine | q2_jun_aarp0061 | MAPD  | AARP_Individual     | COSMOS_CLAIMS   | 
+      | xxxxx | qavgogine  | qavgogine | q3_sep_UAT4_Group224 | MAPD  | UHC_GROUP        | COSMOS_CLAIMS   | 
 
     @memAuth_rallyClaims01_ship
     Examples: 
@@ -51,5 +51,5 @@ Feature: 1.12.2 Member Rally claims - Member Auth
     Examples: 
       | TID   | username   | password  | MemUserName    | planType | memberType        | claimSystem     | 
       | 15299 | qavgogine  | qavgogine | q3_sep_UAT4_AARP057 | PDP | Individual        | RX_CLAIMS       | 
-      | 15300 | qavgogine  | qavgogine | q2_jun_grp0070 | PDP      | GROUP             | RX_CLAIMS       | 
+      | 15300 | qavgogine  | qavgogine | q3_sep_UAT4_Group217 | PDP      | GROUP             | RX_CLAIMS       | 
   #----- end of Non Regression claims scenarios section ------------------------

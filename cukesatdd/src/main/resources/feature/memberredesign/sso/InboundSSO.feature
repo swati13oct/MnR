@@ -92,7 +92,7 @@ Feature: 1.13 Member Inbound SSO functionality tested from TestHarness page for 
       | TID   | GroupName    | ssoPartner | firstName  | lastName | dateOfBirth | uhcID | eaID      | empNumber | userName       | passWord   |
       | 15388 | Verizon MAPD | conduent   | ABDUL-MUHS | BIEBERLY |    07031943 |       | 911172423 |    002230 | sso_dummy_user | Password@1 |
 
-  @regressionMember @p1
+  @regressionMember
   Scenario Outline: Verify that user is able to perfom Inbound SSO for <Scenario> from Ping Federate Test Harness Page
     Given User lands on the ping federate SSO test harness page
     And testharness page is displayed with all the fields
@@ -118,5 +118,5 @@ Feature: 1.13 Member Inbound SSO functionality tested from TestHarness page for 
       # | MCHCP         | MARGERY   | HOLWAY     |    09091955 |             | https://stage-medicare.uhc.com/sso/inbound/mchcp          | State of MO        | RC443160 | https://www.team-h-medicare.ocp-ctc-dmz-nonprod.optum.com/sso/inbound/mchcp          | https://offline-stage-medicare.uhc.com/sso/inbound/mchcp          |
       | bswift        | CIPRIANA  | REVERA     |    02091953 | 5YA7W74DG34 | https://stage-medicare.uhc.com/sso/inbound/bswift         | CenterPoint Energy |       | https://www.team-h-medicare.ocp-ctc-dmz-nonprod.optum.com/sso/inbound/bswift         | https://offline-stage-medicare.uhc.com/sso/inbound/bswift         |
       | Bristol Myers | BEATRIS   | HEFFRON    |    12041954 | 1U76JH6HD60 | https://stage-medicare.uhc.com/sso/inbound/morneaushepell | Bristol Myers      |       | https://www.team-h-medicare.ocp-ctc-dmz-nonprod.optum.com/sso/inbound/morneaushepell | https://offline-stage-medicare.uhc.com/sso/inbound/morneaushepell |
-      | MCHCP         | KARENE    | AIKENS     |    07081948 | 3AT4J01YN92 | https://stage-medicare.uhc.com/sso/inbound/mchcp          | State of MO        |       | https://www.team-h-medicare.ocp-ctc-dmz-nonprod.optum.com/sso/inbound/mchcp          | https://offline-stage-medicare.uhc.com/sso/inbound/mchcp          |
-    
+      #| MCHCP         | KARENE    | AIKENS     |    07081948 | 3AT4J01YN92 | https://stage-medicare.uhc.com/sso/inbound/mchcp          | State of MO        |       | https://www.team-h-medicare.ocp-ctc-dmz-nonprod.optum.com/sso/inbound/mchcp          | https://offline-stage-medicare.uhc.com/sso/inbound/mchcp          |
+      | MCHCP         | XIU       | LOWELL    |    09121941 | 5V61DH2HX33 | https://stage-medicare.uhc.com/sso/inbound/mchcp          | State of MO        |       | https://www.team-h-medicare.ocp-ctc-dmz-nonprod.optum.com/sso/inbound/mchcp          | https://offline-stage-medicare.uhc.com/sso/inbound/mchcp          |

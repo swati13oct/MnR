@@ -16,6 +16,7 @@ import pages.acquisition.dceredesign.BuildYourDrugList;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
+import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 import pages.acquisition.ulayer.PageTitleConstants;
 import pages.acquisition.commonpages.VPPPlanSummaryPage;
@@ -43,6 +44,9 @@ public class GetStartedPage extends UhcDriver {
 	
 	@FindBy(id = "dupIconFlyOut")
 	private WebElement shoppingCartIcon;
+	
+	@FindBy(css="a#visitor-profile-header")
+    private WebElement lnkProfile;
 
 	public GetStartedPage(WebDriver driver) {
 		super(driver);
@@ -53,12 +57,17 @@ public class GetStartedPage extends UhcDriver {
 
 	@Override
 	public void openAndValidate() {
+		if (MRScenario.environment.equals("offline") || MRScenario.environment.equals("prod"))
+			checkModelPopup(driver,45);
+		else 
+			checkModelPopup(driver,10);
 		validateNew(getStartedTab);
 	}
 
 	public BuildYourDrugList clickAddsDrugs() {
 		if(validate(AddMyDrugsBtn))
-			AddMyDrugsBtn.click();
+//			AddMyDrugsBtn.click();
+			jsClickNew(AddMyDrugsBtn);
 		CommonUtility.waitForPageLoad(driver, BuildDrugPage_EnterDrugNameTxt, 30);
 		if (validateNew(BuildDrugPage_EnterDrugNameTxt)) {
 			Assert.assertTrue("Naviagted to Build Drug List Page", true);
@@ -87,7 +96,8 @@ public class GetStartedPage extends UhcDriver {
 		CommonUtility.checkPageIsReadyNew(driver);
 		
 //		while(validate(overlayFilm, 10)) {/**wait*/}
-		CommonUtility.waitForElementToDisappear(driver, overlayFilm, 75);
+//		CommonUtility.waitForElementToDisappear(driver, overlayFilm, 75);
+		waitForPageLoadSafari();
 		
 		if (driver.getCurrentUrl().contains("plan-summary")) {
 			return new VPPPlanSummaryPage(driver);	
@@ -105,7 +115,8 @@ public class GetStartedPage extends UhcDriver {
 	}
 	
 	public VisitorProfilePage clickOnShoppingCart() {
-		shoppingCartIcon.click();
+		jsClickNew(shoppingCartIcon);
+		jsClickNew(lnkProfile);
 		if (driver.getCurrentUrl().contains("profile")) {
 			return new VisitorProfilePage(driver);
 		} else {

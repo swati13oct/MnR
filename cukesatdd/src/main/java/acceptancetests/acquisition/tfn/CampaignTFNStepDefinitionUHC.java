@@ -4,6 +4,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -263,6 +264,7 @@ public void the_user_navigates_to_MA_OLE_Page_and_validates_Federal_TFN_in_UHC()
 	tfnPage.HomepagePlanSearch(Zip);
 	String PlanType = "MA";
 	tfnPage.ViewPlanSummary(PlanType);
+	tfnPage.handlePlanYearSelectionPopup();
 	tfnPage.NavigateToOLE(PlanType);
 	String TFNXpath_PlanDetails = "//a[contains(@class, 'tel') and contains(@href, 'tel')]";
 	tfnPage.validateFederalTFN(TFNXpath_PlanDetails);
@@ -276,6 +278,7 @@ public void the_user_navigates_to_PDP_OLE_Page_and_validates_Federal_TFN_in_UHC(
 	tfnPage.HomepagePlanSearch(Zip);
 	String PlanType = "PDP";
 	tfnPage.ViewPlanSummary(PlanType);
+	tfnPage.handlePlanYearSelectionPopup();
 	tfnPage.NavigateToOLE(PlanType);
 	String TFNXpath_PlanDetails = "//a[contains(@class, 'tel') and contains(@href, 'tel')]";
 	tfnPage.validateFederalTFN(TFNXpath_PlanDetails);
@@ -311,8 +314,23 @@ public void the_user_navigates_to_Medsupp_VPP_and_validates_Medsupp_TFN() throws
 		
 }
 
+@Then("^the user navigates to following memeber signin page and navigate to view medicare plans link UHC$")
+public void the_user_navigates_to_following_memeber_signin_page_UHC(DataTable arg1) throws Throwable {
+	Map<String, String> inputAttributesMap=parseInputArguments(arg1);
+	String memberSignINURL = inputAttributesMap.get("Member Signin URL");
+	AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage)getLoginScenario().getBean(PageConstants.ACQUISITION_HOME_PAGE);
+	
+	
+	if(memberSignINURL!=null){
+		aquisitionhomepage.clickonmemberSignInlink(memberSignINURL);
+		Assert.assertTrue(true);
+	}else
+		Assert.fail("Error in loading the UHC Agent Page");
+	//tfnPage.validateFederalTFN(TFN_Xpath);
 
 }
+}
+
 
 
 

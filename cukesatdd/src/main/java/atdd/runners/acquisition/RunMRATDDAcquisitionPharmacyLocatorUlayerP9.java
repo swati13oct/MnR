@@ -13,8 +13,8 @@ import cucumber.api.CucumberOptions;
 @RunWith(ExtendedCucumber.class)
 @ExtendedCucumberOptions(retryCount=1,screenShotSize="", screenShotLocation="/screenshots/",jsonReport = "target/cucumber-RunMRATDDAcquisitionPharmacyLocatorUlayerP9.json",
 detailedReport = true, detailedAggregatedReport = true, overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDAcquisitionPharmacyLocatorUlayerP9")
-@CucumberOptions(glue = { "atdd.framework", "acceptancetests.acquisition" }, features = { "src/main/resources/feature/acquisition/pharmacylocator/PharmacySearch-AARP.feature" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionPharmacyLocatorUlayerP9.json" }, tags = { "@pharmacyLocatorRegression","@pharmacylocatorulayer07,@pharmacylocatorulayer08" })
+@CucumberOptions(glue = { "atdd.framework", "acceptancetests.acquisition" }, features = { "src/main/resources/feature/acquisition/pharmacylocator/PharmacySearch-Common.feature" }, plugin = {
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionPharmacyLocatorUlayerP9.json" }, tags = { "@PharmacyLocatorCommonAARP07,@PharmacyLocatorCommonAARP08"})//"@pharmacyLocatorRegression","@pharmacylocatorulayer07,@pharmacylocatorulayer08" })
 public class RunMRATDDAcquisitionPharmacyLocatorUlayerP9{ 
  
 }
