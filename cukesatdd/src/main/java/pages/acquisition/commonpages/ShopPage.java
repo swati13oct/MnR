@@ -147,7 +147,7 @@ public class ShopPage extends UhcDriver {
 		//Thread.sleep(4000);
 		if (validate(medSupShopLink)) {
 			//waitforElement(medSupShopLink);
-			medSupShopLink.click();
+			jsClickNew(medSupShopLink);
 			System.out.println("Shop Page Medsupp Plan is Displayed");
 			return new ShopPage(driver);
 		}
