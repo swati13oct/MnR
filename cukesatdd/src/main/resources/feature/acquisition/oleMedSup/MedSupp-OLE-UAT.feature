@@ -14,6 +14,7 @@ Feature: 1.05.9 UAT-OLE MedSupp Flow
     Then the site user fills all the details in MedsuppPage
    		| DOB           | <DOB>         |  		
    	Then the site user validates the RightRails Links on Medsupp Page
+   Then user validate the plandetails on medsupp plans
   Then the site user clicks on Start Application Button and proceed Next 
       | DOB           | <DOB>         |
       | Firstname     | <Firstname>   |
@@ -46,6 +47,7 @@ Scenario Outline: <scenario> MedSup E2E Flow through VPP Pages
     Then the site user fills all the details in MedsuppPage
    		| DOB           | <DOB>         |  		
    	Then the site user validates the RightRails Links on Medsupp Page
+   	Then user validate the plandetails on medsupp plans
   Then the site user clicks on Start Application Button and proceed Next 
       | DOB           | <DOB>         |
       | Firstname     | <Firstname>   |
