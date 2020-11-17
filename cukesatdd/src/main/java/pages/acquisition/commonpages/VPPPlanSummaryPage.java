@@ -333,6 +333,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(id="dupIconFlyOut")
 	private WebElement shoppingCartIcon;
 	
+	@FindBy(css="a#visitor-profile-header")
+    private WebElement lnkProfile;
+	
 	private String savePlanLinkTextXpath = "//span[contains(text(),'Save Plan')]";
 	private String savePlanImgXpath = "//img[contains(@src,'ic_favorite-unfilled.png')]";
 	private String savedPlanLinkTextXpath = "//span[text()='Saved']";
@@ -3299,7 +3302,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	public IsDecisionGuideStep1 clickOnRequestADecisionGuide() {
 		Assert.assertTrue("Decision Guide Link is not displayed on Med Supp VPP Plan Summary Page", validate(DecisionGuideLink));
-		DecisionGuideLink.click();
+		jsClickNew(DecisionGuideLink);
 		CommonUtility.checkPageIsReadyNew(driver);
 		if (driver.getCurrentUrl().contains("medicare-information.html"))
 			return new IsDecisionGuideStep1(driver);
@@ -3597,6 +3600,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	 */
 	public VisitorProfilePage navigateToVisitorProfilePage() {
 		jsClickNew(shoppingCartIcon);
+		jsClickNew(lnkProfile);
 		waitForPageLoadSafari();
 		if(driver.getCurrentUrl().contains("profile")) {
 			CommonUtility.checkPageIsReadyNew(driver);

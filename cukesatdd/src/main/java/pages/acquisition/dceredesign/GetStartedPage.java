@@ -41,6 +41,9 @@ public class GetStartedPage extends UhcDriver {
 	
 	@FindBy(id = "dupIconFlyOut")
 	private WebElement shoppingCartIcon;
+	
+	@FindBy(css="a#visitor-profile-header")
+    private WebElement lnkProfile;
 
 	public GetStartedPage(WebDriver driver) {
 		super(driver);
@@ -110,6 +113,7 @@ public class GetStartedPage extends UhcDriver {
 	
 	public VisitorProfilePage clickOnShoppingCart() {
 		jsClickNew(shoppingCartIcon);
+		jsClickNew(lnkProfile);
 		threadsleep(2000);
 		if (driver.getCurrentUrl().contains("profile")) {
 			return new VisitorProfilePage(driver);

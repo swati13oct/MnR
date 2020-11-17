@@ -298,6 +298,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
     @FindBy(id="dupIconFlyOut")
     private WebElement shoppingCartIcon;
     
+    @FindBy(css="a#visitor-profile-header")
+    private WebElement lnkProfile;
+    
 	@FindBy(xpath = "//button[@id='sam-call-button']//*[contains(@class,'sam__button__text desktop')]")
    	private WebElement callsam;
    	
@@ -1460,6 +1463,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		waitforElement(shoppingCartIcon);
 //		shoppingCartIcon.click();
 		jsClickNew(shoppingCartIcon);
+		jsClickNew(lnkProfile);
 		waitForPageLoadSafari();
 		if(driver.getCurrentUrl().contains("profile")) {
 			return new VisitorProfilePage(driver);
@@ -2635,7 +2639,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			validateNew(RightRail_FindAnAgentMedsupp);
 			CommonUtility.waitForPageLoadNew(driver, RightRail_FindAnAgentMedsupp, 30);
 			String parentWindow = driver.getWindowHandle();
-			RightRail_FindAnAgentMedsupp.click();
+			jsClickNew(RightRail_FindAnAgentMedsupp);
 			sleepBySec(3);
 			Set<String> tabs_windows = driver.getWindowHandles();
 			Iterator<String> itr = tabs_windows.iterator();
