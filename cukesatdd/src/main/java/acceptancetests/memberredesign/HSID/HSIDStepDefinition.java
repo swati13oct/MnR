@@ -705,8 +705,12 @@ public class HSIDStepDefinition {
 		return memberAttributesMap;
 	}
 
-	@Given("^feature security flag must set to true when testing on stage env$")
+	@Given("^feature security flag must set to true when testing on test env$")
 	public void checkSecurityFlag(DataTable memberAttributes) {
+		if (MRScenario.environment.contains("team")) {
+			System.out.println("SKIP security test for team env (doesn't matter) and offline/online-prod (is through memAuth access so it doesn't matter)");
+			return;
+		}
 		boolean useStage3=false;
 		Map<String, String> memberAttributesMap=parseInputArguments(memberAttributes);
 		String feature=memberAttributesMap.get("Feature");
@@ -724,46 +728,66 @@ public class HSIDStepDefinition {
 		}
 		
 		System.out.println("feature="+feature);
-		String securityFlagXpath="//td[text()='enableSecurity']/following-sibling::td";
-		String stageDomain="http://apsrs7260:8080";
-		if (useStage3) {
+		String envDomain="http://apsrs7260:8080";
+		if (useStage3) { //note: this is for if stage ever switch to stage3 again
 			if (feature.equals("ClaimsMicroApp")) {
-				stageDomain="http://ucp-claims-mnr-ucp-stage-3.ocp-ctc-dmz-stg.optum.com";
+				envDomain="http://ucp-claims-mnr-ucp-stage-3.ocp-ctc-dmz-stg.optum.com";
 			} else if (feature.equals("UCPEob")) {
-				stageDomain="http://ucp-eob-mnr-ucp-stage-3.ocp-ctc-dmz-stg.optum.com";
+				envDomain="http://ucp-eob-mnr-ucp-stage-3.ocp-ctc-dmz-stg.optum.com";
 			} else if (feature.equals("UCPHealthWellness")) {
-				stageDomain="http://ucp-health-wellness-mnr-ucp-stage-3.ocp-ctc-dmz-stg.optum.com";
+				envDomain="http://ucp-health-wellness-mnr-ucp-stage-3.ocp-ctc-dmz-stg.optum.com";
 			} else if (feature.equals("UCPBenefits")) {
-				stageDomain="http://ucp-benefits-mnr-ucp-stage-3.ocp-ctc-dmz-stg.optum.com";
+				envDomain="http://ucp-benefits-mnr-ucp-stage-3.ocp-ctc-dmz-stg.optum.com";
 			} else if (feature.equals("UCPPlanDocuments")) {
-				stageDomain="http://ucp-plan-documents-mnr-ucp-stage-3.ocp-ctc-dmz-stg.optum.com";
+				envDomain="http://ucp-plan-documents-mnr-ucp-stage-3.ocp-ctc-dmz-stg.optum.com";
 			} else if (feature.equals("UCPProfileAndPreferences")) {
-				stageDomain="http://ucp-profile-preferences-mnr-ucp-stage-3.ocp-ctc-dmz-stg.optum.com";
+				envDomain="http://ucp-profile-preferences-mnr-ucp-stage-3.ocp-ctc-dmz-stg.optum.com";
 			} else if (feature.equals("UCPOrderPlanMaterials")) {
-				stageDomain="http://ucp-order-plan-materials-mnr-ucp-stage-3.ocp-ctc-dmz-stg.optum.com";
+				envDomain="http://ucp-order-plan-materials-mnr-ucp-stage-3.ocp-ctc-dmz-stg.optum.com";
 			} else if (feature.equals("UCPMyDocuments")) {
-				stageDomain="http://ucp-mydocuments-mnr-ucp-stage-3.ocp-ctc-dmz-stg.optum.com";
+				envDomain="http://ucp-mydocuments-mnr-ucp-stage-3.ocp-ctc-dmz-stg.optum.com";
 			}
 		}
-		//tbd configPgUrl="https://www."+MRScenario.environment+"-medicare."+MRScenario.domain+"/"+feature+"/wsConfig";
-		String configPgUrl=stageDomain+"/"+feature+"/wsConfig";
-		if (MRScenario.environment.contains("team-voc")) 
-			configPgUrl=configPgUrl.replace("www.", "");
-				
-		System.out.println("Config page URL="+configPgUrl);
 		MRScenario m=new MRScenario();
 		WebDriver d=m.getWebDriverNew();
-		d.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
+		d.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+
+		if (MRScenario.environment.contains("stage")) {
+			//note: for stage, only check 1 server
+			checkEnableSecurityPerServer(d, envDomain, feature);
+			
+		} else if (MRScenario.environment.equalsIgnoreCase("offline") || MRScenario.environment.equalsIgnoreCase("prod")) {
+			//note: offline/online-prod servers will keep switching between release
+			//note: it's hard to figure out at run time which server to use so just check for both
+			//note: in theory,both should always be true anyway
+			envDomain="http://apsrp04762:8080";
+			checkEnableSecurityPerServer(d, envDomain, feature);
+
+			envDomain="http://apsrp04763:8080";
+			checkEnableSecurityPerServer(d, envDomain, feature);
+			
+		}
+		d.quit();
+		
+	}
+	
+	public void checkEnableSecurityPerServer(WebDriver d, String envDomain, String feature) {
+		String configPgUrl=envDomain+"/"+feature+"/wsConfig";
+		System.out.println("Config page URL="+configPgUrl);
+
 		d.get(configPgUrl);
 		CommonUtility.checkPageIsReady(d);
 		try {
+			String securityFlagXpath="//td[text()='enableSecurity']/following-sibling::td";
 			WebElement e=d.findElement(By.xpath(securityFlagXpath));
 			CommonUtility.waitForPageLoad(d, e, 5);
 			if (e.isDisplayed()) {
 				System.out.println("Element '"+e.toString()+"' found!!!!");
 				String value=e.getText();
 				if (value.equalsIgnoreCase("false")) {
-					if (MRScenario.environment.toLowerCase().contains("stage")) 
+					if (MRScenario.environment.toLowerCase().contains("stage") 
+							|| MRScenario.environment.equalsIgnoreCase("offline") 
+							|| MRScenario.environment.equalsIgnoreCase("prod")) 
 						Assert.assertTrue("PROBLEM - stage environment should have featire '"+feature+"' security flag = true, right now it is set to "+value+" | configPgUrl="+configPgUrl+", stopping all tests now. | saurcelab session="+MRScenario.returnJobURL(), false);
 					else
 						System.out.println("feature '"+feature+"' security flag is false on env '"+MRScenario.environment+"' configPgUrl="+configPgUrl+", not on stage, okay to move on...");
@@ -774,16 +798,18 @@ public class HSIDStepDefinition {
 				Assert.assertTrue("PROBLEM - unable to locate security flag in the config URL='"+configPgUrl+"' page, stopping all tests now. | saurcelab session="+MRScenario.returnJobURL(), false);
 			}
 		} catch (Exception e) {
-			if (MRScenario.environment.toLowerCase().contains("stage")) {
+			if (MRScenario.environment.toLowerCase().contains("stage") 
+					|| MRScenario.environment.toLowerCase().equalsIgnoreCase("offline") 
+					|| MRScenario.environment.toLowerCase().equalsIgnoreCase("prod")) {
 				e.printStackTrace();
-				Assert.assertTrue("PROBLEM - unable to locate security flag in the config URL='"+configPgUrl+"' page, stopping all tests now. | saurcelab session="+MRScenario.returnJobURL(), false);
+				Assert.assertTrue("PROBLEM - unable to locate security flag in the config URL='"+configPgUrl+"' page, "
+						+ "stopping all tests now. | saurcelab session="+MRScenario.returnJobURL(), false);
 			} else {
-				System.out.println("unable to locate security flag in the config URL='"+configPgUrl+"' page, not on stage, okay to move on...");
+				System.out.println("unable to locate security flag in the config URL='"+configPgUrl+"' page but also not testing on stage/offline-prod/online-prod, okay to move on...");
 			}
-			
 		}
-		d.quit();
 	}
+	
 /** 
 	 * @todo :member lands on payments deep link
 	 */

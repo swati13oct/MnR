@@ -1,9 +1,9 @@
 @planAndDocuments @thePredators @E2E @feature-F368974
 Feature: 1.06.3.2 Member Plans and Documents - section: Membership Materials - Member Auth - PROD
 
-  #Background: If run on stage then feature security flag needs to be true
-  #   Given feature security flag must set to true when testing on stage env
-  #    | Feature           | UCPPlanDocuments |
+  Background: If run on stage then feature security flag needs to be true
+     Given feature security flag must set to true when testing on test env
+      | Feature           | UCPPlanDocuments |
 
   #------------------------------------------
   @prod_planAndDocuments03 @membershipMaterials 

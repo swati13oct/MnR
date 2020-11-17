@@ -2,7 +2,7 @@
 Feature: 1.04.2 To Test EOB for Members - Spending Cost Summary Suppression Logic
 
   Background: If run on stage then feature security flag needs to be true
-     Given feature security flag must set to true when testing on stage env
+     Given feature security flag must set to true when testing on test env
       | Feature           | UCPEob |
 
   # note: for SSUP case, there will be no EOB page

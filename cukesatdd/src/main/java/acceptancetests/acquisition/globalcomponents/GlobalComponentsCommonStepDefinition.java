@@ -66,21 +66,21 @@ public class GlobalComponentsCommonStepDefinition {
 		aquisitionhomepage.validateLogo();		
 	}
 
-	@And("^user clicks on Sign in link on home page$")
+	@And("^user clicks on Sign in link in the header$")
 	public void click_signIn_aarp() {
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		aquisitionhomepage.signInheader();		
 	}
 	
-	@And("^user clicks on register link on home page$")
+	@And("^user clicks on register link in the header$")
 	public void click_register_aarp() {
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		aquisitionhomepage.headerRegisterLink();
 	}
 	
-	@Then("^user validates visitor profile on home page$")
+	@Then("^user clicks on the heart icon in the header$")
 	public void the_user_validates_visitor_profile_aarp() throws Throwable {
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
@@ -324,6 +324,19 @@ public class GlobalComponentsCommonStepDefinition {
 		  aquisitionhomepage.clickBrowserBackButton();
 		  
 	  }
-
+	  
+	  @And("^user clicks on visit aarp.org link in the header$")
+	  public void click_visitAARP_Link_in_the_header() { 
+		  AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage)getLoginScenario() .getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		  aquisitionhomepage.clickVisitAARPHeaderLink();
+		  
+	  }
+	  
+	  @And("^user clicks on visit aarp.org link in the footer$")
+	  public void click_visitAARP_Link_in_the_footer() { 
+		  AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage)getLoginScenario() .getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		  aquisitionhomepage.clickVisitAARPFooterLink();
+		  
+	  }
 }
 

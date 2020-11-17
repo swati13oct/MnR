@@ -333,6 +333,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(id="dupIconFlyOut")
 	private WebElement shoppingCartIcon;
 	
+	@FindBy(css="a#visitor-profile-header")
+    private WebElement lnkProfile;
+	
 	private String savePlanLinkTextXpath = "//span[contains(text(),'Save Plan')]";
 	private String savePlanImgXpath = "//img[contains(@src,'ic_favorite-unfilled.png')]";
 	private String savedPlanLinkTextXpath = "//span[text()='Saved']";
@@ -3582,6 +3585,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	 */
 	public VisitorProfilePage navigateToVisitorProfilePage() {
 		shoppingCartIcon.click();
+		jsClickNew(lnkProfile);
 		if(driver.getCurrentUrl().contains("profile")) {
 			CommonUtility.checkPageIsReadyNew(driver);
 			return new VisitorProfilePage(driver);

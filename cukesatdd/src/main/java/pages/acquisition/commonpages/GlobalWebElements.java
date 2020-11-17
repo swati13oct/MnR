@@ -65,7 +65,7 @@ public class GlobalWebElements  extends UhcDriver{
 	@FindBy(xpath = "//a[contains(@id, 'gfn_lnk_row2') and contains(@dtmname, 'Special Needs')]")
 	 public static WebElement medicareSpecialNeedsPlansLink;
 	
-	@FindBy(xpath = "//a[contains(@id, 'gfn_lnk_row2_3') and contains(@dtmname, 'Medicare Supplement')]")
+	@FindBy(xpath = "//a[contains(@id, 'gfn_lnk_row2_3') and contains(@dtmname, 'Medicare Supplement')]//span[contains(text(),'Medicare Supplement' )]")
 	 public static WebElement medicareSupplementInsurancePlansLink;
 	
 	@FindBy(xpath = "//a[contains(@id, 'gfn_lnk_row2_5') and contains(@dtmname, 'Medicare Prescription')]")
@@ -228,6 +228,9 @@ public class GlobalWebElements  extends UhcDriver{
 	
 	@FindBy(id = "aarpSVGLogo")
 	 public static WebElement AARPlogo;
+	
+	@FindBy(xpath="//*[contains(@id,'uhcSVGLogo')]")
+	public  WebElement UHCLogo;
 	
 	@FindBy(xpath = "//img[contains(@dtmid,'acq_visitor_profile')]")
 	 public static WebElement visitorprofileicon;
