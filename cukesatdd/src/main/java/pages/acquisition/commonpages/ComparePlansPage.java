@@ -601,9 +601,10 @@ public class ComparePlansPage extends UhcDriver {
 	
 	public void  validateCallpopup() throws InterruptedException {
 		//CommonUtility.checkPageIsReady(driver);
-		callsam.click();
+		jsClickNew(callsam);
 		System.out.println("@@@@@@@@@@@@@@@ Call Icon Clicked @@@@@@@@@@@@@@@");		
 		driver.switchTo().activeElement();
+		validateNew(CallSamTFN);
 		if (CallSamTFN.getText().isEmpty()) {
 			// return null;
 			Assert.fail("TFN number was not found on the SAM call Popup");
