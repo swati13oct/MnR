@@ -1,9 +1,9 @@
 @planAndDocuments @thePredators @E2E @feature-F368974
 Feature: 1.06.6.2b Member Plans and Documents - section: Forms And Resources Part 6b of 7 - Other Resources - Member Auth - PROD
 
-  #Background: If run on stage then feature security flag needs to be true
-  #   Given feature security flag must set to true when testing on stage env
-  #    | Feature           | UCPPlanDocuments |
+  Background: If run on stage then feature security flag needs to be true
+     Given feature security flag must set to true when testing on test env
+      | Feature           | UCPPlanDocuments |
 
   #------------------------------------------
   @prod_planAndDocuments06_6bof7 @formsAndResources_6bof7

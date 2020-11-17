@@ -74,21 +74,19 @@ public class DCEStepDefinitionUHC {
 		// getLoginScenario().saveBean(PageConstants.DCE_Redesign_ZipCodePlanYearCapture,
 		// zipCodePlanYearPage);
 	}
-
-	@When("^adds drugs in drug list page on UHC$")
-	public void adds_drugs_in_drug_list_page_UHC(DataTable givenAttributes) {
-		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		Map<String, String> memberAttributesMap = new HashMap<String, String>();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}
-		String drugName = memberAttributesMap.get("DrugName");
-		System.out.println("zipcode" + drugName);
-		BuildYourDrugList buildDrugList = new BuildYourDrugList(driver);
-		getLoginScenario().saveBean(PageConstants.DCE_Redesign_BuildDrugList, buildDrugList);
-		buildDrugList.addDrugs(drugName);
-	}
+	
+	  @When("^adds drugs in drug list page on UHC$") public void
+	  adds_drugs_in_drug_list_page_UHC(DataTable givenAttributes) {
+	  List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+	  Map<String, String> memberAttributesMap = new HashMap<String, String>(); for
+	  (int i = 0; i < memberAttributesRow.size(); i++) {
+	  memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+	  memberAttributesRow.get(i).getCells().get(1)); } String drugName =
+	  memberAttributesMap.get("DrugName"); System.out.println("zipcode" +
+	  drugName); BuildYourDrugList buildDrugList = new BuildYourDrugList(driver);
+	  getLoginScenario().saveBean(PageConstants.DCE_Redesign_BuildDrugList,
+	  buildDrugList); buildDrugList.addDrugs(drugName); }
+	 
 
 	@Then("^plan year dropdown should be displayed during AEP on UHC$")
 	public void plan_year_dropdown_should_be_displayed_during_AEP_UHC() {
