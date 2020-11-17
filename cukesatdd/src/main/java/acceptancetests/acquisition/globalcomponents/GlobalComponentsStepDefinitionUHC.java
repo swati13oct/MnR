@@ -362,6 +362,7 @@ public void user_clicks_on_View_all_disclaimer_information_link_on_home_page_in_
 				AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
 						.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 				EnterZipCodePage enterZipCodePage=aquisitionhomepage.enterZipCode();
+				enterZipCodePage.shopMenuZipComp(zipCode);
 				enterZipCodePage.validateZipComp(zipCode);
 	}
 	
