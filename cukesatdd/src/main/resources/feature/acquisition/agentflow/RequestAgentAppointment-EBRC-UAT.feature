@@ -36,7 +36,6 @@ Scenario Outline: <scenario> Verify request an appointment through <pageName>
       
       
 
-
 Scenario Outline: <scenario> Verify request an appointment with an agent flow for zipcode UHC SIte
 Given the user is on UHC medicare acquisition site page
 When the user navigates to request more help and information in AARP site
