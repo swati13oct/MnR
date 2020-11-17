@@ -958,6 +958,8 @@ public void user_should_verify_you_pay_value_for_not_covered_drug_in_drug_pricin
 		drugDetailsPage.clickDistanceMiledropdown();
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetailsPage);
 	}
+	
+	
 
 	@When("^user click on View Drug Pricing Modal$")
 	public void User_click_on_View_Drug_Pricing_Modal_in_AARP() throws Throwable {

@@ -708,6 +708,7 @@ public class DrugDetailsPage extends UhcDriver {
 		clickDistanceDefaultMile.click();
 		
 	}
+	
 	public void  changePharmacyAndSave() {
 		validateNew(selectRockPharm);
 		selectRockPharm.click();
