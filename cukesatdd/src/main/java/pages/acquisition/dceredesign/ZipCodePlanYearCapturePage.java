@@ -130,7 +130,7 @@ public class ZipCodePlanYearCapturePage extends UhcDriver {
 			//sendkeys(zipCodeTxtbox, zipcode);
 		    validateNew(continueBtn);
 		    
-		    continueBtn.click();
+		    jsClickNew(continueBtn);
 			//countyDropdown.click();
 			CommonUtility.waitForPageLoad(driver,zipCodeErrorMsg , 30);
 			if(validateNew(zipCodeErrorMsg)) {

@@ -184,7 +184,7 @@ public class WelcomePage extends UhcDriver{
 	public PersonalInformationPage navigate_to_Personal_Information_page() {
 		
 		validateNew(NextBtn);
-		NextBtn.click();
+		jsClickNew(NextBtn);
 		CommonUtility.checkPageIsReadyNew(driver);
 		if(validateNew(driver.findElement(By.xpath("//h1[contains(text(),'Personal')]")))){			
 			System.out.println("OLE Personal Information Page is Displayed");
@@ -196,7 +196,7 @@ public class WelcomePage extends UhcDriver{
 	public MedicareInformationPage navigate_to_medicare_info_page_PDP() {
 		
 		validateNew(NextBtn);
-		NextBtn.click();
+		jsClickNew(NextBtn);
 		CommonUtility.checkPageIsReadyNew(driver);
 		if(validateNew(welcomepageHeader)){ 
 			System.out.println("OLE Medicare Information Page is Displayed");

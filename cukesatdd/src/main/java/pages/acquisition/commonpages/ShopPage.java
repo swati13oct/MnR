@@ -164,6 +164,8 @@ public class ShopPage extends UhcDriver {
 	}
 	
 	public void clickOnPDPShopButton() {
+		driver.navigate().refresh();		//Added refresh and wait as elements are not located in Safari browser after using navigate back
+		threadsleep(2000);
 		validateNew(pdpShopLink);
 		jsClickNew(pdpShopLink);
 		validateNew(zipCodeField1);

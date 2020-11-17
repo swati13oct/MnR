@@ -47,6 +47,7 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 			distance=distance+" miles";
 		sleepBySec(3);
 		CommonUtility.waitForPageLoadNew(driver, distanceDropownID, 60);
+		scrollToView(distanceDropownID);
 		selectFromDropDownByText(driver, distanceDropownID, distance);
 		sleepBySec(3);
 		String initialZipVal=zipcodeField.getAttribute("value");
