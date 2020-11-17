@@ -2,7 +2,7 @@
 Feature: 1.12.2 Member Rally claims - Member Auth
 
   #Background: If run on stage then feature security flag needs to be true
-  #   Given feature security flag must set to true when testing on stage env
+  #   Given feature security flag must set to true when testing on test env
   #    | Feature           | ClaimsMicroApp |
 
   #----- beginning of Non Regression claims scenarios section ------------------------

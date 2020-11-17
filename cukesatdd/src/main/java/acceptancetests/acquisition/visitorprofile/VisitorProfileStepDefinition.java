@@ -206,10 +206,26 @@ public class VisitorProfileStepDefinition {
 		visitorProfile.deleteAllDrugs();
 	}
 	
-	@And("^user delets all the added providers on visitor profile page$")
-	public void user_delets_all_the_added_providers_on_visitor_profile_page_of_AARP_site() {
+	@And("^user clicks on Edit Drug and Pharmacy on visitor profile page$")
+	public void user_clicks_on_Edit_Drug_and_Pharmacy_on_visitor_profile_page() {
 		VisitorProfilePage visitorProfile = (VisitorProfilePage) getLoginScenario().getBean(PageConstants.VISITOR_PROFILE_PAGE);
-		visitorProfile.deleteAllProviders();
+		GetStartedPage dcePage = visitorProfile.clickOnEditDrugAndPharmacy();
+		getLoginScenario().saveBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE, dcePage);
+	}
+	
+	@And("^user delets all the added providers on visitor profile page$")
+	public void user_delets_all_the_added_providers_on_visitor_profile_page_of_AARP_site(DataTable Planname) {
+		List<DataTableRow> plannameAttributesRow = Planname
+				.getGherkinRows();
+		Map<String, String> plannameAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < plannameAttributesRow.size(); i++) {
+
+			plannameAttributesMap.put(plannameAttributesRow.get(i).getCells()
+					.get(0), plannameAttributesRow.get(i).getCells().get(1));
+		}
+		String planName = plannameAttributesMap.get("PlanName");
+		VisitorProfilePage visitorProfile = (VisitorProfilePage) getLoginScenario().getBean(PageConstants.VISITOR_PROFILE_PAGE);
+		visitorProfile.deleteProviders(planName);
 	}
 	
 	@Then("^Verify X out of Y provider covered information is displayed on visitor profile page$")

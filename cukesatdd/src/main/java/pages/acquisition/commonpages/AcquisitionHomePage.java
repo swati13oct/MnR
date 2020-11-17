@@ -299,6 +299,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
     @FindBy(id="dupIconFlyOut")
     private WebElement shoppingCartIcon;
     
+    @FindBy(css="a#visitor-profile-header")
+    private WebElement lnkProfile;
+    
 	@FindBy(xpath = "//button[@id='sam-call-button']//*[contains(@class,'sam__button__text desktop')]")
    	private WebElement callsam;
    	
@@ -1054,8 +1057,10 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	public PharmacySearchPage navigateToPharmacyLocator() {
 		//checkModelPopup(driver);
-		Actions action = new Actions(driver);
-		action.moveToElement(navigationSectionHomeLink).moveToElement(ourPlansHoverLink).build().perform();
+//		Actions action = new Actions(driver);
+//		action.moveToElement(navigationSectionHomeLink).moveToElement(ourPlansHoverLink).build().perform();
+		jsMouseOver(navigationSectionHomeLink);
+		jsMouseOver(ourPlansHoverLink);
 		pharmacylocator.click();
 		CommonUtility.checkPageIsReadyNew(driver);
 		if (driver.getTitle().toLowerCase().contains((PageTitleConstants.BLAYER_LOCATE_A_PHARMACY_UNITEDHEALTHCARE).toLowerCase())) {
@@ -1456,6 +1461,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		waitforElement(shoppingCartIcon);
 //		shoppingCartIcon.click();
 		jsClickNew(shoppingCartIcon);
+		jsClickNew(lnkProfile);
 		waitForPageLoadSafari();
 		if(driver.getCurrentUrl().contains("profile")) {
 			return new VisitorProfilePage(driver);
@@ -1897,8 +1903,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		public void validatevisitorprofile() {
 			if (visitorprofileicon.isDisplayed()) {
 
-				Actions actions = new Actions(driver);
-				actions.moveToElement(visitorprofileicon).perform();
+//				Actions actions = new Actions(driver);
+//				actions.moveToElement(visitorprofileicon).perform();
 				jsMouseOver(visitorprofileicon);
 
 				System.out.println("Hover over visitor profile completed");
@@ -2124,9 +2130,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			validateNew(stateDropDown);
 			selectFromDropDownByValue(stateDropDown, "California");
 
-			String StateSessionStorage = ReturnDriverStorage(driver, "sessionStorage", "ucp_geotrackingState");
+		//	String StateSessionStorage = ReturnDriverStorage(driver, "sessionStorage", "ucp_geotrackingState");
 
-//			String StateSessionStorage =  returnDriverStorageJS("sessionStorage", "ucp_geotrackingState");
+		String StateSessionStorage =  returnDriverStorageJS("sessionStorage", "ucp_geotrackingState");
 					//ReturnDriverStorage(driver, "sessionStorage", "ucp_geotrackingState");
 
 			System.out.println("State selected : California");
