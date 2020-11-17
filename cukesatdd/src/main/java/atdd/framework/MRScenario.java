@@ -1,3 +1,4 @@
+
 package atdd.framework;
 
 import java.io.BufferedReader;
@@ -1297,3 +1298,4 @@ try {
 	}
 
 }
+

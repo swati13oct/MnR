@@ -58,7 +58,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	
 
 	//@FindBy(xpath = "//*[contains(@id,'zipcodemeded')][1]//following-sibling::button//*[contains(text(),'Get Started')]")
-	@FindBy(xpath = "(//*[contains(@id,'zipcodemeded')][1]//following-sibling::button)[1]")
+	@FindBy(xpath = "//button[contains(@class,'uhc-zip-button')]")
 	private WebElement ShopEnrollButton;
 	
 	@FindBy(id= "zipcode")
@@ -281,6 +281,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
     @FindBy(xpath="//a[contains(@dtmname, 'Footer:Visit AARP')]")
     private WebElement visitAARPFooterLink;
     
+    @FindBy(xpath="//*[contains(@id, 'aarplink')]")
+    private WebElement visitAARPHeaderLink;
+    
     @FindBy(xpath="//a[contains(@class, 'back-to-top')]")
     private WebElement backToTop;
     
@@ -440,7 +443,10 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	
 	@FindBy(xpath = "//p[contains(text(),'UnitedHealthcare Insurance Company (UnitedHealthcare)')]")
-    private WebElement UHCICSubTiltle;
+    private WebElement UHCICSubTitle;
+	
+	@FindBy(xpath = "//*[contains(@id, 'piFirstName')]")
+	private WebElement registerFirstName;
 
 
    	String ChatSamText= "Chat with a Licensed Insurance Agent";
@@ -1051,8 +1057,10 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	public PharmacySearchPage navigateToPharmacyLocator() {
 		//checkModelPopup(driver);
-		Actions action = new Actions(driver);
-		action.moveToElement(navigationSectionHomeLink).moveToElement(ourPlansHoverLink).build().perform();
+//		Actions action = new Actions(driver);
+//		action.moveToElement(navigationSectionHomeLink).moveToElement(ourPlansHoverLink).build().perform();
+		jsMouseOver(navigationSectionHomeLink);
+		jsMouseOver(ourPlansHoverLink);
 		pharmacylocator.click();
 		CommonUtility.checkPageIsReadyNew(driver);
 		if (driver.getTitle().toLowerCase().contains((PageTitleConstants.BLAYER_LOCATE_A_PHARMACY_UNITEDHEALTHCARE).toLowerCase())) {
@@ -1808,13 +1816,13 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			validateNew(headerSignInLink);
 			validateNew(headerRegisterLink);
 			if(driver.getCurrentUrl().contains("aarpmedicareplans")) {
-				validateNew(visitAARPLink);
-				validateNew(AARPlogo);
+				validateNew(visitAARPLink);	
 			}
 			else
 			{
 				System.out.println("UHC Medicare solutions site loaded");
 			}
+			validateLogo();
 			validateNew(visitorprofileicon);
 		}
 		
@@ -1837,8 +1845,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			// TODO Auto-generated method stub
 			if(driver.getCurrentUrl().contains("aarpmedicareplans")) {
 				validateNew(AARPlogo);
-				WebElement AARPLogo = driver.findElement(By.xpath("//a[contains(@id, 'aarpSVGLogo')]"));
-				WebElement UHCLogo = driver.findElement(By.xpath("//a[contains(@id, 'uhcSVGLogo')]"));
+				WebElement AARPLogo = driver.findElement(By.xpath("//*[contains(@id, 'aarpSVGLogo')]"));
+				WebElement UHCLogo = driver.findElement(By.xpath("//*[contains(@id, 'uhcSVGLogo')]"));
 				if (AARPLogo.isDisplayed() && AARPLogo.isEnabled() && !UHCLogo.isDisplayed()) {
 					Assert.assertTrue(true);
 					System.out.println("Correct AARP Logo is Displayed");
@@ -1847,8 +1855,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 				}
 			}
 			else {
-				WebElement AARPLogo = driver.findElement(By.xpath("//a[contains(@id, 'aarpSVGLogo')]"));
-				WebElement UHCLogo = driver.findElement(By.xpath("//a[contains(@id, 'uhcSVGLogo')]"));
+				WebElement AARPLogo = driver.findElement(By.xpath("//*[contains(@id, 'aarpSVGLogo')]"));
+				WebElement UHCLogo = driver.findElement(By.xpath("//*[contains(@id, 'uhcSVGLogo')]"));
 				if (UHCLogo.isDisplayed() && UHCLogo.isEnabled() && !AARPLogo.isDisplayed()) {
 					Assert.assertTrue(true);
 					System.out.println("Correct UHC Logo is Displayed");
@@ -1880,20 +1888,23 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 		
 		public void headerRegisterLink() {
-			if (headerRegisterLink.isDisplayed() && headerRegisterLink.isEnabled()) {
+			validateNew(headerRegisterLink);
 				Assert.assertTrue(true);
-				System.out.println("Register link is displayed on home page");
-			} else {
-				Assert.fail("Register link is not found/ displayed on home page");
-			}
+			jsClickNew(headerRegisterLink);
+			
+			if(validate(registerFirstName))
+				System.out.println("Register link is displayed in the header");
+			else 
+				Assert.fail("Register link did not lead to the right page");
+			
 
 		}
 		
 		public void validatevisitorprofile() {
 			if (visitorprofileicon.isDisplayed()) {
 
-				Actions actions = new Actions(driver);
-				actions.moveToElement(visitorprofileicon).perform();
+//				Actions actions = new Actions(driver);
+//				actions.moveToElement(visitorprofileicon).perform();
 				jsMouseOver(visitorprofileicon);
 
 				System.out.println("Hover over visitor profile completed");
@@ -1915,7 +1926,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			waitForPageLoadSafari();
 			CheckiPerseptions();
 			CommonUtility.waitForPageLoadNew(driver, GuestProfile, 30);
-			if (driver.getCurrentUrl().contains("profile/guest")) {
+			if (driver.getCurrentUrl().contains("profile")) {
 				Assert.assertTrue(true);
 				System.out.println("Visitor Profile Page opens successsfully");
 			} else {
@@ -1924,7 +1935,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			driver.navigate().back();
 			CheckPageLoad();
 			waitForPageLoadSafari();
-			CheckiPerseptions();
+			//CheckiPerseptions();
 
 			CommonUtility.waitForPageLoadNew(driver, findPlansButton, 30);
 		}
@@ -2119,9 +2130,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			validateNew(stateDropDown);
 			selectFromDropDownByValue(stateDropDown, "California");
 
-			String StateSessionStorage = ReturnDriverStorage(driver, "sessionStorage", "ucp_geotrackingState");
+		//	String StateSessionStorage = ReturnDriverStorage(driver, "sessionStorage", "ucp_geotrackingState");
 
-//			String StateSessionStorage =  returnDriverStorageJS("sessionStorage", "ucp_geotrackingState");
+		String StateSessionStorage =  returnDriverStorageJS("sessionStorage", "ucp_geotrackingState");
 					//ReturnDriverStorage(driver, "sessionStorage", "ucp_geotrackingState");
 
 			System.out.println("State selected : California");
@@ -2611,7 +2622,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		public void validateSubtitle() {
         threadsleep(5);
         System.out.println("validating the sub header");
-        Assert.assertEquals(UHCICSubTiltle.getText(), "UnitedHealthcare Insurance Company (UnitedHealthcare)");
+        Assert.assertEquals(UHCICSubTitle.getText(), "UnitedHealthcare Insurance Company (UnitedHealthcare)");
 
 }
 		
@@ -2663,5 +2674,23 @@ public class AcquisitionHomePage extends GlobalWebElements {
 				jsMouseOver(ShopForaplan);
 				System.out.println("Hover over Shop for a Plan completed");
 			}
-		}		
+		}	
+		
+		public void clickVisitAARPHeaderLink() {
+			if(driver.getCurrentUrl().contains("aarpmedicareplans")) {
+				jsClickNew(visitAARPHeaderLink);
+				if(!driver.getCurrentUrl().contains("aarp.org"))
+					Assert.fail("Visit AARP link did not lead to the right page");
+			}
+			
+		}
+		
+		public void clickVisitAARPFooterLink() {
+			if(driver.getCurrentUrl().contains("aarpmedicareplans")) {
+				jsClickNew(visitAARPFooterLink);
+				if(!driver.getCurrentUrl().contains("aarp.org"))
+					Assert.fail("Visit AARP link did not lead to the right page");
+			}
+		}
+
 }
