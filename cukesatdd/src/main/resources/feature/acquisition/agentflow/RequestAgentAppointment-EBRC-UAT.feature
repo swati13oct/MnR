@@ -31,7 +31,7 @@ Scenario Outline: <scenario> Verify request an appointment through <pageName>
       |E2E Scenario 2_AMP          |	AARP  | shop/medicare-advantage-plans.html                          | ShopPlan: Shop MA Plan       | https://www.myuhcagent.com/| 
 	  |E2E Scenario 2_AMP	       |AARP	| shop/medicare-supplement-plans.html              | ShopPlan: Shop Med Supp Plan |	 https://www.myuhcagent.com/| 		
       |E2E Scenario 2_AMP       |  	AARP	| shop/prescription-drug-plans.html                | ShopPlan: Shop PDP Plan      |  https://www.myuhcagent.com/| 		 
-       |E2E Scenario 2_AMP       |  	AARP	| shop/dual-special-needs-plans.html               | ShopPlan: Shop Medsupp Plan      |  https://www.myuhcagent.com/| 		 
+       |E2E Scenario 2_AMP      |  	AARP	| shop/dual-special-needs-plans.html               | ShopPlan: Shop Medsupp Plan      |  https://www.myuhcagent.com/| 		 
       
       
       
