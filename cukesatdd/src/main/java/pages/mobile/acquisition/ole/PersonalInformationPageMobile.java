@@ -105,10 +105,10 @@ public class PersonalInformationPageMobile extends UhcDriver{
 	@FindBy(id = "city0")
 	private WebElement MailingAdd_City;
 
-	@FindBy(xpath = "//*[@id='constantStates' or @id = 'state0']")
+	@FindBy(xpath = "//*[@id='constantStates' or @id = 'state']")
 	private WebElement MailingAdd_State_DropDown;
 
-	@FindBy(xpath = "//*[@id='zipCode0' or @id = 'Zip0']")
+	@FindBy(xpath = "//*[@id='zipCode' or @id = 'Zip0']")
 	private WebElement MailingAdd_Zip;
 
 	@FindBy(id = "emailAddressQuestion.emailAddress")
@@ -156,8 +156,7 @@ public class PersonalInformationPageMobile extends UhcDriver{
 		String Mailing_State = memberDetailsMap.get("Mailing_State");
 		String Mailing_Zip = memberDetailsMap.get("Mailing_Zip");
 		String EmailAddress = memberDetailsMap.get("Email");
-		JavascriptExecutor jse = (JavascriptExecutor) driver;
-		jse.executeScript("window.scrollBy(0,-100)", "");
+		
 		System.out.println("devansh is here to fix the issue");
 		/*sendkeysNew(firstNameField, FirstName);
 		sendkeysNew(lastNameField, LastName);
@@ -191,17 +190,19 @@ public class PersonalInformationPageMobile extends UhcDriver{
 		
 		PermanentAdd_City.sendKeys(Perm_city);
 		System.out.println("Mailing Question : "+MailingQuestion);
-		if(MailingQuestion.equalsIgnoreCase("no")){
-			SameMailingAddressNo.click();
+		//if(MailingQuestion.equalsIgnoreCase("no")){
+			//SameMailingAddressNo.click();
 			//CommonUtility.waitForPageLoadNew(driver,MailingAdd_Street, 30);
-			MailingAdd_Street.sendKeys(Mailing_Street);
-			MailingAdd_City.sendKeys(Mailing_City);
+		JavascriptExecutor jse = (JavascriptExecutor) driver;
+		jse.executeScript("window.scrollBy(0,100)", "");
+			//MailingAdd_Street.sendKeys(Mailing_Street);
+			//MailingAdd_City.sendKeys(Mailing_City);
 			selectFromDropDownByValue(MailingAdd_State_DropDown,Mailing_State);
 			//Select SelectState = new Select(MailingAdd_State_DropDown);
 			//SelectState.selectByValue(Mailing_State);
 			
 			MailingAdd_Zip.sendKeys(Mailing_Zip);
-		}
+		//}
 		Email.sendKeys(EmailAddress);
 		if(NextBtn.isEnabled()){
 			System.out.println("Next Button is Enabled : All Required Details are entered");
