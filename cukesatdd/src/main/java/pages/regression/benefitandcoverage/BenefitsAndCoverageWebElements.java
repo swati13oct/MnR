@@ -249,12 +249,17 @@ public class BenefitsAndCoverageWebElements extends UhcDriver {
 	protected WebElement RetailDrugCost_Table1; 
 
 	@FindBy(id = "mapdPageNonLisForPMail")
-	protected WebElement preferedMail_Table1PDP;
+	protected WebElement preferedMail_DrugTable;
 
 	@FindBy(id = "mapdPageNonLisForSRetail")
-	protected WebElement standardDetail_Table1PDP;
+	protected WebElement standardRetail_DrugTable;
+	
+	@FindBy(id = "mapdPageNonLisForPRetail")
+	protected WebElement preferredRetail_DrugTable;
 
-
+	@FindBy(id="mapdPageLis")
+	protected WebElement Lis_DrugTable;
+	
 	@FindBy(id = "waystosave")
 	protected WebElement waysToSave;
 
@@ -709,7 +714,7 @@ public class BenefitsAndCoverageWebElements extends UhcDriver {
 	protected WebElement cologoImage;
 
 	@FindBy(xpath = "//*[contains(@class, 'table-white atdd-bnc-standrdretailpharmcytable')]")
-	protected WebElement drugTableNonLisMember;
+	protected WebElement drugTableNonLisMember_stdRetail;
 
 	@FindBy(id = "standard_ads-header")
 	protected List<WebElement> annualDeductibleColumnFederal;
@@ -1105,6 +1110,15 @@ public class BenefitsAndCoverageWebElements extends UhcDriver {
 	
 	@FindBy(xpath = "//h1[text()='Benefit Summary']")
 	protected WebElement coverageBenefitsNewHeader;
+	
+	@FindBy(xpath="//p[text()='To view more details regarding your plan benefits, you may view your Benefits Highlights ']/a")
+	protected WebElement medCopayBenefitsLink;
+
+	@FindBy(xpath="//p[text()='To view more details regarding your plan benefits, you may view your Benefits Highlights ']")
+	protected WebElement medCopayText;
+	
+	@FindBy(xpath = "//*[contains(@class,'tdd-hospitalvisits-title')]")
+	protected WebElement InPatientHospitalCare;
 	
 	public BenefitsAndCoverageWebElements(WebDriver driver) {
 		super(driver);

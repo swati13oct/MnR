@@ -2,6 +2,7 @@ package acceptancetests.memberredesign.benefitandcoverage;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -11,7 +12,9 @@ import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import org.junit.Assert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acceptancetests.data.CommonConstants;
@@ -19,6 +22,7 @@ import acceptancetests.data.LoginCommonConstants;
 import acceptancetests.data.PageConstants;
 import acceptancetests.data.PageConstantsMnR;
 import acceptancetests.memberredesign.claims.ClaimsCommonConstants;
+import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
 import cucumber.api.java.en.And;
@@ -35,7 +39,7 @@ import pages.regression.benefitandcoverage.ValueAddedServicepage;
 import pages.regression.testharness.TestHarness;
 
 /**
- * Functionality: Benefits and Coverage page
+ * Functionality: Benefits and Coverage page 
  */
 public class BenefitsAndCoverageUmsStepDefinition {
 
@@ -763,7 +767,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	/** 
 	 * @toDo : Validates the Locate a Pharmacy button 
 	 */
-	@And("^the user validates Locate a Pharmacy button should be visible")
+	@And("^the user validates Locate a Pharmacy button should be visible$")
 	public void user_validate_locatepharmacybutton(DataTable memberAttributes) {
 		System.out.println("***the user validates Locate a Pharmacy button should be visible***");
 		List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
@@ -817,7 +821,8 @@ public class BenefitsAndCoverageUmsStepDefinition {
 				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
 		// JSONObject
 		// benefitsandcoverageExectedJson=(JSONObject)loginScenario.getBean(PlanBenefitsAndCoverageCommonConstants.BENEFITS_AND_COVERAGE_EXPECTED);
-		benefitsCoveragePage.validate_drugCostDropdownoptions();
+		String memberType = (String) getLoginScenario().getBean(LoginCommonConstants.CATOGERY);
+		benefitsCoveragePage.validate_drugCostDropdownoptions(memberType);
 	}
 
 
@@ -881,7 +886,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	/** 
 	 * @toDo : Validates the Drug costs table  for  a Non Lis member
 	 */
-	@And("the user should see drug copay and discount table")
+	@And("^the user should see drug copay and discount table$")
 	public void user_validate_drugcopaydiscounttable(DataTable givenAttributes ) {
 		List<DataTableRow> memberAttributesRow = givenAttributes
 				.getGherkinRows();
@@ -1220,7 +1225,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	 */
 
 
-	@And("the user validates the Out of Pocket Max section")
+	@And("^the user validates the Out of Pocket Max section$")
 	public void user_validate_OutofPocket() {
 		System.out.println("***the user validates the Out of Pocket Max section***");
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
@@ -1801,7 +1806,8 @@ public class BenefitsAndCoverageUmsStepDefinition {
 
 		BenefitsAndCoveragePage planBenefitsCoverage = (BenefitsAndCoveragePage) getLoginScenario()
 				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
-		planBenefitsCoverage.validatedrugCostSectionTexas();
+		String memberType=(String) getLoginScenario().getBean(LoginCommonConstants.CATOGERY);
+		planBenefitsCoverage.validatedrugCostSectionTexas(memberType);
 
 	}
 	@And("the user verifies the Retail Cost sharing table")
@@ -1810,7 +1816,8 @@ public class BenefitsAndCoverageUmsStepDefinition {
 
 		BenefitsAndCoveragePage planBenefitsCoverage = (BenefitsAndCoveragePage) getLoginScenario()
 				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
-		planBenefitsCoverage.validateRetailCostSharingdrugtable();
+		String memberType=(String) getLoginScenario().getBean(LoginCommonConstants.CATOGERY);
+		planBenefitsCoverage.validateRetailCostSharingdrugtable(memberType);
 
 	}
 	@And("the user verifies the Mail Order Cost sharing table")
@@ -1819,7 +1826,8 @@ public class BenefitsAndCoverageUmsStepDefinition {
 
 		BenefitsAndCoveragePage planBenefitsCoverage = (BenefitsAndCoveragePage) getLoginScenario()
 				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
-		planBenefitsCoverage.validateMailOrderCostSharing_Drugtable();
+		String memberType=(String) getLoginScenario().getBean(LoginCommonConstants.CATOGERY);
+		planBenefitsCoverage.validateMailOrderCostSharing_Drugtable(memberType);
 
 	}
 
@@ -1992,7 +2000,8 @@ public class BenefitsAndCoverageUmsStepDefinition {
 			planId=4;
 		if(planType.equalsIgnoreCase("SSUP"))
 			planId=5;
-
+		if(planType.equalsIgnoreCase("DSNP-MAPD"))
+			planId=6;
 
 		switch (planId) { 
 		case 1: 
@@ -2015,7 +2024,9 @@ public class BenefitsAndCoverageUmsStepDefinition {
 			benefitsCoveragePage.verifyPresenceOfJumpLinksSSUP(rider,planType,memberType);
 			break;
 
-
+	    case 6: 
+			benefitsCoveragePage.verifyPresenceOfJumpLinksDSNP(planType,memberType);
+			break;
 		default: 
 			System.out.println("Plan Not Found");
 			break;
@@ -2060,7 +2071,9 @@ public class BenefitsAndCoverageUmsStepDefinition {
 			planId=4;
 		if(planType.equalsIgnoreCase("SSUP"))
 			planId=5;
-
+		if(planType.equalsIgnoreCase("DSNP-MAPD"))
+			planId=6; 
+		
 		switch (planId) { 
 		case 1: 
 			benefitsCoveragePage.clicksOnJumpLinksAndCheckRespectiveSectionsMAPD(rider,planType,memberType);
@@ -2080,6 +2093,10 @@ public class BenefitsAndCoverageUmsStepDefinition {
 
 		case 5: 
 			benefitsCoveragePage.clicksOnJumpLinksAndCheckRespectiveSectionsSSUP(rider,planType,memberType);
+			break;
+			
+		case 6: 
+			benefitsCoveragePage.clicksOnJumpLinksAndCheckRespectiveSectionsDSNP(planType,memberType);
 			break;
 
 		default: 
@@ -2180,11 +2197,316 @@ public class BenefitsAndCoverageUmsStepDefinition {
 		benefitsCoveragePage.validate_provider_search_link();
 	}
 
-	@And("the user just validates the fields in Primarycare Provider section")
+	@And("^the user just validates the fields in Primarycare Provider section$")
 	public void validatePrimaryCareProviderSection() {
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
 				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
 		benefitsCoveragePage.validatePrimaryCareProviderSection();
 	}
 
+	@And("^the user validates headers on Bnc page for Dsnp indi members$")
+	public void user_validate_Dsnp_Headers(DataTable memberAttributes) {
+		List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		String plantype = memberAttributesMap.get("Plan Type");
+		System.out.println("TEST - "+plantype);
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+		if (benefitsCoveragePage==null) {
+			System.out.println("TEST - page is null");
+		}
+		benefitsCoveragePage.validateHeaders(plantype);
+	}
+
+	@And ("^the user validates the Out of Pocket Max section for Dsnp indi member$")
+	public void user_validate_OutofPocketFor_DsnpIndiMember(DataTable memberAttributes) {
+		List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		String plantype = memberAttributesMap.get("Plan Type");
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+		benefitsCoveragePage.validateOutofPocketMax(plantype);
+	}
+
+	@Given("^user access retiree pre-enrollment site$")
+	public void access_retiree_preenrollment_site() throws InterruptedException {
+		MRScenario m=new MRScenario();
+		WebDriver wd=m.getWebDriverNew();
+
+		String testUrl="";
+		if (MRScenario.environment.contains("stage")) {
+			testUrl="https://www.stage-uhcretiree.uhc.com/fehbp/home.html";
+		} else if (MRScenario.environment.equalsIgnoreCase("offline")) {
+			testUrl="https://offline.uhcretiree.com/fehbp/home.html";
+		} else if (MRScenario.environment.equalsIgnoreCase("prod")) {
+			testUrl="https://uhcretiree.com/fehbp/home.html";
+		} else {
+			Assert.assertTrue("PROBLEM - Aborting test, this test can only be validate on stage, or offline-prod, or online-prod.  current env='"+MRScenario.environment+"'", false);
+		}
+		wd.get(testUrl);
+		CommonUtility.checkPageIsReadyNew(wd);
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+	}
+	
+	@Then("^user validate retiree pre-enrollment destination url$")
+	public void validate_retiree_preenrollment_url() {
+		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		String expUrl="/fehbra/home.html";
+		String actUrl=wd.getCurrentUrl();
+		Assert.assertTrue("PROBLEM - retiree pre-enrollment destination url is not as expected. "
+				+ "Expect to contains '"+expUrl+"' | Actual='"+actUrl+"'", actUrl.contains(expUrl));
+	}
+
+	public static Map<String, String> parseInputArguments(DataTable memberAttributes) {
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0), 
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		return memberAttributesMap;
+	}
+	
+	@Then("^the user validate drug cost table display behavior$")
+	public void vaoidateDrugCostTblBehavior(DataTable memberAttributes) throws InterruptedException {
+		
+		Map<String, String> memberAttributesMap=parseInputArguments(memberAttributes);
+		String planType=memberAttributesMap.get("Plan Type");
+		String memberType=memberAttributesMap.get("Member Type");
+		String copayCategory=memberAttributesMap.get("Copay Category");
+		String insulin=memberAttributesMap.get("Insulin");
+		String deductible=memberAttributesMap.get("Deductible");
+		getLoginScenario().saveBean(BenefitsAndCoverageCommonConstants.TEST_PLAN_TYPE, planType);
+		getLoginScenario().saveBean(BenefitsAndCoverageCommonConstants.TEST_MEMBER_TYPE, memberType);
+		getLoginScenario().saveBean(BenefitsAndCoverageCommonConstants.TEST_COPAY_CATEGORY, copayCategory);
+		getLoginScenario().saveBean(BenefitsAndCoverageCommonConstants.TEST_INSULIN, insulin);
+		getLoginScenario().saveBean(BenefitsAndCoverageCommonConstants.TEST_DEDUCTIBLE, deductible);
+
+		BenefitsAndCoveragePage bncPg = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
+
+		Date currentDate=bncPg.getCurrentSystemDate();
+		String dateStr=bncPg.convertDateToStrFormat_MMDDYYYY(currentDate);
+		Assert.assertTrue("SKIP - scenario is for 2021 validation, current env is on system date='"+dateStr+"'", dateStr.contains("2021"));
+
+		Assert.assertTrue("PROBLEM - this step doesn't support planType '"+planType+"'.  Only support 'MAPD' related plan or 'PDP'", 
+				planType.toUpperCase().contains("MAPD") || planType.toUpperCase().equals("PDP") 
+				|| planType.toUpperCase().equals("CSNP_PCP")
+				|| planType.toUpperCase().equals("CSNP_MAPD")
+				|| planType.toUpperCase().equals("ISNP_MAPD"));
+		
+		
+		Assert.assertTrue("TODO - need to code behavior for deductible type="+deductible, 
+				deductible.equals("NoD")||deductible.equals("T12NoD_T345D")||deductible.equals("T123NoD_T45D")
+				||deductible.equals("NoTier")||deductible.equals("T12345"));
+		
+		Assert.assertTrue("TODO - need to code behavior for insulin type="+insulin, 
+				insulin.equals("hasInsulin")||insulin.equals("nonInsulin"));
+		
+		if (insulin.equals("hasInsulin")) {
+			if (planType.toUpperCase().equals("MAPD")) {
+				List<String> options=bncPg.getDrugDropDownOptions();
+				for (int i=0; i<options.size(); i++) {
+					String optionTxt=options.get(i);
+					if (optionTxt.equals("Standard Retail Pharmacy")) {
+						bncPg.selectDrugTblDropDownOption(optionTxt);
+						if (deductible.equals("NoD")) 
+							bncPg.validateDrgTbl_stdRetPha_mapd_noD_hasInsulin();
+						else if (deductible.equals("T12NoD_T345D")) 
+							bncPg.validateDrgTbl_stdRetPha_mapd_T12NoD_T345D_hasInsulin();
+						else if (deductible.equals("T123NoD_T45D")) 
+							bncPg.validateDrgTbl_stdRetPha_mapd_T123NoD_T45D_hasInsulin();
+					} else if (optionTxt.equals("Preferred Mail Service Pharmacy")) {
+						bncPg.selectDrugTblDropDownOption(optionTxt);
+						if (deductible.equals("NoD")) 
+							bncPg.validateDrgTbl_preMaiSerPha_mapd_noD_hasInsulin();
+						else if (deductible.equals("T12NoD_T345D")) 
+							bncPg.validateDrgTbl_preMaiSerPha_mapd_T12NoD_T345D_hasInsulin();
+						else if (deductible.equals("T123NoD_T45D")) 
+							bncPg.validateDrgTbl_preMaiSerPha_mapd_T123NoD_T45D_hasInsulin();
+					} else if (optionTxt.equals("Preferred Retail Pharmacy")) {
+						bncPg.selectDrugTblDropDownOption(optionTxt);
+						if (deductible.equals("NoD")) 
+							bncPg.validateDrgTbl_preRetail_mapd_noD_hasInsulin();
+						else if (deductible.equals("T12NoD_T345D")) 
+							bncPg.validateDrgTbl_preRetail_mapd_T12NoD_T345D_hasInsulin();
+						else if (deductible.equals("T123NoD_T45D")) 
+							bncPg.validateDrgTbl_preRetail_mapd_T123NoD_T45D_hasInsulin();
+					} else {
+						Assert.assertTrue("TODO - optionTxt="+optionTxt, false);
+					}
+				}
+			} else if (planType.toUpperCase().equals("PDP")) {
+				List<String> options=bncPg.getDrugDropDownOptions();
+				for (int i=0; i<options.size(); i++) {
+					String optionTxt=options.get(i);
+					if (optionTxt.equals("Standard Retail Pharmacy")) {
+						bncPg.selectDrugTblDropDownOption(optionTxt);
+						if (deductible.equals("NoD")) 
+							bncPg.validateDrgTbl_stdRetPha_pdp_noD_hasInsulin();
+						else if (deductible.equals("T12NoD_T345D")) 
+							bncPg.validateDrgTbl_stdRetPha_pdp_T12NoD_T345D_hasInsulin();
+						else if (deductible.equals("T123NoD_T45D")) 
+							bncPg.validateDrgTbl_stdRetPha_pdp_T123NoD_T45D_hasInsulin();
+					} else if (optionTxt.equals("Preferred Mail Service Pharmacy")) {
+						bncPg.selectDrugTblDropDownOption(optionTxt);
+						if (deductible.equals("NoD")) 
+							bncPg.validateDrgTbl_preMaiSerPha_pdp_noD_hasInsulin();
+						else if (deductible.equals("T12NoD_T345D")) 
+							bncPg.validateDrgTbl_preMaiSerPha_pdp_T12NoD_T345D_hasInsulin();
+						else if (deductible.equals("T123NoD_T45D")) 
+							bncPg.validateDrgTbl_preMaiSerPha_pdp_T123NoD_T45D_hasInsulin();
+					} else if (optionTxt.equals("Preferred Retail Pharmacy")) {
+						bncPg.selectDrugTblDropDownOption(optionTxt);
+						if (deductible.equals("NoD")) 
+							bncPg.validateDrgTbl_preRetail_pdp_noD_hasInsulin();
+						else if (deductible.equals("T12NoD_T345D")) 
+							bncPg.validateDrgTbl_preRetail_pdp_T12NoD_T345D_hasInsulin();
+						else if (deductible.equals("T123NoD_T45D")) 
+							bncPg.validateDrgTbl_preRetail_pdp_T123NoD_T45D_hasInsulin();
+					} else {
+						Assert.assertTrue("TODO - optionTxt="+optionTxt, false);
+					}
+				}
+			} else if (planType.toUpperCase().equals("CSNP_PCP")) {
+				List<String> options=bncPg.getDrugDropDownOptions();
+				for (int i=0; i<options.size(); i++) {
+					String optionTxt=options.get(i);
+					if (optionTxt.equals("Standard Retail Pharmacy")) {
+						bncPg.selectDrugTblDropDownOption(optionTxt);
+						if (deductible.equals("NoD")) 
+							bncPg.validateDrgTbl_stdRetPha_csnppcp_noD_hasInsulin();
+						else if (deductible.equals("T12NoD_T345D")) 
+							bncPg.validateDrgTbl_stdRetPha_csnppcp_T12NoD_T345D_hasInsulin();
+						else if (deductible.equals("T123NoD_T45D")) 
+							bncPg.validateDrgTbl_stdRetPha_csnppcp_T123NoD_T45D_hasInsulin();
+					} else if (optionTxt.equals("Preferred Mail Service Pharmacy")) {
+						bncPg.selectDrugTblDropDownOption(optionTxt);
+						if (deductible.equals("NoD")) 
+							bncPg.validateDrgTbl_preMaiSerPha_csnppcp_noD_hasInsulin();
+						else if (deductible.equals("T12NoD_T345D")) 
+							bncPg.validateDrgTbl_preMaiSerPha_csnppcp_T12NoD_T345D_hasInsulin();
+						else if (deductible.equals("T123NoD_T45D")) 
+							bncPg.validateDrgTbl_preMaiSerPha_csnppcp_T123NoD_T45D_hasInsulin();
+					} else if (optionTxt.equals("Preferred Retail Pharmacy")) {
+						bncPg.selectDrugTblDropDownOption(optionTxt);
+						if (deductible.equals("NoD")) 
+							bncPg.validateDrgTbl_preRetail_csnppcp_noD_hasInsulin();
+						else if (deductible.equals("T12NoD_T345D")) 
+							bncPg.validateDrgTbl_preRetail_csnppcp_T12NoD_T345D_hasInsulin();
+						else if (deductible.equals("T123NoD_T45D")) 
+							bncPg.validateDrgTbl_preRetail_csnppcp_T123NoD_T45D_hasInsulin();
+					} else {
+						Assert.assertTrue("TODO - optionTxt="+optionTxt, false);
+					}
+				}
+			} else if (planType.toUpperCase().equals("CSNP_MAPD")) {
+				List<String> options=bncPg.getDrugDropDownOptions();
+				for (int i=0; i<options.size(); i++) {
+					String optionTxt=options.get(i);
+					if (optionTxt.equals("Standard Retail Pharmacy")) {
+						bncPg.selectDrugTblDropDownOption(optionTxt);
+						if (deductible.equals("NoD")) 
+							bncPg.validateDrgTbl_stdRetPha_csnpmsap_noD_hasInsulin();
+						else if (deductible.equals("T12NoD_T345D")) 
+							bncPg.validateDrgTbl_stdRetPha_csnpmsap_T12NoD_T345D_hasInsulin();
+						else if (deductible.equals("T123NoD_T45D")) 
+							bncPg.validateDrgTbl_stdRetPha_csnpmsap_T123NoD_T45D_hasInsulin();
+					} else if (optionTxt.equals("Preferred Mail Service Pharmacy")) {
+						bncPg.selectDrugTblDropDownOption(optionTxt);
+						if (deductible.equals("NoD")) 
+							bncPg.validateDrgTbl_preMaiSerPha_csnpmsap_noD_hasInsulin();
+						else if (deductible.equals("T12NoD_T345D")) 
+							bncPg.validateDrgTbl_preMaiSerPha_csnpmsap_T12NoD_T345D_hasInsulin();
+						else if (deductible.equals("T123NoD_T45D")) 
+							bncPg.validateDrgTbl_preMaiSerPha_csnpmsap_T123NoD_T45D_hasInsulin();
+					} else if (optionTxt.equals("Preferred Retail Pharmacy")) {
+						bncPg.selectDrugTblDropDownOption(optionTxt);
+						if (deductible.equals("NoD")) 
+							bncPg.validateDrgTbl_preRetail_csnpmsap_noD_hasInsulin();
+						else if (deductible.equals("T12NoD_T345D")) 
+							bncPg.validateDrgTbl_preRetail_csnpmsap_T12NoD_T345D_hasInsulin();
+						else if (deductible.equals("T123NoD_T45D")) 
+							bncPg.validateDrgTbl_preRetail_csnpmsap_T123NoD_T45D_hasInsulin();
+					} else {
+						Assert.assertTrue("PROBLEM - DO NOT recognize this dropdown option. optionTxt="+optionTxt, false);
+					}
+				}
+			} else if (planType.toUpperCase().equals("ISNP_MAPD")) {
+				List<String> options=bncPg.getDrugDropDownOptions();
+				for (int i=0; i<options.size(); i++) {
+					String optionTxt=options.get(i);
+					if (optionTxt.equals("Standard Retail Pharmacy")) {
+						bncPg.selectDrugTblDropDownOption(optionTxt);
+						if (deductible.equals("NoD")) 
+							bncPg.validateDrgTbl_stdRetPha_isnpmsap_noD_hasInsulin();
+						else if (deductible.equals("T12NoD_T345D")) 
+							bncPg.validateDrgTbl_stdRetPha_isnpmsap_T12NoD_T345D_hasInsulin();
+						else if (deductible.equals("T123NoD_T45D")) 
+							bncPg.validateDrgTbl_stdRetPha_isnpmsap_T123NoD_T45D_hasInsulin();
+					} else if (optionTxt.equals("Preferred Mail Service Pharmacy")) {
+						bncPg.selectDrugTblDropDownOption(optionTxt);
+						if (deductible.equals("NoD")) 
+							bncPg.validateDrgTbl_preMaiSerPha_isnpmsap_noD_hasInsulin();
+						else if (deductible.equals("T12NoD_T345D")) 
+							bncPg.validateDrgTbl_preMaiSerPha_isnpmsap_T12NoD_T345D_hasInsulin();
+						else if (deductible.equals("T123NoD_T45D")) 
+							bncPg.validateDrgTbl_preMaiSerPha_isnpmsap_T123NoD_T45D_hasInsulin();
+					} else if (optionTxt.equals("Preferred Retail Pharmacy")) {
+						bncPg.selectDrugTblDropDownOption(optionTxt);
+						if (deductible.equals("NoD")) 
+							bncPg.validateDrgTbl_preRetail_isnpmsap_noD_hasInsulin();
+						else if (deductible.equals("T12NoD_T345D")) 
+							bncPg.validateDrgTbl_preRetail_isnpmsap_T12NoD_T345D_hasInsulin();
+						else if (deductible.equals("T123NoD_T45D")) 
+							bncPg.validateDrgTbl_preRetail_isnpmsap_T123NoD_T45D_hasInsulin();
+					} else {
+						Assert.assertTrue("TODO - optionTxt="+optionTxt, false);
+					}
+				}
+			} 	
+		} else if (insulin.equals("nonInsulin")) {
+			//note: for cases w/o dropdown
+			if (!copayCategory.equals("NON LIS")) {
+				if (deductible.equals("NoTier")) 
+					bncPg.validateDrgTbl_mapd_Lis_NoTier_hasInsulin();
+				else
+					Assert.assertTrue("TODO - planType="+planType+" | memberType='"+memberType+"' | copayCategory='"+copayCategory+"' | deductible='"+deductible+"' | insulin='"+insulin+"'", false);
+				return;
+			} 
+			//note: for cases w/ dropdown
+			if (planType.toUpperCase().equals("MAPD")) {
+				List<String> options=bncPg.getDrugDropDownOptions();
+				for (int i=0; i<options.size(); i++) {
+					String optionTxt=options.get(i);
+					if (optionTxt.equals("Standard Retail Pharmacy")) {
+						bncPg.selectDrugTblDropDownOption(optionTxt);
+						if (deductible.equals("T12345")) 
+							bncPg.validateDrgTbl_stdRetPha_mapd_T12345_hasInsulin();
+					} else if (optionTxt.equals("Preferred Mail Service Pharmacy")) {
+						bncPg.selectDrugTblDropDownOption(optionTxt);
+						if (deductible.equals("T12345")) 
+							bncPg.validateDrgTbl_preMaiSerPha_mapd_T12345_hasInsulin();
+					} else if (optionTxt.equals("Preferred Retail Pharmacy")) {
+						bncPg.selectDrugTblDropDownOption(optionTxt);
+						if (deductible.equals("T12345")) 
+							bncPg.validateDrgTbl_preRetail_mapd_T12345_hasInsulin();
+					} else {
+						Assert.assertTrue("TODO - optionTxt="+optionTxt, false);
+					}
+				}
+			} else {
+				Assert.assertTrue("TODO - planType="+planType+" | memberType='"+memberType+"' | copayCategory='"+copayCategory+"' | deductible='"+deductible+"' | insulin='"+insulin+"'", false);
+			}
+		}
+	}
+	
 }//end of class

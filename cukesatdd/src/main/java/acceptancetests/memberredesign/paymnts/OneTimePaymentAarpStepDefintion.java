@@ -564,6 +564,20 @@ public class OneTimePaymentAarpStepDefintion {
 		}
 	}
 
+	@And("^the user moves to Go to Payment History Page button for one time payment$")
+	public void Go_toPayment_History_page_group()  {
+		ConfirmOneTimePaymentPage confirmOneTimePaymentPage = (ConfirmOneTimePaymentPage) getLoginScenario()
+				.getBean(PageConstants.CONFIRM_ONE_TIME_PAYMENT_PAGE);
+		
+		PaymentHistoryPage paymentHistoryPage = confirmOneTimePaymentPage.ScrollDownToBackButtonOneTimePayment();
+			
+			if (paymentHistoryPage != null) {
+			getLoginScenario().saveBean(PageConstants.Payments_History_Page, paymentHistoryPage);
+			System.out.println("User is on Payment History Page");
+		}
+	}
+
+	
 	@And("^the user confirms the values in AARP site$")
 	public void makes_one_time_payment_required_details() {
 		ConfirmOneTimePaymentPage confirmOneTimePayPage = (ConfirmOneTimePaymentPage) getLoginScenario()
@@ -1740,6 +1754,19 @@ public class OneTimePaymentAarpStepDefintion {
 		}
 	}
 
+	@Given("^Updated user navigates to Review Your One-Time Payment Information and selects agreement$")
+	public void Updated_user_navigates_to_Review_Your_One_Time_Payment_Information_and_selects_agreements_and_click_on_Submit_Button_for_Make_One_Time()
+			throws Throwable {
+		OneTimePaymentPage oneTimePaymentPage = (OneTimePaymentPage) getLoginScenario()
+				.getBean(PageConstants.ONE_TIME_PAYMENT_PAGE);
+		ConfirmOneTimePaymentPage confirmOneTimePaymentPage = oneTimePaymentPage
+				.selectAgreeAndClickOnSubmitPaymentsforOneTime_Updated();
+		if (confirmOneTimePaymentPage != null) {
+			getLoginScenario().saveBean(PageConstants.CONFIRM_ONE_TIME_PAYMENT_PAGE, confirmOneTimePaymentPage);
+			System.out.println("User is on One time confirmation page for Checking account");
+		}
+	}
+	
 	@Given("^user navigates to review your Automatic screen and selects agreements and click on Authorize Monthly payments Button for EFT$")
 	public void user_navigates_to_review_your_Automatic_screen_and_selects_agreements_and_click_on_Authorize_Monthly_payments_Button_for_EFT()
 			throws Throwable {
@@ -2119,6 +2146,18 @@ public class OneTimePaymentAarpStepDefintion {
 		}
 	}
 	
+	@Given("^user navigates to Review Payment Method Update screen and selects agreements and do not click on Contuine Button for EFT Ship$")
+	public void user_navigates_to_Review_Payment_Method_Update_screen_and_selects_agreements_and_do_not_click_on_Contuine_Button_for_EFT_Ship()
+			throws Throwable {
+		UpdateReviewPage updateReviewPage = (UpdateReviewPage) getLoginScenario()
+				.getBean(PageConstants.Update_Review_Page);
+		UpdateConfirmationPage updateConfirmationPage = updateReviewPage.selectAgreeAndClickOnContinueforEFTForShipUpdated();
+		if (updateConfirmationPage != null) {
+			getLoginScenario().saveBean(PageConstants.Update_Confirmation_Page, updateConfirmationPage);
+			
+		}
+	}
+	
 	@Then("^User navigates to payment confirmation page and verifies sucessful EFT for setup Recurring for Ship$")
 	public void user_navigates_to_payment_confirmation_page_and_verifies_sucessful_EFT_for_setup_Recurring_for_Ship()
 			throws Throwable {
@@ -2452,6 +2491,37 @@ public class OneTimePaymentAarpStepDefintion {
 }
 	@Then("^user navigates to payment overview screen$")
 	public void user_navigates_to_payment_overview_screen()
+			throws Throwable {
+		ReviewOneTimePaymentPage reviewOneTimePaymentsPage = (ReviewOneTimePaymentPage) getLoginScenario()
+				.getBean(PageConstants.Review_OneTime_Payments_Page);
+
+		ConfirmOneTimePaymentPage confirmOneTimePaymentPage = reviewOneTimePaymentsPage
+				.DoNotselectAgreeAndClickOnMakePayment();
+		if (confirmOneTimePaymentPage != null) {
+			getLoginScenario().saveBean(PageConstants.ONE_TIME_PAYMENT_PAGE, confirmOneTimePaymentPage);
+			System.out.println("User is on Review One time payments page");
+			getLoginScenario().saveBean(PageConstants.ALREADY_ENROLLED_FLAG,"false");
+
+			Assert.assertTrue(true);
+		}else {
+
+			boolean Validation_Status =reviewOneTimePaymentsPage.validate_onlyOnePaymentRequest_Message();
+
+			if(Validation_Status) {
+				System.out.println("Only one payment request message is Displayed in review one time PAGE : " + Validation_Status + " - Validation Passed");
+				getLoginScenario().saveBean(PageConstants.Review_OneTime_Payments_Page, reviewOneTimePaymentsPage);
+				getLoginScenario().saveBean(PageConstants.ALREADY_ENROLLED_FLAG, "true");
+				Assert.assertTrue(true);
+			}else{
+				System.out.println("Only one payment request message is NOT Displayed in review one time PAGE : "+Validation_Status);
+				Assert.fail();
+			}
+
+		}
+	}
+	
+	@Then("^user validates the information on Payment Review page$")
+	public void user_validates_to_payment_review_screen()
 			throws Throwable {
 		ReviewOneTimePaymentPage reviewOneTimePaymentsPage = (ReviewOneTimePaymentPage) getLoginScenario()
 				.getBean(PageConstants.Review_OneTime_Payments_Page);

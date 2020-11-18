@@ -2,7 +2,7 @@
 Feature: 1.12.2 Member Rally claims deeplink - Federal AARP and SHIP
 
   Background: If run on stage then feature security flag needs to be true
-     Given feature security flag must set to true when testing on stage env
+     Given feature security flag must set to true when testing on test env
       | Feature           | ClaimsMicroApp |
 
   #----- beginning of bookmark or deeplink validation for Fed-AARP INDIVIDUAL and Ship

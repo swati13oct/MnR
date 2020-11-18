@@ -736,4 +736,8 @@ public static final String STAGE_PAYMENT_DEEPLINK_lOGIN_PAGE= "paymentdeeplinklo
 	public static final String STAGE_VirtualVisit_DEEPLINK_lOGIN_PAGE="virtualVisitdeeplinklogin";
 
 	public static final String PLANDOCS_PAGE = "plandocs";
+	
+	public static final String EMAIL_AND_PRINT_UTIL = "emailandprintutil";
+
+	public static final String SHOP_PAGE = "shopPage";
 }

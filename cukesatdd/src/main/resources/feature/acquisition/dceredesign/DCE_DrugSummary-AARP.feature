@@ -7,8 +7,8 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
     When I access the acquisition DCE tool from home page
     Then the user validates Get Started Page
     When the user clicks on Add drugs button
-    And adds drugs in drug list page
-      | DrugName | <drugName> |
+    Then the user searches and adds the following Drug to Drug List
+      | DrugName | <drug1> |
     And clicks on Review drug cost button
     Then user should be navigated to zipcode and plan year capture page for AEP
     When user enters valid zipcode and county
@@ -20,7 +20,7 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
     And user verify the drug summary page
 
     Examples: 
-      | zipCode | plantype | county | isMultutiCounty | drugName | planname                                           |
+      | zipCode | plantype | county | isMultutiCounty | drug1 | planname                                           |
       |   10001 | MAPD     | none   | no              | Emsam    | AARP Medicare Advantage SecureHorizons Focus (HMO) |
 
   @DCE_DrugSummary_Page
@@ -32,8 +32,8 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
       | PagePath | <path>     |
     Then the user validates Get Started Page
     When the user clicks on Add drugs button
-    And adds drugs in drug list page
-      | DrugName | <drugName> |
+    Then the user searches and adds the following Drug to Drug List
+      | DrugName | <drug1> |
     And clicks on Review drug cost button
     Then user should be navigated to zipcode and plan year capture page for AEP
     When user enters valid zipcode and county
@@ -46,13 +46,13 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
 
     @dce_DrugSummary_Page_AARP
     Examples: 
-      | site | path                                             | pageName                   | drugName | zipCode |
+      | site | path                                             | pageName                   | drug1 | zipCode |
       | AARP | health-plans/estimate-drug-costs.html/getstarted | DCE Redesign - Get Started | Lipitor  |   90210 |
 
-    #@dce_DrugSummary_Page_UHC
-    #Examples: 
-     # | site | path                                             | pageName                   | drugName | zipCode |
-      #| UHC  | health-plans/estimate-drug-costs.html/getstarted | DCE Redesign - Get Started | Lipitor  |   90210 |
+    @dce_DrugSummary_Page_UHC
+    Examples: 
+     | site | path                                             | pageName                   | drug1 | zipCode |
+     | UHC  | health-plans/estimate-drug-costs.html/getstarted | DCE Redesign - Get Started | Lipitor  |   90210 |
 
   @drugSummary_SAM_Icon_AARP
   Scenario Outline: Test to verify SAM icon is visible on Drug summary page
@@ -62,8 +62,8 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
       | PagePath | <path>     |
     Then the user validates Get Started Page
     When the user clicks on Add drugs button
-    And adds drugs in drug list page
-      | DrugName | <drugName> |
+    Then the user searches and adds the following Drug to Drug List
+      | DrugName | <drug1> |
     And clicks on Review drug cost button
     Then user should be navigated to zipcode and plan year capture page for AEP
     When user enters valid zipcode and county
@@ -73,10 +73,10 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
     #Then load screen should be displayed in AARP
     And user should be navigated to Review drug cost estimate page
     Then the user validates whether call icon is visible on AARP
-    #Then the user validates whether chat Agent is Available on AARP
+    the user validates whether chat icon is visible on AARP
 
     Examples: 
-      | path                                             | pageName                   | drugName | zipCode |
+      | path                                             | pageName                   | drug1 | zipCode |
       | health-plans/estimate-drug-costs.html/getstarted | DCE Redesign - Get Started | Lipitor  |   90210 |
 
   @drugSummary_PlanToggle @F477157 @F472327 @F493728
@@ -87,8 +87,8 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
       | PagePath | <path>     |
     Then the user validates Get Started Page
     When the user clicks on Add drugs button
-    And adds drugs in drug list page
-      | DrugName | <drugName> |
+    Then the user searches and adds the following Drug to Drug List
+      | DrugName | <drug1> |
     And clicks on Review drug cost button
     Then user should be navigated to zipcode and plan year capture page for AEP
     When user enters valid zipcode and county
@@ -101,7 +101,7 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
     And user should be able to toggle between plan types
 
     Examples: 
-      | path                                             | pageName                   | drugName | zipCode |
+      | path                                             | pageName                   | drug1 | zipCode |
       | health-plans/estimate-drug-costs.html/getstarted | DCE Redesign - Get Started | Lipitor  |   90210 |
 
   @dCERedesign_PlanSave_AARP @F476042
@@ -112,8 +112,8 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
       | PagePath | <path>     |
     Then the user validates Get Started Page
     When the user clicks on Add drugs button
-    And adds drugs in drug list page
-      | DrugName | <drugName> |
+    Then the user searches and adds the following Drug to Drug List
+      | DrugName | <drug1> |
     And clicks on Review drug cost button
     Then user should be navigated to zipcode and plan year capture page for AEP
     When user enters valid zipcode and county
@@ -136,7 +136,7 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
       | SNP Plans  | <snptestPlans> |
 
     Examples: 
-      | path                                             | pageName                   | drugName | zipCode | testPlans                                                                                       | pdptestPlans                    | snptestPlans                               |
+      | path                                             | pageName                   | drug1 | zipCode | testPlans                                                                                       | pdptestPlans                    | snptestPlans                               |
       | health-plans/estimate-drug-costs.html/getstarted | DCE Redesign - Get Started | Emsam    |   10001 | UnitedHealthcare Medicare Advantage Choice Plan 4 (Regional PPO) | AARP MedicareRx Preferred (PDP) | UnitedHealthcare Dual Complete (HMO D-SNP) |
 
   @dCERedesign_ChangePharmacy_AARP @F426569
@@ -147,8 +147,8 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
       | PagePath | <path>     |
     Then the user validates Get Started Page
     When the user clicks on Add drugs button
-    And adds drugs in drug list page
-      | DrugName | <drugName> |
+    Then the user searches and adds the following Drug to Drug List
+      | DrugName | <drug1> |
     And clicks on Review drug cost button
     Then user should be navigated to zipcode and plan year capture page for AEP
     When user enters valid zipcode and county
@@ -165,7 +165,7 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
     Then the pharmacy name should be updated on summary page
 
     Examples: 
-      | path                                             | pageName                   | drugName | zipCode |
+      | path                                             | pageName                   | drug1 | zipCode |
       | health-plans/estimate-drug-costs.html/getstarted | DCE Redesign - Get Started | Lipitor  |   90001 |
 
   @dceRedesignSwitchToGenericDrug @F484185 @F495366
@@ -174,9 +174,9 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
     When I access the acquisition DCE tool from home page
     Then the user validates Get Started Page
     When the user clicks on Add drugs button
-    And adds drugs in drug list page
+    Then the user searches and adds the following Drug to Drug List
       | DrugName | <drug1> |
-    And adds drugs in drug list page
+    Then the user searches and adds the following Drug to Drug List
       | DrugName | <drug2> |
     And clicks on Review drug cost button
     Then user should be navigated to zipcode and plan year capture page for AEP
@@ -214,8 +214,8 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
       | PagePath | <path>     |
     Then the user validates Get Started Page
     When the user clicks on Add drugs button
-    And adds drugs in drug list page
-      | DrugName | <drugName> |
+    Then the user searches and adds the following Drug to Drug List
+      | DrugName | <drug1> |
     And clicks on Review drug cost button
     Then user should be navigated to zipcode and plan year capture page for AEP
     When user enters valid zipcode and county
@@ -233,7 +233,7 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
     Then the pharmacy name should be updated on details page
 
     Examples: 
-      | path                                             | pageName                   | drugName | zipCode |
+      | path                                             | pageName                   | drug1 | zipCode |
       | health-plans/estimate-drug-costs.html/getstarted | DCE Redesign - Get Started | Lipitor  |   90001 |
 
   @dceRedesignExtraHelpAlert @F477268 @F470669
@@ -242,8 +242,8 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
     When I access the acquisition DCE tool from home page
     Then the user validates Get Started Page
     When the user clicks on Add drugs button
-    And adds drugs in drug list page
-      | DrugName | <drugName> |
+    Then the user searches and adds the following Drug to Drug List
+      | DrugName | <drug1> |
     And clicks on Review drug cost button
     Then user should be navigated to zipcode and plan year capture page for AEP
     When user enters valid zipcode and county
@@ -258,7 +258,7 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
     And user should verify the drug extra qualification in drug pricing popup
 
     Examples: 
-      | zipCode | plantype | county | isMultutiCounty | drugName | planname                                           |
+      | zipCode | plantype | county | isMultutiCounty | drug1 | planname                                           |
       |   10001 | MAPD     | none   | no              | Emsam    | AARP Medicare Advantage SecureHorizons Focus (HMO) |
 
   @dceNoDefaultMAPDplan @F492296 @F493728
@@ -267,8 +267,8 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
     When I access the acquisition DCE tool from home page
     Then the user validates Get Started Page
     When the user clicks on Add drugs button
-     And adds drugs in drug list page
-      | DrugName | <drugName> |
+    Then the user searches and adds the following Drug to Drug List
+      | DrugName | <drug1> |
     And clicks on Review drug cost button
     Then user should be navigated to zipcode and plan year capture page for AEP
     When user enters valid zipcode and county
@@ -281,7 +281,7 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
     And user should be able to toggle between plan types
     
     Examples: 
-      | zipcode | plantype | county           | isMultutiCounty | drugName   |planname                        |
+      | zipcode | plantype | county           | isMultutiCounty | drug1   |planname                        |
       |   96799 | PDP      | Western District | no              | Orkambi |AARP MedicareRx Walgreens (PDP) |
 
   @dceSaveplanandBacktoplans @F492270
@@ -290,7 +290,7 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
     When I access the acquisition DCE tool from home page
     Then the user validates Get Started Page
     When the user clicks on Add drugs button
-    And adds drugs in drug list page
+    Then the user searches and adds the following Drug to Drug List
       | DrugName | <drug1> |
     And clicks on Review drug cost button
     Then user should be navigated to zipcode and plan year capture page for AEP
@@ -322,7 +322,7 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
     When I access the acquisition DCE tool from home page
     Then the user validates Get Started Page
     When the user clicks on Add drugs button
-    And adds drugs in drug list page
+    Then the user searches and adds the following Drug to Drug List
       | DrugName | <drug1> |
     And clicks on Review drug cost button
     Then user should be navigated to zipcode and plan year capture page for AEP
@@ -347,9 +347,9 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
     When I access the acquisition DCE tool from home page
     Then the user validates Get Started Page
     When the user clicks on Add drugs button
-    And adds drugs in drug list page
+    Then the user searches and adds the following Drug to Drug List
       | DrugName | <drug1> |
-    And adds drugs in drug list page
+    Then the user searches and adds the following Drug to Drug List
       | DrugName | <drug2> |
     And clicks on Review drug cost button
     Then user should be navigated to zipcode and plan year capture page for AEP
@@ -377,7 +377,7 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
     When I access the acquisition DCE tool from home page
     Then the user validates Get Started Page
     When the user clicks on Add drugs button
-    And adds drugs in drug list page
+    Then the user searches and adds the following Drug to Drug List
       | DrugName | <drug1> |
     And clicks on Review drug cost button
     Then user should be navigated to zipcode and plan year capture page for AEP
@@ -399,4 +399,3 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
     Examples: 
       | zipCode | drug1   | drugName1                     | 
       |   10001 | Lipitor | atorvastatin calcium TAB 20MG |
-  

@@ -30,7 +30,7 @@ import pages.acquisition.commonpages.VPPPlanSummaryPage;
  */
 
 public class ProviderSearchCommonStepDefinition {
-
+	
 	@Autowired
 	MRScenario loginScenario;
 
@@ -118,99 +118,99 @@ public class ProviderSearchCommonStepDefinition {
 //	
 //	
 //	
-//	/**
-//	 * @toDo: user performs plan search using following information
-//	 */
-//	@When("^the user clicks on Provider Search on the global header$")
-//	public void zipcode_details_in_aarp_site() {
-//		
-//		AcquisitionHomePage acquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
-//				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-//		
-//		ProviderSearchPage providerSearchPage = acquisitionhomepage.clicksOnRallyToolFromGlobalHeader();
-//
-//		if (providerSearchPage != null) {
-//			getLoginScenario().saveBean(PageConstants.PROVIDER_SEARCH_PAGE, providerSearchPage);
-//		} else {
-//			Assert.fail("Error Loading Rally tool from Global Header");
-//		}
-//	}
-//	
-//	/**
-//	 * @toDo: user Enters a zipcode
-//	 */
-//	@When("^the user enters the zipcode and select a plan on the Rally tool$")
-//	public void user_enters_the_zipcode_on_the_Rally_tool(DataTable givenAttributes) {
-//
-//			List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-//			Map<String, String> memberAttributesMap = new HashMap<String, String>();
-//			for (int i = 0; i < memberAttributesRow.size(); i++) {
-//
-//				memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-//						memberAttributesRow.get(i).getCells().get(1));
-//			}
-//
-//			String zipcode = memberAttributesMap.get("Zip Code");
-//			String planName = memberAttributesMap.get("Plan Name");
-//			String year = memberAttributesMap.get("Year");
-//
-//		{
-//			ProviderSearchPage providerSearchPage = (ProviderSearchPage) getLoginScenario()
-//					.getBean(PageConstants.PROVIDER_SEARCH_PAGE);
-//			 providerSearchPage.entersZipcodeAndSelectPlanName(zipcode,planName,year);
-//			
-//
-//		}
-//	}
-//	
-//	/**
-//	 * @toDo: user Enters a zipcode
-//	 */
-//	@When("^the user enters the zipcode and counts the plan Ulayer$")
-//	public void user_enters_the_zipcode_and_counts_plan(DataTable givenAttributes) {
-//
-//			List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-//			Map<String, String> memberAttributesMap = new HashMap<String, String>();
-//			for (int i = 0; i < memberAttributesRow.size(); i++) {
-//
-//				memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-//						memberAttributesRow.get(i).getCells().get(1));
-//			}
-//
-//			String zipcode = memberAttributesMap.get("Zip Code");
-//			String plancount = memberAttributesMap.get("Plancount");
-//			String planYear = memberAttributesMap.get("Year");
-//
-//		{
-//			ProviderSearchPage providerSearchPage = (ProviderSearchPage) getLoginScenario()
-//					.getBean(PageConstants.PROVIDER_SEARCH_PAGE);
-//			
-//			 int intPlanCounts =providerSearchPage.entersZipcodeAndPlancount(zipcode,planYear);
-//			 int strplancount = Integer.parseInt(plancount);
-//			 System.out.println("expected=="+strplancount +"===actual==" +intPlanCounts);
-//			 if(intPlanCounts!=strplancount){
-//				Assert.fail("Plan count is not matching");
-//			 }
-//			
-//
-//		}
-//	}
-//	
-//	
+	/**
+	 * @toDo: user performs plan search using following information
+	 */
+	@When("^the user clicks on Provider Search on the global header for site$")
+	public void zipcode_details_in_site() {
+		
+		AcquisitionHomePage acquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		
+		ProviderSearchPage providerSearchPage = acquisitionhomepage.clicksOnRallyToolFromGlobalHeader();
+
+		if (providerSearchPage != null) {
+			getLoginScenario().saveBean(PageConstants.PROVIDER_SEARCH_PAGE, providerSearchPage);
+		} else {
+			Assert.fail("Error Loading Rally tool from Global Header");
+		}
+	}
+	
+	/**
+	 * @toDo: user Enters a zipcode
+	 */
+	@When("^the user enters the zipcode and select a plan on the Rally tool for given zipcode$")
+	public void user_enters_the_zipcode_on_the_Rally_tool(DataTable givenAttributes) {
+
+			List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+			Map<String, String> memberAttributesMap = new HashMap<String, String>();
+			for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+				memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+						memberAttributesRow.get(i).getCells().get(1));
+			}
+
+			String zipcode = memberAttributesMap.get("Zip Code");
+			String planName = memberAttributesMap.get("Plan Name");
+			String year = memberAttributesMap.get("Year");
+
+		{
+			ProviderSearchPage providerSearchPage = (ProviderSearchPage) getLoginScenario()
+					.getBean(PageConstants.PROVIDER_SEARCH_PAGE);
+			 providerSearchPage.entersZipcodeAndSelectPlanName(zipcode,planName,year);
+			
+
+		}
+	}
+	
+	/**
+	 * @toDo: user Enters a zipcode
+	 */
+	@When("^the user enters the zipcode and counts the plan$")
+	public void user_enters_the_zipcode_and_counts_plan(DataTable givenAttributes) {
+
+			List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+			Map<String, String> memberAttributesMap = new HashMap<String, String>();
+			for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+				memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+						memberAttributesRow.get(i).getCells().get(1));
+			}
+
+			String zipcode = memberAttributesMap.get("Zip Code");
+			String plancount = memberAttributesMap.get("Plancount");
+			String planYear = memberAttributesMap.get("Year");
+
+		{
+			ProviderSearchPage providerSearchPage = (ProviderSearchPage) getLoginScenario()
+					.getBean(PageConstants.PROVIDER_SEARCH_PAGE);
+			
+			 int intPlanCounts =providerSearchPage.entersZipcodeAndPlancount(zipcode,planYear);
+			 int strplancount = Integer.parseInt(plancount);
+			 System.out.println("expected=="+strplancount +"===actual==" +intPlanCounts);
+			 if(intPlanCounts!=strplancount){
+				Assert.fail("Plan count is not matching");
+			 }
+			
+
+		}
+	}
+	
+	
 //	
 //		
 //	/**
 //	 * @toDo:user user selects a provider
 //	 */
-//	@When("^user selects a provider and saves it$")
-//	public void user_selects_provider_and_saves_it() {
-//		{
-//			ProviderSearchPage providerSearchPage = (ProviderSearchPage) getLoginScenario()
-//					.getBean(PageConstants.PROVIDER_SEARCH_PAGE);
-//			 providerSearchPage.selectsProviderFromGlobaHeader();
-//
-//		}
-//	}
+	@When("^user select a provider and save it$")
+	public void user_selects_provider_and_saves_it() {
+		{
+			ProviderSearchPage providerSearchPage = (ProviderSearchPage) getLoginScenario()
+					.getBean(PageConstants.PROVIDER_SEARCH_PAGE);
+			 providerSearchPage.selectsProviderFromGlobaHeader();
+
+		}
+	}
 //	
 //	
 //	/**
@@ -238,23 +238,23 @@ public class ProviderSearchCommonStepDefinition {
 //		Assert.assertTrue("Provider coverage Info not updated", vppPlanDetailsPage.providerinfo());
 //	}
 //	
-//	/**
-//	 * @toDo: user performs plan search using following information
-//	 */
-//	@When("^the user clicks on Provider Search on the Home Page$")
-//	public void providerSearch_details_in_aarp_site_from_HomePage() {
-//		
-//		AcquisitionHomePage acquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
-//				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-//		
-//		ProviderSearchPage providerSearchPage = acquisitionhomepage.clicksOnRallyToolFromHomePage();
-//
-//		if (providerSearchPage != null) {
-//			getLoginScenario().saveBean(PageConstants.PROVIDER_SEARCH_PAGE, providerSearchPage);
-//		} else {
-//			Assert.fail("Error Loading Rally tool from Home Page");
-//		}
-//	}
+	/**
+	 * @toDo: user performs plan search using following information
+	 */
+	@When("^the user click on Provider Search on the Home Page$")
+	public void providerSearch_details_in_aarp_site_from_HomePage() {
+		
+		AcquisitionHomePage acquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		
+		ProviderSearchPage providerSearchPage = acquisitionhomepage.clicksOnRallyToolFromHomePage();
+
+		if (providerSearchPage != null) {
+			getLoginScenario().saveBean(PageConstants.PROVIDER_SEARCH_PAGE, providerSearchPage);
+		} else {
+			Assert.fail("Error Loading Rally tool from Home Page");
+		}
+	}
 //	
 //	@When("^user selects a provider and retuns to TestHarness page for AARP$")
 //	public void user_selects_a_provider_and_retuns_to_TestHarness_page_for_AARP() {
@@ -370,5 +370,18 @@ public class ProviderSearchCommonStepDefinition {
 				.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
 		Assert.assertTrue("Provider coverage Info not updated", vppPlanDetailsPage.providerinfo());
 	}
-}
+	
+	@When("^user selects a Hospitals and retuns to VPP page$")
+	public void user_selects_Hospitals_and_return_vpp_page() {
+		{
+			ProviderSearchPage providerSearchPage = (ProviderSearchPage) getLoginScenario()
+					.getBean(PageConstants.PROVIDER_SEARCH_PAGE);
+			VPPPlanSummaryPage plansummaryPage = providerSearchPage.selectsHospitals();
+			Assert.assertTrue("Not able to return to Plan Summary page", plansummaryPage != null);
+
+		}
+	}
+
+
+	}
 

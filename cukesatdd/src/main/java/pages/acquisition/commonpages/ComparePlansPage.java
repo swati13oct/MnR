@@ -33,6 +33,7 @@ import pages.acquisition.commonpages.FindCarePage;
 import pages.acquisition.commonpages.PlanDetailsPage;
 import pages.acquisition.commonpages.VPPPlanSummaryPage;
 import pages.acquisition.commonpages.VisitorProfilePage;
+import pages.acquisition.dceredesign.BuildYourDrugList;
 import pages.acquisition.dceredesign.GetStartedPage;
 public class ComparePlansPage extends UhcDriver {
 
@@ -268,7 +269,10 @@ public class ComparePlansPage extends UhcDriver {
 
 	@Override
 	public void openAndValidate() {
-		validateNew(backToProfilePageLink);
+		if (currentUrl().contains("profile=true"))
+			validateNew(backToProfilePageLink);
+		else
+			validateNew(backToAllPlansLink);
 		validateNew(validateprintbutton);
 		validateNew(validateemailbutton);
 		checkModelPopup(driver,20);
@@ -372,17 +376,22 @@ public class ComparePlansPage extends UhcDriver {
 		
 	}
 	
-	public GetStartedPage navigateToDCERedesign() {
+	@FindBy(xpath = "//input[contains(@id, 'drugsearch')]")
+	public WebElement BuildDrugPage_EnterDrugNameTxt;
+
+	public BuildYourDrugList navigateToDCERedesign() {
 
 		validateNew(addDrugsLink);
 		JavascriptExecutor executor = (JavascriptExecutor) driver;
 		executor.executeScript("arguments[0].scrollIntoView(true);", addDrugsLink);
 		jsClickNew(addDrugsLink);
-		if (validateNew(getStartedTab)) {
-			System.out.println("User is on DCE Get started Page");
-			return new GetStartedPage(driver);
-		} else
-			return null;
+		CommonUtility.waitForPageLoad(driver, BuildDrugPage_EnterDrugNameTxt, 30);
+		if (validateNew(BuildDrugPage_EnterDrugNameTxt)) {
+			Assert.assertTrue("Naviagted to Build Drug List Page", true);
+			return new BuildYourDrugList(driver);
+		}
+		Assert.fail("Did not Navigate to Build Drug List Page");
+		return null;
 	}
 
 	public FindCarePage clickonLookUpYourDoctor() throws InterruptedException {
@@ -580,9 +589,10 @@ public class ComparePlansPage extends UhcDriver {
 	
 	public void validateCallSamContent() throws InterruptedException {
 		
-		Actions action = new Actions(driver);
-		WebElement element = callsam;
-		action.moveToElement(element).perform();
+//		Actions action = new Actions(driver);
+//		WebElement element = callsam;
+//		action.moveToElement(element).perform();
+		jsMouseOver(callsam);
 		String toolTipText = callsamtooltip.getText();
 		System.out.println("====================================================================");
 		System.out.println(toolTipText);
@@ -596,9 +606,10 @@ public class ComparePlansPage extends UhcDriver {
 	
 	public void  validateCallpopup() throws InterruptedException {
 		//CommonUtility.checkPageIsReady(driver);
-		callsam.click();
+		jsClickNew(callsam);
 		System.out.println("@@@@@@@@@@@@@@@ Call Icon Clicked @@@@@@@@@@@@@@@");		
 		driver.switchTo().activeElement();
+		validateNew(CallSamTFN);
 		if (CallSamTFN.getText().isEmpty()) {
 			// return null;
 			Assert.fail("TFN number was not found on the SAM call Popup");

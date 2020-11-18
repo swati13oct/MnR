@@ -47,7 +47,9 @@ public class DrugSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//*[text()='Monthly Premium']/following-sibling::div")
 	public WebElement monthlyPremium;
 
-	@FindBy(xpath = "//h5[contains(text(), 'Annual Estimated')]//following-sibling::div")
+	// @FindBy(xpath = "//h5[contains(text(), 'Annual
+	// Estimated')]//following-sibling::div")
+	@FindBy(xpath = "(//div//h5[contains(text(), 'Annual Estimated')])[1]")
 	public WebElement annualEstimatedTotal;
 
 	@FindBy(xpath = "//*[text()='Drugs Covered']/following-sibling::div")
@@ -151,49 +153,49 @@ public class DrugSummaryPage extends UhcDriver {
 
 	@FindBy(xpath = "//button/*[text()='Create Your Profile']")
 	public WebElement dceNBAModalBtn;
-	
+
 	@FindBy(id = "SignIn")
 	public WebElement signInBtn;
-	
+
 	@FindBy(xpath = "//*[@id='enrollmentPopup']/..")
 	private WebElement savedPlansPopup;
-	
+
 	@FindBy(xpath = "//*[@id='enrollmentPopup']/..//*[@class='uhc-modal__close']")
 	private WebElement savedPlansPopupCloseIcon;
-	
+
 	@FindBy(id = "selectPharmacyBtn0")
 	private WebElement firstPharmacySelectBtn;
-	
+
 	@FindBy(xpath = "//button/span[text()='Save and Update Drug Costs']")
 	private WebElement saveAndUpdateDrugCostBtn;
-	
+
 	@FindBy(xpath = "//*[@id='selectPharmacyBtn0']/..//p/span")
 	private WebElement pharmacyNameSelected;
-	
+
 	@FindBy(xpath = "//*[@class='pharmacy-plan-desc']")
 	private WebElement pharmacyName;
-	
+
 	@FindBy(xpath = "//*[[@id='modal']/div/div[2]/div/div/div[2]/div/table/tbody/tr[1]/td[2]/span")
 	private WebElement drugCoverageNotCoveredDrug;
-	
+
 	@FindBy(xpath = "//*[@id='modal']/div/div[2]/div/div/div[2]/div/table/tbody/tr[1]/td[4]")
 	private WebElement youPayNotCoveredDrug;
-	
+
 	@FindBy(xpath = "//*[@id='modal']/div/div[2]/div/div/div[2]/div/table/tbody/tr[2]/td[2]/span")
 	private WebElement drugCoverageCoveredDrug;
-	
+
 	@FindBy(xpath = "//*[@id='modal']/div/div[2]/div/div/div[2]/div/table/tbody/tr[2]/td[4]")
 	private WebElement youPayCoveredDrug;
-	
+
 	@FindBy(id = "selectdosage")
 	private WebElement drugDosage;
-	
+
 	@FindBy(id = "drugquantity")
 	private WebElement drugQty;
-	
+
 	@FindBy(id = "new-drug-refill")
 	private WebElement drugSupplyLength;
-	
+
 	@Override
 	public void openAndValidate() {
 		validateNew(reviewDrugCostPageHeading);
@@ -251,11 +253,11 @@ public class DrugSummaryPage extends UhcDriver {
 	public WebElement returnToHomeBtn;
 
 	public void clickOnReturnToHome() {
-		try{
-			if(savedPlansPopup.isDisplayed()) {
+		try {
+			if (savedPlansPopup.isDisplayed()) {
 				savedPlansPopupCloseIcon.click();
 			}
-		}catch(Exception e) {
+		} catch (Exception e) {
 			System.out.println("Saved Plans modal not displayed");
 		}
 		validateNew(returnToHomeBtn);
@@ -301,7 +303,7 @@ public class DrugSummaryPage extends UhcDriver {
 
 	@FindBy(id = "drugPricingTitleTxt")
 	private WebElement drugTitle;
-	
+
 	/*
 	 * @FindBy(xpath =
 	 * "//a[contains(@id,'switchToGenericLink')]/../../span[contains(text(),'"+
@@ -425,8 +427,7 @@ public class DrugSummaryPage extends UhcDriver {
 		validate(switchToGenericBtn);
 		validate(drugPricingDeductText);
 	}
-	
-	
+
 	public void verifyDrugCoverageAndYouPayNotCoveredDrug() {
 
 		try {
@@ -439,8 +440,7 @@ public class DrugSummaryPage extends UhcDriver {
 		validate(drugCoverageNotCoveredDrug);
 		validate(youPayNotCoveredDrug);
 	}
-	
-	
+
 	public void verifyDrugCoverageAndYouPayCoveredDrug() {
 
 		try {
@@ -477,35 +477,34 @@ public class DrugSummaryPage extends UhcDriver {
 			validateNew(mapdPlanToggle);
 			jsClickNew(mapdPlanToggle);
 			System.out.println("MAPD Plan Toggle Clicked");
-			WebElement DrugDetailsLinkforPlan = driver.findElement(
+			WebElement DrugCostsLinkforPlan = driver.findElement(
 					By.xpath("//button[contains(@aria-label, 'View Drug Costs') and contains(@aria-label, '" + planName
 							+ "')]"));
-			validateNew(DrugDetailsLinkforPlan);
-			jsClickNew(DrugDetailsLinkforPlan);
-			System.out.println("View Drug Details Clicked for MAPD Plan : " + planName);
+			validateNew(DrugCostsLinkforPlan);
+			jsClickNew(DrugCostsLinkforPlan);
+			System.out.println("View Drug Costs Clicked for MAPD Plan : " + planName);
 
 		} else if (plantype.equalsIgnoreCase("PDP")) {
 			validateNew(pdpPlanToggle);
 			jsClickNew(pdpPlanToggle);
 			System.out.println("PDP Plan Toggle Clicked");
-			WebElement DrugDetailsLinkforPlan = driver.findElement(
+			WebElement DrugCostsLinkforPlan = driver.findElement(
 					By.xpath("//button[contains(@aria-label, 'View Drug Costs') and contains(@aria-label, '" + planName
 							+ "')]"));
-			validateNew(DrugDetailsLinkforPlan);
-			jsClickNew(DrugDetailsLinkforPlan);
-			System.out.println("View Drug Details Clicked for PDP Plan : " + planName);
+			validateNew(DrugCostsLinkforPlan);
+			jsClickNew(DrugCostsLinkforPlan);
+			System.out.println("View Drug Costs Clicked for PDP Plan : " + planName);
 
 		} else {
 			validateNew(snpPlanToggle);
 			jsClickNew(snpPlanToggle);
 			System.out.println("SNP Plan Toggle Clicked");
-			WebElement DrugDetailsLinkforPlan = driver.findElement(
+			WebElement DrugCostsLinkforPlan = driver.findElement(
 					By.xpath("//button[contains(@aria-label, 'View Drug Costs') and contains(@aria-label, '" + planName
 							+ "')]"));
-			validateNew(DrugDetailsLinkforPlan);
-			jsClickNew(DrugDetailsLinkforPlan);
-			System.out.println("View Drug Details Clicked for SNP Plan : " + planName);
-
+			validateNew(DrugCostsLinkforPlan);
+			jsClickNew(DrugCostsLinkforPlan);
+			System.out.println("View Drug Costs Clicked for SNP Plan : " + planName);
 		}
 		CommonUtility.waitForPageLoadNew(driver, DrugDetails_DrugCostsHeading, 30);
 		if (validateNew(changePharmacy) && validateNew(DrugDetails_DrugCostsHeading)) {
@@ -543,6 +542,30 @@ public class DrugSummaryPage extends UhcDriver {
 	public void clickViewDrugCostBtn() {
 		viewDrugCostBtn.click();
 	}
+
+	public void validatePremiumForPlan(String premium, String plantype, String planName) {
+		if (plantype.equalsIgnoreCase("MAPD")) {
+			validateNew(mapdPlanToggle);
+			jsClickNew(mapdPlanToggle);
+			System.out.println("MAPD Plan Toggle Clicked");
+		}
+		else if(plantype.equalsIgnoreCase("PDP")){
+			validateNew(pdpPlanToggle);
+			jsClickNew(pdpPlanToggle);
+			System.out.println("PDP Plan Toggle Clicked");
+		}
+		else{
+			validateNew(snpPlanToggle);
+			jsClickNew(snpPlanToggle);
+			System.out.println("SNP Plan Toggle Clicked");
+		}
+		WebElement PremiumforPlan = driver.findElement(By.xpath("//*[contains(text(), '"+planName+"')]//ancestor::*[contains(@class, 'uhc-card__header')]//following-sibling::*//*[contains(text(), 'Monthly Premium')]//following-sibling::*[contains(text(), '$')]"));
+		validateNew(PremiumforPlan);
+		String PremiumDisplayed	= PremiumforPlan.getText();
+		System.out.println("Premium Displayed for Plan : "+PremiumDisplayed);
+		if(!PremiumDisplayed.contains(premium)) {
+			Assert.fail("Expected Premium not displayed, Expected : "+premium+"    Actual Displayed : "+PremiumDisplayed);
+		}
 
 	public void verifyReturnToProfileDisplayed() {
 		try {
@@ -583,36 +606,38 @@ public class DrugSummaryPage extends UhcDriver {
 					driver.getCurrentUrl().contains("app/index.html#/login"));
 		}
 	}
-	
+
 	public static String selectedPharmacyName;
+
 	public void saveAndUpdatePharmacy() {
 		firstPharmacySelectBtn.click();
-		selectedPharmacyName=pharmacyNameSelected.getText();
+		selectedPharmacyName = pharmacyNameSelected.getText();
 		System.out.println(selectedPharmacyName);
-		saveAndUpdateDrugCostBtn.click();	
+		saveAndUpdateDrugCostBtn.click();
 	}
-	
+
 	public void validateSelectedPharmacy() {
-		String pharmacy=pharmacyName.getText().substring(9).trim();
+		String pharmacy = pharmacyName.getText().substring(9).trim();
 		System.out.println(selectedPharmacyName);
 		System.out.println(pharmacy);
 		Assert.assertTrue("Pharmacy not updated", selectedPharmacyName.contains(pharmacy));
 	}
-	
+
 	public void clickSwitchToGenericLink(String drugName) {
-		WebElement SwitchToGenericLink=driver.findElement(By.xpath("//span[contains(text(),'"+drugName+"')]/..//a[contains(@id,'switchToGenericLink')]"));
+		WebElement SwitchToGenericLink = driver.findElement(
+				By.xpath("//span[contains(text(),'" + drugName + "')]/..//a[contains(@id,'switchToGenericLink')]"));
 		waitforElement(SwitchToGenericLink);
 		jsClickNew(SwitchToGenericLink);
 	}
-	
+
 	public void updateDosageQtySupplyLength() {
 		waitforElement(drugDosage);
-	Select dosage=new Select(drugDosage);
-	dosage.selectByIndex(1);
-	drugQty.clear();
-	drugQty.sendKeys("100");
-	Select supplyLen=new Select(drugSupplyLength);
-	supplyLen.selectByIndex(1);
-	switchToGenericSubmitBtn.click();
+		Select dosage = new Select(drugDosage);
+		dosage.selectByIndex(1);
+		drugQty.clear();
+		drugQty.sendKeys("100");
+		Select supplyLen = new Select(drugSupplyLength);
+		supplyLen.selectByIndex(1);
+		switchToGenericSubmitBtn.click();
 	}
 }

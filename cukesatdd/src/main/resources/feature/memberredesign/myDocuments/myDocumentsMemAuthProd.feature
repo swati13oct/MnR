@@ -1,9 +1,9 @@
 @myDocuments  @thePredators @E2E @feature-F368974 @F434260
 Feature: 1.06.7 Member My Documents Page- Member Auth - PROD
 
-  #Background: If run on stage then feature security flag needs to be true
-  #   Given feature security flag must set to true when testing on stage env
-  #    | Feature           | UCPMyDocuments |
+  Background: If run on stage then feature security flag needs to be true
+     Given feature security flag must set to true when testing on test env
+      | Feature           | UCPMyDocuments |
 
   @prodSanity_Individual_MyDocuments
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - To validate the My Documents page E2E Scenario

@@ -11,10 +11,10 @@ import cucumber.api.CucumberOptions;
  * this file is to run test cases for RunMRATDDAcquisitionVppPlanSummary
  */
 @RunWith(ExtendedCucumber.class)
-@ExtendedCucumberOptions(retryCount=0,screenShotSize="", screenShotLocation="/screenshots/",jsonReport = "target/cucumber-RunMRATDDAcquisitionVppFavoritePlanUlayer4.json",detailedReport = true,
+@ExtendedCucumberOptions(retryCount=1,screenShotSize="", screenShotLocation="/screenshots/",jsonReport = "target/cucumber-RunMRATDDAcquisitionVppFavoritePlanUlayer4.json",detailedReport = true,
  detailedAggregatedReport = true, overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDAcquisitionVppFavoritePlanUlayer4")
-@CucumberOptions(glue = { "atdd.framework", "acceptancetests.acquisition" }, features = { "src/main/resources/feature/acquisition/vpp/VPP-AARP-FavoritePlan.feature" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionVppFavoritePlanUlayer4.json" }, tags = { "@vppFavoritePlanRegressionUlayer4" })
+@CucumberOptions(glue = { "atdd.framework", "acceptancetests.acquisition" }, features = { "src/main/resources/feature/acquisition/vpp/" }, plugin = {
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionVppFavoritePlanUlayer4.json" }, tags = { "@VppFavoritePlanCommon_AARP_4"})//"@vppFavoritePlanRegressionUlayer4" })
 public class RunMRATDDAcquisitionVppFavoritePlanUlayer4 { 
  
 }
