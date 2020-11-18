@@ -3902,7 +3902,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 				jsClickNew(drugLinkDropdown.get(0));
 
 			WebElement drugSummaryLinkDropdown = driver.findElement(By.xpath("//*[contains(text(),'" + planName
-					+ "')]/ancestor::div[contains(@class, 'module-plan-overview module')]//*[contains(@class,'edit-drugs')]"));
+					+ "')]/ancestor::div[contains(@class, 'module-plan-overview module')]//*[contains(@class,'edit-drugs')]/a"));
 
 			jsClickNew(drugSummaryLinkDropdown);
 		} else {
