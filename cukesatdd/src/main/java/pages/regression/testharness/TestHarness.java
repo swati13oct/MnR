@@ -1311,6 +1311,7 @@ public class TestHarness extends UhcDriver {
     	 * @param driver
     	 */
     	public static void checkForIPerceptionModel(WebDriver driver) {
+    		driver.manage().timeouts().implicitlyWait(1,TimeUnit.SECONDS) ;
     		int counter = 0;
     		do {
     			System.out.println("current value of counter: " + counter);
