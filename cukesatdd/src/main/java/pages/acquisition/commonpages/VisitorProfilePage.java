@@ -64,7 +64,7 @@ public class VisitorProfilePage extends UhcDriver {
 	@FindBy(id = "enrollment-next-button")
 	private WebElement NextBtn;
 	
-	@FindBy(xpath = "//div[@id='dashPlansContainer']//div[contains(@class,'Plan')][1]//div[@class='enroll-container']/button")
+	@FindBy(xpath = "//h2[@id='saved-plans']/following::button[contains(@aria-label,'Enroll')][1]")
 	private WebElement enrollInPlan;
 	
 	@FindBy(id = "header-number")
@@ -137,6 +137,7 @@ public class VisitorProfilePage extends UhcDriver {
 	}
 	
 	public void validateAddedDrugAndPharmacy(String drug) {
+		CommonUtility.waitForPageLoad(driver, signOut, 10);
 		Assert.assertEquals("Saved Drugs (1) / Pharmacy", drugHeader.getText().trim());
 		jsClickNew(drugHeader);
 		Assert.assertTrue(drugName.getText().trim().contains(drug));
