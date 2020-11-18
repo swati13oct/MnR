@@ -136,6 +136,7 @@ public class VisitorProfilePage extends UhcDriver {
 	}
 	
 	public void validateAddedDrugAndPharmacy(String drug) {
+		CommonUtility.waitForPageLoad(driver, signOut, 10);
 		Assert.assertEquals("Saved Drugs (1) / Pharmacy", drugHeader.getText().trim());
 		jsClickNew(drugHeader);
 		Assert.assertTrue(drugName.getText().trim().contains(drug));
