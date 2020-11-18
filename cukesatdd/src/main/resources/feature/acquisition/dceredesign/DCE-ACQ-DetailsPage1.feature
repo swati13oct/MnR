@@ -17,15 +17,9 @@ Feature: 1.10.5 DCE-REDISIGN AARP DCE Details Page Scenarios - To test DCE Detai
     Then the user validates Tell Us About Drug - Brand page for the Drug
       | GenericName | <genericDrug> |
     Then the user clicks on Add Drug to add drug to drug list
-      | BrandDrugName | <brundDrug> |
+      | BrandDrugName | <brandDrug> |
     Then the user searches and adds the following Drug to Drug List
       | DrugName | <drug1> |
-    Then the user searches and adds the following Drug to Drug List
-      | DrugName | <drug2> |
-    Then the user searches and adds the following Drug to Drug List
-      | DrugName | <drug3> |
-    Then the user searches and adds the following Drug to Drug List
-      | DrugName | <drug4> |
     Then the user validates all added drugs in DrugList
     Then the user clicks on Review Drug Costs to Land on Zip Entry Page
     When user enters valid zipcode and county
@@ -41,7 +35,7 @@ Feature: 1.10.5 DCE-REDISIGN AARP DCE Details Page Scenarios - To test DCE Detai
     Then the user validates Monthly Drug Costs by Stage Info Modals
     Then the user validates Monthly Drug Costs
     Then the user validates Switch to generic for following Brand Drug and validate Generic drug on Details Page
-      | Brand Drug   | <brundDrug>   |
+      | Brand Drug   | <brandDrug>   |
       | Generic Drug | <genericDrug> |
     Then the user clicks Edit Drug on Drug Details Page and validates user navigates to Build your drug list Page
     Then the user deletes the following drug from Drug list
@@ -57,13 +51,13 @@ Feature: 1.10.5 DCE-REDISIGN AARP DCE Details Page Scenarios - To test DCE Detai
 
     @DCE_DrugDetailsValidation_AARP
     Examples: 
-      | drugnameAutocomplete | drug1   | drug2  | drug3   | drug4    | zipCode | planType | planName                                            | site | brundDrug | genericDrug | deleteDrug | addDrug |
-      | ativ                 | Orkambi | Fanapt | Humalog | Adderall |   80002 | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) | AARP | Ativan    | orazepam   | Humalog    | Lipitor |
+      | drugnameAutocomplete | drug1   | zipCode | planType | planName                                            | site | brandDrug | genericDrug | deleteDrug | addDrug |
+      | ativ                 | Humalog |   80002 | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) | AARP | Ativan    | orazepam    | Humalog    | Lipitor |
 
     @DCE_DrugDetailsValidation_UHC
     Examples: 
-      | drugnameAutocomplete | drug1   | drug2  | drug3   | drug4    | zipCode | planType | planName                                            | site | brundDrug | genericDrug | deleteDrug | addDrug |
-      | ativ                 | Orkambi | Fanapt | Humalog | Adderall |   80002 | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) | UHC  | Ativan    | Lorazepam   | Humalog    | Lipitor |
+      | drugnameAutocomplete | drug1   | zipCode | planType | planName                                            | site | brandDrug | genericDrug | deleteDrug | addDrug |
+      | ativ                 | Humalog |   80002 | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) | UHC  | Ativan    | Lorazepam   | Humalog    | Lipitor |
 
   @DCE_DrugDetailsDynamicCopay_Preferred
   Scenario Outline: To verify DCE REDESIGN Details Page for Dynamic copay section for Preferred Pharmacy Copay from <site> home page
