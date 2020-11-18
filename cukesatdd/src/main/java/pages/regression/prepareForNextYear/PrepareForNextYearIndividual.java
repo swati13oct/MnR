@@ -451,7 +451,10 @@ public class PrepareForNextYearIndividual extends PrepareForNextYearBase {
 			targetElement=ind_revPlnMatlsSec_presDrugSec_drugSrchLnk;
 			note.addAll(validateHaveItem(targetItem, targetElement));
 
-			if (!sanityRun) {
+			//note: on offline-prod clicking on dce will bring up a popup 'leaving site...'
+			//note: the fix is on content but it kept getting overwritten during each deploy
+			//note: so we are not going to click on DCE link when running on offline-prod
+			if (!sanityRun && !MRScenario.environment.equalsIgnoreCase("offline")) {
 				String expUrl="/health-plans/estimate-drug-costs.html";
 				if (memberType.toUpperCase().contains("UHC"))
 					if (MRScenario.environment.contains("stage")) 
