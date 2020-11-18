@@ -33,6 +33,7 @@ import pages.acquisition.commonpages.FindCarePage;
 import pages.acquisition.commonpages.PlanDetailsPage;
 import pages.acquisition.commonpages.VPPPlanSummaryPage;
 import pages.acquisition.commonpages.VisitorProfilePage;
+import pages.acquisition.dceredesign.BuildYourDrugList;
 import pages.acquisition.dceredesign.GetStartedPage;
 public class ComparePlansPage extends UhcDriver {
 
@@ -375,18 +376,22 @@ public class ComparePlansPage extends UhcDriver {
 		
 	}
 	
-	public GetStartedPage navigateToDCERedesign() {
+	@FindBy(xpath = "//input[contains(@id, 'drugsearch')]")
+	public WebElement BuildDrugPage_EnterDrugNameTxt;
+
+	public BuildYourDrugList navigateToDCERedesign() {
 
 		validateNew(addDrugsLink);
 		JavascriptExecutor executor = (JavascriptExecutor) driver;
 		executor.executeScript("arguments[0].scrollIntoView(true);", addDrugsLink);
 		jsClickNew(addDrugsLink);
-		waitForPageLoadSafari();
-		if (validateNew(getStartedTab)) {
-			System.out.println("User is on DCE Get started Page");
-			return new GetStartedPage(driver);
-		} else
-			return null;
+		CommonUtility.waitForPageLoad(driver, BuildDrugPage_EnterDrugNameTxt, 30);
+		if (validateNew(BuildDrugPage_EnterDrugNameTxt)) {
+			Assert.assertTrue("Naviagted to Build Drug List Page", true);
+			return new BuildYourDrugList(driver);
+		}
+		Assert.fail("Did not Navigate to Build Drug List Page");
+		return null;
 	}
 
 	public FindCarePage clickonLookUpYourDoctor() throws InterruptedException {

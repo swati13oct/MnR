@@ -37,6 +37,7 @@ import pages.acquisition.commonpages.SiteMapAARPPage;
 import pages.acquisition.commonpages.ContactUsAARPPage;
 import pages.acquisition.commonpages.AboutUsAARPPage;
 import pages.acquisition.commonpages.VisitorProfilePage;
+import pages.acquisition.dceredesign.BuildYourDrugList;
 import pages.acquisition.dceredesign.DrugDetailsPage;
 import pages.acquisition.dceredesign.GetStartedPage;
 import pages.acquisition.commonpages.ComparePlansPage;
@@ -1473,8 +1474,8 @@ public class VppCommonStepDefinition {
 		public void the_user_click_on_EdidDrugLink() throws Throwable {
 			PlanDetailsPage vppPlanDetailsPage = (PlanDetailsPage) getLoginScenario()
 					.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
-			GetStartedPage getStartedPage = (GetStartedPage) vppPlanDetailsPage.navigateToDCERedesignEditDrug(); 
-			getLoginScenario().saveBean(PageConstants.DCE_Redesign_GetStarted, getStartedPage);
+			BuildYourDrugList DCEbuildDrugList = (BuildYourDrugList) vppPlanDetailsPage.navigateToDCERedesignEditDrug(); 
+			getLoginScenario().saveBean(PageConstants.DCE_Redesign_BuildDrugList, DCEbuildDrugList);
 		}
 		
 		@Then("^the user click on Plan costs tab$")
@@ -1490,7 +1491,8 @@ public class VppCommonStepDefinition {
 
 			PlanDetailsPage vppPlanDetailsPage = (PlanDetailsPage) getLoginScenario()
 					.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
-			vppPlanDetailsPage.navigateToDCERedesignFromPlanCostTab();
+			BuildYourDrugList DCEbuildDrugList = vppPlanDetailsPage.navigateToDCERedesignFromPlanCostTab();
+			getLoginScenario().saveBean(PageConstants.DCE_Redesign_BuildDrugList, DCEbuildDrugList);
 		}
 		
 		@Then("^the user verifies the drug information on plan costs tab$")
@@ -2372,6 +2374,10 @@ public class VppCommonStepDefinition {
 					plansummaryPage.medsuppOLERightRailplanoverview();
 					plansummaryPage.medsuppOLERightRailRulesDisclose();
 					plansummaryPage.medsuppOLERightRailEnrollmentDiscount();
+					plansummaryPage.medsuppOLERightRailLearnmore();
+					
+					
+					
 					//Assert.assertTrue(true);
 			//	}else
 				//	Assert.fail("Error in loading the yourguide Page");
@@ -2396,6 +2402,22 @@ public class VppCommonStepDefinition {
 			String submitconfirmation = plansummaryPage.StartApplication(FirstName, LastName);
 			getLoginScenario().saveBean(VPPCommonConstants.SUBMITCONFIRMATION, submitconfirmation);
 
+		}
+		
+		@Then("^user validate the plandetails on medsupp plans$")
+		public void user_validate_plandetails_medsupp_page() throws Throwable {
+			
+			VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+			
+			plansummaryPage.medsuppOLEplandetails();
+			plansummaryPage.medsuppOLERightRail();
+			plansummaryPage.medsuppOLERightRailGuideourhealth();
+			//plansummaryPage.medsuppOLERightRailoutlinecoverage();
+			plansummaryPage.medsuppOLERightRailplanoverview();
+			plansummaryPage.medsuppOLERightRailRulesDisclose();
+			plansummaryPage.medsuppOLERightRailEnrollmentDiscount();
+			plansummaryPage.medsuppOLERightRailLearnmore();
 		}
 }
 		

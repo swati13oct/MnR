@@ -141,7 +141,7 @@ public class ShopForPlanNavigationPage extends UhcDriver {
 			jsClickNew(msLeanHowToshopLink);
 			threadsleep(2000);
 			System.out.println("Shop Page Medsupp Plan is Displayed");
-			return new ShopPage(driver);
+			//return new ShopPage(driver);
 		}
 		return null;
 	}
