@@ -76,7 +76,7 @@ Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanSummary AARP - To test VPP Plan Details 
     And user clicks on continue button in Zip Entry Page in AARP
     #Then load screen should be displayed in AARP
     And user should be navigated to Review drug cost estimate page in AARP
-    And user should be able to see "Medicare Advantage Plans" by default
+    And user should be able to see Medicare Advantage plan by default
     And user click on view plan details on drug summary page
     Then the user verify the drug cost estimator and view plan summary on VPP summary page in AARP
     Then the user click on drug cost estimator on vpp plan summary page in AARP
@@ -122,7 +122,7 @@ Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanSummary AARP - To test VPP Plan Details 
     And user clicks on continue button in Zip Entry Page in AARP
     #Then load screen should be displayed in AARP
     And user should be navigated to Review drug cost estimate page in AARP
-    And user should be able to see "Medicare Advantage Plans" by default
+    And user should be able to see Medicare Advantage plan by default
     And user click on view plan details on drug summary page
     Then the user verify the drug cost estimator and view plan summary on VPP summary page in AARPs
     Then the user click on view plan summary on vpp detail page in AARP

@@ -233,6 +233,12 @@ public class DrugDetailsPage extends UhcDriver {
 	@FindBy(id = "drugPricingTitleTxt")
 	private WebElement drugTitle;
 	
+	@FindBy(xpath = "//*[@id='milesDropdown']/option[5]")
+	private WebElement distanceDefaultMile;
+	
+	@FindBy(xpath = "//*[@id='milesDropdown']")
+	private WebElement clickDistanceDefaultMile;
+	
 	public DrugDetailsPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -676,6 +682,8 @@ public class DrugDetailsPage extends UhcDriver {
 	
 	public void validateSelectPharmacyPage() throws InterruptedException {
 		if(validateNew(selectPharmacyModalCloseBtn) && validateNew(selectedPharmacyLink) &&	validateNew(distanceDrpDown) &&
+		
+	    validateNew	(distanceDefaultMile)&&
 		validateNew(pharmacyZipcodeSearch)&&
 		validateNew(pharmacySearchBtn) &&
 		validateNew(preferredMailPharmacy)&&
@@ -693,6 +701,12 @@ public class DrugDetailsPage extends UhcDriver {
 	
 	public void  clickChangePharmacyLinkDetailsPage() {
 		DrugDetails_ChangePharmacyLnk.click();
+	}
+	
+	public void clickDistanceMiledropdown()
+	{
+		clickDistanceDefaultMile.click();
+		
 	}
 	
 	public void  changePharmacyAndSave() {

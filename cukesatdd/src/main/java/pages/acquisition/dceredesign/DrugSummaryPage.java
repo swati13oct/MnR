@@ -173,6 +173,18 @@ public class DrugSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//*[@class='pharmacy-plan-desc']")
 	private WebElement pharmacyName;
 	
+	@FindBy(xpath = "//*[[@id='modal']/div/div[2]/div/div/div[2]/div/table/tbody/tr[1]/td[2]/span")
+	private WebElement drugCoverageNotCoveredDrug;
+	
+	@FindBy(xpath = "//*[@id='modal']/div/div[2]/div/div/div[2]/div/table/tbody/tr[1]/td[4]")
+	private WebElement youPayNotCoveredDrug;
+	
+	@FindBy(xpath = "//*[@id='modal']/div/div[2]/div/div/div[2]/div/table/tbody/tr[2]/td[2]/span")
+	private WebElement drugCoverageCoveredDrug;
+	
+	@FindBy(xpath = "//*[@id='modal']/div/div[2]/div/div/div[2]/div/table/tbody/tr[2]/td[4]")
+	private WebElement youPayCoveredDrug;
+	
 	@FindBy(id = "selectdosage")
 	private WebElement drugDosage;
 	
@@ -181,7 +193,7 @@ public class DrugSummaryPage extends UhcDriver {
 	
 	@FindBy(id = "new-drug-refill")
 	private WebElement drugSupplyLength;
-
+	
 	@Override
 	public void openAndValidate() {
 		validateNew(reviewDrugCostPageHeading);
@@ -412,7 +424,34 @@ public class DrugSummaryPage extends UhcDriver {
 		validate(drugTitle);
 		validate(switchToGenericBtn);
 		validate(drugPricingDeductText);
+	}
+	
+	
+	public void verifyDrugCoverageAndYouPayNotCoveredDrug() {
 
+		try {
+			Thread.sleep(6000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		validate(drugCoverageNotCoveredDrug);
+		validate(youPayNotCoveredDrug);
+	}
+	
+	
+	public void verifyDrugCoverageAndYouPayCoveredDrug() {
+
+		try {
+			Thread.sleep(6000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		validate(drugCoverageCoveredDrug);
+		validate(youPayCoveredDrug);
 	}
 
 	public void clickOnSNPPlan() {
@@ -561,11 +600,8 @@ public class DrugSummaryPage extends UhcDriver {
 	}
 	
 	public void clickSwitchToGenericLink(String drugName) {
-		//XPathExpression expr = xpath.compile("//a[contains(@id,'switchToGenericLink')]/../../span[contains(text(),'%s')]");
 		WebElement SwitchToGenericLink=driver.findElement(By.xpath("//span[contains(text(),'"+drugName+"')]/..//a[contains(@id,'switchToGenericLink')]"));
-		//validate((WebElement) By.xpath(SwitchToGenericLink));
 		waitforElement(SwitchToGenericLink);
-		//SwitchToGenericLink.click();
 		jsClickNew(SwitchToGenericLink);
 	}
 	

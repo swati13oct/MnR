@@ -339,6 +339,19 @@ public class DCEStepDefinitionAARP {
 		drugSummaryPage.verifyDrugPricingText();
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugSummaryPage);
 	}
+	@And("^user should verify drug coverage and you pay value for not covered drug in drug pricing popup$")
+public void user_should_verify_you_pay_value_for_not_covered_drug_in_drug_pricing_popup() {
+	DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
+	drugSummaryPage.verifyDrugCoverageAndYouPayNotCoveredDrug();
+	getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugSummaryPage);
+}
+	
+	@And("^user should verify drug coverage and you pay value for covered drug in drug pricing popup$")
+	public void user_should_verify_drug_coverage_and_you_pay_value_for_covered_drug_in_drug_pricing_popup() {
+		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
+		drugSummaryPage.verifyDrugCoverageAndYouPayCoveredDrug();
+		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugSummaryPage);
+	}
 
 	@When("^clicks on Review drug cost button$")
 	public void clicks_on_Review_drug_cost_button() {
@@ -942,8 +955,11 @@ public class DCEStepDefinitionAARP {
 	public void user_verify_details_page_change_pharmacy_modal_in_AARP() throws InterruptedException {
 		DrugDetailsPage drugDetailsPage = new DrugDetailsPage(driver);
 		drugDetailsPage.validateSelectPharmacyPage();
+		drugDetailsPage.clickDistanceMiledropdown();
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetailsPage);
 	}
+	
+	
 
 	@When("^user click on View Drug Pricing Modal$")
 	public void User_click_on_View_Drug_Pricing_Modal_in_AARP() throws Throwable {
