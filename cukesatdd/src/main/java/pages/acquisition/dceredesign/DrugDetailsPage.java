@@ -1155,6 +1155,7 @@ public class DrugDetailsPage extends UhcDriver {
 	public void validateInsulinTier_CopaySection(String insulinCopay) {
 		validateNew(CopaySection_InsulinTier);
 		if(CopaySection_InsulinTier.getText().contains(insulinCopay)) {
+			System.out.println("Copay Section - Insulin Tier and correct Copay is Displayed : "+CopaySection_InsulinTier.getText());
 			Assert.assertTrue("Copay Section - Insulin Tier and correct Copay is Displayed : "+CopaySection_InsulinTier.getText(),true);
 		}
 		else {
@@ -1171,6 +1172,7 @@ public class DrugDetailsPage extends UhcDriver {
 		validateNew(InsulinDrugCopayDisplayed);
 		validateNew(InsulinDrugTextDisplayed);
 		if(InsulinDrugCopayDisplayed.getText().contains(insulinCopay)) {
+			System.out.println("Your Drugs Section - Insulin Tier and correct Copay is Displayed : "+InsulinDrugCopayDisplayed.getText());
 			Assert.assertTrue("Your Drugs Section - Insulin Tier and correct Copay is Displayed : "+InsulinDrugCopayDisplayed.getText(),true);
 		}
 		else {
@@ -1186,6 +1188,7 @@ public class DrugDetailsPage extends UhcDriver {
 
 	public void validateInsulinText_ImportantInfo() {
 		if(validateNew(ImportantInfo_InsulinSavingsText) && validateNew(ImportantInfo_InsulinSavingsHeader)) {
+			System.out.println("Important Information Section - Insulin Tier Information is Displayed;  Header: "+ImportantInfo_InsulinSavingsHeader.getText()+"    Text : "+ImportantInfo_InsulinSavingsText.getText());
 			Assert.assertTrue("Important Information Section - Insulin Tier Information is Displayed;  Header: "+ImportantInfo_InsulinSavingsHeader.getText()+"    Text : "+ImportantInfo_InsulinSavingsText.getText(),true);
 		}
 		else {
