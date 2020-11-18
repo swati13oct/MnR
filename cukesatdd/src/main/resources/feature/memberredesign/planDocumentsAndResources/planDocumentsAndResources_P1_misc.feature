@@ -39,6 +39,7 @@ Feature: 1.06.2 Member Plans and Documents - section: header -and- My Documents 
       | 02-002 | xxxxx       | MA       | GROUP_PREEFF_PDnR     | true  | false  | false | false | false |
       | 03-003 | xxxxx       | MAPD     | AARP_IND_PREEFF_PDnR  | true  | false  | false | false | false |
 
+    # when 2021 comes, can switch back to use preeffectiveFEDPDP_001 for PDP IND pre-eff
 	@preeffective_pdp
 	Examples: 
       | index  | TID         | planType | memberType            | md_sd | eob_sd | eob_m | eob_d | rm_sd |

@@ -16,10 +16,11 @@ import gherkin.formatter.model.DataTableRow;
 import pages.acquisition.commonpages.AcquisitionHomePage;
 import pages.acquisition.commonpages.ComparePlansPage;
 import pages.acquisition.commonpages.DrugCostEstimatorPage;
-import pages.acquisition.dceredesign.GetStartedPage;
 import pages.acquisition.commonpages.PlanDetailsPage;
 import pages.acquisition.commonpages.VPPPlanSummaryPage;
 import pages.acquisition.commonpages.VisitorProfilePage;
+import pages.acquisition.dceredesign.BuildYourDrugList;
+import pages.acquisition.dceredesign.GetStartedPage;
 import pages.acquisition.ulayer.VisitorProfileTestHarnessPage;
 /**
  * @author bnaveen4
@@ -209,8 +210,8 @@ public class VisitorProfileStepDefinition {
 	@And("^user clicks on Edit Drug and Pharmacy on visitor profile page$")
 	public void user_clicks_on_Edit_Drug_and_Pharmacy_on_visitor_profile_page() {
 		VisitorProfilePage visitorProfile = (VisitorProfilePage) getLoginScenario().getBean(PageConstants.VISITOR_PROFILE_PAGE);
-		GetStartedPage dcePage = visitorProfile.clickOnEditDrugAndPharmacy();
-		getLoginScenario().saveBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE, dcePage);
+		BuildYourDrugList DCEbuildDrugList = visitorProfile.clickOnEditDrugAndPharmacy();
+		getLoginScenario().saveBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE, DCEbuildDrugList);
 	}
 	
 	@And("^user delets all the added providers on visitor profile page$")

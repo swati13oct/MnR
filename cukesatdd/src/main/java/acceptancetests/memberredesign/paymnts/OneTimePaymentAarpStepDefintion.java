@@ -564,6 +564,20 @@ public class OneTimePaymentAarpStepDefintion {
 		}
 	}
 
+	@And("^the user moves to Go to Payment History Page button for one time payment$")
+	public void Go_toPayment_History_page_group()  {
+		ConfirmOneTimePaymentPage confirmOneTimePaymentPage = (ConfirmOneTimePaymentPage) getLoginScenario()
+				.getBean(PageConstants.CONFIRM_ONE_TIME_PAYMENT_PAGE);
+		
+		PaymentHistoryPage paymentHistoryPage = confirmOneTimePaymentPage.ScrollDownToBackButtonOneTimePayment();
+			
+			if (paymentHistoryPage != null) {
+			getLoginScenario().saveBean(PageConstants.Payments_History_Page, paymentHistoryPage);
+			System.out.println("User is on Payment History Page");
+		}
+	}
+
+	
 	@And("^the user confirms the values in AARP site$")
 	public void makes_one_time_payment_required_details() {
 		ConfirmOneTimePaymentPage confirmOneTimePayPage = (ConfirmOneTimePaymentPage) getLoginScenario()
