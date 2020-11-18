@@ -421,6 +421,7 @@ public class MRConstants {
   public static final String AARP_DEEPLINK_URL_VirtualVisit = "http://stage-myaarpmedicare.uhc.com/virtualvisits";
   public static final String PCP_DEEPLINK_URL_VirtualVisit = "http://stage-mypcpmedicare.uhc.com/virtualvisits";
   public static final String Medica_DEEPLINK_URL_VirtualVisit = "http://stage-mymedicamedicare.uhc.com/virtualvisits";
+  public static final String STAGE_DEEPLINK_URL_my_Documents_Edelivery = "https://stage-medicare.uhc.com/?TARGET=SMSR/medicare/member/my-documents/overview.html%3fdeeplink=true&WT.mc_ID=8003461&mrcid=email_fed_m";
  }
 
 	    
