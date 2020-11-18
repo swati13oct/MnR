@@ -1147,5 +1147,52 @@ public class DrugDetailsPage extends UhcDriver {
 			Assert.fail("Expected Premium not displayed, Expected : "+premium+"    Actual Displayed : "+PremiumDisplayed);
 		}
 	}
+	
+	@FindBy(xpath = "//*[contains(@id, 'plancopaydetail')]//*[contains(text(), 'Insulin Drugs' )and contains(text(),  '$')]")
+	private WebElement CopaySection_InsulinTier;
+
+
+	public void validateInsulinTier_CopaySection(String insulinCopay) {
+		validateNew(CopaySection_InsulinTier);
+		if(CopaySection_InsulinTier.getText().contains(insulinCopay)) {
+			Assert.assertTrue("Copay Section - Insulin Tier and correct Copay is Displayed : "+CopaySection_InsulinTier.getText(),true);
+		}
+		else {
+			Assert.fail("Copay Section - Incorrect Copay Displayed;  Expected Copay: "+insulinCopay);
+		}		
+	}
+
+	public void validateInsulinDrug_YourDrugs(String insulinDrug, String insulinCopay) {
+		WebElement InsulinDrugDisplayed = driver.findElement(By.xpath("//*[contains(@id, 'drugtable')]//*[contains(text(), '"+insulinDrug+"' )]"));
+		WebElement InsulinDrugCopayDisplayed = driver.findElement(By.xpath("//*[contains(@id, 'drugtable')]//*[contains(text(), '"+insulinDrug+"' )]//following::*[contains(text(), '$') and contains(text(), 'Copay')]"));
+
+		WebElement InsulinDrugTextDisplayed = driver.findElement(By.xpath("//*[contains(@id, 'drugtable')]//*[contains(text(), '"+insulinDrug+"' )]//following::*[contains(text(), 'Savings Model')]"));
+		validateNew(InsulinDrugDisplayed);
+		validateNew(InsulinDrugCopayDisplayed);
+		validateNew(InsulinDrugTextDisplayed);
+		if(InsulinDrugCopayDisplayed.getText().contains(insulinCopay)) {
+			Assert.assertTrue("Your Drugs Section - Insulin Tier and correct Copay is Displayed : "+InsulinDrugCopayDisplayed.getText(),true);
+		}
+		else {
+			Assert.fail("Your Drugs Section - Incorrect Copay Displayed;  Expected Copay: "+insulinCopay);
+		}		
+	}
+
+	@FindBy(xpath = "//h2[contains(text(), 'Important Information')]//following::h3[contains(text(), 'Savings Model')]")
+	public WebElement ImportantInfo_InsulinSavingsHeader;
+	
+	@FindBy(xpath = "//h2[contains(text(), 'Important Information')]//following::*[contains(text(), 'insulin')]")
+	public WebElement ImportantInfo_InsulinSavingsText;
+
+	public void validateInsulinText_ImportantInfo() {
+		if(validateNew(ImportantInfo_InsulinSavingsText) && validateNew(ImportantInfo_InsulinSavingsHeader)) {
+			Assert.assertTrue("Important Information Section - Insulin Tier Information is Displayed;  Header: "+ImportantInfo_InsulinSavingsHeader.getText()+"    Text : "+ImportantInfo_InsulinSavingsText.getText(),true);
+		}
+		else {
+			Assert.fail("Important Information Section - Insulin Tier Information is NOT Displayed");
+		}		
+		
+	}
+
 
 }

@@ -1288,6 +1288,7 @@ public class DCEStepDefinitionAARP {
 		}
 		String Premium = memberAttributesMap.get("Premium");
 		drugDetailsPage.validatePremium(Premium);
+		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetailsPage);
 	}
 
 	@Then("^the user validates following premium for the following plan on DCE Summary Page$")
@@ -1304,5 +1305,25 @@ public class DCEStepDefinitionAARP {
 		DrugSummaryPage drugSummaryPage = (DrugSummaryPage) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugSummary);
 		drugSummaryPage.validatePremiumForPlan(Premium,PlanType,PlanName );
 	}
+	
+
+	@Then("^the user validates Insulin savings on Copay section, Your Drugs and Important Information Section$")
+	public void the_user_validates_Insulin_savings_on_Copay_section_Your_Drugs_and_Important_Information_Section(DataTable arg1) throws Throwable {
+		List<DataTableRow> memberAttributesRow = arg1.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		String InsulinCopay = memberAttributesMap.get("InsulinCopay");
+		String InsulinDrug = memberAttributesMap.get("Insulin Drug");
+		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugDetails);
+		drugDetailsPage.validateInsulinTier_CopaySection(InsulinCopay);
+		drugDetailsPage.validateInsulinDrug_YourDrugs(InsulinDrug,InsulinCopay );
+		drugDetailsPage.validateInsulinText_ImportantInfo();
+		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetailsPage);
+		
+	}
+
 
 }
