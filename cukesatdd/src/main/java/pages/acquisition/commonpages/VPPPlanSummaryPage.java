@@ -3198,7 +3198,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		Thread.sleep(2000);
 		Part_B_yearDrpDwnOption.click();
 		Thread.sleep(2000);
-		startDrpDwn.click();
+		jsClickNew(startDrpDwn);
 		Thread.sleep(2000);
 		startDrpDwnOption.click();
 		System.out.println("Plan to start date selected");
@@ -4379,7 +4379,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		validateNew(RightRail_RulesandDisclosure);
 		CommonUtility.waitForPageLoadNew(driver, RightRail_RulesandDisclosure, 30);
 		String parentWindow = driver.getWindowHandle();
-		RightRail_RulesandDisclosure.click();
+		jsClickNew(RightRail_RulesandDisclosure);
 		sleepBySec(3);
 		Set<String> tabs_windows = driver.getWindowHandles();
 		Iterator<String> itr = tabs_windows.iterator();

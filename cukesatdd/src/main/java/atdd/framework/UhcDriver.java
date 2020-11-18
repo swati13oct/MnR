@@ -516,6 +516,7 @@ try {
 		int initialCount = driver.getWindowHandles().size();
 		jsClickNew(Element);
 		waitForCountIncrement(initialCount);
+		waitForPageLoadSafari();
 		ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
 		String currentHandle = null;
 		for (int i = 0; i < initialCount + 1; i++) {
@@ -733,6 +734,7 @@ try {
 		jsMouseOver(menuDropListItem);
 		jsClickNew(menuDropListItem);
 		CommonUtility.checkPageIsReadyNew(driver);
+		waitForPageLoadSafari();
 
 	}
 	
