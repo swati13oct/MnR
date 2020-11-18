@@ -1222,12 +1222,6 @@ public class DCEStepDefinitionAARP {
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetailsPage);
 
 		
-}
-
-	@Then("^the user validates the Drug list on Drug Details Page$")
-	public void the_user_validates_the_Drug_list_on_Drug_Details_Page() throws Throwable {
-		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugDetails);
-		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetailsPage);
 	}
 
 	@Then("^the user validates Dynamic Copay Section for following Pharmacy selection$")
