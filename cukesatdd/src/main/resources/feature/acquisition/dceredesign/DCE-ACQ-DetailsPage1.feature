@@ -58,7 +58,7 @@ Feature: 1.10.5 DCE-REDISIGN AARP DCE Details Page Scenarios - To test DCE Detai
     @DCE_DrugDetailsValidation_AARP
     Examples: 
       | drugnameAutocomplete | drug1   | drug2  | drug3   | drug4    | zipCode | planType | planName                                            | site | brundDrug | genericDrug | deleteDrug | addDrug |
-      | ativ                 | Orkambi | Fanapt | Humalog | Adderall |   80002 | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) | AARP | Ativan    | Lorazepam   | Humalog    | Lipitor |
+      | ativ                 | Orkambi | Fanapt | Humalog | Adderall |   80002 | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) | AARP | Ativan    | orazepam   | Humalog    | Lipitor |
 
     @DCE_DrugDetailsValidation_UHC
     Examples: 
