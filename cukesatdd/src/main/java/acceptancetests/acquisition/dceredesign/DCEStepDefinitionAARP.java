@@ -1004,9 +1004,9 @@ public class DCEStepDefinitionAARP {
 	public void the_user_navigates_to_dce_from_plan_compare_site() throws Throwable {
 		ComparePlansPage planComparepage = (ComparePlansPage) getLoginScenario()
 				.getBean(PageConstants.PLAN_COMPARE_PAGE);
-		GetStartedPage getStartedPage = planComparepage.navigateToDCERedesign();
-		if (null != getStartedPage) {
-			getLoginScenario().saveBean(PageConstants.DCE_Redesign_GetStarted, getStartedPage);
+		BuildYourDrugList DCEbuildDrugList = planComparepage.navigateToDCERedesign();
+		if (null != DCEbuildDrugList) {
+			getLoginScenario().saveBean(PageConstants.DCE_Redesign_BuildDrugList, DCEbuildDrugList);
 		} else
 			Assert.fail("DCE Redesign page object not loaded");
 	}

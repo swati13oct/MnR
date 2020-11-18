@@ -540,7 +540,8 @@ public class PlanDetailsPage extends UhcDriver {
 			return new BuildYourDrugList(driver);
 		}
 		Assert.fail("Did not Navigate to Build Drug List Page");
-		return null;	}
+		return null;
+	}
 	
 	public GetStartedPage navigateToDCERedesign() {
 
