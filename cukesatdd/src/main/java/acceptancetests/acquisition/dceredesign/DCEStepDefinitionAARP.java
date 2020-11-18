@@ -837,7 +837,7 @@ public class DCEStepDefinitionAARP {
 		getLoginScenario().saveBean(DCERedesignCommonConstants.AVG_MONTHLY, AVG_MONTHLY);
 		getLoginScenario().saveBean(DCERedesignCommonConstants.MONTHLY_PREMIUM, MONTHLY_PREMIUM);
 		getLoginScenario().saveBean(DCERedesignCommonConstants.ANNUAL_ESTIMATED_TOTAL, ANNUAL_ESTIMATED_TOTAL);
-		getLoginScenario().saveBean(DCERedesignCommonConstants.AVG_MONTHLY, COVERED_DRUGS_COUNT);
+		getLoginScenario().saveBean(DCERedesignCommonConstants.COVERED_DRUGS_COUNT, COVERED_DRUGS_COUNT);
 	}
 
 
@@ -987,9 +987,9 @@ public class DCEStepDefinitionAARP {
 	
 	@When("^user click on Switch To Generic$")
 	public void User_click_on_Switch_To_Generic_in_AARP() throws Throwable {
-		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
-		drugSummaryPage.clickswitchToGeneric();
-		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
+		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugDetails);
+		drugDetailsPage.clickswitchToGeneric();
+		
 	}
 	
 
@@ -1239,7 +1239,9 @@ public class DCEStepDefinitionAARP {
 	public void the_user_selects_Mail_Pharmacy_and_returns_to_DCE_Details_page() throws Throwable {
 		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugDetails);
 		drugDetailsPage.SelectMailPharmacy();
-		drugDetailsPage.validatePharmacyName("Preferred Mail Service");
+		String pharmacy = "Preferred Mail Service Pharmacy"; 
+		drugDetailsPage.validatePharmacyName(pharmacy);
+		getLoginScenario().saveBean(PageConstants.PHARMACY_NAME, pharmacy);
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetailsPage);
 
 	}
@@ -1288,5 +1290,54 @@ public class DCEStepDefinitionAARP {
 		DrugSummaryPage drugSummaryPage = (DrugSummaryPage) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugSummary);
 		drugSummaryPage.validatePremiumForPlan(Premium,PlanType,PlanName );
 	}
+	
+	@Then("^the user Captures Drug costs on Drug Summary Page for the given plan$")
+	public void the_user_Captures_Drug_costs_on_Drug_Summary_Page_For_Given_Plan(DataTable attributes) throws Throwable {
+		List<DataTableRow> memberAttributesRow = attributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		String planName = memberAttributesMap.get("Plan Name");
+		DrugSummaryPage drugSummaryPage = (DrugSummaryPage) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugSummary);
+		Map<String, String> DrugCosts = drugSummaryPage.captureDrugCosts(planName);
+		String AVG_MONTHLY = DrugCosts.get("AVG_MONTHLY");
+		String MONTHLY_PREMIUM = DrugCosts.get("MONTHLY_PREMIUM");
+		String ANNUAL_ESTIMATED_TOTAL = DrugCosts.get("ANNUAL_ESTIMATED_TOTAL");
+		String COVERED_DRUGS_COUNT = DrugCosts.get("COVERED_DRUGS_COUNT");
 
+		System.out.println(DrugCosts);
+		getLoginScenario().saveBean(DCERedesignCommonConstants.AVG_MONTHLY_DRUG_SUMMARY, AVG_MONTHLY);
+		getLoginScenario().saveBean(DCERedesignCommonConstants.MONTHLY_PREMIUM_DRUG_SUMMARY, MONTHLY_PREMIUM);
+		getLoginScenario().saveBean(DCERedesignCommonConstants.ANNUAL_ESTIMATED_TOTAL_DRUG_SUMMARY, ANNUAL_ESTIMATED_TOTAL);
+		getLoginScenario().saveBean(DCERedesignCommonConstants.COVERED_DRUGS_COUNT_DRUG_SUMMARY,COVERED_DRUGS_COUNT);
+	}
+
+	@Then("^the user compares drug costs for drug details and drug summary pages$")
+	public void the_user_compares_drug_costs_for_drug_details_and_drug_summary() throws Throwable {
+		String drugSummaryAvgMonthly = (String)getLoginScenario().getBean(DCERedesignCommonConstants.AVG_MONTHLY_DRUG_SUMMARY);
+		String drugSummaryMonthlyPremium =(String)getLoginScenario().getBean(DCERedesignCommonConstants.MONTHLY_PREMIUM_DRUG_SUMMARY);
+		String drugSummaryAnnualEstimated =(String)getLoginScenario().getBean(DCERedesignCommonConstants.ANNUAL_ESTIMATED_TOTAL_DRUG_SUMMARY);
+		String drugSummaryDrugCount =(String)getLoginScenario().getBean(DCERedesignCommonConstants.COVERED_DRUGS_COUNT_DRUG_SUMMARY);
+		String drugDetailsAvgMonthly =(String)getLoginScenario().getBean(DCERedesignCommonConstants.AVG_MONTHLY);
+		String drugDetailsMonthlyPremium =(String)getLoginScenario().getBean(DCERedesignCommonConstants.MONTHLY_PREMIUM);
+		String drugDetailsAnnualEstimated =(String)getLoginScenario().getBean(DCERedesignCommonConstants.ANNUAL_ESTIMATED_TOTAL);
+		String drugDetailsDrugCount =(String)getLoginScenario().getBean(DCERedesignCommonConstants.COVERED_DRUGS_COUNT);
+		
+		if(drugSummaryAvgMonthly.equals(drugDetailsAvgMonthly) && drugSummaryMonthlyPremium.equals(drugDetailsMonthlyPremium) && drugSummaryAnnualEstimated.equals(drugDetailsAnnualEstimated) && drugDetailsDrugCount.equals(drugSummaryDrugCount))
+			System.out.println("Drug costs mathced");
+		else
+			Assert.fail("Drug costs between drug details and drug summary didn't match");
+		
+	}
+	
+	@Then("^the user verifies the added pharmacy on prescription drug tab$")
+	public void the_user_verifies_pharmacy_on_prescription_drug_tab() throws Throwable {
+		PlanDetailsPage planDetailsPage = (PlanDetailsPage)getLoginScenario().getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
+		String pharmacyName = (String)getLoginScenario().getBean(PageConstants.PHARMACY_NAME);
+		planDetailsPage.verifyPharmacyAdded(pharmacyName);
+		
+	}
+	
 }
