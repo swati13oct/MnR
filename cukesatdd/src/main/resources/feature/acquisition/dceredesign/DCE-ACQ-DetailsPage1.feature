@@ -13,7 +13,7 @@ Feature: 1.10.5 DCE-REDISIGN AARP DCE Details Page Scenarios - To test DCE Detai
     Then user enter the following drug info and validates drug autocomplete
       | DrugNameAutoComplete | <drugnameAutocomplete> |
     Then the user selects the following Brand Name drug from the dropdown
-      | BrandDrugName | <brundDrug> |
+      | BrandDrugName | <brandDrug> |
     Then the user validates Tell Us About Drug - Brand page for the Drug
       | GenericName | <genericDrug> |
     Then the user clicks on Add Drug to add drug to drug list
