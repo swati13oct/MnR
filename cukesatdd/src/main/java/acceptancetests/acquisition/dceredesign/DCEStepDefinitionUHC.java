@@ -69,10 +69,9 @@ public class DCEStepDefinitionUHC {
 	@When("^the user clicks on Add drugs button on UHC$")
 	public void the_user_clicks_on_Add_drugs_button_UHC() {
 		GetStartedPage DCEgetStarted = (GetStartedPage) getLoginScenario()
-				.getBean(PageConstants.DCE_Redesign_BuildDrugList);
-		DCEgetStarted.clickAddDrugsBtn();
-		// getLoginScenario().saveBean(PageConstants.DCE_Redesign_ZipCodePlanYearCapture,
-		// zipCodePlanYearPage);
+				.getBean(PageConstants.DCE_Redesign_GetStarted);
+		BuildYourDrugList DCEbuildDrugList = DCEgetStarted.clickAddsDrugs();
+		getLoginScenario().saveBean(PageConstants.DCE_Redesign_BuildDrugList,DCEgetStarted);
 	}
 	
 	  @When("^adds drugs in drug list page on UHC$") public void

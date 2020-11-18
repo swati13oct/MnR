@@ -32,6 +32,7 @@ import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 import gherkin.formatter.model.DataTableRow;
+import pages.acquisition.dceredesign.BuildYourDrugList;
 import pages.acquisition.dceredesign.DrugDetailsPage;
 import pages.acquisition.dceredesign.GetStartedPage;
 import pages.acquisition.ole.WelcomePage;
@@ -527,14 +528,18 @@ public class PlanDetailsPage extends UhcDriver {
 		return null;
 	}
 	
-	public GetStartedPage navigateToDCERedesignEditDrug() {
+	public BuildYourDrugList navigateToDCERedesignEditDrug() {
 
 		jsClickNew(presDrugTab.get(0));
 		validateNew(editDrugLink, 20);
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", editDrugLink);
 		((JavascriptExecutor) driver).executeScript("arguments[0].click();", editDrugLink);
-		if (validateNew(dceHeader))
-			return new GetStartedPage(driver);
+		CommonUtility.waitForPageLoad(driver, BuildDrugPage_EnterDrugNameTxt, 30);
+		if (validateNew(BuildDrugPage_EnterDrugNameTxt)) {
+			Assert.assertTrue("Naviagted to Build Drug List Page", true);
+			return new BuildYourDrugList(driver);
+		}
+		Assert.fail("Did not Navigate to Build Drug List Page");
 		return null;
 	}
 	
@@ -1329,14 +1334,21 @@ public class PlanDetailsPage extends UhcDriver {
 			jsClickNew(planCostsTab);
 			
 		}
-		
-		public GetStartedPage navigateToDCERedesignFromPlanCostTab() {
+
+		@FindBy(xpath = "//input[contains(@id, 'drugsearch')]")
+		public WebElement BuildDrugPage_EnterDrugNameTxt;
+
+		public BuildYourDrugList navigateToDCERedesignFromPlanCostTab() {
 
 			validateNew(editDrugLinkPlanCost, 20);
 			jsClickNew(editDrugLinkPlanCost);
 			
-			if (validateNew(dceHeader))
-				return new GetStartedPage(driver);
+			CommonUtility.waitForPageLoad(driver, BuildDrugPage_EnterDrugNameTxt, 30);
+			if (validateNew(BuildDrugPage_EnterDrugNameTxt)) {
+				Assert.assertTrue("Naviagted to Build Drug List Page", true);
+				return new BuildYourDrugList(driver);
+			}
+			Assert.fail("Did not Navigate to Build Drug List Page");
 			return null;
 		}
 
