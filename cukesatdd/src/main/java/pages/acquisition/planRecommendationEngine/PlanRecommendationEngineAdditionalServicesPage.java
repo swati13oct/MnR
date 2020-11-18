@@ -227,4 +227,8 @@ public class PlanRecommendationEngineAdditionalServicesPage extends UhcDriver {
 	desktopCommonUtils.nextPageValidation(page.toUpperCase());
 	}
 
+	public void edit_additional(String additionalOptions) {
+		additionalpageOptions(additionalOptions.split(",")[0],additionalOptions.split(",")[1],additionalOptions.split(",")[2],additionalOptions.split(",")[3]);
+	}
+	
 }

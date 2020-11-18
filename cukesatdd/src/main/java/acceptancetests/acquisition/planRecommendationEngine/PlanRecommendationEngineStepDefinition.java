@@ -828,4 +828,47 @@ public class PlanRecommendationEngineStepDefinition {
 		PlanRecommendationEngineEditResponsePage preEditpage =  new PlanRecommendationEngineEditResponsePage(wd);
 		preEditpage.returnVPP(button);
    	}
+	
+	@Then("^user edits values in edit response page$")
+   	public void edit_saved_value_editResponse_page(DataTable givenAttributes) {
+		readfeaturedata(givenAttributes);
+		PlanRecommendationEngineEditResponsePage preEditpage =  new PlanRecommendationEngineEditResponsePage(wd);
+		preEditpage.editUserResponse(inputValues);
+   	}
+	
+	@Then("^user adds doctor in edit response page$")
+   	public void add_doctor_editResponse_page(DataTable givenAttributes) {
+		readfeaturedata(givenAttributes);
+		PlanRecommendationEngineEditResponsePage preEditpage =  new PlanRecommendationEngineEditResponsePage(wd);
+		preEditpage.addDoctorEditResponse(inputValues);
+   	}
+	
+	@Then("^user navigates to edit response page$")
+   	public void navigate_editResponse_page(DataTable givenAttributes) {
+		readfeaturedata(givenAttributes);
+		PlanRecommendationEngineEditResponsePage preEditpage =  new PlanRecommendationEngineEditResponsePage(wd);
+		preEditpage.navigateEditResponsePage(inputValues.get("Plan Type"));
+   	}
+
+	@Then("^user edits coverage value in edit response page$")
+   	public void edit_coverage_editResponse_page(DataTable givenAttributes) {
+		readfeaturedata(givenAttributes);
+		PlanRecommendationEngineEditResponsePage preEditpage =  new PlanRecommendationEngineEditResponsePage(wd);
+		preEditpage.changeCoverage(inputValues);
+   	}
+	
+	@Then("^user validates coverage value in edit response page$")
+   	public void validate_coverage_editResponse_page(DataTable givenAttributes) {
+		readfeaturedata(givenAttributes);
+		PlanRecommendationEngineEditResponsePage preEditpage =  new PlanRecommendationEngineEditResponsePage(wd);
+		preEditpage.checkCoveragevalue(inputValues);
+   	}
+	
+	@Then("^user selects add drug option in drug page from edit response page$")
+   	public void add_drug_editResponse_page(DataTable givenAttributes) {
+		readfeaturedata(givenAttributes);
+		PlanRecommendationEngineEditResponsePage preEditpage =  new PlanRecommendationEngineEditResponsePage(wd);
+		preEditpage.addDrugs(inputValues);
+   	}
+
 }

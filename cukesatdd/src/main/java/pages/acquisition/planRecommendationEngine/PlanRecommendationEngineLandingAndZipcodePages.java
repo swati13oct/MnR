@@ -333,4 +333,15 @@ public void getStartedAndRunzipcodeWithCounty(String zip_code, String County) th
 		driver.switchTo().defaultContent();
 		return popup_presents;
 	}
+	
+	public void edit_location(String zipcode,String multi,String county) {
+		waitforElementVisibilityInTime(zipCode, 45);
+		zipCode.clear();
+		sendkeys(zipCode, zipcode);
+		if(multi.equalsIgnoreCase("Yes")) {
+			waitforElementVisibilityInTime(PRECounty, 45);
+			selectFromDropDownByText(driver, PRECounty, county);
+		}
+		threadsleep(3000);
+	}
 }
