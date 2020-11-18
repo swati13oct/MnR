@@ -253,8 +253,8 @@ public class BuildYourDrugList extends UhcDriver {
 		for(String currentDrug : DrugListItems) {
 			System.out.println("Current Added Drug Name : "+currentDrug);
 			WebElement DrugName = driver.findElement(By.xpath("//uhc-list-item//h4[contains(text(), '"+currentDrug+"')]"));
-			WebElement DrugEditBtn = driver.findElement(By.xpath("//uhc-list-item//button[contains(@aria-label, 'Edit "+currentDrug+"')]"));
-			WebElement DrugRemoveBtn = driver.findElement(By.xpath("//uhc-list-item//button[contains(@aria-label, 'Remove "+currentDrug+"')]"));
+			WebElement DrugEditBtn = driver.findElement(By.xpath("//uhc-list-item//button[contains(@aria-label, 'Edit') and contains(@aria-label, '"+currentDrug+"')]"));
+			WebElement DrugRemoveBtn = driver.findElement(By.xpath("//uhc-list-item//button[contains(@aria-label, 'Remove') and contains(@aria-label, '"+currentDrug+"')]"));
 
 			if(validateNew(DrugName) && validateNew(DrugEditBtn) && validateNew(DrugRemoveBtn)) {
 				Assert.assertTrue("Validated Drug List for Drug : "+currentDrug, true);
@@ -298,6 +298,21 @@ public class BuildYourDrugList extends UhcDriver {
 			Assert.fail("Review drug cost page not displayed");
 			return null;
 		}
+	}
+	
+	public TellUsAboutDrug clickOnEditButton(String drug) {
+
+		WebElement editLink = driver.findElement(By.xpath("//*[contains(@aria-label,'Edit "+drug+"')]"));
+		jsClickNew(editLink);
+		
+		return new TellUsAboutDrug(driver);
+		
+	}
+
+	public void clickOnRemoveButton(String drug) {
+		WebElement removeLink = driver.findElement(By.xpath("//*[contains(@aria-label,'Remove "+drug+"')]"));
+		jsClickNew(removeLink);
+		
 	}
 
 }

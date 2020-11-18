@@ -112,7 +112,7 @@ public class DrugDetailsPage extends UhcDriver {
 	public WebElement MonthlyDrugStage_CatastropheLink;
 
 //	MonthlyDrugCost Changes Start
-	@FindBy(xpath = "//h2[@class='heading-4' and text()='Monthly Cost Details']")
+	@FindBy(xpath = "//h2[@class='heading-4' and contains(text(),'Monthly Drug Cost Details')]")
 	public WebElement MonthlyCostDetails_Header;
 	@FindBy(xpath = "//div[@id='monthlycostdetails']//th[contains(text(), 'Total Drug Price')]")
 	public WebElement MonthlyDrug_TotalDrugPrice_heading;
@@ -404,13 +404,13 @@ public class DrugDetailsPage extends UhcDriver {
 	@FindBy(xpath = "//*[contains(@class, 'uhc-modal')]//*[contains(@id, 'cancelicon')]")
 	public WebElement StageInfo_Modal_Close;
 
-	@FindBy(xpath = "//*[contains(@class, 'uhc-modal')]//h1[contains(text(), 'Initial Coverage Stage')]")
+	@FindBy(xpath = "//*[contains(@class, 'uhc-modal')]//*[contains(@id, 'modal-label')][contains(text(), 'Initial')]")
 	public WebElement InitialCoverage_Modal_Header;
 
-	@FindBy(xpath = "//*[contains(@class, 'uhc-modal')]//h1[contains(text(), 'Coverage Gap Stage')]")
+	@FindBy(xpath = "//*[contains(@class, 'uhc-modal')]//*[contains(@id, 'modal-label')][contains(text(), 'Gap')]")
 	public WebElement CoverageGap_Modal_Header;
 	
-	@FindBy(xpath = "//*[contains(@class, 'uhc-modal')]//h1[contains(text(), 'Catastrophic Coverage Stage')]")
+	@FindBy(xpath = "//*[contains(@class, 'uhc-modal')]//*[contains(@id, 'modal-label')][contains(text(), 'Catastrophic')]")
 	public WebElement Catastrophe_Modal_Header;
 
 	public void validateDrugStageInfoModals() {
@@ -1131,6 +1131,16 @@ public class DrugDetailsPage extends UhcDriver {
 		}
 		else {
 			Assert.fail("Correct Pharmacy Name is NOT Displayed : "+PharmacyNameText.getText());
+		}
+	}
+
+	public void validatePremium(String premium) {
+		WebElement PremiumforPlan = driver.findElement(By.xpath("//div[contains(text(), 'Monthly Premium')]//following-sibling::*[contains(text(), '$')]"));
+		validateNew(PremiumforPlan);
+		String PremiumDisplayed	= PremiumforPlan.getText();
+		System.out.println("Premium Displayed for Plan : "+PremiumDisplayed);
+		if(!PremiumDisplayed.contains(premium)) {
+			Assert.fail("Expected Premium not displayed, Expected : "+premium+"    Actual Displayed : "+PremiumDisplayed);
 		}
 	}
 
