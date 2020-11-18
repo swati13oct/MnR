@@ -112,7 +112,7 @@ public class DrugDetailsPage extends UhcDriver {
 	public WebElement MonthlyDrugStage_CatastropheLink;
 
 //	MonthlyDrugCost Changes Start
-	@FindBy(xpath = "//h2[@class='heading-4' and text()='Monthly Cost Details']")
+	@FindBy(xpath = "//h2[@class='heading-4' and contains(text(),'Monthly Drug Cost Details')]")
 	public WebElement MonthlyCostDetails_Header;
 	@FindBy(xpath = "//div[@id='monthlycostdetails']//th[contains(text(), 'Total Drug Price')]")
 	public WebElement MonthlyDrug_TotalDrugPrice_heading;

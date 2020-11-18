@@ -170,7 +170,7 @@ public class DCEStepDefinitionAARP {
 		GetStartedPage DCEgetStarted = (GetStartedPage) getLoginScenario()
 				.getBean(PageConstants.DCE_Redesign_GetStarted);
 		BuildYourDrugList DCEbuildDrugList = DCEgetStarted.clickAddsDrugs();
-		getLoginScenario().saveBean(PageConstants.DCE_Redesign_BuildDrugList,DCEgetStarted);
+		getLoginScenario().saveBean(PageConstants.DCE_Redesign_BuildDrugList,DCEbuildDrugList);
 	}
 
 	@Then("^plan year dropdown should be displayed during AEP$")
@@ -259,11 +259,6 @@ public class DCEStepDefinitionAARP {
 		TellUsAboutDrug tellUsAboutDrug = DCEbuildDrugList.SelectDrugfromList(DrugName);
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_TellUsAboutDrug, tellUsAboutDrug);
 		getLoginScenario().saveBean(DCERedesignCommonConstants.BRAND_DRUG1, DrugName);
-		String druglist = (String) getLoginScenario().getBean(DCERedesignCommonConstants.DRUGLIST);
-		druglist = druglist + "&" + DrugName;
-		System.out.println("Drugs List : " + druglist);
-		getLoginScenario().saveBean(DCERedesignCommonConstants.DRUGLIST, druglist);
-
 	}
 
 	@Then("^the user validates Tell Us About Drug - Brand page for the Drug$")
@@ -298,11 +293,22 @@ public class DCEStepDefinitionAARP {
 	}
 
 	@Then("^the user clicks on Add Drug to add drug to drug list$")
-	public void the_user_clicks_on_Add_Drug_to_add_drug_to_drug_list() throws Throwable {
+	public void the_user_clicks_on_Add_Drug_to_add_drug_to_drug_list(DataTable givenAttributes) throws Throwable {
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		String drugName = memberAttributesMap.get("BrandDrugName");
 		TellUsAboutDrug tellUsAboutDrug = (TellUsAboutDrug) getLoginScenario()
 				.getBean(PageConstants.DCE_Redesign_TellUsAboutDrug);
 		BuildYourDrugList DCEbuildDrugList = tellUsAboutDrug.ClickAddDrug();
-	}
+		String druglist = (String) getLoginScenario().getBean(DCERedesignCommonConstants.DRUGLIST);
+		druglist = druglist + "&" + drugName;
+		System.out.println("Drugs List : " + druglist);
+		getLoginScenario().saveBean(DCERedesignCommonConstants.DRUGLIST, druglist);
+}
 
 
 	@Then("^the user clicks on Review Drug Costs to Land on Zip Entry Page$")
