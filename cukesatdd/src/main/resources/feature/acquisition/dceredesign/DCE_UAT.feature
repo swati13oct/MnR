@@ -10,26 +10,23 @@ Feature:1.10.4 UAT-DCE-To test UAT DCE E2E Regression Scenarios
     Then the user clicks on Build Drug List to navigate to Build Drug List Page
     Then the user searches and adds the following Drug to Drug List
       | DrugName | <drug1> |
-    Then the user searches and adds the following Drug to Drug List
-      | DrugName | <drug2> |
-    Then the user searches and adds the following Drug to Drug List
-      | DrugName | <drug3> |
-    Then the user searches and adds the following Drug to Drug List
-      | DrugName | <drug4> |
     Then the user clicks on Review Drug Costs to Land on Zip Entry Page
     When user enters valid zipcode and county
       | ZipCode | <zipCode> |
     And user clicks on continue button in Zip Entry Page
+    Then the user selects View Drug details for following plantype and PlanName
+      | Plan Type | <planType> |
+      | Plan Name | <planName> |
 
 		@dce_redesign_ShopPDP_AARP
     Examples: 
-      |Scenario| drug1   | drug2  | drug3   | drug4    | zipCode |site|
-     	|E2E Scenario 2_AMP| Orkambi | Fanapt | Humalog | Adderall |   80002 |AARP|
+      |Scenario| drug1    | planType   | planName    | zipCode |site|
+     	|E2E Scenario 2_AMP| Lipitor | PDP  | AARP MedicareRx Walgreens (PDP) |   80002 |AARP|
      
      @dce_redesign_ShopPDP_UHC
      Examples: 
-      |Scenario | drug1   | drug2  | drug3   | drug4    | zipCode |site|
-      |E2E Scenario 2_UMS| Orkambi | Fanapt | Humalog | Adderall |   80002 |UHC|
+      |Scenario | drug1   | planType    | planName    | zipCode |site|
+      |E2E Scenario 2_UMS| Lipitor | PDP | AARP MedicareRx Walgreens (PDP) | Adderall |   80002 |UHC|
       
       
   @DCE_MedEdPage
