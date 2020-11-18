@@ -327,11 +327,14 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//button[contains(@class,'zip-button') and contains(@dtmid,'landing')]")
 	private WebElement planOverviewFindPlanButton;
 
-	@FindBy(xpath = "//a[@id='popupClose']")
-	private WebElement closeProfilePopup;
+	@FindBy(xpath = "//*[contains(@id,'pop-btn-1')]")
+	private WebElement keepShoppingBtn;
 
 	@FindBy(id="dupIconFlyOut")
 	private WebElement shoppingCartIcon;
+	
+	@FindBy(css="a#visitor-profile-header")
+    private WebElement lnkProfile;
 	
 	private String savePlanLinkTextXpath = "//span[contains(text(),'Save Plan')]";
 	private String savePlanImgXpath = "//img[contains(@src,'ic_favorite-unfilled.png')]";
@@ -727,6 +730,15 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath="//a[contains(@href,'//aarpsupplementalhealth-stg.uhc.com/content/dam/ole/MedSuppDocs/EnrollmentDiscount')]")
 	private WebElement EnrollmentDiscount;
 	
+	@FindBy(xpath="//a[contains(text(),'Back to all plans')]")
+	private WebElement backallplans;
+	
+	@FindBy(xpath="//*[text()='Gym Membership']")
+	private WebElement GymMembership;
+	
+	@FindBy(xpath="(//a[contains(text(),'Learn more')])[1]")
+	private WebElement LearnMoreLink;
+	
 	@FindBy(xpath = "//*[contains(@id,'mpaed-month')]")
 	private WebElement monthDrpDwn_PartA;
 
@@ -750,6 +762,18 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	@FindBy(xpath = "//*[@id='mpbed-year']/option[3]")
 	private WebElement yearBDrpDwnOption;
+	
+	@FindBy(xpath = "//*[@id='mpaed-year']/option[3]")
+	private WebElement medsuppPlandetails;
+	
+	@FindBy(xpath = "(//button[contains(text(),'View plan details')])[1]")
+	private WebElement viewplandetails;
+	
+	@FindBy(xpath = "//h3[contains(text(),'Medicare Part A: Hospital Services per Benefit Period')]")
+	private WebElement PartA;
+	
+	@FindBy(xpath = "//h3[contains(text(),'Medicare Part B: Medical Services per Calendar Year')]")
+	private WebElement PartB;
 	
 	public WebElement getValEstimatedAnnualDrugCostValue(String planName) {
 		// WebElement valEstimatedAnnualDrugCostValue =
@@ -882,10 +906,11 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	public ProviderSearchPage clicksOnIsProviderCovered(String planName) {
 
+		sleepBySec(5);
 		CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
 
-		WebElement ProviderSearchLink = driver.findElement(By.xpath("//*[contains(text(),\'" + planName
-				+ "\')]/ancestor::div[contains(@class,'module-plan-overview')]//*[contains(@dtmname,'Provider Search')]"));
+		WebElement ProviderSearchLink = driver.findElement(By.xpath("//*[contains(text(),'" + planName
+				+ "')]/ancestor::div[contains(@class,'module-plan-overview')]//*[contains(@dtmname,'Provider Search')]"));
 		validateNew(ProviderSearchLink);
 		switchToNewTabNew(ProviderSearchLink);
 		sleepBySec(15);
@@ -2746,8 +2771,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			jsClickNew(listOfSavePlanIcons.get(0));
 
 			System.out.println("Click to close on the create profile popup");
-			if (validate(closeProfilePopup))
-				closeProfilePopup.click();
+			if (validate(keepShoppingBtn))
+				keepShoppingBtn.click();
 			CommonUtility.checkPageIsReady(driver);
 			
 			System.out.println("Proceed to validate 'Save Plan' link and icon disappeared after clicking it");
@@ -3581,6 +3606,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	 */
 	public VisitorProfilePage navigateToVisitorProfilePage() {
 		shoppingCartIcon.click();
+		jsClickNew(lnkProfile);
 		if(driver.getCurrentUrl().contains("profile")) {
 			CommonUtility.checkPageIsReadyNew(driver);
 			return new VisitorProfilePage(driver);
@@ -4394,6 +4420,32 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		
 	}	
 	
+
+	public void medsuppOLERightRailLearnmore() throws InterruptedException {
+		validateNew(LearnMoreLink);
+		CommonUtility.waitForPageLoadNew(driver, LearnMoreLink, 30);
+		LearnMoreLink.click();
+		sleepBySec(3);
+		CommonUtility.checkPageIsReadyNew(driver);
+	   driver.getCurrentUrl().contains("plan-summary");
+	//	System.out.println("Actual  URL: "+CurrentRailURL);
+
+	/*	if(CurrentRailURL.contains("/health-plans.html#/plan-summary")){
+			System.out.println("***************learnmore about the plan is displayed  ***************");
+
+			Assert.assertTrue(true);*/
+			validateNew(GymMembership);
+			GymMembership.isDisplayed();
+			validateNew(backallplans);
+			 backallplans.click();
+		/*}
+		else {
+			Assert.fail("****************learnmore about the plan is not loaded ***************");
+		}*/
+		
+	}	
+	
+	
 	public Map<String, String> CapturePreEntryPageInfo(String DateOfBirth) {
 
 		validateNew(DOB, 30);
@@ -4510,5 +4562,38 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	}
 	
+
 	
+	
+	public void medsuppOLEplandetails() throws InterruptedException {
+		//validateNew(viewplandetails);
+		//CommonUtility.waitForPageLoadNew(driver, medsuppPlandetails, 30);
+		//medsuppPlandetails.click();
+	//	sleepBySec(3);
+		validateNew(viewplandetails);
+		viewplandetails.click();
+		sleepBySec(3);
+		validateNew(PartA);
+		String parta = PartA.getText();
+		if(parta.isEmpty())
+		{
+			Assert.fail("Part A is not displayed");
+		}
+		else {
+			System.out.println("Expected  part A is displayed" +parta);
+		}
+		
+		validateNew(PartB);
+		String partb = PartB.getText();
+		if(partb.isEmpty())
+		{
+			Assert.fail("Part A is not displayed");
+		}
+		else {
+			System.out.println("Expected  part B is displayed" +partb);
+		}
+
+	}
+
+
 }

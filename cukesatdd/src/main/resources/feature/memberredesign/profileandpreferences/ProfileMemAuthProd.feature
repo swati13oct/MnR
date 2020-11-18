@@ -1,9 +1,9 @@
 @accountProfileProfile @thePredators @F402311
 Feature: 1.02.1 Member Profile page - Prod
 
-  #Background: If run on stage then feature security flag needs to be true
-  #   Given feature security flag must set to true when testing on stage env
-  #    | Feature           | UCPProfileAndPreferences |
+  Background: If run on stage then feature security flag needs to be true
+     Given feature security flag must set to true when testing on test env
+      | Feature           | UCPProfileAndPreferences |
 
   @prodSanity_MAPD_Groups
   Scenario Outline: TID: <TID> -Plan Type: <planType> - To verify Profile page End to End test for MAPD and MA Members
