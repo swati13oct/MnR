@@ -141,18 +141,23 @@ public class DCEStepDefinitionAARP {
 		BuildYourDrugList DCEbuildDrugList = tellUsAboutDrugPage.ClickAddDrug();
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_BuildDrugList, DCEbuildDrugList);
 	}
-
-	@Then("^the user clicks on Build Drug List to navigate to Step (\\d+)$")
-	public void the_user_clicks_on_Build_Drug_List_to_navigate_to_Step(int arg1) throws Throwable {
-		GetStartedPage DCEgetStarted = (GetStartedPage) getLoginScenario()
-				.getBean(PageConstants.DCE_Redesign_GetStarted);
-		BuildYourDrugList DCEbuildDrugList = DCEgetStarted.clickAddsDrugs();
-		getLoginScenario().saveBean(PageConstants.DCE_Redesign_BuildDrugList, DCEbuildDrugList);
-
-		ZipCodePlanYearCapturePage zipCodePlanYearPage = new ZipCodePlanYearCapturePage(driver);
-		zipCodePlanYearPage.validateZipCodePlanYearCapturePageNonAEP();
-		getLoginScenario().saveBean(PageConstants.DCE_Redesign_ZipCodePlanYearCapture, zipCodePlanYearPage);
-	}
+	/*
+	 * 
+	 * UnUSed Step...
+	 * @Then("^the user clicks on Build Drug List to navigate to Step (\\d+)$")
+	 * public void the_user_clicks_on_Build_Drug_List_to_navigate_to_Step(int arg1)
+	 * throws Throwable { GetStartedPage DCEgetStarted = (GetStartedPage)
+	 * getLoginScenario() .getBean(PageConstants.DCE_Redesign_GetStarted);
+	 * BuildYourDrugList DCEbuildDrugList = DCEgetStarted.clickAddsDrugs();
+	 * getLoginScenario().saveBean(PageConstants.DCE_Redesign_BuildDrugList,
+	 * DCEbuildDrugList);
+	 * 
+	 * ZipCodePlanYearCapturePage zipCodePlanYearPage = new
+	 * ZipCodePlanYearCapturePage(driver);
+	 * zipCodePlanYearPage.validateZipCodePlanYearCapturePageNonAEP();
+	 * getLoginScenario().saveBean(PageConstants.
+	 * DCE_Redesign_ZipCodePlanYearCapture, zipCodePlanYearPage); }
+	 */
 	
 	@Then("^the user validates error message for blank search$")
 	public void the_user_validates_error_message_for_blank_search() throws Throwable {
@@ -164,9 +169,8 @@ public class DCEStepDefinitionAARP {
 	public void the_user_clicks_on_Add_drugs_button() {
 		GetStartedPage DCEgetStarted = (GetStartedPage) getLoginScenario()
 				.getBean(PageConstants.DCE_Redesign_GetStarted);
-		DCEgetStarted.clickAddDrugsBtn();
-		// getLoginScenario().saveBean(PageConstants.DCE_Redesign_ZipCodePlanYearCapture,
-		// zipCodePlanYearPage);
+		BuildYourDrugList DCEbuildDrugList = DCEgetStarted.clickAddsDrugs();
+		getLoginScenario().saveBean(PageConstants.DCE_Redesign_BuildDrugList,DCEgetStarted);
 	}
 
 	@Then("^plan year dropdown should be displayed during AEP$")
