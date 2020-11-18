@@ -69,10 +69,9 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 
 	@FindBy(xpath = "//span[(text()='4 of 4 Plans') and @xpath='1']")
 	WebElement plan;
-	
+
 	@FindBy(xpath = "//div/label[@for='currentYear']")
 	WebElement currentYearTab;
-	
 
 	@FindBy(xpath = "//*[@id='togglecurrentYear']/a")
 	private WebElement YearToggle;
@@ -725,7 +724,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 	@FindBy(css = "div#providersBanner>div")
 	private WebElement existingProviders;
 
-	@FindBy(xpath = "//div[contains(@class,'container')]//img[@alt='Rocky Mountain']")
+	@FindBy(xpath = "//header/nav[2]/div[2]/a[1]/img[1]")
 	private WebElement rockyMountainLogo;
 
 	@FindBy(xpath = "//div[contains(@class,'container')]//img[@alt='Peoples Health']")
@@ -787,9 +786,10 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 			return false;
 		}
 	}
-	
+
 	public void clickCurrentYearTab() {
 		jsClickNew(currentYearTab);
+		sleepBySec(3);
 	}
 
 	@Override
@@ -802,7 +802,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 		waitforElement(maPlansCount);
 		scrollToView(maPlansCount);
 		validateNew(maPlansCount);
-		
+
 		waitforElement(msPlansCount);
 		scrollToView(msPlansCount);
 		validateNew(msPlansCount);
@@ -866,7 +866,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 	}
 
 	public ProviderSearchPageMobile clickNextBestActionModalFindMyDoctorsBtn() {
-		//nextBestActionModalFindMyDoctorsBtn.click();
+		// nextBestActionModalFindMyDoctorsBtn.click();
 		jsClickNew(nextBestActionModalFindMyDoctorsBtn);
 		CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
 		int initialCount = driver.getWindowHandles().size();
@@ -880,7 +880,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 		}
 		if (driver.getCurrentUrl().contains("werally")) {
 			return new ProviderSearchPageMobile(driver);
-				}
+		}
 		return null;
 	}
 
@@ -955,7 +955,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 		CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
 
 		WebElement ProviderSearchLink = driver.findElement(By.xpath("//*[contains(text(),\'" + planName
-				+ "\')]/ancestor::div[contains(@class,'module-plan-overview')]//*[contains(@dtmname,'Provider Search')]"));
+				+ "\')]/ancestor::div[contains(@class,'module-plan-overview')]//*[contains(@class,'add-provider')]"));
 		validateNew(ProviderSearchLink);
 		switchToNewTabNew(ProviderSearchLink);
 		sleepBySec(3);
@@ -1881,25 +1881,28 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 		}
 	}
 
-public void validatePlanPremium (String planName , String monthlyPremium){
-		
+	public void validatePlanPremium(String planName, String monthlyPremium) {
+
 		WebElement premiumForPlan = null;
-		if(planName.contains("SNP")){
-			 premiumForPlan = driver.findElement(By.xpath("(//*[contains(text(),\'" + planName + "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//li[contains(@id, 'linkforsnp')]//*[contains(text(),'Monthly Premium')])"));
-		}else if(planName.contains("PDP")){
-			 premiumForPlan = driver.findElement(By.xpath("(//*[contains(text(),\'" + planName + "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class, 'pdpbenefittable')]//li[contains(text(),'Monthly Premium')])"));
-		}else
-			 premiumForPlan = driver.findElement(By.xpath("(//*[contains(text(),\'" + planName + "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class, 'mabenefittable')]//li//*[contains(text(),'Monthly Premium')])"));
-		
+		if (planName.contains("SNP")) {
+			premiumForPlan = driver.findElement(By.xpath("(//*[contains(text(),\'" + planName
+					+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//li[contains(@id, 'linkforsnp')]//*[contains(text(),'Monthly Premium')])"));
+		} else if (planName.contains("PDP")) {
+			premiumForPlan = driver.findElement(By.xpath("(//*[contains(text(),\'" + planName
+					+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class, 'pdpbenefittable')]//li[contains(text(),'Monthly Premium')])"));
+		} else
+			premiumForPlan = driver.findElement(By.xpath("(//*[contains(text(),\'" + planName
+					+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class, 'mabenefittable')]//li//*[contains(text(),'Monthly Premium')])"));
+
 		scrollToView(premiumForPlan);
 		validateNew(premiumForPlan);
-		/*String PlanPremium = PremiumForPlan.getText();
-		if(PlanPremium.equals(monthlyPremium)){
-			System.out.println("Premium for the plan is " + PlanPremium);               
-			Assert.assertTrue(true);
-		}
-		else
-			Assert.fail("Premium for the plan is incorrect : "+planName);*/ 
+		/*
+		 * String PlanPremium = PremiumForPlan.getText();
+		 * if(PlanPremium.equals(monthlyPremium)){
+		 * System.out.println("Premium for the plan is " + PlanPremium);
+		 * Assert.assertTrue(true); } else
+		 * Assert.fail("Premium for the plan is incorrect : "+planName);
+		 */
 	}
 
 	public void validatePrimaryCarePhysicianBenefit(String planType, String planName, String primaryCarePhysician) {
@@ -2138,7 +2141,7 @@ public void validatePlanPremium (String planName , String monthlyPremium){
 
 		Actions action = new Actions(driver);
 		action.moveToElement(DCELink).build().perform();
-		//DCELink.click();
+		// DCELink.click();
 		jsClickNew(DCELink);
 		CommonUtility.checkPageIsReadyNew(driver);
 		if (driver.getCurrentUrl().contains("drug-costs")) {
@@ -2160,7 +2163,8 @@ public void validatePlanPremium (String planName , String monthlyPremium){
 	public void validateAgentEBRCPage() {
 		validateNew(RightRail_AgentInYourArea);
 		CommonUtility.waitForPageLoadNew(driver, RightRail_AgentInYourArea, 30);
-		RightRail_AgentInYourArea.click();
+		// RightRail_AgentInYourArea.click();
+		jsClickNew(RightRail_AgentInYourArea);
 		ArrayList<String> tabs_windows = new ArrayList<String>(driver.getWindowHandles());
 		driver.switchTo().window(tabs_windows.get(1));
 		CommonUtility.checkPageIsReadyNew(driver);
@@ -2280,7 +2284,9 @@ public void validatePlanPremium (String planName , String monthlyPremium){
 		String FirstName = memberAttributesMap.get("First Name");
 		String LastName = memberAttributesMap.get("Last Name");
 		String EmailAddress = memberAttributesMap.get("Email Address");
-		sendkeysNew(firstNameField, FirstName);
+		// sendkeysNew(firstNameField, FirstName);
+		scrollToView(firstNameField);
+		jsSendkeys(firstNameField, FirstName);
 		sendkeysNew(lastNameField, LastName);
 		sendkeysNew(emailField, EmailAddress);
 		validateNew(Submitbutton);
@@ -3918,7 +3924,8 @@ public void validatePlanPremium (String planName , String monthlyPremium){
 		}
 		if (driver.getCurrentUrl().contains("rmhp.org")) {
 			System.out.println("We are in rocky mountain Page : " + driver.getCurrentUrl());
-			validateNew(rockyMountainLogo);
+			scrollToView(rockyMountainLogo);
+			validateNew(rockyMountainLogo,2);
 			System.out.println("Validated Rocky Mountian Logo");
 
 		}
@@ -4262,14 +4269,17 @@ public void validatePlanPremium (String planName , String monthlyPremium){
 	}
 
 	public MultiCountyModalPageMobile VPP_ChangeLocationValidateMultiCOuntyPopUp(String zipcode) {
-		ChangeLocationLink.click();
+		// ChangeLocationLink.click();
+		jsClickNew(ChangeLocationLink);
 		validate(ZipCodeTxtBx);
-		ZipCodeTxtBx.click();
+		// ZipCodeTxtBx.click();
+		jsClickNew(ZipCodeTxtBx);
 		ZipCodeTxtBx.clear();
 		ZipCodeTxtBx.sendKeys(zipcode);
 		scrollToView(FIndPlansButton);
 		validate(FIndPlansButton, 30);
-		FIndPlansButton.click();
+		// FIndPlansButton.click();
+		jsClickNew(FIndPlansButton);
 
 		CommonUtility.checkPageIsReadyNew(driver);
 		if (countyModal.isDisplayed()) {
@@ -4509,10 +4519,12 @@ public void validatePlanPremium (String planName , String monthlyPremium){
 	@FindBy(xpath = "//button[contains(@id,'addDrug')]")
 	public WebElement AddMyDrugsBtn;
 
+	@FindBy(xpath = "//span[contains(text(),'Return to plan summary')]")
+	public WebElement ReturnToPlanSummaryBtn;
 
 	@FindBy(xpath = "//span[contains(text(),'Add My Drugs')]")
 	public WebElement AddMyDrugsBtnDCE;
-	
+
 	public GetStartedPageMobile navigateToDCERedesignFromVPPPlanCard(String plantype, String planName) {
 		if (plantype.equals("MA") || plantype.equals("MAPD") || plantype.equalsIgnoreCase("SNP")) {
 			WebElement dceLink = driver.findElement(By.xpath("//*[contains(text(),'" + planName
@@ -4522,14 +4534,15 @@ public void validatePlanPremium (String planName , String monthlyPremium){
 			// dceLink.click();
 
 		} else {
+
 			WebElement dceLink = driver.findElement(By.xpath("//*[contains(text(),'" + planName
 					+ "')]/ancestor::div[contains(@class, 'module-plan-overview module swiper-slide pdpPlans ng-scope')]//descendant::a[contains(@id,'pdpDrugCostEstimatorLink')]"));
+
 			jsClickMobile(dceLink);
 			// dceLink.click();
 		}
-		scrollToView(AddMyDrugsBtn);
-		
-		if (validateNew(AddMyDrugsBtn))
+
+		if (validateNew(AddMyDrugsBtn, 3))
 			return new GetStartedPageMobile(driver);
 		return null;
 
@@ -4577,6 +4590,11 @@ public void validatePlanPremium (String planName , String monthlyPremium){
 
 	public void validateIsMyProviderCoveredLink(String planType, String planName) {
 		int attempts = 0;
+		if (validateNew(AddMyDrugsBtn)) {
+
+			jsClickNew(ReturnToPlanSummaryBtn);
+		}
+
 		while (attempts < 2) {
 			try {
 				WebElement ProviderSearchLink = driver.findElement(By.xpath("//*[contains(text(),\'" + planName
@@ -4598,7 +4616,7 @@ public void validatePlanPremium (String planName , String monthlyPremium){
 	public ProviderSearchPageMobile clicksOnIsProviderCoveredUms(String planName) {
 
 		CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
-		
+
 		try {
 			Thread.sleep(3000);
 		} catch (InterruptedException e) {
@@ -4610,7 +4628,7 @@ public void validatePlanPremium (String planName , String monthlyPremium){
 				+ "\')]/ancestor::div[contains(@class,'module-plan-overview')]//*[contains(@dtmname,'Provider Search')]"));
 		scrollToView(ProviderSearchLink);
 		validateNew(ProviderSearchLink);
-		//scrollToView(ProviderSearchLink);
+		// scrollToView(ProviderSearchLink);
 		switchToNewTabNew(ProviderSearchLink);
 		sleepBySec(3);
 		if (driver.getCurrentUrl().contains("werally")) {
@@ -4628,7 +4646,8 @@ public void validatePlanPremium (String planName , String monthlyPremium){
 		// switchToNewTabNew(ProviderSearchLink);
 		String parentHandle = driver.getWindowHandle();
 		int initialCount = driver.getWindowHandles().size();
-		ProviderSearchLink.click();
+		// ProviderSearchLink.click();
+		jsClickNew(ProviderSearchLink);
 		try {
 			Thread.sleep(5000);
 		} catch (InterruptedException e) {
@@ -4680,7 +4699,7 @@ public void validatePlanPremium (String planName , String monthlyPremium){
 		}
 
 	}
-	
+
 	@FindBy(xpath = "//*[contains(@id,'mpaed-month')]")
 	private WebElement monthDrpDwn_PartA;
 
@@ -4705,8 +4724,6 @@ public void validatePlanPremium (String planName , String monthlyPremium){
 	@FindBy(xpath = "//*[@id='mpbed-year']/option[3]")
 	private WebElement yearBDrpDwnOption;
 
-	
-	
 	public void MedSupFormValidation_2ndTime(String DateOfBirth, String zipcode) throws InterruptedException {
 		checkModelPopup(driver, 25);
 		System.out.println("MedSup page form is displayed");
@@ -4737,10 +4754,9 @@ public void validatePlanPremium (String planName , String monthlyPremium){
 		ViewPlanMedSupPage.click();
 	}
 
-	
 	public void ResumeApplicationButton() throws InterruptedException {
 		Thread.sleep(5000);
-		//Start_ApplicationBtn.click();
+		// Start_ApplicationBtn.click();
 		CommonUtility.waitForPageLoadNew(driver, resumeApplication, 30);
 		resumeApplication.click();
 		System.out.println("Resume application link clicked successfully");

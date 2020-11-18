@@ -129,40 +129,42 @@ public class VppPlanSummaryMobile {
 			Assert.assertTrue(true);
 		} else
 			Assert.fail("Error in validating the Plan Summary Page");
+
 	}
+
 	@Then("^the user validates below plan benefit values for the above selected plan$")
 	public void user_validates_planBenefitValues_inAARP(DataTable givenAttributes) {
 		String planType = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
-		
-			List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-			Map<String, String> memberAttributesMap = new HashMap<String, String>();
-			for (int i = 0; i < memberAttributesRow.size(); i++) {
 
-				memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-						memberAttributesRow.get(i).getCells().get(1));
-			}
-			String monthlyPremium = memberAttributesMap.get("Monthly Premium");
-			String primaryCarePhysician = memberAttributesMap.get("Primary Care Physician");
-			String specialist = memberAttributesMap.get("Specialist");
-			String referralRequired = memberAttributesMap.get("Referral Required");
-			String outOfPocketMaximum = memberAttributesMap.get("Out Of Pocket Maximum");
-			String prescriptionDrugsTier1 = memberAttributesMap.get("Prescription Drugs, Tier 1");
-			String annualDeductible = memberAttributesMap.get("Annual Deductible");
-			VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
-					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-			String planName = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_NAME);
-			plansummaryPage.clickOnViewMoreForPlan(planName);
-			plansummaryPage.validatePlanPremium(planName, monthlyPremium);
-			plansummaryPage.validatePrescriptionDrugsTier1(planName, planType, prescriptionDrugsTier1);
-		 if (!planType.equals("PDP")) {
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		String monthlyPremium = memberAttributesMap.get("Monthly Premium");
+		String primaryCarePhysician = memberAttributesMap.get("Primary Care Physician");
+		String specialist = memberAttributesMap.get("Specialist");
+		String referralRequired = memberAttributesMap.get("Referral Required");
+		String outOfPocketMaximum = memberAttributesMap.get("Out Of Pocket Maximum");
+		String prescriptionDrugsTier1 = memberAttributesMap.get("Prescription Drugs, Tier 1");
+		String annualDeductible = memberAttributesMap.get("Annual Deductible");
+		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		String planName = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_NAME);
+		plansummaryPage.clickOnViewMoreForPlan(planName);
+		plansummaryPage.validatePlanPremium(planName, monthlyPremium);
+		plansummaryPage.validatePrescriptionDrugsTier1(planName, planType, prescriptionDrugsTier1);
+		if (!planType.equals("PDP")) {
 			plansummaryPage.validatePrimaryCarePhysicianBenefit(planType, planName, primaryCarePhysician);
 			plansummaryPage.validateSpecialistBenefit(planType, planName, specialist);
 			plansummaryPage.validateReferrralRequiredBenefit(planName, referralRequired);
 			plansummaryPage.validatesOutOfPocketMaximum(planName, outOfPocketMaximum);
-			
+
 		} else {
 			plansummaryPage.validateAnnualDeductible(planName, annualDeductible);
-			
+
 		}
 	}
 
@@ -174,11 +176,13 @@ public class VppPlanSummaryMobile {
 					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 			String planName = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_NAME);
 			plansummaryPage.toolTipForPremium0(planName);
+			plansummaryPage.viewPlanSummary(planType);
 		} else if (planType.equals("PDP")) {
 			VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
 					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 			String planName = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_NAME);
 			plansummaryPage.toolTipForAnnualDeductible(planName);
+			plansummaryPage.viewPlanSummary(planType);
 		}
 	}
 
