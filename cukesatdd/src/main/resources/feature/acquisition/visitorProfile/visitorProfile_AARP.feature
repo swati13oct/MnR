@@ -373,7 +373,6 @@ Feature: 1.08. ACQ- Visitor profile
     Then the user should be able to see the Drug information in the guest profile page
       | Drugname | <drug1> |
     And user clicks on Edit Drug and Pharmacy on visitor profile page
-    Then the user clicks on Build Drug List to navigate to Build Drug List Page
     Then the user clicks on Remove button on Drug List page on DCE to delete drug
       | DrugName | <drug1> |
 
