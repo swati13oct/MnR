@@ -1349,9 +1349,24 @@ public class PlanDetailsPage extends UhcDriver {
                         
         }
         
-        public void clickLearnMore() {
-                        jsClickNew(learnMore);
-                        
+    	@FindBy(xpath = "//button[@id='changePharmacyLink']")
+    	public WebElement DrugDetails_ChangePharmacyLnk;
+
+    	@FindBy(xpath = "//h2[contains(text(), 'Drug Cost Details')]")
+    	public WebElement DrugDetails_DrugCostsHeading;
+
+        public DrugDetailsPage clickLearnMore() {
+        	validateNew(learnMore);
+            jsClickNew(learnMore);
+    		CommonUtility.waitForPageLoadNew(driver, DrugDetails_DrugCostsHeading, 30);
+    		if(validateNew(DrugDetails_ChangePharmacyLnk) && validateNew(DrugDetails_DrugCostsHeading))
+    		{
+    			return new DrugDetailsPage(driver);
+    		}
+    		else {
+    			Assert.fail("Drug Details Page is NOT Displayed");
+    			return null;
+    		}		
         }
         
 //    LearnMore changes End
@@ -1383,16 +1398,5 @@ public class PlanDetailsPage extends UhcDriver {
 			// TODO Auto-generated method stub
 			return null;
 		}
-//Learn More changes Start
-        public void validatePlanNameLearnMore(String planName) {
-
-                        System.out.println("Plan Name : "+planName);
-                        WebElement PlanNameElement = driver.findElement(By.xpath("//h1[contains(text(), '"+planName+"')]"));
-                        if(validateNew(PlanNameElement)) {
-                                        Assert.assertTrue("Plan Name is correct for Learn More Page"+PlanNameElement.getText(), true);
-                        }
-                        else
-                        Assert.fail("Plan Name validation Failed for Learn More Page");
-        }
-//Learn More changes End		
+	
 }

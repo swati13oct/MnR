@@ -1196,6 +1196,19 @@ public class DrugDetailsPage extends UhcDriver {
 		}		
 		
 	}
+	
+	//Learn More changes Start
+    public void validatePlanNameLearnMore(String planName) {
+
+                    System.out.println("Plan Name : "+planName);
+                    WebElement PlanNameElement = driver.findElement(By.xpath("//h1[contains(text(), '"+planName+"')]"));
+                    if(validateNew(PlanNameElement)) {
+                                    Assert.assertTrue("Plan Name is correct for Learn More Page"+PlanNameElement.getText(), true);
+                    }
+                    else
+                    Assert.fail("Plan Name validation Failed for Learn More Page");
+    }
+//Learn More changes End	
 
 
 }

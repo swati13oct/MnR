@@ -545,17 +545,19 @@ public class DCEStepDefinitionAARP {
 	@Then("^the user clicks Learn More button on Prescription Drug Costs Tab on Plan Details Page$")
 	public void the_user_clicks_Learn_More_button_on_Prescription_Drug_Costs_Tab_on_Plan_Details_Page() throws Throwable {
 		PlanDetailsPage plandetailspage = (PlanDetailsPage) getLoginScenario().getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
-		plandetailspage.clickLearnMore();
-
+		DrugDetailsPage drugDetailsPage = plandetailspage.clickLearnMore();
+		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetailsPage);
 	}
 	
 	@Then("^the user validates planName on LearnMore page matches plan Name in VPP$")
 	public void the_user_validates_planName_on_LearnMore_page_matches_plan_Name_in_VPP() throws Throwable {
-		PlanDetailsPage planDetailsPage = (PlanDetailsPage) getLoginScenario().getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
+		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugDetails);
 		
 		String PlanName = (String) getLoginScenario().getBean(DCERedesignCommonConstants.PLANNAME);
-		planDetailsPage.validatePlanNameLearnMore(PlanName);
+		drugDetailsPage.validatePlanNameLearnMore(PlanName);
+		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetailsPage);
 	}
+	
 //	LearnMore changes End
 	@Then("^I access the DCE Redesign from Plan Details for the plan$")
 	public void the_user_navigates_to_Presciption_Drug_Benefits_tab_in_AARP_site() throws Throwable {
