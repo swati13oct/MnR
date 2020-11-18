@@ -16,6 +16,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
+import pages.acquisition.dceredesign.BuildYourDrugList;
 import pages.acquisition.dceredesign.GetStartedPage;
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.ulayer.VPPTestHarnessPage;
@@ -252,11 +253,11 @@ public class VisitorProfilePage extends UhcDriver {
 		Assert.assertTrue(addrugs.isDisplayed());
 	}
 	
-	public GetStartedPage clickOnEditDrugAndPharmacy() {
+	public BuildYourDrugList clickOnEditDrugAndPharmacy() {
 		CommonUtility.waitForPageLoadNew(driver, editDrugsPharmacy, 45);
 		jsClickNew(editDrugsPharmacy);
-		if (driver.getCurrentUrl().contains("estimate-drug-costs.html"))
-			return new GetStartedPage(driver);
+		if (driver.getCurrentUrl().contains("buildyourdruglist"))
+			return new BuildYourDrugList(driver);
 		return null; 
 	}
 	
