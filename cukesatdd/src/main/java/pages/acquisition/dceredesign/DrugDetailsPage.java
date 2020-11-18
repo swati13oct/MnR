@@ -536,7 +536,7 @@ public class DrugDetailsPage extends UhcDriver {
 			//WebElement DrugIntlCoverText = driver.findElement(By.xpath("//caption[contains(text(), 'Your Drugs')]/ancestor::table//span[contains(text(), '"+currentDrug+"')]//ancestor::td//following-sibling::td[contains(text(), 'Initial Coverage Cost')]"));
 			WebElement DrugYouPay = driver.findElement(By.xpath("//caption[contains(text(), 'Your Drugs')]/ancestor::table//span[contains(text(), '"+currentDrug+"')]//ancestor::td//following-sibling::td//*[contains(text(), '$')]"));
 
-			if(validateNew(DrugName) && validateNew(DrugIntlCoverText) && validateNew(DrugYouPay)) {
+			if(validateNew(DrugName) && validateNew(DrugYouPay)) {
 				System.out.println("Drug Details Page, Validated Drug List for Drug, Initial Coverage Cost text and You Pay : "+currentDrug);
 			}
 			else

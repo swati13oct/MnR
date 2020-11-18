@@ -566,6 +566,7 @@ public class DrugSummaryPage extends UhcDriver {
 		if(!PremiumDisplayed.contains(premium)) {
 			Assert.fail("Expected Premium not displayed, Expected : "+premium+"    Actual Displayed : "+PremiumDisplayed);
 		}
+	}
 
 	public void verifyReturnToProfileDisplayed() {
 		try {
