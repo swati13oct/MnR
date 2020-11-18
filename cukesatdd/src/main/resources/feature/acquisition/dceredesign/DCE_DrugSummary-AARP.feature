@@ -193,17 +193,17 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
     And user should be able to see "Medicare Advantage Plans" by default
     And user click on View Drug Pricing Modal
     And user verify drug can switch to generic drug
-      | DrugName | <drugName2> |
+      | DrugName | <drugName1> |
     And user click on PDP plan to view drug pricing in AARP
     And user click on Switch To Generic
     And user should be navigated to Review drug cost estimate page
     And user should be able to see "Medicare Prescription Drug Plans" by default
     And user click on View Drug Pricing Modal
     And user verify drug can switch to generic drug
-      | DrugName | <drugName3> |
+      | DrugName | <drugName2> |
 
     Examples: 
-      | zipCode | drug1   | drug2     | drugName2                     | drugName3                    |
+      | zipCode | drug1   | drug2     | drugName1                     | drugName2                    |
       |   10001 | Lipitor | Lopressor | atorvastatin calcium TAB 10MG | metoprolol tartrate TAB 50MG |
 
   @dCERedesign_ChangePharmacy_DetailsPage_AARP @F472598
@@ -357,21 +357,14 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
     And user should be navigated to Review drug cost estimate page
     And user should be able to see "Medicare Advantage Plans" by default
     And user click on View Drug Pricing Modal
-    And user click on lipitor Switch To Generic in AARP
+    And user click on Switch To Generic link for "<drug1>" on drug pricing modal
+    And user updates dosage quantity and supply length in switch to generic modal
     And user should be navigated to Review drug cost estimate page
     And user should be able to see "Medicare Advantage Plans" by default
     And user click on View Drug Pricing Modal
     And user verify drug can switch to generic drug
-      | DrugName | <drugName2> |
-    And user click on PDP plan to view drug pricing in AARP
-    And user click on Switch To Generic
-    And user should be navigated to Review drug cost estimate page
-    And user should be able to see "Medicare Prescription Drug Plans" by default
-    And user click on View Drug Pricing Modal
-    And user verify drug can switch to generic drug
-      | DrugName | <drugName3> |
-
+      | DrugName | <drugName1> |
     Examples: 
-      | zipCode | drug1   | drug2     | drugName2                     | drugName3                    |
-      |   10001 | Lipitor | Lopressor | atorvastatin calcium TAB 10MG | metoprolol tartrate TAB 50MG |
+      | zipCode | drug1   | drug2     | drugName1                     | 
+      |   10001 | Lipitor | Lopressor | atorvastatin calcium TAB 20MG |
   

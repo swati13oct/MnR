@@ -13,6 +13,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.Select;
 
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
@@ -171,6 +172,15 @@ public class DrugSummaryPage extends UhcDriver {
 	
 	@FindBy(xpath = "//*[@class='pharmacy-plan-desc']")
 	private WebElement pharmacyName;
+	
+	@FindBy(id = "selectdosage")
+	private WebElement drugDosage;
+	
+	@FindBy(id = "drugquantity")
+	private WebElement drugQty;
+	
+	@FindBy(id = "new-drug-refill")
+	private WebElement drugSupplyLength;
 
 	@Override
 	public void openAndValidate() {
@@ -279,6 +289,12 @@ public class DrugSummaryPage extends UhcDriver {
 
 	@FindBy(id = "drugPricingTitleTxt")
 	private WebElement drugTitle;
+	
+	/*
+	 * @FindBy(xpath =
+	 * "//a[contains(@id,'switchToGenericLink')]/../../span[contains(text(),'"+
+	 * drugName+"')]") private WebElement switchToGenericDrugLink;
+	 */
 
 	public void clickViewPricing() {
 		// validate(viewProceBtn);
@@ -542,5 +558,25 @@ public class DrugSummaryPage extends UhcDriver {
 		System.out.println(selectedPharmacyName);
 		System.out.println(pharmacy);
 		Assert.assertTrue("Pharmacy not updated", selectedPharmacyName.contains(pharmacy));
+	}
+	
+	public void clickSwitchToGenericLink(String drugName) {
+		//XPathExpression expr = xpath.compile("//a[contains(@id,'switchToGenericLink')]/../../span[contains(text(),'%s')]");
+		WebElement SwitchToGenericLink=driver.findElement(By.xpath("//span[contains(text(),'"+drugName+"')]/..//a[contains(@id,'switchToGenericLink')]"));
+		//validate((WebElement) By.xpath(SwitchToGenericLink));
+		waitforElement(SwitchToGenericLink);
+		//SwitchToGenericLink.click();
+		jsClickNew(SwitchToGenericLink);
+	}
+	
+	public void updateDosageQtySupplyLength() {
+		waitforElement(drugDosage);
+	Select dosage=new Select(drugDosage);
+	dosage.selectByIndex(1);
+	drugQty.clear();
+	drugQty.sendKeys("100");
+	Select supplyLen=new Select(drugSupplyLength);
+	supplyLen.selectByIndex(1);
+	switchToGenericSubmitBtn.click();
 	}
 }

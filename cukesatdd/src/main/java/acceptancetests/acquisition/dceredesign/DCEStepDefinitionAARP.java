@@ -1218,4 +1218,19 @@ public class DCEStepDefinitionAARP {
 		drugSummaryPage.verifyDefaultPlanType(planType);
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
 	}
+	
+	@When("^user click on Switch To Generic link for \"([^\"]*)\" on drug pricing modal$")
+	public void user_click_on_Switch_To_Generic_link_for_on_drug_pricing_modal(String drugName) throws Throwable {
+		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
+		drugSummaryPage.clickSwitchToGenericLink(drugName);
+		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
+	}
+	
+	@When("^user updates dosage quantity and supply length in switch to generic modal$")
+	public void user_updates_dosage_quantity_and_supply_length_in_switch_to_generic_modal() throws Throwable {
+		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
+		drugSummaryPage.updateDosageQtySupplyLength();
+		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
+	}
+
 }
