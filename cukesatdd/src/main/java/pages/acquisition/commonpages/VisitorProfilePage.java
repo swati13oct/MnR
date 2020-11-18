@@ -58,13 +58,13 @@ public class VisitorProfilePage extends UhcDriver {
 	@FindBy(xpath="//div[contains(@class,'drug--block card')]//ul")
 	private WebElement drugBlock;
 	
-	@FindBy(css="div.signupCTA.signupContainer a")
+	@FindBy(xpath="//h2/following-sibling::a[text()='Sign Out']")
 	private WebElement signOut;
 	
 	@FindBy(id = "enrollment-next-button")
 	private WebElement NextBtn;
 	
-	@FindBy(xpath = "//div[@id='dashPlansContainer']//div[contains(@class,'Plan')][1]//div[@class='enroll-container']/button")
+	@FindBy(xpath = "//h2[@id='saved-plans']/following::button[contains(@aria-label,'Enroll')][1]")
 	private WebElement enrollInPlan;
 	
 	@FindBy(id = "header-number")
@@ -107,6 +107,9 @@ public class VisitorProfilePage extends UhcDriver {
 	
 	@FindBy(css="h2#saved-drugs-and-doctors")
 	public WebElement savedDrugsAndDoctorsHeader;
+	
+	@FindBy(xpath = "//h3[@id='saved-drugs']/following-sibling::a")
+	public WebElement editDrugsPharmacy;
 	
 	public VisitorProfilePage(WebDriver driver) {
 		super(driver);
@@ -246,6 +249,14 @@ public class VisitorProfilePage extends UhcDriver {
 		Assert.assertTrue(addrugs.isDisplayed());
 	}
 	
+	public GetStartedPage clickOnEditDrugAndPharmacy() {
+		CommonUtility.waitForPageLoadNew(driver, editDrugsPharmacy, 45);
+		jsClickNew(editDrugsPharmacy);
+		if (driver.getCurrentUrl().contains("estimate-drug-costs.html"))
+			return new GetStartedPage(driver);
+		return null; 
+	}
+	
 	/**
 	 * Get the added provider information
 	 * @param planName
@@ -268,16 +279,13 @@ public class VisitorProfilePage extends UhcDriver {
 	/**
 	 * Delete all the providers from the profile
 	 */
-	public void deleteAllProviders() {
-		if(!(driver.findElements(By.cssSelector("div.no-providers")).size()>0)) {
-			CommonUtility.waitForPageLoadNew(driver, expandProviderBlock, 20);
-			expandProviderBlock.click();
-			driver.findElement(By.xpath("//li[@class='provider']//button")).click();
-			waitforElementDisapper(By.xpath("//div[contains(@class,'provider--block card')]//button[contains(@class,'provider-title')][contains(@class,'collapsed')]"), 5);
-			Assert.assertTrue(validateNonPresenceOfElement(expandProviderBlock));
-		}else {
-			System.out.println("############No Providers##############");
-		}
+	public void deleteProviders(String planName) {
+		WebElement ProviderSearchLink = driver.findElement
+				(By.xpath("//button[contains(@class,'remove')]/following::h3[contains(text(),'"+planName+"')]/following::button[contains(@aria-controls, 'plan-providers')][1]/span/span"));
+		jsClickNew(ProviderSearchLink);
+		WebElement removeProvider = driver.findElement
+				(By.xpath("//button[contains(@class,'remove')]/following::h3[contains(text(),'"+planName+"')]/following::button[contains(@aria-controls, 'plan-providers')][1]/following::button[1]"));
+		jsClickNew(removeProvider);
 	}
 	
 	/**
