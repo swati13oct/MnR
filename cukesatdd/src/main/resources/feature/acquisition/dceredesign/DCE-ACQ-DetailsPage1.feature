@@ -49,15 +49,15 @@ Feature: 1.10.5 DCE-REDISIGN AARP DCE Details Page Scenarios - To test DCE Detai
     #Then the user validates Disclaimers section
     Then the user validates link to Drug Summary Page
 
-    @DCE_DrugDetailsValidation_AARP
+#    @DCE_DrugDetailsValidation_AARP
     Examples: 
       | drugnameAutocomplete | drug1   | zipCode | planType | planName                                            | site | brandDrug | genericDrug | deleteDrug | addDrug |
       | ativ                 | Humalog |   80002 | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) | AARP | Ativan    | orazepam    | Humalog    | Lipitor |
 
-    @DCE_DrugDetailsValidation_UHC
-    Examples: 
-      | drugnameAutocomplete | drug1   | zipCode | planType | planName                                            | site | brandDrug | genericDrug | deleteDrug | addDrug |
-      | ativ                 | Humalog |   80002 | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) | UHC  | Ativan    | Lorazepam   | Humalog    | Lipitor |
+#    @DCE_DrugDetailsValidation_UHC
+#    Examples: 
+#      | drugnameAutocomplete | drug1   | zipCode | planType | planName                                            | site | brandDrug | genericDrug | deleteDrug | addDrug |
+#      | ativ                 | Humalog |   80002 | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) | UHC  | Ativan    | Lorazepam   | Humalog    | Lipitor |
 
   @DCE_DrugDetailsDynamicCopay_Preferred
   Scenario Outline: To verify DCE REDESIGN Details Page for Dynamic copay section for Preferred Pharmacy Copay from <site> home page

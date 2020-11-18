@@ -192,6 +192,8 @@ public class DrugDetailsPage extends UhcDriver {
 	public WebElement MonthlyDrug_PlanPay_month12;
 	@FindBy(xpath = "//div[@id='monthlycostdetails']//tr//td[text()= 'Month 12']//following-sibling::td[contains(text(), '$')][3]")
 	public WebElement MonthlyDrug_YouPay_month12;
+	@FindBy(xpath = "//*[name()='svg' and @class='monthly-cost-details-chart']//*[local-name()='g']//*[local-name()='rect'][1]")
+	public WebElement Graph_svg;
 	//MonthlyDrugCost Changes End
 	@FindBy(xpath = "//h2[contains(text(), 'Important Information')]")
 	public WebElement ImportantInfo_Header;
@@ -392,6 +394,8 @@ public class DrugDetailsPage extends UhcDriver {
 		validateNew(MonthlyDrug_TotalDrugPrice_month12);
 		validateNew(MonthlyDrug_PlanPay_month12);
 		validateNew(MonthlyDrug_YouPay_month12);
+		threadsleep(20);
+		validateNew(Graph_svg);
 
 	}
 //	MonthlyDrugCost Changes End

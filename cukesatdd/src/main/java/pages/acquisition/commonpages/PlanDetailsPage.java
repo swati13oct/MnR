@@ -99,6 +99,14 @@ public class PlanDetailsPage extends UhcDriver {
 	@FindBy(id = "prescriptiondrug")
 	private List<WebElement> presDrugTab;
 
+//  LearnMore changes Start
+    @FindBy(xpath="//span[contains(text(), 'Prescription Drug Benefits')]")
+    private WebElement prescriptionTab;
+    
+    @FindBy(xpath="//a[@class='cta-button ng-scope' and text()='Learn More']")
+    private WebElement learnMore;
+//LearnMore changes End
+    
 	@FindBy(xpath = ".//*[@id='drugBenefits']")
 	private WebElement drugBenefitsSection;
 
@@ -1335,6 +1343,18 @@ public class PlanDetailsPage extends UhcDriver {
 			
 		}
 
+//      LearnMore changes Start
+        public void clickPrescriptionBenifitTab() {
+                        jsClickNew(prescriptionTab);
+                        
+        }
+        
+        public void clickLearnMore() {
+                        jsClickNew(learnMore);
+                        
+        }
+        
+//    LearnMore changes End
 		@FindBy(xpath = "//input[contains(@id, 'drugsearch')]")
 		public WebElement BuildDrugPage_EnterDrugNameTxt;
 
@@ -1363,4 +1383,16 @@ public class PlanDetailsPage extends UhcDriver {
 			// TODO Auto-generated method stub
 			return null;
 		}
+//Learn More changes Start
+        public void validatePlanNameLearnMore(String planName) {
+
+                        System.out.println("Plan Name : "+planName);
+                        WebElement PlanNameElement = driver.findElement(By.xpath("//h1[contains(text(), '"+planName+"')]"));
+                        if(validateNew(PlanNameElement)) {
+                                        Assert.assertTrue("Plan Name is correct for Learn More Page"+PlanNameElement.getText(), true);
+                        }
+                        else
+                        Assert.fail("Plan Name validation Failed for Learn More Page");
+        }
+//Learn More changes End		
 }
