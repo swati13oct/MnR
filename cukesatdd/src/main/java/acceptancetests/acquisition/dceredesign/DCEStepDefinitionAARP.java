@@ -479,14 +479,6 @@ public class DCEStepDefinitionAARP {
 		getLoginScenario().saveBean(DCERedesignCommonConstants.BRAND_DRUG1, DrugName);
 	}
 
-
-	@Then("^the user clicks on Add Drug to add drug to drug list$")
-	public void the_user_clicks_on_Add_Drug_to_add_drug_to_drug_list() throws Throwable {
-		TellUsAboutDrug tellUsAboutDrug = (TellUsAboutDrug) getLoginScenario()
-				.getBean(PageConstants.DCE_Redesign_TellUsAboutDrug);
-		BuildYourDrugList DCEbuildDrugList = tellUsAboutDrug.ClickAddDrug();
-	}
-
 	@Then("^the user does drug search and selects drug for following drug$")
 	public void the_user_does_drug_search_and_selects_drug_for_following_drug(DataTable arg1) throws Throwable {
 

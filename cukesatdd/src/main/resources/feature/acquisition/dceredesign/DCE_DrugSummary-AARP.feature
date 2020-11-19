@@ -73,7 +73,7 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
     #Then load screen should be displayed in AARP
     And user should be navigated to Review drug cost estimate page
     Then the user validates whether call icon is visible on AARP
-    the user validates whether chat icon is visible on AARP
+    Then the user validates whether chat Agent is Available on AARP
 
     Examples: 
       | path                                             | pageName                   | drug1 | zipCode |
