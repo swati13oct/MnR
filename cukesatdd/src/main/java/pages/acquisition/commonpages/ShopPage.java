@@ -124,21 +124,22 @@ public class ShopPage extends UhcDriver {
 	public void clickONEnrollShopLink(String plantype, String planName) throws Exception{
 		if(plantype.equals("SNP")){
 			waitforElement(dsnpShopLink);
-			dsnpShopLink.click();
+			jsClickNew(dsnpShopLink);
 			//Thread.sleep(5000);
 		
 		}
 		else if(plantype.equals("PDP")){
 			waitforElement(pdpShopLink);
-			pdpShopLink.click();
+			jsClickNew(pdpShopLink);
 			//Thread.sleep(5000);
 		}	
 		
 		else if(plantype.equals("MAPD") || plantype.equals("MA")){
 			waitforElement(MAShopLink);
-			MAShopLink.click();
+			jsClickNew(MAShopLink);
 			//Thread.sleep(5000);
-		}	
+		}
+		waitForPageLoadSafari();
 	}
 
 	public ShopPage ShopLinkOnMedsuppPlan() throws Exception {

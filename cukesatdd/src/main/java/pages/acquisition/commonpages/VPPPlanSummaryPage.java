@@ -3194,13 +3194,13 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		Thread.sleep(2000);
 		Part_B_monthDrpDwnOption.click();
 		Thread.sleep(2000);
-		part_B_yearDrpDwn.click();
+		jsClickNew(part_B_yearDrpDwn);
 		Thread.sleep(2000);
 		Part_B_yearDrpDwnOption.click();
 		Thread.sleep(2000);
 		jsClickNew(startDrpDwn);
 		Thread.sleep(2000);
-		startDrpDwnOption.click();
+		jsClickNew(startDrpDwnOption);
 		System.out.println("Plan to start date selected");
 		Thread.sleep(2000);
 		jsClickNew(ViewPlanMedSupPage);

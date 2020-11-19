@@ -340,7 +340,7 @@ public class ProviderSearchPage extends UhcDriver {
 		validateNew(zipCodeTextfield);
 		zipCodeTextfield.sendKeys(zipcode);
 		validateNew(continueButton);
-		continueButton.click();
+		jsClickNew(continueButton);
 		selectYear(year);
 
 		List<WebElement> topicDropDownValues = driver.findElements(By.xpath("//li//button[attribute::data-ui-element-name]"));
