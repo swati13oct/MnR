@@ -967,9 +967,10 @@ public class BenefitsAndCoverageUmsStepDefinition {
 		
 		List<String> testNote=benefitsCoveragePage.validatedrugcosttablePDPGroupLIS1();
 		if (testNote.size()>0) {
-			Assert.fail(testNote.get(0));
 			getLoginScenario().saveBean(BenefitsAndCoverageCommonConstants.TEST_RESULT_NOTE, testNote);
-		}	}
+			Assert.fail(testNote.get(0));
+		}	
+	}
 	
 	@And("the NON-LIS PDP group user should see drug cost table for Lis members")
 	public void user_validate_drugcosttablePDP_NONLIS_Group() {
@@ -980,9 +981,10 @@ public class BenefitsAndCoverageUmsStepDefinition {
 		
 		List<String> testNote=benefitsCoveragePage.validatedrugcosttablePDPGroup_NONLIS(dateStr);
 		if (testNote.size()>0) {
-			Assert.fail(testNote.get(0));
 			getLoginScenario().saveBean(BenefitsAndCoverageCommonConstants.TEST_RESULT_NOTE, testNote);
-		}	}
+			Assert.fail(testNote.get(0));
+		}	
+	}
 	
 	@And("the PDP individual NON-LIS  user should see drug cost table for Lis members")
 	public void user_validate_drugcosttablePDP_NONLIS_Indi() throws InterruptedException {
@@ -993,9 +995,10 @@ public class BenefitsAndCoverageUmsStepDefinition {
 		
 		List<String> testNote=benefitsCoveragePage.validatedrugcosttablePDPIndi_NONLIS(dateStr);
 		if (testNote.size()>0) {
-			Assert.fail(testNote.get(0));
 			getLoginScenario().saveBean(BenefitsAndCoverageCommonConstants.TEST_RESULT_NOTE, testNote);
-		}	}
+			Assert.fail(testNote.get(0));
+		}	
+	}
 	
 	@And("the MAPD group user should see drug cost table for Lis members")
 	public void user_validate_drugcosttableGroup() {
@@ -1012,9 +1015,11 @@ public class BenefitsAndCoverageUmsStepDefinition {
 		
 		List<String> testNote=benefitsCoveragePage.validatedrugcosttablePDPLIS3();
 		if (testNote.size()>0) {
-			Assert.fail(testNote.get(0));
 			getLoginScenario().saveBean(BenefitsAndCoverageCommonConstants.TEST_RESULT_NOTE, testNote);
-		}	}
+			Assert.fail(testNote.get(0));
+		}	
+	}
+
 	@And("the MAPD NON-LIS group user should see drug cost table for Lis members")
 	public void user_validate_drugcosttableGroup_NONLIS() {
 		String dateStr=(String)getLoginScenario().getBean(BenefitsAndCoverageCommonConstants.TEST_DATE_STR);
@@ -1024,9 +1029,10 @@ public class BenefitsAndCoverageUmsStepDefinition {
 		
 		List<String> testNote=benefitsCoveragePage.validatedrugcosttableMAPD_NONLIS(dateStr);
 		if (testNote.size()>0) {
-			Assert.fail(testNote.get(0));
 			getLoginScenario().saveBean(BenefitsAndCoverageCommonConstants.TEST_RESULT_NOTE, testNote);
-		}	}
+			Assert.fail(testNote.get(0));
+		}	
+	}
 
 	/** 
 	 * @toDo : Validates the  Ways to save section
@@ -1660,8 +1666,8 @@ public class BenefitsAndCoverageUmsStepDefinition {
 				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
 		List<String> testNote=benefitsnCoveragepage.validatevillagetabletext();
 		if (testNote.size()>0) {
-			Assert.fail(testNote.get(0));
 			getLoginScenario().saveBean(BenefitsAndCoverageCommonConstants.TEST_RESULT_NOTE, testNote);
+			Assert.fail(testNote.get(0));
 		}
 
 	}
