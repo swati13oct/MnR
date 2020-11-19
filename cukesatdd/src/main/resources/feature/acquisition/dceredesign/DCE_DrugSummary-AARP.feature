@@ -1,4 +1,4 @@
-@dce_redesign_Drug_summary_AARP @F426576
+@dce_redesign_Drug_summary_page_AARP @F426576
 Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
 
   @DCE_DrugSummary_ValidatePage_AARP
