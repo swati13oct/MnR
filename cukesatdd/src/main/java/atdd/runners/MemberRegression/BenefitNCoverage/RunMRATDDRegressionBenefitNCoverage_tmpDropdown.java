@@ -18,7 +18,7 @@ import cucumber.api.CucumberOptions;
 jsonReport = "target/cucumber-RunMRATDDRegressionBenefitNCoverage_tmpDropdown.json",detailedReport = true, detailedAggregatedReport = true,
 overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionBenefitNCoverage_tmpDropdown")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberredesign" }, 
-features = { "src/main/resources/feature/memberredesign/benefitsandcoverage" }, plugin = {
+features = { "src/main/resources/feature/memberredesign/benefitsandcoverage/PlanBenefitsAndCoverage-UMS.feature" }, plugin = {
 		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionBenefitNCoverage_tmpDropdown.json" }, tags = { "@BenefitsforTexasERSMember,@CMMapdGroupNonLis,@CMPDPGroupNonLis,@CMFedPDPNonLis" })
 public class RunMRATDDRegressionBenefitNCoverage_tmpDropdown {
 
