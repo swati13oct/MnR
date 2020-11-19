@@ -3911,7 +3911,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			jsClickNew(drugSummaryLink);
 
 		}
-
+		waitForPageLoadSafari();
 		return new DrugDetailsPage(driver);
 
 	}
