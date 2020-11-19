@@ -676,6 +676,11 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 
 			Assert.assertTrue("PROBLEM - unable to locate pnp page notification element", validate(PnPNotification, 30));
 		}
+		
+		public void validatePharmacies_PrescriptionNotification_Deactivated() {
+
+			Assert.assertFalse("PROBLEM - unable to locate pnp page notification element", validate(PnPNotification, 30));
+		}
 
 		// F436319
 		public void validatePharmacies_PrescriptionNotificationNotDisplayedOnOtherPages() {
@@ -773,6 +778,11 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 
 		public void validateANOCCallToActionOnPnPPage() {
 			Assert.assertTrue("PROBLEM - unable to locate ANOC call to action Button element",
+					validate(ANOCCallToActnBtn, 30));
+		}
+		
+		public void validateANOCCallToActionNotDisplayedOnPnPPage() {
+			Assert.assertFalse("PROBLEM - able to locate ANOC call to action Button element",
 					validate(ANOCCallToActnBtn, 30));
 		}
 
@@ -1137,10 +1147,10 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 			if (size == 1) {
 				//Assert.assertTrue("PROBLEM - same browser window is opened", true);
 				Assert.assertTrue("PROBLEM - Legacy Pharmacy Locator Page zip code text box is NOT displayed",
-						pnpValidate(zipCodeTextBoxLegacyPharmacyLocatorPage, 30));
+						pnpValidate(zipCodeTextBoxLegacyPharmacyLocatorPage, 50));
 			} else {
 				Assert.assertTrue("PROBLEM - Legacy Pharmacy Locator Page zip code text box is NOT displayed",
-						pnpValidate(zipCodeTextBoxLegacyPharmacyLocatorPage, 30));
+						pnpValidate(zipCodeTextBoxLegacyPharmacyLocatorPage, 50));
 				Assert.assertTrue("PROBLEM - Legacy Pharmacy Locator Tool Page is NOT displayed in same browser window",
 						false);
 			}
@@ -1399,6 +1409,7 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 					validate(ViewAllMedications, 50));
 			checkModelPopup(driver);
 			jsClickNew(ViewAllMedications);
+			
 			//ViewAllMedications.click();
 		}
 
@@ -1411,6 +1422,12 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 
 		// F392596
 		public void validateMyMedicationsPage() {
+			if (!validate(MyMedicationsPageHeader, 60)) {
+				//System.out.println("Inside waitTillMedCabLoads");
+				tryAgainMedCabTimeOut.click();
+				CommonUtility.checkPageIsReady(driver);				
+				CommonUtility.waitForPageLoad(driver, MyMedicationsPageHeader, 80);
+			}
 			Assert.assertTrue("PROBLEM - unable to locate My Medications Page Header element",
 					validate(MyMedicationsPageHeader, 20));
 		}
@@ -1553,8 +1570,14 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 		}
 
 		public void validateRefillAllMedications() {
+			if (!validate(refillAllMedications, 60)) {
+				//System.out.println("Inside waitTillMedCabLoads");
+				tryAgainMedCabTimeOut.click();
+				CommonUtility.checkPageIsReady(driver);				
+				CommonUtility.waitForPageLoad(driver, refillAllMedications, 80);				
+			}
 			Assert.assertTrue("PROBLEM - unable to locate Refill All Medications link text element on My Medications",
-					pnpValidate(refillAllMedications,30));
+					pnpValidate(refillAllMedications,50));
 		}
 
 		public void validateNoRefillAllMedications() {
@@ -2823,8 +2846,9 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 			if (!validate(ViewAllMedications, 60)) {
 				System.out.println("Inside waitTillMedCabLoads");
 				tryAgainMedCabTimeOut.click();
-				CommonUtility.checkPageIsReady(driver);
-				CommonUtility.waitForPageLoad(driver, ViewAllMedications, 80);
+				CommonUtility.checkPageIsReady(driver);				
+				CommonUtility.waitForPageLoad(driver, ViewAllMedications, 80);				
+				scrollToView(ViewAllMedications);
 			}
 		}
 

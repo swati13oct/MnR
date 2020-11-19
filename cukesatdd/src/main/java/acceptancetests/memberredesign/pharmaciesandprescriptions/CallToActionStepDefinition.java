@@ -69,6 +69,15 @@ public class CallToActionStepDefinition {
 		pnpPg.validatePharmacies_PrescriptionNotification();
 
 	}
+	
+	@When("^a PnP notification is deactivated$")
+	public void a_PnP_notification_is_deactivated() throws Throwable {
+		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
+				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
+		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
+		pnpPg.validatePharmacies_PrescriptionNotification_Deactivated();
+
+	}
 
 	@Then("^user must see that message at the top of the PnP page$")
 	public void user_must_see_that_message_at_the_top_of_the_pnp_page() throws Throwable {
@@ -658,6 +667,14 @@ public class CallToActionStepDefinition {
 		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
 		pnpPg.validateANOCCallToActionOnPnPPage();
+		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
+	}
+	
+	@Then("^user ANOC Call To Action not displayed$")
+	public void user_view_ANOC_Call_To_Action_not_displayed() throws Throwable {
+		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
+				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
+		pnpPg.validateANOCCallToActionNotDisplayedOnPnPPage();
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
 	}
 

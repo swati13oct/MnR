@@ -483,6 +483,9 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 
 	@FindBy(xpath = "//*[contains(text(),'Medication appearance subject to change')]")
 	protected List<WebElement> Disclaimer;
+	
+	@FindBy(xpath = "//*[contains(text(),'Medication appearance subject to change')]")
+	protected WebElement disclaimer;
 
 	@FindBy(xpath = "//span[contains(text(),'Request received')]")
 	protected List<WebElement> RequestReceived;
@@ -1370,9 +1373,9 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	}
 
 	public boolean disclaimer() {
-		WebElement element = Disclaimer.get(1);
-		waitforElementVisibilityInTime(element, 50);
-		if (Disclaimer.get(Disclaimer.size() - 1).isDisplayed()) {
+		validateNew(disclaimer,30);
+		waitforElementVisibilityInTime(disclaimer, 50);
+		if (disclaimer.isDisplayed()) {
 			return true;
 		} else {
 			return false;
