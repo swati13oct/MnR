@@ -32,7 +32,7 @@ public class DrugDetailsPage extends UhcDriver {
 
 
 
-	@FindBy(xpath = "//button[@id='changePharmacyLink']")
+	@FindBy(xpath = "//button[contains(@id,'changePharmacyLink')]")
 	public WebElement DrugDetails_ChangePharmacyLnk;
 
 	@FindBy(xpath = "//a[contains(@class, 'uhc-link-button') and contains(text(), 'plans in your area')]")
@@ -293,6 +293,12 @@ public class DrugDetailsPage extends UhcDriver {
 
 	@FindBy(xpath="//*[@class='flyout']//div[contains(@class,'success')]")
 	private WebElement favoriteSuccess;
+	
+	@FindBy(xpath = "//*[contains(@id,'drugtable')]//button[contains(text(),'Switch to Generic')]")
+	private WebElement switchToGenericBtn;
+	
+	@FindBy(xpath = "//button[contains(@type,'submit')]//*[contains(text(),'Switch to Generic')]")
+	private WebElement switchToGenericSubmitBtn;
 
 	
 	public DrugDetailsPage(WebDriver driver) {
@@ -793,7 +799,7 @@ public class DrugDetailsPage extends UhcDriver {
 	
 	public void  clickChangePharmacyLinkDetailsPage() {
 		validateNew(DrugDetails_ChangePharmacyLnk);
-		DrugDetails_ChangePharmacyLnk.click();
+		jsClickNew(DrugDetails_ChangePharmacyLnk);
 		CommonUtility.waitForPageLoadNew(driver, pharmacyZipcodeSearch, 20);
 	}
 	
@@ -1214,5 +1220,14 @@ public class DrugDetailsPage extends UhcDriver {
     }
 //Learn More changes End	
 
+
+	public void clickswitchToGeneric() throws InterruptedException {
+		
+		//validate(drugTitle);
+		validate(switchToGenericBtn);
+		jsClickNew(switchToGenericBtn);
+		validateNew(switchToGenericSubmitBtn);
+		jsClickNew(switchToGenericSubmitBtn);
+	}
 
 }

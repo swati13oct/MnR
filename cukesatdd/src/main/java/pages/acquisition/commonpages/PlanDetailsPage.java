@@ -318,6 +318,9 @@ public class PlanDetailsPage extends UhcDriver {
 
 	@FindBy(xpath = "//*[@id='dentalCoverPopup']//strong")
 	private WebElement dentalPopupPlanLabel;	
+	
+	@FindBy(xpath = "//*[contains(@class,'currentpharmacy')]//*[contains(@ng-show,'pharmacyName') and contains(@class,'ng-binding')]")
+	private WebElement pharmacyPrescriptionDrugTab;
 
 	public WebElement getLnkEnterDrugInformation() {
 		return lnkEnterDrugInformation;
@@ -1398,5 +1401,10 @@ public class PlanDetailsPage extends UhcDriver {
 			// TODO Auto-generated method stub
 			return null;
 		}
-	
+
+		public void verifyPharmacyAdded(String pharmacyName) {
+			validateNew(pharmacyPrescriptionDrugTab);
+			if(!pharmacyPrescriptionDrugTab.getText().contains(pharmacyName))
+				Assert.fail("Pharmacy did not match on plan details page with DCE");
+		}
 }
