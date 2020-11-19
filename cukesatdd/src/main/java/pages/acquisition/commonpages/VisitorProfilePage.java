@@ -176,8 +176,8 @@ public class VisitorProfilePage extends UhcDriver {
 			
 			for (String plan: listOfTestPlans) {
 				Assert.assertEquals(plan, driver.findElement(By.xpath("//h3[contains(text(),'"+plan+"')]")).getText().trim());
-				Assert.assertTrue(driver.findElement(By.xpath("//h3[contains(text(),'"+plan+"')]/following::span[contains(@class,'search-provider')]")).isDisplayed());
-				System.out.println(driver.findElement(By.xpath("//h3[contains(text(),'"+plan+"')]")).getText());
+				Assert.assertTrue(driver.findElement(By.xpath("//h4[contains(text(),'"+plan+"')]/following::a[contains(@class,'add-provider')][1]")).isDisplayed());
+				System.out.println(driver.findElement(By.xpath("//h4[contains(text(),'"+plan+"')]")).getText());
 			}
 		}else {
 			for (String plan: listOfTestPlans) {
