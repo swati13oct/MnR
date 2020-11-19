@@ -2359,9 +2359,10 @@ public class BenefitsAndCoverageUmsStepDefinition {
 				insulin.equals("hasInsulin")||insulin.equals("nonInsulin"));
 		
 		List<String> testNote=new ArrayList<String>();
+		List<String> options=bncPg.getDrugDropDownOptions();
+		Assert.assertTrue("PROBLEM - dropdown value should not be empty", options.get(0)!="");
 		if (insulin.equals("hasInsulin")) {
 			if (planType.toUpperCase().equals("MAPD")) {
-				List<String> options=bncPg.getDrugDropDownOptions();
 				for (int i=0; i<options.size(); i++) {
 					String optionTxt=options.get(i);
 					if (optionTxt.equals("Standard Retail Pharmacy")) {
@@ -2393,7 +2394,6 @@ public class BenefitsAndCoverageUmsStepDefinition {
 					}
 				}
 			} else if (planType.toUpperCase().equals("PDP")) {
-				List<String> options=bncPg.getDrugDropDownOptions();
 				for (int i=0; i<options.size(); i++) {
 					String optionTxt=options.get(i);
 					if (optionTxt.equals("Standard Retail Pharmacy")) {
@@ -2425,7 +2425,6 @@ public class BenefitsAndCoverageUmsStepDefinition {
 					}
 				}
 			} else if (planType.toUpperCase().equals("CSNP_PCP")) {
-				List<String> options=bncPg.getDrugDropDownOptions();
 				for (int i=0; i<options.size(); i++) {
 					String optionTxt=options.get(i);
 					if (optionTxt.equals("Standard Retail Pharmacy")) {
@@ -2457,7 +2456,6 @@ public class BenefitsAndCoverageUmsStepDefinition {
 					}
 				}
 			} else if (planType.toUpperCase().equals("CSNP_MAPD")) {
-				List<String> options=bncPg.getDrugDropDownOptions();
 				for (int i=0; i<options.size(); i++) {
 					String optionTxt=options.get(i);
 					if (optionTxt.equals("Standard Retail Pharmacy")) {
@@ -2489,7 +2487,6 @@ public class BenefitsAndCoverageUmsStepDefinition {
 					}
 				}
 			} else if (planType.toUpperCase().equals("ISNP_MAPD")) {
-				List<String> options=bncPg.getDrugDropDownOptions();
 				for (int i=0; i<options.size(); i++) {
 					String optionTxt=options.get(i);
 					if (optionTxt.equals("Standard Retail Pharmacy")) {
@@ -2532,7 +2529,6 @@ public class BenefitsAndCoverageUmsStepDefinition {
 			} 
 			//note: for cases w/ dropdown
 			if (planType.toUpperCase().equals("MAPD")) {
-				List<String> options=bncPg.getDrugDropDownOptions();
 				for (int i=0; i<options.size(); i++) {
 					String optionTxt=options.get(i);
 					if (optionTxt.equals("Standard Retail Pharmacy")) {
@@ -2559,8 +2555,6 @@ public class BenefitsAndCoverageUmsStepDefinition {
 			getLoginScenario().saveBean(BenefitsAndCoverageCommonConstants.TEST_RESULT_NOTE, testNote);
 			Assert.fail(testNote.get(0));
 		}
-		
-		
 	}
 	
 }//end of class
