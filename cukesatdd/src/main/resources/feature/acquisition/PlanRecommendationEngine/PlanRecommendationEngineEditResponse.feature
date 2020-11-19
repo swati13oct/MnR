@@ -343,7 +343,7 @@ Feature: Plan Recommendation Engine flow - Verify PRE flows with Edit response f
       | Zipcode | isMultiCounty | county   | isCoverageOpt | specialNeeds | travel  | doctors | DoctorsName | isMultiDoctor | Dental-Hearing-Vision-Fitness | costPreferenceOption | E_isCoverageOpt | E_Drug Selection | E_DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch |
       |   10001 | NO            | New York | MA            | Medicaid     | regular | Lookup  | sue         | NO            | Yes,Yes,Yes,Yes               | Lower                | None            | Yes              | Lipitor,NO,Lipitor TAB 20MG,,,1,YES,NO                                 |
 
-  @PRE @planrecommendation @EditResponsePage @EditValuePDP @PDPtoMAPD
+  @PRE @planrecommendation @EditResponsePage @PDPtoMAPD
   Scenario Outline: <Zipcode>, <isMultiCounty> ,<county>, <isCoverageOpt> , <Drug Selection> - To validate Edit preference functions for PDP to MAPD in PRE
     Given the user is on UHC medicare acquisition site landing page
     When user navigate to Plan Recommendation Engine and Checking Breadcrumbs
@@ -384,7 +384,7 @@ Feature: Plan Recommendation Engine flow - Verify PRE flows with Edit response f
       | Zipcode | isMultiCounty | county   | isCoverageOpt | Drug Selection | E_isCoverageOpt | E_specialNeeds | E_travel | E_doctors | E_DoctorsName | E_isMultiDoctor | E_Drug Selection | E_DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch | E_Dental-Hearing-Vision-Fitness | E_costPreferenceOption | 1stRecommendation | 2ndRecommendation |
       |   10003 | NO            | New York | PDP           | No             | MAPD            | nursing        | withinUS | Lookup    | john          | NO              | Yes              | Imuran,YES,Imuran TAB 50MG,,25,1,YES,NO                                | No,No,No,No                     | Higher                 | SNP               | MS                |
 
-  @PRE @planrecommendation @EditResponsePage @EditValuePDP @PDPtoMA
+  @PRE @planrecommendation @EditResponsePage @PDPtoMA
   Scenario Outline: <Zipcode>, <isMultiCounty> ,<county>, <isCoverageOpt> , <Drug Selection> - To validate Edit preference functions for PDP to MA in PRE
     Given the user is on UHC medicare acquisition site landing page
     When user navigate to Plan Recommendation Engine and Checking Breadcrumbs
