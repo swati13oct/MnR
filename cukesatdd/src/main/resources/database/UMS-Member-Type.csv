@@ -575,3 +575,7 @@ Q4_insulinDemo_109/Password@1,CSNP_MAPD,Individual_BnC,NON LIS,T123NoD_T45D,hasI
 q4_dec_preISNP/Password@1,ISNP_MAPD,Individual_BnC,NON LIS,T123NoD_T45D,hasInsulin
 q4_insulinDemo_002/Password@1,MAPD,Individual_BnC,NON LIS,NoTier,nonInsulin
 q4_insulinDemo_019/Password@1,MAPD,Individual_BnC,NON LIS,T12345,nonInsulin
+q4_ShipTerminated_001/Password@1,SHIP,TermedMedsupp,header,
+combomembernoemail01/Password@1,SHIP,Combo_Medsupp_TermedPDP,header,
+paymentscombo002/Password@1,SHIP,Combo_PDP_Medsupp,header,
+perfEFTM_12085/Password@1,SHIP,Combo_PDP_TermedMedsupp,header,
