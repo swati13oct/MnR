@@ -134,6 +134,8 @@ Feature: 1.08. ACQ- Visitor profile
   Scenario Outline: <UID> - Verify user is save plans from VPP to the unauthenticated visitor profile - zipcode - <zipcode>
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
+    And the user selects the state drop down value in home page
+      | State | <state> |
     When the user performs plan search using following information
       | Zip Code        | <zipcode>       |
       | County Name     | <county>        |
@@ -180,6 +182,8 @@ Feature: 1.08. ACQ- Visitor profile
   Scenario Outline: <UID> - Verify user is save plans from VPP to the unauthenticated visitor profile and complete OLE
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
+    And the user selects the state drop down value in home page
+      | State | <state> |
     When the user performs plan search using following information
       | Zip Code        | <zipcode>       |
       | County Name     | <county>        |
@@ -281,13 +285,13 @@ Feature: 1.08. ACQ- Visitor profile
     #Then the user Validates Next Steps in Confirmation Page for the Plan Type.
     @VisitorProfile_AARP
     Examples: 
-      | UID       | site | zipcode | isMultiCounty | county          | planyear | testPlans                                                                                            | PlanType | plantype | planName                                | cardtype | firstname | lastname | medicarenumber | ssnflag | partadate | partbdate | medicaidnumber | esrdflag | dob      | gender | permstreet    | permcity    | mailingaddressquestion | mailingstreet | mailingcity | mailingstate | mailingzip | email         | selectoptions                                                                                                                                                                                                                                       | optiondata              | pdpFlag | longTermFlag | riderflag | emailConfirmation | goGreen | healthinsurancename | groupnumber | membernumber | prescriptioncoveragename | pdgroupnumber | pdmembernumber | inputdataType |
-      | US1770330 | AARP |   10001 | NO            | New York County | current  | AARP Medicare Advantage Essential (HMO),UnitedHealthcare Medicare Advantage Essential (Regional PPO) | MA-MBI   | MA       | AARP Medicare Advantage Essential (HMO) | MBI      | John      | Doe      | 2n22C33YK33    | false   |  09011997 |  11012002 |      431665465 | true     | 01011903 | Male   | 003 Morris Rd | Los Angeles | Yes                    |               |             | NY           |      10001 | test@test.com | Medicare Advantage Open Enrollment Period (MA OEP)/change in my Medicaid (newly got Medicaid)/Medicare (or my state)/(or my state helps pay for my Medicare premiums)/major disaster (as declared by the Federal Emergency Management Agency (FEMA) | /12202018/12202018/ / / | yes     | no           | true      | NO                | NO      | HealthInsurance     | HI1562759   | ABC12345DEF  | PrescriptionCoverage     | PD5646136     | BCD12345EFG    | Valid         |
+      | UID       | site | state    | zipcode | isMultiCounty | county          | planyear | testPlans                                                                                            | PlanType | plantype | planName                                | cardtype | firstname | lastname | medicarenumber | ssnflag | partadate | partbdate | medicaidnumber | esrdflag | dob      | gender | permstreet    | permcity    | mailingaddressquestion | mailingstreet | mailingcity | mailingstate | mailingzip | email         | selectoptions                                                                                                                                                                                                                                       | optiondata              | pdpFlag | longTermFlag | riderflag | emailConfirmation | goGreen | healthinsurancename | groupnumber | membernumber | prescriptioncoveragename | pdgroupnumber | pdmembernumber | inputdataType |
+      | US1770330 | AARP | New York |   10001 | NO            | New York County | current  | AARP Medicare Advantage Essential (HMO),UnitedHealthcare Medicare Advantage Essential (Regional PPO) | MA-MBI   | MA       | AARP Medicare Advantage Essential (HMO) | MBI      | John      | Doe      | 2n22C33YK33    | false   |  09011997 |  11012002 |      431665465 | true     | 01011903 | Male   | 003 Morris Rd | Los Angeles | Yes                    |               |             | NY           |      10001 | test@test.com | Medicare Advantage Open Enrollment Period (MA OEP)/change in my Medicaid (newly got Medicaid)/Medicare (or my state)/(or my state helps pay for my Medicare premiums)/major disaster (as declared by the Federal Emergency Management Agency (FEMA) | /12202018/12202018/ / / | yes     | no           | true      | NO                | NO      | HealthInsurance     | HI1562759   | ABC12345DEF  | PrescriptionCoverage     | PD5646136     | BCD12345EFG    | Valid         |
 
     @VisitorProfile_UHC
     Examples: 
-      | UID       | site | zipcode | isMultiCounty | county          | planyear | testPlans                                                                                            | PlanType | plantype | planName                                | cardtype | firstname | lastname | medicarenumber | ssnflag | partadate | partbdate | medicaidnumber | esrdflag | dob      | gender | permstreet    | permcity    | mailingaddressquestion | mailingstreet | mailingcity | mailingstate | mailingzip | email         | selectoptions                                                                                                                                                                                                                                       | optiondata              | pdpFlag | longTermFlag | riderflag | emailConfirmation | goGreen | healthinsurancename | groupnumber | membernumber | prescriptioncoveragename | pdgroupnumber | pdmembernumber | inputdataType |
-      | US1770330 | UHC  |   10001 | NO            | New York County | current  | AARP Medicare Advantage Essential (HMO),UnitedHealthcare Medicare Advantage Essential (Regional PPO) | MA-MBI   | MA       | AARP Medicare Advantage Essential (HMO) | MBI      | John      | Doe      | 2n22C33YK33    | false   |  09011997 |  11012002 |      431665465 | true     | 01011903 | Male   | 003 Morris Rd | Los Angeles | Yes                    |               |             | NY           |      10001 | test@test.com | Medicare Advantage Open Enrollment Period (MA OEP)/change in my Medicaid (newly got Medicaid)/Medicare (or my state)/(or my state helps pay for my Medicare premiums)/major disaster (as declared by the Federal Emergency Management Agency (FEMA) | /12202018/12202018/ / / | yes     | no           | true      | NO                | NO      | HealthInsurance     | HI1562759   | ABC12345DEF  | PrescriptionCoverage     | PD5646136     | BCD12345EFG    | Valid         |
+      | UID       | site | state    | zipcode | isMultiCounty | county          | planyear | testPlans                                                                                            | PlanType | plantype | planName                                | cardtype | firstname | lastname | medicarenumber | ssnflag | partadate | partbdate | medicaidnumber | esrdflag | dob      | gender | permstreet    | permcity    | mailingaddressquestion | mailingstreet | mailingcity | mailingstate | mailingzip | email         | selectoptions                                                                                                                                                                                                                                       | optiondata              | pdpFlag | longTermFlag | riderflag | emailConfirmation | goGreen | healthinsurancename | groupnumber | membernumber | prescriptioncoveragename | pdgroupnumber | pdmembernumber | inputdataType |
+      | US1770330 | UHC  | New York |   10001 | NO            | New York County | current  | AARP Medicare Advantage Essential (HMO),UnitedHealthcare Medicare Advantage Essential (Regional PPO) | MA-MBI   | MA       | AARP Medicare Advantage Essential (HMO) | MBI      | John      | Doe      | 2n22C33YK33    | false   |  09011997 |  11012002 |      431665465 | true     | 01011903 | Male   | 003 Morris Rd | Los Angeles | Yes                    |               |             | NY           |      10001 | test@test.com | Medicare Advantage Open Enrollment Period (MA OEP)/change in my Medicaid (newly got Medicaid)/Medicare (or my state)/(or my state helps pay for my Medicare premiums)/major disaster (as declared by the Federal Emergency Management Agency (FEMA) | /12202018/12202018/ / / | yes     | no           | true      | NO                | NO      | HealthInsurance     | HI1562759   | ABC12345DEF  | PrescriptionCoverage     | PD5646136     | BCD12345EFG    | Valid         |
 
   @vpMSSavePlan
   Scenario Outline: Verify user saves Medsupp plans from VPP to the unauthenticated visitor profile - zipcode - <zipcode>
@@ -330,6 +334,8 @@ Feature: 1.08. ACQ- Visitor profile
   Scenario Outline: Verify Provider Search functional flow for unauthenticated Visitor Profile page
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
+    And the user selects the state drop down value in home page
+      | State | <state> |
     When the user performs plan search using following information
       | Zip Code        | <zipcode>         |
       | County Name     | <county>          |
@@ -360,18 +366,20 @@ Feature: 1.08. ACQ- Visitor profile
 
     @VisitorProfile_AARP @prodRegression_AARP
     Examples: 
-      | site | zipcode | isMultutiCounty | county          | plantype | planyear | planname                             | testPlans                                                                 |
-      | AARP |   10001 | NO              | New York County | MAPD     | current  | AARP Medicare Advantage Plan 2 (HMO) | AARP Medicare Advantage Plan 1 (HMO),AARP Medicare Advantage Plan 2 (HMO) |
+      | site | state    | zipcode | isMultutiCounty | county          | plantype | planyear | planname                             | testPlans                                                                 |  |
+      | AARP | New York |   10001 | NO              | New York County | MAPD     | current  | AARP Medicare Advantage Plan 2 (HMO) | AARP Medicare Advantage Plan 1 (HMO),AARP Medicare Advantage Plan 2 (HMO) |  |
 
     @VisitorProfile_UHC @prodRegression_UHC
     Examples: 
-      | site | zipcode | isMultutiCounty | county          | plantype | planyear | planname                             | testPlans                                                                 |
-      | UHC  |   10001 | NO              | New York County | MAPD     | current  | AARP Medicare Advantage Plan 2 (HMO) | AARP Medicare Advantage Plan 1 (HMO),AARP Medicare Advantage Plan 2 (HMO) |
+      | site | state    | zipcode | isMultutiCounty | county          | plantype | planyear | planname                             | testPlans                                                                 |
+      | UHC  | New York |   10001 | NO              | New York County | MAPD     | current  | AARP Medicare Advantage Plan 2 (HMO) | AARP Medicare Advantage Plan 1 (HMO),AARP Medicare Advantage Plan 2 (HMO) |
 
   @addDrugAuthenticated
   Scenario Outline: Verify user is able to add drug information to the authenticated visitor profile
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
+    And the user selects the state drop down value in home page
+      | State | <state> |
     And the user clicks on the shopping cart icon
     Then the user signs in with optum Id credentials
       | User Name | <userName> |
@@ -406,6 +414,8 @@ Feature: 1.08. ACQ- Visitor profile
   Scenario Outline: Verify Provider Search functional flow for authenticated Visitor Profile page
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
+    And the user selects the state drop down value in home page
+      | State | <state> |
     And the user clicks on the shopping cart icon
     Then the user signs in with optum Id credentials
       | User Name | <userName> |
@@ -426,18 +436,20 @@ Feature: 1.08. ACQ- Visitor profile
 
     @VisitorProfile_AARP
     Examples: 
-      | site | zipcode | isMultutiCounty | county          | userName | password   | plantype | planname                             |
-      | AARP |   10001 | NO              | New York County | mnrqavd4 | Password@2 | MAPD     | AARP Medicare Advantage Plan 2 (HMO) |
+      | site | state    | zipcode | isMultutiCounty | county          | userName | password   | plantype | planname                             |
+      | AARP | New York |   10001 | NO              | New York County | mnrqavd4 | Password@2 | MAPD     | AARP Medicare Advantage Plan 2 (HMO) |
 
     @VisitorProfile_UHC
     Examples: 
-      | site | zipcode | isMultutiCounty | county          | userName | password   | plantype | planname                             |
-      | UHC  |   10001 | NO              | New York County | mnrqavd4 | Password@2 | MAPD     | AARP Medicare Advantage Plan 2 (HMO) |
+      | site | state    | zipcode | isMultutiCounty | county          | userName | password   | plantype | planname                             |
+      | UHC  | New York |   10001 | NO              | New York County | mnrqavd4 | Password@2 | MAPD     | AARP Medicare Advantage Plan 2 (HMO) |
 
   @planCompare @planCompareULayerSmoke @visitorProfileRegressionAARP
   Scenario Outline: Verify user is able to Plan compare to the unauthenticated visitor profile
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
+    And the user selects the state drop down value in home page
+      | State | <state> |
     When the user performs plan search using following information
       | Zip Code        | <zipcode>       |
       | County Name     | <county>        |
