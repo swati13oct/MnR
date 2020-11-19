@@ -320,6 +320,9 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(linkText = "Find Care & Costs")
 	private WebElement findCareCost;
 
+	@FindBy(linkText = "Find Care")
+	private WebElement findCareUsingLinkText;
+	
 	@FindBy(xpath = "//h1[@class='main-heading margin-none']")
 	private WebElement EOBHeading;
 
@@ -4495,4 +4498,33 @@ public class AccountHomePage extends UhcDriver {
 		
     return null;
 	}
+	
+	/*
+	 * validate that the Find care tab is not displayed on the header
+	 */
+
+	public void onlyFindCareNotAvailable() {
+
+		if (locateElementWithinShadowRoot(shadowRootHeader, "a[data-testid*=nav-link-find-care]")!=null) {
+			Assert.fail("find care tab is displayed");
+		}
+	}
+
+	/**
+	 * validate Find Care Tab is displayed
+	 */
+
+	public void validateFindCareTab() {
+		if (validate(findCareUsingLinkText,0)) {
+			Assert.assertTrue("Find Care and Cost tab is not displayed", validate(findCareUsingLinkText,0));
+		} else {
+			System.out.println("Unable to locate 'Find Care & Costs' from dashboard, check to see if it's in shadow-root");
+			if(locateElementWithinShadowRoot(shadowRootHeader, "a[data-testid*=nav-link-find-care]")==null) {
+				Assert.fail("find care tab is not displayed");
+			}
+		}
+
+	}
+	
+	
 }

@@ -256,6 +256,9 @@ public class TestHarness extends UhcDriver {
 	
 	@FindBy(xpath = "//*[contains(@id,'findcarecost')]")
 	private WebElement findCareCostTab;
+
+	@FindBy(xpath = "//*[contains(@id,'findcare') and text()='Find Care']")
+	private WebElement findCareTab;
 	
 	@FindBy(xpath="(//a[@id='pharmacies_5'])[1]")
 	private WebElement pharmaciesTab;
@@ -1884,5 +1887,13 @@ public class TestHarness extends UhcDriver {
 				return new DrugCostEstimatorPage(driver);
 			}
 			return null;
+		}
+		
+		public void validateFindCareTab() {
+			validateNew(findCareTab,0);
+		}
+		
+		public void validateFindCareTabNotAvailable() {
+			Assert.assertFalse("find care tab displayed when not expected", validate(findCareTab,0));			
 		}
 }
