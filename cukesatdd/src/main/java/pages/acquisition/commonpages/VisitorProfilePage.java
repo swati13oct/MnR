@@ -156,10 +156,21 @@ public class VisitorProfilePage extends UhcDriver {
 	
 	public void validateAddedPlans(String planNames) {
 		List<String> listOfTestPlans = Arrays.asList(planNames.split(","));
-		for (String plan: listOfTestPlans) {
-			Assert.assertEquals(plan, driver.findElement(By.xpath("//button[contains(@class,'remove')]/following::h3[contains(text(),'"+plan+"')]")).getText().trim());
-			Assert.assertTrue(driver.findElement(By.xpath("//button[contains(@class,'remove')]/following::h3[contains(text(),'"+plan+"')]/following::span[contains(@class,'search-provider')]")).isDisplayed());
-			System.out.println(driver.findElement(By.xpath("//button[contains(@class,'remove')]/following::h3[contains(text(),'"+plan+"')]")).getText());
+		
+		if(CommonConstants.SELECTED_STATE.equalsIgnoreCase("Pennsylvania") || CommonConstants.SELECTED_STATE.equalsIgnoreCase("Puerto Rico") || 
+				CommonConstants.SELECTED_STATE.equalsIgnoreCase("Vermont")) {
+			
+			for (String plan: listOfTestPlans) {
+				Assert.assertEquals(plan, driver.findElement(By.xpath("//h3[contains(text(),'"+plan+"')]")).getText().trim());
+				Assert.assertTrue(driver.findElement(By.xpath("//h3[contains(text(),'"+plan+"')]/following::span[contains(@class,'search-provider')]")).isDisplayed());
+				System.out.println(driver.findElement(By.xpath("//h3[contains(text(),'"+plan+"')]")).getText());
+			}
+		}else {
+			for (String plan: listOfTestPlans) {
+				Assert.assertEquals(plan, driver.findElement(By.xpath("//button[contains(@class,'remove')]/following::h3[contains(text(),'"+plan+"')]")).getText().trim());
+				Assert.assertTrue(driver.findElement(By.xpath("//button[contains(@class,'remove')]/following::h3[contains(text(),'"+plan+"')]/following::span[contains(@class,'search-provider')]")).isDisplayed());
+				System.out.println(driver.findElement(By.xpath("//button[contains(@class,'remove')]/following::h3[contains(text(),'"+plan+"')]")).getText());
+			}
 		}
 	}
 	
@@ -238,7 +249,12 @@ public class VisitorProfilePage extends UhcDriver {
 			if(driver.findElements(By.xpath("//div[@class='title dropdown-open']")).size()>0){
 				List<String> listOfTestPlans = Arrays.asList(plans.split(","));
 				for (String plan: listOfTestPlans) {
-					driver.findElement(By.xpath("//h3[contains(text(),'"+plan+"')]/preceding::button[contains(@class,'remove')][1]")).click();
+					if(CommonConstants.SELECTED_STATE.equalsIgnoreCase("Pennsylvania") || CommonConstants.SELECTED_STATE.equalsIgnoreCase("Puerto Rico") || 
+							CommonConstants.SELECTED_STATE.equalsIgnoreCase("Vermont")) {
+						driver.findElement(By.xpath("//h4[text()='"+plan+"']/preceding::button[1]")).click();
+					}else {
+						driver.findElement(By.xpath("//h3[contains(text(),'"+plan+"')]/preceding::button[contains(@class,'remove')][1]")).click();
+					}
 					Thread.sleep(5000);
 				}
 				}
@@ -453,9 +469,16 @@ public class VisitorProfilePage extends UhcDriver {
 			CommonUtility.checkPageIsReadyNew(driver);
 			Thread.sleep(20000);
 			for (String plan: listOfTestPlans) {
-				Assert.assertEquals(plan, driver.findElement(By.xpath("//h2[text()='"+plan+"']")).getText());
-				//No pdf link is availbel now
-				//Assert.assertTrue(driver.findElement(By.xpath("//div/a[contains(@aria-describedby,'"+plan+"')] [contains(@class,'pdf-link')]")).isDisplayed());
+				
+				if(CommonConstants.SELECTED_STATE.equalsIgnoreCase("Pennsylvania") || CommonConstants.SELECTED_STATE.equalsIgnoreCase("Puerto Rico") || 
+						CommonConstants.SELECTED_STATE.equalsIgnoreCase("Vermont")) {
+					Assert.assertEquals(plan, driver.findElement(By.xpath("//h2[text()='"+plan+"']")).getText());
+					Assert.assertTrue(driver.findElement(By.xpath("//div/a[contains(@aria-describedby,'"+plan+"')] [contains(@class,'pdf-link')]")).isDisplayed());
+				}else {
+					Assert.assertEquals(plan, driver.findElement(By.xpath("//h2[text()='"+plan+"']")).getText());
+					//No pdf link is availbel now
+					//Assert.assertTrue(driver.findElement(By.xpath("//div/a[contains(@aria-describedby,'"+plan+"')] [contains(@class,'pdf-link')]")).isDisplayed());
+				}
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
