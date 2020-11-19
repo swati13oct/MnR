@@ -2359,9 +2359,9 @@ public class BenefitsAndCoverageUmsStepDefinition {
 				insulin.equals("hasInsulin")||insulin.equals("nonInsulin"));
 		
 		List<String> testNote=new ArrayList<String>();
-		List<String> options=bncPg.getDrugDropDownOptions();
-		Assert.assertTrue("PROBLEM - dropdown value should not be empty", options.get(0).equals(""));
 		if (insulin.equals("hasInsulin")) {
+			List<String> options=bncPg.getDrugDropDownOptions();
+			Assert.assertTrue("PROBLEM - dropdown value should not be empty", options.get(0).equals(""));
 			if (planType.toUpperCase().equals("MAPD")) {
 				for (int i=0; i<options.size(); i++) {
 					String optionTxt=options.get(i);
@@ -2529,6 +2529,8 @@ public class BenefitsAndCoverageUmsStepDefinition {
 			} 
 			//note: for cases w/ dropdown
 			if (planType.toUpperCase().equals("MAPD")) {
+				List<String> options=bncPg.getDrugDropDownOptions();
+				Assert.assertTrue("PROBLEM - dropdown value should not be empty", options.get(0).equals(""));
 				for (int i=0; i<options.size(); i++) {
 					String optionTxt=options.get(i);
 					if (optionTxt.equals("Standard Retail Pharmacy")) {
