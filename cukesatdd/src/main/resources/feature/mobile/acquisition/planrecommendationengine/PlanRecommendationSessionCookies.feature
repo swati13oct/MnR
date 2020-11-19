@@ -8,7 +8,7 @@ Feature: Plan Recommendation Engine - Verify PRE Session Cookies functionalities
       | Zip Code        | <Zipcode>       |
       | Is Multi County | <isMultiCounty> |
       | County Name     | <County>        |
-   	And user verifies "VPP" page mobile
+    And user verifies "VPP" page mobile
     When user adds Doctors in vpp summary page mobile
       | Doctors Search Text | <DoctorsName>   |
       | Multi Doctor        | <isMultiDoctor> |
@@ -294,7 +294,7 @@ Feature: Plan Recommendation Engine - Verify PRE Session Cookies functionalities
 
     Examples: 
       | Zipcode | isMultiCounty | County   | Zipcode1 | isMultiCounty1 | County1  | isCoverageOpt | SpecialNeeds | TravelOption | DoctorsSelection | DoctorsName | isMultiDoctor | DoctorsName1 | isMultiDoctor1 | DrugSelection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch | PharmacySelection | Dental-Hearing-Vision-Fitness | costPreferenceOption |
-      |   10003 | NO            | New York |    10001 | NO             | New York | MAPD          | None         | Regular      | lookup           | sue         | Yes           | robert       | No             | Yes           | Lipitor,NO,Lipitor TAB 20MG,,,1,YES,NO                               | Retail            | Yes,No,No,Yes                 | Lower                |
+      |   10003 | NO            | New York |    10001 | NO             | New York | MAPD          | None         | Regular      | lookup           | sue         | Yes           | john         | No             | Yes           | Lipitor,NO,Lipitor TAB 20MG,,,1,YES,NO                               | Retail            | Yes,No,No,Yes                 | Lower                |
 
   @PRE @planrecommandonationmobile @EmailListmobile @PDPEmailPlans @F452764
   Scenario Outline: Zipcode: <Zipcode> -MultiCountyOptions: <isMultiCounty> -CoverageOptions: <isCoverageOpt> -DrugOption: <DrugSelection> - To validate Email Plan List PDP plans in PRE Mobile
