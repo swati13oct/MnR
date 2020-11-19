@@ -347,7 +347,7 @@ public class SiteSearchMobile {
 		@Then("^the user Click on Look up your Provider button on Plan Details Page$")
 		public void user_Clicks_on_Look_upyourProvider_button_on_PlanDetailsPage() {
 
-			PlanDetailsPageMobile vppPlanDetailsPage = (PlanDetailsPageMobile) getLoginScenario()
+			pages.mobile.acquisition.ulayer.PlanDetailsPageMobile vppPlanDetailsPage = (pages.mobile.acquisition.ulayer.PlanDetailsPageMobile) getLoginScenario()
 					.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
 
 			ProviderSearchPageMobile providerSearchPage = vppPlanDetailsPage.validateLookUpYourProviderButton();

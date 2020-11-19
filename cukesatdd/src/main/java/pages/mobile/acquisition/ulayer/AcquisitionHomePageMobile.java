@@ -315,6 +315,9 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 	@FindBy(id = "dupIconFlyOut")
 	private WebElement shoppingCartIcon;
+	
+	@FindBy(xpath = "//h3[@id='guest-profile']")
+	private WebElement guestProfileLink;
 
 	@FindBy(xpath = "//*[@id='sam-call-button']//*[contains(@class,'sam__button__icon')]")
 	private WebElement callsam;
@@ -854,7 +857,8 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	}
 
 	public AboutUsAARPPageMobile aboutUsFooterClick() {
-		validateNew(footerAboutUsLink,3);
+		waitforElementVisibilityInTime(zipCode1, 10);
+		validateNew(footerAboutUsLink);
 		// footerAboutUsLink.click();
 		jsClickNew(footerAboutUsLink);
 		CommonUtility.checkPageIsReadyNew(driver);
@@ -2076,6 +2080,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	}
 
 	public void validateVisitAarpOrglink() {
+		waitforElementVisibilityInTime(zipCode1, 10);
 		validateNew(visitAARPFooterLink);
 		String hRef = visitAARPFooterLink.getAttribute("href");
 		System.out.println("href for Visit AARP.org link : " + hRef);
@@ -2669,6 +2674,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		waitforElement(shoppingCartIcon);
 		// shoppingCartIcon.click();
 		jsClickNew(shoppingCartIcon);
+		jsClickNew(guestProfileLink);
 		if (driver.getCurrentUrl().contains("profile")) {
 			return new VisitorProfilePageMobile(driver);
 		} else {

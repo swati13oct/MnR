@@ -158,7 +158,7 @@ public class VisitorProfilePageMobile extends UhcDriver {
 	@FindBy(xpath = "//h3[contains(text(),'Save your information')]")
 	private WebElement saveYourInformation;
 
-	@FindBy(xpath = "//span[@class='uhc-button__text' and text()='Get Started' and @xpath='1']")
+	@FindBy(xpath = "//button[contains(@dtmname,'acq_visitor_profile')]//span[contains(text(),'Get Started')]")
 	private WebElement GetStartedDrug;
 
 	public GetStartedPageMobile addDrug_DCERedesign() {

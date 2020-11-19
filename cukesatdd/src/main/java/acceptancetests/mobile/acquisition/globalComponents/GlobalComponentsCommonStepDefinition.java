@@ -66,7 +66,7 @@ public class GlobalComponentsCommonStepDefinition {
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		if (aquisitionhomepage != null) {
 			aquisitionhomepage.validateGlobalFooterLinks();
-			aquisitionhomepage.clickBrowserBackButton();
+			//aquisitionhomepage.clickBrowserBackButton();
 		} else {
 			Assert.fail("Home Page not Loading");
 		}
@@ -196,7 +196,7 @@ public class GlobalComponentsCommonStepDefinition {
 		aquisitionhomepage.validateDisclaimer();
 	}
 	
-	@When("^user verifies visit aarp\\.org link on home page$")
+	@When("^user verifies visit aarp.org link on home page$")
 	public void user_verifies_visit_aarp_org_link_on_home_page_ulayer() throws Throwable {
 		AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
