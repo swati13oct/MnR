@@ -614,7 +614,6 @@ public class PlanRecommendationEngineResultsPage extends UhcDriver {
 			DrugsInDCE = dce.DCEDrugsResults;
 			int count =DrugsInDCE.size();
 			verifyConfirmationmodalResults(count,DrugsInDCE,DrugsList);
-			System.out.println("Validating Drugs Details from VPP to PRE Drug Page: ");
 		}
 		
 		public void removeDrugs(int count) {
