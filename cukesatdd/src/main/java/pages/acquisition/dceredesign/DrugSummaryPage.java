@@ -1,7 +1,9 @@
 package pages.acquisition.dceredesign;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.junit.Assert;
 import org.openqa.selenium.By;
@@ -130,7 +132,7 @@ public class DrugSummaryPage extends UhcDriver {
 	
 	@FindBy(id = "changePharmacyLink")
 	public WebElement changePharmacyLinkDetailsPage;
-
+	
 	@Override
 	public void openAndValidate() {
 		validateNew(reviewDrugCostPageHeading);
@@ -219,13 +221,13 @@ public class DrugSummaryPage extends UhcDriver {
 	@FindBy(id = "priceLinkBtn_0")
 	private WebElement viewProceBtn;
 	
-	@FindBy(xpath = "//a[contains(@id,'switchToGenericLink')]")
+	@FindBy(xpath = "//*[contains(@id,'drugtable')]//button[contains(text(),'Switch to Generic')]")
 	private WebElement switchToGenericBtn;
 	
 	@FindBy(xpath = "//span[contains(text(),'Lipitor')]/following::a[contains(@id,'switchToGenericLink')]")
 	private WebElement lipitorSwitchToGenericBtn;
 	
-	@FindBy(xpath = "//button[@type='submit']//span[text()='Switch to Generic']")
+	@FindBy(xpath = "//button[contains(@type,'submit')]//*[contains(text(),'Switch to Generic')]")
 	private WebElement switchToGenericSubmitBtn;
 	
 	@FindBy(xpath = "//table/tbody/tr/td[1]")
@@ -249,12 +251,12 @@ public class DrugSummaryPage extends UhcDriver {
 	}
 	
 	public void clickswitchToGeneric() throws InterruptedException {
-		Thread.sleep(6000);
-		validate(drugTitle);
+		
+		//validate(drugTitle);
 		validate(switchToGenericBtn);
-		switchToGenericBtn.click();
-		validate(switchToGenericSubmitBtn);
-		switchToGenericSubmitBtn.click();
+		jsClickNew(switchToGenericBtn);
+		validateNew(switchToGenericSubmitBtn);
+		jsClickNew(switchToGenericSubmitBtn);
 	}
 	
 	public void clicklipitorswitchToGeneric() throws InterruptedException {
@@ -479,5 +481,27 @@ public class DrugSummaryPage extends UhcDriver {
 		if(!PremiumDisplayed.contains(premium)) {
 			Assert.fail("Expected Premium not displayed, Expected : "+premium+"    Actual Displayed : "+PremiumDisplayed);
 		}
+	}
+	
+	public Map<String, String> captureDrugCosts(String planName) {
+		Map<String, String> DrugDetails = new HashMap<String, String>();
+		
+		WebElement drugCosts_AvgMonDrugCost_Amount = driver.findElement(By.xpath("//*[contains(text(),'"+planName+"')]/ancestor::*[contains(@class,'uhc-card__header')]//following-sibling::*[contains(@class,'uhc-card__content')]//*[contains(text(), 'Average Monthly Drug Cost')]//following-sibling::div[contains(text(), '$')]"));
+		WebElement drugCosts_MonthlyPremium_Amount = driver.findElement(By.xpath("//*[contains(text(),'"+planName+"')]/ancestor::*[contains(@class,'uhc-card__header')]//following-sibling::*[contains(@class,'uhc-card__content')]//*[contains(text(), 'Monthly Premium')]//following-sibling::div[contains(text(), '$')]"));
+		WebElement drugCosts_AnnualEstTotal_Amount = driver.findElement(By.xpath("//*[contains(text(),'"+planName+"')]/ancestor::*[contains(@class,'uhc-card__header')]//following-sibling::*[contains(@class,'uhc-card__content')]//*[contains(text(), 'Annual Estimated')]//following-sibling::div[contains(text(), '$')]"));
+
+		
+
+		String AVG_MONTHLY = drugCosts_AvgMonDrugCost_Amount.getText();
+		String MONTHLY_PREMIUM = drugCosts_MonthlyPremium_Amount.getText();
+		String ANNUAL_ESTIMATED_TOTAL = drugCosts_AnnualEstTotal_Amount.getText();
+		String COVERED_DRUGS_COUNT = drugsCovered.getText();
+		System.out.println("Covered Drug Text : "+COVERED_DRUGS_COUNT);
+		DrugDetails.put("AVG_MONTHLY", AVG_MONTHLY);
+		DrugDetails.put("MONTHLY_PREMIUM", MONTHLY_PREMIUM);
+		DrugDetails.put("ANNUAL_ESTIMATED_TOTAL", ANNUAL_ESTIMATED_TOTAL);
+		DrugDetails.put("COVERED_DRUGS_COUNT", COVERED_DRUGS_COUNT);
+		
+		return DrugDetails;
 	}
 }
