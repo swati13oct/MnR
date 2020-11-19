@@ -12,9 +12,7 @@ import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import org.junit.Assert;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acceptancetests.data.CommonConstants;
@@ -25,6 +23,7 @@ import acceptancetests.memberredesign.claims.ClaimsCommonConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
+import cucumber.api.Scenario;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -50,7 +49,19 @@ public class BenefitsAndCoverageUmsStepDefinition {
 		return loginScenario;
 	}
 
-
+	//note: added code to print test results note in jenkins report at the end of test for successful cases
+	@cucumber.api.java.After
+	public void testResultNote(Scenario scenario) { 
+		if(null!=getLoginScenario().getBean(BenefitsAndCoverageCommonConstants.TEST_RESULT_NOTE)) {   
+			@SuppressWarnings("unchecked")   
+			List<String> testNote=(List<String>) getLoginScenario()
+			.getBean(BenefitsAndCoverageCommonConstants.TEST_RESULT_NOTE);
+			for (String s: testNote) {   
+				scenario.write(s);
+			}
+			testNote.clear(); 
+		}
+	}
 	/**
 	 * @toDo : The user logs in to the member Redesign Portal
 	 */
@@ -166,6 +177,9 @@ public class BenefitsAndCoverageUmsStepDefinition {
 		}
 		String planType=(String) getLoginScenario().getBean(LoginCommonConstants.PLANTYPE);
 		benefitsCoveragePage.goToSpecificComboTab(planType, false);
+		Date currentDate=benefitsCoveragePage.getCurrentSystemDate();
+		String dateStr=benefitsCoveragePage.convertDateToStrFormat_MMDDYYYY(currentDate);
+		getLoginScenario().saveBean(BenefitsAndCoverageCommonConstants.TEST_DATE_STR, dateStr);
 	}
 
 
@@ -950,8 +964,12 @@ public class BenefitsAndCoverageUmsStepDefinition {
 		System.out.println("***the Group PDP LIS1 user should see drug cost table for Lis members***");
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
 				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
-		benefitsCoveragePage.validatedrugcosttablePDPGroupLIS1();
-	}
+		
+		List<String> testNote=benefitsCoveragePage.validatedrugcosttablePDPGroupLIS1();
+		if (testNote.size()>0) {
+			Assert.fail(testNote.get(0));
+			getLoginScenario().saveBean(BenefitsAndCoverageCommonConstants.TEST_RESULT_NOTE, testNote);
+		}	}
 	
 	@And("the NON-LIS PDP group user should see drug cost table for Lis members")
 	public void user_validate_drugcosttablePDP_NONLIS_Group() {
@@ -959,8 +977,12 @@ public class BenefitsAndCoverageUmsStepDefinition {
 		System.out.println("***the NON-LIS PDP group user should see drug cost table for Lis members***");
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
 				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
-		benefitsCoveragePage.validatedrugcosttablePDPGroup_NONLIS(dateStr);
-	}
+		
+		List<String> testNote=benefitsCoveragePage.validatedrugcosttablePDPGroup_NONLIS(dateStr);
+		if (testNote.size()>0) {
+			Assert.fail(testNote.get(0));
+			getLoginScenario().saveBean(BenefitsAndCoverageCommonConstants.TEST_RESULT_NOTE, testNote);
+		}	}
 	
 	@And("the PDP individual NON-LIS  user should see drug cost table for Lis members")
 	public void user_validate_drugcosttablePDP_NONLIS_Indi() throws InterruptedException {
@@ -968,8 +990,12 @@ public class BenefitsAndCoverageUmsStepDefinition {
 		System.out.println("***the PDP individual NON-LIS  user should see drug cost table for Lis members***");
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
 				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
-		benefitsCoveragePage.validatedrugcosttablePDPIndi_NONLIS(dateStr);
-	}
+		
+		List<String> testNote=benefitsCoveragePage.validatedrugcosttablePDPIndi_NONLIS(dateStr);
+		if (testNote.size()>0) {
+			Assert.fail(testNote.get(0));
+			getLoginScenario().saveBean(BenefitsAndCoverageCommonConstants.TEST_RESULT_NOTE, testNote);
+		}	}
 	
 	@And("the MAPD group user should see drug cost table for Lis members")
 	public void user_validate_drugcosttableGroup() {
@@ -983,16 +1009,24 @@ public class BenefitsAndCoverageUmsStepDefinition {
 		System.out.println("***the MAPD group user should see drug cost table for Lis members***");
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
 				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
-		benefitsCoveragePage.validatedrugcosttablePDPLIS3();
-	}
+		
+		List<String> testNote=benefitsCoveragePage.validatedrugcosttablePDPLIS3();
+		if (testNote.size()>0) {
+			Assert.fail(testNote.get(0));
+			getLoginScenario().saveBean(BenefitsAndCoverageCommonConstants.TEST_RESULT_NOTE, testNote);
+		}	}
 	@And("the MAPD NON-LIS group user should see drug cost table for Lis members")
 	public void user_validate_drugcosttableGroup_NONLIS() {
 		String dateStr=(String)getLoginScenario().getBean(BenefitsAndCoverageCommonConstants.TEST_DATE_STR);
 		System.out.println("***the MAPD NON-LIS group user should see drug cost table for Lis members***");
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
 				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
-		benefitsCoveragePage.validatedrugcosttableMAPD_NONLIS(dateStr);
-	}
+		
+		List<String> testNote=benefitsCoveragePage.validatedrugcosttableMAPD_NONLIS(dateStr);
+		if (testNote.size()>0) {
+			Assert.fail(testNote.get(0));
+			getLoginScenario().saveBean(BenefitsAndCoverageCommonConstants.TEST_RESULT_NOTE, testNote);
+		}	}
 
 	/** 
 	 * @toDo : Validates the  Ways to save section
@@ -1624,7 +1658,11 @@ public class BenefitsAndCoverageUmsStepDefinition {
 		System.out.println("***the Village user validates text in table***");
 		BenefitsAndCoveragePage benefitsnCoveragepage = (BenefitsAndCoveragePage) getLoginScenario()
 				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
-		benefitsnCoveragepage.validatevillagetabletext();
+		List<String> testNote=benefitsnCoveragepage.validatevillagetabletext();
+		if (testNote.size()>0) {
+			Assert.fail(testNote.get(0));
+			getLoginScenario().saveBean(BenefitsAndCoverageCommonConstants.TEST_RESULT_NOTE, testNote);
+		}
 
 	}
 	
@@ -2320,6 +2358,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 		Assert.assertTrue("TODO - need to code behavior for insulin type="+insulin, 
 				insulin.equals("hasInsulin")||insulin.equals("nonInsulin"));
 		
+		List<String> testNote=new ArrayList<String>();
 		if (insulin.equals("hasInsulin")) {
 			if (planType.toUpperCase().equals("MAPD")) {
 				List<String> options=bncPg.getDrugDropDownOptions();
@@ -2328,27 +2367,27 @@ public class BenefitsAndCoverageUmsStepDefinition {
 					if (optionTxt.equals("Standard Retail Pharmacy")) {
 						bncPg.selectDrugTblDropDownOption(optionTxt);
 						if (deductible.equals("NoD")) 
-							bncPg.validateDrgTbl_stdRetPha_mapd_noD_hasInsulin();
+							testNote=bncPg.validateDrgTbl_stdRetPha_mapd_noD_hasInsulin();
 						else if (deductible.equals("T12NoD_T345D")) 
-							bncPg.validateDrgTbl_stdRetPha_mapd_T12NoD_T345D_hasInsulin();
+							testNote=bncPg.validateDrgTbl_stdRetPha_mapd_T12NoD_T345D_hasInsulin();
 						else if (deductible.equals("T123NoD_T45D")) 
-							bncPg.validateDrgTbl_stdRetPha_mapd_T123NoD_T45D_hasInsulin();
+							testNote=bncPg.validateDrgTbl_stdRetPha_mapd_T123NoD_T45D_hasInsulin();
 					} else if (optionTxt.equals("Preferred Mail Service Pharmacy")) {
 						bncPg.selectDrugTblDropDownOption(optionTxt);
 						if (deductible.equals("NoD")) 
-							bncPg.validateDrgTbl_preMaiSerPha_mapd_noD_hasInsulin();
+							testNote=bncPg.validateDrgTbl_preMaiSerPha_mapd_noD_hasInsulin();
 						else if (deductible.equals("T12NoD_T345D")) 
-							bncPg.validateDrgTbl_preMaiSerPha_mapd_T12NoD_T345D_hasInsulin();
+							testNote=bncPg.validateDrgTbl_preMaiSerPha_mapd_T12NoD_T345D_hasInsulin();
 						else if (deductible.equals("T123NoD_T45D")) 
-							bncPg.validateDrgTbl_preMaiSerPha_mapd_T123NoD_T45D_hasInsulin();
+							testNote=bncPg.validateDrgTbl_preMaiSerPha_mapd_T123NoD_T45D_hasInsulin();
 					} else if (optionTxt.equals("Preferred Retail Pharmacy")) {
 						bncPg.selectDrugTblDropDownOption(optionTxt);
 						if (deductible.equals("NoD")) 
-							bncPg.validateDrgTbl_preRetail_mapd_noD_hasInsulin();
+							testNote=bncPg.validateDrgTbl_preRetail_mapd_noD_hasInsulin();
 						else if (deductible.equals("T12NoD_T345D")) 
-							bncPg.validateDrgTbl_preRetail_mapd_T12NoD_T345D_hasInsulin();
+							testNote=bncPg.validateDrgTbl_preRetail_mapd_T12NoD_T345D_hasInsulin();
 						else if (deductible.equals("T123NoD_T45D")) 
-							bncPg.validateDrgTbl_preRetail_mapd_T123NoD_T45D_hasInsulin();
+							testNote=bncPg.validateDrgTbl_preRetail_mapd_T123NoD_T45D_hasInsulin();
 					} else {
 						Assert.assertTrue("TODO - optionTxt="+optionTxt, false);
 					}
@@ -2360,27 +2399,27 @@ public class BenefitsAndCoverageUmsStepDefinition {
 					if (optionTxt.equals("Standard Retail Pharmacy")) {
 						bncPg.selectDrugTblDropDownOption(optionTxt);
 						if (deductible.equals("NoD")) 
-							bncPg.validateDrgTbl_stdRetPha_pdp_noD_hasInsulin();
+							testNote=bncPg.validateDrgTbl_stdRetPha_pdp_noD_hasInsulin();
 						else if (deductible.equals("T12NoD_T345D")) 
-							bncPg.validateDrgTbl_stdRetPha_pdp_T12NoD_T345D_hasInsulin();
+							testNote=bncPg.validateDrgTbl_stdRetPha_pdp_T12NoD_T345D_hasInsulin();
 						else if (deductible.equals("T123NoD_T45D")) 
-							bncPg.validateDrgTbl_stdRetPha_pdp_T123NoD_T45D_hasInsulin();
+							testNote=bncPg.validateDrgTbl_stdRetPha_pdp_T123NoD_T45D_hasInsulin();
 					} else if (optionTxt.equals("Preferred Mail Service Pharmacy")) {
 						bncPg.selectDrugTblDropDownOption(optionTxt);
 						if (deductible.equals("NoD")) 
-							bncPg.validateDrgTbl_preMaiSerPha_pdp_noD_hasInsulin();
+							testNote=bncPg.validateDrgTbl_preMaiSerPha_pdp_noD_hasInsulin();
 						else if (deductible.equals("T12NoD_T345D")) 
-							bncPg.validateDrgTbl_preMaiSerPha_pdp_T12NoD_T345D_hasInsulin();
+							testNote=bncPg.validateDrgTbl_preMaiSerPha_pdp_T12NoD_T345D_hasInsulin();
 						else if (deductible.equals("T123NoD_T45D")) 
-							bncPg.validateDrgTbl_preMaiSerPha_pdp_T123NoD_T45D_hasInsulin();
+							testNote=bncPg.validateDrgTbl_preMaiSerPha_pdp_T123NoD_T45D_hasInsulin();
 					} else if (optionTxt.equals("Preferred Retail Pharmacy")) {
 						bncPg.selectDrugTblDropDownOption(optionTxt);
 						if (deductible.equals("NoD")) 
-							bncPg.validateDrgTbl_preRetail_pdp_noD_hasInsulin();
+							testNote=bncPg.validateDrgTbl_preRetail_pdp_noD_hasInsulin();
 						else if (deductible.equals("T12NoD_T345D")) 
-							bncPg.validateDrgTbl_preRetail_pdp_T12NoD_T345D_hasInsulin();
+							testNote=bncPg.validateDrgTbl_preRetail_pdp_T12NoD_T345D_hasInsulin();
 						else if (deductible.equals("T123NoD_T45D")) 
-							bncPg.validateDrgTbl_preRetail_pdp_T123NoD_T45D_hasInsulin();
+							testNote=bncPg.validateDrgTbl_preRetail_pdp_T123NoD_T45D_hasInsulin();
 					} else {
 						Assert.assertTrue("TODO - optionTxt="+optionTxt, false);
 					}
@@ -2392,27 +2431,27 @@ public class BenefitsAndCoverageUmsStepDefinition {
 					if (optionTxt.equals("Standard Retail Pharmacy")) {
 						bncPg.selectDrugTblDropDownOption(optionTxt);
 						if (deductible.equals("NoD")) 
-							bncPg.validateDrgTbl_stdRetPha_csnppcp_noD_hasInsulin();
+							testNote=bncPg.validateDrgTbl_stdRetPha_csnppcp_noD_hasInsulin();
 						else if (deductible.equals("T12NoD_T345D")) 
-							bncPg.validateDrgTbl_stdRetPha_csnppcp_T12NoD_T345D_hasInsulin();
+							testNote=bncPg.validateDrgTbl_stdRetPha_csnppcp_T12NoD_T345D_hasInsulin();
 						else if (deductible.equals("T123NoD_T45D")) 
-							bncPg.validateDrgTbl_stdRetPha_csnppcp_T123NoD_T45D_hasInsulin();
+							testNote=bncPg.validateDrgTbl_stdRetPha_csnppcp_T123NoD_T45D_hasInsulin();
 					} else if (optionTxt.equals("Preferred Mail Service Pharmacy")) {
 						bncPg.selectDrugTblDropDownOption(optionTxt);
 						if (deductible.equals("NoD")) 
-							bncPg.validateDrgTbl_preMaiSerPha_csnppcp_noD_hasInsulin();
+							testNote=bncPg.validateDrgTbl_preMaiSerPha_csnppcp_noD_hasInsulin();
 						else if (deductible.equals("T12NoD_T345D")) 
-							bncPg.validateDrgTbl_preMaiSerPha_csnppcp_T12NoD_T345D_hasInsulin();
+							testNote=bncPg.validateDrgTbl_preMaiSerPha_csnppcp_T12NoD_T345D_hasInsulin();
 						else if (deductible.equals("T123NoD_T45D")) 
-							bncPg.validateDrgTbl_preMaiSerPha_csnppcp_T123NoD_T45D_hasInsulin();
+							testNote=bncPg.validateDrgTbl_preMaiSerPha_csnppcp_T123NoD_T45D_hasInsulin();
 					} else if (optionTxt.equals("Preferred Retail Pharmacy")) {
 						bncPg.selectDrugTblDropDownOption(optionTxt);
 						if (deductible.equals("NoD")) 
-							bncPg.validateDrgTbl_preRetail_csnppcp_noD_hasInsulin();
+							testNote=bncPg.validateDrgTbl_preRetail_csnppcp_noD_hasInsulin();
 						else if (deductible.equals("T12NoD_T345D")) 
-							bncPg.validateDrgTbl_preRetail_csnppcp_T12NoD_T345D_hasInsulin();
+							testNote=bncPg.validateDrgTbl_preRetail_csnppcp_T12NoD_T345D_hasInsulin();
 						else if (deductible.equals("T123NoD_T45D")) 
-							bncPg.validateDrgTbl_preRetail_csnppcp_T123NoD_T45D_hasInsulin();
+							testNote=bncPg.validateDrgTbl_preRetail_csnppcp_T123NoD_T45D_hasInsulin();
 					} else {
 						Assert.assertTrue("TODO - optionTxt="+optionTxt, false);
 					}
@@ -2424,27 +2463,27 @@ public class BenefitsAndCoverageUmsStepDefinition {
 					if (optionTxt.equals("Standard Retail Pharmacy")) {
 						bncPg.selectDrugTblDropDownOption(optionTxt);
 						if (deductible.equals("NoD")) 
-							bncPg.validateDrgTbl_stdRetPha_csnpmsap_noD_hasInsulin();
+							testNote=bncPg.validateDrgTbl_stdRetPha_csnpmsap_noD_hasInsulin();
 						else if (deductible.equals("T12NoD_T345D")) 
-							bncPg.validateDrgTbl_stdRetPha_csnpmsap_T12NoD_T345D_hasInsulin();
+							testNote=bncPg.validateDrgTbl_stdRetPha_csnpmsap_T12NoD_T345D_hasInsulin();
 						else if (deductible.equals("T123NoD_T45D")) 
-							bncPg.validateDrgTbl_stdRetPha_csnpmsap_T123NoD_T45D_hasInsulin();
+							testNote=bncPg.validateDrgTbl_stdRetPha_csnpmsap_T123NoD_T45D_hasInsulin();
 					} else if (optionTxt.equals("Preferred Mail Service Pharmacy")) {
 						bncPg.selectDrugTblDropDownOption(optionTxt);
 						if (deductible.equals("NoD")) 
-							bncPg.validateDrgTbl_preMaiSerPha_csnpmsap_noD_hasInsulin();
+							testNote=bncPg.validateDrgTbl_preMaiSerPha_csnpmsap_noD_hasInsulin();
 						else if (deductible.equals("T12NoD_T345D")) 
-							bncPg.validateDrgTbl_preMaiSerPha_csnpmsap_T12NoD_T345D_hasInsulin();
+							testNote=bncPg.validateDrgTbl_preMaiSerPha_csnpmsap_T12NoD_T345D_hasInsulin();
 						else if (deductible.equals("T123NoD_T45D")) 
-							bncPg.validateDrgTbl_preMaiSerPha_csnpmsap_T123NoD_T45D_hasInsulin();
+							testNote=bncPg.validateDrgTbl_preMaiSerPha_csnpmsap_T123NoD_T45D_hasInsulin();
 					} else if (optionTxt.equals("Preferred Retail Pharmacy")) {
 						bncPg.selectDrugTblDropDownOption(optionTxt);
 						if (deductible.equals("NoD")) 
-							bncPg.validateDrgTbl_preRetail_csnpmsap_noD_hasInsulin();
+							testNote=bncPg.validateDrgTbl_preRetail_csnpmsap_noD_hasInsulin();
 						else if (deductible.equals("T12NoD_T345D")) 
-							bncPg.validateDrgTbl_preRetail_csnpmsap_T12NoD_T345D_hasInsulin();
+							testNote=bncPg.validateDrgTbl_preRetail_csnpmsap_T12NoD_T345D_hasInsulin();
 						else if (deductible.equals("T123NoD_T45D")) 
-							bncPg.validateDrgTbl_preRetail_csnpmsap_T123NoD_T45D_hasInsulin();
+							testNote=bncPg.validateDrgTbl_preRetail_csnpmsap_T123NoD_T45D_hasInsulin();
 					} else {
 						Assert.assertTrue("PROBLEM - DO NOT recognize this dropdown option. optionTxt="+optionTxt, false);
 					}
@@ -2456,27 +2495,27 @@ public class BenefitsAndCoverageUmsStepDefinition {
 					if (optionTxt.equals("Standard Retail Pharmacy")) {
 						bncPg.selectDrugTblDropDownOption(optionTxt);
 						if (deductible.equals("NoD")) 
-							bncPg.validateDrgTbl_stdRetPha_isnpmsap_noD_hasInsulin();
+							testNote=bncPg.validateDrgTbl_stdRetPha_isnpmsap_noD_hasInsulin();
 						else if (deductible.equals("T12NoD_T345D")) 
-							bncPg.validateDrgTbl_stdRetPha_isnpmsap_T12NoD_T345D_hasInsulin();
+							testNote=bncPg.validateDrgTbl_stdRetPha_isnpmsap_T12NoD_T345D_hasInsulin();
 						else if (deductible.equals("T123NoD_T45D")) 
-							bncPg.validateDrgTbl_stdRetPha_isnpmsap_T123NoD_T45D_hasInsulin();
+							testNote=bncPg.validateDrgTbl_stdRetPha_isnpmsap_T123NoD_T45D_hasInsulin();
 					} else if (optionTxt.equals("Preferred Mail Service Pharmacy")) {
 						bncPg.selectDrugTblDropDownOption(optionTxt);
 						if (deductible.equals("NoD")) 
-							bncPg.validateDrgTbl_preMaiSerPha_isnpmsap_noD_hasInsulin();
+							testNote=bncPg.validateDrgTbl_preMaiSerPha_isnpmsap_noD_hasInsulin();
 						else if (deductible.equals("T12NoD_T345D")) 
-							bncPg.validateDrgTbl_preMaiSerPha_isnpmsap_T12NoD_T345D_hasInsulin();
+							testNote=bncPg.validateDrgTbl_preMaiSerPha_isnpmsap_T12NoD_T345D_hasInsulin();
 						else if (deductible.equals("T123NoD_T45D")) 
-							bncPg.validateDrgTbl_preMaiSerPha_isnpmsap_T123NoD_T45D_hasInsulin();
+							testNote=bncPg.validateDrgTbl_preMaiSerPha_isnpmsap_T123NoD_T45D_hasInsulin();
 					} else if (optionTxt.equals("Preferred Retail Pharmacy")) {
 						bncPg.selectDrugTblDropDownOption(optionTxt);
 						if (deductible.equals("NoD")) 
-							bncPg.validateDrgTbl_preRetail_isnpmsap_noD_hasInsulin();
+							testNote=bncPg.validateDrgTbl_preRetail_isnpmsap_noD_hasInsulin();
 						else if (deductible.equals("T12NoD_T345D")) 
-							bncPg.validateDrgTbl_preRetail_isnpmsap_T12NoD_T345D_hasInsulin();
+							testNote=bncPg.validateDrgTbl_preRetail_isnpmsap_T12NoD_T345D_hasInsulin();
 						else if (deductible.equals("T123NoD_T45D")) 
-							bncPg.validateDrgTbl_preRetail_isnpmsap_T123NoD_T45D_hasInsulin();
+							testNote=bncPg.validateDrgTbl_preRetail_isnpmsap_T123NoD_T45D_hasInsulin();
 					} else {
 						Assert.assertTrue("TODO - optionTxt="+optionTxt, false);
 					}
@@ -2486,7 +2525,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 			//note: for cases w/o dropdown
 			if (!copayCategory.equals("NON LIS")) {
 				if (deductible.equals("NoTier")) 
-					bncPg.validateDrgTbl_mapd_Lis_NoTier_hasInsulin();
+					testNote=bncPg.validateDrgTbl_mapd_Lis_NoTier_hasInsulin();
 				else
 					Assert.assertTrue("TODO - planType="+planType+" | memberType='"+memberType+"' | copayCategory='"+copayCategory+"' | deductible='"+deductible+"' | insulin='"+insulin+"'", false);
 				return;
@@ -2499,15 +2538,15 @@ public class BenefitsAndCoverageUmsStepDefinition {
 					if (optionTxt.equals("Standard Retail Pharmacy")) {
 						bncPg.selectDrugTblDropDownOption(optionTxt);
 						if (deductible.equals("T12345")) 
-							bncPg.validateDrgTbl_stdRetPha_mapd_T12345_hasInsulin();
+							testNote=bncPg.validateDrgTbl_stdRetPha_mapd_T12345_hasInsulin();
 					} else if (optionTxt.equals("Preferred Mail Service Pharmacy")) {
 						bncPg.selectDrugTblDropDownOption(optionTxt);
 						if (deductible.equals("T12345")) 
-							bncPg.validateDrgTbl_preMaiSerPha_mapd_T12345_hasInsulin();
+							testNote=bncPg.validateDrgTbl_preMaiSerPha_mapd_T12345_hasInsulin();
 					} else if (optionTxt.equals("Preferred Retail Pharmacy")) {
 						bncPg.selectDrugTblDropDownOption(optionTxt);
 						if (deductible.equals("T12345")) 
-							bncPg.validateDrgTbl_preRetail_mapd_T12345_hasInsulin();
+							testNote=bncPg.validateDrgTbl_preRetail_mapd_T12345_hasInsulin();
 					} else {
 						Assert.assertTrue("TODO - optionTxt="+optionTxt, false);
 					}
@@ -2516,6 +2555,12 @@ public class BenefitsAndCoverageUmsStepDefinition {
 				Assert.assertTrue("TODO - planType="+planType+" | memberType='"+memberType+"' | copayCategory='"+copayCategory+"' | deductible='"+deductible+"' | insulin='"+insulin+"'", false);
 			}
 		}
+		if (testNote.size()>0) {
+			getLoginScenario().saveBean(BenefitsAndCoverageCommonConstants.TEST_RESULT_NOTE, testNote);
+			Assert.fail(testNote.get(0));
+		}
+		
+		
 	}
 	
 }//end of class
