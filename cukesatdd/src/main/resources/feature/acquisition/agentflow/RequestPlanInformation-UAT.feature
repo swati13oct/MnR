@@ -1,6 +1,6 @@
 Feature: 1.06-UAT Scripts to test Federal Agent Link and request an appointment with an agent flow on Shop Pages
 
-Scenario Outline: <scenario> Verify request an appointment through <pageName>
+Scenario Outline: <scenario> Verify request an appointment through <site>
 		Given the user is on medicare acquisition site landing page
     	|Site| <site>|
 		When the user performs plan search using following information
