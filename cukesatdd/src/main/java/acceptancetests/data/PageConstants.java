@@ -740,4 +740,8 @@ public static final String STAGE_PAYMENT_DEEPLINK_lOGIN_PAGE= "paymentdeeplinklo
 	public static final String EMAIL_AND_PRINT_UTIL = "emailandprintutil";
 
 	public static final String SHOP_PAGE = "shopPage";
+	
+	public static final String STAGE_MyDocuments_Edelivery_DEEPLINK_lOGIN_PAGE="myDocumentsEdeliverydeeplinklogin";
+
+	public static final String PHARMACY_NAME = "pharmacyName";
 }
