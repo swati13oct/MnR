@@ -107,6 +107,9 @@ public class PlanRecommendationEngineResultsPage extends UhcDriver {
 	@FindBy(css = "#plan-list-1 .swiper-container .module-plan-overview:nth-of-type(1) a.add-drug")
 	private WebElement enterDrugsInfoMA1stPlan;
 	
+	@FindBy(css = "#plan-list-1 .swiper-container .module-plan-overview:nth-of-type(1) .edit-drugs a")
+	private WebElement drugSummarylinkMA1stPlan;
+	
 	@FindBy(css = "#plan-list-1 .swiper-container .module-plan-overview div.plan-name-div")
 	private List<WebElement> MAPlansId;
 	
@@ -1344,8 +1347,9 @@ public void useraddDrugsVPP(String drugDetails) {
 
 public void userPreDCE() {
 	threadsleep(10000);
-	validate(enterDrugsInfoMA1stPlan, 60);
-	enterDrugsInfoMA1stPlan.click();
+	drugcoveredsession();
+	validate(drugSummarylinkMA1stPlan, 60);
+	drugSummarylinkMA1stPlan.click();
 }
 
 public boolean changePlanyear(String year) {
