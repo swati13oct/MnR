@@ -373,6 +373,8 @@ public class MemberAuthPage extends UhcDriver {
 				}
 
 				System.out.println("Switched to new tab");
+				//note: fail it if land on oidc-headless-error page, no point of continuing, test is going no where
+				Assert.assertTrue("PROBLEM - user landed on oidc-headless-error page",!driver.getTitle().contains("oidc-headless-error"));
 				CommonUtility.checkPageIsReadyNew(driver);
 				if (MRScenario.environment.equalsIgnoreCase("stage") || MRScenario.environment.equalsIgnoreCase("offline")
 						|| MRScenario.environment.equalsIgnoreCase("prod")

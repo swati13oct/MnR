@@ -7,6 +7,7 @@ import java.util.Map;
 import org.junit.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstants;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
@@ -34,7 +35,7 @@ public class VisitorProfileStepDefinition {
 	public MRScenario getLoginScenario() {
 		return loginScenario;
 	}
-
+	
 	@And("^the user selects the state drop down value in home page$")
 	public void the_user_selects_the_state_drop_down_value_in_AARP_home_page(DataTable givenAttributes) {
 		List<DataTableRow> givenAttributesRow = givenAttributes.getGherkinRows();
@@ -49,6 +50,8 @@ public class VisitorProfileStepDefinition {
 		AcquisitionHomePage acqHomePage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 
+		CommonConstants.SELECTED_STATE  = state; 
+		
 		acqHomePage.selectState(state);
 	}
 	
