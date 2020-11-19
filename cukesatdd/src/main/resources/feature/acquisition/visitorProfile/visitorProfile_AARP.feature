@@ -7,6 +7,8 @@ Feature: 1.08. ACQ- Visitor profile
   Scenario Outline: Verify user is able to add drug information to the unauthenticated visitor profile - zip - <zipCode>
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
+    And the user selects the state drop down value in home page
+      | State | <state> |
     And the user clicks on the shopping cart icon
     And the user clicks on the add drugs button to navigate to DCE Redesign on the profile page
     Then the user validates Get Started Page
@@ -24,18 +26,22 @@ Feature: 1.08. ACQ- Visitor profile
 
     @VisitorProfile_AARP @prodRegression_AARP
     Examples: 
-      | state   | drug1   | zipCode | site |
-      | Alabama | Lipitor |   90210 | AARP |
+      | state        | drug1   | zipCode | site |
+      | Alabama      | Lipitor |   90210 | AARP |
+      | Pennsylvania | Lipitor |   15001 | AARP |
 
     @VisitorProfile_UHC @prodRegression_UHC
     Examples: 
-      | state   | drug1   | zipCode | site |
-      | Alabama | Lipitor |   90210 | UHC  |
+      | state        | drug1   | zipCode | site |
+      | Alabama      | Lipitor |   90210 | UHC  |
+      | Pennsylvania | Lipitor |   15001 | UHC  |
 
   @addDrugsDCE1
   Scenario Outline: Verify user is able to add drug from DCE to the unauthenticated visitor profile - zip -<zipCode>
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
+    And the user selects the state drop down value in home page
+      | State | <state> |
     When I access the acquisition DCE Redesign from home page
     Then the user validates Get Started Page
     Then the user clicks on Build Drug List to navigate to Build Drug List Page
@@ -54,11 +60,13 @@ Feature: 1.08. ACQ- Visitor profile
     Examples: 
       | state   | drug1   | zipCode | site |
       | Alabama | Lipitor |   90210 | AARP |
+      | Vermont | Lipitor |   05001 | AARP |
 
     @VisitorProfile_UHC
     Examples: 
       | state   | drug1   | zipCode | site |
       | Alabama | Lipitor |   90210 | UHC  |
+      | Vermont | Lipitor |   05001 | UHC  |
 
   @addPlans @addPlansULayerSmoke @visitorProfileRegressionAARP
   Scenario Outline: Verify user is able to add plans to the unauthenticated visitor profile - zip -<zipcode>
@@ -92,12 +100,14 @@ Feature: 1.08. ACQ- Visitor profile
     Examples: 
       | site | state   | UID       | planyear | zipcode | isMultiCounty | county           | plantype | testPlans                                                                                              |
       | AARP | Alabama | US1770330 | current  |   90210 | NO            | Jefferson County | MAPD     | AARP Medicare Advantage SecureHorizons Focus (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO) |
+      | AARP | Vermont | US1770330 | current  |   05001 | NO            | Windsor County   | MAPD     | AARP Medicare Advantage Plan 3 (HMO),AARP Medicare Advantage Plan 1 (HMO)                              |
 
     #| Alabama | US1770330 |   53503 | NO            | Jefferson County | SNP      | UnitedHealthcare Dual Complete LP1 (HMO D-SNP),UnitedHealthcare Medicare Advantage Assist (PPO C-SNP)  |
     @VisitorProfile_UHC @prodRegression_UHC
     Examples: 
       | site | state   | UID       | planyear | zipcode | isMultiCounty | county           | plantype | testPlans                                                                                              |
       | UHC  | Alabama | US1770330 | current  |   90210 | NO            | Jefferson County | MAPD     | AARP Medicare Advantage SecureHorizons Focus (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO) |
+      | UHC  | Vermont | US1770330 | current  |   05001 | NO            | Windsor County   | MAPD     | AARP Medicare Advantage Plan 3 (HMO),AARP Medicare Advantage Plan 1 (HMO)                              |
 
   @addPlansVPP
   Scenario Outline: Verify user is save plans from VPP to the unauthenticated visitor profile
@@ -156,13 +166,15 @@ Feature: 1.08. ACQ- Visitor profile
 
     @VisitorProfile_AARP @prodRegression_AARP
     Examples: 
-      | site | state   | UID       | zipcode | isMultiCounty | plantype | planyear | county           | testPlans                                                                                               | eyeWearBenefitType | eyeWearExpectedText                                           | eyeExamBenefitType | eyeExamExpectedText | footCareRoutineBenefitType | footCareRoutineExpectedText | hearingExamBenefitType | hearingExamExpectedText | membershipinHealthClubFitnessClassesBenefitType | membershipinHealthClubFitnessExpectedText                                                                  |
-      | AARP | Alabama | US1770330 |   53503 | NO            | MAPD     | current  | Jefferson County | UnitedHealthcare Medicare Advantage Open (PPO),UnitedHealthcare Medicare Advantage Open Essential (PPO) | Eyewear            | Eyewear has a plan benefit limit up to $100 per every 2 years | Eye Exam           | $0 copay            | Foot Care - Routine        | $50 copay                   | Hearing Exam           | $0 copay                | Fitness Program through Renew Active            | Fitness Membership Only: Basic membership in a fitness program at a network location at no additional cost |
+      | site | state   | UID       | zipcode | isMultiCounty | plantype | planyear | county           | testPlans                                                                                               | eyeWearBenefitType | eyeWearExpectedText                                                                                                                             | eyeExamBenefitType | eyeExamExpectedText    | footCareRoutineBenefitType | footCareRoutineExpectedText | hearingExamBenefitType | hearingExamExpectedText | membershipinHealthClubFitnessClassesBenefitType | membershipinHealthClubFitnessExpectedText                                                                  |
+      | AARP | Alabama | US1770330 |   53503 | NO            | MAPD     | current  | Jefferson County | UnitedHealthcare Medicare Advantage Open (PPO),UnitedHealthcare Medicare Advantage Open Essential (PPO) | Eyewear            | Eyewear has a plan benefit limit up to $100 per every 2 years                                                                                   | Eye Exam           | $0 copay               | Foot Care - Routine        | $50 copay                   | Hearing Exam           | $0 copay                | Fitness Program through Renew Active            | Fitness Membership Only: Basic membership in a fitness program at a network location at no additional cost |
+      | AARP | Vermont | US1770330 |   05001 | NO            | MAPD     | current  | Windsor County   | AARP Medicare Advantage Plan 3 (HMO),AARP Medicare Advantage Plan 1 (HMO)                               | Eyewear            | $0 copay every 2 years; up to $200 for frames or contact lenses. Standard single, bifocal, trifocal, or progressive lenses are covered in full. | Eye Exam           | $0 copay; 1 every year | Foot Care - Routine        | $35 copay                   | Hearing Exam           | $0 copay                | Fitness Program through Renew Active            | Fitness Membership Only: Basic membership in a fitness program at a network location at no additional cost |
 
     @VisitorProfile_UHC @prodRegression_UHC
     Examples: 
-      | site | state   | UID       | zipcode | isMultiCounty | plantype | planyear | county           | testPlans                                                                                               | eyeWearBenefitType | eyeWearExpectedText                                           | eyeExamBenefitType | eyeExamExpectedText | footCareRoutineBenefitType | footCareRoutineExpectedText | hearingExamBenefitType | hearingExamExpectedText | membershipinHealthClubFitnessClassesBenefitType | membershipinHealthClubFitnessExpectedText                                                                  |
-      | UHC  | Alabama | US1770330 |   53503 | NO            | MAPD     | current  | Jefferson County | UnitedHealthcare Medicare Advantage Open (PPO),UnitedHealthcare Medicare Advantage Open Essential (PPO) | Eyewear            | Eyewear has a plan benefit limit up to $100 per every 2 years | Eye Exam           | $0 copay            | Foot Care - Routine        | $50 copay                   | Hearing Exam           | $0 copay                | Fitness Program through Renew Active            | Fitness Membership Only: Basic membership in a fitness program at a network location at no additional cost |
+      | site | state   | UID       | zipcode | isMultiCounty | plantype | planyear | county           | testPlans                                                                                               | eyeWearBenefitType | eyeWearExpectedText                                                                                                                             | eyeExamBenefitType | eyeExamExpectedText    | footCareRoutineBenefitType | footCareRoutineExpectedText | hearingExamBenefitType | hearingExamExpectedText | membershipinHealthClubFitnessClassesBenefitType | membershipinHealthClubFitnessExpectedText                                                                  |
+      | UHC  | Alabama | US1770330 |   53503 | NO            | MAPD     | current  | Jefferson County | UnitedHealthcare Medicare Advantage Open (PPO),UnitedHealthcare Medicare Advantage Open Essential (PPO) | Eyewear            | Eyewear has a plan benefit limit up to $100 per every 2 years                                                                                   | Eye Exam           | $0 copay               | Foot Care - Routine        | $50 copay                   | Hearing Exam           | $0 copay                | Fitness Program through Renew Active            | Fitness Membership Only: Basic membership in a fitness program at a network location at no additional cost |
+      | UHC  | Vermont | US1770330 |   05001 | NO            | MAPD     | current  | Windsor County   | AARP Medicare Advantage Plan 3 (HMO),AARP Medicare Advantage Plan 1 (HMO)                               | Eyewear            | $0 copay every 2 years; up to $200 for frames or contact lenses. Standard single, bifocal, trifocal, or progressive lenses are covered in full. | Eye Exam           | $0 copay; 1 every year | Foot Care - Routine        | $35 copay                   | Hearing Exam           | $0 copay                | Fitness Program through Renew Active            | Fitness Membership Only: Basic membership in a fitness program at a network location at no additional cost |
 
   @vpOLE
   Scenario Outline: <UID> - Verify user is save plans from VPP to the unauthenticated visitor profile and complete OLE
@@ -281,6 +293,8 @@ Feature: 1.08. ACQ- Visitor profile
   Scenario Outline: Verify user saves Medsupp plans from VPP to the unauthenticated visitor profile - zipcode - <zipcode>
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
+    And the user selects the state drop down value in home page
+      | State | <state> |
     When the user performs plan search using following information
       | Zip Code        | <zipcode>       |
       | County Name     | <county>        |
@@ -302,13 +316,15 @@ Feature: 1.08. ACQ- Visitor profile
     #| MS Test Plans | <MS_testPlans> |
     @VisitorProfile_AARP
     Examples: 
-      | site | zipcode | isMultiCounty | plantype | planyear | DOB        | county           | MS_testPlans  |
-      | AARP |   90210 | NO            | MS       | current  | 11/11/1949 | Jefferson County | Plan G,Plan A |
+      | site | state       | zipcode | isMultiCounty | plantype | planyear | DOB        | county           | MS_testPlans  |
+      | AARP | Alabama     |   90210 | NO            | MS       | current  | 11/11/1949 | Jefferson County | Plan G,Plan A |
+      | AARP | Puerto Rico |   00641 | NO            | MS       | current  | 11/11/1949 | Utuado Municipio | Plan G,Plan A |
 
     @VisitorProfile_UHC
     Examples: 
-      | site | zipcode | isMultiCounty | plantype | planyear | DOB        | county           | MS_testPlans  |
-      | UHC  |   90210 | NO            | MS       | current  | 11/11/1949 | Jefferson County | Plan G,Plan A |
+      | site | state       | zipcode | isMultiCounty | plantype | planyear | DOB        | county           | MS_testPlans  |
+      | UHC  | Alabama     |   90210 | NO            | MS       | current  | 11/11/1949 | Jefferson County | Plan G,Plan A |
+      | UHC  | Puerto Rico |   00641 | NO            | MS       | current  | 11/11/1949 | Utuado Municipio | Plan G,Plan A |
 
   @providerFlow
   Scenario Outline: Verify Provider Search functional flow for unauthenticated Visitor Profile page
@@ -406,17 +422,17 @@ Feature: 1.08. ACQ- Visitor profile
     Then Verify X out of Y provider covered information is displayed on visitor profile page
       | PlanName | <planname> |
     And user delets all the added providers on visitor profile page
-    | PlanName | <planname> |
+      | PlanName | <planname> |
 
     @VisitorProfile_AARP
     Examples: 
       | site | zipcode | isMultutiCounty | county          | userName | password   | plantype | planname                             |
-      | AARP |   10001 | NO              | New York County | mnrqavd4 | Password@2 | MAPD     | AARP Medicare Advantage Plan 2 (HMO) | 
+      | AARP |   10001 | NO              | New York County | mnrqavd4 | Password@2 | MAPD     | AARP Medicare Advantage Plan 2 (HMO) |
 
     @VisitorProfile_UHC
     Examples: 
-      | site | zipcode | isMultutiCounty | county          | userName | password   | plantype | planname                             | 
-      | UHC  |   10001 | NO              | New York County | mnrqavd4 | Password@2 | MAPD     | AARP Medicare Advantage Plan 2 (HMO) | 
+      | site | zipcode | isMultutiCounty | county          | userName | password   | plantype | planname                             |
+      | UHC  |   10001 | NO              | New York County | mnrqavd4 | Password@2 | MAPD     | AARP Medicare Advantage Plan 2 (HMO) |
 
   @planCompare @planCompareULayerSmoke @visitorProfileRegressionAARP
   Scenario Outline: Verify user is able to Plan compare to the unauthenticated visitor profile

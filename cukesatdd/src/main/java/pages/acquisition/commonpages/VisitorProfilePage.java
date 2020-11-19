@@ -35,19 +35,19 @@ public class VisitorProfilePage extends UhcDriver {
 	@FindBy(xpath = "//div[contains(@class,'find-plans')]/button")
 	private WebElement addPlans;
 	
-	@FindBy(css = "//h4[contains(text(),'drug')]/following::button[1]")
+	@FindBy(css = "a.addrugs")
 	private WebElement addrugs;
 	
 	@FindBy(css = "a.add-provider")
 	private WebElement addprovider;
 	
-	@FindBy(xpath="//div[contains(@class,'drug-list-accordion')]//button[contains(@class,'drug-list-toggle')][contains(@class,'collapsed')]")
+	@FindBy(xpath="//div[contains(@class,'drug-list-accordion open')]//button[contains(@class,'drug-list-toggle')][contains(@class,'collapsed')]")
 	private WebElement expandDrugBlock;
 	
 	@FindBy(xpath="//div[contains(@class,'provider--block card')]//button[contains(@class,'provider-title')][contains(@class,'collapsed')]")
 	private WebElement expandProviderBlock;
 	
-	@FindBy(css="ul.drugs-list>li>div>span:first-child")
+	@FindBy(css="div.drug-list-accordion.open div.drug-info-container span:first-child")
 	private WebElement drugName;
 	
 	@FindBy(css="ul.drugs-list>li:last-child>span")
@@ -137,13 +137,21 @@ public class VisitorProfilePage extends UhcDriver {
 	}
 	
 	public void validateAddedDrugAndPharmacy(String drug) {
-		CommonUtility.waitForPageLoad(driver, signOut, 10);
-		Assert.assertEquals("Saved Drugs (1) / Pharmacy", drugHeader.getText().trim());
-		jsClickNew(drugHeader);
-		Assert.assertTrue(drugName.getText().trim().contains(drug));
-		Assert.assertEquals("Drugs (1) / Pharmacy", savedDrugsHeader.getText().trim());
-		Assert.assertEquals("Saved Drugs (1) / Pharmacy and Doctors/Providers (0)", savedDrugsAndDoctorsHeader.getText().trim());
-		Assert.assertTrue(pharmacyAddress.isDisplayed());
+		
+		if(CommonConstants.SELECTED_STATE.equalsIgnoreCase("Pennsylvania") || CommonConstants.SELECTED_STATE.equalsIgnoreCase("Puerto Rico") || 
+				CommonConstants.SELECTED_STATE.equalsIgnoreCase("Vermont")) {
+			
+			expandDrugBlock.click();
+			Assert.assertTrue(drugName.getText().trim().contains(drug));
+		}else {
+			CommonUtility.waitForPageLoad(driver, signOut, 10);
+			Assert.assertEquals("Saved Drugs (1) / Pharmacy", drugHeader.getText().trim());
+			jsClickNew(drugHeader);
+			Assert.assertTrue(drugName.getText().trim().contains(drug));
+			Assert.assertEquals("Drugs (1) / Pharmacy", savedDrugsHeader.getText().trim());
+			Assert.assertEquals("Saved Drugs (1) / Pharmacy and Doctors/Providers (0)", savedDrugsAndDoctorsHeader.getText().trim());
+			Assert.assertTrue(pharmacyAddress.isDisplayed());
+		}
 	}
 	
 	public void validateAddedPlans(String planNames) {
@@ -195,8 +203,12 @@ public class VisitorProfilePage extends UhcDriver {
 	
 	public GetStartedPage addDrug_DCERedesign(){
 		
-//		addrugs.click();
-		jsClickNew(drugGetStarted);
+		if(CommonConstants.SELECTED_STATE.equalsIgnoreCase("Pennsylvania") || CommonConstants.SELECTED_STATE.equalsIgnoreCase("Puerto Rico") || 
+				CommonConstants.SELECTED_STATE.equalsIgnoreCase("Vermont")) {
+			jsClickNew(addrugs);
+		}else {
+			jsClickNew(drugGetStarted);
+		}
 		if (validateNew(AddMyDrugsBtn))
 			return new GetStartedPage(driver);
 		return null;
