@@ -330,6 +330,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//*[contains(@id,'pop-btn-1')]")
 	private WebElement keepShoppingBtn;
 
+	@FindBy(xpath = "//a[@id='popupClose']")
+	private WebElement closeProfilePopup;
+	
 	@FindBy(id="dupIconFlyOut")
 	private WebElement shoppingCartIcon;
 	
@@ -906,6 +909,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	public ProviderSearchPage clicksOnIsProviderCovered(String planName) {
 
+		sleepBySec(5);
 		CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
 
 		WebElement ProviderSearchLink = driver.findElement(By.xpath("//*[contains(text(),'" + planName
@@ -2772,8 +2776,15 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			jsClickNew(listOfSavePlanIcons.get(0));
 
 			System.out.println("Click to close on the create profile popup");
-			if (validate(keepShoppingBtn))
+			
+			if(CommonConstants.SELECTED_STATE.equalsIgnoreCase("Pennsylvania") || CommonConstants.SELECTED_STATE.equalsIgnoreCase("Puerto Rico") || 
+					CommonConstants.SELECTED_STATE.equalsIgnoreCase("Vermont")) {
+				if (validate(closeProfilePopup))
+					jsClickNew(closeProfilePopup);
+			}else {
+				if (validate(keepShoppingBtn))
 				jsClickNew(keepShoppingBtn);
+			}
 			CommonUtility.checkPageIsReady(driver);
 			
 			System.out.println("Proceed to validate 'Save Plan' link and icon disappeared after clicking it");
@@ -3194,13 +3205,13 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		Thread.sleep(2000);
 		Part_B_monthDrpDwnOption.click();
 		Thread.sleep(2000);
-		jsClickNew(part_B_yearDrpDwn);
+		part_B_yearDrpDwn.click();
 		Thread.sleep(2000);
 		Part_B_yearDrpDwnOption.click();
 		Thread.sleep(2000);
 		jsClickNew(startDrpDwn);
 		Thread.sleep(2000);
-		jsClickNew(startDrpDwnOption);
+		startDrpDwnOption.click();
 		System.out.println("Plan to start date selected");
 		Thread.sleep(2000);
 		jsClickNew(ViewPlanMedSupPage);

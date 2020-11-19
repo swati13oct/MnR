@@ -1,6 +1,11 @@
 @deeplinkSignin
 Feature: To test member Signin from various Deeplinks
 
+ Background: Feature security flag needs to be true before ATDD script execution
+     Given First check if feature security flag is set to true
+      | Feature | UCPUserManagement |
+###############################Regression Scenarios Begin Here ########################################
+
   @regressionMember @paymentDeeplink @CodeTransformers
   Scenario Outline: Verify Member lands on the payment page after signing in from payment deeplink.
     Given member lands on the payment deeplink page
