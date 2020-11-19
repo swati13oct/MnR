@@ -193,6 +193,9 @@ public class BenefitsAndCoverageUmsStepDefinition {
 			System.out.println("Benefits and Coverage page object is Null ");
 		}
 
+		Date currentDate=benefitsCoveragePage.getCurrentSystemDate();
+		String dateStr=benefitsCoveragePage.convertDateToStrFormat_MMDDYYYY(currentDate);
+		getLoginScenario().saveBean(BenefitsAndCoverageCommonConstants.TEST_DATE_STR, dateStr);
 	}
 	/** 
 	 * @toDo : The user logs in to legacy site  in Mobile view 
@@ -816,13 +819,14 @@ public class BenefitsAndCoverageUmsStepDefinition {
 
 	@And("^the user validates dropdown selection functionality")
 	public void user_validate_dropdwonvalues() {
+		String dateStr=(String)getLoginScenario().getBean(BenefitsAndCoverageCommonConstants.TEST_DATE_STR);
 		System.out.println("***the user validates dropdown selection functionality***");
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
 				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
 		// JSONObject
 		// benefitsandcoverageExectedJson=(JSONObject)loginScenario.getBean(PlanBenefitsAndCoverageCommonConstants.BENEFITS_AND_COVERAGE_EXPECTED);
 		String memberType = (String) getLoginScenario().getBean(LoginCommonConstants.CATOGERY);
-		benefitsCoveragePage.validate_drugCostDropdownoptions(memberType);
+		benefitsCoveragePage.validate_drugCostDropdownoptions(memberType, dateStr);
 	}
 
 
@@ -951,18 +955,20 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	
 	@And("the NON-LIS PDP group user should see drug cost table for Lis members")
 	public void user_validate_drugcosttablePDP_NONLIS_Group() {
+		String dateStr=(String)getLoginScenario().getBean(BenefitsAndCoverageCommonConstants.TEST_DATE_STR);
 		System.out.println("***the NON-LIS PDP group user should see drug cost table for Lis members***");
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
 				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
-		benefitsCoveragePage.validatedrugcosttablePDPGroup_NONLIS();
+		benefitsCoveragePage.validatedrugcosttablePDPGroup_NONLIS(dateStr);
 	}
 	
 	@And("the PDP individual NON-LIS  user should see drug cost table for Lis members")
 	public void user_validate_drugcosttablePDP_NONLIS_Indi() throws InterruptedException {
+		String dateStr=(String)getLoginScenario().getBean(BenefitsAndCoverageCommonConstants.TEST_DATE_STR);
 		System.out.println("***the PDP individual NON-LIS  user should see drug cost table for Lis members***");
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
 				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
-		benefitsCoveragePage.validatedrugcosttablePDPIndi_NONLIS();
+		benefitsCoveragePage.validatedrugcosttablePDPIndi_NONLIS(dateStr);
 	}
 	
 	@And("the MAPD group user should see drug cost table for Lis members")
@@ -981,10 +987,11 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	}
 	@And("the MAPD NON-LIS group user should see drug cost table for Lis members")
 	public void user_validate_drugcosttableGroup_NONLIS() {
+		String dateStr=(String)getLoginScenario().getBean(BenefitsAndCoverageCommonConstants.TEST_DATE_STR);
 		System.out.println("***the MAPD NON-LIS group user should see drug cost table for Lis members***");
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
 				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
-		benefitsCoveragePage.validatedrugcosttableMAPD_NONLIS();
+		benefitsCoveragePage.validatedrugcosttableMAPD_NONLIS(dateStr);
 	}
 
 	/** 
@@ -1803,31 +1810,33 @@ public class BenefitsAndCoverageUmsStepDefinition {
 
 	@And("the user validates the Drug costs Section")
 	public void user_validate_drugCostSectionTexas() {
-
+		String dateStr=(String)getLoginScenario().getBean(BenefitsAndCoverageCommonConstants.TEST_DATE_STR);
 		BenefitsAndCoveragePage planBenefitsCoverage = (BenefitsAndCoveragePage) getLoginScenario()
 				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
 		String memberType=(String) getLoginScenario().getBean(LoginCommonConstants.CATOGERY);
-		planBenefitsCoverage.validatedrugCostSectionTexas(memberType);
+		planBenefitsCoverage.validatedrugCostSectionTexas(memberType,dateStr);
 
 	}
 	@And("the user verifies the Retail Cost sharing table")
 	public void user_validate_RetailCostSharing_Drugtable() {
+		String dateStr=(String)getLoginScenario().getBean(BenefitsAndCoverageCommonConstants.TEST_DATE_STR);
 		System.out.println("***the user verifies the Retail Cost sharing table***");
 
 		BenefitsAndCoveragePage planBenefitsCoverage = (BenefitsAndCoveragePage) getLoginScenario()
 				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
 		String memberType=(String) getLoginScenario().getBean(LoginCommonConstants.CATOGERY);
-		planBenefitsCoverage.validateRetailCostSharingdrugtable(memberType);
+		planBenefitsCoverage.validateRetailCostSharingdrugtable(memberType, dateStr);
 
 	}
 	@And("the user verifies the Mail Order Cost sharing table")
 	public void user_validate_MailOrderCostSharing_Drugtable() throws InterruptedException {
+		String dateStr=(String)getLoginScenario().getBean(BenefitsAndCoverageCommonConstants.TEST_DATE_STR);
 		System.out.println("***the user verifies the Mail Order Cost sharing table***");
 
 		BenefitsAndCoveragePage planBenefitsCoverage = (BenefitsAndCoveragePage) getLoginScenario()
 				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
 		String memberType=(String) getLoginScenario().getBean(LoginCommonConstants.CATOGERY);
-		planBenefitsCoverage.validateMailOrderCostSharing_Drugtable(memberType);
+		planBenefitsCoverage.validateMailOrderCostSharing_Drugtable(memberType, dateStr);
 
 	}
 

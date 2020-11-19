@@ -398,10 +398,8 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 	/**
 	 * Validates the Pharmacy selection dropdown for a non Lis member
 	 */
-	public void validate_drugCostDropdownoptions(String memberType)
-
-	{
-		if (MRScenario.environment.contains("team-a") && memberType.toUpperCase().contains("GROUP")) {
+	public void validate_drugCostDropdownoptions(String memberType, String dateStr)	{
+		if (dateStr.contains("2021") && memberType.toUpperCase().contains("GROUP")) {
 			Assert.assertTrue("PROBLEM - Do not expect drug cost dropdown to show", !validate(drugCostDropdown, 0));
 			Assert.assertTrue("PROBLEM - Do not expect drug cost header to show", !validate(DrugCostHeader, 0));
 		} else {
@@ -1455,19 +1453,19 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 		}
 	}
 
-	public void validatedrugCostSectionTexas(String memberType) {
+	public void validatedrugCostSectionTexas(String memberType, String dateStr) {
 		//note Dec2018 - wait for element to load before validation
 		CommonUtility.waitForPageLoad(driver, pharmacyDropdownTexas, 5);
 		JavascriptExecutor jse = (JavascriptExecutor) driver;
 		jse.executeScript("window.scrollBy(0,-500)", "");
-		if (MRScenario.environment.contains("team-a") && memberType.toUpperCase().contains("GROUP"))
+		if (dateStr.contains("2021") && memberType.toUpperCase().contains("GROUP"))
 		 	Assert.assertTrue("PROBLEM - do not expect drug cost dropdown for group user", !validate(pharmacyDropdownTexas));
 		else 
 			validateNew(pharmacyDropdownTexas);
 	}
 
-	public void validateRetailCostSharingdrugtable(String memberType) {
-		if (!(MRScenario.environment.contains("team-a") && memberType.toLowerCase().contains("group"))) {
+	public void validateRetailCostSharingdrugtable(String memberType, String dateStr) {
+		if (!(dateStr.contains("2021") && memberType.toLowerCase().contains("group"))) {
 			Select drpPharmacy = new Select(pharmacyDropdownTexas);
 			drpPharmacy.selectByValue("Retail Cost Sharing");
 			System.out.println("Retail Cost Sharing dropdown value selected");
@@ -1495,8 +1493,6 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 				+"$120 copay\n"
 				+"$180 copay";
 		String TableData=TableData_2020;
-		if (MRScenario.environment.contains("team-a"))
-			//TableData=TableData_2021;
 			
 		System.out.println("Expected table  is >>>>>>>>>>>>>"+"\n"+TableData.toString());
 		System.out.println("Actual table value is >>>>>>>>>> "+"\n"+retailTable.getText());
@@ -1512,9 +1508,8 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 	}
 
 
-	public void validateMailOrderCostSharing_Drugtable(String memberType) {
-		if (MRScenario.environment.contains("team-a") && memberType.toLowerCase().contains("group")) {
-			//TODO
+	public void validateMailOrderCostSharing_Drugtable(String memberType, String dateStr) {
+		if (dateStr.contains("2021") && memberType.toLowerCase().contains("group")) {
 			System.out.println("TEMPERARY - skip this validation");
 		} else {
 			JavascriptExecutor jse = (JavascriptExecutor) driver;
@@ -2443,7 +2438,7 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 
 	}
 	
-	public void validatedrugcosttableMAPD_NONLIS() {
+	public void validatedrugcosttableMAPD_NONLIS(String dateStr) {
 		CommonUtility.waitForPageLoad(driver, RetailDrugCost_TableNONLIS, 15);
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", RetailDrugCost_TableNONLIS);
 		validateWithValue("Drug cost table is diplaying for MAPD GROUP NON LIS USER", RetailDrugCost_TableNONLIS);
@@ -2486,7 +2481,7 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 				+"Tier 4 \n"
 				+"$55.00";
 		String mapdGroupTable=mapdGroupTable_2020;
-		if (MRScenario.environment.contains("team-a")) 
+		if (dateStr.contains("2021")) 
 			mapdGroupTable=mapdGroupTable_2021;
 		if(RetailDrugCost_TableNONLIS.getText().equals(mapdGroupTable.toString())){
 			Assert.assertTrue("The data in the drug cost table is displaying correctly", true);
@@ -2529,7 +2524,7 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 		}
 
 	}
-	public void validatedrugcosttablePDPGroup_NONLIS() {
+	public void validatedrugcosttablePDPGroup_NONLIS(String dateStr) {
 		CommonUtility.waitForPageLoad(driver, RetailDrugCost_TableNONLIS, 15);
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", RetailDrugCost_TableNONLIS);
 		validateWithValue("Drug cost table is diplaying for MAPD GROUP LIS 4", RetailDrugCost_TableNONLIS);
@@ -2576,7 +2571,7 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 				+"$35.00\n"
 				+"$35.00";		
 		String mapdGroupTable=mapdGroupTable_2020;
-		if (MRScenario.environment.contains("team-a")) 
+		if (dateStr.contains("2021")) 
 			mapdGroupTable=mapdGroupTable_2021;
 		if(RetailDrugCost_TableNONLIS.getText().equals(mapdGroupTable.toString())){
 			Assert.assertTrue("The data in the drug cost table is displaying correctly", true);
@@ -2590,13 +2585,13 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 		}
 	}
 
-	public void validatedrugcosttablePDPIndi_NONLIS() throws InterruptedException {
-		preferredRetailBenefitTableIndipdp();
-		preferredMailBenefitTableIndipdp();
-		standardRetailBenefitTableIndipdp3();
+	public void validatedrugcosttablePDPIndi_NONLIS(String dateStr) throws InterruptedException {
+		preferredRetailBenefitTableIndipdp(dateStr);
+		preferredMailBenefitTableIndipdp(dateStr);
+		standardRetailBenefitTableIndipdp3(dateStr);
 	}
 
-	public void preferredRetailBenefitTableIndipdp(){
+	public void preferredRetailBenefitTableIndipdp(String dateStr){
 		CommonUtility.waitForPageLoad(driver, preferredRetailBenefitTableIndipdp, 15);
 		validateWithValue("Drug cost table", preferredRetailBenefitTableIndipdp);
 		String TableData_2020= "Annual Deductible Stage\n"
@@ -2650,7 +2645,7 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 				+"no more than 37% for generic drugs or 25% for brand name drugs\n"
 				+"*Once you reach the Coverage Gap Stage, you pay co-pays or co-insurance defined by your plan for all Tier 1 through Tier 5 drugs regardless of whether your full deductible has been met.";
 		String TableData=TableData_2020;
-		if (MRScenario.environment.contains("team-a"))
+		if (dateStr.contains("2021"))
 			TableData=TableData_2021;
 		if(preferredRetailBenefitTableIndipdp.getText().equals(TableData.toString())){
 			Assert.assertTrue("The data in the drug cost table is displaying correctly", true);
@@ -2667,7 +2662,7 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 		validateWithValue("Preferred Retail Pharmacy DrugCosts Text Line", PreferredRetailPharmacyDrugCostsTextLinePDP);
 	}
 	
-	public void preferredMailBenefitTableIndipdp() throws InterruptedException{
+	public void preferredMailBenefitTableIndipdp(String dateStr) throws InterruptedException{
 		scrollToView(drugCostDropdown);
 		Select drugCostdropdwn = new Select(drugCostDropdown);
 		drugCostdropdwn.selectByVisibleText("Preferred Mail Service Pharmacy");
@@ -2726,7 +2721,7 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 				+"no more than 37% for generic drugs or 25% for brand name drugs\n"
 				+"*Once you reach the Coverage Gap Stage, you pay copays or coinsurance defined by your plan for all Tier 1 through Tier 5 drugs regardless of whether your full deductible has been met.";
 		String TableData= TableData_2020;
-		if (MRScenario.environment.contains("team-a"))
+		if (dateStr.contains("2021"))
 			TableData=TableData_2021;
 		if(preferedMail_DrugTable.getText().equals(TableData.toString())){
 			Assert.assertTrue("The data in the drug cost table is displaying correctly", true);
@@ -2742,7 +2737,7 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 		validateWithValue("Preferred Mail Service Pharmacy Drug Costs Text Line", PreferredMailServicePharmacyDrugCostsTextLinePDP);
 	}
 
-	public void standardRetailBenefitTableIndipdp3() throws InterruptedException{
+	public void standardRetailBenefitTableIndipdp3(String dateStr) throws InterruptedException{
 		Select drugCostdropdwn = new Select(drugCostDropdown);
 		drugCostdropdwn.selectByVisibleText("Standard Retail Pharmacy");
 		String TableData_2020= "Annual Deductible Stage\n"
@@ -2796,7 +2791,7 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 				+"no more than 37% for generic drugs or 25% for brand name drugs\n"
 				+"*Once you reach the Coverage Gap Stage, you pay copays or coinsurance defined by your plan for all Tier 1 through Tier 5 drugs regardless of whether your full deductible has been met.";
 		String TableData=TableData_2020;
-		if (MRScenario.environment.contains("team-a")) 
+		if (dateStr.contains("2021")) 
 			TableData=TableData_2021;
 		if(standardRetail_DrugTable.getText().equals(TableData.toString())){
 			Assert.assertTrue("The data in the drug cost table is displaying correctly", true);
@@ -2868,9 +2863,8 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 		String TableData= "OFFICE VISITS \n"
 				+"Primary care provider:\n"
 				+"$0.00\n\n"
-
-+"Specialist:\n"
-+"$25.00";
+				+"Specialist:\n"
+				+"$25.00";
 
 		if(officeVisitSection.getText().equals(TableData.toString())){
 			Assert.assertTrue("The data in the Office visit section is displaying correctly", true);
@@ -2938,8 +2932,7 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 
 	public void outNetworkSection(){
 		String TableData= "OUT-OF-NETWORK\n"
-
-+"$7,500.00";
+				+"$7,500.00";
 		
 
 		if(outNetworkSection.getText().equals(TableData.toString())){

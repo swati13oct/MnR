@@ -532,6 +532,7 @@ public class TestHarness extends UhcDriver {
 	 * @return
 	 */
 	public pages.regression.benefitandcoverage.BenefitsAndCoveragePage navigateDirectToBnCPag() {
+   		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
 		JavascriptExecutor jse = (JavascriptExecutor) driver;
 		jse.executeScript("window.scrollBy(0,50)", "");
 		scrollToView(benefitsPageLink);
@@ -539,11 +540,12 @@ public class TestHarness extends UhcDriver {
 
 		CommonUtility.checkPageIsReadyNew(driver);
 		CommonUtility.waitForPageLoad(driver, heading, CommonConstants.TIMEOUT_60);
+		/* tbd 
 		try {
 			Thread.sleep(5000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
-		}
+		} */
 		System.out.println(driver.getTitle());
 		if (driver.getTitle().contains("Benefits")) {
 			return new pages.regression.benefitandcoverage.BenefitsAndCoveragePage(driver);
