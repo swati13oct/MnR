@@ -920,6 +920,7 @@ public class DrugDetailsPage extends UhcDriver {
 	public BuildYourDrugList clickOnEditDrugListLink() {
 
 		jsClickNew(editDrugListLink);
+		waitForPageLoadSafari();
 		
 		return new BuildYourDrugList(driver);
 	}

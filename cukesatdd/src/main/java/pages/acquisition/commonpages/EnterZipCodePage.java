@@ -49,7 +49,7 @@ public class EnterZipCodePage extends UhcDriver {
 				Thread.sleep(3000);
 				ZipCodeText.get(zipCodeNumber - 1).clear();
 				ZipCodeText.get(zipCodeNumber - 1).sendKeys(zipCode);
-				ZipcodeButton.get(zipCodeNumber - 1).click();
+				jsClickNew(ZipcodeButton.get(zipCodeNumber - 1));
 				System.out.println("Clicked on " + zipCodeNumber + " Zip Code Component");
 				System.out.println("Validating VPP page for Zip code " + zipCode);
 				Thread.sleep(20000);

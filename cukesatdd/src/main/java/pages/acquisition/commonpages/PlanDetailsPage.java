@@ -252,7 +252,7 @@ public class PlanDetailsPage extends UhcDriver {
 	@FindBy(xpath = "//table[contains(@class,'drug-list-table')]//tr[contains(@ng-repeat,'drug')]//td")
 	private WebElement presDrugTabDrugInfoCell;
 	
-	@FindBy(xpath = "//table[contains(@class,'drug-list-table')]//tr[contains(@class,'totals')]//td[2]")
+	@FindBy(xpath = "//table[contains(@class,'drug-list-table')]//tr[contains(@class,'totals')]//td[2]/span[@ng-show]")
 	private WebElement presDrugTabAnnualCostValueCell;
 	
 	@FindBy(xpath = "//*[contains(@id,'planCosts')]//tr[not(contains(@class,'ng-hide'))]//p[contains(text(),'Drug')]/ancestor::td/following-sibling::td/p[contains(text(),'Yearly')]/following-sibling::span[not(contains(@class,'ng-hide'))]")
@@ -1328,11 +1328,10 @@ public class PlanDetailsPage extends UhcDriver {
 	}
 
 		public void validateDrugInfoOnPrescriptionDrugTab(String drug, String drugCost) {
-
 			if(!presDrugTabDrugInfoCell.getText().contains(drug))
 				Assert.fail("Drug name not displayed on the prescription drugs tab");
 
-			if(!presDrugTabAnnualCostValueCell.getText().equals(drugCost))
+			if(!presDrugTabAnnualCostValueCell.getText().trim().equals(drugCost))
 				Assert.fail("Drug cost not displayed properly on prescription drugs tab");
 		}
 		

@@ -270,6 +270,7 @@ public class BuildYourDrugList extends UhcDriver {
 
 		validateNew(returnToCompareBtn);
 		jsClickNew(returnToCompareBtn);
+		waitForPageLoadSafari();
 		return new ComparePlansPage(driver);
 	}
 
