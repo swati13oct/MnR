@@ -1,5 +1,10 @@
 Feature: 1.13 Member Outbound SSO functionality for M&R Member Portal
 
+ Background: Feature security flag needs to be true before ATDD script execution
+     Given First check if feature security flag is set to true
+      | Feature | UCPUserManagement |
+###############################Regression Scenarios Begin Here ########################################
+
   @regressionMember
   Scenario Outline: Verify that member of <Test Scenario> is able to perfom Outbound SSO - University of Kentucky - Express Scripts SSO
     Given login with following details logins in the member portal and validate elements
