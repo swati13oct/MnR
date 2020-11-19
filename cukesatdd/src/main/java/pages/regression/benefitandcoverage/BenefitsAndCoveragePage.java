@@ -2612,9 +2612,15 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 
 	public List<String> validatedrugcosttablePDPIndi_NONLIS(String dateStr) throws InterruptedException {
 		List<String> subNote=new ArrayList<String>();
-		subNote.addAll(preferredRetailBenefitTableIndipdp(dateStr));
-		subNote.addAll(preferredMailBenefitTableIndipdp(dateStr));
-		subNote.addAll(standardRetailBenefitTableIndipdp3(dateStr));
+		subNote=preferredRetailBenefitTableIndipdp(dateStr);
+		if (subNote.size()>0)
+			return subNote; //note: if failure then stop test at this point
+		subNote=preferredMailBenefitTableIndipdp(dateStr);
+		if (subNote.size()>0) 
+			return subNote;//note: if failure then stop test at this point
+		subNote=standardRetailBenefitTableIndipdp3(dateStr);
+		if (subNote.size()>0) 
+			return subNote;//note: if failure then stop test at this point
 		return subNote;
 	}
 
@@ -2654,23 +2660,22 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 				+"Tier 1\n"
 				+"No deductible.\n"
 				+"$0.00\n"
-				+"no more than 37% for generic drugs or 25% for brand name drugs\n"
+				+"no more than 25% for generic drugs or 25% for brand name drugs\n"
 				+"Your share of the cost for a covered drug will be either coinsurance or a copayment whichever is the larger amount:\n"
 				+"-either- coinsurance of 5% of the cost of the drug\n"
-				+"-or- $3.40 for a generic drug or a drug that is treated like a generic and $8.50 for all other drugs.\n"
+				+"-or- $3.60 for a generic drug or a drug that is treated like a generic and $8.95 for all other drugs.\n"
 				+"Tier 2\n"
-				+"$5.00\n"
-				+"no more than 37% for generic drugs or 25% for brand name drugs\n"
+				+"$6.00\n"
 				+"Tier 3\n"
-				+"100% until the $435.00 deductible is met.*\n"
+				+"100% until the $445.00 deductible is met.*\n"
 				+"$40.00\n"
-				+"no more than 37% for generic drugs or 25% for brand name drugs\n"
+				+"no more than 25% for generic drugs or 25% for brand name drugs\n"
 				+"Tier 4\n"
-				+"32%\n"
-				+"no more than 37% for generic drugs or 25% for brand name drugs\n"
+				+"40%\n"
+				+"no more than 25% for generic drugs or 25% for brand name drugs\n"
 				+"Tier 5\n"
 				+"25%\n"
-				+"no more than 37% for generic drugs or 25% for brand name drugs\n"
+				+"no more than 25% for generic drugs or 25% for brand name drugs\n"
 				+"*Once you reach the Coverage Gap Stage, you pay co-pays or co-insurance defined by your plan for all Tier 1 through Tier 5 drugs regardless of whether your full deductible has been met.";
 		String TableData=TableData_2020;
 		if (dateStr.contains("2021"))
@@ -2736,23 +2741,19 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 				+"Tier 1\n"
 				+"No deductible.\n"
 				+"$0.00\n"
-				+"no more than 37% for generic drugs or 25% for brand name drugs\n"
+				+"no more than 25% for generic drugs or 25% for brand name drugs\n"
 				+"Your share of the cost for a covered drug will be either coinsurance or a copayment whichever is the larger amount:\n"
 				+"-either- coinsurance of 5% of the cost of the drug\n"
-				+"-or- $3.40 for a generic drug or a drug that is treated like a generic and $8.50 for all other drugs.\n"
+				+"-or- $3.60 for a generic drug or a drug that is treated like a generic and $8.95 for all other drugs.\n"
 				+"Tier 2\n"
-				+"$15.00\n"
-				+"no more than 37% for generic drugs or 25% for brand name drugs\n"
+				+"$18.00\n"
 				+"Tier 3\n"
-				+"100% until the $435.00 deductible is met.*\n"
+				+"100% until the $445.00 deductible is met.*\n"
 				+"$120.00\n"
-				+"no more than 37% for generic drugs or 25% for brand name drugs\n"
+				+"no more than 25% for generic drugs or 25% for brand name drugs\n"
 				+"Tier 4\n"
-				+"32%\n"
-				+"no more than 37% for generic drugs or 25% for brand name drugs\n"
-				+"Tier 5\n"
-				+"25%\n"
-				+"no more than 37% for generic drugs or 25% for brand name drugs\n"
+				+"40%\n"
+				+"no more than 25% for generic drugs or 25% for brand name drugs\n"
 				+"*Once you reach the Coverage Gap Stage, you pay copays or coinsurance defined by your plan for all Tier 1 through Tier 5 drugs regardless of whether your full deductible has been met.";
 		String TableData= TableData_2020;
 		if (dateStr.contains("2021"))
@@ -2812,23 +2813,23 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 				+"Tier 1\n"
 				+"No Deductible\n"
 				+"$15.00\n"
-				+"no more than 37% for generic drugs or 25% for brand name drugs\n"
+				+"no more than 25% for generic drugs or 25% for brand name drugs\n"
 				+"Your share of the cost for a covered drug will be either coinsurance or a copayment whichever is the larger amount:\n"
 				+"-either- coinsurance of 5% of the cost of the drug\n"
-				+"-or- $3.40 for a generic drug or a drug that is treated like a generic and $8.50 for all other drugs.\n"
+				+"-or- $3.60 for a generic drug or a drug that is treated like a generic and $8.95 for all other drugs.\n"
 				+"Tier 2\n"
 				+"$20.00\n"
-				+"no more than 37% for generic drugs or 25% for brand name drugs\n"
+				+"$20.00\n"
 				+"Tier 3\n"
-				+"$435.00\n"
+				+"$445.00\n"
 				+"$47.00\n"
-				+"no more than 37% for generic drugs or 25% for brand name drugs\n"
+				+"no more than 25% for generic drugs or 25% for brand name drugs\n"
 				+"Tier 4\n"
-				+"33%\n"
-				+"no more than 37% for generic drugs or 25% for brand name drugs\n"
+				+"45%\n"
+				+"no more than 25% for generic drugs or 25% for brand name drugs\n"
 				+"Tier 5\n"
 				+"25%\n"
-				+"no more than 37% for generic drugs or 25% for brand name drugs\n"
+				+"no more than 25% for generic drugs or 25% for brand name drugs\n"
 				+"*Once you reach the Coverage Gap Stage, you pay copays or coinsurance defined by your plan for all Tier 1 through Tier 5 drugs regardless of whether your full deductible has been met.";
 		String TableData=TableData_2020;
 		if (dateStr.contains("2021")) 
