@@ -4616,13 +4616,14 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	
 	public boolean RequestPlanIInformation(String FirstName, String LastName, String EmailAddress) throws InterruptedException {
 		
-		boolean validation_Flag = true;
+	//	boolean validation_Flag = true;
 		boolean RequestPlanIInformation_Validation = true;
 		
-		
+		boolean flag = true;
+		/*	
 		if(validate(RequestPlanInformation_ErrorMessage)){
 			System.out.println("Email address is not entered : Error Message is Disabled");
-			RequestPlanIInformation_Validation = true;
+			//RequestPlanIInformation_Validation = true;
 			validateNew(requestemailaddress);
 			requestemailaddress.sendKeys(EmailAddress);
 			System.out.println("Email Address is enetered : "+EmailAddress);
@@ -4656,7 +4657,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			System.out.println("Email Address : Error Message is NOT Disabled");
 			RequestPlanIInformation_Validation = false;
 		}
-	/*	
+		
 		CommonUtility.waitForPageLoadNew(driver, requestfirstName, 20);
 		requestfirstName.sendKeys(FirstName);
 		CommonUtility.waitForPageLoadNew(driver, requestlastName, 20);
@@ -4678,6 +4679,41 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			System.out.println("****************Request information is displayed  ***************");
 		}
 */
+		requestemailaddress.clear();
+		requestemailaddress.sendKeys("(*^*_asb@t.c");
+		requestplaninformationsubmit.click();
+		if(validate(RequestPlanInformation_ErrorMessage) && RequestPlanInformation_ErrorMessage.isDisplayed()){
+			if(!RequestPlanInformation_ErrorMessage.getText().contains("Please enter a valid email address in the format 'user@company.com'")){
+				System.out.println("Email Invalid Error is Not  displayed : "+RequestPlanInformation_ErrorMessage.getText());
+				flag=false;
+			}
+			System.out.println("Email Invalid Error : "+RequestPlanInformation_ErrorMessage.getText());
+
+		}
+		else{
+			System.out.println("Email Invalid Error field is not displayed");
+
+		}
+		
+		validateNew(requestemailaddress);
+		requestemailaddress.clear();
+		requestemailaddress.sendKeys(EmailAddress);
+		System.out.println("Email Address is enetered : "+EmailAddress);
+		CommonUtility.waitForPageLoadNew(driver, requestfirstName, 20);
+		requestfirstName.sendKeys(FirstName);
+		CommonUtility.waitForPageLoadNew(driver, requestlastName, 20);
+		requestlastName.sendKeys(LastName);
+		validateNew(requestplaninformationsubmit);
+		requestplaninformationsubmit.click();
+		if(requestplaninformationsubmitpopup.getText().contains("Your information has been submitted. You should start getting your Medicare updates soon.")) {
+			System.out.println("****************Request  information is displayed  ***************");
+
+			Assert.assertTrue(true);
+			validateNew(requestplaninformationclose);
+			requestplaninformationclose.click();
+		}else {
+			System.out.println("****************Request information is displayed  ***************");
+		}
 	return RequestPlanIInformation_Validation;
 
 	}
