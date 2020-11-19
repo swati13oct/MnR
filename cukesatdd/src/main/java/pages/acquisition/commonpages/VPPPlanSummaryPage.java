@@ -330,6 +330,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//*[contains(@id,'pop-btn-1')]")
 	private WebElement keepShoppingBtn;
 
+	@FindBy(xpath = "//a[@id='popupClose']")
+	private WebElement closeProfilePopup;
+	
 	@FindBy(id="dupIconFlyOut")
 	private WebElement shoppingCartIcon;
 	
@@ -2771,8 +2774,15 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			jsClickNew(listOfSavePlanIcons.get(0));
 
 			System.out.println("Click to close on the create profile popup");
-			if (validate(keepShoppingBtn))
-				keepShoppingBtn.click();
+			
+			if(CommonConstants.SELECTED_STATE.equalsIgnoreCase("Pennsylvania") || CommonConstants.SELECTED_STATE.equalsIgnoreCase("Puerto Rico") || 
+					CommonConstants.SELECTED_STATE.equalsIgnoreCase("Vermont")) {
+				if (validate(closeProfilePopup))
+					closeProfilePopup.click();
+			}else {
+				if (validate(keepShoppingBtn))
+					keepShoppingBtn.click();
+			}
 			CommonUtility.checkPageIsReady(driver);
 			
 			System.out.println("Proceed to validate 'Save Plan' link and icon disappeared after clicking it");
