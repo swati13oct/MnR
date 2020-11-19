@@ -588,6 +588,12 @@ public class PlanRecommendationEngineStepDefinition {
 		planSelectorResultspage.DrugsDetailsVPPtoPRE();
 	}
 	
+	@Then("^user validate drugs details from VPP to DCE page$")
+	public void drugs_VPP_DCE_page() {
+		PlanRecommendationEngineResultsPage planSelectorResultspage =  new PlanRecommendationEngineResultsPage(wd);
+		planSelectorResultspage.DrugsDetailsVPPtoDCE();
+	}
+	
 	@And("^user navigates to vpp summary page$")
    	public void navigate_vpp_summary_page(DataTable givenAttributes) {
 		readfeaturedata(givenAttributes);

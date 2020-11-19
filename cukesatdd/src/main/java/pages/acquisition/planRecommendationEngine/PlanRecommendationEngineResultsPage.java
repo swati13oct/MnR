@@ -608,6 +608,15 @@ public class PlanRecommendationEngineResultsPage extends UhcDriver {
 			vppToPre();
 		}
 		
+		public void DrugsDetailsVPPtoDCE() {
+			System.out.println("Validating Drugs Details from VPP to DCE Page: ");
+			ACQDrugCostEstimatorPage dce = new ACQDrugCostEstimatorPage(driver);
+			DrugsInDCE = dce.DCEDrugsResults;
+			int count =DrugsInDCE.size();
+			verifyConfirmationmodalResults(count,DrugsInDCE,DrugsList);
+			System.out.println("Validating Drugs Details from VPP to PRE Drug Page: ");
+		}
+		
 		public void removeDrugs(int count) {
 			// By default removing 2nd drug
     		int beforeRemove = DrugsList.size();

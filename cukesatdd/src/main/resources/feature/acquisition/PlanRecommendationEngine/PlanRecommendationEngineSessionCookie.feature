@@ -37,7 +37,7 @@ Feature: Plan Recommendation Engine flow - Verify PRE flows functionalities with
       | 2nd Recommendation | <2ndRecommendation> |
     Then user validate drugs details from PRE to VPP page
     Then user navigate from VPP to DCE tool
-    Then user validate drugs details from DCE to VPP and PRE page
+    Then user validate drugs details from VPP to DCE page
 
     Examples: 
       | Zipcode | isMultiCounty | county     | isCoverageOpt | specialNeeds | travel   | doctors         | DoctorsName | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch                                 | pharmacyoption | Dental-Hearing-Vision-Fitness | costPreferenceOption | 1stRecommendation | Rankingplan | 2ndRecommendation |
