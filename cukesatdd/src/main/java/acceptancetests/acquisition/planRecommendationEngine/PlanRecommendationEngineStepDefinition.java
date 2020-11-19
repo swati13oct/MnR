@@ -795,6 +795,13 @@ public class PlanRecommendationEngineStepDefinition {
 		planSelectorResultspage.useraddDrugsVPP(inputValues.get("Drug Details"));
    	}
 	
+	@Then("^user navigate from VPP to DCE tool$")
+   	public void vpp_pre() {
+		PlanRecommendationEngineResultsPage planSelectorResultspage =  new PlanRecommendationEngineResultsPage(wd);
+		checkpopup();
+		planSelectorResultspage.userPreDCE();
+   	}
+	
 	@Then("^user validate future vs current UI and API recommendation rankings in results page$")
    	public void verify_Future_UI_API_rankings_results_page() {
 		checkpopup();

@@ -1342,6 +1342,12 @@ public void useraddDrugsVPP(String drugDetails) {
 	dce.choosePharmacyandBacktoPlans();
 }
 
+public void userPreDCE() {
+	threadsleep(10000);
+	validate(enterDrugsInfoMA1stPlan, 60);
+	enterDrugsInfoMA1stPlan.click();
+}
+
 public boolean changePlanyear(String year) {
 
 	jsClickNew(MAViewPlansLink);

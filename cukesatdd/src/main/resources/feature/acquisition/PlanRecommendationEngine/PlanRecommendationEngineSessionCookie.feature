@@ -1,7 +1,7 @@
 @PlanRecommendationEngine @PRERegression
 Feature: Plan Recommendation Engine flow - Verify PRE flows functionalities with session cookies
 
-  @PRE @planrecommendation @DrugPREtoVPP @F375045 @PRERegression1
+  @PRE @planrecommendation @DrugPREtoVPPtoDCE @F375045 @PRERegression1
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds> , <travel> , <doctors> , <DoctorsName> , <isMultiDoctor> , <Drug Selection> , <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch> , <pharmacyoption> , <Dental-Hearing-Vision-Fitness> , <costPreferenceOption> - To validate Drugs details from PRE to VPP Page
     Given the user is on UHC medicare acquisition site landing page
     When user navigate to Plan Recommendation Engine and Checking Breadcrumbs
@@ -36,6 +36,8 @@ Feature: Plan Recommendation Engine flow - Verify PRE flows functionalities with
       | 1st Ranking plan   | <Rankingplan>       |
       | 2nd Recommendation | <2ndRecommendation> |
     Then user validate drugs details from PRE to VPP page
+    Then user navigate from VPP to DCE tool
+    Then user validate drugs details from DCE to VPP and PRE page
 
     Examples: 
       | Zipcode | isMultiCounty | county     | isCoverageOpt | specialNeeds | travel   | doctors         | DoctorsName | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch                                 | pharmacyoption | Dental-Hearing-Vision-Fitness | costPreferenceOption | 1stRecommendation | Rankingplan | 2ndRecommendation |
