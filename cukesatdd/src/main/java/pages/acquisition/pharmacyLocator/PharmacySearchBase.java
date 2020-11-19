@@ -388,7 +388,8 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 	public PharmacySearchPage selectPlanLanguage() {
 		CommonUtility.checkPageIsReady(driver);
 		CommonUtility.waitForPageLoad(driver, SpanishLanguage, 5);
-		SpanishLanguage.click();
+		//SpanishLanguage.click();
+		jsClickNew(SpanishLanguage);
 		CommonUtility.checkPageIsReady(driver);
 		System.out.println("Spanish language selected"); 
 		return new PharmacySearchPage(driver);
