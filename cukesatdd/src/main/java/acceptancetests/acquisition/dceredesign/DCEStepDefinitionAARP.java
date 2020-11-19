@@ -958,6 +958,23 @@ public class DCEStepDefinitionAARP {
 		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
 		drugSummaryPage.clickChangePharmacy();
 	}
+	
+
+	@Then("^the user selects following pharmacy and returns to DCE Summary page$")
+	public void the_user_selects_following_pharmacy_and_returns_to_DCE_Summary_page(DataTable givenAttributes) throws Throwable {
+		DrugSummaryPage drugSummaryPage = (DrugSummaryPage) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugSummary);
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		String PharmacytoSelect = memberAttributesMap.get("SelectPharmacy");
+		drugSummaryPage.SelectPharmacy(PharmacytoSelect);
+		drugSummaryPage.validatePharmacyName(PharmacytoSelect);
+		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
+
+	}
 
 	@Then("^change pharmacy modal should be displayed$")
 	public void change_pharmacy_modal_should_be_displayed_in_AARP() throws InterruptedException {
@@ -986,7 +1003,6 @@ public class DCEStepDefinitionAARP {
 		drugDetailsPage.clickChangePharmacyLinkDetailsPage();
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetailsPage);
 	}
-	
 
 	@Then("^details page change pharmacy modal should be displayed$")
 	public void details_page_change_pharmacy_modal_should_be_displayed_in_AARP() throws InterruptedException {
@@ -1077,7 +1093,7 @@ public class DCEStepDefinitionAARP {
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetailsPage);
 	}
 	
-	@When("^user click on PDP plan to view drug pricing in AARP$")
+	@When("^user click on PDP plan to view drug pricing$")
 	public void User_click_on_PDP_plan_in_AARP() throws Throwable {
 		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
 		drugSummaryPage.clickOnPdpPlan();
@@ -1085,7 +1101,7 @@ public class DCEStepDefinitionAARP {
 	}
 	
 
-	@When("^user click on lipitor Switch To Generic in AARP$")
+	@When("^user click on lipitor Switch To Generic$")
 	public void User_click_on_lipitor_Switch_To_Generic_in_AARP() throws Throwable {
 		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
 		drugSummaryPage.clicklipitorswitchToGeneric();
@@ -1197,6 +1213,36 @@ public class DCEStepDefinitionAARP {
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetailsPage);
 	}
 
+	@Then("^the user validates Switch to generic for following Brand Drug to Generic from Drug Summary - Drug Pricing Modal$")
+	public void the_user_validates_Switch_to_generic_for_following_Brand_Drug_to_Generic_drug_from_Summary_Page(DataTable givenAttributes) throws Throwable {
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		String BrandDrug = memberAttributesMap.get("Brand Drug");
+		String GenericDrug = memberAttributesMap.get("Generic Drug");
+		DrugSummaryPage drugSummaryPage = (DrugSummaryPage) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugSummary);
+		SwitchToGeneric switchToGenericPage = drugSummaryPage.clickSwitchGeneric(BrandDrug);
+		switchToGenericPage.validateSwitchPage(GenericDrug, BrandDrug);
+		drugSummaryPage = switchToGenericPage.ClickSwitch_ReturnSummaryPage();
+		String druglist = (String) getLoginScenario().getBean(DCERedesignCommonConstants.DRUGLIST);
+		druglist = druglist.replace(BrandDrug, GenericDrug);
+		System.out.println("Drugs List : " + druglist);
+		getLoginScenario().saveBean(DCERedesignCommonConstants.DRUGLIST, druglist);
+
+		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
+	}
+
+	@Then("^user verifies Drug List on DCE Summary Page - Drug Pricing Modal$")
+	public void the_user_validates_druglist_Drugs_DrugSummaryPage() throws Throwable {
+		DrugSummaryPage drugSummaryPage = (DrugSummaryPage) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugSummary);
+		String druglist = (String) getLoginScenario().getBean(DCERedesignCommonConstants.DRUGLIST);
+		drugSummaryPage.ValidatesDrugsList(druglist);
+
+	}
+	
 	@Then("^the user clicks Edit Drug on Drug Details Page and validates user navigates to Build your drug list Page$")
 	public void the_user_clicks_Edit_Drug_on_Drug_Details_Page_and_validates_user_navigates_to_Build_your_drug_list_Page() throws Throwable {
 		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugDetails);
@@ -1327,5 +1373,11 @@ public class DCEStepDefinitionAARP {
 		
 	}
 
+
+	@Then("^the user validates Covered Drug display for NC Pharmacy selection$")
+	public void the_user_validates_Covered_Drug_display_for_NC_Pharmacy_selection() throws Throwable {
+		DrugSummaryPage drugSummaryPage = (DrugSummaryPage) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugSummary);
+		drugSummaryPage.ValidateNCPharmacyCoveredDrugs();
+	}
 
 }

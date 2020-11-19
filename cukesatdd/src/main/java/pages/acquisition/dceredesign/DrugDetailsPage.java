@@ -492,7 +492,11 @@ public class DrugDetailsPage extends UhcDriver {
 		int DrugCount_Total = DrugListItems.length-1;
 		System.out.println("Total Added Drug Count : "+DrugCount_Total);
 		WebElement TotalDrugCount = driver.findElement(By.xpath("//h2[contains(text(), '"+DrugCount_Total+" Covered)') and contains(text(), 'Your Drugs')]"));
-		for(String currentDrug : DrugListItems) {
+		int i;
+		String currentDrug;
+		System.out.println("Total Added Drug Count : "+DrugCount_Total);
+		for(i=1; i<=DrugCount_Total; i++) {
+			currentDrug = DrugListItems[i];
 			System.out.println("Current Added Drug Name : "+currentDrug);
 			WebElement DrugName = driver.findElement(By.xpath("//caption[contains(text(), 'Your Drugs')]/ancestor::table//span[contains(text(), '"+currentDrug+"')]"));
 			//WebElement DrugIntlCoverText = driver.findElement(By.xpath("//caption[contains(text(), 'Your Drugs')]/ancestor::table//span[contains(text(), '"+currentDrug+"')]//ancestor::td//following-sibling::td[contains(text(), 'Initial Coverage Cost')]"));

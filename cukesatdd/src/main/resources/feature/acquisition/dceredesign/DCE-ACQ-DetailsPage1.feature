@@ -63,8 +63,9 @@ Feature: 1.10.5 DCE-REDISIGN AARP DCE Details Page Scenarios - To test DCE Detai
 
     @DCE_DrugDetailsValidation_UHC
     Examples: 
-      | drugnameAutocomplete | drug1   | zipCode | planType | planName                                            | site | brandDrug | genericDrug | deleteDrug | addDrug1 | insulinDrug    | insulinCopay |
-      | ativ                 | Humalog |   80002 | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) | UHC  | Ativan    | orazepam    | Humalog    | Lipitor  | insulin lispro | $35          |
+      | drugnameAutocomplete | drug1   | zipCode | planType | planName                                      | site | brandDrug | genericDrug | deleteDrug | addDrug1 | insulinDrug    | insulinCopay |
+      | ativ                 | Humalog |   33111 | MAPD     | Medica HealthCare Plans MedicareMax (HMO)     | UHC  | Ativan    | orazepam    | Humalog    | Lipitor  | insulin lispro | $30          |
+      | ativ                 | Humalog |   33111 | SNP      | Preferred Special Care Miami-Dade (HMO C-SNP) | UHC  | Ativan    | orazepam    | Humalog    | Lipitor  | insulin lispro | $15          |
 
   @DCE_DrugDetailsDynamicCopay_Preferred
   Scenario Outline: To verify DCE Details Page  <site> site - for Dynamic copay section for Preferred Pharmacy Copay
@@ -154,7 +155,7 @@ Feature: 1.10.5 DCE-REDISIGN AARP DCE Details Page Scenarios - To test DCE Detai
       | vigabatrin | Fanapt |   78006 | SNP      | UnitedHealthcare Chronic Complete (HMO C-SNP)       | UHC  | Standard Retail | Standard Mail    |
 
   @DCE_DrugDetailsPremiumValidation
-  Scenario Outline: To verify DCE Details Page  <site> site - for MS dollor Zero or Range Premium 
+  Scenario Outline: To verify DCE Details Page  <site> site - for MS dollor Zero or Range Premium
     #Given the user is on AARP medicare acquisition site landing page
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
