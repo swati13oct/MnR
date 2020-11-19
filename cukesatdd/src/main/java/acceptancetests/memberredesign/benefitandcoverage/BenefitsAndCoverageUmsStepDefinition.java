@@ -2360,7 +2360,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 		
 		List<String> testNote=new ArrayList<String>();
 		List<String> options=bncPg.getDrugDropDownOptions();
-		Assert.assertTrue("PROBLEM - dropdown value should not be empty", options.get(0)!="");
+		Assert.assertTrue("PROBLEM - dropdown value should not be empty", options.get(0).equals(""));
 		if (insulin.equals("hasInsulin")) {
 			if (planType.toUpperCase().equals("MAPD")) {
 				for (int i=0; i<options.size(); i++) {
