@@ -633,6 +633,10 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 
 	@FindBy(xpath = "//body/div[@id='site-wrapper']/div[@id='globalContentIdForSkipLink']/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/fieldset[1]/div[1]/label[1]")
 	private WebElement currentYearSelection;
+	
+	@FindBy(xpath = "//h3[@id='doctorsAlertTitle']")
+	private WebElement isMyDoctorCoveredText;
+	
 
 	@FindBy(xpath = "//button[@id='lisGoBtn']")
 	private WebElement planYearPopupGoButton;
@@ -3379,6 +3383,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 				System.out.println("*****CLICKING ON Current Year button*****: " + CurrentYearPlansBtn.getText());
 				jsClickNew(CurrentYearPlansBtn);
 				waitforElement(currentYearSelection);
+				waitforElementVisibilityInTime(isMyDoctorCoveredText, 10);
 
 			}
 		}

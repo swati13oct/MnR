@@ -304,7 +304,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	@FindBy(xpath = "//a[contains(@class, 'back-to-top')]")
 	private WebElement backToTop;
 
-	@FindBy(xpath = "//a[contains(@class, 'viewLink disclaimer') and @onclick='showFooterDisclaimer();']")
+	@FindBy(xpath = "//div[contains(text(),'Disclaimers')]")
 	private WebElement disclaimerInformation;
 
 	@FindBy(css = ".icon-search")
@@ -2080,7 +2080,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	}
 
 	public void validateVisitAarpOrglink() {
-		waitforElementVisibilityInTime(zipCode1, 10);
+		waitforElementVisibilityInTime(visitAARPFooterLink, 10);
 		validateNew(visitAARPFooterLink);
 		String hRef = visitAARPFooterLink.getAttribute("href");
 		System.out.println("href for Visit AARP.org link : " + hRef);

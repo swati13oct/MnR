@@ -86,7 +86,7 @@ public class DrugDetailsPageMobile extends UhcDriver {
 	public WebElement YourDrugs_YouPayTxt;
 
 	// This element does not display for Mobile so xpath changed
-	@FindBy(xpath = "//div[contains(text(),'You Pay') and @xpath='1']")
+	@FindBy(xpath = "//body//div[@id='site-wrapper']//div[@id='monthlycostdetails']//div//div//div//div//div[1]//div[2]")
 	public WebElement YourDrugs_InitlCoverageTxt;
 
 	@FindBy(xpath = "//h2[contains(text(), 'Monthly Drug Costs By Stage')]")
