@@ -1074,7 +1074,7 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 				System.out.println("Skip validating PDF content on lower env");
 				return;
 			}
-			
+			scrollElementToCenterScreen(pdf);
 			pdf.click();
 			
 			CommonUtility.checkPageIsReady(driver);
@@ -2492,7 +2492,7 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 				+"Tier 4 \n"
 				+"$55.00";
 		String mapdGroupTable=mapdGroupTable_2020;
-		if (dateStr.contains("2021")) 
+		if (dateStr.contains("2021") || MRScenario.environment.contains("stage")) 
 			mapdGroupTable=mapdGroupTable_2021;
 		if(RetailDrugCost_TableNONLIS.getText().equals(mapdGroupTable.toString())){
 			Assert.assertTrue("The data in the drug cost table is displaying correctly", true);
@@ -2710,7 +2710,7 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 
 		CommonUtility.waitForPageLoad(driver, preferedMail_DrugTable, 15);
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", preferedMail_DrugTable);
-		validateWithValue("Drug cost table is diplaying for MAPD GROUP LIS 4", preferedMail_DrugTable);
+		validateWithValue("Drug cost table", preferedMail_DrugTable);
 		String TableData_2020= "Annual Deductible Stage\n"
 				+"Initial Coverage Stage\n"
 				+"Coverage Gap Stage\n"
@@ -2743,22 +2743,26 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 				+"Tier 1\n"
 				+"No deductible.\n"
 				+"$0.00\n"
-				+"no more than 25% for generic drugs or 25% for brand name drugs\n"
+				+"no more than 37% for generic drugs or 25% for brand name drugs\n"
 				+"Your share of the cost for a covered drug will be either coinsurance or a copayment whichever is the larger amount:\n"
 				+"-either- coinsurance of 5% of the cost of the drug\n"
 				+"-or- $3.60 for a generic drug or a drug that is treated like a generic and $8.95 for all other drugs.\n"
 				+"Tier 2\n"
-				+"$18.00\n"
+				+"$15.00\n"
+				+"no more than 37% for generic drugs or 25% for brand name drugs\n"
 				+"Tier 3\n"
-				+"100% until the $445.00 deductible is met.*\n"
+				+"100% until the $435.00 deductible is met.*\n"
 				+"$120.00\n"
-				+"no more than 25% for generic drugs or 25% for brand name drugs\n"
+				+"no more than 37% for generic drugs or 25% for brand name drugs\n"
 				+"Tier 4\n"
-				+"40%\n"
-				+"no more than 25% for generic drugs or 25% for brand name drugs\n"
+				+"32%\n"
+				+"no more than 37% for generic drugs or 25% for brand name drugs\n"
+				+"Tier 5\n"
+				+"25%\n"
+				+"no more than 37% for generic drugs or 25% for brand name drugs\n"
 				+"*Once you reach the Coverage Gap Stage, you pay copays or coinsurance defined by your plan for all Tier 1 through Tier 5 drugs regardless of whether your full deductible has been met.";
 		String TableData= TableData_2020;
-		if (dateStr.contains("2021"))
+		if (dateStr.contains("2021") || MRScenario.environment.contains("stage"))
 			TableData=TableData_2021;
 		if(preferedMail_DrugTable.getText().equals(TableData.toString())){
 			Assert.assertTrue("The data in the drug cost table is displaying correctly", true);
