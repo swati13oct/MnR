@@ -164,12 +164,15 @@ public class PersonalInformationPageMobile extends UhcDriver{
 		*/
 		jsClickMobile(firstNameField);
 		System.out.println("test is here");
-		jsSendkeys(firstNameField,FirstName);
+		//jsSendkeys(firstNameField,FirstName);
+		firstNameField.sendKeys(FirstName);
+		Thread.sleep(10);
 		//sendkeys(firstNameField,FirstName);
 		System.out.println("test is here after send keys");
 		
 		jsClickMobile(lastNameField);
-		jsSendkeys(lastNameField,LastName);
+		//jsSendkeys(lastNameField,LastName);
+		lastNameField.sendKeys(LastName);
 		
 		jsClickMobile(DOBtxtFld);
 		DOBtxtFld.clear();
