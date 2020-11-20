@@ -1761,4 +1761,19 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 
 	@FindBy(xpath = "//p[@data-testid='view-my-medications-CTA-description' and contains(text(),'View and manage your active medications.')]")
 	protected WebElement ViewAllMedicationCTADescription;
+	
+	@FindBy(xpath="//*[@data-testid='order-OTC-CTA']")
+	protected WebElement OTCCallToAction;
+
+	@FindBy(xpath="//*[@data-testid='order-OTC-CTA-title']")
+    protected WebElement OTCCTATitle;
+	
+	@FindBy(xpath="//*[@data-testid='order-OTC-CTA-icon']")
+	protected WebElement OTCCTAIcon;
+	
+	@FindBy(xpath="//*[@data-testid='order-OTC-CTA-description']")
+	protected WebElement OTCCTADescription;
+	
+	@FindBy(xpath="//*[@data-testid='order-OTC-CTA-external-icon']")
+	protected WebElement OTCCTAExternalIcon;
 }

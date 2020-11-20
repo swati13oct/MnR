@@ -3196,6 +3196,43 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 					validate(DrugLookupCallToActnBtn, 30));
 			DrugLookupCallToActnBtn.click();
 		}
+		
+		public void waitTillMyMedLoads() {
+			if (!validate(MyMedicationsPageHeader, 60)) {
+				System.out.println("Inside waitTillMyMedLoads");
+				tryAgainMedCabTimeOut.click();
+				CommonUtility.checkPageIsReady(driver);
+				CommonUtility.waitForPageLoad(driver, MyMedicationsPageHeader, 80);
+			}
+		}
+		
+		public boolean validateOTCTile() {
+			return validate(OTCCallToAction);
+		}
+		
+		public boolean validateOTCImage() {
+			return validate(OTCCTAIcon);
+		}
+
+		public boolean validateOTCTitle() {
+			return validate(OTCCTATitle);
+		}
+		
+		public boolean validateOTCDescription() {
+			return validate(OTCCTADescription);
+		}
+		
+		public boolean validateOTCExternalIcon() {
+			return validate(OTCCTAExternalIcon);
+		}
+		
+		public void clickOnOTCTile() {
+			switchToNewTabNew(OTCCallToAction);
+		}
+		
+		public boolean validateSolutranPage(String expectedTitle) {
+			return getTitle().contains(expectedTitle);
+		}
 
 }
 
