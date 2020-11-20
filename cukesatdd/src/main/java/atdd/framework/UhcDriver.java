@@ -1216,6 +1216,7 @@ try {
     		// we catch and throw no exception here in case they aren't ignored
     		try {
     			threadsleep(3000);			//Adding sleep since the loading spinner sometimes takes long to come up
+    			CommonUtility.checkPageIsReadyNew(driver);
     			System.out.println("Waiting to check if Loading screen is present");
     			loadingScreen = fwait.until(new Function<WebDriver, List<WebElement>>() {
 					public List<WebElement> apply(WebDriver driver) {
