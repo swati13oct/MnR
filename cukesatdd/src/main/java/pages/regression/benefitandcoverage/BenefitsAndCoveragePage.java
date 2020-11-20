@@ -2697,6 +2697,7 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 				+"-or- $3.60 for a generic drug or a drug that is treated like a generic and $8.95 for all other drugs.\n"
 				+"Tier 2\n"
 				+"$6.00\n"
+				+"$6.00\n"
 				+"Tier 3\n"
 				+"100% until the $445.00 deductible is met.*\n"
 				+"$40.00\n"
