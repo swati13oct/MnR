@@ -1161,7 +1161,7 @@ public class ComparePlansPage extends UhcDriver {
 	
 	// START >>>>>  F&F - Added Code for DCE flow - View Drug COsts from View Drug Info Modal
 
-	@FindBy(xpath="//*[contains(@class, 'uhc-button')][contains(text(), 'Drug')]")
+	@FindBy(xpath="//*[contains(@ng-click, 'launchDCEfromDrugPopup')]//*[contains(text(), 'Drug')]")
 	private WebElement DrugInfoModal_DrugCostDetailsBtn;
 
 	
