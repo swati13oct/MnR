@@ -3383,7 +3383,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 				System.out.println("*****CLICKING ON Current Year button*****: " + CurrentYearPlansBtn.getText());
 				jsClickNew(CurrentYearPlansBtn);
 				waitforElement(currentYearSelection);
-				waitforElementVisibilityInTime(isMyDoctorCoveredText, 10);
+				//waitforElementVisibilityInTime(isMyDoctorCoveredText, 10);
 
 			}
 		}
