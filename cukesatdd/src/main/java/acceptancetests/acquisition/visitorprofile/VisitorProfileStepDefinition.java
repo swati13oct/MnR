@@ -262,6 +262,7 @@ public class VisitorProfileStepDefinition {
 		
 		VisitorProfilePage visitorProfile = (VisitorProfilePage) getLoginScenario().getBean(PageConstants.VISITOR_PROFILE_PAGE);
 		visitorProfile.signIn(username, password);
+		getLoginScenario().saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfile);
 	}
 	
 	@And("^enroll In Plan should not be clickable on Visitor Profile page in Agent mode$")
@@ -352,6 +353,29 @@ public class VisitorProfileStepDefinition {
 		VPPPlanSummaryPage planSummary = visitorProfilePage.backToPlans();
 		
 		getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, planSummary);
+	}
+	
+	@And("^validate OLE details$")
+	public void validate_OLE_details(DataTable oleDetails) {
+		VisitorProfilePage visitorProfile = (VisitorProfilePage) getLoginScenario().getBean(PageConstants.VISITOR_PROFILE_PAGE);
+		visitorProfile.validateOLEDetails(oleDetails);
+		
+	}
+	
+	@And("^the user cancel the enrollment$")
+	public void the_user_cance_the_enrollments(DataTable cancelOLEDetails) {
+		
+		List<DataTableRow> plannameAttributesRow = cancelOLEDetails.getGherkinRows();
+		Map<String, String> plannameAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < plannameAttributesRow.size(); i++) {
+
+			plannameAttributesMap.put(plannameAttributesRow.get(i).getCells().get(0),
+					plannameAttributesRow.get(i).getCells().get(1));
+		}
+		String planName = plannameAttributesMap.get("Plan Name");
+		
+		VisitorProfilePage visitorProfile = (VisitorProfilePage) getLoginScenario().getBean(PageConstants.VISITOR_PROFILE_PAGE);
+		visitorProfile.cancelEnrollment(planName);
 	}
 } 
 

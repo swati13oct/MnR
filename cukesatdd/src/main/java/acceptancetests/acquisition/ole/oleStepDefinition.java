@@ -24,6 +24,7 @@ import cucumber.api.java.en.When;
 import gherkin.formatter.model.DataTableRow;
 import pages.acquisition.bluelayer.PlanComparePage;
 import pages.acquisition.commonpages.VPPPlanSummaryPage;
+import pages.acquisition.commonpages.VisitorProfilePage;
 import pages.acquisition.ole.AuthorizationPage;
 import pages.acquisition.ole.CancelOLEModal;
 import pages.acquisition.ole.CoverageInformationPage;
@@ -45,7 +46,6 @@ import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.ulayer.AcquisitionHomePage;
 import pages.acquisition.ulayer.ComparePlansPage;
 import pages.acquisition.ulayer.PlanDetailsPage;
-import pages.acquisition.ulayer.VisitorProfilePage;
 /**
  * @author sdwaraka
  * Functionality:OLE Common Tool for both AAPR and UHC acquisition sites
@@ -3240,6 +3240,15 @@ public void the_user_navigates_to_SEP_Page_Medicaid_Effective_Date(DataTable Med
 	}
 	else
 		Assert.fail("OLE SEP Page is NOT Displayed");
+	}
+	
+
+	@Then("^the user clicks on save and return later to profile page$")
+	public void the_user_clicks_on_save_and_return_later_to_profile_page() {
+		
+		PersonalInformationPage personalInformationPage = (PersonalInformationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_PERSONAL_INFO_PAGE);
+		VisitorProfilePage visitorProfilePage = personalInformationPage.saveAndReturnLater();
+		getLoginScenario().saveBean(PageConstants.VISITOR_PROFILE_PAGE,visitorProfilePage);
 	}
 
 @Then("^the user clicks on Enroll Now to start the OLE flow from plandetails page$")

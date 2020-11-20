@@ -199,7 +199,7 @@ public class PharmacySearchWebElements extends UhcDriver {
 	@FindBy(xpath="//div[not(contains(@class,'ng-hide'))]/p/a[contains(@href,'LTC_HI_ITU_Pharmacies_Walgreens.pdf')]")
 	protected WebElement pdf_WalgreenPlans;
 
-	@FindBy(xpath = "(//*[@id='lang-select']//option)[1]")
+	@FindBy(xpath = "//*[contains(@id,'lang-select')]//option[contains(@id,'spanish')]")
 	protected WebElement SpanishLanguage;
 
 	@FindBy(xpath = "//a[@class='h5 filter-button bold color-blue-link margin-none']")
