@@ -373,6 +373,8 @@ public class DCEStepDefinitionAARP {
 		BuildYourDrugList buildDrugList = (BuildYourDrugList) getLoginScenario()
 				.getBean(PageConstants.DCE_Redesign_BuildDrugList);
 		buildDrugList.clickReviewDrugCostBtn();
+		DrugDetailsPage drugDetailsPage =new DrugDetailsPage(driver);
+		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetailsPage);
 	}
 
 	@Then("^load screen should be displayed$")
@@ -618,6 +620,7 @@ public void user_should_verify_you_pay_value_for_not_covered_drug_in_drug_pricin
 	public void the_user_Clicks_button_to_VPP_Plan_Details_Page_from_Drug_Details_Page() throws Throwable {
 		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugDetails);
 		String PlanName = (String) getLoginScenario().getBean(DCERedesignCommonConstants.PLANNAME);
+		System.out.println("PlanName: "+PlanName);
 		PlanDetailsPage plandetailspage = drugDetailsPage.ClickandNavigate_VPPPlanDetails(PlanName);
 		if (null != plandetailspage) {
 			getLoginScenario().saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE, plandetailspage);
@@ -713,6 +716,14 @@ public void user_should_verify_you_pay_value_for_not_covered_drug_in_drug_pricin
 
 		String PlanName = (String) getLoginScenario().getBean(DCERedesignCommonConstants.PLANNAME);
 		drugDetailsPage.validatePlanName(PlanName);
+	}
+	
+	@Then("^the user verify and edit the Pharmacy from vpp detail page$")
+	public void the_user_verify_and_edit_the_Pharmacy_from_vpp_detail_page() throws Throwable {
+		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario()
+				.getBean(PageConstants.DCE_Redesign_DrugDetails);
+
+		drugDetailsPage.clickEdit();
 	}
 	
 	@Then("^user save the plan on drug detail page$")
