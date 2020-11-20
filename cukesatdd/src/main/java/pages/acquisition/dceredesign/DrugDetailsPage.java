@@ -24,6 +24,7 @@ import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 import gherkin.formatter.model.DataTableRow;
+import pages.acquisition.commonpages.ComparePlansPage;
 import pages.acquisition.commonpages.PlanDetailsPage;
 import pages.acquisition.commonpages.VPPPlanSummaryPage;
 import pages.acquisition.commonpages.VisitorProfilePage;
@@ -307,12 +308,21 @@ public class DrugDetailsPage extends UhcDriver {
 		openAndValidate();
 
 	}
-
+	private String CurrentFlow = "";
+	
+	public DrugDetailsPage(WebDriver driver, String Flow) {
+		super(driver);
+		PageFactory.initElements(driver, this);
+		CurrentFlow = Flow;
+		openAndValidate();
+	}
+	
 	@Override
 	public void openAndValidate() {
 		validateNew(DrugDetails_ChangePharmacyLnk);
 		validateNew(DrugDetails_DrugCostsHeading);
-		validateNew(LinkToDrugSummary);
+		if(!CurrentFlow.equalsIgnoreCase("compare"))
+			validateNew(LinkToDrugSummary);
 		validateNew(LinktoExitScenario);
 		validateNew(LinktoEditDrugList);
 	}
@@ -1228,6 +1238,59 @@ public class DrugDetailsPage extends UhcDriver {
 		jsClickNew(switchToGenericBtn);
 		validateNew(switchToGenericSubmitBtn);
 		jsClickNew(switchToGenericSubmitBtn);
+	}
+	
+	public void validateDrugListYouPay_FromComparePage(String druglistObject,String drugYouPaylist ) {
+		String[] Drugs = druglistObject.split("&");
+		int DrugCount_Total = Drugs.length-1;
+		String currentAddedDrug;
+		String[] Drugs_YouPay = drugYouPaylist.split("&");
+
+		int i;
+		System.out.println("Total Added Drug Count : "+DrugCount_Total);
+		for(i=1; i<=DrugCount_Total; i++) {
+			currentAddedDrug = Drugs[i];
+			System.out.println("Current Added Drug Name : "+currentAddedDrug);
+			WebElement DrugName = driver.findElement(By.xpath("//caption[contains(text(), 'Your Drugs')]/ancestor::table//span[contains(text(), '"+currentAddedDrug+"')]"));
+			WebElement DrugYouPay = driver.findElement(By.xpath("//caption[contains(text(), 'Your Drugs')]/ancestor::table//span[contains(text(), '"+currentAddedDrug+"')]//ancestor::td//following-sibling::td//*[contains(text(), '$')]"));
+			String currentDrugYouPay = DrugYouPay.getText().trim();
+			String ExpectedYouPay = Drugs_YouPay[i];
+			System.out.println("Current Added Drug Name : "+currentAddedDrug);
+			System.out.println("Displayed Current Drug You Pay : "+currentDrugYouPay);
+			System.out.println("Expected Current Drug You Pay : "+ExpectedYouPay);
+
+			if(validateNew(DrugName) && validateNew(DrugYouPay) && currentDrugYouPay.contentEquals(ExpectedYouPay)) {
+				System.out.println("DCE Details Page -  Validated Drug List and You Pay for Drugs Against Compare Page Display");
+			}
+			else
+				Assert.fail("DCE Details Page - >>>  Validated FAILED  <<<  Drug List and You Pay for Drugs Against Compare Page Display");
+		}	
+	}
+
+	
+	@FindBy(xpath = "//button[contains(@dtmname, 'compare')]//*[contains(text(), 'Compare')]")
+	public WebElement DrugCosts_PlanCompareBtn;
+
+	@FindBy(xpath = "//*[contains(@id, 'compare-table-header')]")
+	public WebElement ComparePage_TableHeader;
+
+	public ComparePlansPage clickViewPlanCompareBtn_ReturnToCompare() {
+		validateNew(DrugCosts_PlanCompareBtn);
+		jsClickNew(DrugCosts_PlanCompareBtn);
+		CommonUtility.waitForPageLoad(driver, ComparePage_TableHeader, 30);
+
+		return new ComparePlansPage(driver);
+	}
+
+	public ComparePlansPage clickViewBackCompareLink_ReturnToCompare() {
+		validateNew(LinktoExitScenario);
+		if(!LinktoExitScenario.getText().contains("Compare"))
+			Assert.fail("Exit Scenario Link Text Incorrect for Compare Flow : "+LinktoExitScenario.getText());
+		
+		jsClickNew(LinktoExitScenario);
+		CommonUtility.waitForPageLoad(driver, reviewDrugCostPageHeading, 30);
+
+		return new ComparePlansPage(driver);
 	}
 
 }

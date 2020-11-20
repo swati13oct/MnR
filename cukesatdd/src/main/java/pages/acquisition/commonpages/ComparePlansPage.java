@@ -28,12 +28,12 @@ import cucumber.api.DataTable;
 import gherkin.formatter.model.DataTableRow;
 import pages.acquisition.ole.WelcomePage;
 
-import pages.acquisition.commonpages.DrugCostEstimatorPage;
 import pages.acquisition.commonpages.FindCarePage;
 import pages.acquisition.commonpages.PlanDetailsPage;
 import pages.acquisition.commonpages.VPPPlanSummaryPage;
 import pages.acquisition.commonpages.VisitorProfilePage;
 import pages.acquisition.dceredesign.BuildYourDrugList;
+import pages.acquisition.dceredesign.DrugDetailsPage;
 import pages.acquisition.dceredesign.GetStartedPage;
 public class ComparePlansPage extends UhcDriver {
 
@@ -931,24 +931,17 @@ public class ComparePlansPage extends UhcDriver {
 			return null;
 	}
 	
-	public DrugCostEstimatorPage clickonEdityourDrugs() {
-
-		try {
-			Thread.sleep(5000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	public BuildYourDrugList clickonEdityourDrugs() {
+		validateNew(editDrugsLink);
 		validate(editDrugsLink);
-		JavascriptExecutor executor = (JavascriptExecutor) driver;
-		executor.executeScript("arguments[0].scrollIntoView(true);", editDrugsLink);
 		jsClickNew(editDrugsLink);
-		waitforElement(addDrug);
-		if (validate(addDrug)) {
-			System.out.println("User is on DCE Page");
-			return new DrugCostEstimatorPage(driver);
-		} else
-			return null;
+		CommonUtility.waitForPageLoad(driver, BuildDrugPage_EnterDrugNameTxt, 30);
+		if (validateNew(BuildDrugPage_EnterDrugNameTxt)) {
+			Assert.assertTrue("Naviagted to Build Drug List Page", true);
+			return new BuildYourDrugList(driver);
+		}
+		Assert.fail("Did not Navigate to Build Drug List Page");
+		return null;
 	}
 	
 	public void validateViewMoreplansComparePage() {
@@ -1163,5 +1156,105 @@ public class ComparePlansPage extends UhcDriver {
 			return null;
 		}
 	}
+	
+
+	
+	// START >>>>>  F&F - Added Code for DCE flow - View Drug COsts from View Drug Info Modal
+
+	@FindBy(xpath="//*[contains(@class, 'uhc-button')][contains(text(), 'Drug')]")
+	private WebElement DrugInfoModal_DrugCostDetailsBtn;
+
+	
+	public void clickViewDrugInfoLinkForPlan(String planName) {
+		int i = findindexofPlan_PlanCompare(planName);
+		WebElement DrugInfoLink = driver.findElement(By.xpath("//a[contains(@id, 'viewDrugInfoLink-"+i+"')]"));
+		validateNew(DrugInfoLink);
+		jsClickNew(DrugInfoLink);
+		
+		WebElement DrugInfoModal_Header = driver.findElement(By.xpath("//*[contains(@class, 'vpp-modal')]//*[contains(text(), '"+planName+"')]"));
+		CommonUtility.waitForPageLoadNew(driver, DrugInfoModal_Header, 30);
+		validateNew(DrugInfoModal_Header);
+		validateNew(DrugInfoModal_DrugCostDetailsBtn);
+
+	}
+	
+	@FindBy(xpath = "//button[@id='changePharmacyLink']")
+	public WebElement DrugDetails_ChangePharmacyLnk;
+
+	@FindBy(xpath = "//h2[contains(text(), 'Drug Cost Details')]")
+	public WebElement DrugDetails_DrugCostsHeading;
+
+
+	public DrugDetailsPage clickDrugCostDetails_DrugInfoModal() {
+		validateNew(DrugInfoModal_DrugCostDetailsBtn);
+		jsClickNew(DrugInfoModal_DrugCostDetailsBtn);
+		CommonUtility.waitForPageLoadNew(driver, DrugDetails_DrugCostsHeading, 30);
+		if(validateNew(DrugDetails_ChangePharmacyLnk) && validateNew(DrugDetails_DrugCostsHeading))
+		{
+			return new DrugDetailsPage(driver, "Compare");
+		}
+		else {
+			Assert.fail("Drug Details Page is NOT Displayed");
+			return null;
+		}
+	}
+
+	public String validateDrugListCaptureDrugYouPay(String druglistObject) {
+		String[] Drugs = druglistObject.split("&");
+		int DrugCount_Total = Drugs.length-1;
+		String currentAddedDrug;
+		String drugYouPaylist = "";
+		int i;
+		System.out.println("Total Added Drug Count : "+DrugCount_Total);
+		for(i=1; i<=DrugCount_Total; i++) {
+			currentAddedDrug = Drugs[i];
+			System.out.println("Current Added Drug Name : "+currentAddedDrug);
+			WebElement DrugName = driver.findElement(By.xpath("//*[contains(@class, 'vpp-modal')]//*[contains(text(), '"+currentAddedDrug+"')]"));
+			WebElement DrugYouPay = driver.findElement(By.xpath("//*[contains(@class, 'vpp-modal')]//*[contains(text(), '"+currentAddedDrug+"')]//following::*[contains(@class, 'initial-coverage')]//following::*[contains(text(), '$')]"));
+			String drugYouPay = DrugYouPay.getText().trim();
+			drugYouPaylist = drugYouPaylist + "&" + drugYouPay;
+			System.out.println("Current Added Drug Name : "+currentAddedDrug);
+			System.out.println("Current Drug You Pay : "+drugYouPay);
+
+			if(validateNew(DrugName) && validateNew(DrugYouPay)) {
+				System.out.println("Plan Compare Page - View Drug Info Modal -  Validated Drug List for Drug and Captured Drug You Pay : "+currentAddedDrug);
+			}
+			else
+				Assert.fail("Plan Compare Page - View Drug Info Modal -  Validation FAILED for Drug List for Drug and Captured Drug You Pay : "+currentAddedDrug);
+		}	
+		System.out.println("Drug You Pay List : "+drugYouPaylist);
+		System.out.println("Drug List : "+druglistObject);
+
+		return drugYouPaylist;
+	}
+	
+	public void ValidatesAddedDrugsList(String druglist) {
+		String[] DrugListItems = druglist.split("&");
+		int DrugCount_Total = DrugListItems.length-1;
+		System.out.println("Total Added Drug Count : "+DrugCount_Total);
+		WebElement TotalDrugCount = driver.findElement(By.xpath("//*[contains(@class, 'drugcoveredalignment')][contains(text(), 'Covered')]"));
+		int i;
+		String currentDrug;
+		System.out.println("Total Added Drug Count : "+DrugCount_Total);
+		for(i=1; i<=DrugCount_Total; i++) {
+			currentDrug = DrugListItems[i];
+			System.out.println("Current Added Drug Name : "+currentDrug);
+			WebElement DrugName = driver.findElement(By.xpath("//h2[contains(@id, 'yourdrugsheading')]//following::*[contains(text(), '"+currentDrug+"')]"));
+
+			if(validateNew(DrugName)) {
+				System.out.println("Plan Compare Page, Validated Drug List for Drug : "+currentDrug);
+			}
+			else
+				Assert.fail("Plan Compare Page, Validation FAILED for Drug : "+currentDrug);
+		}		
+		if(validateNew(TotalDrugCount) && TotalDrugCount.getText().contains(DrugCount_Total+" Covered")) {
+			System.out.println("Plan Compare Page - Total Drug Count Validation Passed");
+		}
+		else
+			Assert.fail("Plan Compare Page - Total Drug Count Validation FAILED");
+	}
+
+	// END >>>>>  F&F - Added Code for DCE flow - View Drug COsts from View Drug Info Modal
+
 }
 

@@ -599,6 +599,6 @@ public class DrugSummaryPage extends UhcDriver {
 			Assert.fail("Drug Summary Page, Drug Covered Text NOT Displayed for Not Covered Pharmacy");
 	}
 	
-	// Code change Start - Added by F&F for Drug Summary Regression Scenario - Switch to Generic and for NC Pharmacy Covered text validation
+	// Code change End - Added by F&F for Drug Summary Regression Scenario - Switch to Generic and for NC Pharmacy Covered text validation
 
 }

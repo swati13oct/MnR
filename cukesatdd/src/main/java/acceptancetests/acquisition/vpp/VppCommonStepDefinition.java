@@ -126,8 +126,8 @@ public class VppCommonStepDefinition {
 		PlanDetailsPage plandetailspage= plansummaryPage.navigateToPlanDetails(planName, planType);
 		
 			getLoginScenario().saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE, plandetailspage);
-			getLoginScenario().saveBean(DCERedesignCommonConstants.PLANTYPE, planType);
-			getLoginScenario().saveBean(DCERedesignCommonConstants.PLANNAME, planName);
+			getLoginScenario().saveBean(VPPCommonConstants.PLAN_TYPE, planType);
+			getLoginScenario().saveBean(VPPCommonConstants.PLAN_NAME, planName);
 
 		}
 
