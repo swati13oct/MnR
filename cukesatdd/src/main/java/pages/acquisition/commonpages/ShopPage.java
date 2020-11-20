@@ -158,6 +158,7 @@ public class ShopPage extends UhcDriver {
 	public void clickOnMAShopButton() {
 		validateNew(MAShopLink);
 		jsClickNew(MAShopLink);
+		waitForPageLoadSafari();
 		validateNew(zipCodeField1);
 		if(!driver.getCurrentUrl().contains("shop/medicare-advantage-plans.html")) {
 			Assert.fail("MA plans page did not load properly");
@@ -169,6 +170,7 @@ public class ShopPage extends UhcDriver {
 		threadsleep(2000);
 		validateNew(pdpShopLink);
 		jsClickNew(pdpShopLink);
+		waitForPageLoadSafari();
 		validateNew(zipCodeField1);
 		if(!driver.getCurrentUrl().contains("shop/prescription-drug-plans.html")) {
 			Assert.fail("PDP plans page did not load properly");
@@ -180,6 +182,7 @@ public class ShopPage extends UhcDriver {
 		threadsleep(2000);
 		validateNew(dsnpShopLink);
 		jsClickNew(dsnpShopLink);
+		waitForPageLoadSafari();
 		validateNew(zipCodeField1);
 		if(!driver.getCurrentUrl().contains("shop/dual-special-needs-plans.html")) {
 			Assert.fail("SNP plans page did not load properly");

@@ -2509,6 +2509,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		validateNew(StartPlanSelector);
 		jsClickNew(StartPlanSelector);
 		CommonUtility.checkPageIsReadyNew(driver);
+		waitForPageLoadSafari();
 		if (driver.getCurrentUrl().contains("plan-recommendation-engine")) {
 			WebElement PlanSelector = driver.findElement(By.xpath("//h1[text()='Get a Plan Recommendation']"));
 			CommonUtility.waitForPageLoadNew(driver, PlanSelector, 30);
