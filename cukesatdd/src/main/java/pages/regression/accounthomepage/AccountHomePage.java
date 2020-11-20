@@ -817,7 +817,7 @@ public class AccountHomePage extends UhcDriver {
 					if (PlanType.equalsIgnoreCase("SHIP"))
 					{	
 						WebElement BenefitsandCoverageTab = root1.findElement(By
-								.cssSelector("#sticky-main-nav > div > div > div > a:nth-child(3)"));
+								.cssSelector("#sticky-main-nav > div > div > div > a:nth-child(4)"));
 						System.out.println("shadow-root element has been located, now clicking on Benefits and Coverage tab");	
 						TestHarness.checkForIPerceptionModel(driver);
 						BenefitsandCoverageTab.click();
@@ -3368,7 +3368,7 @@ public class AccountHomePage extends UhcDriver {
 				if (planType.equalsIgnoreCase("SHIP"))
 				{	
 					WebElement PremiumPaymentTab = root1.findElement(By
-							.cssSelector("#sticky-main-nav > div > div > div > a:nth-child(4)"));
+							.cssSelector("#sticky-main-nav > div > div > div > a:nth-child(5)"));
 					System.out.println("shadow-root element has been located");	
 					TestHarness.checkForIPerceptionModel(driver);
 					System.out.println("getText() of Premium Payment is :" +PremiumPaymentTab.getText());
