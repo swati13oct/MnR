@@ -4,7 +4,7 @@ Feature: P&P - OTC Tile
 
   @F512668 @US2961053
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify image for OTC call to action.
-    Given login with following details logins in the member portal and validate element
+    Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
     When user navigates to the pharmacies and prescriptions page from testharness page
@@ -17,7 +17,7 @@ Feature: P&P - OTC Tile
 
   @F512668 @US2961053
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify title for OTC call to action.
-    Given login with following details logins in the member portal and validate element
+    Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
     When user navigates to the pharmacies and prescriptions page from testharness page
@@ -30,7 +30,7 @@ Feature: P&P - OTC Tile
 
   @F512668 @US2961053
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify description for OTC call to action.
-    Given login with following details logins in the member portal and validate element
+    Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
     When user navigates to the pharmacies and prescriptions page from testharness page
@@ -43,7 +43,7 @@ Feature: P&P - OTC Tile
 
   @F512668 @US2961053
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify HealthyBenefits Web Page Open in New Tab
-    Given login with following details logins in the member portal and validate element
+    Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
     When user navigates to the pharmacies and prescriptions page from testharness page
@@ -57,7 +57,7 @@ Feature: P&P - OTC Tile
 
   @F512668 @US2961053
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify OTC Tile not available for Group Member
-    Given login with following details logins in the member portal and validate element
+    Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
     When user navigates to the pharmacies and prescriptions page from testharness page
@@ -69,7 +69,7 @@ Feature: P&P - OTC Tile
 
   @Regression
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify OTC Tile Functionality
-    Given login with following details logins in the member portal and validate element
+    Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
     When user navigates to the pharmacies and prescriptions page from testharness page
