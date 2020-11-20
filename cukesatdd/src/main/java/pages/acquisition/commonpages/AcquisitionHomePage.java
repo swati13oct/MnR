@@ -1872,7 +1872,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		private void CheckPageLoad() {
 			CommonUtility.checkPageIsReadyNew(driver);
 			System.out.println("Current page URL: " + driver.getCurrentUrl());
-			checkModelPopup(driver, 30);
+			checkModelPopup(driver, 20);
 
 		}
 
@@ -1904,9 +1904,11 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		
 		public void validatevisitorprofile() {
 			if (visitorprofileicon.isDisplayed()) {
+
 //				Actions actions = new Actions(driver);
 //				actions.moveToElement(visitorprofileicon).perform();
 				jsMouseOver(visitorprofileicon);
+
 				System.out.println("Hover over visitor profile completed");
 			}
 			WebElement CreateProfile = driver.findElement(By.xpath("//a[contains(text(), 'Create Profile')]"));
