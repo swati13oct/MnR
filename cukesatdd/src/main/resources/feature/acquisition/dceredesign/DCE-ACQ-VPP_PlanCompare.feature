@@ -106,8 +106,8 @@ Feature: 1.10.3 DCE-Redesign-VPP_PlanCompare - To test DCE - VPP Plan Compare In
       | DrugName | <drug2> |
     Then the user clicks on return to compare link on build drug list page to returns to plan compare
     Then the user validates all added Drugs on Plan Compare
-   # Then the user validates drug is displayed on the plan compare page
-   #   | DrugName | <drug1> |
+    # Then the user validates drug is displayed on the plan compare page
+    #   | DrugName | <drug1> |
     Then the user clicks on View Drug Information link for the following Plan and lands on DCE details
       | PlanName | <planname> |
     Then the user validates planName matches plan Name in VPP
@@ -115,9 +115,9 @@ Feature: 1.10.3 DCE-Redesign-VPP_PlanCompare - To test DCE - VPP Plan Compare In
 
     @DCE_Redesign_VPP_PlanCompare3_AARP
     Examples: 
-      | site | zipcode | plantype | planyear | county | isMultutiCounty | drug1     | drug2                                              | planname |
+      | site | zipcode | plantype | planyear | county | isMultutiCounty | drug1     | drug2                | planname                                           |
       | AARP |   90210 | MAPD     | current  | none   | no              | meloxicam | diclofenac potassium | AARP Medicare Advantage SecureHorizons Focus (HMO) |
-      
+
     @DCE_Redesign_VPP_PlanCompare3_UHC
     Examples: 
       | site | zipcode | plantype | planyear | county | isMultutiCounty | drug1     | drug2                | planname                                           |

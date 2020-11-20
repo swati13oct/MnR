@@ -84,9 +84,9 @@ public class DCEStepDefinitionAARP {
 				.getBean(PageConstants.DCE_Redesign_GetStarted);
 		BuildYourDrugList DCEbuildDrugList = DCEgetStarted.clickAddsDrugs();
 		String druglist = (String) getLoginScenario().getBean(DCERedesignCommonConstants.DRUGLIST);
-		if(null == druglist) {
-			druglist = "";
-		}
+		/*
+		 * if(null == druglist) { druglist = ""; }
+		 */
 		System.out.println("Setting Drugs List : " + druglist);
 		getLoginScenario().saveBean(DCERedesignCommonConstants.DRUGLIST, druglist);
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_BuildDrugList, DCEbuildDrugList);
@@ -432,9 +432,9 @@ public class DCEStepDefinitionAARP {
 		TellUsAboutDrug tellUsAboutDrug = buildDrugList.SearchaddDrugs(drugName);
 		buildDrugList = tellUsAboutDrug.ClickAddDrug();
 		String druglist = (String) getLoginScenario().getBean(DCERedesignCommonConstants.DRUGLIST);
-		if(null == druglist) {
-			druglist = "";
-		}
+		/*
+		 * if(druglist.isEmpty()) { druglist = ""; }
+		 */		
 		System.out.println("Drugs List : " + druglist);
 
 		druglist = druglist + "&" + drugName;
@@ -1068,11 +1068,10 @@ public class DCEStepDefinitionAARP {
 		ComparePlansPage planComparepage = (ComparePlansPage) getLoginScenario()
 				.getBean(PageConstants.PLAN_COMPARE_PAGE);
 		String druglist = (String) getLoginScenario().getBean(DCERedesignCommonConstants.DRUGLIST);
-		if(null == druglist) {
-			druglist = "";
-			getLoginScenario().saveBean(DCERedesignCommonConstants.DRUGLIST,druglist);
-		}
-
+		/*
+		 * if(druglist.isEmpty()) { druglist = "";
+		 * getLoginScenario().saveBean(DCERedesignCommonConstants.DRUGLIST,druglist); }
+		 */
 		BuildYourDrugList DCEbuildDrugList = planComparepage.navigateToDCERedesign();
 		if (null != DCEbuildDrugList) {
 			getLoginScenario().saveBean(PageConstants.DCE_Redesign_BuildDrugList, DCEbuildDrugList);
@@ -1514,4 +1513,7 @@ public class DCEStepDefinitionAARP {
 		getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
 
 	}
+	
+
+	
 }

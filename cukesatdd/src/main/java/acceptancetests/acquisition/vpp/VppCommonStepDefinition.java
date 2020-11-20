@@ -77,6 +77,9 @@ public class VppCommonStepDefinition {
  
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, aquisitionhomepage);
+		getLoginScenario().saveBean(DCERedesignCommonConstants.DRUGLIST, " ");
+		getLoginScenario().saveBean(DCERedesignCommonConstants.YOUPAYLIST_ALLDRUGS, " ");
+
 		if(site.equalsIgnoreCase("AARP"))
 			aquisitionhomepage.validateSubtitle();
 	}
