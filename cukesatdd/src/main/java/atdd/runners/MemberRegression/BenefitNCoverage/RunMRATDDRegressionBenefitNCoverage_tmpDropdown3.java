@@ -15,11 +15,11 @@ import cucumber.api.CucumberOptions;
 
 @RunWith(ExtendedCucumber.class)
 @ExtendedCucumberOptions(retryCount=1,screenShotSize="", screenShotLocation="/screenshots/",
-jsonReport = "target/cucumber-RunMRATDDRegressionBenefitNCoverage_tmpDropdown2.json",detailedReport = true, detailedAggregatedReport = true,
-overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionBenefitNCoverage_tmpDropdown2")
+jsonReport = "target/cucumber-RunMRATDDRegressionBenefitNCoverage_tmpDropdown3.json",detailedReport = true, detailedAggregatedReport = true,
+overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionBenefitNCoverage_tmpDropdown3")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberredesign" }, 
 features = { "src/main/resources/feature/memberredesign/benefitsandcoverage/PlanBenefitsAndCoverage-UMS.feature" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionBenefitNCoverage_tmpDropdown2.json" }, tags = { "@CMPDPGroupNonLis,@CMFedPDPNonLis,@CMMapdGroupNonLis" })
-public class RunMRATDDRegressionBenefitNCoverage_tmpDropdown2 {
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionBenefitNCoverage_tmpDropdown3.json" }, tags = { "@CMMapdGroupNonLis" })
+public class RunMRATDDRegressionBenefitNCoverage_tmpDropdown3 {
 
 }
