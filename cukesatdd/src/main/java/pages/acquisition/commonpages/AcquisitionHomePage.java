@@ -2061,6 +2061,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 //				Actions actions = new Actions(driver);
 //				actions.moveToElement(AARPlogo);
 //				actions.build().perform();
+				jsMouseOut(ShopForaplan);
 				jsMouseOver(AARPlogo);
 			} else {
 				Assert.fail("Sub Nav - Shop for a Plan - All links and element not found / displayed on page : ");
@@ -2120,6 +2121,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 //				Actions actions = new Actions(driver);
 //				actions.moveToElement(AARPlogo);
 //				actions.build().perform();
+				jsMouseOut(lnkLearnAboutMedicare);
 				jsMouseOver(AARPlogo);
 			} else {
 				Assert.fail("Sub Nav - Learn about Medicare - All links and element not found / displayed on page");
