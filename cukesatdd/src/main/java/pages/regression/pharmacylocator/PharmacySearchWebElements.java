@@ -139,7 +139,7 @@ public class PharmacySearchWebElements extends UhcDriver{
 	@FindBy(xpath="//a[@id='showHideMap']")
 	protected WebElement map_showHideMapLnk;
 
-	@FindBy(xpath="//div[@role='button' and @title='Show street map']")
+	@FindBy(xpath="//button[@title='Show street map']")
 	protected WebElement map_mapBtn;
 
 	@FindBy(xpath="//div[@role='button' and @title='Show satellite imagery']")
