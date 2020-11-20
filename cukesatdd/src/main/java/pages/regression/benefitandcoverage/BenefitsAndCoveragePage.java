@@ -400,6 +400,8 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 	 */
 	public void validate_drugCostDropdownoptions(String memberType, String dateStr)	{
 		if (dateStr.contains("2021") && memberType.toUpperCase().contains("GROUP")) {
+			if (validate(drugCostDropdown, 0))
+				scrollToView(drugCostDropdown);
 			Assert.assertTrue("PROBLEM - Do not expect drug cost dropdown to show", !validate(drugCostDropdown, 0));
 			Assert.assertTrue("PROBLEM - Do not expect drug cost header to show", !validate(DrugCostHeader, 0));
 		} else {

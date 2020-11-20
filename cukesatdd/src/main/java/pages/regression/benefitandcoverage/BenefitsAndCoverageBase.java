@@ -539,6 +539,7 @@ public class BenefitsAndCoverageBase extends BenefitsAndCoverageWebElements {
 	//tbd public boolean validateWithValue(String value, WebElement element) {
 	public void validateWithValue(String value, WebElement element) {
 		Assert.assertTrue("Element " +value+ " not found!!!!", validate(element,0));
+		scrollToView(element);
 		System.out.println("Element " +value+ " found!!!!");
 		/* tbd 
 		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
