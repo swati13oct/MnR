@@ -36,6 +36,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.ElementData;
 import acceptancetests.data.MRConstants;
+import acceptancetests.data.PageConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
@@ -778,6 +779,37 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	
 	@FindBy(xpath = "//h3[contains(text(),'Medicare Part B: Medical Services per Calendar Year')]")
 	private WebElement PartB;
+	
+	@FindBy(xpath = "(//label[text()='Add to compare'])[1]")
+	private WebElement compareLink;
+	
+	@FindBy(xpath = "(//button[text()='Compare'])[1]")
+	private WebElement compareButton;
+	
+	@FindBy(xpath = "//span[@class='size36 semiBoldText colorPrimaryBlue']")
+	private WebElement comparePageHeader;
+	
+	@FindBy(xpath = "(//button[@class='unliked buttonIntoText'])[1]")
+	private WebElement savePlanButton;
+	
+	@FindBy(xpath = "(//button[@class='liked buttonIntoText'])[1]/img")
+	private WebElement savePlanImg;
+	
+	@FindBy(xpath = "(//a[@class='edit-your-info-link back-arrow-right show returnEntryPage'])[1]")
+	private WebElement editYourInformationLink;
+	
+	@FindBy(xpath = "(//div[@class='vpp_generic_parsys parsys']//h1)[1]")
+	private WebElement planSummaryPageHeader;
+	
+	@FindBy(xpath = "//span[@class='unliked buttonIntoText']")
+	private List<WebElement> unsavedPlanButton;
+	
+	@FindBy(xpath = "//img[@class='liked' and @alt='liked']")
+	private List<WebElement> savePlanImgList;
+	
+	@FindBy(xpath = "//span[@id='header-number']")
+	private WebElement savedPlanHeaderCount;
+	
 	
 	public WebElement getValEstimatedAnnualDrugCostValue(String planName) {
 		// WebElement valEstimatedAnnualDrugCostValue =
@@ -3174,7 +3206,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	// ^^^ note: added for US1598162
 
 	public void MedSupFormValidation(String DateOfBirth) throws InterruptedException {
-
+		Actions action = new Actions(driver);
 		validateNew(DOB, 30);
 		System.out.println("MedSup page form is displayed");
 		DOB.click();
@@ -3205,7 +3237,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		Thread.sleep(2000);
 		startDrpDwnOption.click();
 		System.out.println("Plan to start date selected");
-		Thread.sleep(2000);
+		Thread.sleep(15000);
+		action.moveToElement(ViewPlanMedSupPage).perform();
 		ViewPlanMedSupPage.click();
 	}
 
@@ -4727,4 +4760,75 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	return RequestPlanIInformation_Validation;
 
 	}
+	
+	public boolean clickAndVerifyNavigateToPage(String btn) throws InterruptedException {
+		boolean flag = false;
+		Actions action = new Actions(driver);
+		if(btn.equalsIgnoreCase("Compare")) {
+			Thread.sleep(2000);
+			action.moveToElement(compareLink).build().perform();
+			compareLink.click();
+			Thread.sleep(10000);
+			action.moveToElement(compareButton).build().perform();
+			compareButton.click();
+			Thread.sleep(2000);
+			action.moveToElement(comparePageHeader).build().perform();
+			if(comparePageHeader.isDisplayed()) {
+				flag = true;
+			}
+		}else if(btn.equalsIgnoreCase("Save")) {
+			Thread.sleep(2000);
+			action.moveToElement(savePlanButton).build().perform();
+			savePlanButton.click();
+			Thread.sleep(2000);
+			action.moveToElement(savePlanImg).build().perform();
+			if(savePlanImg.getAttribute("class").equalsIgnoreCase("liked")) {
+				flag = true;
+			}
+		}else if(btn.equalsIgnoreCase("Information")) {
+			Thread.sleep(2000);
+			action.moveToElement(editYourInformationLink).build().perform();
+			editYourInformationLink.click();
+			Thread.sleep(2000);
+			action.moveToElement(DOB).build().perform();
+			if(DOB.isDisplayed()) {
+				flag = true;
+		}
+		
+		}	else {
+				Thread.sleep(2000);
+				action.moveToElement(ViewPlanMedSupPage).build().perform();
+				ViewPlanMedSupPage.click();
+				Thread.sleep(2000);
+				action.moveToElement(compareButton).build().perform();
+				if(compareLink.isDisplayed()) {
+					flag = true;
+			}
+			
+		}
+		return flag;
+	}
+
+
+public boolean verifyPlanCount() throws InterruptedException {
+	boolean flag = false;
+	Thread.sleep(2000);
+	for(WebElement planToSave : unsavedPlanButton) {
+		planToSave.click();
+	}
+	int planToSaveCount = unsavedPlanButton.size();
+	int savePlanImgCount = savePlanImgList.size();
+	if(planToSaveCount==savePlanImgCount) {
+		int count = Integer.parseInt(savedPlanHeaderCount.getText());
+		if(count==savePlanImgCount) {
+			flag = true;
+		}
+		
+	}
+	
+	
+	
+	return flag;
 }
+}
+    

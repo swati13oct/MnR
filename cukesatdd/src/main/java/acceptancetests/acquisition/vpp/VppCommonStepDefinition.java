@@ -8,6 +8,7 @@ import java.util.Map;
 
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acceptancetests.acquisition.dceredesign.DCERedesignCommonConstants;
@@ -403,7 +404,73 @@ public class VppCommonStepDefinition {
 		getLoginScenario().saveBean(VPPCommonConstants.RESUMEKEY, resumeKey);
 
 	}
+	
+	@Then("^the site user clicks on View Plans Button proceed to View Plans Page$")
+	public void the_site_user_clicks_on_View_Plans_Button_proceed_to_View_Plans_Page_button(DataTable givenAttributes) throws Throwable {
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
 
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		String DateOfBirth = memberAttributesMap.get("DOB");
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		plansummaryPage.MedSupFormValidation(DateOfBirth);
+	}
+	
+	@Then("^user clicks on compare button and navigate to plan compare page$")
+	public void user_clicks_on_compare_button_and_navigate_to_plan_compare_page() throws Throwable {
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		boolean result = plansummaryPage.clickAndVerifyNavigateToPage("Compare");
+		Assert.assertTrue("On clicking compare button user is navigated to plan compare page", result);
+		System.out.println("user clicks on compare button and navigate to plan compare page");
+		
+	    
+	}
+
+	@Then("^user clicks on save button and saves to plan cart$")
+	public void user_clicks_on_save_button_and_saves_to_plan_cart() throws Throwable {
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		boolean result = plansummaryPage.clickAndVerifyNavigateToPage("Save");
+		Assert.assertTrue("On clicking save button user is navigated to save plan page", result);
+		System.out.println("user clicks on save button and saves to plan cart");
+	    
+	    
+	}
+
+	@Then("^user clicks on Edit Your Information link and navigate back to micro form$")
+	public void user_clicks_on_Edit_Your_Information_link_and_navigate_back_to_micro_form() throws Throwable {
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		boolean result = plansummaryPage.clickAndVerifyNavigateToPage("Information");
+		Assert.assertTrue("On clicking Edit Your Information link and navigate back to micro form", result);
+		System.out.println("user clicks on Edit Your Information link and navigate back to micro form");
+	}
+
+	@Then("^user clicks on View plan button link and navigate back to vpp summary page of medsupp$")
+	public void user_clicks_on_View_plan_button_link_and_navigate_back_to_vpp_summary_page_of_medsupp() throws Throwable {
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		boolean result = plansummaryPage.clickAndVerifyNavigateToPage("View Plan");
+		Assert.assertTrue("On clicking View Plan button user is navigated to plan summary page", result);
+		System.out.println("user clicks on View plan button link and navigate back to vpp summary page of medsupp");
+	}
+
+	@Then("^user clicks on Save icon for all the plans and validate count in cart should match to plans$")
+	public void user_clicks_on_Save_icon_for_all_the_plans_and_match_count() throws Throwable {
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		boolean result = plansummaryPage.verifyPlanCount();
+		Assert.assertTrue("Plan count is matched", result);
+		System.out.println("Plan count is matched");
+	}
+
+	
 	@Then("^user clicks on resume application button$")
 	public void click_resume_application(DataTable givenAttributes) throws Throwable {
 		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
