@@ -201,10 +201,13 @@ public class ComparePlansPage extends UhcDriver {
 	
 	@FindBy(xpath="//*[contains(@class,'uhc-link-button') and contains(text(),'Add Drugs')]")
 	private WebElement addDrugsLink;
-	
-	@FindBy(xpath="//*[normalize-space(text())='Edit Drugs']")
+	/*
+	 * @FindBy(xpath="//*[normalize-space(text())='Edit Drugs']") private WebElement
+	 * editDrugsLink;
+	 */
+	@FindBy(xpath="//*[contains(@dtmname,'Edit Drugs')]")
 	private WebElement editDrugsLink;
-	
+
 	@FindBy(xpath="//*[normalize-space(text())='Drug Summary']")
 	private WebElement DrugSummaryHeader;
 	
@@ -932,8 +935,8 @@ public class ComparePlansPage extends UhcDriver {
 	}
 	
 	public BuildYourDrugList clickonEdityourDrugs() {
+		CommonUtility.waitForPageLoad(driver, editDrugsLink, 30);
 		validateNew(editDrugsLink);
-		validate(editDrugsLink);
 		jsClickNew(editDrugsLink);
 		CommonUtility.waitForPageLoad(driver, BuildDrugPage_EnterDrugNameTxt, 30);
 		if (validateNew(BuildDrugPage_EnterDrugNameTxt)) {
@@ -1171,8 +1174,8 @@ public class ComparePlansPage extends UhcDriver {
 		validateNew(DrugInfoLink);
 		jsClickNew(DrugInfoLink);
 		
+		CommonUtility.waitForPageLoadNew(driver, DrugInfoModal_DrugCostDetailsBtn, 30);
 		WebElement DrugInfoModal_Header = driver.findElement(By.xpath("//*[contains(@class, 'vpp-modal')]//*[contains(text(), '"+planName+"')]"));
-		CommonUtility.waitForPageLoadNew(driver, DrugInfoModal_Header, 30);
 		validateNew(DrugInfoModal_Header);
 		validateNew(DrugInfoModal_DrugCostDetailsBtn);
 
