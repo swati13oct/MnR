@@ -3509,6 +3509,7 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 	public List<String> getDrugDropDownOptions() {
 		List<String> optionsList=new ArrayList<String>();
 		Assert.assertTrue("PROBLEM - unable to locate drug costs dropdown", validate(drugCostDropdown,0));
+		scrollElementToCenterScreen(drugCostDropdown);
 		Select s= new Select(drugCostDropdown);
 		List <WebElement> op=s.getOptions();
 		for (int i=0; i<op.size(); i++) {
@@ -3519,6 +3520,7 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 	}
 	
 	public void selectDrugTblDropDownOption(String option) {
+		scrollElementToCenterScreen(drugCostDropdown);
 		Select drugCostdropdwn = new Select(drugCostDropdown);
 		drugCostdropdwn.selectByVisibleText(option);
 	}
