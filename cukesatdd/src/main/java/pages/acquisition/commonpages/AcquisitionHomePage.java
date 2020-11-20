@@ -2005,7 +2005,6 @@ public class AcquisitionHomePage extends GlobalWebElements {
 //				actions.build().perform();
 				jsMouseOver(ShopForaplan);
 				System.out.println("Hover over Shop for a Plan completed");
-
 //					waitforElementNew(driver.findElement(By.xpath("//input[@id='nav-zipcode']")));
 //					System.out.println("Submit button is displayed");
 			}
@@ -2081,6 +2080,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 //				actions.moveToElement(lnkLearnAboutMedicare);
 //				actions.build().perform();
 				jsMouseOver(lnkLearnAboutMedicare);
+				waitForPageLoadSafari();
 				System.out.println("Hover over Learn about Medicare completed");
 			}
 			WebElement EligibilityTxt = driver.findElement(

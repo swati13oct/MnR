@@ -85,6 +85,8 @@ public class EnterZipCodePage extends UhcDriver {
 				}
 				driver.navigate().back();
 				zipCodeNumber++;
+				driver.navigate().refresh();	//Adding refresh since element are not located in Safari browser after using navigate back
+				threadsleep(2000);
 			}
 		} catch (Exception e) {
 			System.out.println(e);
