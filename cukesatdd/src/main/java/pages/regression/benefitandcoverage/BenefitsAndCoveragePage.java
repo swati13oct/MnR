@@ -1496,8 +1496,15 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 				+"$75 copay\n"
 				+"$120 copay\n"
 				+"$180 copay";
+		String TableDate_2021="Annual Prescription Deductible Initial Coverage Stage Coverage Gap Stage Catastrophic Coverage Stage\n"
+				+"30-day supply (non-maintenance drugs) 30-day supply (maintenance drugs*) 31- to 60-day supply** 61- to 90-day supply**\n"
+				+"Tier 1\n"
+				+"Tier 2\n"
+				+"Tier 3";
 		String TableData=TableData_2020;
-			
+		if (dateStr.contains("2021"))
+			TableData=TableDate_2021;
+		
 		System.out.println("Expected table  is >>>>>>>>>>>>>"+"\n"+TableData.toString());
 		System.out.println("Actual table value is >>>>>>>>>> "+"\n"+retailTable.getText());
 
@@ -2580,18 +2587,19 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 				+"No Deductible\n"
 				+"$10.00\n"
 				+"$10.00\n"
-				+"Your share of the cost for a covered drug will be either coinsurance or a copayment whichever is the larger amount:\n"
-				+"-either- coinsurance of 5% of the cost of the drug\n"
-				+"-or- $3.40 for a generic drug or a drug that is treated like a generic and $8.50 for all other drugs.\n"
+				+"Greater of $3.70 or 5.00%\n"
 				+"Tier 2 \n"
 				+"$20.00\n"
 				+"$20.00\n"
+				+"Greater of $9.20 or 5.00%\n"
 				+"Tier 3\n"
 				+"$35.00\n"
 				+"$35.00\n"
+				+"Greater of $9.20 or 5.00%\n"
 				+"Tier 4\n"
 				+"$35.00\n"
-				+"$35.00";		
+				+"$35.00\n"
+				+"Greater of $9.20 or 5.00%";		
 		String mapdGroupTable=mapdGroupTable_2020;
 		if (dateStr.contains("2021")) 
 			mapdGroupTable=mapdGroupTable_2021;
