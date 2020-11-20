@@ -2498,8 +2498,29 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 				+"$55.00\n"
 				+"Tier 4 \n"
 				+"$55.00";
+		String mapdGroupTable_2021_team="Additional Drug Coverage\n"
+				+"Annual Deductible Stage \n"
+				+"Initial Coverage Stage \n"
+				+"Coverage Gap Stage\n"
+				+"Catastrophic Coverage Stage \n"
+				+"Tier 1 \n"
+				+"No Deductible\n"
+				+"$3.00\n"
+				+"$3.00\n"
+				+"Greater of $3.70 or 5.00%\n"
+				+"Tier 2 \n"
+				+"$28.00\n"
+				+"You pay 25% of the total cost for generic drugs and 25% of the cost (plus a portion of the dispensing fee) for brand name drugs. Greater of $9.20 or 5.00%\n"
+				+"Tier 3 \n"
+				+"$55.00\n"
+				+"Greater of $9.20 or 5.00%\n"
+				+"Tier 4 \n"
+				+"$55.00\n"
+				+"Greater of $9.20 or 5.00%";
 		String mapdGroupTable=mapdGroupTable_2020;
-		if (dateStr.contains("2021") || MRScenario.environment.contains("stage")) 
+		if (dateStr.contains("2021") &&  MRScenario.environment.contains("team-a")) 
+			mapdGroupTable=mapdGroupTable_2021_team;
+		else if (dateStr.contains("2021") || MRScenario.environment.contains("stage")) 
 			mapdGroupTable=mapdGroupTable_2021;
 		if(RetailDrugCost_TableNONLIS.getText().equals(mapdGroupTable.toString())){
 			Assert.assertTrue("The data in the drug cost table is displaying correctly", true);
