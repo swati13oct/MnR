@@ -2604,7 +2604,7 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 			System.out.println(">>>>>>>>>>>>>The Actual Table value is<<<<<<<<<<<<<<<<<<<<\n"+RetailDrugCost_TableNONLIS.getText());
 			System.err.println(">>>>>>>>Problem<<<<<<<<<<<<<<<The data in the drug cost table is not displaying correctly<<<<<<<<<<<<<");
 
-			testNote.add("The data in the drug cost table is not displaying correctly. table='etailDrug'");
+			testNote.add("The data in the drug cost table is not displaying correctly. table='RetailDrug'");
 			testNote.add("The data in the drug cost table is not displaying correctly");
 			testNote.add("\n>>>>>>>>>>>>>The Expected Table  value is<<<<<<<<<<<<<<<<< \n"+mapdGroupTable);
 			testNote.add("\n>>>>>>>>>>>>>The Actual Table value is<<<<<<<<<<<<<<<<<<<< \n"+RetailDrugCost_TableNONLIS.getText());
