@@ -1472,30 +1472,36 @@ public class DCEStepDefinitionAARP {
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetailsPage);
 	}
 	
-	@Then("^the user clicks on View Plan Compare button and validates Plan Compare page$")
+	@Then("^the user clicks on View Plan Compare button and validates Plan Compare page, Drug Info Modal$")
 	public void the_user_clicks_on_View_Plan_Compare_button_and_validates_Plan_Compare_page() throws Throwable {
 		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugDetails);
 		String druglist = (String) getLoginScenario().getBean(DCERedesignCommonConstants.DRUGLIST);
 		String drugYouPaylist = (String) getLoginScenario().getBean(DCERedesignCommonConstants.YOUPAYLIST_ALLDRUGS);
 		drugDetailsPage.validateDrugListYouPay_FromComparePage(druglist, drugYouPaylist);
-		ComparePlansPage planComparePage = drugDetailsPage.clickViewPlanCompareBtn_ReturnToCompare();
+		ComparePlansPage planComparePage = drugDetailsPage.clickViewPlanCompareBtn_ReturnToCompare_ViewDrugModal();
 		if (null != planComparePage) {
 			getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
 		} else
 			Assert.fail("VPP Plan Compare not loaded");	
 	}
 
-	@Then("^the user clicks on Back to Compare link and validates Plan Compare page$")
+	@Then("^the user clicks on Back to Compare link and validates Plan Compare page, Drug Info Modal$")
 	public void the_user_clicks_on_Back_to_Compare_link_and_validates_Plan_Compare_page() throws Throwable {
 		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugDetails);
 		String druglist = (String) getLoginScenario().getBean(DCERedesignCommonConstants.DRUGLIST);
 		String drugYouPaylist = (String) getLoginScenario().getBean(DCERedesignCommonConstants.YOUPAYLIST_ALLDRUGS);
 		drugDetailsPage.validateDrugListYouPay_FromComparePage(druglist, drugYouPaylist);
-		ComparePlansPage planComparePage = drugDetailsPage.clickViewBackCompareLink_ReturnToCompare();
+		ComparePlansPage planComparePage = drugDetailsPage.clickViewBackCompareLink_ReturnToCompare_ViewDrugModal();
 		if (null != planComparePage) {
 			getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
 		} else
 			Assert.fail("VPP Plan Compare not loaded");	
+	}
+
+	@Then("^the user closes the Drug Info Modal on Plan Compare page$")
+	public void the_user_closes_the_Drug_Info_Modal_on_Plan_Compare_page() throws Throwable {
+		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario().getBean(PageConstants.PLAN_COMPARE_PAGE);
+		planComparePage.CloseDrugInfoModal();
 	}
 
 	@Then("^the user clicks on Edit Drug link and validates user lands on DCE Build Drug List Page$")

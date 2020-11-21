@@ -1181,6 +1181,21 @@ public class ComparePlansPage extends UhcDriver {
 
 	}
 	
+	@FindBy(xpath="//*[contains(@ng-click, 'closeDrugInfopopup')]//*[contains(text(), 'Close')]")
+	private WebElement DrugInfoModal_CloseBtn;
+
+	public void CloseDrugInfoModal() {
+		validateNew(DrugInfoModal_CloseBtn);
+		jsClickNew(DrugInfoModal_CloseBtn);
+		CommonUtility.waitForPageLoadNew(driver, editDrugsLink, 30);
+		validateNew(yourDrugsBanner);
+		validateNew(editDrugsLink);
+		validateNew(DrugSummaryHeader);
+		validateNew(DrugSummaryCoverageHeader);
+		System.out.println("Drug Info Modal Closed - Plan Compare page displayed");
+	}
+	
+	
 	@FindBy(xpath = "//button[@id='changePharmacyLink']")
 	public WebElement DrugDetails_ChangePharmacyLnk;
 

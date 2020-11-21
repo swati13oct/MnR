@@ -1274,22 +1274,40 @@ public class DrugDetailsPage extends UhcDriver {
 	@FindBy(xpath = "//*[contains(@id, 'compare-table-header')]")
 	public WebElement ComparePage_TableHeader;
 
-	public ComparePlansPage clickViewPlanCompareBtn_ReturnToCompare() {
+	@FindBy(xpath="//*[contains(@ng-click, 'launchDCEfromDrugPopup')]//*[contains(text(), 'Drug')]")
+	private WebElement DrugInfoModal_DrugCostDetailsBtn;
+
+	@FindBy(xpath="//*[contains(@ng-click, 'closeDrugInfopopup')]//*[contains(text(), 'Close')]")
+	private WebElement DrugInfoModal_CloseBtn;
+
+	public ComparePlansPage clickViewPlanCompareBtn_ReturnToCompare_ViewDrugModal() {
 		validateNew(DrugCosts_PlanCompareBtn);
 		jsClickNew(DrugCosts_PlanCompareBtn);
-		CommonUtility.waitForPageLoad(driver, ComparePage_TableHeader, 30);
-
+		//CommonUtility.waitForPageLoad(driver, ComparePage_TableHeader, 30);
+		CommonUtility.waitForPageLoadNew(driver, DrugInfoModal_DrugCostDetailsBtn, 30);
+//		WebElement DrugInfoModal_Header = driver.findElement(By.xpath("//*[contains(@class, 'vpp-modal')]//*[contains(text(), '"+planName+"')]"));
+	//	validateNew(DrugInfoModal_Header);
+		
+		validateNew(DrugInfoModal_DrugCostDetailsBtn);
+		validateNew(DrugInfoModal_CloseBtn);
+		System.out.println("Returned to Plan Compare Page - Drug Info Modal");
 		return new ComparePlansPage(driver);
 	}
 
-	public ComparePlansPage clickViewBackCompareLink_ReturnToCompare() {
+	public ComparePlansPage clickViewBackCompareLink_ReturnToCompare_ViewDrugModal() {
 		validateNew(LinktoExitScenario);
 		if(!LinktoExitScenario.getText().contains("Compare"))
 			Assert.fail("Exit Scenario Link Text Incorrect for Compare Flow : "+LinktoExitScenario.getText());
 		
 		jsClickNew(LinktoExitScenario);
-		CommonUtility.waitForPageLoad(driver, reviewDrugCostPageHeading, 30);
-
+		//CommonUtility.waitForPageLoad(driver, ComparePage_TableHeader, 30);
+		CommonUtility.waitForPageLoadNew(driver, DrugInfoModal_DrugCostDetailsBtn, 30);
+//		WebElement DrugInfoModal_Header = driver.findElement(By.xpath("//*[contains(@class, 'vpp-modal')]//*[contains(text(), '"+planName+"')]"));
+	//	validateNew(DrugInfoModal_Header);
+		
+		validateNew(DrugInfoModal_DrugCostDetailsBtn);
+		validateNew(DrugInfoModal_CloseBtn);
+		System.out.println("Returned to Plan Compare Page - Drug Info Modal");
 		return new ComparePlansPage(driver);
 	}
 
