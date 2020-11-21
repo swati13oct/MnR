@@ -772,7 +772,6 @@ Feature: 1.01 Member  benefits and Coverage page
     And the user validates Locate a Pharmacy button should be visible
       | Plan Type | <planType> |
     And the user validates the Learn More section link for stage
-    And the user validates tier link should not display
     And the user validates view and document label
     And the user validates static links
       | Plan Type | <planType> |
@@ -789,7 +788,7 @@ Feature: 1.01 Member  benefits and Coverage page
     @DSNP_CnS01
     Examples: 
       | index | FID             | planType   | memberType           | copayCategory | language | name         | memberid     | effectivedate | monthlypremium | extrahelp            | Identifier       | count | H-PBP    | rider  |
-      | 26-c2 | F494433,F506320 | DSNP_MAPD  | Individual_CnS02_BnC | LIS 3         | ENGLISH  | EBER KRYSTEK| 903010063-00 | 01/01/2020    | Not Available  | Extra Help Level : 3 | IndEffectiveAARP |     6 | H2228-045| NoRider|
+      | 26-c2 | F494433,F506320 | DSNP_MAPD  | Individual_CnS02_BnC | LIS 1         | ENGLISH  | EBER KRYSTEK| 903010063-00 | 01/01/2020    | Not Available  | Extra Help Level : 1 | IndEffectiveAARP |     6 | H2228-045| NoRider|
     
     @DSNP_CnS02
     Examples:       
@@ -798,6 +797,13 @@ Feature: 1.01 Member  benefits and Coverage page
       | 28-c4 | F494433,F506320 | DSNP_MAPD  | Individual_CnS04_BnC | LIS 1         | ENGLISH  | BLAIS OWEN        | 912002942-1 | 01/01/2020 | Not Available  | Extra Help Level : 1 | IndEffectiveAARP |     6 | H4527-003| NoRider|
       | 29-c5 | F494433,F506320 | DSNP_MAPD  | Individual_CnS05_BnC | LIS 2         | ENGLISH  | KUMARI FROEHNER   | 006644986-1 | 01/01/2020 | Not Available  | Extra Help Level : 2 | IndEffectiveAARP |     6 | H4590-033| NoRider|
     
+    @DSNP_CnS03
+    Examples: 
+      | index | FID    		    | planType   | memberType           | copayCategory | language | name         | memberid     | effectivedate | monthlypremium | extrahelp | Identifier      | count | H-PBP    | rider  |
+      | 35-c6 | F494433,F506320 | DSNP_MAPD  | Individual_CnS06_BnC | Non Lis       | ENGLISH  | EBER KRYSTEK| 903010063-00 | 01/01/2020    | Not Available  | 			  |IndEffectiveAARP |     6 | H4527-015| NoRider|
+      | 36-c7 | F494433,F506320 | DSNP_MAPD  | Individual_CnS07_BnC | Non Lis       | ENGLISH  | EBER KRYSTEK| 903010063-00 | 01/01/2020    | Not Available  |            | IndEffectiveAARP|     6 | H5322-030| NoRider|
+      
+      
     @DSNP_MnR01
     Examples:       
        | index | FID             | planType   | memberType           | copayCategory | language | name         | memberid     | effectivedate | monthlypremium | extrahelp            | Identifier       | count | H-PBP    | rider  |
