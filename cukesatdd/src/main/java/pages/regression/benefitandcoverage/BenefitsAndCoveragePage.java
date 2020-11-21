@@ -1342,6 +1342,7 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 		validateWithValue("Member ID: label", memberID1);
 		validateWithValue("Effective Date: label",effective_Date1);
 		validateWithValue("monthly Premium",monthlypremiumlabel);
+		if(!extrahelp.trim().isEmpty())
 		validateWithValue("Extra Help", ExtraHelp);
 	}
 
@@ -3549,6 +3550,37 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public void validate_lisornonlisdrugcopayheaderntextntable(String copaycategory) {
+		
+		validateWithValue("LIS header", lisDrugCopayHeader);
+			
+	if(copaycategory.equals("LIS 1") || copaycategory.equals("LIS 2") || copaycategory.equals("LIS 3")) {
+			
+			validateWithValue("LIS header text", lisDrugCopayHeadertext);
+			System.out.println(" ***********LIS header and text is validated***********");
+			Assert.assertTrue("Drug table  is n't displaying", lisdrugtable.isDisplayed());
+			scrollElementToCenterScreen(AnnualDeductibleStage);
+			Assert.assertTrue("Annual Deductible Stage Header is n't displaying", AnnualDeductibleStage.getText().trim().equals("Annual Deductible Stage"));	
+			Assert.assertTrue("Initial Coverage Stage Header is n't displaying", InitialCoverageStage.getText().trim().equals("Initial Coverage Stage"));	
+			Assert.assertTrue("Catastrophic Coverage Stage Header is n't displaying", CatastrophicCoverageStage.getText().trim().equals("Catastrophic Coverage Stage"));	
+			Assert.assertTrue("Covered Generic Drugs Header is n't displaying", CoveredGenericDrugs.getText().trim().equals("Covered Generic Drugs"));	
+			Assert.assertTrue("All Other Covered Drugs Header is n't displaying", AllOtherCoveredDrugs.getText().trim().equals("All Other Covered Drugs"));
+			
+		} else if (copaycategory.equals("Non Lis")) {
+			
+			Assert.assertTrue("Annual Deductible Stage Header is n't displaying", NonLisAnnualDeductibleStage.getText().trim().equals("Annual Deductible Stage"));	
+			Assert.assertTrue("Initial Coverage Stage Header is n't displaying", NonLisInitialCoverageStage.getText().trim().equals("Initial Coverage Stage"));	
+			Assert.assertTrue("Coverage Gap Stage Header is n't displaying", NonLisCoverageGapStage.getText().trim().equals("Coverage Gap Stage"));	
+			Assert.assertTrue("Catastrophic Coverage Stage Header is n't displaying", NonLisCatastrophicCoverageStage.getText().trim().equals("Catastrophic Coverage Stage"));	
+			Assert.assertTrue("Tier 1 is n't displaying", Tier1.getText().trim().equals("Tier 1"));
+			Assert.assertTrue("Tier 2 is n't displaying", Tier2.getText().trim().equals("Tier 2"));
+			Assert.assertTrue("Tier 3 is n't displaying", Tier3.getText().trim().equals("Tier 3"));
+			Assert.assertTrue("Tier 4 is n't displaying", Tier4.getText().trim().equals("Tier 4"));
+			Assert.assertTrue("Tier 5 is n't displaying", Tier5.getText().trim().equals("Tier 5"));
+		}
+		
 	}
 	
 	public List<String> getDrugDropDownOptions() {
