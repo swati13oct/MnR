@@ -277,6 +277,7 @@ public class BuildYourDrugList extends UhcDriver {
 	}
 
 	public void deleteDrug(String deleteDrug) {
+		System.out.println("Drug to be removed : "+deleteDrug);
 		WebElement removeLink = driver.findElement(By.xpath("//*[contains(@aria-label,'Remove "+deleteDrug+"')]"));
 		jsClickNew(removeLink);
 		

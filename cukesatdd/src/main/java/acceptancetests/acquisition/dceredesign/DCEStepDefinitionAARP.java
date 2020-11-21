@@ -1282,8 +1282,9 @@ public class DCEStepDefinitionAARP {
 		String DeleteDrug = memberAttributesMap.get("DrugName");
 		buildDrugListPage.deleteDrug(DeleteDrug);
 		String druglist = (String) getLoginScenario().getBean(DCERedesignCommonConstants.DRUGLIST);
+		System.out.println("Drug List before Delete Drug : "+druglist);
 		druglist = druglist.replace("&"+DeleteDrug, "");
-		System.out.println("Drugs List : " + druglist);
+		System.out.println("Updated Drugs List after Delete Drug : " + druglist);
 		getLoginScenario().saveBean(DCERedesignCommonConstants.DRUGLIST, druglist);
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetailsPage);
 
