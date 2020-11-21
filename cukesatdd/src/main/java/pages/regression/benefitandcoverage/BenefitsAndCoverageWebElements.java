@@ -148,6 +148,9 @@ public class BenefitsAndCoverageWebElements extends UhcDriver {
 	@FindBy(xpath = "//a[contains(text(),'Look up Drugs')]")
 	protected WebElement LookUpDrugsButton;
 	
+	@FindBy(xpath="//h1[contains(text(),'Estimate')]")
+	protected WebElement oldDcePgHeader;
+	
 	@FindBy(xpath = "//span[contains(text(),'DRUG LOOKUP')]")
 	protected WebElement LookUpDrugsButtonSection;
 	

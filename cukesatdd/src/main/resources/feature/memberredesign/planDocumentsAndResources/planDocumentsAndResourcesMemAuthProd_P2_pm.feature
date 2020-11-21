@@ -69,7 +69,7 @@ Feature: 1.06.1.2 Member Plans and Documents - section: Plan Materials - Member 
 	@prod_active_mapd @prod_active_mapd_ind
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | pm_sd | pm_op | pm_mi | pm_en | pm_es | pm_zh |
-      | 11-030 | 15108       | kkumard  | mnrs786@  | BILL.ROSNER123#    | MAPD     | AARP_IND_EFF_PDnR     | true  | true  | true  | true  | true  | false | 
+      | 11-030 | 15108       | kkumard  | mnrs786@  | LMHOCHSCHILD11    | MAPD     | AARP_IND_EFF_PDnR     | true  | true  | true  | true  | true  | false | 
 
 	@prod_active_mapd @prod_active_mapd_grp
 	Examples: 

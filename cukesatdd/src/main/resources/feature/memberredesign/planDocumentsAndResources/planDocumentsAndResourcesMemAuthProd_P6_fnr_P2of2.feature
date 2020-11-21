@@ -76,7 +76,7 @@ Feature: 1.06.6.2 Member Plans and Documents - section: Forms And Resources Part
 	@prod_active_mapd_ind_2of2 @prod_active_mapd_2of2
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | fnr_sd | fnr_maf | fnr_or | fnr_di |
-      | 11-106 | 15108       | kkumard  | mnrs786@  | BILL.ROSNER123# | MAPD     | AARP_IND_EFF_PDnR     | true   | true    | true   | true   |
+      | 11-106 | 15108       | kkumard  | mnrs786@  | LMHOCHSCHILD11 | MAPD     | AARP_IND_EFF_PDnR     | true   | true    | true   | true   |
 
 	@prod_active_mapd_grp_2of2 @prod_active_mapd_2of2
 	Examples: 

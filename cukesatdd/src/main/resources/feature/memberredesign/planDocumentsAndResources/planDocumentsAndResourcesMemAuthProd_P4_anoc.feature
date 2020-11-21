@@ -72,7 +72,7 @@ Feature: 1.06.4.2 Member Plans and Documents - section: Annual Notice of Changes
 	@prod_active_mapd @prod_active_mapd_ind
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | an_sd | an_en_cy | an_es_cy | an_zh_cy | an_en_ny | an_es_ny | an_zh_ny |
-      | 11-068 | 15108       | kkumard   | mnrs786@  | BILL.ROSNER123# | MAPD     | AARP_IND_EFF_PDnR     | true  | true     | true     | false    | true     | true     | false    |
+      | 11-068 | 15108       | kkumard   | mnrs786@  | LMHOCHSCHILD11 | MAPD     | AARP_IND_EFF_PDnR     | true  | true     | true     | false    | true     | true     | false    |
 
 	@prod_active_mapd @prod_active_mapd_grp
 	Examples: 
