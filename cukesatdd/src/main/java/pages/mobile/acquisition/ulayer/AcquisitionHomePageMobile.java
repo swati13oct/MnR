@@ -857,7 +857,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	}
 
 	public AboutUsAARPPageMobile aboutUsFooterClick() {
-		waitforElementVisibilityInTime(zipCode1, 10);
+		waitforElementVisibilityInTime(navigationSectionHomeLink, 10);
 		validateNew(footerAboutUsLink);
 		// footerAboutUsLink.click();
 		jsClickNew(footerAboutUsLink);

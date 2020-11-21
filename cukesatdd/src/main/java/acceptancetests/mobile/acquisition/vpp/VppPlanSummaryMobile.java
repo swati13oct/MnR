@@ -171,7 +171,7 @@ public class VppPlanSummaryMobile {
 	@Then("^the user hover overs the tool tip for Why is my premium 0 and validates the text$")
 	public void toolTip_premium0_validateText() throws Throwable {
 		String planType = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
-		if (planType.equals("MA") || planType.equals("MAPD")) {
+		if (planType.equals("MA") || planType.equals("MAPD") || planType.equals("SNP")) {
 			VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
 					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 			String planName = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_NAME);

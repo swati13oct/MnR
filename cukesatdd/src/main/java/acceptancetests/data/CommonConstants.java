@@ -8,6 +8,8 @@ package acceptancetests.data;
  *
  */
 public class CommonConstants {
+	
+	public static String SELECTED_STATE = null;
 
 	public static final String FLOW_NAME = "registration/planconfirmation";
 

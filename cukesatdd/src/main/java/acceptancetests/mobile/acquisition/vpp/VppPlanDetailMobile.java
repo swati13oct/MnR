@@ -134,6 +134,7 @@ public class VppPlanDetailMobile {
 		String TFN;
 		String SiteName;
 		SiteName = (String) getLoginScenario().getBean(oleCommonConstants.ACQ_SITE_NAME);
+		
 
 		String PlanPremium = (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_PREMIUM);
 

@@ -29,6 +29,8 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import com.mysql.jdbc.StringUtils;
+
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.ElementData;
 import acceptancetests.data.MRConstants;
@@ -2434,7 +2436,12 @@ for (int i = 0; i < initialCount + 1; i++) {
 		}
 	}
 
-	public void validateAbilityToSavePlans(String savePlanNames, String planType) {
+	
+	@FindBy(xpath = "//*[contains(@id,'pop-btn-1')]")
+	private WebElement keepShoppingBtn;
+	
+	
+public void validateAbilityToSavePlans(String savePlanNames, String planType) {
 		
 		List<String> listOfTestPlans = Arrays.asList(savePlanNames.split(","));
 		System.out.println("Going to mark the following "+listOfTestPlans.size()+" number of test plans as favorite");
@@ -2463,15 +2470,27 @@ for (int i = 0; i < initialCount + 1; i++) {
 			expMatch=0;
 			Assert.assertTrue("PROBLEM - unable to locate Save Plan icon for ='"+plan+"'.  Expect number of match='"+expMatch+"' | Actual number of match='"+listOfSavedPlanIcons.size()+"'",listOfSavedPlanIcons.size()==expMatch);
 
-			//----------------------------------------
+			// ----------------------------------------
 			System.out.println("Proceed to click to save plan");
-			WebDriverWait d=new WebDriverWait(driver, 20);
+			WebDriverWait d = new WebDriverWait(driver, 20);
 			d.until(ExpectedConditions.elementToBeClickable(By.xpath(initial_savePlanIconXpath)));
 			jsClickNew(listOfSavePlanIcons.get(0));
 
 			System.out.println("Click to close on the create profile popup");
-			if (validate(closeProfilePopup))
-				closeProfilePopup.click();
+			
+			if(!StringUtils.isNullOrEmpty(CommonConstants.SELECTED_STATE)) {
+				if(CommonConstants.SELECTED_STATE.equalsIgnoreCase("Pennsylvania") || CommonConstants.SELECTED_STATE.equalsIgnoreCase("Puerto Rico") || 
+						CommonConstants.SELECTED_STATE.equalsIgnoreCase("Virginia")) {
+					if (validate(closeProfilePopup))
+						closeProfilePopup.click();
+				}else {
+					if (validate(keepShoppingBtn))
+						keepShoppingBtn.click();
+				}
+			}else {
+				if (validate(keepShoppingBtn))
+					keepShoppingBtn.click();
+			}
 			CommonUtility.checkPageIsReady(driver);
 			
 			System.out.println("Proceed to validate 'Save Plan' link and icon disappeared after clicking it");
@@ -2503,7 +2522,6 @@ for (int i = 0; i < initialCount + 1; i++) {
 			Assert.assertTrue("PROBLEM - unable to locate Saved Plan icon after click for ='"+plan+"'.  Expect number of match='"+expMatch+"' | Actual number of match='"+listOfAppearedSavedText.size()+"'",listOfAppearedSavedText.size()==expMatch);
 		}
 	}
-
 	public void validatePlansAreSaved(String savePlanNames, String planType) {
 		String planTypePath="";
 		if (planType.equalsIgnoreCase("ma") || planType.equalsIgnoreCase("mapd")) {

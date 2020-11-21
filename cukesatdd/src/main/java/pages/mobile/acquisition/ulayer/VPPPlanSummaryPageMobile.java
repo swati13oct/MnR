@@ -293,6 +293,9 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 	@FindBy(xpath = ".//*[@id='vpp-monthly-premium-modal-header']/ancestor::div[contains (@class , 'popup-modal active')]")
 	private WebElement learnMoreModalPopUp;
 
+	@FindBy(xpath = "//h2[contains(text(),'Learn About Plans')]")
+	private WebElement learnAbtPlanText;
+
 	@FindBy(id = "lisBackBtn")
 	private WebElement backButtonInLearnMoreModal;
 
@@ -633,10 +636,9 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 
 	@FindBy(xpath = "//body/div[@id='site-wrapper']/div[@id='globalContentIdForSkipLink']/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/fieldset[1]/div[1]/label[1]")
 	private WebElement currentYearSelection;
-	
+
 	@FindBy(xpath = "//h3[@id='doctorsAlertTitle']")
 	private WebElement isMyDoctorCoveredText;
-	
 
 	@FindBy(xpath = "//button[@id='lisGoBtn']")
 	private WebElement planYearPopupGoButton;
@@ -926,10 +928,11 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 			msPlansViewLink.click();
 			// CommonUtility.waitForPageLoadNew(driver, medSuppPlanList.get(0), 30);
 		} else if (planType.equalsIgnoreCase("SNP")) {
+			scrollToView(snpPlanList);
 			validateNew(snpPlansViewLink);
 			jsClickNew(snpPlansViewLink);
 			// snpPlansViewLink.click();
-			CommonUtility.waitForPageLoadNew(driver, planListContainer, 30);
+			// CommonUtility.waitForPageLoadNew(driver, planListContainer, 30);
 		}
 	}
 
@@ -2102,11 +2105,15 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 	 */
 	public void toolTipForPremium0(String planName) {
 		WebElement toolTip = driver.findElement(By.xpath("//*[contains(text(),\'" + planName
-				+ "\')]/ancestor::div[contains(@class, 'module-plan-overview')]//descendant :: span[contains(@class, 'standalone')]//*[name()='use']"));
+				+ "\')]/ancestor::div[contains(@class, 'module-plan-overview')]//descendant :: span[contains(@class, 'standalone')]//*[name()='svg']"));
+		/*
+		 * Actions action = new Actions(driver); scrollToView(toolTip);
+		 * action.moveToElement(toolTip).build().perform();
+		 */
+		scrollToView(toolTip);
+		jsMouseOver(toolTip);
 		WebElement tooltipContent = driver.findElement(By.xpath("//*[contains(text(),\'" + planName
 				+ "\')]/ancestor::div[contains(@class, 'module-plan-overview')]//descendant :: span[contains(@class, 'standalone')]//span"));
-		Actions action = new Actions(driver);
-		action.moveToElement(toolTip).build().perform();
 		String toolTipText = tooltipContent.getAttribute("textContent").trim();
 		if (toolTipText.contains("Why is my premium")) {
 			System.out.println("ToolTip text is " + toolTipText);
@@ -2120,8 +2127,10 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 				+ "\')]/ancestor::div[contains(@class, 'module-plan-overview')]//descendant :: span[contains(@class, 'standalone')]//*[name()='use'])[2]"));
 		WebElement tooltipContent = driver.findElement(By.xpath("(//*[contains(text(),\'" + planName
 				+ "\')]/ancestor::div[contains(@class, 'module-plan-overview')]//descendant :: span[contains(@class, 'standalone')]//span)[2]"));
-		Actions action = new Actions(driver);
-		action.moveToElement(toolTip).build().perform();
+		// Actions action = new Actions(driver);
+		// action.moveToElement(toolTip).build().perform();
+		scrollToView(toolTip);
+		jsMouseOver(toolTip);
 		String toolTipText = tooltipContent.getAttribute("textContent").trim();
 		if (toolTipText.contains("annual deductible")) {
 			System.out.println("ToolTip text is " + toolTipText);
@@ -2264,7 +2273,8 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 
 	public void validatePlanSelectorPageInRightRail() throws Exception {
 		validateNew(StartPlanSelector);
-		StartPlanSelector.click();
+		// StartPlanSelector.click();
+		jsClickNew(StartPlanSelector);
 		CommonUtility.checkPageIsReadyNew(driver);
 		if (driver.getCurrentUrl().contains("plan-recommendation-engine")) {
 			WebElement PlanSelector = driver.findElement(By.xpath("//h1[text()='Get a Plan Recommendation']"));
@@ -3383,7 +3393,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 				System.out.println("*****CLICKING ON Current Year button*****: " + CurrentYearPlansBtn.getText());
 				jsClickNew(CurrentYearPlansBtn);
 				waitforElement(currentYearSelection);
-				//waitforElementVisibilityInTime(isMyDoctorCoveredText, 10);
+				// waitforElementVisibilityInTime(isMyDoctorCoveredText, 10);
 
 			}
 		}
@@ -3930,7 +3940,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 		if (driver.getCurrentUrl().contains("rmhp.org")) {
 			System.out.println("We are in rocky mountain Page : " + driver.getCurrentUrl());
 			scrollToView(rockyMountainLogo);
-			validateNew(rockyMountainLogo,2);
+			validateNew(rockyMountainLogo, 2);
 			System.out.println("Validated Rocky Mountian Logo");
 
 		}

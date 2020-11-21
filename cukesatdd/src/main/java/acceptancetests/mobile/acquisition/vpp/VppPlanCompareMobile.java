@@ -99,7 +99,7 @@ public class VppPlanCompareMobile {
 	public void the_user_on_aarp_medicaresolutions_Site() {
 		wd = getLoginScenario().getMobileDriver();
 		AcquisitionHomePageMobile aquisitionhomepage = new AcquisitionHomePageMobile(wd);
-		//aquisitionhomepage.openPRE();
+		// aquisitionhomepage.openPRE();
 		aquisitionhomepage.openMobileURL();
 		// aquisitionhomepage.openVPPPage();
 		aquisitionhomepage.fixPrivateConnectionMobile();
@@ -204,10 +204,11 @@ public class VppPlanCompareMobile {
 		String zipcode = memberAttributesMap.get("Zip Code");
 		String county = memberAttributesMap.get("County Name");
 		String isMultiCounty = memberAttributesMap.get("Is Multi County");
+
 		getLoginScenario().saveBean(VPPCommonConstants.ZIPCODE, zipcode);
 		getLoginScenario().saveBean(VPPCommonConstants.COUNTY, county);
 		getLoginScenario().saveBean(VPPCommonConstants.IS_MULTICOUNTY, isMultiCounty);
-		
+		getLoginScenario().saveBean(oleCommonConstants.ACQ_SITE_NAME, "UHC_ACQ");
 		
 
 		AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
@@ -225,8 +226,7 @@ public class VppPlanCompareMobile {
 		} else {
 			Assert.fail("Error Loading VPP plan summary page");
 		}
-		
-	
+
 	}
 
 	/**
@@ -370,10 +370,10 @@ public class VppPlanCompareMobile {
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 
 		plansummaryPage.viewPlanSummary(plantype);
-		if(!plantype.equalsIgnoreCase("MS"))
+		if (!plantype.equalsIgnoreCase("MS"))
 			plansummaryPage.handlePlanYearSelectionPopup();
-//		getLoginScenario().saveBean(oleCommonConstants.ACQ_SITE_NAME, "UHC_ACQ");
-//		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_TYPE, plantype);
+		// getLoginScenario().saveBean(oleCommonConstants.ACQ_SITE_NAME, "UHC_ACQ");
+		// getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_TYPE, plantype);
 	}
 
 	/**
@@ -705,6 +705,7 @@ public class VppPlanCompareMobile {
 		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		plansummaryPage.handlePlanYearSelectionPopup(planYear);
+		getLoginScenario().saveBean(planYear, plansummaryPage);
 	}
 
 	/**
@@ -782,7 +783,7 @@ public class VppPlanCompareMobile {
 	}
 
 	/**
-	 * @throws InterruptedException 
+	 * @throws InterruptedException
 	 * @toDo:user view plan details of the above selected plan in AARP site and
 	 *            validates
 	 */
@@ -1556,8 +1557,11 @@ public class VppPlanCompareMobile {
 		String ma_savePlanNames = memberAttributesMap.get("MA Test Plans");
 		String pdp_savePlanNames = memberAttributesMap.get("PDP Test Plans");
 		String snp_savePlanNames = memberAttributesMap.get("SNP Test Plans");
+
 		String planYear = memberAttributesMap.get("Plan Year");
-		getLoginScenario().saveBean(VPPCommonConstants.PLAN_YEAR, planYear);
+		// getLoginScenario().getBean(planYear);
+		getLoginScenario().saveBean(planYear, plansummaryPage);
+
 		// ----- MA plan type ----------------------------
 		String planType = "MA";
 		plansummaryPage.viewPlanSummary(planType);
@@ -2869,7 +2873,7 @@ public class VppPlanCompareMobile {
 		} else {
 			plansummaryPage = aquisitionhomepage.searchPlans(zipcode, county);
 		}
-		
+
 		if (plansummaryPage != null) {
 			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
 
@@ -4125,7 +4129,7 @@ public class VppPlanCompareMobile {
 		}
 		vppPlanDetailsPage.validateDentalPopupDefaults(planName, optionalRiderFlag);
 	}
-	
+
 	@When("^user selects a Hospitals and retuns to VPP page in ums$")
 	public void user_selects_Hospitals_and_return_vpp_page_ums() {
 		{
@@ -4136,7 +4140,7 @@ public class VppPlanCompareMobile {
 
 		}
 	}
-	
+
 	@When("^user access DCE tool on UMS site$")
 	public void accessDCEToolUMS(DataTable attributes) {
 		List<DataTableRow> memberAttributesRow = attributes.getGherkinRows();
@@ -4152,42 +4156,45 @@ public class VppPlanCompareMobile {
 
 		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		//plansummaryPage.viewPlanSummary(plantype);
-		pages.mobile.acquisition.dce.ulayer.DrugCostEstimatorPageMobile dce = plansummaryPage.navigatetoDCEPage(planName);
-		 
+		// plansummaryPage.viewPlanSummary(plantype);
+		pages.mobile.acquisition.dce.ulayer.DrugCostEstimatorPageMobile dce = plansummaryPage
+				.navigatetoDCEPage(planName);
+
 		if (dce != null) {
 			getLoginScenario().saveBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE, dce);
 		}
 	}
-	
+
 	@Then("^I navigate to step3 page and validate the drug info$")
 	public void I_navigate_to_step_page(DataTable data) throws InterruptedException {
 		List<DataTableRow> memberAttributesRow = data.getGherkinRows();
 		String drug = memberAttributesRow.get(0).getCells().get(1);
-		DrugCostEstimatorPageMobile dce = (DrugCostEstimatorPageMobile) getLoginScenario().getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
+		DrugCostEstimatorPageMobile dce = (DrugCostEstimatorPageMobile) getLoginScenario()
+				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
 		dce.navigateToStep3();
-	   if(dce.validateDrugOnStep3(drug))
-		   Assert.assertTrue(true);
-	   else
-		   Assert.fail("Error:the drug did not display on step 3 page"); 
+		if (dce.validateDrugOnStep3(drug))
+			Assert.assertTrue(true);
+		else
+			Assert.fail("Error:the drug did not display on step 3 page");
 	}
-	
+
 	@Then("^the user clicks on return link to navigate to plan summary in UHC$")
-	public void clickOnPlanSummaryReturnLink(){
-		DrugCostEstimatorPageMobile dcePage = (DrugCostEstimatorPageMobile) getLoginScenario().getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
+	public void clickOnPlanSummaryReturnLink() {
+		DrugCostEstimatorPageMobile dcePage = (DrugCostEstimatorPageMobile) getLoginScenario()
+				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
 		dcePage.clickReturnToSummaryLink();
 	}
-	
-	
+
 	@When("^I navigate to step2 page$")
-	public void I_navigate_to_step2_page_aarp () throws InterruptedException
-	{
-		DrugCostEstimatorPageMobile dce = (DrugCostEstimatorPageMobile) getLoginScenario().getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
+	public void I_navigate_to_step2_page_aarp() throws InterruptedException {
+		DrugCostEstimatorPageMobile dce = (DrugCostEstimatorPageMobile) getLoginScenario()
+				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
 		dce.navigateToStep2();
 	}
-	
+
 	@Then("^the user clicks on Back to Plans button in UHC site and Navigates to new Plan Compare$")
-	public void the_user_clicks_on_Back_to_Plans_button_in_AARP_site_and_Navigates_to_new_Plan_Compare1() throws Throwable {
+	public void the_user_clicks_on_Back_to_Plans_button_in_AARP_site_and_Navigates_to_new_Plan_Compare1()
+			throws Throwable {
 		DrugCostEstimatorPageMobile dce = (DrugCostEstimatorPageMobile) getLoginScenario()
 				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
 		ComparePlansPageBlayerMobile planComparePage = dce.clickBtnBackToPlancomparenew();
@@ -4195,8 +4202,7 @@ public class VppPlanCompareMobile {
 			getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
 		}
 	}
-	
-	
+
 	/**
 	 * @toDo:user clicks on Agents & Brokers link from Disclaimers page footer
 	 */
