@@ -486,8 +486,8 @@ public class ComparePlansPage extends UhcDriver {
 
 
 	private int findindexofPlan_PlanCompare(String planName) {
-		int index = 1;
-		List <WebElement> PlanHeadings = driver.findElements(By.xpath("//div[@ng-repeat = 'i in count']"));
+		int index = 0;
+		List <WebElement> PlanHeadings = driver.findElements(By.xpath("//table[@id='plan-summary-table']//*[contains(@ng-if, 'planObject[$index]')][contains(@ng-if, 'planName')]"));
 		try {
 			Thread.sleep(2000);
 		} catch (InterruptedException e) {
@@ -496,8 +496,10 @@ public class ComparePlansPage extends UhcDriver {
 		}
 		System.out.println("Total Plans displayed - Total elements for Plan Name are : "+PlanHeadings.size());
 		for(WebElement currentPlanColumn : PlanHeadings){
-			WebElement PlanNameDisplay = driver.findElement(By.xpath("//div[@ng-repeat = 'i in count']["+index+"]//a[contains(@class,'ng-binding')]"));
-			if(validateNew(PlanNameDisplay) && PlanNameDisplay.getText().contains(planName)){
+			//WebElement PlanNameDisplay = driver.findElement(By.xpath("//div[@ng-repeat = 'i in count']["+index+"]//a[contains(@class,'ng-binding')]"));
+			System.out.println("Plan Name heading text displayed : "+currentPlanColumn.getText().trim());
+
+			if(validateNew(currentPlanColumn) && currentPlanColumn.getText().trim().contains(planName)){
 				System.out.println("Index for the Plan -"+planName+" in Plan Compare is : "+index);
 				return index;
 			}
