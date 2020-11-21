@@ -373,10 +373,16 @@ public class DCEStepDefinitionAARP {
 		BuildYourDrugList buildDrugList = (BuildYourDrugList) getLoginScenario()
 				.getBean(PageConstants.DCE_Redesign_BuildDrugList);
 		buildDrugList.clickReviewDrugCostBtn();
+	}
+	@When("^clicks on Review drug cost button for detail page$")
+	public void clicks_on_Review_drug_cost_button_Detail_Page() {
+		BuildYourDrugList buildDrugList = (BuildYourDrugList) getLoginScenario()
+				.getBean(PageConstants.DCE_Redesign_BuildDrugList);
+		buildDrugList.clickReviewDrugCostBtn();
 		DrugDetailsPage drugDetailsPage =new DrugDetailsPage(driver);
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetailsPage);
 	}
-
+	
 	@Then("^load screen should be displayed$")
 	public void load_screen_should_be_displayed_in_AARP() {
 		ZipCodePlanYearCapturePage zipCodePlanYearPage = (ZipCodePlanYearCapturePage) getLoginScenario()
@@ -742,6 +748,17 @@ public void user_should_verify_you_pay_value_for_not_covered_drug_in_drug_pricin
 
 		drugDetailsPage.validateDrugandPanButton();
 	}
+	
+	@Then("^the user click on Prescription Drug Benefits tab from drug detail page$")
+	public void the_user_click_on_Prescription_Drug_Benefits_tab_from_drug_detail_page() throws Throwable {
+		Thread.sleep(10000);
+		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario()
+				.getBean(PageConstants.DCE_Redesign_DrugDetails);
+
+		drugDetailsPage.validateDrugandPanButton();
+	}
+	
+	
 
 	@Then("^the user verify the drug cost estimator and view plan summary on VPP summary page in AARP$")
 	public void the_user_verify_the_drug_cost_estimator_summary() throws Throwable {
@@ -1032,6 +1049,12 @@ public void user_should_verify_you_pay_value_for_not_covered_drug_in_drug_pricin
 	public void user_clicks_on_change_pharmacy_link_from_summary_page_in_AARP() throws InterruptedException {
 		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
 		drugSummaryPage.clickChangePharmacy();
+	}
+
+	@When("^user clicks on change pharmacy link on alert message from summary page$")
+	public void user_clicks_on_change_pharmacy_link_on_aler_message_from_summary_page() throws InterruptedException {
+		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
+		drugSummaryPage.clickChangePharmacyCoverPrescription();
 	}
 
 	@Then("^change pharmacy modal should be displayed$")
@@ -1467,6 +1490,12 @@ public void user_should_verify_you_pay_value_for_not_covered_drug_in_drug_pricin
 	
 	@When("^user saves and updates pharmacy from list$")
 	public void user_saves_and_updates_pharmacy_from_list()  {
+		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
+		drugSummaryPage.saveAndUpdatePharmacy();
+	}
+	
+	@When("^user saves and updates \"([^\"]*)\"  from list$")
+	public void user_saves_and_updates_from_list()  {
 		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
 		drugSummaryPage.saveAndUpdatePharmacy();
 	}

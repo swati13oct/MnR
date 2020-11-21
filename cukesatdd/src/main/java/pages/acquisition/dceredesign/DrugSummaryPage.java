@@ -195,6 +195,9 @@ public class DrugSummaryPage extends UhcDriver {
 
 	@FindBy(id = "new-drug-refill")
 	private WebElement drugSupplyLength;
+	
+	@FindBy(xpath  = "//*[@id='changePharmacyLink0']")
+	public WebElement changePharmacyCoverPrescription;
 
 	@Override
 	public void openAndValidate() {
@@ -518,7 +521,7 @@ public class DrugSummaryPage extends UhcDriver {
 	public void clickChangePharmacy() {
 		changePharmacy.click();
 	}
-
+	
 	public DrugSummaryPage selectPharmacyModalDisplayed() throws InterruptedException {
 		waitforElementNew(selectPharmacyHeader, 30);
 		if (validateNew(selectPharmacyHeader)) {
@@ -640,5 +643,11 @@ public class DrugSummaryPage extends UhcDriver {
 		Select supplyLen = new Select(drugSupplyLength);
 		supplyLen.selectByIndex(1);
 		switchToGenericSubmitBtn.click();
+	}
+	
+	public void clickChangePharmacyCoverPrescription() {
+		validate(changePharmacyCoverPrescription);
+		changePharmacyCoverPrescription.click();
+		
 	}
 }

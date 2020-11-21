@@ -335,8 +335,12 @@ public class DrugDetailsPage extends UhcDriver {
 	@FindBy(xpath = "//*[@id='milesDropdown']")
 	private WebElement clickDistanceDefaultMile;
 	
-	@FindBy(xpath = "a#editPharmacyLink")
+	@FindBy(xpath = "//*[@id='editPharmacyLink']")
 	public WebElement editLink;
+	
+	@FindBy(id = "prescriptiondrug")
+	private WebElement prescriptiondrugTab;
+
 	
 	public DrugDetailsPage(WebDriver driver) {
 		super(driver);
@@ -1283,9 +1287,17 @@ public class DrugDetailsPage extends UhcDriver {
 		Assert.assertTrue("Drug not switched to generic", switchToGenericIcon.isDisplayed());
 	}	
 	
-	public void clickEdit() {
+	
+	
+	public void clickEdit() throws InterruptedException {
+		Thread.sleep(6000);
+		validate(prescriptiondrugTab);
+		prescriptiondrugTab.click();
 		validateNew(editLink);
-		editLink.click();
+		JavascriptExecutor je = (JavascriptExecutor) driver;
+		je.executeScript("arguments[0].click();", editLink);
+		
+		//Assert.assertTrue("Drug not switched to generic", editLink.isDisplayed());
 	}
 
 }
