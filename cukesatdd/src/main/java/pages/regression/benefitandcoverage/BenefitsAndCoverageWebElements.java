@@ -120,6 +120,51 @@ public class BenefitsAndCoverageWebElements extends UhcDriver {
 
 	@FindBy(className = "atdd-bnc-drgcvrgeinfo")
 	protected WebElement DrugCoveragetext;
+	
+	@FindBy(id = "myretail_ads-header")
+	protected WebElement AnnualDeductibleStage;
+	
+	@FindBy(xpath = "//table[@class='table-white atdd-bnc-standrdretailpharmcytable ng-scope']//th[@id='standard_ads-header']")
+	protected WebElement NonLisAnnualDeductibleStage;
+	
+	@FindBy(id = "myretail_ics-header")
+	protected WebElement InitialCoverageStage;
+	
+	@FindBy(xpath = "//table[@class='table-white atdd-bnc-standrdretailpharmcytable ng-scope']//th[@id='standard_ics-header']")
+	protected WebElement NonLisInitialCoverageStage;
+	
+	@FindBy(xpath = "//table[@class='table-white atdd-bnc-standrdretailpharmcytable ng-scope']//th[@id='standard_cgp-header']")
+	protected WebElement NonLisCoverageGapStage;
+	
+	@FindBy(id = "myretail_ccs-header")
+	protected WebElement CatastrophicCoverageStage;
+	
+	@FindBy(xpath = "//table[@class='table-white atdd-bnc-standrdretailpharmcytable ng-scope']//th[@id='standard_ccs-header']")
+	protected WebElement NonLisCatastrophicCoverageStage;
+	
+	@FindBy(xpath = "//*[@class='table-white atdd-bnc-standrdretailpharmcytable ng-scope']//p[text()='Tier 1']")
+	protected WebElement Tier1;
+	
+	@FindBy(xpath = "//*[@class='table-white atdd-bnc-standrdretailpharmcytable ng-scope']//p[text()='Tier 2']")
+	protected WebElement Tier2;
+	
+	@FindBy(xpath = "//*[@class='table-white atdd-bnc-standrdretailpharmcytable ng-scope']//p[text()='Tier 3']")
+	protected WebElement Tier3;
+	
+	@FindBy(xpath = "//*[@class='table-white atdd-bnc-standrdretailpharmcytable ng-scope']//p[text()='Tier 4']")
+	protected WebElement Tier4;
+	
+	@FindBy(xpath = "//*[@class='table-white atdd-bnc-standrdretailpharmcytable ng-scope']//p[text()='Tier 5']")
+	protected WebElement Tier5;
+	
+	@FindBy(xpath = "//table[@class='table-white atdd-bnc-drgcsttable']//tr[2]/th[1]")
+	protected WebElement CoveredGenericDrugs;
+	
+	@FindBy(xpath = "//table[@class='table-white atdd-bnc-drgcsttable']//tr[5]/th[1]")
+	protected WebElement AllOtherCoveredDrugs;
+	
+	@FindBy(xpath = "//table[@class='table-white atdd-bnc-drgcsttable']")
+	protected WebElement lisdrugtable;
 
 	@FindBy(xpath = "//p[@class='atdd-bnc-drugcoverage-title']")
 	protected WebElement DrugCoveragetext_pdp;
