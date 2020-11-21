@@ -2288,6 +2288,22 @@ public class BenefitsAndCoverageUmsStepDefinition {
 				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
 		benefitsCoveragePage.validateOutofPocketMax(plantype);
 	}
+	
+	@And("^validating the LIS Drug Copays, Discounts header and drug table for Dsnp indi member$")
+	public void user_validate_lisdrugcopaydiscounttabledsnp(DataTable memberAttributes) {
+	
+		List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		String copaycategory = memberAttributesMap.get("Copay Category");
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE);
+		benefitsCoveragePage.validate_lisornonlisdrugcopayheaderntextntable(copaycategory);
+	}
+
 
 	@Given("^user access retiree pre-enrollment site$")
 	public void access_retiree_preenrollment_site() throws InterruptedException {
