@@ -558,10 +558,12 @@ testGrpLghibUser01/Password@1,MAPD,GRP_LGHIB_PREEFF_PnP,,
 testGrpSeibUser01/Password@1,MAPD,GRP_SEIB_PREEFF_PnP,,
 preeffectiveGroupPDP_001/Password@1,PDP,GRP_PREEFF_PnP,,
 q3_unblockedHPBP_001/Password@1,DSNP_MAPD,Individual_CnS01_BnC,LIS 2,
-q3_unblockedHPBP_003/Password@1,DSNP_MAPD,Individual_CnS02_BnC,LIS 3,
+q3_unblockedHPBP_003/Password@1,DSNP_MAPD,Individual_CnS02_BnC,LIS 1,
 q3_unblockedHPBP_004/Password@1,DSNP_MAPD,Individual_CnS03_BnC,LIS 1,
 q4_dec_evercare_011/Password@1,DSNP_MAPD,Individual_CnS04_BnC,LIS 1,
 q3_unblockedHPBP_011/Password@1,DSNP_MAPD,Individual_CnS05_BnC,LIS 2,
+q3_unblockedHPBP_008/Password@1,DSNP_MAPD,Individual_CnS06_BnC,Non Lis,
+q3_unblockedHPBP_013/Password@1,DSNP_MAPD,Individual_CnS07_BnC,Non Lis,
 q2_AmWell_008/Password@3,DSNP_MAPD,Individual_MnR01_BnC,LIS 1,
 q4_dec_evercare_013/Password@1,DSNP_MAPD,Individual_MnR02_BnC,LIS 1,
 q4_DSNP_087/Password@1,DSNP_MAPD,Individual_MnR03_BnC,LIS 1,
@@ -575,3 +577,5 @@ Q4_insulinDemo_109/Password@1,CSNP_MAPD,Individual_BnC,NON LIS,T123NoD_T45D,hasI
 q4_dec_preISNP/Password@1,ISNP_MAPD,Individual_BnC,NON LIS,T123NoD_T45D,hasInsulin
 q4_insulinDemo_002/Password@1,MAPD,Individual_BnC,NON LIS,NoTier,nonInsulin
 q4_insulinDemo_019/Password@1,MAPD,Individual_BnC,NON LIS,T12345,nonInsulin
+q3_unblockedHPBP_008/Password@1,DSNP_MAPD,Individual_CnS06_BnC,Non Lis,
+q3_unblockedHPBP_013/Password@1,DSNP_MAPD,Individual_CnS07_BnC,Non Lis,
