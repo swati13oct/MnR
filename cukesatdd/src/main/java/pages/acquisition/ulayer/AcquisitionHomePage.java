@@ -23,6 +23,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
 import pages.acquisition.commonpages.PlanDocsPage;
+
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.MRConstants;
 import acceptancetests.data.PageData;
@@ -287,8 +288,11 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(id = "search-field")
 	private static WebElement searchfield;
 
-	@FindBy(id = "dupIconFlyOut")
-	private WebElement shoppingCartIcon;
+    @FindBy(id="dupIconFlyOut")
+    private WebElement shoppingCartIcon;
+    
+    @FindBy(css="a#visitor-profile-header")
+    private WebElement lnkProfile;
 
 	@FindBy(xpath = "//*[@id='sam-call-button']//*[contains(@class,'sam__button__icon')]")
 	private WebElement callsam;
@@ -1702,17 +1706,17 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	 */
 	public VisitorProfilePage navigateToVisitorProfilePage() {
 		waitforElement(shoppingCartIcon);
-		shoppingCartIcon.click();
-		CommonUtility.checkPageIsReadyNew(driver);
+//		shoppingCartIcon.click();
+		jsClickNew(shoppingCartIcon);
+		jsClickNew(lnkProfile);
 		waitForPageLoadSafari();
- 		if (driver.getCurrentUrl().contains("profile")) {
+		if(driver.getCurrentUrl().contains("profile")) {
 			return new VisitorProfilePage(driver);
-		} else {
+		}else {
 			System.out.println("Navigation to visitor profile is failed");
 			return null;
 		}
 	}
-
 	public VPPPlanSummaryPage findPlans(String txtZipCode) {
 
 		zipCode.sendKeys(txtZipCode);
