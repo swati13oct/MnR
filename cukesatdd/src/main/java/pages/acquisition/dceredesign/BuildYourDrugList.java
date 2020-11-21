@@ -249,8 +249,13 @@ public class BuildYourDrugList extends UhcDriver {
 	
 	public void ValidateAddedDrugsList(String druglist) {
 		String[] DrugListItems = druglist.split("&");
-		System.out.println("Added Drug Count : "+DrugListItems.length);
-		for(String currentDrug : DrugListItems) {
+		int i;
+		String currentDrug;
+		int DrugCount_Total = DrugListItems.length-1;
+		System.out.println("Total Added Drug Count : "+DrugCount_Total);
+		System.out.println("Total Added Drug Count : "+DrugCount_Total);
+		for(i=1; i<=DrugCount_Total; i++) {
+			currentDrug = DrugListItems[i];
 			System.out.println("Current Added Drug Name : "+currentDrug);
 			WebElement DrugName = driver.findElement(By.xpath("//uhc-list-item//h4[contains(text(), '"+currentDrug+"')]"));
 			WebElement DrugEditBtn = driver.findElement(By.xpath("//uhc-list-item//button[contains(@aria-label, 'Edit') and contains(@aria-label, '"+currentDrug+"')]"));
@@ -272,6 +277,7 @@ public class BuildYourDrugList extends UhcDriver {
 	}
 
 	public void deleteDrug(String deleteDrug) {
+		System.out.println("Drug to be removed : "+deleteDrug);
 		WebElement removeLink = driver.findElement(By.xpath("//*[contains(@aria-label,'Remove "+deleteDrug+"')]"));
 		jsClickNew(removeLink);
 		
