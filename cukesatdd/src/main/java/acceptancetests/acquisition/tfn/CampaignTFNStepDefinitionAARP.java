@@ -598,6 +598,22 @@ public void the_user_lands_on_AARP_from_External_Link_start_now_Landon_pharmacy_
 	tfnPage.validateFederalTFN(TFNXpath_PlanDetails);	
 	
 }
+
+@Given("^the user is on following acquisition site from External Link and land on MA Page$")
+public void the_user_is_on_following_acquisition_site_from_External_Site_Land_MA(DataTable arg1) throws Throwable {
+	Map<String, String> inputAttributesMap=parseInputArguments(arg1);
+	String Acq_Site = inputAttributesMap.get("Site");
+	String CampaignPath = inputAttributesMap.get("Campaign URL");
+	driver = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+
+	//wd.manage().deleteAllCookies();
+	CampaignTFNPage tfnPage = new CampaignTFNPage(driver);
+	getLoginScenario().saveBean(CommonConstants.WEBDRIVER, driver);
+	tfnPage.OpenPath(Acq_Site, CampaignPath);
+	String TFNXpath_PlanDetails = "//a[contains(@class, 'tel')]";
+	tfnPage.validateFederalTFN(TFNXpath_PlanDetails);
+}
+
 }
 
 

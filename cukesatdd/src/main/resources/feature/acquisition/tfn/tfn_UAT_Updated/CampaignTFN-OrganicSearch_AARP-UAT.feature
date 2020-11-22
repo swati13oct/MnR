@@ -47,7 +47,7 @@ Feature: UAT Scripts-To test Organic SearchCampaign TFN on AARP site
    
 
   #######################Script 6: Campaign Precedence Logic#######################################
-  @Scenario_5_1to8_Precedence_1_AARP_UAT @tfn_Precedence_Campaign_Traffic
+  @Scenario_5_1to8_Precedence_1_AARP_UAT 
   Scenario Outline: 5.1 to 5.8 Campaign Precedence Logic No 1
     #------------------------**********---------------------------------
     # Precedence 5.1 - Visit AMP using Direct URL , PSC code 810106
@@ -206,7 +206,9 @@ Feature: UAT Scripts-To test Organic SearchCampaign TFN on AARP site
       @Scenario4_1_ExternalLink_AARP_UAT
        Scenario Outline: <scenario> 4.7.1 Verify email referral plan functionalities on Plan Details page in UHC site
     Given the user Starts WebDriver
-    Given the user is on AARP medicare acquisition site from Campaign Traffic
+      Given the user is on following acquisition site from Campaign Traffic
+      | Site         | <site>         |
+     # | Campaign URL | <campaignUrl>  |  
       | Campaign URL | <MedsuppUrl>  |    
     And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
     Then the user validates PSC code
@@ -239,7 +241,7 @@ Feature: UAT Scripts-To test Organic SearchCampaign TFN on AARP site
     Then the user navigates to Medsupp Plans in VPP and validates Medsupp TFN
 
      Examples:
-   | scenario            | pscCode  | shoppages    |     shoppagesTFN                                                                 |shoppagescompare|shoppagescompareTFN |shoppagesdsnp                                    |   shoppagesdsnpTFN                                                       |connect |    connectTFN|    maUrl                                          |maTFN                                                             |         MedsuppUrl      |                                                                                                                                                                                                                                                          
-   | Sc. 04.01 - 4.02    |  8003093 |   /shop.html | //button[@id='sam-call-button']//span[contains(@class,'sam__button__text desktop')]]| /shop/compare.html               |//button[@id='sam-call-button']//span[contains(@class,'sam__button__text desktop')]] |shop/dual-special-needs-plans.html  | //button[@id='sam-call-button']//span[contains(@class,'sam__button__text desktop')]]  |  /contact-us.html      |//button[@id='sam-call-button']//span[contains(@class,'sam__button__text desktop')]]     |enroll/ma-enrollment.html|//button[@id='sam-call-button']//span[contains(@class,'sam__button__text desktop')]]|/health-plans.html?product=medsup&EBRC=https://www.aarpmedicaresupplement.com/medicare-information-guide.html&intref=AARPMedicareSupplement.com&zipcode=90210&WT.mc_id=23W&#/plan-summary|
+   | scenario            | site|pscCode  | shoppages    |     shoppagesTFN                                                                 |shoppagescompare|shoppagescompareTFN |shoppagesdsnp                                    |   shoppagesdsnpTFN                                                       |connect |    connectTFN|    maUrl                                          |maTFN                                                             |         MedsuppUrl      |                                                                                                                                                                                                                                                          
+   | Sc. 04.01 - 4.02    |  ulayer|8003093 |   /shop.html | //button[@id='sam-call-button']//span[contains(@class,'sam__button__text desktop')]]| /shop/compare.html               |//button[@id='sam-call-button']//span[contains(@class,'sam__button__text desktop')]] |shop/dual-special-needs-plans.html  | //button[@id='sam-call-button']//span[contains(@class,'sam__button__text desktop')]]  |  /contact-us.html      |//button[@id='sam-call-button']//span[contains(@class,'sam__button__text desktop')]]     |enroll/ma-enrollment.html|//button[@id='sam-call-button']//span[contains(@class,'sam__button__text desktop')]]|/health-plans.html?product=medsup&EBRC=https://www.aarpmedicaresupplement.com/medicare-information-guide.html&intref=AARPMedicareSupplement.com&zipcode=90210&WT.mc_id=23W&#/plan-summary|
     
 	
