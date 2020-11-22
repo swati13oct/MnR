@@ -19,7 +19,7 @@ Feature: UAT Scripts-To test Campaign TFN in all flows on AARP site
    Then the user navigates to Medsupp Plans in VPP and validates Medsupp TFN
  Then the user navigates to PDP Plan Details Page and validates Federal TFN
  Then the user navigates to PDP OLE Page and validates Federal TFN
- And the user clicks on the shopping cart icon in AARP site for campaign TFN
+ #And the user clicks on the shopping cart icon in AARP site for campaign TFN
  #Then the user signs in with optum Id credentials
    #   | User Name | <userName> |
     #  | Password  | <password> |      
@@ -67,6 +67,7 @@ Feature: UAT Scripts-To test Campaign TFN in all flows on AARP site
       Then the user navigate to following Med Supp Plan URL and validate MedSupp TFN
       | MedSupp URL | <medSuppUrl> |
       | TFN Xpath   | <medSuppTFN> | 
+    Then the user navigates to homepage validates Federal TFN
     Then the user navigates to MA Plan Details Page and validates Federal TFN
   #  Then the user navigate to following SNP Plan page URL and validate Federal TFN
   #    | SNP URL   | <snpUrl> |
@@ -205,7 +206,7 @@ Feature: UAT Scripts-To test Campaign TFN in all flows on AARP site
     And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
     Then the user validates PSC code
       | PSC Code | <pscCode> |
-     And the user clicks on the shopping cart icon in AARP site for campaign TFN
+     #And the user clicks on the shopping cart icon in AARP site for campaign TFN
     #Then the user signs in with optum Id credentials for campaign TFN
      # | User Name | <userName> |
      # | Password  | <password> |  

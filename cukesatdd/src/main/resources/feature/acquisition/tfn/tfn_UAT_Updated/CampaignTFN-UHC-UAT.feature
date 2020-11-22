@@ -14,7 +14,7 @@ Feature: UAT-SCripts To test Campaign TFN in all flows on UHC site
    Then the user navigates to Medsupp Plans in VPP and validates Medsupp TFN
  Then the user navigates to PDP Plan Details Page and validates Federal TFN
  Then the user navigates to PDP OLE Page and validates Federal TFN
-  And the user clicks on the shopping cart icon
+  #And the user clicks on the shopping cart icon
  #Then the user signs in with optum Id credentials
    #   | User Name | <userName> |
     #  | Password  | <password> |      
@@ -108,7 +108,7 @@ Feature: UAT-SCripts To test Campaign TFN in all flows on UHC site
     And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
     Then the user validates PSC code
       | PSC Code | <pscCode> |
-     And the user clicks on the shopping cart icon
+     #And the user clicks on the shopping cart icon
     #Then the user signs in with optum Id credentials for campaign TFN
      # | User Name | <userName> |
      # | Password  | <password> |  
