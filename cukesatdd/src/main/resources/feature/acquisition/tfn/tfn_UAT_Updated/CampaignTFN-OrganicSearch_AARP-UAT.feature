@@ -204,7 +204,7 @@ Feature: UAT Scripts-To test Organic SearchCampaign TFN on AARP site
      
      ############################ Script 4: AMS Referral Traffic & Referral Visit###########################################
       @Scenario4_1_ExternalLink_AARP_UAT
-       Scenario Outline: <scenario> 4.7.1 Verify email referral plan functionalities on Plan Details page in UHC site
+       Scenario Outline: <scenario> 4.7.1 Verify Externals referral plan functionalities 
     Given the user Starts WebDriver
       Given the user is on following acquisition site from Campaign Traffic
       | Site         | <site>         |

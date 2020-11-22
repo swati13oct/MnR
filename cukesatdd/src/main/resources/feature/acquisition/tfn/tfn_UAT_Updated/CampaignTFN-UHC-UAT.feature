@@ -73,7 +73,7 @@ Feature: UAT-SCripts To test Campaign TFN in all flows on UHC site
    
    #######################Script 5: Email Validation########################################
    @Scenario_5_2_DirectTraffic_Email_UHC_UAT
-  Scenario Outline: <scenario>  Verify TFN in VPP Plan Details and OLE pages, DCE,
+  Scenario Outline: <scenario>  Verify TFN through Email validation
    Given the user is on the uhcmedicaresolutions site landing page
     And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
     Then the user validates PSC code
@@ -100,7 +100,7 @@ Feature: UAT-SCripts To test Campaign TFN in all flows on UHC site
        
            #######################Script 6: External Link########################################
    @Scenario_6_External_Link_UHC_UAT
-  Scenario Outline: <scenario>  Verify TFN in VPP Plan Details and OLE pages, DCE,
+  Scenario Outline: <scenario>  Verify TFN through External Links
     Given the user Starts WebDriver
     Given the user is on following acquisition site from External Link and land on MA Page
       | Site         | <site>         |
