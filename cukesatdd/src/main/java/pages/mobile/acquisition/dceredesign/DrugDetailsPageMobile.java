@@ -95,19 +95,19 @@ public class DrugDetailsPageMobile extends UhcDriver {
 	@FindBy(xpath = "//h4[contains(text(),'Initial Coverage Stage')]")
 	public WebElement MonthlyDrugStage_InitialCoverageStagerTbl;
 
-	@FindBy(xpath = "//button[contains(@id, 'table_initial_coverage')]")
+	@FindBy(css = "#div_initial_coverage_0")
 	public WebElement MonthlyDrugStage_InitialCoverageLink;
 
-	@FindBy(xpath = "//caption[contains(text(), 'Coverage Gap')]")
+	@FindBy(xpath = "//h4[contains(text(),'Coverage Gap Stage')]")
 	public WebElement MonthlyDrugStage_CoverageGapStagerTbl;
 
-	@FindBy(xpath = "//button[contains(@id, 'table_coverage_gap')]")
+	@FindBy(css = "#div_coverage_gap_0")
 	public WebElement MonthlyDrugStage_CoverageGapLink;
 
-	@FindBy(xpath = "//caption[contains(text(), 'Catastrophic Coverage')]")
+	@FindBy(xpath = "//h4[contains(text(),'Catastrophic Coverage Stage')]")
 	public WebElement MonthlyDrugStage_CatastropheStagerTbl;
 
-	@FindBy(xpath = "//button[contains(@id, 'table_catastrophic_coverage')]")
+	@FindBy(css = "#div_catastrophic_coverage_0")
 	public WebElement MonthlyDrugStage_CatastropheLink;
 
 	@FindBy(xpath = "//h2[contains(text(), 'Important Information')]")
