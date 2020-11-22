@@ -18,7 +18,7 @@ Feature: UAT-SCripts To test Campaign TFN in all flows on UHC site
  #Then the user signs in with optum Id credentials
    #   | User Name | <userName> |
     #  | Password  | <password> |      
-  And the user clicks on the add plans button in the profile
+  #And the user clicks on the add plans button in the profile
   When the user performs plan search using following information
       | Zip Code        | <zipcode>         |
       | Is Multi County | <isMultutiCounty> |

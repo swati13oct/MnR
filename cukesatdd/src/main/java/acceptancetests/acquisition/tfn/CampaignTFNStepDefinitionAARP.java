@@ -520,12 +520,12 @@ public void the_user_lands_on_AARP_from_External_Link_Landon_PDP_Plans(DataTable
 	CampaignTFNPage tfnPage = new CampaignTFNPage(driver);
 	getLoginScenario().saveBean(PageConstants.CAMPAIGN_TFN_PAGE, tfnPage);
 	tfnPage.navigateToCampaignURL(URLpath , EnvironmentUrl);
-	String Zip = "10001";
+	/*String Zip = "10001";
 	tfnPage.HomepagePlanSearch(Zip);
 	String PlanType = "PDP";
 	tfnPage.ViewPlanSummary(PlanType);
 	tfnPage.handlePlanYearSelectionPopup();
-	tfnPage.NavigateToOLE(PlanType);
+	tfnPage.NavigateToOLE(PlanType);*/
 	String TFNXpath_PlanDetails = "//a[contains(@class, 'tel')]";
 	tfnPage.validateFederalTFN(TFNXpath_PlanDetails);	
 }
