@@ -192,7 +192,7 @@ Feature: UAT Scripts-To test Campaign TFN in all flows on AARP site
      Then the user navigates to SNP Plan Details Page and validates Federal TFN 
      Then the user navigates to SNP OLE Page and validates Federal TFN 
      Given the user is on AARP medicare acquisition site from External Link and Land on DCE Page
-      | Campaign URL | <campaignUrl1> 
+      | Campaign URL | <campaignUrl1> |
      Then the user validates Get Started Page
     Then the user clicks on Build Drug List to navigate to Build Drug List Page
     Then the user searches and adds the following Drug to Drug List
@@ -205,7 +205,7 @@ Feature: UAT Scripts-To test Campaign TFN in all flows on AARP site
       | Plan Type | <planType> |
       | Plan Name | <planName> |
      Given the user is on AARP medicare acquisition site from External Link start now and Land on pharmary locator
-         | Campaign URL | <campaignUrl2> 
+         | Campaign URL | <campaignUrl2> |
        And the user enters following details for the pharmacy search
       | Zip Code    | <zipCode>    |
       | Distance    | <distance>   |

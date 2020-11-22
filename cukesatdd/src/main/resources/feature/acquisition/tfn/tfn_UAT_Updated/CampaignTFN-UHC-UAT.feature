@@ -2,7 +2,7 @@ Feature: UAT-SCripts To test Campaign TFN in all flows on UHC site
 
 #######################Script 1: Direct traffic########################################
    @Scenario_1_2_DirectTraffic__UHC_UAT 
-  Scenario Outline: <scenario> 1.0 Verify TFN in VPP Plan Details and OLE pages, DCE,
+  Scenario Outline: <scenario>  Verify TFN in VPP Plan Details and OLE pages, DCE,
     Given the user is on the uhcmedicaresolutions site landing page
     And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
     Then the user validates PSC code
@@ -45,7 +45,7 @@ Feature: UAT-SCripts To test Campaign TFN in all flows on UHC site
    #######################Script 2: Campaign traffic########################################
  
    @Scenario_2_CampaignTraffic_UHC_UAT 
-  Scenario Outline: <Scenario>1.0 Verify TFN for different plan types through Campaign Traffic
+  Scenario Outline: <Scenario> Verify TFN for different plan types through Campaign Traffic
    	Given the user Starts WebDriver
       Given the user is on following acquisition site from Campaign Traffic
       | Site         | <site>         |
@@ -67,13 +67,13 @@ Feature: UAT-SCripts To test Campaign TFN in all flows on UHC site
    Then the user navigates to SNP OLE Page and validates Federal TFN in UHC
     Examples: 
      |scenario             | site    |pscCode  | campaignUrl                                                                 | maUrl                                    |   maTFN                                                       | pdpUrl                                  | pdpTFN                                                         | snpUrl                                                                                                                                                                                                                                                                                                                      | snpTFN                       | decisionGuideUrl                                                          | decisionGuideTFN     | agentApptUrl                                                     | agentApptTFN   |medSuppUrl|medSuppTFN|shoppages|shoppagesTFN|connectUrl|connectTFN|
-     |Scenario 2 - UMS     | blayer | 8003728 | health-plans/medicare-advantage-plans/available-plans.html?WT.mc_id=8003728&county=053&state=27#/plan-summary  | enroll/ma-enrollment.html   |  //*[contains(@class,'call')]//a[contains(@class,'tel')]  | enroll/pdp-enrollment.html | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | health-plans.html?zipcode=28035&deepLink=favPlansDeepLink&plantype=MA&year=2020&planId=H5253041000&planYear=2020&systemYear=2020&zipcode=28035&fipsCode=119&product=MAPD&yearDisclaimer=undefined&month=2&yearToggle=undefined&deepLink=plandetail&WT.mc_id=897749&mrcid=em:Acq:MR%7cFederal%7cEGEM3011%7c::897749!/details | //a[contains(@class, 'tel')] | health-plans/medicare-supplement-plans/medicare-information.html?vpp=true | //*[@id='tfn']       | health-plans/medicare-supplement-plans/agent-appointment.html    | //*[@id='tfn'] |shop/medicare-supplement-plans.html|(//*[contains(@class,'call')]//a[contains(@class,'tel')])[2]|/contact-us.html|(//*[contains(@class,'call')]//a[contains(@class,'tel')])[1]|/contact-us.html|  (//a[contains(@class, 'tel')])[1]     |
+     |Scenario 2 - UMS     | blayer | 8003728 | health-plans/medicare-advantage-plans/available-plans.html?WT.mc_id=8003728&county=053&state=27#/plan-summary  | enroll/ma-enrollment.html   |  (//*[contains(@class,'call')]//a[contains(@class,'tel')])[1]  | enroll/pdp-enrollment.html | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | health-plans.html?zipcode=28035&deepLink=favPlansDeepLink&plantype=MA&year=2020&planId=H5253041000&planYear=2020&systemYear=2020&zipcode=28035&fipsCode=119&product=MAPD&yearDisclaimer=undefined&month=2&yearToggle=undefined&deepLink=plandetail&WT.mc_id=897749&mrcid=em:Acq:MR%7cFederal%7cEGEM3011%7c::897749!/details | //a[contains(@class, 'tel')] | health-plans/medicare-supplement-plans/medicare-information.html?vpp=true | //*[@id='tfn']       | health-plans/medicare-supplement-plans/agent-appointment.html    | //*[@id='tfn'] |shop/medicare-supplement-plans.html|(//*[contains(@class,'call')]//a[contains(@class,'tel')])[2]|/contact-us.html|(//*[contains(@class,'call')]//a[contains(@class,'tel')])[1]|/contact-us.html |  //button[@id='sam-call-button']//span[contains(@class,'sam__button__text desktop')] |
    
    
    
    #######################Script 5: Email Validation########################################
    @Scenario_5_2_DirectTraffic_Email_UHC_UAT
-  Scenario Outline: <scenario> 1.0 Verify TFN in VPP Plan Details and OLE pages, DCE,
+  Scenario Outline: <scenario>  Verify TFN in VPP Plan Details and OLE pages, DCE,
    Given the user is on the uhcmedicaresolutions site landing page
     And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
     Then the user validates PSC code
@@ -100,7 +100,7 @@ Feature: UAT-SCripts To test Campaign TFN in all flows on UHC site
        
            #######################Script 6: External Link########################################
    @Scenario_6_External_Link_UHC_UAT
-  Scenario Outline: <scenario> 1.0 Verify TFN in VPP Plan Details and OLE pages, DCE,
+  Scenario Outline: <scenario>  Verify TFN in VPP Plan Details and OLE pages, DCE,
     Given the user Starts WebDriver
     Given the user is on following acquisition site from External Link and land on MA Page
       | Site         | <site>         |
