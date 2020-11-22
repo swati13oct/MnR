@@ -19,6 +19,7 @@ Feature: UAT-SCripts To test Campaign TFN in all flows on UHC site
    #   | User Name | <userName> |
     #  | Password  | <password> |      
   #And the user clicks on the add plans button in the profile
+  Then the user navigates to homepage validates Federal TFN
   When the user performs plan search using following information
       | Zip Code        | <zipcode>         |
       | Is Multi County | <isMultutiCounty> |
@@ -53,7 +54,7 @@ Feature: UAT-SCripts To test Campaign TFN in all flows on UHC site
     And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
     Then the user validates PSC code
       | PSC Code | <pscCode> |
-      Then the user navigate to following Med Supp Plan URL and validate MedSupp TFN
+      Then the user navigate to following MedED Pages URL and validate Federal TFN
       | MedSupp URL | <connectUrl> |
       | TFN Xpath   | <connectTFN> | 
    Then the user navigates to following MA Plan Page URL and validate Federal TFN

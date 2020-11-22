@@ -126,6 +126,7 @@ public class CampaignTFNStepDefinitionAARP {
 		CampaignTFNPage tfnPage = (CampaignTFNPage) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE);
 		tfnPage.navigateToUrl(URLpath);
 		tfnPage.validateMedSuppTFN(TFN_Xpath);
+		//tfnPage.validateFederalTFN(TFN_Xpath);
 	}
 
 	@Given("^the user is on AARP medicare acquisition site from Campaign Traffic$")
@@ -612,6 +613,17 @@ public void the_user_is_on_following_acquisition_site_from_External_Site_Land_MA
 	tfnPage.OpenPath(Acq_Site, CampaignPath);
 	String TFNXpath_PlanDetails = "//a[contains(@class, 'tel')]";
 	tfnPage.validateFederalTFN(TFNXpath_PlanDetails);
+}
+
+@Then("^the user navigate to following MedED Pages URL and validate Federal TFN$")
+public void the_user_navigate_to_following_MedED_Pages_URL_and_validate_Federal_TFN(DataTable arg1) throws Throwable {
+	Map<String, String> inputAttributesMap=parseInputArguments(arg1);
+	String URLpath = inputAttributesMap.get("MedSupp URL");
+	String TFN_Xpath = inputAttributesMap.get("TFN Xpath");
+	CampaignTFNPage tfnPage = (CampaignTFNPage) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE);
+	tfnPage.navigateToUrl(URLpath);
+	//tfnPage.validateMedSuppTFN(TFN_Xpath);
+	tfnPage.validateFederalTFN(TFN_Xpath);
 }
 
 }

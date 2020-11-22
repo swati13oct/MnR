@@ -13,7 +13,7 @@ Feature: UAT Scripts-To test Campaign TFN in all flows on AARP site
    # Then the user navigates to following MA Plan Page URL and validate Federal TFN
      # | MA URL    | <maUrl> |
      # | TFN Xpath | <maTFN> |
-    Then the user navigates to following  Medicare Education Page URL and validate Federal TFN  
+    Then the user navigate to following MedED Pages URL and validate Federal TFN  
       | MEDICARE URL    | <medicareUrl> |
       | TFN Xpath | <medicareTFN> |
    Then the user navigates to Medsupp Plans in VPP and validates Medsupp TFN
@@ -24,6 +24,7 @@ Feature: UAT Scripts-To test Campaign TFN in all flows on AARP site
    #   | User Name | <userName> |
     #  | Password  | <password> |      
  # And the user clicks on the add plans button in the profile
+ Then the user navigates to homepage validates Federal TFN
   When the user performs plan search using following information in the AARP site
       | Zip Code        | <zipcode>         |
       | Is Multi County | <isMultutiCounty> |
@@ -147,7 +148,7 @@ Feature: UAT Scripts-To test Campaign TFN in all flows on AARP site
       
     Examples:  
        |scenario                  | pscCode |pscCode1| emailLinkUrl                                                                                      | emailLinkTFN                                                                      | medicareUrl                                   | medicareTFN                                                         | shoppagesUrl|      shoppagesTFN             |
-       |Scenario 7-Email - AMP 	|  810027 | 8013925|/?WT.mc_id=8013925&mrcid=em:Acq:MR%7CNTM65%7CEGEM3107%7C::8013925 |//button[@id='sam-call-button']//span[contains(@class,'sam__button__text desktop')]|medicare-articles.html                         |//button[@id='sam-call-button']//span[contains(@class,'sam__button__text desktop')]|  shop/medicare-supplement-plans.html                       |//button[@id='sam-call-button']//span[contains(@class,'sam__button__text desktop')]|
+       |Scenario 7-Email - AMP 	|  810027 | 8013925|/?WT.mc_id=8013925&mrcid=em:Acq:MR%7CNTM65%7CEGEM3107%7C::8013925 |(//a[contains(@class, 'tel')])[1]|medicare-articles.html                         |//button[@id='sam-call-button']//span[contains(@class,'sam__button__text desktop')]|  shop/medicare-supplement-plans.html                       |//button[@id='sam-call-button']//span[contains(@class,'sam__button__text desktop')]|
        
        #######################Script 8: External Link PDP########################################
    @Scenario_8_External_Link_PDP_UAT

@@ -38,7 +38,7 @@ Feature: UAT Scripts-To test Organic SearchCampaign TFN on AARP site
      Then the user navigates to shop pages Page and validates Federal TFN
      | SHOPPAGES URL   | <shoppages> |
       | TFN Xpath | <shoppagesTFN> |
-     Then the user navigate to following Med Supp Plan URL and validate MedSupp TFN
+     Then the user navigate to following MedED Pages URL and validate Federal TFN
        | MedSupp URL | <medicareeduUrl> |
       | TFN Xpath   | <medicareeduTFN> |
     Examples: 
