@@ -241,183 +241,153 @@ public class SiteSearchMobile {
 		}
 		return memberAttributesMap;
 	}
-	
-	
+
 	/**
-	 * @toDo:user Click on Is my Provider covered link 
+	 * @toDo:user Click on Is my Provider covered link
 	 */
-		@When("^the user Click on Is my Provider covered link$")
-		public void clickonProvidercoveredlink(DataTable Planname ){
-			List<DataTableRow> plannameAttributesRow = Planname
-					.getGherkinRows();
-			Map<String, String> plannameAttributesMap = new HashMap<String, String>();
-			for (int i = 0; i < plannameAttributesRow.size(); i++) {
+	@When("^the user Click on Is my Provider covered link$")
+	public void clickonProvidercoveredlink(DataTable Planname) {
+		List<DataTableRow> plannameAttributesRow = Planname.getGherkinRows();
+		Map<String, String> plannameAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < plannameAttributesRow.size(); i++) {
 
-				plannameAttributesMap.put(plannameAttributesRow.get(i).getCells()
-						.get(0), plannameAttributesRow.get(i).getCells().get(1));
-			}
-			String planName = plannameAttributesMap.get("PlanName");
-			getLoginScenario().saveBean(VPPCommonConstants.PLAN_NAME, planName);
-			VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario().getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-			
-			pages.mobile.acquisition.ulayer.ProviderSearchPageMobile providerSearchPage = plansummaryPage.clicksOnIsProviderCovered(planName);
-			if(providerSearchPage!=null) {
-				getLoginScenario().saveBean(PageConstants.PROVIDER_SEARCH_PAGE, providerSearchPage);
-			}
+			plannameAttributesMap.put(plannameAttributesRow.get(i).getCells().get(0),
+					plannameAttributesRow.get(i).getCells().get(1));
 		}
-	
-	
-	
-	
-		/**
-		 * @toDo:user user selects a provider
-		 */
-			
-		@When("^user selects a provider and retuns to VPP page$")
-		public void user_selects_provider_and_return_vpp_page_ulayer() {
-			pages.mobile.acquisition.ulayer.ProviderSearchPageMobile providerSearchPage = (pages.mobile.acquisition.ulayer.ProviderSearchPageMobile) getLoginScenario()
+		String planName = plannameAttributesMap.get("PlanName");
+		getLoginScenario().saveBean(VPPCommonConstants.PLAN_NAME, planName);
+		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+
+		pages.mobile.acquisition.ulayer.ProviderSearchPageMobile providerSearchPage = plansummaryPage
+				.clicksOnIsProviderCovered(planName);
+		if (providerSearchPage != null) {
+			getLoginScenario().saveBean(PageConstants.PROVIDER_SEARCH_PAGE, providerSearchPage);
+		}
+	}
+
+	/**
+	 * @toDo:user user selects a provider
+	 */
+
+	@When("^user selects a provider and retuns to VPP page$")
+	public void user_selects_provider_and_return_vpp_page_ulayer() {
+		pages.mobile.acquisition.ulayer.ProviderSearchPageMobile providerSearchPage = (pages.mobile.acquisition.ulayer.ProviderSearchPageMobile) getLoginScenario()
+				.getBean(PageConstants.PROVIDER_SEARCH_PAGE);
+		VPPPlanSummaryPageMobile plansummaryPage = providerSearchPage.selectsProvider();
+		Assert.assertTrue("Not able to return to Plan Summary page", plansummaryPage != null);
+	}
+
+	/**
+	 * @toDo:Verify X out of Y provider covered information is displayed on Plan
+	 *              Summary page
+	 */
+	@Then("^Verify X out of Y provider covered information is displayed on Plan Summary page$")
+	public void verify_providers_covered_ulayer(DataTable Planname) {
+		List<DataTableRow> plannameAttributesRow = Planname.getGherkinRows();
+		Map<String, String> plannameAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < plannameAttributesRow.size(); i++) {
+
+			plannameAttributesMap.put(plannameAttributesRow.get(i).getCells().get(0),
+					plannameAttributesRow.get(i).getCells().get(1));
+		}
+		String planName = plannameAttributesMap.get("PlanName");
+
+		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		plansummaryPage.verifyproviderName(planName);
+	}
+
+	/**
+	 * @toDo:Verify provider covered information is displayed on Plan Summary page
+	 */
+	@Then("^Verify provider name is displayed on Plan Summary page$")
+	public void verify_provider_covered_ulayer(DataTable Planname) {
+
+		List<DataTableRow> plannameAttributesRow = Planname.getGherkinRows();
+		Map<String, String> plannameAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < plannameAttributesRow.size(); i++) {
+
+			plannameAttributesMap.put(plannameAttributesRow.get(i).getCells().get(0),
+					plannameAttributesRow.get(i).getCells().get(1));
+		}
+		String planName = plannameAttributesMap.get("PlanName");
+
+		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		plansummaryPage.verifyproviderName(planName);
+	}
+
+	@Then("^the user navigates to the plan details page$")
+	public void user_navigates_to_plan_details_page(DataTable givenAttributes) {
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		String PlanName = memberAttributesRow.get(0).getCells().get(1);
+		getLoginScenario().saveBean(VPPCommonConstants.PLAN_NAME, PlanName);
+
+		VPPPlanSummaryPageMobile vppPlanSummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+
+		String planType = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
+		System.out.println("Plan name is " + PlanName + "Plan type is " + planType);
+		pages.mobile.acquisition.ulayer.PlanDetailsPageMobile vppPlanDetailsPage = vppPlanSummaryPage
+				.navigateToPlanDetails(PlanName, planType);
+		if (vppPlanDetailsPage != null) {
+			getLoginScenario().saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE, vppPlanDetailsPage);
+			Assert.assertTrue(true);
+		} else
+			Assert.fail("Error in Loading the Plan Details Page");
+
+	}
+
+	@Then("^the user Click on Look up your Provider button on Plan Details Page$")
+	public void user_Clicks_on_Look_upyourProvider_button_on_PlanDetailsPage() {
+
+		pages.mobile.acquisition.ulayer.PlanDetailsPageMobile vppPlanDetailsPage = (pages.mobile.acquisition.ulayer.PlanDetailsPageMobile) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
+
+		ProviderSearchPageMobile providerSearchPage = vppPlanDetailsPage.validateLookUpYourProviderButton();
+		if (providerSearchPage != null) {
+			getLoginScenario().saveBean(PageConstants.PROVIDER_SEARCH_PAGE, providerSearchPage);
+		}
+
+	}
+
+	@When("^user selects a provider and retuns to VPP plan details page$")
+	public void user_selects_provider_and_return_vpp_Plan_details_page_ulayer() {
+		{
+			ProviderSearchPageMobile providerSearchPage = (ProviderSearchPageMobile) getLoginScenario()
 					.getBean(PageConstants.PROVIDER_SEARCH_PAGE);
-			VPPPlanSummaryPageMobile plansummaryPage = providerSearchPage.selectsProvider();
-			Assert.assertTrue("Not able to return to Plan Summary page", plansummaryPage != null);
-		}
-			
-		/**
-		 * @toDo:Verify X out of Y provider covered information is displayed on Plan
-		 *              Summary page
-		 */
-		@Then("^Verify X out of Y provider covered information is displayed on Plan Summary page$")
-		public void verify_providers_covered_ulayer(DataTable Planname) {
-			List<DataTableRow> plannameAttributesRow = Planname.getGherkinRows();
-			Map<String, String> plannameAttributesMap = new HashMap<String, String>();
-			for (int i = 0; i < plannameAttributesRow.size(); i++) {
-
-				plannameAttributesMap.put(plannameAttributesRow.get(i).getCells().get(0),
-						plannameAttributesRow.get(i).getCells().get(1));
-			}
-			String planName = plannameAttributesMap.get("PlanName");
-
-			VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
-					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-			plansummaryPage.verifyproviderName(planName);
-		}
-	
-	
-		/**
-		 * @toDo:Verify provider covered information is displayed on Plan Summary page
-		 */
-		@Then("^Verify provider name is displayed on Plan Summary page$")
-		public void verify_provider_covered_ulayer(DataTable Planname) {
-
-			List<DataTableRow> plannameAttributesRow = Planname.getGherkinRows();
-			Map<String, String> plannameAttributesMap = new HashMap<String, String>();
-			for (int i = 0; i < plannameAttributesRow.size(); i++) {
-
-				plannameAttributesMap.put(plannameAttributesRow.get(i).getCells().get(0),
-						plannameAttributesRow.get(i).getCells().get(1));
-			}
-			String planName = plannameAttributesMap.get("PlanName");
-
-			VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
-					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-			plansummaryPage.verifyproviderName(planName);
-		}
-
-	
-		@Then("^the user navigates to the plan details page$")
-		public void user_navigates_to_plan_details_page(DataTable givenAttributes) {
-			List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-			String PlanName = memberAttributesRow.get(0).getCells().get(1);
-			getLoginScenario().saveBean(VPPCommonConstants.PLAN_NAME, PlanName);
-
-			VPPPlanSummaryPageMobile vppPlanSummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
-					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-
-			String planType = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
-			System.out.println("Plan name is "+ PlanName+"Plan type is "+planType);
-			pages.mobile.acquisition.ulayer.PlanDetailsPageMobile vppPlanDetailsPage = vppPlanSummaryPage.navigateToPlanDetails(PlanName,planType);
-			if (vppPlanDetailsPage != null) {
-				getLoginScenario().saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE, vppPlanDetailsPage);
-				Assert.assertTrue(true);
-			} else
-				Assert.fail("Error in Loading the Plan Details Page");
+			pages.mobile.acquisition.ulayer.PlanDetailsPageMobile planDetailsPage = providerSearchPage
+					.selectsProviderFromVppPlanDetailsPage();
+			Assert.assertTrue("Not able to return to Plan Details page", planDetailsPage != null);
 
 		}
-		
-		
-		@Then("^the user Click on Look up your Provider button on Plan Details Page$")
-		public void user_Clicks_on_Look_upyourProvider_button_on_PlanDetailsPage() {
+	}
 
-			pages.mobile.acquisition.ulayer.PlanDetailsPageMobile vppPlanDetailsPage = (pages.mobile.acquisition.ulayer.PlanDetailsPageMobile) getLoginScenario()
-					.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
+	@Then("^Verify X out of Y provider covered information is displayed on Plan Details page$")
+	public void verify_providers_covered_ulayer_planDetails() {
+		pages.mobile.acquisition.ulayer.PlanDetailsPageMobile vppPlanDetailsPage = (pages.mobile.acquisition.ulayer.PlanDetailsPageMobile) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
+		Assert.assertTrue("Provider coverage Info not updated", vppPlanDetailsPage.providerinfo());
+	}
 
-			ProviderSearchPageMobile providerSearchPage = vppPlanDetailsPage.validateLookUpYourProviderButton();
-			if(providerSearchPage!=null) {
-				getLoginScenario().saveBean(PageConstants.PROVIDER_SEARCH_PAGE, providerSearchPage);
-			}
+	/**
+	 * @toDo: user performs plan search using following information
+	 */
+	@When("^the user click on Provider Search on the Home Page$")
+	public void providerSearch_details_in_aarp_site_from_HomePage1() {
 
+		AcquisitionHomePageMobile acquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+
+		pages.mobile.acquisition.bluelayer.ProviderSearchPageMobile providerSearchPage = acquisitionhomepage
+				.clicksOnRallyToolFromHomePage();
+
+		if (providerSearchPage != null) {
+			getLoginScenario().saveBean(PageConstants.PROVIDER_SEARCH_PAGE, providerSearchPage);
+		} else {
+			Assert.fail("Error Loading Rally tool from Home Page");
 		}
-		
-		
-		
-		@When("^user selects a provider and retuns to VPP plan details page$")
-		public void user_selects_provider_and_return_vpp_Plan_details_page_ulayer() {
-			{
-				ProviderSearchPageMobile providerSearchPage = (ProviderSearchPageMobile) getLoginScenario()
-						.getBean(PageConstants.PROVIDER_SEARCH_PAGE);
-				pages.mobile.acquisition.ulayer.PlanDetailsPageMobile planDetailsPage = providerSearchPage.selectsProviderFromVppPlanDetailsPage();
-				Assert.assertTrue("Not able to return to Plan Details page", planDetailsPage != null);
-
-			}
-		}
-		
-		@Then("^Verify X out of Y provider covered information is displayed on Plan Details page$")
-		public void verify_providers_covered_ulayer_planDetails() {
-			PlanDetailsPageMobile vppPlanDetailsPage = (PlanDetailsPageMobile) getLoginScenario()
-					.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
-			Assert.assertTrue("Provider coverage Info not updated", vppPlanDetailsPage.providerinfo());
-		}
-		
-		
-		
-		/**
-		 * @toDo: user performs plan search using following information
-		 */
-		@When("^the user click on Provider Search on the Home Page$")
-		public void providerSearch_details_in_aarp_site_from_HomePage1() {
-			
-			AcquisitionHomePageMobile acquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
-					.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-			
-			pages.mobile.acquisition.bluelayer.ProviderSearchPageMobile providerSearchPage = acquisitionhomepage.clicksOnRallyToolFromHomePage();
-
-			if (providerSearchPage != null) {
-				getLoginScenario().saveBean(PageConstants.PROVIDER_SEARCH_PAGE, providerSearchPage);
-			} else {
-				Assert.fail("Error Loading Rally tool from Home Page");
-			}
-		}
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-	
+	}
 
 }

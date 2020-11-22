@@ -23,6 +23,9 @@ public class ZipCodeAndPlanYearCapturePageMobile extends UhcDriver {
 	@FindBy(xpath = "//span[@id='zipError']")
 	public WebElement zipCodeErrorMsg;
 
+	@FindBy(xpath = "//button[contains(text(),'Return to page')]")
+	public WebElement returnToPage;
+
 	@FindBy(xpath = "//select[@id='county']/option")
 	public WebElement countyRows;
 
@@ -195,7 +198,13 @@ public class ZipCodeAndPlanYearCapturePageMobile extends UhcDriver {
 	public ZipCodeAndPlanYearCapturePageMobile validateZipCodeErrorMessage() {
 		// String[] zip = zipcode.split(",");
 		// for(String code: zip) {
-		validateNew(zipCodeTxtbox);
+
+		if (returnToPage.isDisplayed()) {
+			jsClickNew(returnToPage);
+			System.out.println("New Popup for wrong zipcode displayed");
+			return new ZipCodeAndPlanYearCapturePageMobile(driver);
+		} else
+			validateNew(zipCodeTxtbox);
 		// sendkeys(zipCodeTxtbox, zipcode);
 		validateNew(continueBtn);
 

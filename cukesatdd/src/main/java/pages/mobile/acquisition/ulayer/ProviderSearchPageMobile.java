@@ -62,7 +62,7 @@ public class ProviderSearchPageMobile extends UhcDriver {
 	@FindBy(xpath = "//button[@data-test-id='button-close']")
 	private WebElement Viewsavebtn;
 
-	@FindBy(xpath = "//*[contains(@class,'action-btn') and contains(text(),'Finish')]")
+	@FindBy(xpath = "(//*[contains(@class,'action-btn') and contains(text(),'Finish')])[2]")
 	private WebElement finishReturnBtn;
 
 	@FindBy(xpath = "//*[text()='View Saved']")
