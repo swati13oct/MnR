@@ -30,7 +30,7 @@ Feature: 1.12 UAT - Header and Footer flows
     And user clicks on agents&brokers link on disclaimers page
     And the user clicks on browser back button
     And user verifies home link of agents&brokers page
-    And the user clicks on browser back button
+   # And the user clicks on browser back button
     When user accesses global header of the Medicare Plans home page
     And user verifies the logo on home page
     And user clicks on Sign in link on home page
@@ -42,10 +42,10 @@ Feature: 1.12 UAT - Header and Footer flows
       | Scenario           | site | zipcode | isMultutiCounty | county    |
       | E2E Scenario_3 AMP | AARP |   80001 | No              | Jefferson |
 
-    @globalfooter_UHC
-    Examples: 
-      | Scenario           | site | zipcode | isMultutiCounty | county   |
-      | E2E Scenario_3 UMS | UHC  |   10001 | No              | New York |
+    #@globalfooter_UHC
+    #Examples: 
+      #| Scenario           | site | zipcode | isMultutiCounty | county   |
+      #| E2E Scenario_3 UMS | UHC  |   10001 | No              | New York |
 
   @globalfooterULayer @Choice
   Scenario Outline: <Scenario> : To verify links displayed in the global footer on DCE page.
@@ -84,10 +84,10 @@ Feature: 1.12 UAT - Header and Footer flows
       | Scenario           | site |
       | E2E Scenario_4 AMP | AARP |
 
-    @globalfooter_UHC
-    Examples: 
-      | Scenario           | site |
-      | E2E Scenario_4 UMS | UHC  |
+    #@globalfooter_UHC
+    #Examples: 
+      #| Scenario           | site |
+      #| E2E Scenario_4 UMS | UHC  |
 
   @globalheaderULayer
   Scenario Outline: <Scenario> : To verify links displayed in the global header of AARP site
@@ -104,10 +104,10 @@ Feature: 1.12 UAT - Header and Footer flows
       | Scenario           | site |
       | E2E Scenario_3 AMP | AARP |
 
-    @globalheader
-    Examples: 
-      | Scenario           | site |
-      | E2E Scenario_3 UMS | UHC  |
+    #@globalheader
+    #Examples: 
+      #| Scenario           | site |
+      #| E2E Scenario_3 UMS | UHC  |
 
   @globalheaderULayer
   Scenario Outline: <Scenario> : To verify links displayed in the global header from DCE
@@ -125,7 +125,7 @@ Feature: 1.12 UAT - Header and Footer flows
       | Scenario           | site |
       | E2E Scenario_4 AMP | AARP |
 
-    @globalheader
-    Examples: 
-      | Scenario           | site |
-      | E2E Scenario_4 UMS | UHC  |
+    #@globalheader
+    #Examples: 
+      #| Scenario           | site |
+      #| E2E Scenario_4 UMS | UHC  |

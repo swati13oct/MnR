@@ -97,7 +97,7 @@ public class GlobalComponentsCommonStepDefinition {
 	public void the_user_validates_visitor_profile_aarp() throws Throwable {
 		AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		aquisitionhomepage.MenuCrossMobile.click();
+		//aquisitionhomepage.MenuCrossMobile.click();
 		
 		aquisitionhomepage.validatevisitorprofile();
 	}

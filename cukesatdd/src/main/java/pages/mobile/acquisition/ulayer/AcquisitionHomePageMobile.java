@@ -315,7 +315,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 	@FindBy(id = "dupIconFlyOut")
 	private WebElement shoppingCartIcon;
-	
+
 	@FindBy(xpath = "//h3[@id='guest-profile']")
 	private WebElement guestProfileLink;
 
@@ -857,11 +857,11 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	}
 
 	public AboutUsAARPPageMobile aboutUsFooterClick() {
-		waitforElementVisibilityInTime(navigationSectionHomeLink, 10);
 		validateNew(footerAboutUsLink);
-		// footerAboutUsLink.click();
+		scrollToView(footerAboutUsLink);
 		jsClickNew(footerAboutUsLink);
 		CommonUtility.checkPageIsReadyNew(driver);
+		validateNew(footerLinkHeader, 30);
 		if (getTitle().contains("About UnitedHealthcare")) {
 			return new AboutUsAARPPageMobile(driver);
 		}
@@ -1694,7 +1694,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		MobileMenuShopTool();
 		scrollToView(providerSearchFromGlobalHeader);
 		jsClickNew(providerSearchFromGlobalHeader);
-		//(providerSearchFromGlobalHeader);
+		// (providerSearchFromGlobalHeader);
 
 		switchToNewTabNew(providerSearchFromGlobalHeader);
 
@@ -1706,8 +1706,6 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		}
 		return null;
 	}
-	
-	
 
 	public pages.mobile.acquisition.ulayer.ProviderSearchPageMobile clicksOnRallyToolFromHomePages() {
 		validateNew(providerSearchFromHomeScreen);
@@ -1722,7 +1720,6 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		}
 		return null;
 	}
-	
 
 	public pages.mobile.acquisition.bluelayer.ProviderSearchPageMobile clicksOnRallyToolFromHomePage() {
 		validateNew(providerSearchFromHomeScreen);
@@ -1737,8 +1734,6 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		}
 		return null;
 	}
-	
-	
 
 	public AcquisitionHomePageMobile hovershopaplan() throws InterruptedException {
 
@@ -2070,13 +2065,13 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	}
 
 	public void validateDisclaimer() {
-		
+
 		scrollToView(disclaimerInformation);
 		validateNew(disclaimerInformation);
 		// disclaimerInformation.click();
 		jsClickNew(disclaimerInformation);
-		validateNew(backToTop_Disclaimer,3);
-	
+		validateNew(backToTop_Disclaimer, 3);
+
 	}
 
 	public void validateVisitAarpOrglink() {
@@ -2352,8 +2347,8 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		if (headerRegisterLink.isDisplayed() && headerRegisterLink.isEnabled()) {
 			Assert.assertTrue(true);
 			System.out.println("Register link is displayed on home page");
-//			scrollToView(MenuCrossMobile);
-//			jsClickNew(MenuCrossMobile);
+			scrollToView(MenuCrossMobile);
+			jsClickNew(MenuCrossMobile);
 		} else {
 			Assert.fail("Register link is not found/ displayed on home page");
 		}
@@ -2816,45 +2811,46 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	}
 
 	public void validatevisitorprofile() {
-		
-		if (visitorprofileicon.isDisplayed()) {
-//			Actions actions = new Actions(driver);
-//			actions.moveToElement(visitorprofileicon).perform();
-			jsClickNew(visitorprofileicon);
-			System.out.println("Hover over visitor profile completed");
-		}
-		WebElement CreateProfile = driver.findElement(By.xpath("//div/a[contains(text(),'Create a profile')]"));
-		WebElement VPSignIn = driver.findElement(
-				By.xpath("//a[.='Sign In ']"));
-		scrollToView(CreateProfile);
-		validateNew(CreateProfile);
-		scrollToView(VPSignIn);
-		validateNew(VPSignIn);
-		if (CreateProfile.isEnabled() && VPSignIn.isEnabled()) {
-			Assert.assertTrue(true);
-			System.out.println("Visitor Profile elements are present on home page");
-		} else {
-			Assert.fail("Visitor Profile elements are not present on home page");
-		}
-		//visitorprofileicon.click();
+
+		// if (visitorprofileicon.isDisplayed()) {
+		//// Actions actions = new Actions(driver);
+		//// actions.moveToElement(visitorprofileicon).perform();
+		// jsClickNew(visitorprofileicon);
+		// System.out.println("Hover over visitor profile completed");
+		// }
+		// WebElement CreateProfile = driver.findElement(By.xpath("//a[contains(text(),
+		// 'Create Profile')]"));
+		// WebElement VPSignIn = driver.findElement(
+		// By.xpath("//a[.='Sign In ']"));
+		// scrollToView(CreateProfile);
+		// validateNew(CreateProfile);
+		// scrollToView(VPSignIn);
+		// validateNew(VPSignIn);
+		// if (CreateProfile.isEnabled() && VPSignIn.isEnabled()) {
+		// Assert.assertTrue(true);
+		// System.out.println("Visitor Profile elements are present on home page");
+		// } else {
+		// Assert.fail("Visitor Profile elements are not present on home page");
+		// }
+
 		jsClickNew(visitorprofileicon);
 		WebElement GuestProfile = driver.findElement(By.xpath("//*[contains(text(), 'Your Guest Profile')]"));
-		CheckPageLoad();
-		CheckiPerseptions();
-		CommonUtility.waitForPageLoadNew(driver, GuestProfile, 30);
+		// CheckPageLoad();
+		// CheckiPerseptions();
+		scrollToView(GuestProfile);
 		if (driver.getCurrentUrl().contains("profile")) {
 			Assert.assertTrue(true);
 			System.out.println("Visitor Profile Page opens successsfully");
 		} else {
 			Assert.fail("Visitor Profile page is not opening up");
 		}
-//		clickBrowserBackButton();
-//		CheckPageLoad();
-//		CheckiPerseptions();
+		// clickBrowserBackButton();
+		// CheckPageLoad();
+		// CheckiPerseptions();
 		jsClickNew(AARPlogo);
 		validate(findPlansButton);
 
-//		CommonUtility.waitForPageLoadNew(driver, findPlansButton, 30);
+		// CommonUtility.waitForPageLoadNew(driver, findPlansButton, 30);
 	}
 
 	public void validateLogo() {
