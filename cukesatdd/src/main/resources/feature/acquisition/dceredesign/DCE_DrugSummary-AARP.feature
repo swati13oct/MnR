@@ -399,3 +399,44 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
     Examples: 
       | zipCode | drug1   | drugName1                     | 
       |   10001 | Lipitor | atorvastatin calcium TAB 20MG |
+      
+      @dCERedesign_ChangePharmacy_AARP @F426569
+  Scenario Outline: Test to verify sort, pagination functionality for change pharmacy on drug summary page
+    Given the user is on AARP medicare acquisition site landing page
+    When the user navigates to following AARP medicare acquisition site page
+      | PageName | <pageName> |
+      | PagePath | <path>     |
+    Then the user validates Get Started Page
+    When the user clicks on Add drugs button
+    Then the user searches and adds the following Drug to Drug List
+      | DrugName | <drug1> |
+    And clicks on Review drug cost button
+    Then user should be navigated to zipcode and plan year capture page for AEP
+    When user enters valid zipcode and county
+      | ZipCode | <zipCode> |
+    #And user selects plan year in AARP
+    And user clicks on continue button in Zip Entry Page
+    #Then load screen should be displayed in AARP
+    And user should be navigated to Review drug cost estimate page
+    And user should be able to see Medicare Advantage plan by default
+    When user clicks on change pharmacy link from summary page
+    Then change pharmacy modal should be displayed
+    And user verify change pharmacy modal
+    When user selects Preferred mail order pharmacy
+    Then the message "OptumRx Home Delivery only provides 90-day refill for your drugs." should be displayed on change pharmacy modal
+    And user verify the default distance on change pharmacy modal
+    When user sort the pharmacy list by "A to Z"
+    Then pharmacy list should be displayed in ascending order
+    When user sort the pharmacy list by "Z to A"
+    Then pharmacy list should be displayed in descending order
+    When user clicks on next button on change pharmacy modal
+    Then user should be navigated to second page of pharmacy list
+    When user clicks on back button on change pharmacy modal
+    Then user should be navigated to first page of pharmacy list
+    When user search with zipcode with no pharamacies
+    | ZipCode | <zipCode1> |
+    Then no results message should be displayed
+    | NoResultsMessage | <message> |
+    Examples: 
+      | path                                             | pageName                   | drug1 | zipCode |message|zipCode1|
+      | health-plans/estimate-drug-costs.html/getstarted | DCE Redesign - Get Started | Lipitor  |   90001 |There were no results found for the requested search. Broadening your search criteria (for example, changing the pharmacy type, search radius and/or your ZIP code) may help you get a different result.|96799|

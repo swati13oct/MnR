@@ -1550,4 +1550,105 @@ public void user_should_verify_you_pay_value_for_not_covered_drug_in_drug_pricin
 		drugSummaryPage.updateDosageQtySupplyLength();
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
 	}
+	
+	@When("^user selects Preferred mail order pharmacy$")
+	public void user_selects_Preferred_mail_order_pharmacy()  {
+		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
+		drugSummaryPage.selectPreferredMailOrderPharmacy();
+		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
+	}
+
+	@Then("^the message \"([^\"]*)\" should be displayed on change pharmacy modal$")
+	public void the_message_should_be_displayed_on_change_pharmacy_modal(String mailOrderPharmacyMessage) {
+		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
+		drugSummaryPage.validatePreferredMailOrderPharmacyMessage(mailOrderPharmacyMessage);
+		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
+	}
+
+	@Then("^user verify the default distance on change pharmacy modal$")
+	public void user_verify_the_default_distance_on_change_pharmacy_modal()  {
+		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
+		drugSummaryPage.validateDefaultDistance();
+		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
+	}
+
+	@When("^user sort the pharmacy list by \"([^\"]*)\"$")
+	public void user_sort_the_pharmacy_list_by(String sortOption){
+		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
+		drugSummaryPage.sortPharmacies(sortOption);
+		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
+	}
+
+	@Then("^pharmacy list should be displayed in ascending order$")
+	public void pharmacy_list_should_be_displayed_in_ascending_order() {
+		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
+		drugSummaryPage.validatePharmaciesAscendingOrder();
+		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
+	}
+	
+	@Then("^pharmacy list should be displayed in descending order$")
+	public void pharmacy_list_should_be_displayed_in_descending_order() {
+		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
+		drugSummaryPage.validatePharmaciesDescendingOrder();
+		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
+	}
+
+	@When("^user clicks on next button on change pharmacy modal$")
+	public void user_clicks_on_next_button_on_change_pharmacy_modal(){
+		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
+		drugSummaryPage.clickNextButton();
+		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
+	}
+
+	
+	@When("^user clicks on back button on change pharmacy modal$")
+	public void user_clicks_on_back_button_on_change_pharmacy_modal(){
+		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
+		drugSummaryPage.clickBackButton();
+		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
+	}
+	
+	@Then("^user should be navigated to second page of pharmacy list$")
+	public void user_should_be_navigated_to_second_page_of_pharmacy_list(){
+		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
+		drugSummaryPage.validateSecondPageDisplayed();
+		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
+	}
+
+	@Then("^user should be navigated to first page of pharmacy list$")
+	public void user_should_be_navigated_to_first_page_of_pharmacy_list() {
+		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
+		drugSummaryPage.validateFirstPageDisplayed();
+		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
+	}
+	
+	@When("^user search with zipcode with no pharamacies$")
+	public void user_search_with_zipcode_with_no_pharamacies(DataTable attributes) throws Throwable {
+		List<DataTableRow> memberAttributesRow = attributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		String zipCode = memberAttributesMap.get("ZipCode");
+		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
+		drugSummaryPage.searchPharmaciesByZipcode(zipCode);
+	}
+
+	@Then("^no results message should be displayed$")
+	public void no_results_message_should_be_displayed(DataTable attributes) throws Throwable {
+		List<DataTableRow> memberAttributesRow = attributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		String message = memberAttributesMap.get("NoResultsMessage");
+		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
+		drugSummaryPage.validateNoResultsMsg(message);
+	}
+
+
 }

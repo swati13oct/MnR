@@ -3,8 +3,13 @@ package pages.acquisition.dceredesign;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 import org.junit.Assert;
 import org.openqa.selenium.By;
@@ -14,6 +19,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
+
+import com.github.mkolisnyk.cucumber.reporting.types.breakdown.matchers.Matcher;
+import com.google.common.collect.Ordering;
 
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
@@ -195,6 +203,18 @@ public class DrugSummaryPage extends UhcDriver {
 
 	@FindBy(id = "new-drug-refill")
 	private WebElement drugSupplyLength;
+
+	@FindBy(xpath = "//*[@id='mailSelectPharmacyBtn0']/../../following-sibling::div[1]")
+	private WebElement mailOrderPharmacyMsg;
+
+	@FindBy(xpath = "//*[contains(@id,'selectPharmacyBtn')]/../div//span[1]")
+	private List<WebElement> pharmacyNameList;
+	
+	@FindBy(xpath = "//*[@class='pagination']/../p")
+	private WebElement pageNumber;
+	
+	@FindBy(xpath = "//*[@id='selectaPharmacy-overlay']//*[@class='field-error-msgfordceui']/span[1]")
+	private WebElement noResultsMessage;
 
 	@Override
 	public void openAndValidate() {
@@ -548,23 +568,23 @@ public class DrugSummaryPage extends UhcDriver {
 			validateNew(mapdPlanToggle);
 			jsClickNew(mapdPlanToggle);
 			System.out.println("MAPD Plan Toggle Clicked");
-		}
-		else if(plantype.equalsIgnoreCase("PDP")){
+		} else if (plantype.equalsIgnoreCase("PDP")) {
 			validateNew(pdpPlanToggle);
 			jsClickNew(pdpPlanToggle);
 			System.out.println("PDP Plan Toggle Clicked");
-		}
-		else{
+		} else {
 			validateNew(snpPlanToggle);
 			jsClickNew(snpPlanToggle);
 			System.out.println("SNP Plan Toggle Clicked");
 		}
-		WebElement PremiumforPlan = driver.findElement(By.xpath("//*[contains(text(), '"+planName+"')]//ancestor::*[contains(@class, 'uhc-card__header')]//following-sibling::*//*[contains(text(), 'Monthly Premium')]//following-sibling::*[contains(text(), '$')]"));
+		WebElement PremiumforPlan = driver.findElement(By.xpath("//*[contains(text(), '" + planName
+				+ "')]//ancestor::*[contains(@class, 'uhc-card__header')]//following-sibling::*//*[contains(text(), 'Monthly Premium')]//following-sibling::*[contains(text(), '$')]"));
 		validateNew(PremiumforPlan);
-		String PremiumDisplayed	= PremiumforPlan.getText();
-		System.out.println("Premium Displayed for Plan : "+PremiumDisplayed);
-		if(!PremiumDisplayed.contains(premium)) {
-			Assert.fail("Expected Premium not displayed, Expected : "+premium+"    Actual Displayed : "+PremiumDisplayed);
+		String PremiumDisplayed = PremiumforPlan.getText();
+		System.out.println("Premium Displayed for Plan : " + PremiumDisplayed);
+		if (!PremiumDisplayed.contains(premium)) {
+			Assert.fail("Expected Premium not displayed, Expected : " + premium + "    Actual Displayed : "
+					+ PremiumDisplayed);
 		}
 	}
 
@@ -641,4 +661,87 @@ public class DrugSummaryPage extends UhcDriver {
 		supplyLen.selectByIndex(1);
 		switchToGenericSubmitBtn.click();
 	}
+
+	public void selectPreferredMailOrderPharmacy() {
+		waitforElement(preferredMailPharmacy);
+		preferredMailPharmacy.click();
+	}
+
+	public void validatePreferredMailOrderPharmacyMessage(String expectedMsg) {
+		waitforElement(mailOrderPharmacyMsg);
+		Assert.assertTrue("Message for Mail order pharmacy not correct" + expectedMsg + "/n" + mailOrderPharmacyMsg,
+				mailOrderPharmacyMsg.getText().trim().equals(expectedMsg));
+	}
+
+	public void validateDefaultDistance() {
+		Select distance = new Select(distanceDrpDown);
+		Assert.assertTrue("Default distance is not 15 miles",
+				distance.getFirstSelectedOption().getText().trim().equals("15 Miles"));
+	}
+
+	public void sortPharmacies(String sortOption) {
+		Select sort = new Select(sortDrpdown);
+		sort.selectByVisibleText(sortOption);
+	}
+
+	public void validatePharmaciesAscendingOrder() {
+		List<String> pharmacListAfterSort = new ArrayList<String>();
+		for (WebElement e : pharmacyNameList) {
+			pharmacListAfterSort.add(e.getText());
+		}
+		System.out.println("After sort" + pharmacListAfterSort);
+		Boolean sorted = Ordering.natural().isOrdered(pharmacListAfterSort);
+		Assert.assertTrue("Pharmacies are not sorted in ascending order", sorted);
+	}
+
+	public void validatePharmaciesDescendingOrder() {
+		List<String> pharmacListAfterSort = new ArrayList<String>();
+		for (WebElement e : pharmacyNameList) {
+			pharmacListAfterSort.add(e.getText());
+		}
+		System.out.println("After sort" + pharmacListAfterSort);
+		Boolean sorted = Ordering.natural().reverse().isOrdered(pharmacListAfterSort);
+		Assert.assertTrue("Pharmacies are not sorted in ascending order", sorted);
+	}
+
+	public void clickNextButton() {
+		nextBtn.click();
+	}
+
+	public void clickBackButton() {
+		backBtn.click();
+	}
+
+	public void validateSecondPageDisplayed() {
+		String page=pageNumber.getText();
+		Pattern p=Pattern.compile("Page (\\d*) of (\\d*)");
+		java.util.regex.Matcher m=p.matcher(page);
+		if(m.find()) {
+			page=m.group(1);
+		}
+		Assert.assertTrue("Second page not displayed", page.equals("2"));
+	}
+
+	public void validateFirstPageDisplayed() {
+		String page=pageNumber.getText();
+		Pattern p=Pattern.compile("Page (\\d*) of (\\d*)");
+		java.util.regex.Matcher m=p.matcher(page);
+		if(m.find()) {
+			page=m.group(1);
+		}
+		Assert.assertTrue("First page not displayed", page.equals("1"));
+	}
+	
+	public void searchPharmaciesByZipcode(String zipcode) {
+		pharmacyZipcodeSearch.clear();
+		pharmacyZipcodeSearch.sendKeys(zipcode);
+		pharmacySearchBtn.click();
+	}
+	
+	public void validateNoResultsMsg(String expectedMsg) {
+		waitforElement(noResultsMessage);
+		System.out.println(noResultsMessage.getText());
+		Assert.assertTrue("No results message not displayed", noResultsMessage.getText().equals(expectedMsg));
+	}
+	
 }
