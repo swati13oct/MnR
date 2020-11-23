@@ -426,6 +426,13 @@ public class MRConstants {
   public static final String Offline_PROD_AARP_DEEPLINK_URL_VirtualVisit = "https://offline.myaarpmedicare.com/virtualvisits";
   public static final String Offline_PROD_PCP_DEEPLINK_URL_VirtualVisit = "https://offline.mypcpmedicare.com/virtualvisits";
   public static final String Offline_PROD_Medica_DEEPLINK_URL_VirtualVisit = "https://offline.mymedicamedicare.com/virtualvisits";
+  public static final String Offline_PROD_UHC_DEEPLINK_URL_HWP ="https://offline.myuhcmedicare.com/hwp";
+  public static final String Offline_PROD_AARP_DEEPLINK_URL_HWP ="https://offline.myaarpmedicare.com/hwp";
+  public static final String Offline_PROD_PCP_DEEPLINK_URL_HWP ="https://offline.mypcpmedicare.com/hwp";
+  public static final String Offline_PROD_Medica_DEEPLINK_URL_HWP ="https://offline.mymedicamedicare.com/hwp";
+  
+  
+  
 }
 
 	    
