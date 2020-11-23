@@ -19,13 +19,13 @@ Feature: UAT-Scripts-To test Organic Search Campaign TFN on UHC site
       Then the user validates PSC code
       | PSC Code | <pscCode> | 
       Then the user navigate to following MedED Pages URL and validate Federal TFN
-      | MedSupp URL | <medicarearicleUrl> |
+      | MedEd URL | <medicarearicleUrl> |
       | TFN Xpath   | <medicarearicleTFN> |
        Then the user navigate to following MedED Pages URL and validate Federal TFN
-      | MedSupp URL | <medicareMadeclearUrl> |
+      | MedEd URL | <medicareMadeclearUrl> |
       | TFN Xpath   | <medicareMadeclearTFN> |
        Then the user navigate to following MedED Pages URL and validate Federal TFN
-      | MedSupp URL | <medicareEligibilityUrl> |
+      | MedEd URL | <medicareEligibilityUrl> |
       | TFN Xpath   | <medicareEligibilityTFN> |
       Given the user Starts WebDriver
     Given user is on Bing and search UHC Medicare Advantage Plan to navigate to navigate to UHC page
