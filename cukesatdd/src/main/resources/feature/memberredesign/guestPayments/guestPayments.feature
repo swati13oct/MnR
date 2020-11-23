@@ -163,7 +163,7 @@ Feature: 1.06.7 Member Guest Payments Page
     Examples:
       | TID   | planType | memberID    | dob        | siteName | Name                 | CreditCardNumber | validMonth | validYear | Email          |
       | 10000 | MAPD     | 005085470-1	  | 03/04/1943| AARP     | GuestPayCC           | 4111111111111111 | 04         | 2024      | test@optum.com |
-      | 10001 | PDP      | 013019914-1	 | 02/12/1948 | UHC      | GuestPayCC           | 4111111111111111 | 04         | 2024      | test@optum.com |
+      | 10001 | PDP     | 907996890-1 | 10/09/1940 || UHC      | GuestPayCC           | 4111111111111111 | 04         | 2024      | test@optum.com |
      # | 10002 | MA       | 917617123-1 | 06/09/1951 | RETIREE  | GuestPayCC           | 4111111111111111 | 04         | 2024      | test@optum.com |
      # | 10003 | MAPD     | 915516555-1 | 10/29/1947 | PCP      | GuestPayCC           | 4111111111111111 | 04         | 2024      | test@optum.com |
       #| 10004 | MAPD     | 915516555-1 | 10/29/1947 | MEDICA   | GuestPayCC           | 4111111111111111 | 04         | 2024      | test@optum.com |
@@ -283,7 +283,7 @@ Feature: 1.06.7 Member Guest Payments Page
 
     Examples:
       | TID   | planType | memberID      | dob           | siteName    |Name                 | CreditCardNumber | validMonth | validYear |otherAmountDue    |
-      | 10000 | MAPD     | 939838215-1   | 05/19/1937    |   AARP      |CreditCardAutomation | 4111111111111111 |         04 |      2024 |  1.05           |
+     # | 10000 | MAPD     | 939838215-1   | 05/19/1937    |   AARP      |CreditCardAutomation | 4111111111111111 |         04 |      2024 |  1.05           |
        | 10001 | MAPD     |007973219-1  | 05/12/1943   |   UHC       |CreditCardAutomation | 4111111111111111 |         04 |      2024 |  1.20           |
      | 10002 | MAPD     | 006738298-1  | 12/18/1938   |   RETIREE   |CreditCardAutomation | 4111111111111111 |         04 |      2024 |  1.30           |
     #  | 10003 | MAPD     |005085470-1  | 10/29/1947    |   PCP       |CreditCardAutomation | 4111111111111111 |         04 |      2024 |  11.000          |
