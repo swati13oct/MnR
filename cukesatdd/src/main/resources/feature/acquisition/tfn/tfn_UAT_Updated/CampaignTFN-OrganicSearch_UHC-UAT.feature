@@ -14,7 +14,7 @@ Feature: UAT-Scripts-To test Organic Search Campaign TFN on UHC site
     Then the user validates PSC code
       | PSC Code | <pscCode> |  
     Then the user navigate to following MedED Pages URL and validate Federal TFN
-      | MedSupp URL | <medicareeduUrl> |
+      | MedEd URL | <medicareeduUrl> |
       | TFN Xpath   | <medicareeduTFN> |
       Then the user validates PSC code
       | PSC Code | <pscCode> | 
@@ -39,7 +39,7 @@ Feature: UAT-Scripts-To test Organic Search Campaign TFN on UHC site
    	Then the user navigates to Medsupp Plans in VPP and validates Medsupp TFN
       Then the user navigates to PDP Plan Details Page and validates Federal TFN
      Then the user navigate to following MedED Pages URL and validate Federal TFN
-       | MedSupp URL | <medicareeduUrl> |
+       | MedEd URL | <medicareeduUrl> |
       | TFN Xpath   | <medicareeduTFN> |
     Examples: 
    |scenario       | pscCode | Precedence1PSC|maUrl                                  | maTFN                                                               | medicareeduUrl                                                                | medicareeduTFN                        |decisionGuideUrl                                                          | decisionGuideTFN     | agentApptUrl                                                     | agentApptTFN   |shoppages       |shoppagesTFN                                                  |medicarearicleUrl|medicarearicleTFN|medicareMadeclearUrl|medicareMadeclearTFN|medicareEligibilityUrl|medicareEligibilityTFN|
