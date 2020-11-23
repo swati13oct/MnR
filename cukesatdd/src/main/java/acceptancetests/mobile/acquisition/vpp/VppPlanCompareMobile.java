@@ -204,12 +204,13 @@ public class VppPlanCompareMobile {
 		String zipcode = memberAttributesMap.get("Zip Code");
 		String county = memberAttributesMap.get("County Name");
 		String isMultiCounty = memberAttributesMap.get("Is Multi County");
+		String planYear = memberAttributesMap.get("Plan Year");
 
 		getLoginScenario().saveBean(VPPCommonConstants.ZIPCODE, zipcode);
 		getLoginScenario().saveBean(VPPCommonConstants.COUNTY, county);
 		getLoginScenario().saveBean(VPPCommonConstants.IS_MULTICOUNTY, isMultiCounty);
+		getLoginScenario().saveBean(VPPCommonConstants.PLAN_YEAR, planYear);
 		getLoginScenario().saveBean(oleCommonConstants.ACQ_SITE_NAME, "UHC_ACQ");
-		
 
 		AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
@@ -348,6 +349,7 @@ public class VppPlanCompareMobile {
 				plansummaryPage.validateVPPPlanSummaryPage());
 		String SiteName = "AARP_ACQ";
 		getLoginScenario().saveBean(oleCommonConstants.ACQ_SITE_NAME, SiteName);
+		getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
 	}
 
 	/**
@@ -362,18 +364,19 @@ public class VppPlanCompareMobile {
 			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
 					givenAttributesRow.get(i).getCells().get(1));
 		}
+		
+		
 
 		String plantype = givenAttributesMap.get("Plan Type");
-		System.out.println("Select PlanType to view Plans for entered Zip " + plantype);
+		String planYear = givenAttributesMap.get("Plan Year");
+		System.out.println("Select PlanType to view Plans for entered Zip" + plantype);
 		getLoginScenario().saveBean(VPPCommonConstants.PLAN_TYPE, plantype);
 		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 
 		plansummaryPage.viewPlanSummary(plantype);
-		if (!plantype.equalsIgnoreCase("MS"))
+		if(!plantype.equalsIgnoreCase("MS"))
 			plansummaryPage.handlePlanYearSelectionPopup();
-		// getLoginScenario().saveBean(oleCommonConstants.ACQ_SITE_NAME, "UHC_ACQ");
-		// getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_TYPE, plantype);
 	}
 
 	/**
@@ -705,7 +708,7 @@ public class VppPlanCompareMobile {
 		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		plansummaryPage.handlePlanYearSelectionPopup(planYear);
-		getLoginScenario().saveBean(planYear, plansummaryPage);
+		getLoginScenario().saveBean(VPPCommonConstants.PLAN_YEAR, planYear);
 	}
 
 	/**
@@ -1552,6 +1555,8 @@ public class VppPlanCompareMobile {
 	public void user_validates_selected_plan_can_be_saved_as_favorite_on_AARP_site(DataTable givenAttributes) {
 		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		
+		getLoginScenario().getBean(VPPCommonConstantsMobile.PLAN_YEAR);
 
 		Map<String, String> memberAttributesMap = prepareTestInput(givenAttributes);
 		String ma_savePlanNames = memberAttributesMap.get("MA Test Plans");
@@ -1559,13 +1564,13 @@ public class VppPlanCompareMobile {
 		String snp_savePlanNames = memberAttributesMap.get("SNP Test Plans");
 
 		String planYear = memberAttributesMap.get("Plan Year");
-		// getLoginScenario().getBean(planYear);
-		getLoginScenario().saveBean(planYear, plansummaryPage);
+
+		
 
 		// ----- MA plan type ----------------------------
 		String planType = "MA";
 		plansummaryPage.viewPlanSummary(planType);
-		plansummaryPage.handlePlanYearSelectionPopup(planYear);
+		//plansummaryPage.handlePlanYearSelectionPopup(planYear);
 		plansummaryPage.validateAbilityToSavePlans(ma_savePlanNames, planType);
 		// plansummaryPage.validatePlansAreSaved(ma_savePlanNames, planType);
 		// //commented out because the previous line already validates after saving plan
@@ -1573,7 +1578,7 @@ public class VppPlanCompareMobile {
 		// ----- PDP plan type ---------------------------
 		planType = "PDP";
 		plansummaryPage.viewPlanSummary(planType);
-		plansummaryPage.handlePlanYearSelectionPopup();
+		//plansummaryPage.handlePlanYearSelectionPopup();
 		plansummaryPage.validateAbilityToSavePlans(pdp_savePlanNames, planType);
 		// plansummaryPage.validatePlansAreSaved(pdp_savePlanNames, planType);
 		// //commented out because the previous line already validates after saving plan

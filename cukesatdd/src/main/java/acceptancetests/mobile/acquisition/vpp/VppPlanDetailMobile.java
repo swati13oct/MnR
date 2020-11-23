@@ -2916,8 +2916,8 @@ public class VppPlanDetailMobile {
 		vppTestHarnessPage.validateMedSupSpecificPlanInfo(planName);
 	}
 
-	@When("^the user selects plan year for the AARP site$")
-	public void user_select_plan_year(DataTable givenAttributes) throws InterruptedException {
+	@And("^the user selects plan year for the AARP site$")
+	public void user_selects_plan_years(DataTable givenAttributes) {
 		List<DataTableRow> givenAttributesRow = givenAttributes.getGherkinRows();
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
 		for (int i = 0; i < givenAttributesRow.size(); i++) {
@@ -2927,11 +2927,11 @@ public class VppPlanDetailMobile {
 		}
 
 		String planYear = givenAttributesMap.get("Plan Year");
-
+		
 		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		plansummaryPage.handlePlanYearSelectionPopup(planYear);
-		// plansummaryPage.handlePlanYearFutureSelectionPopup(planYear);
+		//plansummaryPage.handlePlanYearFutureSelectionPopup(planYear);
 	}
 
 	@And("^the user enters Mandatory fields on ProviderSearch Navigates to provider Page for UHC$")

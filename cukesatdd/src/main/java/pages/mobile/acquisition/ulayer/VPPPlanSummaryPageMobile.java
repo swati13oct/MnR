@@ -918,6 +918,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 		} else if (planType.equalsIgnoreCase("MA") || planType.equalsIgnoreCase("MAPD")) {
 			CommonUtility.waitForPageLoadNew(driver, maPlansViewLink, 40);
 			sleepBySec(9);
+			scrollToView(maPlansViewLink);
 			jsClickNew(maPlansViewLink);
 			// maPlansViewLink.click();
 			CommonUtility.waitForPageLoadNew(driver, planListContainer, 30);
@@ -925,7 +926,8 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 			// driver.navigate().refresh();
 			CommonUtility.waitForPageLoadNew(driver, msPlansViewLink, 30);
 			sleepBySec(2);
-			msPlansViewLink.click();
+			scrollToView(msPlansViewLink);
+			jsClickNew(msPlansViewLink);
 			// CommonUtility.waitForPageLoadNew(driver, medSuppPlanList.get(0), 30);
 		} else if (planType.equalsIgnoreCase("SNP")) {
 			scrollToView(snpPlanList);
@@ -961,8 +963,8 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 
 		CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
 
-		WebElement ProviderSearchLink = driver.findElement(By.xpath("//*[contains(text(),\'" + planName
-				+ "\')]/ancestor::div[contains(@class,'module-plan-overview')]//*[contains(@class,'add-provider')]"));
+		WebElement ProviderSearchLink = driver.findElement(By.xpath("//*[contains(text(),'" + planName
+				+ "')]/ancestor::div[contains(@class,'module-plan-overview')]//*[contains(@dtmname,'Provider Search')]"));
 		validateNew(ProviderSearchLink);
 		switchToNewTabNew(ProviderSearchLink);
 		sleepBySec(3);
@@ -3388,6 +3390,8 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 	public void handlePlanYearSelectionPopup(String planYear) {
 
 		CommonUtility.checkPageIsReadyNew(driver);
+		waitforElementVisibilityInTime(CurrentYearPlansBtn, 10);
+		scrollToView(CurrentYearPlansBtn);
 		if (planYear.equalsIgnoreCase("current")) { // if the scenario is for current year
 			if (validate(CurrentYearPlansBtn, 20)) {
 				System.out.println("*****CLICKING ON Current Year button*****: " + CurrentYearPlansBtn.getText());
