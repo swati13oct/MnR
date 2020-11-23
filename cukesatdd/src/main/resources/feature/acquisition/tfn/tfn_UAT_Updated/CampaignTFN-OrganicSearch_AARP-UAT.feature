@@ -22,8 +22,10 @@ Feature: UAT Scripts-To test Organic SearchCampaign TFN on AARP site
     #  | PSC Code | <pscCode> | 
      Given the user Starts WebDriver
 		Given user is on Bing and search AARP Medicare Advantage Plan to navigate to navigate to AARP page
+		And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
    Then the user validates PSC code
       | PSC Code | <Precedence1PSC> | 
+       Then the user navigates to homepage validates Federal TFN
    	Then the user navigates to MA Plan Details Page and validates Federal TFN
    	Then the user validates PSC code
       | PSC Code | <Precedence1PSC> | 
