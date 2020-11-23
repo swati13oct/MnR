@@ -6,7 +6,7 @@ Feature: MedCab Load On P&P Page
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
-    When now user navigates to the pharmacies and prescriptions page from dashboard or testharness page
+    When user navigates to the pharmacies and prescriptions page from testharness page
     And user view MedCab load successfully on PnP page
     Then user validates the disclaimer Medication appearance subject to change
     And user validates first six of his active prescriptions

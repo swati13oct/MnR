@@ -6,7 +6,7 @@ Feature: Need Help Phone Numbers on PnP Page
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
-    When now user navigates to the pharmacies and prescriptions page from dashboard or testharness page
+    When user navigates to the pharmacies and prescriptions page from testharness page
     Then user validates Need Help section phone numbers
     Then user validates Need Help section hours of operations
 

@@ -5,7 +5,7 @@ Feature: To test Renew Checkout Summary Page
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
-    When now user navigates to the pharmacies and prescriptions page from dashboard or testharness page
+    When user navigates to the pharmacies and prescriptions page from testharness page
     And user fetches medication informations and clicks on Renew Medication call to action button
     Then user will see "Complete Your Renewal" Page
     When user views the Medications section

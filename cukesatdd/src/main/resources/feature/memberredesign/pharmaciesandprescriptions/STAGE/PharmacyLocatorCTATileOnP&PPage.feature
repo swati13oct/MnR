@@ -6,7 +6,7 @@ Feature: Pharmacy Locator CTA Tile on P&P page
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
-    When now user navigates to the pharmacies and prescriptions page from dashboard or testharness page
+    When user navigates to the pharmacies and prescriptions page from testharness page
     Then user view Pharmacy Locator Call To Action
     Then user validates an image for Pharmacy Locator Call To Action
     Then user validates a title for Pharmacy Locator Call To Action

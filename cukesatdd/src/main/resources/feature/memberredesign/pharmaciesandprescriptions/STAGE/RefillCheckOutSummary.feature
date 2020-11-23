@@ -5,8 +5,8 @@ Feature: To test Refill Checkout Summary Page
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
-    #When user navigates to the pharmacies and prescriptions page from testharness page
-    And now user navigates to the pharmacies and prescriptions page from dashboard or testharness page
+    When user navigates to the pharmacies and prescriptions page from testharness page
+    #And now user navigates to the pharmacies and prescriptions page from dashboard or testharness page
     And user fetches medication information and clicks on Refill Medication call to action button
     Then user will see "Complete Your Refill" Page
     When user views the Medications section

@@ -26,7 +26,7 @@ Feature: 2020 and 2021 CTA on Pharmacy Locator page
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
-    When now user navigates to the pharmacies and prescriptions page from dashboard or testharness page
+    When user navigates to the pharmacies and prescriptions page from testharness page
     Then user view Pharmacy Locator Call To Action
     And user clicks on Pharmacy Locator call to action displayed second within that section
     Then user will be directed to the Choose a plan year page

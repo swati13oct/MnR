@@ -6,7 +6,7 @@ Feature: My Medication Page
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
-    When now user navigates to the pharmacies and prescriptions page from dashboard or testharness page
+    When user navigates to the pharmacies and prescriptions page from testharness page
     And user clicks View all medications link to view the My Medications page
     Then user validates the disclaimer Medication appearance subject to change
     Then user validates first ten of his active prescriptions

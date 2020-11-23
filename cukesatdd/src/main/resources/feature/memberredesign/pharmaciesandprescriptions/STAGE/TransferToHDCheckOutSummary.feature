@@ -5,7 +5,7 @@ Feature: To test Transfer To HD Checkout Summary Page
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
-    And now user navigates to the pharmacies and prescriptions page from dashboard or testharness page
+    When user navigates to the pharmacies and prescriptions page from testharness page
     And user fetches medication informations and clicks on Transfer To HD call to action button on My Medication Page
     Then user will see "Transfer to Home Delivery" Page
     When user views the Medications section

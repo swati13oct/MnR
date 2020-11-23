@@ -6,9 +6,7 @@ Feature: Walgreen without Pharmacy Number (Contact Pharmacy)
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
-    When now user navigates to the pharmacies and prescriptions page from dashboard or testharness page
-      | PlanType    | <planType>   |
-      | Member Type | <memberType> |
+    When user navigates to the pharmacies and prescriptions page from testharness page
     Then user views the Current Medications
     And user clicks View all medications link to view the My Medications page
     When user has a Walgreens drug without store numbers on My Medications page
