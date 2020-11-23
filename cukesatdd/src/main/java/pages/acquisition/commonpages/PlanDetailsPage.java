@@ -99,6 +99,14 @@ public class PlanDetailsPage extends UhcDriver {
 	@FindBy(id = "prescriptiondrug")
 	private List<WebElement> presDrugTab;
 
+//  LearnMore changes Start
+    @FindBy(xpath="//span[contains(text(), 'Prescription Drug Benefits')]")
+    private WebElement prescriptionTab;
+    
+    @FindBy(xpath="//a[@class='cta-button ng-scope' and text()='Learn More']")
+    private WebElement learnMore;
+//LearnMore changes End
+    
 	@FindBy(xpath = ".//*[@id='drugBenefits']")
 	private WebElement drugBenefitsSection;
 
@@ -1338,6 +1346,33 @@ public class PlanDetailsPage extends UhcDriver {
 			
 		}
 
+//      LearnMore changes Start
+        public void clickPrescriptionBenifitTab() {
+                        jsClickNew(prescriptionTab);
+                        
+        }
+        
+    	@FindBy(xpath = "//button[@id='changePharmacyLink']")
+    	public WebElement DrugDetails_ChangePharmacyLnk;
+
+    	@FindBy(xpath = "//h2[contains(text(), 'Drug Cost Details')]")
+    	public WebElement DrugDetails_DrugCostsHeading;
+
+        public DrugDetailsPage clickLearnMore() {
+        	validateNew(learnMore);
+            jsClickNew(learnMore);
+    		CommonUtility.waitForPageLoadNew(driver, DrugDetails_DrugCostsHeading, 30);
+    		if(validateNew(DrugDetails_ChangePharmacyLnk) && validateNew(DrugDetails_DrugCostsHeading))
+    		{
+    			return new DrugDetailsPage(driver);
+    		}
+    		else {
+    			Assert.fail("Drug Details Page is NOT Displayed");
+    			return null;
+    		}		
+        }
+        
+//    LearnMore changes End
 		@FindBy(xpath = "//input[contains(@id, 'drugsearch')]")
 		public WebElement BuildDrugPage_EnterDrugNameTxt;
 

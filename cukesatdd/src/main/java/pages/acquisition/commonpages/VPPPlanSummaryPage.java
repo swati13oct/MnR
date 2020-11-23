@@ -13,9 +13,6 @@ import java.util.Set;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.TimeUnit;
 
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -24,15 +21,14 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.logging.LogEntry;
-import org.openqa.selenium.logging.LogType;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import com.google.common.base.Strings;
 import com.mysql.jdbc.StringUtils;
 
 import acceptancetests.data.CommonConstants;
@@ -45,11 +41,7 @@ import atdd.framework.UhcDriver;
 import pages.acquisition.dceredesign.DrugDetailsPage;
 import pages.acquisition.dceredesign.GetStartedPage;
 import pages.acquisition.isdecisionguide.IsDecisionGuideStep1;
-import pages.acquisition.medsuppole.MedSuppOLEPage;
 import pages.acquisition.ole.WelcomePage;
-import pages.acquisition.commonpages.ComparePlansPage;
-import pages.acquisition.commonpages.VisitorProfilePage;
-import pages.acquisition.commonpages.PlanDetailsPage;
 import pages.acquisition.vppforaep.AepVppPlanSummaryPage;
 
 
@@ -782,6 +774,23 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//h3[contains(text(),'Medicare Part B: Medical Services per Calendar Year')]")
 	private WebElement PartB;
 	
+	@FindBy(css = "div#drugsBanner>div")
+	private WebElement prescriptions;
+	
+	@FindBys(value = { @FindBy(css = "div#providersBanner ul.providers-list>li") })
+	private List<WebElement> providersList;
+	
+	@FindBy(css="a#provider-title-")
+	private WebElement existingProvidersForNonMember;
+	
+	@FindBy(css="div#newProvidersBanner>div")
+	private WebElement numberOfProviders;
+	
+	@FindBy(css = "div#CSRLoginAlert>div")
+	private WebElement agentModeBanner;
+	
+	@FindBy(css = "div#currPlansBanner>div>a")
+	private WebElement enrolledPlansBanner;
 	@FindBy(xpath = "(//label[text()='Add to compare'])[1]")
 	private WebElement compareLink;
 	
@@ -4650,124 +4659,121 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		}
 
 	}
-	@FindBy(xpath = "(//input[@id='updates-email'])[2]")
-	private WebElement requestemailaddress;
 	
-	@FindBy(xpath = "//p[contains(text(),'Submit')]")
-	private WebElement requestplaninformationsubmit;
-	
-	@FindBy(xpath = "//p[contains(text(),'Your information has been submitted')]")
-	private WebElement requestplaninformationsubmitpopup;
-	
-	@FindBy(xpath = "//a[contains(@class,'emailsubmit_close')]")
-	private WebElement requestplaninformationclose;
-	
-	@FindBy(xpath = "//*[contains(@id, 'email-error-id')]")
-	private WebElement RequestPlanInformation_ErrorMessage;
-	
-	public boolean RequestPlanIInformation(String FirstName, String LastName, String EmailAddress) throws InterruptedException {
 		
-	//	boolean validation_Flag = true;
-		boolean RequestPlanIInformation_Validation = true;
+	/**
+	 * Validate the Agent Mode Banners and Enrolled Plan overlay
+	 * @param planName
+	 */
+	public void validateAgentModeBanners(String enrolledPlanName,String drugNames,String providers,String planName,String fname,String lname) {
+
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView();", agentModeBanner);
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView();", agentModeBanner);
+		System.out.println("Scrolled...");
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		waitforElementNew(agentModeBanner);
+		System.out.println("######### "+agentModeBanner.getText().trim()+"#########");
+		Assert.assertEquals("You are in Agent mode viewing "+fname+" "+lname+" profile", agentModeBanner.getText().trim());
 		
-		boolean flag = true;
-		/*	
-		if(validate(RequestPlanInformation_ErrorMessage)){
-			System.out.println("Email address is not entered : Error Message is Disabled");
-			//RequestPlanIInformation_Validation = true;
-			validateNew(requestemailaddress);
-			requestemailaddress.sendKeys(EmailAddress);
-			System.out.println("Email Address is enetered : "+EmailAddress);
-			CommonUtility.waitForPageLoadNew(driver, requestfirstName, 20);
-			requestfirstName.sendKeys(FirstName);
-			CommonUtility.waitForPageLoadNew(driver, requestlastName, 20);
-			requestlastName.sendKeys(LastName);
-			//CommonUtility.waitForPageLoadNew(driver, requestemailaddress, 20);
-		//	requestemailaddress.sendKeys(EmailAddress);
-			validateNew(requestplaninformationsubmit);
-			requestplaninformationsubmit.click();
-			validateNew(requestplaninformationclose);
-			requestplaninformationclose.click();
+		if(Strings.isNullOrEmpty(enrolledPlanName))
+			System.out.println("#########Empty Profile#########");
+		else
+			Assert.assertEquals(enrolledPlanName, enrolledPlansBanner.getText().trim());
+		
+		//Validate Providers
+		if(!providers.equalsIgnoreCase("no")) {
+			driver.findElement(By.xpath("//div[@class='plan-name-div']//a[text()='"+planName+"']//following::div[@class='provider-list added'][1]")).click();
+			//Validate Drugs
+			List<WebElement> providersList = driver.findElements(By.xpath("//div[@class='plan-name-div']//a[text()='"+planName+"']//following::div[@class='providers-list'][1]/ul/li"));
+			System.out.println("#########"+numberOfProviders.getText().trim()+"#########");
+			Assert.assertEquals("Number of Providers ("+providersList.size()+")", numberOfProviders.getText().trim());
 			
-			if(requestplaninformationsubmitpopup.getText().contains("Your information has been submitted. You should start getting your Medicare updates soon.")) {
-				System.out.println("****************Request  information is displayed  ***************");
-
-				Assert.assertTrue(true);
-				validateNew(requestplaninformationclose);
-				requestplaninformationclose.click();
-			}else {
-				System.out.println("****************Request information is displayed  ***************");
+			//Split the providers
+			String[] provider = providers.split(";");
+			
+			for(int i=0;i<providersList.size();i++) {
+				scrollToView(driver.findElement(By.xpath("//div[@class='plan-name-div']//a[text()='"+planName+"']//following::div[@class='providers-list'][1]/ul/li["+(i+1)+"]/div/div[contains(@class,'provider-info')]")));
+				provider[i]=provider[i].replace(":", "\n");
+				WebElement providerInfo = driver.findElement(By.xpath("//div[@class='plan-name-div']//a[text()='"+planName+"']//following::div[@class='providers-list'][1]/ul/li["+(i+1)+"]/div/div[contains(@class,'provider-info')]"));
+				String providerInfoTxt = providerInfo.getText().trim().replaceAll("\t+", "");
+				
+				Assert.assertEquals(provider[i], providerInfoTxt);
+				System.out.println("#########" + providerInfoTxt + "#########");
+				/*Assert.assertEquals(provider[i], driver.findElement(By.xpath("//div[@class='plan-name-div']//a[text()='"+planName+"']//following::div[@class='providers-list'][1]/ul/li["+(i+1)+"]/div/div[contains(@class,'provider-info')]")).getText().trim());
+				System.out.println("#########"+driver.findElement(By.xpath("//div[@class='plan-name-div']//a[text()='"+planName+"']//following::div[@class='providers-list'][1]/ul/li["+(i+1)+"]/div/div[contains(@class,'provider-info')]")).getText().trim()+"#########");*/
 			}
-			if(validateNonPresenceOfElement(RequestPlanInformation_ErrorMessage))
-			{
-				System.out.println("Error Message is not Displayed when Email address is entered");
-				RequestPlanIInformation_Validation = true;
-			}
-		}
-		else{
-			System.out.println("Email Address : Error Message is NOT Disabled");
-			RequestPlanIInformation_Validation = false;
-		}
-		
-		CommonUtility.waitForPageLoadNew(driver, requestfirstName, 20);
-		requestfirstName.sendKeys(FirstName);
-		CommonUtility.waitForPageLoadNew(driver, requestlastName, 20);
-		requestlastName.sendKeys(LastName);
-		CommonUtility.waitForPageLoadNew(driver, requestemailaddress, 20);
-		requestemailaddress.sendKeys(EmailAddress);
-		validateNew(requestplaninformationsubmit);
-		requestplaninformationsubmit.click();
-		validateNew(requestplaninformationclose);
-		requestplaninformationclose.click();
-		
-		if(requestplaninformationsubmitpopup.getText().contains("Your information has been submitted. You should start getting your Medicare updates soon.")) {
-			System.out.println("****************Request information is displayed  ***************");
-
-			Assert.assertTrue(true);
-			validateNew(requestplaninformationclose);
-			requestplaninformationclose.click();
 		}else {
-			System.out.println("****************Request information is displayed  ***************");
-		}
-*/
-		requestemailaddress.clear();
-		requestemailaddress.sendKeys("(*^*_asb@t.c");
-		requestplaninformationsubmit.click();
-		if(validate(RequestPlanInformation_ErrorMessage) && RequestPlanInformation_ErrorMessage.isDisplayed()){
-			if(!RequestPlanInformation_ErrorMessage.getText().contains("Please enter a valid email address in the format 'user@company.com'")){
-				System.out.println("Email Invalid Error is Not  displayed : "+RequestPlanInformation_ErrorMessage.getText());
-				flag=false;
-			}
-			System.out.println("Email Invalid Error : "+RequestPlanInformation_ErrorMessage.getText());
-
-		}
-		else{
-			System.out.println("Email Invalid Error field is not displayed");
-
+			System.out.println("#########"+numberOfProviders.getText().trim()+"#########");
+			Assert.assertEquals("Number of Providers (0)", numberOfProviders.getText().trim());
 		}
 		
-		validateNew(requestemailaddress);
-		requestemailaddress.clear();
-		requestemailaddress.sendKeys(EmailAddress);
-		System.out.println("Email Address is enetered : "+EmailAddress);
-		CommonUtility.waitForPageLoadNew(driver, requestfirstName, 20);
-		requestfirstName.sendKeys(FirstName);
-		CommonUtility.waitForPageLoadNew(driver, requestlastName, 20);
-		requestlastName.sendKeys(LastName);
-		validateNew(requestplaninformationsubmit);
-		requestplaninformationsubmit.click();
-		if(requestplaninformationsubmitpopup.getText().contains("Your information has been submitted. You should start getting your Medicare updates soon.")) {
-			System.out.println("****************Request  information is displayed  ***************");
-
-			Assert.assertTrue(true);
-			validateNew(requestplaninformationclose);
-			requestplaninformationclose.click();
+		//Validate Plan Name
+		Assert.assertTrue(validateNew(driver.findElement(By.xpath("//a[text()='"+planName+"']"))));
+		
+		if(!drugNames.equalsIgnoreCase("no")) {
+			
+			driver.findElement(By.xpath("//div[@class='plan-name-div']//a[text()='"+planName+"']//following::div[@class='drug-list added'][1]")).click();
+			//Validate Drugs
+			List<WebElement> drugList = driver.findElements(By.xpath("//div[@class='plan-name-div']//a[text()='"+planName+"']//following::div[@class='drugs-list'][1]/ul/li[contains(@class,'drug')]"));
+			
+			for(int i=0;i<drugList.size();i++) {
+				scrollToView(driver.findElement(By.xpath("//div[@class='plan-name-div']//a[text()='"+planName+"']//following::div[@class='drugs-list'][1]/ul/li[contains(@class,'drug')]["+(i+1)+"]")));
+				Assert.assertTrue(drugNames.contains(driver.findElement(By.xpath("//div[@class='plan-name-div']//a[text()='"+planName+"']//following::div[@class='drugs-list'][1]/ul/li[contains(@class,'drug')]["+(i+1)+"]//span[contains(@class,'name')]")).getText().trim()));
+				System.out.println("#########"+driver.findElement(By.xpath("//div[@class='plan-name-div']//a[text()='"+planName+"']//following::div[@class='drugs-list'][1]/ul/li[contains(@class,'drug')]["+(i+1)+"]//span[contains(@class,'name')]")).getText().trim()+"#########");
+			}
 		}else {
-			System.out.println("****************Request information is displayed  ***************");
+			System.out.println("#########"+prescriptions.getText().trim()+"#########");
+			Assert.assertEquals("Number of Prescriptions (0)", prescriptions.getText().trim());
 		}
-	return RequestPlanIInformation_Validation;
-
+		
 	}
+	
+	/**
+	 * Validate the Agent Mode Banners for Non Member
+	 * @param planName
+	 */
+	public void validateAgentModeBannersForNonMember(String planName,String drugNames,String providers,String fname, String lname) {
+		System.out.println("######### "+agentModeBanner.getText().trim()+"#########");
+		Assert.assertEquals("You are in Agent mode viewing "+fname+" "+lname+" profile", agentModeBanner.getText().trim());
+		
+		if(!providers.equalsIgnoreCase("no")) {
+			//Validate Providers
+			String[] provider = providers.split(",");
+			for(int i=0;i<providersList.size();i++) {
+				Assert.assertEquals(provider[i], providersList.get(i).getText().trim());
+				System.out.println("#########"+providersList.get(i).getText().trim()+"#########");
+			}
+		}else {
+			System.out.println("#########"+numberOfProviders.getText().trim()+"#########");
+			Assert.assertEquals("Number of Providers (0)", numberOfProviders.getText().trim());
+		}
+		
+		Assert.assertTrue(validateNew(driver.findElement(By.xpath("//a[text()='"+planName+"']"))));
+		
+		//Validate Drugs
+		if(!drugNames.equalsIgnoreCase("no")) {
+			driver.findElement(By.xpath("//div[@class='plan-name-div']//a[text()='"+planName+"']//following::div[@class='drug-list added'][1]")).click();
+			
+			//Validate Drugs
+			List<WebElement> drugList = driver.findElements(By.xpath("//div[@class='plan-name-div']//a[text()='"+planName+"']//following::div[@class='drugs-list'][1]/ul/li[contains(@class,'drug')]"));
+			
+			for(int i=0;i<drugList.size();i++) {
+				scrollToView(driver.findElement(By.xpath("//div[@class='plan-name-div']//a[text()='"+planName+"']//following::div[@class='drugs-list'][1]/ul/li[contains(@class,'drug')]["+(i+1)+"]")));
+				Assert.assertTrue(drugNames.contains(driver.findElement(By.xpath("//div[@class='plan-name-div']//a[text()='"+planName+"']//following::div[@class='drugs-list'][1]/ul/li[contains(@class,'drug')]["+(i+1)+"]//span[contains(@class,'name')]")).getText().trim()));
+				System.out.println("#########"+driver.findElement(By.xpath("//div[@class='plan-name-div']//a[text()='"+planName+"']//following::div[@class='drugs-list'][1]/ul/li[contains(@class,'drug')]["+(i+1)+"]//span[contains(@class,'name')]")).getText().trim()+"#########");
+			}
+		}else {
+			System.out.println("#########"+prescriptions.getText().trim()+"#########");
+			Assert.assertEquals("Number of Prescriptions (0)", prescriptions.getText().trim());
+		}
+	}
+
+
+
 	
 	public boolean clickAndVerifyNavigateToPage(String btn) throws InterruptedException {
 		boolean flag = false;
@@ -4837,6 +4843,125 @@ public boolean verifyPlanCount() throws InterruptedException {
 	
 	
 	return flag;
+}
+
+@FindBy(xpath = "(//input[@id='updates-email'])[2]")
+private WebElement requestemailaddress;
+
+@FindBy(xpath = "//p[contains(text(),'Submit')]")
+private WebElement requestplaninformationsubmit;
+
+@FindBy(xpath = "//p[contains(text(),'Your information has been submitted')]")
+private WebElement requestplaninformationsubmitpopup;
+
+@FindBy(xpath = "//a[contains(@class,'emailsubmit_close')]")
+private WebElement requestplaninformationclose;
+
+@FindBy(xpath = "//*[contains(@id, 'email-error-id')]")
+private WebElement RequestPlanInformation_ErrorMessage;
+
+public boolean RequestPlanIInformation(String FirstName, String LastName, String EmailAddress) throws InterruptedException {
+	
+//	boolean validation_Flag = true;
+	boolean RequestPlanIInformation_Validation = true;
+	
+	boolean flag = true;
+	/*	
+	if(validate(RequestPlanInformation_ErrorMessage)){
+		System.out.println("Email address is not entered : Error Message is Disabled");
+		//RequestPlanIInformation_Validation = true;
+		validateNew(requestemailaddress);
+		requestemailaddress.sendKeys(EmailAddress);
+		System.out.println("Email Address is enetered : "+EmailAddress);
+		CommonUtility.waitForPageLoadNew(driver, requestfirstName, 20);
+		requestfirstName.sendKeys(FirstName);
+		CommonUtility.waitForPageLoadNew(driver, requestlastName, 20);
+		requestlastName.sendKeys(LastName);
+		//CommonUtility.waitForPageLoadNew(driver, requestemailaddress, 20);
+	//	requestemailaddress.sendKeys(EmailAddress);
+		validateNew(requestplaninformationsubmit);
+		requestplaninformationsubmit.click();
+		validateNew(requestplaninformationclose);
+		requestplaninformationclose.click();
+		
+		if(requestplaninformationsubmitpopup.getText().contains("Your information has been submitted. You should start getting your Medicare updates soon.")) {
+			System.out.println("****************Request  information is displayed  ***************");
+
+			Assert.assertTrue(true);
+			validateNew(requestplaninformationclose);
+			requestplaninformationclose.click();
+		}else {
+			System.out.println("****************Request information is displayed  ***************");
+		}
+		if(validateNonPresenceOfElement(RequestPlanInformation_ErrorMessage))
+		{
+			System.out.println("Error Message is not Displayed when Email address is entered");
+			RequestPlanIInformation_Validation = true;
+		}
+	}
+	else{
+		System.out.println("Email Address : Error Message is NOT Disabled");
+		RequestPlanIInformation_Validation = false;
+	}
+	
+	CommonUtility.waitForPageLoadNew(driver, requestfirstName, 20);
+	requestfirstName.sendKeys(FirstName);
+	CommonUtility.waitForPageLoadNew(driver, requestlastName, 20);
+	requestlastName.sendKeys(LastName);
+	CommonUtility.waitForPageLoadNew(driver, requestemailaddress, 20);
+	requestemailaddress.sendKeys(EmailAddress);
+	validateNew(requestplaninformationsubmit);
+	requestplaninformationsubmit.click();
+	validateNew(requestplaninformationclose);
+	requestplaninformationclose.click();
+	
+	if(requestplaninformationsubmitpopup.getText().contains("Your information has been submitted. You should start getting your Medicare updates soon.")) {
+		System.out.println("****************Request information is displayed  ***************");
+
+		Assert.assertTrue(true);
+		validateNew(requestplaninformationclose);
+		requestplaninformationclose.click();
+	}else {
+		System.out.println("****************Request information is displayed  ***************");
+	}
+*/
+	requestemailaddress.clear();
+	requestemailaddress.sendKeys("(*^*_asb@t.c");
+	requestplaninformationsubmit.click();
+	if(validate(RequestPlanInformation_ErrorMessage) && RequestPlanInformation_ErrorMessage.isDisplayed()){
+		if(!RequestPlanInformation_ErrorMessage.getText().contains("Please enter a valid email address in the format 'user@company.com'")){
+			System.out.println("Email Invalid Error is Not  displayed : "+RequestPlanInformation_ErrorMessage.getText());
+			flag=false;
+		}
+		System.out.println("Email Invalid Error : "+RequestPlanInformation_ErrorMessage.getText());
+
+	}
+	else{
+		System.out.println("Email Invalid Error field is not displayed");
+
+	}
+	
+	validateNew(requestemailaddress);
+	requestemailaddress.clear();
+	requestemailaddress.sendKeys(EmailAddress);
+	System.out.println("Email Address is enetered : "+EmailAddress);
+	CommonUtility.waitForPageLoadNew(driver, requestfirstName, 20);
+	requestfirstName.sendKeys(FirstName);
+	CommonUtility.waitForPageLoadNew(driver, requestlastName, 20);
+	requestlastName.sendKeys(LastName);
+	validateNew(requestplaninformationsubmit);
+	requestplaninformationsubmit.click();
+	if(requestplaninformationsubmitpopup.getText().contains("Your information has been submitted. You should start getting your Medicare updates soon.")) {
+		System.out.println("****************Request  information is displayed  ***************");
+
+		Assert.assertTrue(true);
+		validateNew(requestplaninformationclose);
+		requestplaninformationclose.click();
+	}else {
+		System.out.println("****************Request information is displayed  ***************");
+	}
+return RequestPlanIInformation_Validation;
+
 }
 }
     
