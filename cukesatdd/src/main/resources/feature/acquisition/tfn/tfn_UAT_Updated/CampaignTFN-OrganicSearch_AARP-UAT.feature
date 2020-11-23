@@ -41,15 +41,15 @@ Feature: UAT Scripts-To test Organic SearchCampaign TFN on AARP site
      | SHOPPAGES URL   | <shoppages> |
       | TFN Xpath | <shoppagesTFN> |
      Then the user navigate to following MedED Pages URL and validate Federal TFN
-       | MedSupp URL | <medicareeduUrl> |
+       | MedEd URL | <medicareeduUrl> |
       | TFN Xpath   | <medicareeduTFN> |
     Examples: 
    |scenario       | pscCode | Precedence1PSC|maUrl                                  | maTFN                                                               | medicareeduUrl                                                                | medicareeduTFN                        |decisionGuideUrl                                                          | decisionGuideTFN     | agentApptUrl                                                     | agentApptTFN   |shoppages       |shoppagesTFN                                                  |
-   |Sc. 3.08 - AMP |  810106 |  810104 |shop/medicare-advantage-plans.html     | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[1] | /medicare-education/medicare-advantage-plans.html                              | (//a[contains(@class, 'tel')])[1]|health-plans/medicare-supplement-plans/medicare-information.html?vpp=true | //*[@id='tfn']       | health-plans/medicare-supplement-plans/agent-appointment.html    | //*[@id='tfn'] |/contact-us.html|(//*[contains(@class,'call')]//a[contains(@class,'tel')])[1]  |
+   |Sc. 3.08 - AMP |  810106 |  810104 |shop/medicare-advantage-plans.html     | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[1] | /medicare-education/medicare-advantage-plans.html                              | (//a[contains(@class, 'tel')])[1]|health-plans/medicare-supplement-plans/medicare-information.html?vpp=true | //*[@id='tfn']       | health-plans/medicare-supplement-plans/agent-appointment.html    | //*[@id='tfn'] |contact-us.html|(//*[contains(@class,'call')]//a[contains(@class,'tel')])[1]  |
    
 
   #######################Script 6: Campaign Precedence Logic#######################################
-  @Scenario_5_1to8_Precedence_1_AARP_UAT 
+  @Scenario_5_1to8_Precedence_1_AARP_UAT1
   Scenario Outline: 5.1 to 5.8 Campaign Precedence Logic No 1
     #------------------------**********---------------------------------
     # Precedence 5.1 - Visit AMP using Direct URL , PSC code 810106
@@ -244,6 +244,6 @@ Feature: UAT Scripts-To test Organic SearchCampaign TFN on AARP site
 
      Examples:
    | scenario            | site|pscCode  | shoppages       |     shoppagesTFN                                                                 |shoppagescompare                   |             shoppagescompareTFN                                                     |shoppagesdsnp                                    |   shoppagesdsnpTFN                                 |connect                   |    connectTFN                                                       |    maUrl                                          |maTFN                                                             |         MedsuppUrl      |                                                                                                                                                                                                                                                          
-   | Sc. 04.01 - 4.02    |  ulayer|8003093 |   /shop.html | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[1]               | /shop/compare.html               |//button[@id='sam-call-button']//span[contains(@class,'sam__button__text desktop')] |shop/dual-special-needs-plans.html  | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[1] |  /contact-us.html      |(//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[1]  |enroll/ma-enrollment.html                          |(//a[contains(@class, 'tel')])[2]                                 |/health-plans.html?product=medsup&EBRC=https://www.aarpmedicaresupplement.com/medicare-information-guide.html&intref=AARPMedicareSupplement.com&zipcode=90210&WT.mc_id=23W&#/plan-summary|
+   | Sc. 04.01 - 4.02    |  ulayer|8003093 |   shop.html | (//a[contains(@class, 'tel')])[1]              | shop/compare.html               |(//a[contains(@class, 'tel')])[1] |shop/dual-special-needs-plans.html  | (//a[contains(@class, 'tel')])[1] |  contact-us.html      |(//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[1]  |enroll/ma-enrollment.html                          |(//a[contains(@class, 'tel')])[2]                                 |health-plans.html?product=medsup&EBRC=https://www.aarpmedicaresupplement.com/medicare-information-guide.html&intref=AARPMedicareSupplement.com&zipcode=90210&WT.mc_id=23W&#/plan-summary|
     
 	

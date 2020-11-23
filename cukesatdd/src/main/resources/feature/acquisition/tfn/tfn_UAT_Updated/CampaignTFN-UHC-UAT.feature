@@ -82,22 +82,24 @@ Feature: UAT-SCripts To test Campaign TFN in all flows on UHC site
      Then the user navigates to following  Medicare Education Page URL and validate Federal TFN  
       | MEDICARE URL    | <emailLinkUrl> |
       | TFN Xpath | <emailLinkTFN> |
+         And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
       Then the user validates PSC code
       | PSC Code | <pscCode1> | 
 	   Then the user navigates to following  Medicare Education Page URL and validate Federal TFN  
       | MEDICARE URL    | <medicareUrl> |
       | TFN Xpath | <medicareTFN> |
+         And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
       Then the user validates PSC code
       | PSC Code | <pscCode1> | 
       Then the user navigates to shop pages Page and validates Federal TFN
      | SHOPPAGES URL   | <shoppagesUrl> |
       | TFN Xpath | <shoppagesTFN> | 
-      Then the user validates PSC code
-      | PSC Code | <pscCode1> | 
+         And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
+    
       
     Examples:  
        |scenario                  | pscCode |pscCode1| emailLinkUrl                                                                                      | emailLinkTFN                                                                      | medicareUrl                                   | medicareTFN                                                         | shoppagesUrl|      shoppagesTFN             |
-       |Scenario 5-Email - UMS 	|  880180 | 801430|?WT.mc_id=8014300&mrcid=em:Acq:MR%7CNTM6501%7CEGEM3108%7C::8014300 |//button[@id='sam-call-button']//span[contains(@class,'sam__button__text desktop')]|medicare-articles.html                         |//button[@id='sam-call-button']//span[contains(@class,'sam__button__text desktop')]|  shop/medicare-supplement-plans.html                       |//button[@id='sam-call-button']//span[contains(@class,'sam__button__text desktop')]|
+       |Scenario 5-Email - UMS 	|  880180 | 801430|/?WT.mc_id=8014300&mrcid=em:Acq:MR%7CNTM6501%7CEGEM3108%7C::8014300 |//button[@id='sam-call-button']//span[contains(@class,'sam__button__text desktop')]|medicare-articles.html                         |//button[@id='sam-call-button']//span[contains(@class,'sam__button__text desktop')]|  shop/medicare-supplement-plans.html                       |//button[@id='sam-call-button']//span[contains(@class,'sam__button__text desktop')]|
        
            #######################Script 6: External Link########################################
    @Scenario_6_External_Link_UHC_UAT

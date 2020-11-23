@@ -451,6 +451,8 @@ public void the_user_navigates_to_shop_Page_and_validates_Federal_TFN(DataTable 
 	Map<String, String> inputAttributesMap=parseInputArguments(arg1);
 	String URLpath = inputAttributesMap.get("SHOPPAGES URL");
 	String TFN_Xpath = inputAttributesMap.get("TFN Xpath");
+	
+	//String TFN_Xpath = "(//a[contains(@class, 'tel')])[1] ";
 	CampaignTFNPage tfnPage = (CampaignTFNPage) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE);
 	tfnPage.NavigateToHome();
 	tfnPage.navigateToUrl(URLpath);
@@ -508,7 +510,7 @@ public void the_user_signs_in_with_optum_Id_credentials_in_AARP_site_campaign_tf
 
 @Given("^the user is on AARP medicare acquisition site from External Link and Land on PDP Plans$")
 public void the_user_lands_on_AARP_from_External_Link_Landon_PDP_Plans(DataTable arg1) throws Throwable  {
-	driver = getLoginScenario().getWebDriverNew();
+	/*driver = getLoginScenario().getWebDriverNew();
 	getLoginScenario().saveBean(CommonConstants.WEBDRIVER, driver);
 	//driver = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 	AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(driver);
@@ -520,13 +522,19 @@ public void the_user_lands_on_AARP_from_External_Link_Landon_PDP_Plans(DataTable
 	//String TFN_Xpath = "//button[@id='sam-call-button']//span[contains(@class,'sam__button__text desktop')]";
 	CampaignTFNPage tfnPage = new CampaignTFNPage(driver);
 	getLoginScenario().saveBean(PageConstants.CAMPAIGN_TFN_PAGE, tfnPage);
-	tfnPage.navigateToCampaignURL(URLpath , EnvironmentUrl);
-	/*String Zip = "10001";
+	tfnPage.navigateToCampaignURL(URLpath , EnvironmentUrl);*/
+	
+	Map<String, String> inputAttributesMap=parseInputArguments(arg1);
+	String URLpath = inputAttributesMap.get("MA URL");
+	String TFN_Xpath = inputAttributesMap.get("TFN Xpath");
+	CampaignTFNPage tfnPage = (CampaignTFNPage) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE);
+	tfnPage.navigateToUrl(URLpath);
+	String Zip = "10001";
 	tfnPage.HomepagePlanSearch(Zip);
 	String PlanType = "PDP";
 	tfnPage.ViewPlanSummary(PlanType);
 	tfnPage.handlePlanYearSelectionPopup();
-	tfnPage.NavigateToOLE(PlanType);*/
+	tfnPage.NavigateToOLE(PlanType);
 	String TFNXpath_PlanDetails = "//a[contains(@class, 'tel')]";
 	tfnPage.validateFederalTFN(TFNXpath_PlanDetails);	
 }
@@ -618,7 +626,7 @@ public void the_user_is_on_following_acquisition_site_from_External_Site_Land_MA
 @Then("^the user navigate to following MedED Pages URL and validate Federal TFN$")
 public void the_user_navigate_to_following_MedED_Pages_URL_and_validate_Federal_TFN(DataTable arg1) throws Throwable {
 	Map<String, String> inputAttributesMap=parseInputArguments(arg1);
-	String URLpath = inputAttributesMap.get("MedSupp URL");
+	String URLpath = inputAttributesMap.get("MedEd URL");
 	String TFN_Xpath = inputAttributesMap.get("TFN Xpath");
 	CampaignTFNPage tfnPage = (CampaignTFNPage) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE);
 	tfnPage.navigateToUrl(URLpath);
