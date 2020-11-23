@@ -14,12 +14,12 @@ import cucumber.api.DataTable;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import gherkin.formatter.model.DataTableRow;
+import pages.acquisition.commonpages.VPPPlanSummaryPage;
 import pages.acquisition.shopperprofile.MemberCreateProfile;
 import pages.acquisition.shopperprofile.NonMemberCreateProfile;
 import pages.acquisition.shopperprofile.ProfileSearch;
 import pages.acquisition.shopperprofile.ShopperProfileAgentLogin;
 import pages.acquisition.ulayer.ComparePlansPage;
-import pages.acquisition.ulayer.VPPPlanSummaryPage;
 /**
  * @author bnaveen4
  * Functionality:Shopper Profile

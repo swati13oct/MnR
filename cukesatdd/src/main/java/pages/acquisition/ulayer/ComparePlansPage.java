@@ -26,6 +26,7 @@ import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 import cucumber.api.DataTable;
 import gherkin.formatter.model.DataTableRow;
+import pages.acquisition.dceredesign.DrugDetailsPage;
 import pages.acquisition.ole.WelcomePage;
 public class ComparePlansPage extends UhcDriver {
 
@@ -202,7 +203,7 @@ public class ComparePlansPage extends UhcDriver {
 
 	@FindBy(xpath="//*[normalize-space(text())='Drug Summary']/ancestor::th/following::tr[1]//th//span[contains(@class,'drugtext')]")
 	private WebElement DrugName;
-	
+
 	@FindBy(xpath="//*[normalize-space(text())='Drug Summary']/ancestor::th/following::tr[1]//td[1]")
 	private WebElement DrugCoverageText;	
 		
@@ -1131,5 +1132,7 @@ public class ComparePlansPage extends UhcDriver {
 			return null;
 		}
 	}
+	
+
 }
 
