@@ -29,6 +29,7 @@ import pages.mobile.acquisition.planrecommendationengine.TravelMobilePage;
 import pages.mobile.acquisition.planrecommendationengine.AdditionalServicesMobilePage;
 import pages.mobile.acquisition.planrecommendationengine.CommonutilitiesMobile;
 import pages.mobile.acquisition.planrecommendationengine.CostPreferencesMobilePage;
+import pages.mobile.acquisition.planrecommendationengine.EditResponseMobilePage;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstants;
 import atdd.framework.MRScenario;
@@ -52,6 +53,19 @@ public class PlanRecommendationStepDefinitionMobile {
 	HashMap<String, String> inputValues;
 	public static String PREflow="";
 
+	public void readfeaturedataMobile(DataTable data) {
+		inputRow = new ArrayList(data.getGherkinRows());
+		inputValues = new HashMap<String, String>();
+		for (int i = 0; i < inputRow.size(); i++) {
+			inputValues.put(inputRow.get(i).getCells().get(0), inputRow.get(i).getCells().get(1));
+		}
+		String temp = inputValues.get("Plan Type");
+		if (temp != null && PREflow != temp) {
+			PREflow = temp;
+			System.out.println("Current PRE Flow : "+PREflow);
+		}
+	}
+	
 	@Given("^the user is on UHC medicare acquisition site mobile$")
 	public void the_user_on_uhc_medicaresolutions_site_mobile() {
 		wd = getLoginScenario().getMobileDriver();
@@ -611,17 +625,60 @@ public class PlanRecommendationStepDefinitionMobile {
 		preheaderfootermobile.navigatePRELandingpageMenuMobile();
 	}
 	
-	public void readfeaturedataMobile(DataTable data) {
-		inputRow = new ArrayList(data.getGherkinRows());
-		inputValues = new HashMap<String, String>();
-		for (int i = 0; i < inputRow.size(); i++) {
-			inputValues.put(inputRow.get(i).getCells().get(0), inputRow.get(i).getCells().get(1));
-		}
-		String temp = inputValues.get("Plan Type");
-		if (temp != null && PREflow != temp) {
-			PREflow = temp;
-			System.out.println("Current PRE Flow : "+PREflow);
-		}
-	}
+	// Edit Page Mobile
+	@Then("^user validate saved values in edit response page mobile$")
+   	public void check_saved_value_editResponse_page(DataTable givenAttributes) {
+		readfeaturedataMobile(givenAttributes);
+		EditResponseMobilePage preEditMobile =  new EditResponseMobilePage(wd);
+		preEditMobile.editResponsepage(inputValues);
+   	}
+	
+	@Then("^user return to vpp page using \"([^\"]*)\" from edit response page mobile$")
+   	public void check_saved_value_editResponse_page(String button) {
+		EditResponseMobilePage preEditMobile =  new EditResponseMobilePage(wd);
+		preEditMobile.returnVPP(button);
+   	}
+	
+	@Then("^user edits values in edit response page mobile$")
+   	public void edit_saved_value_editResponse_page(DataTable givenAttributes) {
+		readfeaturedataMobile(givenAttributes);
+		EditResponseMobilePage preEditMobile =  new EditResponseMobilePage(wd);
+		preEditMobile.editUserResponse(inputValues);
+   	}
+	
+	@Then("^user adds doctor in edit response page mobile$")
+   	public void add_doctor_editResponse_page(DataTable givenAttributes) {
+		readfeaturedataMobile(givenAttributes);
+		EditResponseMobilePage preEditMobile =  new EditResponseMobilePage(wd);
+		preEditMobile.addDoctorEditResponse(inputValues);
+   	}
+	
+	@Then("^user navigates to edit response page mobile$")
+   	public void navigate_editResponse_page(DataTable givenAttributes) {
+		readfeaturedataMobile(givenAttributes);
+		EditResponseMobilePage preEditMobile =  new EditResponseMobilePage(wd);
+		preEditMobile.navigateEditResponsePageMobile(inputValues.get("Plan Type"));
+   	}
+
+	@Then("^user edits coverage value in edit response page mobile$")
+   	public void edit_coverage_editResponse_page(DataTable givenAttributes) {
+		readfeaturedataMobile(givenAttributes);
+		EditResponseMobilePage preEditMobile =  new EditResponseMobilePage(wd);
+		preEditMobile.changeCoverage(inputValues);
+   	}
+	
+	@Then("^user validates coverage value in edit response page mobile$")
+   	public void validate_coverage_editResponse_page(DataTable givenAttributes) {
+		readfeaturedataMobile(givenAttributes);
+		EditResponseMobilePage preEditMobile =  new EditResponseMobilePage(wd);
+		preEditMobile.checkCoveragevalue(inputValues);
+   	}
+	
+	@Then("^user selects add drug option in drug page from edit response page mobile$")
+   	public void add_drug_editResponse_page(DataTable givenAttributes) {
+		readfeaturedataMobile(givenAttributes);
+		EditResponseMobilePage preEditMobile =  new EditResponseMobilePage(wd);
+		preEditMobile.addDrugs(inputValues);
+   	}
 
 }
