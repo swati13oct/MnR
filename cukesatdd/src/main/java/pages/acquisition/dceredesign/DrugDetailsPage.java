@@ -335,6 +335,13 @@ public class DrugDetailsPage extends UhcDriver {
 	@FindBy(xpath = "//*[@id='milesDropdown']")
 	private WebElement clickDistanceDefaultMile;
 	
+	@FindBy(xpath = "//*[@id='editPharmacyLink']")
+	public WebElement editLink;
+	
+	@FindBy(id = "prescriptiondrug")
+	private WebElement prescriptiondrugTab;
+
+	
 	public DrugDetailsPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -354,14 +361,14 @@ public class DrugDetailsPage extends UhcDriver {
 	public void validatePlanName(String planName) {
 
 		System.out.println("Plan Name : "+planName);
-		WebElement PlanNameElement = driver.findElement(By.xpath("//h1[contains(text(), '"+planName+"')]"));
+		WebElement PlanNameElement = driver.findElement(By.xpath("//h2[contains(text(), '"+planName+"')]"));
 		if(validateNew(PlanNameElement)) {
 			Assert.assertTrue("Plan Name is correct for Drug Details Page"+PlanNameElement.getText(), true);
 		}
 		else
 		Assert.fail("Plan Name validation Failed for Drug Details Page");
 	}
-
+	
 	public void validateDrugCosts() {
 		validateNew(DrugDetails_DrugCostsHeading);
 		validateNew(DrugCosts_AvgMonDrugCost);
@@ -1279,4 +1286,18 @@ public class DrugDetailsPage extends UhcDriver {
 		
 		Assert.assertTrue("Drug not switched to generic", switchToGenericIcon.isDisplayed());
 	}	
+	
+	
+	
+	public void clickEdit() throws InterruptedException {
+		Thread.sleep(6000);
+		validate(prescriptiondrugTab);
+		prescriptiondrugTab.click();
+		validateNew(editLink);
+		JavascriptExecutor je = (JavascriptExecutor) driver;
+		je.executeScript("arguments[0].click();", editLink);
+		
+		//Assert.assertTrue("Drug not switched to generic", editLink.isDisplayed());
+	}
+
 }

@@ -128,7 +128,7 @@ Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanDetails AARP - To test DCE - VPP Plan De
     Then the user clicks on Build Drug List to navigate to Build Drug List Page
     Then the user searches and adds the following Drug to Drug List
       | DrugName | <drug1> |   
-    And clicks on Review drug cost button
+    And clicks on Review drug cost button for detail page
     Then the user Clicks button to VPP Plan Details Page from Drug Details Page
     Then the user validates planName matches plan Name in VPP
     Then the user verify the drug cost estimator and view plan summary on VPP detail page in AARP
@@ -170,7 +170,7 @@ Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanDetails AARP - To test DCE - VPP Plan De
     Then the user clicks on Build Drug List to navigate to Build Drug List Page
     Then the user searches and adds the following Drug to Drug List
       | DrugName | <drug1> | 
-     And clicks on Review drug cost button  
+      And clicks on Review drug cost button for detail page
     #Then the user Clicks button to VPP Plan Details Page from Drug Details Page
      And user clicks on change pharmacy link from details page
      Then user change the pharmacy to view no prescription coverage
@@ -322,7 +322,7 @@ Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanDetails AARP - To test DCE - VPP Plan De
     Then the user clicks on Build Drug List to navigate to Build Drug List Page
     Then the user searches and adds the following Drug to Drug List
       | DrugName | <drug1> | 
-     And clicks on Review drug cost button  
+      And clicks on Review drug cost button for detail page  
      Then user verify and click on switch to generic NBA on drug detail page
      Then verify drug is switched to generic on detail page
      
@@ -346,7 +346,7 @@ Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanDetails AARP - To test DCE - VPP Plan De
            Then the user clicks on Build Drug List to navigate to Build Drug List Page
            Then the user searches and adds the following Drug to Drug List
                    | DrugName | <drug1> | 
-           And clicks on Review drug cost button  
+           And clicks on Review drug cost button for detail page  
           #Then the user Clicks button to VPP Plan Details Page from Drug Details Page
            And user clicks on change pharmacy link from details page
            Then user verify details page change pharmacy modal
@@ -355,3 +355,36 @@ Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanDetails AARP - To test DCE - VPP Plan De
       Examples: 
       | zipcode | plantype | county       | isMultutiCounty | drug1     |planname                                              | 
       |   78006 | MAPD      | Bexar County | yes             | Lipitor | AARP Medicare Advantage Choice (PPO)  |
+      
+      
+     @editPharmacyFromVPPDetail
+     
+       Scenario Outline: Test to verify user can edit the pharamcy from detail page 
+    Given the user is on the AARP medicare site landing page
+    When the user performs plan search using following information in the AARP site
+      | Zip Code        | <zipcode>         |
+      | County Name     | <county>          |
+      | Is Multi County | <isMultutiCounty> |
+    Then the user navigates to the plan details for the given plan type in AARP site
+      | Plan Type | <plantype> |
+      | Plan Name | <planname> |
+    And I access the DCE Redesign from Plan Details
+    Then the user validates Get Started Page
+    Then the user clicks on Build Drug List to navigate to Build Drug List Page
+    Then the user searches and adds the following Drug to Drug List
+      | DrugName | <drug1> |   
+    And clicks on Review drug cost button for detail page
+    Then the user Clicks button to VPP Plan Details Page from Drug Details Page
+    Then the user validates planName matches plan Name in VPP
+    Then the user verify the drug cost estimator and view plan summary on VPP detail page in AARP
+     #Then the user click on Prescription Drug Benefits tab from drug detail page
+    Then the user verify and edit the Pharmacy from vpp detail page
+    Then user clicks on change pharmacy link from details page
+    
+     
+      @DCE_Redesign_VPPSummary_to_Vpp_Details_MAPD
+     
+      Examples: 
+      | zipcode | plantype | county | isMultutiCounty | drug1     | drug2                | drug3      | drug4         | drug5            | drug6   | planname                                           |
+      |   90210 | MAPD     | none   | no              | meloxicam | diclofenac potassium | febuxostat | buprenorphine | fentanyl citrate | Lipitor | AARP Medicare Advantage SecureHorizons Focus (HMO) |
+      

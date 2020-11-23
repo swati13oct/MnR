@@ -204,15 +204,18 @@ public class DrugSummaryPage extends UhcDriver {
 	@FindBy(id = "new-drug-refill")
 	private WebElement drugSupplyLength;
 
+	@FindBy(xpath = "//*[@id='changePharmacyLink0']")
+	public WebElement changePharmacyCoverPrescription;
+
 	@FindBy(xpath = "//*[@id='mailSelectPharmacyBtn0']/../../following-sibling::div[1]")
 	private WebElement mailOrderPharmacyMsg;
 
 	@FindBy(xpath = "//*[contains(@id,'selectPharmacyBtn')]/../div//span[1]")
 	private List<WebElement> pharmacyNameList;
-	
+
 	@FindBy(xpath = "//*[@class='pagination']/../p")
 	private WebElement pageNumber;
-	
+
 	@FindBy(xpath = "//*[@id='selectaPharmacy-overlay']//*[@class='field-error-msgfordceui']/span[1]")
 	private WebElement noResultsMessage;
 
@@ -662,6 +665,12 @@ public class DrugSummaryPage extends UhcDriver {
 		switchToGenericSubmitBtn.click();
 	}
 
+	public void clickChangePharmacyCoverPrescription() {
+		validate(changePharmacyCoverPrescription);
+		changePharmacyCoverPrescription.click();
+
+	}
+
 	public void selectPreferredMailOrderPharmacy() {
 		waitforElement(preferredMailPharmacy);
 		preferredMailPharmacy.click();
@@ -713,35 +722,35 @@ public class DrugSummaryPage extends UhcDriver {
 	}
 
 	public void validateSecondPageDisplayed() {
-		String page=pageNumber.getText();
-		Pattern p=Pattern.compile("Page (\\d*) of (\\d*)");
-		java.util.regex.Matcher m=p.matcher(page);
-		if(m.find()) {
-			page=m.group(1);
+		String page = pageNumber.getText();
+		Pattern p = Pattern.compile("Page (\\d*) of (\\d*)");
+		java.util.regex.Matcher m = p.matcher(page);
+		if (m.find()) {
+			page = m.group(1);
 		}
 		Assert.assertTrue("Second page not displayed", page.equals("2"));
 	}
 
 	public void validateFirstPageDisplayed() {
-		String page=pageNumber.getText();
-		Pattern p=Pattern.compile("Page (\\d*) of (\\d*)");
-		java.util.regex.Matcher m=p.matcher(page);
-		if(m.find()) {
-			page=m.group(1);
+		String page = pageNumber.getText();
+		Pattern p = Pattern.compile("Page (\\d*) of (\\d*)");
+		java.util.regex.Matcher m = p.matcher(page);
+		if (m.find()) {
+			page = m.group(1);
 		}
 		Assert.assertTrue("First page not displayed", page.equals("1"));
 	}
-	
+
 	public void searchPharmaciesByZipcode(String zipcode) {
 		pharmacyZipcodeSearch.clear();
 		pharmacyZipcodeSearch.sendKeys(zipcode);
 		pharmacySearchBtn.click();
 	}
-	
+
 	public void validateNoResultsMsg(String expectedMsg) {
 		waitforElement(noResultsMessage);
 		System.out.println(noResultsMessage.getText());
 		Assert.assertTrue("No results message not displayed", noResultsMessage.getText().equals(expectedMsg));
 	}
-	
+
 }
