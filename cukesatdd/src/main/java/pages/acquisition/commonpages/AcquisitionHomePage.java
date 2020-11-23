@@ -1830,6 +1830,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		
 		public void signInheader() {
 			jsClickNew(headerSignInLink);
+			waitForPageLoadSafari();
 			validateNew(signIn);
 			if (driver.getCurrentUrl().contains("medicare.uhc.com")) {
 				Assert.assertTrue(true);
@@ -1893,7 +1894,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			validateNew(headerRegisterLink);
 				Assert.assertTrue(true);
 			jsClickNew(headerRegisterLink);
-			
+			waitForPageLoadSafari();
 			if(validate(registerFirstName))
 				System.out.println("Register link is displayed in the header");
 			else 
@@ -2635,6 +2636,12 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 		public void clickBrowserBackButton() {
 			driver.navigate().back();
+			
+			//Added refresh and wait as elements are not located in Safari 13 browser after using navigate back
+			if(MRScenario.browserName.equalsIgnoreCase("Safari")) {
+				driver.navigate().refresh();
+				sleepBySec(2);
+			}
 		}
 
 		
