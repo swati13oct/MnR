@@ -218,6 +218,9 @@ public class DrugSummaryPage extends UhcDriver {
 
 	@FindBy(xpath = "//*[@id='selectaPharmacy-overlay']//*[@class='field-error-msgfordceui']/span[1]")
 	private WebElement noResultsMessage;
+	
+	@FindBy(id = "inValidZipcodeLbl")
+	private WebElement invalidZipCodeMsg;
 
 	@Override
 	public void openAndValidate() {
@@ -751,6 +754,12 @@ public class DrugSummaryPage extends UhcDriver {
 		waitforElement(noResultsMessage);
 		System.out.println(noResultsMessage.getText());
 		Assert.assertTrue("No results message not displayed", noResultsMessage.getText().equals(expectedMsg));
+	}
+	
+	public void validateInvalidZipCodeMsg(String expectedMsg) {
+		waitforElement(invalidZipCodeMsg);
+		System.out.println(invalidZipCodeMsg.getText());
+		Assert.assertTrue("Invalid zipcode message not displayed", invalidZipCodeMsg.getText().equals(expectedMsg));
 	}
 
 }

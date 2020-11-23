@@ -433,7 +433,7 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
       | pageName                   | drug1 | zipCode |
       | DCE Redesign - Get Started | Lipitor  |   78006 |
       
-      @dCERedesign_ChangePharmacyModal_AARP @F426569
+      @dCERedesign_ChangePharmacyModal_AARP @F426569 @F535368
   Scenario Outline: Test to verify sort, pagination functionality for change pharmacy on drug summary page
     Given the user is on AARP medicare acquisition site landing page
     When the user navigates to following AARP medicare acquisition site page
@@ -468,8 +468,11 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
     Then user should be navigated to first page of pharmacy list
     When user search with zipcode with no pharamacies
     | ZipCode | <zipCode1> |
-    Then no results message should be displayed
-    | NoResultsMessage | <message> |
+    #Then no results message should be displayed
+    #| NoResultsMessage | <message> |
+    When user search with incorrect zipcode
+    | ZipCode | <zipCode2> |
+    Then error message "Please enter a valid ZIP code." should be displayed on change pharmacy modal
     Examples: 
-      | path                                             | pageName                   | drug1 | zipCode |message|zipCode1|
-      | health-plans/estimate-drug-costs.html/getstarted | DCE Redesign - Get Started | Lipitor  |   90001 |There were no results found for the requested search. Broadening your search criteria (for example, changing the pharmacy type, search radius and/or your ZIP code) may help you get a different result.|96799|
+      | path                                             | pageName                   | drug1 | zipCode |message|zipCode1|zipCode2|
+      | health-plans/estimate-drug-costs.html/getstarted | DCE Redesign - Get Started | Lipitor  |   90001 |There were no results found for the requested search. Broadening your search criteria (for example, changing the pharmacy type, search radius and/or your ZIP code) may help you get a different result.|96799|78456|

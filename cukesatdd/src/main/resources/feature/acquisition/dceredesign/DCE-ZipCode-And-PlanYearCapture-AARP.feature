@@ -129,3 +129,30 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test ZipCode and Plan Year capture page i
     Examples: 
       | zipcode | plantype | county           | isMultutiCounty | drugName   |
       |   10001 | MAPD      | Western District | no              | Orkambi|
+      
+      @DCE_ZipCodePlanYear_ErrorMessage_InvalidZipcode_AEP @F443609 @F535368
+  Scenario Outline: Test to verify the error message when user does not enter or enter invalid zipcode and clicks on continue button on <site> site
+    Given the user is on medicare acquisition site landing page
+      | Site | <site> |
+    When I access the acquisition DCE Redesign from home page
+    Then the user validates Get Started Page
+    When the user clicks on Add drugs button
+    Then the user searches and adds the following Drug to Drug List
+      | DrugName | <drug1> |
+    And clicks on Review drug cost button
+    Then user should be navigated to zipcode and plan year capture page for AEP
+    When user enter invalid zipcode
+      | inValidzipCode | <invalidzipcode2> |
+    Then error message should be displayed
+    When user enters valid zipcode and county
+      | ZipCode | <zipCode> |
+    #And user selects plan year
+    And user clicks on continue button in Zip Entry Page
+    Then load screen should be displayed
+    And user should be navigated to Review drug cost estimate page
+
+    @dce_redesign_zipcode_planyear_capture_AEP_AARP
+    Examples: 
+      | invalidzipcode | zipCode | invalidzipcode1 | invalidzipcode2 | drug1   | site |
+      |          78452 |   90210 |            1234 |           00000 | Lipitor | AARP |
+

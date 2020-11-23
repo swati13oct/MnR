@@ -1690,5 +1690,23 @@ public void user_should_verify_you_pay_value_for_not_covered_drug_in_drug_pricin
 		drugSummaryPage.validateNoResultsMsg(message);
 	}
 
+	@When("^user search with incorrect zipcode$")
+	public void user_search_with_incorrect_zipcode(DataTable attributes){
+		List<DataTableRow> memberAttributesRow = attributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
 
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		String zipCode = memberAttributesMap.get("ZipCode");
+		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
+		drugSummaryPage.searchPharmaciesByZipcode(zipCode);
+	}
+
+	@Then("^error message \"([^\"]*)\" should be displayed on change pharmacy modal$")
+	public void error_message_should_be_displayed_on_change_pharmacy_modal(String errorMessage) {
+		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
+		drugSummaryPage.validateInvalidZipCodeMsg(errorMessage);
+	}
 }
