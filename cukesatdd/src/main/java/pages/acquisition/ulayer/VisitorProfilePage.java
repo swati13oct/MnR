@@ -17,6 +17,7 @@ import acceptancetests.data.CommonConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 import pages.acquisition.ulayer.VPPPlanSummaryPage;
+import pages.acquisition.dceredesign.GetStartedPage;
 import pages.acquisition.ole.WelcomePage;
 
 public class VisitorProfilePage extends UhcDriver {
@@ -81,6 +82,15 @@ public class VisitorProfilePage extends UhcDriver {
 	@FindBy(css="div.print-back>a:first-child")
 	private WebElement backToPlans;
 	
+	@FindBy(xpath = "//div[@class='multi-year-select']")
+	private WebElement profileMultiYear;
+	
+	@FindBy(xpath = "//div[@class='multi-year-select']/button[contains(@class,'js-select-year select-year')][2]")
+	private WebElement profileNxtYrPlans;
+	
+	@FindBy(xpath = "//div[@class='multi-year-select']/button[contains(@class,'js-select-year select-year')][1]")
+	private WebElement profileCrntYrPlans;
+	
 	public VisitorProfilePage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -102,11 +112,23 @@ public class VisitorProfilePage extends UhcDriver {
 		return null;
 	}
 	
+	@FindBy(xpath = "//button[contains(@id,'addDrug')]")
+	public WebElement AddMyDrugsBtn;
+
+	
+	public GetStartedPage addDrug_DCERedesign(){
+		
+		addrugs.click();
+		if (validateNew(AddMyDrugsBtn))
+			return new GetStartedPage(driver);
+		return null;
+	}
+	
 	public AcquisitionHomePage addPlan() throws Exception {
 		addPlans.click();
 		Thread.sleep(10000);
 		CommonUtility.checkPageIsReadyNew(driver);
-		if(driver.getCurrentUrl().contains("zipcode")){
+		if(driver.getCurrentUrl().contains("health-plans.html")){
 			String page = "health-plans";
 			return new AcquisitionHomePage(driver,page);
 		}
@@ -128,7 +150,7 @@ public class VisitorProfilePage extends UhcDriver {
 		jsClickNew(expandDrugBlock);
 		System.out.println("Drug Name Text : " + drugName.getText().trim());
 		Assert.assertTrue(drugName.getText().trim().contains(drug));
-		Assert.assertTrue(pharmacyAddress.isDisplayed());
+		//Assert.assertTrue(pharmacyAddress.isDisplayed());
 		System.out.println("Verified Drug Displayed :" + drugName.getText().trim() );
 	}
 	
@@ -190,18 +212,38 @@ public class VisitorProfilePage extends UhcDriver {
 	 * @param plans
 	 */
 	public void deletePlans(String plans) {
+		if(validate(profileMultiYear, 10))
+		{
+			profileNxtYrPlans.click();
+			if(driver.findElements(By.xpath("//div[@class='title dropdown-open']")).size()>0)
+				driver.findElement(By.xpath("//div[@class='multi-year-select']/button[contains(@class,'js-select-year select-year')][2]/following::button[2]")).click();
+			else
+				System.out.println("##############No saved plans available for 2021##############");
+			
+			profileCrntYrPlans.click();
+		}
+		else {
+			System.out.println("##############MultiYear not displayed##############");
+			}
+		
 		try {
 			if(driver.findElements(By.xpath("//div[@class='title dropdown-open']")).size()>0){
-				List<String> listOfTestPlans = Arrays.asList(plans.split(","));
-				for (String plan: listOfTestPlans) {
-					driver.findElement(By.xpath("//h4[text()='"+plan+"']/preceding::button[1]")).click();
-					Thread.sleep(5000);
+				if(driver.findElements(By.xpath("//div[@class='title dropdown-open']")).size()==1)
+					driver.findElement(By.xpath("//div[@class='multi-year-select']/button[contains(@class,'js-select-year select-year')][2]/following::button[2]")).click();
+				else {
+					List<String> listOfTestPlans = Arrays.asList(plans.split(","));
+					for (String plan: listOfTestPlans) {
+						driver.findElement(By.xpath("//h4[text()='"+plan+"']/preceding::button[1]")).click();
+						Thread.sleep(5000);
+						}
+					}
+				System.out.println("##############All saved plans deleted##############");
 				}
-			}else
-				System.out.println("##############No saved plans available here##############");
-		} catch (Exception e) {
+				else
+					System.out.println("##############No saved plans available here##############");
+		}	catch (Exception e) {
 			e.printStackTrace();
-		}
+			}
 		Assert.assertTrue(!(driver.findElements(By.xpath("//div[@class='title dropdown-open']")).size()>0));
 	}
 	
@@ -226,7 +268,7 @@ public class VisitorProfilePage extends UhcDriver {
 	public boolean providerinfo(String planName)
 	{
 		WebElement ProviderSearchLink = driver.findElement
-				(By.xpath("//*[contains(text(),'"+planName+"')]/following::div[contains(@class, 'provider-accordion')][1]//button[contains(@class,'provider-toggle')]"));
+				(By.xpath("//*[contains(text(),'"+planName+"')]/following::div[contains(@class, 'providers--drugs')][1]//div[contains(@class,'provider-list added')]/div/button"));
 		String mproviderinfo=ProviderSearchLink.getText();
 		System.out.println(mproviderinfo);
 		if(mproviderinfo.toLowerCase().contains("providers covered"))
@@ -259,11 +301,13 @@ public class VisitorProfilePage extends UhcDriver {
 	 */
 	public void signIn(String username,String password) {
 		try {
-			
+			validate(signIn, 5);
 			signIn.click();
+			waitForPageLoadSafari();
 			driver.findElement(By.cssSelector("input#userNameId_input")).sendKeys(username);
 			driver.findElement(By.cssSelector("input#passwdId_input")).sendKeys(password);
 			driver.findElement(By.cssSelector("input#SignIn")).click();
+			waitForPageLoadSafari();
 			String Question = driver.findElement(By.cssSelector("label#challengeQuestionLabelId")).getText().trim();
 			WebElement securityAnswer = driver.findElement(By.cssSelector("div#challengeSecurityAnswerId >input"));
 			if (Question.equalsIgnoreCase("What is your best friend's name?")) {
@@ -355,12 +399,12 @@ public class VisitorProfilePage extends UhcDriver {
 	public ComparePlansPage planCompare(String plans) {
 	
 		comparePlans.click();
-		CommonUtility.waitForPageLoad(driver, comparePlansOnPopup, 20);
+		/*CommonUtility.waitForPageLoad(driver, comparePlansOnPopup, 20);
 		String[] plan = plans.split(",");
 		for(int i=0;i<4;i++) {
 			driver.findElement(By.xpath("//label[text()='"+plan[i]+"']/preceding-sibling::input")).click();
 		}
-		comparePlansOnPopup.click();
+		comparePlansOnPopup.click();*/
 		validateNew(enrollBtn);
 		if (driver.getCurrentUrl().contains("/plan-compare")) {
 			System.out.println("Navigation to Plan Compare page is Passed");

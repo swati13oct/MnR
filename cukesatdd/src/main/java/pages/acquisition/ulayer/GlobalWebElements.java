@@ -20,6 +20,10 @@ public class GlobalWebElements  extends UhcDriver{
 		
 		
 	}
+	
+	@FindBy(xpath="//*[@id='planTypesColumn']/h3[4]/a")
+	public static WebElement menuShop;
+	
 
 	@FindBy(id = "gf_lnk_1")
 	public static WebElement footerHomeLink;
@@ -65,8 +69,7 @@ public class GlobalWebElements  extends UhcDriver{
 	@FindBy(xpath = "//a[contains(@id, 'gfn_lnk_row2') and contains(@dtmname, 'Special Needs')]")
 	 public static WebElement medicareSpecialNeedsPlansLink;
 	
-	@FindBy(xpath = "//a[contains(@id, 'gfn_lnk_row2') and contains(@dtmname, 'Medicare Supplement')]")
-	//@FindBy(xpath = "//span[contains(@class ,  'geoTargetedContent') and contains(@id, 'zbe2trg1n')]")
+	@FindBy(xpath = "//li[contains(@class,'liheight') and not(contains(@class,'hide'))]//*[contains(@id, 'gfn_lnk_row2_')]//*[contains(text(), 'Medicare Supplement')]")
 	 public static WebElement medicareSupplementInsurancePlansLink;
 	
 	@FindBy(xpath = "//a[contains(@id, 'gfn_lnk_row2') and contains(@href, 'prescription-drug')]")

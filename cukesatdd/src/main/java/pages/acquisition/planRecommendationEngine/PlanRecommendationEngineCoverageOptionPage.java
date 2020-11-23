@@ -10,7 +10,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 
 import atdd.framework.UhcDriver;
-import pages.acquisition.bluelayer.AcquisitionHomePage;
+import pages.acquisition.commonpages.AcquisitionHomePage;
 
 public class PlanRecommendationEngineCoverageOptionPage extends UhcDriver {
 
@@ -111,22 +111,27 @@ public class PlanRecommendationEngineCoverageOptionPage extends UhcDriver {
 		System.out.println("Functional Operations");
 		if (planType.equalsIgnoreCase("MAPD")) {
 			validate(plantypeMAPD);
-			plantypeMAPD.click();
+//			plantypeMAPD.click();
+			jsClickNew(plantypeMAPD);
 			System.out.println("Plan Type " + planType + " Clicked");
 		} else if (planType.equalsIgnoreCase("MA")) {
 			validate(plantypeMA);
-			plantypeMA.click();
+//			plantypeMA.click();
+			jsClickNew(plantypeMA);
 			System.out.println("Plan Type " + planType + " Clicked");
 		} else if (planType.equalsIgnoreCase("PDP")) {
 			validate(plantypePDP);
-			plantypePDP.click();
+//			plantypePDP.click();
+			jsClickNew(plantypePDP);
 			System.out.println("Plan Type " + planType + " Clicked");
 		} else if (planType.equalsIgnoreCase("None")) {
 			validate(plantypeNone);
-			plantypeNone.click();
+//			plantypeNone.click();
+			jsClickNew(plantypeNone);
 			System.out.println("Plan Type " + planType + " Clicked");
 		}
-		continueBtn.click();
+		jsClickNew(continueBtn);
+//		continueBtn.click();
 		System.out.println("Validating " + page + " page Continue button functionality");
 //		desktopCommonUtils.nextPageValidation(page.toUpperCase());
 	}

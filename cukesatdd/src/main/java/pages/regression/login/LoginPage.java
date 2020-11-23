@@ -5,6 +5,7 @@ package pages.regression.login;
 
 import java.util.concurrent.TimeUnit;
 
+import org.junit.Assert;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.TimeoutException;
@@ -82,7 +83,16 @@ public class LoginPage extends UhcDriver {
 	
 	@FindBy(xpath="//*[@id='proceed-link']")
 	protected WebElement proceedLink;	
-	    
+	
+	@FindBy(xpath="//div[@class='authQuestionTitle' and contains(text(),'logged out of your account')]")
+	protected WebElement loggedOutMsg;
+	
+	@FindBy(xpath="//div[@id='memberSignInGlobalErrorMessageInvalid' and not(contains(@class,'ng-hide'))]")
+	protected WebElement loginPageError;
+
+	@FindBy(xpath="//h1[contains(text(),'Resource') and contains(text(),'not found')]")
+	protected WebElement resourceNotFoundError;
+
 	    MRScenario loginScenario;
 		
 		public MRScenario getLoginScenario() {
@@ -199,6 +209,7 @@ public class LoginPage extends UhcDriver {
 		}
 		
 		public Object loginWithLegacy(String username, String password) throws InterruptedException {
+			driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
 			try {
 				if(privacyNotice.getText().contains("Your connection is not private"))
 				{
@@ -213,6 +224,9 @@ public class LoginPage extends UhcDriver {
 				}catch (Exception e) {
 				System.out.println("Privacy error Page didn't appear");
 			}
+
+			Assert.assertTrue("PROBLEM - encountered login page error on the login page", !validate(loginPageError,0));
+			CommonUtility.waitForPageLoad(driver, userNameField, 5);
 			sendkeysNew(userNameField, username);
 			sendkeysNew(passwordField, password);
 			signInButton.click();
@@ -225,6 +239,9 @@ public class LoginPage extends UhcDriver {
 			} catch (Exception e) {
 				System.out.println("No Such alert displayed");
 			}
+
+			Assert.assertTrue("PROBLEM - encountered Resource not found error", !validate(resourceNotFoundError,0));
+
 			// CommonUtility.checkPageIsReady(driver);
 			WebDriverWait wait = new WebDriverWait(driver, 5);
 			Alert alert;
@@ -246,6 +263,7 @@ public class LoginPage extends UhcDriver {
 					return null;
 				}
 				if (counter < 35) {
+					Assert.assertTrue("PROBLEM - got 'You have successfully logged out' message while attempting to land on testharness page", !validate(loggedOutMsg,0));
 					if (noWaitValidate(homePageNotice,0)) {
 						homePageNotice.click();
 						CommonUtility.checkPageIsReady(driver);
@@ -256,11 +274,19 @@ public class LoginPage extends UhcDriver {
 						homePageNotice3.click();
 						CommonUtility.checkPageIsReady(driver);
 					}
+					//tbd if (null!=MRScenario.environment 
+					//tbd 		&& (MRScenario.environment.contains("team-a") || MRScenario.environment.contains("team-h"))) { 
 					if (null!=MRScenario.environment 
-							&& (MRScenario.environment.contains("team-a") || MRScenario.environment.contains("team-h"))) { 
+							&& MRScenario.environment.contains("team-h")) { 
 						//note: sometimes take longer to load page on team env
 						Thread.sleep(4000);
-						System.out.println("Time elapsed post sign In clicked --" + counter + "*3 sec.");
+						System.out.println("Time elapsed post sign In clicked --" + counter + "*4 sec.");
+					} else if (MRScenario.environment.contains("team-a")) {
+						System.out.println("Time elapsed post sign In clicked --" + counter);
+						if ((counter>0) && (counter % 3) == 0) {
+							System.out.println("...waited for a while...referesh the page and see if it helps");
+							driver.navigate().refresh();
+						}
 					} else {
 						Thread.sleep(2000);
 						System.out.println("Time elapsed post sign In clicked --" + counter + "*2 sec.");
@@ -432,6 +458,7 @@ public class LoginPage extends UhcDriver {
 					return null;
 				}
 				if (counter < 35) {
+					Assert.assertTrue("PROBLEM - got 'You have successfully logged out' message while attempting to land on testharness page", !validate(loggedOutMsg,0));
 					if (MRScenario.environment.contains("team-a")) { //note: sometimes take longer to load page on this team env
 						Thread.sleep(5000);
 						System.out.println("Time elapsed post sign In clicked --" + counter + "*5 sec.");

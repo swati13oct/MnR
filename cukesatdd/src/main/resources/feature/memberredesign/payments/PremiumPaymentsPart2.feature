@@ -1,8 +1,13 @@
-Feature: 1.19 Verify the premium payment flows on member portal - Part 3 - Test cases 7 to 13
+Feature: 1.19 Verify the premium payment flows on member portal - Part 2 - Test cases 13 to 18
 
-   #Test Case 07
+Background: Feature security flag needs to be true before ATDD script execution
+     Given First check if feature security flag is set to true
+      | Feature           | UCPPayments |
+###############################Regression Scenarios Begin Here ########################################
+
+  #Test Case 13
   @regressionMember
-  Scenario Outline: TID: <TID> - Test Case 07 -Verify Update Recurring for Checking Account for Ship Member
+  Scenario Outline: TID: <TID> - Test Case 13 -Verify Setup Recurring payment for Checking Account for Ship Member a) normal user b)terminated and active ship
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
@@ -20,12 +25,13 @@ Feature: 1.19 Verify the premium payment flows on member portal - Part 3 - Test 
     Then User navigates to payment confirmation page and verifies sucessful EFT for setup Recurring for Ship
 
     Examples: 
-      | TID     | planType | memberType         | routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName |
-      | F242866 | SHIP     | SHIPSetup_Payments | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    |
+      | TID     | planType | memberType                     | routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName |
+      | F242866 | SHIP     | SHIPSetup_Payments             | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    |
+      | F242866 | SHIP     | SHIPSetup_Payments_TERM_ACTIVE | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    |
 
-  #Test Case 08
+  #Test Case 14
   @regressionMember
-  Scenario Outline: TID: <TID> -  Test Case 08 -Verify Update Recurring for Checking Account for Ship Member
+  Scenario Outline: TID: <TID> -  Test Case 14 -Verify Update Recurring for Checking Account for Ship Member
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
@@ -47,9 +53,9 @@ Feature: 1.19 Verify the premium payment flows on member portal - Part 3 - Test 
       | TID     | planType | memberType          | routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName |
       | F242866 | SHIP     | SHIPUpdate_Payments | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    |
 
-  #Test Case 09
+  #Test Case 15
   @regressionMember
-  Scenario Outline: TID: <TID> - Test Case 09 -Verify Stop Recurring for Ship Member
+  Scenario Outline: TID: <TID> - Test Case 15 -Verify Stop Recurring for Ship Member
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
@@ -63,9 +69,9 @@ Feature: 1.19 Verify the premium payment flows on member portal - Part 3 - Test 
       | TID     | planType | memberType          |
       | F242866 | SHIP     | SHIPUpdate_Payments |
 
-  #Test Case 10
+  #Test Case 16
   @regressionMember
-  Scenario Outline: FID: <FID> -plan: <planType> -memberType: <memberType> - Test Case 10 -Verify download PDF for payment History
+  Scenario Outline: FID: <FID> -plan: <planType> -memberType: <memberType> - Test Case 16 -Verify download PDF for payment History
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
@@ -76,9 +82,9 @@ Feature: 1.19 Verify the premium payment flows on member portal - Part 3 - Test 
       | FID    | planType | memberType   |
       | 247601 | PDP      | IDCardmember |
 
-  #Test Case 11 - UHC MAPD Plan member with direct pay
+  #Test Case 17 - UHC MAPD Plan member with direct pay
   @regressionMember
-  Scenario Outline: TID: <TID> - Test Case 11 - Verify if the user is able to make one time payment for EFT
+  Scenario Outline: TID: <TID> - Test Case 17 - Verify if the user is able to make one time payment for EFT
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
@@ -103,9 +109,9 @@ Feature: 1.19 Verify the premium payment flows on member portal - Part 3 - Test 
       | TID   | planType | memberType                | routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName | HouseholdID | paymentType |
       | 15118 | MAPD     | IndividualUHCPayments_BnC | 123123123 |        123123123 |     12345 |            12345 | FIRSTNAME | MIDDLENAME | LASTNAME | 80012942508 | OneTime     |
 
-  #Test Case 12
+  #Test Case 18
   @regressionMember
-  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Test Case 12 - Verify if the user is able to make one time Total Amount payment for Ship
+  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Test Case 18 - Verify if the user is able to make one time EFT payment for Ship
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
@@ -123,31 +129,6 @@ Feature: 1.19 Verify the premium payment flows on member portal - Part 3 - Test 
       | Account holder last name   | <lastName>         |
     And user navigates to Review Your One-Time Payment Information and selects agreements and click on Submit Button for Make One Time
     Then SHIP User navigates to payment confirmation page and verifies ConfirmationNo for One time
-
-    Examples: 
-      | TID   | planType | memberType          | routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName |
-      | 15143 | SHIP     | SHIPUpdate_Payments | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    |
-
-  #Test Case 13
-  @regressionMember
-  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Test Case 13 -Verify if the user is able to make one time Other Amount payment for EFT
-    Given login with following details logins in the member portal and validate elements
-      | Plan Type   | <planType>   |
-      | Member Type | <memberType> |
-    Then the user navigates to payment history
-    And user clicks on Make one time payment on payment overview page
-    And user selects other amount and enters "1.00" and selects Checking Account and click on Next button
-    And user Enters all Mandatory fields on form page and click on Authorize button for Make one Time CA
-      | Amount to be paid          | <Amount>           |
-      | Routing number             | <routingNo>        |
-      | Confirm routing number     | <confirmRoutingNo> |
-      | Account number             | <accountNo>        |
-      | Confirm account number     | <confirmAccountNo> |
-      | Account holder first name  | <firstName>        |
-      | Account holder middle name | <middleName>       |
-      | Account holder last name   | <lastName>         |
-    And user navigates to Review Your One-Time Payment Information and selects agreements and click on Submit Button for Make One Time
-    Then User navigates to payment confirmation page and verifies ConfirmationNo for One time
 
     Examples: 
       | TID   | planType | memberType          | routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName |

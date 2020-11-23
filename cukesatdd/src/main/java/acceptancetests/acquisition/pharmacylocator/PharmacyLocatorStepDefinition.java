@@ -321,6 +321,7 @@ public class PharmacyLocatorStepDefinition {
 		boolean hasPrefMailServ = Boolean.parseBoolean(tmp);
 
 		String planName=(String) getLoginScenario().getBean(PharmacySearchCommonConstants.PLAN_NAME);
+		String planYear = (String) getLoginScenario().getBean(PharmacySearchCommonConstants.PLAN_YEAR);
 		String zipcode=(String) getLoginScenario().getBean(PharmacySearchCommonConstants.ZIPCODE);
 		String distance=(String) getLoginScenario().getBean(PharmacySearchCommonConstants.DISTANCE);
 		String county=(String) getLoginScenario().getBean(PharmacySearchCommonConstants.COUNTY);
@@ -329,6 +330,7 @@ public class PharmacyLocatorStepDefinition {
 			language="English";
 		HashMap<String, String> inputMap=new HashMap<String, String>();
 		inputMap.put("planName", planName);
+		inputMap.put("planYear", planYear);
 		inputMap.put("zipcode", zipcode);
 		inputMap.put("distance", distance);
 		inputMap.put("county", county);

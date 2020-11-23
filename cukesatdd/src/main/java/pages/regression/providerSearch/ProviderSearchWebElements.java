@@ -187,6 +187,9 @@ public class ProviderSearchWebElements  extends UhcDriver {
 
 	@FindBy(xpath="//h1[contains(text(),'Benefits')]")
 	protected WebElement benefitsPgHeader;
+	
+	@FindBy(xpath="//div[@id='member-widget']//h1")
+	protected WebElement benefitsPgHeader_newUI;
 
 	@FindBy(xpath="//h1//span[contains(text(),'Displaying claims')]")
 	protected WebElement claimsPgHeader;

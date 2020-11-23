@@ -2,7 +2,7 @@
 Feature: 1.06.6 Member Plans and Documents - section: Forms And Resources Part 5 of 7 - Medication Authorization Forms
 
   Background: If run on stage then feature security flag needs to be true
-     Given feature security flag must set to true when testing on stage env
+     Given feature security flag must set to true when testing on test env
       | Feature           | UCPPlanDocuments |
 
   #------------------------------------------
@@ -90,9 +90,17 @@ Feature: 1.06.6 Member Plans and Documents - section: Forms And Resources Part 5
       | index  | TID         | planType | memberType            | fnr_sd | fnr_maf |
       | 18-113 | 15131,15233 | SSP      | COMBO_GROUP_EFF_PDnR  | true   | false   |
 
-	@active_ship_5of7 @devRegression
+	@active_ship_5of7
 	Examples: 
       | index  | TID         | planType | memberType            | fnr_sd | fnr_maf |
       | 19-114 | 15119,15304 | SHIP     | IND_EFF_PDnR          | true   | false   |
+
+	@active_ship_5of7 @devRegression
+	Examples: 
+      | index  | TID         | planType | memberType            | fnr_sd | fnr_maf |
       | 19-120 | 15119,15304 | SHIP     | MULTI_IND_EFF_PDnR    | true   | false   |
-    
+
+	@preeffective_ship_5of7
+	Examples: 
+      | index  | TID         | planType | memberType            | fnr_sd | fnr_maf |
+      | 20-121 | xxxxx       | SHIP     | IND_PREEFF_PDnR       | true   | false   |            

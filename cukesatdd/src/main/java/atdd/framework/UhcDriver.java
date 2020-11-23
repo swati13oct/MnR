@@ -4,39 +4,39 @@
 package atdd.framework;
 
 import java.text.DecimalFormat;
-import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Random;
-import java.util.TimeZone;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
+import java.util.regex.Pattern;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
-
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Cookie;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.html5.LocalStorage;
 import org.openqa.selenium.html5.SessionStorage;
-import org.openqa.selenium.html5.WebStorage;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.remote.Augmenter;
+import org.openqa.selenium.remote.RemoteExecuteMethod;
+import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.remote.html5.RemoteWebStorage;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import com.google.common.base.Predicate;
 
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.ElementData;
@@ -44,14 +44,11 @@ import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
-import io.appium.java_client.MobileElement;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.touch.WaitOptions;
 import io.appium.java_client.touch.offset.PointOption;
-
-import java.util.regex.Pattern;
 
 /**
  * @author pjaising
@@ -62,11 +59,18 @@ public abstract class UhcDriver {
 	public WebDriver driver;
 	private long defaultTimeoutInSec=15;
 	
+	@FindBy(xpath = ".//*[contains(@id,'singleLargeLayoutContainer')]")
+	public static WebElement IPerceptionsPopup;
+	
 	@FindBy(xpath = ".//iframe[contains(@id,'IPerceptionsEmbed')]")
 	public static WebElement IPerceptionsFrame;
 	
+	@FindBy(xpath="//*[contains(@id,'ip-no')]")
+	public static WebElement IPerceptionPopuNoBtn;
+	
 	@FindBy(xpath="//*[contains(@class,'btn-no')]")
 	public static WebElement IPerceptionNoBtn;
+
 	
 	public void start(String url) {
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
@@ -134,7 +138,7 @@ public abstract class UhcDriver {
 	public void selectFromDropDown(List<WebElement> elementList, String value) {
 		for (WebElement element : elementList) {
 			if (element.getText().contains(value)) {
-				element.click();
+				jsClickNew(element);
 				break;
 			}
 		}
@@ -443,7 +447,7 @@ try {
 	public void jsClickNew(WebElement element) {
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("arguments[0].click();", element);
-		System.out.println("The WebElement ===  " +getidentifier(element) + "  : is Clicked");
+//		System.out.println("The WebElement ===  " +getidentifier(element) + "  : is Clicked");
 	}
 	
 	public static String getidentifier(WebElement element) {
@@ -474,7 +478,7 @@ try {
 	 */
 	public void startNewPRE(String url, String browser) {
 		System.out.println("Browser Name: "+browser);
-		if(browser.equals("safari")) 
+		if(browser.equalsIgnoreCase("safari")) 
 			driver.get(url);
 		else {
 			driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
@@ -615,6 +619,7 @@ try {
 	}
 	
 	public void selectFromDropDownByValue(WebElement dropdownElement, String value) {
+		scrollToView(dropdownElement);
 		Select dropdown = new Select(dropdownElement);
 		waitUntilSelectOptionsPopulated(dropdown);
 		dropdown.selectByValue(value);
@@ -721,10 +726,13 @@ try {
 	/* logic to simulate hover over functionality*/
 	public void navigateToMenuLinks(WebElement hdrMenuElement, WebElement menuDropListItem) {
 
-		Actions actions = new Actions(driver);
-		actions.moveToElement(hdrMenuElement);
-		actions.moveToElement(menuDropListItem);
-		actions.click().build().perform();
+//		Actions actions = new Actions(driver);
+//		actions.moveToElement(hdrMenuElement);
+//		actions.moveToElement(menuDropListItem);
+//		actions.click().build().perform();
+		jsMouseOver(hdrMenuElement);
+		jsMouseOver(menuDropListItem);
+		jsClickNew(menuDropListItem);
 		CommonUtility.checkPageIsReadyNew(driver);
 
 	}
@@ -748,19 +756,32 @@ try {
 	}
 	
 	public void checkModelPopup(WebDriver driver,long timeoutInSec) {
-
+		
 			CommonUtility.waitForPageLoad(driver, IPerceptionsFrame,timeoutInSec);
+//			CommonUtility.waitForPageLoad(driver, IPerceptionsPopup,timeoutInSec);
 			
 			try{
-				if(IPerceptionsFrame.isDisplayed())	{
-					driver.switchTo().frame(IPerceptionsFrame);
-					IPerceptionNoBtn.click();
-					driver.switchTo().defaultContent();
+				if(IPerceptionsPopup.isDisplayed())	{
+					//driver.switchTo().frame(IPerceptionsFrame);
+					IPerceptionPopuNoBtn.click();
+					//driver.switchTo().defaultContent();
 				}
 			}catch(Exception e){
-				System.out.println("Iperceptions popup not found");
+				System.out.println("IPerceptionsPopup not found");
+				try {
+					if(IPerceptionsFrame.isDisplayed())	{
+						System.out.println("IPerceptionsFrame found");
+						driver.switchTo().frame(IPerceptionsFrame);
+//						IPerceptionNoBtn.click();
+						threadsleep(1);
+						jsClickNew(IPerceptionNoBtn);
+						threadsleep(1);
+						driver.switchTo().defaultContent();
+					}
+				}catch(Exception e1) {
+				System.out.println("Iperceptions not found");
+				}
 			}
-
 	}
 	
 	/**
@@ -815,28 +836,40 @@ try {
 		String timeStr = "";
 		String winHandleBefore = driver.getWindowHandle();
 		System.out.println("Proceed to open a new blank tab to check the system time");
-		String urlGetSysTime=testSiteUrl+ "/DCERestWAR/dcerest/profiledetail/bConnected";
+		//tbd String urlGetSysTime=testSiteUrl+ "/DCERestWAR/dcerest/profiledetail/bConnected";
+		String urlGetSysTime=testSiteUrl+ "/PlanBenefitsWAR/profiledetail/aarp";
 		System.out.println("test env URL for getting time: "+urlGetSysTime);
 		//open new tab
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("window.open('"+urlGetSysTime+"','_blank');");
 		for(String winHandle : driver.getWindowHandles()){
-			driver.switchTo().window(winHandle);
+			if(!winHandle.equals(winHandleBefore)) {
+				driver.switchTo().window(winHandle);
+				break;
+			}
 		}
-		WebElement currentSysTimeElement=timeJson;
-		String currentSysTimeStr=currentSysTimeElement.getText();
-		System.out.println("currentSysTimeStr="+currentSysTimeStr);
-		JSONParser parser = new JSONParser();
-		org.json.simple.JSONObject jsonObj;
-		try {
-			jsonObj = (org.json.simple.JSONObject) parser.parse(currentSysTimeStr);
-			org.json.simple.JSONObject sysTimeJsonObj = (org.json.simple.JSONObject) jsonObj; 
 
-			org.json.simple.JSONObject dataObj = (org.json.simple.JSONObject) sysTimeJsonObj.get("data"); 
-			timeStr=(String) dataObj.get("systemDate"); 
-		} catch (ParseException e) {
-			e.printStackTrace();
-			Assert.assertTrue("PROBLEM - unable to find out the system time", false);
+		threadsleep(2000);
+		if(!MRScenario.browserName.equalsIgnoreCase("firefox")) {
+			WebElement currentSysTimeElement = timeJson;
+			String currentSysTimeStr = currentSysTimeElement.getText();
+			System.out.println("currentSysTimeStr=" + currentSysTimeStr);
+			JSONParser parser = new JSONParser();
+			org.json.simple.JSONObject jsonObj;
+			try {
+				jsonObj = (org.json.simple.JSONObject) parser.parse(currentSysTimeStr);
+				org.json.simple.JSONObject sysTimeJsonObj = (org.json.simple.JSONObject) jsonObj;
+
+				org.json.simple.JSONObject dataObj = (org.json.simple.JSONObject) sysTimeJsonObj.get("data");
+				timeStr = (String) dataObj.get("systemDate");
+			} catch (ParseException e) {
+				e.printStackTrace();
+				Assert.assertTrue("PROBLEM - unable to find out the system time", false);
+			}
+		}
+		else
+		{
+			timeStr = driver.findElement(By.xpath("//tbody/tr[5]/td[2]")).getText();
 		}
 		driver.close();
 		driver.switchTo().window(winHandleBefore);
@@ -951,9 +984,9 @@ try {
 		}
 	}
 	
-	public void jsSendkeys(MobileElement element,String keys) {
+	public void jsSendkeys(WebElement searchBox,String keys) {
 		JavascriptExecutor jse = (JavascriptExecutor)driver;
-		jse.executeScript("arguments[0].value='"+ keys +"';", element);
+		jse.executeScript("arguments[0].value='"+ keys +"';", searchBox);
 	}
 	
 	public void pageloadcomplete() {
@@ -981,14 +1014,18 @@ try {
 	 * @author Murali - mmurugas
 	 * This method will select option from dropdown based on visible text mobile
 	 */
-	public void mobileSelectOption(Select element,String option) {
+	public void mobileSelectOption(WebElement selectElement,String option,boolean clickElement) {
 		if(driver.getClass().toString().toUpperCase().contains("ANDROID")) {
+			Select element = new Select(selectElement);
 			element.selectByVisibleText(option);
 		}
 		else {
 			String curHandle = ((IOSDriver) driver).getContext();
 			System.out.println("curHandle - "+curHandle);
 			System.out.println(((IOSDriver) driver).getContextHandles());
+			if(clickElement)
+				selectElement.click();
+			threadsleep(2000);
 			((IOSDriver) driver).context("NATIVE_APP");
 			driver.findElement(MobileBy.className("XCUIElementTypePickerWheel")).sendKeys(option);
 			threadsleep(500);
@@ -1008,7 +1045,7 @@ try {
 		threadsleep(500);
 		}
 		catch(Exception e){
-			System.out.println("Unable to Hide the IOS Keypad");
+			System.out.println("IOS Screen Unable to Click text : "+text);
 		}
 		((IOSDriver) driver).context(curHandle);
 		System.out.println("curHandle - "+((IOSDriver) driver).getContext());
@@ -1043,7 +1080,9 @@ try {
 	
 	public String ReturnDriverStorage(WebDriver driver, String StorageType, String StorageKey) {
 		String ReturnValue = "";
-		WebStorage webStorage = (WebStorage) new Augmenter().augment(driver);
+//		WebStorage webStorage = (WebStorage) new Augmenter().augment(driver);
+		RemoteExecuteMethod executeMethod = new RemoteExecuteMethod((RemoteWebDriver) driver);
+		RemoteWebStorage webStorage = new RemoteWebStorage(executeMethod);
 		if(StorageType.equalsIgnoreCase("local storage") || StorageType.equalsIgnoreCase("localstorage") ) {
 			LocalStorage localStorage = webStorage.getLocalStorage();		
 			ReturnValue = localStorage.getItem(StorageKey);
@@ -1155,5 +1194,99 @@ try {
 		}
 		return ReturnValue;
 	}
+    
+    /**
+     * Wait for page load in Safari browser, by checking the invisibility of loading spinners which show in different flows
+     *
+     * @return true, if successful
+     */
+    public boolean waitForPageLoadSafari() {
+    	boolean ready = false;
+    	if(MRScenario.browserName.equalsIgnoreCase("Safari")) {
+    		//Sets FluentWait Setup
+    		List<WebElement> loadingScreen = null;
+    		FluentWait<WebDriver> fwait = new FluentWait<WebDriver>(driver)
+    				.withTimeout(Duration.ofSeconds(10))
+    				.pollingEvery(Duration.ofMillis(100))
+    				.ignoring(NoSuchElementException.class)
+    				.ignoring(TimeoutException.class);
 
+    		// First checking to see if the loading indicator is found
+    		// we catch and throw no exception here in case they aren't ignored
+    		try {
+    			threadsleep(5000);			//Adding sleep since the loading spinner sometimes takes long to come up
+    			System.out.println("Waiting to check if Loading screen is present");
+    			loadingScreen = fwait.until(new Function<WebDriver, List<WebElement>>() {
+					public List<WebElement> apply(WebDriver driver) {
+						return driver.findElements(By.xpath(
+								"//div[(((@id='overlay' and not(./ancestor::footer)) or @id='loading_fader' or @class='loading-block' or @class='spinner') and not(contains(@style,'none')))]"));
+					}
+    			});
+    		} catch (Exception e) {}
+
+
+    		// checking if loading indicators were found and if so we wait for it to
+    		// disappear
+    		if(!CollectionUtils.isEmpty(loadingScreen)) {
+    			System.out.println("Loading screen visible!!! Waiting till it disappears");
+    			WebDriverWait wait = new WebDriverWait(driver, 10);
+    			try {
+    				ready = wait.until(ExpectedConditions
+    						.invisibilityOfAllElements(loadingScreen));
+    			} catch(NoSuchElementException e) {
+    				//If no loading screen element found, page is ready
+    				ready = true;
+    			} catch(TimeoutException t) {
+    				//If script timed out finding loading screen element, page is ready
+    				ready = true;
+    			}
+    			System.out.println("Loading screen disappeared, page is ready.");
+    		} else {
+    			System.out.println("No loading screen element(s) found");
+    		}
+    	}
+    	return ready;
+    }
+    
+	/**
+	 * mouse over using jQuery event, mouseover.
+	 *
+	 * @param element the element
+	 * @return true, if successful
+	 * 
+	 * Note: use the jsMouseOut if using jsMouseOver for tooltip
+	 */
+	public boolean jsMouseOver(WebElement element) {
+		try {
+			JavascriptExecutor js = (JavascriptExecutor) driver;
+			js.executeScript("$(arguments[0]).mouseover();", element);
+		} catch (Exception e) {
+			Assert.fail("The element " + element.getText() + "is not  found");
+			return false;
+		}
+
+		return true;
+	}
+	
+	
+	/**
+	 * move mouse out from the element using jQuery event, mouseout.
+	 *
+	 * @param element the element
+	 * @return true, if successful
+	 * 
+	 * Note: Use in combination with jsMouseOver
+	 */
+	public boolean jsMouseOut(WebElement element) {
+		try {
+			JavascriptExecutor js = (JavascriptExecutor) driver;
+			js.executeScript("$(arguments[0]).mouseout();", element);
+		} catch (Exception e) {
+			Assert.fail("The element " + element.getText() + "is not  found");
+			return false;
+		}
+
+		return true;
+	}
+	
 }

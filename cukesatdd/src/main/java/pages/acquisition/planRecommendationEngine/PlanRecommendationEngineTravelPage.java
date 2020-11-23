@@ -9,7 +9,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import atdd.framework.UhcDriver;
-import pages.acquisition.bluelayer.AcquisitionHomePage;
+import pages.acquisition.commonpages.AcquisitionHomePage;
 
 public class PlanRecommendationEngineTravelPage extends UhcDriver {
 
@@ -110,17 +110,20 @@ public class PlanRecommendationEngineTravelPage extends UhcDriver {
 					travelpageFunctional(option);
 
 				}
-				continueBtn.click();
+//				continueBtn.click();
+				jsClickNew(continueBtn);
 			}else {
 				if(options.isEmpty()){
-					continueBtn.click();
+//					continueBtn.click();
+					jsClickNew(continueBtn);
 					desktopCommonUtils.desktopErrorValidation(page);
 				}else if(options.contains("None")) {
 					String snpoptions[] = options.split(",");
 					for(String option:snpoptions) {
 						travelpageFunctional(option);
 					}
-					continueBtn.click();
+//					continueBtn.click();
+					jsClickNew(continueBtn);
 					desktopCommonUtils.desktopErrorValidation(page);
 				}
 			}			
@@ -133,19 +136,23 @@ public class PlanRecommendationEngineTravelPage extends UhcDriver {
 			System.out.println("SNP Option "+TravelType+ " Selection");
 			if (TravelType.equalsIgnoreCase("withinUS")) {
 				validate(travelWithin);
-				travelWithin.click();
+//				travelWithin.click();
+				jsClickNew(travelWithin);
 				System.out.println("Plan Type "+TravelType +" Clicked");
 			}else if (TravelType.equalsIgnoreCase("outsideUS")) {
 				validate(travelAnotherpart);
-				travelAnotherpart.click();
+//				travelAnotherpart.click();
+				jsClickNew(travelAnotherpart);
 				System.out.println("Plan Type "+TravelType +" Clicked");
 			}else if (TravelType.equalsIgnoreCase("regular")) {
 				validate(travelPrimary);
-				travelPrimary.click();
+//				travelPrimary.click();
+				jsClickNew(travelPrimary);
 				System.out.println("Plan Type "+TravelType +" Clicked");
 			}else if (TravelType.equalsIgnoreCase("None")) {
 				validate(travelNone);
-				travelNone.click();
+//				travelNone.click();
+				jsClickNew(travelNone);
 				System.out.println("Plan Type "+TravelType +" Clicked");
 			}			
 			

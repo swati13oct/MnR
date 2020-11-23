@@ -4,9 +4,11 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import org.junit.Assert;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acceptancetests.data.CommonConstants;
@@ -14,6 +16,7 @@ import acceptancetests.data.LoginCommonConstants;
 import cucumber.api.Scenario;
 // To be added
 import cucumber.api.java.After;
+import io.appium.java_client.AppiumDriver;
 
 /**
  * This class will take a screen shot of the last screen executed by cucumber
@@ -56,10 +59,11 @@ public class GlobalTearDown {
 	 */
 	@After
 	public void tearDown(Scenario scenario) {
-
+		try {
 		if(null !=getLoginScenario()  && null!=getLoginScenario().getBean(CommonConstants.WEBDRIVER))
 		{
 		    WebDriver wd  =(WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		   // AppiumDriver wd1  =(AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 			final byte[] screenshot = ((TakesScreenshot) wd).getScreenshotAs(OutputType.BYTES);
 			
 			// To get the report embedded in the report
@@ -82,12 +86,21 @@ public class GlobalTearDown {
 					e.printStackTrace();
 				}
 			 //mrScen.DriverQuit();
-			if(wd.getClass().toString().toUpperCase().contains("ANDROID")||wd.getClass().toString().toUpperCase().contains("IOS")) {
-				wd.quit();
-				System.out.println("---- Mobile Script Execution Completed ----");
-			}
+				wd.quit(); 
+				System.out.println("---- Script Execution Completed ----");
+			
 		}
-
+		} catch (WebDriverException e) {
+		    WebDriver wd  =(WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		    wd.quit();
+			if(null != getLoginScenario().getBean(LoginCommonConstants.USERNAME)){
+				scenario.write("USER NAME USED : " + getLoginScenario().getBean(LoginCommonConstants.USERNAME));
+				//tbd Assert.assertTrue("Got WebDriverException. USER NAME USED : " + getLoginScenario().getBean(LoginCommonConstants.USERNAME)+" | "+"SauceLab video link for the job='"+MRScenario.returnJobURL()+"' | exception: "+e, false);
+			} 
+			scenario.write("SauceLab video link for the job | "+MRScenario.returnJobURL());
+			scenario.write("Got exception:\n"+e.getMessage());
+			Assert.assertTrue("Got WebDriverException", false);
+		}
 	}
 	// to be added
 	/**

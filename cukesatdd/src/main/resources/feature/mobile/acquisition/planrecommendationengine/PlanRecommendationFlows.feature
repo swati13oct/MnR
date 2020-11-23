@@ -60,8 +60,8 @@ Feature: Plan Recommendation Engine flow - Verify PRE flows functionalities with
     And user selects add drug option in Drug page mobile
       | Drug Selection | <DrugSelection>                                                        |
       | Drug Details   | <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch> |
-    When user selects Pharmacy in Pharmacy page mobile
-      | Pharmacy Selection | <PharmacySelection> |
+    #When user selects Pharmacy in Pharmacy page mobile
+    #  | Pharmacy Selection | <PharmacySelection> |
     And user validate elements in loading page mobile
     Then user validate recommendations in results page mobile
       | Zip Code           | <Zipcode>           |
@@ -128,8 +128,8 @@ Feature: Plan Recommendation Engine flow - Verify PRE flows functionalities with
     And user selects add drug option in Drug page mobile
       | Drug Selection | <DrugSelection>                                                        |
       | Drug Details   | <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch> |
-    And user selects Pharmacy in Pharmacy page mobile
-      | Pharmacy Selection | <PharmacySelection> |
+    #And user selects Pharmacy in Pharmacy page mobile
+    #  | Pharmacy Selection | <PharmacySelection> |
     And user selects additional services option in additional services page mobile
       | Additional Option | <Dental-Hearing-Vision-Fitness> |
     And user selects cost preferences option in cost preferences page mobile
@@ -178,7 +178,7 @@ Feature: Plan Recommendation Engine flow - Verify PRE flows functionalities with
 
     Examples: 
       | Zipcode | isMultiCounty | County      | isCoverageOpt | SpecialNeeds | TravelOption | DoctorsSelection | DoctorsName | isMultiDoctor | DrugSelection | Dental-Hearing-Vision-Fitness | costPreferenceOption | 1stRecommendation | 2ndRecommendation |
-      |   35034 | YES           | Bibb County | MAPD          | None         | OutsideUS    | lookup           | robert      | NO            | No            | No,No,No,Yes                  | Higher               | MS                | MA                |
+      |   35034 | YES           | Bibb County | MAPD          | None         | OutsideUS    | lookup           | patil       | NO            | No            | No,No,No,Yes                  | Higher               | MS                | MA                |
 
   @PRE @planrecommandonationmobile @MAPDmobile @MAPDzerodrugmobile @F358830
   Scenario Outline: Zipcode: <Zipcode> -MultiCountyOptions: <isMultiCounty> -CoverageOptions: <isCoverageOpt> -SNP: <SpecialNeeds> -Travel: <TravelOption> -Doctors: <DoctorsSelection> -AdditionalOption: <Dental-Hearing-Vision-Fitness> -CostPreferenceSelection: <costPreferenceOption> - To validate MAPD zero drug flow functions for ISNP plans in PRE Mobile
@@ -236,8 +236,8 @@ Feature: Plan Recommendation Engine flow - Verify PRE flows functionalities with
     And user selects add drug option in Drug page mobile
       | Drug Selection | <DrugSelection>                                                        |
       | Drug Details   | <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch> |
-    And user selects Pharmacy in Pharmacy page mobile
-      | Pharmacy Selection | <PharmacySelection> |
+    #And user selects Pharmacy in Pharmacy page mobile
+    #  | Pharmacy Selection | <PharmacySelection> |
     And user selects additional services option in additional services page mobile
       | Additional Option | <Dental-Hearing-Vision-Fitness> |
     And user selects cost preferences option in cost preferences page mobile
@@ -359,5 +359,6 @@ Feature: Plan Recommendation Engine flow - Verify PRE flows functionalities with
       |   10002 | NO            | New York | MA            | None         | None         | UHCNetwork       |             |               | No,No,No,No                   | Lower                | MA                |                   |
       |   25813 | NO            | Raleigh  | MA            | Medicaid     | Regular      | AcceptsMedicare  |             |               | No,No,No,No                   | Higher               | MS                |                   |
       |   00501 | NO            | Suffolk  | MA            | Chronic      | WithinUS     | AcceptsMedicare  |             |               | Yes,No,No,No                  | Lower                | MA                | MS                |
-      |   15537 | NO            | Bedford  | MA            | None         | None         | UHCNetwork       |             |               | No,No,No,No                   | Lower                |                   |                   |
-      |   15537 | NO            | Bedford  | MA            | None         | WithinUS     | AcceptsMedicare  |             |               | Yes,No,No,No                  | Lower                | MS                |                   |
+      |   00610 | NO            | Anasco   | MA            | None         | withinUS     | AcceptsMedicare  |             |               | Yes,No,No,No                  | Lower                | MS                |                   |
+      |   00610 | NO            | Anasco   | MA            | None         | None         | UHGNetwork       |             |               | No,No,No,No                   | Lower                |                   |                   |
+      

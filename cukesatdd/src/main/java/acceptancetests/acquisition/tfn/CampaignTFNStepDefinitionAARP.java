@@ -47,6 +47,7 @@ public class CampaignTFNStepDefinitionAARP {
 		return memberAttributesMap;
 	}
 
+	
 	WebDriver driver;
 	@Given("^the user Starts WebDriver$")
 	public void Start_WebDriver() {
@@ -54,6 +55,7 @@ public class CampaignTFNStepDefinitionAARP {
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, driver);
 
 	}
+	 
 	@Given("^the user retrieves TFNSessionCookie and Federal and MedSupp TFN$")
 	public void the_user_retrieves_TFNSessionCookie_and_Federal_and_MedSupp_TFN() throws Throwable {
 		driver = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
@@ -123,9 +125,11 @@ public class CampaignTFNStepDefinitionAARP {
 
 	@Given("^the user is on AARP medicare acquisition site from Campaign Traffic$")
 	public void the_user_lands_on_AARP_from_Campaign_Traffic(DataTable arg1) throws Throwable  {
-		driver = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
-		AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(driver);
+		driver = getLoginScenario().getWebDriverNew();
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, driver);
+		//driver = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(driver);
+		//getLoginScenario().saveBean(CommonConstants.WEBDRIVER, driver);
 		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, aquisitionhomepage);
 		String EnvironmentUrl = aquisitionhomepage.fetchEnvironmentUrls();
 		Map<String, String> inputAttributesMap=parseInputArguments(arg1);
@@ -325,6 +329,7 @@ public void the_user_navigates_to_MA_OLE_Page_and_validates_Federal_TFN() throws
 	tfnPage.HomepagePlanSearch(Zip);
 	String PlanType = "MA";
 	tfnPage.ViewPlanSummary(PlanType);
+	tfnPage.handlePlanYearSelectionPopup();
 	tfnPage.NavigateToOLE(PlanType);
 	String TFNXpath_PlanDetails = "//a[contains(@class, 'tel') and contains(@href, 'tel')]";
 	tfnPage.validateFederalTFN(TFNXpath_PlanDetails);
@@ -338,6 +343,7 @@ public void the_user_navigates_to_PDP_OLE_Page_and_validates_Federal_TFN() throw
 	tfnPage.HomepagePlanSearch(Zip);
 	String PlanType = "PDP";
 	tfnPage.ViewPlanSummary(PlanType);
+	tfnPage.handlePlanYearSelectionPopup();
 	tfnPage.NavigateToOLE(PlanType);
 	String TFNXpath_PlanDetails = "//a[contains(@class, 'tel') and contains(@href, 'tel')]";
 	tfnPage.validateFederalTFN(TFNXpath_PlanDetails);
@@ -352,6 +358,7 @@ public void the_user_navigates_to_SNP_OLE_Page_and_validates_Federal_TFN() throw
 	tfnPage.HomepagePlanSearch(Zip);
 	String PlanType = "SNP";
 	tfnPage.ViewPlanSummary(PlanType);
+	tfnPage.handlePlanYearSelectionPopup();
 	tfnPage.NavigateToOLE(PlanType);
 	String TFNXpath_PlanDetails = "//a[contains(@class, 'tel') and contains(@href, 'tel')]";
 	tfnPage.validateFederalTFN(TFNXpath_PlanDetails);
@@ -371,7 +378,34 @@ public void the_user_navigates_to_Medsupp_VPP_and_validates_Medsupp_TFN() throws
 			
 		
 }
+
+@Then("^the user navigates to following memeber signin page and navigate to view medicare plans link AARP$")
+public void the_user_navigates_to_following_memeber_signin_page_AARP(DataTable arg1) throws Throwable {
+	Map<String, String> inputAttributesMap=parseInputArguments(arg1);
+	String memberSignINURL = inputAttributesMap.get("Member Signin URL");
+	AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage)getLoginScenario().getBean(PageConstants.ACQUISITION_HOME_PAGE);
+	
+	
+	if(memberSignINURL!=null){
+		aquisitionhomepage.clickonmemberSignInlink(memberSignINURL);
+		Assert.assertTrue(true);
+	}else
+		Assert.fail("Error in loading the UHC Agent Page");
+	//tfnPage.validateFederalTFN(TFN_Xpath);
+
 }
+
+@Then("^the user validate the sam icons tfn with federal TFN on Acquistion page$")
+public void the_user_validate_sam_icons_tfn_with_Federal_TFN(DataTable arg1) throws Throwable {
+	Map<String, String> inputAttributesMap=parseInputArguments(arg1);
+	String TFN_Xpath = inputAttributesMap.get("TFN Xpath");
+	CampaignTFNPage tfnPage = (CampaignTFNPage) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE);
+	//tfnPage.navigateToUrl(URLpath);
+	tfnPage.validateFederalTFN(TFN_Xpath);
+}
+
+}
+
 
 
 

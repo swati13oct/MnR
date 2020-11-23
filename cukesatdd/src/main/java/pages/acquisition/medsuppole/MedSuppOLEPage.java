@@ -105,6 +105,10 @@ public class MedSuppOLEPage extends UhcDriver {
 		
 		@FindBy(xpath = "//input[@id='GI30dayBday_1']/following-sibling::label")
 		private WebElement medSuppOleGI30dayBdayYesRadioBtn;
+		
+		//@FindBy(xpath = "//input[@id='GIClarify_1']/following-sibling::label")
+		@FindBy(xpath ="//div[@id='colctrl_772971250_showhide']//label[@class='radio_choice'][contains(text(),'Yes')]")
+		private WebElement medSuppOleGIClarifyYesRadioBtn;
 				
 		@FindBy(xpath = "//div[@id='ole-form-content']//a[contains(@href,'www.insurance.ca.gov')]")
 		private WebElement medSuppOleInsuranceLink;
@@ -212,6 +216,7 @@ public class MedSuppOLEPage extends UhcDriver {
 		jsClickNew(nextButton);
 		validateNew(medSuppOlePlanEffIn6OfEligibleYesRadioBtn);
 		medSuppOleGI30dayBdayYesRadioBtn.click();
+		medSuppOleGIClarifyYesRadioBtn.click();
 		jsClickNew(nextButton);
 		validateNew(medSuppOleInsuranceLink);
 		jsClickNew(nextButton);

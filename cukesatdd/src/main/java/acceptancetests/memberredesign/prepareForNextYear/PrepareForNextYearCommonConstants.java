@@ -26,5 +26,7 @@ public class PrepareForNextYearCommonConstants {
 	public static final String AEM_TOGGLE="aem_toggle";
 	public static final String EXPECT_PREPARE_FOR_NEXT_YEAR_TAB = "expect_preapre_for_next_year_tab";
 	public static final String TEST_NOTE = "test_note";
+	public static final String SHOW_NEXT_YEAR_PLANNAME="show_next_year_planName";
+	public static final String EXPECT_PLAN_NAME="expect_plan_name";
 	
 }

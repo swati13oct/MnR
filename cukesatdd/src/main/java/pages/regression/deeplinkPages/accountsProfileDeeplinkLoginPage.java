@@ -12,6 +12,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import acceptancetests.data.MRConstants;
 import acceptancetests.util.CommonUtility;
@@ -46,6 +47,8 @@ public class accountsProfileDeeplinkLoginPage extends UhcDriver {
 
 	@FindBy(xpath = "//a[contains(text(),'Home Page')]")
 	protected WebElement homePageNotice3;
+	@FindBy(xpath = "//button[@class='btn btn-outline-primary text-transform-none home-btn']")
+	protected WebElement homePageNotice4;
 
 	public accountsProfileDeeplinkLoginPage(WebDriver driver) {
 		super(driver);
@@ -148,27 +151,24 @@ public class accountsProfileDeeplinkLoginPage extends UhcDriver {
 							{
 								System.out.println("Catch block with no significance");
 							}
-							if (driver.getCurrentUrl().contains("bannerpopup.html")) {
-								System.out.println("COVID 19 Banner page has appeared");
-								try {
-									CommonUtility.waitForPageLoad(driver, homePageNotice, 20);
-									if (validate(homePageNotice, 0)) {
-										homePageNotice.click();
-										CommonUtility.checkPageIsReady(driver);
-									} else if (validate(homePageNotice2, 0)) {
-										homePageNotice2.click();
-										CommonUtility.checkPageIsReady(driver);
-									} else if (validate(homePageNotice3, 0)) {
-										homePageNotice3.click();
-										CommonUtility.checkPageIsReady(driver);
-									}
-									Thread.sleep(3000);
-								} catch (Exception e) {
-									// TODO Auto-generated catch block
-									System.out.println("Catch block");
+							try {
+								CommonUtility.checkPageIsReady(driver);
+								if (validate(homePageNotice, 0)) {
+									homePageNotice.click();
+									CommonUtility.checkPageIsReady(driver);
+								} else if (validate(homePageNotice2, 0)) {
+									homePageNotice2.click();
+									CommonUtility.checkPageIsReady(driver);
+								} else if (validate(homePageNotice3, 0)) {
+									homePageNotice3.click();
+									CommonUtility.checkPageIsReady(driver);
+								} else if (validate(homePageNotice4, 0)) {
+									homePageNotice4.click();
+									CommonUtility.checkPageIsReady(driver);
 								}
-							} else {
-								System.out.println("COVID 19 Banner page did not appear");
+								Thread.sleep(3000);
+							} catch (Exception e) {
+								System.out.println("Error occured while checking home page on banner pages." + e.getMessage());
 							}
 						
 					return;
@@ -203,17 +203,21 @@ public class accountsProfileDeeplinkLoginPage extends UhcDriver {
 					} while (counter < 2);
 				}
 				
+				@FindBy(xpath = "//*[@id='nav']/button[2]")
+				private WebElement iPerceptionAutoPopUp;
+
+				public WebElement getiPerceptionAutoPopUp() {
+					return iPerceptionAutoPopUp;}
+					
 				public boolean validateAccountProfilePage() {
-					checkForIPerceptionModel(driver);
-					CommonUtility.checkPageIsReadyNew(driver);
-					try {
-						Thread.sleep(10000);
-					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
+					WebDriverWait wait = new WebDriverWait(driver, 20);
+					if (validate(iPerceptionAutoPopUp)) {
+						iPerceptionAutoPopUp.click();
+					} else {
+						System.out.println("iPerception Pop Up not displayed");
 					}
 					checkForIPerceptionModel(driver);
-					validateNew(textonpage);
+					//validateNew(textonpage);
 					if (driver.getCurrentUrl().contains("/account/profile.html?deeplink=true")) {
 						System.out.println("*** Page URL ***" + driver.getCurrentUrl());
 						System.out.println("** User landed on Account Setting deeplink Page **");

@@ -33,7 +33,7 @@ public class CommonutilitiesMobile extends UhcDriver {
 	public static final String travelPageName = "Travel";
 	public static final String doctorsPageName = "Doctor";
 	public static final String drugPageName = "Drug";
-	public static final String pharmacyPageName = "Pharmacy";
+	public static final String pharmacyPageName = "Pharmacy"; //Removed From PRE
 	public static final String additionalServicesPageName = "Additional Services";
 	public static final String costPreferencesPageName = "Cost Preferences";
 	public static final String resultsPageName = "Plan Recommendation Summary";
@@ -299,23 +299,23 @@ public class CommonutilitiesMobile extends UhcDriver {
 			if (currentPageName.contains("DRUG")) {
 				previousPageName = "Coverage";
 				previousPagePercentage = "20%";
-				nextPageName = "Pharmacy";
-				nextPagePercentage = "53%";
-				currrentPagePercentage = "20%";
-				if (currentPageName.contains("SKIP")) {
-					nextPageName = "NULL";
-					nextPagePercentage = "NULL";
-					return;
-				}
-			}
-			if (currentPageName.contains("PHARMACY")) {
-				previousPageName = "Drug";
-				previousPagePercentage = "53%";
 				nextPageName = "NULL";
 				nextPagePercentage = "NULL";
-				currrentPagePercentage = "53%";
-				return;
+				currrentPagePercentage = "20%";
+//				if (currentPageName.contains("SKIP")) {
+//					nextPageName = "NULL";
+//					nextPagePercentage = "NULL";
+//					return;
+//				}
 			}
+//			if (currentPageName.contains("PHARMACY")) {
+//				previousPageName = "Drug";
+//				previousPagePercentage = "53%";
+//				nextPageName = "NULL";
+//				nextPagePercentage = "NULL";
+//				currrentPagePercentage = "53%";
+//				return;
+//			}
 		} else {
 			if (currentPageName.contains("COVERAGE")) {
 				previousPageName = "Location";
@@ -358,23 +358,25 @@ public class CommonutilitiesMobile extends UhcDriver {
 			} else if (currentPageName.contains("DRUG")) {
 				previousPageName = "Doctor";
 				previousPagePercentage = "50%";
-				nextPageName = "Pharmacy";
-				nextPagePercentage = "60%";
+				//nextPageName = "Pharmacy";
+				//nextPagePercentage = "60%";
 				currrentPagePercentage = "50%";
-				if (currentPageName.contains("SKIP"))
-					if ((flow.equalsIgnoreCase("MAPD") || flow.equalsIgnoreCase("NONE"))) {
+				//if (currentPageName.contains("SKIP"))
+//					if ((flow.equalsIgnoreCase("MAPD") || flow.equalsIgnoreCase("NONE"))) {
 						nextPageName = "Additional";
 						nextPagePercentage = "70%";
-					}
-			} else if (currentPageName.contains("PHARMACY")) {
+//					}
+			}
+//			else if (currentPageName.contains("PHARMACY")) {
+//				previousPageName = "Drug";
+//				previousPagePercentage = "60%";
+//				nextPageName = "Additional";
+//				nextPagePercentage = "70%";
+//				currrentPagePercentage = "60%";
+//			} 
+		else if (currentPageName.contains("ADDITIONAL")) {
 				previousPageName = "Drug";
 				previousPagePercentage = "60%";
-				nextPageName = "Additional";
-				nextPagePercentage = "70%";
-				currrentPagePercentage = "60%";
-			} else if (currentPageName.contains("ADDITIONAL")) {
-				previousPageName = "Pharmacy";
-				previousPagePercentage = "70%";
 				nextPageName = "Cost";
 				nextPagePercentage = "80%";
 				currrentPagePercentage = "70%";
@@ -384,10 +386,10 @@ public class CommonutilitiesMobile extends UhcDriver {
 					nextPagePercentage = "72%";
 					currrentPagePercentage = "59%";
 				}
-				if (currentPageName.contains("SKIP")) {
-					previousPageName = "Drug";
-					previousPagePercentage = "60%";
-				}
+//				if (currentPageName.contains("SKIP")) {
+//					previousPageName = "Drug";
+//					previousPagePercentage = "60%";
+//				}
 			} else if (currentPageName.contains("COST")) {
 				previousPageName = "Additional";
 				previousPagePercentage = "80%";
@@ -491,4 +493,24 @@ public class CommonutilitiesMobile extends UhcDriver {
 	public void mobileFindElementHorizontal(WebElement element,String swipeRightPercentage) {
 		mobileFindElementHorizontal(element, swipeRightPercentage, 8, false);
 	}
+	
+	public boolean mobileCheckElementBeforeCallBanner(WebElement element) {
+		boolean status = true;
+		try {
+			validate(footerCallbannerSection, 30);
+			validate(element, 30);
+			int locationDifference = 30;
+			int footerY = footerCallbannerSection.getLocation().getY();
+			int elementY =element.getLocation().getY();
+			//System.out.println("Footer Y: "+footerY+"Element Y :"+elementY);
+			if (footerY - elementY < locationDifference) {
+				status = false;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("Element/Footer banner not visible");
+		}
+		return status;
+	}
+
 }

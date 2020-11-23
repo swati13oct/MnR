@@ -13,6 +13,7 @@ import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import pages.acquisition.bluelayer.ComparePlansPageBlayer;
 import pages.acquisition.ulayer.AcquisitionHomePage;
 import pages.acquisition.ulayer.AddDrugDetails;
 import pages.acquisition.ulayer.ComparePlansPage;
@@ -22,6 +23,7 @@ import pages.acquisition.ulayer.SavingsOppurtunity;
 import pages.acquisition.ulayer.VPPPlanSummaryPage;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstants;
+import acceptancetests.acquisition.dceredesign.DCERedesignCommonConstants;
 import acceptancetests.acquisition.vpp.VPPCommonConstants;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
@@ -127,10 +129,11 @@ public class DCEVPPAcqStepDefinitionAARP {
 	}
 		
 	/**
+	 * @throws InterruptedException 
 	 * @toDo:
 	 */
 	@And("^user access DCE tool on aarp site$")
-	public void accessDCETool(DataTable attributes){
+	public void accessDCETool(DataTable attributes) throws InterruptedException{
 		List<DataTableRow> memberAttributesRow = attributes
 				.getGherkinRows();
 		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
@@ -145,6 +148,8 @@ public class DCEVPPAcqStepDefinitionAARP {
 		
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario().getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		plansummaryPage.viewPlanSummary(plantype);
+		if(!plantype.equalsIgnoreCase("MS"))
+			plansummaryPage.handlePlanYearSelectionPopup();
 		//DrugCostEstimatorPage dce=plansummaryPage.navigateToDCEFromVPP(plantype,planName);
 		DrugCostEstimatorPage dce=plansummaryPage.navigatetoDCEVPP(planName);
 		if(dce!=null){
@@ -449,6 +454,16 @@ public class DCEVPPAcqStepDefinitionAARP {
 			getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
 	}
 	}
+	
+	@Then("^the user clicks on Back to Plans button in AARP site and Navigates to new Plan Compare$")
+	public void the_user_clicks_on_Back_to_Plans_button_in_AARP_site_and_Navigates_to_new_Plan_Compare() throws Throwable {
+		DrugCostEstimatorPage dce = (DrugCostEstimatorPage) getLoginScenario()
+				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
+		ComparePlansPage planComparePage = dce.clickBtnBackTonewPlancomparenew();
+		if (planComparePage != null) {
+			getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
+		}
+	}
 
 	@Then("^the user clicks on Back to Plans button in AARP site$")
 	public void the_user_clicks_on_Back_to_Plans_button_in_AARP_site() throws Throwable {
@@ -543,6 +558,9 @@ public class DCEVPPAcqStepDefinitionAARP {
 		PlanDetailsPage plandetailspage= (PlanDetailsPage)plansummaryPage.navigateToPlanDetails(planName, planType);
 		if(plandetailspage!=null){
 			getLoginScenario().saveBean(PageConstants.PLAN_DETAILS_PAGE, plandetailspage);
+			getLoginScenario().saveBean(VPPCommonConstants.PLAN_TYPE, planType);
+			getLoginScenario().saveBean(VPPCommonConstants.PLAN_NAME, planName);
+
 		}
 		
 		

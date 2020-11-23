@@ -43,13 +43,11 @@ public class DCETestHarnessPage extends UhcDriver{
 	public DCETestHarnessPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
-		CommonUtility.waitForPageLoad(driver, ZipCode, 10);
-		try {
-			openAndValidate();
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		CommonUtility.waitForPageLoad(driver, ZipCode, 30);
+		/*
+		 * try { openAndValidate(); } catch (InterruptedException e) { // TODO
+		 * Auto-generated catch block e.printStackTrace(); }
+		 */
 	}
 
 

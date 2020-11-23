@@ -821,7 +821,7 @@ private WebElement editEmailAddressArrowbutton;
 	@FindBy(xpath = "//*[@id='mailingAddress']/div[2]/div[1]/div/div/a[@class='add-address-btn']")
 	private WebElement mailingAddressAddButton;
 
-	@FindBy(xpath = "//*[@id='communicationAddress']/div[3]/a")
+	@FindBy(xpath = "//*[@id='communicationAddress' or @id='communicationAddressCardHeight']/div[3]/a |//*[@id='communicationAddress']/div[2]/a")
 	private WebElement communicationPreferncesEditLink;
 
 	@FindBy(xpath = "//*[@class='nav nav-tabs']/li")
@@ -1219,7 +1219,7 @@ private WebElement editEmailAddressArrowbutton;
 	 *       more ways to contact us link in the Need help section
 	 */
 	public boolean clickcontactUslink() {
-
+  
 		contactUs.click();
 		try {
 			Thread.sleep(2000);

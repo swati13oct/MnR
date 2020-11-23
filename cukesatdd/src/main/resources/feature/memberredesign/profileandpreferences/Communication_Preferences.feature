@@ -2,7 +2,7 @@
 Feature: 1.03 Member Preferences page
 
   Background: If run on stage then feature security flag needs to be true
-     Given feature security flag must set to true when testing on stage env
+     Given feature security flag must set to true when testing on test env
       | Feature           | UCPProfileAndPreferences |
 
   #----- beginning of VBF preferences scenarios section ------------------
@@ -94,7 +94,7 @@ Feature: 1.03 Member Preferences page
       | 15312 | xxxxx         | MA_AARP_GOGreen_Profilepref     | 
       | 15313 | xxxxx         | PDP_AARP_GOGreen_Profilepref    |
       | 15314 | xxxxx         | MAPD_UHC_GOGreen_Profilepref    |
-      | 15315 | xxxxx         | MA_UHC_GOGreen_Profilepref      |
+     # | 15315 | xxxxx         | MA_UHC_GOGreen_Profilepref      |
       | 15316 | xxxxx         | MAPD_GROUP_GOGreen_Profilepref  |
       | 15317 | xxxxx         | PDP_GROUP_GOGreen_Profilepref  |
 
@@ -131,7 +131,7 @@ Feature: 1.03 Member Preferences page
 
     Examples: 
       | TID   | planType       | memberType              |
-   #  | 15310 | Combo_FED_SHIP | EPMPEnabled_ProfilePref |
+      | 15310 | Combo_FED_SHIP | EPMPEnabled_ProfilePref |
       | 15310 | Combo_PDP_SSUP | EPMPEnabled_ProfilePref |
       
   @CommunicationPreferences05 @NoEPMPpreferences @regressionMember
@@ -175,5 +175,5 @@ Feature: 1.03 Member Preferences page
     Examples: 
       | FID    | planType                 | memberType             | planName                      |
       | 276629 | SHIP                     | SHIP_ProfilePref       | AARP MEDICARE SUPPLEMENT PLAN |
-      | 276629 | SHIP                     | COMBO_SHIP_ProfilePref | AARP GROUP HOSPITAL PLAN      |
+      | 276629 | SHIP                     | COMBO_SHIP_ProfilePref | AARP MEDICARE SUPPLEMENT PLAN |
       

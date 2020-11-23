@@ -21,8 +21,7 @@ import org.testng.Assert;
 
 import acceptancetests.data.PageConstants;
 import acceptancetests.util.CommonUtility;
-import acceptancetests.vbfacquisition_deprecated.enrollinplan.oleCommonConstants;
-import acceptancetests.vbfacquisition_deprecated.vpp.VPPCommonConstants;
+
 import atdd.framework.UhcDriver;
 import pages.acquisition.ulayer.PageTitleConstants;
 

@@ -16,23 +16,34 @@ Feature: 2.06. ACQ-OLE Resume and Retrieve Application UMS
        | Lastname      | <Lastname>    |
        | Zipcode       | <zipcode>     | 
      Then the user navigates to next page to locate resume application button
-   	 	| DOB               | <DOB>         |
-     Then the user enters data to resume the application
-       | applicationType           | <applicationType>|
-       | ApplicationID |<ApplicationID>|
+   	 	| DOB           | <DOB>         |
+   	 	| Firstname     | <Firstname>   |
+       | Lastname     | <Lastname>    |
+      # Then the user signs in with optum Id credentials to resume application in UHC site
+      | User Name | <userName> |
+      | Password  | <password> |	
+      Then the user signs in with optum Id in medsup flow for uhc
+     		|User Name | <username> |
+     		|Password | <password>|
+      Then the user validate retrieve application URL in UHC Site
+     | AARP URL    | <AARPUrl> |
+     |AARP URL STG|<AARPUrl-stg>|
+    # Then the user enters data to resume the application
+       | applicationType| <applicationType>|
+      	| ApplicationID |<ApplicationID>|
        | DOB           | <DOB>         |
        | Zipcode       | <zipcode>     |   
-      Then The user validates the resume application processed
+     # Then The user validates the resume application processed
        | Firstname     | <Firstname>   |
        | Lastname      | <Lastname>    |
       
       
        Examples: 
-      | zipcode | isMultutiCounty | county             | plantype | DOB      | Firstname | Lastname|  ApplicationID | applicationType |
-      |   90002 | NO              | Los Angeles County | MS       | 11/13/1940 | John      | Carry   |    ABCD        | Resume          |
+      | zipcode | isMultutiCounty | AARPUrl																					| county             | plantype | DOB      | Firstname | Lastname|  ApplicationID | applicationType | username | password |AARPUrl-stg|
+      |   90002 | NO              | aarpsupplementalhealth.com/ole/ms.olelaunch.html|Los Angeles County | MS       | 11/13/1940 | John      | Carry   |    ABCD        | Resume          |mnrqavd3 | Password@1|https://aarpsupplementalhealth-stg.uhc.com/content/aarpsupplementalhealth/ole/ms.olelaunch.html|
      
   
-@UHC_Retrive_App_UHC @OLE_Regression @oleMedSupBlayer
+@UHC_Retrive_App_UHC @oleMedSupBlayer
  Scenario Outline: MedSup Retrieve Application with Application ID
  Given the user is on the uhcmedicaresolutions site landing page
    When the user performs plan search using following information in UMS site

@@ -751,11 +751,11 @@ public class FooterPage extends UhcDriver {
 					needHelp_PlanSupport_img, needHelp_PlanSupport_phone, needHelp_PlanSupport_tty, 
 					needHelp_PlanSupport_wkDayHrs, null);
 			
-			validateSection="Need Help - Chat With Us";
-			Assert.assertTrue("PROBLEM - unable to locate the "+validateSection+" section element - Chat Section", footerValidate(needHelp_ChatSection));
-			Assert.assertTrue("PROBLEM - unable to locate the "+validateSection+" section element - Chat img", footerValidate(needHelp_Chat_img));
-			Assert.assertTrue("PROBLEM - unable to locate the "+validateSection+" section element - Chat section header", footerValidate(needHelp_Chat_header));
-			Assert.assertTrue("PROBLEM - unable to locate the "+validateSection+" section element - Chat txt", footerValidate(needHelp_Chat_txt));
+			//validateSection="Need Help - Chat With Us";
+			//Assert.assertTrue("PROBLEM - unable to locate the "+validateSection+" section element - Chat Section", footerValidate(needHelp_ChatSection));
+			//Assert.assertTrue("PROBLEM - unable to locate the "+validateSection+" section element - Chat img", footerValidate(needHelp_Chat_img));
+			//Assert.assertTrue("PROBLEM - unable to locate the "+validateSection+" section element - Chat section header", footerValidate(needHelp_Chat_header));
+			//Assert.assertTrue("PROBLEM - unable to locate the "+validateSection+" section element - Chat txt", footerValidate(needHelp_Chat_txt));
 		}
 		System.out.println("Main window = "+driver.getTitle());
 		return driver.getCurrentUrl();

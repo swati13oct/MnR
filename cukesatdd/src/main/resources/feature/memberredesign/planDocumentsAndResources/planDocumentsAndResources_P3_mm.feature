@@ -2,7 +2,7 @@
 Feature: 1.06.3 Member Plans and Documents - section: Membership Materials
 
   Background: If run on stage then feature security flag needs to be true
-     Given feature security flag must set to true when testing on stage env
+     Given feature security flag must set to true when testing on test env
       | Feature           | UCPPlanDocuments |
 
   #------------------------------------------
@@ -79,11 +79,19 @@ Feature: 1.06.3 Member Plans and Documents - section: Membership Materials
       | index  | TID         | planType | memberType            | mm_sd | mm_en | mm_es | mm_zh |
       | 18-056 | 15131,15233 | SSP      | COMBO_GROUP_EFF_PDnR  | true  | true  | false | false | 
 
-	@active_ship @devRegression
+	@active_ship
 	Examples: 
       | index  | TID         | planType | memberType            | mm_sd | mm_en | mm_es | mm_zh |
       | 19-057 | 15119,15304 | SHIP     | IND_EFF_PDnR          | false | false | false | false |
+
+	@active_ship @devRegression
+	Examples: 
+      | index  | TID         | planType | memberType            | mm_sd | mm_en | mm_es | mm_zh |
       | 20-117 | 15119,15304 | SHIP     | MULTI_IND_EFF_PDnR    | false | false | false | false |
 
+	@preeffective_ship
+	Examples: 
+      | index  | TID         | planType | memberType            | mm_sd | mm_en | mm_es | mm_zh |
+      | 21-123 | xxxxx       | SHIP     | IND_PREEFF_PDnR       | false | false | false | false |
 
      

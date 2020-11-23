@@ -181,16 +181,21 @@ public class DoctorsMobilePage extends UhcDriver {
 
 	public void doctorlookup(String search, int count) {
 		String curdriverhandle = driver.getWindowHandle();
-		mobileUtils.mobileLocateElementClick(modalFinddoctors);
+		modalFinddoctors.click();
 		validateWerallySearchanotherWindowmobile(curdriverhandle, "Doctors", search, count);
-		confirmationProviderResults=getConfimationPopupResults(count);
-		verifyConfirmationmodalResults(count, werallyResults, confirmationResults);
-		if (count > 2) {
-			removeDoctors();
-			count = count-1;
-			confirmationProviderResults=getConfimationPopupResults(count);
+		threadsleep(5000);
+		// Changing the count for multiple doc with : separated
+		if (search.contains(":")) {
+			count = search.split(":").length;
 		}
-		mobileUtils.mobileLocateElementClick(modalContinuedoctors);
+		confirmationProviderResults = getConfimationPopupResults(count);
+		verifyConfirmationmodalResults(count, werallyResults, confirmationResults);
+		if (count > 2 && !search.contains(":")) {
+			removeDoctors();
+			count = count - 1;
+			confirmationProviderResults = getConfimationPopupResults(count);
+		}
+		modalContinuedoctors.click();
 	}
 
 	public void doctorModellookupElements() {
@@ -219,7 +224,8 @@ public class DoctorsMobilePage extends UhcDriver {
 		// By default removing 2nd doctor
 		int beforeRemove = modalDoctorsList.size();
 		WebElement remove = modalDoctorsList.get(1).findElement(By.cssSelector("button[class*='secondary']"));
-		mobileUtils.mobileLocateElementClick(remove);
+		mobileactiontap(remove);
+		threadsleep(2000);
 		int afterRemove = modalDoctorsList.size();
 		if (beforeRemove == afterRemove) {
 			System.out.println("Remove Results Count mismatch");
@@ -274,12 +280,16 @@ public class DoctorsMobilePage extends UhcDriver {
 	}
 
 	public void verifyConfirmationmodalResults(int count, ArrayList<String> werally, ArrayList<String> confirm) {
-
+		//Additional specialty will be displayed in saved page of Werally and the same will display in  modal popup
 		if (werally.size() == confirm.size() && count == werally.size()) {
 			if (equalsname(werally, confirm)) {
 				System.out.println("Werally and Modal Result's Content matched");
-			} else {
+			}else if (containsname(confirm, werally)) {
+				System.out.println("Werally and Modal Result's Content matched");
+			}else {
 				System.out.println("Werally and Modal Result's Content mismatch");
+				System.out.println("Actual Confirm "+confirm);
+				System.out.println("Expected Werally "+werally);
 				Assert.assertTrue(false);
 			}
 		} else {
@@ -291,10 +301,10 @@ public class DoctorsMobilePage extends UhcDriver {
 	public boolean equalsname(ArrayList<String> werally, ArrayList<String> doctorsmodal) {
 		boolean result = true;
 		for (int i = 0; i < werally.size(); i++) {
-			String wname[] = werally.get(i).toUpperCase().replace(",", "").replace(".", "").split(" ");
+			String wname[] = werally.get(i).toUpperCase().replace(",", " ").replace(".", " ").replace("  ", " ").split(" ");
 			Arrays.sort(wname);
 			for (int j = 0; j < doctorsmodal.size(); j++) {
-				String dname[] = doctorsmodal.get(j).toUpperCase().replace(",", "").replace(".", "").split(" ");
+				String dname[] = doctorsmodal.get(j).toUpperCase().replace(",", " ").replace(".", " ").replace("  ", " ").split(" ");
 				Arrays.sort(dname);
 				System.out.println(Arrays.equals(wname, dname));
 				if (Arrays.equals(wname, dname)) {
@@ -302,6 +312,8 @@ public class DoctorsMobilePage extends UhcDriver {
 					break;
 				} else {
 					result = false;
+					System.out.println("Expected : "+werally.get(i));
+					System.out.println("Actual : "+doctorsmodal.get(j));
 				}
 			}
 		}
@@ -315,7 +327,7 @@ public class DoctorsMobilePage extends UhcDriver {
 		mobileUtils.mobileLocateElementClick(continueBtn);
 		if (multiDoctor.equalsIgnoreCase("YES")) {
 			String curdriverhandle = driver.getWindowHandle();
-			mobileUtils.mobileLocateElementClick(modalFinddoctors);
+			modalFinddoctors.click();
 			validateWerallySearchanotherWindowmobile(curdriverhandle, "Doctors", doctorsName, 2);
 			doctorConfirmationModellookupElements();
 			modalCancel.click();
@@ -357,14 +369,14 @@ public class DoctorsMobilePage extends UhcDriver {
 
 	public void providerlookup(String search, int count) {
 		String curdriverhandle = driver.getWindowHandle();
-		mobileUtils.mobileLocateElementClick(modalFinddoctors);
+		modalFinddoctors.click();
 		validateWerallySearchanotherWindowmobile(curdriverhandle, "Doctors", search, count);
 		confirmationProviderResults=getConfimationPopupResults(count);
 		verifyConfirmationmodalResults(count, werallyResults, confirmationProviderResults);
 	}
 	
 	public void nextPageValidationDoctor() {
-		mobileUtils.mobileLocateElementClick(modalContinuedoctors);
+		modalContinuedoctors.click();
 		System.out.println("Validating " + page + " page Continue button functionality");
 		mobileUtils.nextPageValidation(page.toUpperCase());
 	}
@@ -379,8 +391,9 @@ public class DoctorsMobilePage extends UhcDriver {
 			providerlookup(doctorName1, 1);
 		int confirmationSize = Integer.parseInt(modalDoctorsCount.getText().trim().split(" ")[2]);
 		String curdriverhandle = driver.getWindowHandle();
-		mobileUtils.mobileLocateElementClick(modalEditdoctors);
-		mobileUtils.mobileLocateElementClick(modalFinddoctors);
+		modalEditdoctors.click();
+		threadsleep(1000);
+		modalFinddoctors.click();
 		if (muliDoctor2.equalsIgnoreCase("YES"))	
 			validateWerallySearchanotherWindowmobile(curdriverhandle, "Doctors", doctorName2, 3);
 		else
@@ -398,9 +411,29 @@ public class DoctorsMobilePage extends UhcDriver {
 	}
 	
 	public void nextPageNameValidationDoctor() {
-		mobileUtils.mobileLocateElementClick(modalContinuedoctors);
+		modalContinuedoctors.click();
 		System.out.println("Validating " + page + " page Continue button functionality");
 		mobileUtils.nextPageNameValidation(page.toUpperCase());
 	}
 
+	public boolean containsname(ArrayList<String> primaryContent, ArrayList<String> subContent) {
+		boolean result = true;
+		for (int i = 0; i < primaryContent.size(); i++) {
+			String wname[] = primaryContent.get(i).toUpperCase().replace(",", "").replace(".", "").split(" ");
+			List<String> wnam = Arrays.asList(wname);
+			for (int j = 0; j < subContent.size(); j++) {
+				String dname[] = subContent.get(j).toUpperCase().replace(",", "").replace(".", "").split(" ");
+				List<String> dnam = Arrays.asList(dname);
+				if (wnam.containsAll(dnam)) {
+					result = true;
+					break;
+				} else {
+					result = false;
+				}
+			}
+		}
+		System.out.println("Content validation Result : " + result);
+		Assert.assertTrue(result, "Content mismatch");
+		return result;
+	}
 }

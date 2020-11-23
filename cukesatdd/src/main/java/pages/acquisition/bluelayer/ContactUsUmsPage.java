@@ -17,10 +17,10 @@ import atdd.framework.UhcDriver;
  */
 public class ContactUsUmsPage extends UhcDriver{
 	
-	@FindBy(xpath = "//*[contains(@class,'meded-article-header__title')]")
+	@FindBy(xpath = "//*[contains(@class,'header') and contains(text(),'Contact')]")
 	public static WebElement header;
 	
-	@FindBy(xpath = "//div[contains(@class,'uhc-container')]")
+	@FindBy(xpath = "//*[contains(text(),'PROVIDERS ONLY')]")
 	public static WebElement rightRailSection_ProvidersOnly;
 	
 	@FindBy(id = "collapse2heading_article_mededaccordion0")
@@ -43,7 +43,7 @@ public class ContactUsUmsPage extends UhcDriver{
 	public void openAndValidate() {
 		CommonUtility.waitForPageLoadNew(driver, header, 30);
 		validateNew(rightRailSection_ProvidersOnly);
-		validateNew(ma_AccordialCollapsed);
+		//validateNew(ma_AccordialCollapsed);
 		//validateNew(disclaimerBox_Para);
 		
 		

@@ -68,10 +68,10 @@ public class SavingsOppurtunity extends UhcDriver{
 		return newPaymentHistoryExpectedJson;
 	}
 	public void savedrugbutton() throws InterruptedException {
-		Thread.sleep(10000);
-		waitforElement(savedrugbutton);
-		savedrugbutton.click();
-		Thread.sleep(15000);
+		//Thread.sleep(10000);
+		if(validate(savedrugbutton,10))
+			savedrugbutton.click();
+		//Thread.sleep(15000);
 		// TODO Auto-generated method stub
 		
 	}

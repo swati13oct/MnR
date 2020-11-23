@@ -121,13 +121,13 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 			sleepByMillSec(300);
 			scrollElementToCenterScreen(targetLinkElement);
 			targetLinkElement.click();
-			CommonUtility.checkPageIsReady(driver);
+			CommonUtility.checkPageIsReadyNew(driver);
 			System.out.println("Clicked the doc link...");
 			sleepBySec(3);
 			if (!redirectUrl.equals("none")) {
 				System.out.println("if redirect then need to wait a little for the page to settle before checking destination link");
 				sleepBySec(3);
-				CommonUtility.checkPageIsReady(driver);
+				CommonUtility.checkPageIsReadyNew(driver);
 			}
 			//note: for these doc, popup will show when clicking this link, validate the proceed and cancel button
 			if (targetDocName.toUpperCase().contains("HEALTH PRODUCTS BENEFIT") 
@@ -142,7 +142,7 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 
 				System.out.println("Proceed to validate the Cancel button on leaving site popup after clicking "+targetDocName+" link");
 				siteLeavingPopup_cancelBtn.click();
-				CommonUtility.checkPageIsReady(driver);
+				CommonUtility.checkPageIsReadyNew(driver);
 				Assert.assertTrue("PROBLEM - should not locate the site-leaving popup after clicking CANCEL button", !planDocValidate(siteLeavingPopup));
 
 				CommonUtility.waitForPageLoad(driver, targetLinkElement, 5);
@@ -150,7 +150,7 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 				CommonUtility.waitForPageLoad(driver, siteLeavingPopup, 5);
 				System.out.println("Proceed to validate the Proceed button on leaving site popup after clicking "+targetDocName+" link");
 				siteLeavingPopup_proceedBtn.click();
-				CommonUtility.checkPageIsReady(driver);
+				CommonUtility.checkPageIsReadyNew(driver);
 				Assert.assertTrue("PROBLEM - should not locate the site-leaving popup after clicking PROCEED button", !planDocValidate(siteLeavingPopup));
 			}
 
@@ -158,8 +158,8 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 			int afterClicked_numTabs=afterClicked_tabs.size();
 			Assert.assertTrue("PROBLEM - Did not get expected new tab after clicking '"+targetDocName+"' link", (afterClicked_numTabs-beforeClicked_numTabs)==1);
 			driver.switchTo().window(afterClicked_tabs.get(afterClicked_numTabs-1));
-			CommonUtility.checkPageIsReady(driver);
-			sleepBySec(5);
+			CommonUtility.checkPageIsReadyNew(driver);
+			sleepBySec(5); //note: let the page settle before validating content
 
 			if (checkDestUrl) {
 				String actUrl=driver.getCurrentUrl();
@@ -176,6 +176,11 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 					section_note=validateSubPageContent(testInputInfoMap, section_note, actUrl, targetDocName);
 				}
 			} else {
+				if (!MRScenario.environment.contains("team-a")) {
+					System.out.println("Proceed to validate the PDF content");
+					String actUrl=driver.getCurrentUrl();
+					section_note=validateSubPageContent(testInputInfoMap, section_note, actUrl, targetDocName); 
+				}
 				section_note.add("    SKIP - element link in href attribute vs actual link URL after clicked validation");
 			}
 			driver.close();
@@ -190,12 +195,10 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 				scrollElementToCenterScreen(targetLinkElement);
 				sleepBySec(1);
 				targetLinkElement.click(); //note: if redirect then need to wait a little for the page to settle before checking destination link
-				CommonUtility.checkPageIsReady(driver);
-				
 				sleepBySec(5);
 				if (!redirectUrl.equals("none")) {
 					System.out.println("if redirect then need to wait a little for the page to settle before checking destination link");
-					CommonUtility.checkPageIsReady(driver);
+					CommonUtility.checkPageIsReadyNew(driver);
 				}
 				ArrayList<String> afterClicked_tabs = new ArrayList<String>(driver.getWindowHandles());
 				int afterClicked_numTabs=afterClicked_tabs.size();			
@@ -295,10 +298,8 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 		//note: validate number of sections
 		String currentYear=yearsMap.get("currentYear");
 		String nextYear=yearsMap.get("nextYear");
-
 		boolean doc_en_curYr=expectedDocTypeDisplayMap.get("doc_en_curYr");
 		boolean doc_en_nxtYr=expectedDocTypeDisplayMap.get("doc_en_nxtYr");
-
 		if (doc_en_curYr) {
 			String expedYearText=currentYear;
 			String testPath=curYr_xpath;
@@ -595,6 +596,8 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 			return "6016";
 		if (docName.toLowerCase().equalsIgnoreCase("Plan Information".toLowerCase()) ) 
 			return "6017";
+		if (docName.toLowerCase().equalsIgnoreCase("Plan Documents".toLowerCase()) ) 
+			return "dunno";
 		System.out.println("TEST - unable to find a type match for docName="+docName);
 		return "-2";
 	}
@@ -689,9 +692,56 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 		String urlStr = (String) responseObj.get("url");
 		Assert.assertTrue("PROBLEM - unable to locate postData string", urlStr!=null);
 		System.out.println("TEST - urlStr="+urlStr);
+		
+		if (planType.toUpperCase().contains("SHIP")) {
+			System.out.println("SHIP has one more API");
+			lookForText1="ship/planDocuments";
+			lookForText2="responseReceived";
+
+			for (LogEntry entry : entries) {
+				String line=entry.getMessage();
+				//keep for debug System.out.println("TEST each line="+line); 
+				if (memberType.contains("COMBO")) {
+					if (line.contains(lookForText1) && line.contains(lookForText2) && line.contains(planType)) {
+						apiReqeust=line;
+						System.out.println("TEST found line="+line);
+						break;
+					}
+				} else {
+					if (line.contains(lookForText1) && line.contains(lookForText2)) {
+						apiReqeust=line;
+						System.out.println("TEST found line="+line);
+						break;
+					}
+				}
+			}
+			Assert.assertTrue("PROBLEM - unable to locate the network entry that contains '"+lookForText1+"' and '"+lookForText2+"'", apiReqeust!=null);
+			parser = new JSONParser();
+			jsobObj=null;
+			try {
+				jsobObj = (JSONObject) parser.parse(apiReqeust);
+			} catch (ParseException e) {
+				e.printStackTrace();
+				Assert.assertTrue("PROBLEM - unable to convert target string into json object", false);
+			}
+			messageObj = (JSONObject) jsobObj.get("message");
+			Assert.assertTrue("PROBLEM - unable to locate message json object", messageObj!=null);
+			paramsObj = (JSONObject) messageObj.get("params");
+			Assert.assertTrue("PROBLEM - unable to locate message json object", paramsObj!=null);
+			responseObj = (JSONObject) paramsObj.get("response");
+			Assert.assertTrue("PROBLEM - unable to locate message json object", responseObj!=null);
+			System.out.println("TEST - responseObj="+responseObj.toString());
+			statusValue = (Long) responseObj.get("status");
+			Assert.assertTrue("PROBLEM - unable to locate postData string", statusValue!=null);
+			Assert.assertTrue("PROBLEM - API response is not getting status=200 or 206. Actual value="+statusValue, statusValue==200 || statusValue==206);
+			String urlStr_ship = (String) responseObj.get("url");
+			Assert.assertTrue("PROBLEM - unable to locate postData string", urlStr!=null);
+			System.out.println("TEST - urlStr_ship="+urlStr_ship);
+			urlStr=urlStr+"TESTING"+urlStr_ship;
+		}
 		return urlStr;
 	}
-
+	
 	public void selectLangFromDropdown(String section, String targetLang) {
 		WebElement langDropDown=null;
 		String langElementValue="en_us";
@@ -849,10 +899,10 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 	 */
 	public HashMap<String, Document> validateDoc(HashMap<String, String> testInputInfoMap, String expDocName) {
 		int count=0;
-		int maxRetry=1;
+		int maxRetry=2;
 		while (true) { 
 			try {
-				System.out.println("Proceed to validate expected document="+expDocName+" against what is showing on UI");
+				System.out.println("Proceed to validate expected document="+expDocName+" against what is showing on UI. count="+count);
 				String section=testInputInfoMap.get("section");
 				String targetLang=testInputInfoMap.get("targetLang");
 				String targetYr=testInputInfoMap.get("targetYr");
@@ -988,10 +1038,11 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 				String planType=testInputInfoMap.get("planType");
 				String memberType=testInputInfoMap.get("memberType");
 				refreshPage(planType, memberType, origUrlBeforeClick);
-				if (++count == maxRetry) {
+				if (count >= maxRetry) {
 					Assert.assertTrue("PROBLEM: Got StaleElementReferenceException and already reload page and retried once, giving up", false);
 					throw e;
 				}
+				count=count+1;
 			}
 		}
 	}
@@ -1014,7 +1065,7 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 	 * @return
 	 */
 	public List<String> validateSubPageContent(HashMap<String, String> testInputInfoMap, List<String> section_note, String actUrl, String targetDocName) {
-		CommonUtility.checkPageIsReady(driver);
+		CommonUtility.checkPageIsReadyNew(driver);
 		String planType=testInputInfoMap.get("planType");
 		sleepBySec(3); //note: let the page settle before validating content
 		waitForDocPageToLoad();
@@ -1114,19 +1165,28 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 						}
 					}
 				} else {
-					section_note.add("    * FAILED - unable to locate page header text element on the landing page for doc '"+testInputInfoMap.get("docName")+"'");
-					Assert.assertTrue("PROBLEM - unable to locate expected page text element on the landing page for doc '"+testInputInfoMap.get("docName")+"' - doc name="+targetDocName, false);
+					if ((planType.equalsIgnoreCase("MEDICA") || planType.equalsIgnoreCase("PCP")) &&
+						(targetDocName.contains("Medicare Plan Appeals & Grievances Form (Online)")
+						|| targetDocName.contains("Medical Reimbursement Form (Online)")
+						|| targetDocName.contains("Authorization to Share Personal Information Form"))
+						&& planDocValidate(systemError)
+						&& MRScenario.environment.equalsIgnoreCase("offline")) {
+						section_note.add("    * KNOWN ISSUE - offline-prod domain got system error opening this doc '"+testInputInfoMap.get("docName")+"'");
+					} else {
+						section_note.add("    * FAILED - unable to locate page header text element on the landing page for doc '"+testInputInfoMap.get("docName")+"'");
+						Assert.assertTrue("PROBLEM - unable to locate expected page text element on the landing page for doc '"+testInputInfoMap.get("docName")+"' - doc name="+targetDocName, false);
+					}
 				}
 			}			
 		} else {
 			//note: for other section, do simpler validatoin
-			if (actUrl.contains(".pdf")) {
+			if (actUrl.contains(".pdf") || actUrl.contains("alphadog")) {
 				try {
 					URL TestURL = new URL(driver.getCurrentUrl());
 					BufferedInputStream TestFile = new BufferedInputStream(TestURL.openStream());
 					PDDocument document = PDDocument.load(TestFile);
 					String PDFText = new PDFTextStripper().getText(document);
-					System.out.println("PDF text : "+PDFText);
+					//keep-for-debug System.out.println("PDF text : "+PDFText);  
 					if(PDFText!=null && !PDFText.equals(""))
 						section_note.add("    PASSED - validated pdf content is not null or empty");
 					else {
@@ -1144,19 +1204,17 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 				}
 			} else {
 				//note: for html or any url that's not pdf related
-				if (planDocValidate(generalPgHeader)) {
+				if (targetDocName.contains("CDI Long Notice") && actUrl.contains(".jpg")) {
+					section_note.add("    PASSED - located jpg image for '"+testInputInfoMap.get("docName")+"'");
+				} else if (planDocValidate(generalPgHeader) || planDocValidate(generalPgHeader_providerSearch)) {
 					if (targetDocName.equals("PREVIOUS ISSUE")) { //note: for PREVIOUS ISSUE, do additional check for now until problem is fixed
 						//note: header text is //h3 not h1 like others
 						if (planDocValidate(prevIssPgHeader)) {
 							section_note.add("    PASSED - located page content on the landing page for doc '"+testInputInfoMap.get("docName")+"'");
 						} else {
-							if (planType.contains("MEDICA") || planType.contains("PCP")) {
-								section_note.add("    * FAILED - KNOWN ISSUE - INC15084751  - unable to locate page content on the landing page for doc '"+testInputInfoMap.get("docName")+"'");
-								Assert.assertTrue("PROBLEM - KNOWN ISSUE - INC15084751  - unable to locate page content for doc name="+targetDocName, planDocValidate(prevIssPgHeader));
-							} else {
-								section_note.add("    * FAILED - unable to locate page content on the landing page for doc '"+testInputInfoMap.get("docName")+"'");
-								Assert.assertTrue("PROBLEM - unable to locate page content for doc name="+targetDocName, planDocValidate(prevIssPgHeader));
-							}
+							CommonUtility.waitForPageLoad(driver, prevIssBody, 5);
+							section_note.add("    * FAILED - unable to locate page content on the landing page for doc '"+testInputInfoMap.get("docName")+"'");
+							Assert.assertTrue("PROBLEM - unable to locate page content for doc name="+targetDocName, planDocValidate(prevIssPgHeader));
 						}
 					} else {
 						section_note.add("    PASSED - validated there is header text element on landing page after clicked");

@@ -44,13 +44,13 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	@FindBy(xpath ="//div[@id='plan-name-div']/div/div/div/p")
 	private WebElement dceplanname;
 
-	@FindBy(id = "add-drug")
+	@FindBy(xpath = "//button[contains(@id,'addDrug')]")
 	public WebElement addDrug;
 
-	@FindBy(id = "pharmacyTabId")
+	@FindBy(xpath = "//*[contains(@id,'build-your-drug-list')]")
 	public WebElement step2;
 
-	@FindBy(id = "drugsTabId")
+	@FindBy(xpath = "//*[contains(@id,'get-started')]")
 	public WebElement step1;
 
 	@FindBy(id = "pharmacy-form")
@@ -71,7 +71,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	@FindBy(className = "edit-drug")
 	public WebElement editDrug;
 
-	@FindBy(id = "drug-search-input")
+	@FindBy(xpath = "//input[contains(@id,'drugsearch')]")
 	public WebElement drugsearchinput;
 
 	@FindBy(id = "drugcostestimatorHeading") // [contains(text(),'Cost')][contains(text(),'Estimator')]")
@@ -194,7 +194,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	@FindBy(id = "total_pharmacysavings")
 	public WebElement left_rail_pharmacy_saving;
 
-	@FindBy(id = "costsTabId")
+	@FindBy(xpath = "//*[contains(@id,'review-drug-costs')]")
 	public WebElement step3;
 	
 	@FindBy(xpath = "//p[contains(text(),'STEP3:')]/following-sibling::span[p[contains(text(),'Summary')]]")
@@ -251,7 +251,8 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	@FindBy(xpath = "//div[@class='dce-nav-btns']/button[contains(text(),'Delete')]")
 	public WebElement confdelpopup_del_button;
 
-	@FindBy(id = "returnLink")
+	//@FindBy(id = "returnLink")
+	@FindBy(xpath="//span[@class='back-to-view-all-pla']")
 	public WebElement returnLink;
 
 	@FindBy(id = "drugcostestimatorDetails")
@@ -467,6 +468,9 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	
 	@FindBy(xpath = "//td[contains(@class,'estimatedrugcost')][1]//div")
 	public WebElement VerifyEstimatedDrugCost;
+	
+	@FindBy(xpath = "(//p[text()='Drug Costs from Formulary']//ancestor::th/parent::tr//td[1]//span[@class='ng-scope'])[2]")
+	public WebElement planCompareVerifyEstimatedDrugCostValue;
 	
 	@FindBy(xpath="//button[contains(@class,'costs-tab-show') and contains(text(),'rofile')]")
 	private WebElement btnReturnToProfile;
@@ -2031,6 +2035,17 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		return new ComparePlansPageBlayer(driver);
 		
 	}	
+	
+	public ComparePlansPageBlayer clickBtnBackToPlancomparenew() throws InterruptedException {
+		validateNew(getBtnBackToPlans());
+		getBtnBackToPlans().click();
+		CommonUtility.checkPageIsReadyNew(driver);
+		CommonUtility.waitForPageLoadNew(driver, planCompareVerifyEstimatedDrugCostValue, 60);
+		return new ComparePlansPageBlayer(driver);
+
+	}
+	
+	
 	public void clickBtnBackToPlans() throws InterruptedException {
 		validateNew(getBtnBackToPlans());
 		getBtnBackToPlans().click();
@@ -2089,6 +2104,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	public VPPPlanSummaryPage clickReturnToSummaryLink() {
 		validateNew(returnLink,20);
 		returnLink.click();
+		waitForPageLoadSafari();
 		if(driver.getCurrentUrl().contains("plan-summary")){
 			return new VPPPlanSummaryPage(driver);
 		}
@@ -2121,7 +2137,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		WebStorage webStorage = (WebStorage) new Augmenter().augment(driver);
 		LocalStorage localStorage = webStorage.getLocalStorage();		
 
-		String DCE_uhcacquisition = localStorage.getItem("uhcacquisition");
+		String DCE_uhcacquisition = localStorage.getItem("ucp_uhcacquisition");
 		System.out.println("UHC ACQ info from Local Storage");
 		System.out.println(DCE_uhcacquisition);
 		boolean validation_Flag=false;
@@ -2133,7 +2149,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 			System.out.println("UHC ACQ info from Local Storage validated : "+Validate_ZipPharmacy);
 		}
 		
-		String DCEDrugList = localStorage.getItem("drugList");
+		String DCEDrugList = localStorage.getItem("ucp_drugList");
 		System.out.println("UHC DrugList from Local Storage");
 		System.out.println(DCEDrugList);
 		boolean Validate_DrugList = false;

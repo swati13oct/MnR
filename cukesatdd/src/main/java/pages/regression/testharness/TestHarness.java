@@ -103,6 +103,9 @@ public class TestHarness extends UhcDriver {
 	@FindBy(xpath="//div[contains(@class,'header') and not(contains(@class,'hide'))]//h1")
 	private WebElement heading;
 
+	@FindBy(xpath="//div[contains(@class,'preEffectiveParsys')]//h1")
+	private WebElement preEffBnfHeading;
+	
 	@FindBy(xpath = "//div[@class='tabs-desktop']/ul[@class='nav nav-tabs']/li")
 	private List<WebElement> tabsForComboMember;
 
@@ -145,6 +148,9 @@ public class TestHarness extends UhcDriver {
 	@FindBy(xpath = "//*[contains(@id,'premiumpayment_3')]")
 	private WebElement premiumPayment;
 
+	@FindBy(xpath = "//a[@class='ng-scope'][contains(text(),'Premium Payments')]")
+	private WebElement premiumPaymentTabOnHeader;	
+	
 	@FindBy(id = "Help")
 	private WebElement helpLink;
 
@@ -233,8 +239,14 @@ public class TestHarness extends UhcDriver {
  	@FindBy(xpath="//a[@id='pharmacies_5']")
  	private WebElement testHarnessTopMenuPhaPresLink;
  	
+ 	@FindBy(xpath="//a[@id='preeffectivepharmacies_6']")
+ 	private WebElement testHarnessTopMenuPhaPresLink_preeff;
+ 	
 	@FindBy(xpath = "//*[@id='main-nav']/div/div/div/a[6]")
 	private WebElement pharPresDashboardLink;
+	
+	@FindBy(xpath="//div[contains(@class,'deskHeader')]//a[contains(@id,'preeffectivepharmacies')]")
+	private WebElement preEffPnpMenuLnk;
 
 	@FindBy(xpath="//h1[contains(text(),'Estimate Your Drug Costs')]")
 	private WebElement dceHeaderTxt;
@@ -244,6 +256,9 @@ public class TestHarness extends UhcDriver {
 	
 	@FindBy(xpath = "//*[contains(@id,'findcarecost')]")
 	private WebElement findCareCostTab;
+
+	@FindBy(xpath = "//*[contains(@id,'findcare') and text()='Find Care']")
+	private WebElement findCareTab;
 	
 	@FindBy(xpath="(//a[@id='pharmacies_5'])[1]")
 	private WebElement pharmaciesTab;
@@ -285,12 +300,18 @@ public class TestHarness extends UhcDriver {
 	@FindBy(xpath="//h1")
 	private WebElement hcePageText;
 	
-	@FindBy(xpath="//*[@class='btn btn--primary onetimepayment']")
+	@FindBy(xpath="//*[@class='btn btn--primary onetimepayment' or @class='btn btn--secondary onetimepayment']")
 	private WebElement MakeAPaymentButton;
 	
 	@FindBy(xpath = "//a[contains(text(),'Go to Payments page')]")
 	private WebElement TestHarnesspaymentsLink;
-		
+	
+	@FindBy(xpath = "//p[contains(text(),'Find out if your drugs are covered, estimate costs')]")
+	protected WebElement LookUpDrugsButton;
+	
+	@FindBy(xpath = "//a[contains(@id,'findcarecost')]")
+	private WebElement findCareCostMenu;
+	
 	String category = null;
 
 	public TestHarness(WebDriver driver) {
@@ -318,14 +339,14 @@ public class TestHarness extends UhcDriver {
 				//(String) getLoginScenario().getBean(LoginCommonConstants.CATOGERY);
 				System.out.println("The selected category is " +category);
 		if (category.equalsIgnoreCase("PCP") || category.equalsIgnoreCase("MEDICA")) {
-			CommonUtility.waitForPageLoad(driver, panelHomePcpMedica, 30);
+			//tbd CommonUtility.waitForPageLoad(driver, pcpMedicaLogo, 30);
 			validateNew(pcpMedicaLogo);		
 		}
 		else{
 			CommonUtility.waitForPageLoad(driver, panelHome, 30);
 		}	
 		//validateNew(panelHome);
-		validateNew(panelClaims);
+		//validateNew(panelClaims);
 		if (category.contains(CommonConstants.CATEGORY_TERMIATED)) {
 			if (panelHealthWellness.isEmpty() && panelFindcarecost.isEmpty()) {
 				Assert.assertTrue("Terminated view is present", true);
@@ -378,9 +399,17 @@ public class TestHarness extends UhcDriver {
 			if (driver.getCurrentUrl().contains("testharness")) {
 				System.out.println("TestHarness Page is displayed, clicking the Premium Payments Link");
 				TestHarness.checkForIPerceptionModel(driver);
-				TestHarnesspaymentsLink.click();
+				try {
+					TestHarnesspaymentsLink.click();
+				} catch (Exception e) {
+					System.out.println("Go to Payments links was not found, trying another approach for Pre-effective member");
+					TestHarness.checkForIPerceptionModel(driver);
+					premiumPaymentTabOnHeader.click();
+				}
 				CommonUtility.checkPageIsReadyNew(driver);
 				CommonUtility.waitForPageLoad(driver, MakeAPaymentButton, 20);
+		try
+		{
 		if (MakeAPaymentButton.isDisplayed())
 		{
 		System.out.println("Make a payment button was displayed on Payments page");
@@ -400,6 +429,38 @@ public class TestHarness extends UhcDriver {
 			{
 				System.out.println("Make a payment button was displayed on Payments page");
 				Assert.fail("Make a payment button was not displayed on Payments page");
+			}
+			
+		}
+		}
+		catch (Exception e)
+		{
+			System.out.println("Make a payment button was not displayed on first time Payments page loaded, refreshing the page");
+			driver.navigate().refresh();
+			CommonUtility.checkPageIsReadyNew(driver);
+			CommonUtility.waitForPageLoad(driver, MakeAPaymentButton, 20);
+	
+			if (MakeAPaymentButton.isDisplayed())
+			{
+			System.out.println("Make a payment button was displayed on Payments page");
+			return new PaymentHistoryPage(driver);
+			}
+			else
+			{
+				System.out.println("Make a payment button was not displayed on first time Payments page loaded, refreshing the page");
+				driver.navigate().refresh();
+				if (MakeAPaymentButton.isDisplayed())
+					
+				{
+					System.out.println("Make a payment button was displayed on Payments page");
+					return new PaymentHistoryPage(driver);
+					}
+				else
+				{
+					System.out.println("Make a payment button was displayed on Payments page");
+					Assert.fail("Make a payment button was not displayed on Payments page");
+				}
+				
 			}
 			
 		}
@@ -493,13 +554,16 @@ public class TestHarness extends UhcDriver {
 		return null;
 	}
 
-	public BenefitsAndCoveragePage navigateDirectToBnCPagFromTestharnessPage() {
+	public BenefitsAndCoveragePage navigateDirectToBnCPagFromTestharnessPage(String memberType) {
 		JavascriptExecutor jse = (JavascriptExecutor) driver;
 		jse.executeScript("window.scrollBy(0,50)", "");
 		scrollToView(testHarnessBenefitsPageLink);
 		jsClickNew(testHarnessBenefitsPageLink);
 		CommonUtility.checkPageIsReadyNew(driver);
-		CommonUtility.waitForPageLoad(driver, heading, 60);
+		WebElement heading_e=heading;
+		if (memberType.contains("PREEFF"))
+			heading_e=preEffBnfHeading;
+		CommonUtility.waitForPageLoad(driver, heading_e, 10);
 		System.out.println(driver.getTitle());
 		if (!driver.getTitle().contains("Benefits")) { //note: in case timing issue, one more try
 			try {
@@ -511,6 +575,37 @@ public class TestHarness extends UhcDriver {
 		}
 		if (driver.getTitle().contains("Benefits")) {
 			return new BenefitsAndCoveragePage(driver);
+		}
+		return null;
+	}
+	
+	@FindBy(xpath="//a[contains(text(),'VIEW PLAN DOCUMENTS')]")
+	private WebElement preEffPlanDocLnk;
+	public PlanDocumentsAndResourcesPage navigateDirectToPlanDocPagFromTestharnessPage_preeff(String memberType) {
+		JavascriptExecutor jse = (JavascriptExecutor) driver;
+		jse.executeScript("window.scrollBy(0,50)", "");
+		scrollToView(testHarnessBenefitsPageLink);
+		jsClickNew(testHarnessBenefitsPageLink);
+		CommonUtility.checkPageIsReadyNew(driver);
+		WebElement heading_e=heading;
+		if (memberType.contains("PREEFF"))
+			heading_e=preEffBnfHeading;
+		CommonUtility.waitForPageLoad(driver, heading_e, 60);
+		System.out.println(driver.getTitle());
+		if (!driver.getTitle().contains("Benefits")) { //note: in case timing issue, one more try
+			try {
+				Thread.sleep(10000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			System.out.println("second try - "+driver.getTitle());
+		}
+		if (driver.getTitle().contains("Benefits")) {
+			CommonUtility.waitForPageLoad(driver, preEffPlanDocLnk, 5);
+			Assert.assertTrue("PROBLEM - unable to locate the 'VIEW PLAN DOCUMENTS' button on pre-effective benefits page", noWaitValidate(preEffPlanDocLnk));
+			preEffPlanDocLnk.click();
+			CommonUtility.checkPageIsReadyNew(driver);
+			return new PlanDocumentsAndResourcesPage(driver);
 		}
 		return null;
 	}
@@ -623,13 +718,14 @@ public class TestHarness extends UhcDriver {
 	 * @throws InterruptedException
 	 */
 	public DrugCostEstimatorPage navigateToDCEPageFromTestHarnessPage() throws InterruptedException {
-		checkModelPopup(driver,5);
+		checkModelPopup(driver,2);
 		validateNew(testHarnessDcePageLink);
 		testHarnessDcePageLink.click();
 		CommonUtility.checkPageIsReady(driver);
-		checkModelPopup(driver,5);
+		checkModelPopup(driver,2);
 		CommonUtility.waitForPageLoad(driver, dceHeaderTxt, CommonConstants.TIMEOUT_90);
 		if (driver.getTitle().contains("Overview")) {
+    		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
 			return new DrugCostEstimatorPage(driver);
 		}
 		return null;
@@ -1137,8 +1233,9 @@ public class TestHarness extends UhcDriver {
 	
 	public pages.regression.benefitandcoverage.BenefitsAndCoveragePage clickOnBenefitsandCoverageTab() throws InterruptedException {
 		System.out.println("Now clicking on Benefits and Coverage Tab on Dashboard");
-		Thread.sleep(5000);
-		checkForIPerceptionModel(driver);
+		//tbd Thread.sleep(5000);
+		checkModelPopup(driver,5);
+		//checkForIPerceptionModel(driver);
 		coverageandbenefitslink.click();
 		return new pages.regression.benefitandcoverage.BenefitsAndCoveragePage(driver);
 
@@ -1217,6 +1314,7 @@ public class TestHarness extends UhcDriver {
     	 * @param driver
     	 */
     	public static void checkForIPerceptionModel(WebDriver driver) {
+    		driver.manage().timeouts().implicitlyWait(1,TimeUnit.SECONDS) ;
     		int counter = 0;
     		do {
     			System.out.println("current value of counter: " + counter);
@@ -1225,9 +1323,11 @@ public class TestHarness extends UhcDriver {
     			if (IPerceptionsFrame.isEmpty()) {
     				try {
     					Thread.sleep(1500);
-    				} catch (InterruptedException e) {
-    					System.out.println(e.getMessage());
-    				}
+    					driver.findElement(By.xpath("//*[@id='ip-close']")).click();
+    					System.out.println("Clicked Close on special popup");
+    				} catch (Exception e) {
+    					System.out.println("Special popup not found");
+    									}
     			} else {
     				driver.switchTo().frame(IPerceptionsFrame.get(0));
     				driver.findElement(By.className("btn-no")).click();
@@ -1290,11 +1390,11 @@ public class TestHarness extends UhcDriver {
     		} catch (org.openqa.selenium.TimeoutException e) {
     			System.out.println("waited "+forceTimeoutInMin+" min for the page to finish loading, give up now");
     			driver.quit(); //note: force the test to fail instead of waiting time
-    			Assert.assertTrue("PROBLEM - page still laoding after "+forceTimeoutInMin+" min, probably stuck, kill test now",false);
+    			Assert.assertTrue("PROBLEM - page still laoding after "+forceTimeoutInMin+" min, probably stuck, kill test now. Exception="+e.getMessage(),false);
     		} catch (WebDriverException we) {
     			System.out.println("Got driver exception while waiting for page to finish loading, give up now");
     			//driver.quit(); //force the test to fail instead of waiting time
-    			Assert.assertTrue("PROBLEM - Got driver exception while waiting for page to finish loading",false);
+    			Assert.assertTrue("PROBLEM - Got driver exception while waiting for page to finish loading. Exception="+we.getMessage(),false);
     		}
     		System.out.println("page load should stopped loading now, give it 2 more sec to settle down");
     		Thread.sleep(2000); // note: give it a bit more time to settle down
@@ -1321,7 +1421,8 @@ public class TestHarness extends UhcDriver {
     		return true;
     	}
 
-
+    	@FindBy(xpath="//div[contains(@class,'pharmacies')]//h1")
+    	private WebElement pnpPreEffHeader;
     	
     	public PharmaciesAndPrescriptionsPage navigateToPharAndPresFromTestHarnessPage() {
     		CommonUtility.checkPageIsReady(driver);
@@ -1336,8 +1437,41 @@ public class TestHarness extends UhcDriver {
     			CommonUtility.checkPageIsReady(driver);
     			testHarnessPharPresLink.click();
     		}
+    		CommonUtility.checkPageIsReadyNew(driver);
+			checkModelPopup(driver,2);
+    		System.out.println("Now waiting for Drug Look up on Pharmacies And Prescriptions page to show up");
+			CommonUtility.waitForPageLoad(driver, LookUpDrugsButton, 40);
+    		if (driver.getCurrentUrl().contains("pharmacy/overview.html")) {
+    			return new PharmaciesAndPrescriptionsPage(driver);
+    		}
+    		return null;
+    	} 
+    	
+    	public PharmaciesAndPrescriptionsPage navigateToPharAndPresFromTestHarnessPage(String memberType) {
     		CommonUtility.checkPageIsReady(driver);
-    		checkForIPerceptionModel(driver);
+			checkForIPerceptionModel(driver);
+			if ((MRScenario.environment.contains("team-a") || MRScenario.environment.contains("stage"))
+					&& memberType.toUpperCase().contains("PREEFF")) {
+				testHarnessTopMenuPhaPresLink_preeff.click();
+			} else {
+	    		try{
+	    			if (noWaitValidate(testHarnessPharPresLink)) 
+	    				testHarnessPharPresLink.click();
+	    			else 
+	    				testHarnessTopMenuPhaPresLink.click();
+	    		} catch (WebDriverException e) {
+	    			checkForIPerceptionModel(driver);
+	    			CommonUtility.checkPageIsReady(driver);
+	    			testHarnessPharPresLink.click();
+	    		}
+			}
+    		CommonUtility.checkPageIsReadyNew(driver);
+			checkModelPopup(driver,2);
+    		System.out.println("Now waiting for Drug Look up on Pharmacies And Prescriptions page to show up");
+    		WebElement pnpElement=LookUpDrugsButton;
+    		if (memberType.toUpperCase().contains("PREEFF")) 
+    			pnpElement=pnpPreEffHeader;
+			CommonUtility.waitForPageLoad(driver, pnpElement, 40);
     		if (driver.getCurrentUrl().contains("pharmacy/overview.html")) {
     			return new PharmaciesAndPrescriptionsPage(driver);
     		}
@@ -1347,9 +1481,12 @@ public class TestHarness extends UhcDriver {
     	@FindBy(tagName = "arcade-header")
     	private WebElement shadowRootHeader;
 
-    	public boolean findPnPLinksExistOnPg() {
+    	public boolean findPnPLinksExistOnPg(String memberType) {
+    		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
     		System.out.println("user is on '" + MRScenario.environmentMedicare + "' dashboard page, attempt to navigate to secondary page to see if PnP link exists");
-    		checkForIPerceptionModel(driver);
+    		checkModelPopup(driver,1);
+    		if (noWaitValidate(preEffPnpMenuLnk) && memberType.contains("PREEFF")) 
+    			return true;
     		if (noWaitValidate(pharPresDashboardLink)) {
     			return true;
     		} else if (noWaitValidate(testHarnessTopMenuPhaPresLink)) {
@@ -1586,12 +1723,12 @@ public class TestHarness extends UhcDriver {
 		
 		public HealthAndWellnessPage navigateToHealthAndWellnessFromTestHarnessPage() {
 			CommonUtility.checkPageIsReady(driver);
-			checkModelPopup(driver,5);
+			checkModelPopup(driver,1);
 			validateNew(testHarnessHealthAndWellnessLink,0);
 			testHarnessHealthAndWellnessLink.click();
 			CommonUtility.checkPageIsReady(driver);
-			checkModelPopup(driver,5);
-			CommonUtility.waitForPageLoad(driver, healthAndWellnessHeader, CommonConstants.TIMEOUT_90);
+			checkModelPopup(driver,1);
+			CommonUtility.waitForPageLoad(driver, healthAndWellnessHeader, 90);
 			if (driver.getTitle().contains("Health And Wellness")) {
 				return new HealthAndWellnessPage(driver);
 			}
@@ -1706,5 +1843,57 @@ public class TestHarness extends UhcDriver {
 			
 			
 		}
-		   
+		
+		public void clickAccountProfile() {
+			checkForIPerceptionModel(driver);
+			if (accountProfile.isDisplayed()) {
+				accountProfile.click();
+			}
+		}
+		
+		public void logout() {
+			if (validate(logOut,0)) {
+				logOut.click();
+				CommonUtility.checkPageIsReadyNew(driver);
+				try {
+					if(driver.getTitle().contains("Signing off")) {
+						Thread.sleep(2000);
+						CommonUtility.checkPageIsReadyNew(driver);
+					}
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				System.out.println("Title after logout-" + driver.getTitle());
+				if(MRScenario.environment.contains("team-h")) {
+					if (validate(accountProfile,0)) {
+						Assert.fail("Logout failed. Account Profile option still visible.");
+					}
+					System.out.println("Logged out from Team-H");
+				} else {
+					Assert.assertTrue(driver.getTitle().contains("UnitedHealthcare Medicare Member Sign In"));
+				}
+			} else {
+				Assert.fail("Logout option not displayed");
+			}
+		}
+		
+		public DrugCostEstimatorPage clickFindCareCostMenu() throws InterruptedException {
+			validateNew(findCareCostMenu);
+			findCareCostMenu.click();
+			CommonUtility.checkPageIsReady(driver);
+			checkModelPopup(driver,5);
+			System.out.println(driver.getTitle());
+			if (driver.getTitle().contains("Find Care")) {
+				return new DrugCostEstimatorPage(driver);
+			}
+			return null;
+		}
+		
+		public void validateFindCareTab() {
+			validateNew(findCareTab,0);
+		}
+		
+		public void validateFindCareTabNotAvailable() {
+			Assert.assertFalse("find care tab displayed when not expected", validate(findCareTab,0));			
+		}
 }

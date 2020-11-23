@@ -76,7 +76,7 @@ Feature: Plan Recommendation Engine flow - Verify Drug page in plan Recommendati
       |   90201 | NO            |        | MAPD          | Medicaid,chronic,nursing | withinUS,outsideUS,regular | UHGNetwork |             |               |                |
 
   @PRE @planrecommendation @drugpage @drugpageadddrug @manualSuggestion @F374225
-  Scenario Outline: <Zipcode>, <isMultiCounty> , <isCoverageOpt> , <specialNeeds> , <travel> , <doctors> , <Drug Selection> , <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch>- To validate Drug page function with manual search in Plan Recommendation Engine
+  Scenario Outline: <Zipcode>, <isMultiCounty> , <isCoverageOpt> , <specialNeeds> , <travel> , <doctors> , <DoctorsName>, <isMultiDoctor>, <Drug Selection> , <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch>- To validate Drug page function with manual search in Plan Recommendation Engine
     Given the user is on UHC medicare acquisition site landing page
     When user navigate to Plan Recommendation Engine and Checking Breadcrumbs
     And clicks on get started button and runs questionnaire
@@ -102,7 +102,7 @@ Feature: Plan Recommendation Engine flow - Verify Drug page in plan Recommendati
       |   90201 | NO            |        | MAPD          | Medicaid,chronic,nursing | withinUS,outsideUS,regular | UHGNetwork |             |               | Yes            | Imuran,YES,Imuran TAB 50MG,,25,1,YES,NO                              |
 
   @PRE @planrecommendation @drugpage @autoSuggestion @drugpageadddrug @F374225
-  Scenario Outline: <Zipcode>, <isMultiCounty> , <isCoverageOpt> , <specialNeeds> , <travel> , <doctors> , <Drug Selection> , <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch> - To validate Drug page function with manual search in Plan Recommendation Engine
+  Scenario Outline: <Zipcode>, <isMultiCounty> , <isCoverageOpt> , <specialNeeds> , <travel> , <doctors> , <DoctorsName>, <isMultiDoctor>, <Drug Selection> , <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch>- To validate Drug page function with auto search in PRE
     Given the user is on UHC medicare acquisition site landing page
     When user navigate to Plan Recommendation Engine and Checking Breadcrumbs
     And clicks on get started button and runs questionnaire
@@ -151,7 +151,7 @@ Feature: Plan Recommendation Engine flow - Verify Drug page in plan Recommendati
 
     Examples: 
       | Zipcode | isMultiCounty | county | isCoverageOpt | specialNeeds             | travel                     | doctors    | DoctorsName | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch           |
-      |   90201 | NO            |        | MAPD          | Medicaid,chronic,nursing | withinUS,outsideUS,regular | UHGNetwork |             |               | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,3,YES,NO:Imuran,YES,Imuran TAB 50MG,,25,1,YES,NO |
+      |   90201 | NO            |        | MAPD          | Medicaid,chronic,nursing | withinUS,outsideUS,regular | UHGNetwork |             |               | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,1,YES,NO:Imuran,YES,Imuran TAB 50MG,,25,1,YES,NO |
 
   @PRE @planrecommendation @drugpage @removedrug @drugpageadddrug @F374225
   Scenario Outline: <Zipcode>, <isMultiCounty> , <isCoverageOpt> , <specialNeeds> , <travel> , <doctors> , <Drug Selection> , <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch>- To validate Drug page function with remove drug in Plan Recommendation Engine
@@ -177,7 +177,7 @@ Feature: Plan Recommendation Engine flow - Verify Drug page in plan Recommendati
 
     Examples: 
       | Zipcode | isMultiCounty | county | isCoverageOpt | specialNeeds             | travel                     | doctors    | DoctorsName | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch                                 |
-      |   90201 | NO            |        | MAPD          | Medicaid,chronic,nursing | withinUS,outsideUS,regular | UHGNetwork |             |               | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,3,YES,NO:Imuran,YES,Imuran TAB 50MG,,25,1,YES,NO:Actiq,NO,,,,1,YES,NO: |
+      |   90201 | NO            |        | MAPD          | Medicaid,chronic,nursing | withinUS,outsideUS,regular | UHGNetwork |             |               | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,1,YES,NO:Imuran,YES,Imuran TAB 50MG,,25,1,YES,NO:Actiq,NO,,,,1,YES,NO: |
 
   @PRE @planrecommendation @drugpage @cancelmodal @drugpageadddrug @F374225
   Scenario Outline: <Zipcode>, <isMultiCounty> , <isCoverageOpt> , <specialNeeds> , <travel> , <doctors> , <Drug Selection> , <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch>- To validate Drug page cancel function in Plan Recommendation Engine
@@ -298,7 +298,7 @@ Feature: Plan Recommendation Engine flow - Verify Drug page in plan Recommendati
 
     Examples: 
       | Zipcode | isMultiCounty | county   | isCoverageOpt | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch |
-      |   10003 | NO            | New York | PDP           | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,3,YES,YES                              |
+      |   10003 | NO            | New York | PDP           | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,1,YES,YES                              |
 
   @PRE @planrecommendation @drugpage @drugnotfound @drugpageadddrug @F374225 @F413341
   Scenario Outline: <Zipcode>, <isMultiCounty> , <isCoverageOpt> , <specialNeeds> , <travel> , <doctors> , <Drug Selection> , <Search Text> - To validate Drug page choose no drug function in Plan Recommendation Engine

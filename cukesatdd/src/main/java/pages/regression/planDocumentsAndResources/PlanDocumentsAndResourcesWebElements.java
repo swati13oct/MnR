@@ -101,12 +101,14 @@ public class PlanDocumentsAndResourcesWebElements extends UhcDriver  {
 	@FindBy(xpath="//p[contains(@id,'seeMoreWaysAtdd')]//a[contains(text(),'contact us')]")
 	protected WebElement needHelp_contactUsLink;
 
-	@FindBy(xpath="//div[contains(@class,'tabs')]//li[contains(@onchange,'togglePlanTypeName') and contains(@class,'active')]//a[contains(text(),'Prescription') and contains(text(),'Medical')]") 
+	//tbd @FindBy(xpath="//div[contains(@class,'tabs')]//li[contains(@onchange,'togglePlanTypeName') and contains(@class,'active')]//a[contains(text(),'Prescription') and contains(text(),'Medical')]") 
+	@FindBy(xpath="//div[contains(@class,'tabs')]//li[contains(@onchange,'togglePlanTypeName')]//a[contains(text(),'Prescription') and contains(text(),'Medical')]") 
 	protected WebElement comboTab_MAPD;
 
-	@FindBy(xpath="//div[contains(@class,'tabs')]//li[contains(@onchange,'togglePlanTypeName') and contains(@class,'active')]//a[contains(text(),'Supplement')]") 
-	
+	//tbd @FindBy(xpath="//div[contains(@class,'tabs')]//li[contains(@onchange,'togglePlanTypeName') and contains(@class,'active')]//a[contains(text(),'Supplement')]") 
+	@FindBy(xpath="//div[contains(@class,'tabs')]//li[contains(@onchange,'togglePlanTypeName')]//a[contains(text(),'Supplement')]") 
 	protected WebElement comboTab_SHIP;
+
 	@FindBy(xpath="//div[contains(@class,'tabs')]//li[contains(@onchange,'togglePlanTypeName')]//a[contains(text(),'Prescription') and not(contains(text(),'Medical'))]") 
 	protected WebElement comboTab_PDP;
 
@@ -234,22 +236,22 @@ public class PlanDocumentsAndResourcesWebElements extends UhcDriver  {
 
 	//--------------------------
 	//note: this set works after year switch to 2020
-	@FindBy(xpath="//div[contains(@class,'Directories_') and not(contains(@class,'ng-hide'))]//div[(contains(@class,'Pharmacy_Provider') or contains(@class,'Provider') or contains(@class,'_PE')) and not(contains(@class,'ng-hide'))]//a[contains(text(),'Provider Search')]")
+	@FindBy(xpath="//div[contains(@class,'Directories_') and not(contains(@class,'ng-hide'))]//div[(contains(@class,'Pharmacy_Provider') or contains(@class,'rovider') or contains(@class,'_PE') or contains(@class,'_AD_')) and not(contains(@class,'ng-hide'))]//a[contains(text(),'Provider Search')]")
 	protected WebElement providerSearch_link_PD;
 
-	@FindBy(xpath="//div[contains(@class,'Directories_') and not(contains(@class,'ng-hide'))]//div[(contains(@class,'Pharmacy_Provider') or contains(@class,'Provider') or contains(@class,'_PE')) and not(contains(@class,'ng-hide'))]//a[contains(text(),'Provider Search')]//img")
+	@FindBy(xpath="//div[contains(@class,'Directories_') and not(contains(@class,'ng-hide'))]//div[(contains(@class,'Pharmacy_Provider') or contains(@class,'rovider') or contains(@class,'_PE') or contains(@class,'_AD_')) and not(contains(@class,'ng-hide'))]//a[contains(text(),'Provider Search')]//img")
 	protected WebElement providerSearch_link_img;
 	
-	@FindBy(xpath="//div[contains(@class,'Directories_') and not(contains(@class,'ng-hide'))]//div[(contains(@class,'Pharmacy_Provider') or contains(@class,'Provider') or contains(@class,'_PE')) and not(contains(@class,'ng-hide'))]//a[contains(text(),'Provider Search')]//following-sibling::p")
+	@FindBy(xpath="//div[contains(@class,'Directories_') and not(contains(@class,'ng-hide'))]//div[(contains(@class,'Pharmacy_Provider') or contains(@class,'rovider') or contains(@class,'_PE') or contains(@class,'_AD_')) and not(contains(@class,'ng-hide'))]//a[contains(text(),'Provider Search')]//following-sibling::p")
 	protected List<WebElement> providerSearch_instr_PD;
 	
-	@FindBy(xpath="//div[contains(@class,'Directories_') and not(contains(@class,'ng-hide'))]//div[(contains(@class,'Pharmacy_Provider') or contains(@class,'Pharmacy')  or contains(@class,'_PE')) and not(contains(@class,'ng-hide'))]//a[contains(text(),'Pharmacy Locator')]")
+	@FindBy(xpath="//div[contains(@class,'Directories_') and not(contains(@class,'ng-hide'))]//div[(contains(@class,'Pharmacy_Provider') or contains(@class,'Pharmacy')  or contains(@class,'_PE') or contains(@class,'_AD_')) and not(contains(@class,'ng-hide'))]//a[contains(text(),'Pharmacy Locator')]")
 	protected WebElement pharmacyLocator_link_PD;
 
-	@FindBy(xpath="//div[contains(@class,'Directories_') and not(contains(@class,'ng-hide'))]//div[(contains(@class,'Pharmacy_Provider') or contains(@class,'Pharmacy')  or contains(@class,'_PE')) and not(contains(@class,'ng-hide'))]//a[contains(text(),'Pharmacy Locator')]//img")
+	@FindBy(xpath="//div[contains(@class,'Directories_') and not(contains(@class,'ng-hide'))]//div[(contains(@class,'Pharmacy_Provider') or contains(@class,'Pharmacy')  or contains(@class,'_PE') or contains(@class,'_AD_')) and not(contains(@class,'ng-hide'))]//a[contains(text(),'Pharmacy Locator')]//img")
 	protected WebElement pharmacyLocator_link_img;
 
-	@FindBy(xpath="//div[contains(@class,'Directories_') and not(contains(@class,'ng-hide'))]//div[(contains(@class,'Pharmacy_Provider') or contains(@class,'Pharmacy')  or contains(@class,'_PE')) and not(contains(@class,'ng-hide'))]//a[contains(text(),'Pharmacy Locator')]//following-sibling::p")
+	@FindBy(xpath="//div[contains(@class,'Directories_') and not(contains(@class,'ng-hide'))]//div[(contains(@class,'Pharmacy_Provider') or contains(@class,'Pharmacy')  or contains(@class,'_PE') or contains(@class,'_AD_')) and not(contains(@class,'ng-hide'))]//a[contains(text(),'Pharmacy Locator')]//following-sibling::p")
 	protected List<WebElement> pharmacyLocator_instr_PD;
 
 
@@ -379,7 +381,11 @@ public class PlanDocumentsAndResourcesWebElements extends UhcDriver  {
 	@FindBy(xpath="//div[contains(@class,'FormsAndResources') and not(contains(@class,'ng-hide'))]//a[contains(text(),'Prescription Mail Order Form') and contains(text(),'Preferred Mail Service Pharmacy through OptumRx')]")
 	protected WebElement presMailOrderForm_link_RF_FnR;
 	//- href="/content/dam/UCP/Individual/OptumRx_Home_Delivery_Form.pdf"
-	
+
+	@FindBy(xpath="//div[contains(@class,'FormsAndResources') and not(contains(@class,'ng-hide'))]//a[contains(text(),'Medicare Part D Claim Form')]")
+	protected WebElement medicarePartDClaimForm_link_RF_FnR;
+	//- href="/content/dam/shared/documents/Medicare-Part-D-Claim-Form.pdf" 
+
 	@FindBy(xpath="//div[contains(@class,'FormsAndResources') and not(contains(@class,'ng-hide'))]//a/span[contains(text(),'Authorization Forms')]")
 	protected WebElement authorizationFormsAndInfo_sectionAF_FnR;
 	
@@ -528,6 +534,9 @@ public class PlanDocumentsAndResourcesWebElements extends UhcDriver  {
 	@FindBy(xpath="//h1")
 	protected WebElement generalPgHeader;
 
+	@FindBy(xpath="//h1[contains(@class,'heading')]")
+	protected WebElement generalPgHeader_providerSearch;
+	
 	//---------------------------------
 	@FindBy(xpath="//input[@id='location']")
 	protected WebElement providerSearchPg_zipcodeInputField;
@@ -547,4 +556,12 @@ public class PlanDocumentsAndResourcesWebElements extends UhcDriver  {
 	@FindBy(xpath="//div[contains(@class,'three-bounce')]")
 	protected WebElement spinLoader;
 	
+	@FindBy(xpath="//div[not(contains(@class,'ng-hide')) and contains(@class,'otherPages planMaterial')]//a[contains(@href,'planDocuments.pdf')]/following-sibling::p[text()='New!']")
+	protected WebElement newTextAgainstPlanDocument;
+	
+	@FindBy(xpath="//h2[contains(text(),'issue with the system')]")
+	protected WebElement systemError;
+	
+	@FindBy(xpath="//div[contains(@class,'hw-program-root')]")
+	protected WebElement prevIssBody;
 }

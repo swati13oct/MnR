@@ -10,6 +10,7 @@ Feature: 2.02-Favorite Plans in vpp flow UMS
       | Is Multi County | <isMultiCounty> |
     Then user validates plan count for all plan types on plan summary page in the UMS site 
     Then user validates selected plans can be saved as favorite on UHC site
+    	|Plan Year				| <planyear>			|
       | MA Test Plans   | <MA_testPlans>  |
       | PDP Test Plans  | <PDP_testPlans> |
       | SNP Test Plans  | <SNP_testPlans> |
@@ -73,6 +74,7 @@ Feature: 2.02-Favorite Plans in vpp flow UMS
       | Is Multi County | <isMultiCounty> |
     Then user validates plan count for all plan types on plan summary page in the UMS site 
     Then user validates selected plans can be saved as favorite on UHC site
+    	|Plan Year				| <planyear>			|
       | MA Test Plans   | <MA_testPlans>  |
       | PDP Test Plans  | <PDP_testPlans> |
       | SNP Test Plans  | <SNP_testPlans> |
@@ -96,8 +98,8 @@ Feature: 2.02-Favorite Plans in vpp flow UMS
       | SNP Test Plans  | <SNP_testPlans> |
 
     Examples: 
-      | UID     | zipcode | isMultiCounty | county           | MA_testPlans                                                                                          | PDP_testPlans                                                    | SNP_testPlans                                                                               |
-      | 1598162 | 80001   | NO            | Jefferson County | AARP Medicare Advantage SecureHorizons Essential (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO)| AARP MedicareRx Preferred (PDP),AARP MedicareRx Saver Plus (PDP) | UnitedHealthcare Dual Complete (HMO D-SNP)|
+      | UID     | zipcode | isMultiCounty | county           | MA_testPlans                                                                                          | PDP_testPlans                                                    | SNP_testPlans                                 |planyear|
+      | 1598162 | 80001   | NO            | Jefferson County | AARP Medicare Advantage SecureHorizons Essential (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO)| AARP MedicareRx Preferred (PDP),AARP MedicareRx Saver Plus (PDP) | UnitedHealthcare Dual Complete (HMO D-SNP)|current|
 
  @feature-F265872 @us1598162 @vppFavoritePlanRegressionBlayer2 @vppFavoritePlanInSession @vppFavoritePlanInSessionUhc @thePredators @Apr_release_2019 @prodRegression
   Scenario Outline: UID: <UID> -zipcode: <zipcode> - Verify user can save and unsave favorite plans on view plan preview page for zipcode change from Shop for Plan dropdown on UHC site
@@ -108,6 +110,7 @@ Feature: 2.02-Favorite Plans in vpp flow UMS
       | Is Multi County | <isMultiCounty> |
     Then user validates plan count for all plan types on plan summary page in the UMS site 
     Then user validates selected plans can be saved as favorite on UHC site
+  	  |Plan Year				| <planyear>			|
       | MA Test Plans   | <MA_testPlans>  |
       | PDP Test Plans  | <PDP_testPlans> |
       | SNP Test Plans  | <SNP_testPlans> |
@@ -131,8 +134,8 @@ Feature: 2.02-Favorite Plans in vpp flow UMS
       | SNP Test Plans  | <SNP_testPlans> |
 
     Examples: 
-      | UID     | zipcode | isMultiCounty | county           | MA_testPlans                                                                                          | PDP_testPlans                                                    | SNP_testPlans                                                                               |
-      | 1598162 | 80001   | NO            | Jefferson County | AARP Medicare Advantage SecureHorizons Essential (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO)| AARP MedicareRx Preferred (PDP),AARP MedicareRx Saver Plus (PDP) | UnitedHealthcare Dual Complete (HMO D-SNP)|
+      | UID     | zipcode | isMultiCounty | county           | MA_testPlans                                                                                          | PDP_testPlans                                                    | SNP_testPlans                                 |planyear|
+      | 1598162 | 80001   | NO            | Jefferson County | AARP Medicare Advantage SecureHorizons Essential (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO)| AARP MedicareRx Preferred (PDP),AARP MedicareRx Saver Plus (PDP) | UnitedHealthcare Dual Complete (HMO D-SNP)|current|
 
  @feature-F265872 @us1598162 @vppFavoritePlanRegressionBlayer3 @vppFavoritePlanInSession @vppFavoritePlanInSessionUhc @thePredators @Apr_release_2019 @prodRegression
   Scenario Outline: UID: <UID> -zipcode: <zipcode> - Verify user can save and unsave favorite plans on view plan preview page for zipcode change within VPP on UHC site
@@ -143,6 +146,7 @@ Feature: 2.02-Favorite Plans in vpp flow UMS
       | Is Multi County | <isMultiCounty> |
     Then user validates plan count for all plan types on plan summary page in the UMS site 
     Then user validates selected plans can be saved as favorite on UHC site
+   		 |Plan Year				| <planyear>			|
       | MA Test Plans   | <MA_testPlans>  |
       | PDP Test Plans  | <PDP_testPlans> |
       | SNP Test Plans  | <SNP_testPlans> |
@@ -166,8 +170,8 @@ Feature: 2.02-Favorite Plans in vpp flow UMS
       | SNP Test Plans  | <SNP_testPlans> |
 
     Examples: 
-      | UID     | zipcode | isMultiCounty | county           | MA_testPlans                                                                                          | PDP_testPlans                                                    | SNP_testPlans                                                                               |
-      | 1598162 | 80001   | NO            | Jefferson County | AARP Medicare Advantage SecureHorizons Essential (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO)| AARP MedicareRx Preferred (PDP),AARP MedicareRx Saver Plus (PDP) | UnitedHealthcare Dual Complete (HMO D-SNP)|
+      | UID     | zipcode | isMultiCounty | county           | MA_testPlans                                                                                          | PDP_testPlans                                                    | SNP_testPlans                                |  planyear |
+      | 1598162 | 80001   | NO            | Jefferson County | AARP Medicare Advantage SecureHorizons Essential (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO)| AARP MedicareRx Preferred (PDP),AARP MedicareRx Saver Plus (PDP) | UnitedHealthcare Dual Complete (HMO D-SNP)|current |
 
   @feature-F265872 @us1598162 @vppFavoritePlanRegressionBlayer4 @vppFavoritePlanInSessionCloseTab @vppFavoritePlanInSessionCloseTabUhc @thePredators @Apr_release_2019
   Scenario Outline: UID: <UID> -zipcode: <zipcode> - Verify user can favorite plans will be saved within session on view plan preview page by switching window tab on UHC site
@@ -178,6 +182,7 @@ Feature: 2.02-Favorite Plans in vpp flow UMS
       | Is Multi County | <isMultiCounty> |
     Then user validates plan count for all plan types on plan summary page in the UMS site 
     Then user validates selected plans can be saved as favorite on UHC site
+   		 |Plan Year				| <planyear>			|
       | MA Test Plans   | <MA_testPlans>  |
       | PDP Test Plans  | <PDP_testPlans> |
       | SNP Test Plans  | <SNP_testPlans> |
@@ -192,5 +197,5 @@ Feature: 2.02-Favorite Plans in vpp flow UMS
       | SNP Test Plans  | <SNP_testPlans> |
  
     Examples: 
-      | UID     | zipcode | isMultiCounty | county           | MA_testPlans                                                                                          | PDP_testPlans                                                    | SNP_testPlans                                                                               |
-      | 1598162 | 80001   | NO            | Jefferson County | AARP Medicare Advantage SecureHorizons Essential (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO)| AARP MedicareRx Preferred (PDP),AARP MedicareRx Saver Plus (PDP) | UnitedHealthcare Dual Complete (HMO D-SNP)|
+      | UID     | zipcode | isMultiCounty | county           | MA_testPlans                                                                                          | PDP_testPlans                                                    | SNP_testPlans                                 |planyear|
+      | 1598162 | 80001   | NO            | Jefferson County | AARP Medicare Advantage SecureHorizons Essential (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO)| AARP MedicareRx Preferred (PDP),AARP MedicareRx Saver Plus (PDP) | UnitedHealthcare Dual Complete (HMO D-SNP)|current|

@@ -10,3 +10,4 @@ target/
 .style.css
 .classpath
 .gitignore
+/.metadata/

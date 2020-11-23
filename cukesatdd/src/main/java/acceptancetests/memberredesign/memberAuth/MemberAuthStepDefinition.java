@@ -7,9 +7,11 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.mysql.jdbc.Driver;
 
@@ -111,11 +113,15 @@ public class MemberAuthStepDefinition{
 	@Given("^the user is on member auth login flow page$")
 	public void member_auth_login_flow_page(){
 		WebDriver wd = getLoginScenario().getWebDriverNew();	
+		wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 
 		MemberAuthPage memberauth = new MemberAuthPage(wd);
-		memberauth.navigateToLoginURL();
-
+		try {
+			memberauth.navigateToLoginURL();
+		} catch (WebDriverException e) {
+			Assert.assertTrue("Got WebDriverException: "+e, false);
+		}
 		if(memberauth!=null){
 			getLoginScenario().saveBean(MRConstants.MEMBER_AUTH, memberauth);
 		}
@@ -324,7 +330,7 @@ public class MemberAuthStepDefinition{
 		}
 		else{
 			System.out.println("==================CSR Page for Member not displayed======================");
-			Assert.fail();
+			Assert.fail("Unable to land on dashboard after clicking on member");
 		}
 	}
 	

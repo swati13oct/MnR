@@ -34,14 +34,6 @@ public class ClaimsSummaryValidateHeader extends ClaimsSummaryBase{
 				+ "Expected to contains="+expPgTitle+" | Actual="+driver.getTitle(), 
 				driver.getTitle().contains(expPgTitle));
 		System.out.println("The title of Claims page is-------->"+driver.getTitle());
-		/* tbd 
-		if (memberType.toLowerCase().contains("combo")) {
-			validateComboTabs();
-			goToSpecificComboTab(planType);
-		} else {
-			boolean flagNonCombo=false; //note: if user has combo then select the right plan
-			goToSpecificComboTab(planType, flagNonCombo); //note: click the target tab for testing
-		} */
 
 		//note: validate header element
 		String expPgHeadingTxt="Claims Summary";
@@ -93,10 +85,7 @@ public class ClaimsSummaryValidateHeader extends ClaimsSummaryBase{
 				System.out.println("Located dropdown option =>"+ship_claimTypeSelect.getOptions().get(i).getText());
 			} 	
 			//note: validate 'review your claims' element exists
-			//tbd if (getOnlyTestUiFlag()) 
-			//tbd 	System.out.println("TEST UI ONLY - will not test custom search for claims for over two years time interval from current date on claims summary page");
-			//tbd else
-				Assert.assertTrue("PROBLEM - Unable to locate the 'Review your claims...' element", claimsValidate(ship_reviewClaimsTxt));
+			Assert.assertTrue("PROBLEM - Unable to locate the 'Review your claims...' element", claimsValidate(ship_reviewClaimsTxt));
 		} else {
 			//note: validate plan name element
 			Assert.assertTrue("PROBLEM - unable to locate plan name element on claims summary page", claimsValidate(planName));
@@ -172,11 +161,8 @@ public class ClaimsSummaryValidateHeader extends ClaimsSummaryBase{
 				} 	
 			}
 			//note: validate 'review your claims' element exists
-			//tbd if (getOnlyTestUiFlag()) 
-			//tbd 	System.out.println("TEST UI ONLY - will not test custom search for claims for over two years time interval from current date on claims summary page");
-			//tbd else
-				Assert.assertTrue("PROBLEM - Unable to locate the 'Review your claims...' element", 
-						claimsValidate(reviewClaimsTxt));
+			Assert.assertTrue("PROBLEM - Unable to locate the 'Review your claims...' element", 
+					claimsValidate(reviewClaimsTxt));
 		}
 	}	
 
@@ -188,10 +174,7 @@ public class ClaimsSummaryValidateHeader extends ClaimsSummaryBase{
 		WebElement testElement=fed_clamsSummCpTxt;
 		if (planType.equalsIgnoreCase("SHIP")) 
 			testElement=ship_clamsSummCpTxt;
-		//tbd if (getOnlyTestUiFlag()) 
-		//tbd 	System.out.println("TEST UI ONLY - will not test custom search for claims for over two years time interval from current date on claims summary page");
-		//tbd else
-			Assert.assertTrue("PROBLEM - 'Review your claims search' is not displaying as expected. "
+		Assert.assertTrue("PROBLEM - 'Review your claims search' is not displaying as expected. "
 				+ "Expect to contain '"+expText+"' | Actual text='"+testElement.getText()+"'", 
 				testElement.getText().contains(expText));
 	}

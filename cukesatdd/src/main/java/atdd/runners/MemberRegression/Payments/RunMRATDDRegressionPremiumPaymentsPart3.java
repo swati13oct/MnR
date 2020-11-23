@@ -1,5 +1,4 @@
 package atdd.runners.MemberRegression.Payments;
-
 import org.junit.runner.RunWith;
 
 import com.github.mkolisnyk.cucumber.runner.ExtendedCucumber;

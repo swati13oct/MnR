@@ -3,6 +3,7 @@ package pages.acquisition.shopperprofile;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -14,6 +15,7 @@ import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 import cucumber.api.DataTable;
 import gherkin.formatter.model.DataTableRow;
+import pages.acquisition.ulayer.ComparePlansPage;
 import pages.acquisition.ulayer.VPPPlanSummaryPage;
 
 public class NonMemberCreateProfile extends UhcDriver {
@@ -39,7 +41,7 @@ public class NonMemberCreateProfile extends UhcDriver {
 	@FindBy(id = "zipCode")
 	private WebElement zipCode;
 	
-	@FindBy(xpath = "//app-tab[@tabtitle='Non Member']//button[contains(text(),'Profile')]")
+	@FindBy(xpath = "//input[@id='zipCode']/following::button[contains(text(),'Profile')][1]")
 	private WebElement btnCreateProfile;
 	
 	@FindBy(xpath="//div[contains(@class,'progress-bar')]")
@@ -77,7 +79,7 @@ public class NonMemberCreateProfile extends UhcDriver {
 	 * @param details
 	 * @return
 	 */
-	public VPPPlanSummaryPage createProfile(DataTable details) {
+	public ComparePlansPage createProfile(DataTable details) {
 		
 		List<DataTableRow> givenAttributesRow = details.getGherkinRows();
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
@@ -111,6 +113,7 @@ public class NonMemberCreateProfile extends UhcDriver {
 				female.click();
 			else
 				male.click();
+			String winHandleBefore = driver.getWindowHandle();
 			btnCreateProfile.click();
 			CommonUtility.waitForPageLoadNew(driver, btnAgreeToConsent, 15);
 			if(consent.equalsIgnoreCase("YES")) {
@@ -123,13 +126,20 @@ public class NonMemberCreateProfile extends UhcDriver {
 			}
 			waitforElementNew(progressBar);
 			waitforElementNew(successMessage);
-			switchToNewTab();
+//			switchToNewTab();
+			Set<String> tabs = driver.getWindowHandles();
+			for(String tab : tabs) {
+				if(!tab.equals(winHandleBefore)) {
+					driver.switchTo().window(tab);
+					break;
+				}
+			}
 			CommonUtility.checkPageIsReadyNew(driver);
 			Thread.sleep(5000);
-			if(driver.getCurrentUrl().contains("health-plans.html#/plan-summary")) {
-				return new VPPPlanSummaryPage(driver);
+			if(driver.getCurrentUrl().contains("health-plans.html")) {
+				return new ComparePlansPage(driver);
 			}else {
-				System.out.println("Plan Summary page is not loaded");
+				System.out.println("Compare Plans page is not loaded");
 				return null;
 			}
 		} catch (Exception e) {

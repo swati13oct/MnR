@@ -105,7 +105,7 @@ public class AddDrugDetails extends UhcDriver {
 		waitforElement(continueButton);
 		continueButton.click();
 		//continueButtons.click();
-		Thread.sleep(12000);
+		//Thread.sleep(12000);
 		return new SavingsOppurtunity(driver);
 		}
 	

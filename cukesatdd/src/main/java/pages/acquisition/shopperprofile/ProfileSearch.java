@@ -19,6 +19,7 @@ import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 import cucumber.api.DataTable;
 import gherkin.formatter.model.DataTableRow;
+import pages.acquisition.ulayer.ComparePlansPage;
 import pages.acquisition.ulayer.VPPPlanSummaryPage;
 
 public class ProfileSearch extends UhcDriver {
@@ -43,6 +44,9 @@ public class ProfileSearch extends UhcDriver {
 	
 	@FindBy(xpath="//table//button")
 	private WebElement btnCloakIn;
+	
+	@FindBy(id = "aarpSVGLogo")
+	public static WebElement AARPlogo;
 	
 	@FindBy(css="input#visitorsEmail+div.invalid-field")
 	private WebElement emailError;
@@ -114,6 +118,7 @@ public class ProfileSearch extends UhcDriver {
 			DeleteProfile deleteProfile = new DeleteProfile(driver);
 			deleteProfile.deleteAProfile(email);
 			backToProfileSearch.click();
+			CommonUtility.checkPageIsReadyNew(driver);
 			CommonUtility.waitForPageLoadNew(driver, visitorEmail, 20);
 			sendkeys(visitorEmail, email);
 			btnSearchShopper.click();
@@ -159,7 +164,7 @@ public class ProfileSearch extends UhcDriver {
 			sendkeys(lastName, lname);
 			btnSearchShopper.click();
 			waitforElement(errorMessage);
-			Assert.assertEquals(errorMessage.getText().trim(), "There are no results found for this user."+"\n"+"Please re-enter"
+			Assert.assertEquals(errorMessage.getText().trim().replaceAll("\\.\\s+", "\\.\n"), "There are no results found for this user."+"\n"+"Please re-enter"
 					+ " Email or First & Last name then click the search button."+"\n"+"or, Create a Shopper Profile for Consumer.");
 		}else {
 			sendkeys(visitorEmail, email);
@@ -186,21 +191,35 @@ public class ProfileSearch extends UhcDriver {
 	 * Cloak In the Searched Profile
 	 * @return
 	 */
-	public VPPPlanSummaryPage doCloakIn() {
+	public ComparePlansPage doCloakIn() {
+	//public VPPPlanSummaryPage doCloakIn() {
 		try {
 			CommonUtility.waitForPageLoadNew(driver, searchResults.get(0), 45);
+			String winBeforeClick = driver.getWindowHandle();
 			btnCloakIn.click();
-			Thread.sleep(10000);
+			Thread.sleep(15000);
 			ArrayList<String> tabs = new ArrayList<String>(
                     driver.getWindowHandles());
-			driver.switchTo().window(tabs.get(1));
+			/*driver.switchTo().window(tabs.get(1));
 			driver.switchTo().window(tabs.get(0)).close();
-			driver.switchTo().window(tabs.get(1));
+			driver.switchTo().window(tabs.get(1));*/
+			
+			for(String tab: tabs) {
+				if(!tab.equals(winBeforeClick)) {
+					driver.switchTo().window(tab);
+					break;
+				} else {
+					driver.switchTo().window(tab).close();
+				}
+			}
+			
+			
 			CommonUtility.checkPageIsReadyNew(driver);
-			if(driver.getCurrentUrl().contains("health-plans.html#/plan-summary")) {
-				return new VPPPlanSummaryPage(driver);
+			validateNew(AARPlogo);
+			if(driver.getCurrentUrl().contains("health-plans.html")) {
+				return new ComparePlansPage(driver);
 			}else {
-				System.out.println("Plan Summary page is not loaded");
+				System.out.println("Plan Compare page is not loaded");
 				return null;
 			}
 		} catch (Exception e) {

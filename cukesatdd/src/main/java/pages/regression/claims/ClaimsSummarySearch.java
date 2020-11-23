@@ -117,7 +117,6 @@ public class ClaimsSummarySearch extends ClaimsSummaryBase {
 		//keep checkModelPopup(driver,1);  //note: enable it if have problem with iPerception popup
 		if(planType.equals("SHIP")){
 			System.out.println("For ship case, locate the drop down box and select '"+claimPeriod+"' option");
-			//tbd if (!getOnlyTestUiFlag()) 
 			moveMouseToElement(ship_reviewClaimsTxt);
 			Select dropdown=new Select (ship_claimsDropdown);	
 			dropdown.selectByVisibleText(claimPeriod);

@@ -19,8 +19,8 @@ Feature: 1.08 Member Header/Navigation validation
     And clicking on the Coverage & Benefits tab should allow me to see links for the Benefits Summary tab, the Forms & Resources tab and Order materials tab on the second level navigation Header
     And then click the Forms & Resources tab and I should be directed to the Forms & Resources Page Header
     And then click the Order Materials tab and I should be directed to the Order Materials Page Header
-    Then I should be able to see and use the Premium Payments tab Header
-    Then I should be able to see and use the pharmacies tab in the header
+    #Then I should be able to see and use the Premium Payments tab Header
+    #Then I should be able to see and use the pharmacies tab in the header
     Then I should be able to see and use the health and wellness tab in the header
     Then I should be able to see the help button Header
     Then I should be able to see and use the Account/Profile dropdown and logout
@@ -41,7 +41,7 @@ Feature: 1.08 Member Header/Navigation validation
 	    Given login with following details logins in the member portal and validate elements
 	      | Plan Type   | <planType>   |
 	      | Member Type | <memberType> |
-	    Then I should be able to see and use the Premium Payments tab Header
+	    #Then I should be able to see and use the Premium Payments tab Header
 		
 		@headerRegression
 	    Examples: 
@@ -77,7 +77,7 @@ Feature: 1.08 Member Header/Navigation validation
 	 	@headerRegression
 	    Examples: 
 	      | TID       | planType    | memberType                | 
-	      | 15253     | MAPD        | IndividualGroup_header    | 
+	      | 15253     | MAPD        | IndividualGroup_header    |
 
         #note: in this case at the time of test, this PDP SHIP combo user has 100 percent subsidy on PDP
         #note: user will see payment tab because of ship plan 

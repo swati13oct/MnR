@@ -1,19 +1,22 @@
 package pages.regression.healthRecord;
 
-import java.util.ArrayList;
+
+import java.util.List;
 
 import org.junit.Assert;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.UnhandledAlertException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.Select;
 
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
-import pages.regression.accounthomepage.AccountHomePage;
 
 public class HealthRecordPage  extends HealthRecordBase {
 
@@ -27,6 +30,7 @@ public class HealthRecordPage  extends HealthRecordBase {
 	public void openAndValidate(){
 	}
 	public WebDriver navigateToContactUsPage() {
+		checkModelPopup(driver,1);
 		if (noWaitValidate(ContactUsLnk)) {
 			ContactUsLnk.click();
 		} else {
@@ -42,7 +46,8 @@ public class HealthRecordPage  extends HealthRecordBase {
 		return driver;
 	}
 
-	public WebDriver navigateToPharmacyLocatorPage() {
+	public WebDriver navigateToPharmacyLocatorPage(String memberType) {
+		checkModelPopup(driver,1);
 		if (noWaitValidate(testharnessTblPharmacyLocatorLnk)) {
 			testharnessTblPharmacyLocatorLnk.click();
 		} else if (noWaitValidate(pharmacySearchLink)) {
@@ -53,13 +58,13 @@ public class HealthRecordPage  extends HealthRecordBase {
 			section_pharmacySearchLink.click();
 		} else {
 			//note: fix up the URL to get to the page...
-			navigateToBenefitsPage();
-			CommonUtility.checkPageIsReady(driver);
+			navigateToBenefitsPage(memberType);
+			CommonUtility.checkPageIsReadyNew(driver);
 			String[] tmp=driver.getCurrentUrl().split(".com/");
 			String plUrl=tmp[0]+".com/content/medicare/member/pharmacy-locator/overview.html#/Pharmacy-Search-English";
 			System.out.println("pharmacy locator pg URL="+plUrl);
 			driver.get(plUrl);
-			CommonUtility.checkPageIsReady(driver);
+			CommonUtility.checkPageIsReadyNew(driver);
 		}
 		CommonUtility.waitForPageLoad(driver, pharmacySearchPgZipcodeField, 10);
 		Assert.assertTrue("PROBLEM - unable to navigator to Pharmacy Locator page", noWaitValidate(pharmacySearchPgZipcodeField));
@@ -67,7 +72,8 @@ public class HealthRecordPage  extends HealthRecordBase {
 	}
 
 
-	public WebDriver navigateToDcePage() {
+	public WebDriver navigateToDcePage(String memberType) {
+		checkModelPopup(driver,1);
 		if (noWaitValidate(testharnessTblDceLnk)) {
 			testharnessTblDceLnk.click();
 		} else if (noWaitValidate(drugLookup)) {
@@ -76,13 +82,13 @@ public class HealthRecordPage  extends HealthRecordBase {
 			section_drugLocator.click();
 		} else {
 			//note: fix up the URL to get to the page...
-			navigateToBenefitsPage();
-			CommonUtility.checkPageIsReady(driver);
+			navigateToBenefitsPage(memberType);
+			CommonUtility.checkPageIsReadyNew(driver);
 			String[] tmp=driver.getCurrentUrl().split(".com/");
 			String plUrl=tmp[0]+".com/content/medicare/member/drug-lookup/overview.html#/drug-cost-estimator";
 			System.out.println("pharmacy locator pg URL="+plUrl);
 			driver.get(plUrl);
-			CommonUtility.checkPageIsReady(driver);
+			CommonUtility.checkPageIsReadyNew(driver);
 		}
 		CommonUtility.waitForPageLoad(driver, dcePgHeaderTxt, 10);
 		Assert.assertTrue("PROBLEM - unable to navigator to DCE page", noWaitValidate(dcePgHeaderTxt));
@@ -120,6 +126,7 @@ public class HealthRecordPage  extends HealthRecordBase {
 
 
 	public WebDriver navigateToFindCarePage() {
+		checkModelPopup(driver,1);
 		if (noWaitValidate(findCareTopMenuLnk)) {
 			System.out.println("Find findCareTopMenuLnk, click it");
 			findCareTopMenuLnk.click();
@@ -134,13 +141,16 @@ public class HealthRecordPage  extends HealthRecordBase {
 				Assert.assertTrue("PROBLEM - unable to locate FindCare link on top menu", false);
 			}
 		}
-		sleepBySec(1);
+		sleepBySec(2);
 		return driver;
 	}
 
 	public WebDriver navigateToClaimsPage() {
+		checkModelPopup(driver,1);
+		CommonUtility.waitForPageLoad(driver, claimsTopMenuLnk, 5);
 		if (noWaitValidate(claimsTopMenuLnk)) {
 			claimsTopMenuLnk.click();
+			CommonUtility.waitForPageLoad(driver, claimsSysTestPg, 10); //note: Rally claims sometimes lands on systest3 sign-in page, wait n c if this is the case
 		} else 	if (noWaitValidate(shadowRootHeader)) {
 			System.out.println("located shadow-root element, attempt to process further...");
 			WebElement root1 = expandRootElement(shadowRootHeader);
@@ -151,6 +161,7 @@ public class HealthRecordPage  extends HealthRecordBase {
 				Assert.assertTrue("PROBLEM - unable to locate Claims link on top menu", false);
 			}
 		}
+		CommonUtility.checkPageIsReady(driver);
 		return driver;
 	}
 
@@ -158,11 +169,13 @@ public class HealthRecordPage  extends HealthRecordBase {
 		navigateToClaimsPage();
 		CommonUtility.waitForPageLoad(driver, eobTopSubMenuLnk, 5);
 		Assert.assertTrue("PROBLEM - unable to locate EOB link on top menu", noWaitValidate(eobTopSubMenuLnk));
+		checkModelPopup(driver,1);
 		eobTopSubMenuLnk.click();
 		return driver;
 	}
 
 	public WebDriver navigateToEobPageViaTestharnessTbl() {
+		checkModelPopup(driver,1);
 		if (noWaitValidate(testharnessTblEobLnk)) {
 			testharnessTblEobLnk.click();
 		} else {
@@ -171,53 +184,86 @@ public class HealthRecordPage  extends HealthRecordBase {
 		return driver;
 	}
 
-	public WebDriver navigateToBenefitsPage() {
+	public WebDriver navigateToBenefitsPage(String memberType) {
+		checkModelPopup(driver,1);
 		if (noWaitValidate(benefitsTopMenuLnk)) {
-			benefitsTopMenuLnk.click();
+			try {
+				checkModelPopup(driver,1);
+				benefitsTopMenuLnk.click();
+			} catch (TimeoutException te) {
+				if (memberType.toUpperCase().contains("PREEFF") || memberType.toUpperCase().contains("TERM")) {
+					System.out.println("memberType '"+memberType+"' will land on PlanDoc page when clicking benefits, need to wait longer for the page to be done");
+					sleepBySec(30);
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+				Assert.assertTrue("PROBLEM - unable to locate Benefits link on top menu", false);
+			}
 		} else 	if (noWaitValidate(shadowRootHeader)) {
 			System.out.println("located shadow-root element, attempt to process further...");
 			WebElement root1 = expandRootElement(shadowRootHeader);
 			try {
-				WebElement claimsTopMenuShadowRootLink = root1.findElement(By.cssSelector("a[data-testid*=nav-link-coverage]"));
-				claimsTopMenuShadowRootLink.click();
+				WebElement benfitsTopMenuShadowRootLink = root1.findElement(By.cssSelector("a[data-testid*=nav-link-coverage]"));
+				benfitsTopMenuShadowRootLink.click();
+			} catch (TimeoutException te) {
+				if (memberType.toUpperCase().contains("PREEFF") || memberType.toUpperCase().contains("TERM")) {
+					System.out.println("memberType '"+memberType+"' will land on PlanDoc page when clicking benefits, need to wait longer for the page to be done");
+					sleepBySec(30);
+				}
 			} catch (Exception e) {
+				e.printStackTrace();
 				Assert.assertTrue("PROBLEM - unable to locate Benefits link on top menu", false);
 			}
 		}
-		return driver;
-	}
-	
-	public WebDriver navigateToPlanDocPage_preEff() {
-		navigateToBenefitsPage();
-		if (noWaitValidate(preeff_goToPlanDocBtn)) {
-			preeff_goToPlanDocBtn.click();
-			CommonUtility.checkPageIsReady(driver);
-		} 
+		CommonUtility.waitForPageLoad(driver, benefitsPgHeader, 5);
 		return driver;
 	}
 
-	public WebDriver navigateToPlanDocPage() {
-		navigateToBenefitsPage();
-		if (noWaitValidate(planDocTopMenuLnk)) {
-			planDocTopMenuLnk.click();
-			CommonUtility.checkPageIsReady(driver);
-		} else 	if (noWaitValidate(shadowRootHeader)) {
-			System.out.println("located shadow-root element, attempt to process further...");
-			WebElement root1 = expandRootElement(shadowRootHeader);
-			try {
-				WebElement benefitsTopMenuShadowRootLink = root1.findElement(By.cssSelector("a[data-testid*=nav-link-coverage]"));
-				benefitsTopMenuShadowRootLink.click();
-				CommonUtility.waitForPageLoad(driver, planDocTopMenuLnk, 5);
+	public WebDriver navigateToPlanDocPage_preEff(String memberType) {
+		navigateToBenefitsPage(memberType);
+		checkModelPopup(driver,1);
+		if (noWaitValidate(planDocHeaderTxt)) {
+			System.out.println("Already on PlanDoc page, no need to go any further");
+		} else {
+			Assert.assertTrue("PROBLEM - this user is expected to be Pre-effective.  Unable to locate the 'VIEW PLAN DOCUMENTS' button on Benefits page.", noWaitValidate(preeff_goToPlanDocBtn));
+			if (noWaitValidate(preeff_goToPlanDocBtn)) {
+				preeff_goToPlanDocBtn.click();
+				CommonUtility.checkPageIsReadyNew(driver);
+			} 
+		}
+		return driver;
+	}
+
+	public WebDriver navigateToPlanDocPage(String memberType) {
+		navigateToBenefitsPage(memberType);
+		System.out.println("Finished navigating to benefits page");
+		if (noWaitValidate(planDocHeaderTxt)) {
+			System.out.println("Already on PlanDoc page, no need to go any further");
+		} else {
+			if (noWaitValidate(planDocTopMenuLnk)) {
+				checkModelPopup(driver,1);
 				planDocTopMenuLnk.click();
-				CommonUtility.checkPageIsReady(driver);
-			} catch (Exception e) {
-				Assert.assertTrue("PROBLEM - unable to locate Plan Documents and Resouces link on top sub menu", false);
+				CommonUtility.checkPageIsReadyNew(driver);
+			} else 	if (noWaitValidate(shadowRootHeader)) {
+				System.out.println("located shadow-root element, attempt to process further...");
+				WebElement root1 = expandRootElement(shadowRootHeader);
+				try {
+					WebElement benefitsTopMenuShadowRootLink = root1.findElement(By.cssSelector("a[data-testid*=nav-link-coverage]"));
+					planDocTopMenuLnk.click();
+					benefitsTopMenuShadowRootLink.click();
+					CommonUtility.waitForPageLoad(driver, planDocTopMenuLnk, 5);
+					planDocTopMenuLnk.click();
+					CommonUtility.checkPageIsReadyNew(driver);
+				} catch (Exception e) {
+					Assert.assertTrue("PROBLEM - unable to locate Plan Documents and Resouces link on top sub menu", false);
+				}
 			}
 		}
 		return driver;
 	}
 
 	public WebDriver navigateToMyDocPage() {
+		checkModelPopup(driver,1);
 		//note: take too long to navigate to plan doc page so this step will have together w/ planDoc
 		//note: assume you are already on planDoc
 		Assert.assertTrue("PROBLEM - unable to locate My Documents link on Plan Documents and Resources page", noWaitValidate(myDocLnk));
@@ -232,11 +278,13 @@ public class HealthRecordPage  extends HealthRecordBase {
 		return driver;
 	}
 
-	public WebDriver navigateToOrderPage() {
-		navigateToBenefitsPage();
+	public WebDriver navigateToOrderPage(String memberType) {
+		navigateToBenefitsPage(memberType);
+		checkModelPopup(driver,1);
 		if (noWaitValidate(orderTopMenuLnk)) {
+			checkModelPopup(driver,1);
 			orderTopMenuLnk.click();
-			CommonUtility.checkPageIsReady(driver);
+			CommonUtility.checkPageIsReadyNew(driver);
 		} else 	if (noWaitValidate(shadowRootHeader)) {
 			System.out.println("located shadow-root element, attempt to process further...");
 			WebElement root1 = expandRootElement(shadowRootHeader);
@@ -245,7 +293,7 @@ public class HealthRecordPage  extends HealthRecordBase {
 				benefitsTopMenuShadowRootLink.click();
 				CommonUtility.waitForPageLoad(driver, orderTopMenuLnk, 5);
 				orderTopMenuLnk.click();
-				CommonUtility.checkPageIsReady(driver);
+				CommonUtility.checkPageIsReadyNew(driver);
 			} catch (Exception e) {
 				Assert.assertTrue("PROBLEM - unable to locate Order Plan Materials link on top sub menu", false);
 			}
@@ -254,9 +302,10 @@ public class HealthRecordPage  extends HealthRecordBase {
 	}
 
 	public WebDriver navigateToPaymentsPage() {
+		checkModelPopup(driver,1);
 		if (noWaitValidate(paymentTopMenuLnk)) {
 			paymentTopMenuLnk.click();
-			CommonUtility.checkPageIsReady(driver);
+			CommonUtility.checkPageIsReadyNew(driver);
 		} else 	if (noWaitValidate(shadowRootHeader)) {
 			System.out.println("located shadow-root element, attempt to process further...");
 			WebElement root1 = expandRootElement(shadowRootHeader);
@@ -271,9 +320,10 @@ public class HealthRecordPage  extends HealthRecordBase {
 	}
 
 	public WebDriver navigateToPnpPage() {
+		checkModelPopup(driver,1);
 		if (noWaitValidate(pnpTopMenuLnk)) {
 			pnpTopMenuLnk.click();
-			CommonUtility.checkPageIsReady(driver);
+			CommonUtility.checkPageIsReadyNew(driver);
 		} else 	if (noWaitValidate(shadowRootHeader)) {
 			System.out.println("located shadow-root element, attempt to process further...");
 			WebElement root1 = expandRootElement(shadowRootHeader);
@@ -281,16 +331,17 @@ public class HealthRecordPage  extends HealthRecordBase {
 				WebElement pnpTopMenuShadowRootLink = root1.findElement(By.cssSelector("a[data-testid*=nav-link-pharmacies]"));
 				pnpTopMenuShadowRootLink.click();
 			} catch (Exception e) {
-				Assert.assertTrue("PROBLEM - unable to locate Payments link on top sub menu", false);
+				Assert.assertTrue("PROBLEM - unable to locate Pharmacies and Prescriptions link on top sub menu", false);
 			}
 		}
 		return driver;
 	}
 
 	public WebDriver navigateToHwPage() {
+		checkModelPopup(driver,1);
 		if (noWaitValidate(hwTopMenuLnk)) {
 			hwTopMenuLnk.click();
-			CommonUtility.checkPageIsReady(driver);
+			CommonUtility.checkPageIsReadyNew(driver);
 		} else 	if (noWaitValidate(shadowRootHeader)) {
 			System.out.println("located shadow-root element, attempt to process further...");
 			WebElement root1 = expandRootElement(shadowRootHeader);
@@ -304,9 +355,16 @@ public class HealthRecordPage  extends HealthRecordBase {
 		return driver;
 	}
 
-	public boolean isHeathRecordLnkOnAcctProfDropdownOption(String planType, String memberType, boolean expComboTab, String targetPage) {
-		//tbd String stageUrl="https://ihr.int.werally.in";
+	public boolean isHeathRecordLnkOnAcctProfDropdownOption(String planType, String memberType, boolean expComboTab, String targetPage, boolean expectIhrLnk) {
+		System.out.println("Proceed to validate if IHR link is included in the dropdown...");
 		String stageUrl="ihr.int.werally.in";
+		String prodUrl="internal-redirect?deepLink=https%3A%2F%2Fihr.werally.com";
+		//note: bluesteel is the link for offline-prod but env can only point at one url at a time
+		//note: to avoid update link for every offline-prod deployment, keeping offline-prod link as prod link for secondary pages
+		String offprodUrl=prodUrl;
+		if (targetPage.equals("Initial landing page after login") || targetPage.equals("Find Care") || targetPage.equals("Claims")) {
+			offprodUrl="internal-redirect?deepLink=https%3A%2F%2Fihr.bluesteel.werally.in";
+		}
 		checkModelPopup(driver,1);
 		if (expComboTab) {
 			if (targetPage.equalsIgnoreCase("payments"))
@@ -317,6 +375,7 @@ public class HealthRecordPage  extends HealthRecordBase {
 		checkModelPopup(driver,1);
 		CommonUtility.waitForPageLoad(driver, shadowRootHeader, 5);
 		sleepBySec(2);
+		scrollToTopOfPg();
 		if (noWaitValidate(shadowRootHeader)) {
 			System.out.println("located shadow-root element, attempt to process further...");
 			WebElement root1 = expandRootElement(shadowRootHeader);
@@ -326,7 +385,12 @@ public class HealthRecordPage  extends HealthRecordBase {
 				checkModelPopup(driver,1);
 				acctSettingMenuShadowRootBtn.click();
 				checkModelPopup(driver,1);
+				if (expectIhrLnk) {
+					WebElement firstLink=root1.findElement(By.cssSelector("#dropdown-options-2 > a:nth-child(1)"));
+					Assert.assertTrue("PROBLEM - 'Health Record' link should be the first link on the dropdown", firstLink.getText().toLowerCase().contains("health record"));
+				}
 			} catch (Exception e) {
+				e.printStackTrace();
 				if (noWaitValidate(sorryError)) {
 					//note: try one more time before giving up
 					System.out.println("try one more time before giving up");
@@ -342,23 +406,29 @@ public class HealthRecordPage  extends HealthRecordBase {
 						else 
 							Assert.assertTrue("PROBLEM - unable to locate Account Profile button on Rally Dashboard top menu", false);
 					}
-				} else
-					Assert.assertTrue("PROBLEM - unable to locate Account Profile button on top menu", false);
+				} 
 			}
 			try {
 				WebElement healthRecordLink = root1.findElement(By.cssSelector("a[data-testid*=TARGET_AWARE_HEALTH_RECORD]"));
 				if (noWaitValidate(healthRecordLink)) {
 					String expUrl=stageUrl;
+					if (MRScenario.environment.equalsIgnoreCase("offline"))
+						expUrl=offprodUrl;
+					else if (MRScenario.environment.equalsIgnoreCase("prod")) 
+						expUrl=prodUrl;
 					String actUrl=healthRecordLink.getAttribute("href");
 					Assert.assertTrue("PROBLEM - Health Record link href value not as expected.  Expect to contains: '"+expUrl+"' | Actual URL='"+actUrl+"'", actUrl.contains(expUrl));
 					return true;
-				} else 
+				} else {
 					return false;
+				}
 			} catch (Exception e) {
 				System.out.println("unable to locate Account Profile link on Rally Dashboard top menu");
 				return false;
 			}
 		} else if (noWaitValidate(testHarn_AcctProfBtn)) {
+			System.out.println("TEST - no shadowroot...");
+			scrollToTopOfPg();
 			checkModelPopup(driver,1);
 			Assert.assertTrue("PROBLEM - unable to locate Account Profile button on Rally Dashboard top menu", noWaitValidate(testHarn_AcctProfBtn));
 			JavascriptExecutor jse = (JavascriptExecutor) driver;
@@ -367,15 +437,35 @@ public class HealthRecordPage  extends HealthRecordBase {
 			jsClickNew(testHarn_AcctProfBtn);
 
 			//note: don't know why .click() doesn't work
-			//testHarn_AcctProfBtn.click();
 			checkModelPopup(driver,1);
-			if (noWaitValidate(testHarn_desktop_AcctProf_IHRLnk)) {
-				String expUrl=stageUrl;
-				String actUrl=testHarn_desktop_AcctProf_IHRLnk.getAttribute("href");
-				Assert.assertTrue("PROBLEM - Health Record link href value not as expected.  Expect to contains: '"+expUrl+"' | Actual URL='"+actUrl+"'", actUrl.contains(expUrl));
-				return true;
-			} else 
+			WebElement ihrLnk=null;
+			List<WebElement> acctProfOptLst=null;
+			if (driver.getCurrentUrl().contains("claims") && noWaitValidate(testHarn_desktop_AcctProf_IHRLnk_claims)) {
+				System.out.println("TEST - This is on claims page");
+				ihrLnk=testHarn_desktop_AcctProf_IHRLnk_claims;
+				acctProfOptLst=testHarn_AcctProfDropdown_claims;
+			} else if (noWaitValidate(testHarn_desktop_AcctProf_IHRLnk)) {
+				System.out.println("TEST - This has the usual desktop stuf");
+				ihrLnk=testHarn_desktop_AcctProf_IHRLnk;
+				acctProfOptLst=testHarn_AcctProfDropdown;
+			} else if (noWaitValidate(testHarn_desktop_AcctProf_IHRLnk_react)) { //note: rally pages starting to use react
+				System.out.println("TEST - This has react stuff");
+				ihrLnk=testHarn_desktop_AcctProf_IHRLnk_react;
+				acctProfOptLst=testHarn_AcctProfDropdown_react;
+			} else {
+				System.out.println("TEST - Can't match anything");
 				return false;
+			}
+			Assert.assertTrue("PROBLEM - 'Health Record' should be the first link in the dropdown.   first link on the list has text='"+ acctProfOptLst.get(0).getText()+"'", acctProfOptLst.get(0).getText().toLowerCase().contains("health record"));
+
+			String expUrl=stageUrl;
+			if (MRScenario.environment.equalsIgnoreCase("offline"))
+				expUrl=offprodUrl;
+			else if (MRScenario.environment.equalsIgnoreCase("prod")) 
+				expUrl=prodUrl;
+			String actUrl=ihrLnk.getAttribute("href");
+			Assert.assertTrue("PROBLEM - Health Record link href value not as expected.  Expect to contains: '"+expUrl+"' | Actual URL='"+actUrl+"'", actUrl.contains(expUrl));
+			return true;
 		} else {
 			System.out.println("unable to locate Account Profile from top menu");
 			return false;
@@ -395,27 +485,27 @@ public class HealthRecordPage  extends HealthRecordBase {
 				acctSettingMenuShadowRootBtn.click();
 			} catch (Exception e) {
 				e.printStackTrace();
-			}
+			} 
 			try {
 				WebElement healthRecordLink = root1.findElement(By.cssSelector("a[data-testid*=TARGET_AWARE_HEALTH_RECORD]"));
-				
+
 				healthRecordLink.click();
-				CommonUtility.checkPageIsReady(driver);
+				CommonUtility.checkPageIsReadyNew(driver);
 				checkModelPopup(driver,1);
-				//if (MRScenario.environment.contains("stage")) {
-				//	CommonUtility.waitForPageLoad(driver, heathRecordPgHeaderText, 30);
-				//	Assert.assertTrue("PROBLEM - unable to locate Heath Record page header text after navigating to Health Record page", noWaitValidate(heathRecordPgHeaderText));
-				//}
 
 			} catch (Exception e) {
 				Assert.assertTrue("PROBLEM - unable to locate Health Record link on Rally Dashboard top menu", false);
 			}
+		} else if (noWaitValidate(testHarn_desktop_AcctProf_IHRLnk_react)) {
+			testHarn_desktop_AcctProf_IHRLnk_react.click();
+			CommonUtility.checkPageIsReadyNew(driver);
+			checkModelPopup(driver,1);
 		} else {
 			Assert.assertTrue("PROBLEM - unable to locate Rally Dashboard top menu", false);
 		}
 	}
 
-	public void navigateFromTestHarnessToHeathRecordPageAndThenCloseTab() {
+	public void navigateFromTestHarnessToHeathRecordPage() {
 		checkModelPopup(driver,1);
 		if (!noWaitValidate(testHarn_desktop_AcctProf_IHRLnk)) {
 			Assert.assertTrue("PROBLEM - unable to locate Account Profile button on Rally Dashboard top menu", noWaitValidate(testHarn_AcctProfBtn));
@@ -425,16 +515,15 @@ public class HealthRecordPage  extends HealthRecordBase {
 			jsClickNew(testHarn_AcctProfBtn);
 		}
 
-		//testHarn_AcctProfBtn.click();
 		Assert.assertTrue("PROBLEM - unable to locate Heath Record link on Account Profile button dropdown options", noWaitValidate(testHarn_desktop_AcctProf_IHRLnk));
 
 		testHarn_desktop_AcctProf_IHRLnk.click();
-		CommonUtility.checkPageIsReady(driver);
+		CommonUtility.checkPageIsReadyNew(driver);
 		checkModelPopup(driver,1);
-		//if (MRScenario.environment.contains("stage")) {
-		//	CommonUtility.waitForPageLoad(driver, heathRecordPgHeaderText, 30);
-		//	Assert.assertTrue("PROBLEM - unable to locate Heath Record page header text after navigating to Health Record page", noWaitValidate(heathRecordPgHeaderText));
-		//}
-	}			
+	}		
+
+	public boolean hasSorryError() {
+		return noWaitValidate(sorryError);
+	}
 
 }

@@ -2,7 +2,7 @@
 Feature: 1.06.4 Member Plans and Documents - section: Annual Notice of Changes Documents
 
   Background: If run on stage then feature security flag needs to be true
-     Given feature security flag must set to true when testing on stage env
+     Given feature security flag must set to true when testing on test env
       | Feature           | UCPPlanDocuments |
 
   #------------------------------------------
@@ -24,7 +24,7 @@ Feature: 1.06.4 Member Plans and Documents - section: Annual Notice of Changes D
 	  | Spanish Current Year               | <an_es_cy> | 
 	  | Chinese Current Year               | <an_zh_cy> | 
 	  | English Next Year                  | <an_en_ny> | 
-	  | Chinese Next Year                  | <an_es_ny> | 
+	  | Spanish Next Year                  | <an_es_ny> | 
 	  | Chinese Next Year                  | <an_zh_ny> | 
 
 	@preeffective_ma_mapd
@@ -52,42 +52,50 @@ Feature: 1.06.4 Member Plans and Documents - section: Annual Notice of Changes D
 	@active_ma
 	Examples: 
       | index  | TID         | planType | memberType            | an_sd | an_en_cy | an_es_cy | an_zh_cy | an_en_ny | an_es_ny | an_zh_ny |
-      | 09-066 | 15129       | MA       | AARP_IND_EFF_PDnR     | true  | true     | true     | false    | false    | false    | false    |
+      | 09-066 | 15129       | MA       | AARP_IND_EFF_PDnR     | true  | true     | true     | false    | true     | true     | false    |
       | 10-067 | 15130       | MA       | GROUP_EFF_PDnR        | true  | true     | false    | false    | false    | false    | false    |
 
 	@active_mapd @devRegression
 	Examples: 
       | index  | TID         | planType | memberType            | an_sd | an_en_cy | an_es_cy | an_zh_cy | an_en_ny | an_es_ny | an_zh_ny |
-      | 11-068 | 15108       | MAPD     | AARP_IND_EFF_PDnR     | true  | true     | true     | false    | false    | false    | false    |
+      | 11-068 | 15108       | MAPD     | AARP_IND_EFF_PDnR     | true  | true     | true     | false    | true     | true     | false    |
 
 	@active_mapd
 	Examples: 
       | index  | TID         | planType | memberType            | an_sd | an_en_cy | an_es_cy | an_zh_cy | an_en_ny | an_es_ny | an_zh_ny |
-      | 12-069 | 15303       | MAPD     | GROUP_EFF_PDnR        | true  | true     | false    | false    | false    | false    | false    |
+      | 12-069 | 15303       | MAPD     | GROUP_EFF_PDnR        | true  | true     | false    | false    | true     | false    | false    |
      ### note: PEEHIP group terminated as of 12/31/2019
      #| 13-070 | 15130       | MAPD     | PEEHIP_GROUP_EFF_PDnR | true  | false    | false    | false    | false    | false    | false    |
 
 	@active_pcp_medica
 	Examples: 
       | index  | TID         | planType | memberType            | an_sd | an_en_cy | an_es_cy | an_zh_cy | an_en_ny | an_es_ny | an_zh_ny |
-      | 14-071 | 15128       | PCP      | IND_EFF_PDnR          | true  | true     | true     | false    | false    | false    | false    |
-      | 15-072 | 15128       | MEDICA   | IND_EFF_PDnR          | true  | true     | true     | false    | false    | false    | false    |
+      | 14-071 | 15128       | PCP      | IND_EFF_PDnR          | true  | true     | true     | false    | true     | true     | false    |
+      | 15-072 | 15128       | MEDICA   | IND_EFF_PDnR          | true  | true     | true     | false    | true     | true     | false    |
 
 	@active_pdp
 	Examples: 
       | index  | TID         | planType | memberType            | an_sd | an_en_cy | an_es_cy | an_zh_cy | an_en_ny | an_es_ny | an_zh_ny |
-      | 16-073 | 15126,15127 | PDP      | AARP_IND_EFF_PDnR     | true  | true     | true     | false    | false     | false    | false    |
-      | 17-074 | 15131,15233 | PDP      | COMBO_GROUP_EFF_PDnR  | true  | true     | false    | false    | false     | false    | false    |
+      | 16-073 | 15126,15127 | PDP      | AARP_IND_EFF_PDnR     | true  | true     | true     | false    | true     | true     | false    |
+      | 17-074 | 15131,15233 | PDP      | COMBO_GROUP_EFF_PDnR  | true  | true     | false    | false    | true     | false    | false    |
 
 	@active_ssup
 	Examples: 
       | index  | TID         | planType | memberType            | an_sd | an_en_cy | an_es_cy | an_zh_cy | an_en_ny | an_es_ny | an_zh_ny |
       | 18-075 | 15131,15233 | SSP      | COMBO_GROUP_EFF_PDnR  | false | false    | false    | false    | false    | false    | false    |
 
-	@active_ship @devRegression
+	@active_ship
     Examples: 
       | index  | TID         | planType | memberType            | an_sd | an_en_cy | an_es_cy | an_zh_cy | an_en_ny | an_es_ny | an_zh_ny |
       | 19-076 | 15119,15304 | SHIP     | IND_EFF_PDnR          | false | false    | false    | false    | false    | false    | false    |
+
+	@active_ship @devRegression
+    Examples: 
+      | index  | TID         | planType | memberType            | an_sd | an_en_cy | an_es_cy | an_zh_cy | an_en_ny | an_es_ny | an_zh_ny |
       | 20-118 | 15119,15304 | SHIP     | MULTI_IND_EFF_PDnR    | false | false    | false    | false    | false    | false    | false    |
 
+	@preeffective_ship
+	Examples: 
+      | index  | TID         | planType | memberType            | an_sd | an_en_cy | an_es_cy | an_zh_cy | an_en_ny | an_es_ny | an_zh_ny |
+      | 21-124 | xxxxx       | SHIP     | IND_PREEFF_PDnR       | false | false    | false    | false    | false    | false    | false    |
 

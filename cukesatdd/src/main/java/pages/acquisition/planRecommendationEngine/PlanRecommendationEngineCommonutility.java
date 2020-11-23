@@ -3,9 +3,12 @@
  */
 package pages.acquisition.planRecommendationEngine;
 
+import java.util.concurrent.TimeUnit;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -15,9 +18,11 @@ import org.testng.Assert;
 import acceptancetests.acquisition.planRecommendationEngine.PlanRecommendationEngineStepDefinition;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
-import pages.acquisition.bluelayer.AcquisitionHomePage;
+import pages.acquisition.commonpages.AcquisitionHomePage;
 
 public class PlanRecommendationEngineCommonutility extends UhcDriver {
+	
+	Actions actions = new Actions(driver);
 
 	public PlanRecommendationEngineCommonutility(WebDriver driver) {
 		super(driver);
@@ -145,22 +150,9 @@ public class PlanRecommendationEngineCommonutility extends UhcDriver {
 				if (currentPageName.contains("DRUG")) {
 					previousPageName = "Coverage";
 					previousPagePercentage = "20%";
-					nextPageName = "Pharmacy";
-					nextPagePercentage = "53%";
-					currrentPagePercentage = "20%";
-					if (currentPageName.contains("SKIP")) {
-						nextPageName = "NULL";
-						nextPagePercentage = "NULL";
-						return;
-					}
-				}
-				if (currentPageName.contains("PHARMACY")) {
-					previousPageName = "Drug";
-					previousPagePercentage = "53%";
 					nextPageName = "NULL";
 					nextPagePercentage = "NULL";
-					currrentPagePercentage = "53%";
-					return;
+					currrentPagePercentage = "20%";
 				}
 			} else {
 				if (currentPageName.contains("COVERAGE")) {
@@ -204,23 +196,25 @@ public class PlanRecommendationEngineCommonutility extends UhcDriver {
 				} else if (currentPageName.contains("DRUG")) {
 					previousPageName = "Doctor";
 					previousPagePercentage = "50%";
-					nextPageName = "Pharmacy";
-					nextPagePercentage = "60%";
+//					nextPageName = "Pharmacy";
+//					nextPagePercentage = "60%";
 					currrentPagePercentage = "50%";
-					if (currentPageName.contains("SKIP"))
-						if ((flow.equalsIgnoreCase("MAPD") || flow.equalsIgnoreCase("NONE"))) {
+//					if (currentPageName.contains("SKIP"))
+//						if ((flow.equalsIgnoreCase("MAPD") || flow.equalsIgnoreCase("NONE"))) {
 							nextPageName = "Additional";
 							nextPagePercentage = "70%";
-						}
+				}
+/*						}
 				} else if (currentPageName.contains("PHARMACY")) {
 					previousPageName = "Drug";
 					previousPagePercentage = "60%";
 					nextPageName = "Additional";
 					nextPagePercentage = "70%";
 					currrentPagePercentage = "60%";
-				} else if (currentPageName.contains("ADDITIONAL")) {
-					previousPageName = "Pharmacy";
-					previousPagePercentage = "70%";
+				} */
+				else if (currentPageName.contains("ADDITIONAL")) {
+					previousPageName = "Drug";
+					previousPagePercentage = "60%";
 					nextPageName = "Cost";
 					nextPagePercentage = "80%";
 					currrentPagePercentage = "70%";
@@ -230,10 +224,10 @@ public class PlanRecommendationEngineCommonutility extends UhcDriver {
 						nextPagePercentage = "72%";
 						currrentPagePercentage = "59%";
 					}
-					if (currentPageName.contains("SKIP")) {
+/*					if (currentPageName.contains("SKIP")) {
 						previousPageName = "Drug";
 						previousPagePercentage = "60%";
-					}
+					}*/
 				} else if (currentPageName.contains("COST")) {
 					previousPageName = "Additional";
 					previousPagePercentage = "80%";
@@ -275,7 +269,7 @@ public class PlanRecommendationEngineCommonutility extends UhcDriver {
 		System.out.println("Clicking continue from page : "+page);
 		threadsleep(1000);
 		validate(continueBtn);
-		continueBtn.click();
+		jsClickNew(continueBtn);
 		System.out.println("Validating " + page + " page Continue button functionality");
 		if(percentageValidation)
 			nextPageValidation(page.toUpperCase());
@@ -300,5 +294,14 @@ public class PlanRecommendationEngineCommonutility extends UhcDriver {
 				System.out.println("Unable to validate Continue button functionality on Next page");
 			}
 		}
+	}
+	
+	public void MouseOver(WebElement element, String browser) {
+		System.out.println("Browser Name: "+browser);
+		if(browser.equals("chrome") || browser.equals("IE") || browser.equals("edge")) 
+			actions.clickAndHold(element).build().perform();
+		else {
+			actions.moveToElement(element).click().build().perform();
+			}
 	}
 }

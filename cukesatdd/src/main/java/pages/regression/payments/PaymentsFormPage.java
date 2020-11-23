@@ -53,7 +53,7 @@ public class PaymentsFormPage extends UhcDriver {
 	@FindBy(xpath = "//button[@class='btn btn--primary']")
 	private WebElement ContinueButton;
 	
-	@FindBy(xpath = "//button[@class='btn btn--secondary cancelbutton cancel-wcag']")
+	@FindBy(xpath = "(//button[@class='btn btn--secondary cancelbutton cancel-wcag' or @class='btn btn--secondary cancelbutton'])[1]")
 	private WebElement cancelButton;
 	
 	@FindBy(xpath = "//a[@class='btn btn--primary cancel-btn-modal']")
@@ -85,6 +85,14 @@ public class PaymentsFormPage extends UhcDriver {
 	}
 
 	public ReviewAutomaticPage EnterFiledsOnEFTforSetup(Map<String, String> accountAttributessMap) throws Exception {
+checkForIPerceptionModel(driver);
+		CommonUtility.checkPageIsReadyNew(driver);
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		String routingNumber = accountAttributessMap.get("Routing number");
 		String confirmRoutingNumber = accountAttributessMap.get("Confirm routing number");
@@ -232,7 +240,7 @@ public class PaymentsFormPage extends UhcDriver {
 		String firstName = accountAttributessMap.get("Account holder first name");
 		String middleName = accountAttributessMap.get("Account holder middle name");
 		String lastName = accountAttributessMap.get("Account holder last name");
-
+		TestHarness.checkForIPerceptionModel(driver);
 		routingNumberField.sendKeys(routingNumber);
 		confirmRoutingNumberField.sendKeys(confirmRoutingNumber);
 		accountNumberField.sendKeys(accountNumber);
@@ -241,8 +249,10 @@ public class PaymentsFormPage extends UhcDriver {
 		middleNameField.sendKeys(middleName);
 		lastNameField.sendKeys(lastName);
 		jsClickNew(ElectronicSignatureInput);
+		TestHarness.checkForIPerceptionModel(driver);
+		TestHarness.checkForIPerceptionModel(driver);
 		ContinueButton.click();
-		System.out.println("Clicked on Contuine button");
+		System.out.println("Clicked on Continue button");
 		try {
 			Thread.sleep(10000);
 		} catch (InterruptedException e) {
@@ -251,7 +261,7 @@ public class PaymentsFormPage extends UhcDriver {
 		}
 		
 		//WARNING  Please add your condition if you have to , do not comment someone else code/////
-		if ((driver.getTitle().contains("Review Your Recurring Payments Information")) || (driver.getCurrentUrl().contains("payments/onetime"))) 
+		if ((driver.getTitle().contains("Review Your Recurring Payments Information")) || (driver.getCurrentUrl().contains("payments/onetime") || driver.getCurrentUrl().contains("recurring-eft-review")))  
 		{
 			System.out.println("User is on Review Your Recurring Payments Information Page");
 			return new OneTimePaymentPage(driver);
@@ -302,7 +312,7 @@ public class PaymentsFormPage extends UhcDriver {
 			e.printStackTrace();
 		}
 		
-		if (driver.getCurrentUrl().contains("payments/overview.html"))
+		if ((driver.getCurrentUrl().contains("payments/overview.html")) || (driver.getCurrentUrl().contains("payments/overview-new.html")))
 				{
 			System.out.println("User is on Payment Overview Page after clicking cancel");
 			return new PaymentHistoryPage(driver);
@@ -412,7 +422,7 @@ public class PaymentsFormPage extends UhcDriver {
 			e.printStackTrace();
 		}
 		
-		if (driver.getCurrentUrl().contains("payments/overview.html"))
+		if (driver.getCurrentUrl().contains("payments/overview"))
 				{
 			System.out.println("User is on Payment Overview Page after clicking cancel");
 			return new PaymentHistoryPage(driver);

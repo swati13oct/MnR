@@ -99,7 +99,7 @@ public class ProviderSearchPage extends ProviderSearchBase {
 				CommonUtility.checkPageIsReady(driver);
 			}
 		}
-		sleepBySec(1);
+		//tbd sleepBySec(1);
 		return driver;
 	}
 
@@ -197,23 +197,43 @@ public class ProviderSearchPage extends ProviderSearchBase {
 	public WebDriver navigateToClaimsPage() {
 		CommonUtility.checkPageIsReady(driver);
 		checkModelPopup(driver, 1);
-		if (noWaitValidate(claimsTopMenuLnk)) {
-			claimsTopMenuLnk.click();
-		} else if (noWaitValidate(shadowRootHeader)) {
-			System.out.println("located shadow-root element, attempt to process further...");
-			WebElement root1 = expandRootElement(shadowRootHeader);
-			try {
-				WebElement claimsTopMenuShadowRootLink = root1
-						.findElement(By.cssSelector("a[data-testid*=nav-link-claims]"));
-				claimsTopMenuShadowRootLink.click();
-			} catch (Exception e) {
-				Assert.assertTrue("PROBLEM - unable to locate Claims link on top menu", false);
+		CommonUtility.waitForPageLoad(driver, claimsTopMenuLnk, 10);
+		int max=1;
+		int count=max;
+		boolean foundMenuOption=false;
+		while (count>0) {
+			if (noWaitValidate(claimsTopMenuLnk)) {
+				claimsTopMenuLnk.click();
+				foundMenuOption=true;
+				break;
+			} else if (noWaitValidate(shadowRootHeader)) {
+				System.out.println("located shadow-root element, attempt to process further...");
+				WebElement root1 = expandRootElement(shadowRootHeader);
+				try {
+					WebElement claimsTopMenuShadowRootLink = root1
+							.findElement(By.cssSelector("a[data-testid*=nav-link-claims]"));
+					claimsTopMenuShadowRootLink.click();
+				} catch (Exception e) {
+					Assert.assertTrue("PROBLEM - unable to locate Claims link on top menu", false);
+				}
+				foundMenuOption=true;
+				break;
+			} else if (noWaitValidate(uhcProviderSearchClaimsLnk)) {
+				uhcProviderSearchClaimsLnk.click();
+				foundMenuOption=true;
+				break;
+			} else {
+				//note: can't find the claims menu option
+				count=count-1;
+				driver.navigate().refresh();
+				CommonUtility.checkPageIsReady(driver);
+				checkModelPopup(driver, 1);
+				CommonUtility.waitForPageLoad(driver, claimsTopMenuLnk, 10);
 			}
-		} else if (noWaitValidate(uhcProviderSearchClaimsLnk)) {
-			uhcProviderSearchClaimsLnk.click();
 		}
+		Assert.assertTrue("PROBLEM - unable to locate claims menu option",foundMenuOption);
 		CommonUtility.checkPageIsReady(driver);
-		CommonUtility.waitForPageLoad(driver, claimsPgHeader, 20);
+		CommonUtility.waitForPageLoad(driver, claimsPgHeader, 5);
 		Assert.assertTrue("PROBLEM - unable to locate header text for 'Claims' page", noWaitValidate(claimsPgHeader));
 		return driver;
 	}
@@ -236,11 +256,13 @@ public class ProviderSearchPage extends ProviderSearchBase {
 	}
 
 	public WebDriver navigateToBenefitsPage() {
+		checkModelPopup(driver, 1);
 		if (noWaitValidate(benefitsTopMenuLnk)) {
 			benefitsTopMenuLnk.click();
 		} else if (noWaitValidate(uhcProviderSearchBenefitsLnk)) {
 			uhcProviderSearchBenefitsLnk.click();
 		} else if (noWaitValidate(shadowRootHeader)) {
+			checkModelPopup(driver, 1);
 			System.out.println("located shadow-root element, attempt to process further...");
 			WebElement root1 = expandRootElement(shadowRootHeader);
 			try {
@@ -252,9 +274,10 @@ public class ProviderSearchPage extends ProviderSearchBase {
 			}
 		}
 		CommonUtility.checkPageIsReady(driver);
-		CommonUtility.waitForPageLoad(driver, benefitsPgHeader, 10);
+		CommonUtility.waitForPageLoad(driver, benefitsPgHeader, 20);
+		checkModelPopup(driver, 1);
 		Assert.assertTrue("PROBLEM - unable to locate header text for 'Coverage and Benefits' page",
-				noWaitValidate(benefitsPgHeader));
+				noWaitValidate(benefitsPgHeader) || noWaitValidate(benefitsPgHeader_newUI));
 		return driver;
 	}
 
@@ -355,7 +378,7 @@ public class ProviderSearchPage extends ProviderSearchBase {
 		CommonUtility.waitForPageLoad(driver, pnpTopMenuLnk, 10);
 		if (noWaitValidate(pnpTopMenuLnk)) {
 			pnpTopMenuLnk.click();
-			CommonUtility.checkPageIsReady(driver);
+			CommonUtility.checkPageIsReadyNew(driver);
 		} else if (noWaitValidate(shadowRootHeader)) {
 			System.out.println("located shadow-root element, attempt to process further...");
 			WebElement root1 = expandRootElement(shadowRootHeader);
@@ -364,10 +387,10 @@ public class ProviderSearchPage extends ProviderSearchBase {
 						.findElement(By.cssSelector("a[data-testid*=nav-link-pharmacies]"));
 				pnpTopMenuShadowRootLink.click();
 			} catch (Exception e) {
-				Assert.assertTrue("PROBLEM - unable to locate Payments link on top sub menu", false);
+				Assert.assertTrue("PROBLEM - unable to locate Pharmacies and Prescriptions link on top sub menu", false);
 			}
 		}
-		CommonUtility.checkPageIsReady(driver);
+		CommonUtility.checkPageIsReadyNew(driver);
 		// note: comment out for now because D-Rex team is working on the page
 		// so the page is unstable
 		// CommonUtility.waitForPageLoad(driver, pnpPgHeader, 10);
@@ -395,7 +418,7 @@ public class ProviderSearchPage extends ProviderSearchBase {
 			}
 		}
 		CommonUtility.checkPageIsReady(driver);
-		CommonUtility.waitForPageLoad(driver, hwPgHeader, 10);
+		CommonUtility.waitForPageLoad(driver, hwPgHeader, 120);
 		Assert.assertTrue("PROBLEM - unable to locate header text for 'Health and Wellness' page",
 				noWaitValidate(hwPgHeader));
 		return driver;

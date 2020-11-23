@@ -605,6 +605,12 @@ public class PlanRecommendationStepDefinitionMobile {
 			resultpage.checkVPP(false);
 	}
 	
+	@When("^user navigates to PRE landing page menu mobile$")
+	public void user_navigates_PRE_landingpage_menu_mobile() {
+		HeaderFooterMobile preheaderfootermobile = new HeaderFooterMobile(wd);
+		preheaderfootermobile.navigatePRELandingpageMenuMobile();
+	}
+	
 	public void readfeaturedataMobile(DataTable data) {
 		inputRow = new ArrayList(data.getGherkinRows());
 		inputValues = new HashMap<String, String>();

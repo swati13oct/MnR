@@ -1,5 +1,7 @@
 package pages.regression.healthRecord;
 
+import java.util.List;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -29,8 +31,11 @@ public class HealthRecordWebElements  extends UhcDriver {
 
 	@FindBy(xpath="//div[@class='deskHeaderContainer']//a[contains(@id,'claims')]")
 	protected WebElement claimsTopMenuLnk;
+	
+	@FindBy(xpath="//h1[contains(.,'Sign In')]")
+	protected WebElement claimsSysTestPg;
 
-	@FindBy(xpath="//header[contains(@class,'sub-nav-header')]//a[contains(@track,'explanation')]")
+	@FindBy(xpath="//header[contains(@class,'sub-nav-header')]//a[contains(@track,'explanation') or contains(@data-testid,'explanation')]")
 	protected WebElement eobTopSubMenuLnk;
 
 	@FindBy(xpath="//div[@class='deskHeaderContainer']//a[contains(@id,'coveragebenefits')]")
@@ -38,6 +43,9 @@ public class HealthRecordWebElements  extends UhcDriver {
 
 	@FindBy(xpath="//div[@class='deskHeaderContainer']//a[contains(@id,'formsandresources')]")
 	protected WebElement planDocTopMenuLnk;
+	
+	@FindBy(xpath="//h1[contains(text(),'Plan Documents')]")
+	protected WebElement planDocHeaderTxt;
 
 	@FindBy(xpath="//a[contains(@id,'myDoc')]")
 	protected WebElement myDocLnk;
@@ -98,12 +106,32 @@ public class HealthRecordWebElements  extends UhcDriver {
 	protected WebElement acctSettingsLnk;
 
 
-	@FindBy(xpath= "//button[@id='accountprofile']")
+	@FindBy(xpath= "//button[@id='accountprofile' or @id='dropdown-toggle-3' or @id='dropdown-toggle-2']")
 	protected WebElement testHarn_AcctProfBtn;
+
+	@FindBy(xpath= "//button[@id='accountprofile' or contains(@id,'dropdown-toggle')]/*[contains(text(),'Account')]")
+	protected WebElement testHarn_AcctProfBtn_claims;
+
+	
+	@FindBy(xpath="//ul[contains(@class,'dropdown-menu')]//li")
+	protected List<WebElement> testHarn_AcctProfDropdown;
+
+	@FindBy(xpath="//div[contains(@class,'account-btn')]//ul[contains(@class,'dropdown-menu') or contains(@id,'dropdown-options')]//a")
+	protected List<WebElement> testHarn_AcctProfDropdown_claims;
+
+	@FindBy(xpath="//ul[contains(@id,'dropdown-options-3') or contains(@id,'dropdown-options-2')]//a")
+	protected List<WebElement> testHarn_AcctProfDropdown_react;
 
 	@FindBy(xpath="//div[@class='deskHeaderContainer']//div[contains(@class,'dropdown') and contains(@class,'open')]//a[contains(@id,'ihr')]")
 	protected WebElement testHarn_desktop_AcctProf_IHRLnk;
 
+	@FindBy(xpath="//div[contains(@class,'account-btn')]//ul[contains(@class,'dropdown-menu') or contains(@id,'dropdown-options')]//a[contains(@href,'ihr')]")
+	protected WebElement testHarn_desktop_AcctProf_IHRLnk_claims;
+
+	//tbd @FindBy(xpath="//div[@data-testid='shared-header']//ul[@aria-expanded='true' and (@id='dropdown-options-3' or @id='dropdown-options-2')]//a[@data-testid='TARGET_AWARE_HEALTH_RECORD']")
+	@FindBy(xpath="//div[@data-testid='shared-header']//ul[@aria-expanded='true' and contains(@id,'dropdown-options')]//a[@data-testid='TARGET_AWARE_HEALTH_RECORD']")
+	protected WebElement testHarn_desktop_AcctProf_IHRLnk_react;
+	
 	@FindBy(xpath="//h1[contains(text(),'Welcome') and contains(text(),'Health Record')]")
 	protected WebElement heathRecordPgHeaderText;
 
@@ -155,5 +183,8 @@ public class HealthRecordWebElements  extends UhcDriver {
 
 	@FindBy(xpath="//div[contains(@class,'formsAndResourcesContainer')]//a[contains(text(),'Senior Supplement Plan')]")
 	protected WebElement comboTab_SSP_planDoc;
+	
+	@FindBy(xpath="//h1[contains(.,'Benefit Summary')]")
+	protected WebElement benefitsPgHeader;
 
 }
