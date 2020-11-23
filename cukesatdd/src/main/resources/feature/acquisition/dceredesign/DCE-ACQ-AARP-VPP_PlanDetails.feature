@@ -359,7 +359,7 @@ Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanDetails AARP - To test DCE - VPP Plan De
       
      @editPharmacyFromVPPDetail
      
-       Scenario Outline: Test to verify user can edit the pharamcy from detail page 
+       Scenario Outline: Test to verify user can edit the pharamcy from vpp detail page 
     Given the user is on the AARP medicare site landing page
     When the user performs plan search using following information in the AARP site
       | Zip Code        | <zipcode>         |
@@ -382,9 +382,38 @@ Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanDetails AARP - To test DCE - VPP Plan De
     Then user clicks on change pharmacy link from details page
     
      
-      @DCE_Redesign_VPPSummary_to_Vpp_Details_MAPD
-     
       Examples: 
       | zipcode | plantype | county | isMultutiCounty | drug1     | drug2                | drug3      | drug4         | drug5            | drug6   | planname                                           |
       |   90210 | MAPD     | none   | no              | meloxicam | diclofenac potassium | febuxostat | buprenorphine | fentanyl citrate | Lipitor | AARP Medicare Advantage SecureHorizons Focus (HMO) |
+      
+      @drugDetailPharmacyFunctionality 
+      
+        Scenario Outline: Test to verify sort, pagination, invalid zipcode error functionality for change pharmacy on drug detail page
+       Given the user is on the AARP medicare site landing page
+    When the user performs plan search using following information in the AARP site
+      | Zip Code        | <zipcode>         |
+      | County Name     | <county>          |
+      | Is Multi County | <isMultutiCounty> |
+    Then the user navigates to the plan details for the given plan type in AARP site
+      | Plan Type | <plantype> |
+      | Plan Name | <planname> |
+    And I access the DCE Redesign from Plan Details
+    Then the user validates Get Started Page
+    Then the user clicks on Build Drug List to navigate to Build Drug List Page
+    Then the user searches and adds the following Drug to Drug List
+      | DrugName | <drug1> |   
+    And clicks on Review drug cost button for detail page
+    Then user clicks on change pharmacy link from details page
+     Then user verify details page change pharmacy modal
+     When user selects Preferred mail order pharmacy from drug detail page
+     Then the message "OptumRx Home Delivery only provides 90-day refill for your drugs." should be displayed on change pharmacy modal from drug detail page
+     And user verify the default distance on change pharmacy modal from drug detail
+     When user sort the pharmacy list by "A to Z" from drug detail
+    Then pharmacy list should be displayed in ascending order from drug detail
+    When user sort the pharmacy list by "Z to A" from drug detail
+    Then pharmacy list should be displayed in descending order from drug details
+    
+      Examples: 
+      | zipcode | plantype | county | isMultutiCounty | drug1     | drug2                | drug3      | drug4         | drug5            | drug6   | planname                                           |
+      |   90001 | MAPD     | none   | no              | meloxicam | diclofenac potassium | febuxostat | buprenorphine | fentanyl citrate | Lipitor | AARP Medicare Advantage SecureHorizons Focus (HMO) |
       

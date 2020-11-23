@@ -1715,4 +1715,47 @@ public void user_should_verify_you_pay_value_for_not_covered_drug_in_drug_pricin
 		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
 		drugSummaryPage.updateDistance(distance);
 	}
+	
+	@When("^user selects Preferred mail order pharmacy from drug detail page$")
+	public void user_selects_Preferred_mail_order_pharmacy_from_drug_detail_page()  {
+		DrugDetailsPage drugDetailsPage = new DrugDetailsPage(driver);
+		drugDetailsPage.selectPreferredMailOrderPharmacyDrugDetails();
+		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetailsPage);
+	}
+	
+	@Then("^the message \"([^\"]*)\" should be displayed on change pharmacy modal from drug detail page$")
+	public void should_be_displayed_on_change_pharmacy_modal_from_drug_detail_page(String mailOrderPharmacyMessage) {
+		DrugDetailsPage drugDetailsPage = new DrugDetailsPage(driver);
+		drugDetailsPage.validatePreferredMailOrderPharmacyMessageDrugDetail(mailOrderPharmacyMessage);
+		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetailsPage);
+		
+	}
+	@Then("^user verify the default distance on change pharmacy modal from drug detail$")
+	public void user_verify_the_default_distance_on_change_pharmacy_modal_from_drug_detail()  {
+		DrugDetailsPage drugDetailsPage = new DrugDetailsPage(driver);
+		drugDetailsPage.validateDefaultDistanceDrugDetails();
+		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetailsPage);
+	}
+	
+	@When("^user sort the pharmacy list by \"([^\"]*)\" from drug detail$")
+	public void user_sort_the_pharmacy_list_by_from_drug_detail(String sortOption){
+		DrugDetailsPage drugDetailsPage = new DrugDetailsPage(driver);
+		drugDetailsPage.sortPharmaciesDrugDetails(sortOption);
+		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetailsPage);
+	}
+	
+	@Then("^pharmacy list should be displayed in ascending order from drug detail$")
+	public void pharmacy_list_should_be_displayed_in_ascending_order_from_drug_detail() {
+		DrugDetailsPage drugDetailsPage = new DrugDetailsPage(driver);
+		drugDetailsPage.validatePharmaciesAscendingOrderDrugDetail();
+		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetailsPage);
+	}
+	
+	@Then("^pharmacy list should be displayed in descending order from drug details$")
+	public void pharmacy_list_should_be_displayed_in_descending_order_from_drug_detail() {
+		DrugDetailsPage drugDetailsPage = new DrugDetailsPage(driver);
+		drugDetailsPage.validatePharmaciesDescendingOrderDrugDetails();
+		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetailsPage);
+	}
+	
 }

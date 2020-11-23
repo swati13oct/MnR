@@ -3,6 +3,13 @@ package pages.acquisition.dceredesign;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,6 +34,13 @@ import gherkin.formatter.model.DataTableRow;
 import pages.acquisition.commonpages.PlanDetailsPage;
 import pages.acquisition.commonpages.VPPPlanSummaryPage;
 import pages.acquisition.commonpages.VisitorProfilePage;
+
+
+import com.github.mkolisnyk.cucumber.reporting.types.breakdown.matchers.Matcher;
+import com.google.common.collect.Ordering;
+
+import acceptancetests.util.CommonUtility;
+import atdd.framework.UhcDriver;
 
 public class DrugDetailsPage extends UhcDriver {
 
@@ -340,6 +354,12 @@ public class DrugDetailsPage extends UhcDriver {
 	
 	@FindBy(id = "prescriptiondrug")
 	private WebElement prescriptiondrugTab;
+	
+	@FindBy(xpath = "//*[@id='mailSelectPharmacyBtn0']/../../following-sibling::div[1]")
+	private WebElement mailOrderPharmacyMsg;
+	
+	@FindBy(xpath = "//*[contains(@id,'selectPharmacyBtn')]/../div//span[1]")
+	private List<WebElement> pharmacyNameList;
 
 	
 	public DrugDetailsPage(WebDriver driver) {
@@ -1299,5 +1319,43 @@ public class DrugDetailsPage extends UhcDriver {
 		
 		//Assert.assertTrue("Drug not switched to generic", editLink.isDisplayed());
 	}
-
+	
+	public void selectPreferredMailOrderPharmacyDrugDetails() {
+		waitforElement(preferredMailPharmacy);
+		preferredMailPharmacy.click();
+	}
+	public void validatePreferredMailOrderPharmacyMessageDrugDetail(String expectedMsg) {
+		waitforElement(mailOrderPharmacyMsg);
+		Assert.assertTrue("Message for Mail order pharmacy not correct" + expectedMsg + "/n" + mailOrderPharmacyMsg,
+				mailOrderPharmacyMsg.getText().trim().equals(expectedMsg));
+	}
+	public void validateDefaultDistanceDrugDetails() {
+		Select distance = new Select(clickDistanceDefaultMile);
+		Assert.assertTrue("Default distance is not 15 miles",
+				distance.getFirstSelectedOption().getText().trim().equals("15 Miles"));
+	}
+	public void sortPharmaciesDrugDetails(String sortOption) {
+		Select sort = new Select(sortDrpdown);
+		sort.selectByVisibleText(sortOption);
+	}
+	public void validatePharmaciesAscendingOrderDrugDetail() {
+		List<String> pharmacListAfterSort = new ArrayList<String>();
+		for (WebElement e : pharmacyNameList) {
+			pharmacListAfterSort.add(e.getText());
+		}
+		System.out.println("After sort" + pharmacListAfterSort);
+		Boolean sorted = Ordering.natural().isOrdered(pharmacListAfterSort);
+		Assert.assertTrue("Pharmacies are not sorted in ascending order", sorted);
+	}
+	public void validatePharmaciesDescendingOrderDrugDetails() {
+		List<String> pharmacListAfterSort = new ArrayList<String>();
+		for (WebElement e : pharmacyNameList) {
+			pharmacListAfterSort.add(e.getText());
+		}
+		System.out.println("After sort" + pharmacListAfterSort);
+		Boolean sorted = Ordering.natural().reverse().isOrdered(pharmacListAfterSort);
+		Assert.assertTrue("Pharmacies are not sorted in ascending order", sorted);
+	}
+	
+	
 }
