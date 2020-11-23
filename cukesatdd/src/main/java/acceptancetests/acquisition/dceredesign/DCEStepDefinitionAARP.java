@@ -1709,4 +1709,10 @@ public void user_should_verify_you_pay_value_for_not_covered_drug_in_drug_pricin
 		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
 		drugSummaryPage.validateInvalidZipCodeMsg(errorMessage);
 	}
+	
+	@When("^user updates the distance to \"([^\"]*)\"$")
+	public void user_updates_the_distance_to(String distance) throws InterruptedException  {
+		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
+		drugSummaryPage.updateDistance(distance);
+	}
 }

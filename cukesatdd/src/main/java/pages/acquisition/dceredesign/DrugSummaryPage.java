@@ -762,4 +762,9 @@ public class DrugSummaryPage extends UhcDriver {
 		Assert.assertTrue("Invalid zipcode message not displayed", invalidZipCodeMsg.getText().equals(expectedMsg));
 	}
 
+	public void updateDistance(String distanceValue) throws InterruptedException {
+		distanceDrpDown.click();
+		Select distance = new Select(distanceDrpDown);
+		distance.selectByVisibleText(distanceValue);
+	}
 }
