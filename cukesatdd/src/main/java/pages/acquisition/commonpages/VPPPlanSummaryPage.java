@@ -3361,7 +3361,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	//F266875 - IS Decision Guide Agency Feature : Adding new Step to Navigate to Step 1 page for IS Decision Guide.
 	//a[contains(@class, 'EBRC')]
 	
-	@FindBy(xpath = "//a[contains(@class, 'EBRC')]")
+	//@FindBy(xpath = "//a[contains(@class, 'EBRC')]")
+	@FindBy(xpath = "//a[contains(text(),'Click here to get your Decision Guide')]")
 	private WebElement DecisionGuideLink;
 
 	public IsDecisionGuideStep1 clickOnRequestADecisionGuide() {
