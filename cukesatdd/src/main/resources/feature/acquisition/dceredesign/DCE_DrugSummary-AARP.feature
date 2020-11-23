@@ -433,7 +433,7 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
       | pageName                   | drug1 | zipCode |
       | DCE Redesign - Get Started | Lipitor  |   78006 |
       
-      @dCERedesign_ChangePharmacy_AARP @F426569
+      @dCERedesign_ChangePharmacyModal_AARP @F426569
   Scenario Outline: Test to verify sort, pagination functionality for change pharmacy on drug summary page
     Given the user is on AARP medicare acquisition site landing page
     When the user navigates to following AARP medicare acquisition site page
