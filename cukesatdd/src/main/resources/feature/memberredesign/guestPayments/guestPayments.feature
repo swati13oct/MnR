@@ -164,7 +164,7 @@ Feature: 1.06.7 Member Guest Payments Page
       | TID   | planType | memberID    | dob        | siteName | Name                 | CreditCardNumber | validMonth | validYear | Email          |
       | 10000 | MAPD     | 005085470-1	  | 03/04/1943| AARP     | GuestPayCC           | 4111111111111111 | 04         | 2024      | test@optum.com |
       | 10001 | PDP     | 907996890-1 | 10/09/1940 || UHC      | GuestPayCC           | 4111111111111111 | 04         | 2024      | test@optum.com |
-     # | 10002 | MA       | 917617123-1 | 06/09/1951 | RETIREE  | GuestPayCC           | 4111111111111111 | 04         | 2024      | test@optum.com |
+     | 10002  | CMSSSA       |951281223-1 | 09/10/1962 | RETIREE  | GuestPayCC           | 4111111111111111 | 04         | 2024      | test@optum.com |
      # | 10003 | MAPD     | 915516555-1 | 10/29/1947 | PCP      | GuestPayCC           | 4111111111111111 | 04         | 2024      | test@optum.com |
       #| 10004 | MAPD     | 915516555-1 | 10/29/1947 | MEDICA   | GuestPayCC           | 4111111111111111 | 04         | 2024      | test@optum.com |
 
@@ -198,7 +198,7 @@ Feature: 1.06.7 Member Guest Payments Page
       | 10000 | MAPD     | 934177770-1 | 03/24/1946| AARP     | Guest     | A          | Payments1 | 1234512345 | 123123123 | test@optum.com |
       | 10001 | PDP      | 000088707-1 | 02/01/1931| AARP     | Guest     | B          | Payments2 | 1234512345 | 123123123 | test@optum.com |
       | 10002 | PDP      | 006738639-1 | 06/27/1937| RETIREE  | Guest     | C          | Payments3 | 1234512345 | 123123123 | test@optum.com |
-     # | 10003 | MAPD     | 978196889   | 10/19/1941 | PCP      | Guest     | D          | Payments4 | 1234512345 | 123123123 | test@optum.com |
+       | 10003 | CMSSSA     | 921317081-1   | 06/07/1945 | PCP      | Guest     | D          | Payments4 | 1234512345 | 123123123 | test@optum.com |
     #  | 10004 | MAPD     | 911808274   | 09/06/1945 | MEDICA   | Guest     | E          | Payments5 | 1234512345 | 123123123 | test@optum.com |
 
 
