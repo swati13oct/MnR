@@ -33,6 +33,8 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import com.mysql.jdbc.StringUtils;
+
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.ElementData;
 import acceptancetests.data.MRConstants;
@@ -2778,13 +2780,18 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 			System.out.println("Click to close on the create profile popup");
 			
-			if(CommonConstants.SELECTED_STATE.equalsIgnoreCase("Pennsylvania") || CommonConstants.SELECTED_STATE.equalsIgnoreCase("Puerto Rico") || 
-					CommonConstants.SELECTED_STATE.equalsIgnoreCase("Vermont")) {
-				if (validate(closeProfilePopup))
-					jsClickNew(closeProfilePopup);
+			if(!StringUtils.isNullOrEmpty(CommonConstants.SELECTED_STATE)) {
+				if(CommonConstants.SELECTED_STATE.equalsIgnoreCase("Pennsylvania") || CommonConstants.SELECTED_STATE.equalsIgnoreCase("Puerto Rico") || 
+						CommonConstants.SELECTED_STATE.equalsIgnoreCase("Virginia")) {
+					if (validate(closeProfilePopup))
+						jsClickNew(closeProfilePopup);
+				}else {
+					if (validate(keepShoppingBtn))
+						jsClickNew(keepShoppingBtn);
+				}
 			}else {
 				if (validate(keepShoppingBtn))
-				jsClickNew(keepShoppingBtn);
+					jsClickNew(keepShoppingBtn);
 			}
 			CommonUtility.checkPageIsReady(driver);
 			

@@ -24,6 +24,7 @@ import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 import gherkin.formatter.model.DataTableRow;
+import pages.acquisition.commonpages.ComparePlansPage;
 import pages.acquisition.commonpages.PlanDetailsPage;
 import pages.acquisition.commonpages.VPPPlanSummaryPage;
 import pages.acquisition.commonpages.VisitorProfilePage;
@@ -192,6 +193,8 @@ public class DrugDetailsPage extends UhcDriver {
 	public WebElement MonthlyDrug_PlanPay_month12;
 	@FindBy(xpath = "//div[@id='monthlycostdetails']//tr//td[text()= 'Month 12']//following-sibling::td[contains(text(), '$')][3]")
 	public WebElement MonthlyDrug_YouPay_month12;
+	@FindBy(xpath = "//*[name()='svg' and @class='monthly-cost-details-chart']//*[local-name()='g']//*[local-name()='rect'][1]")
+	public WebElement Graph_svg;
 	//MonthlyDrugCost Changes End
 	@FindBy(xpath = "//h2[contains(text(), 'Important Information')]")
 	public WebElement ImportantInfo_Header;
@@ -305,12 +308,21 @@ public class DrugDetailsPage extends UhcDriver {
 		openAndValidate();
 
 	}
-
+	private String CurrentFlow = "";
+	
+	public DrugDetailsPage(WebDriver driver, String Flow) {
+		super(driver);
+		PageFactory.initElements(driver, this);
+		CurrentFlow = Flow;
+		openAndValidate();
+	}
+	
 	@Override
 	public void openAndValidate() {
 		validateNew(DrugDetails_ChangePharmacyLnk);
 		validateNew(DrugDetails_DrugCostsHeading);
-		validateNew(LinkToDrugSummary);
+		if(!CurrentFlow.equalsIgnoreCase("compare"))
+			validateNew(LinkToDrugSummary);
 		validateNew(LinktoExitScenario);
 		validateNew(LinktoEditDrugList);
 	}
@@ -398,6 +410,8 @@ public class DrugDetailsPage extends UhcDriver {
 		validateNew(MonthlyDrug_TotalDrugPrice_month12);
 		validateNew(MonthlyDrug_PlanPay_month12);
 		validateNew(MonthlyDrug_YouPay_month12);
+		threadsleep(20);
+		validateNew(Graph_svg);
 
 	}
 //	MonthlyDrugCost Changes End
@@ -494,7 +508,11 @@ public class DrugDetailsPage extends UhcDriver {
 		int DrugCount_Total = DrugListItems.length-1;
 		System.out.println("Total Added Drug Count : "+DrugCount_Total);
 		WebElement TotalDrugCount = driver.findElement(By.xpath("//h2[contains(text(), '"+DrugCount_Total+" Covered)') and contains(text(), 'Your Drugs')]"));
-		for(String currentDrug : DrugListItems) {
+		int i;
+		String currentDrug;
+		System.out.println("Total Added Drug Count : "+DrugCount_Total);
+		for(i=1; i<=DrugCount_Total; i++) {
+			currentDrug = DrugListItems[i];
 			System.out.println("Current Added Drug Name : "+currentDrug);
 			WebElement DrugName = driver.findElement(By.xpath("//caption[contains(text(), 'Your Drugs')]/ancestor::table//span[contains(text(), '"+currentDrug+"')]"));
 			//WebElement DrugIntlCoverText = driver.findElement(By.xpath("//caption[contains(text(), 'Your Drugs')]/ancestor::table//span[contains(text(), '"+currentDrug+"')]//ancestor::td//following-sibling::td[contains(text(), 'Initial Coverage Cost')]"));
@@ -1147,6 +1165,69 @@ public class DrugDetailsPage extends UhcDriver {
 			Assert.fail("Expected Premium not displayed, Expected : "+premium+"    Actual Displayed : "+PremiumDisplayed);
 		}
 	}
+	
+	@FindBy(xpath = "//*[contains(@id, 'plancopaydetail')]//*[contains(text(), 'Insulin Drugs' )and contains(text(),  '$')]")
+	private WebElement CopaySection_InsulinTier;
+
+
+	public void validateInsulinTier_CopaySection(String insulinCopay) {
+		validateNew(CopaySection_InsulinTier);
+		if(CopaySection_InsulinTier.getText().contains(insulinCopay)) {
+			System.out.println("Copay Section - Insulin Tier and correct Copay is Displayed : "+CopaySection_InsulinTier.getText());
+			Assert.assertTrue("Copay Section - Insulin Tier and correct Copay is Displayed : "+CopaySection_InsulinTier.getText(),true);
+		}
+		else {
+			Assert.fail("Copay Section - Incorrect Copay Displayed;  Expected Copay: "+insulinCopay);
+		}		
+	}
+
+	public void validateInsulinDrug_YourDrugs(String insulinDrug, String insulinCopay) {
+		WebElement InsulinDrugDisplayed = driver.findElement(By.xpath("//*[contains(@id, 'drugtable')]//*[contains(text(), '"+insulinDrug+"' )]"));
+		WebElement InsulinDrugCopayDisplayed = driver.findElement(By.xpath("//*[contains(@id, 'drugtable')]//*[contains(text(), '"+insulinDrug+"' )]//following::*[contains(text(), '$') and contains(text(), 'Copay')]"));
+
+		WebElement InsulinDrugTextDisplayed = driver.findElement(By.xpath("//*[contains(@id, 'drugtable')]//*[contains(text(), '"+insulinDrug+"' )]//following::*[contains(text(), 'Savings Model')]"));
+		validateNew(InsulinDrugDisplayed);
+		validateNew(InsulinDrugCopayDisplayed);
+		validateNew(InsulinDrugTextDisplayed);
+		if(InsulinDrugCopayDisplayed.getText().contains(insulinCopay)) {
+			System.out.println("Your Drugs Section - Insulin Tier and correct Copay is Displayed : "+InsulinDrugCopayDisplayed.getText());
+			Assert.assertTrue("Your Drugs Section - Insulin Tier and correct Copay is Displayed : "+InsulinDrugCopayDisplayed.getText(),true);
+		}
+		else {
+			Assert.fail("Your Drugs Section - Incorrect Copay Displayed;  Expected Copay: "+insulinCopay);
+		}		
+	}
+
+	@FindBy(xpath = "//h2[contains(text(), 'Important Information')]//following::h3[contains(text(), 'Savings Model')]")
+	public WebElement ImportantInfo_InsulinSavingsHeader;
+	
+	@FindBy(xpath = "//h2[contains(text(), 'Important Information')]//following::*[contains(text(), 'insulin')]")
+	public WebElement ImportantInfo_InsulinSavingsText;
+
+	public void validateInsulinText_ImportantInfo() {
+		if(validateNew(ImportantInfo_InsulinSavingsText) && validateNew(ImportantInfo_InsulinSavingsHeader)) {
+			System.out.println("Important Information Section - Insulin Tier Information is Displayed;  Header: "+ImportantInfo_InsulinSavingsHeader.getText()+"    Text : "+ImportantInfo_InsulinSavingsText.getText());
+			Assert.assertTrue("Important Information Section - Insulin Tier Information is Displayed;  Header: "+ImportantInfo_InsulinSavingsHeader.getText()+"    Text : "+ImportantInfo_InsulinSavingsText.getText(),true);
+		}
+		else {
+			Assert.fail("Important Information Section - Insulin Tier Information is NOT Displayed");
+		}		
+		
+	}
+	
+	//Learn More changes Start
+    public void validatePlanNameLearnMore(String planName) {
+
+                    System.out.println("Plan Name : "+planName);
+                    WebElement PlanNameElement = driver.findElement(By.xpath("//h1[contains(text(), '"+planName+"')]"));
+                    if(validateNew(PlanNameElement)) {
+                                    Assert.assertTrue("Plan Name is correct for Learn More Page"+PlanNameElement.getText(), true);
+                    }
+                    else
+                    Assert.fail("Plan Name validation Failed for Learn More Page");
+    }
+//Learn More changes End	
+
 
 	public void clickswitchToGeneric() throws InterruptedException {
 		
@@ -1155,6 +1236,77 @@ public class DrugDetailsPage extends UhcDriver {
 		jsClickNew(switchToGenericBtn);
 		validateNew(switchToGenericSubmitBtn);
 		jsClickNew(switchToGenericSubmitBtn);
+	}
+	
+	public void validateDrugListYouPay_FromComparePage(String druglistObject,String drugYouPaylist ) {
+		String[] Drugs = druglistObject.split("&");
+		int DrugCount_Total = Drugs.length-1;
+		String currentAddedDrug;
+		String[] Drugs_YouPay = drugYouPaylist.split("&");
+
+		int i;
+		System.out.println("Total Added Drug Count : "+DrugCount_Total);
+		for(i=1; i<=DrugCount_Total; i++) {
+			currentAddedDrug = Drugs[i];
+			System.out.println("Current Added Drug Name : "+currentAddedDrug);
+			WebElement DrugName = driver.findElement(By.xpath("//caption[contains(text(), 'Your Drugs')]/ancestor::table//span[contains(text(), '"+currentAddedDrug+"')]"));
+			WebElement DrugYouPay = driver.findElement(By.xpath("//caption[contains(text(), 'Your Drugs')]/ancestor::table//span[contains(text(), '"+currentAddedDrug+"')]//ancestor::td//following-sibling::td//*[contains(text(), '$')]"));
+			String currentDrugYouPay = DrugYouPay.getText().trim();
+			String ExpectedYouPay = Drugs_YouPay[i];
+			System.out.println("Current Added Drug Name : "+currentAddedDrug);
+			System.out.println("Displayed Current Drug You Pay : "+currentDrugYouPay);
+			System.out.println("Expected Current Drug You Pay : "+ExpectedYouPay);
+
+			if(validateNew(DrugName) && validateNew(DrugYouPay) && currentDrugYouPay.contentEquals(ExpectedYouPay)) {
+				System.out.println("DCE Details Page -  Validated Drug List and You Pay for Drugs Against Compare Page Display");
+			}
+			else
+				Assert.fail("DCE Details Page - >>>  Validated FAILED  <<<  Drug List and You Pay for Drugs Against Compare Page Display");
+		}	
+	}
+
+	
+	@FindBy(xpath = "//button[contains(@dtmname, 'compare')]//*[contains(text(), 'Compare')]")
+	public WebElement DrugCosts_PlanCompareBtn;
+
+	@FindBy(xpath = "//*[contains(@id, 'compare-table-header')]")
+	public WebElement ComparePage_TableHeader;
+
+	@FindBy(xpath="//*[contains(@ng-click, 'launchDCEfromDrugPopup')]//*[contains(text(), 'Drug')]")
+	private WebElement DrugInfoModal_DrugCostDetailsBtn;
+
+	@FindBy(xpath="//*[contains(@ng-click, 'closeDrugInfopopup')]//*[contains(text(), 'Close')]")
+	private WebElement DrugInfoModal_CloseBtn;
+
+	public ComparePlansPage clickViewPlanCompareBtn_ReturnToCompare_ViewDrugModal() {
+		validateNew(DrugCosts_PlanCompareBtn);
+		jsClickNew(DrugCosts_PlanCompareBtn);
+		//CommonUtility.waitForPageLoad(driver, ComparePage_TableHeader, 30);
+		CommonUtility.waitForPageLoadNew(driver, DrugInfoModal_DrugCostDetailsBtn, 30);
+//		WebElement DrugInfoModal_Header = driver.findElement(By.xpath("//*[contains(@class, 'vpp-modal')]//*[contains(text(), '"+planName+"')]"));
+	//	validateNew(DrugInfoModal_Header);
+		
+		validateNew(DrugInfoModal_DrugCostDetailsBtn);
+		validateNew(DrugInfoModal_CloseBtn);
+		System.out.println("Returned to Plan Compare Page - Drug Info Modal");
+		return new ComparePlansPage(driver);
+	}
+
+	public ComparePlansPage clickViewBackCompareLink_ReturnToCompare_ViewDrugModal() {
+		validateNew(LinktoExitScenario);
+		if(!LinktoExitScenario.getText().contains("Compare"))
+			Assert.fail("Exit Scenario Link Text Incorrect for Compare Flow : "+LinktoExitScenario.getText());
+		
+		jsClickNew(LinktoExitScenario);
+		//CommonUtility.waitForPageLoad(driver, ComparePage_TableHeader, 30);
+		CommonUtility.waitForPageLoadNew(driver, DrugInfoModal_DrugCostDetailsBtn, 30);
+//		WebElement DrugInfoModal_Header = driver.findElement(By.xpath("//*[contains(@class, 'vpp-modal')]//*[contains(text(), '"+planName+"')]"));
+	//	validateNew(DrugInfoModal_Header);
+		
+		validateNew(DrugInfoModal_DrugCostDetailsBtn);
+		validateNew(DrugInfoModal_CloseBtn);
+		System.out.println("Returned to Plan Compare Page - Drug Info Modal");
+		return new ComparePlansPage(driver);
 	}
 
 }

@@ -2,7 +2,7 @@
 Feature: 1.10.5 DCE-REDISIGN AARP DCE Details Page Scenarios - To test DCE Details Page Flows
 
   @DCE_DrugDetailsValidation
-  Scenario Outline: To verify DCE REDESIGN Details Page from <site> home page
+  Scenario Outline: To verify DCE Details Page  <site> site - All Sections, Switch, Edit Drug, Learm more link from VPP Details and Insulin Savings model info on DCE Details Page
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     When I access the acquisition DCE Redesign from home page
@@ -41,26 +41,34 @@ Feature: 1.10.5 DCE-REDISIGN AARP DCE Details Page Scenarios - To test DCE Detai
     Then the user deletes the following drug from Drug list
       | DrugName | <deleteDrug> |
     Then the user searches and adds the following Drug to Drug List
-      | DrugName | <addDrug> |
+      | DrugName | <addDrug1> |
+    Then the user searches and adds the following Drug to Drug List
+      | DrugName | <insulinDrug> |
     Then the user validates all added drugs in DrugList
     Then the user clicks on Review Drug Costs to Land on Drug Details Page
-    Then the user validates the Drug list on Drug Details Page
+    Then the user validates Drug List in Your Drugs Section on Drug Details Page
+    Then the user validates Insulin savings on Copay section, Your Drugs and Important Information Section
+      | InsulinCopay | <insulinCopay> |
+      | Insulin Drug | <insulinDrug>  |
     Then the user validates Important information section
-    #Then the user validates Disclaimers section
-    Then the user validates link to Drug Summary Page
+    Then the user Clicks button to VPP Plan Details Page from Drug Details Page
+    Then the user clicks PrescriptionBenifit Tab on Plan Details Page
+    Then the user clicks Learn More button on Prescription Drug Costs Tab on Plan Details Page
+    Then the user validates planName on LearnMore page matches plan Name in VPP
 
     @DCE_DrugDetailsValidation_AARP
     Examples: 
-      | drugnameAutocomplete | drug1   | zipCode | planType | planName                                            | site | brandDrug | genericDrug | deleteDrug | addDrug |
-      | ativ                 | Humalog |   80002 | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) | AARP | Ativan    | orazepam    | Humalog    | Lipitor |
+      | drugnameAutocomplete | drug1   | zipCode | planType | planName                                            | site | brandDrug | genericDrug | deleteDrug | addDrug1 | insulinDrug    | insulinCopay |
+      | ativ                 | Humalog |   80002 | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) | AARP | Ativan    | orazepam    | Humalog    | Lipitor  | insulin lispro | $35          |
 
     @DCE_DrugDetailsValidation_UHC
     Examples: 
-      | drugnameAutocomplete | drug1   | zipCode | planType | planName                                            | site | brandDrug | genericDrug | deleteDrug | addDrug |
-      | ativ                 | Humalog |   80002 | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) | UHC  | Ativan    | Lorazepam   | Humalog    | Lipitor |
+      | drugnameAutocomplete | drug1   | zipCode | planType | planName                                      | site | brandDrug | genericDrug | deleteDrug | addDrug1 | insulinDrug    | insulinCopay |
+      | ativ                 | Humalog |   33111 | MAPD     | Medica HealthCare Plans MedicareMax (HMO)     | UHC  | Ativan    | orazepam    | Humalog    | Lipitor  | insulin lispro | $30          |
+      | ativ                 | Humalog |   33111 | SNP      | Preferred Special Care Miami-Dade (HMO C-SNP) | UHC  | Ativan    | orazepam    | Humalog    | Lipitor  | insulin lispro | $15          |
 
   @DCE_DrugDetailsDynamicCopay_Preferred
-  Scenario Outline: To verify DCE REDESIGN Details Page for Dynamic copay section for Preferred Pharmacy Copay from <site> home page
+  Scenario Outline: To verify DCE Details Page  <site> site - for Dynamic copay section for Preferred Pharmacy Copay
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     When I access the acquisition DCE Redesign from home page
@@ -105,7 +113,7 @@ Feature: 1.10.5 DCE-REDISIGN AARP DCE Details Page Scenarios - To test DCE Detai
       | vigabatrin | Fanapt |   80001 | PDP      | AARP MedicareRx Walgreens (PDP) | UHC  | Preferred Retail | Preferred Mail   | KING SOOPERS PHARMACY  | Standard Retail      |
 
   @DCE_DrugDetailsDynamicCopay_Standard
-  Scenario Outline: To verify DCE REDESIGN Details Page for Dynamic copay section for Standard Pharmacy Copay from <site> home page
+  Scenario Outline: To verify DCE Details Page  <site> site - for Dynamic copay section for Standard Pharmacy Copay
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     When I access the acquisition DCE Redesign from home page
@@ -147,7 +155,7 @@ Feature: 1.10.5 DCE-REDISIGN AARP DCE Details Page Scenarios - To test DCE Detai
       | vigabatrin | Fanapt |   78006 | SNP      | UnitedHealthcare Chronic Complete (HMO C-SNP)       | UHC  | Standard Retail | Standard Mail    |
 
   @DCE_DrugDetailsPremiumValidation
-  Scenario Outline: To verify DCE REDESIGN Details Page for Zero or Range Premium from <site> home page
+  Scenario Outline: To verify DCE Details Page  <site> site - for MS dollor Zero or Range Premium
     #Given the user is on AARP medicare acquisition site landing page
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
@@ -178,14 +186,10 @@ Feature: 1.10.5 DCE-REDISIGN AARP DCE Details Page Scenarios - To test DCE Detai
       | Orkambi |   90210 | MAPD     | UnitedHealthcare Medicare Advantage Assure (HMO)           | AARP | $0 - $  |
       | Orkambi |   75002 | SNP      | UnitedHealthcare Medicare Silver (Regional PPO C-SNP)      | AARP | $0 - $  |
       | Orkambi |   75002 | SNP      | UnitedHealthcare Dual Complete Choice (Regional PPO D-SNP) | AARP | $0      |
-      | Orkambi |   75002 | SNP      | UnitedHealthcare Dual Complete (HMO D-SNP)                 | AARP | $0 - $  |
-      | Orkambi |   66032 | SNP      | UnitedHealthcare Dual Complete LP1 (HMO-POS D-SNP)         | AARP | $0 - $  |
 
     @DCE_DrugDetailsPremiumValidation_UHC
     Examples: 
       | drug1   | zipCode | planType | planName                                                   | site | premium |
-      | Orkambi |   90210 | MAPD     | UnitedHealthcare Medicare Advantage Assure (HMO)           | UHC  | $0 - $  |
-      | Orkambi |   75002 | SNP      | UnitedHealthcare Medicare Silver (Regional PPO C-SNP)      | UHC  | $0 - $  |
       | Orkambi |   75002 | SNP      | UnitedHealthcare Dual Complete Choice (Regional PPO D-SNP) | UHC  | $0      |
       | Orkambi |   75002 | SNP      | UnitedHealthcare Dual Complete (HMO D-SNP)                 | UHC  | $0 - $  |
       | Orkambi |   66032 | SNP      | UnitedHealthcare Dual Complete LP1 (HMO-POS D-SNP)         | UHC  | $0 - $  |

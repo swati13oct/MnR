@@ -17,6 +17,7 @@ import org.testng.Assert;
 
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
+import pages.acquisition.commonpages.VisitorProfilePage;
 
 /**
  *@author sdwaraka
@@ -166,7 +167,23 @@ public class PersonalInformationPage extends UhcDriver{
 	@FindBy(xpath = "//*[contains(@id, 'medicaidNumber')]/parent::span/input")
 	private WebElement medicaidNumberField;
 	
-	 
+	@FindBy(css="a#save-return-button")
+	private WebElement saveandReturn;
+	
+	@FindBy(css="a#enrollment-saved-wc")
+	private WebElement enrollSavedClose;
+	
+	@FindBy(xpath = "//img[@alt='AARP Medicare Plans from United Healthcare']")
+	private WebElement aarpLogo;
+	
+	@FindBy(xpath = "//a[@class='enrollProfileBtn cta-button']")
+	private WebElement enrollProfileYes;
+	
+	@FindBy(id="dupIconFlyOut")
+	private WebElement shoppingCartIcon;
+	
+	@FindBy(css="a#visitor-profile-header")
+    private WebElement lnkProfile;
 
 	public PersonalInformationPage(WebDriver driver) {
 		super(driver);
@@ -590,5 +607,25 @@ public class PersonalInformationPage extends UhcDriver{
 			Validation_Flag = false;
 		return Validation_Flag;
 	}
-
+	
+	/**
+	 * This method will save and return to visitor profile page
+	 * @return
+	 */
+	public VisitorProfilePage saveAndReturnLater() {
+		
+		jsClickNew(saveandReturn);
+		jsClickNew(enrollSavedClose);
+		jsClickNew(aarpLogo);
+		jsClickNew(enrollProfileYes);
+		jsClickNew(shoppingCartIcon);
+		jsClickNew(lnkProfile);
+		if(driver.getCurrentUrl().contains("profile")) {
+			CommonUtility.checkPageIsReadyNew(driver);
+			return new VisitorProfilePage(driver);
+		}else {
+			System.out.println("Navigation to visitor profile is failed");
+			return null;
+		}
+	}
 }
