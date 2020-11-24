@@ -26,5 +26,7 @@ public class DCERedesignCommonConstants {
 	public static final String ANNUAL_ESTIMATED_TOTAL_DRUG_SUMMARY = "annualEstimatedTotalDrugSummary";
 	public static final String COVERED_DRUGS_COUNT_DRUG_SUMMARY = "coveredDrugCountDrugSummary";
 	public static final String YOUPAYLIST_ALLDRUGS = "youpaylistalldrugs";
+	public static final String PLANTYPE = "planType";
+	public static final String PLANNAME = "planName";
 
 }

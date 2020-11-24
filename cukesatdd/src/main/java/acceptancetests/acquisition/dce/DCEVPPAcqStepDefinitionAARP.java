@@ -33,7 +33,7 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
 /**
- *Functionality:DCE Acquisition
+ * Functionality:DCE Acquisition
  */
 public class DCEVPPAcqStepDefinitionAARP {
 
@@ -43,18 +43,18 @@ public class DCEVPPAcqStepDefinitionAARP {
 	public MRScenario getLoginScenario() {
 		return loginScenario;
 	}
-	
+
 	WebDriver wd;
 
-	/* DCE cost Estimator*/
+	/* DCE cost Estimator */
 	String cost;
-	
-	/* Prescription Drug tab*/
+
+	/* Prescription Drug tab */
 	String estimatedTotalAnnualCost;
-	
-	/*Plan Cost tab*/
+
+	/* Plan Cost tab */
 	String planCostTabEstimatedTotalAnnualCost;
-	
+
 	/**
 	 * @toDo:user is on AARP medicare acquisition site landing page
 	 */
@@ -549,16 +549,6 @@ public class DCEVPPAcqStepDefinitionAARP {
 		wd.manage().window().maximize();
 		List<DataTableRow> memberAttributesRow = data.getGherkinRows();
 		String planType = memberAttributesRow.get(0).getCells().get(1);
-
-		String planName=memberAttributesRow.get(1).getCells().get(1);
-		VPPPlanSummaryPage plansummaryPage =  new VPPPlanSummaryPage(wd);
-		plansummaryPage.viewPlanSummary(planType);
-		PlanDetailsPage plandetailspage= (PlanDetailsPage)plansummaryPage.navigateToPlanDetails(planName, planType);
-		if(plandetailspage!=null){
-			getLoginScenario().saveBean(PageConstants.PLAN_DETAILS_PAGE, plandetailspage);
-			getLoginScenario().saveBean(VPPCommonConstants.PLAN_TYPE, planType);
-			getLoginScenario().saveBean(VPPCommonConstants.PLAN_NAME, planName);
-
 
 		String planName = memberAttributesRow.get(1).getCells().get(1);
 		VPPPlanSummaryPage plansummaryPage = new VPPPlanSummaryPage(wd);
