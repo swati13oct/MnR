@@ -1,7 +1,7 @@
 @PlanRecommendationEngine
 Feature: Plan Recommendation Engine flow - Verify zipcode page in Plan Recommendation Engine
 
-  @PRE @planrecommendation @zipcodepage @siglecounty @F372735 @F526057
+  @PRE @planrecommendation @zipcodepage @siglecounty @F372735
   Scenario Outline: Zipcode: <Zipcode> -MultiCountyOptions: <isMultutiCounty> - To validate Single County in ZipCode Page in Plan Recommendation Engine
     Given the user is on UHC medicare acquisition site landing page
     When user navigate to Plan Recommendation Engine and Checking Breadcrumbs
@@ -13,7 +13,7 @@ Feature: Plan Recommendation Engine flow - Verify zipcode page in Plan Recommend
       | Zipcode | isMultutiCounty |
       |   90210 | NO              |
 
-  @PRE @planrecommendation @zipcodepage @multicounty @F372735 @F520228
+  @PRE @planrecommendation @zipcodepage @multicounty @F372735
   Scenario Outline: Zipcode: <Zipcode> -MultiCountyOptions: <isMultutiCounty> - To validate Multi county in ZipCode Page in Plan Recommendation Engine
     Given the user is on UHC medicare acquisition site landing page
     When user navigate to Plan Recommendation Engine and Checking Breadcrumbs
@@ -25,9 +25,9 @@ Feature: Plan Recommendation Engine flow - Verify zipcode page in Plan Recommend
     Examples: 
       | Zipcode | isMultutiCounty | county           |
       |   78006 | YES             | Bexar County     |
-#      |   77485 | YES             | Fort Bend County |
+      |   77485 | YES             | Fort Bend County |
 
-  @PRE @planrecommendation @zipcodepage @invalidZipcode @regression @F372735 @F520204
+  @PRE @planrecommendation @zipcodepage @invalidZipcode @regression @F372735
   Scenario Outline: Zipcode: <Zipcode> -MultiCountyOptions: <isMultutiCounty> - To validate Invalid Zipcode in ZipCode Page in Plan Recommendation Engine
     Given the user is on UHC medicare acquisition site landing page
     When user navigate to Plan Recommendation Engine and Checking Breadcrumbs
@@ -39,9 +39,9 @@ Feature: Plan Recommendation Engine flow - Verify zipcode page in Plan Recommend
     Examples: 
       | Zipcode | isMultutiCounty | county       |
       |   78006 | YES             | Bexar County |
-#      |   22222 | NO              |              |
-#      |    1234 | NO              |              |
-#      |     123 | NO              |              |
-#      |      12 | NO              |              |
-#      |       1 | NO              |              |
-#      |         | NO              |              |
+      |   22222 | NO              |              |
+      |    1234 | NO              |              |
+      |     123 | NO              |              |
+      |      12 | NO              |              |
+      |       1 | NO              |              |
+      |         | NO              |              |
