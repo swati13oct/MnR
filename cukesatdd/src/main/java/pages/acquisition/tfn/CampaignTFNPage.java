@@ -270,6 +270,12 @@ public class CampaignTFNPage extends UhcDriver {
 	}
 
 	public void validateFederalTFN(String tFN_Xpath) {
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		WebElement TFNelement = driver.findElement(By.xpath(tFN_Xpath));
 		validateNew(TFNelement);	
 		if(validateNew(TFNelement) && TFNelement.isDisplayed()) {
