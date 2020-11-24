@@ -32,7 +32,7 @@ import pages.acquisition.ulayer.AcquisitionHomePage;
 import pages.acquisition.ulayer.GlobalWebElements;
 import pages.acquisition.ulayer.UlayerTFNPage;
 import pages.acquisition.ulayer.VPPPlanSummaryPage;
-import pages.acquisition.ulayer.VisitorProfilePage;
+import pages.acquisition.commonpages.VisitorProfilePage;
 
 public class CampaignTFNStepDefinitionAARP {
 
@@ -440,7 +440,7 @@ public void the_user_clicks_on_the_shopping_cart_icon_in_AARP_site_Campaign_TFN(
 public void the_user_navigates_to_following_DCE_Page_URL_and_validate_Federal_TFN(DataTable arg1) throws Throwable {
 	Map<String, String> inputAttributesMap=parseInputArguments(arg1);
 	String URLpath = inputAttributesMap.get("DCE URL");
-	String TFN_Xpath = "//*[//button[@id='sam-call-button']//*[contains(@class,'sam__button__text desktop')]";
+	String TFN_Xpath = "//button[contains(@id,'sam-call-button')]//*[contains(@class,'sam__button__text desktop')]";
 	CampaignTFNPage tfnPage = (CampaignTFNPage) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE);
 	tfnPage.navigateToUrl(URLpath);
 	tfnPage.validateFederalTFN(TFN_Xpath);

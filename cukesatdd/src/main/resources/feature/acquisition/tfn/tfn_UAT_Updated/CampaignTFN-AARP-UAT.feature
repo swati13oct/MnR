@@ -14,9 +14,9 @@ Feature: UAT Scripts-To test Campaign TFN in all flows on AARP site
      # | MA URL    | <maUrl> |
      # | TFN Xpath | <maTFN> |
     Then the user navigate to following MedED Pages URL and validate Federal TFN  
-      | MedEd URL    | <medicareUrl> |
+      | MEDICARE URL    | <medicareUrl> |
       | TFN Xpath | <medicareTFN> |
-   Then the user navigates to Medsupp Plans in VPP and validates Medsupp TFN
+   Then the user navigates to Medsupp Plans in VPP and validates Medsupp TFNmarke
  Then the user navigates to PDP Plan Details Page and validates Federal TFN
  Then the user navigates to PDP OLE Page and validates Federal TFN
  Then the user navigates to homepage validates Federal TFN
