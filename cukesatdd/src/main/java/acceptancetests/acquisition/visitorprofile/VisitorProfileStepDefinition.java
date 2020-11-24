@@ -7,6 +7,7 @@ import java.util.Map;
 import org.junit.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstants;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
@@ -16,10 +17,11 @@ import gherkin.formatter.model.DataTableRow;
 import pages.acquisition.commonpages.AcquisitionHomePage;
 import pages.acquisition.commonpages.ComparePlansPage;
 import pages.acquisition.commonpages.DrugCostEstimatorPage;
-import pages.acquisition.dceredesign.GetStartedPage;
 import pages.acquisition.commonpages.PlanDetailsPage;
 import pages.acquisition.commonpages.VPPPlanSummaryPage;
 import pages.acquisition.commonpages.VisitorProfilePage;
+import pages.acquisition.dceredesign.BuildYourDrugList;
+import pages.acquisition.dceredesign.GetStartedPage;
 import pages.acquisition.ulayer.VisitorProfileTestHarnessPage;
 /**
  * @author bnaveen4
@@ -33,7 +35,7 @@ public class VisitorProfileStepDefinition {
 	public MRScenario getLoginScenario() {
 		return loginScenario;
 	}
-
+	
 	@And("^the user selects the state drop down value in home page$")
 	public void the_user_selects_the_state_drop_down_value_in_AARP_home_page(DataTable givenAttributes) {
 		List<DataTableRow> givenAttributesRow = givenAttributes.getGherkinRows();
@@ -48,6 +50,8 @@ public class VisitorProfileStepDefinition {
 		AcquisitionHomePage acqHomePage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 
+		CommonConstants.SELECTED_STATE  = state; 
+		
 		acqHomePage.selectState(state);
 	}
 	
@@ -209,8 +213,8 @@ public class VisitorProfileStepDefinition {
 	@And("^user clicks on Edit Drug and Pharmacy on visitor profile page$")
 	public void user_clicks_on_Edit_Drug_and_Pharmacy_on_visitor_profile_page() {
 		VisitorProfilePage visitorProfile = (VisitorProfilePage) getLoginScenario().getBean(PageConstants.VISITOR_PROFILE_PAGE);
-		GetStartedPage dcePage = visitorProfile.clickOnEditDrugAndPharmacy();
-		getLoginScenario().saveBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE, dcePage);
+		BuildYourDrugList DCEbuildDrugList = visitorProfile.clickOnEditDrugAndPharmacy();
+		getLoginScenario().saveBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE, DCEbuildDrugList);
 	}
 	
 	@And("^user delets all the added providers on visitor profile page$")
@@ -258,6 +262,7 @@ public class VisitorProfileStepDefinition {
 		
 		VisitorProfilePage visitorProfile = (VisitorProfilePage) getLoginScenario().getBean(PageConstants.VISITOR_PROFILE_PAGE);
 		visitorProfile.signIn(username, password);
+		getLoginScenario().saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfile);
 	}
 	
 	@And("^enroll In Plan should not be clickable on Visitor Profile page in Agent mode$")
@@ -348,6 +353,29 @@ public class VisitorProfileStepDefinition {
 		VPPPlanSummaryPage planSummary = visitorProfilePage.backToPlans();
 		
 		getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, planSummary);
+	}
+	
+	@And("^validate OLE details$")
+	public void validate_OLE_details(DataTable oleDetails) {
+		VisitorProfilePage visitorProfile = (VisitorProfilePage) getLoginScenario().getBean(PageConstants.VISITOR_PROFILE_PAGE);
+		visitorProfile.validateOLEDetails(oleDetails);
+		
+	}
+	
+	@And("^the user cancel the enrollment$")
+	public void the_user_cance_the_enrollments(DataTable cancelOLEDetails) {
+		
+		List<DataTableRow> plannameAttributesRow = cancelOLEDetails.getGherkinRows();
+		Map<String, String> plannameAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < plannameAttributesRow.size(); i++) {
+
+			plannameAttributesMap.put(plannameAttributesRow.get(i).getCells().get(0),
+					plannameAttributesRow.get(i).getCells().get(1));
+		}
+		String planName = plannameAttributesMap.get("Plan Name");
+		
+		VisitorProfilePage visitorProfile = (VisitorProfilePage) getLoginScenario().getBean(PageConstants.VISITOR_PROFILE_PAGE);
+		visitorProfile.cancelEnrollment(planName);
 	}
 } 
 

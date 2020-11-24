@@ -5,9 +5,12 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Collections;
 import java.util.Comparator;
+
 import java.util.List;
+import java.util.Map;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
@@ -308,14 +311,14 @@ public class DrugSummaryPage extends UhcDriver {
 
 	@FindBy(id = "priceLinkBtn_0")
 	private WebElement viewProceBtn;
-
-	@FindBy(xpath = "//a[contains(@id,'switchToGenericLink')]")
+	
+	@FindBy(xpath = "//*[contains(@id,'drugtable')]//button[contains(text(),'Switch to Generic')]")
 	private WebElement switchToGenericBtn;
 
 	@FindBy(xpath = "//span[contains(text(),'Lipitor')]/following::a[contains(@id,'switchToGenericLink')]")
 	private WebElement lipitorSwitchToGenericBtn;
-
-	@FindBy(xpath = "//button[@type='submit']//span[text()='Switch to Generic']")
+	
+	@FindBy(xpath = "//button[contains(@type,'submit')]//*[contains(text(),'Switch to Generic')]")
 	private WebElement switchToGenericSubmitBtn;
 
 	@FindBy(xpath = "//table/tbody/tr/td[1]")
@@ -337,49 +340,49 @@ public class DrugSummaryPage extends UhcDriver {
 	 */
 
 	public void clickViewPricing() {
-		// validate(viewProceBtn);
-		// viewProceBtn.click();
-		validate(drugPricingLink);
+		//validateNew(viewProceBtn);
+		//viewProceBtn.click();
+		validateNew(drugPricingLink);
 		drugPricingLink.click();
 	}
 
 	public void clickswitchToGeneric() throws InterruptedException {
-		Thread.sleep(6000);
-		validate(drugTitle);
-		validate(switchToGenericBtn);
-		switchToGenericBtn.click();
-		validate(switchToGenericSubmitBtn);
-		switchToGenericSubmitBtn.click();
+		
+		//validateNew(drugTitle);
+		validateNew(switchToGenericBtn);
+		jsClickNew(switchToGenericBtn);
+		validateNew(switchToGenericSubmitBtn);
+		jsClickNew(switchToGenericSubmitBtn);
 	}
 
 	public void clicklipitorswitchToGeneric() throws InterruptedException {
 		Thread.sleep(6000);
-		validate(drugTitle);
-		validate(lipitorSwitchToGenericBtn);
+		validateNew(drugTitle);
+		validateNew(lipitorSwitchToGenericBtn);
 		lipitorSwitchToGenericBtn.click();
-		validate(switchToGenericSubmitBtn);
+		validateNew(switchToGenericSubmitBtn);
 		switchToGenericSubmitBtn.click();
 	}
 
 	public void clickOnPdpPlan() throws InterruptedException {
 		Thread.sleep(6000);
-		validate(pdpPlan);
+		validateNew(pdpPlan);
 		pdpPlan.click();
-		validate(viewProceBtn);
+		validateNew(viewProceBtn);
 		viewProceBtn.click();
 	}
 
 	public void verifyDrugListsUpdated(String genericDrug) throws InterruptedException {
 		Thread.sleep(6000);
-		validate(drugTitle);
+		validateNew(drugTitle);
 		/*
 		 * for(int i=0;i<drugNames.size();i++) {
 		 * System.out.println(drugNames.get(i).getText()); }
 		 */
-		validate(drugNames);
-		System.out.println(drugNames.getText() + "   " + genericDrug);
-		Assert.assertTrue("Drug not switched to generic", drugNames.getText().contains(genericDrug));
-		validate(drugClose);
+		validateNew(drugNames);
+		System.out.println(drugNames.getText()+"   "+genericDrug);
+		Assert.assertTrue("Drug not switched to generic",drugNames.getText().contains(genericDrug));
+		validateNew(drugClose);
 		drugClose.click();
 	}
 
@@ -425,8 +428,8 @@ public class DrugSummaryPage extends UhcDriver {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		validate(clickPdpplan);
-		JavascriptExecutor je = (JavascriptExecutor) driver;
+		validateNew(clickPdpplan);
+		JavascriptExecutor je = (JavascriptExecutor)driver;
 		je.executeScript("arguments[0].click()", clickPdpplan);
 		// clickPdpplan.click();
 
@@ -434,11 +437,13 @@ public class DrugSummaryPage extends UhcDriver {
 
 	@FindBy(xpath = "//div[contains(text(),'If you qualify for LIS,')]")
 	public WebElement drugPricingDeductText;
+	
+	public void verifyTheTextAlert()
+	{
+		
+		validateNew(alertTextImg);
+		validateNew(viewProceBtn);
 
-	public void verifyTheTextAlert() {
-
-		validate(alertTextImg);
-		validate(viewProceBtn);
 	}
 
 	public void verifyDrugPricingText() {
@@ -449,9 +454,11 @@ public class DrugSummaryPage extends UhcDriver {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		validate(drugTitle);
-		validate(switchToGenericBtn);
-		validate(drugPricingDeductText);
+
+		validateNew(drugTitle);
+		validateNew(switchToGenericBtn);
+		validateNew(drugPricingDeductText);
+		
 	}
 
 	public void verifyDrugCoverageAndYouPayNotCoveredDrug() {
@@ -487,8 +494,9 @@ public class DrugSummaryPage extends UhcDriver {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		validate(clickSnpplan);
-		JavascriptExecutor je = (JavascriptExecutor) driver;
+
+		validateNew(clickSnpplan);
+		JavascriptExecutor je = (JavascriptExecutor)driver;
 		je.executeScript("arguments[0].click()", clickSnpplan);
 	}
 
@@ -545,6 +553,35 @@ public class DrugSummaryPage extends UhcDriver {
 		changePharmacy.click();
 	}
 
+	// Code change Start - Added by F&F for Change Pharmacy to NC Pharmacy scenario
+
+	@FindBy(xpath = "//*[@class='uhc-button__text'][contains(text(),'Save and Update Drug Costs')]")
+	public WebElement saveDrugBtn;
+
+	public void SelectPharmacy(String PharmacytoSelect) {
+
+		validateSelectPharmacyPage();
+		WebElement PharmacyName = driver.findElement(By.xpath("(//button[contains(@id, 'selectPharmacyBtn') and contains(@aria-label, 'Select "+PharmacytoSelect+"')])[1]"));
+		jsClickNew(PharmacyName);
+		validateNew(saveDrugBtn);
+		saveDrugBtn.click();		
+	}
+	
+	@FindBy(xpath = "//*[contains(@class, 'pharmacy-plan-desc')]")
+	private WebElement PharmacyNameText;
+
+	public void validatePharmacyName(String PharmacyName) {
+
+		if(validateNew(PharmacyNameText) && PharmacyNameText.getText().contains(PharmacyName)) {
+			Assert.assertTrue("Correct Pharmacy Name is Displayed : "+PharmacyNameText.getText(),true);
+		}
+		else {
+			Assert.fail("Correct Pharmacy Name is NOT Displayed : "+PharmacyNameText.getText());
+		}
+	}
+	
+	// Code change End - Added by F&F for Change Pharmacy to NC Pharmacy scenario	
+	
 	public DrugSummaryPage selectPharmacyModalDisplayed() throws InterruptedException {
 		waitforElementNew(selectPharmacyHeader, 30);
 		if (validateNew(selectPharmacyHeader)) {
@@ -552,14 +589,18 @@ public class DrugSummaryPage extends UhcDriver {
 		}
 		return null;
 	}
-
-	public DrugSummaryPage validateSelectPharmacyPage() throws InterruptedException {
-		if (validateNew(selectPharmacyModalCloseBtn) && validateNew(selectedPharmacyLink)
-				&& validateNew(distanceDrpDown) && validateNew(pharmacyZipcodeSearch) && validateNew(pharmacySearchBtn)
-				&& validateNew(preferredMailPharmacy) && validateNew(pharmacyListSection)
-				&& validateNew(matchingPharmacyCount) && validateNew(sortDrpdown) && validateNew(backBtn)
-				&& validateNew(nextBtn)) {
-			return new DrugSummaryPage(driver);
+	
+	public DrugSummaryPage validateSelectPharmacyPage() {
+		if(validateNew(selectPharmacyModalCloseBtn) && validateNew(selectedPharmacyLink) &&	validateNew(distanceDrpDown) &&
+		validateNew(pharmacyZipcodeSearch)&&
+		validateNew(pharmacySearchBtn) &&
+		validateNew(preferredMailPharmacy)&&
+		validateNew(pharmacyListSection)&&
+		validateNew(matchingPharmacyCount)&&
+		validateNew(sortDrpdown)&&
+		validateNew(backBtn)&&
+		validateNew(nextBtn)) {
+		return new DrugSummaryPage(driver);
 		}
 
 		return null;
@@ -593,6 +634,95 @@ public class DrugSummaryPage extends UhcDriver {
 					+ PremiumDisplayed);
 		}
 	}
+	
+	public Map<String, String> captureDrugCosts(String planName) {
+		Map<String, String> DrugDetails = new HashMap<String, String>();
+		
+		WebElement drugCosts_AvgMonDrugCost_Amount = driver.findElement(By.xpath("//*[contains(text(),'"+planName+"')]/ancestor::*[contains(@class,'uhc-card__header')]//following-sibling::*[contains(@class,'uhc-card__content')]//*[contains(text(), 'Average Monthly Drug Cost')]//following-sibling::div[contains(text(), '$')]"));
+		WebElement drugCosts_MonthlyPremium_Amount = driver.findElement(By.xpath("//*[contains(text(),'"+planName+"')]/ancestor::*[contains(@class,'uhc-card__header')]//following-sibling::*[contains(@class,'uhc-card__content')]//*[contains(text(), 'Monthly Premium')]//following-sibling::div[contains(text(), '$')]"));
+		WebElement drugCosts_AnnualEstTotal_Amount = driver.findElement(By.xpath("//*[contains(text(),'"+planName+"')]/ancestor::*[contains(@class,'uhc-card__header')]//following-sibling::*[contains(@class,'uhc-card__content')]//*[contains(text(), 'Annual Estimated')]//following-sibling::div[contains(text(), '$')]"));
+
+		
+
+		String AVG_MONTHLY = drugCosts_AvgMonDrugCost_Amount.getText();
+		String MONTHLY_PREMIUM = drugCosts_MonthlyPremium_Amount.getText();
+		String ANNUAL_ESTIMATED_TOTAL = drugCosts_AnnualEstTotal_Amount.getText();
+		String COVERED_DRUGS_COUNT = drugsCovered.getText();
+		System.out.println("Covered Drug Text : "+COVERED_DRUGS_COUNT);
+		DrugDetails.put("AVG_MONTHLY", AVG_MONTHLY);
+		DrugDetails.put("MONTHLY_PREMIUM", MONTHLY_PREMIUM);
+		DrugDetails.put("ANNUAL_ESTIMATED_TOTAL", ANNUAL_ESTIMATED_TOTAL);
+		DrugDetails.put("COVERED_DRUGS_COUNT", COVERED_DRUGS_COUNT);
+		
+		return DrugDetails;
+	}
+	
+	
+	// Code change Start - Added by F&F for Drug Summary Regression Scenario - Switch to Generic	
+
+	@FindBy(xpath = "//*[@id='modal-label' and contains(text(), 'Switch to Generic')]")
+	public WebElement SwitchPageHeader;
+	
+	@FindBy(xpath = "//img[contains(@class,'uhc-modal__close')]")
+	public WebElement SwitchPageCloseBtn;
+	
+	public SwitchToGeneric clickSwitchGeneric(String brandDrug) {
+		CommonUtility.waitForPageLoadNew(driver, DrugPricing_CloseBtn, 20);
+		validateNew(DrugPricing_Header);
+		WebElement SwitchLink = driver.findElement(By.xpath("//*[contains(text(), '"+brandDrug+"')]//following::a[contains(text(), 'Switch ')]"));
+		jsClickNew(SwitchLink);
+		CommonUtility.waitForPageLoadNew(driver, SwitchPageHeader, 20);
+		if(validateNew(SwitchPageHeader) && validateNew(SwitchPageCloseBtn)) {
+			return new SwitchToGeneric(driver);
+		}
+		Assert.fail("Did not Navigate to Switch To Generic Page");
+		return null;
+	}
+	
+	
+	@FindBy(xpath = "//h3[contains(text(), 'Drug Pricing')]")
+	public WebElement DrugPricing_Header;
+	
+	@FindBy(xpath = "//*[contains(@id, 'cancelicon')]")
+	public WebElement DrugPricing_CloseBtn;
+	
+	public void ValidatesDrugsList(String druglistObject) {
+		CommonUtility.waitForPageLoadNew(driver, DrugPricing_CloseBtn, 20);
+		validateNew(DrugPricing_Header);
+		String[] Drugs = druglistObject.split("&");
+		int DrugCount_Total = Drugs.length-1;
+		String currentAddedDrug;
+		int i;
+		System.out.println("Total Added Drug Count : "+DrugCount_Total);
+		for(i=1; i<=DrugCount_Total; i++) {
+			currentAddedDrug = Drugs[i];
+			System.out.println("Current Added Drug Name : "+currentAddedDrug);
+			WebElement DrugName = driver.findElement(By.xpath("//span[contains(text(), '"+currentAddedDrug+"')]"));
+			WebElement DrugYouPay = driver.findElement(By.xpath("//span[contains(text(), '"+currentAddedDrug+"')]//following::*[contains(text(), '$')]"));
+
+			if(validateNew(DrugName) && validateNew(DrugYouPay)) {
+				System.out.println("Drug Summary Page, Drug Pricing Modal -  Validated Drug List for Drug and You Pay : "+currentAddedDrug);
+			}
+			else
+				Assert.fail("Drug Summary Page, Drug Pricing Modal -  Validation FAILED for Drug List for Drug and You Pay : "+currentAddedDrug);
+		}	
+		validateNew(DrugPricing_CloseBtn);
+		jsClickNew(DrugPricing_CloseBtn);
+	}
+
+	@FindBy(xpath = "//h5[contains(text(), 'Drugs Covered')]//following-sibling::*[contains(text(), ' of ')]")
+	public WebElement DrugsCoveredText;
+
+	public void ValidateNCPharmacyCoveredDrugs() {
+		
+		if(validateNew(DrugsCoveredText)) {
+			System.out.println("Drug Summary Page, Drug Covered Text Displayed for Not Covered Pharmacy");
+		}
+		else
+			Assert.fail("Drug Summary Page, Drug Covered Text NOT Displayed for Not Covered Pharmacy");
+	}
+	
+	// Code change End - Added by F&F for Drug Summary Regression Scenario - Switch to Generic and for NC Pharmacy Covered text validation
 
 	public void verifyReturnToProfileDisplayed() {
 		try {

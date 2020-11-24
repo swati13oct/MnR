@@ -77,6 +77,9 @@ public class VppCommonStepDefinition {
  
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, aquisitionhomepage);
+		getLoginScenario().saveBean(DCERedesignCommonConstants.DRUGLIST, " ");
+		getLoginScenario().saveBean(DCERedesignCommonConstants.YOUPAYLIST_ALLDRUGS, " ");
+
 		if(site.equalsIgnoreCase("AARP"))
 			aquisitionhomepage.validateSubtitle();
 	}
@@ -126,8 +129,8 @@ public class VppCommonStepDefinition {
 		PlanDetailsPage plandetailspage= plansummaryPage.navigateToPlanDetails(planName, planType);
 		
 			getLoginScenario().saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE, plandetailspage);
-			getLoginScenario().saveBean(DCERedesignCommonConstants.PLANTYPE, planType);
-			getLoginScenario().saveBean(DCERedesignCommonConstants.PLANNAME, planName);
+			getLoginScenario().saveBean(VPPCommonConstants.PLAN_TYPE, planType);
+			getLoginScenario().saveBean(VPPCommonConstants.PLAN_NAME, planName);
 
 		}
 
@@ -2418,6 +2421,36 @@ public class VppCommonStepDefinition {
 			plansummaryPage.medsuppOLERightRailRulesDisclose();
 			plansummaryPage.medsuppOLERightRailEnrollmentDiscount();
 			plansummaryPage.medsuppOLERightRailLearnmore();
+		}
+		
+		@Then("^agent saves two plans as favorite for user$")
+		public void agent_saves_two_plans_as_favorite_on_AARP_site_for_user(DataTable givenAttributes) {
+			VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+
+			Map<String, String> memberAttributesMap = prepareTestInput(givenAttributes);
+			String savePlanNames = memberAttributesMap.get("Test Plans");
+			String planType = memberAttributesMap.get("Plan Type");
+
+			switch (planType) {
+			case "MAPD":
+				plansummaryPage.savePlans(savePlanNames, planType);
+				break;
+			case "MA":
+				plansummaryPage.savePlans(savePlanNames, planType);
+				break;
+			case "SNP":
+				plansummaryPage.viewPlanSummary(planType);
+				plansummaryPage.savePlans(savePlanNames, planType);
+				break;
+			case "PDP":
+				plansummaryPage.viewPlanSummary(planType);
+				plansummaryPage.savePlans(savePlanNames, planType);
+				break;
+
+			default:
+				break;
+			}
 		}
 }
 		

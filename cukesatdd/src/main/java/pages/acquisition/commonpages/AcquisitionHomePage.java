@@ -1880,7 +1880,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		private void CheckPageLoad() {
 			CommonUtility.checkPageIsReadyNew(driver);
 			System.out.println("Current page URL: " + driver.getCurrentUrl());
-			checkModelPopup(driver, 30);
+			checkModelPopup(driver, 20);
 
 		}
 

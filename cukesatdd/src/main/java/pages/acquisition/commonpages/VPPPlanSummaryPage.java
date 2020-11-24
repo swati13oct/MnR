@@ -13,9 +13,6 @@ import java.util.Set;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.TimeUnit;
 
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -24,14 +21,15 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.logging.LogEntry;
-import org.openqa.selenium.logging.LogType;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import com.google.common.base.Strings;
+import com.mysql.jdbc.StringUtils;
 
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.ElementData;
@@ -42,11 +40,7 @@ import atdd.framework.UhcDriver;
 import pages.acquisition.dceredesign.DrugDetailsPage;
 import pages.acquisition.dceredesign.GetStartedPage;
 import pages.acquisition.isdecisionguide.IsDecisionGuideStep1;
-import pages.acquisition.medsuppole.MedSuppOLEPage;
 import pages.acquisition.ole.WelcomePage;
-import pages.acquisition.commonpages.ComparePlansPage;
-import pages.acquisition.commonpages.VisitorProfilePage;
-import pages.acquisition.commonpages.PlanDetailsPage;
 import pages.acquisition.vppforaep.AepVppPlanSummaryPage;
 
 
@@ -330,6 +324,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//*[contains(@id,'pop-btn-1')]")
 	private WebElement keepShoppingBtn;
 
+	@FindBy(xpath = "//a[@id='popupClose']")
+	private WebElement closeProfilePopup;
+	
 	@FindBy(id="dupIconFlyOut")
 	private WebElement shoppingCartIcon;
 	
@@ -774,6 +771,24 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	
 	@FindBy(xpath = "//h3[contains(text(),'Medicare Part B: Medical Services per Calendar Year')]")
 	private WebElement PartB;
+	
+	@FindBy(css = "div#drugsBanner>div")
+	private WebElement prescriptions;
+	
+	@FindBys(value = { @FindBy(css = "div#providersBanner ul.providers-list>li") })
+	private List<WebElement> providersList;
+	
+	@FindBy(css="a#provider-title-")
+	private WebElement existingProvidersForNonMember;
+	
+	@FindBy(css="div#newProvidersBanner>div")
+	private WebElement numberOfProviders;
+	
+	@FindBy(css = "div#CSRLoginAlert>div")
+	private WebElement agentModeBanner;
+	
+	@FindBy(css = "div#currPlansBanner>div>a")
+	private WebElement enrolledPlansBanner;
 	
 	public WebElement getValEstimatedAnnualDrugCostValue(String planName) {
 		// WebElement valEstimatedAnnualDrugCostValue =
@@ -2771,8 +2786,20 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			jsClickNew(listOfSavePlanIcons.get(0));
 
 			System.out.println("Click to close on the create profile popup");
-			if (validate(keepShoppingBtn))
-				keepShoppingBtn.click();
+			
+			if(!StringUtils.isNullOrEmpty(CommonConstants.SELECTED_STATE)) {
+				if(CommonConstants.SELECTED_STATE.equalsIgnoreCase("Pennsylvania") || CommonConstants.SELECTED_STATE.equalsIgnoreCase("Puerto Rico") || 
+						CommonConstants.SELECTED_STATE.equalsIgnoreCase("Virginia")) {
+					if (validate(closeProfilePopup))
+						closeProfilePopup.click();
+				}else {
+					if (validate(keepShoppingBtn))
+						keepShoppingBtn.click();
+				}
+			}else {
+				if (validate(keepShoppingBtn))
+					keepShoppingBtn.click();
+			}
 			CommonUtility.checkPageIsReady(driver);
 			
 			System.out.println("Proceed to validate 'Save Plan' link and icon disappeared after clicking it");
@@ -4595,5 +4622,115 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	}
 
+	/**
+	 * Validate the Agent Mode Banners and Enrolled Plan overlay
+	 * @param planName
+	 */
+	public void validateAgentModeBanners(String enrolledPlanName,String drugNames,String providers,String planName,String fname,String lname) {
+
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView();", agentModeBanner);
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView();", agentModeBanner);
+		System.out.println("Scrolled...");
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		waitforElementNew(agentModeBanner);
+		System.out.println("######### "+agentModeBanner.getText().trim()+"#########");
+		Assert.assertEquals("You are in Agent mode viewing "+fname+" "+lname+" profile", agentModeBanner.getText().trim());
+		
+		if(Strings.isNullOrEmpty(enrolledPlanName))
+			System.out.println("#########Empty Profile#########");
+		else
+			Assert.assertEquals(enrolledPlanName, enrolledPlansBanner.getText().trim());
+		
+		//Validate Providers
+		if(!providers.equalsIgnoreCase("no")) {
+			driver.findElement(By.xpath("//div[@class='plan-name-div']//a[text()='"+planName+"']//following::div[@class='provider-list added'][1]")).click();
+			//Validate Drugs
+			List<WebElement> providersList = driver.findElements(By.xpath("//div[@class='plan-name-div']//a[text()='"+planName+"']//following::div[@class='providers-list'][1]/ul/li"));
+			System.out.println("#########"+numberOfProviders.getText().trim()+"#########");
+			Assert.assertEquals("Number of Providers ("+providersList.size()+")", numberOfProviders.getText().trim());
+			
+			//Split the providers
+			String[] provider = providers.split(";");
+			
+			for(int i=0;i<providersList.size();i++) {
+				scrollToView(driver.findElement(By.xpath("//div[@class='plan-name-div']//a[text()='"+planName+"']//following::div[@class='providers-list'][1]/ul/li["+(i+1)+"]/div/div[contains(@class,'provider-info')]")));
+				provider[i]=provider[i].replace(":", "\n");
+				WebElement providerInfo = driver.findElement(By.xpath("//div[@class='plan-name-div']//a[text()='"+planName+"']//following::div[@class='providers-list'][1]/ul/li["+(i+1)+"]/div/div[contains(@class,'provider-info')]"));
+				String providerInfoTxt = providerInfo.getText().trim().replaceAll("\t+", "");
+				
+				Assert.assertEquals(provider[i], providerInfoTxt);
+				System.out.println("#########" + providerInfoTxt + "#########");
+				/*Assert.assertEquals(provider[i], driver.findElement(By.xpath("//div[@class='plan-name-div']//a[text()='"+planName+"']//following::div[@class='providers-list'][1]/ul/li["+(i+1)+"]/div/div[contains(@class,'provider-info')]")).getText().trim());
+				System.out.println("#########"+driver.findElement(By.xpath("//div[@class='plan-name-div']//a[text()='"+planName+"']//following::div[@class='providers-list'][1]/ul/li["+(i+1)+"]/div/div[contains(@class,'provider-info')]")).getText().trim()+"#########");*/
+			}
+		}else {
+			System.out.println("#########"+numberOfProviders.getText().trim()+"#########");
+			Assert.assertEquals("Number of Providers (0)", numberOfProviders.getText().trim());
+		}
+		
+		//Validate Plan Name
+		Assert.assertTrue(validateNew(driver.findElement(By.xpath("//a[text()='"+planName+"']"))));
+		
+		if(!drugNames.equalsIgnoreCase("no")) {
+			
+			driver.findElement(By.xpath("//div[@class='plan-name-div']//a[text()='"+planName+"']//following::div[@class='drug-list added'][1]")).click();
+			//Validate Drugs
+			List<WebElement> drugList = driver.findElements(By.xpath("//div[@class='plan-name-div']//a[text()='"+planName+"']//following::div[@class='drugs-list'][1]/ul/li[contains(@class,'drug')]"));
+			
+			for(int i=0;i<drugList.size();i++) {
+				scrollToView(driver.findElement(By.xpath("//div[@class='plan-name-div']//a[text()='"+planName+"']//following::div[@class='drugs-list'][1]/ul/li[contains(@class,'drug')]["+(i+1)+"]")));
+				Assert.assertTrue(drugNames.contains(driver.findElement(By.xpath("//div[@class='plan-name-div']//a[text()='"+planName+"']//following::div[@class='drugs-list'][1]/ul/li[contains(@class,'drug')]["+(i+1)+"]//span[contains(@class,'name')]")).getText().trim()));
+				System.out.println("#########"+driver.findElement(By.xpath("//div[@class='plan-name-div']//a[text()='"+planName+"']//following::div[@class='drugs-list'][1]/ul/li[contains(@class,'drug')]["+(i+1)+"]//span[contains(@class,'name')]")).getText().trim()+"#########");
+			}
+		}else {
+			System.out.println("#########"+prescriptions.getText().trim()+"#########");
+			Assert.assertEquals("Number of Prescriptions (0)", prescriptions.getText().trim());
+		}
+		
+	}
+	
+	/**
+	 * Validate the Agent Mode Banners for Non Member
+	 * @param planName
+	 */
+	public void validateAgentModeBannersForNonMember(String planName,String drugNames,String providers,String fname, String lname) {
+		System.out.println("######### "+agentModeBanner.getText().trim()+"#########");
+		Assert.assertEquals("You are in Agent mode viewing "+fname+" "+lname+" profile", agentModeBanner.getText().trim());
+		
+		if(!providers.equalsIgnoreCase("no")) {
+			//Validate Providers
+			String[] provider = providers.split(",");
+			for(int i=0;i<providersList.size();i++) {
+				Assert.assertEquals(provider[i], providersList.get(i).getText().trim());
+				System.out.println("#########"+providersList.get(i).getText().trim()+"#########");
+			}
+		}else {
+			System.out.println("#########"+numberOfProviders.getText().trim()+"#########");
+			Assert.assertEquals("Number of Providers (0)", numberOfProviders.getText().trim());
+		}
+		
+		Assert.assertTrue(validateNew(driver.findElement(By.xpath("//a[text()='"+planName+"']"))));
+		
+		//Validate Drugs
+		if(!drugNames.equalsIgnoreCase("no")) {
+			driver.findElement(By.xpath("//div[@class='plan-name-div']//a[text()='"+planName+"']//following::div[@class='drug-list added'][1]")).click();
+			
+			//Validate Drugs
+			List<WebElement> drugList = driver.findElements(By.xpath("//div[@class='plan-name-div']//a[text()='"+planName+"']//following::div[@class='drugs-list'][1]/ul/li[contains(@class,'drug')]"));
+			
+			for(int i=0;i<drugList.size();i++) {
+				scrollToView(driver.findElement(By.xpath("//div[@class='plan-name-div']//a[text()='"+planName+"']//following::div[@class='drugs-list'][1]/ul/li[contains(@class,'drug')]["+(i+1)+"]")));
+				Assert.assertTrue(drugNames.contains(driver.findElement(By.xpath("//div[@class='plan-name-div']//a[text()='"+planName+"']//following::div[@class='drugs-list'][1]/ul/li[contains(@class,'drug')]["+(i+1)+"]//span[contains(@class,'name')]")).getText().trim()));
+				System.out.println("#########"+driver.findElement(By.xpath("//div[@class='plan-name-div']//a[text()='"+planName+"']//following::div[@class='drugs-list'][1]/ul/li[contains(@class,'drug')]["+(i+1)+"]//span[contains(@class,'name')]")).getText().trim()+"#########");
+			}
+		}else {
+			System.out.println("#########"+prescriptions.getText().trim()+"#########");
+			Assert.assertEquals("Number of Prescriptions (0)", prescriptions.getText().trim());
+		}
+	}
 
 }

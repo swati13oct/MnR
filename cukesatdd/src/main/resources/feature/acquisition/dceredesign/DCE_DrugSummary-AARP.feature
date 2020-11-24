@@ -1,6 +1,54 @@
-@dce_redesign_Drug_summary_page_AARP @F426576
+@dce_redesign_Drug_summary_AARP
 Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
 
+  ############# DCE Summary Regression Scenario #################
+  ############# Validate - Summary Page validation, Switch to generic, Change Pharmacy, Covered Drugs view for Not Covered Pharmacy
+
+  @DCE_DrugSummary_Page
+  Scenario Outline: Test to verify the Drug summary page on <site> site - Switch to generic, Change Pharmacy and Not Covered Pharmacy Covered Drug validation
+    Given the user is on medicare acquisition site landing page
+      | Site | <site> |
+    When I access the acquisition DCE Redesign from home page
+    Then the user validates Get Started Page
+    Then the user clicks on Build Drug List to navigate to Build Drug List Page
+    Then the user searches and adds the following Drug to Drug List
+      | DrugName | <drug1> |
+    Then the user searches and adds the following Drug to Drug List
+      | DrugName | <drug2> |
+    Then the user clicks on Review Drug Costs to Land on Zip Entry Page
+    When user enters valid zipcode and county
+      | ZipCode | <zipCode> |
+    And user clicks on continue button in Zip Entry Page
+    And user verify the drug summary page
+    And user should be able to see Medicare Advantage plan by default
+    And user click on View Drug Pricing Modal
+    Then the user validates Switch to generic for following Brand Drug to Generic from Drug Summary - Drug Pricing Modal
+      | Brand Drug   | <drug1>        |
+      | Generic Drug | <genericDrug1> |
+    And user click on PDP plan to view drug pricing
+    Then the user validates Switch to generic for following Brand Drug to Generic from Drug Summary - Drug Pricing Modal
+      | Brand Drug   | <drug2>        |
+      | Generic Drug | <genericDrug2> |
+    And user click on View Drug Pricing Modal
+    And user verifies Drug List on DCE Summary Page - Drug Pricing Modal
+    And user clicks on change pharmacy link from summary page
+    Then the user selects following pharmacy and returns to DCE Summary page
+      | SelectPharmacy | <SelectPharmacy> |
+    Then the user validates Covered Drug display for NC Pharmacy selection
+
+    @dce_DrugSummary_Page_AARP
+    Examples: 
+      | site | zipCode | drug1   | drug2     | genericDrug1         | genericDrug2        | SelectPharmacy |
+      | AARP |   78006 | Lipitor | Lopressor | atorvastatin calcium | metoprolol tartrate | ROCK PHARMACY  |
+
+    @dce_DrugSummary_Page_UHC
+    Examples: 
+      | site | zipCode | drug1   | drug2     | genericDrug1         | genericDrug2        | SelectPharmacy |
+      | UHC  |   78006 | Lipitor | Lopressor | atorvastatin calcium | metoprolol tartrate | ROCK PHARMACY  |
+
+  ############# END - DCE Summary Regression Scenario #################
+  
+  
   @DCE_DrugSummary_ValidatePage_AARP
   Scenario Outline: Test to verify the Drug summary page in AARP
     Given the user is on the AARP medicare site landing page
@@ -14,45 +62,14 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
     When user enters valid zipcode and county
       | ZipCode | <zipCode> |
     #And user selects plan year in AARP
-    And user clicks on continue button in Zip Entry Page
+    And user clicks on continue button in Zip Entry Page in AARP
     #Then load screen should be displayed in AARP
     And user should be navigated to Review drug cost estimate page
     And user verify the drug summary page
 
     Examples: 
       | zipCode | plantype | county | isMultutiCounty | drug1 | planname                                           |
-      |   10001 | MAPD     | none   | no              | Emsam    | AARP Medicare Advantage SecureHorizons Focus (HMO) |
-
-  @DCE_DrugSummary_Page
-  Scenario Outline: Test to verify the Drug summary page
-    Given the user is on medicare acquisition site landing page
-      | Site | <site> |
-    When the user navigates to following medicare acquisition site page
-      | PageName | <pageName> |
-      | PagePath | <path>     |
-    Then the user validates Get Started Page
-    When the user clicks on Add drugs button
-    Then the user searches and adds the following Drug to Drug List
-      | DrugName | <drug1> |
-    And clicks on Review drug cost button
-    Then user should be navigated to zipcode and plan year capture page for AEP
-    When user enters valid zipcode and county
-      | ZipCode | <zipCode> |
-    #And user selects plan year in AARP
-    And user clicks on continue button in Zip Entry Page
-    #Then load screen should be displayed in AARP
-    And user should be navigated to Review drug cost estimate page
-    And user verify the drug summary page
-
-    @dce_DrugSummary_Page_AARP
-    Examples: 
-      | site | path                                             | pageName                   | drug1 | zipCode |
-      | AARP | health-plans/estimate-drug-costs.html/getstarted | DCE Redesign - Get Started | Lipitor  |   90210 |
-
-    @dce_DrugSummary_Page_UHC
-    Examples: 
-     | site | path                                             | pageName                   | drug1 | zipCode |
-     | UHC  | health-plans/estimate-drug-costs.html/getstarted | DCE Redesign - Get Started | Lipitor  |   90210 |
+      |   10001 | MAPD     | none   | no              | Emsam | AARP Medicare Advantage SecureHorizons Focus (HMO) |
 
   @drugSummary_SAM_Icon_AARP
   Scenario Outline: Test to verify SAM icon is visible on Drug summary page
@@ -213,7 +230,7 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
       | PageName | <pageName> |
       | PagePath | <path>     |
     Then the user validates Get Started Page
-    When the user clicks on Add drugs button
+    When the user clicks on Add drugs button    
     Then the user searches and adds the following Drug to Drug List
       | DrugName | <drug1> |
     And clicks on Review drug cost button

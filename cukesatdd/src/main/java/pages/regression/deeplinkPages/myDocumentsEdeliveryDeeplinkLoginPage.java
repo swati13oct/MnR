@@ -23,7 +23,7 @@ import pages.regression.login.ConfirmSecurityQuestion;
  * @author pminhas
  *
  */
-public class eobDeeplinkLoginPage extends UhcDriver {
+public class myDocumentsEdeliveryDeeplinkLoginPage extends UhcDriver {
 
 	@FindBy(xpath="//*[contains(@id,'submitBtn')]")
 	private static  WebElement signIn;
@@ -37,6 +37,7 @@ public class eobDeeplinkLoginPage extends UhcDriver {
 	@FindBy(xpath = "//*[contains(@onclick,'HSIDSignIn')]")
 	private WebElement mnrSignInButton;
 	
+	
 	@FindBy(xpath = "(//*[contains(@class,'btn btn-outline-primary')])[1]")
 	private WebElement homePageNotice;
 	
@@ -47,7 +48,8 @@ public class eobDeeplinkLoginPage extends UhcDriver {
 	protected WebElement homePageNotice3;
 	@FindBy(xpath = "//button[@class='btn btn-outline-primary text-transform-none home-btn']")
 	protected WebElement homePageNotice4;
-	public eobDeeplinkLoginPage(WebDriver driver) {
+
+	public myDocumentsEdeliveryDeeplinkLoginPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
 		openAndValidate();
@@ -58,13 +60,13 @@ public class eobDeeplinkLoginPage extends UhcDriver {
 				
 	}
 	//page from MR constants 	
-			private static String STAGE_DEEPLINK_URL_eob = MRConstants.STAGE_DEEPLINK_URL_eob;
+			private static String STAGE_DEEPLINK_URL_my_Documents_Edelivery = MRConstants.STAGE_DEEPLINK_URL_my_Documents_Edelivery;
 			
-			 /*This method will open deep link page */
-			public eobDeeplinkLoginPage navigateToLoginURL(){
-				start(STAGE_DEEPLINK_URL_eob);
+			 /*This method will open payments deep link page */
+			public myDocumentsEdeliveryDeeplinkLoginPage navigateToLoginURL(){
+				start(STAGE_DEEPLINK_URL_my_Documents_Edelivery);
 				driver.manage().deleteAllCookies();
-				
+
 				try {
 					Thread.sleep(10000);
 				} catch (InterruptedException e) {
@@ -134,6 +136,15 @@ public class eobDeeplinkLoginPage extends UhcDriver {
 							System.out.println("Sometimes may get NPE due to timing issue, give it one more try before giving up");
 							CommonUtility.checkPageIsReadyNew(driver);
 						}
+						//note: do not remove wait, need to give it enough time for the dashboard or error page to load
+						System.out.println("Start to wait for the dashboard (or some form of error page) to load...");
+												
+						try {
+							CommonUtility.checkPageIsReadyNew(driver);
+						} catch (NullPointerException  e) {
+							System.out.println("Sometimes may get NPE due to timing issue, give it one more try before giving up");
+							CommonUtility.checkPageIsReadyNew(driver);
+						}
 						CommonUtility.checkPageIsReadyNew(driver);
 						if (MRScenario.environment.equalsIgnoreCase("stage") || MRScenario.environment.equalsIgnoreCase("offline")
 								|| MRScenario.environment.equalsIgnoreCase("prod")
@@ -148,32 +159,61 @@ public class eobDeeplinkLoginPage extends UhcDriver {
 							{
 								System.out.println("Catch block with no significance");
 							}
-							try {
-								CommonUtility.checkPageIsReady(driver);
+							if (driver.getCurrentUrl().contains("bannerpopup.html")) {
+								System.out.println("COVID 19 Banner page has appeared");
+								try {
+									CommonUtility.waitForPageLoad(driver, homePageNotice, 20);
+									if (validate(homePageNotice, 0)) {
+										homePageNotice.click();
+										CommonUtility.checkPageIsReady(driver);
+									} else if (validate(homePageNotice2, 0)) {
+										homePageNotice2.click();
+										CommonUtility.checkPageIsReady(driver);
+									} else if (validate(homePageNotice3, 0)) {
+										homePageNotice3.click();
+										CommonUtility.checkPageIsReady(driver);
+									}
+									Thread.sleep(3000);
+								} catch (Exception e) {
+									// TODO Auto-generated catch block
+									System.out.println("Catch block");
+								}
+							} else {
+								System.out.println("COVID 19 Banner page did not appear");
+							}
+							
+							if (driver.getCurrentUrl().contains("/no-email.html")) {
+								System.out.println("No email page has appeared");
+								try {
+									CommonUtility.waitForPageLoad(driver, homePageNotice4, 20);
+									if (validate(homePageNotice4, 0)) {
+										homePageNotice4.click();
+										CommonUtility.checkPageIsReady(driver);
+									} 									
+									Thread.sleep(3000);
+								} catch (Exception e) {
+									// TODO Auto-generated catch block
+									System.out.println("Catch block");
+								}
+							} else {
+								System.out.println("NO emmail page did not appear");
+							}
+							if (driver.getCurrentUrl().contains("/anoc.html")) {
+								System.out.println("annual notice of changes page has appeared");
 								if (validate(homePageNotice, 0)) {
 									homePageNotice.click();
 									CommonUtility.checkPageIsReady(driver);
-								} else if (validate(homePageNotice2, 0)) {
-									homePageNotice2.click();
-									CommonUtility.checkPageIsReady(driver);
-								} else if (validate(homePageNotice3, 0)) {
-									homePageNotice3.click();
-									CommonUtility.checkPageIsReady(driver);
-								} else if (validate(homePageNotice4, 0)) {
-									homePageNotice4.click();
-									CommonUtility.checkPageIsReady(driver);
 								}
-								Thread.sleep(3000);
-							} catch (Exception e) {
-								System.out.println("Error occured while checking home page on banner pages." + e.getMessage());
+							} else {
+								System.out.println("annual notice of changes page did not appear");
 							}
 						
 						
 					return;
-			}
+						}}
 				}
-					}
-								
+					
+				
 				@FindBy (xpath="//h1[@class='main-heading margin-none']")
                 private WebElement textonpage;
 				
@@ -200,11 +240,9 @@ public class eobDeeplinkLoginPage extends UhcDriver {
 						}
 						counter++;
 					} while (counter < 2);
-				}
+				}				
 				
-				public boolean validateEobPage() {
-					checkForIPerceptionModel(driver);
-					CommonUtility.checkPageIsReadyNew(driver);					
+				public boolean validateMyDocumentsPage() {
 					try {
 						Thread.sleep(10000);
 					} catch (InterruptedException e) {
@@ -212,14 +250,15 @@ public class eobDeeplinkLoginPage extends UhcDriver {
 						e.printStackTrace();
 					}
 					checkForIPerceptionModel(driver);
+					CommonUtility.checkPageIsReadyNew(driver);	
 					validateNew(textonpage);
-					if (driver.getCurrentUrl().contains("/eob.html?deeplink=true")) {
+					System.out.println("*** Element Validated -->" +textonpage.getText());
+					if (driver.getCurrentUrl().contains("my-documents/overview.html?deeplink=true&WT.mc_ID=8003461&mrcid=email_fed_m")) {
 						System.out.println("*** Page URL ***" + driver.getCurrentUrl());
-						System.out.println("** User landed on EOB deeplink Page **");
+						System.out.println("** User landed on My Documents deeplink Page **");
 						System.out.println("*** PageTitle ***" + driver.getTitle());
-						//Assert.assertTrue(driver.getTitle().contains("Claims Summary"));
+						Assert.assertTrue(driver.getTitle().contains("My Documents"));
 						return true;
-						
 						} else {
 							Assert.fail("The element " + textonpage.getText() + "is not found");
 						}
