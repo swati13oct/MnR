@@ -1716,7 +1716,7 @@ public void user_should_verify_you_pay_value_for_not_covered_drug_in_drug_pricin
 		drugSummaryPage.updateDistance(distance);
 	}
 	
-	@When("^user selects Preferred mail order pharmacy from drug detail page$")
+	@When("^user selects Preferred mail order pharmacy from drug details page$")
 	public void user_selects_Preferred_mail_order_pharmacy_from_drug_detail_page()  {
 		DrugDetailsPage drugDetailsPage = new DrugDetailsPage(driver);
 		drugDetailsPage.selectPreferredMailOrderPharmacyDrugDetails();
@@ -1730,21 +1730,21 @@ public void user_should_verify_you_pay_value_for_not_covered_drug_in_drug_pricin
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetailsPage);
 		
 	}
-	@Then("^user verify the default distance on change pharmacy modal from drug detail$")
+	@Then("^user verify the default distance on change pharmacy modal from drug details$")
 	public void user_verify_the_default_distance_on_change_pharmacy_modal_from_drug_detail()  {
 		DrugDetailsPage drugDetailsPage = new DrugDetailsPage(driver);
 		drugDetailsPage.validateDefaultDistanceDrugDetails();
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetailsPage);
 	}
 	
-	@When("^user sort the pharmacy list by \"([^\"]*)\" from drug detail$")
+	@When("^user sort the pharmacy list by \"([^\"]*)\" from drug details$")
 	public void user_sort_the_pharmacy_list_by_from_drug_detail(String sortOption){
 		DrugDetailsPage drugDetailsPage = new DrugDetailsPage(driver);
 		drugDetailsPage.sortPharmaciesDrugDetails(sortOption);
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetailsPage);
 	}
 	
-	@Then("^pharmacy list should be displayed in ascending order from drug detail$")
+	@Then("^pharmacy list should be displayed in ascending order from drug details$")
 	public void pharmacy_list_should_be_displayed_in_ascending_order_from_drug_detail() {
 		DrugDetailsPage drugDetailsPage = new DrugDetailsPage(driver);
 		drugDetailsPage.validatePharmaciesAscendingOrderDrugDetail();
@@ -1757,5 +1757,86 @@ public void user_should_verify_you_pay_value_for_not_covered_drug_in_drug_pricin
 		drugDetailsPage.validatePharmaciesDescendingOrderDrugDetails();
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetailsPage);
 	}
+	
+	@When("^user clicks on next button on change pharmacy modal from drug details$")
+	public void user_clicks_on_next_button_on_change_pharmacy_modal_from_drug_detail(){
+		DrugDetailsPage drugDetailsPage = new DrugDetailsPage(driver);
+		drugDetailsPage.clickNextButtonPagination();
+		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetailsPage);
+	}
+
+	@Then("^user should be navigated to second page of pharmacy list from drug details$")
+	public void user_should_be_navigated_to_second_page_of_pharmacy_list_from_drug_details(){
+		DrugDetailsPage drugDetailsPage = new DrugDetailsPage(driver);
+		drugDetailsPage.validateSecondPageDisplayedDrugDetailPharmacy();
+		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetailsPage);
+	}
+	
+	@When("^user clicks on back button on change pharmacy modal from drug details$")
+	public void user_clicks_on_back_button_on_change_pharmacy_modal_from_drug_details(){
+		DrugDetailsPage drugDetailsPage = new DrugDetailsPage(driver);
+		drugDetailsPage.clickBackButtonPagination();
+		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetailsPage);
+	}
+	
+	@Then("^user should be navigated to first page of pharmacy list from drug details$")
+	public void user_should_be_navigated_to_first_page_of_pharmacy_list_from_drug_details() {
+		DrugDetailsPage drugDetailsPage = new DrugDetailsPage(driver);
+		drugDetailsPage.validateFirstPageDisplayedDrugDetails();
+		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetailsPage);
+	}
+	
+	@When("^user search with zipcode with no pharamacies from drug details$")
+	public void user_search_with_zipcode_with_no_pharamacies_from_drug_details(DataTable attributes) throws Throwable {
+		List<DataTableRow> memberAttributesRow = attributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		String zipCode = memberAttributesMap.get("ZipCode");
+		DrugDetailsPage drugDetailsPage = new DrugDetailsPage(driver);
+		drugDetailsPage.searchPharmaciesByZipcodeDrugDetails(zipCode);
+	}
+	
+	@Then("^error message \"([^\"]*)\" should be displayed on change pharmacy modal from drug details$")
+	public void error_message_should_be_displayed_on_change_pharmacy_modal_from_drug_details(String errorMessage) {
+		DrugDetailsPage drugDetailsPage = new DrugDetailsPage(driver);
+		drugDetailsPage.validateInvalidZipErrCodeMsg(errorMessage);
+	}
+	
+	@When("^user search with incorrect zipcode from drug details$")
+	public void user_search_with_incorrect_zipcode_from_drug_details(DataTable attributes){
+		List<DataTableRow> memberAttributesRow = attributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		String zipCode = memberAttributesMap.get("ZipCode");
+		DrugDetailsPage drugDetailsPage = new DrugDetailsPage(driver);
+		drugDetailsPage.searchPharmaciesByZipcodeDrugDetails(zipCode);
+	}
+	@When("^user updates the distance to \"([^\"]*)\" from drug details$")
+	public void user_updates_the_distance_to_drug_details(String distance) throws InterruptedException  {
+		DrugDetailsPage drugDetailsPage = new DrugDetailsPage(driver);
+		drugDetailsPage.updateDistanceDrugDetails(distance);
+	}
+	@Then("^no results message should be displayed from drug details$")
+	public void no_results_message_should_be_displayed_from_drug_details(DataTable attributes) throws Throwable {
+		List<DataTableRow> memberAttributesRow = attributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		String message = memberAttributesMap.get("NoResultsMessage");
+		DrugDetailsPage drugDetailsPage = new DrugDetailsPage(driver);
+		drugDetailsPage.validateNoResultsMsgDrugDetails(message);
+	}
+	
 	
 }

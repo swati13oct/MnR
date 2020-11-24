@@ -405,15 +405,55 @@ Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanDetails AARP - To test DCE - VPP Plan De
     And clicks on Review drug cost button for detail page
     Then user clicks on change pharmacy link from details page
      Then user verify details page change pharmacy modal
-     When user selects Preferred mail order pharmacy from drug detail page
+     When user selects Preferred mail order pharmacy from drug details page
      Then the message "OptumRx Home Delivery only provides 90-day refill for your drugs." should be displayed on change pharmacy modal from drug detail page
-     And user verify the default distance on change pharmacy modal from drug detail
-     When user sort the pharmacy list by "A to Z" from drug detail
-    Then pharmacy list should be displayed in ascending order from drug detail
-    When user sort the pharmacy list by "Z to A" from drug detail
+     And user verify the default distance on change pharmacy modal from drug details
+     When user sort the pharmacy list by "A to Z" from drug details
+    Then pharmacy list should be displayed in ascending order from drug details
+    When user sort the pharmacy list by "Z to A" from drug details
     Then pharmacy list should be displayed in descending order from drug details
+    When user clicks on next button on change pharmacy modal from drug details
+    Then user should be navigated to second page of pharmacy list from drug details
+    When user clicks on back button on change pharmacy modal from drug details
+    Then user should be navigated to first page of pharmacy list from drug details
+    When user search with zipcode with no pharamacies from drug details
+     | ZipCode | <zipCode1> |  
+   When user search with incorrect zipcode from drug details
+    | ZipCode | <zipCode2> |  
+  Then error message "Please enter a valid ZIP code." should be displayed on change pharmacy modal from drug details
     
       Examples: 
-      | zipcode | plantype | county | isMultutiCounty | drug1     | drug2                | drug3      | drug4         | drug5            | drug6   | planname                                           |
-      |   90001 | MAPD     | none   | no              | meloxicam | diclofenac potassium | febuxostat | buprenorphine | fentanyl citrate | Lipitor | AARP Medicare Advantage SecureHorizons Focus (HMO) |
+      | zipcode | plantype | county | isMultutiCounty | drug1     | zipCode1 | zipCode2      | drug4         | drug5            | drug6   | planname                                           |
+      |   90001 | MAPD     | none   | no              | meloxicam | 96799    | 78456         | buprenorphine | fentanyl citrate | Lipitor | AARP Medicare Advantage SecureHorizons Focus (HMO) |
+      
+      
+      @dCERedesign_ChangePharmacyDetailsNoResults_AARP 
+       Scenario Outline: Test to verify no results message displayed for change pharmacy modal on drug details page
+       
+       Given the user is on the AARP medicare site landing page
+    When the user performs plan search using following information in the AARP site
+         | Zip Code        | <zipcode>         |
+         | County Name     | <county>          |
+         | Is Multi County | <isMultutiCounty> |
+    Then the user navigates to the plan details for the given plan type in AARP site
+         | Plan Type | <plantype> |
+         | Plan Name | <planname> |
+    And I access the DCE Redesign from Plan Details
+    Then the user validates Get Started Page
+    Then the user clicks on Build Drug List to navigate to Build Drug List Page
+    Then the user searches and adds the following Drug to Drug List
+         | DrugName | <drug1> |   
+    And clicks on Review drug cost button for detail page
+    Then user clicks on change pharmacy link from details page
+     Then user verify details page change pharmacy modal
+      When user search with zipcode with no pharamacies from drug details 
+         | ZipCode | <zipCode1> |
+     When user updates the distance to "2 Miles" from drug details
+    Then no results message should be displayed from drug details 
+    | NoResultsMessage | <message> |
+     
+      Examples: 
+      | zipcode | plantype | county | isMultutiCounty | drug1     | zipCode1 | zipCode2      | message          | planname                                           |
+      |   90001 | MAPD     | none   | no              | meloxicam | 78006    | 78456         | Prescription drug home delivery is available through OptumRx. Learn more about OptumRx Mail Order Pharmacy | AARP Medicare Advantage SecureHorizons Focus (HMO) |
+      
       

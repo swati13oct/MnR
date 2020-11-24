@@ -360,6 +360,15 @@ public class DrugDetailsPage extends UhcDriver {
 	
 	@FindBy(xpath = "//*[contains(@id,'selectPharmacyBtn')]/../div//span[1]")
 	private List<WebElement> pharmacyNameList;
+	
+	@FindBy(xpath = "//*[@class='pagination']/../p")
+	private WebElement pageNumber;
+	
+	@FindBy(id = "inValidZipcodeLbl")
+	private WebElement invalidZipCodeMsg;
+	
+	@FindBy(xpath = "//*[@id='selectaPharmacy-overlay']/div/div[2]/div/div[5]/div/div/div[2]/div/div[2]/span")
+	private WebElement noResultsMessage;
 
 	
 	public DrugDetailsPage(WebDriver driver) {
@@ -1357,5 +1366,50 @@ public class DrugDetailsPage extends UhcDriver {
 		Assert.assertTrue("Pharmacies are not sorted in ascending order", sorted);
 	}
 	
+	public void clickNextButtonPagination() {
+		nextBtn.click();
+	}
+	public void clickBackButtonPagination() {
+		backBtn.click();
+	}
 	
+	public void validateSecondPageDisplayedDrugDetailPharmacy() {
+		String page = pageNumber.getText();
+		Pattern p = Pattern.compile("Page (\\d*) of (\\d*)");
+		java.util.regex.Matcher m = p.matcher(page);
+		if (m.find()) {
+			page = m.group(1);
+		}
+		Assert.assertTrue("Second page not displayed", page.equals("2"));
+	}
+	
+	public void validateFirstPageDisplayedDrugDetails() {
+		String page = pageNumber.getText();
+		Pattern p = Pattern.compile("Page (\\d*) of (\\d*)");
+		java.util.regex.Matcher m = p.matcher(page);
+		if (m.find()) {
+			page = m.group(1);
+		}
+		Assert.assertTrue("First page not displayed", page.equals("1"));
+	}
+	public void searchPharmaciesByZipcodeDrugDetails(String zipcode) {
+		pharmacyZipcodeSearch.clear();
+		pharmacyZipcodeSearch.sendKeys(zipcode);
+		pharmacySearchBtn.click();
+	}
+	public void validateInvalidZipErrCodeMsg(String expectedMsg) {
+		waitforElement(invalidZipCodeMsg);
+		System.out.println(invalidZipCodeMsg.getText());
+		Assert.assertTrue("Invalid zipcode message not displayed", invalidZipCodeMsg.getText().equals(expectedMsg));
+	}
+	public void updateDistanceDrugDetails(String distanceValue) throws InterruptedException {
+		distanceDrpDown.click();
+		Select distance = new Select(distanceDrpDown);
+		distance.selectByVisibleText(distanceValue);
+	}
+	public void validateNoResultsMsgDrugDetails(String expectedMsg) {
+		waitforElement(noResultsMessage);
+		System.out.println(noResultsMessage.getText());
+		Assert.assertTrue("No results message not displayed", noResultsMessage.getText().equals(expectedMsg));
+	}
 }
