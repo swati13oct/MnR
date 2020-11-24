@@ -124,21 +124,22 @@ public class ShopPage extends UhcDriver {
 	public void clickONEnrollShopLink(String plantype, String planName) throws Exception{
 		if(plantype.equals("SNP")){
 			waitforElement(dsnpShopLink);
-			dsnpShopLink.click();
+			jsClickNew(dsnpShopLink);
 			//Thread.sleep(5000);
 		
 		}
 		else if(plantype.equals("PDP")){
 			waitforElement(pdpShopLink);
-			pdpShopLink.click();
+			jsClickNew(pdpShopLink);
 			//Thread.sleep(5000);
 		}	
 		
 		else if(plantype.equals("MAPD") || plantype.equals("MA")){
 			waitforElement(MAShopLink);
-			MAShopLink.click();
+			jsClickNew(MAShopLink);
 			//Thread.sleep(5000);
-		}	
+		}
+		waitForPageLoadSafari();
 	}
 
 	public ShopPage ShopLinkOnMedsuppPlan() throws Exception {
@@ -147,7 +148,7 @@ public class ShopPage extends UhcDriver {
 		//Thread.sleep(4000);
 		if (validate(medSupShopLink)) {
 			//waitforElement(medSupShopLink);
-			medSupShopLink.click();
+			jsClickNew(medSupShopLink);
 			System.out.println("Shop Page Medsupp Plan is Displayed");
 			return new ShopPage(driver);
 		}
@@ -157,6 +158,7 @@ public class ShopPage extends UhcDriver {
 	public void clickOnMAShopButton() {
 		validateNew(MAShopLink);
 		jsClickNew(MAShopLink);
+		waitForPageLoadSafari();
 		validateNew(zipCodeField1);
 		if(!driver.getCurrentUrl().contains("shop/medicare-advantage-plans.html")) {
 			Assert.fail("MA plans page did not load properly");
@@ -166,6 +168,7 @@ public class ShopPage extends UhcDriver {
 	public void clickOnPDPShopButton() {
 		validateNew(pdpShopLink);
 		jsClickNew(pdpShopLink);
+		waitForPageLoadSafari();
 		validateNew(zipCodeField1);
 		if(!driver.getCurrentUrl().contains("shop/prescription-drug-plans.html")) {
 			Assert.fail("PDP plans page did not load properly");
@@ -175,6 +178,7 @@ public class ShopPage extends UhcDriver {
 	public void clickOnSNPShopButton() {
 		validateNew(dsnpShopLink);
 		jsClickNew(dsnpShopLink);
+		waitForPageLoadSafari();
 		validateNew(zipCodeField1);
 		if(!driver.getCurrentUrl().contains("shop/dual-special-needs-plans.html")) {
 			Assert.fail("SNP plans page did not load properly");

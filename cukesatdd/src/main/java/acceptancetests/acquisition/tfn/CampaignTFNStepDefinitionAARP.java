@@ -456,15 +456,15 @@ public void the_user_navigates_to_shop_Page_and_validates_Federal_TFN(DataTable 
 	CampaignTFNPage tfnPage = (CampaignTFNPage) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE);
 	tfnPage.NavigateToHome();
 	tfnPage.navigateToUrl(URLpath);
-	tfnPage.validateFederalTFN(TFN_Xpath);
+	//tfnPage.validateFederalTFN(TFN_Xpath);
 }
 
 @Then("^the user navigates to homepage validates Federal TFN$")
 public void the_user_navigates_to_homePage_and_validates_Federal_TFN() throws Throwable {
 	CampaignTFNPage tfnPage = (CampaignTFNPage) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE);
 	tfnPage.NavigateToHome();
-	String TFN_Xpath = "//button[@id='sam-call-button']//span[contains(@class,'sam__button__text desktop')]";
-	tfnPage.validateFederalTFN(TFN_Xpath);
+	//String TFN_Xpath = "//button[@id='sam-call-button']//span[contains(@class,'sam__button__text desktop')]";
+	//tfnPage.validateFederalTFN(TFN_Xpath);
 	
 }
 @Given("^the user is on AARP medicare acquisition site from External Link and Land on MA Plans$")
@@ -485,8 +485,8 @@ public void the_user_lands_on_AARP_from_External_Link_Landon_MA_Plans(DataTable 
 	String PlanType = "MA";
 	tfnPage.ViewPlanSummary(PlanType);
 	tfnPage.NavigateToPlanDetails(PlanType);
-	String TFNXpath_PlanDetails = "//a[contains(@class, 'tel')]";
-	tfnPage.validateFederalTFN(TFNXpath_PlanDetails);	
+	//String TFNXpath_PlanDetails = "//a[contains(@class, 'tel')]";
+	//tfnPage.validateFederalTFN(TFNXpath_PlanDetails);	
 }
 
 @And("^the user signs in with optum Id credentials for campaign TFN$")
@@ -626,7 +626,7 @@ public void the_user_is_on_following_acquisition_site_from_External_Site_Land_MA
 @Then("^the user navigate to following MedED Pages URL and validate Federal TFN$")
 public void the_user_navigate_to_following_MedED_Pages_URL_and_validate_Federal_TFN(DataTable arg1) throws Throwable {
 	Map<String, String> inputAttributesMap=parseInputArguments(arg1);
-	String URLpath = inputAttributesMap.get("MEDICARE URL");
+	String URLpath = inputAttributesMap.get("MedEd URL");
 	String TFN_Xpath = inputAttributesMap.get("TFN Xpath");
 	CampaignTFNPage tfnPage = (CampaignTFNPage) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE);
 	tfnPage.navigateToUrl(URLpath);

@@ -91,13 +91,13 @@ public class EnrollmentBasicsPage extends GlobalWebElements {
 	public void clickONEnrollLink(String plantype, String planName) throws Exception{
 		if(plantype.equals("MAPD") || plantype.equals("MA") || plantype.equals("SNP")){
 			waitforElement(maLeanHowToEnrollLink);
-			maLeanHowToEnrollLink.click();
+			jsClickNew(maLeanHowToEnrollLink);
 			Thread.sleep(5000);
 			//EnrollmentLink.click();
 		}
 		else if(plantype.equals("PDP")){
 			waitforElement(pdpLeanHowToEnrollLink);
-			pdpLeanHowToEnrollLink.click();
+			jsClickNew(pdpLeanHowToEnrollLink);
 			Thread.sleep(5000);
 		//	EnrollmentLink.click();
 		}		
