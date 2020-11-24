@@ -14,27 +14,25 @@ Feature: UAT-SCripts To test Campaign TFN in all flows on UHC site
    Then the user navigates to Medsupp Plans in VPP and validates Medsupp TFN
  Then the user navigates to PDP Plan Details Page and validates Federal TFN
  Then the user navigates to PDP OLE Page and validates Federal TFN
-  #And the user clicks on the shopping cart icon
- #Then the user signs in with optum Id credentials
-   #   | User Name | <userName> |
-    #  | Password  | <password> |      
-  #And the user clicks on the add plans button in the profile
-  Then the user navigates to homepage validates Federal TFN
-  When the user performs plan search using following information
+Then the user navigates to homepage validates Federal TFN
+And the user clicks on the shopping cart icon
+  	And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
+    Then the user validates PSC code
+      | PSC Code | <pscCode> |
+And the user clicks on the add plans button in the profile
+When the user enters zipcode on health plans page
       | Zip Code        | <zipcode>         |
       | Is Multi County | <isMultutiCounty> |
       | County Name     | <county>          |
-		And the user views the plans of the below plan type
+   And the user views the plans of the below plan type
       | Plan Type | <plantype> |
-    And the user selects plan year
-    	|Plan Year	| <planyear>|
+      | Site      | <site>     |
+   And the user selects plan year
+      | Plan Year | <planyear> |
+      | Plan Type | <plantype> |
    	And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
     Then the user validates PSC code
       | PSC Code | <pscCode> | 
-   #Then the user view plan details of the first plan in the given plan type and perform validation in test site
-    And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
-    Then the user validates PSC code
-      | PSC Code | <pscCode> |   
     Then the user navigates to following  DCE Page URL and validate Federal TFN 
       | DCE URL    | <dceUrl> |
     Then the user validate the sam icons tfn with federal TFN on Acquistion page 
@@ -46,7 +44,7 @@ Feature: UAT-SCripts To test Campaign TFN in all flows on UHC site
    #######################Script 2: Campaign traffic########################################
  
    @Scenario_2_CampaignTraffic_UHC_UAT 
-  Scenario Outline: <Scenario> Verify TFN for different plan types through Campaign Traffic
+  Scenario Outline: <scenario> Verify TFN for different plan types through Campaign Traffic
    	Given the user Starts WebDriver
       Given the user is on following acquisition site from Campaign Traffic
       | Site         | <site>         |
@@ -55,7 +53,7 @@ Feature: UAT-SCripts To test Campaign TFN in all flows on UHC site
     Then the user validates PSC code
       | PSC Code | <pscCode> |
       Then the user navigate to following MedED Pages URL and validate Federal TFN
-      | MedSupp URL | <connectUrl> |
+      | MedEd URL | <connectUrl> |
       | TFN Xpath   | <connectTFN> | 
    Then the user navigates to following MA Plan Page URL and validate Federal TFN
       | MA URL    | <maUrl> |
@@ -94,27 +92,29 @@ Feature: UAT-SCripts To test Campaign TFN in all flows on UHC site
       Then the user navigates to shop pages Page and validates Federal TFN
      | SHOPPAGES URL   | <shoppagesUrl> |
       | TFN Xpath | <shoppagesTFN> | 
-         And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
-    
+       And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
+      Then the user validates PSC code
+      | PSC Code | <pscCode1> | 
       
     Examples:  
        |scenario                  | pscCode |pscCode1| emailLinkUrl                                                                                      | emailLinkTFN                                                                      | medicareUrl                                   | medicareTFN                                                         | shoppagesUrl|      shoppagesTFN             |
-       |Scenario 5-Email - UMS 	|  880180 | 801430|/?WT.mc_id=8014300&mrcid=em:Acq:MR%7CNTM6501%7CEGEM3108%7C::8014300 |//button[@id='sam-call-button']//span[contains(@class,'sam__button__text desktop')]|medicare-articles.html                         |//button[@id='sam-call-button']//span[contains(@class,'sam__button__text desktop')]|  shop/medicare-supplement-plans.html                       |//button[@id='sam-call-button']//span[contains(@class,'sam__button__text desktop')]|
+       |Scenario 5-Email - UMS 	|  880180 | 801430|/?WT.mc_id=8014300&mrcid=em:Acq:MR%7CNTM6501%7CEGEM3108%7C::8014300 |//a[contains(@class, 'tel') and contains(@href, 'tel')]|medicare-articles.html                         |//button[@id='sam-call-button']//span[contains(@class,'sam__button__text desktop')]|  shop/medicare-supplement-plans.html                       |(//*[contains(@class,'call')]//a[contains(@class,'tel')])[2]|
        
            #######################Script 6: External Link########################################
    @Scenario_6_External_Link_UHC_UAT
   Scenario Outline: <scenario>  Verify TFN through External Links
     Given the user Starts WebDriver
-    Given the user is on following acquisition site from External Link and land on MA Page
+     Given the user is on following acquisition site from Campaign Traffic
       | Site         | <site>         |
       | Campaign URL | <campaignUrl>  |      
     And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
     Then the user validates PSC code
       | PSC Code | <pscCode> |
-     #And the user clicks on the shopping cart icon
-    #Then the user signs in with optum Id credentials for campaign TFN
-     # | User Name | <userName> |
-     # | Password  | <password> |  
+    Then the user navigates to homepage validates Federal TFN
+		And the user clicks on the shopping cart icon
+  	And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
+    Then the user validates PSC code
+      | PSC Code | <pscCode> |  
       Then the user navigates to homepage validates Federal TFN
    	Then the user navigates to MA Plan Details Page and validates Federal TFN
    	 Then the user navigates to MA OLE Page and validates Federal TFN
@@ -124,6 +124,9 @@ Feature: UAT-SCripts To test Campaign TFN in all flows on UHC site
       Then the user navigates to shop pages Page and validates Federal TFN
      | SHOPPAGES URL   | <shoppagesUrl> |
       | TFN Xpath | <shoppagesTFN> | 
+         And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
+      Then the user validates PSC code
+      | PSC Code | <pscCode> | 
     Examples:  
        |scenario                         |site| pscCode | campaignUrl                                                                                      | medEdURL1                                  | medEdTFN                                                        | shoppagesUrl|      shoppagesTFN             |userName|password|
        |Scenerio 6-ExternalLink - UMS 	|blayer  |800297 | health-plans/medicare-advantage-plans/available-plans.html?zipcode=10001&WT.mc_id=8002977&county=420&state=36&coveragePerson=M&originatingSite=https%253A%252F%252Fwww.myuhcplans.com%252Fmorganstanley&subdomain=group#/plan-summary             |   medicare-articles/medicare-made-clear.html         |         (//span[@class='heading-6']//u)[1]              |  shop/medicare-supplement-plans.html                       |//button[@id='sam-call-button']//span[contains(@class,'sam__button__text desktop')]|mnrqavd11|Password@1|

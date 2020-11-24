@@ -86,7 +86,7 @@ Feature: UAT-Scripts-To test Organic Search Campaign TFN on UHC site
   Then the user navigates to Medsupp Plans in VPP and validates Medsupp TFN
     #------------------------------************----------------------------------------------
      # Precedence 4.3.7 - Visit UHC using Direct URL , PSC code 880180
-     # Given the user Starts WebDriver
+     Given the user Starts WebDriver
     Given the user is on the uhcmedicaresolutions site landing page
     And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
     Then the user validates PSC code
@@ -95,7 +95,7 @@ Feature: UAT-Scripts-To test Organic Search Campaign TFN on UHC site
    #----------------------------**************-------------------------------------
    # Precedence 4.3.9 - Visit site via UHC organic search from Google, PSC 880188
     # Campaign supercedes Organic search, so Expected PSC code - 880188
-    # Given the user Starts WebDriver
+     Given the user Starts WebDriver
     Given user is on Google and search UHC Medicare Advantage Plan to navigate to UHC page
     And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
     Then the user validates PSC code
