@@ -763,7 +763,8 @@ Feature: 1.01 Member  benefits and Coverage page
       | Plan Type | <planType> |
     And the user validates the Out of Pocket Max section for Dsnp indi member
     	 | Plan Type | <planType> |
-    And the user view the LIS Drug Copays & Discounts header
+    And validating the LIS Drug Copays, Discounts header and drug table for Dsnp indi member
+    	 | Copay Category | copayCategory |
     And the user validates Drug coverage header and text under the section
     And the user validates text for the Look Up Drugs section
     And the user validates Look Up Drugs button should be visible
