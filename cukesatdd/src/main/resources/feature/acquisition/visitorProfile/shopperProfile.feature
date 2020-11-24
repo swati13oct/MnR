@@ -89,7 +89,7 @@ Feature: 1.08. ACQ- Shopper Profile
       | Providers          | <providers>        |
       | First Name         | <fname>            |
       | Last Name          | <lname>            |
-    Then agent saves two plans as favorite on AARP site for user
+    Then agent saves two plans as favorite for user
       | Plan Type  | <plantype>  |
       | Test Plans | <testPlans> |
     Then Navigate to Visitor Profile page
@@ -157,7 +157,7 @@ Feature: 1.08. ACQ- Shopper Profile
     And user delets all the added providers on visitor profile page
       | Test Plans | <testPlans> |
     And the user clicks on the add plans button in the profile
-    Then agent saves two plans as favorite on AARP site for user
+    Then agent saves two plans as favorite for user
       | Plan Type  | <plantype>  |
       | Test Plans | <testPlans> |
     When the user Click on Is my Provider covered link Ulayer
@@ -202,7 +202,7 @@ Feature: 1.08. ACQ- Shopper Profile
       | Providers          | <providers>        |
       | First Name         | <fname>            |
       | Last Name          | <lname>            |
-    Then agent saves two plans as favorite on AARP site for user
+    Then agent saves two plans as favorite for user
       | Plan Type  | <plantype>  |
       | Test Plans | <testPlans> |
     Then Navigate to Visitor Profile page

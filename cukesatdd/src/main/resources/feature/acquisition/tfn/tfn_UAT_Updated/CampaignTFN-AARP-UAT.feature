@@ -14,16 +14,16 @@ Feature: UAT Scripts-To test Campaign TFN in all flows on AARP site
      # | MA URL    | <maUrl> |
      # | TFN Xpath | <maTFN> |
     Then the user navigate to following MedED Pages URL and validate Federal TFN  
-      | MEDICARE URL    | <medicareUrl> |
+      | MedEd URL    | <medicareUrl> |
       | TFN Xpath | <medicareTFN> |
    Then the user navigates to Medsupp Plans in VPP and validates Medsupp TFN
  Then the user navigates to PDP Plan Details Page and validates Federal TFN
  Then the user navigates to PDP OLE Page and validates Federal TFN
- #And the user clicks on the shopping cart icon in AARP site for campaign TFN
+ And the user clicks on the shopping cart icon in AARP site for campaign TFN
  #Then the user signs in with optum Id credentials
    #   | User Name | <userName> |
     #  | Password  | <password> |      
- # And the user clicks on the add plans button in the profile
+ And the user clicks on the add plans button in the profile
  Then the user navigates to homepage validates Federal TFN
   When the user performs plan search using following information in the AARP site
       | Zip Code        | <zipcode>         |
@@ -133,16 +133,19 @@ Feature: UAT Scripts-To test Campaign TFN in all flows on AARP site
      Then the user navigates to following  Medicare Education Page URL and validate Federal TFN  
       | MEDICARE URL    | <emailLinkUrl> |
       | TFN Xpath | <emailLinkTFN> |
+        And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
       Then the user validates PSC code
       | PSC Code | <pscCode1> | 
 	   Then the user navigates to following  Medicare Education Page URL and validate Federal TFN  
       | MEDICARE URL    | <medicareUrl> |
       | TFN Xpath | <medicareTFN> |
+        And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
       Then the user validates PSC code
       | PSC Code | <pscCode1> | 
       Then the user navigates to shop pages Page and validates Federal TFN
      | SHOPPAGES URL   | <shoppagesUrl> |
-      | TFN Xpath | <shoppagesTFN> | 
+      | TFN Xpath | <shoppagesTFN> |
+        And the user retrieves TFNSessionCookie and Federal and MedSupp TFN 
       Then the user validates PSC code
       | PSC Code | <pscCode1> | 
       
@@ -155,7 +158,8 @@ Feature: UAT Scripts-To test Campaign TFN in all flows on AARP site
   Scenario Outline: <scenario> 1.0  Verify TFN through External Links PDP
     Given the user Starts WebDriver
     Given the user is on AARP medicare acquisition site from External Link and Land on PDP Plans
-      | Campaign URL | <campaignUrl>  |    
+      | Campaign URL | <campaignUrl>  |   
+       | TFN Xpath | <shoppagesTFN> |  
     And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
     Then the user validates PSC code
       | PSC Code | <pscCode> |

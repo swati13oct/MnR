@@ -567,6 +567,7 @@ public class VisitorProfilePage extends UhcDriver {
 		Assert.assertEquals(planName, enrolledPlanName.getText().trim());
 		Assert.assertEquals(zipCode, enrolledPlanZipcode.getText().trim());
 		Assert.assertEquals(status, enrolledStatus.getText().trim());
+		waitforElementVisibilityInTime(enrolledMonthlyPremium, 10);
 		Assert.assertEquals(monthlyPremium, enrolledMonthlyPremium.getText().trim());
 		
 	}
