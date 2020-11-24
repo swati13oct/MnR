@@ -1,7 +1,7 @@
 @PlanRecommandonationEngineMobile @PRERegressionRankingMobile @PRERegressionMobile
 Feature: Plan Recommendation Engine Ranking - Verify PRE Edit Response functionalities using mobile
 
-  @PRE @planrecommendationMobile @EditResponsePageMobile
+  @PRE @planrecommendationMobile @EditResponsePageMobile @MobileVerifyEdit
   Scenario Outline: Zipcode: <Zipcode> -MultiCountyOptions: <isMultiCounty> -CoverageOptions: <isCoverageOpt> -SNP: <SpecialNeeds> -Travel: <TravelOption> -Doctors: <DoctorsSelection> -AdditionalOption: <Dental-Hearing-Vision-Fitness> -CostPreferenceSelection: <costPreferenceOption> - To validate responses in edit preference page in PRE Mobile
     Given the user is on UHC medicare acquisition site mobile
     And user navigates to Zip Code page mobile
@@ -28,13 +28,13 @@ Feature: Plan Recommendation Engine Ranking - Verify PRE Edit Response functiona
       | Preference Option | <costPreferenceOption> |
     Then user validate saved values in edit response page mobile
       | Zip Code            | <Zipcode>                                                              |
-      | CountyDropDown      | <county>                                                               |
+      | CountyDropDown      | <County>                                                               |
       | Plan Type           | <isCoverageOpt>                                                        |
-      | SNP Options         | <specialNeeds>                                                         |
-      | Travel Options      | <travel>                                                               |
-      | Doctors             | <doctors>                                                              |
+      | SNP Options         | <SpecialNeeds>                                                         |
+      | Travel Options      | <TravelOption>                                                         |
+      | Doctors             | <DoctorsSelection>                                                     |
       | Doctors Search Text | <DoctorsName>                                                          |
-      | Drug Selection      | <Drug Selection>                                                       |
+      | Drug Selection      | <DrugSelection>                                                        |
       | Drug Details        | <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch> |
       | Additional Option   | <Dental-Hearing-Vision-Fitness>                                        |
       | Preference Option   | <costPreferenceOption>                                                 |
@@ -42,10 +42,10 @@ Feature: Plan Recommendation Engine Ranking - Verify PRE Edit Response functiona
     Then user validate UI and API recommendation rankings in results page mobile
 
     Examples: 
-      | Zipcode | isMultiCounty | county   | isCoverageOpt | specialNeeds | travel  | doctors | DoctorsName | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch | Dental-Hearing-Vision-Fitness | costPreferenceOption |
-      |   10001 | NO            | New York | None          | Medicaid     | regular | Lookup  | sue         | NO            | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,1,YES,NO                               | Yes,No,No,Yes                 | Lower                |
+      | Zipcode | isMultiCounty | County   | isCoverageOpt | SpecialNeeds | TravelOption | DoctorsSelection | DoctorsName | isMultiDoctor | DrugSelection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch | Dental-Hearing-Vision-Fitness | costPreferenceOption |
+      |   10001 | NO            | New York | None          | Medicaid     | regular      | Lookup           | sue         | NO            | Yes           | Lipitor,NO,Lipitor TAB 20MG,,,1,YES,NO                               | Yes,No,No,Yes                 | Lower                |
 
-  @PRE @planrecommendationMobile @EditResponsePageMobile @EditvalueMAPD
+  @PRE @planrecommendationMobile @EditResponsePageMobile @MobileEditvalueMAPD
   Scenario Outline: Zipcode: <Zipcode> -MultiCountyOptions: <isMultiCounty> -CoverageOptions: <isCoverageOpt> -SNP: <SpecialNeeds> -Travel: <TravelOption> -Doctors: <DoctorsSelection> -AdditionalOption: <Dental-Hearing-Vision-Fitness> -CostPreferenceSelection: <costPreferenceOption> - To validate Edit preference functions for MAPD in PRE Mobile
     Given the user is on UHC medicare acquisition site mobile
     And user navigates to Zip Code page mobile
@@ -85,11 +85,12 @@ Feature: Plan Recommendation Engine Ranking - Verify PRE Edit Response functiona
       | Additional Option   | <E_Dental-Hearing-Vision-Fitness>                                        |
       | Preference Option   | <E_costPreferenceOption>                                                 |
     Then user return to vpp page using "update" from edit response page mobile
-    Examples: 
-      | Zipcode | isMultiCounty | county      | isCoverageOpt | specialNeeds | travel    | doctors    | DoctorsName | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch | Dental-Hearing-Vision-Fitness | costPreferenceOption | E_Zipcode | E_isMultiCounty | E_county    | E_isCoverageOpt | E_specialNeeds | E_travel | E_doctors | E_DoctorsName | E_isMultiDoctor | E_Drug Selection | E_DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch | E_Dental-Hearing-Vision-Fitness | E_costPreferenceOption |
-      |   10001 | NO            | New York    | MAPD          | Medicaid     | regular   | Lookup     | sue         | NO            | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,1,YES,NO                               | Yes,Yes,Yes,Yes               | Lower                |     35034 | YES             | Bibb County | MAPD            | nursing        | withinUS | Lookup    | john          | NO              | Yes              | Imuran,YES,Imuran TAB 50MG,,25,1,YES,NO                                | No,No,No,No                     | Higher                 |
 
-  @PRE @planrecommendationMobile @EditResponsePageMobile @MAPDtoMA
+    Examples: 
+      | Zipcode | isMultiCounty | County   | isCoverageOpt | SpecialNeeds | TravelOption | DoctorsSelection | DoctorsName | isMultiDoctor | DrugSelection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch | Dental-Hearing-Vision-Fitness | costPreferenceOption | E_Zipcode | E_isMultiCounty | E_county    | E_isCoverageOpt | E_specialNeeds | E_travel | E_doctors | E_DoctorsName | E_isMultiDoctor | E_Drug Selection | E_DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch | E_Dental-Hearing-Vision-Fitness | E_costPreferenceOption |
+      |   10001 | NO            | New York | MAPD          | Medicaid     | regular      | Lookup           | sue         | NO            | Yes           | Lipitor,NO,Lipitor TAB 20MG,,,1,YES,NO                               | Yes,Yes,Yes,Yes               | Lower                |     35034 | YES             | Bibb County | MAPD            | nursing        | withinUS | Lookup    | john          | NO              | Yes              | Imuran,YES,Imuran TAB 50MG,,25,1,YES,NO                                | No,No,No,No                     | Higher                 |
+
+  @PRE @planrecommendationMobile @EditResponsePageMobile @MobileMAPDtoMA
   Scenario Outline: Zipcode: <Zipcode> -MultiCountyOptions: <isMultiCounty> -CoverageOptions: <isCoverageOpt> -SNP: <SpecialNeeds> -Travel: <TravelOption> -Doctors: <DoctorsSelection> -AdditionalOption: <Dental-Hearing-Vision-Fitness> -CostPreferenceSelection: <costPreferenceOption> - To validate Edit preference functions for MAPD to MA in PRE Mobile
     Given the user is on UHC medicare acquisition site mobile
     And user navigates to Zip Code page mobile
@@ -123,10 +124,10 @@ Feature: Plan Recommendation Engine Ranking - Verify PRE Edit Response functiona
     Then user return to vpp page using "update" from edit response page mobile
 
     Examples: 
-      | Zipcode | isMultiCounty | county   | isCoverageOpt | specialNeeds | travel  | doctors | DoctorsName | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch | Dental-Hearing-Vision-Fitness | costPreferenceOption | E_isCoverageOpt |
-      |   10001 | NO            | New York | MAPD          | Medicaid     | regular | Lookup  | sue         | NO            | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,1,YES,NO                               | Yes,Yes,Yes,Yes               | Lower                | MA              |
+      | Zipcode | isMultiCounty | County   | isCoverageOpt | SpecialNeeds | TravelOption | DoctorsSelection | DoctorsName | isMultiDoctor | DrugSelection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch | Dental-Hearing-Vision-Fitness | costPreferenceOption | E_isCoverageOpt |
+      |   10001 | NO            | New York | MAPD          | Medicaid     | regular      | Lookup           | sue         | NO            | Yes           | Lipitor,NO,Lipitor TAB 20MG,,,1,YES,NO                               | Yes,Yes,Yes,Yes               | Lower                | MA              |
 
-  @PRE @planrecommendationMobile @EditResponsePageMobile @IDKtoPDP
+  @PRE @planrecommendationMobile @EditResponsePageMobile @MobileIDKtoPDP
   Scenario Outline: Zipcode: <Zipcode> -MultiCountyOptions: <isMultiCounty> -CoverageOptions: <isCoverageOpt> -SNP: <SpecialNeeds> -Travel: <TravelOption> -Doctors: <DoctorsSelection> -AdditionalOption: <Dental-Hearing-Vision-Fitness> -CostPreferenceSelection: <costPreferenceOption>  - To validate Edit preference functions for IDK to PDP in PRE Mobile
     Given the user is on UHC medicare acquisition site mobile
     And user navigates to Zip Code page mobile
@@ -160,10 +161,10 @@ Feature: Plan Recommendation Engine Ranking - Verify PRE Edit Response functiona
     Then user return to vpp page using "update" from edit response page mobile
 
     Examples: 
-      | Zipcode | isMultiCounty | county   | isCoverageOpt | specialNeeds | travel  | doctors | DoctorsName | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch | Dental-Hearing-Vision-Fitness | costPreferenceOption | E_isCoverageOpt |
-      |   10001 | NO            | New York | None          | Medicaid     | regular | Lookup  | sue         | NO            | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,1,YES,NO                               | Yes,Yes,Yes,Yes               | Lower                | PDP             |
+      | Zipcode | isMultiCounty | County   | isCoverageOpt | SpecialNeeds | TravelOption | DoctorsSelection | DoctorsName | isMultiDoctor | DrugSelection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch | Dental-Hearing-Vision-Fitness | costPreferenceOption | E_isCoverageOpt |
+      |   10001 | NO            | New York | None          | Medicaid     | regular      | Lookup           | sue         | NO            | Yes           | Lipitor,NO,Lipitor TAB 20MG,,,1,YES,NO                               | Yes,Yes,Yes,Yes               | Lower                | PDP             |
 
-  @PRE @planrecommendationMobile @EditResponsePageMobile @PDPtoMAPD
+  @PRE @planrecommendationMobile @EditResponsePageMobile @MobilePDPtoMAPD
   Scenario Outline: Zipcode: <Zipcode> -MultiCountyOptions: <isMultiCounty> -CoverageOptions: <isCoverageOpt> - To validate Edit preference functions for PDP to MAPD in PRE Mobile
     Given the user is on UHC medicare acquisition site mobile
     And user navigates to Zip Code page mobile
@@ -196,10 +197,10 @@ Feature: Plan Recommendation Engine Ranking - Verify PRE Edit Response functiona
       | Preference Option | <E_costPreferenceOption> |
     Then user validate recommendations in results page mobile
       | Zip Code           | <Zipcode>           |
-      | County Name        | <county>            |
+      | County Name        | <County>            |
       | 1st Recommendation | <1stRecommendation> |
       | 2nd Recommendation | <2ndRecommendation> |
 
     Examples: 
-      | Zipcode | isMultiCounty | county   | isCoverageOpt | Drug Selection | E_isCoverageOpt | E_specialNeeds | E_travel | E_doctors | E_DoctorsName | E_isMultiDoctor | E_Drug Selection | E_DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch | E_Dental-Hearing-Vision-Fitness | E_costPreferenceOption | 1stRecommendation | 2ndRecommendation |
-      |   10003 | NO            | New York | PDP           | No             | MAPD            | nursing        | withinUS | Lookup    | john          | NO              | Yes              | Imuran,YES,Imuran TAB 50MG,,25,1,YES,NO                                | No,No,No,No                     | Higher                 | SNP               | MS                |
+      | Zipcode | isMultiCounty | County   | isCoverageOpt | DrugSelection | E_isCoverageOpt | E_specialNeeds | E_travel | E_doctors | E_DoctorsName | E_isMultiDoctor | E_Drug Selection | E_DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch | E_Dental-Hearing-Vision-Fitness | E_costPreferenceOption | 1stRecommendation | 2ndRecommendation |
+      |   10003 | NO            | New York | PDP           | No            | MAPD            | nursing        | withinUS | Lookup    | john          | NO              | Yes              | Imuran,YES,Imuran TAB 50MG,,25,1,YES,NO                                | No,No,No,No                     | Higher                 | SNP               | MS                |
