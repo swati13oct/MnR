@@ -657,7 +657,7 @@ public class PlanRecommendationStepDefinitionMobile {
    	public void navigate_editResponse_page(DataTable givenAttributes) {
 		readfeaturedataMobile(givenAttributes);
 		EditResponseMobilePage preEditMobile =  new EditResponseMobilePage(wd);
-		preEditMobile.navigateEditResponsePageMobile(inputValues.get("Plan Type"));
+		preEditMobile.navigateEditResponsePageMobile(inputValues);
    	}
 
 	@Then("^user edits coverage value in edit response page mobile$")

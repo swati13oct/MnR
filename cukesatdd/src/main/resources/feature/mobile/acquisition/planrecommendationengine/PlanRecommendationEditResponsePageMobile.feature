@@ -1,7 +1,7 @@
 @PlanRecommandonationEngineMobile @PRERegressionRankingMobile @PRERegressionMobile
 Feature: Plan Recommendation Engine Ranking - Verify PRE Edit Response functionalities using mobile
 
-  @PRE @planrecommendationMobile @EditResponsePageMobile @MobileVerifyEdit
+  @PRE @planrecommendationMobile @EditResponsePageMobile1 @MobileVerifyEdit
   Scenario Outline: Zipcode: <Zipcode> -MultiCountyOptions: <isMultiCounty> -CoverageOptions: <isCoverageOpt> -SNP: <SpecialNeeds> -Travel: <TravelOption> -Doctors: <DoctorsSelection> -AdditionalOption: <Dental-Hearing-Vision-Fitness> -CostPreferenceSelection: <costPreferenceOption> - To validate responses in edit preference page in PRE Mobile
     Given the user is on UHC medicare acquisition site mobile
     And user navigates to Zip Code page mobile
@@ -45,7 +45,7 @@ Feature: Plan Recommendation Engine Ranking - Verify PRE Edit Response functiona
       | Zipcode | isMultiCounty | County   | isCoverageOpt | SpecialNeeds | TravelOption | DoctorsSelection | DoctorsName | isMultiDoctor | DrugSelection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch | Dental-Hearing-Vision-Fitness | costPreferenceOption |
       |   10001 | NO            | New York | None          | Medicaid     | regular      | Lookup           | sue         | NO            | Yes           | Lipitor,NO,Lipitor TAB 20MG,,,1,YES,NO                               | Yes,No,No,Yes                 | Lower                |
 
-  @PRE @planrecommendationMobile @EditResponsePageMobile @MobileEditvalueMAPD
+  @PRE @planrecommendationMobile @EditResponsePageMobile1 @MobileEditvalueMAPD
   Scenario Outline: Zipcode: <Zipcode> -MultiCountyOptions: <isMultiCounty> -CoverageOptions: <isCoverageOpt> -SNP: <SpecialNeeds> -Travel: <TravelOption> -Doctors: <DoctorsSelection> -AdditionalOption: <Dental-Hearing-Vision-Fitness> -CostPreferenceSelection: <costPreferenceOption> - To validate Edit preference functions for MAPD in PRE Mobile
     Given the user is on UHC medicare acquisition site mobile
     And user navigates to Zip Code page mobile
@@ -116,7 +116,8 @@ Feature: Plan Recommendation Engine Ranking - Verify PRE Edit Response functiona
     And user selects cost preferences option in cost preferences page mobile
       | Preference Option | <costPreferenceOption> |
     Then user navigates to edit response page mobile
-      | Plan Type | <isCoverageOpt> |
+      | Plan Type   | <isCoverageOpt> |
+      | SNP Options | <SpecialNeeds>  |
     Then user edits coverage value in edit response page mobile
       | Plan Type | <E_isCoverageOpt> |
     Then user validates coverage value in edit response page mobile
@@ -153,7 +154,8 @@ Feature: Plan Recommendation Engine Ranking - Verify PRE Edit Response functiona
     And user selects cost preferences option in cost preferences page mobile
       | Preference Option | <costPreferenceOption> |
     Then user navigates to edit response page mobile
-      | Plan Type | <isCoverageOpt> |
+      | Plan Type   | <isCoverageOpt> |
+      | SNP Options | <SpecialNeeds>  |
     Then user edits coverage value in edit response page mobile
       | Plan Type | <E_isCoverageOpt> |
     Then user validates coverage value in edit response page mobile

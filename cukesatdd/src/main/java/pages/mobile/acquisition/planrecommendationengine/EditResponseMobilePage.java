@@ -177,6 +177,26 @@ public class EditResponseMobilePage extends UhcDriver {
 		validate(editResponseTitle);
 		validate(returnToPlanLink, 30);
 	}
+	
+	public void navigateEditResponsePageMobile(HashMap<String, String> userInput) {
+		inputValues = userInput;
+		String flow = inputValues.get("Plan Type");
+		if (flow.equalsIgnoreCase("pdp")) {
+			mobileUtils.mobileLocateElementClick(PDPViewPlansLink);
+			pdpEditResponseButton.click();
+		} else {
+			if (inputValues.get("SNP Options").equalsIgnoreCase("none")) {
+				mobileUtils.mobileLocateElementClick(MAViewPlansLink); // Have zip with snp for all flows
+				mapdEditResponseButton.click();
+			}
+			else {
+				mobileUtils.mobileLocateElementClick(SNPViewPlansLink);
+				snpEditResponseButton.click();
+			}
+		}
+		validate(editResponseTitle);
+		validate(returnToPlanLink, 30);
+	}
 
 	public void checkContent(String section) {
 		// boolean sectionStaus = false;
