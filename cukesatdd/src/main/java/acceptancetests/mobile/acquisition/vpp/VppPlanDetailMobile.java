@@ -2220,7 +2220,7 @@ public class VppPlanDetailMobile {
 	@Then("^user verify the popup and content on Plan Comapare on UHC site$")
 	public void user_verify_the_popup_and_content_PlanCompare_UHC() throws InterruptedException {
 
-		ComparePlansPageBlayerMobile planComparePage = (ComparePlansPageBlayerMobile) getLoginScenario()
+		ComparePlansPageMobile planComparePage = (ComparePlansPageMobile) getLoginScenario()
 				.getBean(PageConstants.PLAN_COMPARE_PAGE);
 		planComparePage.validateCallpopup();
 	}

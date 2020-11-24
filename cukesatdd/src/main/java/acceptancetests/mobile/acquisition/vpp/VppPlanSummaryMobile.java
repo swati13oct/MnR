@@ -679,11 +679,11 @@ public class VppPlanSummaryMobile {
 
 		List<DataTableRow> memberAttributesRow = data.getGherkinRows();
 		String drug = memberAttributesRow.get(1).getCells().get(1);
-		DrugCostEstimatorPageMobile dce = (DrugCostEstimatorPageMobile) getLoginScenario()
+		pages.mobile.acquisition.ulayer.DrugCostEstimatorPageMobile dce = (pages.mobile.acquisition.ulayer.DrugCostEstimatorPageMobile) getLoginScenario()
 				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
 		boolean isDrugPresent = dce.isDrugPresent(drug);
 		if (!isDrugPresent) {
-			AddDrugDetailsMobile addDrugDetails = dce.addDrug(drug.split(" ")[0]);
+			pages.mobile.acquisition.ulayer.AddDrugDetailsMobile addDrugDetails = dce.addDrug(drug.split(" ")[0]);
 			if (null != addDrugDetails) {
 				getLoginScenario().saveBean(PageConstants.ADD_DRUG_DETAILS, addDrugDetails);
 			} else

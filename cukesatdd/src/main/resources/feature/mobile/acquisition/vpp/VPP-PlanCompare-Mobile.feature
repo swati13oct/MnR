@@ -368,8 +368,8 @@ Feature: 2.01.3-Vpp to plan Compare UHC Scenarios
     	|Plan Year | <planyear> |
     And I select "<plantype>" plans and "<count>" plans to compare and click on compare plan link in UHC
     Then verify plan compare page is loaded on UHC
-    Then Click on view more plans for right navigaton on UHC
-    Then Click on view less plans for left navigaton on UHC
+    #Then Click on view more plans for right navigaton on UHC
+    #Then Click on view less plans for left navigaton on UHC
 
     Examples: 
       | TID   | zipcode | isMultiCounty | county          | plantype | count |planyear|
