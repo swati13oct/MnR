@@ -231,7 +231,7 @@ public class PersonalInformationPage extends UhcDriver{
 		sendkeys(PermanentAdd_City,Perm_city);
 		System.out.println("Mailing Question : "+MailingQuestion);
 		if(MailingQuestion.equalsIgnoreCase("no")){
-			SameMailingAddressNo.click();
+			jsClickNew(SameMailingAddressNo);
 			//CommonUtility.waitForPageLoadNew(driver,MailingAdd_Street, 30);
 			sendkeysNew(MailingAdd_Street,Mailing_Street);
 			//sendkeysNew(MailingAdd_Aptno,Mailing_Aptno);
@@ -519,7 +519,7 @@ public class PersonalInformationPage extends UhcDriver{
 					
 					 validateNew(NextBtn); 
 					 jsClickNew(NextBtn);
-					
+					 waitForPageLoadSafari();
 					 if(driver.getCurrentUrl().contains("special-election-period")){
 					  System.out.println("OLE SEP Page is Displayed"); } else {
 					  System.out.println("OLE SEP Page is not Displayed"); }
@@ -575,7 +575,7 @@ public class PersonalInformationPage extends UhcDriver{
 
 		}
 		else{
-			
+			scrollToView(State_DropDown);
 			Select SelectState = new Select(State_DropDown);
 			SelectState.selectByValue(Mailing_State);
 			sendkeysNew(EnterZipCode,ZipCode);

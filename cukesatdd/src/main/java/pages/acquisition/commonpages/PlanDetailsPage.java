@@ -260,7 +260,7 @@ public class PlanDetailsPage extends UhcDriver {
 	@FindBy(xpath = "//table[contains(@class,'drug-list-table')]//tr[contains(@ng-repeat,'drug')]//td")
 	private WebElement presDrugTabDrugInfoCell;
 	
-	@FindBy(xpath = "//table[contains(@class,'drug-list-table')]//tr[contains(@class,'totals')]//td[2]")
+	@FindBy(xpath = "//table[contains(@class,'drug-list-table')]//tr[contains(@class,'totals')]//td[2]/span[@ng-show]")
 	private WebElement presDrugTabAnnualCostValueCell;
 	
 	@FindBy(xpath = "//*[contains(@id,'planCosts')]//tr[not(contains(@class,'ng-hide'))]//p[contains(text(),'Drug')]/ancestor::td/following-sibling::td/p[contains(text(),'Yearly')]/following-sibling::span[not(contains(@class,'ng-hide'))]")
@@ -372,6 +372,8 @@ public class PlanDetailsPage extends UhcDriver {
 		else 
 			checkModelPopup(driver,10);
 		
+		//note: setting the implicit wait to 0 as it fails because of TimeoutException while finding List<WebElement> of the different tabs on Plan detail page 
+		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
 		if (planType.equalsIgnoreCase("MA")) {
 			CommonUtility.waitForPageLoadNew(driver, medBenefitsTab.get(0), 45);
 			org.testng.Assert.assertTrue(0 == presDrugTab2.size(), "Prescription Drug tab not displayed for MA plans");
@@ -387,6 +389,8 @@ public class PlanDetailsPage extends UhcDriver {
 			org.testng.Assert.assertTrue(medBenefitsTab.get(0).isDisplayed(), "Medical Benefit tab not displayed for SNP plans");
 		}/*Added for SNP as well*/
 		validateNew(planCostsTab);
+		//note: setting the implicit wait back to default value - 10
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);  
 
 	}
 
@@ -738,7 +742,7 @@ public class PlanDetailsPage extends UhcDriver {
 			System.out.println("Enroll in Plan Button is Not Displayed ");
 		}
 
-		EnrollinPlan.click();
+		jsClickNew(EnrollinPlan);
 
 		try {
 			Thread.sleep(5000);
@@ -1295,7 +1299,6 @@ public class PlanDetailsPage extends UhcDriver {
 		try {
 			Thread.sleep(5000);
 			if (optionalRider)
-				//dentalPopupOptionalRidersLink.click();
 				jsClickNew(dentalPopupOptionalRidersLink);
 			else {
 				JavascriptExecutor jse = (JavascriptExecutor) driver;
@@ -1305,7 +1308,7 @@ public class PlanDetailsPage extends UhcDriver {
 			System.out.println("Plan Name is : " + planName);
 			Assert.assertTrue("Expected=" + planName + " Actual=" + dentalPopupPlanLabel.getText(),dentalPopupPlanLabel.getText().contains(planName));
 			String parentWindow = driver.getWindowHandle();
-			dentalCoverPopupContinue.click();
+			jsClickNew(dentalCoverPopupContinue);
 			Thread.sleep(5000);
 			System.out.println("Moved to dental directoy rally page");
 
@@ -1324,7 +1327,7 @@ public class PlanDetailsPage extends UhcDriver {
 			Assert.assertTrue( "Title mismatch for dental directory",driver.getTitle().equals("Dental | Find Care"));
 			driver.close();
 			driver.switchTo().window(parentWindow);
-			dentalCoverPopupCancel.click();
+			jsClickNew(dentalCoverPopupCancel);
 
 		} catch (InterruptedException e) {
 			e.printStackTrace();
@@ -1333,11 +1336,10 @@ public class PlanDetailsPage extends UhcDriver {
 	}
 
 		public void validateDrugInfoOnPrescriptionDrugTab(String drug, String drugCost) {
-
 			if(!presDrugTabDrugInfoCell.getText().contains(drug))
 				Assert.fail("Drug name not displayed on the prescription drugs tab");
 
-			if(!presDrugTabAnnualCostValueCell.getText().equals(drugCost))
+			if(!presDrugTabAnnualCostValueCell.getText().trim().equals(drugCost))
 				Assert.fail("Drug cost not displayed properly on prescription drugs tab");
 		}
 		
