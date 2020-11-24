@@ -801,7 +801,8 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth Prod
       | Plan Type | <planType> |
     And the user validates the Out of Pocket Max section for Dsnp indi member
     	 | Plan Type | <planType> |
-    And the user view the LIS Drug Copays & Discounts header
+    And validating the LIS Drug Copays, Discounts header and drug table for Dsnp indi member
+     | Copay Category | copayCategory |
     And the user validates Drug coverage header and text under the section
     And the user validates text for the Look Up Drugs section
     And the user validates Look Up Drugs button should be visible
@@ -829,7 +830,7 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth Prod
       | index | FID             |username |password  |MemUserName| planType   | memberType           | copayCategory | language | name         | memberid     | effectivedate | monthlypremium | extrahelp            | Identifier       | count | H-PBP    | rider  |
       | 22-c3 | F494433,F506320 |kkumard  | mnrs786@ |Mcalado    | DSNP_MAPD  | Individual_CnS03_BnC | LIS 1         | ENGLISH  | HULDIBERAH KINIRY | 967076552-1 | 01/01/2020 | Not Available  | Extra Help Level : 1 | IndEffectiveAARP |     6 | H3113-110| NoRider|
       | 23-c4 | F494433,F506320 |kkumard  | mnrs786@ |aries1942| DSNP_MAPD  | Individual_CnS04_BnC | LIS 1         | ENGLISH  | BLAIS OWEN        | 912002942-1 | 01/01/2020 | Not Available  | Extra Help Level : 1 | IndEffectiveAARP |     6 | H4527-003| NoRider|
-      | 24-c5 | F494433,F506320 |kkumard  | mnrs786@ |mnava47| DSNP_MAPD  | Individual_CnS05_BnC | LIS 2         | ENGLISH  | KUMARI FROEHNER   | 006644986-1 | 01/01/2020 | Not Available  | Extra Help Level : 2 | IndEffectiveAARP |     6 | H4590-033| NoRider|
+      | 24-c5 | F494433,F506320 |kkumard  | mnrs786@ |melodycwilliams| DSNP_MAPD  | Individual_CnS05_BnC | LIS 2         | ENGLISH  | KUMARI FROEHNER   | 006644986-1 | 01/01/2020 | Not Available  | Extra Help Level : 2 | IndEffectiveAARP |     6 | H4590-033| NoRider|
     
    #  @prod_DSNP_CnS03
     #Examples: 
