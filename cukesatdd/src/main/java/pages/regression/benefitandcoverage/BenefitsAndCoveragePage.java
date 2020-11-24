@@ -3567,6 +3567,7 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 			Assert.assertTrue("Catastrophic Coverage Stage Header is n't displaying", CatastrophicCoverageStage.getText().trim().equals("Catastrophic Coverage Stage"));	
 			Assert.assertTrue("Covered Generic Drugs Header is n't displaying", CoveredGenericDrugs.getText().trim().equals("Covered Generic Drugs"));	
 			Assert.assertTrue("All Other Covered Drugs Header is n't displaying", AllOtherCoveredDrugs.getText().trim().equals("All Other Covered Drugs"));
+			System.out.println("LIS table & it's header names displayed successfully");
 			
 		} else if (copaycategory.equals("Non Lis")) {
 			
@@ -3579,6 +3580,7 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 			Assert.assertTrue("Tier 3 is n't displaying", Tier3.getText().trim().equals("Tier 3"));
 			Assert.assertTrue("Tier 4 is n't displaying", Tier4.getText().trim().equals("Tier 4"));
 			Assert.assertTrue("Tier 5 is n't displaying", Tier5.getText().trim().equals("Tier 5"));
+			System.out.println("Non-LIS table & it's header names displayed successfully");
 		}
 		
 	}
