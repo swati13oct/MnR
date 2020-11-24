@@ -434,7 +434,7 @@ Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanDetails AARP - To test DCE - VPP Plan De
       |   90001 | MAPD     | none   | no              | meloxicam |    78006 |    78456 | Prescription drug home delivery is available through OptumRx. Learn more about OptumRx Mail Order Pharmacy | AARP Medicare Advantage SecureHorizons Focus (HMO) |
 
       
-      @dCERedesign_PlanSave_AARP1 @F476042
+      @dCERedesign_PlanSave_AARP @F476042
   Scenario Outline: Test to verify unauthenticated user save the plan on drug details page and see the saved plan on guest profile
     Given the user is on the AARP medicare site landing page
     When the user performs plan search using following information in the AARP site
