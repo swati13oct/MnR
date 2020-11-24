@@ -3350,12 +3350,14 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	//F266875 - IS Decision Guide Agency Feature : Adding new Step to Navigate to Step 1 page for IS Decision Guide.
 	//a[contains(@class, 'EBRC')]
 	
-	@FindBy(xpath = "//a[contains(@class, 'EBRC')]")
+//	@FindBy(xpath = "//a[contains(@class, 'EBRC')]")
+	@FindBy(xpath = "//div[contains(@class, 'decisionGuide')]//a")
 	private WebElement DecisionGuideLink;
 
 	public IsDecisionGuideStep1 clickOnRequestADecisionGuide() {
 		Assert.assertTrue("Decision Guide Link is not displayed on Med Supp VPP Plan Summary Page", validate(DecisionGuideLink));
-		jsClickNew(DecisionGuideLink);
+//		jsClickNew(DecisionGuideLink);
+		switchToNewTabNew(DecisionGuideLink);
 		CommonUtility.checkPageIsReadyNew(driver);
 		if (driver.getCurrentUrl().contains("medicare-information.html"))
 			return new IsDecisionGuideStep1(driver);
@@ -4606,7 +4608,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		ViewPlanMedSupPage.click();
+		jsClickNew(ViewPlanMedSupPage);
 		return EnteredData;
 
 	}
