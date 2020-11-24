@@ -2640,7 +2640,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			//Added refresh and wait as elements are not located in Safari 13 browser after using navigate back
 			if(MRScenario.browserName.equalsIgnoreCase("Safari")) {
 				driver.navigate().refresh();
-				sleepBySec(2);
+				waitForPageLoadSafari();
 			}
 		}
 
