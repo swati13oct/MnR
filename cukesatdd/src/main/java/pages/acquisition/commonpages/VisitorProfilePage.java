@@ -16,7 +16,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.mysql.jdbc.StringUtils;
+//import com.mysql.jdbc.StringUtils;
 
 import acceptancetests.data.CommonConstants;
 import acceptancetests.util.CommonUtility;
@@ -155,43 +155,25 @@ public class VisitorProfilePage extends UhcDriver {
 	}
 	
 	public AcquisitionHomePage addPlan() {
-		
-		if(StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Pennsylvania") || StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Puerto Rico") || 
-				StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Virginia")) {
-			jsClickNew(addplans);
-		}else {
-			jsClickNew(addPlans);
-		}
-		
-//		addPlans.click();
-		
-		CommonUtility.checkPageIsReadyNew(driver);
-		waitForPageLoadSafari();
-		if(driver.getCurrentUrl().contains("plan-summary")){
-			String page = "health-plans";
-			return new AcquisitionHomePage(driver,page);
-		}
-		return null;
-	}*/
-		if(!StringUtils.isNullOrEmpty(CommonConstants.SELECTED_STATE)) {
-			if(CommonConstants.SELECTED_STATE.equalsIgnoreCase("Pennsylvania") || CommonConstants.SELECTED_STATE.equalsIgnoreCase("Puerto Rico") || 
-					CommonConstants.SELECTED_STATE.equalsIgnoreCase("Vermont")) {
+
+			
+			if(StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Pennsylvania") || StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Puerto Rico") || 
+					StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Virginia")) {
 				jsClickNew(addplans);
 			}else {
 				jsClickNew(addPlans);
 			}
-		}else {
-			jsClickNew(addPlans);
+			
+//			addPlans.click();
+			
+			CommonUtility.checkPageIsReadyNew(driver);
+			waitForPageLoadSafari();
+			if(driver.getCurrentUrl().contains("plan-summary")){
+				String page = "health-plans";
+				return new AcquisitionHomePage(driver,page);
+			}
+			return null;
 		}
-//		addPlans.click();
-		
-		CommonUtility.checkPageIsReadyNew(driver);
-		if(driver.getCurrentUrl().contains("plan-summary")){
-			String page = "health-plans";
-			return new AcquisitionHomePage(driver,page);
-		}
-		return null;
-	}
 	
 	public void validateAddedDrugAndPharmacy(String drug) {
 		
