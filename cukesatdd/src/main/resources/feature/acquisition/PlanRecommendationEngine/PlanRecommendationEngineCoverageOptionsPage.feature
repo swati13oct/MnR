@@ -45,7 +45,7 @@ Feature: Plan Recommendation Engine flow - Verify coverage options page in plan 
       | Zipcode | isMultiCounty | isCoverageOpt |
       |   45634 | NO            |               |
 
-  @PRE @planrecommendation @coveragepage @previousfunctionafterContinue @F372736
+  @PRE @planrecommendation @coveragepage @previousfunctionafterContinue @F372736 @F527376
   Scenario Outline: Zipcode: <Zipcode> -MultiCountyOptions: <isMultiCounty> -CoverageOptions: <isCoverageOpt> - To validate Previous Button functionality after Click continue of coverage options page using multi County and CoverageOptions: <isCoverageOpt> in Plan Recommendation Engine
     Given the user is on UHC medicare acquisition site landing page
     When user navigate to Plan Recommendation Engine and Checking Breadcrumbs
