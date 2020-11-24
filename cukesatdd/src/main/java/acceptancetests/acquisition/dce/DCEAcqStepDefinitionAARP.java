@@ -325,7 +325,7 @@ public class DCEAcqStepDefinitionAARP {
 	public void click_on_find_my_area_button_in_aarp() {
 		VPPPlanSummaryPage vppplansummarypage = (VPPPlanSummaryPage) loginScenario
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		vppplansummarypage.clickonFinfAreaBtn();
+		//vppplansummarypage.clickonFinfAreaBtn();
 	}	
 	
 	@And("^user verify the NBA modal to add providers on the VPP summary page in AARP site$")

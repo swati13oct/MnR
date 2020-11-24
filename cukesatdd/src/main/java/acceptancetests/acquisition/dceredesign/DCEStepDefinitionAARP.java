@@ -23,6 +23,7 @@ import pages.acquisition.commonpages.ComparePlansPage;
 import pages.acquisition.commonpages.PlanDetailsPage;
 import pages.acquisition.commonpages.VPPPlanSummaryPage;
 import pages.acquisition.commonpages.VisitorProfilePage;
+import acceptancetests.acquisition.ole.oleCommonConstants;
 import acceptancetests.acquisition.vpp.VPPCommonConstants;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstants;
@@ -1521,6 +1522,23 @@ public class DCEStepDefinitionAARP {
 
 	}
 	
+	@Then("^user should be navigated to first step of DCE Page$")
+	public void the_user_navigated_to_first_step_of_DCE_Page() {
+		driver = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		GetStartedPage DCEgetStarted = new GetStartedPage(driver);
+		getLoginScenario().saveBean(PageConstants.DCE_Redesign_GetStarted, DCEgetStarted);
 
+	}
 	
+	@When("^user clicks on Return to plan summary page link in DCE$")
+	public void user_clicks_on_Return_to_plan_summary_page_link_in_DCE() {
+		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
+		drugSummaryPage.clickReturnToPlanSummary();
+	}
+	
+	@When("^user clicks on Return to home page link in DCE$")
+	public void user_clicks_on_Return_to_home_page_link_in_DCE() {
+		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
+		drugSummaryPage.clickReturnToHomePage();
+	}
 }

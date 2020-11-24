@@ -790,6 +790,17 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(css = "div#currPlansBanner>div>a")
 	private WebElement enrolledPlansBanner;
 	
+	@FindBy(xpath = "//div[contains(@class,'component_info_wrap')]")
+	private WebElement nextBestActionModal;
+	
+	@FindBy(xpath = "//div[contains(@class,'component_info_wrap')]//button[contains(text(),'Find a Provider')]")
+	private WebElement nextBestActionModalFindMyDoctorsBtn;
+	
+	@FindBy(xpath="//div[contains(@class,'component_info_wrap')]//button[text()='Find a Provider']")
+	private WebElement nextBestActionModalMsg;
+	
+	private static String NEXT_ACTION_MODAL_MSG_PROVIDER_SEARCH = "Is my doctor covered?";
+	
 	public WebElement getValEstimatedAnnualDrugCostValue(String planName) {
 		// WebElement valEstimatedAnnualDrugCostValue =
 		// driver.findElement(By.xpath("//*[contains(text(),'"+planName+"')]/ancestor::div[@class='module-plan-overview
@@ -4733,4 +4744,38 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		}
 	}
 
+	public void verifyNextBestActionModalForProviderSearch() {
+			waitforElementVisibilityInTime(nextBestActionModalFindMyDoctorsBtn, 30);
+			try {
+				if (nextBestActionModal.isDisplayed()) {
+					Assert.assertTrue(
+							"The Provider search message is not displayed.../n Expected Message"
+									+ NEXT_ACTION_MODAL_MSG_PROVIDER_SEARCH + "\n Actual message"
+									+ nextBestActionModalMsg.getText(),
+							nextBestActionModalMsg.getText().equals(NEXT_ACTION_MODAL_MSG_PROVIDER_SEARCH));
+				}
+			} catch (Exception ex) {
+				System.out.println("NBA modal not found");
+			}
+		}
+
+	public ProviderSearchPage clickNextBestActionModalFindMyDoctorsBtn() {
+		waitTillElementClickableInTime(nextBestActionModalFindMyDoctorsBtn, 20);
+		nextBestActionModalFindMyDoctorsBtn.click();
+		CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
+		int initialCount = driver.getWindowHandles().size();
+		ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
+		String currentHandle = null;
+		for (int i = 0; i < initialCount + 1; i++) {
+			driver.switchTo().window(tabs.get(i));
+			currentHandle = driver.getWindowHandle();
+			if (!currentHandle.contentEquals(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION))
+				break;
+		}
+		//Thread.sleep(5000);
+		if (driver.getCurrentUrl().contains("werally")) {
+			return new ProviderSearchPage(driver);
+		}
+		return null;
+	}
 }
