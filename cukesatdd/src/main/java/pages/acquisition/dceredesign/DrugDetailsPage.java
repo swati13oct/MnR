@@ -1412,4 +1412,5 @@ public class DrugDetailsPage extends UhcDriver {
 		System.out.println(noResultsMessage.getText());
 		Assert.assertTrue("No results message not displayed", noResultsMessage.getText().equals(expectedMsg));
 	}
+
 }

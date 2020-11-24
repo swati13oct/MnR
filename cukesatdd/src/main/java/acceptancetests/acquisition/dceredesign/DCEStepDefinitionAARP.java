@@ -1838,5 +1838,9 @@ public void user_should_verify_you_pay_value_for_not_covered_drug_in_drug_pricin
 		drugDetailsPage.validateNoResultsMsgDrugDetails(message);
 	}
 	
-	
+	@When("^the user saves plan from drug details page$")
+	public void the_user_saves_plan_from_drug_details_page(){
+		DrugDetailsPage drugDetailsPage = new DrugDetailsPage(driver);
+		drugDetailsPage.savePlan();
+	}
 }
