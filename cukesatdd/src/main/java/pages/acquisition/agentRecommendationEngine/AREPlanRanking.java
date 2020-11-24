@@ -144,9 +144,12 @@ public class AREPlanRanking extends UhcDriver {
 	private List<WebElement> unsaveplanComparepage;
 
 	@FindBy(css = "div[class*='dupIcon'] img[dtmid*='visitor_profile']")
+	private WebElement heartIcon;
+	
+	@FindBy(css = "#auth-saved-items-button")
 	private WebElement viewSavedItems;
 
-	@FindBy(css = "#dashPlansContainer div[class*='item advantagePlan'] h4")
+	@FindBy(css = "div h3[class*='plan-name']")
 	private List<WebElement> planNamesVisitorPrf;
 
 	@FindBy(css = "div[class*='title-compare'] button[class*='btn']")
@@ -571,7 +574,8 @@ public class AREPlanRanking extends UhcDriver {
 			Collections.sort(vppPlans);
 			System.out.println(vppPlans);
 			threadsleep(3000);
-			validate(viewSavedItems);
+			validate(heartIcon);
+			heartIcon.click();
 			viewSavedItems.click();
 			changePlanyearVisitorProfile(year);
 			visitorprofile(planNamesVisitorPrf, vppPlans);
@@ -584,7 +588,8 @@ public class AREPlanRanking extends UhcDriver {
 			Collections.sort(vppPlans);
 			System.out.println(vppPlans);
 			threadsleep(3000);
-			validate(viewSavedItems);
+			validate(heartIcon);
+			heartIcon.click();
 			viewSavedItems.click();
 			changePlanyearVisitorProfile(year);
 			visitorprofile(planNamesVisitorPrf, vppPlans);
