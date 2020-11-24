@@ -928,10 +928,7 @@ public class DrugDetailsPage extends UhcDriver {
 		validateNew(LinktoExitScenario);
 		jsClickNew(LinktoExitScenario);
 		CommonUtility.checkPageIsReadyNew(driver);
-		
-//		while(validate(overlayFilm, 10)) {/**wait*/}
-		//CommonUtility.waitForElementToDisappear(driver, overlayFilm, 75);
-		
+		waitForPageLoadSafari();
 		if (driver.getCurrentUrl().contains("plan-summary")) {
 			return new VPPPlanSummaryPage(driver);	
 		}
@@ -941,6 +938,7 @@ public class DrugDetailsPage extends UhcDriver {
 	public BuildYourDrugList clickOnEditDrugListLink() {
 
 		jsClickNew(editDrugListLink);
+		waitForPageLoadSafari();
 		
 		return new BuildYourDrugList(driver);
 	}

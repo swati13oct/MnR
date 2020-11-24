@@ -414,6 +414,7 @@ public class DrugSummaryPage extends UhcDriver {
 			System.out.println("View Drug Costs Clicked for SNP Plan : "+planName);
 
 		}
+		waitForPageLoadSafari();
 		CommonUtility.waitForPageLoadNew(driver, DrugDetails_DrugCostsHeading, 30);
 		if(validateNew(changePharmacy) && validateNew(DrugDetails_DrugCostsHeading))
 		{
