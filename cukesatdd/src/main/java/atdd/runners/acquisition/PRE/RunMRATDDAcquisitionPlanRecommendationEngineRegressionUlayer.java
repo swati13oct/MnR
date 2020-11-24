@@ -12,7 +12,7 @@ import cucumber.api.CucumberOptions;
  */
 @RunWith(ExtendedCucumber.class)
 @ExtendedCucumberOptions(
-		retryCount=0, 
+		retryCount=1, 
 		screenShotSize="", 
 		screenShotLocation="/screenshots/",
 		jsonReport = "target/cucumber-RunMRATDDAcquisitionPlanRecommendationEngineRegressionUlayer.json",
@@ -25,7 +25,7 @@ import cucumber.api.CucumberOptions;
 		glue = { "atdd.framework", "acceptancetests.acquisition.planRecommendationEngine" }, 
 		features = { "src/main/resources/feature/acquisition/PlanRecommendationEngine" }, 
 		plugin = {"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionPlanRecommendationEngineRegressionUlayer.json" }, 
-		tags = {"@F529584"})
+		tags = {"@PRERegression"})
 public class RunMRATDDAcquisitionPlanRecommendationEngineRegressionUlayer {
 
 }
