@@ -187,7 +187,7 @@ Feature: Plan Recommendation Engine Ranking - Verify PRE Edit Response functiona
     And user selects Travel options in Travel Page mobile
       | Travel Options | <E_travel> |
     And user selects Doctors in Doctors page mobile
-      | Doctors             | <E_doctors>       |
+      | Doctors Selection   | <E_doctors>       |
       | Doctors Search Text | <E_DoctorsName>   |
       | Multi Doctor        | <E_isMultiDoctor> |
     Then user selects add drug option in Drug page mobile
