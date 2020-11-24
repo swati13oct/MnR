@@ -1,7 +1,7 @@
 
 Feature: UAT Scripts-To test Organic SearchCampaign TFN on AARP site
 
- #######################Script 3: Organic Search via Google and Bing#######################################
+ #######################Script 3: Organic Search via Google and Bing##########################################
  
   @Scenario3_1_GoogleBingSearch_AARP_UAT
   Scenario Outline: - <scenario> 3.1 Google search AARP Medicare Advantage Plan
