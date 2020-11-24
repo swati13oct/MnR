@@ -618,7 +618,7 @@ public void the_user_is_on_following_acquisition_site_from_External_Site_Land_MA
 @Then("^the user navigate to following MedED Pages URL and validate Federal TFN$")
 public void the_user_navigate_to_following_MedED_Pages_URL_and_validate_Federal_TFN(DataTable arg1) throws Throwable {
 	Map<String, String> inputAttributesMap=parseInputArguments(arg1);
-	String URLpath = inputAttributesMap.get("MedSupp URL");
+	String URLpath = inputAttributesMap.get("MEDICARE URL");
 	String TFN_Xpath = inputAttributesMap.get("TFN Xpath");
 	CampaignTFNPage tfnPage = (CampaignTFNPage) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE);
 	tfnPage.navigateToUrl(URLpath);
