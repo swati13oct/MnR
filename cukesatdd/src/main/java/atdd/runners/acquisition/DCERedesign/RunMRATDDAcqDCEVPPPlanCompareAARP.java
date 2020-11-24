@@ -15,9 +15,9 @@ import cucumber.api.CucumberOptions;
 @RunWith(ExtendedCucumber.class)
 @ExtendedCucumberOptions(retryCount=1,screenShotSize="", screenShotLocation="/screenshots/",jsonReport = "target/cucumber-RunMRATDDAcqDCEVPPPlanCompareAARP.json",detailedReport = true,
  detailedAggregatedReport = true, overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDAcqDCEVPPPlanCompareAARP")
-@CucumberOptions(glue = { "atdd.framework", "acceptancetests.acquisition" }, features = { "src/main/resources/feature/acquisition" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcqDCEVPPPlanCompareAARP.json" }, tags = { "@DCE_Redesign_VPP_PlanCompare_AARP" })
+@CucumberOptions(glue = { "atdd.framework", "acceptancetests.acquisition" }, features = { "src/main/resources/feature/acquisition/dceredesign" }, plugin = {
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcqDCEVPPPlanCompareAARP.json" }, tags = { "@DCE_Redesign_VPP_PlanCompare1_AARP" })
 
 public class RunMRATDDAcqDCEVPPPlanCompareAARP {
-
+//@DCE_Redesign_VPP_PlanCompare_AARP,@DCE_Redesign_VPP_PlanCompare2_AARP,@DCE_Redesign_VPP_PlanCompare3_AARP
 }

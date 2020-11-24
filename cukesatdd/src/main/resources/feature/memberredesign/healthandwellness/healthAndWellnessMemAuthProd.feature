@@ -1,6 +1,10 @@
 @healthAndWellness
 Feature: 1.09.1 Member Health and Wellness Page - Member Auth - PROD
 
+  Background: If run on stage then feature security flag needs to be true
+     Given feature security flag must set to true when testing on test env
+      | Feature           | UCPHealthWellness |
+
   #----- beginning of sanity ------------------
   #note: look for scenarios w/ sanity tag
   

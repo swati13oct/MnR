@@ -237,10 +237,10 @@ public class HealthRecordStepDefinition {
 		}
 
 		boolean sanityRun=(Boolean) getLoginScenario().getBean(HealthRecordCommonConstants.SANITY_RUN);	
-		if (!sanityRun) {
+		if (!sanityRun && !MRScenario.environment.equals("offline")) {
 			healthRecordPage.navigateFromDashboardToHeathRecordPageAndThenCloseTab();
-			healthRecordPage.backToOriginalLinkToPrepNextStep(planType, memberType, originalUrl);
 		}
+		healthRecordPage.backToOriginalLinkToPrepNextStep(planType, memberType, originalUrl);
 		testNote.add("\tPASSED - Health Record link destination validation");
 
 		getLoginScenario().saveBean(HealthRecordCommonConstants.TEST_NOTE, testNote);
@@ -314,10 +314,10 @@ public class HealthRecordStepDefinition {
 		}
 
 		boolean sanityRun=(Boolean) getLoginScenario().getBean(HealthRecordCommonConstants.SANITY_RUN);	
-		if (!sanityRun) {
+		if (!sanityRun && !MRScenario.environment.equals("offline")) {
 			healthRecordPage.navigateFromDashboardToHeathRecordPageAndThenCloseTab();
-			healthRecordPage.backToOriginalLinkToPrepNextStep(planType, memberType, originalUrl);
 		}
+		healthRecordPage.backToOriginalLinkToPrepNextStep(planType, memberType, originalUrl);
 		testNote.add("\tPASSED - Health Record link destination validation");
 		getLoginScenario().saveBean(HealthRecordCommonConstants.TEST_NOTE, testNote);
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
@@ -373,11 +373,11 @@ public class HealthRecordStepDefinition {
 		}
 
 		boolean sanityRun=(Boolean) getLoginScenario().getBean(HealthRecordCommonConstants.SANITY_RUN);	
-		if (!sanityRun) {
+		if (!sanityRun && !MRScenario.environment.equals("offline")) {
 			//note: already on secondary page, no need to deal with rally dashboard navigation
 			healthRecordPage.navigateFromTestHarnessToHeathRecordPage();
-			healthRecordPage.backToOriginalLinkToPrepNextStep(planType, memberType, originalUrl);
 		}
+		healthRecordPage.backToOriginalLinkToPrepNextStep(planType, memberType, originalUrl);
 		testNote.add("\tPASSED - Health Record link destination validation");
 		getLoginScenario().saveBean(HealthRecordCommonConstants.TEST_NOTE, testNote);
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
@@ -438,10 +438,10 @@ public class HealthRecordStepDefinition {
 		}
 
 		boolean sanityRun=(Boolean) getLoginScenario().getBean(HealthRecordCommonConstants.SANITY_RUN);	
-		if (!sanityRun) {
+		if (!sanityRun && !MRScenario.environment.equals("offline")) {
 			healthRecordPage.navigateFromTestHarnessToHeathRecordPage();
-			healthRecordPage.backToOriginalLinkToPrepNextStep(planType, memberType, originalUrl);
 		}
+		healthRecordPage.backToOriginalLinkToPrepNextStep(planType, memberType, originalUrl);
 		testNote.add("\tPASSED - Health Record link destination validation");
 		getLoginScenario().saveBean(HealthRecordCommonConstants.TEST_NOTE, testNote);
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
@@ -494,7 +494,7 @@ public class HealthRecordStepDefinition {
 			String planDocUrl=wd.getCurrentUrl();
 			//note: already on secondary page, no need to deal with rally dashboard navigation
 			boolean sanityRun=(Boolean) getLoginScenario().getBean(HealthRecordCommonConstants.SANITY_RUN);	
-			if (!sanityRun) {
+			if (!sanityRun && !MRScenario.environment.equals("offline")) {
 				healthRecordPage.navigateFromTestHarnessToHeathRecordPage();
 				healthRecordPage.backToOriginalLinkToPrepNextStep(planType, memberType, planDocUrl);
 			}
@@ -541,11 +541,11 @@ public class HealthRecordStepDefinition {
 		}
 
 		boolean sanityRun=(Boolean) getLoginScenario().getBean(HealthRecordCommonConstants.SANITY_RUN);	
-		if (!sanityRun) {
+		if (!sanityRun && !MRScenario.environment.equals("offline")) {
 			//note: already on secondary page, no need to deal with rally dashboard navigation
 			healthRecordPage.navigateFromTestHarnessToHeathRecordPage();
-			healthRecordPage.backToOriginalLinkToPrepNextStep(planType, memberType, originalUrl);
 		}
+		healthRecordPage.backToOriginalLinkToPrepNextStep(planType, memberType, originalUrl);
 		testNote.add("\tPASSED - Health Record link destination validation");
 		getLoginScenario().saveBean(HealthRecordCommonConstants.TEST_NOTE, testNote);
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
@@ -605,11 +605,11 @@ public class HealthRecordStepDefinition {
 		}
 
 		boolean sanityRun=(Boolean) getLoginScenario().getBean(HealthRecordCommonConstants.SANITY_RUN);	
-		if (!sanityRun) {
+		if (!sanityRun && !MRScenario.environment.equals("offline")) {
 			//note: already on secondary page, no need to deal with rally dashboard navigation
 			healthRecordPage.navigateFromTestHarnessToHeathRecordPage();
-			healthRecordPage.backToOriginalLinkToPrepNextStep(planType, memberType, originalUrl);
 		}
+		healthRecordPage.backToOriginalLinkToPrepNextStep(planType, memberType, originalUrl);
 		testNote.add("\tPASSED - Health Record link destination validation");
 		getLoginScenario().saveBean(HealthRecordCommonConstants.TEST_NOTE, testNote);
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
@@ -692,10 +692,10 @@ public class HealthRecordStepDefinition {
 		}
 
 		boolean sanityRun=(Boolean) getLoginScenario().getBean(HealthRecordCommonConstants.SANITY_RUN);	
-		if (!sanityRun) {
+		if (!sanityRun && !MRScenario.environment.equals("offline")) {
 			healthRecordPage.navigateFromTestHarnessToHeathRecordPage();
-			healthRecordPage.backToOriginalLinkToPrepNextStep(planType, memberType, originalUrl);
 		}
+		healthRecordPage.backToOriginalLinkToPrepNextStep(planType, memberType, originalUrl);
 		testNote.add("\tPASSED - Health Record link destination validation");
 		getLoginScenario().saveBean(HealthRecordCommonConstants.TEST_NOTE, testNote);
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
@@ -760,10 +760,10 @@ public class HealthRecordStepDefinition {
 		}
 
 		boolean sanityRun=(Boolean) getLoginScenario().getBean(HealthRecordCommonConstants.SANITY_RUN);	
-		if (!sanityRun) {
+		if (!sanityRun && !MRScenario.environment.equals("offline")) {
 			healthRecordPage.navigateFromTestHarnessToHeathRecordPage();
-			healthRecordPage.backToOriginalLinkToPrepNextStep(planType, memberType, originalUrl);
 		}
+		healthRecordPage.backToOriginalLinkToPrepNextStep(planType, memberType, originalUrl);
 		testNote.add("\tPASSED - Health Record link destination validation");
 		getLoginScenario().saveBean(HealthRecordCommonConstants.TEST_NOTE, testNote);
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
@@ -832,11 +832,11 @@ public class HealthRecordStepDefinition {
 		}
 
 		boolean sanityRun=(Boolean) getLoginScenario().getBean(HealthRecordCommonConstants.SANITY_RUN);	
-		if (!sanityRun) {
+		if (!sanityRun && !MRScenario.environment.equals("offline")) {
 			//note: already on secondary page, no need to deal with rally dashboard navigation
 			healthRecordPage.navigateFromTestHarnessToHeathRecordPage();
-			healthRecordPage.backToOriginalLinkToPrepNextStep(planType, memberType, originalUrl);
-		}
+		} 
+		healthRecordPage.backToOriginalLinkToPrepNextStep(planType, memberType, originalUrl);
 		testNote.add("\tPASSED - Health Record link destination validation");
 		getLoginScenario().saveBean(HealthRecordCommonConstants.TEST_NOTE, testNote);
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
@@ -881,11 +881,11 @@ public class HealthRecordStepDefinition {
 		}
 
 		boolean sanityRun=(Boolean) getLoginScenario().getBean(HealthRecordCommonConstants.SANITY_RUN);	
-		if (!sanityRun) {
+		if (!sanityRun && !MRScenario.environment.equals("offline")) {
 			//note: already on secondary page, no need to deal with rally dashboard navigation
 			healthRecordPage.navigateFromTestHarnessToHeathRecordPage();
-			healthRecordPage.backToOriginalLinkToPrepNextStep(planType, memberType, originalUrl);
 		}
+		healthRecordPage.backToOriginalLinkToPrepNextStep(planType, memberType, originalUrl);
 		testNote.add("\tPASSED - Health Record link destination validation");
 		getLoginScenario().saveBean(HealthRecordCommonConstants.TEST_NOTE, testNote);
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
@@ -945,11 +945,11 @@ public class HealthRecordStepDefinition {
 		}
 
 		boolean sanityRun=(Boolean) getLoginScenario().getBean(HealthRecordCommonConstants.SANITY_RUN);	
-		if (!sanityRun) {
+		if (!sanityRun && !MRScenario.environment.equals("offline")) {
 			//note: already on secondary page, no need to deal with rally dashboard navigation
 			healthRecordPage.navigateFromTestHarnessToHeathRecordPage();
-			healthRecordPage.backToOriginalLinkToPrepNextStep(planType, memberType, originalUrl);
 		}
+		healthRecordPage.backToOriginalLinkToPrepNextStep(planType, memberType, originalUrl);
 		testNote.add("\tPASSED - Health Record link destination validation");
 		getLoginScenario().saveBean(HealthRecordCommonConstants.TEST_NOTE, testNote);
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
@@ -1009,11 +1009,11 @@ public class HealthRecordStepDefinition {
 		}
 
 		boolean sanityRun=(Boolean) getLoginScenario().getBean(HealthRecordCommonConstants.SANITY_RUN);	
-		if (!sanityRun) {
+		if (!sanityRun && !MRScenario.environment.equals("offline")) {
 			//note: already on secondary page, no need to deal with rally dashboard navigation
 			healthRecordPage.navigateFromTestHarnessToHeathRecordPage();
-			healthRecordPage.backToOriginalLinkToPrepNextStep(planType, memberType, originalUrl);
 		}
+		healthRecordPage.backToOriginalLinkToPrepNextStep(planType, memberType, originalUrl);
 		testNote.add("\tPASSED - Health Record link destination validation");
 		getLoginScenario().saveBean(HealthRecordCommonConstants.TEST_NOTE, testNote);
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
@@ -1058,11 +1058,11 @@ public class HealthRecordStepDefinition {
 		}
 
 		boolean sanityRun=(Boolean) getLoginScenario().getBean(HealthRecordCommonConstants.SANITY_RUN);	
-		if (!sanityRun) {
+		if (!sanityRun && !MRScenario.environment.equals("offline")) {
 			//note: already on secondary page, no need to deal with rally dashboard navigation
 			healthRecordPage.navigateFromTestHarnessToHeathRecordPage();
-			healthRecordPage.backToOriginalLinkToPrepNextStep(planType, memberType, originalUrl);
 		}
+		healthRecordPage.backToOriginalLinkToPrepNextStep(planType, memberType, originalUrl);
 		testNote.add("\tPASSED - Health Record link destination validation");
 		getLoginScenario().saveBean(HealthRecordCommonConstants.TEST_NOTE, testNote);
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);

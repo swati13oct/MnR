@@ -1,6 +1,11 @@
 @deeplinkSignin
 Feature: To test member Signin from various Deeplinks
 
+ Background: Feature security flag needs to be true before ATDD script execution
+     Given First check if feature security flag is set to true
+      | Feature | UCPUserManagement |
+###############################Regression Scenarios Begin Here ########################################
+
   @regressionMember @paymentDeeplink @CodeTransformers
   Scenario Outline: Verify Member lands on the payment page after signing in from payment deeplink.
     Given member lands on the payment deeplink page
@@ -163,3 +168,16 @@ Feature: To test member Signin from various Deeplinks
       | q2_june_Medica_010  | Password@1 | Medica |
       | q2_apr_aarp0250     | Password@1 | AARP   |
       | mapdtest1           | Password@1 | UHC    |
+      
+        @regressionMember @codeWarriors @F392073
+  Scenario Outline: Verify Member lands on the documents page after signing in from edelivery deeplink.
+    Given member lands on the myDocuments edelivery deeplink page
+    And the myDocuments edelivery deeplink page is displayed with all the fields
+    And on myDocuments edelivery deeplink page I enter the member details and click continue
+      | User Name | <username> |
+      | Password  | <password> |
+    And user is navigated to the myDocuments edelivery deep link page
+
+    Examples: 
+      | username            | password   |
+      | q3_Sep_TexasPCD_015 | Password@1 |

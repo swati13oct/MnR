@@ -1,5 +1,11 @@
 Feature: 1.19 Verify the premium payment flows on member portal - Part 3 - Test case 19 to 26
 
+Background: Feature security flag needs to be true before ATDD script execution
+     Given First check if feature security flag is set to true
+      | Feature           | UCPPayments |
+      
+###############################Regression Scenarios Begin Here ########################################
+
   #Test Case 19 - Test data needed - Any AARP MAPD Plan member - Error message for multiple payments in a day
   @regressionMember
   Scenario Outline: TID: <TID> - Test Case 19 - Verify More Than one Payment Per day error message
@@ -159,11 +165,9 @@ Feature: 1.19 Verify the premium payment flows on member portal - Part 3 - Test 
 
     Examples: 
       | UID       | planType | memberType                | routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName |
-<<<<<<< HEAD
-      | US1463204 | MAPD     | UpdateRecurrStop_Payments |123123123 |        123123123 |     12345 |            12345 | first     | second     | third    |
-=======
+
       | US1463204 | MAPD     | UpdateRecurrStop_Payments | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    |
->>>>>>> branch 'develop' of https://github.optum.com/Consumer-Portals/MRATDD
+
 
   #Test Case 24 - Fed Only Member with Recurring method already setup and with billing history
   @regressionMember
@@ -197,7 +201,7 @@ Feature: 1.19 Verify the premium payment flows on member portal - Part 3 - Test 
       | UID       | planType | memberType                |
       | US1449078 | MAPD     | UpdateRecurrStop_Payments |
 
-  #Test Case 26 -Fed - Any member will work
+  #Test Case 26 -Fed - member with single federal plan and Next payment Due amount and date
   @regressionMember
   Scenario Outline: UID: <UID> -plan: <planType> -memberType: <memberType> - Test Case 26 - Verify Payment Summary for OneTime payment Flow
     Given login with following details logins in the member portal and validate elements
@@ -209,146 +213,6 @@ Feature: 1.19 Verify the premium payment flows on member portal - Part 3 - Test 
     And the user validates the Payment Summary option on New page OTP
 
     Examples: 
-      | UID       | planType | memberType                |
-      | US1448800 | MAPD     | UpdateRecurrStop_Payments |
-
-
-
-  #Test Case 27 - Pre-effective federal member with no billing and no payment history
-  @regressionMember
-  Scenario Outline: FID: <FID> -plan: <planType> -memberType: <memberType> - Test Case 27 -Verify payments for Pre-effective Federal member with no billing and no payment history
-    Given login with following details logins in the member portal and validate elements
-      | Plan Type      | <planType>      |
-      | Member Type    | <memberType>    |
-      | Copay Category | <copayCategory> |
-    When the user clicks on Premium Payments on Header
-    Then User Scrolls down and validate Billing history Section and Payment History Section to ensure that sections are disabled
-
-    Examples: 
-      | planType | memberType             | copayCategory | technicalTFN   | segmentId |
-      | IndMA    | preeffectiveIndPayment | NON LIS       | 1-888-980-8125 |       000 |
-
-  #Test Case 28 - Active member Fed and  Active Group Member with billing and payment history in last 90 days
-  @regressionMember
-  Scenario Outline: FID: <FID> -plan: <planType> -memberType: <memberType> - Test Case 28 -Verify billing and payment history for Active Federal and Active Group member with billing and payment history in last 90 days
-    Given login with following details logins in the member portal and validate elements
-      | Plan Type      | <planType>      |
-      | Member Type    | <memberType>    |
-      | Copay Category | <copayCategory> |
-    When the user clicks on Premium Payments on Header
-    Then User Scrolls down to the Billing history Section
-    Then user validates billing history section header exists
-    Then Last 90 days is selected by default in the Billing History dropdown
-    Then user validates data is present in billing history table
-    | Plan Type      | <planType>      |
-    Then user selects Last 6 months in the Billing History dropdown
-    Then user validates data is present in billing history table
-    | Plan Type      | <planType>      |
-    Then user selects Last 12 months in the Billing History dropdown
-    Then user validates data is present in billing history table
-    | Plan Type      | <planType>      |
-    Then user selects Last 24 months in the Billing History dropdown
-    Then user validates data is present in billing history table
-    | Plan Type      | <planType>      |
-    Then User Scrolls down to the Payment history Section
-    Then user validates Payment history section header exists
-    Then Last 90 days is selected by default in the Payment History dropdown
-    Then user validates data is present in Payment history table
-    | Plan Type      | <planType>      |
-    Then user selects Last 6 months in the Payment History dropdown
-    Then user validates data is present in Payment history table
-    | Plan Type      | <planType>      |
-    Then user selects Last 12 months in the Payment History dropdown
-    Then user validates data is present in Payment history table
-    | Plan Type      | <planType>      |
-    Then user selects Last 24 months in the Payment History dropdown
-    Then user validates data is present in Payment history table
-    | Plan Type      | <planType>      |
-
-    Examples: 
-      | planType   | memberType         | copayCategory |
-      | IndMA     | ACTIVEIndPayment   | NON LIS       |
-      | GroupMAPD | ACTIVEGroupPayment | NON LIS       |
-       
-
-  #Test Case 29 - Billing and Payment history for Fed+Fed-Active Group PDP + Active Group SSUP, Active PDP+SHIP CPMBO member with billing and payment history in last 90 days
-  @regressionMember
-  Scenario Outline: FID: <FID> -plan: <planType> -memberType: <memberType> - Test Case 29 -Verify billing and payment history for Fed+Fed - Active Group PDP + Active Group SSUP member , Active PDP + Active SHIP with billing and payment history in last 90 days
-    Given login with following details logins in the member portal and validate elements
-      | Plan Type      | <planType>      |
-      | Member Type    | <memberType>    |
-      | Copay Category | <copayCategory> |
-    When the user clicks on Premium Payments on Header
-    Then User Scrolls down to the Billing history Section
-    Then user clicks to expand the billing hisory section of first plan
-    Then user validates billing history section header exists
-    Then Last 90 days is selected by default in the Billing History dropdown
-    Then user validates data is present in billing history table
-    | Plan Type      | <planType>      |
-    Then user selects Last 6 months in the Billing History dropdown
-    Then user validates data is present in billing history table
-    | Plan Type      | <planType>      |
-    Then user selects Last 12 months in the Billing History dropdown
-    Then user validates data is present in billing history table
-    | Plan Type      | <planType>      |
-    Then user selects Last 24 months in the Billing History dropdown
-    Then user validates data is present in billing history table
-    | Plan Type      | <planType>      |
-    Then user clicks to expand the payment hisory section of first plan
-    Then user validates Payment history section header exists
-    Then Last 90 days is selected by default in the Payment History dropdown
-    Then user validates data is present in Payment history table
-     | Plan Type | <planType> |
-    Then user selects Last 6 months in the Payment History dropdown
-    Then user validates data is present in Payment history table
-     | Plan Type | <planType> |
-    Then user selects Last 12 months in the Payment History dropdown
-    Then user validates data is present in Payment history table
-     | Plan Type | <planType> |
-    Then user selects Last 24 months in the Payment History dropdown
-    Then user validates data is present in Payment history table
-     | Plan Type | <planType> |
-    Then user selects Previous Calendar Year in the Payment History dropdown and views Payment History
-    Then User Scrolls down to the Billing history Section of Second Plan
-    Then user clicks to expand the billing hisory section of Second plan
-    Then user validates billing history section header exists of Second Plan
-    Then Last 90 days is selected by default in the Billing History dropdown of Second Plan
-    Then user validates data is present in billing history table of Second Plan
-      | Plan Type | <planType> |
-    Then user selects Last 6 months in the Billing History dropdown of Second Plan
-    Then user validates data is present in billing history table of Second Plan
-      | Plan Type | <planType> |
-    Then user selects Last 12 months in the Billing History dropdown of Second Plan
-    Then user validates data is present in billing history table of Second Plan
-      | Plan Type | <planType> |
-    Then user selects Last 24 months in the Billing History dropdown of Second Plan
-    Then user validates data is present in billing history table of Second Plan
-      | Plan Type | <planType> |
-    Then user clicks to expand the payment hisory section of Second Plan
-    Then user validates Payment history section header exists of Second Plan
-    Then Last 90 days is selected by default in the Payment History dropdown of Second Plan
-    Then user validates data is present in Payment history table of Second Plan
-      | Plan Type | <planType> |
-    Then user selects Last 6 months in the Payment History dropdown of Second Plan
-    Then user validates data is present in Payment history table of Second Plan
-      | Plan Type | <planType> |
-    Then user selects Last 12 months in the Payment History dropdown of Second Plan
-    Then user validates data is present in Payment history table of Second Plan
-      | Plan Type | <planType> |
-    Then user selects Last 24 months in the Payment History dropdown of Second Plan
-    Then user validates data is present in Payment history table of Second Plan
-      | Plan Type | <planType> |
-    Then user selects Previous Calendar Year in the Payment History dropdown of Second Plan and views Payment History
-    Then user validates data is present in Payment history table of Second Plan
-      | Plan Type | <planType> |
-    Examples: 
-      | planType          | memberType                     | copayCategory |
-      | GroupPDPGroupSSUP | ACTIVEGroupPDPGroupSSUPPayment | NON LIS       |
-      | FedPDPSHIP        | ACTIVEPDPSHIPPayment           | NON LIS       |
-
-<<<<<<< HEAD
-  #Test Case 26 - This test case check the Make a Payment button on Coverage and Benefits page for federal plan member
-=======
   #Test Case 30 - This test case check the Make a Payment button on Coverage and Benefits page for federal plan member
 >>>>>>> branch 'develop' of https://github.optum.com/Consumer-Portals/MRATDD
   @regressionMember
@@ -447,5 +311,6 @@ Feature: 1.19 Verify the premium payment flows on member portal - Part 3 - Test 
     | Plan Type      | <planType>      |
 
     Examples: 
-      | planType   | memberType         | 
-      | SHIP       | SHIPSetup_Payments |          
+
+      | UID       | planType | memberType                    |
+      | US1448800 | MAPD     | UpdateRecurrStop_Payments_new |

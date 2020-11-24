@@ -1,5 +1,10 @@
 Feature: 1.19 Verify the premium payment flows on member portal - Part 1 - Test cases 1 to 6
 
+ Background: Feature security flag needs to be true before ATDD script execution
+     Given First check if feature security flag is set to true
+      | Feature           | UCPPayments |
+###############################Regression Scenarios Begin Here ########################################
+
   #Test Case 00
   ##Below test case is for updating stop date of recurring payment(referenceNumber is of immediate last successful recurring transaction)
   @regressionMember

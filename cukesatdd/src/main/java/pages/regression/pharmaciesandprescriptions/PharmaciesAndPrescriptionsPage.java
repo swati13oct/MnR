@@ -487,22 +487,23 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 				actText.contains(expText));
 
 
-		String expUrl="/pharmacy-uhc/drugs";
-		if (MRScenario.environment.contains("stage")) 
-			expUrl="https://member.int.uhc.com";
-		else if (MRScenario.environment.equalsIgnoreCase("offline")) 
-			expUrl="https://member.uat.uhc.com";
-		else if (MRScenario.environment.equalsIgnoreCase("prod")) 
-			expUrl="https://member.uhc.com";
-		WebElement expElement=rallyDcePgHeading;
-		if (MRScenario.environment.equalsIgnoreCase("offline") || MRScenario.environment.equalsIgnoreCase("prod")) {
-			expUrl="/health-plans/estimate-drug-costs.html";
+		//tbd String expUrl="/pharmacy-uhc/drugs";
+		//tbd if (MRScenario.environment.contains("stage")) 
+		//tbd 	expUrl="https://member.int.uhc.com";
+		//tbd else if (MRScenario.environment.equalsIgnoreCase("offline")) 
+		//tbd 	expUrl="https://member.uat.uhc.com";
+		//tbd else if (MRScenario.environment.equalsIgnoreCase("prod")) 
+		//tbd 	expUrl="https://member.uhc.com";
+		//tbd WebElement expElement=rallyDcePgHeading;
+		//tbd if (MRScenario.environment.equalsIgnoreCase("offline") || MRScenario.environment.equalsIgnoreCase("prod")) {
+			String expUrl="/health-plans/estimate-drug-costs.html";
+
 			if (memberType.toUpperCase().contains("UHC"))
 					expUrl="uhcmedicaresolutions.com"+expUrl;
 			else 
 					expUrl="aarpmedicareplans.com"+expUrl;
-			expElement=dceHeader;
-		}
+			WebElement expElement=dceHeader;
+		//tbd }
 		String expHref=expUrl;
 		String actHref=targetElement.getAttribute("href");
 		Assert.assertTrue("PROBLEM - '"+targetText+"' element href value is not as expected.  "

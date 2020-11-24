@@ -301,7 +301,8 @@ public class PlanRecommendationEngineCommonutility extends UhcDriver {
 		if(browser.equals("chrome") || browser.equals("IE") || browser.equals("edge")) 
 			actions.clickAndHold(element).build().perform();
 		else {
-			actions.moveToElement(element).click().build().perform();
+//			actions.moveToElement(element).click().build().perform();
+			jsMouseOver(element);		//E2E: Actions class does not work in Safari, hence using javascript to perform the action.
 			}
 	}
 }

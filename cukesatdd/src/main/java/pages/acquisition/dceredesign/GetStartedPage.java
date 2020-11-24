@@ -39,11 +39,11 @@ public class GetStartedPage extends UhcDriver {
 	@FindBy(xpath = "//*[contains(@id,'get-started')]")
 	public WebElement getStartedTab;
 	
-	@FindBy(xpath = "//body/div[@id='overlay']")
-	private WebElement overlayFilm;
-	
 	@FindBy(id = "dupIconFlyOut")
 	private WebElement shoppingCartIcon;
+	
+	@FindBy(css="a#visitor-profile-header")
+    private WebElement lnkProfile;
 
 	public GetStartedPage(WebDriver driver) {
 		super(driver);
@@ -74,18 +74,6 @@ public class GetStartedPage extends UhcDriver {
 		return null;
 	}
 
-	public void clickAddDrugsBtn() {
-		validateNew(AddMyDrugsBtn);
-		AddMyDrugsBtn.click();
-		//return new ZipCodePlanYearCapturePage(driver);
-		/*
-		 * CommonUtility.waitForPageLoad(driver, BuildDrugPage_verificationTxt, 30); if
-		 * (validateNew(BuildDrugPage_verificationTxt)) {
-		 * Assert.assertTrue("Naviagted to Build Drug List Page", true); return new
-		 * ZipCodePlanYearCapturePage(driver); }
-		 * Assert.fail("Did not Navigate to Build Drug List Page"); return null;
-		 */
-	}
 
 	public VPPPlanSummaryPage ClickReturnToBtnToVPPSummary() {
 		validateNew(LinktoExitScenario);
@@ -114,7 +102,9 @@ public class GetStartedPage extends UhcDriver {
 	}
 	
 	public VisitorProfilePage clickOnShoppingCart() {
-		shoppingCartIcon.click();
+		jsClickNew(shoppingCartIcon);
+		jsClickNew(lnkProfile);
+		threadsleep(2000);
 		if (driver.getCurrentUrl().contains("profile")) {
 			return new VisitorProfilePage(driver);
 		} else {
@@ -124,21 +114,8 @@ public class GetStartedPage extends UhcDriver {
 	}
 
 
-	public TellUsAboutDrug clickOnEditButton(String drug) {
-
-		WebElement editLink = driver.findElement(By.xpath("//*[contains(@aria-label,'Edit "+drug+"')]"));
-		jsClickNew(editLink);
-		
-		return new TellUsAboutDrug(driver);
-		
-	}
-
-	public void clickOnRemoveButton(String drug) {
-		WebElement removeLink = driver.findElement(By.xpath("//*[contains(@aria-label,'Remove "+drug+"')]"));
-		jsClickNew(removeLink);
-		
-	}
 
 		
+
 
 }

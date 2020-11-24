@@ -410,6 +410,7 @@ public class PharmaciesAndPrescriptionsBase extends PharmaciesAndPrescriptionsWe
 		CommonUtility.waitForPageLoad(driver, expElement, 10);
 
 		checkModelPopup(driver,1);
+		/* tbd 
 		if (targetItem.contains("ESTIMATE DRUG COSTS")) {
 			//note: vaidate the href element
 			//note: from testharness if clicked then likely land the myuhc.ocm sign-in page
@@ -428,9 +429,10 @@ public class PharmaciesAndPrescriptionsBase extends PharmaciesAndPrescriptionsWe
 			Assert.assertTrue("PROLEM: destination URL is not as expected for '"+targetItem+"'.  Expect to contain ='"+expUrl+"' | Actual='"+currentUrl+"'", currentUrl.contains(expUrl));
 
 		} else {
+		*/
 			String currentUrl=driver.getCurrentUrl();
 			Assert.assertTrue("PROLEM: destination URL is not as expected for '"+targetItem+"'.  Expect to contain ='"+expUrl+"' | Actual='"+currentUrl+"'", currentUrl.contains(expUrl));
-		}
+		//tbd }
 
 		if (noWaitValidate(acqPopupExit)) {
 			acqPopupExit.click();

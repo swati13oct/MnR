@@ -1,5 +1,5 @@
 @DCE_Redesign_VPP_PlanSummary
-Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanSummary AARP - To test VPP Plan Details - DCE Flows in AARP site
+Feature: 1.10.2 DCE-Redesign-VPP_PlanSummary AARP - To test VPP Plan Details - DCE Flows in AARP site
 
   @DCE_Redesign_VPP_PlanSummary_Plan
   Scenario Outline: 1.10.2.1 To test the DCE Redesign flow for PlanType :  <plantype> from vpp Plan Summary

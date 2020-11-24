@@ -325,6 +325,9 @@ public class AccountHomePage extends UhcDriver {
 	private WebElement findCareCost;
 
 
+	@FindBy(linkText = "Find Care")
+	private WebElement findCareUsingLinkText;
+	
 
 	@FindBy(xpath = "//h1[@class='main-heading margin-none']")
 	private WebElement EOBHeading;
@@ -823,7 +826,7 @@ public class AccountHomePage extends UhcDriver {
 					if (PlanType.equalsIgnoreCase("SHIP"))
 					{	
 						WebElement BenefitsandCoverageTab = root1.findElement(By
-								.cssSelector("#sticky-main-nav > div > div > div > a:nth-child(3)"));
+								.cssSelector("#sticky-main-nav > div > div > div > a:nth-child(4)"));
 						System.out.println("shadow-root element has been located, now clicking on Benefits and Coverage tab");	
 						TestHarness.checkForIPerceptionModel(driver);
 						BenefitsandCoverageTab.click();
@@ -3376,7 +3379,7 @@ public class AccountHomePage extends UhcDriver {
 				if (planType.equalsIgnoreCase("SHIP"))
 				{	
 					WebElement PremiumPaymentTab = root1.findElement(By
-							.cssSelector("#sticky-main-nav > div > div > div > a:nth-child(4)"));
+							.cssSelector("#sticky-main-nav > div > div > div > a:nth-child(5)"));
 					System.out.println("shadow-root element has been located");	
 					TestHarness.checkForIPerceptionModel(driver);
 					System.out.println("getText() of Premium Payment is :" +PremiumPaymentTab.getText());
@@ -4516,4 +4519,33 @@ public class AccountHomePage extends UhcDriver {
     return null;
 
 	}
+	
+	/*
+	 * validate that the Find care tab is not displayed on the header
+	 */
+
+	public void onlyFindCareNotAvailable() {
+
+		if (locateElementWithinShadowRoot(shadowRootHeader, "a[data-testid*=nav-link-find-care]")!=null) {
+			Assert.fail("find care tab is displayed");
+		}
+	}
+
+	/**
+	 * validate Find Care Tab is displayed
+	 */
+
+	public void validateFindCareTab() {
+		if (validate(findCareUsingLinkText,0)) {
+			Assert.assertTrue("Find Care and Cost tab is not displayed", validate(findCareUsingLinkText,0));
+		} else {
+			System.out.println("Unable to locate 'Find Care & Costs' from dashboard, check to see if it's in shadow-root");
+			if(locateElementWithinShadowRoot(shadowRootHeader, "a[data-testid*=nav-link-find-care]")==null) {
+				Assert.fail("find care tab is not displayed");
+			}
+		}
+
+	}
+	
+	
 }

@@ -2,7 +2,7 @@
 Feature: 1.12.3 Member Rally claims - Non Regression
 
   #Background: If run on stage then feature security flag needs to be true
-  #   Given feature security flag must set to true when testing on stage env
+  #   Given feature security flag must set to true when testing on test env
   #    | Feature           | ClaimsMicroApp |
 
   #----- beginning of Non Regression claims scenarios section ------------------------

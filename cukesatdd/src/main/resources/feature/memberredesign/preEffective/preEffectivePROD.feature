@@ -149,7 +149,7 @@ Feature: 1.15 Member pre-effective functionality
       | Member Type | <memberType> |
     And user clicks on the Premium Payment tab from Forms and Resources Page
       | Member Type | <memberType> |
-
+    # commenting as implementation is changed for combo
     # And verify that correct phone number is displayed in technical support section of Payments page
     #    | Member Type   | <memberType>   |
     #   | Technical TFN | <technicalTFN> |

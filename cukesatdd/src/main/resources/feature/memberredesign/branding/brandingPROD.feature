@@ -95,8 +95,8 @@ Feature: 1.14 Member Branding functionality
       | Secondary Page Logo | <logoToBeDisplayedOnSecondaryPage> |
 
     Examples: 
-      | TID   | planType | memberType        | copayCategory | logoToBeDisplayedOnDashboard | logoToBeDisplayedOnSecondaryPage    | Test Case                            | username | password | member     |
-      | 15151 | MAPD     | TEXASERS_Branding | NON LIS       | TEXASERS                     | dam/UCP/Images/logo/TEXAS%20ERS.svg | TC_06_ Branding for Texas ERS member | jkuma14  | Brock@04 | lanecarolb |
+      | TID   | planType | memberType        | copayCategory | logoToBeDisplayedOnDashboard | logoToBeDisplayedOnSecondaryPage  | Test Case                            | username | password | member     |
+      | 15151 | MAPD     | TEXASERS_Branding | NON LIS       | TEXASERS                     | dam/UCP/Images/logo/TX-ERSNew.svg | TC_06_ Branding for Texas ERS member | jkuma14  | Brock@04 | lanecarolb |
 
   @regressionMemberPROD3
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify_<Test Case>

@@ -515,14 +515,19 @@ public class PlanRecommendationEngineResultsPage extends UhcDriver {
 			jsClickNew(MSPlanGender);
 			threadsleep(8000);
 			jsClickNew(MSPlanGender);
+			threadsleep(3000);							//E2E: Added for the overlay to disappear after selecting a option
 			Select temp = new Select(MSPlanPartAMonth);
 			temp.selectByVisibleText("January 1");
+			threadsleep(2000);							//E2E: Added for the overlay to disappear after selecting a option
 			temp = new Select(MSPlanPartAYear);
 			temp.selectByVisibleText("2021");
+			threadsleep(2000);							//E2E: Added for the overlay to disappear after selecting a option
 			temp = new Select(MSPlanPartBMonth);
 			temp.selectByVisibleText("January 1");
+			threadsleep(2000);							//E2E: Added for the overlay to disappear after selecting a option
 			temp = new Select(MSPlanPartBYear);
 			temp.selectByVisibleText("2021");
+			threadsleep(2000);							//E2E: Added for the overlay to disappear after selecting a option
 			temp = new Select(MSPlanStartMonth);
 			temp.selectByVisibleText("January 1, 2021");
 			jsClickNew(MSViewPlanButton);
@@ -666,7 +671,6 @@ public class PlanRecommendationEngineResultsPage extends UhcDriver {
 		}
 		
 		public void verifyConfirmationmodalResults(int count,ArrayList<String> drug,ArrayList<String> drugListVPP) {
-
     		if(drug.size()==drugListVPP.size() && count==drug.size()) {
     			String druglist =drug.toString();
     			String vppdruglist =drugListVPP.toString();

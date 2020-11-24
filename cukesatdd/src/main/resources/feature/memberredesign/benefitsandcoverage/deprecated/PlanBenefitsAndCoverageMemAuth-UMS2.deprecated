@@ -2,7 +2,7 @@
 Feature: 1.01 Member  benefits and Coverage page  - Member Auth
 
   #Background: If run on stage then feature security flag needs to be true
-  #   Given feature security flag must set to true when testing on stage env
+  #   Given feature security flag must set to true when testing on test env
   #    | Feature           | UCPBenefits |
 
 ###############################Regression Scenarios Begin Here ########################################
@@ -133,7 +133,7 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth
 
     Examples: 
       | TID   |username  | password  | MemUserName | planType | memberType       |
-      | 15091 |qavgogine | qavgogine| q3_SEP_2020SHIP_001|SHIP_HIP    | ComboFEDShip_BnC |
+      | 15091 |qavgogine | qavgogine| q3_SEP_2020SHIP_002|SHIP_HIP    | ComboFEDShip_BnC |
       
     #TC10_Benefits_for_TexasERSMember
   #@benefitsAndCoverage3 @BenefitsforTexasERSMember @regression @BnC_Part3_memAuth

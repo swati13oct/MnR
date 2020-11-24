@@ -929,5 +929,9 @@ public class CommonConstants {
 	public static final String GPS_QUERY_1 ="Select\n" + 
 			"FIRST_NAME,\n" + 
 			"LAST_NAME from Xerox_stage where xerox_stage_id = ";
+
 	public static final String DB_ORACLE_DRIVER = "oracle.jdbc.driver.OracleDriver";
+	
+	public static String SELECTED_STATE = null;
 }
+
