@@ -181,7 +181,7 @@ Feature: 1.12 UAT - Header and Footer flows
       
 
   @globalfooterULayer @UATRegression
-  Scenario Outline: <Scenario> : To verify links displayed in the global header and footer on Pharmacy Search page
+  Scenario Outline: <Scenario> : To verify links displayed in the global header and footer on Pharmacy page
     Given the user is on medicare acquisition site landing page
     	|Site| <site>|
     When the user navigate to pharmacy search page from the navigation bar
@@ -238,7 +238,7 @@ Feature: 1.12 UAT - Header and Footer flows
        |E2E Scenario_5 UMS|	UHC	  |
 
   @globalfooterULayer @UATRegression
-  Scenario Outline: <Scenario> : To verify links displayed in the global header and footer on page mentioned
+  Scenario Outline: <Scenario> : To verify links displayed in the global header and footer on static pages 
     Given the user is on medicare acquisition site landing page
     	|Site| <site>| 
      Given the user navigates to following medicare acquisition site page
