@@ -531,7 +531,7 @@ public class ReviewSubmitPage extends UhcDriver{
 		String Expected_ZipCode = detailsMap.get("Zip Code");
 		String Expected_County = detailsMap.get("County");
 		String Expected_PlanPremium = detailsMap.get("Plan Premium");
-		String Medicaid_No = detailsMap.get("Medicaid");
+		String Medicaid_No = detailsMap.get("Medicaid Number");
 		String Mailing_AptNo = detailsMap.get("Mailing Apartment Number");
 		String PrimaryPhoneNumber = detailsMap.get("Home Number");
 		String MobilePhoneNumber = detailsMap.get("Mobile Phone Number");
@@ -586,7 +586,9 @@ public class ReviewSubmitPage extends UhcDriver{
 		flag&=validateText(MedicareClaimNumberDisplay,MedicareNumber);
 		flag&=validateText(PartADisplay,PartAeffectiveDate);
 		flag&=validateText(PartBDisplay,PartBeffectiveDate);
+		if(Expected_PlanName.contains("DSNP")) {
 		flag&=validateText(MedicaidNo,Medicaid_No);
+		}
 		flag&=validateText(MobilePhoneNo,MobilePhoneNumber);
 		flag&=validateText(PrimaryPhoneNo,PrimaryPhoneNumber);
 		//flag&=validateText(EmailConfirmationNo,EmailConfirmationNumber);

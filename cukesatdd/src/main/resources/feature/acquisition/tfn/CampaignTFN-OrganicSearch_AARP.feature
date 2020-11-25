@@ -203,6 +203,7 @@ Feature: To test Organic SearchCampaign TFN on AARP site
       | PSC Code | <Precedence1PSC> |
      Then the user navigates to following memeber signin page and navigate to view medicare plans link AARP
      | Member Signin URL |<memberSignIn>     |
+     And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
      Then the user validates PSC code
       | PSC Code | <Precedence2PSC> |
       Then the user validate the sam icons tfn with federal TFN on Acquistion page
@@ -227,6 +228,27 @@ Feature: To test Organic SearchCampaign TFN on AARP site
        Examples: 
       | pscCode1 | pscCode2         |SAMiconTFN                                                 |
       |  810027  |  810106         |//button[@id='sam-call-button']//*[contains(@class,'sam__button__text desktop')] |
+      
+   @Scenario4_7Campaign_Trafic_Member_AARP
+  Scenario Outline: 4.7.2 landing Page referral for MedicareMadeclear url and navigate to AARP Portal
+ 	Given the user is on AARP medicare acquisition site landing page
+    And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
+    Then the user validates PSC code
+      | PSC Code | <pscCode1> |
+   Given the user is on following acquisition site from Campaign Traffic
+      | Site         | <site>         |
+      | Campaign URL | <campaign2Url> | 
+  	And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
+    Then the user validates PSC code
+      | PSC Code | <pscCode2> |
+     Then the user validate the sam icons tfn with federal TFN on Acquistion page
+      | TFN Xpath | <SAMiconTFN> |
+      
+      Examples: 
+      | pscCode1 | pscCode2         |SAMiconTFN                                                 |site   | campaign2Url|
+      |  810027  |  8008553         |//button[@id='sam-call-button']//*[contains(@class,'sam__button__text desktop')] |   ulayer |/health-plans.html?WT.mc_id=8008553#/plan-summary|
+      
+      
       
        @Scenario4_7Campaign_Trafic_Member_AARP1
        Scenario Outline: 4.7.1 Verify email referral plan functionalities on Plan Details page in UHC site
