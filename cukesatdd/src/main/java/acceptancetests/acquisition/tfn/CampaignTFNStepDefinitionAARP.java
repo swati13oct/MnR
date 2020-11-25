@@ -429,9 +429,9 @@ public void the_user_clicks_on_the_shopping_cart_icon_in_AARP_site_Campaign_TFN(
 	AcquisitionHomePage acqHomePage = (AcquisitionHomePage) getLoginScenario()
 			.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 
-	VisitorProfilePage visitorProfilePage = acqHomePage.navigateToVisitorProfilePage();
+	//VisitorProfilePage visitorProfilePage = acqHomePage.navigateToVisitorProfilePage();
 	
-	getLoginScenario().saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfilePage);
+//	getLoginScenario().saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfilePage);
 	String TFNXpath_PlanDetails = "//a[contains(@class, 'tel') and contains(@href, 'tel')]";
 	tfnPage.validateFederalTFN(TFNXpath_PlanDetails);
 }
