@@ -37,6 +37,7 @@ import pages.acquisition.commonpages.SiteMapAARPPage;
 import pages.acquisition.commonpages.ContactUsAARPPage;
 import pages.acquisition.commonpages.AboutUsAARPPage;
 import pages.acquisition.commonpages.VisitorProfilePage;
+import pages.acquisition.dceredesign.BuildYourDrugList;
 import pages.acquisition.dceredesign.DrugDetailsPage;
 import pages.acquisition.dceredesign.GetStartedPage;
 import pages.acquisition.commonpages.ComparePlansPage;
@@ -76,7 +77,11 @@ public class VppCommonStepDefinition {
  
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, aquisitionhomepage);
-		aquisitionhomepage.validateSubtitle();
+		getLoginScenario().saveBean(DCERedesignCommonConstants.DRUGLIST, " ");
+		getLoginScenario().saveBean(DCERedesignCommonConstants.YOUPAYLIST_ALLDRUGS, " ");
+
+		if(site.equalsIgnoreCase("AARP"))
+			aquisitionhomepage.validateSubtitle();
 	}
 
 	@When("^the user performs plan search using following information$")
@@ -124,8 +129,8 @@ public class VppCommonStepDefinition {
 		PlanDetailsPage plandetailspage= plansummaryPage.navigateToPlanDetails(planName, planType);
 		
 			getLoginScenario().saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE, plandetailspage);
-			getLoginScenario().saveBean(DCERedesignCommonConstants.PLANTYPE, planType);
-			getLoginScenario().saveBean(DCERedesignCommonConstants.PLANNAME, planName);
+			getLoginScenario().saveBean(VPPCommonConstants.PLAN_TYPE, planType);
+			getLoginScenario().saveBean(VPPCommonConstants.PLAN_NAME, planName);
 
 		}
 
@@ -1472,8 +1477,8 @@ public class VppCommonStepDefinition {
 		public void the_user_click_on_EdidDrugLink() throws Throwable {
 			PlanDetailsPage vppPlanDetailsPage = (PlanDetailsPage) getLoginScenario()
 					.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
-			GetStartedPage getStartedPage = (GetStartedPage) vppPlanDetailsPage.navigateToDCERedesignEditDrug(); 
-			getLoginScenario().saveBean(PageConstants.DCE_Redesign_GetStarted, getStartedPage);
+			BuildYourDrugList DCEbuildDrugList = (BuildYourDrugList) vppPlanDetailsPage.navigateToDCERedesignEditDrug(); 
+			getLoginScenario().saveBean(PageConstants.DCE_Redesign_BuildDrugList, DCEbuildDrugList);
 		}
 		
 		@Then("^the user click on Plan costs tab$")
@@ -1489,7 +1494,8 @@ public class VppCommonStepDefinition {
 
 			PlanDetailsPage vppPlanDetailsPage = (PlanDetailsPage) getLoginScenario()
 					.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
-			vppPlanDetailsPage.navigateToDCERedesignFromPlanCostTab();
+			BuildYourDrugList DCEbuildDrugList = vppPlanDetailsPage.navigateToDCERedesignFromPlanCostTab();
+			getLoginScenario().saveBean(PageConstants.DCE_Redesign_BuildDrugList, DCEbuildDrugList);
 		}
 		
 		@Then("^the user verifies the drug information on plan costs tab$")
@@ -2311,8 +2317,8 @@ public class VppCommonStepDefinition {
 			getLoginScenario().saveBean(PageConstants.DCE_Redesign_GetStarted, getStartedPage);
 		}
 		
-		@Then("^the site user clicks on Start Application Button and proceed Next$")
-		public void Start_application_button_proceed_next(DataTable givenAttributes) throws Throwable {
+		@Then("^the site user fills all the details in MedsuppPage$")
+		public void user_fills_all_details_medsupp(DataTable givenAttributes) throws Throwable {
 			List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 			Map<String, String> memberAttributesMap = new HashMap<String, String>();
 			for (int i = 0; i < memberAttributesRow.size(); i++) {
@@ -2322,14 +2328,10 @@ public class VppCommonStepDefinition {
 			}
 
 			String DateOfBirth = memberAttributesMap.get("DOB");
-			String FirstName = memberAttributesMap.get("Firstname");
-			String LastName = memberAttributesMap.get("Lastname");
+		
 			VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 			plansummaryPage.MedSupFormValidation(DateOfBirth);
-			String submitconfirmation = plansummaryPage.StartApplication(FirstName, LastName);
-			getLoginScenario().saveBean(VPPCommonConstants.SUBMITCONFIRMATION, submitconfirmation);
-
 		}
 		
 		@Then("^the site user clicks on continue application until confirmaion page$")
@@ -2350,4 +2352,105 @@ public class VppCommonStepDefinition {
 			getLoginScenario().saveBean(VPPCommonConstants.SUBMITCONFIRMATION, submitconfirmation);
 
 		}
+		
+		@Then("^the site user validates the RightRails Links on Medsupp Page$")
+		public void user_validate_rightrail_links_medsupp_page() throws Throwable {
+		/*	List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+			Map<String, String> memberAttributesMap = new HashMap<String, String>();
+			for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+				memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+						memberAttributesRow.get(i).getCells().get(1));
+			}
+			String urGuideURL =  memberAttributesMap.get("UR Guide URL");
+				String GuideYourHealthURL =  memberAttributesMap.get("Guide Your Health URL");
+			String OutlineCoverageURL =  memberAttributesMap.get("Outline Coverage URL");
+				String PlanOverviewLink =  memberAttributesMap.get("Plan overview URL");
+			String RulesandDisclosureLink=  memberAttributesMap.get("Rules and Disclosure URL");*/
+				VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+						.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+				
+			//	if(urGuideURL!=null){
+					plansummaryPage.medsuppOLERightRail();
+					plansummaryPage.medsuppOLERightRailGuideourhealth();
+					//plansummaryPage.medsuppOLERightRailoutlinecoverage();
+					plansummaryPage.medsuppOLERightRailplanoverview();
+					plansummaryPage.medsuppOLERightRailRulesDisclose();
+					plansummaryPage.medsuppOLERightRailEnrollmentDiscount();
+					plansummaryPage.medsuppOLERightRailLearnmore();
+					
+					
+					
+					//Assert.assertTrue(true);
+			//	}else
+				//	Assert.fail("Error in loading the yourguide Page");
+
+		}
+		
+		@Then("^the site user clicks on Start Application Button and proceed Next$")
+		public void Start_application_button_proceed_next(DataTable givenAttributes) throws Throwable {
+			List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+			Map<String, String> memberAttributesMap = new HashMap<String, String>();
+			for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+				memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+						memberAttributesRow.get(i).getCells().get(1));
+			}
+
+			//String DateOfBirth = memberAttributesMap.get("DOB");
+			String FirstName = memberAttributesMap.get("Firstname");
+			String LastName = memberAttributesMap.get("Lastname");
+			VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);			
+			String submitconfirmation = plansummaryPage.StartApplication(FirstName, LastName);
+			getLoginScenario().saveBean(VPPCommonConstants.SUBMITCONFIRMATION, submitconfirmation);
+
+		}
+		
+		@Then("^user validate the plandetails on medsupp plans$")
+		public void user_validate_plandetails_medsupp_page() throws Throwable {
+			
+			VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+			
+			plansummaryPage.medsuppOLEplandetails();
+			plansummaryPage.medsuppOLERightRail();
+			plansummaryPage.medsuppOLERightRailGuideourhealth();
+			//plansummaryPage.medsuppOLERightRailoutlinecoverage();
+			plansummaryPage.medsuppOLERightRailplanoverview();
+			plansummaryPage.medsuppOLERightRailRulesDisclose();
+			plansummaryPage.medsuppOLERightRailEnrollmentDiscount();
+			plansummaryPage.medsuppOLERightRailLearnmore();
+		}
+		
+		@Then("^agent saves two plans as favorite for user$")
+		public void agent_saves_two_plans_as_favorite_on_AARP_site_for_user(DataTable givenAttributes) {
+			VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+
+			Map<String, String> memberAttributesMap = prepareTestInput(givenAttributes);
+			String savePlanNames = memberAttributesMap.get("Test Plans");
+			String planType = memberAttributesMap.get("Plan Type");
+
+			switch (planType) {
+			case "MAPD":
+				plansummaryPage.savePlans(savePlanNames, planType);
+				break;
+			case "MA":
+				plansummaryPage.savePlans(savePlanNames, planType);
+				break;
+			case "SNP":
+				plansummaryPage.viewPlanSummary(planType);
+				plansummaryPage.savePlans(savePlanNames, planType);
+				break;
+			case "PDP":
+				plansummaryPage.viewPlanSummary(planType);
+				plansummaryPage.savePlans(savePlanNames, planType);
+				break;
+
+			default:
+				break;
+			}
+		}
 }
+		

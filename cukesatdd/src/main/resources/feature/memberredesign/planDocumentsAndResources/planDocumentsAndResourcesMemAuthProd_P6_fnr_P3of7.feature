@@ -1,9 +1,9 @@
 @planAndDocuments @thePredators @E2E @feature-F368974
 Feature: 1.06.6.2 Member Plans and Documents - section: Forms And Resources Part 3 of 7 - Reimbursement Forms - Member Auth - PROD
 
-  #Background: If run on stage then feature security flag needs to be true
-  #   Given feature security flag must set to true when testing on stage env
-  #    | Feature           | UCPPlanDocuments |
+  Background: If run on stage then feature security flag needs to be true
+     Given feature security flag must set to true when testing on test env
+      | Feature           | UCPPlanDocuments |
 
   #------------------------------------------
   @prod_planAndDocuments06_3of7 @formsAndResources_3of7

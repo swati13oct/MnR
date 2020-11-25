@@ -4,9 +4,13 @@ import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Set;
+import java.util.TimeZone;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Pattern;
 
@@ -1471,9 +1475,9 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 		CommonUtility.waitForPageLoad(driver, pharmacyDropdownTexas, 5);
 		JavascriptExecutor jse = (JavascriptExecutor) driver;
 		jse.executeScript("window.scrollBy(0,-500)", "");
-		//tbd if (MRScenario.environment.contains("team-a") && memberType.toUpperCase().contains("GROUP"))
-		//tbd 	Assert.assertTrue("PROBLEM - do not expect drug cost dropdown for group user", !validate(pharmacyDropdownTexas));
-		//tbd else 
+		if (MRScenario.environment.contains("team-a") && memberType.toUpperCase().contains("GROUP"))
+		 	Assert.assertTrue("PROBLEM - do not expect drug cost dropdown for group user", !validate(pharmacyDropdownTexas));
+		else 
 			validateNew(pharmacyDropdownTexas);
 	}
 
@@ -1866,7 +1870,7 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 
 	public void validateCopayCoinsuranceInDrugTable() {
 		//note: Dec2018 - wait for the element to show up before validation
-		validateNew(drugTableNonLisMember);
+		validateNew(drugTableNonLisMember_stdRetail);
 		if (annualDeductibleColumnFederal.size() > 0 && initialCoverageColumnFederal.size() > 0
 				&& coverageGaStageColumnFederal.size() > 0 && catastrophicCoverageStageColumnFederal.size() > 0) {
 			Assert.assertTrue("The columns are correct in Drug Costs table", true);
@@ -2453,7 +2457,7 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 		}
 
 	}
-
+	
 	public void validatedrugcosttableMAPD_NONLIS() {
 		CommonUtility.waitForPageLoad(driver, RetailDrugCost_TableNONLIS, 15);
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", RetailDrugCost_TableNONLIS);
@@ -2683,9 +2687,9 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 		Select drugCostdropdwn = new Select(drugCostDropdown);
 		drugCostdropdwn.selectByVisibleText("Preferred Mail Service Pharmacy");
 
-		CommonUtility.waitForPageLoad(driver, preferedMail_Table1PDP, 15);
-		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", preferedMail_Table1PDP);
-		validateWithValue("Drug cost table is diplaying for MAPD GROUP LIS 4", preferedMail_Table1PDP);
+		CommonUtility.waitForPageLoad(driver, preferedMail_DrugTable, 15);
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", preferedMail_DrugTable);
+		validateWithValue("Drug cost table is diplaying for MAPD GROUP LIS 4", preferedMail_DrugTable);
 		String TableData_2020= "Annual Deductible Stage\n"
 				+"Initial Coverage Stage\n"
 				+"Coverage Gap Stage\n"
@@ -2739,13 +2743,13 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 		String TableData= TableData_2020;
 		if (MRScenario.environment.contains("team-a"))
 			TableData=TableData_2021;
-		if(preferedMail_Table1PDP.getText().equals(TableData.toString())){
+		if(preferedMail_DrugTable.getText().equals(TableData.toString())){
 			Assert.assertTrue("The data in the drug cost table is displaying correctly", true);
 			System.out.println("The data in the drug cost table is displaying correctly");  
 		}
 		else{
 			System.out.println(">>>>>>>>>>>>>The Expected Table  value is<<<<<<<<<<<<<<<<<< \n"+TableData.toString());
-			System.out.println(">>>>>>>>>>>>>>>>>>>The Actual table value is- <<<<<<<<<<<<< \n"+preferedMail_Table1PDP.getText());
+			System.out.println(">>>>>>>>>>>>>>>>>>>The Actual table value is- <<<<<<<<<<<<< \n"+preferedMail_DrugTable.getText());
 			System.err.println("The data in the drug cost table is not displaying correctly");
 			Assert.fail("The data in the drug cost table is not displaying correctly");
 		}
@@ -2809,13 +2813,13 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 		String TableData=TableData_2020;
 		if (MRScenario.environment.contains("team-a")) 
 			TableData=TableData_2021;
-		if(standardDetail_Table1PDP.getText().equals(TableData.toString())){
+		if(standardRetail_DrugTable.getText().equals(TableData.toString())){
 			Assert.assertTrue("The data in the drug cost table is displaying correctly", true);
 			System.out.println("The data in the drug cost table is displaying correctly");  
 		}
 		else{
 			System.out.println(">>>>>>>>>>>>>The Expected Table  value is<<<<<<<<<<<<<<<<<< \n- "+TableData.toString());
-			System.out.println(">>>>>>>>>>>>>>>>>>>The Actual table value is- <<<<<<<<<<<<< \n"+standardDetail_Table1PDP.getText());
+			System.out.println(">>>>>>>>>>>>>>>>>>>The Actual table value is- <<<<<<<<<<<<< \n"+standardRetail_DrugTable.getText());
 			System.err.println("The data in the drug cost table is not displaying correctly");
 			Assert.fail("The data in the drug cost table is not displaying correctly");
 		}
@@ -3041,13 +3045,13 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 				+"no more than 25% for generic drugs or 25% for brand name drugs\n"
 				+"*Once you reach the Coverage Gap Stage, you pay copays or coinsurance defined by your plan for all Tier 1 through Tier 5 drugs regardless of whether your full deductible has been met.";
 
-		if(standardDetail_Table1PDP.getText().equals(TableData.toString())){
+		if(standardRetail_DrugTable.getText().equals(TableData.toString())){
 			Assert.assertTrue("The data in the drug cost table is displaying correctly", true);
 			System.out.println("The data in the drug cost table is displaying correctly");  
 		}
 		else{
 			System.out.println(">>>>>>>>>The Expected table value is<<<<<<<<<<<< \n"+TableData.toString());
-			System.out.println(">>>>>>>>>>>>>>>>>>>The Actual table value is- <<<<<<<<<<<<< \n"+standardDetail_Table1PDP.getText());
+			System.out.println(">>>>>>>>>>>>>>>>>>>The Actual table value is- <<<<<<<<<<<<< \n"+standardRetail_DrugTable.getText());
 			System.err.println("The data in the drug cost table is not displaying correctly");
 			Assert.fail("The data in the drug cost table is not displaying correctly");
 		}
@@ -3059,9 +3063,9 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 		Select drugCostdropdwn = new Select(drugCostDropdown);
 		drugCostdropdwn.selectByVisibleText("Preferred Mail Service Pharmacy");
 
-		CommonUtility.waitForPageLoad(driver, preferedMail_Table1PDP, 15);
-		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", preferedMail_Table1PDP);
-		validateWithValue("Drug cost table", preferedMail_Table1PDP);
+		CommonUtility.waitForPageLoad(driver, preferedMail_DrugTable, 15);
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", preferedMail_DrugTable);
+		validateWithValue("Drug cost table", preferedMail_DrugTable);
 		String TableData= "Annual Deductible Stage\n"
 				+"Initial Coverage Stage\n"
 				+"Coverage Gap Stage\n"
@@ -3088,13 +3092,13 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 				+"no more than 25% for generic drugs or 25% for brand name drugs\n"
 				+"*Once you reach the Coverage Gap Stage, you pay copays or coinsurance defined by your plan for all Tier 1 through Tier 5 drugs regardless of whether your full deductible has been met.";
 
-		if(preferedMail_Table1PDP.getText().equals(TableData.toString())){
+		if(preferedMail_DrugTable.getText().equals(TableData.toString())){
 			Assert.assertTrue("The data in the drug cost table is displaying correctly", true);
 			System.out.println("The data in the drug cost table is displaying correctly");  
 		}
 		else{
 			System.out.println(">>>>>>>>>The Expected table value is<<<<<<<<<<<< \n"+TableData.toString());
-			System.out.println(">>>>>>>>>>>>>>>>>>>The Actual table value is- <<<<<<<<<<<<< \n"+preferedMail_Table1PDP.getText());
+			System.out.println(">>>>>>>>>>>>>>>>>>>The Actual table value is- <<<<<<<<<<<<< \n"+preferedMail_DrugTable.getText());
 			System.err.println("The data in the drug cost table is not displaying correctly");
 			Assert.fail("The data in the drug cost table is not displaying correctly");
 		}
@@ -3113,9 +3117,9 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 		drugCostdropdwn.selectByVisibleText("Preferred Mail Service Pharmacy");
 		sleepBySec(2);
 
-		CommonUtility.waitForPageLoad(driver, preferedMail_Table1PDP, 15);
-		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", preferedMail_Table1PDP);
-		validateWithValue("Drug cost table is diplaying for MAPD GROUP LIS 4", preferedMail_Table1PDP);
+		CommonUtility.waitForPageLoad(driver, preferedMail_DrugTable, 15);
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", preferedMail_DrugTable);
+		validateWithValue("Drug cost table is diplaying for MAPD GROUP LIS 4", preferedMail_DrugTable);
 		String TableData= "Annual Deductible Stage\n"
 				+"Initial Coverage Stage\n"
 				+"Coverage Gap Stage\n"
@@ -3140,13 +3144,13 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 				+"33%\n"
 				+"no more than 25% for generic drugs or 25% for brand name drugs";
 
-		if(preferedMail_Table1PDP.getText().equals(TableData.toString())){
+		if(preferedMail_DrugTable.getText().equals(TableData.toString())){
 			Assert.assertTrue("The data in the drug cost table is displaying correctly", true);
 			System.out.println("The data in the drug cost table is displaying correctly");  
 		}
 		else{
 			System.out.println(">>>>>>>>>The Expected table value is<<<<<<<<<<<< \n"+TableData.toString());
-			System.out.println(">>>>>>>>>>>>>>>>>>>The Actual table value is- <<<<<<<<<<<<< \n"+preferedMail_Table1PDP.getText());
+			System.out.println(">>>>>>>>>>>>>>>>>>>The Actual table value is- <<<<<<<<<<<<< \n"+preferedMail_DrugTable.getText());
 			System.err.println("The data in the drug cost table is not displaying correctly");
 			Assert.fail("The data in the drug cost table is not displaying correctly");
 		}
@@ -3182,13 +3186,13 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 				+"33%\n"
 				+"no more than 25% for generic drugs or 25% for brand name drugs";
 
-		if(standardDetail_Table1PDP.getText().equals(TableData.toString())){
+		if(standardRetail_DrugTable.getText().equals(TableData.toString())){
 			Assert.assertTrue("The data in the drug cost table is displaying correctly", true);
 			System.out.println("The data in the drug cost table is displaying correctly");  
 		}
 		else{
 			System.out.println(">>>>>>>>>The Expected table value is<<<<<<<<<<<< "+TableData.toString());
-			System.out.println(">>>>>>>>>>>>>>>>>>>The Actual table value is- <<<<<<<<<<<<< \n"+standardDetail_Table1PDP.getText());
+			System.out.println(">>>>>>>>>>>>>>>>>>>The Actual table value is- <<<<<<<<<<<<< \n"+standardRetail_DrugTable.getText());
 			System.err.println("The data in the drug cost table is not displaying correctly");
 			Assert.fail("The data in the drug cost table is not displaying correctly");
 		}
@@ -3205,9 +3209,9 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 		drugCostdropdwn.selectByVisibleText("Preferred Mail Service Pharmacy");
 		sleepBySec(2);
 
-		CommonUtility.waitForPageLoad(driver, preferedMail_Table1PDP, 15);
-		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", preferedMail_Table1PDP);
-		validateWithValue("Drug cost table is diplaying for MAPD GROUP LIS 4", preferedMail_Table1PDP);
+		CommonUtility.waitForPageLoad(driver, preferedMail_DrugTable, 15);
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", preferedMail_DrugTable);
+		validateWithValue("Drug cost table is diplaying for MAPD GROUP LIS 4", preferedMail_DrugTable);
 		String TableData= "Annual Deductible Stage\n"
 				+"Initial Coverage Stage\n"
 				+"Coverage Gap Stage\n"
@@ -3232,13 +3236,13 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 				+"33%\n"
 				+"no more than 25% for generic drugs or 25% for brand name drugs";
 
-		if(preferedMail_Table1PDP.getText().equals(TableData.toString())){
+		if(preferedMail_DrugTable.getText().equals(TableData.toString())){
 			Assert.assertTrue("The data in the drug cost table is displaying correctly", true);
 			System.out.println("The data in the drug cost table is displaying correctly");  
 		}
 		else{
 			System.out.println(">>>>>>>>>The Expected table value is<<<<<<<<<<<< \n"+TableData.toString());
-			System.out.println(">>>>>>>>>>>>>>>>>>>The Actual table value is- <<<<<<<<<<<<< \n"+preferedMail_Table1PDP.getText());
+			System.out.println(">>>>>>>>>>>>>>>>>>>The Actual table value is- <<<<<<<<<<<<< \n"+preferedMail_DrugTable.getText());
 			System.err.println("The data in the drug cost table is not displaying correctly");
 			Assert.fail("The data in the drug cost table is not displaying correctly");
 		}
@@ -3274,13 +3278,13 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 				+"33%\n"
 				+"no more than 25% for generic drugs or 25% for brand name drugs";
 		
-		if(standardDetail_Table1PDP.getText().equals(TableData.toString())){
+		if(standardRetail_DrugTable.getText().equals(TableData.toString())){
 			Assert.assertTrue("The data in the drug cost table is displaying correctly", true);
 			System.out.println("The data in the drug cost table is displaying correctly");  
 		}
 		else{
 			System.out.println(">>>>>>>>>The Expected table value is<<<<<<<<<<<< \n"+TableData.toString());
-			System.out.println(">>>>>>>>>>>>>>>>>>>The Actual table value is- <<<<<<<<<<<<< \n"+standardDetail_Table1PDP.getText());
+			System.out.println(">>>>>>>>>>>>>>>>>>>The Actual table value is- <<<<<<<<<<<<< \n"+standardRetail_DrugTable.getText());
 			System.err.println("The data in the drug cost table is not displaying correctly");
 			Assert.fail("The data in the drug cost table is not displaying correctly");
 		}
@@ -3472,5 +3476,1648 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 		}
 	}
 	
+	public List<String> getDrugDropDownOptions() {
+		List<String> optionsList=new ArrayList<String>();
+		Assert.assertTrue("PROBLEM - unable to locate drug costs dropdown", validate(drugCostDropdown,0));
+		Select s= new Select(drugCostDropdown);
+		List <WebElement> op=s.getOptions();
+		for (int i=0; i<op.size(); i++) {
+			System.out.println("i='"+i+"' | text="+op.get(i).getText());
+			optionsList.add(op.get(i).getText());
+		}
+		return optionsList;	
+	}
+	
+	public void selectDrugTblDropDownOption(String option) {
+		Select drugCostdropdwn = new Select(drugCostDropdown);
+		drugCostdropdwn.selectByVisibleText(option);
+	}
+
+	public Date getCurrentSystemDate() {
+		if (MRScenario.environment.equalsIgnoreCase("offline") || MRScenario.environment.equalsIgnoreCase("prod")) {
+			//note: offline-prod and online-prod should always have current date anyway...
+			return new Date();
+		} else {
+			String dateTimeStr=getMemTestEnvSysTime();
+			String[] tmp=dateTimeStr.split(" ");
+			String month=tmp[1];
+			String day=tmp[2];
+			String year=tmp[5];
+			String s=month+" "+day+","+year;		
+			DateFormat df = new SimpleDateFormat("MMM dd,yyyy"); 
+			df.setTimeZone(TimeZone.getTimeZone("UTC"));
+			Date targetDate;
+			try {
+				targetDate = df.parse(s);
+				String newDateString = df.format(targetDate);
+				System.out.println("currentSystemDate="+newDateString);
+				return targetDate;
+			} catch (java.text.ParseException e) {
+				e.printStackTrace();
+				return null;
+			}
+		}
+	}
+	
+	public String convertDateToStrFormat_MMDDYYYY(Date d) {
+		String pattern = "MM/dd/yyyy";
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+		simpleDateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
+		return simpleDateFormat.format(d);
+	}
+	 
+	public void validateDrgTbl_stdRetPha_mapd_noD_hasInsulin() {
+		String type="MAPD - No Deductible for All Tiers";
+		String tblName="Standard Retail Pharmacy";
+		String tbl= "Additional Drug Coverage\n"
+				+"Annual Deductible Stage\n"
+				+"Initial Coverage Stage\n"
+				+"Coverage Gap Stage\n"
+				+"Catastrophic Coverage Stage\n"
+				+"Tier 1\n"
+				+"No Deductible\n"
+				+"$0.00\n"
+				+"$0.00\n"
+				+"Your share of the cost for a covered drug will be either coinsurance or a copayment whichever is the larger amount:\n"
+				+"-either- coinsurance of 5% of the cost of the drug\n"
+				+"-or- $3.60 for a generic drug or a drug that is treated like a generic and $8.95 for all other drugs.\n"
+				+"Tier 2\n"
+				+"$12.00\n"
+				+"$12.00\n"
+				+"Select Insulin Drugs\n"
+				+"$35.00\n"
+				+"$35.00\n"
+				+"Tier 3\n"
+				+"$47.00\n"
+				+"0%\n"
+				+"Tier 4\n"
+				+"$100.00\n"
+				+"no more than 25% for generic drugs or 25% for brand name drugs\n"
+				+"Tier 5\n"
+				+"33%\n"
+				+"no more than 25% for generic drugs or 25% for brand name drugs";
+		WebElement drugTblElement=standardRetail_DrugTable;
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", drugTblElement);
+		validateWithValue("Drug cost table - '"+tblName+"' - '"+type+"'", drugTblElement);
+		if(drugTblElement.getText().equals(tbl.toString())){
+			Assert.assertTrue("The data in the drug cost table is displaying correctly", true);
+			System.out.println("The data in the drug cost table is displaying correctly");  
+		} else{
+			System.out.println(">>>>>>>>>>>>>The Expected Table  value is<<<<<<<<<<<<<<<<< \n"+tbl.toString());
+			System.out.println(">>>>>>>>>>>>>The Actual Table value is<<<<<<<<<<<<<<<<<<<< \n"+drugTblElement.getText());
+			System.err.println("The data in the drug cost table is not displaying correctly");
+			Assert.fail("The data in the drug cost table is not displaying correctly. table='"+tblName+"' | type='"+type+"'");
+		}
+
+	}
+
+	public void validateDrgTbl_preRetail_mapd_noD_hasInsulin() {
+		String type="MAPD - No Deductible for All Tiers";
+		String tblName="Preferred Retail Pharmacy";
+		String tbl= "TBD";
+		WebElement drugTblElement=preferredRetail_DrugTable;
+		System.out.println("--------------------validateDrgTbl_preRetail_mapd_T123NoD_T45D");
+		System.out.println(drugTblElement.getText());
+		System.out.println("--------------------");
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", drugTblElement);
+		validateWithValue("Drug cost table - '"+tblName+"' - '"+type+"'", drugTblElement);
+		if(drugTblElement.getText().equals(tbl.toString())){
+			Assert.assertTrue("The data in the drug cost table is displaying correctly", true);
+			System.out.println("The data in the drug cost table is displaying correctly");  
+		} else{
+			System.out.println(">>>>>>>>>>>>>The Expected Table  value is<<<<<<<<<<<<<<<<< \n"+tbl.toString());
+			System.out.println(">>>>>>>>>>>>>The Actual Table value is<<<<<<<<<<<<<<<<<<<< \n"+drugTblElement.getText());
+			System.err.println("The data in the drug cost table is not displaying correctly");
+			Assert.fail("The data in the drug cost table is not displaying correctly. table='"+tblName+"' | type='"+type+"'");
+		} 
+	}
+	
+	public void validateDrgTbl_preMaiSerPha_mapd_noD_hasInsulin() {
+		String type="MAPD - No Deductible for All Tiers";
+		String tblName="Preferred Mail Service Pharmacy";
+		String tbl= "Annual Deductible Stage\n"
+				+"Initial Coverage Stage\n"
+				+"Coverage Gap Stage\n"
+				+"Catastrophic Coverage Stage\n"
+				+"Tier 1\n"
+				+"No Deductible\n"
+				+"$0.00\n"
+				+"$0.00\n"
+				+"Your share of the cost for a covered drug will be either coinsurance or a copayment whichever is the larger amount:\n"
+				+"-either- coinsurance of 5% of the cost of the drug\n"
+				+"-or- $3.60 for a generic drug or a drug that is treated like a generic and $8.95 for all other drugs.\n"
+				+"Tier 2\n"
+				+"$12.00\n"
+				+"$12.00\n"
+				+"Select Insulin Drugs\n"
+				+"$95.00\n"
+				+"$95.00\n"
+				+"Tier 3\n"
+				+"$131.00\n"
+				+"0%\n"
+				+"Tier 4\n"
+				+"$290.00\n"
+				+"no more than 25% for generic drugs or 25% for brand name drugs";
+		WebElement drugTblElement=preferedMail_DrugTable;
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", drugTblElement);
+		validateWithValue("Drug cost table - '"+tblName+"' - '"+type+"'", drugTblElement);
+		if(drugTblElement.getText().equals(tbl.toString())){
+			Assert.assertTrue("The data in the drug cost table is displaying correctly", true);
+			System.out.println("The data in the drug cost table is displaying correctly");  
+		} else{
+			System.out.println(">>>>>>>>>>>>>The Expected Table  value is<<<<<<<<<<<<<<<<< \n"+tbl.toString());
+			System.out.println(">>>>>>>>>>>>>The Actual Table value is<<<<<<<<<<<<<<<<<<<< \n"+drugTblElement.getText());
+			System.err.println("The data in the drug cost table is not displaying correctly");
+			Assert.fail("The data in the drug cost table is not displaying correctly. table='"+tblName+"' | type='"+type+"'");
+		}
+	}
+	
+	public void validateDrgTbl_preMaiSerPha_mapd_T12NoD_T345D_hasInsulin() {
+		String type="MAPD - T1,2 No Deductible - T3,4,5 Deductible";
+		String tblName="Preferred Mail Service Pharmacy";
+		String tbl= "Annual Deductible Stage\n"
+				+"Initial Coverage Stage\n"
+				+"Coverage Gap Stage\n"
+				+"Catastrophic Coverage Stage\n"
+				+"Tier 1\n"
+				+"No deductible.\n"
+				+"$0.00\n"
+				+"no more than 25% for generic drugs or 25% for brand name drugs\n"
+				+"Your share of the cost for a covered drug will be either coinsurance or a copayment whichever is the larger amount:\n"
+				+"-either- coinsurance of 5% of the cost of the drug\n"
+				+"-or- $3.60 for a generic drug or a drug that is treated like a generic and $8.95 for all other drugs.\n"
+				+"Tier 2\n"
+				+"$0.00\n"
+				+"$0.00\n"
+				+"Select Insulin Drugs\n"
+				+"100% until the $275.00 deductible is met.*\n"
+				+"$95.00\n"
+				+"$95.00\n"
+				+"Tier 3\n"
+				+"$131.00\n"
+				+"0%\n"
+				+"Tier 4\n"
+				+"$290.00\n"
+				+"no more than 25% for generic drugs or 25% for brand name drugs\n"
+				+"*Once you reach the Coverage Gap Stage, you pay copays or coinsurance defined by your plan for all Tier 1 through Tier 5 drugs regardless of whether your full deductible has been met.";
+		WebElement drugTblElement=preferedMail_DrugTable;
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", drugTblElement);
+		validateWithValue("Drug cost table - '"+tblName+"' - '"+type+"'", drugTblElement);
+		if(drugTblElement.getText().equals(tbl.toString())){
+			Assert.assertTrue("The data in the drug cost table is displaying correctly", true);
+			System.out.println("The data in the drug cost table is displaying correctly");  
+		} else{
+			System.out.println(">>>>>>>>>>>>>The Expected Table  value is<<<<<<<<<<<<<<<<< \n"+tbl.toString());
+			System.out.println(">>>>>>>>>>>>>The Actual Table value is<<<<<<<<<<<<<<<<<<<< \n"+drugTblElement.getText());
+			System.err.println("The data in the drug cost table is not displaying correctly");
+			Assert.fail("The data in the drug cost table is not displaying correctly. table='"+tblName+"' | type='"+type+"'");
+		}
+	}
+	
+	public void validateDrgTbl_stdRetPha_mapd_T12NoD_T345D_hasInsulin() {
+		String type="MAPD - T1,2 No Deductible - T3,4,5 Deductible";
+		String tblName="Standard Retail Pharmacy";
+		String tbl= "Annual Deductible Stage\n"
+				+"Initial Coverage Stage\n"
+				+"Coverage Gap Stage\n"
+				+"Catastrophic Coverage Stage\n"
+				+"Tier 1\n"
+				+"No Deductible\n"
+				+"$10.00\n"
+				+"no more than 25% for generic drugs or 25% for brand name drugs\n"
+				+"Your share of the cost for a covered drug will be either coinsurance or a copayment whichever is the larger amount:\n"
+				+"-either- coinsurance of 5% of the cost of the drug\n"
+				+"-or- $3.60 for a generic drug or a drug that is treated like a generic and $8.95 for all other drugs.\n"
+				+"Tier 2\n"
+				+"$20.00\n"
+				+"$20.00\n"
+				+"Select Insulin Drugs\n"
+				+"$275.00\n"
+				+"$35.00\n"
+				+"$35.00\n"
+				+"Tier 3\n"
+				+"$47.00\n"
+				+"0%\n"
+				+"Tier 4\n"
+				+"$100.00\n"
+				+"no more than 25% for generic drugs or 25% for brand name drugs\n"
+				+"Tier 5\n"
+				+"28%\n"
+				+"no more than 25% for generic drugs or 25% for brand name drugs\n"
+				+"*Once you reach the Coverage Gap Stage, you pay copays or coinsurance defined by your plan for all Tier 1 through Tier 5 drugs regardless of whether your full deductible has been met.";
+		WebElement drugTblElement=standardRetail_DrugTable;
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", drugTblElement);
+		validateWithValue("Drug cost table - '"+tblName+"' - '"+type+"'", drugTblElement);
+		if(drugTblElement.getText().equals(tbl.toString())){
+			Assert.assertTrue("The data in the drug cost table is displaying correctly", true);
+			System.out.println("The data in the drug cost table is displaying correctly");  
+		} else{
+			System.out.println(">>>>>>>>>>>>>The Expected Table  value is<<<<<<<<<<<<<<<<< \n"+tbl.toString());
+			System.out.println(">>>>>>>>>>>>>The Actual Table value is<<<<<<<<<<<<<<<<<<<< \n"+drugTblElement.getText());
+			System.err.println("The data in the drug cost table is not displaying correctly");
+			Assert.fail("The data in the drug cost table is not displaying correctly. table='"+tblName+"' | type='"+type+"'");
+		}
+	}
+	
+	public void validateDrgTbl_preRetail_mapd_T12NoD_T345D_hasInsulin() {
+		String type="MAPD - T1,2 No Deductible - T3,4,5 Deductible";
+		String tblName="Preferred Retail Pharmacy";
+		String tbl= "Annual Deductible Stage\n"
+				+"Initial Coverage Stage\n"
+				+"Coverage Gap Stage\n"
+				+"Catastrophic Coverage Stage\n"
+				+"Tier 1\n"
+				+"No deductible.\n"
+				+"$0.00\n"
+				+"no more than 25% for generic drugs or 25% for brand name drugs\n"
+				+"Your share of the cost for a covered drug will be either coinsurance or a copayment whichever is the larger amount:\n"
+				+"-either- coinsurance of 5% of the cost of the drug\n"
+				+"-or- $3.60 for a generic drug or a drug that is treated like a generic and $8.95 for all other drugs.\n"
+				+"Tier 2\n"
+				+"$0.00\n"
+				+"$0.00\n"
+				+"Select Insulin Drugs\n"
+				+"100% until the $275.00 deductible is met.*\n"
+				+"$35.00\n"
+				+"$35.00\n"
+				+"Tier 3\n"
+				+"$47.00\n"
+				+"100%\n"
+				+"Tier 4\n"
+				+"$100.00\n"
+				+"no more than 25% for generic drugs or 25% for brand name drugs\n"
+				+"Tier 5\n"
+				+"28%\n"
+				+"no more than 25% for generic drugs or 25% for brand name drugs\n"
+				+"*Once you reach the Coverage Gap Stage, you pay co-pays or co-insurance defined by your plan for all Tier 1 through Tier 5 drugs regardless of whether your full deductible has been met.";
+		WebElement drugTblElement=preferredRetail_DrugTable;
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", drugTblElement);
+		validateWithValue("Drug cost table - '"+tblName+"' - '"+type+"'", drugTblElement);
+		if(drugTblElement.getText().equals(tbl.toString())){
+			Assert.assertTrue("The data in the drug cost table is displaying correctly", true);
+			System.out.println("The data in the drug cost table is displaying correctly");  
+		} else{
+			System.out.println(">>>>>>>>>>>>>The Expected Table  value is<<<<<<<<<<<<<<<<< \n"+tbl.toString());
+			System.out.println(">>>>>>>>>>>>>The Actual Table value is<<<<<<<<<<<<<<<<<<<< \n"+drugTblElement.getText());
+			System.err.println("The data in the drug cost table is not displaying correctly");
+			Assert.fail("The data in the drug cost table is not displaying correctly. table='"+tblName+"' | type='"+type+"'");
+		}
+	}
+	
+	public void validateDrgTbl_preMaiSerPha_mapd_T123NoD_T45D_hasInsulin() {
+		String type="MAPD - T1,2,3 No Deductible - T4,5 Deductible";
+		String tblName="Preferred Mail Service Pharmacy";
+		String tbl= "Annual Deductible Stage\n"
+				+"Initial Coverage Stage\n"
+				+"Coverage Gap Stage\n"
+				+"Catastrophic Coverage Stage\n"
+				+"Tier 1\n"
+				+"No deductible.\n"
+				+"$0.00\n"
+				+"no more than 25% for generic drugs or 25% for brand name drugs\n"
+				+"Your share of the cost for a covered drug will be either coinsurance or a copayment whichever is the larger amount:\n"
+				+"-either- coinsurance of 5% of the cost of the drug\n"
+				+"-or- $3.60 for a generic drug or a drug that is treated like a generic and $8.95 for all other drugs.\n"
+				+"Tier 2\n"
+				+"$0.00\n"
+				+"$0.00\n"
+				+"Select Insulin Drugs\n"
+				+"$95.00\n"
+				+"$95.00\n"
+				+"Tier 3\n"
+				+"$131.00\n"
+				+"0%\n"
+				+"Tier 4\n"
+				+"100% until the $175.00 deductible is met.*\n"
+				+"$290.00\n"
+				+"no more than 25% for generic drugs or 25% for brand name drugs\n"
+				+"*Once you reach the Coverage Gap Stage, you pay copays or coinsurance defined by your plan for all Tier 1 through Tier 5 drugs regardless of whether your full deductible has been met.";
+		WebElement drugTblElement=preferedMail_DrugTable;
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", drugTblElement);
+		validateWithValue("Drug cost table - '"+tblName+"' - '"+type+"'", drugTblElement);
+		if(drugTblElement.getText().equals(tbl.toString())){
+			Assert.assertTrue("The data in the drug cost table is displaying correctly", true);
+			System.out.println("The data in the drug cost table is displaying correctly");  
+		} else{
+			System.out.println(">>>>>>>>>>>>>The Expected Table  value is<<<<<<<<<<<<<<<<< \n"+tbl.toString());
+			System.out.println(">>>>>>>>>>>>>The Actual Table value is<<<<<<<<<<<<<<<<<<<< \n"+drugTblElement.getText());
+			System.err.println("The data in the drug cost table is not displaying correctly");
+			Assert.fail("The data in the drug cost table is not displaying correctly. table='"+tblName+"' | type='"+type+"'");
+		} 
+	}
+	
+	public void validateDrgTbl_stdRetPha_mapd_T123NoD_T45D_hasInsulin() {
+		String type="MAPD - T1,2,3 No Deductible - T4,5 Deductible";
+		String tblName="Standard Retail Pharmacy";
+		String tbl= "Annual Deductible Stage\n"
+				+"Initial Coverage Stage\n"
+				+"Coverage Gap Stage\n"
+				+"Catastrophic Coverage Stage\n"
+				+"Tier 1\n"
+				+"No Deductible\n"
+				+"$3.00\n"
+				+"no more than 25% for generic drugs or 25% for brand name drugs\n"
+				+"Your share of the cost for a covered drug will be either coinsurance or a copayment whichever is the larger amount:\n"
+				+"-either- coinsurance of 5% of the cost of the drug\n"
+				+"-or- $3.60 for a generic drug or a drug that is treated like a generic and $8.95 for all other drugs.\n"
+				+"Tier 2\n"
+				+"$12.00\n"
+				+"$12.00\n"
+				+"Select Insulin Drugs\n"
+				+"$35.00\n"
+				+"$35.00\n"
+				+"Tier 3\n"
+				+"$47.00\n"
+				+"0%\n"
+				+"Tier 4\n"
+				+"$175.00\n"
+				+"$100.00\n"
+				+"no more than 25% for generic drugs or 25% for brand name drugs\n"
+				+"Tier 5\n"
+				+"30%\n"
+				+"no more than 25% for generic drugs or 25% for brand name drugs\n"
+				+"*Once you reach the Coverage Gap Stage, you pay copays or coinsurance defined by your plan for all Tier 1 through Tier 5 drugs regardless of whether your full deductible has been met.";
+		WebElement drugTblElement=standardRetail_DrugTable;
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", drugTblElement);
+		validateWithValue("Drug cost table - '"+tblName+"' - '"+type+"'", drugTblElement);
+		if(drugTblElement.getText().equals(tbl.toString())){
+			Assert.assertTrue("The data in the drug cost table is displaying correctly", true);
+			System.out.println("The data in the drug cost table is displaying correctly");  
+		} else{
+			System.out.println(">>>>>>>>>>>>>The Expected Table  value is<<<<<<<<<<<<<<<<< \n"+tbl.toString());
+			System.out.println(">>>>>>>>>>>>>The Actual Table value is<<<<<<<<<<<<<<<<<<<< \n"+drugTblElement.getText());
+			System.err.println("The data in the drug cost table is not displaying correctly");
+			Assert.fail("The data in the drug cost table is not displaying correctly. table='"+tblName+"' | type='"+type+"'");
+		} 
+	}
+	
+	public void validateDrgTbl_preRetail_mapd_T123NoD_T45D_hasInsulin() {
+		String type="MAPD - T1,2,3 No Deductible - T4,5 Deductible";
+		String tblName="Preferred Retail Pharmacy";
+		String tbl= "TBD";
+		WebElement drugTblElement=preferredRetail_DrugTable;
+		System.out.println("--------------------validateDrgTbl_preRetail_mapd_T123NoD_T45D");
+		System.out.println(drugTblElement.getText());
+		System.out.println("--------------------");
+		Assert.assertTrue("TODO - drug table='"+tblName+"' | type='"+type+"'", false);
+		/* keep
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", drugTblElement);
+		validateWithValue("Drug cost table - '"+tblName+"' - '"+type+"'", drugTblElement);
+		if(drugTblElement.getText().equals(tbl.toString())){
+			Assert.assertTrue("The data in the drug cost table is displaying correctly", true);
+			System.out.println("The data in the drug cost table is displaying correctly");  
+		} else{
+			System.out.println(">>>>>>>>>>>>>The Expected Table  value is<<<<<<<<<<<<<<<<< \n"+tbl.toString());
+			System.out.println(">>>>>>>>>>>>>The Actual Table value is<<<<<<<<<<<<<<<<<<<< \n"+drugTblElement.getText());
+			System.err.println("The data in the drug cost table is not displaying correctly");
+			Assert.fail("The data in the drug cost table is not displaying correctly. table='"+tblName+"' | type='"+type+"'");
+		} */
+	}
+
+	public void validateDrgTbl_stdRetPha_pdp_noD_hasInsulin() {
+		String type="PDP - No Deductible for All Tiers";
+		String tblName="Standard Retail Pharmacy";
+		String tbl= "Additional Drug Coverage\n"
+				+"Annual Deductible Stage\n"
+				+"Initial Coverage Stage\n"
+				+"Coverage Gap Stage\n"
+				+"Catastrophic Coverage Stage\n"
+				+"Tier 1\n"
+				+"No Deductible\n"
+				+"$15.00\n"
+				+"no more than 25% for generic drugs or 25% for brand name drugs\n"
+				+"Your share of the cost for a covered drug will be either coinsurance or a copayment whichever is the larger amount:\n"
+				+"-either- coinsurance of 5% of the cost of the drug\n"
+				+"-or- $3.60 for a generic drug or a drug that is treated like a generic and $8.95 for all other drugs.\n"
+				+"Tier 2\n"
+				+"$20.00\n"
+				+"$20.00\n"
+				+"Select Insulin Drugs\n"
+				+"$35.00\n"
+				+"$35.00\n"
+				+"Tier 3\n"
+				+"$47.00\n"
+				+"0%*\n"
+				+"Tier 4\n"
+				+"45%\n"
+				+"no more than 25% for generic drugs or 25% for brand name drugs\n"
+				+"Tier 5\n"
+				+"33%\n"
+				+"no more than 25% for generic drugs or 25% for brand name drugs";
+		WebElement drugTblElement=standardRetail_DrugTable;
+		System.out.println("--------------------validateDrgTbl_stdRetPha_pdp_noD");
+		System.out.println(drugTblElement.getText());
+		System.out.println("--------------------");
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", drugTblElement);
+		validateWithValue("Drug cost table - '"+tblName+"' - '"+type+"'", drugTblElement);
+		if(drugTblElement.getText().equals(tbl.toString())){
+			Assert.assertTrue("The data in the drug cost table is displaying correctly", true);
+			System.out.println("The data in the drug cost table is displaying correctly");  
+		} else{
+			System.out.println(">>>>>>>>>>>>>The Expected Table  value is<<<<<<<<<<<<<<<<< \n"+tbl.toString());
+			System.out.println(">>>>>>>>>>>>>The Actual Table value is<<<<<<<<<<<<<<<<<<<< \n"+drugTblElement.getText());
+			System.err.println("The data in the drug cost table is not displaying correctly");
+			Assert.fail("The data in the drug cost table is not displaying correctly. table='"+tblName+"' | type='"+type+"'");
+		} 
+
+	}
+
+	public void validateDrgTbl_preRetail_pdp_noD_hasInsulin() {
+		String type="PDP - No Deductible for All Tiers";
+		String tblName="Preferred Retail Pharmacy";
+		String tbl= "Annual Deductible Stage\n"
+				+"Initial Coverage Stage\n"
+				+"Coverage Gap Stage\n"
+				+"Catastrophic Coverage Stage\n"
+				+"Tier 1\n"
+				+"No Deductible\n"
+				+"$5.00\n"
+				+"no more than 25% for generic drugs or 25% for brand name drugs\n"
+				+"Your share of the cost for a covered drug will be either coinsurance or a copayment whichever is the larger amount:\n"
+				+"-either- coinsurance of 5% of the cost of the drug\n"
+				+"-or- $3.60 for a generic drug or a drug that is treated like a generic and $8.95 for all other drugs.\n"
+				+"Tier 2\n"
+				+"$10.00\n"
+				+"$10.00\n"
+				+"Select Insulin Drugs\n"
+				+"$35.00\n"
+				+"$35.00\n"
+				+"Tier 3\n"
+				+"$45.00\n"
+				+"100%\n"
+				+"Tier 4\n"
+				+"40%\n"
+				+"no more than 25% for generic drugs or 25% for brand name drugs\n"
+				+"Tier 5\n"
+				+"33%\n"
+				+"no more than 25% for generic drugs or 25% for brand name drugs";
+		WebElement drugTblElement=preferredRetail_DrugTable;
+		System.out.println("--------------------validateDrgTbl_preRetail_pdp_noD");
+		System.out.println(drugTblElement.getText());
+		System.out.println("--------------------");
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", drugTblElement);
+		validateWithValue("Drug cost table - '"+tblName+"' - '"+type+"'", drugTblElement);
+		if(drugTblElement.getText().equals(tbl.toString())){
+			Assert.assertTrue("The data in the drug cost table is displaying correctly", true);
+			System.out.println("The data in the drug cost table is displaying correctly");  
+		} else{
+			System.out.println(">>>>>>>>>>>>>The Expected Table  value is<<<<<<<<<<<<<<<<< \n"+tbl.toString());
+			System.out.println(">>>>>>>>>>>>>The Actual Table value is<<<<<<<<<<<<<<<<<<<< \n"+drugTblElement.getText());
+			System.err.println("The data in the drug cost table is not displaying correctly");
+			Assert.fail("The data in the drug cost table is not displaying correctly. table='"+tblName+"' | type='"+type+"'");
+		} 
+	}
+	
+	public void validateDrgTbl_preMaiSerPha_pdp_noD_hasInsulin() {
+		String type="PDP - No Deductible for All Tiers";
+		String tblName="Preferred Mail Service Pharmacy";
+		String tbl= "Annual Deductible Stage\n"
+				+"Initial Coverage Stage\n"
+				+"Coverage Gap Stage\n"
+				+"Catastrophic Coverage Stage\n"
+				+"Tier 1\n"
+				+"No Deductible\n"
+				+"$0.00\n"
+				+"no more than 25% for generic drugs or 25% for brand name drugs\n"
+				+"Your share of the cost for a covered drug will be either coinsurance or a copayment whichever is the larger amount:\n"
+				+"-either- coinsurance of 5% of the cost of the drug\n"
+				+"-or- $3.60 for a generic drug or a drug that is treated like a generic and $8.95 for all other drugs.\n"
+				+"Tier 2\n"
+				+"$0.00\n"
+				+"$0.00\n"
+				+"Select Insulin Drugs\n"
+				+"$105.00\n"
+				+"$105.00\n"
+				+"Tier 3\n"
+				+"$120.00\n"
+				+"0%\n"
+				+"Tier 4\n"
+				+"40%\n"
+				+"no more than 25% for generic drugs or 25% for brand name drugs";
+		WebElement drugTblElement=preferedMail_DrugTable;
+		System.out.println("--------------------validateDrgTbl_preMaiSerPha_pdp_noD");
+		System.out.println(drugTblElement.getText());
+		System.out.println("--------------------");
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", drugTblElement);
+		validateWithValue("Drug cost table - '"+tblName+"' - '"+type+"'", drugTblElement);
+		if(drugTblElement.getText().equals(tbl.toString())){
+			Assert.assertTrue("The data in the drug cost table is displaying correctly", true);
+			System.out.println("The data in the drug cost table is displaying correctly");  
+		} else{
+			System.out.println(">>>>>>>>>>>>>The Expected Table  value is<<<<<<<<<<<<<<<<< \n"+tbl.toString());
+			System.out.println(">>>>>>>>>>>>>The Actual Table value is<<<<<<<<<<<<<<<<<<<< \n"+drugTblElement.getText());
+			System.err.println("The data in the drug cost table is not displaying correctly");
+			Assert.fail("The data in the drug cost table is not displaying correctly. table='"+tblName+"' | type='"+type+"'");
+		} 
+	}
+	
+	public void validateDrgTbl_preMaiSerPha_pdp_T12NoD_T345D_hasInsulin() {
+		String type="PDP - T1,2 No Deductible - T3,4,5 Deductible";
+		String tblName="Preferred Mail Service Pharmacy";
+		String tbl= "TBD";
+		WebElement drugTblElement=preferedMail_DrugTable;
+		System.out.println("--------------------validateDrgTbl_preMaiSerPha_pdp_T12noD_T345D");
+		System.out.println(drugTblElement.getText());
+		System.out.println("--------------------");
+		Assert.assertTrue("TODO - drug table='"+tblName+"' | type='"+type+"'", false);
+		/* keep
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", drugTblElement);
+		validateWithValue("Drug cost table - '"+tblName+"' - '"+type+"'", drugTblElement);
+		if(drugTblElement.getText().equals(tbl.toString())){
+			Assert.assertTrue("The data in the drug cost table is displaying correctly", true);
+			System.out.println("The data in the drug cost table is displaying correctly");  
+		} else{
+			System.out.println(">>>>>>>>>>>>>The Expected Table  value is<<<<<<<<<<<<<<<<< \n"+tbl.toString());
+			System.out.println(">>>>>>>>>>>>>The Actual Table value is<<<<<<<<<<<<<<<<<<<< \n"+drugTblElement.getText());
+			System.err.println("The data in the drug cost table is not displaying correctly");
+			Assert.fail("The data in the drug cost table is not displaying correctly. table='"+tblName+"' | type='"+type+"'");
+		} */
+	}
+	
+	public void validateDrgTbl_stdRetPha_pdp_T12NoD_T345D_hasInsulin() {
+		String type="PDP - T1,2 No Deductible - T3,4,5 Deductible";
+		String tblName="Standard Retail Pharmacy";
+		String tbl= "TBD";
+		WebElement drugTblElement=standardRetail_DrugTable;
+		System.out.println("--------------------validateDrgTbl_stdRetPha_pdp_T12noD_T345D");
+		System.out.println(drugTblElement.getText());
+		System.out.println("--------------------");
+		Assert.assertTrue("TODO - drug table='"+tblName+"' | type='"+type+"'", false);
+		/* keep
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", drugTblElement);
+		validateWithValue("Drug cost table - '"+tblName+"' - '"+type+"'", drugTblElement);
+		if(drugTblElement.getText().equals(tbl.toString())){
+			Assert.assertTrue("The data in the drug cost table is displaying correctly", true);
+			System.out.println("The data in the drug cost table is displaying correctly");  
+		} else{
+			System.out.println(">>>>>>>>>>>>>The Expected Table  value is<<<<<<<<<<<<<<<<< \n"+tbl.toString());
+			System.out.println(">>>>>>>>>>>>>The Actual Table value is<<<<<<<<<<<<<<<<<<<< \n"+drugTblElement.getText());
+			System.err.println("The data in the drug cost table is not displaying correctly");
+			Assert.fail("The data in the drug cost table is not displaying correctly. table='"+tblName+"' | type='"+type+"'");
+		} */
+	}
+	
+	public void validateDrgTbl_preRetail_pdp_T12NoD_T345D_hasInsulin() {
+		String type="PDP - T1,2 No Deductible - T3,4,5 Deductible";
+		String tblName="Preferred Retail Pharmacy";
+		String tbl= "TBD";
+		WebElement drugTblElement=preferredRetail_DrugTable;
+		System.out.println("--------------------validateDrgTbl_preRetail_pdp_T12noD_T345D");
+		System.out.println(drugTblElement.getText());
+		System.out.println("--------------------");
+		Assert.assertTrue("TODO - drug table='"+tblName+"' | type='"+type+"'", false);
+		/* keep
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", drugTblElement);
+		validateWithValue("Drug cost table - '"+tblName+"' - '"+type+"'", drugTblElement);
+		if(drugTblElement.getText().equals(tbl.toString())){
+			Assert.assertTrue("The data in the drug cost table is displaying correctly", true);
+			System.out.println("The data in the drug cost table is displaying correctly");  
+		} else{
+			System.out.println(">>>>>>>>>>>>>The Expected Table  value is<<<<<<<<<<<<<<<<< \n"+tbl.toString());
+			System.out.println(">>>>>>>>>>>>>The Actual Table value is<<<<<<<<<<<<<<<<<<<< \n"+drugTblElement.getText());
+			System.err.println("The data in the drug cost table is not displaying correctly");
+			Assert.fail("The data in the drug cost table is not displaying correctly. table='"+tblName+"' | type='"+type+"'");
+		} */
+	}
+	
+	public void validateDrgTbl_preMaiSerPha_pdp_T123NoD_T45D_hasInsulin() {
+		String type="PDP - T1,2,3 No Deductible - T4,5 Deductible";
+		String tblName="Preferred Mail Service Pharmacy";
+		String tbl= "TBD";
+		WebElement drugTblElement=preferedMail_DrugTable;
+		System.out.println("--------------------validateDrgTbl_preMaiSerPha_pdp_T123NoD_T45D");
+		System.out.println(drugTblElement.getText());
+		System.out.println("--------------------");
+		Assert.assertTrue("TODO - drug table='"+tblName+"' | type='"+type+"'", false);
+		/* keep
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", drugTblElement);
+		validateWithValue("Drug cost table - '"+tblName+"' - '"+type+"'", drugTblElement);
+		if(drugTblElement.getText().equals(tbl.toString())){
+			Assert.assertTrue("The data in the drug cost table is displaying correctly", true);
+			System.out.println("The data in the drug cost table is displaying correctly");  
+		} else{
+			System.out.println(">>>>>>>>>>>>>The Expected Table  value is<<<<<<<<<<<<<<<<< \n"+tbl.toString());
+			System.out.println(">>>>>>>>>>>>>The Actual Table value is<<<<<<<<<<<<<<<<<<<< \n"+drugTblElement.getText());
+			System.err.println("The data in the drug cost table is not displaying correctly");
+			Assert.fail("The data in the drug cost table is not displaying correctly. table='"+tblName+"' | type='"+type+"'");
+		} */
+	}
+	
+	public void validateDrgTbl_stdRetPha_pdp_T123NoD_T45D_hasInsulin() {
+		String type="PDP - T1,2,3 No Deductible - T4,5 Deductible";
+		String tblName="Standard Retail Pharmacy";
+		String tbl= "TBD";
+		WebElement drugTblElement=standardRetail_DrugTable;
+		System.out.println("--------------------validateDrgTbl_stdRetPha_pdp_T123NoD_T45D");
+		System.out.println(drugTblElement.getText());
+		System.out.println("--------------------");
+		Assert.assertTrue("TODO - drug table='"+tblName+"' | type='"+type+"'", false);
+		/* keep
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", drugTblElement);
+		validateWithValue("Drug cost table - '"+tblName+"' - '"+type+"'", drugTblElement);
+		if(drugTblElement.getText().equals(tbl.toString())){
+			Assert.assertTrue("The data in the drug cost table is displaying correctly", true);
+			System.out.println("The data in the drug cost table is displaying correctly");  
+		} else{
+			System.out.println(">>>>>>>>>>>>>The Expected Table  value is<<<<<<<<<<<<<<<<< \n"+tbl.toString());
+			System.out.println(">>>>>>>>>>>>>The Actual Table value is<<<<<<<<<<<<<<<<<<<< \n"+drugTblElement.getText());
+			System.err.println("The data in the drug cost table is not displaying correctly");
+			Assert.fail("The data in the drug cost table is not displaying correctly. table='"+tblName+"' | type='"+type+"'");
+		} */
+	}
+	
+	public void validateDrgTbl_preRetail_pdp_T123NoD_T45D_hasInsulin() {
+		String type="PDP - T1,2,3 No Deductible - T4,5 Deductible";
+		String tblName="Preferred Retail Pharmacy";
+		String tbl= "TBD";
+		WebElement drugTblElement=preferredRetail_DrugTable;
+		System.out.println("--------------------validateDrgTbl_preRetail_pdp_T123NoD_T45D");
+		System.out.println(drugTblElement.getText());
+		System.out.println("--------------------");
+		Assert.assertTrue("TODO - drug table='"+tblName+"' | type='"+type+"'", false);
+		/* keep
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", drugTblElement);
+		validateWithValue("Drug cost table - '"+tblName+"' - '"+type+"'", drugTblElement);
+		if(drugTblElement.getText().equals(tbl.toString())){
+			Assert.assertTrue("The data in the drug cost table is displaying correctly", true);
+			System.out.println("The data in the drug cost table is displaying correctly");  
+		} else{
+			System.out.println(">>>>>>>>>>>>>The Expected Table  value is<<<<<<<<<<<<<<<<< \n"+tbl.toString());
+			System.out.println(">>>>>>>>>>>>>The Actual Table value is<<<<<<<<<<<<<<<<<<<< \n"+drugTblElement.getText());
+			System.err.println("The data in the drug cost table is not displaying correctly");
+			Assert.fail("The data in the drug cost table is not displaying correctly. table='"+tblName+"' | type='"+type+"'");
+		} */
+	}
+	
+	public void validateDrgTbl_stdRetPha_csnppcp_noD_hasInsulin() {
+		String type="PCP CSNP - No Deductible for All Tiers";
+		String tblName="Standard Retail Pharmacy";
+		String tbl= "Additional Drug Coverage\n"
+		+"Annual Deductible Stage\n"
+		+"Initial Coverage Stage\n"
+		+"Coverage Gap Stage\n"
+		+"Catastrophic Coverage Stage\n"
+		+"Tier 1\n"
+		+"No Deductible\n"
+		+"$0.00\n"
+		+"$0.00\n"
+		+"Your share of the cost for a covered drug will be either coinsurance or a copayment whichever is the larger amount:\n"
+		+"-either- coinsurance of 5% of the cost of the drug\n"
+		+"-or- $3.60 for a generic drug or a drug that is treated like a generic and $8.95 for all other drugs.\n"
+		+"Tier 2\n"
+		+"$0.00\n"
+		+"$0.00\n"
+		+"Select Insulin Drugs\n"
+		+"$15.00\n"
+		+"$15.00\n"
+		+"Tier 3\n"
+		+"$15.00\n"
+		+"$15.00\n"
+		+"Tier 4\n"
+		+"$45.00\n"
+		+"no more than 25% for generic drugs or 25% for brand name drugs\n"
+		+"Tier 5\n"
+		+"33%\n"
+		+"no more than 25% for generic drugs or 25% for brand name drugs";
+		WebElement drugTblElement=standardRetail_DrugTable;
+		System.out.println("--------------------validateDrgTbl_stdRetPha_csnppcp_noD_hasInsulin");
+		System.out.println(drugTblElement.getText());
+		System.out.println("--------------------");
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", drugTblElement);
+		validateWithValue("Drug cost table - '"+tblName+"' - '"+type+"'", drugTblElement);
+		if(drugTblElement.getText().equals(tbl.toString())){
+			Assert.assertTrue("The data in the drug cost table is displaying correctly", true);
+			System.out.println("The data in the drug cost table is displaying correctly");  
+		} else{
+			System.out.println(">>>>>>>>>>>>>The Expected Table  value is<<<<<<<<<<<<<<<<< \n"+tbl.toString());
+			System.out.println(">>>>>>>>>>>>>The Actual Table value is<<<<<<<<<<<<<<<<<<<< \n"+drugTblElement.getText());
+			System.err.println("The data in the drug cost table is not displaying correctly");
+			Assert.fail("The data in the drug cost table is not displaying correctly. table='"+tblName+"' | type='"+type+"'");
+		} 
+	}
+
+	public void validateDrgTbl_preRetail_csnppcp_noD_hasInsulin() {
+		String type="PCP CSNP - No Deductible for All Tiers";
+		String tblName="Preferred Retail Pharmacy";
+		String tbl= "TBD";
+		WebElement drugTblElement=preferredRetail_DrugTable;
+		System.out.println("--------------------validateDrgTbl_preRetail_csnppcp_noD_hasInsulin");
+		System.out.println(drugTblElement.getText());
+		System.out.println("--------------------");
+		Assert.assertTrue("TODO - drug table='"+tblName+"' | type='"+type+"'", false);
+		/* keep
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", drugTblElement);
+		validateWithValue("Drug cost table - '"+tblName+"' - '"+type+"'", drugTblElement);
+		if(drugTblElement.getText().equals(tbl.toString())){
+			Assert.assertTrue("The data in the drug cost table is displaying correctly", true);
+			System.out.println("The data in the drug cost table is displaying correctly");  
+		} else{
+			System.out.println(">>>>>>>>>>>>>The Expected Table  value is<<<<<<<<<<<<<<<<< \n"+tbl.toString());
+			System.out.println(">>>>>>>>>>>>>The Actual Table value is<<<<<<<<<<<<<<<<<<<< \n"+drugTblElement.getText());
+			System.err.println("The data in the drug cost table is not displaying correctly");
+			Assert.fail("The data in the drug cost table is not displaying correctly. table='"+tblName+"' | type='"+type+"'");
+		} */
+	}
+	
+	public void validateDrgTbl_preMaiSerPha_csnppcp_noD_hasInsulin() {
+		String type="PCP CSNP - No Deductible for All Tiers";
+		String tblName="Preferred Mail Service Pharmacy";
+		String tbl= "Annual Deductible Stage\n"
+				+"Initial Coverage Stage\n"
+				+"Coverage Gap Stage\n"
+				+"Catastrophic Coverage Stage\n"
+				+"Tier 1\n"
+				+"No Deductible\n"
+				+"$0.00\n"
+				+"$0.00\n"
+				+"Your share of the cost for a covered drug will be either coinsurance or a copayment whichever is the larger amount:\n"
+				+"-either- coinsurance of 5% of the cost of the drug\n"
+				+"-or- $3.60 for a generic drug or a drug that is treated like a generic and $8.95 for all other drugs.\n"
+				+"Tier 2\n"
+				+"$0.00\n"
+				+"$0.00\n"
+				+"Select Insulin Drugs\n"
+				+"$35.00\n"
+				+"$35.00\n"
+				+"Tier 3\n"
+				+"$35.00\n"
+				+"$35.00\n"
+				+"Tier 4\n"
+				+"$125.00\n"
+				+"no more than 25% for generic drugs or 25% for brand name drugs";
+		WebElement drugTblElement=preferedMail_DrugTable;
+		System.out.println("--------------------validateDrgTbl_preMaiSerPha_csnppcp_noD_hasInsulin");
+		System.out.println(drugTblElement.getText());
+		System.out.println("--------------------");
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", drugTblElement);
+		validateWithValue("Drug cost table - '"+tblName+"' - '"+type+"'", drugTblElement);
+		if(drugTblElement.getText().equals(tbl.toString())){
+			Assert.assertTrue("The data in the drug cost table is displaying correctly", true);
+			System.out.println("The data in the drug cost table is displaying correctly");  
+		} else{
+			System.out.println(">>>>>>>>>>>>>The Expected Table  value is<<<<<<<<<<<<<<<<< \n"+tbl.toString());
+			System.out.println(">>>>>>>>>>>>>The Actual Table value is<<<<<<<<<<<<<<<<<<<< \n"+drugTblElement.getText());
+			System.err.println("The data in the drug cost table is not displaying correctly");
+			Assert.fail("The data in the drug cost table is not displaying correctly. table='"+tblName+"' | type='"+type+"'");
+		}
+	}
+	
+	public void validateDrgTbl_preMaiSerPha_csnppcp_T12NoD_T345D_hasInsulin() {
+		String type="PCP CSNP - T1,2 No Deductible - T3,4,5 Deductible";
+		String tblName="Preferred Mail Service Pharmacy";
+		String tbl= "TBD";
+		WebElement drugTblElement=preferedMail_DrugTable;
+		System.out.println("--------------------validateDrgTbl_preMaiSerPha_csnppcp_T12noD_T345D_hasInsulin");
+		System.out.println(drugTblElement.getText());
+		System.out.println("--------------------");
+		Assert.assertTrue("TODO - drug table='"+tblName+"' | type='"+type+"'", false);
+		/* keep
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", drugTblElement);
+		validateWithValue("Drug cost table - '"+tblName+"' - '"+type+"'", drugTblElement);
+		if(drugTblElement.getText().equals(tbl.toString())){
+			Assert.assertTrue("The data in the drug cost table is displaying correctly", true);
+			System.out.println("The data in the drug cost table is displaying correctly");  
+		} else{
+			System.out.println(">>>>>>>>>>>>>The Expected Table  value is<<<<<<<<<<<<<<<<< \n"+tbl.toString());
+			System.out.println(">>>>>>>>>>>>>The Actual Table value is<<<<<<<<<<<<<<<<<<<< \n"+drugTblElement.getText());
+			System.err.println("The data in the drug cost table is not displaying correctly");
+			Assert.fail("The data in the drug cost table is not displaying correctly. table='"+tblName+"' | type='"+type+"'");
+		} */
+	}
+	
+	public void validateDrgTbl_stdRetPha_csnppcp_T12NoD_T345D_hasInsulin() {
+		String type="PCP CSNP - T1,2 No Deductible - T3,4,5 Deductible";
+		String tblName="Standard Retail Pharmacy";
+		String tbl= "TBD";
+		WebElement drugTblElement=standardRetail_DrugTable;
+		System.out.println("--------------------validateDrgTbl_stdRetPha_csnppcp_T12noD_T345D_hasInsulin");
+		System.out.println(drugTblElement.getText());
+		System.out.println("--------------------");
+		Assert.assertTrue("TODO - drug table='"+tblName+"' | type='"+type+"'", false);
+		/* keep
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", drugTblElement);
+		validateWithValue("Drug cost table - '"+tblName+"' - '"+type+"'", drugTblElement);
+		if(drugTblElement.getText().equals(tbl.toString())){
+			Assert.assertTrue("The data in the drug cost table is displaying correctly", true);
+			System.out.println("The data in the drug cost table is displaying correctly");  
+		} else{
+			System.out.println(">>>>>>>>>>>>>The Expected Table  value is<<<<<<<<<<<<<<<<< \n"+tbl.toString());
+			System.out.println(">>>>>>>>>>>>>The Actual Table value is<<<<<<<<<<<<<<<<<<<< \n"+drugTblElement.getText());
+			System.err.println("The data in the drug cost table is not displaying correctly");
+			Assert.fail("The data in the drug cost table is not displaying correctly. table='"+tblName+"' | type='"+type+"'");
+		} */
+	}
+	
+	public void validateDrgTbl_preRetail_csnppcp_T12NoD_T345D_hasInsulin() {
+		String type="PCP CSNP - T1,2 No Deductible - T3,4,5 Deductible";
+		String tblName="Preferred Retail Pharmacy";
+		String tbl= "TBD";
+		WebElement drugTblElement=preferredRetail_DrugTable;
+		System.out.println("--------------------validateDrgTbl_preRetail_csnppcp_T12noD_T345D_hasInsulin");
+		System.out.println(drugTblElement.getText());
+		System.out.println("--------------------");
+		Assert.assertTrue("TODO - drug table='"+tblName+"' | type='"+type+"'", false);
+		/* keep
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", drugTblElement);
+		validateWithValue("Drug cost table - '"+tblName+"' - '"+type+"'", drugTblElement);
+		if(drugTblElement.getText().equals(tbl.toString())){
+			Assert.assertTrue("The data in the drug cost table is displaying correctly", true);
+			System.out.println("The data in the drug cost table is displaying correctly");  
+		} else{
+			System.out.println(">>>>>>>>>>>>>The Expected Table  value is<<<<<<<<<<<<<<<<< \n"+tbl.toString());
+			System.out.println(">>>>>>>>>>>>>The Actual Table value is<<<<<<<<<<<<<<<<<<<< \n"+drugTblElement.getText());
+			System.err.println("The data in the drug cost table is not displaying correctly");
+			Assert.fail("The data in the drug cost table is not displaying correctly. table='"+tblName+"' | type='"+type+"'");
+		} */
+	}
+	
+	public void validateDrgTbl_preMaiSerPha_csnppcp_T123NoD_T45D_hasInsulin() {
+		String type="PCP CSNP - T1,2,3 No Deductible - T4,5 Deductible";
+		String tblName="Preferred Mail Service Pharmacy";
+		String tbl= "TBD";
+		WebElement drugTblElement=preferedMail_DrugTable;
+		System.out.println("--------------------validateDrgTbl_preMaiSerPha_csnppcp_T123NoD_T45D_hasInsulin");
+		System.out.println(drugTblElement.getText());
+		System.out.println("--------------------");
+		Assert.assertTrue("TODO - drug table='"+tblName+"' | type='"+type+"'", false);
+		/* keep
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", drugTblElement);
+		validateWithValue("Drug cost table - '"+tblName+"' - '"+type+"'", drugTblElement);
+		if(drugTblElement.getText().equals(tbl.toString())){
+			Assert.assertTrue("The data in the drug cost table is displaying correctly", true);
+			System.out.println("The data in the drug cost table is displaying correctly");  
+		} else{
+			System.out.println(">>>>>>>>>>>>>The Expected Table  value is<<<<<<<<<<<<<<<<< \n"+tbl.toString());
+			System.out.println(">>>>>>>>>>>>>The Actual Table value is<<<<<<<<<<<<<<<<<<<< \n"+drugTblElement.getText());
+			System.err.println("The data in the drug cost table is not displaying correctly");
+			Assert.fail("The data in the drug cost table is not displaying correctly. table='"+tblName+"' | type='"+type+"'");
+		} */
+	}
+	
+	public void validateDrgTbl_stdRetPha_csnppcp_T123NoD_T45D_hasInsulin() {
+		String type="PCP CSNP - T1,2,3 No Deductible - T4,5 Deductible";
+		String tblName="Standard Retail Pharmacy";
+		String tbl= "TBD";
+		WebElement drugTblElement=standardRetail_DrugTable;
+		System.out.println("--------------------validateDrgTbl_stdRetPha_csnppcp_T123NoD_T45D_hasInsulin");
+		System.out.println(drugTblElement.getText());
+		System.out.println("--------------------");
+		Assert.assertTrue("TODO - drug table='"+tblName+"' | type='"+type+"'", false);
+		/* keep
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", drugTblElement);
+		validateWithValue("Drug cost table - '"+tblName+"' - '"+type+"'", drugTblElement);
+		if(drugTblElement.getText().equals(tbl.toString())){
+			Assert.assertTrue("The data in the drug cost table is displaying correctly", true);
+			System.out.println("The data in the drug cost table is displaying correctly");  
+		} else{
+			System.out.println(">>>>>>>>>>>>>The Expected Table  value is<<<<<<<<<<<<<<<<< \n"+tbl.toString());
+			System.out.println(">>>>>>>>>>>>>The Actual Table value is<<<<<<<<<<<<<<<<<<<< \n"+drugTblElement.getText());
+			System.err.println("The data in the drug cost table is not displaying correctly");
+			Assert.fail("The data in the drug cost table is not displaying correctly. table='"+tblName+"' | type='"+type+"'");
+		} */
+	}
+	
+	public void validateDrgTbl_preRetail_csnppcp_T123NoD_T45D_hasInsulin() {
+		String type="PCP CSNP - T1,2,3 No Deductible - T4,5 Deductible";
+		String tblName="Preferred Retail Pharmacy";
+		String tbl= "TBD";
+		WebElement drugTblElement=preferredRetail_DrugTable;
+		System.out.println("--------------------validateDrgTbl_preRetail_csnppcp_T123NoD_T45D_hasInsulin");
+		System.out.println(drugTblElement.getText());
+		System.out.println("--------------------");
+		Assert.assertTrue("TODO - drug table='"+tblName+"' | type='"+type+"'", false);
+		/* keep
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", drugTblElement);
+		validateWithValue("Drug cost table - '"+tblName+"' - '"+type+"'", drugTblElement);
+		if(drugTblElement.getText().equals(tbl.toString())){
+			Assert.assertTrue("The data in the drug cost table is displaying correctly", true);
+			System.out.println("The data in the drug cost table is displaying correctly");  
+		} else{
+			System.out.println(">>>>>>>>>>>>>The Expected Table  value is<<<<<<<<<<<<<<<<< \n"+tbl.toString());
+			System.out.println(">>>>>>>>>>>>>The Actual Table value is<<<<<<<<<<<<<<<<<<<< \n"+drugTblElement.getText());
+			System.err.println("The data in the drug cost table is not displaying correctly");
+			Assert.fail("The data in the drug cost table is not displaying correctly. table='"+tblName+"' | type='"+type+"'");
+		} */
+	}
+
+	public void validateDrgTbl_stdRetPha_csnpmsap_noD_hasInsulin() {
+		String type="CSNP MAPD - No Deductible for All Tiers";
+		String tblName="Standard Retail Pharmacy";
+		String tbl= "Additional Drug Coverage\n"
+				+"Annual Deductible Stage\n"
+				+"Initial Coverage Stage\n"
+				+"Coverage Gap Stage\n"
+				+"Catastrophic Coverage Stage\n"
+				+"Tier 1\n"
+				+"No Deductible\n"
+				+"$0.00\n"
+				+"$0.00\n"
+				+"Your share of the cost for a covered drug will be either coinsurance or a copayment whichever is the larger amount:\n"
+				+"-either- coinsurance of 5% of the cost of the drug\n"
+				+"-or- $3.60 for a generic drug or a drug that is treated like a generic and $8.95 for all other drugs.\n"
+				+"Tier 2\n"
+				+"$0.00\n"
+				+"$0.00\n"
+				+"Select Insulin Drugs\n"
+				+"$15.00\n"
+				+"$15.00\n"
+				+"Tier 3\n"
+				+"$15.00\n"
+				+"$15.00\n"
+				+"Tier 4\n"
+				+"$45.00\n"
+				+"no more than 25% for generic drugs or 25% for brand name drugs\n"
+				+"Tier 5\n"
+				+"33%\n"
+				+"no more than 25% for generic drugs or 25% for brand name drugs";
+		WebElement drugTblElement=standardRetail_DrugTable;
+		System.out.println("--------------------validateDrgTbl_stdRetPha_csnpmsap_noD_hasInsulin");
+		System.out.println(drugTblElement.getText());
+		System.out.println("--------------------");
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", drugTblElement);
+		validateWithValue("Drug cost table - '"+tblName+"' - '"+type+"'", drugTblElement);
+		if(drugTblElement.getText().equals(tbl.toString())){
+			Assert.assertTrue("The data in the drug cost table is displaying correctly", true);
+			System.out.println("The data in the drug cost table is displaying correctly");  
+		} else{
+			System.out.println(">>>>>>>>>>>>>The Expected Table  value is<<<<<<<<<<<<<<<<< \n"+tbl.toString());
+			System.out.println(">>>>>>>>>>>>>The Actual Table value is<<<<<<<<<<<<<<<<<<<< \n"+drugTblElement.getText());
+			System.err.println("The data in the drug cost table is not displaying correctly");
+			Assert.fail("The data in the drug cost table is not displaying correctly. table='"+tblName+"' | type='"+type+"'");
+		}
+
+	}
+
+	public void validateDrgTbl_preRetail_csnpmsap_noD_hasInsulin() {
+		String type="CSNP MAPD - No Deductible for All Tiers";
+		String tblName="Preferred Retail Pharmacy";
+		String tbl= "TBD";
+		WebElement drugTblElement=preferredRetail_DrugTable;
+		System.out.println("--------------------validateDrgTbl_preRetail_csnpmsap_noD_hasInsulin");
+		System.out.println(drugTblElement.getText());
+		System.out.println("--------------------");
+		Assert.assertTrue("TODO - drug table='"+tblName+"' | type='"+type+"'", false);
+		/* keep
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", drugTblElement);
+		validateWithValue("Drug cost table - '"+tblName+"' - '"+type+"'", drugTblElement);
+		if(drugTblElement.getText().equals(tbl.toString())){
+			Assert.assertTrue("The data in the drug cost table is displaying correctly", true);
+			System.out.println("The data in the drug cost table is displaying correctly");  
+		} else{
+			System.out.println(">>>>>>>>>>>>>The Expected Table  value is<<<<<<<<<<<<<<<<< \n"+tbl.toString());
+			System.out.println(">>>>>>>>>>>>>The Actual Table value is<<<<<<<<<<<<<<<<<<<< \n"+drugTblElement.getText());
+			System.err.println("The data in the drug cost table is not displaying correctly");
+			Assert.fail("The data in the drug cost table is not displaying correctly. table='"+tblName+"' | type='"+type+"'");
+		} */
+	}
+	
+	public void validateDrgTbl_preMaiSerPha_csnpmsap_noD_hasInsulin() {
+		String type="CSNP MAPD - No Deductible for All Tiers";
+		String tblName="Preferred Mail Service Pharmacy";
+		String tbl= "Annual Deductible Stage\n"
+				+"Initial Coverage Stage\n"
+				+"Coverage Gap Stage\n"
+				+"Catastrophic Coverage Stage\n"
+				+"Tier 1\n"
+				+"No Deductible\n"
+				+"$0.00\n"
+				+"$0.00\n"
+				+"Your share of the cost for a covered drug will be either coinsurance or a copayment whichever is the larger amount:\n"
+				+"-either- coinsurance of 5% of the cost of the drug\n"
+				+"-or- $3.60 for a generic drug or a drug that is treated like a generic and $8.95 for all other drugs.\n"
+				+"Tier 2\n"
+				+"$0.00\n"
+				+"$0.00\n"
+				+"Select Insulin Drugs\n"
+				+"$35.00\n"
+				+"$35.00\n"
+				+"Tier 3\n"
+				+"$35.00\n"
+				+"$35.00\n"
+				+"Tier 4\n"
+				+"$125.00\n"
+				+"no more than 25% for generic drugs or 25% for brand name drugs";
+		WebElement drugTblElement=preferedMail_DrugTable;
+		System.out.println("--------------------validateDrgTbl_preMaiSerPha_csnpmsap_noD_hasInsulin");
+		System.out.println(drugTblElement.getText());
+		System.out.println("--------------------");
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", drugTblElement);
+		validateWithValue("Drug cost table - '"+tblName+"' - '"+type+"'", drugTblElement);
+		if(drugTblElement.getText().equals(tbl.toString())){
+			Assert.assertTrue("The data in the drug cost table is displaying correctly", true);
+			System.out.println("The data in the drug cost table is displaying correctly");  
+		} else{
+			System.out.println(">>>>>>>>>>>>>The Expected Table  value is<<<<<<<<<<<<<<<<< \n"+tbl.toString());
+			System.out.println(">>>>>>>>>>>>>The Actual Table value is<<<<<<<<<<<<<<<<<<<< \n"+drugTblElement.getText());
+			System.err.println("The data in the drug cost table is not displaying correctly");
+			Assert.fail("The data in the drug cost table is not displaying correctly. table='"+tblName+"' | type='"+type+"'");
+		}
+	}
+	
+	public void validateDrgTbl_preMaiSerPha_csnpmsap_T123NoD_T45D_hasInsulin() {
+		String type="CSNP MAPD - T1,2,3 No Deductible - T4,5 Deductible";
+		String tblName="Preferred Mail Service Pharmacy";
+		String tbl= "Annual Deductible Stage\n"
+				+"Initial Coverage Stage\n"
+				+"Coverage Gap Stage\n"
+				+"Catastrophic Coverage Stage\n"
+				+"Tier 1\n"
+				+"No deductible.\n"
+				+"$0.00\n"
+				+"no more than 25% for generic drugs or 25% for brand name drugs\n"
+				+"Your share of the cost for a covered drug will be either coinsurance or a copayment whichever is the larger amount:\n"
+				+"-either- coinsurance of 5% of the cost of the drug\n"
+				+"-or- $3.60 for a generic drug or a drug that is treated like a generic and $8.95 for all other drugs.\n"
+				+"Tier 2\n"
+				+"$0.00\n"
+				+"$0.00\n"
+				+"Select Insulin Drugs\n"
+				+"$95.00\n"
+				+"$95.00\n"
+				+"Tier 3\n"
+				+"$131.00\n"
+				+"0%\n"
+				+"Tier 4\n"
+				+"100% until the $150.00 deductible is met.*\n"
+				+"$290.00\n"
+				+"no more than 25% for generic drugs or 25% for brand name drugs\n"
+				+"*Once you reach the Coverage Gap Stage, you pay copays or coinsurance defined by your plan for all Tier 1 through Tier 5 drugs regardless of whether your full deductible has been met.";
+		WebElement drugTblElement=preferedMail_DrugTable;
+		System.out.println("--------------------validateDrgTbl_preMaiSerPha_csnpmsap_T123NoD_T45D_hasInsulin");
+		System.out.println(drugTblElement.getText());
+		System.out.println("--------------------");
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", drugTblElement);
+		validateWithValue("Drug cost table - '"+tblName+"' - '"+type+"'", drugTblElement);
+		if(drugTblElement.getText().equals(tbl.toString())){
+			Assert.assertTrue("The data in the drug cost table is displaying correctly", true);
+			System.out.println("The data in the drug cost table is displaying correctly");  
+		} else{
+			System.out.println(">>>>>>>>>>>>>The Expected Table  value is<<<<<<<<<<<<<<<<< \n"+tbl.toString());
+			System.out.println(">>>>>>>>>>>>>The Actual Table value is<<<<<<<<<<<<<<<<<<<< \n"+drugTblElement.getText());
+			System.err.println("The data in the drug cost table is not displaying correctly");
+			Assert.fail("The data in the drug cost table is not displaying correctly. table='"+tblName+"' | type='"+type+"'");
+		}
+	}
+	
+	public void validateDrgTbl_stdRetPha_csnpmsap_T123NoD_T45D_hasInsulin() {
+		String type="CSNP MAPD - T1,2,3 No Deductible - T4,5 Deductible";
+		String tblName="Standard Retail Pharmacy";
+		String tbl= "Annual Deductible Stage\n"
+				+"Initial Coverage Stage\n"
+				+"Coverage Gap Stage\n"
+				+"Catastrophic Coverage Stage\n"
+				+"Tier 1\n"
+				+"No Deductible\n"
+				+"$10.00\n"
+				+"no more than 25% for generic drugs or 25% for brand name drugs\n"
+				+"Your share of the cost for a covered drug will be either coinsurance or a copayment whichever is the larger amount:\n"
+				+"-either- coinsurance of 5% of the cost of the drug\n"
+				+"-or- $3.60 for a generic drug or a drug that is treated like a generic and $8.95 for all other drugs.\n"
+				+"Tier 2\n"
+				+"$20.00\n"
+				+"$20.00\n"
+				+"Select Insulin Drugs\n"
+				+"$35.00\n"
+				+"$35.00\n"
+				+"Tier 3\n"
+				+"$47.00\n"
+				+"0%\n"
+				+"Tier 4\n"
+				+"$150.00\n"
+				+"$100.00\n"
+				+"no more than 25% for generic drugs or 25% for brand name drugs\n"
+				+"Tier 5\n"
+				+"30%\n"
+				+"no more than 25% for generic drugs or 25% for brand name drugs\n"
+				+"*Once you reach the Coverage Gap Stage, you pay copays or coinsurance defined by your plan for all Tier 1 through Tier 5 drugs regardless of whether your full deductible has been met.";
+		WebElement drugTblElement=standardRetail_DrugTable;
+		System.out.println("--------------------validateDrgTbl_stdRetPha_csnpmsap_T123NoD_T45D_hasInsulin");
+		System.out.println(drugTblElement.getText());
+		System.out.println("--------------------");
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", drugTblElement);
+		validateWithValue("Drug cost table - '"+tblName+"' - '"+type+"'", drugTblElement);
+		if(drugTblElement.getText().equals(tbl.toString())){
+			Assert.assertTrue("The data in the drug cost table is displaying correctly", true);
+			System.out.println("The data in the drug cost table is displaying correctly");  
+		} else{
+			System.out.println(">>>>>>>>>>>>>The Expected Table  value is<<<<<<<<<<<<<<<<< \n"+tbl.toString());
+			System.out.println(">>>>>>>>>>>>>The Actual Table value is<<<<<<<<<<<<<<<<<<<< \n"+drugTblElement.getText());
+			System.err.println("The data in the drug cost table is not displaying correctly");
+			Assert.fail("The data in the drug cost table is not displaying correctly. table='"+tblName+"' | type='"+type+"'");
+		}
+	}
+	
+	public void validateDrgTbl_preRetail_csnpmsap_T123NoD_T45D_hasInsulin() {
+		String type="CSNP MAPD - T1,2,3 No Deductible - T4,5 Deductible";
+		String tblName="Preferred Retail Pharmacy";
+		String tbl= "Annual Deductible Stage\n"
+				+"Initial Coverage Stage\n"
+				+"Coverage Gap Stage\n"
+				+"Catastrophic Coverage Stage\n"
+				+"Tier 1\n"
+				+"No deductible.\n"
+				+"$0.00\n"
+				+"no more than 25% for generic drugs or 25% for brand name drugs\n"
+				+"Your share of the cost for a covered drug will be either coinsurance or a copayment whichever is the larger amount:\n"
+				+"-either- coinsurance of 5% of the cost of the drug\n"
+				+"-or- $3.60 for a generic drug or a drug that is treated like a generic and $8.95 for all other drugs.\n"
+				+"Tier 2\n"
+				+"$0.00\n"
+				+"$0.00\n"
+				+"Select Insulin Drugs\n"
+				+"$35.00\n"
+				+"$35.00\n"
+				+"Tier 3\n"
+				+"$47.00\n"
+				+"100%\n"
+				+"Tier 4\n"
+				+"100% until the $150.00 deductible is met.*\n"
+				+"$100.00\n"
+				+"no more than 25% for generic drugs or 25% for brand name drugs\n"
+				+"Tier 5\n"
+				+"30%\n"
+				+"no more than 25% for generic drugs or 25% for brand name drugs\n"
+				+"*Once you reach the Coverage Gap Stage, you pay co-pays or co-insurance defined by your plan for all Tier 1 through Tier 5 drugs regardless of whether your full deductible has been met.";
+		WebElement drugTblElement=preferredRetail_DrugTable;
+		System.out.println("--------------------validateDrgTbl_preRetail_csnpmsap_T123NoD_T45D_hasInsulin");
+		System.out.println(drugTblElement.getText());
+		System.out.println("--------------------");
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", drugTblElement);
+		validateWithValue("Drug cost table - '"+tblName+"' - '"+type+"'", drugTblElement);
+		if(drugTblElement.getText().equals(tbl.toString())){
+			Assert.assertTrue("The data in the drug cost table is displaying correctly", true);
+			System.out.println("The data in the drug cost table is displaying correctly");  
+		} else{
+			System.out.println(">>>>>>>>>>>>>The Expected Table  value is<<<<<<<<<<<<<<<<< \n"+tbl.toString());
+			System.out.println(">>>>>>>>>>>>>The Actual Table value is<<<<<<<<<<<<<<<<<<<< \n"+drugTblElement.getText());
+			System.err.println("The data in the drug cost table is not displaying correctly");
+			Assert.fail("The data in the drug cost table is not displaying correctly. table='"+tblName+"' | type='"+type+"'");
+		} 
+	}
+	
+	public void validateDrgTbl_preMaiSerPha_csnpmsap_T12NoD_T345D_hasInsulin() {
+		String type="CSNP MAPD - T1,2 No Deductible - T3,4,5 Deductible";
+		String tblName="Preferred Mail Service Pharmacy";
+		String tbl= "TBD";
+		WebElement drugTblElement=preferedMail_DrugTable;
+		System.out.println("--------------------validateDrgTbl_preMaiSerPha_csnpmsap_T12NoD_T345D_hasInsulin");
+		System.out.println(drugTblElement.getText());
+		System.out.println("--------------------");
+		Assert.assertTrue("TODO - drug table='"+tblName+"' | type='"+type+"'", false);
+		/* keep
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", drugTblElement);
+		validateWithValue("Drug cost table - '"+tblName+"' - '"+type+"'", drugTblElement);
+		if(drugTblElement.getText().equals(tbl.toString())){
+			Assert.assertTrue("The data in the drug cost table is displaying correctly", true);
+			System.out.println("The data in the drug cost table is displaying correctly");  
+		} else{
+			System.out.println(">>>>>>>>>>>>>The Expected Table  value is<<<<<<<<<<<<<<<<< \n"+tbl.toString());
+			System.out.println(">>>>>>>>>>>>>The Actual Table value is<<<<<<<<<<<<<<<<<<<< \n"+drugTblElement.getText());
+			System.err.println("The data in the drug cost table is not displaying correctly");
+			Assert.fail("The data in the drug cost table is not displaying correctly. table='"+tblName+"' | type='"+type+"'");
+		} */
+	}
+	
+	public void validateDrgTbl_stdRetPha_csnpmsap_T12NoD_T345D_hasInsulin() {
+		String type="CSNP MAPD - T1,2 No Deductible - T3,4,5 Deductible";
+		String tblName="Standard Retail Pharmacy";
+		String tbl= "TBD";
+		WebElement drugTblElement=standardRetail_DrugTable;
+		System.out.println("--------------------validateDrgTbl_stdRetPha_csnpmsap_T12NoD_T345D_hasInsulin");
+		System.out.println(drugTblElement.getText());
+		System.out.println("--------------------");
+		Assert.assertTrue("TODO - drug table='"+tblName+"' | type='"+type+"'", false);
+		/* keep
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", drugTblElement);
+		validateWithValue("Drug cost table - '"+tblName+"' - '"+type+"'", drugTblElement);
+		if(drugTblElement.getText().equals(tbl.toString())){
+			Assert.assertTrue("The data in the drug cost table is displaying correctly", true);
+			System.out.println("The data in the drug cost table is displaying correctly");  
+		} else{
+			System.out.println(">>>>>>>>>>>>>The Expected Table  value is<<<<<<<<<<<<<<<<< \n"+tbl.toString());
+			System.out.println(">>>>>>>>>>>>>The Actual Table value is<<<<<<<<<<<<<<<<<<<< \n"+drugTblElement.getText());
+			System.err.println("The data in the drug cost table is not displaying correctly");
+			Assert.fail("The data in the drug cost table is not displaying correctly. table='"+tblName+"' | type='"+type+"'");
+		} */
+	}
+	
+	public void validateDrgTbl_preRetail_csnpmsap_T12NoD_T345D_hasInsulin() {
+		String type="CSNP MAPD - T1,2 3 No Deductible - T4,5 Deductible";
+		String tblName="Preferred Retail Pharmacy";
+		String tbl= "TBD";
+		WebElement drugTblElement=preferredRetail_DrugTable;
+		System.out.println("--------------------validateDrgTbl_preRetail_csnpmsap_T12NoD_T345D_hasInsulin");
+		System.out.println(drugTblElement.getText());
+		System.out.println("--------------------");
+		Assert.assertTrue("TODO - drug table='"+tblName+"' | type='"+type+"'", false);
+		/* keep
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", drugTblElement);
+		validateWithValue("Drug cost table - '"+tblName+"' - '"+type+"'", drugTblElement);
+		if(drugTblElement.getText().equals(tbl.toString())){
+			Assert.assertTrue("The data in the drug cost table is displaying correctly", true);
+			System.out.println("The data in the drug cost table is displaying correctly");  
+		} else{
+			System.out.println(">>>>>>>>>>>>>The Expected Table  value is<<<<<<<<<<<<<<<<< \n"+tbl.toString());
+			System.out.println(">>>>>>>>>>>>>The Actual Table value is<<<<<<<<<<<<<<<<<<<< \n"+drugTblElement.getText());
+			System.err.println("The data in the drug cost table is not displaying correctly");
+			Assert.fail("The data in the drug cost table is not displaying correctly. table='"+tblName+"' | type='"+type+"'");
+		} */
+	}
+	
+	public void validateDrgTbl_stdRetPha_isnpmsap_noD_hasInsulin() {
+		String type="ISNP MAPD - No Deductible for All Tiers";
+		String tblName="Standard Retail Pharmacy";
+		String tbl= "TBD";
+		WebElement drugTblElement=standardRetail_DrugTable;
+		System.out.println("--------------------validateDrgTbl_stdRetPha_isnpmsap_noD_hasInsulin");
+		System.out.println(drugTblElement.getText());
+		System.out.println("--------------------");
+		Assert.assertTrue("TODO - drug table='"+tblName+"' | type='"+type+"'", false);
+		/* keep
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", drugTblElement);
+		validateWithValue("Drug cost table - '"+tblName+"' - '"+type+"'", drugTblElement);
+		if(drugTblElement.getText().equals(tbl.toString())){
+			Assert.assertTrue("The data in the drug cost table is displaying correctly", true);
+			System.out.println("The data in the drug cost table is displaying correctly");  
+		} else{
+			System.out.println(">>>>>>>>>>>>>The Expected Table  value is<<<<<<<<<<<<<<<<< \n"+tbl.toString());
+			System.out.println(">>>>>>>>>>>>>The Actual Table value is<<<<<<<<<<<<<<<<<<<< \n"+drugTblElement.getText());
+			System.err.println("The data in the drug cost table is not displaying correctly");
+			Assert.fail("The data in the drug cost table is not displaying correctly. table='"+tblName+"' | type='"+type+"'");
+		} */
+
+	}
+
+	public void validateDrgTbl_preRetail_isnpmsap_noD_hasInsulin() {
+		String type="ISNP MAPD - No Deductible for All Tiers";
+		String tblName="Preferred Retail Pharmacy";
+		String tbl= "TBD";
+		WebElement drugTblElement=preferredRetail_DrugTable;
+		System.out.println("--------------------validateDrgTbl_preRetail_isnpmsap_noD_hasInsulin");
+		System.out.println(drugTblElement.getText());
+		System.out.println("--------------------");
+		Assert.assertTrue("TODO - drug table='"+tblName+"' | type='"+type+"'", false);
+		/* keep
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", drugTblElement);
+		validateWithValue("Drug cost table - '"+tblName+"' - '"+type+"'", drugTblElement);
+		if(drugTblElement.getText().equals(tbl.toString())){
+			Assert.assertTrue("The data in the drug cost table is displaying correctly", true);
+			System.out.println("The data in the drug cost table is displaying correctly");  
+		} else{
+			System.out.println(">>>>>>>>>>>>>The Expected Table  value is<<<<<<<<<<<<<<<<< \n"+tbl.toString());
+			System.out.println(">>>>>>>>>>>>>The Actual Table value is<<<<<<<<<<<<<<<<<<<< \n"+drugTblElement.getText());
+			System.err.println("The data in the drug cost table is not displaying correctly");
+			Assert.fail("The data in the drug cost table is not displaying correctly. table='"+tblName+"' | type='"+type+"'");
+		} */
+	}
+	
+	public void validateDrgTbl_preMaiSerPha_isnpmsap_noD_hasInsulin() {
+		String type="ISNP MAPD - No Deductible for All Tiers";
+		String tblName="Preferred Mail Service Pharmacy";
+		String tbl= "TBD";
+		WebElement drugTblElement=preferedMail_DrugTable;
+		System.out.println("--------------------validateDrgTbl_preMaiSerPha_isnpmsap_noD_hasInsulin");
+		System.out.println(drugTblElement.getText());
+		System.out.println("--------------------");
+		Assert.assertTrue("TODO - drug table='"+tblName+"' | type='"+type+"'", false);
+		/* keep
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", drugTblElement);
+		validateWithValue("Drug cost table - '"+tblName+"' - '"+type+"'", drugTblElement);
+		if(drugTblElement.getText().equals(tbl.toString())){
+			Assert.assertTrue("The data in the drug cost table is displaying correctly", true);
+			System.out.println("The data in the drug cost table is displaying correctly");  
+		} else{
+			System.out.println(">>>>>>>>>>>>>The Expected Table  value is<<<<<<<<<<<<<<<<< \n"+tbl.toString());
+			System.out.println(">>>>>>>>>>>>>The Actual Table value is<<<<<<<<<<<<<<<<<<<< \n"+drugTblElement.getText());
+			System.err.println("The data in the drug cost table is not displaying correctly");
+			Assert.fail("The data in the drug cost table is not displaying correctly. table='"+tblName+"' | type='"+type+"'");
+		} */
+	}
+	
+	public void validateDrgTbl_preMaiSerPha_isnpmsap_T12NoD_T345D_hasInsulin() {
+		String type="ISNP MAPD - T1,2 No Deductible - T3,4,5 Deductible";
+		String tblName="Preferred Mail Service Pharmacy";
+		String tbl= "TBD";
+		WebElement drugTblElement=preferedMail_DrugTable;
+		System.out.println("--------------------validateDrgTbl_preMaiSerPha_isnpmsap_T12noD_T345D_hasInsulin");
+		System.out.println(drugTblElement.getText());
+		System.out.println("--------------------");
+		Assert.assertTrue("TODO - drug table='"+tblName+"' | type='"+type+"'", false);
+		/* keep
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", drugTblElement);
+		validateWithValue("Drug cost table - '"+tblName+"' - '"+type+"'", drugTblElement);
+		if(drugTblElement.getText().equals(tbl.toString())){
+			Assert.assertTrue("The data in the drug cost table is displaying correctly", true);
+			System.out.println("The data in the drug cost table is displaying correctly");  
+		} else{
+			System.out.println(">>>>>>>>>>>>>The Expected Table  value is<<<<<<<<<<<<<<<<< \n"+tbl.toString());
+			System.out.println(">>>>>>>>>>>>>The Actual Table value is<<<<<<<<<<<<<<<<<<<< \n"+drugTblElement.getText());
+			System.err.println("The data in the drug cost table is not displaying correctly");
+			Assert.fail("The data in the drug cost table is not displaying correctly. table='"+tblName+"' | type='"+type+"'");
+		} */
+	}
+	
+	public void validateDrgTbl_stdRetPha_isnpmsap_T12NoD_T345D_hasInsulin() {
+		String type="ISNP MAPD - T1,2 No Deductible - T3,4,5 Deductible";
+		String tblName="Standard Retail Pharmacy";
+		String tbl= "TBD";
+		WebElement drugTblElement=standardRetail_DrugTable;
+		System.out.println("--------------------validateDrgTbl_stdRetPha_isnpmsap_T12noD_T345D_hasInsulin");
+		System.out.println(drugTblElement.getText());
+		System.out.println("--------------------");
+		Assert.assertTrue("TODO - drug table='"+tblName+"' | type='"+type+"'", false);
+		/* keep
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", drugTblElement);
+		validateWithValue("Drug cost table - '"+tblName+"' - '"+type+"'", drugTblElement);
+		if(drugTblElement.getText().equals(tbl.toString())){
+			Assert.assertTrue("The data in the drug cost table is displaying correctly", true);
+			System.out.println("The data in the drug cost table is displaying correctly");  
+		} else{
+			System.out.println(">>>>>>>>>>>>>The Expected Table  value is<<<<<<<<<<<<<<<<< \n"+tbl.toString());
+			System.out.println(">>>>>>>>>>>>>The Actual Table value is<<<<<<<<<<<<<<<<<<<< \n"+drugTblElement.getText());
+			System.err.println("The data in the drug cost table is not displaying correctly");
+			Assert.fail("The data in the drug cost table is not displaying correctly. table='"+tblName+"' | type='"+type+"'");
+		} */
+	}
+	
+	public void validateDrgTbl_preRetail_isnpmsap_T12NoD_T345D_hasInsulin() {
+		String type="ISNP MAPD - T1,2 No Deductible - T3,4,5 Deductible";
+		String tblName="Preferred Retail Pharmacy";
+		String tbl= "TBD";
+		WebElement drugTblElement=preferredRetail_DrugTable;
+		System.out.println("--------------------validateDrgTbl_preRetail_isnpmsap_T12noD_T345D_hasInsulin");
+		System.out.println(drugTblElement.getText());
+		System.out.println("--------------------");
+		Assert.assertTrue("TODO - drug table='"+tblName+"' | type='"+type+"'", false);
+		/* keep
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", drugTblElement);
+		validateWithValue("Drug cost table - '"+tblName+"' - '"+type+"'", drugTblElement);
+		if(drugTblElement.getText().equals(tbl.toString())){
+			Assert.assertTrue("The data in the drug cost table is displaying correctly", true);
+			System.out.println("The data in the drug cost table is displaying correctly");  
+		} else{
+			System.out.println(">>>>>>>>>>>>>The Expected Table  value is<<<<<<<<<<<<<<<<< \n"+tbl.toString());
+			System.out.println(">>>>>>>>>>>>>The Actual Table value is<<<<<<<<<<<<<<<<<<<< \n"+drugTblElement.getText());
+			System.err.println("The data in the drug cost table is not displaying correctly");
+			Assert.fail("The data in the drug cost table is not displaying correctly. table='"+tblName+"' | type='"+type+"'");
+		} */
+	}
+	
+	public void validateDrgTbl_preMaiSerPha_isnpmsap_T123NoD_T45D_hasInsulin() {
+		String type="ISNP MAPD - T1,2,3 No Deductible - T4,5 Deductible";
+		String tblName="Preferred Mail Service Pharmacy";
+		String tbl= "Annual Deductible Stage\n"
+				+"Initial Coverage Stage\n"
+				+"Coverage Gap Stage\n"
+				+"Catastrophic Coverage Stage\n"
+				+"Tier 1\n"
+				+"No deductible.\n"
+				+"$0.00\n"
+				+"no more than 25% for generic drugs or 25% for brand name drugs\n"
+				+"Your share of the cost for a covered drug will be either coinsurance or a copayment whichever is the larger amount:\n"
+				+"-either- coinsurance of 5% of the cost of the drug\n"
+				+"-or- $3.60 for a generic drug or a drug that is treated like a generic and $8.95 for all other drugs.\n"
+				+"Tier 2\n"
+				+"$0.00\n"
+				+"$0.00\n"
+				+"Select Insulin Drugs\n"
+				+"$95.00\n"
+				+"$95.00\n"
+				+"Tier 3\n"
+				+"$131.00\n"
+				+"0%\n"
+				+"Tier 4\n"
+				+"100% until the $200.00 deductible is met.*\n"
+				+"$290.00\n"
+				+"no more than 25% for generic drugs or 25% for brand name drugs\n"
+				+"*Once you reach the Coverage Gap Stage, you pay copays or coinsurance defined by your plan for all Tier 1 through Tier 5 drugs regardless of whether your full deductible has been met.";
+		WebElement drugTblElement=preferedMail_DrugTable;
+		System.out.println("--------------------validateDrgTbl_preMaiSerPha_isnpmsap_T123NoD_T45D_hasInsulin");
+		System.out.println(drugTblElement.getText());
+		System.out.println("--------------------");
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", drugTblElement);
+		validateWithValue("Drug cost table - '"+tblName+"' - '"+type+"'", drugTblElement);
+		if(drugTblElement.getText().equals(tbl.toString())){
+			Assert.assertTrue("The data in the drug cost table is displaying correctly", true);
+			System.out.println("The data in the drug cost table is displaying correctly");  
+		} else{
+			System.out.println(">>>>>>>>>>>>>The Expected Table  value is<<<<<<<<<<<<<<<<< \n"+tbl.toString());
+			System.out.println(">>>>>>>>>>>>>The Actual Table value is<<<<<<<<<<<<<<<<<<<< \n"+drugTblElement.getText());
+			System.err.println("The data in the drug cost table is not displaying correctly");
+			Assert.fail("The data in the drug cost table is not displaying correctly. table='"+tblName+"' | type='"+type+"'");
+		} 
+	}
+	
+	public void validateDrgTbl_stdRetPha_isnpmsap_T123NoD_T45D_hasInsulin() {
+		String type="ISNP MAPD - T1,2,3 No Deductible - T4,5 Deductible";
+		String tblName="Standard Retail Pharmacy";
+		String tbl= "Annual Deductible Stage\n"
+				+"Initial Coverage Stage\n"
+				+"Coverage Gap Stage\n"
+				+"Catastrophic Coverage Stage\n"
+				+"Tier 1\n"
+				+"No Deductible\n"
+				+"$2.00\n"
+				+"no more than 25% for generic drugs or 25% for brand name drugs\n"
+				+"Your share of the cost for a covered drug will be either coinsurance or a copayment whichever is the larger amount:\n"
+				+"-either- coinsurance of 5% of the cost of the drug\n"
+				+"-or- $3.60 for a generic drug or a drug that is treated like a generic and $8.95 for all other drugs.\n"
+				+"Tier 2\n"
+				+"$12.00\n"
+				+"$12.00\n"
+				+"Select Insulin Drugs\n"
+				+"$35.00\n"
+				+"$35.00\n"
+				+"Tier 3\n"
+				+"$47.00\n"
+				+"0%\n"
+				+"Tier 4\n"
+				+"$200.00\n"
+				+"$100.00\n"
+				+"no more than 25% for generic drugs or 25% for brand name drugs\n"
+				+"Tier 5\n"
+				+"29%\n"
+				+"no more than 25% for generic drugs or 25% for brand name drugs\n"
+				+"*Once you reach the Coverage Gap Stage, you pay copays or coinsurance defined by your plan for all Tier 1 through Tier 5 drugs regardless of whether your full deductible has been met.";
+		WebElement drugTblElement=standardRetail_DrugTable;
+		System.out.println("--------------------validateDrgTbl_stdRetPha_isnpmsap_T123NoD_T45D_hasInsulin");
+		System.out.println(drugTblElement.getText());
+		System.out.println("--------------------");
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", drugTblElement);
+		validateWithValue("Drug cost table - '"+tblName+"' - '"+type+"'", drugTblElement);
+		if(drugTblElement.getText().equals(tbl.toString())){
+			Assert.assertTrue("The data in the drug cost table is displaying correctly", true);
+			System.out.println("The data in the drug cost table is displaying correctly");  
+		} else{
+			System.out.println(">>>>>>>>>>>>>The Expected Table  value is<<<<<<<<<<<<<<<<< \n"+tbl.toString());
+			System.out.println(">>>>>>>>>>>>>The Actual Table value is<<<<<<<<<<<<<<<<<<<< \n"+drugTblElement.getText());
+			System.err.println("The data in the drug cost table is not displaying correctly");
+			Assert.fail("The data in the drug cost table is not displaying correctly. table='"+tblName+"' | type='"+type+"'");
+		}
+	}
+	
+	public void validateDrgTbl_preRetail_isnpmsap_T123NoD_T45D_hasInsulin() {
+		String type="ISNP MAPD - T1,2,3 No Deductible - T4,5 Deductible";
+		String tblName="Preferred Retail Pharmacy";
+		String tbl= "TBD";
+		WebElement drugTblElement=preferredRetail_DrugTable;
+		System.out.println("--------------------validateDrgTbl_preRetail_isnpmsap_T123NoD_T45D_hasInsulin");
+		System.out.println(drugTblElement.getText());
+		System.out.println("--------------------");
+		Assert.assertTrue("TODO - drug table='"+tblName+"' | type='"+type+"'", false);
+		/* keep
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", drugTblElement);
+		validateWithValue("Drug cost table - '"+tblName+"' - '"+type+"'", drugTblElement);
+		if(drugTblElement.getText().equals(tbl.toString())){
+			Assert.assertTrue("The data in the drug cost table is displaying correctly", true);
+			System.out.println("The data in the drug cost table is displaying correctly");  
+		} else{
+			System.out.println(">>>>>>>>>>>>>The Expected Table  value is<<<<<<<<<<<<<<<<< \n"+tbl.toString());
+			System.out.println(">>>>>>>>>>>>>The Actual Table value is<<<<<<<<<<<<<<<<<<<< \n"+drugTblElement.getText());
+			System.err.println("The data in the drug cost table is not displaying correctly");
+			Assert.fail("The data in the drug cost table is not displaying correctly. table='"+tblName+"' | type='"+type+"'");
+		} */
+	}
+	
+//------------------ 
+		
+	public void validateDrgTbl_mapd_Lis_NoTier_hasInsulin() {
+		String type="MAPD - NoTier";
+		String tblName="Only one table";
+		String tbl= "Annual Deductible Stage\n"
+				+"Initial Coverage Stage\n"
+				+"Catastrophic Coverage Stage\n"
+				+"Covered Generic Drugs\n"
+				+"\n"
+				+"\n"
+				+"\n"
+				+"No Deductible\n"
+				+"You'll never pay more than 15%.\n"
+				+"$3.70\n"
+				+"\n"
+				+"\n"
+				+"\n"
+				+"All Other Covered Drugs\n"
+				+"You'll never pay more than 15%.\n"
+				+"$9.20";
+		WebElement drugTblElement=Lis_DrugTable;
+		System.out.println("--------------------validateDrgTbl_mapd_Lis_NoTier_hasInsulin");
+		System.out.println(drugTblElement.getText());
+		System.out.println("--------------------");
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", drugTblElement);
+		validateWithValue("Drug cost table - '"+tblName+"' - '"+type+"'", drugTblElement);
+		if(drugTblElement.getText().equals(tbl.toString())){
+			Assert.assertTrue("The data in the drug cost table is displaying correctly", true);
+			System.out.println("The data in the drug cost table is displaying correctly");  
+		} else{
+			System.out.println(">>>>>>>>>>>>>The Expected Table  value is<<<<<<<<<<<<<<<<< \n"+tbl.toString());
+			System.out.println(">>>>>>>>>>>>>The Actual Table value is<<<<<<<<<<<<<<<<<<<< \n"+drugTblElement.getText());
+			System.err.println("The data in the drug cost table is not displaying correctly");
+			Assert.fail("The data in the drug cost table is not displaying correctly. table='"+tblName+"' | type='"+type+"'");
+		}
+
+	}
+
+
+	
+	public void validateDrgTbl_preMaiSerPha_mapd_T12345_hasInsulin() {
+		String type="MAPD - T12345";
+		String tblName="Preferred Mail Service Pharmacy";
+		String tbl= "TBD";
+		WebElement drugTblElement=preferedMail_DrugTable;
+		System.out.println("--------------------validateDrgTbl_preMaiSerPha_mapd_T12345_hasInsulin");
+		System.out.println(drugTblElement.getText());
+		System.out.println("--------------------");
+		Assert.assertTrue("TODO - drug table='"+tblName+"' | type='"+type+"'", false);
+		/* keep
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", drugTblElement);
+		validateWithValue("Drug cost table - '"+tblName+"' - '"+type+"'", drugTblElement);
+		if(drugTblElement.getText().equals(tbl.toString())){
+			Assert.assertTrue("The data in the drug cost table is displaying correctly", true);
+			System.out.println("The data in the drug cost table is displaying correctly");  
+		} else{
+			System.out.println(">>>>>>>>>>>>>The Expected Table  value is<<<<<<<<<<<<<<<<< \n"+tbl.toString());
+			System.out.println(">>>>>>>>>>>>>The Actual Table value is<<<<<<<<<<<<<<<<<<<< \n"+drugTblElement.getText());
+			System.err.println("The data in the drug cost table is not displaying correctly");
+			Assert.fail("The data in the drug cost table is not displaying correctly. table='"+tblName+"' | type='"+type+"'");
+		} */
+	}
+	
+	
+	
+	
+
+	public void validateDrgTbl_stdRetPha_mapd_T12345_hasInsulin() {
+		String type="MAPD - T12345";
+		String tblName="Standard Retail Pharmacy";
+		String tbl= "Additional Drug Coverage\n"
+				+"Annual Deductible Stage\n"
+				+"Initial Coverage Stage\n"
+				+"Coverage Gap Stage\n"
+				+"Catastrophic Coverage Stage\n"
+				+"Tier 1\n"
+				+"100% until the $445.00 deductible is met.\n"
+				+"25%\n"
+				+"no more than 25% for generic drugs or 25% for brand name drugs\n"
+				+"Your share of the cost for a covered drug will be either coinsurance or a copayment whichever is the larger amount:\n"
+				+"-either- coinsurance of 5% of the cost of the drug\n"
+				+"-or- $3.60 for a generic drug or a drug that is treated like a generic and $8.95 for all other drugs.\n"
+				+"Tier 2\n"
+				+"25%\n"
+				+"no more than 25% for generic drugs or 25% for brand name drugs\n"
+				+"Tier 3\n"
+				+"25%\n"
+				+"no more than 25% for generic drugs or 25% for brand name drugs\n"
+				+"Tier 4\n"
+				+"25%\n"
+				+"no more than 25% for generic drugs or 25% for brand name drugs\n"
+				+"Tier 5\n"
+				+"25%\n"
+				+"no more than 25% for generic drugs or 25% for brand name drugs";
+		WebElement drugTblElement=standardRetail_DrugTable;
+		System.out.println("--------------------validateDrgTbl_stdRetPha_mapd_T12345_hasInsulin");
+		System.out.println(drugTblElement.getText());
+		System.out.println("--------------------");
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", drugTblElement);
+		validateWithValue("Drug cost table - '"+tblName+"' - '"+type+"'", drugTblElement);
+		if(drugTblElement.getText().equals(tbl.toString())){
+			Assert.assertTrue("The data in the drug cost table is displaying correctly", true);
+			System.out.println("The data in the drug cost table is displaying correctly");  
+		} else{
+			System.out.println(">>>>>>>>>>>>>The Expected Table  value is<<<<<<<<<<<<<<<<< \n"+tbl.toString());
+			System.out.println(">>>>>>>>>>>>>The Actual Table value is<<<<<<<<<<<<<<<<<<<< \n"+drugTblElement.getText());
+			System.err.println("The data in the drug cost table is not displaying correctly");
+			Assert.fail("The data in the drug cost table is not displaying correctly. table='"+tblName+"' | type='"+type+"'");
+		} 
+	}
+	
+
+	public void validateDrgTbl_preRetail_mapd_T12345_hasInsulin() {
+		String type="MAPD - T12345";
+		String tblName="Preferred Retail Pharmacy";
+		String tbl= "TBD";
+		WebElement drugTblElement=preferredRetail_DrugTable;
+		System.out.println("--------------------validateDrgTbl_preRetail_mapd_T12345_hasInsulin");
+		System.out.println(drugTblElement.getText());
+		System.out.println("--------------------");
+		Assert.assertTrue("TODO - drug table='"+tblName+"' | type='"+type+"'", false);
+		/* keep
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", drugTblElement);
+		validateWithValue("Drug cost table - '"+tblName+"' - '"+type+"'", drugTblElement);
+		if(drugTblElement.getText().equals(tbl.toString())){
+			Assert.assertTrue("The data in the drug cost table is displaying correctly", true);
+			System.out.println("The data in the drug cost table is displaying correctly");  
+		} else{
+			System.out.println(">>>>>>>>>>>>>The Expected Table  value is<<<<<<<<<<<<<<<<< \n"+tbl.toString());
+			System.out.println(">>>>>>>>>>>>>The Actual Table value is<<<<<<<<<<<<<<<<<<<< \n"+drugTblElement.getText());
+			System.err.println("The data in the drug cost table is not displaying correctly");
+			Assert.fail("The data in the drug cost table is not displaying correctly. table='"+tblName+"' | type='"+type+"'");
+		} */
+	}
+	
+
+	
+	
+
 }
 

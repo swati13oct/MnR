@@ -2,12 +2,13 @@
 Feature: 1.01 Member  benefits and Coverage page
 
   Background: If run on stage then feature security flag needs to be true
-     Given feature security flag must set to true when testing on stage env
+     Given feature security flag must set to true when testing on test env
       | Feature           | UCPBenefits |
 
 ###############################Regression Scenarios Begin Here ########################################
+  #TO BE DEPRECATED
   #TC01_OutpatientSurgeryCentervisits_withprovidertiering
-  @benefitsAndCoverage01 @outpatientcenterwithprovidertier @thepredators @regressionoutpatient @BnC_Part1_regressionMember
+  #@benefitsAndCoverage01 @outpatientcenterwithprovidertier @thepredators @regressionoutpatient @BnC_Part1_regressionMember
   Scenario Outline: Index: <index> -TID: <TID> -plan: <planType> -memberType: <memberType> - Verify the outpatient widget for a member withprovidertiering
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -21,8 +22,9 @@ Feature: 1.01 Member  benefits and Coverage page
       | index | TID   | planType | memberType       |
       | 01    | 15084 | MAPD     | providerTier_BnC |
 
+  #TO BE DEPRECATED
   #TC05_Primarycareprovider_specialist_withoutprovidertiering
-  @benefitsAndCoverage02 @OfficeVisitswithoutprovidertiering @regression @BnC_Part1_regressionMember
+  #@benefitsAndCoverage02 @OfficeVisitswithoutprovidertiering @regression @BnC_Part1_regressionMember
   Scenario Outline: Index: <index> -TID: <TID> -plan: <planType> -memberType: <memberType> - Verify the Office visits widget for a member withoutprovidertiering
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -465,8 +467,9 @@ Feature: 1.01 Member  benefits and Coverage page
       | 18    | 15366 | PDP      | Group_BnC  | NON LIS       | ENGLISH  | Summary Of Benefits | Evidence of Coverage | Comprehensive Formulary         | BBBCCB FFAAFAD | 0191976081 | 01/01/2019    | Not Available  | Tier 2          | true        |
 
 
+  #TO BE DEPRECATED
   #TC21_MAPD_LIS(1,2)- Retail Drug Cost Table
-  @benefitsAndCoverage17 @CMmapdindlis @BnC_Part8_regressionMember  
+  #@benefitsAndCoverage17 @CMmapdindlis @BnC_Part8_regressionMember  
   Scenario Outline: Index: <index> -TID: <TID> -plan: <planType> -memberType: <memberType> - Verify PDF section is in place on Benefits and Coverage page for Lis user
     Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>      |
@@ -592,7 +595,7 @@ Feature: 1.01 Member  benefits and Coverage page
       | 20    | 15245 | MAPD     | Individual_BnC | LIS 1         | ENGLISH  | DBAD ADFED | 919744565-00 | 01/01/2019    | Not Available  | Extra Help Level : 1 | IndEffectiveAARP |     7 | Rider   | F        |
       
   #TC22_NON LIS Ind plan member(PDP)- Drug Cost table
-  @benefitsAndCoverage19 @CMFedPDPNonLis @BnC_Part9_regressionMember
+  @benefitsAndCoverage18 @CMFedPDPNonLis @BnC_Part9_regressionMember
   Scenario Outline: Index: <index> -TID: <TID> -plan: <planType> -memberType: <memberType> -language: <language> - Verify all sections for PDP Ind NonLIS member on Benefits and Coverage page
     Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>      |
@@ -654,7 +657,7 @@ Feature: 1.01 Member  benefits and Coverage page
       | 21    | 15377 | PDP      | Individual_BnC | NON LIS       | ENGLISH  | Summary of Benefits | Evidence of Coverage | Comprehensive Formulary - Drug List | Alternative Drug List | ECADEA DCAA | 0197331001 | 05/01/2018    | Not Available  | Tier 2          | true        | EffectivePDPAARP | 4     | NoRider |
 
 
-  @benefitsAndCoverage20  @hartfordprescriptionDrugBenefit @BnC_Part9_regressionMember
+  @benefitsAndCoverage19  @hartfordprescriptionDrugBenefit @BnC_Part9_regressionMember
   Scenario Outline: Index: <index> -TID: <TID> -plan: <planType> -memberType: <memberType> - Verify city of Hartford Prescription Drug Benefits
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -668,7 +671,7 @@ Feature: 1.01 Member  benefits and Coverage page
       | 22    | 15367 | MAPD     | Hartford_BnC |
     # | xx    | 15367 | PDP      | Hartford_BnC |
 
-  @benefitsAndCoverage21 @TownOfGreenwichprescriptionDrugBenefit @BnC_Part10_regressionMember
+  @benefitsAndCoverage20 @TownOfGreenwichprescriptionDrugBenefit @BnC_Part10_regressionMember
   Scenario Outline: Index: <index> -TID: <TID> -plan: <planType> -memberType: <memberType> - Verify town of greenwich Prescription Drug Benefits
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -681,7 +684,7 @@ Feature: 1.01 Member  benefits and Coverage page
       | index | TID   | planType | memberType    |
       | 23    | 15367 | MAPD     | Greenwich_BnC |
       
-  @benefitsAndCoverage22 @CMpdpindlis @BnC_Part10_regressionMember
+  @benefitsAndCoverage21 @CMpdpindlis @BnC_Part10_regressionMember
   Scenario Outline: Index: <index> -TID: <TID> -plan: <planType> -memberType: <memberType> - Verify all sections for Ind LIS1 member on Benefits and Coverage page
     Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>      |
@@ -729,7 +732,7 @@ Feature: 1.01 Member  benefits and Coverage page
       | index | TID   | planType | memberType     | copayCategory | language | SummaryofBenefits   | EvidenceofCoverage   | ComprehensiveFormularyDrug List     | AlternativeDrugList   | name        | memberid   | effectivedate | monthlypremium | extrahelp            |
       | 24    | 15244 | PDP      | Individual_BnC | LIS 1         | ENGLISH  | Summary of Benefits | Evidence of Coverage | Comprehensive Formulary - Drug List | Alternative Drug List | RABI' MALORY | 0182197901 | 01/01/2019    | Not Available  | Extra Help Level : 1 |
 
-  @benefitsAndCoverage18 @DSNP_CnS
+  @benefitsAndCoverage22 @DSNP_CnS
   Scenario Outline: Index: <index> -FID: <FID> -plan: <planType> -memberType: <memberType> - Verify  Medical copays or coinsurance section and Out-of-pocket maximum section for DSNP members
     Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>      |
@@ -808,5 +811,68 @@ Feature: 1.01 Member  benefits and Coverage page
        | index | FID             | planType   | memberType           | copayCategory | language | name         | memberid     | effectivedate | monthlypremium | extrahelp            | Identifier       | count | H-PBP    | rider  |
        | 32-m3 | F494433,F506320 | DSNP_MAPD  | Individual_MnR03_BnC | LIS 1         | ENGLISH  | DBAD ADFED | 919744565-00 | 01/01/2020   | Not Available   | Extra Help Level : 1 | IndEffectiveAARP |     6 |  R2604-004 | NoRider|
        | 33-m4 | F494433,F506320 | DSNP_MAPD  | Individual_MnR04_BnC | LIS 3         | ENGLISH  | DBAD ADFED | 919744565-00 | 01/01/2020    | Not Available  | Extra Help Level : 3 | IndEffectiveAARP |     6 |  H0271-006 | NoRider|
-    
+
+
+  @benefitsAndCoverage23 @insulin
+  Scenario Outline: Index: <index> -FID: <FID> -plan: <planType> -memberType: <memberType> -copayCategory: <copayCategory> -insulin: <insulin> - Verify Insulin Demo display on drug table for NON-LIS user
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type      | <planType>      |
+      | Member Type    | <memberType>    |
+      | Copay Category | <copayCategory> |
+      | Deductible | <deductible> |
+      | Insulin | <insulin> |
+    Then The user navigates to Benefits and Coverage page
+      | Plan Type | <planType> |
+	And the user validate drug cost table display behavior
+      | Plan Type      | <planType>      |
+      | Member Type    | <memberType>    |
+      | Copay Category | <copayCategory> |
+      | Deductible | <deductible> |
+      | Insulin | <insulin> |
+	
+    @hasInsulin_mapd_NoD
+    Examples: 
+      | index  | FID    | planType  | memberType     | copayCategory | deductible   | insulin      |
+      | 34-I01 | 478830 | MAPD      | Individual_BnC | NON LIS       | NoD          | hasInsulin   | 
+
+    @hasInsulin_mapd_T12NoD_T345D
+    Examples: 
+      | index  | FID    | planType  | memberType     | copayCategory | deductible   | insulin      |
+      | 34-I02 | 478830 | MAPD      | Individual_BnC | NON LIS       | T12NoD_T345D | hasInsulin   | 
+
+    @hasInsulin_mapd_T123NoD_T45D
+    Examples: 
+      | index  | FID    | planType  | memberType     | copayCategory | deductible   | insulin      |
+      | 34-I03 | 478830 | MAPD      | Individual_BnC | NON LIS       | T123NoD_T45D | hasInsulin   | 
+     
+    @hasInsulin_pdp_NoD
+    Examples: 
+      | index  | FID    | planType  | memberType     | copayCategory | deductible   | insulin      |
+      | 34-I04 | 478830 | PDP       | Individual_BnC | NON LIS       | NoD          | hasInsulin   | 
+
+    @hasInsulin_csnpPcp_NoD
+    Examples: 
+      | index  | FID    | planType  | memberType     | copayCategory | deductible   | insulin      |
+      | 34-I05 | 478830 | CSNP_PCP  | Individual_BnC | NON LIS       | NoD          | hasInsulin   | 
+
+    @hasInsulin_csnpMapd_T123NoD_T45D
+    Examples: 
+      | index  | FID    | planType  | memberType     | copayCategory | deductible   | insulin      |
+      | 34-I06 | 478830 | CSNP_MAPD | Individual_BnC | NON LIS       | T123NoD_T45D | hasInsulin   | 
+
+    @hasInsulin_isnpMapd_T123NoD_T45D
+    Examples: 
+      | index  | FID    | planType  | memberType     | copayCategory | deductible   | insulin      |
+      | 34-I07 | 478830 | ISNP_MAPD | Individual_BnC | NON LIS       | T123NoD_T45D | hasInsulin   | 
+
+    @nonInsulin_mapd_NoT
+    Examples: 
+      | index  | FID    | planType  | memberType     | copayCategory | deductible   | insulin      |
+      | 34-I08 | 478830 | MAPD      | Individual_BnC | LIS 4         | NoTier       | nonInsulin   | 
+
+    @nonInsulin_mapd_T12345
+    Examples: 
+      | index  | FID    | planType  | memberType     | copayCategory | deductible   | insulin      |
+      | 34-I09 | 478830 | MAPD      | Individual_BnC | NON LIS       | T12345       | nonInsulin   | 
+
  ###############################Regression Scenarios END Here ########################################

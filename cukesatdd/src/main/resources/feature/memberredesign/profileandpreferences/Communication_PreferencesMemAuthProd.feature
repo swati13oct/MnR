@@ -1,9 +1,9 @@
 @CommunicationPreferences @thePredators @F402311
 Feature: 1.03.1 Member Preferences page -Member Auth - PROD
 
-  #Background: If run on stage then feature security flag needs to be true
-  #   Given feature security flag must set to true when testing on stage env
-  #    | Feature           | UCPProfileAndPreferences |
+  Background: If run on stage then feature security flag needs to be true
+     Given feature security flag must set to true when testing on test env
+      | Feature           | UCPProfileAndPreferences |
 
   #----- beginning of non Regression preferences scenarios section ------------------------
   @prodSanity_MAPD_UHC_GOGreen_Profilepref
