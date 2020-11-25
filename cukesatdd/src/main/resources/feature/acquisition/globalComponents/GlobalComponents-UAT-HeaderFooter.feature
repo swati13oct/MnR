@@ -1,4 +1,4 @@
-@UATRegression
+@UATRegression  @F513647
 Feature: 1.12 UAT - Header and Footer flows
 
   @globalfooterULayer @UATRegression
@@ -70,7 +70,6 @@ Feature: 1.12 UAT - Header and Footer flows
       | Is Multi County | <isMultutiCounty> |
       | County Name     | <county>          |
     When user accesses global footer of the Medicare Plans All page
-    And user clicks on View all disclaimer information link 
     And user clicks on visit aarp.org link in the footer
     And the user clicks on browser back button
     And user clicks on Aboutus link from footer of the Medicare Plans
@@ -117,11 +116,11 @@ Feature: 1.12 UAT - Header and Footer flows
  @globalfooter_AARP
   Examples: 
      |Scenario  					|	site	|zipcode | isMultutiCounty | county        |
-      |E2E Scenario_3 AMP |	AARP	|80001	| No								|Jefferson|
+     |E2E Scenario_3 AMP  |	AARP	|80001	 | No							|Jefferson|
  
  @globalfooter_UHC
   Examples: 
-       |Scenario					|	site|zipcode | isMultutiCounty | county        |
+      |Scenario					|	site|zipcode | isMultutiCounty | county        |
       |E2E Scenario_3 UMS |	UHC	| 10001	| No							 | New York|				     
        
 	@globalfooterULayer  @UATRegression
@@ -130,7 +129,6 @@ Feature: 1.12 UAT - Header and Footer flows
     	|Site| <site>|
     When I click on DCE Redesign link from Shop for a plan hover over
     When user accesses global footer of the Medicare Plans All page
-    And user clicks on View all disclaimer information link 
     And user clicks on visit aarp.org link in the footer
     And the user clicks on browser back button
     And user clicks on Aboutus link from footer of the Medicare Plans 
@@ -191,7 +189,6 @@ Feature: 1.12 UAT - Header and Footer flows
     	|Site| <site>|
     When the user navigate to pharmacy search page from the navigation bar
     When user accesses global footer of the Medicare Plans All page
-    And user clicks on View all disclaimer information link 
     And user clicks on visit aarp.org link in the footer
     And the user clicks on browser back button
     And user clicks on Aboutus link from footer of the Medicare Plans 
@@ -252,7 +249,6 @@ Feature: 1.12 UAT - Header and Footer flows
       | PageName | <pageName> |
       | PagePath | <path>     |
     When user accesses global footer of the Medicare Plans All page
-    And user clicks on View all disclaimer information link 
     And user clicks on visit aarp.org link in the footer
     And the user clicks on browser back button
     And user clicks on Aboutus link from footer of the Medicare Plans 
