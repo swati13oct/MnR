@@ -2,7 +2,7 @@
 Feature: 1.06.3.1 Member Plans and Documents - section: Membership Materials - Member Auth
 
   #Background: If run on stage then feature security flag needs to be true
-  #   Given feature security flag must set to true when testing on stage env
+  #   Given feature security flag must set to true when testing on test env
   #    | Feature           | UCPPlanDocuments |
 
   #------------------------------------------

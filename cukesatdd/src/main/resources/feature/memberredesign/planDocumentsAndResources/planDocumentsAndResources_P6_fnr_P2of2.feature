@@ -2,7 +2,7 @@
 Feature: 1.06.6 Member Plans and Documents - section: Forms And Resources Part 2 of 2
 
   Background: If run on stage then feature security flag needs to be true
-     Given feature security flag must set to true when testing on stage env
+     Given feature security flag must set to true when testing on test env
       | Feature           | UCPPlanDocuments |
 
   #------------------------------------------

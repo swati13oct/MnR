@@ -26,7 +26,7 @@ import cucumber.api.CucumberOptions;
 
 @CucumberOptions(
 		glue = { "atdd.framework", "acceptancetests.acquisition" }, 
-		features = { "src/main/resources/feature/acquisition" }, 
+		features = { "src/main/resources/feature/acquisition/dceredesign" }, 
 		plugin = { "pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcqDCEVPPPlanDetailsUHCPDP.json" }, 
 		tags = { "@DCE_Redesign_VPP_PlanDetails_PDP_UHC" })
 

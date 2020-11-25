@@ -357,6 +357,7 @@ public class EOBBase extends EOBWebElements{
 		}
 		String consumerDetails=getConsumerDetailsFromlocalStorage();
 		String memberId = getMemberIdInConsumerDetails(isComboUser, lookForPlanCategory, consumerDetails);
+		//System.out.println("TEST - memberId="+memberId);
 		return memberId;
 	}
 
@@ -382,7 +383,7 @@ public class EOBBase extends EOBWebElements{
 	}
 
 	public String getMemberIdInConsumerDetails(boolean isComboUser, String lookForPlanCategory, String consumerDetails) {
-		//System.out.println("TEST - consumerDetails="+consumerDetails);
+		//keepForDebug System.out.println("TEST - consumerDetails="+consumerDetails);
 		String actualMemberId=null;
 		try {
 			JSONParser parser = new JSONParser();

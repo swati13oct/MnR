@@ -5,7 +5,7 @@ Feature: 1.11. ACQ-Pharmacy Locator AARP
   Scenario Outline: TID: <TID> -zipcode: <zipcode> - Part 1 of 2 - To verify end-to-end behavior for pharmacy locator page in English on acquisition <site> site
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
-    And the user navigate to pharmacy search page
+    And the user navigate to pharmacy search page from the navigation bar
     #------ English -----------------------------------
     And the user validates header section content on site
     When the user enters following details for the pharmacy search
@@ -42,52 +42,52 @@ Feature: 1.11. ACQ-Pharmacy Locator AARP
     @PharmacyLocatorCommonAARP01a
     Examples: 
       | TID   | site | zipcode | distance | countyName     | cy_planYear | cy_planName                     | ny_planYear | ny_planName                     | pharmacyType  | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
-      | 15582 | AARP |   10980 |       15 | None           |        2020 | AARP MedicareRx Preferred (PDP) |        2020 | AARP MedicareRx Preferred (PDP) | E-Prescribing | True                  | False            | True                 |
-      | 15582 | AARP |   85215 |       15 | None           |        2020 | AARP MedicareRx Walgreens (PDP) |        2020 | AARP MedicareRx Walgreens (PDP) | Open 24 hours | True                  | True             | True                 |
-      | 15582 | AARP |   78006 |       15 | Kendall County |        2020 | AARP MedicareRx Walgreens (PDP) |        2020 | AARP MedicareRx Walgreens (PDP) | Open 24 hours | True                  | True             | True                 |
-      | 15582 | AARP |   00602 |       15 | None           |        2020 | AARP MedicareRx Preferred (PDP) |        2020 | AARP MedicareRx Preferred (PDP) | Open 24 hours | True                  | True             | True                 |
-      | 15582 | AARP |   96950 |       15 | None           |        2020 | AARP MedicareRx Preferred (PDP) |        2020 | AARP MedicareRx Preferred (PDP) | Open 24 hours | False                 | True             | True                 |
+      | 15582 | AARP |   10980 |       15 | None           |        2021 | AARP MedicareRx Preferred (PDP) |        2021 | AARP MedicareRx Preferred (PDP) | E-Prescribing | True                  | False            | True                 |
+      | 15582 | AARP |   85215 |       15 | None           |        2021 | AARP MedicareRx Walgreens (PDP) |        2021 | AARP MedicareRx Walgreens (PDP) | Open 24 hours | True                  | True             | True                 |
+      | 15582 | AARP |   78006 |       15 | Kendall County |        2021 | AARP MedicareRx Walgreens (PDP) |        2021 | AARP MedicareRx Walgreens (PDP) | Open 24 hours | True                  | True             | True                 |
+      | 15582 | AARP |   00602 |       15 | None           |        2021 | AARP MedicareRx Preferred (PDP) |        2021 | AARP MedicareRx Preferred (PDP) | Open 24 hours | True                  | True             | True                 |
+      | 15582 | AARP |   96950 |       15 | None           |        2021 | AARP MedicareRx Preferred (PDP) |        2021 | AARP MedicareRx Preferred (PDP) | Open 24 hours | False                 | True             | True                 |
 
     # @PharmacyLocatorCommonProd_AARP
     Examples: 
       | TID   | site | zipcode | distance | countyName     | cy_planYear | cy_planName                     | ny_planYear | ny_planName                     | pharmacyType  | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
-      | 15582 | AARP |   78006 |       15 | Kendall County |        2020 | AARP MedicareRx Walgreens (PDP) |        2020 | AARP MedicareRx Walgreens (PDP) | Open 24 hours | True                  | True             | True                 |
+      | 15582 | AARP |   78006 |       15 | Kendall County |        2021 | AARP MedicareRx Walgreens (PDP) |        2021 | AARP MedicareRx Walgreens (PDP) | Open 24 hours | True                  | True             | True                 |
 
     @PharmacyLocatorCommonAARP01b
     Examples: 
       | TID   | site | zipcode | distance | countyName   | cy_planYear | cy_planName                                                      | ny_planYear | ny_planName                                                      | pharmacyType                | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
-      | 15583 | AARP |   78006 |       10 | Comal County |        2020 | UnitedHealthcare Medicare Advantage Choice (Regional PPO)        |        2020 | UnitedHealthcare Medicare Advantage Choice (Regional PPO)        | Retail Pharmacy             | False                 | False            | True                 |
-      | 15583 | AARP |   80002 |       10 | Adams County |        2020 | AARP Medicare Advantage SecureHorizons Plan 1 (HMO)              |        2020 | AARP Medicare Advantage SecureHorizons Plan 1 (HMO)              | Long-term care              | False                 | False            | True                 |
-      | 15583 | AARP |   14867 |       25 | None         |        2020 | UnitedHealthcare Medicare Advantage Choice Plan 3 (Regional PPO) |        2020 | UnitedHealthcare Medicare Advantage Choice Plan 3 (Regional PPO) | Long-term care              | False                 | False            | True                 |
-      | 15583 | AARP |   33321 |       10 | None         |        2020 | Medica HealthCare Plans MedicareMax (HMO)                        |        2020 | Medica HealthCare Plans MedicareMax (HMO)                        | Home Infusion and Specialty | False                 | False            | True                 |
+      | 15583 | AARP |   78006 |       10 | Comal County |        2021 | UnitedHealthcare Medicare Advantage Choice (Regional PPO)        |        2021 | UnitedHealthcare Medicare Advantage Choice (Regional PPO)        | Retail Pharmacy             | False                 | False            | True                 |
+      | 15583 | AARP |   80002 |       10 | Adams County |        2021 | AARP Medicare Advantage SecureHorizons Plan 1 (HMO)              |        2021 | AARP Medicare Advantage SecureHorizons Plan 1 (HMO)              | Long-term care              | False                 | False            | True                 |
+      | 15583 | AARP |   14867 |       25 | None         |        2021 | UnitedHealthcare Medicare Advantage Choice Plan 3 (Regional PPO) |        2021 | UnitedHealthcare Medicare Advantage Choice Plan 3 (Regional PPO) | Long-term care              | False                 | False            | True                 |
+      | 15583 | AARP |   33321 |       10 | None         |        2021 | Medica HealthCare Plans MedicareMax (HMO)                        |        2021 | Medica HealthCare Plans MedicareMax (HMO)                        | Home Infusion and Specialty | False                 | False            | True                 |
 
     @PharmacyLocatorCommonUHC01a
     Examples: 
       | TID   | site | zipcode | distance | countyName     | cy_planYear | cy_planName                     | ny_planYear | ny_planName                     | pharmacyType  | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
-      | 15582 | UHC  |   10980 |       15 | None           |        2020 | AARP MedicareRx Preferred (PDP) |        2020 | AARP MedicareRx Preferred (PDP) | E-Prescribing | True                  | False            | True                 |
-      | 15582 | UHC  |   85215 |       15 | None           |        2020 | AARP MedicareRx Walgreens (PDP) |        2020 | AARP MedicareRx Walgreens (PDP) | Open 24 hours | True                  | True             | True                 |
-      | 15582 | UHC  |   78006 |       15 | Kendall County |        2020 | AARP MedicareRx Walgreens (PDP) |        2020 | AARP MedicareRx Walgreens (PDP) | Open 24 hours | True                  | True             | True                 |
-      | 15582 | UHC  |   00602 |       15 | None           |        2020 | AARP MedicareRx Preferred (PDP) |        2020 | AARP MedicareRx Preferred (PDP) | Open 24 hours | True                  | True             | True                 |
-      | 15582 | UHC  |   96950 |       15 | None           |        2020 | AARP MedicareRx Preferred (PDP) |        2020 | AARP MedicareRx Preferred (PDP) | Open 24 hours | False                 | True             | True                 |
+      | 15582 | UHC  |   10980 |       15 | None           |        2021 | AARP MedicareRx Preferred (PDP) |        2021 | AARP MedicareRx Preferred (PDP) | E-Prescribing | True                  | False            | True                 |
+      | 15582 | UHC  |   85215 |       15 | None           |        2021 | AARP MedicareRx Walgreens (PDP) |        2021 | AARP MedicareRx Walgreens (PDP) | Open 24 hours | True                  | True             | True                 |
+      | 15582 | UHC  |   78006 |       15 | Kendall County |        2021 | AARP MedicareRx Walgreens (PDP) |        2021 | AARP MedicareRx Walgreens (PDP) | Open 24 hours | True                  | True             | True                 |
+      | 15582 | UHC  |   00602 |       15 | None           |        2021 | AARP MedicareRx Preferred (PDP) |        2021 | AARP MedicareRx Preferred (PDP) | Open 24 hours | True                  | True             | True                 |
+      | 15582 | UHC  |   96950 |       15 | None           |        2021 | AARP MedicareRx Preferred (PDP) |        2021 | AARP MedicareRx Preferred (PDP) | Open 24 hours | False                 | True             | True                 |
 
     # @PharmacyLocatorCommonProd_UHC
     Examples: 
       | TID   | site | zipcode | distance | countyName     | cy_planYear | cy_planName                     | ny_planYear | ny_planName                     | pharmacyType  | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
-      | 15582 | UHC  |   78006 |       15 | Kendall County |        2020 | AARP MedicareRx Walgreens (PDP) |        2020 | AARP MedicareRx Walgreens (PDP) | Open 24 hours | True                  | True             | True                 |
+      | 15582 | UHC  |   78006 |       15 | Kendall County |        2021 | AARP MedicareRx Walgreens (PDP) |        2021 | AARP MedicareRx Walgreens (PDP) | Open 24 hours | True                  | True             | True                 |
 
     @PharmacyLocatorCommonUHC01b
     Examples: 
       | TID   | siteName | zipcode | distance | countyName   | cy_planYear | cy_planName                                                      | ny_planYear | ny_planName                                                      | pharmacyType                | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
-      | 15583 | UHC      |   78006 |       10 | Comal County |        2020 | UnitedHealthcare Medicare Advantage Choice (Regional PPO)        |        2020 | UnitedHealthcare Medicare Advantage Choice (Regional PPO)        | Retail Pharmacy             | False                 | False            | True                 |
-      | 15583 | UHC      |   80002 |       10 | Adams County |        2020 | AARP Medicare Advantage SecureHorizons Plan 1 (HMO)              |        2020 | AARP Medicare Advantage SecureHorizons Plan 1 (HMO)              | Long-term care              | False                 | False            | True                 |
-      | 15583 | UHC      |   14867 |       25 | None         |        2020 | UnitedHealthcare Medicare Advantage Choice Plan 3 (Regional PPO) |        2020 | UnitedHealthcare Medicare Advantage Choice Plan 3 (Regional PPO) | Long-term care              | False                 | False            | True                 |
-      | 15583 | UHC      |   33321 |       10 | None         |        2020 | Medica HealthCare Plans MedicareMax (HMO)                        |        2020 | Medica HealthCare Plans MedicareMax (HMO)                        | Home Infusion and Specialty | False                 | False            | True                 |
+      | 15583 | UHC      |   78006 |       10 | Comal County |        2021 | UnitedHealthcare Medicare Advantage Choice (Regional PPO)        |        2021 | UnitedHealthcare Medicare Advantage Choice (Regional PPO)        | Retail Pharmacy             | False                 | False            | True                 |
+      | 15583 | UHC      |   80002 |       10 | Adams County |        2021 | AARP Medicare Advantage SecureHorizons Plan 1 (HMO)              |        2021 | AARP Medicare Advantage SecureHorizons Plan 1 (HMO)              | Long-term care              | False                 | False            | True                 |
+      | 15583 | UHC      |   14867 |       25 | None         |        2021 | UnitedHealthcare Medicare Advantage Choice Plan 3 (Regional PPO) |        2021 | UnitedHealthcare Medicare Advantage Choice Plan 3 (Regional PPO) | Long-term care              | False                 | False            | True                 |
+      | 15583 | UHC      |   33321 |       10 | None         |        2021 | Medica HealthCare Plans MedicareMax (HMO)                        |        2021 | Medica HealthCare Plans MedicareMax (HMO)                        | Home Infusion and Specialty | False                 | False            | True                 |
 
   # @pharmacylocatorAARP02 @shopPlan @English @pharmacylocatorAcquisitionE2E @pharmacyLocatorRegression
   Scenario Outline: TID: <TID> -zipcode: <zipcode> - Part 2 of 2 - To verify end-to-end behavior for pharmacy locator page in English on acquisition <site> site
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
-    And the user navigate to pharmacy search page
+    And the user navigate to pharmacy search page from the navigation bar
     #------ English -----------------------------------
     And the user validates header section content
     And the user enters following details for the pharmacy search
@@ -115,53 +115,53 @@ Feature: 1.11. ACQ-Pharmacy Locator AARP
     @PharmacyLocatorCommonAARP02a
     Examples: 
       | TID   | site | zipcode | distance | countyName     | cy_planYear | cy_planName                     | ny_planYear | ny_planName                     | pharmacyType  | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
-      | 15582 | AARP |   10980 |       15 | None           |        2020 | AARP MedicareRx Preferred (PDP) |        2020 | AARP MedicareRx Preferred (PDP) | E-Prescribing | True                  | False            | True                 |
-      | 15582 | AARP |   85215 |       15 | None           |        2020 | AARP MedicareRx Walgreens (PDP) |        2020 | AARP MedicareRx Walgreens (PDP) | Open 24 hours | True                  | True             | True                 |
-      | 15582 | AARP |   78006 |       15 | Kendall County |        2020 | AARP MedicareRx Walgreens (PDP) |        2020 | AARP MedicareRx Walgreens (PDP) | Open 24 hours | True                  | True             | True                 |
+      | 15582 | AARP |   10980 |       15 | None           |        2021 | AARP MedicareRx Preferred (PDP) |        2021 | AARP MedicareRx Preferred (PDP) | E-Prescribing | True                  | False            | True                 |
+      | 15582 | AARP |   85215 |       15 | None           |        2021 | AARP MedicareRx Walgreens (PDP) |        2021 | AARP MedicareRx Walgreens (PDP) | Open 24 hours | True                  | True             | True                 |
+      | 15582 | AARP |   78006 |       15 | Kendall County |        2021 | AARP MedicareRx Walgreens (PDP) |        2021 | AARP MedicareRx Walgreens (PDP) | Open 24 hours | True                  | True             | True                 |
 
     #@prodRegression
     @PharmacyLocatorCommonProd_AARP
     Examples: 
       | TID   | siteName | zipcode | distance | countyName | cy_planYear | cy_planName                     | ny_planYear | ny_planName                     | pharmacyType  | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
-      | 15582 | AARP     |   10980 |       15 | None       |        2020 | AARP MedicareRx Preferred (PDP) |        2020 | AARP MedicareRx Preferred (PDP) | E-Prescribing | True                  | False            | True                 |
+      | 15582 | AARP     |   10980 |       15 | None       |        2021 | AARP MedicareRx Preferred (PDP) |        2021 | AARP MedicareRx Preferred (PDP) | E-Prescribing | True                  | False            | True                 |
 
     #@pharmacylocatorAARP02b
     @PharmacyLocatorCommonAARP02b
     Examples: 
       | TID   | site | zipcode | distance | countyName   | cy_planYear | cy_planName                                                      | ny_planYear | ny_planName                                                      | pharmacyType                | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
-      | 15583 | AARP |   78006 |       10 | Comal County |        2020 | UnitedHealthcare Medicare Advantage Choice (Regional PPO)        |        2020 | UnitedHealthcare Medicare Advantage Choice (Regional PPO)        | Retail Pharmacy             | False                 | False            | True                 |
-      | 15583 | AARP |   80002 |       10 | Adams County |        2020 | AARP Medicare Advantage SecureHorizons Plan 1 (HMO)              |        2020 | AARP Medicare Advantage SecureHorizons Plan 1 (HMO)              | Long-term care              | False                 | False            | True                 |
-      | 15583 | AARP |   14867 |       25 | None         |        2020 | UnitedHealthcare Medicare Advantage Choice Plan 3 (Regional PPO) |        2020 | UnitedHealthcare Medicare Advantage Choice Plan 3 (Regional PPO) | Long-term care              | False                 | False            | True                 |
-      | 15583 | AARP |   33321 |       10 | None         |        2020 | Medica HealthCare Plans MedicareMax (HMO)                        |        2020 | Medica HealthCare Plans MedicareMax (HMO)                        | Home Infusion and Specialty | False                 | False            | True                 |
+      | 15583 | AARP |   78006 |       10 | Comal County |        2021 | UnitedHealthcare Medicare Advantage Choice (Regional PPO)        |        2021 | UnitedHealthcare Medicare Advantage Choice (Regional PPO)        | Retail Pharmacy             | False                 | False            | True                 |
+      | 15583 | AARP |   80002 |       10 | Adams County |        2021 | AARP Medicare Advantage SecureHorizons Plan 1 (HMO)              |        2021 | AARP Medicare Advantage SecureHorizons Plan 1 (HMO)              | Long-term care              | False                 | False            | True                 |
+      | 15583 | AARP |   14867 |       25 | None         |        2021 | UnitedHealthcare Medicare Advantage Choice Plan 3 (Regional PPO) |        2021 | UnitedHealthcare Medicare Advantage Choice Plan 3 (Regional PPO) | Long-term care              | False                 | False            | True                 |
+      | 15583 | AARP |   33321 |       10 | None         |        2021 | Medica HealthCare Plans MedicareMax (HMO)                        |        2021 | Medica HealthCare Plans MedicareMax (HMO)                        | Home Infusion and Specialty | False                 | False            | True                 |
 
     #@pharmacylocatorAARP02a\
     @PharmacyLocatorCommonUHC02a
     Examples: 
       | TID   | site | zipcode | distance | countyName     | cy_planYear | cy_planName                     | ny_planYear | ny_planName                     | pharmacyType  | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
-      | 15582 | UHC  |   10980 |       15 | None           |        2020 | AARP MedicareRx Preferred (PDP) |        2020 | AARP MedicareRx Preferred (PDP) | E-Prescribing | True                  | False            | True                 |
-      | 15582 | UHC  |   85215 |       15 | None           |        2020 | AARP MedicareRx Walgreens (PDP) |        2020 | AARP MedicareRx Walgreens (PDP) | Open 24 hours | True                  | True             | True                 |
-      | 15582 | UHC  |   78006 |       15 | Kendall County |        2020 | AARP MedicareRx Walgreens (PDP) |        2020 | AARP MedicareRx Walgreens (PDP) | Open 24 hours | True                  | True             | True                 |
+      | 15582 | UHC  |   10980 |       15 | None           |        2021 | AARP MedicareRx Preferred (PDP) |        2021 | AARP MedicareRx Preferred (PDP) | E-Prescribing | True                  | False            | True                 |
+      | 15582 | UHC  |   85215 |       15 | None           |        2021 | AARP MedicareRx Walgreens (PDP) |        2021 | AARP MedicareRx Walgreens (PDP) | Open 24 hours | True                  | True             | True                 |
+      | 15582 | UHC  |   78006 |       15 | Kendall County |        2021 | AARP MedicareRx Walgreens (PDP) |        2021 | AARP MedicareRx Walgreens (PDP) | Open 24 hours | True                  | True             | True                 |
 
     #@prodRegression
     @PharmacyLocatorCommonProd_UHC
     Examples: 
       | TID   | siteName | zipcode | distance | countyName | cy_planYear | cy_planName                     | ny_planYear | ny_planName                     | pharmacyType  | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
-      | 15582 | UHC      |   10980 |       15 | None       |        2020 | AARP MedicareRx Preferred (PDP) |        2020 | AARP MedicareRx Preferred (PDP) | E-Prescribing | True                  | False            | True                 |
+      | 15582 | UHC      |   10980 |       15 | None       |        2021 | AARP MedicareRx Preferred (PDP) |        2021 | AARP MedicareRx Preferred (PDP) | E-Prescribing | True                  | False            | True                 |
 
     #@pharmacylocatorAARP02b
     @PharmacyLocatorCommonUHC02b
     Examples: 
       | TID   | site | zipcode | distance | countyName   | cy_planYear | cy_planName                                                      | ny_planYear | ny_planName                                                      | pharmacyType                | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
-      | 15583 | UHC  |   78006 |       10 | Comal County |        2020 | UnitedHealthcare Medicare Advantage Choice (Regional PPO)        |        2020 | UnitedHealthcare Medicare Advantage Choice (Regional PPO)        | Retail Pharmacy             | False                 | False            | True                 |
-      | 15583 | UHC  |   80002 |       10 | Adams County |        2020 | AARP Medicare Advantage SecureHorizons Plan 1 (HMO)              |        2020 | AARP Medicare Advantage SecureHorizons Plan 1 (HMO)              | Long-term care              | False                 | False            | True                 |
-      | 15583 | UHC  |   14867 |       25 | None         |        2020 | UnitedHealthcare Medicare Advantage Choice Plan 3 (Regional PPO) |        2020 | UnitedHealthcare Medicare Advantage Choice Plan 3 (Regional PPO) | Long-term care              | False                 | False            | True                 |
-      | 15583 | UHC  |   33321 |       10 | None         |        2020 | Medica HealthCare Plans MedicareMax (HMO)                        |        2020 | Medica HealthCare Plans MedicareMax (HMO)                        | Home Infusion and Specialty | False                 | False            | True                 |
+      | 15583 | UHC  |   78006 |       10 | Comal County |        2021 | UnitedHealthcare Medicare Advantage Choice (Regional PPO)        |        2021 | UnitedHealthcare Medicare Advantage Choice (Regional PPO)        | Retail Pharmacy             | False                 | False            | True                 |
+      | 15583 | UHC  |   80002 |       10 | Adams County |        2021 | AARP Medicare Advantage SecureHorizons Plan 1 (HMO)              |        2021 | AARP Medicare Advantage SecureHorizons Plan 1 (HMO)              | Long-term care              | False                 | False            | True                 |
+      | 15583 | UHC  |   14867 |       25 | None         |        2021 | UnitedHealthcare Medicare Advantage Choice Plan 3 (Regional PPO) |        2021 | UnitedHealthcare Medicare Advantage Choice Plan 3 (Regional PPO) | Long-term care              | False                 | False            | True                 |
+      | 15583 | UHC  |   33321 |       10 | None         |        2021 | Medica HealthCare Plans MedicareMax (HMO)                        |        2021 | Medica HealthCare Plans MedicareMax (HMO)                        | Home Infusion and Specialty | False                 | False            | True                 |
 
   # @pharmacylocatorAARP03 @shopPlan @Chinese @pharmacylocatorAcquisitionE2E @pharmacyLocatorRegression
   Scenario Outline: TID: <TID> -zipcode: <zipcode> -countyName: <countyName> - Part 1 of 2 - To verify end-to-end behavior for pharmacy locator page in Chinese on acquisition <site> site
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
-    And the user navigate to pharmacy search page
+    And the user navigate to pharmacy search page from the navigation bar
     #------ Chinese -----------------------------------
     When the user selects Chinese Language to translate
     And the user validates header section content on site
@@ -209,22 +209,22 @@ Feature: 1.11. ACQ-Pharmacy Locator AARP
     @PharmacyLocatorCommonAARP03
     Examples: 
       | TID   | site | zipcode | distance | countyName     | cy_planYear | cy_planName                                               | ny_planYear | ny_planName                                               | pharmacyType    | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
-      | 15582 | AARP |   10980 |       15 | None           |        2020 | AARP MedicareRx Preferred (PDP)                           |        2020 | AARP MedicareRx Preferred (PDP)                           | E-Prescribing   | True                  | False            | True                 |
-      | 15582 | AARP |   78006 |       15 | Kendall County |        2020 | AARP MedicareRx Walgreens (PDP)                           |        2020 | AARP MedicareRx Walgreens (PDP)                           | Open 24 hours   | True                  | True             | True                 |
-      | 15583 | AARP |   78006 |       10 | Comal County   |        2020 | UnitedHealthcare Medicare Advantage Choice (Regional PPO) |        2020 | UnitedHealthcare Medicare Advantage Choice (Regional PPO) | Retail Pharmacy | False                 | False            | True                 |
+      | 15582 | AARP |   10980 |       15 | None           |        2021 | AARP MedicareRx Preferred (PDP)                           |        2021 | AARP MedicareRx Preferred (PDP)                           | E-Prescribing   | True                  | False            | True                 |
+      | 15582 | AARP |   78006 |       15 | Kendall County |        2021 | AARP MedicareRx Walgreens (PDP)                           |        2021 | AARP MedicareRx Walgreens (PDP)                           | Open 24 hours   | True                  | True             | True                 |
+      | 15583 | AARP |   78006 |       10 | Comal County   |        2021 | UnitedHealthcare Medicare Advantage Choice (Regional PPO) |        2021 | UnitedHealthcare Medicare Advantage Choice (Regional PPO) | Retail Pharmacy | False                 | False            | True                 |
 
     @PharmacyLocatorCommonUHC03
     Examples: 
       | TID   | site | zipcode | distance | countyName     | cy_planYear | cy_planName                                               | ny_planYear | ny_planName                                               | pharmacyType    | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
-      | 15582 | UHC  |   10980 |       15 | None           |        2020 | AARP MedicareRx Preferred (PDP)                           |        2020 | AARP MedicareRx Preferred (PDP)                           | E-Prescribing   | True                  | False            | True                 |
-      | 15582 | UHC  |   78006 |       15 | Kendall County |        2020 | AARP MedicareRx Walgreens (PDP)                           |        2020 | AARP MedicareRx Walgreens (PDP)                           | Open 24 hours   | True                  | True             | True                 |
-      | 15583 | UHC  |   78006 |       10 | Comal County   |        2020 | UnitedHealthcare Medicare Advantage Choice (Regional PPO) |        2020 | UnitedHealthcare Medicare Advantage Choice (Regional PPO) | Retail Pharmacy | False                 | False            | True                 |
+      | 15582 | UHC  |   10980 |       15 | None           |        2021 | AARP MedicareRx Preferred (PDP)                           |        2021 | AARP MedicareRx Preferred (PDP)                           | E-Prescribing   | True                  | False            | True                 |
+      | 15582 | UHC  |   78006 |       15 | Kendall County |        2021 | AARP MedicareRx Walgreens (PDP)                           |        2021 | AARP MedicareRx Walgreens (PDP)                           | Open 24 hours   | True                  | True             | True                 |
+      | 15583 | UHC  |   78006 |       10 | Comal County   |        2021 | UnitedHealthcare Medicare Advantage Choice (Regional PPO) |        2021 | UnitedHealthcare Medicare Advantage Choice (Regional PPO) | Retail Pharmacy | False                 | False            | True                 |
 
   #  @pharmacylocatorAARP04 @shopPlan @Chinese @pharmacylocatorAcquisitionE2E @pharmacyLocatorRegression
   Scenario Outline: TID: <TID> -zipcode: <zipcode> -countyName: <countyName> - Part 2 of 2 - To verify end-to-end behavior for pharmacy locator page in Chinese on acquisition <site> site
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
-    And the user navigate to pharmacy search page
+    And the user navigate to pharmacy search page from the navigation bar
     #------ Chinese -----------------------------------
     When the user selects Chinese Language to translate
     And the user enters following details for the pharmacy search
@@ -251,22 +251,22 @@ Feature: 1.11. ACQ-Pharmacy Locator AARP
     @PharmacyLocatorCommonAARP04
     Examples: 
       | TID   | site | zipcode | distance | countyName     | cy_planYear | cy_planName                                               | ny_planYear | ny_planName                                               | pharmacyType    | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
-      | 15582 | AARP |   10980 |       15 | None           |        2020 | AARP MedicareRx Preferred (PDP)                           |        2020 | AARP MedicareRx Preferred (PDP)                           | E-Prescribing   | True                  | False            | True                 |
-      | 15582 | AARP |   78006 |       15 | Kendall County |        2020 | AARP MedicareRx Walgreens (PDP)                           |        2020 | AARP MedicareRx Walgreens (PDP)                           | Open 24 hours   | True                  | True             | True                 |
-      | 15583 | AARP |   78006 |       10 | Comal County   |        2020 | UnitedHealthcare Medicare Advantage Choice (Regional PPO) |        2020 | UnitedHealthcare Medicare Advantage Choice (Regional PPO) | Retail Pharmacy | False                 | False            | True                 |
+      | 15582 | AARP |   10980 |       15 | None           |        2021 | AARP MedicareRx Preferred (PDP)                           |        2021 | AARP MedicareRx Preferred (PDP)                           | E-Prescribing   | True                  | False            | True                 |
+      | 15582 | AARP |   78006 |       15 | Kendall County |        2021 | AARP MedicareRx Walgreens (PDP)                           |        2021 | AARP MedicareRx Walgreens (PDP)                           | Open 24 hours   | True                  | True             | True                 |
+      | 15583 | AARP |   78006 |       10 | Comal County   |        2021 | UnitedHealthcare Medicare Advantage Choice (Regional PPO) |        2021 | UnitedHealthcare Medicare Advantage Choice (Regional PPO) | Retail Pharmacy | False                 | False            | True                 |
 
     @PharmacyLocatorCommonUHC04
     Examples: 
       | TID   | site | zipcode | distance | countyName     | cy_planYear | cy_planName                                               | ny_planYear | ny_planName                                               | pharmacyType    | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
-      | 15582 | UHC  |   10980 |       15 | None           |        2020 | AARP MedicareRx Preferred (PDP)                           |        2020 | AARP MedicareRx Preferred (PDP)                           | E-Prescribing   | True                  | False            | True                 |
-      | 15582 | UHC  |   78006 |       15 | Kendall County |        2020 | AARP MedicareRx Walgreens (PDP)                           |        2020 | AARP MedicareRx Walgreens (PDP)                           | Open 24 hours   | True                  | True             | True                 |
-      | 15583 | UHC  |   78006 |       10 | Comal County   |        2020 | UnitedHealthcare Medicare Advantage Choice (Regional PPO) |        2020 | UnitedHealthcare Medicare Advantage Choice (Regional PPO) | Retail Pharmacy | False                 | False            | True                 |
+      | 15582 | UHC  |   10980 |       15 | None           |        2021 | AARP MedicareRx Preferred (PDP)                           |        2021 | AARP MedicareRx Preferred (PDP)                           | E-Prescribing   | True                  | False            | True                 |
+      | 15582 | UHC  |   78006 |       15 | Kendall County |        2021 | AARP MedicareRx Walgreens (PDP)                           |        2021 | AARP MedicareRx Walgreens (PDP)                           | Open 24 hours   | True                  | True             | True                 |
+      | 15583 | UHC  |   78006 |       10 | Comal County   |        2021 | UnitedHealthcare Medicare Advantage Choice (Regional PPO) |        2021 | UnitedHealthcare Medicare Advantage Choice (Regional PPO) | Retail Pharmacy | False                 | False            | True                 |
 
   #@pharmacylocatorAARP05 @shopPlan @Spanish @pharmacylocatorAcquisitionE2E @pharmacyLocatorRegression
   Scenario Outline: TID: <TID> -zipcode: <zipcode> -countyName: <countyName> - Part 1 of 2 - To verify end-to-end behavior for pharmacy locator page in Spanish on acquisition <site> site
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
-    And the user navigate to pharmacy search page
+    And the user navigate to pharmacy search page from the navigation bar
     #------ Spanish -----------------------------------
     When the user selects Spanish Language to translate
     And the user validates header section content on site
@@ -303,22 +303,22 @@ Feature: 1.11. ACQ-Pharmacy Locator AARP
     @PharmacyLocatorCommonAARP05
     Examples: 
       | TID   | site | zipcode | distance | countyName     | cy_planYear | cy_planName                                               | ny_planYear | ny_planName                                               | pharmacyType    | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
-      | 15582 | AARP |   10980 |       15 | None           |        2020 | AARP MedicareRx Preferred (PDP)                           |        2020 | AARP MedicareRx Preferred (PDP)                           | E-Prescribing   | True                  | False            | True                 |
-      | 15582 | AARP |   78006 |       15 | Kendall County |        2020 | AARP MedicareRx Walgreens (PDP)                           |        2020 | AARP MedicareRx Walgreens (PDP)                           | Open 24 hours   | True                  | True             | True                 |
-      | 15583 | AARP |   78006 |       10 | Comal County   |        2020 | UnitedHealthcare Medicare Advantage Choice (Regional PPO) |        2020 | UnitedHealthcare Medicare Advantage Choice (Regional PPO) | Retail Pharmacy | False                 | False            | True                 |
+      | 15582 | AARP |   10980 |       15 | None           |        2021 | AARP MedicareRx Preferred (PDP)                           |        2021 | AARP MedicareRx Preferred (PDP)                           | E-Prescribing   | True                  | False            | True                 |
+      | 15582 | AARP |   78006 |       15 | Kendall County |        2021 | AARP MedicareRx Walgreens (PDP)                           |        2021 | AARP MedicareRx Walgreens (PDP)                           | Open 24 hours   | True                  | True             | True                 |
+      | 15583 | AARP |   78006 |       10 | Comal County   |        2021 | UnitedHealthcare Medicare Advantage Choice (Regional PPO) |        2021 | UnitedHealthcare Medicare Advantage Choice (Regional PPO) | Retail Pharmacy | False                 | False            | True                 |
 
     @PharmacyLocatorCommonUHC05
     Examples: 
       | TID   | site | zipcode | distance | countyName     | cy_planYear | cy_planName                                               | ny_planYear | ny_planName                                               | pharmacyType    | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
-      | 15582 | UHC  |   10980 |       15 | None           |        2020 | AARP MedicareRx Preferred (PDP)                           |        2020 | AARP MedicareRx Preferred (PDP)                           | E-Prescribing   | True                  | False            | True                 |
-      | 15582 | UHC  |   78006 |       15 | Kendall County |        2020 | AARP MedicareRx Walgreens (PDP)                           |        2020 | AARP MedicareRx Walgreens (PDP)                           | Open 24 hours   | True                  | True             | True                 |
-      | 15583 | UHC  |   78006 |       10 | Comal County   |        2020 | UnitedHealthcare Medicare Advantage Choice (Regional PPO) |        2020 | UnitedHealthcare Medicare Advantage Choice (Regional PPO) | Retail Pharmacy | False                 | False            | True                 |
+      | 15582 | UHC  |   10980 |       15 | None           |        2021 | AARP MedicareRx Preferred (PDP)                           |        2021 | AARP MedicareRx Preferred (PDP)                           | E-Prescribing   | True                  | False            | True                 |
+      | 15582 | UHC  |   78006 |       15 | Kendall County |        2021 | AARP MedicareRx Walgreens (PDP)                           |        2021 | AARP MedicareRx Walgreens (PDP)                           | Open 24 hours   | True                  | True             | True                 |
+      | 15583 | UHC  |   78006 |       10 | Comal County   |        2021 | UnitedHealthcare Medicare Advantage Choice (Regional PPO) |        2021 | UnitedHealthcare Medicare Advantage Choice (Regional PPO) | Retail Pharmacy | False                 | False            | True                 |
 
   #     @pharmacylocatorulayer06 @shopPlan @Spanish @pharmacylocatorAcquisitionE2E @pharmacyLocatorRegression
   Scenario Outline: TID: <TID> -zipcode: <zipcode> -countyName: <countyName> - Part 2 of 2 - To verify end-to-end behavior for pharmacy locator page in Spanish on acquisition <site> site
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
-    And the user navigate to pharmacy search page
+    And the user navigate to pharmacy search page from the navigation bar
     #------ Spanish -----------------------------------
     When the user selects Spanish Language to translate
     And the user enters following details for the pharmacy search
@@ -345,16 +345,16 @@ Feature: 1.11. ACQ-Pharmacy Locator AARP
     @PharmacyLocatorCommonAARP06
     Examples: 
       | TID   | site | zipcode | distance | countyName     | cy_planYear | cy_planName                                               | ny_planYear | ny_planName                                               | pharmacyType    | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
-      | 15582 | AARP |   10980 |       15 | None           |        2020 | AARP MedicareRx Preferred (PDP)                           |        2020 | AARP MedicareRx Preferred (PDP)                           | E-Prescribing   | True                  | False            | True                 |
-      | 15582 | AARP |   78006 |       15 | Kendall County |        2020 | AARP MedicareRx Walgreens (PDP)                           |        2020 | AARP MedicareRx Walgreens (PDP)                           | Open 24 hours   | True                  | True             | True                 |
-      | 15583 | AARP |   78006 |       10 | Comal County   |        2020 | UnitedHealthcare Medicare Advantage Choice (Regional PPO) |        2020 | UnitedHealthcare Medicare Advantage Choice (Regional PPO) | Retail Pharmacy | False                 | False            | True                 |
+      | 15582 | AARP |   10980 |       15 | None           |        2021 | AARP MedicareRx Preferred (PDP)                           |        2021 | AARP MedicareRx Preferred (PDP)                           | E-Prescribing   | True                  | False            | True                 |
+      | 15582 | AARP |   78006 |       15 | Kendall County |        2021 | AARP MedicareRx Walgreens (PDP)                           |        2021 | AARP MedicareRx Walgreens (PDP)                           | Open 24 hours   | True                  | True             | True                 |
+      | 15583 | AARP |   78006 |       10 | Comal County   |        2021 | UnitedHealthcare Medicare Advantage Choice (Regional PPO) |        2021 | UnitedHealthcare Medicare Advantage Choice (Regional PPO) | Retail Pharmacy | False                 | False            | True                 |
 
     @PharmacyLocatorCommonUHC06
     Examples: 
       | TID   | site | zipcode | distance | countyName     | cy_planYear | cy_planName                                               | ny_planYear | ny_planName                                               | pharmacyType    | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
-      | 15582 | UHC  |   10980 |       15 | None           |        2020 | AARP MedicareRx Preferred (PDP)                           |        2020 | AARP MedicareRx Preferred (PDP)                           | E-Prescribing   | True                  | False            | True                 |
-      | 15582 | UHC  |   78006 |       15 | Kendall County |        2020 | AARP MedicareRx Walgreens (PDP)                           |        2020 | AARP MedicareRx Walgreens (PDP)                           | Open 24 hours   | True                  | True             | True                 |
-      | 15583 | UHC  |   78006 |       10 | Comal County   |        2020 | UnitedHealthcare Medicare Advantage Choice (Regional PPO) |        2020 | UnitedHealthcare Medicare Advantage Choice (Regional PPO) | Retail Pharmacy | False                 | False            | True                 |
+      | 15582 | UHC  |   10980 |       15 | None           |        2021 | AARP MedicareRx Preferred (PDP)                           |        2021 | AARP MedicareRx Preferred (PDP)                           | E-Prescribing   | True                  | False            | True                 |
+      | 15582 | UHC  |   78006 |       15 | Kendall County |        2021 | AARP MedicareRx Walgreens (PDP)                           |        2021 | AARP MedicareRx Walgreens (PDP)                           | Open 24 hours   | True                  | True             | True                 |
+      | 15583 | UHC  |   78006 |       10 | Comal County   |        2021 | UnitedHealthcare Medicare Advantage Choice (Regional PPO) |        2021 | UnitedHealthcare Medicare Advantage Choice (Regional PPO) | Retail Pharmacy | False                 | False            | True                 |
 
   # @pharmacylocatorulayer07 @onlinePharmacyDir @pharmacyLocatorRegression
   Scenario Outline: TID: <TID> -plan: <planType>  - To verify navigation to pharmacy search page from VPP page

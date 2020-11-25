@@ -190,7 +190,7 @@ public class HealthAndWellnessPage extends HealthAndWellnessBase {
 		String expectedUrl="uhc.com/rewards";
 		String actUrlLink=getRewardLink.getAttribute("href");
 		Assert.assertTrue("PROBLEM - unable to locate expected href link from element.  Expect to contain '"+expectedUrl+"' | Actual='"+actUrlLink+"'",actUrlLink.contains(expectedUrl));
-		if (testThirdPartyPage) {
+		if (testThirdPartyPage && MRScenario.environment.equalsIgnoreCase("prod")) {
 			getRewardLink.click();
 			CommonUtility.checkPageIsReady(driver);
 			sleepBySec(15);
@@ -280,7 +280,7 @@ public class HealthAndWellnessPage extends HealthAndWellnessBase {
 			String expectedHref="/active/overview";
 			String expectedDomain=getExpectedDomain();
 			String expectedEnv=getExpectedEnv();
-			if (testThirdPartyPage) {
+			if (testThirdPartyPage && MRScenario.environment.equalsIgnoreCase("prod")) {
 				renewActiveIconImg_ship.click();
 				CommonUtility.checkPageIsReady(driver);
 				CommonUtility.waitForPageLoad(driver, generalHeader, 15);
@@ -309,7 +309,7 @@ public class HealthAndWellnessPage extends HealthAndWellnessBase {
 			expectedDomain=getExpectedDomain();
 			expectedEnv=getExpectedEnv();
 			Assert.assertTrue("PROBLEM - '"+targetElement+"' element href attribute value is not as expected. Expected='"+expectedHref+"' | Actual='"+actualEleLnkHref+"'", actualEleLnkHref.contains(expectedHref));
-			if (testThirdPartyPage) {
+			if (testThirdPartyPage && MRScenario.environment.equalsIgnoreCase("prod")) {
 				renewActiveIconImg_ship.click();
 				CommonUtility.checkPageIsReady(driver);
 				CommonUtility.waitForPageLoad(driver, generalHeader, 15);
@@ -335,7 +335,7 @@ public class HealthAndWellnessPage extends HealthAndWellnessBase {
 		//String expectedHref="https://member.int.uhc.com/active/fitness-location-search";
 		String actualEleLnkHref=gymElement.getAttribute("href");
 		Assert.assertTrue("PROBLEM - '"+targetElement+"' element href attribute value is not as expected. Expected='"+expectedHref+"' | Actual='"+actualEleLnkHref+"'", actualEleLnkHref.contains(expectedHref));
-		if (testThirdPartyPage) {
+		if (testThirdPartyPage && MRScenario.environment.equalsIgnoreCase("prod")) {
 			gymElement.click();
 			CommonUtility.checkPageIsReady(driver);
 			CommonUtility.waitForPageLoad(driver, generalHeader, 15);
@@ -356,7 +356,7 @@ public class HealthAndWellnessPage extends HealthAndWellnessBase {
 		expectedHref="/active/train-your-brain";
 		actualEleLnkHref=brainElement.getAttribute("href");
 		Assert.assertTrue("PROBLEM - '"+targetElement+"' element href attribute value is not as expected. Expected='"+expectedHref+"' | Actual='"+actualEleLnkHref+"'", actualEleLnkHref.contains(expectedHref));
-		if (testThirdPartyPage) {
+		if (testThirdPartyPage && MRScenario.environment.equalsIgnoreCase("prod")) {
 			brainElement.click();
 			CommonUtility.checkPageIsReady(driver);
 			CommonUtility.waitForPageLoad(driver, generalHeader, 15);
@@ -421,7 +421,7 @@ public class HealthAndWellnessPage extends HealthAndWellnessBase {
 		String expectedEnv=getExpectedEnv();
 		//note: on offline-line env, this link will land on error b/c of the env config
 		//note: on online-stage env, this link sometimes will run in loop/redirecting non stop, already notified Talix contact but it worked fine on their side
-		if (testThirdPartyPage) {
+		if (testThirdPartyPage && MRScenario.environment.equalsIgnoreCase("prod")) {
 			termsAndConditionsElement.click();
 			CommonUtility.checkPageIsReady(driver);
 			CommonUtility.waitForPageLoad(driver, generalHeader, 15);

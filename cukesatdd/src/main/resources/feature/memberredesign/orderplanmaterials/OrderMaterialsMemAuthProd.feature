@@ -1,6 +1,10 @@
 @orderPlanMaterials @thePredators
 Feature: 1.10.1 Member  order materials Page - PROD
 
+  #Background: If run on stage then feature security flag needs to be true
+  #   Given feature security flag must set to true when testing on test env
+  #    | Feature           | UCPOrderPlanMaterials |
+
   @prodSanity_UHC_Individual_order
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify order plan material functionality for different type of users
     Given the user is on member auth login flow page
