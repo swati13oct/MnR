@@ -5,7 +5,8 @@ Feature: UAT Scripts-To test Campaign TFN in all flows on AARP site
  #######################Script 1: Direct traffic########################################
    @Scenario_1_2_DirectTraffic_UAT 
   Scenario Outline: <scenario> 1.0 Verify TFN in VPP Plan Details and OLE pages, DCE,
-    Given the user is on AARP medicare acquisition site landing page
+    Given the user is on medicare acquisition site landing page
+      | Site | <site> | 
     And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
     Then the user validates PSC code
       | PSC Code | <pscCode> | 
@@ -14,9 +15,9 @@ Feature: UAT Scripts-To test Campaign TFN in all flows on AARP site
      # | MA URL    | <maUrl> |
      # | TFN Xpath | <maTFN> |
     Then the user navigate to following MedED Pages URL and validate Federal TFN  
-      | MEDICARE URL    | <medicareUrl> |
+      | MedEd URL    | <medicareUrl> |
       | TFN Xpath | <medicareTFN> |
-   Then the user navigates to Medsupp Plans in VPP and validates Medsupp TFNmarke
+   Then the user navigates to Medsupp Plans in VPP and validates Medsupp TFN
  Then the user navigates to PDP Plan Details Page and validates Federal TFN
  Then the user navigates to PDP OLE Page and validates Federal TFN
  Then the user navigates to homepage validates Federal TFN
@@ -52,8 +53,8 @@ When the user enters zipcode on health plans page
       | PSC Code | <Precedence2PSC> |
       Then the user validate the sam icons tfn with federal TFN on Acquistion page
   Examples: 
-  |scenario           | pscCode | maUrl                                  | maTFN                                                          | pdpUrl                                    | pdpTFN                                                         | snpUrl                                                                                                                                                                                                                                                                                                                      | snpTFN                       | medSuppUrl                                                                | medSuppTFN     | medicareUrl                |medicareTFN                        | site   | zipcode | plantype | isMultutiCounty |planyear |userName|password| dceUrl|Precedence2PSC |memberSignIn|
-  |Scenario 1 - AMP 	|  810027 | enroll/ma-enrollment.html              | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | shop/estimate/pdp-costs.html              | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | health-plans.html?zipcode=28035&deepLink=favPlansDeepLink&plantype=MA&year=2020&planId=H5253041000&planYear=2020&systemYear=2020&zipcode=28035&fipsCode=119&product=MAPD&yearDisclaimer=undefined&month=2&yearToggle=undefined&deepLink=plandetail&WT.mc_id=897749&mrcid=em:Acq:MR%7cFederal%7cEGEM3011%7c::897749!/details | //a[contains(@class, 'tel')] | health-plans/medicare-supplement-plans/medicare-information.html?vpp=true | //*[@id='tfn'] | medicare-education.html     |(//a[contains(@class, 'tel')])[1]|Ulayer | 80001   | MA       | No              |current  |mnrqavd11|Password@1|health-plans/estimate-drug-costs.html#/drug-cost-estimator|8009508 |https://www.medicare.uhc.com/  |
+  |scenario           | site	|pscCode | maUrl                                  | maTFN                                                          | pdpUrl                                    | pdpTFN                                                         | snpUrl                                                                                                                                                                                                                                                                                                                      | snpTFN                       | medSuppUrl                                                                | medSuppTFN     | medicareUrl                |medicareTFN                        | site   | zipcode | plantype | isMultutiCounty |planyear |userName|password| dceUrl|Precedence2PSC |memberSignIn|
+  |Scenario 1 - AMP 	| AARP | 810027 | enroll/ma-enrollment.html              | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | shop/estimate/pdp-costs.html              | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | health-plans.html?zipcode=28035&deepLink=favPlansDeepLink&plantype=MA&year=2020&planId=H5253041000&planYear=2020&systemYear=2020&zipcode=28035&fipsCode=119&product=MAPD&yearDisclaimer=undefined&month=2&yearToggle=undefined&deepLink=plandetail&WT.mc_id=897749&mrcid=em:Acq:MR%7cFederal%7cEGEM3011%7c::897749!/details | //a[contains(@class, 'tel')] | health-plans/medicare-supplement-plans/medicare-information.html?vpp=true | //*[@id='tfn'] | medicare-education.html     |(//a[contains(@class, 'tel')])[1]|Ulayer | 80001   | MA       | No              |current  |mnrqavd11|Password@1|health-plans/estimate-drug-costs.html#/drug-cost-estimator|8009508 |https://www.medicare.uhc.com/  |
   
   #######################Script 2: Campaign traffic########################################
  
