@@ -135,6 +135,12 @@ public class DrugSummaryPage extends UhcDriver {
 	@FindBy(id = "changePharmacyLink")
 	public WebElement changePharmacyLinkDetailsPage;
 	
+	@FindBy(xpath="//*[text()='Return to plan summary']")
+	public WebElement returnToPlanSummaryLink;
+	
+	@FindBy(xpath="//*[text()='Return to home page']")
+	public WebElement returnToHomePageLink;
+	
 	@Override
 	public void openAndValidate() {
 		validateNew(reviewDrugCostPageHeading);
@@ -604,6 +610,14 @@ public class DrugSummaryPage extends UhcDriver {
 	
 	// Code change End - Added by F&F for Drug Summary Regression Scenario - Switch to Generic and for NC Pharmacy Covered text validation
 
+	
+	public void clickReturnToPlanSummary() {
+		returnToPlanSummaryLink.click();
+	}
+	
+	public void clickReturnToHomePage() {
+		returnToHomePageLink.click();
+	}
 
 
 
