@@ -374,7 +374,7 @@ public class DrugDetailsPage extends UhcDriver {
 	@FindBy(id = "inValidZipcodeLbl")
 	private WebElement invalidZipCodeMsg;
 
-	@FindBy(xpath = "//*[@id='selectaPharmacy-overlay']/div/div[2]/div/div[5]/div/div/div[2]/div/div[2]/span")
+	@FindBy(xpath = "//*[@id='selectaPharmacy-overlay']/div/div[2]/div/div[6]/div/div/div[2]/div/div[2]/span")
 	private WebElement noResultsMessage;
 
 	public DrugDetailsPage(WebDriver driver) {
@@ -1603,4 +1603,22 @@ public class DrugDetailsPage extends UhcDriver {
 		saveBtn.click();
 		validate(savedBtn);
 	}
+	
+	@FindBy(xpath = "//*[@id='selectaPharmacy-overlay']/div/div[2]/div/div[5]/div/div/fieldset/div/label[1]/span")
+	public WebElement preferredPharmacyTab;
+
+	@FindBy(xpath = "//*[@id='selectaPharmacy-overlay']/div/div[2]/div/div[5]/div/div/fieldset/div/label[2]/span")
+	public WebElement standardPharmacyTab;
+	
+	public void validatePreferredTab() {
+		waitforElement(preferredPharmacyTab);
+		validate(preferredPharmacyTab);
+		preferredPharmacyTab.click();
+	}
+
+	public void validateStandardTab() {
+		waitforElement(standardPharmacyTab);
+		validate(standardPharmacyTab);
+		standardPharmacyTab.click();
+		}		
 }

@@ -472,3 +472,32 @@ Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanDetails AARP - To test DCE - VPP Plan De
       | zipcode | plantype | county       | isMultutiCounty | drug1     | planname                                              |
       |   10001 | SNP      | none | no             | meloxicam | UnitedHealthcare Dual Complete (HMO D-SNP) |
       
+      @decChangePharmacyPreferredStandardTab
+      
+       @dce_Redesign_VPP_PlanDetails_Pharmacy_PDP
+       
+       Scenario Outline: Test to verify preferred and Standard tab on drug detail change pharmacy
+        Given the user is on the AARP medicare site landing page
+    When the user performs plan search using following information in the AARP site
+         | Zip Code        | <zipcode>         |
+         | County Name     | <county>          |
+         | Is Multi County | <isMultutiCounty> |
+    Then the user navigates to the plan details for the given plan type in AARP site
+         | Plan Type | <plantype> |
+         | Plan Name | <planname> |
+    And I access the DCE Redesign from Plan Details
+    Then the user validates Get Started Page
+    Then the user clicks on Build Drug List to navigate to Build Drug List Page
+    Then the user searches and adds the following Drug to Drug List
+         | DrugName | <drug1> |   
+    And clicks on Review drug cost button for detail page
+    Then user clicks on change pharmacy link from details page
+     Then user verify details page change pharmacy modal for preferred tab
+     Then user click on standard tab from drug details      
+       
+    Examples: 
+      | zipcode |planyear|  plantype | county       | isMultutiCounty | drug1     | zipCode1                | message      | drug4         | drug5            | drug6   | planname                        |
+      |   80002 |current| PDP      | Adams County | yes             | meloxicam | 78006 | Prescription drug home delivery is available through OptumRx. Learn more about OptumRx Mail Order Pharmacy | buprenorphine | fentanyl citrate | Lipitor | AARP MedicareRx Walgreens (PDP) |
+      
+      
+      
