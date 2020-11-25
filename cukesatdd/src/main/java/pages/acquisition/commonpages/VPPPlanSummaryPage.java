@@ -34,6 +34,7 @@ import com.mysql.jdbc.StringUtils;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.ElementData;
 import acceptancetests.data.MRConstants;
+import acceptancetests.data.PageConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
@@ -452,11 +453,12 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//a[@class='cancel-button modal-link']")
 	private WebElement cancelButton;
 
-	@FindBy(xpath = "(//a[contains(text(),'Return to Application')])[3]")
-	private WebElement ReturntoApplicationButton;
 
 	@FindBy(xpath = "(//a[contains(text(),'Cancel Application')])[3]")
 	private WebElement cancelButtonPopUp;
+	
+	@FindBy(xpath = "(//a[contains(text(),'Return to Application')])[3]")
+	private WebElement ReturntoApplicationButton;
 
 	// @FindBy(xpath = "//a[contains(text(),'Enter your existing Application ID
 	// code')]")
@@ -795,6 +797,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	@FindBy(css = "div#currPlansBanner>div>a")
 	private WebElement enrolledPlansBanner;
+	@FindBy(xpath = "(//label[text()='Add to compare'])[1]")
+	private WebElement compareLink;
+	
 
 	@FindBy(xpath = "//div[contains(@class,'component_info_wrap')]")
 	private WebElement nextBestActionModal;
@@ -811,6 +816,34 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	private static String NEXT_ACTION_MODAL_MSG_PROVIDER_SEARCH = "Is my doctor covered?";
 	private static String NEXT_ACTION_MODAL_MSG_ENROLL_PLAN = "How do I enroll?";
 
+	@FindBy(xpath = "(//button[text()='Compare'])[1]")
+	private WebElement compareButton;
+	
+	@FindBy(xpath = "//span[@class='size36 semiBoldText colorPrimaryBlue']")
+	private WebElement comparePageHeader;
+	
+	@FindBy(xpath = "(//button[@class='unliked buttonIntoText'])[1]")
+	private WebElement savePlanButton;
+	
+	@FindBy(xpath = "(//button[@class='liked buttonIntoText'])[1]/img")
+	private WebElement savePlanImg;
+	
+	@FindBy(xpath = "(//a[@class='edit-your-info-link back-arrow-right show returnEntryPage'])[1]")
+	private WebElement editYourInformationLink;
+	
+	@FindBy(xpath = "(//div[@class='vpp_generic_parsys parsys']//h1)[1]")
+	private WebElement planSummaryPageHeader;
+	
+	@FindBy(xpath = "//span[@class='unliked buttonIntoText']")
+	private List<WebElement> unsavedPlanButton;
+	
+	@FindBy(xpath = "//img[@class='liked' and @alt='liked']")
+	private List<WebElement> savePlanImgList;
+	
+	@FindBy(xpath = "//span[@id='header-number']")
+	private WebElement savedPlanHeaderCount;
+	
+	
 	public WebElement getValEstimatedAnnualDrugCostValue(String planName) {
 		// WebElement valEstimatedAnnualDrugCostValue =
 		// driver.findElement(By.xpath("//*[contains(text(),'"+planName+"')]/ancestor::div[@class='module-plan-overview
@@ -3374,7 +3407,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	// ^^^ note: added for US1598162
 
 	public void MedSupFormValidation(String DateOfBirth) throws InterruptedException {
-
+		Actions action = new Actions(driver);
 		validateNew(DOB, 30);
 		System.out.println("MedSup page form is displayed");
 		DOB.click();
@@ -3406,7 +3439,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		Thread.sleep(2000);
 		startDrpDwnOption.click();
 		System.out.println("Plan to start date selected");
-		Thread.sleep(2000);
+		Thread.sleep(15000);
+		action.moveToElement(ViewPlanMedSupPage).perform();
 		jsClickNew(ViewPlanMedSupPage);
 	}
 
@@ -3522,7 +3556,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	// Step 1 page for IS Decision Guide.
 	// a[contains(@class, 'EBRC')]
 
-	@FindBy(xpath = "//a[contains(@class, 'EBRC')]")
+	//@FindBy(xpath = "//a[contains(@class, 'EBRC')]")
+	@FindBy(xpath = "//a[contains(text(),'Click here to get your Decision Guide')]")
 	private WebElement DecisionGuideLink;
 
 	public IsDecisionGuideStep1 clickOnRequestADecisionGuide() {
@@ -4799,7 +4834,13 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		return EnteredData;
 
 	}
+	@FindBy(xpath = "//input[@id='updates-first-name']")
+	private WebElement requestfirstName;
 
+	@FindBy(xpath = "//input[@id='updates-last-name']")
+	private WebElement requestlastName;
+	
+	
 	public void medsuppOLEplandetails() throws InterruptedException {
 		// validateNew(viewplandetails);
 		// CommonUtility.waitForPageLoadNew(driver, medsuppPlandetails, 30);
@@ -4825,7 +4866,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		}
 
 	}
-
+	
+		
 	/**
 	 * Validate the Agent Mode Banners and Enrolled Plan overlay
 	 * 
@@ -5031,4 +5073,197 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		}
 	}
 
+
+
+
+	
+	public boolean clickAndVerifyNavigateToPage(String btn) throws InterruptedException {
+		boolean flag = false;
+		Actions action = new Actions(driver);
+		if(btn.equalsIgnoreCase("Compare")) {
+			Thread.sleep(2000);
+			action.moveToElement(compareLink).build().perform();
+			compareLink.click();
+			Thread.sleep(10000);
+			action.moveToElement(compareButton).build().perform();
+			compareButton.click();
+			Thread.sleep(2000);
+			action.moveToElement(comparePageHeader).build().perform();
+			if(comparePageHeader.isDisplayed()) {
+				flag = true;
+			}
+		}else if(btn.equalsIgnoreCase("Save")) {
+			Thread.sleep(2000);
+			action.moveToElement(savePlanButton).build().perform();
+			savePlanButton.click();
+			Thread.sleep(2000);
+			action.moveToElement(savePlanImg).build().perform();
+			if(savePlanImg.getAttribute("class").equalsIgnoreCase("liked")) {
+				flag = true;
+			}
+		}else if(btn.equalsIgnoreCase("Information")) {
+			Thread.sleep(2000);
+			action.moveToElement(editYourInformationLink).build().perform();
+			editYourInformationLink.click();
+			Thread.sleep(2000);
+			action.moveToElement(DOB).build().perform();
+			if(DOB.isDisplayed()) {
+				flag = true;
+		}
+		
+		}	else {
+				Thread.sleep(2000);
+				action.moveToElement(ViewPlanMedSupPage).build().perform();
+				ViewPlanMedSupPage.click();
+				Thread.sleep(2000);
+				action.moveToElement(compareButton).build().perform();
+				if(compareLink.isDisplayed()) {
+					flag = true;
+			}
+			
+		}
+		return flag;
+	}
+
+
+public boolean verifyPlanCount() throws InterruptedException {
+	boolean flag = false;
+	Thread.sleep(2000);
+	for(WebElement planToSave : unsavedPlanButton) {
+		planToSave.click();
+	}
+	int planToSaveCount = unsavedPlanButton.size();
+	int savePlanImgCount = savePlanImgList.size();
+	if(planToSaveCount==savePlanImgCount) {
+		int count = Integer.parseInt(savedPlanHeaderCount.getText());
+		if(count==savePlanImgCount) {
+			flag = true;
+		}
+		
+	}
+	
+	
+	
+	return flag;
 }
+
+@FindBy(xpath = "(//input[@id='updates-email'])[2]")
+private WebElement requestemailaddress;
+
+@FindBy(xpath = "//p[contains(text(),'Submit')]")
+private WebElement requestplaninformationsubmit;
+
+@FindBy(xpath = "//p[contains(text(),'Your information has been submitted')]")
+private WebElement requestplaninformationsubmitpopup;
+
+@FindBy(xpath = "//a[contains(@class,'emailsubmit_close')]")
+private WebElement requestplaninformationclose;
+
+@FindBy(xpath = "//*[contains(@id, 'email-error-id')]")
+private WebElement RequestPlanInformation_ErrorMessage;
+
+public boolean RequestPlanIInformation(String FirstName, String LastName, String EmailAddress) throws InterruptedException {
+	
+//	boolean validation_Flag = true;
+	boolean RequestPlanIInformation_Validation = true;
+	
+	boolean flag = true;
+	/*	
+	if(validate(RequestPlanInformation_ErrorMessage)){
+		System.out.println("Email address is not entered : Error Message is Disabled");
+		//RequestPlanIInformation_Validation = true;
+		validateNew(requestemailaddress);
+		requestemailaddress.sendKeys(EmailAddress);
+		System.out.println("Email Address is enetered : "+EmailAddress);
+		CommonUtility.waitForPageLoadNew(driver, requestfirstName, 20);
+		requestfirstName.sendKeys(FirstName);
+		CommonUtility.waitForPageLoadNew(driver, requestlastName, 20);
+		requestlastName.sendKeys(LastName);
+		//CommonUtility.waitForPageLoadNew(driver, requestemailaddress, 20);
+	//	requestemailaddress.sendKeys(EmailAddress);
+		validateNew(requestplaninformationsubmit);
+		requestplaninformationsubmit.click();
+		validateNew(requestplaninformationclose);
+		requestplaninformationclose.click();
+		
+		if(requestplaninformationsubmitpopup.getText().contains("Your information has been submitted. You should start getting your Medicare updates soon.")) {
+			System.out.println("****************Request  information is displayed  ***************");
+
+			Assert.assertTrue(true);
+			validateNew(requestplaninformationclose);
+			requestplaninformationclose.click();
+		}else {
+			System.out.println("****************Request information is displayed  ***************");
+		}
+		if(validateNonPresenceOfElement(RequestPlanInformation_ErrorMessage))
+		{
+			System.out.println("Error Message is not Displayed when Email address is entered");
+			RequestPlanIInformation_Validation = true;
+		}
+	}
+	else{
+		System.out.println("Email Address : Error Message is NOT Disabled");
+		RequestPlanIInformation_Validation = false;
+	}
+	
+	CommonUtility.waitForPageLoadNew(driver, requestfirstName, 20);
+	requestfirstName.sendKeys(FirstName);
+	CommonUtility.waitForPageLoadNew(driver, requestlastName, 20);
+	requestlastName.sendKeys(LastName);
+	CommonUtility.waitForPageLoadNew(driver, requestemailaddress, 20);
+	requestemailaddress.sendKeys(EmailAddress);
+	validateNew(requestplaninformationsubmit);
+	requestplaninformationsubmit.click();
+	validateNew(requestplaninformationclose);
+	requestplaninformationclose.click();
+	
+	if(requestplaninformationsubmitpopup.getText().contains("Your information has been submitted. You should start getting your Medicare updates soon.")) {
+		System.out.println("****************Request information is displayed  ***************");
+
+		Assert.assertTrue(true);
+		validateNew(requestplaninformationclose);
+		requestplaninformationclose.click();
+	}else {
+		System.out.println("****************Request information is displayed  ***************");
+	}
+*/
+	requestemailaddress.clear();
+	requestemailaddress.sendKeys("(*^*_asb@t.c");
+	requestplaninformationsubmit.click();
+	if(validate(RequestPlanInformation_ErrorMessage) && RequestPlanInformation_ErrorMessage.isDisplayed()){
+		if(!RequestPlanInformation_ErrorMessage.getText().contains("Please enter a valid email address in the format 'user@company.com'")){
+			System.out.println("Email Invalid Error is Not  displayed : "+RequestPlanInformation_ErrorMessage.getText());
+			flag=false;
+		}
+		System.out.println("Email Invalid Error : "+RequestPlanInformation_ErrorMessage.getText());
+
+	}
+	else{
+		System.out.println("Email Invalid Error field is not displayed");
+
+	}
+	
+	validateNew(requestemailaddress);
+	requestemailaddress.clear();
+	requestemailaddress.sendKeys(EmailAddress);
+	System.out.println("Email Address is enetered : "+EmailAddress);
+	CommonUtility.waitForPageLoadNew(driver, requestfirstName, 20);
+	requestfirstName.sendKeys(FirstName);
+	CommonUtility.waitForPageLoadNew(driver, requestlastName, 20);
+	requestlastName.sendKeys(LastName);
+	validateNew(requestplaninformationsubmit);
+	requestplaninformationsubmit.click();
+	if(requestplaninformationsubmitpopup.getText().contains("Your information has been submitted. You should start getting your Medicare updates soon.")) {
+		System.out.println("****************Request  information is displayed  ***************");
+
+		Assert.assertTrue(true);
+		validateNew(requestplaninformationclose);
+		requestplaninformationclose.click();
+	}else {
+		System.out.println("****************Request information is displayed  ***************");
+	}
+return RequestPlanIInformation_Validation;
+
+}
+}
+    

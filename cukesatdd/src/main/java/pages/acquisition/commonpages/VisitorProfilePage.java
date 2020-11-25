@@ -16,6 +16,8 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+//import com.mysql.jdbc.StringUtils;
+
 import acceptancetests.data.CommonConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
@@ -153,24 +155,25 @@ public class VisitorProfilePage extends UhcDriver {
 	}
 	
 	public AcquisitionHomePage addPlan() {
-		
-		if(StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Pennsylvania") || StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Puerto Rico") || 
-				StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Virginia")) {
-			jsClickNew(addplans);
-		}else {
-			jsClickNew(addPlans);
+
+			
+			if(StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Pennsylvania") || StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Puerto Rico") || 
+					StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Virginia")) {
+				jsClickNew(addplans);
+			}else {
+				jsClickNew(addPlans);
+			}
+			
+//			addPlans.click();
+			
+			CommonUtility.checkPageIsReadyNew(driver);
+			waitForPageLoadSafari();
+			if(driver.getCurrentUrl().contains("plan-summary")){
+				String page = "health-plans";
+				return new AcquisitionHomePage(driver,page);
+			}
+			return null;
 		}
-		
-//		addPlans.click();
-		
-		CommonUtility.checkPageIsReadyNew(driver);
-		waitForPageLoadSafari();
-		if(driver.getCurrentUrl().contains("plan-summary")){
-			String page = "health-plans";
-			return new AcquisitionHomePage(driver,page);
-		}
-		return null;
-	}
 	
 	public void validateAddedDrugAndPharmacy(String drug) {
 		

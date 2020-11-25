@@ -320,7 +320,32 @@ public class isInsuranceAgentStepDefenitionUHC    {
 	}
 	
 	
+	@Then("^the user clicks on Request a Free Insurance Agent on UHC site$")
+	public void the_user_clicks_on_Request_a_Free_Insurance_Agent_on_UHC_site(DataTable givenAttributes) throws Throwable {
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		String path = memberAttributesMap.get("PagePath");
+		path = path.replace("!", "#");
+		System.out.print("Path to Acq page : "+path);
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);	
+ //  IsInsuranceAgent licenseInsuranceAgent =(IsInsuranceAgent) getLoginScenario().getBean(PageConstants.IS_INSURANCE_AGENT_PAGE);
+	
+//	licenseInsuranceAgent.navigateToISPath(path);
+		IsInsuranceAgent lispage = aquisitionhomepage.navigateToISPath(path);
 
+		if (lispage != null) {
+			getLoginScenario().saveBean(PageConstants.IS_INSURANCE_AGENT_PAGE, lispage);
+
+		} else {
+			Assert.fail("Error Loading Insurance Agent page");
+		}
+	
+	}
 
 	
 

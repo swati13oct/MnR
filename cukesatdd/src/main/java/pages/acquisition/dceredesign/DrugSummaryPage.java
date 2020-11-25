@@ -15,6 +15,8 @@ import org.openqa.selenium.support.PageFactory;
 
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
+import pages.acquisition.commonpages.PlanDetailsPage;
+import pages.acquisition.commonpages.VPPPlanSummaryPage;
 
 public class DrugSummaryPage extends UhcDriver {
 
@@ -615,5 +617,43 @@ public class DrugSummaryPage extends UhcDriver {
 	
 	public void clickReturnToHomePage() {
 		returnToHomePageLink.click();
+	}
+
+
+
+	public PlanDetailsPage clickViewplanDetailsForPlan(String plantype, String planName) {
+		// TODO Auto-generated method stub
+		if (plantype.equalsIgnoreCase("MAPD")) {
+			validateNew(mapdPlanToggle);
+			jsClickNew(mapdPlanToggle);
+			System.out.println("MAPD Plan Toggle Clicked");
+			WebElement PlanDetailsLinkforPlan = driver.findElement(By.xpath("//button[contains(@aria-label, 'View Plan Details') and contains(@aria-label, '"+planName+"')]"));
+			validateNew(PlanDetailsLinkforPlan);
+			jsClickNew(PlanDetailsLinkforPlan);
+			System.out.println("View Plan details Clicked for MAPD Plan : "+planName);
+
+		}
+		else if(plantype.equalsIgnoreCase("PDP")){
+			validateNew(pdpPlanToggle);
+			jsClickNew(pdpPlanToggle);
+			System.out.println("PDP Plan Toggle Clicked");
+			WebElement PlanDetailsLinkforPlan = driver.findElement(By.xpath("//button[contains(@aria-label, 'View Plan Details') and contains(@aria-label, '"+planName+"')]"));
+			validateNew(PlanDetailsLinkforPlan);
+			jsClickNew(PlanDetailsLinkforPlan);
+			System.out.println("View Plan details Clicked for PDP Plan : "+planName);
+
+		}
+		else{
+			validateNew(snpPlanToggle);
+			jsClickNew(snpPlanToggle);
+			System.out.println("SNP Plan Toggle Clicked");
+			WebElement PlanDetailsLinkforPlan = driver.findElement(By.xpath("//button[contains(@aria-label, 'View Plan Details') and contains(@aria-label, '"+planName+"')]"));
+			validateNew(PlanDetailsLinkforPlan);
+			jsClickNew(PlanDetailsLinkforPlan);
+			System.out.println("View Plan details Clicked for SNP Plan : "+planName);
+
+		}		
+			return new PlanDetailsPage(driver);
+		
 	}
 }
