@@ -16,8 +16,9 @@ import cucumber.api.CucumberOptions;
 @ExtendedCucumberOptions(retryCount=1,screenShotSize="", screenShotLocation="/screenshots/",jsonReport = "target/cucumber-RunMRATDDAcqDCEVPPPlanCompareUHC.json",detailedReport = true,
  detailedAggregatedReport = true, overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDAcqDCEVPPPlanCompareUHC")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.acquisition" }, features = { "src/main/resources/feature/acquisition/dceredesign" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcqDCEVPPPlanCompareUHC.json" }, tags = { "@DCE_Redesign_VPP_PlanCompare_UHC" })
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcqDCEVPPPlanCompareUHC.json" }, tags = { "@DCE_Redesign_VPP_PlanCompare1_UHC" })
 
 public class RunMRATDDAcqDCEVPPPlanCompareUHC {
+//	,@DCE_Redesign_VPP_PlanCompare2_UHC,@DCE_Redesign_VPP_PlanCompare3_UHC
 
 }

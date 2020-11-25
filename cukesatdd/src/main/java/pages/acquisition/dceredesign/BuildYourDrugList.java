@@ -185,6 +185,7 @@ public class BuildYourDrugList extends UhcDriver {
 		WebElement SelectDrug = driver.findElement(By.xpath("//uhc-list-item//button[contains(@aria-label, 'Select "+drugName+"')]"));
 		validateNew(SelectDrug);
 		jsClickNew(SelectDrug);
+		threadsleep(2000);
 		CommonUtility.checkPageIsReadyNew(driver);
 		CommonUtility.waitForPageLoadNew(driver, TellUsABoutHeader, 20);
 		if(validateNew(TellUsABoutHeader) && validateNew(TellUsABoutCloseBtn))
@@ -206,6 +207,7 @@ public class BuildYourDrugList extends UhcDriver {
 	public DrugDetailsPage navigateToDrugDetailsPage() {
 		validateNew(reviewDrugCost);
 		jsClickNew(reviewDrugCost);
+		threadsleep(2000);
 		CommonUtility.waitForPageLoadNew(driver, DrugDetails_DrugCostsHeading, 20);
 		if(validateNew(DrugDetails_ChangePharmacyLnk) && validateNew(DrugDetails_DrugCostsHeading))
 		{
@@ -249,8 +251,13 @@ public class BuildYourDrugList extends UhcDriver {
 	
 	public void ValidateAddedDrugsList(String druglist) {
 		String[] DrugListItems = druglist.split("&");
-		System.out.println("Added Drug Count : "+DrugListItems.length);
-		for(String currentDrug : DrugListItems) {
+		int i;
+		String currentDrug;
+		int DrugCount_Total = DrugListItems.length-1;
+		System.out.println("Total Added Drug Count : "+DrugCount_Total);
+		System.out.println("Total Added Drug Count : "+DrugCount_Total);
+		for(i=1; i<=DrugCount_Total; i++) {
+			currentDrug = DrugListItems[i];
 			System.out.println("Current Added Drug Name : "+currentDrug);
 			WebElement DrugName = driver.findElement(By.xpath("//uhc-list-item//h4[contains(text(), '"+currentDrug+"')]"));
 			WebElement DrugEditBtn = driver.findElement(By.xpath("//uhc-list-item//button[contains(@aria-label, 'Edit') and contains(@aria-label, '"+currentDrug+"')]"));
@@ -267,11 +274,13 @@ public class BuildYourDrugList extends UhcDriver {
 	public ComparePlansPage returnToPlanComparePage() {
 
 		validateNew(returnToCompareBtn);
-		returnToCompareBtn.click();
+		jsClickNew(returnToCompareBtn);
+		waitForPageLoadSafari();
 		return new ComparePlansPage(driver);
 	}
 
 	public void deleteDrug(String deleteDrug) {
+		System.out.println("Drug to be removed : "+deleteDrug);
 		WebElement removeLink = driver.findElement(By.xpath("//*[contains(@aria-label,'Remove "+deleteDrug+"')]"));
 		jsClickNew(removeLink);
 		
