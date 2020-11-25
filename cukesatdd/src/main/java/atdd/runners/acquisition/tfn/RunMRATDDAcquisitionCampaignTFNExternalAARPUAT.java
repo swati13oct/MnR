@@ -16,7 +16,7 @@ jsonReport = "target/cucumber-RunMRATDDAcquisitionCampaignTFNExternalAARPUAT.jso
 detailedReport = true, detailedAggregatedReport = true, overviewReport = true, toPDF = true, 
 outputFolder = "target/RunMRATDDAcquisitionCampaignTFNExternalAARPUAT")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.acquisition" }, monochrome = true, features = { "src/main/resources/feature/acquisition/tfn/tfn_UAT_Updated/CampaignTFN-AARP-UAT.feature" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionCampaignTFNExternalAARPUAT.json" }, tags = {"@Scenario_1_2_DirectTraffic_Email_UAT,@Scenario_9_External_Link_UAT,@Scenario_8_External_Link_PDP_UAT"})
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionCampaignTFNExternalAARPUAT.json" }, tags = {"@Scenario_7_DirectTraffic_Email_UAT,@Scenario_8_External_Link_PDP_UAT,@Scenario_9_External_Link_UAT"})
 
 public class RunMRATDDAcquisitionCampaignTFNExternalAARPUAT {
 

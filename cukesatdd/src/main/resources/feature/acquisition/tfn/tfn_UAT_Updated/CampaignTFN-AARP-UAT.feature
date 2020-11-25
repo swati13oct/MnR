@@ -129,7 +129,7 @@ When the user enters zipcode on health plans page
     
     
    #######################Script 7: Email Validation########################################
-   @Scenario_1_2_DirectTraffic_Email_UAT
+   @Scenario_7_DirectTraffic_Email_UAT
   Scenario Outline: <scenario> 1.0 Verify TFN through Email Validation
     Given the user is on AARP medicare acquisition site landing page
     And the user retrieves TFNSessionCookie and Federal and MedSupp TFN

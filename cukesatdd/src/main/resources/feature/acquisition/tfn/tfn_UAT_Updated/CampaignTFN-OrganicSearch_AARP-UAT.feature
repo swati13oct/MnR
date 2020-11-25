@@ -117,6 +117,7 @@ Feature: UAT Scripts-To test Organic SearchCampaign TFN on AARP site
         And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
     Then the user validates PSC code
       | PSC Code | <Precedence7PSC> |
+      Then the user navigates to homepage validates Federal TFN
       Then the user navigates to MA Plan Details Page and validates Federal TFN 
       Then the user navigate to following Med Supp Plan URL and validate MedSupp TFN
       | MedSupp URL | <medSuppUrl> |
@@ -182,9 +183,10 @@ Feature: UAT Scripts-To test Organic SearchCampaign TFN on AARP site
       | MA URL    | <maUrl> |
       | TFN Xpath | <maTFN> |
       Given the user is on AARP medicare acquisition site landing page
-    And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
-    Then the user validates PSC code
-      | PSC Code | <pscCode> |
+     Then the user navigates to MA Plan Details Page and validates Federal TFN
+    #And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
+    #Then the user validates PSC code
+     # | PSC Code | <pscCode> |
     Then the user navigates to Medsupp Plans in VPP and validates Medsupp TFN
 
      Examples:
