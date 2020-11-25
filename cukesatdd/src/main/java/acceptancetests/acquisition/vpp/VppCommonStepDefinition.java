@@ -2518,5 +2518,12 @@ public class VppCommonStepDefinition {
 				getLoginScenario().saveBean(PageConstants.PROVIDER_SEARCH_PAGE, providerSearchPage);
 			}
 		}
+		
+		@Then("^user should be able to see the NBA modal to Enroll Plan on the VPP summary page$")
+		public void user_should_be_able_to_see_the_NBA_modal_to_Enroll_Plan_on_the_VPP_summary_page() {
+			VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+			plansummaryPage.verifyNextBestActionModalForEnrollPlan();
+		}
 }
 		

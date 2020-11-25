@@ -1310,5 +1310,18 @@ public class DrugDetailsPage extends UhcDriver {
 		System.out.println("Returned to Plan Compare Page - Drug Info Modal");
 		return new ComparePlansPage(driver);
 	}
+	
+	public PlanDetailsPage clickViewPlanDetailsBtn() {
+		validateNew(DrugCosts_PlanDetailsBtn);
+		jsClickNew(DrugCosts_PlanDetailsBtn);
+		waitForPageLoadSafari();
+		if (driver.getCurrentUrl().contains("details") ) {
+			System.out.println("Plan Details Page displayed ");
+			return new PlanDetailsPage(driver);
+		}
+		else {
+			return null;
+		}
+	}
 
 }

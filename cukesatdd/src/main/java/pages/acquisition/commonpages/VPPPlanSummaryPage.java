@@ -799,7 +799,11 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath="//div[contains(@class,'component_info_wrap')]//button[text()='Find a Provider']")
 	private WebElement nextBestActionModalMsg;
 	
+	@FindBy(xpath = "//div[contains(@class,'component_info_wrap')]//button[text()='Select a Plan']")
+	private WebElement nextBestActionModalContinueEnrollmentBtn;
+	
 	private static String NEXT_ACTION_MODAL_MSG_PROVIDER_SEARCH = "Is my doctor covered?";
+	private static String NEXT_ACTION_MODAL_MSG_ENROLL_PLAN = "How do I enroll?";
 	
 	public WebElement getValEstimatedAnnualDrugCostValue(String planName) {
 		// WebElement valEstimatedAnnualDrugCostValue =
@@ -4777,5 +4781,18 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			return new ProviderSearchPage(driver);
 		}
 		return null;
+	}
+	
+	public void verifyNextBestActionModalForEnrollPlan() {
+		waitforElementVisibilityInTime(nextBestActionModalContinueEnrollmentBtn, 20);
+		try {
+			if (nextBestActionModal.isDisplayed()) {
+				Assert.assertTrue("The Continue Enrollment message is not displayed.../n Expected Message"
+						+ NEXT_ACTION_MODAL_MSG_ENROLL_PLAN + "\n Actual message" + nextBestActionModalMsg.getText(),
+						nextBestActionModalMsg.getText().equals(NEXT_ACTION_MODAL_MSG_ENROLL_PLAN));
+			}
+		} catch (Exception ex) {
+			System.out.println("NBA modal not found");
+		}
 	}
 }

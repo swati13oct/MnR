@@ -240,7 +240,7 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
     #Then load screen should be displayed in AARP
     And user should be navigated to Review drug cost estimate page in AARP
     And user should be able to see Medicare Advantage plan by default
-    When user clicks view drug cost button in AARP
+    When user clicks view drug cost button
     And user clicks on change pharmacy link from details page in AARP
     Then details page change pharmacy modal should be displayed in AARP
     And user verify details page change pharmacy modal in AARP
