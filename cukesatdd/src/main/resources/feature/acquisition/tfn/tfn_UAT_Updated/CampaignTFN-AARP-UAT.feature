@@ -197,14 +197,20 @@ When the user enters zipcode on health plans page
      And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
     Then the user validates PSC code
       | PSC Code | <pscCode> |
-       And the user enters following details for the pharmacy search
-      | Zip Code    | <zipCode>    |
-      | Distance    | <distance>   |
-      | County Name | <countyName> |
-    And the user chooses a plan from dropdown list
-     | Next Year Plan Name    | <ny_planName> |
-      | Next Year Plan Year    | <ny_planYear> | 
-    ###May be need to add  step 8.10 ##########  
+       #And the user enters following details for the pharmacy search
+      #| Zip Code    | <zipCode>    |
+     # | Distance    | <distance>   |
+     # | County Name | <countyName> |
+    #And the user chooses a plan from dropdown list
+    # | Next Year Plan Name    | <ny_planName> |
+     # | Next Year Plan Year    | <ny_planYear> | 
+    ###May be need to add  step 8.10 ########## Added the line 8.10 ############## 
+     Then the user navigates to following MedEd Plan Page URL and validate Federal TFN
+      | MedEd URL    | <estimateUrl> |
+      | TFN Xpath | <shoppagesTFN> |
+      And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
+    Then the user validates PSC code
+      | PSC Code | <pscCode> |
    	  Then the user navigates to following MedEd Plan Page URL and validate Federal TFN
       | MedEd URL    | <medEdURL1> |
       | TFN Xpath | <medEdTFN> |
@@ -215,8 +221,8 @@ When the user enters zipcode on health plans page
       Then the user validates PSC code
       | PSC Code | <pscCode> | 
     Examples:  
-       |scenario                         | site|pscCode | campaignUrl                                                                                      | campaignUrl1                                  |drug1   |zipCode|planType | planName                                            | campaignUrl2                                  |distance|countyName |ny_planYear | ny_planName                     |pharmacyType                ||medEdTFN                                                        | shoppagesUrl|      shoppagesTFN             |
-       |Scenerio 8-ExternalLink - AMP 	| ulayer |8001024 | health-plans/prescription-drug-plans/available-plans.html?WT.mc_id=8001024&county=053&state=27#/plan-summary |  health-plans/estimate-drug-costs.html?WT.mc_id=8001024&county=053&state=27#/getstarted      | Lipitor|10001| MAPD     |AARP Medicare Advantage Prime (HMO)  | health-plans/aarp-pharmacy.html?WT.mc_id=8001024&county=053&state=27#/Pharmacy-Search-English               |    15 | None           | 2020 | AARP MedicareRx Preferred (PDP) | Preferred Retail Pharmacy Network|  medicare-articles/eligibility-and-enrollment.html|   (//span[@class='heading-6']//u)[1]              |  shop/medicare-supplement-plans.html                       |//button[@id='sam-call-button']//span[contains(@class,'sam__button__text desktop')]|
+       |scenario                         | site  |pscCode | campaignUrl                                                                                                  | campaignUrl1                                                                                 |drug1   |zipCode|planType | planName                                                                          | campaignUrl2                                                                                                |distance|countyName |ny_planYear | ny_planName                     |pharmacyType                |medEdURL1                                                        | medEdTFN|shoppagesUrl                                              |      shoppagesTFN             |estimateUrl
+       |Scenerio 8-ExternalLink - AMP 	| ulayer |8001024 | health-plans/prescription-drug-plans/available-plans.html?WT.mc_id=8001024&county=053&state=27#/plan-summary |  health-plans/estimate-drug-costs.html?WT.mc_id=8001024&county=053&state=27#/getstarted      | Lipitor|10001| MAPD     |AARP Medicare Advantage Prime (HMO)                                                 | health-plans/aarp-pharmacy.html?WT.mc_id=8001024&county=053&state=27#/Pharmacy-Search-English               |    15 | None       | 2020 | AARP MedicareRx Preferred (PDP) | Preferred Retail Pharmacy Network|  medicare-articles/eligibility-and-enrollment.html             | (//span[@class='heading-6']//u)[1] |shop/medicare-supplement-plans.html                       |//button[@id='sam-call-button']//span[contains(@class,'sam__button__text desktop')]|/health-plans/estimate-drug-costs.html#/getstarted|
        
       
         #######################Script 9: External Link Plan 11########################################
