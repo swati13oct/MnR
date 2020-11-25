@@ -609,8 +609,10 @@ public class PlanRecommendationEngineResultsPage extends UhcDriver {
 		}
 		
 		public void DrugsDetailsVPPtoDCE() {
-			System.out.println("Validating Drugs Details from VPP to DCE Page: ");
 			ACQDrugCostEstimatorPage dce = new ACQDrugCostEstimatorPage(driver);
+			System.out.println("Validating Pharmacy Details in DCE Page: ");
+			dce.Pharmacytype();
+			System.out.println("Validating Drugs Details from VPP to DCE Page: ");
 			DrugsInDCE = dce.DCEDrugsResults;
 			int count =DrugsInDCE.size();
 			verifyConfirmationmodalResults(count,DrugsInDCE,DrugsList);

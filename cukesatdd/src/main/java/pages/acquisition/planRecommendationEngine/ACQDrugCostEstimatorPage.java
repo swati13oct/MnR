@@ -133,6 +133,9 @@ public class ACQDrugCostEstimatorPage extends UhcDriver {
 	@FindBy(css = "table[class*='yourDrugsTable'] tbody >tr")
 	private List<WebElement> drugsNamesinDCE; 
 	
+	@FindBy(css = "span[class*='text-normal']")
+	private WebElement PharmacyType;
+	
 	public void drugsHandlerWithdetails(String drugsDetails) {
 		String drugName = "";
 		boolean searchButtonClick = false;
@@ -260,6 +263,12 @@ public class ACQDrugCostEstimatorPage extends UhcDriver {
 		System.out.println("DrugsList in DCE Size is : "+DCEDrugsResults.size());
 		System.out.println("DrugList in DCE Content is : "+DCEDrugsResults);
 		return DCEDrugsResults;
+	}
+	
+	public void Pharmacytype() {
+		threadsleep(5000);
+    	validate(PharmacyType);
+    	Assert.assertTrue(PharmacyType.getText().contains("Preferred Mail Service Pharmacy"), "Pharmacy is not default online");    			
 	}
 
 }
