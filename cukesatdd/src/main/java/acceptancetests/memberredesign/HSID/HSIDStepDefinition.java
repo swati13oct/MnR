@@ -35,6 +35,7 @@ import pages.memberrdesignVBF.RallyDashboardPage;
 import pages.regression.accounthomepage.AccountHomePage;
 import pages.regression.claims.ClaimsSummaryPage;
 import pages.regression.deeplinkPages.ClaimsDeeplinkLoginPage;
+import pages.regression.deeplinkPages.OfflineProd_PharmacynPrescriptionLoginPage;
 import pages.regression.deeplinkPages.OfflineProd_VirtualVisitDeeplinkLoginPage;
 import pages.regression.deeplinkPages.PaymentsDeeplinkLoginPage;
 import pages.regression.deeplinkPages.PharmacyDeeplinkLoginPage;
@@ -1577,5 +1578,27 @@ public class HSIDStepDefinition {
 												OfflineProd_VirtualVisitDeeplinkLoginPage OfflineProd_VirtualVisitDeeplinkLoginPage = (OfflineProd_VirtualVisitDeeplinkLoginPage) loginScenario.getBean(PageConstants.Offline_PROD_VirtualVisit_DEEPLINK_lOGIN_PAGE);
 												OfflineProd_VirtualVisitDeeplinkLoginPage.validatePageElements();
 												OfflineProd_VirtualVisitDeeplinkLoginPage.validateOfflineProdVirtualVisitPage();
+											}  
+											
+											/** 
+											 * @todo :member lands on virtual visit offline PROD deep link
+											*/
+											@Given("^member lands on the offline PROD HWP deeplink page$")
+											public void the_user_is_on_offline_PROD_HWP_deeplink_Page(DataTable givenAttributes) throws InterruptedException{
+												String brand = givenAttributes.asList(String.class).get(0);
+												WebDriver wd = getLoginScenario().getWebDriver();
+												getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+												OfflineProd_PharmacynPrescriptionLoginPage OfflineProd_PharmacynPrescriptionLoginPage = new OfflineProd_PharmacynPrescriptionLoginPage(wd);
+												OfflineProd_PharmacynPrescriptionLoginPage.navigateToLoginURL(brand);
+												getLoginScenario().saveBean(PageConstants.Offline_PROD_HWP_DEEPLINK_lOGIN_PAGE,OfflineProd_PharmacynPrescriptionLoginPage);
+														}
+											/** 
+											 * @todo :deep link login page elements validate  
+											*/
+											@And("^the offline PROD HWP deeplink login page is displayed with all the fields$")
+											public void offlinePROD_HWP_pageis_displayed(){
+												OfflineProd_PharmacynPrescriptionLoginPage OfflineProd_PharmacynPrescriptionLoginPage = (OfflineProd_PharmacynPrescriptionLoginPage) loginScenario.getBean(PageConstants.Offline_PROD_HWP_DEEPLINK_lOGIN_PAGE);
+												OfflineProd_PharmacynPrescriptionLoginPage.validatePageElements();
+												OfflineProd_PharmacynPrescriptionLoginPage.validateOfflineProdHWPPage();
 											}  
 										}

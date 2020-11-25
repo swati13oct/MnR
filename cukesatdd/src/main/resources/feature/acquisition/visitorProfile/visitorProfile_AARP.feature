@@ -542,15 +542,14 @@ Feature: 1.08. ACQ- Visitor profile
       | MedicaidNumber           | <medicaidnumber>         |
     Then the user clicks on save and return later to profile page
     And validate OLE details
-      | Plan Name       | <planname>       |
+      | Plan Name       | <planName>       |
       | Zip Code        | <zipcode>        |
       | Status          | <status>         |
       | Monthly Premium | <monthlyPremium> |
     And the user cancel the enrollment
-      | Plan Name       | <planname>       |
-    
+      | Plan Name | <planName> |
 
     @VisitorProfile_AARP
     Examples: 
-      | UID       | site | state    | userName | password   | zipcode | isMultiCounty | county          | planyear | PlanType | plantype | planName                                | cardtype | firstname | lastname | medicarenumber | ssnflag | partadate | partbdate | medicaidnumber | status      | monthlyPremium |
-      | US1770330 | AARP | New York | mnrvd5   | Password@1 |   10001 | NO            | New York County | current  | MA-MBI   | MA       | AARP Medicare Advantage Essential (HMO) | MBI      | John      | Doe      | 2n22C33YK33    | false   |  09011997 |  11012002 |      431665465 | In Progress | $0             |
+      | UID       | site | state    | userName | password   | zipcode | isMultiCounty | county          | planyear | PlanType | plantype | planName                                | cardtype | firstname | lastname | dob      | gender | permstreet    | permcity | mailingstate | mailingzip | email         | medicarenumber | ssnflag | partadate | partbdate | medicaidnumber | status      | monthlyPremium |
+      | US1770330 | AARP | New York | mnrvd5   | Password@1 |   10001 | NO            | New York County | current  | MA-MBI   | MA       | AARP Medicare Advantage Essential (HMO) | MBI      | John      | Doe      | 01011903 | Male   | 003 Morris Rd | NY       | NY           |      10001 | test@test.com | 2n22C33YK33    | false   |  09011997 |  11012002 |      431665465 | In Progress | $0             |
