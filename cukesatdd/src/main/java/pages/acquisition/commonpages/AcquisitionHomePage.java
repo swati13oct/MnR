@@ -1194,7 +1194,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	public DisclaimersAARPPage disclaimersFooterClick() {
 		validate(footerDisclaimersLink);
 		jsClickNew(footerDisclaimersLink);
-		sleepBySec(2);
+		sleepBySec(3);
 		CommonUtility.checkPageIsReadyNew(driver);
 		if (driver.getCurrentUrl().contains("disclaimer")) {
 			return new DisclaimersAARPPage(driver);
@@ -2698,18 +2698,12 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		}	
 		
 		public void clickVisitAARPHeaderLink() {
-			if(driver.getCurrentUrl().contains("aarpmedicareplans")) {
-				switchToNewTabNew(visitAARPHeaderLink);
+			if (driver.getCurrentUrl().contains("aarpmedicareplans")) {
+				jsClickNew(visitAARPHeaderLink);
 				proceedToLeaveAARP();
-				if (!driver.getCurrentUrl().contains("aarp.org")) {
+				if (!driver.getCurrentUrl().contains("aarp.org"))
 					Assert.fail("Visit AARP link did not lead to the right page");
-				} else {
-					Assert.assertTrue(true, "Navigated to AARP org page");
-					driver.close();
-					driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
-				}
 			}
-			
 		}
 		
 		public void clickVisitAARPFooterLink() {
