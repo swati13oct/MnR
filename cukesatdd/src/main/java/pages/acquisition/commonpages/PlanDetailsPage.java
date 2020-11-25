@@ -268,6 +268,9 @@ public class PlanDetailsPage extends UhcDriver {
 	
 	@FindBy(xpath = "//h1[contains(text(),'Drug Cost Estimator')]")
 	private WebElement dceHeader;
+	
+	@FindBy(xpath = "//*[@class='tab ng-scope active']")
+	private WebElement defaultSelectedTab;
 
 	public WebElement getValCostTabEstimatedTotalAnnualCost() {
 		return valCostTabYearlyCost;
@@ -1406,5 +1409,10 @@ public class PlanDetailsPage extends UhcDriver {
 			validateNew(pharmacyPrescriptionDrugTab);
 			if(!pharmacyPrescriptionDrugTab.getText().contains(pharmacyName))
 				Assert.fail("Pharmacy did not match on plan details page with DCE");
+		}
+		
+		public void validateDefaultTab(String tabName) {
+			validateNew(defaultSelectedTab);
+			Assert.assertTrue("Default tab "+tabName+" not displayed", defaultSelectedTab.getText().equals(tabName));
 		}
 }

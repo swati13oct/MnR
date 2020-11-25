@@ -2114,4 +2114,24 @@ public class DCEStepDefinitionAARP {
 		DrugDetailsPage drugDetailsPage = new DrugDetailsPage(driver);
 		drugDetailsPage.savePlan();
 	}
+
+	@Then("^verify the default tab displayed on VPP details page$")
+	public void verify_the_default_tab_displayed_on_VPP_details_page(DataTable attributes) {
+		List<DataTableRow> memberAttributesRow = attributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		String tabName = memberAttributesMap.get("TabName");
+		PlanDetailsPage planDetails = new PlanDetailsPage(driver);
+		planDetails.validateDefaultTab(tabName);
+	}
+	
+	@When("^user clicks on view plan details button on drug summary page$")
+	public void user_clicks_on_view_plan_details_button_on_drug_summary_page(){
+		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
+		drugSummaryPage.clickViewPlanDetails();
+	}
 }

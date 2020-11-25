@@ -897,4 +897,8 @@ public class DrugSummaryPage extends UhcDriver {
 		Select distance = new Select(distanceDrpDown);
 		distance.selectByVisibleText(distanceValue);
 	}
+	
+	public void clickViewPlanDetails() {
+		viewPlanDetailsBtn.click();
+	}
 }

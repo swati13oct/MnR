@@ -72,7 +72,7 @@ Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanDetails AARP - To test DCE - VPP Plan De
       | site | zipcode | planyear | plantype | county       | isMultutiCounty | drug1     | drug2                | drug3      | drug4         | drug5            | drug6   | planname                                                   |
       | UHC  |   78006 | current  | SNP      | Bexar County | yes             | meloxicam | diclofenac potassium | febuxostat | buprenorphine | fentanyl citrate | Lipitor | UnitedHealthcare Dual Complete Choice (Regional PPO D-SNP) |
 
-  @DCE_Redesign_DCE_Detail_to_Vpp_Details
+  @DCE_Redesign_DCE_Detail_to_Vpp_Details1
   Scenario Outline: Test to verify the Drug cost estimator and view plan summary from DCE to VPP detail page
     Given the user is on the AARP medicare site landing page
     When the user performs plan search using following information in the AARP site
@@ -90,24 +90,26 @@ Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanDetails AARP - To test DCE - VPP Plan De
     Then the user clicks on Review Drug Costs to Land on Drug Details Page
     Then the user Clicks button to VPP Plan Details Page from Drug Details Page
     Then the user validates planName matches plan Name in VPP
+    And verify the default tab displayed on VPP details page
+    | TabName | <tabName> |
     Then the user verify the drug cost estimator and view plan summary on VPP detail page in AARP
     Then the user click on drug cost estimator on vpp plan detail page in AARP
     Then User validates planName matches plan Name in DCE detail page in AARP
 
     @DCE_Redesign_DCE_Detail_to_Vpp_Details_MAPD @F501519
     Examples: 
-      | zipcode | plantype | county | isMultutiCounty | drug1     | planname                                       |
-      |   90210 | MAPD     | none   | no              | meloxicam | AARP Medicare Advantage Freedom Plus (HMO-POS) |
+      | zipcode | plantype | county | isMultutiCounty | drug1     | planname                                       |tabName|
+      |   90210 | MAPD     | none   | no              | Lipitor | AARP Medicare Advantage Freedom Plus (HMO-POS) |Medical Benefits and Programs|
 
     @DCE_Redesign_DCE_Detail_to_Vpp_Details_PDP
     Examples: 
-      | zipcode | plantype | county       | isMultutiCounty | drug1     | planname                        |
-      |   80002 | PDP      | Adams County | yes             | meloxicam | AARP MedicareRx Walgreens (PDP) |
+      | zipcode | plantype | county       | isMultutiCounty | drug1     | planname                        |tabName|
+      |   80002 | PDP      | Adams County | yes             | Lipitor | AARP MedicareRx Walgreens (PDP) |Prescription Drug Benefits|
 
     @DCE_Redesign_DCE_Detail_to_Vpp_Details_SNP
     Examples: 
-      | zipcode | plantype | county       | isMultutiCounty | drug1     | planname                                              |
-      |   78006 | SNP      | Bexar County | yes             | meloxicam | UnitedHealthcare Medicare Silver (Regional PPO C-SNP) |
+      | zipcode | plantype | county       | isMultutiCounty | drug1     | planname                                              |tabName|
+      |   78006 | SNP      | Bexar County | yes             | Lipitor | UnitedHealthcare Medicare Silver (Regional PPO C-SNP) |Medical Benefits and Programs|
 
   @DCE_Redesign_VPPSummary_to_Vpp_Details
   Scenario Outline: Test to verify the Drug cost estimator and view plan summary are not visible when user navigate away from DCE and navigate to VPP detail page

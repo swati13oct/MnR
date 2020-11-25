@@ -417,8 +417,7 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
       | zipCode | drug1   | drugName1                     | 
       |   10001 | Lipitor | atorvastatin calcium TAB 20MG |
       
-      @dceRedesignNoPrescriptionChangePharmacy
-      
+      @dceRedesignChangePharmacyDetailsPage
        Scenario Outline: Test to verify change pharmacy functionality from Drug details page
     Given the user is on the AARP medicare site landing page
     When I access the acquisition DCE tool from home page
@@ -525,3 +524,33 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
       | path                                             | pageName                   | drug1 | zipCode |message|zipCode1|
       | health-plans/estimate-drug-costs.html/getstarted | DCE Redesign - Get Started | Lipitor  |   90001 |Prescription drug home delivery is available through OptumRx. Learn more about OptumRx Mail Order Pharmacy|78006|
       
+      @DCERedesign_DCE-VPPDetails_DrugSummary
+      Scenario Outline: Test to verify the Drug cost estimator and view plan summary button on VPP detail page from Drug summary page
+    Given the user is on AARP medicare acquisition site landing page
+    When the user navigates to following AARP medicare acquisition site page
+      | PageName | <pageName> |
+      | PagePath | <path>     |
+    Then the user validates Get Started Page
+    When the user clicks on Add drugs button
+    Then the user searches and adds the following Drug to Drug List
+      | DrugName | <drug1> |
+    And clicks on Review drug cost button
+    Then user should be navigated to zipcode and plan year capture page for AEP
+    When user enters valid zipcode and county
+      | ZipCode | <zipCode> |
+    #And user selects plan year in AARP
+    And user clicks on continue button in Zip Entry Page
+    #Then load screen should be displayed in AARP
+    And user should be navigated to Review drug cost estimate page
+    And user should be able to see Medicare Advantage plan by default
+   	When user clicks on view plan details button on drug summary page
+   	Then the user validates planName matches plan Name in VPP
+    And verify the default tab displayed on VPP details page
+    | TabName | <tabName> |
+    Then the user verify the drug cost estimator and view plan summary on VPP detail page in AARP
+    When the user click on drug cost estimator on vpp plan detail page in AARP
+    Then user verify the drug summary page
+
+    Examples: 
+      | path                                             | pageName                   | drug1 | zipCode |
+      | health-plans/estimate-drug-costs.html/getstarted | DCE Redesign - Get Started | Lipitor  |   90210 |
