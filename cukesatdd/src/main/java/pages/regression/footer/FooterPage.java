@@ -122,7 +122,7 @@ public class FooterPage extends UhcDriver {
 	@FindBy(xpath="//h1//*[contains(text(),'Health & Wellness')]")
 	private WebElement healthAndWellnessHeader;
 	
-	@FindBy(id="healthwellness_6")
+	@FindBy(id="healthwellness_7")
 	private WebElement healthAndWellness;
 	
 	@FindBy(id="pharmacies_5")
