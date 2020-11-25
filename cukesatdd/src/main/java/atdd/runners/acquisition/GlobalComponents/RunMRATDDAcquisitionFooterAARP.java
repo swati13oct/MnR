@@ -1,3 +1,4 @@
+
 package atdd.runners.acquisition.GlobalComponents;
 
 import org.junit.runner.RunWith;
@@ -17,3 +18,4 @@ import cucumber.api.CucumberOptions;
 public class RunMRATDDAcquisitionFooterAARP {
 
 }
+

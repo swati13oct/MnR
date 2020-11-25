@@ -731,7 +731,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		@FindBy(xpath = "//*[contains(@id, 'GoBtnText')]")
 		private WebElement  SelectYearGoBtn;
 		
-		@FindBy(xpath = "//input[@class='nextButton']")
+//		@FindBy(xpath = "//input[@class='nextButton']")
+		@FindBy(id = "authQuesSubmitButton")
 		private WebElement  Submit;
 
 		
@@ -951,8 +952,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 		CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
 
-		WebElement ProviderSearchLink = driver.findElement(By.xpath("//*[contains(text(),\'" + planName
-				+ "\')]/ancestor::div[contains(@class,'module-plan-overview')]//*[contains(@dtmname,'Provider Search')]"));
+		WebElement ProviderSearchLink = driver.findElement(By.xpath("//*[contains(text(),'" + planName+ "')]/ancestor::div[contains(@class,'module-plan-overview')]//*[contains(@dtmname,'Provider Search')]"));
 		validateNew(ProviderSearchLink);
 //		switchToNewTabNew(ProviderSearchLink);
 		jsClickNew(ProviderSearchLink);
@@ -3298,8 +3298,7 @@ for (int i = 0; i < initialCount + 1; i++) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}		
-		//part_B_monthDrpDwn.click();
-		jsClickNew(part_B_monthDrpDwn);
+		part_B_monthDrpDwn.click();
 		try {
 			Thread.sleep(2000);
 		} catch (InterruptedException e) {
@@ -3327,7 +3326,7 @@ for (int i = 0; i < initialCount + 1; i++) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}		
-		startDrpDwn.click();	
+		startDrpDwn.click();
 		try {
 			Thread.sleep(2000);
 		} catch (InterruptedException e) {
@@ -3360,7 +3359,8 @@ for (int i = 0; i < initialCount + 1; i++) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}		
-		ViewPlanMedSupPage.click();
+		jsClickNew(ViewPlanMedSupPage);
+		waitForPageLoadSafari();
 		return EnteredData;
 		
 	}
@@ -3507,7 +3507,7 @@ for (int i = 0; i < initialCount + 1; i++) {
 	private WebElement DecisionGuideLink;
 	public IsDecisionGuideStep1 clickOnRequestADecisionGuide() {
 		Assert.assertTrue("Decision Guide Link is not displayed on Med Supp VPP Plan Summary Page", validate(DecisionGuideLink));
-		DecisionGuideLink.click();
+		jsClickNew(DecisionGuideLink);
 		CommonUtility.checkPageIsReadyNew(driver);
 		if (driver.getCurrentUrl().contains("medicare-information.html"))
 			return new IsDecisionGuideStep1(driver);
@@ -3529,7 +3529,7 @@ for (int i = 0; i < initialCount + 1; i++) {
 	 * @return
 	 */
 	public VisitorProfilePage continueAsGuest(){
-		continueAsGuest.click();
+		jsClickNew(continueAsGuest);
 		if(driver.getCurrentUrl().contains("profile")) {
 			CommonUtility.checkPageIsReadyNew(driver);
 			return new VisitorProfilePage(driver);
@@ -4239,7 +4239,7 @@ for (int i = 0; i < initialCount + 1; i++) {
 	private WebElement InsuranceAgentLink;
 	public IsInsuranceAgent clickOnRequestInsuranceAgent() {
 		Assert.assertTrue("InsuranceAgent Link is not displayed on Med Supp VPP Plan Summary Page", validate(InsuranceAgentLink));
-		InsuranceAgentLink.click();
+		jsClickNew(InsuranceAgentLink);
 		CommonUtility.checkPageIsReadyNew(driver);
 		if (driver.getCurrentUrl().contains("agent-appointment.html"))
 			return new IsInsuranceAgent(driver);
@@ -4341,8 +4341,8 @@ for (int i = 0; i < initialCount + 1; i++) {
 			driver.findElement(By.cssSelector("input#passwdId_input")).sendKeys(password);
 			driver.findElement(By.cssSelector("input#SignIn")).click();
 			waitForPageLoadSafari();
-			String Question = driver.findElement(By.cssSelector("label#challengeQuestionLabelId")).getText().trim();
-			WebElement securityAnswer = driver.findElement(By.cssSelector("div#challengeSecurityAnswerId >input"));
+			String Question = driver.findElement(By.cssSelector("span#challengeQuestionLabelId")).getText().trim();
+			WebElement securityAnswer = driver.findElement(By.cssSelector("div#UnrecognizedSecAns >input"));
 			if (Question.equalsIgnoreCase("What is your best friend's name?")) {
 				System.out.println("Question is related to friendname");
 				securityAnswer.sendKeys("name1");

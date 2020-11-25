@@ -224,7 +224,7 @@ public class PlanDocumentsAndResourcesPD extends PlanDocumentsAndResourcesBase  
 					//note: if env is happy then will land on this,but most of the time is the other one
 					//redirectUrl="https://member.int.uhc.com/retiree/find-care"; 
 					//redirectUrl="https://systest3.myuhc.com/member/prewelcome.do";
-					redirectUrl="https://systest3.myuhc.com/member/prelogoutLayout.do?reason=timeout&currentLanguageFromPreCheck=en";
+					redirectUrl="https://systest3.myuhc.com/member/prelogoutLayout.do?reason=";
 					if (MRScenario.environment.equalsIgnoreCase("offline")) {
 						expectedUrl="https://member.uat.uhc.com/UHC/find-care";
 						redirectUrl="https://member.uat.uhc.com/uhc/find-care";

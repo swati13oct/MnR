@@ -19,7 +19,7 @@ jsonReport = "target/cucumber-RunMRATDDRegressionEOBShipP02_singleShip.json",det
 overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionEOBShipP02_singleShip")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberredesign" }, 
 features = { "src/main/resources/feature/memberredesign/eob" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionEOBShipP02_singleShip.json" }, tags = { "@regressionMember", "@SHIP_EOBs2" })
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionEOBShipP02_singleShip.json" }, tags = { "@regressionMember", "@SHIP_EOBs2_singleShip" })
 public class RunMRATDDRegressionEOBShipP02_singleShip {
 
 }

@@ -1,5 +1,10 @@
 Feature: 1.14 Member Branding functionality
 
+ Background: Feature security flag needs to be true before ATDD script execution
+     Given First check if feature security flag is set to true
+      | Feature | UCPUserManagement |
+###############################Regression Scenarios Begin Here ########################################
+
   @regressionMember
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify_<Test Case>
     Given login with following details logins in the member portal and validate elements
@@ -21,7 +26,7 @@ Feature: 1.14 Member Branding functionality
       | 15153 | MEDICA   | Medica_Branding         | NON LIS       | MEDICA                       | dam/UCP/Images/logo/MEDICA.svg      | TC_03_ Branding for Branding for Medica Plan member                          |
       | 15152 | PCP      | PCP_Branding            | NON LIS       | PCP                          | dam/UCP/Images/logo/PCP.svg         | TC_04_ Branding for Branding for PCP Plan member                             |
       | 15148 | MAPD     | Individual_Branding     | NON LIS       | UHC                          | dam/UCP/Images/logo/UHC.svg         | TC_05_ Branding for Branding for UHC Plan member                             |
-      | 15151 | MAPD     | TEXASERS_Branding       | NON LIS       | TEXASERS                     | dam/UCP/Images/logo/TEXAS%20ERS.svg | TC_06_ Branding for Texas ERS member                                         |
+      | 15151 | MAPD     | TEXASERS_Branding       | NON LIS       | TEXASERS                     | dam/UCP/Images/logo/TX-ERSNew.svg	| TC_06_ Branding for Texas ERS member                                         |
 #	  | 15148 | MAPD     | ACTIVETERM_Branding     | NON LIS       | AARP                         | dam/UCP/Images/logo/AARP.svg        | TC_07_ Branding for member with both active and termed plan with diff brands |
       | 15150 | MAPD     | UHCAARPCOMBO_Branding   | NON LIS       | AARP                         | dam/UCP/Images/logo/AARP.svg        | TC_08_ Branding for Members with multiple active plans                       |
 
