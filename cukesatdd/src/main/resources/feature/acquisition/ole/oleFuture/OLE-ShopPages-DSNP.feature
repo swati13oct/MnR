@@ -70,7 +70,8 @@ Feature: 1.05.9 OLE Common tool flow E2E Shop Pages
     | Prescription Name			| <prescriptioncoveragename>  |
     |  PD Group Number			 | <pdgroupnumber>  |
     | PD Member Number        | <pdmembernumber>   | 
-    Then the user navigates to SEP Page
+    #Then the user navigates to SEP Page
+     Then the user navigates to SEP Page for Medicaid and Effective date
       |	Input Data					 | <inputdataType>   |
     	| PartA Date         | <partadate>         |
    		| PartB Date         | <partbdate>         |
