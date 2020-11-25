@@ -2121,16 +2121,17 @@ public class DCEStepDefinitionAARP {
 		drugDetailsPage.validatePreferredTab();
 	}
 	
-	@Then("^user verify details page change pharmacy modal for standard tab$")
-	public void user_verify_details_page_change_pharmacy_modal_for_standard_tab() {
-		DrugDetailsPage drugDetailsPage = new DrugDetailsPage(driver);
-		drugDetailsPage.validateStandardTab();
-	}
-	
-	@Then("^user click on standard tab from drug details")
+	@Then("^user verify and click on standard tab from drug details")
 	public void user_click_on_standard_tab_to_update_the_distance_to_durg_details() {
 		DrugDetailsPage drugDetailsPage = new DrugDetailsPage(driver);
 		drugDetailsPage.validateStandardTab();
 	
 	}
+	
+	@And("^user clicks on change pharmacy link on alert message from plan card on drug summary page$")
+	public void user_clicks_on_change_pharmacy_link_on_alert_message_from_plan_card_on_drug_summary_page () {
+		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
+		drugSummaryPage.clickChangePharmacyFromAltMsg();
+	}
+
 }

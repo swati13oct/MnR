@@ -897,4 +897,13 @@ public class DrugSummaryPage extends UhcDriver {
 		Select distance = new Select(distanceDrpDown);
 		distance.selectByVisibleText(distanceValue);
 	}
+	
+	@FindBy(xpath = "//*[@id='changePharmacyLink0']")
+	public WebElement changePharmacyAltMsg;
+	
+	public void clickChangePharmacyFromAltMsg() {
+		waitforElement(changePharmacyAltMsg);
+		validate(changePharmacyAltMsg);
+		changePharmacyAltMsg.click();
+		}		
 }
