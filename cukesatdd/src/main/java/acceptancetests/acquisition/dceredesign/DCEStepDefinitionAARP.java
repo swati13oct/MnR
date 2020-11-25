@@ -2151,5 +2151,6 @@ public class DCEStepDefinitionAARP {
 	public void user_clicks_on_view_plan_details_button_on_drug_summary_page(){
 		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
 		drugSummaryPage.clickViewPlanDetails();
+		//getLoginScenario().saveBean(VPPCommonConstants.PLAN_NAME, planName);
 	}
 }

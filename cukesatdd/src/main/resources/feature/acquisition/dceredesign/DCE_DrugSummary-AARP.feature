@@ -484,8 +484,8 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
     Then user should be navigated to first page of pharmacy list
     When user search with zipcode with no pharamacies
     | ZipCode | <zipCode1> |
-    #Then no results message should be displayed
-    #| NoResultsMessage | <message> |
+    Then no results message should be displayed
+    | NoResultsMessage | <message> |
     When user search with incorrect zipcode
     | ZipCode | <zipCode2> |
     Then error message "Please enter a valid ZIP code." should be displayed on change pharmacy modal
@@ -544,6 +544,7 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
     And user should be navigated to Review drug cost estimate page
     And user should be able to see Medicare Advantage plan by default
    	When user clicks on view plan details button on drug summary page
+   	| Plan Name | <planname> |
    	Then the user validates planName matches plan Name in VPP
     And verify the default tab displayed on VPP details page
     | TabName | <tabName> |
@@ -552,5 +553,5 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
     Then user verify the drug summary page
 
     Examples: 
-      | path                                             | pageName                   | drug1 | zipCode |
+      | path                                             | pageName                   | drug1 | zipCode |planname|
       | health-plans/estimate-drug-costs.html/getstarted | DCE Redesign - Get Started | Lipitor  |   90210 |
