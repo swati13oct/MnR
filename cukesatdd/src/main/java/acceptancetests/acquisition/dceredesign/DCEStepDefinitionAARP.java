@@ -23,6 +23,7 @@ import pages.acquisition.commonpages.ComparePlansPage;
 import pages.acquisition.commonpages.PlanDetailsPage;
 import pages.acquisition.commonpages.VPPPlanSummaryPage;
 import pages.acquisition.commonpages.VisitorProfilePage;
+import acceptancetests.acquisition.ole.oleCommonConstants;
 import acceptancetests.acquisition.vpp.VPPCommonConstants;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstants;
@@ -710,7 +711,6 @@ public class DCEStepDefinitionAARP {
 	@Then("^the user click on view plan summary on vpp detail page$")
 	public void the_user_click_on_drug_cost_estimator_details() throws Throwable {
 		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugDetails);
-		
 		drugDetailsPage.clickOnvppPlan();
 	}
 	
@@ -1521,6 +1521,44 @@ public class DCEStepDefinitionAARP {
 
 	}
 	
+	@Then("^user should be navigated to first step of DCE Page$")
+	public void the_user_navigated_to_first_step_of_DCE_Page() {
+		driver = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		GetStartedPage DCEgetStarted = new GetStartedPage(driver);
+		getLoginScenario().saveBean(PageConstants.DCE_Redesign_GetStarted, DCEgetStarted);
 
+	}
+	
+	@When("^user clicks on Return to plan summary page link in DCE$")
+	public void user_clicks_on_Return_to_plan_summary_page_link_in_DCE() {
+		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
+		drugSummaryPage.clickReturnToPlanSummary();
+	}
+	
+	@When("^user clicks on Return to home page link in DCE$")
+	public void user_clicks_on_Return_to_home_page_link_in_DCE() {
+		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
+		drugSummaryPage.clickReturnToHomePage();
+	}
+	
+	@Then("^the user clicks VPP Plan Details button from Drug Details Page$")
+	public void the_user_clicks__VPP_Plan_Details_button_from_Drug_Details_Page() throws Throwable {
+		DrugDetailsPage drugDetailsPage = new DrugDetailsPage(driver);
+		PlanDetailsPage plandetailspage = drugDetailsPage.clickViewPlanDetailsBtn();
+		if (null != plandetailspage) {
+			getLoginScenario().saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE, plandetailspage);
+		} else
+			Assert.fail("VPP Plan Details not loaded");	
+	}
+	
+	@Then("^the user click on view plan summary button on vpp detail page$")
+	public void the_user_click_on_view_plan_summary_details() throws Throwable {
+		PlanDetailsPage plandetailspage = (PlanDetailsPage) getLoginScenario().getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
+		VPPPlanSummaryPage plansummaryPage=plandetailspage.clickViewPlanSummaryBtn();
+		if(null!=plansummaryPage){
+			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
+		} else
+			Assert.fail("VPP Plan Details not loaded");	
+	}
 	
 }

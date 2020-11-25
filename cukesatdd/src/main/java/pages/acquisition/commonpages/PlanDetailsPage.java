@@ -268,6 +268,9 @@ public class PlanDetailsPage extends UhcDriver {
 	
 	@FindBy(xpath = "//h1[contains(text(),'Drug Cost Estimator')]")
 	private WebElement dceHeader;
+	
+	@FindBy(xpath = "//button[@ng-click='backToPlanSummary()']")
+	public WebElement backtoVPPSummaryBtn;
 
 	public WebElement getValCostTabEstimatedTotalAnnualCost() {
 		return valCostTabYearlyCost;
@@ -1408,5 +1411,14 @@ public class PlanDetailsPage extends UhcDriver {
 			validateNew(pharmacyPrescriptionDrugTab);
 			if(!pharmacyPrescriptionDrugTab.getText().contains(pharmacyName))
 				Assert.fail("Pharmacy did not match on plan details page with DCE");
+		}
+		
+		public VPPPlanSummaryPage clickViewPlanSummaryBtn() {
+			validateNew(backtoVPPSummaryBtn);
+			backtoVPPSummaryBtn.click();
+			if (driver.getCurrentUrl().contains("plan-summary")) {
+				return new VPPPlanSummaryPage(driver);
+			}
+			return null;
 		}
 }
