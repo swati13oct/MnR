@@ -79,7 +79,7 @@ public class VppPlanSummaryStepDefinitionUHC {
 		if (("NO").equalsIgnoreCase(isMultiCounty.trim())) {
 			plansummaryPage = aquisitionhomepage.searchPlansWithOutCounty(zipcode);
 		} else {
-			plansummaryPage = aquisitionhomepage.searchPlans(zipcode, county);
+			plansummaryPage = aquisitionhomepage.searchPlans1(zipcode, county);
 		}
 
 		if (plansummaryPage != null) {

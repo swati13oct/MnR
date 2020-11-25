@@ -2418,6 +2418,38 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		System.out.println("Expected Count from Attribute" + expectedCountfromAttribute);
 		Assert.assertEquals(expectedCount, expectedCountfromAttribute);
 		System.out.println("check");
+		int size=driver.findElements(By.xpath("(//*[@class='pagination'])[1]/li/following::li[1]/a[@dtmid='acq_search_lnk'][1]")).size();
+	int size1=size-1;
+	int inum=Integer.parseInt(expectedCount);
+	System.out.println("number of paginations"+size1);
+		if(inum>=45) {
+			if(size1>=3) {
+			Assert.assertTrue(true);
+			}
+			else {
+				Assert.assertTrue(false);
+			}
+			
+		}
+		else if(inum>=30) {
+			if(size1>=2) {
+			Assert.assertTrue(true);
+			}
+			else {
+				Assert.assertTrue(false);
+			}
+			
+		}
+		else if(inum>=50) {
+			if(size1>=4) {
+			Assert.assertTrue(true);
+			}
+			else {
+				Assert.assertTrue(false);
+			}
+			
+		}
+		
 
 	}
 
@@ -2603,19 +2635,21 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		UnitedHealthcareMedicareSolutions.click();
 	}
 	
-	public void validateUrl(String url) {
-		threadsleep(6);
-		String parentWindow = driver.getWindowHandle();
-		driver.switchTo().window(driver.getWindowHandles().toArray()[1].toString());
-		System.out.println(driver.getTitle());
-		String str=driver.getTitle();
-		//Assert.assertTrue( "Title mismatch for dental directory",driver.getTitle().equals(url));
-		if(str.equals(url)) {
-			assertTrue(true);
-		}
-		
-	}
-	
+//	public void validateUrl(String url) {
+//		threadsleep(6);
+//		String parentWindow = driver.getWindowHandle();
+//		driver.switchTo().window(driver.getWindowHandles().toArray()[1].toString());
+//		System.out.println(driver.getTitle());
+//		String str=driver.getTitle();
+//		//Assert.assertTrue( "Title mismatch for dental directory",driver.getTitle().equals(url));
+//		if(str.equals(url)) {
+//			assertTrue(true);
+//		}
+//		driver.switchTo().window(parentWindow);
+//		Assert.assertEquals(driver.getTitle(), "Site Search");
+//		
+//	}
+//	
 	public void enterAndvalidateEmail() {
 		
 		threadsleep(8);

@@ -63,7 +63,7 @@ public class VppCommonStepDefinition {
 	 */
 
 	@Given("^the user is on medicare acquisition site landing page$")
-	public void the_user_on__medicaresolutions_Site(DataTable givenAttributes) {
+	public void the_user_on__medicare_acquisition_site(DataTable givenAttributes) {
 		wd = getLoginScenario().getWebDriverNew();
 		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
@@ -81,7 +81,7 @@ public class VppCommonStepDefinition {
 	}
 
 	@When("^the user performs plan search using following information$")
-	public void zipcode_details_in_aarp_site(DataTable givenAttributes) throws InterruptedException {
+	public void zipcode_details_in_medicare_acquisition_site(DataTable givenAttributes) throws InterruptedException {
 		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
@@ -2178,9 +2178,8 @@ public class VppCommonStepDefinition {
 //			plansummaryPage.validatePlansAreSaved(snp_savePlanNames, planType);
 		}
 		
-		@Then("^the user enter the searchvalue in the search text box and hits enter$")
-		public void the_user_enter_the_searchValue_in_the_search_text_box_and_hits_enter(DataTable inputvalue)
-				throws Throwable {
+		@Then("^the user enter the searchValue in the search text box and hits enter$")
+		public void the_user_enter_the_searchValue_in_the_search_text_box_and_hits_enter(DataTable inputvalue) throws Throwable {
 			AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
 					.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 			List<DataTableRow> AttributesRow = inputvalue.getGherkinRows();
@@ -2197,6 +2196,7 @@ public class VppCommonStepDefinition {
 			aquisitionhomepage.enterSearchtextvalue(InputValue);
 
 		}
+				
 		@Then("^the user should see fifteen results before the pagination$")
 		public void the_user_should_see_fifteen_results_before_pagination() throws Throwable {
 			AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
@@ -2268,6 +2268,23 @@ public class VppCommonStepDefinition {
 			Thread.sleep(3000);
 			aquisitionhomepage.validateErrorMsg(error,newSearchValue);
 		}
+		
+		@Then("^the user clicks on the united health care medicare solutions link$")
+		public void the_user_clicks_on_the_united_health_care_medicare_solutions_link() throws Throwable {
+		 AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+        aquisitionhomepage.clickUnitedHealthcareMedicareSolutions();
+		    
+		}
+
+		@Then("^the user validates the \"([^\"]*)\"$")
+		public void the_user_validates_the(String url) throws Throwable {
+	      AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+        .getBean(PageConstants.ACQUISITION_HOME_PAGE);
+         aquisitionhomepage.validateUrl(url);
+		}
+
+
 		/** user is on the AARP Medicare Site landing page */
 		@Given("^the user is on Acquisition Site landing page and navigate to pharmacy search page$")
 		public void validateUserIsOnAcquisitionSiteNavToPharmacySearch(DataTable givenAttributes) {

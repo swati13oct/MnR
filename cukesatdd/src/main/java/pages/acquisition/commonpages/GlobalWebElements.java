@@ -223,7 +223,7 @@ public class GlobalWebElements  extends UhcDriver{
 	@FindBy(xpath="(//a[contains(@dtmid, 'acq_top_nav') and contains(text(), 'Sign in')])[1]")
 	public static WebElement headerSignInLink;
 	
-	@FindBy(xpath = "(//a[contains(@href, 'healthsafe-id')])[1]")
+	@FindBy(xpath = "(//a[contains(text(),'Register')])[1]")
 	 public static WebElement headerRegisterLink;
 	
 	@FindBy(id = "aarpSVGLogo")

@@ -6,9 +6,12 @@ import java.util.List;
 import java.util.Map;
 
 import org.junit.Assert;
+import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstants;
+import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
 import cucumber.api.java.en.And;
@@ -59,28 +62,28 @@ public class GlobalComponentsCommonStepDefinition {
 		}
 	}
 	
-	@When("^user verifies the logo on home page$")
+	@When("^user verifies the logo$")
 	public void user_verifies_the_AARP_logo_on_home_page() throws Throwable {
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		aquisitionhomepage.validateLogo();		
 	}
 
-	@And("^user clicks on Sign in link on home page$")
+	@And("^user clicks on Sign in link$")
 	public void click_signIn_aarp() {
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		aquisitionhomepage.signInheader();		
 	}
 	
-	@And("^user clicks on register link on home page$")
+	@And("^user clicks on register link$")
 	public void click_register_aarp() {
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		aquisitionhomepage.headerRegisterLink();
 	}
 	
-	@Then("^user validates visitor profile on home page$")
+	@Then("^user validates visitor profile$")
 	public void the_user_validates_visitor_profile_aarp() throws Throwable {
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
@@ -314,7 +317,8 @@ public class GlobalComponentsCommonStepDefinition {
 		  getLoginScenario() .getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		  AcquisitionHomePage aquisitionHomePageReload =
 		  aquisitionhomepage.homeFooterClick();
-		  Assert.assertTrue("home page not found", aquisitionHomePageReload!= null); 
+     
+		//  Assert.assertTrue("home page not found", aquisitionHomePageReload!= null); 
 	  }
 
 	  @And("^the user clicks on browser back button$")
@@ -324,6 +328,66 @@ public class GlobalComponentsCommonStepDefinition {
 		  aquisitionhomepage.clickBrowserBackButton();
 		  
 	  }
+
+ @And("^user clicks on visit aarp.org link in the header$")
+ public void click_visitAARP_Link_in_the_header() { 
+	  AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage)getLoginScenario() .getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		  aquisitionhomepage.clickVisitAARPHeaderLink();
+	  
+	  }
+  
+	  @And("^user clicks on visit aarp.org link in the footer$")
+	  public void click_visitAARP_Link_in_the_footer() { 
+		  AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage)getLoginScenario() .getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		  aquisitionhomepage.clickVisitAARPFooterLink();
+		  
+	  }
+
+	  @When("^the user clicks on Medicare Advantage Plans Link$")
+	  public void the_user_clicks_on_Medicare_Advantage_Plans_Link() throws Throwable {
+		  AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage)getLoginScenario() .getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		  aquisitionhomepage.MedicareAdvantagePlans();
+		 
+	  }
+
+	  @When("^the user clicks on Dual Special Needs Plans Link$")
+	  public void the_user_clicks_on_Dual_Special_Needs_Plans_Link() throws Throwable {
+		  AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage)getLoginScenario() .getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		  aquisitionhomepage.DualSplNeedPlans();
+	  }
+
+	  @When("^the user clicks on Medicare Supplement Insurance Plans Link$")
+	  public void the_user_clicks_on_Medicare_Supplement_Insurance_Plans_Link() throws Throwable {
+		  AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage)getLoginScenario() .getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		  aquisitionhomepage.Medicaresupplementinsuranceplans();
+	  }
+
+	  @When("^the user clicks on Medicare Prescription Drug Plans Link$")
+	  public void the_user_clicks_on_Medicare_Prescription_Drug_Plans_Link() throws Throwable {
+		  AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage)getLoginScenario() .getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		  aquisitionhomepage.MedicarePrescriptionDrugPlans();
+	  }
+
+	  @When("^the user clicks on Medicare Education Link$")
+	  public void the_user_clicks_on_Medicare_Education_Link() throws Throwable {
+		  AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage)getLoginScenario() .getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		  aquisitionhomepage.MedicareEducation();
+	  }
+
+	  @When("^the user clicks on Back to top Link$")
+	  public void the_user_clicks_on_Back_to_top_Link() throws Throwable {
+		  AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage)getLoginScenario() .getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		  aquisitionhomepage.backtotop();
+	  }
+
+
+     @When("^the user clicks on Accessibility Link$")
+     public void the_user_clicks_on_Accessibility_Link() throws Throwable {
+	  AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage)getLoginScenario() .getBean(PageConstants.ACQUISITION_HOME_PAGE);
+	  aquisitionhomepage.Accessibility();
+}
+
+
 
 }
 
