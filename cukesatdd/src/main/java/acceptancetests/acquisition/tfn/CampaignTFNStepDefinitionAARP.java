@@ -28,7 +28,7 @@ import gherkin.formatter.model.DataTableRow;
 import pages.acquisition.commonpages.PlanDetailsPage;
 import pages.acquisition.dceredesign.DrugSummaryPage;
 import pages.acquisition.tfn.CampaignTFNPage;
-import pages.acquisition.ulayer.AcquisitionHomePage;
+import pages.acquisition.commonpages.AcquisitionHomePage;
 import pages.acquisition.ulayer.GlobalWebElements;
 import pages.acquisition.ulayer.UlayerTFNPage;
 import pages.acquisition.ulayer.VPPPlanSummaryPage;
