@@ -1,15 +1,13 @@
 @UATRegression  @F513647
 Feature: 1.12 UAT - Header and Footer flows
 
-  @globalfooterULayer @UATRegression
+ @globalfooterULayer @UATRegression
   Scenario Outline: <Scenario> : To verify links displayed in the global header and footer on home page
-    Given the user is on medicare acquisition site landing page
+   Given the user is on medicare acquisition site landing page
     	|Site| <site>|
     When user accesses global footer of the Medicare Plans All page
-    And user clicks on View all disclaimer information link 
-    And user clicks on visit aarp.org link in the footer
-    And the user clicks on browser back button
-    And user clicks on Aboutus link from footer of the Medicare Plans 
+    And user clicks on View all disclaimer information link on the home page
+    And user clicks on Aboutus link from footer of the Medicare Plans home page 
     And the user clicks on browser back button
     And user clicks on contactus link on aboutus page
     And the user clicks on browser back button
@@ -25,12 +23,12 @@ Feature: 1.12 UAT - Header and Footer flows
     And the user clicks on browser back button
     And user verifies home link of agents&brokers page
     And the user clicks on browser back button
+    And the user clicks on Accessibility Link
+    And the user clicks on browser back button
     And the user clicks on Medicare Advantage Plans Link 
     And the user clicks on browser back button
     And the user clicks on Dual Special Needs Plans Link 
     And the user clicks on browser back button
-    And the user clicks on Accessibility Link
-    And the user clicks on browser back button 
     And the user clicks on Medicare Supplement Insurance Plans Link 
     And the user clicks on browser back button 
     And the user clicks on Medicare Prescription Drug Plans Link 
@@ -38,16 +36,17 @@ Feature: 1.12 UAT - Header and Footer flows
     And the user clicks on Medicare Education Link 
     And the user clicks on browser back button 
     And the user clicks on Back to top Link
-    When user accesses global header of the Medicare Plans 
+    When user accesses global header of the Medicare Plans home page
     And user verifies the logo 
-    And user clicks on visit aarp.org link in the header
-    And the user clicks on browser back button
     And user clicks on Sign in link 
     And the user clicks on browser back button
     And user clicks on register link 
     And the user clicks on browser back button
     Then user validates visitor profile 
     And the user clicks on browser back button
+    And user clicks on visit aarp.org link in the header
+    And the user clicks on browser back button
+    And user clicks on visit aarp.org link in the footer
    
   
   @globalfooter_AARP
@@ -70,9 +69,7 @@ Feature: 1.12 UAT - Header and Footer flows
       | Is Multi County | <isMultutiCounty> |
       | County Name     | <county>          |
     When user accesses global footer of the Medicare Plans All page
-    And user clicks on visit aarp.org link in the footer
-    And the user clicks on browser back button
-    And user clicks on Aboutus link from footer of the Medicare Plans
+    And user clicks on Aboutus link from footer of the Medicare Plans home page 
     And the user clicks on browser back button
     And user clicks on contactus link on aboutus page
     And the user clicks on browser back button
@@ -88,12 +85,12 @@ Feature: 1.12 UAT - Header and Footer flows
     And the user clicks on browser back button
     And user verifies home link of agents&brokers page
     And the user clicks on browser back button
+    And the user clicks on Accessibility Link
+    And the user clicks on browser back button
     And the user clicks on Medicare Advantage Plans Link 
     And the user clicks on browser back button
     And the user clicks on Dual Special Needs Plans Link 
     And the user clicks on browser back button
-    And the user clicks on Accessibility Link
-    And the user clicks on browser back button 
     And the user clicks on Medicare Supplement Insurance Plans Link 
     And the user clicks on browser back button 
     And the user clicks on Medicare Prescription Drug Plans Link 
@@ -101,16 +98,17 @@ Feature: 1.12 UAT - Header and Footer flows
     And the user clicks on Medicare Education Link 
     And the user clicks on browser back button 
     And the user clicks on Back to top Link
-    When user accesses global header of the Medicare Plans
+    When user accesses global header of the Medicare Plans home page
     And user verifies the logo 
-    And user clicks on visit aarp.org link in the header
-    And the user clicks on browser back button
     And user clicks on Sign in link 
     And the user clicks on browser back button
     And user clicks on register link 
     And the user clicks on browser back button
     Then user validates visitor profile 
     And the user clicks on browser back button
+    And user clicks on visit aarp.org link in the header
+    And the user clicks on browser back button
+    And user clicks on visit aarp.org link in the footer
    
 
  @globalfooter_AARP
@@ -129,9 +127,7 @@ Feature: 1.12 UAT - Header and Footer flows
     	|Site| <site>|
     When I click on DCE Redesign link from Shop for a plan hover over
     When user accesses global footer of the Medicare Plans All page
-    And user clicks on visit aarp.org link in the footer
-    And the user clicks on browser back button
-    And user clicks on Aboutus link from footer of the Medicare Plans 
+    And user clicks on Aboutus link from footer of the Medicare Plans home page 
     And the user clicks on browser back button
     And user clicks on contactus link on aboutus page
     And the user clicks on browser back button
@@ -147,12 +143,12 @@ Feature: 1.12 UAT - Header and Footer flows
     And the user clicks on browser back button
     And user verifies home link of agents&brokers page
     And the user clicks on browser back button
+    And the user clicks on Accessibility Link
+    And the user clicks on browser back button
     And the user clicks on Medicare Advantage Plans Link 
     And the user clicks on browser back button
     And the user clicks on Dual Special Needs Plans Link 
     And the user clicks on browser back button
-    And the user clicks on Accessibility Link
-    And the user clicks on browser back button 
     And the user clicks on Medicare Supplement Insurance Plans Link 
     And the user clicks on browser back button 
     And the user clicks on Medicare Prescription Drug Plans Link 
@@ -160,16 +156,17 @@ Feature: 1.12 UAT - Header and Footer flows
     And the user clicks on Medicare Education Link 
     And the user clicks on browser back button 
     And the user clicks on Back to top Link
-    When user accesses global header of the Medicare Plans 
+    When user accesses global header of the Medicare Plans home page
     And user verifies the logo 
-    And user clicks on visit aarp.org link in the header
-    And the user clicks on browser back button
     And user clicks on Sign in link 
     And the user clicks on browser back button
     And user clicks on register link 
     And the user clicks on browser back button
     Then user validates visitor profile 
     And the user clicks on browser back button
+    And user clicks on visit aarp.org link in the header
+    And the user clicks on browser back button
+    And user clicks on visit aarp.org link in the footer
 
 	@globalfooter_AARP
   Examples: 
@@ -189,9 +186,7 @@ Feature: 1.12 UAT - Header and Footer flows
     	|Site| <site>|
     When the user navigate to pharmacy search page from the navigation bar
     When user accesses global footer of the Medicare Plans All page
-    And user clicks on visit aarp.org link in the footer
-    And the user clicks on browser back button
-    And user clicks on Aboutus link from footer of the Medicare Plans 
+        And user clicks on Aboutus link from footer of the Medicare Plans home page 
     And the user clicks on browser back button
     And user clicks on contactus link on aboutus page
     And the user clicks on browser back button
@@ -207,12 +202,12 @@ Feature: 1.12 UAT - Header and Footer flows
     And the user clicks on browser back button
     And user verifies home link of agents&brokers page
     And the user clicks on browser back button
+    And the user clicks on Accessibility Link
+    And the user clicks on browser back button
     And the user clicks on Medicare Advantage Plans Link 
     And the user clicks on browser back button
     And the user clicks on Dual Special Needs Plans Link 
     And the user clicks on browser back button
-    And the user clicks on Accessibility Link
-    And the user clicks on browser back button 
     And the user clicks on Medicare Supplement Insurance Plans Link 
     And the user clicks on browser back button 
     And the user clicks on Medicare Prescription Drug Plans Link 
@@ -220,16 +215,17 @@ Feature: 1.12 UAT - Header and Footer flows
     And the user clicks on Medicare Education Link 
     And the user clicks on browser back button 
     And the user clicks on Back to top Link
-    When user accesses global header of the Medicare Plans 
+    When user accesses global header of the Medicare Plans home page
     And user verifies the logo 
-    And user clicks on visit aarp.org link in the header
-    And the user clicks on browser back button
     And user clicks on Sign in link 
     And the user clicks on browser back button
     And user clicks on register link 
     And the user clicks on browser back button
     Then user validates visitor profile 
     And the user clicks on browser back button
+    And user clicks on visit aarp.org link in the header
+    And the user clicks on browser back button
+    And user clicks on visit aarp.org link in the footer
   
   @globalfooter_AARP
   Examples: 
@@ -249,9 +245,7 @@ Feature: 1.12 UAT - Header and Footer flows
       | PageName | <pageName> |
       | PagePath | <path>     |
     When user accesses global footer of the Medicare Plans All page
-    And user clicks on visit aarp.org link in the footer
-    And the user clicks on browser back button
-    And user clicks on Aboutus link from footer of the Medicare Plans 
+    And user clicks on Aboutus link from footer of the Medicare Plans home page 
     And the user clicks on browser back button
     And user clicks on contactus link on aboutus page
     And the user clicks on browser back button
@@ -267,12 +261,12 @@ Feature: 1.12 UAT - Header and Footer flows
     And the user clicks on browser back button
     And user verifies home link of agents&brokers page
     And the user clicks on browser back button
+    And the user clicks on Accessibility Link
+    And the user clicks on browser back button
     And the user clicks on Medicare Advantage Plans Link 
     And the user clicks on browser back button
     And the user clicks on Dual Special Needs Plans Link 
     And the user clicks on browser back button
-    And the user clicks on Accessibility Link
-    And the user clicks on browser back button 
     And the user clicks on Medicare Supplement Insurance Plans Link 
     And the user clicks on browser back button 
     And the user clicks on Medicare Prescription Drug Plans Link 
@@ -280,23 +274,24 @@ Feature: 1.12 UAT - Header and Footer flows
     And the user clicks on Medicare Education Link 
     And the user clicks on browser back button 
     And the user clicks on Back to top Link
-    When user accesses global header of the Medicare Plans 
+    When user accesses global header of the Medicare Plans home page
     And user verifies the logo 
-    And user clicks on visit aarp.org link in the header
-    And the user clicks on browser back button
     And user clicks on Sign in link 
     And the user clicks on browser back button
     And user clicks on register link 
     And the user clicks on browser back button
     Then user validates visitor profile 
     And the user clicks on browser back button
+    And user clicks on visit aarp.org link in the header
+    And the user clicks on browser back button
+    And user clicks on visit aarp.org link in the footer
     
 @globalfooter_AARP 
  Examples:
  |Scenario          |site|path                                                            |pagename|
  |E2E Scenario_2 AMP|AARP|health-plans.html#/zipcode                                       |Shop for a Plan|
  |E2E Scenario_2 AMP|AARP|shop.html                                                        |Shop Hub|
-  |E2E Scenario_2 AMP|AARP|shop/medicare-advantage-plans.html                               |Shop Medicare Advantage Plans|
+  |E2E Scenario_2 AMP|AARP|shop/medicare-advantage-plans.html                              |Shop Medicare Advantage Plans|
  |E2E Scenario_2 AMP|AARP|shop/medicare-advantage-plans/wellness-discounts.html            |Wellness Resources and Services|
   |E2E Scenario_2 AMP|AARP|shop/medicare-advantage-plans/health-care-management.html        |Clinical Programs: Condition Management and Care Management|
   |E2E Scenario_2 AMP|AARP|shop/medicare-advantage-plans/ma-plan-benefits.html              |Medicare Advantage Plan Benefits|
