@@ -686,7 +686,7 @@ public class ComparePlansPage extends UhcDriver {
 		validateNew(Newremove4thplan);
 		String PlanName=Newremove4thplanName.getText();
 		System.out.println("4th plan name is : " + PlanName );
-		Newremove4thplan.click();
+		jsClickNew(Newremove4thplan);
 		System.out.println("Clicked on Remove Link on plan Compare page");
 
 	}
@@ -711,14 +711,14 @@ public class ComparePlansPage extends UhcDriver {
 	
 	public void clickOnBacktoPlans(){
 		validateNew(backToAllPlansLink);
-		backToAllPlansLink.click();
+		jsClickNew(backToAllPlansLink);
 		System.out.println("Clicked on Back to plans");
 	}
 	
 	public VPPPlanSummaryPage clickOnNewAddIcon(){
     	 
     	 validateNew(addPlanButton);
-    	 addPlanButton.click();
+    	 jsClickNew(addPlanButton);
  		try {
  			Thread.sleep(4000);
  		} catch (InterruptedException e) {

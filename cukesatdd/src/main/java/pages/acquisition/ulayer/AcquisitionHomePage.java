@@ -780,7 +780,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	public VPPPlanSummaryPage navigateToVpp(String zipcode) {
 		CommonUtility.waitForPageLoadNew(driver, zipCodeField, 3000);
 		sendkeys(zipCodeField, zipcode);
-		viewPlansButton.click();
+		jsClickNew(viewPlansButton);
 		CommonUtility.waitForPageLoadNew(driver, vppTop, 3000);
 		if (driver.getCurrentUrl().contains("plan-summary")) {
 			return new VPPPlanSummaryPage(driver);
@@ -795,7 +795,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	public VPPPlanSummaryPage enterZipcode(String zipCode, String county, String planYear) {
 		sendkeys(zipCodeField, zipCode);
-		zipCodebtn.click();
+		jsClickNew(zipCodebtn);
 		return new VPPPlanSummaryPage(driver);
 	}
 
@@ -1454,8 +1454,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	public DrugCostEstimatorPage navigateToDCEToolFromHome() throws InterruptedException {
 		validateNew(getStarted);
-		getStarted.click();
-
+		jsClickNew(getStarted);
+		waitForPageLoadSafari();
 		if (driver.getCurrentUrl().contains("health-plans/estimate-drug-costs.html"))
 			return new DrugCostEstimatorPage(driver);
 		return null;

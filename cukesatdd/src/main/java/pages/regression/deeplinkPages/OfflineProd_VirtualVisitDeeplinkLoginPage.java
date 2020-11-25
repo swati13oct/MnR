@@ -82,14 +82,6 @@ public class OfflineProd_VirtualVisitDeeplinkLoginPage extends UhcDriver {
 	public static final String Offline_PROD_AARP_DEEPLINK_URL_VirtualVisit = MRConstants.Offline_PROD_AARP_DEEPLINK_URL_VirtualVisit;
 	public static final String Offline_PROD_PCP_DEEPLINK_URL_VirtualVisit = MRConstants.Offline_PROD_PCP_DEEPLINK_URL_VirtualVisit;
 	public static final String Offline_PROD_Medica_DEEPLINK_URL_VirtualVisit = MRConstants.Offline_PROD_Medica_DEEPLINK_URL_VirtualVisit;
-	// private static String UHC_DEEPLINK_URL_VirtualVisit =
-	// MRConstants.UHC_DEEPLINK_URL_VirtualVisit;
-	// private static String AARP_DEEPLINK_URL_VirtualVisit =
-	// MRConstants.AARP_DEEPLINK_URL_VirtualVisit;
-	// private static String PCP_DEEPLINK_URL_VirtualVisit =
-	// MRConstants.PCP_DEEPLINK_URL_VirtualVisit;
-	// private static String Medica_DEEPLINK_URL_VirtualVisit =
-	// MRConstants.Medica_DEEPLINK_URL_VirtualVisit;
 
 	/* This method will open virtualVisit deep link pages */
 	public OfflineProd_VirtualVisitDeeplinkLoginPage navigateToLoginURL(String brand) {
@@ -133,75 +125,7 @@ public class OfflineProd_VirtualVisitDeeplinkLoginPage extends UhcDriver {
 	//	username.clear();
 		//password.clear();
 	}
-	/*
-	 * This method will enter user name & password public void enterusername(String
-	 * uname) { sendkeys(username, uname); }
-	 * 
-	 * public void enterpassword(String Password) { sendkeys(password, Password); }
-	 * 
-	 * Click continue & answer security question & covid page public void
-	 * clickSubmit() { signIn.click(); try { Thread.sleep(20000); } catch
-	 * (InterruptedException e1) { // TODO Auto-generated catch block
-	 * e1.printStackTrace(); } if
-	 * (driver.getCurrentUrl().contains("=securityQuestion")) {
-	 * System.out.println("Landed on security question page...");
-	 * 
-	 * ConfirmSecurityQuestion cs = new ConfirmSecurityQuestion(driver); try {
-	 * cs.enterValidSecurityAnswer(); System.out.println(driver.getCurrentUrl());
-	 * System.out.println("Check to see if document.readyState is ready...");
-	 * CommonUtility.checkPageIsReadyNew(driver); } catch (Exception e) { // TODO
-	 * Auto-generated catch block e.printStackTrace(); }
-	 * 
-	 * //note: do not remove wait, need to give it enough time for the dashboard or
-	 * error page to load System.out.
-	 * println("Start to wait for the dashboard (or some form of error page) to load..."
-	 * );
-	 * 
-	 * try { CommonUtility.checkPageIsReadyNew(driver); } catch
-	 * (NullPointerException e) { System.out.
-	 * println("Sometimes may get NPE due to timing issue, give it one more try before giving up"
-	 * ); CommonUtility.checkPageIsReadyNew(driver); }
-	 * CommonUtility.checkPageIsReadyNew(driver); if
-	 * (MRScenario.environment.equalsIgnoreCase("stage") ||
-	 * MRScenario.environment.equalsIgnoreCase("offline") ||
-	 * MRScenario.environment.equalsIgnoreCase("prod") ||
-	 * MRScenario.environment.equalsIgnoreCase("team-h")) {
-	 * CommonUtility.checkPageIsReadyNew(driver); try { System.out.
-	 * println("Waiting for continue button of banner page as banner doesn't appear everytime"
-	 * ); CommonUtility.waitForPageLoad(driver, homePageNotice, 10); } catch
-	 * (Exception e) { System.out.println("Catch block with no significance"); } if
-	 * (driver.getCurrentUrl().contains("bannerpopup.html")) {
-	 * System.out.println("COVID 19 Banner page has appeared"); try {
-	 * CommonUtility.waitForPageLoad(driver, homePageNotice, 20); if
-	 * (validate(homePageNotice, 0)) { homePageNotice.click();
-	 * CommonUtility.checkPageIsReady(driver); } else if (validate(homePageNotice2,
-	 * 0)) { homePageNotice2.click(); CommonUtility.checkPageIsReady(driver); } else
-	 * if (validate(homePageNotice3, 0)) { homePageNotice3.click();
-	 * CommonUtility.checkPageIsReady(driver); }
-	 * 
-	 * Thread.sleep(3000); } catch (Exception e) { // TODO Auto-generated catch
-	 * block System.out.println("Catch block"); } } else {
-	 * System.out.println("COVID 19 Banner page did not appear"); try {
-	 * Thread.sleep(15000); } catch (InterruptedException e) { // TODO
-	 * Auto-generated catch block e.printStackTrace(); }
-	 * System.out.println(driver.getCurrentUrl()); } if
-	 * (driver.getCurrentUrl().contains("/no-email.html")) {
-	 * System.out.println("No email page has appeared"); try {
-	 * CommonUtility.waitForPageLoad(driver, homePageNotice4, 20); if
-	 * (validate(homePageNotice4, 0)) { homePageNotice4.click();
-	 * CommonUtility.checkPageIsReady(driver); } Thread.sleep(3000); } catch
-	 * (Exception e) { // TODO Auto-generated catch block
-	 * System.out.println("Catch block"); } } else {
-	 * System.out.println("NO emmail page did not appear"); } if
-	 * (driver.getCurrentUrl().contains("/anoc.html")) {
-	 * System.out.println("annual notice of changes page has appeared"); if
-	 * (validate(homePageNotice, 0)) { homePageNotice.click();
-	 * CommonUtility.checkPageIsReady(driver); } } else {
-	 * System.out.println("annual notice of changes page did not appear"); }
-	 * 
-	 * return; }}}
-	 */
-
+	
 	/**
 	 * For iPerception Model
 	 * 
