@@ -112,10 +112,12 @@ public class CostBasicsPage extends GlobalWebElements {
 
 	public void navigatesToMedicareSaving() {
 		
+		CommonUtility.checkPageIsReadyNew(driver);
 		WebElement lnkSavings=driver.findElement(By.xpath("//a[contains(text(),'Find out if you qualify for a Medicare Savings Pro')]"));
 		validateNew(lnkSavings);
 		switchToNewTabNew(lnkSavings);		
 		CommonUtility.checkPageIsReadyNew(driver);
+		sleepBySec(5);
 		String urlCheck="https://www.medicare.gov/your-medicare-costs/get-help-paying-costs/medicare-savings-programs";
 		System.out.println("Expected URL: "+urlCheck);
 		System.out.println("Actual   URL: "+driver.getCurrentUrl());
@@ -129,5 +131,13 @@ public class CostBasicsPage extends GlobalWebElements {
 		driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
 
 	}		
+	public void sleepBySec(int sec) {
+		try {
+			Thread.sleep(sec*1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 
 }
