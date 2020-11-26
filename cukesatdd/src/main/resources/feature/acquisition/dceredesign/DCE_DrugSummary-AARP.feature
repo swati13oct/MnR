@@ -358,8 +358,7 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
       
       
      @dcecovereduncoveredDrugSummayPage @F531892
-     Scenario Outline: To verify drug pricing modal popup for covered/noncovered drug for DSNP on drug summary page 
-     
+     Scenario Outline: To verify drug pricing modal popup for covered/noncovered drug for DSNP on drug summary page  
      Given the user is on the AARP medicare site landing page
     When I access the acquisition DCE tool from home page
     Then the user validates Get Started Page
@@ -417,14 +416,17 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
       | zipCode | drug1   | drugName1                     | 
       |   10001 | Lipitor | atorvastatin calcium TAB 20MG |
       
-      @dceRedesignChangePharmacyDetailsPage
-       Scenario Outline: Test to verify change pharmacy functionality from Drug details page
+
+      @dceRedesignNoPrescriptionChangePharmacy
+       Scenario Outline: Test to verify change pharmacy functionality from plan card when no drug prescription
     Given the user is on the AARP medicare site landing page
     When I access the acquisition DCE tool from home page
     Then the user validates Get Started Page
     When the user clicks on Add drugs button
     Then the user searches and adds the following Drug to Drug List
       | DrugName | <drug1> |
+    Then the user searches and adds the following Drug to Drug List
+      | DrugName | <drug2> |
     And clicks on Review drug cost button
     Then user should be navigated to zipcode and plan year capture page for AEP
     When user enters valid zipcode and county
@@ -439,15 +441,13 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
     And user verify change pharmacy modal
     When user saves and updates pharmacy from list
     Then the pharmacy name should be updated on summary page
-    Then user clicks on change pharmacy link from summary page
-    And user clicks on change pharmacy link on alert message from summary page 
-     #And user verify change pharmacy modal
-    #When user saves and updates "walgreens" from list 
-    #Then the pharmacy name should be updated on summary page
+    And user clicks on change pharmacy link on alert message from plan card on drug summary page
+    Then change pharmacy modal should be displayed
+    And user verify change pharmacy modal
 
     Examples: 
-      | pageName                   | drug1 | zipCode |
-      | DCE Redesign - Get Started | Lipitor  |   78006 |
+      | pageName                   | drug1    |drug2      | zipCode |
+      | DCE Redesign - Get Started | Emsam  |   Lipitor   |78006 |
       
       @dCERedesign_ChangePharmacyModal_AARP @F426569 @F535368
   Scenario Outline: Test to verify sort, pagination, invalid zipcode error functionality for change pharmacy on drug summary page

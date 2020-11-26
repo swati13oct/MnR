@@ -898,7 +898,17 @@ public class DrugSummaryPage extends UhcDriver {
 		distance.selectByVisibleText(distanceValue);
 	}
 	
+	@FindBy(xpath = "//*[@id='changePharmacyLink0']")
+	public WebElement changePharmacyAltMsg;
+	
+	public void clickChangePharmacyFromAltMsg() {
+		waitforElement(changePharmacyAltMsg);
+		validate(changePharmacyAltMsg);
+		changePharmacyAltMsg.click();
+		}		
+	
 	public void clickViewPlanDetails(String planName) {
 		driver.findElement(By.xpath("//*[@class='uhc-card__header']//h4[contains(text(),'"+planName+"')]//../../following-sibling::div//*[text()='View Plan Details']")).click();
 	}
+
 }
