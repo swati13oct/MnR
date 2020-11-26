@@ -14,24 +14,25 @@ Feature:1.08 UAT-Site Search Flows
         |NewSearchValue|<newsearchvalue>|
    Then the user validates pagination and results displayed
    
-  @SiteSearchAARP   
+  @SiteSearch_AARP   
      Examples: 
-      |site | searchValue |newsearchvalue|
-      |AARP  | Medicare    |Pharmacy|
-      |AARP  |Medicare|MEDICARE PART D CLAIM FORM(PDF)|
-      |AARP |Dental coverage| Drug cost estimator|
+     |Scenario           |site | searchValue |newsearchvalue|
+     |E2E Scenario 1_AMP |AARP  | Medicare    |Pharmacy|
+     |E2E Scenario 1_AMP  |AARP  |Medicare|MEDICARE PART D CLAIM FORM(PDF)|
+     |E2E Scenario 1_AMP  |AARP |Dental coverage| Drug cost estimator|
       
-  @SiteSearchUHC 
+  @SiteSearch_UHC 
      Examples: 
-      |site | searchValue |newsearchvalue|
-      |UHC  | Medicare    |Pharmacy|
-      |UHC  |Medicare|MEDICARE PART D CLAIM FORM(PDF)|
-      |UHC  |Dental coverage| Drug cost estimator|
+     |Scenario            |site | searchValue |newsearchvalue|
+     |E2E Scenario 1_UMS  |UHC  | Medicare    |Pharmacy|
+     |E2E Scenario 1_UMS  |UHC  |Medicare|MEDICARE PART D CLAIM FORM(PDF)|
+     |E2E Scenario 1_UMS  |UHC  |Dental coverage| Drug cost estimator|
       
       
   @SiteSearchULayer @UATRegression
  Scenario Outline: <Scenario>: Verify Error handling on Homepage
     Given the user is on medicare acquisition site landing page
+    |Site| <site>|
    Then the user enter the searchValue in the search text box and hits enter
        |search Value|<searchValue>| 
    Then the user clear secondary search box and insert new search value
@@ -39,15 +40,24 @@ Feature:1.08 UAT-Site Search Flows
    Then the user validates Error message
    |Error|<Error>|
    |NewSearchValue|<NewSearchValue>|
+   
+   @SiteSearch_AARP  
     Examples: 
-    | searchValue |Error | NewSearchValue| 
-  	|   Medicare  |Empty	  | |
-    |Medicare|InvalidCharacter|medicareeee|  
-    |Medicare|InvalidCharacter|ggahjkllllllllllllllllllllllllllllllllllllllllllljjjjjjjjjjjjjjjjjjjjjjjjjj|
-    |Medicare|InvalidCharacter|Unicorn|
+   |Scenario          | site|searchValue |Error | NewSearchValue| 
+   |E2E Scenario 1_AMP| AARP|  Medicare  |Empty	  | |
+   |E2E Scenario 1_AMP|AARP| Medicare|InvalidCharacter|medicareeee|  
+   |E2E Scenario 1_AMP |AARP| Medicare|InvalidCharacter|ggahjkllllllllllllllllllllllllllllllllllllllllllljjjjjjjjjjjjjjjjjjjjjjjjjj|
+   |E2E Scenario 1_AMP |AARP| Medicare|InvalidCharacter|Unicorn|
     
-     
- @SiteSearchULayer @UATRegressionthird
+   @SiteSearch_UHC  
+    Examples: 
+   |Scenario          | site|searchValue |Error | NewSearchValue| 
+   |E2E Scenario 1_UMS| UHC|  Medicare  |Empty	  | |
+   |E2E Scenario 1_UMS|UHC| Medicare|InvalidCharacter|medicareeee|  
+   |E2E Scenario 1_UMS |UHC| Medicare|InvalidCharacter|ggahjkllllllllllllllllllllllllllllllllllllllllllljjjjjjjjjjjjjjjjjjjjjjjjjj|
+   |E2E Scenario 1_UMS |UHC| Medicare|InvalidCharacter|Unicorn| 
+ 
+ @SiteSearchULayer @UATRegression
  Scenario Outline: <Scenario> : Verify provider search third party URL from homepage
    Given the user is on medicare acquisition site landing page
    	|Site| <site>|
@@ -57,19 +67,19 @@ Feature:1.08 UAT-Site Search Flows
    Then the user validates the "<url>"  
    
       
- @SiteSearchAARP
+ @SiteSearch_AARP
     Examples: 
    |Scenario  					|	site| searchValue         |url|
    | E2E Scenario 3_AMP | AARP | Provider search    |https://connect.werally.com/county-plan-selection/uhc.mnr/zip|
       
       
-  @SiteSearchUHC
+  @SiteSearch_UHC
     Examples: 
    |Scenario           |site| searchValue        |url|
    |E2E Scenario 3_UMS |UHC | Provider search    |https://connect.werally.com/county-plan-selection/uhc.mnr/zip|
     
      
-@SiteSearchULayer
+@SiteSearchULayer @UATRegression
  Scenario Outline: <Scenario> : Verify search results on VPP page
     Given the user is on medicare acquisition site landing page
      	|Site| <site>|
@@ -77,59 +87,33 @@ Feature:1.08 UAT-Site Search Flows
       | Zip Code        | <zipcode>         |
       | County Name     | <county>          |
       | Is Multi County | <isMultutiCounty> |
-    Then user is on View Plan and Pricing page
-    And the user views the plans of the below MA plantype
+    And the user views the plans of the below plan type
       | Plan Type | <plantype> |
+    Then the user navigates to the plan details page
+      | Plan Name | <planName> |
     Then the user enter the searchValue in the search text box and hits enter
        |search Value|<searchValue>|  
-    #Then user validates the URL for search header  
-    Then the user is able to see pagination based on number of search results
-    And user is able to see pagination based on number of search results
-    When user is on Pagination page 1 
-    Then the user is on the first page of pagination and page count is greater than 1
-    And the next arrow is clickable for next page pagination
-    #And search result fetches .pdf extension when on pagination page 1  
-    When user is on Pagination page 2, Count of result fetched is  < 30 
-    When user is on Pagination page 2, Count of result fetched is  >=30  
-    Then  user is on the second page of pagination and page count is greater than 2 
-    And the previous arrow and next arrow are clickable for previous page and next page pagination
-    And the user is on the second page of pagination and page count is equal to 2
-    #And search result fetches .pdf extension when on pagination page 2
-    When user is on Pagination page 3, Count of result fetched is  < 45 
-    When user is on Pagination page 3, Count of result fetched is  >=45
-    And the user is on the third page of pagination and page count is greater than 3
-    Then the previous arrow and next arrow are clickable for previous page and next page pagination
-    And the user is on the third page of pagination and page count is equal to 3
-    #And search result fetches .pdf extension when on pagination page 3
-    When user is on Pagination page 4, Count of result fetched is < 50
-    When user is on Pagination page 4, Count of result fetched is =50
-    And the user is on the fourth page of pagination and page count is equal to 4
-    And the previous arrow is clickable for previous page  pagination
-    #And search result fetches .pdf extension when on pagination page 4
-    #Then the user can click on search results link and is being redirected to appropriate page within the same portal
-    Then the user is able to go back to search results page on clicking browser back page button
-    And the user is able to click on Search icon without entering any search term as blank
-    And the user should be able to click on OK button to continue browsing
+    Then the user should see fifteen results before pagination
+    Then the user validates pagination and results displayed
+    Then the user validates the secondary search by providing newsearchvalue in the text box
+        |NewSearchValue|<newsearchvalue>|
+    Then the user validates pagination and results displayed
     
-    
-   
-    And the user can click on Heart icon
-    Then the user Clicks on Sign in link
-    
-@SiteSearchAARP
+             
+@SiteSearch_AARP
 Examples:
-|site| TID   | zipcode | isMultutiCounty | county                        | plantype       | planName                                           |searchValue |newsearchvalue|
-|AARP|15652 |   19019 | No              | Philadelphia County           | MAPD            | AARP Medicare Advantage Choice Plan 2 (PPO)        |Medicare    |pharmacy|
+|Scenario             |site| TID  | zipcode | isMultutiCounty | county                        | plantype       | planName                                           |searchValue |newsearchvalue|
+|E2E Scenario 3_AMP 	|AARP|15652 |   19019 | No              | Philadelphia County           | MAPD           | AARP Medicare Advantage Choice Plan 2 (PPO)        |Medicare    |pharmacy|
 
 
-@SiteSearchUHC
+@SiteSearch_UHC
 Examples:
-|site| TID   | zipcode | isMultutiCounty | county                        | plantype        | planName                                           |searchValue |newsearchvalue|
-|UHC|15652 |   19019 | No              | Philadelphia County           | MAPD            | AARP Medicare Advantage Choice Plan 2 (PPO)        |Medicare    |pharmacy|
+|Scenario             |site| TID | zipcode | isMultutiCounty | county                      | plantype        | planName                                           |searchValue |newsearchvalue|
+|E2E Scenario 3_UMS 	|UHC|15652 |   19019 | No              | Philadelphia County         | MAPD            | AARP Medicare Advantage Choice Plan 2 (PPO)        |Medicare    |pharmacy|
 
      
     
-   @SiteSearchULayer @UATRegressionError
+@SiteSearchULayer @UATRegression
  Scenario Outline: <Scenario> : To verify Errorhandling on VPP page
    Given the user is on medicare acquisition site landing page
    	|Site| <site>|
@@ -137,9 +121,10 @@ Examples:
       | Zip Code        | <zipcode>         |
       | County Name     | <county>          |
       | Is Multi County | <isMultutiCounty> |
-    Then user is on View Plan and Pricing page
-    And the user views the plans of the below MA plantype
+  And the user views the plans of the below plan type
       | Plan Type | <plantype> |
+    Then the user navigates to the plan details page
+      | Plan Name | <planName> |
     Then the user enter the searchValue in the search text box and hits enter
        |search Value|<searchValue>| 
    Then the user clear secondary search box and insert new search value
@@ -148,26 +133,26 @@ Examples:
    |Error|<Error>|
    |NewSearchValue|<NewSearchValue>|
    
-   @SiteSearchAARP
-    Examples: 
-    |Scenario             | site|searchValue |Error      | NewSearchValue| 
-    |E2E Scenario 3_AMP 	| AARP|  Medicare  |Empty	    |            |
-   |E2E Scenario 3_AMP   |AARP|Medicare|InvalidCharacter|medicareeee|  
-   |E2E Scenario 3_AMP   |AARP|Medicare|InvalidCharacter|ggahjksabdegfhijkalalamnpqrajjjjkkkrrasabdabatuvyazefghijakmnpqttttvwyzabde|
-   |E2E Scenario 3_AMP  |AARP|Medicare|InvalidCharacter|Unicorn|
-   |E2E Scenario 3_AMP  |AARP|Medicare|InvalidCharacter|plan25|
-    
-    @SiteSearchUHC
+   @SiteSearch_AARP
+     Examples: 
+    |Scenario             | site| TID   | zipcode | isMultutiCounty | county                        | plantype       | planName|searchValue |Error      | NewSearchValue| 
+    |E2E Scenario 3_AMP 	| AARP| 15652 |   19019 | No              | Philadelphia County           | MAPD            | AARP Medicare Advantage Choice Plan 2 (PPO)        |Medicare    | Empty  |	    |           
+    |E2E Scenario 3_AMP 	| AARP| 15652 |   19019 | No              | Philadelphia County           | MAPD            | AARP Medicare Advantage Choice Plan 2 (PPO)        |Medicare|InvalidCharacter|medicareeee| 
+    |E2E Scenario 3_AMP 	| AARP| 15652 |   19019 | No              | Philadelphia County           | MAPD            | AARP Medicare Advantage Choice Plan 2 (PPO)        |Medicare|InvalidCharacter|ggahjksabdegfhijkalalamnpqrajjjjkkkrrasabdabatuvyazefghijakmnpqttttvwyzabde|
+    |E2E Scenario 3_AMP 	| AARP| 15652 |   19019 | No              | Philadelphia County           | MAPD            | AARP Medicare Advantage Choice Plan 2 (PPO)        |Medicare|InvalidCharacter|Unicorn|
+    |E2E Scenario 3_AMP 	| AARP| 15652 |   19019 | No              | Philadelphia County           | MAPD            | AARP Medicare Advantage Choice Plan 2 (PPO)        |Medicare|InvalidCharacter|plan25|
+
+   @SiteSearch_UHC
     Examples:
-   |Scenario              | site|searchValue |Error      | NewSearchValue| 
-   |E2E Scenario 3_UMS 	  |UHC  |Medicare    |Empty	      |            |
-   |E2E Scenario 3_UMS    |UHC  |Medicare    |InvalidCharacter|medicareeee|  
-   |E2E Scenario 3_UMS    |UHC  |Medicare    |InvalidCharacter|ggahjksabdegfhijkalalamnpqrajjjjkkkrrasabdabatuvyazefghijakmnpqttttvwyzabde|
-   |E2E Scenario 3_UMS    |UHC  |Medicare    |InvalidCharacter|Unicorn|
-   |E2E Scenario 3_UMS    |UHC  |Medicare    |InvalidCharacter|plan25|
+   |Scenario              | site| TID   | zipcode | isMultutiCounty | county                        | plantype        | planName                                    |searchValue |Error           | NewSearchValue| 
+   |E2E Scenario 3_UMS 	  |UHC  | 15652 |   19019 | No              | Philadelphia County           | MAPD            | AARP Medicare Advantage Choice Plan 2 (PPO) |Medicare    |	Empty         |               |
+   |E2E Scenario 3_UMS    |UHC  |15652 |   19019 | No              | Philadelphia County           | MAPD            | AARP Medicare Advantage Choice Plan 2 (PPO) |Medicare     |InvalidCharacter|medicareeee|  
+   |E2E Scenario 3_UMS    |UHC  |15652 |   19019 | No              | Philadelphia County           | MAPD            | AARP Medicare Advantage Choice Plan 2 (PPO) | Medicare    |InvalidCharacter|ggahjksabdegfhijkalalamnpqrajjjjkkkrrasabdabatuvyazefghijakmnpqttttvwyzabde|
+   |E2E Scenario 3_UMS    |UHC  |15652 |   19019 | No              | Philadelphia County           | MAPD            | AARP Medicare Advantage Choice Plan 2 (PPO) | Medicare    |InvalidCharacter|Unicorn|
+   |E2E Scenario 3_UMS    |UHC  |15652 |   19019 | No              | Philadelphia County           | MAPD            | AARP Medicare Advantage Choice Plan 2 (PPO) | Medicare    |InvalidCharacter|plan25|
     
   
- @SiteSearchULayer @UATRegressionthird
+@SiteSearchULayer @UATRegression
  Scenario Outline: <Scenario> : To verify provider search third party URL on VPP Page
     Given the user is on medicare acquisition site landing page
      	|Site| <site>|
@@ -175,25 +160,24 @@ Examples:
       | Zip Code        | <zipcode>         |
       | County Name     | <county>          |
       | Is Multi County | <isMultutiCounty> |
-    Then user is on View Plan and Pricing page
-    And the user views the plans of the below MA plantype
-      | Plan Type | <plantype> |
+    Then the user views the plans of the below plan type
+         | Plan Type | <plantype> |
     Then the user enter the searchValue in the search text box and hits enter
        |search Value|<searchValue>|  
    Then the user clicks on the united health care medicare solutions link
    Then the user validates the "<url>"  
    
       
- @SiteSearchAARP
+ @SiteSearch_AARP
     Examples: 
-   |Scenario  					|	site| searchValue         |url|
-   | E2E Scenario 3_AMP | AARP | Provider search    |https://connect.werally.com/county-plan-selection/uhc.mnr/zip|
+   |Scenario  					|	site| TID   | zipcode | isMultutiCounty | county                        | plantype       | planName|searchValue         |url|
+   | E2E Scenario 3_AMP | AARP| 15652 |   19019 | No              | Philadelphia County           | MAPD            | AARP Medicare Advantage Choice Plan 2 (PPO)     | Provider search    |https://connect.werally.com/county-plan-selection/uhc.mnr/zip|
       
       
-  @SiteSearchUHC
+  @SiteSearch_UHC
     Examples: 
-   |Scenario           |site| searchValue        |url|
-   |E2E Scenario 3_UMS |UHC | Provider search    |https://connect.werally.com/county-plan-selection/uhc.mnr/zip|
+   |Scenario           |site|TID   | zipcode | isMultutiCounty | county                        | plantype       | planName| searchValue        |url|
+   |E2E Scenario 3_UMS |UHC |15652 |   19019 | No              | Philadelphia County           | MAPD            | AARP Medicare Advantage Choice Plan 2 (PPO)    | Provider search    |https://connect.werally.com/county-plan-selection/uhc.mnr/zip|
     
 
 

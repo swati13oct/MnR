@@ -3080,10 +3080,10 @@ public class VppStepDefinitionUpdatedAARP {
 //	}
 //
 //	@Then("^the user validates count of results aganist the total shown at top of the page$")
-//	public void the_user_validates_count_of_results_aganist_the_total_shown_at_top_of_the_page() throws Throwable {
+//public void the_user_validates_count_of_results_aganist_the_total_shown_at_top_of_the_page() throws Throwable {
 //		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
-//				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-//		aquisitionhomepage.validateCountResults();
+//			.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+//	aquisitionhomepage.validateCountResults();
 //	}
 //
 //	@Then("^the user validates pagination and results displayed$")
@@ -3955,9 +3955,8 @@ public class VppStepDefinitionUpdatedAARP {
 		}
 
 	
-//
-	
-	
 	}
+	
+	
 
 }

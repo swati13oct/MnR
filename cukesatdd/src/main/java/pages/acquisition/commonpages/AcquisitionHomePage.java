@@ -2545,6 +2545,25 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			
 		}
 		
+		public void validateCountResults() {
+			System.out.println("@@@inside count results validation@@");
+			String SearchResultsCountUI = SearchResultsCount.getText();
+			System.out.println("SearchResultsCountUI" + SearchResultsCountUI);
+
+			String[] arr = SearchResultsCountUI.split("\\s+");
+			String expectedCount = arr[3];
+			System.out.println("Expected count from UI" + expectedCount);
+			String SearchResultsCountAttribute = SearchResultsCount.getAttribute("dtmname");
+			System.out.println("SearchResultsCountAttribute" + SearchResultsCountAttribute);
+			String[] arr1 = SearchResultsCountAttribute.split("\\s+");
+			String expectedCountfromAttribute = arr1[0];
+			System.out.println("Expected Count from Attribute" + expectedCountfromAttribute);
+			Assert.assertEquals(expectedCount, expectedCountfromAttribute);
+			System.out.println("check");
+
+		}
+
+		
 		public void validatePaginationofSearchResults() {
 			System.out.println("Inside the pagination validation@@@@");
 			int sizeofpages = driver.findElements(By.xpath("//*[@class='pagination']/li/a")).size();
@@ -2844,4 +2863,6 @@ public class AcquisitionHomePage extends GlobalWebElements {
 				assertTrue(true);
 			}
 		}
+		
+		
 }
