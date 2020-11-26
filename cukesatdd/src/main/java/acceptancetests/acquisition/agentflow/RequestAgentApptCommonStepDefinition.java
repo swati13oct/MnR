@@ -131,17 +131,17 @@ public class RequestAgentApptCommonStepDefinition {
 	}
 
 	
-	@Then("^the user click on Request more Information$")
-	public void click_on_Request_more_information() throws Throwable {
-		AcquisitionHomePage requestAgentAppointmentPage = (AcquisitionHomePage)getLoginScenario().getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		RequestHelpAndInformationPage ContactusPage =requestAgentAppointmentPage.RequestLinkOnShopPlan();
-	//	RequestAgentAppointmentPage ContactusPage = requestAgentAppointmentPage.RequestLinkOnShopPlan();
-		if (ContactusPage != null)
-			getLoginScenario().saveBean(PageConstants.REQUEST_MORE_HELP_INFORMATION_PAGE, ContactusPage);
-		else
-			System.out.println("Error in loading requestAgentAppointmentPage");
-	}
-	
+//	@Then("^the user click on Request more Information$")
+//	public void click_on_Request_more_information() throws Throwable {
+//		AcquisitionHomePage requestAgentAppointmentPage = (AcquisitionHomePage)getLoginScenario().getBean(PageConstants.ACQUISITION_HOME_PAGE);
+//		RequestHelpAndInformationPage ContactusPage =requestAgentAppointmentPage.RequestLinkOnShopPlan();
+//	//	RequestAgentAppointmentPage ContactusPage = requestAgentAppointmentPage.RequestLinkOnShopPlan();
+//		if (ContactusPage != null)
+//			getLoginScenario().saveBean(PageConstants.REQUEST_MORE_HELP_INFORMATION_PAGE, ContactusPage);
+//		else
+//			System.out.println("Error in loading requestAgentAppointmentPage");
+//	}
+//	
 	@When("^the user clicks on Agent link and validates the correct URL is loaded from Med Ed Page$")
 	public void User_navigate_EBRC_Links_from_MedEd(DataTable arg1) throws InterruptedException {
 		Map<String, String> inputAttributesMap=parseInputArguments(arg1);
@@ -155,4 +155,5 @@ public class RequestAgentApptCommonStepDefinition {
 			Assert.fail("Error in loading the UHC Agent Page");
 	}
 	
+}
 

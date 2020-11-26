@@ -406,11 +406,6 @@ public class GlobalComponentsCommonStepDefinition {
 
 
 
-}
-
-
-
-
 	  @Then("^user select state for geotargeting from global footer of the Medicare Plans All page$")
 	  public void user_select_state_for_geotargeting(){
 		  LearnAboutMedicareHomePage learnAboutMedicareHomePage= (LearnAboutMedicareHomePage)getLoginScenario() .getBean(PageConstants.LEARN_ABOUT_MEDICARE_PAGE);

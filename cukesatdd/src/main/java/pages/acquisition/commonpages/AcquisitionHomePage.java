@@ -2704,16 +2704,16 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		}
 
 		
-		public RequestHelpAndInformationPage RequestLinkOnShopPlan() throws Exception {
-			//Thread.sleep(4000);
-			if (validate(RequestMoreInformationLink)) {
-				waitforElement(RequestMoreInformationLink);
-				System.out.println("Contact Us Page is Displayed");
-				return new RequestHelpAndInformationPage(driver);
-			}
-			return null;
-
-		}
+//		public RequestHelpAndInformationPage RequestLinkOnShopPlan() throws Exception {
+//			//Thread.sleep(4000);
+//			if (validate(RequestMoreInformationLink)) {
+//				waitforElement(RequestMoreInformationLink);
+//				System.out.println("Contact Us Page is Displayed");
+//				return new RequestHelpAndInformationPage(driver);
+//			}
+//			return null;
+//
+//		}
 
 		
 		public void clickonFindanAgentlinkMedsupp(String ExpectedUHCAgentURL ) {
