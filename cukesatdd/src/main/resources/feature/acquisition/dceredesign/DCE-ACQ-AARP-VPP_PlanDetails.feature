@@ -72,7 +72,7 @@ Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanDetails AARP - To test DCE - VPP Plan De
       | site | zipcode | planyear | plantype | county       | isMultutiCounty | drug1     | drug2                | drug3      | drug4         | drug5            | drug6   | planname                                                   |
       | UHC  |   78006 | current  | SNP      | Bexar County | yes             | meloxicam | diclofenac potassium | febuxostat | buprenorphine | fentanyl citrate | Lipitor | UnitedHealthcare Dual Complete Choice (Regional PPO D-SNP) |
 
-  @DCE_Redesign_DCE_Detail_to_Vpp_Details1
+  @DCE_Redesign_DCE_Detail_to_Vpp_Details
   Scenario Outline: Test to verify the Drug cost estimator and view plan summary from DCE to VPP detail page
     Given the user is on the AARP medicare site landing page
     When the user performs plan search using following information in the AARP site

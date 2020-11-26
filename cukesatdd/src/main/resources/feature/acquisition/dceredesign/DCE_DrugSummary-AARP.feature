@@ -544,14 +544,14 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
     And user should be navigated to Review drug cost estimate page
     And user should be able to see Medicare Advantage plan by default
    	When user clicks on view plan details button on drug summary page
-   	| Plan Name | <planname> |
-   	Then the user validates planName matches plan Name in VPP
+   	| Plan Name | <planName> |
+   	Then the user validates planName matches plan Name in VPP details page
     And verify the default tab displayed on VPP details page
     | TabName | <tabName> |
-    Then the user verify the drug cost estimator and view plan summary on VPP detail page in AARP
-    When the user click on drug cost estimator on vpp plan detail page in AARP
+    Then the user verify the drug cost estimator and view plan summary buttons on VPP detail page
+    When the user click on drug cost estimator button on vpp plan detail page
     Then user verify the drug summary page
 
     Examples: 
-      | path                                             | pageName                   | drug1 | zipCode |planname|
-      | health-plans/estimate-drug-costs.html/getstarted | DCE Redesign - Get Started | Lipitor  |   90210 |
+      | path                                             | pageName                   | drug1 | zipCode |planName|tabName|
+      | health-plans/estimate-drug-costs.html/getstarted | DCE Redesign - Get Started | Lipitor  |   10001|AARP Medicare Advantage Prime (HMO)|Medical Benefits and Programs|

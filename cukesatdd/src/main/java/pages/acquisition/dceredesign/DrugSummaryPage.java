@@ -81,7 +81,7 @@ public class DrugSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//button/span[text()='View Plan Details']")
 	public WebElement viewPlanDetailsBtn;
 
-	@FindBy(xpath = "//button//span[text()='Save']")
+	@FindBy(xpath = "//button//span[contains(text(),'Save')]")
 	public WebElement saveBtn;
 
 	@FindBy(xpath = "//*[@id='accordion-1-button']")
@@ -898,7 +898,7 @@ public class DrugSummaryPage extends UhcDriver {
 		distance.selectByVisibleText(distanceValue);
 	}
 	
-	public void clickViewPlanDetails() {
-		viewPlanDetailsBtn.click();
+	public void clickViewPlanDetails(String planName) {
+		driver.findElement(By.xpath("//*[@class='uhc-card__header']//h4[contains(text(),'"+planName+"')]//../../following-sibling::div//*[text()='View Plan Details']")).click();
 	}
 }

@@ -1016,7 +1016,7 @@ public class DCEStepDefinitionAARP {
 	@When("^user should be able to see Medicare Advantage plan by default$")
 	public void user_should_be_able_to_see_Medicare_Advantage_plan_by_default() throws Throwable {
 		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
-		// drugSummaryPage.verifyDefaultPlanType();
+		//drugSummaryPage.verifyDefaultPlanType();
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
 	}
 
@@ -2148,9 +2148,38 @@ public class DCEStepDefinitionAARP {
 	}
 	
 	@When("^user clicks on view plan details button on drug summary page$")
-	public void user_clicks_on_view_plan_details_button_on_drug_summary_page(){
+	public void user_clicks_on_view_plan_details_button_on_drug_summary_page(DataTable attributes){
+		List<DataTableRow> memberAttributesRow = attributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		String planName = memberAttributesMap.get("Plan Name");
 		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
-		drugSummaryPage.clickViewPlanDetails();
-		//getLoginScenario().saveBean(VPPCommonConstants.PLAN_NAME, planName);
+		drugSummaryPage.clickViewPlanDetails(planName);
+		System.out.println(planName);
+		getLoginScenario().saveBean(VPPCommonConstants.PLAN_NAME, planName);
+		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
+	}
+	
+	@Then("^the user validates planName matches plan Name in VPP details page$")
+	public void the_user_validates_planName_matches_plan_Name_in_VPP_details_page() throws Throwable {
+		PlanDetailsPage planDetails=new PlanDetailsPage(driver);
+		String PlanName = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_NAME);
+		planDetails.validatePlanNameVPPDetails(PlanName);
+	}
+	
+	@Then("^the user verify the drug cost estimator and view plan summary buttons on VPP detail page$")
+	public void the_user_verify_the_drug_cost_estimator_and_VPP_buttons()  {
+		PlanDetailsPage planDetails=new PlanDetailsPage(driver);
+		planDetails.validateBackToDceAndBackToVPPButton();
+	}
+	
+	@Then("^the user click on drug cost estimator button on vpp plan detail page$")
+	public void the_user_click_on_drug_cost_estimator_button_on_vpp_details_page() throws Throwable {
+		PlanDetailsPage planDetails=new PlanDetailsPage(driver);
+		planDetails.clickOnBacktoDrugCostEstBtn();
 	}
 }

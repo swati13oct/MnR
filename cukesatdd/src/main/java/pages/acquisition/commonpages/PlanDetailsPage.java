@@ -324,6 +324,12 @@ public class PlanDetailsPage extends UhcDriver {
 	
 	@FindBy(xpath = "//*[contains(@class,'currentpharmacy')]//*[contains(@ng-show,'pharmacyName') and contains(@class,'ng-binding')]")
 	private WebElement pharmacyPrescriptionDrugTab;
+	
+	@FindBy(xpath = "//button[@ng-click='backToDceDrugDetailsOrSummary()']")
+	public WebElement backtoDrugEstBtn;
+
+	@FindBy(xpath = "//button[@ng-click='backToPlanSummary()']")
+	public WebElement backtoVPPSummaryBtn;
 
 	public WebElement getLnkEnterDrugInformation() {
 		return lnkEnterDrugInformation;
@@ -1414,5 +1420,26 @@ public class PlanDetailsPage extends UhcDriver {
 		public void validateDefaultTab(String tabName) {
 			validateNew(defaultSelectedTab);
 			Assert.assertTrue("Default tab "+tabName+" not displayed", defaultSelectedTab.getText().equals(tabName));
+		}
+		
+		public void validatePlanNameVPPDetails(String planName) {
+
+			System.out.println("Plan Name : " + planName);
+			WebElement PlanNameElement = driver.findElement(By.xpath("//h2[contains(text(), '" + planName + "')]"));
+			if (validateNew(PlanNameElement)) {
+				Assert.assertTrue("Plan Name is correct for VPP Details Page" + PlanNameElement.getText(), true);
+			} else
+				Assert.fail("Plan Name validation Failed for VPP Details Page");
+		}
+		
+		
+		public void validateBackToDceAndBackToVPPButton() {
+			validateNew(backtoDrugEstBtn);
+			validateNew(backtoVPPSummaryBtn);
+		}
+		
+		public void clickOnBacktoDrugCostEstBtn() {
+			validateNew(backtoDrugEstBtn);
+			backtoDrugEstBtn.click();
 		}
 }
