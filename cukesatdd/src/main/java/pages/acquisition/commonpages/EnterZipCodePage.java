@@ -16,13 +16,16 @@ import pages.acquisition.commonpages.PageTitleConstants;
 
 public class EnterZipCodePage extends UhcDriver {
 
-	@FindBy(xpath = "//form[contains(@class,'zipForm')]")
+	//@FindBy(xpath = "//form[contains(@class,'zipForm')]")
+	@FindBy(xpath = "//form[contains(@class,'zip-form')]")
 	List<WebElement> zipForm;
 
-	@FindBy(xpath = "(//form[contains(@class,'zipForm')]//input[contains(@class,'zip-input')])")
+	//@FindBy(xpath = "(//form[contains(@class,'zipForm')]//input[contains(@class,'zip-input')])")
+	@FindBy(xpath = "(//form[contains(@class,'zip-form')]//input)[2]")
 	List<WebElement> ZipCodeText;
 
-	@FindBy(xpath = "(//form[contains(@class,'zipForm')]//button[contains(@class,'uhc-zip-button')])")
+	//@FindBy(xpath = "(//form[contains(@class,'zipForm')]//button[contains(@class,'uhc-zip-button')])")
+	@FindBy(xpath = "(//form[contains(@class,'zip-form')]//button[contains(@class,'zip-button')])[2]")
 	List<WebElement> ZipcodeButton;
 
 	@FindBy(xpath = "//li[@class='expandable'][1]")

@@ -21,6 +21,7 @@ import pages.acquisition.dceredesign.ZipCodePlanYearCapturePage;
 import pages.acquisition.commonpages.AcquisitionHomePage;
 import pages.acquisition.commonpages.ComparePlansPage;
 import pages.acquisition.commonpages.PlanDetailsPage;
+import pages.acquisition.commonpages.PrescriptionsProvidersBenefitsPage;
 import pages.acquisition.commonpages.VPPPlanSummaryPage;
 import pages.acquisition.commonpages.VisitorProfilePage;
 import acceptancetests.acquisition.vpp.VPPCommonConstants;
@@ -1520,7 +1521,28 @@ public class DCEStepDefinitionAARP {
 		getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
 
 	}
+	@Then("the user click on return to MEdEd page from Get Started Page")
+	public void user_click_to_return_to_MedEd_page(){
+		GetStartedPage getStartedPage = (GetStartedPage) getLoginScenario().
+				getBean(PageConstants.DCE_Redesign_GetStarted);
+		
+		PrescriptionsProvidersBenefitsPage benefitsPage= getStartedPage.clickReturnToAcqHomePAge();
+		if (null != benefitsPage) {
+			getLoginScenario().saveBean(PageConstants.PRESCRIPTION_PROVIDER_BENEFITS_PAGE, benefitsPage);
+		} else
+			Assert.fail("Benefit Page not loaded");
+		
+	}
 	
-
+	@Then("^the user clicks on Estimate Drug Costs Link from Benefit Page to land on DCE Redesign$")
+	public void the_user_clicks_on_Estimate_Drug_Costs_Link_from_Benefit_page_to_land_on_DCE_Redesign() throws Throwable {
+		PrescriptionsProvidersBenefitsPage benefitsPage= (PrescriptionsProvidersBenefitsPage)getLoginScenario().getBean(PageConstants.PRESCRIPTION_PROVIDER_BENEFITS_PAGE);
+		  
+		GetStartedPage getStartedPage = benefitsPage.clickDCERedesignLinkonMedEdPage();
+		if (null != getStartedPage) {
+			getLoginScenario().saveBean(PageConstants.DCE_Redesign_GetStarted, getStartedPage);
+		} else
+			Assert.fail("DCE Redesign page object not loaded");
+	}
 	
 }

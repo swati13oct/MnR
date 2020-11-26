@@ -17,6 +17,7 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import gherkin.formatter.model.DataTableRow;
 import pages.acquisition.commonpages.AcquisitionHomePage;
+import pages.acquisition.commonpages.LearnAboutMedicareHomePage;
 import pages.acquisition.commonpages.RequestAgentAppointmentPage;
 import pages.acquisition.commonpages.RequestHelpAndInformationPage;
 import pages.acquisition.ulayer.ProviderSearchPage;
@@ -128,4 +129,17 @@ public class RequestAgentApptCommonStepDefinition {
 		
 			
 	}
+	@When("^the user clicks on Agent link and validates the correct URL is loaded from Med Ed Page$")
+	public void User_navigate_EBRC_Links_from_MedEd(DataTable arg1) throws InterruptedException {
+		Map<String, String> inputAttributesMap=parseInputArguments(arg1);
+		String myUHCAgentURL = inputAttributesMap.get("UHC Agent URL");
+		
+		LearnAboutMedicareHomePage learnAboutMedicareHomePage=(LearnAboutMedicareHomePage)getLoginScenario().getBean(PageConstants.LEARN_ABOUT_MEDICARE_PAGE);		
+		if(myUHCAgentURL!=null){
+			learnAboutMedicareHomePage.clickonFindanAgentlinkfromMedEd(myUHCAgentURL);
+			Assert.assertTrue(true);
+		}else
+			Assert.fail("Error in loading the UHC Agent Page");
+	}
+	
 }

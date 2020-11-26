@@ -448,6 +448,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "//*[contains(@id, 'piFirstName')]")
 	private WebElement registerFirstName;
 
+	@FindBy(xpath="//a[contains(text(),'Learn More')]")
+	private WebElement learnAboutMedicareHomeScreen;
+		
 
    	String ChatSamText= "Chat with a Licensed Insurance Agent";
 
@@ -2692,5 +2695,18 @@ public class AcquisitionHomePage extends GlobalWebElements {
 					Assert.fail("Visit AARP link did not lead to the right page");
 			}
 		}
-
+		
+		
+	public LearnAboutMedicareHomePage clickLearnMoreOnHomePage() {
+			
+			validateNew(learnAboutMedicareHomeScreen);
+			jsClickNew(learnAboutMedicareHomeScreen);	
+			String urlCheck=driver.getCurrentUrl();
+			if(urlCheck.contains("medicare-education.html")) {
+				return new LearnAboutMedicareHomePage(driver);
+			}
+			else{
+				return null;
+			}		
+		}
 }

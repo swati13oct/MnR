@@ -576,4 +576,11 @@ public class ProviderSearchPage extends UhcDriver {
 		}
 		
 	}
+
+	public AcquisitionHomePage returnToAcqHomePage() {
+		// TODO Auto-generated method stub
+		driver.close();
+		driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
+		return new AcquisitionHomePage(driver);
+	}
 }
