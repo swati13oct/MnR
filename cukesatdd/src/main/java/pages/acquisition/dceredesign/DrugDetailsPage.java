@@ -928,10 +928,7 @@ public class DrugDetailsPage extends UhcDriver {
 		validateNew(LinktoExitScenario);
 		jsClickNew(LinktoExitScenario);
 		CommonUtility.checkPageIsReadyNew(driver);
-		
-//		while(validate(overlayFilm, 10)) {/**wait*/}
-		//CommonUtility.waitForElementToDisappear(driver, overlayFilm, 75);
-		
+		waitForPageLoadSafari();
 		if (driver.getCurrentUrl().contains("plan-summary")) {
 			return new VPPPlanSummaryPage(driver);	
 		}
@@ -941,6 +938,7 @@ public class DrugDetailsPage extends UhcDriver {
 	public BuildYourDrugList clickOnEditDrugListLink() {
 
 		jsClickNew(editDrugListLink);
+		waitForPageLoadSafari();
 		
 		return new BuildYourDrugList(driver);
 	}
@@ -1309,6 +1307,19 @@ public class DrugDetailsPage extends UhcDriver {
 		validateNew(DrugInfoModal_CloseBtn);
 		System.out.println("Returned to Plan Compare Page - Drug Info Modal");
 		return new ComparePlansPage(driver);
+	}
+	
+	public PlanDetailsPage clickViewPlanDetailsBtn() {
+		validateNew(DrugCosts_PlanDetailsBtn);
+		jsClickNew(DrugCosts_PlanDetailsBtn);
+		waitForPageLoadSafari();
+		if (driver.getCurrentUrl().contains("details") ) {
+			System.out.println("Plan Details Page displayed ");
+			return new PlanDetailsPage(driver);
+		}
+		else {
+			return null;
+		}
 	}
 
 }
