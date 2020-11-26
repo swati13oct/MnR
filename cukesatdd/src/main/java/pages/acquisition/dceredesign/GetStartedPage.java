@@ -19,6 +19,8 @@ import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 import pages.acquisition.ulayer.PageTitleConstants;
+import pages.acquisition.commonpages.AcquisitionHomePage;
+import pages.acquisition.commonpages.PrescriptionsProvidersBenefitsPage;
 import pages.acquisition.commonpages.VPPPlanSummaryPage;
 import pages.acquisition.commonpages.VisitorProfilePage;
 
@@ -110,7 +112,15 @@ public class GetStartedPage extends UhcDriver {
 			return null;
 		}
 	}
-
 	
-
+	public PrescriptionsProvidersBenefitsPage clickReturnToAcqHomePAge() {
+		validateNew(LinktoExitScenario);
+		jsClickNew(LinktoExitScenario);
+		
+		if (driver.getCurrentUrl().contains("medicare-education")) {
+			return new PrescriptionsProvidersBenefitsPage(driver);	
+		}
+		return null;	
+		
+	}
 }
