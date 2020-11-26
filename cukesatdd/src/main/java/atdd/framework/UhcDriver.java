@@ -515,8 +515,8 @@ try {
 		CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
 		int initialCount = driver.getWindowHandles().size();
 		jsClickNew(Element);
-		waitForCountIncrement(initialCount);
 		waitForPageLoadSafari();
+		waitForCountIncrement(initialCount);
 		ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
 		String currentHandle = null;
 		for (int i = 0; i < initialCount + 1; i++) {
