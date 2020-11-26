@@ -440,10 +440,18 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "//p[contains(text(),'UnitedHealthcare Insurance Company (UnitedHealthcare)')]")
     private WebElement UHCICSubTitle;
 	
+
 	
 	
 	@FindBy(xpath = "//a[@id='aarplink']")
     private WebElement aarpLink;
+
+	@FindBy(xpath = "//*[contains(@id, 'piFirstName')]")
+	private WebElement registerFirstName;
+
+	@FindBy(xpath="//a[contains(text(),'Learn More')]")
+	private WebElement learnAboutMedicareHomeScreen;
+		
 
 	@FindBy(xpath = "//a[@id='gfn_lnk_row2_1']")
     private WebElement MedicareAdvantagePlans;
@@ -2687,6 +2695,24 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		
 		public void clickBrowserBackButton() {
 			driver.navigate().back();
+
+			//Added refresh and wait as elements are not located in Safari 13 browser after using navigate back
+			if(MRScenario.browserName.equalsIgnoreCase("Safari")) {
+				driver.navigate().refresh();
+				waitForPageLoadSafari();
+		}
+		}
+
+		
+		public RequestHelpAndInformationPage RequestLinkOnShopPlan() throws Exception {
+			//Thread.sleep(4000);
+			if (validate(RequestMoreInformationLink)) {
+				waitforElement(RequestMoreInformationLink);
+				System.out.println("Contact Us Page is Displayed");
+				return new RequestHelpAndInformationPage(driver);
+			}
+			return null;
+
 		}
 
 		
@@ -2788,6 +2814,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 				assertTrue(true);
 			}
 		}
+
 			
 			
 			
@@ -2865,4 +2892,34 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		}
 		
 		
+
+		
+		public String fetchEnvironmentUrls() {
+			if (MRScenario.environment.equals("offline")) {
+				testSiteUrl = AARP_ACQISITION_OFFLINE_PAGE_URL;
+				return testSiteUrl;
+			} else if (MRScenario.environment.equals("prod")) {
+				testSiteUrl = AARP_ACQISITION_PROD_PAGE_URL;
+				return testSiteUrl;
+			} else if (MRScenario.environment.contains("stage-0")) {
+				testSiteUrl = AARP_ACQISITION_PAGE_URL_NEW;
+				return testSiteUrl;
+			} else
+				testSiteUrl = AARP_ACQISITION_PAGE_URL;
+			return testSiteUrl;
+		}
+		
+	public LearnAboutMedicareHomePage clickLearnMoreOnHomePage() {
+			
+			validateNew(learnAboutMedicareHomeScreen);
+			jsClickNew(learnAboutMedicareHomeScreen);	
+			String urlCheck=driver.getCurrentUrl();
+			if(urlCheck.contains("medicare-education.html")) {
+				return new LearnAboutMedicareHomePage(driver);
+			}
+			else{
+				return null;
+			}		
+		}
+
 }

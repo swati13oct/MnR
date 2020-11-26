@@ -746,5 +746,12 @@ public static final String STAGE_PAYMENT_DEEPLINK_lOGIN_PAGE= "paymentdeeplinklo
 	public static final String PHARMACY_NAME = "pharmacyName";
 	public static final String Offline_PROD_VirtualVisit_DEEPLINK_lOGIN_PAGE="offlinePRODvirtualVisitdeeplinklogin";
 	public static final String Offline_PROD_HWP_DEEPLINK_lOGIN_PAGE="offlinePRODHWPdeeplinklogin";
+
+
+	public static final String PRESCRIPTION_PROVIDER_BENEFITS_PAGE="prescriptionProviderBenefitsPage";
+
+	public static final String COST_BASICS_PAGE="costBasicsPage";
 	
+	public static final String COVERAGE_CHOICE_PAGE="coverageChoicePage";
+
 }
