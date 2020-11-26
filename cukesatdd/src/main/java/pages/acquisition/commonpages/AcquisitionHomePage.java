@@ -458,6 +458,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	@FindBy(id = "cancel")
 	private WebElement cancelLeaveAARPMedicare;
+	
+	@FindBy(xpath="//a[contains(text(),'Learn More')]")
+	private WebElement learnAboutMedicareHomeScreen;
 
    	String ChatSamText= "Chat with a Licensed Insurance Agent";
 
@@ -2787,5 +2790,19 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			} else
 				testSiteUrl = AARP_ACQISITION_PAGE_URL;
 			return testSiteUrl;
+		}
+		
+	public LearnAboutMedicareHomePage clickLearnMoreOnHomePage() {
+			
+			validateNew(learnAboutMedicareHomeScreen);
+			jsClickNew(learnAboutMedicareHomeScreen);
+			waitForPageLoadSafari();
+			String urlCheck=driver.getCurrentUrl();
+			if(urlCheck.contains("medicare-education.html")) {
+				return new LearnAboutMedicareHomePage(driver);
+			}
+			else{
+				return null;
+			}		
 		}
 }
