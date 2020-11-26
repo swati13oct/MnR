@@ -437,6 +437,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath="//a[contains(@href,'https://www.myuhcagent.com/')]")
 	private WebElement RightRail_FindAnAgent; 
 	
+	@FindBy(xpath="//a[contains(@href,'/shop/connect.html')]")
+	private WebElement RequestMoreInformationLink;
+	
 	@FindBy(xpath="(//a[contains(@href,'https://www.myuhcagent.com/')])[1]")
 	private WebElement RightRail_FindAnAgentMedsupp;
 
@@ -2653,6 +2656,41 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		}
 
 		
+		public RequestHelpAndInformationPage RequestLinkOnShopPlan() throws Exception {
+			//Thread.sleep(4000);
+			if (validate(RequestMoreInformationLink)) {
+				waitforElement(RequestMoreInformationLink);
+				System.out.println("Contact Us Page is Displayed");
+				return new RequestHelpAndInformationPage(driver);
+			}
+			return null;
+		}
+		
+		
+		public RequestHelpAndInformationPage navigateToRequestmoreHelp() {
+
+			waitforElement(ShopForaplan);
+			if (ShopForaplan.isDisplayed()) {
+				/* Actions action = new Actions(driver);
+				action.moveToElement(ShopForaplan).build().perform(); */
+				jsMouseOver(ShopForaplan);
+				try {
+					Thread.sleep(4000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				validateNew(RequestMoreInformationLink);
+				jsClickNew(RequestMoreInformationLink);
+				return new  RequestHelpAndInformationPage(driver);
+			} else {
+				return null;		
+			}
+		}
+		
+		
+		
+		
 		public void clickonFindanAgentlinkMedsupp(String ExpectedUHCAgentURL ) {
 			
 			validateNew(RightRail_FindAnAgentMedsupp);
@@ -2736,4 +2774,18 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			}
 		}
 
+		public String fetchEnvironmentUrls() {
+			if (MRScenario.environment.equals("offline")) {
+				testSiteUrl = AARP_ACQISITION_OFFLINE_PAGE_URL;
+				return testSiteUrl;
+			} else if (MRScenario.environment.equals("prod")) {
+				testSiteUrl = AARP_ACQISITION_PROD_PAGE_URL;
+				return testSiteUrl;
+			} else if (MRScenario.environment.contains("stage-0")) {
+				testSiteUrl = AARP_ACQISITION_PAGE_URL_NEW;
+				return testSiteUrl;
+			} else
+				testSiteUrl = AARP_ACQISITION_PAGE_URL;
+			return testSiteUrl;
+		}
 }
