@@ -2,6 +2,7 @@ package pages.acquisition.pharmacyLocator;
 
 import java.util.List;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -198,7 +199,7 @@ public class PharmacySearchWebElements extends UhcDriver {
 	@FindBy(xpath="//div[not(contains(@class,'ng-hide'))]/p/a[contains(@href,'LTC_HI_ITU_Pharmacies_Walgreens.pdf')]")
 	protected WebElement pdf_WalgreenPlans;
 
-	@FindBy(xpath = "(//*[@id='lang-select']//option)[1]")
+	@FindBy(xpath = "//*[contains(@id,'lang-select')]//option[contains(@id,'spanish')]")
 	protected WebElement SpanishLanguage;
 
 	@FindBy(xpath = "//a[@class='h5 filter-button bold color-blue-link margin-none']")
@@ -227,6 +228,8 @@ public class PharmacySearchWebElements extends UhcDriver {
 
 	@FindBy(className = "loading-block")
 	protected WebElement loadingImage;
+	
+	protected By loadingSpinner = By.className("loading-block");
 
 	@FindBy(xpath="//a[@id='filter_toggle_id']")
 	protected WebElement moveAwayFromTooltip;
@@ -252,10 +255,12 @@ public class PharmacySearchWebElements extends UhcDriver {
 	@FindBy(xpath="//a[@id='showHideMap']")
 	protected WebElement map_showHideMapLnk;
 
-	@FindBy(xpath="//div[@role='button' and @title='Show street map']")
+//	@FindBy(xpath="//div[@role='button' and @title='Show street map']")
+	@FindBy(xpath = "//button[@title='Show street map' and text()='Map']")
 	protected WebElement map_mapBtn;
 
-	@FindBy(xpath="//div[@role='button' and @title='Show satellite imagery']")
+//	@FindBy(xpath="//div[@role='button' and @title='Show satellite imagery']")
+	@FindBy(xpath = "//button[@title='Show satellite imagery' and text()='Satellite']")
 	protected WebElement map_satelliteBtn;
 
 	@FindBy(xpath="//button[@title='Toggle fullscreen view']")

@@ -1,9 +1,9 @@
 @planAndDocuments @thePredators @E2E @feature-F368974
 Feature: 1.06.3.2 Member Plans and Documents - section: Membership Materials - Member Auth - PROD
 
-  #Background: If run on stage then feature security flag needs to be true
-  #   Given feature security flag must set to true when testing on stage env
-  #    | Feature           | UCPPlanDocuments |
+  Background: If run on stage then feature security flag needs to be true
+     Given feature security flag must set to true when testing on test env
+      | Feature           | UCPPlanDocuments |
 
   #------------------------------------------
   @prod_planAndDocuments03 @membershipMaterials 
@@ -38,7 +38,7 @@ Feature: 1.06.3.2 Member Plans and Documents - section: Membership Materials - M
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | mm_sd | mm_en | mm_es | mm_zh |
 #      | 01-039 | xxxxx       | kkumard  | mnrs786@  | Ranch1955    | MA       | AARP_IND_PREEFF_PDnR  | true  | true  | true  | false |
 #      | 02-040 | xxxxx       | kkumard  | mnrs786@  | testusername    | MA       | GROUP_PREEFF_PDnR     | true  | false | false | false |
-      | 03-041 | xxxxx       | kkumard  | mnrs786@  | Abayne01          | MAPD     | AARP_IND_PREEFF_PDnR  | true  | true  | true  | false |
+      | 03-041 | xxxxx       | kkumard  | mnrs786@  | UHCjanicejohn          | MAPD     | AARP_IND_PREEFF_PDnR  | true  | true  | true  | false |
 
 #	@prod_preeffective_pdp
 #	Examples: 

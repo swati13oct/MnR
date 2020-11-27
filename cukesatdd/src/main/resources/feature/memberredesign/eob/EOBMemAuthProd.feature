@@ -1,9 +1,9 @@
 @eob
 Feature: 1.04.1.1 To Test NON-DREAM EOB for Members - E2E - Member Auth - PROD
 
-  #Background: If run on stage then feature security flag needs to be true
-  #   Given feature security flag must set to true when testing on stage env
-  #    | Feature           | UCPEob |
+  Background: If run on stage then feature security flag needs to be true
+     Given feature security flag must set to true when testing on test env
+      | Feature           | UCPEob |
 
   #----- begin sanity
   @prod_sanity
@@ -55,7 +55,7 @@ Feature: 1.04.1.1 To Test NON-DREAM EOB for Members - E2E - Member Auth - PROD
     #----- Validate Date Range Last 90 Days ----  
     And the user selects the desired date range
       | Date Range | Last 90 Days |
-    #Then the user obtains API response info for validation
+    Then the user obtains API response info for validation
     Then the user validates search result section content
     Then the user clicks on first eob from the list to validate pdf
       | Real EOB | <realEob> |
@@ -63,7 +63,7 @@ Feature: 1.04.1.1 To Test NON-DREAM EOB for Members - E2E - Member Auth - PROD
     #----- Validate Date Range Last 3-6 months ----  
     And the user selects the desired date range
       | Date Range | Last 3-6 months |
-    #Then the user obtains API response info for validation
+    Then the user obtains API response info for validation
     Then the user validates search result section content
     Then the user clicks on first eob from the list to validate pdf
       | Real EOB | <realEob> |
@@ -71,7 +71,7 @@ Feature: 1.04.1.1 To Test NON-DREAM EOB for Members - E2E - Member Auth - PROD
     #----- Validate Date Range Last 6-12 months ----  
     And the user selects the desired date range
       | Date Range | Last 6-12 months |
-    #Then the user obtains API response info for validation
+    Then the user obtains API response info for validation
     Then the user validates search result section content
     Then the user clicks on first eob from the list to validate pdf
       | Real EOB | <realEob> |
@@ -79,7 +79,7 @@ Feature: 1.04.1.1 To Test NON-DREAM EOB for Members - E2E - Member Auth - PROD
     #----- Validate Date Range Last 12- months ----  
     And the user selects the desired date range
       | Date Range | Last 12-18 months |
-    #Then the user obtains API response info for validation
+    Then the user obtains API response info for validation
     Then the user validates search result section content
     Then the user clicks on first eob from the list to validate pdf
       | Real EOB | <realEob> |
@@ -89,26 +89,26 @@ Feature: 1.04.1.1 To Test NON-DREAM EOB for Members - E2E - Member Auth - PROD
       | Flag Zero EOB User | <flagZeroEob> |
 
     # note: to correctly validate for SHIP, planType must be in this format: SHIP_<planCategory>
-    @prod_SHIP_EOBs @prod_SHIP_EOBs1
+    @prod_SHIP_EOBs @prod_SHIP_EOBs1_multiShip
     Examples: 
       | index | username  | password  | MemUserName            | planType                 | memberType         | eobType | realEob | flagZeroEob |
-      | 11    | kkumard  | mnrs786@  | gingerdrais46           | SHIP_HOSPITAL INDEMNITY  | MULTI_SHIP_EOB     | Medical | true    | false       | 
+      | 11    | kkumard   | mnrs786@  | gingerdrais46          | SHIP_HOSPITAL INDEMNITY  | MULTI_SHIP_EOB     | Medical | true    | false       | 
 
-    @prod_SHIP_EOBs @prod_SHIP_EOBs2
+    @prod_SHIP_EOBs @prod_SHIP_EOBs2_singleShip
     Examples: 
       | index | username  | password  | MemUserName            | planType                 | memberType         | eobType | realEob | flagZeroEob |
-      | 12    | kkumard  | mnrs786@  | Norm749                 | SHIP_MEDICARE SUPPLEMENT | PDP_SHIP_COMBO_EOB | Medical | true    | true       |
+      | 12    | kkumard   | mnrs786@  | cdgatling-2            | SHIP_MEDICARE SUPPLEMENT | SHIP_EOB           | Medical | true    | true       |
 
-    @prod_SHIP_EOBs @prod_SHIP_EOBs3
+    @prod_SHIP_EOBs @prod_SHIP_EOBs3_shipComboShipFed
     Examples: 
       | index | username  | password  | MemUserName            | planType                 | memberType              | eobType | realEob | flagZeroEob |
-      | 13    | kkumard  | mnrs786@  | phleauxdailles43        | SHIP_HOSPITAL INDEMNITY  | COMBO_SHIP_MA_NICE_DEOB | Medical | true    | false   | 
+      | 13    | kkumard   | mnrs786@  | phleauxdailles43       | SHIP_HOSPITAL INDEMNITY  | COMBO_SHIP_MA_NICE_DEOB | Medical | true    | false   | 
 
-    @prod_SHIP_EOBs @prod_SHIP_EOBs4
+    @prod_SHIP_EOBs @prod_SHIP_EOBs4_shipComboFedShip
     Examples: 
       | index | username  | password  | MemUserName            | planType                 | memberType              | eobType | realEob | flagZeroEob |
-    # | 14    | kkumard  | mnrs786@  | testusername            | SHIP_MEDICARE SUPPLEMENT | COMBO_SHIP_PDP_RX_DEOB  | Medical | true    | true   |  
-      | 14    | kkumard  | mnrs786@  | MaryLouMichels2         | SHIP_MEDICARE SUPPLEMENT | COMBO_PDP_SHIP_RX_DEOB  | Medical | true    | true   |  
+    # | 14    | kkumard   | mnrs786@  | testusername           | SHIP_MEDICARE SUPPLEMENT | COMBO_SHIP_PDP_RX_DEOB  | Medical | true    | true   |  
+      | 14    | kkumard   | mnrs786@  | MaryLouMichels2        | SHIP_MEDICARE SUPPLEMENT | COMBO_PDP_SHIP_RX_DEOB  | Medical | true    | true   |  
 
 
   @prod_eob02 @regression_06_06_18FnF

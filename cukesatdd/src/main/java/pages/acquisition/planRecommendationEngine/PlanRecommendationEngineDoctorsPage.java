@@ -159,15 +159,15 @@ public class PlanRecommendationEngineDoctorsPage extends UhcDriver {
 		System.out.println("Doctor Page Functional Operations");
 		if (doctor.equalsIgnoreCase("UHGNetwork")) {
 			validate(innetwork);
-			innetwork.click();
+			jsClickNew(innetwork);
 			System.out.println("Doctors Type " + doctor + " Clicked");
 		} else if (doctor.equalsIgnoreCase("AcceptsMedicare")) {
 			validate(outnetwork);
-			outnetwork.click();
+			jsClickNew(outnetwork);
 			System.out.println("Doctors Type " + doctor + " Clicked");
 		} else if (doctor.equalsIgnoreCase("Lookup")) {
 			validate(mydoctors);
-			mydoctors.click();
+			jsClickNew(mydoctors);
 			System.out.println("Doctors Type " + doctor + " Clicked");
 		}
 	}
@@ -178,7 +178,7 @@ public class PlanRecommendationEngineDoctorsPage extends UhcDriver {
 		System.out.println("Doctor Page Functional Operations");
 		if (status.toUpperCase().contains("POSITIVE")) {
 			doctorspageOptions(doctor);
-			continueBtn.click();
+			jsClickNew(continueBtn);
 			if (doctor.equalsIgnoreCase("Lookup")) {
 				if (multiDoctor.equalsIgnoreCase("YES"))
 					doctorModellookup(doctorsName, 3);
@@ -192,7 +192,7 @@ public class PlanRecommendationEngineDoctorsPage extends UhcDriver {
 				desktopCommonUtils.nextPageNameValidation(page.toUpperCase());
 		} else {
 			if (doctor.isEmpty()) {
-				continueBtn.click();
+				jsClickNew(continueBtn);
 				desktopCommonUtils.desktopErrorValidation(page);
 			}
 		}
@@ -226,7 +226,8 @@ public class PlanRecommendationEngineDoctorsPage extends UhcDriver {
 	public void doctorModellookup(String search, int count) {
 		String curWindow = driver.getWindowHandle();
 		System.out.println(curWindow);
-		modalFinddoctors.click();
+//		modalFinddoctors.click();
+		jsClickNew(modalFinddoctors);
 		validateLinksanotherWindow(curWindow, "Doctors", search, count);
 		threadsleep(5000);
 		// Changing the count for multiple doc with : separated
@@ -240,7 +241,8 @@ public class PlanRecommendationEngineDoctorsPage extends UhcDriver {
 			count = count - 1;
 			confirmationProviderResults = getConfimationPopupResults(count);
 		}
-		modalContinuedoctors.click();
+//		modalContinuedoctors.click();
+		jsClickNew(modalContinuedoctors);
 	}
 
 	public void doctorModellookupElements() {
@@ -270,7 +272,7 @@ public class PlanRecommendationEngineDoctorsPage extends UhcDriver {
 //Switch to Werally Window Page
 
 	public ArrayList<String> validateLinksanotherWindow(String primaryWindow, String type, String search, int count) {
-		String browser = MRScenario.browsername;
+		String browser = MRScenario.browserName;				//E2E: the browser name is stored in browserName variable in getWebDriverNew method of MRScenario 
 		String env = MRScenario.environment;
 		threadsleep(2000);
 		ArrayList<String> windows = new ArrayList<String>(driver.getWindowHandles());
@@ -404,7 +406,8 @@ public class PlanRecommendationEngineDoctorsPage extends UhcDriver {
 	public void removeDoctors() {
 		// By default removing 2nd doctor
 		int beforeRemove = modalDoctorsList.size();
-		modalDoctorsList.get(1).findElement(By.cssSelector("button[class*='secondary']")).click();
+//		modalDoctorsList.get(1).findElement(By.cssSelector("button[class*='secondary']")).click();
+		jsClickNew(modalDoctorsList.get(1).findElement(By.cssSelector("button[class*='secondary']")));
 		int afterRemove = modalDoctorsList.size();
 		if (beforeRemove != afterRemove) {
 			System.out.println("Remove Results Count mismatch");
@@ -421,28 +424,33 @@ public class PlanRecommendationEngineDoctorsPage extends UhcDriver {
 	}
 
 	public void nextPageValidationDoctor() {
-		modalContinuedoctors.click();
+		jsClickNew(modalContinuedoctors);
 		System.out.println("Validating " + page + " page Continue button functionality");
 		desktopCommonUtils.nextPageValidation(page.toUpperCase());
 	}
 
 	public void doctorspageCancel(String doctorsName, String multiDoctor) {
-		doctorLookupOption.click();
+//		doctorLookupOption.click();
+		jsClickNew(doctorLookupOption);
 		System.out.println("Plan Type Lookup Clicked");
-		continueBtn.click();
+//		continueBtn.click();
+		jsClickNew(continueBtn);
 		if (multiDoctor.equalsIgnoreCase("YES")) {
 			String curdriverhandle = driver.getWindowHandle();
-			modalFinddoctors.click();
+//			modalFinddoctors.click();
+			jsClickNew(modalFinddoctors);
 			validateLinksanotherWindow(curdriverhandle, "Doctors", doctorsName, 2);
 			doctorConfirmationModellookup();
-			modalCancel.click();
+//			modalCancel.click();
+			jsClickNew(modalCancel);
 			if (validate(modalCancel, 10) == true) {
 				System.out.println("Modal Popup is not closed");
 				Assert.assertTrue(false);
 			}
 		} else {
 			doctorModellookupElements();
-			modalCancel.click();
+//			modalCancel.click();
+			jsClickNew(modalCancel);
 			if (validate(modalCancel, 10) == true) {
 				System.out.println("Confirmation Modal Popup is not closed");
 				Assert.assertTrue(false);
@@ -453,39 +461,41 @@ public class PlanRecommendationEngineDoctorsPage extends UhcDriver {
 	}
 
 	public void navigateDoctorsmodalsession() {
-		doctorLookupOption.click();
+//		doctorLookupOption.click();
+		jsClickNew(doctorLookupOption);
 		System.out.println("Doctor Lookup Type Clicked");
-		continueBtn.click();
+//		continueBtn.click();
+		jsClickNew(continueBtn);
 	}
 
 	static ArrayList<String> confirmationProviderResults = new ArrayList<String>();
 
 	public void addProvidersPRE(String doctorsName, String multiDoctor) {
-		doctorLookupOption.click();
+		jsClickNew(doctorLookupOption);
 		System.out.println("Lookup Type Clicked");
-		continueBtn.click();
+		jsClickNew(continueBtn);
 		if (multiDoctor.equalsIgnoreCase("YES"))
 			providerlookup(doctorsName, 3);
 		else
 			providerlookup(doctorsName, 1);
 		System.out.println("Validating " + page + " page Continue button functionality");
-		modalContinuedoctors.click();
+		jsClickNew(modalContinuedoctors);
 		desktopCommonUtils.nextPageValidation(page.toUpperCase());
 
 	}
 
 	public void providerlookup(String search, int count) {
 		String curdriverhandle = driver.getWindowHandle();
-		modalFinddoctors.click();
+		jsClickNew(modalFinddoctors);
 		validateLinksanotherWindow(curdriverhandle, "Doctors", search, count);
 		confirmationProviderResults = getConfimationPopupResults(count);
 		verifyConfirmationmodalResults(count, werallyResults, confirmationProviderResults);
 	}
 
 	public void editProvider(String doctorName1, String multiDoctor1, String doctorName2, String muliDoctor2) {
-		doctorLookupOption.click();
+		jsClickNew(doctorLookupOption);
 		System.out.println("Lookup Type Clicked");
-		continueBtn.click();
+		jsClickNew(continueBtn);
 		if (multiDoctor1.equalsIgnoreCase("YES"))
 			providerlookup(doctorName1, 3);
 		else
@@ -493,8 +503,8 @@ public class PlanRecommendationEngineDoctorsPage extends UhcDriver {
 		int confirmationSize = Integer.parseInt(modalDoctorsCount.getText().trim().split(" ")[2]);
 		String curdriverhandle = driver.getWindowHandle();
 		threadsleep(5000);
-		modalEditdoctors.click();
-		modalFinddoctors.click();
+		jsClickNew(modalEditdoctors);
+		jsClickNew(modalFinddoctors);
 		if (muliDoctor2.equalsIgnoreCase("YES"))
 			validateLinksanotherWindow(curdriverhandle, "Doctors", doctorName2, 3);
 		else
@@ -513,7 +523,7 @@ public class PlanRecommendationEngineDoctorsPage extends UhcDriver {
 	}
 
 	public void nextPageNameValidationDoctor() {
-		modalContinuedoctors.click();
+		jsClickNew(modalContinuedoctors);
 		System.out.println("Validating " + page + " page Continue button functionality");
 		desktopCommonUtils.nextPageNameValidation(page.toUpperCase());
 	}

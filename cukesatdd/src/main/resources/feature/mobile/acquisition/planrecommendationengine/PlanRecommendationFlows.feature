@@ -359,5 +359,6 @@ Feature: Plan Recommendation Engine flow - Verify PRE flows functionalities with
       |   10002 | NO            | New York | MA            | None         | None         | UHCNetwork       |             |               | No,No,No,No                   | Lower                | MA                |                   |
       |   25813 | NO            | Raleigh  | MA            | Medicaid     | Regular      | AcceptsMedicare  |             |               | No,No,No,No                   | Higher               | MS                |                   |
       |   00501 | NO            | Suffolk  | MA            | Chronic      | WithinUS     | AcceptsMedicare  |             |               | Yes,No,No,No                  | Lower                | MA                | MS                |
-      |   00610 | NO            | Anasco   | MA            | None         | None         | UHGNetwork       |             |               | No,No,No,No                   | Lower                | MA                |                   |
-      |   00610 | NO            | Anasco   | MA            | None         | withinUS     | AcceptsMedicare  |             |               | Yes,No,No,No                  | Lower                |                   |                   |
+      |   00610 | NO            | Anasco   | MA            | None         | withinUS     | AcceptsMedicare  |             |               | Yes,No,No,No                  | Lower                | MS                |                   |
+      |   00610 | NO            | Anasco   | MA            | None         | None         | UHGNetwork       |             |               | No,No,No,No                   | Lower                |                   |                   |
+      

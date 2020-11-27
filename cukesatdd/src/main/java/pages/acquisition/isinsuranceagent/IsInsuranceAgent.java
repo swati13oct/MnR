@@ -418,7 +418,25 @@ public class IsInsuranceAgent extends UhcDriver{
 		
 		}
 	}
+	
 
+	
+	public void navigateToISPath(String path) {
+
+		String CurrentURL = driver.getCurrentUrl();
+		System.out.println("Current URL : " + CurrentURL);
+
+		String NavigateToURL = CurrentURL + path;
+		System.out.println("Navigating to URL : " + NavigateToURL);
+		driver.navigate().to(NavigateToURL);
+		//CommonUtility.waitForPageLoad(driver, driver.findElement(By.xpath("//header[contains(@class,'header')]")), 30);
+		System.out.println("Page Title : " + (driver.findElement(By.xpath("//title")).getText()));
+		//return IsInsuranceAgent;
+		//return new IsInsuranceAgent(driver);
+	
+
+	}
+	
 	public boolean Validate_addressAutoComplete() {
 		HomeAddressTxt.clear();
 		CityTxt.clear();

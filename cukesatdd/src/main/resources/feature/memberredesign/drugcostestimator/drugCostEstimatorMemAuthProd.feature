@@ -24,7 +24,7 @@ Feature: 1.07.1 Member DCE Page - Member Auth - PROD
     Examples: 
       | index | TID   | username | password | MemUserName       | planType | memberType   |
       | 02    | 15326 | kkumard  | mnrs786@ | vernajohnson19651	| SHIP     | SHIP_DCE     |
-      | 03    | 15337 | kkumard  | mnrs786@ | BNCSAUVE2  	    | MA       | MA_DCE       |
+      | 03    | 15337 | kkumard  | mnrs786@ | ExDesertrat  	    | MA       | MA_DCE       |
       
    
   @drugCostEstimator2 @prod @prod_dce_p2

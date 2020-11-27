@@ -14,6 +14,10 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
+
+import static org.junit.Assert.assertTrue;
+
+import java.util.ArrayList;
 import java.util.List;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -187,6 +191,10 @@ public class UlayerTFNPage extends UhcDriver {
 	@FindBy(xpath = "//*[@class='overview-tabs module-tabs-tabs']//*[contains(@ng-click,'MedSupp')]//*[@class='trigger-closed'][text()='View Plans']")
 	private WebElement MedSupViewPlan;
 	
+	
+			@FindBy(xpath = "(//button[@class='c-button'])[2]")
+			private WebElement findPlangetPlan;
+	
 	@FindBy(xpath = "//*[@id='_au8mcmkkj']")
 	private WebElement MedSupViewPlan_css;
 	
@@ -250,6 +258,10 @@ public class UlayerTFNPage extends UhcDriver {
 	@FindBy(xpath = "(//*[@class='zip-button'])[2]")
 	private WebElement findPlansButtonUHC;
 	
+	
+			@FindBy(xpath = "(//input[@class='c-input c-input--bigzip u-color-blue js-zip-finder-input'])[2]")
+			private WebElement findPlansButtonGetPlan;
+	
 	@FindBy(xpath = "//*[@id='ghn_lnk_2']")
 	public WebElement ShopMenu;
 
@@ -291,7 +303,22 @@ public class UlayerTFNPage extends UhcDriver {
 	
 	@FindBy(xpath = "//*[@id='tty-number']")
 	public WebElement PDPOLETFN;
+	
+	@FindBy(xpath = "//a[@data-asset-name='Learn About Medicare']")
+	public WebElement learnaboutMedicare;
+	
+	
 
+	@FindBy(xpath = "//a[@data-asset-name='Get Help Finding a Plan']")
+	public WebElement getHelpFindingaPlan;
+	
+
+	@FindBy(xpath = "(//a[@class='tel'])[1]")
+	public WebElement tfNOnExternalLinks;
+	
+	@FindBy(xpath = "//div[@ng-if='fedTfn']/p/r/a")
+	public WebElement vppvTFN;
+	
 	public  UlayerTFNPage(WebDriver driver) throws Exception {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -899,6 +926,15 @@ public class UlayerTFNPage extends UhcDriver {
 		Thread.sleep(3000);
 		return MAvppTFN;	
 	}
+	
+	public void closeBrowserandSwitchBack() {
+		driver.close();
+		ArrayList<String> windows=new ArrayList<String>(driver.getWindowHandles());
+		driver.switchTo().window(windows.get(0));
+		
+	}
+	
+	
 
 	
 
@@ -1110,7 +1146,63 @@ public class UlayerTFNPage extends UhcDriver {
 		return MedSupTfn;
 
 	}
-
+	public void medicalSupTFN_FromDeepLink1(String zip,String URL) throws Exception {
+		Thread.sleep(3000);
+		String parentWindow=driver.getWindowHandle();
+		ArrayList<String> windows=new ArrayList<String>(driver.getWindowHandles());
+		driver.switchTo().window(windows.get(0));
 	
+		findPlansButtonGetPlan.sendKeys(zip);
+		
+		findPlangetPlan.click();
+		Thread.sleep(3000);
+		driver.switchTo().window(windows.get(1));
+		Thread.sleep(3000);
+		driver.get(URL);
+		Thread.sleep(3000);
+		
+
+	}
+
+public void clickonLearnAboutMedicare(String url) {
+	threadsleep(8);
+	learnaboutMedicare.click();
+	threadsleep(5);
+	ArrayList<String> windows=new ArrayList<String>(driver.getWindowHandles());
+	driver.switchTo().window(windows.get(1));
+	driver.navigate().to(url);
+	threadsleep(5);
+}
+
+public void clickonGetHelpFindingaPlan(String url) {
+		threadsleep(5);
+		String parentWindow=driver.getWindowHandle();
+		ArrayList<String> windows=new ArrayList<String>(driver.getWindowHandles());
+		driver.switchTo().window(windows.get(0));
+		getHelpFindingaPlan.click();
+		threadsleep(5);
+		driver.switchTo().window(windows.get(1));
+		driver.navigate().to(url);
+		threadsleep(3);
+}
+
+
+public String getTfnOneatOn() throws InterruptedException {
+	threadsleep(8);
+	waitforElement(tfNOnExternalLinks);
+	String MAvppTFN = tfNOnExternalLinks.getText().trim();
+	System.out.println("MAvppTFN from UI"+MAvppTFN);
+	Thread.sleep(5000);
+	return MAvppTFN;	
+}
+
+public String getTfnOnVPP() throws InterruptedException {
+	threadsleep(8);
+	waitforElement(vppvTFN);
+	String MAvppTFN = vppvTFN.getText().trim();
+	System.out.println("MAvppTFN from UI"+MAvppTFN);
+	Thread.sleep(5000);
+	return MAvppTFN;	
+}
 	
 }

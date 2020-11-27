@@ -1,5 +1,10 @@
 Feature: Plan Documents - personalize document for SHIP
 
+ Background: Feature security flag needs to be true before ATDD script execution
+     Given First check if feature security flag is set to true
+      | Feature | UCPUserManagement |
+###############################Regression Scenarios Begin Here ########################################
+
   @CodeWarriors @F377245
   Scenario Outline: planType <planType> -memberType <memberType> - To validate the NEW text against personalize plan documents 
     Given login with following details logins in the member portal and validate elements

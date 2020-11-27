@@ -27,8 +27,10 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
 import acceptancetests.acquisition.planRecommendationEngine.PlanRecommendationEngineStepDefinition;
+import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 import pages.acquisition.commonpages.AcquisitionHomePage;
+import pages.acquisition.commonpages.VPPPlanSummaryPage;
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineDoctorsPage;
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineDrugsPage;
 import pages.mobile.acquisition.planrecommendationengine.DoctorsMobilePage;
@@ -317,7 +319,10 @@ public class PlanRecommendationEngineResultsPage extends UhcDriver {
 	@FindBy(xpath = "//*[@id='zip-code']")
 	private WebElement zipCode;
 	
-	@FindBy(css = "#selectCounty p")
+	@FindBy(css = "#selectCounty")
+	private WebElement multiCountyDialog;
+	
+	@FindBy(css = "#selectCounty p a")
 	private  List<WebElement> multiCounty;
 	
 	@FindBy(id = "zipInfo")
@@ -365,6 +370,7 @@ public class PlanRecommendationEngineResultsPage extends UhcDriver {
 	public void resultsUI(String zip,String county,String R1,String R2, boolean tie) {
 		System.out.println("Validating Results UI Page: ");
 		pageloadcomplete();
+		waitForPageLoadSafari();
 		validate(planZipInfo,60);
 		waitforElementInvisibilityInTime(planLoaderscreen,60);
 		Assert.assertTrue(planZipInfo.getText().contains(zip),"Invalid Zip");
@@ -503,20 +509,25 @@ public class PlanRecommendationEngineResultsPage extends UhcDriver {
 		public void submitMSform() {
 			//Zip value is pre-populated by default
 			MSPlanDOB.sendKeys("01/06/1940");
-			MSPlanGender.click();
+			jsClickNew(MSPlanGender);
 			threadsleep(8000);
-			MSPlanGender.click();
+			jsClickNew(MSPlanGender);
+			threadsleep(3000);							//E2E: Added for the overlay to disappear after selecting a option
 			Select temp = new Select(MSPlanPartAMonth);
 			temp.selectByVisibleText("January 1");
+			threadsleep(2000);							//E2E: Added for the overlay to disappear after selecting a option
 			temp = new Select(MSPlanPartAYear);
 			temp.selectByVisibleText("2021");
+			threadsleep(2000);							//E2E: Added for the overlay to disappear after selecting a option
 			temp = new Select(MSPlanPartBMonth);
 			temp.selectByVisibleText("January 1");
+			threadsleep(2000);							//E2E: Added for the overlay to disappear after selecting a option
 			temp = new Select(MSPlanPartBYear);
 			temp.selectByVisibleText("2021");
+			threadsleep(2000);							//E2E: Added for the overlay to disappear after selecting a option
 			temp = new Select(MSPlanStartMonth);
 			temp.selectByVisibleText("January 1, 2021");
-			MSViewPlanButton.click();
+			jsClickNew(MSViewPlanButton);
 		}
 
 		public void clickEnrolldesktop(WebElement enrollButton,WebElement needhelp) {
@@ -524,7 +535,7 @@ public class PlanRecommendationEngineResultsPage extends UhcDriver {
 			for (int i = 0; i < 5; i++) {
 				try {
 					validate(enrollButton, 5);
-					enrollButton.click();
+					jsClickNew(enrollButton);
 					click = true;
 					break;
 				} catch (Exception e) {
@@ -554,16 +565,17 @@ public class PlanRecommendationEngineResultsPage extends UhcDriver {
 		
 		public void navigateVPP(String zip) {
 			validate(headerNavigationBarHomeTab,20);
-			headerNavigationBarHomeTab.click();
+			jsClickNew(headerNavigationBarHomeTab);
 			validate(homePageZiptxt,60);
 			homePageZiptxt.sendKeys(zip);
-			homePageFindPlans.click();
+			jsClickNew(homePageFindPlans);
 			validate(planZipInfo, 60);
 			waitforElementInvisibilityInTime(planLoaderscreen,60);
 			threadsleep(5000);// Plan loader
 			Assert.assertTrue(planZipInfo.getText().contains(zip),"Invalid Zip");		
-			MAViewPlansLink.click();
+			jsClickNew(MAViewPlansLink);
 			pageloadcomplete();
+			waitForPageLoadSafari();
 		}
 		
 		public void drugsDetailsPREtoVPP() {
@@ -609,7 +621,8 @@ public class PlanRecommendationEngineResultsPage extends UhcDriver {
     		int beforeRemove = DrugsList.size();
     		threadsleep(5000);
     		drugcoveredsession();
-    		DrugsNames.get(count-1).findElement(By.cssSelector("button[class*='remove-icon']")).click();
+//    		DrugsNames.get(count-1).findElement(By.cssSelector("button[class*='remove-icon']")).click();
+    		jsClickNew(DrugsNames.get(count-1).findElement(By.cssSelector("button[class*='remove-icon']")));
     		threadsleep(8000);
 //    		drugcoveredsession();
     		pageloadcomplete();
@@ -643,7 +656,7 @@ public class PlanRecommendationEngineResultsPage extends UhcDriver {
 				validate(coveredIcon,20);
 			}
 			Collections.sort(DrugsList);
-			drugCoveredeVPP.click();
+			jsClickNew(drugCoveredeVPP);
 			System.out.println("DrugsList Size is : "+DrugsList.size());
 			System.out.println("DrugList Content is : "+DrugsList);
 			return DrugsList;
@@ -651,11 +664,10 @@ public class PlanRecommendationEngineResultsPage extends UhcDriver {
 		
 		public void drugcoveredsession() {
 			drugCoveredeVPP = MA1stPlanList.get(0).findElement(By.cssSelector("a[class*='drug-list-toggle']"));
-			drugCoveredeVPP.click();
+			jsClickNew(drugCoveredeVPP);
 		}
 		
 		public void verifyConfirmationmodalResults(int count,ArrayList<String> drug,ArrayList<String> drugListVPP) {
-
     		if(drug.size()==drugListVPP.size() && count==drug.size()) {
     			String druglist =drug.toString();
     			String vppdruglist =drugListVPP.toString();
@@ -689,35 +701,41 @@ public class PlanRecommendationEngineResultsPage extends UhcDriver {
 	public void vppToPre() {
 		System.out.println("Validating VPP to PRE Page");
 		validate(StartNowButton,20);
-		StartNowButton.click();
+		jsClickNew(StartNowButton);
 		pageloadcomplete();
+		waitForPageLoadSafari();
 	}
 	
 
 	public void validateDrugPage(String plan,boolean removedrug) {
 		System.out.println("Validating Drugs in Drug Page");
-		getStartedBtn.click();
+//		getStartedBtn.click();
+		jsClickNew(getStartedBtn);
 		threadsleep(2000);
 		int MAPD = 6;
 		int PDP = 3;
 		int None = 6;
 		if(plan.equalsIgnoreCase("MAPD")) {
 			for(int i=0;i<MAPD;i++) {
-				continueBtn.click();
+				jsClickNew(continueBtn);
 				threadsleep(2000);
 				pageloadcomplete();
+				waitForPageLoadSafari();
 			}
 		}else if(plan.equalsIgnoreCase("None")) {
 			for(int i=0;i<None;i++) {
-				continueBtn.click();
+				jsClickNew(continueBtn);
 				threadsleep(2000);
 				pageloadcomplete();
+				waitForPageLoadSafari();
 			}
 		}else if(plan.equalsIgnoreCase("PDP")) {
 			for(int i=0;i<PDP;i++) {
-				continueBtn.click();
+//				continueBtn.click();
+				jsClickNew(continueBtn);
 				threadsleep(2000);
 				pageloadcomplete();
+				waitForPageLoadSafari();
 			}
 		}
 		if(removedrug==true) {
@@ -738,19 +756,22 @@ public class PlanRecommendationEngineResultsPage extends UhcDriver {
 		int None = 1;
 		if(plan.equalsIgnoreCase("MAPD")) {
 			for(int i=0;i<MAPD;i++) {
-				continueBtn.click();
+//				continueBtn.click();
+				jsClickNew(continueBtn);
 				threadsleep(2000);
 				pageloadcomplete();
 			}
 		}else if(plan.equalsIgnoreCase("None")) {
 			for(int i=0;i<None;i++) {
-				continueBtn.click();
+//				continueBtn.click();
+				jsClickNew(continueBtn);
 				threadsleep(2000);
 				pageloadcomplete();
 			}
 		}else if(plan.equalsIgnoreCase("PDP")) {
 			for(int i=0;i<PDP;i++) {
-				continueBtn.click();
+//				continueBtn.click();
+				jsClickNew(continueBtn);
 				threadsleep(2000);
 				pageloadcomplete();
 			}
@@ -763,7 +784,8 @@ public class PlanRecommendationEngineResultsPage extends UhcDriver {
 	public void addProviderVPP(String name,String multi) {
 //		MAViewPlansLink.click();
 		String curdriverhandle = driver.getWindowHandle();
-		enterProvidersInfoMA1stPlan.click();
+//		enterProvidersInfoMA1stPlan.click();
+		jsClickNew(enterProvidersInfoMA1stPlan);
 		if(multi.equalsIgnoreCase("Yes"))
 			count = 1;
 		werallyResults=docdesktop.validateLinksanotherWindow(curdriverhandle, "Doctors", name, count);	
@@ -774,7 +796,8 @@ public class PlanRecommendationEngineResultsPage extends UhcDriver {
 	public ArrayList<String> getProvidersVPP() {
 		threadsleep(5000);
 		pageloadcomplete();
-		providersInfoMA1stPlan.click();
+//		providersInfoMA1stPlan.click();
+		jsClickNew(providersInfoMA1stPlan);
 		vppProviderResults = new ArrayList<String>();
 		for(WebElement e:providersListMA1stPlan) {
 			vppProviderResults.add(e.getText().trim());
@@ -833,7 +856,8 @@ public class PlanRecommendationEngineResultsPage extends UhcDriver {
 	}
 	
 	public void navigatePRE() {
-		StartNowButton.click();
+//		StartNowButton.click();
+		jsClickNew(StartNowButton);
 		pageloadcomplete();
 		Assert.assertTrue(driver.getCurrentUrl().contains("plan-recommendation-engine.html"));
 		//driver.navigate().refresh();
@@ -850,25 +874,27 @@ public class PlanRecommendationEngineResultsPage extends UhcDriver {
 	public void countyandViewPlan(String zip,String county, String isMultiCounty) {
 		System.out.println("Validating Zipcode in Results UI Page: ");
 		validate(headerNavigationBarHomeTab,20);
-		headerNavigationBarHomeTab.click();
+		jsClickNew(headerNavigationBarHomeTab);
 		validate(homePageZiptxt,60);
 		homePageZiptxt.sendKeys(zip);
-		homePageFindPlans.click();
+		jsClickNew(homePageFindPlans);
 		pageloadcomplete();
-		if(isMultiCounty.equalsIgnoreCase("YES"))
+		if(isMultiCounty.equalsIgnoreCase("YES")) {
+			validate(multiCountyDialog);
 			selectFromDropDown(multiCounty, county);
+		}
 		validate(planZipInfo,60);
 		waitforElementInvisibilityInTime(planLoaderscreen,60);
 		Assert.assertTrue(planZipInfo.getText().contains(zip),"Invalid Zip");
 		Assert.assertTrue(planZipInfo.getText().toUpperCase().contains(county.toUpperCase()),"Invalid County");
 		Assert.assertTrue(Integer.parseInt(planZipInfo.getText().split(" ")[2])>0,"Total Plan count is less than 1");
-		MAViewPlansLink.click();
+		jsClickNew(MAViewPlansLink);
 		pageloadcomplete();
 	}
 	
 	public void validateZipcodePage(String zip,String county, String isMultiCounty) {
 		System.out.println("Validating Zipcode and County in location Page");
-		getStartedBtn.click();
+		jsClickNew(getStartedBtn);
 		pageloadcomplete();
 		Assert.assertTrue(zipCode.getAttribute("ng-reflect-model").contains(zip),"Invalid Zip");
 		if (isMultiCounty.equalsIgnoreCase("NO")) {
@@ -878,16 +904,17 @@ public class PlanRecommendationEngineResultsPage extends UhcDriver {
 			validate(multiCountyInfo,20);
 			Assert.assertTrue(multiCountyInfo.getText().toUpperCase().contains(county.toUpperCase()),"Invalid County");
 		}
-		continueBtn.click();
+		jsClickNew(continueBtn);
 		
 	}
 	
 	public void vppToPreStartOver() {
 		System.out.println("Validating VPP to PRE Page Clicking on Start Over Button");
 		validate(StartOverButton,20);
-		StartOverButton.click();
+		jsClickNew(StartOverButton);
 		startOverPopup();
 		pageloadcomplete();
+		waitForPageLoadSafari();
 	}
 	
 	public void startOverPopup() {
@@ -896,7 +923,7 @@ public class PlanRecommendationEngineResultsPage extends UhcDriver {
 		validate(StartOverContent,20);
 		validate(closeButton,20);
 		validate(startOverButtoninPopup,20);
-		startOverButtoninPopup.click();
+		jsClickNew(startOverButtoninPopup);
 	}
 	
 	public void validateRankingPlans(String Recom,String plans) {
@@ -964,20 +991,20 @@ public void sendEmail(String plan, String email) {
 	System.out.println("Email Plan list from VPP : ");
 	plansLoader();
 	if (plan.equalsIgnoreCase("PDP")) {
-		pdpemailList.click();
+		jsClickNew(pdpemailList);
 	} else if (plan.equalsIgnoreCase("MA")) {
-		maemailList.click();
+		jsClickNew(maemailList);
 
 	} else if (plan.equalsIgnoreCase("SNP")) {
-		snpemailList.click();
+		jsClickNew(snpemailList);
 
 	} else {
 		Assert.assertTrue(false, "Print Email is not configured for the given Plan :" + plan);
 	}
 	emailText.sendKeys(email);
-	emailSendButton.click();
+	jsClickNew(emailSendButton);
 	validate(emailSuccess,15);
-	emailCloseButton.click();
+	jsClickNew(emailCloseButton);
 }
 
 public void validateUIAPIRecommendations() {
@@ -1334,7 +1361,7 @@ public void browserBack() {
 public void useraddDrugsVPP(String drugDetails) {
 	threadsleep(10000);
 	validate(enterDrugsInfoMA1stPlan, 60);
-	enterDrugsInfoMA1stPlan.click();
+	jsClickNew(enterDrugsInfoMA1stPlan);
 	ACQDrugCostEstimatorPage dce = new ACQDrugCostEstimatorPage(driver);
 	dce.drugsHandlerWithdetails(drugDetails);
 	dce.getDrugsDCE();
@@ -1342,10 +1369,12 @@ public void useraddDrugsVPP(String drugDetails) {
 }
 
 public boolean changePlanyear(String year) {
+
+	jsClickNew(MAViewPlansLink);
 	// Checking and Changing to Current Year
 	if (year.equalsIgnoreCase("current")) {
 		if (validate(currentPlanYear, 15)) {
-			currentPlanYear.click();
+			jsClickNew(currentPlanYear);
 			Assert.assertTrue(currentPlanYearSelected.getAttribute("id").length()>0,"Current Plan Year is not Selected");
 			threadsleep(5000);
 			return true;
@@ -1355,7 +1384,7 @@ public boolean changePlanyear(String year) {
 	// Checking and Changing Future Year
 	if (year.equalsIgnoreCase("future")) {
 		if (validate(futurePlanYear, 15)) {
-			futurePlanYear.click();
+			jsClickNew(futurePlanYear);
 			Assert.assertTrue(futurePlanYearSelected.getAttribute("id").length()>0,"Future Plan Year is not Selected");
 			threadsleep(5000);
 			return true;
@@ -1369,7 +1398,8 @@ public boolean changePlanyear(String year) {
 public boolean checkPlanyear(String year) {
 	// Checking Current year selection
 	try {
-		MAViewPlansLink.click();
+		//MAViewPlansLink.click();
+		jsClickNew(MAViewPlansLink);
 	if (year.equalsIgnoreCase("current")) {
 		if (validate(currentPlanYear, 15) && currentPlanYearSelected.getAttribute("id").length()>0) {
 			return true;
@@ -1388,4 +1418,21 @@ public boolean checkPlanyear(String year) {
 	return false;
 }
 
+
+@FindBy(xpath = "//div[@class='switch-field ng-scope']//label[@class='ng-binding'][contains(text(),'2020 plans')]")
+private WebElement  CurrentYearPlansBtn;
+
+public VPPPlanSummaryPage handlePlanYearSelectionPRE(String planYear) {
+
+	CommonUtility.checkPageIsReadyNew(driver);			
+		if(planYear.equalsIgnoreCase("current")) {				// if the scenario is for current year
+			if(validate(CurrentYearPlansBtn, 20)) {
+				System.out.println("*****CLICKING ON Current Year button*****: "+CurrentYearPlansBtn.getText());
+				jsClickNew(CurrentYearPlansBtn);
+				CommonUtility.checkPageIsReadyNew(driver);
+			}
+		}
+		return null;
+		
+}
 }

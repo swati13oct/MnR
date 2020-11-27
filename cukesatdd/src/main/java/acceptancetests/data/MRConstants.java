@@ -421,8 +421,17 @@ public static final String UHC_DEEPLINK_URL_Pharmacy = "http://stage-myuhcmedica
   public static final String AARP_DEEPLINK_URL_VirtualVisit = "http://stage-myaarpmedicare.uhc.com/virtualvisits";
   public static final String PCP_DEEPLINK_URL_VirtualVisit = "http://stage-mypcpmedicare.uhc.com/virtualvisits";
   public static final String Medica_DEEPLINK_URL_VirtualVisit = "http://stage-mymedicamedicare.uhc.com/virtualvisits";
-  
- public static String AARP_GUEST_PAYMENTS_PAGE_URL = "https://"+ MRScenario.environment +"-paymyaarppremium."+ "uhc.com";
+ 
+  public static final String STAGE_DEEPLINK_URL_my_Documents_Edelivery = "https://stage-medicare.uhc.com/?TARGET=SMSR/medicare/member/my-documents/overview.html%3fdeeplink=true&WT.mc_ID=8003461&mrcid=email_fed_m";
+  public static final String Offline_PROD_UHC_DEEPLINK_URL_VirtualVisit = "https://offline.myuhcmedicare.com/virtualvisits";
+  public static final String Offline_PROD_AARP_DEEPLINK_URL_VirtualVisit = "https://offline.myaarpmedicare.com/virtualvisits";
+  public static final String Offline_PROD_PCP_DEEPLINK_URL_VirtualVisit = "https://offline.mypcpmedicare.com/virtualvisits";
+  public static final String Offline_PROD_Medica_DEEPLINK_URL_VirtualVisit = "https://offline.mymedicamedicare.com/virtualvisits";
+  public static final String Offline_PROD_UHC_DEEPLINK_URL_HWP ="https://offline.myuhcmedicare.com/hwp";
+  public static final String Offline_PROD_AARP_DEEPLINK_URL_HWP ="https://offline.myaarpmedicare.com/hwp";
+  public static final String Offline_PROD_PCP_DEEPLINK_URL_HWP ="https://offline.mypcpmedicare.com/hwp";
+  public static final String Offline_PROD_Medica_DEEPLINK_URL_HWP ="https://offline.mymedicamedicare.com/hwp";
+     public static String AARP_GUEST_PAYMENTS_PAGE_URL = "https://"+ MRScenario.environment +"-paymyaarppremium."+ "uhc.com";
   public static String UHC_GUEST_PAYMENTS_PAGE_URL = "https://"+ MRScenario.environment +"-paymyuhcpremium."+ "uhc.com";
   public static String RETIREE_GUEST_PAYMENTS_PAGE_URL ="https://"+ MRScenario.environment +"-paymyuhcpremium."+ "uhc.com"+"/retiree";
   public static String PCP_GUEST_PAYMENTS_PAGE_URL = "https://"+ MRScenario.environment +"-paymypcppremium."+ "uhc.com";
@@ -435,10 +444,5 @@ public static final String UHC_DEEPLINK_URL_Pharmacy = "http://stage-myuhcmedica
   public static String PCP_GUEST_PAYMENTS_PAGE_URL_PROD= "https://www.medicare.uhc.com/pcp/premium-payment/#/";
   public static String MEDICA_GUEST_PAYMENTS_PAGE_URL_PROD= "https://www.medicare.uhc.com/medica/premium-payment/#/"; 
   public static String GUEST_PAYMENTS_PAGE_URL_TEAM_A_TEST= "https://www.team-atest-medicare.ocp-elr-core-nonprod.optum.com/content/medicare/guest-payment.html/#/"; 
-  
-}
 
-
-
-	    
- 
+  }

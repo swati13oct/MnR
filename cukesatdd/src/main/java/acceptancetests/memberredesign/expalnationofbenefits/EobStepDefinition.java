@@ -495,6 +495,7 @@ public class EobStepDefinition {
 	public void the_user_clicks_on_first_eob_from_the_list_dream() {
 		String planType=(String) getLoginScenario().getBean(LoginCommonConstants.PLANTYPE);
 		String memberId=(String) getLoginScenario().getBean(EobCommonConstants.MEMBERID);
+		System.out.println("TEST - memberID="+memberId);
 		boolean testApiFlag=(Boolean) getLoginScenario().getBean(EobCommonConstants.TESTAPI);
 		int eobCount=(Integer) getLoginScenario().getBean(EobCommonConstants.EOB_COUNT);
 		if (eobCount>0) {

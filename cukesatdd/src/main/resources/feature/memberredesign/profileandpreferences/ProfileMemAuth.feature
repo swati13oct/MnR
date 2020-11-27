@@ -2,7 +2,7 @@
 Feature: 1.02.1 Member Profile page - Member Auth
 
   #Background: If run on stage then feature security flag needs to be true
-  #   Given feature security flag must set to true when testing on stage env
+  #   Given feature security flag must set to true when testing on test env
   #    | Feature           | UCPProfileAndPreferences |
 
   @memAuth_accountProfile01
