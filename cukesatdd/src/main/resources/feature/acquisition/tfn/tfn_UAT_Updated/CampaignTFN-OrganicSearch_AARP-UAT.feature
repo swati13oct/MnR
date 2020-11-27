@@ -11,14 +11,14 @@ Feature: UAT Scripts-To test Organic SearchCampaign TFN on AARP site
     Then the user validates PSC code
       | PSC Code | <pscCode> |
     Then the user navigates to following MA Plan Page URL and validate Federal TFN
-      | MA URL    | <maUrl> |
-      | TFN Xpath | <maTFN> |
+      | MA URL    | <medicareeduUrl> |
+      | TFN Xpath | <medicareeduTFN> |
    And the user retrieves TFNSessionCookie and Federal and MedSupp TFN 
     Then the user validates PSC code
       | PSC Code | <pscCode> |  
-    #Then the user navigate to following Med Supp Plan URL and validate MedSupp TFN
-    #  | MedSupp URL | <medicareeduUrl> |
-      #| TFN Xpath   | <medicareeduTFN> |
+   # Then the user navigate to following Med Supp Plan URL and validate MedSupp TFN
+     # | MedSupp URL | <medicareeduUrl> |
+     # | TFN Xpath   | <medicareeduTFN> |
      # Then the user validates PSC code
     #  | PSC Code | <pscCode> | 
 		Given user is on Bing and search AARP Medicare Advantage Plan to navigate to navigate to AARP page
