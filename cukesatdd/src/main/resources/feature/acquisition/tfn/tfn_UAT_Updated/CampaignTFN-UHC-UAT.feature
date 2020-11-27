@@ -109,15 +109,16 @@ When the user enters zipcode on health plans page
    @Scenario_6_External_Link_UHC_UAT
   Scenario Outline: <scenario>  Verify TFN through External Links
     Given the user Starts WebDriver
-     Given the user is on following acquisition site from Campaign Traffic
-      | Site         | <site>         |
-      | Campaign URL | <campaignUrl>  |      
+   Given the user is on UHC medicare solutions acquisition site from Campaign Traffic
+      | Campaign URL | <campaignUrl>  |    
     And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
     Then the user validates PSC code
       | PSC Code | <pscCode> |
     Then the user navigates to homepage validates Federal TFN
-		#And the user clicks on the shopping cart icon
-		And the user clicks on the shopping cart icon in UHC site
+		And the user selects the state drop down value in home page
+      | State | <state> |
+		And the user clicks on the shopping cart icon
+		#And the user clicks on the shopping cart icon in UHC site
   	And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
     Then the user validates PSC code
       | PSC Code | <pscCode> |  
@@ -134,7 +135,7 @@ When the user enters zipcode on health plans page
       Then the user validates PSC code
       | PSC Code | <pscCode> | 
     Examples:  
-       |scenario                         |site| pscCode | campaignUrl                                                                                      | medEdURL1                                  | medEdTFN                                                        | shoppagesUrl|      shoppagesTFN             |userName|password|
-       |Scenerio 6-ExternalLink - UMS 	|blayer  |8002977 | health-plans/medicare-advantage-plans/available-plans.html?zipcode=10001&WT.mc_id=8002977&county=420&state=36&coveragePerson=M&originatingSite=https%253A%252F%252Fwww.myuhcplans.com%252Fmorganstanley&subdomain=group#/plan-summary             |   medicare-articles/medicare-made-clear.html         |         (//span[@class='heading-6']//u)[1]              |  shop/medicare-supplement-plans.html                       |//button[@id='sam-call-button']//span[contains(@class,'sam__button__text desktop')]|mnrqavd11|Password@1|
+       |scenario                         |site|state| pscCode | campaignUrl                                                                                      | medEdURL1                                  | medEdTFN                                                        | shoppagesUrl|      shoppagesTFN             |userName|password|
+       |Scenerio 6-ExternalLink - UMS 	|blayer |Alabama  |8002977 | health-plans/medicare-advantage-plans/available-plans.html?zipcode=10001&WT.mc_id=8002977&county=420&state=36&coveragePerson=M&originatingSite=https%253A%252F%252Fwww.myuhcplans.com%252Fmorganstanley&subdomain=group#/plan-summary             |   medicare-articles/medicare-made-clear.html         |         (//span[@class='heading-6']//u)[1]              |  shop/medicare-supplement-plans.html                       |//button[@id='sam-call-button']//span[contains(@class,'sam__button__text desktop')]|mnrqavd11|Password@1|
        
         
