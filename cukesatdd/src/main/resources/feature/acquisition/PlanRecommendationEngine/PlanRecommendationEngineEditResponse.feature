@@ -1,4 +1,4 @@
-@PlanRecommendationEngine
+@PlanRecommendationEngine @PRERegression7
 Feature: Plan Recommendation Engine flow - Verify PRE flows with Edit response functionalities
 
   @PRE @planrecommendation @EditResponsePage

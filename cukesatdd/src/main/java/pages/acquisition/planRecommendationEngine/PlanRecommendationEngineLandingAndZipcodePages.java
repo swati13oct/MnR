@@ -143,8 +143,8 @@ public class PlanRecommendationEngineLandingAndZipcodePages extends UhcDriver {
 	
 	public void landingpage() {
 		System.out.println("Validating Title: ");
-		String preBreadcrumbs = (driver.findElement(By.cssSelector("div.breadcrumb"))).getText();
-		Assert.assertTrue(preBreadcrumbs.contains("Home / Plan Recommendation Engine"));
+		//String preBreadcrumbs = (driver.findElement(By.cssSelector("div.breadcrumb"))).getText();
+		//Assert.assertTrue(preBreadcrumbs.contains("Home / Plan Recommendation Engine"));
 		String ExpectedTitle = "plan";
 		validate(landingpageHeader, 30);
 		String ActualTitle = landingpageHeader.getText();

@@ -49,7 +49,7 @@ public class ACQDrugCostEstimatorPage extends UhcDriver {
 	@FindBy(css = "input#drugsearch")
 	private WebElement drugsearchBox;
 
-	@FindBy(css = "uhc-menu uhc-menu-item div")
+	@FindBy(css = "#listPop li")
 	private List<WebElement> drugsAutoList;
 
 	@FindBy(css = "button#search")
