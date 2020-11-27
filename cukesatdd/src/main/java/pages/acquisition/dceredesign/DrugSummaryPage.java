@@ -224,6 +224,9 @@ public class DrugSummaryPage extends UhcDriver {
 	
 	@FindBy(id = "inValidZipcodeLbl")
 	private WebElement invalidZipCodeMsg;
+	
+	@FindBy(xpath = "//*[contains(@class,'keepPharmacyLink')]")
+	private WebElement keepUsingPharmacyLink;
 
 	@Override
 	public void openAndValidate() {
@@ -909,6 +912,16 @@ public class DrugSummaryPage extends UhcDriver {
 	
 	public void clickViewPlanDetails(String planName) {
 		driver.findElement(By.xpath("//*[@class='uhc-card__header']//h4[contains(text(),'"+planName+"')]//../../following-sibling::div//*[text()='View Plan Details']")).click();
+	}
+	
+	public void validateDefaultPharmacyName(String defaultPharmacy) {
+		validateNew(pharmacyName);
+		Assert.assertTrue("Default pharmacy name is not displayed", pharmacyName.getText().contains(defaultPharmacy));
+	}
+	
+	public void clickKeepUsingPharmacyLink() {
+		validateNew(keepUsingPharmacyLink);
+		keepUsingPharmacyLink.click();
 	}
 
 }

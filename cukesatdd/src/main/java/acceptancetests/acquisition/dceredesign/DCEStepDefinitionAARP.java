@@ -2182,5 +2182,30 @@ public class DCEStepDefinitionAARP {
 		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
 		drugSummaryPage.clickChangePharmacyFromAltMsg();
 	}
+	
+	@Then("^the user verify the default Retail chain pharmacy on drug summary page$")
+	public void the_user_verify_the_default_Retail_chain_pharmacy_on_drug_summary_page(DataTable attributes)  {
+		List<DataTableRow> memberAttributesRow = attributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
 
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		String pharmacyName = memberAttributesMap.get("DefaultPharmacy");
+		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
+		drugSummaryPage.validateDefaultPharmacyName(pharmacyName);
+	}
+
+	@Then("^user validate \"([^\"]*)\" pharmacy on drug summary page$")
+	public void user_validate_pharmacy_on_drug_summary_page(String pharmacyName) {
+		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
+		drugSummaryPage.validateDefaultPharmacyName(pharmacyName);
+	}
+	
+	@When("^user clicks on Keep Using This Pharmacy link on change pharmacy modal")
+	public void user_clicks_on_keep_using_pharmacy_link_on_change_pharmacy_modal() throws InterruptedException {
+		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
+		drugSummaryPage.clickKeepUsingPharmacyLink();
+	}
 }
