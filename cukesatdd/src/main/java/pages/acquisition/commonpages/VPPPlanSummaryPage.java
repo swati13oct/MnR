@@ -924,16 +924,19 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			// waitForPageLoadNew but didn't work
 			jsClickNew(pdpPlansViewLink);
 			System.out.println("PDP Plan Type Clicked");
+			waitForPageLoadSafari();
 			CommonUtility.waitForPageLoadNew(driver, planListContainer, 30);
 		} else if (planType.equalsIgnoreCase("MA") || planType.equalsIgnoreCase("MAPD")) {
 			CommonUtility.waitForPageLoadNew(driver, maPlansViewLink, 30);
 			// sleepBySec(2);
 			jsClickNew(maPlansViewLink);
+			waitForPageLoadSafari();
 			CommonUtility.waitForPageLoadNew(driver, planListContainer, 30);
 		} else if (planType.equalsIgnoreCase("MS")) {
 			CommonUtility.waitForPageLoadNew(driver, msPlansViewLink, 30);
 			// sleepBySec(2);
 			jsClickNew(msPlansViewLink);
+			waitForPageLoadSafari();
 			CommonUtility.waitForPageLoadNew(driver, medSuppZipCode, 30);
 			/*
 			 * msPlansViewLink.click(); CommonUtility.waitForPageLoadNew(driver,
@@ -943,6 +946,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			// sleepBySec(5);
 			CommonUtility.waitForPageLoadNew(driver, snpPlansViewLink, 30);
 			jsClickNew(snpPlansViewLink);
+			waitForPageLoadSafari();
 			CommonUtility.waitForPageLoadNew(driver, planListContainer, 30);
 			try {
 				Thread.sleep(5000);
