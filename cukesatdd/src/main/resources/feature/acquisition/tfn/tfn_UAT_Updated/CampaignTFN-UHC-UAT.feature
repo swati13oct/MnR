@@ -15,7 +15,10 @@ Feature: UAT-SCripts To test Campaign TFN in all flows on UHC site
  Then the user navigates to PDP Plan Details Page and validates Federal TFN
  Then the user navigates to PDP OLE Page and validates Federal TFN
 Then the user navigates to homepage validates Federal TFN
+And the user selects the state drop down value in home page
+      | State | <state> |
 And the user clicks on the shopping cart icon
+#And the user clicks on the shopping cart icon
   	And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
     Then the user validates PSC code
       | PSC Code | <pscCode> |
@@ -35,10 +38,12 @@ When the user enters zipcode on health plans page
       | PSC Code | <pscCode> | 
     Then the user navigates to following  DCE Page URL and validate Federal TFN 
       | DCE URL    | <dceUrl> |
-    Then the user validate the sam icons tfn with federal TFN on Acquistion page 
+    And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
+    Then the user validates PSC code
+      | PSC Code | <pscCode> | 
   Examples: 
-  |scenario           | pscCode | maUrl                                  | maTFN                                                          | pdpUrl                                    | pdpTFN                                                         | snpUrl                                                                                                                                                                                                                                                                                                                      | snpTFN                       | medSuppUrl                                                                | medSuppTFN     | medicareUrl                |medicareTFN| site   | zipcode | plantype | isMultutiCounty |planyear |userName|password| dceUrl|Precedence2PSC |memberSignIn|
-  |Scenario 1 - UMS 	|  880180 | enroll/ma-enrollment.html | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | shop/estimate/pdp-costs.html | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | health-plans.html?zipcode=28035&deepLink=favPlansDeepLink&plantype=MA&year=2020&planId=H5253041000&planYear=2020&systemYear=2020&zipcode=28035&fipsCode=119&product=MAPD&yearDisclaimer=undefined&month=2&yearToggle=undefined&deepLink=plandetail&WT.mc_id=897749&mrcid=em:Acq:MR%7cFederal%7cEGEM3011%7c::897749!/details | //a[contains(@class, 'tel')] | health-plans/medicare-supplement-plans/medicare-information.html?vpp=true | //*[@id='tfn'] | /medicare-education.html     |(//a[contains(@class, 'tel')])[1]|blayer | 10001   | MA       | No              |current  |mnrqavd11|Password@1|health-plans/estimate-drug-costs.html#/drug-cost-estimator|8009508 |https://www.medicare.uhc.com/  |
+  |scenario           | pscCode | state   | maUrl                    | maTFN                                                          | pdpUrl                                    | pdpTFN                                                         | snpUrl                                                                                                                                                                                                                                                                                                                      | snpTFN                       | medSuppUrl                                                                | medSuppTFN     | medicareUrl                |medicareTFN| site   | zipcode | plantype | isMultutiCounty |planyear |userName|password| dceUrl|Precedence2PSC |memberSignIn|
+  |Scenario 1 - UMS 	|  880180 |Alabama  |enroll/ma-enrollment.html | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | shop/estimate/pdp-costs.html | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | health-plans.html?zipcode=28035&deepLink=favPlansDeepLink&plantype=MA&year=2020&planId=H5253041000&planYear=2020&systemYear=2020&zipcode=28035&fipsCode=119&product=MAPD&yearDisclaimer=undefined&month=2&yearToggle=undefined&deepLink=plandetail&WT.mc_id=897749&mrcid=em:Acq:MR%7cFederal%7cEGEM3011%7c::897749!/details | //a[contains(@class, 'tel')] | health-plans/medicare-supplement-plans/medicare-information.html?vpp=true | //*[@id='tfn'] | /medicare-education.html     |(//a[contains(@class, 'tel')])[1]|blayer | 10001   | MA       | No              |current  |mnrqavd11|Password@1|health-plans/estimate-drug-costs.html#/drug-cost-estimator|8009508 |https://www.medicare.uhc.com/  |
   
   
    #######################Script 2: Campaign traffic########################################
@@ -111,7 +116,8 @@ When the user enters zipcode on health plans page
     Then the user validates PSC code
       | PSC Code | <pscCode> |
     Then the user navigates to homepage validates Federal TFN
-		And the user clicks on the shopping cart icon
+		#And the user clicks on the shopping cart icon
+		And the user clicks on the shopping cart icon in UHC site
   	And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
     Then the user validates PSC code
       | PSC Code | <pscCode> |  
