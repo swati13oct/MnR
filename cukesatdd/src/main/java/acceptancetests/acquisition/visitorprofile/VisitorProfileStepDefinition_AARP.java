@@ -7,6 +7,7 @@ import java.util.Map;
 import org.junit.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstants;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
@@ -46,6 +47,7 @@ public class VisitorProfileStepDefinition_AARP {
 		String state = givenAttributesMap.get("State");
 		AcquisitionHomePage acqHomePage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		CommonConstants.SELECTED_STATE  = state; 
 
 		acqHomePage.selectState(state);
 	}

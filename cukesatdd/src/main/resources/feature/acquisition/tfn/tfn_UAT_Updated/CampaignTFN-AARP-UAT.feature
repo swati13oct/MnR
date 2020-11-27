@@ -21,11 +21,13 @@ Feature: UAT Scripts-To test Campaign TFN in all flows on AARP site
  Then the user navigates to PDP Plan Details Page and validates Federal TFN
  Then the user navigates to PDP OLE Page and validates Federal TFN
  Then the user navigates to homepage validates Federal TFN
-  And the user clicks on the shopping cart icon
+  And the user selects the state drop down value in AARP home page
+     | State | <state> |
+     And the user clicks on the shopping cart icon in AARP site
   	And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
     Then the user validates PSC code
       | PSC Code | <pscCode> |
-And the user clicks on the add plans button in the profile
+And the user clicks on the add plans button in the profile in AARP site
 When the user enters zipcode on health plans page
       | Zip Code        | <zipcode>         |
       | Is Multi County | <isMultutiCounty> |
@@ -291,7 +293,9 @@ When the user enters zipcode on health plans page
     And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
     Then the user validates PSC code
       | PSC Code | <pscCode> |
-    And the user clicks on the shopping cart icon
+    And the user selects the state drop down value in AARP home page
+       | State | <state> |
+    And the user clicks on the shopping cart icon in AARP site
   	And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
     Then the user validates PSC code
       | PSC Code | <pscCode> |
