@@ -56,10 +56,10 @@ Feature: 1.11. ACQ-Pharmacy Locator AARP
     @PharmacyLocatorCommonAARP01b
     Examples: 
       | TID   | site | zipcode | distance | countyName      | cy_planYear | cy_planName                                                      | ny_planYear | ny_planName                                                      | pharmacyType                | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
-#      | 15583 | AARP |   78006 |       10 | Comal County    |        2021 | UnitedHealthcare Medicare Advantage Choice (Regional PPO)        |        2021 | UnitedHealthcare Medicare Advantage Choice (Regional PPO)        | Retail Pharmacy             | False                 | False            | True                 |
-#      | 15583 | AARP |   80002 |       10 | Adams County    |        2021 | AARP Medicare Advantage SecureHorizons Plan 1 (HMO)              |        2021 | AARP Medicare Advantage SecureHorizons Plan 1 (HMO)              | Long-term care              | False                 | False            | True                 |
+      | 15583 | AARP |   78006 |       10 | Comal County    |        2021 | UnitedHealthcare Medicare Advantage Choice (Regional PPO)        |        2021 | UnitedHealthcare Medicare Advantage Choice (Regional PPO)        | Retail Pharmacy             | False                 | False            | True                 |
+      | 15583 | AARP |   80002 |       10 | Adams County    |        2021 | AARP Medicare Advantage SecureHorizons Plan 1 (HMO)              |        2021 | AARP Medicare Advantage SecureHorizons Plan 1 (HMO)              | Long-term care              | False                 | False            | True                 |
       | 15583 | AARP |   14867 |       25 | Tompkins County |        2021 | UnitedHealthcare Medicare Advantage Choice Plan 3 (Regional PPO) |        2021 | UnitedHealthcare Medicare Advantage Choice Plan 3 (Regional PPO) | Long-term care              | False                 | False            | True                 |
-#      | 15583 | AARP |   33321 |       10 | None            |        2021 | Medica HealthCare Plans MedicareMax (HMO)                        |        2021 | Medica HealthCare Plans MedicareMax (HMO)                        | Home Infusion and Specialty | False                 | False            | True                 |
+      | 15583 | AARP |   33321 |       10 | None            |        2021 | Medica HealthCare Plans MedicareMax (HMO)                        |        2021 | Medica HealthCare Plans MedicareMax (HMO)                        | Home Infusion and Specialty | False                 | False            | True                 |
 
     @PharmacyLocatorCommonUHC01a
     Examples: 
