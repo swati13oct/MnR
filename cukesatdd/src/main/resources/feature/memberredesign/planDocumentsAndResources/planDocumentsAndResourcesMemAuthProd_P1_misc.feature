@@ -1,9 +1,9 @@
 @planAndDocuments @thePredators @E2E @feature-F368974
 Feature: 1.06.2.2 Member Plans and Documents - section: header -and- My Documents -and- EOB -and- Renew magine -and- Adobe -and- NeedHelp - Member Auth - PROD
 
-  #Background: If run on stage then feature security flag needs to be true
-  #   Given feature security flag must set to true when testing on stage env
-  #    | Feature           | UCPPlanDocuments |
+  Background: If run on stage then feature security flag needs to be true
+     Given feature security flag must set to true when testing on test env
+      | Feature           | UCPPlanDocuments |
 
   #------------------------------------------
   @prod_planAndDocuments01 @header @myDocuments @eob @renewMagazine @adobe @needHelp
@@ -41,12 +41,13 @@ Feature: 1.06.2.2 Member Plans and Documents - section: header -and- My Document
     #note: moved to footer feature
 	#Then user validate Need Help section
 
+	#note: Teripappas is MAPD IND with plan 2021
 	@prod_preeffective_ma_mapd
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | md_sd | eob_sd | eob_m | eob_d | rm_sd |
 #      | 01-001 | xxxxx       | kkumard  | mnrs786@  | Ranch1955       | MA       | AARP_IND_PREEFF_PDnR  | true  | false  | false | false | false |
 #      | 02-002 | xxxxx       | kkumard  | mnrs786@  | testusername    | MA       | GROUP_PREEFF_PDnR     | true  | false  | false | false | false |
-      | 03-003 | xxxxx       | kkumard  | mnrs786@  | Abayne01          | MAPD     | AARP_IND_PREEFF_PDnR  | true  | false  | false | false | false |
+      | 03-003 | xxxxx       | kkumard  | mnrs786@  | UHCjanicejohn          | MAPD     | AARP_IND_PREEFF_PDnR  | true  | false  | false | false | false |
 
 #	@prod_preeffective_pdp
 #	Examples: 

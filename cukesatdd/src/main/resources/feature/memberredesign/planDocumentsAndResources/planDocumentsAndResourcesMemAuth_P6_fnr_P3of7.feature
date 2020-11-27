@@ -2,7 +2,7 @@
 Feature: 1.06.6.1 Member Plans and Documents - section: Forms And Resources Part 3 of 7 - Reimbursement Forms - Member Auth
 
   #Background: If run on stage then feature security flag needs to be true
-  #   Given feature security flag must set to true when testing on stage env
+  #   Given feature security flag must set to true when testing on test env
   #    | Feature           | UCPPlanDocuments |
 
   #------------------------------------------

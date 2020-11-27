@@ -1,9 +1,9 @@
 @myDocuments  @thePredators @E2E @feature-F368974 @F434260
 Feature: 1.06.7 Member My Documents Page- Member Auth - PROD
 
-  #Background: If run on stage then feature security flag needs to be true
-  #   Given feature security flag must set to true when testing on stage env
-  #    | Feature           | UCPMyDocuments |
+  Background: If run on stage then feature security flag needs to be true
+     Given feature security flag must set to true when testing on test env
+      | Feature           | UCPMyDocuments |
 
   @prodSanity_Individual_MyDocuments
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - To validate the My Documents page E2E Scenario
@@ -39,7 +39,7 @@ Feature: 1.06.7 Member My Documents Page- Member Auth - PROD
     #------------Pass documents expected flag as Y or N only--------------
     Examples:
       | TID   | username  | password  | MemUserName      | planType | memberType            | documentsExpectedInPast24Months  |
-      | 10000 | ujethwa  | 221Umang  | TEAKSAMPPALA1    | MAPD     | Individual_MyDocuments|           Y                      |
+      | 10000 | ujethwa  | Member22  | LMHOCHSCHILD11    | MAPD     | Individual_MyDocuments|           Y                      |
 
   @prod_myDocuments01
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - To validate the My Documents page E2E Scenario
@@ -98,6 +98,6 @@ Feature: 1.06.7 Member My Documents Page- Member Auth - PROD
     #------------Pass documents expected flag as Y or N only--------------
     Examples: 
     | TID   | username  | password  | MemUserName      | planType | memberType            | documentsExpectedInPast24Months  |             
-    | 10000 | ujethwa  | 221Umang  | TEAKSAMPPALA1    | MAPD     | Individual_MyDocuments|           Y                      |
-    | 10001 | ujethwa  | 221Umang | WILLIAMGARRISON48 | MAPD     | Group_MyDocuments     |           Y                      |
-    | 10002 | ujethwa  | 221Umang | rldf1942       | COMBO    | FedAndShip_MyDocuments|           Y                    |
+    | 10000 | ujethwa  | Member22  | LMHOCHSCHILD11    | MAPD     | Individual_MyDocuments|           Y                      |
+    | 10001 | ujethwa  | Member22 | WILLIAMGARRISON48 | MAPD     | Group_MyDocuments     |           Y                      |
+    | 10002 | ujethwa  | Member22 | rldf1942       | COMBO    | FedAndShip_MyDocuments|           Y                    |

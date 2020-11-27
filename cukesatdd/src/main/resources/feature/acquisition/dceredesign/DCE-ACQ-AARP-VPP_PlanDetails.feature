@@ -1,5 +1,5 @@
 @DCE_Redesign_VPP_Details
-Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanDetails AARP - To test DCE - VPP Plan Details in AARP site
+Feature: 1.10.2 DCE-Redesign-VPP_PlanDetails AARP - To test DCE - VPP Plan Details in AARP site
 
   @DCE_Redesign_VPP_PlanDetails
   Scenario Outline: 1.10.2.1 To test the DCE Redesignflow for PlanType :  <plantype> from vpp Plan Details
@@ -133,7 +133,7 @@ Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanDetails AARP - To test DCE - VPP Plan De
     Then the user Clicks button to VPP Plan Details Page from Drug Details Page
     Then the user validates planName matches plan Name in VPP
     Then the user verify the drug cost estimator and view plan summary on VPP detail page in AARP
-    Then the user click on view plan summary on vpp detail page in AARP
+    Then the user click on view plan summary on vpp detail page
     Then user click on veiw plan details on summary page in AARP
     #Then user verifiy drug cost estomator and view plan summary is not exist in vpp detail page in ARRP
      

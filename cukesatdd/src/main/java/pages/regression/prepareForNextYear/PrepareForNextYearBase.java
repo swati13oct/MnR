@@ -839,6 +839,20 @@ public class PrepareForNextYearBase  extends PrepareForNextYearWebElements {
 					}
 				}
 
+				//note: workaround
+				//note: sometimes after deleting cookie to test the green checkmark, the pdf links would be gone on the page
+				//note: reload the page to see if the pdfs would be showing again before giving up
+				int max=3;
+				int retry=0;
+				while (!validate(pdfElement,0) && retry<max) {
+					retry=retry+1;
+					System.out.println("TEST - retry #"+retry);
+					sleepBySec(2);
+					driver.navigate().refresh();
+					CommonUtility.checkPageIsReady(driver);
+					checkModelPopup(driver,1);
+					selectValueFromDropdown(langDropdownElement1, targetLang);
+				}
 				CommonUtility.waitForPageLoad(driver, pdfElement, 10);
 				note.addAll(validateHaveItem(targetItem, pdfElement));
 

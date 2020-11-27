@@ -56,12 +56,13 @@ public class CampaignTFNPage extends UhcDriver {
 	//@FindBy(xpath = "//h3[contains(text(),'AARP Medicare Advantage (Part C) Plans | UnitedHealthcare') or contains(text(),'AARP Medicare Advantage (Part C) Plans | UnitedHea')]")
 	//@FindBy(xpath = "//a[@href='https://www.aarpmedicareplans.com/shop/medicare-advantage-plans.html']")
 	//@FindBy(xpath = "//h3[contains(text(),'AARP Medicare Plans from UnitedHealthcare')]")
-	@FindBy(xpath = "(//h3//span[contains(text(),'AARP Medicare Advantage (Part C) Plans | UnitedHealthcare')])[1]")
+	@FindBy(xpath = "(//h3//span[contains(text(),'AARP Medicare Advantage (Part C) Plans | UnitedHealthcare') or contains(text(),'Shop AARP Medicare Advantage Plans from UnitedHealthcare')])[1]")
 	public WebElement AARPSearchLinkfromGoogle_alternative;
 
 	//@FindBy(xpath = "(//a[contains(@href,'medicaresolutions')])[3]")
 	//@FindBy(xpath = "//h3[contains(text(),'Learn More About Medicare Advantage (Part C)')]")
-	@FindBy(xpath = "//a//span[contains(text(),'Learn More About Medicare Advantage (Part C) Plans - AARP ...')]")
+//	@FindBy(xpath = "//a//span[contains(text(),'Learn More About Medicare Advantage (Part C) Plans - AARP ...')]")
+	@FindBy(xpath = "(//a//span[contains(text(),'Learn More About Medicare Advantage (Part C) Plans - AARP ...')])[2]")
 	//@FindBy(xpath = "//a//h3[contains(text(),'Learn More About Medicare Advantage (Part C) Plans - AARP ...') or contains(text(),'Find Medicare Plans Available from UnitedHealthcare')]")
 	//@FindBy(xpath = "//h3[contains(text(),'Learn More About Medicare Advantage (Part C)') or contains(text(),'Find Medicare Plans Available from UnitedHealthcare')]")
 	//@FindBy(xpath = "//h3[contains(text(),'Find Medicare Plans Available from UnitedHealthcare')]")
@@ -133,7 +134,7 @@ public class CampaignTFNPage extends UhcDriver {
 	public static WebElement proactiveChatExitBtn;
 	
 	public void CheckiPerseptions() {
-		CommonUtility.waitForPageLoad(driver, proactiveChatExitBtn,20); // do not change this to waitForPageLoadNew as we're not trying to fail the test if it isn't found
+		CommonUtility.waitForPageLoad(driver, proactiveChatExitBtn,10); // do not change this to waitForPageLoadNew as we're not trying to fail the test if it isn't found
 		try{
 			if(proactiveChatExitBtn.isDisplayed())
 				jsClickNew(proactiveChatExitBtn);
@@ -196,7 +197,7 @@ public class CampaignTFNPage extends UhcDriver {
 	private void CheckPageLoad() {
 		CommonUtility.checkPageIsReadyNew(driver);
 		System.out.println("Current page URL: "+driver.getCurrentUrl());
-		checkModelPopup(driver, 30);
+		checkModelPopup(driver, 10);
 	
 	}
 	
@@ -269,6 +270,12 @@ public class CampaignTFNPage extends UhcDriver {
 	}
 
 	public void validateFederalTFN(String tFN_Xpath) {
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		WebElement TFNelement = driver.findElement(By.xpath(tFN_Xpath));
 		validateNew(TFNelement);	
 		if(validateNew(TFNelement) && TFNelement.isDisplayed()) {
@@ -597,21 +604,18 @@ public class CampaignTFNPage extends UhcDriver {
 
 	
 	public void NavigateToHome() {
-		CheckPageLoad();
-		CheckiPerseptions();
-		CommonUtility.waitForPageLoadNew(driver, HomeLogo, 30);
+		//CheckPageLoad();
+		//CheckiPerseptions();
+		CommonUtility.waitForPageLoadNew(driver, HomeLogo, 10);
 		HomeLogo.click();
 		System.out.println("Home Logo is clicked to navigate to Home Page");
-		try {
-			if(LeaveOLE.isDisplayed()) {
+		if(driver.getCurrentUrl().contains("online-application")) {
+			if(validate(LeaveOLE,10)) {
 				LeaveOLE.click();
 				System.out.println("Leave OLE is clicked to navigate to Home Page");
 			}
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		CommonUtility.waitForPageLoadNew(driver, zipCodeField, 30);
+		} 
+		//CommonUtility.waitForPageLoadNew(driver, zipCodeField, 30);
 		if(!validateNew(zipCodeField)){
 			Assert.assertTrue("Home Page NOT Displayed", false);
 		}
