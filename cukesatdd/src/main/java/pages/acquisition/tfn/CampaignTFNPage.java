@@ -88,7 +88,10 @@ public class CampaignTFNPage extends UhcDriver {
 	//@FindBy(xpath = "//a[contains(@href,'https://www.aarpmedicareplans.com/health-plans/shop/medicare-advantage-plans/ma-plan-benefits.html')]")
 	@FindBy(xpath = "//a[contains(text(),'AARP Medicare Plans from UnitedHealthcare')]")
 	public WebElement YahooSearchResult;
-
+	
+	//a[contains(@href,'https://www.aarpmedicareplans.com/shop/medicare-advantage-plans.html')]
+	@FindBy(xpath = "//a[contains(@href,'https://www.aarpmedicareplans.com/shop/medicare-advantage-plans.html')]")
+	public WebElement YahooSearchResultshop;
 	//@FindBy(xpath = "//h3//a[contains(text(),'Medicare Advantage (Part C) Plans')]")
 	//@FindBy(xpath = "//h3//a[contains(text(),'Find Medicare Plans Available')]")
 	@FindBy(xpath = "//h3//a[contains(text(),'Find Medicare Plans Available') or contains(@href,'https://www.uhcmedicaresolutions.com/health-plans.html')]")
@@ -350,6 +353,27 @@ public class CampaignTFNPage extends UhcDriver {
 			Assert.assertFalse("no yahoo search result found", false);
 		}
 		YahooSearchResult.click();
+		System.out.println("Yahoo Results - AARP Medicare Advantage Plan - Link Clicked");
+		switchToNewTab();
+		CheckPageLoad();
+	}
+	
+	public void YahooSearchAARPShopPages() {
+		
+		CommonUtility.waitForPageLoad(driver, YahooSearchField, 30);
+		YahooSearchField.sendKeys("AARP Medicare Advantage Plan");
+		CommonUtility.waitForPageLoad(driver, YahooSearchBttn, 30);
+		YahooSearchBttn.click();
+		System.out.println("Yahoo Search entered for : AARP Medicare Advantage Plan");
+
+		CommonUtility.waitForPageLoad(driver, YahooSearchResultshop, 30);
+		if(YahooSearchResultshop.isDisplayed())
+			System.out.println("Yahoo search result found");
+		else {
+			System.out.println("yahoo search result not found");
+			Assert.assertFalse("no yahoo search result found", false);
+		}
+		YahooSearchResultshop.click();
 		System.out.println("Yahoo Results - AARP Medicare Advantage Plan - Link Clicked");
 		switchToNewTab();
 		CheckPageLoad();

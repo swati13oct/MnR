@@ -634,6 +634,22 @@ public void the_user_navigate_to_following_MedED_Pages_URL_and_validate_Federal_
 	tfnPage.validateFederalTFN(TFN_Xpath);
 }
 
+@Given("^user is on Yahoo and search AARP Medicare Advantage Plan and  navigate to AARP shop pages$")
+public void user_is_on_Yahoo_and_search_AARP_Medicare_Advantage_Plan_to_navigate_to_AARP_shoppage() throws Throwable {
+
+	String url = "https://www.Yahoo.com/";
+	driver = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+
+	//wd.manage().deleteAllCookies();
+	CampaignTFNPage tfnPage = new CampaignTFNPage(driver);
+	getLoginScenario().saveBean(CommonConstants.WEBDRIVER, driver);
+	tfnPage.openUrl(url);
+	tfnPage.YahooSearchAARPShopPages();
+
+	getLoginScenario().saveBean(PageConstants.CAMPAIGN_TFN_PAGE, tfnPage);
+
+}
+
 }
 
 

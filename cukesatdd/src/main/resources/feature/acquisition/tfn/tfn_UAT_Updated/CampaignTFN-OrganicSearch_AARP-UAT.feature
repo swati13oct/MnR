@@ -124,6 +124,9 @@ Feature: UAT Scripts-To test Organic SearchCampaign TFN on AARP site
       | TFN Xpath   | <medSuppTFN> |    
     ################## Precedence 6.15 - Visit site via organic search from Yahoo, PSC code 810105######################
     Given user is on Yahoo and search AARP Medicare Advantage Plan to navigate to AARP page
+    Then the user navigates to shop pages Page and validates Federal TFN
+     | SHOPPAGES URL   | <connect> |
+      | TFN Xpath | <connectTFN> | 
     And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
     Then the user validates PSC code
       | PSC Code | <Precedence8PSC> |
@@ -132,8 +135,8 @@ Feature: UAT Scripts-To test Organic SearchCampaign TFN on AARP site
       | TFN Xpath   | <medSuppTFN> |
 
     Examples: 
-   | scenario                             | site   | Precedence1PSC | Precedence2PSC |  Precedence3PSC |  Precedence4PSC | Precedence5PSC |Precedence6PSC |Precedence7PSC |Precedence8PSC       | medSuppUrl                          |medSuppTFN                                                      | campaign2Url                                                   |campaign3Url                                        |campaign4Url                                                                                                  |
-   |Scenario 6: Campaign Precedence- AMP  | ulayer |        810106  |         860002 | 8001533          |  8001533        |        810027 | 810106          |  8001533        |        810105 | shop/medicare-supplement-plans.html | (//*[contains(@class,'call')]//a[contains(@class,'tel')])[2]   | /shop/medicare-advantage-plans.html?WT.mc_id=860002&zipcode=90210|/shop/medicare-advantage-plans.html?WT.mc_id=8001533|/health-plans/medicare-advantage-plans/available-plans.html?WT.mc_id=8001533&county=053&state=27#/plan-summary|
+   | scenario                             | site   | Precedence1PSC | Precedence2PSC |  Precedence3PSC |  Precedence4PSC | Precedence5PSC |Precedence6PSC |Precedence7PSC |Precedence8PSC       | medSuppUrl                          |medSuppTFN                                                      | campaign2Url                                                   |campaign3Url                                        |campaign4Url                                                                                                  |connect|connectTFN|
+   |Scenario 6: Campaign Precedence- AMP  | ulayer |        810106  |         860002 | 8001533          |  8001533        |        810027 | 810106          |  8001533        |        810105 | shop/medicare-supplement-plans.html | (//*[contains(@class,'call')]//a[contains(@class,'tel')])[2]   | /shop/medicare-advantage-plans.html?WT.mc_id=860002&zipcode=90210|/shop/medicare-advantage-plans.html?WT.mc_id=8001533|/health-plans/medicare-advantage-plans/available-plans.html?WT.mc_id=8001533&county=053&state=27#/plan-summary|/shop/medicare-advantage-plans.html|(//*[contains(@class,'call')]//a[contains(@class,'tel')])[1]|
   
    
      
@@ -182,7 +185,7 @@ Feature: UAT Scripts-To test Organic SearchCampaign TFN on AARP site
       Then the user navigates to following MA Plan Page URL and validate Federal TFN
       | MA URL    | <maUrl> |
       | TFN Xpath | <maTFN> |
-      Given the user is on AARP medicare acquisition site landing page
+      Then the user navigates to homepage validates Federal TFN
      Then the user navigates to MA Plan Details Page and validates Federal TFN
     #And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
     #Then the user validates PSC code
