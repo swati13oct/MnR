@@ -15,7 +15,7 @@ import cucumber.api.CucumberOptions;
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.acquisition" }, features = { "src/main/resources/feature/acquisition/globalComponents" }, plugin = {
 
 	
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionHeaderAARP.json" }, tags = { "@UATRegressionPages" })
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionHeaderAARP.json" }, tags = { "@globalheader_AARP" })
 
 public class RunMRATDDAcquisitionHeaderAARP {
 
