@@ -237,7 +237,7 @@ Feature: 1.12 UAT - Header and Footer flows
        |Scenario          |	site	|
        |E2E Scenario_5 UMS|	UHC	  |
 
-  @globalfooterULayer @UATRegression
+  @globalheaderULayer @UATRegressionPages
   Scenario Outline: <Scenario> : To verify links displayed in the global header and footer on static pages 
     Given the user is on medicare acquisition site landing page
     	|Site| <site>| 
@@ -286,7 +286,7 @@ Feature: 1.12 UAT - Header and Footer flows
     And the user clicks on browser back button
     And user clicks on visit aarp.org link in the footer
     
-@globalfooter_AARP 
+@globalheader_AARP 
  Examples:
  |Scenario          |site|path                                                            |pagename|
  |E2E Scenario_2 AMP|AARP|health-plans.html#/zipcode                                       |Shop for a Plan|
@@ -356,7 +356,7 @@ Feature: 1.12 UAT - Header and Footer flows
 |E2E Scenario_2 AMP|AARP|medicare-articles/medicare-made-clear.html   |MMC page|
    
    
- @globalfooter_UHC 
+ @globalheader_UHC 
  Examples:
  |Scenario          |site|path                                                             |pagename|
  |E2E Scenario_2 UMS|UHC|health-plans.html#/zipcode                                       |Shop for a Plan|
