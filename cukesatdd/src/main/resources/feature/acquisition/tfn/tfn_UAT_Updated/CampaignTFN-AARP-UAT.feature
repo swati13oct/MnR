@@ -293,9 +293,11 @@ When the user enters zipcode on health plans page
     And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
     Then the user validates PSC code
       | PSC Code | <pscCode> |
-    And the user selects the state drop down value in AARP home page
+    #And the user selects the state drop down value in AARP home page
+    And the user selects the state drop down value in home page
        | State | <state> |
-    And the user clicks on the shopping cart icon in AARP site
+    And the user clicks on the shopping cart icon   
+    #And the user clicks on the shopping cart icon in AARP site
   	And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
     Then the user validates PSC code
       | PSC Code | <pscCode> |
@@ -316,8 +318,8 @@ When the user enters zipcode on health plans page
       Then the user validates PSC code
       | PSC Code | <pscCode> | 
     Examples:  
-       |scenario                         | pscCode | campaignUrl                                                                                      | medEdURL1                                  | medEdTFN                                                        | shoppagesUrl|      shoppagesTFN             |userName|password|
-       |Scenerio 9-ExternalLink - AMP 	|  8000158 | health-plans.html?zipcode=10001&WT.mc_id=8000158&county=420&state=36#/plan-summary               |   medicare-articles/medicare-made-clear.html         |         (//span[@class='heading-6']//u)[1]              |  shop/medicare-supplement-plans.html                       |//button[@id='sam-call-button']//span[contains(@class,'sam__button__text desktop')]|mnrqavd11|Password@1|
+       |scenario                         | pscCode |state| campaignUrl                                                                                      | medEdURL1                                  | medEdTFN                                                        | shoppagesUrl|      shoppagesTFN             |userName|password|
+       |Scenerio 9-ExternalLink - AMP 	|  8000158 |Alabama| health-plans.html?zipcode=10001&WT.mc_id=8000158&county=420&state=36#/plan-summary               |   medicare-articles/medicare-made-clear.html         |         (//span[@class='heading-6']//u)[1]              |  shop/medicare-supplement-plans.html                       |//button[@id='sam-call-button']//span[contains(@class,'sam__button__text desktop')]|mnrqavd11|Password@1|
        
        
      
