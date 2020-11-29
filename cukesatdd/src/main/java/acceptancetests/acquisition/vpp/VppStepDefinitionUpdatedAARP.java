@@ -998,7 +998,7 @@ public class VppStepDefinitionUpdatedAARP {
 	
 	//steps added for NBA
 	
-	@And("^user Verify and click perform on Next Best Action Modal for Get Started$")
+	@And("^user Verify and click perform on Next Best Action Modal for Get Started in AARP site$")
 	public void user_Verify_Next_Best_Action_Modal_for_MAPD_plan_and_click_on_Get_Started() {
 		VPPPlanSummaryPage vppplansummarypage = (VPPPlanSummaryPage) loginScenario
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
