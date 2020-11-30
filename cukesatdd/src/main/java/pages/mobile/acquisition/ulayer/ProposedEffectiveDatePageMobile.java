@@ -15,7 +15,7 @@ import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 import pages.acquisition.ole.PlanPremiumPage;
-import pages.acquisition.ole.PrimaryCarePhysicianPage;
+import pages.mobile.acquisition.ole.PrimaryCarePhysicianPageMobile;
 
 public class ProposedEffectiveDatePageMobile extends UhcDriver{
 	
@@ -123,7 +123,7 @@ public class ProposedEffectiveDatePageMobile extends UhcDriver{
 		else{
 			if (validateNew(driver.findElement(By.xpath("//h1[contains(text(),'Provider')]")))){
 				System.out.println("OLE Primary Care Physician Page is Displayed");
-				return new PrimaryCarePhysicianPage(driver);
+				return new PrimaryCarePhysicianPageMobile(driver);
 			}
 			else{
 				System.out.println("OLE Primary Care Physician Page is Not Displayed");
