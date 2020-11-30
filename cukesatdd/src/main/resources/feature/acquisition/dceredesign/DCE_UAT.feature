@@ -81,10 +81,10 @@ Feature: 1.10.4 UAT-DCE-To test UAT DCE E2E Regression Scenarios
 
     @DCE_MedEdPage_AARP
     Examples: 
-      | Scenario           | site | drug1   | drug2  | zipCode | pharmacyZipCode | SelectPharmacy    | planType | planName                        |
-      | E2E Scenario 4_AMP | AARP | Orkambi | Fanapt |   80002 |           10001 | AHF PHARMACY | PDP      | AARP MedicareRx Walgreens (PDP) |
+      | Scenario           | site | drug1   | drug2  | zipCode | pharmacyZipCode | SelectPharmacy | planType | planName                        |
+      | E2E Scenario 4_AMP | AARP | Orkambi | Fanapt |   80002 |           10001 | AHF PHARMACY   | PDP      | AARP MedicareRx Walgreens (PDP) |
 
     @DCE_MedEdPage_UHC
     Examples: 
-      | Scenario           | site | drug1   | drug2  | zipCode | pharmacyZipCode | SelectPharmacy    | planType | planName                        |
-      | E2E Scenario 4_UMS | UHC  | Orkambi | Fanapt |   80002 |           10001 | AHF PHARMACY 3407 | PDP      | AARP MedicareRx Walgreens (PDP) |
+      | Scenario           | site | drug1   | drug2  | zipCode | pharmacyZipCode | SelectPharmacy | planType | planName                        |
+      | E2E Scenario 4_UMS | UHC  | Orkambi | Fanapt |   80002 |           10001 | AHF PHARMACY   | PDP      | AARP MedicareRx Walgreens (PDP) |
