@@ -1522,5 +1522,26 @@ public class DCEStepDefinitionAARP {
 	}
 	
 
+	@Then("^the user validates PLan Toggle on Drug Summary Page$")
+	public void the_user_validates_PLan_Toggle_on_Drug_Summary_Page() throws Throwable {
+		DrugSummaryPage drugSummaryPage = (DrugSummaryPage) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugSummary);
+		drugSummaryPage.verifyPDPPlanToggle();
+		drugSummaryPage.verifySNPPlanToggle();
+		drugSummaryPage.verifyMAPDPlanToggle();
+
+	}
+
+	@Then("^the user validates distance dropdown and Zipcode change on Summary page - Change Pharmacy Page$")
+	public void the_user_validates_distance_dropdown_and_Zipcode_change_on_Summary_page_Change_Pharmacy_Page(DataTable arg1) throws Throwable {
+		List<DataTableRow> memberAttributesRow = arg1.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		String PharmacyZipCode = memberAttributesMap.get("PharmacyZipCode");
+		DrugSummaryPage drugSummaryPage = (DrugSummaryPage) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugSummary);
+		drugSummaryPage.validateZipandDistanceDropDwn(PharmacyZipCode);
+	}
 	
 }
