@@ -2617,5 +2617,18 @@ public class VppCommonStepDefinition {
 			
 
 }
+		@Then("^the user clicks on back on all plan linnk in Plan Compare page")
+		  public void user_clicks_back_to_all_plan_PlanCompare_AARP() throws InterruptedException{
+			  ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario().getBean(PageConstants.PLAN_COMPARE_PAGE); 
+			  VPPPlanSummaryPage plansummaryPage = planComparePage.navigateBackToAllPlans();
+				if (plansummaryPage != null) {
+						getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
+						Assert.assertTrue(true);
+						plansummaryPage.handlePlanYearSelectionPopup();
+					} 
+				else
+					Assert.fail("Error in navigating back to Plan Summary Page");
+			
+		  }
 		
 }
