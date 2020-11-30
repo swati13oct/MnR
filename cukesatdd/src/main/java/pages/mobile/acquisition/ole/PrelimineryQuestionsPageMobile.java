@@ -23,7 +23,7 @@ import atdd.framework.UhcDriver;
  *@author sdwaraka
  *
  */
-public class PrelimineryQuestionsPage extends UhcDriver{
+public class PrelimineryQuestionsPageMobile extends UhcDriver{
 	
 	
 	//OLE Common Elements
@@ -190,7 +190,7 @@ public class PrelimineryQuestionsPage extends UhcDriver{
 	@FindBy(id="heartorlegsQuestionNo")
 	private WebElement CardiovascularDisordersQ6No;
 	
-	public PrelimineryQuestionsPage(WebDriver driver) {
+	public PrelimineryQuestionsPageMobile(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
 		openAndValidate();
@@ -393,7 +393,7 @@ public PersonalInformationPageMobile Validate_use_and_disclosure_page() {
 		
 	}
 	
-	public UseAndDisclosureAuthorizationPage validate_Required_Fields_CSNP( String medicaidNumber, String PlanName) {
+	public UseAndDisclosureAuthorizationPageMobile validate_Required_Fields_CSNP( String medicaidNumber, String PlanName) {
 		//System.out.println("plantype : "+plantype+" Medicare Number : "+medicaidNumber);
 		
 				if(PlanName.contains("Chronic") || PlanName.contains("Gold")){
@@ -433,7 +433,7 @@ public PersonalInformationPageMobile Validate_use_and_disclosure_page() {
 					
 						NextBtn.click();
 						waitforElement(disclosureBox);
-						return new UseAndDisclosureAuthorizationPage(driver);
+						return new UseAndDisclosureAuthorizationPageMobile(driver);
 			            
 		    }else if(PlanName.contains("Silver")){
 				System.out.println("Medicaid Question is displayed for "+PlanName+" : "+validate(MedicaidQuestion));
@@ -459,7 +459,7 @@ public PersonalInformationPageMobile Validate_use_and_disclosure_page() {
 					validate(NextBtn);
 					NextBtn.click();
 					waitforElement(disclosureBox);
-					return new UseAndDisclosureAuthorizationPage(driver);
+					return new UseAndDisclosureAuthorizationPageMobile(driver);
 		    }
 		
 				else return null;	

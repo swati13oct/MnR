@@ -28,7 +28,7 @@ import atdd.framework.UhcDriver;
  *@author sdwaraka
  *
  */
-public class OLEconfirmationPage extends UhcDriver{
+public class OLEconfirmationPageMobile extends UhcDriver{
 	
 	//@FindBy(xpath = "//*[contains(@class,'confirmation-number')]")
 	@FindBy(xpath = "//*[contains(@class,'confirmation-number')]//p[@class='confirmation-number']")
@@ -53,7 +53,7 @@ public class OLEconfirmationPage extends UhcDriver{
 	@FindBy(xpath = "//*[contains(@class,'confirmation-number')]//p[@class='confirmation-number']")
 	private WebElement confirmationNumber;
 	
-	public OLEconfirmationPage(WebDriver driver) {
+	public OLEconfirmationPageMobile(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
 		openAndValidate();

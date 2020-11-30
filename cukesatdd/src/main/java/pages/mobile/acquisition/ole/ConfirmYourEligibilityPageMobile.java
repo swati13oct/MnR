@@ -411,7 +411,7 @@ public class ConfirmYourEligibilityPageMobile extends UhcDriver{
 		return false;
 	}
 	
-	public PrelimineryQuestionsPage navigate_to_Preliminary_Questions_page() {
+	public PrelimineryQuestionsPageMobile navigate_to_Preliminary_Questions_page() {
 		
 		validateNew(NextBtn);
 		jsClickNew(NextBtn);
@@ -423,13 +423,13 @@ if(!Preliminary_Questions.isDisplayed())
 	System.out.println("coudnt find the xpath for pre question");
 		if(Preliminary_Questions.isDisplayed()){
 			System.out.println("OLE Preliminary Questions page is Displayed");
-			return new PrelimineryQuestionsPage(driver);
+			return new PrelimineryQuestionsPageMobile(driver);
 		}
 		return null;
 	}
 
 	
-public PrelimineryQuestionsPage navigate_to_Preliminary_Diabetes_Questions_page() {
+public PrelimineryQuestionsPageMobile navigate_to_Preliminary_Diabetes_Questions_page() {
 	
 	NextBtn.click();
 	try {
@@ -451,7 +451,7 @@ public PrelimineryQuestionsPage navigate_to_Preliminary_Diabetes_Questions_page(
 		}
 		if(driver.getCurrentUrl().contains("use-disclosure")){
 			System.out.println("OLE UseDisclosure page is Displayed");
-			return new PrelimineryQuestionsPage(driver);
+			return new PrelimineryQuestionsPageMobile(driver);
 		}
 		return null;
 	}

@@ -19,6 +19,7 @@ import atdd.framework.UhcDriver;
 import pages.acquisition.ulayer.VPPPlanSummaryPage;
 import pages.acquisition.ulayer.VPPTestHarnessPage;
 import pages.mobile.acquisition.dceredesign.GetStartedPageMobile;
+import pages.mobile.acquisition.ole.WelcomePageMobile;
 import pages.acquisition.commonpages.AcquisitionHomePage;
 import pages.acquisition.commonpages.ComparePlansPage;
 import pages.acquisition.commonpages.PlanDetailsPage;
@@ -296,7 +297,7 @@ public class VisitorProfilePageMobile extends UhcDriver {
 	 * @param planName
 	 * @return
 	 */
-	public WelcomePage Enroll_OLE_Plan(String planName) {
+	public WelcomePageMobile Enroll_OLE_Plan(String planName) {
 		WebElement enrollForPlan = null;
 
 		enrollForPlan = driver.findElement(By.xpath("//*[contains(text(), '" + planName
@@ -307,7 +308,7 @@ public class VisitorProfilePageMobile extends UhcDriver {
 		validateNew(NextBtn);
 		if (driver.getCurrentUrl().contains("welcome")) {
 			System.out.println("OLE Welcome Page is Displayed");
-			return new WelcomePage(driver);
+			return new WelcomePageMobile(driver);
 		}
 		return null;
 	}

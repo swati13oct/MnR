@@ -338,14 +338,14 @@ public ArrayList<String> validate_marketing_details(String planName) {
 	
 	}
 	
-public MedicareInformationPage navigate_to_medicare_info_page() {
+public MedicareInformationPageMobile navigate_to_medicare_info_page() {
 		
 		validateNew(NextBtn);
 		NextBtn.click();
 		CommonUtility.checkPageIsReadyNew(driver);
 		if(validateNew(driver.findElement(By.xpath("//h1[contains(text(),'Medicare')]")))){			
 			System.out.println("OLE Medicare Information Page is Displayed");
-			return new MedicareInformationPage(driver);
+			return new MedicareInformationPageMobile(driver);
 		}
 		return null;
 	}

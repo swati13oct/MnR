@@ -2930,6 +2930,7 @@ public class VppPlanDetailMobile {
 		
 		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		
 		plansummaryPage.handlePlanYearSelectionPopup(planYear);
 		//plansummaryPage.handlePlanYearFutureSelectionPopup(planYear);
 	}

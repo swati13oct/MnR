@@ -56,7 +56,7 @@ public class LeavingOLEmodalMobile extends UhcDriver{
 		}
 		else if(driver.getCurrentUrl().contains("preliminary-questions")){
 			System.out.println("OLE Preliminary Questions Page is Displayed");
-			return new PrelimineryQuestionsPage(driver);
+			return new PrelimineryQuestionsPageMobile(driver);
 		}
 		else if(driver.getCurrentUrl().contains("personal-information")){
 			System.out.println("OLE Personal Information Page is Displayed");

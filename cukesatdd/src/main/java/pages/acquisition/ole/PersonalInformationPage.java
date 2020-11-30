@@ -493,14 +493,7 @@ public class PersonalInformationPage extends UhcDriver{
 
 		validateNew(NextBtn);
 		jsClickNew(NextBtn);
-		/*JavascriptExecutor executor = (JavascriptExecutor)driver;
-		executor.executeScript("arguments[0].click();", NextBtn);*/
-		
-		/*if(validateNew(driver.findElement(By.xpath("//h1[contains(text(),'Special Election')]")))){
-			System.out.println("OLE SEP Page is Displayed");
-			return new SpecialElectionPeriodPage(driver);
-		}
-		*/
+
 		
 		Thread.sleep(3000);
 			if(driver.getCurrentUrl().contains("special")){
@@ -520,7 +513,8 @@ public class PersonalInformationPage extends UhcDriver{
 					 jsClickNew(NextBtn);
 					 waitForPageLoadSafari();
 					 if(driver.getCurrentUrl().contains("special")){
-					  System.out.println("OLE SEP Page is Displayed"); } else {
+					  System.out.println("OLE SEP Page is Displayed"); }
+					 else {
 					  System.out.println("OLE SEP Page is not Displayed"); }
 					 return new SpecialElectionPeriodPage(driver);	
 				}

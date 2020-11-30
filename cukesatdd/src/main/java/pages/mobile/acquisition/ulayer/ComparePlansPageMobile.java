@@ -286,7 +286,7 @@ public class ComparePlansPageMobile extends UhcDriver {
 	 * @return
 	 * @throws InterruptedException
 	 */
-	public WelcomePage Enroll_OLE_Plan(String planName) throws InterruptedException {
+	public WelcomePageMobile Enroll_OLE_Plan(String planName) throws InterruptedException {
 
 		System.out.println("Enroll in Plan for Plan : " + planName);
 		WebElement EnrollForPlan = driver.findElement(By.xpath("//*[contains(text(), '" + planName
@@ -308,7 +308,7 @@ public class ComparePlansPageMobile extends UhcDriver {
 		}
 		if (driver.getCurrentUrl().contains("enrollment")) {
 			System.out.println("OLE Welcome Page is Displayed");
-			return new WelcomePage(driver);
+			return new WelcomePageMobile(driver);
 		}
 		return null;
 	}

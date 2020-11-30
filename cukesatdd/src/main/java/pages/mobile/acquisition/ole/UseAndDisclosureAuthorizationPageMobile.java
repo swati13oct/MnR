@@ -17,7 +17,7 @@ import atdd.framework.UhcDriver;
  *@author pdas101
  *
  */
-public class UseAndDisclosureAuthorizationPage extends UhcDriver{
+public class UseAndDisclosureAuthorizationPageMobile extends UhcDriver{
 	
 	
 	
@@ -54,7 +54,7 @@ public class UseAndDisclosureAuthorizationPage extends UhcDriver{
 	
 
 	
-	public UseAndDisclosureAuthorizationPage(WebDriver driver) {
+	public UseAndDisclosureAuthorizationPageMobile(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
 		openAndValidate();

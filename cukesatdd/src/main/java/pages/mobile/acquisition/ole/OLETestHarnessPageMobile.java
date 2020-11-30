@@ -15,7 +15,7 @@ import atdd.framework.UhcDriver;
  * @author sdwaraka
  *
  */
-public class OLETestHarnessPage extends UhcDriver {
+public class OLETestHarnessPageMobile extends UhcDriver {
 
 	@FindBy(id = "siteid")
 	private WebElement SiteidTH;
@@ -91,14 +91,14 @@ public class OLETestHarnessPage extends UhcDriver {
 	@FindBy(id = "enrollment-next-button")
 	private WebElement NextBtn;
 
-	public OLETestHarnessPage(WebDriver driver) {
+	public OLETestHarnessPageMobile(WebDriver driver) {
 
 		super(driver);
 		PageFactory.initElements(driver, this);
 		// openAndValidate();
 	}
 
-	public OLETestHarnessPage(WebDriver driver, String OLE_URL) {
+	public OLETestHarnessPageMobile(WebDriver driver, String OLE_URL) {
 		super(driver);
 		PageFactory.initElements(driver, this);
 		start(OLE_URL);

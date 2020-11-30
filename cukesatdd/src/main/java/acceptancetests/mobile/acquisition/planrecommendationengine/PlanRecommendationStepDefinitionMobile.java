@@ -156,7 +156,7 @@ public class PlanRecommendationStepDefinitionMobile {
 				wd);
 		//headerAndFooter.navigationToPlanRecommendationEngine();
 		headerAndFooter.MobileMenuAndGetStarted();
-		headerAndFooter.breadCrumbs();
+		//headerAndFooter.breadCrumbs();
 		
 	
 	}
@@ -175,7 +175,7 @@ public class PlanRecommendationStepDefinitionMobile {
 		PlanRecommendationEngineLandingAndZipcodeMobilePages planSelectorhomepage = new PlanRecommendationEngineLandingAndZipcodeMobilePages(
 				wd);
 		headerAndFooter.navigationToPlanRecommendationEngineViaShopTools();
-		headerAndFooter.breadCrumbs();
+		///headerAndFooter.breadCrumbs();
 	}
 
 	@Then("^user validate Header elements and Link Validation of Plan Recommendation Engine$")
@@ -227,7 +227,7 @@ public class PlanRecommendationStepDefinitionMobile {
 				wd);
 		PlanRecommendationEngineHeaderAndFooterMobile headerAndFooter = new PlanRecommendationEngineHeaderAndFooterMobile(
 				wd);
-		headerAndFooter.breadCrumbs();
+		//headerAndFooter.breadCrumbs();
 		if (isMultiCounty.equalsIgnoreCase("NO")) {
 			planSelectorhomepage.getStartedAndRunInvalidzipcode(zipcode);
 		} else {
@@ -242,7 +242,7 @@ public class PlanRecommendationStepDefinitionMobile {
 				wd);
 		PlanRecommendationEngineHeaderAndFooterMobile headerAndFooter = new PlanRecommendationEngineHeaderAndFooterMobile(
 				wd);
-		headerAndFooter.breadCrumbs();
+		//headerAndFooter.breadCrumbs();
 		planSelectorCoverageepage.coverageOptionpage();
 
 	}
@@ -341,7 +341,7 @@ public class PlanRecommendationStepDefinitionMobile {
 				wd);
 		PlanRecommendationEngineHeaderAndFooterMobile headerAndFooter = new PlanRecommendationEngineHeaderAndFooterMobile(
 				wd);
-		headerAndFooter.breadCrumbs();
+		//headerAndFooter.breadCrumbs();
 		planSelectorDoctorspage.doctorspageElements();
 
 	}
@@ -505,7 +505,7 @@ public class PlanRecommendationStepDefinitionMobile {
 				wd);
 		PlanRecommendationEngineHeaderAndFooterMobile headerAndFooter = new PlanRecommendationEngineHeaderAndFooterMobile(
 				wd);
-		headerAndFooter.breadCrumbs();
+		//headerAndFooter.breadCrumbs();
 		planSelectorPharmacyepage.pharmacypage();
 
 	}
@@ -547,7 +547,7 @@ public class PlanRecommendationStepDefinitionMobile {
 				wd);
 		PlanRecommendationEngineHeaderAndFooterMobile headerAndFooter = new PlanRecommendationEngineHeaderAndFooterMobile(
 				wd);
-		headerAndFooter.breadCrumbs();
+		//headerAndFooter.breadCrumbs();
 		planSelectorAdditionalpage.additionalpage(inputValues.get("Drug Selection"));
 	}
 
@@ -573,7 +573,7 @@ public class PlanRecommendationStepDefinitionMobile {
 				wd);
 		PlanRecommendationEngineHeaderAndFooterMobile headerAndFooter = new PlanRecommendationEngineHeaderAndFooterMobile(
 				wd);
-		headerAndFooter.breadCrumbs();
+		//headerAndFooter.breadCrumbs();
 		planSelectorPreferencespage.costpreferencepage();
 	}
 

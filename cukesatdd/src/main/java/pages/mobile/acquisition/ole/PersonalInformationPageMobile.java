@@ -16,21 +16,53 @@ import org.testng.Assert;
 
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
-import pages.mobile.acquisition.ulayer.SpecialElectionPeriodPageMobile;
+import pages.acquisition.commonpages.VisitorProfilePage;
+import pages.acquisition.ole.ConfirmYourEligibilityPage;
+import pages.acquisition.ole.SpecialElectionPeriodPage;
+import pages.mobile.acquisition.ulayer.VisitorProfilePageMobile;
 
 /**
- *@author sdwaraka
+ * @author sdwaraka
  *
  */
-public class PersonalInformationPageMobile extends UhcDriver{
+public class PersonalInformationPageMobile extends UhcDriver {
 
-
-	//OLE Common Elements
-	@FindBy(xpath ="//*[@class = 'logo']//img")
+	// OLE Common Elements
+	@FindBy(xpath = "//*[@class = 'logo']//img")
 	private WebElement SiteLogo;
 
-	@FindBy(id = "ole-form-next-button")
+	@FindBy(xpath = "//input[contains(@id,'homephnnum')]")
+	private WebElement HomephoneNumberField;
+
+	@FindBy(xpath = "//input[contains(@id,'mobilephnnum')]")
+	private WebElement MobileNumberField;
+
+	@FindBy(xpath = "//*[@id='middleName' or @id = 'middle']")
+	private WebElement MiddleNameField;
+
+	@FindBy(xpath = "//input[contains(@id,'emailAddressQuestion')]")
+	private WebElement emailAddressField;
+
+	@FindBy(xpath = "//input[contains(@id,'goGreenYes')]")
+	private WebElement goGreenYesBtn;
+
+	// @FindBy(id = "goGreenNo")
+	@FindBy(xpath = "//input[contains(@id,'goGreenNo')]")
+	private WebElement goGreenNoBtn;
+
+	// @FindBy(id = "emailConfirmationNo")
+	@FindBy(xpath = "//input[contains(@id,'emailConfirmationNo')]")
+	private WebElement emailConfirmationNoBtn;
+
+	// @FindBy(id = "emailConfirmationYes")
+	@FindBy(xpath = "//input[contains(@id,'emailConfirmationYes')]")
+	private WebElement emailConfirmationYesBtn;
+
+	@FindBy(css = "#ole-form-next-button")
 	private WebElement NextBtn;
+
+	@FindBy(xpath = "//span[contains(text(),'✓')]")
+	private WebElement emailAddVaidationChecktick;
 
 	@FindBy(id = "ole-form-back-button")
 	private WebElement BackBtn;
@@ -47,7 +79,7 @@ public class PersonalInformationPageMobile extends UhcDriver{
 	@FindBy(id = "leavingSite-linkrouter")
 	private WebElement LeavingOLEmodal;
 
-	//Right Rail Elements
+	// Right Rail Elements
 
 	@FindBy(xpath = "//*[@id='learn-more-ole']/a")
 	private WebElement RightRail_LearnMoreLink;
@@ -64,8 +96,7 @@ public class PersonalInformationPageMobile extends UhcDriver{
 	@FindBy(xpath = "//*[@id='ole-premium']")
 	private WebElement PremiumDisplay;
 
-
-	//Personal Information fields
+	// Personal Information fields
 	@FindBy(xpath = "//*[contains(text(), 'First Name')]//..")
 	private WebElement FirstNameDisplay;
 
@@ -105,30 +136,46 @@ public class PersonalInformationPageMobile extends UhcDriver{
 	@FindBy(id = "city0")
 	private WebElement MailingAdd_City;
 
-	@FindBy(xpath = "//*[@id='constantStates' or @id = 'state']")
+	@FindBy(css = "#state0")
 	private WebElement MailingAdd_State_DropDown;
 
-	@FindBy(xpath = "//*[@id='zipCode' or @id = 'Zip0']")
+	@FindBy(css = "#zipCode0")
 	private WebElement MailingAdd_Zip;
 
 	@FindBy(id = "emailAddressQuestion.emailAddress")
 	private WebElement Email;
-	
-	@FindBy(xpath="//*[@id='firstName' or @id = 'FirstName']")
+
+	@FindBy(xpath = "//*[@id='firstName' or @id = 'FirstName']")
 	private WebElement firstNameField;
-	
+
 	@FindBy(xpath = "//*[@id='lastName' or @id = 'Last']")
 	private WebElement lastNameField;
-	
+
 	@FindBy(xpath = "//*[(contains(@id,'partAEffectiveDate') or contains(@id,'partAdate')) and contains(@class,'input-element')]")
 	private WebElement partAStartDateField;
 
 	@FindBy(xpath = "//*[(contains(@id,'partBEffectiveDate') or contains(@id,'partBdate')) and contains(@class,'input-element')]")
 	private WebElement partBStartDateField;
-	
+
+	@FindBy(css = "a#save-return-button")
+	private WebElement saveandReturn;
+
+	@FindBy(css = "a#enrollment-saved-wc")
+	private WebElement enrollSavedClose;
+
+	@FindBy(xpath = "//img[@alt='AARP Medicare Plans from United Healthcare']")
+	private WebElement aarpLogo;
+
+	@FindBy(xpath = "//a[@class='enrollProfileBtn cta-button']")
+	private WebElement enrollProfileYes;
+
+	@FindBy(id = "dupIconFlyOut")
+	private WebElement shoppingCartIcon;
+
+	@FindBy(css = "a#visitor-profile-header")
+	private WebElement lnkProfile;
+
 	private WebElement specialElectionPage;
-	
-	 
 
 	public PersonalInformationPageMobile(WebDriver driver) {
 		super(driver);
@@ -156,115 +203,72 @@ public class PersonalInformationPageMobile extends UhcDriver{
 		String Mailing_State = memberDetailsMap.get("Mailing_State");
 		String Mailing_Zip = memberDetailsMap.get("Mailing_Zip");
 		String EmailAddress = memberDetailsMap.get("Email");
-		
-		System.out.println("devansh is here to fix the issue");
-		/*sendkeysNew(firstNameField, FirstName);
-		sendkeysNew(lastNameField, LastName);
-		
-		*/
+
+		/*
+		 * sendkeysNew(firstNameField, FirstName); sendkeysNew(lastNameField, LastName);
+		 * 
+		 */
 		jsClickMobile(firstNameField);
 		System.out.println("test is here");
-		//jsSendkeys(firstNameField,FirstName);
+		// jsSendkeys(firstNameField,FirstName);
 		firstNameField.sendKeys(FirstName);
 		Thread.sleep(10);
-		//sendkeys(firstNameField,FirstName);
+		// sendkeys(firstNameField,FirstName);
 		System.out.println("test is here after send keys");
-		
+
 		jsClickMobile(lastNameField);
-		//jsSendkeys(lastNameField,LastName);
+		// jsSendkeys(lastNameField,LastName);
 		lastNameField.sendKeys(LastName);
-		
+
 		jsClickMobile(DOBtxtFld);
 		DOBtxtFld.clear();
-		//jsSendkeys(DOBtxtFld,DOB);
+		// jsSendkeys(DOBtxtFld,DOB);
 		DOBtxtFld.sendKeys(DOB);
-		if(Gender.contains("Male")){
-			//GenderSelectMale.click();
+		if (Gender.contains("Male")) {
+			// GenderSelectMale.click();
 			jsClickMobile(GenderSelectMale);
-		}
-		else{
-			//GenderSelectFemale.click();
+		} else {
+			// GenderSelectFemale.click();
 			jsClickNew(GenderSelectFemale);
-		}	
-		//jsSendkeys(PermanentAdd_Street,Perm_Street);
+		}
+		// jsSendkeys(PermanentAdd_Street,Perm_Street);
 		PermanentAdd_Street.sendKeys(Perm_Street);
-		
-		//jsSendkeys(PermanentAdd_City,Perm_city);
-		
+
+		// jsSendkeys(PermanentAdd_City,Perm_city);
+
 		PermanentAdd_City.sendKeys(Perm_city);
-		System.out.println("Mailing Question : "+MailingQuestion);
-		//if(MailingQuestion.equalsIgnoreCase("no")){
-			//SameMailingAddressNo.click();
-			//CommonUtility.waitForPageLoadNew(driver,MailingAdd_Street, 30);
-		JavascriptExecutor jse = (JavascriptExecutor) driver;
-		jse.executeScript("window.scrollBy(0,100)", "");
-			//MailingAdd_Street.sendKeys(Mailing_Street);
-			//MailingAdd_City.sendKeys(Mailing_City);
-			selectFromDropDownByValue(MailingAdd_State_DropDown,Mailing_State);
-			//Select SelectState = new Select(MailingAdd_State_DropDown);
-			//SelectState.selectByValue(Mailing_State);
-			
+		System.out.println("Mailing Question : " + MailingQuestion);
+		if (MailingQuestion.equalsIgnoreCase("no")) {
+			// SameMailingAddressNo.click();
+			jsClickNew(SameMailingAddressNo);
+			// CommonUtility.waitForPageLoadNew(driver,MailingAdd_Street, 30);
+			JavascriptExecutor jse = (JavascriptExecutor) driver;
+			jse.executeScript("window.scrollBy(0,100)", "");
+			MailingAdd_Street.sendKeys(Mailing_Street);
+			MailingAdd_City.sendKeys(Mailing_City);
+			selectFromDropDownByValue(MailingAdd_State_DropDown, Mailing_State);
+			// jsSendkeys(MailingAdd_Zip, Mailing_Zip);
 			MailingAdd_Zip.sendKeys(Mailing_Zip);
-		//}
+
+		}
 		Email.sendKeys(EmailAddress);
-		if(NextBtn.isEnabled()){
+		if (NextBtn.isEnabled()) {
 			System.out.println("Next Button is Enabled : All Required Details are entered");
 			return true;
 		}
 		return false;
 	}
 
-	public boolean validate_plan_details(Map<String, String> planDetailsMap) {
-		String PlanYear_PlanName_Text = PlanYear_PlanName.getText();
-		String Zip_County_Text = ZipCode_County.getText();
-		String Premium = PremiumDisplay.getText();
-		System.out.println("Plan Year and Plan Name Displayed on OLE : "+PlanYear_PlanName_Text);
-		System.out.println("Zip Code and County Displayed on OLE : "+Zip_County_Text);
-		System.out.println("Monthly Premium for Plan Displayed on OLE : "+Premium);
-		String Expected_PlanName = planDetailsMap.get("Plan Name");
-		String Expected_PlanYear = planDetailsMap.get("Plan Year");
-		String Expected_ZipCode = planDetailsMap.get("Zip Code");
-		String Expected_County = planDetailsMap.get("County");
-		String Expected_PlanPremium = planDetailsMap.get("Plan Premium");
-		boolean flag = false;
-
-		if(PlanYear_PlanName_Text.contains(Expected_PlanName)){
-			flag = true;
-			System.out.println("Plan Name is Validated : "+flag);
-		}else flag =false;
-		//Plan Year commented for AEP validation
-		/*if(PlanYear_PlanName_Text.contains(Expected_PlanYear)){
-			flag = (flag==false)?false:true;
-			System.out.println("Plan Year is Validated : "+flag);
-		}else flag =false;*/
-		if(Zip_County_Text.contains(Expected_County)){
-			flag = (flag==false)?false:true;
-			System.out.println("Plan County is Validated : "+flag);
-		}else flag =false;
-		if(Zip_County_Text.contains(Expected_ZipCode)){
-			flag = (flag==false)?false:true;
-			System.out.println("Plan ZIP CODE is Validated : "+flag);
-		}else flag =false;
-/*		if(Premium.contains(Expected_PlanPremium)){
-			flag = (flag==false)?false:true;
-			System.out.println("Plan Premium is Validated : "+flag);
-		}else flag =false;*/
-		System.out.println("Plan Details are Validated : "+flag);
-		return flag;
-	}
-
-
 	public boolean ValidateTFNMedicareInfo(String MedicaretFN) {
-		if(validate(RightRailTFN)){
+		if (validate(RightRailTFN)) {
 			String TFN_OLE = RightRailTFN.getText();
-			if(TFN_OLE.contains(MedicaretFN)){
-				System.out.println("TFN is validated in Medicare Insurance info Page"+MedicaretFN);
+			if (TFN_OLE.contains(MedicaretFN)) {
+				System.out.println("TFN is validated in Medicare Insurance info Page" + MedicaretFN);
 				return true;
-			}
-			else{
+			} else {
 				System.out.println("TFN does not match");
-				System.out.println("TFN in VPP page : "+MedicaretFN);
-				System.out.println("TFN in Medicare Info Right Rail : "+TFN_OLE);
+				System.out.println("TFN in VPP page : " + MedicaretFN);
+				System.out.println("TFN in Medicare Info Right Rail : " + TFN_OLE);
 				return false;
 			}
 		}
@@ -281,7 +285,7 @@ public class PersonalInformationPageMobile extends UhcDriver{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		if(validate(LearnMore_Modal)){
+		if (validate(LearnMore_Modal)) {
 			System.out.println("OLE Learn More Modal is Displayed");
 			return new LearnMoreModalMobile(driver);
 		}
@@ -290,18 +294,19 @@ public class PersonalInformationPageMobile extends UhcDriver{
 
 	public CancelOLEModalMobile OpenCancelOLE() {
 		validate(CancelEnrollmentLink);
-		JavascriptExecutor executor = (JavascriptExecutor)driver;
+		JavascriptExecutor executor = (JavascriptExecutor) driver;
 		executor.executeScript("arguments[0].click();", CancelEnrollmentLink);
 
-		//((JavascriptExecutor) driver).executeScript("arguments[0].click;", CancelEnrollmentLink);
+		// ((JavascriptExecutor) driver).executeScript("arguments[0].click;",
+		// CancelEnrollmentLink);
 
-		//CancelEnrollmentLink.click();
+		// CancelEnrollmentLink.click();
 		try {
 			Thread.sleep(6000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		if(validate(CancellationModal)){
+		if (validate(CancellationModal)) {
 			System.out.println("OLE Cancel Enrollment Modal is Displayed");
 			return new CancelOLEModalMobile(driver);
 		}
@@ -310,99 +315,148 @@ public class PersonalInformationPageMobile extends UhcDriver{
 
 	public LeavingOLEmodalMobile OpenLeaveOLEmodal() {
 		validate(SiteLogo);
-		JavascriptExecutor executor = (JavascriptExecutor)driver;
+		JavascriptExecutor executor = (JavascriptExecutor) driver;
 		executor.executeScript("arguments[0].click();", SiteLogo);
-		//SiteLogo.click();
+		// SiteLogo.click();
 		try {
 			Thread.sleep(6000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		if(validate(LeavingOLEmodal)){
+		if (validate(LeavingOLEmodal)) {
 			System.out.println("Leaving OLE modal is Displayed");
 			return new LeavingOLEmodalMobile(driver);
 		}
 		return null;
 	}
-	
+
 	public MedicareInformationPageMobile navigate_to_medicare_info_page() {
-		
-		validateNew(NextBtn);
-//		NextBtn.click();
+
+		validate(emailAddVaidationChecktick);
+		scrollToView(NextBtn);
+
 		jsClickNew(NextBtn);
+		WebElement MedicareLable = driver.findElement(By.xpath("//h1[contains(text(),'Medicare')]"));
 		CommonUtility.checkPageIsReadyNew(driver);
-		if(validateNew(driver.findElement(By.xpath("//h1[contains(text(),'Medicare')]")))){			
+		boolean flagpage = validateNew(MedicareLable, 10);
+		if (flagpage == true) {
 			System.out.println("OLE Medicare Information Page is Displayed");
 			return new MedicareInformationPageMobile(driver);
 		}
 		return null;
 	}
 
-	public SpecialElectionPeriodPageMobile navigate_to_SEP_page(Map<String, String> MedicareDetailsMap) throws InterruptedException {
+	public SpecialElectionPeriodPagemobile navigate_to_SEP_page(Map<String, String> MedicareDetailsMap)
+			throws InterruptedException {
 
 		validateNew(NextBtn);
 		jsClickMobile(NextBtn);
-		/*JavascriptExecutor executor = (JavascriptExecutor)driver;
-		executor.executeScript("arguments[0].click();", NextBtn);*/
-		
-		/*if(validateNew(driver.findElement(By.xpath("//h1[contains(text(),'Special Election')]")))){
-			System.out.println("OLE SEP Page is Displayed");
-			return new SpecialElectionPeriodPage(driver);
-		}
-		*/
-		
+		/*
+		 * JavascriptExecutor executor = (JavascriptExecutor)driver;
+		 * executor.executeScript("arguments[0].click();", NextBtn);
+		 */
+
+		/*
+		 * if(validateNew(driver.findElement(By.
+		 * xpath("//h1[contains(text(),'Special Election')]")))){
+		 * System.out.println("OLE SEP Page is Displayed"); return new
+		 * SpecialElectionPeriodPage(driver); }
+		 */
+
 		Thread.sleep(3000);
-			if(driver.getCurrentUrl().contains("special")){
+		if (driver.getCurrentUrl().contains("special")) {
 			Assert.assertTrue(driver.getCurrentUrl().contains("special"), "OLE SEP Page is Displayed");
-			return new SpecialElectionPeriodPageMobile(driver);
-			
-			}
-		else if(driver.getCurrentUrl().contains("eligibility"))
+			return new SpecialElectionPeriodPagemobile(driver);
 
-			 {
-				
-				ConfirmYourEligibilityPageMobile confirmYourEligibilityPage= enterConfirmEligibilityPageData(MedicareDetailsMap);
-				if(confirmYourEligibilityPage!=null) {
-					
-					
-					 validateNew(NextBtn); 
-					 jsClickNew(NextBtn);
-					
-					 if(driver.getCurrentUrl().contains("special")){
-					  System.out.println("OLE SEP Page is Displayed"); } else {
-					  System.out.println("OLE SEP Page is not Displayed"); }
-					 return new SpecialElectionPeriodPageMobile(driver);	
+		} else if (driver.getCurrentUrl().contains("eligibility"))
+
+		{
+
+			ConfirmYourEligibilityPageMobile confirmYourEligibilityPage = enterConfirmEligibilityPageData(
+					MedicareDetailsMap);
+			if (confirmYourEligibilityPage != null) {
+
+				validateNew(NextBtn);
+				jsClickNew(NextBtn);
+
+				if (driver.getCurrentUrl().contains("special")) {
+					System.out.println("OLE SEP Page is Displayed");
+				} else {
+					System.out.println("OLE SEP Page is not Displayed");
 				}
-			 }
+				return new SpecialElectionPeriodPagemobile(driver);
+			}
+		}
 		return null;
-	}	
-
-
+	}
 
 	public ConfirmYourEligibilityPageMobile enterConfirmEligibilityPageData(Map<String, String> MedicareDetailsMap) {
-		
+
 		String PartAeffectiveDate = MedicareDetailsMap.get("PartA Date");
-		String PartBeffectiveDate = MedicareDetailsMap.get("PartB Date"); 
-		
-		if(validateNew(driver.findElement(By.xpath("//h1[contains(text(),'Confirm')]")))){
+		String PartBeffectiveDate = MedicareDetailsMap.get("PartB Date");
+
+		if (validateNew(driver.findElement(By.xpath("//h1[contains(text(),'Confirm')]")))) {
 			System.out.println("OLE Confirm your Eligibility is Displayed");
-		
+
 			jsSendkeys(partAStartDateField, PartAeffectiveDate);
-			jsSendkeys(partBStartDateField, PartBeffectiveDate);	 
+			jsSendkeys(partBStartDateField, PartBeffectiveDate);
 		}
-		
+
 		return new ConfirmYourEligibilityPageMobile(driver);
 	}
 
+	public boolean enter_member_details_Other(Map<String, String> memberDetailsMap) throws InterruptedException {
 
-	public boolean validate_member_details(Map<String, String> memberDetailsMap){
+		String EmailAddress = memberDetailsMap.get("Email");
+		String emailConfirmation = memberDetailsMap.get("Email Confirmation");
+		String goGreen = memberDetailsMap.get("Go Green");
+		// String email = memberDetailsMap.get("Email");
+		String HomeNumber = memberDetailsMap.get("Home Number");
+		String MobileNumber = memberDetailsMap.get("Mobile Number");
+		String MiddleName = memberDetailsMap.get("Middle Name");
+
+		validateNew(HomephoneNumberField);
+		// sendkeys(HomephoneNumberField, HomeNumber);
+		jsSendkeys(HomephoneNumberField, HomeNumber);
+		validateNew(MobileNumberField);
+		// sendkeys(MobileNumberField, MobileNumber);
+		jsSendkeys(MobileNumberField, MobileNumber);
+		// sendkeysNew(MiddleNameField, MiddleName);
+		jsSendkeys(MiddleNameField, MiddleName);
+		if (emailConfirmation.equalsIgnoreCase("YES")) {
+			jsClickNew(emailConfirmationYesBtn); // emailConfirmationYesBtn.click();
+		} else
+			jsClickNew(emailConfirmationNoBtn); // emailConfirmationNoBtn.click();
+
+		if (goGreen.equalsIgnoreCase("YES")) {
+			// goGreenYesBtn.click();
+			jsClickNew(goGreenYesBtn);
+		} else
+			// goGreenNoBtn.click();
+			jsClickNew(goGreenNoBtn);
+
+		// if(emailConfirmation.equalsIgnoreCase("YES") &&
+		// goGreen.equalsIgnoreCase("YES"))
+		// sendkeysNew(emailAddressField, email);
+
+		// sendkeys(Email, EmailAddress);
+		jsSendkeys(Email, EmailAddress);
+
+		if (NextBtn.isEnabled()) {
+			System.out.println("Next Button is Enabled : All Required Details are entered");
+			return true;
+		}
+		return false;
+	}
+
+	public boolean validate_member_details(Map<String, String> memberDetailsMap) {
 		String FirstName = memberDetailsMap.get("First Name");
 		String LastName = memberDetailsMap.get("Last Name");
 		String ZipCode = memberDetailsMap.get("Zip Code");
 		String state = memberDetailsMap.get("Mailing_State");
-		
+
 		boolean Validation_Flag = true;
-		
+
 		/*
 		 * String FirstNameDisplayText = FirstNameDisplay.getText(); String
 		 * LastNameDisplayText = LastNameDisplay.getText();
@@ -410,43 +464,179 @@ public class PersonalInformationPageMobile extends UhcDriver{
 		String StateDisplayText = "";
 		String ZipDisplayText = "";
 
-		if(validate(StateDisplay) && validate(ZipDisplay)){
+		if (validate(StateDisplay) && validate(ZipDisplay)) {
 			StateDisplayText = StateDisplay.getText();
 			ZipDisplayText = ZipDisplay.getText();
 
-		}
-		else{
+		} else {
 			WebElement StateSelected = driver.findElement(By.xpath("//select[@id='state']"));
-			//StateSelected.click();
+			// StateSelected.click();
 			jsClickMobile(StateSelected);
-			WebElement StateSelectNC = driver.findElement(By.xpath("//option[@value='"+state+"']"));
-		
+			WebElement StateSelectNC = driver.findElement(By.xpath("//option[@value='" + state + "']"));
+
 			jsClickMobile(StateSelectNC);
-			//StateSelectNC.click();
+			// StateSelectNC.click();
 			WebElement EnterZip = driver.findElement(By.xpath("//input[contains(@id,'zipCode')]"));
-			//EnterZip.sendKeys(ZipCode);
+			// EnterZip.sendKeys(ZipCode);
 			jsSendkeys(EnterZip, ZipCode);
 			System.out.println("C&S DSNP Plan : State selected and Zip Entered");
 			StateDisplayText = state;
 			ZipDisplayText = EnterZip.getText();
 		}
-		
+
 		/*
 		 * System.out.println("First Name Expected : "
 		 * +FirstName+"       Displayed on page  - "+FirstNameDisplayText);
 		 * System.out.println("Last Name Expected : "
-		 * +LastName+"       Displayed on page  - "+LastNameDisplayText); && ZipDisplayText.contains(ZipCode)
+		 * +LastName+"       Displayed on page  - "+LastNameDisplayText); &&
+		 * ZipDisplayText.contains(ZipCode)
 		 */
-		System.out.println("State Name Expected - "+ state +"\tState Name Displayed on page  - "+StateDisplayText);
-		System.out.println("Zip Code Name Expected : "+ZipCode+"       Displayed on page  - "+ZipDisplayText);
-		
-		if(StateDisplayText.contains(state)){
+		System.out.println("State Name Expected - " + state + "\tState Name Displayed on page  - " + StateDisplayText);
+		System.out.println("Zip Code Name Expected : " + ZipCode + "       Displayed on page  - " + ZipDisplayText);
+
+		if (StateDisplayText.contains(state)) {
 			System.out.println("Member Details Validated on Personal Information Page");
 			Validation_Flag = true;
-		}
-		else
+		} else
 			Validation_Flag = false;
 		return Validation_Flag;
+	}
+
+	public boolean validate_plan_details(Map<String, String> planDetailsMap) {
+		String PlanYear_PlanName_Text = PlanYear_PlanName.getText();
+		String Zip_County_Text = ZipCode_County.getText();
+		String Premium = PremiumDisplay.getText();
+		System.out.println("Plan Year and Plan Name Displayed on OLE : " + PlanYear_PlanName_Text);
+		System.out.println("Zip Code and County Displayed on OLE : " + Zip_County_Text);
+		System.out.println("Monthly Premium for Plan Displayed on OLE : " + Premium);
+		String Expected_PlanName = planDetailsMap.get("Plan Name");
+		String Expected_PlanYear = planDetailsMap.get("Plan Year");
+		String Expected_ZipCode = planDetailsMap.get("Zip Code");
+		String Expected_County = planDetailsMap.get("County");
+		String Expected_PlanPremium = planDetailsMap.get("Plan Premium");
+		boolean flag = false;
+
+		if (PlanYear_PlanName_Text.contains(Expected_PlanName)) {
+			flag = true;
+			System.out.println("Plan Name is Validated : " + flag);
+		} else
+			flag = false;
+		// Plan Year commented for AEP validation
+		/*
+		 * if(PlanYear_PlanName_Text.contains(Expected_PlanYear)){ flag =
+		 * (flag==false)?false:true;
+		 * System.out.println("Plan Year is Validated : "+flag); }else flag =false;
+		 */
+		if (Zip_County_Text.contains(Expected_County)) {
+			flag = (flag == false) ? false : true;
+			System.out.println("Plan County is Validated : " + flag);
+		} else
+			flag = false;
+		if (Zip_County_Text.contains(Expected_ZipCode)) {
+			flag = (flag == false) ? false : true;
+			System.out.println("Plan ZIP CODE is Validated : " + flag);
+		} else
+			flag = false;
+		/*
+		 * if(Premium.contains(Expected_PlanPremium)){ flag = (flag==false)?false:true;
+		 * System.out.println("Plan Premium is Validated : "+flag); }else flag =false;
+		 */
+		System.out.println("Plan Details are Validated : " + flag);
+		return flag;
+	}
+
+	public boolean enter_member_details_Other_dsnp(Map<String, String> memberDetailsMap) throws InterruptedException {
+
+		String EmailAddress = memberDetailsMap.get("Email");
+		String HomeNumber = memberDetailsMap.get("Home Number");
+		String MobileNumber = memberDetailsMap.get("Mobile Number");
+		String MiddleName = memberDetailsMap.get("Middle Name");
+
+		validateNew(HomephoneNumberField);
+		sendkeys(HomephoneNumberField, HomeNumber);
+		validateNew(MobileNumberField);
+		sendkeys(MobileNumberField, MobileNumber);
+		sendkeysNew(MiddleNameField, MiddleName);
+		sendkeys(Email, EmailAddress);
+
+		if (NextBtn.isEnabled()) {
+			System.out.println("Next Button is Enabled : All Required Details are entered");
+			return true;
+		}
+		return false;
+	}
+
+	public SpecialElectionPeriodPagemobile navigate_to_SEP_page_Medicaid(Map<String, String> MedicareDetailsMap)
+			throws InterruptedException {
+
+		validateNew(NextBtn);
+		jsClickNew(NextBtn);
+
+		Thread.sleep(3000);
+		if (driver.getCurrentUrl().contains("special")) {
+			Assert.assertTrue(driver.getCurrentUrl().contains("special"), "OLE SEP Page is Displayed");
+			return new SpecialElectionPeriodPagemobile(driver);
+
+		} else if (driver.getCurrentUrl().contains("eligibility"))
+
+		{
+
+			ConfirmYourEligibilityPageMobile confirmYourEligibilityPage = enterConfirmEligibilityPageData1(
+					MedicareDetailsMap);
+			if (confirmYourEligibilityPage != null) {
+
+				scrollToView(NextBtn);
+				jsClickNew(NextBtn);
+				//waitForPageLoadSafari();
+				if (driver.getCurrentUrl().contains("special")) {
+					System.out.println("OLE SEP Page is Displayed");
+				} else {
+					System.out.println("OLE SEP Page is not Displayed");
+				}
+				return new SpecialElectionPeriodPagemobile(driver);
+			}
+		}
+		return null;
+	}
+
+	/**
+	 * This method will save and return to visitor profile page
+	 * 
+	 * @return
+	 */
+	public VisitorProfilePageMobile saveAndReturnLater() {
+
+		jsClickNew(saveandReturn);
+		jsClickNew(enrollSavedClose);
+		jsClickNew(aarpLogo);
+		jsClickNew(enrollProfileYes);
+		jsClickNew(shoppingCartIcon);
+		jsClickNew(lnkProfile);
+		if (driver.getCurrentUrl().contains("profile")) {
+			CommonUtility.checkPageIsReadyNew(driver);
+			return new VisitorProfilePageMobile(driver);
+		} else {
+			System.out.println("Navigation to visitor profile is failed");
+			return null;
+		}
+	}
+
+	public ConfirmYourEligibilityPageMobile enterConfirmEligibilityPageData1(Map<String, String> MedicareDetailsMap) {
+
+		String PartAeffectiveDate = MedicareDetailsMap.get("PartA Date");
+		String PartBeffectiveDate = MedicareDetailsMap.get("PartB Date");
+		// String MedicaidNo = MedicareDetailsMap.get("MedicaidNumber");
+		if (validateNew(driver.findElement(By.xpath("//h1[contains(text(),'Confirm')]")))) {
+			System.out.println("OLE Confirm your Eligibility is Displayed");
+
+			//sendkeysNew(partAStartDateField, PartAeffectiveDate);
+			jsSendkeys(partAStartDateField, PartAeffectiveDate);
+			//sendkeysNew(partBStartDateField, PartBeffectiveDate);
+			jsSendkeys(partBStartDateField, PartBeffectiveDate);
+			// sendkeysNew(medicaidNumberField,MedicaidNo);
+		}
+
+		return new ConfirmYourEligibilityPageMobile(driver);
 	}
 
 }

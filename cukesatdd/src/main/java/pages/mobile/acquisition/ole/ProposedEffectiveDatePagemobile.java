@@ -104,7 +104,7 @@ public class ProposedEffectiveDatePagemobile extends UhcDriver{
 		if(planType.contentEquals("PDP")){
 			if(validateNew(driver.findElement(By.xpath("//h1[contains(text(),'Plan Premium')]")))){
 				System.out.println("OLE Monthly Plan Premium Page is Displayed");
-				return new PlanPremiumPage(driver);
+				return new PlanPremiumPageMobile(driver);
 			}
 			else{
 				System.out.println("OLE Monthly Plan Premium Page is Not Displayed");
@@ -114,7 +114,7 @@ public class ProposedEffectiveDatePagemobile extends UhcDriver{
 		else{
 			if (validateNew(driver.findElement(By.xpath("//h1[contains(text(),'Provider')]")))){
 				System.out.println("OLE Primary Care Physician Page is Displayed");
-				return new PrimaryCarePhysicianPage(driver);
+				return new PrimaryCarePhysicianPageMobile(driver);
 			}
 			else{
 				System.out.println("OLE Primary Care Physician Page is Not Displayed");

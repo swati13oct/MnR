@@ -4,12 +4,10 @@
 package pages.mobile.acquisition.ole;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.testng.Assert;
 
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
@@ -18,7 +16,7 @@ import atdd.framework.UhcDriver;
  *@author sdwaraka
  *
  */
-public class PlanPremiumPage extends UhcDriver{
+public class SupplementalBenefitsPageMobile extends UhcDriver{
 	
 	//OLE Common Elements
 	@FindBy(xpath = "//*[@class = 'logo']")
@@ -36,9 +34,6 @@ public class PlanPremiumPage extends UhcDriver{
 	//Page Header
 	@FindBy(xpath = "//*[contains(@class, 'ole-form-header')]//*[contains(@class,'only-prelim')]")
 	private WebElement PageHeader;
-	
-	@FindBy(xpath = "//h1[contains(text(),'Authorization')]")
-	private WebElement authPageHeader;
 
 	//Right Rail Elements
 
@@ -57,10 +52,16 @@ public class PlanPremiumPage extends UhcDriver{
 	@FindBy(xpath = "//*[@id='ole-premium']")
 	private WebElement PremiumDisplay;
 	
-	@FindBy(xpath=".//*[@id='ole-form-content']//*[contains(@for,'premiumAgree')]")
-	private WebElement agreeBtn;
+	@FindBy(xpath = ".//*[@id='ole-form-content']//label[contains(text(),'No. I do not')]")
+	private WebElement ridersNoBtn;
 	
-	public PlanPremiumPage(WebDriver driver) {
+	@FindBy(xpath = "//input[@type='radio']/parent::span//label[contains(text(),'Yes, I want to add')]")
+	private WebElement dentalRiderYes;
+	
+	@FindBy(xpath = "//input[@type='checkbox']/parent::span//label[contains(text(),'Yes, I want to add')]")
+	public WebElement fitnessRiderYes;
+	
+	public SupplementalBenefitsPageMobile(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
 		openAndValidate();
@@ -68,46 +69,38 @@ public class PlanPremiumPage extends UhcDriver{
 
 	@Override
 	public void openAndValidate() {
-		CommonUtility.waitForPageLoadNew(driver, ZipCode_County, 30);
+		CommonUtility.waitForPageLoadNew(driver, ridersNoBtn, 30);
 		validateNew(PageHeader);
-		System.out.println("Page header is Displayed : "+PageHeader.getText());	
+		System.out.println("Page header is Displayed"+PageHeader.getText());	
 	}
 
-	public SupplementalBenefitsPage navigate_to_Supplemental_Riders_Page() {
-		agreeBtn.click();
+	public AuthorizationPageMobile navigate_to_Authorization_Page() {
 		validateNew(NextBtn);
 		jsClickNew(NextBtn);
 		/*JavascriptExecutor executor = (JavascriptExecutor)driver;
 		executor.executeScript("arguments[0].click();", NextBtn);*/
 		
-		if(validateNew(driver.findElement(By.xpath("//h1[contains(text(),'Supplemental')]")))){
-			Assert.assertTrue(validateNew(driver.findElement(By.xpath("//label[contains(text(),'Yes, I want to add')]"))), "unable to find Yes option available for rider");
-			System.out.println("Validated Yes option available");
-			System.out.println("OLE Supplemental Benefits page is Displayed");
-			return new SupplementalBenefitsPage(driver);
-		}
-		else{
-			System.out.println("OLE Supplemental Benefits page is Displayed");
-			return null;
-		}
-	}	
-
-	public AuthorizationPageMobile navigate_to_Authorization_Page() {
-		agreeBtn.click();
-		validateNew(NextBtn);
-		jsClickNew(NextBtn);
-		/*JavascriptExecutor executor = (JavascriptExecutor)driver;
-		executor.executeScript("arguments[0].click();", NextBtn);*/
-		if(validateNew(authPageHeader,45)){
-			System.out.println("OLE Authorization page is Displayed : Navigation from Plan Premium Page Passed");
+		if(validateNew(driver.findElement(By.xpath("//h1[contains(text(),'Authorization')]")))){
+			System.out.println("OLE Authorization page is Displayed : Navigation from Optional Benefits Page Passed");
 			return new AuthorizationPageMobile(driver);
 		}
 		else{
-			System.out.println("OLE Authorization page is Displayed : Navigation from Plan Premium Page Failed");
+			System.out.println("OLE Authorization page is Displayed : Navigation from Optional Benefits Page Passed");
 			return null;
 		}
-	}	
+	}
 
-
+	public void select_riders(String DentalRider, String FitnessRider) {
+		if (DentalRider.contains("true")) {
+			dentalRiderYes.isDisplayed();
+			jsClickNew(dentalRiderYes);
+		} else
+			System.out.println("No rider available");
+		if (DentalRider.contains("true")) {
+			fitnessRiderYes.isDisplayed();
+			jsClickNew(fitnessRiderYes);
+		} else
+			System.out.println("No rider available");
+	}
 
 }

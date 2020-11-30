@@ -19,7 +19,7 @@ import atdd.framework.UhcDriver;
  *@author sdwaraka
  *
  */
-public class CoverageInformationPage extends UhcDriver{
+public class CoverageInformationPageMobile extends UhcDriver{
 	
 	//OLE Common Elements
 	@FindBy(xpath = "//*[@class = 'logo']")
@@ -89,7 +89,7 @@ public class CoverageInformationPage extends UhcDriver{
 	@FindBy(id = "hasHealthInsuranceYes")
 	private WebElement OtherIns_Question_No;
 
-	public CoverageInformationPage(WebDriver driver) {
+	public CoverageInformationPageMobile(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
 		openAndValidate();

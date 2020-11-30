@@ -12,6 +12,7 @@ import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 import pages.acquisition.bluelayer.PlanComparePage;
 import pages.acquisition.ole.WelcomePage;
+import pages.mobile.acquisition.ole.WelcomePageMobile;
 
 public class PlanComparePageMobile extends UhcDriver{
 	
@@ -68,7 +69,7 @@ public class PlanComparePageMobile extends UhcDriver{
 	 * @return
 	 * @throws InterruptedException
 	 */
-	public WelcomePage Enroll_OLE_Plan(String planName) throws InterruptedException {
+	public WelcomePageMobile Enroll_OLE_Plan(String planName) throws InterruptedException {
 		
 		System.out.println("Enroll in Plan for Plan : "+planName);
 		WebElement EnrollForPlan = driver.findElement(By.xpath("//*[contains(text(), '"+planName+"')]/ancestor::div[@id='innerdiv']//*[contains(text(), 'Enroll in plan')]"));
@@ -89,7 +90,7 @@ public class PlanComparePageMobile extends UhcDriver{
 		}
 		if(driver.getCurrentUrl().contains("enrollment")){
 			System.out.println("OLE Welcome Page is Displayed");
-			return new WelcomePage(driver);
+			return new WelcomePageMobile(driver);
 		}
 		return null;
 	}
