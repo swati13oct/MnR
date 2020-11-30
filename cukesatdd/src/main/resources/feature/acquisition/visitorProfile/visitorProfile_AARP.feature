@@ -25,7 +25,7 @@ Feature: 1.08. ACQ- Visitor profile
       | Drugname | <drug1> |
 
     @VisitorProfile_AARP @prodRegression_AARP
-    Examples: 
+    Examples:
       | state        | drug1   | zipCode | site |
       | Alabama      | Lipitor |   90210 | AARP |
       | Pennsylvania | Lipitor |   15001 | AARP |
@@ -170,13 +170,13 @@ Feature: 1.08. ACQ- Visitor profile
     Examples: 
       | site | state    | UID       | zipcode | isMultiCounty | plantype | planyear | county           | testPlans                                                                                               | eyeWearBenefitType | eyeWearExpectedText                                           | eyeExamBenefitType | eyeExamExpectedText    | footCareRoutineBenefitType | footCareRoutineExpectedText | hearingExamBenefitType | hearingExamExpectedText | membershipinHealthClubFitnessClassesBenefitType | membershipinHealthClubFitnessExpectedText                                                                  |
       | AARP | Alabama  | US1770330 |   53503 | NO            | MAPD     | current  | Jefferson County | UnitedHealthcare Medicare Advantage Open (PPO),UnitedHealthcare Medicare Advantage Open Essential (PPO) | Eyewear            | Eyewear has a plan benefit limit up to $100 per every 2 years | Eye Exam           | $0 copay               | Foot Care - Routine        | $50 copay                   | Hearing Exam           | $0 copay                | Fitness Program through Renew Active            | Fitness Membership Only: Basic membership in a fitness program at a network location at no additional cost |
-      | AARP | Virginia | US1770330 |   22320 | NO            | MAPD     | current  | Alexandria city  | AARP Medicare Advantage Walgreens (PPO),AARP Medicare Advantage Plan 1 (HMO)                            | Eyewear            | Eyewear has a plan benefit limit up to $200 per every 2 years | Eye Exam           | $0 copay; 1 every year | Foot Care - Routine        | $35 copay                   | Hearing Exam           | $0 copay                | Fitness Program through Renew Active            | Fitness Membership Only: Basic membership in a fitness program at a network location at no additional cost |
+      | AARP | Virginia | US1770330 |   22320 | NO            | MAPD     | current  | Alexandria city  | AARP Medicare Advantage Walgreens (PPO),AARP Medicare Advantage Plan 1 (HMO)                            | Eyewear            | Eyewear has a plan benefit limit up to $200 per every 2 years | Eye Exam           | $0 copay; 1 every year | Foot Care - Routine        | $35 copay                   | Hearing Exam           | $0 copay                | Fitness Program through Renew Active            | Fitness Membership and Fitness Wearable: Basic membership in a fitness program at a network location and get a Fitbit® activity tracker at no additional cost |
 
     @VisitorProfile_UHC @prodRegression_UHC
     Examples: 
       | site | state    | UID       | zipcode | isMultiCounty | plantype | planyear | county           | testPlans                                                                                               | eyeWearBenefitType | eyeWearExpectedText                                           | eyeExamBenefitType | eyeExamExpectedText    | footCareRoutineBenefitType | footCareRoutineExpectedText | hearingExamBenefitType | hearingExamExpectedText | membershipinHealthClubFitnessClassesBenefitType | membershipinHealthClubFitnessExpectedText                                                                  |
       | UHC  | Alabama  | US1770330 |   53503 | NO            | MAPD     | current  | Jefferson County | UnitedHealthcare Medicare Advantage Open (PPO),UnitedHealthcare Medicare Advantage Open Essential (PPO) | Eyewear            | Eyewear has a plan benefit limit up to $100 per every 2 years | Eye Exam           | $0 copay               | Foot Care - Routine        | $50 copay                   | Hearing Exam           | $0 copay                | Fitness Program through Renew Active            | Fitness Membership Only: Basic membership in a fitness program at a network location at no additional cost |
-      | UHC  | Virginia | US1770330 |   22320 | NO            | MAPD     | current  | Alexandria city  | AARP Medicare Advantage Walgreens (PPO),AARP Medicare Advantage Plan 1 (HMO)                            | Eyewear            | Eyewear has a plan benefit limit up to $200 per every 2 years | Eye Exam           | $0 copay; 1 every year | Foot Care - Routine        | $35 copay                   | Hearing Exam           | $0 copay                | Fitness Program through Renew Active            | Fitness Membership Only: Basic membership in a fitness program at a network location at no additional cost |
+      | UHC  | Virginia | US1770330 |   22320 | NO            | MAPD     | current  | Alexandria city  | AARP Medicare Advantage Walgreens (PPO),AARP Medicare Advantage Plan 1 (HMO)                            | Eyewear            | Eyewear has a plan benefit limit up to $200 per every 2 years | Eye Exam           | $0 copay; 1 every year | Foot Care - Routine        | $35 copay                   | Hearing Exam           | $0 copay                | Fitness Program through Renew Active            | Fitness Membership and Fitness Wearable: Basic membership in a fitness program at a network location and get a Fitbit® activity tracker at no additional cost |
 
   @vpOLE
   Scenario Outline: <UID> - Verify user is save plans from VPP to the unauthenticated visitor profile and complete OLE
@@ -525,6 +525,9 @@ Feature: 1.08. ACQ- Visitor profile
     Then the user clicks on Enroll Now for AARP site to start the OLE flow
       | Plan Name | <planName> |
     Then the user validates the Plan details on OLE
+    Then the user validates Learn more modal for Welcome OLE
+    Then the user validates Leave OLE modal for Welcome OLE
+    Then the user validates cancellation modal for Welcome OLE
     Then the user navigates to Personal Information Page
     Then the user enters following required information in Personal Information Page
       | First Name               | <firstname>              |
