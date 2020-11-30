@@ -144,19 +144,19 @@ public class VppPlanValidationStepDefinition {
 									  new VppCommonPage(wd,siteType,currentCellValue);  //gets the partial deeplink fromt the excel and appends it with the environment URL and navigates to plan details page	
 									  planDetailsPage = new AepPlanDetailsPage(wd);
 									  
-									  if(sheetName.contains("PDP")) {
+									/*  if(sheetName.contains("PDP")) {
 										  if(!row.getCell(6).getStringCellValue().contains("NA")) {
 											  planDetailsPage.navigateToDCEandAddDrug(row.getCell(6).getStringCellValue());
 											  benefitsMap = planDetailsPage.collectInfoVppPlanDetailPg(sheetName,rowIndex);
 											  planDetailsPage.editDrugListAndRemoveDrug();
 										  }else 
 											  benefitsMap = planDetailsPage.collectInfoVppPlanDetailPg(sheetName,rowIndex);
-									  }else
+									  }else*/
 										  benefitsMap = planDetailsPage.collectInfoVppPlanDetailPg(sheetName,rowIndex);              //  stores all the table info into hashmap
 
 								 }
 
-								 if(!(currentColName.contains("Plan ID QA")||currentColName.contains("Product Focus")||currentColName.contains("DSNP Sub Type")||currentColName.contains("SNP Type")||currentColName.equalsIgnoreCase("Drug Name")||currentColName.equalsIgnoreCase("Error Count")||currentColName.equalsIgnoreCase("portal labels")||currentColName.equalsIgnoreCase("OON_IN")||currentColName.equalsIgnoreCase("plan type")||currentColName.equalsIgnoreCase("county")||currentColName.equalsIgnoreCase("Link parameters")||currentColName.equalsIgnoreCase("Contract PBP Segment ID")||currentColName.equalsIgnoreCase("product")||currentColName.equalsIgnoreCase("plan name")||currentColName.equalsIgnoreCase("zipcode")||currentColName.equalsIgnoreCase("fips"))) {	
+								 if(!(currentColName.equalsIgnoreCase("Plan ID QA script")||currentColName.equalsIgnoreCase("Product Focus")||currentColName.equalsIgnoreCase("DSNP Sub Type")||currentColName.equalsIgnoreCase("Drug Name")||currentColName.equalsIgnoreCase("Error Count")||currentColName.equalsIgnoreCase("portal labels")||currentColName.equalsIgnoreCase("OON_IN")||currentColName.equalsIgnoreCase("plan type")||currentColName.equalsIgnoreCase("county")||currentColName.equalsIgnoreCase("Link parameters")||currentColName.equalsIgnoreCase("Contract PBP Segment ID")||currentColName.equalsIgnoreCase("product")||currentColName.equalsIgnoreCase("plan name")||currentColName.equalsIgnoreCase("zipcode")||currentColName.equalsIgnoreCase("fips"))) {	
 
 								      resultMap = planDetailsPage.compareBenefits(currentColName, currentCellValue, benefitsMap); //compares the benefit value from the excel to the values from the hashmap. key = columnName, value= benefit value
 								      if(resultMap.containsKey(false))
@@ -506,7 +506,7 @@ public class VppPlanValidationStepDefinition {
 				 AepVppPlanSummaryPage planSummaryPage = null;
 				 String currentCellValue = "";
 				 String currentColName = "";
-				 
+				 int countyCellNum = 0, planYearCellNum = 0, planNameCellNum = 0;
 				 HashMap <String, String> benefitsMap = new HashMap<String, String>();
 				 System.out.println(sheetName+ " SAUCE URL: "+ MRScenario.returnJobURL());
 				 //Looping over total rows with values
@@ -535,14 +535,20 @@ public class VppPlanValidationStepDefinition {
 			                 HSSFCell newCell = (HSSFCell) resultsRow.createCell(cellIndex); 
 			                 if(rowIndex==0) {
 								 newCell.setCellValue(cell.getStringCellValue()); 
+								 if(cell.getStringCellValue().equalsIgnoreCase("county"))
+									  countyCellNum = cellIndex;
+								 else if(cell.getStringCellValue().equalsIgnoreCase("plan year"))
+									 planYearCellNum = cellIndex;
+								 else if(cell.getStringCellValue().equalsIgnoreCase("plan name"))
+									 planNameCellNum = cellIndex;
 			                 }
 							
 							 if(rowIndex!=0) { //skip the header row
 								 if(cellIndex==0) { 
 									 
-									  String countyName = row.getCell(4).getStringCellValue();
-									  String planYear = row.getCell(5).getStringCellValue();
-									  String planName = row.getCell(3).getStringCellValue();
+									  String countyName = row.getCell(countyCellNum).getStringCellValue(); 
+									  String planYear = row.getCell(planYearCellNum).getStringCellValue();
+									  String planName = row.getCell(planNameCellNum).getStringCellValue();
 									  
 									  System.out.println("Validating "+sheetName+ " Plan "+rowIndex+" ************************************************************");
 									  new VppCommonPage(wd,siteType,currentCellValue);  //gets the partial deeplink fromt the excel and appends it with the environment URL and navigates to plan details page
@@ -554,7 +560,7 @@ public class VppPlanValidationStepDefinition {
                                       benefitsMap = planSummaryPage.collectInfoVppPlanSummaryPg(planName, countyName, planYear, sheetName, rowIndex);
 								 }
 
-								 if(!(currentColName.equalsIgnoreCase("plan year")||currentColName.equalsIgnoreCase("plan id qa")||currentColName.equalsIgnoreCase("product focus")||currentColName.equalsIgnoreCase("dsnp sub type")||currentColName.equalsIgnoreCase("Error Count")||currentColName.equalsIgnoreCase("portal labels")||currentColName.equalsIgnoreCase("OON_IN")||currentColName.equalsIgnoreCase("plan type")||currentColName.equalsIgnoreCase("county")||currentColName.equalsIgnoreCase("Link parameters")||currentColName.equalsIgnoreCase("Contract PBP Segment ID")||currentColName.equalsIgnoreCase("product")||currentColName.equalsIgnoreCase("plan name")||currentColName.equalsIgnoreCase("zipcode")||currentColName.equalsIgnoreCase("fips"))) {	
+								 if(!(currentColName.equalsIgnoreCase("plan year")||currentColName.equalsIgnoreCase("plan id qa script")||currentColName.equalsIgnoreCase("product focus")||currentColName.equalsIgnoreCase("dsnp sub type")||currentColName.equalsIgnoreCase("Error Count")||currentColName.equalsIgnoreCase("portal labels")||currentColName.equalsIgnoreCase("OON_IN")||currentColName.equalsIgnoreCase("plan type")||currentColName.equalsIgnoreCase("county")||currentColName.equalsIgnoreCase("Link parameters")||currentColName.equalsIgnoreCase("Contract PBP Segment ID")||currentColName.equalsIgnoreCase("product")||currentColName.equalsIgnoreCase("plan name")||currentColName.equalsIgnoreCase("zipcode")||currentColName.equalsIgnoreCase("fips"))) {	
 									 
 									 resultMap = planSummaryPage.compareBenefits(currentColName, currentCellValue, benefitsMap); //compares the benefit value from the excel to the values from the hashmap. key = columnName, value= benefit value
 									 if(resultMap.containsKey(false))
