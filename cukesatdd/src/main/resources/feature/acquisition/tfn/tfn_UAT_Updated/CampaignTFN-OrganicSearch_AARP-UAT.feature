@@ -113,6 +113,7 @@ Feature: UAT Scripts-To test Organic SearchCampaign TFN on AARP site
       | MedSupp URL | <medSuppUrl> |
       | TFN Xpath   | <medSuppTFN> |    
     ################## Precedence 6.15 - Visit site via organic search from Yahoo, PSC code 810105######################
+    Given the user Starts WebDriver
     Given user is on Yahoo and search AARP Medicare Advantage Plan to navigate to AARP page
     Then the user navigates to shop pages Page and validates Federal TFN
      | SHOPPAGES URL   | <connect> |
@@ -124,7 +125,7 @@ Feature: UAT Scripts-To test Organic SearchCampaign TFN on AARP site
       | MedSupp URL | <medSuppUrl> |
       | TFN Xpath   | <medSuppTFN> |
 	################ # Precedence 6.3 - Visit AMP using Campign URL , PSC code 860002###############################
-        Given the user is on following acquisition site from Campaign Traffic
+      Given the user is on following acquisition site from Campaign Traffic
       | Site         | <site>         |
       | Campaign URL | <campaign2Url> |
         And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
