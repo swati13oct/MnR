@@ -2293,7 +2293,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	     	
 	     	//driver.findElement(By.xpath("//*[@id='globalContentIdForSkipLink']/div/table/tbody/tr[2]/td/div[1]/div/div/div[3]/div/div/div/div[2]/div/div/div/div/div/div/div/a")).click();
 			jsClickNew(driver.findElement(By.xpath("//*[@id='globalContentIdForSkipLink']/div/table/tbody/tr[2]/td/div[1]/div/div/div[3]/div/div/div/div[2]/div/div/div/div/div/div/div/a")));
-	     	    	
+	     	waitForPageLoadSafari();
 	     		return new PlanDocsPage(driver);
 		 }
 
