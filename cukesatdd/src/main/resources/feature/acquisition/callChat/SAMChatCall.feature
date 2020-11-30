@@ -174,5 +174,147 @@ Examples:
       | disclaimer.html               | UHC|
      | contact-us.html               | UHC|
       | privacy-policy.html           |UHC|
-    
+      
+    #############Updated for Regression Suite Team  #################################
+       @samChatRegressionAARP7
+      Examples: 
+			| pagename |site|
+			|/| AARP|
+			| medicare-education/medicare-eligibility.html             |AARP|
+      | medicare-education/medicare-parts-and-medigap-plans.html |AARP| 
+      | medicare-education/medicare-benefits.html                |AARP|
+      | medicare-education/medicare-advantage-plans.html  |AARP|
+      | medicare-education/medicare-supplement-plans.html |AARP|
+      | medicare-education/medicare-part-d.html           | AARP|
+      | medicare-education/medicare-costs.html                | AARP|
+      | medicare-education/enrollment-and-changing-plans.html | AARP|
+      | medicare-education/medicare-faq.html                  | AARP|
+      
+      @samChatRegressionAARP8
+      Examples: 
+			| pagename |site|
+      | shop.html          | AARP|
+      | shop/connect       | AARP|
+   #   | shop/compare.html  | AARP|
+      | shop/estimate.html | AARP|
+      | shop/switch.html   |  AARP|
+      | shop/medicare-advantage-plans.html  | AARP|
+      | shop/medicare-supplement-plans.html | AARP|
+      | shop/prescription-drug-plans.html   |AARP| 
+      | shop/dual-special-needs-plans.html  |AARP|
+ 
+ 
+  @samChatRegressionAARP9
+   Examples: 
+			| pagename |site|
+      | enroll.html                | AARP|
+      | enroll/ma-enrollment.html  |AARP|
+      | enroll/pdp-enrollment.html | AARP|
+    #  | resources.html                                       |AARP|
+      | resources/medication-therapy-management-program.html |AARP| 
+      | resources/how-to-appoint-a-representative.html       | AARP|
+      | resources/prescription-drug-costs-help.html          | AARP|
+      | resources/healthcare-fraud.html                      | AARP|
+      | resources/how-to-pay-your-premium.html               |  AARP|
+      | resources/disenrollment-information.html                                            | AARP|
+      
+      @samChatRegressionAARP10
+      Examples: 
+			| pagename |site|
+      | health-plans.html?zipcode=90210&deepLink=favPlansDeepLink&plantype=MA&year=2020&planId=H0543168000&planYear=2020&systemYear=2020&zipcode=90210&fipsCode=037&product=MAPD&yearDisclaimer=undefined&month=2&yearToggle=undefined&deepLink=plandetail&WT.mc_id=8016371&mrcid=em:Acq:MR%7cFederal%7cEGEM3011%7c::8016371!/details |   AARP|                           
+      | health-plans.html?zipcode=28035&deepLink=favPlansDeepLink&plantype=MA&year=2020&planId=H5253041000&planYear=2020&systemYear=2020&zipcode=28035&fipsCode=119&product=MAPD&yearDisclaimer=undefined&month=2&yearToggle=undefined&deepLink=plandetail&WT.mc_id=897749&mrcid=em:Acq:MR%7cFederal%7cEGEM3011%7c::897749!/details   | AARP|
+      | health-plans/medicare-advantage-plans/available-plans.html?WT.mc_id=897506&zipcode=96795&county=020&state=12&originatingSite=https%3A%2F%2Fwww.myuhcplans.com%2Featon&subdomain=eaton!/plan-summary                                                                                                                           | AARP|
+     
+      @samChatRegressionAARP11
+   Examples: 
+			| pagename |site|
+      | profile/guest                                              | AARP|
+      | about-us.html                 |AARP|
+      | sitemap.html                  | AARP|
+      | terms-of-use.html             | AARP|
+      | disclaimer.html               | AARP|
+      | contact-us.html               | AARP|
+      | privacy-policy.html           |AARP|
+      
+     @samChatRegressionAARP12
+			Examples:
+			| pagename |site|
+			|medicare-articles.html                                 |AARP|
+			|medicare-articles/medicare-made-clear.html             |AARP|
+      |medicare-articles/eligibility-and-enrollment.html      |AARP|
+     # |medicare-articles/medicare-benefits-and-coverage.html  |AARP|
+      |medicare-articles/medicare-costs.html                  |AARP|
+    #  |medicare-articles/shopping-for-medicare.html           |AARP|
+    #  |medicare-articles/medicare-when-working-past-65.html   |AARP|
+      
+       @samChatRegressionUHC7
+      Examples: 
+			| pagename |site|
+			|/| UHC|
+			| medicare-education/medicare-eligibility.html             |UHC|
+      | medicare-education/medicare-parts-and-medigap-plans.html |UHC| 
+      | medicare-education/medicare-benefits.html                |UHC|
+      | medicare-education/medicare-advantage-plans.html  |UHC|
+      | medicare-education/medicare-supplement-plans.html |UHC|
+      | medicare-education/medicare-part-d.html           | UHC|
+      | medicare-education/medicare-costs.html                | UHC|
+      | medicare-education/enrollment-and-changing-plans.html | UHC|
+      | medicare-education/medicare-faq.html                  | UHC|
+      
+      @samChatRegressionUHC8
+      Examples: 
+			| pagename |site|
+      | shop.html          | UHC|
+      | shop/connect       | UHC|
+     # | shop/compare.html  | UHC|
+      | shop/estimate.html | UHC|
+    #  | shop/switch.html   |  UHC|
+      | shop/medicare-advantage-plans.html  | UHC|
+      | shop/medicare-supplement-plans.html | UHC|
+      | shop/prescription-drug-plans.html   |UHC| 
+      | shop/dual-special-needs-plans.html  |UHC|
+ 
+ 
+  @samChatRegressionUHC9
+   Examples: 
+			| pagename |site|
+      | enroll.html                | UHC|
+      | enroll/ma-enrollment.html  |UHC|
+      | enroll/pdp-enrollment.html | UHC|
+    #  | resources.html                                       |UHC|
+      | resources/medication-therapy-management-program.html |UHC| 
+      | resources/how-to-appoint-a-representative.html       | UHC|
+      | resources/prescription-drug-costs-help.html          | UHC|
+      | resources/healthcare-fraud.html                      | UHC|
+      | resources/how-to-pay-your-premium.html               |  UHC|
+      | resources/disenrollment-information.html                                            | UHC|
+      
+      @samChatRegressionUHC10
+      Examples: 
+			| pagename |site|
+      | health-plans.html?zipcode=90210&deepLink=favPlansDeepLink&plantype=MA&year=2020&planId=H0543168000&planYear=2020&systemYear=2020&zipcode=90210&fipsCode=037&product=MAPD&yearDisclaimer=undefined&month=2&yearToggle=undefined&deepLink=plandetail&WT.mc_id=8016371&mrcid=em:Acq:MR%7cFederal%7cEGEM3011%7c::8016371!/details |   UHC|                           
+      | health-plans.html?zipcode=28035&deepLink=favPlansDeepLink&plantype=MA&year=2020&planId=H5253041000&planYear=2020&systemYear=2020&zipcode=28035&fipsCode=119&product=MAPD&yearDisclaimer=undefined&month=2&yearToggle=undefined&deepLink=plandetail&WT.mc_id=897749&mrcid=em:Acq:MR%7cFederal%7cEGEM3011%7c::897749!/details   | UHC|
+      | health-plans/medicare-advantage-plans/available-plans.html?WT.mc_id=897506&zipcode=96795&county=020&state=12&originatingSite=https%3A%2F%2Fwww.myuhcplans.com%2Featon&subdomain=eaton!/plan-summary                                                                                                                           | UHC|
+     
+     @samChatRegressionUHC11
+   Examples: 
+			| pagename |site|
+      | profile/guest                                              | UHC|
+      | about-us.html                 |UHC|
+      | sitemap.html                  | UHC|
+      | terms-of-use.html             | UHC|
+      | disclaimer.html               | UHC|
+      | contact-us.html               | UHC|
+      | privacy-policy.html           |UHC|
+      
+     @samChatRegressionUHC12
+			Examples:
+			| pagename |site|
+			|medicare-articles.html                                 |UHC|
+			|medicare-articles/medicare-made-clear.html             |UHC|
+      |medicare-articles/eligibility-and-enrollment.html      |UHC|
+    #  |medicare-articles/medicare-benefits-and-coverage.html  |UHC|
+      |medicare-articles/medicare-costs.html                  |UHC|
+   #   |medicare-articles/shopping-for-medicare.html           |UHC|
+     # |medicare-articles/medicare-when-working-past-65.html   |UHC|
    

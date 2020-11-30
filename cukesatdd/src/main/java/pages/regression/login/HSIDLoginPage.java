@@ -132,6 +132,7 @@ public class HSIDLoginPage extends UhcDriver {
 		
 	@FindBy(xpath="//header//button[contains(@ng-click,'goToHomePage()')]")
 	protected WebElement anocGoToHomepageBtn;
+	
 
 	@FindBy(xpath="//*[@id='main-message']/h1")
 	protected WebElement privacyNotice;
@@ -163,6 +164,9 @@ public class HSIDLoginPage extends UhcDriver {
 		PageFactory.initElements(driver, this);
 		openAndValidate(deepLinkUrl);
 	}
+	
+	
+
 	
 	public void validateFooter() {
 		FooterPage footerPg=new FooterPage(driver);
@@ -1073,6 +1077,8 @@ public class HSIDLoginPage extends UhcDriver {
 		//note: default in UhcDriver is 10
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);  
 		return false;
-	} 
+	}
+
+
 
 }

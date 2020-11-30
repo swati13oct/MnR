@@ -543,7 +543,7 @@ public class ProviderSearchPage extends UhcDriver {
 
 		
 		counter++;
-		if(counter==6)
+		if(counter==9)
 			{
 			break;			
 			}
@@ -586,5 +586,12 @@ public class ProviderSearchPage extends UhcDriver {
 				nextYrTile.click();
 		}
 		
+	}
+
+	public AcquisitionHomePage returnToAcqHomePage() {
+		// TODO Auto-generated method stub
+		driver.close();
+		driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
+		return new AcquisitionHomePage(driver);
 	}
 }
