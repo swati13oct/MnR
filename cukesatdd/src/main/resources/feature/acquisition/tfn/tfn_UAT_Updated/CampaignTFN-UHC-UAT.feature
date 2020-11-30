@@ -102,7 +102,7 @@ When the user enters zipcode on health plans page
       
     Examples:  
        |scenario                  | pscCode |pscCode1| emailLinkUrl                                                                                      | emailLinkTFN                                                                      | medicareUrl                                   | medicareTFN                                                         | shoppagesUrl|      shoppagesTFN             |
-       |Scenario 5-Email - UMS 	|  880180 | 8014300|/?WT.mc_id=8014300&mrcid=em:Acq:MR%7CNTM6501%7CEGEM3108%7C::8014300 |//a[contains(@class, 'tel') and contains(@href, 'tel')]|medicare-articles.html                         |//button[@id='sam-call-button']//span[contains(@class,'sam__button__text desktop')]|  shop/medicare-supplement-plans.html                       |(//*[contains(@class,'call')]//a[contains(@class,'tel')])[2]|
+       |Scenario 5-Email - UMS 	|  880180 | 8014300|?WT.mc_id=8014300&mrcid=em:Acq:MR%7CNTM6501%7CEGEM3108%7C::8014300 |//a[contains(@class, 'tel') and contains(@href, 'tel')]|medicare-articles.html                         |//button[@id='sam-call-button']//span[contains(@class,'sam__button__text desktop')]|  shop/medicare-supplement-plans.html                       |(//*[contains(@class,'call')]//a[contains(@class,'tel')])[2]|
        
            #######################Script 6: External Link########################################
    @Scenario_6_External_Link_UHC_UAT
