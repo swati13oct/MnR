@@ -14,7 +14,7 @@ jsonReport = "target/cucumber-RunMRATDDRegressionPfnyStageP05_IndMapdAarp.json",
 overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionPfnyStageP05_IndMapdAarp")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberredesign" }, 
 features = { "src/main/resources/feature/memberredesign/prepareForNextYear" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionPfnyStageP05_IndMapdAarp.json" }, tags = { "@stageEnv","@prepareForNextYear02_ind_mapd_aarp" })
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionPfnyStageP05_IndMapdAarp.json" }, tags = { "@stageEnv","@pfny02_ind_mapd_aarp" })
 public class RunMRATDDRegressionPfnyStageP05_IndMapdAarp {
 
 }

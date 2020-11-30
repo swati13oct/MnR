@@ -1,4 +1,4 @@
-@GlobalComponentsUHC
+@GlobalComponentsUHC @F448210
 Feature: 2.12 ACQ - Global Components UHC
 
   @globalfooterBLayer
@@ -36,6 +36,7 @@ Feature: 2.12 ACQ - Global Components UHC
     When user accesses global footer of the UHC Medicare Solutions All page
     Then the USer validates Shop for a Plan Navigation links on UHC site
     Then the user validates Medicare Education Navigation links on UHC site
+     Then the user validate ZipCode Components on UHC page using ZipCode "90210"
     Then the user validates TFN on page on UHC site
       | TFNxpath | <tfnXpath> |
       | TFNflag  | <tfnFlag>  |
@@ -173,23 +174,231 @@ Feature: 2.12 ACQ - Global Components UHC
       | contact-us.html               | Footer: Contact Us         | //a[contains(@href ,'tel')]  | false   |
       | privacy-policy.html           | Footer: Privacy Policy     | //a[contains(@href ,'tel')]  | false   |
 
-  @GlobalComponentsUHCPages_ISonlyPages
-  Scenario Outline: To verify Global Components for the page mentioned of AARP site <pageName> : <path>
-    Given the user is on the uhcmedicaresolutions site landing page
-    Given the user navigates to following UHC medicare acquisition site page
+  #@GlobalComponentsUHCPages_ISonlyPages
+  #Scenario Outline: To verify Global Components for the page mentioned of AARP site <pageName> : <path>
+    #Given the user is on the uhcmedicaresolutions site landing page
+    #Given the user navigates to following UHC medicare acquisition site page
+      #| PageName | <pageName> |
+      #| PagePath | <path>     |
+    #When user accesses global header of the UHC Medicare Solutions home page
+    #When user accesses global footer of the UHC Medicare Solutions All page
+    #Then the USer validates Shop for a Plan Navigation links on UHC site
+    #Then the user validates Medicare Education Navigation links on UHC site
+    #Then the user validate ZipCode Components on UHC page using ZipCode "90210"
+    #Then the user validates TFN on page on UHC site
+      #| TFNxpath | <tfnXpath> |
+      #| TFNflag  | <tfnFlag>  |
+    #Then the user validates SAM Call Icon on UHC site
+#
+    #@MedSuppOnlyPages_GlobalCompsUHC
+    #Examples: 
+      #| path                                                                      | pageName          | tfnXpath       | tfnFlag |
+      #| medicare-supplement-plans/medicare-information.html?vpp=true              | Decision Guide    | //*[@id='tfn'] | true    |
+      #| medicare-supplement-plans/agent-appointment.html                          | Agent Appointment | //*[@id='tfn'] | true    |
+      
+    @GlobalComponentsUHC_NewShopPages   @NewpagesUHC
+  Scenario Outline: To verify Global Components for the page mentioned on UHC site<pageName> : <path>
+     Given the user is on the uhcmedicaresolutions site landing page
+     Given the user navigates to following UHC medicare acquisition site page
       | PageName | <pageName> |
       | PagePath | <path>     |
-    When user accesses global header of the UHC Medicare Solutions home page
-    When user accesses global footer of the UHC Medicare Solutions All page
-    Then the USer validates Shop for a Plan Navigation links on UHC site
-    Then the user validates Medicare Education Navigation links on UHC site
-    Then the user validates TFN on page on UHC site
-      | TFNxpath | <tfnXpath> |
-      | TFNflag  | <tfnFlag>  |
-    Then the user validates SAM Call Icon on UHC site
-
-    @MedSuppOnlyPages_GlobalCompsUHC
-    Examples: 
-      | path                                                                      | pageName          | tfnXpath       | tfnFlag |
-      | medicare-supplement-plans/medicare-information.html?vpp=true              | Decision Guide    | //*[@id='tfn'] | true    |
-      | medicare-supplement-plans/agent-appointment.html                          | Agent Appointment | //*[@id='tfn'] | true    |
+    Then the user validate ZipCode Components on UHC page using ZipCode "55416"
+    
+    
+     @GlobalComponentsUHC_NewShopPages    @NewpagesUHC
+     Examples: 
+      | path                                                                      | pageName      | 
+      | contact-us.html                                                           | Contact us    |
+      | shop/estimate/ma-costs.html                                               | Estimate MA  | 
+      | shop/estimate/pdp-costs.html                                              | Estimate PDP  |
+      | shop/switch.html                                                          | Switch        |
+      | shop/renew-active.html                                                    | Renew Active  |
+      | shop/medicare-advantage-plans/ma-plan-benefits.html                       | MA Plan benefits|
+      | shop/compare/compare-ma.html                                              | Compare MA    |
+      | shop/compare/compare-pdp.html                                             | Compare PDP   |
+      | shop/medicare-advantage-veteran-plan.html                                 | MA Veteran Plan|
+      | enroll/ma-enrollment.html                                                 | MA Enrollment |
+      | enroll/pdp-enrollment.html                                                | PDP Enrollment|
+      |medicare-articles/eligibility-and-enrollment.html                          | Sample Category Page   |
+            
+    
+   @GlobalComponentsUHC_BlogPages    @NewpagesUHC
+  Scenario Outline: To verify Global Components for the page mentioned on UHC site <pageName> : <path>
+     Given the user is on the uhcmedicaresolutions site landing page
+     Given the user navigates to following UHC medicare acquisition site page
+      | PageName | <pageName> |
+      | PagePath | <path>     |
+    Then the user enters and validate the fields and clicks on submit on UHC site
+    Then the user validate ZipCode Components on UHC page using ZipCode "55424"
+    
+    
+   @GlobalComponentsUHC_BlogPages    @NewpagesUHC
+     Examples: 
+      |path                               |site                                                         | pageName               |
+      |medicare-articles.html    |UHC                                                                   | Medicare Articles Home |
+      |medicare-articles/medicare-made-clear.html      |UHC                                                | About MMC              |
+      |medicare-articles/what-is-retiree-health-coverage.html      |UHC                                   | Sample Article Page 2  |
+      |medicare-articles/unintended-part-d-gotcha-could-getcha-if-you-enroll-after-age-65.html  |UHC       | Sample Article Page 1  |
+      |medicare-articles/medicare-benefits-and-coverage.html |UHC|Article page|
+|medicare-articles/medicare-costs.html |UHC|Article page|
+|medicare-articles/shopping-for-medicare.html |UHC|Article page|
+|medicare-articles/medicare-when-working-past-65.html |UHC|Article page|
+|medicare-articles/medicare-tips-and-faqs.html |UHC|Article page|
+|medicare-articles/how-to-avoid-the-medicare-part-b-late-penalty |UHC|Article page|
+|medicare-articles/9-good-reasons-why-a-medicare-advantage-plan-might-be-right-for-you|UHC|Article page|
+|medicare-articles/caregiver-corner-helping-your-loved-one-prepare-for-the-medicare-annual-enrollment-period|UHC|Article page|
+|medicare-articles/your-5-point-checklist-choosing-medicare-part-d-plan|UHC|Article page|
+|medicare-articles/6-tips-to-protect-yourself-from-medicare-fraud|UHC|Article page|
+|medicare-articles/what-will-medicare-cost-in-2020|UHC|Article page|
+|medicare-articles/medicare-plan-annual-notice-of-change-what-to-look-for|UHC|Article page|
+|medicare-articles/need-eyeglasses-or-eye-care-coverage-check-your-medicare-options|UHC|Article page|
+|medicare-articles/medicare-doesnt-cover-everything-what-you-need-know|UHC|Article page|
+|medicare-articles/6-timely-medicare-tips-for-turning-65|UHC|Article page|
+|medicare-articles/should-i-get-part-b-if-im-working-past-65|UHC|Article page|
+|medicare-articles/try-to-avoid-medicare-late-enrollment-premium-penalties|UHC|Article page|
+|medicare-articles/what-is-the-difference-between-original-medicare-and-medicare-advantage|UHC|Article page|
+|medicare-articles/do-i-need-medicare-with-spouses-employer-plan|UHC|Article page|
+|medicare-articles/5-ways-to-pay-your-medicare-part-b-premium|UHC|Article page|
+|medicare-articles/5-medicare-myths-set-straight|UHC|Article page|
+|medicare-articles/when-can-you-start-getting-medicare|UHC|Article page|
+|medicare-articles/is-medicare-mandatory|UHC|Article page|
+|medicare-articles/can-i-change-my-medicare-plan|UHC|Article page|
+|medicare-articles/medicare-coverage-for-non-working-spouses|UHC|Article page|
+|medicare-articles/5-tips-for-enrolling-in-medicare-for-the-first-time|UHC|Article page|
+|medicare-articles/decide-change-plan |UHC|Article page|
+|medicare-articles/medicare-coverage-for-mammograms|UHC|Article page|
+|medicare-articles/have-diabetes-medicare-parts-b-and-d-have-you-covered|UHC|Article page|
+|medicare-articles/how-to-get-ready-for-the-medicare-annual-enrollment-period|UHC|Article page|
+|medicare-articles/what-does-original-medicare-include|UHC|Article page|
+|medicare-articles/what-is-creditable-drug-coverage|UHC|Article page|
+|medicare-articles/safe-medicare-enrollment-during-COVID|UHC|Article page|
+|medicare-articles/what-is-the-medicare-annual-enrollment-period|UHC|Article page|
+|medicare-articles/aep-change-or-renew|UHC|Article page|
+|medicare-articles/can-you-switch-between-original-medicare-and-medicare-advantage-during-the-annual-enrollment-period|UHC|Article page|
+|medicare-articles/2-ways-to-prescription-drug-coverage|UHC|Article page|
+|medicare-articles/good-reasons-to-shop-for-a-new-medicare-plan|UHC|Article page|
+|medicare-articles/the-difference-between-medicare-hmo-and-ppo-plans|UHC|Article page|
+|medicare-articles/medicare-mistakes-that-could-be-costly|UHC|Article page|
+|medicare-articles/5-savvy-shopper-tips-help-get-medicare|UHC|Article page|
+|medicare-articles/which-vaccines-does-medicare-cover|UHC|Article page|
+|medicare-articles/what-if-i-missed-my-initial-enrollment-period|UHC|Article page|
+|medicare-articles/4-basic-questions-to-ask-about-medicare-part-d-coverage|UHC|Article page|
+|medicare-articles/turn-65-retire-sign-up-for-medicare-or-not|UHC|Article page|
+|medicare-articles/7-inside-tips-to-help-you-make-a-smooth-move-to-medicare|UHC|Article page|
+|medicare-articles/medicare-individuals-who-divorced-widowed|UHC|Article page|
+|medicare-articles/medicare-and-durable-medical-equipment-dme|UHC|Article page|
+|medicare-articles/3-simple-ways-to-change-medicare-plans|UHC|Article page|
+|medicare-articles/prescription-discount-cards-other-money-saving-medicare-tips|UHC|Article page|
+|medicare-articles/does-medicare-coverage-change-if-you-return-to-work|UHC|Article page|
+|medicare-articles/medicare-enrollment-for-veterans|UHC|Article page|
+|medicare-articles/retiring-in-2020-what-to-know-about-medicare|UHC|Article page|
+|medicare-articles/like-to-travel-it-may-affect-which-medicare-plan-you-choose|UHC|Article page|
+|medicare-articles/how-do-tricare-and-medicare-work-together|UHC|Article page|
+|medicare-articles/youre-65-working-medicare|UHC|Article page|
+|medicare-articles/how-to-get-dental-and-vision-care-coverage-when-you-have-medicare|UHC|Article page|
+|medicare-articles/pharmacists-answering-your-medicare-prescription-drug-questions|UHC|Article page|
+|medicare-articles/why-you-and-your-spouse-might-need-different-medicare-plans|UHC|Article page|
+|medicare-articles/born-in-1955-or-later-you-may-have-to-work-until-youre-67|UHC|Article page|
+|medicare-articles/renew-medicare-plan-open-enrollment|UHC|Article page|
+|medicare-articles/medicare-enrollment-checklist-helping-you-prepare-for-an-important-decision|UHC|Article page|
+|medicare-articles/should-you-change-your-medicare-plan|UHC|Article page|
+|medicare-articles/what-happens-to-your-medicare-plan-if-you-move|UHC|Article page|
+|medicare-articles/help-i-have-a-disability-and-i-want-to-enroll-in-medicare|UHC|Article page|
+|medicare-articles/what-is-the-medicare-special-enrollment-period|UHC|Article page|
+|medicare-articles/wheres-my-original-medicare-card|UHC|Article page|
+|medicare-articles/the-truth-your-medicare-part-b-premium|UHC|Article page|
+|medicare-articles/dos-and-donts-cancelling-a-marketplace-health-plan|UHC|Article page|
+|medicare-articles/outpatient-mental-health-care-services|UHC|Article page|
+|medicare-articles/medicare-increases-coverage-mental-health-care|UHC|Article page|
+|medicare-articles/how-to-transition-from-the-health-marketplace-to-medicare|UHC|Article page|
+|medicare-articles/what-should-i-look-for-in-a-medicare-prescription-drug-plan|UHC|Article page|
+|medicare-articles/saving-on-medicare-when-self-employed|UHC|Article page|
+|medicare-articles/concrete-answers-10-common-medicare-questions|UHC|Article page|
+|medicare-articles/is-your-medicare-plan-the-best-one-for-you-this-checklist-can-help-you-decide|UHC|Article page|
+|medicare-articles/what-telehealth-services-does-medicare-offer|UHC|Article page|
+|medicare-articles/7-popular-medicare-questions-asked-during-national-medicare-education-week|UHC|Article page|
+|medicare-articles/whats-the-difference-between-a-skilled-nursing-facility-and-a-nursing-home|UHC|Article page|
+|medicare-articles/what-s-the-difference-between-medicare-and-medicaid|UHC|Article page|
+|medicare-articles/how-to-appeal-a-medicare-decision|UHC|Article page|
+|medicare-articles/how-avoid-paying-more-prescription-drug-coverage|UHC|Article page|
+|medicare-articles/3-ways-to-dispose-of-your-old-unused-medications-safely|UHC|Article page|
+|medicare-articles/what-is-a-tiered-formulary-and-what-does-it-mean-for-me|UHC|Article page|
+|medicare-articles/good-news-medicare-part-b-covers-cataract-surgery|UHC|Article page|
+|medicare-articles/heart-healthy-help-medicare|UHC|Article page|
+|medicare-articles/what-can-i-do-during-the-medicare-advantage-open-enrollment-period|UHC|Article page|
+|medicare-articles/medicare-coverage-for-same-sex-couples|UHC|Article page|
+|medicare-articles/how-to-evaluate-medicare-plan-costs|UHC|Article page|
+|medicare-articles/6-point-checklist-to-rate-your-new-medicare-advantage-plan|UHC|Article page|
+|medicare-articles/replacing-your-medicare-card-just-got-a-whole-lot-easier|UHC|Article page|
+|medicare-articles/understanding-your-medicare-plan|UHC|Article page|
+|medicare-articles/how-to-save-on-prescription-drugs-with-medicare|UHC|Article page|
+|medicare-articles/10-tips-choosing-primary-care-doctor|UHC|Article page|
+|medicare-articles/avoid-sticker-shock-medicare-billing|UHC|Article page|
+|medicare-articles/does-medicare-part-a-cost-anything|UHC|Article page|
+|medicare-articles/how-much-does-medicare-part-b-cost|UHC|Article page|
+|medicare-articles/what-is-co-insurance|UHC|Article page|
+|medicare-articles/what-is-the-medicare-advantage-open-enrollment-period|UHC|Article page|
+|medicare-articles/whats-the-difference-between-a-physical-exam-and-a-medicare-wellness-visit|UHC|Article page|
+|medicare-articles/what-medicare-medical-savings-account-plan|UHC|Article page|
+|medicare-articles/copd-medicare|UHC|Article page|
+|medicare-articles/decoding-medicare|UHC|Article page|
+|medicare-articles/does-medicare-cover-a-colonoscopy|UHC|Article page|
+|medicare-articles/does-medicare-cover-blood-tests-for-cholesterol|UHC|Article page|
+|medicare-articles/does-medicare-cover-diabetes-prevention-program|UHC|Article page|
+|medicare-articles/does-medicare-cover-emergency-room-visits|UHC|Article page|
+|medicare-articles/does-medicare-cover-home-blood-pressure-monitors|UHC|Article page|
+|medicare-articles/does-medicare-cover-melanoma-screenings|UHC|Article page|
+|medicare-articles/home-health-care-those-medicare-who-cant-leave-home|UHC|Article page|
+|medicare-articles/how-often-should-a-woman-over-65-have-a-pap-smear|UHC|Article page|
+|medicare-articles/medicare-transportation-services|UHC|Article page|
+|medicare-articles/are-you-living-with-chronic-heart-failure|UHC|Article page|
+|medicare-articles/how-prepare-your-medicare-wellness-visit|UHC|Article page|
+|medicare-articles/will-medicare-cover-a-cpap-machine|UHC|Article page|
+|medicare-articles/new-to-medicare-schedule-your-welcome-to-medicare-visit|UHC|Article page|
+|medicare-articles/how-to-become-a-medicare-authorized-representative|UHC|Article page|
+|medicare-articles/what-is-a-transition-refill|UHC|Article page|
+|medicare-articles/got-coverage-for-the-new-year|UHC|Article page|
+|medicare-articles/medicare-and-your-private-medical-information|UHC|Article page|
+|medicare-articles/medicare-memo-what-are-advance-directives|UHC|Article page|
+|medicare-articles/getting-a-knee-replaced-with-Medicare|UHC|Article page|
+|medicare-articles/2-ways-save-on-blood-sugar-test-strips|UHC|Article page|
+|medicare-articles/are-glaucoma-screenings-covered-by-medicare|UHC|Article page|
+|medicare-articles/colon-cancer-screening-tests-without-the-ouch|UHC|Article page|
+|medicare-articles/medicare-beneficiaries-needing-hospice-care-may-be-covered|UHC|Article page|
+|medicare-articles/medicare-coverage-for-inpatient-rehabilitation|UHC|Article page|
+|medicare-articles/medicare-coverage-for-outpatient-rehabilitation-therapy|UHC|Article page|
+|medicare-articles/medicare-coverage-for-prostate-cancer-screening|UHC|Article page|
+|medicare-articles/medicare-part-benefit-periods-deductibles|UHC|Article page|
+|medicare-articles/reasons-you-should-schedule-an-annual-medicare-wellness-visit|UHC|Article page|
+|medicare-articles/does-medicare-cover-allergy-testing|UHC|Article page|
+|medicare-articles/medicare-part-b-may-not-cover-hearing-aid-part-c-might|UHC|Article page|
+|medicare-articles/medicare-part-b-basics|UHC|Article page|
+|medicare-articles/medicare-part-d-basics|UHC|Article page|
+|medicare-articles/medicare-part-a-the-basics|UHC|Article page|
+|medicare-articles/medicare-part-c-basics|UHC|Article page|
+|medicare-articles/does-medicare-cover-a-chiropractor|UHC|Article page|
+|medicare-articles/what-does-medicare-cover-after-a-stroke|UHC|Article page|
+|medicare-articles/dual-special-needs-plans|UHC|Article page|
+|medicare-articles/cual-es-la-diferencia-entre-medicare-y-medicaid|UHC|Article page|
+|medicare-articles/cuatro-programas-de-asistencia-para-pagar-sus-costos-de-medicare|UHC|Article page|
+|medicare-articles/guia-paso-paso-para-inscribirse-en-medicare-los-65-anos|UHC|Article page|
+|medicare-articles/medicare-parte-c-conceptos-basicos|UHC|Article page|
+|medicare-articles/parte-a-de-medicare-conceptos-basicos|UHC|Article page|
+|medicare-articles/parte-b-de-medicare-conceptos-basicos|UHC|Article page|
+|medicare-articles/parte-d-de-medicare-conceptos-basicos|UHC|Article page|
+|medicare-articles/what-is-a-pdp-prescription-drug-plan|UHC|Article page|
+|medicare-articles/4-assistance-programs-could-help-pay-your-medicare-costs|UHC|Article page|
+|medicare-articles/4-types-of-medicare-savings-programs-and-what-they-cover|UHC|Article page|
+|medicare-articles/what-is-the-medicare-part-d-coverage-gap|UHC|Article page|
+|medicare-articles/4surefire-tips-for-picking-a-medicare-plan-that-fits-your-health-needs-and-budget|UHC|Article page|
+|medicare-articles/medicare-part-d-costs-you-may-not-know-about|UHC|Article page|
+|medicare-articles/new-medicare-follow-checklist-successful-start|UHC|Article page|
+|medicare-articles/medicare-coverage-for-cancer-screenings-chemo-and-radiation|UHC|Article page|
+|medicare-articles/how-to-compare-medicare-advantage-plan-costs|UHC|Article page|
+      
+   
+        
+	
+     
+     
+      

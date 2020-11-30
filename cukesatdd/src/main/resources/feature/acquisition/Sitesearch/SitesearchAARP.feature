@@ -1,4 +1,4 @@
-@SiteSearchResultsAARP @F294024
+@SiteSearchResultsAARP @F448210
 Feature:1.03 Acq-To test Sitesearch results in AMP site
 
 @SiteSearchAARP @SiteSearchRegressionAARP @vbfGate
@@ -64,14 +64,14 @@ Examples:
     When I access the acquisition DCE tool from home page
     Then the user enter the searchValue in the search text box and hits enter
        |search Value|<searchValue>| 
-   Then the user should see fifteen results before pagination
+   #Then the user should see fifteen results before pagination
    #Then the user validates count of results aganist the total shown at top of the page
-   Then the user validates pagination and results displayed
+   #Then the user validates pagination and results displayed
    Then the user validates the secondary search by providing newsearchvalue in the text box
         |NewSearchValue|<newsearchvalue>|
-   Then the user validates pagination and results displayed
+   #Then the user validates pagination and results displayed
     Examples: 
-      | searchValue |newsearchvalue|
+      | searchValue |NewSearchValue|
       | Medicare    |pharmacy|
       
 
@@ -91,3 +91,15 @@ Examples:
 Examples: 
       | siteName | searchValue |newsearchvalue|
       | Ulayer   |  Medicare    |pharmacy|
+      
+ @SiteSearchAARP @thirdpartyURLAARP  @SiteSearchRegressionAARP
+ Scenario Outline: Verify search results in AARP site -search value -<newsearchvalue>
+   Given the user is on AARP medicare acquisition site landing page
+   Then the user enter the searchValue in the search text box and hits enter
+       |search Value|<searchValue>| 
+   Then the user clicks on the united health care medicare solutions link
+   Then ther user validates the "<url>"   
+  
+    Examples: 
+      | searchValue        |url|
+      | Provider search    |https://connect.werally.com/county-plan-selection/uhc.mnr/zip|

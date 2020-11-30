@@ -15,8 +15,8 @@ import cucumber.api.CucumberOptions;
 @RunWith(ExtendedCucumber.class)
 @ExtendedCucumberOptions(retryCount=1,screenShotSize="", screenShotLocation="/screenshots/",jsonReport = "target/cucumber-RunMRATDDAcqDCEDrugTierLimitsValidationAARP.json",detailedReport = true,
  detailedAggregatedReport = true, overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDAcqDCEDrugTierLimitsValidationAARP")
-@CucumberOptions(glue = { "atdd.framework", "acceptancetests.acquisition" }, features = { "src/main/resources/feature/acquisition" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcqDCEDrugTierLimitsValidationAARP.json" }, tags = { "@DCE_DrugListTiersLimits" })
+@CucumberOptions(glue = { "atdd.framework", "acceptancetests.acquisition" }, features = { "src/main/resources/feature/acquisition/dceredesign" }, plugin = {
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcqDCEDrugTierLimitsValidationAARP.json" }, tags = { "@DCE_DrugListTiersLimits_AEP_AARP" })
 
 public class RunMRATDDAcqDCEDrugTierLimitsValidationAARP {
 

@@ -144,11 +144,18 @@ public class OneTimePaymentPage extends UhcDriver {
 	@FindBy(id = "memAuthPaymentSubmitError")
 	private WebElement csrUnauthorizedErrorMessage;
 	
-	@FindBy(xpath = "//dt[text()='Next Payment Amount:']")
+	@FindBy(xpath = "//dt[contains(text(),'Next Premium Payment:')]")
 	private WebElement NextPaymentSummary;
 
-	@FindBy(xpath = "//*[@class='onetime-bill']/div[@class='ng-scope']")
+	@FindBy(xpath = "//*[@class='onetime-bill']/div[@class='ng-binding ng-scope']")
 	private WebElement NextPaymentProcess;
+
+    @FindBy(xpath = "//dt[contains(text(),'Due Date:')]")
+    private WebElement NextDueDateLabel;
+
+    @FindBy(xpath = "//*[@class='ng-scope']/dd[@class='onetime-bill ng-binding']")
+    private WebElement NextDueDateValue;
+
 
 	@FindBy(xpath = "//*[@class='dl-horizontal'][2]")
 	private WebElement RemainingAmountSummary;
@@ -528,6 +535,7 @@ public class OneTimePaymentPage extends UhcDriver {
 		validate(otherAmountRadioButton);
 		otherAmountRadioButton.click();
 		otherAmountInput.clear();
+		TestHarness.checkForIPerceptionModel(driver);
 		otherAmountInput.sendKeys(otherAmount);
 		System.out.println("User selected Other amount option and Entered amount : " + otherAmount);
 	}
@@ -546,6 +554,13 @@ public class OneTimePaymentPage extends UhcDriver {
 	}
 	
 	public void selectCheckingAccountOption() {
+		 try {
+	            Thread.sleep(5000);
+	            System.out.println(driver.getCurrentUrl());
+	        } catch (InterruptedException e) {
+	            e.printStackTrace();
+	        }
+		TestHarness.checkForIPerceptionModel(driver);
 		validate(CheckingAccountRadioButton);
 		CheckingAccountRadioButton.click();
 		System.out.println("User selects Checking Account Option");
@@ -554,6 +569,7 @@ public class OneTimePaymentPage extends UhcDriver {
 
 	public CreditCardUPGPage clickOnNextButton() {
 		validate(otheramountfield);
+		TestHarness.checkForIPerceptionModel(driver);
 		NextButton.click();
 		System.out.println("User Click on Next button on one time page");
 		try {
@@ -573,6 +589,7 @@ public class OneTimePaymentPage extends UhcDriver {
 	
 	
 	public PaymentsFormPage clickOnContuineButton() {
+		TestHarness.checkForIPerceptionModel(driver);
 		validate(otheramountfield);
 		TestHarness.checkForIPerceptionModel(driver);
 		NextButton.click();
@@ -596,7 +613,7 @@ public class OneTimePaymentPage extends UhcDriver {
 	public ConfirmOneTimePaymentPage selectAgreeAndClickOnSubmitPaymentsforOneTime() {
 		CommonUtility.waitForPageLoad(driver, EditPaymentInformation, 10);
 		TestHarness.checkForIPerceptionModel(driver);
-		System.out.println("User is on Review Review Your Automatic Payments Information Page");
+		System.out.println("User is on Review Your Automatic Payments Information Page");
 		PaymentsDataVerificationonReviewPage();
 		jsClickNew(AgreeCheckBox);
 		TestHarness.checkForIPerceptionModel(driver);
@@ -625,6 +642,25 @@ public class OneTimePaymentPage extends UhcDriver {
 		}
 	}
 	
+	public ConfirmOneTimePaymentPage selectAgreeAndClickOnSubmitPaymentsforOneTime_Updated() {
+		CommonUtility.waitForPageLoad(driver, EditPaymentInformation, 10);
+		TestHarness.checkForIPerceptionModel(driver);
+		System.out.println("User is on Review Your Automatic Payments Information Page");
+		PaymentsDataVerificationonReviewPage();
+		 JavascriptExecutor jse = (JavascriptExecutor)driver;
+		 jse.executeScript("window.scrollBy(0,650)", "");
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		jsClickNew(AgreeCheckBox);
+		TestHarness.checkForIPerceptionModel(driver);
+		return null;
+		}
+	
+	
 	public ConfirmOneTimePaymentPage selectAgreeAndClickOnContinueforEFTForShip() {
 		validate(EditPaymentInformation);
 		PaymentsDataVerificationonReviewPage();
@@ -643,7 +679,7 @@ public class OneTimePaymentPage extends UhcDriver {
 		}		
 		CommonUtility.waitForPageLoad(driver, MakeAPaymentButton, 20);
 		CommonUtility.checkPageIsReadyNew(driver);
-		if (driver.getTitle().contains("Recurring Payments Request Submitted")) {
+		if (driver.getTitle().contains("Recurring Payments Request Submitted") || driver.getCurrentUrl().contains("recurring-eft-confirmation")) {
 			System.out.println("User is on Confirmation Page for Setup Recurring for ship");
 			return new ConfirmOneTimePaymentPage(driver);
 		} else {
@@ -691,28 +727,33 @@ public class OneTimePaymentPage extends UhcDriver {
 
 	}
 	
-	public OneTimePaymentPage BalanceSummaryValidation() {
-
-		
-		System.out.println("in new method for summary validation");
-		try {
-			if (NextPaymentSummary.isDisplayed() && RemainingAmountSummary.isDisplayed()) {
-				System.out.println("Next Payment due is : " + NextPaymentProcess.getText());
-				System.out.println("Remaining amount due is : " + RemainingAmount.getText());
-				return new OneTimePaymentPage(driver);
-			}
-		} catch (Exception e) {
-			if (NextPaymentProcess.isDisplayed() && RemainingAmountSummary.isDisplayed()) {
-				System.out.println("Next Payment due is : " + NextPaymentProcess.getText());
-				System.out.println("Remaining amount due is : " + RemainingAmount.getText());
-				return new OneTimePaymentPage(driver);
-			} else
-				return null;
-		}
-
-		return null;
-	}
-
+public OneTimePaymentPage BalanceSummaryValidation() {
+ 
+        
+        System.out.println("Validating Payment Summary Section on right");
+        try {
+            Thread.sleep(5000);
+            if (NextPaymentSummary.isDisplayed()) {
+                System.out.println("Next Premium Payment amount is : " + NextPaymentProcess.getText());
+                
+            }
+        } catch (Exception e) {
+            Assert.fail("Next Premium Payment label or amount was not displayed in Payment Summary Section");
+            
+            } 
+        
+        try {
+            if (NextDueDateLabel.isDisplayed()) {
+                System.out.println("Next Due Date Value is : " + NextDueDateValue.getText());
+                
+            }
+        } catch (Exception e) {
+            Assert.fail("Next Due date label or amount was not displayed in Payment Summary Section");
+            
+            }
+        
+            return new OneTimePaymentPage(driver);
+        }
 	
 	@Override
 	public void openAndValidate() {

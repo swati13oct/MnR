@@ -34,7 +34,7 @@ Feature: 2.07. ACQ- Provider Search Flow in UMS
 
     Examples: 
       | zipcode | planname                             | year     |
-      |   10001 | AARP Medicare Advantage Plan 2 (HMO) | nextYear |
+      |   10001 | AARP Medicare Advantage Plan 2 (HMO) | current |
 
   @ProviderSearchFromGlobalHeaderBlayer1 
   Scenario Outline: Verify Provider Search  plan count in UMS site from Global Header- plan count - <plancount>
@@ -43,16 +43,17 @@ Feature: 2.07. ACQ- Provider Search Flow in UMS
     Then the user enters the zipcode and counts the plan Blayer
       | Zip Code  | <zipcode>   |
       | Plancount | <plancount> |
+      | Year      | <year>     |
 
 	@AcqRegressionProviderSearchBlayer
     Examples: 
-      | zipcode | plancount |
-      |   10001 |        12 |
+      | zipcode | plancount |year|
+      |   10001 |        12 |current|
       
     Examples: 
-      | zipcode | plancount |
-      |   55344 |         7 |
-      |   04011 |         6 |
+      | zipcode | plancount |year|
+      |   55344 |         7 |current|
+      |   04011 |         6 |current|
 
   @ProviderSearchFromWidgetBlayer @AcqRegressionProviderSearchBlayer
   Scenario Outline: Verify Provider Search  plan count in UMS site from Home page - plan count - <plancount>
@@ -61,16 +62,17 @@ Feature: 2.07. ACQ- Provider Search Flow in UMS
     Then the user enters the zipcode and counts the plan Blayer
       | Zip Code  | <zipcode>   |
       | Plancount | <plancount> |
+      | Year      | <year>     |
 
 	@AcqRegressionProviderSearchBlayer
     Examples: 
-      | zipcode | plancount |
-      |   10001 |        12 |
+      | zipcode | plancount |year|
+      |   10001 |        12 |current|
       
     Examples: 
-      | zipcode | plancount |
-      |   55344 |         7 |
-      |   04011 |         6 |
+      | zipcode | plancount |year|
+      |   55344 |         7 |current|
+      |   04011 |         6 |current|
 
   @ProviderSearchFromVppPlanSummaryPageBlayer @prodRegression
   Scenario Outline: Verify Provider Search  in UHC site from plan summary page

@@ -1,7 +1,6 @@
 package pages.acquisition.pharmacyLocator;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
@@ -9,6 +8,7 @@ import java.util.regex.Pattern;
 
 import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -47,6 +47,7 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 			distance=distance+" miles";
 		sleepBySec(3);
 		CommonUtility.waitForPageLoadNew(driver, distanceDropownID, 60);
+		scrollToView(distanceDropownID);
 		selectFromDropDownByText(driver, distanceDropownID, distance);
 		sleepBySec(3);
 		String initialZipVal=zipcodeField.getAttribute("value");
@@ -64,7 +65,7 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 					System.out.println("This is either the first time entering zip for multicounty or changing to zip that's multicounty, expect selection popup");
 					Assert.assertTrue("PROBLEM - expects zipcode '"+zipcode+"' with multi-county but county selection popup is NOT showing", 
 							pharmacyValidate(countyModal));
-					driver.findElement(By.xpath("//div[@id='selectCounty']//a[text()='" + county + "']")).click();
+					jsClickNew(driver.findElement(By.xpath("//div[@id='selectCounty']//a[text()='" + county + "']")));
 					CommonUtility.checkPageIsReadyNew(driver);
 					CommonUtility.waitForPageLoadNew(driver, pharmacylocatorheader, 10); //note: should be on vpp page afterward
 				} else {
@@ -82,11 +83,15 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 	public void validateNoresultsZipcodeError(String zipcode) {
 		zipcodeField.clear();
 		sleepBySec(8);
-		
+
 		zipcodeField.sendKeys(zipcode);
-		//if(zipcode.length()!=5){
-		distanceOption_15miles.click();
-		//}
+		if(zipcode.length()!=5){
+			zipcodeField.sendKeys(Keys.TAB);
+			sleepBySec(2);
+			/*jsMouseOver(distanceDropDownField);
+			distanceDropDownField.click();
+			distanceOption_15miles.click();*/
+		}
 		//searchbtn.click();
 		//CommonUtility.waitForPageLoadNew(driver, zipcodeErrorMessage, 10);
 		//Assert.assertTrue("PROBLEM - unable to locate Zipcode Error message", pharmacyValidate(zipcodeErrorMessage));
@@ -141,9 +146,11 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 	}
 
 	public void selectsPlanName(String planName, String testSiteUrl) {
+		scrollToView(seletPlandropdown);
 		waitTllOptionsAvailableInDropdown(seletPlandropdown, 45);
-		seletPlandropdown.click();
-		sleepBySec(1); 
+//		seletPlandropdown.click();
+		jsClickNew(seletPlandropdown);
+		sleepBySec(1);
 		selectFromDropDownByText(driver, seletPlandropdown, planName);
 		sleepBySec(2);
 		if (!loadingBlock.isEmpty())
@@ -151,7 +158,8 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 		if (!loadingBlock.isEmpty())	//note: if still not done, give it another 30 second
 			waitforElementDisapper(By.className("loading-block"), 30);
 		sleepBySec(1); //note: let the page settle down
-		searchbtn.click();
+//		searchbtn.click();
+		jsClickNew(searchbtn);
 		sleepBySec(50);
 		Assert.assertTrue("PROBLEM - Pharmacies not displayed", pharmacyValidate(pharmacyCount));
 		if (!pharmacyValidate(pharmacyCount)) {
@@ -179,12 +187,14 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 	}
 
 	public void selectsPlanYear(String planYear) {
+		CommonUtility.checkPageIsReadyNew(driver);
+		scrollToView(yearDropdown);
 		waitTllOptionsAvailableInDropdown(yearDropdown, 45);
-		yearDropdown.click();
+		//		yearDropdown.click();
 		Select yearList=new Select(yearDropdown);
 		yearList.selectByVisibleText(planYear);
 		System.out.println("Selected year='"+planYear+"' from year dropdown");
-		CommonUtility.checkPageIsReady(driver);
+		CommonUtility.checkPageIsReadyNew(driver);
 	}
 
 	public void selectAYear(String year) { //note: keep for now, may need when AEP comes around
@@ -215,12 +225,19 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 				+ "Expected year (either system is on this year or selected this year on plan year dropdown)='"+testPlanYear+"' | Actual link text='"+pdfLink.getText()+"'", 
 				pdfLink.getText().contains(testPdfLinkTextDate));
 		String winHandleBefore = driver.getWindowHandle();
-		CommonUtility.checkPageIsReady(driver);
-		pdfLink.click();
+//		CommonUtility.checkPageIsReadyNew(driver);
+		jsClickNew(pdfLink);
+//		pdfLink.click();
 		Thread.sleep(2000); //note: keep this for the page to load
 		ArrayList<String> afterClicked_tabs = new ArrayList<String>(driver.getWindowHandles());
-		int afterClicked_numTabs=afterClicked_tabs.size();					
-		driver.switchTo().window(afterClicked_tabs.get(afterClicked_numTabs-1));
+		for(String tab : afterClicked_tabs) {
+			if(!tab.equals(winHandleBefore)) {
+				driver.switchTo().window(tab);
+				break;
+			}
+		}
+//		int afterClicked_numTabs=afterClicked_tabs.size();					
+//		driver.switchTo().window(afterClicked_tabs.get(afterClicked_numTabs-1));
 		String currentURL=driver.getCurrentUrl();
 		String expectedURL=pdfType;
 		Assert.assertTrue("PROBLEM - PDF Page  is not opening, "
@@ -239,8 +256,9 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 	
 	public void searchesPharmacy(String language, String planName, String testPlanYear, String testSiteUrl, String testPdfLinkTextDate) throws InterruptedException {
 		int total=0;
+		
 		CommonUtility.checkPageIsReadyNew(driver);
-		CommonUtility.waitForElementToDisappear(driver, loadingImage, 90);
+		waitforElementDisapper(loadingSpinner, 90);
 		int PharmacyCount = 0;
 		if (!pharmacyValidate(noResultMsg)) {
 			PharmacyCount = PharmacyResultList.size();
@@ -261,7 +279,7 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 				Assert.assertTrue("PROBLEM - unable to locate the 'CONTACT UNITEDHELATHCARE' link "
 						+ "in 'pharmacies with India/Tribal/Urbal...' section", 
 						pharmacyValidate(contactUsLink));
-				contactUsLink.click();
+				jsClickNew(contactUsLink);
 				Thread.sleep(2000); //note: keep this for the page to load
 				CommonUtility.checkPageIsReadyNew(driver);
 				String currentURL=driver.getCurrentUrl();
@@ -270,8 +288,9 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 						+ "Expect to contain '"+expectedURL+"' | Actual URL='"+currentURL+"'",
 						currentURL.contains(expectedURL));
 				driver.navigate().back();
+				driver.navigate().refresh();	//Added since select plan dropdown element was not located after navigating back from contact us page
 				CommonUtility.checkPageIsReadyNew(driver);
-				CommonUtility.waitForElementToDisappear(driver, loadingImage, 90);
+				waitforElementDisapper(loadingSpinner, 90);
 				currentURL=driver.getCurrentUrl();
 				//System.out.println(currentURL);
 				expectedURL="Pharmacy-Search";
@@ -281,6 +300,7 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 				if (isPlanYear()) {
 					System.out.println("Year dropdown is displayed, proceed to select '"+testPlanYear+"' year");
 					selectsPlanYear(testPlanYear);
+					sleepBySec(2);
 					CommonUtility.checkPageIsReady(driver);
 				}
 				selectsPlanName(planName, testSiteUrl);
@@ -290,7 +310,8 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 				pdfType="LTC_HI_ITU_Pharmacies_Walgreens.pdf";
 				pdfElement=pdf_WalgreenPlans;
 				validateLtcPdfDoc(pdfType, testPlanYear, pdfElement, testPdfLinkTextDate);
-				moveMouseToElement(contactUsLink);
+				scrollToView(contactUsLink);
+				jsMouseOver(contactUsLink);
 				Assert.assertTrue("PROBLEM - unable to locate the pagination element", 
 						pharmacyValidate(pagination));
 				Assert.assertTrue("PROBLEM - unable to locate the left arrow element", 
@@ -298,9 +319,9 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 				Assert.assertTrue("PROBLEM - unable to locate the right arrow element", 
 						pharmacyValidate(rightArrow));
 				try {
-					rightArrow.click();
+					jsClickNew(rightArrow);
 					CommonUtility.checkPageIsReady(driver);
-					leftArrow.click();
+					jsClickNew(leftArrow);
 					CommonUtility.checkPageIsReady(driver);
 				} catch (Exception e) {
 					Assert.assertTrue("PROBLEM - something wrong with the arrow", false);
@@ -412,8 +433,9 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 		else if (planType.equalsIgnoreCase("SNP"))
 			testElementList=listOfSnpPlans;
 		Assert.assertTrue("PROBLEM - unable to locate plan for planType='"+planType+"'", testElementList.size()>0);
-		testElementList.get(0).click();
+		jsClickNew(testElementList.get(0));
 		CommonUtility.checkPageIsReady(driver);
+		waitForPageLoadSafari();
 	}
 
 	/**
@@ -426,15 +448,14 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 	 */
 	public void clickDirectoryLnk(String isMultiCounty, String countyName) {
 		CommonUtility.waitForPageLoad(driver, vpp_onlinePharmacyDirectoryLnk, 5);
-		moveMouseToElement(vppDetailSectionHeader);
+		scrollToView(vpp_onlinePharmacyDirectoryLnk);
+//		moveMouseToElement(vppDetailSectionHeader);
+		jsMouseOver(vppDetailSectionHeader);
 		Assert.assertTrue("PROBLEM - unable to locate the Online Pharmacy Directory link on VPP page",
 				pharmacyValidate(vpp_onlinePharmacyDirectoryLnk));
-		vpp_onlinePharmacyDirectoryLnk.click();
+		switchToNewTabNew(vpp_onlinePharmacyDirectoryLnk);
 		CommonUtility.checkPageIsReady(driver);
 		//	Thread.sleep(2000); //note: keep this for the page to load
-		ArrayList<String> afterClicked_tabs = new ArrayList<String>(driver.getWindowHandles());
-		int afterClicked_numTabs=afterClicked_tabs.size();					
-		driver.switchTo().window(afterClicked_tabs.get(afterClicked_numTabs-1));
 		System.out.println("New window = "+driver.getTitle());
 		String currentURL=driver.getCurrentUrl();
 		if (("Yes").equalsIgnoreCase(isMultiCounty.trim())) {

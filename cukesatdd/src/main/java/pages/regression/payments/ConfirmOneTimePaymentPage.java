@@ -58,6 +58,9 @@ public class ConfirmOneTimePaymentPage extends UhcDriver {
 
 	@FindBy(xpath = "//*[@ng-click='backToPaymentHistoryPage()']")
 	private WebElement BackToPaymentHistoryPage;
+	
+	@FindBy(xpath = "(//*[@ng-click='backToPaymentHistoryPage()'])[2]")
+	private WebElement BackToPaymentHistoryPageOneTimePayment;
 
 	@FindBy(xpath = "//*[@id='nav']/button[2]")
 	private WebElement iPerceptionAutoPopUp;
@@ -271,6 +274,19 @@ public class ConfirmOneTimePaymentPage extends UhcDriver {
 			return null;
 	}
 
+	public PaymentHistoryPage ScrollDownToBackButtonOneTimePayment() {
+		JavascriptExecutor jse = (JavascriptExecutor) driver;
+		jse.executeScript("window.scrollBy(0,700)", "");
+		if (BackToPaymentHistoryPageOneTimePayment.isDisplayed()) {
+			System.out.println("Now clicking on Back to Payment History button on confirmation page");
+			BackToPaymentHistoryPageOneTimePayment.click();
+			System.out.println("Back to Payment history button has been clicked");
+			return new PaymentHistoryPage(driver);
+		} else
+			return null;
+	}
+
+	
 	public ConfirmOneTimePaymentPage ValidateAutoPaymentButton() throws InterruptedException {
 
 		try {
@@ -337,7 +353,7 @@ public class ConfirmOneTimePaymentPage extends UhcDriver {
 		validate(MakeOneTimePaymentLink);
 		PaymentsDataVerificationonConfirmationPage();
 		CommonUtility.checkPageIsReadyNew(driver);
-		if (driver.getTitle().contains("Recurring Payments Request Submitted")) {
+		if (driver.getTitle().contains("Recurring Payments Request Submitted") || driver.getCurrentUrl().contains("recurring-eft-confirmation")) {
 			System.out.println("User is on Confirmation Page for Setup Recurring for ship");
 		} else 
 		{

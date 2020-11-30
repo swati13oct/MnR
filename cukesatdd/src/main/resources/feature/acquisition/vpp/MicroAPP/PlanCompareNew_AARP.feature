@@ -61,7 +61,7 @@ Feature: 1.01.3-Vpp to plan Compare AARP Scenarios
       | 00006 |   35616 | NO            | Colbert County | MAPD     |current|
 
   @vppPlanCompareAARP04 @vppPlanCompareAARPRun01New @vppPlanCompareAARPRegression
-  Scenario Outline: <TCID> - Plan Type: <plantype> - To verify links displayed in the global footer of AARP site
+  Scenario Outline: TID: <TCID> - Plan Type: <plantype> - To verify links displayed in the global footer of AARP site
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site
       | Zip Code        | <zipcode>       |
@@ -88,7 +88,7 @@ Feature: 1.01.3-Vpp to plan Compare AARP Scenarios
       | 00007 |   90210 | No            | Los Angeles County | MAPD     |current|
 
   @vppPlanCompareAARP05 @vppPlanCompareAARPRun01New @vppPlanCompareAARPRegression
-  Scenario Outline: <TCID> - Plan Type: <plantype> -Navigation for plan comapre to Back to summary page
+  Scenario Outline: TID: <TCID> - Plan Type: <plantype> -Navigation for plan comapre to Back to summary page
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site
       | Zip Code        | <zipcode>       |
@@ -252,16 +252,16 @@ Feature: 1.01.3-Vpp to plan Compare AARP Scenarios
       | TID   | zipcode | isMultiCounty | county          | plantype | planname                             |planyear|
       | 00014 |   10010 | NO            | New York County | MAPD     | AARP Medicare Advantage Plan 1 (HMO) |current|
 
-  @vppPlanCompareAARP12 @vppPlanCompareAARPRun01New @vppPlanCompareAARPRegression
+  @vppPlanCompareAARP12 @vppPlanCompareAARPRegression
   Scenario Outline: TID: <TID> - Plan Type: <plantype> - valiadation of Add drug from plan compare and Edit drug from plan compare page for AARP
-    Given the user is on the AARP medicare site landing page
-    When the user performs plan search using following information in the AARP site
+    Given the user is on the medicare site landing page
+    When the user performs plan search using following information
       | Zip Code        | <zipcode>       |
       | County Name     | <county>        |
       | Is Multi County | <isMultiCounty> |
-    And the user views the plans of the below plan type in AARP site
+    And the user views the plans of the below plan type
       | Plan Type | <plantype> |
-    And the user selects plan year for the AARP site
+    And the user selects plan year
     	|Plan Year	| <planyear>| 
     And I access the DCE tool on aarp site
       | Plan Type | <plantype> |

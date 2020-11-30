@@ -1,6 +1,11 @@
 @orderPlanMaterials @thePredators
 Feature: 1.10 Member  order materials Page
 
+  #Background: If run on stage then feature security flag needs to be true
+  #   Given feature security flag must set to true when testing on test env
+  #    | Feature           | UCPOrderPlanMaterials |
+
+
   #----- beginning of VBF scenarios section ------------------   
   @smokeTest @MemberVBF @smokeTest_OrderPlanMaterial @rallyDashboard @testharness @vbfGate @F357514
   Scenario Outline: Verify order materials confirmation page on member site
@@ -133,8 +138,8 @@ Feature: 1.10 Member  order materials Page
     @ValidateHeaderComboTabs @combo_ship_mapd @devRegression
     Examples:
       | TID   | planType | memberType            | segmentId |
-      | 15281 | MAPD	 | COMBO_order           | 000       |
-      | 15281 | MEDSUPP	 | COMBO_order           | 000       |
+      | 15281 | MA	 | COMBO_order           | 000       |
+     # | 15281 | MEDSUPP	 | COMBO_order           | 000       |
 
     # note: keep SSUP case but skip the run for now, it requires specific data setup that doesn't always exist
     @ValidateHeaderComboTabs

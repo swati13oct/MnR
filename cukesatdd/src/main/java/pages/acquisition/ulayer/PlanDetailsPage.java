@@ -9,7 +9,9 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.pdfbox.pdmodel.PDDocument;
@@ -802,6 +804,7 @@ public class PlanDetailsPage extends UhcDriver {
 		validateNew(lookUpYourProviderButton);
 		CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
 		switchToNewTabNew(lookUpYourProviderButton);
+		waitForPageLoadSafari();
 		if (driver.getCurrentUrl().contains("werally")) {
 			return new ProviderSearchPage(driver);
 		}
@@ -835,6 +838,7 @@ public class PlanDetailsPage extends UhcDriver {
 		jsClickNew(getLnkBackToAllPlans());
 		//getLnkBackToAllPlans().click();
 		CommonUtility.checkPageIsReadyNew(driver);
+		waitForPageLoadSafari();
 		if (driver.getCurrentUrl().contains("plan-summary")) {
 			return new VPPPlanSummaryPage(driver);
 
@@ -1252,24 +1256,39 @@ public class PlanDetailsPage extends UhcDriver {
 		try {
 			Thread.sleep(5000);
 			if (optionalRider)
-				dentalPopupOptionalRidersLink.click();
+//				dentalPopupOptionalRidersLink.click();
+				jsClickNew(dentalPopupOptionalRidersLink);
 			else {
 				JavascriptExecutor jse = (JavascriptExecutor) driver;
+//				jse.executeScript("arguments[0].scrollIntoView(true);", dentalPopupLink);
 				jse.executeScript("arguments[0].click()", dentalPopupLink);
 			}
 			System.out.println("Plan Name is : " + planName);
 			Assert.assertTrue("Expected=" + planName + " Actual=" + dentalPopupPlanLabel.getText(),dentalPopupPlanLabel.getText().contains(planName));
 			String parentWindow = driver.getWindowHandle();
-			dentalCoverPopupContinue.click();
+//			dentalCoverPopupContinue.click();
+			jsClickNew(dentalCoverPopupContinue);
 			Thread.sleep(5000);
 			System.out.println("Moved to dental directoy rally page");
 
-			driver.switchTo().window(driver.getWindowHandles().toArray()[1].toString());
+//			driver.switchTo().window(driver.getWindowHandles().toArray()[1].toString());
+			Set<String> tab_windows = driver.getWindowHandles();
+			Iterator<String> itr = tab_windows.iterator();
+			while(itr.hasNext()) {
+				String childWindow = itr.next();
+				if(!childWindow.equals(parentWindow)) {
+					driver.switchTo().window(childWindow);
+					break;
+				}
+			}
+			waitForPageLoadSafari();
+			waitTillElementClickableInTime(driver.findElement(By.id("changeLocationBtn")), 10);
 			System.out.println(driver.getTitle());
 			Assert.assertTrue( "Title mismatch for dental directory",driver.getTitle().equals("Dental | Find Care"));
 			driver.close();
 			driver.switchTo().window(parentWindow);
-			dentalCoverPopupCancel.click();
+//			dentalCoverPopupCancel.click();
+			jsClickNew(dentalCoverPopupCancel);
 
 		} catch (InterruptedException e) {
 			e.printStackTrace();

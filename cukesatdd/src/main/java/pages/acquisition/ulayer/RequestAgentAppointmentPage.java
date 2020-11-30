@@ -3,6 +3,7 @@
  */
 package pages.acquisition.ulayer;
 
+import java.util.List;
 import java.util.Map;
 
 import org.openqa.selenium.WebDriver;
@@ -28,7 +29,8 @@ public class RequestAgentAppointmentPage extends UhcDriver{
 	@FindBy(id = "postcodeTxt")
 	private WebElement zipCodeInput;
 
-	@FindBy(xpath = "//button//*[contains(text(),'STARTED')]")
+	//@FindBy(xpath = "//button//*[contains(text(),'STARTED')]")
+	@FindBy(xpath = "//span[contains(text(),'Get Started')]")
 	private WebElement getStartedBtn;
 
 	@FindBy(xpath = "//button[contains(@class,'form-control')]//*[contains(text(),'SEARCH')]")
@@ -40,7 +42,8 @@ public class RequestAgentAppointmentPage extends UhcDriver{
 	@FindBy(name = "reppage")
 	private WebElement viewRepresentativePage;
 
-	@FindBy(xpath = "(//div[@id='searchResultDiv'][contains(@style,'display: block;')]//*[contains(@class,'agentname')])[1]")
+	//@FindBy(xpath = "(//div[@id='searchResultDiv'][contains(@style,'display: block;')]//*[contains(@class,'agentname')])[1]")
+	@FindBy(xpath="//div[@id='targetContainer']//div[4]/div[1]/div[1]/h4[1]")
 	private WebElement firstAgentName;
 	
 
@@ -54,9 +57,12 @@ public class RequestAgentAppointmentPage extends UhcDriver{
 
 	@Override
 	public void openAndValidate() {
-		CommonUtility.waitForPageLoadNew(driver, firstName, 60);
-		validateNew(lastName);
-		validateNew(state);
+		//CommonUtility.waitForPageLoadNew(driver, firstName, 60);
+		CommonUtility.waitForPageLoadNew(driver, zipCodeInput, 60);
+		//validateNew(lastName);
+		//validateNew(state);
+		//validate(zipCodeInput);
+		validateNew(getStartedBtn);
 		
 	}
 	
@@ -93,6 +99,7 @@ public class RequestAgentAppointmentPage extends UhcDriver{
 
 		return false;
 	}
+	
 	
 
 }

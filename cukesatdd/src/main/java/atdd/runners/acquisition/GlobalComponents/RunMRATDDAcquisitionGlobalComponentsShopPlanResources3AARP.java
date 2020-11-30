@@ -11,7 +11,7 @@ import cucumber.api.CucumberOptions;
  * this file is to run test cases for RunMRATDDAcquisitionGlobalComponentsShopPlanResources3AARP
  */
 @RunWith(ExtendedCucumber.class)
-@ExtendedCucumberOptions(retryCount=2,screenShotSize="", screenShotLocation="/screenshots/",
+@ExtendedCucumberOptions(retryCount=1,screenShotSize="", screenShotLocation="/screenshots/",
 jsonReport = "target/cucumber-RunMRATDDAcquisitionGlobalComponentsShopPlanResources3AARP.json",
 detailedReport = true, detailedAggregatedReport = true, overviewReport = true, toPDF = true, 
 outputFolder = "target/RunMRATDDAcquisitionGlobalComponentsShopPlanResources3AARP")

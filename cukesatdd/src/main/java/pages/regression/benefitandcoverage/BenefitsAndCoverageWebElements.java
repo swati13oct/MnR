@@ -249,12 +249,17 @@ public class BenefitsAndCoverageWebElements extends UhcDriver {
 	protected WebElement RetailDrugCost_Table1; 
 
 	@FindBy(id = "mapdPageNonLisForPMail")
-	protected WebElement preferedMail_Table1PDP;
+	protected WebElement preferedMail_DrugTable;
 
 	@FindBy(id = "mapdPageNonLisForSRetail")
-	protected WebElement standardDetail_Table1PDP;
+	protected WebElement standardRetail_DrugTable;
+	
+	@FindBy(id = "mapdPageNonLisForPRetail")
+	protected WebElement preferredRetail_DrugTable;
 
-
+	@FindBy(id="mapdPageLis")
+	protected WebElement Lis_DrugTable;
+	
 	@FindBy(id = "waystosave")
 	protected WebElement waysToSave;
 
@@ -351,9 +356,12 @@ public class BenefitsAndCoverageWebElements extends UhcDriver {
 	@FindBy(xpath = "//div[@class='col-md-8 margin-small']//div[@class='benefitsSummary parbase']//h3//span")
 	protected WebElement OutofPocketMaximum;
 
+	@FindBy(xpath = "//*[@id='preventiveCareSection']/h4/span")
+	protected WebElement PreventiveCare;
+
 	@FindBy(xpath = "//span[contains(text(),'Out-of-Pocket Maximum')]")
 	protected WebElement OutofPocketMaximumText;
-
+	
 	@FindBy(id = "oopInNetowrk")
 	protected WebElement INNETWORK;
 
@@ -362,10 +370,25 @@ public class BenefitsAndCoverageWebElements extends UhcDriver {
 
 	@FindBy(xpath = "//*[contains(text(),'IN-NETWORK')]")
 	protected WebElement INNETWORKTEXT;
-
+	
 	@FindBy(xpath = "//*[contains(text(),'OUT-OF-NETWORK')]")
 	protected WebElement OUTOFNETWORKTEXT;
 
+	@FindBy(xpath = "//*[@id='preventiveCareSection']//a[normalize-space(text()) = 'Wellness Visit male']")
+	protected WebElement WellnessVisitMale;
+    
+	@FindBy(xpath = "//*[@id='preventiveCareSection']//a[normalize-space(text()) = 'Wellness Visit Female']")
+	protected WebElement WellnessVisitFemale;
+	
+	@FindBy(xpath = "//*[@id='preventiveCareSection']//a[normalize-space(text()) = 'Colonoscopy']")
+	protected WebElement Colonoscopy;
+
+	@FindBy(xpath = "//*[@id='preventiveCareSection']//a[normalize-space(text()) = 'Shingrix Vaccine']")
+	protected WebElement ShingrixVaccine;
+	
+	@FindBy(xpath = "//*[@id='preventiveCareSection']//a[normalize-space(text()) = 'Mammogram']")
+	protected WebElement Mammogram;
+	
 	@FindBy(xpath = "//button[@id='dropdown-toggle--1']/span[contains(text(),'Profile')]")
 	protected WebElement accountToggleDropdown;
 
@@ -651,7 +674,7 @@ public class BenefitsAndCoverageWebElements extends UhcDriver {
 	@FindBy(xpath = "//*[contains(@class, 'document-list-new margin-none')]//*[contains(text(),'View other documents')]")
 	protected WebElement viewDocsAndResourcesLinkShip;
 
-	@FindBy(id = "benefitsSummary")
+	@FindBy(xpath = "//*[@id='benefitssummary']")
 	protected WebElement benefitsSummarySection;
 
 	@FindBy(id = "formsandresourcesC1")
@@ -709,7 +732,7 @@ public class BenefitsAndCoverageWebElements extends UhcDriver {
 	protected WebElement cologoImage;
 
 	@FindBy(xpath = "//*[contains(@class, 'table-white atdd-bnc-standrdretailpharmcytable')]")
-	protected WebElement drugTableNonLisMember;
+	protected WebElement drugTableNonLisMember_stdRetail;
 
 	@FindBy(id = "standard_ads-header")
 	protected List<WebElement> annualDeductibleColumnFederal;
@@ -828,7 +851,8 @@ public class BenefitsAndCoverageWebElements extends UhcDriver {
 	@FindBy(xpath = "//*[@id='plan_benefit_documents']//*/h2")
 	protected WebElement PlanDocumentsAndResourcesSectionHeader;
 
-	@FindBy(xpath = "//*[@id='benefits-quickLinksParsys']//*[@class='jumplinks']//li[not(contains(@style,'none'))]")
+	//tbd @FindBy(xpath = "//*[@id='benefits-quickLinksParsys']//*[@class='jumplinks']//li[not(contains(@style,'none'))]")
+	@FindBy(xpath = "//*[@id='benefits-quickLinksParsys']//*[@class='jumplinks']//li")
 	protected List<WebElement> directorySection;
 
 	@FindBy(xpath = "//*[@id='benefits-quickLinksParsys']/div[1]//ul//li")
@@ -1104,6 +1128,15 @@ public class BenefitsAndCoverageWebElements extends UhcDriver {
 	
 	@FindBy(xpath = "//h1[text()='Benefit Summary']")
 	protected WebElement coverageBenefitsNewHeader;
+	
+	@FindBy(xpath="//p[text()='To view more details regarding your plan benefits, you may view your Benefits Highlights ']/a")
+	protected WebElement medCopayBenefitsLink;
+
+	@FindBy(xpath="//p[text()='To view more details regarding your plan benefits, you may view your Benefits Highlights ']")
+	protected WebElement medCopayText;
+	
+	@FindBy(xpath = "//*[contains(@class,'tdd-hospitalvisits-title')]")
+	protected WebElement InPatientHospitalCare;
 	
 	public BenefitsAndCoverageWebElements(WebDriver driver) {
 		super(driver);

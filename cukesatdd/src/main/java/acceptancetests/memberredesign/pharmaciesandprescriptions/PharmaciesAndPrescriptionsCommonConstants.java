@@ -8,6 +8,7 @@ public class PharmaciesAndPrescriptionsCommonConstants {
 	public static final String TEST_EXPECT_LINK = "test_expect_link";
 	public static final String TEST_MEMBER_FIRSTNAME = "test_member_firstname";
 	public static final String TEST_MEMBER_LASTNAME = "test_member_lastname";
+	public static final String TEST_MEMBER_PLANSTARTDATE = "test_member_planstartdate";
 	public static final String TEST_MEMBER_PLAN_CATEGORY_ID = "test_member_planCategoryId";
 
 }

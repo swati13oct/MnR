@@ -2,7 +2,7 @@
 Feature: 1.06.1 Member Plans and Documents - section: Plan Materials
 
   Background: If run on stage then feature security flag needs to be true
-     Given feature security flag must set to true when testing on stage env
+     Given feature security flag must set to true when testing on test env
       | Feature           | UCPPlanDocuments |
 
   #------------------------------------------
@@ -91,6 +91,10 @@ Feature: 1.06.1 Member Plans and Documents - section: Plan Materials
       | index  | TID         | planType | memberType            | pm_sd | pm_op | pm_mi | pm_en | pm_es | pm_zh |
       | 20-116 | 15119,15304 | SHIP     | MULTI_IND_EFF_PDnR    | true  | true  | true  | true  | false | false |  
 
+	@preeffective_ship
+	Examples: 
+      | index  | TID         | planType | memberType            | pm_sd | pm_op | pm_mi | pm_en | pm_es | pm_zh |
+      | 21-122 | xxxxx       | SHIP     | IND_PREEFF_PDnR       | true  | false | false | true  | false | false | 
 
 
     

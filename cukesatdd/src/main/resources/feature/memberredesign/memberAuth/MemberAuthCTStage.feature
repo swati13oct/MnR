@@ -1,5 +1,10 @@
 Feature: S1.1 To test Member Auth Sign for SSO Micro App.
 
+ Background: Feature security flag needs to be true before ATDD script execution
+     Given First check if feature security flag is set to true
+      | Feature | UCPSSOMemberAuth |
+###############################Regression Scenarios Begin Here ########################################
+
   @regressionMember
   Scenario Outline: Scenario: <Scenario> - Test Case_To test single signon using member auth - Search with Username
     Given the user is on member auth login flow page
@@ -9,11 +14,12 @@ Feature: S1.1 To test Member Auth Sign for SSO Micro App.
     And Member Enters the Username he wants to search
       | MemUsername | <member> |
     And user clicks on member to select
+    And I click on logout and validate the login page
 
     Examples: 
       | username  | password  | member                               | Scenario                                                        |
       | qavgogine | qavgogine | Auto20191121091814_4                 | Scenario 1:  Search with member username : Federal Member- NICE |
-      | qavgogine | qavgogine | Q1_feb_2020SHIP_001                  | Scenario 2a: Search using username – SHIP Member                |
+      | qavgogine | qavgogine | q3_SEP_2020SHIP_019                  | Scenario 2a: Search using username – SHIP Member                |
       | qavgogine | qavgogine | q3_Sep_UAT4_Sofl022                  | Scenario 3: Search using username – PCP/Medica Member           |
       | qavgogine | qavgogine | q2_jun_aarp0065                      | Scenario 4: Search using username – Terminated<12               |
       | qavgogine | qavgogine | PreeffectiveFEDMA_001                | Scenario 5: Search using username – Pre-effective               |
@@ -32,6 +38,7 @@ Feature: S1.1 To test Member Auth Sign for SSO Micro App.
       | Day       | <day>      |
       | Year      | <year>     |
     And user clicks on member to select
+    And I click on logout and validate the login page
 
     Examples: 
       | username  | password  | memberid    | month | day | year | Scenario                                                             |

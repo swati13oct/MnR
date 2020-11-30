@@ -7,6 +7,7 @@ import java.util.Map;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -16,6 +17,7 @@ import org.testng.Assert;
 
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
+import pages.acquisition.commonpages.VisitorProfilePage;
 
 /**
  *@author sdwaraka
@@ -73,6 +75,30 @@ public class PersonalInformationPage extends UhcDriver{
 
 	@FindBy(id = "dob")
 	private WebElement DOBtxtFld;
+	
+	@FindBy(xpath = "//input[contains(@id,'homephnnum')]")
+	private WebElement HomephoneNumberField;
+	
+	@FindBy(xpath = "//input[contains(@id,'mobilephnnum')]")
+	private WebElement MobileNumberField;
+	
+	@FindBy(xpath = "//input[contains(@id,'emailAddressQuestion')]")
+	private WebElement emailAddressField;
+	
+	@FindBy(xpath = "//input[contains(@id,'goGreenYes')]")
+	private WebElement goGreenYesBtn;
+	
+	//@FindBy(id = "goGreenNo")
+	@FindBy(xpath = "//input[contains(@id,'goGreenNo')]")
+	private WebElement goGreenNoBtn;
+	
+	//@FindBy(id = "emailConfirmationNo")
+	@FindBy(xpath = "//input[contains(@id,'emailConfirmationNo')]")
+	private WebElement emailConfirmationNoBtn;
+	
+	//@FindBy(id = "emailConfirmationYes")
+	@FindBy(xpath = "//input[contains(@id,'emailConfirmationYes')]")
+	private WebElement emailConfirmationYesBtn;
 
 	@FindBy(id = "genderMale")
 	private WebElement GenderSelectMale;
@@ -82,6 +108,9 @@ public class PersonalInformationPage extends UhcDriver{
 
 	@FindBy(id = "address1")
 	private WebElement PermanentAdd_Street;
+
+	@FindBy(id = "address2")
+	private WebElement PermanentAdd_Aptno;
 
 	@FindBy(id = "city")
 	private WebElement PermanentAdd_City;
@@ -100,6 +129,10 @@ public class PersonalInformationPage extends UhcDriver{
 
 	@FindBy(id = "address10")
 	private WebElement MailingAdd_Street;
+	
+	@FindBy(id = "address20")
+	private WebElement MailingAdd_Aptno;
+
 
 	@FindBy(id = "city0")
 	private WebElement MailingAdd_City;
@@ -119,6 +152,10 @@ public class PersonalInformationPage extends UhcDriver{
 	@FindBy(xpath = "//*[@id='lastName' or @id = 'Last']")
 	private WebElement lastNameField;
 	
+	
+	@FindBy(xpath = "//*[@id='middleName' or @id = 'middle']")
+	private WebElement MiddleNameField;
+	
 	@FindBy(xpath = "//*[(contains(@id,'partAEffectiveDate') or contains(@id,'partAdate')) and contains(@class,'input-element')]")
 	private WebElement partAStartDateField;
 
@@ -127,7 +164,26 @@ public class PersonalInformationPage extends UhcDriver{
 	
 	private WebElement specialElectionPage;
 	
-	 
+	@FindBy(xpath = "//*[contains(@id, 'medicaidNumber')]/parent::span/input")
+	private WebElement medicaidNumberField;
+	
+	@FindBy(css="a#save-return-button")
+	private WebElement saveandReturn;
+	
+	@FindBy(css="a#enrollment-saved-wc")
+	private WebElement enrollSavedClose;
+	
+	@FindBy(xpath = "//img[@alt='AARP Medicare Plans from United Healthcare']")
+	private WebElement aarpLogo;
+	
+	@FindBy(xpath = "//a[@class='enrollProfileBtn cta-button']")
+	private WebElement enrollProfileYes;
+	
+	@FindBy(id="dupIconFlyOut")
+	private WebElement shoppingCartIcon;
+	
+	@FindBy(css="a#visitor-profile-header")
+    private WebElement lnkProfile;
 
 	public PersonalInformationPage(WebDriver driver) {
 		super(driver);
@@ -144,13 +200,15 @@ public class PersonalInformationPage extends UhcDriver{
 	public boolean enter_member_details(Map<String, String> memberDetailsMap) throws InterruptedException {
 
 		String FirstName = memberDetailsMap.get("First Name");
-		String LastName = memberDetailsMap.get("Last Name");
+		String LastName = memberDetailsMap.get("Last Name");	
 		String DOB = memberDetailsMap.get("DOB");
 		String Gender = memberDetailsMap.get("Gender");
 		String Perm_Street = memberDetailsMap.get("Perm_Street");
+		//String Perm_Aptno = memberDetailsMap.get("Perm_Aptno");
 		String Perm_city = memberDetailsMap.get("Perm_city");
 		String MailingQuestion = memberDetailsMap.get("Mailing Address Question");
 		String Mailing_Street = memberDetailsMap.get("Mailing_Street");
+		String Mailing_Aptno = memberDetailsMap.get("Mailing_Aptno");
 		String Mailing_City = memberDetailsMap.get("Mailing_City");
 		String Mailing_State = memberDetailsMap.get("Mailing_State");
 		String Mailing_Zip = memberDetailsMap.get("Mailing_Zip");
@@ -158,6 +216,7 @@ public class PersonalInformationPage extends UhcDriver{
 
 		sendkeysNew(firstNameField, FirstName);
 		sendkeysNew(lastNameField, LastName);
+		
 		sendkeys(DOBtxtFld,DOB);
 		if(Gender.contains("Male")){
 			//GenderSelectMale.click();
@@ -168,25 +227,87 @@ public class PersonalInformationPage extends UhcDriver{
 			jsClickNew(GenderSelectFemale);
 		}	
 		sendkeys(PermanentAdd_Street,Perm_Street);
+		//sendkeys(PermanentAdd_Aptno,Perm_Aptno);
 		sendkeys(PermanentAdd_City,Perm_city);
 		System.out.println("Mailing Question : "+MailingQuestion);
 		if(MailingQuestion.equalsIgnoreCase("no")){
-			SameMailingAddressNo.click();
+			jsClickNew(SameMailingAddressNo);
 			//CommonUtility.waitForPageLoadNew(driver,MailingAdd_Street, 30);
 			sendkeysNew(MailingAdd_Street,Mailing_Street);
+			//sendkeysNew(MailingAdd_Aptno,Mailing_Aptno);
 			sendkeys(MailingAdd_City,Mailing_City);
 			Select SelectState = new Select(MailingAdd_State_DropDown);
 			SelectState.selectByValue(Mailing_State);
 			sendkeysNew(MailingAdd_Zip,Mailing_Zip);
 		}
 		sendkeys(Email,EmailAddress);
+		
 		if(NextBtn.isEnabled()){
 			System.out.println("Next Button is Enabled : All Required Details are entered");
 			return true;
 		}
 		return false;
 	}
+	
+	public boolean enter_member_details_Other(Map<String, String> memberDetailsMap) throws InterruptedException {
 
+		String EmailAddress = memberDetailsMap.get("Email");
+		String emailConfirmation = memberDetailsMap.get("Email Confirmation");
+		String goGreen = memberDetailsMap.get("Go Green");
+		//String email = memberDetailsMap.get("Email");
+		String HomeNumber = memberDetailsMap.get("Home Number");
+		String MobileNumber =memberDetailsMap.get("Mobile Number");
+		String MiddleName = memberDetailsMap.get("Middle Name");
+		
+		validateNew(HomephoneNumberField);
+		sendkeys(HomephoneNumberField, HomeNumber);
+		  validateNew(MobileNumberField);
+		sendkeys(MobileNumberField, MobileNumber);
+		sendkeysNew(MiddleNameField, MiddleName);
+		if(emailConfirmation.equalsIgnoreCase("YES")){
+			jsClickNew(emailConfirmationYesBtn);	//emailConfirmationYesBtn.click();
+		}else
+			jsClickNew(emailConfirmationNoBtn); //emailConfirmationNoBtn.click();
+		
+	if(goGreen.equalsIgnoreCase("YES")){
+		//goGreenYesBtn.click();
+		jsClickNew(goGreenYesBtn);
+	}else
+	//	goGreenNoBtn.click();
+	jsClickNew(goGreenNoBtn);
+	
+	//if(emailConfirmation.equalsIgnoreCase("YES") && goGreen.equalsIgnoreCase("YES"))
+	//sendkeysNew(emailAddressField, email);
+	
+		
+		sendkeys(Email,EmailAddress);
+		
+		if(NextBtn.isEnabled()){
+			System.out.println("Next Button is Enabled : All Required Details are entered");
+			return true;
+		}
+		return false;
+	}
+	public boolean enter_member_details_Other_dsnp(Map<String, String> memberDetailsMap) throws InterruptedException {
+
+		String EmailAddress = memberDetailsMap.get("Email");
+		String HomeNumber = memberDetailsMap.get("Home Number");
+		String MobileNumber =memberDetailsMap.get("Mobile Number");
+		String MiddleName = memberDetailsMap.get("Middle Name");
+		
+		validateNew(HomephoneNumberField);
+		sendkeys(HomephoneNumberField, HomeNumber);
+		  validateNew(MobileNumberField);
+		sendkeys(MobileNumberField, MobileNumber);
+		sendkeysNew(MiddleNameField, MiddleName);
+		sendkeys(Email,EmailAddress);
+		
+		if(NextBtn.isEnabled()){
+			System.out.println("Next Button is Enabled : All Required Details are entered");
+			return true;
+		}
+		return false;
+	}
 	public boolean validate_plan_details(Map<String, String> planDetailsMap) {
 		String PlanYear_PlanName_Text = PlanYear_PlanName.getText();
 		String Zip_County_Text = ZipCode_County.getText();
@@ -301,7 +422,8 @@ public class PersonalInformationPage extends UhcDriver{
 	public MedicareInformationPage navigate_to_medicare_info_page() {
 		
 		validateNew(NextBtn);
-		NextBtn.click();
+//		NextBtn.click();
+		jsClickNew(NextBtn);
 		CommonUtility.checkPageIsReadyNew(driver);
 		if(validateNew(driver.findElement(By.xpath("//h1[contains(text(),'Medicare')]")))){			
 			System.out.println("OLE Medicare Information Page is Displayed");
@@ -355,23 +477,88 @@ public class PersonalInformationPage extends UhcDriver{
 		
 		String PartAeffectiveDate = MedicareDetailsMap.get("PartA Date");
 		String PartBeffectiveDate = MedicareDetailsMap.get("PartB Date"); 
-		
+		//String MedicaidNo = MedicareDetailsMap.get("MedicaidNumber"); 
 		if(validateNew(driver.findElement(By.xpath("//h1[contains(text(),'Confirm')]")))){
 			System.out.println("OLE Confirm your Eligibility is Displayed");
 		
 			sendkeysNew(partAStartDateField, PartAeffectiveDate);
-			sendkeysNew(partBStartDateField, PartBeffectiveDate);	 
+			sendkeysNew(partBStartDateField, PartBeffectiveDate);
+			//sendkeysNew(medicaidNumberField,MedicaidNo);
 		}
 		
 		return new ConfirmYourEligibilityPage(driver);
 	}
 
+	public SpecialElectionPeriodPage navigate_to_SEP_page_Medicaid(Map<String, String> MedicareDetailsMap) throws InterruptedException {
 
+		validateNew(NextBtn);
+		jsClickNew(NextBtn);
+		/*JavascriptExecutor executor = (JavascriptExecutor)driver;
+		executor.executeScript("arguments[0].click();", NextBtn);*/
+		
+		/*if(validateNew(driver.findElement(By.xpath("//h1[contains(text(),'Special Election')]")))){
+			System.out.println("OLE SEP Page is Displayed");
+			return new SpecialElectionPeriodPage(driver);
+		}
+		*/
+		
+		Thread.sleep(3000);
+			//if(driver.getCurrentUrl().contains("special")){
+			if(driver.getCurrentUrl().contains("special-election-period")){
+			Assert.assertTrue(driver.getCurrentUrl().contains("special-election-period"), "OLE SEP Page is Displayed");
+			return new SpecialElectionPeriodPage(driver);
+			
+			}
+		else if(driver.getCurrentUrl().contains("eligibility"))
+
+			 {
+				
+				ConfirmYourEligibilityPage confirmYourEligibilityPage= enterConfirmEligibilityPageData1(MedicareDetailsMap);
+				if(confirmYourEligibilityPage!=null) {
+					
+					
+					 validateNew(NextBtn); 
+					 jsClickNew(NextBtn);
+					 waitForPageLoadSafari();
+					 if(driver.getCurrentUrl().contains("special-election-period")){
+					  System.out.println("OLE SEP Page is Displayed"); } else {
+					  System.out.println("OLE SEP Page is not Displayed"); }
+					 return new SpecialElectionPeriodPage(driver);	
+				}
+			 }
+		return null;
+	}	
+
+
+
+	public ConfirmYourEligibilityPage enterConfirmEligibilityPageData1(Map<String, String> MedicareDetailsMap) {
+		
+		String PartAeffectiveDate = MedicareDetailsMap.get("PartA Date");
+		String PartBeffectiveDate = MedicareDetailsMap.get("PartB Date"); 
+		String MedicaidNo = MedicareDetailsMap.get("MedicaidNumber"); 
+		if(validateNew(driver.findElement(By.xpath("//h1[contains(text(),'Confirm')]")))){
+			System.out.println("OLE Confirm your Eligibility is Displayed");
+		
+			sendkeysNew(partAStartDateField, PartAeffectiveDate);
+			sendkeysNew(partBStartDateField, PartBeffectiveDate);
+			sendkeysNew(medicaidNumberField,MedicaidNo);
+		}
+		
+		return new ConfirmYourEligibilityPage(driver);
+	}
+
+	@FindBy(xpath = "//select[@id='state']")
+	private WebElement State_DropDown;	
+	@FindBy(xpath = "//input[contains(@id,'zipCode')]")
+	private WebElement EnterZipCode;
+	
 	public boolean validate_member_details(Map<String, String> memberDetailsMap){
 		String FirstName = memberDetailsMap.get("First Name");
 		String LastName = memberDetailsMap.get("Last Name");
 		String ZipCode = memberDetailsMap.get("Zip Code");
-		String state = memberDetailsMap.get("Mailing_State");
+		//String state = memberDetailsMap.get("Mailing_State");
+		String Mailing_State = memberDetailsMap.get("Mailing_State");
+		String Mailing_Zip = memberDetailsMap.get("Mailing_Zip");
 		
 		boolean Validation_Flag = true;
 		
@@ -388,16 +575,20 @@ public class PersonalInformationPage extends UhcDriver{
 
 		}
 		else{
-			WebElement StateSelected = driver.findElement(By.xpath("//select[@id='state']"));
-			StateSelected.click();
-			WebElement StateSelectNC = driver.findElement(By.xpath("//option[@value='"+state+"']"));
+			scrollToView(State_DropDown);
+			Select SelectState = new Select(State_DropDown);
+			SelectState.selectByValue(Mailing_State);
+			sendkeysNew(EnterZipCode,ZipCode);
+			//WebElement StateSelected = driver.findElement(By.xpath("//select[@id='state']"));
+		//	StateSelected.click();
+			//WebElement StateSelectNC = driver.findElement(By.xpath("//option[@value='"+state+"']"));
 		
-			StateSelectNC.click();
-			WebElement EnterZip = driver.findElement(By.xpath("//input[contains(@id,'zipCode')]"));
-			EnterZip.sendKeys(ZipCode);
+		//	StateSelectNC.click();
+			//WebElement EnterZip = driver.findElement(By.xpath("//input[contains(@id,'zipCode')]"));
+			//EnterZip.sendKeys(ZipCode);
 			System.out.println("C&S DSNP Plan : State selected and Zip Entered");
-			StateDisplayText = state;
-			ZipDisplayText = EnterZip.getText();
+			StateDisplayText = Mailing_State;
+			ZipDisplayText = ZipCode;
 		}
 		
 		/*
@@ -406,10 +597,10 @@ public class PersonalInformationPage extends UhcDriver{
 		 * System.out.println("Last Name Expected : "
 		 * +LastName+"       Displayed on page  - "+LastNameDisplayText);
 		 */
-		System.out.println("State Name Displayed on page  - "+StateDisplayText);
+		System.out.println("State Name Expected - "+ Mailing_State +"\tState Name Displayed on page  - "+StateDisplayText);
 		System.out.println("Zip Code Name Expected : "+ZipCode+"       Displayed on page  - "+ZipDisplayText);
 		
-		if(StateDisplayText.contains(state) && ZipDisplayText.contains(ZipCode)){
+		if(StateDisplayText.contains(Mailing_State) && ZipDisplayText.contains(ZipCode)){
 			System.out.println("Member Details Validated on Personal Information Page");
 			Validation_Flag = true;
 		}
@@ -417,5 +608,25 @@ public class PersonalInformationPage extends UhcDriver{
 			Validation_Flag = false;
 		return Validation_Flag;
 	}
-
+	
+	/**
+	 * This method will save and return to visitor profile page
+	 * @return
+	 */
+	public VisitorProfilePage saveAndReturnLater() {
+		
+		jsClickNew(saveandReturn);
+		jsClickNew(enrollSavedClose);
+		jsClickNew(aarpLogo);
+		jsClickNew(enrollProfileYes);
+		jsClickNew(shoppingCartIcon);
+		jsClickNew(lnkProfile);
+		if(driver.getCurrentUrl().contains("profile")) {
+			CommonUtility.checkPageIsReadyNew(driver);
+			return new VisitorProfilePage(driver);
+		}else {
+			System.out.println("Navigation to visitor profile is failed");
+			return null;
+		}
+	}
 }

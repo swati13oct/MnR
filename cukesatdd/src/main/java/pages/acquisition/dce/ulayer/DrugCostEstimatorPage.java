@@ -1739,7 +1739,8 @@ sendkeys(zipcodeInput, zipcode); // not sure what webelement to use
 	public VPPPlanSummaryPage navigateBackToPlanSummaryPage() {	
 		
 		//WebElement returnToPlanSummaryLink = driver.findElement(By.xpath(".//*[@id='returnLink']"));	
-		WebElement returnToPlanSummaryLink = driver.findElement(By.xpath("//*[@id='returnLink']"));	
+		//WebElement returnToPlanSummaryLink = driver.findElement(By.xpath("//*[@id='returnLink']"));	
+		WebElement returnToPlanSummaryLink = driver.findElement(By.xpath("//span[@class='back-to-view-all-pla']"));
 		JavascriptExecutor executor = (JavascriptExecutor)driver;
 		executor.executeScript("arguments[0].click();", returnToPlanSummaryLink);
 		//returnToPlanSummaryLink.click();

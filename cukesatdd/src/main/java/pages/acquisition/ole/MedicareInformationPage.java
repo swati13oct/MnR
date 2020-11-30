@@ -189,7 +189,8 @@ public class MedicareInformationPage extends UhcDriver{
 	@FindBy(xpath = "//*[contains(text(), 'Do you or your spouse have other health insurance that will cover medical services?')]")
 	private WebElement OtherIns_Question;
 	
-	@FindBy(id = "hasLongTermCareFacilityYes")
+	//@FindBy(id = "hasLongTermCareFacilityYes")
+	@FindBy(id = "hasHealthInsuranceYes")
 	private WebElement LongTerm_Question_Yes;
 	
 	@FindBy(xpath = "//*[contains(@id,'hasHealthInsuranceYes')]")
@@ -224,6 +225,9 @@ public class MedicareInformationPage extends UhcDriver{
 
 	@FindBy(xpath= "//*[contains(@id,'memberIdNumber0')]")
 	private WebElement PrescriptionCoveragememberNumberField;
+	
+	@FindBy(xpath = "//*[contains(@id, 'medicaidNumber')]/parent::span/input")
+	private WebElement medicaidNumberField;
 	
 
 	//=============================================================================	
@@ -545,7 +549,7 @@ public boolean ValidateTFNMedicareInfo(String MedicaretFN) {
 
 public LearnMoreModal OpenLearnMore() {
 	validate(RightRail_LearnMoreLink);
-	RightRail_LearnMoreLink.click();
+	jsClickNew(RightRail_LearnMoreLink);
 	try {
 		Thread.sleep(6000);
 	} catch (InterruptedException e) {
@@ -637,15 +641,15 @@ public boolean validate_Required_Fields(String planType, String medicaidNumber, 
 	//ESRD question validation for MA and DSNP
 
 	if (planType.contains("MA")|| planType.contains("SNP") ){
-		if(validate(ESRDQuestion )) {
+		if(validate(ESRDQuestion, 20 )) {
 			//&& planYear.equalsIgnoreCase("current") 
 			System.out.println("ESRD question is displayed for MA/DSNP plans in Preliminary Questions Page");
-			esrdYes.click();
+			jsClickNew(esrdYes);
 			System.out.println("ESRD question : YES clicked"+esrdYes.isSelected());
 			if(validate(esrdError) && validate(CancelButton) && validateNonPresenceOfElement(NextBtn)){
 				System.out.println("ESRD error and Cancel Enrollment button are displayed for MA/DSNP plans, YES answer to ESRD question");
 				validation_Flag = true;
-				esrdNo.click();
+				jsClickNew(esrdNo);
 				System.out.println("ESRD question : No clicked"+esrdNo.isSelected());
 				if(validateNonPresenceOfElement(esrdError) && validateNonPresenceOfElement(CancelButton) && validate(NextBtn)){
 					System.out.println("ESRD error and Cancel Enrollment button are NOT displayed for NO answer to ESRD question");
@@ -682,12 +686,12 @@ public boolean validate_Required_Fields(String planType, String medicaidNumber, 
 	//Medicaid Question validation for DSNP only
 	if(planName.contains("D-SNP")){
 		System.out.println("Medicaid Question is displayed for "+planType+" : "+validate(MedicaidQuestion));
-		medicaiddno.click();
+		jsClickNew(medicaiddno);
 		System.out.println("Medicaid question : No clicked"+medicaiddno.isSelected());
 		if(validate(MedicaidError) && validate(CancelButton) && validateNonPresenceOfElement(NextBtn)){
 			System.out.println("Medicaid Number error and Cancel Enrollment button are displayed for DSNP plansNO answer to ESRD question");
 			//validation_Flag = (validation_Flag==false)?false:true;
-			medicaiddyes.click();
+			jsClickNew(medicaiddyes);
 			System.out.println("Medicaid question : YES clicked"+medicaiddyes.isSelected());
 			NextBtn.click();
 			
@@ -743,12 +747,83 @@ public boolean validate_Required_Fields(String planType, String medicaidNumber, 
 		return validation_Flag;
 	
 }
+
+
+public boolean validate_notRequired_ESRD_Fields(String planType, String medicaidNumber, String planName, String planYear) {
+	System.out.println("PlanType : "+planType+" Medicare Number : "+medicaidNumber);
+	boolean validation_Flag = true;
+	boolean Medicaid_Validation = true;
+	//Medicaid Question validation for DSNP only
+	if(planName.contains("D-SNP")){
+		System.out.println("Medicaid Question is displayed for "+planType+" : "+validate(MedicaidQuestion));
+		jsClickNew(medicaiddno);
+		System.out.println("Medicaid question : No clicked"+medicaiddno.isSelected());
+		if(validate(MedicaidError) && validate(CancelButton) && validateNonPresenceOfElement(NextBtn)){
+			System.out.println("Medicaid Number error and Cancel Enrollment button are displayed for DSNP plansNO answer to ESRD question");
+			//validation_Flag = (validation_Flag==false)?false:true;
+			jsClickNew(medicaiddyes);
+			System.out.println("Medicaid question : YES clicked"+medicaiddyes.isSelected());
+			jsClickNew(NextBtn);
+			
+			if(validate(RequiredField_ErrorMessage) && validate(MedicaidRequired_ErrorMessage)){
+				System.out.println("Medicaid Number Required : Error Message is Disabled");
+				Medicaid_Validation = true;
+				medicaidnumTxtBx.sendKeys(medicaidNumber);
+				System.out.println("Medicare Number is enetered : "+medicaidNumber);
+				if(validateNonPresenceOfElement(RequiredField_ErrorMessage)&& validateNonPresenceOfElement(MedicaidRequired_ErrorMessage))
+				{
+					System.out.println("Error Message is not Displayed when Medicaid Number is entered");
+					Medicaid_Validation = true;
+				}
+			}
+			else{
+				System.out.println("Medicaid Number Required FAILED : Error Message is NOT Disabled");
+				Medicaid_Validation = false;
+			}
+		}else{
+			System.out.println("Medicaid required validation failed for DSNP in Medicare Information Page");
+			Medicaid_Validation = false;
+		}
+		System.out.println("Medicaid question Validation Status for "+planType+" : "+Medicaid_Validation);
+		validation_Flag = (validation_Flag==false || Medicaid_Validation==false)?false:true;
+	}
+	else{
+		if(validate(MedicaidQuestion) && NextBtn.isEnabled()){
+			System.out.println("Medicaid Number question is not required for non-DSNP : validation pass");
+			jsClickNew(medicaiddno);
+			System.out.println("Medicaid question : No clicked"+medicaiddno.isSelected());
+			if(validateNonPresenceOfElement(MedicaidError) && validateNonPresenceOfElement(CancelButton) && NextBtn.isEnabled()){
+				System.out.println("Next Button is enabled when Medicaid question Answered NO");
+				Medicaid_Validation = (!Medicaid_Validation)?false:true;
+			}else{
+				System.out.println("non DSNP - Medicare Question 'No' : validation failed");
+				Medicaid_Validation = false;
+			}
+			jsClickNew(medicaiddyes);
+			System.out.println("Medicaid question : Yes clicked"+medicaiddyes.isSelected());
+			if(validateNonPresenceOfElement(MedicaidError) && validateNonPresenceOfElement(CancelButton) && NextBtn.isEnabled()){
+				System.out.println("non DSNP - Medicare Number not required");
+				Medicaid_Validation = (!Medicaid_Validation)?false:true;
+			}
+			else{
+				System.out.println("non DSNP - Medicare Number not required : validation failed");
+				Medicaid_Validation = false;
+			}
+		}
+	}
+		validation_Flag = (validation_Flag==false)?false:true;
+		System.out.println("Validation Status for Preliminary Question Page for Plan Type - "+planType+" : "+validation_Flag);
+		
+		return validation_Flag;
+	
+}
+
 public boolean validate_Required_Fields_CSNP( String medicaidNumber, String PlanName) {
 	//System.out.println("plantype : "+plantype+" Medicare Number : "+medicaidNumber);
 	
 			if(PlanName.contains("Chronic") || PlanName.contains("Gold")){
 				System.out.println("Medicaid Question is displayed for "+PlanName+" : "+validate(MedicaidQuestion));
-				medicaiddno.click();
+				jsClickNew(medicaiddno);
 				System.out.println("Medicaid question : No clicked"+medicaiddno.isSelected());
 				
 					//Diabetes questions
@@ -784,7 +859,7 @@ public boolean validate_Required_Fields_CSNP( String medicaidNumber, String Plan
 		            
 	    }else if(PlanName.contains("Silver")){
 			System.out.println("Medicaid Question is displayed for "+PlanName+" : "+validate(MedicaidQuestion));
-			medicaiddno.click();
+			jsClickNew(medicaiddno);
 			System.out.println("Medicaid question : No clicked"+medicaiddno.isSelected());
 			
 				//Diabetes questions
@@ -843,10 +918,10 @@ public boolean answer_following_questions(Map<String, String> questionMap) {
 	String LongTermQuestionFlag = questionMap.get("LongTerm Question");
 
 	if(PDPquestionFlag.equalsIgnoreCase("yes")){
-		PDPQuestion_Yes.click();
+		jsClickNew(PDPQuestion_Yes);
 	}
 	if(LongTermQuestionFlag.equalsIgnoreCase("yes")){
-		LongTerm_Question_Yes.click();
+		jsClickNew(LongTerm_Question_Yes);
 	}
 	if(NextBtn.isEnabled()){
 		System.out.println("SEP options selected :  Next button is enabled");
@@ -1049,14 +1124,14 @@ public boolean validate_MedicaidNumberField(String planType, String medicaidNumb
 	//Medicaid Question validation for DSNP only
 	if(planName.contains("D-SNP")){
 		System.out.println("Medicaid Question is displayed for "+planType+" : "+validate(MedicaidQuestion));
-		medicaiddno.click();
+		jsClickNew(medicaiddno);
 		System.out.println("Medicaid question : No clicked"+medicaiddno.isSelected());
 		if(validate(MedicaidError) && validate(CancelButton) && validateNonPresenceOfElement(NextBtn)){
 			System.out.println("Medicaid Number error and Cancel Enrollment button are displayed for DSNP plansNO answer to ESRD question");
 			//validation_Flag = (validation_Flag==false)?false:true;
-			medicaiddyes.click();
+			jsClickNew(medicaiddyes);
 			System.out.println("Medicaid question : YES clicked"+medicaiddyes.isSelected());
-			NextBtn.click();
+			jsClickNew(NextBtn);
 			
 			if(validate(RequiredField_ErrorMessage) && validate(MedicaidRequired_ErrorMessage)){
 				System.out.println("Medicaid Number Required : Error Message is Disabled");
@@ -1110,4 +1185,41 @@ public boolean validate_MedicaidNumberField(String planType, String medicaidNumb
 		return validation_Flag;
 	
 }
+
+public boolean validate_Medicaid_Number_CEP(Map<String, String> memberDetailsMap) {
+boolean Validation_Flag = true;
+	
+	try
+	{
+
+	if(medicaiddno.isDisplayed()) {
+		jsClickNew(medicaiddno);
+		if(!validate(medicaidnumTxtBx)){
+			System.out.println("Medicaid Options is yes : Validation Passed");	
+			Validation_Flag = true;	
+		}
+		else {
+			System.out.println("Medicaid Options  :Validation Failed");
+			Validation_Flag = false;
+		}
+	}
+	
+	medicaiddyes.isDisplayed();
+	jsClickNew(medicaiddyes);	
+	
+	String MedicaidNumber = memberDetailsMap.get("MedicaidNumber");
+	
+	sendkeysNew(medicaidNumberField, MedicaidNumber);
+	}catch(Exception e) {
+		
+		System.out.println("Failed Due To-------"+e.getMessage());
+		}
+
+	if(NextBtn.isEnabled()){
+		System.out.println("Medicaid options selected :  Next button is enabled");
+	}
+	return true;
+
+}
+
 }

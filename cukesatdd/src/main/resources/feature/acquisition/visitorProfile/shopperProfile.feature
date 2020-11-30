@@ -89,18 +89,18 @@ Feature: 1.08. ACQ- Shopper Profile
       | Providers          | <providers>        |
       | First Name         | <fname>            |
       | Last Name          | <lname>            |
-    Then agent saves two plans as favorite on AARP site for user
+    Then agent saves two plans as favorite for user
       | Plan Type  | <plantype>  |
       | Test Plans | <testPlans> |
-    Then Navigate to Visitor Profile page on AARP site
-    And user validates the added plans on visitor profile page of AARP site
+    Then Navigate to Visitor Profile page
+    And user validates the added plans on visitor profile page
       | Test Plans | <testPlans> |
-    And user delets the added plans on visitor profile page of AARP site
+    And user delets the added plans on visitor profile page
       | Test Plans | <testPlans> |
 
     Examples: 
-      | username  | password  | email                     | fname  | lname    | mbi           | dob        | plantype | enrolledplanName                  | planName                                | drugNames | providers | testPlans                                                                    |
-      | qavgogine | qavgogine | LXAGFOFOAPWXK6@MASKED.COM | CHERRY | KUKOWSKI | 9EX6-WA2-PQ79 | 12/05/1966 | MAPD     | AARP Medicare Advantage (HMO-POS) | AARP Medicare Advantage Focus (HMO-POS) | No        | No        | AARP Medicare Advantage Focus (HMO-POS),AARP Medicare Advantage Choice (PPO) |
+      | username  | password  | email                     | fname  | lname    | mbi           | dob        | plantype | enrolledplanName                  | planName                             | drugNames | providers | testPlans                                                                 |
+      | qavgogine | qavgogine | LXAGFOFOAPWXK6@MASKED.COM | CHERRY | KUKOWSKI | 9EX6-WA2-PQ79 | 12/05/1966 | MAPD     | AARP Medicare Advantage (HMO-POS) | AARP Medicare Advantage Plan 1 (HMO) | No        | No        | AARP Medicare Advantage Plan 1 (HMO),AARP Medicare Advantage Plan 2 (HMO) |
 
   #@searchProfileAndAddDrugs
   #Scenario Outline: Telesales agent searching for the profile using Email and Adding drugs for user
@@ -153,25 +153,25 @@ Feature: 1.08. ACQ- Shopper Profile
       | DOB                | <dob>              |
       | MBI                | <mbi>              |
     Then the user clicks on back on all plan linnk in Plan Compare page
-    Then Navigate to Visitor Profile page on AARP site
-    And user delets the added plans on visitor profile page of AARP site
+    Then Navigate to Visitor Profile page
+    And user delets all the added providers on visitor profile page
       | Test Plans | <testPlans> |
-    And user delets all the added providers on visitor profile page of AARP site
-    And the user clicks on the add plans button in the profile in agent mode in AARP site
-    Then agent saves two plans as favorite on AARP site for user
+    And the user clicks on the add plans button in the profile
+    Then agent saves two plans as favorite for user
       | Plan Type  | <plantype>  |
       | Test Plans | <testPlans> |
     When the user Click on Is my Provider covered link Ulayer
       | PlanName | <planname> |
     When user selects a provider and retuns to VPP page in ulayer
-    Then Verify X out of Y provider covered information is displayed on Plan Summary page Ulayer
+    Then Verify X out of Y provider covered information is displayed on Plan Summary page
       | PlanName | <planname> |
-    Then Navigate to Visitor Profile page on AARP site
-    Then Verify X out of Y provider covered information is displayed on visitor profile page of AARP site
+    Then Navigate to Visitor Profile page
+    Then Verify X out of Y provider covered information is displayed on visitor profile page
       | PlanName | <planname> |
-    And user delets the added plans on visitor profile page of AARP site
+    And user delets the added plans on visitor profile page
       | Test Plans | <testPlans> |
-    And user delets all the added providers on visitor profile page of AARP site
+    And user delets all the added providers on visitor profile page
+      | Test Plans | <testPlans> |
 
     Examples: 
       | username  | password  | email             | fname  | lname   | mbi           | dob        | plantype | enrolledplanName                                    | planname                                | drugNames | providers | testPlans                                                                                   |
@@ -202,12 +202,12 @@ Feature: 1.08. ACQ- Shopper Profile
       | Providers          | <providers>        |
       | First Name         | <fname>            |
       | Last Name          | <lname>            |
-    Then agent saves two plans as favorite on AARP site for user
+    Then agent saves two plans as favorite for user
       | Plan Type  | <plantype>  |
       | Test Plans | <testPlans> |
-    Then Navigate to Visitor Profile page on AARP site
-    And enroll In Plan should not be clickable on Visitor Profile page in Agent mode on aarp
-    And user delets the added plans on visitor profile page of AARP site
+    Then Navigate to Visitor Profile page
+    And enroll In Plan should not be clickable on Visitor Profile page in Agent mode
+    And user delets the added plans on visitor profile page
       | Test Plans | <testPlans> |
 
     Examples: 
@@ -251,7 +251,7 @@ Feature: 1.08. ACQ- Shopper Profile
       | qavgogine | qavgogine | !!AURORA | SHEPLEY__ |
 
   @createProfileMember
-  Scenario Outline: Telesales agent searching for the Creating a profile
+  Scenario Outline: Telesales agent searching for the Creating a profile - email - <email>
     Given I am an agent logged into the cloak in tool
       | User Name | <username> |
       | Password  | <password> |
@@ -287,11 +287,11 @@ Feature: 1.08. ACQ- Shopper Profile
 
     Examples: 
       | username  | password  | email                    | dob        | mbi           | fname   | lname      | zipCode | enrolledplanName                          | planName                                                         | drugNames | providers                                                       |
-      | qavgogine | qavgogine | TESTMAINTAINDEMO@GPS.COM | 06/04/1938 | 7GE4-FF9-HG07 | MANISHA | BOOKWALTER |         | Medica HealthCare Plans MedicareMax (HMO) | Medica HealthCare Plans MedicareMax (HMO)                        | No        | Luis Plasencia:8420 W Flagler St Ste 120, Miami-Dade, FL, 33144 |
+      | qavgogine | qavgogine | TESTMAINTAINDEMO@GPS.COM | 06/04/1938 | 7GE4-FF9-HG07 | MANISHA | BOOKWALTER |   33134 | Medica HealthCare Plans MedicareMax (HMO) | Medica HealthCare Plans MedicareMax (HMO)                        | No        | Luis Plasencia:8420 W Flagler St Ste 120, Miami-Dade, FL, 33144 |
       | qavgogine | qavgogine | LEONEL@MEMBER.COM        | 08/23/1940 |               | LEONEL  | DREHMER    |   10010 |                                           | UnitedHealthcare Medicare Advantage Choice Plan 1 (Regional PPO) | No        | No                                                              |
 
   @createProfileNonMember
-  Scenario Outline: Telesales agent Creating a Non Member Profile
+  Scenario Outline: Telesales agent Creating a Non Member Profile - email - <email>
     Given I am an agent logged into the cloak in tool
       | User Name | <username> |
       | Password  | <password> |
@@ -326,6 +326,6 @@ Feature: 1.08. ACQ- Shopper Profile
       | Last Name  | <lname>     |
 
     Examples: 
-      | username  | password  | email                  | dob        | gender | fname    | lname    | zipCode | consent | planName                             | drugNames                                                                                                                                                                     | providers                                                                                                                                                                                     |
-      | qavgogine | qavgogine | DFONNMUF@NONMEMBER.COM | 08/20/1946 | F      | DFONNMUF | DFONNMUL |   10010 | YES     | AARP Medicare Advantage Plan 1 (HMO) | nifedipine TAB 60MG ER (osmotic),simvastatin TAB 20MG,trazodone hcl TAB 50MG,levothyroxine sodium TAB 100MCG,nitrofurantoin monohydrate CAP 100MG,ciprofloxacin hcl TAB 500MG | Maria S Neri-Nixon:33100 Cleveland Clinic Blvd, Lorain, OH, 44011;Ronald L Garcia:33100 Cleveland Clinic Blvd, Lorain, OH, 44011;Ronald L Garcia:850 Columbia Rd Ste 130, Cuyahoga, OH, 44145 |
-      | qavgogine | qavgogine | DFPIXROF@NONMEMBER.COM | 11/03/1943 | F      | DFPIXROF | DFPIXROL |   10010 | NO      | AARP Medicare Advantage Plan 1 (HMO) | No                                                                                                                                                                            | No                                                                                                                                                                                            |
+      | username  | password  | email                  | dob        | gender | fname    | lname    | zipCode | consent | planName                             | drugNames                                                                                                                                                                                 | providers                                                                                                                                                                                     |
+      | qavgogine | qavgogine | DFONNMUF@NONMEMBER.COM | 08/20/1946 | F      | DFONNMUF | DFONNMUL |   10010 | YES     | AARP Medicare Advantage Plan 1 (HMO) | nifedipine TAB 60MG ER Osmotic,simvastatin TAB 20MG,trazodone hcl TAB 50MG,levothyroxine sodium TAB 100MCG,nitrofurantoin monohydrate/macrocrystals CAP 100MG,ciprofloxacin hcl TAB 500MG | Maria S Neri-Nixon:33100 Cleveland Clinic Blvd, Lorain, OH, 44011;Ronald L Garcia:33100 Cleveland Clinic Blvd, Lorain, OH, 44011;Ronald L Garcia:850 Columbia Rd Ste 130, Cuyahoga, OH, 44145 |
+      | qavgogine | qavgogine | DFPIXROF@NONMEMBER.COM | 11/03/1943 | F      | DFPIXROF | DFPIXROL |   10010 | NO      | AARP Medicare Advantage Plan 1 (HMO) | No                                                                                                                                                                                        | No                                                                                                                                                                                            |

@@ -383,7 +383,7 @@ public class AepPlanDetailsPage extends UhcDriver {
 					benefitValueUI = benefitValueUI.replace("-opensinnewwindow", "");
 					benefitValueUI = benefitValueUI.replace("opensinanewwindow", "");
 				}
-				
+
 				if(columnName.contains("eye exam")&&benefitValue.endsWith("1")) {
 					benefitValue = 	StringUtils.trimTrailingCharacter(benefitValue, '1');
 				}
@@ -498,9 +498,9 @@ public class AepPlanDetailsPage extends UhcDriver {
 					else if(benefitValueUI.contains(".1"))
 						benefitValueUI = benefitValueUI.replace(".1", ".");
 				}
-				
+
 				benefitValue = benefitValue.replace("-opensinnewwindow", "");
-					if(key.equalsIgnoreCase(columnName)) {	
+					if(key.equalsIgnoreCase(columnName)) {
 						
 						benefitValueUI = benefitValueUI.replace("/", "");
 						
@@ -530,9 +530,9 @@ public class AepPlanDetailsPage extends UhcDriver {
 							benefitValueUI = benefitValueUI.replaceAll("1/", "");
 						else if(benefitValueUI.contains("2/"))
 							benefitValueUI = benefitValueUI.replaceAll("2/", "");
-						else if(benefitValueUI.contains("/") &&!benefitValueUI.contains("mydoctor")) 
+						else if(benefitValueUI.contains("/") &&!benefitValueUI.contains("mydoctor"))
 							benefitValueUI =benefitValueUI.replaceAll("/", "");
-				 
+
 						if(key.equalsIgnoreCase("Walgreens – Preferred Retail Pharmacy")) {
 							if(benefitValueUI.endsWith("."))
 								benefitValueUI = StringUtils.trimTrailingCharacter(key, '.');
@@ -601,7 +601,7 @@ public class AepPlanDetailsPage extends UhcDriver {
 		}
 		return result;
 	}
-	
+
 	public HashMap<String, String> collectInfoVppPlanDetailPg() {
 		System.out.println("Proceed to collect the info on vpp detail page =====");
 

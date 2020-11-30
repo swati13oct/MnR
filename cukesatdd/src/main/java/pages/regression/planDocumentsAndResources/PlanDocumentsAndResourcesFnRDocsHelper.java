@@ -315,6 +315,10 @@ public class PlanDocumentsAndResourcesFnRDocsHelper {
 							||	planType.toUpperCase().equals("MAPD") 
 							|| planType.toUpperCase().equals("SSP")))
 				testInputInfoMap.put("expectedUrl", "Potential_for_Contract_Termination.pdf");
+			if (MRScenario.environment.equalsIgnoreCase("offline") || MRScenario.environment.equalsIgnoreCase("prod")) {
+				if (planType.toUpperCase().equals("MA") && memberType.toUpperCase().contains("GROUP") && memberType.toUpperCase().contains("TERM")) 
+					testInputInfoMap.put("expectedUrl", "PotentialContractTermination.pdf");
+			}
 			
 			testInputInfoMap.put("redirectUrl", "none");
 			testInputInfoMap.put("checkDestUrl", "true");
@@ -448,8 +452,10 @@ public class PlanDocumentsAndResourcesFnRDocsHelper {
 			testInputInfoMap.put("redirectUrl", "none");
 			testInputInfoMap.put("checkDestUrl", "true");
 			testInputInfoMap.put("switchTab", "true");
-			testInputInfoMap.put("headerText","Try home delivery from OptumRx");
-			testInputInfoMap.put("sampleBodyText","How it works");
+			testInputInfoMap.put("headerText","PrescriPtioN Mail-iN order ForM");
+			testInputInfoMap.put("sampleBodyText","Member and physician");
+			//tbd testInputInfoMap.put("headerText","Try home delivery from OptumRx");
+			//tbd testInputInfoMap.put("sampleBodyText","How it works");
 			return testInputInfoMap; 
 		}
 		if (docName.equals("Appeals and Grievances – Senior Supplement Plans")) {
@@ -505,10 +511,10 @@ public class PlanDocumentsAndResourcesFnRDocsHelper {
 			testInputInfoMap.put("switchTab", "true");
 			testInputInfoMap.put("headerText","Your Privacy is Important");
 			testInputInfoMap.put("sampleBodyText","UnitedHealthcare Insurance Company cares about your privacy");
-			if (MRScenario.environment.equalsIgnoreCase("offline") || MRScenario.environment.equalsIgnoreCase("prod")) {
+			//tbd if (MRScenario.environment.equalsIgnoreCase("offline") || MRScenario.environment.equalsIgnoreCase("prod")) {
 				testInputInfoMap.put("headerText","You have the right to privacy");
 				testInputInfoMap.put("sampleBodyText","What you need to do");
-			}
+				//tbd }
 			return testInputInfoMap; 
 		}	
 

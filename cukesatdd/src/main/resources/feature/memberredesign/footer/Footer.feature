@@ -88,7 +88,7 @@ Feature: 1.05 Member Footer validation
     Then the user navigates to profile and pref page
     Then user validates Need Help section content for account setting page
     Then the user navigates to Benefits page
-    Then user validates Need Help section content for benefits page
+    #Then user validates Need Help section content for benefits page
     Then the user navigates to the Order Plan Materials page
     Then user validates Need Help section content for order plan materials page
     Then the user navigates to the Health and Wellness page
@@ -123,11 +123,11 @@ Feature: 1.05 Member Footer validation
     Then user validates Need Help section content for order plan materials page
     Then the user navigates to the Health and Wellness page
     Then user validates Need Help section content for health and wellness page
-    Then the user navigates to the Pharmacies and Prescriptions page
-    Then user validates Need Help section content for pharmacies and prescriptions page
+    #Then the user navigates to the Pharmacies and Prescriptions page
+    #Then user validates Need Help section content for pharmacies and prescriptions page
 
     Examples: 
       | TID   | planType | memberType             |
       | 15347 | SHIP     | IND_footer             |
       #note: combo user with SHIP priority
-	  | xxxxx | MAPD     | SHIP_FED_COMBO_footer  | 
+	  | xxxxx | MA     | SHIP_FED_COMBO_footer  |

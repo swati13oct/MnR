@@ -20,6 +20,7 @@ Feature: 1.10.1 DCE-REDISIGN AARP - To test Acq Visitor Profile to NEW DCE Flows
     Then the user clicks on Review Drug Costs to Land on Zip Entry Page
     When user enters valid zipcode and county
       | ZipCode | <zipCode> |
+    And user selects plan year
     And user clicks on continue button in Zip Entry Page
 
 		@DCE_VisitorProfile_AARP

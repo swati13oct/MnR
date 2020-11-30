@@ -251,7 +251,8 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	@FindBy(xpath = "//div[@class='dce-nav-btns']/button[contains(text(),'Delete')]")
 	public WebElement confdelpopup_del_button;
 
-	@FindBy(id = "returnLink")
+	//@FindBy(id = "returnLink")
+	@FindBy(xpath="//span[@class='back-to-view-all-pla']")
 	public WebElement returnLink;
 
 	@FindBy(id = "drugcostestimatorDetails")
@@ -2103,6 +2104,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	public VPPPlanSummaryPage clickReturnToSummaryLink() {
 		validateNew(returnLink,20);
 		returnLink.click();
+		waitForPageLoadSafari();
 		if(driver.getCurrentUrl().contains("plan-summary")){
 			return new VPPPlanSummaryPage(driver);
 		}

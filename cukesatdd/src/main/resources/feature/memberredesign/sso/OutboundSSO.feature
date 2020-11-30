@@ -1,5 +1,10 @@
 Feature: 1.13 Member Outbound SSO functionality for M&R Member Portal
 
+ Background: Feature security flag needs to be true before ATDD script execution
+     Given First check if feature security flag is set to true
+      | Feature | UCPUserManagement |
+###############################Regression Scenarios Begin Here ########################################
+
   @regressionMember
   Scenario Outline: Verify that member of <Test Scenario> is able to perfom Outbound SSO - University of Kentucky - Express Scripts SSO
     Given login with following details logins in the member portal and validate elements
@@ -49,22 +54,22 @@ Feature: 1.13 Member Outbound SSO functionality for M&R Member Portal
       | TC002 | MAPD     | optumrx    | NON LIS       | TC_OptumxRX_SSO | LookUpDrugsButton                                               |
       | TC003 | MAPD     | optumrx    | NON LIS       | TC_OptumxRX_SSO | viewDetailsAtOptumrxLink                                        |
 
-  @regressionMember
-  Scenario Outline: Verify that user is able to perfom Outbound SSO - OptumRx from Pharmacies and Prescriptions Page from link <optumrxssolink>
-    Given login with following details logins in the member portal and validate elements
-      | Plan Type      | <planType>      |
-      | Member Type    | <memberType>    |
-      | Copay Category | <copayCategory> |
-    When now user navigates to the pharmacies and prescriptions page from dashboard or testharness page
-      | PlanType | <planType> |
-    And user scrolls down to OptumRx SSO link on Pharmacies and Prescriptions Page to perform outbound OptumRx SSO
-      | OptumRx SSO Link | <optumrxssolink> |
-    And user clicks on OptumRx SSO link on Pharmacies and Prescriptions Page and lands on OptumRx SSO Page in new window
-      | OptumRx SSO Link | <optumrxssolink> |
-
-    Examples: 
-      | TID   | planType                | memberType | copayCategory | Test Scenario   | optumrxssolink           |
-      | TC004 | GroupMAPDWithoutPayment | optumrx    | NON LIS       | TC_OptumxRX_SSO | LookUpDrugsButton        |
-      | TC005 | GroupMAPDWithoutPayment | optumrx    | NON LIS       | TC_OptumxRX_SSO | orderPrescriptionsButton |
+  #@regressionMember Outbound SSO from P&P page is not available now
+  #Scenario Outline: Verify that user is able to perfom Outbound SSO - OptumRx from Pharmacies and Prescriptions Page from link <optumrxssolink>
+  #  Given login with following details logins in the member portal and validate elements
+  #    | Plan Type      | <planType>      |
+  #    | Member Type    | <memberType>    |
+  #    | Copay Category | <copayCategory> |
+  #  When now user navigates to the pharmacies and prescriptions page from dashboard or testharness page
+  #    | PlanType | <planType> |
+  #  And user scrolls down to OptumRx SSO link on Pharmacies and Prescriptions Page to perform outbound OptumRx SSO
+  #    | OptumRx SSO Link | <optumrxssolink> |
+  #  And user clicks on OptumRx SSO link on Pharmacies and Prescriptions Page and lands on OptumRx SSO Page in new window
+  #    | OptumRx SSO Link | <optumrxssolink> |
+  #
+  #  Examples: 
+  #    | TID   | planType                | memberType | copayCategory | Test Scenario   | optumrxssolink           |
+  #    | TC004 | GroupMAPDWithoutPayment | optumrx    | NON LIS       | TC_OptumxRX_SSO | LookUpDrugsButton        |
+  #    | TC005 | GroupMAPDWithoutPayment | optumrx    | NON LIS       | TC_OptumxRX_SSO | orderPrescriptionsButton |
     # | TC006 | GroupMAPDWithoutPayment | optumrx    | NON LIS       | TC_OptumxRX_SSO | checkDelieryStatusButton |
-      | TC007 | GroupMAPDWithoutPayment | optumrx    | NON LIS       | TC_OptumxRX_SSO | drugCostSummaryButton    |
+  #   | TC007 | GroupMAPDWithoutPayment | optumrx    | NON LIS       | TC_OptumxRX_SSO | drugCostSummaryButton    |

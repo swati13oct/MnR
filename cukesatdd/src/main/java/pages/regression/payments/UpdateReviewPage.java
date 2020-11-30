@@ -11,7 +11,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import com.google.common.base.Strings;
-
+import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 
 public class UpdateReviewPage extends UhcDriver {
@@ -45,8 +45,16 @@ public class UpdateReviewPage extends UhcDriver {
 
 	@FindBy(id = "memAuthPaymentCancelSubmitError")
 	private WebElement csrUnauthorizedErrorMessage;
+	
+	@FindBy(xpath = "//span[contains(@class,'confirmation__number')]")
+	private WebElement ConfirmationNumber;
 
-
+	@FindBy(xpath = "(//button[@class='btn btn--secondary cancelbutton cancel-wcag' or @class='btn btn--secondary cancelbutton'])[1]")
+	private WebElement cancelButton;
+	
+	@FindBy(xpath = "//a[@class='btn btn--primary cancel-btn-modal']")
+	private WebElement cancelButtonOnModal;
+	
 	public UpdateReviewPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -85,7 +93,7 @@ public class UpdateReviewPage extends UhcDriver {
 			System.out.println(driver.getCurrentUrl());
 			e.printStackTrace();
 		}
-		if (driver.getTitle().contains("Recurring Payments Request Submitted")) {
+		if (ConfirmationNumber.isDisplayed()) {
 			System.out.println("Navigated to Recurring Payments Request Submitted page");
 			return new UpdateConfirmationPage(driver);
 		} else {
@@ -93,6 +101,26 @@ public class UpdateReviewPage extends UhcDriver {
 			return null;
 		}
 	}
+	
+	public UpdateConfirmationPage CSRselectAgreeAndClickOnContinueforEFT() {
+		validate(EditPaymentInformation);
+		System.out.println("User is on Payment Method Update Page");
+		PaymentsDataVerificationOnUpdateReviewPage();
+		System.out.println("Going to scroll down");
+		JavascriptExecutor jse = (JavascriptExecutor) driver;
+		jse.executeScript("window.scrollBy(0,650)", "");
+		jsClickNew(AgreeCheckBox);
+		AuthorizeMonthlyPaymentstButton.click();
+		System.out.println("Clicked on Continue button");
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			System.out.println(driver.getCurrentUrl());
+			e.printStackTrace();
+		}
+		return new UpdateConfirmationPage(driver);
+	}
+
 
 	public UpdateConfirmationPage selectAgreeAndClickOnContinueforCC() {
 		validate(ChangeCard);
@@ -140,6 +168,32 @@ public class UpdateReviewPage extends UhcDriver {
 			return new UpdateConfirmationPage(driver);
 		} else {
 			System.out.println("Confirmation Page for Update not displayed for ship");
+			return null;
+		}
+	}
+	
+	
+	public UpdateConfirmationPage selectAgreeAndClickOnContinueforEFTForShipUpdated() {
+		validate(EditPaymentInformation);
+		PaymentsDataVerificationOnUpdateReviewPage();
+		System.out.println("User is on Payment Method Update Page");
+		System.out.println("Going to scroll down");
+		JavascriptExecutor jse = (JavascriptExecutor) driver;
+		jse.executeScript("window.scrollBy(0,650)", "");
+		jsClickNew(AgreeCheckBox);
+		//AuthorizeMonthlyPaymentstButton.click();
+		//System.out.println("Clicked on Continue button");
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			System.out.println(driver.getCurrentUrl());
+			e.printStackTrace();
+		}
+		if (driver.getCurrentUrl().contains("member/payments/recurring/setup-recurring/overview")) {
+			System.out.println("User is on Confirmation Page for Update Recurring for ship");
+			return new UpdateConfirmationPage(driver);
+		} else {
+			System.out.println("Confirmation Page for Update recurring not displayed for ship");
 			return null;
 		}
 	}
@@ -268,4 +322,63 @@ public class UpdateReviewPage extends UhcDriver {
 	}
 
 
+	public PaymentHistoryPage clickCancelOnCancelRecurringPaymentPage() {	
+		checkForIPerceptionModel(driver);
+		CommonUtility.checkPageIsReadyNew(driver);
+		validate(cancelButton);
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		cancelButton.click();
+		CommonUtility.waitForPageLoad(driver, cancelButtonOnModal, 20);
+		System.out.println("Clicking on cancel button of modal  - Update Checking Account EFT form or One Time Payment EFT form");
+		cancelButtonOnModal.click();
+		CommonUtility.checkPageIsReadyNew(driver);
+		try {
+			System.out.println("Waiting for 10 seconds to go back to Payment Overview page");
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		if (driver.getCurrentUrl().contains("payments/overview"))
+				{
+			System.out.println("User is on Payment Overview Page after clicking cancel");
+			return new PaymentHistoryPage(driver);
+				}
+		else {
+			System.out.println("Payment Overview Page was not displayed on clicking cancel");
+			Assert.fail("Payment Overview Page was not displayed on clicking cancel");
+		}
+		return null;
+	}
+	
+
+
+public static void checkForIPerceptionModel(WebDriver driver) {
+	int counter = 0;
+	do {
+		System.out.println("current value of counter: " + counter);
+		List<WebElement> IPerceptionsFrame = driver.findElements(By.id("IPerceptionsEmbed"));
+
+		if (IPerceptionsFrame.isEmpty()) {
+			try {
+				Thread.sleep(1500);
+			} catch (InterruptedException e) {
+				System.out.println(e.getMessage());
+			}
+		} else {
+			driver.switchTo().frame(IPerceptionsFrame.get(0));
+			driver.findElement(By.className("btn-no")).click();
+			driver.switchTo().defaultContent();
+		}
+		counter++;
+	} while (counter < 2);
 }
+
+}
+

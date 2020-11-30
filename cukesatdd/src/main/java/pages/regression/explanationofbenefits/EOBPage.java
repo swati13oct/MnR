@@ -249,7 +249,9 @@ public class EOBPage extends EOBBase{
 	public void validateHeaderSectionContent_DREAMEOB(String planType) {
 		checkModelPopup(driver,2);
 		CommonUtility.waitForPageLoad(driver, eobSubSectionDescription, 5);
-		Assert.assertTrue("PROBLEM - should not encounter 'internal server problem' error message",!eobValidate(internalServerError));
+		//tbd Assert.assertTrue("PROBLEM - should not encounter 'internal server problem' error message",!eobValidate(internalServerError) && !eobValidate(internalServerError2));
+		if (!eobValidate(eobHeader) || !eobValidate(eobSubSectionDescription))
+			Assert.assertTrue("PROBLEM - should not encounter 'internal server problem' error message",!eobValidate(internalServerError) && !eobValidate(internalServerError2));
 		Assert.assertTrue("PROBLEM - unable to locate EOB page header element", eobValidate(eobHeader));
 		Assert.assertTrue("PROBLEM - unable to locate EOB page sub section description element", eobValidate(eobSubSectionDescription));
 
@@ -972,12 +974,12 @@ public class EOBPage extends EOBBase{
 				Assert.assertTrue("PROBLEM - unable to locate the disabled prev page arrow after clicking prev page arrow", eobValidate(prevPageArrow_disabled));
 				break;
 			}
-			testNote.add("\tEOB number "+(i)+" entry eleemnts validation: PASSED");
+			testNote.add("\tEOB number "+(i)+" entry elements validation: PASSED");
 		}
 		return testNote;
 	}
 
-	public void validateEobEntries (String planType, String memberId) {
+	public void validateEobEntries (String planType, String memberId, boolean realEob) {
 		CommonUtility.waitForPageLoad(driver, eobFirst, 5);
 		Assert.assertTrue("PROBLEM - unable to locate first EOB element", eobValidate(eobFirst));
 		scrollElementToCenterScreen(eobFirst);
@@ -997,7 +999,7 @@ public class EOBPage extends EOBBase{
 		System.out.println("TEST - uuid="+getUuid());
 		String targetUuid=getUuid();
 		//note: skip SHIP user for now because test data issue, pdf won't load for SHIP
-		if (MRScenario.environment.contains("stage")) {
+		if (MRScenario.environment.contains("stage") || MRScenario.environment.contains("prod")) {
 
 			try {
 				URL TestURL = new URL(pdfUrl);
@@ -1018,31 +1020,34 @@ public class EOBPage extends EOBBase{
 				System.out.println("TEST - responseMessage="+ urlConnection.getResponseMessage());
 				Assert.assertTrue("PROBLEM - unable to validate the PDF content because pdflink is getting non-200 ("+urlConnection.getResponseCode()+") response code.  "
 						+ "PDF link='"+pdfUrl+"'",
-						responseCode==200);
-				System.out.println("TEST - is able to open pdf url, proceed to validate content");
-				PDDocument document = PDDocument.load(urlConnection.getInputStream());
-				String PDFText = new PDFTextStripper().getText(document);
-				//keepForDebug System.out.println("PDF text : " + PDFText);
+						(responseCode==200 && realEob) || (responseCode!=200 && !realEob));
+				if (responseCode==200) {
+					System.out.println("TEST - is able to open pdf url, proceed to validate content");
+					PDDocument document = PDDocument.load(urlConnection.getInputStream());
+					String PDFText = new PDFTextStripper().getText(document);
+					System.out.println("PDF text : " + PDFText);
 
-				String error="Your Explannation of Benefits is currently unavailable.";
-				Assert.assertTrue("PROBLEM : pdf content is not as expected.  "
-						+ "Do not expect to see '"+error+"'", 
-						!PDFText.contains(error));
+					String error="Your Explannation of Benefits is currently unavailable.";
+					Assert.assertTrue("PROBLEM : pdf content is not as expected.  "
+							+ "Do not expect to see '"+error+"'", 
+							!PDFText.contains(error));
 
-				//note: check to see if EOB contains memebr ID
-				String memberId_portion=memberId;
-				//note: strip the leading 0 
-				//note: regex if want to keep one 0 if all 0: memberId_portion.replaceFirst("^0+(?!$)", "")
-				System.out.println("TEST - Proceed to look for Member ID '"+memberId_portion+"' in the PDF doc");
-				if (memberId.contains("-")) {
-					String[] tmp=memberId.split("-");
-					memberId_portion=tmp[0];
+					//note: check to see if EOB contains memebr ID
+					String memberId_portion=memberId;
+					//note: strip the leading 0 
+					//note: regex if want to keep one 0 if all 0: memberId_portion.replaceFirst("^0+(?!$)", "")
+					System.out.println("TEST - Proceed to look for Member ID '"+memberId_portion+"' in the PDF doc");
+					if (memberId.contains("-")) {
+						String[] tmp=memberId.split("-");
+						memberId_portion=tmp[0];
+					}
+					//memberId_portion=StringUtils.stripStart(memberId_portion,"0");
+					memberId_portion=memberId_portion.replaceFirst("^0+(?!$)", "");
+					System.out.println("TEST - after removing leading 0 - memberId_portion="+memberId_portion);
+					Assert.assertTrue("PROBLEM : pdf content does not contain the expected memebr ID portion '"+memberId_portion+"' of '"+memberId+"' ",
+							PDFText.contains(memberId_portion));
+					
 				}
-				//memberId_portion=StringUtils.stripStart(memberId_portion,"0");
-				memberId_portion=memberId_portion.replaceFirst("^0+(?!$)", "");
-				System.out.println("TEST - after removing leading 0 - memberId_portion="+memberId_portion);
-				Assert.assertTrue("PROBLEM : pdf content does not contain the expected memebr ID portion '"+memberId_portion+"' of '"+memberId+"' ",
-						PDFText.contains(memberId_portion));
 
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -1132,9 +1137,14 @@ public class EOBPage extends EOBBase{
 		if (eobCount>=10) { //note: only validate the first 10 eobs on the 1st page if more than 10 eobs
 			max=10;
 		}
-		if (eobCount>2 && (MRScenario.environment.equalsIgnoreCase("offline") || MRScenario.environment.equalsIgnoreCase("prod"))) { 
+		boolean sanityRun=false;
+		for (String s: MRScenario.getTagList()) {
+			if (s.contains("sanity"))
+				sanityRun=true;
+		}
+		if (eobCount>2 && (MRScenario.environment.equalsIgnoreCase("offline") || MRScenario.environment.equalsIgnoreCase("prod") || sanityRun)) { 
 			System.out.println("TEST - limit the amount of EOB detail validation to speed up the run on offline/online-prod");
-			max=2; //note: only validate the first 2 eobs on offline-prod and online-prod env to speed up the test run duration
+			max=2; //note: only validate the first 2 eobs on offline-prod and online-prod env or sanity run to speed up the test run duration
 		}
 		System.out.println("will validate "+max+" number of EOBs in detail");
 		for (int i = 1; i <= max; i++) {
@@ -1164,7 +1174,7 @@ public class EOBPage extends EOBBase{
 				String pdfUrl = driver.getCurrentUrl();
 				System.out.println(" pdf url: '" + pdfUrl+"'");
 				Assert.assertTrue("PROBLEM - actual URL doesn't contain '.pdf'.  Actual URL='"+pdfUrl+"'", pdfUrl.contains(".pdf"));
-				if (MRScenario.environment.contains("stage")) {
+				if (MRScenario.environment.contains("stage") || MRScenario.environment.contains("prod")) {
 					String result=validatePdfContent_dream(pdfUrl, targetUuid, memberId);
 					testNote.add("\tEOB number "+(i)+" PDF content validation result: "+result);
 				}
@@ -1200,7 +1210,7 @@ public class EOBPage extends EOBBase{
 
 
 	public int getNumEobAfterSearch(){
-		sleepBySec(5); //note: wait for page to settle before storing the count just in case
+		sleepBySec(3); //note: wait for page to settle before storing the count just in case
 		Assert.assertTrue("PROBLEM - unable to locate EOB count element", eobValidate(eobCount));
 		int eobCountInt = Integer.parseInt(eobCount.getText());
 		//System.out.println("EOB Count is: "+eobCount.getText());
@@ -1213,7 +1223,7 @@ public class EOBPage extends EOBBase{
 	}
 	
 	public int getNumEobAfterSearch_dream(){
-		sleepBySec(5); //note: wait for page to settle before storing the count just in case
+		sleepBySec(3); //note: wait for page to settle before storing the count just in case
 		Assert.assertTrue("PROBLEM - unable to locate EOB count element", eobValidate(eobCount));
 		int eobCountInt = Integer.parseInt(eobCount.getText());
 		System.out.println("EOB Count is: "+eobCount.getText());

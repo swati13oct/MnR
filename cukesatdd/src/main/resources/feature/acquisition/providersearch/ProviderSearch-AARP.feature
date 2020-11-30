@@ -21,7 +21,7 @@ Feature: 1.07 .ACQ- Provider Search Flow in AARP
       | zipcode | isMultutiCounty | county          | plantype | planname                             |
       |   10001 | NO              | New York County | MAPD     | AARP Medicare Advantage Plan 2 (HMO) |
 
-  @ProviderSearchFromGlobalHeaderUlayer @AcqRegressionProviderSearchUlayer @prodRegression
+  @ProviderSearchFromGlobalHeaderUlayer @prodRegression
   Scenario Outline: Verify Provider Search  in AARP site from Global Header
     Given the user is on AARP medicare acquisition site landing page
     When the user clicks on Provider Search on the global header
@@ -33,7 +33,7 @@ Feature: 1.07 .ACQ- Provider Search Flow in AARP
 
     Examples: 
       | zipcode | planname                             | year     |
-      |   10001 | AARP Medicare Advantage Plan 2 (HMO) | nextYear |
+      |   10001 | AARP Medicare Advantage Plan 2 (HMO) | current |
 
   @ProviderSearchFromGlobalHeaderUlayer1 
   Scenario Outline: Verify Provider Search plan count in AARP site from Global Header -plan count-<plancount>
@@ -42,16 +42,17 @@ Feature: 1.07 .ACQ- Provider Search Flow in AARP
     When the user enters the zipcode and counts the plan Ulayer
       | Zip Code  | <zipcode>   |
       | Plancount | <plancount> |
+      | Year      | <year>     |
 
-    @AcqRegressionProviderSearchUlayer
+    #@AcqRegressionProviderSearchUlayer
     Examples: 
-      | zipcode | plancount |
-      |   10001 |        12 |
+      | zipcode | plancount | year|
+      |   10001 |        12 |current|
       
     Examples: 
-      | zipcode | plancount |
-      |   55344 |         7 |
-      |   04011 |         6 |
+      | zipcode | plancount |year|
+      |   55344 |         7 |current|
+      |   04011 |         6 |current|
 
   @ProviderSearchFromWidgetUlayer 
   Scenario Outline: Verify Provider Search plan count in AARP site from Home Page 
@@ -60,16 +61,17 @@ Feature: 1.07 .ACQ- Provider Search Flow in AARP
     When the user enters the zipcode and counts the plan Ulayer
       | Zip Code  | <zipcode>   |
       | Plancount | <plancount> |
+      | Year      | <year>     |
 
-	@AcqRegressionProviderSearchUlayer
+	#@AcqRegressionProviderSearchUlayer
     Examples: 
-      | zipcode | plancount |
-      |   10001 |        12 |
+      | zipcode | plancount | year|
+      |   10001 |        12 |current|
       
     Examples: 
-      | zipcode | plancount |
-      |   55344 |         7 |
-      |   04011 |         6 |
+      | zipcode | plancount | year|
+      |   55344 |         7 |current|
+      |   04011 |         6 |current|
 
   @ProviderSearchFromVppPlanSummaryPageUlayer @prodRegression
   Scenario Outline: Verify Provider Search  in AARP site from plan summary page
@@ -93,7 +95,7 @@ Feature: 1.07 .ACQ- Provider Search Flow in AARP
       | zipcode | isMultutiCounty | county          | plantype | planname                             |planyear|
       |   10001 | NO              | New York County | MAPD     | AARP Medicare Advantage Plan 2 (HMO) |current|
 
-  @ProviderSearchFromVppPlanDetailsPageUlayer @AcqRegressionProviderSearchUlayer @prodRegression
+  @ProviderSearchFromVppPlanDetailsPageUlayer @prodRegression
   Scenario Outline: Verify Provider Search  in AARP site from Plan Details page
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site
@@ -114,7 +116,7 @@ Feature: 1.07 .ACQ- Provider Search Flow in AARP
       | zipcode | isMultutiCounty | county          | plantype | planName                                |planyear|
       |   10001 | NO              | New York County | MA       | AARP Medicare Advantage Essential (HMO) |current|
 
-  @ProviderSearchFromHomePageUlayer @AcqRegressionProviderSearchUlayer @ProviderSearchFromHomePageNextYrUlayerSmoke @prodRegression
+  @ProviderSearchFromHomePageUlayer @ProviderSearchFromHomePageNextYrUlayerSmoke @prodRegression
   Scenario Outline: Verify Provider Search  in AARP site from Home Page
     Given the user is on AARP medicare acquisition site landing page
     When the user clicks on Provider Search on the Home Page

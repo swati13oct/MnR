@@ -281,6 +281,23 @@ public class VppStepDefinitionUHC {
 		
 		plansummaryPage.handlePlanYearSelectionPopup(planYear);
 	}
+	
+	@And("^the user selects future plan year for the UHC site$")
+	public void user_selects_future_plan_year_UHC_Sites(DataTable givenAttributes) {
+		List<DataTableRow> givenAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < givenAttributesRow.size(); i++) {
+
+			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+					givenAttributesRow.get(i).getCells().get(1));
+		}
+
+		String planYear = givenAttributesMap.get("Plan Year");
+		
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		plansummaryPage.handlePlanYearFutureSelectionPopup(planYear);
+	}
 
 	@Then("^the user validates the Enroll Now Button present for the plan type$")
 	public void Enroll_now_button_validation(DataTable givenAttributes) {
@@ -1133,6 +1150,7 @@ public class VppStepDefinitionUHC {
 		switch (planType) {
 		case "MAPD":
 			plansummaryPage.viewPlanSummary(planType);
+			plansummaryPage.handlePlanYearSelectionPopup();
 			plansummaryPage.savePlans(savePlanNames, planType);
 			break;
 		case "MA":
@@ -1141,6 +1159,7 @@ public class VppStepDefinitionUHC {
 			break;
 		case "SNP":
 			plansummaryPage.viewPlanSummary(planType);
+			plansummaryPage.handlePlanYearSelectionPopup();
 			plansummaryPage.savePlans(savePlanNames, planType);
 			break;
 		case "PDP":
@@ -2898,8 +2917,8 @@ public class VppStepDefinitionUHC {
 			Assert.fail("Error Loading on visitor Profile page");
 		}
 	}
-	@Then("^the user enter the searchValue in the search text box and hits enter on UHC Site$")
-	public void the_user_enter_the_searchValue_in_the_search_text_box_and_hits_enter(DataTable inputvalue) throws Throwable {
+	@Then("^the user enter the searchValue in the search text box and hits enter on UHC site$")
+	public void the_user_enter_the_searchValue_in_the_search_text_box_and_hits_enter_on_UHC_site(DataTable inputvalue) throws Throwable {
 	/*	VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);*/
 
@@ -3005,6 +3024,23 @@ public void the_user_validates_pagination_and_results_displayed(DataTable inputv
 	Thread.sleep(3000);
 	aquisitionhomepage.validateErrorMsg(error,newSearchValue);
 }
+
+
+@Then("^the user clicks on the united health care medicare solutions link on UHC site$")
+public void the_user_clicks_on_the_united_health_care_medicare_solutions_link_on_UHC_site() throws Throwable {
+	AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+			.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+	aquisitionhomepage.clickUnitedHealthcareMedicareSolutions();
+    
+}
+
+@Then("^ther user validates the \"([^\"]*)\" on UHC site$")
+public void ther_user_validates_the_on_UHC_site(String url) throws Throwable {
+	AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+			.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+	aquisitionhomepage.validateUrl(url);
+}
+
 
 	@Then("^user saves all plans as favorite on UHC site$")
 	public void user_saves_all_plans_as_favorite_on_AARP_site(DataTable givenAttributes) {
@@ -3286,4 +3322,37 @@ public void the_user_validates_pagination_and_results_displayed(DataTable inputv
 					}
 			vppPlanDetailsPage.validateDentalPopupDefaults(planName,optionalRiderFlag);
 		}
-} 
+	
+		@When("^the user performs plan search using Standalone information in the UHC site$")
+	public void Standalone_Shop_details_in_aarp_site(DataTable givenAttributes) throws InterruptedException {
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		String zipcode = memberAttributesMap.get("Zip Code");
+		String county = memberAttributesMap.get("County Name");
+		String isMultiCounty = memberAttributesMap.get("Is Multi County");
+		getLoginScenario().saveBean(VPPCommonConstants.ZIPCODE, zipcode);
+		getLoginScenario().saveBean(VPPCommonConstants.COUNTY, county);
+		getLoginScenario().saveBean(VPPCommonConstants.IS_MULTICOUNTY, isMultiCounty);
+
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		VPPPlanSummaryPage plansummaryPage = null;
+		if (("NO").equalsIgnoreCase(isMultiCounty.trim())) {
+			plansummaryPage = aquisitionhomepage.searchPlansWithOutCountyShop(zipcode);
+		} else {
+			plansummaryPage = aquisitionhomepage.searchPlansShop(zipcode, county);
+		}
+		
+		if (plansummaryPage != null) {
+			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
+
+		} else {
+			Assert.fail("Error Loading VPP plan summary page");
+		}
+	}
+}
+

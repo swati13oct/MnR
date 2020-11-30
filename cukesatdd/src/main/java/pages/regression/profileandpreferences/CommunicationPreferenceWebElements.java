@@ -143,19 +143,19 @@ public class CommunicationPreferenceWebElements extends UhcDriver {
 	@FindBy(xpath="//span[@class='edit-remove-underline']")
 	protected WebElement emailEditButtonOnIframe;
 
-	@FindBy(id="primaryEmail_0")
+	@FindBy(id="primaryEmail")
 	protected WebElement newEmailTextfield;
 
 	@FindBy(id="updatedisable")
 	protected WebElement saveButtonOnEmailUpdatePopup;
 
-	@FindBy(id="cancelUpdateEmailBtn_P")
+	@FindBy(id="cancelUpdateEmailBtn")
 	protected WebElement cancelButtonOnEmailUpdatePopup;
 
 	@FindBy(xpath="//div[2]/div[2]/p")
 	protected WebElement updatedEmailAfterSave;
 
-	@FindBy(xpath="//div[@id='mail-preferences-selector-SHIP']//div[contains(@class,'prefs-confirm')]//span[contains(text(),'Thank you for updating your delivery preferences')]")
+	@FindBy(xpath="//div[contains(@class,'prefs-confirm')]//span[contains(text(),'Thank you for updating your delivery preferences')]")
 	protected WebElement shipSuccMsg;
 
 	@FindBy(id="claims_1")
@@ -187,6 +187,9 @@ public class CommunicationPreferenceWebElements extends UhcDriver {
 
 	@FindBy(xpath="//*[@id='profileTabHeader']//div[@class='tabs-desktop']//li//a[contains(.,'Senior Supplement Plan')]") 
 	protected WebElement comboTab_SSUP;
+	
+	@FindBy(xpath="//a[@class='accordion-toggle']/span//div//p[contains(text(),'plan or benefits')]")
+	protected WebElement paperlessSettingsAccordian;
 
 	public CommunicationPreferenceWebElements(WebDriver driver) {
 		super(driver);

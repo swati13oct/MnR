@@ -16,9 +16,13 @@ import pages.acquisition.dceredesign.BuildYourDrugList;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
+import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 import pages.acquisition.ulayer.PageTitleConstants;
-import pages.acquisition.ulayer.VPPPlanSummaryPage;
+import pages.acquisition.commonpages.AcquisitionHomePage;
+import pages.acquisition.commonpages.PrescriptionsProvidersBenefitsPage;
+import pages.acquisition.commonpages.VPPPlanSummaryPage;
+import pages.acquisition.commonpages.VisitorProfilePage;
 
 public class GetStartedPage extends UhcDriver {
 
@@ -33,6 +37,15 @@ public class GetStartedPage extends UhcDriver {
 	
 	@FindBy(xpath = "//a[contains(@class, 'uhc-link-button')]//*[contains(text(), 'Return to')]")
 	public WebElement LinktoExitScenario;
+	
+	@FindBy(xpath = "//*[contains(@id,'get-started')]")
+	public WebElement getStartedTab;
+	
+	@FindBy(id = "dupIconFlyOut")
+	private WebElement shoppingCartIcon;
+	
+	@FindBy(css="a#visitor-profile-header")
+    private WebElement lnkProfile;
 
 	public GetStartedPage(WebDriver driver) {
 		super(driver);
@@ -43,12 +56,17 @@ public class GetStartedPage extends UhcDriver {
 
 	@Override
 	public void openAndValidate() {
-		validateNew(AddMyDrugsBtn);
+		if (MRScenario.environment.equals("offline") || MRScenario.environment.equals("prod"))
+			checkModelPopup(driver,45);
+		else 
+			checkModelPopup(driver,10);
+		validateNew(getStartedTab);
 	}
 
 	public BuildYourDrugList clickAddsDrugs() {
-		validateNew(AddMyDrugsBtn);
-		AddMyDrugsBtn.click();
+		if(validate(AddMyDrugsBtn))
+//			AddMyDrugsBtn.click();
+			jsClickNew(AddMyDrugsBtn);
 		CommonUtility.waitForPageLoad(driver, BuildDrugPage_EnterDrugNameTxt, 30);
 		if (validateNew(BuildDrugPage_EnterDrugNameTxt)) {
 			Assert.assertTrue("Naviagted to Build Drug List Page", true);
@@ -58,22 +76,16 @@ public class GetStartedPage extends UhcDriver {
 		return null;
 	}
 
-	public void clickAddDrugsBtn() {
-		validateNew(AddMyDrugsBtn);
-		AddMyDrugsBtn.click();
-		//return new ZipCodePlanYearCapturePage(driver);
-		/*
-		 * CommonUtility.waitForPageLoad(driver, BuildDrugPage_verificationTxt, 30); if
-		 * (validateNew(BuildDrugPage_verificationTxt)) {
-		 * Assert.assertTrue("Naviagted to Build Drug List Page", true); return new
-		 * ZipCodePlanYearCapturePage(driver); }
-		 * Assert.fail("Did not Navigate to Build Drug List Page"); return null;
-		 */
-	}
 
 	public VPPPlanSummaryPage ClickReturnToBtnToVPPSummary() {
 		validateNew(LinktoExitScenario);
 		jsClickNew(LinktoExitScenario);
+		CommonUtility.checkPageIsReadyNew(driver);
+		
+//		while(validate(overlayFilm, 10)) {/**wait*/}
+//		CommonUtility.waitForElementToDisappear(driver, overlayFilm, 75);
+		waitForPageLoadSafari();
+		
 		if (driver.getCurrentUrl().contains("plan-summary")) {
 			return new VPPPlanSummaryPage(driver);	
 		}
@@ -86,7 +98,29 @@ public class GetStartedPage extends UhcDriver {
 		if (driver.getCurrentUrl().contains("plan-summary")) {
 			return new pages.acquisition.bluelayer.VPPPlanSummaryPage(driver);	
 		}
-		return null;	}
+		return null;	
+	}
+	
+	public VisitorProfilePage clickOnShoppingCart() {
+		jsClickNew(shoppingCartIcon);
+		jsClickNew(lnkProfile);
+		threadsleep(2000);
+		if (driver.getCurrentUrl().contains("profile")) {
+			return new VisitorProfilePage(driver);
+		} else {
+			System.out.println("Navigation to visitor profile is failed");
+			return null;
+		}
+	}
+	
+	public PrescriptionsProvidersBenefitsPage clickReturnToAcqHomePAge() {
+		validateNew(LinktoExitScenario);
+		jsClickNew(LinktoExitScenario);
 		
-
+		if (driver.getCurrentUrl().contains("medicare-education")) {
+			return new PrescriptionsProvidersBenefitsPage(driver);	
+		}
+		return null;	
+		
+	}
 }

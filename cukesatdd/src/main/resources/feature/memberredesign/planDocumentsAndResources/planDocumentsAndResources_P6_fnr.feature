@@ -2,7 +2,7 @@
 Feature: 1.06.6 Member Plans and Documents - section: Forms And Resources
 
   Background: If run on stage then feature security flag needs to be true
-     Given feature security flag must set to true when testing on stage env
+     Given feature security flag must set to true when testing on test env
       | Feature           | UCPPlanDocuments |
 
   #------------------------------------------
@@ -105,4 +105,9 @@ Feature: 1.06.6 Member Plans and Documents - section: Forms And Resources
 	Examples: 
       | index  | TID         | planType | memberType            | fnr_sd | fnr_pdmo | fnr_ppi | fnr_rf | fnr_af | fnr_maf | fnr_or | fnr_di |
       | 19-120 | 15119,15304 | SHIP     | MULTI_IND_EFF_PDnR    | true   | false    | false   | false  | false  | false   | false  | false  |
+
+	@active_ship
+	Examples: 
+      | index  | TID         | planType | memberType            | fnr_sd | fnr_pdmo | fnr_ppi | fnr_rf | fnr_af | fnr_maf | fnr_or | fnr_di |
+      | 20-121 | 15119,15304 | SHIP     | IND_PREEFF_PDnR       | true   | false    | false   | false  | false  | false   | false  | false  |
     

@@ -1,5 +1,10 @@
 Feature: 1.15 Member pre-effective functionality
 
+ Background: Feature security flag needs to be true before ATDD script execution
+     Given First check if feature security flag is set to true
+      | Feature | UCPUserManagement |
+###############################Regression Scenarios Begin Here ########################################
+
   @regressionMember
   Scenario Outline: -planType: <planType> - Member Type: - <memberType> - Verify that correct links and messages are displayed on Dashboard and Secondary Page.
     Given login with following details logins in the member portal and validate elements
@@ -15,8 +20,8 @@ Feature: 1.15 Member pre-effective functionality
     #And verify that correct preeffective message is displayed on coverage and benefits page
     #And verify that correct phone number is displayed in technical support section of coverage and benefits page
     #  | Technical TFN | <technicalTFN> |
-    #And verify that claim support header with phone number in Need Help is not displayed to SHIP Pre-effective members on coverage and benefits page
-    #  | Member Type | <memberType> |
+    And verify that claim support header with phone number in Need Help is not displayed to SHIP Pre-effective members on coverage and benefits page
+      | Member Type | <memberType> |
     And user click on the plan documents button
     And user is navigated to Forms and Resource page
     And verify that payment tab is displayed to Preeffective member from secondary pages
@@ -78,7 +83,7 @@ Feature: 1.15 Member pre-effective functionality
 
     Examples: 
       | planType | memberType               | copayCategory | technicalTFN   | segmentId | username | password | member     | planstartdate | technicalTFNSHIP |
-      | IndPDP   | preeffectivePDPSHIPCOMBO | NON LIS       | 1-888-980-8125 |       000 | jkuma14  | Brock@03 | Shephard09 | 06/01/2020    | 1-866-254-3132   |
+      | IndPDP   | preeffectivePDPSHIPCOMBO | NON LIS       | 1-888-980-8125 |       000 | jkuma14  | Brock@04 | Shephard09 | 06/01/2020    | 1-866-254-3132   |
 
   @regressionMember
   Scenario Outline: -planType: <planType> - Member Type - <memberType> - Verify that correct links and messages are displayed on Dashboard and Secondary Page.
@@ -111,7 +116,7 @@ Feature: 1.15 Member pre-effective functionality
       
     Examples: 
       | planType     | memberType                    | copayCategory | technicalTFN   | segmentId | username | password | member         | planstartdate | 
-      | GroupPDPSSUP | preeffectiveGROUPPDPSSUPCOMBO | NON LIS       | 1-888-980-8125 |       000 | jkuma14  | Brock@03 | tomwindsor1955 | 06/01/2020    | 
+      | GroupPDPSSUP | preeffectiveGROUPPDPSSUPCOMBO | NON LIS       | 1-888-980-8125 |       000 | jkuma14  | Brock@04 | tomwindsor1955 | 06/01/2020    | 
   
   
   @regressionMember2

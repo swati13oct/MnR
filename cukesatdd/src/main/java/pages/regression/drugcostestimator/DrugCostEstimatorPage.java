@@ -151,6 +151,9 @@ public class DrugCostEstimatorPage extends UhcDriver {
 
 	@FindBy(xpath = "//div[@id='pharmacy-results']//span[contains(@class,'pharmacy-name')]")
 	public List<WebElement> pharmacies;
+	
+	@FindBy(xpath = "//li[@id='leftArrowId']/preceding-sibling::li")
+	public WebElement zipcodeSearchresults;
 
 	@FindBy(xpath = "//div[@id='pharmacy-results']/div[1]/ul[1]/li[1]/div/div[2]/a") 
 	public WebElement select_btn_first; 
@@ -525,8 +528,9 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	public void navigateToStep2() throws InterruptedException {
 
 		Thread.sleep(5000);
-		checkModelPopup(driver,1);
+		CommonUtility.checkPageIsReady(driver);
 		CommonUtility.waitForPageLoad(driver, step2Pharmacy, 20);
+		checkModelPopup(driver,1);
 		step2Pharmacy.click();
 
 		CommonUtility.waitForPageLoad(driver, pharmacy_form, 20);
@@ -640,8 +644,8 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	public void deleteDrugsByDosage(String dosage) throws InterruptedException {
 		Thread.sleep(15000);
 
-		//String deleteDrugXpath = "//div[@id='drugs-tab']//p[contains (text(), '" + dosage+ "')]/following-sibling::ul//li/a[@class='delete-drug']";
-		String deleteDrugXpath = "//*[@id='drugcontainer_0']/div/section/ul/li[2]/a";
+		String deleteDrugXpath = "//div[@id='drugs-tab']//p[contains (text(), '" + dosage+ "')]/../following-sibling::ul//li/a[@class='delete-drug']";
+		//String deleteDrugXpath = "//*[@id='drugcontainer_0']/div/section/ul/li[2]/a";
 		WebElement deletedrug = driver.findElement(By.xpath(deleteDrugXpath));
 		deletedrug.click();
 		CommonUtility.waitForPageLoad(driver, delDrgConfirm, 10);
@@ -733,11 +737,18 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	/** 
 	 * Select radius in miles drop down
 	 */
-	public void selectRadius() {
+	public void selectRadius(String radius) {
 
-		//Select options = new Select(milesSelection);
+	   // Select options = new Select(milesSelection);
 		//options.selectByIndex(index);
 		// options.getAllSelectedOptions();
+
+		if (dceValidate(milesSelection)) {
+			Assert.assertTrue(true);
+		} else Assert.assertTrue("milesSelection is not present", false);
+		
+		Select options = new Select(milesSelection);
+		options.selectByVisibleText(radius);
 	}
 
 	/* 
@@ -849,6 +860,8 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	 */
 	public void validatePharmacylist() {
 		//Assert.assertEquals(3, pharmacies.size());
+		Assert.assertTrue(pharmacies.size()>0);
+		System.out.println("Number of pharmacies search results value is : "  + zipcodeSearchresults.getText());
 	}
 
 	/** 
@@ -1015,7 +1028,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		System.out.println("--------first_pharmacy_select_btn.click----------------"+ first_pharmacy_select_btn.getText());
 		//first_pharmacy_select_btn.click();
 		jsClickNew(first_pharmacy_select_btn);
-		CommonUtility.waitForPageLoad(driver, overlay_disappeared, 10);
+		CommonUtility.waitForPageLoad(driver, overlay_disappeared, 30);
 		Assert.assertTrue("expected Pharmacy is not selected", pharmacy_selected.getText().contains(temp_pharm));
 	}
 
@@ -1127,7 +1140,8 @@ public class DrugCostEstimatorPage extends UhcDriver {
 			CommonUtility.waitForPageLoad(driver, delDrgConfirm, 10);
 			delDrgConfirm.click();
 			System.out.println("Clicked delDrgConfirm");
-			Assert.assertTrue("PROBLEM - delDrgConfirm button should disappear after clicking", !validate(delDrgConfirm,5));
+			Thread.sleep(1000);
+			Assert.assertTrue("PROBLEM - delDrgConfirm button should disappear after clicking", !validate(delDrgConfirm));
 			CommonUtility.waitForPageLoad(driver, overlay_disappeared, 10);
 		}
 	}
@@ -1680,7 +1694,12 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		addDrugDetails.continueAddDrugDetailsBranded();
 
 		SavingsOppurtunity savings_oppurtunity = new SavingsOppurtunity(driver);
-		savings_oppurtunity.savedrugbutton();
+		try {
+			CommonUtility.waitForPageLoad(driver, savings_oppurtunity.savedrugbutton, 20);
+			savings_oppurtunity.savedrugbutton.click();
+		}catch(Exception e) {
+			System.out.println("Save button is not displayed");
+		}
 	}
 
 	/** 

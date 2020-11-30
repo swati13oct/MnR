@@ -5,6 +5,8 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -17,8 +19,10 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import acceptancetests.acquisition.dceredesign.DCERedesignCommonConstants;
 import acceptancetests.acquisition.ole.oleCommonConstants;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.OLE_PageConstants;
@@ -30,6 +34,7 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import gherkin.formatter.model.DataTableRow;
+import pages.acquisition.dceredesign.DrugDetailsPage;
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.pharmacyLocator.PharmacySearchPage;
 import pages.acquisition.tfn.CampaignTFNPage;
@@ -68,7 +73,7 @@ public class VppStepDefinitionUpdatedAARP {
 	public void the_user_on_aarp_medicaresolutions_Site() {
 		WebDriver wd = getLoginScenario().getWebDriverNew();
 		AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd);
-
+		aquisitionhomepage.validateSubtitle();
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, aquisitionhomepage);
 	}
@@ -216,6 +221,7 @@ public class VppStepDefinitionUpdatedAARP {
 		}
 
 		String plantype = givenAttributesMap.get("Plan Type");
+		//String planYear = givenAttributesMap.get("Plan Year");
 		System.out.println("Select PlanType to view Plans for entered Zip" + plantype);
 		getLoginScenario().saveBean(VPPCommonConstants.PLAN_TYPE, plantype);
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
@@ -225,7 +231,6 @@ public class VppStepDefinitionUpdatedAARP {
 		if(!plantype.equalsIgnoreCase("MS"))
 			plansummaryPage.handlePlanYearSelectionPopup();
 	}
-
 
 	/**
 	 * @toDo:user views the plans of the below plan type and select current year for AEP
@@ -288,6 +293,24 @@ public class VppStepDefinitionUpdatedAARP {
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		plansummaryPage.handlePlanYearSelectionPopup(planYear);
+		//plansummaryPage.handlePlanYearFutureSelectionPopup(planYear);
+	}
+	
+	@And("^the user selects future plan year for the AARP site$")
+	public void user_selects_future_plan_year(DataTable givenAttributes) {
+		List<DataTableRow> givenAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < givenAttributesRow.size(); i++) {
+
+			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+					givenAttributesRow.get(i).getCells().get(1));
+		}
+
+		String planYear = givenAttributesMap.get("Plan Year");
+		
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		plansummaryPage.handlePlanYearFutureSelectionPopup(planYear);
 	}
 
 	/**
@@ -907,7 +930,7 @@ public class VppStepDefinitionUpdatedAARP {
 
 
 
-		String OLE_Campaign_URL = "https://stage-aarpmedicareplans.uhc.com/health-plans.html?gclid=EAIaIQobChMI3PKJmZKJ3QIVBqZpCh2ROgj7EAAYAiAAEgKDjPD_BwE&mrcid=ps%253Agoogle%253Aportfolio+ma+ma%257CCofund%257CBrand%253AUHC%253A07.26.18%253A8004731&zipcode=63043&WT.mc_id=8004731#/plan-summary <>";
+		String OLE_Campaign_URL = "https://stage-aarpmedicareplans.uhc.com/health-plans.html?gclid=EAIaIQobChMI3PKJmZKJ3QIVBqZpCh2ROgj7EAAYAiAAEgKDjPD_BwE&mrcid=ps%253Agoogle%253Aportfolio+ma+ma%257CCofund%257CBrand%253AUHC%253A07.26.18%253A8004731&zipcode=63043&WT.mc_id=8004731#/plan-summary";
 
 
 		WebDriver wd = getLoginScenario().getWebDriverNew();
@@ -975,6 +998,48 @@ public class VppStepDefinitionUpdatedAARP {
 			Assert.fail("Error in Loading the Plan Details Page");
 
 	}
+	
+	//steps added for NBA
+	
+	@And("^user Verify and click perform on Next Best Action Modal for Get Started$")
+	public void user_Verify_Next_Best_Action_Modal_for_MAPD_plan_and_click_on_Get_Started() {
+		VPPPlanSummaryPage vppplansummarypage = (VPPPlanSummaryPage) loginScenario
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		vppplansummarypage.validateButton("Get Started");
+		vppplansummarypage.clickOnButtonInPlanSummaryPage("Get Started");
+	}
+	
+	@And("^user verify NBA modal to add providers on the VPP summary page in AARP site$")
+	public void user_verify_and_click_on_the_NBA_modal_to_add_providers_on_the_VPP_summary_page_in_AARP_site() {
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		plansummaryPage.verifyNextBestActionModalForProviderSearch();
+	}
+	
+	@When("^user clicks on Find My Doctor button in AARP Site$")
+	public void user_clicks_on_Find_My_Doctor_button_in_aarp_Site() throws Throwable {
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		ProviderSearchPage providerSearchPage = (ProviderSearchPage)plansummaryPage.clickNextBestActionModalFindMyDoctorsBtn();
+		if (providerSearchPage != null) {
+			getLoginScenario().saveBean(PageConstants.PROVIDER_SEARCH_PAGE, providerSearchPage);
+		}
+	}
+	
+	@Then("^user should be redirected to Provider search Rally page in AARP site$")
+	public void user_should_be_redirected_to_Provider_search_Rally_page() throws Throwable {
+		ProviderSearchPage providerSearchPage = (ProviderSearchPage) getLoginScenario()
+				.getBean(PageConstants.PROVIDER_SEARCH_PAGE);
+		providerSearchPage.verifyProviderSearchRallyPageDisplayed();
+	}
+	
+	@Then("^user should be able to see the NBA modal to Enroll Plan on the VPP summary page in AARP site$")
+	public void user_should_be_able_to_see_the_NBA_modal_to_Enroll_Plan_on_the_VPP_summary_page_in_UMS_site() {
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		plansummaryPage.verifyNextBestActionModalForEnrollPlan();
+	}
+
 
 	@Then("^the user Click on Look up your Provider button$")
 	public void user_Clicks_on_Look_upyourProvider_button_on_PlanDetailsPage() {
@@ -1187,6 +1252,7 @@ public class VppStepDefinitionUpdatedAARP {
 			break;
 		case "SNP":
 			plansummaryPage.viewPlanSummary(planType);
+			plansummaryPage.handlePlanYearSelectionPopup();
 			plansummaryPage.savePlans(savePlanNames, planType);
 			break;
 		case "PDP":
@@ -2191,19 +2257,20 @@ public class VppStepDefinitionUpdatedAARP {
 		
 	  }
 	
-	@Then("^the user clicks on back on all plan linnk in Plan Compare page")
-	  public void user_clicks_back_to_all_plan_PlanCompare_AARP() throws InterruptedException{
-		  ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario().getBean(PageConstants.PLAN_COMPARE_PAGE); 
-		  VPPPlanSummaryPage plansummaryPage = planComparePage.navigateBackToAllPlans();
-			if (plansummaryPage != null) {
-					getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
-					Assert.assertTrue(true);
-					plansummaryPage.handlePlanYearSelectionPopup();
-				} 
-			else
-				Assert.fail("Error in navigating back to Plan Summary Page");
-		
-	  }
+		/*
+		 * @Then("^the user clicks on back on all plan linnk in Plan Compare page")
+		 * public void user_clicks_back_to_all_plan_PlanCompare_AARP() throws
+		 * InterruptedException{ ComparePlansPage planComparePage = (ComparePlansPage)
+		 * getLoginScenario().getBean(PageConstants.PLAN_COMPARE_PAGE);
+		 * VPPPlanSummaryPage plansummaryPage =
+		 * planComparePage.navigateBackToAllPlans(); if (plansummaryPage != null) {
+		 * getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE,
+		 * plansummaryPage); Assert.assertTrue(true);
+		 * plansummaryPage.handlePlanYearSelectionPopup(); } else
+		 * Assert.fail("Error in navigating back to Plan Summary Page");
+		 * 
+		 * }
+		 */
 	@When("^verify Call SAM icon is visible or not on Plan Comapare$")
 	public void verify_Call_SAM_icon_is_visible_or_not_PlanCompare() throws InterruptedException {
 		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario().getBean(PageConstants.PLAN_COMPARE_PAGE);
@@ -3723,8 +3790,13 @@ public void the_user_validates_the_secondary_search_by_providing_newsearchvalue_
 	public void the_user_retrieve_application_URL_in_AARPSite(DataTable arg1) throws InterruptedException {
 		Map<String, String> inputAttributesMap=parseInputArguments(arg1);
 		String AARPURL = inputAttributesMap.get("AARP URL");
+		String AARPURLSTG=inputAttributesMap.get("AARP URL STG");
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario().getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		plansummaryPage.RetrieveURL(AARPURL);
+		if(getLoginScenario().environment.equals("stage")){
+			plansummaryPage.RetrieveURL(AARPURLSTG);
+		}else{
+			plansummaryPage.RetrieveURL(AARPURL);
+		}
 
 	}
 	
@@ -3751,4 +3823,142 @@ public void the_user_validates_the_secondary_search_by_providing_newsearchvalue_
 				}
 		vppPlanDetailsPage.validateDentalPopupDefaults(planName,optionalRiderFlag);
 	}
+	@Then("^the user clicks on the united health care medicare solutions link$")
+	public void the_user_clicks_on_the_united_health_care_medicare_solutions_link() throws Throwable {
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		aquisitionhomepage.clickUnitedHealthcareMedicareSolutions();
+	    
+	}
+	
+	@Then("^ther user validates the \"([^\"]*)\"$")
+	public void ther_user_validates_the(String url) throws Throwable {
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		aquisitionhomepage.validateUrl(url);
+		
+	}
+	
+	@Given("^the user is on AARP medicare acquisition site hits Campaign URL$")
+	public void the_user_on_aarpmedicareplans_hits_Campaign_landing_page(DataTable planAttributes) throws Throwable {
+
+		List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows();
+		Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		String County = "St. Louis County";
+		String ZipCode = "63043";
+		String PlanYear = "2020"; 
+		String SiteName =  "AARP_ACQ";
+		String uRLpath=givenAttributesMap.get("Campaign URL");
+		
+		getLoginScenario().saveBean(oleCommonConstants.OLE_ZIPCODE, ZipCode);
+		getLoginScenario().saveBean(oleCommonConstants.OLE_COUNTY, County);
+		getLoginScenario().saveBean(oleCommonConstants.ACQ_SITE_NAME, SiteName);
+		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_YEAR, PlanYear);
+		
+		VPPPlanSummaryPage planSummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		planSummaryPage.navigateToUrl(uRLpath);
+		
+		if (planSummaryPage != null) {
+			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE,
+					planSummaryPage);
+			System.out.println("OLE Campaign Landing Page Displayed");
+			Assert.assertTrue(true);
+		}
+		else
+			Assert.fail("Error in validating the OLE Campaign Landing");
+	}
+	@When("^the user performs plan search using Standalone information in the AARP site$")
+	public void Standalone_zipcode_details_in_aarp_site(DataTable givenAttributes) throws InterruptedException {
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		String zipcode = memberAttributesMap.get("Zip Code");
+		String county = memberAttributesMap.get("County Name");
+		String isMultiCounty = memberAttributesMap.get("Is Multi County");
+		getLoginScenario().saveBean(VPPCommonConstants.ZIPCODE, zipcode);
+		getLoginScenario().saveBean(VPPCommonConstants.COUNTY, county);
+		getLoginScenario().saveBean(VPPCommonConstants.IS_MULTICOUNTY, isMultiCounty);
+
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		VPPPlanSummaryPage plansummaryPage = null;
+		if (("NO").equalsIgnoreCase(isMultiCounty.trim())) {
+			plansummaryPage = aquisitionhomepage.searchPlansWithOutCountyShop(zipcode);
+		} else {
+			plansummaryPage = aquisitionhomepage.searchPlansShop(zipcode, county);
+		}
+		
+		if (plansummaryPage != null) {
+			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
+
+		} else {
+			Assert.fail("Error Loading VPP plan summary page");
+		}
+	}
+	
+	@And("^the user view below plans on vpp page and matches plan count for all plans$")
+	public void the_user_view_below_plans_on_vpp_page_and_matches_plan_count_for_all_plans(DataTable givenAttributes) {
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		
+		System.out.println("Validating Plan Name---------------------------------------------------------------");
+		
+		List<String> planNameListExpected = givenAttributes.asList(String.class);
+		System.out.println("Expected Plan Name---------------------------------------------------------------"+planNameListExpected);
+		List<WebElement> planNameListElement=plansummaryPage.planTypes;
+		
+		List<String> planNameListActual = new ArrayList<String>();
+		for(WebElement planName : planNameListElement ){
+			String text = planName.getText().trim();
+			planNameListActual.add(text);
+		}
+		
+		System.out.println("Actual Plan Name---------------------------------------------------------------"+planNameListActual);
+		
+		
+
+        Collections.sort(planNameListExpected);
+        Collections.sort(planNameListActual);
+		
+        if (planNameListExpected.equals(planNameListActual)) {
+			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
+
+		} else {
+			Assert.fail("Plan name did not match ");
+		}
+
+		System.out.println("Validating Plan Count---------------------------------------------------------------");
+		String planCountExpected = plansummaryPage.titleCount.getText();
+		String [] planArray = planCountExpected.split(" ");
+		planCountExpected = planArray[2];
+		System.out.println("Expected Plan Count---------------------------------------------------------------"+planCountExpected);
+		List<WebElement> planCountElement=plansummaryPage.planCount;
+		
+		int total = 0;
+		
+		for(WebElement planCount : planCountElement ){
+		
+			String text = planCount.getText().trim();
+			total = total+ Integer.parseInt(text);
+		}
+		System.out.println("Actual Plan Count---------------------------------------------------------------"+total);
+		
+	
+		if (planCountExpected.equals(total)) {
+			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
+
+		} else {
+			Assert.fail("Plan count did not match ");
+		}
+
+	
+//
+	
+	
+	}
+
 }

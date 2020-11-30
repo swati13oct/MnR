@@ -70,10 +70,37 @@ public class PaymentsDeeplinkLoginPage extends UhcDriver {
 	}
 	//page from MR constants 	
 			private static String STAGE_DEEPLINK_URL_payments = MRConstants.STAGE_DEEPLINK_URL_payments;
-			
+			private static String STAGE_DEEPLINK_URL_payments_overview = MRConstants.STAGE_DEEPLINK_URL_payments_overview;
+			private static String STAGE_DEEPLINK_URL_payments_overview_new = MRConstants.STAGE_DEEPLINK_URL_payments_overview_new;
 			 /*This method will open payments deep link page */
 			public PaymentsDeeplinkLoginPage navigateToLoginURL(){
 				start(STAGE_DEEPLINK_URL_payments);
+				driver.manage().deleteAllCookies();
+
+				try {
+					Thread.sleep(10000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}		
+				return null;
+				}
+			 /*This method will open payments overview.html deep link page */
+			public PaymentsDeeplinkLoginPage navigateToLoginOverviewURL(){
+				start(STAGE_DEEPLINK_URL_payments_overview);
+				driver.manage().deleteAllCookies();
+
+				try {
+					Thread.sleep(10000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}		
+				return null;
+				}
+			/*This method will open payments overview-new.html deep link page */
+			public PaymentsDeeplinkLoginPage navigateToLoginOverviewNewURL(){
+				start(STAGE_DEEPLINK_URL_payments_overview_new);
 				driver.manage().deleteAllCookies();
 
 				try {
@@ -150,45 +177,24 @@ public class PaymentsDeeplinkLoginPage extends UhcDriver {
 							{
 								System.out.println("Catch block with no significance");
 							}
-							if (driver.getCurrentUrl().contains("bannerpopup.html")) {
-								System.out.println("COVID 19 Banner page has appeared");
-								try {
-									CommonUtility.waitForPageLoad(driver, homePageNotice, 20);
-									if (validate(homePageNotice, 0)) {
-										homePageNotice.click();
-										CommonUtility.checkPageIsReady(driver);
-									} else if (validate(homePageNotice2, 0)) {
-										homePageNotice2.click();
-										CommonUtility.checkPageIsReady(driver);
-									} else if (validate(homePageNotice3, 0)) {
-										homePageNotice3.click();
-										CommonUtility.checkPageIsReady(driver);
-									}
-									
-									Thread.sleep(3000);
-								} catch (Exception e) {
-									// TODO Auto-generated catch block
-									System.out.println("Catch block");
+							try {
+								CommonUtility.checkPageIsReady(driver);
+								if (validate(homePageNotice, 0)) {
+									homePageNotice.click();
+									CommonUtility.checkPageIsReady(driver);
+								} else if (validate(homePageNotice2, 0)) {
+									homePageNotice2.click();
+									CommonUtility.checkPageIsReady(driver);
+								} else if (validate(homePageNotice3, 0)) {
+									homePageNotice3.click();
+									CommonUtility.checkPageIsReady(driver);
+								} else if (validate(homePageNotice4, 0)) {
+									homePageNotice4.click();
+									CommonUtility.checkPageIsReady(driver);
 								}
-							} else {
-								System.out.println("COVID 19 Banner page did not appear");
-								System.out.println(driver.getCurrentUrl());	
-							}
-							if (driver.getCurrentUrl().contains("/no-email.html")) {
-								System.out.println("No email page has appeared");
-								try {
-									CommonUtility.waitForPageLoad(driver, homePageNotice4, 20);
-									if (validate(homePageNotice4, 0)) {
-										homePageNotice4.click();
-										CommonUtility.checkPageIsReady(driver);
-									} 									
-									Thread.sleep(3000);
-								} catch (Exception e) {
-									// TODO Auto-generated catch block
-									System.out.println("Catch block");
-								}
-							} else {
-								System.out.println("NO emmail page did not appear");
+								Thread.sleep(3000);
+							} catch (Exception e) {
+								System.out.println("Error occured while checking home page on banner pages." + e.getMessage());
 							}
 											
 					return;
@@ -237,9 +243,9 @@ public class PaymentsDeeplinkLoginPage extends UhcDriver {
 					System.out.println("*** Page URL ***" + driver.getCurrentUrl());
 					System.out.println("*** Page URL ***" + driver.getTitle());
 					//if (driver.getCurrentUrl().contains("payments/overview.html?deeplink=true")) {
-					if (driver.getCurrentUrl().contains("payments/overview")) {
+					if (driver.getCurrentUrl().contains("payments/overview.html")) {
 						System.out.println("*** Page URL ***" + driver.getCurrentUrl());
-						System.out.println("** User landed on Payments deeplink Page **");
+						System.out.println("** User landed on Payments overview.html deeplink Page **");
 						System.out.println("*** PageTitle ***" + driver.getTitle());
 						Assert.assertTrue(driver.getTitle().contains("Premium Payments"));
 						return true;

@@ -9,7 +9,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import atdd.framework.UhcDriver;
-import pages.acquisition.bluelayer.AcquisitionHomePage;
+import pages.acquisition.commonpages.AcquisitionHomePage;
 
 public class PlanRecommendationEngineCostPreferencesPage extends UhcDriver {
 
@@ -63,10 +63,10 @@ public class PlanRecommendationEngineCostPreferencesPage extends UhcDriver {
 	@FindBy(css = "p.all-fields-marked-wi")
 	private WebElement pageRequiredInfo;
 
-	@FindBy(css = "#custom-radio-group>fieldset>uhc-radio:nth-child(2)>label>span.radio-label-content")
+	@FindBy(css = "#custom-radio-group>fieldset>uhc-radio:nth-child(2)>label>span.radio-container")
 	private WebElement lowerPremium;
 
-	@FindBy(css = "#custom-radio-group>fieldset>uhc-radio:nth-child(3)>label")
+	@FindBy(css = "#custom-radio-group>fieldset>uhc-radio:nth-child(3)>label span.radio-container")
 	private WebElement higherPremium;
 
 	@FindBy(css = "#errorMessage")
@@ -108,28 +108,32 @@ public class PlanRecommendationEngineCostPreferencesPage extends UhcDriver {
 		System.out.println("Cost Preferences option selection in Cost Preferences Page");
 		if (costpreferenceoption.equalsIgnoreCase("Lower")) {
 			validate(lowerPremium);
-			lowerPremium.click();
+			jsClickNew(lowerPremium);
 			System.out.println("Cost Preferences Type " + costpreferenceoption + " Clicked");
 		} else if (costpreferenceoption.equalsIgnoreCase("Higher")) {
 			validate(higherPremium);
-			higherPremium.click();
+			jsClickNew(higherPremium);
 			System.out.println("Cost Preferences Type " + costpreferenceoption + " Clicked");
 		}
 	}
 // Selecting Cost Preference options and processed to Cost Preference Page
 
 	public void costPreferencepageFunctional(String preference) {
-		System.out.println("Cost Preferences Page Functional Operations");
-		costPreferencepageOptions(preference);
-		continueBtn.click();
-		System.out.println("Validating " + page + " page Continue button functionality");	
+		if (!(preference.isEmpty())) {
+			System.out.println("Cost Preferences Page Functional Operations");
+			costPreferencepageOptions(preference);
+			jsClickNew(continueBtn);
+			System.out.println("Validating " + page + " page Continue button functionality");
+		} else {
+			System.out.println("Cost Preferences Page Functional Operations is not needed for PDP");
 		}
+	}
 
 //Cost Preference Page Error Function Verification     
 
 	public void costPreferencepageerror() {
 		System.out.println("Cost Preference type is not selected - Error Scenario in Cost Preference Page");
-		continueBtn.click();
+		jsClickNew(continueBtn);
 		desktopCommonUtils.desktopErrorValidation(page);
 	}
 

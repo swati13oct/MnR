@@ -2,7 +2,7 @@
 Feature: 1.06.6.1 Member Plans and Documents - section: Forms And Resources Part 6a of 7 - Other Resources - Member Auth
 
   #Background: If run on stage then feature security flag needs to be true
-  #   Given feature security flag must set to true when testing on stage env
+  #   Given feature security flag must set to true when testing on test env
   #    | Feature           | UCPPlanDocuments |
 
   #------------------------------------------
@@ -107,8 +107,15 @@ Feature: 1.06.6.1 Member Plans and Documents - section: Forms And Resources Part
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | fnr_sd | fnr_or |
       | 18-113 | 15131,15233 | qavgogine | qavgogine | q2_jun_grp0255  | SSP      | COMBO_GROUP_EFF_PDnR  | true   | true   |
 
-	@memAuth_active_ship_6aof7
-	Examples: 
-      | index  | TID         | username  | password  | MemUserName     | planType | memberType            | fnr_sd | fnr_or |
-      | 19-114 | 15119,15304 | qavgogine | qavgogine | PaidInFullShip0011 | SHIP  | IND_EFF_PDnR          | true   | false  |
-      | 19-120 | 15119,15304 | qavgogine | qavgogine | q3_SEP_2020SHIP_001| SHIP  | MULTI_IND_EFF_PDnR    | true   | false  |
+	#note - covered by P1of7 already
+	#@memAuth_active_ship_6aof7
+	#Examples: 
+    #  | index  | TID         | username  | password  | MemUserName     | planType | memberType            | fnr_sd | fnr_or |
+    #  | 19-114 | 15119,15304 | qavgogine | qavgogine | PaidInFullShip0011 | SHIP  | IND_EFF_PDnR          | true   | false  |
+    #  | 19-120 | 15119,15304 | qavgogine | qavgogine | q3_SEP_2020SHIP_012| SHIP  | MULTI_IND_EFF_PDnR    | true   | false  |
+    
+	#@memAuth_preeffective_ship_6aof7
+	#Examples: 
+    #  | index  | TID         | username  | password  | MemUserName         | planType | memberType            | fnr_sd | fnr_or  |
+    #  | 21-121 | xxxxx       | qavgogine | qavgogine | shipPreeffective707 | SHIP     | IND_PREEFF_PDnR       | true   | false   |
+        

@@ -228,11 +228,16 @@ public class VisitorProfilePage extends UhcDriver {
 		
 		try {
 			if(driver.findElements(By.xpath("//div[@class='title dropdown-open']")).size()>0){
-				List<String> listOfTestPlans = Arrays.asList(plans.split(","));
-				for (String plan: listOfTestPlans) {
-					driver.findElement(By.xpath("//h4[text()='"+plan+"']/preceding::button[1]")).click();
-					Thread.sleep(5000);
-				}
+				if(driver.findElements(By.xpath("//div[@class='title dropdown-open']")).size()==1)
+					driver.findElement(By.xpath("//div[@class='multi-year-select']/button[contains(@class,'js-select-year select-year')][2]/following::button[2]")).click();
+				else {
+					List<String> listOfTestPlans = Arrays.asList(plans.split(","));
+					for (String plan: listOfTestPlans) {
+						driver.findElement(By.xpath("//h4[text()='"+plan+"']/preceding::button[1]")).click();
+						Thread.sleep(5000);
+						}
+					}
+				System.out.println("##############All saved plans deleted##############");
 				}
 				else
 					System.out.println("##############No saved plans available here##############");
@@ -280,8 +285,8 @@ public class VisitorProfilePage extends UhcDriver {
 	public void deleteAllProviders() {
 		if(!(driver.findElements(By.cssSelector("div.no-providers")).size()>0)) {
 			CommonUtility.waitForPageLoadNew(driver, expandProviderBlock, 20);
-			expandProviderBlock.click();
-			driver.findElement(By.xpath("//li[@class='provider']//button")).click();
+			jsClickNew(expandProviderBlock);
+			jsClickNew(driver.findElement(By.xpath("//li[@class='provider']//button")));
 			waitforElementDisapper(By.xpath("//div[contains(@class,'provider--block card')]//button[contains(@class,'provider-title')][contains(@class,'collapsed')]"), 5);
 			Assert.assertTrue(validateNonPresenceOfElement(expandProviderBlock));
 		}else {
@@ -296,11 +301,13 @@ public class VisitorProfilePage extends UhcDriver {
 	 */
 	public void signIn(String username,String password) {
 		try {
-			
-			signIn.click();
+			validate(signIn, 5);
+			jsClickNew(signIn);
+			waitForPageLoadSafari();
 			driver.findElement(By.cssSelector("input#userNameId_input")).sendKeys(username);
 			driver.findElement(By.cssSelector("input#passwdId_input")).sendKeys(password);
-			driver.findElement(By.cssSelector("input#SignIn")).click();
+			jsClickNew(driver.findElement(By.cssSelector("input#SignIn")));
+			waitForPageLoadSafari();
 			String Question = driver.findElement(By.cssSelector("label#challengeQuestionLabelId")).getText().trim();
 			WebElement securityAnswer = driver.findElement(By.cssSelector("div#challengeSecurityAnswerId >input"));
 			if (Question.equalsIgnoreCase("What is your best friend's name?")) {
@@ -315,7 +322,8 @@ public class VisitorProfilePage extends UhcDriver {
 				System.out.println("Question is related to phone");
 				securityAnswer.sendKeys("number1");
 			}
-			driver.findElement(By.cssSelector("input#authQuesSubmitButton")).click();
+			jsClickNew(driver.findElement(By.cssSelector("input#authQuesSubmitButton")));
+			waitForPageLoadSafari();
 			CommonUtility.waitForPageLoadNew(driver, signOut, 15);
 			
 		} catch (Exception e) {
@@ -413,8 +421,9 @@ public class VisitorProfilePage extends UhcDriver {
 	 */
 	public VPPPlanSummaryPage backToPlans() {
 		try {
-			backToPlans.click();
+			jsClickNew(backToPlans);
 			CommonUtility.checkPageIsReadyNew(driver);
+			waitForPageLoadSafari();
 		if (driver.getCurrentUrl().contains("#/plan-summary")) {	
 			return new VPPPlanSummaryPage(driver);
 			}
