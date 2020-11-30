@@ -285,6 +285,7 @@ When the user enters zipcode on health plans page
        
       
         #######################Script 9: External Link Plan 11########################################
+   
    @Scenario_9_External_Link_UAT
   Scenario Outline: <scenario> 1.0 Verify TFN through External Links
     Given the user Starts WebDriver
