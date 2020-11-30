@@ -195,7 +195,7 @@ Feature: Plan Recommendation Engine flow - Verify PRE flows with Edit response f
       | Zipcode | isMultiCounty | county   | isCoverageOpt | specialNeeds | travel  | doctors | DoctorsName | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch | Dental-Hearing-Vision-Fitness | costPreferenceOption | E_doctors | E_DoctorsName |
       |   10001 | NO            | New York | MAPD          | Medicaid     | regular | Lookup  | sue         | NO            | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,1,YES,NO                               | Yes,Yes,Yes,Yes               | Lower                | Lookup    | john          |
 
-  @PRE @planrecommendation @EditResponsePage @MAPDtoMA
+  @PRE @planrecommendation @EditResponsePage
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds> , <travel> , <doctors> , <DoctorsName> , <isMultiDoctor> , <Drug Selection> , <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch> , <pharmacyoption> , <Dental-Hearing-Vision-Fitness> , <costPreferenceOption> - To validate Edit preference functions for MAPD to MA in PRE
     Given the user is on UHC medicare acquisition site landing page
     When user navigate to Plan Recommendation Engine and Checking Breadcrumbs
@@ -229,16 +229,17 @@ Feature: Plan Recommendation Engine flow - Verify PRE flows with Edit response f
     Then user return to vpp page using "update" from edit response page
     Then user validate UI and API recommendation rankings in results page
 
+		@EditResponsePage_MAPDtoMA
     Examples: 
       | Zipcode | isMultiCounty | county     | isCoverageOpt | specialNeeds | travel  | doctors | DoctorsName | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch | Dental-Hearing-Vision-Fitness | costPreferenceOption | E_isCoverageOpt |
       |   33143 | NO            | Miami-Dade | MAPD          | Medicaid     | regular | Lookup  | john        | NO            | Yes            | morphine sulfate,NO,morphine sulfate CAP 10MG ER,,,1,NO,NO           | Yes,Yes,Yes,Yes               | Lower                | MA              |
 
-    @PRE @planrecommendation @EditResponsePage @IDKtoPDP
+    @EditResponsePage_IDKtoPDP
     Examples: 
       | Zipcode | isMultiCounty | county   | isCoverageOpt | specialNeeds | travel  | doctors | DoctorsName | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch | Dental-Hearing-Vision-Fitness | costPreferenceOption | E_isCoverageOpt |
       |   10005 | NO            | New York | None          | Medicaid     | regular | Lookup  | sue         | NO            | Yes            | Lipitor,NO,Lipitor TAB 40MG,,,1,YES,NO                               | Yes,Yes,Yes,Yes               | Lower                | PDP             |
 
-  @PRE @planrecommendation @EditResponsePage @MAtoPDP
+  @PRE @planrecommendation @EditResponsePage
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds> , <travel> , <doctors> , <DoctorsName> , <isMultiDoctor> , <Drug Selection> , <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch> , <pharmacyoption> , <Dental-Hearing-Vision-Fitness> , <costPreferenceOption> - To validate Edit preference functions for MA to PDP in PRE
     Given the user is on UHC medicare acquisition site landing page
     When user navigate to Plan Recommendation Engine and Checking Breadcrumbs
@@ -272,15 +273,16 @@ Feature: Plan Recommendation Engine flow - Verify PRE flows with Edit response f
     Then user return to vpp page using "update" from edit response page
     Then user validate UI and API recommendation rankings in results page
 
+		@EditResponsePage_MAtoPDP
     Examples: 
       | Zipcode | isMultiCounty | county  | isCoverageOpt | specialNeeds | travel  | doctors | DoctorsName       | isMultiDoctor | Dental-Hearing-Vision-Fitness | costPreferenceOption | E_isCoverageOpt | E_Drug Selection | E_DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch |
       |   32115 | NO            | Volusia | MA            | Medicaid     | regular | Lookup  | David B. Auerbach | NO            | Yes,Yes,Yes,Yes               | Lower                | PDP             | Yes              | Lipitor,NO,Lipitor TAB 80MG,,,1,YES,NO                                 |
 
-    @PRE @planrecommendation @EditResponsePage @MAtoIDK
+    @EditResponsePage_MAtoIDK
     Examples: 
       | Zipcode | isMultiCounty | county  | isCoverageOpt | specialNeeds | travel  | doctors | DoctorsName       | isMultiDoctor | Dental-Hearing-Vision-Fitness | costPreferenceOption | E_isCoverageOpt | E_Drug Selection | E_DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch |
       |   32115 | NO            | Volusia | MA            | Medicaid     | regular | Lookup  | David B. Auerbach | NO            | Yes,Yes,Yes,Yes               | Lower                | None            | Yes              | Lipitor,NO,Lipitor TAB 10MG,,,1,YES,NO                                 |
-
+      
   @PRE @planrecommendation @EditResponsePage @PDPtoMAPD
   Scenario Outline: <Zipcode>, <isMultiCounty> ,<county>, <isCoverageOpt> , <Drug Selection> - To validate Edit preference functions for PDP to MAPD in PRE
     Given the user is on UHC medicare acquisition site landing page
