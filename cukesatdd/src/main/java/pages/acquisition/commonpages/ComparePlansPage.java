@@ -261,6 +261,9 @@ public class ComparePlansPage extends UhcDriver {
 	
 	@FindBy(xpath="//button[contains(@class,'button-primary proactive-offer__button main-background-color second-color proactive-offer__close')]")
 	public static WebElement proactiveChatExitBtn;
+	
+	@FindBy(css = "a#visitor-profile-header")
+	private WebElement lnkProfile;
 
 
 	public ComparePlansPage(WebDriver driver) {
@@ -1152,11 +1155,13 @@ public class ComparePlansPage extends UhcDriver {
 	 * @return
 	 */
 	public VisitorProfilePage navigateToVisitorProfilePage() {
-		shoppingCartIcon.click();
-		if(driver.getCurrentUrl().contains("profile")) {
+		jsClickNew(shoppingCartIcon);
+		jsClickNew(lnkProfile);
+		waitForPageLoadSafari();
+		if (driver.getCurrentUrl().contains("profile")) {
 			CommonUtility.checkPageIsReadyNew(driver);
 			return new VisitorProfilePage(driver);
-		}else {
+		} else {
 			System.out.println("Navigation to visitor profile is failed");
 			return null;
 		}
