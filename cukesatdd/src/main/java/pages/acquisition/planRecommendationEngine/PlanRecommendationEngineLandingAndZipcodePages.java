@@ -13,6 +13,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 
+import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 import pages.acquisition.commonpages.AcquisitionHomePage;
 
@@ -143,8 +144,8 @@ public class PlanRecommendationEngineLandingAndZipcodePages extends UhcDriver {
 	
 	public void landingpage() {
 		System.out.println("Validating Title: ");
-		//String preBreadcrumbs = (driver.findElement(By.cssSelector("div.breadcrumb"))).getText();
-		//Assert.assertTrue(preBreadcrumbs.contains("Home / Plan Recommendation Engine"));
+		String preBreadcrumbs = (driver.findElement(By.cssSelector("div.breadcrumb"))).getText();
+		Assert.assertTrue(preBreadcrumbs.contains("Home / Plan Recommendation Engine"));
 		String ExpectedTitle = "plan";
 		validate(landingpageHeader, 30);
 		String ActualTitle = landingpageHeader.getText();
@@ -326,7 +327,8 @@ public void getStartedAndRunzipcodeWithCounty(String zip_code, String County) th
 			if(validate(popupFrame, 5))
 				driver.switchTo().frame(popupFrame);
 			threadsleep(1000);
-			popupNo.click();
+//			popupNo.click();
+			jsClickNew(popupNo);
 			threadsleep(1000);
 			popup_presents = true;
 		}
@@ -334,14 +336,15 @@ public void getStartedAndRunzipcodeWithCounty(String zip_code, String County) th
 		return popup_presents;
 	}
 	
-	public void edit_location(String zipcode,String multi,String county) {
-		waitforElementVisibilityInTime(zipCode, 45);
-		zipCode.clear();
-		sendkeys(zipCode, zipcode);
-		if(multi.equalsIgnoreCase("Yes")) {
-			waitforElementVisibilityInTime(PRECounty, 45);
-			selectFromDropDownByText(driver, PRECounty, county);
-		}
-		threadsleep(3000);
-	}
+ 	public void edit_location(String zipcode,String multi,String county) {
+ 		waitforElementVisibilityInTime(zipCode, 45);
+ 		zipCode.clear();
+ 		sendkeys(zipCode, zipcode);
+ 		if(multi.equalsIgnoreCase("Yes")) {
+ 			waitforElementVisibilityInTime(PRECounty, 45);
+ 			selectFromDropDownByText(driver, PRECounty, county);
+ 		}
+ 		threadsleep(3000);
+ 	}
+	
 }

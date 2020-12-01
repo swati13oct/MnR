@@ -43,7 +43,8 @@ public class ACQDrugCostEstimatorPage extends UhcDriver {
 
 	// DCE Page Elements
 
-	@FindBy(css = "#adddrugfooter")
+//	@FindBy(css = "#adddrugfooter")
+	@FindBy(css = "#addDrug")
 	private WebElement drugAddBtn;
 
 	@FindBy(css = "input#drugsearch")
@@ -164,7 +165,7 @@ public class ACQDrugCostEstimatorPage extends UhcDriver {
 				if (drugDetails[7].toUpperCase().equals("YES"))
 					switchGeneric = true;
 				threadsleep(2000);
-				drugAddBtn.click();
+				jsClickNew(drugAddBtn);
 				threadsleep(2000);
 				addDrugbySearchDCE(drugName, searchButtonClick, dosage, packageName, count, threeeMonthfrequency,
 						GenericDrug, switchGeneric);
@@ -174,13 +175,14 @@ public class ACQDrugCostEstimatorPage extends UhcDriver {
 
     public void choosePharmacyandBacktoPlans() {
     	validate(drugpageButtons.get(0));
-		drugpageButtons.get(0).click();
+		jsClickNew(drugpageButtons.get(0));
 		pageloadcomplete();
 		threadsleep(2000);
 		validate(backtoPlansButton.get(0));
-		backtoPlansButton.get(0).click();
+		jsClickNew(backtoPlansButton.get(0));
 		pageloadcomplete();
 		threadsleep(2000);
+		waitForPageLoadSafari();
 }
 	
 	
@@ -192,20 +194,20 @@ public class ACQDrugCostEstimatorPage extends UhcDriver {
 			drugsearchBox.clear();
 			drugsearchBox.sendKeys(drugName);
 			if (searchButtonClick) {
-			drugsearchButton.click();
+			jsClickNew(drugsearchButton);
 			//Select modal
 			validate(searchList.get(0), 30);
 			threadsleep(2000);
 			for(WebElement elm:searchList) {
 				if(elm.findElement(By.cssSelector("span")).getText().trim().equalsIgnoreCase(drugName)) {
-					elm.findElement(By.cssSelector("button")).click();
+					jsClickNew(elm.findElement(By.cssSelector("button")));
 					break;
 				}
 			}
 			threadsleep(2000);
 		} else {
 			threadsleep(10000);
-			drugsAutoList.get(0).click();
+			jsClickNew(drugsAutoList.get(0));
 		}
 
 			validate(modalDosageSelect, 30);
@@ -229,7 +231,7 @@ public class ACQDrugCostEstimatorPage extends UhcDriver {
 			dosage = dos.getFirstSelectedOption().getText().trim().split(" ")[1] + " "
 					+ dos.getFirstSelectedOption().getText().trim().split(" ")[2];
 			threadsleep(2000);
-			addDrugButton.click();
+			jsClickNew(addDrugButton);
 			// Not Covered switch generic as it is not DD scope in DCE page
 		} catch (Exception e) {
 			System.out.println("Unable to add drug");

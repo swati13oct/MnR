@@ -1,6 +1,7 @@
 package pages.acquisition.ulayer;
 
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -239,7 +240,7 @@ public ComparePlansPage providerfromMedicalGroup() throws Exception {
 		 * 
 		 * }
 		 */
-		
+		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);		//Added since below findelements throws timeout exception if element not found
 		if(driver.findElements(By.xpath("(//button[contains(text(),'Check Provider Coverage')])[1]")).size() > 0){
 			System.out.println("OLD Rally page displayed");
 			//ParentWindow = driver.getTitle();
@@ -362,7 +363,6 @@ public ComparePlansPage providerfromMedicalGroup() throws Exception {
 			FinishButton.click();
 		}else
 			System.out.println("Issue with Xpath");
-		checkIfPageReadySafari();
 		driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
 		if (currentUrl().contains("/health-plans.html#/plan-compare"))
 			return new ComparePlansPage(driver);
@@ -418,7 +418,6 @@ public ComparePlansPage providerfromMedicalGroup() throws Exception {
 		}else
 			System.out.println("Issue with Xpath");
 	
-		checkIfPageReadySafari();
 		driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
 		if (currentUrl().contains("/health-plans.html#/plan-compare"))
 			return new ComparePlansPage(driver);

@@ -269,7 +269,7 @@ public class PlanRecommendationEngineCommonutility extends UhcDriver {
 		System.out.println("Clicking continue from page : "+page);
 		threadsleep(1000);
 		validate(continueBtn);
-		continueBtn.click();
+		jsClickNew(continueBtn);
 		System.out.println("Validating " + page + " page Continue button functionality");
 		if(percentageValidation)
 			nextPageValidation(page.toUpperCase());
@@ -301,7 +301,8 @@ public class PlanRecommendationEngineCommonutility extends UhcDriver {
 		if(browser.equals("chrome") || browser.equals("IE") || browser.equals("edge")) 
 			actions.clickAndHold(element).build().perform();
 		else {
-			actions.moveToElement(element).click().build().perform();
+//			actions.moveToElement(element).click().build().perform();
+			jsMouseOver(element);		//E2E: Actions class does not work in Safari, hence using javascript to perform the action.
 			}
 	}
 }

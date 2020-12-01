@@ -732,8 +732,28 @@ public static final String STAGE_PAYMENT_DEEPLINK_lOGIN_PAGE= "paymentdeeplinklo
 	public static final String DCE_Redesign_DrugSummary="dcedrugsummary";
 
 	public static final String AARP_HAWL="aarpHAWL";
-	public static final String STAGE_Pharmacy_DEEPLINK_lOGIN_PAGE="pharmacydeeplinklogin";
+public static final String STAGE_Pharmacy_DEEPLINK_lOGIN_PAGE="pharmacydeeplinklogin";
 	public static final String STAGE_VirtualVisit_DEEPLINK_lOGIN_PAGE="virtualVisitdeeplinklogin";
 
 	public static final String PLANDOCS_PAGE = "plandocs";
-}
+	
+	public static final String EMAIL_AND_PRINT_UTIL = "emailandprintutil";
+
+	public static final String SHOP_PAGE = "shopPage";
+	
+	public static final String STAGE_MyDocuments_Edelivery_DEEPLINK_lOGIN_PAGE="myDocumentsEdeliverydeeplinklogin";
+
+	public static final String PHARMACY_NAME = "pharmacyName";
+	public static final String Offline_PROD_VirtualVisit_DEEPLINK_lOGIN_PAGE="offlinePRODvirtualVisitdeeplinklogin";
+	public static final String Offline_PROD_HWP_DEEPLINK_lOGIN_PAGE="offlinePRODHWPdeeplinklogin";
+
+
+	public static final String PRESCRIPTION_PROVIDER_BENEFITS_PAGE="prescriptionProviderBenefitsPage";
+
+	public static final String COST_BASICS_PAGE="costBasicsPage";
+	
+	public static final String COVERAGE_CHOICE_PAGE="coverageChoicePage";public static final String One_Time_Guest_Payments_Page="oneTimeGuestPaymentsPage";
+public static final String GUEST_PAYMENTS_HOME_PAGE = "guestPaymentsHomePage";
+	public static final String Review_OneTime_Guest_Payments_Page = "reviewOneTimeGuestPaymentsPage";
+
+	public static final String Confirm_OneTime_Guest_Payments_Page = "confirmOneTimeGuestPaymentsPage";}

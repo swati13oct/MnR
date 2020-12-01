@@ -92,8 +92,11 @@ public class PrimaryCarePhysicianPage extends UhcDriver{
 	private WebElement ProviderName;
 	
 	//PCP Page - PCP information display
-	@FindBy(xpath = "//*[@id = 'pcpFullName']//preceding-sibling::*[contains(@class, 'provider-info__data')]")
+	@FindBy(xpath = "//*[@id = 'pcpFullName']//preceding-sibling::*[contains(@class, 'provider-info__data')][1]")
 	private WebElement ProviderNameDisplay_PCPpage;
+	
+	@FindBy(xpath = "//*[@id = 'pcpNumber']//preceding-sibling::*[contains(@class, 'provider-info__data')][1]")
+	private WebElement ProviderNumberDisplay_PCPpage;
 
 	@FindBy(xpath = "//*[contains(text(), 'Are you now seeing or have you recently seen this doctor?')]")
 	private WebElement CurrentPCP_Question;
@@ -149,7 +152,7 @@ public class PrimaryCarePhysicianPage extends UhcDriver{
 	
 	@FindBy(id = "hsptlPhno")
 	private WebElement Hospital_Ph;
-	
+		
 	@FindBy(id = "hsptlCity")
 	private WebElement Hospital_City;
 	
@@ -236,7 +239,7 @@ public class PrimaryCarePhysicianPage extends UhcDriver{
 				//if(!planType.contains("SNP")){
 					if(validate(SelectPCPLink)){
 						System.out.println("PCP selection is Displayed in Rally Page : Selecting PCP");
-						SelectPCPLink.click();
+						jsClickNew(SelectPCPLink);
 						try {
 							Thread.sleep(2000);
 						} catch (InterruptedException e1) {
@@ -365,24 +368,7 @@ public class PrimaryCarePhysicianPage extends UhcDriver{
 		}
 	}
 	//
-	public ArrayList<String> pcpinforetreive(String plantype){
-	
-		WebElement PCPSearchLink = driver.findElement(By.xpath("//button[@class='view-more-btn-pcp']"));
-		String mPCPinfo=PCPSearchLink.getText();
-		System.out.println(mPCPinfo);
-		PCPSearchLink.click();
-        ArrayList<String> PCPproviderNames = new ArrayList<String>();
-		List<WebElement> pcpproviders = driver.findElements(By.xpath("//*[contains(@class,'ole-provider-list')]//ul[@class='ul-pcp-list']//div[@class='provider-desc']//p[2]"));
-		for(WebElement element:pcpproviders)
-		{
-			String provider = element.getText();
-			PCPproviderNames.add(provider.trim());
-		}
-			
-		return PCPproviderNames;
-	}
-	
-	public PrimaryCarePhysicianPage navigate_PCPPage() {
+		public PrimaryCarePhysicianPage navigate_PCPPage() {
 		boolean flag;
 		WebElement PCPSearchLink = driver.findElement(By.xpath("(//*[@class='inputradio'])[1]"));
 		PCPSearchLink.click();
@@ -410,6 +396,36 @@ public class PrimaryCarePhysicianPage extends UhcDriver{
 		jsClickNew(NextBtn);
 		
 		return null;
-			
 	}	
+		
+		public ArrayList<String> getPCPInfo(){
+			ArrayList<String> pcp = new ArrayList<String>();
+			
+			String pcp_name=ProviderNameDisplay_PCPpage.getText().replaceAll("-", "").trim();
+			String pcp_number=ProviderNumberDisplay_PCPpage.getText().trim();
+			CurrentPCP_Question_Yes.click();
+			String pcp_question_text = "Yes";
+			pcp.add(pcp_name);
+			pcp.add(pcp_number);
+			pcp.add(pcp_question_text);
+			return pcp;
+		}
+		
+		public ArrayList<String> pcpinforetreive(String plantype){
+			
+			//WebElement PCPSearchLink = driver.findElement(By.xpath("//button[@class='view-more-btn-pcp']"));
+			WebElement PCPSearchLink = driver.findElement(By.xpath("//button[@class='view-more-btn-pcp']"));
+			String mPCPinfo=PCPSearchLink.getText();
+			System.out.println(mPCPinfo);
+			PCPSearchLink.click();
+	        ArrayList<String> PCPproviderNames = new ArrayList<String>();
+			List<WebElement> pcpproviders = driver.findElements(By.xpath("//*[contains(@class,'ole-provider-list')]//ul[@class='ul-pcp-list']//div[@class='provider-desc']//p[2]"));
+			for(WebElement element:pcpproviders)
+			{
+				String provider = element.getText();
+				PCPproviderNames.add(provider.trim());
+			}
+				
+			return PCPproviderNames;
+		}
 }

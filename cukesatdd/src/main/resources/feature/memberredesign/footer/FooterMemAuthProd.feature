@@ -30,7 +30,7 @@ Feature: 1.05.1 Member Footer validation - Member Auth - PROD
 
     Examples:
       | TID   | username | password | MemUserName          | planType | memberType        |
-      | 15347 | ujethwa | 221Umang | skho@roadrunner.com  | MAPD     | IndMAPDUHC_footer |
+      | 15347 | ujethwa | Member22 | skho@roadrunner.com  | MAPD     | IndMAPDUHC_footer |
 
   @prod_footer01
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify footer section is in place
@@ -68,9 +68,9 @@ Feature: 1.05.1 Member Footer validation - Member Auth - PROD
 
     Examples:
       | TID   | username | password | MemUserName          | planType | memberType        |
-      | 15347 | ujethwa | 221Umang | skho@roadrunner.com  | MAPD     | IndMAPDUHC_footer |
-      | 15347 | ujethwa | 221Umang | ALREALESTATE@AOL.COM | MEDICA   | Ind_footer        |
-      | 15347 | ujethwa | 221Umang | BATLLOT@AOL.COM      | PCP      | Ind_footer        |
+      | 15347 | ujethwa | Member22 | skho@roadrunner.com  | MAPD     | IndMAPDUHC_footer |
+      | 15347 | ujethwa | Member22 | ALREALESTATE@AOL.COM | MEDICA   | Ind_footer        |
+      | 15347 | ujethwa | Member22 | BATLLOT@AOL.COM      | PCP      | Ind_footer        |
 
   @prod_footer02 @footer_prodSanity_SHIP
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify footer section is in place for SHIP member
@@ -107,7 +107,7 @@ Feature: 1.05.1 Member Footer validation - Member Auth - PROD
 
     Examples:
       | TID   | username | password | MemUserName | planType | memberType |
-      | 15347 | ujethwa | 221Umang | rldf1942 | SHIP     | IND_footer |
+      | 15347 | ujethwa | Member22 | rldf1942 | SHIP     | IND_footer |
 
   @prod_footer03
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify Need Help section is in place
@@ -146,9 +146,9 @@ Feature: 1.05.1 Member Footer validation - Member Auth - PROD
 
     Examples:
       | TID   | username | password | MemUserName          | planType | memberType        |
-      | 15347 | ujethwa | 221Umang | skho@roadrunner.com  | MAPD     | IndMAPDUHC_footer |
-      | 15347 | ujethwa | 221Umang | ALREALESTATE@AOL.COM | MEDICA   | Ind_footer        |
-      | 15347 | ujethwa | 221Umang | BATLLOT@AOL.COM      | PCP      | Ind_footer        |
+      | 15347 | ujethwa | Member22 | skho@roadrunner.com  | MAPD     | IndMAPDUHC_footer |
+      | 15347 | ujethwa | Member22 | ALREALESTATE@AOL.COM | MEDICA   | Ind_footer        |
+      | 15347 | ujethwa | Member22 | BATLLOT@AOL.COM      | PCP      | Ind_footer        |
 
   @prod_footer04
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify Need Help section is in place for SHIP member
@@ -184,6 +184,6 @@ Feature: 1.05.1 Member Footer validation - Member Auth - PROD
 
     Examples:
       | TID   | username | password | MemUserName      | planType | memberType            |
-      #| 15347 | ujethwa | 221Umang | rldf1942      | SHIP     | IND_footer            |
+      #| 15347 | ujethwa | Member22 | rldf1942      | SHIP     | IND_footer            |
       #note: combo user with SHIP priority
-      #| xxxxx | ujethwa | 221Umang | LUISGARCIA2054  | MA       | SHIP_FED_COMBO_footer |
+      #| xxxxx | ujethwa | Member22 | LUISGARCIA2054  | MA       | SHIP_FED_COMBO_footer |

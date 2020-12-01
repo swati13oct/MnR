@@ -2,7 +2,7 @@
 Feature: 1.04.1.1 To Test NON-DREAM EOB for Members - E2E - Member Auth
 
   #Background: If run on stage then feature security flag needs to be true
-  #   Given feature security flag must set to true when testing on stage env
+  #   Given feature security flag must set to true when testing on test env
   #    | Feature           | UCPEob |
 
 
@@ -83,7 +83,7 @@ Feature: 1.04.1.1 To Test NON-DREAM EOB for Members - E2E - Member Auth
     @memAuth_SHIP_EOBs @memAuth_SHIP_EOBs4_shipComboShipMapd
     Examples: 
       | index | username  | password  | MemUserName             | planType                 | memberType               | eobType | realEob | flagZeroEob |
-      | 13    | qavgogine | qavgogine | q3_sept_UAT4_AARP_011   | SHIP_MEDICARE SUPPLEMENT | COMBO_SHIP_MAPD_NICE_DEOB| Medical | false   | true        | 
+      | 13    | qavgogine | qavgogine | GENARO_Q4_COMBO         | SHIP_MEDICARE SUPPLEMENT | COMBO_SHIP_MAPD_NICE_DEOB| Medical | false   | true        | 
 
     @memAuth_SHIP_EOBs @memAuth_SHIP_EOBs5_shipComboShipPdp
     Examples: 
@@ -110,8 +110,8 @@ Feature: 1.04.1.1 To Test NON-DREAM EOB for Members - E2E - Member Auth
 
     @memAuth_PHIP_EOBs
     Examples: 
-      | index | username  | password  | MemUserName     | TID   | planType | memberType |
-      | 15    | qavgogine | qavgogine | PHIP01          | 15174 | PHIP     | SHIP_EOB   |
+      | index | username  | password  | MemUserName        | TID   | planType | memberType |
+      | 15    | qavgogine | qavgogine | q3_SEP_2020SHIP_037| 15174 | PHIP     | SHIP_EOB   |
 
 
   #note: pending coverage until SSUP individual user is available

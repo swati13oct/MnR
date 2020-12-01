@@ -29,7 +29,7 @@ import pages.regression.contactus.ContactUsPage;
 import pages.regression.footer.FooterPage;
 import pages.regression.profileandpreferences.ProfileandPreferencesPage;
 import pages.member_deprecated.ulayer.SetupAutoPaymentPage;
-import pages.memberrdesignVBF.TestHarness;
+import pages.regression.testharness.*;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
@@ -2235,7 +2235,9 @@ public class PaymentHistoryPage extends UhcDriver {
 		checkForIPerceptionModel(driver);
 	       // clicking on contact us 
 		Thread.sleep(2000);
+		TestHarness.checkForIPerceptionModel(driver);
 			waitforElement(contactus);
+			TestHarness.checkForIPerceptionModel(driver);
 			contactus.click();			
 			System.out.println(driver.getTitle());
 			System.out.println(driver.getCurrentUrl());			

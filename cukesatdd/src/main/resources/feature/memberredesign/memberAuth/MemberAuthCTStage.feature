@@ -1,5 +1,10 @@
 Feature: S1.1 To test Member Auth Sign for SSO Micro App.
 
+ Background: Feature security flag needs to be true before ATDD script execution
+     Given First check if feature security flag is set to true
+      | Feature | UCPSSOMemberAuth |
+###############################Regression Scenarios Begin Here ########################################
+
   @regressionMember
   Scenario Outline: Scenario: <Scenario> - Test Case_To test single signon using member auth - Search with Username
     Given the user is on member auth login flow page

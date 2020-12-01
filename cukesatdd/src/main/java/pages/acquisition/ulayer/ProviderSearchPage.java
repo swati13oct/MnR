@@ -4,6 +4,7 @@
 package pages.acquisition.ulayer;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -160,7 +161,8 @@ public class ProviderSearchPage extends UhcDriver {
 
 	@Override
 	public void openAndValidate() {
-		CommonUtility.waitForPageLoadNew(driver, continueButton, 45);
+//		CommonUtility.waitForPageLoadNew(driver, continueButton, 45);
+		validateNew(continueButton, 45);
 	}
 
 	public VPPPlanSummaryPage selectsProvider(String physicianSearchCriteria, String physicianName) {
@@ -239,6 +241,8 @@ public class ProviderSearchPage extends UhcDriver {
 		 * 
 		 * }
 		 */
+		//note: setting the implicit wait to 0 as it fails because of TimeoutException while finding List<WebElement>
+		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
 		if(driver.findElements(By.xpath("(//button[contains(text(),'Check Provider Coverage')])[1]")).size() > 0){
 			System.out.println("OLD Rally page displayed");
 			Checkcoverage.click();
@@ -249,8 +253,11 @@ public class ProviderSearchPage extends UhcDriver {
 		}else
 			System.out.println("Issue with Xpath");
 	
+		//note: setting the implicit wait back to default value - 10
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS); 
+		
 		threadsleep(3);
-		waitForCountDecrement(2);
+//		waitForCountDecrement(2);
 		driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
 
 		return new VPPPlanSummaryPage(driver);
@@ -280,11 +287,14 @@ public class ProviderSearchPage extends UhcDriver {
 		MRConstants.PROV_NAME=providerSaved;
 		
 		if(driver.findElements(By.xpath("//*[@data-test-id='button-view-saved-provider']")).size() > 0)
-			ViewsaveOldbtn.click();
+//			ViewsaveOldbtn.click();
+			jsClickNew(ViewsaveOldbtn);
 		else if(driver.findElements(By.xpath("//button[@data-test-id='button-close']")).size() > 0){
-			Viewsavebtn.click();
+//			Viewsavebtn.click();
+			jsClickNew(Viewsavebtn);
 		if(driver.findElements(By.xpath("//span[text()='Update This Provider']")).size() > 0){
-			ViewSavedProvidersLink.click();
+//			ViewSavedProvidersLink.click();
+			jsClickNew(ViewSavedProvidersLink);
 		}
 		else
 			System.out.println("New Rally page not displayed");
@@ -421,6 +431,8 @@ public class ProviderSearchPage extends UhcDriver {
 		 * 
 		 * }
 		 */
+		
+		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);		//Added because below findelements throws timeout exception if element not found
 		if(driver.findElements(By.xpath("(//button[contains(text(),'Check Provider Coverage')])[1]")).size() > 0){
 			System.out.println("OLD Rally page displayed");
 			Checkcoverage.click();
@@ -430,6 +442,8 @@ public class ProviderSearchPage extends UhcDriver {
 			FinishButton.click();
 		}else
 			System.out.println("Issue with Xpath");
+		//note: setting the implicit wait back to default value - 10
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS); 
 		
 		driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
 

@@ -12,7 +12,7 @@ import cucumber.api.CucumberOptions;
 jsonReport = "target/cucumber-RunMRATDDRegressionPnpPreeff_Dev.json",detailedReport = true, detailedAggregatedReport = true,
 overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionPnpPreeff_Dev")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberredesign" }, 
-features = { "src/main/resources/feature/memberredesign/pharmaciesandprescriptions" }, plugin = {
+features = { "src/main/resources/feature/memberredesign/pharmaciesandprescriptions/PharmaciesAndPrescriptionsPreEff.feature" }, plugin = {
 		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionPnpPreeff_Dev.json" }, tags = { "@devRegression" })
 public class RunMRATDDRegressionPnpPreeff_Dev {
 

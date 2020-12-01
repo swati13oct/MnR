@@ -110,7 +110,7 @@ public class PlanRecommendationEngineCoverageOptionPage extends UhcDriver {
 	public void coverageOptionpageFunctional(String planType) {
 		System.out.println("Functional Operations");
 		chooseCoverageOption(planType);
-		continueBtn.click();
+		jsClickNew(continueBtn);
 		System.out.println("Validating " + page + " page Continue button functionality");
 //		desktopCommonUtils.nextPageValidation(page.toUpperCase());
 	}

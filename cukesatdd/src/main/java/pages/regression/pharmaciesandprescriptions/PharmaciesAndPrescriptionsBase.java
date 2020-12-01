@@ -271,7 +271,7 @@ public class PharmaciesAndPrescriptionsBase extends PharmaciesAndPrescriptionsWe
 			lookForPlanCategory=planType;
 
 		String consumerDetails=getConsumerDetailsFromlocalStorage();
-		System.out.println("TEST - consumerDetails="+consumerDetails);
+		//keepForDebug System.out.println("TEST - consumerDetails="+consumerDetails);
 		//note: if first / last name, no need to go into planProfiles - infoType: firstName | lastName 
 		//note: LIS and segmentID needs to get within planProfiles - infoType: segmentId | planCategoryId 
 		Assert.assertTrue("PROBLEM - code only support locating the following info "
@@ -404,9 +404,30 @@ public class PharmaciesAndPrescriptionsBase extends PharmaciesAndPrescriptionsWe
 		driver.switchTo().window(afterClicked_tabs.get(afterClicked_numTabs-1));
 		CommonUtility.checkPageIsReady(driver);
 		CommonUtility.waitForPageLoad(driver, expElement, 10);
-		checkModelPopup(driver,5);
-		String currentUrl=driver.getCurrentUrl();
-		Assert.assertTrue("PROLEM: destination URL is not as expected for '"+targetItem+"'.  Expect to contain ='"+expUrl+"' | Actual='"+currentUrl+"'", currentUrl.contains(expUrl));
+		checkModelPopup(driver,1);
+		/* tbd 
+		if (targetItem.contains("ESTIMATE DRUG COSTS")) {
+			//note: vaidate the href element
+			//note: from testharness if clicked then likely land the myuhc.ocm sign-in page
+			//note: from dashboard if clicked then likely sorry error page then dce page
+			if (MRScenario.isTestHarness.equalsIgnoreCase("yes")) {
+				expUrl="https://www.myuhc.com/member/prelogoutLayout.do?reason=timeout&currentLanguageFromPreCheck=en";
+			}
+			if (validate(rallyDceSorryPgHeading,0)) {
+				checkModelPopup(driver,1);
+				rallyDceSorryPgBtnClose.click();
+				CommonUtility.checkPageIsReady(driver);
+				CommonUtility.waitForPageLoad(driver, rallyDcePgHeading, 5);
+				checkModelPopup(driver,1);
+			}
+			String currentUrl=driver.getCurrentUrl();
+			Assert.assertTrue("PROLEM: destination URL is not as expected for '"+targetItem+"'.  Expect to contain ='"+expUrl+"' | Actual='"+currentUrl+"'", currentUrl.contains(expUrl));
+
+		} else {
+		*/
+			String currentUrl=driver.getCurrentUrl();
+			Assert.assertTrue("PROLEM: destination URL is not as expected for '"+targetItem+"'.  Expect to contain ='"+expUrl+"' | Actual='"+currentUrl+"'", currentUrl.contains(expUrl));
+		//tbd }
 
 		if (noWaitValidate(acqPopupExit)) {
 			acqPopupExit.click();

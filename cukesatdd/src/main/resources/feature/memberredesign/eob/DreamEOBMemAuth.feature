@@ -2,7 +2,7 @@
 Feature: 1.04.2.1 To Test DREAM EOB for Members - E2E - Member Auth
 
   #Background: If run on stage then feature security flag needs to be true
-  #   Given feature security flag must set to true when testing on stage env
+  #   Given feature security flag must set to true when testing on test env
   #    | Feature           | UCPEob |
 
 
@@ -110,7 +110,7 @@ Feature: 1.04.2.1 To Test DREAM EOB for Members - E2E - Member Auth
     @memAuth_dreamEob01h_mapdComboShipFed
     Examples: 
       | index | username  | password  | MemUserName             | planType | memberType        | note                              | flagZeroEob |
-      | 08    | qavgogine | qavgogine | q3_sept_UAT4_AARP_011   | MAPD     | COMBO_SHIP_MAPD_NICE_DEOB | NA                        | false       | 
+      | 08    | qavgogine | qavgogine | GENARO_Q4_COMBO         | MAPD     | COMBO_SHIP_MAPD_NICE_DEOB | NA                        | false       | 
 
     @memAuth_dreamEob01i_pdpComboPdpSsp
     Examples: 

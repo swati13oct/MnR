@@ -162,10 +162,10 @@ public class PlanRecommendationEngineSpecialNeedsPage extends UhcDriver {
 				specialNeedspageFunctional(option);
 				specialNeedsOptionsMoreInfo(option);
 			}
-			continueBtn.click();
+			jsClickNew(continueBtn);
 		} else {
 			if (options.isEmpty()) {
-				continueBtn.click();
+				jsClickNew(continueBtn);
 				validate(errorMessage, 30);
 				Assert.assertTrue(errorMessage.getText().contains("No"));
 			} else if (options.contains("None")) {
@@ -173,7 +173,7 @@ public class PlanRecommendationEngineSpecialNeedsPage extends UhcDriver {
 				for (String option : snpoptions) {
 					specialNeedspageFunctional(option);
 				}
-				continueBtn.click();
+				jsClickNew(continueBtn);
 				validate(errorMessage, 30);
 				Assert.assertTrue(errorMessage.getText().contains("Please"));
 			}
@@ -186,22 +186,21 @@ public class PlanRecommendationEngineSpecialNeedsPage extends UhcDriver {
 		System.out.println("SNP Option " + SNPType + " Selection");
 		if (SNPType.equalsIgnoreCase("Medicaid")) {
 			validate(snpMedicaid);
-			snpMedicaid.click();
+			jsClickNew(snpMedicaid);
 			System.out.println("Plan Type " + SNPType + " Clicked");
 		} else if (SNPType.equalsIgnoreCase("chronic")) {
 			validate(snpConditions);
-			snpConditions.click();
+			jsClickNew(snpConditions);
 			System.out.println("Plan Type " + SNPType + " Clicked");
 		} else if (SNPType.equalsIgnoreCase("nursing")) {
 			validate(snpNursinghome);
-			snpNursinghome.click();
+			jsClickNew(snpNursinghome);
 			System.out.println("Plan Type " + SNPType + " Clicked");
 		} else if (SNPType.equalsIgnoreCase("None")) {
 			validate(snpNone);
-			snpNone.click();
+			jsClickNew(snpNone);
 			System.out.println("Plan Type " + SNPType + " Clicked");
 		}
-
 	}
 
 // Verify the More Information for SNP Options
@@ -213,7 +212,7 @@ public class PlanRecommendationEngineSpecialNeedsPage extends UhcDriver {
 				Assert.assertTrue(snpMedicaidAccordionMoreInfo.getText().contains("More"));
 //					Assert.assertTrue(snpMedicaidAccordionMoreInfo1stPara.getText().contains("D-SNP"));
 //					Assert.assertTrue(snpMedicareAccordionMoreInfo2ndPara.getText().contains("toll free"));
-				snpMedicaidAccordionCarrot.click();
+				jsClickNew(snpMedicaidAccordionCarrot);
 			} else {
 				System.out.println("Accordion is not displayed for  " + SNPType + " .");
 			}
@@ -223,7 +222,7 @@ public class PlanRecommendationEngineSpecialNeedsPage extends UhcDriver {
 				Assert.assertTrue(snpConditionsAccordionMoreInfo.getText().contains("More"));
 //					Assert.assertTrue(snpConditionsAccordionMoreInfo1stPara.getText().contains("C-SNP"));
 //					Assert.assertTrue(snpConditionsAccordionMoreInfo2ndPara.getText().contains("toll free"));
-				snpConditionsAccordionCarrot.click();
+				jsClickNew(snpConditionsAccordionCarrot);
 			} else {
 				System.out.println("Accordion is not displayed for  " + SNPType + " .");
 			}
@@ -233,7 +232,7 @@ public class PlanRecommendationEngineSpecialNeedsPage extends UhcDriver {
 				Assert.assertTrue(snpNursinghomeAccordionMoreInfo.getText().contains("More"));
 //					Assert.assertTrue(snpNursinghomeAccordionMoreInfo1stPara.getText().contains("I-SNP"));
 //					Assert.assertTrue(snpNursinghomeAccordionMoreInfo2ndPara.getText().contains("toll free"));
-				snpNursinghomeAccordionCarrot.click();
+				jsClickNew(snpNursinghomeAccordionCarrot);
 			} else {
 				System.out.println("Accordion is not displayed for  " + SNPType + " .");
 			}
