@@ -119,7 +119,7 @@ public class PlanRecommendationEngineSpecialNeedsPage extends UhcDriver {
 	@FindBy(css = "uhc-checkbox-group>fieldset>div:nth-child(4)>uhc-accordion>div .accordion-content>span>p:nth-child(2)")
 	private WebElement snpNursinghomeAccordionMoreInfo2ndPara;
 
-	@FindBy(css = "#errorMessage>span:nth-child(2)")
+	@FindBy(css = "#errorMessage>p")
 	private WebElement errorMessage;
 
 	@FindBy(css = "uhc-checkbox.checkbox-checked")
