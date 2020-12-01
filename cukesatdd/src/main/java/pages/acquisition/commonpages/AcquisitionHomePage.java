@@ -437,6 +437,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath="//a[contains(@href,'https://www.myuhcagent.com/')]")
 	private WebElement RightRail_FindAnAgent; 
 	
+	@FindBy(xpath="//a[contains(@href,'/shop/connect.html')]")
+	private WebElement RequestMoreInformationLink;
+	
 	@FindBy(xpath="(//a[contains(@href,'https://www.myuhcagent.com/')])[1]")
 	private WebElement RightRail_FindAnAgentMedsupp;
 
@@ -446,7 +449,18 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	
 	@FindBy(xpath = "//*[contains(@id, 'piFirstName')]")
 	private WebElement registerFirstName;
+	
+	@FindBy(id = "redirect_content")
+	private WebElement leaveAARPMedicarePlansDialog;
+	
+	@FindBy(id = "proceed")
+	private WebElement proceedLeaveAARPMedicare;
 
+	@FindBy(id = "cancel")
+	private WebElement cancelLeaveAARPMedicare;
+	
+	@FindBy(xpath="//a[contains(text(),'Learn More')]")
+	private WebElement learnAboutMedicareHomeScreen;
 
    	String ChatSamText= "Chat with a Licensed Insurance Agent";
 
@@ -1186,7 +1200,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	public DisclaimersAARPPage disclaimersFooterClick() {
 		validate(footerDisclaimersLink);
 		jsClickNew(footerDisclaimersLink);
-		sleepBySec(2);
+		sleepBySec(3);
 		CommonUtility.checkPageIsReadyNew(driver);
 		if (driver.getCurrentUrl().contains("disclaimer")) {
 			return new DisclaimersAARPPage(driver);
@@ -2279,7 +2293,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	     	
 	     	//driver.findElement(By.xpath("//*[@id='globalContentIdForSkipLink']/div/table/tbody/tr[2]/td/div[1]/div/div/div[3]/div/div/div/div[2]/div/div/div/div/div/div/div/a")).click();
 			jsClickNew(driver.findElement(By.xpath("//*[@id='globalContentIdForSkipLink']/div/table/tbody/tr[2]/td/div[1]/div/div/div[3]/div/div/div/div[2]/div/div/div/div/div/div/div/a")));
-	     	    	
+	     	waitForPageLoadSafari();
 	     		return new PlanDocsPage(driver);
 		 }
 
@@ -2645,6 +2659,41 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		}
 
 		
+		public RequestHelpAndInformationPage RequestLinkOnShopPlan() throws Exception {
+			//Thread.sleep(4000);
+			if (validate(RequestMoreInformationLink)) {
+				waitforElement(RequestMoreInformationLink);
+				System.out.println("Contact Us Page is Displayed");
+				return new RequestHelpAndInformationPage(driver);
+			}
+			return null;
+		}
+		
+		
+		public RequestHelpAndInformationPage navigateToRequestmoreHelp() {
+
+			waitforElement(ShopForaplan);
+			if (ShopForaplan.isDisplayed()) {
+				/* Actions action = new Actions(driver);
+				action.moveToElement(ShopForaplan).build().perform(); */
+				jsMouseOver(ShopForaplan);
+				try {
+					Thread.sleep(4000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				validateNew(RequestMoreInformationLink);
+				jsClickNew(RequestMoreInformationLink);
+				return new  RequestHelpAndInformationPage(driver);
+			} else {
+				return null;		
+			}
+		}
+		
+		
+		
+		
 		public void clickonFindanAgentlinkMedsupp(String ExpectedUHCAgentURL ) {
 			
 			validateNew(RightRail_FindAnAgentMedsupp);
@@ -2690,20 +2739,70 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		}	
 		
 		public void clickVisitAARPHeaderLink() {
-			if(driver.getCurrentUrl().contains("aarpmedicareplans")) {
+			if (driver.getCurrentUrl().contains("aarpmedicareplans")) {
 				jsClickNew(visitAARPHeaderLink);
-				if(!driver.getCurrentUrl().contains("aarp.org"))
+				proceedToLeaveAARP();
+				if (!driver.getCurrentUrl().contains("aarp.org"))
 					Assert.fail("Visit AARP link did not lead to the right page");
 			}
-			
 		}
 		
 		public void clickVisitAARPFooterLink() {
-			if(driver.getCurrentUrl().contains("aarpmedicareplans")) {
-				jsClickNew(visitAARPFooterLink);
-				if(!driver.getCurrentUrl().contains("aarp.org"))
+			if (driver.getCurrentUrl().contains("aarpmedicareplans")) {
+				switchToNewTabNew(visitAARPFooterLink);
+				proceedToLeaveAARP();
+				if (!driver.getCurrentUrl().contains("aarp.org")) {
 					Assert.fail("Visit AARP link did not lead to the right page");
+				} else {
+					Assert.assertTrue(true, "Navigated to AARP org page");
+					driver.close();
+					driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
+				}
+			}
+		}
+		
+		public void proceedToLeaveAARP() {
+			if (validate(leaveAARPMedicarePlansDialog)) {
+				jsClickNew(proceedLeaveAARPMedicare);
+				waitForPageLoadSafari();
+				CommonUtility.checkPageIsReadyNew(driver);
+			}
+		}
+		
+		public void cancelLeaveAARPRedirect() {
+			if (validate(leaveAARPMedicarePlansDialog)) {
+				jsClickNew(cancelLeaveAARPMedicare);
+				waitForPageLoadSafari();
+				CommonUtility.checkPageIsReadyNew(driver);
 			}
 		}
 
+		public String fetchEnvironmentUrls() {
+			if (MRScenario.environment.equals("offline")) {
+				testSiteUrl = AARP_ACQISITION_OFFLINE_PAGE_URL;
+				return testSiteUrl;
+			} else if (MRScenario.environment.equals("prod")) {
+				testSiteUrl = AARP_ACQISITION_PROD_PAGE_URL;
+				return testSiteUrl;
+			} else if (MRScenario.environment.contains("stage-0")) {
+				testSiteUrl = AARP_ACQISITION_PAGE_URL_NEW;
+				return testSiteUrl;
+			} else
+				testSiteUrl = AARP_ACQISITION_PAGE_URL;
+			return testSiteUrl;
+		}
+		
+	public LearnAboutMedicareHomePage clickLearnMoreOnHomePage() {
+			
+			validateNew(learnAboutMedicareHomeScreen);
+			jsClickNew(learnAboutMedicareHomeScreen);
+			waitForPageLoadSafari();
+			String urlCheck=driver.getCurrentUrl();
+			if(urlCheck.contains("medicare-education.html")) {
+				return new LearnAboutMedicareHomePage(driver);
+			}
+			else{
+				return null;
+			}		
+		}
 }

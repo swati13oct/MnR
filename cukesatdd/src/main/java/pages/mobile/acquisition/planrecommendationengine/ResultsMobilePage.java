@@ -115,7 +115,7 @@ public class ResultsMobilePage extends UhcDriver {
 	@FindBy(css = "#mainBody .swiper-container .module-plan-overview:nth-of-type(1) h2")
 	private WebElement MS1stPlanName;
 
-	@FindBy(css = "#mainBody .swiper-container div[class^='module-plan-overview']:nth-of-type(2) .swiper-content>a")
+	@FindBy(css = "#mainBody .swiper-container div[class^='module-plan-overview']:nth-of-type(2) .swiper-content .apply-button")
 	private WebElement MS1stPlanEnroll;
 
 	@FindBy(css = "div[data-rel='#plan-list-3']")

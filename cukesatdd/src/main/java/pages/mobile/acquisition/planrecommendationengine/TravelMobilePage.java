@@ -155,4 +155,11 @@ public class TravelMobilePage extends UhcDriver {
 		}
 	}
 
+	public void edit_travel(String options) {
+		String snpoptions[] = options.split(",");
+		for(String option:snpoptions) {
+			travelpageFunctional(option);
+		}
+	}
+
 }

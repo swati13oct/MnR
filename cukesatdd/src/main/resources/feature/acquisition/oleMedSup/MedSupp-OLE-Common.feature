@@ -37,7 +37,7 @@ Feature: 1.05.9 -OLE MedSupp Flow
     #  | Firstname     | <Firstname>   |
     #  | Lastname      | <Lastname>    |
   
-   @MedSupp_OLE_Common_AARP  
+   @MedSupp_OLE_Common_AARP 
    Examples: 
       | zipcode | isMultutiCounty | AARPUrl																					| county             | plantype | DOB      | Firstname | Lastname|  ApplicationID | applicationType | username | password |AARPUrl-stg|site|
       |   90002 | NO              | aarpsupplementalhealth.com/ole/ms.olelaunch.html|Los Angeles County | MS       | 11/13/1940 | John      | Carry   |    ABCD        | Resume          |mnrqavd11 | Password@1|https://aarpsupplementalhealth-stg.uhc.com/content/aarpsupplementalhealth/ole/ms.olelaunch.html|AARP|
@@ -77,4 +77,32 @@ Feature: 1.05.9 -OLE MedSupp Flow
    | E2E Scenario 3_UMS  |   90002 | NO              | aarpsupplementalhealth.com/ole/ms.olelaunch.html|Los Angeles County | MS       | 11/13/1940 | John      | Carry   |    ABCD        | Resume          |TiggerOptumID29 | TiggerTigger1|https://aarpsupplementalhealth-stg.uhc.com/content/aarpsupplementalhealth/ole/ms.olelaunch.html|UHC|1EG1TE1MK13|
   
   
+  
+@MedSupp_OLE_Common
+  Scenario Outline: Med Sup Heart icon should save  on VPP summary page when the cart count is reflecting correctly
+   Given the user is on medicare acquisition site landing page
+   		|Site| <site>|
+		When the user performs plan search using following information
+      | Zip Code        | <zipcode>         |
+      | County Name     | <county>          |
+      | Is Multi County | <isMultutiCounty> |
+		When the user views the plans of the below plan type
+      | Plan Type | <plantype> |
+		Then the site user clicks on View Plans Button proceed to View Plans Page
+      | DOB           | <DOB>         |
+       And user clicks on compare button and navigate to plan compare page
+       And user clicks on save button and saves to plan cart
+       And user clicks on Edit Your Information link and navigate back to micro form
+       And user clicks on View plan button link and navigate back to vpp summary page of medsupp
+       Then user clicks on Save icon for all the plans and validate count in cart should match to plans    
+      
+   @MedSupp_OLE_Common_AARP11 
+   Examples: 
+      | zipcode | isMultutiCounty | AARPUrl																					| county             | plantype | DOB      | Firstname | Lastname|  ApplicationID | applicationType | username | password |AARPUrl-stg|site|
+      |   90002 | NO              | aarpsupplementalhealth.com/ole/ms.olelaunch.html|Los Angeles County | MS       | 11/13/1940 | John      | Carry   |    ABCD        | Resume          |mnrqavd11 | Password@1|https://aarpsupplementalhealth-stg.uhc.com/content/aarpsupplementalhealth/ole/ms.olelaunch.html|AARP|
+	
+	@MedSupp_OLE_Common_UHC11
+   Examples: 
+      | zipcode | isMultutiCounty | AARPUrl																					| county             | plantype | DOB      | Firstname | Lastname|  ApplicationID | applicationType | username | password |AARPUrl-stg|site|
+      |   90002 | NO              | aarpsupplementalhealth.com/ole/ms.olelaunch.html|Los Angeles County | MS       | 11/13/1940 | John      | Carry   |    ABCD        | Resume          |mnrqavd11 | Password@1|https://aarpsupplementalhealth-stg.uhc.com/content/aarpsupplementalhealth/ole/ms.olelaunch.html|UHC|
   

@@ -204,17 +204,17 @@ public class ProviderSearchPage extends UhcDriver {
 
 	public VPPPlanSummaryPage selectsProvider() {
 		CommonUtility.waitForPageLoadNew(driver, GetStarted, 45);
-		jsClickNew(GetStarted);
+		GetStarted.click();
 
 		CommonUtility.waitForPageLoadNew(driver, People, 30);
-		jsClickNew(People);
+		People.click();
 
 		CommonUtility.waitForPageLoadNew(driver, Primary, 30);
-		jsClickNew(Primary);
-
+		Primary.click();
+		
 		CommonUtility.waitForPageLoadNew(driver, Physician, 30);
 
-		jsClickNew(Physician);
+		Physician.click();
 		CommonUtility.waitForPageLoadNew(driver, selectProviderBtn, 30);
 		jsClickNew(selectProviderBtn);
 
@@ -543,7 +543,7 @@ public class ProviderSearchPage extends UhcDriver {
 
 		
 		counter++;
-		if(counter==6)
+		if(counter==9)
 			{
 			break;			
 			}
@@ -586,5 +586,12 @@ public class ProviderSearchPage extends UhcDriver {
 				nextYrTile.click();
 		}
 		
+	}
+
+	public AcquisitionHomePage returnToAcqHomePage() {
+		// TODO Auto-generated method stub
+		driver.close();
+		driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
+		return new AcquisitionHomePage(driver);
 	}
 }
