@@ -990,6 +990,29 @@ public class DCEStepDefinitionAARP {
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
 
 	}
+	
+	@Then("^the user selects following pharmacy and returns to DCE Details page$")
+	public void the_user_selects_following_pharmacy_and_returns_to_DCE_Details_page(DataTable givenAttributes) throws Throwable {
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugDetails);
+		String PharmacytoSelect = memberAttributesMap.get("SelectPharmacy");
+		drugDetailsPage.SelectPharmacy(PharmacytoSelect);
+		drugDetailsPage.validatePharmacyName(PharmacytoSelect);
+		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetailsPage);
+
+	}
+	
+
+	@Then("^the user validates Not Covered Pharmacy view for DCE Details Page$")
+	public void the_user_validates_Not_Covered_Pharmacy_view_for_DCE_Details_Page() throws Throwable {
+		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugDetails);
+		drugDetailsPage.validateNotCoveredPharmacyView();
+	}
 
 	@Then("^change pharmacy modal should be displayed$")
 	public void change_pharmacy_modal_should_be_displayed_in_AARP() throws InterruptedException {
@@ -1587,6 +1610,19 @@ public class DCEStepDefinitionAARP {
 		String PharmacyZipCode = memberAttributesMap.get("PharmacyZipCode");
 		DrugSummaryPage drugSummaryPage = (DrugSummaryPage) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugSummary);
 		drugSummaryPage.validateZipandDistanceDropDwn(PharmacyZipCode);
+	}
+	
+	@Then("^the user validates distance dropdown and Zipcode change on DCE Details page - Change Pharmacy Page$")
+	public void the_user_validates_distance_dropdown_and_Zipcode_change_on_Details_page_Change_Pharmacy_Page(DataTable arg1) throws Throwable {
+		List<DataTableRow> memberAttributesRow = arg1.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		String PharmacyZipCode = memberAttributesMap.get("PharmacyZipCode");
+		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugDetails);
+		drugDetailsPage.validateZipandDistanceDropDwn(PharmacyZipCode);
 	}
 	
 	@When("^user clicks on Return to plan summary page link in DCE$")

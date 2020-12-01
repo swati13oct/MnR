@@ -368,6 +368,7 @@ public class DrugDetailsPage extends UhcDriver {
 		validateNew(MonthlyDrugStage_CatastropheLink);
 	}
 
+
 //	MonthlyDrugCost Changes Start
 	public void validateMonthlyCost() {
 		validateNew(MonthlyCostDetails_Header);
@@ -790,7 +791,7 @@ public class DrugDetailsPage extends UhcDriver {
 		}
 	}
 	
-	public void validateSelectPharmacyPage() throws InterruptedException {
+	public void validateSelectPharmacyPage(){
 		if(validateNew(selectPharmacyModalCloseBtn) && validateNew(selectedPharmacyLink) &&	validateNew(distanceDrpDown) &&
 		validateNew(pharmacyZipcodeSearch)&&
 		validateNew(pharmacySearchBtn) &&
@@ -800,10 +801,10 @@ public class DrugDetailsPage extends UhcDriver {
 		validateNew(sortDrpdown)&&
 		validateNew(backBtn)&&
 		validateNew(nextBtn)) {
-			System.out.println("Select Pharmacy Modal validated");
+			System.out.println("Select Pharmacy Modal validated - DCE Details Page");
 		}
 		else {
-		Assert.fail("Select Pharmacy Modal not as expected");
+		Assert.fail("Select Pharmacy Modal not as expected - DCE Details Page");
 		}
 	}
 	
@@ -1114,7 +1115,7 @@ public class DrugDetailsPage extends UhcDriver {
 			Assert.fail("Standard Mail Pharmacy Copay and Modals NOT validated");
 
 	}
-	
+
 	
 	public void validatePreferredMailCopaySection() {
 		validateNew(CopaySection);
@@ -1322,4 +1323,125 @@ public class DrugDetailsPage extends UhcDriver {
 		}
 	}
 
+	@FindBy(xpath = "//*[contains(@id, 'pharmacy-zip-filter') or contains(@name, 'zipCode')]")
+	public WebElement Pharmacy_ZipCodeTxt;
+
+	@FindBy(xpath = "//*[contains(@class, 'uhc-button')][contains(text(), 'Search')]")
+	public WebElement Pharmacy_SearchBtn;
+
+	@FindBy(xpath = "//select[contains(@id, 'milesDropdown')]")
+	public WebElement Pharmacy_DistanceDropDwn;
+
+
+	@FindBy(xpath = "//select[contains(@id, 'milesDropdown')]//option[contains(text(), '1 Mile')]")
+	public WebElement Pharmacy_Distance_Select1Mile;
+
+	@FindBy(xpath = "//select[contains(@id, 'milesDropdown')]//option[contains(text(), '2 Mile')]")
+	public WebElement Pharmacy_Distance_Select2Mile;
+
+	@FindBy(xpath = "//select[contains(@id, 'milesDropdown')]//option[contains(text(), '5 Mile')]")
+	public WebElement Pharmacy_Distance_Select5Mile;
+
+	@FindBy(xpath = "//select[contains(@id, 'milesDropdown')]//option[contains(text(), '10 Mile')]")
+	public WebElement Pharmacy_Distance_Select10Mile;
+
+	@FindBy(xpath = "//select[contains(@id, 'milesDropdown')]//option[contains(text(), '15 Mile')]")
+	public WebElement Pharmacy_Distance_Select15Mile;
+
+	@FindBy(xpath = "//select[contains(@id, 'milesDropdown')]//option[contains(text(), '25 Mile')]")
+	public WebElement Pharmacy_Distance_Select25Mile;
+
+	@FindBy(xpath = "//h2[contains(@id, 'matchingLbl')]")
+	public WebElement PharmacyCountTxt;
+
+	public void validateZipandDistanceDropDwn(String pharmacyZipCode) {
+		validateNew(Pharmacy_DistanceDropDwn);
+		System.out.println("Pharmacy Seacth for default Zip "+Pharmacy_ZipCodeTxt.getText());
+
+		//jsClickNew(Pharmacy_DistanceDropDwn);
+		Pharmacy_DistanceDropDwn.click();
+		Pharmacy_Distance_Select1Mile.click();
+		//validateNew(Pharmacy_Distance_Select1Mile);
+		jsClickNew(Pharmacy_Distance_Select1Mile);
+		validateNew(PharmacyCountTxt);
+		System.out.println("Pharmacy Count for 1 Mile Distance for Zip : "+PharmacyCountTxt.getText());
+
+		//jsClickNew(Pharmacy_DistanceDropDwn);
+		Pharmacy_DistanceDropDwn.click();
+		Pharmacy_Distance_Select2Mile.click();
+		//validateNew(Pharmacy_Distance_Select2Mile);
+		jsClickNew(Pharmacy_Distance_Select2Mile);
+		validateNew(PharmacyCountTxt);
+		System.out.println("Pharmacy Count for 2 Mile Distance for Zip : "+PharmacyCountTxt.getText());
+
+		//jsClickNew(Pharmacy_DistanceDropDwn);
+		Pharmacy_DistanceDropDwn.click();
+		//validateNew(Pharmacy_Distance_Select5Mile);
+		Pharmacy_Distance_Select5Mile.click();
+		jsClickNew(Pharmacy_Distance_Select5Mile);
+		validateNew(PharmacyCountTxt);
+		System.out.println("Pharmacy Count for 5 Mile Distance for Zip : "+PharmacyCountTxt.getText());
+
+		//jsClickNew(Pharmacy_DistanceDropDwn);
+		Pharmacy_DistanceDropDwn.click();
+		//validateNew(Pharmacy_Distance_Select10Mile);
+		Pharmacy_Distance_Select10Mile.click();
+		jsClickNew(Pharmacy_Distance_Select10Mile);
+		validateNew(PharmacyCountTxt);
+		System.out.println("Pharmacy Count for 10 Mile Distance for Zip : "+PharmacyCountTxt.getText());
+
+		//jsClickNew(Pharmacy_DistanceDropDwn);
+		Pharmacy_DistanceDropDwn.click();
+		//validateNew(Pharmacy_Distance_Select15Mile);
+		Pharmacy_Distance_Select15Mile.click();
+		jsClickNew(Pharmacy_Distance_Select15Mile);
+		validateNew(PharmacyCountTxt);
+		System.out.println("Pharmacy Count for 15 Mile Distance for Zip : "+PharmacyCountTxt.getText());
+
+		//jsClickNew(Pharmacy_DistanceDropDwn);
+		Pharmacy_DistanceDropDwn.click();
+		//validateNew(Pharmacy_Distance_Select25Mile);
+		Pharmacy_Distance_Select25Mile.click();
+		jsClickNew(Pharmacy_Distance_Select25Mile);
+		validateNew(PharmacyCountTxt);
+		System.out.println("Pharmacy Count for 25 Mile Distance for Zip : "+PharmacyCountTxt.getText());
+		
+		validateNew(Pharmacy_ZipCodeTxt);
+		Pharmacy_ZipCodeTxt.clear();
+		Pharmacy_ZipCodeTxt.sendKeys(pharmacyZipCode);
+		validateNew(Pharmacy_SearchBtn);
+		Pharmacy_SearchBtn.click();
+		System.out.println("Pharmacy Seacth for Zip Expected - "+pharmacyZipCode+"  : Entered : "+Pharmacy_ZipCodeTxt.getText());
+		System.out.println("Default Pharmacy Count for Zip - "+pharmacyZipCode+"  : "+PharmacyCountTxt.getText());
+
+	}
+
+	public void SelectPharmacy(String PharmacytoSelect) {
+
+		validateSelectPharmacyPage();
+		List <WebElement> PharmacyName = driver.findElements(By.xpath("//button[contains(@id, 'selectPharmacyBtn') and contains(@aria-label, 'Select "+PharmacytoSelect+"')]"));
+
+		jsClickNew(PharmacyName.get(0));
+		validateNew(saveDrugBtn);
+		saveDrugBtn.click();		
+	}
+
+	public void validateNotCoveredPharmacyView() {
+		if(validate(YourDrugs_Table)  ||
+		validate(LinktoEditDrugList)  ||
+		validate(MonthlyDrugStage_Header)  ||
+		validate(MonthlyDrugStage_InitialCoverageStagerTbl) ||
+		validate(MonthlyDrugStage_CoverageGapStagerTbl) ||
+		validate(MonthlyDrugStage_CatastropheStagerTbl) ||
+		validate(MonthlyDrug_YouPay_heading) ||
+		validate(ImportantInfo_Header) 
+		// ||validate(CopaySection)
+		) {
+			Assert.fail("***** DCE Details Page validation for Not Covered Pharmacy View - FAILED *****");
+		}
+		System.out.println("***** DCE Details Page validation for Not Covered Pharmacy View Passed *****");
+		System.out.println("***** Your Drugs, Monthly Costs by Stage, Copay and Coinsurance and Monthly Drugs costs Sections are not displayed *****");
+		
+	}
+	
 }
