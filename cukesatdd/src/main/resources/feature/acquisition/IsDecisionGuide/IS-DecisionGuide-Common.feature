@@ -44,7 +44,7 @@ Feature: 1.14 Med Supp Plans (IS) Decision Guide flow
     #  | PhNo       | <phNo>       |
     # | MobileFlag | <mobileFlag> |
     Then the user clicks Submit to submit Decision Guide on AARP site
-    Then the user validates Thank You Page
+    Then the user validates Thank You Page and land on Medsupp Page
 
     @IS_DecisionGuide_Common_AARP
     Examples: 
@@ -98,7 +98,7 @@ Feature: 1.14 Med Supp Plans (IS) Decision Guide flow
     #  | PhNo       | <phNo>       |
     # | MobileFlag | <mobileFlag> |
     Then the user clicks Submit to submit Decision Guide on AARP site
-    Then the user validates Thank You Page
+    Then the user validates Thank You Page and land on Medsupp Page
 
     @IS_DecisionGuide_Common_AARP
     Examples: 

@@ -252,6 +252,7 @@ public class IsDecisionGuideCommonStepDefinition {
 	@Then("^the user enters valid information errors for the following fields in IS Pages$")
 	public void the_user_enters_valid_information_errors_for_the_following_fields_in_IS_Pages(DataTable givenAttributes) throws Throwable {
 
+		
 		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
@@ -265,5 +266,16 @@ public class IsDecisionGuideCommonStepDefinition {
 		getLoginScenario().saveBean(PageConstants.IS_DECISION_GUIDE_PAGE1,DecisionGuideStep1Page);
 
 	}
-
+	
+	@Then("^the user validates Thank You Page and land on Medsupp Page$")
+	public void the_user_validates_Thank_You_Page_on_VPP_PLan_Summary_Page_for_Med_Supp_Plans() throws Throwable {
+		IsDecisionGuideStep2 DecisionGuideStep2Page =(IsDecisionGuideStep2) getLoginScenario().getBean(PageConstants.IS_DECISION_GUIDE_PAGE2);
+		VPPPlanSummaryPage dgrThankYouPage = DecisionGuideStep2Page.NavigateNext_vppMedsuppPage();
+		if (dgrThankYouPage != null) {
+			System.out.println("Successfully navigated to IS Decision Guide Step 2 Page");
+			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE,dgrThankYouPage);
+		} else {
+			Assert.assertTrue("PROBLEM - Is Decision Guide Step 2 Page is null", false);
+		}
+	}
 }
