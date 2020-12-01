@@ -925,16 +925,19 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			// waitForPageLoadNew but didn't work
 			jsClickNew(pdpPlansViewLink);
 			System.out.println("PDP Plan Type Clicked");
+			waitForPageLoadSafari();
 			CommonUtility.waitForPageLoadNew(driver, planListContainer, 30);
 		} else if (planType.equalsIgnoreCase("MA") || planType.equalsIgnoreCase("MAPD")) {
 			CommonUtility.waitForPageLoadNew(driver, maPlansViewLink, 30);
 			// sleepBySec(2);
 			jsClickNew(maPlansViewLink);
+			waitForPageLoadSafari();
 			CommonUtility.waitForPageLoadNew(driver, planListContainer, 30);
 		} else if (planType.equalsIgnoreCase("MS")) {
 			CommonUtility.waitForPageLoadNew(driver, msPlansViewLink, 30);
 			// sleepBySec(2);
 			jsClickNew(msPlansViewLink);
+			waitForPageLoadSafari();
 			CommonUtility.waitForPageLoadNew(driver, medSuppZipCode, 30);
 			/*
 			 * msPlansViewLink.click(); CommonUtility.waitForPageLoadNew(driver,
@@ -944,6 +947,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			// sleepBySec(5);
 			CommonUtility.waitForPageLoadNew(driver, snpPlansViewLink, 30);
 			jsClickNew(snpPlansViewLink);
+			waitForPageLoadSafari();
 			CommonUtility.waitForPageLoadNew(driver, planListContainer, 30);
 			try {
 				Thread.sleep(5000);
@@ -1702,7 +1706,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	}
 
 	/**
-	 * @author sdwaraka Method added for OLE Flow Validations
+	 * @author sdwaraka
+	 * Method added for OLE Flow Validations
 	 * @return
 	 */
 	public String GetTFNforPlanType() {
@@ -3407,7 +3412,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	// ^^^ note: added for US1598162
 
 	public void MedSupFormValidation(String DateOfBirth) throws InterruptedException {
-		Actions action = new Actions(driver);
+
 		validateNew(DOB, 30);
 		System.out.println("MedSup page form is displayed");
 		DOB.click();
@@ -3440,7 +3445,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		startDrpDwnOption.click();
 		System.out.println("Plan to start date selected");
 		Thread.sleep(15000);
-		action.moveToElement(ViewPlanMedSupPage).perform();
+		jsMouseOver(ViewPlanMedSupPage);
 		jsClickNew(ViewPlanMedSupPage);
 	}
 
@@ -3561,9 +3566,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	private WebElement DecisionGuideLink;
 
 	public IsDecisionGuideStep1 clickOnRequestADecisionGuide() {
-		Assert.assertTrue("Decision Guide Link is not displayed on Med Supp VPP Plan Summary Page",
-				validate(DecisionGuideLink));
-		jsClickNew(DecisionGuideLink);
+		Assert.assertTrue("Decision Guide Link is not displayed on Med Supp VPP Plan Summary Page", validate(DecisionGuideLink));
+		//		jsClickNew(DecisionGuideLink);
+		switchToNewTabNew(DecisionGuideLink);
 		CommonUtility.checkPageIsReadyNew(driver);
 		if (driver.getCurrentUrl().contains("medicare-information.html"))
 			return new IsDecisionGuideStep1(driver);
@@ -4830,7 +4835,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		ViewPlanMedSupPage.click();
+		jsClickNew(ViewPlanMedSupPage);
 		return EnteredData;
 
 	}
@@ -5182,16 +5187,16 @@ public boolean RequestPlanIInformation(String FirstName, String LastName, String
 		//CommonUtility.waitForPageLoadNew(driver, requestemailaddress, 20);
 	//	requestemailaddress.sendKeys(EmailAddress);
 		validateNew(requestplaninformationsubmit);
-		requestplaninformationsubmit.click();
+		jsClickNew(requestplaninformationsubmit);
 		validateNew(requestplaninformationclose);
-		requestplaninformationclose.click();
-		
+		jsClickNew(requestplaninformationclose);
+
 		if(requestplaninformationsubmitpopup.getText().contains("Your information has been submitted. You should start getting your Medicare updates soon.")) {
 			System.out.println("****************Request  information is displayed  ***************");
 
 			Assert.assertTrue(true);
 			validateNew(requestplaninformationclose);
-			requestplaninformationclose.click();
+			jsClickNew(requestplaninformationclose);
 		}else {
 			System.out.println("****************Request information is displayed  ***************");
 		}
@@ -5213,10 +5218,10 @@ public boolean RequestPlanIInformation(String FirstName, String LastName, String
 	CommonUtility.waitForPageLoadNew(driver, requestemailaddress, 20);
 	requestemailaddress.sendKeys(EmailAddress);
 	validateNew(requestplaninformationsubmit);
-	requestplaninformationsubmit.click();
+	jsClickNew(requestplaninformationsubmit);
 	validateNew(requestplaninformationclose);
-	requestplaninformationclose.click();
-	
+	jsClickNew(requestplaninformationclose);
+
 	if(requestplaninformationsubmitpopup.getText().contains("Your information has been submitted. You should start getting your Medicare updates soon.")) {
 		System.out.println("****************Request information is displayed  ***************");
 
@@ -5252,13 +5257,13 @@ public boolean RequestPlanIInformation(String FirstName, String LastName, String
 	CommonUtility.waitForPageLoadNew(driver, requestlastName, 20);
 	requestlastName.sendKeys(LastName);
 	validateNew(requestplaninformationsubmit);
-	requestplaninformationsubmit.click();
+		jsClickNew(requestplaninformationsubmit);
 	if(requestplaninformationsubmitpopup.getText().contains("Your information has been submitted. You should start getting your Medicare updates soon.")) {
 		System.out.println("****************Request  information is displayed  ***************");
 
 		Assert.assertTrue(true);
 		validateNew(requestplaninformationclose);
-		requestplaninformationclose.click();
+		jsClickNew(requestplaninformationclose);
 	}else {
 		System.out.println("****************Request information is displayed  ***************");
 	}
@@ -5266,4 +5271,3 @@ return RequestPlanIInformation_Validation;
 
 }
 }
-    

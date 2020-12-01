@@ -1,4 +1,3 @@
-
 Feature: UAT Scripts-To test Campaign TFN in all flows on AARP site
 
  
@@ -6,16 +5,16 @@ Feature: UAT Scripts-To test Campaign TFN in all flows on AARP site
    @Scenario_1_2_DirectTraffic_UAT
   Scenario Outline: <scenario> 1.0 Verify TFN in VPP Plan Details and OLE pages, DCE,
     Given the user is on medicare acquisition site landing page
-      | Site | <site> | 
+      | Site | <site> |
     And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
     Then the user validates PSC code
-      | PSC Code | <pscCode> | 
+      | PSC Code | <pscCode> |
     Then the user navigates to MA Plan Details Page and validates Federal TFN
-   # Then the user navigates to following MA Plan Page URL and validate Federal TFN
-     # | MA URL    | <maUrl> |
-     # | TFN Xpath | <maTFN> |
-    Then the user navigate to following MedED Pages URL and validate Federal TFN  
-      | MedEd URL    | <medicareUrl> |
+    # Then the user navigates to following MA Plan Page URL and validate Federal TFN
+    # | MA URL    | <maUrl> |
+    # | TFN Xpath | <maTFN> |
+    Then the user navigate to following MedED Pages URL and validate Federal TFN
+      | MedEd URL | <medicareUrl> |
       | TFN Xpath | <medicareTFN> |
    Then the user navigates to Medsupp Plans in VPP and validates Medsupp TFN
  Then the user navigates to PDP Plan Details Page and validates Federal TFN
@@ -32,70 +31,71 @@ When the user enters zipcode on health plans page
       | Zip Code        | <zipcode>         |
       | Is Multi County | <isMultutiCounty> |
       | County Name     | <county>          |
-   And the user views the plans of the below plan type
+    And the user views the plans of the below plan type
       | Plan Type | <plantype> |
       | Site      | <site>     |
-   And the user selects plan year
+    And the user selects plan year
       | Plan Year | <planyear> |
       | Plan Type | <plantype> |
-   	And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
-    Then the user validates PSC code
-      | PSC Code | <pscCode> | 
-   #Then the user view plan details of the first plan in the given plan type and perform validation in test site
-    #And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
-    #Then the user validates PSC code
-     # | PSC Code | <pscCode> |   
-    Then the user navigates to following  DCE Page URL and validate Federal TFN 
-      | DCE URL    | <dceUrl> |
-    Then the user validate the sam icons tfn with federal TFN on Acquistion page 
-    Then the user navigates to following memeber signin page and navigate to view medicare plans link AARP
-     | Member Signin URL |<memberSignIn>     |
-     And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
-     Then the user validates PSC code
-      | PSC Code | <Precedence2PSC> |
-      Then the user validate the sam icons tfn with federal TFN on Acquistion page
-  Examples: 
-  |scenario           | site	|pscCode | maUrl                                  | maTFN                                                          | pdpUrl                                    | pdpTFN                                                         | snpUrl                                                                                                                                                                                                                                                                                                                      | snpTFN                       | medSuppUrl                                                                | medSuppTFN     | medicareUrl                |medicareTFN                        | site   | zipcode | plantype | isMultutiCounty |planyear |userName|password| dceUrl|Precedence2PSC |memberSignIn|
-  |Scenario 1 - AMP 	| AARP | 810027 | enroll/ma-enrollment.html              | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | shop/estimate/pdp-costs.html              | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | health-plans.html?zipcode=28035&deepLink=favPlansDeepLink&plantype=MA&year=2020&planId=H5253041000&planYear=2020&systemYear=2020&zipcode=28035&fipsCode=119&product=MAPD&yearDisclaimer=undefined&month=2&yearToggle=undefined&deepLink=plandetail&WT.mc_id=897749&mrcid=em:Acq:MR%7cFederal%7cEGEM3011%7c::897749!/details | //a[contains(@class, 'tel')] | health-plans/medicare-supplement-plans/medicare-information.html?vpp=true | //*[@id='tfn'] | medicare-education.html     |(//a[contains(@class, 'tel')])[1]|Ulayer | 80001   | MA       | No              |current  |mnrqavd11|Password@1|health-plans/estimate-drug-costs.html#/drug-cost-estimator|8009508 |https://www.medicare.uhc.com/  |
-  
-  #######################Script 2: Campaign traffic########################################
- 
-   @Scenario_2_CampaignTraffic_UAT 
-  Scenario Outline: <scenario> Verify TFN for different plan types through Campaign Traffic
-   Given the user Starts WebDriver
- Given the user is on following acquisition site from Campaign Traffic
-      | Site         | <site>         |
-      | Campaign URL | <campaignUrl>  |    
     And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
     Then the user validates PSC code
       | PSC Code | <pscCode> |
-      Then the user navigate to following Med Supp Plan URL and validate MedSupp TFN
+    #Then the user view plan details of the first plan in the given plan type and perform validation in test site
+    #And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
+    #Then the user validates PSC code
+    # | PSC Code | <pscCode> |
+    Then the user navigates to following  DCE Page URL and validate Federal TFN
+      | DCE URL | <dceUrl> |
+    Then the user validate the sam icons tfn with federal TFN on Acquistion page
+    Then the user navigates to following memeber signin page and navigate to view medicare plans link AARP
+      | Member Signin URL | <memberSignIn> |
+    And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
+    Then the user validates PSC code
+      | PSC Code | <Precedence2PSC> |
+    Then the user validate the sam icons tfn with federal TFN on Acquistion page
+
+    Examples: 
+      | scenario         | site | pscCode | maUrl                     | maTFN                                                          | pdpUrl                       | pdpTFN                                                         | snpUrl                                                                                                                                                                                                                                                                                                                      | snpTFN                       | medSuppUrl                                                                | medSuppTFN     | medicareUrl             | medicareTFN                       | site   | zipcode | plantype | isMultutiCounty | planyear | userName  | password   | dceUrl                                                     | Precedence2PSC | memberSignIn                  |
+      | Scenario 1 - AMP | AARP |  810027 | enroll/ma-enrollment.html | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | shop/estimate/pdp-costs.html | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | health-plans.html?zipcode=28035&deepLink=favPlansDeepLink&plantype=MA&year=2020&planId=H5253041000&planYear=2020&systemYear=2020&zipcode=28035&fipsCode=119&product=MAPD&yearDisclaimer=undefined&month=2&yearToggle=undefined&deepLink=plandetail&WT.mc_id=897749&mrcid=em:Acq:MR%7cFederal%7cEGEM3011%7c::897749!/details | //a[contains(@class, 'tel')] | health-plans/medicare-supplement-plans/medicare-information.html?vpp=true | //*[@id='tfn'] | medicare-education.html | (//a[contains(@class, 'tel')])[1] | Ulayer |   80001 | MA       | No              | current  | mnrqavd11 | Password@1 | health-plans/estimate-drug-costs.html#/drug-cost-estimator |        8009508 | https://www.medicare.uhc.com/ |
+
+  #######################Script 2: Campaign traffic########################################
+  @Scenario_2_CampaignTraffic_UAT
+  Scenario Outline: <scenario> Verify TFN for different plan types through Campaign Traffic
+    Given the user Starts WebDriver
+    Given the user is on following acquisition site from Campaign Traffic
+      | Site         | <site>        |
+      | Campaign URL | <campaignUrl> |
+    And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
+    Then the user validates PSC code
+      | PSC Code | <pscCode> |
+    Then the user navigate to following Med Supp Plan URL and validate MedSupp TFN
       | MedSupp URL | <medSuppUrl> |
-      | TFN Xpath   | <medSuppTFN> | 
+      | TFN Xpath   | <medSuppTFN> |
     Then the user navigates to homepage validates Federal TFN
     Then the user navigates to MA Plan Details Page and validates Federal TFN
-  #  Then the user navigate to following SNP Plan page URL and validate Federal TFN
-  #    | SNP URL   | <snpUrl> |
-  #    | TFN Xpath | <snpTFN> |
-   Then the user navigates to following MA Plan Page URL and validate Federal TFN
+    #  Then the user navigate to following SNP Plan page URL and validate Federal TFN
+    #    | SNP URL   | <snpUrl> |
+    #    | TFN Xpath | <snpTFN> |
+    Then the user navigates to following MA Plan Page URL and validate Federal TFN
       | MA URL    | <maUrl> |
       | TFN Xpath | <maTFN> |
-   Then the user navigates to Medsupp Plans in VPP and validates Medsupp TFN
-     Then the user navigate to following Med Supp Plan URL and validate MedSupp TFN
+    Then the user navigates to Medsupp Plans in VPP and validates Medsupp TFN
+    Then the user navigate to following Med Supp Plan URL and validate MedSupp TFN
       | MedSupp URL | <agentApptUrl> |
       | TFN Xpath   | <agentApptTFN> |
-     Then the user navigate to following Med Supp Plan URL and validate MedSupp TFN
+    Then the user navigate to following Med Supp Plan URL and validate MedSupp TFN
       | MedSupp URL | <decisionGuideUrl> |
       | TFN Xpath   | <decisionGuideTFN> |
-      Then the user navigate to following PDP Plan Page URL and validate Federal TFN
+    Then the user navigate to following PDP Plan Page URL and validate Federal TFN
       | PDP URL   | <pdpUrl> |
       | TFN Xpath | <pdpTFN> |
     Then the user navigates to shop pages Page and validates Federal TFN
-     | SHOPPAGES URL   | <shoppages> |
-      | TFN Xpath | <shoppagesTFN> |
-          And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
+      | SHOPPAGES URL | <shoppages>    |
+      | TFN Xpath     | <shoppagesTFN> |
+    And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
     Then the user validates PSC code
       | PSC Code | <pscCode> |
+
     Examples: 
     |scenario            | pscCode  | site  |campaignUrl                                                                 | maUrl                                    |   maTFN                                                       | pdpUrl                                  | pdpTFN                                                         | snpUrl                                                                                                                                                                                                                                                                                                                      | snpTFN                       | decisionGuideUrl                                                          | decisionGuideTFN     | agentApptUrl                                                     | agentApptTFN   |medSuppUrl|medSuppTFN|shoppages|shoppagesTFN|
     |Scenario 2 - AMP 	  |  8001038 | ulayer|/shop/medicare-advantage-plans?zipcode=90210&WT.mc_id=8001038  | enroll/ma-enrollment.html   |  //*[contains(@class,'call')]//a[contains(@class,'tel')]  | enroll/pdp-enrollment.html | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | health-plans.html?zipcode=28035&deepLink=favPlansDeepLink&plantype=MA&year=2020&planId=H5253041000&planYear=2020&systemYear=2020&zipcode=28035&fipsCode=119&product=MAPD&yearDisclaimer=undefined&month=2&yearToggle=undefined&deepLink=plandetail&WT.mc_id=897749&mrcid=em:Acq:MR%7cFederal%7cEGEM3011%7c::897749!/details | //a[contains(@class, 'tel')] | health-plans/medicare-supplement-plans/medicare-information.html?vpp=true | //*[@id='tfn']       | health-plans/medicare-supplement-plans/agent-appointment.html    | //*[@id='tfn'] |shop/medicare-supplement-plans.html|(//*[contains(@class,'call')]//a[contains(@class,'tel')])[2]|/contact-us.html|(//*[contains(@class,'call')]//a[contains(@class,'tel')])[1]|
@@ -162,112 +162,112 @@ When the user enters zipcode on health plans page
      
      @Scenario_5_Portfolio_CampaignTraffic_MedEd1_UAT
   Scenario Outline: <scenario>1.0 Verify TFN in MedEd Pages and VPP
-   Given the user Starts WebDriver
+    Given the user Starts WebDriver
     Given the user is on following acquisition site from Campaign Traffic
-      | Site         | <site>         |
-      | Campaign URL | <campaignUrl>  |  
+      | Site         | <site>        |
+      | Campaign URL | <campaignUrl> |
     And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
     Then the user validates PSC code
       | PSC Code | <pscCode> |
     Then the user navigates to following MedEd Plan Page URL and validate Federal TFN
-      | MedEd URL    | <medEdURL> |
+      | MedEd URL | <medEdURL> |
       | TFN Xpath | <medEdTFN> |
-      Then the user navigates to following MedEd Plan Page URL and validate Federal TFN
-      | MedEd URL    | <medEdURL1> |
-      | TFN Xpath | <medEdTFN> |
-      Then the user navigates to following MedEd Plan Page URL and validate Federal TFN
-      | MedEd URL    | <medEdURL2> |
-      | TFN Xpath | <medEdTFN> |
-      Then the user navigates to homepage validates Federal TFN
-   	Then the user navigates to MA Plan Details Page and validates Federal TFN
-   	 Then the user navigates to SNP Plan Details Page and validates Federal TFN
-   	 Then the user navigates to SNP OLE Page and validates Federal TFN
+    Then the user navigates to following MedEd Plan Page URL and validate Federal TFN
+      | MedEd URL | <medEdURL1> |
+      | TFN Xpath | <medEdTFN>  |
+    Then the user navigates to following MedEd Plan Page URL and validate Federal TFN
+      | MedEd URL | <medEdURL2> |
+      | TFN Xpath | <medEdTFN>  |
+    Then the user navigates to homepage validates Federal TFN
+    Then the user navigates to MA Plan Details Page and validates Federal TFN
+    Then the user navigates to SNP Plan Details Page and validates Federal TFN
+    Then the user navigates to SNP OLE Page and validates Federal TFN
+
     Examples: 
-     |scenario                        | site|pscCode  | campaignUrl                                | medEdURL                                     |     medEdTFN                                           |    medEdURL1                                                          |medEdURL2                                     |                                                                                                                                                                                                  
-     | Scenerio 5-Portfolio- AMP      | ulayer| 8001277 | /medicare-education.html?WT.mc_id=8001277  | medicare-articles.html                       | (//span[@class='heading-6']//u)[1]   |  medicare-articles/medicare-made-clear.html                          | medicare-articles/eligibility-and-enrollment.html  |
-    
-    
-   #######################Script 7: Email Validation########################################
-   @Scenario_7_DirectTraffic_Email_UAT
+      | scenario                  | site   | pscCode | campaignUrl                               | medEdURL               | medEdTFN                           | medEdURL1                                  | medEdURL2                                         |
+      | Scenerio 5-Portfolio- AMP | ulayer | 8001277 | /medicare-education.html?WT.mc_id=8001277 | medicare-articles.html | (//span[@class='heading-6']//u)[1] | medicare-articles/medicare-made-clear.html | medicare-articles/eligibility-and-enrollment.html |
+
+  #######################Script 7: Email Validation########################################
+  @Scenario_7_DirectTraffic_Email_UAT
   Scenario Outline: <scenario> 1.0 Verify TFN through Email Validation
     Given the user is on AARP medicare acquisition site landing page
     And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
     Then the user validates PSC code
-      | PSC Code | <pscCode> | 
-     Then the user navigates to following  Medicare Education Page URL and validate Federal TFN  
-      | MEDICARE URL    | <emailLinkUrl> |
-      | TFN Xpath | <emailLinkTFN> |
-        And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
-      Then the user validates PSC code
-      | PSC Code | <pscCode1> | 
-	   Then the user navigates to following  Medicare Education Page URL and validate Federal TFN  
-      | MEDICARE URL    | <medicareUrl> |
-      | TFN Xpath | <medicareTFN> |
-        And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
-      Then the user validates PSC code
-      | PSC Code | <pscCode1> | 
-      Then the user navigates to shop pages Page and validates Federal TFN
-     | SHOPPAGES URL   | <shoppagesUrl> |
-      | TFN Xpath | <shoppagesTFN> |
-        And the user retrieves TFNSessionCookie and Federal and MedSupp TFN 
-      Then the user validates PSC code
-      | PSC Code | <pscCode1> | 
-      
-    Examples:  
-       |scenario                  | pscCode |pscCode1| emailLinkUrl                                                                                      | emailLinkTFN                                                                      | medicareUrl                                   | medicareTFN                                                         | shoppagesUrl|      shoppagesTFN             |
-       |Scenario 7-Email - AMP 	|  810027 | 8013925|/?WT.mc_id=8013925&mrcid=em:Acq:MR%7CNTM65%7CEGEM3107%7C::8013925 |(//a[contains(@class, 'tel')])[1]|medicare-articles.html                         |//button[@id='sam-call-button']//span[contains(@class,'sam__button__text desktop')]|  shop/medicare-supplement-plans.html                       |//button[@id='sam-call-button']//span[contains(@class,'sam__button__text desktop')]|
-       
-       #######################Script 8: External Link PDP########################################
-   @Scenario_8_External_Link_PDP_UAT
+      | PSC Code | <pscCode> |
+    Then the user navigates to following  Medicare Education Page URL and validate Federal TFN
+      | MEDICARE URL | <emailLinkUrl> |
+      | TFN Xpath    | <emailLinkTFN> |
+    And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
+    Then the user validates PSC code
+      | PSC Code | <pscCode1> |
+    Then the user navigates to following  Medicare Education Page URL and validate Federal TFN
+      | MEDICARE URL | <medicareUrl> |
+      | TFN Xpath    | <medicareTFN> |
+    And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
+    Then the user validates PSC code
+      | PSC Code | <pscCode1> |
+    Then the user navigates to shop pages Page and validates Federal TFN
+      | SHOPPAGES URL | <shoppagesUrl> |
+      | TFN Xpath     | <shoppagesTFN> |
+    And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
+    Then the user validates PSC code
+      | PSC Code | <pscCode1> |
+
+    Examples: 
+      | scenario               | pscCode | pscCode1 | emailLinkUrl                                                      | emailLinkTFN                      | medicareUrl            | medicareTFN                                                                         | shoppagesUrl                        | shoppagesTFN                                                                        |
+      | Scenario 7-Email - AMP |  810027 |  8013925 | /?WT.mc_id=8013925&mrcid=em:Acq:MR%7CNTM65%7CEGEM3107%7C::8013925 | (//a[contains(@class, 'tel')])[1] | medicare-articles.html | //button[@id='sam-call-button']//span[contains(@class,'sam__button__text desktop')] | shop/medicare-supplement-plans.html | //button[@id='sam-call-button']//span[contains(@class,'sam__button__text desktop')] |
+
+  #######################Script 8: External Link PDP########################################
+  @Scenario_8_External_Link_PDP_UAT
   Scenario Outline: <scenario> 1.0  Verify TFN through External Links PDP
     Given the user Starts WebDriver
-      Given the user is on following acquisition site from Campaign Traffic
-      | Site         | <site>         |
-      | Campaign URL | <campaignUrl>  | 
+    Given the user is on following acquisition site from Campaign Traffic
+      | Site         | <site>        |
+      | Campaign URL | <campaignUrl> |
     And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
     Then the user validates PSC code
       | PSC Code | <pscCode> |
-     Then the user navigates to PDP Plan Details Page and validates Federal TFN
-      Then the user navigates to homepage validates Federal TFN
-   	Then the user navigates to MA Plan Details Page and validates Federal TFN
-     Then the user navigates to Medsupp Plans in VPP and validates Medsupp TFN  
-     Then the user navigates to SNP Plan Details Page and validates Federal TFN 
-     Then the user navigates to SNP OLE Page and validates Federal TFN 
-      Given the user is on following acquisition site from Campaign Traffic
+    Then the user navigates to PDP Plan Details Page and validates Federal TFN
+    Then the user navigates to homepage validates Federal TFN
+    Then the user navigates to MA Plan Details Page and validates Federal TFN
+    Then the user navigates to Medsupp Plans in VPP and validates Medsupp TFN
+    Then the user navigates to SNP Plan Details Page and validates Federal TFN
+    Then the user navigates to SNP OLE Page and validates Federal TFN
+    Given the user is on following acquisition site from Campaign Traffic
       | Site         | <site>         |
       | Campaign URL | <campaignUrl1> |
-       And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
+    And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
     Then the user validates PSC code
       | PSC Code | <pscCode> |
-     Then the user validates Get Started Page
+    Then the user validates Get Started Page
     Then the user clicks on Build Drug List to navigate to Build Drug List Page
     Then the user searches and adds the following Drug to Drug List
       | DrugName | <drug1> |
     Then the user clicks on Review Drug Costs to Land on Zip Entry Page
     When user enters valid zipcode and county
-      | ZipCode | <zipCode> | 
-      And user clicks on continue button in Zip Entry Page 
-     Then the user selects View plan details for following plantype and PlanName for DCE Page
+      | ZipCode | <zipCode> |
+    And user clicks on continue button in Zip Entry Page
+    Then the user selects View plan details for following plantype and PlanName for DCE Page
       | Plan Type | <planType> |
       | Plan Name | <planName> |
-     Given the user is on following acquisition site from Campaign Traffic
-      		| Site         | <site>         |
-         | Campaign URL | <campaignUrl2> |
-     And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
+    Given the user is on following acquisition site from Campaign Traffic
+      | Site         | <site>         |
+      | Campaign URL | <campaignUrl2> |
+    And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
     Then the user validates PSC code
       | PSC Code | <pscCode> |
-       #And the user enters following details for the pharmacy search
-      #| Zip Code    | <zipCode>    |
-     # | Distance    | <distance>   |
-     # | County Name | <countyName> |
+    #And the user enters following details for the pharmacy search
+    #| Zip Code    | <zipCode>    |
+    # | Distance    | <distance>   |
+    # | County Name | <countyName> |
     #And the user chooses a plan from dropdown list
     # | Next Year Plan Name    | <ny_planName> |
-     # | Next Year Plan Year    | <ny_planYear> | 
-    ###May be need to add  step 8.10 ########## Added the line 8.10 ############## 
-     Then the user navigates to following MedEd Plan Page URL and validate Federal TFN
-      | MedEd URL    | <estimateUrl> |
+    # | Next Year Plan Year    | <ny_planYear> |
+    ###May be need to add  step 8.10 ########## Added the line 8.10 ##############
+    Then the user navigates to following MedEd Plan Page URL and validate Federal TFN
+      | MedEd URL | <estimateUrl>  |
       | TFN Xpath | <shoppagesTFN> |
-      And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
+    And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
     Then the user validates PSC code
       | PSC Code | <pscCode> |
    	  Then the user navigates to following MedEd Plan Page URL and validate Federal TFN
@@ -290,7 +290,7 @@ When the user enters zipcode on health plans page
   Scenario Outline: <scenario> 1.0 Verify TFN through External Links
     Given the user Starts WebDriver
     Given the user is on AARP medicare acquisition site from External Link and Land on MA Plans
-      | Campaign URL | <campaignUrl>  |    
+      | Campaign URL | <campaignUrl> |
     And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
     Then the user validates PSC code
       | PSC Code | <pscCode> |
@@ -300,10 +300,10 @@ When the user enters zipcode on health plans page
        | State | <state> |
     And the user clicks on the shopping cart icon   
     #And the user clicks on the shopping cart icon in AARP site
-  	And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
+    And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
     Then the user validates PSC code
       | PSC Code | <pscCode> |
-     #And the user clicks on the shopping cart icon in AARP site for campaign TFN
+    #And the user clicks on the shopping cart icon in AARP site for campaign TFN
     #Then the user signs in with optum Id credentials for campaign TFN
      # | User Name | <userName> |
      # | Password  | <password> |  

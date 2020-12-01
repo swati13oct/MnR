@@ -546,17 +546,20 @@ public class CampaignTFNPage extends UhcDriver {
 //			sleepBySec(2); //note: add sleep for timing issue, tried increase timeout from waitForPageLoadNew but didn't work
 			pdpPlansViewLink.click();
 			System.out.println("PDP Plan Type Clicked");
+			waitForPageLoadSafari();
 			CommonUtility.waitForPageLoadNew(driver, planListContainer, 30);
 		} else if (planType.equalsIgnoreCase("MA") || planType.equalsIgnoreCase("MAPD")) {
 			CommonUtility.waitForPageLoadNew(driver, maPlansViewLink, 30);
 //			sleepBySec(2);
 			maPlansViewLink.click();
 			System.out.println("MA Plan Type Clicked");
+			waitForPageLoadSafari();
 			CommonUtility.waitForPageLoadNew(driver, planListContainer, 30);
 		} else if (planType.equalsIgnoreCase("MS")) {
 			CommonUtility.waitForPageLoadNew(driver, msPlansViewLink, 30);
 			//sleepBySec(2);
 			msPlansViewLink.click();
+			waitForPageLoadSafari();
 			CommonUtility.waitForPageLoadNew(driver, medSuppZipCode, 30);
 			/*msPlansViewLink.click();
 			CommonUtility.waitForPageLoadNew(driver, medSuppPlanList.get(0), 30);*/
@@ -565,6 +568,7 @@ public class CampaignTFNPage extends UhcDriver {
 			CommonUtility.waitForPageLoadNew(driver, snpPlansViewLink, 30);
 			snpPlansViewLink.click();
 			System.out.println("SNP Plan Type Clicked");
+			waitForPageLoadSafari();
 			CommonUtility.waitForPageLoadNew(driver, planListContainer, 30);
 	
 		}	
@@ -576,7 +580,8 @@ public class CampaignTFNPage extends UhcDriver {
 		CheckPageLoad();
 		CheckiPerseptions();
 		CommonUtility.waitForPageLoadNew(driver, firstPlanDetailsLink, 30);
-		firstPlanDetailsLink.click();
+		jsClickNew(firstPlanDetailsLink);
+		waitForPageLoadSafari();
 		CommonUtility.checkPageIsReadyNew(driver);
 		System.out.println("View Plan Details Link is clicked for first plan for "+planType);
 				CommonUtility.checkPageIsReadyNew(driver);
@@ -596,7 +601,8 @@ public class CampaignTFNPage extends UhcDriver {
 		CheckPageLoad();
 		CheckiPerseptions();
 		CommonUtility.waitForPageLoadNew(driver, firstEnrollPlanLink, 30);
-		firstEnrollPlanLink.click();
+		jsClickNew(firstEnrollPlanLink);
+		waitForPageLoadSafari();
 		System.out.println("Enroll In Plan Link is clicked for first plan for "+planType);
 				CommonUtility.checkPageIsReadyNew(driver);
 				if (driver.getCurrentUrl().contains("welcome")) {	
@@ -618,7 +624,7 @@ public class CampaignTFNPage extends UhcDriver {
 		CheckPageLoad();
 		CheckiPerseptions();
 		CommonUtility.waitForPageLoadNew(driver, HomeLogo, 30);
-		HomeLogo.click();
+		jsClickNew(HomeLogo);
 		System.out.println("Home Logo is clicked to navigate to Home Page");
 		CommonUtility.waitForPageLoadNew(driver, zipCodeField, 30);
 		if(!validateNew(zipCodeField)){
@@ -631,11 +637,11 @@ public class CampaignTFNPage extends UhcDriver {
 		//CheckPageLoad();
 		//CheckiPerseptions();
 		CommonUtility.waitForPageLoadNew(driver, HomeLogo, 10);
-		HomeLogo.click();
+		jsClickNew(HomeLogo);
 		System.out.println("Home Logo is clicked to navigate to Home Page");
 		if(driver.getCurrentUrl().contains("online-application")) {
 			if(validate(LeaveOLE,10)) {
-				LeaveOLE.click();
+				jsClickNew(LeaveOLE);
 				System.out.println("Leave OLE is clicked to navigate to Home Page");
 			}
 		} 
