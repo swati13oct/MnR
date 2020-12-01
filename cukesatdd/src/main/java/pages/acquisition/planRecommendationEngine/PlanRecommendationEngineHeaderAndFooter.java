@@ -50,7 +50,7 @@ public class PlanRecommendationEngineHeaderAndFooter extends UhcDriver {
 	@FindBy(xpath = "//*[@id='aarpSVGLogo']/img")
 	private WebElement AARPlogoInHeader;
 	
-	@FindBy(css = "#uhcSVGLogo > svg")
+	@FindBy(css = "#uhcSVGLogo")
 	private WebElement UHClogoInHeader;
 	
 	@FindBy(css = ".companyNameHeader>p")
