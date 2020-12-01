@@ -19,7 +19,8 @@ public class DGR_ThankYouPage extends UhcDriver{
 
 
 	//Global Elements
-	@FindBy(xpath = "//*[@class = 'logo']")
+//	@FindBy(xpath = "//*[@class = 'logo']")
+	@FindBy(id = "aarpSVGLogo")
 	private WebElement SiteLogo;
 
 	@FindBy(xpath = "//*[@id = 'nav' and @role = 'navigation']")
@@ -67,7 +68,7 @@ public class DGR_ThankYouPage extends UhcDriver{
 	public void openAndValidate() {
 		CommonUtility.waitForPageLoadNew(driver, PageHeader,30);
 
-		validate(Step1Tab);
+//		validate(Step1Tab);
 		validate(PageHeader);
 		validate(HeaderNavigation);
 		validate(SiteLogo);

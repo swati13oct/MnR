@@ -1281,6 +1281,7 @@ public class DrugDetailsPage extends UhcDriver {
 	public ComparePlansPage clickViewPlanCompareBtn_ReturnToCompare_ViewDrugModal() {
 		validateNew(DrugCosts_PlanCompareBtn);
 		jsClickNew(DrugCosts_PlanCompareBtn);
+		waitForPageLoadSafari();
 		//CommonUtility.waitForPageLoad(driver, ComparePage_TableHeader, 30);
 		CommonUtility.waitForPageLoadNew(driver, DrugInfoModal_DrugCostDetailsBtn, 30);
 //		WebElement DrugInfoModal_Header = driver.findElement(By.xpath("//*[contains(@class, 'vpp-modal')]//*[contains(text(), '"+planName+"')]"));
@@ -1298,6 +1299,7 @@ public class DrugDetailsPage extends UhcDriver {
 			Assert.fail("Exit Scenario Link Text Incorrect for Compare Flow : "+LinktoExitScenario.getText());
 		
 		jsClickNew(LinktoExitScenario);
+		waitForPageLoadSafari();
 		//CommonUtility.waitForPageLoad(driver, ComparePage_TableHeader, 30);
 		CommonUtility.waitForPageLoadNew(driver, DrugInfoModal_DrugCostDetailsBtn, 30);
 //		WebElement DrugInfoModal_Header = driver.findElement(By.xpath("//*[contains(@class, 'vpp-modal')]//*[contains(text(), '"+planName+"')]"));
