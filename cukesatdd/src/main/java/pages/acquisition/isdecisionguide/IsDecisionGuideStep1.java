@@ -527,4 +527,33 @@ public class IsDecisionGuideStep1 extends UhcDriver{
 		}
 		return null;
 	}
+	
+	@FindBy(xpath = "//*[contains(@class, 'first_name is-invalid')]")
+	private WebElement DecisionGuideFirstName_ErrorMessage;
+	
+	@FindBy(xpath = "(//*[contains(@class, 'last_name is-invalid')])[2]")
+	private WebElement DecisionGuideLastName_ErrorMessage;
+	
+	@FindBy(xpath = "//*[contains(@class, 'address pac-target-input is-invalid')]")
+	private WebElement DecisionGuideaddress_ErrorMessage;
+	
+	@FindBy(xpath = "(//*[contains(@class, 'city is-invalid')])[2]")
+	private WebElement DecisionGuidecity_ErrorMessage;
+	
+	public boolean enterUserInfoSteperror(Map<String, String> MemberDetailsMap) throws InterruptedException {
+		
+		
+		boolean validation_Flag = true;
+	
+		jsClickNew(NextBtn);
+		if(NextBtn.isEnabled() && validate(DecisionGuideFirstName_ErrorMessage) && validate(DecisionGuideLastName_ErrorMessage) && validate(DecisionGuideaddress_ErrorMessage) && validate(DecisionGuidecity_ErrorMessage)&& DecisionGuideFirstName_ErrorMessage.isDisplayed()){
+			System.out.println("Required Fields are displayed for Decision Guide Details entry : Next Button is enabled");
+			validation_Flag = (!validation_Flag)?false:true;
+			}
+			else{
+				System.out.println("Next Button is enabled : Required Field Validation Failed");
+				validation_Flag = false;
+			}
+		return validation_Flag;
+	}
 }

@@ -249,5 +249,21 @@ public class IsDecisionGuideCommonStepDefinition {
 		
 	}
 
+	@Then("^the user enters valid information errors for the following fields in IS Pages$")
+	public void the_user_enters_valid_information_errors_for_the_following_fields_in_IS_Pages(DataTable givenAttributes) throws Throwable {
+
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		IsDecisionGuideStep1 DecisionGuideStep1Page =(IsDecisionGuideStep1) getLoginScenario().getBean(PageConstants.IS_DECISION_GUIDE_PAGE1);
+		DecisionGuideStep1Page.enterUserInfoSteperror(memberAttributesMap);
+		getLoginScenario().saveBean(PageConstants.IS_DECISION_GUIDE_PAGE1,DecisionGuideStep1Page);
+
+	}
 
 }
