@@ -919,6 +919,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	public void viewPlanSummary(String planType) {
 		if (planType.equalsIgnoreCase("PDP")) {
+			sleepBySec(2);
+			((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView();", pdpPlansViewLink);
 			CommonUtility.waitForPageLoadNew(driver, pdpPlansViewLink, 30);
 			// sleepBySec(2); // note: add sleep for timing issue, tried increase timeout
 			// from
