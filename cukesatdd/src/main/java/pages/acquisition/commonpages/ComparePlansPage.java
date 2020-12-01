@@ -23,6 +23,7 @@ import com.mysql.jdbc.StringUtils;
 
 import acceptancetests.data.CommonConstants;
 import acceptancetests.util.CommonUtility;
+import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 import cucumber.api.DataTable;
 import gherkin.formatter.model.DataTableRow;
@@ -943,6 +944,7 @@ public class ComparePlansPage extends UhcDriver {
 		CommonUtility.waitForPageLoad(driver, editDrugsLink, 30);
 		validateNew(editDrugsLink);
 		jsClickNew(editDrugsLink);
+		waitForPageLoadSafari();
 		CommonUtility.waitForPageLoad(driver, BuildDrugPage_EnterDrugNameTxt, 30);
 		if (validateNew(BuildDrugPage_EnterDrugNameTxt)) {
 			Assert.assertTrue("Naviagted to Build Drug List Page", true);
@@ -1213,6 +1215,7 @@ public class ComparePlansPage extends UhcDriver {
 	public DrugDetailsPage clickDrugCostDetails_DrugInfoModal() {
 		validateNew(DrugInfoModal_DrugCostDetailsBtn);
 		jsClickNew(DrugInfoModal_DrugCostDetailsBtn);
+		waitForPageLoadSafari();
 		CommonUtility.waitForPageLoadNew(driver, DrugDetails_DrugCostsHeading, 30);
 		if(validateNew(DrugDetails_ChangePharmacyLnk) && validateNew(DrugDetails_DrugCostsHeading))
 		{
@@ -1229,6 +1232,7 @@ public class ComparePlansPage extends UhcDriver {
 		int DrugCount_Total = Drugs.length-1;
 		String currentAddedDrug;
 		String drugYouPaylist = "";
+		String drugYouPay;
 		int i;
 		System.out.println("Total Added Drug Count : "+DrugCount_Total);
 		for(i=1; i<=DrugCount_Total; i++) {
@@ -1236,7 +1240,12 @@ public class ComparePlansPage extends UhcDriver {
 			System.out.println("Current Added Drug Name : "+currentAddedDrug);
 			WebElement DrugName = driver.findElement(By.xpath("//*[contains(@class, 'vpp-modal')]//*[contains(text(), '"+currentAddedDrug+"')]"));
 			WebElement DrugYouPay = driver.findElement(By.xpath("//*[contains(@class, 'vpp-modal')]//*[contains(text(), '"+currentAddedDrug+"')]//following::*[contains(@class, 'initial-coverage')]//following::*[contains(text(), '$')]"));
-			String drugYouPay = DrugYouPay.getText().trim();
+			//DrugYouPay.getText will get child element text as well in Safari browser which fails the scripts ahead
+			if (!MRScenario.browserName.equalsIgnoreCase("Safari")) {
+				drugYouPay = DrugYouPay.getText().trim();
+			} else {
+				drugYouPay = DrugYouPay.findElement(By.xpath("./text()")).getText().trim();
+			}
 			drugYouPaylist = drugYouPaylist + "&" + drugYouPay;
 			System.out.println("Current Added Drug Name : "+currentAddedDrug);
 			System.out.println("Current Drug You Pay : "+drugYouPay);
