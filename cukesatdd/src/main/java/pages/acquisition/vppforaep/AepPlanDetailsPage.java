@@ -533,10 +533,10 @@ public class AepPlanDetailsPage extends UhcDriver {
 						else if(benefitValueUI.contains("/") &&!benefitValueUI.contains("mydoctor"))
 							benefitValueUI =benefitValueUI.replaceAll("/", "");
 
-						if(key.equalsIgnoreCase("Walgreens – Preferred Retail Pharmacy")) {
-							if(benefitValueUI.endsWith("."))
-								benefitValueUI = StringUtils.trimTrailingCharacter(key, '.');
-						}
+						/*if(key.equalsIgnoreCase("Walgreens – Preferred Retail Pharmacy")) {
+							 if(benefitValueUI.contains(".1"))
+								benefitValueUI = benefitValueUI.replace(".1", "");
+						}*/
 						
 						//the following code is only needed for the specific benefit values where we have to remove the footnote values form the end
 						if( key.equalsIgnoreCase("Preferred Mail Home Delivery through OptumRx")) {
@@ -721,11 +721,11 @@ public class AepPlanDetailsPage extends UhcDriver {
 		}
 		System.out.println("Finished collecting the info on vpp detail page =====");
 		
-//		  for(String keyValue : result.keySet()) {
-//		  System.out.println("Key : "+keyValue+" Value: "+result.get(keyValue));
-//		  System.out.println(
-//		  "_________________________________________________________________________________________________"
-//		  ); }
+		  for(String keyValue : result.keySet()) {
+		  System.out.println("Key : "+keyValue+" Value: "+result.get(keyValue));
+		  System.out.println(
+		  "_________________________________________________________________________________________________"
+		  ); }
 
 		return result;
 	}
