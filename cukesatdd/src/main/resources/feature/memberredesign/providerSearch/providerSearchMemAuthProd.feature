@@ -24,22 +24,22 @@ Feature: 1.23.2 Member Provider Search - Member Auth - PROD
 	@prod_providerSearch01_mapd
     Examples: 
 	    | index | username  | password  | MemUserName          | planType | memberType              | 
-	    | S02   | kkumard   | mnrs786@  | LMHOCHSCHILD11       | MAPD     | UHC_IND_ProviderSearch  |
+	    | S02   | kkumard   | tnps459#  | LMHOCHSCHILD11       | MAPD     | UHC_IND_ProviderSearch  |
 
 	@prod_providerSearch01_pdp
     Examples: 
 	    | index | username  | password  | MemUserName          | planType | memberType              | 
-	    | S03   | kkumard   | mnrs786@  | nawal1215            | PDP      | AARP_IND_ProviderSearch |	
+	    | S03   | kkumard   | tnps459#  | nawal1215            | PDP      | AARP_IND_ProviderSearch |	
 
 	@prod_providerSearch01_ma
     Examples: 
 	    | index | username  | password  | MemUserName          | planType | memberType              | 
-        | S04   | kkumard   | mnrs786@  | haradaty32           | MA       | UHC_IND_ProviderSearch  |
+        | S04   | kkumard   | tnps459#  | haradaty32           | MA       | UHC_IND_ProviderSearch  |
 
 	@prod_providerSearch01_medica_pcp
     Examples: 
 	    | index | username  | password  | MemUserName          | planType | memberType              |
-	    | S07   | kkumard   | mnrs786@  | BATLLOT@AOL.COM      | PCP      | PCP_IND_ProviderSearch  |
+	    | S07   | kkumard   | tnps459#  | BATLLOT@AOL.COM      | PCP      | PCP_IND_ProviderSearch  |
 
   @prod_sanity02
   Scenario Outline: -Index <index> -Plan Type: <planType> -Member Type: <memberType> - To validate navigation from Provider Search page to other secondary pages - To validate navigation from Provider Search page to other secondary pages  - pharmacies and prescriptions, health and wellness, account setting
@@ -63,22 +63,22 @@ Feature: 1.23.2 Member Provider Search - Member Auth - PROD
 	@prod_providerSearch01_mapd
     Examples: 
 	    | index | username  | password  | MemUserName          | planType | memberType              | 
-	    | S02   | kkumard   | mnrs786@  | LMHOCHSCHILD11       | MAPD     | UHC_IND_ProviderSearch  |
+	    | S02   | kkumard   | tnps459#  | LMHOCHSCHILD11       | MAPD     | UHC_IND_ProviderSearch  |
 
 	@prod_providerSearch01_pdp
     Examples: 
 	    | index | username  | password  | MemUserName          | planType | memberType              | 
-	    | S03   | kkumard   | mnrs786@  | nawal1215            | PDP      | AARP_IND_ProviderSearch |	
+	    | S03   | kkumard   | tnps459#  | nawal1215            | PDP      | AARP_IND_ProviderSearch |	
 
 	@prod_providerSearch01_ma
     Examples: 
 	    | index | username  | password  | MemUserName          | planType | memberType              | 
-        | S04   | kkumard   | mnrs786@  | haradaty32           | MA       | UHC_IND_ProviderSearch  |
+        | S04   | kkumard   | tnps459#  | haradaty32           | MA       | UHC_IND_ProviderSearch  |
 
 	@prod_providerSearch01_medica_pcp
     Examples: 
 	    | index | username  | password  | MemUserName          | planType | memberType              |
-	    | S06   | kkumard   | mnrs786@  | ALREALESTATE@AOL.COM | MEDICA   | MEDICA_IND_ProviderSearch |
+	    | S06   | kkumard   | tnps459#  | ALREALESTATE@AOL.COM | MEDICA   | MEDICA_IND_ProviderSearch |
 
 	
   #----- begin regression
@@ -107,28 +107,28 @@ Feature: 1.23.2 Member Provider Search - Member Auth - PROD
 	@prod_providerSearch01_mapd
     Examples: 
 	    | index | username  | password  | MemUserName          | planType | memberType              | 
-	    | 01    | kkumard  | mnrs786@  | BILL.ROSNER123#      | MAPD     | AARP_IND_ProviderSearch  |
-	    | 02    | kkumard  | mnrs786@  | LMHOCHSCHILD11       | MAPD     | UHC_IND_ProviderSearch  |
+	    | 01    | kkumard  | tnps459#  | BILL.ROSNER123#      | MAPD     | AARP_IND_ProviderSearch  |
+	    | 02    | kkumard  | tnps459#  | LMHOCHSCHILD11       | MAPD     | UHC_IND_ProviderSearch  |
 
 	@prod_providerSearch01_pdp
     Examples: 
 	    | index | username  | password  | MemUserName          | planType | memberType              | 
-	    | 03    | kkumard  | mnrs786@  | nawal1215            | PDP      | AARP_IND_ProviderSearch |
+	    | 03    | kkumard  | tnps459#  | nawal1215            | PDP      | AARP_IND_ProviderSearch |
 
 	@prod_providerSearch01_ma
     Examples: 
 	    | index | username  | password  | MemUserName          | planType | memberType              | 
-        | 04    | kkumard  | mnrs786@  | haradaty32           | MA       | UHC_IND_ProviderSearch  |
-	    | 05    | kkumard  | mnrs786@  | haradaty32           | MA       | AARP_IND_ProviderSearch |
+        | 04    | kkumard  | tnps459#  | haradaty32           | MA       | UHC_IND_ProviderSearch  |
+	    | 05    | kkumard  | tnps459#  | haradaty32           | MA       | AARP_IND_ProviderSearch |
 
 	@prod_providerSearch01_medica_pcp
     Examples: 
 	    | index | username  | password  | MemUserName          | planType | memberType              |
-	    | 07    | kkumard  | mnrs786@  | BATLLOT@AOL.COM      | PCP      | PCP_IND_ProviderSearch  |
-	    | 06    | kkumard  | mnrs786@  | ALREALESTATE@AOL.COM | MEDICA   | MEDICA_IND_ProviderSearch |
+	    | 07    | kkumard  | tnps459#  | BATLLOT@AOL.COM      | PCP      | PCP_IND_ProviderSearch  |
+	    | 06    | kkumard  | tnps459#  | ALREALESTATE@AOL.COM | MEDICA   | MEDICA_IND_ProviderSearch |
 
 	@prod_providerSearch01_grp
     Examples: 
 	    | index | username  | password  | MemUserName          | planType | memberType              | 
-	    | 08    | kkumard  | mnrs786@  | Andersonga1@Bellsouth.Net | MAPD| GRP_ProviderSearch      |
+	    | 08    | kkumard  | tnps459#  | Andersonga1@Bellsouth.Net | MAPD| GRP_ProviderSearch      |
 
