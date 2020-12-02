@@ -1434,14 +1434,87 @@ public class DrugDetailsPage extends UhcDriver {
 		validate(MonthlyDrugStage_CoverageGapStagerTbl) ||
 		validate(MonthlyDrugStage_CatastropheStagerTbl) ||
 		validate(MonthlyDrug_YouPay_heading) ||
-		validate(ImportantInfo_Header) 
-		// ||validate(CopaySection)
+		validate(ImportantInfo_Header) ||
+		validate(CopaySection)
 		) {
 			Assert.fail("***** DCE Details Page validation for Not Covered Pharmacy View - FAILED *****");
 		}
 		System.out.println("***** DCE Details Page validation for Not Covered Pharmacy View Passed *****");
 		System.out.println("***** Your Drugs, Monthly Costs by Stage, Copay and Coinsurance and Monthly Drugs costs Sections are not displayed *****");
-		
 	}
+
+
+	@FindBy(xpath = "//*[contains(@id, 'plancopaydetail')]")
+	public WebElement LIS_Buydown_CopaySection;
+
+	@FindBy(xpath = "//*[contains(@id, 'plancopaydetail')]//h3[contains(text(), 'Qualify for LIS')]")
+	public WebElement LIS_BuyDown_Copay;
+
+	@FindBy(xpath = "//*[contains(@id, 'plancopaydetail')]//h3[contains(text(), 'Deductible')]")
+	public WebElement LIS_BuyDown_Deductible;
+
+	@FindBy(xpath = "//*[contains(@alt, 'alert')]//following::*[contains(text(), 'level of Extra Help')]")
+	public WebElement LIS_Alert;
+
+
+	public void validateLISBuyDown_CopaySection_LISAlert() {
+		if(validateNew(LIS_Buydown_CopaySection)  &&
+		validateNew(LIS_BuyDown_Copay) &&
+		validateNew(LIS_BuyDown_Deductible) &&
+		validateNew(LIS_Alert)
+		) {
+			System.out.println("***** DCE Details Page validation Passed for LIS BuyDown - Alert and LIS copay Section *****");
+			System.out.println("***** $0 Copay and Coinsurance for LIS Buydown *****");
+			System.out.println(LIS_BuyDown_Copay.getText());
+			System.out.println("***** Deductible for LIS Buydown *****");
+			System.out.println(LIS_BuyDown_Deductible.getText());
+			System.out.println("***** Alert Displayed for LIS Buydown *****");
+			System.out.println(LIS_Alert.getText());
+		}
+		else
+			Assert.fail("***** DCE Details Page validation for LIS BuyDown - Alert and LIS copay Section - FAILED *****");
+	}
+
+	
+	@FindBy(xpath = "//div[@id='monthlycostdetails']")
+	public WebElement MonthlyDrug_Tbl;
+
+	public void validateLISBuyDown_MonthlyCostsNotDisplayed() {
+		if(validate(MonthlyCostDetails_Header)  ||
+				validate(MonthlyDrug_Tbl) ||
+				validate(Graph_svg)
+		) {
+			Assert.fail("***** DCE Details Page validation for LIS Buydown, Monthly Cost details IS Displayed - FAILED *****");
+		}
+		System.out.println("***** DCE Details Page validation for LIS Buydown, Monthly Cost details is Displayed Passed *****");
+		System.out.println("***** Monthly Cost details Section, graph and Table are not displayed *****");
+	}
+
+	public void validateLISBuyDown_CoveredDrugCost(String coveredDrug) {
+		WebElement DrugYouPay = driver.findElement(By.xpath("//caption[contains(text(), 'Your Drugs')]/ancestor::table//span[contains(text(), '"+coveredDrug+"')]//ancestor::td//following-sibling::td//*[contains(text(), '$')]"));
+		String currentDrugYouPay = DrugYouPay.getText().trim();
+		System.out.println("Displayed Covered Drug - "+coveredDrug+" You Pay : "+currentDrugYouPay);
+		System.out.println("Expected Covered Drug -"+coveredDrug+" You Pay : $0");
+
+		if(validateNew(DrugYouPay) && currentDrugYouPay.contentEquals("$0")) {
+			System.out.println("DCE Details Page, LIS BuyDown -  Validated $0 You Pay for Covered Drugs");
+		}
+		else
+			Assert.fail("DCE Details Page - >>>  Validated FAILED  <<<  LIS BuyDown -  $0 You Pay for Covered Drugs NOT Displayed");
+	}
+
+	public void validateLISBuyDown_NotCoveredDrugCost(String notCoveredDrug) {
+		WebElement DrugYouPay = driver.findElement(By.xpath("//caption[contains(text(), 'Your Drugs')]/ancestor::table//span[contains(text(), '"+notCoveredDrug+"')]//ancestor::td//following-sibling::td//*[contains(text(), '$')]"));
+		String currentDrugYouPay = DrugYouPay.getText().trim();
+		System.out.println("Displayed Not Covered Drug - "+notCoveredDrug+" You Pay : "+currentDrugYouPay);
+		System.out.println("Expected Not Covered Drug - "+notCoveredDrug+" You Pay : Not $0");
+
+		if(validateNew(DrugYouPay) && !currentDrugYouPay.contains("$0")) {
+			System.out.println("DCE Details Page, LIS BuyDown -  Validated Non $0 You Pay for Not Covered Drugs");
+		}
+		else
+			Assert.fail("DCE Details Page - >>>  Validated FAILED  <<<  LIS BuyDown -  Non $0 You Pay for Not Covered Drugs NOT Displayed");
+	}
+
 	
 }
