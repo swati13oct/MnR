@@ -278,4 +278,17 @@ public class IsDecisionGuideCommonStepDefinition {
 			Assert.assertTrue("PROBLEM - Is Decision Guide Step 2 Page is null", false);
 		}
 	}
+	
+	@Then("^user clicks Next to Navigate to IS Second Step$")
+	public void user_clicks_Next_to_Navigate_to_IS_Second_Step() throws Throwable {
+		IsDecisionGuideStep1 DecisionGuideStep1Page =(IsDecisionGuideStep1) getLoginScenario().getBean(PageConstants.IS_DECISION_GUIDE_PAGE1);
+		IsDecisionGuideStep2 DecisionGuideStep2Page = DecisionGuideStep1Page.NavigateNext_DGR();
+		if (DecisionGuideStep2Page != null) {
+			System.out.println("Successfully navigated to IS Decision Guide Step 2 Page");
+			getLoginScenario().saveBean(PageConstants.IS_DECISION_GUIDE_PAGE2,DecisionGuideStep2Page);
+		} else {
+			Assert.assertTrue("PROBLEM - Is Decision Guide Step 2 Page is null", false);
+		}
+
+	}
 }

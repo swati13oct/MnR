@@ -539,7 +539,23 @@ public class IsDecisionGuideStep1 extends UhcDriver{
 		return null;
 	}
 	
-	
+	public IsDecisionGuideStep2 NavigateNext_DGR() {
+		if(validate(NextBtn)){
+			jsClickNew(NextBtn);
+			
+		}
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if(Step2Tab.isEnabled()){
+			System.out.println("Next Button Clicked : Step 2 Displayed");
+			return new IsDecisionGuideStep2(driver);
+		}
+		return null;
+	}
 	
 	public boolean enterUserInfoSteperror(Map<String, String> memberAttributesMap) throws InterruptedException {
 
