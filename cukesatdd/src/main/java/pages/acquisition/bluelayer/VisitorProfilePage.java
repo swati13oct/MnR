@@ -26,7 +26,8 @@ public class VisitorProfilePage extends UhcDriver {
 	@FindBy(css = "div.signupCTA a.profileBtn")
 	private WebElement btnCreateProfile;
 	
-	@FindBy(xpath = "//*[contains(@aria-label,'Add Plans')]")
+	//@FindBy(xpath = "//*[contains(@aria-label,'Add Plans')]")
+	@FindBy(xpath = "//*[contains(@aria-labelledby,'findPlans')]")
 	private WebElement addPlans;
 	
 	@FindBy(css = "a.addrugs")

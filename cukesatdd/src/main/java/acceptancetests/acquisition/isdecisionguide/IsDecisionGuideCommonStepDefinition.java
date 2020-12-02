@@ -269,11 +269,12 @@ public class IsDecisionGuideCommonStepDefinition {
 	
 	@Then("^the user validates Thank You Page and land on Medsupp Page$")
 	public void the_user_validates_Thank_You_Page_on_VPP_PLan_Summary_Page_for_Med_Supp_Plans() throws Throwable {
-		IsDecisionGuideStep2 DecisionGuideStep2Page =(IsDecisionGuideStep2) getLoginScenario().getBean(PageConstants.IS_DECISION_GUIDE_PAGE2);
-		VPPPlanSummaryPage dgrThankYouPage = DecisionGuideStep2Page.NavigateNext_vppMedsuppPage();
-		if (dgrThankYouPage != null) {
+		//IsDecisionGuideStep2 DecisionGuideStep2Page =(IsDecisionGuideStep2) getLoginScenario().getBean(PageConstants.IS_DECISION_GUIDE_PAGE2);
+		DGR_ThankYouPage DecisionGuideStep2Page = (DGR_ThankYouPage) getLoginScenario().getBean(PageConstants.DGR_THANKYOU_PAGE);
+		VPPPlanSummaryPage planSummaryPage = DecisionGuideStep2Page.NavigateNext_vppMedsuppPage();
+		if (planSummaryPage != null) {
 			System.out.println("Successfully navigated to IS Decision Guide Step 2 Page");
-			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE,dgrThankYouPage);
+			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE,planSummaryPage);
 		} else {
 			Assert.assertTrue("PROBLEM - Is Decision Guide Step 2 Page is null", false);
 		}
