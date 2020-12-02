@@ -570,6 +570,8 @@ Feature: 1.01 Member  benefits and Coverage page
    #And the user validates the Primarycare Provider section
    #  | Plan Type | <planType> |
     And the user validates the Out of Pocket Max section
+    And the user validates the Preventive Care section
+     | UserGender| <userGender> |
     And the user view the LIS Drug Copays & Discounts header
     And the user MAPD LIS should see drug cost table for Lis members
     And the user validates Drug coverage header and text under the section
@@ -589,8 +591,8 @@ Feature: 1.01 Member  benefits and Coverage page
     And the user validates contactus section
 
     Examples: 
-      | index | TID   | planType | memberType     | copayCategory | language | name       | memberid     | effectivedate | monthlypremium | extrahelp            | Identifier       | count | rider   |
-      | 20    | 15245 | MAPD     | Individual_BnC | LIS 1         | ENGLISH  | DBAD ADFED | 919744565-00 | 01/01/2019    | Not Available  | Extra Help Level : 1 | IndEffectiveAARP |     7 | Rider   |
+      | index | TID   | planType | memberType     | copayCategory | language | name       | memberid     | effectivedate | monthlypremium | extrahelp            | Identifier       | count | rider   |userGender|
+      | 20    | 15245 | MAPD     | Individual_BnC | LIS 1         | ENGLISH  | DBAD ADFED | 919744565-00 | 01/01/2019    | Not Available  | Extra Help Level : 1 | IndEffectiveAARP |     7 | Rider   | F        |
       
   #TC22_NON LIS Ind plan member(PDP)- Drug Cost table
   @benefitsAndCoverage18 @CMFedPDPNonLis @BnC_Part9_regressionMember

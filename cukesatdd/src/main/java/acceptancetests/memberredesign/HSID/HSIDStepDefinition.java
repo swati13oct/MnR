@@ -35,6 +35,8 @@ import pages.memberrdesignVBF.RallyDashboardPage;
 import pages.regression.accounthomepage.AccountHomePage;
 import pages.regression.claims.ClaimsSummaryPage;
 import pages.regression.deeplinkPages.ClaimsDeeplinkLoginPage;
+import pages.regression.deeplinkPages.OfflineProd_PharmacynPrescriptionLoginPage;
+import pages.regression.deeplinkPages.OfflineProd_VirtualVisitDeeplinkLoginPage;
 import pages.regression.deeplinkPages.PaymentsDeeplinkLoginPage;
 import pages.regression.deeplinkPages.PharmacyDeeplinkLoginPage;
 import pages.regression.deeplinkPages.VirtualVisitDeeplinkLoginPage;
@@ -45,6 +47,7 @@ import pages.regression.deeplinkPages.eobDeeplinkLoginPage;
 import pages.regression.deeplinkPages.healthwellnessDeepLinkLoginPage;
 import pages.regression.deeplinkPages.healthwellnessDeepLinkLoginPageSHIP;
 import pages.regression.deeplinkPages.myDocumentsDeeplinkLoginPage;
+import pages.regression.deeplinkPages.myDocumentsEdeliveryDeeplinkLoginPage;
 import pages.regression.footer.FooterPage;
 import pages.regression.healthandwellness.HealthAndWellnessPage;
 import pages.regression.login.AssistiveRegistrationPage;
@@ -1500,4 +1503,102 @@ public class HSIDStepDefinition {
 										  }
 										  d.quit();
 										}
+										/** 
+										 * @todo :member lands on myDocuments e-delivery deep link page 
+										 */
+										@Given("^member lands on the myDocuments edelivery deeplink page$")
+										public void the_user_is_on_myDocuments_edelivery_deeplink_Page() throws InterruptedException{
+											WebDriver wd = getLoginScenario().getWebDriver();
+											getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+											myDocumentsEdeliveryDeeplinkLoginPage myDocumentsEdeliveryDeeplinkLoginPage = new myDocumentsEdeliveryDeeplinkLoginPage(wd);
+											myDocumentsEdeliveryDeeplinkLoginPage.navigateToLoginURL();
+											//myDocumentsDeeplinkLoginPage myDocumentsDeeplinkLoginPage = new myDocumentsDeeplinkLoginPage(wd);
+											//myDocumentsDeeplinkLoginPage.navigateToLoginURL();
+											getLoginScenario().saveBean(PageConstants.STAGE_MyDocuments_Edelivery_DEEPLINK_lOGIN_PAGE,myDocumentsEdeliveryDeeplinkLoginPage );	
+										}
+										/** 
+										 * @todo :edelivery deep link login page elements validate  
+										 */
+										@And("^the myDocuments edelivery deeplink page is displayed with all the fields$")
+										public void myDocuments_edelivery_pageis_displayed(){
+											myDocumentsEdeliveryDeeplinkLoginPage myDocumentsEdeliveryDeeplinkLoginPage = (myDocumentsEdeliveryDeeplinkLoginPage) loginScenario.getBean(PageConstants.STAGE_MyDocuments_Edelivery_DEEPLINK_lOGIN_PAGE);
+											myDocumentsEdeliveryDeeplinkLoginPage.validatePageElements();
+										}  
+										/** 
+										 * @todo :on the myDocuments edelivery deep link page member enters login credentials 
+										 */
+										@Given("^on myDocuments edelivery deeplink page I enter the member details and click continue$")
+										public void the_user_is_on_myDocuments_edelivery_deeplink_page(DataTable givenAttributes) throws InterruptedException{
+											/* Reading the given attribute from feature file */
+											List<DataTableRow> memberAttributesRow = givenAttributes
+													.getGherkinRows();
+											Map<String, String> memberAttributesMap = new HashMap<String, String>();
+											for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+												memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+														.get(0), memberAttributesRow.get(i).getCells().get(1));
+											}
+											String username = memberAttributesMap.get("User Name");
+											String password  = memberAttributesMap.get("Password");
+											System.out.println("User name : "+username );
+											myDocumentsEdeliveryDeeplinkLoginPage myDocumentsEdeliveryDeeplinkLoginPage = (myDocumentsEdeliveryDeeplinkLoginPage) getLoginScenario().getBean(PageConstants.STAGE_MyDocuments_Edelivery_DEEPLINK_lOGIN_PAGE);
+											Thread.sleep(5000);
+											System.out.println("Title of new page : "+myDocumentsEdeliveryDeeplinkLoginPage.getTitle());
+											myDocumentsEdeliveryDeeplinkLoginPage.enterusername(username);
+											myDocumentsEdeliveryDeeplinkLoginPage.enterpassword(password);	
+											myDocumentsEdeliveryDeeplinkLoginPage.clickSubmit();
+										                                               }
+										/** 
+										 * @todo :member lands on myDocuments edelivery deep link page 
+										 */
+										 @Given("^user is navigated to the myDocuments edelivery deep link page$") 
+										 public void user_navigatedTo_myDocuments_edelivery_Deeplink_page() throws InterruptedException{
+											
+											 myDocumentsEdeliveryDeeplinkLoginPage myDocumentsEdeliveryDeeplinkLoginPage = (myDocumentsEdeliveryDeeplinkLoginPage) getLoginScenario().getBean(PageConstants.STAGE_MyDocuments_Edelivery_DEEPLINK_lOGIN_PAGE);
+										     Thread.sleep(3000);
+										     myDocumentsEdeliveryDeeplinkLoginPage.validateMyDocumentsPage();
+										}
+										 /** 
+											 * @todo :member lands on virtual visit offline PROD deep link
+											*/
+											@Given("^member lands on the offline PROD virtual visit deeplink page$")
+											public void the_user_is_on_offline_PROD_virtualVisit_deeplink_Page(DataTable givenAttributes) throws InterruptedException{
+												String brand = givenAttributes.asList(String.class).get(0);
+												WebDriver wd = getLoginScenario().getWebDriver();
+												getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+												OfflineProd_VirtualVisitDeeplinkLoginPage OfflineProd_VirtualVisitDeeplinkLoginPage = new OfflineProd_VirtualVisitDeeplinkLoginPage(wd);
+												OfflineProd_VirtualVisitDeeplinkLoginPage.navigateToLoginURL(brand);
+												getLoginScenario().saveBean(PageConstants.Offline_PROD_VirtualVisit_DEEPLINK_lOGIN_PAGE,OfflineProd_VirtualVisitDeeplinkLoginPage);
+														}
+											/** 
+											 * @todo :deep link login page elements validate  
+											*/
+											@And("^the offline PROD virtual visit deeplink login page is displayed with all the fields$")
+											public void offlinePROD_virtualVisit_pageis_displayed(){
+												OfflineProd_VirtualVisitDeeplinkLoginPage OfflineProd_VirtualVisitDeeplinkLoginPage = (OfflineProd_VirtualVisitDeeplinkLoginPage) loginScenario.getBean(PageConstants.Offline_PROD_VirtualVisit_DEEPLINK_lOGIN_PAGE);
+												OfflineProd_VirtualVisitDeeplinkLoginPage.validatePageElements();
+												OfflineProd_VirtualVisitDeeplinkLoginPage.validateOfflineProdVirtualVisitPage();
+											}  
+											
+											/** 
+											 * @todo :member lands on virtual visit offline PROD deep link
+											*/
+											@Given("^member lands on the offline PROD HWP deeplink page$")
+											public void the_user_is_on_offline_PROD_HWP_deeplink_Page(DataTable givenAttributes) throws InterruptedException{
+												String brand = givenAttributes.asList(String.class).get(0);
+												WebDriver wd = getLoginScenario().getWebDriver();
+												getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+												OfflineProd_PharmacynPrescriptionLoginPage OfflineProd_PharmacynPrescriptionLoginPage = new OfflineProd_PharmacynPrescriptionLoginPage(wd);
+												OfflineProd_PharmacynPrescriptionLoginPage.navigateToLoginURL(brand);
+												getLoginScenario().saveBean(PageConstants.Offline_PROD_HWP_DEEPLINK_lOGIN_PAGE,OfflineProd_PharmacynPrescriptionLoginPage);
+														}
+											/** 
+											 * @todo :deep link login page elements validate  
+											*/
+											@And("^the offline PROD HWP deeplink login page is displayed with all the fields$")
+											public void offlinePROD_HWP_pageis_displayed(){
+												OfflineProd_PharmacynPrescriptionLoginPage OfflineProd_PharmacynPrescriptionLoginPage = (OfflineProd_PharmacynPrescriptionLoginPage) loginScenario.getBean(PageConstants.Offline_PROD_HWP_DEEPLINK_lOGIN_PAGE);
+												OfflineProd_PharmacynPrescriptionLoginPage.validatePageElements();
+												OfflineProd_PharmacynPrescriptionLoginPage.validateOfflineProdHWPPage();
+											}  
 										}

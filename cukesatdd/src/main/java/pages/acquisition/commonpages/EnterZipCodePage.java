@@ -16,13 +16,16 @@ import pages.acquisition.commonpages.PageTitleConstants;
 
 public class EnterZipCodePage extends UhcDriver {
 
-	@FindBy(xpath = "//form[contains(@class,'zipForm')]")
+	//@FindBy(xpath = "//form[contains(@class,'zipForm')]")
+	@FindBy(xpath = "//form[contains(@class,'zip-form')]")
 	List<WebElement> zipForm;
 
-	@FindBy(xpath = "(//form[contains(@class,'zipForm')]//input[contains(@class,'zip-input')])")
+	//@FindBy(xpath = "(//form[contains(@class,'zipForm')]//input[contains(@class,'zip-input')])")
+	@FindBy(xpath = "(//form[contains(@class,'zip-form')]//input)[2]")
 	List<WebElement> ZipCodeText;
 
-	@FindBy(xpath = "(//form[contains(@class,'zipForm')]//button[contains(@class,'uhc-zip-button')])")
+	//@FindBy(xpath = "(//form[contains(@class,'zipForm')]//button[contains(@class,'uhc-zip-button')])")
+	@FindBy(xpath = "(//form[contains(@class,'zip-form')]//button[contains(@class,'zip-button')])[2]")
 	List<WebElement> ZipcodeButton;
 
 	@FindBy(xpath = "//li[@class='expandable'][1]")
@@ -49,7 +52,7 @@ public class EnterZipCodePage extends UhcDriver {
 				Thread.sleep(3000);
 				ZipCodeText.get(zipCodeNumber - 1).clear();
 				ZipCodeText.get(zipCodeNumber - 1).sendKeys(zipCode);
-				ZipcodeButton.get(zipCodeNumber - 1).click();
+				jsClickNew(ZipcodeButton.get(zipCodeNumber - 1));
 				System.out.println("Clicked on " + zipCodeNumber + " Zip Code Component");
 				System.out.println("Validating VPP page for Zip code " + zipCode);
 				Thread.sleep(20000);
@@ -85,6 +88,8 @@ public class EnterZipCodePage extends UhcDriver {
 				}
 				driver.navigate().back();
 				zipCodeNumber++;
+				driver.navigate().refresh();	//Adding refresh since element are not located in Safari browser after using navigate back
+				threadsleep(2000);
 			}
 		} catch (Exception e) {
 			System.out.println(e);

@@ -11,6 +11,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
+import pages.acquisition.commonpages.VPPPlanSummaryPage;
 import pages.acquisition.dceredesign.BuildYourDrugList;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageData;
@@ -94,6 +95,21 @@ public class SwitchToGeneric extends UhcDriver {
 			return new DrugDetailsPage(driver);
 		}
 		Assert.fail("Did not Navigate to DCE Drug Details Page");
+		return null;
+	}
+	
+	@FindBy(xpath = "//h2[contains(text(),'Your estimated')]")
+	public WebElement reviewDrugCostPageHeading;
+
+	public DrugSummaryPage ClickSwitch_ReturnSummaryPage() {
+		validateNew(AddDrugBtn);
+		jsClickNew(AddDrugBtn);
+		CommonUtility.waitForPageLoad(driver, reviewDrugCostPageHeading, 30);
+
+		if(validateNew(reviewDrugCostPageHeading)) {
+			return new DrugSummaryPage(driver);
+		}
+		Assert.fail("DCE - Drug Summary Page is not displayed");
 		return null;
 	}
 	
