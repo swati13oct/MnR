@@ -340,4 +340,16 @@ public class VisitorProfilePage extends UhcDriver {
 		}
 		return null;
 	}
+	
+	public AcquisitionHomePage findPlans() {
+
+		jsClickNew(addPlans);
+		waitForPageLoadSafari();
+		if(driver.getCurrentUrl().contains("profile")) {
+			return new AcquisitionHomePage(driver);
+		}else {
+			System.out.println("Navigation to visitor profile is failed");
+			return null;
+		}
+	}
 }

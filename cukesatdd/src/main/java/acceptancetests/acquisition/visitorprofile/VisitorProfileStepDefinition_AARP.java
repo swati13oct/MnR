@@ -79,7 +79,8 @@ public class VisitorProfileStepDefinition_AARP {
 		VisitorProfilePage visitorProfilePage = (VisitorProfilePage) getLoginScenario().
 				getBean(PageConstants.VISITOR_PROFILE_PAGE);
 
-		AcquisitionHomePage acqPage = visitorProfilePage.addPlan();
+		//AcquisitionHomePage acqPage = visitorProfilePage.addPlan();
+		AcquisitionHomePage acqPage = visitorProfilePage.findPlans();
 		
 		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, acqPage);
 	}
