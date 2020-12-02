@@ -440,8 +440,6 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "//p[contains(text(),'UnitedHealthcare Insurance Company (UnitedHealthcare)')]")
     private WebElement UHCICSubTitle;
 	
-
-	
 	
 	@FindBy(xpath = "//a[@id='aarplink']")
     private WebElement aarpLink;
@@ -453,11 +451,14 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	private WebElement learnAboutMedicareHomeScreen;
 		
 
-	@FindBy(xpath = "//a[@id='gfn_lnk_row2_1']")
+   @FindBy(xpath = "//a[@id='gfn_lnk_row2_1']")
     private WebElement MedicareAdvantagePlans;
 	
-	@FindBy(xpath = "//span[contains(text(),'Dual Special Needs Plans')]")
-    private WebElement DualSpecialNeedsPlans;
+//	@FindBy(xpath = "//span[contains(text(),'Dual Special Needs Plans')]")
+//    private WebElement DualSpecialNeedsPlans;
+	
+	@FindBy(xpath = "//a[@id='gfn_lnk_row2_2']")
+	private WebElement DualSpecialNeedsPlans;
 	
 	@FindBy(xpath = "//a[@id='gfn_lnk_row2_3']")
     private WebElement MedicareSupplementInsurancePlans;
@@ -2809,7 +2810,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			//MedicareAdvantagePlans.click();
 			jsClickNew(MedicareAdvantagePlans);
 			threadsleep(5);
-			Assert.assertEquals(driver.getCurrentUrl(), "https://www.stage-aarpmedicareplans.uhc.com/shop/medicare-advantage-plans.html");
+//			Assert.assertEquals(driver.getCurrentUrl(), "https://www.stage-aarpmedicareplans.uhc.com/shop/medicare-advantage-plans.html");
 			if(driver.getCurrentUrl().contains("aarpmedicareplans.com")||driver.getCurrentUrl().contains("uhcmedicaresolutions.com")) {
 				assertTrue(true);
 			}
@@ -2822,8 +2823,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		public void DualSplNeedPlans() {
 			
 			threadsleep(6);
-//			DualSpecialNeedsPlans.click();
-			jsClickNew(DualSpecialNeedsPlans);
+        	DualSpecialNeedsPlans.click();
+//			jsClickNew(DualSpecialNeedsPlans);
 			threadsleep(5);
 			Assert.assertEquals(driver.getCurrentUrl(), "https://www.stage-aarpmedicareplans.uhc.com/shop/dual-special-needs-plans.html");
 			if(driver.getCurrentUrl().contains("aarpmedicareplans.com")||driver.getCurrentUrl().contains("uhcmedicaresolutions.com")) {

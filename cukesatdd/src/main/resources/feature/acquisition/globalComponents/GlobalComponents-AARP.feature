@@ -20,12 +20,12 @@ Feature: 1.12 ACQ - Global Components AARP and UHC
     And user verifies home link of agents&brokers page
     Then user clicks on back to top link of home page
 
-	@globalfooter_AARP
+	@globalfooter
   Examples: 
        |	site	|
        |	AARP	|
  
- @globalfooter_UHC
+ @globalfooter
   Examples: 
        |	site	|
        |	UHC	|      

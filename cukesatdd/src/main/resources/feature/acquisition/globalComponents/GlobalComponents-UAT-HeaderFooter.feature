@@ -23,8 +23,6 @@ Feature: 1.12 UAT - Header and Footer flows
     And the user clicks on browser back button
     And user verifies home link of agents&brokers page
     And the user clicks on browser back button
-    And the user clicks on Accessibility Link
-    And the user clicks on browser back button
     And the user clicks on Medicare Advantage Plans Link 
     And the user clicks on browser back button
     And the user clicks on Dual Special Needs Plans Link 
@@ -46,8 +44,10 @@ Feature: 1.12 UAT - Header and Footer flows
     And the user clicks on browser back button
     And user clicks on visit aarp.org link in the header
     And the user clicks on browser back button
+    And the user clicks on Accessibility Link
+    And the user clicks on browser back button
     And user clicks on visit aarp.org link in the footer
-   
+    
   
   @globalfooter_AARP
   Examples: 
