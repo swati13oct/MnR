@@ -576,6 +576,7 @@ public class AREPlanRanking extends UhcDriver {
 			threadsleep(3000);
 			validate(heartIcon);
 			heartIcon.click();
+			threadsleep(3000);
 			viewSavedItems.click();
 			changePlanyearVisitorProfile(year);
 			visitorprofile(planNamesVisitorPrf, vppPlans);
@@ -590,6 +591,7 @@ public class AREPlanRanking extends UhcDriver {
 			threadsleep(3000);
 			validate(heartIcon);
 			heartIcon.click();
+			threadsleep(3000);
 			viewSavedItems.click();
 			changePlanyearVisitorProfile(year);
 			visitorprofile(planNamesVisitorPrf, vppPlans);
