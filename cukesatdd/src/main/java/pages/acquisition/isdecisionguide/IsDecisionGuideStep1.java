@@ -124,6 +124,17 @@ public class IsDecisionGuideStep1 extends UhcDriver{
 	@FindBy(xpath="//button[contains(@class, 'close') and contains(@data-dismiss, 'modal')]")
 	private WebElement closebuttontfn;
 
+	@FindBy(xpath = "//*[contains(@class, 'first_name is-invalid')]")
+	private WebElement DecisionGuideFirstName_ErrorMessage;
+	
+	@FindBy(xpath = "(//*[contains(@class, 'last_name is-invalid')])[2]")
+	private WebElement DecisionGuideLastName_ErrorMessage;
+	
+	@FindBy(xpath = "//*[contains(@class, 'address pac-target-input is-invalid')]")
+	private WebElement DecisionGuideaddress_ErrorMessage;
+	
+	@FindBy(xpath = "(//*[contains(@class, 'city is-invalid')])[2]")
+	private WebElement DecisionGuidecity_ErrorMessage;
 	
 	
 	public IsDecisionGuideStep1(WebDriver driver) {
@@ -528,21 +539,10 @@ public class IsDecisionGuideStep1 extends UhcDriver{
 		return null;
 	}
 	
-	@FindBy(xpath = "//*[contains(@class, 'first_name is-invalid')]")
-	private WebElement DecisionGuideFirstName_ErrorMessage;
 	
-	@FindBy(xpath = "(//*[contains(@class, 'last_name is-invalid')])[2]")
-	private WebElement DecisionGuideLastName_ErrorMessage;
 	
-	@FindBy(xpath = "//*[contains(@class, 'address pac-target-input is-invalid')]")
-	private WebElement DecisionGuideaddress_ErrorMessage;
-	
-	@FindBy(xpath = "(//*[contains(@class, 'city is-invalid')])[2]")
-	private WebElement DecisionGuidecity_ErrorMessage;
-	
-	public boolean enterUserInfoSteperror(Map<String, String> MemberDetailsMap) throws InterruptedException {
-		
-		
+	public boolean enterUserInfoSteperror(Map<String, String> memberAttributesMap) throws InterruptedException {
+
 		boolean validation_Flag = true;
 	
 		jsClickNew(NextBtn);
@@ -554,6 +554,23 @@ public class IsDecisionGuideStep1 extends UhcDriver{
 				System.out.println("Next Button is enabled : Required Field Validation Failed");
 				validation_Flag = false;
 			}
+		
+		String FirstName = memberAttributesMap.get("FirstName");
+		String LastName = memberAttributesMap.get("LastName");
+		String DistributionMethod = memberAttributesMap.get("DistributionMethod");
+		String Email = memberAttributesMap.get("Email");
+		FirstNameTxt.clear();
+		LastNameTxt.clear();
+		EmailTxt.clear();
+		FirstNameTxt.sendKeys(FirstName);
+		LastNameTxt.sendKeys(LastName);
+		if(DistributionMethod.equalsIgnoreCase("email")){
+			EmailOptionSelection.click();
+			EmailTxt.sendKeys(Email);
+		}
+		else{
+			MailOptionSelection.click();
+		}
 		return validation_Flag;
 	}
 }
