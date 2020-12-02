@@ -165,8 +165,8 @@ Feature: 1.08. ACQ- Shopper Profile
       | PlanName | <planname> |
 
     Examples: 
-      | username  | password  | email             | fname  | lname   | mbi           | dob        | plantype | enrolledplanName                                    | planname                                | drugNames | providers | 
-      | qavgogine | qavgogine | nanine@member.com | NANINE | SLOVICK | 3XQ9-C41-RQ43 | 03/10/1949 | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) | No        | No        | 
+      | username  | password  | email             | fname  | lname   | mbi           | dob        | plantype | enrolledplanName                                    | planname                                            | drugNames | providers |
+      | qavgogine | qavgogine | nanine@member.com | NANINE | SLOVICK | 3XQ9-C41-RQ43 | 03/10/1949 | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) | No        | No        |
 
   @searchProfileAndEnroll
   Scenario Outline: Telesales agent searching for the profile using first name and last name and validate OLE flow is not allowed
@@ -185,25 +185,12 @@ Feature: 1.08. ACQ- Shopper Profile
       | Last Name          | <lname>            |
       | DOB                | <dob>              |
       | MBI                | <mbi>              |
-    Then the user clicks on back on all plan linnk in Plan Compare page
-    Then I land on the plan summary page of VPP
-      | Enrolled Plan Name | <enrolledplanName> |
-      | Plan Name          | <planName>         |
-      | Drugs              | <drugNames>        |
-      | Providers          | <providers>        |
-      | First Name         | <fname>            |
-      | Last Name          | <lname>            |
-    Then agent saves two plans as favorite for user
-      | Plan Type  | <plantype>  |
-      | Test Plans | <testPlans> |
-    Then Navigate to Visitor Profile page
+    Then Navigate to Visitor Profile page from compare page
     And enroll In Plan should not be clickable on Visitor Profile page in Agent mode
-    And user delets the added plans on visitor profile page
-      | Test Plans | <testPlans> |
 
     Examples: 
-      | username  | password  | email             | fname  | lname  | mbi           | dob        | plantype | enrolledplanName                     | planName                                | drugNames | providers | testPlans                                                                    |
-      | qavgogine | qavgogine | tyrone@member.com | TYRONE | QUARRY | 3C36-J24-EH68 | 01/06/1950 | MAPD     | AARP Medicare Advantage Plan 2 (HMO) | AARP Medicare Advantage Walgreens (PPO) | No        | No        | AARP Medicare Advantage Walgreens (PPO),AARP Medicare Advantage Choice (PPO) |
+      | username  | password  | email             | fname  | lname  | mbi           | dob        | plantype | enrolledplanName                     | planName                                | drugNames | providers |
+      | qavgogine | qavgogine | tyrone@member.com | TYRONE | QUARRY | 3C36-J24-EH68 | 01/06/1950 | MAPD     | AARP Medicare Advantage Plan 2 (HMO) | AARP Medicare Advantage Walgreens (PPO) | No        | No        |
 
   @searchProfileEmptyFields
   Scenario Outline: Telesales agent searching for the profile using empty Email,firstname and lastname
