@@ -81,10 +81,11 @@ Feature: 1.18.1.2 Member Pharamcies And Prescriptions page - Pre-Effective - PRO
 	  | FID     | username  | password  | MemUserName               | planType | memberType          | expectLink |
 	  | F493942 | kkumard   | tnps459#  | Webfan50                  | MAPD     | GRP_PREEFF_PnP      | yes        |
 
-	@prod_pnpPreEff_mapd_grp_lghib
-    Examples: 
-	  | FID     | username  | password  | MemUserName               | planType | memberType          | expectLink |
-	  | F493942 | kkumard   | tnps459#  | Chief2302                 | MAPD     | GRP_LGHIB_PREEFF_PnP| yes        |
+    #note: no prod user pre-eff for these groups for now
+	#@prod_pnpPreEff_mapd_grp_lghib
+    #Examples: 
+	#  | FID     | username  | password  | MemUserName               | planType | memberType          | expectLink |
+	#  | F493942 | kkumard   | tnps459#  | Chief2302                 | MAPD     | GRP_LGHIB_PREEFF_PnP| yes        |
 
 	#@prod_pnpPreEff_mapd_grp_seib
     #Examples: 

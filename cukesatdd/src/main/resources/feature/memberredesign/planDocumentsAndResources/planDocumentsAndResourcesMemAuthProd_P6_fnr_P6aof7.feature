@@ -41,7 +41,7 @@ Feature: 1.06.6.2a Member Plans and Documents - section: Forms And Resources Par
 	@prod_preeffective_mapd_6aof7
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | fnr_sd | fnr_or |
-      | 03-098 | xxxxx       | kkumard  | tnps459#  | UHCjanicejohn          | MAPD     | AARP_IND_PREEFF_PDnR  | false  | false  |
+      | 03-098 | xxxxx       | kkumard  | tnps459#  | Mino77003          | MAPD     | AARP_IND_PREEFF_PDnR  | false  | false  |
 
 #	@prod_preeffective_pdp_6aof7
 #	Examples: 
@@ -53,7 +53,7 @@ Feature: 1.06.6.2a Member Plans and Documents - section: Forms And Resources Par
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | fnr_sd | fnr_or |
 #      | 06-103 | xxxxx       | kkumard  | tnps459#  | testusername    | MA       | IND_TERM_PDnR         | true   | true   |
-      | 07-102 | xxxxx       | kkumard  | tnps459#  | PJVANEKRIS65    | MA       | GROUP_TERM_PDnR       | true   | true   |
+      | 07-102 | xxxxx       | kkumard  | tnps459#  | pkarels    | MA       | GROUP_TERM_PDnR       | true   | true   |
 
 #	@prod_terminated_mapd_6aof7
 #	Examples: 

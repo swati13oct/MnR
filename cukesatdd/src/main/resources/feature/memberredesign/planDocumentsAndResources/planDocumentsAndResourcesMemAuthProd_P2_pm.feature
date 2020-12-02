@@ -40,7 +40,7 @@ Feature: 1.06.1.2 Member Plans and Documents - section: Plan Materials - Member 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | pm_sd | pm_op | pm_mi | pm_en | pm_es | pm_zh |
 #      | 01-020 | xxxxx       | kkumard  | tnps459#  | Ranch1955    | MA       | AARP_IND_PREEFF_PDnR  | false | false | false | false | false | false |
 #      | 02-021 | xxxxx       | kkumard  | tnps459#  | testusername    | MA       | GROUP_PREEFF_PDnR     | false | false | false | false | false | false |
-      | 03-022 | xxxxx       | kkumard  | tnps459#  | UHCjanicejohn          | MAPD     | AARP_IND_PREEFF_PDnR  | false | false | false | false | false | false |
+      | 03-022 | xxxxx       | kkumard  | tnps459#  | Mino77003          | MAPD     | AARP_IND_PREEFF_PDnR  | false | false | false | false | false | false |
 
 #	@prod_preeffective_pdp
 #	Examples: 
