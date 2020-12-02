@@ -68,7 +68,7 @@ public class DCEACQVPPPlanSummaryMobile {
 	public void the_user_on__medicaresolutions_Site(DataTable givenAttributes) {
 		wd = getLoginScenario().getMobileDriver();
 		AcquisitionHomePageMobile aquisitionhomepage = new AcquisitionHomePageMobile(wd);
-		//aquisitionhomepage.openPRE();
+		// aquisitionhomepage.openPRE();
 		aquisitionhomepage.openMobileURL();
 		aquisitionhomepage.fixPrivateConnectionMobile();
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
@@ -93,7 +93,7 @@ public class DCEACQVPPPlanSummaryMobile {
 		AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		VPPPlanSummaryPageMobile plansummaryPage = null;
-		plansummaryPage = aquisitionhomepage.searchPlanOnHealthPlansPage(zipcode,county,isMultiCounty);
+		plansummaryPage = aquisitionhomepage.searchPlanOnHealthPlansPage(zipcode, county, isMultiCounty);
 
 		if (plansummaryPage != null) {
 			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
@@ -103,10 +103,6 @@ public class DCEACQVPPPlanSummaryMobile {
 		}
 
 	}
-	
-	
-	
-	
 
 	@Then("^the enduser navigates to the plan details for the given plan type in AARP site-$")
 	public void the_user_navigates_to_the_plan_details_for_the_given_plan_type_in_AARP_site(DataTable data)
@@ -117,8 +113,7 @@ public class DCEACQVPPPlanSummaryMobile {
 		String planName = memberAttributesRow.get(1).getCells().get(1);
 		VPPPlanSummaryPageMobile plansummaryPage = new VPPPlanSummaryPageMobile(wd);
 		// plansummaryPage.viewPlanSummary(planType);
-		PlanDetailsPageMobile plandetailspage = plansummaryPage.navigateToPlanDetails(planName,
-				planType);
+		PlanDetailsPageMobile plandetailspage = plansummaryPage.navigateToPlanDetails(planName, planType);
 		if (plandetailspage != null) {
 			getLoginScenario().saveBean(PageConstants.PLAN_DETAILS_PAGE, plandetailspage);
 			getLoginScenario().saveBean(DCERedesignCommonConstants.PLANTYPE, planType);
@@ -235,7 +230,6 @@ public class DCEACQVPPPlanSummaryMobile {
 		drugDetailsPage.validateMonthlyCostStage();
 	}
 
-	
 	@Then("^the enduser validates link to Drug Summary Page$")
 	public void the_user_validates_link_to_Drug_Summary_Page() throws Throwable {
 		DrugDetailsPageMobile drugDetailsPage = (DrugDetailsPageMobile) getLoginScenario()
@@ -258,7 +252,7 @@ public class DCEACQVPPPlanSummaryMobile {
 			Assert.fail("VPP Plan Details not loaded");
 
 	}
-	
+
 	@Then("^the enduser validates Important information section$")
 	public void the_user_validates_Important_information_section() throws Throwable {
 		DrugDetailsPageMobile drugDetailsPage = (DrugDetailsPageMobile) getLoginScenario()
@@ -282,7 +276,7 @@ public class DCEACQVPPPlanSummaryMobile {
 
 	}
 	///
-	
+
 	@When("^the user views the plans of the below plan type and select Next year$")
 	public void user_performs_planSearch_in_aarp_site_next_year(DataTable givenAttributes) {
 		List<DataTableRow> givenAttributesRow = givenAttributes.getGherkinRows();
@@ -300,25 +294,26 @@ public class DCEACQVPPPlanSummaryMobile {
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 
 		plansummaryPage.viewPlanSummary(plantype);
-		if(!plantype.equalsIgnoreCase("MS"))
+		if (!plantype.equalsIgnoreCase("MS"))
 			plansummaryPage.handlePlanYearSelectionPopup();
 	}
 
 	@When("^I access the DCE Redesign from Plan Summary for mentioned plan$")
-	public void accessDCERign_PlanSummaryforPlan(DataTable attributes){
-		List<DataTableRow> memberAttributesRow = attributes
-				.getGherkinRows();
+	public void accessDCERign_PlanSummaryforPlan(DataTable attributes) {
+		List<DataTableRow> memberAttributesRow = attributes.getGherkinRows();
 		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
 
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
-					.get(0), memberAttributesRow.get(i).getCells().get(1));
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
 		}
 		String plantype = memberAttributesMap.get("Plan Type");
 		String planName = memberAttributesMap.get("Plan Name");
-		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario().getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		plansummaryPage.handlePlanYearSelectionPopup("current");
-	
+		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+
+		plansummaryPage.viewPlanSummary(plantype);
+
 		GetStartedPageMobile getStartedPage = plansummaryPage.navigateToDCERedesignFromVPPPlanCard(plantype, planName);
 		getLoginScenario().saveBean(DCERedesignCommonConstants.PLANTYPE, plantype);
 		getLoginScenario().saveBean(DCERedesignCommonConstants.PLANNAME, planName);
@@ -326,6 +321,6 @@ public class DCEACQVPPPlanSummaryMobile {
 			getLoginScenario().saveBean(PageConstants.DCE_Redesign_GetStarted, getStartedPage);
 		} else
 			Assert.fail("DCE Redesign page object not loaded");
-		
+
 	}
 }

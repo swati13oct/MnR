@@ -33,24 +33,27 @@ public class GetStartedPageMobile extends UhcDriver {
 
 	@FindBy(xpath = "//h3[contains(text(), 'Almost there')]")
 	public WebElement BuildDrugPage_verificationTxt;
-	
-	@FindBy(xpath = "//a[contains(@class, 'uhc-link-button')]//*[contains(text(), 'Return to')]")
+
+	@FindBy(xpath = "//span[contains(text(),'Return to plan summary')]")
 	public WebElement LinktoExitScenario;
-	
+
 	@FindBy(xpath = "//span[contains(text(),'Get Started')]")
 	public WebElement getStartedTab;
-	
+
 	@FindBy(xpath = "//body/div[@id='overlay']")
 	private WebElement overlayFilm;
-	
+
 	@FindBy(id = "dupIconFlyOut")
 	private WebElement shoppingCartIcon;
+
+	@FindBy(xpath = "//a[contains(text(),'Back to plan results')]")
+	private WebElement backToPlanResults;
 
 	public GetStartedPageMobile(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
 		// CommonUtility.waitForPageLoad(driver, addDrugDetailsPage, 10);
-		//openAndValidate();
+		// openAndValidate();
 	}
 
 	@Override
@@ -59,9 +62,9 @@ public class GetStartedPageMobile extends UhcDriver {
 	}
 
 	public BuildYourDrugListMobile clickAddsDrugs() {
-		if(validate(AddMyDrugsBtn))
+		if (validate(AddMyDrugsBtn))
 			jsClickMobile(AddMyDrugsBtn);
-			//AddMyDrugsBtn.click();
+		// AddMyDrugsBtn.click();
 		CommonUtility.waitForPageLoad(driver, BuildDrugPage_EnterDrugNameTxt, 40);
 		if (validateNew(BuildDrugPage_EnterDrugNameTxt)) {
 			Assert.assertTrue("Naviagted to Build Drug List Page", true);
@@ -74,8 +77,8 @@ public class GetStartedPageMobile extends UhcDriver {
 	public void clickAddDrugsBtn() {
 		validateNew(AddMyDrugsBtn);
 		jsClickMobile(AddMyDrugsBtn);
-		//AddMyDrugsBtn.click();
-		//return new ZipCodePlanYearCapturePage(driver);
+		// AddMyDrugsBtn.click();
+		// return new ZipCodePlanYearCapturePage(driver);
 		/*
 		 * CommonUtility.waitForPageLoad(driver, BuildDrugPage_verificationTxt, 30); if
 		 * (validateNew(BuildDrugPage_verificationTxt)) {
@@ -85,18 +88,13 @@ public class GetStartedPageMobile extends UhcDriver {
 		 */
 	}
 
-	
-	
 	public VPPPlanSummaryPageMobile ClickReturnToBtnToVPPSummary() {
 		validateNew(LinktoExitScenario);
 		jsClickNew(LinktoExitScenario);
-		CommonUtility.checkPageIsReadyNew(driver);
-		
-//		while(validate(overlayFilm, 10)) {/**wait*/}
-		//CommonUtility.waitForElementToDisappear(driver, overlayFilm, 75);
-		
+		waitforElementVisibilityInTime(backToPlanResults, 15);
+
 		if (driver.getCurrentUrl().contains("plan-summary")) {
-			return new VPPPlanSummaryPageMobile(driver);	
+			return new VPPPlanSummaryPageMobile(driver);
 		}
 		return null;
 	}
@@ -105,11 +103,11 @@ public class GetStartedPageMobile extends UhcDriver {
 		validateNew(LinktoExitScenario);
 		jsClickNew(LinktoExitScenario);
 		if (driver.getCurrentUrl().contains("plan-summary")) {
-			return new pages.acquisition.bluelayer.VPPPlanSummaryPage(driver);	
+			return new pages.acquisition.bluelayer.VPPPlanSummaryPage(driver);
 		}
-		return null;	
+		return null;
 	}
-	
+
 	public VisitorProfilePageMobile clickOnShoppingCart() {
 		shoppingCartIcon.click();
 		if (driver.getCurrentUrl().contains("profile")) {

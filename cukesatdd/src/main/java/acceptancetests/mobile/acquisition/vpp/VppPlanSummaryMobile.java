@@ -190,7 +190,10 @@ public class VppPlanSummaryMobile {
 	public void the_user_clicks_on_returnlink_to_vpp_planSummary_Getstarted() {
 		GetStartedPageMobile getStartedPage = (GetStartedPageMobile) getLoginScenario()
 				.getBean(PageConstants.DCE_Redesign_GetStarted);
+	
+		
 		VPPPlanSummaryPageMobile plansummaryPage = getStartedPage.ClickReturnToBtnToVPPSummary();
+		
 		if (null != plansummaryPage) {
 			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
 		} else
@@ -204,6 +207,10 @@ public class VppPlanSummaryMobile {
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 
 		String planName = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_NAME);
+		
+
+		
+	
 		plansummaryPage.clickOnViewMoreForPlan(planName);
 		plansummaryPage.validateIsMyProviderCoveredLink(planType, planName);
 
@@ -215,6 +222,7 @@ public class VppPlanSummaryMobile {
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		String planName = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_NAME);
 		String planType = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
+
 		WelcomePageMobile welcomeOLEPage = plansummaryPage.Enroll_OLE_Plan(planName, planType);
 		if (welcomeOLEPage != null) {
 			getLoginScenario().saveBean(PageConstants.OLE_WELCOME_PAGE, welcomeOLEPage);

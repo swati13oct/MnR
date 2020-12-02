@@ -682,8 +682,6 @@ public class VppPlanCompareMobile {
 			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
 					givenAttributesRow.get(i).getCells().get(1));
 		}
-		
-	
 
 		String planYear = givenAttributesMap.get("Plan Year");
 
@@ -691,6 +689,8 @@ public class VppPlanCompareMobile {
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 
 		plansummaryPage.handlePlanYearSelectionPopup(planYear);
+		getLoginScenario().saveBean(planYear, plansummaryPage);
+		
 	}
 
 	@And("^the user selects plan year for AARP site$")
@@ -1555,7 +1555,7 @@ public class VppPlanCompareMobile {
 	public void user_validates_selected_plan_can_be_saved_as_favorite_on_AARP_site(DataTable givenAttributes) {
 		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		
+
 		getLoginScenario().getBean(VPPCommonConstantsMobile.PLAN_YEAR);
 
 		Map<String, String> memberAttributesMap = prepareTestInput(givenAttributes);
@@ -1565,28 +1565,26 @@ public class VppPlanCompareMobile {
 
 		String planYear = memberAttributesMap.get("Plan Year");
 
-		
-
 		// ----- MA plan type ----------------------------
 		String planType = "MA";
-		//plansummaryPage.viewPlanSummary(planType);
-		//plansummaryPage.handlePlanYearSelectionPopup(planYear);
+		// plansummaryPage.viewPlanSummary(planType);
+		// plansummaryPage.handlePlanYearSelectionPopup(planYear);
 		plansummaryPage.validateAbilityToSavePlans(ma_savePlanNames, planType);
 		// plansummaryPage.validatePlansAreSaved(ma_savePlanNames, planType);
 		// //commented out because the previous line already validates after saving plan
 
 		// ----- PDP plan type ---------------------------
 		planType = "PDP";
-		//plansummaryPage.viewPlanSummary(planType);
-		//plansummaryPage.handlePlanYearSelectionPopup();
+		// plansummaryPage.viewPlanSummary(planType);
+		// plansummaryPage.handlePlanYearSelectionPopup();
 		plansummaryPage.validateAbilityToSavePlans(pdp_savePlanNames, planType);
 		// plansummaryPage.validatePlansAreSaved(pdp_savePlanNames, planType);
 		// //commented out because the previous line already validates after saving plan
 
 		// ----- SNP plan type ---------------------------
 		planType = "SNP";
-		//plansummaryPage.viewPlanSummary(planType);
-		//plansummaryPage.handlePlanYearSelectionPopup();
+		// plansummaryPage.viewPlanSummary(planType);
+		// plansummaryPage.handlePlanYearSelectionPopup();
 		plansummaryPage.validateAbilityToSavePlans(snp_savePlanNames, planType);
 		// plansummaryPage.validatePlansAreSaved(snp_savePlanNames, planType);
 		// //commented out because the previous line already validates after saving plan

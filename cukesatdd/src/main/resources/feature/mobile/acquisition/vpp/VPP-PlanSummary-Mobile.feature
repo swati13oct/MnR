@@ -30,13 +30,13 @@ Feature: 1.01.1-Vpp to plan Summary AARP Scenarios
     #      | Prescription Drugs, Tier 1 | <prescriptionDrugsTier1> |
     #     | Plan Type                  | <plantype>               |
     #      | Annual Deductible          | <annualDeductible>       |
-    Then the user hover overs the tool tip for Why is my premium 0 and validates the text
+    #Then the user hover overs the tool tip for Why is my premium 0 and validates the text
     # New steps for DCE Redesign
     And I access the DCE Redesign from Plan Summary for mentioned plan
       | Plan Type | <plantype> |
       | Plan Name | <planName> |
     Then the user validates Get Started Page
-    #Then the user click on return to plan summary from Get Started Page to return to VPP Plan Summary
+    Then the user click on return to plan summary from Get Started Page to return to VPP Plan Summary
     #Then the user clicks on enter drug information link in the benefits table and validate the DCE Home Page for MAPD, PDP , DSNP Plan in AARP site
     #Then the user clicks on Return to Plan Summary link and validates its redirection to Plan Summary Page for MAPD, PDP , DSNP Plan in AARP Site
     #    Then the user validates and clicks learn more about Extra help link for MAPD , PDP , DSNP Plans and it should not be displayed for MA Plans in AARP site
@@ -46,7 +46,7 @@ Feature: 1.01.1-Vpp to plan Summary AARP Scenarios
 
     Examples: 
       | TID   | zipcode | site | isMultutiCounty | county             | plantype | planName                                               | monthlyPremium | primaryCarePhysician | specialist | referralRequired | outOfPocketMaximum | prescriptionDrugsTier1                     | annualDeductible | planyear |
-     # | 15545 |   90210 | AARP | NO              | Los Angeles County | MAPD     | AARP Medicare Advantage SecureHorizons Plan 1 (HMO)    | $0             | $0  copay            | $0  copay  | Yes              | $3,400.00          | $4  copay                                  |                  | next     |
+      | 15545 |   90210 | AARP | NO              | Los Angeles County | MAPD     | AARP Medicare Advantage SecureHorizons Plan 1 (HMO)    | $0             | $0  copay            | $0  copay  | Yes              | $3,400.00          | $4  copay                                  |                  | next     |
       | 15546 |   28105 | AARP | YES             | Mecklenburg County | SNP      | UnitedHealthcare Dual Complete RP (Regional PPO D-SNP) | $0             | $0  copay            | $0  copay  | No               | $0 - $6,700.00     | $0, $1.25, $3.40 copay, or 15% coinsurance |                  | next     |
 
   @vppPlanSummaryAARP02 @vppPlanSummaryAARPRun01 @vppPlanSummaryAARPRegression
@@ -140,7 +140,7 @@ Feature: 1.01.1-Vpp to plan Summary AARP Scenarios
     Examples: 
       | UID | zipcode | isMultiCounty | county | MA_testPlans | PDP_testPlans | SNP_testPlans |
 
-  #      | 1598162 |   80001 | NO            | Jefferson County | AARP Medicare Advantage SecureHorizons Essential (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO) | AARP MedicareRx Preferred (PDP),AARP MedicareRx Saver Plus (PDP) | UnitedHealthcare Dual Complete (HMO D-SNP) |
+  #| 1598162 |   80001 | NO            | Jefferson County | AARP Medicare Advantage SecureHorizons Essential (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO) | AARP MedicareRx Preferred (PDP),AARP MedicareRx Saver Plus (PDP) | UnitedHealthcare Dual Complete (HMO D-SNP) |
   @vppPlanSummaryAARP04
   Scenario Outline: UID: <UID> -zipcode: <zipcode> - Verify user can favorite plans will be saved within session on view plan preview page on AARP site
     Given the user is on AARP medicare acquisition site landing page
