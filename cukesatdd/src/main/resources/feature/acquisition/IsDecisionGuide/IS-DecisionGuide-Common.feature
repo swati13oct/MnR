@@ -42,7 +42,7 @@ Feature: 1.14 Med Supp Plans (IS) Decision Guide flow
     #Then the user validates Thank You Page and land on Medsupp Page
     Then the user validates Thank You Page
 
-    @IS_DecisionGuide_Common_AARP1
+    @IS_DecisionGuide_Common_AARP
     Examples: 
       | UID  | site | zipcode | isMultutiCounty | county             | plantype | firstname      | lastname      | distributionmethod | email         | dob        | partBmonth | partByear | aarpNo     | phNo       | mobileFlag | partAmonth | partAyear | startDate | gender |
       | 0001 | AARP |   90210 | NO              | Los Angeles County | MS       | test-mnr-first | test-mnr-last | mail               |               | 01/01/1945 | January    |      2020 | 0321323215 | 3216549871 | N          | February   |      2020 | June      | male   |
