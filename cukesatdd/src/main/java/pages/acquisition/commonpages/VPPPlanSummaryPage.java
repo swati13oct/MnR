@@ -4901,8 +4901,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 		// Validate Providers
 		if (!providers.equalsIgnoreCase("no")) {
-			jsClickNew(driver.findElement(By.xpath("//div[@class='plan-name-div']//a[text()='" + planName
-					+ "']//following::div[@class='provider-list added'][1]")));
+			driver.findElement(By.xpath("//div[@class='plan-name-div']//a[text()='" + planName
+					+ "']//following::div[@class='provider-list added'][1]")).click();
 			// Validate Drugs
 			List<WebElement> providersList = driver.findElements(By.xpath("//div[@class='plan-name-div']//a[text()='"
 					+ planName + "']//following::div[@class='providers-list'][1]/ul/li"));
@@ -4947,8 +4947,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 		if (!drugNames.equalsIgnoreCase("no")) {
 
-			jsClickNew(driver.findElement(By.xpath("//div[@class='plan-name-div']//a[text()='" + planName
-					+ "']//following::div[@class='drug-list added'][1]")));
+			driver.findElement(By.xpath("//div[@class='plan-name-div']//a[text()='" + planName
+					+ "']//following::div[@class='drug-list added'][1]")).click();
 			// Validate Drugs
 			List<WebElement> drugList = driver.findElements(By.xpath("//div[@class='plan-name-div']//a[text()='"
 					+ planName + "']//following::div[@class='drugs-list'][1]/ul/li[contains(@class,'drug')]"));
@@ -5002,8 +5002,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 		// Validate Drugs
 		if (!drugNames.equalsIgnoreCase("no")) {
-			jsClickNew(driver.findElement(By.xpath("//div[@class='plan-name-div']//a[text()='" + planName
-					+ "']//following::div[@class='drug-list added'][1]")));
+			driver.findElement(By.xpath("//div[@class='plan-name-div']//a[text()='" + planName
+					+ "']//following::div[@class='drug-list added'][1]")).click();;
 
 			// Validate Drugs
 			List<WebElement> drugList = driver.findElements(By.xpath("//div[@class='plan-name-div']//a[text()='"
