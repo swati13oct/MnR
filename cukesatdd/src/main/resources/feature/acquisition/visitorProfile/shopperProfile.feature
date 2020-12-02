@@ -3,7 +3,7 @@
 @ShopperProfile
 Feature: 1.08. ACQ- Shopper Profile
 
-  @searchProfileEmail
+  @searchProfileEmail @SanitySP
   Scenario Outline: Telesales agent searching for the profile using Email
     Given I am an agent logged into the cloak in tool
       | User Name | <username> |
@@ -64,7 +64,7 @@ Feature: 1.08. ACQ- Shopper Profile
       | username  | password  | fname | lname | mbi           | dob        | enrolledplanName                                  | planName                             | drugNames        | providers                                                                                                                  |
       | qavgogine | qavgogine | DAX   | MUNET | 4F78-QY7-CU31 | 08/05/1951 | UnitedHealthcare Dual Complete Plan 1 (HMO D-SNP) | AARP Medicare Advantage Plan 1 (HMO) | Lipitor TAB 10MG | Margaret S Miklic:3686 Grandview Pkwy Ste 300, Jefferson, AL, 35243;David J Knapp:1245 E South Blvd, Montgomery, AL, 36116 |
 
-  @searchProfileAndAddPlans
+  @searchProfileAndAddPlans @SanitySP
   Scenario Outline: Telesales agent searching for the profile using Email and Adding the plans for user
     Given I am an agent logged into the cloak in tool
       | User Name | <username> |
