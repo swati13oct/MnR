@@ -5142,7 +5142,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			if(savePlanImg.getAttribute("class").equalsIgnoreCase("liked")) {
 				flag = true;
 			}
-		}else if(btn.equalsIgnoreCase("Information")) {
+		else if(btn.equalsIgnoreCase("Information")) {
 			Thread.sleep(2000);
 			action.moveToElement(editYourInformationLink).build().perform();
 			editYourInformationLink.click();
@@ -5165,7 +5165,6 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		}
 		return flag;
 	}
-
 
 public boolean verifyPlanCount() throws InterruptedException {
 	boolean flag = false;

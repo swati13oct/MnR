@@ -468,6 +468,8 @@ public class VppCommonStepDefinition {
 	    
 	    
 	}
+	
+	/*---------------------------Added steps for Medsupp Ole----------------
 
 	@Then("^user clicks on Edit Your Information link and navigate back to micro form$")
 	public void user_clicks_on_Edit_Your_Information_link_and_navigate_back_to_micro_form() throws Throwable {
@@ -486,6 +488,7 @@ public class VppCommonStepDefinition {
 		Assert.assertTrue("On clicking View Plan button user is navigated to plan summary page", result);
 		System.out.println("user clicks on View plan button link and navigate back to vpp summary page of medsupp");
 	}
+---------------------------Added steps for Medsupp Ole----------------*/
 
 	@Then("^user clicks on Save icon for all the plans and validate count in cart should match to plans$")
 	public void user_clicks_on_Save_icon_for_all_the_plans_and_match_count() throws Throwable {
