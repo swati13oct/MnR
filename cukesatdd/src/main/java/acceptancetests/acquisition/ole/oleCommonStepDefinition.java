@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.junit.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.testng.util.Strings;
 
 import acceptancetests.acquisition.vpp.VPPCommonConstants;
 import acceptancetests.data.OLE_PageConstants;
@@ -39,11 +40,17 @@ public class oleCommonStepDefinition {
 		}
 		String PlanName = givenAttributesMap.get("Plan Name");
 		String PlanType = givenAttributesMap.get("Plan Type");
+		String ZipCode = givenAttributesMap.get("Zip Code");
+		String County = givenAttributesMap.get("County Name");
+		String premium = givenAttributesMap.get("Monthly Premium");
 		String PlanYear = (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_YEAR); 
 		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_NAME, PlanName);
 		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_TYPE, PlanType);
-		String ZipCode = (String) getLoginScenario().getBean(VPPCommonConstants.ZIPCODE);
-		String County = (String) getLoginScenario().getBean(VPPCommonConstants.COUNTY);
+		
+		getLoginScenario().saveBean(oleCommonConstants.OLE_ZIPCODE, ZipCode);
+		getLoginScenario().saveBean(oleCommonConstants.OLE_COUNTY, County);
+		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_PREMIUM, premium);
+		
 		String SiteName;
 		String PlanPremium = "";
 		SiteName = (String) getLoginScenario().getBean(oleCommonConstants.ACQ_SITE_NAME);
