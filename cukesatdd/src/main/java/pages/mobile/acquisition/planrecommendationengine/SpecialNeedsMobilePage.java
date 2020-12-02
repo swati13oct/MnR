@@ -231,4 +231,11 @@ public class SpecialNeedsMobilePage extends UhcDriver {
 		}
 	}
 
+	public void edit_specialneeds(String options) {
+		String snpoptions[] = options.split(",");
+		for (String option : snpoptions) {
+			specialNeedspageFunctional(option);
+			specialNeedsOptionsMoreInfo(option);
+		}
+	}
 }

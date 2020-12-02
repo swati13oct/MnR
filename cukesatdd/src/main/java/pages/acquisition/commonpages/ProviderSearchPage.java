@@ -204,17 +204,17 @@ public class ProviderSearchPage extends UhcDriver {
 
 	public VPPPlanSummaryPage selectsProvider() {
 		CommonUtility.waitForPageLoadNew(driver, GetStarted, 45);
-		jsClickNew(GetStarted);
+		GetStarted.click();
 
 		CommonUtility.waitForPageLoadNew(driver, People, 30);
-		jsClickNew(People);
+		People.click();
 
 		CommonUtility.waitForPageLoadNew(driver, Primary, 30);
-		jsClickNew(Primary);
-
+		Primary.click();
+		
 		CommonUtility.waitForPageLoadNew(driver, Physician, 30);
 
-		jsClickNew(Physician);
+		Physician.click();
 		CommonUtility.waitForPageLoadNew(driver, selectProviderBtn, 30);
 		jsClickNew(selectProviderBtn);
 

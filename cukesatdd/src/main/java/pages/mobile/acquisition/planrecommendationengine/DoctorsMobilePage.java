@@ -436,4 +436,37 @@ public class DoctorsMobilePage extends UhcDriver {
 		Assert.assertTrue(result, "Content mismatch");
 		return result;
 	}
+	
+	public void doctorspageOptions(String doctorsSelection) {
+			if (doctorsSelection.equalsIgnoreCase("UHCNetwork")) {
+				mobileUtils.mobileLocateElementClick(doctorUHCNetworkOption);
+				System.out.println("Plan Type " + doctorsSelection + " Clicked");
+				mobileUtils.mobileLocateElementClick(continueBtn);
+			} else if (doctorsSelection.equalsIgnoreCase("AcceptsMedicare")) {
+				mobileUtils.mobileLocateElementClick(doctorWantOption);
+				System.out.println("Plan Type " + doctorsSelection + " Clicked");
+				mobileUtils.mobileLocateElementClick(continueBtn);
+			} else if (doctorsSelection.equalsIgnoreCase("lookup")) {
+				mobileUtils.mobileLocateElementClick(doctorLookupOption);
+				System.out.println("Plan Type " + doctorsSelection + " Clicked");
+			}
+	}
+	
+	public void edit_doctor(String doctor, String doctorsName, String multiDoctor) {
+		doctorspageOptions(doctor);
+		mobileUtils.mobileLocateElementClick(continueBtn);
+		if (doctor.equalsIgnoreCase("Lookup")) {
+			if (multiDoctor.equalsIgnoreCase("YES"))
+				doctorlookup(doctorsName, 3);
+			else
+				doctorlookup(doctorsName, 1);
+		}
+	}
+	
+	public void addProviderEdit(String search) {
+		String curWindow = driver.getWindowHandle();
+		System.out.println(curWindow);
+		validateWerallySearchanotherWindowmobile(curWindow, "Doctors", search, 1);
+		threadsleep(5000);
+	}
 }
