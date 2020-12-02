@@ -23,6 +23,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
 import pages.acquisition.commonpages.PlanDocsPage;
+
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.MRConstants;
 import acceptancetests.data.PageData;
@@ -36,6 +37,7 @@ import pages.acquisition.ole.OLETestHarnessPage;
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.pharmacyLocator.PharmacySearchPage;
 import pages.acquisition.dceredesign.GetStartedPage;
+import pages.acquisition.isinsuranceagent.IsInsuranceAgent;
 
 /**
  * @author pperugu
@@ -286,8 +288,11 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(id = "search-field")
 	private static WebElement searchfield;
 
-	@FindBy(id = "dupIconFlyOut")
-	private WebElement shoppingCartIcon;
+    @FindBy(id="dupIconFlyOut")
+    private WebElement shoppingCartIcon;
+    
+    @FindBy(css="a#visitor-profile-header")
+    private WebElement lnkProfile;
 
 	@FindBy(xpath = "//*[@id='sam-call-button']//*[contains(@class,'sam__button__icon')]")
 	private WebElement callsam;
@@ -780,7 +785,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	public VPPPlanSummaryPage navigateToVpp(String zipcode) {
 		CommonUtility.waitForPageLoadNew(driver, zipCodeField, 3000);
 		sendkeys(zipCodeField, zipcode);
-		viewPlansButton.click();
+		jsClickNew(viewPlansButton);
 		CommonUtility.waitForPageLoadNew(driver, vppTop, 3000);
 		if (driver.getCurrentUrl().contains("plan-summary")) {
 			return new VPPPlanSummaryPage(driver);
@@ -795,7 +800,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	public VPPPlanSummaryPage enterZipcode(String zipCode, String county, String planYear) {
 		sendkeys(zipCodeField, zipCode);
-		zipCodebtn.click();
+		jsClickNew(zipCodebtn);
 		return new VPPPlanSummaryPage(driver);
 	}
 
@@ -1454,8 +1459,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	public DrugCostEstimatorPage navigateToDCEToolFromHome() throws InterruptedException {
 		validateNew(getStarted);
-		getStarted.click();
-
+		jsClickNew(getStarted);
+		waitForPageLoadSafari();
 		if (driver.getCurrentUrl().contains("health-plans/estimate-drug-costs.html"))
 			return new DrugCostEstimatorPage(driver);
 		return null;
@@ -1701,17 +1706,17 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	 */
 	public VisitorProfilePage navigateToVisitorProfilePage() {
 		waitforElement(shoppingCartIcon);
-		shoppingCartIcon.click();
-		CommonUtility.checkPageIsReadyNew(driver);
+//		shoppingCartIcon.click();
+		jsClickNew(shoppingCartIcon);
+		jsClickNew(lnkProfile);
 		waitForPageLoadSafari();
- 		if (driver.getCurrentUrl().contains("profile")) {
+		if(driver.getCurrentUrl().contains("profile")) {
 			return new VisitorProfilePage(driver);
-		} else {
+		}else {
 			System.out.println("Navigation to visitor profile is failed");
 			return null;
 		}
 	}
-
 	public VPPPlanSummaryPage findPlans(String txtZipCode) {
 
 		zipCode.sendKeys(txtZipCode);
@@ -2042,6 +2047,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		System.out.println("Page Title : " + (driver.findElement(By.xpath("//title")).getText()));
 
 	}
+	
 
 	public void validateGlobalFooterLinks() {
 		validateNew(footerHomeLink);
@@ -2698,6 +2704,29 @@ public class AcquisitionHomePage extends GlobalWebElements {
      Assert.assertEquals(UHCICSubTiltle.getText(), "UnitedHealthcare Insurance Company (UnitedHealthcare)");
 }
 	
+	public IsInsuranceAgent navigateToISPath(String path) {
+
+		String CurrentURL = driver.getCurrentUrl();
+		System.out.println("Current URL : " + CurrentURL);
+
+		String NavigateToURL = CurrentURL + path;
+		System.out.println("Navigating to URL : " + NavigateToURL);
+		driver.navigate().to(NavigateToURL);
+		//CommonUtility.waitForPageLoad(driver, driver.findElement(By.xpath("//header[contains(@class,'header')]")), 30);
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		System.out.println("Page Title : " + (driver.findElement(By.xpath("//title")).getText()));
+		//return IsInsuranceAgent;
+		return new IsInsuranceAgent(driver);
+	
+
+	}
+
 
 	@FindBy(xpath="(//*[contains(text(),'Sign in')])[1]")
 	private WebElement memberSignInPage; 
@@ -2742,7 +2771,13 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		switchToNewTabNew(ViewMedicareplanlinks);
 		sleepBySec(15);
 		if (driver.getCurrentUrl().contains("plan-summary")) {
-			//return new ProviderSearchPage(driver);
+			try {
+				Thread.sleep(2000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			System.out.println("****AARP Page is displayed ******");
 		}
 		//return null;
 		

@@ -129,4 +129,8 @@ public class CostPreferencesMobilePage extends UhcDriver {
 		mobileUtils.mobleErrorValidation(page);
 	}
 
+	public void edit_cost(String preference) {
+		costPreferencepageOptions(preference);
+	}
+
 }

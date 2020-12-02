@@ -89,7 +89,7 @@ Feature: 1.08. ACQ- Shopper Profile
       | Providers          | <providers>        |
       | First Name         | <fname>            |
       | Last Name          | <lname>            |
-    Then agent saves two plans as favorite on AARP site for user
+    Then agent saves two plans as favorite for user
       | Plan Type  | <plantype>  |
       | Test Plans | <testPlans> |
     Then Navigate to Visitor Profile page
@@ -153,29 +153,20 @@ Feature: 1.08. ACQ- Shopper Profile
       | DOB                | <dob>              |
       | MBI                | <mbi>              |
     Then the user clicks on back on all plan linnk in Plan Compare page
-    Then Navigate to Visitor Profile page
-    And user delets all the added providers on visitor profile page
-      | Test Plans | <testPlans> |
-    And the user clicks on the add plans button in the profile
-    Then agent saves two plans as favorite on AARP site for user
-      | Plan Type  | <plantype>  |
-      | Test Plans | <testPlans> |
-    When the user Click on Is my Provider covered link Ulayer
+    When the user Click on Is my Provider covered link
       | PlanName | <planname> |
-    When user selects a provider and retuns to VPP page in ulayer
+    When user selects a provider and retuns to VPP page
     Then Verify X out of Y provider covered information is displayed on Plan Summary page
       | PlanName | <planname> |
     Then Navigate to Visitor Profile page
     Then Verify X out of Y provider covered information is displayed on visitor profile page
       | PlanName | <planname> |
-    And user delets the added plans on visitor profile page
-      | Test Plans | <testPlans> |
     And user delets all the added providers on visitor profile page
-      | Test Plans | <testPlans> |
+      | PlanName | <planname> |
 
     Examples: 
-      | username  | password  | email             | fname  | lname   | mbi           | dob        | plantype | enrolledplanName                                    | planname                                | drugNames | providers | testPlans                                                                                   |
-      | qavgogine | qavgogine | nanine@member.com | NANINE | SLOVICK | 3XQ9-C41-RQ43 | 03/10/1949 | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) | AARP Medicare Advantage Walgreens (PPO) | No        | No        | AARP Medicare Advantage Walgreens (PPO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO) |
+      | username  | password  | email             | fname  | lname   | mbi           | dob        | plantype | enrolledplanName                                    | planname                                | drugNames | providers | 
+      | qavgogine | qavgogine | nanine@member.com | NANINE | SLOVICK | 3XQ9-C41-RQ43 | 03/10/1949 | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) | No        | No        | 
 
   @searchProfileAndEnroll
   Scenario Outline: Telesales agent searching for the profile using first name and last name and validate OLE flow is not allowed
@@ -202,7 +193,7 @@ Feature: 1.08. ACQ- Shopper Profile
       | Providers          | <providers>        |
       | First Name         | <fname>            |
       | Last Name          | <lname>            |
-    Then agent saves two plans as favorite on AARP site for user
+    Then agent saves two plans as favorite for user
       | Plan Type  | <plantype>  |
       | Test Plans | <testPlans> |
     Then Navigate to Visitor Profile page

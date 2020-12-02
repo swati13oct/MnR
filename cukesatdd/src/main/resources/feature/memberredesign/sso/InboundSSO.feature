@@ -1,5 +1,10 @@
 Feature: 1.13 Member Inbound SSO functionality tested from TestHarness page for M&R Member Portal
 
+ Background: Feature security flag needs to be true before ATDD script execution
+     Given First check if feature security flag is set to true
+      | Feature | UCPUserManagement |
+###############################Regression Scenarios Begin Here ########################################
+
   #This scenario below cannot be tested as test harness page is no longer working
   @sso
   Scenario Outline: TID: <TID> -Group: <GroupName> -SSO Partner: <ssoPartner> - Verify North Carolina SSO functionality and check that security and password reset links are not displayed on profile page.

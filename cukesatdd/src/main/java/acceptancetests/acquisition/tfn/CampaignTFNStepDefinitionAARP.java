@@ -13,21 +13,26 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import acceptancetests.acquisition.dceredesign.DCERedesignCommonConstants;
 import acceptancetests.acquisition.ole.oleCommonConstants;
 import acceptancetests.acquisition.vpp.VPPCommonConstants;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstants;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
+import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import gherkin.formatter.model.DataTableRow;
+import pages.acquisition.commonpages.PlanDetailsPage;
+import pages.acquisition.dceredesign.DrugSummaryPage;
 import pages.acquisition.tfn.CampaignTFNPage;
-import pages.acquisition.ulayer.AcquisitionHomePage;
+import pages.acquisition.commonpages.AcquisitionHomePage;
 import pages.acquisition.ulayer.GlobalWebElements;
 import pages.acquisition.ulayer.UlayerTFNPage;
 import pages.acquisition.ulayer.VPPPlanSummaryPage;
+import pages.acquisition.commonpages.VisitorProfilePage;
 
 public class CampaignTFNStepDefinitionAARP {
 
@@ -121,6 +126,7 @@ public class CampaignTFNStepDefinitionAARP {
 		CampaignTFNPage tfnPage = (CampaignTFNPage) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE);
 		tfnPage.navigateToUrl(URLpath);
 		tfnPage.validateMedSuppTFN(TFN_Xpath);
+		//tfnPage.validateFederalTFN(TFN_Xpath);
 	}
 
 	@Given("^the user is on AARP medicare acquisition site from Campaign Traffic$")
@@ -396,16 +402,239 @@ public void the_user_navigates_to_following_memeber_signin_page_AARP(DataTable a
 }
 
 @Then("^the user validate the sam icons tfn with federal TFN on Acquistion page$")
-public void the_user_validate_sam_icons_tfn_with_Federal_TFN(DataTable arg1) throws Throwable {
-	Map<String, String> inputAttributesMap=parseInputArguments(arg1);
-	String TFN_Xpath = inputAttributesMap.get("TFN Xpath");
+public void the_user_validate_sam_icons_tfn_with_Federal_TFN() throws Throwable {
+	//Map<String, String> inputAttributesMap=parseInputArguments(arg1);
+	String TFN_Xpath = "//button[@id='sam-call-button']//span[contains(@class,'sam__button__text desktop')]";
 	CampaignTFNPage tfnPage = (CampaignTFNPage) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE);
 	//tfnPage.navigateToUrl(URLpath);
 	tfnPage.validateFederalTFN(TFN_Xpath);
 }
 
+@Then("^the user navigates to following  Medicare Education Page URL and validate Federal TFN$")
+public void the_user_navigates_to_following_Medicare_Education_Page_URL_and_validate_Federal_TFN(DataTable arg1) throws Throwable {
+	Map<String, String> inputAttributesMap=parseInputArguments(arg1);
+	String URLpath = inputAttributesMap.get("MEDICARE URL");
+	String TFN_Xpath = inputAttributesMap.get("TFN Xpath");
+	CampaignTFNPage tfnPage = (CampaignTFNPage) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE);
+	tfnPage.navigateToUrl(URLpath);
+	tfnPage.validateFederalTFN(TFN_Xpath);
 }
 
+@And("^the user clicks on the shopping cart icon in AARP site for campaign TFN$")
+public void the_user_clicks_on_the_shopping_cart_icon_in_AARP_site_Campaign_TFN() {
+	
+	CampaignTFNPage tfnPage = (CampaignTFNPage) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE);
+	tfnPage.NavigateToHome();
+	
+	AcquisitionHomePage acqHomePage = (AcquisitionHomePage) getLoginScenario()
+			.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+
+	//VisitorProfilePage visitorProfilePage = acqHomePage.navigateToVisitorProfilePage();
+	
+//	getLoginScenario().saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfilePage);
+	String TFNXpath_PlanDetails = "//a[contains(@class, 'tel') and contains(@href, 'tel')]";
+	tfnPage.validateFederalTFN(TFNXpath_PlanDetails);
+}
+
+@Then("^the user navigates to following  DCE Page URL and validate Federal TFN$")
+public void the_user_navigates_to_following_DCE_Page_URL_and_validate_Federal_TFN(DataTable arg1) throws Throwable {
+	Map<String, String> inputAttributesMap=parseInputArguments(arg1);
+	String URLpath = inputAttributesMap.get("DCE URL");
+	String TFN_Xpath = "//button[contains(@id,'sam-call-button')]//*[contains(@class,'sam__button__text desktop')]";
+	CampaignTFNPage tfnPage = (CampaignTFNPage) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE);
+	tfnPage.navigateToUrl(URLpath);
+	tfnPage.validateFederalTFN(TFN_Xpath);
+}
+
+@Then("^the user navigates to shop pages Page and validates Federal TFN$")
+public void the_user_navigates_to_shop_Page_and_validates_Federal_TFN(DataTable arg1) throws Throwable {
+	Map<String, String> inputAttributesMap=parseInputArguments(arg1);
+	String URLpath = inputAttributesMap.get("SHOPPAGES URL");
+	String TFN_Xpath = inputAttributesMap.get("TFN Xpath");
+	
+	//String TFN_Xpath = "(//a[contains(@class, 'tel')])[1] ";
+	CampaignTFNPage tfnPage = (CampaignTFNPage) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE);
+	tfnPage.NavigateToHome();
+	tfnPage.navigateToUrl(URLpath);
+	//tfnPage.validateFederalTFN(TFN_Xpath);
+}
+
+@Then("^the user navigates to homepage validates Federal TFN$")
+public void the_user_navigates_to_homePage_and_validates_Federal_TFN() throws Throwable {
+	CampaignTFNPage tfnPage = (CampaignTFNPage) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE);
+	tfnPage.NavigateToHome();
+	//String TFN_Xpath = "//button[@id='sam-call-button']//span[contains(@class,'sam__button__text desktop')]";
+	//tfnPage.validateFederalTFN(TFN_Xpath);
+	
+}
+@Given("^the user is on AARP medicare acquisition site from External Link and Land on MA Plans$")
+public void the_user_lands_on_AARP_from_External_Link_Landon_MA_Plans(DataTable arg1) throws Throwable  {
+	driver = getLoginScenario().getWebDriverNew();
+	getLoginScenario().saveBean(CommonConstants.WEBDRIVER, driver);
+	//driver = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+	AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(driver);
+	//getLoginScenario().saveBean(CommonConstants.WEBDRIVER, driver);
+	getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, aquisitionhomepage);
+	String EnvironmentUrl = aquisitionhomepage.fetchEnvironmentUrls();
+	Map<String, String> inputAttributesMap=parseInputArguments(arg1);
+	String URLpath = inputAttributesMap.get("Campaign URL");
+	//String TFN_Xpath = "//button[@id='sam-call-button']//span[contains(@class,'sam__button__text desktop')]";
+	CampaignTFNPage tfnPage = new CampaignTFNPage(driver);
+	getLoginScenario().saveBean(PageConstants.CAMPAIGN_TFN_PAGE, tfnPage);
+	tfnPage.navigateToCampaignURL(URLpath , EnvironmentUrl);
+	String PlanType = "MA";
+	tfnPage.ViewPlanSummary(PlanType);
+	tfnPage.NavigateToPlanDetails(PlanType);
+	//String TFNXpath_PlanDetails = "//a[contains(@class, 'tel')]";
+	//tfnPage.validateFederalTFN(TFNXpath_PlanDetails);	
+}
+
+@And("^the user signs in with optum Id credentials for campaign TFN$")
+public void the_user_signs_in_with_optum_Id_credentials_in_AARP_site_campaign_tfn(DataTable credentials) {
+	List<DataTableRow> plannameAttributesRow = credentials.getGherkinRows();
+	Map<String, String> plannameAttributesMap = new HashMap<String, String>();
+	for (int i = 0; i < plannameAttributesRow.size(); i++) {
+
+		plannameAttributesMap.put(plannameAttributesRow.get(i).getCells().get(0),
+				plannameAttributesRow.get(i).getCells().get(1));
+	}
+	String username = plannameAttributesMap.get("User Name");
+	String password = plannameAttributesMap.get("Password");
+	
+	VisitorProfilePage visitorProfile = (VisitorProfilePage) getLoginScenario().getBean(PageConstants.VISITOR_PROFILE_PAGE);
+	visitorProfile.signIn(username, password);
+	getLoginScenario().saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfile);
+}
+
+
+
+@Given("^the user is on AARP medicare acquisition site from External Link and Land on PDP Plans$")
+public void the_user_lands_on_AARP_from_External_Link_Landon_PDP_Plans(DataTable arg1) throws Throwable  {
+	/*driver = getLoginScenario().getWebDriverNew();
+	getLoginScenario().saveBean(CommonConstants.WEBDRIVER, driver);
+	//driver = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+	AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(driver);
+	//getLoginScenario().saveBean(CommonConstants.WEBDRIVER, driver);
+	getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, aquisitionhomepage);
+	String EnvironmentUrl = aquisitionhomepage.fetchEnvironmentUrls();
+	Map<String, String> inputAttributesMap=parseInputArguments(arg1);
+	String URLpath = inputAttributesMap.get("Campaign URL");
+	//String TFN_Xpath = "//button[@id='sam-call-button']//span[contains(@class,'sam__button__text desktop')]";
+	CampaignTFNPage tfnPage = new CampaignTFNPage(driver);
+	getLoginScenario().saveBean(PageConstants.CAMPAIGN_TFN_PAGE, tfnPage);
+	tfnPage.navigateToCampaignURL(URLpath , EnvironmentUrl);*/
+	
+	Map<String, String> inputAttributesMap=parseInputArguments(arg1);
+	String URLpath = inputAttributesMap.get("MA URL");
+	String TFN_Xpath = inputAttributesMap.get("TFN Xpath");
+	CampaignTFNPage tfnPage = (CampaignTFNPage) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE);
+	tfnPage.navigateToUrl(URLpath);
+	String Zip = "10001";
+	tfnPage.HomepagePlanSearch(Zip);
+	String PlanType = "PDP";
+	tfnPage.ViewPlanSummary(PlanType);
+	tfnPage.handlePlanYearSelectionPopup();
+	tfnPage.NavigateToOLE(PlanType);
+	String TFNXpath_PlanDetails = "//a[contains(@class, 'tel')]";
+	tfnPage.validateFederalTFN(TFNXpath_PlanDetails);	
+}
+
+@Given("^the user is on AARP medicare acquisition site from External Link and Land on DCE Page$")
+public void the_user_lands_on_AARP_from_External_Link_Landon_DCE_Page(DataTable arg1) throws Throwable  {
+	driver = getLoginScenario().getWebDriverNew();
+	getLoginScenario().saveBean(CommonConstants.WEBDRIVER, driver);
+	//driver = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+	AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(driver);
+	//getLoginScenario().saveBean(CommonConstants.WEBDRIVER, driver);
+	getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, aquisitionhomepage);
+	String EnvironmentUrl = aquisitionhomepage.fetchEnvironmentUrls();
+	Map<String, String> inputAttributesMap=parseInputArguments(arg1);
+	String URLpath = inputAttributesMap.get("Campaign URL");
+	//String TFN_Xpath = "//button[@id='sam-call-button']//span[contains(@class,'sam__button__text desktop')]";
+	CampaignTFNPage tfnPage = new CampaignTFNPage(driver);
+	getLoginScenario().saveBean(PageConstants.CAMPAIGN_TFN_PAGE, tfnPage);
+	tfnPage.navigateToCampaignURL(URLpath , EnvironmentUrl);
+	String TFNXpath_PlanDetails = "//button[@id='sam-call-button']//span[contains(@class,'sam__button__text desktop')]";
+	tfnPage.validateFederalTFN(TFNXpath_PlanDetails);	
+	
+}
+
+@Then("^the user selects View plan details for following plantype and PlanName for DCE Page$")
+public void the_user_selects_View_plan_details_for_following_plantype_and_PlanName_DCE_Page(DataTable attributes)
+		throws Throwable {
+	List<DataTableRow> memberAttributesRow = attributes.getGherkinRows();
+	Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+	for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+		memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+				memberAttributesRow.get(i).getCells().get(1));
+	}
+	String plantype = memberAttributesMap.get("Plan Type");
+	String planName = memberAttributesMap.get("Plan Name");
+	DrugSummaryPage plansummaryPage = (DrugSummaryPage) getLoginScenario()
+			.getBean(PageConstants.DCE_Redesign_DrugSummary);
+	PlanDetailsPage plandetailspage= plansummaryPage.clickViewplanDetailsForPlan(plantype, planName);
+	CampaignTFNPage tfnPage = (CampaignTFNPage) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE);
+	String TFNXpath_PlanDetails = "//a[contains(@class, 'tel')]";
+	tfnPage.validateFederalTFN(TFNXpath_PlanDetails);
+	//getLoginScenario().saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE, plandetailspage);
+	getLoginScenario().saveBean(DCERedesignCommonConstants.PLANTYPE, plantype);
+	getLoginScenario().saveBean(DCERedesignCommonConstants.PLANNAME, planName);
+	getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_NAME, planName);
+	getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_TYPE, plantype);
+
+	
+	getLoginScenario().saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE, plandetailspage);
+	
+}
+
+@Given("^the user is on AARP medicare acquisition site from External Link start now and Land on pharmary locator$")
+public void the_user_lands_on_AARP_from_External_Link_start_now_Landon_pharmacy_locator(DataTable arg1) throws Throwable  {
+	driver = getLoginScenario().getWebDriverNew();
+	getLoginScenario().saveBean(CommonConstants.WEBDRIVER, driver);
+	//driver = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+	AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(driver);
+	//getLoginScenario().saveBean(CommonConstants.WEBDRIVER, driver);
+	getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, aquisitionhomepage);
+	String EnvironmentUrl = aquisitionhomepage.fetchEnvironmentUrls();
+	Map<String, String> inputAttributesMap=parseInputArguments(arg1);
+	String URLpath = inputAttributesMap.get("Campaign URL");
+	//String TFN_Xpath = "//button[@id='sam-call-button']//span[contains(@class,'sam__button__text desktop')]";
+	CampaignTFNPage tfnPage = new CampaignTFNPage(driver);
+	getLoginScenario().saveBean(PageConstants.CAMPAIGN_TFN_PAGE, tfnPage);
+	tfnPage.navigateToCampaignURL(URLpath , EnvironmentUrl);
+	String TFNXpath_PlanDetails = "//button[@id='sam-call-button']//span[contains(@class,'sam__button__text desktop')]";
+	tfnPage.validateFederalTFN(TFNXpath_PlanDetails);	
+	
+}
+
+@Given("^the user is on following acquisition site from External Link and land on MA Page$")
+public void the_user_is_on_following_acquisition_site_from_External_Site_Land_MA(DataTable arg1) throws Throwable {
+	Map<String, String> inputAttributesMap=parseInputArguments(arg1);
+	String Acq_Site = inputAttributesMap.get("Site");
+	String CampaignPath = inputAttributesMap.get("Campaign URL");
+	driver = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+
+	//wd.manage().deleteAllCookies();
+	CampaignTFNPage tfnPage = new CampaignTFNPage(driver);
+	getLoginScenario().saveBean(CommonConstants.WEBDRIVER, driver);
+	tfnPage.OpenPath(Acq_Site, CampaignPath);
+	String TFNXpath_PlanDetails = "//a[contains(@class, 'tel')]";
+	tfnPage.validateFederalTFN(TFNXpath_PlanDetails);
+}
+
+@Then("^the user navigate to following MedED Pages URL and validate Federal TFN$")
+public void the_user_navigate_to_following_MedED_Pages_URL_and_validate_Federal_TFN(DataTable arg1) throws Throwable {
+	Map<String, String> inputAttributesMap=parseInputArguments(arg1);
+	String URLpath = inputAttributesMap.get("MedEd URL");
+	String TFN_Xpath = inputAttributesMap.get("TFN Xpath");
+	CampaignTFNPage tfnPage = (CampaignTFNPage) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE);
+	tfnPage.navigateToUrl(URLpath);
+	//tfnPage.validateMedSuppTFN(TFN_Xpath);
+	tfnPage.validateFederalTFN(TFN_Xpath);
+}
+
+}
 
 
 

@@ -238,4 +238,14 @@ public class LandingAndZipcodeMobilePage extends UhcDriver {
 		}
 	}
 
+	public void edit_location(String zipcode,String multi,String county) {
+		waitforElementVisibilityInTime(zipCode, 45);
+		zipCode.clear();
+		mobileactionsendkeys(zipCode, zipcode);
+		if(multi.equalsIgnoreCase("Yes")) {
+			mobileSelectOption(multicountySelect, county,true);
+		}
+		threadsleep(3000);
+	}
+
 }
