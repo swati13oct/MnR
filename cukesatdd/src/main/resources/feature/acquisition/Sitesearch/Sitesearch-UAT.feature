@@ -104,7 +104,8 @@ Feature:1.08 UAT-Site Search Flows
 Examples:
 |Scenario             |site| TID  | zipcode | isMultutiCounty | county                        | plantype       | planName                                           |searchValue |newsearchvalue|
 |E2E Scenario 3_AMP 	|AARP|15652 |   19019 | No              | Philadelphia County           | MAPD           | AARP Medicare Advantage Choice Plan 2 (PPO)        |Medicare    |pharmacy|
-
+|E2E Scenario 3_AMP 	|AARP|15652 |   19019 | No              | Philadelphia County           | MAPD           | AARP Medicare Advantage Choice Plan 2 (PPO)        |Dental coverage    |Drug cost estimator|
+|E2E Scenario 3_AMP 	|AARP|15652 |   19019 | No              | Philadelphia County           | MAPD           | AARP Medicare Advantage Choice Plan 2 (PPO)        |Medicare    |pharmacy|
 
 @SiteSearch_UHC
 Examples:
@@ -141,7 +142,9 @@ Examples:
     |E2E Scenario 3_AMP 	| AARP| 15652 |   19019 | No              | Philadelphia County           | MAPD            | AARP Medicare Advantage Choice Plan 2 (PPO)        |Medicare|InvalidCharacter|ggahjksabdegfhijkalalamnpqrajjjjkkkrrasabdabatuvyazefghijakmnpqttttvwyzabde|
     |E2E Scenario 3_AMP 	| AARP| 15652 |   19019 | No              | Philadelphia County           | MAPD            | AARP Medicare Advantage Choice Plan 2 (PPO)        |Medicare|InvalidCharacter|Unicorn|
     |E2E Scenario 3_AMP 	| AARP| 15652 |   19019 | No              | Philadelphia County           | MAPD            | AARP Medicare Advantage Choice Plan 2 (PPO)        |Medicare|InvalidCharacter|plan25|
-
+    |E2E Scenario 3_AMP 	| AARP| 15652 |   19019 | No              | Philadelphia County           | MAPD            | AARP Medicare Advantage Choice Plan 2 (PPO)        |Medicare|InvalidCharacter|123456|
+    |E2E Scenario 3_AMP 	| AARP| 15652 |   19019 | No              | Philadelphia County           | MAPD            | AARP Medicare Advantage Choice Plan 2 (PPO)        |Medicare|InvalidCharacter|@@@@|
+    
    @SiteSearch_UHC
     Examples:
    |Scenario              | site| TID   | zipcode | isMultutiCounty | county                        | plantype        | planName                                    |searchValue |Error           | NewSearchValue| 
@@ -150,7 +153,8 @@ Examples:
    |E2E Scenario 3_UMS    |UHC  |15652 |   19019 | No              | Philadelphia County           | MAPD            | AARP Medicare Advantage Choice Plan 2 (PPO) | Medicare    |InvalidCharacter|ggahjksabdegfhijkalalamnpqrajjjjkkkrrasabdabatuvyazefghijakmnpqttttvwyzabde|
    |E2E Scenario 3_UMS    |UHC  |15652 |   19019 | No              | Philadelphia County           | MAPD            | AARP Medicare Advantage Choice Plan 2 (PPO) | Medicare    |InvalidCharacter|Unicorn|
    |E2E Scenario 3_UMS    |UHC  |15652 |   19019 | No              | Philadelphia County           | MAPD            | AARP Medicare Advantage Choice Plan 2 (PPO) | Medicare    |InvalidCharacter|plan25|
-    
+   |E2E Scenario 3_UMS    |UHC  |15652 |   19019 | No              | Philadelphia County           | MAPD            | AARP Medicare Advantage Choice Plan 2 (PPO) | Medicare    |InvalidCharacter|123456|
+   |E2E Scenario 3_UMS    |UHC  |15652 |   19019 | No              | Philadelphia County           | MAPD            | AARP Medicare Advantage Choice Plan 2 (PPO) | Medicare    |InvalidCharacter|@@@@|
   
 @SiteSearchULayer @UATRegression
  Scenario Outline: <Scenario> : To verify provider search third party URL on VPP Page
