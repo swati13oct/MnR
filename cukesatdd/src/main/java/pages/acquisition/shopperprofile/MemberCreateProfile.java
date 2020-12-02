@@ -17,7 +17,8 @@ import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 import cucumber.api.DataTable;
 import gherkin.formatter.model.DataTableRow;
-import pages.acquisition.ulayer.ComparePlansPage;
+import pages.acquisition.commonpages.ComparePlansPage;
+
 
 public class MemberCreateProfile extends UhcDriver {
 	

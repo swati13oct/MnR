@@ -109,6 +109,9 @@ public class PlanRecommendationEngineResultsPage extends UhcDriver {
 	@FindBy(css = "#plan-list-1 .swiper-container .module-plan-overview:nth-of-type(1) a.add-drug")
 	private WebElement enterDrugsInfoMA1stPlan;
 	
+	@FindBy(css = "#plan-list-1 .swiper-container .module-plan-overview:nth-of-type(1) .edit-drugs a")
+	private WebElement drugSummarylinkMA1stPlan;
+	
 	@FindBy(css = "#plan-list-1 .swiper-container .module-plan-overview div.plan-name-div")
 	private List<WebElement> MAPlansId;
 	
@@ -614,6 +617,16 @@ public class PlanRecommendationEngineResultsPage extends UhcDriver {
 			verifyConfirmationmodalResults(count,DrugsInDCE,DrugsList);
 			System.out.println("Validating Drugs Details from VPP to PRE Drug Page: ");
 			vppToPre();
+		}
+		
+		public void DrugsDetailsVPPtoDCE() {
+			ACQDrugCostEstimatorPage dce = new ACQDrugCostEstimatorPage(driver);
+			System.out.println("Validating Pharmacy Details in DCE Page: ");
+			dce.Pharmacytype();
+			System.out.println("Validating Drugs Details from VPP to DCE Page: ");
+			DrugsInDCE = dce.DCEDrugsResults;
+			int count =DrugsInDCE.size();
+			verifyConfirmationmodalResults(count,DrugsInDCE,DrugsList);
 		}
 		
 		public void removeDrugs(int count) {
@@ -1366,6 +1379,13 @@ public void useraddDrugsVPP(String drugDetails) {
 	dce.drugsHandlerWithdetails(drugDetails);
 	dce.getDrugsDCE();
 	dce.choosePharmacyandBacktoPlans();
+}
+
+public void userPreDCE() {
+	threadsleep(10000);
+	drugcoveredsession();
+	validate(drugSummarylinkMA1stPlan, 60);
+	drugSummarylinkMA1stPlan.click();
 }
 
 public boolean changePlanyear(String year) {

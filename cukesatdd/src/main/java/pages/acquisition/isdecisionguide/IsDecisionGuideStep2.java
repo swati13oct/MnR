@@ -23,7 +23,8 @@ public class IsDecisionGuideStep2 extends UhcDriver{
 
 	
 	//Global Elements
-	@FindBy(xpath = "//*[@class = 'logo']")
+//	@FindBy(xpath = "//*[@class = 'logo']")
+	@FindBy(id = "aarpSVGLogo")
 	private WebElement SiteLogo;
 	
 	@FindBy(xpath = "//*[@id = 'nav' and @role = 'navigation']")
@@ -329,7 +330,7 @@ public class IsDecisionGuideStep2 extends UhcDriver{
 
 	public DGR_ThankYouPage NavigateNext_DGRthankYouPage() {
 		if( validate(SubmitBtn)){
-			SubmitBtn.click();
+			jsClickNew(SubmitBtn);
 			
 		}
 		try {

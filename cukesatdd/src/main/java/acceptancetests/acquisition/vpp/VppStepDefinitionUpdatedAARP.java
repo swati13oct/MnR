@@ -292,8 +292,8 @@ public class VppStepDefinitionUpdatedAARP {
 		
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		plansummaryPage.handlePlanYearSelectionPopup(planYear);
-		//plansummaryPage.handlePlanYearFutureSelectionPopup(planYear);
+		//plansummaryPage.handlePlanYearSelectionPopup(planYear);
+		plansummaryPage.handlePlanYearFutureSelectionPopup(planYear);
 	}
 	
 	@And("^the user selects future plan year for the AARP site$")
@@ -1001,7 +1001,7 @@ public class VppStepDefinitionUpdatedAARP {
 	
 	//steps added for NBA
 	
-	@And("^user Verify and click perform on Next Best Action Modal for Get Started$")
+	@And("^user Verify and click perform on Next Best Action Modal for Get Started in AARP site$")
 	public void user_Verify_Next_Best_Action_Modal_for_MAPD_plan_and_click_on_Get_Started() {
 		VPPPlanSummaryPage vppplansummarypage = (VPPPlanSummaryPage) loginScenario
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
@@ -2257,19 +2257,20 @@ public class VppStepDefinitionUpdatedAARP {
 		
 	  }
 	
-	@Then("^the user clicks on back on all plan linnk in Plan Compare page")
-	  public void user_clicks_back_to_all_plan_PlanCompare_AARP() throws InterruptedException{
-		  ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario().getBean(PageConstants.PLAN_COMPARE_PAGE); 
-		  VPPPlanSummaryPage plansummaryPage = planComparePage.navigateBackToAllPlans();
-			if (plansummaryPage != null) {
-					getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
-					Assert.assertTrue(true);
-					plansummaryPage.handlePlanYearSelectionPopup();
-				} 
-			else
-				Assert.fail("Error in navigating back to Plan Summary Page");
-		
-	  }
+		/*
+		 * @Then("^the user clicks on back on all plan linnk in Plan Compare page")
+		 * public void user_clicks_back_to_all_plan_PlanCompare_AARP() throws
+		 * InterruptedException{ ComparePlansPage planComparePage = (ComparePlansPage)
+		 * getLoginScenario().getBean(PageConstants.PLAN_COMPARE_PAGE);
+		 * VPPPlanSummaryPage plansummaryPage =
+		 * planComparePage.navigateBackToAllPlans(); if (plansummaryPage != null) {
+		 * getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE,
+		 * plansummaryPage); Assert.assertTrue(true);
+		 * plansummaryPage.handlePlanYearSelectionPopup(); } else
+		 * Assert.fail("Error in navigating back to Plan Summary Page");
+		 * 
+		 * }
+		 */
 	@When("^verify Call SAM icon is visible or not on Plan Comapare$")
 	public void verify_Call_SAM_icon_is_visible_or_not_PlanCompare() throws InterruptedException {
 		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario().getBean(PageConstants.PLAN_COMPARE_PAGE);
@@ -3952,11 +3953,13 @@ public class VppStepDefinitionUpdatedAARP {
 
 		} else {
 			Assert.fail("Plan count did not match ");
+			
 		}
 
 	
 	}
 	
 	
+
 
 }
