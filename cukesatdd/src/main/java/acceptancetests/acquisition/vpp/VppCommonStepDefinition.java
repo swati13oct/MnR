@@ -2624,7 +2624,7 @@ public class VppCommonStepDefinition {
 				if (plansummaryPage != null) {
 						getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
 						Assert.assertTrue(true);
-						//plansummaryPage.handlePlanYearSelectionPopup();
+						plansummaryPage.handlePlanYearSelectionPopup();
 					} 
 				else
 					Assert.fail("Error in navigating back to Plan Summary Page");
