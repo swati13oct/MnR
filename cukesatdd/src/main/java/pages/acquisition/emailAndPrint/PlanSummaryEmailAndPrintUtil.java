@@ -266,7 +266,7 @@ public class PlanSummaryEmailAndPrintUtil extends EmailAndPrintUtilBase{
 
 	public boolean validateAllPlansCheckedOnSummaryPage(String plansForCompare) {
 		waitForSummaryPageToLoad();
-		List<WebElement> compareChkBoxes = driver.findElements(By.xpath("//div[contains(@class,'compare-add')]"));	
+		List<WebElement> compareChkBoxes = driver.findElements(By.xpath("//div[contains(@class,'compare-add')]//*[contains(@class,'multiple-added-text')]"));
 		String expectedTxt=plansForCompare+" plans added";
 		System.out.println("Validate there are "+plansForCompare+" number of plans added for compare");
 		boolean result=true;

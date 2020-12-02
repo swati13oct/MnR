@@ -990,6 +990,29 @@ public class DCEStepDefinitionAARP {
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
 
 	}
+	
+	@Then("^the user selects following pharmacy and returns to DCE Details page$")
+	public void the_user_selects_following_pharmacy_and_returns_to_DCE_Details_page(DataTable givenAttributes) throws Throwable {
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugDetails);
+		String PharmacytoSelect = memberAttributesMap.get("SelectPharmacy");
+		drugDetailsPage.SelectPharmacy(PharmacytoSelect);
+		drugDetailsPage.validatePharmacyName(PharmacytoSelect);
+		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetailsPage);
+
+	}
+	
+
+	@Then("^the user validates Not Covered Pharmacy view for DCE Details Page$")
+	public void the_user_validates_Not_Covered_Pharmacy_view_for_DCE_Details_Page() throws Throwable {
+		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugDetails);
+		drugDetailsPage.validateNotCoveredPharmacyView();
+	}
 
 	@Then("^change pharmacy modal should be displayed$")
 	public void change_pharmacy_modal_should_be_displayed_in_AARP() throws InterruptedException {
@@ -1589,6 +1612,19 @@ public class DCEStepDefinitionAARP {
 		drugSummaryPage.validateZipandDistanceDropDwn(PharmacyZipCode);
 	}
 	
+	@Then("^the user validates distance dropdown and Zipcode change on DCE Details page - Change Pharmacy Page$")
+	public void the_user_validates_distance_dropdown_and_Zipcode_change_on_Details_page_Change_Pharmacy_Page(DataTable arg1) throws Throwable {
+		List<DataTableRow> memberAttributesRow = arg1.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		String PharmacyZipCode = memberAttributesMap.get("PharmacyZipCode");
+		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugDetails);
+		drugDetailsPage.validateZipandDistanceDropDwn(PharmacyZipCode);
+	}
+	
 	@When("^user clicks on Return to plan summary page link in DCE$")
 	public void user_clicks_on_Return_to_plan_summary_page_link_in_DCE() {
 		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
@@ -1632,4 +1668,42 @@ public class DCEStepDefinitionAARP {
 			Assert.fail("DCE Redesign page object not loaded");
 	}
 	
+	@Then("^the user validates correct Copay section view and LIS message for LIS Buydown Plan on DCE details Page$")
+	public void the_user_validates_correct_Copay_section_view_and_LIS_message_for_LIS_Buydown_Plan_on_DCE_details_Page() throws Throwable {
+		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugDetails);
+		drugDetailsPage.validateLISBuyDown_CopaySection_LISAlert();
+	}
+
+	@Then("^the user validates Monthly Costs are not displayed for LIS Buydown plan on DCE details Page$")
+	public void the_user_validates_Monthly_Costs_are_not_displayed_for_LIS_Buydown_plan_on_DCE_details_Page() throws Throwable {
+		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugDetails);
+		drugDetailsPage.validateLISBuyDown_MonthlyCostsNotDisplayed();
+	}
+
+	@Then("^the user validates zero costs for following Covered generic drug for LIS Buydown on DCE details Page$")
+	public void the_user_validates_zero_costs_for_following_Covered_generic_drug_for_LIS_Buydown_on_DCE_details_Page(DataTable arg1) throws Throwable {
+		List<DataTableRow> memberAttributesRow = arg1.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		String CoveredDrug = memberAttributesMap.get("CoveredDrug");
+		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugDetails);
+		drugDetailsPage.validateLISBuyDown_CoveredDrugCost(CoveredDrug);
+	}
+
+	@Then("^the user validates non zero costs for Not covered Drugs for LIS Buydown on DCE details Page$")
+	public void the_user_validates_non_zero_costs_for_Not_covered_Drugs_for_LIS_Buydown_on_DCE_details_Page(DataTable arg1) throws Throwable {
+		List<DataTableRow> memberAttributesRow = arg1.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		String NotCoveredDrug = memberAttributesMap.get("NotCoveredDrug");
+		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugDetails);
+		drugDetailsPage.validateLISBuyDown_NotCoveredDrugCost(NotCoveredDrug);
+	}
+
 }

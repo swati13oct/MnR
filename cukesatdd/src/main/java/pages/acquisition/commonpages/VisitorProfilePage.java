@@ -570,7 +570,7 @@ public class VisitorProfilePage extends UhcDriver {
 		WebElement removeEnrolledPlan = driver.findElement(By.xpath("//button[@aria-label='Remove "+planName+"']"));
 		jsClickNew(removeEnrolledPlan);
 		waitforElement(cancelEnrollment);
-		jsClickNew(removeEnrolledPlan);
+		jsClickNew(cancelEnrollment);
 		waitforElementDisapper(By.xpath("//button[@aria-label='Remove "+planName+"']"), 5);
 		
 	}
