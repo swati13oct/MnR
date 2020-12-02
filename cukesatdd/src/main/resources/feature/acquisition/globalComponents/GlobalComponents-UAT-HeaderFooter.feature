@@ -113,13 +113,13 @@ Feature: 1.12 UAT - Header and Footer flows
 
  @globalfooter_AARP
   Examples: 
-     |Scenario  					|	site	|zipcode | isMultutiCounty | county        |
-     |E2E Scenario_3 AMP  |	AARP	|80001	 | No							|Jefferson|
+     |Scenario  					|	site	|zipcode | isMultutiCounty | county  |
+     |E2E Scenario_3 AMP  |	AARP	|80001	 | No							 |Jefferson|
  
  @globalfooter_UHC
   Examples: 
-      |Scenario					|	site|zipcode | isMultutiCounty | county        |
-      |E2E Scenario_3 UMS |	UHC	| 10001	| No							 | New York|				     
+      |Scenario					  |	site|zipcode | isMultutiCounty | county  |
+      |E2E Scenario_3 UMS |	UHC	| 10001	 | No							 | New York|				     
        
 	@globalfooterULayer  @UATRegression
   Scenario Outline: <Scenario> : To verify links displayed in the global header and footer on DCE page
