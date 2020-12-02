@@ -285,12 +285,12 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 		System.out.println("****the user validates Look Up Drugs button should be visible***");
 		validateWithValue("Look Up Drugs Button", LookUpDrugsButton);
 		scrollElementToCenterScreen(LookUpDrugsButton);
-		//LookUpDrugsButton.click();
+		LookUpDrugsButton.click();
 		CommonUtility.checkPageIsReadyNew(driver);
-		//CommonUtility.waitForPageLoad(driver, oldDcePgHeader, 5);
-		//Assert.assertTrue("PROBLEM - unable to locate the DCE page header", 
-		//		validate(oldDcePgHeader,0) );
-		//driver.navigate().back();
+		CommonUtility.waitForPageLoad(driver, oldDcePgHeader, 5);
+		Assert.assertTrue("PROBLEM - unable to locate the DCE page header", 
+				validate(oldDcePgHeader,0) );
+		driver.navigate().back();
 		CommonUtility.checkPageIsReadyNew(driver);
 		checkModelPopup(driver,2);
 	}
