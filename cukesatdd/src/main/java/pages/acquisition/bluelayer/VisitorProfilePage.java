@@ -26,7 +26,8 @@ public class VisitorProfilePage extends UhcDriver {
 	@FindBy(css = "div.signupCTA a.profileBtn")
 	private WebElement btnCreateProfile;
 	
-	@FindBy(xpath = "//*[contains(@aria-label,'Add Plans')]")
+	//@FindBy(xpath = "//*[contains(@aria-label,'Add Plans')]")
+	@FindBy(xpath = "//*[contains(@aria-labelledby,'findPlans')]")
 	private WebElement addPlans;
 	
 	@FindBy(css = "a.addrugs")
@@ -339,5 +340,17 @@ public class VisitorProfilePage extends UhcDriver {
 			Assert.fail("Navigation to Plan Compare page is failed");
 		}
 		return null;
+	}
+	
+	public AcquisitionHomePage findPlans() {
+
+		jsClickNew(addPlans);
+		waitForPageLoadSafari();
+		if(driver.getCurrentUrl().contains("profile")) {
+			return new AcquisitionHomePage(driver);
+		}else {
+			System.out.println("Navigation to visitor profile is failed");
+			return null;
+		}
 	}
 }

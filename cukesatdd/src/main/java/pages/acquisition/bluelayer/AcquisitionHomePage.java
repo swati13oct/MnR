@@ -37,6 +37,7 @@ import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.pharmacyLocator.PharmacySearchPage;
 import pages.acquisition.ulayer.PageTitleConstants;
 import pages.acquisition.commonpages.PlanDocsPage;
+//import pages.acquisition.commonpages.VisitorProfilePage;
 public class AcquisitionHomePage extends GlobalWebElements {
 
 	@FindBy(id = "lookzip")
@@ -299,8 +300,11 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "//a[contains(@class, 'viewLink disclaimer')]")
 	private WebElement disclaimerInformation;
 
-	@FindBy(id = "dupIconFlyOut")
-	private WebElement shoppingCartIcon;
+	@FindBy(id="dupIconFlyOut")
+    private WebElement shoppingCartIcon;
+    
+    @FindBy(css="a#visitor-profile-header")
+    private WebElement lnkProfile;
 
 	@FindBy(xpath = "//*[contains(@id,'sam-call-button')]//*[contains(@class,'sam__button__icon')]")
 	private WebElement callsam;
@@ -1768,10 +1772,13 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	 */
 	public VisitorProfilePage navigateToVisitorProfilePage() {
 		waitforElement(shoppingCartIcon);
-		shoppingCartIcon.click();
-		if (driver.getCurrentUrl().contains("profile")) {
+//		shoppingCartIcon.click();
+		jsClickNew(shoppingCartIcon);
+		jsClickNew(lnkProfile);
+		waitForPageLoadSafari();
+		if(driver.getCurrentUrl().contains("profile")) {
 			return new VisitorProfilePage(driver);
-		} else {
+		}else {
 			System.out.println("Navigation to visitor profile is failed");
 			return null;
 		}
