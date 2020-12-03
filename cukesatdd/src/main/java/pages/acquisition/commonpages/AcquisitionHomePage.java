@@ -447,6 +447,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "//p[contains(text(),'UnitedHealthcare Insurance Company (UnitedHealthcare)')]")
     private WebElement UHCICSubTitle;
 	
+	@FindBy(xpath = "//*[contains(text(),'UnitedHealthcare Medicare Solutions | Provider Search')]")
+	private WebElement UnitedHealthcareMedicareSolutions;
+	
 	@FindBy(xpath = "//*[contains(@id, 'piFirstName')]")
 	private WebElement registerFirstName;
 	
@@ -2623,6 +2626,23 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			}
 		}
 
+		public void validateCountResults() {
+			System.out.println("@@@inside count results validation@@");
+			String SearchResultsCountUI = SearchResultsCount.getText();
+			System.out.println("SearchResultsCountUI" + SearchResultsCountUI);
+
+			String[] arr = SearchResultsCountUI.split("\\s+");
+			String expectedCount = arr[3];
+			System.out.println("Expected count from UI" + expectedCount);
+			String SearchResultsCountAttribute = SearchResultsCount.getAttribute("dtmname");
+			System.out.println("SearchResultsCountAttribute" + SearchResultsCountAttribute);
+			String[] arr1 = SearchResultsCountAttribute.split("\\s+");
+			String expectedCountfromAttribute = arr1[0];
+			System.out.println("Expected Count from Attribute" + expectedCountfromAttribute);
+			Assert.assertEquals(expectedCount, expectedCountfromAttribute);
+			System.out.println("check");
+
+		}
 
 		@FindBy(xpath="(//*[contains(text(),'Sign in')])[1]")
 		private WebElement memberSignInPage;
@@ -2975,5 +2995,25 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			}
 		}
 		
+		public void clickUnitedHealthcareMedicareSolutions() {
+			threadsleep(8);
+			UnitedHealthcareMedicareSolutions.click();
+		}
+		
+		public void validateUrl(String url) {
+			threadsleep(6);
+			String parentWindow = driver.getWindowHandle();
+			driver.switchTo().window(driver.getWindowHandles().toArray()[1].toString());
+			System.out.println(driver.getTitle());
+			String str=driver.getTitle();
+			//Assert.assertTrue( "Title mismatch for dental directory",driver.getTitle().equals(url));
+			if(str.equals(url)) {
+				assertTrue(true);
+			}
+			
+		}
+		
+
+
 
 }

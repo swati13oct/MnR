@@ -1,7 +1,7 @@
 @UATRegression @F513647
 Feature:1.08 UAT-Site Search Flows
 
-@SiteSearchULayer @UATRegression
+@SiteSearchULayer @UATRegressionhome
  Scenario Outline: Verify search results on Homepage
     Given the user is on medicare acquisition site landing page
      	|Site| <site>|

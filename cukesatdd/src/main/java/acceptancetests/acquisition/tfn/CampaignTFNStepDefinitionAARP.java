@@ -379,7 +379,7 @@ public void the_user_navigates_to_Medsupp_VPP_and_validates_Medsupp_TFN() throws
 		
 }
 
-@Then("^the user navigates to following memeber signin page and navigate to view medicare plans link AARP$")
+/*@Then("^the user navigates to following memeber signin page and navigate to view medicare plans link AARP$")
 public void the_user_navigates_to_following_memeber_signin_page_AARP(DataTable arg1) throws Throwable {
 	Map<String, String> inputAttributesMap=parseInputArguments(arg1);
 	String memberSignINURL = inputAttributesMap.get("Member Signin URL");
@@ -401,7 +401,7 @@ public void the_user_navigates_to_following_memeber_signin_page_AARP(DataTable a
 	//tfnPage.validateFederalTFN(TFN_Xpath);
 */
 	
-}
+
 
 @Then("^the user validate the sam icons tfn with federal TFN on Acquistion page$")
 public void the_user_validate_sam_icons_tfn_with_Federal_TFN(DataTable arg1) throws Throwable {
@@ -412,7 +412,7 @@ public void the_user_validate_sam_icons_tfn_with_Federal_TFN(DataTable arg1) thr
 	tfnPage.validateFederalTFN(TFN_Xpath);
 }
 
-}
+
 
 
 @Given("^user is on Yahoo and search AARP Medicare Advantage Plan and  navigate to AARP shop pages$")
