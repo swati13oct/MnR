@@ -358,14 +358,14 @@ public class AepPlanDetailsPage extends UhcDriver {
 			benefitValueUI = benefitValueUI.toLowerCase();
 			if(columnName.startsWith("tier") && !columnName.contains(":") && key.startsWith("tier"))
 				key = key.replace(":","");
-
 			
 			if(key.endsWith("1"))
 				key = 	StringUtils.trimTrailingCharacter(key, '1');
 			else if(key.endsWith("2"))
 				key = 	StringUtils.trimTrailingCharacter(key, '2');
 			
-			//removing all the footnote words from the string as they represent footnote
+			
+			//removing all the footnote words from the UI string and the superscripts
 			if(!(key.equalsIgnoreCase("monthly premium")||key.contains("plan premium")||key.contains("optional rider")||key.contains("estimated annual total") || key.contains("part b"))) {
 				if(benefitValueUI.endsWith("footnote2"))
 					benefitValueUI = benefitValueUI.replace("footnote2", "");

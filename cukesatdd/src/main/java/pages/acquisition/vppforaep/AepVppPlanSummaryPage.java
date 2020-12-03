@@ -259,10 +259,10 @@ public class AepVppPlanSummaryPage extends UhcDriver {
 
 		//commenting the below lines of coe to reduce the log on Jenkins job
 		
-//		for(String keyValue : result.keySet()) {
-//			  System.out.println("Key : "+keyValue+" Value: "+result.get(keyValue));
-//			  System.out.println("_________________________________________________________________________________________________");
-//		}
+		for(String keyValue : result.keySet()) {
+			  System.out.println("Key : "+keyValue+" Value: "+result.get(keyValue));
+			  System.out.println("_________________________________________________________________________________________________");
+		}
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 
 		System.out.println(sheetName+"_"+rowIndex+" - Finished to collect the plan benefits info on vpp summary page - Benefits Map count - " + result.size());
@@ -337,11 +337,22 @@ public class AepVppPlanSummaryPage extends UhcDriver {
 						benefitValue = benefitValue.trim();
 						benefitValueUI = benefitValueUI.trim();
 						
-						if(benefitValueUI.contains(benefitValue)||benefitValueUI.equalsIgnoreCase(benefitValue)) {
+						if(key.contains("primarycarephysician")||key.contains("specialist")||key.contains("outofpocket")) {
+							if(benefitValueUI.equalsIgnoreCase(benefitValue)) {
+								flag = true;break;
+							}else {
+								flag = false;
+								System.out.println(sheetName+"_"+rowIndex+" - Values did not match for col:1 "+columnName+" Excel: "+benefitValue+" | UI: "+benefitValueUI);
+								tmpUIString2 = tmpUIString1;
+								break;
+							}
+									
+						}
+						else if(benefitValueUI.contains(benefitValue)||benefitValueUI.equalsIgnoreCase(benefitValue)) {
 							flag = true;break;
 						}else {
 							flag = false;
-							System.out.println(sheetName+"_"+rowIndex+" - Values did not match for col:1 "+columnName+" Excel: "+benefitValue+" | UI: "+benefitValueUI);
+							System.out.println(sheetName+"_"+rowIndex+" - Values did not match for col:2 "+columnName+" Excel: "+benefitValue+" | UI: "+benefitValueUI);
 							tmpUIString2 = tmpUIString1;
 							break;
 						}
