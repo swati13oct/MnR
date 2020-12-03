@@ -5272,4 +5272,26 @@ public boolean RequestPlanIInformation(String FirstName, String LastName, String
 return RequestPlanIInformation_Validation;
 
 }
+public void checkMAPlansOnly(String counter) {
+	try {
+		Thread.sleep(2000);
+	} catch (InterruptedException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	List<Integer> selectPlanIndexes=new ArrayList<Integer>();
+	int	count=counter.contains(",") ? 0 :Integer.parseInt(counter);
+	if(count==0)
+		for(String index: counter.split(",")) {selectPlanIndexes.add(Integer.parseInt(index));}
+	else
+		for(int i=0;i<count;i++) {selectPlanIndexes.add(i);}
+
+	List<WebElement> allMAPlans = driver
+			.findElements(By.xpath(".//*[@id='plan-list-1']//div[contains(@class,'compare-box')]//label"));
+	if(allMAPlans!=null) {
+		for(int i:selectPlanIndexes) {
+			allMAPlans.get(i).click();
+		}
+	}
+}
 }
