@@ -4,13 +4,15 @@ Feature: 1.10.2 DCE-Redesign-VPP_PlanSummary AARP - To test VPP Plan Details - D
   @DCE_Redesign_VPP_PlanSummary_Plan
   Scenario Outline: 1.10.2.1 To test the DCE Redesign flow for PlanType :  <plantype> from vpp Plan Summary
     Given the user is on medicare acquisition site landing page
-    	|Site| <site>|
+      | Site | <site> |
     When the user performs plan search using following information
       | Zip Code        | <zipcode>         |
       | County Name     | <county>          |
       | Is Multi County | <isMultutiCounty> |
-    And the user views the plans of the below plan type and select Next year
+    And the user views the plans of the below plan type
       | Plan Type | <plantype> |
+    And the user selects plan year
+      | Plan Year | <planyear> |
     And I access the DCE Redesign from Plan Summary for mentioned plan
       | Plan Type | <plantype> |
       | Plan Name | <planname> |
@@ -30,44 +32,42 @@ Feature: 1.10.2 DCE-Redesign-VPP_PlanSummary AARP - To test VPP Plan Details - D
 
     @DCE_Redesign_VPP_PlanSummary_MAPD_AARP
     Examples: 
-      |	site	| zipcode | plantype | county | isMultutiCounty | drug1   | planname                                           |
-      |	AARP	|   90210 | MAPD     | none   | no              | Orkambi | AARP Medicare Advantage SecureHorizons Focus (HMO) |
+      | site | zipcode | plantype | planyear | county | isMultutiCounty | drug1   | planname                                           |
+      | AARP |   90210 | MAPD     | current   | none   | no              | Orkambi | AARP Medicare Advantage SecureHorizons Focus (HMO) |
 
-		@DCE_Redesign_VPP_PlanSummary_MAPD_UHC
+    @DCE_Redesign_VPP_PlanSummary_MAPD_UHC
     Examples: 
-      |	site	| zipcode | plantype | county | isMultutiCounty | drug1   | planname                                           |
-      |	UHC	|   90210 | MAPD     | none   | no              | Orkambi | AARP Medicare Advantage SecureHorizons Focus (HMO) |
-	
+      | site | zipcode | plantype | planyear | county | isMultutiCounty | drug1   | planname                                           |
+      | UHC  |   90210 | MAPD     | current   | none   | no              | Orkambi | AARP Medicare Advantage SecureHorizons Focus (HMO) |
+
     @DCE_Redesign_VPP_PlanSummary_PDP_AARP
     Examples: 
-      |	site	| zipcode | plantype | county       | isMultutiCounty | drug1   | planname                        |
-      |	AARP	|   80002 | PDP      | Adams County | yes             | Orkambi | AARP MedicareRx Walgreens (PDP) |
-      
+      | site | zipcode | plantype | county       | isMultutiCounty | drug1   | planname                        |
+      | AARP |   80002 | PDP      | Adams County | yes             | Orkambi | AARP MedicareRx Walgreens (PDP) |
+
     @DCE_Redesign_VPP_PlanSummary_PDP_UHC
     Examples: 
-      |	site	| zipcode | plantype | county       | isMultutiCounty | drug1   | planname                        |
-      |	UHC	|   80002 | PDP      | Adams County | yes             | Orkambi | AARP MedicareRx Walgreens (PDP) |
+      | site | zipcode | plantype | county       | isMultutiCounty | drug1   | planname                        |
+      | UHC  |   80002 | PDP      | Adams County | yes             | Orkambi | AARP MedicareRx Walgreens (PDP) |
 
     @DCE_Redesign_VPP_PlanSummary_SNP_AARP
     Examples: 
-      |	site	| zipcode | plantype | county       | isMultutiCounty | drug1   | planname                                              |
-      |	AARP	|   78006 | SNP      | Bexar County | yes             | Orkambi | UnitedHealthcare Dual Complete Choice (Regional PPO D-SNP) |
-      
+      | site | zipcode | plantype | county       | isMultutiCounty | drug1   | planname                                                   |
+      | AARP |   78006 | SNP      | Bexar County | yes             | Orkambi | UnitedHealthcare Dual Complete Choice (Regional PPO D-SNP) |
+
     @DCE_Redesign_VPP_PlanSummary_SNP_UHC
     Examples: 
-      |	site	| zipcode | plantype | county       | isMultutiCounty | drug1   | planname                                              |
-      |	UHC		|   78006 | SNP      | Bexar County | yes             | Orkambi | UnitedHealthcare Dual Complete Choice (Regional PPO D-SNP) |
+      | site | zipcode | plantype | county       | isMultutiCounty | drug1   | planname                                                   |
+      | UHC  |   78006 | SNP      | Bexar County | yes             | Orkambi | UnitedHealthcare Dual Complete Choice (Regional PPO D-SNP) |
 
-
-@dceRedesingDrugSummarytoVPPdetail @470713
-      
-       Scenario Outline: Test to Verify that user navigates to vpp detail page from drug summary page to validate drug cost estimator and view plan summary  
+  @dceRedesingDrugSummarytoVPPdetail @470713
+  Scenario Outline: Test to Verify that user navigates to vpp detail page from drug summary page to validate drug cost estimator and view plan summary
     Given the user is on the AARP medicare site landing page
-     When I access the acquisition DCE tool from home page
+    When I access the acquisition DCE tool from home page
     Then the user validates Get Started Page
     When the user clicks on Add drugs button
-   And adds drugs in drug list page
-    | DrugName | <drug1> |
+    And adds drugs in drug list page
+      | DrugName | <drug1> |
     And clicks on Review drug cost button
     Then user should be navigated to zipcode and plan year capture page for AEP in AARP
     When user enters valid zipcode and county in AARP
@@ -80,40 +80,31 @@ Feature: 1.10.2 DCE-Redesign-VPP_PlanSummary AARP - To test VPP Plan Details - D
     And user click on view plan details on drug summary page
     Then the user verify the drug cost estimator and view plan summary on VPP summary page in AARP
     Then the user click on drug cost estimator on vpp plan summary page in AARP
+
     #Then User validates planName matches plan Name in DCE summary page in AARP
-    
-     @dceRedesingDrugSummarytoVPPdetail_MAPD
-   
+    @dceRedesingDrugSummarytoVPPdetail_MAPD
     Examples: 
-    
-      | zipCode | plantype | county | isMultutiCounty | drug1 | planname                                           |
+      | zipCode | plantype | county | isMultutiCounty | drug1   | planname                                           |
       |   10001 | MAPD     | none   | no              | Orkambi | AARP Medicare Advantage SecureHorizons Focus (HMO) |
-      
-        @dceRedesingDrugSummarytoVPPdetail_PDP
-        
+
+    @dceRedesingDrugSummarytoVPPdetail_PDP
     Examples: 
-     
       | zipcode | plantype | county       | isMultutiCounty | drug1   | planname                        |
       |   80002 | PDP      | Adams County | yes             | Orkambi | AARP MedicareRx Walgreens (PDP) |
 
-     @dceRedesingDrugSummarytoVPPdetail_SNP
-   
+    @dceRedesingDrugSummarytoVPPdetail_SNP
     Examples: 
-     
       | zipcode | plantype | county       | isMultutiCounty | drug1   | planname                                              |
       |   78006 | SNP      | Bexar County | yes             | Orkambi | UnitedHealthcare Medicare Silver (Regional PPO C-SNP) |
-      
-      
-      @vvpSummarytoVppDetail
-      
-      Scenario Outline: Test to verify the Drug cost estimator and view plan summary are not visible when user navigate away from DCE and navigate to VPP detail page
-      
-      Given the user is on the AARP medicare site landing page
-     When I access the acquisition DCE tool from home page
+
+  @vvpSummarytoVppDetail
+  Scenario Outline: Test to verify the Drug cost estimator and view plan summary are not visible when user navigate away from DCE and navigate to VPP detail page
+    Given the user is on the AARP medicare site landing page
+    When I access the acquisition DCE tool from home page
     Then the user validates Get Started Page
     When the user clicks on Add drugs button
-   And adds drugs in drug list page
-    | DrugName | <drug1> |
+    And adds drugs in drug list page
+      | DrugName | <drug1> |
     And clicks on Review drug cost button
     Then user should be navigated to zipcode and plan year capture page for AEP in AARP
     When user enters valid zipcode and county in AARP
@@ -127,27 +118,18 @@ Feature: 1.10.2 DCE-Redesign-VPP_PlanSummary AARP - To test VPP Plan Details - D
     Then the user verify the drug cost estimator and view plan summary on VPP summary page in AARPs
     Then the user click on view plan summary on vpp detail page in AARP
     Then user click on veiw plan details on summary page in AARP
-    
+
     @vvpSummarytoVppDetail_MAPD
-    
-    Examples:
-     
-      | zipCode | plantype | county | isMultutiCounty | drug1 | planname                                           |
+    Examples: 
+      | zipCode | plantype | county | isMultutiCounty | drug1   | planname                                           |
       |   10001 | MAPD     | none   | no              | Orkambi | AARP Medicare Advantage SecureHorizons Focus (HMO) |
-      
-      @vvpSummarytoVppDetail_PDP
-       Examples: 
-     
+
+    @vvpSummarytoVppDetail_PDP
+    Examples: 
       | zipcode | plantype | county       | isMultutiCounty | drug1   | planname                        |
       |   80002 | PDP      | Adams County | yes             | Orkambi | AARP MedicareRx Walgreens (PDP) |
 
-      @vvpSummarytoVppDetail_SNP
-   
+    @vvpSummarytoVppDetail_SNP
     Examples: 
-     
       | zipcode | plantype | county       | isMultutiCounty | drug1   | planname                                              |
       |   78006 | SNP      | Bexar County | yes             | Orkambi | UnitedHealthcare Medicare Silver (Regional PPO C-SNP) |
-      
-
-      
-      
