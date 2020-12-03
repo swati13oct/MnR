@@ -1643,10 +1643,10 @@ public class VppCommonStepDefinition {
 			String Counter) throws Throwable {
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		int counter = Integer.parseInt(Counter);
+//		int counter = Integer.parseInt(Counter);
 		if (planType.equals("MAPD")) {
 			//plansummaryPage.clickonViewPlans();
-			plansummaryPage.checkMAPlansOnly(counter);
+			plansummaryPage.checkMAPlansOnly(Counter);
 			System.out.println("Selected All MAPD plans for Plan Compare");
 		}
 
@@ -2630,5 +2630,34 @@ public class VppCommonStepDefinition {
 					Assert.fail("Error in navigating back to Plan Summary Page");
 			
 		  }
+		@Then("^remove \"([^\"]*)\" plan from new plan compare page$")
+		public void remove_plan_from_new_plan_compare_page_for_UHC(String planIndices) throws Throwable {
+			ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario().getBean(PageConstants.PLAN_COMPARE_PAGE);
+			planComparePage.clickOnSelectedRemoveLink(planIndices);
+		}
+
+		@Then("^validate optional service riders section on compare page is not shown$")
+		public void validate_optional_service_riders_section_on_compare_page_is_not_shown() throws Throwable {
+			ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario().getBean(PageConstants.PLAN_COMPARE_PAGE);
+			planComparePage.validateOptionalRidersSectionHidden();			
+		}
+		
+		@Then("^validate all available plans are shown on click of view all plans$")
+		public void validate_all_plans_are_shown() throws Throwable {
+			ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario().getBean(PageConstants.PLAN_COMPARE_PAGE);
+			planComparePage.validateAllPlansShown();			
+		}
+		
+		@Then("^validate OON Toggle is displayed on medical and additional benefits$")
+		public void validate_OON_Toggle_is_displayed_on_medical_and_additional_benefits() throws Throwable {
+			ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario().getBean(PageConstants.PLAN_COMPARE_PAGE);
+			planComparePage.validateOONDDisplayed();
+		}
+
+		@Then("^Validate OON Toggle is not displayed when there are no OON Plans Available$")
+		public void validate_OON_Toggle_is_not_displayed_when_there_are_no_OON_Plans_Available() throws Throwable {
+			ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario().getBean(PageConstants.PLAN_COMPARE_PAGE);
+			planComparePage.validateOONNotDisplayed();
+		}
 		
 }
