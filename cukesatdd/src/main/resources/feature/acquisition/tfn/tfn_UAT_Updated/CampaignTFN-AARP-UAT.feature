@@ -226,13 +226,13 @@ Feature: UAT Scripts-To test Campaign TFN in all flows on AARP site
     Then the user clicks on Build Drug List to navigate to Build Drug List Page
     Then the user searches and adds the following Drug to Drug List
       | DrugName | <drug1> |
-    Then the user clicks on Review Drug Costs to Land on Zip Entry Page
-    When user enters valid zipcode and county
-      | ZipCode | <zipCode> |
-    And user clicks on continue button in Zip Entry Page
-    Then the user selects View plan details for following plantype and PlanName for DCE Page
-      | Plan Type | <planType> |
-      | Plan Name | <planName> |
+    #Then the user clicks on Review Drug Costs to Land on Zip Entry Page
+   # When user enters valid zipcode and county
+    #  | ZipCode | <zipCode> |
+    #And user clicks on continue button in Zip Entry Page
+    #Then the user selects View plan details for following plantype and PlanName for DCE Page
+     # | Plan Type | <planType> |
+     # | Plan Name | <planName> |
     Given the user is on following acquisition site from Campaign Traffic
       | Site         | <site>         |
       | Campaign URL | <campaignUrl2> |
