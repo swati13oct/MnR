@@ -442,21 +442,21 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath="//a[contains(@href,'https://www.myuhcagent.com/')]")
 	private WebElement RightRail_FindAnAgent; 
 
-	@FindBy(xpath="(//a[contains(@href,'https://www.myuhcagent.com/')])[1]")
-	private WebElement RightRail_FindAnAgentMedsupp;
+//	@FindBy(xpath="(//a[contains(@href,'https://www.myuhcagent.com/')])[1]")
+//	private WebElement RightRail_FindAnAgentMedsupp;
 	
 	@FindBy(xpath = "//*[contains(text(),'UnitedHealthcare Medicare Solutions | Provider Search')]")
 	private WebElement UnitedHealthcareMedicareSolutions;
 
-	@FindBy(xpath = "//p[contains(text(),'UnitedHealthcare Insurance Company (UnitedHealthcare)')]")
-    private WebElement UHCICSubTitle;
-	
+//	@FindBy(xpath = "//p[contains(text(),'UnitedHealthcare Insurance Company (UnitedHealthcare)')]")
+//    private WebElement UHCICSubTitle;
+//	
 	
 	@FindBy(xpath = "//a[@id='aarplink']")
     private WebElement aarpLink;
 
-	@FindBy(xpath = "//*[contains(@id, 'piFirstName')]")
-	private WebElement registerFirstName;
+//	@FindBy(xpath = "//*[contains(@id, 'piFirstName')]")
+//	private WebElement registerFirstName;
 
 	@FindBy(xpath="//a[contains(text(),'Learn More')]")
 	private WebElement learnAboutMedicareHomeScreen;
@@ -513,8 +513,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(id = "cancel")
 	private WebElement cancelLeaveAARPMedicare;
 	
-	@FindBy(xpath="//a[contains(text(),'Learn More')]")
-	private WebElement learnAboutMedicareHomeScreen;
+//	@FindBy(xpath="//a[contains(text(),'Learn More')]")
+//	private WebElement learnAboutMedicareHomeScreen;
 
 
    	String ChatSamText= "Chat with a Licensed Insurance Agent";
@@ -1330,12 +1330,12 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	public AcquisitionHomePage homeFooterClick() {
 		validateNew(footerHomeLink);
 
-//		footerHomeLink.click();
-// 		jsClickNew(footerHomeLink);
-// 		CommonUtility.checkPageIsReadyNew(driver);
-// 		threadsleep(8);
-// 		if (validateNew(zipCodeField)) {
-// 			return new AcquisitionHomePage(driver, true);
+	footerHomeLink.click();
+		jsClickNew(footerHomeLink);
+		CommonUtility.checkPageIsReadyNew(driver);
+	threadsleep(8);
+ 		if (validateNew(zipCodeField)) {
+ 			return new AcquisitionHomePage(driver, true);
 		}
 		threadsleep(8);
 		jsClickNew(footerHomeLink);
@@ -2095,11 +2095,11 @@ public class AcquisitionHomePage extends GlobalWebElements {
 				assertTrue(true);
 			}
 			
-			/*if (CreateProfile.isEnabled() && VPSignIn.isEnabled()) {
+			if (CreateProfile.isEnabled() && VPSignIn.isEnabled()) {
 
-			WebElement CreateProfile = driver.findElement(By.xpath("//a[contains(text(), 'Create Profile')]"));
-			WebElement VPSignIn = driver.findElement(
-					By.xpath("//a[contains(text(), 'Sign In') and not(contains(@aria-labelledby ,'VPSignIn'))]"));
+//			WebElement CreateProfile = driver.findElement(By.xpath("//a[contains(text(), 'Create Profile')]"));
+//			WebElement VPSignIn = driver.findElement(
+//					By.xpath("//a[contains(text(), 'Sign In') and not(contains(@aria-labelledby ,'VPSignIn'))]"));
 			validateNew(CreateProfile);
 			validateNew(VPSignIn);
 			if (CreateProfile.isEnabled() && VPSignIn.isEnabled()) {
@@ -2131,7 +2131,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			CommonUtility.waitForPageLoadNew(driver, findPlansButton, 30);
 
 		}
-		
+		}
 		public void navigateToPath(String path) {
 
 			String CurrentURL = driver.getCurrentUrl();
@@ -2336,7 +2336,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 		//	String StateSessionStorage = ReturnDriverStorage(driver, "sessionStorage", "ucp_geotrackingState");
 
-		String StateSessionStorage =  returnDriverStorageJS("sessionStorage", "ucp_geotrackingState");
+//		String StateSessionStorage =  returnDriverStorageJS("sessionStorage", "ucp_geotrackingState");
 
 					//ReturnDriverStorage(driver, "sessionStorage", "ucp_geotrackingState");
 
@@ -2893,15 +2893,14 @@ public class AcquisitionHomePage extends GlobalWebElements {
 //			if (validate(RequestMoreInformationLink)) {
 //				waitforElement(RequestMoreInformationLink);
 //				System.out.println("Contact Us Page is Displayed");
-//				return new RequestHelpAndInformationPage(driver);
-//			}
+//			return new RequestHelpAndInformationPage(driver);
+//		}
 //			return null;
-
-	
-
-
-			}
-		}
+//
+//	
+//
+//
+//		}
 
 		
 		public RequestHelpAndInformationPage RequestLinkOnShopPlan() throws Exception {
@@ -3012,26 +3011,27 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			CommonUtility.waitForElementToDisappear(driver, aarpLink, 30);
 			aarpLink.click();
 		}
-		public void clickVisitAARPHeaderLink() {
-			if(driver.getCurrentUrl().contains("aarpmedicareplans")) {
-				jsClickNew(aarpLink);
-				if(!driver.getCurrentUrl().contains("aarp.org"))
-					Assert.fail("Visit AARP link did not lead to the right page");
-			}
 		
-		}
+//		public void clickVisitAARPHeaderLink() {
+//			if(driver.getCurrentUrl().contains("aarpmedicareplans")) {
+//				jsClickNew(aarpLink);
+//				if(!driver.getCurrentUrl().contains("aarp.org"))
+//					Assert.fail("Visit AARP link did not lead to the right page");
+//			}
+//		
+//		}
 		
-		public void clickVisitAARPFooterLink() {
-			//if(driver.getCurrentUrl().contains("aarpmedicareplans")) {
-				threadsleep(8);
-				jsClickNew(visitAARPFooterLink);
-				//visitAARPFooterLink.click();
-				threadsleep(6);
-			if(driver.getCurrentUrl().contains("aarpmedicareplans.com")||driver.getCurrentUrl().contains("uhcmedicaresolutions.com")) {
-				assertTrue(true);
-			}
-		}	
-		
+//		public void clickVisitAARPFooterLink() {
+//			//if(driver.getCurrentUrl().contains("aarpmedicareplans")) {
+//				threadsleep(8);
+//				jsClickNew(visitAARPFooterLink);
+//				//visitAARPFooterLink.click();
+//				threadsleep(6);
+//			if(driver.getCurrentUrl().contains("aarpmedicareplans.com")||driver.getCurrentUrl().contains("uhcmedicaresolutions.com")) {
+//				assertTrue(true);
+//			}
+//		}	
+//		
 		public void MedicareAdvantagePlans() {
 			threadsleep(6);
 			//MedicareAdvantagePlans.click();
@@ -3119,11 +3119,6 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			}
 		}
 		
-		
-
-		
-
-		}	
 		
 		public void clickVisitAARPHeaderLink() {
 			if (driver.getCurrentUrl().contains("aarpmedicareplans")) {
