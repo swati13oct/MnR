@@ -280,8 +280,8 @@ Feature: Plan Recommendation Engine flow - Verify PRE flows with Edit response f
 
     @EditResponsePage_MAtoIDK
     Examples: 
-      | Zipcode | isMultiCounty | county  | isCoverageOpt | specialNeeds | travel  | doctors | DoctorsName       | isMultiDoctor | Dental-Hearing-Vision-Fitness | costPreferenceOption | E_isCoverageOpt | E_Drug Selection | E_DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch |
-      |   32115 | NO            | Volusia | MA            | Medicaid     | regular | Lookup  | David B. Auerbach | NO            | Yes,Yes,Yes,Yes               | Lower                | None            | Yes              | Lipitor,NO,Lipitor TAB 10MG,,,1,YES,NO                                 |
+      | Zipcode | isMultiCounty | county   | isCoverageOpt | specialNeeds | travel  | doctors | DoctorsName | isMultiDoctor | Dental-Hearing-Vision-Fitness | costPreferenceOption | E_isCoverageOpt | E_Drug Selection | E_DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch |
+      |   10004 | NO            | New York | MA            | Medicaid     | regular | Lookup  | sue         | NO            | Yes,Yes,Yes,Yes               | Lower                | None            | Yes              | Lipitor,NO,Lipitor TAB 10MG,,,1,YES,NO                                 |
 
   @PRE @planrecommendation @EditResponsePage @PDPtoMAPD
   Scenario Outline: <Zipcode>, <isMultiCounty> ,<county>, <isCoverageOpt> , <Drug Selection> - To validate Edit preference functions for PDP to MAPD in PRE
