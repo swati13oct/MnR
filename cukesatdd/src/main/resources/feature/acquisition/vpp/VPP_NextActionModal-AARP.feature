@@ -128,15 +128,10 @@ Feature: 1.03-ACQ-Next Action Modal on vpp flow AARP
     Then the user clicks VPP Plan Details button from Drug Details Page
     Then the user click on view plan summary button on vpp detail page
     Then user should be able to see the NBA modal to add providers on the VPP summary page
-    And the user views the plans of the below plan type in AARP site and select Next year
-      | Plan Type | <plantype> |
-    And the user selects plan year for the AARP site
-      | Plan Year | <planyear> |
-    Then user should be able to see the NBA modal to Enroll Plan on the VPP summary page
 
     Examples: 
-      | drug1   | zipCode | plantype | planName                                            | planyear |
-      | Lipitor |   19019 | MAPD     | AARP Medicare Advantage SecureHorizons Plan 1 (HMO) | future   |
+      | drug1   | zipCode | plantype | planName                                            |
+      | Lipitor |   19019 | MAPD     | AARP Medicare Advantage SecureHorizons Plan 1 (HMO) |
 
   @vppNBAAddproviderCoveredLink
   Scenario Outline: UserStory: Plan type: <plantype> -Test to verify the Next action modal on VPP summary page for MAPD plan when Provider exists
@@ -296,15 +291,13 @@ Feature: 1.03-ACQ-Next Action Modal on vpp flow AARP
     Then the user clicks VPP Plan Details button from Drug Details Page
     Then the user click on view plan summary button on vpp detail page
     Then user should be able to see the NBA modal to add providers on the VPP summary page
-    And the user views the plans of the below plan type in AARP site and select Next year
+    And the user views the plans of the below plan type
       | Plan Type | <plantype> |
-    And the user selects plan year for the AARP site
-      | Plan Year | <planyear> |
     Then user should be able to see the NBA modal to Enroll Plan on the VPP summary page
 
     Examples: 
-      | drug1   | zipCode | plantype | planyear |
-      | Lipitor |   19019 | PDP      | future   |
+      | drug1   | zipCode | plantype |
+      | Lipitor |   19019 | pdp      |
 
   @vppSavedPDPEnrollNBA
   Scenario Outline: Test to verify the Select Plan for Enroll Modal when  user clicks on "Enroll in Plan" button and multiple plans are saved
