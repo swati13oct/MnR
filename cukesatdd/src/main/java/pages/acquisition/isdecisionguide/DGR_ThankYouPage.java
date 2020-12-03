@@ -86,8 +86,8 @@ public class DGR_ThankYouPage extends UhcDriver{
 	public  VPPPlanSummaryPage NavigateNext_vppMedsuppPage() {
 	//	if( validate(FindPlansAreaButton)){
 		validateNew(FindPlansAreaButton);
-		FindPlansAreaButton.click();
-			//	jsClickNew(FindPlansAreaButton);
+		//FindPlansAreaButton.click();
+		jsClickNew(FindPlansAreaButton);
 		try {
 			Thread.sleep(2000);
 		} catch (InterruptedException e) {

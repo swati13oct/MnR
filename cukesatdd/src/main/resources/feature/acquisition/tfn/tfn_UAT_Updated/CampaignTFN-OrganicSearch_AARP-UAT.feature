@@ -64,7 +64,16 @@ Feature: UAT Scripts-To test Organic SearchCampaign TFN on AARP site
       Then the user navigate to following Med Supp Plan URL and validate MedSupp TFN
       | MedSupp URL | <medSuppUrl> |
       | TFN Xpath   | <medSuppTFN> | 
-    
+   	################ # Precedence 6.3 - Visit AMP using Campign URL , PSC code 860002###############################
+      Given the user is on following acquisition site from Campaign Traffic
+      | Site         | <site>         |
+      | Campaign URL | <campaign2Url> |
+        And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
+    Then the user validates PSC code
+      | PSC Code | <Precedence2PSC> |
+      Then the user navigate to following Med Supp Plan URL and validate MedSupp TFN
+      | MedSupp URL | <medSuppUrl> |
+      | TFN Xpath   | <medSuppTFN> | 
     ############# # Precedence 6.5 - Visit AMP using Campign URL , PSC code 8001533###########################
      Given the user is on following acquisition site from Campaign Traffic
       | Site         | <site>         |
@@ -124,19 +133,10 @@ Feature: UAT Scripts-To test Organic SearchCampaign TFN on AARP site
     Then the user navigate to following Med Supp Plan URL and validate MedSupp TFN
       | MedSupp URL | <medSuppUrl> |
       | TFN Xpath   | <medSuppTFN> |
-	################ # Precedence 6.3 - Visit AMP using Campign URL , PSC code 860002###############################
-      Given the user is on following acquisition site from Campaign Traffic
-      | Site         | <site>         |
-      | Campaign URL | <campaign2Url> |
-        And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
-    Then the user validates PSC code
-      | PSC Code | <Precedence2PSC> |
-      Then the user navigate to following Med Supp Plan URL and validate MedSupp TFN
-      | MedSupp URL | <medSuppUrl> |
-      | TFN Xpath   | <medSuppTFN> | 
+
     Examples: 
    | scenario                             | site   | Precedence1PSC | Precedence2PSC |  Precedence3PSC |  Precedence4PSC | Precedence5PSC |Precedence6PSC |Precedence7PSC |Precedence8PSC       | medSuppUrl                          |medSuppTFN                                                      | campaign2Url                                                   |campaign3Url                                        |campaign4Url                                                                                                  |connect|connectTFN|
-   |Scenario 6: Campaign Precedence- AMP  | ulayer |        810106  |         860002 | 8001533          |  810106        |        810027 | 810106          |  8001533        |        810105 | shop/medicare-supplement-plans.html | (//*[contains(@class,'call')]//a[contains(@class,'tel')])[2]   | /shop/medicare-advantage-plans.html?WT.mc_id=860002&zipcode=90210|/shop/medicare-advantage-plans.html?WT.mc_id=8001533|/health-plans/medicare-advantage-plans/available-plans.html?WT.mc_id=8001533&county=053&state=27#/plan-summary|/shop/medicare-advantage-plans.html|(//*[contains(@class,'call')]//a[contains(@class,'tel')])[1]|
+   |Scenario 6: Campaign Precedence- AMP  | ulayer |        810106  |         860002 | 8001533          |  8001533        |        810027 | 810106          |  8001533        |        810105 | shop/medicare-supplement-plans.html | (//*[contains(@class,'call')]//a[contains(@class,'tel')])[2]   | /shop/medicare-advantage-plans.html?WT.mc_id=860002&zipcode=90210|/shop/medicare-advantage-plans.html?WT.mc_id=8001533|/health-plans/medicare-advantage-plans/available-plans.html?WT.mc_id=8001533&county=053&state=27#/plan-summary|/shop/medicare-advantage-plans.html|(//*[contains(@class,'call')]//a[contains(@class,'tel')])[1]|
   
    
      
