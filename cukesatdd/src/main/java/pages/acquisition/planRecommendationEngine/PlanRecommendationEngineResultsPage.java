@@ -1423,9 +1423,10 @@ public void useraddDrugsVPP(String drugDetails) {
 
 public void userPreDCE() {
 	threadsleep(10000);
-	drugcoveredsession();
-	validate(drugSummarylinkMA1stPlan, 60);
-	drugSummarylinkMA1stPlan.click();
+	validate(MAViewPlansLink, 60);
+	jsClickNew(MAViewPlansLink);
+	drugCoveredeVPP = MA1stPlanList.get(0).findElement(By.cssSelector("a[class*='add-drug']"));
+	jsClickNew(drugCoveredeVPP);
 }
 
 public boolean changePlanyear(String year) {
@@ -1625,9 +1626,10 @@ public void PREStage(String primaryWindow, String aarp) {
 	System.out.println(windows);
 	if (windows.size() == 2) {
 		for (String window : windows) {
-			System.out.println(window.replace("page-", ""));
+			System.out.println(window.replace("CDwindow-", ""));
 			if (!window.equals(primaryWindow)) {
 				driver.switchTo().window(window);
+				System.out.println(driver.getCurrentUrl());
 				Assert.assertTrue(driver.getCurrentUrl().contains("/plan-recommendation-engine.html/"), "PRE is not loading");
 			}
 			if(aarp.contains("aarpmedicareplans")) {
