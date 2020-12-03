@@ -339,7 +339,7 @@ Feature: 1.05.4 OLE common tool flow E2E SNP
 		#Then the user validates the OLE Submission Details in GPS
     #| Plan Type | <plantype> |
     
-    @SNP_OLE_AARP_Future1
+    @SNP_OLE_AARP_Future
    		Examples: 
     Examples: 
      | TID   | site|PlanType |planyear|planYear|zipcode | isMultutiCounty | county            | plantype | planName                                                | cardtype | firstname | lastname    | medicarenumber | ssnflag |SSNnumber   | partadate | partbdate | medicaidnumber | esrdflag | dob      | gender | permstreet    | permcity    | mailingaddressquestion | mailingstreet | mailingcity | mailingstate | mailingzip | email         | selectoptions                                                                                                                                                                                                                                       | optiondata              | pdpFlag | longTermFlag | riderflag | emailConfirmation | goGreen |healthinsurancename|groupnumber| membernumber|prescriptioncoveragename|pdgroupnumber|pdmembernumber|inputdataType|
