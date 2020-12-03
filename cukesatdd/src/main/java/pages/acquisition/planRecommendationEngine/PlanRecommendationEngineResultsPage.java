@@ -274,6 +274,15 @@ public class PlanRecommendationEngineResultsPage extends UhcDriver {
 	@FindBy(css = ".enroll-details a[dtmid='cta_acq_plans_landing']:nth-of-type(2)")
 	private WebElement EnrollPlanButton;
 	
+	@FindBy(css = "#plan-list-1 .swiper-container .module-plan-overview h3>a")
+	private List<WebElement> MAPlanNames;
+	
+	@FindBy(css = "#plan-list-1 .swiper-container .module-plan-overview a[id*='savePlan']")
+	private List<WebElement> MAPlansSaveIcon;
+	
+	@FindBy(css = "#pop-btn-2")
+	private WebElement ViewSavedPlansBtn;
+	
 // Provider and Drug Details in Plan Type
 	
 	@FindBy(css = "#plan-list-1 div.module-plan-overview")
@@ -356,6 +365,26 @@ public class PlanRecommendationEngineResultsPage extends UhcDriver {
 	
 	@FindBy(css = "input#currentYear[class*='selected']")
 	private WebElement currentPlanYearSelected;
+	
+// Visitor profile elements
+	
+	@FindBy(css = "div h3[class*='plan-name']")
+	private List<WebElement> planNamesVisitorPrf;
+	
+	@FindBy(css = "#navLinks a:nth-child(1)")
+	private WebElement BacktoPlansLink;
+	
+	@FindBy(css = "#saved-drugs")
+	private WebElement DrugCount;
+	
+	@FindBy(css = "#saved-doctors h3")
+	private WebElement ProviderCount;
+	
+	@FindBy(css = ".drugs-list li")
+	private List<WebElement> Druglist;
+	
+	@FindBy(css = ".doctors-list li")
+	private List<WebElement> Providerlist;
 	
 //Result Loading Page Element Verification Method 
 
@@ -613,7 +642,7 @@ public class PlanRecommendationEngineResultsPage extends UhcDriver {
 			ACQDrugCostEstimatorPage dce = new ACQDrugCostEstimatorPage(driver);
 			DrugsInDCE = dce.vppDrugsResults;
 			int count =DrugsInDCE.size();
-			drugsCoveredInVPP(count);
+			DrugsList = drugsCoveredInVPP(count);
 			verifyConfirmationmodalResults(count,DrugsInDCE,DrugsList);
 			System.out.println("Validating Drugs Details from VPP to PRE Drug Page: ");
 			vppToPre();
@@ -1455,4 +1484,103 @@ public VPPPlanSummaryPage handlePlanYearSelectionPRE(String planYear) {
 		return null;
 		
 }
+
+public void validateSavePlan(String year) {
+	System.out.println("Validate PRE Save Plans functionality : ");
+	int saveplans = 2;
+	verifySavePlans(MAPlanNames, saveplans, year, MAPlansSaveIcon);
+}
+
+public void verifySavePlans(List<WebElement> plansName, int saveplans,	String year, List<WebElement> savePlan) {
+	List<String> vppPlans = new ArrayList<String>();
+	System.out.println("Plans Count :" +plansName.size());
+		for (int plan = 0; plan < saveplans; plan++) {
+			vppPlans.add(savingplans(plansName.get(plan), savePlan.get(plan)));
+		}
+		Collections.sort(vppPlans);
+		System.out.println(vppPlans);
+		threadsleep(3000);
+		validate(ViewSavedPlansBtn);
+		ViewSavedPlansBtn.click();
+		threadsleep(3000);
+		changePlanyearVisitorProfile(year);
+		visitorprofile(planNamesVisitorPrf, vppPlans);
+	System.out.println("Plan Name compared Successful Clicks on Save Plan");
+}
+
+public String savingplans(WebElement plan, WebElement saveplan) {
+	String exceptedplanName = plan.getText().trim();
+	System.out.println("Plan Name in VPP Summary Page: " + exceptedplanName);
+	String save = saveplan.getText().trim();
+	if (save.equalsIgnoreCase("Save")) {
+		saveplan.click();
+	} 
+	threadsleep(5000);
+	return exceptedplanName;
+}
+
+public boolean changePlanyearVisitorProfile(String year) {
+	// Checking Current year selection
+	if (year.equalsIgnoreCase("current")) {
+		if (validate(currentPlanYear, 15)) {
+			currentPlanYear.click();
+			Assert.assertTrue(currentPlanYear.getAttribute("class").length() > 0,
+					"Current Plan Year is not Selected");
+			return true;
+		}
+	}
+
+	// Checking and Changing Future Year
+	if (year.equalsIgnoreCase("future")) {
+		if (validate(futurePlanYear, 15)) {
+			futurePlanYear.click();
+			Assert.assertTrue(futurePlanYear.getAttribute("class").length() > 0,
+					"Future Plan Year is not Selected");
+			return true;
+		} else {
+			Assert.assertTrue(false, "Future Plan Year Toggle is Needed");
+		}
+	}
+	return false;
+}
+
+public void visitorprofile(List<WebElement> plansName, List<String> vppPlans) {
+	System.out.println("Plan Name in VPP Page: " + vppPlans);
+	String actualplanName = "";
+	pageloadcomplete();
+	System.out.println(plansName.size());
+	for (int i = 0; i < plansName.size(); i++) {
+		actualplanName = plansName.get(i).getText().trim();
+		System.out.println("Plan Name in Visitor Profile Page: " + actualplanName);
+		Assert.assertTrue(vppPlans.contains(actualplanName), "--- Plan name are not matches---");
+	}
+}
+
+public void validateDrugProvider(String drugs, String doctors) {
+	System.out.println("Validate Drug and provider details in VP ");
+	List<String> vpdrugs = new ArrayList<String>();
+	List<String> vpProviders = new ArrayList<String>();
+	int drgcount =  Integer.parseInt(DrugCount.getText().trim().replace(")", "").replace("(", "").split("/")[0].split("Drugs")[1]);
+	for(int i=0; i<drgcount;i++) {
+		vpdrugs.add(Druglist.get(i).findElement(By.cssSelector("div")).getText());
+	}
+	Collections.sort(vpdrugs);
+	System.out.println(vpdrugs);
+	Assert.assertTrue(vpdrugs.contains(drugs), "--- Drug name are not matches---");
+	threadsleep(3000);
+	
+	int prdcount =  Integer.parseInt(ProviderCount.getText().trim().replace(")", "").replace("(", "").split("Providers")[1]);
+	for(int i=0; i<prdcount;i++) {
+		vpProviders.add(Providerlist.get(i).findElement(By.cssSelector("div>span:nth-child(1)")).getText());
+	}
+	Collections.sort(vpProviders);
+	System.out.println(vpProviders);
+	Assert.assertTrue(vpProviders.contains(doctors), "--- Doctors name are not matches---");
+	threadsleep(3000);
+	System.out.println("Drug and provider details successfully validated in VP ");
+	BacktoPlansLink.click();
+	threadsleep(8000);
+	Assert.assertTrue(driver.getCurrentUrl().contains("/plan-summary"), "--- VPP Summary not loaded---");
+}
+
 }

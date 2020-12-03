@@ -883,5 +883,20 @@ public class PlanRecommendationEngineStepDefinition {
 		PlanRecommendationEngineEditResponsePage preEditpage =  new PlanRecommendationEngineEditResponsePage(wd);
 		preEditpage.addDrugs(inputValues);
    	}
+	
+	@Then("^user save plans in vpp summary and Validate in Visitor profile page$")
+	public void user_verify_saveplan(DataTable givenAttributes) {
+		readfeaturedata(givenAttributes);
+		PlanRecommendationEngineResultsPage planSelectorResultspage =  new PlanRecommendationEngineResultsPage(wd);
+		planSelectorResultspage.changePlanyear("current");
+		planSelectorResultspage.validateSavePlan(inputValues.get("Plan Year"));
+	}
+	
+	@Then("^user Validate Drug and Provider details in Visitor profile page$")
+	public void user_verify_drug_provider(DataTable givenAttributes) {
+		readfeaturedata(givenAttributes);
+		PlanRecommendationEngineResultsPage planSelectorResultspage =  new PlanRecommendationEngineResultsPage(wd);
+		planSelectorResultspage.validateDrugProvider(inputValues.get("Drug Names"), inputValues.get("Doctors Search Text"));
+	}
 
 }
