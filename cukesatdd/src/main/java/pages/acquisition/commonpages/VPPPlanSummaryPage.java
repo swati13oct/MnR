@@ -5084,14 +5084,26 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 
 	
-	public boolean clickAndVerifyNavigateToPage(String btn) throws InterruptedException {
+	public boolean clickAndVerifyNavigateToPage(String btn, int plans, String shot) throws InterruptedException {
 		boolean flag = false;
 		Actions action = new Actions(driver);
 		if(btn.equalsIgnoreCase("Compare")) {
+			if(plans==1) {
 			Thread.sleep(2000);
 			action.moveToElement(compareLink).build().perform();
 			compareLink.click();
 			Thread.sleep(10000);
+			}
+			else {
+				while(plans>0) {
+					Thread.sleep(2000);
+					WebElement comparePlanLink = driver.findElement(By.xpath("(//label[text()='Add to compare'])["+plans+"])"));
+					action.moveToElement(comparePlanLink).build().perform();
+					comparePlanLink.click();
+					Thread.sleep(10000);
+					plans = plans-1;
+				}
+			}
 			action.moveToElement(compareButton).build().perform();
 			compareButton.click();
 			Thread.sleep(2000);
@@ -5100,15 +5112,39 @@ public class VPPPlanSummaryPage extends UhcDriver {
 				flag = true;
 			}
 		}else if(btn.equalsIgnoreCase("Save")) {
+			if(plans==1) {
 			Thread.sleep(2000);
 			action.moveToElement(savePlanButton).build().perform();
 			savePlanButton.click();
 			Thread.sleep(2000);
+			}
+			else if(shot.equalsIgnoreCase("first")) {
+				while(plans>0) {
+					Thread.sleep(2000);
+					WebElement savePlanLink = driver.findElement(By.xpath("(//button[@class='unliked buttonIntoText'])["+plans+"])"));
+					action.moveToElement(savePlanLink).build().perform();
+					savePlanLink.click();
+					Thread.sleep(10000);
+					plans = plans-1;
+				}
+			} else if(shot.equalsIgnoreCase("second")) {
+						Thread.sleep(2000);
+						WebElement savePlan3 = driver.findElement(By.xpath("(//button[@class='unliked buttonIntoText'])[10])"));
+						action.moveToElement(savePlan3).build().perform();
+						savePlan3.click();
+						Thread.sleep(10000);
+						WebElement savePlan4 = driver.findElement(By.xpath("(//button[@class='unliked buttonIntoText'])[12])"));
+						action.moveToElement(savePlan4).build().perform();
+						savePlan4.click();
+						Thread.sleep(10000);
+					}
+				
+			}
 			action.moveToElement(savePlanImg).build().perform();
 			if(savePlanImg.getAttribute("class").equalsIgnoreCase("liked")) {
 				flag = true;
 			}
-		}else if(btn.equalsIgnoreCase("Information")) {
+		else if(btn.equalsIgnoreCase("Information")) {
 			Thread.sleep(2000);
 			action.moveToElement(editYourInformationLink).build().perform();
 			editYourInformationLink.click();
@@ -5131,7 +5167,6 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		}
 		return flag;
 	}
-
 
 public boolean verifyPlanCount() throws InterruptedException {
 	boolean flag = false;
@@ -5271,5 +5306,27 @@ public boolean RequestPlanIInformation(String FirstName, String LastName, String
 	}
 return RequestPlanIInformation_Validation;
 
+}
+public void checkMAPlansOnly(String counter) {
+	try {
+		Thread.sleep(2000);
+	} catch (InterruptedException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	List<Integer> selectPlanIndexes=new ArrayList<Integer>();
+	int	count=counter.contains(",") ? 0 :Integer.parseInt(counter);
+	if(count==0)
+		for(String index: counter.split(",")) {selectPlanIndexes.add(Integer.parseInt(index));}
+	else
+		for(int i=0;i<count;i++) {selectPlanIndexes.add(i);}
+
+	List<WebElement> allMAPlans = driver
+			.findElements(By.xpath(".//*[@id='plan-list-1']//div[contains(@class,'compare-box')]//label"));
+	if(allMAPlans!=null) {
+		for(int i:selectPlanIndexes) {
+			allMAPlans.get(i).click();
+		}
+	}
 }
 }

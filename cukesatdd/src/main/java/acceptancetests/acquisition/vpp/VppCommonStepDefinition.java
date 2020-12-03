@@ -1,3 +1,4 @@
+
 package acceptancetests.acquisition.vpp;
 
 import java.util.ArrayList;
@@ -18,7 +19,7 @@ import acceptancetests.data.CommonConstants;
 import acceptancetests.data.OLE_PageConstants;
 import acceptancetests.data.PageConstants;
 import atdd.framework.MRScenario;
-import cucumber.api.DataTable;
+import cucumber.api.DataTable;validateUrl
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -67,7 +68,7 @@ public class VppCommonStepDefinition {
 	 */
 
 	@Given("^the user is on medicare acquisition site landing page$")
-	public void the_user_on__medicare_acquisition_site(DataTable givenAttributes) {
+	public void the_user_on__medicaresolutions_Site(DataTable givenAttributes) {
 		wd = getLoginScenario().getWebDriverNew();
 		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
@@ -89,7 +90,7 @@ public class VppCommonStepDefinition {
 	}
 
 	@When("^the user performs plan search using following information$")
-	public void zipcode_details_in_medicare_acquisition_site(DataTable givenAttributes) throws InterruptedException {
+	public void zipcode_details_in_aarp_site(DataTable givenAttributes) throws InterruptedException {
 		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
@@ -425,26 +426,51 @@ public class VppCommonStepDefinition {
 	}
 	
 	@Then("^user clicks on compare button and navigate to plan compare page$")
-	public void user_clicks_on_compare_button_and_navigate_to_plan_compare_page() throws Throwable {
+	public void user_clicks_on_compare_button_and_navigate_to_plan_compare_page(DataTable givenAttributes) throws Throwable {
+		List<DataTableRow> givenAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < givenAttributesRow.size(); i++) {
+
+			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+					givenAttributesRow.get(i).getCells().get(1));
+		}
+
+		String totalPlans = givenAttributesMap.get("No Of Plans To Compare");
+		int total_plans = Integer.parseInt(totalPlans);
+
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		boolean result = plansummaryPage.clickAndVerifyNavigateToPage("Compare");
+		String attempt = "first";
+		boolean result = plansummaryPage.clickAndVerifyNavigateToPage("Compare", total_plans, attempt);
 		Assert.assertTrue("On clicking compare button user is navigated to plan compare page", result);
 		System.out.println("user clicks on compare button and navigate to plan compare page");
 		
 	    
 	}
 
-	@Then("^user clicks on save button and saves to plan cart$")
-	public void user_clicks_on_save_button_and_saves_to_plan_cart() throws Throwable {
+	@Then("^user clicks on save button and saves to plan cart \"([^\"]*)\" time $")
+	public void user_clicks_on_save_button_and_saves_to_plan_cart(DataTable givenAttributes, String attempt) throws Throwable {
+		List<DataTableRow> givenAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < givenAttributesRow.size(); i++) {
+
+			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+					givenAttributesRow.get(i).getCells().get(1));
+		}
+
+		String totalPlans = givenAttributesMap.get("No Of Plans To Compare");
+		int total_plans = Integer.parseInt(totalPlans);
+
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		boolean result = plansummaryPage.clickAndVerifyNavigateToPage("Save");
-		Assert.assertTrue("On clicking save button user is navigated to save plan page", result);
+		boolean result = plansummaryPage.clickAndVerifyNavigateToPage("Save", total_plans, attempt);
+		Assert.assertTrue("On clicking save button use,r is navigated to save plan page", result);
 		System.out.println("user clicks on save button and saves to plan cart");
 	    
 	    
 	}
+	
+	/*---------------------------Added steps for Medsupp Ole----------------
 
 	@Then("^user clicks on Edit Your Information link and navigate back to micro form$")
 	public void user_clicks_on_Edit_Your_Information_link_and_navigate_back_to_micro_form() throws Throwable {
@@ -463,6 +489,7 @@ public class VppCommonStepDefinition {
 		Assert.assertTrue("On clicking View Plan button user is navigated to plan summary page", result);
 		System.out.println("user clicks on View plan button link and navigate back to vpp summary page of medsupp");
 	}
+---------------------------Added steps for Medsupp Ole----------------*/
 
 	@Then("^user clicks on Save icon for all the plans and validate count in cart should match to plans$")
 	public void user_clicks_on_Save_icon_for_all_the_plans_and_match_count() throws Throwable {
@@ -1643,10 +1670,10 @@ public class VppCommonStepDefinition {
 			String Counter) throws Throwable {
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		int counter = Integer.parseInt(Counter);
+//		int counter = Integer.parseInt(Counter);
 		if (planType.equals("MAPD")) {
 			//plansummaryPage.clickonViewPlans();
-			plansummaryPage.checkMAPlansOnly(counter);
+			plansummaryPage.checkMAPlansOnly(Counter);
 			System.out.println("Selected All MAPD plans for Plan Compare");
 		}
 
@@ -2253,8 +2280,9 @@ public class VppCommonStepDefinition {
 //			plansummaryPage.validatePlansAreSaved(snp_savePlanNames, planType);
 		}
 		
-		@Then("^the user enter the searchValue in the search text box and hits enter$")
-		public void the_user_enter_the_searchValue_in_the_search_text_box_and_hits_enter(DataTable inputvalue) throws Throwable {
+		@Then("^the user enter the searchvalue in the search text box and hits enter$")
+		public void the_user_enter_the_searchValue_in_the_search_text_box_and_hits_enter(DataTable inputvalue)
+				throws Throwable {
 			AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
 					.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 			List<DataTableRow> AttributesRow = inputvalue.getGherkinRows();
@@ -2271,31 +2299,20 @@ public class VppCommonStepDefinition {
 			aquisitionhomepage.enterSearchtextvalue(InputValue);
 
 		}
-				
-		@Then("^the user should see fifteen results before pagination$")
+		@Then("^the user should see fifteen results before the pagination$")
 		public void the_user_should_see_fifteen_results_before_pagination() throws Throwable {
 			AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
 					.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 			aquisitionhomepage.validateFifteenResults();
 
 		}
-		
-		@Then("^the user validates count of results aganist the total shown at top of the page$")
-		public void the_user_validates_count_of_results_aganist_the_total_shown_at_top_of_the_page() throws Throwable {
-        AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
-        .getBean(PageConstants.ACQUISITION_HOME_PAGE);
-        aquisitionhomepage.validateCountResults();
-        
-		}
-
-		@Then("^the user validates pagination and results displayed$")
+		@Then("^the user validates pagination and results displayed on page$")
 		public void the_user_validates_pagination_and_results_displayed() throws Throwable {
 			AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
 					.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 			aquisitionhomepage.validatePaginationofSearchResults();
 		}
-		
-		@Then("^the user validates the secondary search by providing newsearchvalue in the text box$")
+		@Then("^the user validates the secondary search by providing new searchvalue in the text box$")
 		public void the_user_validates_the_secondary_search_by_providing_newsearchvalue_in_the_text_box(DataTable inputvalue) throws Throwable {
 			AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
 					.getBean(PageConstants.ACQUISITION_HOME_PAGE);
@@ -2314,8 +2331,8 @@ public class VppCommonStepDefinition {
 		 
 		}
 
-		@Then("^the user clear secondary search box and insert new search value$")
-		public void the_user_clear_secondary_search_box_and_insert_new_search_value(DataTable inputvalue) throws Throwable {
+		@Then("^the user clear secondary search box and insert new searchvalue$")
+		public void the_user_clea_seacondary_search_box_and_insert_new_search_value(DataTable inputvalue) throws Exception {
 			AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
 					.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 
@@ -2333,11 +2350,13 @@ public class VppCommonStepDefinition {
 
 		}
 		
-		@Then("^the user validates Error message$")
-		public void the_user_validates_Error_message(DataTable inputvalue) throws Throwable {
-		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+		@Then("^the user validates Error message on page$")
+		public void the_user_validates_pagination_and_results_displayed(DataTable inputvalue) throws Throwable {
+
+			AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
 					.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 			
+
 			List<DataTableRow> AttributesRow = inputvalue.getGherkinRows();
 			Map<String, String> urlAttributesMap = new HashMap<String, String>();
 
@@ -2351,23 +2370,6 @@ public class VppCommonStepDefinition {
 			Thread.sleep(3000);
 			aquisitionhomepage.validateErrorMsg(error,newSearchValue);
 		}
-		
-		@Then("^the user clicks on the united health care medicare solutions link$")
-		public void the_user_clicks_on_the_united_health_care_medicare_solutions_link() throws Throwable {
-		 AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
-				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-        aquisitionhomepage.clickUnitedHealthcareMedicareSolutions();
-		    
-		}
-
-		@Then("^the user validates the \"([^\"]*)\"$")
-		public void the_user_validates_the(String url) throws Throwable {
-	      AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
-        .getBean(PageConstants.ACQUISITION_HOME_PAGE);
-         aquisitionhomepage.validateUrl(url);
-		}
-
-
 		/** user is on the AARP Medicare Site landing page */
 		@Given("^the user is on Acquisition Site landing page and navigate to pharmacy search page$")
 		public void validateUserIsOnAcquisitionSiteNavToPharmacySearch(DataTable givenAttributes) {
@@ -2638,7 +2640,8 @@ public class VppCommonStepDefinition {
 			VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);			
          plansummaryPage.RequestPlanIInformation(FirstName, LastName, EmailAddress);
-
+	
+			
 
 }
 		@Then("^the user clicks on back on all plan linnk in Plan Compare page")
@@ -2654,8 +2657,49 @@ public class VppCommonStepDefinition {
 					Assert.fail("Error in navigating back to Plan Summary Page");
 			
 		  }
+		@Then("^remove \"([^\"]*)\" plan from new plan compare page$")
+		public void remove_plan_from_new_plan_compare_page_for_UHC(String planIndices) throws Throwable {
+			ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario().getBean(PageConstants.PLAN_COMPARE_PAGE);
+			planComparePage.clickOnSelectedRemoveLink(planIndices);
+		}
 
+		@Then("^validate optional service riders section on compare page is not shown$")
+		public void validate_optional_service_riders_section_on_compare_page_is_not_shown() throws Throwable {
+			ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario().getBean(PageConstants.PLAN_COMPARE_PAGE);
+			planComparePage.validateOptionalRidersSectionHidden();			
+		}
 		
+		@Then("^validate all available plans are shown on click of view all plans$")
+		public void validate_all_plans_are_shown() throws Throwable {
+			ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario().getBean(PageConstants.PLAN_COMPARE_PAGE);
+			planComparePage.validateAllPlansShown();			
+		}
+		
+		@Then("^validate OON Toggle is displayed on medical and additional benefits$")
+		public void validate_OON_Toggle_is_displayed_on_medical_and_additional_benefits() throws Throwable {
+			ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario().getBean(PageConstants.PLAN_COMPARE_PAGE);
+			planComparePage.validateOONDDisplayed();
+		}
+
+		@Then("^Validate OON Toggle is not displayed when there are no OON Plans Available$")
+		public void validate_OON_Toggle_is_not_displayed_when_there_are_no_OON_Plans_Available() throws Throwable {
+			ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario().getBean(PageConstants.PLAN_COMPARE_PAGE);
+			planComparePage.validateOONNotDisplayed();
+		}
+		
+		@Then("^the user clicks on the united health care medicare solutions link$")
+		public void the_user_clicks_on_the_united_health_care_medicare_solutions_link() throws Throwable {
+		 AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+        aquisitionhomepage.clickUnitedHealthcareMedicareSolutions();
+		    
+		}
+		
+		@Then("^the user validates the \"([^\"]*)\"$")
+		public void the_user_validates_the(String url) throws Throwable {
+	      AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+        .getBean(PageConstants.ACQUISITION_HOME_PAGE);
+         aquisitionhomepage.validateUrl(url);
+		}
 		
 }
-		

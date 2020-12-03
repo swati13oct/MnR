@@ -3,6 +3,7 @@ package pages.acquisition.ulayer;
 import java.util.Arrays;
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -31,14 +32,20 @@ public class VisitorProfilePage extends UhcDriver {
 	@FindBy(css = "div.signupCTA a.profileBtn")
 	private WebElement btnCreateProfile;
 	
-	@FindBy(css = "div.dashboardCard.plans a.empty-message-link")
-	private WebElement addPlans;
+	//@FindBy(css = "div.dashboardCard.plans a.empty-message-link")
+	//private WebElement addPlans;
 	
 	@FindBy(css = "a.addrugs")
 	private WebElement addrugs;
 	
 	@FindBy(css = "a.add-provider")
 	private WebElement addprovider;
+	
+	@FindBy(xpath = "//div[contains(@class,'find-plans')]/button")
+	private WebElement addPlans;
+	
+	@FindBy(xpath = "//div[contains(@class,'find-plans')]/button")
+	private WebElement addplans;
 	
 	@FindBy(xpath="//div[contains(@class,'drug-list-accordion')]//button[contains(@class,'drug-list-toggle')][contains(@class,'collapsed')]")
 	private WebElement expandDrugBlock;
@@ -125,10 +132,18 @@ public class VisitorProfilePage extends UhcDriver {
 	}
 	
 	public AcquisitionHomePage addPlan() throws Exception {
-		addPlans.click();
-		Thread.sleep(10000);
+		if(StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Pennsylvania") || StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Puerto Rico") || 
+				StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Virginia")) {
+			jsClickNew(addplans);
+		}else {
+			jsClickNew(addPlans);
+		}
+		
+//		addPlans.click();
+		
 		CommonUtility.checkPageIsReadyNew(driver);
-		if(driver.getCurrentUrl().contains("health-plans.html")){
+		waitForPageLoadSafari();
+		if(driver.getCurrentUrl().contains("plan-summary")){
 			String page = "health-plans";
 			return new AcquisitionHomePage(driver,page);
 		}
@@ -431,5 +446,18 @@ public class VisitorProfilePage extends UhcDriver {
 		e.printStackTrace();
 		}
 		return null;
+	}
+	
+	
+	public AcquisitionHomePage findPlans() {
+		
+		jsClickNew(addPlans);
+		waitForPageLoadSafari();
+		if(driver.getCurrentUrl().contains("profile")) {
+			return new AcquisitionHomePage(driver);
+		}else {
+			System.out.println("Navigation to visitor profile is failed");
+			return null;
+		}
 	}
 }
