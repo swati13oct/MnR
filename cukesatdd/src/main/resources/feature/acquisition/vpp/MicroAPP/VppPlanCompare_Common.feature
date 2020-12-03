@@ -305,3 +305,86 @@ Feature: 1.01.3-Vpp to plan Compare AARP Scenarios
     Examples: 
       | TID   | site | zipcode | isMultiCounty | county          | plantype | planname                             | planyear |
       | 00014 | UHC  |   10010 | NO            | New York County | MAPD     | AARP Medicare Advantage Plan 1 (HMO) | current  |
+#    @vppPlanCompareAARP12 @vppPlanCompareAARPRun02New @vppPlanCompareAARPRegression
+  Scenario Outline: TID: <TID> - Plan Type: <plantype> - Verify if optional service section is hidden when a plan with only one optional service benefit on compare page on <site>
+    Given the user is on medicare acquisition site landing page
+      | Site | <site> |
+    When the user performs plan search using following information
+      | Zip Code        | <zipcode>         |
+      | Is Multi County | <isMultutiCounty> |
+      | County Name     | <county>          |
+    And the user views the plans of the below plan type
+      | Plan Type | <plantype> |
+    And the user selects plan year
+      | Plan Year | <planyear> |
+    Then I select "<plantype>" plans and "<planIndices>" plans to compare and click on compare plan link
+    Then verify plan compare page is loaded
+    Then remove "<removePlanIndices>" plan from new plan compare page
+    Then validate optional service riders section on compare page is not shown
+
+    @VppPlanCompareCommon_AARP02 @vppPlanCompareAARP12
+    Examples: 
+      | TID   | site | zipcode | isMultiCounty | county          | plantype | removePlanIndices | planyear | planIndices |
+      | 00015 | AARP |   55343 | NO            | Hennepin County | MAPD     |                 1 |     2021 |           5 |
+
+    @VppPlanCompareCommon_UHC02 @vppPlanCompareUHC12
+    Examples: 
+      | TID   | site | zipcode | isMultiCounty | county          | plantype | removePlanIndices | planyear | planIndices |
+      | 00015 | UHC  |   55343 | NO            | Hennepin County | MAPD     |                 1 |     2021 |           5 |
+
+  #    @vppPlanCompareAARP13 @vppPlanCompareAARPRun02New @vppPlanCompareAARPRegression
+  Scenario Outline: TID: <TID> - Plan Type: <plantype> - validation of plan compare on click of view all plans on <site>
+    Given the user is on medicare acquisition site landing page
+      | Site | <site> |
+    When the user performs plan search using following information
+      | Zip Code        | <zipcode>         |
+      | Is Multi County | <isMultutiCounty> |
+      | County Name     | <county>          |
+    And the user views the plans of the below plan type
+      | Plan Type | <plantype> |
+    And the user selects plan year
+      | Plan Year | <planyear> |
+    Then I select "<plantype>" plans and "<planIndices>" plans to compare and click on compare plan link
+    Then verify plan compare page is loaded
+    Then remove "<removePlanIndices>" plan from new plan compare page
+    Then validate all available plans are shown on click of view all plans
+
+    @VppPlanCompareCommon_AARP02 @vppPlanCompareAARP13
+    Examples: 
+      | TID   | site | zipcode | isMultiCounty | county          | plantype | removePlanIndices | planyear | planIndices |
+      | 00016 | AARP |   55343 | NO            | Hennepin County | MAPD     |             4,1,2 |     2021 |           5 |
+
+    @VppPlanCompareCommon_UHC02 @vppPlanCompareUHC13
+    Examples: 
+      | TID   | site | zipcode | isMultiCounty | county          | plantype | removePlanIndices | planyear | planIndices |
+      | 00016 | UHC  |   55343 | NO            | Hennepin County | MAPD     |               2,1 |     2021 |           5 |
+      | 00016 | UHC  |   55343 | NO            | Hennepin County | PDP      |               2,1 |     2021 |           3 |
+
+  #    @vppPlanCompareAARP13 @vppPlanCompareAARPRun02New @vppPlanCompareAARPRegression
+  Scenario Outline: TID: <TID> - Plan Type: <plantype> - validation of plan compare on OON Toggle for Medical Benefits and Additional Benefits on <site>
+    Given the user is on medicare acquisition site landing page
+      | Site | <site> |
+    When the user performs plan search using following information
+      | Zip Code        | <zipcode>         |
+      | Is Multi County | <isMultutiCounty> |
+      | County Name     | <county>          |
+    And the user views the plans of the below plan type
+      | Plan Type | <plantype> |
+    And the user selects plan year
+      | Plan Year | <planyear> |
+    Then I select "<plantype>" plans and "<planIndices>" plans to compare and click on compare plan link
+    Then verify plan compare page is loaded
+    Then validate OON Toggle is displayed on medical and additional benefits
+    When remove "<removePlanIndices>" plan from new plan compare page
+    Then Validate OON Toggle is not displayed when there are no OON Plans Available
+
+    @VppPlanCompareCommon_AARP02 @vppPlanCompareAARP14 
+    Examples: 
+      | TID   | site | zipcode | isMultiCounty | county       | plantype | planyear | planIndices | removePlanIndices |
+      | 00017 | AARP |   78006 | NO            | Bexar County | MAPD     |     2021 |           4 |              4,1 |
+
+    @VppPlanCompareCommon_UHC02 @vppPlanCompareUHC14
+    Examples: 
+      | TID   | site | zipcode | isMultiCounty | county       | plantype | planyear | planIndices | removePlanIndices |
+      | 00017 | UHC  |   78006 | NO            | Bexar County | MAPD     |     2021 |           4 |               1,4 |
+      
