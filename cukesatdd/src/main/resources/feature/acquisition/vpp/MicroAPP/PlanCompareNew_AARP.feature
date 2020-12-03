@@ -87,7 +87,7 @@ Feature: 1.01.3-Vpp to plan Compare AARP Scenarios
       | TCID  | zipcode | isMultiCounty | county             | plantype |planyear|
       | 00007 |   90210 | No            | Los Angeles County | MAPD     |current|
 
-  @vppPlanCompareAARP05 @vppPlanCompareAARPRun01New @vppPlanCompareAARPRegression
+  @vppPlanCompareAARP05 @vppPlanCompareAARPRun01New @vppPlanCompareAARPRegression @VBFTEAMC
   Scenario Outline: TID: <TCID> - Plan Type: <plantype> -Navigation for plan comapre to Back to summary page
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site
