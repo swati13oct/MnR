@@ -627,6 +627,8 @@ public class PlanRecommendationEngineResultsPage extends UhcDriver {
 			int count =DrugsInPRE.size();
 			drugsCoveredInVPP(count);
 			verifyConfirmationmodalResults(count,DrugsInPRE,DrugsList);
+			validate(enterDrugsInfoMA1stPlan, 60);
+			jsClickNew(enterDrugsInfoMA1stPlan);
 		}
 		
 		public void removedDrugsDetailsVPPtoPRE() {
@@ -1413,8 +1415,6 @@ public void browserBack() {
 
 public void useraddDrugsVPP(String drugDetails) {
 	threadsleep(10000);
-	validate(enterDrugsInfoMA1stPlan, 60);
-	jsClickNew(enterDrugsInfoMA1stPlan);
 	ACQDrugCostEstimatorPage dce = new ACQDrugCostEstimatorPage(driver);
 	dce.drugsHandlerWithdetails(drugDetails);
 	dce.getDrugsDCE();
@@ -1430,14 +1430,14 @@ public void userPreDCE() {
 }
 
 public boolean changePlanyear(String year) {
-
+	threadsleep(5000);
 	jsClickNew(MAViewPlansLink);
 	// Checking and Changing to Current Year
 	if (year.equalsIgnoreCase("current")) {
 		if (validate(currentPlanYear, 15)) {
 			jsClickNew(currentPlanYear);
 			Assert.assertTrue(currentPlanYearSelected.getAttribute("id").length()>0,"Current Plan Year is not Selected");
-			threadsleep(5000);
+			threadsleep(10000);
 			return true;
 		}
 	}
@@ -1630,7 +1630,7 @@ public void PREStage(String primaryWindow, String aarp) {
 			if (!window.equals(primaryWindow)) {
 				driver.switchTo().window(window);
 				System.out.println(driver.getCurrentUrl());
-				Assert.assertTrue(driver.getCurrentUrl().contains("/plan-recommendation-engine.html/"), "PRE is not loading");
+				Assert.assertTrue(driver.getCurrentUrl().contains("/plan-recommendation-engine.html"), "PRE is not loading");
 			}
 			if(aarp.contains("aarpmedicareplans")) {
 				driver.navigate().to("https://www.stage-aarpmedicareplans.uhc.com/plan-recommendation-engine.html");
