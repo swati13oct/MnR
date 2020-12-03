@@ -653,6 +653,8 @@ public class PlanRecommendationEngineResultsPage extends UhcDriver {
 		public void DrugsDetailsVPPtoPRE() {
 			System.out.println("Validating Drugs Details from DCE to VPP Drug Page: ");
 			ACQDrugCostEstimatorPage dce = new ACQDrugCostEstimatorPage(driver);
+			validate(MAViewPlansLink, 60);
+			jsClickNew(MAViewPlansLink);
 			DrugsInDCE = dce.vppDrugsResults;
 			int count =DrugsInDCE.size();
 			DrugsList = drugsCoveredInVPP(count);
@@ -1572,7 +1574,7 @@ public void validateDrugProvider(String drugs, String doctors) {
 	System.out.println("Validate Drug and provider details in VP ");
 	List<String> vpdrugs = new ArrayList<String>();
 	List<String> vpProviders = new ArrayList<String>();
-	int drgcount =  Integer.parseInt(DrugCount.getText().trim().replace(")", "").replace("(", "").split("/")[0].split("Drugs")[1]);
+	int drgcount =  Integer.parseInt(DrugCount.getText().trim().replace(")", "").replace("(", "").split("/")[0].split("Drugs")[1].trim());
 	for(int i=0; i<drgcount;i++) {
 		vpdrugs.add(Druglist.get(i).findElement(By.cssSelector("div")).getText());
 	}
@@ -1581,7 +1583,7 @@ public void validateDrugProvider(String drugs, String doctors) {
 	Assert.assertTrue(vpdrugs.contains(drugs), "--- Drug name are not matches---");
 	threadsleep(3000);
 	
-	int prdcount =  Integer.parseInt(ProviderCount.getText().trim().replace(")", "").replace("(", "").split("Providers")[1]);
+	int prdcount =  Integer.parseInt(ProviderCount.getText().trim().replace(")", "").replace("(", "").split("Providers")[1].trim());
 	for(int i=0; i<prdcount;i++) {
 		vpProviders.add(Providerlist.get(i).findElement(By.cssSelector("div>span:nth-child(1)")).getText());
 	}
