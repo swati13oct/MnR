@@ -898,5 +898,24 @@ public class PlanRecommendationEngineStepDefinition {
 		PlanRecommendationEngineResultsPage planSelectorResultspage =  new PlanRecommendationEngineResultsPage(wd);
 		planSelectorResultspage.validateDrugProvider(inputValues.get("Drug Names"), inputValues.get("Doctors Search Text"));
 	}
+	
+	@Given("^the user is on external acquisition site landing page$")
+	public void the_user_on_external_Site(DataTable givenAttributes) {
+		readfeaturedata(givenAttributes);
+		wd = getLoginScenario().getWebDriverNew();
+		AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd,"PRE",true);
+		aquisitionhomepage.openExternalLinkPRE(inputValues.get("Site Name"));
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE,
+				aquisitionhomepage);
+	}
+	
+	@When("^user navigate to Plan Recommendation Engine Tool$")
+	public void the_user_external_PRE(DataTable givenAttributes) {
+		readfeaturedata(givenAttributes);
+		PlanRecommendationEngineResultsPage planSelectorResultspage =  new PlanRecommendationEngineResultsPage(wd);
+		checkpopup();
+		planSelectorResultspage.navigatePRE(inputValues.get("Site Name"));
+	}
 
 }

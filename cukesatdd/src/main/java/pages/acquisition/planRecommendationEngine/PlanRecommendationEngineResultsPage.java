@@ -386,6 +386,17 @@ public class PlanRecommendationEngineResultsPage extends UhcDriver {
 	@FindBy(css = ".doctors-list li")
 	private List<WebElement> Providerlist;
 	
+// External page elements
+	
+	@FindBy(css = ".c-card__footer a[class*='primary']")
+	private WebElement GetHelpFindingaPlanBtn;
+	
+	@FindBy(css = ".c-card__footer a[class*='naked']")
+	private WebElement HelpMeChooseBtn;
+	
+	@FindBy(css = ".c-banner__cta>a")
+	private WebElement startNowBtn;
+	
 //Result Loading Page Element Verification Method 
 
 	public void resultsloadingpage() {
@@ -1581,6 +1592,53 @@ public void validateDrugProvider(String drugs, String doctors) {
 	BacktoPlansLink.click();
 	threadsleep(8000);
 	Assert.assertTrue(driver.getCurrentUrl().contains("/plan-summary"), "--- VPP Summary not loaded---");
+}
+
+public void navigatePRE(String site) {
+	System.out.println("Validate Drug and provider details in VP ");
+	String curWindow = driver.getWindowHandle();
+	System.out.println(curWindow);
+	if (site.equalsIgnoreCase("Myuhcplans")) {
+		validate(GetHelpFindingaPlanBtn);
+		GetHelpFindingaPlanBtn.click();
+		PREStage(curWindow, site);
+	}
+	if (site.equalsIgnoreCase("uhcandwellmedsa")) {
+		validate(HelpMeChooseBtn);
+		HelpMeChooseBtn.click();
+		PREStage(curWindow, site);
+	}
+	if (site.equalsIgnoreCase("mauhcmedicaresolutions") || site.equalsIgnoreCase("maaarpmedicareplans")) {
+		validate(startNowBtn);
+		startNowBtn.click();
+		PREStage(curWindow, site);
+	}
+	if (site.equalsIgnoreCase("uhcmedicaresolutions") || site.equalsIgnoreCase("aarpmedicareplans")) {
+		navigateVPP("10001");
+		vppToPre();
+		PREStage(curWindow, site);
+	}
+}
+
+public void PREStage(String primaryWindow, String aarp) {
+	ArrayList<String> windows = new ArrayList<String>(driver.getWindowHandles());
+	System.out.println(windows);
+	if (windows.size() == 2) {
+		for (String window : windows) {
+			System.out.println(window.replace("page-", ""));
+			if (!window.equals(primaryWindow)) {
+				driver.switchTo().window(window);
+				Assert.assertTrue(driver.getCurrentUrl().contains("/plan-recommendation-engine.html/"), "PRE is not loading");
+			}
+			if(aarp.contains("aarpmedicareplans")) {
+				driver.navigate().to("https://www.stage-aarpmedicareplans.uhc.com/plan-recommendation-engine.html");
+			}
+			else
+				driver.navigate().to("https://www.stage-uhcmedicaresolutions.uhc.com/plan-recommendation-engine.html");
+			}
+	}
+	threadsleep(5000);
+	driver.switchTo().window(primaryWindow);
 }
 
 }

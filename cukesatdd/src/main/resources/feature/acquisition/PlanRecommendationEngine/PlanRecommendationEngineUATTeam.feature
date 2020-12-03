@@ -67,3 +67,19 @@ Feature: PRE_UAT - Verify UAT Scenarios in PRE
     Examples: 
       | Zipcode | isMultiCounty | county  | isCoverageOpt | specialNeeds | travel   | doctors    | DoctorsName | isMultiDoctor | Dental-Hearing-Vision-Fitness | costPreferenceOption | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch |
       |   15537 | NO            | Bedford | MA            | Medicaid     | withinUS | UHGNetwork |             |               | Yes,No,No,No                  | Lower                | Lipitor,YES,Lipitor TAB 10MG,,,1,YES,NO                              |
+
+  @PRE @planrecommendation @PRE_UAT_ExternalLink
+  Scenario Outline: <site>  - To validate drug and doctors in Visitor profile
+    Given the user is on external acquisition site landing page
+      | Site Name | <site> |
+    When user navigate to Plan Recommendation Engine Tool
+      | Site Name | <site> |
+
+    Examples: 
+      | site                   |
+      | Myuhcplans             |
+      | uhcandwellmedsa        |
+      | mauhcmedicaresolutions |
+      | maaarpmedicareplans    |
+      | uhcmedicaresolutions   |
+      | aarpmedicareplans      |
