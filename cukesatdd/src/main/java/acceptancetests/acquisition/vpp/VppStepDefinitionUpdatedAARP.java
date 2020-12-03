@@ -292,8 +292,8 @@ public class VppStepDefinitionUpdatedAARP {
 		
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		plansummaryPage.handlePlanYearSelectionPopup(planYear);
-		//plansummaryPage.handlePlanYearFutureSelectionPopup(planYear);
+		//plansummaryPage.handlePlanYearSelectionPopup(planYear);
+		plansummaryPage.handlePlanYearFutureSelectionPopup(planYear);
 	}
 	
 	@And("^the user selects future plan year for the AARP site$")
@@ -3953,6 +3953,7 @@ public void the_user_validates_the_secondary_search_by_providing_newsearchvalue_
 
 		} else {
 			Assert.fail("Plan count did not match ");
+			
 		}
 
 	
@@ -3960,5 +3961,7 @@ public void the_user_validates_the_secondary_search_by_providing_newsearchvalue_
 	
 	
 	}
+	
+	
 
 }
