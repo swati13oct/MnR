@@ -69,7 +69,7 @@ public class DrugSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//button/span[text()='View Plan Details']")
 	public WebElement viewPlanDetailsBtn;
 	
-	@FindBy(xpath = "//button//span[text()='Save']")
+	@FindBy(xpath = "//button//span[contains(text(),'Save')]")
 	public WebElement saveBtn;
 	
 	@FindBy(xpath = "//*[@id='accordion-1-button']")
@@ -212,17 +212,38 @@ public class DrugSummaryPage extends UhcDriver {
 
 	public DrugSummaryPage verifyPDPPlanToggle(){
 		pdpPlanToggle.click();
+		System.out.println("PDP Plans Toggle is displayed and is Clicked");
+
 		if(planTypeHeading.getText().contains("Medicare Prescription Drug Plans")) {
+			System.out.println("PDP Plans displayed for PDP toggle click");
 			return new DrugSummaryPage(driver);
 		}
+		Assert.fail("PDP Plans NOT displayed for PDP toggle click");
+		return null;
+	}
+	
+	public DrugSummaryPage verifyMAPDPlanToggle(){
+		
+		mapdPlanToggle.click();
+		System.out.println("MAPD Plans Toggle is displayed and is Clicked");
+
+		if(planTypeHeading.getText().contains("Medicare Advantage Plans")) {
+			System.out.println("MAPD Plans displayed for MAPD toggle click");
+			return new DrugSummaryPage(driver);
+		}
+		Assert.fail("MAPD Plans NOT displayed for MAPD toggle click");
 		return null;
 	}
 	
 	public DrugSummaryPage verifySNPPlanToggle(){
 		snpPlanToggle.click();
+		System.out.println("SNP Plans Toggle is displayed and is Clicked");
+
 		if(planTypeHeading.getText().contains("Medicare Special Needs Plans")) {
+			System.out.println("SNP Plans displayed for SNP toggle click");
 			return new DrugSummaryPage(driver);
 		}
+		Assert.fail("SNP Plans NOT displayed for SNP toggle click");
 		return null;
 	}
 	
@@ -334,18 +355,8 @@ public class DrugSummaryPage extends UhcDriver {
 	
 	public void clickOnPDPPlan()
 	{
-		try {
-			Thread.sleep(5000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		validateNew(clickPdpplan);
-		JavascriptExecutor je = (JavascriptExecutor)driver;
-		je.executeScript("arguments[0].click()", clickPdpplan);
-		//clickPdpplan.click();
-		
-		
+		jsClickNew(clickPdpplan);
 	}
 	
 	@FindBy(xpath = "//div[contains(text(),'If you qualify for LIS,')]")
@@ -446,8 +457,9 @@ public class DrugSummaryPage extends UhcDriver {
 	public void SelectPharmacy(String PharmacytoSelect) {
 
 		validateSelectPharmacyPage();
-		WebElement PharmacyName = driver.findElement(By.xpath("(//button[contains(@id, 'selectPharmacyBtn') and contains(@aria-label, 'Select "+PharmacytoSelect+"')])[1]"));
-		jsClickNew(PharmacyName);
+		List <WebElement> PharmacyName = driver.findElements(By.xpath("//button[contains(@id, 'selectPharmacyBtn') and contains(@aria-label, 'Select "+PharmacytoSelect+"')]"));
+
+		jsClickNew(PharmacyName.get(0));
 		validateNew(saveDrugBtn);
 		saveDrugBtn.click();		
 	}
@@ -524,6 +536,12 @@ public class DrugSummaryPage extends UhcDriver {
 	public Map<String, String> captureDrugCosts(String planName) {
 		Map<String, String> DrugDetails = new HashMap<String, String>();
 		
+		if(planName.contains("PDP"))
+			verifyPDPPlanToggle();
+		else if(planName.contains("SNP"))
+			verifySNPPlanToggle();
+		else
+			verifyMAPDPlanToggle();
 		WebElement drugCosts_AvgMonDrugCost_Amount = driver.findElement(By.xpath("//*[contains(text(),'"+planName+"')]/ancestor::*[contains(@class,'uhc-card__header')]//following-sibling::*[contains(@class,'uhc-card__content')]//*[contains(text(), 'Average Monthly Drug Cost')]//following-sibling::div[contains(text(), '$')]"));
 		WebElement drugCosts_MonthlyPremium_Amount = driver.findElement(By.xpath("//*[contains(text(),'"+planName+"')]/ancestor::*[contains(@class,'uhc-card__header')]//following-sibling::*[contains(@class,'uhc-card__content')]//*[contains(text(), 'Monthly Premium')]//following-sibling::div[contains(text(), '$')]"));
 		WebElement drugCosts_AnnualEstTotal_Amount = driver.findElement(By.xpath("//*[contains(text(),'"+planName+"')]/ancestor::*[contains(@class,'uhc-card__header')]//following-sibling::*[contains(@class,'uhc-card__content')]//*[contains(text(), 'Annual Estimated')]//following-sibling::div[contains(text(), '$')]"));
@@ -607,8 +625,101 @@ public class DrugSummaryPage extends UhcDriver {
 		else
 			Assert.fail("Drug Summary Page, Drug Covered Text NOT Displayed for Not Covered Pharmacy");
 	}
+
+
+	@FindBy(xpath = "//*[contains(@id, 'pharmacy-zip-filter') or contains(@name, 'zipCode')]")
+	public WebElement Pharmacy_ZipCodeTxt;
+
+	@FindBy(xpath = "//*[contains(@class, 'uhc-button')][contains(text(), 'Search')]")
+	public WebElement Pharmacy_SearchBtn;
+
+	@FindBy(xpath = "//select[contains(@id, 'milesDropdown')]")
+	public WebElement Pharmacy_DistanceDropDwn;
+
+
+	@FindBy(xpath = "//select[contains(@id, 'milesDropdown')]//option[contains(text(), '1 Mile')]")
+	public WebElement Pharmacy_Distance_Select1Mile;
+
+	@FindBy(xpath = "//select[contains(@id, 'milesDropdown')]//option[contains(text(), '2 Mile')]")
+	public WebElement Pharmacy_Distance_Select2Mile;
+
+	@FindBy(xpath = "//select[contains(@id, 'milesDropdown')]//option[contains(text(), '5 Mile')]")
+	public WebElement Pharmacy_Distance_Select5Mile;
+
+	@FindBy(xpath = "//select[contains(@id, 'milesDropdown')]//option[contains(text(), '10 Mile')]")
+	public WebElement Pharmacy_Distance_Select10Mile;
+
+	@FindBy(xpath = "//select[contains(@id, 'milesDropdown')]//option[contains(text(), '15 Mile')]")
+	public WebElement Pharmacy_Distance_Select15Mile;
+
+	@FindBy(xpath = "//select[contains(@id, 'milesDropdown')]//option[contains(text(), '25 Mile')]")
+	public WebElement Pharmacy_Distance_Select25Mile;
+
+	@FindBy(xpath = "//h2[contains(@id, 'matchingLbl')]")
+	public WebElement PharmacyCountTxt;
+
 	
-	// Code change End - Added by F&F for Drug Summary Regression Scenario - Switch to Generic and for NC Pharmacy Covered text validation
+	public void validateZipandDistanceDropDwn(String pharmacyZipCode) {
+		validateNew(Pharmacy_DistanceDropDwn);
+		System.out.println("Pharmacy Seacth for default Zip "+Pharmacy_ZipCodeTxt.getText());
+
+		//jsClickNew(Pharmacy_DistanceDropDwn);
+		Pharmacy_DistanceDropDwn.click();
+		Pharmacy_Distance_Select1Mile.click();
+		//validateNew(Pharmacy_Distance_Select1Mile);
+		jsClickNew(Pharmacy_Distance_Select1Mile);
+		validateNew(PharmacyCountTxt);
+		System.out.println("Pharmacy Count for 1 Mile Distance for Zip : "+PharmacyCountTxt.getText());
+
+		//jsClickNew(Pharmacy_DistanceDropDwn);
+		Pharmacy_DistanceDropDwn.click();
+		Pharmacy_Distance_Select2Mile.click();
+		//validateNew(Pharmacy_Distance_Select2Mile);
+		jsClickNew(Pharmacy_Distance_Select2Mile);
+		validateNew(PharmacyCountTxt);
+		System.out.println("Pharmacy Count for 2 Mile Distance for Zip : "+PharmacyCountTxt.getText());
+
+		//jsClickNew(Pharmacy_DistanceDropDwn);
+		Pharmacy_DistanceDropDwn.click();
+		//validateNew(Pharmacy_Distance_Select5Mile);
+		Pharmacy_Distance_Select5Mile.click();
+		jsClickNew(Pharmacy_Distance_Select5Mile);
+		validateNew(PharmacyCountTxt);
+		System.out.println("Pharmacy Count for 5 Mile Distance for Zip : "+PharmacyCountTxt.getText());
+
+		//jsClickNew(Pharmacy_DistanceDropDwn);
+		Pharmacy_DistanceDropDwn.click();
+		//validateNew(Pharmacy_Distance_Select10Mile);
+		Pharmacy_Distance_Select10Mile.click();
+		jsClickNew(Pharmacy_Distance_Select10Mile);
+		validateNew(PharmacyCountTxt);
+		System.out.println("Pharmacy Count for 10 Mile Distance for Zip : "+PharmacyCountTxt.getText());
+
+		//jsClickNew(Pharmacy_DistanceDropDwn);
+		Pharmacy_DistanceDropDwn.click();
+		//validateNew(Pharmacy_Distance_Select15Mile);
+		Pharmacy_Distance_Select15Mile.click();
+		jsClickNew(Pharmacy_Distance_Select15Mile);
+		validateNew(PharmacyCountTxt);
+		System.out.println("Pharmacy Count for 15 Mile Distance for Zip : "+PharmacyCountTxt.getText());
+
+		//jsClickNew(Pharmacy_DistanceDropDwn);
+		Pharmacy_DistanceDropDwn.click();
+		//validateNew(Pharmacy_Distance_Select25Mile);
+		Pharmacy_Distance_Select25Mile.click();
+		jsClickNew(Pharmacy_Distance_Select25Mile);
+		validateNew(PharmacyCountTxt);
+		System.out.println("Pharmacy Count for 25 Mile Distance for Zip : "+PharmacyCountTxt.getText());
+		
+		validateNew(Pharmacy_ZipCodeTxt);
+		Pharmacy_ZipCodeTxt.clear();
+		Pharmacy_ZipCodeTxt.sendKeys(pharmacyZipCode);
+		validateNew(Pharmacy_SearchBtn);
+		Pharmacy_SearchBtn.click();
+		System.out.println("Pharmacy Seacth for Zip Expected - "+pharmacyZipCode+"  : Entered : "+Pharmacy_ZipCodeTxt.getText());
+		System.out.println("Default Pharmacy Count for Zip - "+pharmacyZipCode+"  : "+PharmacyCountTxt.getText());
+
+	}
 
 	
 	public void clickReturnToPlanSummary() {
