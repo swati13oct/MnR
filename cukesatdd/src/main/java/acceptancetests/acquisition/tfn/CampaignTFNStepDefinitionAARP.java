@@ -389,16 +389,23 @@ public void the_user_navigates_to_Medsupp_VPP_and_validates_Medsupp_TFN() throws
 public void the_user_navigates_to_following_memeber_signin_page_AARP(DataTable arg1) throws Throwable {
 	Map<String, String> inputAttributesMap=parseInputArguments(arg1);
 	String memberSignINURL = inputAttributesMap.get("Member Signin URL");
-	AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage)getLoginScenario().getBean(PageConstants.ACQUISITION_HOME_PAGE);
+	String memberSignINSTAGEURL = inputAttributesMap.get("Member Signin URL STG");
+	AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(driver);
+	//AcquisitionHomePage aquisitionhomepage1 = (AcquisitionHomePage)getLoginScenario().getBean(PageConstants.ACQUISITION_HOME_PAGE);
+	getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, aquisitionhomepage);
 	
-	
-	if(memberSignINURL!=null){
+	if (getLoginScenario().environment.equals("stage")) {
+		aquisitionhomepage.clickonmemberSignInStagelink(memberSignINSTAGEURL);
+	} else {
+		aquisitionhomepage.clickonmemberSignInlink(memberSignINURL);
+	}
+	/*if(memberSignINURL!=null){
 		aquisitionhomepage.clickonmemberSignInlink(memberSignINURL);
 		Assert.assertTrue(true);
 	}else
 		Assert.fail("Error in loading the UHC Agent Page");
 	//tfnPage.validateFederalTFN(TFN_Xpath);
-
+*/
 }
 
 @Then("^the user validate the sam icons tfn with federal TFN on Acquistion page$")
