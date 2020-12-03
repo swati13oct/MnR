@@ -665,7 +665,6 @@ public class AepPlanDetailsPage extends UhcDriver {
 						else
 							cellsPerRowXpath="//div[contains(@id,'detail') and contains(@class,'active')]//div[contains(@class,'plan-benefits')]["+sectionIndex+"]//table//tr[not(contains(@class,'ng-hide'))]["+rowIndex+"]//td[not(contains(@class,'ng-hide'))]";
 						
-						
 						List<WebElement> listOfCellsPerRow=driver.findElements(By.xpath(cellsPerRowXpath));
 						
 						for (int cellIndex=1; cellIndex<=listOfCellsPerRow.size(); cellIndex++) {
@@ -705,9 +704,11 @@ public class AepPlanDetailsPage extends UhcDriver {
 								else 
 									 value= value+e.getText();
 							}else {
-								if(cellIndex==1)
+								if(cellIndex==1) {
 									key=e.getText();
-								else {
+									value= e.getText();
+								
+								}else {
 								   value= value+e.getText();
 								
 								}
