@@ -59,7 +59,6 @@ Feature: PRE_UAT - Verify UAT Scenarios in PRE
     Then user selects cost preferences option in cost preferences page
       | Preference Option | <costPreferenceOption> |
     Then user validate elements in loading results page
-    Then user navigate from VPP to DCE tool
     When user adds Drugs in vpp summary page
       | Drug Details | <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch> |
     Then user validate drugs details from DCE to VPP and PRE page

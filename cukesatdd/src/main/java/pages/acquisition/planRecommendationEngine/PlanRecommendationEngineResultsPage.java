@@ -627,8 +627,8 @@ public class PlanRecommendationEngineResultsPage extends UhcDriver {
 			int count =DrugsInPRE.size();
 			drugsCoveredInVPP(count);
 			verifyConfirmationmodalResults(count,DrugsInPRE,DrugsList);
-			validate(enterDrugsInfoMA1stPlan, 60);
-			jsClickNew(enterDrugsInfoMA1stPlan);
+			validate(drugSummarylinkMA1stPlan, 60);
+			jsClickNew(drugSummarylinkMA1stPlan);
 		}
 		
 		public void removedDrugsDetailsVPPtoPRE() {
@@ -1417,6 +1417,7 @@ public void browserBack() {
 
 public void useraddDrugsVPP(String drugDetails) {
 	threadsleep(10000);
+	userPreDCE();
 	ACQDrugCostEstimatorPage dce = new ACQDrugCostEstimatorPage(driver);
 	dce.drugsHandlerWithdetails(drugDetails);
 	dce.getDrugsDCE();
@@ -1425,8 +1426,6 @@ public void useraddDrugsVPP(String drugDetails) {
 
 public void userPreDCE() {
 	threadsleep(10000);
-	validate(MAViewPlansLink, 60);
-	jsClickNew(MAViewPlansLink);
 	drugCoveredeVPP = MA1stPlanList.get(0).findElement(By.cssSelector("a[class*='add-drug']"));
 	jsClickNew(drugCoveredeVPP);
 }
