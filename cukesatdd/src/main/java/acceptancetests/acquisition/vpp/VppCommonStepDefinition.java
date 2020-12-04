@@ -2439,15 +2439,13 @@ public class VppCommonStepDefinition {
 				memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
 						memberAttributesRow.get(i).getCells().get(1));
 			}
-
 			String Medicarenumber = memberAttributesMap.get("MedicareNumber");
 			String DateOfBirth = memberAttributesMap.get("DOB");			
 			VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 			String submitconfirmation = plansummaryPage.continueApplicationuntilSubmitPage(Medicarenumber);
 			getLoginScenario().saveBean(VPPCommonConstants.SUBMITCONFIRMATION, submitconfirmation);
-
-		}
+			}
 		
 		@Then("^the site user validates the RightRails Links on Medsupp Page$")
 		public void user_validate_rightrail_links_medsupp_page() throws Throwable {

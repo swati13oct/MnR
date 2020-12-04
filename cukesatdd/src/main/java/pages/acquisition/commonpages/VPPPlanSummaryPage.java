@@ -720,19 +720,28 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//*[contains(text(),'View Prescription Drug Plans')]")
 	private WebElement ViewPrescriptionDrugPlans;
 
-	@FindBy(xpath = "//a[contains(@href,'//aarpsupplementalhealth-stg.uhc.com/content/dam/ole/MedSuppDocs/YourGuide/')]")
+	//@FindBy(xpath = "//a[contains(@href,'//aarpsupplementalhealth-stg.uhc.com/content/dam/ole/MedSuppDocs/YourGuide/')]")
+	@FindBy(xpath = "//a[contains(text(),'Your Guide to AARP Medicare Supplement Insurance Plans')]")
 	private WebElement RightRail_yourGuide;
 
-	@FindBy(xpath = "//a[contains(@href,'//aarpsupplementalhealth-stg.uhc.com/content/dam/ole/MedSuppDocs/GuideToHealth')]")
+//	@FindBy(xpath = "//a[contains(@href,'//aarpsupplementalhealth-stg.uhc.com/content/dam/ole/MedSuppDocs/GuideToHealth')]")
+	@FindBy(xpath = "//a[contains(text(),'Guide to Health Insurance for People with Medicare')]")
 	private WebElement RightRail_Guidetoyourhealth;
-	@FindBy(xpath = "//a[contains(@href,'//aarpsupplementalhealth-stg.uhc.com/content/dam/ole/MedSuppDocs/OutlineOfCoverage')]")
+	
+	@FindBy(xpath = "//a[contains(@href,'//aarpsupplementalhealth-stg.uhc.com/content/dam/ole/MedSuppDocs/OutlineOfCoverage') or contains(@href,'//www.aarpsupplementalhealth.com/content/dam/ole/MedSuppDocs/OutlineOfCoverage')]")
+	//@FindBy(xpath = "//a[contains(text(),'Plan Overview')]")
 	private WebElement RightRail_outlinecoverage;
-	@FindBy(xpath = "//a[contains(@href,'//aarpsupplementalhealth-stg.uhc.com/content/dam/ole/MedSuppDocs/PlanOverview')]")
+	
+//	@FindBy(xpath = "//a[contains(@href,'//aarpsupplementalhealth-stg.uhc.com/content/dam/ole/MedSuppDocs/PlanOverview')]")
+	@FindBy(xpath = "//a[contains(text(),'Plan Overview')]")
 	private WebElement RightRail_Planoverview;
-	@FindBy(xpath = "//a[contains(@href,'//aarpsupplementalhealth-stg.uhc.com/content/dam/ole/MedSuppDocs/RulesAndDisclosures')]")
+	
+	//@FindBy(xpath = "//a[contains(@href,'//aarpsupplementalhealth-stg.uhc.com/content/dam/ole/MedSuppDocs/RulesAndDisclosures')]")
+	@FindBy(xpath = "//a[contains(text(),'Rules and Disclosures')]")
 	private WebElement RightRail_RulesandDisclosure;
 
-	@FindBy(xpath = "//a[contains(@href,'//aarpsupplementalhealth-stg.uhc.com/content/dam/ole/MedSuppDocs/EnrollmentDiscount')]")
+//	@FindBy(xpath = "//a[contains(@href,'//aarpsupplementalhealth-stg.uhc.com/content/dam/ole/MedSuppDocs/EnrollmentDiscount')]")
+	@FindBy(xpath = "(//a[contains(text(),'Enrollment Discount')])[2]")
 	private WebElement EnrollmentDiscount;
 
 	@FindBy(xpath = "//a[contains(text(),'Back to all plans')]")
@@ -4493,6 +4502,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		Thread.sleep(3000);
 		jsClickNew(VerificationAgree3);
 		jsClickNew(nextButton);
+		
+		if (!(MRScenario.environment.equalsIgnoreCase("offline")
+				|| MRScenario.environment.equalsIgnoreCase("prod"))) {
 		validateNew(SubmitApplication);
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", SubmitApplication);
 		jsClickNew(SubmitApplication);
@@ -4504,6 +4516,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		// jsClickNew(ViewPrescriptionDrugPlans);
 		// Thread.sleep(2000);
 		return SubmitConfirmation;
+		}
+		return Medicarenumber;
 	}
 
 	public void medsuppOLERightRail() throws InterruptedException {
