@@ -48,7 +48,7 @@ Feature: 1.01.3-Vpp to plan Compare AARP Scenarios
     And verify Call SAM roll out and contain the text Call a Licensed Insurance Agent on Plan Comapare Page
     Then user verify the popup and content on Plan Comapare Page
 
-    @VppPlanCompareCommon_AARP01
+    @VppPlanCompareCommon_AARP01 @VBFTEAMC
     Examples: 
       | TID   | site | zipcode | isMultiCounty | county             | plantype | planyear |
       | 00005 | AARP |   90210 | NO            | Los Angeles County | MAPD     | current  |
@@ -107,7 +107,7 @@ Feature: 1.01.3-Vpp to plan Compare AARP Scenarios
     And I select "<plantype>" plans to compare and click on compare plan link
     Then the user clicks on back on all plan link in Plan Compare page
 
-    @VppPlanCompareCommon_AARP01 @VBFTEAMC
+    @VppPlanCompareCommon_AARP01
     Examples: 
       | TCID  | site | zipcode | isMultiCounty | county             | plantype | planyear |
       | 00008 | AARP |   90210 | No            | Los Angeles County | MAPD     | current  |
