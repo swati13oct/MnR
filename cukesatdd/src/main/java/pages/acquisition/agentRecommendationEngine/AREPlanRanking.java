@@ -576,6 +576,7 @@ public class AREPlanRanking extends UhcDriver {
 			threadsleep(3000);
 			validate(heartIcon);
 			heartIcon.click();
+			threadsleep(3000);
 			viewSavedItems.click();
 			changePlanyearVisitorProfile(year);
 			visitorprofile(planNamesVisitorPrf, vppPlans);
@@ -590,6 +591,7 @@ public class AREPlanRanking extends UhcDriver {
 			threadsleep(3000);
 			validate(heartIcon);
 			heartIcon.click();
+			threadsleep(3000);
 			viewSavedItems.click();
 			changePlanyearVisitorProfile(year);
 			visitorprofile(planNamesVisitorPrf, vppPlans);
@@ -614,13 +616,13 @@ public class AREPlanRanking extends UhcDriver {
 	}
 
 	public void visitorprofile(List<WebElement> plansName, List<String> vppPlans) {
-		List<String> vpPlans = new ArrayList<String>();
+		System.out.println("Plan Name in VPP Page: " + vppPlans);
 		String actualplanName = "";
-		String exceptedplanName = "";
 		pageloadcomplete();
 		System.out.println(plansName.size());
 		for (int i = 0; i < plansName.size(); i++) {
 			actualplanName = plansName.get(i).getText().trim();
+			System.out.println("Plan Name in Visitor Profile Page: " + actualplanName);
 			Assert.assertTrue(vppPlans.contains(actualplanName), "--- Plan name are not matches---");
 		}
 	}

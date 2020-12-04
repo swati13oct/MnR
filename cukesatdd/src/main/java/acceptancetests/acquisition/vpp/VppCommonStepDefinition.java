@@ -2686,4 +2686,48 @@ public class VppCommonStepDefinition {
 			planComparePage.validateOONNotDisplayed();
 		}
 		
+		@Then("^the user clicks on Enroll in plan and validates the Welcome to OLE Page on new Plan Compare")
+		  public void user_clicks_enrollInPlan_newPlanCompare() throws InterruptedException{
+			  ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario().getBean(PageConstants.PLAN_COMPARE_PAGE); 
+			  WelcomePage  welcomeOLEPage = planComparePage.Enroll_OLE_Plancompare();
+		   if (welcomeOLEPage != null) {
+				getLoginScenario().saveBean(PageConstants.OLE_WELCOME_PAGE, welcomeOLEPage);
+			} else {
+				Assert.fail("Error Loading Welcome Page for OLE");
+			}
+		  }
+		
+		@Then("^the user clicks on Plan details link in new Plan Compare page")
+		  public void user_clicks_planDetails_newPlanCompare() throws InterruptedException{
+			  ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario().getBean(PageConstants.PLAN_COMPARE_PAGE); 
+			  PlanDetailsPage vppPlanDetailsPage = planComparePage.navigateToPlanDetailfromplanCompare();
+				if (vppPlanDetailsPage != null) {
+						getLoginScenario().saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE, vppPlanDetailsPage);
+						Assert.assertTrue(true);
+					} 
+				else
+					Assert.fail("Error in Loading the Plan Details Page");
+			
+		  }
+		
+		@Then("^Click on view more plans for right navigaton$")
+		public void Clickonviewmoreplansforrightnavigatonon() throws Throwable {
+			ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
+					.getBean(PageConstants.PLAN_COMPARE_PAGE);
+			planComparePage.validateViewMoreplansComparePage();
+		}
+		
+		@Then("^Click on view less plans for left navigaton$")
+		public void Clickonviewlessplansforrightnavigatonon() throws Throwable {
+			ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
+					.getBean(PageConstants.PLAN_COMPARE_PAGE);
+			planComparePage.validateViewlessplansComparePage();
+		}
+		
+		@Given("^remove one plan from \"([^\"]*)\" new plan compare and verify remove icon is disabled page$")
+		public void removeoneplanfrom_compare_plan_link(String Counter) throws Throwable {
+			ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
+					.getBean(PageConstants.PLAN_COMPARE_PAGE);		
+			planComparePage.CounterNewRemoveLink(Counter);
+		}
 }

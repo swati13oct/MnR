@@ -142,6 +142,7 @@ public class DoctorsMobilePage extends UhcDriver {
 		validate(doctorLookupOption, 30);
 		//Assert.assertTrue(doctorLookupOption.getText().contains("lookup"));
 		mobileUtils.mobileLocateElementClick(doctorWantOption);
+		mobileUtils.mobileLocateElement(previousBtn);
 		mobileUtils.mobileLocateElementClick(previousBtn);
 		System.out.println("Validating " + page + " page Previous button functionality");
 		mobileUtils.previousPageValidation(page.toUpperCase());
