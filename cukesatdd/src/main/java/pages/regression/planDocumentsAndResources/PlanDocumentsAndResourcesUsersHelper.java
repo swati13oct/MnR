@@ -3066,7 +3066,7 @@ public class PlanDocumentsAndResourcesUsersHelper {
 		if (section.equals("Membership Materials") || section.equals("Welcome Guide")) {//note: MM
 			if (subSection.equals("EN")) {
 				targetTestDocList = new ArrayList<String>();
-				targetTestDocList.add("Quick Start Guide");
+				//targetTestDocList.add("Quick Start Guide");
 				targetTestDocList.add("Benefit Highlights");
 				targetTestDocList.add("Evidence Of Coverage");
 				targetTestDocList.add("UnitedHealth Passport Program");
@@ -3074,7 +3074,7 @@ public class PlanDocumentsAndResourcesUsersHelper {
 			} 
 			if (subSection.equals("ES")) {
 				targetTestDocList = new ArrayList<String>();
-				targetTestDocList.add("Gu.a R.pida para Comenzar"); //note: regex
+				//targetTestDocList.add("Gu.a R.pida para Comenzar"); //note: regex
 				targetTestDocList.add("Beneficios Importantes");
 				targetTestDocList.add("Comprobante de Cobertura");
 				targetTestDocList.add("Programa UnitedHealth Passport");
@@ -3255,7 +3255,7 @@ public class PlanDocumentsAndResourcesUsersHelper {
 		if (section.equals("Membership Materials") || section.equals("Welcome Guide")) {//note: MM
 			if (subSection.equals("EN")) {
 				targetTestDocList = new ArrayList<String>();
-				targetTestDocList.add("Quick Start Guide");
+				//targetTestDocList.add("Quick Start Guide");
 				targetTestDocList.add("Benefit Highlights");
 				targetTestDocList.add("Comprehensive Formulary");
 				targetTestDocList.add("Alternative Drug List");
@@ -3266,7 +3266,7 @@ public class PlanDocumentsAndResourcesUsersHelper {
 			} 
 			if (subSection.equals("ES")) {
 				targetTestDocList = new ArrayList<String>();
-				targetTestDocList.add("Gu.a R.pida para Comenzar"); //note: regex
+				//targetTestDocList.add("Gu.a R.pida para Comenzar"); //note: regex
 				targetTestDocList.add("Beneficios Importantes");
 				targetTestDocList.add("Formulario completo");
 				targetTestDocList.add("Lista de Medicamentos Alternativos");
@@ -3648,7 +3648,7 @@ public class PlanDocumentsAndResourcesUsersHelper {
 		if (section.equals("Membership Materials") || section.equals("Welcome Guide")) {//note: MM
 			if (subSection.equals("EN")) {
 				targetTestDocList = new ArrayList<String>();
-				targetTestDocList.add("Quick Start Guide");
+				//targetTestDocList.add("Quick Start Guide");
 				targetTestDocList.add("Benefit Highlights");
 				targetTestDocList.add("Comprehensive Formulary");
 				targetTestDocList.add("Alternative Drug List");
@@ -3657,7 +3657,7 @@ public class PlanDocumentsAndResourcesUsersHelper {
 			} 
 			if (subSection.equals("ES")) {
 				targetTestDocList = new ArrayList<String>();
-				targetTestDocList.add("Gu.a R.pida para Comenzar"); //note: regex
+				//targetTestDocList.add("Gu.a R.pida para Comenzar"); //note: regex
 				targetTestDocList.add("Beneficios Importantes");
 				targetTestDocList.add("Formulario completo");
 				targetTestDocList.add("Lista de Medicamentos");

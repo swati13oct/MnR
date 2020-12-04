@@ -522,8 +522,7 @@ public class PlanDocumentsAndResourcesStepDefinition {
 			testInputInfoMap.put("targetYr",targetYr);
 			//note: special case for during year transition when pre-eff user has plan start in next year
 			if (memberType.contains("PREEFF")) {
-				if (api_planDocMap.getMemMatl_es_curYr_docList().size()==0 && 
-						api_planDocMap.getMemMatl_es_nxtYr_docList().size()>0) {
+				if (api_planDocMap.getMemMatl_es_nxtYr_docList().size()>0) {
 					testInputInfoMap.put("targetSubSection","nextYear");
 					testInputInfoMap.put("targetYr",yearsMap.get("nextYear"));
 				}
@@ -561,8 +560,7 @@ public class PlanDocumentsAndResourcesStepDefinition {
 			testInputInfoMap.put("targetYr",targetYr);
 			//note: special case for during year transition when pre-eff user has plan start in next year
 			if (memberType.contains("PREEFF")) {
-				if (api_planDocMap.getMemMatl_es_curYr_docList().size()==0 && 
-						api_planDocMap.getMemMatl_es_nxtYr_docList().size()>0) {
+				if (api_planDocMap.getMemMatl_es_nxtYr_docList().size()>0) {
 					testInputInfoMap.put("targetSubSection","nextYear");
 					testInputInfoMap.put("targetYr",yearsMap.get("nextYear"));
 				}
@@ -599,8 +597,7 @@ public class PlanDocumentsAndResourcesStepDefinition {
 			testInputInfoMap.put("targetYr",targetYr);
 			//note: special case for during year transition when pre-eff user has plan start in next year
 			if (memberType.contains("PREEFF")) {
-				if (api_planDocMap.getMemMatl_es_curYr_docList().size()==0 && 
-						api_planDocMap.getMemMatl_es_nxtYr_docList().size()>0) {
+				if (api_planDocMap.getMemMatl_es_nxtYr_docList().size()>0) {
 					testInputInfoMap.put("targetSubSection","nextYear");
 					testInputInfoMap.put("targetYr",yearsMap.get("nextYear"));
 				}
@@ -1048,7 +1045,7 @@ public class PlanDocumentsAndResourcesStepDefinition {
 		testInputInfoMap.put("section", section);
 
 		//note: validate jumplink
-		planDocumentsAndResourcesPage.validateJumplink_PD(sectionDisplay);
+		planDocumentsAndResourcesPage.validateJumplink_PD(sectionDisplay, memberType);
 		sectionNote.add("PASSED - jumplink validation");
 
 		//note: validate section header
@@ -1302,7 +1299,7 @@ public class PlanDocumentsAndResourcesStepDefinition {
 		testInputInfoMap.put("section", section);
 
 		//note: validate jumplink
-		planDocumentsAndResourcesPage.validateJumplink_PD(sectionDisplay);
+		planDocumentsAndResourcesPage.validateJumplink_PD(sectionDisplay, memberType);
 		sectionNote.add("PASSED - jumplink validation");
 
 		//note: validate section header
