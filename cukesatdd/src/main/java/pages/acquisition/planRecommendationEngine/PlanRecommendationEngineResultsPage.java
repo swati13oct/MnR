@@ -1581,16 +1581,16 @@ public void validateDrugProvider(String drugs, String doctors) {
 	}
 	Collections.sort(vpdrugs);
 	System.out.println(vpdrugs);
-	Assert.assertTrue(vpdrugs.contains(drugs), "--- Drug name are not matches---");
+	Assert.assertTrue(vpdrugs.contains(drugs.toUpperCase()), "--- Drug name are not matches---");
 	threadsleep(3000);
 	
 	int prdcount =  Integer.parseInt(ProviderCount.getText().trim().replace(")", "").replace("(", "").split("Providers")[1].trim());
 	for(int i=0; i<prdcount;i++) {
-		vpProviders.add(Providerlist.get(i).findElement(By.cssSelector("div>span:nth-child(1)")).getText());
+		vpProviders.add(Providerlist.get(i).findElement(By.cssSelector("div>span:nth-child(1)")).getText().toUpperCase());
 	}
 	Collections.sort(vpProviders);
 	System.out.println(vpProviders);
-	Assert.assertTrue(vpProviders.contains(doctors), "--- Doctors name are not matches---");
+	Assert.assertTrue(vpProviders.contains(doctors.toUpperCase()), "--- Doctors name are not matches---");
 	threadsleep(3000);
 	System.out.println("Drug and provider details successfully validated in VP ");
 	BacktoPlansLink.click();
