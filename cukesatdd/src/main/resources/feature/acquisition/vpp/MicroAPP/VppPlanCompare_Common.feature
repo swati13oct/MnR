@@ -107,7 +107,7 @@ Feature: 1.01.3-Vpp to plan Compare AARP Scenarios
     And I select "<plantype>" plans to compare and click on compare plan link
     Then the user clicks on back on all plan link in Plan Compare page
 
-    @VppPlanCompareCommon_AARP01
+    @VppPlanCompareCommon_AARP01 @VBFTEAMC
     Examples: 
       | TCID  | site | zipcode | isMultiCounty | county             | plantype | planyear |
       | 00008 | AARP |   90210 | No            | Los Angeles County | MAPD     | current  |
