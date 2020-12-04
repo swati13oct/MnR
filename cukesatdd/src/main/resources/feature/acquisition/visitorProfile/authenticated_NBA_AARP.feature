@@ -56,11 +56,11 @@ Feature: 1.08. ACQ- Visitor Profile Authenticated NBA AARP
     When user clicks on Find a Provider button on NBA
     When user selects a provider and retuns to VPP page
     Then user should be able to see the NBA modal to Enroll Plan on the VPP summary page
-    When user clicks on Select a plan button in AARP Site
+    When user clicks on Select a plan button on NBA
     Then user should be able to see the Select Plan for Enroll Modal with all plans in AARP site
     When user saves plan as favorite on AARP site
       | Plan Type | <testPlans> |
-    When user clicks on Select a plan button in AARP Site
+    When user clicks on Select a plan button on NBA
     Then user should be able to see the Select Plan for Enroll Modal with saved plans in AARP site
       | Test Plans | <testPlans> |
     When user clicks on Saved items

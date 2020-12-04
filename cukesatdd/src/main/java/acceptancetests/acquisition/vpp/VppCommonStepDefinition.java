@@ -2746,4 +2746,13 @@ public class VppCommonStepDefinition {
 			planComparePage.validateOONNotDisplayed();
 		}
 		
+		List<String> allPlanNames = null;
+		@When("^user clicks on Select a plan button on NBA$")
+		public void user_clicks_on_select_a_plan_button_on_NBA() throws Throwable {
+			VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+			allPlanNames = plansummaryPage.getAllPlanNames();
+			plansummaryPage.clickContinueEnrollmentBtn();
+		}
+		
 }

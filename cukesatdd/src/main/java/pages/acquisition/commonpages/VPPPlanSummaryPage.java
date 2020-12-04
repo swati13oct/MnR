@@ -853,6 +853,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//a[text()='View Saved Items']")
 	private WebElement viewSavedItems;
 	
+	@FindBy(xpath = "//div[contains(@class,'plan-list show active')]//*[@class='segment-title oon-benefit-padding']//h3")
+	private List<WebElement> planNames;
+	
 
 	private static String NEXT_ACTION_MODAL_MSG_PROVIDER_SEARCH="Is my doctor covered?";
 	private static String NEXT_ACTION_MODAL_MSG_ENROLL_PLAN="How do I enroll?";
@@ -5394,5 +5397,19 @@ public void validateProviderNBA() {
 	catch(Exception ex) {
 		System.out.println("NBA modal not found");
 	}
+}
+
+public List<String> getAllPlanNames()
+{
+	List<String> allPlanNames=new ArrayList<String>();
+	for(WebElement plan:planNames) {
+		allPlanNames.add(plan.getText());
+	}
+	return allPlanNames;
+}
+
+public void clickContinueEnrollmentBtn() {
+	waitTillElementClickableInTime(nextBestActionModalContinueEnrollmentBtn,15);
+	nextBestActionModalContinueEnrollmentBtn.click();
 }
 }
