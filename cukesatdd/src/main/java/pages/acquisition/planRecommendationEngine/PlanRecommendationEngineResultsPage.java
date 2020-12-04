@@ -109,6 +109,9 @@ public class PlanRecommendationEngineResultsPage extends UhcDriver {
 	@FindBy(css = "#plan-list-1 .swiper-container .module-plan-overview:nth-of-type(1) a.add-drug")
 	private WebElement enterDrugsInfoMA1stPlan;
 	
+	@FindBy(css = "#plan-list-1 .swiper-container .module-plan-overview:nth-of-type(1) .edit-drugs a")
+	private WebElement drugSummarylinkMA1stPlan;
+	
 	@FindBy(css = "#plan-list-1 .swiper-container .module-plan-overview div.plan-name-div")
 	private List<WebElement> MAPlansId;
 	
@@ -512,14 +515,19 @@ public class PlanRecommendationEngineResultsPage extends UhcDriver {
 			jsClickNew(MSPlanGender);
 			threadsleep(8000);
 			jsClickNew(MSPlanGender);
+			threadsleep(3000);							//E2E: Added for the overlay to disappear after selecting a option
 			Select temp = new Select(MSPlanPartAMonth);
 			temp.selectByVisibleText("January 1");
+			threadsleep(2000);							//E2E: Added for the overlay to disappear after selecting a option
 			temp = new Select(MSPlanPartAYear);
 			temp.selectByVisibleText("2021");
+			threadsleep(2000);							//E2E: Added for the overlay to disappear after selecting a option
 			temp = new Select(MSPlanPartBMonth);
 			temp.selectByVisibleText("January 1");
+			threadsleep(2000);							//E2E: Added for the overlay to disappear after selecting a option
 			temp = new Select(MSPlanPartBYear);
 			temp.selectByVisibleText("2021");
+			threadsleep(2000);							//E2E: Added for the overlay to disappear after selecting a option
 			temp = new Select(MSPlanStartMonth);
 			temp.selectByVisibleText("January 1, 2021");
 			jsClickNew(MSViewPlanButton);
@@ -611,6 +619,16 @@ public class PlanRecommendationEngineResultsPage extends UhcDriver {
 			vppToPre();
 		}
 		
+		public void DrugsDetailsVPPtoDCE() {
+			ACQDrugCostEstimatorPage dce = new ACQDrugCostEstimatorPage(driver);
+			System.out.println("Validating Pharmacy Details in DCE Page: ");
+			dce.Pharmacytype();
+			System.out.println("Validating Drugs Details from VPP to DCE Page: ");
+			DrugsInDCE = dce.DCEDrugsResults;
+			int count =DrugsInDCE.size();
+			verifyConfirmationmodalResults(count,DrugsInDCE,DrugsList);
+		}
+		
 		public void removeDrugs(int count) {
 			// By default removing 2nd drug
     		int beforeRemove = DrugsList.size();
@@ -663,7 +681,6 @@ public class PlanRecommendationEngineResultsPage extends UhcDriver {
 		}
 		
 		public void verifyConfirmationmodalResults(int count,ArrayList<String> drug,ArrayList<String> drugListVPP) {
-
     		if(drug.size()==drugListVPP.size() && count==drug.size()) {
     			String druglist =drug.toString();
     			String vppdruglist =drugListVPP.toString();
@@ -1362,6 +1379,13 @@ public void useraddDrugsVPP(String drugDetails) {
 	dce.drugsHandlerWithdetails(drugDetails);
 	dce.getDrugsDCE();
 	dce.choosePharmacyandBacktoPlans();
+}
+
+public void userPreDCE() {
+	threadsleep(10000);
+	drugcoveredsession();
+	validate(drugSummarylinkMA1stPlan, 60);
+	drugSummarylinkMA1stPlan.click();
 }
 
 public boolean changePlanyear(String year) {

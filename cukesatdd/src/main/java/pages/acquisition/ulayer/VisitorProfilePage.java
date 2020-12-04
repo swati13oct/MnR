@@ -3,6 +3,7 @@ package pages.acquisition.ulayer;
 import java.util.Arrays;
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -24,86 +25,76 @@ public class VisitorProfilePage extends UhcDriver {
 
 	@FindBy(id = "dupIconFlyOut")
 	private WebElement shoppingCartIcon;
-
+	
 	@FindBy(css = "div.signupCTA a:first-child")
 	private WebElement signIn;
-
+	
 	@FindBy(css = "div.signupCTA a.profileBtn")
 	private WebElement btnCreateProfile;
-
-	@FindBy(css = "div.dashboardCard.plans a.empty-message-link")
-	private WebElement addPlans;
-
+	
+	//@FindBy(css = "div.dashboardCard.plans a.empty-message-link")
+	//private WebElement addPlans;
+	
 	@FindBy(css = "a.addrugs")
 	private WebElement addrugs;
-
+	
 	@FindBy(css = "a.add-provider")
 	private WebElement addprovider;
-
-	@FindBy(xpath = "//div[contains(@class,'drug-list-accordion')]//button[contains(@class,'drug-list-toggle')][contains(@class,'collapsed')]")
+	
+	@FindBy(xpath = "//div[contains(@class,'find-plans')]/button")
+	private WebElement addPlans;
+	
+	@FindBy(xpath = "//div[contains(@class,'find-plans')]/button")
+	private WebElement addplans;
+	
+	@FindBy(xpath="//div[contains(@class,'drug-list-accordion')]//button[contains(@class,'drug-list-toggle')][contains(@class,'collapsed')]")
 	private WebElement expandDrugBlock;
-
-	@FindBy(xpath = "//*[contains(text(),'Your Drugs (')]")
-	private List<WebElement> totalDrugs;
-
-	@FindBy(xpath = "//button[contains(@id,'DrugDelete')]")
-	private List<WebElement> editDrugs;
 	
-	@FindBy(xpath = "//button[contains(@id,'ProviderDelete')]")
-	private List<WebElement> editProviders;
-
-	@FindBy(xpath = "//*[contains(text(),'Your Providers (')]")
-	private List<WebElement> totalProviders;
-	
-	@FindBy(xpath = "//button[@aria-label='Delete Plan']")
-	private List<WebElement> deletPlan;
-
-
-	@FindBy(xpath = "//div[contains(@class,'provider--block card')]//button[contains(@class,'provider-title')][contains(@class,'collapsed')]")
+	@FindBy(xpath="//div[contains(@class,'provider--block card')]//button[contains(@class,'provider-title')][contains(@class,'collapsed')]")
 	private WebElement expandProviderBlock;
-
-	@FindBy(xpath = "//*[contains(@id,'DrugName-noplan-0')]")
+	
+	@FindBy(xpath="//*[contains(@id,'DrugName-noplan-0')]")
 	private WebElement drugName;
-
-	@FindBy(xpath = "//*[contains(@class,'pharminfo')]")
+	
+	@FindBy(xpath="//*[contains(@class,'pharminfo')]")
 	private WebElement pharmacyAddress;
-
-	@FindAll({ @FindBy(xpath = "//li[@class='drug']") })
+	
+	@FindAll({@FindBy(xpath = "//li[@class='drug']")})
 	private List<WebElement> savedDrugs;
-
-	@FindBy(xpath = "//div[contains(@class,'drug--block card')]//ul")
+	
+	@FindBy(xpath="//div[contains(@class,'drug--block card')]//ul")
 	private WebElement drugBlock;
-
-	@FindBy(css = "div.signupCTA.signupContainer a")
+	
+	@FindBy(css="div.signupCTA.signupContainer a")
 	private WebElement signOut;
-
+	
 	@FindBy(id = "enrollment-next-button")
 	private WebElement NextBtn;
-
+	
 	@FindBy(xpath = "//div[@id='dashPlansContainer']//div[contains(@class,'Plan')][1]//div[@class='enroll-container']/button")
 	private WebElement enrollInPlan;
-
+	
 	@FindBy(id = "header-number")
 	private WebElement shoppingCartNumber;
-
+	
 	@FindBy(xpath = "//div[contains(@class,'compare')]/button")
 	private WebElement comparePlans;
-
+	
 	@FindBy(css = "button.cta-button.create-profile")
 	private WebElement comparePlansOnPopup;
-
+	
 	@FindBy(xpath = "//*[contains(@id,'enrollbtnplancompare0')]")
 	private WebElement enrollBtn;
-
-	@FindBy(css = "div.print-back>a:first-child")
+	
+	@FindBy(css="div.print-back>a:first-child")
 	private WebElement backToPlans;
-
+	
 	@FindBy(xpath = "//div[@class='multi-year-select']")
 	private WebElement profileMultiYear;
-
+	
 	@FindBy(xpath = "//div[@class='multi-year-select']/button[contains(@class,'js-select-year select-year')][2]")
 	private WebElement profileNxtYrPlans;
-
+	
 	@FindBy(xpath = "//div[@class='multi-year-select']/button[contains(@class,'js-select-year select-year')][1]")
 	private WebElement profileCrntYrPlans;
 	
@@ -136,86 +127,74 @@ public class VisitorProfilePage extends UhcDriver {
 	
 	@FindBy(xpath = "//*[@id='globalContentIdForSkipLink']/..//a[text()='Sign Out']")
 	public WebElement signOutLink;
+	
+	@FindBy(xpath = "//*[contains(text(),'Your Drugs (')]")
+	private List<WebElement> totalDrugs;
 
+	@FindBy(xpath = "//button[contains(@id,'DrugDelete')]")
+	private List<WebElement> editDrugs;
+	
+	@FindBy(xpath = "//button[contains(@id,'ProviderDelete')]")
+	private List<WebElement> editProviders;
+
+	@FindBy(xpath = "//*[contains(text(),'Your Providers (')]")
+	private List<WebElement> totalProviders;
+	
+	@FindBy(xpath = "//button[@aria-label='Delete Plan']")
+	private List<WebElement> deletPlan;
+	
 	public VisitorProfilePage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
 
 		openAndValidate();
 	}
-
+	
 	@Override
 	public void openAndValidate() {
 		validate(shoppingCartIcon);
 
 	}
-
-	public void clearDrugs() {
-		if (totalDrugs.size()!=0) {
-			for(int i=0;i<editDrugs.size();i++) {
-				totalDrugs.get(0).click();
-				validate(editDrugs.get(i));
-				editDrugs.get(i).click();
-			}
-			validate(addrugs);
-		}
-	}
 	
-	public void clearProvider() {
-		if (totalProviders.size()!=0) {
-			for(int i=0;i<editProviders.size();i++) {
-				totalProviders.get(0).click();
-				validate(editProviders.get(i));
-				editProviders.get(i).click();
-			}
-		}
-	}
-	
-	public void deletePlans() {
-		if (deletPlan.size()!=0) {
-			for(int i=0;i<deletPlan.size();i++) {
-				try {
-					Thread.sleep(1500);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				validate(deletPlan.get(i));
-				deletPlan.get(i).click();
-			}
-		}
-	}
-
-	public DrugCostEstimatorPage addDrug() {
-
+	public DrugCostEstimatorPage addDrug(){
+		
 		addrugs.click();
-		if (currentUrl().contains("/estimate-drug-costs.html"))
+		if(currentUrl().contains("/estimate-drug-costs.html"))
 			return new DrugCostEstimatorPage(driver);
 		return null;
 	}
-
+	
 	@FindBy(xpath = "//button[contains(@id,'addDrug')]")
 	public WebElement AddMyDrugsBtn;
 
-	public GetStartedPage addDrug_DCERedesign() {
-
+	
+	public GetStartedPage addDrug_DCERedesign(){
+		
 		addrugs.click();
 		if (validateNew(AddMyDrugsBtn))
 			return new GetStartedPage(driver);
 		return null;
 	}
-
+	
 	public AcquisitionHomePage addPlan() throws Exception {
-		addPlans.click();
-		Thread.sleep(10000);
+		if(StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Pennsylvania") || StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Puerto Rico") || 
+				StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Virginia")) {
+			jsClickNew(addplans);
+		}else {
+			jsClickNew(addPlans);
+		}
+		
+//		addPlans.click();
+		
 		CommonUtility.checkPageIsReadyNew(driver);
-		if (driver.getCurrentUrl().contains("health-plans.html")) {
+		waitForPageLoadSafari();
+		if(driver.getCurrentUrl().contains("plan-summary")){
 			String page = "health-plans";
-			return new AcquisitionHomePage(driver, page);
+			return new AcquisitionHomePage(driver,page);
 		}
 		return null;
 	}
-
+	
 	public VPPPlanSummaryPage addPlanForMember() throws Exception {
 		addPlans.click();
 		Thread.sleep(10000);
@@ -225,99 +204,88 @@ public class VisitorProfilePage extends UhcDriver {
 		}
 		return null;
 	}
-
+	
 	public void validateAddedDrugAndPharmacy(String drug) {
 		validateNew(expandDrugBlock);
 		jsClickNew(expandDrugBlock);
 		System.out.println("Drug Name Text : " + drugName.getText().trim());
 		Assert.assertTrue(drugName.getText().trim().contains(drug));
-		// Assert.assertTrue(pharmacyAddress.isDisplayed());
-		System.out.println("Verified Drug Displayed :" + drugName.getText().trim());
+		//Assert.assertTrue(pharmacyAddress.isDisplayed());
+		System.out.println("Verified Drug Displayed :" + drugName.getText().trim() );
 	}
-
+	
 	public void validateAddedPlans(String planNames) {
 		List<String> listOfTestPlans = Arrays.asList(planNames.split(","));
 		CommonUtility.checkPageIsReadyNew(driver);
-		for (String plan : listOfTestPlans) {
-			Assert.assertEquals(plan, driver.findElement(By.xpath("//h3[text()=' " + plan + " ']")).getText());
-			Assert.assertTrue(
-					driver.findElement(By.xpath("//h3[text()=' " + plan + " ']/following::button[1]")).isDisplayed());
+		for (String plan: listOfTestPlans) {
+			Assert.assertEquals(plan, driver.findElement(By.xpath("//h4[text()='"+plan+"']")).getText());
+			Assert.assertTrue(driver.findElement(By.xpath("//h4[text()='"+plan+"']/following::button[1]")).isDisplayed());
 			System.out.println("Verified plans are added on vistior profile page");
 		}
 	}
-
+	
 	public void validateAddedMsPlans(String planNames) {
 		try {
 			List<String> listOfTestPlans = Arrays.asList(planNames.split(","));
 			CommonUtility.checkPageIsReadyNew(driver);
 			Thread.sleep(20000);
-			for (String plan : listOfTestPlans) {
-				Assert.assertEquals(plan, driver.findElement(By.xpath("//h2[text()='" + plan + "']")).getText());
-				Assert.assertTrue(driver
-						.findElement(By.xpath(
-								"//div/a[contains(@aria-describedby,'" + plan + "')] [contains(@class,'pdf-link')]"))
-						.isDisplayed());
+			for (String plan: listOfTestPlans) {
+				Assert.assertEquals(plan, driver.findElement(By.xpath("//h2[text()='"+plan+"']")).getText());
+				Assert.assertTrue(driver.findElement(By.xpath("//div/a[contains(@aria-describedby,'"+plan+"')] [contains(@class,'pdf-link')]")).isDisplayed());
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-
+	
 	/**
 	 * Validate the pdf links available
-	 * 
 	 * @param planNames
 	 */
 	public void validateAddedPlansPDFLinks(String planNames) {
 		List<String> listOfTestPlans = Arrays.asList(planNames.split(","));
-		for (String plan : listOfTestPlans) {
-			Assert.assertTrue(driver
-					.findElement(By
-							.xpath("//div/a[contains(@aria-describedby,'" + plan + "')] [contains(@class,'pdf-link')]"))
-					.isDisplayed());
+		for (String plan: listOfTestPlans) {
+			Assert.assertTrue(driver.findElement(By.xpath("//div/a[contains(@aria-describedby,'"+plan+"')] [contains(@class,'pdf-link')]")).isDisplayed());
 		}
 	}
-
 	/**
 	 * Navigate to the plan details page
-	 * 
 	 * @param planName
 	 * @return
 	 */
 	public PlanDetailsPage navigateToPlanDetails(String planName) {
 		try {
-			driver.findElement(By.xpath("//h4[text()='" + planName + "']")).click();
+			driver.findElement(By.xpath("//h4[text()='"+planName+"']")).click();
 			Thread.sleep(20000);
-			if (driver.getCurrentUrl().contains("#/details")) {
+			if (driver.getCurrentUrl().contains("#/details")) {	
 				return new PlanDetailsPage(driver);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
+		
 		return null;
 	}
-
+	
 	/**
 	 * Deletes the specified plans
-	 * 
 	 * @param plans
 	 */
 	public void deletePlans(String plans) {
-		if (validate(profileMultiYear, 10)) {
+		if(validate(profileMultiYear, 10))
+		{
 			profileNxtYrPlans.click();
-			if (driver.findElements(By.xpath("//div[@class='title dropdown-open']")).size() > 0)
-				driver.findElement(By.xpath(
-						"//div[@class='multi-year-select']/button[contains(@class,'js-select-year select-year')][2]/following::button[2]"))
-						.click();
+			if(driver.findElements(By.xpath("//div[@class='title dropdown-open']")).size()>0)
+				driver.findElement(By.xpath("//div[@class='multi-year-select']/button[contains(@class,'js-select-year select-year')][2]/following::button[2]")).click();
 			else
 				System.out.println("##############No saved plans available for 2021##############");
-
+			
 			profileCrntYrPlans.click();
-		} else {
-			System.out.println("##############MultiYear not displayed##############");
 		}
-
+		else {
+			System.out.println("##############MultiYear not displayed##############");
+			}
+		
 		try {
 			if(driver.findElements(By.xpath("//div[@class='title dropdown-open']")).size()>0){
 				if(driver.findElements(By.xpath("//div[@class='title dropdown-open']")).size()==1)
@@ -335,73 +303,70 @@ public class VisitorProfilePage extends UhcDriver {
 					System.out.println("##############No saved plans available here##############");
 		}	catch (Exception e) {
 			e.printStackTrace();
-		}
-		Assert.assertTrue(!(driver.findElements(By.xpath("//div[@class='title dropdown-open']")).size() > 0));
+			}
+		Assert.assertTrue(!(driver.findElements(By.xpath("//div[@class='title dropdown-open']")).size()>0));
 	}
-
+	
 	/**
 	 * Delete all the drugs from the profile
 	 */
 	public void deleteAllDrugs() {
 		CommonUtility.waitForPageLoadNew(driver, savedDrugs.get(0), 45);
 		driver.findElement(By.xpath("//li[@class='drug']//button")).click();
-		/*
-		 * for (WebElement drug: savedDrugs) {
-		 * drug.findElement(By.xpath("//button")).click(); }
-		 */
+		/*for (WebElement drug: savedDrugs) {
+			drug.findElement(By.xpath("//button")).click();
+		}*/
 		CommonUtility.waitForPageLoadNew(driver, addrugs, 45);
 		Assert.assertTrue(addrugs.isDisplayed());
 	}
-
+	
 	/**
 	 * Get the added provider information
-	 * 
 	 * @param planName
 	 * @return
 	 */
-	public boolean providerinfo(String planName) {
-		WebElement ProviderSearchLink = driver.findElement(By.xpath("//*[contains(text(),'" + planName
-				+ "')]/following::div[contains(@class, 'providers--drugs')][1]//div[contains(@class,'provider-list added')]/div/button"));
-		String mproviderinfo = ProviderSearchLink.getText();
+	public boolean providerinfo(String planName)
+	{
+		WebElement ProviderSearchLink = driver.findElement
+				(By.xpath("//*[contains(text(),'"+planName+"')]/following::div[contains(@class, 'providers--drugs')][1]//div[contains(@class,'provider-list added')]/div/button"));
+		String mproviderinfo=ProviderSearchLink.getText();
 		System.out.println(mproviderinfo);
-		if (mproviderinfo.toLowerCase().contains("providers covered")) {
+		if(mproviderinfo.toLowerCase().contains("providers covered"))
+		{
 			return true;
 		}
 		return false;
 
 	}
-
+	
 	/**
 	 * Delete all the providers from the profile
 	 */
 	public void deleteAllProviders() {
-		if (!(driver.findElements(By.cssSelector("div.no-providers")).size() > 0)) {
+		if(!(driver.findElements(By.cssSelector("div.no-providers")).size()>0)) {
 			CommonUtility.waitForPageLoadNew(driver, expandProviderBlock, 20);
-			expandProviderBlock.click();
-			driver.findElement(By.xpath("//li[@class='provider']//button")).click();
-			waitforElementDisapper(By.xpath(
-					"//div[contains(@class,'provider--block card')]//button[contains(@class,'provider-title')][contains(@class,'collapsed')]"),
-					5);
+			jsClickNew(expandProviderBlock);
+			jsClickNew(driver.findElement(By.xpath("//li[@class='provider']//button")));
+			waitforElementDisapper(By.xpath("//div[contains(@class,'provider--block card')]//button[contains(@class,'provider-title')][contains(@class,'collapsed')]"), 5);
 			Assert.assertTrue(validateNonPresenceOfElement(expandProviderBlock));
-		} else {
+		}else {
 			System.out.println("############No Providers##############");
 		}
 	}
-
+	
 	/**
 	 * Sign In with Optum Id credentials
-	 * 
 	 * @param username
 	 * @param password
 	 */
-	public void signIn(String username, String password) {
+	public void signIn(String username,String password) {
 		try {
 			validate(signIn, 5);
-			signIn.click();
+			jsClickNew(signIn);
 			waitForPageLoadSafari();
 			driver.findElement(By.cssSelector("input#userNameId_input")).sendKeys(username);
 			driver.findElement(By.cssSelector("input#passwdId_input")).sendKeys(password);
-			driver.findElement(By.cssSelector("input#SignIn")).click();
+			jsClickNew(driver.findElement(By.cssSelector("input#SignIn")));
 			waitForPageLoadSafari();
 			String Question = driver.findElement(By.cssSelector("label#challengeQuestionLabelId")).getText().trim();
 			WebElement securityAnswer = driver.findElement(By.cssSelector("div#challengeSecurityAnswerId >input"));
@@ -417,58 +382,57 @@ public class VisitorProfilePage extends UhcDriver {
 				System.out.println("Question is related to phone");
 				securityAnswer.sendKeys("number1");
 			}
-			driver.findElement(By.cssSelector("input#authQuesSubmitButton")).click();
-			CommonUtility.waitForPageLoadNew(driver, signOut, 20);
-
+			jsClickNew(driver.findElement(By.cssSelector("input#authQuesSubmitButton")));
+			waitForPageLoadSafari();
+			CommonUtility.waitForPageLoadNew(driver, signOut, 15);
+			
 		} catch (Exception e) {
 			Assert.fail("###############Optum Id Sign In failed###############");
 		}
-
+		
 	}
-
 	/**
-	 * Enroll in a plan
-	 * 
+	 * Enroll in a plan 
 	 * @param planName
 	 * @return
 	 */
 	public WelcomePage Enroll_OLE_Plan(String planName) {
 		WebElement enrollForPlan = null;
-
-		enrollForPlan = driver.findElement(By.xpath("//*[contains(text(), '" + planName
-				+ "')]/ancestor::*[contains(@class,'title-container')]//*[contains(@class,'btn') and contains(@dtmname,'Enroll in Plan')]"));
-		if (enrollForPlan != null) {
+		
+		enrollForPlan = driver.findElement(By.xpath("//*[contains(text(), '"+planName+"')]/ancestor::*[contains(@class,'title-container')]//*[contains(@class,'btn') and contains(@dtmname,'Enroll in Plan')]"));
+		if(enrollForPlan!=null){
 			jsClickNew(enrollForPlan);
 		}
 		validateNew(NextBtn);
-		if (driver.getCurrentUrl().contains("welcome")) {
+		if(driver.getCurrentUrl().contains("welcome")){
 			System.out.println("OLE Welcome Page is Displayed");
 			return new WelcomePage(driver);
 		}
 		return null;
 	}
-
+	
 	/**
 	 * Validate Enroll plan is Clickable or not
-	 * 
 	 * @return
 	 */
 	public boolean validateEnrollInPlanIsClickable() {
 		boolean enrollInNotPossible = false;
-		try {
-			WebDriverWait wait = new WebDriverWait(driver, 5);
-			wait.until(ExpectedConditions.elementToBeClickable(enrollInPlan));
-			enrollInNotPossible = true;
-			return enrollInNotPossible;
-		} catch (Exception e) {
-			e.printStackTrace();
-			return enrollInNotPossible;
-		}
+		try
+	    {
+	        WebDriverWait wait = new WebDriverWait(driver, 5);
+	        wait.until(ExpectedConditions.elementToBeClickable(enrollInPlan));
+	        enrollInNotPossible = true;
+	        return enrollInNotPossible;
+	    }
+	    catch (Exception e)
+	    {
+	    	e.printStackTrace();
+	        return enrollInNotPossible;
+	    }		
 	}
-
+	
 	/**
 	 * Validate the plan count on the shopping cart icon
-	 * 
 	 * @param plancount
 	 */
 	public void validatePlanCountOnCartIcon(String plancount) {
@@ -487,22 +451,21 @@ public class VisitorProfilePage extends UhcDriver {
 		}
 		return null;
 	}
-
+	
 	/**
 	 * Select plans and compare
-	 * 
 	 * @param plans
 	 * @return
 	 */
 	public ComparePlansPage planCompare(String plans) {
-
+	
 		comparePlans.click();
-		/*
-		 * CommonUtility.waitForPageLoad(driver, comparePlansOnPopup, 20); String[] plan
-		 * = plans.split(","); for(int i=0;i<4;i++) {
-		 * driver.findElement(By.xpath("//label[text()='"+plan[i]+
-		 * "']/preceding-sibling::input")).click(); } comparePlansOnPopup.click();
-		 */
+		/*CommonUtility.waitForPageLoad(driver, comparePlansOnPopup, 20);
+		String[] plan = plans.split(",");
+		for(int i=0;i<4;i++) {
+			driver.findElement(By.xpath("//label[text()='"+plan[i]+"']/preceding-sibling::input")).click();
+		}
+		comparePlansOnPopup.click();*/
 		validateNew(enrollBtn);
 		if (driver.getCurrentUrl().contains("/plan-compare")) {
 			System.out.println("Navigation to Plan Compare page is Passed");
@@ -512,23 +475,37 @@ public class VisitorProfilePage extends UhcDriver {
 		}
 		return null;
 	}
-
+	
 	/**
 	 * Back to VPP
 	 */
 	public VPPPlanSummaryPage backToPlans() {
 		try {
-			backToPlans.click();
+			jsClickNew(backToPlans);
 			CommonUtility.checkPageIsReadyNew(driver);
-			if (driver.getCurrentUrl().contains("#/plan-summary")) {
-				return new VPPPlanSummaryPage(driver);
+			waitForPageLoadSafari();
+		if (driver.getCurrentUrl().contains("#/plan-summary")) {	
+			return new VPPPlanSummaryPage(driver);
 			}
-		} catch (Exception e) {
-			e.printStackTrace();
+		}catch (Exception e) {
+		e.printStackTrace();
 		}
 		return null;
 	}
-
+	
+	
+	public AcquisitionHomePage findPlans() {
+		
+		jsClickNew(addPlans);
+		waitForPageLoadSafari();
+		if(driver.getCurrentUrl().contains("profile")) {
+			return new AcquisitionHomePage(driver);
+		}else {
+			System.out.println("Navigation to visitor profile is failed");
+			return null;
+		}
+	}
+	
 	public void backtoPlan() {
 		backToPlans.click();
 		CommonUtility.checkPageIsReadyNew(driver);
@@ -634,5 +611,41 @@ public class VisitorProfilePage extends UhcDriver {
 			Assert.fail("###############Optum Id Sign In failed###############");
 		}
 
+	}
+	
+	public void clearDrugs() {
+		if (totalDrugs.size()!=0) {
+			for(int i=0;i<editDrugs.size();i++) {
+				totalDrugs.get(0).click();
+				validate(editDrugs.get(i));
+				editDrugs.get(i).click();
+			}
+			validate(addrugs);
+		}
+	}
+	
+	public void clearProvider() {
+		if (totalProviders.size()!=0) {
+			for(int i=0;i<editProviders.size();i++) {
+				totalProviders.get(0).click();
+				validate(editProviders.get(i));
+				editProviders.get(i).click();
+			}
+		}
+	}
+	
+	public void deletePlans() {
+		if (deletPlan.size()!=0) {
+			for(int i=0;i<deletPlan.size();i++) {
+				try {
+					Thread.sleep(1500);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				validate(deletPlan.get(i));
+				deletPlan.get(i).click();
+			}
+		}
 	}
 }

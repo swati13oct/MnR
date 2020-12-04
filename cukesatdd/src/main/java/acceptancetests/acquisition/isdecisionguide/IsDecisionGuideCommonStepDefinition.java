@@ -238,6 +238,7 @@ public class IsDecisionGuideCommonStepDefinition {
 		if (dgrThankYouPage != null) {
 			System.out.println("Successfully navigated to IS Decision Guide Step 2 Page");
 			getLoginScenario().saveBean(PageConstants.IS_DECISION_GUIDE_PAGE2,dgrThankYouPage);
+			getLoginScenario().saveBean(PageConstants.DGR_THANKYOU_PAGE,dgrThankYouPage);
 		} else {
 			Assert.assertTrue("PROBLEM - Is Decision Guide Step 2 Page is null", false);
 		}
@@ -249,5 +250,47 @@ public class IsDecisionGuideCommonStepDefinition {
 		
 	}
 
+	@Then("^the user enters valid information errors for the following fields in IS Pages$")
+	public void the_user_enters_valid_information_errors_for_the_following_fields_in_IS_Pages(DataTable givenAttributes) throws Throwable {
 
+		
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		IsDecisionGuideStep1 DecisionGuideStep1Page =(IsDecisionGuideStep1) getLoginScenario().getBean(PageConstants.IS_DECISION_GUIDE_PAGE1);
+		DecisionGuideStep1Page.enterUserInfoSteperror(memberAttributesMap);
+		getLoginScenario().saveBean(PageConstants.IS_DECISION_GUIDE_PAGE1,DecisionGuideStep1Page);
+
+	}
+	
+	@Then("^the user validates Thank You Page and land on Medsupp Page$")
+	public void the_user_validates_Thank_You_Page_on_VPP_PLan_Summary_Page_for_Med_Supp_Plans() throws Throwable {
+		//IsDecisionGuideStep2 DecisionGuideStep2Page =(IsDecisionGuideStep2) getLoginScenario().getBean(PageConstants.IS_DECISION_GUIDE_PAGE2);
+		DGR_ThankYouPage dgrThankYouPage = (DGR_ThankYouPage) getLoginScenario().getBean(PageConstants.DGR_THANKYOU_PAGE);
+		VPPPlanSummaryPage planSummaryPage = dgrThankYouPage.NavigateNext_vppMedsuppPage();
+		if (planSummaryPage != null) {
+			System.out.println("Successfully navigated to IS Decision Guide Step 2 Page");
+			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE,planSummaryPage);
+		} else {
+			Assert.assertTrue("PROBLEM - Is Decision Guide Step 2 Page is null", false);
+		}
+	}
+	
+	@Then("^user clicks Next to Navigate to IS Second Step$")
+	public void user_clicks_Next_to_Navigate_to_IS_Second_Step() throws Throwable {
+		IsDecisionGuideStep1 DecisionGuideStep1Page =(IsDecisionGuideStep1) getLoginScenario().getBean(PageConstants.IS_DECISION_GUIDE_PAGE1);
+		IsDecisionGuideStep2 DecisionGuideStep2Page = DecisionGuideStep1Page.NavigateNext_DGR();
+		if (DecisionGuideStep2Page != null) {
+			System.out.println("Successfully navigated to IS Decision Guide Step 2 Page");
+			getLoginScenario().saveBean(PageConstants.IS_DECISION_GUIDE_PAGE2,DecisionGuideStep2Page);
+		} else {
+			Assert.assertTrue("PROBLEM - Is Decision Guide Step 2 Page is null", false);
+		}
+
+	}
 }

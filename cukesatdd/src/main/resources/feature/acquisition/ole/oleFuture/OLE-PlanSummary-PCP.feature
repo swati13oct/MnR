@@ -23,9 +23,9 @@ Feature: 1.05.6. OLE PCP Flow
 		Then the user validates the Plan details on OLE
 		Then the User Validates Marketing Bullets for Welcome OLE
    		| PlanName | <planName> |
-    #Then the user validates TFN in Welcome OLE Right Rail
-    #Then the user validates Learn more modal for Welcome OLE
-   	#Then the user validates Leave OLE modal for Welcome OLE
+    Then the user validates TFN in Welcome OLE Right Rail
+    Then the user validates Learn more modal for Welcome OLE
+   	Then the user validates Leave OLE modal for Welcome OLE
    	Then the user validates cancellation modal for Welcome OLE
     Then the user navigates to Personal Information Page
     Then the user enters following required information in Personal Information Page
@@ -75,7 +75,7 @@ Feature: 1.05.6. OLE PCP Flow
     | Prescription Name			| <prescriptioncoveragename>  |
     |  PD Group Number			 | <pdgroupnumber>  |
     | PD Member Number        | <pdmembernumber>   | 
-    Then the user navigates to SEP Page for Medicaid and Effective date
+    Then the user navigates to SEP Page
        	|	Input Data					 | <inputdataType>   |
     	| PartA Date         | <partadate>         |
    		| PartB Date         | <partbdate>         |
@@ -114,12 +114,12 @@ Feature: 1.05.6. OLE PCP Flow
 		 @MA_OLE_AARP_PCP_Future
     Examples: 
        | TID   | site|PlanType |planyear|planYear|zipcode    | isMultutiCounty | county          | plantype |planyear| planName                                | cardtype | firstname | lastname    | medicarenumber | ssnflag | partadate  | partbdate | medicaidnumber | esrdflag | dob      | gender | permstreet    | permcity    | mailingaddressquestion | mailingstreet | mailingcity | mailingstate | mailingzip | email         | selectoptions                                                                                                                                                                                                                                                    | optiondata              | pdpFlag | longTermFlag | riderflag | emailConfirmation | goGreen | phoneno   | mobileno | healthinsurancename|groupnumber  | membernumber    |prescriptioncoveragename        |pdgroupnumber|pdmembernumber|inputdataType|middlename|authorizefirstN|authorizelastN|authorizeaddress|authorizeapartment|authorizecity|authorizezip|authorizephonenumber|authorizeRelationship|authorizestate|
-       | 15513 | AARP|MA-MBI   |future  |future  |			10001 | NO              | New York County | MA       |future|AARP Medicare Advantage Patriot (HMO)      | MBI      | GOTTFRIED | GARRAND     | 5N69QY6ET34    | false   |   09011997 |  11012002 |      431665465 | true     | 04261944 | Male   | 003 Morris Rd | Los Angeles | No                    |  123 Test             |  Edison           | NY           |      10001    | test@test.com | Medicare Advantage Open Enrollment Period (MA OEP)/change in my Medicaid (newly got Medicaid)/Medicare (or my state)/(or my state helps pay for my Medicare premiums)/major disaster (as declared by the Federal Emergency Management Agency (FEMA) | /12202018/12202018/ / / | yes     | no           | true      |      yes       | yes     | 1234567890|2345678901|HealthInsurance     |HI1562759    | ABC12345DEF     |PrescriptionCoverage            |PD5646136    | BCD12345EFG  |Valid|M|Test_K|Test_M|122 2ND AVE|655|MINNEAPOLIS|55455|1235678901|FRIEND|MN|
+       | 15513 | AARP|MA-MBI   |future  |future  |			10001 | NO              | New York County | MA       |future|AARP Medicare Advantage Patriot (HMO)      | MBI      | GOTTFRIED | GARRAND     | 5N69QY6ET31    | false   |   09011997 |  11012002 |      0123456789  | true     | 04261944 | Male   | 003 Morris Rd | Los Angeles | No                    |  123 Test             |  Edison           | NY           |      10001    | test@test.com | Medicare Advantage Open Enrollment Period (MA OEP)/change in my Medicaid (newly got Medicaid)/Medicare (or my state)/(or my state helps pay for my Medicare premiums)/major disaster (as declared by the Federal Emergency Management Agency (FEMA) | /12202018/12202018/ / / | yes     | no           | true      |      yes       | yes     | 1234567890|2345678901|HealthInsurance     |HI1562759    | ABC12345DEF     |PrescriptionCoverage            |PD5646136    | BCD12345EFG  |Valid|M|Test_K|Test_M|122 2ND AVE|655|MINNEAPOLIS|55455|1235678901|FRIEND|MN|
   	
     @MA_OLE_UHC_PCP_Future
     Examples: 
        | TID   | site|PlanType |planyear|planYear|zipcode    | isMultutiCounty | county          | plantype |planyear| planName                                | cardtype | firstname | lastname    | medicarenumber | ssnflag | partadate  | partbdate | medicaidnumber | esrdflag | dob      | gender | permstreet    | permcity    | mailingaddressquestion | mailingstreet | mailingcity | mailingstate | mailingzip | email         | selectoptions                                                                                                                                                                                                                                                    | optiondata              | pdpFlag | longTermFlag | riderflag | emailConfirmation | goGreen | phoneno   | mobileno | healthinsurancename|groupnumber  | membernumber    |prescriptioncoveragename        |pdgroupnumber|pdmembernumber|inputdataType|
-    | 15514 | UHC|MA-MBI   |future  |future  |			10001 | NO              | New York County | MA       |future|AARP Medicare Advantage Patriot (HMO)      | MBI      | GOTTFRIED | GARRAND     | 5N69QY6ET34    | false   |   09011997 |  11012002 |      431665465 | true     | 04261944 | Male   | 003 Morris Rd | Los Angeles | No                    |  123 Test             |  Edison           | NY           |      10001    | test@test.com | Medicare Advantage Open Enrollment Period (MA OEP)/change in my Medicaid (newly got Medicaid)/Medicare (or my state)/(or my state helps pay for my Medicare premiums)/major disaster (as declared by the Federal Emergency Management Agency (FEMA) | /12202018/12202018/ / / | yes     | no           | true      |      yes       | yes     | 1234567890|2345678901|HealthInsurance     |HI1562759    | ABC12345DEF     |PrescriptionCoverage            |PD5646136    | BCD12345EFG  |Valid|
+    | 15514 | UHC|MA-MBI   |future  |future  |			10001 | NO              | New York County | MA       |future|AARP Medicare Advantage Patriot (HMO)      | MBI      | GOTTFRIED | GARRAND     | 5N69QY6ET31    | false   |   09011997 |  11012002 |     0123456789  | true     | 04261944 | Male   | 003 Morris Rd | Los Angeles | No                    |  123 Test             |  Edison           | NY           |      10001    | test@test.com | Medicare Advantage Open Enrollment Period (MA OEP)/change in my Medicaid (newly got Medicaid)/Medicare (or my state)/(or my state helps pay for my Medicare premiums)/major disaster (as declared by the Federal Emergency Management Agency (FEMA) | /12202018/12202018/ / / | yes     | no           | true      |      yes       | yes     | 1234567890|2345678901|HealthInsurance     |HI1562759    | ABC12345DEF     |PrescriptionCoverage            |PD5646136    | BCD12345EFG  |Valid|
   	
    
    @MA_OLE_AARP_LT

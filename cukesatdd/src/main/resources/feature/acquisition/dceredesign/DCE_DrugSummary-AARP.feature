@@ -586,4 +586,3 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
     Examples: 
       |site| zipCode | plantype | county       | isMultutiCounty | drug1     |defaultPharmacy|
       |AARP|   10001 | MAPD     | Bexar County | yes             | Lipitor |Retail Chain Pharmacy (Pricing is based off of a Preferred Pharmacy for applicable plans.)|
-      

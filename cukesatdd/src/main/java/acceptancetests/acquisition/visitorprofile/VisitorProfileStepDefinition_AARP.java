@@ -50,6 +50,7 @@ public class VisitorProfileStepDefinition_AARP {
 		String state = givenAttributesMap.get("State");
 		AcquisitionHomePage acqHomePage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		CommonConstants.SELECTED_STATE  = state; 
 
 		acqHomePage.selectState(state);
 	}
@@ -81,8 +82,9 @@ public class VisitorProfileStepDefinition_AARP {
 		VisitorProfilePage visitorProfilePage = (VisitorProfilePage) getLoginScenario()
 				.getBean(PageConstants.VISITOR_PROFILE_PAGE);
 
-		AcquisitionHomePage acqPage = visitorProfilePage.addPlan();
-
+		//AcquisitionHomePage acqPage = visitorProfilePage.addPlan();
+		AcquisitionHomePage acqPage = visitorProfilePage.findPlans();
+		
 		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, acqPage);
 	}
 
