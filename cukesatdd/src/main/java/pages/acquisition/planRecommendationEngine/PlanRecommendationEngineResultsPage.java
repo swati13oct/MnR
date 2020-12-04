@@ -1571,8 +1571,9 @@ public void visitorprofile(List<WebElement> plansName, List<String> vppPlans) {
 
 public void validateDrugProvider(String drugs, String doctors) {
 	System.out.println("Validate Drug and provider details in VP ");
-	List<String> vpdrugs = new ArrayList<String>();
+	ArrayList<String> vpdrugs = new ArrayList<String>();
 	List<String> vpProviders = new ArrayList<String>();
+	DrugsInPRE = PlanRecommendationEngineDrugsPage.drugNames;
 	int drgcount =  Integer.parseInt(DrugCount.getText().trim().replace(")", "").replace("(", "").split("/")[0].split("Drugs")[1].trim());
 	for(int i=0; i<drgcount;i++) {
 		vpdrugs.add(Druglist.get(i).findElement(By.cssSelector("div>span:nth-child(1)")).getText().trim()
@@ -1581,7 +1582,8 @@ public void validateDrugProvider(String drugs, String doctors) {
 	}
 	Collections.sort(vpdrugs);
 	System.out.println(vpdrugs);
-	Assert.assertTrue(vpdrugs.contains(drugs.toUpperCase()), "--- Drug name are not matches---");
+	verifyConfirmationmodalResults(drgcount,DrugsInPRE,vpdrugs);
+//	Assert.assertTrue(vpdrugs.contains(drugs.toUpperCase()), "--- Drug name are not matches---");
 	threadsleep(3000);
 	
 	int prdcount =  Integer.parseInt(ProviderCount.getText().trim().replace(")", "").replace("(", "").split("Providers")[1].trim());
