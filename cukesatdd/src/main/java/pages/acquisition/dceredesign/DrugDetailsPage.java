@@ -398,7 +398,7 @@ public class DrugDetailsPage extends UhcDriver {
 	public void validatePlanName(String planName) {
 
 		System.out.println("Plan Name : "+planName);
-		WebElement PlanNameElement = driver.findElement(By.xpath("//h1[contains(text(), '"+planName+"')]"));
+		WebElement PlanNameElement = driver.findElement(By.xpath("//h2[contains(text(), '"+planName+"')]"));
 		if(validateNew(PlanNameElement)) {
 			Assert.assertTrue("Plan Name is correct for Drug Details Page"+PlanNameElement.getText(), true);
 		}

@@ -4,7 +4,7 @@ Feature: 1.08. ACQ- Visitor Profile Authenticated NBA AARP
   @getStartedNBA
   Scenario Outline: Verify get started NBA for authenticated user on VPP page
     Given the user is on medicare acquisition site landing page
-    		|Site| <site>|
+      | Site | <site> |
     When the user navigate to Visitor profile page
     And the user login with optum Id credentials
       | User Name | <userName> |
@@ -18,24 +18,30 @@ Feature: 1.08. ACQ- Visitor Profile Authenticated NBA AARP
       | County Name     | <county>          |
       | Is Multi County | <isMultutiCounty> |
     And the user views the plans of the below plan type
-    	| Plan Type  | <plantype>  |
+      | Plan Type | <plantype> |
     Then user should see the Get started NBA on VPP
     When user clicks on Saved items on NBA
     Then user should be navigated to visitor profile page
 
+    @getStartedNBA_MAPD_AARP
     Examples: 
-      |site| userName      | password    | isMultutiCounty | zipcode | county          | plantype | 
-      |AARP| chargersqa@23 | Password@23 | NO              |   10001 | New York County | MAPD     |
+      | site | userName      | password    | isMultutiCounty | zipcode | county          | plantype |
+      | AARP | chargersqa@23 | Password@23 | NO              |   10001 | New York County | MAPD     |
+
+    @getStartedNBA_MAPD_UHC
+    Examples: 
+      | site | userName      | password    | isMultutiCounty | zipcode | county          | plantype |
+      | UHC  | chargersqa@23 | Password@23 | NO              |   10001 | New York County | MAPD     |
 
   @drugAlreadyAdded1
   Scenario Outline: Verify NBA for Find a provider for authenticated Visitor Profile VPP summary page when drug is already added
-   Given the user is on medicare acquisition site landing page
-    		|Site| <site>|
+    Given the user is on medicare acquisition site landing page
+      | Site | <site> |
     When the user navigate to Visitor profile page
     And the user login with optum Id credentials
       | User Name | <userName> |
       | Password  | <password> |
-   And user clears the existing drugs in Visitor profile
+    And user clears the existing drugs in Visitor profile
     And user clears the provider in visitor profile page
     Then user clicks on home menu from Visitor profile page
     When the user performs plan search using following information
@@ -43,7 +49,7 @@ Feature: 1.08. ACQ- Visitor Profile Authenticated NBA AARP
       | County Name     | <county>          |
       | Is Multi County | <isMultutiCounty> |
     And the user views the plans of the below plan type
-    	| Plan Type  | <plantype>  |
+      | Plan Type | <plantype> |
     Then user should see the Get started NBA on VPP
     Then user clicks on get started button on NBA
     Then the user validates Get Started Page
@@ -66,15 +72,20 @@ Feature: 1.08. ACQ- Visitor Profile Authenticated NBA AARP
     When user clicks on Saved items
     Then user should be navigated to visitor profile
 
+    @drugAlreadyAdded1_MAPD_AARP
     Examples: 
-      |site| userName      | password    | isMultutiCounty | zipcode | county          | plantype | drugName | dosage   | quantity | frequency     | zipcode | radius   | quantity | frequency     | branded | testPlans                            |
-      |AARP| chargersqa@23 | Password@23 | NO              |   10001 | New York County | MAPD     | Lipitor  | TAB 10MG |       30 | Every 1 month |   90210 | 15 miles |       30 | Every 1 month | yes     | AARP Medicare Advantage Plan 1 (HMO) |
+      | site | userName      | password    | isMultutiCounty | zipcode | county          | plantype | drugName | dosage   | quantity | frequency     | zipcode | radius   | quantity | frequency     | branded | testPlans                            |
+      | AARP | chargersqa@23 | Password@23 | NO              |   10001 | New York County | MAPD     | Lipitor  | TAB 10MG |       30 | Every 1 month |   90210 | 15 miles |       30 | Every 1 month | yes     | AARP Medicare Advantage Plan 1 (HMO) |
 
-      
+    @drugAlreadyAdded1_MAPD_UHC
+    Examples: 
+      | site | userName      | password    | isMultutiCounty | zipcode | county          | plantype | drugName | dosage   | quantity | frequency     | zipcode | radius   | quantity | frequency     | branded | testPlans                            |
+      | UHC  | chargersqa@23 | Password@23 | NO              |   10001 | New York County | MAPD     | Lipitor  | TAB 10MG |       30 | Every 1 month |   90210 | 15 miles |       30 | Every 1 month | yes     | AARP Medicare Advantage Plan 1 (HMO) |
+
   @continueEnrollmentNBA
   Scenario Outline: Verify NBA for Continue Enrollment for authenticated Visitor Profile VPP summary page
     Given the user is on medicare acquisition site landing page
-    		|Site| <site>|
+      | Site | <site> |
     When the user navigate to Visitor profile page
     And the user login with optum Id credentials
       | User Name | <userName> |
@@ -92,7 +103,12 @@ Feature: 1.08. ACQ- Visitor Profile Authenticated NBA AARP
     When user clicks on continue enrollment button
     Then user should navigated to enrollment page
 
+    @continueEnrollmentNBA_PDP_AARP
     Examples: 
-      |site| userName      | password    | isMultutiCounty | zipcode | county          | plantype | drugName | dosage   | quantity | frequency     | zipcode | radius   | quantity | frequency     | branded | testPlans                            |
-      |AARP| jarvisstage23111 | Password@15 | NO              |   55344 | Hennepin County | PDP     | Lipitor  | TAB 10MG |       30 | Every 1 month |   90210 | 15 miles |       30 | Every 1 month | yes     | AARP Medicare Advantage Plan 1 (HMO) |
-      
+      | site | userName         | password    | isMultutiCounty | zipcode | county          | plantype | drugName | dosage   | quantity | frequency     | zipcode | radius   | quantity | frequency     | branded | testPlans                            |
+      | AARP | jarvisstage23111 | Password@15 | NO              |   55344 | Hennepin County | PDP      | Lipitor  | TAB 10MG |       30 | Every 1 month |   90210 | 15 miles |       30 | Every 1 month | yes     | AARP Medicare Advantage Plan 1 (HMO) |
+
+    @continueEnrollmentNBA__PDP_UHC
+    Examples: 
+      | site | userName         | password    | isMultutiCounty | zipcode | county          | plantype | drugName | dosage   | quantity | frequency     | zipcode | radius   | quantity | frequency     | branded | testPlans                            |
+      | UHC  | jarvisstage23111 | Password@15 | NO              |   55344 | Hennepin County | PDP      | Lipitor  | TAB 10MG |       30 | Every 1 month |   90210 | 15 miles |       30 | Every 1 month | yes     | AARP Medicare Advantage Plan 1 (HMO) |
