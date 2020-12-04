@@ -225,12 +225,12 @@ Feature: ACQ-Plan benefits validation
       @planSummaryBenefitsPDPAARP01_NextYear
       Examples: 
       | excelPath                | workSheet | site |
-      | Plan Summary Benefits_Data | SheetPDP2021_1  | AARP |
+      | Plan Summary Benefits_Data | PDPSheet2021_1  | AARP |
       
        @planSummaryBenefitsPDPAARP02_NextYear
       Examples: 
       | excelPath                | workSheet | site |
-      | Plan Summary Benefits_Data | SheetPDP2021_2  | AARP |
+      | Plan Summary Benefits_Data | PDPSheet2021_2  | AARP |
       
 # UHC 
 
