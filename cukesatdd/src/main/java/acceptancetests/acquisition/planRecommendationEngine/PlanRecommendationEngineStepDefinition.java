@@ -893,8 +893,7 @@ public class PlanRecommendationEngineStepDefinition {
 	}
 	
 	@Then("^user Validate Drug and Provider details in Visitor profile page$")
-	public void user_verify_drug_provider(DataTable givenAttributes) {
-		readfeaturedata(givenAttributes);
+	public void user_verify_drug_provider() {
 		PlanRecommendationEngineResultsPage planSelectorResultspage =  new PlanRecommendationEngineResultsPage(wd);
 		planSelectorResultspage.validateDrugProvider();
 	}
