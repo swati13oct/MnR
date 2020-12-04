@@ -145,4 +145,13 @@ Feature: 1.04.2.2 To Test DREAM EOB for Members - E2E - Member Auth - PROD
       | index | username  | password  | MemUserName             | planType | memberType         | flagZeroEob |
 #     | 11    | kkumard   | tnps459#  | testuserTBD             | MAPD     | ES_CnD_NICE_DEOB   | true        |
 #     | 12    | kkumard   | tnps459#  | testuserTBD             | MAPD     | ES_D_NICE_DEOB     | true        |
-      
+
+    @prod_dreamEob01m_dsnp
+    Examples: 
+      | index | username  | password  | MemUserName             | planType | memberType         | flagZeroEob |
+      | 13    | kkumard   | tnps459#  | Arm8bur                 | MAPD     | DSNP_DEOB          | false       |        
+
+    @prod_dreamEob01n_ssp
+    Examples: 
+      | index | username  | password  | MemUserName             | planType | memberType        | flagZeroEob |
+      | 14    | kkumard   | tnps459#  | DKELLY27                | SSP      | COMBO_PDP_SSP_DEOB| false       |                          

@@ -131,4 +131,13 @@ Feature: 1.04.2.1 To Test DREAM EOB for Members - E2E - Member Auth
     Examples: 
       | index | username  | password  | MemUserName             | planType | memberType        | note                              | flagZeroEob |
       | 12    | qavgogine | qavgogine | q2_DreamEOB_0003        | MAPD     | ES_D_NICE_DEOB    | 1 new D spanish, old M            | true        |
-      
+
+    @memAuth_dreamEob01m_dsnp
+    Examples: 
+      | index | username  | password  | MemUserName             | planType | memberType        | note                              | flagZeroEob |
+      | 13    | qavgogine | qavgogine | q4_DSNP_052             | MAPD     | DSNP_DEOB         | DSNP EOB                          | true        |        
+
+    @memAuth_dreamEob01n_ssp
+    Examples: 
+      | index | username  | password  | MemUserName             | planType | memberType        | note                              | flagZeroEob |
+      | 14    | qavgogine | qavgogine | q3_sep_UAT4_UHC063      | SSP      | COMBO_PDP_SSP_DEOB| SSP EOB                           | true        |                    

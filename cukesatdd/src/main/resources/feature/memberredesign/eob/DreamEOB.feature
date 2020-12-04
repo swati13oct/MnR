@@ -138,3 +138,13 @@ Feature: 1.04.2 To Test DREAM EOB for Members - E2E
     Examples: 
       | index | planType | memberType        | note                              | flagZeroEob |
       | 12    | MAPD     | ES_D_NICE_DEOB    | 1 new D spanish, old M            | true        |      
+      
+@abc    @dreamEob01m_dsnp
+    Examples: 
+      | index | planType | memberType        | note                              | flagZeroEob |
+      | 13    | MAPD     | DSNP_DEOB         | DSNP EOB                          | true        |        
+
+    @dreamEob01n_ssp
+    Examples: 
+      | index | planType | memberType        | note                              | flagZeroEob |
+      | 14    | SSP      | COMBO_PDP_SSP_DEOB| SSP EOB                           | true        |                
