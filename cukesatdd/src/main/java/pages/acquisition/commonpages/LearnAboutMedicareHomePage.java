@@ -455,9 +455,14 @@ public class LearnAboutMedicareHomePage extends GlobalWebElements {
 	
 	public void selectStateForGeotargeting() {
 		//driver.findElement(By.cssSelector("body")).sendKeys(Keys.CONTROL,Keys.END);
+		WebElement stateDropDown = driver.findElement(By.id("state-select"));
+		scrollToView(stateDropDown);
+		
 		WebElement stateGeotargeting = driver.findElement(By.xpath("(//select[@id='state-select']//option)[2]"));
 		scrollToView(stateGeotargeting);
-		stateGeotargeting.click();
+//		stateGeotargeting.click();
+		jsClickNew(stateGeotargeting);
+		waitForPageLoadSafari();
 		waitforElementNew(stateGeotargeting, 5);
 		System.out.println("State selected for Geotagging: "+ stateGeotargeting.getText());
 		waitforElementNew(stateGeotargeting, 5);
