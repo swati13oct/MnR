@@ -1575,7 +1575,9 @@ public void validateDrugProvider(String drugs, String doctors) {
 	List<String> vpProviders = new ArrayList<String>();
 	int drgcount =  Integer.parseInt(DrugCount.getText().trim().replace(")", "").replace("(", "").split("/")[0].split("Drugs")[1].trim());
 	for(int i=0; i<drgcount;i++) {
-		vpdrugs.add(Druglist.get(i).findElement(By.cssSelector("div")).getText());
+		vpdrugs.add(Druglist.get(i).findElement(By.cssSelector("div>span:nth-child(1)")).getText().trim()
+				.toUpperCase() + " "
+				+ Druglist.get(i).findElement(By.cssSelector("div>span:nth-child(2)")).getText().trim().replace("Qty ", "").toUpperCase());
 	}
 	Collections.sort(vpdrugs);
 	System.out.println(vpdrugs);
