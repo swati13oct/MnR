@@ -23,7 +23,6 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
 import pages.acquisition.commonpages.PlanDocsPage;
-
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.MRConstants;
 import acceptancetests.data.PageData;
@@ -1695,8 +1694,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	}
 
 	public void selectState(String state) {
-		scrollToView(stateDropDown);
 		selectFromDropDownByValue(stateDropDown, state);
+	
 	}
 
 	/**
@@ -1705,6 +1704,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	 * @return
 	 */
 	public VisitorProfilePage navigateToVisitorProfilePage() {
+		
 		waitforElement(shoppingCartIcon);
 //		shoppingCartIcon.click();
 		jsClickNew(shoppingCartIcon);
