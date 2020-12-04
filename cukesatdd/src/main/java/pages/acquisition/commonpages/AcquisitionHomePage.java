@@ -2708,7 +2708,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		 * 
 		 * @return
 		 */
-		public void navigateToNewVisitorProfilePage() {
+		public VisitorProfilePage navigateToNewVisitorProfilePage() {
 			try{
 				if(savedPlansPopup.isDisplayed()) {
 					savedPlansPopupCloseIcon.click();
@@ -2719,16 +2719,15 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			waitforElement(shoppingCartIcon);
 			shoppingCartIcon.click();
 			guestProfileLink.click();
-			//Actions actions = new Actions(driver);
-			//actions.moveToElement(guestProfileLink);
-			//actions.click().build().perform();
 			CommonUtility.checkPageIsReadyNew(driver);
-			if (driver.getCurrentUrl().contains("guest")) {
+			if (driver.getCurrentUrl().contains("profile")) {
 				System.out.println("Navigated to Visitor profile page");
+				return new VisitorProfilePage(driver);
 			} else {
 				System.out.println("Navigation to visitor profile is failed");
 				Assert.fail("User not navigated to Visitor profile page");
 			}
+			return null;
 		}
 }
 

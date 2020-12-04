@@ -38,8 +38,8 @@ Feature: 1.10.1 DCE-REDISIGN AARP - To test Acq Visitor Profile to NEW DCE Flows
   Scenario Outline: To verify DCE REDESIGN shopper profile flow when adding and editing drugs globally
   Given the user is on medicare acquisition site landing page
     		|Site| <site>|
-    When the user clicks on the shopping cart icon
-    And the user clicks on the add drugs button to navigate to DCE Redesign on the profile page
+    When the user navigate to Visitor profile page
+    And the user clicks on the add drugs button globally on the profile page
     Then the user validates Get Started Page
     Then the user clicks on Build Drug List to navigate to Build Drug List Page
     Then the user searches and adds the following Drug to Drug List
@@ -53,7 +53,7 @@ Feature: 1.10.1 DCE-REDISIGN AARP - To test Acq Visitor Profile to NEW DCE Flows
     And Back to profile button should be displayed for each plan card
     When user clicks on Back to profile button
     Then user should be navigated to shopper profile page
-    When user clicks on edit drugs button globally
+    When user clicks on Edit Drug and Pharmacy on visitor profile page
     Then user should be navigated to build drug list page
     Then the user searches and adds the following Drug to Drug List
       | DrugName | <drug2> |
@@ -75,19 +75,22 @@ Feature: 1.10.1 DCE-REDISIGN AARP - To test Acq Visitor Profile to NEW DCE Flows
       
       @DCEShopperProfileAddDrugsPlancard
   Scenario Outline: To verify DCE REDESIGN shopper profile flow when adding and editing drugs from plan card
-   Given the user is on AARP medicare acquisition site landing page
-    When the user performs plan search using following information in the AARP site
+   Given the user is on medicare acquisition site landing page
+    		|Site| <site>|
+    When the user performs plan search using following information
       | Zip Code        | <zipcode>       |
       | County Name     | <county>        |
       | Is Multi County | <isMultiCounty> |
-    Then user saves two plans as favorite on AARP site
+    And the user views the plans of the below plan type
+    	| Plan Type  | <plantype>  |
+    Then user saves two plans as favorite
       | Plan Type  | <plantype>  |
       | Test Plans | <testPlans> |
-    Then user gets a create profile prompt on AARP site
-    Then user click on view saved plans button on AARP site
-    And user validates the added plans on new visitor profile page of AARP site
+    Then user gets a create profile prompt
+    Then user click on view saved plans button
+    And user validates the added plans on new visitor profile page
       | Test Plans | <testPlans> |
-    And the user clicks on the enter drug information button from plan card to navigate to DCE Redesign
+    And the user clicks on the enter drug information button from plan card on Visitor Profile page
     Then the user validates Get Started Page
     Then the user clicks on Build Drug List to navigate to Build Drug List Page
     Then the user searches and adds the following Drug to Drug List
@@ -96,7 +99,7 @@ Feature: 1.10.1 DCE-REDISIGN AARP - To test Acq Visitor Profile to NEW DCE Flows
     Then user should be able to see Return to profile link on details page
     When user clicks on Return to profile link on details page
     Then user should be navigated to shopper profile page
-    And user should see back to drug cost estimator on visitor profile page
+    And user should see back to drug cost estimator link on visitor profile page
     When user clicks on edit drugs button from plan card
     Then user should be navigated to build drug list page
     Then the user searches and adds the following Drug to Drug List
@@ -104,20 +107,21 @@ Feature: 1.10.1 DCE-REDISIGN AARP - To test Acq Visitor Profile to NEW DCE Flows
     And clicks on Review drug cost button
     Then user should be able to see Return to profile link on details page
     Examples: 
-      | drug1   | drug2|plantype|testPlans|zipcode | isMultiCounty | county|    
-      | Orkambi | Fanapt|MAPD|AARP Medicare Advantage Plan 1 (HMO),AARP Medicare Advantage Plan 2 (HMO)|10001 | NO            | New York County|
+      |site| drug1   | drug2|plantype|testPlans|zipcode | isMultiCounty | county|    
+      |AARP| Orkambi | Fanapt|MAPD|AARP Medicare Advantage Plan 1 (HMO),AARP Medicare Advantage Plan 2 (HMO)|10001 | NO            | New York County|
       
       
       @DCEShopperProfileAddDrugsGloballyAuthenticatedUser
   Scenario Outline: To verify DCE REDESIGN shopper profile flow when adding and editing drugs globally for authenticated user
-  	Given the user is on AARP medicare acquisition site landing page
-    When the user navigates to Visitor profile page
+  	Given the user is on medicare acquisition site landing page
+    		|Site| <site>|
+    When the user navigate to Visitor profile page
     And the user login with optum Id credentials
       | User Name | <userName> |
       | Password  | <password> |
-    And user clears the existing drugs
-    And user clears the provider
-    And user removed existing saved plans
+    And user clears the existing drugs in Visitor profile
+    And user clears the provider in visitor profile page
+    #And user removed existing saved plans
     And the user clicks on the add drugs button to navigate to DCE Redesign on the profile page
     Then the user validates Get Started Page
     Then the user clicks on Build Drug List to navigate to Build Drug List Page
@@ -148,5 +152,5 @@ Feature: 1.10.1 DCE-REDISIGN AARP - To test Acq Visitor Profile to NEW DCE Flows
       | Plan Name | <planName> |
     Then user should be able to see Return to profile link on details page
     Examples: 
-      | drug1   | zipCode |drug2|planType|planName|userName| password|
-      | Orkambi | 80002 |Fanapt|MAPD|AARP Medicare Advantage SecureHorizons Plan 2 (HMO)|jarvisstage23111 | Password@9 |
+      |site| drug1   | zipCode |drug2|planType|planName|userName| password|
+      |AARP| Orkambi | 80002 |Fanapt|MAPD|AARP Medicare Advantage SecureHorizons Plan 2 (HMO)|jarvisstage23111 | Password@15 |

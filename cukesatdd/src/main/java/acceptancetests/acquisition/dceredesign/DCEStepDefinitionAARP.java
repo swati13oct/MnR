@@ -697,7 +697,6 @@ public class DCEStepDefinitionAARP {
 	public void the_user_clicks_on_the_add_drugs_button_in_the_profile_to_DCE_Redesign_in_AARP_site() {
 		VisitorProfilePage visitorProfilePage = (VisitorProfilePage) getLoginScenario()
 				.getBean(PageConstants.VISITOR_PROFILE_PAGE);
-
 		GetStartedPage getStartedPage = visitorProfilePage.addDrug_DCERedesign();
 		if (null != getStartedPage) {
 			getLoginScenario().saveBean(PageConstants.DCE_Redesign_GetStarted, getStartedPage);
@@ -1702,7 +1701,7 @@ public class DCEStepDefinitionAARP {
 	public void the_user_clicks_on_return_to_plan_summary() {
 		GetStartedPage getStartedPage = (GetStartedPage) getLoginScenario()
 				.getBean(PageConstants.DCE_Redesign_GetStarted);
-		pages.acquisition.ulayer.VPPPlanSummaryPage plansummaryPage = getStartedPage.ClickReturnToPlanSummary();
+		VPPPlanSummaryPage plansummaryPage = getStartedPage.ClickReturnToPlanSummary();
 		if (null != plansummaryPage) {
 			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
 		} else
@@ -1808,7 +1807,8 @@ public class DCEStepDefinitionAARP {
 		AcquisitionHomePage acqHomePage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 
-		acqHomePage.navigateToNewVisitorProfilePage();
+		VisitorProfilePage visitorProfilePage=acqHomePage.navigateToNewVisitorProfilePage();
+		getLoginScenario().saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfilePage);
 	}
 
 	@And("^user validates the plans on new visitor profile page of AARP site$")
@@ -2203,9 +2203,16 @@ public class DCEStepDefinitionAARP {
 		drugSummaryPage.validateDefaultPharmacyName(pharmacyName);
 	}
 	
-	@When("^user clicks on Keep Using This Pharmacy link on change pharmacy modal")
+	@When("^user clicks on Keep Using This Pharmacy link on change pharmacy modal$")
 	public void user_clicks_on_keep_using_pharmacy_link_on_change_pharmacy_modal() throws InterruptedException {
 		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
 		drugSummaryPage.clickKeepUsingPharmacyLink();
+	}
+	
+	@And("^the user clicks on the add drugs button globally on the profile page$")
+	public void the_user_clicks_on_the_add_drugs_button_globally_in__profile_page() {
+		VisitorProfilePage visitorProfilePage = (VisitorProfilePage) getLoginScenario()
+				.getBean(PageConstants.VISITOR_PROFILE_PAGE);
+		visitorProfilePage.clickAddDrugsGlobal();
 	}
 }

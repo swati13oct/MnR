@@ -33,7 +33,7 @@ public class GetStartedPage extends UhcDriver {
 	@FindBy(xpath = "//h3[contains(text(), 'Almost there')]")
 	public WebElement BuildDrugPage_verificationTxt;
 
-	@FindBy(xpath = "//a[contains(@class, 'uhc-link-button')][contains(text(),'Return')]")
+	@FindBy(xpath = "//a[contains(@class, 'uhc-link-button')]//*[contains(text(),'Return')]")
 	public WebElement LinktoExitScenario;
 
 	@FindBy(xpath = "//*[contains(@id,'get-started')]")
@@ -113,11 +113,11 @@ public class GetStartedPage extends UhcDriver {
 		}
 	}
 
-	public pages.acquisition.ulayer.VPPPlanSummaryPage ClickReturnToPlanSummary() {
+	public VPPPlanSummaryPage ClickReturnToPlanSummary() {
 		validateNew(LinktoExitScenario);
 		jsClickNew(LinktoExitScenario);
 		if (driver.getCurrentUrl().contains("plan-summary")) {
-			return new pages.acquisition.ulayer.VPPPlanSummaryPage(driver);
+			return new VPPPlanSummaryPage(driver);
 		}
 		return null;
 	}

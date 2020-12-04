@@ -2452,5 +2452,70 @@ public class VppCommonStepDefinition {
 				break;
 			}
 		}
+		
+		@And("^user click on view saved plans button$")
+		public void user_click_on_view_saved_plans_button() {
+			VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+
+			VisitorProfilePage visitorProfilePage = plansummaryPage.viewSavedPlans();
+			
+			getLoginScenario().saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfilePage);
+		}
+		
+		@Then("^user should see the Get started NBA on VPP$")
+		public void user_should_see_the_Get_started_NBA() throws Throwable {
+			VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+			plansummaryPage.verifyNextBestActionModalForDrugCostAuthenticated();
+			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE,
+					plansummaryPage);
+		}
+		
+		@When("^user clicks on Saved items on NBA$")
+		public void user_clicks_on_Saved_items() throws Throwable {
+			VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);	
+			plansummaryPage.clickSavedItems();
+		}
+		
+		@Then("^user should be navigated to visitor profile page$")
+		public void user_should_be_navigated_to_visitor_profile_page() throws Throwable {
+			VisitorProfilePage visitorProfile = (VisitorProfilePage) getLoginScenario()
+					.getBean(PageConstants.VISITOR_PROFILE_PAGE);
+			visitorProfile.validateVisitorProfilePage();
+		}
+		
+		@And("^user clicks on get started button on NBA$")
+		public void user_click_Get_started_button_on_NBA() {
+			VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		plansummaryPage.clickGetStartedBtnOnNba();
+		}
+		
+		@And("^user validate Find a Provider NBA on VPP$")
+		public void user_validate_Find_a_Provider_NBA_on_VPP() {
+			VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		plansummaryPage.validateProviderNBA();
+		}
+		
+		@When("^user clicks on Find a Provider button on NBA$")
+		public void user_clicks_on_Find_a_provider_button_on_NBA() throws Throwable {
+			VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+			ProviderSearchPage providerSearchPage = (ProviderSearchPage) plansummaryPage
+					.clickNextBestActionModalFindMyDoctorsBtn();
+			if (providerSearchPage != null) {
+				getLoginScenario().saveBean(PageConstants.PROVIDER_SEARCH_PAGE, providerSearchPage);
+			}
+		}
+		
+		@Then("^user should be able to see the NBA modal to Enroll Plan on the VPP summary page$")
+		public void user_should_be_able_to_see_the_NBA_modal_to_Enroll_Plan_on_the_VPP_summary_page() {
+			VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+			plansummaryPage.verifyNextBestActionModalForEnrollPlan();
+		}
 }
 		
