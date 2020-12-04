@@ -75,7 +75,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(id = "Find a pharmacy near you")
 	private WebElement pharmacyNearLink;
 
-	@FindBy(className = "zip-button")
+	//@FindBy(className = "zip-button")
+	@FindBy(xpath="(//*[@class='zip-button'])[1]")
 	private WebElement FindPlansButton1;
 
 	@FindBy(xpath = "//*[@id='ghn_lnk_2']")
@@ -221,7 +222,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "//*[@id='ghn_lnk_2']")
 	private WebElement OurPlans;
 
-	@FindBy(id = "nav-zipcode")
+	//@FindBy(id = "nav-zipcode")
+	@FindBy(xpath="//input[contains(@id,'nav-zipcode')]")
 	private WebElement OurPlans_zipfield;
 
 	@FindBy(xpath = "//*[@id = 'nav-zipcode']/following-sibling::button[@class = 'zip-button']")
@@ -2860,5 +2862,31 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		String expectedURL =urlCheck.replace(prodURL,stageURL);
 		System.out.println("**********Actual URL is displayed *************"+expectedURL);
 		
+	}
+	public boolean checkZipCompErrorInSubNav() {
+		hoverOverShopForPlan();
+		sleepBySec(3);
+		CommonUtility.checkPageIsReadyNew(driver);
+		validateNew(OurPlans_zipfield);
+		validateNew(FindPlansButton1);
+		WebElement errorMsg=driver.findElement(By.xpath("//span[@class='field-error-msg']"));
+		jsClickNew(FindPlansButton1);
+		waitforElementNew(errorMsg);
+		if(errorMsg.isDisplayed()){
+			System.out.println("Zip Component present in Sub Nav");
+			System.out.println("Error Message Displayed: "+ errorMsg.getText());
+			return true;
+		}else
+			return false;
+	}
+
+	public VPPPlanSummaryPage checkZipCompSubNavVpp(String zipCode) {
+		sendkeys(OurPlans_zipfield, zipCode);
+		jsClickNew(FindPlansButton1);
+		CommonUtility.checkPageIsReadyNew(driver);
+		if (getTitle().equalsIgnoreCase(PageTitleConstants.ULAYER_VPP_PLAN_PAGE_AARP_SHOP_MEDICARE)) {
+			return new VPPPlanSummaryPage(driver);
+		}
+		return null;		
 	}
 }
