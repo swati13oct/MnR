@@ -14,7 +14,7 @@ import cucumber.api.CucumberOptions;
 @ExtendedCucumberOptions(retryCount=1,screenShotSize="", screenShotLocation="/screenshots/",jsonReport = "target/cucumber-RunMRATDDAcquisitionOLEMedSupBlayer.json",detailedReport = true,
  detailedAggregatedReport = true, overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDAcquisitionOLEMedSupBlayer")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.acquisition" }, monochrome=true,features = { "src/main/resources/feature/acquisition/oleMedSup" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionOLEMedSupBlayer.json" }, tags = { "@MedSupp_OLE_Common_UHC1" })
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionOLEMedSupBlayer.json" }, tags = { "@MedSupp_OLE_Common_UHC" })
 public class RunMRATDDAcquisitionOLEMedSupBlayer { 
  
 }

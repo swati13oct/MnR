@@ -106,6 +106,7 @@ public class TravelMobilePage extends UhcDriver {
 		validate(travelNoneOption, 30);
 		//Assert.assertTrue(travelNoneOption.getText().contains("None"));
 		mobileUtils.mobileLocateElementClick(travelAnotherPartOption);
+		mobileUtils.mobileLocateElement(previousBtn);
 		mobileUtils.mobileLocateElementClick(previousBtn);
 		System.out.println("Validating " + page + " page Previous button functionality");
 		mobileUtils.previousPageValidation(page.toUpperCase());

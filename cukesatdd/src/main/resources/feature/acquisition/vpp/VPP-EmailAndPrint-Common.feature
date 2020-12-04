@@ -26,23 +26,23 @@ Feature: 1.04 -ACQ-Print and email on VPP page
 
     @VppEmailandPrintCommon_AARP_1
     Examples: 
-      | TID   | site | zipcode | plantype | isMultiCounty | planyear |
-      | 15523 | AARP |   90210 | MA       | NO            | current  |
+      | TID   | site | zipcode | plantype | isMultiCounty | planyear 	|
+      | 15523 | AARP |   90210 | MA       | NO            | next	  	|
 
     @VppEmailandPrintCommon_UHC_1
     Examples: 
-      | TID   | site | zipcode | plantype | isMultiCounty | planyear |
-      | 15523 | UHC  |   90210 | MA       | NO            | current  |
+      | TID   | site | zipcode | plantype | isMultiCounty | planyear	|
+      | 15523 | UHC  |   90210 | MA       | NO            | next		  |
 
     @prodRegression_AARP @VppEmailandPrintCommon_AARP_1
     Examples: 
       | TID   | site | zipcode | plantype | isMultiCounty | planyear |
-      | 15523 | AARP |   90210 | PDP      | NO            | current  |
+      | 15523 | AARP |   90210 | PDP      | NO            | next		 |
 
     @prodRegression_UHC @VppEmailandPrintCommon_UHC_1
     Examples: 
       | TID   | site | zipcode | plantype | isMultiCounty | planyear |
-      | 15523 | UHC  |   90210 | PDP      | NO            | current  |
+      | 15523 | UHC  |   90210 | PDP      | NO            | next		 |
 
   #@emailAndPrint_AARP2 @emailAndPrintplanDetails @predators @decRelease2018 @RegressionPredators @emailAndPrint_UHC2 @emailAndPrintplanDetails @predatorsdecrelease2018 @RegressionPredators
   Scenario Outline: TID: <TID> -plantype: <plantype> - Verify email and Print plan functionalities on Plan Details page in AARP site

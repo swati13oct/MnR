@@ -52,6 +52,7 @@ public class PlanRecommendationEngineResultsPage extends UhcDriver {
 	
 	String flow;
 	ArrayList<String> DrugsInPRE;
+	ArrayList<String> DocInPRE;
 	ArrayList<String> DrugsInDCE;
 	ArrayList<String> DrugsList = new ArrayList<String>();
 	ArrayList<String> ModelDrugsList = new ArrayList<String>();
@@ -274,6 +275,15 @@ public class PlanRecommendationEngineResultsPage extends UhcDriver {
 	@FindBy(css = ".enroll-details a[dtmid='cta_acq_plans_landing']:nth-of-type(2)")
 	private WebElement EnrollPlanButton;
 	
+	@FindBy(css = "#plan-list-1 .swiper-container .module-plan-overview h3>a")
+	private List<WebElement> MAPlanNames;
+	
+	@FindBy(css = "#plan-list-1 .swiper-container .module-plan-overview a[id*='savePlan']")
+	private List<WebElement> MAPlansSaveIcon;
+	
+	@FindBy(css = "#pop-btn-2")
+	private WebElement ViewSavedPlansBtn;
+	
 // Provider and Drug Details in Plan Type
 	
 	@FindBy(css = "#plan-list-1 div.module-plan-overview")
@@ -356,6 +366,37 @@ public class PlanRecommendationEngineResultsPage extends UhcDriver {
 	
 	@FindBy(css = "input#currentYear[class*='selected']")
 	private WebElement currentPlanYearSelected;
+	
+// Visitor profile elements
+	
+	@FindBy(css = "div h3[class*='plan-name']")
+	private List<WebElement> planNamesVisitorPrf;
+	
+	@FindBy(css = "#navLinks a:nth-child(1)")
+	private WebElement BacktoPlansLink;
+	
+	@FindBy(css = "#saved-drugs")
+	private WebElement DrugCount;
+	
+	@FindBy(css = "#saved-doctors h3")
+	private WebElement ProviderCount;
+	
+	@FindBy(css = ".drugs-list li")
+	private List<WebElement> Druglist;
+	
+	@FindBy(css = ".doctors-list li")
+	private List<WebElement> Providerlist;
+	
+// External page elements
+	
+	@FindBy(css = ".c-card__footer a[class*='primary']")
+	private WebElement GetHelpFindingaPlanBtn;
+	
+	@FindBy(css = ".c-card__footer a[class*='naked']")
+	private WebElement HelpMeChooseBtn;
+	
+	@FindBy(css = ".c-banner__cta>a")
+	private WebElement startNowBtn;
 	
 //Result Loading Page Element Verification Method 
 
@@ -587,6 +628,8 @@ public class PlanRecommendationEngineResultsPage extends UhcDriver {
 			int count =DrugsInPRE.size();
 			drugsCoveredInVPP(count);
 			verifyConfirmationmodalResults(count,DrugsInPRE,DrugsList);
+			validate(drugSummarylinkMA1stPlan, 60);
+			jsClickNew(drugSummarylinkMA1stPlan);
 		}
 		
 		public void removedDrugsDetailsVPPtoPRE() {
@@ -611,9 +654,11 @@ public class PlanRecommendationEngineResultsPage extends UhcDriver {
 		public void DrugsDetailsVPPtoPRE() {
 			System.out.println("Validating Drugs Details from DCE to VPP Drug Page: ");
 			ACQDrugCostEstimatorPage dce = new ACQDrugCostEstimatorPage(driver);
+			validate(MAViewPlansLink, 60);
+			jsClickNew(MAViewPlansLink);
 			DrugsInDCE = dce.vppDrugsResults;
 			int count =DrugsInDCE.size();
-			drugsCoveredInVPP(count);
+			DrugsList = drugsCoveredInVPP(count);
 			verifyConfirmationmodalResults(count,DrugsInDCE,DrugsList);
 			System.out.println("Validating Drugs Details from VPP to PRE Drug Page: ");
 			vppToPre();
@@ -1373,8 +1418,7 @@ public void browserBack() {
 
 public void useraddDrugsVPP(String drugDetails) {
 	threadsleep(10000);
-	validate(enterDrugsInfoMA1stPlan, 60);
-	jsClickNew(enterDrugsInfoMA1stPlan);
+	userPreDCE();
 	ACQDrugCostEstimatorPage dce = new ACQDrugCostEstimatorPage(driver);
 	dce.drugsHandlerWithdetails(drugDetails);
 	dce.getDrugsDCE();
@@ -1383,20 +1427,19 @@ public void useraddDrugsVPP(String drugDetails) {
 
 public void userPreDCE() {
 	threadsleep(10000);
-	drugcoveredsession();
-	validate(drugSummarylinkMA1stPlan, 60);
-	drugSummarylinkMA1stPlan.click();
+	drugCoveredeVPP = MA1stPlanList.get(0).findElement(By.cssSelector("a[class*='add-drug']"));
+	jsClickNew(drugCoveredeVPP);
 }
 
 public boolean changePlanyear(String year) {
-
+	threadsleep(5000);
 	jsClickNew(MAViewPlansLink);
 	// Checking and Changing to Current Year
 	if (year.equalsIgnoreCase("current")) {
 		if (validate(currentPlanYear, 15)) {
 			jsClickNew(currentPlanYear);
 			Assert.assertTrue(currentPlanYearSelected.getAttribute("id").length()>0,"Current Plan Year is not Selected");
-			threadsleep(5000);
+			threadsleep(10000);
 			return true;
 		}
 	}
@@ -1455,4 +1498,157 @@ public VPPPlanSummaryPage handlePlanYearSelectionPRE(String planYear) {
 		return null;
 		
 }
+
+public void validateSavePlan(String year) {
+	System.out.println("Validate PRE Save Plans functionality : ");
+	int saveplans = 2;
+	verifySavePlans(MAPlanNames, saveplans, year, MAPlansSaveIcon);
+}
+
+public void verifySavePlans(List<WebElement> plansName, int saveplans,	String year, List<WebElement> savePlan) {
+	List<String> vppPlans = new ArrayList<String>();
+	System.out.println("Plans Count :" +plansName.size());
+		for (int plan = 0; plan < saveplans; plan++) {
+			vppPlans.add(savingplans(plansName.get(plan), savePlan.get(plan)));
+		}
+		Collections.sort(vppPlans);
+		System.out.println(vppPlans);
+		threadsleep(3000);
+		validate(ViewSavedPlansBtn);
+		ViewSavedPlansBtn.click();
+		threadsleep(3000);
+		changePlanyearVisitorProfile(year);
+		visitorprofile(planNamesVisitorPrf, vppPlans);
+	System.out.println("Plan Name compared Successful Clicks on Save Plan");
+}
+
+public String savingplans(WebElement plan, WebElement saveplan) {
+	String exceptedplanName = plan.getText().trim();
+	System.out.println("Plan Name in VPP Summary Page: " + exceptedplanName);
+	String save = saveplan.getText().trim();
+	if (save.equalsIgnoreCase("Save")) {
+		saveplan.click();
+	} 
+	threadsleep(5000);
+	return exceptedplanName;
+}
+
+public boolean changePlanyearVisitorProfile(String year) {
+	// Checking Current year selection
+	if (year.equalsIgnoreCase("current")) {
+		if (validate(currentPlanYear, 15)) {
+			currentPlanYear.click();
+			Assert.assertTrue(currentPlanYear.getAttribute("class").length() > 0,
+					"Current Plan Year is not Selected");
+			return true;
+		}
+	}
+
+	// Checking and Changing Future Year
+	if (year.equalsIgnoreCase("future")) {
+		if (validate(futurePlanYear, 15)) {
+			futurePlanYear.click();
+			Assert.assertTrue(futurePlanYear.getAttribute("class").length() > 0,
+					"Future Plan Year is not Selected");
+			return true;
+		} else {
+			Assert.assertTrue(false, "Future Plan Year Toggle is Needed");
+		}
+	}
+	return false;
+}
+
+public void visitorprofile(List<WebElement> plansName, List<String> vppPlans) {
+	System.out.println("Plan Name in VPP Page: " + vppPlans);
+	String actualplanName = "";
+	pageloadcomplete();
+	System.out.println(plansName.size());
+	for (int i = 0; i < plansName.size(); i++) {
+		actualplanName = plansName.get(i).getText().trim();
+		System.out.println("Plan Name in Visitor Profile Page: " + actualplanName);
+		Assert.assertTrue(vppPlans.contains(actualplanName), "--- Plan name are not matches---");
+	}
+}
+
+public void validateDrugProvider() {
+	System.out.println("Validate Drug and provider details in VP ");
+	ArrayList<String> vpdrugs = new ArrayList<String>();
+	ArrayList<String> vpProviders = new ArrayList<String>();
+	DrugsInPRE = PlanRecommendationEngineDrugsPage.drugNames;
+	DocInPRE = PlanRecommendationEngineDoctorsPage.confirmationResults;
+	int drgcount =  Integer.parseInt(DrugCount.getText().trim().replace(")", "").replace("(", "").split("/")[0].split("Drugs")[1].trim());
+	for(int i=0; i<drgcount;i++) {
+		vpdrugs.add(Druglist.get(i).findElement(By.cssSelector("div>span:nth-child(1)")).getText().trim()
+				.toUpperCase() + " "
+				+ Druglist.get(i).findElement(By.cssSelector("div>span:nth-child(2)")).getText().trim().replace("Qty ", "").toUpperCase());
+	}
+	Collections.sort(vpdrugs);
+	System.out.println(vpdrugs);
+	verifyConfirmationmodalResults(drgcount,DrugsInPRE,vpdrugs);
+//	Assert.assertTrue(vpdrugs.contains(drugs.toUpperCase()), "--- Drug name are not matches---");
+	threadsleep(3000);
+	
+	int prdcount =  Integer.parseInt(ProviderCount.getText().trim().replace(")", "").replace("(", "").split("Providers")[1].trim());
+	for(int i=0; i<prdcount;i++) {
+		vpProviders.add(Providerlist.get(i).findElement(By.cssSelector("div>span:nth-child(1)")).getText().toUpperCase());
+	}
+	Collections.sort(vpProviders);
+	System.out.println(vpProviders);
+	verifyConfirmationmodalResults(prdcount,DocInPRE,vpProviders);
+//	Assert.assertTrue(vpProviders.contains(doctors.toUpperCase()), "--- Doctors name are not matches---");
+	threadsleep(3000);
+	System.out.println("Drug and provider details successfully validated in VP ");
+	BacktoPlansLink.click();
+	threadsleep(8000);
+	Assert.assertTrue(driver.getCurrentUrl().contains("/plan-summary"), "--- VPP Summary not loaded---");
+}
+
+public void navigatePRE(String site) {
+	System.out.println("Validate Drug and provider details in VP ");
+	String curWindow = driver.getWindowHandle();
+	System.out.println(curWindow);
+	if (site.equalsIgnoreCase("Myuhcplans")) {
+		validate(GetHelpFindingaPlanBtn);
+		GetHelpFindingaPlanBtn.click();
+		PREStage(curWindow, site);
+	}
+	if (site.equalsIgnoreCase("uhcandwellmedsa")) {
+		validate(HelpMeChooseBtn);
+		HelpMeChooseBtn.click();
+		PREStage(curWindow, site);
+	}
+	if (site.equalsIgnoreCase("mauhcmedicaresolutions") || site.equalsIgnoreCase("maaarpmedicareplans")) {
+		validate(startNowBtn);
+		startNowBtn.click();
+		PREStage(curWindow, site);
+	}
+	if (site.equalsIgnoreCase("uhcmedicaresolutions") || site.equalsIgnoreCase("aarpmedicareplans")) {
+		navigateVPP("10001");
+		vppToPre();
+		PREStage(curWindow, site);
+	}
+}
+
+public void PREStage(String primaryWindow, String aarp) {
+	ArrayList<String> windows = new ArrayList<String>(driver.getWindowHandles());
+	System.out.println(windows);
+	if (windows.size() == 2) {
+		for (String window : windows) {
+			System.out.println(window.replace("CDwindow-", ""));
+			if (!window.equals(primaryWindow)) {
+				driver.switchTo().window(window);
+				System.out.println(driver.getCurrentUrl());
+				Assert.assertTrue(driver.getCurrentUrl().contains("/plan-recommendation-engine.html"), "PRE is not loading");
+			}
+			if(aarp.contains("aarpmedicareplans")) {
+				driver.navigate().to("https://www.stage-aarpmedicareplans.uhc.com/plan-recommendation-engine.html");
+			}
+			else
+				driver.navigate().to("https://www.stage-uhcmedicaresolutions.uhc.com/plan-recommendation-engine.html");
+			}
+	}
+	threadsleep(5000);
+	driver.switchTo().window(primaryWindow);
+}
+
 }
