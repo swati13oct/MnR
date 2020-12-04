@@ -689,10 +689,14 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 
 	public void validateHeaders(String planType) {
 		if(planType.equals("DSNP_MAPD")) {
-			String ExpectedUrl="member/documents/overview.html";
 			validateNew(BenefitsSummaryHeader);
 			validateNew(Copayscoinsuranceheader);
+
+			String ExpectedUrl="member/documents/overview.html";
 			Assert.assertTrue("'To view more details regarding----'  text is expected to display", medCopayText.isDisplayed());
+
+			//note: to save time, skip navigating to planDoc page, only validate link href has the correct url
+			/* keep
 			medCopayBenefitsLink.click();
 			driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);  
 			String actualUrl=driver.getCurrentUrl();
@@ -701,11 +705,14 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 			System.out.println("ExpectedUrl is " + ExpectedUrl);
 			driver.navigate().back();
 			driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-
+			*/
+			String actHrefValue=medCopayBenefitsLink.getAttribute("href");
+			Assert.assertTrue("PROBLEM - medCopayBenefitsLink href value is not as expected. "
+					+ "Expected to contain '"+ExpectedUrl+"' | Actual href='"+actHrefValue+"'", actHrefValue.contains(ExpectedUrl));
+			
 			Assert.assertTrue("'OfficeVisits' is not expected to display", !OfficeVisits.isDisplayed());
 			Assert.assertTrue("'InPatientHospitalCare' is not expected to display", !InPatientHospitalCare.isDisplayed());
 			Assert.assertTrue("'OutpatientSurgeryCenter' is not expected to display", !OutpatientSurgeryCenter.isDisplayed());
-			
 		} else if (planType.equalsIgnoreCase("PDP")) {
 			//note: for PDP user, there will be NO Benefits Summary Header section
 			System.out.println("User has planType=PDP, validate should not have Benefits Summary section at all");
