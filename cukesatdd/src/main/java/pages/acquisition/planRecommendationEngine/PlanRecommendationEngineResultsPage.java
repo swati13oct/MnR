@@ -52,6 +52,7 @@ public class PlanRecommendationEngineResultsPage extends UhcDriver {
 	
 	String flow;
 	ArrayList<String> DrugsInPRE;
+	ArrayList<String> DocInPRE;
 	ArrayList<String> DrugsInDCE;
 	ArrayList<String> DrugsList = new ArrayList<String>();
 	ArrayList<String> ModelDrugsList = new ArrayList<String>();
@@ -1569,11 +1570,12 @@ public void visitorprofile(List<WebElement> plansName, List<String> vppPlans) {
 	}
 }
 
-public void validateDrugProvider(String drugs, String doctors) {
+public void validateDrugProvider() {
 	System.out.println("Validate Drug and provider details in VP ");
 	ArrayList<String> vpdrugs = new ArrayList<String>();
-	List<String> vpProviders = new ArrayList<String>();
+	ArrayList<String> vpProviders = new ArrayList<String>();
 	DrugsInPRE = PlanRecommendationEngineDrugsPage.drugNames;
+	DocInPRE = PlanRecommendationEngineDoctorsPage.confirmationResults;
 	int drgcount =  Integer.parseInt(DrugCount.getText().trim().replace(")", "").replace("(", "").split("/")[0].split("Drugs")[1].trim());
 	for(int i=0; i<drgcount;i++) {
 		vpdrugs.add(Druglist.get(i).findElement(By.cssSelector("div>span:nth-child(1)")).getText().trim()
@@ -1592,7 +1594,8 @@ public void validateDrugProvider(String drugs, String doctors) {
 	}
 	Collections.sort(vpProviders);
 	System.out.println(vpProviders);
-	Assert.assertTrue(vpProviders.contains(doctors.toUpperCase()), "--- Doctors name are not matches---");
+	verifyConfirmationmodalResults(prdcount,DocInPRE,vpProviders);
+//	Assert.assertTrue(vpProviders.contains(doctors.toUpperCase()), "--- Doctors name are not matches---");
 	threadsleep(3000);
 	System.out.println("Drug and provider details successfully validated in VP ");
 	BacktoPlansLink.click();

@@ -896,7 +896,7 @@ public class PlanRecommendationEngineStepDefinition {
 	public void user_verify_drug_provider(DataTable givenAttributes) {
 		readfeaturedata(givenAttributes);
 		PlanRecommendationEngineResultsPage planSelectorResultspage =  new PlanRecommendationEngineResultsPage(wd);
-		planSelectorResultspage.validateDrugProvider(inputValues.get("Drug Names"), inputValues.get("Doctors Search Text"));
+		planSelectorResultspage.validateDrugProvider();
 	}
 	
 	@Given("^the user is on external acquisition site landing page$")
