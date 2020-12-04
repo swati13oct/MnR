@@ -5325,7 +5325,7 @@ public void checkMAPlansOnly(String counter) {
 			.findElements(By.xpath(".//*[@id='plan-list-1']//div[contains(@class,'compare-box')]//label"));
 	if(allMAPlans!=null) {
 		for(int i:selectPlanIndexes) {
-			allMAPlans.get(i).click();
+			jsClickNew(allMAPlans.get(i));
 		}
 	}
 }

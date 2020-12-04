@@ -1334,7 +1334,7 @@ public class ComparePlansPage extends UhcDriver {
 	
 	public void validateAllPlansShown(){
 	   	System.out.println(planComparePlansAvailableLabel.getText());
-	   	int planCount=Integer.parseInt(planComparePlansAvailableLabel.getText().substring(0, planComparePlansAvailableLabel.getText().indexOf(" Plans")));
+	   	int planCount=Integer.parseInt(planComparePlansAvailableLabel.getText().substring(0, planComparePlansAvailableLabel.getText().indexOf(" Plans")).trim());
 	    System.out.println("Count of plans Available="+planCount);
 	   System.out.println("Count of plans on compare Before button is clicked"+driver.findElements(By.xpath("//div[contains(@class,'flex-lg-row')]/div")).size());
 	   Assert.assertTrue("View All button should be displayed", viewAllplansButton.isDisplayed());
@@ -1356,10 +1356,12 @@ public class ComparePlansPage extends UhcDriver {
 		medicalBenefitsOONToggle.click();
 		Assert.assertTrue("OON Toggle Should be Displayed for Additional Benefits", additionalBenefitsOONToggle.isDisplayed());
 		Assert.assertEquals("OON Toggle default Text should be displayed as View Out-of-Network Benefits", "View Out-of-Network Benefits",additionalBenefitsOONLabel.getText().trim());
-		additionalBenefitsOONToggle.click();
+//		additionalBenefitsOONToggle.click();
+		jsClickNew(additionalBenefitsOONToggle);
 		Assert.assertEquals("OON Toggle Text should be changed to View In-Network Benefits", "View In-Network Benefits", additionalBenefitsOONLabel.getText().trim());
 		Assert.assertTrue("OON Toggle Style should be changed", outOfNetworkStyle.isDisplayed());
-		additionalBenefitsOONToggle.click();
+//		additionalBenefitsOONToggle.click();
+		jsClickNew(additionalBenefitsOONToggle);
 	}
 	
 	public void validateOONNotDisplayed()
