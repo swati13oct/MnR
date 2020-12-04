@@ -388,6 +388,7 @@ Feature: 1.01.3-Vpp to plan Compare AARP Scenarios
 
   Scenario Outline: <TCID> - Plan Type: <plantype> - Navigation for plan comapre to OLE on <site>
     Given the user is on medicare acquisition site landing page
+    | Site | <site> |
     When the user performs plan search using following information
       | Zip Code        | <zipcode>         |
       | Is Multi County | <isMultutiCounty> |
@@ -411,6 +412,8 @@ Feature: 1.01.3-Vpp to plan Compare AARP Scenarios
       | 00018 | UHC  |   90210 | No            | Los Angeles County | MAPD     | current  |           5 |
 
   Scenario Outline: <TCID> - Plan Type: <plantype> - Navigation for plan comapre to Plan Detail on <site>
+    Given the user is on medicare acquisition site landing page
+    | Site | <site> |
     When the user performs plan search using following information
       | Zip Code        | <zipcode>         |
       | Is Multi County | <isMultutiCounty> |
@@ -435,6 +438,7 @@ Feature: 1.01.3-Vpp to plan Compare AARP Scenarios
 
   Scenario Outline: <TCID> - Plan Type: <plantype> - Validation for Selecting more than 4 plans for plan comapre from VPP on <site>
     Given the user is on medicare acquisition site landing page
+    | Site | <site> |
     When the user performs plan search using following information
       | Zip Code        | <zipcode>         |
       | Is Multi County | <isMultutiCounty> |
@@ -461,6 +465,7 @@ Feature: 1.01.3-Vpp to plan Compare AARP Scenarios
   @vppPlanCompareAARP16 @vppPlanCompareAARPRun02 @vppPlanCompareAARPRegression
   Scenario Outline: <TCID> - Plan Type: <plantype> - Validation for remove icon should be disabled when only one plan on plan compare on <site>
     Given the user is on medicare acquisition site landing page
+    | Site | <site> |
     When the user performs plan search using following information
       | Zip Code        | <zipcode>         |
       | Is Multi County | <isMultutiCounty> |
