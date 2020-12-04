@@ -330,6 +330,46 @@ Feature: 1.08. ACQ- Visitor profile
       | UHC  | Alabama     |   90210 | NO            | MS       | current  | 11/11/1949 | Jefferson County | Plan G,Plan A |
       | UHC  | Puerto Rico |   00641 | NO            | MS       | current  | 11/11/1949 | Utuado Municipio | Plan G,Plan A |
 
+  @vpMSSavePlanAuthenticated
+  Scenario Outline: Verify user saves Medsupp plans from VPP to the unauthenticated visitor profile - zipcode - <zipcode>
+    Given the user is on medicare acquisition site landing page
+      | Site | <site> |
+    And the user selects the state drop down value in home page
+      | State | <state> |
+    When the user performs plan search using following information
+      | Zip Code        | <zipcode>       |
+      | County Name     | <county>        |
+      | Is Multi County | <isMultiCounty> |
+    When the user views the plans of the below plan type
+      | Plan Type | <plantype> |
+    Then user fills out medsup form and proceeds to next pages
+      | Zip Code | <zipcode> |
+      | DOB      | <DOB>     |
+    Then user saves two ms plans as favorite
+      | MS Test Plans | <MS_testPlans> |
+    Then user gets a create profile prompt
+    Then user click on continue as guest button
+    Then the user signs in with optum Id credentials
+      | User Name | <userName> |
+      | Password  | <password> |
+    And user validates the added Ms plans on visitor profile page
+      | MS Test Plans | <MS_testPlans> |
+    And user delets the added Ms plans on visitor profile page
+      | MS Test Plans | <MS_testPlans> |
+
+    #No pdf link is avialable now
+    #And user validate pdf link
+    #| MS Test Plans | <MS_testPlans> |
+    @VisitorProfile_AARP
+    Examples: 
+      | site | state       | zipcode | isMultiCounty | plantype | planyear | DOB        | county           | MS_testPlans  | userName   | password   |
+      | AARP | Alabama     |   90210 | NO            | MS       | current  | 11/11/1949 | Jefferson County | Plan G,Plan A | mnrmedsupp | Password@1 |
+
+    @VisitorProfile_UHC
+    Examples: 
+      | site | state       | zipcode | isMultiCounty | plantype | planyear | DOB        | county           | MS_testPlans  | userName   | password   |
+      | UHC  | Alabama     |   90210 | NO            | MS       | current  | 11/11/1949 | Jefferson County | Plan G,Plan A | mnrmedsupp | Password@1 |
+
   @providerFlow
   Scenario Outline: Verify Provider Search functional flow for unauthenticated Visitor Profile page
     Given the user is on medicare acquisition site landing page
