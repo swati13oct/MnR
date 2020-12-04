@@ -83,7 +83,6 @@ public class HealthRecordPage  extends HealthRecordBase {
 		//TODO: new DCE page will be rally page
 		//tbd } else if (noWaitValidate(section_drugLocator)) {
 		//tbd 	section_drugLocator.click();
-		//tbd 	System.out.println("OMG - 3");
 		} else {
 			//note: fix up the URL to get to the page...
 			navigateToBenefitsPage(memberType);
