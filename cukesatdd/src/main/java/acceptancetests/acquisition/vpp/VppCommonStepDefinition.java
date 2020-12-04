@@ -425,26 +425,51 @@ public class VppCommonStepDefinition {
 	}
 	
 	@Then("^user clicks on compare button and navigate to plan compare page$")
-	public void user_clicks_on_compare_button_and_navigate_to_plan_compare_page() throws Throwable {
+	public void user_clicks_on_compare_button_and_navigate_to_plan_compare_page(DataTable givenAttributes) throws Throwable {
+		List<DataTableRow> givenAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < givenAttributesRow.size(); i++) {
+
+			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+					givenAttributesRow.get(i).getCells().get(1));
+		}
+
+		String totalPlans = givenAttributesMap.get("No Of Plans To Compare");
+		int total_plans = Integer.parseInt(totalPlans);
+
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		boolean result = plansummaryPage.clickAndVerifyNavigateToPage("Compare");
+		String attempt = "first";
+		boolean result = plansummaryPage.clickAndVerifyNavigateToPage("Compare", total_plans, attempt);
 		Assert.assertTrue("On clicking compare button user is navigated to plan compare page", result);
 		System.out.println("user clicks on compare button and navigate to plan compare page");
 		
 	    
 	}
 
-	@Then("^user clicks on save button and saves to plan cart$")
-	public void user_clicks_on_save_button_and_saves_to_plan_cart() throws Throwable {
+	@Then("^user clicks on save button and saves to plan cart \"([^\"]*)\" time $")
+	public void user_clicks_on_save_button_and_saves_to_plan_cart(DataTable givenAttributes, String attempt) throws Throwable {
+		List<DataTableRow> givenAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < givenAttributesRow.size(); i++) {
+
+			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+					givenAttributesRow.get(i).getCells().get(1));
+		}
+
+		String totalPlans = givenAttributesMap.get("No Of Plans To Compare");
+		int total_plans = Integer.parseInt(totalPlans);
+
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		boolean result = plansummaryPage.clickAndVerifyNavigateToPage("Save");
-		Assert.assertTrue("On clicking save button user is navigated to save plan page", result);
+		boolean result = plansummaryPage.clickAndVerifyNavigateToPage("Save", total_plans, attempt);
+		Assert.assertTrue("On clicking save button use,r is navigated to save plan page", result);
 		System.out.println("user clicks on save button and saves to plan cart");
 	    
 	    
 	}
+	
+	/*---------------------------Added steps for Medsupp Ole----------------
 
 	@Then("^user clicks on Edit Your Information link and navigate back to micro form$")
 	public void user_clicks_on_Edit_Your_Information_link_and_navigate_back_to_micro_form() throws Throwable {
@@ -463,6 +488,7 @@ public class VppCommonStepDefinition {
 		Assert.assertTrue("On clicking View Plan button user is navigated to plan summary page", result);
 		System.out.println("user clicks on View plan button link and navigate back to vpp summary page of medsupp");
 	}
+---------------------------Added steps for Medsupp Ole----------------*/
 
 	@Then("^user clicks on Save icon for all the plans and validate count in cart should match to plans$")
 	public void user_clicks_on_Save_icon_for_all_the_plans_and_match_count() throws Throwable {
