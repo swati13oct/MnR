@@ -939,7 +939,6 @@ public class BenefitsAndCoverageBase extends BenefitsAndCoverageWebElements {
 	}
 			
 	
-	
 	public void clicksToOptumRxSSOLink(String optumrxssolink ) {
 		// TODO Auto-generated method stub
 		

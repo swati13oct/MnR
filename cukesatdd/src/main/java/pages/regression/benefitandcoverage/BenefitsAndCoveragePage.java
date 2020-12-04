@@ -30,6 +30,7 @@ import org.openqa.selenium.support.ui.Select;
 
 import pages.member_deprecated.bluelayer.ProfilePreferencesPage;
 import pages.regression.benefitandcoverage.ValueAddedServicepage;
+import pages.regression.drugcostestimator.DrugCostEstimatorPage;
 import pages.regression.testharness.TestHarness;
 import acceptancetests.data.MRConstants;
 import acceptancetests.data.PageData;
@@ -277,6 +278,24 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 		Assert.assertTrue(!validate(DrugCoveragetext,0));
 	}
 
+	public DrugCostEstimatorPage navigateToDcePg() {
+		//note: temp for now when Drug look up still pointing to old DCE page
+		String tmpUrl=driver.getCurrentUrl();
+		tmpUrl=tmpUrl.replace("benefits-coverage.html", "drug-lookup/overview.html#/drug-cost-estimator");
+		driver.get(tmpUrl);
+
+		//note: use the following three lines after Drug look up button is pointing to the new DCE page
+		//keep validateWithValue("Look Up Drugs Button", LookUpDrugsButton);
+		//keep scrollElementToCenterScreen(LookUpDrugsButton);
+		//keep LookUpDrugsButton.click();   	
+		CommonUtility.checkPageIsReadyNew(driver);
+		CommonUtility.waitForPageLoad(driver, oldDcePgHeader, 5);
+		Assert.assertTrue("PROBLEM - unable to locate the DCE page header", 
+				validate(oldDcePgHeader,0) );
+		return new DrugCostEstimatorPage(driver);
+	}
+	
+	
 	/**
 	 * Validates Look Up Drugs button in the DrugCosts section
 	 */
