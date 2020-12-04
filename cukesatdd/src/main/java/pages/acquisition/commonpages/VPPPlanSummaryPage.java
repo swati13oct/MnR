@@ -741,7 +741,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	private WebElement RightRail_RulesandDisclosure;
 
 //	@FindBy(xpath = "//a[contains(@href,'//aarpsupplementalhealth-stg.uhc.com/content/dam/ole/MedSuppDocs/EnrollmentDiscount')]")
-	@FindBy(xpath = "(//a[contains(text(),'Enrollment Discount')])[2]")
+	//@FindBy(xpath = "(//a[contains(text(),'Enrollment Discount')])[2]")
+	@FindBy(xpath = "//a[contains(@href,'//aarpsupplementalhealth-stg.uhc.com/content/dam/ole/MedSuppDocs/EnrollmentDiscount') or contains(@href,'//www.aarpsupplementalhealth.com/content/dam/ole/MedSuppDocs/EnrollmentDiscount')]")
 	private WebElement EnrollmentDiscount;
 
 	@FindBy(xpath = "//a[contains(text(),'Back to all plans')]")
@@ -4545,7 +4546,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		// System.out.println("Expected URL: "+ExpectedCurrentRailURL1);
 		System.out.println("Actual  URL: " + CurrentRailURL);
 
-		if (CurrentRailURL.contains("https://aarpsupplementalhealth-stg.uhc.com/") && CurrentRailURL.contains(".pdf")) {
+		if (CurrentRailURL.contains("https://aarpsupplementalhealth-stg.uhc.com/") || CurrentRailURL.contains("https://www.aarpsupplementalhealth.com/") && CurrentRailURL.contains(".pdf")) {
 			System.out.println("****************Rail Rail is displayed  ***************");
 
 			Assert.assertTrue(true);
@@ -4581,7 +4582,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		// System.out.println("Expected URL: "+ExpectedCurrentRailURL1);
 		System.out.println("Actual  URL: " + CurrentRailURL);
 
-		if (CurrentRailURL.contains("https://aarpsupplementalhealth-stg.uhc.com/") && CurrentRailURL.contains(".pdf")) {
+		if (CurrentRailURL.contains("https://aarpsupplementalhealth-stg.uhc.com/") || CurrentRailURL.contains("https://www.aarpsupplementalhealth.com/") && CurrentRailURL.contains(".pdf")) {
 			System.out.println("****************Rail Rail is displayed  ***************");
 
 			Assert.assertTrue(true);
@@ -4611,7 +4612,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		String CurrentRailURL = driver.getCurrentUrl();
 		System.out.println("Actual  URL: " + CurrentRailURL);
 
-		if (CurrentRailURL.contains("https://aarpsupplementalhealth-stg.uhc.com/") && CurrentRailURL.contains(".pdf")) {
+		if (CurrentRailURL.contains("https://aarpsupplementalhealth-stg.uhc.com/") || CurrentRailURL.contains("https://www.aarpsupplementalhealth.com/")  && CurrentRailURL.contains(".pdf")) {
 			System.out.println("****************Rail Rail is displayed  ***************");
 
 			Assert.assertTrue(true);
@@ -4641,7 +4642,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		String CurrentRailURL = driver.getCurrentUrl();
 		System.out.println("Actual  URL: " + CurrentRailURL);
 
-		if (CurrentRailURL.contains("https://aarpsupplementalhealth-stg.uhc.com/") && CurrentRailURL.contains(".pdf")) {
+		if (CurrentRailURL.contains("https://aarpsupplementalhealth-stg.uhc.com/") || CurrentRailURL.contains("https://www.aarpsupplementalhealth.com/") && CurrentRailURL.contains(".pdf")) {
 			System.out.println("****************Rail Rail is displayed  ***************");
 
 			Assert.assertTrue(true);
@@ -4671,7 +4672,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		String CurrentRailURL = driver.getCurrentUrl();
 		System.out.println("Actual  URL: " + CurrentRailURL);
 
-		if (CurrentRailURL.contains("https://aarpsupplementalhealth-stg.uhc.com/") && CurrentRailURL.contains(".pdf")) {
+		if (CurrentRailURL.contains("https://aarpsupplementalhealth-stg.uhc.com/") || CurrentRailURL.contains("https://www.aarpsupplementalhealth.com/")  && CurrentRailURL.contains(".pdf")) {
 			System.out.println("****************Rail Rail is displayed  ***************");
 
 			Assert.assertTrue(true);
@@ -4701,7 +4702,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		String CurrentRailURL = driver.getCurrentUrl();
 		System.out.println("Actual  URL: " + CurrentRailURL);
 
-		if (CurrentRailURL.contains("https://aarpsupplementalhealth-stg.uhc.com/") && CurrentRailURL.contains(".pdf")) {
+		if (CurrentRailURL.contains("https://aarpsupplementalhealth-stg.uhc.com/") || CurrentRailURL.contains("https://www.aarpsupplementalhealth.com/") && CurrentRailURL.contains(".pdf")) {
 			System.out.println("****************Rail Rail is displayed  ***************");
 
 			Assert.assertTrue(true);
