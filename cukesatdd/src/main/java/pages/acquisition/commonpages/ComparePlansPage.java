@@ -560,7 +560,8 @@ public class ComparePlansPage extends UhcDriver {
   		enrollForPlan = driver.findElement(By.xpath("//*[@id='enrollbtnplancompare0']//button//span[text()='Enroll']"));
   		if(enrollForPlan!=null){
   			//validateNew(enrollForPlan);
-  			enrollForPlan.click();
+//  			enrollForPlan.click();
+  			jsClickNew(enrollForPlan);
   		}
   		CommonUtility.waitForPageLoadNew(driver, NextBtn, 30);
   		System.out.println(driver.getCurrentUrl());
@@ -576,9 +577,10 @@ public class ComparePlansPage extends UhcDriver {
 		CommonUtility.checkPageIsReadyNew(driver);
 		WebElement PlanDetailsLink = driver.findElement(By.xpath("(//*[contains(text(),'View Plan Details')])[1]"));
 				CommonUtility.waitForPageLoadNew(driver, PlanDetailsLink, 30);
-				PlanDetailsLink.click();
+//				PlanDetailsLink.click();
+				jsClickNew(PlanDetailsLink);
 				System.out.println("View Plan Details Link is clicked");
-		
+		waitForPageLoadSafari();
 		CommonUtility.checkPageIsReadyNew(driver);
 		System.out.println(driver.getCurrentUrl());
 		if (driver.getCurrentUrl().contains("#/details")) 
@@ -726,7 +728,8 @@ public class ComparePlansPage extends UhcDriver {
 		WebElement removePlanName = driver.findElement(By.xpath("//th[@ng-repeat='plan in count']["+counter+"]//div[contains(@ng-if,'planName')]"));
 		String PlanName=removePlanName.getText();
 		System.out.println("3rd plan name is : " + PlanName );
-		removelink.click();
+//		removelink.click();
+		jsClickNew(removelink);
 		System.out.println("Clicked on Remove Link on plan Compare page");
 		
 		if(driver.findElement(By.xpath("//th[@ng-repeat='plan in count'][1]//a[contains(@class,'remove')]")).isDisplayed()){
@@ -987,7 +990,8 @@ public class ComparePlansPage extends UhcDriver {
 		WebDriverWait wait = new WebDriverWait(driver, 60);
 		
 		for(int i=0;viewMore.isEnabled();){
-			viewMore.click();
+//			viewMore.click();
+			jsClickNew(viewMore);
 			System.out.println("Clicked no. of times : " + i);
 			i++;	
 		}
@@ -1005,7 +1009,8 @@ public class ComparePlansPage extends UhcDriver {
 		WebElement viewLess = driver.findElement(By.xpath("//span[text()='Scroll Plans Left']/ancestor::button"));
 		WebDriverWait wait = new WebDriverWait(driver, 60);
 		for(int i=0;viewLess.isEnabled();){
-			viewLess.click();
+//			viewLess.click();
+			jsClickNew(viewLess);
 			System.out.println("Clicked no. of times : " + i);
 			i++;	
 		}
