@@ -16,7 +16,7 @@ jsonReport = "target/cucumber-RunMRATDDAcquisitionOrganicSearchTFNAARPUAT.json",
 detailedReport = true, detailedAggregatedReport = true, overviewReport = true, toPDF = true, 
 outputFolder = "target/RunMRATDDAcquisitionOrganicSearchTFNAARPUAT")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.acquisition" }, monochrome = true, features = { "src/main/resources/feature/acquisition/tfn/tfn_UAT_Updated/CampaignTFN-OrganicSearch_AARP-UAT.feature" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionOrganicSearchTFNAARPUAT.json" }, tags = {"@Scenario3_1_GoogleBingSearch_AARP_UAT, @Scenario_6_Precedence_1_AARP_UAT,@Scenario4_1_ExternalLink_AARP_UAT"})
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionOrganicSearchTFNAARPUAT.json" }, tags = {"@Scenario3_1_GoogleBingSearch_AARP_UAT, @Scenario_6_Precedence_1_AARP_UAT"})
 
 public class RunMRATDDAcquisitionOrganicSearchTFNAARPUAT {
 

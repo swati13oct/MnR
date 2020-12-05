@@ -102,7 +102,6 @@ Feature: 1.08. ACQ- Visitor profile
       | AARP | Alabama  | US1770330 | current  |   90210 | NO            | Jefferson County | MAPD     | AARP Medicare Advantage SecureHorizons Focus (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO) |
       | AARP | Virginia | US1770330 | current  |   22320 | NO            | Alexandria city  | MAPD     | AARP Medicare Advantage Walgreens (PPO),AARP Medicare Advantage Plan 1 (HMO)                           |
 
-    #| Alabama | US1770330 |   53503 | NO            | Jefferson County | SNP      | UnitedHealthcare Dual Complete LP1 (HMO D-SNP),UnitedHealthcare Medicare Advantage Assist (PPO C-SNP)  |
     @VisitorProfile_UHC @prodRegression_UHC
     Examples: 
       | site | state    | UID       | planyear | zipcode | isMultiCounty | county           | plantype | testPlans                                                                                              |
@@ -155,28 +154,26 @@ Feature: 1.08. ACQ- Visitor profile
     And user clicks on plan name
       | Test Plans | <testPlans> |
     Then the user validates the following Additional Benefits of Plan for the plan
-      | Eye Wear Benefit Type                                     | <eyeWearBenefitType>                              |
-      | Eye Wear Expected Text                                    | <eyeWearExpectedText>                             |
-      | Eye Exam Benefit Type                                     | <eyeExamBenefitType>                              |
-      | Eye Exam Expected Text                                    | <eyeExamExpectedText>                             |
-      | Foot Care Routine Benefit Type                            | <footCareRoutineBenefitType>                      |
-      | Foot Care Routine Expected Text                           | <footCareRoutineExpectedText>                     |
-      | Hearing Exam Benefit Type                                 | <hearingExamBenefitType>                          |
-      | Hearing Exam Expected Text                                | <hearingExamExpectedText>                         |
-      | Membership in Health Club / Fitness Classes Benefit Type  | <membershipinHealthClubFitnessClassesBenefitType> |
-      | Membership in Health Club / Fitness Classes Expected Text | <membershipinHealthClubFitnessExpectedText>       |
+      | Eye Wear Benefit Type           | <eyeWearBenefitType>          |
+      | Eye Wear Expected Text          | <eyeWearExpectedText>         |
+      | Eye Exam Benefit Type           | <eyeExamBenefitType>          |
+      | Eye Exam Expected Text          | <eyeExamExpectedText>         |
+      | Foot Care Routine Benefit Type  | <footCareRoutineBenefitType>  |
+      | Foot Care Routine Expected Text | <footCareRoutineExpectedText> |
+      | Hearing Exam Benefit Type       | <hearingExamBenefitType>      |
+      | Hearing Exam Expected Text      | <hearingExamExpectedText>     |
 
     @VisitorProfile_AARP @prodRegression_AARP
     Examples: 
-      | site | state    | UID       | zipcode | isMultiCounty | plantype | planyear | county           | testPlans                                                                                               | eyeWearBenefitType | eyeWearExpectedText                                           | eyeExamBenefitType | eyeExamExpectedText    | footCareRoutineBenefitType | footCareRoutineExpectedText | hearingExamBenefitType | hearingExamExpectedText | membershipinHealthClubFitnessClassesBenefitType | membershipinHealthClubFitnessExpectedText                                                                                                                     |
-      | AARP | Alabama  | US1770330 |   53503 | NO            | MAPD     | current  | Jefferson County | UnitedHealthcare Medicare Advantage Open (PPO),UnitedHealthcare Medicare Advantage Open Essential (PPO) | Eyewear            | Eyewear has a plan benefit limit up to $100 per every 2 years | Eye Exam           | $0 copay               | Foot Care - Routine        | $50 copay                   | Hearing Exam           | $0 copay                | Fitness Program through Renew Active            | Fitness Membership Only: Basic membership in a fitness program at a network location at no additional cost                                                    |
-      | AARP | Virginia | US1770330 |   22320 | NO            | MAPD     | current  | Alexandria city  | AARP Medicare Advantage Walgreens (PPO),AARP Medicare Advantage Plan 1 (HMO)                            | Eyewear            | Eyewear has a plan benefit limit up to $200 per every 2 years | Eye Exam           | $0 copay; 1 every year | Foot Care - Routine        | $35 copay                   | Hearing Exam           | $0 copay                | Fitness Program through Renew Active            | Fitness Membership and Fitness Wearable: Basic membership in a fitness program at a network location and get a Fitbit® activity tracker at no additional cost |
+      | site | state    | UID       | zipcode | isMultiCounty | plantype | planyear | county           | testPlans                                                                                               | eyeWearBenefitType | eyeWearExpectedText                                           | eyeExamBenefitType | eyeExamExpectedText    | footCareRoutineBenefitType | footCareRoutineExpectedText | hearingExamBenefitType | hearingExamExpectedText |
+      | AARP | Alabama  | US1770330 |   53503 | NO            | MAPD     | current  | Jefferson County | UnitedHealthcare Medicare Advantage Open (PPO),UnitedHealthcare Medicare Advantage Open Essential (PPO) | Eyewear            | Eyewear has a plan benefit limit up to $100 per every 2 years | Eye Exam           | $0 copay               | Foot Care - Routine        | $50 copay                   | Hearing Exam           | $0 copay                |
+      | AARP | Virginia | US1770330 |   22320 | NO            | MAPD     | current  | Alexandria city  | AARP Medicare Advantage Walgreens (PPO),AARP Medicare Advantage Plan 1 (HMO)                            | Eyewear            | Eyewear has a plan benefit limit up to $200 per every 2 years | Eye Exam           | $0 copay; 1 every year | Foot Care - Routine        | $35 copay                   | Hearing Exam           | $0 copay                |
 
     @VisitorProfile_UHC @prodRegression_UHC
     Examples: 
-      | site | state    | UID       | zipcode | isMultiCounty | plantype | planyear | county           | testPlans                                                                                               | eyeWearBenefitType | eyeWearExpectedText                                           | eyeExamBenefitType | eyeExamExpectedText    | footCareRoutineBenefitType | footCareRoutineExpectedText | hearingExamBenefitType | hearingExamExpectedText | membershipinHealthClubFitnessClassesBenefitType | membershipinHealthClubFitnessExpectedText                                                                                                                     |
-      | UHC  | Alabama  | US1770330 |   53503 | NO            | MAPD     | current  | Jefferson County | UnitedHealthcare Medicare Advantage Open (PPO),UnitedHealthcare Medicare Advantage Open Essential (PPO) | Eyewear            | Eyewear has a plan benefit limit up to $100 per every 2 years | Eye Exam           | $0 copay               | Foot Care - Routine        | $50 copay                   | Hearing Exam           | $0 copay                | Fitness Program through Renew Active            | Fitness Membership Only: Basic membership in a fitness program at a network location at no additional cost                                                    |
-      | UHC  | Virginia | US1770330 |   22320 | NO            | MAPD     | current  | Alexandria city  | AARP Medicare Advantage Walgreens (PPO),AARP Medicare Advantage Plan 1 (HMO)                            | Eyewear            | Eyewear has a plan benefit limit up to $200 per every 2 years | Eye Exam           | $0 copay; 1 every year | Foot Care - Routine        | $35 copay                   | Hearing Exam           | $0 copay                | Fitness Program through Renew Active            | Fitness Membership and Fitness Wearable: Basic membership in a fitness program at a network location and get a Fitbit® activity tracker at no additional cost |
+      | site | state    | UID       | zipcode | isMultiCounty | plantype | planyear | county           | testPlans                                                                                               | eyeWearBenefitType | eyeWearExpectedText                                           | eyeExamBenefitType | eyeExamExpectedText    | footCareRoutineBenefitType | footCareRoutineExpectedText | hearingExamBenefitType | hearingExamExpectedText |
+      | UHC  | Alabama  | US1770330 |   53503 | NO            | MAPD     | current  | Jefferson County | UnitedHealthcare Medicare Advantage Open (PPO),UnitedHealthcare Medicare Advantage Open Essential (PPO) | Eyewear            | Eyewear has a plan benefit limit up to $100 per every 2 years | Eye Exam           | $0 copay               | Foot Care - Routine        | $50 copay                   | Hearing Exam           | $0 copay                |
+      | UHC  | Virginia | US1770330 |   22320 | NO            | MAPD     | current  | Alexandria city  | AARP Medicare Advantage Walgreens (PPO),AARP Medicare Advantage Plan 1 (HMO)                            | Eyewear            | Eyewear has a plan benefit limit up to $200 per every 2 years | Eye Exam           | $0 copay; 1 every year | Foot Care - Routine        | $35 copay                   | Hearing Exam           | $0 copay                |
 
   @vpOLE
   Scenario Outline: <UID> - Verify user is save plans from VPP to the unauthenticated visitor profile and complete OLE
@@ -202,10 +199,12 @@ Feature: 1.08. ACQ- Visitor profile
     And user validates the added plans on visitor profile page
       | Test Plans | <testPlans> |
     And the user navigates to clicks on Enroll Now from visitor profile to start OLE flow
-      | Plan Name | <planName> |
-      | Plan Type | <plantype> |
+      | Plan Name       | <planName>       |
+      | Plan Type       | <plantype>       |
+      | Zip Code        | <zipcode>        |
+      | County Name     | <county>         |
+      | Monthly Premium | <monthlyPremium> |
     Then the user validates the Plan details on OLE
-    #Then the user validates TFN in Welcome OLE Right Rail
     Then the user validates Learn more modal for Welcome OLE
     Then the user validates Leave OLE modal for Welcome OLE
     Then the user validates cancellation modal for Welcome OLE
@@ -329,6 +328,46 @@ Feature: 1.08. ACQ- Visitor profile
       | site | state       | zipcode | isMultiCounty | plantype | planyear | DOB        | county           | MS_testPlans  |
       | UHC  | Alabama     |   90210 | NO            | MS       | current  | 11/11/1949 | Jefferson County | Plan G,Plan A |
       | UHC  | Puerto Rico |   00641 | NO            | MS       | current  | 11/11/1949 | Utuado Municipio | Plan G,Plan A |
+
+  @vpMSSavePlanAuthenticated
+  Scenario Outline: Verify user saves Medsupp plans from VPP to the unauthenticated visitor profile - zipcode - <zipcode>
+    Given the user is on medicare acquisition site landing page
+      | Site | <site> |
+    And the user selects the state drop down value in home page
+      | State | <state> |
+    When the user performs plan search using following information
+      | Zip Code        | <zipcode>       |
+      | County Name     | <county>        |
+      | Is Multi County | <isMultiCounty> |
+    When the user views the plans of the below plan type
+      | Plan Type | <plantype> |
+    Then user fills out medsup form and proceeds to next pages
+      | Zip Code | <zipcode> |
+      | DOB      | <DOB>     |
+    Then user saves two ms plans as favorite
+      | MS Test Plans | <MS_testPlans> |
+    Then user gets a create profile prompt
+    Then user click on continue as guest button
+    Then the user signs in with optum Id credentials
+      | User Name | <userName> |
+      | Password  | <password> |
+    And user validates the added Ms plans on visitor profile page
+      | MS Test Plans | <MS_testPlans> |
+    And user delets the added Ms plans on visitor profile page
+      | MS Test Plans | <MS_testPlans> |
+
+    #No pdf link is avialable now
+    #And user validate pdf link
+    #| MS Test Plans | <MS_testPlans> |
+    @VisitorProfile_AARP
+    Examples: 
+      | site | state   | zipcode | isMultiCounty | plantype | planyear | DOB        | county           | MS_testPlans  | userName   | password   |
+      | AARP | Alabama |   90210 | NO            | MS       | current  | 11/11/1949 | Jefferson County | Plan G,Plan A | mnrmedsupp | Password@1 |
+
+    @VisitorProfile_UHC
+    Examples: 
+      | site | state   | zipcode | isMultiCounty | plantype | planyear | DOB        | county           | MS_testPlans  | userName   | password   |
+      | UHC  | Alabama |   90210 | NO            | MS       | current  | 11/11/1949 | Jefferson County | Plan G,Plan A | mnrmedsupp | Password@1 |
 
   @providerFlow
   Scenario Outline: Verify Provider Search functional flow for unauthenticated Visitor Profile page
@@ -499,12 +538,12 @@ Feature: 1.08. ACQ- Visitor profile
     @VisitorProfile_AARP
     Examples: 
       | site | state    | zipcode | isMultutiCounty | county          | userName | password   | plantype | planname                             | status      | monthlyPremium |
-      | AARP | New York |   10001 | NO              | New York County | mnrqavd4 | Password@2 | MAPD     | AARP Medicare Advantage Plan 2 (HMO) | In Progress | $0             |
+      | AARP | New York |   10001 | NO              | New York County | mnrqavd4 | Password@2 | MAPD     | AARP Medicare Advantage Plan 2 (HMO) | In Progress | $34.00         |
 
     @VisitorProfile_UHC
     Examples: 
       | site | state    | zipcode | isMultutiCounty | county          | userName | password   | plantype | planname                             | status      | monthlyPremium |
-      | UHC  | New York |   10001 | NO              | New York County | mnrqavd4 | Password@2 | MAPD     | AARP Medicare Advantage Plan 2 (HMO) | In Progress | $0             |
+      | UHC  | New York |   10001 | NO              | New York County | mnrqavd4 | Password@2 | MAPD     | AARP Medicare Advantage Plan 2 (HMO) | In Progress | $34.00         |
 
   @vpPartialOLEAndRemove
   Scenario Outline: <UID> - Verify Partial enrollment and cancel or remove the enrollment from profile page
