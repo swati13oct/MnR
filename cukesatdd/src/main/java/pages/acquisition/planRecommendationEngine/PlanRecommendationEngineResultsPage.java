@@ -290,6 +290,12 @@ public class PlanRecommendationEngineResultsPage extends UhcDriver {
 	@FindBy(css = "#pop-btn-1 span")
 	private WebElement keepshoppingPlansBtn;
 	
+	@FindBy(css = ".flyout-heart-icon")
+	private WebElement heartIcon;
+	
+	@FindBy(css = "#guest-saved-items-button a ")
+	private WebElement viewSavedItemsBtn;
+	
 // Provider and Drug Details in Plan Type
 	
 	@FindBy(css = "#plan-list-1 div.module-plan-overview")
@@ -1511,6 +1517,8 @@ public void validateSavePlan(String year) {
 	System.out.println("Validate PRE Save Plans functionality : ");
 	int saveplans = 2;
 	saveplans(MAPlanNames,saveplans, year, MAPlansSaveIcon);
+	validate(keepshoppingPlansBtn);
+	keepshoppingPlansBtn.click();
 	verifySavePlans(year, vppPlans);
 }
 
@@ -1522,6 +1530,11 @@ public void validateCombineSavePlan(String year) {
 	keepshoppingPlansBtn.click();
 	saveplans(MAPlanNames,saveplans, year, MAPlansSaveIcon);
 	saveplans(SNPPlansName,1, year, SNPPlansSaveIcon);
+	scrollToView(heartIcon);
+	validate(heartIcon);
+	heartIcon.click();
+	validate(viewSavedItemsBtn);
+	viewSavedItemsBtn.click();
 	verifySavePlans(year, vppPlans);
 	verifyPlansVPandPDP(planNamesVisitorPrf);
 }
@@ -1577,11 +1590,7 @@ public String savingplans(WebElement plan, WebElement saveplan) {
 	String exceptedplanName = plan.getText().trim();
 	System.out.println("Plan Name in VPP Summary Page: " + exceptedplanName);
 	String save = saveplan.getText().trim();
-	if (save.equalsIgnoreCase("Save")) {
-		saveplan.click();
-	}else {
-		saveplan.click();
-		threadsleep(5000);
+	if (save.equalsIgnoreCase("Save") || save.equalsIgnoreCase("Save Plan")) { 
 		saveplan.click();
 	}
 	threadsleep(5000);
