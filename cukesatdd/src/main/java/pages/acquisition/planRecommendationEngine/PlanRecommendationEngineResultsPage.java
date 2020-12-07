@@ -281,8 +281,14 @@ public class PlanRecommendationEngineResultsPage extends UhcDriver {
 	@FindBy(css = "#plan-list-1 .swiper-container .module-plan-overview a[id*='savePlan']")
 	private List<WebElement> MAPlansSaveIcon;
 	
-	@FindBy(css = "#pop-btn-2")
-	private WebElement ViewSavedPlansBtn;
+	@FindBy(css = "#plan-list-3 .swiper-container .module-plan-overview a[id*='savePlan']")
+	private List<WebElement> PDPPlansSaveIcon;
+	
+	@FindBy(css = "#plan-list-4 .swiper-container .module-plan-overview a[id*='savePlan']")
+	private List<WebElement> SNPPlansSaveIcon;
+	
+	@FindBy(css = "#pop-btn-1 span")
+	private WebElement keepshoppingPlansBtn;
 	
 // Provider and Drug Details in Plan Type
 	
@@ -351,6 +357,9 @@ public class PlanRecommendationEngineResultsPage extends UhcDriver {
 	
 	@FindBy(id = "backToPlanSummaryTop")
 	private WebElement backtoPlanSummary;
+	
+	@FindBy(css = ".uhc-container a[class*='back-to-plans']")
+	private List<WebElement> backtoProfile;
 	
 	@FindBy(css = ".segment h2")
 	private WebElement planNameEnrollPage;
@@ -727,7 +736,7 @@ public class PlanRecommendationEngineResultsPage extends UhcDriver {
 		
 		public void verifyConfirmationmodalResults(int count,ArrayList<String> drug,ArrayList<String> drugListVPP) {
     		if(drug.size()==drugListVPP.size() && count==drug.size()) {
-    			String druglist =drug.toString();
+    			String druglist =drug.toString().toUpperCase();
     			String vppdruglist =drugListVPP.toString();
     			if(druglist.contains(vppdruglist)) {
     				System.out.println("Drug and Modal Result's Content matched");
@@ -1502,24 +1511,58 @@ public VPPPlanSummaryPage handlePlanYearSelectionPRE(String planYear) {
 public void validateSavePlan(String year) {
 	System.out.println("Validate PRE Save Plans functionality : ");
 	int saveplans = 2;
-	verifySavePlans(MAPlanNames, saveplans, year, MAPlansSaveIcon);
+	saveplans(MAPlanNames,saveplans, year, MAPlansSaveIcon);
+	validate(keepshoppingPlansBtn);
+	keepshoppingPlansBtn.click();
+	saveplans(PDPPlansName,saveplans, year, PDPPlansSaveIcon);
+	saveplans(SNPPlansName,1, year, SNPPlansSaveIcon);
+	verifySavePlans(year, vppPlans);
+	verifyPlansVPandPDP(planNamesVisitorPrf);
+}
+ArrayList<String> vppPlans = new ArrayList<String>();
+public ArrayList<String> saveplans(List<WebElement> plansName, int saveplans,	String year, List<WebElement> savePlan) {
+	System.out.println("Plans Count :" +plansName.size());
+	if(plansName.get(0).getText().equalsIgnoreCase("MedicareRx")) {
+		validate(PDPViewPlansLink);
+		PDPViewPlansLink.click();
+	}else if(plansName.get(0).getText().equalsIgnoreCase("UnitedHealthcare")) {
+		validate(SNPViewPlansLink);
+		SNPViewPlansLink.click();
+	}
+	for (int plan = 0; plan < saveplans; plan++) {
+		vppPlans.add(savingplans(plansName.get(plan), savePlan.get(plan)));
+	}
+	Collections.sort(vppPlans);
+	System.out.println(vppPlans);
+	threadsleep(3000);
+	return vppPlans;
 }
 
-public void verifySavePlans(List<WebElement> plansName, int saveplans,	String year, List<WebElement> savePlan) {
-	List<String> vppPlans = new ArrayList<String>();
-	System.out.println("Plans Count :" +plansName.size());
-		for (int plan = 0; plan < saveplans; plan++) {
-			vppPlans.add(savingplans(plansName.get(plan), savePlan.get(plan)));
-		}
-		Collections.sort(vppPlans);
-		System.out.println(vppPlans);
-		threadsleep(3000);
-		validate(ViewSavedPlansBtn);
-		ViewSavedPlansBtn.click();
-		threadsleep(3000);
-		changePlanyearVisitorProfile(year);
-		visitorprofile(planNamesVisitorPrf, vppPlans);
+public void verifySavePlans(String year, ArrayList<String> vppPlans) {
+	threadsleep(3000);
+	changePlanyearVisitorProfile(year);
+	visitorprofile(planNamesVisitorPrf, vppPlans);
 	System.out.println("Plan Name compared Successful Clicks on Save Plan");
+}
+
+public void verifyPlansVPandPDP(List<WebElement> plansName) {
+	System.out.println("Plan Name in VP Page: " + plansName);
+	String actualplanName = "";
+	String exceptedplanName = "";
+	pageloadcomplete();
+	System.out.println(plansName.size());
+	for (int i = 0; i < plansName.size(); i++) {
+		exceptedplanName = plansName.get(i).getText().trim();
+		System.out.println("Plan Name in Visitor Profile Page: " + actualplanName);
+		plansName.get(i).click();
+		threadsleep(30000);
+		actualplanName = planNameVPPDetailsPage.getText().split("\n")[0];
+		System.out.println("Plan Name in VPP Details Page: "+actualplanName);
+		Assert.assertTrue(exceptedplanName.equalsIgnoreCase(actualplanName), "--- Plan name are not matches---");
+		backtoProfile.get(0).click();
+		pageloadcomplete();
+	}
+	System.out.println("Plan Names successfully validated Visitor Profile VS VPP Details Page ");
 }
 
 public String savingplans(WebElement plan, WebElement saveplan) {
@@ -1645,6 +1688,7 @@ public void PREStage(String primaryWindow, String aarp) {
 			}
 			else
 				driver.navigate().to("https://www.stage-uhcmedicaresolutions.uhc.com/plan-recommendation-engine.html");
+				driver.navigate().to("https://steelcase.stage-uhcmedicaresolutions.uhc.com/plan-recommendation-engine.html");
 			}
 	}
 	threadsleep(5000);

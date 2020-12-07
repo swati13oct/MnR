@@ -888,7 +888,7 @@ public class PlanRecommendationEngineStepDefinition {
 	public void user_verify_saveplan(DataTable givenAttributes) {
 		readfeaturedata(givenAttributes);
 		PlanRecommendationEngineResultsPage planSelectorResultspage =  new PlanRecommendationEngineResultsPage(wd);
-		planSelectorResultspage.changePlanyear("current");
+		planSelectorResultspage.changePlanyear(inputValues.get("Plan Year"));
 		planSelectorResultspage.validateSavePlan(inputValues.get("Plan Year"));
 	}
 	
