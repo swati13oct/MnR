@@ -132,6 +132,7 @@ public class CoverageOptionsMobilePage extends UhcDriver {
 	public void previouspageValidation() {
 		System.out.println("Previous page Validation");
 		if (radioselect.isDisplayed()) {
+			mobileUtils.mobileLocateElement(previousBtn);
 			mobileUtils.mobileLocateElementClick(previousBtn);
 			System.out.println("Validationg " + page + " page Previous button functionality");
 			mobileUtils.previousPageValidation(page.toUpperCase());

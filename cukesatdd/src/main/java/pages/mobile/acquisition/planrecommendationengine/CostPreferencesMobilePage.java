@@ -95,6 +95,7 @@ public class CostPreferencesMobilePage extends UhcDriver {
 		validate(higherPremium, 30);
 		//Assert.assertTrue(higherPremium.getText().contains("higher"));
 		mobileUtils.mobileLocateElementClick(higherPremium);
+		mobileUtils.mobileLocateElement(previousBtn);
 		mobileUtils.mobileLocateElementClick(previousBtn);
 		System.out.println("Validating " + page + " page Previous button functionality");
 		mobileUtils.previousPageValidation(page.toUpperCase());

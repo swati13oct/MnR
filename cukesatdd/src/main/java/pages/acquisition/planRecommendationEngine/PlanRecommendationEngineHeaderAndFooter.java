@@ -683,7 +683,7 @@ public class PlanRecommendationEngineHeaderAndFooter extends UhcDriver {
 		headerNavigationBarEnterSearchTab.click();
 		headerNavigationBarEnterSearchTab.sendKeys(SearchKey);
 		threadsleep(2000);
-		jsClickNew(headerNavigationBarSearchIconTab);
+		headerNavigationBarSearchIconTab.click();
 		String expectedpageurl = driver.getCurrentUrl();
 		String ExpectedPage = "site-search.html?";
 		Boolean url = ((actualpageurl.equals(expectedpageurl)));
