@@ -1878,14 +1878,14 @@ public class VppCommonStepDefinition {
 			//----- PDP plan type ---------------------------
 			planType="PDP";
 			plansummaryPage.viewPlanSummary(planType);
-			plansummaryPage.handlePlanYearSelectionPopup();
+			plansummaryPage.handlePlanYearSelectionPopup(planYear);
 			plansummaryPage.validateAbilityToSavePlans(pdp_savePlanNames, planType);
 		//	plansummaryPage.validatePlansAreSaved(pdp_savePlanNames, planType); //commented out because the previous line already validates after saving plan
 
 			//----- SNP plan type ---------------------------
 			planType="SNP";
 			plansummaryPage.viewPlanSummary(planType);
-			plansummaryPage.handlePlanYearSelectionPopup();
+			plansummaryPage.handlePlanYearSelectionPopup(planYear);
 			plansummaryPage.validateAbilityToSavePlans(snp_savePlanNames, planType);
 		//	plansummaryPage.validatePlansAreSaved(snp_savePlanNames, planType); //commented out because the previous line already validates after saving plan
 		}
@@ -2257,18 +2257,20 @@ public class VppCommonStepDefinition {
 			String pdp_savePlanNames = memberAttributesMap.get("PDP Test Plans");
 			String snp_savePlanNames = memberAttributesMap.get("SNP Test Plans");
 
+			String planYear = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_YEAR);
+			
 			//----- MA plan type ---------------------------
 			String planType="MA";
 			System.out.println("Proceed to validate "+planType+" saved plan(s) are still saved");
 			plansummaryPage.viewPlanSummary(planType);
-			plansummaryPage.handlePlanYearSelectionPopup();
+			plansummaryPage.handlePlanYearSelectionPopup(planYear);
 			plansummaryPage.validatePlansAreSaved(ma_savePlanNames, planType);
 
 			//----- PDP plan type --------------------------
 			planType="PDP";
 			System.out.println("Proceed to validate "+planType+" saved plan(s) are still saved");
 			plansummaryPage.viewPlanSummary(planType);
-			plansummaryPage.handlePlanYearSelectionPopup();
+			plansummaryPage.handlePlanYearSelectionPopup(planYear);
 			plansummaryPage.validatePlansAreSaved(pdp_savePlanNames, planType);
 
 			//----- SNP plan type --------------------------
