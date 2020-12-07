@@ -213,7 +213,6 @@ Feature: 1.03-ACQ-Next Action Modal on vpp flow AARP
     Then user should be able to see Medicare Advantage plan by default
     When user clicks on Return to plan summary page link in DCE
     Then user verify the NBA modal to add providers on the VPP summary page in AARP site
-    And Click on Find my area button in AARP
     When user clicks on Find My Doctor button in AARP Site
     When user selects a provider and retuns to VPP page in ulayer
     And the user selects plan year for the AARP site
