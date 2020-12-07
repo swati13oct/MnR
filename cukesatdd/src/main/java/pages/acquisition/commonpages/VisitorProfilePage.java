@@ -180,6 +180,9 @@ public class VisitorProfilePage extends UhcDriver {
 
 	@FindBy(xpath = "//*[contains(@id,'ghn_lnk')]/span[text()='Home']")
 	private WebElement homeTab;
+	
+	@FindBy(xpath = "//button[contains(@class,'remove-button') and contains(@aria-label,'Delete')]")
+	private List<WebElement> deletePlan;
 		
 	public VisitorProfilePage(WebDriver driver) {
 		super(driver);
@@ -713,13 +716,14 @@ public class VisitorProfilePage extends UhcDriver {
 		try {
 			if (expandDrugsPlanCard.isDisplayed()) {
 				expandDrugsPlanCard.click();
+			
 				while (removeDrugsPlanCard.size() != 0) {
 					/*
 					 * for(int i=0;i<editDrugs.size();i++) { totalDrugs.get(0).click();
 					 * validate(editDrugs.get(i)); editDrugs.get(i).click(); }
 					 */
 					removeDrugsPlanCard.get(0).click();
-
+					System.out.println("Removed drugs");
 					validate(addrugs);
 				}
 			}
@@ -732,18 +736,19 @@ public class VisitorProfilePage extends UhcDriver {
 		try {
 			if (expandProvidersPlanCard.isDisplayed()) {
 				expandProvidersPlanCard.click();
+			
 				while (removeProvidersPlanCard.size() != 0) {
 					/*
 					 * for(int i=0;i<editDrugs.size();i++) { totalDrugs.get(0).click();
 					 * validate(editDrugs.get(i)); editDrugs.get(i).click(); }
 					 */
 					removeProvidersPlanCard.get(0).click();
-
+					System.out.println("Removed provider");
 				//	validate(addrugs);
 				}
 			}
 		} catch (Exception e) {
-			System.out.println("No existing drugs found");
+			System.out.println("No existing providers found");
 		}
 	}
 	
@@ -759,5 +764,16 @@ public class VisitorProfilePage extends UhcDriver {
 			e.printStackTrace();
 		}
 		return null;
+	}
+	
+	public void deletePlans() {
+		if (deletePlan.size()!=0) {
+			for(int i=0;i<deletePlan.size();i++) {
+				validate(deletePlan.get(i));
+				//deletePlan.get(i).click();
+				jsClickNew(deletePlan.get(i));
+				System.out.println("Deleted existing saved plan from visitor profile");
+			}
+		}
 	}
 }

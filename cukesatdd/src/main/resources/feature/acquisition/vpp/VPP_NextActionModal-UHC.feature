@@ -117,7 +117,7 @@ Feature: 1.03-ACQ-Next Action Modal on vpp flow UHC
       |site| zipCode | isMultutiCounty | county         | plantype |drug1    |
       |UHC|   19019 | No              | Iowa County    | MAPD      |Lipitor |
       
-      @vppNextActionModalRegressionPDPAddDrug
+      @vppNextActionModalRegressionPDPAddDrug1
      Scenario Outline: UserStory: Plan type: <plantype> -Test to verify the Next action modal for Enroll Plan on VPP summary page for PDP Plan when drug added from DCE
     Given the user is on medicare acquisition site landing page
    		|Site| <site>|

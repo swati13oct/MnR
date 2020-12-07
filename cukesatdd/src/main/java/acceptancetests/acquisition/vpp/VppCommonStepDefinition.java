@@ -2752,7 +2752,84 @@ public class VppCommonStepDefinition {
 			VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 			allPlanNames = plansummaryPage.getAllPlanNames();
-			plansummaryPage.clickContinueEnrollmentBtn();
+			plansummaryPage.clickSelectPlanButton();
 		}
 		
+		@Then("^user should be able to see the Select Plan for Enroll Modal with all plans$")
+		public void user_should_be_able_to_see_the_Select_Plan_for_Enroll_Modal_with_all_plans()
+				throws Throwable {
+			VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+			plansummaryPage.verifySelectPlanForEnrollModalForallPlans(allPlanNames);
+		}
+		
+		@Then("^user saves plan as favorite on VPP$")
+		public void user_saves_plan_as_favorite_on_VPP(DataTable givenAttributes) {
+			VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+			List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+			String PlanName = memberAttributesRow.get(0).getCells().get(1);
+			System.out.println("Plan name" + PlanName);
+			plansummaryPage.savePlan(PlanName);
+		}
+		
+		@Then("^user should be able to see the Select Plan for Enroll Modal with saved plans$")
+		public void user_should_be_able_to_see_Select_Plan_for_Enroll_Modal_with_Saved_plans(
+				DataTable givenAttributes) {
+			VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+			List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+			String PlanName = memberAttributesRow.get(0).getCells().get(1);
+			System.out.println("Plan name" + PlanName);
+			plansummaryPage.verifySelectPlanForEnrollModalForSavedPlans(PlanName);
+		}
+		
+		@Then("^user removes existing saved plans in visitor profile$")
+		public void user_removed_existing_saved_plans() {
+			VisitorProfilePage visitorProfile = (VisitorProfilePage) getLoginScenario()
+					.getBean(PageConstants.VISITOR_PROFILE_PAGE);
+			visitorProfile.deletePlans();
+		}
+		
+		@Then("^user should be able to see the continue enrollment modal$")
+		public void user_should_be_able_to_see_the_continue_enrollment_modal() {
+			VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+			plansummaryPage.verifyNextBestActionModalForContinueEnrollment();
+		}
+		
+		@When("^user clicks on continue enrollment button$")
+		public void user_clicks_on_continue_enrollment_button() {
+			VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+			plansummaryPage.clickNextBestActionModalContinueEnrollmentBtn();
+		}
+
+		@Then("^user should navigated to enrollment page$")
+		public void user_should_navigated_to_enrollment_page() {
+			VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+			plansummaryPage.verifyNavigationToOLEPage();
+		}
+		
+		@Then("^user should be able to see the continue enrollment modal for multiple plan$")
+		public void user_should_be_able_to_see_the_continue_enrollment_modal_for_multiple_plan() throws Throwable {
+			VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+			plansummaryPage.verifyNextBestActionModalForContinueEnrollmentMultiplePlans();
+		}
+		
+		@Then("^continue enrollment button should be displayed for each plan$")
+		public void continue_enrollment_button_should_be_displayed_for_each_plan() throws Throwable {
+			VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+			plansummaryPage.validateContinueEnrollmentModal();
+		}
+
+		@When("^user clicks on continue enrollment button on the modal$")
+		public void user_clicks_on_continue_enrollment_button_on_the_modal() throws Throwable {
+			VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+			plansummaryPage.clickContinueEnrollmentBtnOnModal();
+		}
 }

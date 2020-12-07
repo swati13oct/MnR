@@ -1,4 +1,4 @@
-@AARPAuthenticatedNBAValidations
+@AuthenticatedNBAValidations
 Feature: 1.08. ACQ- Visitor Profile Authenticated NBA AARP
 
   @getStartedNBA
@@ -11,7 +11,7 @@ Feature: 1.08. ACQ- Visitor Profile Authenticated NBA AARP
       | Password  | <password> |
     And user clears the existing drugs in Visitor profile
     And user clears the provider in visitor profile page
-    #And user removed existing saved plans
+    And user removes existing saved plans in visitor profile
     Then user clicks on home menu from Visitor profile page
     When the user performs plan search using following information
       | Zip Code        | <zipcode>         |
@@ -33,8 +33,8 @@ Feature: 1.08. ACQ- Visitor Profile Authenticated NBA AARP
       | site | userName      | password    | isMultutiCounty | zipcode | county          | plantype |
       | UHC  | chargersqa@23 | Password@23 | NO              |   10001 | New York County | MAPD     |
 
-  @drugAlreadyAdded1
-  Scenario Outline: Verify NBA for Find a provider for authenticated Visitor Profile VPP summary page when drug is already added
+  @NBAAuthenticated1
+  Scenario Outline: Verify NBA for authenticated Visitor Profile VPP summary page
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     When the user navigate to Visitor profile page
@@ -43,6 +43,7 @@ Feature: 1.08. ACQ- Visitor Profile Authenticated NBA AARP
       | Password  | <password> |
     And user clears the existing drugs in Visitor profile
     And user clears the provider in visitor profile page
+    And user removes existing saved plans in visitor profile
     Then user clicks on home menu from Visitor profile page
     When the user performs plan search using following information
       | Zip Code        | <zipcode>         |
@@ -63,14 +64,14 @@ Feature: 1.08. ACQ- Visitor Profile Authenticated NBA AARP
     When user selects a provider and retuns to VPP page
     Then user should be able to see the NBA modal to Enroll Plan on the VPP summary page
     When user clicks on Select a plan button on NBA
-    Then user should be able to see the Select Plan for Enroll Modal with all plans in AARP site
-    When user saves plan as favorite on AARP site
+    Then user should be able to see the Select Plan for Enroll Modal with all plans
+    When user saves plan as favorite on VPP
       | Plan Type | <testPlans> |
     When user clicks on Select a plan button on NBA
-    Then user should be able to see the Select Plan for Enroll Modal with saved plans in AARP site
+    Then user should be able to see the Select Plan for Enroll Modal with saved plans
       | Test Plans | <testPlans> |
-    When user clicks on Saved items
-    Then user should be navigated to visitor profile
+    When user clicks on Saved items on NBA
+    Then user should be navigated to visitor profile page
 
     @drugAlreadyAdded1_MAPD_AARP
     Examples: 
@@ -83,32 +84,67 @@ Feature: 1.08. ACQ- Visitor Profile Authenticated NBA AARP
       | UHC  | chargersqa@23 | Password@23 | NO              |   10001 | New York County | MAPD     | Lipitor  | TAB 10MG |       30 | Every 1 month |   90210 | 15 miles |       30 | Every 1 month | yes     | AARP Medicare Advantage Plan 1 (HMO) |
 
   @continueEnrollmentNBA
-  Scenario Outline: Verify NBA for Continue Enrollment for authenticated Visitor Profile VPP summary page
+  Scenario Outline: Verify NBA for Continue Enrollment for authenticated Visitor Profile VPP summary page for single plan
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     When the user navigate to Visitor profile page
     And the user login with optum Id credentials
       | User Name | <userName> |
       | Password  | <password> |
-    #And user clears the existing drugs
-    #And user clears the provider
-    Then user clicks on home on VP authenticated AARP site
-    When the user performs plan search using following information in the AARP site
+    And user clears the existing drugs in Visitor profile
+    And user clears the provider in visitor profile page
+    And user removes existing saved plans in visitor profile
+    Then user clicks on home menu from Visitor profile page
+    When the user performs plan search using following information
       | Zip Code        | <zipcode>         |
       | County Name     | <county>          |
       | Is Multi County | <isMultutiCounty> |
-    And the user views the plans of the below plan type in AARP site and select Current year
+    And the user views the plans of the below plan type
       | Plan Type | <plantype> |
     Then user should be able to see the continue enrollment modal
     When user clicks on continue enrollment button
     Then user should navigated to enrollment page
 
+    @continueEnrollmentNBA_MAPD_AARP
+    Examples: 
+      | site | userName         | password    | isMultutiCounty | zipcode | county          | plantype |
+      | AARP | jarvisstage23111 | Password@15 | NO              |   55344 | Hennepin County | MAPD     |
+
+    @continueEnrollmentNBA__MAPD_UHC
+    Examples: 
+      | site | userName         | password    | isMultutiCounty | zipcode | county          | plantype |
+      | UHC  | jarvisstage23111 | Password@15 | NO              |   55344 | Hennepin County | MAPD     |
+
+      
+      @continueEnrollmentNBAMultiplePlan
+  Scenario Outline: Verify NBA for Continue Enrollment for authenticated Visitor Profile VPP summary page for multiple plan
+    Given the user is on medicare acquisition site landing page
+      | Site | <site> |
+    When the user navigate to Visitor profile page
+    And the user login with optum Id credentials
+      | User Name | <userName> |
+      | Password  | <password> |
+    And user clears the existing drugs in Visitor profile
+    And user clears the provider in visitor profile page
+    And user removes existing saved plans in visitor profile
+    Then user clicks on home menu from Visitor profile page
+    When the user performs plan search using following information
+      | Zip Code        | <zipcode>         |
+      | County Name     | <county>          |
+      | Is Multi County | <isMultutiCounty> |
+    And the user views the plans of the below plan type
+      | Plan Type | <plantype> |
+    Then user should be able to see the continue enrollment modal for multiple plan
+    When user clicks on Select a plan button on NBA
+    Then continue enrollment button should be displayed for each plan
+    When user clicks on continue enrollment button on the modal
+		Then user should navigated to enrollment page
     @continueEnrollmentNBA_PDP_AARP
     Examples: 
-      | site | userName         | password    | isMultutiCounty | zipcode | county          | plantype | drugName | dosage   | quantity | frequency     | zipcode | radius   | quantity | frequency     | branded | testPlans                            |
-      | AARP | jarvisstage23111 | Password@15 | NO              |   55344 | Hennepin County | PDP      | Lipitor  | TAB 10MG |       30 | Every 1 month |   90210 | 15 miles |       30 | Every 1 month | yes     | AARP Medicare Advantage Plan 1 (HMO) |
+      | site | userName         | password    | isMultutiCounty | zipcode | county          | plantype |
+      | AARP | jarvisstage23111 | Password@15 | NO              |   55344 | Hennepin County | PDP     |
 
     @continueEnrollmentNBA__PDP_UHC
     Examples: 
-      | site | userName         | password    | isMultutiCounty | zipcode | county          | plantype | drugName | dosage   | quantity | frequency     | zipcode | radius   | quantity | frequency     | branded | testPlans                            |
-      | UHC  | jarvisstage23111 | Password@15 | NO              |   55344 | Hennepin County | PDP      | Lipitor  | TAB 10MG |       30 | Every 1 month |   90210 | 15 miles |       30 | Every 1 month | yes     | AARP Medicare Advantage Plan 1 (HMO) |
+      | site | userName         | password    | isMultutiCounty | zipcode | county          | plantype |
+      | UHC  | jarvisstage23111 | Password@15 | NO              |   55344 | Hennepin County | PDP     |
