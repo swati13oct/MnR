@@ -181,54 +181,6 @@ Feature: Plan Recommendation Engine flow - Verify PRE flows functionalities with
       |   10003 | NO            | New York         |
       |   77485 | YES           | Fort Bend County |
 
-  @PRE @planrecommendation @startOverfunction @F427582 @PRERegression4
-  Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds> , <travel> , <doctors> , <DoctorsName> , <isMultiDoctor> , <Drug Selection> , <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch> , <pharmacyoption> , <Dental-Hearing-Vision-Fitness> , <costPreferenceOption> - - To validate Zipcode session from VPP to PRE Using StartNow
-    Given the user is on UHC medicare acquisition site landing page
-    When user navigate to Plan Recommendation Engine and Checking Breadcrumbs
-    And clicks on get started button and runs questionnaire
-      | Zip Code        | <Zipcode>       |
-      | Is Multi County | <isMultiCounty> |
-      | CountyDropDown  | <county>        |
-    And user selects plan type in coverage options page
-      | Plan Type | <isCoverageOpt> |
-    And user selects SNP options in Special Needs Page
-      | SNP Options | <specialNeeds> |
-    And user selects Travel options in Care Away From Home Page
-      | Travel Options | <travel> |
-    Then user adds Providers in Doctors page
-      | Doctors Search Text | <DoctorsName>   |
-      | Multi Doctor        | <isMultiDoctor> |
-    Then user selects add drug option in Drug page
-      | Drug Selection | <Drug Selection>                                                       |
-      | Drug Details   | <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch> |
-#    And user selects pharmacy option in pharmacy page
-#      | Pharmacy Type | <pharmacyoption> |
-    And user selects additional services option in additional services page
-      | Additional Option | <Dental-Hearing-Vision-Fitness> |
-    Then user selects cost preferences option in cost preferences page
-      | Preference Option | <costPreferenceOption> |
-    Then user validate elements in loading results page
-    Then user navigate to PRE and validate zipcode using Start Over
-      | Zip Code        | <Zipcode>       |
-      | Is Multi County | <isMultiCounty> |
-      | County Name     | <county>        |
-    And user selects plan type in coverage options page
-      | Plan Type | <isCoverageOpt> |
-    And user selects SNP options in Special Needs Page
-      | SNP Options | <specialNeeds> |
-    And user selects Travel options in Care Away From Home Page
-      | Travel Options | <travel> |
-    Then user navigate Doctors lookup session in Doctors page
-    And user verifies Start Over doctors session in Doctors page
-      | Multi Doctor | <isMultiDoctor> |
-    Then user selects add drug option and verifying the drugs in Drug page
-      | Drug Selection | <Drug Selection> |
-
-    Examples: 
-      | Zipcode | isMultiCounty | county           | isCoverageOpt | specialNeeds | travel   | doctors | DoctorsName | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch | pharmacyoption | Dental-Hearing-Vision-Fitness | costPreferenceOption |
-      |   10003 | NO            | New York         | MAPD          | None         | withinUS | Lookup  | sue         | NO            | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,1,YES,NO                               | Retail         | Yes,No,No,Yes                 | Lower                |
-      |   77485 | YES           | Fort Bend County | MAPD          | None         | withinUS | Lookup  | sue         | NO            | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,1,YES,NO                               | Retail         | Yes,No,No,Yes                 | Lower                |
-
   @PRE @planrecommendation @StartNowE2Eflow @F375045 @PRERegression4
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds> , <travel> , <doctors> , <DoctorsName> , <isMultiDoctor> , <Drug Selection> , <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch> , <pharmacyoption> , <Dental-Hearing-Vision-Fitness> , <costPreferenceOption> - To validate Drugs details from PRE to VPP Page
     Given the user is on UHC medicare acquisition site landing page

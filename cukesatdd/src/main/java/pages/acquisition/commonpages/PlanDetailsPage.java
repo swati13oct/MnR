@@ -1009,6 +1009,7 @@ public class PlanDetailsPage extends UhcDriver {
 	public boolean clickAndValidatePlanCosts(String monthlyPremium,String yearlyPremium) {
 		boolean bValidation = false;
 		jsClickNew(planCostsTab);
+		CommonUtility.checkPageIsReadyNew(driver);
 		if(monthlyPremium.equals(planMonthlyPremium.getText().trim()) && yearlyPremium.equals(planYearlyPremium.getText().trim()))	
 			bValidation = true;
 		else

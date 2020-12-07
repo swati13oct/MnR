@@ -425,26 +425,51 @@ public class VppCommonStepDefinition {
 	}
 	
 	@Then("^user clicks on compare button and navigate to plan compare page$")
-	public void user_clicks_on_compare_button_and_navigate_to_plan_compare_page() throws Throwable {
+	public void user_clicks_on_compare_button_and_navigate_to_plan_compare_page(DataTable givenAttributes) throws Throwable {
+		List<DataTableRow> givenAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < givenAttributesRow.size(); i++) {
+
+			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+					givenAttributesRow.get(i).getCells().get(1));
+		}
+
+		String totalPlans = givenAttributesMap.get("No Of Plans To Compare");
+		int total_plans = Integer.parseInt(totalPlans);
+
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		boolean result = plansummaryPage.clickAndVerifyNavigateToPage("Compare");
+		String attempt = "first";
+		boolean result = plansummaryPage.clickAndVerifyNavigateToPage("Compare", total_plans, attempt);
 		Assert.assertTrue("On clicking compare button user is navigated to plan compare page", result);
 		System.out.println("user clicks on compare button and navigate to plan compare page");
 		
 	    
 	}
 
-	@Then("^user clicks on save button and saves to plan cart$")
-	public void user_clicks_on_save_button_and_saves_to_plan_cart() throws Throwable {
+	@Then("^user clicks on save button and saves to plan cart \"([^\"]*)\" time $")
+	public void user_clicks_on_save_button_and_saves_to_plan_cart(DataTable givenAttributes, String attempt) throws Throwable {
+		List<DataTableRow> givenAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < givenAttributesRow.size(); i++) {
+
+			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+					givenAttributesRow.get(i).getCells().get(1));
+		}
+
+		String totalPlans = givenAttributesMap.get("No Of Plans To Compare");
+		int total_plans = Integer.parseInt(totalPlans);
+
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		boolean result = plansummaryPage.clickAndVerifyNavigateToPage("Save");
-		Assert.assertTrue("On clicking save button user is navigated to save plan page", result);
+		boolean result = plansummaryPage.clickAndVerifyNavigateToPage("Save", total_plans, attempt);
+		Assert.assertTrue("On clicking save button use,r is navigated to save plan page", result);
 		System.out.println("user clicks on save button and saves to plan cart");
 	    
 	    
 	}
+	
+	/*---------------------------Added steps for Medsupp Ole----------------
 
 	@Then("^user clicks on Edit Your Information link and navigate back to micro form$")
 	public void user_clicks_on_Edit_Your_Information_link_and_navigate_back_to_micro_form() throws Throwable {
@@ -463,6 +488,7 @@ public class VppCommonStepDefinition {
 		Assert.assertTrue("On clicking View Plan button user is navigated to plan summary page", result);
 		System.out.println("user clicks on View plan button link and navigate back to vpp summary page of medsupp");
 	}
+---------------------------Added steps for Medsupp Ole----------------*/
 
 	@Then("^user clicks on Save icon for all the plans and validate count in cart should match to plans$")
 	public void user_clicks_on_Save_icon_for_all_the_plans_and_match_count() throws Throwable {
@@ -1643,10 +1669,10 @@ public class VppCommonStepDefinition {
 			String Counter) throws Throwable {
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		int counter = Integer.parseInt(Counter);
+//		int counter = Integer.parseInt(Counter);
 		if (planType.equals("MAPD")) {
 			//plansummaryPage.clickonViewPlans();
-			plansummaryPage.checkMAPlansOnly(counter);
+			plansummaryPage.checkMAPlansOnly(Counter);
 			System.out.println("Selected All MAPD plans for Plan Compare");
 		}
 
@@ -2413,15 +2439,13 @@ public class VppCommonStepDefinition {
 				memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
 						memberAttributesRow.get(i).getCells().get(1));
 			}
-
 			String Medicarenumber = memberAttributesMap.get("MedicareNumber");
 			String DateOfBirth = memberAttributesMap.get("DOB");			
 			VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 			String submitconfirmation = plansummaryPage.continueApplicationuntilSubmitPage(Medicarenumber);
 			getLoginScenario().saveBean(VPPCommonConstants.SUBMITCONFIRMATION, submitconfirmation);
-
-		}
+			}
 		
 		@Then("^the site user validates the RightRails Links on Medsupp Page$")
 		public void user_validate_rightrail_links_medsupp_page() throws Throwable {
@@ -2630,5 +2654,78 @@ public class VppCommonStepDefinition {
 					Assert.fail("Error in navigating back to Plan Summary Page");
 			
 		  }
+		@Then("^remove \"([^\"]*)\" plan from new plan compare page$")
+		public void remove_plan_from_new_plan_compare_page_for_UHC(String planIndices) throws Throwable {
+			ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario().getBean(PageConstants.PLAN_COMPARE_PAGE);
+			planComparePage.clickOnSelectedRemoveLink(planIndices);
+		}
+
+		@Then("^validate optional service riders section on compare page is not shown$")
+		public void validate_optional_service_riders_section_on_compare_page_is_not_shown() throws Throwable {
+			ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario().getBean(PageConstants.PLAN_COMPARE_PAGE);
+			planComparePage.validateOptionalRidersSectionHidden();			
+		}
 		
+		@Then("^validate all available plans are shown on click of view all plans$")
+		public void validate_all_plans_are_shown() throws Throwable {
+			ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario().getBean(PageConstants.PLAN_COMPARE_PAGE);
+			planComparePage.validateAllPlansShown();			
+		}
+		
+		@Then("^validate OON Toggle is displayed on medical and additional benefits$")
+		public void validate_OON_Toggle_is_displayed_on_medical_and_additional_benefits() throws Throwable {
+			ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario().getBean(PageConstants.PLAN_COMPARE_PAGE);
+			planComparePage.validateOONDDisplayed();
+		}
+
+		@Then("^Validate OON Toggle is not displayed when there are no OON Plans Available$")
+		public void validate_OON_Toggle_is_not_displayed_when_there_are_no_OON_Plans_Available() throws Throwable {
+			ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario().getBean(PageConstants.PLAN_COMPARE_PAGE);
+			planComparePage.validateOONNotDisplayed();
+		}
+		
+		@Then("^the user clicks on Enroll in plan and validates the Welcome to OLE Page on new Plan Compare")
+		  public void user_clicks_enrollInPlan_newPlanCompare() throws InterruptedException{
+			  ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario().getBean(PageConstants.PLAN_COMPARE_PAGE); 
+			  WelcomePage  welcomeOLEPage = planComparePage.Enroll_OLE_Plancompare();
+		   if (welcomeOLEPage != null) {
+				getLoginScenario().saveBean(PageConstants.OLE_WELCOME_PAGE, welcomeOLEPage);
+			} else {
+				Assert.fail("Error Loading Welcome Page for OLE");
+			}
+		  }
+		
+		@Then("^the user clicks on Plan details link in new Plan Compare page")
+		  public void user_clicks_planDetails_newPlanCompare() throws InterruptedException{
+			  ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario().getBean(PageConstants.PLAN_COMPARE_PAGE); 
+			  PlanDetailsPage vppPlanDetailsPage = planComparePage.navigateToPlanDetailfromplanCompare();
+				if (vppPlanDetailsPage != null) {
+						getLoginScenario().saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE, vppPlanDetailsPage);
+						Assert.assertTrue(true);
+					} 
+				else
+					Assert.fail("Error in Loading the Plan Details Page");
+			
+		  }
+		
+		@Then("^Click on view more plans for right navigaton$")
+		public void Clickonviewmoreplansforrightnavigatonon() throws Throwable {
+			ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
+					.getBean(PageConstants.PLAN_COMPARE_PAGE);
+			planComparePage.validateViewMoreplansComparePage();
+		}
+		
+		@Then("^Click on view less plans for left navigaton$")
+		public void Clickonviewlessplansforrightnavigatonon() throws Throwable {
+			ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
+					.getBean(PageConstants.PLAN_COMPARE_PAGE);
+			planComparePage.validateViewlessplansComparePage();
+		}
+		
+		@Given("^remove one plan from \"([^\"]*)\" new plan compare and verify remove icon is disabled page$")
+		public void removeoneplanfrom_compare_plan_link(String Counter) throws Throwable {
+			ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
+					.getBean(PageConstants.PLAN_COMPARE_PAGE);		
+			planComparePage.CounterNewRemoveLink(Counter);
+		}
 }

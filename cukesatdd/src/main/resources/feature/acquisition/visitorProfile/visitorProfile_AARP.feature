@@ -25,7 +25,7 @@ Feature: 1.08. ACQ- Visitor profile
       | Drugname | <drug1> |
 
     @VisitorProfile_AARP @prodRegression_AARP
-    Examples:
+    Examples: 
       | state        | drug1   | zipCode | site |
       | Alabama      | Lipitor |   90210 | AARP |
       | Pennsylvania | Lipitor |   15001 | AARP |
@@ -102,7 +102,6 @@ Feature: 1.08. ACQ- Visitor profile
       | AARP | Alabama  | US1770330 | current  |   90210 | NO            | Jefferson County | MAPD     | AARP Medicare Advantage SecureHorizons Focus (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO) |
       | AARP | Virginia | US1770330 | current  |   22320 | NO            | Alexandria city  | MAPD     | AARP Medicare Advantage Walgreens (PPO),AARP Medicare Advantage Plan 1 (HMO)                           |
 
-    #| Alabama | US1770330 |   53503 | NO            | Jefferson County | SNP      | UnitedHealthcare Dual Complete LP1 (HMO D-SNP),UnitedHealthcare Medicare Advantage Assist (PPO C-SNP)  |
     @VisitorProfile_UHC @prodRegression_UHC
     Examples: 
       | site | state    | UID       | planyear | zipcode | isMultiCounty | county           | plantype | testPlans                                                                                              |
@@ -155,28 +154,26 @@ Feature: 1.08. ACQ- Visitor profile
     And user clicks on plan name
       | Test Plans | <testPlans> |
     Then the user validates the following Additional Benefits of Plan for the plan
-      | Eye Wear Benefit Type                                     | <eyeWearBenefitType>                              |
-      | Eye Wear Expected Text                                    | <eyeWearExpectedText>                             |
-      | Eye Exam Benefit Type                                     | <eyeExamBenefitType>                              |
-      | Eye Exam Expected Text                                    | <eyeExamExpectedText>                             |
-      | Foot Care Routine Benefit Type                            | <footCareRoutineBenefitType>                      |
-      | Foot Care Routine Expected Text                           | <footCareRoutineExpectedText>                     |
-      | Hearing Exam Benefit Type                                 | <hearingExamBenefitType>                          |
-      | Hearing Exam Expected Text                                | <hearingExamExpectedText>                         |
-      | Membership in Health Club / Fitness Classes Benefit Type  | <membershipinHealthClubFitnessClassesBenefitType> |
-      | Membership in Health Club / Fitness Classes Expected Text | <membershipinHealthClubFitnessExpectedText>       |
+      | Eye Wear Benefit Type           | <eyeWearBenefitType>          |
+      | Eye Wear Expected Text          | <eyeWearExpectedText>         |
+      | Eye Exam Benefit Type           | <eyeExamBenefitType>          |
+      | Eye Exam Expected Text          | <eyeExamExpectedText>         |
+      | Foot Care Routine Benefit Type  | <footCareRoutineBenefitType>  |
+      | Foot Care Routine Expected Text | <footCareRoutineExpectedText> |
+      | Hearing Exam Benefit Type       | <hearingExamBenefitType>      |
+      | Hearing Exam Expected Text      | <hearingExamExpectedText>     |
 
     @VisitorProfile_AARP @prodRegression_AARP
     Examples: 
-      | site | state    | UID       | zipcode | isMultiCounty | plantype | planyear | county           | testPlans                                                                                               | eyeWearBenefitType | eyeWearExpectedText                                           | eyeExamBenefitType | eyeExamExpectedText    | footCareRoutineBenefitType | footCareRoutineExpectedText | hearingExamBenefitType | hearingExamExpectedText | membershipinHealthClubFitnessClassesBenefitType | membershipinHealthClubFitnessExpectedText                                                                  |
-      | AARP | Alabama  | US1770330 |   53503 | NO            | MAPD     | current  | Jefferson County | UnitedHealthcare Medicare Advantage Open (PPO),UnitedHealthcare Medicare Advantage Open Essential (PPO) | Eyewear            | Eyewear has a plan benefit limit up to $100 per every 2 years | Eye Exam           | $0 copay               | Foot Care - Routine        | $50 copay                   | Hearing Exam           | $0 copay                | Fitness Program through Renew Active            | Fitness Membership Only: Basic membership in a fitness program at a network location at no additional cost |
-      | AARP | Virginia | US1770330 |   22320 | NO            | MAPD     | current  | Alexandria city  | AARP Medicare Advantage Walgreens (PPO),AARP Medicare Advantage Plan 1 (HMO)                            | Eyewear            | Eyewear has a plan benefit limit up to $200 per every 2 years | Eye Exam           | $0 copay; 1 every year | Foot Care - Routine        | $35 copay                   | Hearing Exam           | $0 copay                | Fitness Program through Renew Active            | Fitness Membership and Fitness Wearable: Basic membership in a fitness program at a network location and get a Fitbit® activity tracker at no additional cost |
+      | site | state    | UID       | zipcode | isMultiCounty | plantype | planyear | county           | testPlans                                                                                               | eyeWearBenefitType | eyeWearExpectedText                                           | eyeExamBenefitType | eyeExamExpectedText    | footCareRoutineBenefitType | footCareRoutineExpectedText | hearingExamBenefitType | hearingExamExpectedText |
+      | AARP | Alabama  | US1770330 |   53503 | NO            | MAPD     | current  | Jefferson County | UnitedHealthcare Medicare Advantage Open (PPO),UnitedHealthcare Medicare Advantage Open Essential (PPO) | Eyewear            | Eyewear has a plan benefit limit up to $100 per every 2 years | Eye Exam           | $0 copay               | Foot Care - Routine        | $50 copay                   | Hearing Exam           | $0 copay                |
+      | AARP | Virginia | US1770330 |   22320 | NO            | MAPD     | current  | Alexandria city  | AARP Medicare Advantage Walgreens (PPO),AARP Medicare Advantage Plan 1 (HMO)                            | Eyewear            | Eyewear has a plan benefit limit up to $200 per every 2 years | Eye Exam           | $0 copay; 1 every year | Foot Care - Routine        | $35 copay                   | Hearing Exam           | $0 copay                |
 
     @VisitorProfile_UHC @prodRegression_UHC
     Examples: 
-      | site | state    | UID       | zipcode | isMultiCounty | plantype | planyear | county           | testPlans                                                                                               | eyeWearBenefitType | eyeWearExpectedText                                           | eyeExamBenefitType | eyeExamExpectedText    | footCareRoutineBenefitType | footCareRoutineExpectedText | hearingExamBenefitType | hearingExamExpectedText | membershipinHealthClubFitnessClassesBenefitType | membershipinHealthClubFitnessExpectedText                                                                  |
-      | UHC  | Alabama  | US1770330 |   53503 | NO            | MAPD     | current  | Jefferson County | UnitedHealthcare Medicare Advantage Open (PPO),UnitedHealthcare Medicare Advantage Open Essential (PPO) | Eyewear            | Eyewear has a plan benefit limit up to $100 per every 2 years | Eye Exam           | $0 copay               | Foot Care - Routine        | $50 copay                   | Hearing Exam           | $0 copay                | Fitness Program through Renew Active            | Fitness Membership Only: Basic membership in a fitness program at a network location at no additional cost |
-      | UHC  | Virginia | US1770330 |   22320 | NO            | MAPD     | current  | Alexandria city  | AARP Medicare Advantage Walgreens (PPO),AARP Medicare Advantage Plan 1 (HMO)                            | Eyewear            | Eyewear has a plan benefit limit up to $200 per every 2 years | Eye Exam           | $0 copay; 1 every year | Foot Care - Routine        | $35 copay                   | Hearing Exam           | $0 copay                | Fitness Program through Renew Active            | Fitness Membership and Fitness Wearable: Basic membership in a fitness program at a network location and get a Fitbit® activity tracker at no additional cost |
+      | site | state    | UID       | zipcode | isMultiCounty | plantype | planyear | county           | testPlans                                                                                               | eyeWearBenefitType | eyeWearExpectedText                                           | eyeExamBenefitType | eyeExamExpectedText    | footCareRoutineBenefitType | footCareRoutineExpectedText | hearingExamBenefitType | hearingExamExpectedText |
+      | UHC  | Alabama  | US1770330 |   53503 | NO            | MAPD     | current  | Jefferson County | UnitedHealthcare Medicare Advantage Open (PPO),UnitedHealthcare Medicare Advantage Open Essential (PPO) | Eyewear            | Eyewear has a plan benefit limit up to $100 per every 2 years | Eye Exam           | $0 copay               | Foot Care - Routine        | $50 copay                   | Hearing Exam           | $0 copay                |
+      | UHC  | Virginia | US1770330 |   22320 | NO            | MAPD     | current  | Alexandria city  | AARP Medicare Advantage Walgreens (PPO),AARP Medicare Advantage Plan 1 (HMO)                            | Eyewear            | Eyewear has a plan benefit limit up to $200 per every 2 years | Eye Exam           | $0 copay; 1 every year | Foot Care - Routine        | $35 copay                   | Hearing Exam           | $0 copay                |
 
   @vpOLE
   Scenario Outline: <UID> - Verify user is save plans from VPP to the unauthenticated visitor profile and complete OLE
@@ -202,10 +199,12 @@ Feature: 1.08. ACQ- Visitor profile
     And user validates the added plans on visitor profile page
       | Test Plans | <testPlans> |
     And the user navigates to clicks on Enroll Now from visitor profile to start OLE flow
-      | Plan Name | <planName> |
-      | Plan Type | <plantype> |
+      | Plan Name       | <planName>       |
+      | Plan Type       | <plantype>       |
+      | Zip Code        | <zipcode>        |
+      | County Name     | <county>         |
+      | Monthly Premium | <monthlyPremium> |
     Then the user validates the Plan details on OLE
-    #Then the user validates TFN in Welcome OLE Right Rail
     Then the user validates Learn more modal for Welcome OLE
     Then the user validates Leave OLE modal for Welcome OLE
     Then the user validates cancellation modal for Welcome OLE
@@ -285,13 +284,13 @@ Feature: 1.08. ACQ- Visitor profile
     #Then the user Validates Next Steps in Confirmation Page for the Plan Type.
     @VisitorProfile_AARP
     Examples: 
-      | UID       | site | state    | zipcode | isMultiCounty | county          | planyear | testPlans                                                                                            | PlanType | plantype | planName                                | cardtype | firstname | lastname | medicarenumber | ssnflag | partadate | partbdate | medicaidnumber | esrdflag | dob      | gender | permstreet    | permcity    | mailingaddressquestion | mailingstreet | mailingcity | mailingstate | mailingzip | email         | selectoptions                                                                                                                                                                                                                                       | optiondata              | pdpFlag | longTermFlag | riderflag | emailConfirmation | goGreen | healthinsurancename | groupnumber | membernumber | prescriptioncoveragename | pdgroupnumber | pdmembernumber | inputdataType |
-      | US1770330 | AARP | New York |   10001 | NO            | New York County | current  | AARP Medicare Advantage Essential (HMO),UnitedHealthcare Medicare Advantage Essential (Regional PPO) | MA-MBI   | MA       | AARP Medicare Advantage Essential (HMO) | MBI      | John      | Doe      | 2n22C33YK33    | false   |  09011997 |  11012002 |      431665465 | true     | 01011903 | Male   | 003 Morris Rd | Los Angeles | Yes                    |               |             | NY           |      10001 | test@test.com | Medicare Advantage Open Enrollment Period (MA OEP)/change in my Medicaid (newly got Medicaid)/Medicare (or my state)/(or my state helps pay for my Medicare premiums)/major disaster (as declared by the Federal Emergency Management Agency (FEMA) | /12202018/12202018/ / / | yes     | no           | true      | NO                | NO      | HealthInsurance     | HI1562759   | ABC12345DEF  | PrescriptionCoverage     | PD5646136     | BCD12345EFG    | Valid         |
+      | UID       | site | state    | zipcode | isMultiCounty | county          | planyear | testPlans                                                                | PlanType | plantype | planName                            | cardtype | firstname | lastname | medicarenumber | ssnflag | partadate | partbdate | medicaidnumber | esrdflag | dob      | gender | permstreet    | permcity    | mailingaddressquestion | mailingstreet | mailingcity | mailingstate | mailingzip | email         | selectoptions                                                                                                                                                                                                                                       | optiondata              | pdpFlag | longTermFlag | riderflag | emailConfirmation | goGreen | healthinsurancename | groupnumber | membernumber | prescriptioncoveragename | pdgroupnumber | pdmembernumber | inputdataType |
+      | US1770330 | AARP | New York |   10001 | NO            | New York County | Next     | AARP Medicare Advantage Prime (HMO),AARP Medicare Advantage Plan 1 (HMO) | MA-MBI   | MA       | AARP Medicare Advantage Prime (HMO) | MBI      | John      | Doe      | 2n22C33YK33    | false   |  09011997 |  11012002 |      431665465 | true     | 01011903 | Male   | 003 Morris Rd | Los Angeles | Yes                    |               |             | NY           |      10001 | test@test.com | Medicare Advantage Open Enrollment Period (MA OEP)/change in my Medicaid (newly got Medicaid)/Medicare (or my state)/(or my state helps pay for my Medicare premiums)/major disaster (as declared by the Federal Emergency Management Agency (FEMA) | /12202018/12202018/ / / | yes     | no           | true      | NO                | NO      | HealthInsurance     | HI1562759   | ABC12345DEF  | PrescriptionCoverage     | PD5646136     | BCD12345EFG    | Valid         |
 
     @VisitorProfile_UHC
     Examples: 
-      | UID       | site | state    | zipcode | isMultiCounty | county          | planyear | testPlans                                                                                            | PlanType | plantype | planName                                | cardtype | firstname | lastname | medicarenumber | ssnflag | partadate | partbdate | medicaidnumber | esrdflag | dob      | gender | permstreet    | permcity    | mailingaddressquestion | mailingstreet | mailingcity | mailingstate | mailingzip | email         | selectoptions                                                                                                                                                                                                                                       | optiondata              | pdpFlag | longTermFlag | riderflag | emailConfirmation | goGreen | healthinsurancename | groupnumber | membernumber | prescriptioncoveragename | pdgroupnumber | pdmembernumber | inputdataType |
-      | US1770330 | UHC  | New York |   10001 | NO            | New York County | current  | AARP Medicare Advantage Essential (HMO),UnitedHealthcare Medicare Advantage Essential (Regional PPO) | MA-MBI   | MA       | AARP Medicare Advantage Essential (HMO) | MBI      | John      | Doe      | 2n22C33YK33    | false   |  09011997 |  11012002 |      431665465 | true     | 01011903 | Male   | 003 Morris Rd | Los Angeles | Yes                    |               |             | NY           |      10001 | test@test.com | Medicare Advantage Open Enrollment Period (MA OEP)/change in my Medicaid (newly got Medicaid)/Medicare (or my state)/(or my state helps pay for my Medicare premiums)/major disaster (as declared by the Federal Emergency Management Agency (FEMA) | /12202018/12202018/ / / | yes     | no           | true      | NO                | NO      | HealthInsurance     | HI1562759   | ABC12345DEF  | PrescriptionCoverage     | PD5646136     | BCD12345EFG    | Valid         |
+      | UID       | site | state    | zipcode | isMultiCounty | county          | planyear | testPlans                                                                | PlanType | plantype | planName                            | cardtype | firstname | lastname | medicarenumber | ssnflag | partadate | partbdate | medicaidnumber | esrdflag | dob      | gender | permstreet    | permcity    | mailingaddressquestion | mailingstreet | mailingcity | mailingstate | mailingzip | email         | selectoptions                                                                                                                                                                                                                                       | optiondata              | pdpFlag | longTermFlag | riderflag | emailConfirmation | goGreen | healthinsurancename | groupnumber | membernumber | prescriptioncoveragename | pdgroupnumber | pdmembernumber | inputdataType |
+      | US1770330 | UHC  | New York |   10001 | NO            | New York County | Next     | AARP Medicare Advantage Prime (HMO),AARP Medicare Advantage Plan 1 (HMO) | MA-MBI   | MA       | AARP Medicare Advantage Prime (HMO) | MBI      | John      | Doe      | 2n22C33YK33    | false   |  09011997 |  11012002 |      431665465 | true     | 01011903 | Male   | 003 Morris Rd | Los Angeles | Yes                    |               |             | NY           |      10001 | test@test.com | Medicare Advantage Open Enrollment Period (MA OEP)/change in my Medicaid (newly got Medicaid)/Medicare (or my state)/(or my state helps pay for my Medicare premiums)/major disaster (as declared by the Federal Emergency Management Agency (FEMA) | /12202018/12202018/ / / | yes     | no           | true      | NO                | NO      | HealthInsurance     | HI1562759   | ABC12345DEF  | PrescriptionCoverage     | PD5646136     | BCD12345EFG    | Valid         |
 
   @vpMSSavePlan
   Scenario Outline: Verify user saves Medsupp plans from VPP to the unauthenticated visitor profile - zipcode - <zipcode>
@@ -329,6 +328,46 @@ Feature: 1.08. ACQ- Visitor profile
       | site | state       | zipcode | isMultiCounty | plantype | planyear | DOB        | county           | MS_testPlans  |
       | UHC  | Alabama     |   90210 | NO            | MS       | current  | 11/11/1949 | Jefferson County | Plan G,Plan A |
       | UHC  | Puerto Rico |   00641 | NO            | MS       | current  | 11/11/1949 | Utuado Municipio | Plan G,Plan A |
+
+  @vpMSSavePlanAuthenticated
+  Scenario Outline: Verify user saves Medsupp plans from VPP to the unauthenticated visitor profile - zipcode - <zipcode>
+    Given the user is on medicare acquisition site landing page
+      | Site | <site> |
+    And the user selects the state drop down value in home page
+      | State | <state> |
+    When the user performs plan search using following information
+      | Zip Code        | <zipcode>       |
+      | County Name     | <county>        |
+      | Is Multi County | <isMultiCounty> |
+    When the user views the plans of the below plan type
+      | Plan Type | <plantype> |
+    Then user fills out medsup form and proceeds to next pages
+      | Zip Code | <zipcode> |
+      | DOB      | <DOB>     |
+    Then user saves two ms plans as favorite
+      | MS Test Plans | <MS_testPlans> |
+    Then user gets a create profile prompt
+    Then user click on continue as guest button
+    Then the user signs in with optum Id credentials
+      | User Name | <userName> |
+      | Password  | <password> |
+    And user validates the added Ms plans on visitor profile page
+      | MS Test Plans | <MS_testPlans> |
+    And user delets the added Ms plans on visitor profile page
+      | MS Test Plans | <MS_testPlans> |
+
+    #No pdf link is avialable now
+    #And user validate pdf link
+    #| MS Test Plans | <MS_testPlans> |
+    @VisitorProfile_AARP
+    Examples: 
+      | site | state   | zipcode | isMultiCounty | plantype | planyear | DOB        | county           | MS_testPlans  | userName   | password   |
+      | AARP | Alabama |   90210 | NO            | MS       | current  | 11/11/1949 | Jefferson County | Plan G,Plan A | mnrmedsupp | Password@1 |
+
+    @VisitorProfile_UHC
+    Examples: 
+      | site | state   | zipcode | isMultiCounty | plantype | planyear | DOB        | county           | MS_testPlans  | userName   | password   |
+      | UHC  | Alabama |   90210 | NO            | MS       | current  | 11/11/1949 | Jefferson County | Plan G,Plan A | mnrmedsupp | Password@1 |
 
   @providerFlow
   Scenario Outline: Verify Provider Search functional flow for unauthenticated Visitor Profile page
@@ -472,13 +511,13 @@ Feature: 1.08. ACQ- Visitor profile
 
     @VisitorProfile_AARP
     Examples: 
-      | site | state   | UID       | zipcode | isMultiCounty | county           | plantype | planyear | testPlans                                                                                                                                                                                                                                                        |
-      | AARP | Alabama | US1770330 |   90210 | NO            | Jefferson County | MAPD     | current  | AARP Medicare Advantage SecureHorizons Focus (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO),AARP Medicare Advantage SecureHorizons Plan 2 (HMO),AARP Medicare Advantage SecureHorizons Premier (HMO),UnitedHealthcare Medicare Advantage Assure (HMO) |
+      | site | state   | UID       | zipcode | isMultiCounty | county           | plantype | planyear | testPlans                                                                                                                                                                                                 |
+      | AARP | Alabama | US1770330 |   90210 | NO            | Jefferson County | MAPD     | Next     | AARP Medicare Advantage Freedom Plus (HMO-POS),AARP Medicare Advantage SecureHorizons Focus (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO),AARP Medicare Advantage SecureHorizons Plan 2 (HMO) |
 
     @VisitorProfile_UHC
     Examples: 
-      | site | state   | UID       | zipcode | isMultiCounty | county           | plantype | planyear | testPlans                                                                                                                                                                                                                                                        |
-      | UHC  | Alabama | US1770330 |   90210 | NO            | Jefferson County | MAPD     | current  | AARP Medicare Advantage SecureHorizons Focus (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO),AARP Medicare Advantage SecureHorizons Plan 2 (HMO),AARP Medicare Advantage SecureHorizons Premier (HMO),UnitedHealthcare Medicare Advantage Assure (HMO) |
+      | site | state   | UID       | zipcode | isMultiCounty | county           | plantype | planyear | testPlans                                                                                                                                                                                                 |
+      | UHC  | Alabama | US1770330 |   90210 | NO            | Jefferson County | MAPD     | Next     | AARP Medicare Advantage Freedom Plus (HMO-POS),AARP Medicare Advantage SecureHorizons Focus (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO),AARP Medicare Advantage SecureHorizons Plan 2 (HMO) |
 
   @oleAuthenticatedValidations
   Scenario Outline: Verify OLE validations for authenticated Visitor Profile page
@@ -498,13 +537,13 @@ Feature: 1.08. ACQ- Visitor profile
 
     @VisitorProfile_AARP
     Examples: 
-      | site | state    | zipcode | isMultutiCounty | county          | userName | password   | plantype | planname                                | status      | monthlyPremium |
-      | AARP | New York |   10001 | NO              | New York County | mnrqavd4 | Password@2 | MAPD     | AARP Medicare Advantage Essential (HMO) | In Progress | $0             |
+      | site | state    | zipcode | isMultutiCounty | county          | userName | password   | plantype | planname                             | status      | monthlyPremium |
+      | AARP | New York |   10001 | NO              | New York County | mnrqavd4 | Password@2 | MAPD     | AARP Medicare Advantage Plan 2 (HMO) | In Progress | $34.00         |
 
     @VisitorProfile_UHC
     Examples: 
-      | site | state    | zipcode | isMultutiCounty | county          | userName | password   | plantype | planname                                | status      | monthlyPremium |
-      | UHC  | New York |   10001 | NO              | New York County | mnrqavd4 | Password@2 | MAPD     | AARP Medicare Advantage Essential (HMO) | In Progress | $0             |
+      | site | state    | zipcode | isMultutiCounty | county          | userName | password   | plantype | planname                             | status      | monthlyPremium |
+      | UHC  | New York |   10001 | NO              | New York County | mnrqavd4 | Password@2 | MAPD     | AARP Medicare Advantage Plan 2 (HMO) | In Progress | $34.00         |
 
   @vpPartialOLEAndRemove
   Scenario Outline: <UID> - Verify Partial enrollment and cancel or remove the enrollment from profile page
@@ -516,18 +555,13 @@ Feature: 1.08. ACQ- Visitor profile
     Then the user signs in with optum Id credentials
       | User Name | <userName> |
       | Password  | <password> |
-    And the user back to VPP plan summary page
-    And the user views the plans of the below plan type
-      | Plan Type | <plantype> |
-    And the user selects plan year
-      | Plan Year | <planyear> |
-    And the user validates the available plans for selected plan types
-    Then the user clicks on Enroll Now for AARP site to start the OLE flow
-      | Plan Name | <planName> |
+    And the user navigates to clicks on Enroll Now from visitor profile to start OLE flow
+      | Plan Name       | <planName>       |
+      | Plan Type       | <plantype>       |
+      | Zip Code        | <zipcode>        |
+      | County Name     | <county>         |
+      | Monthly Premium | <monthlyPremium> |
     Then the user validates the Plan details on OLE
-    Then the user validates Learn more modal for Welcome OLE
-    Then the user validates Leave OLE modal for Welcome OLE
-    Then the user validates cancellation modal for Welcome OLE
     Then the user navigates to Personal Information Page
     Then the user enters following required information in Personal Information Page
       | First Name               | <firstname>              |
@@ -554,5 +588,5 @@ Feature: 1.08. ACQ- Visitor profile
 
     @VisitorProfile_AARP
     Examples: 
-      | UID       | site | state    | userName | password   | zipcode | isMultiCounty | county          | planyear | PlanType | plantype | planName                                | cardtype | firstname | lastname | dob      | gender | permstreet    | permcity | mailingstate | mailingzip | email         | medicarenumber | ssnflag | partadate | partbdate | medicaidnumber | status      | monthlyPremium |
-      | US1770330 | AARP | New York | mnrvd5   | Password@1 |   10001 | NO            | New York County | current  | MA-MBI   | MA       | AARP Medicare Advantage Essential (HMO) | MBI      | John      | Doe      | 01011903 | Male   | 003 Morris Rd | NY       | NY           |      10001 | test@test.com | 2n22C33YK33    | false   |  09011997 |  11012002 |      431665465 | In Progress | $0             |
+      | UID       | site | state    | userName | password   | zipcode | isMultiCounty | county          | planyear | PlanType | plantype | planName                              | cardtype | firstname | lastname | dob      | gender | permstreet    | permcity | mailingstate | mailingzip | email         | medicarenumber | ssnflag | partadate | partbdate | medicaidnumber | status      | monthlyPremium |
+      | US1770330 | AARP | New York | mnrvd5   | Password@1 |   10001 | NO            | New York County | Next     | MA-MBI   | MA       | AARP Medicare Advantage Patriot (HMO) | MBI      | John      | Doe      | 01011903 | Male   | 003 Morris Rd | NY       | NY           |      10001 | test@test.com | 2n22C33YK33    | false   |  09011997 |  11012002 |      431665465 | In Progress | $0             |
