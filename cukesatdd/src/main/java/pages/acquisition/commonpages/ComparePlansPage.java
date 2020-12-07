@@ -560,7 +560,8 @@ public class ComparePlansPage extends UhcDriver {
   		enrollForPlan = driver.findElement(By.xpath("//*[@id='enrollbtnplancompare0']//button//span[text()='Enroll']"));
   		if(enrollForPlan!=null){
   			//validateNew(enrollForPlan);
-  			enrollForPlan.click();
+//  			enrollForPlan.click();
+  			jsClickNew(enrollForPlan);
   		}
   		CommonUtility.waitForPageLoadNew(driver, NextBtn, 30);
   		System.out.println(driver.getCurrentUrl());
@@ -576,9 +577,10 @@ public class ComparePlansPage extends UhcDriver {
 		CommonUtility.checkPageIsReadyNew(driver);
 		WebElement PlanDetailsLink = driver.findElement(By.xpath("(//*[contains(text(),'View Plan Details')])[1]"));
 				CommonUtility.waitForPageLoadNew(driver, PlanDetailsLink, 30);
-				PlanDetailsLink.click();
+//				PlanDetailsLink.click();
+				jsClickNew(PlanDetailsLink);
 				System.out.println("View Plan Details Link is clicked");
-		
+		waitForPageLoadSafari();
 		CommonUtility.checkPageIsReadyNew(driver);
 		System.out.println(driver.getCurrentUrl());
 		if (driver.getCurrentUrl().contains("#/details")) 
@@ -726,7 +728,8 @@ public class ComparePlansPage extends UhcDriver {
 		WebElement removePlanName = driver.findElement(By.xpath("//th[@ng-repeat='plan in count']["+counter+"]//div[contains(@ng-if,'planName')]"));
 		String PlanName=removePlanName.getText();
 		System.out.println("3rd plan name is : " + PlanName );
-		removelink.click();
+//		removelink.click();
+		jsClickNew(removelink);
 		System.out.println("Clicked on Remove Link on plan Compare page");
 		
 		if(driver.findElement(By.xpath("//th[@ng-repeat='plan in count'][1]//a[contains(@class,'remove')]")).isDisplayed()){
@@ -987,7 +990,8 @@ public class ComparePlansPage extends UhcDriver {
 		WebDriverWait wait = new WebDriverWait(driver, 60);
 		
 		for(int i=0;viewMore.isEnabled();){
-			viewMore.click();
+//			viewMore.click();
+			jsClickNew(viewMore);
 			System.out.println("Clicked no. of times : " + i);
 			i++;	
 		}
@@ -1005,7 +1009,8 @@ public class ComparePlansPage extends UhcDriver {
 		WebElement viewLess = driver.findElement(By.xpath("//span[text()='Scroll Plans Left']/ancestor::button"));
 		WebDriverWait wait = new WebDriverWait(driver, 60);
 		for(int i=0;viewLess.isEnabled();){
-			viewLess.click();
+//			viewLess.click();
+			jsClickNew(viewLess);
 			System.out.println("Clicked no. of times : " + i);
 			i++;	
 		}
@@ -1334,7 +1339,7 @@ public class ComparePlansPage extends UhcDriver {
 	
 	public void validateAllPlansShown(){
 	   	System.out.println(planComparePlansAvailableLabel.getText());
-	   	int planCount=Integer.parseInt(planComparePlansAvailableLabel.getText().substring(0, planComparePlansAvailableLabel.getText().indexOf(" Plans")));
+	   	int planCount=Integer.parseInt(planComparePlansAvailableLabel.getText().substring(0, planComparePlansAvailableLabel.getText().indexOf(" Plans")).trim());
 	    System.out.println("Count of plans Available="+planCount);
 	   System.out.println("Count of plans on compare Before button is clicked"+driver.findElements(By.xpath("//div[contains(@class,'flex-lg-row')]/div")).size());
 	   Assert.assertTrue("View All button should be displayed", viewAllplansButton.isDisplayed());
@@ -1356,10 +1361,12 @@ public class ComparePlansPage extends UhcDriver {
 		medicalBenefitsOONToggle.click();
 		Assert.assertTrue("OON Toggle Should be Displayed for Additional Benefits", additionalBenefitsOONToggle.isDisplayed());
 		Assert.assertEquals("OON Toggle default Text should be displayed as View Out-of-Network Benefits", "View Out-of-Network Benefits",additionalBenefitsOONLabel.getText().trim());
-		additionalBenefitsOONToggle.click();
+//		additionalBenefitsOONToggle.click();
+		jsClickNew(additionalBenefitsOONToggle);
 		Assert.assertEquals("OON Toggle Text should be changed to View In-Network Benefits", "View In-Network Benefits", additionalBenefitsOONLabel.getText().trim());
 		Assert.assertTrue("OON Toggle Style should be changed", outOfNetworkStyle.isDisplayed());
-		additionalBenefitsOONToggle.click();
+//		additionalBenefitsOONToggle.click();
+		jsClickNew(additionalBenefitsOONToggle);
 	}
 	
 	public void validateOONNotDisplayed()
