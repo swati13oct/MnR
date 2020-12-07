@@ -12,10 +12,10 @@ import cucumber.api.CucumberOptions;
  * RunMRATDDAcquisitionVppPlanSummaryNextBestActionModal
  */
 @RunWith(ExtendedCucumber.class)
-@ExtendedCucumberOptions(retryCount = 1, screenShotSize = "", screenShotLocation = "/screenshots/", jsonReport = "target/cucumber-RunMRATDDAcqusitionVPPNextActionModalBlayer.json", detailedReport = true, detailedAggregatedReport = true, overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDAcqusitionVPPNextActionModalBlayer")
+@ExtendedCucumberOptions(retryCount = 1, screenShotSize = "", screenShotLocation = "/screenshots/", jsonReport = "target/cucumber-RunMRATDDAcquisitionVPPNextActionModalBlayerMAPD.json", detailedReport = true, detailedAggregatedReport = true, overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDAcquisitionVPPNextActionModalBlayerMAPD")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.acquisition" }, features = {
 		"src/main/resources/feature/acquisition/vpp" }, plugin = { "pretty", "html:reports/test-report",
-				"json:target/cucumber-RunMRATDDAcquisitionVPPNextActionModalBlayer.json" }, tags = { "@NBA_MAPD_UHC" })
+				"json:target/cucumber-RunMRATDDAcquisitionVPPNextActionModalBlayerMAPD.json" }, tags = { "@NBA_MAPD_UHC" })
 public class RunMRATDDAcquisitionVPPNextActionModalBlayerMAPD {
 
 }

@@ -11,10 +11,10 @@ import cucumber.api.CucumberOptions;
  * this file is to run test cases for RunMRATDDAcquisitionVppPlanSummary
  */
 @RunWith(ExtendedCucumber.class)
-@ExtendedCucumberOptions(retryCount = 1, screenShotSize = "", screenShotLocation = "/screenshots/", jsonReport = "target/cucumber-RunMRATDDAcqusitionVPPNextActionModalUlayer.json", detailedReport = true, detailedAggregatedReport = true, overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDAcqusitionVPPNextActionModalUlayer")
+@ExtendedCucumberOptions(retryCount = 1, screenShotSize = "", screenShotLocation = "/screenshots/", jsonReport = "target/cucumber-RunMRATDDAcqusitionVPPNextActionModalUlayerPDP.json", detailedReport = true, detailedAggregatedReport = true, overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDAcqusitionVPPNextActionModalUlayerPDP")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.acquisition" }, features = {
 		"src/main/resources/feature/acquisition/vpp" }, plugin = { "pretty", "html:reports/test-report",
-				"json:target/cucumber-RunMRATDDAcqusitionVPPNextActionModalUlayer.json" }, tags = {
+				"json:target/cucumber-RunMRATDDAcqusitionVPPNextActionModalUlayerPDP.json" }, tags = {
 						" @NBA_PDP_AARP" })
 
 public class RunMRATDDAcqusitionVPPNextActionModalUlayerPDP {
