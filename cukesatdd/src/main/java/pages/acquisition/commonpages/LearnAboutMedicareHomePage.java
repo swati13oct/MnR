@@ -207,10 +207,12 @@ public class LearnAboutMedicareHomePage extends GlobalWebElements {
 
 	public void navigateToMenuLinks(WebElement hdrMenuElement, WebElement menuDropListItem) {
 
-		Actions actions = new Actions(driver);
+		/*Actions actions = new Actions(driver);
 		actions.moveToElement(hdrMenuElement);
 		actions.moveToElement(menuDropListItem);
-		actions.click().build().perform();
+		actions.click().build().perform();*/
+		jsMouseOver(hdrMenuElement);
+		jsMouseOver(menuDropListItem);
 		CommonUtility.checkPageIsReadyNew(driver);
 
 	}
@@ -310,12 +312,14 @@ public class LearnAboutMedicareHomePage extends GlobalWebElements {
 	public MedicareAdvantagePartCPlansPage planSelectionMA() {
 //		getLnkMedicareAdvantage().click();
 		jsClickNew(getLnkMedicareAdvantage());
+		waitForPageLoadSafari();
 		return new MedicareAdvantagePartCPlansPage(driver);
 
 	}
 	public MedicareSupplementInsurancePlansPage planSelectionMS() {
 //		getLnkMedicareSupplement().click();
 		jsClickNew(getLnkMedicareSupplement());
+		waitForPageLoadSafari();
 		return new MedicareSupplementInsurancePlansPage(driver);
 
 	}
@@ -327,6 +331,7 @@ public class LearnAboutMedicareHomePage extends GlobalWebElements {
 	public MedicarePrescriptionDrugPartDPlansPage planSelectionPDP() {
 //		getLnkMedicareAdvantage().click();
 		jsClickNew(getLnkMedicareAdvantage());
+		waitForPageLoadSafari();
 		CommonUtility.checkPageIsReadyNew(driver);
 		return new MedicarePrescriptionDrugPartDPlansPage(driver);
 
@@ -379,6 +384,7 @@ public class LearnAboutMedicareHomePage extends GlobalWebElements {
 		WebElement lnkcvrgChoice=driver.findElement(By.xpath("//a[contains(@href,'medicare-parts')]//span[contains(text(),'Coverage') and contains(@class,'card')]"));
 		validateNew(lnkcvrgChoice);
 		jsClickNew(lnkcvrgChoice);
+		waitForPageLoadSafari();
 		CommonUtility.checkPageIsReadyNew(driver);
 		
 		String checkUrl=driver.getCurrentUrl();
