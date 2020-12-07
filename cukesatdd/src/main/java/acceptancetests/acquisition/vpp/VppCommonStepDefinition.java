@@ -2728,4 +2728,20 @@ public class VppCommonStepDefinition {
 					.getBean(PageConstants.PLAN_COMPARE_PAGE);		
 			planComparePage.CounterNewRemoveLink(Counter);
 		}
+		
+		@Then("^Click on Dental Flyer Link$")
+		public void clickonDentalFlyerLink(DataTable givenAttributes) throws Throwable {
+			List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+			Map<String, String> memberAttributesMap = new HashMap<String, String>();
+			for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+				memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+						memberAttributesRow.get(i).getCells().get(1));
+			}
+			String PDFtype = memberAttributesMap.get("PDF LINK");
+			String DocCode = memberAttributesMap.get("DocumentCode");
+			ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
+					.getBean(PageConstants.PLAN_COMPARE_PAGE);		
+			planComparePage.CounterDentalFlyerLink(PDFtype,DocCode);
+		}
 }
