@@ -2398,4 +2398,11 @@ public void user_verify_details_page_change_pharmacy_modal_for_preferred_tab() {
 				.getBean(PageConstants.VISITOR_PROFILE_PAGE);
 		visitorProfilePage.clickAddDrugsGlobal();
 	}
+	
+	@When("^user click on Switch To Generic on drug summary$")
+	public void User_click_on_Switch_To_Generic_drug_summary() throws Throwable {
+		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
+		drugSummaryPage.clickswitchToGeneric();
+
+	}
 }

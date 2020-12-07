@@ -237,7 +237,14 @@ public class DrugSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//*[contains(@class,'keepPharmacyLink')]")
 	private WebElement keepUsingPharmacyLink;
 	
-
+	@FindBy(xpath = "//*[@id='modal']")
+	private WebElement planSavePopup;
+	
+	@FindBy(xpath = "//*[@id='modal']//*[@id='cancelicon']")
+	private WebElement closeIconPlanSavePopup;
+	
+	public static String LIS_MESSAGE_DRUG_PRICING="If you receive \"Extra Help\" to pay your prescription drugs, this payment stage does not apply to you. Learn more about Extra Help.";
+	
 	@Override
 	public void openAndValidate() {
 		validateNew(reviewDrugCostPageHeading);
@@ -346,7 +353,7 @@ public class DrugSummaryPage extends UhcDriver {
 	@FindBy(id = "priceLinkBtn_0")
 	private WebElement viewProceBtn;
 	
-	@FindBy(xpath = "//*[contains(@id,'drugtable')]//button[contains(text(),'Switch to Generic')]")
+	@FindBy(xpath = "//a[contains(text(),'Switch to Generic')]")
 	private WebElement switchToGenericBtn;
 
 	@FindBy(xpath = "//span[contains(text(),'Lipitor')]/following::a[contains(@id,'switchToGenericLink')]")
@@ -364,7 +371,7 @@ public class DrugSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//label/span[contains(text(),'Medicare Prescription Drug Plans')]")
 	private WebElement pdpPlan;
 
-	@FindBy(id = "drugPricingTitleTxt")
+	@FindBy(id = "modal-label")
 	private WebElement drugTitle;
 
 	/*
@@ -440,6 +447,10 @@ public class DrugSummaryPage extends UhcDriver {
 			/*
 			 * if(createProfilePopup.isDisplayed()) { closeProfilePopup.click(); }
 			 */
+			
+			if(planSavePopup.isDisplayed()) {
+				closeIconPlanSavePopup.click();
+			}
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -462,7 +473,7 @@ public class DrugSummaryPage extends UhcDriver {
 		jsClickNew(clickPdpplan);
 	}
 
-	@FindBy(xpath = "//div[contains(text(),'If you qualify for LIS,')]")
+	@FindBy(xpath = "//div[contains(text(),'If you receive')]")
 	public WebElement drugPricingDeductText;
 	
 	public void verifyTheTextAlert()
@@ -485,6 +496,7 @@ public class DrugSummaryPage extends UhcDriver {
 		validateNew(drugTitle);
 		validateNew(switchToGenericBtn);
 		validateNew(drugPricingDeductText);
+		Assert.assertTrue("Expected text not displayed on Drug pricing modal", drugPricingDeductText.getText().equals(LIS_MESSAGE_DRUG_PRICING));
 		
 	}
 
