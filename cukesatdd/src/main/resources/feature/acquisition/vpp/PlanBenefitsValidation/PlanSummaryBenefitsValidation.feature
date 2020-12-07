@@ -307,12 +307,12 @@ Feature: ACQ-Plan benefits validation
       @planSummaryBenefitsPDPUHC01_NextYear
       Examples: 
       | excelPath                | workSheet | site |
-      | Plan Summary Benefits_Data | SheetPDP2021_1  | UHC |
+      | Plan Summary Benefits_Data | PDPSheet2021_1  | UHC |
       
        @planSummaryBenefitsPDPUHC02_NextYear
       Examples: 
       | excelPath                | workSheet | site |
-      | Plan Summary Benefits_Data | SheetPDP2021_2  | UHC |
+      | Plan Summary Benefits_Data | PDPSheet2021_2  | UHC |
       
       # PROD NIGHT RUN SCENARIOS
       
