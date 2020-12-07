@@ -1,6 +1,11 @@
 @hsid 
 Feature: To test HSID registration flow
 
+ Background: Feature security flag needs to be true before ATDD script execution
+     Given First check if feature security flag is set to true
+      | Feature | UCPUserManagement |
+###############################Regression Scenarios Begin Here ########################################
+
    @hsid1 @US968241 @hsidregistration @regressionMember
    Scenario Outline:Plan Type: <planType>-Verify HSID registration.
    Given the user connect to DB
