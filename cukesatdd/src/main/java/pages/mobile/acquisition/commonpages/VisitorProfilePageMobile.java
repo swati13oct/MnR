@@ -3,6 +3,7 @@ package pages.mobile.acquisition.commonpages;
 import java.util.Arrays;
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -45,6 +46,16 @@ public class VisitorProfilePageMobile extends UhcDriver {
 	
 	@FindBy(xpath="//div[contains(@class,'drug-list-accordion')]//button[contains(@class,'drug-list-toggle')][contains(@class,'collapsed')]")
 	private WebElement expandDrugBlock;
+	
+
+	@FindBy(xpath = "//p[contains(@class,'items-count')]//a[contains(text(),'Drugs')]")
+	public WebElement drugHeader;
+	
+	@FindBy(css="div.drug-list-accordion.open div.drug-info-container span:first-child")
+	private WebElement drugname;
+	
+	@FindBy(id="DrugDelete-noplan-0")
+	private WebElement deleteDrug;
 	
 	@FindBy(xpath="//div[contains(@class,'provider--block card')]//button[contains(@class,'provider-title')][contains(@class,'collapsed')]")
 	private WebElement expandProviderBlock;
@@ -121,10 +132,24 @@ public class VisitorProfilePageMobile extends UhcDriver {
 	}
 	
 	public void validateAddedDrugAndPharmacy(String drug) {
-		expandDrugBlock.click();
+	//	expandDrugBlock.click();
+
 		
-		Assert.assertTrue(drugName.getText().trim().contains(drug));
-		Assert.assertTrue(pharmacyAddress.isDisplayed());
+		if(StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Pennsylvania") || StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Puerto Rico") || 
+				StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Virginia")) {
+			System.out.println("drug name "+drug);
+			jsClickNew(expandDrugBlock);
+			Assert.assertTrue(drugname.getText().trim().contains(drug));
+		}else {
+			CommonUtility.waitForPageLoad(driver, pharmacyAddress, 10);
+			Assert.assertEquals("Saved Drugs (1) / Pharmacy", drugHeader.getText().trim());
+			jsClickNew(drugHeader);
+			Assert.assertTrue(drugName.getText().trim().contains(drug));
+			
+//			Assert.assertTrue(pharmacyAddress.isDisplayed());
+		}
+		/*jsClickNew(expandDrugBlock);
+		jsClickMobile(deleteDrug);*/
 	}
 	
 	public void validateAddedPlans(String planNames) {
