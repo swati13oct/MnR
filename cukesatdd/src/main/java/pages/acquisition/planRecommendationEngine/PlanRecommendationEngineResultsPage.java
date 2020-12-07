@@ -290,6 +290,9 @@ public class PlanRecommendationEngineResultsPage extends UhcDriver {
 	@FindBy(css = "#pop-btn-1 span")
 	private WebElement keepshoppingPlansBtn;
 	
+	@FindBy(css = "#pop-btn-2 span")
+	private WebElement ViewSavedBtn;
+	
 	@FindBy(css = ".flyout-heart-icon")
 	private WebElement heartIcon;
 	
@@ -1517,8 +1520,8 @@ public void validateSavePlan(String year) {
 	System.out.println("Validate PRE Save Plans functionality : ");
 	int saveplans = 2;
 	saveplans(MAPlanNames,saveplans, year, MAPlansSaveIcon);
-	validate(keepshoppingPlansBtn);
-	keepshoppingPlansBtn.click();
+	validate(ViewSavedBtn);
+	ViewSavedBtn.click();
 	verifySavePlans(year, vppPlans);
 }
 
@@ -1528,7 +1531,11 @@ public void validateCombineSavePlan(String year) {
 	saveplans(PDPPlansName,saveplans, year, PDPPlansSaveIcon);
 	validate(keepshoppingPlansBtn);
 	keepshoppingPlansBtn.click();
+	threadsleep(3000);
+	viewplanLink(MAPlanNames);
 	saveplans(MAPlanNames,saveplans, year, MAPlansSaveIcon);
+	threadsleep(3000);
+	viewplanLink(SNPPlansName);
 	saveplans(SNPPlansName,1, year, SNPPlansSaveIcon);
 	scrollToView(heartIcon);
 	validate(heartIcon);
@@ -1538,18 +1545,29 @@ public void validateCombineSavePlan(String year) {
 	verifySavePlans(year, vppPlans);
 	verifyPlansVPandPDP(planNamesVisitorPrf);
 }
-ArrayList<String> vppPlans = new ArrayList<String>();
-public ArrayList<String> saveplans(List<WebElement> plansName, int saveplans,	String year, List<WebElement> savePlan) {
-	System.out.println("Plans Count :" +plansName.size());
-	if(plansName.get(0).getText().equalsIgnoreCase("MedicareRx")) {
+
+public void viewplanLink(List<WebElement> plansName) {
+	if(plansName.get(0).getText().equalsIgnoreCase("Medicare Advantage")) {
+		threadsleep(3000);
+		scrollToView(MAViewPlansLink);
+		validate(MAViewPlansLink);
+		MAViewPlansLink.click();
+	}else if(plansName.get(0).getText().equalsIgnoreCase("MedicareRx")) {
+		threadsleep(3000);
 		scrollToView(PDPViewPlansLink);
 		validate(PDPViewPlansLink);
 		PDPViewPlansLink.click();
 	}else if(plansName.get(0).getText().equalsIgnoreCase("UnitedHealthcare")) {
+		threadsleep(3000);
 		scrollToView(SNPViewPlansLink);
 		validate(SNPViewPlansLink);
 		SNPViewPlansLink.click();
 	}
+}
+ArrayList<String> vppPlans = new ArrayList<String>();
+public ArrayList<String> saveplans(List<WebElement> plansName, int saveplans,	String year, List<WebElement> savePlan) {
+	System.out.println("Plans Count :" +plansName.size());
+	threadsleep(3000);
 	for (int plan = 0; plan < saveplans; plan++) {
 		vppPlans.add(savingplans(plansName.get(plan), savePlan.get(plan)));
 	}
@@ -1591,6 +1609,7 @@ public String savingplans(WebElement plan, WebElement saveplan) {
 	System.out.println("Plan Name in VPP Summary Page: " + exceptedplanName);
 	String save = saveplan.getText().trim();
 	if (save.equalsIgnoreCase("Save") || save.equalsIgnoreCase("Save Plan")) { 
+		threadsleep(3000);
 		saveplan.click();
 	}
 	threadsleep(5000);
