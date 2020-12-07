@@ -1507,14 +1507,20 @@ public VPPPlanSummaryPage handlePlanYearSelectionPRE(String planYear) {
 		return null;
 		
 }
-
 public void validateSavePlan(String year) {
 	System.out.println("Validate PRE Save Plans functionality : ");
 	int saveplans = 2;
 	saveplans(MAPlanNames,saveplans, year, MAPlansSaveIcon);
+	verifySavePlans(year, vppPlans);
+}
+
+public void validateCombineSavePlan(String year) {
+	System.out.println("Validate PRE Save Plans functionality : ");
+	int saveplans = 2;
+	saveplans(PDPPlansName,saveplans, year, PDPPlansSaveIcon);
 	validate(keepshoppingPlansBtn);
 	keepshoppingPlansBtn.click();
-	saveplans(PDPPlansName,saveplans, year, PDPPlansSaveIcon);
+	saveplans(MAPlanNames,saveplans, year, MAPlansSaveIcon);
 	saveplans(SNPPlansName,1, year, SNPPlansSaveIcon);
 	verifySavePlans(year, vppPlans);
 	verifyPlansVPandPDP(planNamesVisitorPrf);
@@ -1523,9 +1529,11 @@ ArrayList<String> vppPlans = new ArrayList<String>();
 public ArrayList<String> saveplans(List<WebElement> plansName, int saveplans,	String year, List<WebElement> savePlan) {
 	System.out.println("Plans Count :" +plansName.size());
 	if(plansName.get(0).getText().equalsIgnoreCase("MedicareRx")) {
+		scrollToView(PDPViewPlansLink);
 		validate(PDPViewPlansLink);
 		PDPViewPlansLink.click();
 	}else if(plansName.get(0).getText().equalsIgnoreCase("UnitedHealthcare")) {
+		scrollToView(SNPViewPlansLink);
 		validate(SNPViewPlansLink);
 		SNPViewPlansLink.click();
 	}
@@ -1571,7 +1579,11 @@ public String savingplans(WebElement plan, WebElement saveplan) {
 	String save = saveplan.getText().trim();
 	if (save.equalsIgnoreCase("Save")) {
 		saveplan.click();
-	} 
+	}else {
+		saveplan.click();
+		threadsleep(5000);
+		saveplan.click();
+	}
 	threadsleep(5000);
 	return exceptedplanName;
 }
