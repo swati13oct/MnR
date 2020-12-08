@@ -398,8 +398,8 @@ public class PlanDocumentsAndResourcesUsersHelper {
 				targetTestDocList.add("Annual Notice of Changes");
 				targetTestDocList.add("Evidence Of Coverage");
 				targetTestDocList.add("Comprehensive Formulary");
-				//targetTestDocList.add("Certificate of Coverage");
-				//targetTestDocList.add("Additional Drug Coverage");
+				targetTestDocList.add("Certificate of Coverage");
+				targetTestDocList.add("Additional Drug Coverage");
 				return targetTestDocList;
 			} 
 			if (subSection.equals("ES-nextYear")) {
@@ -1430,10 +1430,10 @@ public class PlanDocumentsAndResourcesUsersHelper {
 				targetTestDocList.add("Certificate of Coverage");
 				targetTestDocList.add("Additional Drug Coverage");
 				//targetTestDocList.add("Formulary/Drug List - Comprehensive");
-				targetTestDocList.add("Prior Authorization Criteria");
-				targetTestDocList.add("Step Therapy Criteria");
-				targetTestDocList.add("Formulary Additions");
-				targetTestDocList.add("Formulary Deletions");
+				//targetTestDocList.add("Prior Authorization Criteria");
+				//targetTestDocList.add("Step Therapy Criteria");
+				//targetTestDocList.add("Formulary Additions");
+				//targetTestDocList.add("Formulary Deletions");
 				targetTestDocList.add("Plan Guide");
 				return targetTestDocList;
 			} 
@@ -1492,6 +1492,7 @@ public class PlanDocumentsAndResourcesUsersHelper {
 				targetTestDocList.add("Annual Notice of Changes");
 				targetTestDocList.add("Evidence Of Coverage");
 				targetTestDocList.add("Certificate of Coverage");
+				targetTestDocList.add("Additional Drug Coverage");
 				//targetTestDocList.add("Comprehensive Formulary");
 				return targetTestDocList;
 			} 
