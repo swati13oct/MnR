@@ -743,9 +743,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		
 		@FindBy(xpath = "//span[@class='title']//span")//
 		public WebElement  titleCount;
-
-
-
+		
+		@FindBy(xpath="//span[text()='Enroll in Plan']/..")
+		private WebElement  enrollInPlanBtn;
 
 		
 		public WebElement getValEstimatedAnnualDrugCostValue(String planName) {
@@ -4438,5 +4438,13 @@ for (int i = 0; i < initialCount + 1; i++) {
 		return flag;
 	}
 		
-
+	public void clickEnrollPlanBtnOnSelectPlanModal() {
+		validateNew(enrollInPlanBtn);
+		enrollInPlanBtn.click();
+	}
+	public void validateNavigatedToOle() {
+		if(driver.getCurrentUrl().contains("welcome")) {
+			Assert.assertTrue("Navigation to OLE failed", driver.getTitle().contains("Online Enrollment"));
+		}
+	}
 }
