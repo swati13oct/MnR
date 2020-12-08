@@ -1615,7 +1615,8 @@ public String savingplans(WebElement plan, WebElement saveplan) {
 	String save = saveplan.getText().trim();
 	if (save.equalsIgnoreCase("Save") || save.equalsIgnoreCase("Save Plan")) { 
 		threadsleep(3000);
-		saveplan.click();
+//		saveplan.click();
+		jsClickNew(saveplan);
 	}
 	threadsleep(5000);
 	return exceptedplanName;
