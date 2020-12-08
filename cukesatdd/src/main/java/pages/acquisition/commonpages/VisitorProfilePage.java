@@ -110,7 +110,7 @@ public class VisitorProfilePage extends UhcDriver {
 	
 	//New Shopper profile page objects
 	
-	@FindBy(xpath = "//h4[contains(text(),'drug')]/following::button[1]")
+	@FindBy(xpath = "//button[contains(@dtmname,'Drugs:Get Started')]")
 	public WebElement drugGetStarted;
 	
 	@FindBy(xpath = "//p[contains(@class,'items-count')]//a[contains(text(),'Drugs')]")
@@ -573,5 +573,22 @@ public class VisitorProfilePage extends UhcDriver {
 		jsClickNew(cancelEnrollment);
 		waitforElementDisapper(By.xpath("//button[@aria-label='Remove "+planName+"']"), 5);
 		
+	}
+	
+	/**
+	 * Deletes the specified MS plans
+	 * 
+	 * @param plans
+	 */
+	public void deleteMSPlans(String plans) {
+		try {
+			String[] plan = plans.split(",");
+			for (String planName : plan) {
+				jsClickNew(driver.findElement(By.xpath(
+						"//h2[contains(text(),'" + planName + "')]/preceding::button[contains(@class,'remove')][1]")));
+			}
+			Assert.assertTrue(!(driver.findElements(By.xpath("//div[@class='title dropdown-open']")).size() > 0));
+		} catch (Exception e) {
+		}
 	}
 }
