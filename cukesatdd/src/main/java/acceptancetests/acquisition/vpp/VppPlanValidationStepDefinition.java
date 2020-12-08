@@ -506,7 +506,7 @@ public class VppPlanValidationStepDefinition {
 				 AepVppPlanSummaryPage planSummaryPage = null;
 				 String currentCellValue = "";
 				 String currentColName = "";
-				// int countyCellNum = 7, planYearCellNum = 9, planNameCellNum = 6;
+				 //int countyCellNum = 7, planYearCellNum = 9, planNameCellNum = 6; //to be used when running a random row number
 				 int countyCellNum = 0, planYearCellNum =0, planNameCellNum = 0;
 				 HashMap <String, String> benefitsMap = new HashMap<String, String>();
 				 System.out.println(sheetName+ " SAUCE URL: "+ MRScenario.returnJobURL());
