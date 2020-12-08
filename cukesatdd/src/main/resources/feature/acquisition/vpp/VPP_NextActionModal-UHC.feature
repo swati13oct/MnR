@@ -325,11 +325,7 @@ Feature: 1.03-ACQ-Next Action Modal on vpp flow UHC
       | zipcode | isMultutiCounty | county         | plantype |drug1    |
       |   19019 | No              | Iowa County    | PDP     |Lipitor |
       
-<<<<<<< HEAD
-      @vppNextActionModalEnrollPlanPopupWithSavedPlanPDP123 @NBA_PDP_UHC
-=======
       @vppNextActionModalEnrollPlanPopupWithSavedPlanPDP @NBA_PDP_UHC02
->>>>>>> branch 'feature-F473803' of https://github.optum.com/Consumer-Portals/MRATDD
      Scenario Outline: UserStory: Plan type: <plantype> -Test to verify the Select Plan for Enroll Modal when  user clicks on "Enroll in Plan" button and multiple plans are saved in PDP
    Given the user is on uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
