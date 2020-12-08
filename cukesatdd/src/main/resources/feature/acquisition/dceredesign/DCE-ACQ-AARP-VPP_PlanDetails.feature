@@ -161,32 +161,32 @@ Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanDetails AARP - To test DCE - VPP Plan De
     Then user click on view plan details on summary page in AARP
 
     #Then user verifiy drug cost estomator and view plan summary is not exist in vpp detail page in ARRP
-    @DCE_Redesign_VPPSummary_to_Vpp_Details_MAPD_AARP
+    @DCE_Redesign_VPPSummary_to_Vpp_Details_MAPD_AARP @dceViewPlanSummaryButton_AARP
     Examples: 
       | site | zipcode | plantype | planyear | county | isMultutiCounty | drug1     | tabName                       | planname                                           |
       | AARP |   90210 | MAPD     | future   | none   | no              | meloxicam | Medical Benefits and Programs | AARP Medicare Advantage SecureHorizons Focus (HMO) |
 
-    @DCE_Redesign_VPPSummary_to_Vpp_Details_PDP_AARP
+    @DCE_Redesign_VPPSummary_to_Vpp_Details_PDP_AARP @dceViewPlanSummaryButton_AARP
     Examples: 
       | site | zipcode | plantype | planyear | county       | isMultutiCounty | drug1     | tabName                       | planname                        |
       | AARP |   80002 | PDP      | future   | Adams County | yes             | meloxicam | Medical Benefits and Programs | AARP MedicareRx Walgreens (PDP) |
 
-    @DCE_Redesign_VPPSummary_to_Vpp_Details_SNP_AARP
+    @DCE_Redesign_VPPSummary_to_Vpp_Details_SNP_AARP @dceViewPlanSummaryButton_AARP
     Examples: 
       | site | zipcode | plantype | planyear | county       | isMultutiCounty | drug1   | planname                                              | tabName                       |
       | AARP |   78006 | SNP      | future   | Bexar County | yes             | Lipitor | UnitedHealthcare Medicare Silver (Regional PPO C-SNP) | Medical Benefits and Programs |
 
-    @DCE_Redesign_VPPSummary_to_Vpp_Details_MAPD_UHC
+    @DCE_Redesign_VPPSummary_to_Vpp_Details_MAPD_UHC @dceViewPlanSummaryButton_UHC
     Examples: 
       | site | zipcode | plantype | planyear | county | isMultutiCounty | drug1     | tabName                       | planname                                           |
       | UHC  |   90210 | MAPD     | future   | none   | no              | meloxicam | Medical Benefits and Programs | AARP Medicare Advantage SecureHorizons Focus (HMO) |
 
-    @DCE_Redesign_VPPSummary_to_Vpp_Details_PDP_UHC
+    @DCE_Redesign_VPPSummary_to_Vpp_Details_PDP_UHC @dceViewPlanSummaryButton_UHC
     Examples: 
       | site | zipcode | plantype | planyear | county       | isMultutiCounty | drug1     | tabName                       | planname                        |
       | UHC  |   80002 | PDP      | future   | Adams County | yes             | meloxicam | Medical Benefits and Programs | AARP MedicareRx Walgreens (PDP) |
 
-    @DCE_Redesign_VPPSummary_to_Vpp_Details_SNP_UHC
+    @DCE_Redesign_VPPSummary_to_Vpp_Details_SNP_UHC @dceViewPlanSummaryButton_UHC
     Examples: 
       | site | zipcode | plantype | planyear | county       | isMultutiCounty | drug1   | planname                                              | tabName                       |
       | UHC  |   78006 | SNP      | future   | Bexar County | yes             | Lipitor | UnitedHealthcare Medicare Silver (Regional PPO C-SNP) | Medical Benefits and Programs |
@@ -597,25 +597,23 @@ Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanDetails AARP - To test DCE - VPP Plan De
     Examples: 
       | site | zipcode | plantype | county | isMultutiCounty | drug1     | planname                                       | planyear |
       | AARP |   90210 | MAPD     | none   | no              | meloxicam | AARP Medicare Advantage Freedom Plus (HMO-POS) | future   |
-      
-      @dCERedesign_PlanSave_PDP_AARP @dceDrugDetailSaveAARP
-    
+
+    @dCERedesign_PlanSave_PDP_AARP @dceDrugDetailSaveAARP
     Examples: 
-      | site | zipcode | plantype | planyear | county       | isMultutiCounty | drug1   | planname                        | 
-      | AARP |   80002 | PDP      | future   | Adams County | yes             | Lipitor | AARP MedicareRx Walgreens (PDP) | 
-      
-     @dCERedesign_PlanSave_PDP_AARP @dceDrugDetailSaveAARP
+      | site | zipcode | plantype | planyear | county       | isMultutiCounty | drug1   | planname                        |
+      | AARP |   80002 | PDP      | future   | Adams County | yes             | Lipitor | AARP MedicareRx Walgreens (PDP) |
+
+    @dCERedesign_PlanSave_PDP_AARP @dceDrugDetailSaveAARP
     Examples: 
       | site | zipcode | plantype | planyear | county       | isMultutiCounty | drug1   | planname                                              | tabName                       |
       | AARP |   78006 | SNP      | future   | Bexar County | yes             | Lipitor | UnitedHealthcare Medicare Silver (Regional PPO C-SNP) | Medical Benefits and Programs |
 
-    
-     @dCERedesign_PlanSave_MAPD_UHC @dceDrugDetailSaveUHC
+    @dCERedesign_PlanSave_MAPD_UHC @dceDrugDetailSaveUHC
     Examples: 
       | site | zipcode | plantype | county | isMultutiCounty | drug1     | planname                                       |
       | UHC  |   90210 | MAPD     | none   | no              | meloxicam | AARP Medicare Advantage Freedom Plus (HMO-POS) |
 
-     @dCERedesign_PlanSave_PDP_UHC @dceDrugDetailSaveUHC
+    @dCERedesign_PlanSave_PDP_UHC @dceDrugDetailSaveUHC
     Examples: 
       | site | zipcode | plantype | county       | isMultutiCounty | drug1     | planname                        | planyear |
       | UHC  |   80002 | PDP      | Adams County | yes             | meloxicam | AARP MedicareRx Walgreens (PDP) | future   |
@@ -625,7 +623,6 @@ Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanDetails AARP - To test DCE - VPP Plan De
       | site | zipcode | plantype | county | isMultutiCounty | drug1     | planname                                   | planyear |
       | AARP |   10001 | SNP      | none   | no              | meloxicam | UnitedHealthcare Dual Complete (HMO D-SNP) | future   |
 
-  
   @dce_Redesign_VPP_PlanDetails_Pharmacy_PDP @decRelease
   Scenario Outline: Test to verify preferred and Standard tab on drug detail change pharmacy
     Given the user is on medicare acquisition site landing page
