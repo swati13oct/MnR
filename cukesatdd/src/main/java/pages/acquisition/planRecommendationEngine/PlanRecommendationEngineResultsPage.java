@@ -281,7 +281,7 @@ public class PlanRecommendationEngineResultsPage extends UhcDriver {
 	@FindBy(css = "#plan-list-1 .swiper-container .module-plan-overview a[id*='savePlan']")
 	private List<WebElement> MAPlansSaveIcon;
 	
-	@FindBy(css = "#plan-list-3 .swiper-container .module-plan-overview a[id*='savePlan']")
+	@FindBy(css = "#plan-list-3 .swiper-container .module-plan-overview a[class*='favorite-plan'] span[class*='unliked']")
 	private List<WebElement> PDPPlansSaveIcon;
 	
 	@FindBy(css = "#plan-list-4 .swiper-container .module-plan-overview a[id*='savePlan']")
@@ -1569,6 +1569,10 @@ public ArrayList<String> saveplans(List<WebElement> plansName, int saveplans,	St
 	System.out.println("Plans Count :" +plansName.size());
 	threadsleep(3000);
 	for (int plan = 0; plan < saveplans; plan++) {
+		if(plansName.get(1).getText().equalsIgnoreCase("MedicareRx")) {
+			vppPlans.add(savingplans(plansName.get(plan), savePlan.get(2)));
+			continue;
+		}
 		vppPlans.add(savingplans(plansName.get(plan), savePlan.get(plan)));
 	}
 	Collections.sort(vppPlans);
@@ -1605,6 +1609,7 @@ public void verifyPlansVPandPDP(List<WebElement> plansName) {
 }
 
 public String savingplans(WebElement plan, WebElement saveplan) {
+	scrollToView(plan);
 	String exceptedplanName = plan.getText().trim();
 	System.out.println("Plan Name in VPP Summary Page: " + exceptedplanName);
 	String save = saveplan.getText().trim();
