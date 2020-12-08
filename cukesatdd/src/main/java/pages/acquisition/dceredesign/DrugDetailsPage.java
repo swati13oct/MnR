@@ -251,11 +251,13 @@ public class DrugDetailsPage extends UhcDriver {
 	@FindBy(xpath = "//a[text()='Keep using this pharmacy.']")
 	public WebElement keepUsingPharmBtn;
 	
-	// @FindBy(xpath = "//a[text()='Change Pharmacy']/ancestor::div/div/span']")
-	@FindBy(xpath = "//button[text()='Change Pharmacy']/ancestor::div/div/span")
+	@FindBy(xpath = "//a[text()='Change Pharmacy']/ancestor::div/div/span']")
+	//@FindBy(xpath = "//button[text()='Change Pharmacy']/ancestor::div/div/span")
 	public WebElement pharmacyName;
 	
-	@FindBy(xpath = "//button[contains(@aria-label,'Select ROCK PHARMACY -')]")
+	//@FindBy(xpath = "//button[contains(@aria-label,'Select ROCK PHARMACY -')]")
+	
+	@FindBy(xpath ="//*[@id='selectPharmacyBtn2']")
 	public WebElement selectRockPharm;
 	
 	@FindBy(xpath = "//*[@class='uhc-button__text'][contains(text(),'Save and Update Drug Costs')]")
@@ -267,7 +269,7 @@ public class DrugDetailsPage extends UhcDriver {
 	@FindBy(xpath = "//div[text()='Monthly Premium']/following::div[1]")
 	public WebElement monthlyValue;
 	
-	@FindBy(xpath = "//*[contains(@class,'uhc-modal__content p-5 ng-tns-c37')]/div/div/div/p")
+	@FindBy(xpath = "//*[@id='modal']/div/div[2]/div/div/div/p")
 	public WebElement coverageMsg;
 	
 	@FindBy(xpath = "//*[@id='table_coverage_gap']")
@@ -902,7 +904,8 @@ public class DrugDetailsPage extends UhcDriver {
 		assertTrue(pharmacyName.getText().contains("WALGREENS"));
 	}
 	
-	public void  validateAndClickKeepPharm() {
+	public void  validateAndClickKeepPharm()throws InterruptedException {
+		waitforElementNew(keepUsingPharmBtn, 30);
 		validateNew(keepUsingPharmBtn);
 		keepUsingPharmBtn.click();
 	}
@@ -921,8 +924,12 @@ public class DrugDetailsPage extends UhcDriver {
 		}
 	}
 	
-	public void validateCoverageGapMessage(String message) {
+	
+		
+	
+	public void validateCoverageGapMessage(String message)throws InterruptedException {
 		if(validateNew(coverageGap)) {
+			waitforElementNew(coverageGap, 30);
 			coverageGap.click();
 			System.out.println(coverageMsg.getText());
 			System.out.println(message);

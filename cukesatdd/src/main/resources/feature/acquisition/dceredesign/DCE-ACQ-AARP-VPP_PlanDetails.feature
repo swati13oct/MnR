@@ -157,7 +157,7 @@ Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanDetails AARP - To test DCE - VPP Plan De
     And verify the default tab displayed on VPP details page
       | TabName | <tabName> |
     Then the user verify the drug cost estimator and view plan summary on VPP detail page in AARP
-    Then the user click on view plan summary on vpp detail page 
+    Then the user click on view plan summary on vpp detail page
     Then user click on view plan details on summary page in AARP
 
     #Then user verifiy drug cost estomator and view plan summary is not exist in vpp detail page in ARRP
@@ -193,49 +193,54 @@ Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanDetails AARP - To test DCE - VPP Plan De
 
   @noPrescriptionCoverage @F492445
   Scenario Outline: Test to verify No Prescription Coverage for Pharmacies on DCE Details Page
-    Given the user is on the AARP medicare site landing page
-    When the user performs plan search using following information in the AARP site
+    Given the user is on medicare acquisition site landing page
+      | Site | <site> |
+    When the user performs plan search using following information
       | Zip Code        | <zipcode>         |
       | County Name     | <county>          |
       | Is Multi County | <isMultutiCounty> |
-    Then the user navigates to the plan details for the given plan type in AARP site
+    And the user views the plans of the below plan type
+      | Plan Type | <plantype> |
+    And the user selects plan year
+      | Plan Year | <planyear> |
+    Then the user navigates to the plan details for the given plan type
       | Plan Type | <plantype> |
       | Plan Name | <planname> |
-    And I access the DCE Redesign from Plan Details
+    And I access the DCE Redesign from Plan Details for the plan
     Then the user validates Get Started Page
     Then the user clicks on Build Drug List to navigate to Build Drug List Page
     Then the user searches and adds the following Drug to Drug List
       | DrugName | <drug1> |
-    And clicks on Review drug cost button for detail page
+    Then the user clicks on Review Drug Costs to Land on Drug Details Page
     And user clicks on change pharmacy link from details page
     Then user change the pharmacy to view no prescription coverage
 
-    @noPrescriptionCoverge_MAPD
+    @noPrescriptionCoverge_MAPD_AARP
     Examples: 
-      | zipcode | plantype | county       | isMultutiCounty | drug1   | planname                             |
-      |   78006 | MAPD     | Bexar County | yes             | Lipitor | AARP Medicare Advantage Choice (PPO) |
+      | site | zipcode | plantype | county       | isMultutiCounty | drug1   | planname                             | planyear |
+      | AARP |   78006 | MAPD     | Bexar County | yes             | Lipitor | AARP Medicare Advantage Choice (PPO) | future   |
 
-    @noPrescriptionCoverge_SNP
+    @noPrescriptionCoverge_MAPD_UHC
     Examples: 
-      | zipcode | plantype | county       | isMultutiCounty | drug1   | planname                                   |
-      |   78006 | SNP      | Bexar County | yes             | Lipitor | UnitedHealthcare Dual Complete (HMO D-SNP) |
-
-    @noPrescriptionCoverge_PDP
-    Examples: 
-      | zipcode | plantype | county       | isMultutiCounty | drug1   | planname                        |
-      |   78006 | PDP      | Bexar County | yes             | Lipitor | AARP MedicareRx Walgreens (PDP) |
+      | site | zipcode | plantype | county       | isMultutiCounty | drug1   | planname                             | planyear |
+      | UHC  |   78006 | MAPD     | Bexar County | yes             | Lipitor | AARP Medicare Advantage Choice (PPO) | future   |
 
   @dceRedesignExtraHelpAlertDetailPage @F478554 @F492102 @F519757
   Scenario Outline: Test to Verify that Extra help Warning messgae on drug detail page
-    Given the user is on the AARP medicare site landing page
-    When the user performs plan search using following information in the AARP site
+    Given the user is on medicare acquisition site landing page
+      | Site | <site> |
+    When the user performs plan search using following information
       | Zip Code        | <zipcode>         |
       | County Name     | <county>          |
       | Is Multi County | <isMultutiCounty> |
-    Then the user navigates to the plan details for the given plan type in AARP site
+    And the user views the plans of the below plan type
+      | Plan Type | <plantype> |
+    And the user selects plan year
+      | Plan Year | <planyear> |
+    Then the user navigates to the plan details for the given plan type
       | Plan Type | <plantype> |
       | Plan Name | <planname> |
-    And I access the DCE Redesign from Plan Details
+    And I access the DCE Redesign from Plan Details for the plan
     Then the user validates Get Started Page
     Then the user clicks on Build Drug List to navigate to Build Drug List Page
     Then the user searches and adds the following Drug to Drug List
@@ -251,18 +256,29 @@ Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanDetails AARP - To test DCE - VPP Plan De
     And the user verifies the catastrophic coverage message
       | catastrophicCoverage | <catastrophicCoverageMessage> |
 
+    @dceRedesignExtraHelpAlertDetailPage_AARP
     Examples: 
-      | zipcode | plantype | county       | isMultutiCounty | drug1 | drug2                | drug3      | drug4         | drug5            | drug6   | planname                                   | coverageGapMessage                                                           | catastrophicCoverageMessage                                                           |
-      |   78006 | SNP      | Bexar County | yes             | Emsam | diclofenac potassium | febuxostat | buprenorphine | fentanyl citrate | Lipitor | UnitedHealthcare Dual Complete (HMO D-SNP) | During the Coverage Gap Stage, the plan pays all of the cost for your drugs. | During the Catastrophic Coverage Stage, the plan pays all of the cost for your drugs. |
+      | site | zipcode | plantype | county       | isMultutiCounty | drug1 | planyear | planname                                   | coverageGapMessage                                                           | catastrophicCoverageMessage                                                           |
+      | AARP |   78006 | SNP      | Bexar County | yes             | Emsam | future   | UnitedHealthcare Dual Complete (HMO D-SNP) | During the Coverage Gap Stage, the plan pays all of the cost for your drugs. | During the Catastrophic Coverage Stage, the plan pays all of the cost for your drugs. |
 
-  @dceRedesignDefaultPharmacy @F497405
+    @dceRedesignExtraHelpAlertDetailPage_UHC
+    Examples: 
+      | site | zipcode | plantype | county       | isMultutiCounty | drug1 | planyear | planname                                   | coverageGapMessage                                                           | catastrophicCoverageMessage                                                           |
+      | UHC  |   78006 | SNP      | Bexar County | yes             | Emsam | future   | UnitedHealthcare Dual Complete (HMO D-SNP) | During the Coverage Gap Stage, the plan pays all of the cost for your drugs. | During the Catastrophic Coverage Stage, the plan pays all of the cost for your drugs. |
+
+  @dceRedesignDrugDetailsDefaultPharmacy @F497405
   Scenario Outline: Test to Verify default Retail chain pharmacy on detail page
-    Given the user is on the AARP medicare site landing page
-    When the user performs plan search using following information in the AARP site
+    Given the user is on medicare acquisition site landing page
+      | Site | <site> |
+    When the user performs plan search using following information
       | Zip Code        | <zipcode>         |
       | County Name     | <county>          |
       | Is Multi County | <isMultutiCounty> |
-    Then the user navigates to the plan details for the given plan type in AARP site
+    And the user views the plans of the below plan type
+      | Plan Type | <plantype> |
+    And the user selects plan year
+      | Plan Year | <planyear> |
+    Then the user navigates to the plan details for the given plan type
       | Plan Type | <plantype> |
       | Plan Name | <planname> |
     And I access the DCE Redesign from Plan Details for the plan
@@ -276,32 +292,32 @@ Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanDetails AARP - To test DCE - VPP Plan De
     Then user clicks on Keep Using This Pharmacy on change pharmacy page
     Then User validate Walgreens pharmacy on detail page
 
-    @dceRetailChain_MAPD
+    @dceRedesignDrugDetailsDefaultPharmacy_MAPD_AARP
     Examples: 
-      | zipcode | plantype | county       | isMultutiCounty | drug1     | planname                                              |
-      |   10001 | MAPD     | Bexar County | yes             | meloxicam | UnitedHealthcare Medicare Silver (Regional PPO C-SNP) |
+      | site | zipcode | plantype | planyear | county | isMultutiCounty | drug1     | tabName                       | planname                                           |
+      | AARP |   90210 | MAPD     | future   | none   | no              | meloxicam | Medical Benefits and Programs | AARP Medicare Advantage SecureHorizons Focus (HMO) |
 
-    @dceRetailChain_PDP
+    @dceRedesignDrugDetailsDefaultPharmacy_MAPD_UHC
     Examples: 
-      | zipcode | plantype | county       | isMultutiCounty | drug1     | planname                        |
-      |   10001 | PDP      | Adams County | yes             | meloxicam | AARP MedicareRx Walgreens (PDP) |
+      | site | zipcode | plantype | planyear | county | isMultutiCounty | drug1     | tabName                       | planname                                           |
+      | UHC  |   90210 | MAPD     | future   | none   | no              | meloxicam | Medical Benefits and Programs | AARP Medicare Advantage SecureHorizons Focus (HMO) |
 
-    @dceRetailChain_SNP
-    Examples: 
-      | zipcode | plantype | county       | isMultutiCounty | drug1     | planname                        |
-      |   10001 | SNP      | Adams County | yes             | meloxicam | AARP MedicareRx Walgreens (PDP) |
-
-  @dceNBADetailPage @F509520
+  @dceNBADetailPageNBA @F509520
   Scenario Outline: Test to Verify the DCE NBA on drug detail page
-    Given the user is on the AARP medicare site landing page
-    When the user performs plan search using following information in the AARP site
+    Given the user is on medicare acquisition site landing page
+      | Site | <site> |
+    When the user performs plan search using following information
       | Zip Code        | <zipcode>         |
       | County Name     | <county>          |
       | Is Multi County | <isMultutiCounty> |
-    Then the user navigates to the plan details for the given plan type in AARP site
+    And the user views the plans of the below plan type
+      | Plan Type | <plantype> |
+    And the user selects plan year
+      | Plan Year | <planyear> |
+    Then the user navigates to the plan details for the given plan type
       | Plan Type | <plantype> |
       | Plan Name | <planname> |
-    And I access the DCE Redesign from Plan Details
+    And I access the DCE Redesign from Plan Details for the plan
     Then the user validates Get Started Page
     Then the user clicks on Build Drug List to navigate to Build Drug List Page
     Then the user searches and adds the following Drug to Drug List
@@ -309,9 +325,35 @@ Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanDetails AARP - To test DCE - VPP Plan De
     Then the user clicks on Review Drug Costs to Land on Drug Details Page
     And verify DCE NBA is displayed on drug details page
 
+    @dceNBADetailPageNBA_MAPD_AARP
     Examples: 
-      | zipcode | plantype | county       | isMultutiCounty | drug1 | planname                                   |
-      |   78006 | SNP      | Bexar County | yes             | Emsam | UnitedHealthcare Dual Complete (HMO D-SNP) |
+      | site | zipcode | plantype | planyear | county | isMultutiCounty | drug1     | tabName                       | planname                                           |
+      | AARP |   90210 | MAPD     | future   | none   | no              | meloxicam | Medical Benefits and Programs | AARP Medicare Advantage SecureHorizons Focus (HMO) |
+
+    @dceNBADetailPageNBA_PDP_AARP
+    Examples: 
+      | site | zipcode | plantype | county       | isMultutiCounty | drug1     | planname                        | planyear |
+      | AARP |   10001 | PDP      | Adams County | yes             | meloxicam | AARP MedicareRx Walgreens (PDP) | future   |
+
+    @dceNBADetailPageNBA_SNP_AARP
+    Examples: 
+      | site | zipcode | plantype | county       | isMultutiCounty | drug1 | planname                                   | planyear |
+      | AARP |   78006 | SNP      | Bexar County | yes             | Emsam | UnitedHealthcare Dual Complete (HMO D-SNP) | future   |
+
+    @dceNBADetailPageNBA_MAPD_UHC
+    Examples: 
+      | site | zipcode | plantype | planyear | county | isMultutiCounty | drug1     | tabName                       | planname                                           |
+      | UHC  |   90210 | MAPD     | future   | none   | no              | meloxicam | Medical Benefits and Programs | AARP Medicare Advantage SecureHorizons Focus (HMO) |
+
+    @dceNBADetailPageNBA_PDP_UHC
+    Examples: 
+      | site | zipcode | plantype | county       | isMultutiCounty | drug1     | planname                        | planyear |
+      | UHC  |   10001 | PDP      | Adams County | yes             | meloxicam | AARP MedicareRx Walgreens (PDP) | future   |
+
+    @dceNBADetailPageNBA_SNP_UHC
+    Examples: 
+      | site | zipcode | plantype | county       | isMultutiCounty | drug1 | planname                                   |planyear|
+      | UHC  |   78006 | SNP      | Bexar County | yes             | Emsam | UnitedHealthcare Dual Complete (HMO D-SNP) |future|
 
   @dceRedesing_PlanCost @F501519
   Scenario Outline: Test to Verify Prescription Drug benefit and plan cost tab on vpp details
@@ -337,67 +379,88 @@ Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanDetails AARP - To test DCE - VPP Plan De
 
   @dceSwitchtoGenericNBA @F505210
   Scenario Outline: Test to verify Switch to generic NBA on DCE Details Page
-    Given the user is on the AARP medicare site landing page
-    When the user performs plan search using following information in the AARP site
+    Given the user is on medicare acquisition site landing page
+      | Site | <site> |
+    When the user performs plan search using following information
       | Zip Code        | <zipcode>         |
       | County Name     | <county>          |
       | Is Multi County | <isMultutiCounty> |
-    Then the user navigates to the plan details for the given plan type in AARP site
+    And the user views the plans of the below plan type
+      | Plan Type | <plantype> |
+    And the user selects plan year
+      | Plan Year | <planyear> |
+    Then the user navigates to the plan details for the given plan type
       | Plan Type | <plantype> |
       | Plan Name | <planname> |
-    And I access the DCE Redesign from Plan Details
+    And I access the DCE Redesign from Plan Details for the plan
     Then the user validates Get Started Page
     Then the user clicks on Build Drug List to navigate to Build Drug List Page
     Then the user searches and adds the following Drug to Drug List
       | DrugName | <drug1> |
-    And clicks on Review drug cost button for detail page
+    Then the user clicks on Review Drug Costs to Land on Drug Details Page
     Then user verify and click on switch to generic NBA on drug detail page
     Then verify drug is switched to generic on detail page
 
+    @dceSwitchtoGenericNBA_MAPD_AARP
     Examples: 
-      | zipcode | plantype | county       | isMultutiCounty | drug1   | drug2   | planname                             |
-      |   78006 | MAPD     | Bexar County | yes             | Lipitor | orfadin | AARP Medicare Advantage Choice (PPO) |
+      | site | zipcode | plantype | county       | isMultutiCounty | drug1   | drug2   | planname                             |
+      | AARP |   78006 | MAPD     | Bexar County | yes             | Lipitor | orfadin | AARP Medicare Advantage Choice (PPO) |
+
+    @dceSwitchtoGenericNBA_MAPD_UHC
+    Examples: 
+      | site | zipcode | plantype | county       | isMultutiCounty | drug1   | drug2   | planname                             |
+      | UHC  |   78006 | MAPD     | Bexar County | yes             | Lipitor | orfadin | AARP Medicare Advantage Choice (PPO) |
 
   @detailPageDefaultPharmacy
   Scenario Outline: Test to verify default distance and zip code, miles dropdown for pharmacy from vpp detail page
-    Given the user is on the AARP medicare site landing page
-    When the user performs plan search using following information in the AARP site
+   Given the user is on medicare acquisition site landing page
+      | Site | <site> |
+    When the user performs plan search using following information
       | Zip Code        | <zipcode>         |
       | County Name     | <county>          |
       | Is Multi County | <isMultutiCounty> |
-    Then the user navigates to the plan details for the given plan type in AARP site
+    And the user views the plans of the below plan type
+      | Plan Type | <plantype> |
+    And the user selects plan year
+      | Plan Year | <planyear> |
+    Then the user navigates to the plan details for the given plan type
       | Plan Type | <plantype> |
       | Plan Name | <planname> |
-    And I access the DCE Redesign from Plan Details
+    And I access the DCE Redesign from Plan Details for the plan
     Then the user validates Get Started Page
     Then the user clicks on Build Drug List to navigate to Build Drug List Page
     Then the user searches and adds the following Drug to Drug List
       | DrugName | <drug1> |
-    And clicks on Review drug cost button for detail page
-    #Then the user Clicks button to VPP Plan Details Page from Drug Details Page
+    Then the user clicks on Review Drug Costs to Land on Drug Details Page
     And user clicks on change pharmacy link from details page
     Then user verify details page change pharmacy modal
 
     Examples: 
-      | zipcode | plantype | county       | isMultutiCounty | drug1   | planname                             |
-      |   78006 | MAPD     | Bexar County | yes             | Lipitor | AARP Medicare Advantage Choice (PPO) |
+      | site | zipcode | plantype | county       | isMultutiCounty | drug1   | planname                             |planyear|
+      | AARP |   78006 | MAPD     | Bexar County | yes             | Lipitor | AARP Medicare Advantage Choice (PPO) |future|
 
   @editPharmacyFromVPPDetail
   Scenario Outline: Test to verify user can edit the pharmacy from vpp detail page
-    Given the user is on the AARP medicare site landing page
-    When the user performs plan search using following information in the AARP site
+    Given the user is on medicare acquisition site landing page
+      | Site | <site> |
+    When the user performs plan search using following information
       | Zip Code        | <zipcode>         |
       | County Name     | <county>          |
       | Is Multi County | <isMultutiCounty> |
-    Then the user navigates to the plan details for the given plan type in AARP site
+    And the user views the plans of the below plan type
+      | Plan Type | <plantype> |
+    And the user selects plan year
+      | Plan Year | <planyear> |
+    Then the user navigates to the plan details for the given plan type
       | Plan Type | <plantype> |
       | Plan Name | <planname> |
-    And I access the DCE Redesign from Plan Details
+    And I access the DCE Redesign from Plan Details for the plan
     Then the user validates Get Started Page
     Then the user clicks on Build Drug List to navigate to Build Drug List Page
     Then the user searches and adds the following Drug to Drug List
       | DrugName | <drug1> |
-    And clicks on Review drug cost button for detail page
+    Then the user clicks on Review Drug Costs to Land on Drug Details Page
+    #And clicks on Review drug cost button for detail page
     Then the user Clicks button to VPP Plan Details Page from Drug Details Page
     Then the user validates planName matches plan Name in VPP
     Then the user verify the drug cost estimator and view plan summary on VPP detail page in AARP
@@ -405,26 +468,30 @@ Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanDetails AARP - To test DCE - VPP Plan De
     Then user clicks on change pharmacy link from details page
 
     Examples: 
-      | zipcode | plantype | county | isMultutiCounty | drug1     | drug2                | drug3      | drug4         | drug5            | drug6   | planname                                           |
-      |   90210 | MAPD     | none   | no              | meloxicam | diclofenac potassium | febuxostat | buprenorphine | fentanyl citrate | Lipitor | AARP Medicare Advantage SecureHorizons Focus (HMO) |
+      | site | zipcode | plantype | county | isMultutiCounty | drug1     | planyear             | drug3      | drug4         | drug5            | drug6   | planname                                           |
+      | AARP |   90210 | MAPD     | none   | no              | meloxicam | future  | febuxostat | buprenorphine | fentanyl citrate | Lipitor | AARP Medicare Advantage SecureHorizons Focus (HMO) |
 
   @drugDetailPharmacyFunctionality
   Scenario Outline: Test to verify sort, pagination, invalid zipcode error functionality for change pharmacy on drug detail page
-    Given the user is on the AARP medicare site landing page
-    When the user performs plan search using following information in the AARP site
+    Given the user is on medicare acquisition site landing page
+      | Site | <site> |
+    When the user performs plan search using following information
       | Zip Code        | <zipcode>         |
       | County Name     | <county>          |
       | Is Multi County | <isMultutiCounty> |
-    Then the user navigates to the plan details for the given plan type in AARP site
+    And the user views the plans of the below plan type
+      | Plan Type | <plantype> |
+    And the user selects plan year
+      | Plan Year | <planyear> |
+    Then the user navigates to the plan details for the given plan type
       | Plan Type | <plantype> |
       | Plan Name | <planname> |
-    And I access the DCE Redesign from Plan Details
+    And I access the DCE Redesign from Plan Details for the plan
     Then the user validates Get Started Page
     Then the user clicks on Build Drug List to navigate to Build Drug List Page
     Then the user searches and adds the following Drug to Drug List
       | DrugName | <drug1> |
-    And clicks on Review drug cost button for detail page
-    Then user clicks on change pharmacy link from details page
+    Then the user clicks on Review Drug Costs to Land on Drug Details Page
     Then user verify details page change pharmacy modal
     When user selects Preferred mail order pharmacy from drug details page
     Then the message "OptumRx Home Delivery only provides 90-day refill for your drugs." should be displayed on change pharmacy modal from drug detail page
@@ -444,25 +511,30 @@ Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanDetails AARP - To test DCE - VPP Plan De
     Then error message "Please enter a valid ZIP code." should be displayed on change pharmacy modal from drug details
 
     Examples: 
-      | zipcode | plantype | county | isMultutiCounty | drug1     | zipCode1 | zipCode2 | drug4         | drug5            | drug6   | planname                                           |
-      |   90001 | MAPD     | none   | no              | meloxicam |    96799 |    78456 | buprenorphine | fentanyl citrate | Lipitor | AARP Medicare Advantage SecureHorizons Focus (HMO) |
+      | site | zipcode | plantype | county | isMultutiCounty | drug1     | zipCode1 | zipCode2 | drug4         | drug5            | drug6   | planname                                           |
+      | AARP |   90001 | MAPD     | none   | no              | meloxicam |    96799 |    78456 | buprenorphine | fentanyl citrate | Lipitor | AARP Medicare Advantage SecureHorizons Focus (HMO) |
 
   @dCERedesign_ChangePharmacyDetailsNoResults_AARP
   Scenario Outline: Test to verify no results message displayed for change pharmacy modal on drug details page
-    Given the user is on the AARP medicare site landing page
-    When the user performs plan search using following information in the AARP site
+    Given the user is on medicare acquisition site landing page
+      | Site | <site> |
+    When the user performs plan search using following information
       | Zip Code        | <zipcode>         |
       | County Name     | <county>          |
       | Is Multi County | <isMultutiCounty> |
-    Then the user navigates to the plan details for the given plan type in AARP site
+    And the user views the plans of the below plan type
+      | Plan Type | <plantype> |
+    And the user selects plan year
+      | Plan Year | <planyear> |
+    Then the user navigates to the plan details for the given plan type
       | Plan Type | <plantype> |
       | Plan Name | <planname> |
-    And I access the DCE Redesign from Plan Details
+    And I access the DCE Redesign from Plan Details for the plan
     Then the user validates Get Started Page
     Then the user clicks on Build Drug List to navigate to Build Drug List Page
     Then the user searches and adds the following Drug to Drug List
       | DrugName | <drug1> |
-    And clicks on Review drug cost button for detail page
+    Then the user clicks on Review Drug Costs to Land on Drug Details Page
     Then user clicks on change pharmacy link from details page
     Then user verify details page change pharmacy modal
     When user search with zipcode with no pharamacies from drug details
@@ -472,8 +544,8 @@ Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanDetails AARP - To test DCE - VPP Plan De
       | NoResultsMessage | <message> |
 
     Examples: 
-      | zipcode | plantype | county | isMultutiCounty | drug1     | zipCode1 | zipCode2 | message                                                                                                    | planname                                           |
-      |   90001 | MAPD     | none   | no              | meloxicam |    78006 |    78456 | Prescription drug home delivery is available through OptumRx. Learn more about OptumRx Mail Order Pharmacy | AARP Medicare Advantage SecureHorizons Focus (HMO) |
+      | site | zipcode | plantype | planyear | county | isMultutiCounty | drug1     | zipCode1 | zipCode2 | message                                                                                                    | planname                                           |
+      | AARP |   90001 | MAPD     | future   | none   | no              | meloxicam |    78006 |    78456 | Prescription drug home delivery is available through OptumRx. Learn more about OptumRx Mail Order Pharmacy | AARP Medicare Advantage SecureHorizons Focus (HMO) |
 
   @dCERedesign_PlanSave_AARP @F476042
   Scenario Outline: Test to verify unauthenticated user save the plan on drug details page and see the saved plan on guest profile
@@ -499,54 +571,60 @@ Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanDetails AARP - To test DCE - VPP Plan De
 
     @DCE_Redesign_DCE_Detail_to_Vpp_Details_MAPD
     Examples: 
-      |site| zipcode | plantype | county | isMultutiCounty | drug1     | planname                                       |
-      |AARP|   90210 | MAPD     | none   | no              | meloxicam | AARP Medicare Advantage Freedom Plus (HMO-POS) |
-      
-      @DCE_Redesign_DCE_Detail_to_Vpp_Details_MAPD
+      | site | zipcode | plantype | county | isMultutiCounty | drug1     | planname                                       |planyear|
+      | AARP |   90210 | MAPD     | none   | no              | meloxicam | AARP Medicare Advantage Freedom Plus (HMO-POS) |future|
+
+    @DCE_Redesign_DCE_Detail_to_Vpp_Details_MAPD
     Examples: 
-      |site| zipcode | plantype | county | isMultutiCounty | drug1     | planname                                       |
-      |UHC|   90210 | MAPD     | none   | no              | meloxicam | AARP Medicare Advantage Freedom Plus (HMO-POS) |
+      | site | zipcode | plantype | county | isMultutiCounty | drug1     | planname                                       |
+      | UHC  |   90210 | MAPD     | none   | no              | meloxicam | AARP Medicare Advantage Freedom Plus (HMO-POS) |
 
     @DCE_Redesign_DCE_Detail_to_Vpp_Details_PDP
     Examples: 
-      |site| zipcode | plantype | county       | isMultutiCounty | drug1     | planname                        |
-      |AARP|   80002 | PDP      | Adams County | yes             | meloxicam | AARP MedicareRx Walgreens (PDP) |
-      
-      @DCE_Redesign_DCE_Detail_to_Vpp_Details_PDP
+      | site | zipcode | plantype | county       | isMultutiCounty | drug1     | planname                        |planyear|
+      | AARP |   80002 | PDP      | Adams County | yes             | meloxicam | AARP MedicareRx Walgreens (PDP) |future|
+
+    @DCE_Redesign_DCE_Detail_to_Vpp_Details_PDP
     Examples: 
-      |site| zipcode | plantype | county       | isMultutiCounty | drug1     | planname                        |
-      |UHC|   80002 | PDP      | Adams County | yes             | meloxicam | AARP MedicareRx Walgreens (PDP) |
+      | site | zipcode | plantype | county       | isMultutiCounty | drug1     | planname                        |planyear|
+      | UHC  |   80002 | PDP      | Adams County | yes             | meloxicam | AARP MedicareRx Walgreens (PDP) |future|
 
     @DCE_Redesign_DCE_Detail_to_Vpp_Details_SNP
     Examples: 
-      |site| zipcode | plantype | county | isMultutiCounty | drug1     | planname                                   |
-      |AARP|   10001 | SNP      | none   | no              | meloxicam | UnitedHealthcare Dual Complete (HMO D-SNP) |
-      
-      @DCE_Redesign_DCE_Detail_to_Vpp_Details_SNP
+      | site | zipcode | plantype | county | isMultutiCounty | drug1     | planname                                   |planyear|
+      | AARP |   10001 | SNP      | none   | no              | meloxicam | UnitedHealthcare Dual Complete (HMO D-SNP) |future|
+
+    @DCE_Redesign_DCE_Detail_to_Vpp_Details_SNP
     Examples: 
-      |site| zipcode | plantype | county | isMultutiCounty | drug1     | planname                                   |
-      |UHC|   10001 | SNP      | none   | no              | meloxicam | UnitedHealthcare Dual Complete (HMO D-SNP) |
+      | site | zipcode | plantype | county | isMultutiCounty | drug1     | planname                                   |planyear|
+      | UHC  |   10001 | SNP      | none   | no              | meloxicam | UnitedHealthcare Dual Complete (HMO D-SNP) |future|
 
   @dce_Redesign_VPP_PlanDetails_Pharmacy_PDP
   Scenario Outline: Test to verify preferred and Standard tab on drug detail change pharmacy
-    Given the user is on the AARP medicare site landing page
-    When the user performs plan search using following information in the AARP site
+    Given the user is on medicare acquisition site landing page
+      | Site | <site> |
+    When the user performs plan search using following information
       | Zip Code        | <zipcode>         |
       | County Name     | <county>          |
       | Is Multi County | <isMultutiCounty> |
-    Then the user navigates to the plan details for the given plan type in AARP site
+    And the user views the plans of the below plan type
+      | Plan Type | <plantype> |
+    And the user selects plan year
+      | Plan Year | <planyear> |
+    Then the user navigates to the plan details for the given plan type
       | Plan Type | <plantype> |
       | Plan Name | <planname> |
-    And I access the DCE Redesign from Plan Details
+    And I access the DCE Redesign from Plan Details for the plan
     Then the user validates Get Started Page
     Then the user clicks on Build Drug List to navigate to Build Drug List Page
     Then the user searches and adds the following Drug to Drug List
       | DrugName | <drug1> |
-    And clicks on Review drug cost button for detail page
+    Then the user clicks on Review Drug Costs to Land on Drug Details Page
+    # And clicks on Review drug cost button for detail page
     Then user clicks on change pharmacy link from details page
     Then user verify details page change pharmacy modal for preferred tab
     Then user click on standard tab from drug details
 
     Examples: 
-      | zipcode | planyear | plantype | county       | isMultutiCounty | drug1     | zipCode1 | message                                                                                                    | drug4         | drug5            | drug6   | planname                        |
-      |   80002 | current  | PDP      | Adams County | yes             | meloxicam |    78006 | Prescription drug home delivery is available through OptumRx. Learn more about OptumRx Mail Order Pharmacy | buprenorphine | fentanyl citrate | Lipitor | AARP MedicareRx Walgreens (PDP) |
+     |site | zipcode | planyear |planyear| plantype | county       | isMultutiCounty | drug1     | zipCode1 | message                                                                                                    | planyear | planname                        |
+      |AARP|   80002 | current  |future|  PDP      | Adams County | yes             | meloxicam |    78006 | Prescription drug home delivery is available through OptumRx. Learn more about OptumRx Mail Order Pharmacy | future   | AARP MedicareRx Walgreens (PDP) |
