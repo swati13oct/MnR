@@ -26,22 +26,22 @@ Feature: 1.08. ACQ- Visitor Profile Authenticated NBA AARP
     @getStartedNBA_MAPD_AARP
     Examples: 
       | site | userName      | password    | isMultiCounty | zipcode | county          | plantype |
-      | AARP | chargersqa@23 | Password@23 | NO              |   10001 | New York County | MAPD     |
+      | AARP | chargersqa@23 | Password@3 | NO              |   10001 | New York County | MAPD     |
       
       @getStartedNBA_PDP_AARP
     Examples: 
       | site | userName      | password    | isMultiCounty | zipcode | county          | plantype |
-      | AARP | chargersqa@23 | Password@23 | NO              |   10001 | New York County | PDP     |
+      | AARP | chargersqa@23 | Password@3 | NO              |   10001 | New York County | PDP     |
 
     @getStartedNBA_MAPD_UHC
     Examples: 
       | site | userName      | password    | isMultiCounty | zipcode | county          | plantype |
-      | UHC  | chargersqa@23 | Password@23 | NO              |   10001 | New York County | MAPD     |
+      | UHC  | chargersqa@23 | Password@3 | NO              |   10001 | New York County | MAPD     |
       
       @getStartedNBA_PDP_UHC
     Examples: 
       | site | userName      | password    | isMultiCounty | zipcode | county          | plantype |
-      | UHC  | chargersqa@23 | Password@23 | NO              |   10001 | New York County | PDP     |
+      | UHC  | chargersqa@23 | Password@3 | NO              |   10001 | New York County | PDP     |
 
   @NBAAuthenticatedMAPD
   Scenario Outline: Verify NBA for authenticated Visitor Profile VPP summary page
@@ -86,12 +86,12 @@ Feature: 1.08. ACQ- Visitor Profile Authenticated NBA AARP
     @authenticatedNBA_MAPD_AARP
     Examples: 
       | site | userName      | password    | isMultiCounty | zipcode | county          | plantype | drugName | dosage   | quantity | frequency     | zipcode | radius   | quantity | frequency     | branded | testPlans                            |
-      | AARP | chargersqa@23 | Password@23 | NO              |   10001 | New York County | MAPD     | Lipitor  | TAB 10MG |       30 | Every 1 month |   90210 | 15 miles |       30 | Every 1 month | yes     | AARP Medicare Advantage Plan 1 (HMO) |
+      | AARP | chargersqa@23 | Password@3 | NO              |   10001 | New York County | MAPD     | Lipitor  | TAB 10MG |       30 | Every 1 month |   90210 | 15 miles |       30 | Every 1 month | yes     | AARP Medicare Advantage Plan 1 (HMO) |
 
     @authenticatedNBA_MAPD_UHC
     Examples: 
       | site | userName      | password    | isMultutiCounty | zipcode | county          | plantype | drugName | dosage   | quantity | frequency     | zipcode | radius   | quantity | frequency     | branded | testPlans                            |
-      | UHC  | chargersqa@23 | Password@23 | NO              |   10001 | New York County | MAPD     | Lipitor  | TAB 10MG |       30 | Every 1 month |   90210 | 15 miles |       30 | Every 1 month | yes     | AARP Medicare Advantage Plan 1 (HMO) |
+      | UHC  | chargersqa@23 | Password@3 | NO              |   10001 | New York County | MAPD     | Lipitor  | TAB 10MG |       30 | Every 1 month |   90210 | 15 miles |       30 | Every 1 month | yes     | AARP Medicare Advantage Plan 1 (HMO) |
 
   @continueEnrollmentNBA
   Scenario Outline: Verify NBA for Continue Enrollment for authenticated Visitor Profile VPP summary page for single plan
