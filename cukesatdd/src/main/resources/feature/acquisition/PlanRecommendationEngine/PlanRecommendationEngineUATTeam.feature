@@ -26,7 +26,7 @@ Feature: PRE_UAT - Verify UAT Scenarios in PRE
       | Additional Option | <Dental-Hearing-Vision-Fitness> |
     Then user selects cost preferences option in cost preferences page
       | Preference Option | <costPreferenceOption> |
-    Then user save plans in vpp summary and Validate in Visitor profile page
+    Then user save 2 MA plans in vpp summary and Validate in Visitor profile page
       | Plan Year | <PlanYear> |
     Then user Validate Drug and Provider details in Visitor profile page
 
@@ -80,3 +80,24 @@ Feature: PRE_UAT - Verify UAT Scenarios in PRE
       | maaarpmedicareplans    |
       | uhcmedicaresolutions   |
       | aarpmedicareplans      |
+
+  @PRE @planrecommendation @PRE_UAT_VP_PLANS_PDP
+  Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <Drug Selection> , <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch> , <PlanYear> - To validate Plan Names VP VS VPP Details Page
+    Given the user is on UHC medicare acquisition site landing page
+    When user navigate to Plan Recommendation Engine and Checking Breadcrumbs
+    And clicks on get started button and runs questionnaire
+      | Zip Code        | <Zipcode>       |
+      | Is Multi County | <isMultiCounty> |
+      | CountyDropDown  | <county>        |
+    And user selects plan type in coverage options page
+      | Plan Type | <isCoverageOpt> |
+    And user selects add drug option in Drug page
+      | Drug Selection | <Drug Selection>                                                       |
+      | Drug Details   | <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch> |
+    Then user save plans in vpp summary and Validate in Visitor profile page
+    	| Plan Year | <PlanYear> |
+    
+
+    Examples: 
+      | Zipcode | isMultiCounty | county   | isCoverageOpt | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch                              | PlanYear |
+      |   10001 | NO            | New York | PDP           | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,1,YES,NO:morphine sulfate,NO,morphine sulfate CAP 10MG ER,,,1,NO,NO | current   |

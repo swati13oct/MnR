@@ -888,7 +888,15 @@ public class PlanRecommendationEngineStepDefinition {
 	public void user_verify_saveplan(DataTable givenAttributes) {
 		readfeaturedata(givenAttributes);
 		PlanRecommendationEngineResultsPage planSelectorResultspage =  new PlanRecommendationEngineResultsPage(wd);
-		planSelectorResultspage.changePlanyear("current");
+		planSelectorResultspage.changePlanyear(inputValues.get("Plan Year"));
+		planSelectorResultspage.validateCombineSavePlan(inputValues.get("Plan Year"));
+	}
+	
+	@Then("^user save 2 MA plans in vpp summary and Validate in Visitor profile page$")
+	public void user_saveplan(DataTable givenAttributes) {
+		readfeaturedata(givenAttributes);
+		PlanRecommendationEngineResultsPage planSelectorResultspage =  new PlanRecommendationEngineResultsPage(wd);
+		planSelectorResultspage.changePlanyear(inputValues.get("Plan Year"));
 		planSelectorResultspage.validateSavePlan(inputValues.get("Plan Year"));
 	}
 	
