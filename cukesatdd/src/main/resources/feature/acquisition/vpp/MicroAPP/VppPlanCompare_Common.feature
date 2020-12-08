@@ -478,7 +478,7 @@ Feature: 1.01.3 - Vpp to plan Compare Scenarios
       | TCID  | site | zipcode | isMultiCounty | county          | plantype | count | planIndices | planyear |
       | 00021 | UHC  |   10010 | No            | New York County | MAPD     |     1 |           2 | future   |
 
-  Scenario Outline: TID: <TID> - Plan Type: <plantype> - Verify a plan can be removed using Remove link from the widget on the top of page on <site> site
+  Scenario Outline: TID: <TID> - Plan Type: <plantype> - Verify Dental Flyer PDF are loading on plan compare page on <site> site
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     When the user performs plan search using following information
