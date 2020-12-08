@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.TreeSet;
 
@@ -557,7 +558,7 @@ public class ComparePlansPage extends UhcDriver {
 
 	public WelcomePage Enroll_OLE_Plancompare() throws InterruptedException {
   		WebElement enrollForPlan = null;
-  		enrollForPlan = driver.findElement(By.xpath("//*[@id='enrollbtnplancompare0']//button//span[text()='Enroll']"));
+  		enrollForPlan = driver.findElement(By.xpath("//*[@id='enrollbtnplancompare0']//button//*[text()='Enroll']"));
   		if(enrollForPlan!=null){
   			//validateNew(enrollForPlan);
 //  			enrollForPlan.click();
@@ -724,7 +725,7 @@ public class ComparePlansPage extends UhcDriver {
 	}
 	
 	public void CounterNewRemoveLink(String counter){
-		WebElement removelink = driver.findElement(By.xpath("//th[@ng-repeat='plan in count']["+counter+"]//a[contains(@class,'uhc-link-button d-none d-lg-inline-block')]"));
+		WebElement removelink = driver.findElement(By.xpath("//th[@ng-repeat='plan in count']["+counter+"]//*[contains(@class,'uhc-link-button d-none d-lg-inline-block')]"));
 		WebElement removePlanName = driver.findElement(By.xpath("//th[@ng-repeat='plan in count']["+counter+"]//div[contains(@ng-if,'planName')]"));
 		String PlanName=removePlanName.getText();
 		System.out.println("3rd plan name is : " + PlanName );
@@ -986,7 +987,7 @@ public class ComparePlansPage extends UhcDriver {
 	public void validateViewMoreplansComparePage() {
 		validateNew(backToAllPlansLink);
 		
-		WebElement viewMore = driver.findElement(By.xpath("//span[text()='Scroll Plans Right']/ancestor::button"));
+		WebElement viewMore = driver.findElement(By.xpath("//span[text()='Next']/ancestor::button"));
 		WebDriverWait wait = new WebDriverWait(driver, 60);
 		
 		for(int i=0;viewMore.isEnabled();){
@@ -998,7 +999,7 @@ public class ComparePlansPage extends UhcDriver {
 		WebElement RightButtonDisabled = 
 			    wait.until(ExpectedConditions
 			                   .visibilityOfElementLocated(
-			                        By.xpath("//span[text()='Scroll Plans Right']/ancestor::button[attribute::disabled]")));
+			                        By.xpath("//span[text()='Next']/ancestor::button[attribute::disabled]")));
 		validateNew(RightButtonDisabled);
 		System.out.println("Validated Right arrow is Disabled");
 		
@@ -1006,7 +1007,7 @@ public class ComparePlansPage extends UhcDriver {
 	
 	public void validateViewlessplansComparePage() {
 		validateNew(backToAllPlansLink);		
-		WebElement viewLess = driver.findElement(By.xpath("//span[text()='Scroll Plans Left']/ancestor::button"));
+		WebElement viewLess = driver.findElement(By.xpath("//span[text()='Previous']/ancestor::button"));
 		WebDriverWait wait = new WebDriverWait(driver, 60);
 		for(int i=0;viewLess.isEnabled();){
 //			viewLess.click();
@@ -1017,7 +1018,7 @@ public class ComparePlansPage extends UhcDriver {
 		WebElement LeftButtonDisabled = 
 			    wait.until(ExpectedConditions
 			                   .visibilityOfElementLocated(
-			                        By.xpath("//span[text()='Scroll Plans Left']/ancestor::button[attribute::disabled]")));
+			                        By.xpath("//span[text()='Previous']/ancestor::button[attribute::disabled]")));
 		validateNew(LeftButtonDisabled);
 		System.out.println("Validated Left arrow is Disabled");
 	}
@@ -1373,6 +1374,44 @@ public class ComparePlansPage extends UhcDriver {
 	{
 		Assert.assertTrue("OON Toggle Should be Displayed for Medical Benefits", driver.findElements(By.xpath("//h2[contains(text(),'Medical Benefits')]/following::span[@class='uhc-switch__slider']")).isEmpty());
 		Assert.assertTrue("OON Toggle Should be Displayed for Additional Benefits", driver.findElements(By.xpath("//h2[contains(text(),'Additional Benefits')]/following::span[@class='uhc-switch__slider']")).isEmpty());
+	}
+	
+	public void CounterDentalFlyerLink(String counter,String Documentcode) throws Exception{
+		String ParentWindow = driver.getTitle();
+		WebElement DentalFlyerLink;
+		if (counter.equals("1023")) {
+			DentalFlyerLink = driver.findElement(By.xpath("//td[1]//*[text()='Click here for details']"));
+			System.out.println("Dental Flyer link is 1023 Displayed");
+			jsClickNew(DentalFlyerLink);
+			System.out.println("Clicked on 1023 DentalFlyer on plan Compare page");
+			CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
+			switchToNewTabNew(DentalFlyerLink);
+			if (driver.getCurrentUrl().contains(Documentcode)) {
+				System.out.println("We able to 1023  Document loaded");
+				driver.manage().window().maximize();
+				Thread.sleep(3000);
+			} else {
+				System.out.println("Not found Expected window");
+				driver.switchTo().window(ParentWindow);
+			}
+		} else if (counter.equals("1025")) {
+			DentalFlyerLink = driver.findElement(By.xpath("//td[2]//*[text()='Click here for details']"));
+			System.out.println("Dental Flyer link is 1025 Displayed");
+			jsClickNew(DentalFlyerLink);
+			System.out.println("Clicked on 1025 DentalFlyer on plan Compare page");
+			CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
+			switchToNewTabNew(DentalFlyerLink);
+
+			if (driver.getCurrentUrl().contains(Documentcode)) {
+				System.out.println("We able to 1025  Document loaded");
+				driver.manage().window().maximize();
+				Thread.sleep(3000);
+			} else {
+				System.out.println("Not found Expected window");
+				driver.switchTo().window(ParentWindow);
+			}
+		}
+		
 	}
 }
 
