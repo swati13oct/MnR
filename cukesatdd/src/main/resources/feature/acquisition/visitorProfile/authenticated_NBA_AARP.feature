@@ -16,7 +16,7 @@ Feature: 1.08. ACQ- Visitor Profile Authenticated NBA AARP
     When the user performs plan search using following information
       | Zip Code        | <zipcode>         |
       | County Name     | <county>          |
-      | Is Multi County | <isMultutiCounty> |
+      | Is Multi County | <isMultiCounty> |
     And the user views the plans of the below plan type
       | Plan Type | <plantype> |
     Then user should see the Get started NBA on VPP
@@ -25,15 +25,25 @@ Feature: 1.08. ACQ- Visitor Profile Authenticated NBA AARP
 
     @getStartedNBA_MAPD_AARP
     Examples: 
-      | site | userName      | password    | isMultutiCounty | zipcode | county          | plantype |
+      | site | userName      | password    | isMultiCounty | zipcode | county          | plantype |
       | AARP | chargersqa@23 | Password@23 | NO              |   10001 | New York County | MAPD     |
+      
+      @getStartedNBA_PDP_AARP
+    Examples: 
+      | site | userName      | password    | isMultiCounty | zipcode | county          | plantype |
+      | AARP | chargersqa@23 | Password@23 | NO              |   10001 | New York County | PDP     |
 
     @getStartedNBA_MAPD_UHC
     Examples: 
-      | site | userName      | password    | isMultutiCounty | zipcode | county          | plantype |
+      | site | userName      | password    | isMultiCounty | zipcode | county          | plantype |
       | UHC  | chargersqa@23 | Password@23 | NO              |   10001 | New York County | MAPD     |
+      
+      @getStartedNBA_PDP_UHC
+    Examples: 
+      | site | userName      | password    | isMultiCounty | zipcode | county          | plantype |
+      | UHC  | chargersqa@23 | Password@23 | NO              |   10001 | New York County | PDP     |
 
-  @NBAAuthenticated1
+  @NBAAuthenticatedMAPD
   Scenario Outline: Verify NBA for authenticated Visitor Profile VPP summary page
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
@@ -48,7 +58,7 @@ Feature: 1.08. ACQ- Visitor Profile Authenticated NBA AARP
     When the user performs plan search using following information
       | Zip Code        | <zipcode>         |
       | County Name     | <county>          |
-      | Is Multi County | <isMultutiCounty> |
+      | Is Multi County | <isMultiCounty> |
     And the user views the plans of the below plan type
       | Plan Type | <plantype> |
     Then user should see the Get started NBA on VPP
@@ -73,12 +83,12 @@ Feature: 1.08. ACQ- Visitor Profile Authenticated NBA AARP
     When user clicks on Saved items on NBA
     Then user should be navigated to visitor profile page
 
-    @drugAlreadyAdded1_MAPD_AARP
+    @authenticatedNBA_MAPD_AARP
     Examples: 
-      | site | userName      | password    | isMultutiCounty | zipcode | county          | plantype | drugName | dosage   | quantity | frequency     | zipcode | radius   | quantity | frequency     | branded | testPlans                            |
+      | site | userName      | password    | isMultiCounty | zipcode | county          | plantype | drugName | dosage   | quantity | frequency     | zipcode | radius   | quantity | frequency     | branded | testPlans                            |
       | AARP | chargersqa@23 | Password@23 | NO              |   10001 | New York County | MAPD     | Lipitor  | TAB 10MG |       30 | Every 1 month |   90210 | 15 miles |       30 | Every 1 month | yes     | AARP Medicare Advantage Plan 1 (HMO) |
 
-    @drugAlreadyAdded1_MAPD_UHC
+    @authenticatedNBA_MAPD_UHC
     Examples: 
       | site | userName      | password    | isMultutiCounty | zipcode | county          | plantype | drugName | dosage   | quantity | frequency     | zipcode | radius   | quantity | frequency     | branded | testPlans                            |
       | UHC  | chargersqa@23 | Password@23 | NO              |   10001 | New York County | MAPD     | Lipitor  | TAB 10MG |       30 | Every 1 month |   90210 | 15 miles |       30 | Every 1 month | yes     | AARP Medicare Advantage Plan 1 (HMO) |
@@ -98,7 +108,7 @@ Feature: 1.08. ACQ- Visitor Profile Authenticated NBA AARP
     When the user performs plan search using following information
       | Zip Code        | <zipcode>         |
       | County Name     | <county>          |
-      | Is Multi County | <isMultutiCounty> |
+      | Is Multi County | <isMultiCounty> |
     And the user views the plans of the below plan type
       | Plan Type | <plantype> |
     Then user should be able to see the continue enrollment modal
@@ -107,12 +117,12 @@ Feature: 1.08. ACQ- Visitor Profile Authenticated NBA AARP
 
     @continueEnrollmentNBA_MAPD_AARP
     Examples: 
-      | site | userName         | password    | isMultutiCounty | zipcode | county          | plantype |
+      | site | userName         | password    | isMultiCounty | zipcode | county          | plantype |
       | AARP | jarvisstage23111 | Password@15 | NO              |   55344 | Hennepin County | MAPD     |
 
     @continueEnrollmentNBA__MAPD_UHC
     Examples: 
-      | site | userName         | password    | isMultutiCounty | zipcode | county          | plantype |
+      | site | userName         | password    | isMultiCounty | zipcode | county          | plantype |
       | UHC  | jarvisstage23111 | Password@15 | NO              |   55344 | Hennepin County | MAPD     |
 
       
@@ -131,7 +141,7 @@ Feature: 1.08. ACQ- Visitor Profile Authenticated NBA AARP
     When the user performs plan search using following information
       | Zip Code        | <zipcode>         |
       | County Name     | <county>          |
-      | Is Multi County | <isMultutiCounty> |
+      | Is Multi County | <isMultiCounty> |
     And the user views the plans of the below plan type
       | Plan Type | <plantype> |
     Then user should be able to see the continue enrollment modal for multiple plan
@@ -141,10 +151,10 @@ Feature: 1.08. ACQ- Visitor Profile Authenticated NBA AARP
 		Then user should navigated to enrollment page
     @continueEnrollmentNBA_PDP_AARP
     Examples: 
-      | site | userName         | password    | isMultutiCounty | zipcode | county          | plantype |
+      | site | userName         | password    | isMultiCounty | zipcode | county          | plantype |
       | AARP | jarvisstage23111 | Password@15 | NO              |   55344 | Hennepin County | PDP     |
 
     @continueEnrollmentNBA__PDP_UHC
     Examples: 
-      | site | userName         | password    | isMultutiCounty | zipcode | county          | plantype |
+      | site | userName         | password    | isMultiCounty | zipcode | county          | plantype |
       | UHC  | jarvisstage23111 | Password@15 | NO              |   55344 | Hennepin County | PDP     |
