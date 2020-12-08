@@ -449,10 +449,18 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	
 	@FindBy(xpath = "//*[contains(@id, 'piFirstName')]")
 	private WebElement registerFirstName;
+	
+	@FindBy(id = "redirect_content")
+	private WebElement leaveAARPMedicarePlansDialog;
+	
+	@FindBy(id = "proceed")
+	private WebElement proceedLeaveAARPMedicare;
 
+	@FindBy(id = "cancel")
+	private WebElement cancelLeaveAARPMedicare;
+	
 	@FindBy(xpath="//a[contains(text(),'Learn More')]")
 	private WebElement learnAboutMedicareHomeScreen;
-		
 
    	String ChatSamText= "Chat with a Licensed Insurance Agent";
 
@@ -1192,7 +1200,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	public DisclaimersAARPPage disclaimersFooterClick() {
 		validate(footerDisclaimersLink);
 		jsClickNew(footerDisclaimersLink);
-		sleepBySec(2);
+		sleepBySec(3);
 		CommonUtility.checkPageIsReadyNew(driver);
 		if (driver.getCurrentUrl().contains("disclaimer")) {
 			return new DisclaimersAARPPage(driver);
@@ -1466,6 +1474,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	 * @return
 	 */
 	public VisitorProfilePage navigateToVisitorProfilePage() {
+		scrollToView(shoppingCartIcon);
 		waitforElement(shoppingCartIcon);
 //		shoppingCartIcon.click();
 		jsClickNew(shoppingCartIcon);
@@ -1505,22 +1514,27 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		return null;	
 	}
 	
-	 public void validateCallSam() throws InterruptedException {
-	        boolean present;
-//	        driver.navigate().refresh();
-	        try {
-	        validateNew(callsam);
-	        present = true;
-	        } catch (NoSuchElementException e) {
-	        present = false;
-	        }
-	        if (present) {
-	          System.out.println("@@@@@@@@@ Able to find TFN widget @@@@@@@@@");
-	        }
-	        else
-	        	Assert.fail("@@@@@@@@@ No TFN widget @@@@@@@@@");
-	      
+	public void validateCallSam() throws InterruptedException {
+		boolean present;
+		//driver.navigate().refresh();
+		
+		if(MRScenario.browserName.equalsIgnoreCase("Safari")) {	//Adding because Safari 13 fails to locate element after navigate back
+			driver.navigate().refresh();
+			sleepBySec(2);
 		}
+		try {
+			validateNew(callsam);
+			present = true;
+		} catch (NoSuchElementException e) {
+			present = false;
+		}
+		if (present) {
+			System.out.println("@@@@@@@@@ Able to find TFN widget @@@@@@@@@");
+		}
+		else
+			Assert.fail("@@@@@@@@@ No TFN widget @@@@@@@@@");
+
+	}
 		
 		public void validateCallSamContent() throws InterruptedException {
 			
@@ -2285,7 +2299,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	     	
 	     	//driver.findElement(By.xpath("//*[@id='globalContentIdForSkipLink']/div/table/tbody/tr[2]/td/div[1]/div/div/div[3]/div/div/div/div[2]/div/div/div/div/div/div/div/a")).click();
 			jsClickNew(driver.findElement(By.xpath("//*[@id='globalContentIdForSkipLink']/div/table/tbody/tr[2]/td/div[1]/div/div/div[3]/div/div/div/div[2]/div/div/div/div/div/div/div/a")));
-	     	    	
+	     	waitForPageLoadSafari();
 	     		return new PlanDocsPage(driver);
 		 }
 
@@ -2600,7 +2614,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			validateNew(memberSignInPage);
 			CommonUtility.waitForPageLoadNew(driver, memberSignInPage, 30);
 			String parentWindow = driver.getWindowHandle();
-			memberSignInPage.click();
+		//	memberSignInPage.click();
+			jsClickNew(memberSignInPage);
 			sleepBySec(3);
 			Set<String> tabs_windows = driver.getWindowHandles();
 			Iterator<String> itr = tabs_windows.iterator();
@@ -2618,7 +2633,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			System.out.println("Expected member signin URL: "+ExpectedmemberSigninURL);
 			System.out.println("Actual member signin URL: "+ActualmemberSigninURL);
 
-			if(ExpectedmemberSigninURL.equalsIgnoreCase(ActualmemberSigninURL)) {
+			if(ExpectedmemberSigninURL.contains(ActualmemberSigninURL)) {
 				System.out.println("****************member signin Page is displayed  ***************");
 
 				Assert.assertTrue(true);
@@ -2626,9 +2641,10 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			else {
 				Assert.fail("****************member signin Page is not loaded ***************");
 			}
-
+		//	String urlCheck=driver.getCurrentUrl();
+		//	if(urlCheck.contains("medicare-education.html")) {
 			ViewMedicareplanlinks.click();
-
+			
 		}
 		
 
@@ -2647,7 +2663,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			if(MRScenario.browserName.equalsIgnoreCase("Safari")) {
 				driver.navigate().refresh();
 				waitForPageLoadSafari();
-		}
+			}
 		}
 
 		
@@ -2666,8 +2682,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 			waitforElement(ShopForaplan);
 			if (ShopForaplan.isDisplayed()) {
-				Actions action = new Actions(driver);
-				action.moveToElement(ShopForaplan).build().perform();
+				/* Actions action = new Actions(driver);
+				action.moveToElement(ShopForaplan).build().perform(); */
+				jsMouseOver(ShopForaplan);
 				try {
 					Thread.sleep(4000);
 				} catch (InterruptedException e) {
@@ -2675,7 +2692,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 					e.printStackTrace();
 				}
 				validateNew(RequestMoreInformationLink);
-				RequestMoreInformationLink.click();
+				jsClickNew(RequestMoreInformationLink);
 				return new  RequestHelpAndInformationPage(driver);
 			} else {
 				return null;		
@@ -2730,22 +2747,44 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		}	
 		
 		public void clickVisitAARPHeaderLink() {
-			if(driver.getCurrentUrl().contains("aarpmedicareplans")) {
+			if (driver.getCurrentUrl().contains("aarpmedicareplans")) {
 				jsClickNew(visitAARPHeaderLink);
-				if(!driver.getCurrentUrl().contains("aarp.org"))
+				proceedToLeaveAARP();
+				if (!driver.getCurrentUrl().contains("aarp.org"))
 					Assert.fail("Visit AARP link did not lead to the right page");
 			}
-			
 		}
 		
 		public void clickVisitAARPFooterLink() {
-			if(driver.getCurrentUrl().contains("aarpmedicareplans")) {
-				jsClickNew(visitAARPFooterLink);
-				if(!driver.getCurrentUrl().contains("aarp.org"))
+			if (driver.getCurrentUrl().contains("aarpmedicareplans")) {
+				switchToNewTabNew(visitAARPFooterLink);
+				proceedToLeaveAARP();
+				if (!driver.getCurrentUrl().contains("aarp.org")) {
 					Assert.fail("Visit AARP link did not lead to the right page");
+				} else {
+					Assert.assertTrue(true, "Navigated to AARP org page");
+					driver.close();
+					driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
+				}
 			}
 		}
 		
+		public void proceedToLeaveAARP() {
+			if (validate(leaveAARPMedicarePlansDialog)) {
+				jsClickNew(proceedLeaveAARPMedicare);
+				waitForPageLoadSafari();
+				CommonUtility.checkPageIsReadyNew(driver);
+			}
+		}
+		
+		public void cancelLeaveAARPRedirect() {
+			if (validate(leaveAARPMedicarePlansDialog)) {
+				jsClickNew(cancelLeaveAARPMedicare);
+				waitForPageLoadSafari();
+				CommonUtility.checkPageIsReadyNew(driver);
+			}
+		}
+
 		public String fetchEnvironmentUrls() {
 			if (MRScenario.environment.equals("offline")) {
 				testSiteUrl = AARP_ACQISITION_OFFLINE_PAGE_URL;
@@ -2764,7 +2803,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	public LearnAboutMedicareHomePage clickLearnMoreOnHomePage() {
 			
 			validateNew(learnAboutMedicareHomeScreen);
-			jsClickNew(learnAboutMedicareHomeScreen);	
+			jsClickNew(learnAboutMedicareHomeScreen);
+			waitForPageLoadSafari();
 			String urlCheck=driver.getCurrentUrl();
 			if(urlCheck.contains("medicare-education.html")) {
 				return new LearnAboutMedicareHomePage(driver);
@@ -2773,4 +2813,58 @@ public class AcquisitionHomePage extends GlobalWebElements {
 				return null;
 			}		
 		}
+	
+	public void clickonmemberSignInStagelink(String ExpectedmemberSigninURL) {
+		validateNew(memberSignInPage);
+		CommonUtility.waitForPageLoadNew(driver, memberSignInPage, 30);
+		String parentWindow = driver.getWindowHandle();
+	//	memberSignInPage.click();
+		jsClickNew(memberSignInPage);
+		sleepBySec(3);
+		Set<String> tabs_windows = driver.getWindowHandles();
+		Iterator<String> itr = tabs_windows.iterator();
+		while(itr.hasNext()) {
+			String window = itr.next();
+			if(!parentWindow.equals(window)) {
+				driver.switchTo().window(window);
+			}
+		}
+
+		CommonUtility.checkPageIsReadyNew(driver);
+		String CurrentmemberSigninURL = driver.getCurrentUrl();
+		String ActualmemberSigninURL=CurrentmemberSigninURL.substring(0, 31).trim();
+		System.out.println("memberSignin Page is displayed : "+ActualmemberSigninURL);
+		System.out.println("Expected member signin URL: "+ExpectedmemberSigninURL);
+		System.out.println("Actual member signin URL: "+ActualmemberSigninURL);
+
+		if(ExpectedmemberSigninURL.contains(ActualmemberSigninURL)) {
+			System.out.println("****************member signin Page is displayed  ***************");
+
+			Assert.assertTrue(true);
+		}
+		else {
+			Assert.fail("****************member signin Page is not loaded ***************");
+		}
+		//ViewMedicareplanlinks.click();
+		validateNew(ViewMedicareplanlinks);
+		CommonUtility.waitForPageLoadNew(driver, ViewMedicareplanlinks, 30);
+		String parentWindow1 = driver.getWindowHandle();
+		jsClickNew(ViewMedicareplanlinks);
+		sleepBySec(3);
+		Set<String> tabs_windows1 = driver.getWindowHandles();
+		Iterator<String> itr1 = tabs_windows1.iterator();
+		while(itr1.hasNext()) {
+			String window = itr1.next();
+			if(!parentWindow1.equals(window)) {
+				driver.switchTo().window(window);
+			}
+		}
+		CommonUtility.checkPageIsReadyNew(driver);
+		 String stageURL="https://www.stage-aarpmedicareplans.uhc.com/";
+		 String prodURL="https://www.aarpmedicareplans.com/";
+		 String urlCheck=driver.getCurrentUrl();
+		String expectedURL =urlCheck.replace(prodURL,stageURL);
+		System.out.println("**********Actual URL is displayed *************"+expectedURL);
+		
+	}
 }

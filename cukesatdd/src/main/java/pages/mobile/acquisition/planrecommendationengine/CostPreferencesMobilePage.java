@@ -95,6 +95,7 @@ public class CostPreferencesMobilePage extends UhcDriver {
 		validate(higherPremium, 30);
 		//Assert.assertTrue(higherPremium.getText().contains("higher"));
 		mobileUtils.mobileLocateElementClick(higherPremium);
+		mobileUtils.mobileLocateElement(previousBtn);
 		mobileUtils.mobileLocateElementClick(previousBtn);
 		System.out.println("Validating " + page + " page Previous button functionality");
 		mobileUtils.previousPageValidation(page.toUpperCase());
@@ -127,6 +128,10 @@ public class CostPreferencesMobilePage extends UhcDriver {
 		System.out.println("Cost Preference type is not selected - Error Scenario in Cost Preference Page");
 		mobileUtils.mobileLocateElementClick(continueBtn);
 		mobileUtils.mobleErrorValidation(page);
+	}
+
+	public void edit_cost(String preference) {
+		costPreferencepageOptions(preference);
 	}
 
 }

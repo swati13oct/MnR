@@ -181,6 +181,7 @@ public class BuildYourDrugList extends UhcDriver {
 		EnterDrugNameTxt.sendKeys(drugName);
 		validateNew(SearchBtn);
 		jsClickNew(SearchBtn);
+		waitForPageLoadSafari();
 		CommonUtility.checkPageIsReadyNew(driver);
 		WebElement SelectDrug = driver.findElement(By.xpath("//uhc-list-item//button[contains(@aria-label, 'Select "+drugName+"')]"));
 		validateNew(SelectDrug);
@@ -207,6 +208,7 @@ public class BuildYourDrugList extends UhcDriver {
 	public DrugDetailsPage navigateToDrugDetailsPage() {
 		validateNew(reviewDrugCost);
 		jsClickNew(reviewDrugCost);
+		waitForPageLoadSafari();
 		threadsleep(2000);
 		CommonUtility.waitForPageLoadNew(driver, DrugDetails_DrugCostsHeading, 20);
 		if(validateNew(DrugDetails_ChangePharmacyLnk) && validateNew(DrugDetails_DrugCostsHeading))

@@ -567,6 +567,7 @@ public class PlanDetailsPage extends UhcDriver {
 		validateNew(estimateDrugBtn, 20);
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", estimateDrugBtn);
 		((JavascriptExecutor) driver).executeScript("arguments[0].click();", estimateDrugBtn);
+		waitForPageLoadSafari();
 		if (validateNew(dceHeader))
 			return new GetStartedPage(driver);
 		return null;
@@ -1009,6 +1010,7 @@ public class PlanDetailsPage extends UhcDriver {
 	public boolean clickAndValidatePlanCosts(String monthlyPremium,String yearlyPremium) {
 		boolean bValidation = false;
 		jsClickNew(planCostsTab);
+		CommonUtility.checkPageIsReadyNew(driver);
 		if(monthlyPremium.equals(planMonthlyPremium.getText().trim()) && yearlyPremium.equals(planYearlyPremium.getText().trim()))	
 			bValidation = true;
 		else
@@ -1366,6 +1368,7 @@ public class PlanDetailsPage extends UhcDriver {
         public DrugDetailsPage clickLearnMore() {
         	validateNew(learnMore);
             jsClickNew(learnMore);
+            waitForPageLoadSafari();
     		CommonUtility.waitForPageLoadNew(driver, DrugDetails_DrugCostsHeading, 30);
     		if(validateNew(DrugDetails_ChangePharmacyLnk) && validateNew(DrugDetails_DrugCostsHeading))
     		{

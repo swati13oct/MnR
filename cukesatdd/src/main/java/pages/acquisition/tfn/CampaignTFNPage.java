@@ -62,11 +62,11 @@ public class CampaignTFNPage extends UhcDriver {
 	//@FindBy(xpath = "(//a[contains(@href,'medicaresolutions')])[3]")
 	//@FindBy(xpath = "//h3[contains(text(),'Learn More About Medicare Advantage (Part C)')]")
 //	@FindBy(xpath = "//a//span[contains(text(),'Learn More About Medicare Advantage (Part C) Plans - AARP ...')]")
-	@FindBy(xpath = "(//a//span[contains(text(),'Learn More About Medicare Advantage (Part C) Plans - AARP ...')])[2]")
+	@FindBy(xpath = "(//h3//span[contains(text(),'Learn More About Medicare Advantage (Part C) Plans - AARP ...')])[2]")
 	//@FindBy(xpath = "//a//h3[contains(text(),'Learn More About Medicare Advantage (Part C) Plans - AARP ...') or contains(text(),'Find Medicare Plans Available from UnitedHealthcare')]")
 	//@FindBy(xpath = "//h3[contains(text(),'Learn More About Medicare Advantage (Part C)') or contains(text(),'Find Medicare Plans Available from UnitedHealthcare')]")
 	//@FindBy(xpath = "//h3[contains(text(),'Find Medicare Plans Available from UnitedHealthcare')]")
-	//@FindBy(xpath = "(//a[contains(@href,'https://www.uhcmedicaresolutions.com/health-plans/shop/medicare-advantage-plan')])[1]")
+	//@FindBy(xpath = "(//a[contains(@href,'https://www.uhcmedicaresolutions.com/shop/medicare-advantage-plan')])[1]")
 	public WebElement UHCSearchLinkfromGoogle;
 
 	@FindBy(xpath = "(//*[contains(text(),'Find Medicare Plans Available From UnitedHealthcare®')])[2]")
@@ -88,7 +88,10 @@ public class CampaignTFNPage extends UhcDriver {
 	//@FindBy(xpath = "//a[contains(@href,'https://www.aarpmedicareplans.com/health-plans/shop/medicare-advantage-plans/ma-plan-benefits.html')]")
 	@FindBy(xpath = "//a[contains(text(),'AARP Medicare Plans from UnitedHealthcare')]")
 	public WebElement YahooSearchResult;
-
+	
+	//a[contains(@href,'https://www.aarpmedicareplans.com/shop/medicare-advantage-plans.html')]
+	@FindBy(xpath = "//a[contains(@href,'https://www.aarpmedicareplans.com/shop/medicare-advantage-plans.html')]")
+	public WebElement YahooSearchResultshop;
 	//@FindBy(xpath = "//h3//a[contains(text(),'Medicare Advantage (Part C) Plans')]")
 	//@FindBy(xpath = "//h3//a[contains(text(),'Find Medicare Plans Available')]")
 	@FindBy(xpath = "//h3//a[contains(text(),'Find Medicare Plans Available') or contains(@href,'https://www.uhcmedicaresolutions.com/health-plans.html')]")
@@ -354,6 +357,27 @@ public class CampaignTFNPage extends UhcDriver {
 		switchToNewTab();
 		CheckPageLoad();
 	}
+	
+	public void YahooSearchAARPShopPages() {
+		
+		CommonUtility.waitForPageLoad(driver, YahooSearchField, 30);
+		YahooSearchField.sendKeys("AARP Medicare Advantage Plan");
+		CommonUtility.waitForPageLoad(driver, YahooSearchBttn, 30);
+		YahooSearchBttn.click();
+		System.out.println("Yahoo Search entered for : AARP Medicare Advantage Plan");
+
+		CommonUtility.waitForPageLoad(driver, YahooSearchResultshop, 30);
+		if(YahooSearchResultshop.isDisplayed())
+			System.out.println("Yahoo search result found");
+		else {
+			System.out.println("yahoo search result not found");
+			Assert.assertFalse("no yahoo search result found", false);
+		}
+		YahooSearchResultshop.click();
+		System.out.println("Yahoo Results - AARP Medicare Advantage Plan - Link Clicked");
+		switchToNewTab();
+		CheckPageLoad();
+	}
 
 	public void BingSearchAARP() {
 		CommonUtility.waitForPageLoad(driver, bingSearchField, 30);
@@ -522,17 +546,20 @@ public class CampaignTFNPage extends UhcDriver {
 //			sleepBySec(2); //note: add sleep for timing issue, tried increase timeout from waitForPageLoadNew but didn't work
 			pdpPlansViewLink.click();
 			System.out.println("PDP Plan Type Clicked");
+			waitForPageLoadSafari();
 			CommonUtility.waitForPageLoadNew(driver, planListContainer, 30);
 		} else if (planType.equalsIgnoreCase("MA") || planType.equalsIgnoreCase("MAPD")) {
 			CommonUtility.waitForPageLoadNew(driver, maPlansViewLink, 30);
 //			sleepBySec(2);
 			maPlansViewLink.click();
 			System.out.println("MA Plan Type Clicked");
+			waitForPageLoadSafari();
 			CommonUtility.waitForPageLoadNew(driver, planListContainer, 30);
 		} else if (planType.equalsIgnoreCase("MS")) {
 			CommonUtility.waitForPageLoadNew(driver, msPlansViewLink, 30);
 			//sleepBySec(2);
 			msPlansViewLink.click();
+			waitForPageLoadSafari();
 			CommonUtility.waitForPageLoadNew(driver, medSuppZipCode, 30);
 			/*msPlansViewLink.click();
 			CommonUtility.waitForPageLoadNew(driver, medSuppPlanList.get(0), 30);*/
@@ -541,6 +568,7 @@ public class CampaignTFNPage extends UhcDriver {
 			CommonUtility.waitForPageLoadNew(driver, snpPlansViewLink, 30);
 			snpPlansViewLink.click();
 			System.out.println("SNP Plan Type Clicked");
+			waitForPageLoadSafari();
 			CommonUtility.waitForPageLoadNew(driver, planListContainer, 30);
 	
 		}	
@@ -552,7 +580,8 @@ public class CampaignTFNPage extends UhcDriver {
 		CheckPageLoad();
 		CheckiPerseptions();
 		CommonUtility.waitForPageLoadNew(driver, firstPlanDetailsLink, 30);
-		firstPlanDetailsLink.click();
+		jsClickNew(firstPlanDetailsLink);
+		waitForPageLoadSafari();
 		CommonUtility.checkPageIsReadyNew(driver);
 		System.out.println("View Plan Details Link is clicked for first plan for "+planType);
 				CommonUtility.checkPageIsReadyNew(driver);
@@ -572,7 +601,8 @@ public class CampaignTFNPage extends UhcDriver {
 		CheckPageLoad();
 		CheckiPerseptions();
 		CommonUtility.waitForPageLoadNew(driver, firstEnrollPlanLink, 30);
-		firstEnrollPlanLink.click();
+		jsClickNew(firstEnrollPlanLink);
+		waitForPageLoadSafari();
 		System.out.println("Enroll In Plan Link is clicked for first plan for "+planType);
 				CommonUtility.checkPageIsReadyNew(driver);
 				if (driver.getCurrentUrl().contains("welcome")) {	
@@ -594,7 +624,7 @@ public class CampaignTFNPage extends UhcDriver {
 		CheckPageLoad();
 		CheckiPerseptions();
 		CommonUtility.waitForPageLoadNew(driver, HomeLogo, 30);
-		HomeLogo.click();
+		jsClickNew(HomeLogo);
 		System.out.println("Home Logo is clicked to navigate to Home Page");
 		CommonUtility.waitForPageLoadNew(driver, zipCodeField, 30);
 		if(!validateNew(zipCodeField)){
@@ -607,11 +637,11 @@ public class CampaignTFNPage extends UhcDriver {
 		//CheckPageLoad();
 		//CheckiPerseptions();
 		CommonUtility.waitForPageLoadNew(driver, HomeLogo, 10);
-		HomeLogo.click();
+		jsClickNew(HomeLogo);
 		System.out.println("Home Logo is clicked to navigate to Home Page");
 		if(driver.getCurrentUrl().contains("online-application")) {
 			if(validate(LeaveOLE,10)) {
-				LeaveOLE.click();
+				jsClickNew(LeaveOLE);
 				System.out.println("Leave OLE is clicked to navigate to Home Page");
 			}
 		} 

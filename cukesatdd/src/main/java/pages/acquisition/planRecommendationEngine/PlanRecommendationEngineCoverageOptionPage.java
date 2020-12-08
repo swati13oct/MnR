@@ -109,29 +109,8 @@ public class PlanRecommendationEngineCoverageOptionPage extends UhcDriver {
 
 	public void coverageOptionpageFunctional(String planType) {
 		System.out.println("Functional Operations");
-		if (planType.equalsIgnoreCase("MAPD")) {
-			validate(plantypeMAPD);
-//			plantypeMAPD.click();
-			jsClickNew(plantypeMAPD);
-			System.out.println("Plan Type " + planType + " Clicked");
-		} else if (planType.equalsIgnoreCase("MA")) {
-			validate(plantypeMA);
-//			plantypeMA.click();
-			jsClickNew(plantypeMA);
-			System.out.println("Plan Type " + planType + " Clicked");
-		} else if (planType.equalsIgnoreCase("PDP")) {
-			validate(plantypePDP);
-//			plantypePDP.click();
-			jsClickNew(plantypePDP);
-			System.out.println("Plan Type " + planType + " Clicked");
-		} else if (planType.equalsIgnoreCase("None")) {
-			validate(plantypeNone);
-//			plantypeNone.click();
-			jsClickNew(plantypeNone);
-			System.out.println("Plan Type " + planType + " Clicked");
-		}
+		chooseCoverageOption(planType);
 		jsClickNew(continueBtn);
-//		continueBtn.click();
 		System.out.println("Validating " + page + " page Continue button functionality");
 //		desktopCommonUtils.nextPageValidation(page.toUpperCase());
 	}
@@ -140,23 +119,7 @@ public class PlanRecommendationEngineCoverageOptionPage extends UhcDriver {
 
 	public void coverageOptionpagePreviousButton(String planType) {
 		System.out.println("Functional Operations");
-		if (planType.equalsIgnoreCase("MAPD")) {
-			validate(plantypeMAPD);
-			plantypeMAPD.click();
-			System.out.println("Plan Type " + planType + " Clicked");
-		} else if (planType.equalsIgnoreCase("MA")) {
-			validate(plantypeMA);
-			plantypeMA.click();
-			System.out.println("Plan Type " + planType + " Clicked");
-		} else if (planType.equalsIgnoreCase("PDP")) {
-			validate(plantypePDP);
-			plantypePDP.click();
-			System.out.println("Plan Type " + planType + " Clicked");
-		} else if (planType.equalsIgnoreCase("None")) {
-			validate(plantypeNone);
-			plantypeNone.click();
-			System.out.println("Plan Type " + planType + " Clicked");
-		}
+		chooseCoverageOption(planType);
 		if (radioselect.isDisplayed()) {
 			validate(pageProgressPercentage, 30);
 			Assert.assertTrue(pageProgressPercentage.getText().contains("10% Complete"));
@@ -179,4 +142,25 @@ public class PlanRecommendationEngineCoverageOptionPage extends UhcDriver {
 
 		driver.navigate().back();
 	}
+	
+	public void chooseCoverageOption(String planType) {
+		if (planType.equalsIgnoreCase("MAPD")) {
+			validate(plantypeMAPD);
+			plantypeMAPD.click();
+			System.out.println("Plan Type " + planType + " Clicked");
+		} else if (planType.equalsIgnoreCase("MA")) {
+			validate(plantypeMA);
+			plantypeMA.click();
+			System.out.println("Plan Type " + planType + " Clicked");
+		} else if (planType.equalsIgnoreCase("PDP")) {
+			validate(plantypePDP);
+			plantypePDP.click();
+			System.out.println("Plan Type " + planType + " Clicked");
+		} else if (planType.equalsIgnoreCase("None")) {
+			validate(plantypeNone);
+			plantypeNone.click();
+			System.out.println("Plan Type " + planType + " Clicked");
+		}
+	}
+
 }

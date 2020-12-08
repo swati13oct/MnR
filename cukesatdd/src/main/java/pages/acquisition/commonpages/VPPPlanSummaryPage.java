@@ -720,19 +720,29 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//*[contains(text(),'View Prescription Drug Plans')]")
 	private WebElement ViewPrescriptionDrugPlans;
 
-	@FindBy(xpath = "//a[contains(@href,'//aarpsupplementalhealth-stg.uhc.com/content/dam/ole/MedSuppDocs/YourGuide/')]")
+	//@FindBy(xpath = "//a[contains(@href,'//aarpsupplementalhealth-stg.uhc.com/content/dam/ole/MedSuppDocs/YourGuide/')]")
+	@FindBy(xpath = "//a[contains(text(),'Your Guide to AARP Medicare Supplement Insurance Plans')]")
 	private WebElement RightRail_yourGuide;
 
-	@FindBy(xpath = "//a[contains(@href,'//aarpsupplementalhealth-stg.uhc.com/content/dam/ole/MedSuppDocs/GuideToHealth')]")
+//	@FindBy(xpath = "//a[contains(@href,'//aarpsupplementalhealth-stg.uhc.com/content/dam/ole/MedSuppDocs/GuideToHealth')]")
+	@FindBy(xpath = "//a[contains(text(),'Guide to Health Insurance for People with Medicare')]")
 	private WebElement RightRail_Guidetoyourhealth;
-	@FindBy(xpath = "//a[contains(@href,'//aarpsupplementalhealth-stg.uhc.com/content/dam/ole/MedSuppDocs/OutlineOfCoverage')]")
+	
+	@FindBy(xpath = "//a[contains(@href,'//aarpsupplementalhealth-stg.uhc.com/content/dam/ole/MedSuppDocs/OutlineOfCoverage') or contains(@href,'//www.aarpsupplementalhealth.com/content/dam/ole/MedSuppDocs/OutlineOfCoverage')]")
+	//@FindBy(xpath = "//a[contains(text(),'Plan Overview')]")
 	private WebElement RightRail_outlinecoverage;
-	@FindBy(xpath = "//a[contains(@href,'//aarpsupplementalhealth-stg.uhc.com/content/dam/ole/MedSuppDocs/PlanOverview')]")
+	
+//	@FindBy(xpath = "//a[contains(@href,'//aarpsupplementalhealth-stg.uhc.com/content/dam/ole/MedSuppDocs/PlanOverview')]")
+	@FindBy(xpath = "//a[contains(text(),'Plan Overview')]")
 	private WebElement RightRail_Planoverview;
-	@FindBy(xpath = "//a[contains(@href,'//aarpsupplementalhealth-stg.uhc.com/content/dam/ole/MedSuppDocs/RulesAndDisclosures')]")
+	
+	//@FindBy(xpath = "//a[contains(@href,'//aarpsupplementalhealth-stg.uhc.com/content/dam/ole/MedSuppDocs/RulesAndDisclosures')]")
+	@FindBy(xpath = "//a[contains(text(),'Rules and Disclosures')]")
 	private WebElement RightRail_RulesandDisclosure;
 
-	@FindBy(xpath = "//a[contains(@href,'//aarpsupplementalhealth-stg.uhc.com/content/dam/ole/MedSuppDocs/EnrollmentDiscount')]")
+//	@FindBy(xpath = "//a[contains(@href,'//aarpsupplementalhealth-stg.uhc.com/content/dam/ole/MedSuppDocs/EnrollmentDiscount')]")
+	//@FindBy(xpath = "(//a[contains(text(),'Enrollment Discount')])[2]")
+	@FindBy(xpath = "//a[contains(@href,'//aarpsupplementalhealth-stg.uhc.com/content/dam/ole/MedSuppDocs/EnrollmentDiscount') or contains(@href,'//www.aarpsupplementalhealth.com/content/dam/ole/MedSuppDocs/EnrollmentDiscount')]")
 	private WebElement EnrollmentDiscount;
 
 	@FindBy(xpath = "//a[contains(text(),'Back to all plans')]")
@@ -919,22 +929,27 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	public void viewPlanSummary(String planType) {
 		if (planType.equalsIgnoreCase("PDP")) {
+			sleepBySec(2);
+			((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", pdpPlansViewLink);
 			CommonUtility.waitForPageLoadNew(driver, pdpPlansViewLink, 30);
 			// sleepBySec(2); // note: add sleep for timing issue, tried increase timeout
 			// from
 			// waitForPageLoadNew but didn't work
 			jsClickNew(pdpPlansViewLink);
 			System.out.println("PDP Plan Type Clicked");
+			waitForPageLoadSafari();
 			CommonUtility.waitForPageLoadNew(driver, planListContainer, 30);
 		} else if (planType.equalsIgnoreCase("MA") || planType.equalsIgnoreCase("MAPD")) {
 			CommonUtility.waitForPageLoadNew(driver, maPlansViewLink, 30);
 			// sleepBySec(2);
 			jsClickNew(maPlansViewLink);
+			waitForPageLoadSafari();
 			CommonUtility.waitForPageLoadNew(driver, planListContainer, 30);
 		} else if (planType.equalsIgnoreCase("MS")) {
 			CommonUtility.waitForPageLoadNew(driver, msPlansViewLink, 30);
 			// sleepBySec(2);
 			jsClickNew(msPlansViewLink);
+			waitForPageLoadSafari();
 			CommonUtility.waitForPageLoadNew(driver, medSuppZipCode, 30);
 			/*
 			 * msPlansViewLink.click(); CommonUtility.waitForPageLoadNew(driver,
@@ -944,6 +959,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			// sleepBySec(5);
 			CommonUtility.waitForPageLoadNew(driver, snpPlansViewLink, 30);
 			jsClickNew(snpPlansViewLink);
+			waitForPageLoadSafari();
 			CommonUtility.waitForPageLoadNew(driver, planListContainer, 30);
 			try {
 				Thread.sleep(5000);
@@ -1702,7 +1718,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	}
 
 	/**
-	 * @author sdwaraka Method added for OLE Flow Validations
+	 * @author sdwaraka
+	 * Method added for OLE Flow Validations
 	 * @return
 	 */
 	public String GetTFNforPlanType() {
@@ -3407,7 +3424,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	// ^^^ note: added for US1598162
 
 	public void MedSupFormValidation(String DateOfBirth) throws InterruptedException {
-		Actions action = new Actions(driver);
+
 		validateNew(DOB, 30);
 		System.out.println("MedSup page form is displayed");
 		DOB.click();
@@ -3440,7 +3457,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		startDrpDwnOption.click();
 		System.out.println("Plan to start date selected");
 		Thread.sleep(15000);
-		action.moveToElement(ViewPlanMedSupPage).perform();
+		jsMouseOver(ViewPlanMedSupPage);
 		jsClickNew(ViewPlanMedSupPage);
 	}
 
@@ -3561,9 +3578,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	private WebElement DecisionGuideLink;
 
 	public IsDecisionGuideStep1 clickOnRequestADecisionGuide() {
-		Assert.assertTrue("Decision Guide Link is not displayed on Med Supp VPP Plan Summary Page",
-				validate(DecisionGuideLink));
-		jsClickNew(DecisionGuideLink);
+		Assert.assertTrue("Decision Guide Link is not displayed on Med Supp VPP Plan Summary Page", validate(DecisionGuideLink));
+		//		jsClickNew(DecisionGuideLink);
+		switchToNewTabNew(DecisionGuideLink);
 		CommonUtility.checkPageIsReadyNew(driver);
 		if (driver.getCurrentUrl().contains("medicare-information.html"))
 			return new IsDecisionGuideStep1(driver);
@@ -3836,8 +3853,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			driver.findElement(By.cssSelector("input#passwdId_input")).sendKeys(password);
 			jsClickNew(driver.findElement(By.cssSelector("input#SignIn")));
 			waitForPageLoadSafari();
-			String Question = driver.findElement(By.cssSelector("span#challengeQuestionLabelId")).getText().trim();
-			WebElement securityAnswer = driver.findElement(By.cssSelector("div#UnrecognizedSecAns >input"));
+			String Question = driver.findElement(By.cssSelector("#challengeQuestionLabelId")).getText().trim();
+			WebElement securityAnswer = driver.findElement(By.cssSelector("#challengeSecurityAnswerId > input"));
 			if (Question.equalsIgnoreCase("What is your best friend's name?")) {
 				System.out.println("Question is related to friendname");
 				securityAnswer.sendKeys("name1");
@@ -4486,6 +4503,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		Thread.sleep(3000);
 		jsClickNew(VerificationAgree3);
 		jsClickNew(nextButton);
+		
+		if (!(MRScenario.environment.equalsIgnoreCase("offline")
+				|| MRScenario.environment.equalsIgnoreCase("prod"))) {
 		validateNew(SubmitApplication);
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", SubmitApplication);
 		jsClickNew(SubmitApplication);
@@ -4497,6 +4517,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		// jsClickNew(ViewPrescriptionDrugPlans);
 		// Thread.sleep(2000);
 		return SubmitConfirmation;
+		}
+		return Medicarenumber;
 	}
 
 	public void medsuppOLERightRail() throws InterruptedException {
@@ -4524,7 +4546,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		// System.out.println("Expected URL: "+ExpectedCurrentRailURL1);
 		System.out.println("Actual  URL: " + CurrentRailURL);
 
-		if (CurrentRailURL.contains("https://aarpsupplementalhealth-stg.uhc.com/") && CurrentRailURL.contains(".pdf")) {
+		if (CurrentRailURL.contains("https://aarpsupplementalhealth-stg.uhc.com/") || CurrentRailURL.contains("https://www.aarpsupplementalhealth.com/") && CurrentRailURL.contains(".pdf")) {
 			System.out.println("****************Rail Rail is displayed  ***************");
 
 			Assert.assertTrue(true);
@@ -4560,7 +4582,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		// System.out.println("Expected URL: "+ExpectedCurrentRailURL1);
 		System.out.println("Actual  URL: " + CurrentRailURL);
 
-		if (CurrentRailURL.contains("https://aarpsupplementalhealth-stg.uhc.com/") && CurrentRailURL.contains(".pdf")) {
+		if (CurrentRailURL.contains("https://aarpsupplementalhealth-stg.uhc.com/") || CurrentRailURL.contains("https://www.aarpsupplementalhealth.com/") && CurrentRailURL.contains(".pdf")) {
 			System.out.println("****************Rail Rail is displayed  ***************");
 
 			Assert.assertTrue(true);
@@ -4590,7 +4612,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		String CurrentRailURL = driver.getCurrentUrl();
 		System.out.println("Actual  URL: " + CurrentRailURL);
 
-		if (CurrentRailURL.contains("https://aarpsupplementalhealth-stg.uhc.com/") && CurrentRailURL.contains(".pdf")) {
+		if (CurrentRailURL.contains("https://aarpsupplementalhealth-stg.uhc.com/") || CurrentRailURL.contains("https://www.aarpsupplementalhealth.com/")  && CurrentRailURL.contains(".pdf")) {
 			System.out.println("****************Rail Rail is displayed  ***************");
 
 			Assert.assertTrue(true);
@@ -4620,7 +4642,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		String CurrentRailURL = driver.getCurrentUrl();
 		System.out.println("Actual  URL: " + CurrentRailURL);
 
-		if (CurrentRailURL.contains("https://aarpsupplementalhealth-stg.uhc.com/") && CurrentRailURL.contains(".pdf")) {
+		if (CurrentRailURL.contains("https://aarpsupplementalhealth-stg.uhc.com/") || CurrentRailURL.contains("https://www.aarpsupplementalhealth.com/") && CurrentRailURL.contains(".pdf")) {
 			System.out.println("****************Rail Rail is displayed  ***************");
 
 			Assert.assertTrue(true);
@@ -4650,7 +4672,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		String CurrentRailURL = driver.getCurrentUrl();
 		System.out.println("Actual  URL: " + CurrentRailURL);
 
-		if (CurrentRailURL.contains("https://aarpsupplementalhealth-stg.uhc.com/") && CurrentRailURL.contains(".pdf")) {
+		if (CurrentRailURL.contains("https://aarpsupplementalhealth-stg.uhc.com/") || CurrentRailURL.contains("https://www.aarpsupplementalhealth.com/")  && CurrentRailURL.contains(".pdf")) {
 			System.out.println("****************Rail Rail is displayed  ***************");
 
 			Assert.assertTrue(true);
@@ -4680,7 +4702,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		String CurrentRailURL = driver.getCurrentUrl();
 		System.out.println("Actual  URL: " + CurrentRailURL);
 
-		if (CurrentRailURL.contains("https://aarpsupplementalhealth-stg.uhc.com/") && CurrentRailURL.contains(".pdf")) {
+		if (CurrentRailURL.contains("https://aarpsupplementalhealth-stg.uhc.com/") || CurrentRailURL.contains("https://www.aarpsupplementalhealth.com/") && CurrentRailURL.contains(".pdf")) {
 			System.out.println("****************Rail Rail is displayed  ***************");
 
 			Assert.assertTrue(true);
@@ -4830,7 +4852,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		ViewPlanMedSupPage.click();
+		jsClickNew(ViewPlanMedSupPage);
 		return EnteredData;
 
 	}
@@ -4942,8 +4964,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 		if (!drugNames.equalsIgnoreCase("no")) {
 
-			jsClickNew(driver.findElement(By.xpath("//div[@class='plan-name-div']//a[text()='" + planName
-					+ "']//following::div[@class='drug-list added'][1]")));
+			driver.findElement(By.xpath("//div[@class='plan-name-div']//a[text()='" + planName
+					+ "']//following::div[@class='drug-list added'][1]")).click();
 			// Validate Drugs
 			List<WebElement> drugList = driver.findElements(By.xpath("//div[@class='plan-name-div']//a[text()='"
 					+ planName + "']//following::div[@class='drugs-list'][1]/ul/li[contains(@class,'drug')]"));
@@ -4997,8 +5019,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 		// Validate Drugs
 		if (!drugNames.equalsIgnoreCase("no")) {
-			jsClickNew(driver.findElement(By.xpath("//div[@class='plan-name-div']//a[text()='" + planName
-					+ "']//following::div[@class='drug-list added'][1]")));
+			driver.findElement(By.xpath("//div[@class='plan-name-div']//a[text()='" + planName
+					+ "']//following::div[@class='drug-list added'][1]")).click();;
 
 			// Validate Drugs
 			List<WebElement> drugList = driver.findElements(By.xpath("//div[@class='plan-name-div']//a[text()='"
@@ -5077,14 +5099,26 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 
 	
-	public boolean clickAndVerifyNavigateToPage(String btn) throws InterruptedException {
+	public boolean clickAndVerifyNavigateToPage(String btn, int plans, String shot) throws InterruptedException {
 		boolean flag = false;
 		Actions action = new Actions(driver);
 		if(btn.equalsIgnoreCase("Compare")) {
+			if(plans==1) {
 			Thread.sleep(2000);
 			action.moveToElement(compareLink).build().perform();
 			compareLink.click();
 			Thread.sleep(10000);
+			}
+			else {
+				while(plans>0) {
+					Thread.sleep(2000);
+					WebElement comparePlanLink = driver.findElement(By.xpath("(//label[text()='Add to compare'])["+plans+"])"));
+					action.moveToElement(comparePlanLink).build().perform();
+					comparePlanLink.click();
+					Thread.sleep(10000);
+					plans = plans-1;
+				}
+			}
 			action.moveToElement(compareButton).build().perform();
 			compareButton.click();
 			Thread.sleep(2000);
@@ -5093,15 +5127,39 @@ public class VPPPlanSummaryPage extends UhcDriver {
 				flag = true;
 			}
 		}else if(btn.equalsIgnoreCase("Save")) {
+			if(plans==1) {
 			Thread.sleep(2000);
 			action.moveToElement(savePlanButton).build().perform();
 			savePlanButton.click();
 			Thread.sleep(2000);
+			}
+			else if(shot.equalsIgnoreCase("first")) {
+				while(plans>0) {
+					Thread.sleep(2000);
+					WebElement savePlanLink = driver.findElement(By.xpath("(//button[@class='unliked buttonIntoText'])["+plans+"])"));
+					action.moveToElement(savePlanLink).build().perform();
+					savePlanLink.click();
+					Thread.sleep(10000);
+					plans = plans-1;
+				}
+			} else if(shot.equalsIgnoreCase("second")) {
+						Thread.sleep(2000);
+						WebElement savePlan3 = driver.findElement(By.xpath("(//button[@class='unliked buttonIntoText'])[10])"));
+						action.moveToElement(savePlan3).build().perform();
+						savePlan3.click();
+						Thread.sleep(10000);
+						WebElement savePlan4 = driver.findElement(By.xpath("(//button[@class='unliked buttonIntoText'])[12])"));
+						action.moveToElement(savePlan4).build().perform();
+						savePlan4.click();
+						Thread.sleep(10000);
+					}
+				
+			}
 			action.moveToElement(savePlanImg).build().perform();
 			if(savePlanImg.getAttribute("class").equalsIgnoreCase("liked")) {
 				flag = true;
 			}
-		}else if(btn.equalsIgnoreCase("Information")) {
+		else if(btn.equalsIgnoreCase("Information")) {
 			Thread.sleep(2000);
 			action.moveToElement(editYourInformationLink).build().perform();
 			editYourInformationLink.click();
@@ -5124,7 +5182,6 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		}
 		return flag;
 	}
-
 
 public boolean verifyPlanCount() throws InterruptedException {
 	boolean flag = false;
@@ -5182,16 +5239,16 @@ public boolean RequestPlanIInformation(String FirstName, String LastName, String
 		//CommonUtility.waitForPageLoadNew(driver, requestemailaddress, 20);
 	//	requestemailaddress.sendKeys(EmailAddress);
 		validateNew(requestplaninformationsubmit);
-		requestplaninformationsubmit.click();
+		jsClickNew(requestplaninformationsubmit);
 		validateNew(requestplaninformationclose);
-		requestplaninformationclose.click();
-		
+		jsClickNew(requestplaninformationclose);
+
 		if(requestplaninformationsubmitpopup.getText().contains("Your information has been submitted. You should start getting your Medicare updates soon.")) {
 			System.out.println("****************Request  information is displayed  ***************");
 
 			Assert.assertTrue(true);
 			validateNew(requestplaninformationclose);
-			requestplaninformationclose.click();
+			jsClickNew(requestplaninformationclose);
 		}else {
 			System.out.println("****************Request information is displayed  ***************");
 		}
@@ -5213,10 +5270,10 @@ public boolean RequestPlanIInformation(String FirstName, String LastName, String
 	CommonUtility.waitForPageLoadNew(driver, requestemailaddress, 20);
 	requestemailaddress.sendKeys(EmailAddress);
 	validateNew(requestplaninformationsubmit);
-	requestplaninformationsubmit.click();
+	jsClickNew(requestplaninformationsubmit);
 	validateNew(requestplaninformationclose);
-	requestplaninformationclose.click();
-	
+	jsClickNew(requestplaninformationclose);
+
 	if(requestplaninformationsubmitpopup.getText().contains("Your information has been submitted. You should start getting your Medicare updates soon.")) {
 		System.out.println("****************Request information is displayed  ***************");
 
@@ -5252,18 +5309,39 @@ public boolean RequestPlanIInformation(String FirstName, String LastName, String
 	CommonUtility.waitForPageLoadNew(driver, requestlastName, 20);
 	requestlastName.sendKeys(LastName);
 	validateNew(requestplaninformationsubmit);
-	requestplaninformationsubmit.click();
+		jsClickNew(requestplaninformationsubmit);
 	if(requestplaninformationsubmitpopup.getText().contains("Your information has been submitted. You should start getting your Medicare updates soon.")) {
 		System.out.println("****************Request  information is displayed  ***************");
 
 		Assert.assertTrue(true);
 		validateNew(requestplaninformationclose);
-		requestplaninformationclose.click();
+		jsClickNew(requestplaninformationclose);
 	}else {
 		System.out.println("****************Request information is displayed  ***************");
 	}
 return RequestPlanIInformation_Validation;
 
 }
+public void checkMAPlansOnly(String counter) {
+	try {
+		Thread.sleep(2000);
+	} catch (InterruptedException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	List<Integer> selectPlanIndexes=new ArrayList<Integer>();
+	int	count=counter.contains(",") ? 0 :Integer.parseInt(counter);
+	if(count==0)
+		for(String index: counter.split(",")) {selectPlanIndexes.add(Integer.parseInt(index));}
+	else
+		for(int i=0;i<count;i++) {selectPlanIndexes.add(i);}
+
+	List<WebElement> allMAPlans = driver
+			.findElements(By.xpath(".//*[@id='plan-list-1']//div[contains(@class,'compare-box')]//label"));
+	if(allMAPlans!=null) {
+		for(int i:selectPlanIndexes) {
+			jsClickNew(allMAPlans.get(i));
+		}
+	}
 }
-    
+}
