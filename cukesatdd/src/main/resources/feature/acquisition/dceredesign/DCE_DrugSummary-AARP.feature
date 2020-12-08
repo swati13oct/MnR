@@ -370,7 +370,7 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
       |UHC| Orkambi |   10001 | UnitedHealthcare Medicare Advantage Choice Plan 4 (Regional PPO) | AARP MedicareRx Preferred (PDP) | UnitedHealthcare Dual Complete (HMO D-SNP) |UnitedHealthcare Medicare Advantage Choice Plan 4 (Regional PPO),AARP MedicareRx Preferred (PDP),UnitedHealthcare Dual Complete (HMO D-SNP)|
       
   @dceNBADrugSummaryPage @F465679
-  Scenario Outline: Test to Verify that DCE NBA on Drug summary page
+  Scenario Outline: Test to Verify that DCE NBA on Drug summary page @decRelease
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     When I access the acquisition DCE Redesign from home page
@@ -397,7 +397,7 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
       |site| zipcode | county | isMultutiCounty | drug1   |
       |UHC|   10001 | none   | no              | Orkambi |
       
-     @dcecovereduncoveredDrugSummayPage @F531892
+     @dcecovereduncoveredDrugSummayPage @F531892 @decRelease
      Scenario Outline: To verify drug pricing modal popup for covered/noncovered drug for DSNP on drug summary page  
      Given the user is on medicare acquisition site landing page
       | Site | <site> |
@@ -431,7 +431,7 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
       |site| zipCode | plantype | county | isMultutiCounty | drug1 | drug2| planname                                           |
       |UHC|   10001 | MAPD     | none   | no              | Emsam   | Lipitor | AARP Medicare Advantage SecureHorizons Focus (HMO) |
       
-  @dceRedesignSwitchToGenericDrug @F484185 @F495366
+  @dceRedesignSwitchToGenericDrug @F484185 @F495366 @decRelease
   Scenario Outline: Test to Verify that user can update drug dosage, quantity and supply length in switch to generic drug modal
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
@@ -466,7 +466,7 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
       |UHC|   10001 | Lipitor | atorvastatin calcium TAB 20MG |
       
       
-      @dceRedesignNoPrescriptionChangePharmacy
+      @dceRedesignNoPrescriptionChangePharmacy @decRelease
        Scenario Outline: Test to verify change pharmacy functionality from plan card when no drug prescription
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
@@ -503,7 +503,7 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
       |site| drug1    |drug2      | zipCode |
       |UHC| Emsam  |   Lipitor   |78006 |
       
-      @dCERedesign_ChangePharmacyModal_AARP @F426569 @F535368
+      @dCERedesign_ChangePharmacyModal_AARP @F426569 @F535368 @decRelease
   Scenario Outline: Test to verify sort, pagination, invalid zipcode error functionality for change pharmacy on drug summary page
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
@@ -551,7 +551,7 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
       |UHC| Lipitor  |   90001 |There were no results found for the requested search.Broadening your search criteria (for example, changing the pharmacy type, search radius and/or your ZIP code) may help you get a different result.|96799|78456|
 
       
-      @dCERedesign_ChangePharmacyNoResults_AARP @F426569 @F489207
+      @dCERedesign_ChangePharmacyNoResults_AARP @F426569 @F489207 @decRelease
   Scenario Outline: Test to verify no results message displayed for change pharmacy modal on drug summary page
     Given the user is on medicare acquisition site landing page
       | Site | <site> |

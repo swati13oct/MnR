@@ -108,7 +108,7 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test ZipCode and Plan Year capture page i
       | drug1   | site |
       | Lipitor | UHC  |
 
-		@dcePreviousButton @F477541
+		@dcePreviousButton @F477541 @decRelease
     Scenario Outline: Test to Verify Previous button for Zip Code entry
     Given the user is on the AARP medicare site landing page
     When I access the acquisition DCE tool from home page

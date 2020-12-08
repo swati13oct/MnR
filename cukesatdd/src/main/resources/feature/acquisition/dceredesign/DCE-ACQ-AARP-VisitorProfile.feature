@@ -34,7 +34,7 @@ Feature: 1.10.1 DCE-REDISIGN AARP - To test Acq Visitor Profile to NEW DCE Flows
       | Orkambi | Fanapt | Humalog | Adderall |   80002 |UHC|
 
 
-	@DCEShopperProfileAddDrugsGlobally
+	@DCEShopperProfileAddDrugsGlobally @decRelease
   Scenario Outline: To verify DCE REDESIGN shopper profile flow when adding and editing drugs globally
   Given the user is on medicare acquisition site landing page
     		|Site| <site>|
@@ -73,7 +73,7 @@ Feature: 1.10.1 DCE-REDISIGN AARP - To test Acq Visitor Profile to NEW DCE Flows
       | Orkambi | 80002 |AARP|Fanapt|MAPD|AARP Medicare Advantage SecureHorizons Plan 2 (HMO)|
       
       
-      @DCEShopperProfileAddDrugsPlancard
+      @DCEShopperProfileAddDrugsPlancard @decRelease
   Scenario Outline: To verify DCE REDESIGN shopper profile flow when adding and editing drugs from plan card
    Given the user is on medicare acquisition site landing page
     		|Site| <site>|
@@ -111,7 +111,7 @@ Feature: 1.10.1 DCE-REDISIGN AARP - To test Acq Visitor Profile to NEW DCE Flows
       |AARP| Orkambi | Fanapt|MAPD|AARP Medicare Advantage Plan 1 (HMO),AARP Medicare Advantage Plan 2 (HMO)|10001 | NO            | New York County|
       
       
-      @DCEShopperProfileAddDrugsGloballyAuthenticatedUser
+      @DCEShopperProfileAddDrugsGloballyAuthenticatedUser @decRelease
   Scenario Outline: To verify DCE REDESIGN shopper profile flow when adding and editing drugs globally for authenticated user
   	Given the user is on medicare acquisition site landing page
     		|Site| <site>|
