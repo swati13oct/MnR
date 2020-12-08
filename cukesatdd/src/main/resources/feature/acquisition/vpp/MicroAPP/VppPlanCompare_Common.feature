@@ -18,18 +18,18 @@ Feature: 1.01.3-Vpp to plan Compare Scenarios
     @VppPlanCompareCommon_AARP01
     Examples: 
       | TID   | site | zipcode | isMultiCounty | county           | plantype | planyear |
-      | 00001 | AARP |   96799 | NO            | Western District | PDP      | current  |
-      | 00002 | AARP |   78006 | YES           | Bexar County     | SNP      | current  |
-      | 00003 | AARP |   90265 | YES           | Ventura County   | MAPD     | current  |
-      | 00004 | AARP |   70072 | NO            | Jefferson Parish | MAPD     | current  |
+      | 00001 | AARP |   96799 | NO            | Western District | PDP      | future   |
+      | 00002 | AARP |   78006 | YES           | Bexar County     | SNP      | future   |
+      | 00003 | AARP |   48101 | NO            | Wayne County     | MAPD     | future   |
+      | 00004 | AARP |   70072 | NO            | Jefferson Parish | MAPD     | future   |
 
     @VppPlanCompareCommon_UHC01
     Examples: 
       | TID   | site | zipcode | isMultiCounty | county           | plantype | planyear |
-      | 00001 | UHC  |   96799 | NO            | Western District | PDP      | current  |
-      | 00002 | UHC  |   78006 | YES           | Bexar County     | SNP      | current  |
-      | 00003 | UHC  |   90265 | YES           | Ventura County   | MAPD     | current  |
-      | 00004 | UHC  |   70072 | NO            | Jefferson Parish | MAPD     | current  |
+      | 00001 | UHC  |   96799 | NO            | Western District | PDP      | future   |
+      | 00002 | UHC  |   78006 | YES           | Bexar County     | SNP      | future   |
+      | 00003 | UHC  |   48101 | NO            | Wayne County     | MAPD     | future   |
+      | 00004 | UHC  |   70072 | NO            | Jefferson Parish | MAPD     | future   |
 
   #@vppPlanCompareAARP02 @vppPlanCompareAARPRun01New @vppPlanCompareAARPRegression
   Scenario Outline: TID: <TID> - Plan Type: <plantype> - Verify Call sticky action menu on <site> site
@@ -486,4 +486,33 @@ Feature: 1.01.3-Vpp to plan Compare Scenarios
     @VppPlanCompareCommon_UHC03
     Examples: 
       | TCID  | site | zipcode | isMultiCounty | county          | plantype | count | planIndices | planyear |
-      | 00021 | UHC  |   10010 | No            | New York County | MAPD     |     1 |           2 | current  |
+      | 00021 | UHC  |   10010 | No            | New York County | MAPD     |     1 |           2 | future   |
+
+  Scenario Outline: TID: <TID> - Plan Type: <plantype> - Verify Dental Flyer PDF are loading on plan compare page on <site> site
+    Given the user is on medicare acquisition site landing page
+      | Site | <site> |
+    When the user performs plan search using following information
+      | Zip Code        | <zipcode>         |
+      | Is Multi County | <isMultutiCounty> |
+      | County Name     | <county>          |
+    And the user views the plans of the below plan type
+      | Plan Type | <plantype> |
+    And the user selects plan year
+      | Plan Year | <planyear> |
+    And I select "<plantype>" plans to compare and click on compare plan link
+    Then verify plan compare page is loaded
+    Then Click on Dental Flyer Link
+      | PDF LINK     | <pdfLink> |
+      | DocumentCode | <docCode> |
+
+    @VppPlanCompareCommon_AARP03
+    Examples: 
+      | TID  | site | zipcode | isMultiCounty | county       | plantype | planyear | pdfLink | docCode |
+      | 0022 | AARP |   78006 | YES           | Bexar County | MAPD     | future   |    1023 | 4866893 |
+      | 0023 | AARP |   78006 | YES           | Bexar County | MAPD     | future   |    1025 | 4805658 |
+
+    @VppPlanCompareCommon_UHC03
+    Examples: 
+      | TID  | site | zipcode | isMultiCounty | county       | plantype | planyear | pdfLink | docCode |
+      | 0024 | UHC  |   78006 | YES           | Bexar County | MAPD     | future   |    1023 | 4866893 |
+      | 0025 | UHC  |   78006 | YES           | Bexar County | MAPD     | future   |    1025 | 4805658 |
