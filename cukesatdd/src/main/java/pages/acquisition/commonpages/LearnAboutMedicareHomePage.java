@@ -308,12 +308,14 @@ public class LearnAboutMedicareHomePage extends GlobalWebElements {
 
 	/* Accessing MedicareAdvantage option from the learn About medicare homePage */
 	public MedicareAdvantagePartCPlansPage planSelectionMA() {
-		getLnkMedicareAdvantage().click();
+//		getLnkMedicareAdvantage().click();
+		jsClickNew(getLnkMedicareAdvantage());
 		return new MedicareAdvantagePartCPlansPage(driver);
 
 	}
 	public MedicareSupplementInsurancePlansPage planSelectionMS() {
-		getLnkMedicareSupplement().click();
+//		getLnkMedicareSupplement().click();
+		jsClickNew(getLnkMedicareSupplement());
 		return new MedicareSupplementInsurancePlansPage(driver);
 
 	}
@@ -323,7 +325,8 @@ public class LearnAboutMedicareHomePage extends GlobalWebElements {
 	 * homePage
 	 */
 	public MedicarePrescriptionDrugPartDPlansPage planSelectionPDP() {
-		getLnkMedicareAdvantage().click();
+//		getLnkMedicareAdvantage().click();
+		jsClickNew(getLnkMedicareAdvantage());
 		CommonUtility.checkPageIsReadyNew(driver);
 		return new MedicarePrescriptionDrugPartDPlansPage(driver);
 
@@ -362,6 +365,7 @@ public class LearnAboutMedicareHomePage extends GlobalWebElements {
 		validateNew(lnkMedEligibility);
 		jsClickNew(lnkMedEligibility);
 		
+		waitForPageLoadSafari();
 		String checkUrl=driver.getCurrentUrl();
 		if(checkUrl.contains("medicare-education/medicare-eligibility.html")) {
 			return new MedicareEligibilityPage(driver);
@@ -392,7 +396,8 @@ public class LearnAboutMedicareHomePage extends GlobalWebElements {
 		validateNew(FindAnAgent);
 		CommonUtility.waitForPageLoadNew(driver, FindAnAgent, 30);
 		String parentWindow = driver.getWindowHandle();
-		FindAnAgent.click();
+//		FindAnAgent.click();
+		jsClickNew(FindAnAgent);
 		sleepBySec(3);
 		Set<String> tabs_windows = driver.getWindowHandles();
 		Iterator<String> itr = tabs_windows.iterator();
@@ -447,6 +452,7 @@ public class LearnAboutMedicareHomePage extends GlobalWebElements {
 		WebElement lnkNext=driver.findElement(By.xpath("//p[contains(@class,'meded-next')]"));
 		validateNew(lnkNext);
 		jsClickNew(lnkNext);
+		waitForPageLoadSafari();
 		CommonUtility.checkPageIsReadyNew(driver);
 		System.out.println(driver.getTitle());
 		
@@ -455,9 +461,14 @@ public class LearnAboutMedicareHomePage extends GlobalWebElements {
 	
 	public void selectStateForGeotargeting() {
 		//driver.findElement(By.cssSelector("body")).sendKeys(Keys.CONTROL,Keys.END);
+		WebElement stateDropDown = driver.findElement(By.id("state-select"));
+		scrollToView(stateDropDown);
+		waitTllOptionsAvailableInDropdown(stateDropDown, 5);
+		
 		WebElement stateGeotargeting = driver.findElement(By.xpath("(//select[@id='state-select']//option)[2]"));
-		scrollToView(stateGeotargeting);
-		stateGeotargeting.click();
+//		scrollToView(stateGeotargeting);
+//		stateGeotargeting.click();
+		jsClickNew(stateGeotargeting);
 		waitforElementNew(stateGeotargeting, 5);
 		System.out.println("State selected for Geotagging: "+ stateGeotargeting.getText());
 		waitforElementNew(stateGeotargeting, 5);
@@ -639,6 +650,7 @@ public class LearnAboutMedicareHomePage extends GlobalWebElements {
 	public EnrollmentBasicsPage clickonEnrollmentBasicLink() {
 		validateNew(lnkEnrollmentBasic);
 		jsClickNew(lnkEnrollmentBasic);
+		waitForPageLoadSafari();
 		CommonUtility.checkPageIsReadyNew(driver);
 		
 		String checkUrl=driver.getCurrentUrl();

@@ -1878,14 +1878,14 @@ public class VppCommonStepDefinition {
 			//----- PDP plan type ---------------------------
 			planType="PDP";
 			plansummaryPage.viewPlanSummary(planType);
-			plansummaryPage.handlePlanYearSelectionPopup();
+			plansummaryPage.handlePlanYearSelectionPopup(planYear);
 			plansummaryPage.validateAbilityToSavePlans(pdp_savePlanNames, planType);
 		//	plansummaryPage.validatePlansAreSaved(pdp_savePlanNames, planType); //commented out because the previous line already validates after saving plan
 
 			//----- SNP plan type ---------------------------
 			planType="SNP";
 			plansummaryPage.viewPlanSummary(planType);
-			plansummaryPage.handlePlanYearSelectionPopup();
+			plansummaryPage.handlePlanYearSelectionPopup(planYear);
 			plansummaryPage.validateAbilityToSavePlans(snp_savePlanNames, planType);
 		//	plansummaryPage.validatePlansAreSaved(snp_savePlanNames, planType); //commented out because the previous line already validates after saving plan
 		}
@@ -2257,18 +2257,20 @@ public class VppCommonStepDefinition {
 			String pdp_savePlanNames = memberAttributesMap.get("PDP Test Plans");
 			String snp_savePlanNames = memberAttributesMap.get("SNP Test Plans");
 
+			String planYear = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_YEAR);
+			
 			//----- MA plan type ---------------------------
 			String planType="MA";
 			System.out.println("Proceed to validate "+planType+" saved plan(s) are still saved");
 			plansummaryPage.viewPlanSummary(planType);
-			plansummaryPage.handlePlanYearSelectionPopup();
+			plansummaryPage.handlePlanYearSelectionPopup(planYear);
 			plansummaryPage.validatePlansAreSaved(ma_savePlanNames, planType);
 
 			//----- PDP plan type --------------------------
 			planType="PDP";
 			System.out.println("Proceed to validate "+planType+" saved plan(s) are still saved");
 			plansummaryPage.viewPlanSummary(planType);
-			plansummaryPage.handlePlanYearSelectionPopup();
+			plansummaryPage.handlePlanYearSelectionPopup(planYear);
 			plansummaryPage.validatePlansAreSaved(pdp_savePlanNames, planType);
 
 			//----- SNP plan type --------------------------
@@ -2439,15 +2441,13 @@ public class VppCommonStepDefinition {
 				memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
 						memberAttributesRow.get(i).getCells().get(1));
 			}
-
 			String Medicarenumber = memberAttributesMap.get("MedicareNumber");
 			String DateOfBirth = memberAttributesMap.get("DOB");			
 			VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 			String submitconfirmation = plansummaryPage.continueApplicationuntilSubmitPage(Medicarenumber);
 			getLoginScenario().saveBean(VPPCommonConstants.SUBMITCONFIRMATION, submitconfirmation);
-
-		}
+			}
 		
 		@Then("^the site user validates the RightRails Links on Medsupp Page$")
 		public void user_validate_rightrail_links_medsupp_page() throws Throwable {
@@ -2744,6 +2744,67 @@ public class VppCommonStepDefinition {
 		public void validate_OON_Toggle_is_not_displayed_when_there_are_no_OON_Plans_Available() throws Throwable {
 			ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario().getBean(PageConstants.PLAN_COMPARE_PAGE);
 			planComparePage.validateOONNotDisplayed();
+		}
+		
+		@Then("^the user clicks on Enroll in plan and validates the Welcome to OLE Page on new Plan Compare")
+		  public void user_clicks_enrollInPlan_newPlanCompare() throws InterruptedException{
+			  ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario().getBean(PageConstants.PLAN_COMPARE_PAGE); 
+			  WelcomePage  welcomeOLEPage = planComparePage.Enroll_OLE_Plancompare();
+		   if (welcomeOLEPage != null) {
+				getLoginScenario().saveBean(PageConstants.OLE_WELCOME_PAGE, welcomeOLEPage);
+			} else {
+				Assert.fail("Error Loading Welcome Page for OLE");
+			}
+		  }
+		
+		@Then("^the user clicks on Plan details link in new Plan Compare page")
+		  public void user_clicks_planDetails_newPlanCompare() throws InterruptedException{
+			  ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario().getBean(PageConstants.PLAN_COMPARE_PAGE); 
+			  PlanDetailsPage vppPlanDetailsPage = planComparePage.navigateToPlanDetailfromplanCompare();
+				if (vppPlanDetailsPage != null) {
+						getLoginScenario().saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE, vppPlanDetailsPage);
+						Assert.assertTrue(true);
+					} 
+				else
+					Assert.fail("Error in Loading the Plan Details Page");
+			
+		  }
+		
+		@Then("^Click on view more plans for right navigaton$")
+		public void Clickonviewmoreplansforrightnavigatonon() throws Throwable {
+			ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
+					.getBean(PageConstants.PLAN_COMPARE_PAGE);
+			planComparePage.validateViewMoreplansComparePage();
+		}
+		
+		@Then("^Click on view less plans for left navigaton$")
+		public void Clickonviewlessplansforrightnavigatonon() throws Throwable {
+			ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
+					.getBean(PageConstants.PLAN_COMPARE_PAGE);
+			planComparePage.validateViewlessplansComparePage();
+		}
+		
+		@Given("^remove one plan from \"([^\"]*)\" new plan compare and verify remove icon is disabled page$")
+		public void removeoneplanfrom_compare_plan_link(String Counter) throws Throwable {
+			ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
+					.getBean(PageConstants.PLAN_COMPARE_PAGE);		
+			planComparePage.CounterNewRemoveLink(Counter);
+		}
+		
+		@Then("^Click on Dental Flyer Link$")
+		public void clickonDentalFlyerLink(DataTable givenAttributes) throws Throwable {
+			List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+			Map<String, String> memberAttributesMap = new HashMap<String, String>();
+			for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+				memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+						memberAttributesRow.get(i).getCells().get(1));
+			}
+			String PDFtype = memberAttributesMap.get("PDF LINK");
+			String DocCode = memberAttributesMap.get("DocumentCode");
+			ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
+					.getBean(PageConstants.PLAN_COMPARE_PAGE);		
+			planComparePage.CounterDentalFlyerLink(PDFtype,DocCode);
 		}
 		
 		List<String> allPlanNames = null;

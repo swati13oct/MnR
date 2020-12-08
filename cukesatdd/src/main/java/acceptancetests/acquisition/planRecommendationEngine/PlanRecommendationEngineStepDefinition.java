@@ -883,5 +883,46 @@ public class PlanRecommendationEngineStepDefinition {
 		PlanRecommendationEngineEditResponsePage preEditpage =  new PlanRecommendationEngineEditResponsePage(wd);
 		preEditpage.addDrugs(inputValues);
    	}
+	
+	@Then("^user save plans in vpp summary and Validate in Visitor profile page$")
+	public void user_verify_saveplan(DataTable givenAttributes) {
+		readfeaturedata(givenAttributes);
+		PlanRecommendationEngineResultsPage planSelectorResultspage =  new PlanRecommendationEngineResultsPage(wd);
+		planSelectorResultspage.changePlanyear(inputValues.get("Plan Year"));
+		planSelectorResultspage.validateCombineSavePlan(inputValues.get("Plan Year"));
+	}
+	
+	@Then("^user save 2 MA plans in vpp summary and Validate in Visitor profile page$")
+	public void user_saveplan(DataTable givenAttributes) {
+		readfeaturedata(givenAttributes);
+		PlanRecommendationEngineResultsPage planSelectorResultspage =  new PlanRecommendationEngineResultsPage(wd);
+		planSelectorResultspage.changePlanyear(inputValues.get("Plan Year"));
+		planSelectorResultspage.validateSavePlan(inputValues.get("Plan Year"));
+	}
+	
+	@Then("^user Validate Drug and Provider details in Visitor profile page$")
+	public void user_verify_drug_provider() {
+		PlanRecommendationEngineResultsPage planSelectorResultspage =  new PlanRecommendationEngineResultsPage(wd);
+		planSelectorResultspage.validateDrugProvider();
+	}
+	
+	@Given("^the user is on external acquisition site landing page$")
+	public void the_user_on_external_Site(DataTable givenAttributes) {
+		readfeaturedata(givenAttributes);
+		wd = getLoginScenario().getWebDriverNew();
+		AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd,"PRE",true);
+		aquisitionhomepage.openExternalLinkPRE(inputValues.get("Site Name"));
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE,
+				aquisitionhomepage);
+	}
+	
+	@When("^user navigate to Plan Recommendation Engine Tool$")
+	public void the_user_external_PRE(DataTable givenAttributes) {
+		readfeaturedata(givenAttributes);
+		PlanRecommendationEngineResultsPage planSelectorResultspage =  new PlanRecommendationEngineResultsPage(wd);
+		checkpopup();
+		planSelectorResultspage.navigatePRE(inputValues.get("Site Name"));
+	}
 
 }
