@@ -308,12 +308,14 @@ public class LearnAboutMedicareHomePage extends GlobalWebElements {
 
 	/* Accessing MedicareAdvantage option from the learn About medicare homePage */
 	public MedicareAdvantagePartCPlansPage planSelectionMA() {
-		getLnkMedicareAdvantage().click();
+//		getLnkMedicareAdvantage().click();
+		jsClickNew(getLnkMedicareAdvantage());
 		return new MedicareAdvantagePartCPlansPage(driver);
 
 	}
 	public MedicareSupplementInsurancePlansPage planSelectionMS() {
-		getLnkMedicareSupplement().click();
+//		getLnkMedicareSupplement().click();
+		jsClickNew(getLnkMedicareSupplement());
 		return new MedicareSupplementInsurancePlansPage(driver);
 
 	}
@@ -323,7 +325,8 @@ public class LearnAboutMedicareHomePage extends GlobalWebElements {
 	 * homePage
 	 */
 	public MedicarePrescriptionDrugPartDPlansPage planSelectionPDP() {
-		getLnkMedicareAdvantage().click();
+//		getLnkMedicareAdvantage().click();
+		jsClickNew(getLnkMedicareAdvantage());
 		CommonUtility.checkPageIsReadyNew(driver);
 		return new MedicarePrescriptionDrugPartDPlansPage(driver);
 
