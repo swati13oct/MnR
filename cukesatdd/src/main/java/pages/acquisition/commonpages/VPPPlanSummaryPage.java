@@ -5123,7 +5123,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	}
 
 	public void verifyNextBestActionModalForEnrollPlan() {
-		waitforElementVisibilityInTime(nextBestActionModalContinueEnrollmentBtn, 20);
+		waitforElementVisibilityInTime(nextBestActionModalSelectPlanBtn, 20);
 		try {
 			if (nextBestActionModal.isDisplayed()) {
 				if(nextBestActionModalMsg.size()>1) {
