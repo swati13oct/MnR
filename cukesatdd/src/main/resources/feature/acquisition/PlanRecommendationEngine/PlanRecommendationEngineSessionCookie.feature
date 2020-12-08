@@ -36,7 +36,6 @@ Feature: Plan Recommendation Engine flow - Verify PRE flows functionalities with
       | 1st Ranking plan   | <Rankingplan>       |
       | 2nd Recommendation | <2ndRecommendation> |
     Then user validate drugs details from PRE to VPP page
-    Then user navigate from VPP to DCE tool
     Then user validate drugs details from VPP to DCE page
 
     Examples: 
