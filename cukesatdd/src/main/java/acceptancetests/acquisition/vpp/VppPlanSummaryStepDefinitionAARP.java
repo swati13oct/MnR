@@ -1081,4 +1081,17 @@ public class VppPlanSummaryStepDefinitionAARP {
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		plansummaryPage.verifySelectPlanForEnrollModalForallPlans(allPlanNames);
 	}
+	
+	@When("^user clicks on Enroll in plan button on the select plan modal in AARP site$")
+	public void user_clicks_on_Enroll_in_plan_button_on_the_select_plan_moda_AARPl() throws Throwable {
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		plansummaryPage.clickEnrollPlanBtnOnSelectPlanModal();
+	}
+	@Then("^user should be navigated to OLE page in AARP site$")
+	public void user_should_be_navigated_to_OLE_page_AARP() throws Throwable {
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		plansummaryPage.validateNavigatedToOle();
+	}
 }
