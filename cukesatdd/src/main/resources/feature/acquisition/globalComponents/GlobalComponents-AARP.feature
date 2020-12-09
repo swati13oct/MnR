@@ -581,68 +581,88 @@ Feature: 1.12 ACQ - Global Components AARP and UHC
 
     @Global_Comps_ZipSubNav_AARP
     Examples: 
-      | site | path                                                                                    | pageName                        |
-      | AARP | shop.html                                                                               | ShopPlan: Homepage              |
-      | AARP | shop/medicare-advantage-plans.html                                                      | ShopPlan: Shop MA Plan          |
-      | AARP | shop/medicare-supplement-plans.html                                                     | ShopPlan: Shop MS Plan          |
-      | AARP | shop/prescription-drug-plans.html                                                       | ShopPlan: Shop PDP Plan         |
-      | AARP | shop/dual-special-needs-plans.html                                                      | ShopPlan: Shop SNP Plan         |
-      | AARP | safe-shopping.html                                                                      | ShopPlan: Safe Shopping         |
-      | AARP | shop/compare/compare-ma-ms.html                                                         | ShopPlan: Compare MA-MS         |
-      | AARP | shop/compare/compare-ms.html                                                            | ShopPlan: Compare MS            |
-      | AARP | enroll.html                                                                             | ShopPlan: Enrollment Homepage   |
-      | AARP | enroll/ms-apply.html                                                                    | ShopPlan: MS Enrollment         |
-      | AARP | enroll/ma-enrollment.html                                                               | ShopPlan: MA Enrollment         |
-      | AARP | enroll/pdp-enrollment.html                                                              | ShopPlan: PDP Enrollment        |
-      | AARP | shop/compare.html                                                                       | ShopPlan: Compare Homepage      |
-      | AARP | shop/compare/compare-ma.html                                                            | ShopPlan: Compare MA            |
-      | AARP | shop/compare/compare-pdp.html                                                           | ShopPlan: Compare PDP           |
-      | AARP | shop/estimate.html                                                                      | ShopPlan: Estimate Homepage     |
-      | AARP | shop/estimate/ms-costs.html                                                             | ShopPlan: Estimate MS           |
-      | AARP | shop/estimate/ma-costs.html                                                             | ShopPlan: Estimate  MA          |
-      | AARP | shop/estimate/pdp-costs.html                                                            | ShopPlan: Estimate  PDP         |
-      | AARP | shop/switch.html                                                                        | ShopPlan: Switch                |
-      | AARP | resources/mail-order-pharmacy.html                                                      | ShopPlan: Mail ORDER-PHARMACY   |
-      | AARP | shop/medicare-advantage-plans/ma-plan-benefits.html                                     | ShopPlan: MA Plan benefits      |
-      | AARP | contact-us.html                                                                         | Contact us                      |
-      | AARP | shop/renew-active.html                                                                  | ShopPlan: Renew Active          |
-      | AARP | shop/medicare-advantage-veteran-plan.html                                               | ShopPlan: MA Veteran Plan       |
-      | AARP | medicare-articles.html                                                                  | ShopPlan: Articles              |
-      | AARP | medicare-articles/eligibility-and-enrollment.html                                       | ShopPlan: Sample Category Page  |
-      | AARP | medicare-articles/medicare-made-clear.html                                              | ShopPlan: About MMC             |
-      | AARP | medicare-articles/unintended-part-d-gotcha-could-getcha-if-you-enroll-after-age-65.html | ShopPlan: Sample Article Page 1 |
-      | AARP | medicare-articles/what-is-retiree-health-coverage.html                                  | ShopPlan: Retiree Health        |
+      | site | path                                                                                                         | pageName                        |
+      | AARP | shop.html                                                                                                    | ShopPlan: Homepage              |
+      | AARP | shop/medicare-advantage-plans.html                                                                           | ShopPlan: Shop MA Plan          |
+      | AARP | shop/medicare-supplement-plans.html                                                                          | ShopPlan: Shop MS Plan          |
+      | AARP | shop/prescription-drug-plans.html                                                                            | ShopPlan: Shop PDP Plan         |
+      | AARP | shop/dual-special-needs-plans.html                                                                           | ShopPlan: Shop SNP Plan         |
+      | AARP | safe-shopping.html                                                                                           | ShopPlan: Safe Shopping         |
+      | AARP | shop/compare/compare-ma-ms.html                                                                              | ShopPlan: Compare MA-MS         |
+      | AARP | shop/compare/compare-ms.html                                                                                 | ShopPlan: Compare MS            |
+      | AARP | enroll.html                                                                                                  | ShopPlan: Enrollment Homepage   |
+      | AARP | enroll/ms-apply.html                                                                                         | ShopPlan: MS Enrollment         |
+      | AARP | enroll/ma-enrollment.html                                                                                    | ShopPlan: MA Enrollment         |
+      | AARP | enroll/pdp-enrollment.html                                                                                   | ShopPlan: PDP Enrollment        |
+      | AARP | shop/compare.html                                                                                            | ShopPlan: Compare Homepage      |
+      | AARP | shop/compare/compare-ma.html                                                                                 | ShopPlan: Compare MA            |
+      | AARP | shop/compare/compare-pdp.html                                                                                | ShopPlan: Compare PDP           |
+      | AARP | shop/estimate.html                                                                                           | ShopPlan: Estimate Homepage     |
+      | AARP | shop/estimate/ms-costs.html                                                                                  | ShopPlan: Estimate MS           |
+      | AARP | shop/estimate/ma-costs.html                                                                                  | ShopPlan: Estimate  MA          |
+      | AARP | shop/estimate/pdp-costs.html                                                                                 | ShopPlan: Estimate  PDP         |
+      | AARP | shop/switch.html                                                                                             | ShopPlan: Switch                |
+      | AARP | resources/mail-order-pharmacy.html                                                                           | ShopPlan: Mail ORDER-PHARMACY   |
+      | AARP | shop/medicare-advantage-plans/ma-plan-benefits.html                                                          | ShopPlan: MA Plan benefits      |
+      | AARP | contact-us.html                                                                                              | Contact us                      |
+      | AARP | shop/renew-active.html                                                                                       | ShopPlan: Renew Active          |
+      | AARP | shop/medicare-advantage-veteran-plan.html                                                                    | ShopPlan: MA Veteran Plan       |
+      | AARP | medicare-articles.html                                                                                       | ShopPlan: Articles              |
+      | AARP | medicare-articles/eligibility-and-enrollment.html                                                            | ShopPlan: Sample Category Page  |
+      | AARP | medicare-articles/medicare-made-clear.html                                                                   | ShopPlan: About MMC             |
+      | AARP | medicare-articles/unintended-part-d-gotcha-could-getcha-if-you-enroll-after-age-65.html                      | ShopPlan: Sample Article Page 1 |
+      | AARP | medicare-articles/what-is-retiree-health-coverage.html                                                       | ShopPlan: Retiree Health        |
+      | AARP | about-us.html                                                                                                | About Us Page                   |
+      #| AARP | sitemap.html                                                                                                 | Site Map Page                   |
+      #| AARP | privacy-policy.html                                                                                          | Privacy Policy Page             |
+      #| AARP | terms-of-use.html                                                                                            | Terms of Use Page               |
+      #| AARP | site-search.html                                                                                             | Site Search Page                |
+      #| AARP | profile                                                                                                      | Visitor Profile Page            |
+      #| AARP | health-plans/estimate-drug-costs.html/drug-cost-estimator                                                    | DCE Page                        |
+      #| AARP | health-plans/aarp-pharmacy.html/Pharmacy-Search-English                                                      | Pharmacy Search Page            |
+      #| AARP | health-plans/medicare-supplement-plans/agent-appointment.html                                                | MS Agent Appointment Page       |
+      #| AARP | https://www.stage-aarpmedicareplans.uhc.com/health-plans/medicare-supplement-plans/medicare-information.html | Agent Appointment Page          |
 
     @Global_Comps_ZipSubNav_UHC
     Examples: 
-      | site | path                                                                                    | pageName                        |
-      | UHC  | shop.html                                                                               | ShopPlan: Homepage              |
-      | UHC  | shop/medicare-advantage-plans.html                                                      | ShopPlan: Shop MA Plan          |
-      | UHC  | shop/medicare-supplement-plans.html                                                     | ShopPlan: Shop MS Plan          |
-      | UHC  | shop/prescription-drug-plans.html                                                       | ShopPlan: Shop PDP Plan         |
-      | UHC  | shop/dual-special-needs-plans.html                                                      | ShopPlan: Shop SNP Plan         |
-      | UHC  | safe-shopping.html                                                                      | ShopPlan: Safe Shopping         |
-      | UHC  | shop/compare/compare-ma-ms.html                                                         | ShopPlan: Compare MA-MS         |
-      | UHC  | shop/compare/compare-ms.html                                                            | ShopPlan: Compare MS            |
-      | UHC  | enroll.html                                                                             | ShopPlan: Enrollment Homepage   |
-      | UHC  | enroll/ms-apply.html                                                                    | ShopPlan: MS Enrollment         |
-      | UHC  | enroll/ma-enrollment.html                                                               | ShopPlan: MA Enrollment         |
-      | UHC  | enroll/pdp-enrollment.html                                                              | ShopPlan: PDP Enrollment        |
-      | UHC  | shop/compare.html                                                                       | ShopPlan: Compare Homepage      |
-      | UHC  | shop/compare/compare-ma.html                                                            | ShopPlan: Compare MA            |
-      | UHC  | shop/compare/compare-pdp.html                                                           | ShopPlan: Compare PDP           |
-      | UHC  | shop/estimate.html                                                                      | ShopPlan: Estimate Homepage     |
-      | UHC  | shop/estimate/ms-costs.html                                                             | ShopPlan: Estimate MS           |
-      | UHC  | shop/estimate/ma-costs.html                                                             | ShopPlan: Estimate  MA          |
-      | UHC  | shop/estimate/pdp-costs.html                                                            | ShopPlan: Estimate  PDP         |
-      | UHC  | shop/switch.html                                                                        | ShopPlan: Switch                |
-      | UHC  | resources/mail-order-pharmacy.html                                                      | ShopPlan: Mail ORDER-PHARMACY   |
-      | UHC  | shop/medicare-advantage-plans/ma-plan-benefits.html                                     | ShopPlan: MA Plan benefits      |
-      | UHC  | contact-us.html                                                                         | Contact us                      |
-      | UHC  | shop/renew-active.html                                                                  | ShopPlan: Renew Active          |
-      | UHC  | shop/medicare-advantage-veteran-plan.html                                               | ShopPlan: MA Veteran Plan       |
-      | UHC  | medicare-articles.html                                                                  | ShopPlan: Articles              |
-      | UHC  | medicare-articles/eligibility-and-enrollment.html                                       | ShopPlan: Sample Category Page  |
-      | UHC  | medicare-articles/medicare-made-clear.html                                              | ShopPlan: About MMC             |
-      | UHC  | medicare-articles/unintended-part-d-gotcha-could-getcha-if-you-enroll-after-age-65.html | ShopPlan: Sample Article Page 1 |
-      | UHC  | medicare-articles/what-is-retiree-health-coverage.html                                  | ShopPlan: Retiree Health        |
+      | site | path                                                                                                         | pageName                        |
+      | UHC  | shop.html                                                                                                    | ShopPlan: Homepage              |
+      | UHC  | shop/medicare-advantage-plans.html                                                                           | ShopPlan: Shop MA Plan          |
+      | UHC  | shop/medicare-supplement-plans.html                                                                          | ShopPlan: Shop MS Plan          |
+      | UHC  | shop/prescription-drug-plans.html                                                                            | ShopPlan: Shop PDP Plan         |
+      | UHC  | shop/dual-special-needs-plans.html                                                                           | ShopPlan: Shop SNP Plan         |
+      | UHC  | safe-shopping.html                                                                                           | ShopPlan: Safe Shopping         |
+      | UHC  | shop/compare/compare-ma-ms.html                                                                              | ShopPlan: Compare MA-MS         |
+      | UHC  | shop/compare/compare-ms.html                                                                                 | ShopPlan: Compare MS            |
+      | UHC  | enroll.html                                                                                                  | ShopPlan: Enrollment Homepage   |
+      | UHC  | enroll/ms-apply.html                                                                                         | ShopPlan: MS Enrollment         |
+      | UHC  | enroll/ma-enrollment.html                                                                                    | ShopPlan: MA Enrollment         |
+      | UHC  | enroll/pdp-enrollment.html                                                                                   | ShopPlan: PDP Enrollment        |
+      | UHC  | shop/compare.html                                                                                            | ShopPlan: Compare Homepage      |
+      | UHC  | shop/compare/compare-ma.html                                                                                 | ShopPlan: Compare MA            |
+      | UHC  | shop/compare/compare-pdp.html                                                                                | ShopPlan: Compare PDP           |
+      | UHC  | shop/estimate.html                                                                                           | ShopPlan: Estimate Homepage     |
+      | UHC  | shop/estimate/ms-costs.html                                                                                  | ShopPlan: Estimate MS           |
+      | UHC  | shop/estimate/ma-costs.html                                                                                  | ShopPlan: Estimate  MA          |
+      | UHC  | shop/estimate/pdp-costs.html                                                                                 | ShopPlan: Estimate  PDP         |
+      | UHC  | shop/switch.html                                                                                             | ShopPlan: Switch                |
+      | UHC  | resources/mail-order-pharmacy.html                                                                           | ShopPlan: Mail ORDER-PHARMACY   |
+      | UHC  | shop/medicare-advantage-plans/ma-plan-benefits.html                                                          | ShopPlan: MA Plan benefits      |
+      | UHC  | contact-us.html                                                                                              | Contact us                      |
+      | UHC  | shop/renew-active.html                                                                                       | ShopPlan: Renew Active          |
+      | UHC  | shop/medicare-advantage-veteran-plan.html                                                                    | ShopPlan: MA Veteran Plan       |
+      | UHC  | medicare-articles.html                                                                                       | ShopPlan: Articles              |
+      | UHC  | medicare-articles/eligibility-and-enrollment.html                                                            | ShopPlan: Sample Category Page  |
+      | UHC  | medicare-articles/medicare-made-clear.html                                                                   | ShopPlan: About MMC             |
+      | UHC  | medicare-articles/unintended-part-d-gotcha-could-getcha-if-you-enroll-after-age-65.html                      | ShopPlan: Sample Article Page 1 |
+      | UHC  | medicare-articles/what-is-retiree-health-coverage.html                                                       | ShopPlan: Retiree Health        |
+      | UHC  | about-us.html                                                                                                | About Us Page                   |
+      #| UHC  | sitemap.html                                                                                                 | Site Map Page                   |
+      #| UHC  | privacy-policy.html                                                                                          | Privacy Policy Page             |
+      #| UHC  | terms-of-use.html                                                                                            | Terms of Use Page               |
+      #| UHC  | site-search.html                                                                                             | Site Search Page                |
+      #| UHC  | profile                                                                                                      | Visitor Profile Page            |
+      #| UHC  | health-plans/estimate-drug-costs.html/drug-cost-estimator                                                    | DCE Page                        |
+      #| UHC  | health-plans/aarp-pharmacy.html/Pharmacy-Search-English                                                      | Pharmacy Search Page            |
+      #| UHC  | health-plans/medicare-supplement-plans/agent-appointment.html                                                | MS Agent Appointment Page       |
+      #| UHC  | https://www.stage-aarpmedicareplans.uhc.com/health-plans/medicare-supplement-plans/medicare-information.html | Agent Appointment Page          |

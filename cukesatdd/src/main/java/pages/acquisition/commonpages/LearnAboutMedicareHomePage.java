@@ -547,7 +547,7 @@ public class LearnAboutMedicareHomePage extends GlobalWebElements {
 		}
 		else if (pageName.contains("Cost Basics")) {
 			
-			WebElement lnkPremium=driver.findElement(By.xpath("(//a[contains(text(),'What is a premium?')])[2]"));
+			/*WebElement lnkPremium=driver.findElement(By.xpath("(//a[contains(text(),'What is a premium?')])[2]"));
 			jsClickNew(lnkPremium);
 			System.out.println(" Link Clicked: What is a premium? ");
 			
@@ -570,7 +570,7 @@ public class LearnAboutMedicareHomePage extends GlobalWebElements {
 			WebElement lnkMedCost=driver.findElement(By.xpath("(//a[contains(text(),'paying Medicare costs?')])[2]"));
 			scrollToView(lnkMedCost);
 			jsClickNew(lnkMedCost);
-			System.out.println(" What if I need help paying Medicare costs? ");
+			System.out.println(" What if I need help paying Medicare costs? ");*/
 		}
 	}
 	public void clickToYoutubeVideo() {
