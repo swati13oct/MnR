@@ -320,7 +320,7 @@ public class ConfirmOneTimePaymentPage extends UhcDriver {
 
 
 		validate(ConfirmationNumber);
-		//PaymentsDataVerificationonConfirmationPage();
+		PaymentsDataVerificationonConfirmationPage();
 		System.out.println("Your Confimation Number is : " + ConfirmationNumber.getText());
 
 	}

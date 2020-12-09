@@ -567,7 +567,6 @@ public class PlanDetailsPage extends UhcDriver {
 		validateNew(estimateDrugBtn, 20);
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", estimateDrugBtn);
 		((JavascriptExecutor) driver).executeScript("arguments[0].click();", estimateDrugBtn);
-		waitForPageLoadSafari();
 		if (validateNew(dceHeader))
 			return new GetStartedPage(driver);
 		return null;
