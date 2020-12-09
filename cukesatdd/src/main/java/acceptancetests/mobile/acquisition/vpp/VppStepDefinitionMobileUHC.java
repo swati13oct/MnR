@@ -90,7 +90,7 @@ public class VppStepDefinitionMobileUHC {
 		if (("NO").equalsIgnoreCase(isMultiCounty.trim())) {
 			plansummaryPage = aquisitionhomepage.searchPlansWithOutCounty(zipcode);
 		} else {
-			plansummaryPage = aquisitionhomepage.searchPlans(zipcode, county);
+			plansummaryPage = aquisitionhomepage.searchPlans1(zipcode, county);
 		}
 
 		if (plansummaryPage != null) {
@@ -158,7 +158,7 @@ public class VppStepDefinitionMobileUHC {
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		// VPPPlanSummaryPage plansummaryPage =
 		// aquisitionhomepage.searchPlans(zipcode, county);
-		VPPPlanSummaryPage plansummaryPage = aquisitionhomepage.searchPlans(zipcode, county);
+		VPPPlanSummaryPage plansummaryPage = aquisitionhomepage.searchPlans1(zipcode, county);
 		if (plansummaryPage != null) {
 			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
 			if (plansummaryPage.validateVPPPlanSummaryPage())
@@ -1202,7 +1202,7 @@ public class VppStepDefinitionMobileUHC {
 		if (("NO").equalsIgnoreCase(isMultiCounty.trim())) {
 			plansummaryPage = aquisitionhomepage.searchPlansWithOutCounty(zipcode);
 		} else {
-			plansummaryPage = aquisitionhomepage.searchPlans(zipcode, county);
+			plansummaryPage = aquisitionhomepage.searchPlans1(zipcode, county);
 		}
 
 		if (plansummaryPage != null) {
@@ -1392,7 +1392,7 @@ public class VppStepDefinitionMobileUHC {
 		if (("NO").equalsIgnoreCase(isMultiCounty.trim())) {
 			plansummaryPage = aquisitionhomepage.searchPlansWithOutCounty(zipcode);
 		} else {
-			plansummaryPage = aquisitionhomepage.searchPlans(zipcode, county);
+			plansummaryPage = aquisitionhomepage.searchPlans1(zipcode, county);
 		}
 
 		if (plansummaryPage != null) {
