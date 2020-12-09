@@ -78,7 +78,7 @@ public class ZipCodePlanYearCapturePage extends UhcDriver {
 		if(validate(planYearDropdown)) {
 			planYearDropdown.click();
 			Select planYear = new Select(planYearDropdown);
-			planYear.selectByIndex(1);
+			planYear.selectByIndex(0);
 		}
 	}
 	
