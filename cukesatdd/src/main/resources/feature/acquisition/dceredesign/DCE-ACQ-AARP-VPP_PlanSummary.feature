@@ -33,12 +33,12 @@ Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanSummary AARP - To test VPP Plan Details 
     @DCE_Redesign_VPP_PlanSummary_MAPD_AARP
     Examples: 
       | site | zipcode | plantype | planyear | county | isMultutiCounty | drug1   | planname                                           |
-      | AARP |   90210 | MAPD     | current   | none   | no              | Orkambi | AARP Medicare Advantage SecureHorizons Focus (HMO) |
+      | AARP |   90210 | MAPD     | future   | none   | no              | Orkambi | AARP Medicare Advantage SecureHorizons Focus (HMO) |
 
     @DCE_Redesign_VPP_PlanSummary_MAPD_UHC
     Examples: 
       | site | zipcode | plantype | planyear | county | isMultutiCounty | drug1   | planname                                           |
-      | UHC  |   90210 | MAPD     | current   | none   | no              | Orkambi | AARP Medicare Advantage SecureHorizons Focus (HMO) |
+      | UHC  |   90210 | MAPD     | future   | none   | no              | Orkambi | AARP Medicare Advantage SecureHorizons Focus (HMO) |
 
     @DCE_Redesign_VPP_PlanSummary_PDP_AARP
     Examples: 

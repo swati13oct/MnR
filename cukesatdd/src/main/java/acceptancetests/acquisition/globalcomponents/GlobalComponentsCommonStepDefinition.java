@@ -41,6 +41,7 @@ import pages.acquisition.commonpages.EnrollmentBasicsPage;
 import pages.acquisition.commonpages.PrivacyPolicyAARPPage;
 import pages.acquisition.commonpages.SiteMapAARPPage;
 import pages.acquisition.commonpages.TermsnConditionsAARPPage;
+import pages.acquisition.commonpages.VPPPlanSummaryPage;
 import pages.acquisition.dceredesign.DrugDetailsPage;
 import pages.acquisition.commonpages.AboutUsAARPPage;
 import pages.acquisition.commonpages.AcquisitionHomePage;
@@ -675,6 +676,27 @@ public class GlobalComponentsCommonStepDefinition {
 		  learnAboutMedicareHomePage.hoverToPlanPage(plantype);
 	  }
 	  
+	  @Then("^the user hover over Shop for a Plan and validates zipcode component$")
+	  public void the_user_hover_over_Shop_for_a_Plan_and_validates_zipcode_component() {
+		  AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage)getLoginScenario() .getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		  if(aquisitionhomepage.checkZipCompErrorInSubNav()==true){
+			  Assert.assertTrue(true);
+		  }else
+			  Assert.fail("Zip Component not present or Error msg not shown");
+	  }
+	  
+	  @Then("^the user validate ZipCode Components on SubNav using ZipCode \"([^\"]*)\"$")
+	  public void the_user_enter_zipcode_and_go_to_Plan_Summary_Page(String zipCode){
+		  AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage)getLoginScenario() .getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		  VPPPlanSummaryPage vppPlanSummaryPage=aquisitionhomepage.checkZipCompSubNavVpp(zipCode);
+		  if(vppPlanSummaryPage!=null) {
+			  System.out.println("Vpp Plan Summary Page opened Successfully");
+			  Assert.assertTrue(true);
+		  }else
+			  Assert.fail("Error Loading in VPP Plan Summary Page");
+		  
+		  
+	  }
 	 
 	  
 
