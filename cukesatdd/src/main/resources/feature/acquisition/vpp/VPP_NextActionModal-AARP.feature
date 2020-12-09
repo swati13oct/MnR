@@ -187,6 +187,8 @@ Feature: 1.03-ACQ-Next Action Modal on vpp flow AARP
     Then user clicks on Continue Enrollment button in AARP Site
     Then user should be able to see the Select Plan for Enroll Modal with saved plans in AARP site
       | Test Plans | <testPlans> |
+    When user clicks on Enroll in plan button on the select plan modal in AARP site
+    Then user should be navigated to OLE page in AARP site
 
     Examples: 
       | zipcode | isMultutiCounty | county      | plantype | drug1   | testPlans                                   | planyear |
@@ -221,6 +223,8 @@ Feature: 1.03-ACQ-Next Action Modal on vpp flow AARP
     Then user clicks on Continue Enrollment button in AARP Site
     Then user should be able to see the Select Plan for Enroll Modal with all plans in AARP site
       | Test Plans | <testPlans> |
+    When user clicks on Enroll in plan button on the select plan modal in AARP site
+    Then user should be navigated to OLE page in AARP site
 
     Examples: 
       | zipcode | isMultutiCounty | county      | plantype | drug1   | planyear |
@@ -326,6 +330,8 @@ Feature: 1.03-ACQ-Next Action Modal on vpp flow AARP
     Then user clicks on Continue Enrollment button in AARP Site
     Then user should be able to see the Select Plan for Enroll Modal with saved plans in AARP site
       | Test Plans | <testPlans> |
+    When user clicks on Enroll in plan button on the select plan modal in AARP site
+    Then user should be navigated to OLE page in AARP site
 
     Examples: 
       | zipcode | isMultutiCounty | county      | plantype | drug1   | testPlans                       | planyear |
@@ -357,6 +363,8 @@ Feature: 1.03-ACQ-Next Action Modal on vpp flow AARP
     Then user clicks on Continue Enrollment button in AARP Site
     Then user should be able to see the Select Plan for Enroll Modal with all plans in AARP site
       | Test Plans | <testPlans> |
+    When user clicks on Enroll in plan button on the select plan modal in AARP site
+    Then user should be navigated to OLE page in AARP site
 
     Examples: 
       | zipcode | isMultutiCounty | county      | plantype | drug1   | testPlans                       | planyear |
