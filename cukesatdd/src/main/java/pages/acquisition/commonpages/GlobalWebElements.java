@@ -1,3 +1,4 @@
+
 package pages.acquisition.commonpages;
 
 import org.openqa.selenium.WebDriver;

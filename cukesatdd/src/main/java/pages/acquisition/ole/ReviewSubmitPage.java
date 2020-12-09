@@ -471,8 +471,8 @@ public class ReviewSubmitPage extends UhcDriver{
 		
 
 		validateNew(SubmitApplicationBtn);
-//		jsClickNew(SubmitApplicationBtn);
-		SubmitApplicationBtn.click();
+		jsClickNew(SubmitApplicationBtn);
+		//SubmitApplicationBtn.click();
 		CommonUtility.checkPageIsReadyNew(driver);
 		waitForPageLoadSafari();
 		//waitforElementDisapper(By.xpath("//button[contains(@class,'confirm-button')]"), 60);
