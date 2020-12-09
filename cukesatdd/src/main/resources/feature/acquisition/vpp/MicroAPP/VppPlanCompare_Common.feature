@@ -506,3 +506,33 @@ Feature: 1.01.3 - Vpp to plan Compare Scenarios
       | TID  | site | zipcode | isMultiCounty | county       | plantype | planyear | pdfLink | docCode |
       | 0024 | UHC  |   78006 | YES           | Bexar County | MAPD     | future   |    1023 | 4866893 |
       | 0025 | UHC  |   78006 | YES           | Bexar County | MAPD     | future   |    1025 | 4805658 |
+      
+# @vppPlanCompareAARP17 @vppPlanCompareAARPRun02New @vppPlanCompareAARPRegression
+  Scenario Outline: TID: <TID> - Plan Type: <plantype> - valiadation of Add provider from VPP and view locations on plan compare page
+    Given the user is on medicare acquisition site landing page
+      | Site | <site> |
+    When the user performs plan search using following information
+      | Zip Code        | <zipcode>         |
+      | Is Multi County | <isMultutiCounty> |
+      | County Name     | <county>          |
+    And the user views the plans of the below plan type
+      | Plan Type | <plantype> |
+    And the user selects plan year
+      | Plan Year | <planyear> |
+    When the user Click on Is my Provider covered link
+      | PlanName | <planname> |
+    When user selects a provider and retuns to VPP page
+    And I select "<plantype>" plans to compare and click on compare plan link
+    Then verify plan compare page is loaded
+    Then verify Your doctors is loaded with doctor summary on Plan Compare page
+    Then validate view locations popup on compare page
+  
+    @VppPlanCompareCommon_AARP03
+    Examples: 
+      | TID   | site | zipcode | isMultiCounty | county             | plantype | planname                                            | planyear |
+      | 00026 | AARP |   90210 | NO            | Los Angeles County | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) | future   |
+
+    @VppPlanCompareCommon_UHC03
+    Examples: 
+      | TID   | site | zipcode | isMultiCounty | county             | plantype | planname                                            | planyear |
+      | 00026 | UHC  |   90210 | NO            | Los Angeles County | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) | future   |

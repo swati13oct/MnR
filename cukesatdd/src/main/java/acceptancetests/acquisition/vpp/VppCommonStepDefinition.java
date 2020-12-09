@@ -2746,4 +2746,30 @@ public class VppCommonStepDefinition {
 					.getBean(PageConstants.PLAN_COMPARE_PAGE);		
 			planComparePage.CounterDentalFlyerLink(PDFtype,DocCode);
 		}
+		
+		@Then("^validate view locations popup on compare page$")
+		public void validate_view_locations_popup_on_compare_page() throws Throwable {
+			ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
+					.getBean(PageConstants.PLAN_COMPARE_PAGE);	
+			planComparePage.validateViewLocation();
+		}
+		
+		@Given("^I select \"([^\"]*)\" plans and \"([^\"]*)\" plans to compare$")
+		public void i_select_plans_for_compare(String planType,
+				String Counter) throws Throwable {
+			VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+			plansummaryPage.checkPlansForCompare(Counter,planType);
+		}
+		
+		@Then("^click add to compare checkbox on plan details page and navigate to compare page$")
+		public void click_add_to_compare_checkbox_on_plan_details_page_and_navigate_to_compare_page() throws Throwable {
+			PlanDetailsPage planDetailsPage = (PlanDetailsPage) getLoginScenario()
+					.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
+			ComparePlansPage planComparePage = planDetailsPage.addToCompareAndNavigate();
+			if (planComparePage != null) {
+				getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
+			} else
+				Assert.fail("Error in loading the compare plans page");
+		}
 }

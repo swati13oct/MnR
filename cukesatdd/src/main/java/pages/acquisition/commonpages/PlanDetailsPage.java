@@ -271,6 +271,12 @@ public class PlanDetailsPage extends UhcDriver {
 	
 	@FindBy(xpath = "//button[@ng-click='backToPlanSummary()']")
 	public WebElement backtoVPPSummaryBtn;
+	
+	@FindBy(xpath="(//label[contains(text(),'Add to Compare')])[1]")
+	public WebElement addToCompareLabel;
+	
+	@FindBy(xpath="(//a[contains(text(),'Compare plans')])[1]")
+	public WebElement comparePlansLink;
 
 	public WebElement getValCostTabEstimatedTotalAnnualCost() {
 		return valCostTabYearlyCost;
@@ -1422,6 +1428,14 @@ public class PlanDetailsPage extends UhcDriver {
 			if (driver.getCurrentUrl().contains("plan-summary")) {
 				return new VPPPlanSummaryPage(driver);
 			}
+			return null;
+		}
+		public ComparePlansPage addToCompareAndNavigate()
+		{
+			jsClickNew(addToCompareLabel);
+			jsClickNew(comparePlansLink);
+			if (currentUrl().contains("/health-plans.html#/plan-compare"))
+				return new ComparePlansPage(driver);
 			return null;
 		}
 }
