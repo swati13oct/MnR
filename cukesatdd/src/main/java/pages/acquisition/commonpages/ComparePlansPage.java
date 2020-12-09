@@ -291,6 +291,15 @@ public class ComparePlansPage extends UhcDriver {
 	
 	@FindBy(xpath="//h2[contains(text(),'Medical Benefits')]/following::span[@class='uhc-switch__slider']")
 	public static WebElement medicalBenefitsOONToggleNotDisplayed;
+	
+	@FindBy(css = "#viewLocationLink-0")
+	private WebElement viewLocationLink;
+	
+	@FindBy(xpath="//tr[contains(@ng-repeat,'uniqueDoctorProviders')]//child::span[contains(@class,'provider-name')][1]")
+	private WebElement firstDoctorNameLabel;
+	
+	@FindBy(xpath="//h2[@id='viewLocationTitle']")
+	private WebElement viewLocationPopupProviderName;
 
 
 	public ComparePlansPage(WebDriver driver) {
@@ -1370,5 +1379,14 @@ public class ComparePlansPage extends UhcDriver {
 		Assert.assertTrue("OON Toggle Should be Displayed for Medical Benefits", driver.findElements(By.xpath("//h2[contains(text(),'Medical Benefits')]/following::span[@class='uhc-switch__slider']")).isEmpty());
 		Assert.assertTrue("OON Toggle Should be Displayed for Additional Benefits", driver.findElements(By.xpath("//h2[contains(text(),'Additional Benefits')]/following::span[@class='uhc-switch__slider']")).isEmpty());
 	}
+			
+	public void validateViewLocation()
+	{
+		System.out.println(firstDoctorNameLabel.getText());
+		String firstDoctorName=firstDoctorNameLabel.getText();
+		viewLocationLink.click();
+		Assert.assertEquals("Doctor name is not displayed correctly", firstDoctorName, viewLocationPopupProviderName.getText());
+	}
+
 }
 
