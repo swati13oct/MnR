@@ -150,7 +150,7 @@ public class VisitorProfilePage extends UhcDriver {
 	@FindBy(xpath = "//a[contains(text(),'Back to Drug Cost Estimator')]")
 	public WebElement backToDrugCostEstimatorLink;
 
-	@FindBy(xpath = "//*[contains(@aria-controls,'plan-drugs-dropdown')]")
+	@FindBy(xpath = "//*[contains(@aria-controls,'plan-drugs-dropdown')]/img")
 	public WebElement expandDrugsPlanCard;
 
 	@FindBy(xpath = "//*[text()='Edit Drugs']")
@@ -173,7 +173,7 @@ public class VisitorProfilePage extends UhcDriver {
 	@FindBy(xpath = "//*[contains(@id,'plan-providers-dropdown')]//button[@aria-label='Remove drug']")
 	public List<WebElement> removeDrugsPlanCard;
 
-	@FindBy(xpath = "//*[contains(@aria-controls,'plan-providers-dropdown')]")
+	@FindBy(xpath = "//*[contains(@aria-controls,'plan-providers-dropdown')]/img")
 	public WebElement expandProvidersPlanCard;
 
 	@FindBy(xpath = "//*[contains(@id,'plan-providers-dropdown')]//button[@aria-label='Remove provider']")

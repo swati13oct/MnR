@@ -47,7 +47,6 @@ Feature: 1.10.1 DCE-REDISIGN AARP - To test Acq Visitor Profile to NEW DCE Flows
       Then the user clicks on Review Drug Costs to Land on Zip Entry Page
     When user enters valid zipcode and county
       | ZipCode | <zipCode> |
-    And user selects plan year
     And user clicks on continue button in Zip Entry Page
     Then user should be able to see Return to profile link on summary page
     And Back to profile button should be displayed for each plan card
@@ -60,7 +59,6 @@ Feature: 1.10.1 DCE-REDISIGN AARP - To test Acq Visitor Profile to NEW DCE Flows
       Then the user clicks on Review Drug Costs to Land on Zip Entry Page
     When user enters valid zipcode and county
       | ZipCode | <zipCode> |
-    And user selects plan year
     And user clicks on continue button in Zip Entry Page
     Then user should be able to see Return to profile link on summary page
     And Back to profile button should be displayed for each plan card
@@ -122,7 +120,7 @@ Feature: 1.10.1 DCE-REDISIGN AARP - To test Acq Visitor Profile to NEW DCE Flows
     And user clears the existing drugs in Visitor profile
     And user clears the provider in visitor profile page
     #And user removed existing saved plans
-    And the user clicks on the add drugs button to navigate to DCE Redesign on the profile page
+    And the user clicks on the add drugs button globally on the profile page
     Then the user validates Get Started Page
     Then the user clicks on Build Drug List to navigate to Build Drug List Page
     Then the user searches and adds the following Drug to Drug List
@@ -130,7 +128,6 @@ Feature: 1.10.1 DCE-REDISIGN AARP - To test Acq Visitor Profile to NEW DCE Flows
       Then the user clicks on Review Drug Costs to Land on Zip Entry Page
     When user enters valid zipcode and county
       | ZipCode | <zipCode> |
-    And user selects plan year
     And user clicks on continue button in Zip Entry Page
     Then user should be able to see Return to profile link on summary page
     And Back to profile button should be displayed for each plan card
@@ -143,7 +140,6 @@ Feature: 1.10.1 DCE-REDISIGN AARP - To test Acq Visitor Profile to NEW DCE Flows
       Then the user clicks on Review Drug Costs to Land on Zip Entry Page
     When user enters valid zipcode and county
       | ZipCode | <zipCode> |
-    And user selects plan year
     And user clicks on continue button in Zip Entry Page
     Then user should be able to see Return to profile link on summary page
     And Back to profile button should be displayed for each plan card

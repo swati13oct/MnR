@@ -493,6 +493,7 @@ public void user_clears_the_existing_drugs_in_visitor_profile() {
 	VisitorProfilePage visitorProfile = (VisitorProfilePage) getLoginScenario()
 			.getBean(PageConstants.VISITOR_PROFILE_PAGE);
 	visitorProfile.clearDrugsFromPlanCard();
+	getLoginScenario().saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfile);
 }
 
 @Then("^user clears the provider in visitor profile page$")
@@ -500,6 +501,7 @@ public void user_clears_the_provider_in_visitor_profile_page() {
 	VisitorProfilePage visitorProfile = (VisitorProfilePage) getLoginScenario()
 			.getBean(PageConstants.VISITOR_PROFILE_PAGE);
 	visitorProfile.clearProvider();
+	getLoginScenario().saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfile);
 }
 
 @And("^user clicks on home menu from Visitor profile page$")
