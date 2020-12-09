@@ -306,9 +306,26 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 		scrollElementToCenterScreen(LookUpDrugsButton);
 		LookUpDrugsButton.click();
 		CommonUtility.checkPageIsReadyNew(driver);
-		CommonUtility.waitForPageLoad(driver, oldDcePgHeader, 5);
-		Assert.assertTrue("PROBLEM - unable to locate the DCE page header", 
-				validate(oldDcePgHeader,0) );
+		if (MRScenario.isTestHarness.equalsIgnoreCase("YES")) { //note: new DCE is a Rally page, access via testharness will land on myuhc.com login page
+			String expUrl="https://www.myuhc.com/member/prelogoutLayout.do?reason=logout&currentLanguageFromPreCheck=en";
+			String actUrl=driver.getCurrentUrl();
+			Assert.assertTrue("PROBLEM - not getting expected URL. From team or stage env ", actUrl.contains(expUrl));
+		} else {
+			if (driver.getCurrentUrl().contains("/pharmacy-uhc/drugs")) {
+				if (validate(newDcePrePgCloseBtn,0)) {
+					newDcePrePgCloseBtn.click();
+					CommonUtility.checkPageIsReadyNew(driver);
+				} else {
+					CommonUtility.waitForPageLoad(driver, newDcePgSearchBtn, 5);
+					Assert.assertTrue("PROBLEM - unable to locate the DCE page header", 
+							validate(newDcePgSearchBtn,0) );
+				}
+			} else {
+				CommonUtility.waitForPageLoad(driver, oldDcePgHeader, 5);
+				Assert.assertTrue("PROBLEM - unable to locate the DCE page header", 
+						validate(oldDcePgHeader,0) );
+			}
+		}
 		driver.navigate().back();
 		CommonUtility.checkPageIsReadyNew(driver);
 		checkModelPopup(driver,2);
@@ -4198,8 +4215,8 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 				+"$0.00\n"
 				+"$0.00\n"
 				+"Select Insulin Drugs\n"
-				+"$35.00\n"
-				+"$35.00\n"
+				+"$105.00\n"
+				+"$105.00\n"
 				+"Tier 3\n"
 				+"$120.00\n"
 				+"0%\n"
@@ -4856,7 +4873,7 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 				+"-or- $3.70 for a generic drug or a drug that is treated like a generic and $9.20 for all other drugs.\n"
 				+"Tier 2\n"
 				+"$0.00\n"
-				+"$0.00\n"
+				+"no more than 25% for generic drugs or 25% for brand name drugs\n"
 				+"Select Insulin Drugs\n"
 				+"$95.00\n"
 				+"$95.00\n"
@@ -4907,7 +4924,7 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 				+"-or- $3.70 for a generic drug or a drug that is treated like a generic and $9.20 for all other drugs.\n"
 				+"Tier 2\n"
 				+"$20.00\n"
-				+"$20.00\n"
+				+"no more than 25% for generic drugs or 25% for brand name drugs\n"
 				+"Select Insulin Drugs\n"
 				+"$35.00\n"
 				+"$35.00\n"
@@ -5328,7 +5345,7 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 				+"-or- $3.70 for a generic drug or a drug that is treated like a generic and $9.20 for all other drugs.\n"
 				+"Tier 2\n"
 				+"$12.00\n"
-				+"$12.00\n"
+				+"no more than 25% for generic drugs or 25% for brand name drugs\n"
 				+"Select Insulin Drugs\n"
 				+"$35.00\n"
 				+"$35.00\n"
