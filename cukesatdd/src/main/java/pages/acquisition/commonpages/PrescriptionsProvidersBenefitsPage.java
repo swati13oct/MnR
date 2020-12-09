@@ -83,7 +83,6 @@ public class PrescriptionsProvidersBenefitsPage extends GlobalWebElements {
 		
 		WebElement annualEnrll=driver.findElement(By.xpath("//a[contains(text(),'Medicare Annual Enrollment Period')]"));
 		jsClickNew(annualEnrll);
-		waitForPageLoadSafari();
 		CommonUtility.checkPageIsReadyNew(driver);
 		
 		if(driver.getCurrentUrl().contains("/medicare-education/enrollment-and-changing-plans.html"))
@@ -117,7 +116,6 @@ public class PrescriptionsProvidersBenefitsPage extends GlobalWebElements {
 		WebElement DCELink = driver.findElement(By.xpath("//a[contains(@href,'drug-cost-estimator') and contains(@class,'contentRow__mededcontainer')]"));
 		validateNew(DCELink);
 		jsClickNew(DCELink);
-		waitForPageLoadSafari();
 		CommonUtility.checkPageIsReadyNew(driver);
 		WebElement AddMyDrugsBtn=driver.findElement(By.xpath("//button[contains(@id,'addDrug')]"));
 		if (validateNew(AddMyDrugsBtn))
