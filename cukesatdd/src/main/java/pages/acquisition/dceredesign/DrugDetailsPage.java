@@ -284,6 +284,9 @@ public class DrugDetailsPage extends UhcDriver {
 	@FindBy(xpath = "//div/a[contains(text(),'View Plan Details')]")
 	public WebElement viewPlanBtn;
 	
+	@FindBy(xpath = "backToPlanSummaryTop")
+	public WebElement backToPlan;
+	
 	@FindBy(xpath = "//*[contains(@dtmname,'step 3') and contains(text(),'Return to plan details')]")
 	public WebElement returnToDetailsLink;
 	
@@ -968,6 +971,10 @@ public class DrugDetailsPage extends UhcDriver {
 	public void clickOnvppPlanDetails() {
 		validateNew(viewPlanBtn);
 		viewPlanBtn.click();
+		
+		validate(backToPlan);
+		assertTrue("Drug Cost Estimator is Displaying",!backtoDrugEstBtn.isDisplayed());
+		assertTrue("View Plan Summary is Displaying",!backtoSummaryBtn.isDisplayed());
 	}
 	
 	public PlanDetailsPage clickReturnToDetailsLink() {

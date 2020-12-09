@@ -131,7 +131,7 @@ Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanDetails AARP - To test DCE - VPP Plan De
       | site | zipcode | plantype | planyear | county       | isMultutiCounty | drug1   | planname                                              | tabName                       |
       | UHC  |   78006 | SNP      | future   | Bexar County | yes             | Lipitor | UnitedHealthcare Medicare Silver (Regional PPO C-SNP) | Medical Benefits and Programs |
 
-  @DCE_Redesign_VPPSummary_to_Vpp_Details
+  @DCE_Redesign_DCEViewPlanSummaryBtnNotExist
   Scenario Outline: Test to verify the Drug cost estimator and view plan summary are not visible when user navigate away from DCE and navigate to VPP detail page
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
@@ -160,7 +160,6 @@ Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanDetails AARP - To test DCE - VPP Plan De
     Then the user click on view plan summary on vpp detail page
     Then user click on view plan details on summary page in AARP
 
-    #Then user verifiy drug cost estomator and view plan summary is not exist in vpp detail page in ARRP
     @DCE_Redesign_VPPSummary_to_Vpp_Details_MAPD_AARP @dceViewPlanSummaryButton_AARP
     Examples: 
       | site | zipcode | plantype | planyear | county | isMultutiCounty | drug1     | tabName                       | planname                                           |
