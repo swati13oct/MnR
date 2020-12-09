@@ -2867,4 +2867,59 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		System.out.println("**********Actual URL is displayed *************"+expectedURL);
 		
 	}
+	
+	public void clickonmemberSignInOfflinelink(String ExpectedmemberSigninURL) {
+		validateNew(memberSignInPage);
+		CommonUtility.waitForPageLoadNew(driver, memberSignInPage, 30);
+		String parentWindow = driver.getWindowHandle();
+	//	memberSignInPage.click();
+		jsClickNew(memberSignInPage);
+		sleepBySec(3);
+		Set<String> tabs_windows = driver.getWindowHandles();
+		Iterator<String> itr = tabs_windows.iterator();
+		while(itr.hasNext()) {
+			String window = itr.next();
+			if(!parentWindow.equals(window)) {
+				driver.switchTo().window(window);
+			}
+		}
+
+		CommonUtility.checkPageIsReadyNew(driver);
+		String CurrentmemberSigninURL = driver.getCurrentUrl();
+		String ActualmemberSigninURL=CurrentmemberSigninURL.substring(0, 32).trim();
+		System.out.println("memberSignin Page is displayed : "+ActualmemberSigninURL);
+		System.out.println("Expected member signin URL: "+ExpectedmemberSigninURL);
+		System.out.println("Actual member signin URL: "+ActualmemberSigninURL);
+
+		if(ExpectedmemberSigninURL.contains(ActualmemberSigninURL)) {
+			System.out.println("****************member signin Page is displayed  ***************");
+
+			Assert.assertTrue(true);
+		}
+		else {
+			Assert.fail("****************member signin Page is not loaded ***************");
+		}
+		//ViewMedicareplanlinks.click();
+		validateNew(ViewMedicareplanlinks);
+		CommonUtility.waitForPageLoadNew(driver, ViewMedicareplanlinks, 30);
+		String parentWindow1 = driver.getWindowHandle();
+		jsClickNew(ViewMedicareplanlinks);
+		sleepBySec(3);
+		Set<String> tabs_windows1 = driver.getWindowHandles();
+		Iterator<String> itr1 = tabs_windows1.iterator();
+		while(itr1.hasNext()) {
+			String window = itr1.next();
+			if(!parentWindow1.equals(window)) {
+				driver.switchTo().window(window);
+			}
+		}
+		CommonUtility.checkPageIsReadyNew(driver);
+		 String stageURL="https://www.stage-aarpmedicareplans.uhc.com/";
+		 String prodURL="https://www.aarpmedicareplans.com/";
+		 String offlineprodURL="https://offline.aarpmedicareplans.com/";
+		 String urlCheck=driver.getCurrentUrl();
+		String expectedURL =urlCheck.replace(prodURL,offlineprodURL);
+		System.out.println("**********Actual URL is displayed *************"+expectedURL);
+		
+	}
 }
