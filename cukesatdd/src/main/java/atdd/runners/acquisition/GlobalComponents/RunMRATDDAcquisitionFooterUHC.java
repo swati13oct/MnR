@@ -1,3 +1,4 @@
+
 package atdd.runners.acquisition.GlobalComponents;
 
 import org.junit.runner.RunWith;

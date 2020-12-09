@@ -14,6 +14,7 @@ import org.openqa.selenium.support.PageFactory;
 
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
+import pages.acquisition.commonpages.VPPPlanSummaryPage;
 
 /**
  *@author sdwaraka
@@ -23,7 +24,8 @@ public class IsDecisionGuideStep2 extends UhcDriver{
 
 	
 	//Global Elements
-	@FindBy(xpath = "//*[@class = 'logo']")
+//	@FindBy(xpath = "//*[@class = 'logo']")
+	@FindBy(id = "aarpSVGLogo")
 	private WebElement SiteLogo;
 	
 	@FindBy(xpath = "//*[@id = 'nav' and @role = 'navigation']")
@@ -329,7 +331,7 @@ public class IsDecisionGuideStep2 extends UhcDriver{
 
 	public DGR_ThankYouPage NavigateNext_DGRthankYouPage() {
 		if( validate(SubmitBtn)){
-			SubmitBtn.click();
+			jsClickNew(SubmitBtn);
 			
 		}
 		try {
@@ -381,4 +383,29 @@ public class IsDecisionGuideStep2 extends UhcDriver{
 		}
 
 	}
+	
+	
+	@FindBy(xpath = "//button[contains(text(), 'Find Plans in Your Area')]")
+	private WebElement FindPlansAreaButton;
+	
+	public  VPPPlanSummaryPage NavigateNext_vppMedsuppPage() {
+		if( validate(FindPlansAreaButton)){
+			jsClickNew(FindPlansAreaButton);
+			
+		}
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		CommonUtility.checkPageIsReadyNew(driver);	
+		String checkUrl=driver.getCurrentUrl();
+		if(checkUrl.contains("health-plans.html?product=medsup#/plan-summary")) {
+			System.out.println("Submit Button Clicked : Plan summary Page is Displayed");
+			return new VPPPlanSummaryPage(driver);
+		}
+		return null;	
+		}
+
 }	

@@ -125,6 +125,17 @@ public class VppPlanSummaryStepDefinitionAARP {
 	}
 
 	List<String> allPlanNames = null;
+	
+	
+	//NBA steps
+	
+	@Then("^user should be able to see the NBA modal to add drugs on the VPP summary page in AARP site$")
+	public void user_should_be_able_to_see_the_NBA_modal_to_add_drugs_on_the_VPP_summary_page_in_AARP_site() {
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		//plansummaryPage.verifyNextBestActionModalForDrugCost();
+	}
+	
 
 	@When("^user clicks on Continue Enrollment button in AARP Site$")
 	public void user_clicks_on_Continue_Enrollment_button_in_aarp_Site() throws Throwable {
@@ -1069,5 +1080,18 @@ public class VppPlanSummaryStepDefinitionAARP {
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		plansummaryPage.verifySelectPlanForEnrollModalForallPlans(allPlanNames);
+	}
+	
+	@When("^user clicks on Enroll in plan button on the select plan modal in AARP site$")
+	public void user_clicks_on_Enroll_in_plan_button_on_the_select_plan_moda_AARPl() throws Throwable {
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		plansummaryPage.clickEnrollPlanBtnOnSelectPlanModal();
+	}
+	@Then("^user should be navigated to OLE page in AARP site$")
+	public void user_should_be_navigated_to_OLE_page_AARP() throws Throwable {
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		plansummaryPage.validateNavigatedToOle();
 	}
 }

@@ -400,6 +400,7 @@ public class PharmacySearchPage extends PharmacySearchBase {
 		driver.navigate().back(); //note: use driver back to go back to pharmacy locator page
 		//tbd Thread.sleep(2000); //note: keep for timing issue
 		driver.navigate().refresh(); //note: added refresh since Safari has issues locating elements after navigate back
+		sleepBySec(2);
 		CommonUtility.checkPageIsReady(driver);
 		expUrl="/Pharmacy-Search-";
 		actUrl=driver.getCurrentUrl();
@@ -407,7 +408,9 @@ public class PharmacySearchPage extends PharmacySearchBase {
 				+ "Expected url contains '"+expUrl+"' Actual URL='"+actUrl+"'", 
 				actUrl.contains(expUrl));
 		enterZipDistanceDetails(zipcode, distance, county);
-		selectsPlanYear(planYear);
+		if(isPlanYear()) {
+			selectsPlanYear(planYear);
+		}
 		selectsPlanName(planName, testSiteUrl);
 		CommonUtility.checkPageIsReady(driver);
 	}

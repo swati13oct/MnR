@@ -1,6 +1,7 @@
 package pages.acquisition.commonpages;
 
 import org.junit.Assert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -181,7 +182,80 @@ public class MedicareEligibilityPage extends GlobalWebElements {
 		return driver;
 		
 	}
+    public void clickOnIEP() {
+		
+		WebElement lnkIEP=driver.findElement(By.xpath("//a[contains(text(),'Initial Enrollment Period')]"));
+		validateNew(lnkIEP);
+		jsClickNew(lnkIEP);
+		CommonUtility.checkPageIsReadyNew(driver);
+		
+		if(driver.getCurrentUrl().contains("medicare-education/enrollment-and-changing-plans.html"))
+		{
+			WebElement pageHeader=driver.findElement(By.xpath("//h1[contains(text(),'Enrollment Basics')]"));
+			waitforElementNew(pageHeader);
+			Assert.assertTrue(true);
+			System.out.println("Initial Enrollment Period Page open correctly");
+			
+		}else {
+			Assert.fail("Initial Enrollment Period Page did not open correctly");
+		}
+		
+		driver.navigate().back();			
+	}
 
+    public void checkLeftRailPlanLinks(String plan) {
+		WebElement lnkplan=null;
+		CommonUtility.checkPageIsReadyNew(driver);
+		if(plan=="MA") {
+		 lnkplan=driver.findElement(By.xpath("//a[contains(@href,'medicare-advantage') and contains(@class,'sidebar')]"));
+		}else if(plan=="MS") {
+		 lnkplan=driver.findElement(By.xpath("//a[contains(@href,'medicare-supplement') and contains(@class,'sidebar')]"));
+		}else if(plan=="PDP") {
+		 lnkplan=driver.findElement(By.xpath("//a[contains(@href,'medicare-part-d') and contains(@class,'sidebar')]"));
+		}
+		validateNew(lnkplan);
+		jsClickNew(lnkplan);
+		
+		CommonUtility.checkPageIsReadyNew(driver);
+		String checkUrl=driver.getCurrentUrl();
+		
+		WebElement pageHeader=null;
+		
+		if(plan=="MA" && checkUrl.contains("medicare-education/medicare-advantage-plans.html")) {
+			pageHeader=driver.findElement(By.xpath("//h1[contains(text(),'Medicare Advantage')]"));			
+		}else if(plan=="MS" && checkUrl.contains("medicare-education/medicare-supplement-plans.html")) {
+			pageHeader=driver.findElement(By.xpath("//h1//span[contains(text(),'Medicare Supplement')]"));
+		}else if(plan=="PDP" && checkUrl.contains("medicare-education/medicare-part-d.html")) {
+			
+			pageHeader=driver.findElement(By.xpath("//h1//span[contains(text(),'Medicare Prescription')]"));
+		}
+		if (pageHeader!=null)
+		{
+			Assert.assertTrue(true);	
+			waitforElementNew(pageHeader,8);
+			System.out.println(pageHeader.getText()+" page is displayed");
+			driver.navigate().back();
+		}else {
+			Assert.fail(plan+" MEd Ed page not displayed");
+		}
+		
+	}
+
+	public CoverageChoicesPage clickonCoverageChoicesLink() {
+		WebElement lnkcvrgChoice=driver.findElement(By.xpath("//p[contains(@class,'meded-next')]"));
+		validateNew(lnkcvrgChoice);
+		jsClickNew(lnkcvrgChoice);
+		CommonUtility.checkPageIsReadyNew(driver);
+		
+		String checkUrl=driver.getCurrentUrl();
+		if(checkUrl.contains("medicare-education/medicare-parts-and-medigap-plans.html")) {
+			return new CoverageChoicesPage(driver);
+		}else
+		{
+			return null;
+		}
+	}
+    
 	
 	
 	

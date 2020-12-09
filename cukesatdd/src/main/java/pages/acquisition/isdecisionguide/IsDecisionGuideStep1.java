@@ -26,7 +26,8 @@ public class IsDecisionGuideStep1 extends UhcDriver{
 
 
 	//Global Elements
-	@FindBy(xpath = "//*[@class = 'logo']")
+//	@FindBy(xpath = "//*[@class = 'logo']")
+	@FindBy(id = "aarpSVGLogo")
 	private WebElement SiteLogo;
 
 	@FindBy(xpath = "//*[@id = 'nav' and @role = 'navigation']")
@@ -123,6 +124,17 @@ public class IsDecisionGuideStep1 extends UhcDriver{
 	@FindBy(xpath="//button[contains(@class, 'close') and contains(@data-dismiss, 'modal')]")
 	private WebElement closebuttontfn;
 
+	@FindBy(xpath = "//*[contains(@class, 'first_name is-invalid')]")
+	private WebElement DecisionGuideFirstName_ErrorMessage;
+	
+	@FindBy(xpath = "(//*[contains(@class, 'last_name is-invalid')])[2]")
+	private WebElement DecisionGuideLastName_ErrorMessage;
+	
+	@FindBy(xpath = "//*[contains(@class, 'address pac-target-input is-invalid')]")
+	private WebElement DecisionGuideaddress_ErrorMessage;
+	
+	@FindBy(xpath = "(//*[contains(@class, 'city is-invalid')])[2]")
+	private WebElement DecisionGuidecity_ErrorMessage;
 	
 	
 	public IsDecisionGuideStep1(WebDriver driver) {
@@ -511,7 +523,7 @@ public class IsDecisionGuideStep1 extends UhcDriver{
 
 	public IsDecisionGuideStep2 NavigateNext_DGRStep2() {
 		if(!validate(topErrorMsg) && validate(NextBtn)){
-			NextBtn.click();
+			jsClickNew(NextBtn);
 			
 		}
 		try {
@@ -525,5 +537,56 @@ public class IsDecisionGuideStep1 extends UhcDriver{
 			return new IsDecisionGuideStep2(driver);
 		}
 		return null;
+	}
+	
+	public IsDecisionGuideStep2 NavigateNext_DGR() {
+		if(validate(NextBtn)){
+			jsClickNew(NextBtn);
+			
+		}
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if(Step2Tab.isEnabled()){
+			System.out.println("Next Button Clicked : Step 2 Displayed");
+			return new IsDecisionGuideStep2(driver);
+		}
+		return null;
+	}
+	
+	public boolean enterUserInfoSteperror(Map<String, String> memberAttributesMap) throws InterruptedException {
+
+		boolean validation_Flag = true;
+	
+		jsClickNew(NextBtn);
+		if(NextBtn.isEnabled() && validate(DecisionGuideFirstName_ErrorMessage) && validate(DecisionGuideLastName_ErrorMessage) && validate(DecisionGuideaddress_ErrorMessage) && validate(DecisionGuidecity_ErrorMessage)&& DecisionGuideFirstName_ErrorMessage.isDisplayed()){
+			System.out.println("Required Fields are displayed for Decision Guide Details entry : Next Button is enabled");
+			validation_Flag = (!validation_Flag)?false:true;
+			}
+			else{
+				System.out.println("Next Button is enabled : Required Field Validation Failed");
+				validation_Flag = false;
+			}
+		
+		String FirstName = memberAttributesMap.get("FirstName");
+		String LastName = memberAttributesMap.get("LastName");
+		String DistributionMethod = memberAttributesMap.get("DistributionMethod");
+		String Email = memberAttributesMap.get("Email");
+		FirstNameTxt.clear();
+		LastNameTxt.clear();
+		EmailTxt.clear();
+		FirstNameTxt.sendKeys(FirstName);
+		LastNameTxt.sendKeys(LastName);
+		if(DistributionMethod.equalsIgnoreCase("email")){
+			EmailOptionSelection.click();
+			EmailTxt.sendKeys(Email);
+		}
+		else{
+			MailOptionSelection.click();
+		}
+		return validation_Flag;
 	}
 }

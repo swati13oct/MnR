@@ -1,3 +1,4 @@
+
 package pages.acquisition.commonpages;
 
 import org.openqa.selenium.WebDriver;
@@ -238,7 +239,7 @@ public class GlobalWebElements  extends UhcDriver{
 	@FindBy(xpath = "//*[contains(@onclick,'jumpToHSIDSignIn()')]")
 	public static WebElement signIn;
 	
-	@FindBy(xpath="//*[@id='planTypesColumn']/h3[4]/a")
+	@FindBy(xpath="//*[@id='planTypesColumn']/h3[3]/a")
 	public static WebElement menuShop;
 	
 	public void ourPlansHover() {

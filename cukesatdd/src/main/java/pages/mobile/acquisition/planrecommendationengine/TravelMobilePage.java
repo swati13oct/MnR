@@ -106,6 +106,7 @@ public class TravelMobilePage extends UhcDriver {
 		validate(travelNoneOption, 30);
 		//Assert.assertTrue(travelNoneOption.getText().contains("None"));
 		mobileUtils.mobileLocateElementClick(travelAnotherPartOption);
+		mobileUtils.mobileLocateElement(previousBtn);
 		mobileUtils.mobileLocateElementClick(previousBtn);
 		System.out.println("Validating " + page + " page Previous button functionality");
 		mobileUtils.previousPageValidation(page.toUpperCase());
@@ -152,6 +153,13 @@ public class TravelMobilePage extends UhcDriver {
 		} else if (travelType.equalsIgnoreCase("None")) {
 			mobileUtils.mobileLocateElementClick(travelNoneOption);
 			System.out.println("Plan Type " + travelType + " Clicked");
+		}
+	}
+
+	public void edit_travel(String options) {
+		String snpoptions[] = options.split(",");
+		for(String option:snpoptions) {
+			travelpageFunctional(option);
 		}
 	}
 
