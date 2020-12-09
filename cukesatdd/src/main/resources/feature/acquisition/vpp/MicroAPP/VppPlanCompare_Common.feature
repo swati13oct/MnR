@@ -19,7 +19,7 @@ Feature: 1.01.3 - Vpp to plan Compare Scenarios
       | TID   | site | zipcode | isMultiCounty | county           | plantype | planyear |
       | 00001 | AARP |   96799 | NO            | Western District | PDP      | future   |
       | 00002 | AARP |   78006 | YES           | Bexar County     | SNP      | future   |
-      | 00003 | AARP |   90265 | YES           | Ventura County   | MAPD     | future   |
+      | 00003 | AARP |   48101 | NO            | Wayne County     | MAPD     | future   |
       | 00004 | AARP |   70072 | NO            | Jefferson Parish | MAPD     | future   |
 
     @VppPlanCompareCommon_UHC01
@@ -27,7 +27,7 @@ Feature: 1.01.3 - Vpp to plan Compare Scenarios
       | TID   | site | zipcode | isMultiCounty | county           | plantype | planyear |
       | 00001 | UHC  |   96799 | NO            | Western District | PDP      | future   |
       | 00002 | UHC  |   78006 | YES           | Bexar County     | SNP      | future   |
-      | 00003 | UHC  |   90265 | YES           | Ventura County   | MAPD     | future   |
+      | 00003 | UHC  |   48101 | NO            | Wayne County     | MAPD     | future   |
       | 00004 | UHC  |   70072 | NO            | Jefferson Parish | MAPD     | future   |
 
   Scenario Outline: TID: <TID> - Plan Type: <plantype> - Verify Call sticky action menu on <site> site
