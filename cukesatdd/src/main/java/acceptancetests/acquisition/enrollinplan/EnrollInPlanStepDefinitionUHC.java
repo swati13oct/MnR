@@ -80,7 +80,7 @@ public class EnrollInPlanStepDefinitionUHC {
 
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		VPPPlanSummaryPage plansummaryPage = aquisitionhomepage.searchPlans(
+		VPPPlanSummaryPage plansummaryPage = aquisitionhomepage.searchPlans1(
 				zipcode, county);
 
 		if (plansummaryPage != null) {

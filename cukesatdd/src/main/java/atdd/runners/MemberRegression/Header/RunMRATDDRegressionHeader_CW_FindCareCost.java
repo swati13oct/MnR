@@ -9,11 +9,11 @@ import cucumber.api.CucumberOptions;
 
 
 @RunWith(ExtendedCucumber.class)
-@ExtendedCucumberOptions(retryCount=0,screenShotSize="", screenShotLocation="/screenshots/",
+@ExtendedCucumberOptions(retryCount=1,screenShotSize="", screenShotLocation="/screenshots/",
 jsonReport = "target/cucumber-RunMRATDDRegressionHeader_CW_FindCareCost.json",detailedReport = true, detailedAggregatedReport = true,
 overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionHeader_CW_FindCareCost")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberredesign" }, 
-features = { "src/main/resources/feature/memberredesign/header/Header.feature" }, plugin = {
+features = { "src/main/resources/feature/memberredesign/header/Header1.feature" }, plugin = {
 		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionHeader_CW_FindCareCost.json" }, tags = { "@CodeWarriors" })
 public class RunMRATDDRegressionHeader_CW_FindCareCost {
 
