@@ -5344,32 +5344,4 @@ public void checkMAPlansOnly(String counter) {
 		}
 	}
 }
-public void checkPlansForCompare(String counter,String planType)
-{
-	try {
-		Thread.sleep(2000);
-	} catch (InterruptedException e) {
-		e.printStackTrace();
-	}
-	List<Integer> selectPlanIndexes=new ArrayList<Integer>();
-	int	count=counter.contains(",") ? 0 :Integer.parseInt(counter);
-	if(count==0)
-		for(String index: counter.split(",")) {selectPlanIndexes.add(Integer.parseInt(index));}
-	else
-		for(int i=0;i<count;i++) {selectPlanIndexes.add(i);}	
-	List<WebElement> allPlans;
-	if(planType.equalsIgnoreCase("MAPD") || planType.equalsIgnoreCase("MA")) {
-		allPlans=driver
-				.findElements(By.xpath(".//*[@id='plan-list-1']//div[contains(@class,'compare-box')]//label"));
-	}
-	else
-	{
-		allPlans=driver.findElements(By.xpath("//label[contains(text(),'Add to compare')]"));
-	}
-	if(allPlans!=null) {
-		for(int i:selectPlanIndexes) {
-			jsClickNew(allPlans.get(i));
-		}
-	}
-}
 }

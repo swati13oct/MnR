@@ -266,34 +266,3 @@ Feature: 1.01.2-Vpp to plan Details AARP Scenarios
     Examples: 
       | TID        | site | zipcode | isMultutiCounty | county        | plantype | planName                                                   | optionalRider   | planyear |
       | F435191-01 | UHC  |   11516 | No              | Nassau County | MA       | UnitedHealthcare Medicare Advantage Patriot (Regional PPO) | Dental Platinum | future   |
-
-  #    @vppPlanDetailsAARP11 @vppPlanDetailsAARPRun03 @vppPlanDetailsAARPRegression
-  Scenario Outline: UserStory: <TCID> -plan type: <plantype> - Verify plan details to Plan compare navigation
-    Given the user is on medicare acquisition site landing page
-      | Site | <site> |
-    When the user performs plan search using following information
-      | Zip Code        | <zipcode>         |
-      | Is Multi County | <isMultutiCounty> |
-      | County Name     | <county>          |
-    And the user views the plans of the below plan type
-      | Plan Type | <plantype> |
-    And the user selects plan year
-      | Plan Year | <planyear> |
-    And I select "<plantype>" plans and "<planIndices>" plans to compare
-    And the user navigates to the plan details page
-      | Plan Name | <planName> |
-    Then click add to compare checkbox on plan details page and navigate to compare page
-    Then verify plan compare page is loaded
-
-    @VppPlanDetailsCommon_AARP03 @dummy124
-    Examples: 
-      | TCID   | site | zipcode | isMultutiCounty | county       | plantype | planName                              | planyear | planIndices |
-      | 000018 | AARP |   78006 | YES             | Bexar County | MA       | AARP Medicare Advantage Patriot (HMO) | future   |         1,3 |
-      | 000018 | AARP |   78006 | YES             | Bexar County | PDP      | AARP MedicareRx Walgreens (PDP)       | future   |         1,2 |
-
-    @VppPlanDetailsCommon_UHC03
-    Examples: 
-      | TCID   | site | zipcode | isMultutiCounty | county       | plantype | planName                              | planyear | planIndices |
-      | 000018 | UHC  |   78006 | YES             | Bexar County | MA       | AARP Medicare Advantage Patriot (HMO) | future   |         1,3 |
-      | 000018 | UHC  |   78006 | YES             | Bexar County | PDP      | AARP MedicareRx Walgreens (PDP)       | future   |         1,2 |
-      
