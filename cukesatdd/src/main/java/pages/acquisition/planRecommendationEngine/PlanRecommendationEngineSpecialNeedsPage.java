@@ -218,6 +218,7 @@ public class PlanRecommendationEngineSpecialNeedsPage extends UhcDriver {
 //					Assert.assertTrue(snpMedicaidAccordionMoreInfo1stPara.getText().contains("D-SNP"));
 //					Assert.assertTrue(snpMedicareAccordionMoreInfo2ndPara.getText().contains("toll free"));
 				snpMedicaidAccordionCarrot.click();
+//				jsClickNew(snpMedicaidAccordionCarrot);
 			} else {
 				System.out.println("Accordion is not displayed for  " + SNPType + " .");
 			}
@@ -228,6 +229,7 @@ public class PlanRecommendationEngineSpecialNeedsPage extends UhcDriver {
 //					Assert.assertTrue(snpConditionsAccordionMoreInfo1stPara.getText().contains("C-SNP"));
 //					Assert.assertTrue(snpConditionsAccordionMoreInfo2ndPara.getText().contains("toll free"));
 				snpConditionsAccordionCarrot.click();
+//				jsClickNew(snpConditionsAccordionCarrot);
 			} else {
 				System.out.println("Accordion is not displayed for  " + SNPType + " .");
 			}
@@ -238,6 +240,7 @@ public class PlanRecommendationEngineSpecialNeedsPage extends UhcDriver {
 //					Assert.assertTrue(snpNursinghomeAccordionMoreInfo1stPara.getText().contains("I-SNP"));
 //					Assert.assertTrue(snpNursinghomeAccordionMoreInfo2ndPara.getText().contains("toll free"));
 				snpNursinghomeAccordionCarrot.click();
+//				jsClickNew(snpNursinghomeAccordionCarrot);
 			} else {
 				System.out.println("Accordion is not displayed for  " + SNPType + " .");
 			}

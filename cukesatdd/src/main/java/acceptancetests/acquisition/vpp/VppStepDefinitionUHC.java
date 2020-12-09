@@ -104,7 +104,7 @@ public class VppStepDefinitionUHC {
 		if (("NO").equalsIgnoreCase(isMultiCounty.trim())) {
 			plansummaryPage = aquisitionhomepage.searchPlansWithOutCounty(zipcode);
 		} else {
-			plansummaryPage = aquisitionhomepage.searchPlans(zipcode, county);
+			plansummaryPage = aquisitionhomepage.searchPlans1(zipcode, county);
 		}
 
 		if (plansummaryPage != null) {
@@ -172,7 +172,7 @@ public class VppStepDefinitionUHC {
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		// VPPPlanSummaryPage plansummaryPage =
 		// aquisitionhomepage.searchPlans(zipcode, county);
-		VPPPlanSummaryPage plansummaryPage = aquisitionhomepage.searchPlans(zipcode, county);
+		VPPPlanSummaryPage plansummaryPage = aquisitionhomepage.searchPlans1(zipcode, county);
 		if (plansummaryPage != null) {
 			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
 			if (plansummaryPage.validateVPPPlanSummaryPage())
@@ -1249,7 +1249,7 @@ public class VppStepDefinitionUHC {
 		if (("NO").equalsIgnoreCase(isMultiCounty.trim())) {
 			plansummaryPage = aquisitionhomepage.searchPlansWithOutCounty(zipcode);
 		} else {
-			plansummaryPage = aquisitionhomepage.searchPlans(zipcode, county);
+			plansummaryPage = aquisitionhomepage.searchPlans1(zipcode, county);
 		}
 
 		if (plansummaryPage != null) {
@@ -1443,7 +1443,7 @@ public class VppStepDefinitionUHC {
 		if (("NO").equalsIgnoreCase(isMultiCounty.trim())) {
 			plansummaryPage = aquisitionhomepage.searchPlansWithOutCounty(zipcode);
 		} else {
-			plansummaryPage = aquisitionhomepage.searchPlans(zipcode, county);
+			plansummaryPage = aquisitionhomepage.searchPlans1(zipcode, county);
 		}
 
 		if (plansummaryPage != null) {
@@ -2917,129 +2917,129 @@ public class VppStepDefinitionUHC {
 			Assert.fail("Error Loading on visitor Profile page");
 		}
 	}
-	@Then("^the user enter the searchValue in the search text box and hits enter on UHC site$")
-	public void the_user_enter_the_searchValue_in_the_search_text_box_and_hits_enter_on_UHC_site(DataTable inputvalue) throws Throwable {
-	/*	VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
-				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);*/
-
-		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
-				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		List<DataTableRow> AttributesRow = inputvalue
-				.getGherkinRows();
-		Map<String, String> urlAttributesMap = new HashMap<String, String>();
-		
-		for (int i = 0; i < AttributesRow.size(); i++) {
-
-			urlAttributesMap .put(AttributesRow.get(i).getCells()
-					.get(0), AttributesRow.get(i).getCells().get(1));
-		}
-		String InputValue = urlAttributesMap.get("search Value");
-		System.out.println("Search value"+InputValue );
-		Thread.sleep(3000);
-		
-		aquisitionhomepage.enterSearchtextvalue(InputValue);
-
-	}
-	
-	@Then("^the user should see fifteen results before pagination on UHC Site$")
-	public void the_user_should_see_fifteen_results_before_pagination() throws Throwable {
-		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
-				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		aquisitionhomepage.validateFifteenResults();
-	   
-	}
-	
-
-@Then("^the user validates count of results aganist the total shown at top of the page on UHC Site$")
-public void the_user_validates_count_of_results_aganist_the_total_shown_at_top_of_the_page() throws Throwable {
-	AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
-			.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-	aquisitionhomepage.validateCountResults();
-}
-
-
-@Then("^the user validates pagination and results displayed on UHC Site$")
-public void the_user_validates_pagination_and_results_displayed() throws Throwable {
-	AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
-			.getBean(PageConstants.ACQUISITION_HOME_PAGE); 
-	aquisitionhomepage.validatePaginationofSearchResults();
-}
-
-
-@Then("^the user validates the secondary search by providing newsearchvalue in the text box on UHC Site$")
-public void the_user_validates_the_secondary_search_by_providing_newsearchvalue_in_the_text_box(DataTable inputvalue) throws Throwable {
-	AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
-			.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-	List<DataTableRow> AttributesRow = inputvalue.getGherkinRows();
-	Map<String, String> urlAttributesMap = new HashMap<String, String>();
-
-	for (int i = 0; i < AttributesRow.size(); i++) {
-
-		urlAttributesMap.put(AttributesRow.get(i).getCells().get(0), AttributesRow.get(i).getCells().get(1));
-	}
-	String InputValue = urlAttributesMap.get("NewSearchValue");
-	System.out.println("NewSearchValue" + InputValue);
-	Thread.sleep(3000);
-	
-	aquisitionhomepage.enterSecondarySearchValue(InputValue);
- 
-}
-
-@Then("^the user clear secondary search box and insert new search value on UHC Site$")
-public void the_user_clea_seacondary_search_box_and_insert_new_search_value(DataTable inputvalue) throws Exception {
-	AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
-			.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-
-	List<DataTableRow> AttributesRow = inputvalue.getGherkinRows();
-	Map<String, String> urlAttributesMap = new HashMap<String, String>();
-
-	for (int i = 0; i < AttributesRow.size(); i++) {
-
-		urlAttributesMap.put(AttributesRow.get(i).getCells().get(0), AttributesRow.get(i).getCells().get(1));
-	}
-	String InputValue = urlAttributesMap.get("New Search Value");
-	System.out.println("New Search Value" + InputValue);
-	Thread.sleep(3000);
-	aquisitionhomepage.insertValueIntoSecondSearchBox(InputValue);
-
-}
-
-@Then("^the user validates Error message on UHC site$")
-public void the_user_validates_pagination_and_results_displayed(DataTable inputvalue) throws Throwable {
-
-	AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
-			.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-	
-
-	List<DataTableRow> AttributesRow = inputvalue.getGherkinRows();
-	Map<String, String> urlAttributesMap = new HashMap<String, String>();
-
-	for (int i = 0; i < AttributesRow.size(); i++) {
-
-		urlAttributesMap.put(AttributesRow.get(i).getCells().get(0), AttributesRow.get(i).getCells().get(1));
-	}
-	String error = urlAttributesMap.get("Error");
-	String newSearchValue=urlAttributesMap.get("NewSearchValue");
-	System.out.println("Error : " + error);
-	Thread.sleep(3000);
-	aquisitionhomepage.validateErrorMsg(error,newSearchValue);
-}
-
-
-@Then("^the user clicks on the united health care medicare solutions link on UHC site$")
-public void the_user_clicks_on_the_united_health_care_medicare_solutions_link_on_UHC_site() throws Throwable {
-	AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
-			.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-	aquisitionhomepage.clickUnitedHealthcareMedicareSolutions();
-    
-}
-
-@Then("^ther user validates the \"([^\"]*)\" on UHC site$")
-public void ther_user_validates_the_on_UHC_site(String url) throws Throwable {
-	AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
-			.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-	aquisitionhomepage.validateUrl(url);
-}
+//	@Then("^the user enter the searchValue in the search text box and hits enter on UHC site$")
+//	public void the_user_enter_the_searchValue_in_the_search_text_box_and_hits_enter_on_UHC_site(DataTable inputvalue) throws Throwable {
+//	/*	VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+//				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);*/
+//
+//		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+//				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+//		List<DataTableRow> AttributesRow = inputvalue
+//				.getGherkinRows();
+//		Map<String, String> urlAttributesMap = new HashMap<String, String>();
+//		
+//		for (int i = 0; i < AttributesRow.size(); i++) {
+//
+//			urlAttributesMap .put(AttributesRow.get(i).getCells()
+//					.get(0), AttributesRow.get(i).getCells().get(1));
+//		}
+//		String InputValue = urlAttributesMap.get("search Value");
+//		System.out.println("Search value"+InputValue );
+//		Thread.sleep(3000);
+//		
+//		aquisitionhomepage.enterSearchtextvalue(InputValue);
+//
+//	}
+//	
+//	@Then("^the user should see fifteen results before pagination on UHC Site$")
+//	public void the_user_should_see_fifteen_results_before_pagination() throws Throwable {
+//		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+//				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+//		aquisitionhomepage.validateFifteenResults();
+//	   
+//	}
+//	
+//
+//@Then("^the user validates count of results aganist the total shown at top of the page on UHC Site$")
+//public void the_user_validates_count_of_results_aganist_the_total_shown_at_top_of_the_page() throws Throwable {
+//	AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+//			.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+//	aquisitionhomepage.validateCountResults();
+//}
+//
+//
+//@Then("^the user validates pagination and results displayed on UHC Site$")
+//public void the_user_validates_pagination_and_results_displayed() throws Throwable {
+//	AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+//			.getBean(PageConstants.ACQUISITION_HOME_PAGE); 
+//	aquisitionhomepage.validatePaginationofSearchResults();
+//}
+//
+//
+//@Then("^the user validates the secondary search by providing newsearchvalue in the text box on UHC Site$")
+//public void the_user_validates_the_secondary_search_by_providing_newsearchvalue_in_the_text_box(DataTable inputvalue) throws Throwable {
+//	AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+//			.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+//	List<DataTableRow> AttributesRow = inputvalue.getGherkinRows();
+//	Map<String, String> urlAttributesMap = new HashMap<String, String>();
+//
+//	for (int i = 0; i < AttributesRow.size(); i++) {
+//
+//		urlAttributesMap.put(AttributesRow.get(i).getCells().get(0), AttributesRow.get(i).getCells().get(1));
+//	}
+//	String InputValue = urlAttributesMap.get("NewSearchValue");
+//	System.out.println("NewSearchValue" + InputValue);
+//	Thread.sleep(3000);
+//	
+//	aquisitionhomepage.enterSecondarySearchValue(InputValue);
+// 
+//}
+//
+//@Then("^the user clear secondary search box and insert new search value on UHC Site$")
+//public void the_user_clea_seacondary_search_box_and_insert_new_search_value(DataTable inputvalue) throws Exception {
+//	AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+//			.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+//
+//	List<DataTableRow> AttributesRow = inputvalue.getGherkinRows();
+//	Map<String, String> urlAttributesMap = new HashMap<String, String>();
+//
+//	for (int i = 0; i < AttributesRow.size(); i++) {
+//
+//		urlAttributesMap.put(AttributesRow.get(i).getCells().get(0), AttributesRow.get(i).getCells().get(1));
+//	}
+//	String InputValue = urlAttributesMap.get("New Search Value");
+//	System.out.println("New Search Value" + InputValue);
+//	Thread.sleep(3000);
+//	aquisitionhomepage.insertValueIntoSecondSearchBox(InputValue);
+//
+//}
+//
+//@Then("^the user validates Error message on UHC site$")
+//public void the_user_validates_pagination_and_results_displayed(DataTable inputvalue) throws Throwable {
+//
+//	AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+//			.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+//	
+//
+//	List<DataTableRow> AttributesRow = inputvalue.getGherkinRows();
+//	Map<String, String> urlAttributesMap = new HashMap<String, String>();
+//
+//	for (int i = 0; i < AttributesRow.size(); i++) {
+//
+//		urlAttributesMap.put(AttributesRow.get(i).getCells().get(0), AttributesRow.get(i).getCells().get(1));
+//	}
+//	String error = urlAttributesMap.get("Error");
+//	String newSearchValue=urlAttributesMap.get("NewSearchValue");
+//	System.out.println("Error : " + error);
+//	Thread.sleep(3000);
+//	aquisitionhomepage.validateErrorMsg(error,newSearchValue);
+//}
+//
+//
+//@Then("^the user clicks on the united health care medicare solutions link on UHC site$")
+//public void the_user_clicks_on_the_united_health_care_medicare_solutions_link_on_UHC_site() throws Throwable {
+//	AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+//			.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+//	aquisitionhomepage.clickUnitedHealthcareMedicareSolutions();
+//    
+//}
+//
+//@Then("^ther user validates the \"([^\"]*)\" on UHC site$")
+//public void ther_user_validates_the_on_UHC_site(String url) throws Throwable {
+//	AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+//			.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+//	aquisitionhomepage.validateUrl(url);
+//}
 
 
 	@Then("^user saves all plans as favorite on UHC site$")
