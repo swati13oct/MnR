@@ -44,7 +44,7 @@ Feature: 1.01 Member  benefits and Coverage page
       | Member Type | <memberType> |
     Then The user navigate to Benefits and Coverage page
     And the user validates the benefits for a combo member
-@abc
+
     Examples: 
       | index | TID   | planType | memberType       |
       | 03    | 15091 | SHIP     | ComboFEDShip_BnC |
