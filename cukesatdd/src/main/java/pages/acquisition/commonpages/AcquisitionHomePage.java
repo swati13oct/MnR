@@ -75,7 +75,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(id = "Find a pharmacy near you")
 	private WebElement pharmacyNearLink;
 
-	@FindBy(className = "zip-button")
+	//@FindBy(className = "zip-button")
+	@FindBy(xpath="(//*[@class='zip-button'])[1]")
 	private WebElement FindPlansButton1;
 
 	@FindBy(xpath = "//*[@id='ghn_lnk_2']")
@@ -221,7 +222,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "//*[@id='ghn_lnk_2']")
 	private WebElement OurPlans;
 
-	@FindBy(id = "nav-zipcode")
+	//@FindBy(id = "nav-zipcode")
+	@FindBy(xpath="//input[contains(@id,'nav-zipcode')]")
 	private WebElement OurPlans_zipfield;
 
 	@FindBy(xpath = "//*[@id = 'nav-zipcode']/following-sibling::button[@class = 'zip-button']")
@@ -464,7 +466,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	
 	@FindBy(xpath="//a[contains(text(),'Learn More')]")
 	private WebElement learnAboutMedicareHomeScreen;
-	
+
 	@FindBy(xpath = "//a[@id='gfn_lnk_row2_1']")
     private WebElement MedicareAdvantagePlans;
 	
@@ -1542,22 +1544,22 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		return null;	
 	}
 	
-	 public void validateCallSam() throws InterruptedException {
-	        boolean present;
-//	        driver.navigate().refresh();
-	        try {
-	        validateNew(callsam);
-	        present = true;
-	        } catch (NoSuchElementException e) {
-	        present = false;
-	        }
-	        if (present) {
-	          System.out.println("@@@@@@@@@ Able to find TFN widget @@@@@@@@@");
-	        }
-	        else
-	        	Assert.fail("@@@@@@@@@ No TFN widget @@@@@@@@@");
-	      
+	public void validateCallSam() throws InterruptedException {
+		boolean present;
+		//driver.navigate().refresh();
+		try {
+			validateNew(callsam);
+			present = true;
+		} catch (NoSuchElementException e) {
+			present = false;
 		}
+		if (present) {
+			System.out.println("@@@@@@@@@ Able to find TFN widget @@@@@@@@@");
+		}
+		else
+			Assert.fail("@@@@@@@@@ No TFN widget @@@@@@@@@");
+
+	}
 		
 		public void validateCallSamContent() throws InterruptedException {
 			
@@ -1959,7 +1961,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			WebElement VPSignIn = driver.findElement(
 					By.xpath("//a[contains(text(), 'Sign In') and not(contains(@aria-labelledby ,'VPSignIn'))]"));
 			validateNew(CreateProfile);
-		    validateNew(VPSignIn);
+			validateNew(VPSignIn);
 			if (CreateProfile.isEnabled() && VPSignIn.isEnabled()) {
 				Assert.assertTrue(true);
 				System.out.println("Visitor Profile elements are present on home page");
@@ -3016,4 +3018,30 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 
 
+	public boolean checkZipCompErrorInSubNav() {
+		hoverOverShopForPlan();
+		sleepBySec(3);
+		CommonUtility.checkPageIsReadyNew(driver);
+		validateNew(OurPlans_zipfield);
+		validateNew(FindPlansButton1);
+		WebElement errorMsg=driver.findElement(By.xpath("//span[@class='field-error-msg']"));
+		jsClickNew(FindPlansButton1);
+		waitforElementNew(errorMsg);
+		if(errorMsg.isDisplayed()){
+			System.out.println("Zip Component present in Sub Nav");
+			System.out.println("Error Message Displayed: "+ errorMsg.getText());
+			return true;
+		}else
+			return false;
+	}
+
+	public VPPPlanSummaryPage checkZipCompSubNavVpp(String zipCode) {
+		sendkeys(OurPlans_zipfield, zipCode);
+		jsClickNew(FindPlansButton1);
+		CommonUtility.checkPageIsReadyNew(driver);
+		if (getTitle().equalsIgnoreCase(PageTitleConstants.ULAYER_VPP_PLAN_PAGE_AARP_SHOP_MEDICARE)) {
+			return new VPPPlanSummaryPage(driver);
+		}
+		return null;		
+	}
 }
