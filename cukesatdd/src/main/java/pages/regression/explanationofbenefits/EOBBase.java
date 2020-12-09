@@ -460,7 +460,7 @@ public class EOBBase extends EOBWebElements{
 				//System.out.println("TEST each line="+line);
 				if (line.contains(lookForText1) && line.contains(lookForText2)) {
 					apiReqeust=line;
-					System.out.println("TEST found line="+line);
+					//keepForDebug System.out.println("TEST found line="+line);
 					//break; //note: only break if looking for the first response, otherwise always take the latest line
 				}
 			}
@@ -476,7 +476,7 @@ public class EOBBase extends EOBWebElements{
 					String line=entry.getMessage();
 					if (line.contains(lookForText1) && line.contains(lookForText2)) {
 						apiReqeust=line;
-						System.out.println("TEST found line="+line);
+						//keepForDebug System.out.println("TEST found line="+line);
 						//break; //note: only break if looking for the first response, otherwise always take the latest line
 					}
 				}
@@ -496,7 +496,7 @@ public class EOBBase extends EOBWebElements{
 				//System.out.println("TEST each line="+line);
 				if (line.contains(lookForText1) && line.contains(lookForText2)) {
 					apiReqeust=line;
-					System.out.println("TEST found line="+line);
+					//keepForDebug System.out.println("TEST found line="+line);
 					//break; //note: only break if looking for the first response, otherwise always take the latest line
 				}
 			}
@@ -512,7 +512,7 @@ public class EOBBase extends EOBWebElements{
 					String line=entry.getMessage();
 					if (line.contains(lookForText1) && line.contains(lookForText2)) {
 						apiReqeust=line;
-						System.out.println("TEST found line="+line);
+						//keepForDebug System.out.println("TEST found line="+line);
 						//break; //note: only break if looking for the first response, otherwise always take the latest line
 					}
 				}
@@ -537,13 +537,13 @@ public class EOBBase extends EOBWebElements{
 				if (memberType.contains("COMBO")) {
 					if (line.contains(lookForText1) && line.contains(lookForText2) && line.contains(lookForText3)) {
 						apiReqeust=line;
-						System.out.println("TEST found line="+line);
+						//keepForDebug System.out.println("TEST found line="+line);
 						//break;  //note: only break if looking for the first response, otherwise always take the latest line
 					}
 				} else {
 					if (line.contains(lookForText1) && line.contains(lookForText2)) {
 						apiReqeust=line;
-						System.out.println("TEST found line="+line);
+						//keepForDebug System.out.println("TEST found line="+line);
 						//break; //note: only break if looking for the first response, otherwise always take the latest line
 					}
 				} 
