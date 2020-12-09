@@ -100,7 +100,8 @@ public class PlanRecommendationEngineCoverageOptionPage extends UhcDriver {
 //		Assert.assertTrue(plantypePDP.getText().contains("Prescription"));
 		validate(plantypeNone, 30);
 //		Assert.assertTrue(plantypeNone.getText().contains("don't"));
-		previousBtn.click();
+//		previousBtn.click();
+		jsClickNew(previousBtn);
 		System.out.println("Validating " + page + " page Previous button functionality");
 		desktopCommonUtils.previousPageValidation(page.toUpperCase());
 	}
@@ -134,7 +135,8 @@ public class PlanRecommendationEngineCoverageOptionPage extends UhcDriver {
 //Coverage Option Page Function Verification			
 	public void coverageOptionpageerror() {
 		System.out.println("Plan Type is empty - Error Scenario in Coverage Options Page");
-		continueBtn.click();
+//		continueBtn.click();
+		jsClickNew(continueBtn);
 		desktopCommonUtils.desktopErrorValidation(page);
 	}
 
