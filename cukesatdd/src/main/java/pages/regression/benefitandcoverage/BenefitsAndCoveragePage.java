@@ -1941,7 +1941,7 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 			String memberid1;
 			validateNew(memberIdForPlan);
 			memberid1 = memberIdForPlan.getText();
-			if (memberid1.contains("-11")) {
+			if (memberid1.contains("-11")||memberid1.contains("-12")) {
 				validateNew(MemberName);
 				validateNew(MemberId);
 				validateNew(EffectiveDate);

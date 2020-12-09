@@ -70,7 +70,7 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth
 
     Examples: 
       | index | TID   |username  | password  | MemUserName | planType | memberType       |
-      | 03    | 15091 |qavgogine | qavgogine| q3_SEP_2020SHIP_002|SHIP_HIP    | ComboFEDShip_BnC |
+      | 03    | 15091 |qavgogine | qavgogine| q4_Ship_014|SHIP    | ComboFEDShip_BnC |
       
   #TC10_Benefits_for_TexasERSMember
   @memAuth_benefitsAndCoverage3 @BenefitsforTexasERSMember @regression @BnC_Part2_memAuth
@@ -146,7 +146,7 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth
 
     Examples: 
       | index |TID  |username |password |MemUserName        |planType|memberType|language|numberOfBenefitCards|Identifier          | count| rider   |
-      | 05    |15094|qavgogine|qavgogine|q3_sep_UAT4_AARP013| SHIP   |SHIP_BnC  | ENGLISH| 5                  |EffectiveShipMedSupp|   3  | NoRider |
+      | 05    |15094|qavgogine|qavgogine|q4_Ship_013        | SHIP   |SHIP_BnC  | ENGLISH| 5                  |EffectiveShipMedSupp|   3  | NoRider |
       
 
   @memAuth_benefitsAndCoverage10 @BenefitsForMAMedsupSSUPMember  @BnC_Part3_memAuth 

@@ -44,11 +44,10 @@ Feature: 1.01 Member  benefits and Coverage page
       | Member Type | <memberType> |
     Then The user navigate to Benefits and Coverage page
     And the user validates the benefits for a combo member
-
+@abc
     Examples: 
       | index | TID   | planType | memberType       |
-      | 03    | 15091 | SHIP_HIP | ComboFEDShip_BnC |
-
+      | 03    | 15091 | SHIP     | ComboFEDShip_BnC |
 
   #TC10_Benefits_for_TexasERSMember
   @benefitsAndCoverage04 @BenefitsforTexasERSMember @regression @BnC_Part2_regressionMember
