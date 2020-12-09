@@ -369,8 +369,8 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
       |site| drug1   | zipCode | testPlans                                                        | pdptestPlans                    | snptestPlans                               |testPlansName|
       |UHC| Orkambi |   10001 | UnitedHealthcare Medicare Advantage Choice Plan 4 (Regional PPO) | AARP MedicareRx Preferred (PDP) | UnitedHealthcare Dual Complete (HMO D-SNP) |UnitedHealthcare Medicare Advantage Choice Plan 4 (Regional PPO),AARP MedicareRx Preferred (PDP),UnitedHealthcare Dual Complete (HMO D-SNP)|
       
-  @dceNBADrugSummaryPage @F465679
-  Scenario Outline: Test to Verify that DCE NBA on Drug summary page @decRelease
+  @dceNBADrugSummaryPage @F465679 @decRelease
+  Scenario Outline: Test to Verify that DCE NBA on Drug summary page 
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     When I access the acquisition DCE Redesign from home page
@@ -621,7 +621,7 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
       |site| drug1 | zipCode |planName|tabName|
       |UHC| Lipitor  |   10001|AARP Medicare Advantage Prime (HMO)|Medical Benefits and Programs|
       
-      @dceRedesignDefaultPharmacyDrugSummary @F497405
+      @dceRedesignDefaultPharmacyDrugSummary @F497405 @decRelease
   Scenario Outline: Test to Verify default Retail chain pharmacy on drug summary page
      Given the user is on medicare acquisition site landing page
       | Site | <site> |
