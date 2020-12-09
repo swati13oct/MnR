@@ -1,9 +1,9 @@
 @Dreameob
 Feature: 1.04.2 To Test DREAM EOB for Members - E2E
 
-  Background: If run on stage then feature security flag needs to be true
-     Given feature security flag must set to true when testing on test env
-      | Feature           | UCPEob |
+##  Background: If run on stage then feature security flag needs to be true
+##     Given feature security flag must set to true when testing on test env
+##      | Feature           | UCPEob |
 
   #----- begin sanity
   @sanity
@@ -144,7 +144,7 @@ Feature: 1.04.2 To Test DREAM EOB for Members - E2E
       | index | planType | memberType        | note                              | flagZeroEob |
       | 13    | MAPD     | DSNP_DEOB         | DSNP EOB                          | true        |        
 
-    @dreamEob01n_ssp
+@abc    @dreamEob01n_ssp
     Examples: 
       | index | planType | memberType        | note                              | flagZeroEob |
       | 14    | SSP      | COMBO_PDP_SSP_DEOB| SSP EOB                           | true        |                

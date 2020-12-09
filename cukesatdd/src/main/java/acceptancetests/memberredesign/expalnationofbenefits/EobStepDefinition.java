@@ -118,7 +118,12 @@ public class EobStepDefinition {
 			searchNote.add("----- TEST NOTE ------------------------------");
 			String tmp=(String) getLoginScenario().getBean(EobCommonConstants.EOB_TYPE);
 			if (tmp==null) 
-				searchNote.add("DREAM EOB");
+				if (planType.toUpperCase().contains("SSP"))
+					searchNote.add("SSP EOB");
+				else if (memberType.toUpperCase().contains("DSNP"))
+					searchNote.add("DSNP EOB");
+				else
+					searchNote.add("DREAM EOB");
 			else
 				searchNote.add("EOB TYPE="+tmp);
 		}
@@ -157,7 +162,8 @@ public class EobStepDefinition {
 			System.out.println("Before cleanup, 1st call size="+eobResponseObj.getListOfEob().size());
 
 			EobApiResponse r_eobResponseObj=new EobApiResponse();
-			if (!planType.equals("MA")) {
+			//TODO: for release 12/16 DSNP works like MA with just medical EOB for now
+			if (!planType.equals("MA") && !memberType.contains("DSNP") && !planType.contains("SSP")) {
 				String r_requestUrl=tmpResponsJson.get(1);
 				System.out.println("TEST - r_requestUrl="+r_requestUrl);
 				String r_apiResponseJson=eobPage.getApiResponse(planType, memberType, r_requestUrl);
