@@ -35,8 +35,6 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import gherkin.formatter.model.DataTableRow;
 import pages.acquisition.dceredesign.DrugDetailsPage;
-import pages.acquisition.dceredesign.GetStartedPage;
-
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.pharmacyLocator.PharmacySearchPage;
 import pages.acquisition.tfn.CampaignTFNPage;
@@ -104,37 +102,37 @@ public class VppStepDefinitionUpdatedAARP {
 	 * @throws InterruptedException 
 	 * @toDo: user performs plan search using following information
 	 */
-	@When("^the user performs plan search using following information in the AARP site$")
-	public void zipcode_details_in_aarp_site(DataTable givenAttributes) throws InterruptedException {
-		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		Map<String, String> memberAttributesMap = new HashMap<String, String>();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}
-		String zipcode = memberAttributesMap.get("Zip Code");
-		String county = memberAttributesMap.get("County Name");
-		String isMultiCounty = memberAttributesMap.get("Is Multi County");
-		getLoginScenario().saveBean(VPPCommonConstants.ZIPCODE, zipcode);
-		getLoginScenario().saveBean(VPPCommonConstants.COUNTY, county);
-		getLoginScenario().saveBean(VPPCommonConstants.IS_MULTICOUNTY, isMultiCounty);
-
-		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
-				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		VPPPlanSummaryPage plansummaryPage = null;
-		if (("NO").equalsIgnoreCase(isMultiCounty.trim())) {
-			plansummaryPage = aquisitionhomepage.searchPlansWithOutCounty(zipcode);
-		} else {
-			plansummaryPage = aquisitionhomepage.searchPlans(zipcode, county);
-		}
-		
-		if (plansummaryPage != null) {
-			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
-
-		} else {
-			Assert.fail("Error Loading VPP plan summary page");
-		}
-	}
+//	@When("^the user performs plan search using following information in the AARP site$")
+//	public void zipcode_details_in_aarp_site(DataTable givenAttributes) throws InterruptedException {
+//		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+//		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+//		for (int i = 0; i < memberAttributesRow.size(); i++) {
+//			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+//					memberAttributesRow.get(i).getCells().get(1));
+//		}
+//		String zipcode = memberAttributesMap.get("Zip Code");
+//		String county = memberAttributesMap.get("County Name");
+//		String isMultiCounty = memberAttributesMap.get("Is Multi County");
+//		getLoginScenario().saveBean(VPPCommonConstants.ZIPCODE, zipcode);
+//		getLoginScenario().saveBean(VPPCommonConstants.COUNTY, county);
+//		getLoginScenario().saveBean(VPPCommonConstants.IS_MULTICOUNTY, isMultiCounty);
+//
+//		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+//				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+//		VPPPlanSummaryPage plansummaryPage = null;
+//		if (("NO").equalsIgnoreCase(isMultiCounty.trim())) {
+//			plansummaryPage = aquisitionhomepage.searchPlansWithOutCounty(zipcode);
+//		} else {
+//			plansummaryPage = aquisitionhomepage.searchPlans(zipcode, county);
+//		}
+//		
+//		if (plansummaryPage != null) {
+//			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
+//
+//		} else {
+//			Assert.fail("Error Loading VPP plan summary page");
+//		}
+//	}
 	
 	@When("^the user enters zipcode on health plans page in the AARP site$")
 	public void enters_zipcode_details_in_aarp_site(DataTable givenAttributes) throws InterruptedException {
@@ -278,26 +276,6 @@ public class VppStepDefinitionUpdatedAARP {
 		plansummaryPage.viewPlanSummary(plantype);
 		if(!plantype.equalsIgnoreCase("MS"))
 			plansummaryPage.handlePlanYearSelectionPopup();
-	}
-	@And("^user validate Saved items and Get started$")
-	public void user_validate_Saved_items_and_Get_started() {
-		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
-				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-	plansummaryPage.getValidate();
-	}
-	
-	@And("^user validate Find a Provider NBA$")
-	public void user_validate_Find_a_Provider() {
-		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
-				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-	plansummaryPage.validateProviderNBA();
-	}
-	
-	@And("^user click on get started on AARP site$")
-	public void user_click_Get_started() {
-		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
-				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-	plansummaryPage.clickOnButtonInPlanSummaryPage("Get Started");
 	}
 
 	@And("^the user selects plan year for the AARP site$")
@@ -3054,108 +3032,108 @@ public class VppStepDefinitionUpdatedAARP {
 		}
 	}
 	
-	@Then("^the user enter the searchValue in the search text box and hits enter$")
-	public void the_user_enter_the_searchValue_in_the_search_text_box_and_hits_enter(DataTable inputvalue)
-			throws Throwable {
-		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
-				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		List<DataTableRow> AttributesRow = inputvalue.getGherkinRows();
-		Map<String, String> urlAttributesMap = new HashMap<String, String>();
-
-		for (int i = 0; i < AttributesRow.size(); i++) {
-
-			urlAttributesMap.put(AttributesRow.get(i).getCells().get(0), AttributesRow.get(i).getCells().get(1));
-		}
-		String InputValue = urlAttributesMap.get("search Value");
-		System.out.println("Search value" + InputValue);
-		Thread.sleep(3000);
-
-		aquisitionhomepage.enterSearchtextvalue(InputValue);
-
-	}
-	
-
-@Then("^the user validates the secondary search by providing newsearchvalue in the text box$")
-public void the_user_validates_the_secondary_search_by_providing_newsearchvalue_in_the_text_box(DataTable inputvalue) throws Throwable {
-	AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
-			.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-	List<DataTableRow> AttributesRow = inputvalue.getGherkinRows();
-	Map<String, String> urlAttributesMap = new HashMap<String, String>();
-
-	for (int i = 0; i < AttributesRow.size(); i++) {
-
-		urlAttributesMap.put(AttributesRow.get(i).getCells().get(0), AttributesRow.get(i).getCells().get(1));
-	}
-	String InputValue = urlAttributesMap.get("NewSearchValue");
-	System.out.println("NewSearchValue" + InputValue);
-	Thread.sleep(3000);
-	
-	aquisitionhomepage.enterSecondarySearchValue(InputValue);
- 
-}
-
-	@Then("^the user should see fifteen results before pagination$")
-	public void the_user_should_see_fifteen_results_before_pagination() throws Throwable {
-		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
-				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		aquisitionhomepage.validateFifteenResults();
-
-	}
-
-	@Then("^the user validates count of results aganist the total shown at top of the page$")
-	public void the_user_validates_count_of_results_aganist_the_total_shown_at_top_of_the_page() throws Throwable {
-		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
-				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		aquisitionhomepage.validateCountResults();
-	}
-
-	@Then("^the user validates pagination and results displayed$")
-	public void the_user_validates_pagination_and_results_displayed() throws Throwable {
-		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
-				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		aquisitionhomepage.validatePaginationofSearchResults();
-	}
-
-	@Then("^the user validates Error message$")
-	public void the_user_validates_pagination_and_results_displayed(DataTable inputvalue) throws Throwable {
-
-		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
-				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		
-
-		List<DataTableRow> AttributesRow = inputvalue.getGherkinRows();
-		Map<String, String> urlAttributesMap = new HashMap<String, String>();
-
-		for (int i = 0; i < AttributesRow.size(); i++) {
-
-			urlAttributesMap.put(AttributesRow.get(i).getCells().get(0), AttributesRow.get(i).getCells().get(1));
-		}
-		String error = urlAttributesMap.get("Error");
-		String newSearchValue=urlAttributesMap.get("NewSearchValue");
-		System.out.println("Error : " + error);
-		Thread.sleep(3000);
-		aquisitionhomepage.validateErrorMsg(error,newSearchValue);
-	}
-
-	@Then("^the user clear secondary search box and insert new search value$")
-	public void the_user_clea_seacondary_search_box_and_insert_new_search_value(DataTable inputvalue) throws Exception {
-		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
-				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-
-		List<DataTableRow> AttributesRow = inputvalue.getGherkinRows();
-		Map<String, String> urlAttributesMap = new HashMap<String, String>();
-
-		for (int i = 0; i < AttributesRow.size(); i++) {
-
-			urlAttributesMap.put(AttributesRow.get(i).getCells().get(0), AttributesRow.get(i).getCells().get(1));
-		}
-		String InputValue = urlAttributesMap.get("New Search Value");
-		System.out.println("New Search Value" + InputValue);
-		Thread.sleep(3000);
-		aquisitionhomepage.insertValueIntoSecondSearchBox(InputValue);
-
-	}
-	
+//	@Then("^the user enter the searchValue in the search text box and hits enter$")
+//	public void the_user_enter_the_searchValue_in_the_search_text_box_and_hits_enter(DataTable inputvalue)
+//			throws Throwable {
+//		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+//				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+//		List<DataTableRow> AttributesRow = inputvalue.getGherkinRows();
+//		Map<String, String> urlAttributesMap = new HashMap<String, String>();
+//
+//		for (int i = 0; i < AttributesRow.size(); i++) {
+//
+//			urlAttributesMap.put(AttributesRow.get(i).getCells().get(0), AttributesRow.get(i).getCells().get(1));
+//		}
+//		String InputValue = urlAttributesMap.get("search Value");
+//		System.out.println("Search value" + InputValue);
+//		Thread.sleep(3000);
+//
+//		aquisitionhomepage.enterSearchtextvalue(InputValue);
+//
+//	}
+//	
+//
+//@Then("^the user validates the secondary search by providing newsearchvalue in the text box$")
+//public void the_user_validates_the_secondary_search_by_providing_newsearchvalue_in_the_text_box(DataTable inputvalue) throws Throwable {
+//	AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+//			.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+//	List<DataTableRow> AttributesRow = inputvalue.getGherkinRows();
+//	Map<String, String> urlAttributesMap = new HashMap<String, String>();
+//
+//	for (int i = 0; i < AttributesRow.size(); i++) {
+//
+//		urlAttributesMap.put(AttributesRow.get(i).getCells().get(0), AttributesRow.get(i).getCells().get(1));
+//	}
+//	String InputValue = urlAttributesMap.get("NewSearchValue");
+//	System.out.println("NewSearchValue" + InputValue);
+//	Thread.sleep(3000);
+//	
+//	aquisitionhomepage.enterSecondarySearchValue(InputValue);
+// 
+//}
+//
+//	@Then("^the user should see fifteen results before pagination$")
+//	public void the_user_should_see_fifteen_results_before_pagination() throws Throwable {
+//		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+//				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+//		aquisitionhomepage.validateFifteenResults();
+//
+//	}
+//
+//	@Then("^the user validates count of results aganist the total shown at top of the page$")
+//public void the_user_validates_count_of_results_aganist_the_total_shown_at_top_of_the_page() throws Throwable {
+//		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+//			.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+//	aquisitionhomepage.validateCountResults();
+//	}
+//
+//	@Then("^the user validates pagination and results displayed$")
+//	public void the_user_validates_pagination_and_results_displayed() throws Throwable {
+//		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+//				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+//		aquisitionhomepage.validatePaginationofSearchResults();
+//	}
+//
+//	@Then("^the user validates Error message$")
+//	public void the_user_validates_pagination_and_results_displayed(DataTable inputvalue) throws Throwable {
+//
+//		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+//				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+//		
+//
+//		List<DataTableRow> AttributesRow = inputvalue.getGherkinRows();
+//		Map<String, String> urlAttributesMap = new HashMap<String, String>();
+//
+//		for (int i = 0; i < AttributesRow.size(); i++) {
+//
+//			urlAttributesMap.put(AttributesRow.get(i).getCells().get(0), AttributesRow.get(i).getCells().get(1));
+//		}
+//		String error = urlAttributesMap.get("Error");
+//		String newSearchValue=urlAttributesMap.get("NewSearchValue");
+//		System.out.println("Error : " + error);
+//		Thread.sleep(3000);
+//		aquisitionhomepage.validateErrorMsg(error,newSearchValue);
+//	}
+//
+//	@Then("^the user clear secondary search box and insert new search value$")
+//	public void the_user_clea_seacondary_search_box_and_insert_new_search_value(DataTable inputvalue) throws Exception {
+//		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+//				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+//
+//		List<DataTableRow> AttributesRow = inputvalue.getGherkinRows();
+//		Map<String, String> urlAttributesMap = new HashMap<String, String>();
+//
+//		for (int i = 0; i < AttributesRow.size(); i++) {
+//
+//			urlAttributesMap.put(AttributesRow.get(i).getCells().get(0), AttributesRow.get(i).getCells().get(1));
+//		}
+//		String InputValue = urlAttributesMap.get("New Search Value");
+//		System.out.println("New Search Value" + InputValue);
+//		Thread.sleep(3000);
+//		aquisitionhomepage.insertValueIntoSecondSearchBox(InputValue);
+//
+//	}
+//	
 	@Then("^the user picks each example from excel to validate Plan Document PDFs and reports into excel$")
 	public void the_user_ExceldataValidation_PDF_link_and_validates_document_code_in_PDFtext_URL(DataTable givenAttributes) throws Throwable {
 		List<DataTableRow> givenAttributesRow = givenAttributes
@@ -3845,22 +3823,22 @@ public void the_user_validates_the_secondary_search_by_providing_newsearchvalue_
 				}
 		vppPlanDetailsPage.validateDentalPopupDefaults(planName,optionalRiderFlag);
 	}
-	@Then("^the user clicks on the united health care medicare solutions link$")
-	public void the_user_clicks_on_the_united_health_care_medicare_solutions_link() throws Throwable {
-		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
-				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		aquisitionhomepage.clickUnitedHealthcareMedicareSolutions();
-	    
-	}
-	
-	@Then("^ther user validates the \"([^\"]*)\"$")
-	public void ther_user_validates_the(String url) throws Throwable {
-		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
-				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		aquisitionhomepage.validateUrl(url);
-		
-	}
-	
+//	@Then("^the user clicks on the united health care medicare solutions link$")
+//	public void the_user_clicks_on_the_united_health_care_medicare_solutions_link() throws Throwable {
+//		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+//				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+//		aquisitionhomepage.clickUnitedHealthcareMedicareSolutions();
+//	    
+//	}
+//	
+//	@Then("^ther user validates the \"([^\"]*)\"$")
+//	public void ther_user_validates_the(String url) throws Throwable {
+//		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+//				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+//		aquisitionhomepage.validateUrl(url);
+//		
+//	}
+//	
 	@Given("^the user is on AARP medicare acquisition site hits Campaign URL$")
 	public void the_user_on_aarpmedicareplans_hits_Campaign_landing_page(DataTable planAttributes) throws Throwable {
 
@@ -3922,7 +3900,6 @@ public void the_user_validates_the_secondary_search_by_providing_newsearchvalue_
 		}
 	}
 	
-
 	@And("^the user view below plans on vpp page and matches plan count for all plans$")
 	public void the_user_view_below_plans_on_vpp_page_and_matches_plan_count_for_all_plans(DataTable givenAttributes) {
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
@@ -3980,65 +3957,84 @@ public void the_user_validates_the_secondary_search_by_providing_newsearchvalue_
 		}
 
 	
-//
+	}
 	
 	
+	@Then("^user should see the Get started NBA$")
+	public void user_should_see_the_Get_started_NBA() throws Throwable {
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		plansummaryPage.verifyNextBestActionModalForDrugCostAuthenticated();
+		getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE,
+				plansummaryPage);
+	}
+		
+		
+
+	@When("^user clicks on Saved items$")
+	public void user_clicks_on_Saved_items() throws Throwable {
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);	
+		plansummaryPage.clickSavedItems();
 	}
 
-@Then("^user should see the Get started NBA$")
-public void user_should_see_the_Get_started_NBA() throws Throwable {
-	VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
-			.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-	plansummaryPage.verifyNextBestActionModalForDrugCostAuthenticated();
-	getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE,
-			plansummaryPage);
-}
+	@Then("^user should be navigated to visitor profile$")
+	public void user_should_be_navigated_to_visitor_profile() throws Throwable {
+		VisitorProfilePage visitorProfile = (VisitorProfilePage) getLoginScenario()
+				.getBean(PageConstants.VISITOR_PROFILE_PAGE);
+		visitorProfile.validateVisitorProfilePageDisplayed();
+	}
+
+	@Then("^user changes the new zipcode on vpp summary page$")
+	public void user_changes_the_new_zipcode_on_vpp_summary_page(DataTable givenAttributes) {
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+
+		Map<String, String> memberAttributesMap = prepareTestInput(givenAttributes);
+		String zipCode = memberAttributesMap.get("New Zip Code");
+		
+		plansummaryPage.enternewZip(zipCode);
+	}
+	@Then("^user navigate to Drug Summary page$")
+	public void user_navigate_to_Drug_Summary_page() {
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		
+		DrugDetailsPage drugDetails= plansummaryPage.clickonDrugSummary();
+		if (null != drugDetails) {
+			getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetails);
+		} else
+			Assert.fail("DCE Redesign page object not loaded");		
+	}
+
+	@And("^user click on view saved plans button on AARP site$")
+	public void user_click_on_view_saved_plans_button_on_AARP_site() {
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+
+		VisitorProfilePage visitorProfilePage = plansummaryPage.viewSavedPlans();
+		
+		getLoginScenario().saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfilePage);
+	}
+
+	@And("^user validate Saved items and Get started$")
+	public void user_validate_Saved_items_and_Get_started() {
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+	plansummaryPage.getValidate();
+	}
 	
+	@And("^user validate Find a Provider NBA$")
+	public void user_validate_Find_a_Provider() {
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+	plansummaryPage.validateProviderNBA();
+	}
 	
-
-@When("^user clicks on Saved items$")
-public void user_clicks_on_Saved_items() throws Throwable {
-	VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
-			.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);	
-	plansummaryPage.clickSavedItems();
-}
-
-@Then("^user should be navigated to visitor profile$")
-public void user_should_be_navigated_to_visitor_profile() throws Throwable {
-	VisitorProfilePage visitorProfile = (VisitorProfilePage) getLoginScenario()
-			.getBean(PageConstants.VISITOR_PROFILE_PAGE);
-	visitorProfile.validateVisitorProfilePageDisplayed();
-}
-
-@Then("^user changes the new zipcode on vpp summary page$")
-public void user_changes_the_new_zipcode_on_vpp_summary_page(DataTable givenAttributes) {
-	VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
-			.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-
-	Map<String, String> memberAttributesMap = prepareTestInput(givenAttributes);
-	String zipCode = memberAttributesMap.get("New Zip Code");
-	
-	plansummaryPage.enternewZip(zipCode);
-}
-@Then("^user navigate to Drug Summary page$")
-public void user_navigate_to_Drug_Summary_page() {
-	VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
-			.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-	
-	DrugDetailsPage drugDetails= plansummaryPage.clickonDrugSummary();
-	if (null != drugDetails) {
-		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetails);
-	} else
-		Assert.fail("DCE Redesign page object not loaded");		
-}
-
-@And("^user click on view saved plans button on AARP site$")
-public void user_click_on_view_saved_plans_button_on_AARP_site() {
-	VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
-			.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-
-	VisitorProfilePage visitorProfilePage = plansummaryPage.viewSavedPlans();
-	
-	getLoginScenario().saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfilePage);
-}
+	@And("^user click on get started on AARP site$")
+	public void user_click_Get_started() {
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+	plansummaryPage.clickOnButtonInPlanSummaryPage("Get Started");
+	}
 }

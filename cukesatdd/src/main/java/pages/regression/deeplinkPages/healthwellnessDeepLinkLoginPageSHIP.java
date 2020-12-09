@@ -61,25 +61,10 @@ public class healthwellnessDeepLinkLoginPageSHIP extends UhcDriver {
 	}
 	//page from MR constants 	
 			private static String AARP_HAWL = MRConstants.AARP_HAWL;
-			private static String STAGE_DEEPLINK_URL_DENTEGRA_DENTAL = MRConstants.DENTEGRA_DENTAL_DEEPLINK_URL;
 			
 			 /*This method will open deep link page */
 			public healthwellnessDeepLinkLoginPageSHIP navigateToLoginURL(){
 				start(AARP_HAWL);
-				driver.manage().deleteAllCookies();
-				
-				try {
-					Thread.sleep(10000);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}		
-				return null;
-				}
-			
-			/*This method will open deep link page */
-			public healthwellnessDeepLinkLoginPageSHIP navigateToDentegraDentalURL(){
-				start(STAGE_DEEPLINK_URL_DENTEGRA_DENTAL);
 				driver.manage().deleteAllCookies();
 				
 				try {
@@ -258,21 +243,6 @@ public class healthwellnessDeepLinkLoginPageSHIP extends UhcDriver {
 						return true;	
 					}
 				
-				public boolean validateDentegraDentalPage() {
-					checkForIPerceptionModel(driver);
-					CommonUtility.checkPageIsReadyNew(driver);	
-					try {
-						Thread.sleep(10000);
-					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-					validateNew(textonpage);
-					System.out.println("*** Page URL ***" + driver.getCurrentUrl());
-					
-					Assert.assertTrue(driver.getCurrentUrl().contains("wellness/health/uhcarticle/hwal-dentegra-dental-discount"));
-					return true;	
-				}				
 				
 }
 

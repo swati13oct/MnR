@@ -746,6 +746,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		
 		@FindBy(xpath = "//span[@class='title']//span")//
 		public WebElement  titleCount;
+		
+		@FindBy(xpath="//span[text()='Enroll in Plan']/..")
+		private WebElement  enrollInPlanBtn;
 
 		@FindBy(xpath = "//a[text()='View Saved Items']")
 		private WebElement viewSavedItems;
@@ -4436,6 +4439,39 @@ for (int i = 0; i < initialCount + 1; i++) {
 		System.out.println("Page Title : "+(driver.findElement(By.xpath("//title")).getText()));
 		//return NavigateToURL;
 	}
+
+	public boolean validateContactAgentPage(List <String> planName) {
+		boolean flag = false;
+		for (int i = 0; i < planName.size(); i++) {
+			
+			driver.findElement(By.xpath("//a[contains(@aria-label,"+"'"+planName+"'"+")]")).click();
+			try {
+				Thread.sleep(5000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			if(planName.get(i).contains("Drug")) {
+			driver.findElement(By.xpath("(//a[contains(text(),'View plan and drug')])[1]")).click();	
+			}
+			else {
+			driver.findElement(By.xpath("(//a[contains(text(),'View Plan Details')])[1]")).click();
+			}
+			
+		}
+			
+		return flag;
+	}
+		
+	public void clickEnrollPlanBtnOnSelectPlanModal() {
+		validateNew(enrollInPlanBtn);
+		enrollInPlanBtn.click();
+	}
+	public void validateNavigatedToOle() {
+		if(driver.getCurrentUrl().contains("welcome")) {
+			Assert.assertTrue("Navigation to OLE failed", driver.getTitle().contains("Online Enrollment"));
+		}
+	}
 	
 	public void getValidate() {
 		validate(getStartedBtn);
@@ -4515,42 +4551,18 @@ for (int i = 0; i < initialCount + 1; i++) {
 		}
 	}
 
+	
+	public void clickNextBestActionModalContinueEnrollmentBtn() {
+		waitTillElementClickableInTime(nextBestActionModalContinueEnrollmentBtn,15);
+		nextBestActionModalContinueEnrollmentBtn.click();
+	}
 
-	public boolean validateContactAgentPage(List <String> planName) {
-		boolean flag = false;
-		for (int i = 0; i < planName.size(); i++) {
-			
-			driver.findElement(By.xpath("//a[contains(@aria-label,"+"'"+planName+"'"+")]")).click();
-			try {
-				Thread.sleep(5000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			if(planName.get(i).contains("Drug")) {
-			driver.findElement(By.xpath("(//a[contains(text(),'View plan and drug')])[1]")).click();	
-			}
-			else {
-			driver.findElement(By.xpath("(//a[contains(text(),'View Plan Details')])[1]")).click();
-			}
-			
+	public void verifyNavigationToOLEPage() {
+		if(driver.getTitle().contains("Online Enrollment")){
+			System.out.println("OLE Welcome Page is Displayed");
 		}
-			
-		return flag;
+		else {
+			Assert.fail("User not navigates to OLE page");
+		}
 	}
-		
-public void clickNextBestActionModalContinueEnrollmentBtn() {
-	waitTillElementClickableInTime(nextBestActionModalContinueEnrollmentBtn,15);
-	nextBestActionModalContinueEnrollmentBtn.click();
-}
-
-public void verifyNavigationToOLEPage() {
-	if(driver.getTitle().contains("Online Enrollment")){
-		System.out.println("OLE Welcome Page is Displayed");
-	}
-	else {
-		Assert.fail("User not navigates to OLE page");
-	}
-}
-
 }
