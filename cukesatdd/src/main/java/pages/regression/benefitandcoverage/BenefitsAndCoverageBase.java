@@ -426,9 +426,14 @@ public class BenefitsAndCoverageBase extends BenefitsAndCoverageWebElements {
 	}
 
 	public void clicksOnJumpLinksAndCheckRespectiveSectionsDSNP(String planType, String memberType) {
-		
-		clicksOnLinkAndBackToTop(getJmpLinkToMedicalCopaysOrCoinsurance(), getCopayscoinsuranceheader());
-		clicksOnLinkAndBackToTop(getJmpLinkToOutofPocketMaximum(), getOutOfPocketSectionHeader());
+		//note: when ready, remove the lines from if section and keep the two assert from else only
+		if (MRScenario.environment.equals("offline") || MRScenario.environment.equals("prod")) {
+			clicksOnLinkAndBackToTop(getJmpLinkToMedicalCopaysOrCoinsurance(), getCopayscoinsuranceheader());
+			clicksOnLinkAndBackToTop(getJmpLinkToOutofPocketMaximum(), getOutOfPocketSectionHeader());
+		} else {
+			Assert.assertTrue("PROBLEM - should not be able to locate the 'MedicalCopaysOrCoinsurance' jumplink", !validate(getCopayscoinsuranceheader(),0));
+			Assert.assertTrue("PROBLEM - should not be able to locate the 'OutofPocketMaximum' jumplink", !validate(getOutOfPocketSectionHeader(),0));
+		}
 		clicksOnLinkAndBackToTop(getJmpLinkToPrimaryCareProvider(), getPrimaryCareProviderHeaderInd());
 		clicksOnLinkAndBackToTop(getJmpLinkToDrugCopaysAndDiscounts(), getDrugCopaysAndDiscountsSectionHeader());
 		clicksOnLinkAndBackToTop(getJmpLinkToDrugCoverage(), getDrugCoverageSectionHeader());
@@ -539,6 +544,7 @@ public class BenefitsAndCoverageBase extends BenefitsAndCoverageWebElements {
 	//tbd public boolean validateWithValue(String value, WebElement element) {
 	public void validateWithValue(String value, WebElement element) {
 		Assert.assertTrue("Element " +value+ " not found!!!!", validate(element,0));
+		scrollToView(element);
 		System.out.println("Element " +value+ " found!!!!");
 		/* tbd 
 		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
@@ -937,7 +943,6 @@ public class BenefitsAndCoverageBase extends BenefitsAndCoverageWebElements {
 		
 	}
 			
-	
 	
 	public void clicksToOptumRxSSOLink(String optumrxssolink ) {
 		// TODO Auto-generated method stub

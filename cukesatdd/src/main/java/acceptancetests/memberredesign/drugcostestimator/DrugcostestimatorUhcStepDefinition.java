@@ -26,6 +26,7 @@ import gherkin.formatter.model.DataTableRow;
 //import pages.memberredesign.bluelayer.LoginPage;
 import pages.mobile.member.blayer.BenefitsSummaryPage;
 import pages.regression.accounthomepage.AccountHomePage;
+import pages.regression.benefitandcoverage.BenefitsAndCoveragePage;
 import pages.regression.drugcostestimator.AddDrugDetails;
 import pages.regression.drugcostestimator.AddNewDrugModal;
 import pages.regression.drugcostestimator.DrugCostEstimatorPage;
@@ -1214,7 +1215,10 @@ public class DrugcostestimatorUhcStepDefinition {
 			dcePage = testHarnessPage.navigateToDCEPageFromTestHarnessPage();
 		} else {
 			AccountHomePage account_home_page = (AccountHomePage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
-			dcePage = (DrugCostEstimatorPage) account_home_page.navigate_to_dce();
+			//tbd dcePage = (DrugCostEstimatorPage) account_home_page.navigate_to_dce();
+			BenefitsAndCoveragePage bncPg=account_home_page.navigateDirectToBnCPag();
+			dcePage =bncPg.navigateToDcePg();
+			
 		}
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 
