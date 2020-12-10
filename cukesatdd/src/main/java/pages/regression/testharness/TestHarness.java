@@ -343,7 +343,7 @@ public class TestHarness extends UhcDriver {
 			validateNew(pcpMedicaLogo);		
 		}
 		else{
-			CommonUtility.waitForPageLoad(driver, panelHome, 30);
+			CommonUtility.waitForPageLoad(driver, panelHome, 10);
 		}	
 		//validateNew(panelHome);
 		//validateNew(panelClaims);

@@ -304,12 +304,19 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 		System.out.println("****the user validates Look Up Drugs button should be visible***");
 		validateWithValue("Look Up Drugs Button", LookUpDrugsButton);
 		scrollElementToCenterScreen(LookUpDrugsButton);
+		String actHref=LookUpDrugsButton.getAttribute("href");
 		LookUpDrugsButton.click();
 		CommonUtility.checkPageIsReadyNew(driver);
 		if (MRScenario.isTestHarness.equalsIgnoreCase("YES")) { //note: new DCE is a Rally page, access via testharness will land on myuhc.com login page
-			String expUrl="https://www.myuhc.com/member/prelogoutLayout.do?reason=logout&currentLanguageFromPreCheck=en";
-			String actUrl=driver.getCurrentUrl();
-			Assert.assertTrue("PROBLEM - not getting expected URL. From team or stage env ", actUrl.contains(expUrl));
+			if (actHref.contains("/pharmacy-uhc/drugs")) {
+				String expUrl="https://www.myuhc.com/member/prelogoutLayout.do?reason=logout&currentLanguageFromPreCheck=en";
+				String actUrl=driver.getCurrentUrl();
+				Assert.assertTrue("PROBLEM - not getting expected URL. From team or stage env. Expect to contains '"+expUrl+"' | Actual URL='"+actUrl+"'", actUrl.contains(expUrl));
+			} else { //note: assume still the old DCE page if not the new Rally DCE
+				CommonUtility.waitForPageLoad(driver, oldDcePgHeader, 5);
+				Assert.assertTrue("PROBLEM - unable to locate the DCE page header", 
+						validate(oldDcePgHeader,0) );
+			}
 		} else {
 			if (driver.getCurrentUrl().contains("/pharmacy-uhc/drugs")) {
 				if (validate(newDcePrePgCloseBtn,0)) {
@@ -710,7 +717,10 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 			validateNew(Copayscoinsuranceheader);
 
 			String ExpectedUrl="member/documents/overview.html";
-			Assert.assertTrue("'To view more details regarding----'  text is expected to display", medCopayText.isDisplayed());
+			if (MRScenario.environment.equals("offline") || MRScenario.environment.equals("prod")) 
+				Assert.assertTrue("'To view more details regarding----'  text is expected to display", medCopayText_old.isDisplayed());
+			else
+				Assert.assertTrue("'To view more details regarding----'  text is expected to display", medCopayText.isDisplayed());
 
 			//note: to save time, skip navigating to planDoc page, only validate link href has the correct url
 			/* keep
@@ -723,9 +733,12 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 			driver.navigate().back();
 			driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 			*/
-			String actHrefValue=medCopayBenefitsLink.getAttribute("href");
-			Assert.assertTrue("PROBLEM - medCopayBenefitsLink href value is not as expected. "
-					+ "Expected to contain '"+ExpectedUrl+"' | Actual href='"+actHrefValue+"'", actHrefValue.contains(ExpectedUrl));
+			if (MRScenario.environment.equals("offline") || MRScenario.environment.equals("prod")) 
+				Assert.assertTrue("PROBLEM - medCopayBenefitsLink href value is not as expected. "
+						+ "Expected to contain '"+ExpectedUrl+"' | Actual href='"+medCopayBenefitsLink_old.getAttribute("href")+"'", medCopayBenefitsLink_old.getAttribute("href").contains(ExpectedUrl));
+			else
+				Assert.assertTrue("PROBLEM - medCopayBenefitsLink href value is not as expected. "
+						+ "Expected to contain '"+ExpectedUrl+"' | Actual href='"+medCopayBenefitsLink.getAttribute("href")+"'", medCopayBenefitsLink.getAttribute("href").contains(ExpectedUrl));
 			
 			Assert.assertTrue("'OfficeVisits' is not expected to display", !OfficeVisits.isDisplayed());
 			Assert.assertTrue("'InPatientHospitalCare' is not expected to display", !InPatientHospitalCare.isDisplayed());

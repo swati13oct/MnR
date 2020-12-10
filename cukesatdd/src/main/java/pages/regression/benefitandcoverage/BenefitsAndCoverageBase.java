@@ -427,8 +427,13 @@ public class BenefitsAndCoverageBase extends BenefitsAndCoverageWebElements {
 
 	public void clicksOnJumpLinksAndCheckRespectiveSectionsDSNP(String planType, String memberType) {
 		
-		clicksOnLinkAndBackToTop(getJmpLinkToMedicalCopaysOrCoinsurance(), getCopayscoinsuranceheader());
-		clicksOnLinkAndBackToTop(getJmpLinkToOutofPocketMaximum(), getOutOfPocketSectionHeader());
+		if (MRScenario.environment.equals("offline") || MRScenario.environment.equals("prod")) {
+			clicksOnLinkAndBackToTop(getJmpLinkToMedicalCopaysOrCoinsurance(), getCopayscoinsuranceheader());
+			clicksOnLinkAndBackToTop(getJmpLinkToOutofPocketMaximum(), getOutOfPocketSectionHeader());
+		} else {
+			Assert.assertTrue("PROBLEM - should not be able to locate the 'MedicalCopaysOrCoinsurance' jumplink", !validate(getCopayscoinsuranceheader(),0));
+			Assert.assertTrue("PROBLEM - should not be able to locate the 'OutofPocketMaximum' jumplink", !validate(getOutOfPocketSectionHeader(),0));
+		}
 		clicksOnLinkAndBackToTop(getJmpLinkToPrimaryCareProvider(), getPrimaryCareProviderHeaderInd());
 		clicksOnLinkAndBackToTop(getJmpLinkToDrugCopaysAndDiscounts(), getDrugCopaysAndDiscountsSectionHeader());
 		clicksOnLinkAndBackToTop(getJmpLinkToDrugCoverage(), getDrugCoverageSectionHeader());
