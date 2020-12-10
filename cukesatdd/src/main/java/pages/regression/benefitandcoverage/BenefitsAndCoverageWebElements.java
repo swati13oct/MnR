@@ -1199,6 +1199,21 @@ public class BenefitsAndCoverageWebElements extends UhcDriver {
 	@FindBy(xpath = "//*[contains(@class,'tdd-hospitalvisits-title')]")
 	protected WebElement InPatientHospitalCare;
 	
+	@FindBy(xpath="//div[contains(@class,'ssoerrormessage')]//h2[contains(text(),'sorry')]")
+	protected WebElement ssoErrMsg_stage;
+
+	@FindBy(xpath="//input[@type='search']")
+	protected WebElement ssoSearchBox;
+	
+	@FindBy(xpath="//div[contains(@class,'PopOverContainer')]/div[3]")
+	protected WebElement ssoSurveyX;
+	
+	@FindBy(xpath="//h1[contains(text(),'Quick actions')]")
+	protected WebElement medicineCabinetDrugSearchBtn;
+	
+
+	
+	
 	public BenefitsAndCoverageWebElements(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);

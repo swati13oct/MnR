@@ -340,20 +340,35 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 
 	public void validategrouplookupdrugsbutton() 
 	{
-		sleepBySec(10);
+		//tbd sleepBySec(10);
 		validateNew(LookUpDrugsButton,0);
+		String expHref="/sso/outbound?outboundTo=optumrx&deepLink=rxpricingtool";
+		String actHref=LookUpDrugsButton.getAttribute("href");
+		
+		Assert.assertTrue("PROBLEM - 'DRUG LOOKUP' (for group case) element href is not as expected. Expected to contain '"+expHref+"' | Actual ='"+actHref+"'", actHref.contains(expHref));
 		//note: don't bother if it's team-atest, env not support
 		if (!MRScenario.environment.contains("team-a")) {
-			LookUpDrugsButton.click();
-			sleepBySec(5);
-			ArrayList<String> tabs2 = new ArrayList<String>(driver.getWindowHandles());
-			if(tabs2.size() == (2)) {
-				
-				driver.switchTo().window(tabs2.get(0));
+			ArrayList<String> beforeClick_tabNum = new ArrayList<String>(driver.getWindowHandles());
+			LookUpDrugsButton.click(); //note: after click should land on new tab
+			CommonUtility.checkPageIsReady(driver);
+			CommonUtility.waitForPageLoad(driver, ssoSearchBox, 15);
+			//tbd sleepBySec(5);
+			ArrayList<String> afterClick_tabNum = new ArrayList<String>(driver.getWindowHandles());
+			Assert.assertTrue("PROBLEM - 'DRUG LOOKUP' (for group case) should open new tab after click.  TabNumber before click='"+beforeClick_tabNum.size()+"' | After click='"+afterClick_tabNum.size()+"'", afterClick_tabNum.size() > beforeClick_tabNum.size());
+			driver.switchTo().window(afterClick_tabNum.get(afterClick_tabNum.size()-1));
+			if (MRScenario.environment.contains("stage")) { //note: online-stage not all test user setup w/ sso access
+				Assert.assertTrue("PROBLEM - not getting expected element on '"+MRScenario.environment+"' env.", validate(ssoErrMsg_stage,0) || validate(ssoSearchBox,0) || validate(medicineCabinetDrugSearchBtn,0));
+			} else if (MRScenario.environment.equals("offline") || MRScenario.environment.equals("prod")) {
+				if (validate(ssoSurveyX,0))
+					ssoSurveyX.click();
+				Assert.assertTrue("PROBLEM - not getting expected element on '"+MRScenario.environment+"' env",  validate(ssoSearchBox,0) || validate(medicineCabinetDrugSearchBtn,0));
 			}
-			else if(tabs2.size()==(3))  
-			{
-				driver.switchTo().window(tabs2.get(1));
+			sleepBySec(1);
+			//note: go back to the benefits page
+			if(afterClick_tabNum.size() == (2)) {
+				driver.switchTo().window(afterClick_tabNum.get(0));
+			} else if(afterClick_tabNum.size()==(3)) {
+				driver.switchTo().window(afterClick_tabNum.get(1));
 			}
 		}
 		
@@ -2706,19 +2721,18 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 				+"No Deductible\n"
 				+"$10.00\n"
 				+"$10.00\n"
-				+"Greater of $3.70 or 5.00%\n"
+				+"Your share of the cost for a covered drug will be either coinsurance or a copayment whichever is the larger amount:\n"
+				+"-either- coinsurance of 5% of the cost of the drug\n"
+				+"-or- $3.70 for a generic drug or a drug that is treated like a generic and $9.20 for all other drugs.\n"
 				+"Tier 2 \n"
 				+"$20.00\n"
 				+"$20.00\n"
-				+"Greater of $9.20 or 5.00%\n"
 				+"Tier 3\n"
 				+"$35.00\n"
 				+"$35.00\n"
-				+"Greater of $9.20 or 5.00%\n"
 				+"Tier 4\n"
 				+"$35.00\n"
-				+"$35.00\n"
-				+"Greater of $9.20 or 5.00%";		
+				+"$35.00";		
 		String mapdGroupTable=mapdGroupTable_2020;
 		if (dateStr.contains("2021")) 
 			mapdGroupTable=mapdGroupTable_2021;
@@ -2792,7 +2806,7 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 				+"no more than 25% for generic drugs or 25% for brand name drugs\n"
 				+"Your share of the cost for a covered drug will be either coinsurance or a copayment whichever is the larger amount:\n"
 				+"-either- coinsurance of 5% of the cost of the drug\n"
-				+"-or- $3.60 for a generic drug or a drug that is treated like a generic and $8.95 for all other drugs.\n"
+				+"-or- $3.70 for a generic drug or a drug that is treated like a generic and $9.20 for all other drugs.\n"
 				+"Tier 2\n"
 				+"$6.00\n"
 				+"$6.00\n"
@@ -2871,23 +2885,20 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 				+"Tier 1\n"
 				+"No deductible.\n"
 				+"$0.00\n"
-				+"no more than 37% for generic drugs or 25% for brand name drugs\n"
+				+"no more than 25% for generic drugs or 25% for brand name drugs\n"
 				+"Your share of the cost for a covered drug will be either coinsurance or a copayment whichever is the larger amount:\n"
 				+"-either- coinsurance of 5% of the cost of the drug\n"
-				+"-or- $3.60 for a generic drug or a drug that is treated like a generic and $8.95 for all other drugs.\n"
+				+"-or- $3.70 for a generic drug or a drug that is treated like a generic and $9.20 for all other drugs.\n"
 				+"Tier 2\n"
-				+"$15.00\n"
-				+"no more than 37% for generic drugs or 25% for brand name drugs\n"
+				+"$18.00\n"
+				+"$18.00\n"
 				+"Tier 3\n"
-				+"100% until the $435.00 deductible is met.*\n"
+				+"100% until the $445.00 deductible is met.*\n"
 				+"$120.00\n"
-				+"no more than 37% for generic drugs or 25% for brand name drugs\n"
+				+"no more than 25% for generic drugs or 25% for brand name drugs\n"
 				+"Tier 4\n"
-				+"32%\n"
-				+"no more than 37% for generic drugs or 25% for brand name drugs\n"
-				+"Tier 5\n"
-				+"25%\n"
-				+"no more than 37% for generic drugs or 25% for brand name drugs\n"
+				+"40%\n"
+				+"no more than 25% for generic drugs or 25% for brand name drugs\n"
 				+"*Once you reach the Coverage Gap Stage, you pay copays or coinsurance defined by your plan for all Tier 1 through Tier 5 drugs regardless of whether your full deductible has been met.";
 		String TableData= TableData_2020;
 		if (dateStr.contains("2021") && MRScenario.environment.contains("stage"))
@@ -2950,7 +2961,7 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 				+"no more than 25% for generic drugs or 25% for brand name drugs\n"
 				+"Your share of the cost for a covered drug will be either coinsurance or a copayment whichever is the larger amount:\n"
 				+"-either- coinsurance of 5% of the cost of the drug\n"
-				+"-or- $3.60 for a generic drug or a drug that is treated like a generic and $8.95 for all other drugs.\n"
+				+"-or- $3.70 for a generic drug or a drug that is treated like a generic and $9.20 for all other drugs.\n"
 				+"Tier 2\n"
 				+"$20.00\n"
 				+"$20.00\n"
