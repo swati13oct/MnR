@@ -226,17 +226,21 @@ public class AepVppPlanSummaryPage extends UhcDriver {
 		System.out.println("Plan card xpath : "+ planCard);
 		String rowXpath = "";
 		String headerPremiumXpath = planCard+"//*[contains(@class,'monthly-cost')]";
+		String headerPrem = "header premium"; //this variable will be stored as key for the header premium
+		
 		if(planName.contains("PDP"))
 			rowXpath = planCard+"//*[contains(@class,'pdpbenefittable')]//ul//li";
-		else
+		else {
 			rowXpath = planCard+"//ul[contains(@class,'benefits-table')]//li";
-		
+			List<WebElement> headerPremium = driver.findElements(By.xpath(headerPremiumXpath));
+			String headerPremiumText = headerPremium.get(0).getText(); //this variable will be stored as value for the header premium value
+			result.put(headerPrem, headerPremiumText);
+		}
 		List<WebElement> listOfRowsPerTable=driver.findElements(By.xpath(rowXpath));
-		List<WebElement> headerPremium = driver.findElements(By.xpath(headerPremiumXpath));
+		
 		String key = "";
-		String headerPrem = "header premium"; //this variable will be stored as key for the header premium
-		String headerPremiumText = headerPremium.get(0).getText(); //this variable will be stored as value for the header premium value
-		result.put(headerPrem, headerPremiumText);
+		
+		
 		
 		for(int rowIndex=1; rowIndex<=listOfRowsPerTable.size(); rowIndex++) { //note: loop through each row
 			String cellsXpath="",benefitValueXpath ="";
@@ -313,7 +317,9 @@ public class AepVppPlanSummaryPage extends UhcDriver {
 		String tmpUIString1 = "",tmpUIString2="",benefitValueUI="", headerPremiumString="";
 		HashMap<Boolean, String> comparedResult = new HashMap<Boolean, String>();
 		headerPremiumString = benefitsMap.get("header premium"); //gets the value for the header premium that was stored from the UI
-		headerPremiumString = headerPremiumString.replace("\n", "").replaceAll("\\s+", ""); //removing spaces and next lines if any
+		
+		if(headerPremiumString!=null) //the header monthly premium value is not there for PDP plans so in case of PDP plans this value will be null
+			headerPremiumString = headerPremiumString.replace("\n", "").replaceAll("\\s+", ""); //removing spaces and next lines if any
 		
 		for(String key : benefitsMap.keySet()) {
 			 benefitValueUI = benefitsMap.get(key);
@@ -345,13 +351,17 @@ public class AepVppPlanSummaryPage extends UhcDriver {
 						if(key.contains("monthly premium")) {
 							if(benefitValueUI.equalsIgnoreCase(benefitValue)) { //if the UI value and the excel value matches
 								if(benefitValueUI.equalsIgnoreCase(headerPremiumString)){
-									flag = true;break;
-								}else {
-									flag = false;
-									System.out.println(sheetName+"_"+rowIndex+" - header premium value didn't match with the box for: "+columnName+" Excel: "+headerPremiumString+" | UI: "+benefitValueUI);
-									tmpUIString2 = tmpUIString1 +" / Header Value: "+headerPremiumString;
-									break;
+										flag = true;break;
+								}else if(headerPremiumString == null ) { //for PDP plans this will be null
+										flag = true; break;
 								}
+								else {
+										flag = false;
+										System.out.println(sheetName+"_"+rowIndex+" - header premium value didn't match with the box for: "+columnName+" Excel: "+headerPremiumString+" | UI: "+benefitValueUI);
+										tmpUIString2 = tmpUIString1 +" / Header Value: "+headerPremiumString;
+										break;
+								}
+							
 							}else {
 								flag = false;
 								System.out.println(sheetName+"_"+rowIndex+" - Values did not match for col:1 "+columnName+" Excel: "+benefitValue+" | UI: "+benefitValueUI);
