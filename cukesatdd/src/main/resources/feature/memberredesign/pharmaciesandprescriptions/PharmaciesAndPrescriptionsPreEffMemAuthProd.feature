@@ -33,7 +33,7 @@ Feature: 1.18.1.2 Member Pharamcies And Prescriptions page - Pre-Effective - PRO
 	@prod_pnpPreEff_mapd_ind_sanity
     Examples: 
 	  | FID     | username  | password  | MemUserName               | planType | memberType          | expectLink |
-	  | F493942 | kkumard   | mnrs786@  | Teripappas                | MAPD     | IND_PREEFF_PnP      | yes        |
+	  | F493942 | kkumard   | tnps459#  | Teripappas                | MAPD     | IND_PREEFF_PnP      | yes        |
 
   #----- being regression section --------------------
   @prod_pnpPreEff01
@@ -74,42 +74,43 @@ Feature: 1.18.1.2 Member Pharamcies And Prescriptions page - Pre-Effective - PRO
 	@prod_pnpPreEff_mapd_ind
     Examples: 
 	  | FID     | username  | password  | MemUserName               | planType | memberType          | expectLink |
-	  | F493942 | kkumard   | mnrs786@  | Teripappas                | MAPD     | IND_PREEFF_PnP      | yes        |
+	  | F493942 | kkumard   | tnps459#  | Teripappas                | MAPD     | IND_PREEFF_PnP      | yes        |
 
 	@prod_pnpPreEff_mapd_grp
     Examples: 
 	  | FID     | username  | password  | MemUserName               | planType | memberType          | expectLink |
-	  | F493942 | kkumard   | mnrs786@  | Webfan50                  | MAPD     | GRP_PREEFF_PnP      | yes        |
+	  | F493942 | kkumard   | tnps459#  | Webfan50                  | MAPD     | GRP_PREEFF_PnP      | yes        |
 
-	@prod_pnpPreEff_mapd_grp_lghib
-    Examples: 
-	  | FID     | username  | password  | MemUserName               | planType | memberType          | expectLink |
-	  | F493942 | kkumard   | mnrs786@  | Chief2302                 | MAPD     | GRP_LGHIB_PREEFF_PnP| yes        |
+    #note: no prod user pre-eff for these groups for now
+	#@prod_pnpPreEff_mapd_grp_lghib
+    #Examples: 
+	#  | FID     | username  | password  | MemUserName               | planType | memberType          | expectLink |
+	#  | F493942 | kkumard   | tnps459#  | Chief2302                 | MAPD     | GRP_LGHIB_PREEFF_PnP| yes        |
 
 	#@prod_pnpPreEff_mapd_grp_seib
     #Examples: 
 	#  | FID     | username  | password  | MemUserName               | planType | memberType          | expectLink |
-	#  | F493942 | kkumard   | mnrs786@  | testUserName              | MAPD     | GRP_SEIB_PREEFF_PnP | yes        |
+	#  | F493942 | kkumard   | tnps459#  | testUserName              | MAPD     | GRP_SEIB_PREEFF_PnP | yes        |
 
 	@prod_pnpPreEff_pdp_ind
     Examples: 
 	  | FID     | username  | password  | MemUserName               | planType | memberType          | expectLink |
-	  | F493942 | kkumard   | mnrs786@  | Lelabos1952               | PDP      | IND_PREEFF_PnP      | yes        |
+	  | F493942 | kkumard   | tnps459#  | Lelabos1952               | PDP      | IND_PREEFF_PnP      | yes        |
 
 	#@prod_pnpPreEff_pdp_grp
     #Examples: 
 	#  | FID     | username  | password  | MemUserName               | planType | memberType          | expectLink |
-	#  | F493942 | kkumard   | mnrs786@  | testUserName              | PDP      | GRP_PREEFF_PnP      | yes        |
+	#  | F493942 | kkumard   | tnps459#  | testUserName              | PDP      | GRP_PREEFF_PnP      | yes        |
 
 	@prod_pnpPreEff_snp_ind
     Examples: 
 	  | FID     | username  | password  | MemUserName               | planType | memberType          | expectLink |
-	  | F493942 | kkumard   | mnrs786@  | Sadiekennedy50@Yahoo.Com  | SNP      | IND_PREEFF_PnP      | yes        |
+	  | F493942 | kkumard   | tnps459#  | Sadiekennedy50@Yahoo.Com  | SNP      | IND_PREEFF_PnP      | yes        |
 
 	#@prod_pnpPreEff_ssp_grp
     #Examples: 
 	#  | FID     | username  | password  | MemUserName               | planType | memberType          | expectLink |
-	#  | F493942 | kkumard   | mnrs786@  | testUserName              | SSP      | GRP_PREEFF_PnP      | yes        |
+	#  | F493942 | kkumard   | tnps459#  | testUserName              | SSP      | GRP_PREEFF_PnP      | yes        |
 
   @prod_pnpPreEff02
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> - Verify member will not have access to Pharmacies and Prescriptions Page
@@ -141,15 +142,15 @@ Feature: 1.18.1.2 Member Pharamcies And Prescriptions page - Pre-Effective - PRO
 	#@prod_pnpPreEff_ma_ind
     #Examples: 
 	#  | FID     | username  | password  | MemUserName             | planType | memberType          | expectLink |
-	#  | F493942 | kkumard   | mnrs786@  | testUserName            | MA       | IND_PREEFF_PnP      | no         |
+	#  | F493942 | kkumard   | tnps459#  | testUserName            | MA       | IND_PREEFF_PnP      | no         |
 
 	#@prod_pnpPreEff_ma_grp
     #Examples: 
 	#  | FID     | username  | password  | MemUserName             | planType | memberType          | expectLink |
-	#  | F493942 | kkumard   | mnrs786@  | testUserName            | MA       | GRP_PREEFF_PnP      | no         |
+	#  | F493942 | kkumard   | tnps459#  | testUserName            | MA       | GRP_PREEFF_PnP      | no         |
 
 	@prod_pnpPreEff_ship_ind
     Examples: 
 	  | FID     | username  | password  | MemUserName             | planType | memberType          | expectLink |
-	  | F493942 | kkumard   | mnrs786@  | Travelynn1              | SHIP     | IND_PREEFF_PnP      | no         |
+	  | F493942 | kkumard   | tnps459#  | Travelynn1              | SHIP     | IND_PREEFF_PnP      | no         |
 	  
