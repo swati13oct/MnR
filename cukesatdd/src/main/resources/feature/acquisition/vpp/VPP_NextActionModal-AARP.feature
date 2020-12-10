@@ -1,4 +1,4 @@
-@vppNextActionModalUlayer @F445017 @F473803 @vppNextActionModalUlayer
+@vppNextActionModalUlayer @F445017 @F473803
 Feature: 1.03-ACQ-Next Action Modal on vpp flow AARP
 
   #**************************************************************MAPD*************************************************************************
@@ -156,7 +156,7 @@ Feature: 1.03-ACQ-Next Action Modal on vpp flow AARP
       | zipcode | isMultutiCounty | county          | plantype | planname                             | planyear |
       |   10001 | NO              | New York County | MAPD     | AARP Medicare Advantage Plan 2 (HMO) | future   |
 
-  @vppNBASavedMAPDPlan @NBA_MAPD_AARP02
+  @vppNBASavedMAPDPlan
   Scenario Outline: Test to verify the Select Plan for Enroll Modal when  user clicks on "Enroll in Plan" button and multiple plans are saved
     Given the user is on AARP medicare acquisition site landing page
     When the user does plan search using the following information in the AARP site
@@ -215,6 +215,7 @@ Feature: 1.03-ACQ-Next Action Modal on vpp flow AARP
     Then user should be able to see Medicare Advantage plan by default
     When user clicks on Return to plan summary page link in DCE
     Then user verify the NBA modal to add providers on the VPP summary page in AARP site
+    And Click on Find my area button in AARP
     When user clicks on Find My Doctor button in AARP Site
     When user selects a provider and retuns to VPP page in ulayer
     And the user selects plan year for the AARP site
@@ -249,7 +250,7 @@ Feature: 1.03-ACQ-Next Action Modal on vpp flow AARP
       | zipcode | isMultutiCounty | county      | plantype | planyear |
       |   19019 | No              | Iowa County | PDP      | future   |
 
-  @vppNBAPDPAddDrug @NBA_PDP_AARP01
+  @vppNBAPDPAddDrug
   Scenario Outline: UserStory: Plan type: <plantype> -Test to verify the Next action modal for Enroll Plan on VPP summary page for PDP Plan when Drugs are added
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site

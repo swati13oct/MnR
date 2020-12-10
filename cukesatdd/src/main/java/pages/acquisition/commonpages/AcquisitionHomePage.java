@@ -75,7 +75,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(id = "Find a pharmacy near you")
 	private WebElement pharmacyNearLink;
 
-	@FindBy(className = "zip-button")
+	//@FindBy(className = "zip-button")
+	@FindBy(xpath="(//*[@class='zip-button'])[1]")
 	private WebElement FindPlansButton1;
 
 	@FindBy(xpath = "//*[@id='ghn_lnk_2']")
@@ -221,7 +222,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "//*[@id='ghn_lnk_2']")
 	private WebElement OurPlans;
 
-	@FindBy(id = "nav-zipcode")
+	//@FindBy(id = "nav-zipcode")
+	@FindBy(xpath="//input[contains(@id,'nav-zipcode')]")
 	private WebElement OurPlans_zipfield;
 
 	@FindBy(xpath = "//*[@id = 'nav-zipcode']/following-sibling::button[@class = 'zip-button']")
@@ -447,6 +449,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "//p[contains(text(),'UnitedHealthcare Insurance Company (UnitedHealthcare)')]")
     private WebElement UHCICSubTitle;
 	
+	@FindBy(xpath = "//*[contains(text(),'UnitedHealthcare Medicare Solutions | Provider Search')]")
+	private WebElement UnitedHealthcareMedicareSolutions;
+	
 	@FindBy(xpath = "//*[contains(@id, 'piFirstName')]")
 	private WebElement registerFirstName;
 	
@@ -462,6 +467,32 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath="//a[contains(text(),'Learn More')]")
 	private WebElement learnAboutMedicareHomeScreen;
 
+	@FindBy(xpath = "//a[@id='gfn_lnk_row2_1']")
+    private WebElement MedicareAdvantagePlans;
+	
+	@FindBy(xpath = "//a[@id='gfn_lnk_row2_2']")
+	private WebElement DualSpecialNeedsPlans;
+	
+	@FindBy(xpath = "//a[@id='gfn_lnk_row2_3']")
+    private WebElement MedicareSupplementInsurancePlans;
+	
+	@FindBy(xpath = "//span[contains(text(),'Medicare Prescription Drug Plans')]")
+    private WebElement MedicarePrescriptionDrugPlans;
+	
+	@FindBy(xpath = "//span[contains(text(),'Medicare Education')]")
+    private WebElement MedicareEducation;
+	
+	@FindBy(xpath = "//a[@class='back-to-top']")
+    private WebElement BackToTop;
+	
+	@FindBy(xpath="//div[contains(text(),'Accessibility')]")
+    private WebElement Accessibility;
+	
+	@FindBy(xpath="(//a[@id='gf_lnk_2']")
+    private WebElement Aboutus;
+	
+		
+	
    	String ChatSamText= "Chat with a Licensed Insurance Agent";
 
 	private static String TeamC_ACQUISITION_PAGE_URL = MRConstants.TeamC_UHC_URL;
@@ -1474,7 +1505,6 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	 * @return
 	 */
 	public VisitorProfilePage navigateToVisitorProfilePage() {
-		scrollToView(shoppingCartIcon);
 		waitforElement(shoppingCartIcon);
 //		shoppingCartIcon.click();
 		jsClickNew(shoppingCartIcon);
@@ -1517,11 +1547,6 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	public void validateCallSam() throws InterruptedException {
 		boolean present;
 		//driver.navigate().refresh();
-		
-		if(MRScenario.browserName.equalsIgnoreCase("Safari")) {	//Adding because Safari 13 fails to locate element after navigate back
-			driver.navigate().refresh();
-			sleepBySec(2);
-		}
 		try {
 			validateNew(callsam);
 			present = true;
@@ -2603,6 +2628,23 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			}
 		}
 
+		public void validateCountResults() {
+			System.out.println("@@@inside count results validation@@");
+			String SearchResultsCountUI = SearchResultsCount.getText();
+			System.out.println("SearchResultsCountUI" + SearchResultsCountUI);
+
+			String[] arr = SearchResultsCountUI.split("\\s+");
+			String expectedCount = arr[3];
+			System.out.println("Expected count from UI" + expectedCount);
+			String SearchResultsCountAttribute = SearchResultsCount.getAttribute("dtmname");
+			System.out.println("SearchResultsCountAttribute" + SearchResultsCountAttribute);
+			String[] arr1 = SearchResultsCountAttribute.split("\\s+");
+			String expectedCountfromAttribute = arr1[0];
+			System.out.println("Expected Count from Attribute" + expectedCountfromAttribute);
+			Assert.assertEquals(expectedCount, expectedCountfromAttribute);
+			System.out.println("check");
+
+		}
 
 		@FindBy(xpath="(//*[contains(text(),'Sign in')])[1]")
 		private WebElement memberSignInPage;
@@ -2866,5 +2908,195 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		String expectedURL =urlCheck.replace(prodURL,stageURL);
 		System.out.println("**********Actual URL is displayed *************"+expectedURL);
 		
+	}
+	
+	public void clickonmemberSignInOfflinelink(String ExpectedmemberSigninURL) {
+		validateNew(memberSignInPage);
+		CommonUtility.waitForPageLoadNew(driver, memberSignInPage, 30);
+		String parentWindow = driver.getWindowHandle();
+	//	memberSignInPage.click();
+		jsClickNew(memberSignInPage);
+		sleepBySec(3);
+		Set<String> tabs_windows = driver.getWindowHandles();
+		Iterator<String> itr = tabs_windows.iterator();
+		while(itr.hasNext()) {
+			String window = itr.next();
+			if(!parentWindow.equals(window)) {
+				driver.switchTo().window(window);
+			}
+		}
+
+		CommonUtility.checkPageIsReadyNew(driver);
+		String CurrentmemberSigninURL = driver.getCurrentUrl();
+		String ActualmemberSigninURL=CurrentmemberSigninURL.substring(0, 32).trim();
+		System.out.println("memberSignin Page is displayed : "+ActualmemberSigninURL);
+		System.out.println("Expected member signin URL: "+ExpectedmemberSigninURL);
+		System.out.println("Actual member signin URL: "+ActualmemberSigninURL);
+
+		if(ExpectedmemberSigninURL.contains(ActualmemberSigninURL)) {
+			System.out.println("****************member signin Page is displayed  ***************");
+
+			Assert.assertTrue(true);
+		}
+		else {
+			Assert.fail("****************member signin Page is not loaded ***************");
+		}
+		//ViewMedicareplanlinks.click();
+		validateNew(ViewMedicareplanlinks);
+		CommonUtility.waitForPageLoadNew(driver, ViewMedicareplanlinks, 30);
+		String parentWindow1 = driver.getWindowHandle();
+		jsClickNew(ViewMedicareplanlinks);
+		sleepBySec(3);
+		Set<String> tabs_windows1 = driver.getWindowHandles();
+		Iterator<String> itr1 = tabs_windows1.iterator();
+		while(itr1.hasNext()) {
+			String window = itr1.next();
+			if(!parentWindow1.equals(window)) {
+				driver.switchTo().window(window);
+			}
+		}
+		CommonUtility.checkPageIsReadyNew(driver);
+		 String stageURL="https://www.stage-aarpmedicareplans.uhc.com/";
+		 String prodURL="https://www.aarpmedicareplans.com/";
+		 String offlineprodURL="https://offline.aarpmedicareplans.com/";
+		 String urlCheck=driver.getCurrentUrl();
+		String expectedURL =urlCheck.replace(prodURL,offlineprodURL);
+		System.out.println("**********Actual URL is displayed *************"+expectedURL);
+		
+	}
+	
+	public void MedicareAdvantagePlans() {
+			threadsleep(6);
+			//MedicareAdvantagePlans.click();
+			jsClickNew(MedicareAdvantagePlans);
+			threadsleep(5);
+//			Assert.assertEquals(driver.getCurrentUrl(), "https://www.stage-aarpmedicareplans.uhc.com/shop/medicare-advantage-plans.html");
+			if(driver.getCurrentUrl().contains("aarpmedicareplans.com")||driver.getCurrentUrl().contains("uhcmedicaresolutions.com")) {
+				assertTrue(true);
+			}
+		}
+
+			
+			
+			
+		
+		public void DualSplNeedPlans() {
+			
+			threadsleep(6);
+        	DualSpecialNeedsPlans.click();
+//			jsClickNew(DualSpecialNeedsPlans);
+			threadsleep(5);
+			Assert.assertEquals(driver.getCurrentUrl(), "https://www.stage-aarpmedicareplans.uhc.com/shop/dual-special-needs-plans.html");
+			if(driver.getCurrentUrl().contains("aarpmedicareplans.com")||driver.getCurrentUrl().contains("uhcmedicaresolutions.com")) {
+				assertTrue(true);
+			}
+			
+		}
+		
+		public void Medicaresupplementinsuranceplans() {
+			
+			threadsleep(6);
+//			MedicareSupplementInsurancePlans.click();
+			jsClickNew(MedicareSupplementInsurancePlans);
+			threadsleep(5);
+			Assert.assertEquals(driver.getCurrentUrl(), "https://www.stage-aarpmedicareplans.uhc.com/shop/medicare-supplement-plans.html");
+			if(driver.getCurrentUrl().contains("aarpmedicareplans.com")||driver.getCurrentUrl().contains("uhcmedicaresolutions.com")) {
+				assertTrue(true);
+			}
+		}
+		
+		public void MedicarePrescriptionDrugPlans() {
+			
+			threadsleep(6);
+//			MedicarePrescriptionDrugPlans.click();
+			jsClickNew(MedicarePrescriptionDrugPlans);
+			threadsleep(5);
+			Assert.assertEquals(driver.getCurrentUrl(), "https://www.stage-aarpmedicareplans.uhc.com/shop/prescription-drug-plans.html");
+			if(driver.getCurrentUrl().contains("aarpmedicareplans.com")||driver.getCurrentUrl().contains("uhcmedicaresolutions.com")) {
+				assertTrue(true);
+		}
+		}
+		
+		public void MedicareEducation() {
+			threadsleep(6);
+//			MedicareEducation.click();
+			jsClickNew(MedicareEducation);
+			threadsleep(5);
+			Assert.assertEquals(driver.getCurrentUrl(), "https://www.stage-aarpmedicareplans.uhc.com/medicare-education.html");
+			if(driver.getCurrentUrl().contains("aarpmedicareplans.com")||driver.getCurrentUrl().contains("uhcmedicaresolutions.com")) {
+				assertTrue(true);
+			}
+			
+		}
+		
+		public void backtotop() {
+			threadsleep(6);
+//		BackToTop.click();
+		jsClickNew(BackToTop);
+		threadsleep(5);
+		if(driver.getCurrentUrl().contains("aarpmedicareplans.com")||driver.getCurrentUrl().contains("uhcmedicaresolutions.com")) {
+			assertTrue(true);
+		}
+				
+		}
+		
+		public void Accessibility() {
+
+			threadsleep(6);
+//			Accessibility.click();
+			jsClickNew(Accessibility);
+			threadsleep(5);
+			//Assert.assertEquals(driver.getCurrentUrl(), "https://www.uhc.com/legal/accessibility");
+			if(driver.getCurrentUrl().contains("accessibility")) {
+				assertTrue(true);
+			}
+		}
+		
+		public void clickUnitedHealthcareMedicareSolutions() {
+			threadsleep(8);
+			UnitedHealthcareMedicareSolutions.click();
+		}
+		
+		public void validateUrl(String url) {
+			threadsleep(6);
+			String parentWindow = driver.getWindowHandle();
+			driver.switchTo().window(driver.getWindowHandles().toArray()[1].toString());
+			System.out.println(driver.getTitle());
+			String str=driver.getTitle();
+			//Assert.assertTrue( "Title mismatch for dental directory",driver.getTitle().equals(url));
+			if(str.equals(url)) {
+				assertTrue(true);
+			}
+			
+		}
+		
+
+
+
+	public boolean checkZipCompErrorInSubNav() {
+		hoverOverShopForPlan();
+		sleepBySec(3);
+		CommonUtility.checkPageIsReadyNew(driver);
+		validateNew(OurPlans_zipfield);
+		validateNew(FindPlansButton1);
+		WebElement errorMsg=driver.findElement(By.xpath("//span[@class='field-error-msg']"));
+		jsClickNew(FindPlansButton1);
+		waitforElementNew(errorMsg);
+		if(errorMsg.isDisplayed()){
+			System.out.println("Zip Component present in Sub Nav");
+			System.out.println("Error Message Displayed: "+ errorMsg.getText());
+			return true;
+		}else
+			return false;
+	}
+
+	public VPPPlanSummaryPage checkZipCompSubNavVpp(String zipCode) {
+		sendkeys(OurPlans_zipfield, zipCode);
+		jsClickNew(FindPlansButton1);
+		CommonUtility.checkPageIsReadyNew(driver);
+		if (getTitle().equalsIgnoreCase(PageTitleConstants.ULAYER_VPP_PLAN_PAGE_AARP_SHOP_MEDICARE)) {
+			return new VPPPlanSummaryPage(driver);
+		}
+		return null;		
 	}
 }

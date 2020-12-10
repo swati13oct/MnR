@@ -2,7 +2,7 @@ Feature: 1.13 Member Outbound SSO functionality for M&R Member Portal
 
  Background: Feature security flag needs to be true before ATDD script execution
      Given First check if feature security flag is set to true
-      | Feature | UCPSSOMemberAuth |
+      | Feature | UCPUserManagement |
 ###############################Regression Scenarios Begin Here ########################################
 
   @regressionMember

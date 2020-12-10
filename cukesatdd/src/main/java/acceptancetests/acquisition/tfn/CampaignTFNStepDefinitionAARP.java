@@ -390,22 +390,23 @@ public void the_user_navigates_to_following_memeber_signin_page_AARP(DataTable a
 	Map<String, String> inputAttributesMap=parseInputArguments(arg1);
 	String memberSignINURL = inputAttributesMap.get("Member Signin URL");
 	String memberSignINSTAGEURL = inputAttributesMap.get("Member Signin URL STG");
+	String memberSignINOFFLINEURL = inputAttributesMap.get("Member Signin URL Offline");
 	AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(driver);
 	//AcquisitionHomePage aquisitionhomepage1 = (AcquisitionHomePage)getLoginScenario().getBean(PageConstants.ACQUISITION_HOME_PAGE);
 	getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, aquisitionhomepage);
 	
-	if (getLoginScenario().environment.equals("stage")) {
+	if (getLoginScenario().environment.equalsIgnoreCase("stage")) {
 		aquisitionhomepage.clickonmemberSignInStagelink(memberSignINSTAGEURL);
-	} else {
+	} 
+	else if (getLoginScenario().environment.equalsIgnoreCase("prod")){
 		aquisitionhomepage.clickonmemberSignInlink(memberSignINURL);
 	}
-	/*if(memberSignINURL!=null){
-		aquisitionhomepage.clickonmemberSignInlink(memberSignINURL);
-		Assert.assertTrue(true);
-	}else
+	else if(getLoginScenario().environment.equalsIgnoreCase("offline")) {
+		aquisitionhomepage.clickonmemberSignInOfflinelink(memberSignINOFFLINEURL);
+	}
+	else {
 		Assert.fail("Error in loading the UHC Agent Page");
-	//tfnPage.validateFederalTFN(TFN_Xpath);
-*/
+	}
 	
 }
 

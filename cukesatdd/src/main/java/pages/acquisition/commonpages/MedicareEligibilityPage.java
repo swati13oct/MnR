@@ -9,7 +9,6 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
 import acceptancetests.util.CommonUtility;
-import atdd.framework.MRScenario;
 
 import java.util.List;
 
@@ -188,7 +187,6 @@ public class MedicareEligibilityPage extends GlobalWebElements {
 		WebElement lnkIEP=driver.findElement(By.xpath("//a[contains(text(),'Initial Enrollment Period')]"));
 		validateNew(lnkIEP);
 		jsClickNew(lnkIEP);
-		waitForPageLoadSafari();
 		CommonUtility.checkPageIsReadyNew(driver);
 		
 		if(driver.getCurrentUrl().contains("medicare-education/enrollment-and-changing-plans.html"))
@@ -202,17 +200,11 @@ public class MedicareEligibilityPage extends GlobalWebElements {
 			Assert.fail("Initial Enrollment Period Page did not open correctly");
 		}
 		
-		driver.navigate().back();
-		//Adding the below code as elements are not located in Safari browser after using navigate back
-		if(MRScenario.browserName.equalsIgnoreCase("Safari")) {
-			driver.navigate().refresh();
-			threadsleep(2000);
-		}
+		driver.navigate().back();			
 	}
 
     public void checkLeftRailPlanLinks(String plan) {
 		WebElement lnkplan=null;
-		waitForPageLoadSafari();
 		CommonUtility.checkPageIsReadyNew(driver);
 		if(plan=="MA") {
 		 lnkplan=driver.findElement(By.xpath("//a[contains(@href,'medicare-advantage') and contains(@class,'sidebar')]"));
@@ -224,7 +216,6 @@ public class MedicareEligibilityPage extends GlobalWebElements {
 		validateNew(lnkplan);
 		jsClickNew(lnkplan);
 		
-		waitForPageLoadSafari();
 		CommonUtility.checkPageIsReadyNew(driver);
 		String checkUrl=driver.getCurrentUrl();
 		
@@ -244,11 +235,6 @@ public class MedicareEligibilityPage extends GlobalWebElements {
 			waitforElementNew(pageHeader,8);
 			System.out.println(pageHeader.getText()+" page is displayed");
 			driver.navigate().back();
-			//Adding the below code as elements are not located in Safari browser after using navigate back
-			if(MRScenario.browserName.equalsIgnoreCase("Safari")) {
-				driver.navigate().refresh();
-				threadsleep(2000);
-			}
 		}else {
 			Assert.fail(plan+" MEd Ed page not displayed");
 		}

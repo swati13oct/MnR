@@ -1639,16 +1639,14 @@ public class OneTimePaymentAarpStepDefintion {
 		}
 
 	}
-	
-	
+
 	@Then("^for saving card user navigates to payment overview screen and selects agreements and save card checkbox and click on Make one time payment$")
 	public void then_user_navigates_to_payment_overview_screen_and_selects_agreements_save_card_checkbox_and_click_on_Make_one_time_payemnt()
 			throws Throwable {
 		ReviewOneTimePaymentPage reviewOneTimePaymentsPage = (ReviewOneTimePaymentPage) getLoginScenario()
 				.getBean(PageConstants.Review_OneTime_Payments_Page);
 
-		ConfirmOneTimePaymentPage confirmOneTimePaymentPage = reviewOneTimePaymentsPage
-				.selectAgreeSelectSaveCardAndClickOnMakePayment();
+		ConfirmOneTimePaymentPage confirmOneTimePaymentPage = reviewOneTimePaymentsPage.selectAgreeSelectSaveCardAndClickOnMakePayment();
 		if (confirmOneTimePaymentPage != null) {
 			getLoginScenario().saveBean(PageConstants.ONE_TIME_PAYMENT_PAGE, confirmOneTimePaymentPage);
 			System.out.println("User is on Review One time payments page");
