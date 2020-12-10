@@ -247,8 +247,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	public static List<WebElement> proactiveChatExistBtn;
 
 	
-//	@FindBy(xpath = "//div[@class='overview-main']//h2")
-@FindBy(xpath = "//div[@class='overview-main']/h2")
+//	@FindBy(xpath = "//div[@class='overview-main']/h2")
+@FindBy(xpath = "//div[@class='overview-main']//h2")
 private WebElement vppTop;
 
 	@FindBy(id = "cobrowse-disclaimer")
