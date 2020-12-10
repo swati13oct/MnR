@@ -402,7 +402,8 @@ public class PlanRecommendationEngineDrugsPage extends UhcDriver {
 			threadsleep(1000);
 			drugNames.add(drugNameList.get(i).findElement(By.cssSelector("p:nth-child(1)")).getText().trim()
 					.toUpperCase() + " "
-					+ drugNameList.get(i).findElement(By.cssSelector("p:nth-child(2)")).getText().toUpperCase());
+					+ drugNameList.get(i).findElement(By.cssSelector("p:nth-child(2)")).getText().trim()
+					.toUpperCase());
 		}
 		Collections.sort(drugNames);
 		System.out.println("Drugs Name list is : " + drugNames);
