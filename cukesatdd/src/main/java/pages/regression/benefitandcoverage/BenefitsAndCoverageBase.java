@@ -426,7 +426,7 @@ public class BenefitsAndCoverageBase extends BenefitsAndCoverageWebElements {
 	}
 
 	public void clicksOnJumpLinksAndCheckRespectiveSectionsDSNP(String planType, String memberType) {
-		
+		//note: when ready, remove the lines from if section and keep the two assert from else only
 		if (MRScenario.environment.equals("offline") || MRScenario.environment.equals("prod")) {
 			clicksOnLinkAndBackToTop(getJmpLinkToMedicalCopaysOrCoinsurance(), getCopayscoinsuranceheader());
 			clicksOnLinkAndBackToTop(getJmpLinkToOutofPocketMaximum(), getOutOfPocketSectionHeader());

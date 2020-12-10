@@ -2522,6 +2522,7 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 	}
 	
 	public List<String> validatedrugcosttableMAPD_NONLIS(String dateStr) {
+		System.out.println("TEST - dateStr="+dateStr);
 		List<String> testNote=new ArrayList<String>();
 		CommonUtility.waitForPageLoad(driver, RetailDrugCost_TableNONLIS, 15);
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", RetailDrugCost_TableNONLIS);
@@ -2584,10 +2585,11 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 				+"$55.00\n"
 				+"Greater of $9.20 or 5.00%";
 		String mapdGroupTable=mapdGroupTable_2020;
-		if (dateStr.contains("2021") &&  MRScenario.environment.contains("team-a")) 
+		if (dateStr.contains("2021") &&  MRScenario.environment.contains("team-a")) {
 			mapdGroupTable=mapdGroupTable_2021_team;
-		else if (dateStr.contains("2021") || MRScenario.environment.contains("stage")) 
+		} else if (dateStr.contains("2021") && MRScenario.environment.contains("stage")) {
 			mapdGroupTable=mapdGroupTable_2021;
+		}
 		if(RetailDrugCost_TableNONLIS.getText().equals(mapdGroupTable.toString())){
 			Assert.assertTrue("The data in the drug cost table is displaying correctly", true);
 			System.out.println("The data in the drug cost table is displaying correctly");  
@@ -2858,7 +2860,7 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 				+"no more than 37% for generic drugs or 25% for brand name drugs\n"
 				+"*Once you reach the Coverage Gap Stage, you pay copays or coinsurance defined by your plan for all Tier 1 through Tier 5 drugs regardless of whether your full deductible has been met.";
 		String TableData= TableData_2020;
-		if (dateStr.contains("2021") || MRScenario.environment.contains("stage"))
+		if (dateStr.contains("2021") && MRScenario.environment.contains("stage"))
 			TableData=TableData_2021;
 		if(preferedMail_DrugTable.getText().equals(TableData.toString())){
 			Assert.assertTrue("The data in the drug cost table is displaying correctly", true);

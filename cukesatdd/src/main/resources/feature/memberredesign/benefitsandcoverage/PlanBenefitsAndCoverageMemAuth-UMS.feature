@@ -449,7 +449,7 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth
 
     Examples: 
       | index | TID   |username |password  |MemUserName| planType | memberType | copayCategory | language | SummaryofBenefits   | EvidenceofCoverage   | ComprehensiveFormularyDrug List | name             | memberid     | effectivedate | monthlypremium | UpdatedLanguage | DisplayFlag |
-      | 15    | 15246 |qavgogine| qavgogine| q3_sep_UAT4_Group224|MAPD     | Group_BnC  | NON LIS       | ENGLISH  | Summary Of Benefits | Evidence of Coverage | Comprehensive Formulary         | EFADDB CDEEFFCDC | 978095497-00 | 01/01/2018    | Not Available  | Tier 2  | true        |
+      | 15    | 15246 |qavgogine| qavgogine| testMapdGrpUser01|MAPD     | Group_BnC  | NON LIS       | ENGLISH  | Summary Of Benefits | Evidence of Coverage | Comprehensive Formulary         | EFADDB CDEEFFCDC | 978095497-00 | 01/01/2018    | Not Available  | Tier 2  | true        |
 
   #TC24_Group NON LIS_PDP
   @memAuth_benefitsAndCoverage27 @CMPDPGroupNonLis @BnC_Part7_memAuth
@@ -803,7 +803,7 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth
     Examples: 
       | index | FID             |username |password  |MemUserName| planType   | memberType           | copayCategory | language | name         | memberid     | effectivedate | monthlypremium | extrahelp            | Identifier       | count | H-PBP    | rider  |
       | 22-c1 | F494433,F506320 |qavgogine| qavgogine|q3_unblockedHPBP_001| DSNP_MAPD  | Individual_CnS01_BnC | LIS 2         | ENGLISH  | DREENA KIMURA| 971949191-00 | 01/01/2020    | Not Available  | Extra Help Level : 2 | IndEffectiveAARP |     4 | H0624-001| NoRider|
-      | 23-c2 | F494433,F506320 |qavgogine| qavgogine|q3_unblockedHPBP_003| DSNP_MAPD  | Individual_CnS02_BnC | LIS 3         | ENGLISH  | EBER KRYSTEK| 903010063-00 | 01/01/2020    | Not Available  | Extra Help Level : 3 | IndEffectiveAARP |     4 | H2228-045| NoRider|
+      | 23-c2 | F494433,F506320 |qavgogine| qavgogine|q4_DSNP_019| DSNP_MAPD  | Individual_CnS02_BnC | LIS 3         | ENGLISH  | EBER KRYSTEK| 903010063-00 | 01/01/2020    | Not Available  | Extra Help Level : 3 | IndEffectiveAARP |     4 | H2228-045| NoRider|
     
     @memAuth_DSNP_CnS02
     Examples:       

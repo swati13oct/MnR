@@ -1020,7 +1020,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 		}	
 	}
 
-	@And("the MAPD NON-LIS group user should see drug cost table for Lis members")
+	@And("^the MAPD NON-LIS group user should see drug cost table for Lis members$")
 	public void user_validate_drugcosttableGroup_NONLIS() {
 		String dateStr=(String)getLoginScenario().getBean(BenefitsAndCoverageCommonConstants.TEST_DATE_STR);
 		System.out.println("***the MAPD NON-LIS group user should see drug cost table for Lis members***");
