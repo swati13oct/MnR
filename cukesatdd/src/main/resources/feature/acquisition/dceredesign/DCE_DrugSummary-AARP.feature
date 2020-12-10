@@ -569,7 +569,7 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
     @dCERedesign_ChangePharmacyModal_AARP
     Examples: 
       |site| drug1 | zipCode |message|zipCode1|zipCode2|
-      |AARP| Lipitor  |   90001 |There were no results found for the requested search. Broadening your search criteria (for example, changing the pharmacy type, search radius and/or your ZIP code) may help you get a different result.|96799|78456|
+      |AARP| Lipitor  |   90001 |There were no results found for the requested search.Broadening your search criteria (for example, changing the pharmacy type, search radius and/or your ZIP code) may help you get a different result.|96799|78456|
 
 		@dCERedesign_ChangePharmacyModal_UHC
  		Examples: 
