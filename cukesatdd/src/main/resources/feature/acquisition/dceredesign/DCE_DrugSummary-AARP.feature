@@ -68,10 +68,12 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
     And user should be navigated to Review drug cost estimate page
     And user verify the drug summary page
 
+		@DCE_DrugSummary_ValidatePage_AARP
     Examples: 
       |site| zipCode | plantype | county | isMultutiCounty | drug1 | planname                                           |
       |AARP|   10001 | MAPD     | none   | no              | Emsam | AARP Medicare Advantage SecureHorizons Focus (HMO) |
       
+      @DCE_DrugSummary_ValidatePage_UHC
       Examples: 
       |site| zipCode | plantype | county | isMultutiCounty | drug1 | planname                                           |
       |UHC|   10001 | MAPD     | none   | no              | Emsam | AARP Medicare Advantage SecureHorizons Focus (HMO) |
@@ -124,10 +126,12 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
     And user should be able to see Medicare Advantage plan by default
     And user should be able to toggle between plan types
 
+		@drugSummary_PlanToggle_AARP
     Examples: 
       |site| drug1 | zipCode |
       |AARP| Lipitor  |   90210 |
       
+      @drugSummary_PlanToggle_UHC
       Examples: 
       |site| drug1 | zipCode |
       |UHC| Lipitor  |   90210 |
@@ -170,7 +174,7 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
       |site| drug1 | zipCode | testPlans                                                                                       | pdptestPlans                    | snptestPlans                               |
       |UHC| Emsam    |   10001 | UnitedHealthcare Medicare Advantage Choice Plan 4 (Regional PPO) | AARP MedicareRx Preferred (PDP) | UnitedHealthcare Dual Complete (HMO D-SNP) |
 
-  @dCERedesign_ChangePharmacy_AARP @F426569
+  @dCERedesign_SummaryPage_ChangePharmacy @F426569
   Scenario Outline: Test to verify change pharmacy functionality
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
@@ -194,15 +198,17 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
     When user saves and updates pharmacy from list
     Then the pharmacy name should be updated on summary page
 
+		@dCERedesign_SummaryPage_ChangePharmacy_AARP
     Examples: 
       |site| drug1 | zipCode |
       |AARP| Lipitor  |   90001 |
       
+      @dCERedesign_SummaryPage_ChangePharmacy_UHC
       Examples: 
       |site| drug1 | zipCode |
       |UHC| Lipitor  |   90001 |
 
-  @dceRedesignSwitchToGenericDrug @F484185 @F495366
+  @drugSummaryPageSwitchToGenericDrug @F484185 @F495366
   Scenario Outline: Test to Verify that user can switch to generic drug when no drug covered
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
@@ -235,15 +241,17 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
     And user verify drug can switch to generic drug
       | DrugName | <drugName2> |
 
+		@drugSummaryPageSwitchToGenericDrug_AARP
     Examples: 
       |site| zipCode | drug1   | drug2     | drugName1                     | drugName2                    |
       |AARP|   10001 | Lipitor | Lopressor | atorvastatin calcium TAB 10MG | metoprolol tartrate TAB 50MG |
-      
+     
+     @drugSummaryPageSwitchToGenericDrug_UHC 
       Examples: 
       |site| zipCode | drug1   | drug2     | drugName1                     | drugName2                    |
       |UHC|   10001 | Lipitor | Lopressor | atorvastatin calcium TAB 10MG | metoprolol tartrate TAB 50MG |
 
-  @dCERedesign_ChangePharmacy_DetailsPage_AARP @F472598
+  @dCERedesign_ChangePharmacy_DetailsPage @F472598
   Scenario Outline: Test to verify change pharmacy functionality from Drug details page
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
@@ -268,10 +276,12 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
     When user saves and updates pharmacy from list on details page
     Then the pharmacy name should be updated on details page
 
+		@dCERedesign_ChangePharmacy_DetailsPage_AARP
     Examples: 
       |site| drug1 | zipCode |
       |AARP| Lipitor  |   90001 |
       
+      @dCERedesign_ChangePharmacy_DetailsPage_UHC
        Examples: 
       |site| drug1 | zipCode |
       |UHC| Lipitor  |   90001 |
@@ -294,19 +304,21 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
     #Then load screen should be displayed in AARP
     And user should be navigated to Review drug cost estimate page
     And user should be able to see Medicare Advantage plan by default
-    And user should verify the Extra help
+    And user should verify the Extra help on SNP plan type
     And user click on View Drug Pricing Modal
     And user should verify the drug extra qualification in drug pricing popup
 
+		@dceRedesignExtraHelpAlert_AARP
     Examples: 
       |site| zipCode | plantype | county | isMultutiCounty | drug1 | planname                                           |
       |AARP|   10001 | MAPD     | none   | no              | Lipitor    | AARP Medicare Advantage SecureHorizons Focus (HMO) |
-      
+     
+     @dceRedesignExtraHelpAlert_UHC 
       Examples: 
       |site| zipCode | plantype | county | isMultutiCounty | drug1 | planname                                           |
       |UHC|   10001 | MAPD     | none   | no              | Lipitor    | AARP Medicare Advantage SecureHorizons Focus (HMO) |
 
-  @dceNoDefaultMAPDplan @F492296 @F493728
+  @dceNoPharmaciesZipCode @F492296 @F493728
   Scenario Outline: Test to Verify that user can Handle Zip Codes with No Pharmacies Returned
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
@@ -324,10 +336,12 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
     And user should be able to see "Medicare Advantage Plans" by default
     And user should be able to toggle between plan types
     
+    @dceNoPharmaciesZipCode_AARP
     Examples: 
       |site| zipcode |drug1   |
       |AARP|   96799 |Orkambi |
       
+      @dceNoPharmaciesZipCode_UHC
       Examples: 
       |site| zipcode |drug1   |
       |UHC|   96799 |Orkambi |
@@ -389,10 +403,12 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
     And user should be able to see Medicare Advantage plan by default
     And verify DCE NBA is displayed on drug summary page
 
+		@dceNBADrugSummaryPage_AARP
     Examples: 
       |site| zipcode | county | isMultutiCounty | drug1   |
       |AARP|   10001 | none   | no              | Orkambi |
       
+      @dceNBADrugSummaryPage_UHC
       Examples: 
       |site| zipcode | county | isMultutiCounty | drug1   |
       |UHC|   10001 | none   | no              | Orkambi |
@@ -417,16 +433,18 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
     #Then load screen should be displayed in AARP
     And user should be navigated to Review drug cost estimate page
     And user should be able to see Medicare Advantage plan by default
-    And user should verify the Extra help
+    And user should verify the Extra help on SNP plan type
     And user click on View Drug Pricing Modal
     And user should verify the drug extra qualification in drug pricing popup
     And user should verify drug coverage and you pay value for not covered drug in drug pricing popup
    And user should verify drug coverage and you pay value for covered drug in drug pricing popup
 
+		@dcecovereduncoveredDrugSummayPage_AARP
     Examples: 
       |site| zipCode | plantype | county | isMultutiCounty | drug1 | drug2| planname                                           |
       |AARP|   10001 | MAPD     | none   | no              | Emsam   | Lipitor | AARP Medicare Advantage SecureHorizons Focus (HMO) |
      
+     @dcecovereduncoveredDrugSummayPage_UHC
    Examples: 
       |site| zipCode | plantype | county | isMultutiCounty | drug1 | drug2| planname                                           |
       |UHC|   10001 | MAPD     | none   | no              | Emsam   | Lipitor | AARP Medicare Advantage SecureHorizons Focus (HMO) |
@@ -457,10 +475,13 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
     And user click on View Drug Pricing Modal
     And user verify drug can switch to generic drug
       | DrugName | <drugName1> |
+      
+      @dceRedesignSwitchToGenericDrug_Summary_AARP
     Examples: 
       |site| zipCode | drug1   | drugName1                     | 
       |AARP|   10001 | Lipitor | atorvastatin calcium TAB 20MG |
       
+      @dceRedesignSwitchToGenericDrug_Summary_UHC
 		Examples: 
       |site| zipCode | drug1   | drugName1                     | 
       |UHC|   10001 | Lipitor | atorvastatin calcium TAB 20MG |
@@ -495,15 +516,17 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
     Then change pharmacy modal should be displayed
     And user verify change pharmacy modal
 
+		@dceRedesignNoPrescriptionChangePharmacy_AARP
     Examples: 
       |site| drug1    |drug2      | zipCode |
       |AARP| Emsam  |   Lipitor   |78006 |
       
+      @dceRedesignNoPrescriptionChangePharmacy_UHC
       Examples: 
       |site| drug1    |drug2      | zipCode |
       |UHC| Emsam  |   Lipitor   |78006 |
       
-      @dCERedesign_ChangePharmacyModal_AARP @F426569 @F535368 @decRelease
+      @dCERedesign_ChangePharmacyModal @F426569 @F535368 @decRelease
   Scenario Outline: Test to verify sort, pagination, invalid zipcode error functionality for change pharmacy on drug summary page
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
@@ -542,16 +565,19 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
     When user search with incorrect zipcode
     | ZipCode | <zipCode2> |
     Then error message "Please enter a valid ZIP code." should be displayed on change pharmacy modal
+    
+    @dCERedesign_ChangePharmacyModal_AARP
     Examples: 
       |site| drug1 | zipCode |message|zipCode1|zipCode2|
       |AARP| Lipitor  |   90001 |There were no results found for the requested search. Broadening your search criteria (for example, changing the pharmacy type, search radius and/or your ZIP code) may help you get a different result.|96799|78456|
 
+		@dCERedesign_ChangePharmacyModal_UHC
  		Examples: 
       |site| drug1 | zipCode |message|zipCode1|zipCode2|
       |UHC| Lipitor  |   90001 |There were no results found for the requested search.Broadening your search criteria (for example, changing the pharmacy type, search radius and/or your ZIP code) may help you get a different result.|96799|78456|
 
       
-      @dCERedesign_ChangePharmacyNoResults_AARP @F426569 @F489207 @decRelease
+      @dCERedesign_ChangePharmacyNoResults @F426569 @F489207 @decRelease
   Scenario Outline: Test to verify no results message displayed for change pharmacy modal on drug summary page
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
@@ -577,10 +603,12 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
     Then no results message should be displayed
     | NoResultsMessage | <message> |
     
+    @dCERedesign_ChangePharmacyNoResults_AARP
     Examples: 
       |site| drug1 | zipCode |message|zipCode1|
       |AARP| Lipitor  |   90001 |Prescription drug home delivery is available through OptumRx. Learn more about OptumRx Mail Order Pharmacy|78006|
       
+      @dCERedesign_ChangePharmacyNoResults_UHC
        Examples: 
       |site| drug1 | zipCode |message|zipCode1|
       |UHC| Lipitor  |   90001 |Prescription drug home delivery is available through OptumRx. Learn more about OptumRx Mail Order Pharmacy|78006|
@@ -645,12 +673,12 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
     Then user clicks on Keep Using This Pharmacy link on change pharmacy modal
     Then user validate "WALGREENS" pharmacy on drug summary page
 
-    @dceRetailChain_MAPD
+    @dceRedesignDefaultPharmacyDrugSummary_AARP
     Examples: 
       |site| zipCode | plantype | county       | isMultutiCounty | drug1     |defaultPharmacy|
       |AARP|   10001 | MAPD     | Bexar County | yes             | Lipitor |Retail Chain Pharmacy (Pricing is based off of a Preferred Pharmacy for applicable plans.)|
 
-      
+      @dceRedesignDefaultPharmacyDrugSummary_UHC
       Examples: 
       |site| zipCode | plantype | county       | isMultutiCounty | drug1     |defaultPharmacy|
       |UHC|   10001 | MAPD     | Bexar County | yes             | Lipitor |Retail Chain Pharmacy (Pricing is based off of a Preferred Pharmacy for applicable plans.)|

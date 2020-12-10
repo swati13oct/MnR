@@ -534,7 +534,7 @@ Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanDetails AARP - To test DCE - VPP Plan De
       | site | zipcode | plantype | county       | isMultutiCounty | drug1   | drug2   | planname                             |
       | UHC  |   78006 | MAPD     | Bexar County | yes             | Lipitor | orfadin | AARP Medicare Advantage Choice (PPO) |
 
-  @detailPageDefaultPharmacy @decRelease
+  @detailPageChangePharmacy @decRelease
   Scenario Outline: Test to verify default distance and zip code, miles dropdown for pharmacy from vpp detail page
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
@@ -596,12 +596,12 @@ Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanDetails AARP - To test DCE - VPP Plan De
     Then the user verify and edit the Pharmacy from vpp detail page
     Then user clicks on change pharmacy link from details page
 
-    @drugDetailschangePharmacyAARP
+    @editPharmacyFromVPPDetail_AARP
     Examples: 
       | site | zipcode | plantype | county | isMultutiCounty | drug1     | planyear | drug3      | drug4         | drug5            | drug6   | planname                                           |
       | AARP |   90210 | MAPD     | none   | no              | meloxicam | future   | febuxostat | buprenorphine | fentanyl citrate | Lipitor | AARP Medicare Advantage SecureHorizons Focus (HMO) |
 
-    @drugDetailschangePharmacyUHC
+    @editPharmacyFromVPPDetail_UHC
     Examples: 
       | site | zipcode | plantype | county       | isMultutiCounty | drug1   | planname                             | planyear |
       | UHC  |   78006 | MAPD     | Bexar County | yes             | Lipitor | AARP Medicare Advantage Choice (PPO) | future   |

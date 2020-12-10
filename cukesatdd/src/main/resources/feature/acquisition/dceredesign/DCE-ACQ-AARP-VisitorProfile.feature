@@ -66,9 +66,16 @@ Feature: 1.10.1 DCE-REDISIGN AARP - To test Acq Visitor Profile to NEW DCE Flows
       | Plan Type | <planType> |
       | Plan Name | <planName> |
     Then user should be able to see Return to profile link on details page
+    
+    @DCEShopperProfileAddDrugsGlobally_AARP
     Examples: 
       | drug1   | zipCode |site|drug2|planType|planName|
       | Orkambi | 80002 |AARP|Fanapt|MAPD|AARP Medicare Advantage SecureHorizons Plan 2 (HMO)|
+      
+      @DCEShopperProfileAddDrugsGlobally_UHC
+      Examples: 
+      | drug1   | zipCode |site|drug2|planType|planName|
+      | Orkambi | 80002 |UHC|Fanapt|MAPD|AARP Medicare Advantage SecureHorizons Plan 2 (HMO)|
       
       
       @DCEShopperProfileAddDrugsPlancard @decRelease
@@ -104,9 +111,16 @@ Feature: 1.10.1 DCE-REDISIGN AARP - To test Acq Visitor Profile to NEW DCE Flows
       | DrugName | <drug2> |
     And clicks on Review drug cost button
     Then user should be able to see Return to profile link on details page
+    
+    @DCEShopperProfileAddDrugsPlancard_AARP
     Examples: 
       |site| drug1   | drug2|plantype|testPlans|zipcode | isMultiCounty | county|    
       |AARP| Orkambi | Fanapt|MAPD|AARP Medicare Advantage Plan 1 (HMO),AARP Medicare Advantage Plan 2 (HMO)|10001 | NO            | New York County|
+      
+      @DCEShopperProfileAddDrugsPlancard_UHC
+      Examples: 
+      |site| drug1   | drug2|plantype|testPlans|zipcode | isMultiCounty | county|    
+      |UHC| Orkambi | Fanapt|MAPD|AARP Medicare Advantage Plan 1 (HMO),AARP Medicare Advantage Plan 2 (HMO)|10001 | NO            | New York County|
       
       
       @DCEShopperProfileAddDrugsGloballyAuthenticatedUser @decRelease
@@ -147,6 +161,13 @@ Feature: 1.10.1 DCE-REDISIGN AARP - To test Acq Visitor Profile to NEW DCE Flows
       | Plan Type | <planType> |
       | Plan Name | <planName> |
     Then user should be able to see Return to profile link on details page
+    
+    @DCEShopperProfileAddDrugsGloballyAuthenticatedUser_AARP
     Examples: 
       |site| drug1   | zipCode |drug2|planType|planName|userName| password|
       |AARP| Orkambi | 80002 |Fanapt|MAPD|AARP Medicare Advantage SecureHorizons Plan 2 (HMO)|jarvisstage23111 | Password@15 |
+      
+      @DCEShopperProfileAddDrugsGloballyAuthenticatedUser_UHC
+      Examples: 
+      |site| drug1   | zipCode |drug2|planType|planName|userName| password|
+      |UHC| Orkambi | 80002 |Fanapt|MAPD|AARP Medicare Advantage SecureHorizons Plan 2 (HMO)|jarvisstage23111 | Password@15 |

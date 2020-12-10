@@ -15,7 +15,7 @@ import cucumber.api.CucumberOptions;
 @ExtendedCucumberOptions(retryCount=1,screenShotSize="", screenShotLocation="/screenshots/",jsonReport = "target/cucumber-RunMRATDDAcqDCEDrugSummaryPageUHC.json",detailedReport = true,
  detailedAggregatedReport = true, overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDAcqDCEDrugSummaryPageUHC")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.acquisition" }, features = { "src/main/resources/feature/acquisition" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcqDCEDrugSummaryPageUHC.json" }, tags = { " @drugSummary_PlanToggle_UHC" })
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcqDCEDrugSummaryPageUHC.json" }, tags = { " @DCE_DrugSummary_ValidatePage_UHC,@drugSummary_PlanToggle_UHC,@dcecovereduncoveredDrugSummayPage_UHC,@dceRedesignExtraHelpAlert_UHC" })
 
 public class RunMRATDDAcqDCEDrugSummaryPageUHC {
 

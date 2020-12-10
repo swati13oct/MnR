@@ -359,7 +359,7 @@ public class DCEStepDefinitionAARP {
 	 * buildDrugList); buildDrugList.addDrugs(drugName); }
 	 */
 
-	@When("^user should verify the Extra help$")
+	@When("^user should verify the Extra help on SNP plan type$")
 	public void user_should_verify_the_Extra_help_in_AARP() {
 		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
 		drugSummaryPage.clickOnSNPPlan();
