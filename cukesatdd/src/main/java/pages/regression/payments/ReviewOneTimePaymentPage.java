@@ -15,7 +15,7 @@ import com.itextpdf.text.log.SysoCounter;
 
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
-
+import pages.regression.payments.ConfirmOneTimePaymentPage;
 /**
  * @author pperugu
  *
@@ -34,6 +34,9 @@ public class ReviewOneTimePaymentPage extends UhcDriver {
 	@FindBy(id = "termsAgree")
 	private WebElement AgreeCheckBox;
 
+	@FindBy(id = "saveCCInFile")
+	private WebElement saveCardCheckbox;
+	
 	@FindBy(id = "custom-page-title")
 	private WebElement confirmPageHeader;
 
@@ -84,6 +87,36 @@ public class ReviewOneTimePaymentPage extends UhcDriver {
 		}
 	}
 
+	public ConfirmOneTimePaymentPage selectAgreeSelectSaveCardAndClickOnMakePayment() {
+		validate(ChangeCard);
+		System.out.println("User is on Review one Time CC Page");
+		PaymentsDataVerificationonReviewPage();
+		jsClickNew(saveCardCheckbox);
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		jsClickNew(AgreeCheckBox);
+		ContinueButton.click();
+		try {
+			Thread.sleep(20000);
+			System.out.println(driver.getCurrentUrl());
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		if (driver.getTitle().contains("One-Time Payment Submitted")) {
+			System.out.println("User is on Confirmation Page");
+			return new ConfirmOneTimePaymentPage(driver);
+		} else {
+
+			System.out.println("User is not on Confirmation Page");
+			return null;
+		}
+			
+		}
+	
 	@Override
 	public void openAndValidate() {
 		validate(ChangeCard);
