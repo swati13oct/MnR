@@ -232,10 +232,10 @@ public class AepVppPlanSummaryPage extends UhcDriver {
 			rowXpath = planCard+"//ul[contains(@class,'benefits-table')]//li";
 		
 		List<WebElement> listOfRowsPerTable=driver.findElements(By.xpath(rowXpath));
-		WebElement headerPremium = driver.findElement(By.xpath(headerPremiumXpath));
+		List<WebElement> headerPremium = driver.findElements(By.xpath(headerPremiumXpath));
 		String key = "";
 		String headerPrem = "header premium"; //this variable will be stored as key for the header premium
-		String headerPremiumText = headerPremium.getText(); //this variable will be stored as value for the header premium value
+		String headerPremiumText = headerPremium.get(0).getText(); //this variable will be stored as value for the header premium value
 		result.put(headerPrem, headerPremiumText);
 		
 		for(int rowIndex=1; rowIndex<=listOfRowsPerTable.size(); rowIndex++) { //note: loop through each row
