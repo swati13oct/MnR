@@ -1534,7 +1534,10 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 			validateNew(pharmacyDropdownTexas);
 	}
 
-	public void validateRetailCostSharingdrugtable(String memberType, String dateStr) {
+	public List<String> validateRetailCostSharingdrugtable(String memberType, String dateStr) {
+		List<String> testNote=new ArrayList<String>();
+		String type="PDP GROUP (ERS) NON-LIS";
+		String tblName="Retail Cost Sharing";
 		if (!(dateStr.contains("2021") && memberType.toLowerCase().contains("group"))) {
 			Select drpPharmacy = new Select(pharmacyDropdownTexas);
 			drpPharmacy.selectByValue("Retail Cost Sharing");
@@ -1565,14 +1568,35 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 		String TableDate_2021="Annual Prescription Deductible Initial Coverage Stage Coverage Gap Stage Catastrophic Coverage Stage\n"
 				+"30-day supply (non-maintenance drugs) 30-day supply (maintenance drugs*) 31- to 60-day supply** 61- to 90-day supply**\n"
 				+"Tier 1\n"
+				+"You pay 100% of costs until $50 deductible is met*\n"
+				+"$10 copay\n"
+				+"$10 copay\n"
+				+"$20 copay\n"
+				+"$30 copay\n"
+				+"After your total drug costs reach $4,020, the plan covers all formulary drugs through the coverage gap at the same copays listed under the Initial Coverage Stage\n"
+				+"When your out-of-pocket costs reach the $6,350 limit for the plan year, you move to the Catastrophic Coverage Stage.  In this stage, you will continue to pay the same cost share that you paid in the Initial Coverage Stage.\n"
+				+"The catastrophic coverage will go toward Part D covered medications.\n"
 				+"Tier 2\n"
-				+"Tier 3";
+				+"$35 copay\n"
+				+"$45 copay\n"
+				+"$70 copay\n"
+				+"$105 copay\n"
+				+"Tier 3\n"
+				+"$60 copay\n"
+				+"$75 copay\n"
+				+"$120 copay\n"
+				+"$180 copay";
+
 		String TableData=TableData_2020;
-		if (dateStr.contains("2021"))
+		if (dateStr.contains("2021")) {
 			TableData=TableDate_2021;
+		}
 		
 		System.out.println("Expected table  is >>>>>>>>>>>>>"+"\n"+TableData.toString());
 		System.out.println("Actual table value is >>>>>>>>>> "+"\n"+retailTable.getText());
+
+		System.out.println("FootNote  is >>>>>>>>>>>>>"+"\n"+TableData.toString());
+		System.out.println("Actual FootNote is >>>>>>>>>> "+"\n"+retailTable.getText());
 
 		if(retailTable.getText().equals(TableData.toString())){
 			Assert.assertTrue("The data in the drug cost table is displaying correctly", true);
@@ -1580,8 +1604,14 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 		}
 		else{
 			System.err.println("The data in the drug cost table is not displaying correctly");
-			Assert.fail("The data in the drug cost table is not displaying correctly");
+			//tbd Assert.fail("The data in the drug cost table is not displaying correctly");
+			testNote.add("The data in the drug cost table is not displaying correctly. table='"+tblName+"' | type='"+type+"'");
+			testNote.add("\n>>>>>>>>>>>>>The Expected Table  value is<<<<<<<<<<<<<<<<< \n"+TableData.toString());
+			testNote.add("\n>>>>>>>>>>>>>The Actual Table value is<<<<<<<<<<<<<<<<<<<< \n"+retailTable.getText());
+
 		}
+		
+		return testNote;
 	}
 
 
@@ -2557,10 +2587,10 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 				+"$3.00\n"
 				+"Your share of the cost for a covered drug will be either coinsurance or a copayment whichever is the larger amount:\n"
 				+"-either- coinsurance of 5% of the cost of the drug\n"
-				+"-or- $3.40 for a generic drug or a drug that is treated like a generic and $8.50 for all other drugs.\n"
+				+"-or- $3.70 for a generic drug or a drug that is treated like a generic and $9.20 for all other drugs.\n"
 				+"Tier 2 \n"
 				+"$28.00\n"
-				+"You pay 37% of the total cost for generic drugs and 25% of the cost (plus a portion of the dispensing fee) for brand name drugs.\n"
+				+"You pay 25% of the total cost for generic drugs and 25% of the cost (plus a portion of the dispensing fee) for brand name drugs.\n"
 				+"Tier 3 \n"
 				+"$55.00\n"
 				+"Tier 4 \n"
@@ -5309,7 +5339,7 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 				+"-or- $3.70 for a generic drug or a drug that is treated like a generic and $9.20 for all other drugs.\n"
 				+"Tier 2\n"
 				+"$0.00\n"
-				+"$0.00\n"
+				+"no more than 25% for generic drugs or 25% for brand name drugs\n"
 				+"Select Insulin Drugs\n"
 				+"$95.00\n"
 				+"$95.00\n"
@@ -5512,7 +5542,7 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 				+"no more than 25% for generic drugs or 25% for brand name drugs\n"
 				+"Your share of the cost for a covered drug will be either coinsurance or a copayment whichever is the larger amount:\n"
 				+"-either- coinsurance of 5% of the cost of the drug\n"
-				+"-or- $3.60 for a generic drug or a drug that is treated like a generic and $8.95 for all other drugs.\n"
+				+"-or- $3.70 for a generic drug or a drug that is treated like a generic and $9.20 for all other drugs.\n"
 				+"Tier 2\n"
 				+"25%\n"
 				+"no more than 25% for generic drugs or 25% for brand name drugs\n"

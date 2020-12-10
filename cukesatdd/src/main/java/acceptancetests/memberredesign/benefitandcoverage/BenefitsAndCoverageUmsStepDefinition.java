@@ -1869,7 +1869,11 @@ public class BenefitsAndCoverageUmsStepDefinition {
 		BenefitsAndCoveragePage planBenefitsCoverage = (BenefitsAndCoveragePage) getLoginScenario()
 				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
 		String memberType=(String) getLoginScenario().getBean(LoginCommonConstants.CATOGERY);
-		planBenefitsCoverage.validateRetailCostSharingdrugtable(memberType, dateStr);
+		List<String> testNote=planBenefitsCoverage.validateRetailCostSharingdrugtable(memberType, dateStr);
+		if (testNote.size()>0) {
+			getLoginScenario().saveBean(BenefitsAndCoverageCommonConstants.TEST_RESULT_NOTE, testNote);
+			Assert.fail(testNote.get(0));
+		}
 
 	}
 	@And("the user verifies the Mail Order Cost sharing table")
