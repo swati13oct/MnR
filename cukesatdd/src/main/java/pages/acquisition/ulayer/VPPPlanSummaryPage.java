@@ -4440,7 +4440,8 @@ for (int i = 0; i < initialCount + 1; i++) {
 		
 	public void clickEnrollPlanBtnOnSelectPlanModal() {
 		validateNew(enrollInPlanBtn);
-		enrollInPlanBtn.click();
+//		enrollInPlanBtn.click();
+		jsClickNew(enrollInPlanBtn);
 	}
 	public void validateNavigatedToOle() {
 		if(driver.getCurrentUrl().contains("welcome")) {
