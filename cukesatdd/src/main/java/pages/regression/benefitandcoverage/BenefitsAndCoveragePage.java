@@ -340,7 +340,6 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 
 	public void validategrouplookupdrugsbutton() 
 	{
-		//tbd sleepBySec(10);
 		validateNew(LookUpDrugsButton,0);
 		String expHref="/sso/outbound?outboundTo=optumrx&deepLink=rxpricingtool";
 		String actHref=LookUpDrugsButton.getAttribute("href");
@@ -356,15 +355,17 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 			ArrayList<String> afterClick_tabNum = new ArrayList<String>(driver.getWindowHandles());
 			Assert.assertTrue("PROBLEM - 'DRUG LOOKUP' (for group case) should open new tab after click.  TabNumber before click='"+beforeClick_tabNum.size()+"' | After click='"+afterClick_tabNum.size()+"'", afterClick_tabNum.size() > beforeClick_tabNum.size());
 			driver.switchTo().window(afterClick_tabNum.get(afterClick_tabNum.size()-1));
-			if (MRScenario.environment.contains("stage")) { //note: online-stage not all test user setup w/ sso access
+			if (MRScenario.environment.contains("stage")) { 
+				//note: online-stage not all test user setup w/ sso access, include the error msg as one of the possibility
 				Assert.assertTrue("PROBLEM - not getting expected element on '"+MRScenario.environment+"' env.", 
 						validate(ssoErrMsg_stage,0) 
 						|| validate(ssoSearchBox,0) 
 						|| validate(medicineCabinetDrugSearchBtn,0) 
 						|| validate(hsidPersonInfoContBtn,0));
 			} else if (MRScenario.environment.equals("offline") || MRScenario.environment.equals("prod")) {
-				if (validate(ssoSurveyX,0))
+				if (validate(ssoSurveyX,0))   //note: handle the sso page survey if needed
 					ssoSurveyX.click();
+				//note: should not get error for prod env
 				Assert.assertTrue("PROBLEM - not getting expected element on '"+MRScenario.environment+"' env",  
 						validate(ssoSearchBox,0) 
 						|| validate(medicineCabinetDrugSearchBtn,0)
