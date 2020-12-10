@@ -1211,7 +1211,8 @@ public class BenefitsAndCoverageWebElements extends UhcDriver {
 	@FindBy(xpath="//h1[contains(text(),'Quick actions')]")
 	protected WebElement medicineCabinetDrugSearchBtn;
 	
-
+	@FindBy(xpath="//button[@id='step1Btn']")
+	protected WebElement hsidPersonInfoContBtn;
 	
 	
 	public BenefitsAndCoverageWebElements(WebDriver driver) {

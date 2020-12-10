@@ -357,11 +357,18 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 			Assert.assertTrue("PROBLEM - 'DRUG LOOKUP' (for group case) should open new tab after click.  TabNumber before click='"+beforeClick_tabNum.size()+"' | After click='"+afterClick_tabNum.size()+"'", afterClick_tabNum.size() > beforeClick_tabNum.size());
 			driver.switchTo().window(afterClick_tabNum.get(afterClick_tabNum.size()-1));
 			if (MRScenario.environment.contains("stage")) { //note: online-stage not all test user setup w/ sso access
-				Assert.assertTrue("PROBLEM - not getting expected element on '"+MRScenario.environment+"' env.", validate(ssoErrMsg_stage,0) || validate(ssoSearchBox,0) || validate(medicineCabinetDrugSearchBtn,0));
+				Assert.assertTrue("PROBLEM - not getting expected element on '"+MRScenario.environment+"' env.", 
+						validate(ssoErrMsg_stage,0) 
+						|| validate(ssoSearchBox,0) 
+						|| validate(medicineCabinetDrugSearchBtn,0) 
+						|| validate(hsidPersonInfoContBtn,0));
 			} else if (MRScenario.environment.equals("offline") || MRScenario.environment.equals("prod")) {
 				if (validate(ssoSurveyX,0))
 					ssoSurveyX.click();
-				Assert.assertTrue("PROBLEM - not getting expected element on '"+MRScenario.environment+"' env",  validate(ssoSearchBox,0) || validate(medicineCabinetDrugSearchBtn,0));
+				Assert.assertTrue("PROBLEM - not getting expected element on '"+MRScenario.environment+"' env",  
+						validate(ssoSearchBox,0) 
+						|| validate(medicineCabinetDrugSearchBtn,0)
+						|| validate(hsidPersonInfoContBtn,0));
 			}
 			//note: go back to the benefits page
 			if(afterClick_tabNum.size() == (2)) {
