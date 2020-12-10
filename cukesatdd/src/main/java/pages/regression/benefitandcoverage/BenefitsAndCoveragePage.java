@@ -363,7 +363,6 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 					ssoSurveyX.click();
 				Assert.assertTrue("PROBLEM - not getting expected element on '"+MRScenario.environment+"' env",  validate(ssoSearchBox,0) || validate(medicineCabinetDrugSearchBtn,0));
 			}
-			sleepBySec(1);
 			//note: go back to the benefits page
 			if(afterClick_tabNum.size() == (2)) {
 				driver.switchTo().window(afterClick_tabNum.get(0));
@@ -371,8 +370,6 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 				driver.switchTo().window(afterClick_tabNum.get(1));
 			}
 		}
-		
-
 	}
 
 	/**
