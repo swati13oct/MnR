@@ -934,4 +934,10 @@ public class PlanRecommendationEngineStepDefinition {
 		priorities.continuePriority();
 	}
 
+	@Then("^user validate elements in priorities page$")
+	public void user_validate_prioritiesElements() {
+		PlanRecommendationEnginePrioritiesPage priorities =  new PlanRecommendationEnginePrioritiesPage(wd);
+		priorities.prioritiesElements();
+	}
+
 }

@@ -63,7 +63,7 @@ public class PlanRecommendationEnginePrioritiesPage extends UhcDriver {
 	
 	public HashMap<String, String> inputValues;
 	
-	public void priorities() {
+	public void prioritiesElements() {
 		System.out.println("Validating Priorities Page: ");
 		String currentPageUrl = driver.getCurrentUrl();
 		currentPageUrl.contains("/plan-recommendation-engine.html/");
@@ -113,7 +113,7 @@ public class PlanRecommendationEnginePrioritiesPage extends UhcDriver {
 			priorityOptions(false,value.split(",")[1]);
 		}
 		else {
-			
+			System.out.println("Not selecting Priorities");
 		}
 	}
 	
