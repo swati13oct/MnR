@@ -28,18 +28,18 @@ Feature: 1.12.2 Member Rally claims - Member Auth - PROD
     @prod_rallyClaims01_ma
     Examples: 
       | TID   | username   | password  | MemUserName  | planType | memberType          | claimSystem    |
-      | 15234 | kkumard   | tnps459#  | haradaty32   | MA       | UHC_Individual      | COSMOS_CLAIMS   |
+      | 15234 | kkumard    | tnps459#  | ssmhi1       | MA       | UHC_Individual      | COSMOS_CLAIMS   |
       
    @prod_rallyClaims01_ma             @claims_prodsanityMA_Group
      Examples: 
       | TID   | username   | password  | MemUserName  | planType | memberType          | claimSystem     |
-      | xxxxx | kkumard   | tnps459#  | ExDesertrat    | MA       | UHC_GROUP           | COSMOS_CLAIMS   | 
+      | xxxxx | kkumard    | tnps459#  | ExDesertrat  | MA       | UHC_GROUP           | COSMOS_CLAIMS   | 
    
 
     @prod_rallyClaims01_medica_pcp          @claims_prodsanityPcp
     Examples: 
-      | TID   | username   | password  | MemUserName  | planType | memberType          | claimSystem     | 
-      | 15268 | kkumard   | tnps459#  | BATLLOT@AOL.COM | PCP   | Individual          | COSMOS_CLAIMS   | 
+      | TID   | username   | password  | MemUserName        | planType | memberType          | claimSystem     | 
+      | 15268 | kkumard    | tnps459#  | SOFYABAKMAN@MSN.COM| PCP   | Individual          | COSMOS_CLAIMS   | 
 
     @prod_rallyClaims01_mapd
     Examples: 
@@ -54,7 +54,7 @@ Feature: 1.12.2 Member Rally claims - Member Auth - PROD
     @prod_rallyClaims01_ship @claims_prodsanityShip
     Examples: 
       | TID   | username   | password  | MemUserName  | planType | memberType          | claimSystem     | 
-      | 15236 | kkumard   | tnps459#  | vernajohnson19651  | SHIP     | Individual          | COMPASS_CLAIMS  | 
+      | 15236 | kkumard   | tnps459#  | tntparents82  | SHIP     | Individual          | COMPASS_CLAIMS  | 
 
     @prod_rallyClaims01_pdp
     Examples: 
