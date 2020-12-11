@@ -103,7 +103,8 @@ Feature: 1.04.1.1 To Test NON-DREAM EOB for Members - E2E - Member Auth - PROD
     @prod_SHIP_EOBs @prod_SHIP_EOBs3_shipComboShipFed
     Examples: 
       | index | username  | password  | MemUserName            | planType                 | memberType              | eobType | realEob | flagZeroEob |
-      | 13    | kkumard   | tnps459#  | phleauxdailles43       | SHIP_HOSPITAL INDEMNITY  | COMBO_SHIP_MA_NICE_DEOB | Medical | true    | false   | 
+    #x| 13    | kkumard   | tnps459#  | phleauxdailles43       | SHIP_HOSPITAL INDEMNITY  | COMBO_SHIP_MA_NICE_DEOB | Medical | true    | false   | 
+      | 13    | kkumard   | tnps459#  | VirginiaRuth1936       | SHIP_HOSPITAL INDEMNITY  | COMBO_SHIP_MA_NICE_DEOB | Medical | true    | false   | 
 
     @prod_SHIP_EOBs @prod_SHIP_EOBs4_shipComboFedShip
     Examples: 

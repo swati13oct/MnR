@@ -53,17 +53,17 @@ Feature: 1.06.1.2 Member Plans and Documents - section: Plan Materials - Member 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | pm_sd | pm_op | pm_mi | pm_en | pm_es | pm_zh |
 #      | 06-025 | xxxxx       | kkumard  | tnps459#  | testusername    | MA       | IND_TERM_PDnR         | true  | false | true  | true  | true  | false |
 #      | 07-026 | xxxxx       | kkumard  | tnps459#  | testusername    | MA       | GROUP_TERM_PDnR       | true  | false | true  | true  | false | false |
-      | 08-027 | xxxxx       | kkumard  | tnps459#  | BEVERLY_BOB5    | MAPD     | IND_TERM_PDnR         | true  | false | true  | false | false | false |
+      | 08-027 | xxxxx       | kkumard  | tnps459#  | SWHITE33436    | MAPD     | IND_TERM_PDnR         | true  | false | true  | false | false | false |
 
 	@prod_active_ma @prod_active_ma_ind
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | pm_sd | pm_op | pm_mi | pm_en | pm_es | pm_zh |
-      | 09-028 | 15129       | kkumard   | tnps459#  | haradaty32 | MA       | AARP_IND_EFF_PDnR     | true  | true  | true  | true  | true  | false | 
+      | 09-028 | 15129       | kkumard   | tnps459#  | ssmhi1 | MA       | AARP_IND_EFF_PDnR     | true  | true  | true  | true  | true  | false | 
 
 	@prod_active_ma @prod_active_ma_grp
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | pm_sd | pm_op | pm_mi | pm_en | pm_es | pm_zh |
-      | 10-029 | 15130       | kkumard  | tnps459#  | 1GIRL4DEAN    | MA       | GROUP_EFF_PDnR        | true  | true  | true  | true  | false | false |
+      | 10-029 | 15130       | kkumard  | tnps459#  | ExDesertrat    | MA       | GROUP_EFF_PDnR        | true  | true  | true  | true  | false | false |
 #      | 10-029 | 15130       | kkumard  | tnps459#  | SPENCEPR1    | MA       | NICE_GROUP_EFF_PDnR        | true  | true  | true  | true  | false | false |
  
 	@prod_active_mapd @prod_active_mapd_ind
@@ -81,17 +81,17 @@ Feature: 1.06.1.2 Member Plans and Documents - section: Plan Materials - Member 
 	@prod_active_pcp
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | pm_sd | pm_op | pm_mi | pm_en | pm_es | pm_zh |
-      | 14-033 | 15128       | kkumard  | tnps459#  | BATLLOT@AOL.COM    | PCP      | IND_EFF_PDnR          | true  | true  | true  | true  | true  | false |
+      | 14-033 | 15128       | kkumard  | tnps459#  | SOFYABAKMAN@MSN.COM    | PCP      | IND_EFF_PDnR          | true  | true  | true  | true  | true  | false |
 
 	@prod_active_medica
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | pm_sd | pm_op | pm_mi | pm_en | pm_es | pm_zh |
-      | 15-034 | 15128       | kkumard  | tnps459#  | SUSICHAPMAN@GMAIL.COM    | MEDICA   | IND_EFF_PDnR          | true  | true  | true  | true  | true  | false |
+      | 15-034 | 15128       | kkumard  | tnps459#  | TCZUNIGA52    | MEDICA   | IND_EFF_PDnR          | true  | true  | true  | true  | true  | false |
 
 	@prod_active_pdp @prod_active_pdp_ind
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | pm_sd | pm_op | pm_mi | pm_en | pm_es | pm_zh |
-      | 16-035 | 15126,15127 | kkumard  | tnps459#  | nawal1215    | PDP      | AARP_IND_EFF_PDnR     | true  | true  | true  | true  | true  | false |
+      | 16-035 | 15126,15127 | kkumard  | tnps459#  | PWINSAUER51    | PDP      | AARP_IND_EFF_PDnR     | true  | true  | true  | true  | true  | false |
 
 	@prod_active_pdp @prod_active_pdp_grp
 	Examples: 

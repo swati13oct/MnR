@@ -55,18 +55,18 @@ Feature: 1.06.4.2 Member Plans and Documents - section: Annual Notice of Changes
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | an_sd | an_en_cy | an_es_cy | an_zh_cy | an_en_ny | an_es_ny | an_zh_ny |
 #     | 06-063 | xxxxx       | kkumard   | tnps459#  | testusername    | MA       | IND_TERM_PDnR         | false | false    | false    | false    | false    | false    | false    |
 #     | 07-064 | xxxxx       | kkumard   | tnps459#  | testusername    | MA       | GROUP_TERM_PDnR       | false | false    | false    | false    | false    | false    | false    |
-      | 08-065 | xxxxx       | kkumard   | tnps459#  | BEVERLY_BOB5    | MAPD     | IND_TERM_PDnR         | false | false    | false    | false    | false    | false    | false    |
+      | 08-065 | xxxxx       | kkumard   | tnps459#  | SWHITE33436    | MAPD     | IND_TERM_PDnR         | false | false    | false    | false    | false    | false    | false    |
 
 
 	@prod_active_ma @prod_active_ma_ind
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | an_sd | an_en_cy | an_es_cy | an_zh_cy | an_en_ny | an_es_ny | an_zh_ny |
-      | 09-066 | 15129       | kkumard   | tnps459#  | haradaty32      | MA       | AARP_IND_EFF_PDnR     | true  | true     | true     | false    | true     | true     | false    |
+      | 09-066 | 15129       | kkumard   | tnps459#  | ssmhi1      | MA       | AARP_IND_EFF_PDnR     | true  | true     | true     | false    | true     | true     | false    |
 
 	@prod_active_ma @prod_active_ma_grp
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | an_sd | an_en_cy | an_es_cy | an_zh_cy | an_en_ny | an_es_ny | an_zh_ny |
-      | 10-067 | 15130       | kkumard   | tnps459#  | 1GIRL4DEAN      | MA       | GROUP_EFF_PDnR        | true  | true     | false    | false    | true     | false    | false    |
+      | 10-067 | 15130       | kkumard   | tnps459#  | ExDesertrat      | MA       | GROUP_EFF_PDnR        | true  | true     | false    | false    | true     | false    | false    |
 #     | 10-067 | 15130       | kkumard   | tnps459#  | SPENCEPR1       | MA       | NICE_GROUP_EFF_PDnR   | true  | true     | false    | false    | false    | false    | false    |
 
 	@prod_active_mapd @prod_active_mapd_ind
@@ -84,17 +84,17 @@ Feature: 1.06.4.2 Member Plans and Documents - section: Annual Notice of Changes
 	@prod_active_pcp
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | an_sd | an_en_cy | an_es_cy | an_zh_cy | an_en_ny | an_es_ny | an_zh_ny |
-      | 14-071 | 15128       | kkumard   | tnps459#  | BATLLOT@AOL.COM    | PCP      | IND_EFF_PDnR       | true  | true     | true     | false    | true     | true     | false    |
+      | 14-071 | 15128       | kkumard   | tnps459#  | SOFYABAKMAN@MSN.COM    | PCP      | IND_EFF_PDnR       | true  | true     | true     | false    | true     | true     | false    |
 
 	@prod_active_medica
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | an_sd | an_en_cy | an_es_cy | an_zh_cy | an_en_ny | an_es_ny | an_zh_ny |
-      | 15-072 | 15128       | kkumard   | tnps459#  | SUSICHAPMAN@GMAIL.COM    | MEDICA   | IND_EFF_PDnR | true  | true     | true     | false    | true     | true     | false    |
+      | 15-072 | 15128       | kkumard   | tnps459#  | TCZUNIGA52    | MEDICA   | IND_EFF_PDnR | true  | true     | true     | false    | true     | true     | false    |
 
 	@prod_active_pdp @prod_active_pdp_ind
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | an_sd | an_en_cy | an_es_cy | an_zh_cy | an_en_ny | an_es_ny | an_zh_ny |
-      | 16-073 | 15126,15127 | kkumard   | tnps459#  | nawal1215       | PDP      | AARP_IND_EFF_PDnR     | true  | true     | true     | false    | true     | true     | false    |
+      | 16-073 | 15126,15127 | kkumard   | tnps459#  | PWINSAUER51       | PDP      | AARP_IND_EFF_PDnR     | true  | true     | true     | false    | true     | true     | false    |
 
 	@prod_active_pdp @prod_active_pdp_grp
 	Examples: 

@@ -129,7 +129,8 @@ Feature: 1.04.2.2 To Test DREAM EOB for Members - E2E - Member Auth - PROD
     Examples: 
       | index | username  | password  | MemUserName             | planType | memberType              | flagZeroEob |
 #     | 07    | kkumard   | tnps459#  | testuserTBD             | PDP      | COMBO_SHIP_PDP_RX_DEOB  | true        |  
-      | 08    | kkumard   | tnps459#  | phleauxdailles43        | MA       | COMBO_SHIP_MA_NICE_DEOB | true        | 
+    #x| 08    | kkumard   | tnps459#  | phleauxdailles43        | MA       | COMBO_SHIP_MA_NICE_DEOB | true        | 
+      | 08    | kkumard   | tnps459#  | VirginiaRuth1936        | MA       | COMBO_SHIP_MA_NICE_DEOB | true        | 
 
     @prod_dreamEob01g_pdpComboPdpSsp
     Examples: 
