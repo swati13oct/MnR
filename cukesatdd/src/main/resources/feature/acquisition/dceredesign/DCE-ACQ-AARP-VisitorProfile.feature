@@ -174,7 +174,7 @@ Feature: 1.10.1 DCE-REDISIGN AARP - To test Acq Visitor Profile to NEW DCE Flows
       
       
       @drugSummary_DefaultPlanType @F504721
-  Scenario Outline: To verify default plan type on drug summary page when there are no MAPD plans available
+  Scenario Outline: To verify default plan type on drug summary page when there are no MAPD plans available from visitor profile page
     Given the user is on medicare acquisition site landing page
     		|Site| <site>|
     And the user clicks on the shopping cart icon
@@ -198,3 +198,29 @@ Feature: 1.10.1 DCE-REDISIGN AARP - To test Acq Visitor Profile to NEW DCE Flows
     Examples: 
       | drug1   | zipCode |site|
       | Orkambi | 40701 |UHC|
+      
+      @drugSummary_DefaultPlanType @F504721
+  Scenario Outline: To verify default plan type on drug summary page when there are MAPD plans available from visitor profile page
+    Given the user is on medicare acquisition site landing page
+    		|Site| <site>|
+    And the user clicks on the shopping cart icon
+    And the user clicks on the add drugs button to navigate to DCE Redesign on the profile page
+    Then the user validates Get Started Page
+    Then the user clicks on Build Drug List to navigate to Build Drug List Page
+    Then the user searches and adds the following Drug to Drug List
+      | DrugName | <drug1> |
+    Then the user clicks on Review Drug Costs to Land on Zip Entry Page
+    When user enters valid zipcode and county
+      | ZipCode | <zipCode> |
+    And user clicks on continue button in Zip Entry Page
+		Then user should be able to see "Medicare Advantage Plans" by default
+		
+		@drugSummary_DefaultPlanType_AARP
+    Examples: 
+      | drug1   | zipCode |site|
+      | Orkambi | 90210 |AARP|
+      
+      @drugSummary_DefaultPlanType_UHC
+    Examples: 
+      | drug1   | zipCode |site|
+      | Orkambi | 90210 |UHC|

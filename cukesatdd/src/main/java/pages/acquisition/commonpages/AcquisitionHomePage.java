@@ -562,6 +562,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			} else {
 				startNew(UMS_ACQISITION_PAGE_URL);
 				testSiteUrl=UMS_ACQISITION_PAGE_URL;
+				checkForSecurityPage();
 				checkModelPopup(driver,10);
 			}
 			
