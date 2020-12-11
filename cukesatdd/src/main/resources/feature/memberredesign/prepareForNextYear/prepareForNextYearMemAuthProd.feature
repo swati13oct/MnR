@@ -102,17 +102,17 @@ Feature: 1.25.2 Member Prepare For Next Year - PROD
     @prod_pfny01_offcycle
     Examples: 
 	    | index | FID     | username  | password  | MemUserName       | planType | memberType          |
-	    | 1-01  | F437767 | kkumard   | tnps459#  |  1MGriffin2       | PDP	     | GRP_OFFCYC_PFNY     |
+	   #| 1-01  | F437767 | kkumard   | tnps459#  |  1MGriffin2       | PDP	     | GRP_OFFCYC_PFNY     |
 	   #| 1-02  | F437767 | kkumard   | tnps459#  |  testUserName     | MA	     | GRP_OFFCYC_PFNY     |
-       #| 1-03  | F437767 | kkumard   | tnps459#  |  diannahill1      | MAPD	 | GRP_OFFCYC_PFNY     |
+        | 1-03  | F437767 | kkumard   | tnps459#  |  mkdteach1        | MAPD	 | GRP_OFFCYC_PFNY     |
 
     # caution: if changing system time for testing, the PREEFF or TERM user may no longer be true
     @prod_pfny01_preTermShip
     Examples: 
 	    | index | FID     | username  | password  | MemUserName       | planType | memberType          |
 	   #| 1-04  | F437767 | kkumard   | tnps459#  | Ranch1955         | MA	     | IND_PREEFF_PFNY     |
-	    | 1-04  | F437767 | kkumard   | tnps459#  | Teripappas          | MAPD     | IND_PREEFF_PFNY     |
-	    | 1-05  | F437767 | kkumard   | tnps459#  | BEVERLY_BOB5      | MA	     | IND_TERM_PFNY       |
+	    | 1-04  | F437767 | kkumard   | tnps459#  | Teripappas        | MAPD     | IND_PREEFF_PFNY     |
+	    | 1-05  | F437767 | kkumard   | tnps459#  | SWHITE33436       | MA	     | IND_TERM_PFNY       |
 	    | 1-06  | F437767 | kkumard   | tnps459#  | Pramila1946       | SHIP	 | IND_PFNY            |
 			
 	@prod_pfny01_comboPdpSsp
@@ -199,17 +199,19 @@ Feature: 1.25.2 Member Prepare For Next Year - PROD
 	@prod_pfny02_ind_ma
     Examples: 
 	    | index | FID     | username  | password  | MemUserName               | planType | memberType | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | co_us | co_es | co_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh | showNxtYrPlan |
-	    | 2-03  | F437767 | kkumard   | tnps459#  | haradaty32                | MA	     | IND_PFNY   | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | false | false | false | true          |
+	    | 2-03  | F437767 | kkumard   | tnps459#  | ssmhi1                    | MA	     | IND_PFNY   | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | false | false | false | true          |
 
 	@prod_pfny02_ind_medica
     Examples: 
 	    | index | FID     | username  | password  | MemUserName               | planType | memberType | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | co_us | co_es | co_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh | showNxtYrPlan | 
-	    | 2-04  | F437767 | kkumard   | tnps459#  | ALREALESTATE@AOL.COM      | MEDICA   | IND_PFNY   | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | false | false | false | true          |
+	  #x| 2-04  | F437767 | kkumard   | tnps459#  | ALREALESTATE@AOL.COM      | MEDICA   | IND_PFNY   | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | false | false | false | true          |
+	    | 2-04  | F437767 | kkumard   | tnps459#  | TCZUNIGA52                | MEDICA   | IND_PFNY   | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | false | false | false | true          |
 
 	@prod_pfny02_ind_pcp
     Examples: 
 	    | index | FID     | username  | password  | MemUserName               | planType | memberType | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | co_us | co_es | co_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh | showNxtYrPlan | 
-	    | 2-05  | F437767 | kkumard   | tnps459#  | BATLLOT@AOL.COM           | PCP	     | IND_PFNY   | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | false | false | false | true          |
+	  #x| 2-05  | F437767 | kkumard   | tnps459#  | BATLLOT@AOL.COM           | PCP	     | IND_PFNY   | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | false | false | false | true          |
+	    | 2-05  | F437767 | kkumard   | tnps459#  | SOFYABAKMAN@MSN.COM       | PCP	     | IND_PFNY   | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | false | false | false | true          |
 
 	@prod_pfny02_grp_mapd
     Examples: 
@@ -241,7 +243,8 @@ Feature: 1.25.2 Member Prepare For Next Year - PROD
 	@prod_pfny02_combo_ship_fed
     Examples: 
 	    | index | FID     | username  | password  | MemUserName               | planType | memberType             | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | co_us | co_es | co_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh | showNxtYrPlan |
-	    | 2-11  | F437767 | kkumard   | tnps459#  | phleauxdailles43          | MA       | COMBO_SHIP_MA_GRP_PFNY | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | false | false | false | false | false | false | true          |
+	  #x| 2-11  | F437767 | kkumard   | tnps459#  | phleauxdailles43          | MA       | COMBO_SHIP_MA_GRP_PFNY | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | false | false | false | false | false | false | true          |
+	    | 2-11  | F437767 | kkumard   | tnps459#  | VirginiaRuth1936          | MA       | COMBO_SHIP_MA_GRP_PFNY | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | false | false | false | false | false | false | true          |
 
 	@prod_pfny02_combo_fed_ship
     Examples: 
@@ -279,7 +282,8 @@ Feature: 1.25.2 Member Prepare For Next Year - PROD
 	@prod_pfny03a
     Examples: 
 	    | index | FID     | username  | password  | MemUserName             | planType | memberType              |
-	    | 3-01  | F437767 | kkumard   | tnps459#  | phleauxdailles43        | SHIP_HIP | COMBO_SHIP_MA_GRP_PFNY  |
+	    | 3-01  | F437767 | kkumard   | tnps459#  | VirginiaRuth1936        | SHIP_HIP | COMBO_SHIP_MA_GRP_PFNY  |
+	  #x| 3-01  | F437767 | kkumard   | tnps459#  | phleauxdailles43        | SHIP_HIP | COMBO_SHIP_MA_GRP_PFNY  |
 			
 	@prod_pfny03b
     Examples: 
