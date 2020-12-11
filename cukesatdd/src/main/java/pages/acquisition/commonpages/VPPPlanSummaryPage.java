@@ -850,44 +850,41 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	@FindBy(xpath = "//div[contains(@class,'component_info_wrap')]//button[text()='Get Started']")
 	private WebElement getStartedBtn;
-	
+
 	@FindBy(xpath = "button[ng-click='getProviders()']")
 	private WebElement findMyDoctorBtn;
 
 	@FindBy(xpath = "//button[contains(text(),'Select a Plan')]")
 	private WebElement contEnrollmentBtn;
-	
+
 	@FindBy(id = "pop-btn-2")
-private WebElement viewSavedPlans;
+	private WebElement viewSavedPlans;
 
+	@FindBy(xpath = "//*[contains(@class,'component_title')]")
+	private List<WebElement> nextBestActionModalMsg;
 
-@FindBy(xpath = "//*[contains(@class,'component_title')]")
-private List<WebElement> nextBestActionModalMsg;
+	@FindBy(xpath = "//a[text()='View Saved Items']")
+	private WebElement viewSavedItems;
 
-@FindBy(xpath = "//a[text()='View Saved Items']")
-private WebElement viewSavedItems;
+	@FindBy(id = "enrollModalCloseBtn")
+	private WebElement enrollModalCloseBtn;
 
+	@FindBy(id = "enrollAlertTitle")
+	private WebElement nextBestActionModalMsgAuthenticated;
 
-@FindBy(id = "enrollModalCloseBtn")
-private WebElement enrollModalCloseBtn;
+	@FindBy(xpath = "//div[contains(@class,'component_info_wrap')]//button[text()='Select a Plan']")
+	private WebElement nextBestActionModalContinueEnrollmentBtn;
 
+	@FindBy(xpath = "//*[contains(@id,'plan')]//following-sibling::span//span[text()='Select a ']/..")
+	private List<WebElement> selectPlanModalContinueEnrollmentBtnList;
 
-@FindBy(id = "enrollAlertTitle")
-private WebElement nextBestActionModalMsgAuthenticated;
+	@FindBy(xpath = "//*[@class='uhc-modal__content']//*[contains(@id,'plan')]")
+	private List<WebElement> selectPlanModalPlansList;
 
-@FindBy(xpath = "//div[contains(@class,'component_info_wrap')]//button[text()='Continue Enrollment']")
-private WebElement nextBestActionModalContinueEnrollmentBtn;
-
-@FindBy(xpath = "//*[contains(@id,'plan')]//following-sibling::span//span[text()='Continue Enrollment']/..")
-private List<WebElement> selectPlanModalContinueEnrollmentBtnList;
-
-@FindBy(xpath = "//*[@class='uhc-modal__content']//*[contains(@id,'plan')]")
-private List<WebElement> selectPlanModalPlansList;
-
-private static String NEXT_ACTION_MODAL_MSG_PROVIDER_SEARCH = "Is my doctor covered?";
-private static String NEXT_ACTION_MODAL_MSG_ENROLL_PLAN = "How do I enroll?";
-private static String NEXT_ACTION_MODAL_MSG_DRUG_COST = "How much will my drugs cost?";
-private static String NEXT_ACTION_MODAL_MSG_CONTINUE_ENROLLMENT = "Continue my enrollment";
+	private static String NEXT_ACTION_MODAL_MSG_PROVIDER_SEARCH = "Is my doctor covered?";
+	private static String NEXT_ACTION_MODAL_MSG_ENROLL_PLAN = "How do I enroll?";
+	private static String NEXT_ACTION_MODAL_MSG_DRUG_COST = "How much will my drugs cost?";
+	private static String NEXT_ACTION_MODAL_MSG_CONTINUE_ENROLLMENT = "Continue my enrollment";
 
 	public WebElement getValEstimatedAnnualDrugCostValue(String planName) {
 		// WebElement valEstimatedAnnualDrugCostValue =
@@ -5428,7 +5425,6 @@ private static String NEXT_ACTION_MODAL_MSG_CONTINUE_ENROLLMENT = "Continue my e
 		}
 	}
 
-
 //NBA
 
 	public void validateNBAButton(String BtnName) {
@@ -5663,7 +5659,6 @@ private static String NEXT_ACTION_MODAL_MSG_CONTINUE_ENROLLMENT = "Continue my e
 		}
 	}
 
-
 	public void verifyNextBestActionModalForContinueEnrollment() {
 		try {
 			if (nextBestActionModal.isDisplayed()) {
@@ -5680,7 +5675,7 @@ private static String NEXT_ACTION_MODAL_MSG_CONTINUE_ENROLLMENT = "Continue my e
 	}
 
 	public void clickNextBestActionModalContinueEnrollmentBtn() {
-		waitTillElementClickableInTime(nextBestActionModalContinueEnrollmentBtn, 15);
+		waitTillElementClickableInTime(nextBestActionModalContinueEnrollmentBtn, 30);
 		nextBestActionModalContinueEnrollmentBtn.click();
 	}
 
