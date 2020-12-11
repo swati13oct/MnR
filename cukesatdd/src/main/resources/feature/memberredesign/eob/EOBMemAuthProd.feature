@@ -92,12 +92,13 @@ Feature: 1.04.1.1 To Test NON-DREAM EOB for Members - E2E - Member Auth - PROD
     @prod_SHIP_EOBs @prod_SHIP_EOBs1_multiShip
     Examples: 
       | index | username  | password  | MemUserName            | planType                 | memberType         | eobType | realEob | flagZeroEob |
-      | 11    | kkumard   | tnps459#  | gingerdrais46          | SHIP_HOSPITAL INDEMNITY  | MULTI_SHIP_EOB     | Medical | true    | false       | 
+      | 11    | kkumard   | tnps459#  | Pauline3707            | SHIP_HOSPITAL INDEMNITY  | MULTI_SHIP_EOB     | Medical | true    | false       | 
 
     @prod_SHIP_EOBs @prod_SHIP_EOBs2_singleShip
     Examples: 
       | index | username  | password  | MemUserName            | planType                 | memberType         | eobType | realEob | flagZeroEob |
-      | 12    | kkumard   | tnps459#  | cdgatling-2            | SHIP_MEDICARE SUPPLEMENT | SHIP_EOB           | Medical | true    | true       |
+    #x| 12    | kkumard   | tnps459#  | cdgatling-2            | SHIP_MEDICARE SUPPLEMENT | SHIP_EOB           | Medical | true    | true       |
+      | 12    | kkumard   | tnps459#  | tntparents82           | SHIP_MEDICARE SUPPLEMENT | SHIP_EOB           | Medical | true    | true       |
 
     @prod_SHIP_EOBs @prod_SHIP_EOBs3_shipComboShipFed
     Examples: 
@@ -108,7 +109,8 @@ Feature: 1.04.1.1 To Test NON-DREAM EOB for Members - E2E - Member Auth - PROD
     Examples: 
       | index | username  | password  | MemUserName            | planType                 | memberType              | eobType | realEob | flagZeroEob |
     # | 14    | kkumard   | tnps459#  | testusername           | SHIP_MEDICARE SUPPLEMENT | COMBO_SHIP_PDP_RX_DEOB  | Medical | true    | true   |  
-      | 14    | kkumard   | tnps459#  | MaryLouMichels2        | SHIP_MEDICARE SUPPLEMENT | COMBO_PDP_SHIP_RX_DEOB  | Medical | true    | true   |  
+    #x| 14    | kkumard   | tnps459#  | MaryLouMichels2        | SHIP_MEDICARE SUPPLEMENT | COMBO_PDP_SHIP_RX_DEOB  | Medical | true    | true   |  
+      | 14    | kkumard   | tnps459#  | elizabeth6310          | SHIP_MEDICARE SUPPLEMENT | COMBO_PDP_SHIP_RX_DEOB  | Medical | true    | true   |  
 
 
   @prod_eob02 @regression_06_06_18FnF

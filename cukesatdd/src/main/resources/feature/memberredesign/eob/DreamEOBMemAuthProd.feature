@@ -117,7 +117,8 @@ Feature: 1.04.2.2 To Test DREAM EOB for Members - E2E - Member Auth - PROD
     @prod_dreamEob01d_maCosmos 
     Examples: 
       | index | username  | password  | MemUserName             | planType | memberType         | flagZeroEob |
-      | 05    | kkumard   | tnps459#  | haradaty32              | MA       | COSMOS_DEOB        | true        |
+    #x| 05    | kkumard   | tnps459#  | haradaty32              | MA       | COSMOS_DEOB        | true        |
+      | 05    | kkumard   | tnps459#  | ExDesertrat             | MA       | COSMOS_DEOB        | true        |
 
     #@prod_dreamEob01e_maNice 
     #Examples: 
@@ -133,7 +134,8 @@ Feature: 1.04.2.2 To Test DREAM EOB for Members - E2E - Member Auth - PROD
     @prod_dreamEob01g_pdpComboPdpSsp
     Examples: 
       | index | username  | password  | MemUserName             | planType | memberType         | flagZeroEob |
-      | 09    | kkumard   | tnps459#  | rldf1942                | PDP      | PDP_SSP_COMBO_DEOB | true        |
+    #x| 09    | kkumard   | tnps459#  | rldf1942                | PDP      | PDP_SSP_COMBO_DEOB | true        |
+      | 09    | kkumard   | tnps459#  | DKELLY27                | PDP      | PDP_SSP_COMBO_DEOB | true        |
 
     @prod_dreamEob01h_fedComboFedShip
     Examples: 
