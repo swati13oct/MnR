@@ -119,7 +119,7 @@ Feature: 1.24.2.b Member Individual Health Record - PROD - P2 - Benefits, Paymen
     @prod_no_ihr_p2_shipCombo
     Examples: 
 	    | index | FID     | username  | password  | MemUserName             | planType                 | memberType         | expectLink | 
-	    | 03    | F424804 | kkumard   | tnps459#  | elizabeth6310         | SHIP_MEDICARE SUPPLEMENT | COMBO_PDP_SHIP_IHR | false      |
+	    | 03    | F424804 | kkumard   | tnps459#  | nino2@theciliangroup.com         | SHIP_MEDICARE SUPPLEMENT | COMBO_PDP_SHIP_IHR | false      |
 	 #  | 04    | F424804 | kkumard   | tnps459#  | testUserName            | SHIP_MEDICARE SUPPLEMENT | COMBO_SHIP_PDP_IHR | false      |
 	    | 04    | F424804 | kkumard   | tnps459#  | VirginiaRuth1936        | SHIP_HIP                 | COMBO_SHIP_MA_BOA_IHR  | false      |
 
@@ -164,7 +164,7 @@ Feature: 1.24.2.b Member Individual Health Record - PROD - P2 - Benefits, Paymen
     @prod_ihr_p2_fedShipCombo_shipFedCombo
     Examples: 
 	    | index | FID     | username  | password  | MemUserName             | planType | memberType         | expectLink | 
-	    | 15    | F424804 | kkumard   | tnps459#  | elizabeth6310         | PDP      | COMBO_PDP_SHIP_IHR | true       |
+	    | 15    | F424804 | kkumard   | tnps459#  | nino2@theciliangroup.com         | PDP      | COMBO_PDP_SHIP_IHR | true       |
 	    #note: this user is BOA group
 	    | 16    | F424804 | kkumard   | tnps459#  | VirginiaRuth1936        | MA       | COMBO_SHIP_MA_BOA_IHR  | false      |
 

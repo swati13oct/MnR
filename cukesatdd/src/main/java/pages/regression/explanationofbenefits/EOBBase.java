@@ -235,7 +235,7 @@ public class EOBBase extends EOBWebElements{
 			} else if (planType.toLowerCase().contains("ma") && !planType.toLowerCase().contains("pd")) {
 				Assert.assertTrue("PROBLEM - unable to locate combo tab for MA", eobValidate(comboTab_MA));
 				comboTab_MA.click();
-			} else if (planType.toLowerCase().contains("ship_hip")) {
+			} else if (planType.toLowerCase().contains("ship_hip") || planType.toUpperCase().contains("SHIP_HOSPITAL INDEMNITY")) {
 				Assert.assertTrue("PROBLEM - unable to locate combo tab for SHIP_HIP", eobValidate(comboTab_SHIP_HIP));
 				comboTab_SHIP_HIP.click();
 			} else if (planType.toLowerCase().contains("ship")) {

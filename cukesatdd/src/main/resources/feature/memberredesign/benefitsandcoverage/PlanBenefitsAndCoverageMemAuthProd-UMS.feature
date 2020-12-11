@@ -276,7 +276,8 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth Prod
 
     Examples: 
       | index | TID   |username |password  |MemUserName| planType| memberType| copayCategory | SummaryofBenefits   | EvidenceofCoverage   | ComprehensiveFormularyDrug List | AlternativeDrugList   |
-      | 09    | 15248 |kkumard|  tnps459#|Melw4344|PDP | PDPLIS_BnC | LIS 3  | Summary of Benefits | Evidence of Coverage | Comprehensive Formulary         | Alternative Drug List |
+    #x| 09    | 15248 |kkumard|  tnps459#|Melw4344|PDP | PDPLIS_BnC | LIS 3  | Summary of Benefits | Evidence of Coverage | Comprehensive Formulary         | Alternative Drug List |
+      | 09    | 15248 |kkumard|  tnps459#|Shelton1104 |PDP | PDPLIS_BnC | LIS 3  | Summary of Benefits | Evidence of Coverage | Comprehensive Formulary         | Alternative Drug List |
             
   #TC25_Group members_MAPD_LIS(3,4)
   @prod__benefitsAndCoverage1  @CMGroupmembersTC25  @prod_BnC_Part6 @bnc_sanity_mapd
