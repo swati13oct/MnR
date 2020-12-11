@@ -25,7 +25,7 @@ Feature: 2020 and 2021 CTA on Pharmacy Locator page
 
     Examples: 
       | username | password | memUserName | planType | memberType |
-      | kjadha10 | Free@123 | Berniewb    | PDP      | Individual |
+      | kjadha10 | Virus$$1 | Berniewb    | PDP      | Individual |
 
   @Regression
   Scenario Outline: To verify 2020 CTA redirect to new Pharmacy Locator tool built by Rally
@@ -44,11 +44,11 @@ Feature: 2020 and 2021 CTA on Pharmacy Locator page
     Then user will be directed to the Choose a plan year page
     Then user will see a twenty twenty call to action on Choose a plan year page
     When user click on the twenty twenty call to action on Choose a plan year page
-    Then user will be directed to the new Pharmacy Locator tool built by Rally in the same browser window
+    Then user will be directed to the new Pharmacy Locator tool built by Rally in the same browser window memAuth
 
     Examples: 
       | username | password | memUserName | planType | memberType |
-      | kjadha10 | Free@123 | Berniewb    | PDP      | Individual |
+      | kjadha10 | Virus$$1 | Berniewb    | PDP      | Individual |
 
   @Regression
   Scenario Outline: To verify 2021 CTA redirect to the legacy Pharmacy Locator tool
@@ -67,8 +67,8 @@ Feature: 2020 and 2021 CTA on Pharmacy Locator page
     Then user will be directed to the Choose a plan year page
     Then user will see a twenty twentyone call to action on Choose a plan year page
     When user click on the twenty twentyone call to action on Choose a plan year page
-    Then user will be directed to the legacy Pharmacy Locator tool in the same browser window
+    Then user will be directed to the legacy Pharmacy Locator tool in the same browser window memAuth
 
     Examples: 
       | username | password | memUserName | planType | memberType |
-      | kjadha10 | Free@123 | Berniewb    | PDP      | Individual |
+      | kjadha10 | Virus$$1 | Berniewb    | PDP      | Individual |

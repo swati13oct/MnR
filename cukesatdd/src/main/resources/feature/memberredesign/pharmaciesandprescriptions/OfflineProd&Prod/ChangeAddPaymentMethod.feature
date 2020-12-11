@@ -23,4 +23,4 @@ Feature: Change or Add Payment Details
 
     Examples: 
       | username | password | memUserName | planType | memberType |
-      | kjadha10 | Free@123 | Berniewb    | PDP      | Individual |
+      | kjadha10 | Virus$$1 | Berniewb    | PDP      | Individual |

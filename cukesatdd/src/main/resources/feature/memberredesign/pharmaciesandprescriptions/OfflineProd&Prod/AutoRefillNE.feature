@@ -21,4 +21,4 @@ Feature: Auto Refill NE
 
     Examples: 
       | username | password | memUserName   | planType | memberType |
-      | kjadha10 | Free@123 | Everett123fish| PDP      | Individual |
+      | kjadha10 | Virus$$1 | Everett123fish| PDP      | Individual |

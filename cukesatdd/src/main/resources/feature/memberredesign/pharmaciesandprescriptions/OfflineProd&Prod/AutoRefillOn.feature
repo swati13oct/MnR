@@ -26,4 +26,4 @@ Feature: Auto Refill On
 
     Examples: 
       | username | password | memUserName                          | planType | memberType |
-      | kjadha10 | Free@123 | 02452308-041f-424c-83af-b1e760fbfa9d | PDP      | Individual |
+      | kjadha10 | Virus$$1 | 02452308-041f-424c-83af-b1e760fbfa9d | PDP      | Individual |

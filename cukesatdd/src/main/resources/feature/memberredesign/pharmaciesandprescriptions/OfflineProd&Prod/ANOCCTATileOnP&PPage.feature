@@ -22,4 +22,4 @@ Feature: ANOC CTA Tile not displayed on P&P page
     #Then user will be redirected to the prepare for Next Year page in a new tab
     Examples: 
       | username | password | memUserName | planType | memberType |
-      | kjadha10 | Free@123 | Berniewb    | PDP      | Individual |
+      | kjadha10 | Virus$$1 | Berniewb    | PDP      | Individual |

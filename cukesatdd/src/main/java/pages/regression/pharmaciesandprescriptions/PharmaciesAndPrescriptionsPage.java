@@ -14,6 +14,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 
+import acceptancetests.memberredesign.pharmaciesandprescriptions.PharmaciesAndPrescriptionsCommonConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import pages.regression.testharness.TestHarness;
@@ -1140,11 +1141,43 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 				Assert.assertTrue("PROBLEM - Pharmacy Locator Tool Page NOT displayed in same browser window", false);
 			}
 		}
+		
+		public void validatePharmacyLocatortoolbuiltbyRallyInSameBrowserWindow_memAuth() {
+			pageloadcomplete();
+			int size = countOfNewWindowTab();
+			System.out.println("Number of windows opened when user click on 2020 CTA is :: " + size);
+			if (size == 2) {
+				pageloadcomplete();
+				Assert.assertTrue("PROBLEM - Pharmacy Locator Tool Page is NOT displayed successfully",
+						pnpValidate(SearchButtonPharmacyLocatorPageByRally, 30));
+			} else {
+				pageloadcomplete();
+				Assert.assertTrue("PROBLEM - Pharmacy Locator Tool Page is NOT displayed",
+						pnpValidate(SearchButtonPharmacyLocatorPageByRally, 30));
+				Assert.assertTrue("PROBLEM - Pharmacy Locator Tool Page NOT displayed in same browser window", false);
+			}
+		}
 
 		public void validateLegacyPharmacyLocatortoolInSameBrowserWindow() {
 			int size = countOfNewWindowTab();
 			System.out.println("Number of windows opened when user click on 2021 CTA is :: " + size);
 			if (size == 1) {
+				//Assert.assertTrue("PROBLEM - same browser window is opened", true);
+				Assert.assertTrue("PROBLEM - Legacy Pharmacy Locator Page zip code text box is NOT displayed",
+						pnpValidate(zipCodeTextBoxLegacyPharmacyLocatorPage, 50));
+			} else {
+				Assert.assertTrue("PROBLEM - Legacy Pharmacy Locator Page zip code text box is NOT displayed",
+						pnpValidate(zipCodeTextBoxLegacyPharmacyLocatorPage, 50));
+				Assert.assertTrue("PROBLEM - Legacy Pharmacy Locator Tool Page is NOT displayed in same browser window",
+						false);
+			}
+
+		}
+		
+		public void validateLegacyPharmacyLocatortoolInSameBrowserWindow_memAuth() {
+			int size = countOfNewWindowTab();
+			System.out.println("Number of windows opened when user click on 2021 CTA is :: " + size);
+			if (size == 2) {
 				//Assert.assertTrue("PROBLEM - same browser window is opened", true);
 				Assert.assertTrue("PROBLEM - Legacy Pharmacy Locator Page zip code text box is NOT displayed",
 						pnpValidate(zipCodeTextBoxLegacyPharmacyLocatorPage, 50));
@@ -3219,6 +3252,54 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 			Assert.assertTrue("PROBLEM - unable to locate Drug Lookup call to action Tile element",
 					validate(DrugLookupCallToActnBtn, 30));
 			DrugLookupCallToActnBtn.click();
+		}
+		
+		public List<Integer> getListOfIndexForRefillMedication_NE() {
+			int size = listOfDrugName.size();
+			validate(drugsAvailableOnMyMedication, 10);
+			String numberTXT = drugsAvailableOnMyMedication.getText();
+			int expectedSize = Integer.parseInt(numberTXT);
+			System.out.println("Expected Drug Name Size" + expectedSize);
+			while (size != expectedSize) {
+				size = listOfDrugName.size();
+			}
+			List<Integer> listOfIndex = new ArrayList<>();
+			for (int i = 0; i < listOfRefillMedication_NE.size(); i++) {
+				listOfIndex.add(i);
+			}
+			return listOfIndex;
+		}
+		
+		public List<Integer> getListOfIndexForRefillMedication_ON() {
+			int size = listOfDrugName.size();
+			validate(drugsAvailableOnMyMedication, 10);
+			String numberTXT = drugsAvailableOnMyMedication.getText();
+			int expectedSize = Integer.parseInt(numberTXT);
+			System.out.println("Expected Drug Name Size" + expectedSize);
+			while (size != expectedSize) {
+				size = listOfDrugName.size();
+			}
+			List<Integer> listOfIndex = new ArrayList<>();
+			for (int i = 0; i < listOfRefillMedication_ON.size(); i++) {
+				listOfIndex.add(i);
+			}
+			return listOfIndex;
+		}
+		
+		public List<Integer> getListOfIndexForRefillMedication_OFF() {
+			int size = listOfDrugName.size();
+			validate(drugsAvailableOnMyMedication, 10);
+			String numberTXT = drugsAvailableOnMyMedication.getText();
+			int expectedSize = Integer.parseInt(numberTXT);
+			System.out.println("Expected Drug Name Size" + expectedSize);
+			while (size != expectedSize) {
+				size = listOfDrugName.size();
+			}
+			List<Integer> listOfIndex = new ArrayList<>();
+			for (int i = 0; i < listOfRefillMedication_Off.size(); i++) {
+				listOfIndex.add(i);
+			}
+			return listOfIndex;
 		}
 
 }

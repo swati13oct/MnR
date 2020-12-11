@@ -233,7 +233,7 @@ public class CheckOutSummaryWebElements extends UhcDriver {
 	protected WebElement autoRefillEnrollmentPage;
 
 	// Auto refill disenrollment Confirmation:
-	@FindBy(xpath = "//*[@data-testid='header__title']//h1[text()='Would you like to stop enroll in Auto Refill?']")
+	@FindBy(xpath = "//*[@data-testid='header__title']//h1[text()='Would you like to stop Auto Refill?']")
 	protected WebElement autoRefillDisenrollmentPage;
 
 	// Auto Refill Confirmation Close button

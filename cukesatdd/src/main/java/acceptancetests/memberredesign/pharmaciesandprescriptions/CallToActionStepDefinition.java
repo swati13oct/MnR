@@ -619,6 +619,15 @@ public class CallToActionStepDefinition {
 		pnpPg.validatePharmacyLocatortoolbuiltbyRallyInSameBrowserWindow();
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
 	}
+		
+	@Then("^user will be directed to the new Pharmacy Locator tool built by Rally in the same browser window memAuth$")
+	public void user_will_be_directed_to_the_new_Pharmacy_Locator_tool_built_by_Rally_in_the_same_browser_window_memAuth()
+			throws Throwable {
+		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
+				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
+		pnpPg.validatePharmacyLocatortoolbuiltbyRallyInSameBrowserWindow_memAuth();
+		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
+	}
 
 	@When("^user click on the back button on Pharmacy Locator tool built by Rally$")
 	public void user_click_on_the_back_button_on_Pharmacy_Locator_tool_built_by_Rally() throws Throwable {
@@ -635,6 +644,17 @@ public class CallToActionStepDefinition {
 		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
 		pnpPg.validateLegacyPharmacyLocatortoolInSameBrowserWindow();
+		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
+	}
+	
+	
+	@Then("^user will be directed to the legacy Pharmacy Locator tool in the same browser window memAuth$")
+	public void user_will_be_directed_to_the_legacy_Pharmacy_Locator_tool_in_the_same_browser_window_memAuth()
+			throws Throwable {
+		// Write code here that turns the phrase above into concrete actions
+		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
+				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
+		pnpPg.validateLegacyPharmacyLocatortoolInSameBrowserWindow_memAuth();
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
 	}
 
