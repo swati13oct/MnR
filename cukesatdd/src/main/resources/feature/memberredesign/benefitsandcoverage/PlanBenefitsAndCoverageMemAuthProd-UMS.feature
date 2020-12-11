@@ -168,7 +168,7 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth Prod
 
     Examples:  
       | index | TID   |username |password  |MemUserName |  planType | memberType| copayCategory |
-      | 05    | 15238 |kkumard| tnps459#| dhcbhansen7 |MAPD| Group_Ancillary_BnC | NON LIS    |
+      | 05    | 15238 |kkumard| tnps459#| moppeg |MAPD| Group_Ancillary_BnC | NON LIS    |
  
   #TC16-Part1_Ancilliary Benefits for Group member(PDP and other than Group members)
   @prod__benefitsAndCoverage32_1 @ancillarybenefitnegativescenarioscodemonkeys @AncillaryBenefit_Negative 
@@ -232,7 +232,8 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth Prod
     Examples: 
       | index | TID   |username |password|MemUserName       | planType | memberType  |
       | 07    | 15242 |kkumard| tnps459#| bluefury1502@gmail.com|PDP       | Wallgreens_BnC  |
-      | 08    | 15243 |kkumard| tnps459#|BHTRUE1           |PDP       | MailOrderPharamacy_BnC |
+    #x| 08    | 15243 |kkumard| tnps459#|BHTRUE1           |PDP       | MailOrderPharamacy_BnC |
+      | 08    | 15243 |kkumard| tnps459#|lkd3408           |PDP       | MailOrderPharamacy_BnC |
       
   #TC21_PDP_LIS(3,4)- Retail Drug Cost Table
   @prod__benefitsAndCoverage1  @PDPLIS3member @prod_BnC_Part5 @bnc_sanity_pdp
@@ -822,34 +823,34 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth Prod
     @prod_DSNP_CnS01
     Examples: 
       | index | FID             |username |password  |MemUserName| planType   | memberType           | copayCategory | language | name         | memberid     | effectivedate | monthlypremium | extrahelp            | Identifier       | count | H-PBP    | rider  |
-      | 20-c1 | F494433,F506320 |kkumard  | tnps459# |Filbert44  | DSNP_MAPD  | Individual_CnS01_BnC | LIS 2         | ENGLISH  | DREENA KIMURA| 971949191-00 | 01/01/2020    | Not Available  | Extra Help Level : 2 | IndEffectiveAARP |     6 | H0624-001| NoRider|
-      | 21-c2 | F494433,F506320 |kkumard  | tnps459# |Arm8bur    | DSNP_MAPD  | Individual_CnS02_BnC | LIS 1         | ENGLISH  | EBER KRYSTEK| 903010063-00 | 01/01/2020    | Not Available  | Extra Help Level : 1 | IndEffectiveAARP |     6 | H2228-045| NoRider|
+      | 20-c1 | F494433,F506320 |kkumard  | tnps459# |Filbert44  | DSNP_MAPD  | Individual_CnS01_BnC | LIS 2         | ENGLISH  | DREENA KIMURA| 971949191-00 | 01/01/2020    | Not Available  | Extra Help Level : 2 | IndEffectiveAARP |     4 | H0624-001| NoRider|
+      | 21-c2 | F494433,F506320 |kkumard  | tnps459# |Arm8bur    | DSNP_MAPD  | Individual_CnS02_BnC | LIS 1         | ENGLISH  | EBER KRYSTEK| 903010063-00 | 01/01/2020    | Not Available  | Extra Help Level : 1 | IndEffectiveAARP |     4 | H2228-045| NoRider|
     
     @prod_DSNP_CnS02
     Examples:       
       | index | FID             |username |password  |MemUserName| planType   | memberType           | copayCategory | language | name         | memberid     | effectivedate | monthlypremium | extrahelp            | Identifier       | count | H-PBP    | rider  |
-      | 22-c3 | F494433,F506320 |kkumard  | tnps459# |Mcalado    | DSNP_MAPD  | Individual_CnS03_BnC | LIS 1         | ENGLISH  | HULDIBERAH KINIRY | 967076552-1 | 01/01/2020 | Not Available  | Extra Help Level : 1 | IndEffectiveAARP |     6 | H3113-110| NoRider|
-      | 23-c4 | F494433,F506320 |kkumard  | tnps459# |aries1942| DSNP_MAPD  | Individual_CnS04_BnC | LIS 1         | ENGLISH  | BLAIS OWEN        | 912002942-1 | 01/01/2020 | Not Available  | Extra Help Level : 1 | IndEffectiveAARP |     6 | H4527-003| NoRider|
-      | 24-c5 | F494433,F506320 |kkumard  | tnps459# |melodycwilliams| DSNP_MAPD  | Individual_CnS05_BnC | LIS 2         | ENGLISH  | KUMARI FROEHNER   | 006644986-1 | 01/01/2020 | Not Available  | Extra Help Level : 2 | IndEffectiveAARP |     6 | H4590-033| NoRider|
+      | 22-c3 | F494433,F506320 |kkumard  | tnps459# |Mcalado    | DSNP_MAPD  | Individual_CnS03_BnC | LIS 1         | ENGLISH  | HULDIBERAH KINIRY | 967076552-1 | 01/01/2020 | Not Available  | Extra Help Level : 1 | IndEffectiveAARP |     4 | H3113-110| NoRider|
+      | 23-c4 | F494433,F506320 |kkumard  | tnps459# |aries1942| DSNP_MAPD  | Individual_CnS04_BnC | LIS 1         | ENGLISH  | BLAIS OWEN        | 912002942-1 | 01/01/2020 | Not Available  | Extra Help Level : 1 | IndEffectiveAARP |     4 | H4527-003| NoRider|
+      | 24-c5 | F494433,F506320 |kkumard  | tnps459# |melodycwilliams| DSNP_MAPD  | Individual_CnS05_BnC | LIS 2         | ENGLISH  | KUMARI FROEHNER   | 006644986-1 | 01/01/2020 | Not Available  | Extra Help Level : 2 | IndEffectiveAARP |     4 | H4590-033| NoRider|
     
    #  @prod_DSNP_CnS03
     #Examples: 
     #  | index | FID    		    |username |password  |MemUserName | planType   | memberType           | copayCategory | language | name         | memberid     | effectivedate | monthlypremium| extrahelp | Identifier      | count | H-PBP    | rider  |
-     # | 35-c6 | F494433,F506320 |kkumard  | tnps459# |testUserName| DSNP_MAPD  | Individual_CnS06_BnC | Non Lis       | ENGLISH  | EBER KRYSTEK| 903010063-00 | 01/01/2020    | Not Available  | 		   |IndEffectiveAARP |     6 | H4527-015| NoRider|
-     # | 36-c7 | F494433,F506320 |kkumard  | tnps459# |testUserName| DSNP_MAPD  | Individual_CnS07_BnC | Non Lis       | ENGLISH  | EBER KRYSTEK| 903010063-00 | 01/01/2020    | Not Available  |           | IndEffectiveAARP|     6 | H5322-030| NoRider|
+     # | 35-c6 | F494433,F506320 |kkumard  | tnps459# |testUserName| DSNP_MAPD  | Individual_CnS06_BnC | Non Lis       | ENGLISH  | EBER KRYSTEK| 903010063-00 | 01/01/2020    | Not Available  | 		   |IndEffectiveAARP |     4 | H4527-015| NoRider|
+     # | 36-c7 | F494433,F506320 |kkumard  | tnps459# |testUserName| DSNP_MAPD  | Individual_CnS07_BnC | Non Lis       | ENGLISH  | EBER KRYSTEK| 903010063-00 | 01/01/2020    | Not Available  |           | IndEffectiveAARP|     4 | H5322-030| NoRider|
       
       
     @prod_DSNP_MnR01
     Examples:       
        | index | FID             |username |password  |MemUserName| planType   | memberType           | copayCategory | language | name         | memberid     | effectivedate | monthlypremium | extrahelp            | Identifier       | count | H-PBP    | rider  |
-       | 25-m1 | F494433,F506320 |kkumard  | tnps459# |insurance1704| DSNP_MAPD  | Individual_MnR01_BnC | LIS 1         | ENGLISH  | OFER MCLEON  | 937024725-1| 01/01/2020    | Not Available  | Extra Help Level : 1 | IndEffectiveAARP |     6 |  H0271-005 |  NoRider|
-       | 26-m2 | F494433,F506320 |kkumard  | tnps459# |scales5| DSNP_MAPD  | Individual_MnR02_BnC | LIS 1         | ENGLISH  | DBAD ADFED | 919744565-00 | 01/01/2020    | Not Available  | Extra Help Level : 1 | IndEffectiveAARP |     6 |  H5253-041 | NoRider |
+       | 25-m1 | F494433,F506320 |kkumard  | tnps459# |insurance1704| DSNP_MAPD  | Individual_MnR01_BnC | LIS 1         | ENGLISH  | OFER MCLEON  | 937024725-1| 01/01/2020    | Not Available  | Extra Help Level : 1 | IndEffectiveAARP |     4 |  H0271-005 |  NoRider|
+       | 26-m2 | F494433,F506320 |kkumard  | tnps459# |scales5| DSNP_MAPD  | Individual_MnR02_BnC | LIS 1         | ENGLISH  | DBAD ADFED | 919744565-00 | 01/01/2020    | Not Available  | Extra Help Level : 1 | IndEffectiveAARP |     4 |  H5253-041 | NoRider |
 
     @prod_DSNP_MnR02
     Examples:      
        | index | FID             |username |password  |MemUserName| planType   | memberType           | copayCategory | language | name         | memberid     | effectivedate | monthlypremium | extrahelp            | Identifier       | count | H-PBP    | rider  |
-       | 27-m3 | F494433,F506320 |kkumard  | tnps459# |dkdinkins  | DSNP_MAPD  | Individual_MnR03_BnC | LIS 1         | ENGLISH  | DBAD ADFED | 919744565-00 | 01/01/2020   | Not Available   | Extra Help Level : 1 | IndEffectiveAARP |     6 |  R2604-004 | NoRider|
-       | 28-m4 | F494433,F506320 |kkumard  | tnps459# |Buttercup2020| DSNP_MAPD  | Individual_MnR04_BnC | LIS 3         | ENGLISH  | DBAD ADFED | 919744565-00 | 01/01/2020    | Not Available  | Extra Help Level : 3 | IndEffectiveAARP |     6 |  H0271-006 | NoRider|
+       | 27-m3 | F494433,F506320 |kkumard  | tnps459# |dkdinkins  | DSNP_MAPD  | Individual_MnR03_BnC | LIS 1         | ENGLISH  | DBAD ADFED | 919744565-00 | 01/01/2020   | Not Available   | Extra Help Level : 1 | IndEffectiveAARP |     4 |  R2604-004 | NoRider|
+       | 28-m4 | F494433,F506320 |kkumard  | tnps459# |Buttercup2020| DSNP_MAPD  | Individual_MnR04_BnC | LIS 3         | ENGLISH  | DBAD ADFED | 919744565-00 | 01/01/2020    | Not Available  | Extra Help Level : 3 | IndEffectiveAARP |     4 |  H0271-006 | NoRider|
 
   @prod_benefitsAndCoverage19 @insulin
   Scenario Outline: Index: <index> -FID: <FID> -plan: <planType> -memberType: <memberType> -copayCategory: <copayCategory> -insulin: <insulin> - Verify Insulin Demo display on drug table for NON-LIS user

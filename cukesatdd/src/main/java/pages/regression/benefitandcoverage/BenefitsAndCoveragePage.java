@@ -737,10 +737,10 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 			validateNew(Copayscoinsuranceheader);
 
 			String ExpectedUrl="member/documents/overview.html";
-			if (MRScenario.environment.equals("offline") || MRScenario.environment.equals("prod")) 
-				Assert.assertTrue("'To view more details regarding----'  text is expected to display", medCopayText_old.isDisplayed());
-			else
-				Assert.assertTrue("'To view more details regarding----'  text is expected to display", medCopayText.isDisplayed());
+			//tbd if (MRScenario.environment.equals("offline") || MRScenario.environment.equals("prod")) 
+			//tbd 	Assert.assertTrue("'To view more details regarding----'  text is expected to display", medCopayText_old.isDisplayed());
+			//tbd else
+			Assert.assertTrue("'To view more details regarding----'  text is expected to display", medCopayText.isDisplayed());
 
 			//note: to save time, skip navigating to planDoc page, only validate link href has the correct url
 			/* keep
@@ -753,12 +753,12 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 			driver.navigate().back();
 			driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 			*/
-			if (MRScenario.environment.equals("offline") || MRScenario.environment.equals("prod")) 
-				Assert.assertTrue("PROBLEM - medCopayBenefitsLink href value is not as expected. "
-						+ "Expected to contain '"+ExpectedUrl+"' | Actual href='"+medCopayBenefitsLink_old.getAttribute("href")+"'", medCopayBenefitsLink_old.getAttribute("href").contains(ExpectedUrl));
-			else
-				Assert.assertTrue("PROBLEM - medCopayBenefitsLink href value is not as expected. "
-						+ "Expected to contain '"+ExpectedUrl+"' | Actual href='"+medCopayBenefitsLink.getAttribute("href")+"'", medCopayBenefitsLink.getAttribute("href").contains(ExpectedUrl));
+			//tbd if (MRScenario.environment.equals("offline") || MRScenario.environment.equals("prod")) 
+			//tbd 	Assert.assertTrue("PROBLEM - medCopayBenefitsLink href value is not as expected. "
+			//tbd     + "Expected to contain '"+ExpectedUrl+"' | Actual href='"+medCopayBenefitsLink_old.getAttribute("href")+"'", medCopayBenefitsLink_old.getAttribute("href").contains(ExpectedUrl));
+			//tbd else
+			Assert.assertTrue("PROBLEM - medCopayBenefitsLink href value is not as expected. "
+					+ "Expected to contain '"+ExpectedUrl+"' | Actual href='"+medCopayBenefitsLink.getAttribute("href")+"'", medCopayBenefitsLink.getAttribute("href").contains(ExpectedUrl));
 			
 			Assert.assertTrue("'OfficeVisits' is not expected to display", !OfficeVisits.isDisplayed());
 			Assert.assertTrue("'InPatientHospitalCare' is not expected to display", !InPatientHospitalCare.isDisplayed());

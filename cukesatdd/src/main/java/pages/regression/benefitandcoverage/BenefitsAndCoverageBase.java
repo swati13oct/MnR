@@ -426,14 +426,13 @@ public class BenefitsAndCoverageBase extends BenefitsAndCoverageWebElements {
 	}
 
 	public void clicksOnJumpLinksAndCheckRespectiveSectionsDSNP(String planType, String memberType) {
-		//note: when ready, remove the lines from if section and keep the two assert from else only
-		if (MRScenario.environment.equals("offline") || MRScenario.environment.equals("prod")) {
-			clicksOnLinkAndBackToTop(getJmpLinkToMedicalCopaysOrCoinsurance(), getCopayscoinsuranceheader());
-			clicksOnLinkAndBackToTop(getJmpLinkToOutofPocketMaximum(), getOutOfPocketSectionHeader());
-		} else {
-			Assert.assertTrue("PROBLEM - should not be able to locate the 'MedicalCopaysOrCoinsurance' jumplink", !validate(getCopayscoinsuranceheader(),0));
-			Assert.assertTrue("PROBLEM - should not be able to locate the 'OutofPocketMaximum' jumplink", !validate(getOutOfPocketSectionHeader(),0));
-		}
+		//tbd if (MRScenario.environment.equals("offline") || MRScenario.environment.equals("prod")) {
+		//tbd 	clicksOnLinkAndBackToTop(getJmpLinkToMedicalCopaysOrCoinsurance(), getCopayscoinsuranceheader());
+		//tbd 	clicksOnLinkAndBackToTop(getJmpLinkToOutofPocketMaximum(), getOutOfPocketSectionHeader());
+		//tbd } else {
+		Assert.assertTrue("PROBLEM - should not be able to locate the 'MedicalCopaysOrCoinsurance' jumplink", !validate(getCopayscoinsuranceheader(),0));
+		Assert.assertTrue("PROBLEM - should not be able to locate the 'OutofPocketMaximum' jumplink", !validate(getOutOfPocketSectionHeader(),0));
+		//tbd }
 		clicksOnLinkAndBackToTop(getJmpLinkToPrimaryCareProvider(), getPrimaryCareProviderHeaderInd());
 		clicksOnLinkAndBackToTop(getJmpLinkToDrugCopaysAndDiscounts(), getDrugCopaysAndDiscountsSectionHeader());
 		clicksOnLinkAndBackToTop(getJmpLinkToDrugCoverage(), getDrugCoverageSectionHeader());
