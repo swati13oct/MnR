@@ -818,14 +818,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//div[contains(@class,'component_info_wrap')]//button[contains(text(),'Find a Provider')]")
 	private WebElement nextBestActionModalFindMyDoctorsBtn;
 
-	@FindBy(xpath = "//div[contains(@class,'component_info_wrap')]//button[text()='Find a Provider']")
-	private WebElement nextBestActionModalMsg;
-
 	@FindBy(xpath = "//div[contains(@class,'component_info_wrap')]//button[text()='Select a Plan']")
-	private WebElement nextBestActionModalContinueEnrollmentBtn;
-
-	private static String NEXT_ACTION_MODAL_MSG_PROVIDER_SEARCH = "Is my doctor covered?";
-	private static String NEXT_ACTION_MODAL_MSG_ENROLL_PLAN = "How do I enroll?";
+	private WebElement nextBestActionModalSelectPlanBtn;
 
 	@FindBy(xpath = "(//button[text()='Compare'])[1]")
 	private WebElement compareButton;
@@ -856,11 +850,44 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	@FindBy(xpath = "//div[contains(@class,'component_info_wrap')]//button[text()='Get Started']")
 	private WebElement getStartedBtn;
+	
 	@FindBy(xpath = "button[ng-click='getProviders()']")
 	private WebElement findMyDoctorBtn;
 
 	@FindBy(xpath = "//button[contains(text(),'Select a Plan')]")
 	private WebElement contEnrollmentBtn;
+	
+	@FindBy(id = "pop-btn-2")
+private WebElement viewSavedPlans;
+
+
+@FindBy(xpath = "//*[contains(@class,'component_title')]")
+private List<WebElement> nextBestActionModalMsg;
+
+@FindBy(xpath = "//a[text()='View Saved Items']")
+private WebElement viewSavedItems;
+
+
+@FindBy(id = "enrollModalCloseBtn")
+private WebElement enrollModalCloseBtn;
+
+
+@FindBy(id = "enrollAlertTitle")
+private WebElement nextBestActionModalMsgAuthenticated;
+
+@FindBy(xpath = "//div[contains(@class,'component_info_wrap')]//button[text()='Continue Enrollment']")
+private WebElement nextBestActionModalContinueEnrollmentBtn;
+
+@FindBy(xpath = "//*[contains(@id,'plan')]//following-sibling::span//span[text()='Continue Enrollment']/..")
+private List<WebElement> selectPlanModalContinueEnrollmentBtnList;
+
+@FindBy(xpath = "//*[@class='uhc-modal__content']//*[contains(@id,'plan')]")
+private List<WebElement> selectPlanModalPlansList;
+
+private static String NEXT_ACTION_MODAL_MSG_PROVIDER_SEARCH = "Is my doctor covered?";
+private static String NEXT_ACTION_MODAL_MSG_ENROLL_PLAN = "How do I enroll?";
+private static String NEXT_ACTION_MODAL_MSG_DRUG_COST = "How much will my drugs cost?";
+private static String NEXT_ACTION_MODAL_MSG_CONTINUE_ENROLLMENT = "Continue my enrollment";
 
 	public WebElement getValEstimatedAnnualDrugCostValue(String planName) {
 		// WebElement valEstimatedAnnualDrugCostValue =
@@ -5073,8 +5100,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 				Assert.assertTrue(
 						"The Provider search message is not displayed.../n Expected Message"
 								+ NEXT_ACTION_MODAL_MSG_PROVIDER_SEARCH + "\n Actual message"
-								+ nextBestActionModalMsg.getText(),
-						nextBestActionModalMsg.getText().equals(NEXT_ACTION_MODAL_MSG_PROVIDER_SEARCH));
+								+ nextBestActionModalMsg.get(1).getText(),
+						nextBestActionModalMsg.get(1).getText().equals(NEXT_ACTION_MODAL_MSG_PROVIDER_SEARCH));
 			}
 		} catch (Exception ex) {
 			System.out.println("NBA modal not found");
@@ -5102,12 +5129,22 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	}
 
 	public void verifyNextBestActionModalForEnrollPlan() {
-		waitforElementVisibilityInTime(nextBestActionModalContinueEnrollmentBtn, 20);
+		waitforElementVisibilityInTime(nextBestActionModalSelectPlanBtn, 20);
 		try {
 			if (nextBestActionModal.isDisplayed()) {
-				Assert.assertTrue("The Continue Enrollment message is not displayed.../n Expected Message"
-						+ NEXT_ACTION_MODAL_MSG_ENROLL_PLAN + "\n Actual message" + nextBestActionModalMsg.getText(),
-						nextBestActionModalMsg.getText().equals(NEXT_ACTION_MODAL_MSG_ENROLL_PLAN));
+				if (nextBestActionModalMsg.size() > 1) {
+					Assert.assertTrue(
+							"The Continue Enrollment message is not displayed.../n Expected Message"
+									+ NEXT_ACTION_MODAL_MSG_ENROLL_PLAN + "\n Actual message"
+									+ nextBestActionModalMsg.get(1).getText(),
+							nextBestActionModalMsg.get(1).getText().equals(NEXT_ACTION_MODAL_MSG_ENROLL_PLAN));
+				} else {
+					Assert.assertTrue(
+							"The Continue Enrollment message is not displayed.../n Expected Message"
+									+ NEXT_ACTION_MODAL_MSG_ENROLL_PLAN + "\n Actual message"
+									+ nextBestActionModalMsg.get(0).getText(),
+							nextBestActionModalMsg.get(0).getText().equals(NEXT_ACTION_MODAL_MSG_ENROLL_PLAN));
+				}
 			}
 		} catch (Exception ex) {
 			System.out.println("NBA modal not found");
@@ -5391,6 +5428,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		}
 	}
 
+
 //NBA
 
 	public void validateNBAButton(String BtnName) {
@@ -5525,6 +5563,163 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		} catch (Exception ex) {
 			System.out.println("NBA modal not found");
 		}
+	}
+
+	/**
+	 * Click on View Saved plans button on Plan saved prompt
+	 * 
+	 * @return
+	 */
+	public VisitorProfilePage viewSavedPlans() {
+		viewSavedPlans.click();
+		if (driver.getCurrentUrl().contains("profile")) {
+			CommonUtility.checkPageIsReadyNew(driver);
+			return new VisitorProfilePage(driver);
+		} else {
+			System.out.println("Navigation to visitor profile is failed");
+			return null;
+		}
+	}
+
+	public void verifyNextBestActionModalForDrugCostAuthenticated() {
+		try {
+			if (nextBestActionModal.isDisplayed()) {
+				validate(getStartedBtn);
+				if (nextBestActionModalMsg.size() > 1) {
+					Assert.assertTrue(
+							"The Drug cost message is not displayed on NBA.../n Expected Message"
+									+ NEXT_ACTION_MODAL_MSG_DRUG_COST + "\n Actual message"
+									+ nextBestActionModalMsg.get(1).getText(),
+							nextBestActionModalMsg.get(1).getText().equals(NEXT_ACTION_MODAL_MSG_DRUG_COST));
+				} else {
+					Assert.assertTrue(
+							"The Drug cost message is not displayed on NBA.../n Expected Message"
+									+ NEXT_ACTION_MODAL_MSG_DRUG_COST + "\n Actual message"
+									+ nextBestActionModalMsg.get(0).getText(),
+							nextBestActionModalMsg.get(0).getText().equals(NEXT_ACTION_MODAL_MSG_DRUG_COST));
+				}
+			}
+		} catch (Exception ex) {
+			System.out.println("NBA modal not found");
+			Assert.fail("NBA element not found" + ex.getMessage());
+		}
+	}
+
+	public void clickSavedItems() {
+		validate(viewSavedItems);
+		jsClickNew(viewSavedItems);
+		// viewSavedItems.click();
+	}
+
+	public void clickGetStartedBtnOnNba() {
+		getStartedBtn.click();
+	}
+
+	public void validateProviderNBA() {
+		try {
+			if (nextBestActionModal.isDisplayed()) {
+				validate(nextBestActionModalFindMyDoctorsBtn);
+				if (nextBestActionModalMsg.size() > 1) {
+					Assert.assertTrue(
+							"The Provider NBA message is not displayed on NBA.../n Expected Message"
+									+ NEXT_ACTION_MODAL_MSG_PROVIDER_SEARCH + "\n Actual message"
+									+ nextBestActionModalMsg.get(1).getText(),
+							nextBestActionModalMsg.get(1).getText().equals(NEXT_ACTION_MODAL_MSG_PROVIDER_SEARCH));
+				} else {
+					Assert.assertTrue(
+							"The Provider NBA message is not displayed on NBA.../n Expected Message"
+									+ NEXT_ACTION_MODAL_MSG_PROVIDER_SEARCH + "\n Actual message"
+									+ nextBestActionModalMsg.get(0).getText(),
+							nextBestActionModalMsg.get(0).getText().equals(NEXT_ACTION_MODAL_MSG_PROVIDER_SEARCH));
+				}
+			}
+		} catch (Exception ex) {
+			System.out.println("NBA modal not found");
+		}
+	}
+
+	public void verifySelectPlanForEnrollModalForallPlans(List<String> allPlanNames) {
+		try {
+			List<String> actualPlanNames = new ArrayList<String>();
+			if (selectPlanForEnrolModal.isDisplayed()) {
+				for (WebElement plan : plansInPopup) {
+					String text = plan.getText();
+					for (WebElement child : plan.findElements(By.xpath("./*"))) {
+						text = text.replaceFirst(child.getText(), "");
+					}
+					actualPlanNames.add(text.trim());
+				}
+				Collections.sort(allPlanNames);
+				Collections.sort(actualPlanNames);
+				System.out.println(allPlanNames);
+				System.out.println(actualPlanNames);
+				jsClickNew(enrollModalCloseBtn);
+				Assert.assertTrue("All plans not displayed in Enroll Plan Popup.../n Expected plans" + allPlanNames
+						+ "\n Actual plans" + actualPlanNames, actualPlanNames.equals(allPlanNames));
+			}
+
+		} catch (Exception ex) {
+			System.out.println("NBA modal not found");
+		}
+	}
+
+
+	public void verifyNextBestActionModalForContinueEnrollment() {
+		try {
+			if (nextBestActionModal.isDisplayed()) {
+				Assert.assertTrue(
+						"The Continue Enrollment message is not displayed.../n Expected Message"
+								+ NEXT_ACTION_MODAL_MSG_CONTINUE_ENROLLMENT + "\n Actual message"
+								+ nextBestActionModalMsgAuthenticated.getText(),
+						nextBestActionModalMsgAuthenticated.getText()
+								.equals(NEXT_ACTION_MODAL_MSG_CONTINUE_ENROLLMENT));
+			}
+		} catch (Exception ex) {
+			System.out.println("NBA modal not found");
+		}
+	}
+
+	public void clickNextBestActionModalContinueEnrollmentBtn() {
+		waitTillElementClickableInTime(nextBestActionModalContinueEnrollmentBtn, 15);
+		nextBestActionModalContinueEnrollmentBtn.click();
+	}
+
+	public void verifyNavigationToOLEPage() {
+		if (driver.getTitle().contains("Online Enrollment")) {
+			System.out.println("OLE Welcome Page is Displayed");
+		} else {
+			Assert.fail("User not navigates to OLE page");
+		}
+	}
+
+	public void verifyNextBestActionModalForContinueEnrollmentMultiplePlans() {
+		try {
+			if (nextBestActionModal.isDisplayed()) {
+				validateNew(nextBestActionModalSelectPlanBtn);
+				Assert.assertTrue(
+						"The Continue Enrollment message is not displayed.../n Expected Message"
+								+ NEXT_ACTION_MODAL_MSG_CONTINUE_ENROLLMENT + "\n Actual message"
+								+ nextBestActionModalMsgAuthenticated.getText(),
+						nextBestActionModalMsgAuthenticated.getText()
+								.equals(NEXT_ACTION_MODAL_MSG_CONTINUE_ENROLLMENT));
+			}
+		} catch (Exception ex) {
+			Assert.fail("NBA modal not found");
+		}
+	}
+
+	public void clickSelectPlanButton() {
+		waitTillElementClickableInTime(nextBestActionModalSelectPlanBtn, 15);
+		nextBestActionModalSelectPlanBtn.click();
+	}
+
+	public void validateContinueEnrollmentModal() {
+		Assert.assertTrue("Continue enrollment button not displayed for each plan",
+				selectPlanModalPlansList.size() == selectPlanModalContinueEnrollmentBtnList.size());
+	}
+
+	public void clickContinueEnrollmentBtnOnModal() {
+		selectPlanModalContinueEnrollmentBtnList.get(0).click();
 	}
 
 }

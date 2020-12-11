@@ -1,5 +1,5 @@
 @DCE_Redesign_VPP_PlanSummary
-Feature: 1.10.2 DCE-Redesign-VPP_PlanSummary AARP - To test VPP Plan Details - DCE Flows in AARP site
+Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanSummary AARP - To test VPP Plan Details - DCE Flows in AARP site
 
   @DCE_Redesign_VPP_PlanSummary_Plan
   Scenario Outline: 1.10.2.1 To test the DCE Redesign flow for PlanType :  <plantype> from vpp Plan Summary
@@ -133,3 +133,39 @@ Feature: 1.10.2 DCE-Redesign-VPP_PlanSummary AARP - To test VPP Plan Details - D
     Examples: 
       | zipcode | plantype | county       | isMultutiCounty | drug1   | planname                                              |
       |   78006 | SNP      | Bexar County | yes             | Orkambi | UnitedHealthcare Medicare Silver (Regional PPO C-SNP) |
+      
+      @dceSavePlanDifferentZipcode @F519020
+   Scenario Outline: Test to Verify the Plan saved correctly in visitor profile through differnt zipcodes
+   Given the user is on medicare acquisition site landing page
+    	|Site| <site>|
+    When the user performs plan search using following information
+      | Zip Code        | <zipcode>         |
+      | County Name     | <county>          |
+      | Is Multi County | <isMultutiCounty> |
+    And the user views the plans of the below plan type and select Next year
+      | Plan Type | <plantype> |
+      And user saves below plan
+      | Plan Type | <plantype> |
+      | Plan Name | <planname> |
+    And I access the DCE Redesign from Plan Summary for mentioned plan
+      | Plan Type | <plantype> |
+      | Plan Name | <planname> |
+    Then the user validates Get Started Page
+    Then the user clicks on Build Drug List to navigate to Build Drug List Page
+    Then the user searches and adds the following Drug to Drug List
+      | DrugName | <drug1> |
+    Then the user clicks on Review Drug Costs to Land on Drug DetailsP Page
+    Then the user validates planName matches plan Name in VPP
+    Then the user click on return to plan summary on DCE summary page
+     And user changes the new zipcode on vpp summary page
+     | New Zip Code        | <newzipcode> |
+    And user navigate to Drug Summary page
+    Then user save the plan on drug detail page 
+    When the user navigate to Visitor profile page
+    And user validates the plans on new visitor profile page of AARP site
+      | Test Plans  |<mapdtestPlans> |
+    
+     Examples: 
+      |	site	| zipcode | plantype | county | isMultutiCounty | drug1   | planname                                           |mapdtestPlans|newzipcode|
+      |	AARP	|   90210 | MAPD     | none   | no              | Orkambi | AARP Medicare Advantage SecureHorizons Focus (HMO) |AARP Medicare Advantage Plan 1 (HMO) |10001|
+      
