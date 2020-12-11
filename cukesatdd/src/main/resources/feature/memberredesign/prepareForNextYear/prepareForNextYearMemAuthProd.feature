@@ -118,8 +118,8 @@ Feature: 1.25.2 Member Prepare For Next Year - PROD
 	@prod_pfny01_comboPdpSsp
     Examples: 
 	    | index | FID     | username  | password  | MemUserName       | planType | memberType                 |
-	    | 1-07  | F437767 | kkumard   | tnps459#  | JSENFYFDRE#ERY2GO | PDP      | COMBO_PDP_GRP_SSP_GRP_PFNY |
-	    | 1-08  | F437767 | kkumard   | tnps459#  | JSENFYFDRE#ERY2GO | SSP      | COMBO_PDP_GRP_SSP_GRP_PFNY |
+	    | 1-07  | F437767 | kkumard   | tnps459#  | DKELLY27          | PDP      | COMBO_PDP_GRP_SSP_GRP_PFNY |
+	    | 1-08  | F437767 | kkumard   | tnps459#  | DKELLY27          | SSP      | COMBO_PDP_GRP_SSP_GRP_PFNY |
 		
 	@prod_pfny01_comboMaPdp
     Examples: 
