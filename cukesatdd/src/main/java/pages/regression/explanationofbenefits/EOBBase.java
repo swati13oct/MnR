@@ -449,7 +449,7 @@ public class EOBBase extends EOBWebElements{
 		String apiReqeust=null;
 		List<LogEntry> entries = driver.manage().logs().get(LogType.PERFORMANCE).getAll();
 
-		if (eobType.equals("dream")) {
+		if (eobType.equals("dream") && !memberType.contains("DSNP") && !planType.equals("SSP")) {
 			//note: need to do two search
 			System.out.println("TEST - first API request...");
 			String lookForText1="/dreamEob/search?memberNumber=";
@@ -460,7 +460,7 @@ public class EOBBase extends EOBWebElements{
 				//System.out.println("TEST each line="+line);
 				if (line.contains(lookForText1) && line.contains(lookForText2)) {
 					apiReqeust=line;
-					System.out.println("TEST found line="+line);
+					//keepForDebug System.out.println("TEST found line="+line);
 					//break; //note: only break if looking for the first response, otherwise always take the latest line
 				}
 			}
@@ -476,7 +476,7 @@ public class EOBBase extends EOBWebElements{
 					String line=entry.getMessage();
 					if (line.contains(lookForText1) && line.contains(lookForText2)) {
 						apiReqeust=line;
-						System.out.println("TEST found line="+line);
+						//keepForDebug System.out.println("TEST found line="+line);
 						//break; //note: only break if looking for the first response, otherwise always take the latest line
 					}
 				}
@@ -484,6 +484,42 @@ public class EOBBase extends EOBWebElements{
 				System.out.println("TEST - r_urlStr="+r_urlStr);
 				urlList.add(r_urlStr);
 			}
+			return urlList; 
+		} else if (memberType.contains("DSNP") || planType.equals("SSP")) {
+			//note: need to do two search, release 12/16 has cover medical only
+			System.out.println("TEST - first API request...");
+			String lookForText1="dreamEob/search/medicaleobs?";
+			String lookForText2="responseReceived";
+
+			for (LogEntry entry : entries) {
+				String line=entry.getMessage();
+				//System.out.println("TEST each line="+line);
+				if (line.contains(lookForText1) && line.contains(lookForText2)) {
+					apiReqeust=line;
+					//keepForDebug System.out.println("TEST found line="+line);
+					//break; //note: only break if looking for the first response, otherwise always take the latest line
+				}
+			}
+			Assert.assertTrue("PROBLEM - unable to locate the network entry that contains '"+lookForText1+"' and '"+lookForText2+"'", apiReqeust!=null);
+			String m_urlStr=parseLine(apiReqeust);
+			System.out.println("TEST - m_urlStr="+m_urlStr);
+			urlList.add(m_urlStr);
+			/* TODO
+			if (!planType.equals("MA")) {
+				System.out.println("TEST - second API request...");
+				lookForText1="/dreamEob/rx/search?medicareId";
+				for (LogEntry entry : entries) {
+					String line=entry.getMessage();
+					if (line.contains(lookForText1) && line.contains(lookForText2)) {
+						apiReqeust=line;
+						//keepForDebug System.out.println("TEST found line="+line);
+						//break; //note: only break if looking for the first response, otherwise always take the latest line
+					}
+				}
+				String r_urlStr=parseLine(apiReqeust);
+				System.out.println("TEST - r_urlStr="+r_urlStr);
+				urlList.add(r_urlStr);
+			} */
 			return urlList; 
 		} else {
 			String lookForText1="/member/claims/eob/search";  //note: non-Dream case
@@ -501,13 +537,13 @@ public class EOBBase extends EOBWebElements{
 				if (memberType.contains("COMBO")) {
 					if (line.contains(lookForText1) && line.contains(lookForText2) && line.contains(lookForText3)) {
 						apiReqeust=line;
-						System.out.println("TEST found line="+line);
+						//keepForDebug System.out.println("TEST found line="+line);
 						//break;  //note: only break if looking for the first response, otherwise always take the latest line
 					}
 				} else {
 					if (line.contains(lookForText1) && line.contains(lookForText2)) {
 						apiReqeust=line;
-						System.out.println("TEST found line="+line);
+						//keepForDebug System.out.println("TEST found line="+line);
 						//break; //note: only break if looking for the first response, otherwise always take the latest line
 					}
 				} 
@@ -730,10 +766,28 @@ public class EOBBase extends EOBWebElements{
 
 			if (eobType!=null && !eobType.equals("")) { 
 				System.out.println("TEST - this is DREAM EOB - eobDate="+eobDate+" | espType="+eobType+" | esp="+esp+" | compoundDoc="+compoundDoc);
-				apiResponse.addEob(eobDate, esp, eobType, compoundDoc);
+				boolean addedAlready=false;
+				for(Eob e: apiResponse.getListOfEob()) {
+					if (e.getCompoundDoc().equals(compoundDoc)) {
+						addedAlready=true;
+						System.out.println("this compoundDoc code already processed, skipping");
+						break;
+					}
+				}
+				if (!addedAlready)
+					apiResponse.addEob(eobDate, esp, eobType, compoundDoc);
 			} else {
 				System.out.println("TEST - this is NON-DREAM EOB - eobDate="+eobDate+" | esp="+esp+" | compoundDoc="+compoundDoc);
-				apiResponse.addEob(eobDate, esp, compoundDoc);
+				boolean addedAlready=false;
+				for(Eob e: apiResponse.getListOfEob()) {
+					if (e.getCompoundDoc().equals(compoundDoc)) {
+						addedAlready=true;
+						System.out.println("this compoundDoc code already processed, skipping");
+						break;
+					}
+				}
+				if (!addedAlready)
+					apiResponse.addEob(eobDate, esp, compoundDoc);
 			}
 		} 
 		return apiResponse;
