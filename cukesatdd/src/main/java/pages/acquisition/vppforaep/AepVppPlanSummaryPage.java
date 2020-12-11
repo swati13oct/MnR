@@ -227,13 +227,16 @@ public class AepVppPlanSummaryPage extends UhcDriver {
 		String rowXpath = "";
 		String headerPremiumXpath = planCard+"//*[contains(@class,'monthly-cost')]";
 		String headerPrem = "header premium"; //this variable will be stored as key for the header premium
-		
+		String headerPremiumText = "Header not found";
 		if(planName.contains("PDP"))
 			rowXpath = planCard+"//*[contains(@class,'pdpbenefittable')]//ul//li";
 		else {
 			rowXpath = planCard+"//ul[contains(@class,'benefits-table')]//li";
 			List<WebElement> headerPremium = driver.findElements(By.xpath(headerPremiumXpath));
-			String headerPremiumText = headerPremium.get(0).getText(); //this variable will be stored as value for the header premium value
+			if(headerPremium.size()!=0) {
+				 headerPremiumText = headerPremium.get(0).getText(); //this variable will be stored as value for the header premium value
+				
+			}
 			result.put(headerPrem, headerPremiumText);
 		}
 		List<WebElement> listOfRowsPerTable=driver.findElements(By.xpath(rowXpath));
