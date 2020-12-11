@@ -1,17 +1,11 @@
 Feature: To test Renew Checkout Summary Page
 
-  @Sanity @Regression
+  @STAGERegression
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Complete Your Renewal Page Functionality
-    Given the user is on member auth login flow page
-    When the member is able to login with correct username and password
-      | Username | <username> |
-      | Password | <password> |
-    And Member Enters the Username he wants to search
-      | MemUsername | <MemUserName> |
-    And user clicks on member to select
-    When now user navigates to the pharmacies and prescriptions page from dashboard or testharness page
-      | PlanType    | <planType>   |
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type   | <planType>   |
       | Member Type | <memberType> |
+    When user navigates to the pharmacies and prescriptions page from testharness page
     And user fetches medication informations and clicks on Renew Medication call to action button
     Then user will see "Complete Your Renewal" Page
     When user views the Medications section
@@ -52,6 +46,7 @@ Feature: To test Renew Checkout Summary Page
     Then user will view the disclaimer message
     And disclaimer will remind the user that "OptumRx" is fulfilling the order
 
-    Examples: 
-      | FID     | username | password | MemUserName | planType | memberType     |
-      | F484041 | ntalesha | pass@123 | Jaewoo34 | MPDP     | Individual_PnP |
+
+    Examples:
+      | planType | memberType             |
+      | PDP     | Rx_Refill_ChangePaymentMethod |

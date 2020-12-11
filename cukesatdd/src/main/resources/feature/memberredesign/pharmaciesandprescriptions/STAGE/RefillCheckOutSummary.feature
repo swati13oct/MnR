@@ -1,18 +1,12 @@
 Feature: To test Refill Checkout Summary Page
 
-  @Sanity @Regression
+  @STAGERegression
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Complete Your Refill Page Functionality
-    Given the user is on member auth login flow page
-    When the member is able to login with correct username and password
-      | Username | <username> |
-      | Password | <password> |
-    And Member Enters the Username he wants to search
-      | MemUsername | <MemUserName> |
-    And user clicks on member to select
-    #When user navigates to the pharmacies and prescriptions page from testharness page
-    And now user navigates to the pharmacies and prescriptions page from dashboard or testharness page
-      | PlanType    | <planType>   |
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type   | <planType>   |
       | Member Type | <memberType> |
+    When user navigates to the pharmacies and prescriptions page from testharness page
+    #And now user navigates to the pharmacies and prescriptions page from dashboard or testharness page
     And user fetches medication information and clicks on Refill Medication call to action button
     Then user will see "Complete Your Refill" Page
     When user views the Medications section
@@ -53,6 +47,7 @@ Feature: To test Refill Checkout Summary Page
     Then user will view the disclaimer message
     And disclaimer will remind the user that "OptumRx" is fulfilling the order
 
-    Examples: 
-      | FID     | username | password | MemUserName | planType | memberType     |
-      | F481927 | ntalesha | pass@123 | Tlhoffmann65 | MPDP     | Individual_PnP |
+    Examples:
+      | planType | memberType             |
+      | PDP     | Rx_Refill_ChangePaymentMethod |
+

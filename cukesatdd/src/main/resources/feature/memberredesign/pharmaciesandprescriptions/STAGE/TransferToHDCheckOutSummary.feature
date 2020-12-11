@@ -1,17 +1,11 @@
 Feature: To test Transfer To HD Checkout Summary Page
 
-  @Regression @Sanity
+  @STAGERegression
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Transfer to Home Delivery Page Functionality
-    Given the user is on member auth login flow page
-    When the member is able to login with correct username and password
-      | Username | <username> |
-      | Password | <password> |
-    And Member Enters the Username he wants to search
-      | MemUsername | <MemUserName> |
-    And user clicks on member to select
-    And now user navigates to the pharmacies and prescriptions page from dashboard or testharness page
-      | PlanType    | <planType>   |
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type   | <planType>   |
       | Member Type | <memberType> |
+    When user navigates to the pharmacies and prescriptions page from testharness page
     And user fetches medication informations and clicks on Transfer To HD call to action button on My Medication Page
     Then user will see "Transfer to Home Delivery" Page
     When user views the Medications section
@@ -52,6 +46,6 @@ Feature: To test Transfer To HD Checkout Summary Page
     Then user will view the disclaimer message
     And disclaimer will remind the user that "OptumRx" is fulfilling the order
 
-    Examples: 
-      | FID     | username | password | MemUserName | planType | memberType     |
-      | F484057 | ntalesha | pass@123 | DorisJean27 | MPDP     | Individual_PnP |
+    Examples:
+      | planType | memberType             |
+      | PDP     | Rx_Refill_AutoRefillOff |
