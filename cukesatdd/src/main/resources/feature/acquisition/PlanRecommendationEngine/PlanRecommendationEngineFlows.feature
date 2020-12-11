@@ -118,6 +118,9 @@ Feature: Plan Recommendation Engine flow - Verify PRE flows functionalities with
       | Additional Option | <Dental-Hearing-Vision-Fitness> |
     Then user selects cost preferences option in cost preferences page
       | Preference Option | <costPreferenceOption> |
+    Then user selects priority in priorities page
+      | Priority Option | <priorityOption> |
+      | Priorities      | <priorities>     |
     Then user validate elements in loading results page
     Then user validate recommendations in results page
       | Zip Code           | <Zipcode>           |
@@ -126,9 +129,9 @@ Feature: Plan Recommendation Engine flow - Verify PRE flows functionalities with
       | 2nd Recommendation | <2ndRecommendation> |
 
     Examples: 
-      | Zipcode | isMultiCounty | county         | isCoverageOpt | specialNeeds | travel   | doctors         | DoctorsName | isMultiDoctor | Dental-Hearing-Vision-Fitness | costPreferenceOption | 1stRecommendation | 2ndRecommendation |
-      |   10003 | NO            | New York       | MA            | None         | withinUS | Lookup          | john        | YES           | Yes,No,No,Yes                 | Lower                | MA                | MS                |
-      |   25813 | NO            | Raleigh County | MA            | Medicaid     | regular  | AcceptsMedicare |             |               | No,No,No,No                   | Higher               | MS                |                   |
+      | Zipcode | isMultiCounty | county         | isCoverageOpt | specialNeeds | travel   | doctors         | DoctorsName | isMultiDoctor | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities      | 1stRecommendation | 2ndRecommendation |
+      |   10003 | NO            | New York       | MA            | None         | withinUS | Lookup          | john        | YES           | Yes,No,No,Yes                 | Lower                | both           | Doctors, Dental | MA                | MS                |
+      |   25813 | NO            | Raleigh County | MA            | Medicaid     | regular  | AcceptsMedicare |             |               | No,No,No,No                   | Higher               | None           | Doctors, Dental | MS                |                   |
 
   @PRE @planrecommendation @MAPDFlow @F358830 @F458224 @PRERegression2
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds> , <travel> , <doctors> , <DoctorsName> , <isMultiDoctor> , <Drug Selection> , <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch> , <pharmacyoption> , <Dental-Hearing-Vision-Fitness> , <costPreferenceOption> - To validate MAPD flow functions with drug functions for MA plans in PRE
@@ -272,6 +275,9 @@ Feature: Plan Recommendation Engine flow - Verify PRE flows functionalities with
       | Additional Option | <Dental-Hearing-Vision-Fitness> |
     Then user selects cost preferences option in cost preferences page
       | Preference Option | <costPreferenceOption> |
+    Then user selects priority in priorities page
+      | Priority Option | <priorityOption> |
+      | Priorities      | <priorities>     |
     Then user validate elements in loading results page
     Then user validate recommendations in results page
       | Zip Code           | <Zipcode>           |
@@ -280,8 +286,8 @@ Feature: Plan Recommendation Engine flow - Verify PRE flows functionalities with
       | 2nd Recommendation | <2ndRecommendation> |
 
     Examples: 
-      | Zipcode | isMultiCounty | county   | isCoverageOpt | specialNeeds | travel  | doctors | DoctorsName | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch | pharmacyoption | Dental-Hearing-Vision-Fitness | costPreferenceOption | 1stRecommendation | 2ndRecommendation |
-      |   10001 | NO            | New York | None          | Medicaid     | regular | Lookup  | sue         | NO            | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,1,YES,NO                               | Retail         | Yes,No,No,Yes                 | Lower                | SNP               | MA                |
+      | Zipcode | isMultiCounty | county   | isCoverageOpt | specialNeeds | travel  | doctors | DoctorsName | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch | pharmacyoption | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities             | 1stRecommendation | 2ndRecommendation |
+      |   10001 | NO            | New York | None          | Medicaid     | regular | Lookup  | sue         | NO            | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,1,YES,NO                               | Retail         | Yes,No,No,Yes                 | Lower                | 1st            | Drug Cost, Health Cost | SNP               | MA                |
 
   @PRE @planrecommendation @DKFlow @DKskipdrug @F358830 @PRERegression5
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds> , <travel> , <doctors> , <DoctorsName> , <isMultiDoctor> , <Drug Selection> , <Dental-Hearing-Vision-Fitness> , <costPreferenceOption> - To validate MAPD flow functions with skip drug with CSNP in PRE
@@ -307,6 +313,7 @@ Feature: Plan Recommendation Engine flow - Verify PRE flows functionalities with
       | Additional Option | <Dental-Hearing-Vision-Fitness> |
     Then user selects cost preferences option in cost preferences page
       | Preference Option | <costPreferenceOption> |
+    And verify continue function on "Priorities" page
     Then user validate elements in loading results page
     Then user validate recommendations in results page
       | Zip Code           | <Zipcode>           |
@@ -342,6 +349,9 @@ Feature: Plan Recommendation Engine flow - Verify PRE flows functionalities with
       | Additional Option | <Dental-Hearing-Vision-Fitness> |
     Then user selects cost preferences option in cost preferences page
       | Preference Option | <costPreferenceOption> |
+    Then user selects priority in priorities page
+      | Priority Option | <priorityOption> |
+      | Priorities      | <priorities>     |
     Then user validate elements in loading results page
     Then user validate recommendations in results page
       | Zip Code           | <Zipcode>           |
@@ -350,8 +360,8 @@ Feature: Plan Recommendation Engine flow - Verify PRE flows functionalities with
       | 2nd Recommendation | <2ndRecommendation> |
 
     Examples: 
-      | Zipcode | isMultiCounty | county       | isCoverageOpt | specialNeeds | travel  | doctors    | DoctorsName | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption | 1stRecommendation | 2ndRecommendation |
-      |   84315 | YES           | Davis County | None          | chronic      | regular | UHGNetwork |             |               | Yes            | Yes,Yes,Yes,Yes               | Lower                | SNP               | MA                |
+      | Zipcode | isMultiCounty | county       | isCoverageOpt | specialNeeds | travel  | doctors    | DoctorsName | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities             | 1stRecommendation | 2ndRecommendation |
+      |   84315 | YES           | Davis County | None          | chronic      | regular | UHGNetwork |             |               | Yes            | Yes,Yes,Yes,Yes               | Lower                | None           | Drug Cost, Health Cost | SNP               | MA                |
 
   @PRE @planrecommendation @MAflowTie @F432670 @PRERegression5
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds> , <travel> , <doctors> , <DoctorsName> , <isMultiDoctor> , <Dental-Hearing-Vision-Fitness> , <costPreferenceOption> , <1stRecommendation> , <2ndRecommendation> - To validate MA flow functions in PRE
@@ -375,6 +385,9 @@ Feature: Plan Recommendation Engine flow - Verify PRE flows functionalities with
       | Additional Option | <Dental-Hearing-Vision-Fitness> |
     Then user selects cost preferences option in cost preferences page
       | Preference Option | <costPreferenceOption> |
+    Then user selects priority in priorities page
+      | Priority Option | <priorityOption> |
+      | Priorities      | <priorities>     |
     Then user validate elements in loading results page
     Then user validate tie recommendations in results page
       | Zip Code           | <Zipcode>           |
@@ -383,14 +396,14 @@ Feature: Plan Recommendation Engine flow - Verify PRE flows functionalities with
       | 2nd Recommendation | <2ndRecommendation> |
 
     Examples: 
-      | Zipcode | isMultiCounty | county   | isCoverageOpt | specialNeeds | travel   | doctors         | DoctorsName | isMultiDoctor | Dental-Hearing-Vision-Fitness | costPreferenceOption | 1stRecommendation | 2ndRecommendation |
-      |   10003 | NO            | New York | MA            | None         | withinUS | AcceptsMedicare |             |               | Yes,No,No,No                  | Lower                | MA                | MS                |
-      |   10001 | NO            | New York | MA            | Medicaid     | regular  | AcceptsMedicare |             |               | Yes,No,No,No                  | Lower                | SNP               |                   |
-      |   10002 | NO            | New York | MA            | None         | None     | UHGNetwork      |             |               | No,No,No,No                   | Lower                | MA                |                   |
-      |   25813 | NO            | Raleigh  | MA            | Medicaid     | regular  | AcceptsMedicare |             |               | No,No,No,No                   | Higher               | MS                |                   |
-      |   00501 | NO            | Suffolk  | MA            | chronic      | withinUS | AcceptsMedicare |             |               | Yes,No,No,No                  | Lower                | MA                | MS                |
-      |   00610 | NO            | Anasco   | MA            | None         | withinUS | AcceptsMedicare |             |               | Yes,No,No,No                  | Lower                | MS                |                   |
-      |   00610 | NO            | Anasco   | MA            | None         | None     | UHGNetwork      |             |               | No,No,No,No                   | Lower                |                   |                   |
+      | Zipcode | isMultiCounty | county   | isCoverageOpt | specialNeeds | travel   | doctors         | DoctorsName | isMultiDoctor | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities           | 1stRecommendation | 2ndRecommendation |
+      |   10003 | NO            | New York | MA            | None         | withinUS | AcceptsMedicare |             |               | Yes,No,No,No                  | Lower                | both           | Travel, Health Cost  | MA                | MS                |
+      |   10001 | NO            | New York | MA            | Medicaid     | regular  | AcceptsMedicare |             |               | Yes,No,No,No                  | Lower                | both           | Doctors, Dental      | SNP               |                   |
+      |   10002 | NO            | New York | MA            | None         | None     | UHGNetwork      |             |               | No,No,No,No                   | Lower                | None           | Doctors, Dental      | MA                |                   |
+      |   25813 | NO            | Raleigh  | MA            | Medicaid     | regular  | AcceptsMedicare |             |               | No,No,No,No                   | Higher               | 1st            | Doctors, Health Cost | MS                |                   |
+      |   00501 | NO            | Suffolk  | MA            | chronic      | withinUS | AcceptsMedicare |             |               | Yes,No,No,No                  | Lower                | 2nd            | Doctors, Health Cost | MA                | MS                |
+      |   00610 | NO            | Anasco   | MA            | None         | withinUS | AcceptsMedicare |             |               | Yes,No,No,No                  | Lower                | both           | Travel, Doctors      | MS                |                   |
+      |   00610 | NO            | Anasco   | MA            | None         | None     | UHGNetwork      |             |               | No,No,No,No                   | Lower                | 1st            | Doctors, Health Cost |                   |                   |
 
   @PRE @planrecommendation @MAPDFlowTie @PRERegression5
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds> , <travel> , <doctors> , <DoctorsName> , <isMultiDoctor> ,<Drug Selection> , <Dental-Hearing-Vision-Fitness> , <costPreferenceOption> - To validate MAPD flow functions with zero drug in PRE
@@ -416,6 +429,7 @@ Feature: Plan Recommendation Engine flow - Verify PRE flows functionalities with
       | Additional Option | <Dental-Hearing-Vision-Fitness> |
     Then user selects cost preferences option in cost preferences page
       | Preference Option | <costPreferenceOption> |
+    And verify continue function on "Priorities" page
     Then user validate elements in loading results page
     Then user validate tie recommendations in results page
       | Zip Code           | <Zipcode>           |

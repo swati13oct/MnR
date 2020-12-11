@@ -25,6 +25,7 @@ Feature: Plan Recommendation Engine flow - Verify Results page in plan Recommend
       | Additional Option | <Dental-Hearing-Vision-Fitness> |
     Then user selects cost preferences option in cost preferences page
       | Preference Option | <costPreferenceOption> |
+    And verify continue function on "Priorities" page
     Then user validate elements in loading results page
 
     Examples: 
@@ -58,6 +59,7 @@ Feature: Plan Recommendation Engine flow - Verify Results page in plan Recommend
       | Additional Option | <Dental-Hearing-Vision-Fitness> |
     Then user selects cost preferences option in cost preferences page
       | Preference Option | <costPreferenceOption> |
+    And verify continue function on "Priorities" page
     Then user validate elements in loading results page
     Then user validate MA Plan Names in VPP Summary VS Details in results page
     Then user validate PDP Plan Names in VPP Summary VS Details in results page

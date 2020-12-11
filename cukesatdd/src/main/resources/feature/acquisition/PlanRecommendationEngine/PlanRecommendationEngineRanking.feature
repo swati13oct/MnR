@@ -28,13 +28,16 @@ Feature: Plan Recommendation Engine Ranking - Verify PRE flows functionalities w
       | Additional Option | <Dental-Hearing-Vision-Fitness> |
     Then user selects cost preferences option in cost preferences page
       | Preference Option | <costPreferenceOption> |
+    Then user selects priority in priorities page
+      | Priority Option | <priorityOption> |
+      | Priorities      | <priorities>     |
     Then user validate elements in loading results page
     Then user validate UI and API recommendation rankings in results page
 
     Examples: 
-      | Zipcode | isMultiCounty | county      | isCoverageOpt | specialNeeds | travel    | doctors    | DoctorsName         | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch | pharmacyoption | Dental-Hearing-Vision-Fitness | costPreferenceOption |
-      |   12345 | NO            | Schenectady | MAPD          | None         | withinUS  | UHGNetwork |                     |               | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,1,YES,NO                               | Online         | No,No,No,No                   | Lower                |
-      |   12345 | NO            | Schenectady | MAPD          | None         | outsideUS | Lookup     | Sherrie L Murray NP | NO            | Yes            | Lipitor,NO,Lipitor TAB 10MG,,,1,YES,NO                               | Retail         | Yes,Yes,Yes,Yes               | Higher               |
+      | Zipcode | isMultiCounty | county      | isCoverageOpt | specialNeeds | travel    | doctors    | DoctorsName         | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch | pharmacyoption | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities         |
+      |   12345 | NO            | Schenectady | MAPD          | None         | withinUS  | UHGNetwork |                     |               | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,1,YES,NO                               | Online         | No,No,No,No                   | Lower                | both           | Doctors, Drug Cost |
+      |   12345 | NO            | Schenectady | MAPD          | None         | outsideUS | Lookup     | Sherrie L Murray NP | NO            | Yes            | Lipitor,NO,Lipitor TAB 10MG,,,1,YES,NO                               | Retail         | Yes,Yes,Yes,Yes               | Higher               | None           | Doctors, Drug Cost |
 
   @PRE @Ranking @MAPlansRanking @F358846 @PRERegression1
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds> , <travel> , <doctors> , <DoctorsName> , <isMultiDoctor> , <Drug Selection> , <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch> , <pharmacyoption> , <Dental-Hearing-Vision-Fitness> , <costPreferenceOption> - To validate Ranking for MA plans in PRE
@@ -60,12 +63,15 @@ Feature: Plan Recommendation Engine Ranking - Verify PRE flows functionalities w
       | Additional Option | <Dental-Hearing-Vision-Fitness> |
     Then user selects cost preferences option in cost preferences page
       | Preference Option | <costPreferenceOption> |
+    Then user selects priority in priorities page
+      | Priority Option | <priorityOption> |
+      | Priorities      | <priorities>     |
     Then user validate elements in loading results page
     Then user validate UI and API recommendation rankings in results page
 
     Examples: 
-      | Zipcode | isMultiCounty | county      | isCoverageOpt | specialNeeds | travel | doctors         | DoctorsName | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption |
-      |   12345 | NO            | Schenectady | MAPD          | None         | None   | AcceptsMedicare |             |               | NO             | No,No,Yes,Yes                 | Lower                |
+      | Zipcode | isMultiCounty | county      | isCoverageOpt | specialNeeds | travel | doctors         | DoctorsName | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities          |
+      |   12345 | NO            | Schenectady | MAPD          | None         | None   | AcceptsMedicare |             |               | NO             | No,No,Yes,Yes                 | Lower                | 1st            | Health Cost, Vision |
 
   @PRE @Ranking @PDPPlansRanking @F358846 @PRERegression1
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <Drug Selection> , <primaryRecommendation> , <RankingplansOrder> - To validate PDP ranking plans in PRE
@@ -133,6 +139,7 @@ Feature: Plan Recommendation Engine Ranking - Verify PRE flows functionalities w
       | Additional Option | <Dental-Hearing-Vision-Fitness> |
     Then user selects cost preferences option in cost preferences page
       | Preference Option | <costPreferenceOption> |
+    And verify continue function on "Priorities" page
     Then user validate elements in loading results page
     Then user validate UI and API recommendation rankings in results page
 
