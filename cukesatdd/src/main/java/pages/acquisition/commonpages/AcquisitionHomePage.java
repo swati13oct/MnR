@@ -1909,7 +1909,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 					Assert.assertTrue(true);
 					System.out.println("Correct UHC Logo is Displayed");
 				} else {
-					Assert.fail("UHC logo is not dispalyed for Ulayer");
+					Assert.fail("UHC logo is not dispalyed for Blayer");
 				}
 				
 			}
@@ -1939,6 +1939,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			validateNew(headerRegisterLink);
 				Assert.assertTrue(true);
 			jsClickNew(headerRegisterLink);
+			CommonUtility.checkPageIsReadyNew(driver);
 			waitForPageLoadSafari();
 			if(validate(registerFirstName))
 				System.out.println("Register link is displayed in the header");
@@ -1954,10 +1955,11 @@ public class AcquisitionHomePage extends GlobalWebElements {
 //				Actions actions = new Actions(driver);
 //				actions.moveToElement(visitorprofileicon).perform();
 				jsMouseOver(visitorprofileicon);
-
+				visitorprofileicon.click();
 				System.out.println("Hover over visitor profile completed");
 			}
-			WebElement CreateProfile = driver.findElement(By.xpath("//a[contains(text(), 'Create Profile')]"));
+			//WebElement CreateProfile = driver.findElement(By.xpath("//a[contains(text(), 'Create Profile')]"));
+			WebElement CreateProfile = driver.findElement(By.xpath("//h3[@id='guest-profile']"));
 			WebElement VPSignIn = driver.findElement(
 					By.xpath("//a[contains(text(), 'Sign In') and not(contains(@aria-labelledby ,'VPSignIn'))]"));
 			validateNew(CreateProfile);
@@ -1969,7 +1971,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 				Assert.fail("Visitor Profile elements are not present on home page");
 			}
 			visitorprofileicon.click();
-			WebElement GuestProfile = driver.findElement(By.xpath("//*[contains(text(), 'Your Guest Profile')]"));
+			jsClickNew(CreateProfile);
+			//WebElement GuestProfile = driver.findElement(By.xpath("//*[contains(text(), 'Your Guest Profile')]"));
+			WebElement GuestProfile = driver.findElement(By.xpath("//h2[contains(text(), 'Your Guest Profile')]"));
 			CheckPageLoad();
 			waitForPageLoadSafari();
 			CheckiPerseptions();
@@ -1981,11 +1985,12 @@ public class AcquisitionHomePage extends GlobalWebElements {
 				Assert.fail("Visitor Profile page is not opening up");
 			}
 			driver.navigate().back();
-			CheckPageLoad();
+			CommonUtility.checkPageIsReady(driver);
+			/*CheckPageLoad();*/
 			waitForPageLoadSafari();
 			//CheckiPerseptions();
 
-			CommonUtility.waitForPageLoadNew(driver, findPlansButton, 30);
+			//CommonUtility.waitForPageLoadNew(driver, findPlansButton, 30);
 		}
 		
 		public void navigateToPath(String path) {
@@ -2003,6 +2008,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		}
 		
 		public void validateGlobalFooterLinks() {
+			scrollToView(footerHomeLink);
 			validateNew(footerHomeLink);
 			validateNew(footerAboutUsLink);
 			validateNew(footerContactUsLink);
@@ -2970,6 +2976,12 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			//MedicareAdvantagePlans.click();
 			jsClickNew(MedicareAdvantagePlans);
 			threadsleep(5);
+			if(driver.getCurrentUrl().contains("shop/medicare-advantage-plans.html")) {
+				Assert.assertTrue(true);
+				System.out.println("MA Plan Page open: URL-->  "+driver.getCurrentUrl());
+				}else {
+					Assert.fail("Error loading MA Link");
+				}
 //			Assert.assertEquals(driver.getCurrentUrl(), "https://www.stage-aarpmedicareplans.uhc.com/shop/medicare-advantage-plans.html");
 			if(driver.getCurrentUrl().contains("aarpmedicareplans.com")||driver.getCurrentUrl().contains("uhcmedicaresolutions.com")) {
 				assertTrue(true);
@@ -2986,7 +2998,13 @@ public class AcquisitionHomePage extends GlobalWebElements {
         	DualSpecialNeedsPlans.click();
 //			jsClickNew(DualSpecialNeedsPlans);
 			threadsleep(5);
-			Assert.assertEquals(driver.getCurrentUrl(), "https://www.stage-aarpmedicareplans.uhc.com/shop/dual-special-needs-plans.html");
+			if(driver.getCurrentUrl().contains("shop/dual-special-needs-plans.html")) {
+			Assert.assertTrue(true);
+			System.out.println("DSNP Plan Page open: URL--> "+driver.getCurrentUrl());
+			}else {
+				Assert.fail("Error loading DSNP Link");
+			}
+			//Assert.assertEquals(driver.getCurrentUrl(), "https://www.stage-aarpmedicareplans.uhc.com/shop/dual-special-needs-plans.html");
 			if(driver.getCurrentUrl().contains("aarpmedicareplans.com")||driver.getCurrentUrl().contains("uhcmedicaresolutions.com")) {
 				assertTrue(true);
 			}
@@ -2997,9 +3015,16 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			
 			threadsleep(6);
 //			MedicareSupplementInsurancePlans.click();
+			scrollToView(MedicareSupplementInsurancePlans);
 			jsClickNew(MedicareSupplementInsurancePlans);
 			threadsleep(5);
-			Assert.assertEquals(driver.getCurrentUrl(), "https://www.stage-aarpmedicareplans.uhc.com/shop/medicare-supplement-plans.html");
+			if(driver.getCurrentUrl().contains("shop/medicare-supplement-plans.html")) {
+				Assert.assertTrue(true);
+				System.out.println("MS Plan Page open: URL-->"+driver.getCurrentUrl());
+			}else {
+				Assert.fail("Error loading MS link");
+			}
+			//Assert.assertEquals(driver.getCurrentUrl(), "https://www.stage-aarpmedicareplans.uhc.com/shop/medicare-supplement-plans.html");
 			if(driver.getCurrentUrl().contains("aarpmedicareplans.com")||driver.getCurrentUrl().contains("uhcmedicaresolutions.com")) {
 				assertTrue(true);
 			}
@@ -3011,7 +3036,13 @@ public class AcquisitionHomePage extends GlobalWebElements {
 //			MedicarePrescriptionDrugPlans.click();
 			jsClickNew(MedicarePrescriptionDrugPlans);
 			threadsleep(5);
-			Assert.assertEquals(driver.getCurrentUrl(), "https://www.stage-aarpmedicareplans.uhc.com/shop/prescription-drug-plans.html");
+			if(driver.getCurrentUrl().contains("shop/prescription-drug-plans.html")) {
+				Assert.assertTrue(true);
+				System.out.println("PDP Plan Page open: URL-->"+driver.getCurrentUrl());
+			}else {
+				Assert.fail("Error loading PDP link");
+			}
+			//Assert.assertEquals(driver.getCurrentUrl(), "https://www.stage-aarpmedicareplans.uhc.com/shop/prescription-drug-plans.html");
 			if(driver.getCurrentUrl().contains("aarpmedicareplans.com")||driver.getCurrentUrl().contains("uhcmedicaresolutions.com")) {
 				assertTrue(true);
 		}
@@ -3022,7 +3053,13 @@ public class AcquisitionHomePage extends GlobalWebElements {
 //			MedicareEducation.click();
 			jsClickNew(MedicareEducation);
 			threadsleep(5);
-			Assert.assertEquals(driver.getCurrentUrl(), "https://www.stage-aarpmedicareplans.uhc.com/medicare-education.html");
+			if(driver.getCurrentUrl().contains("medicare-education.html")) {
+				Assert.assertTrue(true);
+				System.out.println("Medicare Education Homepage open: URL-->"+driver.getCurrentUrl());
+			}else {
+				Assert.fail("Error loading Medicare Education Homepage link");
+			}
+			//Assert.assertEquals(driver.getCurrentUrl(), "https://www.stage-aarpmedicareplans.uhc.com/medicare-education.html");
 			if(driver.getCurrentUrl().contains("aarpmedicareplans.com")||driver.getCurrentUrl().contains("uhcmedicaresolutions.com")) {
 				assertTrue(true);
 			}

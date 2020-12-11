@@ -21,12 +21,13 @@ Feature: 1.12 UAT - Header and Footer flows
     And the user clicks on browser back button
     And user clicks on agents&brokers link on disclaimers page
     And the user clicks on browser back button
-    And user verifies home link of agents&brokers page
+    #And user verifies home link of agents&brokers page
+    And user clicks on agents&brokers link on disclaimers page
     And the user clicks on browser back button
     When user accesses global header of the Medicare Plans home page
     And user verifies the logo 
     And user clicks on Sign in link 
-    And the user clicks on browser back button
+    #And the user clicks on browser back button
     And user clicks on register link 
     And the user clicks on browser back button
     Then user validates visitor profile 
