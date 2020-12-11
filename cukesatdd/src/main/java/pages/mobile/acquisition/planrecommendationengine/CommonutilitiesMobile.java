@@ -36,6 +36,7 @@ public class CommonutilitiesMobile extends UhcDriver {
 	public static final String pharmacyPageName = "Pharmacy"; //Removed From PRE
 	public static final String additionalServicesPageName = "Additional Services";
 	public static final String costPreferencesPageName = "Cost Preferences";
+	public static final String prioritiesPageName = "Priorities";
 	public static final String resultsPageName = "Plan Recommendation Summary";
 	
 	String flow;
@@ -393,14 +394,23 @@ public class CommonutilitiesMobile extends UhcDriver {
 			} else if (currentPageName.contains("COST")) {
 				previousPageName = "Additional";
 				previousPagePercentage = "80%";
-				nextPageName = "NULL";
-				nextPagePercentage = "NULL";
+				nextPageName = "Priorities";
+				nextPagePercentage = "96%";
 				currrentPagePercentage = "80%";
 				if (flow.equalsIgnoreCase("MA")) {
 					previousPagePercentage = "72%";
 					currrentPagePercentage = "72%";
 				}
-				return;
+			}else if (currentPageName.contains("PRIORITIES")) {
+				previousPageName = "Cost";
+				previousPagePercentage = "90%";
+				nextPageName = "NULL";
+				nextPagePercentage = "NULL";
+				currrentPagePercentage = "96%";
+				if (flow.equalsIgnoreCase("MA")) {
+					previousPagePercentage = "85%";
+					//currrentPagePercentage = "72%";
+				}
 			} else {
 				previousPageName = "";
 				previousPagePercentage = "";

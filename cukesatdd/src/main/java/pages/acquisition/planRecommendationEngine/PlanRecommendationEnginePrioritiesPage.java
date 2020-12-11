@@ -61,8 +61,6 @@ public class PlanRecommendationEnginePrioritiesPage extends UhcDriver {
 	@FindBy(css = "button.addAnotherLink")
 	private WebElement addAnotherLink;
 	
-	public HashMap<String, String> inputValues;
-	
 	public void prioritiesElements() {
 		System.out.println("Validating Priorities Page: ");
 		String currentPageUrl = driver.getCurrentUrl();
@@ -109,7 +107,7 @@ public class PlanRecommendationEnginePrioritiesPage extends UhcDriver {
 		else if(option.equalsIgnoreCase("1st")) {
 			priorityOptions(true,value.split(",")[0]);
 		}
-		else if(inputValues.get("Priority Option").equalsIgnoreCase("2nd")) {
+		else if(option.equalsIgnoreCase("2nd")) {
 			priorityOptions(false,value.split(",")[1]);
 		}
 		else {
