@@ -281,7 +281,7 @@ Feature: 1.25 Member Prepare For Next Year
 	@pfny_ind_mapd_aarp_sanity
     Examples: 
 	    | index | FID     | username  | password  | MemUserName               | planType | memberType | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | co_us | co_es | co_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh | showNxtYrPlan |
-	    | S2-01 | F437767 | kkumard   | mnrs786@  | mamireyes           | MAPD	 | IND_PFNY   | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | false | false | false | true          |
+	    | S2-01 | F437767 | kkumard   | mnrs786@  | kirit1976           | MAPD	 | IND_PFNY   | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | false | false | false | true          |
 
 	@pfny_grp_mapd_sanity
     Examples: 

@@ -49,7 +49,7 @@ Feature: 1.12.2 Member Rally claims - Member Auth - PROD
    @prod_rallyClaims01_mapd      @claims_prodsanityMapd_Individual
      Examples:   
        | TID   | username   | password  | MemUserName  | planType | memberType          | claimSystem     | 
-      | 15230 | kkumard   | tnps459#  | mamireyes | MAPD  | AARP_Individual     | COSMOS_CLAIMS   |
+      | 15230 | kkumard   | tnps459#  | kirit1976 | MAPD  | AARP_Individual     | COSMOS_CLAIMS   |
 
     @prod_rallyClaims01_ship @claims_prodsanityShip
     Examples: 

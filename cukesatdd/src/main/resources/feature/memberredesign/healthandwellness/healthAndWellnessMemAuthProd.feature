@@ -32,7 +32,7 @@ Feature: 1.09.1 Member Health and Wellness Page - Member Auth - PROD
     @prod_healthAndWellness01_ma_mapd @prod_sanity
     Examples: 
       | TID   | username  | password  | MemUserName     | planType | memberType        | hasReward | hasRenewActive |
-    #x| 15340 | kkumard   | tnps459#  | mamireyes | MAPD     | RewardsMember     | true      | true           |
+    #x| 15340 | kkumard   | tnps459#  | kirit1976 | MAPD     | RewardsMember     | true      | true           |
       | 15340 | kkumard   | tnps459#  | mleroy@mcn.org  | MAPD     | RewardsMember     | true      | false          |
 
     @prod_healthAndWellness01_ma_mapd

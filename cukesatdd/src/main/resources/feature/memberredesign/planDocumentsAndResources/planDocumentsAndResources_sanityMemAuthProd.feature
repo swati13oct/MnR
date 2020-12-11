@@ -36,7 +36,7 @@ Feature: 1.06.7.1 Member Plans and Documents - Sanity - PROD
 	@prod_active_mapd_1of2 @sanity
 	Examples: 
       | index | TID         | username  | password  | MemUserName     | planType | memberType            | pm_sd | mm_sd | an_sd | pd_sd |
-      | S-01  | 15108       | kkumard   | mnrs786@  | mamireyes | MAPD     | AARP_IND_EFF_PDnR     | true  | true  | true  | true  |	
+      | S-01  | 15108       | kkumard   | mnrs786@  | kirit1976 | MAPD     | AARP_IND_EFF_PDnR     | true  | true  | true  | true  |	
 
 	@prod_active_ship_1of2 @sanity
 	Examples: 
@@ -74,7 +74,7 @@ Feature: 1.06.7.1 Member Plans and Documents - Sanity - PROD
 	@prod_active_mapd_2of2 @sanity
 	Examples: 
       | index | TID         | username  | password  | MemUserName     | planType | memberType            | fnr_sd | md_sd | eob_sd | rm_sd |
-      | S-01  | 15108       | kkumard   | mnrs786@  | mamireyes | MAPD     | AARP_IND_EFF_PDnR     | true   | true  | true   | true  |	
+      | S-01  | 15108       | kkumard   | mnrs786@  | kirit1976 | MAPD     | AARP_IND_EFF_PDnR     | true   | true  | true   | true  |	
 
 	@prod_active_ship_2of2 @sanity
 	Examples: 

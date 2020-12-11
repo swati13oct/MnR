@@ -107,7 +107,7 @@ Feature: 1.23.2 Member Provider Search - Member Auth - PROD
 	@prod_providerSearch01_mapd
     Examples: 
 	    | index | username  | password  | MemUserName          | planType | memberType              | 
-	    | 01    | kkumard   | tnps459#  | mamireyes      | MAPD     | AARP_IND_ProviderSearch  |
+	    | 01    | kkumard   | tnps459#  | kirit1976      | MAPD     | AARP_IND_ProviderSearch  |
 	    | 02    | kkumard   | tnps459#  | LMHOCHSCHILD11       | MAPD     | UHC_IND_ProviderSearch  |
 
 	@prod_providerSearch01_pdp
