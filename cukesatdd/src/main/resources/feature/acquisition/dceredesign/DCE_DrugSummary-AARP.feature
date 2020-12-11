@@ -510,21 +510,21 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
     And user clicks on change pharmacy link from summary page
     Then change pharmacy modal should be displayed
     And user verify change pharmacy modal
-    When user saves and updates pharmacy from list
-    Then the pharmacy name should be updated on summary page
+    Then the user selects following pharmacy and returns to DCE Summary page
+      | SelectPharmacy | <SelectPharmacy> |
     And user clicks on change pharmacy link on alert message from plan card on drug summary page
     Then change pharmacy modal should be displayed
     And user verify change pharmacy modal
 
 		@dceRedesignNoPrescriptionChangePharmacy_AARP
     Examples: 
-      |site| drug1    |drug2      | zipCode |
-      |AARP| Emsam  |   Lipitor   |78006 |
+      |site| drug1    |drug2      | zipCode |SelectPharmacy|
+      |AARP| Emsam  |   Lipitor   |78006 |ROCK PHARMACY  |
       
       @dceRedesignNoPrescriptionChangePharmacy_UHC
       Examples: 
-      |site| drug1    |drug2      | zipCode |
-      |UHC| Emsam  |   Lipitor   |78006 |
+      |site| drug1    |drug2      | zipCode |SelectPharmacy|
+      |UHC| Emsam  |   Lipitor   |78006 |ROCK PHARMACY  |
       
       @dCERedesign_ChangePharmacyModal @F426569 @F535368 @decRelease
   Scenario Outline: Test to verify sort, pagination, invalid zipcode error functionality for change pharmacy on drug summary page
