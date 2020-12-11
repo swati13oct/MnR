@@ -106,7 +106,8 @@ Feature: 1.04.2.2 To Test DREAM EOB for Members - E2E - Member Auth - PROD
     @prod_dreamEob01b_mapdNice
     Examples: 
       | index | username  | password  | MemUserName             | planType | memberType         | flagZeroEob |
-      | 02    | kkumard   | tnps459#  | sandrakaye86            | MAPD     | NICE_DEOB          | true        |  
+    #x| 02    | kkumard   | tnps459#  | sandrakaye86            | MAPD     | NICE_DEOB          | true        |  
+      | 02    | kkumard   | tnps459#  | wq2451601               | MAPD     | NICE_DEOB          | true        |  
 
     @prod_dreamEob01c_pdp 
     Examples: 
