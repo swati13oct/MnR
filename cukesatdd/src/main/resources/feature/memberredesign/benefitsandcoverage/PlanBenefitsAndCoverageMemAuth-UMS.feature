@@ -70,7 +70,7 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth
 
     Examples: 
       | index | TID   |username  | password  | MemUserName | planType | memberType       |
-      | 03    | 15091 |qavgogine | qavgogine| q3_SEP_2020SHIP_002|SHIP_HIP    | ComboFEDShip_BnC |
+      | 03    | 15091 |qavgogine | qavgogine| q4_Ship_014|SHIP    | ComboFEDShip_BnC |
       
   #TC10_Benefits_for_TexasERSMember
   @memAuth_benefitsAndCoverage3 @BenefitsforTexasERSMember @regression @BnC_Part2_memAuth
@@ -146,7 +146,7 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth
 
     Examples: 
       | index |TID  |username |password |MemUserName        |planType|memberType|language|numberOfBenefitCards|Identifier          | count| rider   |
-      | 05    |15094|qavgogine|qavgogine|q3_sep_UAT4_AARP013| SHIP   |SHIP_BnC  | ENGLISH| 5                  |EffectiveShipMedSupp|   3  | NoRider |
+      | 05    |15094|qavgogine|qavgogine|q4_Ship_013        | SHIP   |SHIP_BnC  | ENGLISH| 5                  |EffectiveShipMedSupp|   3  | NoRider |
       
 
   @memAuth_benefitsAndCoverage10 @BenefitsForMAMedsupSSUPMember  @BnC_Part3_memAuth 
@@ -449,7 +449,7 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth
 
     Examples: 
       | index | TID   |username |password  |MemUserName| planType | memberType | copayCategory | language | SummaryofBenefits   | EvidenceofCoverage   | ComprehensiveFormularyDrug List | name             | memberid     | effectivedate | monthlypremium | UpdatedLanguage | DisplayFlag |
-      | 15    | 15246 |qavgogine| qavgogine| q3_sep_UAT4_Group224|MAPD     | Group_BnC  | NON LIS       | ENGLISH  | Summary Of Benefits | Evidence of Coverage | Comprehensive Formulary         | EFADDB CDEEFFCDC | 978095497-00 | 01/01/2018    | Not Available  | Tier 2  | true        |
+      | 15    | 15246 |qavgogine| qavgogine| testMapdGrpUser01|MAPD     | Group_BnC  | NON LIS       | ENGLISH  | Summary Of Benefits | Evidence of Coverage | Comprehensive Formulary         | EFADDB CDEEFFCDC | 978095497-00 | 01/01/2018    | Not Available  | Tier 2  | true        |
 
   #TC24_Group NON LIS_PDP
   @memAuth_benefitsAndCoverage27 @CMPDPGroupNonLis @BnC_Part7_memAuth
@@ -802,27 +802,27 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth
     @memAuth_DSNP_CnS01
     Examples: 
       | index | FID             |username |password  |MemUserName| planType   | memberType           | copayCategory | language | name         | memberid     | effectivedate | monthlypremium | extrahelp            | Identifier       | count | H-PBP    | rider  |
-      | 22-c1 | F494433,F506320 |qavgogine| qavgogine|q3_unblockedHPBP_001| DSNP_MAPD  | Individual_CnS01_BnC | LIS 2         | ENGLISH  | DREENA KIMURA| 971949191-00 | 01/01/2020    | Not Available  | Extra Help Level : 2 | IndEffectiveAARP |     6 | H0624-001| NoRider|
-      | 23-c2 | F494433,F506320 |qavgogine| qavgogine|q3_unblockedHPBP_003| DSNP_MAPD  | Individual_CnS02_BnC | LIS 3         | ENGLISH  | EBER KRYSTEK| 903010063-00 | 01/01/2020    | Not Available  | Extra Help Level : 3 | IndEffectiveAARP |     6 | H2228-045| NoRider|
+      | 22-c1 | F494433,F506320 |qavgogine| qavgogine|q3_unblockedHPBP_001| DSNP_MAPD  | Individual_CnS01_BnC | LIS 2         | ENGLISH  | DREENA KIMURA| 971949191-00 | 01/01/2020    | Not Available  | Extra Help Level : 2 | IndEffectiveAARP |     4 | H0624-001| NoRider|
+      | 23-c2 | F494433,F506320 |qavgogine| qavgogine|q4_DSNP_019| DSNP_MAPD  | Individual_CnS02_BnC | LIS 3         | ENGLISH  | EBER KRYSTEK| 903010063-00 | 01/01/2020    | Not Available  | Extra Help Level : 3 | IndEffectiveAARP |     4 | H2228-045| NoRider|
     
     @memAuth_DSNP_CnS02
     Examples:       
       | index | FID             |username |password  |MemUserName| planType   | memberType           | copayCategory | language | name         | memberid     | effectivedate | monthlypremium | extrahelp            | Identifier       | count | H-PBP    | rider  |
-      | 24-c3 | F494433,F506320 |qavgogine| qavgogine|q3_unblockedHPBP_004| DSNP_MAPD  | Individual_CnS03_BnC | LIS 1         | ENGLISH  | HULDIBERAH KINIRY | 967076552-1 | 01/01/2020 | Not Available  | Extra Help Level : 1 | IndEffectiveAARP |     6 | H3113-110| NoRider|
-      | 25-c4 | F494433,F506320 |qavgogine| qavgogine|q4_dec_evercare_011| DSNP_MAPD  | Individual_CnS04_BnC | LIS 1         | ENGLISH  | BLAIS OWEN        | 912002942-1 | 01/01/2020 | Not Available  | Extra Help Level : 1 | IndEffectiveAARP |     6 | H4527-003| NoRider|
-      | 26-c5 | F494433,F506320 |qavgogine| qavgogine|q3_unblockedHPBP_011| DSNP_MAPD  | Individual_CnS05_BnC | LIS 2         | ENGLISH  | KUMARI FROEHNER   | 006644986-1 | 01/01/2020 | Not Available  | Extra Help Level : 2 | IndEffectiveAARP |     6 | H4590-033| NoRider|
+      | 24-c3 | F494433,F506320 |qavgogine| qavgogine|q3_unblockedHPBP_004| DSNP_MAPD  | Individual_CnS03_BnC | LIS 1         | ENGLISH  | HULDIBERAH KINIRY | 967076552-1 | 01/01/2020 | Not Available  | Extra Help Level : 1 | IndEffectiveAARP |     4 | H3113-110| NoRider|
+      | 25-c4 | F494433,F506320 |qavgogine| qavgogine|q4_dec_evercare_011| DSNP_MAPD  | Individual_CnS04_BnC | LIS 1         | ENGLISH  | BLAIS OWEN        | 912002942-1 | 01/01/2020 | Not Available  | Extra Help Level : 1 | IndEffectiveAARP |     4 | H4527-003| NoRider|
+      | 26-c5 | F494433,F506320 |qavgogine| qavgogine|q3_unblockedHPBP_011| DSNP_MAPD  | Individual_CnS05_BnC | LIS 2         | ENGLISH  | KUMARI FROEHNER   | 006644986-1 | 01/01/2020 | Not Available  | Extra Help Level : 2 | IndEffectiveAARP |     4 | H4590-033| NoRider|
     
     @memAuth_DSNP_MnR01
     Examples:       
        | index | FID             |username |password  |MemUserName| planType   | memberType           | copayCategory | language | name         | memberid     | effectivedate | monthlypremium | extrahelp            | Identifier       | count | H-PBP    | rider  |
-       | 27-m1 | F494433,F506320 |qavgogine| qavgogine|q2_AmWell_008| DSNP_MAPD  | Individual_MnR01_BnC | LIS 1         | ENGLISH  | OFER MCLEON  | 937024725-1| 01/01/2020    | Not Available  | Extra Help Level : 1 | IndEffectiveAARP |     6 |  H0271-005 |  NoRider|
-       | 28-m2 | F494433,F506320 |qavgogine| qavgogine|q4_dec_evercare_013| DSNP_MAPD  | Individual_MnR02_BnC | LIS 1         | ENGLISH  | DBAD ADFED | 919744565-00 | 01/01/2020    | Not Available  | Extra Help Level : 1 | IndEffectiveAARP |     6 |  H5253-041 | NoRider |
+       | 27-m1 | F494433,F506320 |qavgogine| qavgogine|q2_AmWell_008| DSNP_MAPD  | Individual_MnR01_BnC | LIS 1         | ENGLISH  | OFER MCLEON  | 937024725-1| 01/01/2020    | Not Available  | Extra Help Level : 1 | IndEffectiveAARP |     4 |  H0271-005 |  NoRider|
+       | 28-m2 | F494433,F506320 |qavgogine| qavgogine|q4_dec_evercare_013| DSNP_MAPD  | Individual_MnR02_BnC | LIS 1         | ENGLISH  | DBAD ADFED | 919744565-00 | 01/01/2020    | Not Available  | Extra Help Level : 1 | IndEffectiveAARP |     4 |  H5253-041 | NoRider |
 
     @memAuth_DSNP_MnR02
     Examples:      
        | index | FID             |username |password  |MemUserName| planType   | memberType           | copayCategory | language | name         | memberid     | effectivedate | monthlypremium | extrahelp            | Identifier       | count | H-PBP    | rider  |
-       | 29-m3 | F494433,F506320 |qavgogine| qavgogine|q4_DSNP_087| DSNP_MAPD  | Individual_MnR03_BnC | LIS 1         | ENGLISH  | DBAD ADFED | 919744565-00 | 01/01/2020   | Not Available   | Extra Help Level : 1 | IndEffectiveAARP |     6 |  R2604-004 | NoRider|
-       | 30-m4 | F494433,F506320 |qavgogine| qavgogine|q4_DSNP_056| DSNP_MAPD  | Individual_MnR04_BnC | LIS 3         | ENGLISH  | DBAD ADFED | 919744565-00 | 01/01/2020    | Not Available  | Extra Help Level : 3 | IndEffectiveAARP |     6 |  H0271-006 | NoRider|
+       | 29-m3 | F494433,F506320 |qavgogine| qavgogine|q4_DSNP_087| DSNP_MAPD  | Individual_MnR03_BnC | LIS 1         | ENGLISH  | DBAD ADFED | 919744565-00 | 01/01/2020   | Not Available   | Extra Help Level : 1 | IndEffectiveAARP |     4 |  R2604-004 | NoRider|
+       | 30-m4 | F494433,F506320 |qavgogine| qavgogine|q4_DSNP_056| DSNP_MAPD  | Individual_MnR04_BnC | LIS 3         | ENGLISH  | DBAD ADFED | 919744565-00 | 01/01/2020    | Not Available  | Extra Help Level : 3 | IndEffectiveAARP |     4 |  H0271-006 | NoRider|
 
   @memAuth_benefitsAndCoverage19 @insulin
   Scenario Outline: Index: <index> -FID: <FID> -plan: <planType> -memberType: <memberType> -copayCategory: <copayCategory> -insulin: <insulin> - Verify Insulin Demo display on drug table for NON-LIS user

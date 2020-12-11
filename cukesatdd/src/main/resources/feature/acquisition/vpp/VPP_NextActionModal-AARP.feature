@@ -4,36 +4,36 @@ Feature: 1.03-ACQ-Next Action Modal on vpp flow AARP
   #**************************************************************MAPD*************************************************************************
   @vppNextActionModalRegression_12 @NBA_MAPD_AARP01
   Scenario Outline: UserStory: Plan type: <plantype> -Test to verify the Next action modal on VPP summary page for MAPD Plan when no Drug cost/provider is added
-    Given the user is on AARP medicare acquisition site landing page
-    When the user performs plan search using following information in the AARP site
+    Given the user is on medicare acquisition site landing page
+      | Site | <site> |
+    When the user performs plan search using following information
       | Zip Code        | <zipcode>         |
-      | County Name     | <county>          |
       | Is Multi County | <isMultutiCounty> |
-    Then user validates plan count for all plan types on plan summary page in the AARP site
-    And the user views the plans of the below plan type in AARP site and select Next year
+      | County Name     | <county>          |
+    And the user views the plans of the below plan type
       | Plan Type | <plantype> |
-    And the user selects plan year for the AARP site
+    And the user selects plan year
       | Plan Year | <planyear> |
-    Then user Verify and click perform on Next Best Action Modal for Get Started in AARP site
+    And user Verify and click perform on Next Best Action Modal for Get Started
     Then user should be navigated to first step of DCE Page
 
     Examples: 
-      | zipcode | isMultutiCounty | county      | plantype | planyear |
-      |   19019 | No              | Iowa County | MAPD     | future   |
+      | site | zipcode | isMultutiCounty | county      | plantype | planyear |
+      | AARP |   19019 | No              | Iowa County | MAPD     | next     |
 
   @vppNBAAddDrugMAPD @NBA_MAPD_AARP01
   Scenario Outline: UserStory: Plan type: <plantype> -Test to verify the Next action modal for Provider search on VPP summary page for MAPD Plan when Drug cost exists
-    Given the user is on AARP medicare acquisition site landing page
-    When the user performs plan search using following information in the AARP site
+    Given the user is on medicare acquisition site landing page
+      | Site | <site> |
+    When the user performs plan search using following information
       | Zip Code        | <zipcode>         |
-      | County Name     | <county>          |
       | Is Multi County | <isMultutiCounty> |
-    Then user validates plan count for all plan types on plan summary page in the AARP site
-    And the user views the plans of the below plan type in AARP site and select Next year
+      | County Name     | <county>          |
+    And the user views the plans of the below plan type
       | Plan Type | <plantype> |
-    And the user selects plan year for the AARP site
+    And the user selects plan year
       | Plan Year | <planyear> |
-    Then user Verify and click perform on Next Best Action Modal for Get Started in AARP site
+    And user Verify and click perform on Next Best Action Modal for Get Started
     Then user should be navigated to first step of DCE Page
     When the user clicks on Build Drug List to navigate to Build Drug List Page
     And the user searches and adds the following Drug to Drug List
@@ -41,27 +41,27 @@ Feature: 1.03-ACQ-Next Action Modal on vpp flow AARP
     And clicks on Review drug cost button
     Then user should be able to see Medicare Advantage plan by default
     When user clicks on Return to plan summary page link in DCE
-    Then user verify the NBA modal to add providers on the VPP summary page in AARP site
-    When user clicks on Find My Doctor button in AARP Site
-    And user should be redirected to Provider search Rally page in AARP site
+    Then user should be able to see the NBA modal to add providers on the VPP summary page
+    When user clicks on Find My Doctor button
+    And user should be redirected to Provider search Rally page
 
     Examples: 
-      | zipcode | isMultutiCounty | county      | plantype | drug1   | planName                                            |
-      |   19019 | No              | Iowa County | MAPD     | Lipitor | AARP Medicare Advantage SecureHorizons Plan 1 (HMO) |
+      | site | zipcode | isMultutiCounty | county      | plantype | drug1   | planyear |
+      | AARP |   19019 | No              | Iowa County | MAPD     | Lipitor | next     |
 
   @vppNextActionModalAddDrugProvider @NBA_MAPD_AARP01
   Scenario Outline: UserStory: Plan type: <plantype> Test to verify the Next action modal on VPP summary page for MAPD plan when Drug/Provider exists
-    Given the user is on AARP medicare acquisition site landing page
-    When the user performs plan search using following information in the AARP site
+    Given the user is on medicare acquisition site landing page
+      | Site | <site> |
+    When the user performs plan search using following information
       | Zip Code        | <zipcode>         |
-      | County Name     | <county>          |
       | Is Multi County | <isMultutiCounty> |
-    Then user validates plan count for all plan types on plan summary page in the AARP site
-    And the user views the plans of the below plan type in AARP site and select Next year
+      | County Name     | <county>          |
+    And the user views the plans of the below plan type
       | Plan Type | <plantype> |
-    And the user selects plan year for the AARP site
+    And the user selects plan year
       | Plan Year | <planyear> |
-    Then user Verify and click perform on Next Best Action Modal for Get Started in AARP site
+    And user Verify and click perform on Next Best Action Modal for Get Started
     Then user should be navigated to first step of DCE Page
     When the user clicks on Build Drug List to navigate to Build Drug List Page
     And the user searches and adds the following Drug to Drug List
@@ -69,30 +69,28 @@ Feature: 1.03-ACQ-Next Action Modal on vpp flow AARP
     And clicks on Review drug cost button
     Then user should be able to see Medicare Advantage plan by default
     When user clicks on Return to plan summary page link in DCE
-    Then user verify the NBA modal to add providers on the VPP summary page in AARP site
-    When user clicks on Find My Doctor button in AARP Site
-    When user selects a provider and retuns to VPP page in ulayer
-    And the user selects plan year for the AARP site
-      | Plan Year | <planyear> |
-    Then user should be able to see the NBA modal to Enroll Plan on the VPP summary page in AARP site
+    Then user should be able to see the NBA modal to add providers on the VPP summary page
+    When user clicks on Find My Doctor button
+    When user selects a provider and retuns to VPP page
+    Then user should be able to see the NBA modal to Enroll Plan on the VPP summary page
 
     Examples: 
-      | zipcode | isMultutiCounty | county      | plantype | drug1   | planName                                    | planyear |
-      |   19019 | No              | Iowa County | MAPD     | Lipitor | AARP Medicare Advantage SecureHorizons Plan | future   |
+      | site | zipcode | isMultutiCounty | county      | plantype | drug1   | planyear |
+      | AARP |   19019 | No              | Iowa County | MAPD     | Lipitor | next     |
 
   @vppNBAMAPDToPDP @NBA_MAPD_AARP01
   Scenario Outline: UserStory: Plan type: <plantype> Test to verify the Next action modal for Enroll Plan on VPP summary page for PDP Plan when user adds Drug cost from MAPD page
-    Given the user is on AARP medicare acquisition site landing page
-    When the user performs plan search using following information in the AARP site
+    Given the user is on medicare acquisition site landing page
+      | Site | <site> |
+    When the user performs plan search using following information
       | Zip Code        | <zipcode>         |
-      | County Name     | <county>          |
       | Is Multi County | <isMultutiCounty> |
-    Then user validates plan count for all plan types on plan summary page in the AARP site
-    And the user views the plans of the below plan type in AARP site and select Next year
+      | County Name     | <county>          |
+    And the user views the plans of the below plan type
       | Plan Type | <plantype> |
-    And the user selects plan year for the AARP site
+    And the user selects plan year
       | Plan Year | <planyear> |
-    Then user Verify and click perform on Next Best Action Modal for Get Started in AARP site
+    And user Verify and click perform on Next Best Action Modal for Get Started
     Then user should be navigated to first step of DCE Page
     When the user clicks on Build Drug List to navigate to Build Drug List Page
     And the user searches and adds the following Drug to Drug List
@@ -100,21 +98,22 @@ Feature: 1.03-ACQ-Next Action Modal on vpp flow AARP
     And clicks on Review drug cost button
     Then user should be able to see Medicare Advantage plan by default
     When user clicks on Return to plan summary page link in DCE
-    #And wait for the VPP summary page to load
-    And the user views the plans of the below plan type in AARP site
+    Then user should be able to see the NBA modal to add providers on the VPP summary page
+    And the user views the plans of the below plan type
       | Plan Type | <plantype1> |
-    And the user selects plan year for the AARP site
+    And the user selects plan year
       | Plan Year | <planyear> |
-    Then user should be able to see the NBA modal to Enroll Plan on the VPP summary page in AARP site
+    Then user should be able to see the NBA modal to Enroll Plan on the VPP summary page
 
     Examples: 
-      | zipcode | isMultutiCounty | county      | plantype | plantype1 | drug1   | planName                                            | planyear |
-      |   19019 | No              | Iowa County | MAPD     | PDP       | Lipitor | AARP Medicare Advantage SecureHorizons Plan 1 (HMO) | future   |
+      | site | zipcode | isMultutiCounty | county      | plantype | plantype1 | drug1   | planyear |
+      | AARP |   19019 | No              | Iowa County | MAPD     | PDP       | Lipitor | next     |
 
   @vppDCEFlowtoNextActionModalMAPD @NBA_MAPD_AARP02
   Scenario Outline: UserStory: Plan type: <plantype> Test to verify the Next action modal for Provider search on VPP summary page for MAPD Plan when drug added from DCE
-    Given the user is on the AARP medicare site landing page
-    When I access the acquisition DCE tool from home page
+    Given the user is on medicare acquisition site landing page
+      | Site | <site> |
+    When I access the acquisition DCE Redesign from home page
     Then the user validates Get Started Page
     When the user clicks on Build Drug List to navigate to Build Drug List Page
     And the user searches and adds the following Drug to Drug List
@@ -130,47 +129,47 @@ Feature: 1.03-ACQ-Next Action Modal on vpp flow AARP
     Then user should be able to see the NBA modal to add providers on the VPP summary page
 
     Examples: 
-      | drug1   | zipCode | plantype | planName                                            |
-      | Lipitor |   19019 | MAPD     | AARP Medicare Advantage SecureHorizons Plan 1 (HMO) |
+      | site | drug1   | zipCode | plantype |
+      | AARP | Lipitor |   19019 | MAPD     |
 
   @vppNBAAddproviderCoveredLink @NBA_MAPD_AARP02
   Scenario Outline: UserStory: Plan type: <plantype> -Test to verify the Next action modal on VPP summary page for MAPD plan when Provider exists
-    Given the user is on AARP medicare acquisition site landing page
-    When the user performs plan search using following information in the AARP site
+    Given the user is on medicare acquisition site landing page
+      | Site | <site> |
+    When the user performs plan search using following information
       | Zip Code        | <zipcode>         |
-      | County Name     | <county>          |
       | Is Multi County | <isMultutiCounty> |
-    #And the user views the plans of the below plan type in AARP site
-    And the user views the plans of the below plan type in AARP site and select Next year
+      | County Name     | <county>          |
+    And the user views the plans of the below plan type
       | Plan Type | <plantype> |
-    And the user selects plan year for the AARP site
+    And the user selects plan year
       | Plan Year | <planyear> |
-    When the user Click on Is my Provider covered link Ulayer
+    When the user Click on Is my Provider covered link
       | PlanName | <planname> |
-    When user selects a provider and retuns to VPP page in ulayer
-    And the user selects plan year for the AARP site
+    When user selects a provider and retuns to VPP page
+    And the user selects plan year
       | Plan Year | <planyear> |
-    Then user Verify and click perform on Next Best Action Modal for Get Started in AARP site
+    Then user Verify and click perform on Next Best Action Modal for Get Started
 
     Examples: 
-      | zipcode | isMultutiCounty | county          | plantype | planname                             | planyear |
-      |   10001 | NO              | New York County | MAPD     | AARP Medicare Advantage Plan 2 (HMO) | future   |
+      | site | zipcode | isMultutiCounty | county          | plantype | planname                             | planyear |
+      | AARP |   10001 | NO              | New York County | MAPD     | AARP Medicare Advantage Plan 2 (HMO) | next     |
 
-  @vppNBASavedMAPDPlan
+  @vppNBASavedMAPDPlan @NBA_MAPD_AARP02
   Scenario Outline: Test to verify the Select Plan for Enroll Modal when  user clicks on "Enroll in Plan" button and multiple plans are saved
-    Given the user is on AARP medicare acquisition site landing page
-    When the user does plan search using the following information in the AARP site
-      | Zip Code        | <zipcode>       |
-      | County Name     | <county>        |
-      | Is Multi County | <isMultiCounty> |
-    Then user validates plan count for all plan types on plan summary page in the AARP site
-    And the user views the plans of the below plan type in AARP site and select Next year
+    Given the user is on medicare acquisition site landing page
+      | Site | <site> |
+    When the user performs plan search using following information
+      | Zip Code        | <zipcode>         |
+      | Is Multi County | <isMultutiCounty> |
+      | County Name     | <county>          |
+    And the user views the plans of the below plan type
       | Plan Type | <plantype> |
-    And the user selects plan year for the AARP site
+    And the user selects plan year
       | Plan Year | <planyear> |
-    Then user saves plan as favorite on AARP site
-      | Plan Type | <testPlans> |
-    Then user Verify and click perform on Next Best Action Modal for Get Started in AARP site
+    Then user saves plan as favorite on vpp summary page
+      | Test Plans | <testPlans> |
+    Then user Verify and click perform on Next Best Action Modal for Get Started
     Then user should be navigated to first step of DCE Page
     When the user clicks on Build Drug List to navigate to Build Drug List Page
     And the user searches and adds the following Drug to Drug List
@@ -178,35 +177,33 @@ Feature: 1.03-ACQ-Next Action Modal on vpp flow AARP
     And clicks on Review drug cost button
     Then user should be able to see Medicare Advantage plan by default
     When user clicks on Return to plan summary page link in DCE
-    Then user verify the NBA modal to add providers on the VPP summary page in AARP site
-    When user clicks on Find My Doctor button in AARP Site
-    When user selects a provider and retuns to VPP page in ulayer
-    And the user selects plan year for the AARP site
-      | Plan Year | <planyear> |
-    Then user should be able to see the NBA modal to Enroll Plan on the VPP summary page in AARP site
-    Then user clicks on Continue Enrollment button in AARP Site
-    Then user should be able to see the Select Plan for Enroll Modal with saved plans in AARP site
+    Then user should be able to see the NBA modal to add providers on the VPP summary page
+    When user clicks on Find My Doctor button
+    When user selects a provider and retuns to VPP page
+    Then user should be able to see the NBA modal to Enroll Plan on the VPP summary page
+    When user clicks on Continue Enrollment button on summary page
+    Then user should be able to see the Select Plan for Enroll Modal with saved plans
       | Test Plans | <testPlans> |
-    When user clicks on Enroll in plan button on the select plan modal in AARP site
-    Then user should be navigated to OLE page in AARP site
+    When user clicks on Enroll in plan button on the select plan modal on vpp summary page
+    Then user should be navigated to OLE page
 
     Examples: 
-      | zipcode | isMultutiCounty | county      | plantype | drug1   | testPlans                                   | planyear |
-      |   19019 | No              | Iowa County | MAPD     | Lipitor | AARP Medicare Advantage Choice Plan 2 (PPO) | future   |
+      | site | zipcode | isMultutiCounty | county      | plantype | drug1   | testPlans                           | planyear |
+      | AARP |   10001 | No              | Iowa County | MAPD     | Lipitor | AARP Medicare Advantage Prime (HMO) | next     |
 
   @vppUnsavedEnrollMAPDPlan @NBA_MAPD_AARP02
   Scenario Outline: Test to verify the Select Plan for Enroll Modal when  user clicks on "Enroll in Plan" button and no plans are saved
-    Given the user is on AARP medicare acquisition site landing page
-    When the user performs plan search using following information in the AARP site
+    Given the user is on medicare acquisition site landing page
+      | Site | <site> |
+    When the user performs plan search using following information
       | Zip Code        | <zipcode>         |
-      | County Name     | <county>          |
       | Is Multi County | <isMultutiCounty> |
-    Then user validates plan count for all plan types on plan summary page in the AARP site
-    And the user views the plans of the below plan type in AARP site and select Next year
+      | County Name     | <county>          |
+    And the user views the plans of the below plan type
       | Plan Type | <plantype> |
-    And the user selects plan year for the AARP site
+    And the user selects plan year
       | Plan Year | <planyear> |
-    Then user Verify and click perform on Next Best Action Modal for Get Started in AARP site
+    And user Verify and click perform on Next Best Action Modal for Get Started
     Then user should be navigated to first step of DCE Page
     When the user clicks on Build Drug List to navigate to Build Drug List Page
     And the user searches and adds the following Drug to Drug List
@@ -214,55 +211,52 @@ Feature: 1.03-ACQ-Next Action Modal on vpp flow AARP
     And clicks on Review drug cost button
     Then user should be able to see Medicare Advantage plan by default
     When user clicks on Return to plan summary page link in DCE
-    Then user verify the NBA modal to add providers on the VPP summary page in AARP site
-    And Click on Find my area button in AARP
-    When user clicks on Find My Doctor button in AARP Site
-    When user selects a provider and retuns to VPP page in ulayer
-    And the user selects plan year for the AARP site
-      | Plan Year | <planyear> |
-    Then user should be able to see the NBA modal to Enroll Plan on the VPP summary page in AARP site
-    Then user clicks on Continue Enrollment button in AARP Site
-    Then user should be able to see the Select Plan for Enroll Modal with all plans in AARP site
-      | Test Plans | <testPlans> |
-    When user clicks on Enroll in plan button on the select plan modal in AARP site
-    Then user should be navigated to OLE page in AARP site
+    Then user should be able to see the NBA modal to add providers on the VPP summary page
+    When user clicks on Find My Doctor button
+    When user selects a provider and retuns to VPP page
+    Then user should be able to see the NBA modal to Enroll Plan on the VPP summary page
+    When user clicks on Continue Enrollment button on summary page
+    Then user should be able to see the Select Plan for Enroll Modal with all plans on vpp summary page
+    When user clicks on Enroll in plan button on the select plan modal on vpp summary page
+    Then user should be navigated to OLE page
 
     Examples: 
-      | zipcode | isMultutiCounty | county      | plantype | drug1   | planyear |
-      |   19019 | No              | Iowa County | MAPD     | Lipitor | future   |
+      | site | zipcode | isMultutiCounty | county      | plantype | drug1   | planyear |
+      | AARP |   19019 | No              | Iowa County | MAPD     | Lipitor | next     |
 
   #*****************************************************PDP**************************************************************************************
   @vppNBAPDPNoDrug @NBA_PDP_AARP01
   Scenario Outline: UserStory: Plan type: <plantype> -Test to verify the Next action modal on VPP summary page for PDP Plan when no Drugs added
-    Given the user is on AARP medicare acquisition site landing page
-    When the user performs plan search using following information in the AARP site
+    Given the user is on medicare acquisition site landing page
+      | Site | <site> |
+    When the user performs plan search using following information
       | Zip Code        | <zipcode>         |
-      | County Name     | <county>          |
       | Is Multi County | <isMultutiCounty> |
-    And the user views the plans of the below plan type in AARP site and select Next year
+      | County Name     | <county>          |
+    And the user views the plans of the below plan type
       | Plan Type | <plantype> |
-    And the user selects plan year for the AARP site
+    And the user selects plan year
       | Plan Year | <planyear> |
-    Then user Verify and click perform on Next Best Action Modal for Get Started in AARP site
+    And user Verify and click perform on Next Best Action Modal for Get Started
     Then user should be navigated to first step of DCE Page
 
     Examples: 
-      | zipcode | isMultutiCounty | county      | plantype | planyear |
-      |   19019 | No              | Iowa County | PDP      | future   |
+      | site | zipcode | isMultutiCounty | county      | plantype | planyear |
+      | AARP |   19019 | No              | Iowa County | PDP      | next     |
 
   @vppNBAPDPAddDrug
   Scenario Outline: UserStory: Plan type: <plantype> -Test to verify the Next action modal for Enroll Plan on VPP summary page for PDP Plan when Drugs are added
-    Given the user is on AARP medicare acquisition site landing page
-    When the user performs plan search using following information in the AARP site
+    Given the user is on medicare acquisition site landing page
+      | Site | <site> |
+    When the user performs plan search using following information
       | Zip Code        | <zipcode>         |
-      | County Name     | <county>          |
       | Is Multi County | <isMultutiCounty> |
-    Then user validates plan count for all plan types on plan summary page in the AARP site
-    And the user views the plans of the below plan type in AARP site and select Next year
+      | County Name     | <county>          |
+    And the user views the plans of the below plan type
       | Plan Type | <plantype> |
-    And the user selects plan year for the AARP site
+    And the user selects plan year
       | Plan Year | <planyear> |
-    Then user Verify and click perform on Next Best Action Modal for Get Started in AARP site
+    And user Verify and click perform on Next Best Action Modal for Get Started
     Then user should be navigated to first step of DCE Page
     When the user clicks on Build Drug List to navigate to Build Drug List Page
     And the user searches and adds the following Drug to Drug List
@@ -270,17 +264,15 @@ Feature: 1.03-ACQ-Next Action Modal on vpp flow AARP
     And clicks on Review drug cost button
     Then user should be able to see Medicare Advantage plan by default
     When user clicks on Return to plan summary page link in DCE
-    And the user selects plan year for the AARP site
-      | Plan Year | <planyear> |
-    Then user should be able to see the NBA modal to Enroll Plan on the VPP summary page in AARP site
+    Then user should be able to see the NBA modal to Enroll Plan on the VPP summary page
 
     Examples: 
-      | drug1   | zipcode | plantype | planName                        | planyear |
-      | Lipitor |   90210 | PDP      | AARP MedicareRx Walgreens (PDP) | future   |
+      | site | drug1   | zipcode | plantype | planName                        | planyear |
+      | AARP | Lipitor |   90210 | PDP      | AARP MedicareRx Walgreens (PDP) | next     |
 
   @vppDCEFlowtoNextActionModalPDP @NBA_PDP_AARP01
   Scenario Outline: UserStory: Plan type: <plantype> Test to verify the Next action modal for Enroll Plan on VPP summary page for PDP Plan when drug added from DCE
-    Given the user is on the AARP medicare site landing page
+    Given the user is on AARP medicare acquisition site landing page
     When I access the acquisition DCE tool from home page
     Then the user validates Get Started Page
     When the user clicks on Build Drug List to navigate to Build Drug List Page
@@ -300,24 +292,24 @@ Feature: 1.03-ACQ-Next Action Modal on vpp flow AARP
     Then user should be able to see the NBA modal to Enroll Plan on the VPP summary page
 
     Examples: 
-      | drug1   | zipCode | plantype |
-      | Lipitor |   19019 | pdp      |
+      | site | drug1   | zipCode | plantype |
+      | AARP | Lipitor |   19019 | PDP      |
 
   @vppSavedPDPEnrollNBA @NBA_PDP_AARP02
   Scenario Outline: Test to verify the Select Plan for Enroll Modal when  user clicks on "Enroll in Plan" button and multiple plans are saved
-    Given the user is on AARP medicare acquisition site landing page
-    When the user does plan search using the following information in the AARP site
-      | Zip Code        | <zipcode>       |
-      | County Name     | <county>        |
-      | Is Multi County | <isMultiCounty> |
-    Then user validates plan count for all plan types on plan summary page in the AARP site
-    And the user views the plans of the below plan type in AARP site and select Next year
+    Given the user is on medicare acquisition site landing page
+      | Site | <site> |
+    When the user performs plan search using following information
+      | Zip Code        | <zipcode>         |
+      | Is Multi County | <isMultutiCounty> |
+      | County Name     | <county>          |
+    And the user views the plans of the below plan type
       | Plan Type | <plantype> |
-    And the user selects plan year for the AARP site
+    And the user selects plan year
       | Plan Year | <planyear> |
-    Then user saves plan as favorite on AARP site
-      | Plan Type | <testPlans> |
-    Then user Verify and click perform on Next Best Action Modal for Get Started in AARP site
+    Then user saves plan as favorite on vpp summary page
+      | Test Plans | <testPlans> |
+    Then user Verify and click perform on Next Best Action Modal for Get Started
     Then user should be navigated to first step of DCE Page
     When the user clicks on Build Drug List to navigate to Build Drug List Page
     And the user searches and adds the following Drug to Drug List
@@ -325,32 +317,30 @@ Feature: 1.03-ACQ-Next Action Modal on vpp flow AARP
     And clicks on Review drug cost button
     Then user should be able to see Medicare Advantage plan by default
     When user clicks on Return to plan summary page link in DCE
-    And the user selects plan year for the AARP site
-      | Plan Year | <planyear> |
-    Then user should be able to see the NBA modal to Enroll Plan on the VPP summary page in AARP site
-    Then user clicks on Continue Enrollment button in AARP Site
-    Then user should be able to see the Select Plan for Enroll Modal with saved plans in AARP site
+    Then user should be able to see the NBA modal to Enroll Plan on the VPP summary page
+    When user clicks on Continue Enrollment button on summary page
+    Then user should be able to see the Select Plan for Enroll Modal with saved plans
       | Test Plans | <testPlans> |
-    When user clicks on Enroll in plan button on the select plan modal in AARP site
-    Then user should be navigated to OLE page in AARP site
+    When user clicks on Enroll in plan button on the select plan modal on vpp summary page
+    Then user should be navigated to OLE page
 
     Examples: 
-      | zipcode | isMultutiCounty | county      | plantype | drug1   | testPlans                       | planyear |
-      |   19019 | No              | Iowa County | PDP      | Lipitor | AARP MedicareRx Walgreens (PDP) | future   |
+      | site | zipcode | isMultutiCounty | county      | plantype | drug1   | testPlans                       | planyear |
+      | AARP |   19019 | No              | Iowa County | PDP      | Lipitor | AARP MedicareRx Walgreens (PDP) | next     |
 
   @vppunSavedPDPPlans @NBA_PDP_AARP02
   Scenario Outline: UserStory: Plan type: <plantype> -Test to verify the Next action modal for PDP Plan when Drug cost and Enroll for All Plans
-    Given the user is on AARP medicare acquisition site landing page
-    When the user performs plan search using following information in the AARP site
+    Given the user is on medicare acquisition site landing page
+      | Site | <site> |
+    When the user performs plan search using following information
       | Zip Code        | <zipcode>         |
-      | County Name     | <county>          |
       | Is Multi County | <isMultutiCounty> |
-    Then user validates plan count for all plan types on plan summary page in the AARP site
-    And the user views the plans of the below plan type in AARP site and select Next year
+      | County Name     | <county>          |
+    And the user views the plans of the below plan type
       | Plan Type | <plantype> |
-    And the user selects plan year for the AARP site
-      | Plan Year | <planyear> |
-    Then user Verify and click perform on Next Best Action Modal for Get Started in AARP site
+    And the user selects plan year
+      | Plan Year | <planyear> |  |
+    And user Verify and click perform on Next Best Action Modal for Get Started
     Then user should be navigated to first step of DCE Page
     When the user clicks on Build Drug List to navigate to Build Drug List Page
     And the user searches and adds the following Drug to Drug List
@@ -358,32 +348,29 @@ Feature: 1.03-ACQ-Next Action Modal on vpp flow AARP
     And clicks on Review drug cost button
     Then user should be able to see Medicare Advantage plan by default
     When user clicks on Return to plan summary page link in DCE
-    And the user selects plan year for the AARP site
-      | Plan Year | <planyear> |
-    Then user should be able to see the NBA modal to Enroll Plan on the VPP summary page in AARP site
-    Then user clicks on Continue Enrollment button in AARP Site
-    Then user should be able to see the Select Plan for Enroll Modal with all plans in AARP site
-      | Test Plans | <testPlans> |
-    When user clicks on Enroll in plan button on the select plan modal in AARP site
-    Then user should be navigated to OLE page in AARP site
+    Then user should be able to see the NBA modal to Enroll Plan on the VPP summary page
+    When user clicks on Continue Enrollment button on summary page
+    Then user should be able to see the Select Plan for Enroll Modal with all plans on vpp summary page
+    When user clicks on Enroll in plan button on the select plan modal on vpp summary page
+    Then user should be navigated to OLE page
 
     Examples: 
-      | zipcode | isMultutiCounty | county      | plantype | drug1   | testPlans                       | planyear |
-      |   19019 | No              | Iowa County | PDP      | Lipitor | AARP MedicareRx Walgreens (PDP) | future   |
+      | site | zipcode | isMultutiCounty | county      | plantype | drug1   | planyear |
+      | AARP |   19019 | No              | Iowa County | PDP      | Lipitor | next     |
 
   @vppPDPToMAPD @NBA_PDP_AARP02
   Scenario Outline: UserStory: Plan type: <plantype> Test to verify the Next action modal for Enroll Plan on VPP summary page for MAPD Plan when user adds Drug cost from PDP page
-    Given the user is on AARP medicare acquisition site landing page
-    When the user performs plan search using following information in the AARP site
+    Given the user is on medicare acquisition site landing page
+      | Site | <site> |
+    When the user performs plan search using following information
       | Zip Code        | <zipcode>         |
-      | County Name     | <county>          |
       | Is Multi County | <isMultutiCounty> |
-    Then user validates plan count for all plan types on plan summary page in the AARP site
-    And the user views the plans of the below plan type in AARP site and select Next year
+      | County Name     | <county>          |
+    And the user views the plans of the below plan type
       | Plan Type | <plantype> |
-    And the user selects plan year for the AARP site
+    And the user selects plan year
       | Plan Year | <planyear> |
-    Then user Verify and click perform on Next Best Action Modal for Get Started in AARP site
+    And user Verify and click perform on Next Best Action Modal for Get Started
     Then user should be navigated to first step of DCE Page
     When the user clicks on Build Drug List to navigate to Build Drug List Page
     And the user searches and adds the following Drug to Drug List
@@ -391,13 +378,13 @@ Feature: 1.03-ACQ-Next Action Modal on vpp flow AARP
     And clicks on Review drug cost button
     Then user should be able to see Medicare Advantage plan by default
     When user clicks on Return to plan summary page link in DCE
-    Then user should be able to see the NBA modal to Enroll Plan on the VPP summary page in AARP site
-    And the user views the plans of the below plan type in AARP site
+    Then user should be able to see the NBA modal to Enroll Plan on the VPP summary page
+    And the user views the plans of the below plan type
       | Plan Type | <plantype1> |
-    And the user selects plan year for the AARP site
+    And the user selects plan year
       | Plan Year | <planyear> |
-    Then user verify the NBA modal to add providers on the VPP summary page in AARP site
+    Then user should be able to see the NBA modal to add providers on the VPP summary page
 
     Examples: 
-      | zipcode | isMultutiCounty | county      | plantype | plantype1 | drug1   | planyear |
-      |   19019 | No              | Iowa County | PDP      | MAPD      | Lipitor | future   |
+      | site | zipcode | isMultutiCounty | county      | plantype | plantype1 | drug1   | planyear |
+      | AARP |   19019 | No              | Iowa County | PDP      | MAPD      | Lipitor | next     |
