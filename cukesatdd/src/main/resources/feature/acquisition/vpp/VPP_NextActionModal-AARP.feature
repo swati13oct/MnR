@@ -46,8 +46,8 @@ Feature: 1.03-ACQ-Next Action Modal on vpp flow AARP
     And user should be redirected to Provider search Rally page
 
     Examples: 
-      | site | zipcode | isMultutiCounty | county      | plantype | drug1   | planyear|
-      | AARP |   19019 | No              | Iowa County | MAPD     | Lipitor | next|
+      | site | zipcode | isMultutiCounty | county      | plantype | drug1   | planyear |
+      | AARP |   19019 | No              | Iowa County | MAPD     | Lipitor | next     |
 
   @vppNextActionModalAddDrugProvider @NBA_MAPD_AARP01
   Scenario Outline: UserStory: Plan type: <plantype> Test to verify the Next action modal on VPP summary page for MAPD plan when Drug/Provider exists
@@ -76,7 +76,7 @@ Feature: 1.03-ACQ-Next Action Modal on vpp flow AARP
 
     Examples: 
       | site | zipcode | isMultutiCounty | county      | plantype | drug1   | planyear |
-      | AARP |   19019 | No              | Iowa County | MAPD     | Lipitor |  next     |
+      | AARP |   19019 | No              | Iowa County | MAPD     | Lipitor | next     |
 
   @vppNBAMAPDToPDP @NBA_MAPD_AARP01
   Scenario Outline: UserStory: Plan type: <plantype> Test to verify the Next action modal for Enroll Plan on VPP summary page for PDP Plan when user adds Drug cost from MAPD page
@@ -106,8 +106,8 @@ Feature: 1.03-ACQ-Next Action Modal on vpp flow AARP
     Then user should be able to see the NBA modal to Enroll Plan on the VPP summary page
 
     Examples: 
-      | site | zipcode | isMultutiCounty | county      | plantype | plantype1 | drug1   | planyear  |
-      | AARP |   19019 | No              | Iowa County | MAPD     | PDP       | Lipitor |  next     |
+      | site | zipcode | isMultutiCounty | county      | plantype | plantype1 | drug1   | planyear |
+      | AARP |   19019 | No              | Iowa County | MAPD     | PDP       | Lipitor | next     |
 
   @vppDCEFlowtoNextActionModalMAPD @NBA_MAPD_AARP02
   Scenario Outline: UserStory: Plan type: <plantype> Test to verify the Next action modal for Provider search on VPP summary page for MAPD Plan when drug added from DCE
@@ -130,7 +130,7 @@ Feature: 1.03-ACQ-Next Action Modal on vpp flow AARP
 
     Examples: 
       | site | drug1   | zipCode | plantype |
-      | AARP | Lipitor |   19019 | MAPD     | 
+      | AARP | Lipitor |   19019 | MAPD     |
 
   @vppNBAAddproviderCoveredLink @NBA_MAPD_AARP02
   Scenario Outline: UserStory: Plan type: <plantype> -Test to verify the Next action modal on VPP summary page for MAPD plan when Provider exists
@@ -242,7 +242,7 @@ Feature: 1.03-ACQ-Next Action Modal on vpp flow AARP
 
     Examples: 
       | site | zipcode | isMultutiCounty | county      | plantype | planyear |
-      | AARP |   19019 | No              | Iowa County | PDP     | next     |
+      | AARP |   19019 | No              | Iowa County | PDP      | next     |
 
   @vppNBAPDPAddDrug
   Scenario Outline: UserStory: Plan type: <plantype> -Test to verify the Next action modal for Enroll Plan on VPP summary page for PDP Plan when Drugs are added
@@ -318,7 +318,6 @@ Feature: 1.03-ACQ-Next Action Modal on vpp flow AARP
     Then user should be able to see Medicare Advantage plan by default
     When user clicks on Return to plan summary page link in DCE
     Then user should be able to see the NBA modal to Enroll Plan on the VPP summary page
-    Then user clicks on Continue Enrollment button on summary page
     When user clicks on Continue Enrollment button on summary page
     Then user should be able to see the Select Plan for Enroll Modal with saved plans
       | Test Plans | <testPlans> |
@@ -384,7 +383,7 @@ Feature: 1.03-ACQ-Next Action Modal on vpp flow AARP
       | Plan Type | <plantype1> |
     And the user selects plan year
       | Plan Year | <planyear> |
-    Then user verify the NBA modal to add providers on the VPP summary page
+    Then user should be able to see the NBA modal to add providers on the VPP summary page
 
     Examples: 
       | site | zipcode | isMultutiCounty | county      | plantype | plantype1 | drug1   | planyear |
