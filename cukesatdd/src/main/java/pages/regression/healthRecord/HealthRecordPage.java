@@ -78,8 +78,11 @@ public class HealthRecordPage  extends HealthRecordBase {
 			testharnessTblDceLnk.click();
 		} else if (noWaitValidate(drugLookup)) {
 			drugLookup.click();
-		} else if (noWaitValidate(section_drugLocator)) {
-			section_drugLocator.click();
+		//TODO: when benefits Drug Look Up points to new DCE page, need to update the navigation
+		//TODO: navigation will got to Benefits then click DRUG LOOK UP link
+		//TODO: new DCE page will be rally page
+		//tbd } else if (noWaitValidate(section_drugLocator)) {
+		//tbd 	section_drugLocator.click();
 		} else {
 			//note: fix up the URL to get to the page...
 			navigateToBenefitsPage(memberType);

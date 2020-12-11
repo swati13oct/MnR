@@ -75,7 +75,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(id = "Find a pharmacy near you")
 	private WebElement pharmacyNearLink;
 
-	@FindBy(className = "zip-button")
+	//@FindBy(className = "zip-button")
+	@FindBy(xpath="(//*[@class='zip-button'])[1]")
 	private WebElement FindPlansButton1;
 
 	@FindBy(xpath = "//*[@id='ghn_lnk_2']")
@@ -221,7 +222,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "//*[@id='ghn_lnk_2']")
 	private WebElement OurPlans;
 
-	@FindBy(id = "nav-zipcode")
+	//@FindBy(id = "nav-zipcode")
+	@FindBy(xpath="//input[contains(@id,'nav-zipcode')]")
 	private WebElement OurPlans_zipfield;
 
 	@FindBy(xpath = "//*[@id = 'nav-zipcode']/following-sibling::button[@class = 'zip-button']")
@@ -464,7 +466,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	
 	@FindBy(xpath="//a[contains(text(),'Learn More')]")
 	private WebElement learnAboutMedicareHomeScreen;
-	
+
 	@FindBy(xpath = "//a[@id='gfn_lnk_row2_1']")
     private WebElement MedicareAdvantagePlans;
 	
@@ -1542,22 +1544,22 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		return null;	
 	}
 	
-	 public void validateCallSam() throws InterruptedException {
-	        boolean present;
-//	        driver.navigate().refresh();
-	        try {
-	        validateNew(callsam);
-	        present = true;
-	        } catch (NoSuchElementException e) {
-	        present = false;
-	        }
-	        if (present) {
-	          System.out.println("@@@@@@@@@ Able to find TFN widget @@@@@@@@@");
-	        }
-	        else
-	        	Assert.fail("@@@@@@@@@ No TFN widget @@@@@@@@@");
-	      
+	public void validateCallSam() throws InterruptedException {
+		boolean present;
+		//driver.navigate().refresh();
+		try {
+			validateNew(callsam);
+			present = true;
+		} catch (NoSuchElementException e) {
+			present = false;
 		}
+		if (present) {
+			System.out.println("@@@@@@@@@ Able to find TFN widget @@@@@@@@@");
+		}
+		else
+			Assert.fail("@@@@@@@@@ No TFN widget @@@@@@@@@");
+
+	}
 		
 		public void validateCallSamContent() throws InterruptedException {
 			
@@ -1959,7 +1961,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			WebElement VPSignIn = driver.findElement(
 					By.xpath("//a[contains(text(), 'Sign In') and not(contains(@aria-labelledby ,'VPSignIn'))]"));
 			validateNew(CreateProfile);
-		    validateNew(VPSignIn);
+			validateNew(VPSignIn);
 			if (CreateProfile.isEnabled() && VPSignIn.isEnabled()) {
 				Assert.assertTrue(true);
 				System.out.println("Visitor Profile elements are present on home page");
@@ -2908,6 +2910,61 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		
 	}
 	
+	public void clickonmemberSignInOfflinelink(String ExpectedmemberSigninURL) {
+		validateNew(memberSignInPage);
+		CommonUtility.waitForPageLoadNew(driver, memberSignInPage, 30);
+		String parentWindow = driver.getWindowHandle();
+	//	memberSignInPage.click();
+		jsClickNew(memberSignInPage);
+		sleepBySec(3);
+		Set<String> tabs_windows = driver.getWindowHandles();
+		Iterator<String> itr = tabs_windows.iterator();
+		while(itr.hasNext()) {
+			String window = itr.next();
+			if(!parentWindow.equals(window)) {
+				driver.switchTo().window(window);
+			}
+		}
+
+		CommonUtility.checkPageIsReadyNew(driver);
+		String CurrentmemberSigninURL = driver.getCurrentUrl();
+		String ActualmemberSigninURL=CurrentmemberSigninURL.substring(0, 32).trim();
+		System.out.println("memberSignin Page is displayed : "+ActualmemberSigninURL);
+		System.out.println("Expected member signin URL: "+ExpectedmemberSigninURL);
+		System.out.println("Actual member signin URL: "+ActualmemberSigninURL);
+
+		if(ExpectedmemberSigninURL.contains(ActualmemberSigninURL)) {
+			System.out.println("****************member signin Page is displayed  ***************");
+
+			Assert.assertTrue(true);
+		}
+		else {
+			Assert.fail("****************member signin Page is not loaded ***************");
+		}
+		//ViewMedicareplanlinks.click();
+		validateNew(ViewMedicareplanlinks);
+		CommonUtility.waitForPageLoadNew(driver, ViewMedicareplanlinks, 30);
+		String parentWindow1 = driver.getWindowHandle();
+		jsClickNew(ViewMedicareplanlinks);
+		sleepBySec(3);
+		Set<String> tabs_windows1 = driver.getWindowHandles();
+		Iterator<String> itr1 = tabs_windows1.iterator();
+		while(itr1.hasNext()) {
+			String window = itr1.next();
+			if(!parentWindow1.equals(window)) {
+				driver.switchTo().window(window);
+			}
+		}
+		CommonUtility.checkPageIsReadyNew(driver);
+		 String stageURL="https://www.stage-aarpmedicareplans.uhc.com/";
+		 String prodURL="https://www.aarpmedicareplans.com/";
+		 String offlineprodURL="https://offline.aarpmedicareplans.com/";
+		 String urlCheck=driver.getCurrentUrl();
+		String expectedURL =urlCheck.replace(prodURL,offlineprodURL);
+		System.out.println("**********Actual URL is displayed *************"+expectedURL);
+		
+	}
+	
 	public void MedicareAdvantagePlans() {
 			threadsleep(6);
 			//MedicareAdvantagePlans.click();
@@ -3016,4 +3073,30 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 
 
+	public boolean checkZipCompErrorInSubNav() {
+		hoverOverShopForPlan();
+		sleepBySec(3);
+		CommonUtility.checkPageIsReadyNew(driver);
+		validateNew(OurPlans_zipfield);
+		validateNew(FindPlansButton1);
+		WebElement errorMsg=driver.findElement(By.xpath("//span[@class='field-error-msg']"));
+		jsClickNew(FindPlansButton1);
+		waitforElementNew(errorMsg);
+		if(errorMsg.isDisplayed()){
+			System.out.println("Zip Component present in Sub Nav");
+			System.out.println("Error Message Displayed: "+ errorMsg.getText());
+			return true;
+		}else
+			return false;
+	}
+
+	public VPPPlanSummaryPage checkZipCompSubNavVpp(String zipCode) {
+		sendkeys(OurPlans_zipfield, zipCode);
+		jsClickNew(FindPlansButton1);
+		CommonUtility.checkPageIsReadyNew(driver);
+		if (getTitle().equalsIgnoreCase(PageTitleConstants.ULAYER_VPP_PLAN_PAGE_AARP_SHOP_MEDICARE)) {
+			return new VPPPlanSummaryPage(driver);
+		}
+		return null;		
+	}
 }

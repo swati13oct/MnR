@@ -375,6 +375,9 @@ public class EOBWebElements extends UhcDriver{
 	@FindBy(xpath="//p//strong[contains(text(),'Is there a provider')]/../a")
 	protected WebElement contactusLnk;
 	
+	@FindBy(xpath="//div[contains(@ng-show,'SSP') and not(contains(@class,'ng-hide'))]//*[contains(text(),'EOBs for your plan are currently not available on this site')]")
+	protected WebElement oldSspErrMsg;
+	
 	public EOBWebElements(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);

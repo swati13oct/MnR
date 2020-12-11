@@ -33,12 +33,12 @@ Feature: 1.09.1 Member Health and Wellness Page - Member Auth
     Examples: 
       | TID   | username  | password  | MemUserName     | planType | memberType        | hasReward | hasRenewActive |
       | 15342 | qavgogine | qavgogine | q3_sep_Active_combo_005 | PDP      | RewardsMember     | false     | false          |
-      | xxxxx | qavgogine | qavgogine | PaidInFullShip0011 | SHIP  | RewardsMember     | false     | false          |
+      | xxxxx | qavgogine | qavgogine | q4_Ship_013 | SHIP  | RewardsMember     | false     | false          |
 
     @memAuth_healthAndWellness01_fedShipCombo_shipFedCombo
     Examples: 
       | TID   | username  | password  | MemUserName     | planType | memberType        | hasReward | hasRenewActive |
-      | 15343 | qavgogine | qavgogine | q3_sep_UAT4_AARP023| FED_SHIP_COMBO | RewardsMember | false    | true       |
+      | 15343 | qavgogine | qavgogine | q3_sep_UAT4_AARP273| FED_SHIP_COMBO | RewardsMember | false    | true       |
       | 15343 | qavgogine | qavgogine | GENARO_Q4_COMBO    | SHIP_FED_COMBO | RewardsMember| true    | true       |
  
  
