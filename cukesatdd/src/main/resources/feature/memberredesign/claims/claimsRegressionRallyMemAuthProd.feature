@@ -49,7 +49,7 @@ Feature: 1.12.2 Member Rally claims - Member Auth - PROD
    @prod_rallyClaims01_mapd      @claims_prodsanityMapd_Individual
      Examples:   
        | TID   | username   | password  | MemUserName  | planType | memberType          | claimSystem     | 
-      | 15230 | kkumard   | tnps459#  | BILL.ROSNER123# | MAPD  | AARP_Individual     | COSMOS_CLAIMS   |
+      | 15230 | kkumard   | tnps459#  | mamireyes | MAPD  | AARP_Individual     | COSMOS_CLAIMS   |
 
     @prod_rallyClaims01_ship @claims_prodsanityShip
     Examples: 
@@ -59,6 +59,6 @@ Feature: 1.12.2 Member Rally claims - Member Auth - PROD
     @prod_rallyClaims01_pdp
     Examples: 
       | TID   | username   | password  | MemUserName  | planType | memberType          | claimSystem     | 
-      | 15299 | kkumard   | tnps459#  | nawal1215    | PDP      | Individual          | RX_CLAIMS       | 
-      | 15300 | kkumard   | tnps459#  | MON48DA      | PDP      | GROUP               | RX_CLAIMS       | 
+      | 15299 | kkumard   | tnps459#  | Branford910    | PDP      | Individual          | RX_CLAIMS       | 
+      | 15300 | kkumard   | tnps459#  | LeanoraF      | PDP      | GROUP               | RX_CLAIMS       | 
   #----- end of Non Regression claims scenarios section ------------------------
