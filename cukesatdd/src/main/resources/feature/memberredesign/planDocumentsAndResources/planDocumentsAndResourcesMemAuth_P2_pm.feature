@@ -93,8 +93,8 @@ Feature: 1.06.1.1 Member Plans and Documents - section: Plan Materials - Member 
 	@memAuth_active_ship
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | pm_sd | pm_op | pm_mi | pm_en | pm_es | pm_zh |
-      | 19-038 | 15119,15304 | qavgogine | qavgogine | PaidInFullShip0011    | SHIP     | IND_EFF_PDnR          | true  | true  | true  | true  | false | false |  
-      | 20-116 | 15119,15304 | qavgogine | qavgogine | q3_SEP_2020SHIP_012    | SHIP     | MULTI_IND_EFF_PDnR   | true  | true  | true  | true  | false | false |  
+      | 19-038 | 15119,15304 | qavgogine | qavgogine | q4_Ship_013    | SHIP     | IND_EFF_PDnR          | true  | true  | true  | true  | false | false |  
+      | 20-116 | 15119,15304 | qavgogine | qavgogine | q4_Ship_014    | SHIP     | MULTI_IND_EFF_PDnR   | true  | true  | true  | true  | false | false |  
 
 	@memAuth_preeffective_ship
 	Examples: 

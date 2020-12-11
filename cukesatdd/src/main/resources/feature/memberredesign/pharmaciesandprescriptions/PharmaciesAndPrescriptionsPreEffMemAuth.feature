@@ -63,20 +63,22 @@ Feature: 1.18.1.1 Member Pharamcies And Prescriptions page - Pre-Effective - Mem
 	  | FID     | username  | password  | MemUserName               | planType | memberType          | expectLink |
 	  | F493942 | qavgogine | qavgogine | preeffectiveFEDPDP_001    | PDP      | IND_PREEFF_PnP      | yes        |
 
-	@memAuth_pnpPreEff_pdp_grp
-    Examples: 
-	  | FID     | username  | password  | MemUserName               | planType | memberType          | expectLink |
-	  | F493942 | qavgogine | qavgogine | preeffectiveGroupPDP_001  | PDP      | GRP_PREEFF_PnP      | yes        |
+	#note: no test user available for now
+	#@memAuth_pnpPreEff_pdp_grp
+    #Examples: 
+	#  | FID     | username  | password  | MemUserName               | planType | memberType          | expectLink |
+	#  | F493942 | qavgogine | qavgogine | preeffectiveGroupPDP_001  | PDP      | GRP_PREEFF_PnP      | yes        |
 
 	@memAuth_pnpPreEff_snp_ind
     Examples: 
 	  | FID     | username  | password  | MemUserName               | planType | memberType          | expectLink |
 	  | F493942 | qavgogine | qavgogine | testSnpUser01             | SNP      | IND_PREEFF_PnP      | yes        |
 
-	@memAuth_pnpPreEff_ssp_grp
-    Examples: 
-	  | FID     | username  | password  | MemUserName               | planType | memberType          | expectLink |
-	  | F493942 | qavgogine | qavgogine | preeffectiveGroupSSUP01   | SSP      | GRP_PREEFF_PnP      | yes        |
+	#note: no test user available for now
+	#@memAuth_pnpPreEff_ssp_grp
+    #Examples: 
+	#  | FID     | username  | password  | MemUserName               | planType | memberType          | expectLink |
+	#  | F493942 | qavgogine | qavgogine | preeffectiveGroupSSUP01   | SSP      | GRP_PREEFF_PnP      | yes        |
 
   @memAuth_pnpPreEff02
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> - Verify member will not have access to Pharmacies and Prescriptions Page
@@ -115,8 +117,9 @@ Feature: 1.18.1.1 Member Pharamcies And Prescriptions page - Pre-Effective - Mem
 	  | FID     | username  | password  | MemUserName             | planType | memberType          | expectLink |
 	  | F493942 | qavgogine | qavgogine | preeffective_GroupMA_001| MA       | GRP_PREEFF_PnP      | no         |
 
-	@memAuth_pnpPreEff_ship_ind
-    Examples: 
-	  | FID     | username  | password  | MemUserName             | planType | memberType          | expectLink |
-	  | F493942 | qavgogine | qavgogine | shipPreeffective707     | SHIP     | IND_PREEFF_PnP      | no         |
+	#note: no test user available for now
+	#@memAuth_pnpPreEff_ship_ind
+    #Examples: 
+	#  | FID     | username  | password  | MemUserName             | planType | memberType          | expectLink |
+	#  | F493942 | qavgogine | qavgogine | shipPreeffective707     | SHIP     | IND_PREEFF_PnP      | no         |
 	  
