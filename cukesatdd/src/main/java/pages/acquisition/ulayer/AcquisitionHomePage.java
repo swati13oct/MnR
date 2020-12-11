@@ -1,4 +1,3 @@
-
 package pages.acquisition.ulayer;
 
 import static org.junit.Assert.assertTrue;
@@ -458,6 +457,15 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	
 	@FindBy(xpath = "//p[contains(text(),'UnitedHealthcare Insurance Company (UnitedHealthcare)')]")
     private WebElement UHCICSubTiltle;
+	
+	@FindBy(id = "logged-username")
+	private WebElement guestProfileLink;
+
+	@FindBy(xpath = "//*[@id='enrollmentPopup']/..")
+	private WebElement savedPlansPopup;
+
+	@FindBy(xpath = "//*[@id='enrollmentPopup']/..//*[@class='uhc-modal__close']")
+	private WebElement savedPlansPopupCloseIcon;
 
    	//String ChatSamText= "Chat with a Licensed Insurance Agent";
 	String ChatSamText= "Chat Now";
@@ -2792,6 +2800,33 @@ public class AcquisitionHomePage extends GlobalWebElements {
 						e.printStackTrace();
 			}		
 
-				}	
+				}
+	
+	/**
+	 * This method used to navigate to new visitor profile dashboard
+	 * 
+	 * @return
+	 */
+	public VisitorProfilePage navigateToNewVisitorProfilePage() {
+		try {
+			if (savedPlansPopup.isDisplayed()) {
+				savedPlansPopupCloseIcon.click();
+			}
+		} catch (Exception e) {
+			System.out.println("Saved Plans modal not displayed");
+		}
+		waitforElement(shoppingCartIcon);
+		shoppingCartIcon.click();
+		guestProfileLink.click();
+		// Actions actions = new Actions(driver);
+		// actions.moveToElement(guestProfileLink);
+		// actions.click().build().perform();
+		CommonUtility.checkPageIsReadyNew(driver);
+		if (driver.getCurrentUrl().contains("profile")) {
+			return new VisitorProfilePage(driver);
+		} else {
+			System.out.println("Navigation to visitor profile is failed");
+			return null;
+		}
+	}
 }
-

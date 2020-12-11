@@ -325,4 +325,9 @@ public class BuildYourDrugList extends UhcDriver {
 		
 	}
 
+	public void validateBuildDrugListPageDisplayed() {
+		validateNew(EnterDrugNameTxt);
+		validateNew(SearchBtn);
+		validateNew(PreviousBtn);
+	}
 }
