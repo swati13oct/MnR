@@ -2719,17 +2719,6 @@ public class VppCommonStepDefinition {
 		System.out.println("Plan name" + PlanName);
 		plansummaryPage.savePlan(PlanName);
 	}
-
-	@Then("^user should be able to see the Select Plan for Enroll Modal with saved plans$")
-	public void user_should_be_able_to_see_Select_Plan_for_Enroll_Modal_with_Saved_plans_in_UMS_site(
-			DataTable givenAttributes) {
-		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
-				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		String PlanName = memberAttributesRow.get(0).getCells().get(1);
-		System.out.println("Plan name" + PlanName);
-		plansummaryPage.verifySelectPlanForEnrollModalForSavedPlans(PlanName);
-	}
 	
 	@And("^user click on view saved plans button$")
 	public void user_click_on_view_saved_plans_button() {
