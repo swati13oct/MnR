@@ -144,6 +144,7 @@ public class PlanRecommendationEngineEditResponsePage extends UhcDriver {
 		checkContent("drugs");
 		checkContent("additional");
 		checkContent("cost");
+		checkContent("priorities");
 		verifyClickEditButton("location", false);
 		verifyClickEditButton("coverage", false);
 		verifyClickEditButton("special", false);
@@ -152,6 +153,7 @@ public class PlanRecommendationEngineEditResponsePage extends UhcDriver {
 		verifyClickEditButton("drugs", false);
 		verifyClickEditButton("additional", false);
 		verifyClickEditButton("cost", false);
+		verifyClickEditButton("priorities", false);
 		checkDrugDocInfo("drugs", false);
 		checkDrugDocInfo("doctor", false);
 		editCancel(inputValues.get("Plan Type").toLowerCase());
@@ -220,8 +222,9 @@ public class PlanRecommendationEngineEditResponsePage extends UhcDriver {
 			// Works for all Yes or all No
 		} else if (section.equalsIgnoreCase("cost")) {
 			UIValue = inputValues.get("Preference Option");
+		} else if (section.equalsIgnoreCase("priorities")) {
+			UIValue = inputValues.get("priorities");
 		}
-
 		return UIValue.toLowerCase();
 	}
 
@@ -294,6 +297,7 @@ public class PlanRecommendationEngineEditResponsePage extends UhcDriver {
 		mapd.put(5, "drugs");
 		mapd.put(6, "additional");
 		mapd.put(7, "cost");
+		mapd.put(8, "priorities");
 
 		ma = new HashMap<Integer, String>();
 		ma.put(0, "location");
@@ -303,6 +307,7 @@ public class PlanRecommendationEngineEditResponsePage extends UhcDriver {
 		ma.put(4, "doctor");
 		ma.put(5, "additional");
 		ma.put(6, "cost");
+		ma.put(7, "priorities");
 
 		pdp = new HashMap<Integer, String>();
 		pdp.put(0, "location");
@@ -343,7 +348,6 @@ public class PlanRecommendationEngineEditResponsePage extends UhcDriver {
 
 	}
 
-	
 	public void editCancel(String flow) {
 		System.out.println("Flow : " + flow);
 		int randomEdit = chooseRandomQuesNum(flow);
@@ -359,7 +363,6 @@ public class PlanRecommendationEngineEditResponsePage extends UhcDriver {
 		Assert.assertTrue(validate(returnToPlanLink, 10), "Invalid cancel action");
 	}
 
-	
 	public void editUserResponse(HashMap<String, String> userInput) {
 		System.out.println("Edit User Response: ");
 		inputValues = userInput;
@@ -444,9 +447,14 @@ public class PlanRecommendationEngineEditResponsePage extends UhcDriver {
 				checkDrugDocInfo("doctor", false);
 				docEdit = true;
 			}
+		} else if (section.equalsIgnoreCase("priorities")) {
+			PlanRecommendationEnginePrioritiesPage priority = new PlanRecommendationEnginePrioritiesPage(driver);
+			priority.prioritiesFunctional(inputValues.get("Priority Option"), inputValues.get("Priorities"));
+			jsClickNew(saveBtn);
+			checkContent("priorities");
 		}
 	}
-	
+
 	public void addDoctorEditResponse(HashMap<String, String> userInput) {
 		System.out.println("Add Provider: ");
 		inputValues = userInput;
@@ -465,16 +473,16 @@ public class PlanRecommendationEngineEditResponsePage extends UhcDriver {
 		inputValues = userInput;
 		verifyClickEditButton("coverage", true);
 		validate(progressInfo, 10);
-		PlanRecommendationEngineCoverageOptionPage coverage =  new PlanRecommendationEngineCoverageOptionPage(driver);
+		PlanRecommendationEngineCoverageOptionPage coverage = new PlanRecommendationEngineCoverageOptionPage(driver);
 		coverage.chooseCoverageOption(inputValues.get("Plan Type"));
 		jsClickNew(saveBtn);
 	}
-	
+
 	public void checkCoveragevalue(HashMap<String, String> userInput) {
 		inputValues = userInput;
 		checkContent("coverage");
 	}
-	
+
 	public void addDrugs(HashMap<String, String> userInput) {
 		inputValues = userInput;
 		editValue("drugs");

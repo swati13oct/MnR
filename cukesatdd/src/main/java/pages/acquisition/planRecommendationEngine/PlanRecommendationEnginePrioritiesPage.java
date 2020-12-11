@@ -1,0 +1,125 @@
+/**
+* 
+ */
+package pages.acquisition.planRecommendationEngine;
+
+import java.util.HashMap;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
+import org.testng.Assert;
+
+import atdd.framework.UhcDriver;
+import pages.acquisition.commonpages.AcquisitionHomePage;
+
+public class PlanRecommendationEnginePrioritiesPage extends UhcDriver {
+
+	public PlanRecommendationEnginePrioritiesPage(WebDriver driver) {
+		super(driver);
+		PageFactory.initElements(driver, this);
+	}
+
+	@Override
+	public void openAndValidate() {
+		}
+
+	String page = "Priorities";
+
+	PlanRecommendationEngineCommonutility desktopCommonUtils = new PlanRecommendationEngineCommonutility(driver);
+
+// Priorities page Elements
+
+	@FindBy(css = "#progress-bar-title")
+	private WebElement planSelectorPageTilte;
+
+	@FindBy(xpath = "//*[@class='progress-bar-info']/h2")
+	private WebElement pageStepsNumberName;
+
+	@FindBy(xpath = "//*[@class='progress-bar-info']/p")
+	private WebElement pageProgressPercentage;
+
+	@FindBy(css = "h3.primary-question-tex")
+	private WebElement priorityTitle;
+
+	@FindBy(css = "p.description-text")
+	private WebElement priorityDescription;
+
+	@FindBy(xpath = "//button[contains(text(),'Continue')]")
+	private WebElement continueBtn;
+
+	@FindBy(xpath = "//button[contains(text(),'Previous')]")
+	private WebElement previousBtn;
+
+	@FindBy(css = "select#topPriority")
+	private WebElement topSelect;
+	
+	@FindBy(css = "select#secondPriority")
+	private WebElement secondSelect;
+	
+	@FindBy(css = "button.addAnotherLink")
+	private WebElement addAnotherLink;
+	
+	public HashMap<String, String> inputValues;
+	
+	public void priorities() {
+		System.out.println("Validating Priorities Page: ");
+		String currentPageUrl = driver.getCurrentUrl();
+		currentPageUrl.contains("/plan-recommendation-engine.html/");
+		validate(planSelectorPageTilte);
+		validate(pageStepsNumberName, 30);
+		validate(pageProgressPercentage, 30);
+		desktopCommonUtils.currentPageValidation(page.toUpperCase());
+		validate(priorityTitle);
+		validate(priorityDescription);
+		validate(continueBtn);
+		validate(previousBtn);
+		Assert.assertTrue(validate(topSelect, 30));
+		validate(addAnotherLink, 30);
+		jsClickNew(addAnotherLink);
+		Assert.assertTrue(validate(secondSelect, 30));
+		jsClickNew(previousBtn);
+		System.out.println("Validating " + page + " page Previous button functionality");
+		desktopCommonUtils.previousPageValidation(page.toUpperCase());
+	}
+
+// Selecting Priority options
+
+	public void priorityOptions(boolean top,String value) {
+		System.out.println("Priorities option selection");
+		if (top) {
+			selectFromDropDownByText(driver, topSelect, value);
+			System.out.println("Top Priority value " + value + " selected");
+		} else {
+			if(validate(addAnotherLink)) {
+				jsClickNew(addAnotherLink);
+				threadsleep(1000);
+			}
+			selectFromDropDownByText(driver, secondSelect, value);
+			System.out.println("Second Priority value " + value + " selected");
+		}
+	}
+
+	public void prioritiesFunctional(String option,String value) {
+		if(option.equalsIgnoreCase("Both")) {
+			priorityOptions(true,value.split(",")[0]);
+			priorityOptions(false,value.split(",")[1]);
+		}
+		else if(option.equalsIgnoreCase("1st")) {
+			priorityOptions(true,value.split(",")[0]);
+		}
+		else if(inputValues.get("Priority Option").equalsIgnoreCase("2nd")) {
+			priorityOptions(false,value.split(",")[1]);
+		}
+		else {
+			
+		}
+	}
+	
+	public void continuePriority() {
+		jsClickNew(continueBtn);
+		System.out.println("Validating " + page + " page Continue button functionality");
+	}
+
+}

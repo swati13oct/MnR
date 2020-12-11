@@ -231,12 +231,22 @@ public class PlanRecommendationEngineCommonutility extends UhcDriver {
 				} else if (currentPageName.contains("COST")) {
 					previousPageName = "Additional";
 					previousPagePercentage = "80%";
-					nextPageName = "NULL";
-					nextPagePercentage = "NULL";
+					nextPageName = "Priorities";
+					nextPagePercentage = "96%";
 					currrentPagePercentage = "80%";
 					if (flow.equalsIgnoreCase("MA")) {
 						previousPagePercentage = "72%";
 						currrentPagePercentage = "72%";
+					}
+				}else if (currentPageName.contains("PRIORITIES")) {
+					previousPageName = "Cost";
+					previousPagePercentage = "90%";
+					nextPageName = "NULL";
+					nextPagePercentage = "NULL";
+					currrentPagePercentage = "96%";
+					if (flow.equalsIgnoreCase("MA")) {
+						previousPagePercentage = "85%";
+						//currrentPagePercentage = "72%";
 					}
 				} else {
 					previousPageName = "";

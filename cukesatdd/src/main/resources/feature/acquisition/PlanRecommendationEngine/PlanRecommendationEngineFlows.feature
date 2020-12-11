@@ -157,6 +157,9 @@ Feature: Plan Recommendation Engine flow - Verify PRE flows functionalities with
       | Additional Option | <Dental-Hearing-Vision-Fitness> |
     Then user selects cost preferences option in cost preferences page
       | Preference Option | <costPreferenceOption> |
+    Then user selects priority in priorities page
+      | Priority Option | <priorityOption> |
+      | Priorities      | <priorities>     |
     Then user validate elements in loading results page
     Then user validate recommendations in results page
       | Zip Code           | <Zipcode>           |
@@ -165,8 +168,8 @@ Feature: Plan Recommendation Engine flow - Verify PRE flows functionalities with
       | 2nd Recommendation | <2ndRecommendation> |
 
     Examples: 
-      | Zipcode | isMultiCounty | county   | isCoverageOpt | specialNeeds | travel  | doctors         | DoctorsName | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch | pharmacyoption | Dental-Hearing-Vision-Fitness | costPreferenceOption | 1stRecommendation | 2ndRecommendation |
-      |   10003 | NO            | New York | MAPD          | None         | regular | AcceptsMedicare |             |               | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,1,YES,NO                               | Retail         | Yes,No,No,Yes                 | Lower                | MA                | MS                |
+      | Zipcode | isMultiCounty | county   | isCoverageOpt | specialNeeds | travel  | doctors         | DoctorsName | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch | pharmacyoption | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities         | 1stRecommendation | 2ndRecommendation |
+      |   10003 | NO            | New York | MAPD          | None         | regular | AcceptsMedicare |             |               | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,1,YES,NO                               | Retail         | Yes,No,No,Yes                 | Lower                | both           | Drug Cost, Doctors | MA                | MS                |
 
   @PRE @planrecommendation @MAPDFlow @MAPDskipdrug @F358830 @PRERegression2
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds> , <travel> , <doctors> , <DoctorsName> , <isMultiDoctor> , <Drug Selection> , <Dental-Hearing-Vision-Fitness> , <costPreferenceOption> - To validate MAPD flow functions with skip drug for MS plans in PRE
@@ -192,6 +195,7 @@ Feature: Plan Recommendation Engine flow - Verify PRE flows functionalities with
       | Additional Option | <Dental-Hearing-Vision-Fitness> |
     Then user selects cost preferences option in cost preferences page
       | Preference Option | <costPreferenceOption> |
+    And verify continue function on "Priorities" page
     Then user validate elements in loading results page
     Then user validate recommendations in results page
       | Zip Code           | <Zipcode>           |
@@ -227,6 +231,9 @@ Feature: Plan Recommendation Engine flow - Verify PRE flows functionalities with
       | Additional Option | <Dental-Hearing-Vision-Fitness> |
     Then user selects cost preferences option in cost preferences page
       | Preference Option | <costPreferenceOption> |
+    Then user selects priority in priorities page
+      | Priority Option | <priorityOption> |
+      | Priorities      | <priorities>     |
     Then user validate elements in loading results page
     Then user validate recommendations in results page
       | Zip Code           | <Zipcode>           |
@@ -235,8 +242,8 @@ Feature: Plan Recommendation Engine flow - Verify PRE flows functionalities with
       | 2nd Recommendation | <2ndRecommendation> |
 
     Examples: 
-      | Zipcode | isMultiCounty | county     | isCoverageOpt | specialNeeds | travel  | doctors         | DoctorsName | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption | 1stRecommendation | 2ndRecommendation |
-      |   55001 | NO            | Washington | MAPD          | nursing      | regular | AcceptsMedicare |             |               | Yes            | Yes,No,No,Yes                 | Higher               | SNP               | MS                |
+      | Zipcode | isMultiCounty | county     | isCoverageOpt | specialNeeds | travel  | doctors         | DoctorsName | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities        | 1stRecommendation | 2ndRecommendation |
+      |   55001 | NO            | Washington | MAPD          | nursing      | regular | AcceptsMedicare |             |               | Yes            | Yes,No,No,Yes                 | Higher               | 1st            | Drug Cost,Doctors | SNP               | MS                |
 
   @PRE @planrecommendation @DKFlow @DKdrug @F358830 @PRERegression5
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds> , <travel> , <doctors> , <DoctorsName> , <isMultiDoctor> , <Drug Selection> , <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch> , <pharmacyoption> , <Dental-Hearing-Vision-Fitness> , <costPreferenceOption> - To validate DK flow functions with drug and DSNP in PRE

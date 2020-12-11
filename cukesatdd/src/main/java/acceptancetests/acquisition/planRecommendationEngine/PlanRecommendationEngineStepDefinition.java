@@ -32,6 +32,7 @@ import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineEditRe
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineHeaderAndFooter;
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineLandingAndZipcodePages;
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEnginePharmacyPage;
+import pages.acquisition.planRecommendationEngine.PlanRecommendationEnginePrioritiesPage;
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineResultsPage;
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineSpecialNeedsPage;
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineTravelPage;
@@ -923,6 +924,14 @@ public class PlanRecommendationEngineStepDefinition {
 		PlanRecommendationEngineResultsPage planSelectorResultspage =  new PlanRecommendationEngineResultsPage(wd);
 		checkpopup();
 		planSelectorResultspage.navigatePRE(inputValues.get("Site Name"));
+	}
+	
+	@Then("^user selects priority in priorities page$")
+	public void user_selects_priorities(DataTable givenAttributes) {
+		readfeaturedata(givenAttributes);
+		PlanRecommendationEnginePrioritiesPage priorities =  new PlanRecommendationEnginePrioritiesPage(wd);
+		priorities.prioritiesFunctional(inputValues.get("Priority Option"),inputValues.get("Priorities"));
+		priorities.continuePriority();
 	}
 
 }
