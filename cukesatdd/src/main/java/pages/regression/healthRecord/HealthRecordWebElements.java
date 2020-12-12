@@ -132,6 +132,9 @@ public class HealthRecordWebElements  extends UhcDriver {
 	@FindBy(xpath="//div[@data-testid='shared-header']//ul[@aria-expanded='true' and contains(@id,'dropdown-options')]//a[@data-testid='TARGET_AWARE_HEALTH_RECORD']")
 	protected WebElement testHarn_desktop_AcctProf_IHRLnk_react;
 	
+	@FindBy(xpath="//li[@class='accountSettings']//a[contains(text(),'Health record')]")
+	protected WebElement testHarn_IHRLnk;
+	
 	@FindBy(xpath="//h1[contains(text(),'Welcome') and contains(text(),'Health Record')]")
 	protected WebElement heathRecordPgHeaderText;
 

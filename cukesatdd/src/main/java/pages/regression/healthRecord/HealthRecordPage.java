@@ -455,6 +455,10 @@ public class HealthRecordPage  extends HealthRecordBase {
 				System.out.println("TEST - This has react stuff");
 				ihrLnk=testHarn_desktop_AcctProf_IHRLnk_react;
 				acctProfOptLst=testHarn_AcctProfDropdown_react;
+			} else if (noWaitValidate(testHarn_IHRLnk)) {
+				System.out.println("TEST - This has another desktop IHR xpath");
+				ihrLnk=testHarn_IHRLnk;
+				acctProfOptLst=testHarn_AcctProfDropdown;
 			} else {
 				System.out.println("TEST - Can't match anything");
 				return false;
