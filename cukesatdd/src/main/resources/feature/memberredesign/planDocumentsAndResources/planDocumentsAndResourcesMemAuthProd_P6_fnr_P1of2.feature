@@ -61,7 +61,7 @@ Feature: 1.06.6.2 Member Plans and Documents - section: Forms And Resources Part
 #	@prod_terminated_mapd_1of2
 #	Examples: 
 #      | index  | TID         | username  | password  | MemUserName     | planType | memberType            | fnr_sd | fnr_pdmo | fnr_ppi | fnr_rf | fnr_af |
-#      | 07-101 | xxxxx       | kkumard  | tnps459#  | SWHITE33436    | MAPD     | IND_TERM_PDnR         | true   | true     | true    | true   | true   |
+#      | 07-101 | xxxxx       | kkumard  | tnps459#  | Patkeving    | MAPD     | IND_TERM_PDnR         | true   | true     | true    | true   | true   |
 
 	@prod_active_ma_ind_1of2 @prod_active_ma_1of2
 	Examples: 

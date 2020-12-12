@@ -112,7 +112,7 @@ Feature: 1.25.2 Member Prepare For Next Year - PROD
 	    | index | FID     | username  | password  | MemUserName       | planType | memberType          |
 	   #| 1-04  | F437767 | kkumard   | tnps459#  | Ranch1955         | MA	     | IND_PREEFF_PFNY     |
 	    | 1-04  | F437767 | kkumard   | tnps459#  | Teripappas        | MAPD     | IND_PREEFF_PFNY     |
-	    | 1-05  | F437767 | kkumard   | tnps459#  | SWHITE33436       | MA	     | IND_TERM_PFNY       |
+	    | 1-05  | F437767 | kkumard   | tnps459#  | Patkeving       | MA	     | IND_TERM_PFNY       |
 	    | 1-06  | F437767 | kkumard   | tnps459#  | Pramila1946       | SHIP	 | IND_PFNY            |
 			
 	@prod_pfny01_comboPdpSsp

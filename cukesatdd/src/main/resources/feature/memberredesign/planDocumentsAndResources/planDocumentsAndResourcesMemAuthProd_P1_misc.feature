@@ -60,7 +60,7 @@ Feature: 1.06.2.2 Member Plans and Documents - section: header -and- My Document
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | md_sd | eob_sd | eob_m | eob_d | rm_sd |
 #      | 06-006 | xxxxx       | kkumard  | tnps459#  | testusername    | MA       | IND_TERM_PDnR         | true  | true   | true  | false | false |
 #      | 07-007 | xxxxx       | kkumard  | tnps459#  | testusername    | MA       | GROUP_TERM_PDnR       | true  | true   | true  | false | false |
-      | 08-008 | xxxxx       | kkumard  | tnps459#  | SWHITE33436    | MAPD     | IND_TERM_PDnR         | true  | true   | true  | true  | false |
+      | 08-008 | xxxxx       | kkumard  | tnps459#  | Patkeving    | MAPD     | IND_TERM_PDnR         | true  | true   | true  | true  | false |
 
 	@prod_active_ma @prod_active_ma_ind
 	Examples: 

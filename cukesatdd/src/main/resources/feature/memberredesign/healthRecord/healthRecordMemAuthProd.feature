@@ -78,7 +78,7 @@ Feature: 1.24.2 Member Individual Health Record - PROD
 	    | index | FID     | username  | password  | MemUserName             | planType | memberType         | expectLink | 
 	 #  | 11    | F424804 | kkumard   | tnps459#  | Ranch1955               | MA       | PREEFF_IHR         | true       |
 	    | 11    | F424804 | kkumard   | tnps459#  | Teripappas                | MAPD     | PREEFF_IHR         | true       |
-	    | 12    | F424804 | kkumard   | tnps459#  | SWHITE33436            | MAPD     | TERM_IHR           | false      |
+	    | 12    | F424804 | kkumard   | tnps459#  | Patkeving            | MAPD     | TERM_IHR           | false      |
 
     @prod_ihr_pdpSspCombo
     Examples: 

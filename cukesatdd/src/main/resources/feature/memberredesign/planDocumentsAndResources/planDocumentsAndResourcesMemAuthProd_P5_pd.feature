@@ -56,7 +56,7 @@ Feature: 1.06.5.2 Member Plans and Documents - section: Provider Directory -or- 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | pd_sd | pd_ps | pd_pl | pd_en_cy | pd_es_cy | pd_zh_cy | pd_en_ny | pd_es_ny | pd_zh_ny |
 #     | 06-082 | xxxxx       | kkumard   | tnps459#  | testusername    | MA       | IND_TERM_PDnR         | false | false | false | false    | false    | false    | false    | false    | false    |
 #     | 07-083 | xxxxx       | kkumard   | tnps459#  | testusername    | MA       | GROUP_TERM_PDnR       | false | false | false | false    | false     | false    | false    | false    | false    |
-      | 08-084 | xxxxx       | kkumard   | tnps459#  | SWHITE33436    | MAPD     | IND_TERM_PDnR         | false | false | false | false    | false    | false    | false    | false    | false    |
+      | 08-084 | xxxxx       | kkumard   | tnps459#  | Patkeving    | MAPD     | IND_TERM_PDnR         | false | false | false | false    | false    | false    | false    | false    | false    |
 
 
 	@prod_active_ma @prod_active_ma_ind

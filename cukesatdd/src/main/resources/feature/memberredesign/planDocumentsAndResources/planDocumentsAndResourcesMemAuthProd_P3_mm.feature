@@ -51,7 +51,7 @@ Feature: 1.06.3.2 Member Plans and Documents - section: Membership Materials - M
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | mm_sd | mm_en | mm_es | mm_zh |
 #      | 06-044 | xxxxx       | kkumard  | tnps459#  | testusername    | MA       | IND_TERM_PDnR         | false | false | false | false |
 #      | 07-045 | xxxxx       | kkumard  | tnps459#  | testusername    | MA       | GROUP_TERM_PDnR       | false | false | false | false |
-      | 08-046 | xxxxx       | kkumard  | tnps459#  | SWHITE33436    | MAPD     | IND_TERM_PDnR         | false | false | false | false |
+      | 08-046 | xxxxx       | kkumard  | tnps459#  | Patkeving    | MAPD     | IND_TERM_PDnR         | false | false | false | false |
 
 	@prod_active_ma @prod_active_ma_ind
 	Examples: 

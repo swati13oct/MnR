@@ -402,8 +402,8 @@ public class PlanDocumentsAndResourcesUsersHelperProd {
 			}
 			if (subSection.equals("EN-nextYear")) {
 				targetTestDocList = new ArrayList<String>();
-				targetTestDocList.add("Annual Notice of Changes");
-				targetTestDocList.add("Evidence Of Coverage");
+				//targetTestDocList.add("Annual Notice of Changes");
+				//targetTestDocList.add("Evidence Of Coverage");
 				//targetTestDocList.add("Comprehensive Formulary");
 				//targetTestDocList.add("Certificate of Coverage");
 				//targetTestDocList.add("Additional Drug Coverage");
