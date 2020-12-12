@@ -247,22 +247,26 @@ public class AepVppPlanSummaryPage extends UhcDriver {
 		
 		for(int rowIndex=1; rowIndex<=listOfRowsPerTable.size(); rowIndex++) { //note: loop through each row
 			String cellsXpath="",benefitValueXpath ="";
-			String value = "";
+			String value = "",rowText ="" ,benefitValueText = "";
 			
 			 cellsXpath = rowXpath+"["+rowIndex+"]"; //index xpath for each row in the table
 			benefitValueXpath = cellsXpath + "//*[contains(@class,'float-right')]";// xpath for the benefit value for the cell
 			 
+			 // the below code gets the benefit name from the table before the : symbol
 			 WebElement e=driver.findElement(By.xpath(cellsXpath));
-			 WebElement j = driver.findElement(By.xpath(benefitValueXpath));
-			 String rowText = e.getText();
-			 
+			 rowText = e.getText();
 			 String [] parts = rowText.split(":");
 			 key = parts[0];
-			 value = j.getText();
+			 
+			 //the below code gets the benefit value from the table after the : symbol
+			 List <WebElement> j = driver.findElements(By.xpath(benefitValueXpath));
+			 if(j.size()!=0)
+				 benefitValueText = j.get(0).getText();
+			 
 			 /*for (int i = 1; i < parts.length; i++) {
 				 value = value + parts[i]; 
 			 }*/
-			 
+			 value = benefitValueText;
 			 
 			 
 			 result.put(key, value);
