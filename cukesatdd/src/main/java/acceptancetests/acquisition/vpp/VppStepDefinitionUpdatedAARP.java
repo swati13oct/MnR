@@ -3960,6 +3960,81 @@ public class VppStepDefinitionUpdatedAARP {
 	}
 	
 	
+	@Then("^user should see the Get started NBA$")
+	public void user_should_see_the_Get_started_NBA() throws Throwable {
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		plansummaryPage.verifyNextBestActionModalForDrugCostAuthenticated();
+		getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE,
+				plansummaryPage);
+	}
+		
+		
 
+	@When("^user clicks on Saved items$")
+	public void user_clicks_on_Saved_items() throws Throwable {
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);	
+		plansummaryPage.clickSavedItems();
+	}
 
+	@Then("^user should be navigated to visitor profile$")
+	public void user_should_be_navigated_to_visitor_profile() throws Throwable {
+		VisitorProfilePage visitorProfile = (VisitorProfilePage) getLoginScenario()
+				.getBean(PageConstants.VISITOR_PROFILE_PAGE);
+		visitorProfile.validateVisitorProfilePageDisplayed();
+	}
+
+	@Then("^user changes the new zipcode on vpp summary page$")
+	public void user_changes_the_new_zipcode_on_vpp_summary_page(DataTable givenAttributes) {
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+
+		Map<String, String> memberAttributesMap = prepareTestInput(givenAttributes);
+		String zipCode = memberAttributesMap.get("New Zip Code");
+		
+		plansummaryPage.enternewZip(zipCode);
+	}
+	@Then("^user navigate to Drug Summary page$")
+	public void user_navigate_to_Drug_Summary_page() {
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		
+		DrugDetailsPage drugDetails= plansummaryPage.clickonDrugSummary();
+		if (null != drugDetails) {
+			getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetails);
+		} else
+			Assert.fail("DCE Redesign page object not loaded");		
+	}
+
+	@And("^user click on view saved plans button on AARP site$")
+	public void user_click_on_view_saved_plans_button_on_AARP_site() {
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+
+		VisitorProfilePage visitorProfilePage = plansummaryPage.viewSavedPlans();
+		
+		getLoginScenario().saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfilePage);
+	}
+
+	@And("^user validate Saved items and Get started$")
+	public void user_validate_Saved_items_and_Get_started() {
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+	plansummaryPage.getValidate();
+	}
+	
+	@And("^user validate Find a Provider NBA$")
+	public void user_validate_Find_a_Provider() {
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+	plansummaryPage.validateProviderNBA();
+	}
+	
+	@And("^user click on get started on AARP site$")
+	public void user_click_Get_started() {
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+	plansummaryPage.clickOnButtonInPlanSummaryPage("Get Started");
+	}
 }
