@@ -181,4 +181,4 @@ Feature: 1.04.1.1 To Test NON-DREAM EOB for Members - E2E - Member Auth - PROD
     @prod_SSP_EOBs
     Examples: 
       | index | username  | password  | MemUserName              | FID    | planType | memberType | 
-      | 17    | kkumard  | tnps459#  | JSENFYFDRE#ERY2GO        | 267688 | SSUP     | GROUP_EOB  | 
+      | 17    | kkumard  | tnps459#  | elizabeth6310#ERY2GO        | 267688 | SSUP     | GROUP_EOB  | 

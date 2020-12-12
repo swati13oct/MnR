@@ -63,7 +63,7 @@ Feature: 1.24.2 Member Individual Health Record - PROD
     @prod_ihr_ma_mapd
     Examples: 
 	    | index | FID     | username  | password  | MemUserName             | planType | memberType         | expectLink | 
-	    | 08    | F424804 | kkumard   | tnps459#  | haradaty32              | MA       | IHR                | true       |
+	    | 08    | F424804 | kkumard   | tnps459#  | ssmhi1              | MA       | IHR                | true       |
 	    | 09    | F424804 | kkumard   | tnps459#  | Grandmagrey123          | MAPD     | NONBOA_GROUP_IHR   | true       |
 
     @prod_ihr_pdp
