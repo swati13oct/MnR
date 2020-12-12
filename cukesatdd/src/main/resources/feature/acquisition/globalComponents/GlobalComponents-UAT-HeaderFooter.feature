@@ -239,11 +239,11 @@ Feature: 1.12 UAT - Header and Footer flows
        |E2E Scenario_5 UMS|	UHC	  |
 
 @globalheaderULayer @UATRegression
-  Scenario Outline: <Scenario> : To verify links displayed in the global header and footer on static pages 
+  Scenario Outline: <Scenario> : To verify links displayed in the global header and footer on static pages : <pagename> page
     Given the user is on medicare acquisition site landing page
     	|Site| <site>| 
      Given the user navigates to following medicare acquisition site page
-      | PageName | <pageName> |
+      | PageName | <pagename> |
       | PagePath | <path>     |
     When user accesses global footer of the Medicare Plans All page
     And user clicks on Aboutus link from footer of the Medicare Plans home page 
