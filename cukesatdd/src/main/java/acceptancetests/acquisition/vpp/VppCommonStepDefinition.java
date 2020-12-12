@@ -2645,36 +2645,8 @@ public class VppCommonStepDefinition {
 		}
 	}
 
-	@When("^the user performs plan search from home page$")
-	public void the_user_performs_plan_search_from_home_page(DataTable givenAttributes) throws InterruptedException {
-		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		Map<String, String> memberAttributesMap = new HashMap<String, String>();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}
-		String zipcode = memberAttributesMap.get("Zip Code");
-		String county = memberAttributesMap.get("County Name");
-		String isMultiCounty = memberAttributesMap.get("Is Multi County");
-		getLoginScenario().saveBean(VPPCommonConstants.ZIPCODE, zipcode);
-		getLoginScenario().saveBean(VPPCommonConstants.COUNTY, county);
-		getLoginScenario().saveBean(VPPCommonConstants.IS_MULTICOUNTY, isMultiCounty);
-		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
-				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		VPPPlanSummaryPage plansummaryPage = null;
-		if (("NO").equalsIgnoreCase(isMultiCounty.trim())) {
-			plansummaryPage = aquisitionhomepage.searchPlansWithOutCounty(zipcode);
-		} else {
-			plansummaryPage = aquisitionhomepage.searchPlansShop(zipcode, county);
-		}
-		if (plansummaryPage != null) {
-			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
 
-		} else {
-			Assert.fail("Error Loading VPP plan summary page");
-		}
-	}
-
+	
 	@When("user views plans of the below plan type$")
 	public void user_view_plans_of_plantype(DataTable givenAttributes) throws InterruptedException {
 		List<DataTableRow> givenAttributesRow = givenAttributes.getGherkinRows();
@@ -2693,125 +2665,6 @@ public class VppCommonStepDefinition {
 		plansummaryPage.viewPlanSummary(plantype);
 	}
 
-	@Then("^user should be able to see the NBA modal to add providers on the VPP summary page$")
-	public void user_should_be_able_to_see_the_NBA_modal_to_add_providers_on_the_VPP_summary_page() {
-		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
-				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		plansummaryPage.verifyNextBestActionModalForProviderSearch();
-	}
-
-	@When("^user clicks on Find My Doctor button$")
-	public void user_clicks_on_Find_My_Doctor_button() throws Throwable {
-		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
-				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		ProviderSearchPage providerSearchPage = (ProviderSearchPage) plansummaryPage
-				.clickNextBestActionModalFindMyDoctorsBtn();
-		if (providerSearchPage != null) {
-			getLoginScenario().saveBean(PageConstants.PROVIDER_SEARCH_PAGE, providerSearchPage);
-		}
-	}
-
-	@Then("^user should be able to see the NBA modal to Enroll Plan on the VPP summary page$")
-	public void user_should_be_able_to_see_the_NBA_modal_to_Enroll_Plan_on_the_VPP_summary_page() {
-		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
-				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		plansummaryPage.verifyNextBestActionModalForEnrollPlan();
-	}
-
-	@Then("^the user enters following information in Request Plan Information Guide$")
-	public void the_user_enters_following__information_in_Request_Plan_Information_Guide(DataTable givenAttributes)
-			throws Throwable {
-		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		Map<String, String> memberAttributesMap = new HashMap<String, String>();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}
-
-		// String DateOfBirth = memberAttributesMap.get("DOB");
-		String FirstName = memberAttributesMap.get("Firstname");
-		String LastName = memberAttributesMap.get("Lastname");
-		String EmailAddress = memberAttributesMap.get("Email");
-		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
-				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		plansummaryPage.RequestPlanIInformation(FirstName, LastName, EmailAddress);
-
-	}
-
-	@Then("^the user clicks on back on all plan linnk in Plan Compare page")
-	public void user_clicks_back_to_all_plan_PlanCompare_AARP() throws InterruptedException {
-		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
-				.getBean(PageConstants.PLAN_COMPARE_PAGE);
-		VPPPlanSummaryPage plansummaryPage = planComparePage.navigateBackToAllPlans();
-		if (plansummaryPage != null) {
-			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
-			Assert.assertTrue(true);
-			plansummaryPage.handlePlanYearSelectionPopup();
-		} else
-			Assert.fail("Error in navigating back to Plan Summary Page");
-
-	}
-
-	@Then("^remove \"([^\"]*)\" plan from new plan compare page$")
-	public void remove_plan_from_new_plan_compare_page_for_UHC(String planIndices) throws Throwable {
-		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
-				.getBean(PageConstants.PLAN_COMPARE_PAGE);
-		planComparePage.clickOnSelectedRemoveLink(planIndices);
-	}
-
-	@Then("^validate optional service riders section on compare page is not shown$")
-	public void validate_optional_service_riders_section_on_compare_page_is_not_shown() throws Throwable {
-		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
-				.getBean(PageConstants.PLAN_COMPARE_PAGE);
-		planComparePage.validateOptionalRidersSectionHidden();
-	}
-
-	@Then("^validate all available plans are shown on click of view all plans$")
-	public void validate_all_plans_are_shown() throws Throwable {
-		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
-				.getBean(PageConstants.PLAN_COMPARE_PAGE);
-		planComparePage.validateAllPlansShown();
-	}
-
-	@Then("^validate OON Toggle is displayed on medical and additional benefits$")
-	public void validate_OON_Toggle_is_displayed_on_medical_and_additional_benefits() throws Throwable {
-		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
-				.getBean(PageConstants.PLAN_COMPARE_PAGE);
-		planComparePage.validateOONDDisplayed();
-	}
-
-	@Then("^Validate OON Toggle is not displayed when there are no OON Plans Available$")
-	public void validate_OON_Toggle_is_not_displayed_when_there_are_no_OON_Plans_Available() throws Throwable {
-		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
-				.getBean(PageConstants.PLAN_COMPARE_PAGE);
-		planComparePage.validateOONNotDisplayed();
-	}
-
-	@Then("^validate view locations popup on compare page$")
-	public void validate_view_locations_popup_on_compare_page() throws Throwable {
-		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
-				.getBean(PageConstants.PLAN_COMPARE_PAGE);
-		planComparePage.validateViewLocation();
-	}
-
-	@Given("^I select \"([^\"]*)\" plans and \"([^\"]*)\" plans to compare$")
-	public void i_select_plans_for_compare(String planType, String Counter) throws Throwable {
-		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
-				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		plansummaryPage.checkPlansForCompare(Counter, planType);
-	}
-
-	@Then("^click add to compare checkbox on plan details page and navigate to compare page$")
-	public void click_add_to_compare_checkbox_on_plan_details_page_and_navigate_to_compare_page() throws Throwable {
-		PlanDetailsPage planDetailsPage = (PlanDetailsPage) getLoginScenario()
-				.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
-		ComparePlansPage planComparePage = planDetailsPage.addToCompareAndNavigate();
-		if (planComparePage != null) {
-			getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
-		} else
-			Assert.fail("Error in loading the compare plans page");
-	}
 
 	// NBA
 
@@ -2866,16 +2719,300 @@ public class VppCommonStepDefinition {
 		System.out.println("Plan name" + PlanName);
 		plansummaryPage.savePlan(PlanName);
 	}
-
-	@Then("^user should be able to see the Select Plan for Enroll Modal with saved plans$")
-	public void user_should_be_able_to_see_Select_Plan_for_Enroll_Modal_with_Saved_plans_in_UMS_site(
-			DataTable givenAttributes) {
+	
+	@And("^user click on view saved plans button$")
+	public void user_click_on_view_saved_plans_button() {
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		String PlanName = memberAttributesRow.get(0).getCells().get(1);
-		System.out.println("Plan name" + PlanName);
-		plansummaryPage.verifySelectPlanForEnrollModalForSavedPlans(PlanName);
+
+		VisitorProfilePage visitorProfilePage = plansummaryPage.viewSavedPlans();
+
+		getLoginScenario().saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfilePage);
 	}
+
+	@Then("^user should see the Get started NBA on VPP$")
+	public void user_should_see_the_Get_started_NBA() throws Throwable {
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		plansummaryPage.verifyNextBestActionModalForDrugCostAuthenticated();
+		getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
+	}
+
+	@When("^user clicks on Saved items on NBA$")
+	public void user_clicks_on_Saved_items() throws Throwable {
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		plansummaryPage.clickSavedItems();
+	}
+
+	@Then("^user should be navigated to visitor profile page$")
+	public void user_should_be_navigated_to_visitor_profile_page() throws Throwable {
+		VisitorProfilePage visitorProfile = (VisitorProfilePage) getLoginScenario()
+				.getBean(PageConstants.VISITOR_PROFILE_PAGE);
+		visitorProfile.validateVisitorProfilePage();
+	}
+
+	@And("^user clicks on get started button on NBA$")
+	public void user_click_Get_started_button_on_NBA() {
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		plansummaryPage.clickGetStartedBtnOnNba();
+	}
+
+	@And("^user validate Find a Provider NBA on VPP$")
+	public void user_validate_Find_a_Provider_NBA_on_VPP() {
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		plansummaryPage.validateProviderNBA();
+	}
+
+	@When("^user clicks on Find a Provider button on NBA$")
+	public void user_clicks_on_Find_a_provider_button_on_NBA() throws Throwable {
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		ProviderSearchPage providerSearchPage = (ProviderSearchPage) plansummaryPage
+				.clickNextBestActionModalFindMyDoctorsBtn();
+		if (providerSearchPage != null) {
+			getLoginScenario().saveBean(PageConstants.PROVIDER_SEARCH_PAGE, providerSearchPage);
+		}
+	}
+	
+
+
+@Then("^user should be able to see the NBA modal to Enroll Plan on the VPP summary page$")
+public void user_should_be_able_to_see_the_NBA_modal_to_Enroll_Plan_on_the_VPP_summary_page() {
+	VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+			.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+	plansummaryPage.verifyNextBestActionModalForEnrollPlan();
+}
+
+@When("^the user performs plan search from home page$")
+public void the_user_performs_plan_search_from_home_page(DataTable givenAttributes) throws InterruptedException {
+	List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+	Map<String, String> memberAttributesMap = new HashMap<String, String>();
+	for (int i = 0; i < memberAttributesRow.size(); i++) {
+		memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+				memberAttributesRow.get(i).getCells().get(1));
+	}
+	String zipcode = memberAttributesMap.get("Zip Code");
+	String county = memberAttributesMap.get("County Name");
+	String isMultiCounty = memberAttributesMap.get("Is Multi County");
+	getLoginScenario().saveBean(VPPCommonConstants.ZIPCODE, zipcode);
+	getLoginScenario().saveBean(VPPCommonConstants.COUNTY, county);
+	getLoginScenario().saveBean(VPPCommonConstants.IS_MULTICOUNTY, isMultiCounty);
+	AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+			.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+	VPPPlanSummaryPage plansummaryPage = null;
+	if (("NO").equalsIgnoreCase(isMultiCounty.trim())) {
+		plansummaryPage = aquisitionhomepage.searchPlansWithOutCounty(zipcode);
+	} else {
+		plansummaryPage = aquisitionhomepage.searchPlansShop(zipcode, county);
+	}
+	if (plansummaryPage != null) {
+		getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
+
+	} else {
+		Assert.fail("Error Loading VPP plan summary page");
+	}
+}
+
+
+@Then("^user should be able to see the NBA modal to add providers on the VPP summary page$")
+public void user_should_be_able_to_see_the_NBA_modal_to_add_providers_on_the_VPP_summary_page() {
+	VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+			.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+	plansummaryPage.verifyNextBestActionModalForProviderSearch();
+}
+
+@When("^user clicks on Find My Doctor button$")
+public void user_clicks_on_Find_My_Doctor_button() throws Throwable {
+	VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+			.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+	ProviderSearchPage providerSearchPage = (ProviderSearchPage) plansummaryPage
+			.clickNextBestActionModalFindMyDoctorsBtn();
+	if (providerSearchPage != null) {
+		getLoginScenario().saveBean(PageConstants.PROVIDER_SEARCH_PAGE, providerSearchPage);
+	}
+}
+
+@Then("^the user enters following information in Request Plan Information Guide$")
+public void the_user_enters_following__information_in_Request_Plan_Information_Guide(DataTable givenAttributes)
+		throws Throwable {
+	List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+	Map<String, String> memberAttributesMap = new HashMap<String, String>();
+	for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+		memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+				memberAttributesRow.get(i).getCells().get(1));
+	}
+
+	// String DateOfBirth = memberAttributesMap.get("DOB");
+	String FirstName = memberAttributesMap.get("Firstname");
+	String LastName = memberAttributesMap.get("Lastname");
+	String EmailAddress = memberAttributesMap.get("Email");
+	VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+			.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+	plansummaryPage.RequestPlanIInformation(FirstName, LastName, EmailAddress);
+
+}
+
+@Then("^the user clicks on back on all plan linnk in Plan Compare page")
+public void user_clicks_back_to_all_plan_PlanCompare_AARP() throws InterruptedException {
+	ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
+			.getBean(PageConstants.PLAN_COMPARE_PAGE);
+	VPPPlanSummaryPage plansummaryPage = planComparePage.navigateBackToAllPlans();
+	if (plansummaryPage != null) {
+		getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
+		Assert.assertTrue(true);
+		plansummaryPage.handlePlanYearSelectionPopup();
+	} else
+		Assert.fail("Error in navigating back to Plan Summary Page");
+
+}
+
+@Then("^remove \"([^\"]*)\" plan from new plan compare page$")
+public void remove_plan_from_new_plan_compare_page_for_UHC(String planIndices) throws Throwable {
+	ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
+			.getBean(PageConstants.PLAN_COMPARE_PAGE);
+	planComparePage.clickOnSelectedRemoveLink(planIndices);
+}
+
+@Then("^validate optional service riders section on compare page is not shown$")
+public void validate_optional_service_riders_section_on_compare_page_is_not_shown() throws Throwable {
+	ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
+			.getBean(PageConstants.PLAN_COMPARE_PAGE);
+	planComparePage.validateOptionalRidersSectionHidden();
+}
+
+@Then("^validate all available plans are shown on click of view all plans$")
+public void validate_all_plans_are_shown() throws Throwable {
+	ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
+			.getBean(PageConstants.PLAN_COMPARE_PAGE);
+	planComparePage.validateAllPlansShown();
+}
+
+@Then("^validate OON Toggle is displayed on medical and additional benefits$")
+public void validate_OON_Toggle_is_displayed_on_medical_and_additional_benefits() throws Throwable {
+	ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
+			.getBean(PageConstants.PLAN_COMPARE_PAGE);
+	planComparePage.validateOONDDisplayed();
+}
+
+@Then("^Validate OON Toggle is not displayed when there are no OON Plans Available$")
+public void validate_OON_Toggle_is_not_displayed_when_there_are_no_OON_Plans_Available() throws Throwable {
+	ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
+			.getBean(PageConstants.PLAN_COMPARE_PAGE);
+	planComparePage.validateOONNotDisplayed();
+}
+
+@Then("^validate view locations popup on compare page$")
+public void validate_view_locations_popup_on_compare_page() throws Throwable {
+	ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
+			.getBean(PageConstants.PLAN_COMPARE_PAGE);
+	planComparePage.validateViewLocation();
+}
+
+@Given("^I select \"([^\"]*)\" plans and \"([^\"]*)\" plans to compare$")
+public void i_select_plans_for_compare(String planType, String Counter) throws Throwable {
+	VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+			.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+	plansummaryPage.checkPlansForCompare(Counter, planType);
+}
+
+@Then("^click add to compare checkbox on plan details page and navigate to compare page$")
+public void click_add_to_compare_checkbox_on_plan_details_page_and_navigate_to_compare_page() throws Throwable {
+	PlanDetailsPage planDetailsPage = (PlanDetailsPage) getLoginScenario()
+			.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
+	ComparePlansPage planComparePage = planDetailsPage.addToCompareAndNavigate();
+	if (planComparePage != null) {
+		getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
+	} else
+		Assert.fail("Error in loading the compare plans page");
+}
+
+
+@When("^user clicks on Select a plan button on NBA$")
+public void user_clicks_on_select_a_plan_button_on_NBA() throws Throwable {
+	VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+			.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+	allPlanNames = plansummaryPage.getAllPlanNames();
+	plansummaryPage.clickSelectPlanButton();
+}
+
+@Then("^user should be able to see the Select Plan for Enroll Modal with all plans$")
+public void user_should_be_able_to_see_the_Select_Plan_for_Enroll_Modal_with_all_plans() throws Throwable {
+	VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+			.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+	plansummaryPage.verifySelectPlanForEnrollModalForallPlans(allPlanNames);
+}
+
+@Then("^user saves plan as favorite on VPP$")
+public void user_saves_plan_as_favorite_on_VPP(DataTable givenAttributes) {
+	VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+			.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+	List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+	String PlanName = memberAttributesRow.get(0).getCells().get(1);
+	System.out.println("Plan name" + PlanName);
+	plansummaryPage.savePlan(PlanName);
+}
+
+@Then("^user should be able to see the Select Plan for Enroll Modal with saved plans$")
+public void user_should_be_able_to_see_Select_Plan_for_Enroll_Modal_with_Saved_plans(DataTable givenAttributes) {
+	VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+			.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+	List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+	String PlanName = memberAttributesRow.get(0).getCells().get(1);
+	System.out.println("Plan name" + PlanName);
+	plansummaryPage.verifySelectPlanForEnrollModalForSavedPlans(PlanName);
+}
+
+@Then("^user removes existing saved plans in visitor profile$")
+public void user_removed_existing_saved_plans() {
+	VisitorProfilePage visitorProfile = (VisitorProfilePage) getLoginScenario()
+			.getBean(PageConstants.VISITOR_PROFILE_PAGE);
+	visitorProfile.deletePlans();
+}
+
+@Then("^user should be able to see the continue enrollment modal$")
+public void user_should_be_able_to_see_the_continue_enrollment_modal() {
+	VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+			.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+	plansummaryPage.verifyNextBestActionModalForContinueEnrollment();
+}
+
+@When("^user clicks on continue enrollment button$")
+public void user_clicks_on_continue_enrollment_button() {
+	VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+			.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+	plansummaryPage.clickNextBestActionModalContinueEnrollmentBtn();
+}
+
+@Then("^user should navigated to enrollment page$")
+public void user_should_navigated_to_enrollment_page() {
+	VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+			.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+	plansummaryPage.verifyNavigationToOLEPage();
+}
+
+@Then("^user should be able to see the continue enrollment modal for multiple plan$")
+public void user_should_be_able_to_see_the_continue_enrollment_modal_for_multiple_plan() throws Throwable {
+	VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+			.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+	plansummaryPage.verifyNextBestActionModalForContinueEnrollmentMultiplePlans();
+}
+
+@Then("^continue enrollment button should be displayed for each plan$")
+public void continue_enrollment_button_should_be_displayed_for_each_plan() throws Throwable {
+	VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+			.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+	plansummaryPage.validateContinueEnrollmentModal();
+}
+
+@When("^user clicks on continue enrollment button on the modal$")
+public void user_clicks_on_continue_enrollment_button_on_the_modal() throws Throwable {
+	VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+			.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+	plansummaryPage.clickContinueEnrollmentBtnOnModal();
+}
 
 }
