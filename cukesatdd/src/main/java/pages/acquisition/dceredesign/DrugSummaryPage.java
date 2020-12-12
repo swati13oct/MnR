@@ -866,11 +866,15 @@ public class DrugSummaryPage extends UhcDriver {
 
 	
 	public void clickReturnToPlanSummary() {
-		returnToPlanSummaryLink.click();
+//		returnToPlanSummaryLink.click();
+		jsClickNew(returnToPlanSummaryLink);
+		waitForPageLoadSafari();
 	}
 	
 	public void clickReturnToHomePage() {
-		returnToHomePageLink.click();
+//		returnToHomePageLink.click();
+		jsClickNew(returnToHomePageLink);
+		waitForPageLoadSafari();
 	}
 
 

@@ -5107,9 +5107,11 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	}
 
 	public ProviderSearchPage clickNextBestActionModalFindMyDoctorsBtn() {
-		waitTillElementClickableInTime(nextBestActionModalFindMyDoctorsBtn, 20);
-		nextBestActionModalFindMyDoctorsBtn.click();
 		CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
+		waitTillElementClickableInTime(nextBestActionModalFindMyDoctorsBtn, 20);
+//		nextBestActionModalFindMyDoctorsBtn.click();
+		jsClickNew(nextBestActionModalFindMyDoctorsBtn);
+		waitForPageLoadSafari();
 		int initialCount = driver.getWindowHandles().size();
 		ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
 		String currentHandle = null;
@@ -5141,7 +5143,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 							"The Continue Enrollment message is not displayed.../n Expected Message"
 									+ NEXT_ACTION_MODAL_MSG_ENROLL_PLAN + "\n Actual message"
 									+ nextBestActionModalMsg.get(0).getText(),
-							nextBestActionModalMsg.get(0).getText().equals(NEXT_ACTION_MODAL_MSG_ENROLL_PLAN));
+							nextBestActionModalMsg.get(0).getText().trim().equals(NEXT_ACTION_MODAL_MSG_ENROLL_PLAN));
 				}
 			}
 		} catch (Exception ex) {
@@ -5440,14 +5442,18 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	public void clickOnButtonInPlanSummaryPage(String BtnName) {
 		if (BtnName.equalsIgnoreCase("Get Started")) {
-			getStartedBtn.click();
+//			getStartedBtn.click();
+			jsClickNew(getStartedBtn);
 		} else if (BtnName.equalsIgnoreCase("Find a Provider")) {
 			waitTillElementClickableInTime(findMyDoctorBtn, 5);
-			findMyDoctorBtn.click();
+//			findMyDoctorBtn.click();
+			jsClickNew(findMyDoctorBtn);
 		} else if (BtnName.equalsIgnoreCase("Continue to enrollment")) {
 			waitTillElementClickableInTime(contEnrollmentBtn, 5);
-			contEnrollmentBtn.click();
+//			contEnrollmentBtn.click();
+			jsClickNew(contEnrollmentBtn);
 		}
+		waitForPageLoadSafari();
 	}
 
 	@FindBy(xpath = "//div[contains(@class,'plan-list show active')]//*[@class='segment-title oon-benefit-padding']//h3")
