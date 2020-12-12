@@ -363,7 +363,7 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	protected WebElement OptumRxOrderStatusHeader;
 
 	// Medicine Cabinet
-	@FindBy(xpath = "//*[@data-testid='medcab-title']")
+	@FindBy(xpath = "//h2[text()='Current Medications']")
 	protected WebElement CurrentMedicationsHeader;
 
 	@FindBy(xpath = "//div[@class='sc-LzLtN ijGRvz']")
@@ -383,7 +383,7 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 
 	//@FindBy(xpath = "//*[contains(text(),'My Med')]/..//a[@data-testid='view-all-meds-CTA']")
 	
-	@FindBy(xpath = "//a[@data-testid='view-all-meds-CTA' and contains(text(),'View All Medications')]")
+	@FindBy(xpath = "//a[@data-testid='view-all-meds-CTA']")
 	protected WebElement ViewAllMedications;
 
 	@FindBy(xpath = "//span[contains(text(),'Remove Item from Order')]")

@@ -1133,11 +1133,11 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 			if (size == 1) {
 				pageloadcomplete();
 				Assert.assertTrue("PROBLEM - Pharmacy Locator Tool Page is NOT displayed successfully",
-						pnpValidate(SearchButtonPharmacyLocatorPageByRally, 30));
+						pnpValidate(SearchButtonPharmacyLocatorPageByRally, 50));
 			} else {
 				pageloadcomplete();
-				Assert.assertTrue("PROBLEM - Pharmacy Locator Tool Page is NOT displayed",
-						pnpValidate(SearchButtonPharmacyLocatorPageByRally, 30));
+				/*Assert.assertTrue("PROBLEM - Pharmacy Locator Tool Page is NOT displayed",
+						pnpValidate(SearchButtonPharmacyLocatorPageByRally, 30));*/
 				Assert.assertTrue("PROBLEM - Pharmacy Locator Tool Page NOT displayed in same browser window", false);
 			}
 		}
@@ -1149,11 +1149,11 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 			if (size == 2) {
 				pageloadcomplete();
 				Assert.assertTrue("PROBLEM - Pharmacy Locator Tool Page is NOT displayed successfully",
-						pnpValidate(SearchButtonPharmacyLocatorPageByRally, 30));
+						pnpValidate(SearchButtonPharmacyLocatorPageByRally, 50));
 			} else {
 				pageloadcomplete();
-				Assert.assertTrue("PROBLEM - Pharmacy Locator Tool Page is NOT displayed",
-						pnpValidate(SearchButtonPharmacyLocatorPageByRally, 30));
+				/*Assert.assertTrue("PROBLEM - Pharmacy Locator Tool Page is NOT displayed",
+						pnpValidate(SearchButtonPharmacyLocatorPageByRally, 30));*/
 				Assert.assertTrue("PROBLEM - Pharmacy Locator Tool Page NOT displayed in same browser window", false);
 			}
 		}
@@ -1166,8 +1166,8 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 				Assert.assertTrue("PROBLEM - Legacy Pharmacy Locator Page zip code text box is NOT displayed",
 						pnpValidate(zipCodeTextBoxLegacyPharmacyLocatorPage, 50));
 			} else {
-				Assert.assertTrue("PROBLEM - Legacy Pharmacy Locator Page zip code text box is NOT displayed",
-						pnpValidate(zipCodeTextBoxLegacyPharmacyLocatorPage, 50));
+				/*Assert.assertTrue("PROBLEM - Legacy Pharmacy Locator Page zip code text box is NOT displayed",
+						pnpValidate(zipCodeTextBoxLegacyPharmacyLocatorPage, 50));*/
 				Assert.assertTrue("PROBLEM - Legacy Pharmacy Locator Tool Page is NOT displayed in same browser window",
 						false);
 			}
@@ -1182,8 +1182,8 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 				Assert.assertTrue("PROBLEM - Legacy Pharmacy Locator Page zip code text box is NOT displayed",
 						pnpValidate(zipCodeTextBoxLegacyPharmacyLocatorPage, 50));
 			} else {
-				Assert.assertTrue("PROBLEM - Legacy Pharmacy Locator Page zip code text box is NOT displayed",
-						pnpValidate(zipCodeTextBoxLegacyPharmacyLocatorPage, 50));
+				/*Assert.assertTrue("PROBLEM - Legacy Pharmacy Locator Page zip code text box is NOT displayed",
+						pnpValidate(zipCodeTextBoxLegacyPharmacyLocatorPage, 50));*/
 				Assert.assertTrue("PROBLEM - Legacy Pharmacy Locator Tool Page is NOT displayed in same browser window",
 						false);
 			}
