@@ -5469,7 +5469,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	public void clickContinueEnrollmentBtn() {
 		waitTillElementClickableInTime(nextBestActionModalContinueEnrollmentBtn, 15);
-		nextBestActionModalContinueEnrollmentBtn.click();
+//		nextBestActionModalContinueEnrollmentBtn.click();
+		jsClickNew(nextBestActionModalContinueEnrollmentBtn);
+		waitForPageLoadSafari();
 	}
 
 	@FindBy(xpath = "//div[contains(@class,'uhc-modal__content')]//p[contains(@id,'plan')]")
@@ -5510,7 +5512,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	public void clickEnrollPlanBtnOnSelectPlanModal() {
 		validateNew(enrollInPlanBtn);
-		enrollInPlanBtn.click();
+//		enrollInPlanBtn.click();
+		jsClickNew(enrollInPlanBtn);
+		waitForPageLoadSafari();
 	}
 
 	public void validateNavigatedToOle() {
