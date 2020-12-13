@@ -16,7 +16,6 @@ import cucumber.api.CucumberOptions;
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.acquisition" }, features = { "src/main/resources/feature/acquisition/dceredesign" }, plugin = {
 		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcqDCEDefaultPlanTypeAARP.json" }, tags = { "@drugSummary_DefaultPlanType_AARP" })
 
-
 public class RunMRATDDAcqDCEDefaultPlanTypeAARP {
 
 }
