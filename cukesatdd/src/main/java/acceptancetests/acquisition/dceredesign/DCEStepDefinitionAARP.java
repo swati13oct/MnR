@@ -1251,10 +1251,10 @@ public class DCEStepDefinitionAARP {
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetailsPage);
 	}
 
-	@When("^User validate Walgreens pharmacy on detail page")
-	public void user_validate_pharmacy() throws InterruptedException {
+	@When("^user validate \"([^\"]*)\" pharmacy on detail page")
+	public void user_validate_pharmacy_on_detail_page(String pharmacyName) throws InterruptedException {
 		DrugDetailsPage drugDetailsPage = new DrugDetailsPage(driver);
-		drugDetailsPage.validateAndClickKeepPharm();
+		drugDetailsPage.validateDefaultPharmacyName(pharmacyName);
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetailsPage);
 	}
 

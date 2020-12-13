@@ -413,7 +413,7 @@ Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanDetails AARP - To test DCE - VPP Plan De
     Then the user verify the Retail chain pharmacy on detail page
     And user clicks on change pharmacy link from details page
     Then user clicks on Keep Using This Pharmacy on change pharmacy page
-    Then User validate Walgreens pharmacy on detail page
+    Then user validate "WALGREENS" pharmacy on detail page
 
     @dceRedesignDrugDetailsDefaultPharmacy_MAPD_AARP @drugDetailschangePharmacyAARP
     Examples: 
@@ -627,6 +627,7 @@ Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanDetails AARP - To test DCE - VPP Plan De
     Then the user searches and adds the following Drug to Drug List
       | DrugName | <drug1> |
     Then the user clicks on Review Drug Costs to Land on Drug Details Page
+    When user clicks on change pharmacy link from details page
     Then user verify details page change pharmacy modal
     When user selects Preferred mail order pharmacy from drug details page
     Then the message "OptumRx Home Delivery only provides 90-day refill for your drugs." should be displayed on change pharmacy modal from drug detail page
@@ -647,10 +648,10 @@ Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanDetails AARP - To test DCE - VPP Plan De
 
     @drugDetailPharmacyFunctionality_AARP @drugDetailschangePharmacyAARP
     Examples: 
-      | site | zipcode | plantype | county | isMultutiCounty | drug1     | zipCode1 | zipCode2 | drug4         | drug5            | drug6   | planname                                           |
-      | AARP |   90001 | MAPD     | none   | no              | meloxicam |    96799 |    78456 | buprenorphine | fentanyl citrate | Lipitor | AARP Medicare Advantage SecureHorizons Focus (HMO) |
+      | site | zipcode | plantype | county | isMultutiCounty | drug1     | zipCode1 | zipCode2 | planname                                           |
+      | AARP |   90001 | MAPD     | none   | no              | meloxicam |    96799 |    78456 | AARP Medicare Advantage SecureHorizons Focus (HMO) |
 
-    @drugDetailPharmacyFunctionality_AARP_UHC @drugDetailschangePharmacyAARP
+    @drugDetailPharmacyFunctionality_UHC @drugDetailschangePharmacyUHC
     Examples: 
       | site | zipcode | plantype | county | isMultutiCounty | drug1     | zipCode1 | zipCode2 | drug4         | drug5            | drug6   | planname                                           |
       | UHC  |   90001 | MAPD     | none   | no              | meloxicam |    96799 |    78456 | buprenorphine | fentanyl citrate | Lipitor | AARP Medicare Advantage SecureHorizons Focus (HMO) |
@@ -684,7 +685,7 @@ Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanDetails AARP - To test DCE - VPP Plan De
     Then no results message should be displayed from drug details
       | NoResultsMessage | <message> |
 
-    @dCERedesign_ChangePharmacyDetailsNoResults_AARP @drugDetailschangePharmacyAARP
+    @dCERedesign_ChangePharmacyDetailsNoResults_AARP111 @drugDetailschangePharmacyAARP
     Examples: 
       | site | zipcode | plantype | planyear | county | isMultutiCounty | drug1     | zipCode1 | zipCode2 | message                                                                                                    | planname                                           |
       | AARP |   90001 | MAPD     | future   | none   | no              | meloxicam |    78006 |    78456 | Prescription drug home delivery is available through OptumRx. Learn more about OptumRx Mail Order Pharmacy | AARP Medicare Advantage SecureHorizons Focus (HMO) |
