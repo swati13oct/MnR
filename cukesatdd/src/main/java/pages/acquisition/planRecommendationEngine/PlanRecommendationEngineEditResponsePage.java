@@ -260,6 +260,7 @@ public class PlanRecommendationEngineEditResponsePage extends UhcDriver {
 //						elem.findElement(By.cssSelector("button")).click();
 						jsClickNew(elem.findElement(By.cssSelector("button")));
 					}
+					waitForPageLoadSafari();			//E2E: additional wait for page to load in Safari browser only
 				}
 				break;
 			}
