@@ -176,7 +176,7 @@ public class VisitorProfilePage extends UhcDriver {
 		
 		if(StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Pennsylvania") || StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Puerto Rico") || 
 				StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Virginia")) {
-			
+			System.out.println("drug name "+drug);
 			jsClickNew(expandDrugBlock);
 			Assert.assertTrue(drugname.getText().trim().contains(drug));
 		}else {

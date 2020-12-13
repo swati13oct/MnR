@@ -3484,9 +3484,11 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 	}
 
 	public void fillDetails(String zipCode, String DateOfBirth) throws InterruptedException {
-		sendkeys(medSuppZipCode, zipCode);
+	//	sendkeys(medSuppZipCode, zipCode);
+		medSuppZipCode.sendKeys(zipCode);
 		Thread.sleep(1000);
-		sendkeys(DOB, DateOfBirth);
+		//sendkeys(DOB, DateOfBirth);
+		DOB.sendKeys(DateOfBirth);
 		System.out.println("Date of birth is entered");
 
 		// monthDrpDwn.click();
@@ -3494,7 +3496,8 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 		monthDrpDwnOptionPartA.click();
 		Thread.sleep(2000);
 		System.out.println("Effective date- month value selected");
-		medSuppOleMaleCheckbox.click();
+		//medSuppOleMaleCheckbox.click();
+		jsClickMobile(medSuppOleMaleCheckbox);
 		yearDrpDwnPartA.click();
 		Thread.sleep(2000);
 		yearDrpDwnOptionPartA.click();
@@ -3504,20 +3507,22 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 		Thread.sleep(2000);
 		System.out.println("Effective date- month value selected");
 
-		yearDrpDwnPartB.click();
+		//yearDrpDwnPartB.click();
+		jsClickMobile(yearDrpDwnPartB);
 		Thread.sleep(2000);
 		yearDrpDwnOptionPartB.click();
 
 		System.out.println("Effective date- year value selected");
 		Thread.sleep(2000);
-		startDrpDwn.click();
+		//startDrpDwn.click();
+		jsClickMobile(startDrpDwn);
 		Thread.sleep(2000);
 		startDrpDwnOption.click();
 
 		System.out.println("Plan to start date selected");
 
-		viewPlansBtnMedSupp.click();
-
+		//viewPlansBtnMedSupp.click();
+jsClickMobile(viewPlansBtnMedSupp);
 		CommonUtility.checkPageIsReadyNew(driver);
 		CommonUtility.waitForPageLoadNew(driver, Start_ApplicationBtn, 45);
 

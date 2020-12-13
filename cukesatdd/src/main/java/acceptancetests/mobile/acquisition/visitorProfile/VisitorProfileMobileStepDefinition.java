@@ -7,12 +7,14 @@ import java.util.Map;
 import org.junit.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import acceptancetests.acquisition.vpp.VPPCommonConstants;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstants;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
 import gherkin.formatter.model.DataTableRow;
 import pages.acquisition.commonpages.AcquisitionHomePage;
 import pages.acquisition.commonpages.ComparePlansPage;
@@ -27,6 +29,8 @@ import pages.acquisition.ulayer.VisitorProfileTestHarnessPage;
 import pages.mobile.acquisition.commonpages.VisitorProfilePageMobile;
 import pages.mobile.acquisition.dceredesign.GetStartedPageMobile;
 import pages.mobile.acquisition.ulayer.AcquisitionHomePageMobile;
+import pages.mobile.acquisition.ulayer.PlanDetailsPageMobile;
+import pages.mobile.acquisition.ulayer.VPPPlanSummaryPageMobile;
 /**
  * @author bnaveen4
  * Functionality:Visitor Profile for both AAPR and UHC acquisition sites
@@ -97,7 +101,7 @@ public class VisitorProfileMobileStepDefinition {
 	@And("^the user clicks on the add plans button in the profile$")
 	public void the_user_clicks_on_the_add_plans_button_in_the_profile_in_AARP_site() throws Exception {
 		
-		VisitorProfilePage visitorProfilePage = (VisitorProfilePage) getLoginScenario().
+		pages.mobile.acquisition.ulayer.VisitorProfilePageMobile visitorProfilePage = (pages.mobile.acquisition.ulayer.VisitorProfilePageMobile) getLoginScenario().
 				getBean(PageConstants.VISITOR_PROFILE_PAGE);
 
 		AcquisitionHomePage acqPage = visitorProfilePage.addPlan();
@@ -116,6 +120,35 @@ public class VisitorProfileMobileStepDefinition {
 		
 		getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, planSummary);
 	}
+	
+	@When("^the user enters zipcode on health plans page$")
+	public void enters_zipcode_details_in_aarp_site(DataTable givenAttributes) throws InterruptedException {
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		String zipcode = memberAttributesMap.get("Zip Code");
+		String county = memberAttributesMap.get("County Name");
+		String isMultiCounty = memberAttributesMap.get("Is Multi County");
+		getLoginScenario().saveBean(VPPCommonConstants.ZIPCODE, zipcode);
+		getLoginScenario().saveBean(VPPCommonConstants.COUNTY, county);
+		getLoginScenario().saveBean(VPPCommonConstants.IS_MULTICOUNTY, isMultiCounty);
+
+		AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		VPPPlanSummaryPageMobile plansummaryPage = aquisitionhomepage.searchPlanOnHealthPlansPage(zipcode, county, isMultiCounty);
+
+			
+		if (plansummaryPage != null) {
+			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
+
+		} else {
+			Assert.fail("Error Loading VPP plan summary page");
+		}
+	}
+
 	
 	@And("^the user returns to the visitor profile page$")
 	public void the_user_returns_to_the_visitor_profile_page() {
@@ -146,7 +179,7 @@ public class VisitorProfileMobileStepDefinition {
 					givenAttributesRow.get(i).getCells().get(1));
 		}
 		String savePlanNames = givenAttributesMap.get("Test Plans");
-		VisitorProfilePage visitorProfile = (VisitorProfilePage) getLoginScenario().getBean(PageConstants.VISITOR_PROFILE_PAGE);
+		pages.mobile.acquisition.ulayer.VisitorProfilePageMobile visitorProfile = (pages.mobile.acquisition.ulayer.VisitorProfilePageMobile) getLoginScenario().getBean(PageConstants.VISITOR_PROFILE_PAGE);
 		visitorProfile.validateAddedPlans(savePlanNames);
 	}
 	
@@ -160,7 +193,7 @@ public class VisitorProfileMobileStepDefinition {
 					givenAttributesRow.get(i).getCells().get(1));
 		}
 		String savePlanNames = givenAttributesMap.get("MS Test Plans");
-		VisitorProfilePage visitorProfile = (VisitorProfilePage) getLoginScenario().getBean(PageConstants.VISITOR_PROFILE_PAGE);
+		pages.mobile.acquisition.ulayer.VisitorProfilePageMobile visitorProfile = (pages.mobile.acquisition.ulayer.VisitorProfilePageMobile) getLoginScenario().getBean(PageConstants.VISITOR_PROFILE_PAGE);
 		visitorProfile.validateAddedMsPlans(savePlanNames);
 	}
 	
@@ -203,10 +236,42 @@ public class VisitorProfileMobileStepDefinition {
 					givenAttributesRow.get(i).getCells().get(1));
 		}
 		String planName = givenAttributesMap.get("Test Plans");
-		VisitorProfilePage visitorProfilePage = (VisitorProfilePage) getLoginScenario().getBean(PageConstants.VISITOR_PROFILE_PAGE);
-		PlanDetailsPage planDetails = visitorProfilePage.navigateToPlanDetails(planName.split(",")[0]);
+		pages.mobile.acquisition.ulayer.VisitorProfilePageMobile visitorProfilePage = (pages.mobile.acquisition.ulayer.VisitorProfilePageMobile) getLoginScenario().getBean(PageConstants.VISITOR_PROFILE_PAGE);
+		PlanDetailsPageMobile planDetails = visitorProfilePage.navigateToPlanDetails(planName.split(",")[0]);
 		getLoginScenario().saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE, planDetails);
+		System.out.println(planDetails);
 	}
+	
+	
+	@Then("^user saves two ms plans as favorite mobile$")
+	public void user_saves_two_ms_plans_as_favorite_on_AARP_site(DataTable givenAttributes) {
+		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+					.get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+
+//		Map<String, String> memberAttributesMap = prepareTestInput(givenAttributes);
+		String ms_savePlanNames = memberAttributesMap.get("MS Test Plans");
+
+		//----- MS plan type ----------------------------
+		plansummaryPage.saveMSPlans(ms_savePlanNames);
+
+	}
+	@Then("^the user validates the following Additional Benefits of Plan for the plan$")
+	public void the_user_validates_the_following_Additional_Benefits_of_Plan_for_the_plan_in_AARP(DataTable givenAttributes) throws Throwable {
+		List<DataTableRow> additionalBenefits = givenAttributes.getGherkinRows();
+  System.out.println("fadfadfadfafd");
+		PlanDetailsPageMobile vppPlanDetailsPage = (PlanDetailsPageMobile) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
+		System.out.println("vapp plan details page"+ PageConstants.VPP_PLAN_DETAILS_PAGE+ vppPlanDetailsPage);
+		vppPlanDetailsPage.validatingAdditionalBenefitTextInPlanDetails(additionalBenefits);
+	}
+	
 	
 	@And("^user delets the added plans on visitor profile page$")
 	public void user_delets_the_added_plans_on_visitor_profile_page_of_AARP_site(DataTable planNames) {
@@ -222,6 +287,40 @@ public class VisitorProfileMobileStepDefinition {
 		visitorProfile.deletePlans(savedPlanNames);
 	}
 	
+	@Then("^user saves two plans as favorite$")
+	public void user_saves_two_plans_as_favorite_on_AARP_site(DataTable givenAttributes) {
+		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+				memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+						.get(0), memberAttributesRow.get(i).getCells().get(1));
+			}
+			String savePlanNames = memberAttributesMap.get("Test Plans");
+			String planType = memberAttributesMap.get("Plan Type");
+
+			plansummaryPage.savePlans(savePlanNames, planType);
+		}
+	@Then("^user gets a create profile prompt$")
+	public void user_saves_two_plans_as_favorite_on_AARP_site() {
+		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+
+		plansummaryPage.validateCreateProfilePrompt();
+		
+		getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
+		
+	}
+	@And("^user click on continue as guest button$")
+	public void user_click_on_continue_as_guest_button_on_AARP_site() {
+		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+
+		pages.mobile.acquisition.ulayer.VisitorProfilePageMobile visitorProfilePage = plansummaryPage.continueAsGuest();
+		getLoginScenario().saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfilePage);
+
+	}
 	@And("^user delets all the added drugs on visitor profile page$")
 	public void user_delets_all_the_added_drugs_on_visitor_profile_page_of_AARP_site() {
 		VisitorProfilePage visitorProfile = (VisitorProfilePage) getLoginScenario().getBean(PageConstants.VISITOR_PROFILE_PAGE);
@@ -365,12 +464,13 @@ public class VisitorProfileMobileStepDefinition {
 	@And("^the user back to VPP plan summary page$")
 	public void the_user_back_to_VPP_plan_summary_page_in_aarp() {
 		
-		VisitorProfilePage visitorProfilePage = (VisitorProfilePage) getLoginScenario().
+		pages.mobile.acquisition.ulayer.VisitorProfilePageMobile visitorProfilePage = (pages.mobile.acquisition.ulayer.VisitorProfilePageMobile) getLoginScenario().
 				getBean(PageConstants.VISITOR_PROFILE_PAGE);
 
-		VPPPlanSummaryPage planSummary = visitorProfilePage.backToPlans();
+		VPPPlanSummaryPageMobile planSummary = visitorProfilePage.backToPlans();
 		
 		getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, planSummary);
+		System.out.println("afaknfkanfklnasknfkanfklanssfka"+planSummary);
 	}
 	
 	@And("^validate OLE details$")

@@ -3,6 +3,7 @@ package pages.mobile.acquisition.ulayer;
 import java.util.Arrays;
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -37,7 +38,7 @@ public class VisitorProfilePageMobile extends UhcDriver {
 	@FindBy(css = "div.signupCTA a.profileBtn")
 	private WebElement btnCreateProfile;
 
-	@FindBy(css = "div.dashboardCard.plans a.empty-message-link")
+	@FindBy(xpath = "//div[contains(@class,'find-plans')]/button")
 	private WebElement addPlans;
 
 	@FindBy(css = "a.addrugs")
@@ -114,7 +115,9 @@ public class VisitorProfilePageMobile extends UhcDriver {
 	}
 
 	public AcquisitionHomePage addPlan() {
-		addPlans.click();
+		//addPlans.click();
+		scrollToView(addPlans);
+		jsClickMobile(addPlans);
 		CommonUtility.checkPageIsReadyNew(driver);
 		if (driver.getCurrentUrl().contains("zipcode")) {
 			String page = "health-plans";
@@ -132,22 +135,30 @@ public class VisitorProfilePageMobile extends UhcDriver {
 
 	public void validateAddedPlans(String planNames) {
 		List<String> listOfTestPlans = Arrays.asList(planNames.split(","));
-		for (String plan : listOfTestPlans) {
-			Assert.assertEquals(plan, driver.findElement(By.xpath("//h4[text()='" + plan + "']")).getText());
-			Assert.assertTrue(
-					driver.findElement(By.xpath("//h4[text()='" + plan + "']/following::button[1]")).isDisplayed());
-			Assert.assertTrue(driver
-					.findElement(By.xpath("//h4[text()='" + plan + "']/following::div[@class='provider-list'][1]/a"))
-					.isDisplayed());
+		
+		if(StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Pennsylvania") || StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Puerto Rico") || 
+				StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Virginia")) {
+			
+			for (String plan: listOfTestPlans) {
+				Assert.assertEquals(plan, driver.findElement(By.xpath("//h4[contains(text(),'"+plan+"')]")).getText().trim());
+				Assert.assertTrue(driver.findElement(By.xpath("//h4[contains(text(),'"+plan+"')]/following::a[contains(@class,'add-provider')][1]")).isDisplayed());
+				System.out.println(driver.findElement(By.xpath("//h4[contains(text(),'"+plan+"')]")).getText());
+			}
+		}else {
+			for (String plan: listOfTestPlans) {
+				Assert.assertEquals(plan, driver.findElement(By.xpath("//button[contains(@class,'remove')]/following::h3[contains(text(),'"+plan+"')]")).getText().trim());
+				Assert.assertTrue(driver.findElement(By.xpath("//button[contains(@class,'remove')]/following::h3[contains(text(),'"+plan+"')]/following::span[contains(@class,'search-provider')]")).isDisplayed());
+				System.out.println(driver.findElement(By.xpath("//button[contains(@class,'remove')]/following::h3[contains(text(),'"+plan+"')]")).getText());
+			}
 		}
 	}
-
-	public PlanDetailsPage navigateToPlanDetails(String planName) {
+	
+	public PlanDetailsPageMobile navigateToPlanDetails(String planName) {
 		try {
 			driver.findElement(By.xpath("//h4[text()='" + planName + "']")).click();
 			Thread.sleep(20000);
 			if (driver.getCurrentUrl().contains("#/details")) {
-				return new PlanDetailsPage(driver);
+				return new PlanDetailsPageMobile(driver);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -382,12 +393,15 @@ public class VisitorProfilePageMobile extends UhcDriver {
 	/**
 	 * Back to VPP
 	 */
-	public VPPPlanSummaryPage backToPlans() {
+	public VPPPlanSummaryPageMobile backToPlans() {
 		try {
-			backToPlans.click();
+			//Thread.sleep(10000);
+			//SbackToPlans.click();
+			jsClickMobile(backToPlans);
+		
 			CommonUtility.checkPageIsReadyNew(driver);
 			if (driver.getCurrentUrl().contains("#/plan-summary")) {
-				return new VPPPlanSummaryPage(driver);
+				return new VPPPlanSummaryPageMobile(driver);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
