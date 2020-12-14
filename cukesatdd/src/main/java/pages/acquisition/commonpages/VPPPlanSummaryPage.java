@@ -5462,7 +5462,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	public List<String> getAllPlanNames() {
 		List<String> allPlanNames = new ArrayList<String>();
 		for (WebElement plan : planNames) {
-			allPlanNames.add(plan.getText());
+			allPlanNames.add(plan.getText().trim());
 		}
 		return allPlanNames;
 	}
