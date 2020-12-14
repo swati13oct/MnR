@@ -104,7 +104,7 @@ public class VisitorProfileMobileStepDefinition {
 		pages.mobile.acquisition.ulayer.VisitorProfilePageMobile visitorProfilePage = (pages.mobile.acquisition.ulayer.VisitorProfilePageMobile) getLoginScenario().
 				getBean(PageConstants.VISITOR_PROFILE_PAGE);
 
-		AcquisitionHomePage acqPage = visitorProfilePage.addPlan();
+		AcquisitionHomePageMobile acqPage = visitorProfilePage.addPlan();
 		
 		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, acqPage);
 	}
