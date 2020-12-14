@@ -114,14 +114,15 @@ public class VisitorProfilePageMobile extends UhcDriver {
 
 	}
 
-	public AcquisitionHomePage addPlan() {
+	public AcquisitionHomePageMobile addPlan() {
 		//addPlans.click();
 		scrollToView(addPlans);
 		jsClickMobile(addPlans);
 		CommonUtility.checkPageIsReadyNew(driver);
-		if (driver.getCurrentUrl().contains("zipcode")) {
+		if (driver.getCurrentUrl().contains("plan-summary")) {
 			String page = "health-plans";
-			return new AcquisitionHomePage(driver, page);
+			System.out.println("validating zipcode and returning value");
+			return new AcquisitionHomePageMobile(driver, page);
 		}
 		return null;
 	}
