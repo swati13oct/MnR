@@ -26,6 +26,9 @@ Feature: Plan Recommendation Engine Ranking - Verify PRE Edit Response functiona
       | Additional Option | <Dental-Hearing-Vision-Fitness> |
     And user selects cost preferences option in cost preferences page mobile
       | Preference Option | <costPreferenceOption> |
+    Then user selects priority in priorities page
+      | Priority Option | <priorityOption> |
+      | Priorities      | <priorities>     |
     Then user validate saved values in edit response page mobile
       | Zip Code            | <Zipcode>                                                              |
       | CountyDropDown      | <County>                                                               |
@@ -38,12 +41,13 @@ Feature: Plan Recommendation Engine Ranking - Verify PRE Edit Response functiona
       | Drug Details        | <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch> |
       | Additional Option   | <Dental-Hearing-Vision-Fitness>                                        |
       | Preference Option   | <costPreferenceOption>                                                 |
+      | Priorities          | <priorities>                                                           |
     Then user return to vpp page using "return" from edit response page mobile
     Then user validate UI and API recommendation rankings in results page mobile
 
     Examples: 
-      | Zipcode | isMultiCounty | County   | isCoverageOpt | SpecialNeeds | TravelOption | DoctorsSelection | DoctorsName | isMultiDoctor | DrugSelection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch | Dental-Hearing-Vision-Fitness | costPreferenceOption |
-      |   10001 | NO            | New York | None          | Medicaid     | regular      | Lookup           | sue         | NO            | Yes           | Lipitor,NO,Lipitor TAB 20MG,,,1,YES,NO                               | Yes,No,No,Yes                 | Lower                |
+      | Zipcode | isMultiCounty | County   | isCoverageOpt | SpecialNeeds | TravelOption | DoctorsSelection | DoctorsName | isMultiDoctor | DrugSelection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities         |
+      |   10001 | NO            | New York | None          | Medicaid     | regular      | Lookup           | sue         | NO            | Yes           | Lipitor,NO,Lipitor TAB 20MG,,,1,YES,NO                               | Yes,No,No,Yes                 | Lower                | both           | Drug Cost, Doctors |
 
   @PRE @planrecommendationMobile @EditResponsePageMobile @MobileEditvalueMAPD
   Scenario Outline: Zipcode: <Zipcode> -MultiCountyOptions: <isMultiCounty> -CoverageOptions: <isCoverageOpt> -SNP: <SpecialNeeds> -Travel: <TravelOption> -Doctors: <DoctorsSelection> -AdditionalOption: <Dental-Hearing-Vision-Fitness> -CostPreferenceSelection: <costPreferenceOption> - To validate Edit preference functions for MAPD in PRE Mobile
@@ -70,6 +74,7 @@ Feature: Plan Recommendation Engine Ranking - Verify PRE Edit Response functiona
       | Additional Option | <Dental-Hearing-Vision-Fitness> |
     And user selects cost preferences option in cost preferences page mobile
       | Preference Option | <costPreferenceOption> |
+    And verify continue function on "Priorities" page mobile
     Then user edits values in edit response page mobile
       | Plan Type           | <isCoverageOpt>                                                          |
       | Zip Code            | <E_Zipcode>                                                              |
@@ -84,6 +89,8 @@ Feature: Plan Recommendation Engine Ranking - Verify PRE Edit Response functiona
       | Drug Details        | <E_DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch> |
       | Additional Option   | <E_Dental-Hearing-Vision-Fitness>                                        |
       | Preference Option   | <E_costPreferenceOption>                                                 |
+      | Priority Option     | <E_priorityOption>                                                       |
+      | Priorities          | <E_priorities>                                                           |
     Then user return to vpp page using "update" from edit response page mobile
 
     Examples: 
@@ -115,6 +122,9 @@ Feature: Plan Recommendation Engine Ranking - Verify PRE Edit Response functiona
       | Additional Option | <Dental-Hearing-Vision-Fitness> |
     And user selects cost preferences option in cost preferences page mobile
       | Preference Option | <costPreferenceOption> |
+    Then user selects priority in priorities page
+      | Priority Option | <priorityOption> |
+      | Priorities      | <priorities>     |
     Then user navigates to edit response page mobile
       | Plan Type   | <isCoverageOpt> |
       | SNP Options | <SpecialNeeds>  |
@@ -125,8 +135,8 @@ Feature: Plan Recommendation Engine Ranking - Verify PRE Edit Response functiona
     Then user return to vpp page using "update" from edit response page mobile
 
     Examples: 
-      | Zipcode | isMultiCounty | County   | isCoverageOpt | SpecialNeeds | TravelOption | DoctorsSelection | DoctorsName | isMultiDoctor | DrugSelection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch | Dental-Hearing-Vision-Fitness | costPreferenceOption | E_isCoverageOpt |
-      |   10001 | NO            | New York | MAPD          | Medicaid     | regular      | Lookup           | sue         | NO            | Yes           | Lipitor,NO,Lipitor TAB 20MG,,,1,YES,NO                               | Yes,Yes,Yes,Yes               | Lower                | MA              |
+      | Zipcode | isMultiCounty | County   | isCoverageOpt | SpecialNeeds | TravelOption | DoctorsSelection | DoctorsName | isMultiDoctor | DrugSelection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities     | E_isCoverageOpt |
+      |   10001 | NO            | New York | MAPD          | Medicaid     | regular      | Lookup           | sue         | NO            | Yes           | Lipitor,NO,Lipitor TAB 20MG,,,1,YES,NO                               | Yes,Yes,Yes,Yes               | Lower                | both           | Travel,Doctors | MA              |
 
   @PRE @planrecommendationMobile @EditResponsePageMobile @MobileIDKtoPDP
   Scenario Outline: Zipcode: <Zipcode> -MultiCountyOptions: <isMultiCounty> -CoverageOptions: <isCoverageOpt> -SNP: <SpecialNeeds> -Travel: <TravelOption> -Doctors: <DoctorsSelection> -AdditionalOption: <Dental-Hearing-Vision-Fitness> -CostPreferenceSelection: <costPreferenceOption>  - To validate Edit preference functions for IDK to PDP in PRE Mobile
@@ -197,6 +207,7 @@ Feature: Plan Recommendation Engine Ranking - Verify PRE Edit Response functiona
       | Additional Option | <E_Dental-Hearing-Vision-Fitness> |
     Then user selects cost preferences option in cost preferences page mobile
       | Preference Option | <E_costPreferenceOption> |
+    And verify continue function on "Priorities" page mobile
     Then user validate recommendations in results page mobile
       | Zip Code           | <Zipcode>           |
       | County Name        | <County>            |

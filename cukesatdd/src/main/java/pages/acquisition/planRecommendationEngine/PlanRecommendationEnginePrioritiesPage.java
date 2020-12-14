@@ -101,14 +101,14 @@ public class PlanRecommendationEnginePrioritiesPage extends UhcDriver {
 
 	public void prioritiesFunctional(String option,String value) {
 		if(option.equalsIgnoreCase("Both")) {
-			priorityOptions(true,value.split(",")[0]);
-			priorityOptions(false,value.split(",")[1]);
+			priorityOptions(true,value.split(",")[0].trim());
+			priorityOptions(false,value.split(",")[1].trim());
 		}
 		else if(option.equalsIgnoreCase("1st")) {
-			priorityOptions(true,value.split(",")[0]);
+			priorityOptions(true,value.split(",")[0].trim());
 		}
 		else if(option.equalsIgnoreCase("2nd")) {
-			priorityOptions(false,value.split(",")[1]);
+			priorityOptions(false,value.split(",")[1].trim());
 		}
 		else {
 			System.out.println("Not selecting Priorities");

@@ -51,12 +51,15 @@ Feature: Plan Recommendation Engine Ranking - Verify PRE Business flows with API
       | Additional Option | <Dental-Hearing-Vision-Fitness> |
     And user selects cost preferences option in cost preferences page mobile
       | Preference Option | <costPreferenceOption> |
+    Then user selects priority in priorities page
+      | Priority Option | <priorityOption> |
+      | Priorities      | <priorities>     |
     And user validate elements in loading page mobile
     Then user validate UI and API recommendation rankings in results page mobile
 
     Examples: 
-      | Zipcode | isMultiCounty | County   | isCoverageOpt | SpecialNeeds | TravelOption | DoctorsSelection | DoctorsName | isMultiDoctor | DrugSelection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch                              | PharmacySelection | Dental-Hearing-Vision-Fitness | costPreferenceOption |
-      |   10001 | NO            | New York | MAPD          | None         | OutsideUS    | UHCNetwork       |             |               | Yes           | morphine sulfate,NO,morphine sulfate CAP 10MG ER,,,1,NO,NO:Lipitor,NO,Lipitor TAB 10MG,,,1,YES,NO | Online            | No,Yes,Yes,No                 | Lower                |
+      | Zipcode | isMultiCounty | County   | isCoverageOpt | SpecialNeeds | TravelOption | DoctorsSelection | DoctorsName | isMultiDoctor | DrugSelection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch                              | PharmacySelection | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities     |
+      |   10001 | NO            | New York | MAPD          | None         | OutsideUS    | UHCNetwork       |             |               | Yes           | morphine sulfate,NO,morphine sulfate CAP 10MG ER,,,1,NO,NO:Lipitor,NO,Lipitor TAB 10MG,,,1,YES,NO | Online            | No,Yes,Yes,No                 | Lower                | both           | Travel,Doctors |
 
   @PRE @Rankingmobile @IDKAPIUIRanking @APIRankingmobile @F358846
   Scenario Outline: Zipcode: <Zipcode> -MultiCountyOptions: <isMultiCounty> -CoverageOptions: <isCoverageOpt> -SNP: <SpecialNeeds> -Travel: <TravelOption> -Doctors: <DoctorsSelection> -AdditionalOption: <Dental-Hearing-Vision-Fitness> -CostPreferenceSelection: <costPreferenceOption> - To validate API ranking with UI plans in PRE Mobile
@@ -82,12 +85,15 @@ Feature: Plan Recommendation Engine Ranking - Verify PRE Business flows with API
       | Additional Option | <Dental-Hearing-Vision-Fitness> |
     And user selects cost preferences option in cost preferences page mobile
       | Preference Option | <costPreferenceOption> |
+    Then user selects priority in priorities page
+      | Priority Option | <priorityOption> |
+      | Priorities      | <priorities>     |
     And user validate elements in loading page mobile
     Then user validate UI and API recommendation rankings in results page mobile
 
     Examples: 
-      | Zipcode | isMultiCounty | County     | isCoverageOpt | SpecialNeeds | TravelOption | DoctorsSelection | DoctorsName | isMultiDoctor | DrugSelection | Dental-Hearing-Vision-Fitness | costPreferenceOption |
-      |   33143 | NO            | Miami-Dade | None          | None         | None         | UHCNetwork       |             |               | No            | Yes,No,No,No                  | Lower                |
+      | Zipcode | isMultiCounty | County     | isCoverageOpt | SpecialNeeds | TravelOption | DoctorsSelection | DoctorsName | isMultiDoctor | DrugSelection | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities          |
+      |   33143 | NO            | Miami-Dade | None          | None         | None         | UHCNetwork       |             |               | No            | Yes,No,No,No                  | Lower                | both           | Health Cost,Doctors |
 
   @PRE @Rankingmobile @MAAPIUIRanking @APIRankingmobile @F358846
   Scenario Outline: Zipcode: <Zipcode> -MultiCountyOptions: <isMultiCounty> -CoverageOptions: <isCoverageOpt> -SNP: <SpecialNeeds> -Travel: <TravelOption> -Doctors: <DoctorsSelection> -AdditionalOption: <Dental-Hearing-Vision-Fitness> -CostPreferenceSelection: <costPreferenceOption> - To validate API ranking with UI plans in PRE Mobile
@@ -111,9 +117,12 @@ Feature: Plan Recommendation Engine Ranking - Verify PRE Business flows with API
       | Additional Option | <Dental-Hearing-Vision-Fitness> |
     And user selects cost preferences option in cost preferences page mobile
       | Preference Option | <costPreferenceOption> |
+    Then user selects priority in priorities page
+      | Priority Option | <priorityOption> |
+      | Priorities      | <priorities>     |
     And user validate elements in loading page mobile
     Then user validate UI and API recommendation rankings in results page mobile
 
     Examples: 
-      | Zipcode | isMultiCounty | County        | isCoverageOpt | SpecialNeeds     | TravelOption | DoctorsSelection | DoctorsName                      | isMultiDoctor | Dental-Hearing-Vision-Fitness | costPreferenceOption |
-      |   30012 | YES           | Walton County | MA            | Medicaid,Nursing | WithinUS     | lookup           | Emily Adams, NP:Azizul Hoque, MD | NO            | Yes,Yes,Yes,Yes               | Lower                |
+      | Zipcode | isMultiCounty | County        | isCoverageOpt | SpecialNeeds     | TravelOption | DoctorsSelection | DoctorsName                      | isMultiDoctor | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities        |
+      |   30012 | YES           | Walton County | MA            | Medicaid,Nursing | WithinUS     | lookup           | Emily Adams, NP:Azizul Hoque, MD | NO            | Yes,Yes,Yes,Yes               | Lower                | both           | Travel,Heath Cost |
