@@ -2405,4 +2405,10 @@ public void user_verify_details_page_change_pharmacy_modal_for_preferred_tab() {
 		drugSummaryPage.clickswitchToGeneric();
 
 	}
+	
+	@Then("^user click on standard tab from drug details$")
+	public void user_click_on_standard_tab_from_drug_details() {
+		DrugDetailsPage drugDetailsPage = new DrugDetailsPage(driver);
+		drugDetailsPage.validateStandardTab();
+	}
 }

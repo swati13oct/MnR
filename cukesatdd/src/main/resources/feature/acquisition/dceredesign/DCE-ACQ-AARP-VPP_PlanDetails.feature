@@ -731,7 +731,7 @@ Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanDetails AARP - To test DCE - VPP Plan De
     @dCERedesign_PlanSave_PDP_AARP @dceDrugDetailSaveAARP
     Examples: 
       | site | zipcode | plantype | planyear | county       | isMultutiCounty | drug1   | planname                                              | planyear |
-      | AARP |   78006 | SNP      | future   | Bexar County | yes             | Lipitor | UnitedHealthcare Medicare Silver (Regional PPO C-SNP) | future   |
+      | AARP |   10001 | SNP      | future   | none | no             | Lipitor | UnitedHealthcare Dual Complete (HMO D-SNP) | future   |
 
     @dCERedesign_PlanSave_MAPD_UHC @dceDrugDetailSaveUHC
     Examples: 
@@ -776,10 +776,10 @@ Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanDetails AARP - To test DCE - VPP Plan De
 
     @dce_Redesign_VPP_PlanDetails_Pharmacy_PDP_AARP @drugDetailschangePharmacyAARP
     Examples: 
-      | site | zipcode | planyear | planyear | plantype | county       | isMultutiCounty | drug1     | zipCode1 | message                                                                                                    | planyear | planname                        |
-      | AARP |   80002 | current  | future   | PDP      | Adams County | yes             | meloxicam |    78006 | Prescription drug home delivery is available through OptumRx. Learn more about OptumRx Mail Order Pharmacy | future   | AARP MedicareRx Walgreens (PDP) |
+      | site | zipcode | planyear | planyear | plantype | county       | isMultutiCounty | drug1     | zipCode1 | planyear | planname                        |
+      | AARP |   80002 | current  | future   | PDP      | Adams County | yes             | meloxicam |    78006 | future   | AARP MedicareRx Walgreens (PDP) |
 
     @dce_Redesign_VPP_PlanDetails_Pharmacy_PDP_UHC @drugDetailschangePharmacyAARP
     Examples: 
-      | site | zipcode | planyear | planyear | plantype | county       | isMultutiCounty | drug1     | zipCode1 | message                                                                                                    | planyear | planname                        |
-      | UHC  |   80002 | current  | future   | PDP      | Adams County | yes             | meloxicam |    78006 | Prescription drug home delivery is available through OptumRx. Learn more about OptumRx Mail Order Pharmacy | future   | AARP MedicareRx Walgreens (PDP) |
+      | site | zipcode | planyear | planyear | plantype | county       | isMultutiCounty | drug1     | zipCode1 | planyear | planname                        |
+      | UHC  |   80002 | current  | future   | PDP      | Adams County | yes             | meloxicam |    78006 | future   | AARP MedicareRx Walgreens (PDP) |
