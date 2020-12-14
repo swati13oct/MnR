@@ -350,16 +350,16 @@ Feature: 1.12 UAT - Header and Footer flows
 
  @globalheader_AARP_3
   Examples:
-|Scenario          |site|path                                                               |pagename|
-|E2E Scenario_2 AMP|AARP|medicare-education/enrollment-and-changing-plans.html              |Enrollment & Changing Plans|
-|E2E Scenario_2 AMP|AARP|about-us.html                                                      |About Us|
-|E2E Scenario_2 AMP|AARP|contact-us.html                                                    |Contact Us|
-|E2E Scenario_2 AMP|AARP|sitemap.html                                                       |Site Map|
-|E2E Scenario_2 AMP|AARP|privacy_policy.html                                                |Privacy Policy|
-|E2E Scenario_2 AMP|AARP|terms_and_conditions.html                                          |Terms of Use|
-|E2E Scenario_2 AMP|AARP|disclaimer.html                                                    |Disclaimers|
-|E2E Scenario_2 AMP|AARP|health-insurance-brokers.html                                      |Agents & Brokers|
-|E2E Scenario_2 AMP|AARP|shop-medicare-coverage.html                                        |Visit a UHC Store|
+|Scenario          |site|path                                                                                     |pagename|
+|E2E Scenario_2 AMP|AARP|medicare-education/enrollment-and-changing-plans.html                                    |Enrollment & Changing Plans|
+|E2E Scenario_2 AMP|AARP|about-us.html                                                                            |About Us|
+|E2E Scenario_2 AMP|AARP|contact-us.html                                                                          |Contact Us|
+|E2E Scenario_2 AMP|AARP|sitemap.html                                                                             |Site Map|
+|E2E Scenario_2 AMP|AARP|privacy_policy.html                                                                      |Privacy Policy|
+|E2E Scenario_2 AMP|AARP|terms_and_conditions.html                                                                |Terms of Use|
+|E2E Scenario_2 AMP|AARP|disclaimer.html                                                                          |Disclaimers|
+|E2E Scenario_2 AMP|AARP|health-insurance-brokers.html                                                            |Agents & Brokers|
+|E2E Scenario_2 AMP|AARP|shop-medicare-coverage.html                                                              |Visit a UHC Store|
 |E2E Scenario_2 AMP|AARP|about-our-plans.html                                                                     |Why Choose UHC?|
 |E2E Scenario_2 AMP|AARP|profile/guest                                                                            |Your Profile|
 |E2E Scenario_2 AMP|AARP|site-search.html/?q1=medicare&searchloc=header                                           |Site search page|
@@ -433,19 +433,19 @@ Feature: 1.12 UAT - Header and Footer flows
  
   @globalheader_UHC_3
  Examples:
- |Scenario          |site|path                                                             |pagename|
- |E2E Scenario_2 UMS|UHC|medicare-education/enrollment-and-changing-plans.html              |Enrollment & Changing Plans|
- |E2E Scenario_2 UMS|UHC|about-us.html                                                      |About Us|
- |E2E Scenario_2 UMS|UHC|contact-us.html                                                   |Contact Us|
- |E2E Scenario_2 UMS|UHC|sitemap.html                                                      |Site Map|
- |E2E Scenario_2 UMS|UHC|privacy_policy.html                                               |Privacy Policy|
- |E2E Scenario_2 UMS|UHC|terms_and_conditions.html                                         |Terms of Use|
- |E2E Scenario_2 UMS|UHC|disclaimer.html                                                   |Disclaimers|
- |E2E Scenario_2 UMS |UHC|health-insurance-brokers.html                                    |Agents & Brokers|
- |E2E Scenario_2 UMS|UHC|shop-medicare-coverage.html                                       |Visit a UHC Store|
- |E2E Scenario_2 UMS|UHC|about-our-plans.html                                              |Why Choose UHC?|
- |E2E Scenario_2 UMS|UHC|profile/guest                                                     |Your Profile|
- |E2E Scenario_2 UMS|UHC|site-search.html/?q1=medicare&searchloc=header                    |Site search page|
+ |Scenario          |site|path                                                                                |pagename|
+ |E2E Scenario_2 UMS|UHC|medicare-education/enrollment-and-changing-plans.html                                |Enrollment & Changing Plans|
+ |E2E Scenario_2 UMS|UHC|about-us.html                                                                        |About Us|
+ |E2E Scenario_2 UMS|UHC|contact-us.html                                                                      |Contact Us|
+ |E2E Scenario_2 UMS|UHC|sitemap.html                                                                         |Site Map|
+ |E2E Scenario_2 UMS|UHC|privacy_policy.html                                                                  |Privacy Policy|
+ |E2E Scenario_2 UMS|UHC|terms_and_conditions.html                                                            |Terms of Use|
+ |E2E Scenario_2 UMS|UHC|disclaimer.html                                                                      |Disclaimers|
+ |E2E Scenario_2 UMS |UHC|health-insurance-brokers.html                                                       |Agents & Brokers|
+ |E2E Scenario_2 UMS|UHC|shop-medicare-coverage.html                                                          |Visit a UHC Store|
+ |E2E Scenario_2 UMS|UHC|about-our-plans.html                                                                 |Why Choose UHC?|
+ |E2E Scenario_2 UMS|UHC|profile/guest                                                                        |Your Profile|
+ |E2E Scenario_2 UMS|UHC|site-search.html/?q1=medicare&searchloc=header                                       |Site search page|
  |E2E Scenario_2 UMS|UHC|medicare-articles.html                                                                    |Blog Homepage|
  |E2E Scenario_2 UMS|UHC|medicare-articles/eligibility-and-enrollment.html                                         |Category Page|
  |E2E Scenario_2 UMS|UHC|medicare-articles/unintended-part-d-gotcha-could-getcha-if-you-enroll-after-age-65.html   |Article Page 1|
