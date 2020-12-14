@@ -1979,22 +1979,25 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			}
 			visitorprofileicon.click();
 			jsClickNew(CreateProfile);
+			//CommonUtility.checkPageIsReadyNew(driver);
+			driver.navigate().refresh();
+			sleepBySec(3);
 			//WebElement GuestProfile = driver.findElement(By.xpath("//*[contains(text(), 'Your Guest Profile')]"));
-			WebElement GuestProfile = driver.findElement(By.xpath("//h2[contains(text(), 'Your Guest Profile')]"));
+			/*WebElement GuestProfile = driver.findElement(By.xpath("//h2[contains(text(), 'Your Guest Profile')]"));
 			CheckPageLoad();
 			waitForPageLoadSafari();
 			CheckiPerseptions();
-			CommonUtility.waitForPageLoadNew(driver, GuestProfile, 30);
+			CommonUtility.waitForPageLoadNew(driver, GuestProfile, 30);*/
 			if (driver.getCurrentUrl().contains("profile")) {
 				Assert.assertTrue(true);
 				System.out.println("Visitor Profile Page opens successsfully");
 			} else {
 				Assert.fail("Visitor Profile page is not opening up");
 			}
-			driver.navigate().back();
-			CommonUtility.checkPageIsReady(driver);
+			/*driver.navigate().back();
+			CommonUtility.checkPageIsReady(driver);*/
 			/*CheckPageLoad();*/
-			waitForPageLoadSafari();
+			//waitForPageLoadSafari();
 			//CheckiPerseptions();
 
 			//CommonUtility.waitForPageLoadNew(driver, findPlansButton, 30);
