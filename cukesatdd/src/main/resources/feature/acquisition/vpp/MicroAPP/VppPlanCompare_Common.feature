@@ -445,12 +445,12 @@ Feature: 1.01.3-Vpp to plan Compare Scenarios
     @VppPlanCompareCommon_AARP03
     Examples: 
       | TCID  | site | zipcode | isMultiCounty | county          | plantype | planIndices | planyear |
-      | 00020 | AARP |   10010 | No            | New York County | MAPD     |           9 | current  |
+      | 00020 | AARP |   10010 | No            | New York County | MAPD     |           9 | future	 |
 
     @VppPlanCompareCommon_UHC03
     Examples: 
       | TCID  | site | zipcode | isMultiCounty | county          | plantype | planIndices | planyear |
-      | 00020 | UHC  |   10010 | No            | New York County | MAPD     |           9 | current  |
+      | 00020 | UHC  |   10010 | No            | New York County | MAPD     |           9 | future	 |
 
   @vppPlanCompareAARP16 @vppPlanCompareAARPRun02 @vppPlanCompareAARPRegression
   Scenario Outline: <TCID> - Plan Type: <plantype> - Validation for remove icon should be disabled when only one plan on plan compare on <site>
