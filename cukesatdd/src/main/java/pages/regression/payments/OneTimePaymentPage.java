@@ -36,7 +36,7 @@ public class OneTimePaymentPage extends UhcDriver {
 	@FindBy(id = "optionsRadios1")
 	private WebElement AmountDueTodayButton;
 	
-	@FindBy(xpath = "//label[@for='optionsRadios10']//input")
+	@FindBy(xpath = "//label[@for='optionsRadios30']//input")
 	private WebElement CheckingAccountRadioButton;
 
 	@FindBy(xpath = "//label[@for='optionsRadios40']//input")
