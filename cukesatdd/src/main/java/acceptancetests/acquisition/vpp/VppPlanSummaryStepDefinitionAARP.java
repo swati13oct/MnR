@@ -21,6 +21,7 @@ import pages.acquisition.ulayer.OurPlansPage;
 import pages.acquisition.ulayer.PlanDetailsPage;
 import pages.acquisition.ulayer.ProviderSearchPage;
 import pages.acquisition.ulayer.VPPPlanSummaryPage;
+import pages.acquisition.ulayer.VisitorProfilePage;
 import pages.acquisition.ulayer.keywordSearchAARP;
 import pages.regression.accounthomepage.AccountHomePage;
 import pages.regression.claims.ClaimsSummaryPage;
@@ -137,8 +138,8 @@ public class VppPlanSummaryStepDefinitionAARP {
 	}
 	
 
-	@When("^user clicks on Continue Enrollment button in AARP Site$")
-	public void user_clicks_on_Continue_Enrollment_button_in_aarp_Site() throws Throwable {
+	@When("^user clicks on Select a plan button in AARP Site$")
+	public void user_clicks_on_select_a_plan_button_in_aarp_Site() throws Throwable {
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		allPlanNames = plansummaryPage.getAllPlanNames();
@@ -1075,7 +1076,7 @@ public class VppPlanSummaryStepDefinitionAARP {
 	}
 
 	@Then("^user should be able to see the Select Plan for Enroll Modal with all plans in AARP site$")
-	public void user_should_be_able_to_see_the_Select_Plan_for_Enroll_Modal_with_all_plans_in_aarp_site(DataTable arg1)
+	public void user_should_be_able_to_see_the_Select_Plan_for_Enroll_Modal_with_all_plans_in_aarp_site()
 			throws Throwable {
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
@@ -1093,5 +1094,16 @@ public class VppPlanSummaryStepDefinitionAARP {
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		plansummaryPage.validateNavigatedToOle();
+	}
+	
+	@When("^user clicks on Find a Provider button in AARP Site$")
+	public void user_clicks_on_Find_a_provider_button_in_UMS_Site() throws Throwable {
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		ProviderSearchPage providerSearchPage = (ProviderSearchPage) plansummaryPage
+				.clickNextBestActionModalFindMyDoctorsBtn();
+		if (providerSearchPage != null) {
+			getLoginScenario().saveBean(PageConstants.PROVIDER_SEARCH_PAGE, providerSearchPage);
+		}
 	}
 }

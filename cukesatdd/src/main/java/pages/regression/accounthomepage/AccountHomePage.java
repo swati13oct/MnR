@@ -485,7 +485,19 @@ public class AccountHomePage extends UhcDriver {
 	//@FindBy(xpath="//a[contains(text(),'View Documents & Resources')]")
 	@FindBy(xpath="//div[contains(@class,'link-bar')]//a[contains(@href,'documents/overview.html')]")
 	protected WebElement planDocResPgLink;
+	
+	@FindBy(xpath="//section[contains(@class,'hide-mobile')]//a[contains(@href,'documents/overview.html')]")
+	protected WebElement planDocResPgLink_newRallyDesign;
 
+	@FindBy(xpath="//a[contains(@href,'documents/overview.html') and contains(text(),'VIEW PLAN DOCUMENTS')]")
+	protected WebElement preEffPlanDocLnkOnBncPg;
+	
+	@FindBy(xpath="//span[contains(@class,'warning-message') and contains(text(),'coverage end date')]")
+	protected WebElement yellowBannerForTermUser;
+	
+	@FindBy(xpath="//nav[@class='menuL1']//a[contains(@id,'formsandresources') and contains(text(),'Plan Documents')]")
+	protected WebElement activeUsrPlanDocLnkOnBncPg;
+	
 	@FindBy(name="zipCode")
 	private WebElement zipCodeTextBox;
 
@@ -3264,6 +3276,21 @@ public class AccountHomePage extends UhcDriver {
 
 		return null;
 	}
+	
+	public void navigateDirectToBnCPgNoTitleChk() {
+		checkModelPopup(driver,5);
+		if (noWaitValidate(shadowRootHeader)) {
+			System.out.println("located shadow-root element, attempt to process further...");
+			WebElement root1 = expandRootElement(shadowRootHeader);
+			try {
+				WebElement benefitsTopMenuShadowRootLink = root1.findElement(By.cssSelector("a[data-testid*=nav-link-coverage]"));
+				benefitsTopMenuShadowRootLink.click();
+			} catch (Exception e) {
+				Assert.assertTrue("PROBLEM - unable to locate Benefits link on Rally Dashboard top menu", false);
+			}		
+
+		} 
+	}
 
 	@FindBy(xpath="//div[contains(@class,'preEffectiveParsys')]//h1")
 	private WebElement preEffBnfHeading;
@@ -3840,10 +3867,30 @@ public class AccountHomePage extends UhcDriver {
 				}
 				checkModelPopup(driver,2);
 			} else if (MRScenario.environment.equalsIgnoreCase("prod") || MRScenario.environment.equalsIgnoreCase("offline")) {
-				Assert.assertTrue("PROBLEM - unable to locate the plan doc link on rally dashboard", noWaitValidate(planDocResPgLink));
-				checkModelPopup(driver, 2);
-				scrollElementToCenterScreen(planDocResPgLink);
-				planDocResPgLink.click();
+				//tbd Assert.assertTrue("PROBLEM - unable to locate the plan doc link on rally dashboard", noWaitValidate(planDocResPgLink));
+				if (noWaitValidate(yellowBannerForTermUser)) {
+					//note: if terminated user, would be on planDoc page already after clicking Benefits
+					navigateDirectToBnCPgNoTitleChk();
+				} else {
+					WebElement planDocElement=null;
+					if (noWaitValidate(planDocResPgLink)) { //note: old rally dashboard planDoc quick link
+						planDocElement=planDocResPgLink; 
+					} else if (noWaitValidate(planDocResPgLink_newRallyDesign)) { //note: new rally dashboard quick link
+						planDocElement=planDocResPgLink_newRallyDesign;
+					} else { //note: either active or pre-eff user
+						navigateDirectToBnCPag();
+						if (noWaitValidate(preEffPlanDocLnkOnBncPg)) { //note: pre-eff user
+							planDocElement=preEffPlanDocLnkOnBncPg;
+						} else if (noWaitValidate(activeUsrPlanDocLnkOnBncPg)){ //note: active user
+							planDocElement=activeUsrPlanDocLnkOnBncPg;
+						} else {
+							Assert.assertTrue("PROBLEM - unable to locate the navigate to PlanDoc page from Benefits page", false);
+						}
+					}
+					checkModelPopup(driver, 2);
+					scrollElementToCenterScreen(planDocElement);
+					planDocElement.click();
+				}
 			} else {
 				if (driver.getCurrentUrl().contains("mymedicareaccount"))
 					driver.navigate().to("https://" + MRScenario.environmentMedicare
