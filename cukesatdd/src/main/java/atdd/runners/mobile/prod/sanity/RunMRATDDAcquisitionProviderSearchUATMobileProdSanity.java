@@ -8,7 +8,7 @@ import com.github.mkolisnyk.cucumber.runner.ExtendedCucumberOptions;
 import cucumber.api.CucumberOptions;
 
 /**
- * this file is to run test cases for RunMRATDDAcquisitionProviderSearchMobileProdSanity
+ * this file is to run test cases for RunMRATDDAcquisitionProviderSearchUATMobileProdSanity
  */
 @RunWith(ExtendedCucumber.class)
 @ExtendedCucumberOptions(retryCount=1,screenShotSize="", screenShotLocation="/screenshots/",
@@ -17,8 +17,8 @@ jsonReport = "target/cucumber-RunMRATDDAcquisitionProviderSearchMobileProdSanity
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.mobile" }, features = { "src/main/resources/feature/mobile/acquisition/providersearch" }, 
 plugin = {
 		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionProviderSearchMobileProdSanity.json" }, 
-tags = {  "@OnlyProd","@fixedTestCaseTest"}, dryRun=false)
-public class RunMRATDDAcquisitionProviderSearchMobileProdSanity { 
+tags = { "@UATRegression" }, dryRun=false)
+public class RunMRATDDAcquisitionProviderSearchUATMobileProdSanity { 
  
 }
 

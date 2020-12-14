@@ -1,7 +1,7 @@
 @vppPlanCompareUHC
-Feature: 2.01.3-Vpp to plan Compare UHC Scenarios
+Feature: 2.01.3-Vpp to plan Compare AARP Scenarios
 
-  @vppPlanCompareUHCRegressionMobile @OnlyProd @vppPlanCompareUHCRegression
+  @vppPlanCompareUHCRegressionMobile @vppPlanCompareUHCRegression @OnlyProd
   Scenario Outline: TID: <TID> - Plan Type: <plantype> -  Verify the checkbox for add to compare link is not visible for single plan.
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
@@ -21,7 +21,7 @@ Feature: 2.01.3-Vpp to plan Compare UHC Scenarios
       | 00003 |   90265 | YES           | Ventura County   | MAPD     |current|
       | 00004 |   70072 | NO            | Jefferson Parish | MAPD     |current|
 
-  @vppPlanCompareUHCRegressionMobile @prodSanity @vppPlanCompareUHCRegression
+  @vppPlanCompareUHCRegressionMobile @prodSanity @vppPlanCompareUHCRegression @OnlyProd
   Scenario Outline: TID: <TID> - Verify Call sticky action menu on AARP site
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
@@ -41,7 +41,7 @@ Feature: 2.01.3-Vpp to plan Compare UHC Scenarios
       | TID   | zipcode | isMultiCounty | county             | MultiCOuntyzipcode | plantype | count |planyear|
       | 00005 |   90210 | No            | Los Angeles County |              80002 | MAPD     |     2 |current|
 
-  @vppPlanCompareUHCRegressionMobile @prodSanity @vppPlanCompareUHCRegression
+  @vppPlanCompareUHCRegressionMobile @prodSanity @vppPlanCompareUHCRegression @OnlyProd
   Scenario Outline: TID: <TID> - Plan Type: <plantype> - Verify for zipcode with 2 plans when 1 is selected then the other plan is auto-selected and De-selection
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
@@ -84,8 +84,8 @@ Feature: 2.01.3-Vpp to plan Compare UHC Scenarios
       | TID   | zipcode | isMultiCounty | county             | MultiCOuntyzipcode | plantype | count |planyear|
       | 00007 |   90210 | No            | Los Angeles County |              80002 | MAPD     |     2 |current|
 
-  @vppPlanCompareUHC05 @vppPlanCompareUHCRun01New @vppPlanCompareUHCRegression
-  Scenario Outline: TID: <TID> - Navigation for plan comapre to Back to summary page
+  @vppPlanCompareUHC05 @vppPlanCompareUHCRun01New @vppPlanCompareUHCRegression @OnlyProd
+  Scenario Outline: TID: <TID> - Navigation for plan compare to Back to summary page
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
       | Zip Code        | <zipcode>       |

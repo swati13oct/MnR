@@ -19,7 +19,7 @@ jsonReport = "target/cucumber-RunMRATDDAcquisitionVPPPlanCompareMobileProdSanity
 features = { "src/main/resources/feature/mobile/acquisition/vpp" }, 
 plugin = {
 		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionVPPPlanCompareMobileProdSanity.json" }, 
-tags = {"@vppPlanCompareUHCRegressionMobile","@OnlyProd"})
+tags = {"@vppPlanCompareUHC","@OnlyProd"})
 public class RunMRATDDAcquisitionVPPPlanCompareMobileProdSanity { 
  
 }

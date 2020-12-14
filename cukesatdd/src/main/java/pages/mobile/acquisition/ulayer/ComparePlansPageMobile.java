@@ -139,10 +139,10 @@ public class ComparePlansPageMobile extends UhcDriver {
 	@FindBy(xpath="//span[@class='remove-button removebtn3']")
 	private WebElement remove4thplanName;
 	
-	@FindBy(xpath="(//div[contains(@class,'align-items-lg-start')]//button)[4]")
+	@FindBy(xpath="//div[contains(@class,'align-items-lg-start')]//button)[4]")
 	private WebElement Newremove4thplan;
 	
-	@FindBy(xpath="(//div[contains(@class,'align-items-lg-start')]//div)[4]")
+	@FindBy(xpath="//div[contains(@class,'align-items-lg-start')]//div)[4]")
 	private WebElement Newremove4thplanName;
 	
 	@FindBy(xpath="//a[@id='addanotherplanbutton2']")

@@ -17,12 +17,14 @@ import pages.acquisition.dceredesign.DrugSummaryPage;
 import pages.acquisition.dceredesign.GetStartedPage;
 import pages.acquisition.dceredesign.ZipCodePlanYearCapturePage;
 import pages.acquisition.ulayer.AcquisitionHomePage;
+import pages.acquisition.ulayer.DrugCostEstimatorPage;
 import pages.mobile.acquisition.dceredesign.BuildYourDrugListMobile;
 import pages.mobile.acquisition.dceredesign.DrugDetailsPageMobile;
 import pages.mobile.acquisition.dceredesign.DrugSummaryPageMobile;
 import pages.mobile.acquisition.dceredesign.TellUsAboutDrugMobile;
 import pages.mobile.acquisition.dceredesign.ZipCodeAndPlanYearCapturePageMobile;
 import pages.mobile.acquisition.ulayer.AcquisitionHomePageMobile;
+import pages.mobile.acquisition.ulayer.DrugCostEstimatorPageMobile;
 //import pages.mobile.acquisition.ulayer.GetStartedPageMobile;
 import pages.mobile.acquisition.dceredesign.GetStartedPageMobile;
 import acceptancetests.data.CommonConstants;
@@ -68,6 +70,35 @@ public class DCEACQDrugSummaryMobile {
 		AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		aquisitionhomepage.navigateToPath(path);
+	}
+	
+	
+	@When("^I access the acquisition DCE tool from home page$")
+	public void I_access_the_DCE_tool_home_page() throws InterruptedException {
+
+		AcquisitionHomePageMobile acquisitionHomePage = (AcquisitionHomePageMobile) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		DrugCostEstimatorPageMobile dcePage = (DrugCostEstimatorPageMobile) acquisitionHomePage.navigateToDCEToolFromHome();
+		if (null != dcePage) {
+			getLoginScenario().saveBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE, dcePage);
+		} else
+			Assert.fail("DCE page object not loaded");
+	}
+	
+
+	/**
+	 * @toDo:user is on AARP medicare acquisition site landing page
+	 */
+	@Given("^the user is on the AARP medicare site landing page$")
+	public void the_user_on_aarp_medicaresolutions_Site() {
+		wd = getLoginScenario().getMobileDriver();
+		AcquisitionHomePageMobile aquisitionhomepage = new AcquisitionHomePageMobile(wd);
+		aquisitionhomepage.openMobileURL();
+		//aquisitionhomepage.openPRE();
+		
+		aquisitionhomepage.fixPrivateConnectionMobile();
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, aquisitionhomepage);
 	}
 	
 	@When("^the user navigates to following medicare acquisition site page$")

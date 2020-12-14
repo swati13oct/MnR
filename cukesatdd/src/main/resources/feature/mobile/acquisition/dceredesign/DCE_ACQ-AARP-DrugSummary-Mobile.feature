@@ -14,7 +14,7 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
     When user enters valid zipcode and county
       | ZipCode | <zipCode> |
     #And user selects plan year in AARP
-    And user clicks on continue button in Zip Entry Page in AARP
+    And user clicks on continue button in Zip Entry Page
     #Then load screen should be displayed in AARP
     And user should be navigated to Review drug cost estimate page
     And user verify the drug summary page

@@ -15,7 +15,7 @@ import cucumber.api.CucumberOptions;
 @ExtendedCucumberOptions(retryCount = 0, screenShotSize = "", screenShotLocation = "/screenshots/", jsonReport = "target/cucumber-RunMRATDDAcquisitionVPPPlanSummaryMobileProdSanity.json", detailedReport = true, detailedAggregatedReport = true, overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDAcquisitionVPPPlanSummaryMobileProdSanity")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.mobile" }, features = {
 		"src/main/resources/feature/mobile/acquisition/vpp/" }, plugin = { "pretty", "html:reports/test-report",
-				"json:target/cucumber-RunMRATDDAcquisitionVPPPlanSummaryMobileProdSanity.json" }, tags = { "@vppPlanSummaryUHCRegressionMobile", "@OnlyProd" })
+				"json:target/cucumber-RunMRATDDAcquisitionVPPPlanSummaryMobileProdSanity.json" }, tags = { "@vppPlanSummaryAARP", "@OnlyProd" })
 public class RunMRATDDAcquisitionVPPPlanSummaryMobileProdSanity {
 
 }

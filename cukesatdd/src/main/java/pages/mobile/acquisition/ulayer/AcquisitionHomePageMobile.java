@@ -55,6 +55,7 @@ import pages.acquisition.dceredesign.GetStartedPage;
 import pages.acquisition.ole.OLETestHarnessPage;
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.pharmacyLocator.PharmacySearchPage;
+import pages.acquisition.ulayer.DrugCostEstimatorPage;
 import pages.acquisition.ulayer.PageTitleConstants;
 import pages.mobile.acquisition.dceredesign.BuildYourDrugListMobile;
 import pages.mobile.acquisition.dceredesign.GetStartedPageMobile;
@@ -2976,6 +2977,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		validateNew(visitorprofileicon);
 	}
 
+
 	public void clickRequestAsistancce() {
 		validateNew(footerRequestforAssistancelink);
 		if (proactiveChatExitBtn != null)
@@ -2997,6 +2999,15 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		if (driver.getCurrentUrl().contains("sitemap.html")) {
 			return new SiteMapAARPPageMobile(driver);
 		}
+		return null;
+	}
+
+	public DrugCostEstimatorPageMobile navigateToDCEToolFromHome() {
+		validateNew(getStarted);
+		jsClickNew(getStarted);
+		waitForPageLoadSafari();
+		if (driver.getCurrentUrl().contains("health-plans/estimate-drug-costs.html"))
+			return new DrugCostEstimatorPageMobile(driver);
 		return null;
 	}
 
