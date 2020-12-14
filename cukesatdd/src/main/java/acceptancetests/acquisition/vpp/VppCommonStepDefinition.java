@@ -202,7 +202,7 @@ public class VppCommonStepDefinition {
 			Assert.fail("Error in loading the compare plans page");
 	}
 
-	@Then("^verify plan compare page is loaded$")
+
 	public void verify_plan_compare_page_is_loaded_on_AARP() throws Throwable {
 		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
 				.getBean(PageConstants.PLAN_COMPARE_PAGE);
@@ -3014,5 +3014,67 @@ public void user_clicks_on_continue_enrollment_button_on_the_modal() throws Thro
 			.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 	plansummaryPage.clickContinueEnrollmentBtnOnModal();
 }
+
+	@Then("^the user clicks on Enroll in plan and validates the Welcome to OLE Page on new Plan Compare")
+	public void user_clicks_enrollInPlan_newPlanCompare() throws InterruptedException {
+		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		WelcomePage welcomeOLEPage = planComparePage.Enroll_OLE_Plancompare();
+		if (welcomeOLEPage != null) {
+			getLoginScenario().saveBean(PageConstants.OLE_WELCOME_PAGE, welcomeOLEPage);
+		} else {
+			Assert.fail("Error Loading Welcome Page for OLE");
+		}
+	}
+
+	@Then("^the user clicks on Plan details link in new Plan Compare page")
+	public void user_clicks_planDetails_newPlanCompare() throws InterruptedException {
+		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		PlanDetailsPage vppPlanDetailsPage = planComparePage.navigateToPlanDetailfromplanCompare();
+		if (vppPlanDetailsPage != null) {
+			getLoginScenario().saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE, vppPlanDetailsPage);
+			Assert.assertTrue(true);
+		} else
+			Assert.fail("Error in Loading the Plan Details Page");
+
+	}
+
+	@Then("^Click on view more plans for right navigaton$")
+	public void Clickonviewmoreplansforrightnavigatonon() throws Throwable {
+		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		planComparePage.validateViewMoreplansComparePage();
+	}
+
+	@Then("^Click on view less plans for left navigaton$")
+	public void Clickonviewlessplansforrightnavigatonon() throws Throwable {
+		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		planComparePage.validateViewlessplansComparePage();
+	}
+
+	@Given("^remove one plan from \"([^\"]*)\" new plan compare and verify remove icon is disabled page$")
+	public void removeoneplanfrom_compare_plan_link(String Counter) throws Throwable {
+		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		planComparePage.CounterNewRemoveLink(Counter);
+	}
+
+	@Then("^Click on Dental Flyer Link$")
+	public void clickonDentalFlyerLink(DataTable givenAttributes) throws Throwable {
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		String PDFtype = memberAttributesMap.get("PDF LINK");
+		String DocCode = memberAttributesMap.get("DocumentCode");
+		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		planComparePage.CounterDentalFlyerLink(PDFtype, DocCode);
+	}
 
 }
