@@ -1981,7 +1981,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			jsClickNew(CreateProfile);
 			//CommonUtility.checkPageIsReadyNew(driver);
 			driver.navigate().refresh();
-			sleepBySec(3);
+			//sleepBySec(3);
 			//WebElement GuestProfile = driver.findElement(By.xpath("//*[contains(text(), 'Your Guest Profile')]"));
 			/*WebElement GuestProfile = driver.findElement(By.xpath("//h2[contains(text(), 'Your Guest Profile')]"));
 			CheckPageLoad();

@@ -102,7 +102,7 @@ Feature: 1.12 UAT - Header and Footer flows
     When user accesses global header of the Medicare Plans home page
     And user verifies the logo 
     And user clicks on Sign in link 
-    And the user clicks on browser back button
+    #And the user clicks on browser back button
     And user clicks on register link 
     And the user clicks on browser back button
     Then user validates visitor profile 
@@ -160,7 +160,7 @@ Feature: 1.12 UAT - Header and Footer flows
     When user accesses global header of the Medicare Plans home page
     And user verifies the logo 
     And user clicks on Sign in link 
-    And the user clicks on browser back button
+    #And the user clicks on browser back button
     And user clicks on register link 
     And the user clicks on browser back button
     Then user validates visitor profile 
@@ -219,7 +219,7 @@ Feature: 1.12 UAT - Header and Footer flows
     When user accesses global header of the Medicare Plans home page
     And user verifies the logo 
     And user clicks on Sign in link 
-    And the user clicks on browser back button
+    #And the user clicks on browser back button
     And user clicks on register link 
     And the user clicks on browser back button
     Then user validates visitor profile 
@@ -278,7 +278,7 @@ Feature: 1.12 UAT - Header and Footer flows
     When user accesses global header of the Medicare Plans home page
     And user verifies the logo 
     And user clicks on Sign in link 
-    And the user clicks on browser back button
+    #And the user clicks on browser back button
     And user clicks on register link 
     And the user clicks on browser back button
     Then user validates visitor profile 
