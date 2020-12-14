@@ -21,22 +21,22 @@ Feature: 1.23.2 Member Provider Search - Member Auth - PROD
 	Then the user navigates to Benefits page from Provider Search page
 	Then the user navigates to Payments page from Provider Search page
 
-	@prod_providerSearch01_mapd
+	@prod_sanity_providerSearch01_mapd
     Examples: 
 	    | index | username  | password  | MemUserName          | planType | memberType              | 
 	    | S02   | kkumard   | tnps459#  | LMHOCHSCHILD11       | MAPD     | UHC_IND_ProviderSearch  |
 
-	@prod_providerSearch01_pdp
+	@prod_sanity_providerSearch01_pdp
     Examples: 
 	    | index | username  | password  | MemUserName          | planType | memberType              | 
 	    | S03   | kkumard   | tnps459#  | Branford910            | PDP      | AARP_IND_ProviderSearch |	
 
-	@prod_providerSearch01_ma
+	@prod_sanity_providerSearch01_ma
     Examples: 
 	    | index | username  | password  | MemUserName          | planType | memberType              | 
         | S04   | kkumard   | tnps459#  | ExDesertrat          | MA       | UHC_IND_ProviderSearch  |
 
-	@prod_providerSearch01_medica_pcp
+	@prod_sanity_providerSearch01_medica_pcp
     Examples: 
 	    | index | username  | password  | MemUserName          | planType | memberType              |
 	    | S07   | kkumard   | tnps459#  | SOFYABAKMAN@MSN.COM  | PCP      | PCP_IND_ProviderSearch  |
@@ -60,22 +60,22 @@ Feature: 1.23.2 Member Provider Search - Member Auth - PROD
 	Then the user navigates to Health and Wellness page from Provider Search page
 	Then the user navigates to Account Settings page from Provider Search page
 
-	@prod_providerSearch01_mapd
+	@prod_sanity_providerSearch01_mapd
     Examples: 
 	    | index | username  | password  | MemUserName          | planType | memberType              | 
 	    | S02   | kkumard   | tnps459#  | LMHOCHSCHILD11       | MAPD     | UHC_IND_ProviderSearch  |
 
-	@prod_providerSearch01_pdp
+	@prod_sanity_providerSearch01_pdp
     Examples: 
 	    | index | username  | password  | MemUserName          | planType | memberType              | 
 	    | S03   | kkumard   | tnps459#  | Branford910            | PDP      | AARP_IND_ProviderSearch |	
 
-	@prod_providerSearch01_ma
+	@prod_sanity_providerSearch01_ma
     Examples: 
 	    | index | username  | password  | MemUserName          | planType | memberType              | 
         | S04   | kkumard   | tnps459#  | SOFYABAKMAN@MSN.COM  | MA       | UHC_IND_ProviderSearch  |
 
-	@prod_providerSearch01_medica_pcp
+	@prod_sanity_providerSearch01_medica_pcp
     Examples: 
 	    | index | username  | password  | MemUserName          | planType | memberType              |
 	    | S06   | kkumard   | tnps459#  | TCZUNIGA52           | MEDICA   | MEDICA_IND_ProviderSearch |
