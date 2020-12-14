@@ -1,7 +1,6 @@
 @vppPlanCompareAARPNew
 Feature: 1.01.3-Vpp to plan Compare Scenarios
 
-  #@vppPlanCompareAARP01 @vppPlanCompareAARPRun01New @vppPlanCompareAARPRegression
   Scenario Outline: TID: <TID> - Plan Type: <plantype> - Verify the checkbox for add to compare link is not visible for single plan on <site> site.
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
@@ -31,7 +30,6 @@ Feature: 1.01.3-Vpp to plan Compare Scenarios
       | 00003 | UHC  |   48101 | NO            | Wayne County     | MAPD     | future   |
       | 00004 | UHC  |   70072 | NO            | Jefferson Parish | MAPD     | future   |
 
-  #@vppPlanCompareAARP02 @vppPlanCompareAARPRun01New @vppPlanCompareAARPRegression
   Scenario Outline: TID: <TID> - Plan Type: <plantype> - Verify Call sticky action menu on <site> site
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
@@ -58,7 +56,6 @@ Feature: 1.01.3-Vpp to plan Compare Scenarios
       | TID   | site | zipcode | isMultiCounty | county             | plantype | planyear |
       | 00005 | UHC  |   90210 | NO            | Los Angeles County | MAPD     | future   |
 
-  @vppPlanCompareAARP04 @vppPlanCompareAARPRun01New @vppPlanCompareAARPRegression
   Scenario Outline: TID: <TCID> - Plan Type: <plantype> - To verify links displayed in the global footer of <site> site
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
@@ -92,7 +89,6 @@ Feature: 1.01.3-Vpp to plan Compare Scenarios
       | TCID  | site | zipcode | isMultiCounty | county             | plantype | planyear |
       | 00007 | UHC  |   90210 | No            | Los Angeles County | MAPD     | future   |
 
-  #    @vppPlanCompareAARP05 @vppPlanCompareAARPRun01New @vppPlanCompareAARPRegression
   Scenario Outline: TID: <TCID> - Plan Type: <plantype> -Navigation for plan comapre to Back to summary page on <site> site
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
@@ -117,7 +113,6 @@ Feature: 1.01.3-Vpp to plan Compare Scenarios
       | TCID  | site | zipcode | isMultiCounty | county             | plantype | planyear |
       | 00008 | UHC  |   90210 | No            | Los Angeles County | MAPD     | future   |
 
-  #      @vppPlanCompareAARP06 @vppPlanCompareAARPRun01New @vppPlanCompareAARPRegression
   Scenario Outline: TID: <TID> - Plan Type: <plantype> - Verify a plan can be removed using Remove link from the widget on the top of page on <site> site
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
@@ -145,7 +140,6 @@ Feature: 1.01.3-Vpp to plan Compare Scenarios
       | TID   | site | zipcode | isMultiCounty | county             | plantype | planyear |
       | 00009 | UHC  |   90210 | NO            | Los Angeles County | MAPD     | future   |
 
-  # @vppPlanCompareAARP07 @vppPlanCompareAARPRun01New @vppPlanCompareAARPRegression
   Scenario Outline: TID: <TID> - Plan Type: <plantype> - Verify a plan can be added while on plan compare page by using '+Add a plan' widget on <site> site.
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
@@ -173,7 +167,6 @@ Feature: 1.01.3-Vpp to plan Compare Scenarios
       | TID   | site | zipcode | isMultiCounty | county             | plantype | count | planyear |
       | 00010 | UHC  |   90210 | NO            | Los Angeles County | MAPD     |     1 | future   |
 
-  # @vppPlanCompareAARP08 @vppPlanCompareAARPRun02New @vppPlanCompareAARPRegression
   Scenario Outline: TID: <TID> - Plan Type: <plantype> - valiadation of Add provider from VPP and Edit provider from plan compare page for <site> site
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
@@ -207,7 +200,6 @@ Feature: 1.01.3-Vpp to plan Compare Scenarios
       | TID   | site | zipcode | isMultiCounty | county             | plantype | planname                                            | planyear |
       | 00011 | UHC  |   90210 | NO            | Los Angeles County | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) | future   |
 
-  #@vppPlanCompareAARP09 @vppPlanCompareAARPRun02New @vppPlanCompareAARPRegression
   Scenario Outline: TID: <TID> - Plan Type: <plantype> - valiadation of Add provider from plan compare and Edit provider from plan compare page for <site> site
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
@@ -239,7 +231,6 @@ Feature: 1.01.3-Vpp to plan Compare Scenarios
       | TID   | site | zipcode | isMultiCounty | county             | plantype | planname                                            | planyear |
       | 00012 | UHC  |   90210 | NO            | Los Angeles County | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) | future   |
 
-  # @vppPlanCompareAARP10 @vppPlanCompareAARPRun02New @vppPlanCompareAARPRegression
   Scenario Outline: TID: <TID> - Plan Type: <plantype> - valiadation of Add Hospital from VPP and Edit hospital from plan compare page for <site> site.
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
@@ -273,7 +264,6 @@ Feature: 1.01.3-Vpp to plan Compare Scenarios
       | TID   | site | zipcode | isMultiCounty | county          | plantype | planname                             | planyear |
       | 00013 | UHC  |   10010 | NO            | New York County | MAPD     | AARP Medicare Advantage Plan 1 (HMO) | future   |
 
-  #    @vppPlanCompareAARP11 @vppPlanCompareAARPRun02New @vppPlanCompareAARPRegression
   Scenario Outline: TID: <TID> - Plan Type: <plantype> - valiadation of Add Hosptial from plan compare and Edit Hosptial from plan compare page for <site> site
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
@@ -455,12 +445,12 @@ Feature: 1.01.3-Vpp to plan Compare Scenarios
     @VppPlanCompareCommon_AARP03
     Examples: 
       | TCID  | site | zipcode | isMultiCounty | county          | plantype | planIndices | planyear |
-      | 00020 | AARP |   10010 | No            | New York County | MAPD     |           9 | future   |
+      | 00020 | AARP |   10010 | No            | New York County | MAPD     |           9 | current  |
 
     @VppPlanCompareCommon_UHC03
     Examples: 
       | TCID  | site | zipcode | isMultiCounty | county          | plantype | planIndices | planyear |
-      | 00020 | UHC  |   10010 | No            | New York County | MAPD     |           9 | future   |
+      | 00020 | UHC  |   10010 | No            | New York County | MAPD     |           9 | current  |
 
   @vppPlanCompareAARP16 @vppPlanCompareAARPRun02 @vppPlanCompareAARPRegression
   Scenario Outline: <TCID> - Plan Type: <plantype> - Validation for remove icon should be disabled when only one plan on plan compare on <site>
