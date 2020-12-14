@@ -128,6 +128,7 @@ public class TellUsAboutDrug extends UhcDriver {
 	public BuildYourDrugList ClickAddDrug() {
 		validateNew(AddDrugBtn);
 		jsClickNew(AddDrugBtn);
+		waitForPageLoadSafari();
 		CommonUtility.waitForPageLoad(driver, BuildDrugPage_EnterDrugNameTxt, 30);
 		if (validateNew(BuildDrugPage_EnterDrugNameTxt)) {
 			Assert.assertTrue("Naviagted to Build Drug List Page", true);

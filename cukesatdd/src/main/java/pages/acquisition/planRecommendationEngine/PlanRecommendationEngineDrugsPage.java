@@ -264,6 +264,7 @@ public class PlanRecommendationEngineDrugsPage extends UhcDriver {
 	public void skipDrugs(String drugsSelection) {
 		drugpageOptions(drugsSelection);
 		jsClickNew(continueBtn);
+		waitForPageLoadSafari();			//E2E: Additional wait for Safari browser only
 		System.out.println("Validating " + page + " page Continue button functionality");
 		desktopCommonUtils.nextPageValidation(page.toUpperCase() + "skip");
 	}
@@ -323,6 +324,7 @@ public class PlanRecommendationEngineDrugsPage extends UhcDriver {
 		threadsleep(2000);
 		drugnamesList();
 		jsClickNew(continueBtn);
+		waitForPageLoadSafari();
 		System.out.println("Validating " + page + " page Continue button functionality");
 		desktopCommonUtils.nextPageValidation(page.toUpperCase());
 	}
@@ -400,7 +402,8 @@ public class PlanRecommendationEngineDrugsPage extends UhcDriver {
 			threadsleep(1000);
 			drugNames.add(drugNameList.get(i).findElement(By.cssSelector("p:nth-child(1)")).getText().trim()
 					.toUpperCase() + " "
-					+ drugNameList.get(i).findElement(By.cssSelector("p:nth-child(2)")).getText().toUpperCase());
+					+ drugNameList.get(i).findElement(By.cssSelector("p:nth-child(2)")).getText().trim()
+					.toUpperCase());
 		}
 		Collections.sort(drugNames);
 		System.out.println("Drugs Name list is : " + drugNames);
