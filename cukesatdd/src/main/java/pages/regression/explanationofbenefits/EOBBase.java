@@ -449,7 +449,7 @@ public class EOBBase extends EOBWebElements{
 		String apiReqeust=null;
 		List<LogEntry> entries = driver.manage().logs().get(LogType.PERFORMANCE).getAll();
 
-		if (eobType.equals("dream") && !memberType.contains("DSNP") && !planType.equals("SSP")) {
+		if (eobType.equals("dream") && !planType.equals("SSP")) {
 			//note: need to do two search
 			System.out.println("TEST - first API request...");
 			String lookForText1="/dreamEob/search?memberNumber=";
@@ -484,8 +484,29 @@ public class EOBBase extends EOBWebElements{
 				System.out.println("TEST - r_urlStr="+r_urlStr);
 				urlList.add(r_urlStr);
 			}
+			
+			if (memberType.contains("DSNP")) {
+				System.out.println("TEST - DSNP API request...");
+				lookForText1="dreamEob/search/medicaleobs?";
+				lookForText2="responseReceived";
+
+				for (LogEntry entry : entries) {
+					String line=entry.getMessage();
+					//System.out.println("TEST each line="+line);
+					if (line.contains(lookForText1) && line.contains(lookForText2)) {
+						apiReqeust=line;
+						//keepForDebug System.out.println("TEST found line="+line);
+						//break; //note: only break if looking for the first response, otherwise always take the latest line
+					}
+				}
+				Assert.assertTrue("PROBLEM - unable to locate the network entry that contains '"+lookForText1+"' and '"+lookForText2+"'", apiReqeust!=null);
+				String d_urlStr=parseLine(apiReqeust);
+				System.out.println("TEST - d_urlStr="+d_urlStr);
+				urlList.add(d_urlStr);				
+			}
+			
 			return urlList; 
-		} else if (memberType.contains("DSNP") || planType.equals("SSP")) {
+		} else if (planType.equals("SSP")) {
 			//note: need to do two search, release 12/16 has cover medical only
 			System.out.println("TEST - first API request...");
 			String lookForText1="dreamEob/search/medicaleobs?";

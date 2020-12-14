@@ -163,7 +163,7 @@ public class EobStepDefinition {
 
 			EobApiResponse r_eobResponseObj=new EobApiResponse();
 			//TODO: for release 12/16 DSNP works like MA with just medical EOB for now
-			if (!planType.equals("MA") && !memberType.contains("DSNP") && !planType.contains("SSP")) {
+			if (!planType.equals("MA") && !planType.contains("SSP")) {
 				String r_requestUrl=tmpResponsJson.get(1);
 				System.out.println("TEST - r_requestUrl="+r_requestUrl);
 				String r_apiResponseJson=eobPage.getApiResponse(planType, memberType, r_requestUrl);
@@ -171,6 +171,17 @@ public class EobStepDefinition {
 				Assert.assertTrue("PROBLEM - unable to get a successful API response for further testing. resp2="+r_apiResponseJson, r_eobResponseObj!=null);
 				System.out.println("Before cleanup, 2nd call size="+r_eobResponseObj.getListOfEob().size());
 			}
+			
+			EobApiResponse d_eobResponseObj=new EobApiResponse();
+			if (memberType.contains("DSNP")) {
+				String d_requestUrl=tmpResponsJson.get(2);
+				System.out.println("TEST - d_requestUrl="+d_requestUrl);
+				String d_apiResponseJson=eobPage.getApiResponse(planType, memberType, d_requestUrl);
+				d_eobResponseObj=eobPage.parseApiResponse(d_apiResponseJson);
+				Assert.assertTrue("PROBLEM - unable to get a successful API response for further testing. resp2="+d_apiResponseJson, d_eobResponseObj!=null);
+				System.out.println("Before cleanup, 3rd (medicaleobs) call size="+d_eobResponseObj.getListOfEob().size());
+			}
+			
 			//note: remove duplicated compoundDoc
 			List<Eob> uniqueEobList=new ArrayList<Eob>();
 			if (eobResponseObj.getListOfEob().size()>0) {
@@ -204,6 +215,23 @@ public class EobStepDefinition {
 				if (!found) {
 					System.out.println("TEST - not yet added, add it");
 					uniqueEobList.add(r_eobResponseObj.getListOfEob().get(i));
+				}
+			}
+			if (memberType.contains("DSNP")) {
+				for(int i=0; i<d_eobResponseObj.getListOfEob().size(); i++) {
+					boolean found=false;
+					System.out.println("TEST - 3 - check to see if compoundDoc='"+d_eobResponseObj.getListOfEob().get(i).getCompoundDoc()+"' has been added to the list yet");
+					for(int k=0; k<uniqueEobList.size(); k++) {
+						if (d_eobResponseObj.getListOfEob().get(i).getCompoundDoc().equals(uniqueEobList.get(k).getCompoundDoc())) {
+							found=true;
+							System.out.println("TEST - already added, skip");
+							break;
+						}
+					}
+					if (!found) {
+						System.out.println("TEST - not yet added, add it");
+						uniqueEobList.add(d_eobResponseObj.getListOfEob().get(i));
+					}
 				}
 			}
 			
