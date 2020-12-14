@@ -202,7 +202,7 @@ public class VppCommonStepDefinition {
 			Assert.fail("Error in loading the compare plans page");
 	}
 
-
+	@Then("^verify plan compare page is loaded$")
 	public void verify_plan_compare_page_is_loaded_on_AARP() throws Throwable {
 		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
 				.getBean(PageConstants.PLAN_COMPARE_PAGE);
