@@ -811,6 +811,30 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	private WebElement enrolledPlansBanner;
 	@FindBy(xpath = "(//label[text()='Add to compare'])[1]")
 	private WebElement compareLink;
+	
+	@FindBy(xpath = "(//a[@class='add-button'])[2]")
+	private WebElement addBtn2;
+
+	@FindBy(xpath = "(//a[@class='add-button'])[3]")
+	private WebElement addBtn3;
+	
+	@FindBy(xpath = "(//button[@class='unliked buttonIntoText'])[10]")
+	private WebElement savePlanK;
+		
+	@FindBy(xpath = "(//button[@class='unliked buttonIntoText'])[11]")
+	private WebElement savePlanL;
+	
+	@FindBy(xpath = "(//a[@class='back-to-plans resTopPadding10 leftPadding20 back-arrow-left']")
+	private WebElement backToPlans;
+
+	@FindBy(xpath = "(//button[text()='Plan K' and @class='addComparePlan  btn secondary rightMargin bottomMargin15'])[2]")
+	private WebElement planK;
+		
+	@FindBy(xpath = "(//button[text()='Plan L' and @class='addComparePlan  btn secondary rightMargin bottomMargin15'])[2]")
+	private WebElement planL;
+
+	@FindBy(xpath = "(//h3[contains(text(),'Plan L')])[1]")
+	private WebElement displayplanL;
 
 	@FindBy(xpath = "//div[contains(@class,'component_info_wrap')]")
 	private WebElement nextBestActionModal;
@@ -5150,7 +5174,29 @@ private static String NEXT_ACTION_MODAL_MSG_CONTINUE_ENROLLMENT = "Continue my e
 			System.out.println("NBA modal not found");
 		}
 	}
-
+	
+	public boolean addTwoMorePlansForComparing() throws InterruptedException {
+		boolean flag = false;
+		Actions action = new Actions(driver);
+		Thread.sleep(2000);
+		action.moveToElement(addBtn2).build().perform();
+		addBtn2.click();
+		Thread.sleep(10000);
+		action.moveToElement(planK).build().perform();
+		planK.click();
+		Thread.sleep(10000);
+		action.moveToElement(addBtn3).build().perform();
+		addBtn3.click();
+		Thread.sleep(10000);
+		action.moveToElement(planL).build().perform();
+		planL.click();
+		Thread.sleep(10000);
+		if(displayplanL.isDisplayed()) {
+			flag = true;
+		}
+		
+	return flag;
+		}
 	public boolean clickAndVerifyNavigateToPage(String btn, int plans, String shot) throws InterruptedException {
 		boolean flag = false;
 		Actions action = new Actions(driver);
@@ -5164,7 +5210,7 @@ private static String NEXT_ACTION_MODAL_MSG_CONTINUE_ENROLLMENT = "Continue my e
 				while (plans > 0) {
 					Thread.sleep(2000);
 					WebElement comparePlanLink = driver
-							.findElement(By.xpath("(//label[text()='Add to compare'])[" + plans + "])"));
+							.findElement(By.xpath("(//label[text()='Add to compare'])[" + plans + "]"));
 					action.moveToElement(comparePlanLink).build().perform();
 					comparePlanLink.click();
 					Thread.sleep(10000);
@@ -5188,21 +5234,25 @@ private static String NEXT_ACTION_MODAL_MSG_CONTINUE_ENROLLMENT = "Continue my e
 				while (plans > 0) {
 					Thread.sleep(2000);
 					WebElement savePlanLink = driver
-							.findElement(By.xpath("(//button[@class='unliked buttonIntoText'])[" + plans + "])"));
+							.findElement(By.xpath("(//button[@class='unliked buttonIntoText'])[" + plans + "]"));
 					action.moveToElement(savePlanLink).build().perform();
 					savePlanLink.click();
 					Thread.sleep(10000);
 					plans = plans - 1;
+					WebElement close = driver.findElement(By.xpath("//img[@class='uhc-modal__close']"));
+					if(close.isDisplayed()) {
+						close.click();
+					}
 				}
 			} else if (shot.equalsIgnoreCase("second")) {
 				Thread.sleep(2000);
-				WebElement savePlan3 = driver.findElement(By.xpath("(//button[@class='unliked buttonIntoText'])[10])"));
-				action.moveToElement(savePlan3).build().perform();
-				savePlan3.click();
+				action.moveToElement(savePlanK).build().perform();
+				savePlanK.click();
 				Thread.sleep(10000);
-				WebElement savePlan4 = driver.findElement(By.xpath("(//button[@class='unliked buttonIntoText'])[12])"));
-				action.moveToElement(savePlan4).build().perform();
-				savePlan4.click();
+				action.moveToElement(savePlanL).build().perform();
+				savePlanL.click();
+				Thread.sleep(10000);
+				backToPlans.click();
 				Thread.sleep(10000);
 			}
 
