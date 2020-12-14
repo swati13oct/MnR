@@ -30,7 +30,7 @@ Feature: S1.1 To test Member Auth premium payment flows Micro App.
       | F243897 | jkuma14  | Brock@04 | Pramila1946 | SHIP     | Last 24 months | Last 18 months | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    | Recurring   |
 
  
-  @regressionMemberPROD
+  @regressionMemberPROD1
   Scenario Outline: UID: <UID> -plan: <planType> - Test Case 07 - Verify SHIP Update Recurring EFT flow
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
@@ -54,7 +54,7 @@ Feature: S1.1 To test Member Auth premium payment flows Micro App.
    
     Examples: 
       | UID     | planType | memberType          | routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName |username | password | memUserName       | 
-      | F243897 | SHIP     | SHIPUpdate_Payments | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    | jkuma14  | Brock@04 | vernajohnson19651 | 
+      | F243897 | SHIP     | SHIPUpdate_Payments | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    | jkuma14  | Brock@04 | dmpeters513@gmail.com | 
       
       
   @regressionMemberPROD @sanityMemberPROD2
