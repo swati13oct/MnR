@@ -14,8 +14,8 @@ Feature: 1.08. ACQ- Visitor Profile Authenticated NBA AARP
     And user removes existing saved plans in visitor profile
     Then user clicks on home menu from Visitor profile page
     When the user performs plan search using following information
-      | Zip Code        | <zipcode>         |
-      | County Name     | <county>          |
+      | Zip Code        | <zipcode>       |
+      | County Name     | <county>        |
       | Is Multi County | <isMultiCounty> |
     And the user views the plans of the below plan type
       | Plan Type | <plantype> |
@@ -23,25 +23,25 @@ Feature: 1.08. ACQ- Visitor Profile Authenticated NBA AARP
     When user clicks on Saved items on NBA
     Then user should be navigated to visitor profile page
 
-    @getStartedNBA_MAPD_AARP
+    @getStartedNBA_MAPD_AARP @authenticatedNBAMAPDAARP01
     Examples: 
-      | site | userName      | password    | isMultiCounty | zipcode | county          | plantype |
-      | AARP | chargersqa@23 | Password@3 | NO              |   10001 | New York County | MAPD     |
-      
-      @getStartedNBA_PDP_AARP
-    Examples: 
-      | site | userName      | password    | isMultiCounty | zipcode | county          | plantype |
-      | AARP | chargersqa@23 | Password@3 | NO              |   10001 | New York County | PDP     |
+      | site | userName      | password   | isMultiCounty | zipcode | county          | plantype |
+      | AARP | chargersqa@23 | Password@3 | NO            |   10001 | New York County | MAPD     |
 
-    @getStartedNBA_MAPD_UHC
+    @getStartedNBA_PDP_AARP @authenticatedNBAPDPAARP01
     Examples: 
-      | site | userName      | password    | isMultiCounty | zipcode | county          | plantype |
-      | UHC  | chargersqa@23 | Password@3 | NO              |   10001 | New York County | MAPD     |
-      
-      @getStartedNBA_PDP_UHC
+      | site | userName      | password   | isMultiCounty | zipcode | county          | plantype |
+      | AARP | chargersqa@23 | Password@3 | NO            |   10001 | New York County | PDP      |
+
+    @getStartedNBA_MAPD_UHC01 @authenticatedNBAMAPDUHC01
     Examples: 
-      | site | userName      | password    | isMultiCounty | zipcode | county          | plantype |
-      | UHC  | chargersqa@23 | Password@3 | NO              |   10001 | New York County | PDP     |
+      | site | userName      | password   | isMultiCounty | zipcode | county          | plantype |
+      | UHC  | chargersqa@23 | Password@3 | NO            |   10001 | New York County | MAPD     |
+
+    @getStartedNBA_PDP_UHC02 @authenticatedNBAPDPUHC02
+    Examples: 
+      | site | userName      | password   | isMultiCounty | zipcode | county          | plantype |
+      | UHC  | chargersqa@23 | Password@3 | NO            |   10001 | New York County | PDP      |
 
   @NBAAuthenticatedMAPD @decRelease
   Scenario Outline: Verify NBA for authenticated Visitor Profile VPP summary page
@@ -56,8 +56,8 @@ Feature: 1.08. ACQ- Visitor Profile Authenticated NBA AARP
     And user removes existing saved plans in visitor profile
     Then user clicks on home menu from Visitor profile page
     When the user performs plan search using following information
-      | Zip Code        | <zipcode>         |
-      | County Name     | <county>          |
+      | Zip Code        | <zipcode>       |
+      | County Name     | <county>        |
       | Is Multi County | <isMultiCounty> |
     And the user views the plans of the below plan type
       | Plan Type | <plantype> |
@@ -83,15 +83,25 @@ Feature: 1.08. ACQ- Visitor Profile Authenticated NBA AARP
     When user clicks on Saved items on NBA
     Then user should be navigated to visitor profile page
 
-    @authenticatedNBA_MAPD_AARP
+    @authenticatedNBA_MAPD_AARP @authenticatedNBAMAPDAARP01
     Examples: 
-      | site | userName      | password    | isMultiCounty | zipcode | county          | plantype | drugName | dosage   | quantity | frequency     | zipcode | radius   | quantity | frequency     | branded | testPlans                            |
-      | AARP | chargersqa@23 | Password@3 | NO              |   10001 | New York County | MAPD     | Lipitor  | TAB 10MG |       30 | Every 1 month |   90210 | 15 miles |       30 | Every 1 month | yes     | AARP Medicare Advantage Plan 1 (HMO) |
+      | site | userName      | password   | isMultiCounty | zipcode | county          | plantype | drugName | dosage   | quantity | frequency     | zipcode | radius   | quantity | frequency     | branded | testPlans                            |
+      | AARP | chargersqa@23 | Password@3 | NO            |   10001 | New York County | MAPD     | Lipitor  | TAB 10MG |       30 | Every 1 month |   90210 | 15 miles |       30 | Every 1 month | yes     | AARP Medicare Advantage Plan 1 (HMO) |
 
-    @authenticatedNBA_MAPD_UHC
+    @authenticatedNBA_PDP_AARP01 @authenticatedNBAPDPAARP01
     Examples: 
-      | site | userName      | password    | isMultutiCounty | zipcode | county          | plantype | drugName | dosage   | quantity | frequency     | zipcode | radius   | quantity | frequency     | branded | testPlans                            |
+      | site | userName | password | isMultiCounty | zipcode | county          | plantype | drugName | dosage   | quantity | frequency     | zipcode | radius   | quantity | frequency     | branded | testPlans                       |
+      | AARP | deep120  | Jagir@83 | NO            |   10001 | New York County | PDP      | Lipitor  | TAB 10MG |       30 | Every 1 month |   90210 | 15 miles |       30 | Every 1 month | yes     | AARP MedicareRx Walgreens (PDP) |
+
+    @authenticatedNBA_MAPD_UHC01 @authenticatedNBAMAPDUHC01
+    Examples: 
+      | site | userName      | password   | isMultutiCounty | zipcode | county          | plantype | drugName | dosage   | quantity | frequency     | zipcode | radius   | quantity | frequency     | branded | testPlans                            |
       | UHC  | chargersqa@23 | Password@3 | NO              |   10001 | New York County | MAPD     | Lipitor  | TAB 10MG |       30 | Every 1 month |   90210 | 15 miles |       30 | Every 1 month | yes     | AARP Medicare Advantage Plan 1 (HMO) |
+
+    @authenticatedNBA_PDP_UHC02 @authenticatedNBAPDPUHC02
+    Examples: 
+      | site | userName      | password   | isMultiCounty | zipcode | county          | plantype | drugName | dosage   | quantity | frequency     | zipcode | radius   | quantity | frequency     | branded | testPlans                       |
+      | UHC  | chargersqa@23 | Password@3 | NO            |   10001 | New York County | PDP      | Lipitor  | TAB 10MG |       30 | Every 1 month |   90210 | 15 miles |       30 | Every 1 month | yes     | AARP MedicareRx Walgreens (PDP) |
 
   @continueEnrollmentNBA @decRelease
   Scenario Outline: Verify NBA for Continue Enrollment for authenticated Visitor Profile VPP summary page for single plan
@@ -106,8 +116,8 @@ Feature: 1.08. ACQ- Visitor Profile Authenticated NBA AARP
     And user removes existing saved plans in visitor profile
     Then user clicks on home menu from Visitor profile page
     When the user performs plan search using following information
-      | Zip Code        | <zipcode>         |
-      | County Name     | <county>          |
+      | Zip Code        | <zipcode>       |
+      | County Name     | <county>        |
       | Is Multi County | <isMultiCounty> |
     And the user views the plans of the below plan type
       | Plan Type | <plantype> |
@@ -115,18 +125,27 @@ Feature: 1.08. ACQ- Visitor Profile Authenticated NBA AARP
     When user clicks on continue enrollment button
     Then user should navigated to enrollment page
 
-    @continueEnrollmentNBA_MAPD_AARP
+    @continueEnrollmentNBA_MAPD_AARP @authenticatedNBAMAPDAARP01
     Examples: 
-      | site | userName         | password    | isMultiCounty | zipcode | county          | plantype |
-      | AARP | jarvisstage23111 | Password@15 | NO              |   55344 | Hennepin County | MAPD     |
+      | site | userName     | password   | isMultiCounty | zipcode | county          | plantype |
+      | AARP | chargersqa@2 | Password@2 | NO            |   55344 | Hennepin County | MAPD     |
 
-    @continueEnrollmentNBA__MAPD_UHC
+    @authenticatedNBAPDPAARP01
     Examples: 
-      | site | userName         | password    | isMultiCounty | zipcode | county          | plantype |
-      | UHC  | jarvisstage23111 | Password@15 | NO              |   55344 | Hennepin County | MAPD     |
+      | site | userName     | password   | isMultiCounty | zipcode | county          | plantype |
+      | AARP | chargersqa@2 | Password@2 | NO            |   55344 | Hennepin County | PDP      |
 
-      
-      @continueEnrollmentNBAMultiplePlan @decRelease
+    @continueEnrollmentNBA__MAPD_UHC @authenticatedNBAMAPDUHC01
+    Examples: 
+      | site | userName     | password   | isMultiCounty | zipcode | county          | plantype |
+      | UHC  | chargersqa@2 | Password@2 | NO            |   55344 | Hennepin County | MAPD     |
+
+    @authenticatedNBAPDPUHC02
+    Examples: 
+      | site | userName     | password   | isMultiCounty | zipcode | county          | plantype |
+      | UHC  | chargersqa@2 | Password@2 | NO            |   55344 | Hennepin County | PDP      |
+
+  @continueEnrollmentNBAMultiplePlan @decRelease
   Scenario Outline: Verify NBA for Continue Enrollment for authenticated Visitor Profile VPP summary page for multiple plan
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
@@ -139,8 +158,8 @@ Feature: 1.08. ACQ- Visitor Profile Authenticated NBA AARP
     And user removes existing saved plans in visitor profile
     Then user clicks on home menu from Visitor profile page
     When the user performs plan search using following information
-      | Zip Code        | <zipcode>         |
-      | County Name     | <county>          |
+      | Zip Code        | <zipcode>       |
+      | County Name     | <county>        |
       | Is Multi County | <isMultiCounty> |
     And the user views the plans of the below plan type
       | Plan Type | <plantype> |
@@ -148,13 +167,24 @@ Feature: 1.08. ACQ- Visitor Profile Authenticated NBA AARP
     When user clicks on Select a plan button on NBA
     Then continue enrollment button should be displayed for each plan
     When user clicks on continue enrollment button on the modal
-		Then user should navigated to enrollment page
-    @continueEnrollmentNBA_PDP_AARP
-    Examples: 
-      | site | userName         | password    | isMultiCounty | zipcode | county          | plantype |
-      | AARP | jarvisstage23111 | Password@15 | NO              |   55344 | Hennepin County | PDP     |
+    Then user should navigated to enrollment page
 
-    @continueEnrollmentNBA__PDP_UHC
+    @authenticatedNBAMAPDAARP01
     Examples: 
-      | site | userName         | password    | isMultiCounty | zipcode | county          | plantype |
-      | UHC  | jarvisstage23111 | Password@15 | NO              |   55344 | Hennepin County | PDP     |
+      | site | userName     | password   | isMultiCounty | zipcode | county          | plantype |
+      | AARP | chargersqa@3 | Password@3 | NO            |   55344 | Hennepin County | MAPD     |
+
+    @continueEnrollmentNBA_PDP_AARP @authenticatedNBAPDPAARP01
+    Examples: 
+      | site | userName     | password   | isMultiCounty | zipcode | county          | plantype |
+      | AARP | chargersqa@3 | Password@3 | NO            |   55344 | Hennepin County | PDP      |
+
+    @continueEnrollmentNBA__MAPD_UHC01 @authenticatedNBAMAPDAARP01
+    Examples: 
+      | site | userName     | password   | isMultiCounty | zipcode | county          | plantype |
+      | UHC  | chargersqa@3 | Password@3 | NO            |   55344 | Hennepin County | MAPD     |
+
+    @continueEnrollmentNBA__PDP_UHC01 @authenticatedNBAPDPUHC02
+    Examples: 
+      | site | userName     | password   | isMultiCounty | zipcode | county          | plantype |
+      | UHC  | chargersqa@3 | Password@3 | NO            |   55344 | Hennepin County | PDP      |
