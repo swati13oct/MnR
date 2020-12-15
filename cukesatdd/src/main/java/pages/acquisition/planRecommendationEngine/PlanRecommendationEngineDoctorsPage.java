@@ -530,13 +530,21 @@ public class PlanRecommendationEngineDoctorsPage extends UhcDriver {
 
 	public void edit_doctor(String doctor, String doctorsName, String multiDoctor) {
 		doctorspageOptions(doctor);
-		continueBtn.click();
+		jsClickNew(continueBtn);
+		if(validate(modalEditdoctors)) {
+			jsClickNew(modalEditdoctors);
+		}
+		String curWindow = driver.getWindowHandle();
+		System.out.println(curWindow);
+		jsClickNew(modalFinddoctors);
+		threadsleep(5000);
 		if (doctor.equalsIgnoreCase("Lookup")) {
 			if (multiDoctor.equalsIgnoreCase("YES"))
-				doctorModellookup(doctorsName, 3);
+				validateLinksanotherWindow(curWindow, "Doctors", doctorsName, 3);
 			else
-				doctorModellookup(doctorsName, 1);
+				validateLinksanotherWindow(curWindow, "Doctors", doctorsName, 1);
 		}
+		jsClickNew(modalContinuedoctors);
 	}
 	
 	public void addProviderEdit(String search) {
