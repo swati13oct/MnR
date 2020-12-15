@@ -438,11 +438,12 @@ public class IsDecisionGuideStep1 extends UhcDriver{
 		FirstNameTxt.sendKeys(FirstName);
 		LastNameTxt.sendKeys(LastName);
 		if(DistributionMethod.equalsIgnoreCase("email")){
-			EmailOptionSelection.click();
+//			EmailOptionSelection.click();
+			jsClickNew(EmailOptionSelection);
 			EmailTxt.sendKeys(Email);
 		}
 		else{
-			MailOptionSelection.click();
+			jsClickNew(MailOptionSelection);
 		}
 	}
 

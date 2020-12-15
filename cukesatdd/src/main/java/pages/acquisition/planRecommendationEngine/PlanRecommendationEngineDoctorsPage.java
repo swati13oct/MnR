@@ -227,6 +227,7 @@ public class PlanRecommendationEngineDoctorsPage extends UhcDriver {
 		String curWindow = driver.getWindowHandle();
 		System.out.println(curWindow);
 //		modalFinddoctors.click();
+		validate(modalFinddoctors);
 		jsClickNew(modalFinddoctors);
 		validateLinksanotherWindow(curWindow, "Doctors", search, count);
 		threadsleep(5000);
@@ -530,7 +531,8 @@ public class PlanRecommendationEngineDoctorsPage extends UhcDriver {
 
 	public void edit_doctor(String doctor, String doctorsName, String multiDoctor) {
 		doctorspageOptions(doctor);
-		continueBtn.click();
+//		continueBtn.click();
+		jsClickNew(continueBtn);					//E2E : .click does not work in Safari, changed to jsClickNew
 		if (doctor.equalsIgnoreCase("Lookup")) {
 			if (multiDoctor.equalsIgnoreCase("YES"))
 				doctorModellookup(doctorsName, 3);
