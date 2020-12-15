@@ -376,12 +376,12 @@ Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanDetails AARP - To test DCE - VPP Plan De
     And the user verifies the catastrophic coverage message
       | catastrophicCoverage | <catastrophicCoverageMessage> |
 
-    @dceRedesignExtraHelpAlertDetailPage_AARP
+    @dceRedesignExtraHelpAlertDetailPage_AARP @extraHelpSNPAARP
     Examples: 
       | site | zipcode | plantype | county       | isMultutiCounty | drug1 | planyear | planname                                   | coverageGapMessage                                                           | catastrophicCoverageMessage                                                           |
       | AARP |   78006 | SNP      | Bexar County | yes             | Emsam | future   | UnitedHealthcare Dual Complete (HMO D-SNP) | During the Coverage Gap Stage, the plan pays all of the cost for your drugs. | During the Catastrophic Coverage Stage, the plan pays all of the cost for your drugs. |
 
-    @dceRedesignExtraHelpAlertDetailPage_UHC
+    @dceRedesignExtraHelpAlertDetailPage_UHC @extraHelpDSNUHC
     Examples: 
       | site | zipcode | plantype | county       | isMultutiCounty | drug1 | planyear | planname                                   | coverageGapMessage                                                           | catastrophicCoverageMessage                                                           |
       | UHC  |   78006 | SNP      | Bexar County | yes             | Emsam | future   | UnitedHealthcare Dual Complete (HMO D-SNP) | During the Coverage Gap Stage, the plan pays all of the cost for your drugs. | During the Catastrophic Coverage Stage, the plan pays all of the cost for your drugs. |
@@ -521,12 +521,12 @@ Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanDetails AARP - To test DCE - VPP Plan De
     Then user verify and click on switch to generic NBA on drug detail page
     Then verify drug is switched to generic on detail page
 
-    @dceSwitchtoGenericNBA_MAPD_AARP
+    @dceSwitchtoGenericNBA_MAPD_AARP  @switchtoGenericAARP
     Examples: 
       | site | zipcode | plantype | county       | isMultutiCounty | drug1   | drug2   | planname                             |
       | AARP |   78006 | MAPD     | Bexar County | yes             | Lipitor | orfadin | AARP Medicare Advantage Choice (PPO) |
 
-    @dceSwitchtoGenericNBA_MAPD_UHC
+    @dceSwitchtoGenericNBA_MAPD_UHC @switchtoGenericUHC
     Examples: 
       | site | zipcode | plantype | county       | isMultutiCounty | drug1   | drug2   | planname                             |
       | UHC  |   78006 | MAPD     | Bexar County | yes             | Lipitor | orfadin | AARP Medicare Advantage Choice (PPO) |
@@ -730,8 +730,8 @@ Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanDetails AARP - To test DCE - VPP Plan De
 
     @dCERedesign_PlanSave_PDP_AARP @dceDrugDetailSaveAARP
     Examples: 
-      | site | zipcode | plantype | planyear | county       | isMultutiCounty | drug1   | planname                                              | planyear |
-      | AARP |   10001 | SNP      | future   | none | no             | Lipitor | UnitedHealthcare Dual Complete (HMO D-SNP) | future   |
+      | site | zipcode | plantype | planyear | county | isMultutiCounty | drug1   | planname                                   | planyear |
+      | AARP |   10001 | SNP      | future   | none   | no              | Lipitor | UnitedHealthcare Dual Complete (HMO D-SNP) | future   |
 
     @dCERedesign_PlanSave_MAPD_UHC @dceDrugDetailSaveUHC
     Examples: 
