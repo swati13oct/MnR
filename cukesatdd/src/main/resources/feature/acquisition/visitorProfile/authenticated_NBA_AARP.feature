@@ -169,7 +169,7 @@ Feature: 1.08. ACQ- Visitor Profile Authenticated NBA AARP
       | site | userName     | password   | isMultiCounty | zipcode | county          | plantype |
       | AARP | chargersqa@3 | Password@3 | NO            |   55344 | Hennepin County | PDP      |
 
-    @continueEnrollmentNBA__MAPD_UHC01 @authenticatedNBAMAPDAARP01
+    @continueEnrollmentNBA__MAPD_UHC01 @authenticatedNBAMAPDUHC01
     Examples: 
       | site | userName     | password   | isMultiCounty | zipcode | county          | plantype |
       | UHC  | chargersqa@3 | Password@3 | NO            |   55344 | Hennepin County | MAPD     |

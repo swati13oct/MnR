@@ -9,7 +9,7 @@ import cucumber.api.CucumberOptions;
 
 /**
  * this file is to run test cases for
- * RunMRATDDAcqAuthenticatedVisitorProfileNBAUlayer
+ * RunMRATDDAcqAuthenticatedVisitorProfileNBABlayerPDP
  */
 @RunWith(ExtendedCucumber.class)
 @ExtendedCucumberOptions(retryCount = 1, screenShotSize = "", screenShotLocation = "/screenshots/", jsonReport = "target/cucumber-RunMRATDDAcqAuthenticatedVisitorProfileNBABlayerPDP.json", detailedReport = true, detailedAggregatedReport = true, overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDAcqAuthenticatedVisitorProfileNBABlayerPDP")
