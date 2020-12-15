@@ -812,10 +812,10 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "(//label[text()='Add to compare'])[1]")
 	private WebElement compareLink;
 	
-	@FindBy(xpath = "(//a[@class='add-button'])[2]")
+	@FindBy(xpath = "(//a[@class='collapsed add-button'])[2]")
 	private WebElement addBtn2;
 
-	@FindBy(xpath = "(//a[@class='add-button'])[3]")
+	@FindBy(xpath = "(//a[@class='add-button collapsed'])[3]")
 	private WebElement addBtn3;
 	
 	@FindBy(xpath = "(//button[@class='unliked buttonIntoText'])[10]")
@@ -824,13 +824,13 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "(//button[@class='unliked buttonIntoText'])[11]")
 	private WebElement savePlanL;
 	
-	@FindBy(xpath = "(//a[@class='back-to-plans resTopPadding10 leftPadding20 back-arrow-left']")
+	@FindBy(xpath = "//a[contains(text(),'Back to all plans')]")
 	private WebElement backToPlans;
 
-	@FindBy(xpath = "(//button[text()='Plan K' and @class='addComparePlan  btn secondary rightMargin bottomMargin15'])[2]")
+	@FindBy(xpath = "(//button[@class='addComparePlan  btn secondary rightMargin bottomMargin15'])[2]")
 	private WebElement planK;
 		
-	@FindBy(xpath = "(//button[text()='Plan L' and @class='addComparePlan  btn secondary rightMargin bottomMargin15'])[2]")
+	@FindBy(xpath = "(//button[@class='addComparePlan  btn secondary rightMargin bottomMargin15'])[3]")
 	private WebElement planL;
 
 	@FindBy(xpath = "(//h3[contains(text(),'Plan L')])[1]")
@@ -1006,7 +1006,7 @@ private static String NEXT_ACTION_MODAL_MSG_CONTINUE_ENROLLMENT = "Continue my e
 			CommonUtility.waitForPageLoadNew(driver, planListContainer, 30);
 		} else if (planType.equalsIgnoreCase("MS")) {
 			CommonUtility.waitForPageLoadNew(driver, msPlansViewLink, 30);
-			// sleepBySec(2);
+			sleepBySec(2);
 			jsClickNew(msPlansViewLink);
 			waitForPageLoadSafari();
 			CommonUtility.waitForPageLoadNew(driver, medSuppZipCode, 30);
@@ -5182,21 +5182,18 @@ private static String NEXT_ACTION_MODAL_MSG_CONTINUE_ENROLLMENT = "Continue my e
 		action.moveToElement(addBtn2).build().perform();
 		addBtn2.click();
 		Thread.sleep(10000);
-		action.moveToElement(planK).build().perform();
-		planK.click();
-		Thread.sleep(10000);
+		jsClickNew(planK);
+		Thread.sleep(2000);
 		action.moveToElement(addBtn3).build().perform();
 		addBtn3.click();
 		Thread.sleep(10000);
-		action.moveToElement(planL).build().perform();
-		planL.click();
+		jsClickNew(planL);
 		Thread.sleep(10000);
-		if(displayplanL.isDisplayed()) {
-			flag = true;
+		flag=displayplanL.getAttribute("class").equalsIgnoreCase("inline");
+	
+		return flag;
 		}
-		
-	return flag;
-		}
+	
 	public boolean clickAndVerifyNavigateToPage(String btn, int plans, String shot) throws InterruptedException {
 		boolean flag = false;
 		Actions action = new Actions(driver);
@@ -5230,6 +5227,7 @@ private static String NEXT_ACTION_MODAL_MSG_CONTINUE_ENROLLMENT = "Continue my e
 				action.moveToElement(savePlanButton).build().perform();
 				savePlanButton.click();
 				Thread.sleep(2000);
+				flag=savePlanImg.getAttribute("class").equalsIgnoreCase("liked");
 			} else if (shot.equalsIgnoreCase("first")) {
 				while (plans > 0) {
 					Thread.sleep(2000);
@@ -5243,23 +5241,18 @@ private static String NEXT_ACTION_MODAL_MSG_CONTINUE_ENROLLMENT = "Continue my e
 					if(close.isDisplayed()) {
 						close.click();
 					}
+					flag=savePlanImg.getAttribute("class").equalsIgnoreCase("liked");
 				}
 			} else if (shot.equalsIgnoreCase("second")) {
 				Thread.sleep(2000);
-				action.moveToElement(savePlanK).build().perform();
-				savePlanK.click();
+				jsClickNew(savePlanK);
 				Thread.sleep(10000);
-				action.moveToElement(savePlanL).build().perform();
-				savePlanL.click();
+				jsClickNew(savePlanL);
 				Thread.sleep(10000);
+				flag=savePlanImg.getAttribute("class").equalsIgnoreCase("liked");
 				backToPlans.click();
 				Thread.sleep(10000);
 			}
-
-		}
-		action.moveToElement(savePlanImg).build().perform();
-		if (savePlanImg.getAttribute("class").equalsIgnoreCase("liked")) {
-			flag = true;
 		} else if (btn.equalsIgnoreCase("Information")) {
 			Thread.sleep(2000);
 			action.moveToElement(editYourInformationLink).build().perform();
@@ -5287,10 +5280,20 @@ private static String NEXT_ACTION_MODAL_MSG_CONTINUE_ENROLLMENT = "Continue my e
 	public boolean verifyPlanCount() throws InterruptedException {
 		boolean flag = false;
 		Thread.sleep(2000);
-		for (WebElement planToSave : unsavedPlanButton) {
-			planToSave.click();
-		}
+		
+		List<WebElement> unsavedPlanButton = driver.findElements(By.xpath("//span[@class='unliked buttonIntoText']"));
+		
 		int planToSaveCount = unsavedPlanButton.size();
+		
+		while (planToSaveCount > 0) {
+			Thread.sleep(2000);
+			WebElement planToSave = driver
+					.findElement(By.xpath("//span[@class='unliked buttonIntoText'])[" + planToSaveCount + "]"));
+			jsClickNew(planToSave);
+			Thread.sleep(10000);
+			planToSaveCount = planToSaveCount - 1;
+		}
+		
 		int savePlanImgCount = savePlanImgList.size();
 		if (planToSaveCount == savePlanImgCount) {
 			int count = Integer.parseInt(savedPlanHeaderCount.getText());
