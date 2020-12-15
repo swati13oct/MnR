@@ -24,22 +24,22 @@ Feature: 1.10.3 DCE-Redesign-VPP_PlanCompare - To test DCE - VPP Plan Compare In
     @DCE_Redesign_VPP_PlanCompare_AARP
     Examples: 
       | site | zipcode | plantype | planyear | county | isMultutiCounty | drug1     | planname                                           |
-      | AARP |   90210 | MAPD     | current  | none   | no              | meloxicam | AARP Medicare Advantage SecureHorizons Focus (HMO) |
+      | AARP |   90210 | MAPD     | future	 | none   | no              | meloxicam | AARP Medicare Advantage SecureHorizons Focus (HMO) |
 
     @DCE_Redesign_VPP_PlanCompare_UHC
     Examples: 
       | site | zipcode | plantype | planyear | county | isMultutiCounty | drug1     | drug2                | drug3      | drug4         | drug5            | drug6   | planname                                           |
-      | UHC  |   90210 | MAPD     | current  | none   | no              | meloxicam | diclofenac potassium | febuxostat | buprenorphine | fentanyl citrate | Lipitor | AARP Medicare Advantage SecureHorizons Focus (HMO) |
+      | UHC  |   90210 | MAPD     | future	 | none   | no              | meloxicam | diclofenac potassium | febuxostat | buprenorphine | fentanyl citrate | Lipitor | AARP Medicare Advantage SecureHorizons Focus (HMO) |
 
     @DCE_Redesign_VPP_PlanCompare_AARP
     Examples: 
       | site | zipcode | plantype | planyear | county       | isMultutiCounty | drug1     | drug2                | drug3      | drug4         | drug5            | drug6   | planname                        |
-      | AARP |   80002 | PDP      | current  | Adams County | yes             | meloxicam | diclofenac potassium | febuxostat | buprenorphine | fentanyl citrate | Lipitor | AARP MedicareRx Walgreens (PDP) |
+      | AARP |   80002 | PDP      | future	 | Adams County | yes             | meloxicam | diclofenac potassium | febuxostat | buprenorphine | fentanyl citrate | Lipitor | AARP MedicareRx Walgreens (PDP) |
 
     @DCE_Redesign_VPP_PlanCompare_UHC
     Examples: 
       | site | zipcode | plantype | planyear | county       | isMultutiCounty | drug1     | drug2                | drug3      | drug4         | drug5            | drug6   | planname                        |
-      | UHC  |   80002 | PDP      | current  | Adams County | yes             | meloxicam | diclofenac potassium | febuxostat | buprenorphine | fentanyl citrate | Lipitor | AARP MedicareRx Walgreens (PDP) |
+      | UHC  |   80002 | PDP      | future	 | Adams County | yes             | meloxicam | diclofenac potassium | febuxostat | buprenorphine | fentanyl citrate | Lipitor | AARP MedicareRx Walgreens (PDP) |
 
 
 ############ DCE Plan Compare Regression scenarios  ##############
@@ -84,22 +84,22 @@ Feature: 1.10.3 DCE-Redesign-VPP_PlanCompare - To test DCE - VPP Plan Compare In
     @DCE_Redesign_VPP_PlanCompare1_AARP
     Examples: 
       | site | zipcode | plantype | planyear | county | isMultutiCounty | drug1  | drug2                | drug3   | planname                                           |
-      | AARP |   90210 | MAPD     | current  | none   | no              | Ativan | diclofenac potassium | Lipitor | AARP Medicare Advantage SecureHorizons Focus (HMO) |
+      | AARP |   90210 | MAPD     | future 	 | none   | no              | Ativan | diclofenac potassium | Lipitor | AARP Medicare Advantage SecureHorizons Focus (HMO) |
 
     @DCE_Redesign_VPP_PlanCompare1_UHC
     Examples: 
       | site | zipcode | plantype | planyear | county | isMultutiCounty | drug1     | drug2                | drug3   | planname                                           |
-      | UHC  |   90210 | MAPD     | current  | none   | no              | meloxicam | diclofenac potassium | Lipitor | AARP Medicare Advantage SecureHorizons Focus (HMO) |
+      | UHC  |   90210 | MAPD     | future 	 | none   | no              | meloxicam | diclofenac potassium | Lipitor | AARP Medicare Advantage SecureHorizons Focus (HMO) |
 
     @DCE_Redesign_VPP_PlanCompare1_AARP
     Examples: 
       | site | zipcode | plantype | planyear | county       | isMultutiCounty | drug1     | drug2                | drug3   | planname                        |
-      | AARP |   80002 | PDP      | current  | Adams County | yes             | meloxicam | diclofenac potassium | Lipitor | AARP MedicareRx Walgreens (PDP) |
+      | AARP |   80002 | PDP      | future	 | Adams County | yes             | meloxicam | diclofenac potassium | Lipitor | AARP MedicareRx Walgreens (PDP) |
 
     @DCE_Redesign_VPP_PlanCompare1_UHC
     Examples: 
       | site | zipcode | plantype | planyear | county       | isMultutiCounty | drug1  | drug2                | drug3   | planname                        |
-      | UHC  |   80002 | PDP      | current  | Adams County | yes             | Ativan | diclofenac potassium | Lipitor | AARP MedicareRx Walgreens (PDP) |
+      | UHC  |   80002 | PDP      | future 	 | Adams County | yes             | Ativan | diclofenac potassium | Lipitor | AARP MedicareRx Walgreens (PDP) |
 
 ############ END - DCE Plan Compare Regression scenarios  ##############
 
@@ -129,19 +129,19 @@ Feature: 1.10.3 DCE-Redesign-VPP_PlanCompare - To test DCE - VPP Plan Compare In
     @DCE_Redesign_VPP_PlanCompare3_AARP
     Examples: 
       | site | zipcode | plantype | planyear | county | isMultutiCounty | drug1     | drug2                | planname                                           |
-      | AARP |   90210 | MAPD     | current  | none   | no              | meloxicam | diclofenac potassium | AARP Medicare Advantage SecureHorizons Focus (HMO) |
+      | AARP |   90210 | MAPD     | future 	 | none   | no              | meloxicam | diclofenac potassium | AARP Medicare Advantage SecureHorizons Focus (HMO) |
 
     @DCE_Redesign_VPP_PlanCompare3_UHC
     Examples: 
       | site | zipcode | plantype | planyear | county | isMultutiCounty | drug1     | drug2                | planname                                           |
-      | UHC  |   90210 | MAPD     | current  | none   | no              | meloxicam | diclofenac potassium | AARP Medicare Advantage SecureHorizons Focus (HMO) |
+      | UHC  |   90210 | MAPD     | future 	 | none   | no              | meloxicam | diclofenac potassium | AARP Medicare Advantage SecureHorizons Focus (HMO) |
 
     @DCE_Redesign_VPP_PlanCompare3_AARP
     Examples: 
       | site | zipcode | plantype | planyear | county       | isMultutiCounty | drug1     | drug2                | planname                        |
-      | AARP |   80002 | PDP      | current  | Adams County | yes             | meloxicam | diclofenac potassium | AARP MedicareRx Walgreens (PDP) |
+      | AARP |   80002 | PDP      | future 	 | Adams County | yes             | meloxicam | diclofenac potassium | AARP MedicareRx Walgreens (PDP) |
 
     @DCE_Redesign_VPP_PlanCompare3_UHC
     Examples: 
       | site | zipcode | plantype | planyear | county       | isMultutiCounty | drug1     | drug2                | planname                        |
-      | AARP |   80002 | PDP      | current  | Adams County | yes             | meloxicam | diclofenac potassium | AARP MedicareRx Walgreens (PDP) |
+      | AARP |   80002 | PDP      | future   | Adams County | yes             | meloxicam | diclofenac potassium | AARP MedicareRx Walgreens (PDP) |

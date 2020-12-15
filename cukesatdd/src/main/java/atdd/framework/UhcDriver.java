@@ -515,8 +515,8 @@ try {
 		CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
 		int initialCount = driver.getWindowHandles().size();
 		jsClickNew(Element);
-		waitForCountIncrement(initialCount);
 		waitForPageLoadSafari();
+		waitForCountIncrement(initialCount);
 		ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
 		String currentHandle = null;
 		for (int i = 0; i < initialCount + 1; i++) {
@@ -1221,7 +1221,7 @@ try {
     			loadingScreen = fwait.until(new Function<WebDriver, List<WebElement>>() {
 					public List<WebElement> apply(WebDriver driver) {
 						return driver.findElements(By.xpath(
-								"//div[(((@id='overlay' and not(./ancestor::footer)) or @id='loading_fader' or @class='loading-block' or @class='spinner') and not(contains(@style,'none')))]"));
+								"//div[(((@id='overlay' and not(./ancestor::footer)) or @id='loading_fader' or @class='loading-block' or @class='spinner' or @id='loader') and not(contains(@style,'none')))]"));
 					}
     			});
     		} catch (Exception e) {}

@@ -39,7 +39,7 @@ Scenario Outline: <scenario> 1.19.1.2 To test the SAM icons on Visitor Profile P
 			|/|UHC|E2E Scenario 3_UMS|
 			
 
-Scenario Outline: <scenario> 1.19.1.3 To test the SAM icons on Acq site on <site> chat agent not available hours
+Scenario Outline: <scenario> 1.19.1.3 To test the SAM icons on Acq site on <site> chat agent not available hours <pagename>
  Given the user is on medicare acquisition site landing page
     	|Site| <site>|
 And user opens the page to validate M&R Sites

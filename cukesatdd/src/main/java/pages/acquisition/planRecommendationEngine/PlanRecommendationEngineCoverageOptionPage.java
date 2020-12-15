@@ -100,7 +100,8 @@ public class PlanRecommendationEngineCoverageOptionPage extends UhcDriver {
 //		Assert.assertTrue(plantypePDP.getText().contains("Prescription"));
 		validate(plantypeNone, 30);
 //		Assert.assertTrue(plantypeNone.getText().contains("don't"));
-		previousBtn.click();
+//		previousBtn.click();
+		jsClickNew(previousBtn);
 		System.out.println("Validating " + page + " page Previous button functionality");
 		desktopCommonUtils.previousPageValidation(page.toUpperCase());
 	}
@@ -109,9 +110,45 @@ public class PlanRecommendationEngineCoverageOptionPage extends UhcDriver {
 
 	public void coverageOptionpageFunctional(String planType) {
 		System.out.println("Functional Operations");
+		chooseCoverageOption(planType);
+		jsClickNew(continueBtn);
+		System.out.println("Validating " + page + " page Continue button functionality");
+//		desktopCommonUtils.nextPageValidation(page.toUpperCase());
+	}
+
+//Coverage option page - Select Plantype and click on Previous Button	
+
+	public void coverageOptionpagePreviousButton(String planType) {
+		System.out.println("Functional Operations");
+		chooseCoverageOption(planType);
+		if (radioselect.isDisplayed()) {
+			validate(pageProgressPercentage, 30);
+			Assert.assertTrue(pageProgressPercentage.getText().contains("10% Complete"));
+		} else {
+			System.out.println("Plan Type not selected in Coverage Options Page");
+		}
+		previousBtn.click();
+		System.out.println("Validating " + page + " page Previous button functionality");
+		desktopCommonUtils.previousPageValidation(page.toUpperCase());
+	}
+
+//Coverage Option Page Function Verification			
+	public void coverageOptionpageerror() {
+		System.out.println("Plan Type is empty - Error Scenario in Coverage Options Page");
+//		continueBtn.click();
+		jsClickNew(continueBtn);
+		desktopCommonUtils.desktopErrorValidation(page);
+	}
+
+	public void browserBack() {
+
+		driver.navigate().back();
+	}
+	
+	public void chooseCoverageOption(String planType) {
 		if (planType.equalsIgnoreCase("MAPD")) {
 			validate(plantypeMAPD);
-//			plantypeMAPD.click();
+//			plantypeMAPD.click();						//E2E : updated to jsClickNew as .click does not work in Safari13 
 			jsClickNew(plantypeMAPD);
 			System.out.println("Plan Type " + planType + " Clicked");
 		} else if (planType.equalsIgnoreCase("MA")) {
@@ -130,53 +167,6 @@ public class PlanRecommendationEngineCoverageOptionPage extends UhcDriver {
 			jsClickNew(plantypeNone);
 			System.out.println("Plan Type " + planType + " Clicked");
 		}
-		jsClickNew(continueBtn);
-//		continueBtn.click();
-		System.out.println("Validating " + page + " page Continue button functionality");
-//		desktopCommonUtils.nextPageValidation(page.toUpperCase());
 	}
 
-//Coverage option page - Select Plantype and click on Previous Button	
-
-	public void coverageOptionpagePreviousButton(String planType) {
-		System.out.println("Functional Operations");
-		if (planType.equalsIgnoreCase("MAPD")) {
-			validate(plantypeMAPD);
-			plantypeMAPD.click();
-			System.out.println("Plan Type " + planType + " Clicked");
-		} else if (planType.equalsIgnoreCase("MA")) {
-			validate(plantypeMA);
-			plantypeMA.click();
-			System.out.println("Plan Type " + planType + " Clicked");
-		} else if (planType.equalsIgnoreCase("PDP")) {
-			validate(plantypePDP);
-			plantypePDP.click();
-			System.out.println("Plan Type " + planType + " Clicked");
-		} else if (planType.equalsIgnoreCase("None")) {
-			validate(plantypeNone);
-			plantypeNone.click();
-			System.out.println("Plan Type " + planType + " Clicked");
-		}
-		if (radioselect.isDisplayed()) {
-			validate(pageProgressPercentage, 30);
-			Assert.assertTrue(pageProgressPercentage.getText().contains("10% Complete"));
-		} else {
-			System.out.println("Plan Type not selected in Coverage Options Page");
-		}
-		previousBtn.click();
-		System.out.println("Validating " + page + " page Previous button functionality");
-		desktopCommonUtils.previousPageValidation(page.toUpperCase());
-	}
-
-//Coverage Option Page Function Verification			
-	public void coverageOptionpageerror() {
-		System.out.println("Plan Type is empty - Error Scenario in Coverage Options Page");
-		continueBtn.click();
-		desktopCommonUtils.desktopErrorValidation(page);
-	}
-
-	public void browserBack() {
-
-		driver.navigate().back();
-	}
 }

@@ -68,7 +68,7 @@ Feature: 1.04.1.1 To Test NON-DREAM EOB for Members - E2E - Member Auth
     @memAuth_SHIP_EOBs @memAuth_SHIP_EOBs1_multiShip
     Examples: 
       | index | username  | password  | MemUserName             | planType                 | memberType           | eobType | realEob | flagZeroEob |
-      | 11    | qavgogine | qavgogine | q3_SEP_2020SHIP_012     | SHIP_MEDICARE SUPPLEMENT | COMBO_MULTI_SHIP_EOB | Medical | false   | true        | 
+      | 11    | qavgogine | qavgogine | q4_Ship_014     | SHIP_MEDICARE SUPPLEMENT | COMBO_MULTI_SHIP_EOB | Medical | false   | true        | 
 
     @memAuth_SHIP_EOBs @memAuth_SHIP_EOBs2_singleShip
     Examples: 
@@ -78,7 +78,7 @@ Feature: 1.04.1.1 To Test NON-DREAM EOB for Members - E2E - Member Auth
     @memAuth_SHIP_EOBs @memAuth_SHIP_EOBs3_shipComboFedShip
     Examples: 
       | index | username  | password  | MemUserName             | planType                 | memberType         | eobType | realEob | flagZeroEob |
-      | 12    | qavgogine | qavgogine | q3_sep_UAT4_AARP023     | SHIP_MEDICARE SUPPLEMENT | PDP_SHIP_COMBO_EOB | Medical | false   | false       |
+      | 12    | qavgogine | qavgogine | q3_sep_UAT4_AARP273     | SHIP_MEDICARE SUPPLEMENT | PDP_SHIP_COMBO_EOB | Medical | false   | false       |
 
     @memAuth_SHIP_EOBs @memAuth_SHIP_EOBs4_shipComboShipMapd
     Examples: 

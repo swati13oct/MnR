@@ -186,6 +186,7 @@ public class BuildYourDrugList extends UhcDriver {
 		validateNew(SelectDrug);
 		jsClickNew(SelectDrug);
 		threadsleep(2000);
+		waitForPageLoadSafari();
 		CommonUtility.checkPageIsReadyNew(driver);
 		CommonUtility.waitForPageLoadNew(driver, TellUsABoutHeader, 20);
 		if(validateNew(TellUsABoutHeader) && validateNew(TellUsABoutCloseBtn))
@@ -207,6 +208,7 @@ public class BuildYourDrugList extends UhcDriver {
 	public DrugDetailsPage navigateToDrugDetailsPage() {
 		validateNew(reviewDrugCost);
 		jsClickNew(reviewDrugCost);
+		waitForPageLoadSafari();
 		threadsleep(2000);
 		CommonUtility.waitForPageLoadNew(driver, DrugDetails_DrugCostsHeading, 20);
 		if(validateNew(DrugDetails_ChangePharmacyLnk) && validateNew(DrugDetails_DrugCostsHeading))
@@ -324,4 +326,9 @@ public class BuildYourDrugList extends UhcDriver {
 		
 	}
 
+	public void validateBuildDrugListPageDisplayed() {
+		validateNew(EnterDrugNameTxt);
+		validateNew(SearchBtn);
+		validateNew(PreviousBtn);
+	}
 }
