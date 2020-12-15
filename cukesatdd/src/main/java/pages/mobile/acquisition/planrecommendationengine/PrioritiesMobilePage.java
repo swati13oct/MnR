@@ -108,6 +108,26 @@ public class PrioritiesMobilePage extends UhcDriver {
 		}
 	}
 
+	public void priorityOptions2nd(String value) {
+		System.out.println("Priorities 2nd option alone selection");
+		String mandatoryOpt1 = "Doctors",mandatoryOpt2 = "Health Cost",defaultVal = "Select Priority";
+		if (value.toLowerCase().contains(mandatoryOpt1.toLowerCase())) {
+			mobileSelectOption(topSelect, mandatoryOpt2, true);
+			System.out.println("Top Priority value " + mandatoryOpt2 + " selected");
+		} else {
+			mobileSelectOption(topSelect, mandatoryOpt1, true);
+			System.out.println("Top Priority value " + mandatoryOpt1 + " selected");
+		}
+		if (validate(addAnotherLink)) {
+			mobileUtils.mobileLocateElementClick(addAnotherLink);
+			threadsleep(1000);
+		}
+		mobileSelectOption(secondSelect, value, true);
+		System.out.println("Second Priority value " + value + " selected");
+		mobileSelectOption(topSelect, defaultVal, true);
+		System.out.println("Second Priority value " + defaultVal + " selected");
+	}
+	
 	public void prioritiesFunctional(String option, String value) {
 		if (option.equalsIgnoreCase("Both")) {
 			priorityOptions(true, value.split(",")[0].trim());
@@ -115,7 +135,7 @@ public class PrioritiesMobilePage extends UhcDriver {
 		} else if (option.equalsIgnoreCase("1st")) {
 			priorityOptions(true, value.split(",")[0].trim());
 		} else if (option.equalsIgnoreCase("2nd")) {
-			priorityOptions(false, value.split(",")[1].trim());
+			priorityOptions2nd(value.split(",")[1].trim());
 		} else {
 			System.out.println("Not selecting Priorities");
 		}

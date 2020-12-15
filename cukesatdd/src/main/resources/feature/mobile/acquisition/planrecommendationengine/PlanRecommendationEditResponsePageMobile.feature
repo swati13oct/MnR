@@ -163,6 +163,7 @@ Feature: Plan Recommendation Engine Ranking - Verify PRE Edit Response functiona
       | Additional Option | <Dental-Hearing-Vision-Fitness> |
     And user selects cost preferences option in cost preferences page mobile
       | Preference Option | <costPreferenceOption> |
+    And verify continue function on "Priorities" page mobile
     Then user navigates to edit response page mobile
       | Plan Type   | <isCoverageOpt> |
       | SNP Options | <SpecialNeeds>  |
@@ -207,7 +208,6 @@ Feature: Plan Recommendation Engine Ranking - Verify PRE Edit Response functiona
       | Additional Option | <E_Dental-Hearing-Vision-Fitness> |
     Then user selects cost preferences option in cost preferences page mobile
       | Preference Option | <E_costPreferenceOption> |
-    And verify continue function on "Priorities" page mobile
     Then user validate recommendations in results page mobile
       | Zip Code           | <Zipcode>           |
       | County Name        | <County>            |

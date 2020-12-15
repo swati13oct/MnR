@@ -3,8 +3,6 @@
  */
 package pages.acquisition.planRecommendationEngine;
 
-import java.util.HashMap;
-
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -12,7 +10,6 @@ import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 
 import atdd.framework.UhcDriver;
-import pages.acquisition.commonpages.AcquisitionHomePage;
 
 public class PlanRecommendationEnginePrioritiesPage extends UhcDriver {
 
@@ -98,6 +95,26 @@ public class PlanRecommendationEnginePrioritiesPage extends UhcDriver {
 			System.out.println("Second Priority value " + value + " selected");
 		}
 	}
+	
+	public void priorityOptions2nd(String value) {
+		System.out.println("Priorities 2nd option alone selection");
+		String mandatoryOpt1 = "Doctors",mandatoryOpt2 = "Health Cost",defaultVal = "Select Priority";
+		if (value.toLowerCase().contains(mandatoryOpt1.toLowerCase())) {
+			selectFromDropDownByText(driver, topSelect, mandatoryOpt2);
+			System.out.println("Top Priority value " + mandatoryOpt2 + " selected");
+		} else {
+			selectFromDropDownByText(driver, topSelect, mandatoryOpt1);
+			System.out.println("Top Priority value " + mandatoryOpt1 + " selected");
+		}
+		if (validate(addAnotherLink)) {
+			jsClickNew(addAnotherLink);
+			threadsleep(1000);
+		}
+		selectFromDropDownByText(driver, secondSelect, value);
+		System.out.println("Second Priority value " + value + " selected");
+		selectFromDropDownByText(driver, topSelect, defaultVal);
+		System.out.println("Top Priority value " + defaultVal + " selected");
+	}
 
 	public void prioritiesFunctional(String option,String value) {
 		if(option.equalsIgnoreCase("Both")) {
@@ -108,7 +125,7 @@ public class PlanRecommendationEnginePrioritiesPage extends UhcDriver {
 			priorityOptions(true,value.split(",")[0].trim());
 		}
 		else if(option.equalsIgnoreCase("2nd")) {
-			priorityOptions(false,value.split(",")[1].trim());
+			priorityOptions2nd(value.split(",")[1].trim());
 		}
 		else {
 			System.out.println("Not selecting Priorities");
