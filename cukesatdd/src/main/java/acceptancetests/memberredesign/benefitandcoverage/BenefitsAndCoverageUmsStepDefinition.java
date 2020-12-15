@@ -2606,7 +2606,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 		}	
 		
 		for (String url: testNote) {
-			Assert.assertTrue("PROBLEM - planBenefits API contains 'undefined' value in the request", !url.contains("undefined"));
+			Assert.assertTrue("PROBLEM - planBenefits API contains 'undefined' value in the request. issue: "+url, !url.contains("undefined"));
 		}
 		
 

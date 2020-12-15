@@ -5637,7 +5637,7 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 			tabsForComboMember.get(i).click();
 			CommonUtility.checkPageIsReady(driver);
 			System.out.println("-----------------------------------------------------");
-			System.out.println("TEST - on tab #"+(i+1)+"...");
+			System.out.println("TEST - on tab #"+(i+1)+" '"+tabsForComboMember.get(i).getText()+"'...");
 			//tbd String lookForText1="/UCPBenefits/member/planBenefits";
 			String lookForText1="/UCPBenefits/";
 			String lookForText2="requestWillBeSent";
@@ -5676,58 +5676,6 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 		return apiList;
 	}
 
-	/* 
-	public void verifyApi() {
-		//note: loop through each tab and check the API
-		List<String> apiList=new ArrayList<String>();
-		List<String> rawList=new ArrayList<String>();
-		for(int i=0; i< tabsForComboMember.size(); i++) {
-			tabsForComboMember.get(i).click();
-			CommonUtility.checkPageIsReady(driver);
-			System.out.println("-----------------------------------------------------");
-			System.out.println("TEST - on tab #"+(i+1)+"...");
-			//tbd String lookForText1="/UCPBenefits/member/planBenefits";
-			String lookForText1="/UCPBenefits/";
-			String lookForText2="requestWillBeSent";
-
-			List<LogEntry> entries = driver.manage().logs().get(LogType.PERFORMANCE).getAll();
-			for (LogEntry entry : entries) {
-				String line=entry.getMessage();
-				//keepForDebug System.out.println("TEST each line="+line);
-				if (line.contains(lookForText1) && line.contains(lookForText2)) {
-					System.out.println("FOUND - line="+line);
-					rawList.add(line);
-				}
-			}
-		}
-			
-		for(String l: rawList) {
-			try {
-				JSONParser parser = new JSONParser();
-				JSONObject jsobObj=null;
-				jsobObj = (JSONObject) parser.parse(l);
-				JSONObject messageObj;
-				messageObj = (JSONObject) jsobObj.get("message");
-				Assert.assertTrue("PROBLEM - unable to locate message json object", messageObj!=null);
-				JSONObject paramsObj = (JSONObject) messageObj.get("params");
-				Assert.assertTrue("PROBLEM - unable to locate params json object", paramsObj!=null);
-				JSONObject requestObj = (JSONObject) paramsObj.get("request");
-				Assert.assertTrue("PROBLEM - unable to locate request json object", requestObj!=null);
-				System.out.println("TEST - requestObj="+requestObj.toString());
-				String urlStr = (String) requestObj.get("url");
-				Assert.assertTrue("PROBLEM - unable to locate postData string", urlStr!=null);
-				System.out.println("TEST - urlStr="+urlStr);			
-			} catch (ParseException e) {
-				e.printStackTrace();
-				Assert.assertTrue("PROBLEM - unable to convert target string into json object", false);
-			}
-		}
-
-
-		for (String url: apiList) {
-			Assert.assertTrue("PROBLEM - planBenefits API is contains 'undefined' value in the request", url.contains("undefined"));
-		}
-	} */
 }
 
 
