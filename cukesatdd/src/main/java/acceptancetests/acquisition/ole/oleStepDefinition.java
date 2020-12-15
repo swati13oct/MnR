@@ -1000,9 +1000,13 @@ public class oleStepDefinition {
 		getLoginScenario().saveBean(OLE_PageConstants.ZIP, MedicareDetailsMap.get("Zip"));
 		getLoginScenario().saveBean(OLE_PageConstants.PROVIDER_NUMBER, MedicareDetailsMap.get("Provider Phone Number"));
 		
-		PersonalInformationPage personalInformationPage = useranddisclosure.Validate_and_Enter_Details_for_YourProvide_Section( MedicareDetailsMap);
+	/*	PersonalInformationPage personalInformationPage = useranddisclosure.Validate_and_Enter_Details_for_YourProvide_Section( MedicareDetailsMap);
 		getLoginScenario().saveBean(OLE_PageConstants.OLE_PERSONAL_INFO_PAGE,
-				personalInformationPage);
+				personalInformationPage);*/
+		
+		SpecialElectionPeriodPage specialElectionPeriodPage = useranddisclosure.Validate_and_Enter_Details_for_YourProvide_Section( MedicareDetailsMap);
+		getLoginScenario().saveBean(OLE_PageConstants.OLE_SPECIAL_ELECTION_PERIOD_PAGE,
+					specialElectionPeriodPage);
 	}
 	/**
 	 * @toDo:user fill following information in Preliminary Questions Page 
@@ -3321,4 +3325,31 @@ public void the_user_clicks_on_Enroll_Now_to_start_the_OLE_flow_plan_details_pag
 	else
 		Assert.fail("Error in validating the OLE Welcome Page");
 }
+
+@Then("^the user navigates to Disclosure Authorization Page for Medicaid and Effective date CSNP Plans$")
+public void the_user_navigates_to_Disclosure_Authorization_Page_Medicaid_Effective_Date_CSNP_Plans(DataTable Medicareoptions) throws Throwable {
+	List<DataTableRow> givenAttributesRow = Medicareoptions.getGherkinRows();
+	Map<String, String> MedicareDetailsMap = new HashMap<String, String>();
+	for (int i = 0; i < givenAttributesRow.size(); i++) {
+
+		MedicareDetailsMap.put(givenAttributesRow.get(i).getCells().get(0),
+				givenAttributesRow.get(i).getCells().get(1));
+	}
+	PersonalInformationPage personalInformationPage = (PersonalInformationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_PERSONAL_INFO_PAGE);
+	UseAndDisclosureAuthorizationPage useranddisclosure = personalInformationPage.navigate_to_SEP_page_CSNP(MedicareDetailsMap);
+	if (useranddisclosure  != null) {
+		getLoginScenario().saveBean(OLE_PageConstants.OLE_User_And_Disclosure_PAGE,
+				useranddisclosure );
+		System.out.println("OLE Use and Disclosure Authorization Page is Displayed");
+		
+	getLoginScenario().saveBean(oleCommonConstants.PARTA_EFFECTIVE, MedicareDetailsMap.get("PartA Date"));
+	getLoginScenario().saveBean(oleCommonConstants.PARTB_EFFECTIVE, MedicareDetailsMap.get("PartB Date"));
+	getLoginScenario().saveBean(oleCommonConstants.MEDICAID_NUMBER, MedicareDetailsMap.get("MedicaidNumber"));
+		Assert.assertTrue(true);
+	}
+	else
+		Assert.fail("OLE Use and Disclosure Authorization Page is NOT Displayed");
+	}
+
+
 	}

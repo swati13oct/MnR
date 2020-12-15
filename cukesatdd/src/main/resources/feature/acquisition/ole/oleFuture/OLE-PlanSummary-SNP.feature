@@ -195,11 +195,17 @@ Feature: 1.05.4 OLE common tool flow E2E SNP
     | Prescription Name			| <prescriptioncoveragename>  |
     |  PD Group Number			 | <pdgroupnumber>  |
     | PD Member Number        | <pdmembernumber>   | 
-    Then the user navigates to SEP Page for Medicaid and Effective date
+    Then the user navigates to Disclosure Authorization Page for Medicaid and Effective date CSNP Plans
        	|	Input Data					 | <inputdataType>   |
     	| PartA Date         | <partadate>         |
    		| PartB Date         | <partbdate>         |
-    #Then the user validates SEP options and Required Fields for PlanType in SEP Page
+   Then the user enters provider details in Use and Disclosure Authorization page for CSNP and navidates to Personal information page
+      |	Provider Name			           | <providername>       |
+    	| Provider Street Address      | < provideraddress>   |
+   		| City        								 | <providercity>       |
+   		| Zip                          | < providerzipcode>   |
+   		| Provider Phone Number        | <providernumber>     |
+   #Then the user validates SEP options and Required Fields for PlanType in SEP Page
     Then the user selects the following options for SEP Page
       | Select Options | <selectoptions> |
       | Option Data    | <optiondata>    |
@@ -216,14 +222,14 @@ Feature: 1.05.4 OLE common tool flow E2E SNP
       | Rider Flag | <riderflag> |
     Then the user validates required fields for Authorization Page
     Then the user navigates to Review and Submit Page
-    #Then the user validates the Plan and Member details on Review and Submit Page
-    Then the user validates the Online Enrollment details on Review and Submit Page
+    Then the user validates the Plan and Member details on Review and Submit Page
+    #Then the user validates the Online Enrollment details on Review and Submit Page
     Then the user clicks on Submit Enrollment to complete enrollment
     # Then the user validates Plan and Member Details on Confirmation Page
     Then the user Validates Next Steps in Confirmation Page for the Plan Type.
 	#Then the user validates the OLE Submission Details in GPS
    # | Plan Type | <plantype> |
-    #@SNP_OLE_AARP @SNP_OLE_AARP_CSNP @OLE_Regression_Ulayer
+	@CSNP_OLE_AARP_Future
     Examples: 
       | TID   | PlanType | Plan Year|planYear|zipcode | isMultutiCounty | county       | plantype | planName                                              | cardtype | firstname | lastname | medicarenumber | ssnflag | partadate | partbdate | medicaidnumber | esrdflag | dob      | gender | permstreet    | permcity    | mailingaddressquestion | mailingstreet | mailingcity | mailingstate | mailingzip | email         | selectoptions                                                                                                                                                                                                                                       | optiondata              | pdpFlag | longTermFlag | riderflag | providername | provideraddress | providercity | providerzipcode | providernumber | emailConfirmation | goGreen |healthinsurancename|groupnumber| membernumber|prescriptioncoveragename|pdgroupnumber|pdmembernumber|inputdataType|
       | 15586 | CSNP-MBI | future  |future |  78006 | YES             | Bexar County | SNP      | UnitedHealthcare Chronic Complete (HMO C-SNP)         | MBI      | GOTTFRIED | GARRAND     | 5N69QY6ET34    | false|   09011997 |  11012002 |      431665465 | true     | 04261944 | Male   | 003 Morris Rd | Los Angeles | Yes                    |               |             | TX           |      78006 | test@test.com | Medicare Advantage Open Enrollment Period (MA OEP)/change in my Medicaid (newly got Medicaid)/Medicare (or my state)/(or my state helps pay for my Medicare premiums)/major disaster (as declared by the Federal Emergency Management Agency (FEMA) | /12202018/12202018/ / / | yes     | no           | false     | John         | address of prov | Palmer       |           99645 |     1231231234 | NO                | NO      |HealthInsurance             |HI1562759    | ABC12345DEF     |PrescriptionCoverage            |PD5646136   | BCD12345EFG |Valid|
@@ -232,7 +238,7 @@ Feature: 1.05.4 OLE common tool flow E2E SNP
 		| 15589 | CSNP-MBI | future         |  78006 | YES             | Bexar County | SNP      | UnitedHealthcare Chronic Complete (HMO C-SNP)         | MBI      | John      | Doe      | 2n22C33YK33    | false   |  01012010 |  01012010 |      431665465 | true     | 01011983 | Male   | 003 Morris Rd | Los Angeles | Yes                    |               |             | TX           |      78006 | test@test.com | Medicare Advantage Open Enrollment Period (MA OEP)/change in my Medicaid (newly got Medicaid)/Medicare (or my state)/(or my state helps pay for my Medicare premiums)/major disaster (as declared by the Federal Emergency Management Agency (FEMA) | /12202018/12202018/ / / | yes     | no           | false     | John         | address of prov | Palmer       |           99645 |     1231231234 | NO                | NO      |Invalid|
     #  | 15590 | CSNP-MBI |   78006 | YES             | Bexar County | SNP      | UnitedHealthcare Medicare Silver (Regional PPO C-SNP) | MBI      | John      | Doe      | 2n22C33YK33    | false   |  01012010 |  01012010 |      431665465 | true     | 01011983 | Male   | 003 Morris Rd | Los Angeles | Yes                    |               |             | TX           |      78006 | test@test.com | Medicare Advantage Open Enrollment Period (MA OEP)/change in my Medicaid (newly got Medicaid)/Medicare (or my state)/(or my state helps pay for my Medicare premiums)/major disaster (as declared by the Federal Emergency Management Agency (FEMA) | /12202018/12202018/ / / | yes     | no           | false     | John         | address of prov | Palmer       |           99645 |     1231231234 | NO                | NO      |Invalid|
    #   | 15591 | CSNP-MBI |   78006 | YES             | Bexar County | SNP      | UnitedHealthcare Medicare Gold (Regional PPO C-SNP)   | MBI      | John      | Doe      | 2n22C33YK33    | false   |  01012010 |  01012010 |      431665465 | true     | 01011983 | Male   | 003 Morris Rd | Los Angeles | Yes                    |               |             | TX           |      78006 | test@test.com | Medicare Advantage Open Enrollment Period (MA OEP)/change in my Medicaid (newly got Medicaid)/Medicare (or my state)/(or my state helps pay for my Medicare premiums)/major disaster (as declared by the Federal Emergency Management Agency (FEMA) | /12202018/12202018/ / / | yes     | no           | true      | John         | address of prov | Palmer       |           99645 |     1231231234 | NO                | NO      |Invalid|
-			#@SNP_OLE_AARP_Future @SNP_OLE_AARP_CSNP_Future
+		@CSNP_OLE_UHC_Future
     Examples: 
       | TID   | PlanType | Plan Year|planYear|zipcode | isMultutiCounty | county       | plantype | planName                                              | cardtype | firstname | lastname | medicarenumber | ssnflag | partadate | partbdate | medicaidnumber | esrdflag | dob      | gender | permstreet    | permcity    | mailingaddressquestion | mailingstreet | mailingcity | mailingstate | mailingzip | email         | selectoptions                                                                                                                                                                                                                                       | optiondata              | pdpFlag | longTermFlag | riderflag | providername | provideraddress | providercity | providerzipcode | providernumber | emailConfirmation | goGreen |healthinsurancename|groupnumber| membernumber|prescriptioncoveragename|pdgroupnumber|pdmembernumber|inputdataType|
       | 15586 | CSNP-MBI | future  | future  | 78006 | YES             | Bexar County | SNP      | UnitedHealthcare Chronic Complete (HMO C-SNP)         | MBI      | GOTTFRIED | GARRAND     | 5N69QY6ET34    | false|   09011997 |  11012002 |      431665465 | true     | 04261944 | Male   | 003 Morris Rd | Los Angeles | Yes                    |               |             | TX           |      78006 | test@test.com | Medicare Advantage Open Enrollment Period (MA OEP)/change in my Medicaid (newly got Medicaid)/Medicare (or my state)/(or my state helps pay for my Medicare premiums)/major disaster (as declared by the Federal Emergency Management Agency (FEMA) | /12202018/12202018/ / / | yes     | no           | false     | John         | address of prov | Palmer       |           99645 |     1231231234 | NO                | NO      |HealthInsurance             |HI1562759    | ABC12345DEF     |PrescriptionCoverage            |PD5646136   | BCD12345EFG |Valid|

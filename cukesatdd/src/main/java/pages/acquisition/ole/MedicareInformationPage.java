@@ -821,7 +821,7 @@ public boolean validate_notRequired_ESRD_Fields(String planType, String medicaid
 public boolean validate_Required_Fields_CSNP( String medicaidNumber, String PlanName) {
 	//System.out.println("plantype : "+plantype+" Medicare Number : "+medicaidNumber);
 	
-			if(PlanName.contains("Chronic") || PlanName.contains("Gold")){
+			if(PlanName.contains("Chronic") || PlanName.contains("Gold") ||PlanName.contains("Silver")){
 				System.out.println("Medicaid Question is displayed for "+PlanName+" : "+validate(MedicaidQuestion));
 				jsClickNew(medicaiddno);
 				System.out.println("Medicaid question : No clicked"+medicaiddno.isSelected());
@@ -857,7 +857,8 @@ public boolean validate_Required_Fields_CSNP( String medicaidNumber, String Plan
 				//	waitforElement(disclosureBox);
 					return true;
 		            
-	    }else if(PlanName.contains("Silver")){
+	/*  ----------------  Removed the lines for silver separately---------------------
+	 }else if(PlanName.contains("Silver")){
 			System.out.println("Medicaid Question is displayed for "+PlanName+" : "+validate(MedicaidQuestion));
 			jsClickNew(medicaiddno);
 			System.out.println("Medicaid question : No clicked"+medicaiddno.isSelected());
@@ -876,7 +877,7 @@ public boolean validate_Required_Fields_CSNP( String medicaidNumber, String Plan
 				validateNew(chronicHeartFailureQuestion3No);
 				jsClickNew(chronicHeartFailureQuestion3No);				
 			//	waitforElement(disclosureBox);
-				return true;
+				return true;*/
 	    }
 	
 			else return false;	

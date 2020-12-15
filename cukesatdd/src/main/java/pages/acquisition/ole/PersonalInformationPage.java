@@ -631,4 +631,61 @@ public class PersonalInformationPage extends UhcDriver{
 			return null;
 		}
 	}
+	
+	public UseAndDisclosureAuthorizationPage navigate_to_SEP_page_CSNP(Map<String, String> MedicareDetailsMap) throws InterruptedException {
+
+		validateNew(NextBtn);
+		jsClickNew(NextBtn);
+		/*JavascriptExecutor executor = (JavascriptExecutor)driver;
+		executor.executeScript("arguments[0].click();", NextBtn);*/
+		
+		/*if(validateNew(driver.findElement(By.xpath("//h1[contains(text(),'Special Election')]")))){
+			System.out.println("OLE SEP Page is Displayed");
+			return new SpecialElectionPeriodPage(driver);
+		}
+		*/
+		
+		Thread.sleep(3000);
+			if(driver.getCurrentUrl().contains("special")){
+			Assert.assertTrue(driver.getCurrentUrl().contains("special"), "OLE SEP Page is Displayed");
+			return new UseAndDisclosureAuthorizationPage(driver);
+			
+			}
+		else if(driver.getCurrentUrl().contains("eligibility"))
+
+			 {
+				
+				ConfirmYourEligibilityPage confirmYourEligibilityPage= enterConfirmEligibilityPageDataCSNP(MedicareDetailsMap);
+				if(confirmYourEligibilityPage!=null) {
+					
+					
+					 validateNew(NextBtn); 
+					 jsClickNew(NextBtn);
+					
+					 if(driver.getCurrentUrl().contains("special")){
+					  System.out.println("OLE SEP Page is Displayed"); } else {
+					  System.out.println("OLE SEP Page is not Displayed"); }
+					 return new UseAndDisclosureAuthorizationPage(driver);	
+				}
+			 }
+		return null;
+	}	
+
+
+
+	public ConfirmYourEligibilityPage enterConfirmEligibilityPageDataCSNP(Map<String, String> MedicareDetailsMap) {
+		
+		String PartAeffectiveDate = MedicareDetailsMap.get("PartA Date");
+		String PartBeffectiveDate = MedicareDetailsMap.get("PartB Date"); 
+		//String MedicaidNo = MedicareDetailsMap.get("MedicaidNumber"); 
+		if(validateNew(driver.findElement(By.xpath("//h1[contains(text(),'Confirm')]")))){
+			System.out.println("OLE Confirm your Eligibility is Displayed");
+		
+			sendkeysNew(partAStartDateField, PartAeffectiveDate);
+			sendkeysNew(partBStartDateField, PartBeffectiveDate);
+			//sendkeysNew(medicaidNumberField,MedicaidNo);
+		}
+		
+		return new ConfirmYourEligibilityPage(driver);
+	}
 }
