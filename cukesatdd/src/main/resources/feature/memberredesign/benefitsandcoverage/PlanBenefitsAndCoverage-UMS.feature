@@ -889,6 +889,7 @@ Feature: 1.01 Member  benefits and Coverage page
       | index  | FID    | planType  | memberType     | copayCategory | deductible   | insulin      |
       | 34-I09 | 478830 | MAPD      | Individual_BnC | NON LIS       | T12345       | nonInsulin   | 
 
+  #note: if FED_SHIP_SHIP_BnC user stop working, replace with any FED+SHIP combo user would do, coverage is for combo with federal priority
   @benefitsAndCoverage24 @comboApi
   Scenario Outline: Index: <index> -TID: <TID> -plan: <planType> -memberType: <memberType> - Verify UCPBenefits API not having undefined input value for COMBO user
     Given login with following details logins in the member portal and validate elements
