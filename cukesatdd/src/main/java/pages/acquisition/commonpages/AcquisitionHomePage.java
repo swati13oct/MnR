@@ -3009,8 +3009,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		public void DualSplNeedPlans() {
 			
 			threadsleep(6);
-        	DualSpecialNeedsPlans.click();
-//			jsClickNew(DualSpecialNeedsPlans);
+//        	DualSpecialNeedsPlans.click();
+			jsClickNew(DualSpecialNeedsPlans);
 			threadsleep(5);
 			if(driver.getCurrentUrl().contains("shop/dual-special-needs-plans.html")) {
 			Assert.assertTrue(true);
@@ -3105,7 +3105,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		
 		public void clickUnitedHealthcareMedicareSolutions() {
 			threadsleep(8);
-			UnitedHealthcareMedicareSolutions.click();
+//			UnitedHealthcareMedicareSolutions.click();
+			jsClickNew(UnitedHealthcareMedicareSolutions);
 		}
 		
 		public void validateUrl(String url) {
