@@ -2835,7 +2835,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			if (validate(leaveAARPMedicarePlansDialog)) {
 				jsClickNew(proceedLeaveAARPMedicare);
 				waitForPageLoadSafari();
-				CommonUtility.checkPageIsReadyNew(driver);
+//				CommonUtility.checkPageIsReadyNew(driver);
 			}
 		}
 		
@@ -2843,7 +2843,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			if (validate(leaveAARPMedicarePlansDialog)) {
 				jsClickNew(cancelLeaveAARPMedicare);
 				waitForPageLoadSafari();
-				CommonUtility.checkPageIsReadyNew(driver);
+//				CommonUtility.checkPageIsReadyNew(driver);
 			}
 		}
 
