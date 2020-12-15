@@ -905,7 +905,6 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth
       | Username | <MemUserName> |
       | Plan Type    | <planType>    |
       | Member Type  | <memberType>  |
-      | Copay Category | <copayCategory> |
     Then The user navigate to Benefits and Coverage page
     And the users validate Benefits page has combo tabs
     And the users validate UCPBenefits related API requests are not having undefined input value

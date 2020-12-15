@@ -934,7 +934,6 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth Prod
       | Username | <MemUserName> |
       | Plan Type    | <planType>    |
       | Member Type  | <memberType>  |
-      | Copay Category | <copayCategory> |
     Then The user navigate to Benefits and Coverage page
     And the users validate Benefits page has combo tabs
     And the users validate UCPBenefits related API requests are not having undefined input value
@@ -942,5 +941,5 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth Prod
     Examples: 
       | index | TID   | username | password  | MemUserName        | planType | memberType   |
       | 35    | xxxxx | kkumard  | tnps459# | VirginiaRuth1936    | COMBO    | SHIP_FED_BnC |
-      | 36    | xxxxx | kkumard  | tnps459# | nino2@theciliangroup.com     | COMBO    | FED_SHIP_SHIP_BnC |
+      | 36    | xxxxx | kkumard  | tnps459# | nino2@theciliangroup.com     | COMBO    | FED_SHIP_BnC |
       | 37    | xxxxx | kkumard  | tnps459# | DKELLY27     | COMBO    | FED_FED_BnC  |
