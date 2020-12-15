@@ -5675,6 +5675,16 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 			
 		return apiList;
 	}
+	
+	public boolean checkpharmoutpockttextarea() {
+		boolean isDisplayed = false;
+		try {
+			isDisplayed = pharmoutpockttextarea.isDisplayed();
+		}catch(Exception e) {
+			
+		}
+		return isDisplayed;
+	}
 
 }
 
