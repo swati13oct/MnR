@@ -204,16 +204,18 @@ Feature: 1.01 Member  benefits and Coverage page
       | Member Type | <memberType> |
     Then The user navigate to Benefits and Coverage page
     And the user validates the ways to save section
+    And user validates to not display pharmacy out-of-pocket maximum beside drug lookup
+      | Type   | <type>   |
   
     @devRegression @WaystoSave_walgreens
     Examples: 
-      | index | TID   | planType | memberType             |
-      | 09    | 15242 | PDP      | Wallgreens_BnC         |
+      | index | TID   | planType | memberType             | type      |
+      | 09    | 15242 | PDP      | Wallgreens_BnC         | Individual|
 
     @devRegression @WaystoSave_mailOrder
     Examples: 
-      | index | TID   | planType | memberType             |
-      | 10    | 15243 | PDP      | MailOrderPharamacy_BnC |
+      | index | TID   | planType | memberType             | type      |
+      | 10    | 15243 | PDP      | MailOrderPharamacy_BnC | Individual|
 
     @devRegression @noWaystoSave
     Examples: 
@@ -252,6 +254,8 @@ Feature: 1.01 Member  benefits and Coverage page
     And the user validates tier link should not display
     And the user view the Drug Cost header and text
     And the user validated the Look up Drugs link
+    And user validates to not display pharmacy out-of-pocket maximum beside drug lookup
+      | Type   | <type>   |
     And the user validates Locate a Pharmacy button should be visible
       | Plan Type | <planType> |
     And the drugcost dropdown should not display
@@ -272,8 +276,8 @@ Feature: 1.01 Member  benefits and Coverage page
     And the user validates contactus section
 
     Examples: 
-      | index | TID   | planType | memberType | copayCategory | SummaryofBenefits   | EvidenceofCoverage   | ComprehensiveFormularyDrug List | AlternativeDrugList   |
-      | 13    | 15248 | PDP      | PDPLIS_BnC | LIS 3         | Summary of Benefits | Evidence of Coverage | Comprehensive Formulary         | Alternative Drug List |
+      | index | TID   | planType | memberType | copayCategory | SummaryofBenefits   | EvidenceofCoverage   | ComprehensiveFormularyDrug List | AlternativeDrugList   | type      |
+      | 13    | 15248 | PDP      | PDPLIS_BnC | LIS 3         | Summary of Benefits | Evidence of Coverage | Comprehensive Formulary         | Alternative Drug List | Individual|
       
   #TC21_PDP_LIS(3,4)- Retail Drug Cost Table
   @benefitsAndCoverage12  @PDPLIS3member @BnC_Part6_regressionMember  
@@ -631,6 +635,8 @@ Feature: 1.01 Member  benefits and Coverage page
     And the user validates text for the Look Up Drugs section
     And the user validates Look Up Drugs button should be visible
       | Plan Type | <planType> |
+    And user validates to not display pharmacy out-of-pocket maximum beside drug lookup
+      | MemberType   | <memberType>   |
     And the user validates text for the Locate a Pharmacy section
     And the user validates Locate a Pharmacy button should be visible
       | Plan Type | <planType> |
@@ -705,6 +711,8 @@ Feature: 1.01 Member  benefits and Coverage page
     And the user validates text for the Look Up Drugs section
     And the user validates Look Up Drugs button should be visible
       | Plan Type | <planType> |
+    And user validates to not display pharmacy out-of-pocket maximum beside drug lookup
+       | MemberType   | <memberType>   |
     And the user validates text for the Locate a Pharmacy section
     And the user validates Locate a Pharmacy button should be visible
       | Plan Type | <planType> |
