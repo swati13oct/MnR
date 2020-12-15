@@ -3146,6 +3146,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	public VPPPlanSummaryPage checkZipCompSubNavVpp(String zipCode) {
 		sendkeys(OurPlans_zipfield, zipCode);
 		jsClickNew(FindPlansButton1);
+		waitForPageLoadSafari();
 		CommonUtility.checkPageIsReadyNew(driver);
 		if (getTitle().equalsIgnoreCase(PageTitleConstants.ULAYER_VPP_PLAN_PAGE_AARP_SHOP_MEDICARE)) {
 			return new VPPPlanSummaryPage(driver);
