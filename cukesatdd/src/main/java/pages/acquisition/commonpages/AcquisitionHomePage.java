@@ -1554,6 +1554,10 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	public void validateCallSam() throws InterruptedException {
 		boolean present;
 		//driver.navigate().refresh();
+		if(MRScenario.browserName.equalsIgnoreCase("Safari")) {	//Adding because Safari 13 fails to locate element after navigate back
+			driver.navigate().refresh();
+			sleepBySec(2);
+		}
 		try {
 			validateNew(callsam);
 			present = true;
