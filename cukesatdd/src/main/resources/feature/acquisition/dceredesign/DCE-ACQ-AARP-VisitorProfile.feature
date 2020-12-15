@@ -162,12 +162,12 @@ Feature: 1.10.1 DCE-REDISIGN AARP - To test Acq Visitor Profile to NEW DCE Flows
       | Plan Name | <planName> |
     Then user should be able to see Return to profile link on details page
     
-    @DCEShopperProfileAddDrugsGloballyAuthenticatedUser_AARP
+    @DCEShopperProfileAddDrugsGloballyAuthenticatedUser_AARP123
     Examples: 
       |site| drug1   | zipCode |drug2|planType|planName|userName| password|
-      |AARP| Orkambi | 80002 |Fanapt|MAPD|AARP Medicare Advantage SecureHorizons Plan 2 (HMO)|jarvisstage23111 | Password@15 |
+      |AARP| Orkambi | 80002 |Fanapt|MAPD|AARP Medicare Advantage SecureHorizons Plan 2 (HMO)|chargersdev@1 | Password@1 |
       
       @DCEShopperProfileAddDrugsGloballyAuthenticatedUser_UHC
       Examples: 
       |site| drug1   | zipCode |drug2|planType|planName|userName| password|
-      |UHC| Orkambi | 80002 |Fanapt|MAPD|AARP Medicare Advantage SecureHorizons Plan 2 (HMO)|jarvisstage23111 | Password@15 |
+      |UHC| Orkambi | 80002 |Fanapt|MAPD|AARP Medicare Advantage SecureHorizons Plan 2 (HMO)|chargersdev@1 | Password@1 |

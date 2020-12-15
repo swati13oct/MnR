@@ -107,9 +107,9 @@ public class VisitorProfilePage extends UhcDriver {
 
 	@FindBy(xpath = "//button[contains(@id,'addDrug')]")
 	public WebElement AddMyDrugsBtn;
-	
-	//New Shopper profile page objects
-	
+
+	// New Shopper profile page objects
+
 	@FindBy(xpath = "//h4[contains(text(),'drug')]/following::button[1]")
 	public WebElement drugGetStarted;
 
@@ -170,7 +170,7 @@ public class VisitorProfilePage extends UhcDriver {
 	@FindBy(xpath = "//*[@id='globalContentIdForSkipLink']/..//a[text()='Sign Out']")
 	public WebElement signOutLink;
 
-	@FindBy(xpath = "//*[contains(@id,'plan-providers-dropdown')]//button[@aria-label='Remove drug']")
+	@FindBy(xpath = "//button[@aria-expanded='true']/..//*[contains(@id,'plan-providers-dropdown')]//button[@aria-label='Remove drug']")
 	public List<WebElement> removeDrugsPlanCard;
 
 	@FindBy(xpath = "//*[contains(@aria-controls,'plan-providers-dropdown')]/img")
@@ -752,16 +752,23 @@ public class VisitorProfilePage extends UhcDriver {
 		try {
 			if (expandDrugsPlanCard.isDisplayed()) {
 				expandDrugsPlanCard.click();
-
-				while (removeDrugsPlanCard.size() != 0) {
-					/*
-					 * for(int i=0;i<editDrugs.size();i++) { totalDrugs.get(0).click();
-					 * validate(editDrugs.get(i)); editDrugs.get(i).click(); }
-					 */
+				System.out.println(removeDrugsPlanCard.size());
+				while (removeDrugsPlanCard.size() != 0){ 
 					removeDrugsPlanCard.get(0).click();
+					expandDrugsPlanCard.click();
+					System.out.println(removeDrugsPlanCard.size());
 					System.out.println("Removed drugs");
-					validate(addrugs);
+										
 				}
+				/*
+				 * while (removeDrugsPlanCard.size() != 0) {
+				 * 
+				 * for(int i=0;i<editDrugs.size();i++) { totalDrugs.get(0).click();
+				 * validate(editDrugs.get(i)); editDrugs.get(i).click(); }
+				 * 
+				 * removeDrugsPlanCard.get(0).click(); System.out.println("Removed drugs");
+				 * validate(addrugs); }
+				 */
 			}
 		} catch (Exception e) {
 			System.out.println("No existing drugs found");

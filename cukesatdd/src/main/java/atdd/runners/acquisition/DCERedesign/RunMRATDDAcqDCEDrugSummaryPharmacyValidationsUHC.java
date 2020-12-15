@@ -8,7 +8,7 @@ import com.github.mkolisnyk.cucumber.runner.ExtendedCucumberOptions;
 import cucumber.api.CucumberOptions;
 
 /**
- * this file is to run test cases for RunMRATDDAcquisitionDCERegressionUlayerHome - Scenario for drug summary Page
+ * this file is to run test cases for RunMRATDDAcqDCEDetailsPharmacyValidationUHC - Scenario for DCE Details Page pharmacy validation
  */
 @RunWith(ExtendedCucumber.class)
 @ExtendedCucumberOptions(retryCount=1,screenShotSize="", screenShotLocation="/screenshots/",jsonReport = "target/cucumber-RunMRATDDAcqDCEDrugSummaryPharmacyValidationsAARP.json",detailedReport = true,
