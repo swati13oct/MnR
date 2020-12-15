@@ -208,7 +208,7 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
       |site| drug1 | zipCode |
       |UHC| Lipitor  |   90001 |
 
-  @drugSummaryPageSwitchToGenericDrug @F484185 @F495366
+  @drugSummaryPageSwitchToGenericDrug @F484185 @F495366 
   Scenario Outline: Test to Verify that user can switch to generic drug when no drug covered
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
@@ -241,12 +241,12 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
     And user verify drug can switch to generic drug
       | DrugName | <drugName2> |
 
-		@drugSummaryPageSwitchToGenericDrug_AARP
+		@drugSummaryPageSwitchToGenericDrug_AARP @switchtoGenericAARP
     Examples: 
       |site| zipCode | drug1   | drug2     | drugName1                     | drugName2                    |
       |AARP|   10001 | Lipitor | Lopressor | atorvastatin calcium TAB 10MG | metoprolol tartrate TAB 50MG |
      
-     @drugSummaryPageSwitchToGenericDrug_UHC 
+     @drugSummaryPageSwitchToGenericDrug_UHC @switchtoGenericUHC
       Examples: 
       |site| zipCode | drug1   | drug2     | drugName1                     | drugName2                    |
       |UHC|   10001 | Lipitor | Lopressor | atorvastatin calcium TAB 10MG | metoprolol tartrate TAB 50MG |
@@ -308,12 +308,12 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
     And user click on View Drug Pricing Modal
     And user should verify the drug extra qualification in drug pricing popup
 
-		@dceRedesignExtraHelpAlert_AARP
+		@dceRedesignExtraHelpAlert_AARP @extraHelpSNPAARP
     Examples: 
       |site| zipCode | plantype | county | isMultutiCounty | drug1 | planname                                           |
       |AARP|   10001 | MAPD     | none   | no              | Lipitor    | AARP Medicare Advantage SecureHorizons Focus (HMO) |
      
-     @dceRedesignExtraHelpAlert_UHC 
+     @dceRedesignExtraHelpAlert_UHC @extraHelpSNPUHC
       Examples: 
       |site| zipCode | plantype | county | isMultutiCounty | drug1 | planname                                           |
       |UHC|   10001 | MAPD     | none   | no              | Lipitor    | AARP Medicare Advantage SecureHorizons Focus (HMO) |

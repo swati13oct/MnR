@@ -371,7 +371,7 @@ public class DrugDetailsPage extends UhcDriver {
 	@FindBy(id = "inValidZipcodeLbl")
 	private WebElement invalidZipCodeMsg;
 
-	@FindBy(xpath = "//*[@id='selectaPharmacy-overlay']/div/div[2]/div/div[6]/div/div/div[2]/div/div[2]/span")
+	@FindBy(xpath = "//*[@id='selectaPharmacy-overlay']//*[@class='field-error-msgfordceui']")
 	private WebElement noResultsMessage;
 
 	
@@ -403,7 +403,7 @@ public class DrugDetailsPage extends UhcDriver {
 	public void validatePlanName(String planName) {
 
 		System.out.println("Plan Name : "+planName);
-		WebElement PlanNameElement = driver.findElement(By.xpath("//h2[contains(text(), '"+planName+"')]"));
+		WebElement PlanNameElement = driver.findElement(By.xpath("//h1[contains(text(), '"+planName+"')]"));
 		if(validateNew(PlanNameElement)) {
 			Assert.assertTrue("Plan Name is correct for Drug Details Page"+PlanNameElement.getText(), true);
 		}
@@ -1813,5 +1813,10 @@ public class DrugDetailsPage extends UhcDriver {
 		waitforElement(standardPharmacyTab);
 		validate(standardPharmacyTab);
 		standardPharmacyTab.click();
+	}
+	
+	public void validateDefaultPharmacyName(String defaultPharmacy) {
+		validateNew(pharmacyName);
+		Assert.assertTrue("Default pharmacy name is not displayed", pharmacyName.getText().contains(defaultPharmacy));
 	}
 }

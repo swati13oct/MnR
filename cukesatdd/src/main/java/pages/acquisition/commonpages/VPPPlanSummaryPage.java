@@ -545,6 +545,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	@FindBy(xpath = "//button[contains(@class,'view--review')]")
 	private WebElement OleMS_ProceedToAuthBtn;
+	
 
 	@FindBy(xpath = "//input[@id='SignatureInd']/following-sibling::label")
 	private WebElement OleMS_SignatureIndCheckBox;
@@ -874,44 +875,53 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	@FindBy(xpath = "//div[contains(@class,'component_info_wrap')]//button[text()='Get Started']")
 	private WebElement getStartedBtn;
-	
+
 	@FindBy(xpath = "button[ng-click='getProviders()']")
 	private WebElement findMyDoctorBtn;
 
 	@FindBy(xpath = "//button[contains(text(),'Select a Plan')]")
 	private WebElement contEnrollmentBtn;
-	
+
 	@FindBy(id = "pop-btn-2")
-private WebElement viewSavedPlans;
+	private WebElement viewSavedPlans;
 
+	@FindBy(xpath = "//*[contains(@class,'component_title')]")
+	private List<WebElement> nextBestActionModalMsg;
 
-@FindBy(xpath = "//*[contains(@class,'component_title')]")
-private List<WebElement> nextBestActionModalMsg;
+	@FindBy(xpath = "//a[text()='View Saved Items']")
+	private WebElement viewSavedItems;
 
-@FindBy(xpath = "//a[text()='View Saved Items']")
-private WebElement viewSavedItems;
+	@FindBy(id = "enrollModalCloseBtn")
+	private WebElement enrollModalCloseBtn;
 
+	@FindBy(id = "enrollAlertTitle")
+	private WebElement nextBestActionModalMsgAuthenticated;
 
-@FindBy(id = "enrollModalCloseBtn")
-private WebElement enrollModalCloseBtn;
+	@FindBy(xpath = "//div[contains(@class,'component_info_wrap')]//button[text()='Continue Enrollment']")
+	private WebElement nextBestActionModalContinueEnrollmentBtn;
 
+	@FindBy(xpath = "//*[contains(@id,'plan')]//following-sibling::span//span[text()='Continue Enrollment']/..")
+	private List<WebElement> selectPlanModalContinueEnrollmentBtnList;
 
-@FindBy(id = "enrollAlertTitle")
-private WebElement nextBestActionModalMsgAuthenticated;
+	@FindBy(xpath = "//*[@class='uhc-modal__content']//*[contains(@id,'plan')]")
+	private List<WebElement> selectPlanModalPlansList;
+	
+	@FindBy(xpath = "//*[contains(@id,'drug-list-title')]")
+	private WebElement drugListPlanCard;
+	
+	@FindBy(xpath = "//*[@aria-expanded='true']//*[@class='remove-drug']")
+	private List<WebElement> removeDrugListPlanCard;
+	
+	@FindBy(xpath = "//*[contains(@id,'provider-title')]")
+	private WebElement providerListPlanCard;
+	
+	@FindBy(xpath = "//*[@aria-expanded='true']//*[@class='remove-provider']")
+	private List<WebElement> removeProviderListPlanCard;
 
-@FindBy(xpath = "//div[contains(@class,'component_info_wrap')]//button[text()='Continue Enrollment']")
-private WebElement nextBestActionModalContinueEnrollmentBtn;
-
-@FindBy(xpath = "//*[contains(@id,'plan')]//following-sibling::span//span[text()='Continue Enrollment']/..")
-private List<WebElement> selectPlanModalContinueEnrollmentBtnList;
-
-@FindBy(xpath = "//*[@class='uhc-modal__content']//*[contains(@id,'plan')]")
-private List<WebElement> selectPlanModalPlansList;
-
-private static String NEXT_ACTION_MODAL_MSG_PROVIDER_SEARCH = "Is my doctor covered?";
-private static String NEXT_ACTION_MODAL_MSG_ENROLL_PLAN = "How do I enroll?";
-private static String NEXT_ACTION_MODAL_MSG_DRUG_COST = "How much will my drugs cost?";
-private static String NEXT_ACTION_MODAL_MSG_CONTINUE_ENROLLMENT = "Continue my enrollment";
+	private static String NEXT_ACTION_MODAL_MSG_PROVIDER_SEARCH = "Is my doctor covered?";
+	private static String NEXT_ACTION_MODAL_MSG_ENROLL_PLAN = "How do I enroll?";
+	private static String NEXT_ACTION_MODAL_MSG_DRUG_COST = "How much will my drugs cost?";
+	private static String NEXT_ACTION_MODAL_MSG_CONTINUE_ENROLLMENT = "Continue my enrollment";
 
 	public WebElement getValEstimatedAnnualDrugCostValue(String planName) {
 		// WebElement valEstimatedAnnualDrugCostValue =
@@ -5133,9 +5143,11 @@ private static String NEXT_ACTION_MODAL_MSG_CONTINUE_ENROLLMENT = "Continue my e
 	}
 
 	public ProviderSearchPage clickNextBestActionModalFindMyDoctorsBtn() {
-		waitTillElementClickableInTime(nextBestActionModalFindMyDoctorsBtn, 20);
-		nextBestActionModalFindMyDoctorsBtn.click();
 		CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
+		waitTillElementClickableInTime(nextBestActionModalFindMyDoctorsBtn, 20);
+//		nextBestActionModalFindMyDoctorsBtn.click();
+		jsClickNew(nextBestActionModalFindMyDoctorsBtn);
+		waitForPageLoadSafari();
 		int initialCount = driver.getWindowHandles().size();
 		ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
 		String currentHandle = null;
@@ -5167,7 +5179,7 @@ private static String NEXT_ACTION_MODAL_MSG_CONTINUE_ENROLLMENT = "Continue my e
 							"The Continue Enrollment message is not displayed.../n Expected Message"
 									+ NEXT_ACTION_MODAL_MSG_ENROLL_PLAN + "\n Actual message"
 									+ nextBestActionModalMsg.get(0).getText(),
-							nextBestActionModalMsg.get(0).getText().equals(NEXT_ACTION_MODAL_MSG_ENROLL_PLAN));
+							nextBestActionModalMsg.get(0).getText().trim().equals(NEXT_ACTION_MODAL_MSG_ENROLL_PLAN));
 				}
 			}
 		} catch (Exception ex) {
@@ -5481,7 +5493,6 @@ private static String NEXT_ACTION_MODAL_MSG_CONTINUE_ENROLLMENT = "Continue my e
 		}
 	}
 
-
 //NBA
 
 	public void validateNBAButton(String BtnName) {
@@ -5496,14 +5507,18 @@ private static String NEXT_ACTION_MODAL_MSG_CONTINUE_ENROLLMENT = "Continue my e
 
 	public void clickOnButtonInPlanSummaryPage(String BtnName) {
 		if (BtnName.equalsIgnoreCase("Get Started")) {
-			getStartedBtn.click();
+//			getStartedBtn.click();
+			jsClickNew(getStartedBtn);
 		} else if (BtnName.equalsIgnoreCase("Find a Provider")) {
 			waitTillElementClickableInTime(findMyDoctorBtn, 5);
-			findMyDoctorBtn.click();
+//			findMyDoctorBtn.click();
+			jsClickNew(findMyDoctorBtn);
 		} else if (BtnName.equalsIgnoreCase("Continue to enrollment")) {
 			waitTillElementClickableInTime(contEnrollmentBtn, 5);
-			contEnrollmentBtn.click();
+//			contEnrollmentBtn.click();
+			jsClickNew(contEnrollmentBtn);
 		}
+		waitForPageLoadSafari();
 	}
 
 	@FindBy(xpath = "//div[contains(@class,'plan-list show active')]//*[@class='segment-title oon-benefit-padding']//h3")
@@ -5519,7 +5534,9 @@ private static String NEXT_ACTION_MODAL_MSG_CONTINUE_ENROLLMENT = "Continue my e
 
 	public void clickContinueEnrollmentBtn() {
 		waitTillElementClickableInTime(nextBestActionModalContinueEnrollmentBtn, 15);
-		nextBestActionModalContinueEnrollmentBtn.click();
+//		nextBestActionModalContinueEnrollmentBtn.click();
+		jsClickNew(nextBestActionModalContinueEnrollmentBtn);
+		waitForPageLoadSafari();
 	}
 
 	@FindBy(xpath = "//div[contains(@class,'uhc-modal__content')]//p[contains(@id,'plan')]")
@@ -5560,7 +5577,9 @@ private static String NEXT_ACTION_MODAL_MSG_CONTINUE_ENROLLMENT = "Continue my e
 
 	public void clickEnrollPlanBtnOnSelectPlanModal() {
 		validateNew(enrollInPlanBtn);
-		enrollInPlanBtn.click();
+//		enrollInPlanBtn.click();
+		jsClickNew(enrollInPlanBtn);
+		waitForPageLoadSafari();
 	}
 
 	public void validateNavigatedToOle() {
@@ -5716,7 +5735,6 @@ private static String NEXT_ACTION_MODAL_MSG_CONTINUE_ENROLLMENT = "Continue my e
 		}
 	}
 
-
 	public void verifyNextBestActionModalForContinueEnrollment() {
 		try {
 			if (nextBestActionModal.isDisplayed()) {
@@ -5733,7 +5751,7 @@ private static String NEXT_ACTION_MODAL_MSG_CONTINUE_ENROLLMENT = "Continue my e
 	}
 
 	public void clickNextBestActionModalContinueEnrollmentBtn() {
-		waitTillElementClickableInTime(nextBestActionModalContinueEnrollmentBtn, 15);
+		waitTillElementClickableInTime(nextBestActionModalContinueEnrollmentBtn, 30);
 		nextBestActionModalContinueEnrollmentBtn.click();
 	}
 
@@ -5773,6 +5791,32 @@ private static String NEXT_ACTION_MODAL_MSG_CONTINUE_ENROLLMENT = "Continue my e
 
 	public void clickContinueEnrollmentBtnOnModal() {
 		selectPlanModalContinueEnrollmentBtnList.get(0).click();
+	}
+	
+	public void removeDrugsFromPlanCard() {
+		try {
+			drugListPlanCard.click();
+		while(removeDrugListPlanCard.size()!=0) {
+			removeDrugListPlanCard.get(0).click();
+			System.out.println("Removed drugs in plan card");
+		}
+		}
+		catch(Exception e) {
+			System.out.println("No drugs in plan card");
+		}
+	}
+	
+	public void removeProvidersFromPlanCard() {
+		try {
+			providerListPlanCard.click();
+		while(removeProviderListPlanCard.size()!=0) {
+			removeProviderListPlanCard.get(0).click();
+			System.out.println("Removed providers in plan card");
+		}
+		}
+		catch(Exception e) {
+			System.out.println("No providers in plan card");
+		}
 	}
 
 }

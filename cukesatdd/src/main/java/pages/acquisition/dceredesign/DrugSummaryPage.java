@@ -222,7 +222,7 @@ public class DrugSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//*[@class='pagination']/../p")
 	private WebElement pageNumber;
 
-	@FindBy(xpath = "//*[@id='selectaPharmacy-overlay']//*[@class='field-error-msgfordceui']/span[1]")
+	@FindBy(xpath = "//*[@id='selectaPharmacy-overlay']//*[@class='field-error-msgfordceui']")
 	private WebElement noResultsMessage;
 
 	@FindBy(xpath="//*[text()='Return to plan summary']")
@@ -866,11 +866,15 @@ public class DrugSummaryPage extends UhcDriver {
 
 	
 	public void clickReturnToPlanSummary() {
-		returnToPlanSummaryLink.click();
+//		returnToPlanSummaryLink.click();
+		jsClickNew(returnToPlanSummaryLink);
+		waitForPageLoadSafari();
 	}
 	
 	public void clickReturnToHomePage() {
-		returnToHomePageLink.click();
+//		returnToHomePageLink.click();
+		jsClickNew(returnToHomePageLink);
+		waitForPageLoadSafari();
 	}
 
 

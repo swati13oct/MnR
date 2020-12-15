@@ -1388,5 +1388,42 @@ public class ComparePlansPage extends UhcDriver {
 		Assert.assertEquals("Doctor name is not displayed correctly", firstDoctorName, viewLocationPopupProviderName.getText());
 	}
 
+	public void CounterDentalFlyerLink(String counter,String Documentcode) throws Exception{
+		String ParentWindow = driver.getTitle();
+		WebElement DentalFlyerLink;
+		if (counter.equals("1023")) {
+			DentalFlyerLink = driver.findElement(By.xpath("//td[1]//*[text()='Click here for details']"));
+			System.out.println("Dental Flyer link is 1023 Displayed");
+			jsClickNew(DentalFlyerLink);
+			System.out.println("Clicked on 1023 DentalFlyer on plan Compare page");
+			CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
+			switchToNewTabNew(DentalFlyerLink);
+			if (driver.getCurrentUrl().contains(Documentcode)) {
+				System.out.println("We able to 1023  Document loaded");
+				driver.manage().window().maximize();
+				Thread.sleep(3000);
+			} else {
+				System.out.println("Not found Expected window");
+				driver.switchTo().window(ParentWindow);
+			}
+		} else if (counter.equals("1025")) {
+			DentalFlyerLink = driver.findElement(By.xpath("//td[2]//*[text()='Click here for details']"));
+			System.out.println("Dental Flyer link is 1025 Displayed");
+			jsClickNew(DentalFlyerLink);
+			System.out.println("Clicked on 1025 DentalFlyer on plan Compare page");
+			CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
+			switchToNewTabNew(DentalFlyerLink);
+
+			if (driver.getCurrentUrl().contains(Documentcode)) {
+				System.out.println("We able to 1025  Document loaded");
+				driver.manage().window().maximize();
+				Thread.sleep(3000);
+			} else {
+				System.out.println("Not found Expected window");
+				driver.switchTo().window(ParentWindow);
+			}
+		}
+		
+	}
 }
 
