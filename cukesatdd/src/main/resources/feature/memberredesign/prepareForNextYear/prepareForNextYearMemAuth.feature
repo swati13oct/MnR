@@ -183,7 +183,7 @@ Feature: 1.25.1 Member Prepare For Next Year - Member Auth
     @memAuth_pfny02_combo_fed_ship
     Examples: 
 	    | index | FID     | username  | password  | MemUserName          | planType | memberType              | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | co_us | co_es | co_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh | showNxtYrPlan |  
-	    | 2-12  | F443004 | qavgogine | qavgogine | q3_sep_UAT4_AARP273  | PDP	    | COMBO_PDP_IND_SHIP_PFNY | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | false | false | false | true          |
+	    | 2-12  | F443004 | qavgogine | qavgogine | q4_ShipVAS_005  | PDP	    | COMBO_PDP_IND_SHIP_PFNY | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | false | false | false | true          |
 
 
   @memAuth_pfny03 @hasTab @noCombTabOnPfny
@@ -222,7 +222,7 @@ Feature: 1.25.1 Member Prepare For Next Year - Member Auth
 	@memAuth_pfny03b
     Examples: 
 	    | index | FID     | username  | password  | MemUserName             | planType | memberType              |
-	    | 3-02  | F437767 | qavgogine | qavgogine | q3_sep_UAT4_AARP273     | SHIP	   | COMBO_PDP_IND_SHIP_PFNY |
+	    | 3-02  | F437767 | qavgogine | qavgogine | q4_ShipVAS_005     | SHIP	   | COMBO_PDP_IND_SHIP_PFNY |
 
   @memAuth_pfny04 @hasTab
   Scenario Outline: -Index <index> -FID <FID> -Plan Type: <planType> -Member Type: <memberType> - To verify Prepare For Next Year tab and page content will display when conditions are met 
