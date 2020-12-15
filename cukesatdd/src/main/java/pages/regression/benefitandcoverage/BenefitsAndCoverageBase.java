@@ -787,6 +787,7 @@ public class BenefitsAndCoverageBase extends BenefitsAndCoverageWebElements {
 	public void contactUslink() {
 		validateWithValue("Link- Contact US", contactUslink);
 		if (contactUslink.isEnabled()) {
+			scrollElementToCenterScreen(contactUslink);
 			contactUslink.click();
 			sleepBySec(10);
 			Assert.assertTrue("Contact Us page is loaded successfully",driver.getCurrentUrl().contains("contact-us/overview.html"));

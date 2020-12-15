@@ -1251,6 +1251,10 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 		targetDocName="VIEW OTHER DOCUMENTS AND RESOURCES";
 		System.out.println("Proceed to validate '"+targetDocName+"' link");
 		validateNew(Viewotherdocsinpdfpdp);
+		String expHref="/content/medicare/member/documents/overview.html";
+		String actHref=Viewotherdocsinpdfpdp.getAttribute("href");
+		Assert.assertTrue("PROBLEM - '"+targetDocName+"' link href value is not as expected.  Expected to contain '"+expHref+"' | Actual = '"+actHref+"'", actHref.contains(expHref));
+		/* keep re-activate this validation if planDoc page ever load faster...
 		Viewotherdocsinpdfpdp.click();
 		sleepBySec(10);
 		expectedUrl="/member/documents/overview.html";
@@ -1259,6 +1263,7 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 		Assert.assertTrue("PROBLEM - '"+targetDocName+"' destination URL not as expected. Expected to contain '"+expectedUrl+"' | Actual = '"+actualUrl+"'", actualUrl.contains(expectedUrl));
 		sleepBySec(20);
 		driver.get(originalUrl);
+		*/
 	}
 
 	public void navigateToBenefitsPg(String plantype) {
