@@ -9,8 +9,6 @@ Feature: 1.08. ACQ- Visitor Profile Authenticated NBA AARP
     And the user login with optum Id credentials
       | User Name | <userName> |
       | Password  | <password> |
-    And user clears the existing drugs in Visitor profile
-    And user clears the provider in visitor profile page
     And user removes existing saved plans in visitor profile
     Then user clicks on home menu from Visitor profile page
     When the user performs plan search using following information
@@ -19,6 +17,8 @@ Feature: 1.08. ACQ- Visitor Profile Authenticated NBA AARP
       | Is Multi County | <isMultiCounty> |
     And the user views the plans of the below plan type
       | Plan Type | <plantype> |
+      And user removes drugs from plan card
+      And user removes provider from plan card
     Then user should see the Get started NBA on VPP
     When user clicks on Saved items on NBA
     Then user should be navigated to visitor profile page
@@ -51,8 +51,6 @@ Feature: 1.08. ACQ- Visitor Profile Authenticated NBA AARP
     And the user login with optum Id credentials
       | User Name | <userName> |
       | Password  | <password> |
-    And user clears the existing drugs in Visitor profile
-    And user clears the provider in visitor profile page
     And user removes existing saved plans in visitor profile
     Then user clicks on home menu from Visitor profile page
     When the user performs plan search using following information
@@ -61,6 +59,8 @@ Feature: 1.08. ACQ- Visitor Profile Authenticated NBA AARP
       | Is Multi County | <isMultiCounty> |
     And the user views the plans of the below plan type
       | Plan Type | <plantype> |
+      And user removes drugs from plan card
+      And user removes provider from plan card
     Then user should see the Get started NBA on VPP
     Then user clicks on get started button on NBA
     Then the user validates Get Started Page
