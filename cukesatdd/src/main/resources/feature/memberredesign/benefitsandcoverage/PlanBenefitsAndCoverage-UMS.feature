@@ -881,4 +881,18 @@ Feature: 1.01 Member  benefits and Coverage page
       | index  | FID    | planType  | memberType     | copayCategory | deductible   | insulin      |
       | 34-I09 | 478830 | MAPD      | Individual_BnC | NON LIS       | T12345       | nonInsulin   | 
 
+  @benefitsAndCoverage24 @comboApi
+  Scenario Outline: Index: <index> -TID: <TID> -plan: <planType> -memberType: <memberType> - Verify UCPBenefits API not having undefined input value for COMBO user
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type   | <planType>   |
+      | Member Type | <memberType> |
+    Then The user navigate to Benefits and Coverage page
+    And the users validate Benefits page has combo tabs
+    And the users validate UCPBenefits related API requests are not having undefined input value
+
+    Examples: 
+      | index | TID   | planType | memberType   |
+      | 35    | xxxxx | COMBO    | SHIP_FED_BnC |
+      | 36    | xxxxx | COMBO    | FED_SHIP_SHIP_BnC |
+      | 37    | xxxxx | COMBO    | FED_FED_BnC  |
  ###############################Regression Scenarios END Here ########################################

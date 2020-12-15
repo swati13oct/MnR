@@ -2585,5 +2585,32 @@ public class BenefitsAndCoverageUmsStepDefinition {
 		}
 	}
 	
+	@Then("^the users validate Benefits page has combo tabs$")
+	public void verifyComboTab() {
+		BenefitsAndCoveragePage bncPg = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
+		int numTab=bncPg.numberOfComboTab();
+		Assert.assertTrue("PROBLEM - user has '"+numTab+"' combo tab, not suitable for this scenario testing", numTab >1);
+	}
+	
+	@Then("^the users validate UCPBenefits related API requests are not having undefined input value$")
+	public void verifyApi() {
+		BenefitsAndCoveragePage bncPg = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
+		List<String> testNote = new ArrayList<String>();
+		testNote.add("API requests for this user:");
+		testNote.addAll(bncPg.verifyApi());
+
+		if (testNote.size()>0) {
+			getLoginScenario().saveBean(BenefitsAndCoverageCommonConstants.TEST_RESULT_NOTE, testNote);
+		}	
+		
+		for (String url: testNote) {
+			Assert.assertTrue("PROBLEM - planBenefits API is contains 'undefined' value in the request", !url.contains("undefined"));
+		}
+		
+
+	}
+	
 }//end of class
 

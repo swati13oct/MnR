@@ -591,3 +591,6 @@ a09a118c-0dfd-447f-8e7c-42c8391df4ce/Password@1,CSNP_MAPD,Individual_BnC,NON LIS
 474cb580-e9d9-4013-8609-1b07bbec66aa/Password@1,ISNP_MAPD,Individual_BnC,NON LIS,T123NoD_T45D,hasInsulin
 fa88fdee-5dd1-446a-9da5-514500ad995b/Password@1,MAPD,Individual_BnC,LIS 4,NoTier,nonInsulin
 d5970b4f-c7bf-475f-8dfc-309d8dee95c7/Password@1,MAPD,Individual_BnC,NON LIS,T12345,nonInsulin
+f0ec69a1-3ce4-4f74-8718-51519fc55547/Password@1,COMBO,SHIP_FED_BnC
+2fe07482-726b-49b8-b3c0-b062d9f0ca08/Password@1,COMBO,FED_SHIP_SHIP_BnC
+dce22223-be33-4281-828e-712024e058fb/Password@1,COMBO,FED_FED_BnC
