@@ -697,8 +697,13 @@ public class GlobalComponentsCommonStepDefinition {
 		  
 		  
 	  }
+	  @Then("^the user check Still have a question$")
+	  public void the_user_check_Still_have_a_question() {
+		  LearnAboutMedicareHomePage learnAboutMedicareHomePage=(LearnAboutMedicareHomePage)getLoginScenario().getBean(PageConstants.LEARN_ABOUT_MEDICARE_PAGE);
+		  learnAboutMedicareHomePage.chechStillHaveQues();
+	  }
+	  
 	 
 	  
-
 }
 
