@@ -80,20 +80,22 @@ Feature: 1.18.1 Member Pharamcies And Prescriptions page - Pre-Effective
 	  | FID     | planType | memberType          | expectLink |
 	  | F493942 | PDP      | IND_PREEFF_PnP      | yes        |
 
-	@pnpPreEff_pdp_grp
-    Examples: 
-	  | FID     | planType | memberType          | expectLink |
-	  | F493942 | PDP      | GRP_PREEFF_PnP      | yes        |
+	#note: no test user available for now
+	#@pnpPreEff_pdp_grp
+    #Examples: 
+	#  | FID     | planType | memberType          | expectLink |
+	#  | F493942 | PDP      | GRP_PREEFF_PnP      | yes        |
 
 	@pnpPreEff_snp_ind
     Examples: 
 	  | FID     | planType | memberType          | expectLink |
 	  | F493942 | SNP      | IND_PREEFF_PnP      | yes        |
 
-	@pnpPreEff_ssp_grp
-    Examples: 
-	  | FID     | planType | memberType          | expectLink |
-	  | F493942 | SSP      | GRP_PREEFF_PnP      | yes        |
+	#note: no test user available for now
+	#@pnpPreEff_ssp_grp
+    #Examples: 
+	#  | FID     | planType | memberType          | expectLink |
+	#  | F493942 | SSP      | GRP_PREEFF_PnP      | yes        |
 
   @pnpPreEff02 @regressionMember
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> - Verify member will not have access to Pharmacies and Prescriptions Page
@@ -123,8 +125,9 @@ Feature: 1.18.1 Member Pharamcies And Prescriptions page - Pre-Effective
 	  | FID     | planType | memberType          | expectLink |
 	  | F493942 | MA       | GRP_PREEFF_PnP      | no         |
 
-	@pnpPreEff_ship_ind
-    Examples: 
-	  | FID     | planType | memberType          | expectLink |
-	  | F493942 | SHIP     | IND_PREEFF_PnP      | no         |
+	#note: no test user available for now
+	#@pnpPreEff_ship_ind
+    #Examples: 
+	#  | FID     | planType | memberType          | expectLink |
+	#  | F493942 | SHIP     | IND_PREEFF_PnP      | no         |
 	  

@@ -40,7 +40,8 @@ Feature: 1.06.6 Member Plans and Documents - section: Forms And Resources Part 2
 	Examples: 
       | index  | TID         | planType | memberType            | fnr_sd | fnr_maf | fnr_or | fnr_di |
       | 04-099 | xxxxx       | PDP      | AARP_IND_PREEFF_PDnR  | false  | false   | false  | false  |
-      | 05-100 | xxxxx       | PDP      | GROUP_PREEFF_PDnR     | false  | false   | false  | false  |
+	#note: no test user available for now
+    #  | 05-100 | xxxxx       | PDP      | GROUP_PREEFF_PDnR     | false  | false   | false  | false  |
 
 	@terminated_ma_2of2
 	Examples: 
@@ -102,8 +103,9 @@ Feature: 1.06.6 Member Plans and Documents - section: Forms And Resources Part 2
       | index  | TID         | planType | memberType            | fnr_sd | fnr_maf | fnr_or | fnr_di |
       | 19-120 | 15119,15304 | SHIP     | MULTI_IND_EFF_PDnR    | true   | false   | false  | false  |
 
-	@preeffective_ship_2of2
-	Examples: 
-      | index  | TID         | planType | memberType            | fnr_sd | fnr_maf | fnr_or | fnr_di |
-      | 20-121 | xxxxx       | SHIP     | IND_PREEFF_PDnR       | true   | false   | false  | false  |
+	#note: no test user available for now
+	#@preeffective_ship_2of2
+	#Examples: 
+    #  | index  | TID         | planType | memberType            | fnr_sd | fnr_maf | fnr_or | fnr_di |
+    #  | 20-121 | xxxxx       | SHIP     | IND_PREEFF_PDnR       | true   | false   | false  | false  |
     

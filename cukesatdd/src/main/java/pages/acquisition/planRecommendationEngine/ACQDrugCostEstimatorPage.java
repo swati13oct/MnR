@@ -176,6 +176,7 @@ public class ACQDrugCostEstimatorPage extends UhcDriver {
     public void choosePharmacyandBacktoPlans() {
     	validate(drugpageButtons.get(0));
 		jsClickNew(drugpageButtons.get(0));
+		waitForPageLoadSafari();
 		pageloadcomplete();
 		threadsleep(2000);
 		validate(backtoPlansButton.get(0));

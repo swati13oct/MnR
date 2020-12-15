@@ -93,7 +93,7 @@ Given the user is on AARP medicare acquisition site landing page
      @MedSuppOLEBLayerSmoke
 Scenario Outline: MedSup OLE End to end from AARP Acquisition site VPP Plan Summary
 Given the user is on UHC medicare acquisition site page
-    When the user performs plan search using following information in the AARP site
+    When the user performs plan search using following information in UMS site
       | Zip Code        | <zipcode>         |
       | County Name     | <county>          |
       | Is Multi County | <isMultutiCounty> |
