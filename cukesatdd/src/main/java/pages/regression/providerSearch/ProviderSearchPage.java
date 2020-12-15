@@ -276,7 +276,7 @@ public class ProviderSearchPage extends ProviderSearchBase {
 		CommonUtility.checkPageIsReady(driver);
 		CommonUtility.waitForPageLoad(driver, benefitsPgHeader, 20);
 		checkModelPopup(driver, 1);
-		if (planType.equals("MA") && (MRScenario.environment.equals("offline") || MRScenario.environment.equals("online"))) {
+		if (planType.equals("MA") && (MRScenario.environment.equals("offline") || MRScenario.environment.equals("prod"))) {
 			Assert.assertTrue("PROBLEM - KNOWN ISSUE- notified Rally already - unable to locate header text for 'Coverage and Benefits' page",
 					noWaitValidate(benefitsPgHeader) || noWaitValidate(benefitsPgHeader_newUI));
 		} else {
