@@ -577,15 +577,20 @@ public class ProviderSearchPage extends UhcDriver {
 	public void selectYear(String year) {
 		if (year.contains("current")) {
 			if (validate(currentYrTile)) {
-				currentYrTile.click();
+				// currentYrTile.click();
+				jsClickNew(currentYrTile);
 			} else {
 				System.out.println("Current year tile is not present");
 			}
-		} else if (year.contains("next")) {
-			if (validate(nextYrTile))
-				nextYrTile.click();
+		} else {
+			if (validate(nextYrTile)) {
+				// nextYrTile.click();
+				jsClickNew(nextYrTile);
+			} else {
+				System.out.println("Next year tile is not present");
+			}
 		}
-		
+
 	}
 
 	public AcquisitionHomePage returnToAcqHomePage() {
