@@ -255,7 +255,7 @@ public class ProviderSearchPage extends ProviderSearchBase {
 		return driver;
 	}
 
-	public WebDriver navigateToBenefitsPage() {
+	public WebDriver navigateToBenefitsPage(String planType) {
 		checkModelPopup(driver, 1);
 		if (noWaitValidate(benefitsTopMenuLnk)) {
 			benefitsTopMenuLnk.click();
@@ -276,13 +276,18 @@ public class ProviderSearchPage extends ProviderSearchBase {
 		CommonUtility.checkPageIsReady(driver);
 		CommonUtility.waitForPageLoad(driver, benefitsPgHeader, 20);
 		checkModelPopup(driver, 1);
-		Assert.assertTrue("PROBLEM - unable to locate header text for 'Coverage and Benefits' page",
-				noWaitValidate(benefitsPgHeader) || noWaitValidate(benefitsPgHeader_newUI));
+		if (planType.equals("MA") && (MRScenario.environment.equals("offline") || MRScenario.environment.equals("online"))) {
+			Assert.assertTrue("PROBLEM - KNOWN ISSUE- notified Rally already - unable to locate header text for 'Coverage and Benefits' page",
+					noWaitValidate(benefitsPgHeader) || noWaitValidate(benefitsPgHeader_newUI));
+		} else {
+			Assert.assertTrue("PROBLEM - unable to locate header text for 'Coverage and Benefits' page",
+					noWaitValidate(benefitsPgHeader) || noWaitValidate(benefitsPgHeader_newUI));
+		}
 		return driver;
 	}
 
-	public WebDriver navigateToPlanDocPage_preEff() {
-		navigateToBenefitsPage();
+	public WebDriver navigateToPlanDocPage_preEff(String planType) {
+		navigateToBenefitsPage(planType);
 		if (noWaitValidate(preeff_goToPlanDocBtn)) {
 			preeff_goToPlanDocBtn.click();
 			CommonUtility.checkPageIsReady(driver);
@@ -290,8 +295,8 @@ public class ProviderSearchPage extends ProviderSearchBase {
 		return driver;
 	}
 
-	public WebDriver navigateToPlanDocPage() {
-		navigateToBenefitsPage();
+	public WebDriver navigateToPlanDocPage(String planType) {
+		navigateToBenefitsPage(planType);
 		if (noWaitValidate(planDocTopMenuLnk)) {
 			planDocTopMenuLnk.click();
 			CommonUtility.checkPageIsReady(driver);
@@ -329,8 +334,8 @@ public class ProviderSearchPage extends ProviderSearchBase {
 		return driver;
 	}
 
-	public WebDriver navigateToOrderPage() {
-		navigateToBenefitsPage();
+	public WebDriver navigateToOrderPage(String planType) {
+		navigateToBenefitsPage(planType);
 		if (noWaitValidate(orderTopMenuLnk)) {
 			orderTopMenuLnk.click();
 			CommonUtility.checkPageIsReady(driver);
