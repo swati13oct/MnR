@@ -1891,7 +1891,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			if (driver.getCurrentUrl().contains("medicare.uhc.com")) {
 				Assert.assertTrue(true);
 				System.out.println("Signin page is loaded");
-				driver.navigate().back();
+//				driver.navigate().back();
+				clickBrowserBackButton();
 				CommonUtility.waitForPageLoad(driver, healthPlansZipcode, 30);
 				System.out.println("Home Page is loaded");
 			} else {
