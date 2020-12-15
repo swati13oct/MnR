@@ -2612,5 +2612,36 @@ public class BenefitsAndCoverageUmsStepDefinition {
 
 	}
 	
+	@Then("user validates to not display pharmacy out-of-pocket maximum beside drug lookup")
+	public void  validatePharmacyOutOfPocketMaximum(DataTable memberAttributes) throws InterruptedException {
+		List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		String plantype = memberAttributesMap.get("Plan Type");
+		System.out.println("TEST - "+plantype);
+		String memberType=(String) getLoginScenario().getBean(LoginCommonConstants.CATOGERY);
+		String type=memberAttributesMap.get("Type");
+		
+		BenefitsAndCoveragePage bncPg = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
+		
+		boolean isPharm = true;
+		
+		if(type!=null) {
+			if(type.contains("Individual")) {
+				Assert.assertTrue(!bncPg.checkpharmoutpockttextarea());
+				isPharm = false;
+			}
+		}else if(memberType!=null && isPharm) {
+			if(memberType.contains("Individual_BnC")) {
+				Assert.assertTrue(!bncPg.checkpharmoutpockttextarea());
+			}
+		}
+		
+	}
+	
 }//end of class
 
