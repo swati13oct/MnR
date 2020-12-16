@@ -44,4 +44,4 @@ Feature: Refill All Medications CTA - My Medications
 
     Examples: 
       | username | password | memUserName | planType | memberType |
-      | yaihemai | Yusufu6$ | Jeanfr46    | HMO      | Individual |
+      | yaihemai | Yusufu6$ | TCZUNIGA52  | Medica   | Individual |

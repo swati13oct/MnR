@@ -62,7 +62,7 @@ Feature: Drug Name and Get Pricing
       | yaihemai | Yusufu6$ | LUGRUG11    | MAPD     | Individual |
 
   @Sanity @Regression
-  Scenario Outline: To verify user has access to Get Pricing
+  Scenario Outline: To verify MAPD user has access to Get Pricing
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
       | Username | <username> |
@@ -102,7 +102,7 @@ Feature: Drug Name and Get Pricing
       | yaihemai | Yusufu6$ | sofyabakman@msn.com | PCP      | Individual |
 
   @Sanity @Regression
-  Scenario Outline: To verify user has access to Get Pricing
+  Scenario Outline: To verify PCP user has access to Get Pricing
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
       | Username | <username> |
@@ -142,7 +142,7 @@ Feature: Drug Name and Get Pricing
       | yaihemai | Yusufu6$ | TCZUNIGA52  | Medica   | Individual |
 
   @Sanity @Regression
-  Scenario Outline: To verify user has access to Get Pricing
+  Scenario Outline: To verify Medica user has access to Get Pricing
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
       | Username | <username> |

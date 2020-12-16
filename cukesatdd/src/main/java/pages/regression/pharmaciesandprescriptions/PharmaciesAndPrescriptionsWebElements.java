@@ -1000,7 +1000,7 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 
 	// F436319
 	//@FindBy(xpath = "//*[@data-testid='global-alert-banner-Expanded Access to Care, Support and Resources for COVID-19']")
-	@FindBy(xpath = "//*[@data-testid='global-alert-banner-title']")
+	@FindBy(xpath = "//*[@data-testid='global-alert-banner--title']")
 	protected WebElement PnPNotification;
 
 	public List<Integer> getListOfIndexForManageAtWalgreens() {
