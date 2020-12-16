@@ -223,7 +223,7 @@ public class PlanRecommendationEngineEditResponsePage extends UhcDriver {
 		} else if (section.equalsIgnoreCase("cost")) {
 			UIValue = inputValues.get("Preference Option");
 		} else if (section.equalsIgnoreCase("priorities")) {
-			UIValue = inputValues.get("priorities");
+			UIValue = inputValues.get("Priorities");
 		}
 		return UIValue.toLowerCase();
 	}

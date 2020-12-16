@@ -168,7 +168,7 @@ Feature: Plan Recommendation Engine flow - Verify PRE flows with Edit response f
     Then user validate UI and API recommendation rankings in results page
 
     Examples: 
-      | Zipcode | isMultiCounty | county      | isCoverageOpt | specialNeeds | travel  | doctors    | DoctorsName | isMultiDoctor | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities     | E_Zipcode | E_isMultiCounty | E_county | E_isCoverageOpt | E_specialNeeds | E_travel | E_doctors | E_DoctorsName | E_isMultiDoctor | E_Dental-Hearing-Vision-Fitness | E_costPreferenceOption | priorityOption | priorities          |
+      | Zipcode | isMultiCounty | county      | isCoverageOpt | specialNeeds | travel  | doctors    | DoctorsName | isMultiDoctor | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities     | E_Zipcode | E_isMultiCounty | E_county | E_isCoverageOpt | E_specialNeeds | E_travel | E_doctors | E_DoctorsName | E_isMultiDoctor | E_Dental-Hearing-Vision-Fitness | E_costPreferenceOption | E_priorityOption | E_priorities          |
       |   35034 | Yes           | Bibb County | MA            | nursing      | regular | UHGNetwork |             |               | Yes,Yes,Yes,Yes               | Lower                | both           | Travel,Doctors |     10002 | NO              | New York | MA              | chronic        | withinUS | Lookup    | john          | NO              | No,No,No,No                     | Higher                 | both           | Doctors,Health Cost |
 
   @PRE @planrecommendation @EditResponsePage @EditResponseAddProvider

@@ -281,7 +281,7 @@ public class PlanRecommendationEngineResultsPage extends UhcDriver {
 	@FindBy(css = "#plan-list-1 .swiper-container .module-plan-overview a[id*='savePlan']")
 	private List<WebElement> MAPlansSaveIcon;
 	
-	@FindBy(css = "#plan-list-3 .swiper-container .module-plan-overview a[class*='favorite-plan'] span[class*='unliked']")
+	@FindBy(css = "#plan-list-3 .swiper-wrapper .module-plan-overview a[class*='favorite-plan']:nth-child(1) img[class*='unliked']")
 	private List<WebElement> PDPPlansSaveIcon;
 	
 	@FindBy(css = "#plan-list-4 .swiper-container .module-plan-overview a[id*='savePlan']")
@@ -384,6 +384,9 @@ public class PlanRecommendationEngineResultsPage extends UhcDriver {
 	
 	@FindBy(css = "input#currentYear[class*='selected']")
 	private WebElement currentPlanYearSelected;
+	
+	@FindBy(css = "#highlights a[class*='cta-button']:nth-child(1)")
+	private List<WebElement> enrollBtnPlanDetails;
 	
 // Visitor profile elements
 	
@@ -1569,10 +1572,6 @@ public ArrayList<String> saveplans(List<WebElement> plansName, int saveplans,	St
 	System.out.println("Plans Count :" +plansName.size());
 	threadsleep(3000);
 	for (int plan = 0; plan < saveplans; plan++) {
-		if(plansName.get(1).getText().equalsIgnoreCase("MedicareRx")) {
-			vppPlans.add(savingplans(plansName.get(plan), savePlan.get(2)));
-			continue;
-		}
 		vppPlans.add(savingplans(plansName.get(plan), savePlan.get(plan)));
 	}
 	Collections.sort(vppPlans);
@@ -1738,7 +1737,29 @@ public void PREStage(String primaryWindow, String aarp) {
 			}
 	}
 	threadsleep(5000);
-	driver.switchTo().window(primaryWindow);
+//	driver.switchTo().window(primaryWindow);
+}
+
+public void validatePDPPlanNamesAndEnroll() {
+	System.out.println("Validating PDP Plan Names in Details pages : ");
+	plansLoader();
+	int pdpPlanCount = Integer.parseInt(PDPPlanCount.getText());
+	System.out.println(pdpPlanCount);
+	validate(PDP1stPlanName, 60);
+	String exceptedplanName = PDPPlansNames.get(0).getText().split("\n")[0];
+	WebElement planViewdetailsBut = PDPPlansNames.get(0).findElement(By.cssSelector("#viewmoredetlinkpdp"));
+	planViewdetailsBut.click();
+	pageloadcomplete();
+	String actualplanName = planNameVPPDetailsPage.getText().split("\n")[0];
+	System.out.println("Plan Name in VPP Details Page: "+actualplanName);
+	Assert.assertTrue(exceptedplanName.contains(actualplanName), "--- Plan name are not matches---");
+	enrollBtnPlanDetails.get(0).click();
+	pageloadcomplete();
+	String planNameinOLE = planNameEnrollPage.getText().trim(); 
+	System.out.println("Plan Name in Plan Enroll Page: "+planNameinOLE);
+	Assert.assertTrue(planNameinOLE.contains(exceptedplanName), "--- Plan name are not matches---");	
+	System.out.println(driver.getCurrentUrl());
+	Assert.assertTrue(driver.getCurrentUrl().contains("online-application.html/welcome"), "OLE page not loaded");
 }
 
 }

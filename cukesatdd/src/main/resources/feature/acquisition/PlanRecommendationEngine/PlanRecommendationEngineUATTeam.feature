@@ -77,15 +77,25 @@ Feature: PRE_UAT - Verify UAT Scenarios in PRE
       | Site Name | <site> |
     When user navigate to Plan Recommendation Engine Tool
       | Site Name | <site> |
+    And clicks on get started button and runs questionnaire
+      | Zip Code        | <Zipcode>       |
+      | Is Multi County | <isMultiCounty> |
+      | CountyDropDown  | <county>        |
+    And user selects plan type in coverage options page
+      | Plan Type | <isCoverageOpt> |
+    And user selects add drug option in Drug page
+      | Drug Selection | <Drug Selection>                                                       |
+      | Drug Details   | <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch> |
+    Then user validate PDP Plan Names in VPP Details and Click Enroll Button in Plan Details page
 
     Examples: 
-      | site                   |
-      | Myuhcplans             |
-      | uhcandwellmedsa        |
-      | mauhcmedicaresolutions |
-      | maaarpmedicareplans    |
-      | uhcmedicaresolutions   |
-      | aarpmedicareplans      |
+      | site                   | Zipcode | isMultiCounty | county       | isCoverageOpt | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch                              |
+      | Myuhcplans             |   10002 | NO            | New York     | PDP           | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,1,YES,NO                                                            |
+      | uhcandwellmedsa        |   10003 | NO            | New York     | PDP           | Yes            | morphine sulfate,NO,morphine sulfate CAP 10MG ER,,,1,NO,NO                                        |
+      | mauhcmedicaresolutions |   35034 | YES           | Bibb County  | PDP           | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,1,YES,NO                                                            |
+      | maaarpmedicareplans    |   35034 | YES           | Perry County | PDP           | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,1,YES,NO:morphine sulfate,NO,morphine sulfate CAP 10MG ER,,,1,NO,NO |
+      | uhcmedicaresolutions   |   10001 | NO            | New County   | PDP           | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,1,YES,NO                                                            |
+      | aarpmedicareplans      |   10001 | NO            | New York     | PDP           | Yes            | morphine sulfate,NO,morphine sulfate CAP 10MG ER,,,1,NO,NO                                        |
 
   @PRE @planrecommendation @PRE_UAT_VP_PLANS_PDP
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <Drug Selection> , <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch> , <PlanYear> - To validate Plan Names VP VS VPP Details Page

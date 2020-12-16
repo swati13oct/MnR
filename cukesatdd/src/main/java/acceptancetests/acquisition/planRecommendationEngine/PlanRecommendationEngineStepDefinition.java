@@ -700,7 +700,6 @@ public class PlanRecommendationEngineStepDefinition {
    	public void zipcode_Doc_Drug_pre(DataTable givenAttributes) {
 		readfeaturedata(givenAttributes);
 		PlanRecommendationEngineResultsPage planSelectorResultspage =  new PlanRecommendationEngineResultsPage(wd);
-		PlanRecommendationEngineDoctorsPage planSelectorDoctorspage =  new PlanRecommendationEngineDoctorsPage(wd);
 		String zip = inputValues.get("Zip Code");
 		String county = inputValues.get("County Name");
 		String isMultiCounty = inputValues.get("Is Multi County");
@@ -938,6 +937,13 @@ public class PlanRecommendationEngineStepDefinition {
 	public void user_validate_prioritiesElements() {
 		PlanRecommendationEnginePrioritiesPage priorities =  new PlanRecommendationEnginePrioritiesPage(wd);
 		priorities.prioritiesElements();
+	}
+	
+	@Then("^user validate PDP Plan Names in VPP Details and Click Enroll Button in Plan Details page$")
+   	public void verify_Plan_names_Enroll_page() {
+		PlanRecommendationEngineResultsPage planSelectorResultspage =  new PlanRecommendationEngineResultsPage(wd);
+		checkpopup();
+		planSelectorResultspage.validatePDPPlanNamesAndEnroll();
 	}
 
 }
