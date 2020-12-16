@@ -914,5 +914,9 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth
       | 35    | xxxxx | qavgogine| qavgogine | GENARO_Q4_COMBO    | COMBO    | SHIP_FED_BnC |
       | 36    | xxxxx | qavgogine| qavgogine | q4_ShipVAS_009     | COMBO    | FED_SHIP_SHIP_BnC |
       | 37    | xxxxx | qavgogine| qavgogine | q2_jun_grp0255     | COMBO    | FED_FED_BnC  |
+      | 38    | xxxxx | qavgogine| qavgogine | q2_jun_grp0428     | MA       | FED_BnC      |
+      | 39    | xxxxx | qavgogine| qavgogine | q3_Sep_FedANOC_002 | MAPD     | FED_BnC      |
+      | 40    | xxxxx | qavgogine| qavgogine | q2_jun_aarp0112    | PDP      | FED_BnC      |
+      | 40    | xxxxx | qavgogine| qavgogine | q2_jun_grp0440     | TERM     | FED_BnC      |
            
 ########################################################################################################  

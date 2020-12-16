@@ -2350,7 +2350,6 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	
 	@Then("^the user validate drug cost table display behavior$")
 	public void vaoidateDrugCostTblBehavior(DataTable memberAttributes) throws InterruptedException {
-		
 		Map<String, String> memberAttributesMap=parseInputArguments(memberAttributes);
 		String planType=memberAttributesMap.get("Plan Type");
 		String memberType=memberAttributesMap.get("Member Type");
@@ -2585,12 +2584,16 @@ public class BenefitsAndCoverageUmsStepDefinition {
 		}
 	}
 	
-	@Then("^the users validate Benefits page has combo tabs$")
+	@Then("^the users validate Benefits page has combo tabs for combo users$")
 	public void verifyComboTab() {
+		String planType=(String) getLoginScenario().getBean(LoginCommonConstants.PLANTYPE);
 		BenefitsAndCoveragePage bncPg = (BenefitsAndCoveragePage) getLoginScenario()
 				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
 		int numTab=bncPg.numberOfComboTab();
-		Assert.assertTrue("PROBLEM - user has '"+numTab+"' combo tab, not suitable for this scenario testing", numTab >1);
+		if (planType.toUpperCase().contains("COMBO")) 
+			Assert.assertTrue("PROBLEM - user has '"+numTab+"' combo tab, not suitable for this scenario testing", numTab > 1);
+		else
+			Assert.assertTrue("PROBLEM - user has '"+numTab+"' combo tab, not suitable for this scenario testing", numTab == 0);
 	}
 	
 	@Then("^the users validate UCPBenefits related API requests are not having undefined input value$")
@@ -2598,7 +2601,6 @@ public class BenefitsAndCoverageUmsStepDefinition {
 		BenefitsAndCoveragePage bncPg = (BenefitsAndCoveragePage) getLoginScenario()
 				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
 		List<String> testNote = new ArrayList<String>();
-		testNote.add("API requests for this user:");
 		testNote.addAll(bncPg.verifyApi());
 
 		if (testNote.size()>0) {

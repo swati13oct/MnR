@@ -5638,46 +5638,76 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 	public List<String> verifyApi() {
 		//note: loop through each tab and check the API
 		List<String> apiList=new ArrayList<String>();
-		for(int i=0; i< tabsForComboMember.size(); i++) {
-			tabsForComboMember.get(i).click();
-			CommonUtility.checkPageIsReady(driver);
-			System.out.println("-----------------------------------------------------");
-			System.out.println("TEST - on tab #"+(i+1)+" '"+tabsForComboMember.get(i).getText()+"'...");
-			//tbd String lookForText1="/UCPBenefits/member/planBenefits";
-			String lookForText1="/UCPBenefits/";
-			String lookForText2="requestWillBeSent";
+		WebElement targetTabElement=null;
+		int tabNum=0;
+		
+		if (tabsForComboMember.size()==0) {
+			apiList.add("API requests for this user (non-combo):");
+			apiList.addAll(lookforBenefitsApiRequests(tabNum, targetTabElement));
+		} else {
+			apiList.add("API requests for this user (combo) - click tab from left to right:");
+			for(int i=0; i< tabsForComboMember.size(); i++) {
+				tabsForComboMember.get(i).click();
+				CommonUtility.checkPageIsReady(driver);
+				System.out.println("-----------------------------------------------------");
+				System.out.println("TEST - on tab #"+(i+1)+" '"+tabsForComboMember.get(i).getText()+"'...");
+				targetTabElement=tabsForComboMember.get(i);
+				tabNum=(i+1);
+				apiList.addAll(lookforBenefitsApiRequests(tabNum, targetTabElement));
+			} 
+			apiList.add("API requests for this user (combo) - click tab from right to left:");
+			for(int i=(tabsForComboMember.size()-1); i>=0; i--) {
+				tabsForComboMember.get(i).click();
+				CommonUtility.checkPageIsReady(driver);
+				System.out.println("-----------------------------------------------------");
+				System.out.println("TEST - on tab #"+(i+1)+" '"+tabsForComboMember.get(i).getText()+"'...");
+				targetTabElement=tabsForComboMember.get(i);
+				tabNum=(i+1);
+				apiList.addAll(lookforBenefitsApiRequests(tabNum, targetTabElement));
+			} 
+		}
 
-			List<LogEntry> entries = driver.manage().logs().get(LogType.PERFORMANCE).getAll();
-			for (LogEntry entry : entries) {
-				String line=entry.getMessage();
-				//keepForDebug System.out.println("TEST each line="+line);
-				if (line.contains(lookForText1) && line.contains(lookForText2)) {
-					System.out.println("FOUND - line="+line);
-					
-					try {
-						JSONParser parser = new JSONParser();
-						JSONObject jsobObj=null;
-						jsobObj = (JSONObject) parser.parse(line);
-						JSONObject messageObj;
-						messageObj = (JSONObject) jsobObj.get("message");
-						Assert.assertTrue("PROBLEM - unable to locate message json object", messageObj!=null);
-						JSONObject paramsObj = (JSONObject) messageObj.get("params");
-						Assert.assertTrue("PROBLEM - unable to locate params json object", paramsObj!=null);
-						JSONObject requestObj = (JSONObject) paramsObj.get("request");
-						Assert.assertTrue("PROBLEM - unable to locate request json object", requestObj!=null);
-						System.out.println("TEST - requestObj="+requestObj.toString());
-						String urlStr = (String) requestObj.get("url");
-						Assert.assertTrue("PROBLEM - unable to locate postData string", urlStr!=null);
-						System.out.println("TEST - urlStr="+urlStr);			
-						apiList.add("tab #"+(i+1)+" ("+tabsForComboMember.get(i).getText()+") - "+urlStr);
-					} catch (ParseException e) {
-						e.printStackTrace();
-						Assert.assertTrue("PROBLEM - unable to convert target string into json object", false);
-					}
+		return apiList;
+	}
+	
+	
+	public List<String> lookforBenefitsApiRequests(int tabNum, WebElement targetTabElement) {
+		List<String> apiList=new ArrayList<String>();
+		String lookForText1="/UCPBenefits/";
+		String lookForText2="requestWillBeSent";
+
+		List<LogEntry> entries = driver.manage().logs().get(LogType.PERFORMANCE).getAll();
+		for (LogEntry entry : entries) {
+			String line=entry.getMessage();
+			//keepForDebug System.out.println("TEST each line="+line);
+			if (line.contains(lookForText1) && line.contains(lookForText2)) {
+				System.out.println("FOUND - line="+line);
+				
+				try {
+					JSONParser parser = new JSONParser();
+					JSONObject jsobObj=null;
+					jsobObj = (JSONObject) parser.parse(line);
+					JSONObject messageObj;
+					messageObj = (JSONObject) jsobObj.get("message");
+					Assert.assertTrue("PROBLEM - unable to locate message json object", messageObj!=null);
+					JSONObject paramsObj = (JSONObject) messageObj.get("params");
+					Assert.assertTrue("PROBLEM - unable to locate params json object", paramsObj!=null);
+					JSONObject requestObj = (JSONObject) paramsObj.get("request");
+					Assert.assertTrue("PROBLEM - unable to locate request json object", requestObj!=null);
+					System.out.println("TEST - requestObj="+requestObj.toString());
+					String urlStr = (String) requestObj.get("url");
+					Assert.assertTrue("PROBLEM - unable to locate postData string", urlStr!=null);
+					System.out.println("TEST - urlStr="+urlStr);
+					if (targetTabElement!=null) 
+						apiList.add("tab #"+tabNum+" ("+targetTabElement.getText()+") - "+urlStr);
+					else 
+						apiList.add(urlStr);
+				} catch (ParseException e) {
+					e.printStackTrace();
+					Assert.assertTrue("PROBLEM - unable to convert target string into json object", false);
 				}
 			}
 		}
-			
 		return apiList;
 	}
 	

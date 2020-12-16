@@ -904,4 +904,9 @@ Feature: 1.01 Member  benefits and Coverage page
       | 35    | xxxxx | COMBO    | SHIP_FED_BnC |
       | 36    | xxxxx | COMBO    | FED_SHIP_SHIP_BnC |
       | 37    | xxxxx | COMBO    | FED_FED_BnC  |
+      | 38    | xxxxx | MA       | FED_BnC      |
+      | 39    | xxxxx | MAPD     | FED_BnC      |
+      | 40    | xxxxx | PDP      | FED_BnC      |
+      | 40    | xxxxx | TERM     | FED_BnC      |
+      
  ###############################Regression Scenarios END Here ########################################

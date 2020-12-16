@@ -922,7 +922,7 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth Prod
     #  | 34-I09 | 478830 | kkumard  | tnps459#  | testUserName       | MAPD      | Individual_BnC | NON LIS       | T12345       | nonInsulin   |   H0271-017-000| 
 
   @prod_benefitsAndCoverage24 @prod_comboApi
-  Scenario Outline: Index: <index> -TID: <TID> -plan: <planType> -memberType: <memberType> - Verify UCPBenefits API not having undefined input value for COMBO user
+  Scenario Outline: Index: <index> -TID: <TID> -plan: <planType> -memberType: <memberType> - Verify UCPBenefits API not having undefined input value
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
       | Username | <username> |
@@ -935,11 +935,16 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth Prod
       | Plan Type    | <planType>    |
       | Member Type  | <memberType>  |
     Then The user navigate to Benefits and Coverage page
-    And the users validate Benefits page has combo tabs
+    And the users validate Benefits page has combo tabs for combo users
     And the users validate UCPBenefits related API requests are not having undefined input value
 
     Examples: 
-      | index | TID   | username | password  | MemUserName        | planType | memberType   |
-      | 35    | xxxxx | kkumard  | tnps459# | VirginiaRuth1936    | COMBO    | SHIP_FED_BnC |
-      | 36    | xxxxx | kkumard  | tnps459# | nino2@theciliangroup.com     | COMBO    | FED_SHIP_BnC |
-      | 37    | xxxxx | kkumard  | tnps459# | DKELLY27     | COMBO    | FED_FED_BnC  |
+      | index | TID   | username | password  | MemUserName              | planType | memberType   |
+      | 35    | xxxxx | kkumard  | tnps459#  | VirginiaRuth1936         | COMBO    | SHIP_FED_BnC |
+      | 36    | xxxxx | kkumard  | tnps459#  | nino2@theciliangroup.com | COMBO    | FED_SHIP_BnC |
+      | 37    | xxxxx | kkumard  | tnps459#  | DKELLY27                 | COMBO    | FED_FED_BnC  |
+      | 38    | xxxxx | kkumard  | tnps459#  | ssmhi1                   | MA       | FED_BnC      |
+      | 39    | xxxxx | kkumard  | tnps459#  | kirit1976                | MAPD     | FED_BnC      |
+      | 40    | xxxxx | kkumard  | tnps459#  | lkd3408                  | PDP      | FED_BnC      |
+      | 40    | xxxxx | kkumard  | tnps459#  | Patkeving                | TERM     | FED_BnC      |
+      
