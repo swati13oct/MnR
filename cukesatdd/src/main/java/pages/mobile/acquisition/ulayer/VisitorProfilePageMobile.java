@@ -86,13 +86,13 @@ public class VisitorProfilePageMobile extends UhcDriver {
 	@FindBy(xpath = "//*[contains(@id,'enrollbtnplancompare0')]")
 	private WebElement enrollBtn;
 
-	@FindBy(css = "div.print-back>a:first-child")
+	@FindBy(css = "div#navLinks>a:first-child")
 	private WebElement backToPlans;
 
 	@FindBy(xpath = "//div[@class='multi-year-select']")
 	private WebElement profileMultiYear;
 
-	@FindBy(xpath = "//div[@class='multi-year-select']/button[contains(@class,'js-select-year select-year')][2]")
+	@FindBy(xpath = "//div[@class='multi-year-select']/button[contains(@class,'select-year')][2]")
 	private WebElement profileNxtYrPlans;
 
 	@FindBy(xpath = "//div[@class='multi-year-select']/button[contains(@class,'js-select-year select-year')][1]")
@@ -121,8 +121,8 @@ public class VisitorProfilePageMobile extends UhcDriver {
 		CommonUtility.checkPageIsReadyNew(driver);
 		if (driver.getCurrentUrl().contains("plan-summary")) {
 			String page = "health-plans";
-			System.out.println("validating zipcode and returning value");
-			return new AcquisitionHomePageMobile(driver, page);
+		//	System.out.println("validating zipcode and returning value-----------------------------------------------------");
+			return new AcquisitionHomePageMobile(driver);
 		}
 		return null;
 	}
@@ -191,7 +191,8 @@ public class VisitorProfilePageMobile extends UhcDriver {
 	 */
 	public void deletePlans(String plans) {
 		if (validate(profileMultiYear, 10)) {
-			profileNxtYrPlans.click();
+		//	profileNxtYrPlans.click();
+			jsClickMobile(profileNxtYrPlans);
 			if (driver.findElements(By.xpath("//div[@class='title dropdown-open']")).size() > 0)
 				driver.findElement(By.xpath(
 						"//div[@class='multi-year-select']/button[contains(@class,'js-select-year select-year')][2]/following::button[2]"))

@@ -273,7 +273,7 @@ public class VisitorProfileMobileStepDefinition {
 	}
 	
 	
-	@And("^user delets the added plans on visitor profile page$")
+	@And("^user deletes the added plans on visitor profile page$")
 	public void user_delets_the_added_plans_on_visitor_profile_page_of_AARP_site(DataTable planNames) {
 		List<DataTableRow> givenAttributesRow = planNames.getGherkinRows();
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
@@ -283,7 +283,7 @@ public class VisitorProfileMobileStepDefinition {
 					givenAttributesRow.get(i).getCells().get(1));
 		}
 		String savedPlanNames = givenAttributesMap.get("Test Plans");
-		VisitorProfilePage visitorProfile = (VisitorProfilePage) getLoginScenario().getBean(PageConstants.VISITOR_PROFILE_PAGE);
+		pages.mobile.acquisition.ulayer.VisitorProfilePageMobile visitorProfile = (pages.mobile.acquisition.ulayer.VisitorProfilePageMobile) getLoginScenario().getBean(PageConstants.VISITOR_PROFILE_PAGE);
 		visitorProfile.deletePlans(savedPlanNames);
 	}
 	

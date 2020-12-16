@@ -44,6 +44,7 @@ import pages.mobile.acquisition.ole.WelcomePageMobile;
 import pages.mobile.acquisition.ulayer.AcquisitionHomePageMobile;
 import pages.mobile.acquisition.ulayer.ComparePlansPageMobile;
 import pages.mobile.acquisition.ulayer.ProposedEffectiveDatePageMobile;
+import pages.mobile.acquisition.ulayer.VPPAarpPlanSummaryPageMobile;
 import pages.acquisition.commonpages.AcquisitionHomePage;
 import pages.acquisition.ole.PersonalInformationPage;
 import pages.acquisition.ole.SpecialElectionPeriodPage;
@@ -525,6 +526,60 @@ public class OLEStepDefinitionMobile {
 		}
 	}
 
+	@Then("^the site user clicks on Start Application Button and proceed Next$")
+	public void Start_application_button_proceed_next(DataTable givenAttributes) throws Throwable {
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		//String DateOfBirth = memberAttributesMap.get("DOB");
+		String FirstName = memberAttributesMap.get("Firstname");
+		String LastName = memberAttributesMap.get("Lastname");
+		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);			
+		String submitconfirmation = plansummaryPage.StartApplication(FirstName, LastName);
+		getLoginScenario().saveBean(VPPCommonConstants.SUBMITCONFIRMATION, submitconfirmation);
+
+	}
+	@Then("^the site user clicks on continue application until confirmation page$")
+	public void conitnue_application_until_confirmation_page(DataTable givenAttributes) throws Throwable {
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		String Medicarenumber = memberAttributesMap.get("MedicareNumber");
+		String DateOfBirth = memberAttributesMap.get("DOB");			
+		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		String submitconfirmation = plansummaryPage.continueApplicationuntilSubmitPage(Medicarenumber);
+		getLoginScenario().saveBean(VPPCommonConstants.SUBMITCONFIRMATION, submitconfirmation);
+
+	}
+	
+	@Then("^the site user fills all the details in MedsuppPage$")
+	public void user_fills_all_details_medsupp(DataTable givenAttributes) throws Throwable {
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		String DateOfBirth = memberAttributesMap.get("DOB");
+	
+		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		plansummaryPage.MedSupFormValidation(DateOfBirth);
+	}
 	@Then("^the user validates Learn more modal for Welcome OLE$")
 	public void the_user_validates_Learn_more_modal_for_OLE() throws Throwable {
 		WelcomePageMobile welcomePage = (WelcomePageMobile) getLoginScenario()
@@ -797,6 +852,33 @@ public class OLEStepDefinitionMobile {
 					+ Validation_Status);
 			Assert.fail();
 		}
+	}
+	
+	@Given("^the user is on the Acquisition Site landing page and navigate to Shop a plan page mobile$")
+	public void validateUserIsOnAcquisitionSiteNavToShopPlanMobile(DataTable inputAttributes) {
+		Map<String, String> inputAttributesMap=parseInputArguments(inputAttributes);
+		String siteName = inputAttributesMap.get("Site Name");
+		
+		wd = getLoginScenario().getMobileDriver();
+		AcquisitionHomePageMobile aquisitionhomepage = new AcquisitionHomePageMobile(wd);
+		//aquisitionhomepage.openPRE();
+		aquisitionhomepage.openMobileURL();
+		aquisitionhomepage.fixPrivateConnectionMobile();
+		
+		
+		aquisitionhomepage.selectState("Select State"); //note: default it to no state selected for predictable result
+		System.out.println("Unselected state on home page for more predictable result");
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE,
+			aquisitionhomepage);
+/*		
+		PharmacySearchPageMobile pharmacySearchPage = aquisitionhomepage.navigateToShopPlanMobile();
+		 
+		//PharmacySearchPage pharmacySearchPage=new PharmacySearchPage(aquisitionhomepage.driver);
+		
+		getLoginScenario().saveBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE,
+				pharmacySearchPage);*/
+		
 	}
 
 	@Then("^the user validates Learn more modal for Medicare Information Page$")
