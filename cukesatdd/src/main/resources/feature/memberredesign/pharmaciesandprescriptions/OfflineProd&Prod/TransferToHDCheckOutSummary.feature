@@ -54,4 +54,4 @@ Feature: To test Transfer To HD Checkout Summary Page
 
     Examples: 
       | FID     | username | password | MemUserName | planType | memberType     |
-      | F484057 | ntalesha | pass@123 | DorisJean27 | MPDP     | Individual_PnP |
+      | F484057 | kjadha10 | Virus$$1 | DorisJean27 | MPDP     | Individual_PnP |
