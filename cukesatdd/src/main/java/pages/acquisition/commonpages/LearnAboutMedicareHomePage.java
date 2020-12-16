@@ -683,5 +683,18 @@ public class LearnAboutMedicareHomePage extends GlobalWebElements {
 		System.out.println(""+driver.getCurrentUrl());
 		
 	}
+	public void chechStillHaveQues() {
+		CommonUtility.checkPageIsReadyNew(driver);
+		sleepBySec(4);
+		WebElement stillQues=driver.findElement(By.xpath("//section//*[contains(text(),'Still')]"));
+		validateNew(stillQues);
+		if(stillQues.isDisplayed()) {
+			Assert.assertTrue(true);
+		}
+		else {
+			Assert.fail("Still have a question not displayed");
+		}
+		
+	}
 }
 
