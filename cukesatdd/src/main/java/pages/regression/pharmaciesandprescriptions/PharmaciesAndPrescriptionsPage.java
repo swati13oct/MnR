@@ -2725,9 +2725,12 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 			rand_int = rand.nextInt(listOfRefillMedication.size());
 
 			String text = listOfMedicationEligibleFrRefill.get(rand_int).getText();
-			for (WebElement child : listOfMedicationEligibleFrRefill.get(rand_int).findElements(By.xpath("./*"))) {
+			
+			// Commenting as Xpath got changed
+			
+			/*for (WebElement child : listOfMedicationEligibleFrRefill.get(rand_int).findElements(By.xpath("./*"))) {
 				text = text.replaceFirst(child.getText(), "");
-			}
+			}*/
 			listOfVal.add(text);
 			
 			/*String text2 = listOfRefillLeftEligibleFrRefill.get(rand_int).getText();
@@ -2757,9 +2760,11 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 			rand_int = rand.nextInt(listOfRenewMedication.size());
 
 			String text = listOfMedicationEligibleFrRenew.get(rand_int).getText();
-			for (WebElement child : listOfMedicationEligibleFrRenew.get(rand_int).findElements(By.xpath("./*"))) {
+			//Commenting after Xpath got changed
+			/*for (WebElement child : listOfMedicationEligibleFrRenew.get(rand_int).findElements(By.xpath("./*"))) {
 				text = text.replaceFirst(child.getText(), "");
 			}
+		*/	
 			listOfVal.add(text);
 			listOfVal.add(listOfDaySupplyEligibleFrRenew.get(rand_int).getText());
 			// listOfVal.add(listOfAmntPaidEligibleFrRenew.get(rand_int).getText());
@@ -2923,7 +2928,7 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 
 		public List<Integer> getListOfIndexForRefillMedicationOnMyMed() {
 			int size = listOfDrugName.size();
-			validate(drugsAvailableOnMyMedication, 10);
+			validate(drugsAvailableOnMyMedication, 30);
 			String numberTXT = drugsAvailableOnMyMedication.getText();
 			int expectedSize = Integer.parseInt(numberTXT);
 			System.out.println("Expected Drug Name Size" + expectedSize);
@@ -3106,9 +3111,12 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 			rand_int = rand.nextInt(listOfTransferToHDCTA.size());
 
 			String text = listOfRetailMedEligibleForTransferToHD.get(rand_int).getText();
-			for (WebElement child : listOfRetailMedEligibleForTransferToHD.get(rand_int).findElements(By.xpath("./*"))) {
+
+			//Commenting as Xpath got changed
+			
+			/*for (WebElement child : listOfRetailMedEligibleForTransferToHD.get(rand_int).findElements(By.xpath("./*"))) {
 				text = text.replaceFirst(child.getText(), "");
-			}
+			}*/
 			listOfVal.add(text);
 			listOfVal.add(listOfDaySupplyEligibleForTransferToHD.get(rand_int).getText());
 			// listOfVal.add(listOfAmntPaidEligibleFrRenew.get(rand_int).getText());

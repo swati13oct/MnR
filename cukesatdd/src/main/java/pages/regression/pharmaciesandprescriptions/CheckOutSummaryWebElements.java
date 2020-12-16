@@ -83,7 +83,8 @@ public class CheckOutSummaryWebElements extends UhcDriver {
 	@FindBy(xpath = "//*[@data-testid='os__payment__title']/..")
 	protected WebElement paymentSection;
 
-	@FindBy(xpath = "//*[@data-testid='os__payment__ccImage']//img")
+	//Need to update the Locator
+	@FindBy(xpath = "//*[@data-testid='os__payment__ccImage']")
 	protected WebElement paymentCreditCardImage;
 
 	@FindBy(xpath = "//*[@data-testid='os__payment__ccNumber']")
@@ -164,9 +165,14 @@ public class CheckOutSummaryWebElements extends UhcDriver {
 
 	// ***********************Shipping Dropdown*********************************
 
-	@FindBy(xpath = "//*[@data-testid='os__shipping__methodSelect']//div")
+	/*
+	 * @FindBy(xpath = "//*[@data-testid='os__shipping__methodSelect']//div")
+	 * protected WebElement shippingDrpDownVal;
+	 */
+	
+	@FindBy(xpath = "(//*[@data-testid='os__shipping__methodSelect']//select//option)[1]")
 	protected WebElement shippingDrpDownVal;
-
+	
 	@FindBy(xpath = "//*[@data-testid='os__shipping__methodSelect']")
 	protected WebElement shippingDrpDown;
 
@@ -194,10 +200,13 @@ public class CheckOutSummaryWebElements extends UhcDriver {
 	@FindBy(xpath = "//*[@data-testid='os__shipping__methodSelect']//span")
 	protected WebElement shippingMethodForRenew;
 
-	@FindBy(xpath = "//div[@data-testid='header__title']//h1/ancestor::div[contains(@class,'MuiScopedCssBaseline')]/..//*[@data-testid='order-management-disclaimer']")
+	/*@FindBy(xpath = "//div[@data-testid='header__title']//h1/ancestor::div[contains(@class,'MuiScopedCssBaseline')]/..//*[@data-testid='order-management-disclaimer']")
+	protected WebElement disclaimerBelowSkyLineComponent;*/
+	
+	@FindBy(xpath = "//div[@data-testid='os__summary__pharmacy__disclaimer']//span")
 	protected WebElement disclaimerBelowSkyLineComponent;
-
-	@FindBy(xpath = "//*[@data-testid='order-management-disclaimer']")
+	
+	@FindBy(xpath = "//div[@data-testid='os__summary__pharmacy__disclaimer']//span")
 	protected WebElement disclaimerMessage;
 
 	@FindBy(xpath = "//div[@data-testid='header__title']//*[text()='Change Shipping Address']")

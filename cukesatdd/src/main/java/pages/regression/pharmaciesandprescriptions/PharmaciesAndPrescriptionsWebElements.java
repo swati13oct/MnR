@@ -1639,9 +1639,9 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	@FindBy(xpath = "//a[@data-testid='medication-action-renew']/ancestor::div[@data-testid]//*[@data-testid='medication-data-you-paid']")
 	protected List<WebElement> listOfAmntPaidEligibleFrRenew;
 	
-	@FindBy(xpath = "//a[@data-testid='medication-action-refill']/ancestor::div[@data-testid]//*[@data-testid='medication-data-name']")
+	@FindBy(xpath = "//a[@data-testid='medication-action-refill']/ancestor::div[@data-testid]//*[@data-testid='medication-data-name']/span")
 	protected List<WebElement> listOfMedicationEligibleFrRefill;
-	@FindBy(xpath = "//a[@data-testid='medication-action-renew']/ancestor::div[@data-testid]//*[@data-testid='medication-data-name']")
+	@FindBy(xpath = "//a[@data-testid='medication-action-renew']/ancestor::div[@data-testid]//*[@data-testid='medication-data-name']//span")
 	protected List<WebElement> listOfMedicationEligibleFrRenew;
 
 	@FindBy(xpath = "//*[@data-testid='medication-data-order-status']/ancestor::div[@data-testid]//*[@data-testid='medication-data-name']")
@@ -1710,7 +1710,7 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	@FindBy(xpath="//a[@data-testid='medication-action-transfer']/ancestor::div[@data-testid]//div[@data-testid='medication-data-pharmacy-name']")
 	protected List<WebElement> listOfRetailPharmacyNameEligibleForTransferToHD;
 	
-	@FindBy(xpath="//a[@data-testid='medication-action-transfer']/ancestor::div[@data-testid]//a[@data-testid='medication-data-name']")
+	@FindBy(xpath="//a[@data-testid='medication-action-transfer']/ancestor::div[@data-testid]//a[@data-testid='medication-data-name']//span")
 	protected List<WebElement> listOfRetailMedEligibleForTransferToHD;
 	
 	@FindBy(xpath="//a[@data-testid='medication-action-transfer']/ancestor::div[@data-testid]//div[@data-testid='medication-data-day-supply']")

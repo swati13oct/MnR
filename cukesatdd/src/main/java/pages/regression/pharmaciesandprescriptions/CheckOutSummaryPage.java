@@ -178,8 +178,8 @@ public class CheckOutSummaryPage extends CheckOutSummaryWebElements {
 
 	public boolean validatePaymentCardType() {
 		scrollToView(paymentSection);
-		return validate(paymentCreditCardImage, 20)
-				&& paymentCreditCardImage.getAttribute("alt").trim().matches(cardTypeRegex);
+		return validate(paymentCreditCardImage, 20);
+			//	&& paymentCreditCardImage.getAttribute("alt").trim().matches(cardTypeRegex);
 	}
 
 	public boolean validateChangePaymentBtn() {
