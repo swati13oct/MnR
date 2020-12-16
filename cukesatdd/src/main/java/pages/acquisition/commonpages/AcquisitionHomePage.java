@@ -562,13 +562,15 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			if (MRScenario.environment.equals("offline")) {
 				startNew(UMS_ACQISITION_OFFLINE_PAGE_URL);
 				testSiteUrl=UMS_ACQISITION_OFFLINE_PAGE_URL;
+				checkModelPopup(driver,45);
 			} else if (MRScenario.environment.equals("prod")) {
 				startNew(UMS_ACQISITION_PROD_PAGE_URL);
 				testSiteUrl=UMS_ACQISITION_PROD_PAGE_URL;
+				checkModelPopup(driver,45);
 			} else {
 				startNew(UMS_ACQISITION_PAGE_URL);
 				testSiteUrl=UMS_ACQISITION_PAGE_URL;
-				checkModelPopup(driver,10);
+				checkModelPopup(driver,20);
 			}
 			
 		} else if("health-plans".equalsIgnoreCase(site)){
