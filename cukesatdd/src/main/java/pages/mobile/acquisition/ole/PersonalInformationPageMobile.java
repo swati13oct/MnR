@@ -335,7 +335,8 @@ public class PersonalInformationPageMobile extends UhcDriver {
 		validate(emailAddVaidationChecktick);
 		scrollToView(NextBtn);
 
-		jsClickNew(NextBtn);
+		jsClickMobile(NextBtn);
+		CommonUtility.checkPageIsReadyNew(driver);
 		WebElement MedicareLable = driver.findElement(By.xpath("//h1[contains(text(),'Medicare')]"));
 		CommonUtility.checkPageIsReadyNew(driver);
 		boolean flagpage = validateNew(MedicareLable, 10);
@@ -553,12 +554,15 @@ public class PersonalInformationPageMobile extends UhcDriver {
 		String MiddleName = memberDetailsMap.get("Middle Name");
 
 		validateNew(HomephoneNumberField);
-		sendkeys(HomephoneNumberField, HomeNumber);
+	//	sendkeys(HomephoneNumberField, HomeNumber);
+		HomephoneNumberField.sendKeys(HomeNumber);
 		validateNew(MobileNumberField);
 		sendkeys(MobileNumberField, MobileNumber);
-		sendkeysNew(MiddleNameField, MiddleName);
-		sendkeys(Email, EmailAddress);
-
+		//sendkeysNew(MiddleNameField, MiddleName);
+		MiddleNameField.sendKeys(MiddleName);
+		//sendkeys(Email, EmailAddress);
+		//Email.sendKeys(EmailAddress);
+		
 		if (NextBtn.isEnabled()) {
 			System.out.println("Next Button is Enabled : All Required Details are entered");
 			return true;
