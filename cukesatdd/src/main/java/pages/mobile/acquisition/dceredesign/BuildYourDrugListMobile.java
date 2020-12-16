@@ -17,6 +17,7 @@ import com.itextpdf.text.Document;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 import io.appium.java_client.AppiumFluentWait;
+import pages.acquisition.dceredesign.TellUsAboutDrug;
 import pages.acquisition.ulayer.DrugCostEstimatorPage;
 import pages.mobile.acquisition.ulayer.ComparePlansPageMobile;
 import pages.mobile.acquisition.ulayer.DrugCostEstimatorPageMobile;
@@ -279,6 +280,13 @@ public class BuildYourDrugListMobile extends UhcDriver {
 				Assert.fail("Drug List Validation FAILED for Drug : " + currentDrug);
 		}
 	}
+	
+	public void deleteDrug(String deleteDrug) {
+		System.out.println("Drug to be removed : "+deleteDrug);
+		WebElement removeLink = driver.findElement(By.xpath("//*[contains(@aria-label,'Remove "+deleteDrug+"')]"));
+		jsClickNew(removeLink);
+		
+	}
 
 	public ComparePlansPageMobile returnToPlanComparePage() {
 
@@ -287,5 +295,19 @@ public class BuildYourDrugListMobile extends UhcDriver {
 		jsClickNew(returnToCompareBtn);
 		return new ComparePlansPageMobile(driver);
 	}
+	
+	public TellUsAboutDrugMobile EditDrug(String drugName) {
+		WebElement removeLink = driver.findElement(By.xpath("//*[contains(@aria-label,'Edit "+drugName+"')]"));
+		jsClickNew(removeLink);
+		CommonUtility.waitForPageLoadNew(driver, TellUsABoutHeader, 20);
+		if(validateNew(TellUsABoutHeader) && validateNew(TellUsABoutCloseBtn))
+		{
+			return new TellUsAboutDrugMobile(driver);
+		}
+		else {
+			Assert.fail("Tell Us About Drug Page is NOT Displayed");
+			return null;
+		}	}
+
 
 }

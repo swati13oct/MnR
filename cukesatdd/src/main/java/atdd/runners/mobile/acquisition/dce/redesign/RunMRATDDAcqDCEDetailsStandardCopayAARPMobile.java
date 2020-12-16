@@ -13,10 +13,13 @@ import cucumber.api.CucumberOptions;
  * this file is to run test cases for RunMRATDDAcqDCEDetailsStandardCopayAARP - Scenario for DCE Details Page copay section Standard Pharmacy copays validation
  */
 @RunWith(ExtendedCucumber.class)
-@ExtendedCucumberOptions(retryCount=1,screenShotSize="", screenShotLocation="/screenshots/",jsonReport = "target/cucumber-RunMRATDDAcqDCEDetailsStandardCopayAARP.json",detailedReport = true,
+@ExtendedCucumberOptions(retryCount=1,screenShotSize="", screenShotLocation="/screenshots/",
+jsonReport = "target/cucumber-RunMRATDDAcqDCEDetailsStandardCopayAARP.json",detailedReport = true,
  detailedAggregatedReport = true, overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDAcqDCEDetailsStandardCopayAARP")
-@CucumberOptions(glue = { "atdd.framework", "acceptancetests.mobile.acquisition" }, features = { "src/main/resources/feature/mobile/acquisition/dceredesign" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcqDCEDetailsStandardCopayAARP.json" }, tags = { "@DCE_DrugDetailsCopay_Standard_AARP" })
+@CucumberOptions(glue = { "atdd.framework", "acceptancetests.mobile.acquisition" }, features = { "src/main/resources/feature/mobile/acquisition/dceredesign" }, 
+plugin = {
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcqDCEDetailsStandardCopayAARP.json" }, 
+tags = { "@DCE_DrugDetailsCopay_Standard_AARP" }, dryRun=false)
 
 public class RunMRATDDAcqDCEDetailsStandardCopayAARPMobile {
  

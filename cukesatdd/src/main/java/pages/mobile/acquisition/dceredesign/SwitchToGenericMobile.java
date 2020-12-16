@@ -12,6 +12,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
 import pages.acquisition.dceredesign.BuildYourDrugList;
+import pages.acquisition.dceredesign.DrugDetailsPage;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
@@ -169,4 +170,34 @@ public class SwitchToGenericMobile extends UhcDriver {
 		jsClickNew(element);
 	
 	}
+	
+	public void validateSwitchPage(String genericDrug, String brandDrug) {
+		WebElement GenericDrugText = driver.findElement(By.xpath("//h2//*[contains(text(), '"+genericDrug+"')]"));
+		WebElement BrandDrugText = driver.findElement(By.xpath("//h2//*[contains(text(), '"+brandDrug+"')]"));
+		WebElement SavingsText = driver.findElement(By.xpath("//*[contains(text(), 'save up to') and contains(text(), 'annually by switching to the generic')]"));
+		
+		if(!validateNew(GenericDrugText) || !validateNew(BrandDrugText) || !validateNew(SavingsText)) {
+			Assert.fail("Switch To Generic Page Validation Failed");
+		}
+		Assert.assertTrue("Switch To Generic Page Validation Passed", true);
+	}
+	
+	@FindBy(xpath = "//button[@id='changePharmacyLink']")
+	public WebElement DrugDetails_ChangePharmacyLnk;
+
+	@FindBy(xpath = "//a[contains(@class, 'uhc-link-button') and contains(text(), 'plans in your area')]")
+	public WebElement LinkToDrugSummary;
+
+	public DrugDetailsPageMobile ClickSwitch_ReturnDetailsPage() {
+		validateNew(AddDrugBtn);
+		jsClickNew(AddDrugBtn);
+		CommonUtility.waitForPageLoad(driver, DrugDetails_ChangePharmacyLnk, 30);
+		if (validateNew(DrugDetails_ChangePharmacyLnk) && validateNew(LinkToDrugSummary)) {
+			Assert.assertTrue("Naviagted to DCE Drug Details Page", true);
+			return new DrugDetailsPageMobile(driver);
+		}
+		Assert.fail("Did not Navigate to DCE Drug Details Page");
+		return null;
+	}
+	
 }

@@ -17,7 +17,7 @@ import cucumber.api.CucumberOptions;
 jsonReport = "target/cucumber-RunMRATDDAcqDCEDetailsPageAARPMobile.json",detailedReport = true,
  detailedAggregatedReport = true, overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDAcqDCEDetailsPageAARPMobile")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.mobile.acquisition" }, features = { "src/main/resources/feature/mobile/acquisition/dceredesign" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcqDCEDetailsPageAARPMobile.json" }, tags = { "@DCE_DrugDetailsValidation_AARP" })
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcqDCEDetailsPageAARPMobile.json" }, tags = { "@DCE_DrugDetailsValidation_AARP" },dryRun=false)
 
 public class RunMRATDDAcqDCEDetailsPageAARPMobile {
 //,@DCE_DrugDetailsValidation_AARP, @DCE_DrugDetailsPremiumValidation_AARP

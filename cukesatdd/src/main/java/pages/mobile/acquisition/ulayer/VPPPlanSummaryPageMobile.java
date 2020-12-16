@@ -757,7 +757,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 		super(driver);
 
 		PageFactory.initElements(driver, this);
-		// openAndValidate();
+		openAndValidate();
 	}
 
 	public VPPPlanSummaryPageMobile(WebDriver driver, String planType) {
@@ -802,21 +802,21 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 		else
 			checkModelPopup(driver, 10);
 		handleChatPopup();
-		waitforElement(maPlansCount);
-		scrollToView(maPlansCount);
-		validateNew(maPlansCount);
-
-		waitforElement(msPlansCount);
-		scrollToView(msPlansCount);
-		validateNew(msPlansCount);
-
-		waitforElement(pdpPlansCount);
-		scrollToView(pdpPlansCount);
-		validateNew(pdpPlansCount);
-
-		waitforElement(snpPlansCount);
-		scrollToView(snpPlansCount);
-		validateNew(snpPlansCount);
+//		waitforElement(maPlansCount);
+//		scrollToView(maPlansCount);
+//		validateNew(maPlansCount);
+//
+//		waitforElement(msPlansCount);
+//		scrollToView(msPlansCount);
+//		validateNew(msPlansCount);
+//
+//		waitforElement(pdpPlansCount);
+//		scrollToView(pdpPlansCount);
+//		validateNew(pdpPlansCount);
+//
+//		waitforElement(snpPlansCount);
+//		scrollToView(snpPlansCount);
+//		validateNew(snpPlansCount);
 	}
 
 	public boolean validateTimeoutPopup() {

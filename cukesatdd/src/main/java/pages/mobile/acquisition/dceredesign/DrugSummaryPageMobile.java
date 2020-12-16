@@ -76,15 +76,6 @@ public class DrugSummaryPageMobile extends UhcDriver {
 	@FindBy(xpath = "//button/span[text()='View Plan Details']")
 	public WebElement viewPlanButton;
 
-	@FindBy(xpath = "//label[contains(@class,'uhc-filter')]//span[contains(text(),'Medicare Advantage Plans')]")
-	public WebElement mapdPlanToggle;
-
-	@FindBy(xpath = "//label[contains(@class,'uhc-filter')]//span[contains(text(),'Medicare Prescription Drug Plans')]")
-	public WebElement pdpPlanToggle;
-
-	@FindBy(xpath = "//label[contains(@class,'uhc-filter')]//span[contains(text(),'Medicare Special Needs Plans')]")
-	public WebElement snpPlanToggle;
-
 	@FindBy(id = "changePharmacyLink")
 	public WebElement changePharmacy;
 
@@ -137,24 +128,14 @@ public class DrugSummaryPageMobile extends UhcDriver {
 	}
 
 	public DrugSummaryPageMobile validateDrugSummaryPage() throws InterruptedException {
-		//&& validateNew(whyAverageLink) 
-		//&& validateNew(whatsIncludedLink)
-		
-		if (validateNew(reviewDrugCostPageHeading) 
-				&& validateNew(planTypeToggle) 
-				&& validateNew(pharmacyLink) 
-				&& validateNew(planCardHeader)
-				&& validateNew(avgMonthlyDrugCost) 
-				&& validateNew(monthlyPremium) 
-				&& validateNew(annualEstimatedTotal)
-				&& validateNew(drugsCovered) 
-				&& validateNew(whyAverageLink) 
-				&& validateNew(whatsIncludedLink)
-				&& validateNew(drugPricingLink) 
-				&& validateNew(viewDrugCostBtn) 
-				&& validateNew(viewPlanDetailsBtn)
-				&& validateNew(saveBtn) 
-				&& validateNew(disclaimer)) {
+		// && validateNew(whyAverageLink)
+		// && validateNew(whatsIncludedLink)
+
+		if (validateNew(reviewDrugCostPageHeading) && validateNew(planTypeToggle) && validateNew(pharmacyLink)
+				&& validateNew(planCardHeader) && validateNew(avgMonthlyDrugCost) && validateNew(monthlyPremium)
+				&& validateNew(annualEstimatedTotal) && validateNew(drugsCovered) && validateNew(whyAverageLink)
+				&& validateNew(whatsIncludedLink) && validateNew(drugPricingLink) && validateNew(viewDrugCostBtn)
+				&& validateNew(viewPlanDetailsBtn) && validateNew(saveBtn) && validateNew(disclaimer)) {
 			return new DrugSummaryPageMobile(driver);
 		}
 
@@ -393,5 +374,39 @@ public class DrugSummaryPageMobile extends UhcDriver {
 
 	public void clickViewDrugCostBtn() {
 		viewDrugCostBtn.click();
+	}
+
+	@FindBy(xpath = "//label[contains(@class,'uhc-filter')]//span[contains(text(),'Medicare Advantage Plans')]")
+	public WebElement mapdPlanToggle;
+
+	@FindBy(xpath = "//label[contains(@class,'uhc-filter')]//span[contains(text(),'Medicare Prescription Drug Plans')]")
+	public WebElement pdpPlanToggle;
+
+	@FindBy(xpath = "//label[contains(@class,'uhc-filter')]//span[contains(text(),'Medicare Special Needs Plans')]")
+	public WebElement snpPlanToggle;
+
+	public void validatePremiumForPlan(String premium, String plantype, String planName) {
+		if (plantype.equalsIgnoreCase("MAPD")) {
+			validateNew(mapdPlanToggle);
+			jsClickNew(mapdPlanToggle);
+			System.out.println("MAPD Plan Toggle Clicked");
+		} else if (plantype.equalsIgnoreCase("PDP")) {
+			validateNew(pdpPlanToggle);
+			jsClickNew(pdpPlanToggle);
+			System.out.println("PDP Plan Toggle Clicked");
+		} else {
+			validateNew(snpPlanToggle);
+			jsClickNew(snpPlanToggle);
+			System.out.println("SNP Plan Toggle Clicked");
+		}
+		WebElement PremiumforPlan = driver.findElement(By.xpath("//*[contains(text(), '" + planName
+				+ "')]//ancestor::*[contains(@class, 'uhc-card__header')]//following-sibling::*//*[contains(text(), 'Monthly Premium')]//following-sibling::*[contains(text(), '$')]"));
+		validateNew(PremiumforPlan);
+		String PremiumDisplayed = PremiumforPlan.getText();
+		System.out.println("Premium Displayed for Plan : " + PremiumDisplayed);
+		if (!PremiumDisplayed.contains(premium)) {
+			Assert.fail("Expected Premium not displayed, Expected : " + premium + "    Actual Displayed : "
+					+ PremiumDisplayed);
+		}
 	}
 }

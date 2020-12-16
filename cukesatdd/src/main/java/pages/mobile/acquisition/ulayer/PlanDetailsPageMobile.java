@@ -26,6 +26,7 @@ import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 import gherkin.formatter.model.DataTableRow;
+import pages.acquisition.dceredesign.DrugDetailsPage;
 import pages.acquisition.dceredesign.GetStartedPage;
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.pharmacyLocator.PharmacySearchPage;
@@ -34,6 +35,7 @@ import pages.acquisition.ulayer.PageTitleConstants;
 import pages.acquisition.ulayer.PlanInformationPage;
 import pages.acquisition.ulayer.ProviderSearchPage;
 import pages.acquisition.ulayer.VPPPlanSummaryPage;
+import pages.mobile.acquisition.dceredesign.DrugDetailsPageMobile;
 import pages.mobile.acquisition.dceredesign.GetStartedPageMobile;
 import pages.mobile.acquisition.ole.WelcomePageMobile;
 
@@ -672,7 +674,9 @@ public class PlanDetailsPageMobile extends UhcDriver {
 			System.out.println("Enroll in Plan Button is Not Displayed ");
 		}
 
-		EnrollinPlan.click();
+		// EnrollinPlan.click();
+		scrollToView(EnrollinPlan);
+		jsClickNew(EnrollinPlan);
 
 		try {
 			Thread.sleep(5000);
@@ -1369,6 +1373,39 @@ public class PlanDetailsPageMobile extends UhcDriver {
 
 		}
 		return null;
+	}
+
+	// LearnMore changes Start
+	@FindBy(xpath = "//span[contains(text(), 'Prescription Drug Benefits')]")
+	private WebElement prescriptionTab;
+
+	// LearnMore changes Start
+	public void clickPrescriptionBenifitTab() {
+		jsClickNew(prescriptionTab);
+
+	}
+
+	// LearnMore changes Start
+
+	@FindBy(xpath = "//button[@id='changePharmacyLink']")
+	public WebElement DrugDetails_ChangePharmacyLnk;
+
+	@FindBy(xpath = "//h2[contains(text(), 'Drug Cost Details')]")
+	public WebElement DrugDetails_DrugCostsHeading;
+	
+	@FindBy(xpath = "//a[@class='cta-button ng-scope' and text()='Learn More']")
+	private WebElement learnMore;
+
+	public DrugDetailsPageMobile clickLearnMore() {
+		validateNew(learnMore);
+		jsClickNew(learnMore);
+		CommonUtility.waitForPageLoadNew(driver, DrugDetails_DrugCostsHeading, 30);
+		if (validateNew(DrugDetails_ChangePharmacyLnk) && validateNew(DrugDetails_DrugCostsHeading)) {
+			return new DrugDetailsPageMobile(driver);
+		} else {
+			Assert.fail("Drug Details Page is NOT Displayed");
+			return null;
+		}
 	}
 
 }

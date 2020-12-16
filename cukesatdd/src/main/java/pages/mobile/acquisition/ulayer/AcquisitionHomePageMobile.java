@@ -1482,7 +1482,8 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		CommonUtility.waitForPageLoadNew(driver, zipCodeField, 30);
 		//sendkeys(zipCodeField, zipcode);
 		zipCodeField.sendKeys(zipcode);
-		viewPlansButton.click();
+		//viewPlansButton.click();
+		jsClickNew(viewPlansButton);
 
 		CommonUtility.checkPageIsReadyNew(driver);
 
