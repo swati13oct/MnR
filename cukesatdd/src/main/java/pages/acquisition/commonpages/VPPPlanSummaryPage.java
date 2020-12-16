@@ -3650,6 +3650,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	public VisitorProfilePage continueAsGuest() {
 		jsClickNew(continueAsGuest);
 		sleepBySec(2);
+		waitForPageLoadSafari();
 		if (driver.getCurrentUrl().contains("profile")) {
 			return new VisitorProfilePage(driver);
 		} else {

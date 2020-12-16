@@ -1019,7 +1019,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		
 			waitForPageLoadSafari();
 			CommonUtility.waitForPageLoadNew(driver, zipCodeField, 30);
-			sendkeys(zipCodeField, zipcode);
+//			sendkeys(zipCodeField, zipcode);
+			sendkeysNew(zipCodeField, zipcode);
 			jsClickNew(viewPlansButton);
 	//	}
 //			while(validate(overlayFilm, 10)) {/**wait*/}
@@ -1821,7 +1822,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		
 		public void verifyChatpopup() throws InterruptedException {
 			//CommonUtility.checkPageIsReady(driver);
-			chatsam.click();
+//			chatsam.click();
+			jsClickNew(chatsam);
 			System.out.println("@@@@@@@@@@@@@@@ Chat Icon Clicked @@@@@@@@@@@@@@@");	
 			
 		}
