@@ -21,4 +21,4 @@ Feature: Change Shipping Address
 
     Examples: 
       | username | password | memUserName                          | planType | memberType |
-      | kjadha10 | Free@123 | 9ac57f09-f46f-4989-99af-53f86c089e07 | PDP      | Individual |
+      | kjadha10 | Virus$$1 | 9ac57f09-f46f-4989-99af-53f86c089e07 | PDP      | Individual |

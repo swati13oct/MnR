@@ -14,6 +14,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 
+import acceptancetests.memberredesign.pharmaciesandprescriptions.PharmaciesAndPrescriptionsCommonConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import pages.regression.testharness.TestHarness;
@@ -676,6 +677,11 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 
 			Assert.assertTrue("PROBLEM - unable to locate pnp page notification element", validate(PnPNotification, 30));
 		}
+		
+		public void validatePharmacies_PrescriptionNotification_Deactivated() {
+
+			Assert.assertFalse("PROBLEM - unable to locate pnp page notification element", validate(PnPNotification, 30));
+		}
 
 		// F436319
 		public void validatePharmacies_PrescriptionNotificationNotDisplayedOnOtherPages() {
@@ -773,6 +779,11 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 
 		public void validateANOCCallToActionOnPnPPage() {
 			Assert.assertTrue("PROBLEM - unable to locate ANOC call to action Button element",
+					validate(ANOCCallToActnBtn, 30));
+		}
+		
+		public void validateANOCCallToActionNotDisplayedOnPnPPage() {
+			Assert.assertFalse("PROBLEM - able to locate ANOC call to action Button element",
 					validate(ANOCCallToActnBtn, 30));
 		}
 
@@ -1122,11 +1133,27 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 			if (size == 1) {
 				pageloadcomplete();
 				Assert.assertTrue("PROBLEM - Pharmacy Locator Tool Page is NOT displayed successfully",
-						pnpValidate(SearchButtonPharmacyLocatorPageByRally, 30));
+						pnpValidate(SearchButtonPharmacyLocatorPageByRally, 50));
 			} else {
 				pageloadcomplete();
-				Assert.assertTrue("PROBLEM - Pharmacy Locator Tool Page is NOT displayed",
-						pnpValidate(SearchButtonPharmacyLocatorPageByRally, 30));
+				/*Assert.assertTrue("PROBLEM - Pharmacy Locator Tool Page is NOT displayed",
+						pnpValidate(SearchButtonPharmacyLocatorPageByRally, 30));*/
+				Assert.assertTrue("PROBLEM - Pharmacy Locator Tool Page NOT displayed in same browser window", false);
+			}
+		}
+		
+		public void validatePharmacyLocatortoolbuiltbyRallyInSameBrowserWindow_memAuth() {
+			pageloadcomplete();
+			int size = countOfNewWindowTab();
+			System.out.println("Number of windows opened when user click on 2020 CTA is :: " + size);
+			if (size == 2) {
+				pageloadcomplete();
+				Assert.assertTrue("PROBLEM - Pharmacy Locator Tool Page is NOT displayed successfully",
+						pnpValidate(SearchButtonPharmacyLocatorPageByRally, 50));
+			} else {
+				pageloadcomplete();
+				/*Assert.assertTrue("PROBLEM - Pharmacy Locator Tool Page is NOT displayed",
+						pnpValidate(SearchButtonPharmacyLocatorPageByRally, 30));*/
 				Assert.assertTrue("PROBLEM - Pharmacy Locator Tool Page NOT displayed in same browser window", false);
 			}
 		}
@@ -1137,10 +1164,26 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 			if (size == 1) {
 				//Assert.assertTrue("PROBLEM - same browser window is opened", true);
 				Assert.assertTrue("PROBLEM - Legacy Pharmacy Locator Page zip code text box is NOT displayed",
-						pnpValidate(zipCodeTextBoxLegacyPharmacyLocatorPage, 30));
+						pnpValidate(zipCodeTextBoxLegacyPharmacyLocatorPage, 50));
 			} else {
+				/*Assert.assertTrue("PROBLEM - Legacy Pharmacy Locator Page zip code text box is NOT displayed",
+						pnpValidate(zipCodeTextBoxLegacyPharmacyLocatorPage, 50));*/
+				Assert.assertTrue("PROBLEM - Legacy Pharmacy Locator Tool Page is NOT displayed in same browser window",
+						false);
+			}
+
+		}
+		
+		public void validateLegacyPharmacyLocatortoolInSameBrowserWindow_memAuth() {
+			int size = countOfNewWindowTab();
+			System.out.println("Number of windows opened when user click on 2021 CTA is :: " + size);
+			if (size == 2) {
+				//Assert.assertTrue("PROBLEM - same browser window is opened", true);
 				Assert.assertTrue("PROBLEM - Legacy Pharmacy Locator Page zip code text box is NOT displayed",
-						pnpValidate(zipCodeTextBoxLegacyPharmacyLocatorPage, 30));
+						pnpValidate(zipCodeTextBoxLegacyPharmacyLocatorPage, 50));
+			} else {
+				/*Assert.assertTrue("PROBLEM - Legacy Pharmacy Locator Page zip code text box is NOT displayed",
+						pnpValidate(zipCodeTextBoxLegacyPharmacyLocatorPage, 50));*/
 				Assert.assertTrue("PROBLEM - Legacy Pharmacy Locator Tool Page is NOT displayed in same browser window",
 						false);
 			}
@@ -1399,6 +1442,7 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 					validate(ViewAllMedications, 50));
 			checkModelPopup(driver);
 			jsClickNew(ViewAllMedications);
+			
 			//ViewAllMedications.click();
 		}
 
@@ -1411,6 +1455,12 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 
 		// F392596
 		public void validateMyMedicationsPage() {
+			if (!validate(MyMedicationsPageHeader, 60)) {
+				//System.out.println("Inside waitTillMedCabLoads");
+				tryAgainMedCabTimeOut.click();
+				CommonUtility.checkPageIsReady(driver);				
+				CommonUtility.waitForPageLoad(driver, MyMedicationsPageHeader, 80);
+			}
 			Assert.assertTrue("PROBLEM - unable to locate My Medications Page Header element",
 					validate(MyMedicationsPageHeader, 20));
 		}
@@ -1553,8 +1603,14 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 		}
 
 		public void validateRefillAllMedications() {
+			if (!validate(refillAllMedications, 60)) {
+				//System.out.println("Inside waitTillMedCabLoads");
+				tryAgainMedCabTimeOut.click();
+				CommonUtility.checkPageIsReady(driver);				
+				CommonUtility.waitForPageLoad(driver, refillAllMedications, 80);				
+			}
 			Assert.assertTrue("PROBLEM - unable to locate Refill All Medications link text element on My Medications",
-					pnpValidate(refillAllMedications,30));
+					pnpValidate(refillAllMedications,50));
 		}
 
 		public void validateNoRefillAllMedications() {
@@ -2823,8 +2879,9 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 			if (!validate(ViewAllMedications, 60)) {
 				System.out.println("Inside waitTillMedCabLoads");
 				tryAgainMedCabTimeOut.click();
-				CommonUtility.checkPageIsReady(driver);
-				CommonUtility.waitForPageLoad(driver, ViewAllMedications, 80);
+				CommonUtility.checkPageIsReady(driver);				
+				CommonUtility.waitForPageLoad(driver, ViewAllMedications, 80);				
+				scrollToView(ViewAllMedications);
 			}
 		}
 
@@ -3232,6 +3289,53 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 		
 		public boolean validateSolutranPage(String expectedTitle) {
 			return getTitle().contains(expectedTitle);
+			
+		public List<Integer> getListOfIndexForRefillMedication_NE() {
+			int size = listOfDrugName.size();
+			validate(drugsAvailableOnMyMedication, 10);
+			String numberTXT = drugsAvailableOnMyMedication.getText();
+			int expectedSize = Integer.parseInt(numberTXT);
+			System.out.println("Expected Drug Name Size" + expectedSize);
+			while (size != expectedSize) {
+				size = listOfDrugName.size();
+			}
+			List<Integer> listOfIndex = new ArrayList<>();
+			for (int i = 0; i < listOfRefillMedication_NE.size(); i++) {
+				listOfIndex.add(i);
+			}
+			return listOfIndex;
+		}
+		
+		public List<Integer> getListOfIndexForRefillMedication_ON() {
+			int size = listOfDrugName.size();
+			validate(drugsAvailableOnMyMedication, 10);
+			String numberTXT = drugsAvailableOnMyMedication.getText();
+			int expectedSize = Integer.parseInt(numberTXT);
+			System.out.println("Expected Drug Name Size" + expectedSize);
+			while (size != expectedSize) {
+				size = listOfDrugName.size();
+			}
+			List<Integer> listOfIndex = new ArrayList<>();
+			for (int i = 0; i < listOfRefillMedication_ON.size(); i++) {
+				listOfIndex.add(i);
+			}
+			return listOfIndex;
+		}
+		
+		public List<Integer> getListOfIndexForRefillMedication_OFF() {
+			int size = listOfDrugName.size();
+			validate(drugsAvailableOnMyMedication, 10);
+			String numberTXT = drugsAvailableOnMyMedication.getText();
+			int expectedSize = Integer.parseInt(numberTXT);
+			System.out.println("Expected Drug Name Size" + expectedSize);
+			while (size != expectedSize) {
+				size = listOfDrugName.size();
+			}
+			List<Integer> listOfIndex = new ArrayList<>();
+			for (int i = 0; i < listOfRefillMedication_Off.size(); i++) {
+				listOfIndex.add(i);
+			}
+			return listOfIndex;
 		}
 
 }

@@ -69,6 +69,15 @@ public class CallToActionStepDefinition {
 		pnpPg.validatePharmacies_PrescriptionNotification();
 
 	}
+	
+	@When("^a PnP notification is deactivated$")
+	public void a_PnP_notification_is_deactivated() throws Throwable {
+		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
+				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
+		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
+		pnpPg.validatePharmacies_PrescriptionNotification_Deactivated();
+
+	}
 
 	@Then("^user must see that message at the top of the PnP page$")
 	public void user_must_see_that_message_at_the_top_of_the_pnp_page() throws Throwable {
@@ -610,6 +619,15 @@ public class CallToActionStepDefinition {
 		pnpPg.validatePharmacyLocatortoolbuiltbyRallyInSameBrowserWindow();
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
 	}
+		
+	@Then("^user will be directed to the new Pharmacy Locator tool built by Rally in the same browser window memAuth$")
+	public void user_will_be_directed_to_the_new_Pharmacy_Locator_tool_built_by_Rally_in_the_same_browser_window_memAuth()
+			throws Throwable {
+		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
+				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
+		pnpPg.validatePharmacyLocatortoolbuiltbyRallyInSameBrowserWindow_memAuth();
+		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
+	}
 
 	@When("^user click on the back button on Pharmacy Locator tool built by Rally$")
 	public void user_click_on_the_back_button_on_Pharmacy_Locator_tool_built_by_Rally() throws Throwable {
@@ -626,6 +644,17 @@ public class CallToActionStepDefinition {
 		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
 		pnpPg.validateLegacyPharmacyLocatortoolInSameBrowserWindow();
+		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
+	}
+	
+	
+	@Then("^user will be directed to the legacy Pharmacy Locator tool in the same browser window memAuth$")
+	public void user_will_be_directed_to_the_legacy_Pharmacy_Locator_tool_in_the_same_browser_window_memAuth()
+			throws Throwable {
+		// Write code here that turns the phrase above into concrete actions
+		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
+				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
+		pnpPg.validateLegacyPharmacyLocatortoolInSameBrowserWindow_memAuth();
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
 	}
 
@@ -658,6 +687,14 @@ public class CallToActionStepDefinition {
 		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
 		pnpPg.validateANOCCallToActionOnPnPPage();
+		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
+	}
+	
+	@Then("^user ANOC Call To Action not displayed$")
+	public void user_view_ANOC_Call_To_Action_not_displayed() throws Throwable {
+		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
+				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
+		pnpPg.validateANOCCallToActionNotDisplayedOnPnPPage();
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
 	}
 

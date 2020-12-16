@@ -1,5 +1,6 @@
 package acceptancetests.memberredesign.pharmaciesandprescriptions;
 
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,6 +18,10 @@ public class RefillAllMedicationCTAMyMedicationStepDefination {
 	
 	@Autowired
 	MRScenario loginScenario;
+	
+	public static List<Object> listOfMedicationDetail = new ArrayList<>();
+	public static String MedicationName = "";
+	public static String MedicatioNameToBeSearchedOnP_P;
 
 	public MRScenario getLoginScenario() {
 		return loginScenario;
@@ -138,5 +143,23 @@ public class RefillAllMedicationCTAMyMedicationStepDefination {
 		pnpPg.validateNoEstimatedDeliveryDate();
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
 
+	}
+	
+	@When("^user select the Refill CTA AutoRefill is NE$")
+	public void user_select_the_Refill_CTA_AutoRefill_is_NE() throws Throwable {
+		//TODO
+
+	}
+	
+	@When("^user select the Refill CTA AutoRefill is Off$")
+	public void user_select_the_Refill_CTA_AutoRefill_is_Off() throws Throwable {
+		//TODO
+
+	}
+	
+	@When("^user select the Refill CTA AutoRefill is On$")
+	public void user_select_the_Refill_CTA_AutoRefill_is_On() throws Throwable {
+		
+		//TODO
 	}
 }

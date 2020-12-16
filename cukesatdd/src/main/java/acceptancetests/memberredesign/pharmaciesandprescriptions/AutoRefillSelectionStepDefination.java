@@ -66,7 +66,7 @@ public class AutoRefillSelectionStepDefination {
 	public void user_will_not_view_the_Auto_Refill_display() throws Throwable {
 		CheckOutSummaryPage checkoutSumaryPg = (CheckOutSummaryPage) getLoginScenario()
 				.getBean(PageConstants.CHECKOUT_SUMMARY_PAGE);
-		Assert.assertFalse("PROBLEM -  Auto Refill is displayed for eligible prescription",
+		Assert.assertFalse("PROBLEM -  Auto Refill is displayed for noneligible prescription",
 				checkoutSumaryPg.validateAutoRefillField());
 		getLoginScenario().saveBean(PageConstants.CHECKOUT_SUMMARY_PAGE, checkoutSumaryPg);
 	}
