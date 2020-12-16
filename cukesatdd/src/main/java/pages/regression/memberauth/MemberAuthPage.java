@@ -123,6 +123,9 @@ public class MemberAuthPage extends UhcDriver {
 	protected WebElement paymentGoToHomepageBtn;
 
 	@FindBy(xpath="//header//button[contains(@ng-click,'goToHomePage()')]")
+	protected WebElement otcGoToHomepageBtn;
+	
+	@FindBy(xpath="//header//button[contains(@ng-click,'goToHomePage()')]")
 	protected WebElement anocGoToHomepageBtn;
 	
 	@FindBy(xpath="//span[contains(@class,'redError') and not(contains(@class,'ng-hide')) and contains(text(),'Either your UserName or Password was incorrect.')]")
@@ -398,6 +401,7 @@ public class MemberAuthPage extends UhcDriver {
 					//tbd CommonUtility.checkPageIsReadyNew(driver);
 					paymentSplashPageWorkaround();
 					//tbd CommonUtility.checkPageIsReadyNew(driver);
+					otcSplashPageWorkaround();
 					if (driver.getCurrentUrl().contains("bannerpopup.html")) {
 						System.out.println("COVID 19 Banner page has appeared");
 						try {
@@ -618,6 +622,38 @@ public class MemberAuthPage extends UhcDriver {
 		}
 	}
 
+	public void otcSplashPageWorkaround() {
+		CommonUtility.checkPageIsReadyNew(driver);
+		CommonUtility.waitForPageLoad(driver, otcGoToHomepageBtn, 3);
+		System.out.println("Proceed to check if need to perform OTC workaround...");
+		//checkModelPopup(driver, 2);
+		if (driver.getCurrentUrl().contains("login/otc.html")) {
+			if (MRScenario.environment.contains("team-a") || MRScenario.environment.contains("stage")) {
+				CommonUtility.waitForPageLoad(driver, otcGoToHomepageBtn, 5);
+				System.out.println("User encounted otc splash page, handle it...");
+				try {
+					if (validate(otcGoToHomepageBtn,0)) {
+						System.out.println("'Go To Homepage' button showed up, click it");
+						otcGoToHomepageBtn.click();
+					}
+				} catch (Exception e1) {
+					System.out.println("did not encounter 'Go To Homepage', moving on. "+e1);
+				}
+				CommonUtility.checkPageIsReadyNew(driver);
+				checkModelPopup(driver, 1);
+			} else if (MRScenario.environment.equalsIgnoreCase("offline") || MRScenario.environment.equalsIgnoreCase("prod")) { 
+				splashPgWorkaroundForProd();
+			} else {
+				Assert.assertTrue("PROBLEM - will only workaround the splash page on team-atest, stage, offline-prod, or online-prod env, "
+						+ "please either use another test user or manually handle the splash page properly.  "
+						+ "Env='"+MRScenario.environment+"'", false);
+			}
+			CommonUtility.checkPageIsReadyNew(driver);
+		} else {
+			System.out.println("no need to perform otc workaround...");
+		}
+	}
+	
 	public void anocSplashPageWorkaround() {
 		CommonUtility.checkPageIsReadyNew(driver);
 		CommonUtility.waitForPageLoad(driver, anocGoToHomepageBtn, 3);

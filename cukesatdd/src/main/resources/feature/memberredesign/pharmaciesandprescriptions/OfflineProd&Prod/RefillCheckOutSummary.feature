@@ -54,5 +54,5 @@ Feature: Refill Checkout Summary Page
     And disclaimer will remind the user that "OptumRx" is fulfilling the order
 
     Examples: 
-      | FID     | username | password | MemUserName | planType | memberType     |
-      | F481927 | ntalesha | pass@123 | Tlhoffmann65 | MPDP     | Individual_PnP |
+      | FID     | username | password | MemUserName  | planType | memberType     |
+      | F481927 | kjadha10 | Virus$$1 | Tlhoffmann65 | MPDP     | Individual_PnP |
