@@ -898,68 +898,6 @@ public class MedicineCabinetStepDefinition {
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
 
 	}
-	
-	@Then("^user view OTC Call To Action$")
-	public void user_view_OTC_Call_To_Action() throws Throwable {
-		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
-				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
-		Assert.assertTrue("PROBLEM - OTC Call To Action not present on P&P Page",
-				pnpPg.validateOTCTile());
-		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
-	}
-
-	@Then("^user validates an image for OTC Call To Action$")
-	public void user_validates_an_image_for_OTC_Call_To_Action() throws Throwable {
-		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
-				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
-		Assert.assertTrue("PROBLEM - OTC Icon not present on P&P Page",
-				pnpPg.validateOTCImage());
-		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);   
-	}
-
-	@Then("^user validates a title for OTC Call To Action$")
-	public void user_validates_a_title_for_OTC_Call_To_Action() throws Throwable {
-		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
-				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
-		Assert.assertTrue("PROBLEM - OTC title not present on P&P Page",
-				pnpPg.validateOTCTitle());
-		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);   
-	}
-
-	@Then("^user validates a description for OTC Call To Action$")
-	public void user_validates_a_description_for_OTC_Call_To_Action() throws Throwable {
-		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
-				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
-		Assert.assertTrue("PROBLEM - OTC description not present on P&P Page",
-				pnpPg.validateOTCDescription());
-		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);   
-	}
-
-	@When("^user clicks on OTC CTA$")
-	public void user_clicks_on_OTC_CTA() throws Throwable {
-		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
-				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
-				pnpPg.clickOnOTCTile();
-		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);   
-	}
-
-	@Then("^user will see the authenticated healthybenefits web page open in a new tab$")
-	public void user_will_see_the_authenticated_healthybenefits_web_page_open_in_a_new_tab() throws Throwable {
-		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
-				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
-		Assert.assertTrue("PROBLEM - Solutran WebPage not available",
-				pnpPg.validateSolutranPage(""));	
-		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg); 
-	}
-
-	@Then("^user wont see the OTC Tile$")
-	public void user_wont_see_the_OTC_Tile() throws Throwable {
-		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
-				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
-		Assert.assertFalse("PROBLEM - OTC Call To Action is present on P&P Page for the user",
-				pnpPg.validateOTCTile());
-		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);   
-	}
 
 
 }
