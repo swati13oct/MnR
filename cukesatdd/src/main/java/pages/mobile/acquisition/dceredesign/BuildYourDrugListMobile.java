@@ -172,7 +172,7 @@ public class BuildYourDrugListMobile extends UhcDriver {
 
 	public TellUsAboutDrugMobile SelectDrugfromList(String drugName) {
 		validateNew(AutoCompleteList);
-		WebElement Drug = driver.findElement(By.xpath("//uhc-menu-item[@id='" + drugName + "']"));
+		WebElement Drug = driver.findElement(By.xpath("//*[@id='"+drugName+"']"));
 		jsClickNew(Drug);
 		CommonUtility.waitForPageLoadNew(driver, TellUsABoutHeader, 20);
 		if (validateNew(TellUsABoutHeader) && validateNew(TellUsABoutCloseBtn)) {
@@ -264,23 +264,25 @@ public class BuildYourDrugListMobile extends UhcDriver {
 
 	public void ValidateAddedDrugsList(String druglist) {
 		String[] DrugListItems = druglist.split("&");
-		System.out.println("Added Drug Count : " + DrugListItems.length);
-		for (String currentDrug : DrugListItems) {
-			System.out.println("Current Added Drug Name : " + currentDrug);
-			WebElement DrugName = driver
-					.findElement(By.xpath("//uhc-list-item//h4[contains(text(), '" + currentDrug + "')]"));
-			WebElement DrugEditBtn = driver.findElement(
-					By.xpath("//uhc-list-item//button[contains(@aria-label, 'Edit " + currentDrug + "')]"));
-			WebElement DrugRemoveBtn = driver.findElement(
-					By.xpath("//uhc-list-item//button[contains(@aria-label, 'Remove " + currentDrug + "')]"));
+		int i;
+		String currentDrug;
+		int DrugCount_Total = DrugListItems.length-1;
+		System.out.println("Total Added Drug Count : "+DrugCount_Total);
+		System.out.println("Total Added Drug Count : "+DrugCount_Total);
+		for(i=1; i<=DrugCount_Total; i++) {
+			currentDrug = DrugListItems[i];
+			System.out.println("Current Added Drug Name : "+currentDrug);
+			WebElement DrugName = driver.findElement(By.xpath("//uhc-list-item//h4[contains(text(), '"+currentDrug+"')]"));
+			WebElement DrugEditBtn = driver.findElement(By.xpath("//uhc-list-item//button[contains(@aria-label, 'Edit') and contains(@aria-label, '"+currentDrug+"')]"));
+			WebElement DrugRemoveBtn = driver.findElement(By.xpath("//uhc-list-item//button[contains(@aria-label, 'Remove') and contains(@aria-label, '"+currentDrug+"')]"));
 
-			if (validateNew(DrugName) && validateNew(DrugEditBtn) && validateNew(DrugRemoveBtn)) {
-				Assert.assertTrue("Validated Drug List for Drug : " + currentDrug, true);
-			} else
+			if(validateNew(DrugName) && validateNew(DrugEditBtn) && validateNew(DrugRemoveBtn)) {
+				Assert.assertTrue("Validated Drug List for Drug : "+currentDrug, true);
+			}
+			else
 				Assert.fail("Drug List Validation FAILED for Drug : " + currentDrug);
 		}
 	}
-	
 	public void deleteDrug(String deleteDrug) {
 		System.out.println("Drug to be removed : "+deleteDrug);
 		WebElement removeLink = driver.findElement(By.xpath("//*[contains(@aria-label,'Remove "+deleteDrug+"')]"));

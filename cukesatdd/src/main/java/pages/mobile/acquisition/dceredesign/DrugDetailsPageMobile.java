@@ -392,13 +392,13 @@ public class DrugDetailsPageMobile extends UhcDriver {
 	@FindBy(xpath = "//*[contains(@class, 'uhc-modal')]//*[contains(@id, 'cancelicon')]")
 	public WebElement StageInfo_Modal_Close;
 
-	@FindBy(xpath = "//*[contains(@class, 'uhc-modal')]//h1[contains(text(), 'Initial Coverage Stage')]")
+	@FindBy(xpath = "//*[contains(@class, 'uhc-modal')]//*[contains(@id, 'modal-label')][contains(text(), 'Initial')]")
 	public WebElement InitialCoverage_Modal_Header;
 
-	@FindBy(xpath = "//*[contains(@class, 'uhc-modal')]//h1[contains(text(), 'Coverage Gap Stage')]")
+	@FindBy(xpath = "//*[contains(@class, 'uhc-modal')]//*[contains(@id, 'modal-label')][contains(text(), 'Gap')]")
 	public WebElement CoverageGap_Modal_Header;
-
-	@FindBy(xpath = "//*[contains(@class, 'uhc-modal')]//h1[contains(text(), 'Catastrophic Coverage Stage')]")
+	
+	@FindBy(xpath = "//*[contains(@class, 'uhc-modal')]//*[contains(@id, 'modal-label')][contains(text(), 'Catastrophic')]")
 	public WebElement Catastrophe_Modal_Header;
 
 	public void validateDrugStageInfoModals() {
@@ -475,39 +475,32 @@ public class DrugDetailsPageMobile extends UhcDriver {
 
 	public void ValidatesDrugsList(String druglist) {
 		String[] DrugListItems = druglist.split("&");
-		int DrugCount_Total = DrugListItems.length - 1;
-		System.out.println("Total Added Drug Count : " + DrugCount_Total);
-		WebElement TotalDrugCount = driver.findElement(By.xpath(
-				"//h2[contains(text(), '" + DrugCount_Total + " Covered)') and contains(text(), 'Your Drugs')]"));
-		for (String currentDrug : DrugListItems) {
-			System.out.println("Current Added Drug Name : " + currentDrug);
-			WebElement DrugName = driver.findElement(
-					By.xpath("//caption[contains(text(), 'Your Drugs')]/ancestor::table//span[contains(text(), '"
-							+ currentDrug + "')]"));
-			WebElement DrugIntlCoverText = driver.findElement(By.xpath(
-					"//caption[contains(text(), 'Your Drugs')]/ancestor::table//span[contains(text(), '" + currentDrug
-							+ "')]//ancestor::td//following-sibling::td[contains(text(), 'Initial Coverage Cost')]"));
-			WebElement DrugYouPay = driver.findElement(
-					By.xpath("//caption[contains(text(), 'Your Drugs')]/ancestor::table//span[contains(text(), '"
-							+ currentDrug + "')]//ancestor::td//following-sibling::td//*[contains(text(), '$')]"));
+		int DrugCount_Total = DrugListItems.length-1;
+		System.out.println("Total Added Drug Count : "+DrugCount_Total);
+		WebElement TotalDrugCount = driver.findElement(By.xpath("//h2[contains(text(), '"+DrugCount_Total+" Covered)') and contains(text(), 'Your Drugs')]"));
+		int i;
+		String currentDrug;
+		System.out.println("Total Added Drug Count : "+DrugCount_Total);
+		for(i=1; i<=DrugCount_Total; i++) {
+			currentDrug = DrugListItems[i];
+			System.out.println("Current Added Drug Name : "+currentDrug);
+			WebElement DrugName = driver.findElement(By.xpath("//caption[contains(text(), 'Your Drugs')]/ancestor::table//span[contains(text(), '"+currentDrug+"')]"));
+			//WebElement DrugIntlCoverText = driver.findElement(By.xpath("//caption[contains(text(), 'Your Drugs')]/ancestor::table//span[contains(text(), '"+currentDrug+"')]//ancestor::td//following-sibling::td[contains(text(), 'Initial Coverage Cost')]"));
+			WebElement DrugYouPay = driver.findElement(By.xpath("//caption[contains(text(), 'Your Drugs')]/ancestor::table//span[contains(text(), '"+currentDrug+"')]//ancestor::td//following-sibling::td//*[contains(text(), '$')]"));
 
-			if (validateNew(DrugName) && validateNew(DrugIntlCoverText) && validateNew(DrugYouPay)) {
-				System.out.println(
-						"Drug Details Page, Validated Drug List for Drug, Initial Coverage Cost text and You Pay : "
-								+ currentDrug);
-			} else
-				Assert.fail(
-						"Drug Details Page, Drug List, Initial Coverage Cost text and You Pay Validation FAILED for Drug : "
-								+ currentDrug);
+			if(scrollToView(DrugName) && scrollToView(DrugYouPay)) {
+				System.out.println("Drug Details Page, Validated Drug List for Drug, Initial Coverage Cost text and You Pay : "+currentDrug);
+			}
+			else
+				Assert.fail("Drug Details Page, Drug List, Initial Coverage Cost text and You Pay Validation FAILED for Drug : "+currentDrug);
+		}		
+		if(validateNew(TotalDrugCount)) {
+			System.out.println("Drug Details Page, Validated Total Added Drug Count Displayed in Your Drug Section: "+TotalDrugCount.getText());
 		}
-		if (validateNew(TotalDrugCount)) {
-			System.out.println("Drug Details Page, Validated Total Added Drug Count Displayed in Your Drug Section: "
-					+ TotalDrugCount.getText());
-		} else
-			Assert.fail("Drug Details Page, Validated Total Added Drug Count NOT Displayed in Your Drug Section: "
-					+ TotalDrugCount.getText());
-
+		else
+			Assert.fail("Drug Details Page, Validated Total Added Drug Count NOT Displayed in Your Drug Section: "+TotalDrugCount.getText());
 	}
+
 
 	public void ValidatesDrugsTier_LimitsDisplayed() {
 		List<WebElement> Tier1Drugs = driver.findElements(
@@ -1078,48 +1071,48 @@ public class DrugDetailsPageMobile extends UhcDriver {
 
 	// MonthlyDrugCost Changes Start
 	public void validateMonthlyCost() {
-		validateNew(MonthlyCostDetails_Header);
-		validateNew(MonthlyDrug_TotalDrugPrice_heading);
-		validateNew(MonthlyDrug_PlanPay_heading);
-		validateNew(MonthlyDrug_YouPay_heading);
-		validateNew(MonthlyDrug_TotalDrugPrice_month1);
-		validateNew(MonthlyDrug_PlanPay_month1);
-		validateNew(MonthlyDrug_YouPay_month1);
-		validateNew(MonthlyDrug_TotalDrugPrice_month2);
-		validateNew(MonthlyDrug_PlanPay_month2);
-		validateNew(MonthlyDrug_YouPay_month2);
-		validateNew(MonthlyDrug_TotalDrugPrice_month3);
-		validateNew(MonthlyDrug_PlanPay_month3);
-		validateNew(MonthlyDrug_YouPay_month3);
-		validateNew(MonthlyDrug_TotalDrugPrice_month4);
-		validateNew(MonthlyDrug_PlanPay_month4);
-		validateNew(MonthlyDrug_YouPay_month4);
-		validateNew(MonthlyDrug_TotalDrugPrice_month5);
-		validateNew(MonthlyDrug_PlanPay_month5);
-		validateNew(MonthlyDrug_YouPay_month5);
-		validateNew(MonthlyDrug_TotalDrugPrice_month6);
-		validateNew(MonthlyDrug_PlanPay_month6);
-		validateNew(MonthlyDrug_YouPay_month6);
-		validateNew(MonthlyDrug_TotalDrugPrice_month7);
-		validateNew(MonthlyDrug_PlanPay_month7);
-		validateNew(MonthlyDrug_YouPay_month7);
-		validateNew(MonthlyDrug_TotalDrugPrice_month8);
-		validateNew(MonthlyDrug_PlanPay_month8);
-		validateNew(MonthlyDrug_YouPay_month8);
-		validateNew(MonthlyDrug_TotalDrugPrice_month9);
-		validateNew(MonthlyDrug_PlanPay_month9);
-		validateNew(MonthlyDrug_YouPay_month9);
-		validateNew(MonthlyDrug_TotalDrugPrice_month10);
-		validateNew(MonthlyDrug_PlanPay_month10);
-		validateNew(MonthlyDrug_YouPay_month10);
-		validateNew(MonthlyDrug_TotalDrugPrice_month11);
-		validateNew(MonthlyDrug_PlanPay_month11);
-		validateNew(MonthlyDrug_YouPay_month11);
-		validateNew(MonthlyDrug_TotalDrugPrice_month12);
-		validateNew(MonthlyDrug_PlanPay_month12);
-		validateNew(MonthlyDrug_YouPay_month12);
+		scrollToView(MonthlyCostDetails_Header);
+		scrollToView(MonthlyDrug_TotalDrugPrice_heading);
+		scrollToView(MonthlyDrug_PlanPay_heading);
+		scrollToView(MonthlyDrug_YouPay_heading);
+		scrollToView(MonthlyDrug_TotalDrugPrice_month1);
+		scrollToView(MonthlyDrug_PlanPay_month1);
+		scrollToView(MonthlyDrug_YouPay_month1);
+		scrollToView(MonthlyDrug_TotalDrugPrice_month2);
+		scrollToView(MonthlyDrug_PlanPay_month2);
+		scrollToView(MonthlyDrug_YouPay_month2);
+		scrollToView(MonthlyDrug_TotalDrugPrice_month3);
+		scrollToView(MonthlyDrug_PlanPay_month3);
+		scrollToView(MonthlyDrug_YouPay_month3);
+		scrollToView(MonthlyDrug_TotalDrugPrice_month4);
+		scrollToView(MonthlyDrug_PlanPay_month4);
+		scrollToView(MonthlyDrug_YouPay_month4);
+		scrollToView(MonthlyDrug_TotalDrugPrice_month5);
+		scrollToView(MonthlyDrug_PlanPay_month5);
+		scrollToView(MonthlyDrug_YouPay_month5);
+		scrollToView(MonthlyDrug_TotalDrugPrice_month6);
+		scrollToView(MonthlyDrug_PlanPay_month6);
+		scrollToView(MonthlyDrug_YouPay_month6);
+		scrollToView(MonthlyDrug_TotalDrugPrice_month7);
+		scrollToView(MonthlyDrug_PlanPay_month7);
+		scrollToView(MonthlyDrug_YouPay_month7);
+		scrollToView(MonthlyDrug_TotalDrugPrice_month8);
+		scrollToView(MonthlyDrug_PlanPay_month8);
+		scrollToView(MonthlyDrug_YouPay_month8);
+		scrollToView(MonthlyDrug_TotalDrugPrice_month9);
+		scrollToView(MonthlyDrug_PlanPay_month9);
+		scrollToView(MonthlyDrug_YouPay_month9);
+		scrollToView(MonthlyDrug_TotalDrugPrice_month10);
+		scrollToView(MonthlyDrug_PlanPay_month10);
+		scrollToView(MonthlyDrug_YouPay_month10);
+		scrollToView(MonthlyDrug_TotalDrugPrice_month11);
+		scrollToView(MonthlyDrug_PlanPay_month11);
+		scrollToView(MonthlyDrug_YouPay_month11);
+		scrollToView(MonthlyDrug_TotalDrugPrice_month12);
+		scrollToView(MonthlyDrug_PlanPay_month12);
+		scrollToView(MonthlyDrug_YouPay_month12);
 		threadsleep(20);
-		validateNew(Graph_svg);
+		scrollToView(Graph_svg);
 
 	}
 	
@@ -1155,9 +1148,9 @@ public class DrugDetailsPageMobile extends UhcDriver {
 		WebElement InsulinDrugCopayDisplayed = driver.findElement(By.xpath("//*[contains(@id, 'drugtable')]//*[contains(text(), '"+insulinDrug+"' )]//following::*[contains(text(), '$') and contains(text(), 'Copay')]"));
 
 		WebElement InsulinDrugTextDisplayed = driver.findElement(By.xpath("//*[contains(@id, 'drugtable')]//*[contains(text(), '"+insulinDrug+"' )]//following::*[contains(text(), 'Savings Model')]"));
-		validateNew(InsulinDrugDisplayed);
-		validateNew(InsulinDrugCopayDisplayed);
-		validateNew(InsulinDrugTextDisplayed);
+		scrollToView(InsulinDrugDisplayed);
+		scrollToView(InsulinDrugCopayDisplayed);
+		scrollToView(InsulinDrugTextDisplayed);
 		if(InsulinDrugCopayDisplayed.getText().contains(insulinCopay)) {
 			System.out.println("Your Drugs Section - Insulin Tier and correct Copay is Displayed : "+InsulinDrugCopayDisplayed.getText());
 			Assert.assertTrue("Your Drugs Section - Insulin Tier and correct Copay is Displayed : "+InsulinDrugCopayDisplayed.getText(),true);

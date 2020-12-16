@@ -50,7 +50,7 @@ public class PlanRecommendationEngineLandingAndZipcodeMobilePages extends UhcDri
 	@FindBy(css = "div[class*='get-started-main-inner'] button")
 	private WebElement getStartedBtn1;
 
-	@FindBy(xpath = "//h1[contains(@class,'text-display')]")
+	@FindBy(xpath = "//h1[contains(text(),'Get Help Finding a Plan')]")
 	private WebElement landingpageHeader;
 
 	@FindBy(xpath = "//*[@class='get-started-banner']//img[@class='mb-3 mb-0-lg']")
@@ -141,7 +141,7 @@ public class PlanRecommendationEngineLandingAndZipcodeMobilePages extends UhcDri
 		//String preBreadcrumbs = (driver.findElement(By.cssSelector("div.breadcrumb"))).getText();
 		//Assert.assertTrue(preBreadcrumbs.contains("Home / Plan Recommendation Engine"));
 		String ExpectedTitle = "plan";
-		validate(landingpageHeader, 30);
+		validateNew(landingpageHeader, 30);
 		String ActualTitle = landingpageHeader.getText();
 		System.out.println(ActualTitle.equalsIgnoreCase(ExpectedTitle));
 		System.out.println("Validating Animation Images: ");

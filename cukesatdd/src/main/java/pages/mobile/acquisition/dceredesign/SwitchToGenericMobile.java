@@ -1,4 +1,5 @@
 package pages.mobile.acquisition.dceredesign;
+
 import java.util.Map;
 
 import org.json.JSONException;
@@ -21,10 +22,9 @@ import pages.acquisition.ulayer.PageTitleConstants;
 
 public class SwitchToGenericMobile extends UhcDriver {
 
-
 	@FindBy(xpath = "//*[@id='drugPopHeading']")
 	public WebElement TellUsABoutHeader;
-	
+
 	@FindBy(xpath = "//img[contains(@class,'uhc-modal__close')]")
 	public WebElement TellUsABoutCloseBtn;
 
@@ -36,11 +36,18 @@ public class SwitchToGenericMobile extends UhcDriver {
 	 * @FindBy(xpath =
 	 * "//*[contains(@for,'radio-2-input')]//div[contains(@class,'label')]") public
 	 * WebElement GenericDrugRadio;
-	 */	
+	 */
+
+	@FindBy(xpath = "//*[@id='modal-label' and contains(text(), 'Switch to Generic')]")
+	public WebElement SwitchPageHeader;
+
+	@FindBy(xpath = "//img[contains(@class,'uhc-modal__close')]")
+	public WebElement SwitchPageCloseBtn;
+	
 	@FindBy(xpath = "//input[@id= 'drugquantity']")
 	public WebElement DrugQuantityTxtBx;
 
-	@FindBy(xpath = "//button[@type= 'submit' and contains(@attr.dtmname, 'confirm')]")
+	@FindBy(xpath = "//button[@type= 'submit' and contains(@dtmname, 'confirm')]")
 	public WebElement AddDrugBtn;
 
 	@FindBy(xpath = "//*[@id='quantitycontainer']//*[contains(@class, ' errtext')]")
@@ -72,21 +79,22 @@ public class SwitchToGenericMobile extends UhcDriver {
 
 	@Override
 	public void openAndValidate() {
-		validateNew(TellUsABoutHeader);
-		validateNew(TellUsABoutCloseBtn);
+		validateNew(SwitchPageHeader);
+		validateNew(SwitchPageCloseBtn);
 		validateNew(AddDrugBtn);
 		validateNew(supplyLengthDrpDwn);
-		validateNew(FrequentyDrpDwn);
 		validateNew(QuantityTxt);
 	}
 
 	public void validateBrandDrugPage(String BrandDrugName, String genericDrugName) {
 		BrandDrugName = BrandDrugName.toLowerCase();
 		genericDrugName = genericDrugName.toLowerCase();
-		
-		WebElement BrandDrugRadio = driver.findElement(By.xpath("//uhc-radio[contains(@dtmname, '"+BrandDrugName+"')]"));
-		WebElement GenericDrugRadio = driver.findElement(By.xpath("//uhc-radio[contains(@dtmname, '"+genericDrugName+"')]"));
-		//input
+
+		WebElement BrandDrugRadio = driver
+				.findElement(By.xpath("//uhc-radio[contains(@dtmname, '" + BrandDrugName + "')]"));
+		WebElement GenericDrugRadio = driver
+				.findElement(By.xpath("//uhc-radio[contains(@dtmname, '" + genericDrugName + "')]"));
+		// input
 		validateNew(BrandDrugRadio);
 		validateNew(GenericDrugRadio);
 		/*
@@ -96,32 +104,31 @@ public class SwitchToGenericMobile extends UhcDriver {
 		 * 
 		 * } else { Assert.fail("Brand Name and Generic Drug options NOT Validated"); }
 		 */
-		
-		
+
 	}
 
 	public void ValidateBlankQuantityError() {
 		validateNew(DrugQuantityTxtBx);
 		String Quantity = DrugQuantityTxtBx.getText();
 		DrugQuantityTxtBx.clear();
-		System.out.println("Quantity cleared : "+DrugQuantityTxtBx.getText());
+		System.out.println("Quantity cleared : " + DrugQuantityTxtBx.getText());
 		jsClickNew(DrugQuantityTxtBx);
-		if(DrugQuantityTxtBx.getText().isEmpty()) {
+		if (DrugQuantityTxtBx.getText().isEmpty()) {
 			validateNew(AddDrugBtn);
 			jsClickNew(AddDrugBtn);
-			if(validateNew(BlankQuantityError) && BlankQuantityError.getText().contains("enter a valid quantity between 1 and 999")) {
-				System.out.println("Error Message displayed for Blank Quantity search : "+BlankQuantityError.getText());
+			if (validateNew(BlankQuantityError)
+					&& BlankQuantityError.getText().contains("enter a valid quantity between 1 and 999")) {
+				System.out
+						.println("Error Message displayed for Blank Quantity search : " + BlankQuantityError.getText());
 				DrugQuantityTxtBx.sendKeys(Quantity);
-			}
-			else
-				Assert.fail("Error Message displayed for Blank Quantity search : "+BlankQuantityError.getText());
+			} else
+				Assert.fail("Error Message displayed for Blank Quantity search : " + BlankQuantityError.getText());
+
+		} else {
+			Assert.fail("Drug Quantity Text Box NOT Cleared : " + DrugQuantityTxtBx.getText());
 
 		}
-		else {
-			Assert.fail("Drug Quantity Text Box NOT Cleared : "+DrugQuantityTxtBx.getText());
 
-		}
-						
 	}
 
 	public BuildYourDrugList ClickAddDrug() {
@@ -135,22 +142,24 @@ public class SwitchToGenericMobile extends UhcDriver {
 		Assert.fail("Did not Navigate to Build Drug List Page");
 		return null;
 	}
-	
+
 	public void selectDosage(String Dosage) {
 		validateNew(SelectDosageDrpDwn);
 		jsClickNew(SelectDosageDrpDwn);
-		WebElement Drug = driver.findElement(By.xpath("//select[@id='selectdosage']//option[contains(text(), '"+Dosage+"')]"));
+		WebElement Drug = driver
+				.findElement(By.xpath("//select[@id='selectdosage']//option[contains(text(), '" + Dosage + "')]"));
 		jsClickNew(Drug);
 	}
 
 	public void selectPackage(String Package) {
 		validateNew(SelectPackageDrpDwn);
 		jsClickNew(SelectPackageDrpDwn);
-		WebElement element = driver.findElement(By.xpath("//select[@id='new-drug-packaging']//option[contains(text(), '"+Package+"')]"));
+		WebElement element = driver.findElement(
+				By.xpath("//select[@id='new-drug-packaging']//option[contains(text(), '" + Package + "')]"));
 		jsClickNew(element);
-	
+
 	}
-	
+
 	public void selectQuantity(String Quantity) {
 		validateNew(QuantityTxt);
 		QuantityTxt.sendKeys(Quantity);
@@ -159,29 +168,32 @@ public class SwitchToGenericMobile extends UhcDriver {
 	public void selectFrequency(String Frequency) {
 		validateNew(FrequentyDrpDwn);
 		jsClickNew(FrequentyDrpDwn);
-		WebElement element = driver.findElement(By.xpath("//select[@id='new-drug-frequency']//option[contains(text(), '"+Frequency+"')]"));
+		WebElement element = driver.findElement(
+				By.xpath("//select[@id='new-drug-frequency']//option[contains(text(), '" + Frequency + "')]"));
 		jsClickNew(element);
 	}
 
 	public void selectSupplyLength(String SupplyLength) {
 		validateNew(supplyLengthDrpDwn);
 		jsClickNew(supplyLengthDrpDwn);
-		WebElement element = driver.findElement(By.xpath("//select[@id='new-drug-refill']//option[contains(text(), '"+SupplyLength+"')]"));
+		WebElement element = driver.findElement(
+				By.xpath("//select[@id='new-drug-refill']//option[contains(text(), '" + SupplyLength + "')]"));
 		jsClickNew(element);
-	
+
 	}
-	
+
 	public void validateSwitchPage(String genericDrug, String brandDrug) {
-		WebElement GenericDrugText = driver.findElement(By.xpath("//h2//*[contains(text(), '"+genericDrug+"')]"));
-		WebElement BrandDrugText = driver.findElement(By.xpath("//h2//*[contains(text(), '"+brandDrug+"')]"));
-		WebElement SavingsText = driver.findElement(By.xpath("//*[contains(text(), 'save up to') and contains(text(), 'annually by switching to the generic')]"));
-		
-		if(!validateNew(GenericDrugText) || !validateNew(BrandDrugText) || !validateNew(SavingsText)) {
+		WebElement GenericDrugText = driver.findElement(By.xpath("//h2//*[contains(text(), '" + genericDrug + "')]"));
+		WebElement BrandDrugText = driver.findElement(By.xpath("//h2//*[contains(text(), '" + brandDrug + "')]"));
+		WebElement SavingsText = driver.findElement(By.xpath(
+				"//*[contains(text(), 'save up to') and contains(text(), 'annually by switching to the generic')]"));
+
+		if (!validateNew(GenericDrugText) || !validateNew(BrandDrugText) || !validateNew(SavingsText)) {
 			Assert.fail("Switch To Generic Page Validation Failed");
 		}
 		Assert.assertTrue("Switch To Generic Page Validation Passed", true);
 	}
-	
+
 	@FindBy(xpath = "//button[@id='changePharmacyLink']")
 	public WebElement DrugDetails_ChangePharmacyLnk;
 
@@ -199,5 +211,5 @@ public class SwitchToGenericMobile extends UhcDriver {
 		Assert.fail("Did not Navigate to DCE Drug Details Page");
 		return null;
 	}
-	
+
 }

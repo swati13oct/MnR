@@ -1028,7 +1028,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 	public void viewPlanSummary(String planType) {
 
 		if (planType.equalsIgnoreCase("PDP")) {
-			validateNew(pdpPlansViewLink, 30);
+			scrollToView(pdpPlansViewLink);
 			// note: add sleep for timing issue, tried increase timeout from
 			// waitForPageLoadNew but didn't work
 			jsClickNew(pdpPlansViewLink);
@@ -1036,7 +1036,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 			System.out.println("PDP Plan Type Clicked");
 			validateNew(planListContainer, 30);
 		} else if (planType.equalsIgnoreCase("MA") || planType.equalsIgnoreCase("MAPD")) {
-			int maPlans = Integer.valueOf(maPlansCount.getText().replace(" Plans", ""));
+			int maPlans = Integer.valueOf(maPlansCount.getText().replace(" Plans", "").trim());
 			if (maPlans == 0) {
 				jsClickNew(maPlansViewLink);
 				sleepBySec(2);
