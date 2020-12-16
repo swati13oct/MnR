@@ -211,6 +211,25 @@ public class BenefitsAndCoverageUmsStepDefinition {
 		String dateStr=benefitsCoveragePage.convertDateToStrFormat_MMDDYYYY(currentDate);
 		getLoginScenario().saveBean(BenefitsAndCoverageCommonConstants.TEST_DATE_STR, dateStr);
 	}
+
+	@Then("^The user will not be able to navigate to Benefits and Coverage page$")
+	public void user_noBenefitsAndCoverage() {
+		String planType=(String) getLoginScenario().getBean(LoginCommonConstants.PLANTYPE);
+		String memberType=(String) getLoginScenario().getBean(LoginCommonConstants.CATOGERY);
+		Assert.assertTrue("PROBLEM - this scenario is for terminated user only", 
+				planType.toUpperCase().contains("TERM") || memberType.toUpperCase().contains("TERM"));
+		System.out.println("***The user navigates to Benefits and Coverage page***");
+		BenefitsAndCoveragePage benefitsCoveragePage;
+		if ("YES".equalsIgnoreCase(MRScenario.isTestHarness)) {
+			TestHarness testHarness = (TestHarness) getLoginScenario().getBean(PageConstantsMnR.TEST_HARNESS_PAGE);
+			benefitsCoveragePage = testHarness.navigateDirectToBnCPag();
+		}else{
+			AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
+			benefitsCoveragePage = accountHomePage.navigateDirectToBnCPag();	
+		}
+		Assert.assertTrue("PROBLEM - not expecting terminated user to be able to land on Benefits page",benefitsCoveragePage == null);
+	}
+
 	/** 
 	 * @toDo : The user logs in to legacy site  in Mobile view 
 	 */

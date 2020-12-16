@@ -912,6 +912,17 @@ Feature: 1.01 Member  benefits and Coverage page
       | 38    | xxxxx | MA       | FED_BnC      |
       | 39    | xxxxx | MAPD     | FED_BnC      |
       | 40    | xxxxx | PDP      | FED_BnC      |
-      | 40    | xxxxx | TERM     | FED_BnC      |
+      
+  @benefitsAndCoverage25 @api
+  Scenario Outline: Index: <index> -TID: <TID> -plan: <planType> -memberType: <memberType> - Verify UCPBenefits API not having undefined input value for COMBO user
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type   | <planType>   |
+      | Member Type | <memberType> |
+    Then The user will not be able to navigate to Benefits and Coverage page
+      
+    @singleApi
+    Examples: 
+      | index | TID   | planType | memberType   |
+      | 41    | xxxxx | TERM     | FED_BnC      |
       
  ###############################Regression Scenarios END Here ########################################

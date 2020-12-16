@@ -922,6 +922,16 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth
       | 38    | xxxxx | qavgogine| qavgogine | q2_jun_grp0428     | MA       | FED_BnC      |
       | 39    | xxxxx | qavgogine| qavgogine | q3_Sep_FedANOC_002 | MAPD     | FED_BnC      |
       | 40    | xxxxx | qavgogine| qavgogine | q2_jun_aarp0112    | PDP      | FED_BnC      |
-      | 40    | xxxxx | qavgogine| qavgogine | q2_jun_grp0440     | TERM     | FED_BnC      |
-           
+
+  @memAuth_benefitsAndCoverage25 @memAuth_api
+  Scenario Outline: Index: <index> -TID: <TID> -plan: <planType> -memberType: <memberType> - Verify UCPBenefits API not having undefined input value for COMBO user
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type   | <planType>   |
+      | Member Type | <memberType> |
+    Then The user will not be able to navigate to Benefits and Coverage page
+      
+    @memAuth_singleApi
+    Examples: 
+      | index | TID   | username | password  | MemUserName        | planType | memberType   |
+      | 41    | xxxxx | qavgogine| qavgogine | q2_jun_grp0440     | TERM     | FED_BnC      |
 ########################################################################################################  

@@ -957,5 +957,23 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth Prod
       | 38    | xxxxx | kkumard  | tnps459#  | ssmhi1                   | MA       | FED_BnC      |
       | 39    | xxxxx | kkumard  | tnps459#  | kirit1976                | MAPD     | FED_BnC      |
       | 40    | xxxxx | kkumard  | tnps459#  | lkd3408                  | PDP      | FED_BnC      |
-      | 40    | xxxxx | kkumard  | tnps459#  | Patkeving                | TERM     | FED_BnC      |
-      
+
+  @prod_benefitsAndCoverage25 @prod_api
+  Scenario Outline: Index: <index> -TID: <TID> -plan: <planType> -memberType: <memberType> - Verify UCPBenefits API not having undefined input value
+    Given the user is on member auth login flow page
+    When the member is able to login with correct username and password
+      | Username | <username> |
+      | Password | <password> |
+    And Member Enters the Username he wants to search
+      | MemUsername | <MemUserName> |
+    And user clicks on member to select
+    And user stores test input for validations
+      | Username | <MemUserName> |
+      | Plan Type    | <planType>    |
+      | Member Type  | <memberType>  |
+    Then The user will not be able to navigate to Benefits and Coverage page
+
+	@prod_singleApi
+    Examples: 
+      | index | TID   | username | password  | MemUserName              | planType | memberType   |
+      | 41    | xxxxx | kkumard  | tnps459#  | Patkeving                | TERM     | FED_BnC      |      
