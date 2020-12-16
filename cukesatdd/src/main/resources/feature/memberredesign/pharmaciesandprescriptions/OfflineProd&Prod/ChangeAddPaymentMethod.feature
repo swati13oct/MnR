@@ -22,5 +22,5 @@ Feature: Change or Add Payment Details
     Then user will view Change Payment in a full page modal
 
     Examples: 
-      | username | password | memUserName | planType | memberType |
-      | kjadha10 | Virus$$1 | Berniewb    | PDP      | Individual |
+      | username | password | memUserName                          | planType | memberType |
+      | kjadha10 | Virus$$1 | b2dc8f2f-56d5-43e5-bef3-bb36ad49d6f9 | PDP      | Individual |

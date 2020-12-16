@@ -3301,6 +3301,64 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 			}
 			return listOfIndex;
 		}
+		
+		public void validateOTCCallToActionOnPnPPage() { 
+			Assert.assertTrue("PROBLEM - unable to locate OTC call to action tile element"
+			 , validate(OTCToActnBtn, 30)); 
+		}
+		
+		public void validateImageOTCCallToActionOnPnPPage() {
+			Assert.assertTrue("PROBLEM - unable to locate OTC call to action Image element",
+					pnpValidate(OTCCTAImg));
+		}
+		
+		public void validateTitleOTCCallToActionOnPnPPage() {
+			Assert.assertTrue("PROBLEM - unable to locate OTC call to action Title element",
+					pnpValidate(OTCCTATitle));
+		}
+		
+		public void validateDescriptionOTCCallToActionOnPnPPage() {
+			Assert.assertTrue("PROBLEM - unable to locate OTC call to action Description element",
+					pnpValidate(OTCCTADescription));
+		}
+		
+		public void clickOTCCallToActionOnPnPPage() {
+			Assert.assertTrue("PROBLEM - unable to locate OTC call to action Tile element",
+					validate(OTCToActnBtn, 30));
+			OTCToActnBtn.click();
+		}
+		
+		public void validateOTCCallToActionNOTOnPnPPage() { 
+			Assert.assertFalse("PROBLEM - able to locate OTC call to action tile element"
+			 , validate(OTCToActnBtn, 30)); 
+		}
+				
+		public void validateSolutranOpensInNewWindow_memAuth() {
+			pageloadcomplete();
+			Set handles = driver.getWindowHandles();
+			String pnpPageHandle = driver.getWindowHandle();
+			handles.remove(pnpPageHandle);
+			String winHandle = (String) handles.iterator().next();
+			if (winHandle != pnpPageHandle) {
+				String SolutranHandle = winHandle;
+				driver.switchTo().window(SolutranHandle);
+				pageloadcomplete();
+				CommonUtility.checkPageIsReady(driver);
+				if(currentUrl().contains("https://healthybenefitsplus.com/base/About")) {
+					if(getTitle().equalsIgnoreCase("healthybenefitsplus")) {
+						Assert.assertTrue(true);
+					}
+					else {
+						Assert.assertFalse("PROBLEM - Solutran page is not successfully displayed",
+								true);
+					}
+				
+				}
+			}
+			driver.close();
+			driver.switchTo().window(pnpPageHandle);
+
+		}
 
 }
 

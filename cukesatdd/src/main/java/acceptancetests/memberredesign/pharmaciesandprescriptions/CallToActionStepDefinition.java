@@ -666,7 +666,7 @@ public class CallToActionStepDefinition {
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
 	}
 
-	@When("^user clicks on Drug Lookup a Medication Call To Action$")
+	@When("^user clicks on Drug Lookup Call To Action$")
 	public void user_clicks_on_Drug_Lookup_Call_To_Action() throws Throwable {
 		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
@@ -868,5 +868,63 @@ public class CallToActionStepDefinition {
 		pnpPg.validateTitleDrugLookupCallToActionOnPnPPage();
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
 	}
+	
+	@Then("^user view OTC Call To Action$")
+	public void user_view_OTC_Call_To_Action() throws Throwable {
+		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
+				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
+		pnpPg.validateOTCCallToActionOnPnPPage();
+		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
+	}
 
+	@Then("^user validates an image for OTC Call To Action$")
+	public void user_validates_an_image_for_OTC_Call_To_Action() throws Throwable {
+		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
+				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
+		pnpPg.validateImageOTCCallToActionOnPnPPage();
+		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
+	}
+
+	@Then("^user validates a title for OTC Call To Action$")
+	public void user_validates_a_title_for_OTC_Call_To_Action() throws Throwable {
+		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
+				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
+		pnpPg.validateTitleOTCCallToActionOnPnPPage();
+		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
+	}
+	
+	@When("^user clicks on OTC Call To Action$")
+	public void user_clicks_on_OTC_Call_To_Action() throws Throwable {
+		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
+				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
+		pnpPg.clickOTCCallToActionOnPnPPage();
+		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
+	}
+
+	
+	@Then("^user validates a description for OTC Call To Action$")
+	public void user_validates_a_description_for_OTC_Call_To_Action() throws Throwable {
+		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
+				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
+		pnpPg.validateDescriptionOTCCallToActionOnPnPPage();
+		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
+	}
+	
+	@Then("^user will not be able to view OTC Call To Action$")
+	public void user_will_not_be_able_to_view_OTC_Call_to_Action() throws Throwable {
+		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
+				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
+		pnpPg.validateOTCCallToActionNOTOnPnPPage();
+		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
+	}
+	
+	
+	@Then("^user will see the authenticated healthybenefits web page open in a new tab using memAuth$")
+	public void user_will_see_the_authenticated_healthybenefits_web_page_open_in_a_new_tab_using_memAuth() throws Throwable {
+		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario() 
+				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);
+		pnpPg.validateSolutranOpensInNewWindow_memAuth(); 
+		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
+	}
+	
 }

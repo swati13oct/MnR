@@ -1,4 +1,4 @@
-Feature: To test Refill Checkout Summary Page
+Feature: Refill Checkout Summary Page
 
   @Sanity @Regression
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Complete Your Refill Page Functionality

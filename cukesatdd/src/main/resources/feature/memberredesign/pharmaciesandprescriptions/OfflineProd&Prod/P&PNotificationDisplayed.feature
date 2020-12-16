@@ -1,8 +1,8 @@
-Feature: P&P Notification is deactivated
-  To validate P&P Notification is deactivated.
+Feature: P&P Notification is activated
+  To validate P&P Notification is activated.
 
   @Sanity @Regression
-  Scenario Outline: To verify P&P Notification is deactivated
+  Scenario Outline: To verify P&P Notification is activated
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
       | Username | <username> |
@@ -13,8 +13,9 @@ Feature: P&P Notification is deactivated
     When now user navigates to the pharmacies and prescriptions page from dashboard or testharness page
       | PlanType    | <planType>   |
       | Member Type | <memberType> |
-    When a PnP notification is deactivated
+    When a PnP notification is activated
 
+    #When a PnP notification is deactivated
     Examples: 
       | username | password | memUserName | planType | memberType |
       | kjadha10 | Virus$$1 | Berniewb    | PDP      | Individual |

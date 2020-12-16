@@ -1,4 +1,4 @@
-Feature: To test Transfer To HD Checkout Summary Page
+Feature: Transfer To HD Checkout Summary Page
 
   @Regression @Sanity
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Transfer to Home Delivery Page Functionality

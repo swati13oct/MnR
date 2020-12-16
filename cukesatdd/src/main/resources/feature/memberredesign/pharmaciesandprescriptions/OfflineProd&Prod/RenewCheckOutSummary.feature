@@ -1,4 +1,4 @@
-Feature: To test Renew Checkout Summary Page
+Feature: Renew Checkout Summary Page
 
   @Sanity @Regression
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Complete Your Renewal Page Functionality

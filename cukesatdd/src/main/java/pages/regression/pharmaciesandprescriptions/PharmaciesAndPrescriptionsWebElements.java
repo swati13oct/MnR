@@ -999,8 +999,8 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	}
 
 	// F436319
-	@FindBy(xpath = "//*[@data-testid='global-alert-banner-Expanded Access to Care, Support and Resources for COVID-19']")
-	//@FindBy(xpath = "//*[@data-testid='global-alert-banner-title']")
+	//@FindBy(xpath = "//*[@data-testid='global-alert-banner-Expanded Access to Care, Support and Resources for COVID-19']")
+	@FindBy(xpath = "//*[@data-testid='global-alert-banner-title']")
 	protected WebElement PnPNotification;
 
 	public List<Integer> getListOfIndexForManageAtWalgreens() {
@@ -1011,8 +1011,8 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 		return listOfIndex;
 	}
 
-	@FindBy(xpath = "//*[@data-testid='global-alert-banner-Expanded Access to Care, Support and Resources for COVID-19']//div//div//button[@data-testid='global-alert-banner--close-button']")
-	//@FindBy(xpath = "//*[@data-testid='global-alert-banner-close-button']")
+	//@FindBy(xpath = "//*[@data-testid='global-alert-banner-Expanded Access to Care, Support and Resources for COVID-19']//div//div//button[@data-testid='global-alert-banner--close-button']")
+	@FindBy(xpath = "//*[@data-testid='global-alert-banner--close-button']")
 	protected WebElement PnPNotificationCloseBtn;
 
 	public List<Integer> getListOfIndexForTransferToWalgreens() {
@@ -1773,4 +1773,17 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	
 	@FindBy(xpath = "//*[@data-rxhffflag='N']//a[@data-testid='medication-action-refill']")
 	protected List<WebElement> listOfRefillMedication_Off;
+	
+	// OTC Call to Action
+	@FindBy(xpath = "//div[@data-testid='over-the-counter-CTA']")
+	protected WebElement OTCToActnBtn;
+
+	@FindBy(xpath = "//*[@data-testid='over-the-counter-CTA-icon']")
+	protected WebElement OTCCTAImg;
+		
+	@FindBy(xpath = "//h2[@data-testid='over-the-counter-CTA-title']")
+	protected WebElement OTCCTATitle;
+		
+	@FindBy(xpath = "//p[@data-testid='over-the-counter-CTA-description']")
+	protected WebElement OTCCTADescription;
 }
