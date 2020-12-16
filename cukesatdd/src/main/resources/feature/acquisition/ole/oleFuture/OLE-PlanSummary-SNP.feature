@@ -196,7 +196,7 @@ Feature: 1.05.4 OLE common tool flow E2E SNP
     |  PD Group Number			 | <pdgroupnumber>  |
     | PD Member Number        | <pdmembernumber>   | 
     Then the user navigates to Disclosure Authorization Page for Medicaid and Effective date CSNP Plans
-       	|	Input Data					 | <inputdataType>   |
+      |	Input Data					 | <inputdataType>   |
     	| PartA Date         | <partadate>         |
    		| PartB Date         | <partbdate>         |
    Then the user enters provider details in Use and Disclosure Authorization page for CSNP and navidates to Personal information page
@@ -223,7 +223,7 @@ Feature: 1.05.4 OLE common tool flow E2E SNP
     Then the user validates required fields for Authorization Page
     Then the user navigates to Review and Submit Page
     Then the user validates the Plan and Member details on Review and Submit Page
-    #Then the user validates the Online Enrollment details on Review and Submit Page
+    Then the user validates the Online Enrollment details on Review and Submit Page
     Then the user clicks on Submit Enrollment to complete enrollment
     # Then the user validates Plan and Member Details on Confirmation Page
     Then the user Validates Next Steps in Confirmation Page for the Plan Type.

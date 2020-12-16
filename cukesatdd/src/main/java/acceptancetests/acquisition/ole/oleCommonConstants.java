@@ -79,5 +79,30 @@ public class oleCommonConstants {
 	public static final String AUTHORIZATION_RELATIONSHIP = "authorizationrealtionship";
 	public static final String PROPOSED_EFF_DATE = "proposedeffectivedate";
 	
+	
+	public static final String DIABETES_QUESTION_1 = "diabetesquestion1";
+	public static final String DIABETES_QUESTION_2 = "diabetesquestion2";
+	
+	public static final String CHRONIC_HEART_FAILURE_QUESTION_1 = "chronicheartfailurequestion1";
+	public static final String CHRONIC_HEART_FAILURE_QUESTION_2 = "chronicheartfailurequestion2";
+	public static final String CHRONIC_HEART_FAILURE_QUESTION_3 = "chronicheartfailurequestion3";
+	
+	public static final String CARDIO_VASCULAR_DISORDER_QUESTION_1 = "cardiovasculardisordersquestion1";
+	public static final String CARDIO_VASCULAR_DISORDER_QUESTION_2 = "cardiovasculardisordersquestion2";
+	public static final String CARDIO_VASCULAR_DISORDER_QUESTION_3 = "cardiovasculardisordersquestion3";
+	public static final String CARDIO_VASCULAR_DISORDER_QUESTION_4 = "cardiovasculardisordersquestion4";
+	public static final String CARDIO_VASCULAR_DISORDER_QUESTION_5 = "cardiovasculardisordersquestion5";
+	public static final String CARDIO_VASCULAR_DISORDER_QUESTION_6 = "cardiovasculardisordersquestion6";
+	
+	
+	public static final String DISCLOSURE_CHECKBOX = "disclosurecheckbox";
+	public static final String DISCLOSURE_PROVIDER_NAME = "disclosureprovidername";
+	public static final String DISCLOSURE_PROVIDER_STREET_ADDRESS = "disclosureproviderstreetaddress";
+	public static final String DISCLOSURE_PROVIDER_CITY = "disclosureprovidercity";
+	public static final String DISCLOSURE_PROVIDER_STATE = "disclosureproviderstate";
+	public static final String DISCLOSURE_PROVIDER_ZIP = "disclosureproviderzip";
+	public static final String DISCLOSURE_PROVIDER_PHONENUMBER = "disclosureproviderphonenumber";
+
+	
 
 }

@@ -98,6 +98,60 @@ public class ReviewSubmitPage extends UhcDriver{
 	@FindBy(xpath = "//*[contains(text(), 'Medical (Part B) Effective Date')]//following-sibling::*")
 	private WebElement PartBDisplay;
 	
+	@FindBy(xpath = "//*[contains(text(), 'Have you ever been told by a doctor or clinic that you have diabetes (too much sugar in')]//following-sibling::*")
+	private WebElement DiabetsQuestion1;
+	
+	@FindBy(xpath = "//*[contains(text(), 'Have you ever been prescribed, or are you taking insulin or an oral medication that is supposed to lower the sugar in your blood?')]//following-sibling::*")
+	private WebElement DiabetsQuestion2;
+	
+	@FindBy(xpath = "//*[contains(text(), 'Have you ever been told by the doctor or clinic that you have heart failure or Congestive Heart Failure (weak heart or weak heart pump)?')]//following-sibling::*")
+	private WebElement ChronicHeartQuestion1;
+	
+	@FindBy(xpath = "//*[contains(text(), 'Have you ever had problems with fluid in your lungs and swelling in your legs in the past, accompanied by shortness of breath, due to a heart problem?')]//following-sibling::*")
+	private WebElement ChronicHeartQuestion2;
+	
+	@FindBy(xpath = "//*[contains(text(), 'During the past 12 months, have you been counseled or educated about weighing yourself daily')]//following-sibling::*")
+	private WebElement ChronicHeartQuestion3;
+	
+	@FindBy(xpath = "//*[contains(text(), 'Have you ever been told by a doctor or clinic that you have a cardiovascular disorder such as cardiac arrhythmia')]//following-sibling::*")
+	private WebElement CardioVascularQuestion1;
+	
+	@FindBy(xpath = "//*[contains(text(), 'Have you ever been told by your doctor or clinic that you have an irregular or abnormal heartbeat')]//following-sibling::*")
+	private WebElement CardioVascularQuestion2;
+	
+	@FindBy(xpath = "//*[contains(text(), 'Have you ever had multiple episodes of chest pain, pain in your legs')]//following-sibling::*")
+	private WebElement CardioVascularQuestion3;
+	
+	@FindBy(xpath = "//*[contains(text(), 'Have you ever been prescribed medications to thin your blood, including Warfarin')]//following-sibling::*")
+	private WebElement CardioVascularQuestion4;
+	
+	@FindBy(xpath = "//*[contains(text(), 'Do you have a pacemaker or internal defibrillator?')]//following-sibling::*")
+	private WebElement CardioVascularQuestion5;
+	
+	@FindBy(xpath = "//*[contains(text(), 'Have you had an angioplasty, stents or bypass')]//following-sibling::*")
+	private WebElement CardioVascularQuestion6;
+	
+	@FindBy(xpath = "//*[contains(text(), 'I hereby authorize the disclosure of my health information by:')]//following-sibling::*")
+	private WebElement DisclosureCheckbox;
+	
+	@FindBy(xpath = "//*[contains(text(), 'Provider Name')]//following-sibling::*")
+	private WebElement DisclosureProviderName;
+	
+	@FindBy(xpath = "//*[contains(text(), 'Provider Street Address')]//following-sibling::*")
+	private WebElement DisclosureProviderStreetAddress;
+	
+	@FindBy(xpath = "//*[contains(text(), 'Use and Disclosure Authorization')]/ancestor::*[contains(@class, 'review-step')]//*[contains(text(), 'City')]//following-sibling::*")
+	private WebElement DisclosureProviderCity;
+	
+	@FindBy(xpath = "//*[contains(text(), 'Use and Disclosure Authorization')]/ancestor::*[contains(@class, 'review-step')]//*[contains(text(), 'State')]//following-sibling::*")
+	private WebElement DisclosureProviderState;
+	
+	@FindBy(xpath = "//*[contains(text(), 'Use and Disclosure Authorization')]/ancestor::*[contains(@class, 'review-step')]//*[contains(text(), 'Zip')]//following-sibling::*")
+	private WebElement DisclosureProviderZipcode;
+	
+	@FindBy(xpath = "Provider Phone Number")
+	private WebElement DisclosureProviderPhoneNumber;
+			
 	@FindBy(xpath = "//*[contains(text(), 'Birth Date')]//following-sibling::*")
 	private WebElement DOBDisplay;
 
@@ -574,6 +628,25 @@ public class ReviewSubmitPage extends UhcDriver{
 		String AuthAgreeDisplay = detailsMap.get("Authorization Agree");
 		String AuthRelationshipDisplay= detailsMap.get("Authorization Relationship");
 		
+		String DiabetesQuestion1Display= detailsMap.get("Diabetes Question 1");
+		String DiabetesQuestion2Display= detailsMap.get("Diabetes Question 2");
+		String ChronicHeartFailureQuestion1Display= detailsMap.get("Chronic Heart Failure Question 1");
+		String ChronicHeartFailureQuestion2Display= detailsMap.get("Chronic Heart Failure Question 2");
+		String ChronicHeartFailureQuestion3Display= detailsMap.get("Chronic Heart Failure Question 3");
+		String CardioVascularDisorderQuestion1Display= detailsMap.get("Cardio Vascular Disorder Question 1");
+		String CardioVascularDisorderQuestion2Display= detailsMap.get("Cardio Vascular Disorder Question 2");
+		String CardioVascularDisorderQuestion3Display= detailsMap.get("Cardio Vascular Disorder Question 3");
+		String CardioVascularDisorderQuestion4Display= detailsMap.get("Cardio Vascular Disorder Question 4");
+		String CardioVascularDisorderQuestion5Display= detailsMap.get("Cardio Vascular Disorder Question 5");
+		String CardioVascularDisorderQuestion6Display= detailsMap.get("Cardio Vascular Disorder Question 6");
+		
+		String DisclosureCheckboxDisplay= detailsMap.get("Disclosure Checkbox");
+		String DisclosureProviderNameDisplay= detailsMap.get("Disclosure Provider Name");
+		String DisclosureProviderStreetAddressDisplay= detailsMap.get("Disclosure Provider Street Address");
+		String DisclosureProviderCityDisplay= detailsMap.get("Disclosure Provider City");
+		String DisclosureProviderStateDisplay= detailsMap.get("Disclosure Provider State");
+		String DisclosureProviderZipDisplay= detailsMap.get("Disclosure Provider Zip");
+		String DisclosureProviderPhoneNumberDisplay= detailsMap.get("Disclosure Provider PhoneNumber");
 		
 		boolean flag = true;
 		
@@ -634,7 +707,34 @@ public class ReviewSubmitPage extends UhcDriver{
 		flag&=validateText(MailZipDisplay,Mailing_Zip);
 		flag&=validateText(MailStreetDisplays,Mailing_Street);		
 		//flag&=validateText(MailApartmentSuite,Mailing_AptNo);
-		flag&=validateText(MailCityDisplay,Mailing_City);		
+		flag&=validateText(MailCityDisplay,Mailing_City);	
+		
+		//-------------Adding the Line for CSNP Plans-------------------------//
+		
+		if(Expected_PlanName.contains("Chronic") || Expected_PlanName.contains("Gold") ||Expected_PlanName.contains("Silver")) {
+			flag&=validateText(DiabetsQuestion1,DiabetesQuestion1Display);
+			flag&=validateText(DiabetsQuestion2,DiabetesQuestion2Display);
+			flag&=validateText(ChronicHeartQuestion1,ChronicHeartFailureQuestion1Display);
+			flag&=validateText(ChronicHeartQuestion2,ChronicHeartFailureQuestion2Display);
+			flag&=validateText(ChronicHeartQuestion3,ChronicHeartFailureQuestion3Display);
+			flag&=validateText(CardioVascularQuestion1,CardioVascularDisorderQuestion1Display);
+			flag&=validateText(CardioVascularQuestion2,CardioVascularDisorderQuestion2Display);
+			flag&=validateText(CardioVascularQuestion3,CardioVascularDisorderQuestion3Display);
+			flag&=validateText(CardioVascularQuestion4,CardioVascularDisorderQuestion4Display);
+			flag&=validateText(CardioVascularQuestion5,CardioVascularDisorderQuestion5Display);
+			flag&=validateText(CardioVascularQuestion6,CardioVascularDisorderQuestion6Display);
+			flag&=validateText(DisclosureCheckbox,DisclosureCheckboxDisplay);
+			flag&=validateText(DisclosureProviderName,DisclosureProviderNameDisplay);
+			flag&=validateText(DisclosureProviderStreetAddress,DisclosureProviderStreetAddressDisplay);
+			flag&=validateText(DisclosureProviderCity, DisclosureProviderCityDisplay);
+			flag&=validateText(DisclosureProviderState,DisclosureProviderStateDisplay);
+			flag&=validateText(DisclosureProviderZipcode,DisclosureProviderZipDisplay);
+			flag&=validateText(DisclosureProviderPhoneNumber,DisclosureProviderPhoneNumberDisplay);
+			
+			}
+
+	
+		//-------------Adding the Line for CSNP Plans-------------------------//
 		
 		/*if(validate(Submit_Disclaimer) && validate(Enrollment_Disclaimer_Text)){
 			if(Enrollment_Disclaimer_Text.getText().contains("Submitting your enrollment application electronically")){

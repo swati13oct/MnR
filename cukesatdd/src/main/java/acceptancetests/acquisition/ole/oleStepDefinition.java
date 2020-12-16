@@ -553,8 +553,47 @@ public class oleStepDefinition {
 		}
 			String medicaidNumber = PreliminaryFlagsMap.get("MedicaidNumber");
 			String planName = (String)getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_NAME);
+			String diabetesQuestion1 ="";
+			String diabetesQuestion2="";
+			String diabetesQuestion3="";
+			String chronicHeartFailure1="";
+			String chronicHeartFailure2="";
+			String chronicHeartFailure3="";
+			String cardioVasculardisorder1="";
+			String cardioVasculardisorder2="";
+			String cardioVasculardisorder3="";
+			String cardioVasculardisorder4="";
+			String cardioVasculardisorder5="";
+			String cardioVasculardisorder6="";
+			
 			MedicareInformationPage medicareInfoPage = (MedicareInformationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE);
 			medicareInfoPage.validate_Required_Fields_CSNP(medicaidNumber, planName);
+			
+		//------------Added for CSNP plans-------
+			getLoginScenario().saveBean(oleCommonConstants.DIABETES_QUESTION_1, diabetesQuestion1);
+			getLoginScenario().saveBean(oleCommonConstants.DIABETES_QUESTION_2, diabetesQuestion2);
+			getLoginScenario().saveBean(oleCommonConstants.CHRONIC_HEART_FAILURE_QUESTION_1, chronicHeartFailure1);
+			getLoginScenario().saveBean(oleCommonConstants.CHRONIC_HEART_FAILURE_QUESTION_2, chronicHeartFailure2);
+			getLoginScenario().saveBean(oleCommonConstants.CHRONIC_HEART_FAILURE_QUESTION_3, chronicHeartFailure3);
+			getLoginScenario().saveBean(oleCommonConstants.CARDIO_VASCULAR_DISORDER_QUESTION_1,cardioVasculardisorder1);
+			getLoginScenario().saveBean(oleCommonConstants.CARDIO_VASCULAR_DISORDER_QUESTION_2, cardioVasculardisorder2);
+			getLoginScenario().saveBean(oleCommonConstants.CARDIO_VASCULAR_DISORDER_QUESTION_3, cardioVasculardisorder3);
+			getLoginScenario().saveBean(oleCommonConstants.CARDIO_VASCULAR_DISORDER_QUESTION_4, cardioVasculardisorder4);
+			getLoginScenario().saveBean(oleCommonConstants.CARDIO_VASCULAR_DISORDER_QUESTION_5, cardioVasculardisorder5);
+			getLoginScenario().saveBean(oleCommonConstants.CARDIO_VASCULAR_DISORDER_QUESTION_6, cardioVasculardisorder6);
+		System.out.println("Diabetes Question1 is : "+diabetesQuestion1);
+			System.out.println("Diabetes Question2 is : "+diabetesQuestion2);
+			System.out.println("Chronic Heart Failure Question1  is : "+chronicHeartFailure1);
+			System.out.println("Chronic Heart Failure Question2 is : "+chronicHeartFailure2);
+			System.out.println("Chronic Heart Failure Question3 is : "+chronicHeartFailure3);
+			System.out.println("Cardio Vascular Disorder Question1 is : "+cardioVasculardisorder1);
+			System.out.println("Cardio Vascular Disorder Question2 is : "+cardioVasculardisorder2);
+			System.out.println("Cardio Vascular Disorder Question3 is: "+cardioVasculardisorder3);
+			System.out.println("Cardio Vascular Disorder Question4 is : "+cardioVasculardisorder4);
+			System.out.println("Cardio Vascular Disorder Question5 is: "+cardioVasculardisorder5);
+			System.out.println("Cardio Vascular Disorder Question6 is : "+cardioVasculardisorder6);
+			
+			//------------Added for CSNP plans-------
 	}
 
 
@@ -992,6 +1031,10 @@ public class oleStepDefinition {
 			MedicareDetailsMap.put(givenAttributesRow.get(i).getCells().get(0),
 					givenAttributesRow.get(i).getCells().get(1));
 		}
+		
+		String diclsoureCheckbox="";
+		String diclsourestate ="";
+		
 		UseAndDisclosureAuthorizationPage useranddisclosure = (UseAndDisclosureAuthorizationPage) getLoginScenario()
 	.getBean(OLE_PageConstants.OLE_User_And_Disclosure_PAGE);
 		getLoginScenario().saveBean(OLE_PageConstants.PROVIDER_NAME, MedicareDetailsMap.get("Provider Name"));
@@ -1007,6 +1050,15 @@ public class oleStepDefinition {
 		SpecialElectionPeriodPage specialElectionPeriodPage = useranddisclosure.Validate_and_Enter_Details_for_YourProvide_Section( MedicareDetailsMap);
 		getLoginScenario().saveBean(OLE_PageConstants.OLE_SPECIAL_ELECTION_PERIOD_PAGE,
 					specialElectionPeriodPage);
+		
+		getLoginScenario().saveBean(oleCommonConstants.DISCLOSURE_CHECKBOX, diclsoureCheckbox);
+		getLoginScenario().saveBean(oleCommonConstants.DISCLOSURE_PROVIDER_NAME, MedicareDetailsMap.get("Provider Name"));
+		getLoginScenario().saveBean(oleCommonConstants.DISCLOSURE_PROVIDER_STREET_ADDRESS, MedicareDetailsMap.get("Provider Street Address"));
+		getLoginScenario().saveBean(oleCommonConstants.DISCLOSURE_PROVIDER_CITY, MedicareDetailsMap.get("City"));
+		getLoginScenario().saveBean(oleCommonConstants.DISCLOSURE_PROVIDER_STATE, diclsourestate);
+		getLoginScenario().saveBean(oleCommonConstants.DISCLOSURE_PROVIDER_ZIP,  MedicareDetailsMap.get("Zip"));
+		getLoginScenario().saveBean(oleCommonConstants.DISCLOSURE_PROVIDER_PHONENUMBER, MedicareDetailsMap.get("Provider Phone Number"));
+
 	}
 	/**
 	 * @toDo:user fill following information in Preliminary Questions Page 
@@ -3167,7 +3219,27 @@ public void the_user_validates_the_online_Enrollment_details_on_Review_and_Submi
 		DetailsMap.put("Auth Zip Display", (String) getLoginScenario().getBean(oleCommonConstants.AUTHORIZATION_ZIP));
 		
 
+		//-----------------Added for CSNP validation-----------------//
+		DetailsMap.put("Diabetes Question 1", (String) getLoginScenario().getBean(oleCommonConstants.DIABETES_QUESTION_1));
+		DetailsMap.put("Diabetes Question 2", (String) getLoginScenario().getBean(oleCommonConstants.DIABETES_QUESTION_2));
+		DetailsMap.put("Chronic Heart Failure Question 1", (String) getLoginScenario().getBean(oleCommonConstants. CHRONIC_HEART_FAILURE_QUESTION_1 ));
+		DetailsMap.put("Chronic Heart Failure Question 2", (String) getLoginScenario().getBean(oleCommonConstants.CHRONIC_HEART_FAILURE_QUESTION_2));
+		DetailsMap.put("Chronic Heart Failure Question 3", (String) getLoginScenario().getBean(oleCommonConstants.CHRONIC_HEART_FAILURE_QUESTION_3));
+		DetailsMap.put("Cardio Vascular Disorder Question 1", (String) getLoginScenario().getBean(oleCommonConstants.CARDIO_VASCULAR_DISORDER_QUESTION_1));
+		DetailsMap.put("Cardio Vascular Disorder Question 2", (String) getLoginScenario().getBean(oleCommonConstants.CARDIO_VASCULAR_DISORDER_QUESTION_2));
+		DetailsMap.put("Cardio Vascular Disorder Question 3", (String) getLoginScenario().getBean(oleCommonConstants.CARDIO_VASCULAR_DISORDER_QUESTION_3));
+		DetailsMap.put("Cardio Vascular Disorder Question 4", (String) getLoginScenario().getBean(oleCommonConstants.CARDIO_VASCULAR_DISORDER_QUESTION_4));
+		DetailsMap.put("Cardio Vascular Disorder Question 5", (String) getLoginScenario().getBean(oleCommonConstants.CARDIO_VASCULAR_DISORDER_QUESTION_5));
+		DetailsMap.put("Cardio Vascular Disorder Question 6", (String) getLoginScenario().getBean(oleCommonConstants.CARDIO_VASCULAR_DISORDER_QUESTION_6));
+
 		
+		DetailsMap.put("Disclosure Checkbox", (String) getLoginScenario().getBean(oleCommonConstants.DISCLOSURE_CHECKBOX));
+		DetailsMap.put("Disclosure Provider Name", (String) getLoginScenario().getBean(oleCommonConstants.DISCLOSURE_PROVIDER_NAME));
+		DetailsMap.put("Disclosure Provider Street Address", (String) getLoginScenario().getBean(oleCommonConstants.DISCLOSURE_PROVIDER_STREET_ADDRESS));
+		DetailsMap.put("Disclosure Provider City", (String) getLoginScenario().getBean(oleCommonConstants.DISCLOSURE_PROVIDER_CITY));
+		DetailsMap.put("Disclosure Provider State", (String) getLoginScenario().getBean(oleCommonConstants.DISCLOSURE_PROVIDER_STATE));
+		DetailsMap.put("Disclosure Provider Zip", (String) getLoginScenario().getBean(oleCommonConstants.DISCLOSURE_PROVIDER_ZIP));
+		DetailsMap.put("Disclosure Provider PhoneNumber", (String) getLoginScenario().getBean(oleCommonConstants.DISCLOSURE_PROVIDER_PHONENUMBER));
 		
 		
 
