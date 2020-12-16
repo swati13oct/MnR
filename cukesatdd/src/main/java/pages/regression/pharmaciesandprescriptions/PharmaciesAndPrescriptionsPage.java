@@ -3289,6 +3289,7 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 		
 		public boolean validateSolutranPage(String expectedTitle) {
 			return getTitle().contains(expectedTitle);
+		}
 			
 		public List<Integer> getListOfIndexForRefillMedication_NE() {
 			int size = listOfDrugName.size();
