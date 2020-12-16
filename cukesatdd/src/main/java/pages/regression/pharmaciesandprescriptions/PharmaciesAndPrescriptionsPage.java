@@ -2960,7 +2960,7 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 
 		public List<Integer> getListOfIndexForRenewMedicationOnMyMed() {
 			int size = listOfDrugName.size();
-			validate(drugsAvailableOnMyMedication, 10);
+			validate(drugsAvailableOnMyMedication, 35);
 			String numberTXT = drugsAvailableOnMyMedication.getText();
 			int expectedSize = Integer.parseInt(numberTXT);
 			System.out.println("Expected Drug Name Size" + expectedSize);
@@ -3126,7 +3126,7 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 		
 		public List<Integer> getListOfIndexForRetailTransferToHDOnMyMed() {
 			int size = listOfDrugName.size();
-			validate(drugsAvailableOnMyMedication, 10);
+			validate(drugsAvailableOnMyMedication, 35);
 			String numberTXT = drugsAvailableOnMyMedication.getText();
 			int expectedSize = Integer.parseInt(numberTXT);
 			System.out.println("Expected Drug Name Size" + expectedSize);
