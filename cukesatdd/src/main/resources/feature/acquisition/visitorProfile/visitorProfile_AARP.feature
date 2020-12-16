@@ -542,8 +542,6 @@ Feature: 1.08. ACQ- Visitor profile
   Scenario Outline: Verify OLE validations for authenticated Visitor Profile page
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
-    And the user selects the state drop down value in home page
-      | State | <state> |
     And the user clicks on the shopping cart icon
     Then the user signs in with optum Id credentials
       | User Name | <userName> |
@@ -568,12 +566,12 @@ Feature: 1.08. ACQ- Visitor profile
   Scenario Outline: <UID> - Verify Partial enrollment and cancel or remove the enrollment from profile page
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
-    And the user selects the state drop down value in home page
-      | State | <state> |
     And the user clicks on the shopping cart icon
     Then the user signs in with optum Id credentials
       | User Name | <userName> |
       | Password  | <password> |
+    And the user cancel the enrollment
+      | Plan Name | <planName> |  
     And the user navigates to clicks on Enroll Now from visitor profile to start OLE flow
       | Plan Name       | <planName>       |
       | Plan Type       | <plantype>       |

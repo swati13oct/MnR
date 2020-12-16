@@ -1,4 +1,4 @@
-Feature: 1.07 and 1.10.4 ACQ-Pharmacy Locator
+Feature: 1.07 and 1.11 ACQ-Pharmacy Locator
 
   Scenario Outline: TID: <TID> -zipcode: <zipcode> - To verify end-to-end behavior for pharmacy locator page in English on acquisition <site> site
     Given the user is on medicare acquisition site landing page
@@ -43,11 +43,11 @@ Feature: 1.07 and 1.10.4 ACQ-Pharmacy Locator
       | DrugName | <drug1> |
     Then the user searches and adds the following Drug to Drug List
       | DrugName | <drug2> |
-    Then the user searches and adds the following Drug to Drug List
-      | DrugName | <drug3> |
-    Then the user searches and adds the following Drug to Drug List
-      | DrugName | <drug4> |
+    Then the user validates all added drugs in DrugList
     Then the user clicks on Review Drug Costs to Land on Zip Entry Page
+    When user enters valid zipcode and county
+      | ZipCode | <zipCode> |
+    And user clicks on continue button in Zip Entry Page
     When user enters valid zipcode and county
       | ZipCode | <zipCode> |
     And user clicks on continue button in Zip Entry Page
@@ -56,13 +56,13 @@ Feature: 1.07 and 1.10.4 ACQ-Pharmacy Locator
 
     @UATAARP01
     Examples: 
-      | TID                 | site | zipcode | distance | countyName | cy_planYear | cy_planName                     | ny_planYear | ny_planName                     | pharmacyType  | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan | drug1   | drug2  | drug3   | drug4    |
-      | E2E Scenario 1_AARP | AARP |   10980 |       15 | None       |        2021 | AARP MedicareRx Preferred (PDP) |        2021 | AARP MedicareRx Preferred (PDP) | E-Prescribing | True                  | False            | True                 | Orkambi | Fanapt | Humalog | Adderall |
+      | TID                 | site | zipcode | distance | countyName | cy_planYear | cy_planName                     | ny_planYear | ny_planName                     | pharmacyType  | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan | drug1  | drug2   |
+      | E2E Scenario 1_AARP | AARP |   10980 |       15 | None       |        2021 | AARP MedicareRx Preferred (PDP) |        2021 | AARP MedicareRx Preferred (PDP) | E-Prescribing | True                  | False            | True                 | Fanapt | Lipitor |
 
     @UATUHC01
     Examples: 
-      | TID                | site | zipcode | distance | countyName | cy_planYear | cy_planName                     | ny_planYear | ny_planName                     | pharmacyType  | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan | drug1   | drug2  | drug3   | drug4    |
-      | E2E Scenario 1_UHC | UHC  |   10980 |       15 | None       |        2021 | AARP MedicareRx Preferred (PDP) |        2021 | AARP MedicareRx Preferred (PDP) | E-Prescribing | True                  | False            | True                 | Orkambi | Fanapt | Humalog | Adderall |
+      | TID                | site | zipcode | distance | countyName | cy_planYear | cy_planName                     | ny_planYear | ny_planName                     | pharmacyType  | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan | drug1  | drug2   |
+      | E2E Scenario 1_UHC | UHC  |   10980 |       15 | None       |        2021 | AARP MedicareRx Preferred (PDP) |        2021 | AARP MedicareRx Preferred (PDP) | E-Prescribing | True                  | False            | True                 | Fanapt | Lipitor |
 
   Scenario Outline: TID: <TID> -zipcode: <zipcode> To verify end-to-end behavior for pharmacy locator page in English on acquisition <site> site
     Given the user is on medicare acquisition site landing page
