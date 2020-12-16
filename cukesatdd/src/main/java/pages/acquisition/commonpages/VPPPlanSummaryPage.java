@@ -854,8 +854,12 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	@FindBy(xpath = "(//button[@class='unliked buttonIntoText'])[1]")
 	private WebElement savePlanButton;
+	
+	@FindBy(xpath = "//img[@class='uhc-modal__close']")
+	private WebElement close;
 
-	@FindBy(xpath = "(//button[@class='liked buttonIntoText'])[1]/img")
+
+	@FindBy(xpath = "(//*[@class='liked buttonIntoText'])[1]/img")
 	private WebElement savePlanImg;
 
 	@FindBy(xpath = "(//a[@class='edit-your-info-link back-arrow-right show returnEntryPage'])[1]")
@@ -5206,26 +5210,25 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		return flag;
 		}
 	
-	public boolean clickAndVerifyNavigateToPage(String btn, int plans, String shot) throws InterruptedException {
+	public boolean clickAndVerifyNavigateToPage(String btn, int plans, String shot, String navigateComparePage) throws InterruptedException {
 		boolean flag = false;
 		Actions action = new Actions(driver);
 		if (btn.equalsIgnoreCase("Compare")) {
 			if (plans == 1) {
 				Thread.sleep(2000);
-				action.moveToElement(compareLink).build().perform();
-				compareLink.click();
+				jsClickNew(compareLink);
 				Thread.sleep(10000);
 			} else {
 				while (plans > 0) {
 					Thread.sleep(2000);
 					WebElement comparePlanLink = driver
 							.findElement(By.xpath("(//label[text()='Add to compare'])[" + plans + "]"));
-					action.moveToElement(comparePlanLink).build().perform();
-					comparePlanLink.click();
+					jsClickNew(compareLink);
 					Thread.sleep(10000);
 					plans = plans - 1;
 				}
 			}
+			if(navigateComparePage.equalsIgnoreCase("Yes")) {
 			action.moveToElement(compareButton).build().perform();
 			compareButton.click();
 			Thread.sleep(2000);
@@ -5233,6 +5236,12 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			if (comparePageHeader.isDisplayed()) {
 				flag = true;
 			}
+			}
+			if(navigateComparePage.equalsIgnoreCase("No")) {
+				flag = true;
+			}
+		
+			
 		} else if (btn.equalsIgnoreCase("Save")) {
 			if (plans == 1) {
 				Thread.sleep(2000);
@@ -5244,12 +5253,12 @@ public class VPPPlanSummaryPage extends UhcDriver {
 				while (plans > 0) {
 					Thread.sleep(2000);
 					WebElement savePlanLink = driver
-							.findElement(By.xpath("(//button[@class='unliked buttonIntoText'])[" + plans + "]"));
+							.findElement(By.xpath("(//*[@class='unliked buttonIntoText'])[" + plans + "]"));
+					
 					action.moveToElement(savePlanLink).build().perform();
 					savePlanLink.click();
 					Thread.sleep(10000);
 					plans = plans - 1;
-					WebElement close = driver.findElement(By.xpath("//img[@class='uhc-modal__close']"));
 					if(close.isDisplayed()) {
 						close.click();
 					}
@@ -5289,34 +5298,69 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		return flag;
 	}
 
-	public boolean verifyPlanCount() throws InterruptedException {
+	public boolean verifyPlanCount(int savedPlan) throws InterruptedException {
 		boolean flag = false;
 		Thread.sleep(2000);
 		
 		List<WebElement> unsavedPlanButton = driver.findElements(By.xpath("//span[@class='unliked buttonIntoText']"));
 		
 		int planToSaveCount = unsavedPlanButton.size();
+		int totalNoOfPlans = planToSaveCount;
+		int alreadySavedPlanOnComparePage = savedPlan;
 		
 		while (planToSaveCount > 0) {
 			Thread.sleep(2000);
 			WebElement planToSave = driver
-					.findElement(By.xpath("//span[@class='unliked buttonIntoText'])[" + planToSaveCount + "]"));
+					.findElement(By.xpath("(//span[@class='unliked buttonIntoText'])[" + planToSaveCount + "]"));
 			jsClickNew(planToSave);
 			Thread.sleep(10000);
 			planToSaveCount = planToSaveCount - 1;
 		}
 		
-		int savePlanImgCount = savePlanImgList.size();
-		if (planToSaveCount == savePlanImgCount) {
-			int count = Integer.parseInt(savedPlanHeaderCount.getText());
-			if (count == savePlanImgCount) {
+		int noOfSavedPlansOnPlanCart = totalNoOfPlans - alreadySavedPlanOnComparePage;
+		int noOfPlansOnHeartIcon = Integer.parseInt(savedPlanHeaderCount.getText());
+		
+		if (noOfSavedPlansOnPlanCart == noOfPlansOnHeartIcon) {
 				flag = true;
 			}
 
+		return flag;
+	}
+	
+	public boolean verifyPlanSavedOnSummaryAreDisplayedOnCompare() throws InterruptedException {
+		boolean flag = false;
+		Thread.sleep(2000);
+		
+		List<WebElement> unsavedPlanButton = driver.findElements(By.xpath("//span[@class='unliked buttonIntoText']"));
+		
+		int planToSaveCount = unsavedPlanButton.size();
+		int totalNoOfPlans = planToSaveCount;
+		
+		while (planToSaveCount > 0) {
+			Thread.sleep(2000);
+			WebElement planToSave = driver
+					.findElement(By.xpath("(//span[@class='unliked buttonIntoText'])[" + planToSaveCount + "]"));
+			jsClickNew(planToSave);
+			Thread.sleep(10000);
+			if(close.isDisplayed()) {
+				close.click();
+			}
+			Thread.sleep(2000);
+			planToSaveCount = planToSaveCount - 1;
 		}
+		
+		compareButton.click();
+		Thread.sleep(2000);
+		
+		int noOfPlansOnHeartIcon = Integer.parseInt(savedPlanHeaderCount.getText());
+		
+		if (totalNoOfPlans == noOfPlansOnHeartIcon) {
+				flag = true;
+			}
 
 		return flag;
 	}
+
 
 	@FindBy(xpath = "(//input[@id='updates-email'])[2]")
 	private WebElement requestemailaddress;
