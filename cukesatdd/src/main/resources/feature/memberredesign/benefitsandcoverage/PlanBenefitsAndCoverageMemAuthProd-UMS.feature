@@ -228,12 +228,14 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth Prod
       | Member Type  | <memberType>  |
     Then The user navigate to Benefits and Coverage page
     And the user validates the ways to save section
+     And user validates to not display pharmacy out-of-pocket maximum beside drug lookup
+      | Type   | <type>   |
   
     Examples: 
-      | index | TID   |username |password|MemUserName       | planType | memberType  |
-      | 07    | 15242 |kkumard| tnps459#| bluefury1502@gmail.com|PDP       | Wallgreens_BnC  |
+      | index | TID   |username |password|MemUserName       | planType | memberType  |type      |
+      | 07    | 15242 |kkumard| tnps459#| bluefury1502@gmail.com|PDP       | Wallgreens_BnC  |Individual|
     #x| 08    | 15243 |kkumard| tnps459#|BHTRUE1           |PDP       | MailOrderPharamacy_BnC |
-      | 08    | 15243 |kkumard| tnps459#|lkd3408           |PDP       | MailOrderPharamacy_BnC |
+      | 08    | 15243 |kkumard| tnps459#|lkd3408           |PDP       | MailOrderPharamacy_BnC | Individual|
       
   #TC21_PDP_LIS(3,4)- Retail Drug Cost Table
   @prod__benefitsAndCoverage1  @PDPLIS3member @prod_BnC_Part5 @bnc_sanity_pdp
@@ -275,9 +277,9 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth Prod
     And the user validates contactus section
 
     Examples: 
-      | index | TID   |username |password  |MemUserName| planType| memberType| copayCategory | SummaryofBenefits   | EvidenceofCoverage   | ComprehensiveFormularyDrug List | AlternativeDrugList   |
+      | index | TID   |username |password  |MemUserName| planType| memberType| copayCategory | SummaryofBenefits   | EvidenceofCoverage   | ComprehensiveFormularyDrug List | AlternativeDrugList   |type      |
     #x| 09    | 15248 |kkumard|  tnps459#|Melw4344|PDP | PDPLIS_BnC | LIS 3  | Summary of Benefits | Evidence of Coverage | Comprehensive Formulary         | Alternative Drug List |
-      | 09    | 15248 |kkumard|  tnps459#|Shelton1104 |PDP | PDPLIS_BnC | LIS 3  | Summary of Benefits | Evidence of Coverage | Comprehensive Formulary         | Alternative Drug List |
+      | 09    | 15248 |kkumard|  tnps459#|Shelton1104 |PDP | PDPLIS_BnC | LIS 3  | Summary of Benefits | Evidence of Coverage | Comprehensive Formulary         | Alternative Drug List |Individual|
             
   #TC25_Group members_MAPD_LIS(3,4)
   @prod__benefitsAndCoverage1  @CMGroupmembersTC25  @prod_BnC_Part6 @bnc_sanity_mapd
@@ -643,6 +645,8 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth Prod
     And the user validates text for the Look Up Drugs section
     And the user validates Look Up Drugs button should be visible
       | Plan Type | <planType> |
+    And user validates to not display pharmacy out-of-pocket maximum beside drug lookup
+      | MemberType   | <memberType>   |
     And the user validates text for the Locate a Pharmacy section
     And the user validates Locate a Pharmacy button should be visible
       | Plan Type | <planType> |
@@ -739,6 +743,8 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth Prod
     And the user validates text for the Look Up Drugs section
     And the user validates Look Up Drugs button should be visible
       | Plan Type | <planType> |
+    And user validates to not display pharmacy out-of-pocket maximum beside drug lookup
+       | MemberType   | <memberType>   |
     And the user validates text for the Locate a Pharmacy section
     And the user validates Locate a Pharmacy button should be visible
       | Plan Type | <planType> |
