@@ -574,24 +574,23 @@ public class ProviderSearchPage extends UhcDriver {
 				"Provider Search Rally Page is not displayed");
 	}
 
-	public void selectYear(String year) {
-		if (year.contains("current")) {
-			if (validate(currentYrTile)) {
-				// currentYrTile.click();
-				jsClickNew(currentYrTile);
-			} else {
-				System.out.println("Current year tile is not present");
-			}
-		} else {
-			if (validate(nextYrTile)) {
-				// nextYrTile.click();
-				jsClickNew(nextYrTile);
-			} else {
-				System.out.println("Next year tile is not present");
-			}
-		}
-
-	}
+	 public void selectYear(String year) {
+	        if (year.contains("current")) {
+	            if (validate(currentYrTile)) {
+	                // currentYrTile.click();
+	                jsClickNew(currentYrTile);
+	            } else {
+	                System.out.println("Current year tile is not present");
+	            }
+	        } else {
+	            if (validate(nextYrTile)) {
+	                // nextYrTile.click();
+	                jsClickNew(nextYrTile);
+	            } else {
+	                System.out.println("Next year tile is not present");
+	            }
+	        }
+	    }
 
 	public AcquisitionHomePage returnToAcqHomePage() {
 		// TODO Auto-generated method stub
