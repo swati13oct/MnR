@@ -1241,8 +1241,8 @@ try {
 				mobileDriver = new IOSDriver(new URL(mobileURL), capabilities);
 			}
 			System.out.println("Session ID --- " + mobileDriver.getSessionId());
-			System.out.println(mobileDeviceName + " JobURL  --- "
-					+ mobileDriver.getCapabilities().getCapability("testobject_test_report_url"));
+			JobURL = (String) mobileDriver.getCapabilities().getCapability("testobject_test_report_url");
+			System.out.println(mobileDeviceName + " JobURL  --- " + JobURL);
 			// System.out.println("JobReportURL ---
 			// "+mobileDriver.getCapabilities().getCapability("testobject_test_live_view_url"));
 			// System.out.println("APIURL ---

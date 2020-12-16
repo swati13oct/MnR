@@ -95,7 +95,7 @@ Feature: Plan Recommendation Engine flow - Verify PRE flows functionalities with
       | Additional Option | <Dental-Hearing-Vision-Fitness> |
     And user selects cost preferences option in cost preferences page mobile
       | Preference Option | <costPreferenceOption> |
-    Then user selects priority in priorities page
+    Then user selects priority in priorities page mobile
       | Priority Option | <priorityOption> |
       | Priorities      | <priorities>     |
     And user validate elements in loading page mobile
@@ -137,7 +137,7 @@ Feature: Plan Recommendation Engine flow - Verify PRE flows functionalities with
       | Additional Option | <Dental-Hearing-Vision-Fitness> |
     And user selects cost preferences option in cost preferences page mobile
       | Preference Option | <costPreferenceOption> |
-    Then user selects priority in priorities page
+    Then user selects priority in priorities page mobile
       | Priority Option | <priorityOption> |
       | Priorities      | <priorities>     |
     And user validate elements in loading page mobile
@@ -223,7 +223,7 @@ Feature: Plan Recommendation Engine flow - Verify PRE flows functionalities with
 
     Examples: 
       | Zipcode | isMultiCounty | County     | isCoverageOpt | SpecialNeeds | TravelOption | DoctorsSelection | DoctorsName | isMultiDoctor | DrugSelection | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities         | 1stRecommendation | 2ndRecommendation |
-      |   55001 | NO            | Washington | MAPD          | Nursing      | Regular      | AcceptsMedicare  |             |               | Yes           | Yes,No,No,Yes                 | Higher               | both           | Drug Cost, Doctors | SNP               | MS                |
+      |   55001 | NO            | Washington | MAPD          | Nursing      | Regular      | AcceptsMedicare  |             |               | Yes           | Yes,No,No,Yes                 | Higher               | both           | Drug Cost, Doctors | SNP               | MA                |
 
   @PRE @planrecommandonationmobile @DKmobile @DKdrugmobile @F358830 @F458224
   Scenario Outline: Zipcode: <Zipcode> -MultiCountyOptions: <isMultiCounty> -CoverageOptions: <isCoverageOpt> -SNP: <SpecialNeeds> -Travel: <TravelOption> -Doctors: <DoctorsSelection> -AdditionalOption: <Dental-Hearing-Vision-Fitness> -CostPreferenceSelection: <costPreferenceOption> - To validate Dont Know flow with drug and DSNP functions in PRE Mobile

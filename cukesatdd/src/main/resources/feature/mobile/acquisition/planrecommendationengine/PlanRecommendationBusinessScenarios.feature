@@ -51,7 +51,7 @@ Feature: Plan Recommendation Engine Ranking - Verify PRE Business flows with API
       | Additional Option | <Dental-Hearing-Vision-Fitness> |
     And user selects cost preferences option in cost preferences page mobile
       | Preference Option | <costPreferenceOption> |
-    Then user selects priority in priorities page
+    Then user selects priority in priorities page mobile
       | Priority Option | <priorityOption> |
       | Priorities      | <priorities>     |
     And user validate elements in loading page mobile
@@ -85,7 +85,7 @@ Feature: Plan Recommendation Engine Ranking - Verify PRE Business flows with API
       | Additional Option | <Dental-Hearing-Vision-Fitness> |
     And user selects cost preferences option in cost preferences page mobile
       | Preference Option | <costPreferenceOption> |
-    Then user selects priority in priorities page
+    Then user selects priority in priorities page mobile
       | Priority Option | <priorityOption> |
       | Priorities      | <priorities>     |
     And user validate elements in loading page mobile
@@ -117,7 +117,7 @@ Feature: Plan Recommendation Engine Ranking - Verify PRE Business flows with API
       | Additional Option | <Dental-Hearing-Vision-Fitness> |
     And user selects cost preferences option in cost preferences page mobile
       | Preference Option | <costPreferenceOption> |
-    Then user selects priority in priorities page
+    Then user selects priority in priorities page mobile
       | Priority Option | <priorityOption> |
       | Priorities      | <priorities>     |
     And user validate elements in loading page mobile
