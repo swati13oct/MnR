@@ -500,6 +500,12 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "//*[@id='enrollmentPopup']/..//*[@class='uhc-modal__close']")
 	private WebElement savedPlansPopupCloseIcon;
 	
+	@FindBy(xpath = "//h3//a[text()='Medicare Prescription Drug Plans']")
+	private WebElement planTypePDPLink;
+	
+	@FindBy(xpath = "//a[@title='Pharmacy Locator']")
+	private WebElement pdpPharmacyLink;
+	
    	String ChatSamText= "Chat with a Licensed Insurance Agent";
 
 	private static String TeamC_ACQUISITION_PAGE_URL = MRConstants.TeamC_UHC_URL;
@@ -3176,5 +3182,22 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			Assert.fail("User not navigated to Visitor profile page");
 		}
 		return null;
+	}
+	
+	
+	public PharmacySearchPage navigateToPharmacyLocatorFromPlanType() {
+		jsMouseOver(navigationSectionHomeLink);
+		jsMouseOver(ourPlansHoverLink);
+		jsClickNew(planTypePDPLink);
+		CommonUtility.checkPageIsReadyNew(driver);
+		waitforElement(shoppingCartIcon);
+		jsClickNew(pdpPharmacyLink);
+		CommonUtility.checkPageIsReadyNew(driver);
+		waitForPageLoadSafari();
+		if (driver.getTitle().toLowerCase().contains((PageTitleConstants.BLAYER_LOCATE_A_PHARMACY_UNITEDHEALTHCARE).toLowerCase())) {
+			return new PharmacySearchPage(driver);
+		}
+		return null;
+
 	}
 }
