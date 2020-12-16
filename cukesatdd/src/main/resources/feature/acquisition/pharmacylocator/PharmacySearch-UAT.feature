@@ -1,4 +1,4 @@
-Feature: 1.07 and 1.10.4 ACQ-Pharmacy Locator
+Feature: 1.07 and 1.11 ACQ-Pharmacy Locator
 
   Scenario Outline: TID: <TID> -zipcode: <zipcode> - To verify end-to-end behavior for pharmacy locator page in English on acquisition <site> site
     Given the user is on medicare acquisition site landing page
