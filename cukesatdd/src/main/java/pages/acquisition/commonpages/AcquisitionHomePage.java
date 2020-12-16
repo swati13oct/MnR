@@ -327,7 +327,6 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "//button[contains(@class,'proactive-offer__button_type_chat') and contains(text(), 'Chat')]")
    	private WebElement ProActivePopup_ChatBtn;
 
-   	
    	@FindBy(xpath ="//*[@id='sam-call-modal']/div/div/div[2]/p[1]/a[1]")
    	private WebElement CallSamModel;
    	
@@ -337,7 +336,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
    	@FindBy(xpath ="//*[contains(@id,'sam-call-modal')]//*[contains(@class,'modal-close')]")
    	private WebElement CallSamTFNClose;
    	
-//   	String CallSam= "Call a Licensed Insurance Agent";
+//  String CallSam= "Call a Licensed Insurance Agent";
    	String CallSam1855= "1-855";
    	String CallSam1877= "1-877";
    	
@@ -1955,18 +1954,18 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 				System.out.println("Hover over visitor profile completed");
 			}
-			WebElement CreateProfile = driver.findElement(By.xpath("//a[contains(text(), 'Create Profile')]"));
-			WebElement VPSignIn = driver.findElement(
-					By.xpath("//a[contains(text(), 'Sign In') and not(contains(@aria-labelledby ,'VPSignIn'))]"));
-			validateNew(CreateProfile);
-		    validateNew(VPSignIn);
-			if (CreateProfile.isEnabled() && VPSignIn.isEnabled()) {
-				Assert.assertTrue(true);
-				System.out.println("Visitor Profile elements are present on home page");
-			} else {
-				Assert.fail("Visitor Profile elements are not present on home page");
-			}
-			visitorprofileicon.click();
+//			WebElement CreateProfile = driver.findElement(By.xpath("//a[contains(text(), 'Create Profile')]"));
+//			WebElement VPSignIn = driver.findElement(
+//					By.xpath("//a[contains(text(), 'Sign In') and not(contains(@aria-labelledby ,'VPSignIn'))]"));
+//			validateNew(CreateProfile);
+//		    validateNew(VPSignIn);
+//			if (CreateProfile.isEnabled() && VPSignIn.isEnabled()) {
+//				Assert.assertTrue(true);
+//				System.out.println("Visitor Profile elements are present on home page");
+//			} else {
+//				Assert.fail("Visitor Profile elements are not present on home page");
+//			}
+//			visitorprofileicon.click();
 			WebElement GuestProfile = driver.findElement(By.xpath("//*[contains(text(), 'Your Guest Profile')]"));
 			CheckPageLoad();
 			waitForPageLoadSafari();
