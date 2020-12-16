@@ -83,38 +83,9 @@ Feature: 1.05.4 OLE common tool flow E2E SNP
       | Select Options | <selectoptions> |
       | Option Data    | <optiondata>    |
 #    Then the user navigates to Coverage and Health Information Page
-    Then the user navigates to Proposed Effective Date Page
-    Then the user validates Proposed Effective Date is Displayed
-    Then the user navigates to PCP Page and validates PCP page is not displayed for PDP
-    Then the user validates PCP page for MA and MAPD PFFS plans
-    Then the user validates Look up Provider for MA MAPD and DSNP plans.
-    Then the user navigates to Monthly Plan Premium Page
-    Then the user navigates to Optional Benefits Page for following plans with available Riders
-      | Rider Flag | <riderflag> |
-    Then the user navigates to Authorization Page for plan as per following rider options
-      | Rider Flag | <riderflag> |
-    #Then the user validates required fields for Authorization Page
-    Then the user validates required fields for Authorization Page Representative
-      	|authorizationFirstname|<authorizefirstN>|
-      	|authorizationLastname|<authorizelastN>|
-       	|authorizationAddress|<authorizeaddress>|
-       	|authorizationApartmentSuite|<authorizeapartment>|
-        |authorizationCity|<authorizecity>|
-        |authorizationZip|<authorizezip>|
-        |authorizationPhoneNo|<authorizephonenumber>|
-        |authorizationRelationship| <authorizeRelationship>|
-        |authorizationStateDisplay|<authorizestate>|
-        |authorizationAgree  |<authorizationagree>|
-    Then the user navigates to Review and Submit Page
-    #Then the user validates the Plan and Member details on Review and Submit Page
-    Then the user validates the Online Enrollment details on Review and Submit Page
-    Then the user clicks on Submit Enrollment to complete enrollment
-    # Then the user validates the Online Enrollment details on Review and Submit Page
-    Then the user Validates Next Steps in Confirmation Page for the Plan Type.
-		#Then the user validates the OLE Submission Details in GPS
-    #| Plan Type | <plantype> |
+    
 		
-		@SNP_OLE_AARP_Future @prodRegression
+		@SNP_OLE_AARP_Future1 @prodRegression
     Examples: 
     # | TID   | site|PlanType |planyear|planYear|zipcode | isMultutiCounty | county            | plantype | planName                              | cardtype | firstname | lastname | medicarenumber | ssnflag | partadate | partbdate | medicaidnumber | esrdflag | dob      | gender | permstreet  | permcity    | mailingaddressquestion | mailingstreet | mailingcity | mailingstate | mailingzip | email         | selectoptions                                      | optiondata        | pdpFlag | longTermFlag | riderflag | emailConfirmation | goGreen |healthinsurancename|groupnumber| membernumber|prescriptioncoveragename|pdgroupnumber|pdmembernumber|inputdataType|
     # | 15574 | AARP|PCP-DSNP-MBI |  future|future | 33143 | NO              | Miami-Dade County | SNP      |  UnitedHealthcare Dual Complete RP - FL (Regional PPO D-SNP) | MBI      | GOTTFRIED | GARRAND     | 5N69QY6ET34    | false|   09011997 |  11012002 |     0123456789 | true     | 04261944 | Female | 123 Perm Rd | Los Angeles | Yes                    | 876 MailingSt | Mailing LA  | FL           |      33143 | test@test.com | losing coverage/ moved outside of the service area | 01012018/01012018 | yes     | no           | false     | NO                | NO      |HealthInsurance             |HI1562759    | ABC12345DEF     |PrescriptionCoverage            |PD5646136   | BCD12345EFG |Valid|

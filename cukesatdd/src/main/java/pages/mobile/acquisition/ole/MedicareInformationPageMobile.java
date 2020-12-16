@@ -318,8 +318,8 @@ public class MedicareInformationPageMobile extends UhcDriver {
 		String goGreen = MedicareDetailsMap.get("Go Green");
 		String email = MedicareDetailsMap.get("Email");
 
-		//jsSendkeys(claimNumberField, MedicareNumber);
-		claimNumberField.sendKeys(MedicareNumber);
+		jsSendkeys(claimNumberField, MedicareNumber);
+		//claimNumberField.sendKeys(MedicareNumber);
 
 		if (SSNflag.contains("true")) {
 			String SSNnumber = MedicareDetailsMap.get("SSN Number");
@@ -662,16 +662,17 @@ public class MedicareInformationPageMobile extends UhcDriver {
 		// Medicaid Question validation for DSNP only
 		if (planName.contains("D-SNP")) {
 			System.out.println("Medicaid Question is displayed for " + planType + " : " + validate(MedicaidQuestion));
-			medicaiddno.click();
+			//medicaiddno.click();
+			jsClickMobile(medicaiddno);
 			System.out.println("Medicaid question : No clicked" + medicaiddno.isSelected());
 			if (validate(MedicaidError) && validate(CancelButton) && validateNonPresenceOfElement(NextBtn)) {
 				System.out.println(
 						"Medicaid Number error and Cancel Enrollment button are displayed for DSNP plansNO answer to ESRD question");
 				// validation_Flag = (validation_Flag==false)?false:true;
-				medicaiddyes.click();
+				jsClickMobile(medicaiddyes);
 				System.out.println("Medicaid question : YES clicked" + medicaiddyes.isSelected());
-				NextBtn.click();
-
+				
+				jsClickMobile(NextBtn);
 				if (validate(RequiredField_ErrorMessage) && validate(MedicaidRequired_ErrorMessage)) {
 					System.out.println("Medicaid Number Required : Error Message is Disabled");
 					Medicaid_Validation = true;
