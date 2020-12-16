@@ -927,7 +927,7 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth Prod
     #  | index  | FID    | username | password  | MemUserName        | planType  | memberType     | copayCategory | deductible   | insulin      | note |
     #  | 34-I09 | 478830 | kkumard  | tnps459#  | testUserName       | MAPD      | Individual_BnC | NON LIS       | T12345       | nonInsulin   |   H0271-017-000| 
 
-  @prod_benefitsAndCoverage24 @prod_comboApi
+  @prod_benefitsAndCoverage24 @prod_api
   Scenario Outline: Index: <index> -TID: <TID> -plan: <planType> -memberType: <memberType> - Verify UCPBenefits API not having undefined input value
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
@@ -944,11 +944,16 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth Prod
     And the users validate Benefits page has combo tabs for combo users
     And the users validate UCPBenefits related API requests are not having undefined input value
 
+	@prod_comboApi
     Examples: 
       | index | TID   | username | password  | MemUserName              | planType | memberType   |
       | 35    | xxxxx | kkumard  | tnps459#  | VirginiaRuth1936         | COMBO    | SHIP_FED_BnC |
       | 36    | xxxxx | kkumard  | tnps459#  | nino2@theciliangroup.com | COMBO    | FED_SHIP_BnC |
       | 37    | xxxxx | kkumard  | tnps459#  | DKELLY27                 | COMBO    | FED_FED_BnC  |
+
+	@prod_singleApi
+    Examples: 
+      | index | TID   | username | password  | MemUserName              | planType | memberType   |
       | 38    | xxxxx | kkumard  | tnps459#  | ssmhi1                   | MA       | FED_BnC      |
       | 39    | xxxxx | kkumard  | tnps459#  | kirit1976                | MAPD     | FED_BnC      |
       | 40    | xxxxx | kkumard  | tnps459#  | lkd3408                  | PDP      | FED_BnC      |

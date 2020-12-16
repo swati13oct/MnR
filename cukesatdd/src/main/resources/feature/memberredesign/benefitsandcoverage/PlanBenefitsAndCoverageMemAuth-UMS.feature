@@ -892,7 +892,7 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth
       | index  | FID    | username | password  | MemUserName        | planType  | memberType     | copayCategory | deductible   | insulin      |
       | 34-I09 | 478830 | qavgogine| qavgogine | q4_insulinDemo_019 | MAPD      | Individual_BnC | NON LIS       | T12345       | nonInsulin   | 
 
-  @memAuth_benefitsAndCoverage24 @memAuth_comboApi
+  @memAuth_benefitsAndCoverage24 @memAuth_api
   Scenario Outline: Index: <index> -TID: <TID> -plan: <planType> -memberType: <memberType> - Verify UCPBenefits API not having undefined input value for COMBO user
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
@@ -909,11 +909,16 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth
     And the users validate Benefits page has combo tabs
     And the users validate UCPBenefits related API requests are not having undefined input value
 
+    @memAuth_comboApi
     Examples: 
       | index | TID   | username | password  | MemUserName        | planType | memberType   |
       | 35    | xxxxx | qavgogine| qavgogine | GENARO_Q4_COMBO    | COMBO    | SHIP_FED_BnC |
       | 36    | xxxxx | qavgogine| qavgogine | q4_ShipVAS_009     | COMBO    | FED_SHIP_SHIP_BnC |
       | 37    | xxxxx | qavgogine| qavgogine | q2_jun_grp0255     | COMBO    | FED_FED_BnC  |
+
+    @memAuth_singleApi
+    Examples: 
+      | index | TID   | username | password  | MemUserName        | planType | memberType   |
       | 38    | xxxxx | qavgogine| qavgogine | q2_jun_grp0428     | MA       | FED_BnC      |
       | 39    | xxxxx | qavgogine| qavgogine | q3_Sep_FedANOC_002 | MAPD     | FED_BnC      |
       | 40    | xxxxx | qavgogine| qavgogine | q2_jun_aarp0112    | PDP      | FED_BnC      |
