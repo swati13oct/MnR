@@ -304,7 +304,7 @@ Examples:
    |E2E Scenario 3_UMS |UHC |15652 |   19019 | No              | Philadelphia County           | MAPD            | AARP Medicare Advantage Choice Plan 2 (PPO)    | Provider search    |https://connect.werally.com/county-plan-selection/uhc.mnr/zip|
     
 
-@SiteSearchULayer @UATRegressionVP
+@SiteSearchULayer @UATRegression
  Scenario Outline: <Scenario> : Verify search results on Visitor profile from VPP page
     Given the user is on medicare acquisition site landing page
      	|Site| <site>|
@@ -326,21 +326,21 @@ Examples:
     Then the user validates pagination and results displayed
     
              
-@SiteSearch_AARP
+@SiteSearch_AARP_07
 Examples:
 |Scenario             |site| TID  | zipcode | isMultutiCounty | county                        | plantype       | planName                                           |searchValue |newsearchvalue|
 |E2E Scenario 3_AMP 	|AARP|15652 |   19019 | No              | Philadelphia County           | MAPD           | AARP Medicare Advantage Choice Plan 2 (PPO)        |Medicare    |pharmacy|
 |E2E Scenario 3_AMP 	|AARP|15652 |   19019 | No              | Philadelphia County           | MAPD           | AARP Medicare Advantage Choice Plan 2 (PPO)        |Dental coverage    |Drug cost estimator|
 |E2E Scenario 3_AMP 	|AARP|15652 |   19019 | No              | Philadelphia County           | MAPD           | AARP Medicare Advantage Choice Plan 2 (PPO)        |Medicare    |pharmacy|
 
-@SiteSearch_UHC
+@SiteSearch_UHC_07
 Examples:
 |Scenario             |site| TID | zipcode | isMultutiCounty | county                      | plantype        | planName                                           |searchValue |newsearchvalue|
 |E2E Scenario 3_UMS 	|UHC|15652 |   19019 | No              | Philadelphia County         | MAPD            | AARP Medicare Advantage Choice Plan 2 (PPO)        |Medicare    |pharmacy|
 
      
     
-@SiteSearchULayer @UATRegressionVP
+@SiteSearchULayer @UATRegression
  Scenario Outline: <Scenario> : To verify Errorhandling on Visitor profile from VPP page
    Given the user is on medicare acquisition site landing page
    	|Site| <site>|
@@ -361,7 +361,7 @@ Examples:
    |Error|<Error>|
    |NewSearchValue|<NewSearchValue>|
    
-   @SiteSearch_AARP
+   @SiteSearch_AARP_07
      Examples: 
     |Scenario             | site| TID   | zipcode | isMultutiCounty | county                        | plantype       | planName|searchValue |Error      | NewSearchValue| 
     |E2E Scenario 3_AMP 	| AARP| 15652 |   19019 | No              | Philadelphia County           | MAPD            | AARP Medicare Advantage Choice Plan 2 (PPO)        |Medicare    | Empty  |	    |           
@@ -372,7 +372,7 @@ Examples:
     |E2E Scenario 3_AMP 	| AARP| 15652 |   19019 | No              | Philadelphia County           | MAPD            | AARP Medicare Advantage Choice Plan 2 (PPO)        |Medicare|InvalidCharacter|123456|
     |E2E Scenario 3_AMP 	| AARP| 15652 |   19019 | No              | Philadelphia County           | MAPD            | AARP Medicare Advantage Choice Plan 2 (PPO)        |Medicare|InvalidCharacter|@@@@|
     
-   @SiteSearch_UHC
+   @SiteSearch_UHC_07
     Examples:
    |Scenario              | site| TID   | zipcode | isMultutiCounty | county                        | plantype        | planName                                    |searchValue |Error           | NewSearchValue| 
    |E2E Scenario 3_UMS 	  |UHC  | 15652 |   19019 | No              | Philadelphia County           | MAPD            | AARP Medicare Advantage Choice Plan 2 (PPO) |Medicare    |	Empty         |               |
@@ -383,7 +383,7 @@ Examples:
    |E2E Scenario 3_UMS    |UHC  |15652 |   19019 | No              | Philadelphia County           | MAPD            | AARP Medicare Advantage Choice Plan 2 (PPO) | Medicare    |InvalidCharacter|123456|
    |E2E Scenario 3_UMS    |UHC  |15652 |   19019 | No              | Philadelphia County           | MAPD            | AARP Medicare Advantage Choice Plan 2 (PPO) | Medicare    |InvalidCharacter|@@@@|
   
-@SiteSearchULayer @UATRegressionVP
+@SiteSearchULayer @UATRegression
  Scenario Outline: <Scenario> : To verify provider search third party URL on Visitor profile from VPP Page
     Given the user is on medicare acquisition site landing page
      	|Site| <site>|
@@ -400,19 +400,19 @@ Examples:
    Then the user validates the "<url>"  
    
       
- @SiteSearch_AARP
+ @SiteSearch_AARP_07
     Examples: 
    |Scenario  					|	site| TID   | zipcode | isMultutiCounty | county                        | plantype       | planName|searchValue         |url|
    | E2E Scenario 3_AMP | AARP| 15652 |   19019 | No              | Philadelphia County           | MAPD            | AARP Medicare Advantage Choice Plan 2 (PPO)     | Provider search    |https://connect.werally.com/county-plan-selection/uhc.mnr/zip|
       
       
-  @SiteSearch_UHC
+  @SiteSearch_UHC_07
     Examples: 
    |Scenario           |site|TID   | zipcode | isMultutiCounty | county                        | plantype       | planName| searchValue        |url|
    |E2E Scenario 3_UMS |UHC |15652 |   19019 | No              | Philadelphia County           | MAPD            | AARP Medicare Advantage Choice Plan 2 (PPO)    | Provider search    |https://connect.werally.com/county-plan-selection/uhc.mnr/zip|
     
   
-@SiteSearchULayer @UATRegressionVP
+@SiteSearchULayer @UATRegression
  Scenario Outline: <Scenario> : To verify provider search third party URL on page mentioned
    Given the user is on medicare acquisition site landing page
   		| Site | <site>	|
