@@ -128,7 +128,7 @@ public class PlanRecommendationEngineDoctorsPageMobile extends UhcDriver {
 
 	@FindBy(css = "#modal div[class*='edit']>button")
 	private WebElement modalEditdoctors;
-	
+
 	@FindBy(xpath = "//button[@id='finishAndReturnButton']")
 	private WebElement finishandReturnBtn;
 
@@ -166,17 +166,17 @@ public class PlanRecommendationEngineDoctorsPageMobile extends UhcDriver {
 		System.out.println("Doctor Page Functional Operations");
 		if (doctor.equalsIgnoreCase("UHGNetwork")) {
 			validate(innetwork);
-			//innetwork.click();
+			// innetwork.click();
 			jsClickNew(innetwork);
 			System.out.println("Doctors Type " + doctor + " Clicked");
 		} else if (doctor.equalsIgnoreCase("AcceptsMedicare")) {
 			validate(outnetwork);
-			//outnetwork.click();
+			// outnetwork.click();
 			jsClickNew(outnetwork);
 			System.out.println("Doctors Type " + doctor + " Clicked");
 		} else if (doctor.equalsIgnoreCase("Lookup")) {
 			validate(mydoctors);
-			//mydoctors.click();
+			// mydoctors.click();
 			jsClickNew(mydoctors);
 			System.out.println("Doctors Type " + doctor + " Clicked");
 		}
@@ -188,7 +188,7 @@ public class PlanRecommendationEngineDoctorsPageMobile extends UhcDriver {
 		System.out.println("Doctor Page Functional Operations");
 		if (status.toUpperCase().contains("POSITIVE")) {
 			doctorspageOptions(doctor);
-			//continueBtn.click();
+			// continueBtn.click();
 			jsClickNew(continueBtn);
 			if (doctor.equalsIgnoreCase("Lookup")) {
 				if (multiDoctor.equalsIgnoreCase("YES"))
@@ -196,14 +196,15 @@ public class PlanRecommendationEngineDoctorsPageMobile extends UhcDriver {
 				else
 					doctorModellookup(doctorsName, 1);
 			}
-//			System.out.println("Validating " + page + " page Continue button functionality");
-//			if (!status.toUpperCase().contains("NEXTPAGENAME"))
-//				desktopCommonUtils.nextPageValidation(page.toUpperCase());
-//			else
-//				desktopCommonUtils.nextPageNameValidation(page.toUpperCase());
+			// System.out.println("Validating " + page + " page Continue button
+			// functionality");
+			// if (!status.toUpperCase().contains("NEXTPAGENAME"))
+			// desktopCommonUtils.nextPageValidation(page.toUpperCase());
+			// else
+			// desktopCommonUtils.nextPageNameValidation(page.toUpperCase());
 		} else {
 			if (doctor.isEmpty()) {
-				//continueBtn.click();
+				// continueBtn.click();
 				jsClickNew(continueBtn);
 				desktopCommonUtils.desktopErrorValidation(page);
 			}
@@ -238,7 +239,7 @@ public class PlanRecommendationEngineDoctorsPageMobile extends UhcDriver {
 	public void doctorModellookup(String search, int count) {
 		String curWindow = driver.getWindowHandle();
 		System.out.println(curWindow);
-		//modalFinddoctors.click();
+		// modalFinddoctors.click();
 		jsClickNew(modalFinddoctors);
 		validateLinksanotherWindow(curWindow, "Doctors", search, count);
 		threadsleep(5000);
@@ -250,7 +251,7 @@ public class PlanRecommendationEngineDoctorsPageMobile extends UhcDriver {
 			count = count - 1;
 			confirmationProviderResults = getConfimationPopupResults(count);
 		}
-		//modalContinuedoctors.click();
+		// modalContinuedoctors.click();
 		jsClickNew(modalContinuedoctors);
 
 	}
@@ -282,7 +283,8 @@ public class PlanRecommendationEngineDoctorsPageMobile extends UhcDriver {
 	// Switch to Werally Window Page
 
 	public ArrayList<String> validateLinksanotherWindow(String primaryWindow, String type, String search, int count) {
-		String browser = MRScenario.browsername;
+		String browser = MRScenario.browsername; // E2E: the browser name is stored in browserName variable in
+													// getWebDriverNew method of MRScenario
 		String env = MRScenario.environment;
 		threadsleep(2000);
 		ArrayList<String> windows = new ArrayList<String>(driver.getWindowHandles());
@@ -302,16 +304,15 @@ public class PlanRecommendationEngineDoctorsPageMobile extends UhcDriver {
 					 */
 					driver.switchTo().window(window);
 					if (browser.equalsIgnoreCase("firefox") || browser.equalsIgnoreCase("edge")
-							|| browser.equalsIgnoreCase("IE"))
-						driver.manage().window().maximize();
+							|| browser.equalsIgnoreCase("IE") || browser.equalsIgnoreCase("chrome")) 
+						//driver.manage().window().maximize();
 					System.out.println(driver.getCurrentUrl());
-					if (env.equalsIgnoreCase("prod") || env.equalsIgnoreCase("prod-aarp")
-							|| env.equalsIgnoreCase("offline-prod") || env.equalsIgnoreCase("offline-prod-aarp"))
+					if (env.equalsIgnoreCase("prod") || env.equalsIgnoreCase("offline"))
 						Assert.assertTrue(driver.getCurrentUrl().contains("werally.com"),
-								"Connected to Incorrect Rally");
+								"Prod Connected to Incorrect Rally");
 					else
 						Assert.assertTrue(driver.getCurrentUrl().contains("werally.in"),
-								"Connected to Incorrect Rally");
+								"Non Prod Connected to Incorrect Rally");
 					werallyResults = werally.werallySearch(type, search, count);
 					System.out.println("werallyResults Size is : " + werallyResults.size());
 					System.out.println("werallyResults Content is : " + werallyResults);
@@ -454,41 +455,40 @@ public class PlanRecommendationEngineDoctorsPageMobile extends UhcDriver {
 	}
 
 	public void navigateDoctorsmodalsession() {
-		//doctorLookupOption.click();
+		// doctorLookupOption.click();
 		jsClickNew(doctorLookupOption);
 		System.out.println("Doctor Lookup Type Clicked");
-		//continueBtn.click();
+		// continueBtn.click();
 		jsClickNew(continueBtn);
 	}
 
 	static ArrayList<String> confirmationProviderResults = new ArrayList<String>();
 
 	public void addProvidersPRE(String doctorsName, String multiDoctor) {
-		//doctorLookupOption.click();
+		// doctorLookupOption.click();
 		jsClickNew(doctorLookupOption);
 		System.out.println("Lookup Type Clicked");
-		//continueBtn.click();
+		// continueBtn.click();
 		jsClickNew(continueBtn);
-	
+
 		if (multiDoctor.equalsIgnoreCase("YES"))
 			providerlookup(doctorsName, 3);
 		else
 			providerlookup(doctorsName, 1);
 		System.out.println("Validating " + page + " page Continue button functionality");
-		//modalContinuedoctors.click();
+		// modalContinuedoctors.click();
 		jsClickMobile(modalContinuedoctors);
-		//jsClickNew(finishandReturnBtn);
-		
-		//driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
+		// jsClickNew(finishandReturnBtn);
+
+		// driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
 		jsClickNew(continueBtn);
 		desktopCommonUtils.nextPageValidation(page.toUpperCase());
-		
 
 	}
 
 	public void providerlookup(String search, int count) {
 		String curdriverhandle = driver.getWindowHandle();
-		//modalFinddoctors.click();
+		// modalFinddoctors.click();
 		jsClickNew(modalFinddoctors);
 		validateLinksanotherWindow(curdriverhandle, "Doctors", search, count);
 		confirmationProviderResults = getConfimationPopupResults(count);

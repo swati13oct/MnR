@@ -59,7 +59,7 @@ Feature: 1.10.5 DCE-REDISIGN AARP DCE Details Page Scenarios - To test DCE Detai
     @DCE_DrugDetailsValidation_AARP
     Examples: 
       | drugnameAutocomplete | drug1   | zipCode | planType | planName                                            | site | brandDrug | genericDrug | deleteDrug | addDrug1 | insulinDrug    | insulinCopay |
-      | ativ                 | Humalog |   80002 | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) | AARP | Ativan    | orazepam    | Humalog    | Lipitor  | insulin lispro |$35|
+      | ativ                 | Humalog |   80002 | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) | AARP | Ativan    | orazepam    | Humalog    | Lipitor  | insulin lispro | $35          |
 
     @DCE_DrugDetailsValidation_UHC
     Examples: 
