@@ -384,4 +384,160 @@ public class GlobalComponentsCommonStepDefinition {
 //		  
 	  }
 
+	  @Then("^the user come back to Med-ed page$")
+	  public void the_user_come_back_to_Med_ed_page(){
+		  LearnAboutMedicareHomePage learnAboutMedicareHomePage= (LearnAboutMedicareHomePage)getLoginScenario() .getBean(PageConstants.LEARN_ABOUT_MEDICARE_PAGE);
+		  learnAboutMedicareHomePage.backToMedEdPage();
+	  }
+	  
+	  
+	  @Then ("^user clicks on  Medicare Part A and Part B Coverage dropdown$")
+	  public void user_check_coverage_dropdown() {
+		  CoverageChoicesPage coverageChoicesPage=(CoverageChoicesPage)getLoginScenario().getBean(PageConstants.COVERAGE_CHOICE_PAGE);
+		  coverageChoicesPage.checkCoverageDropdownAB();
+		 
+	  }
+	  @Then ("^user clicks on the plan dropdowns$")
+	  public void user_clicks_on_the_plan_dropdowns() {
+		  CoverageChoicesPage coverageChoicesPage=(CoverageChoicesPage)getLoginScenario().getBean(PageConstants.COVERAGE_CHOICE_PAGE);
+		  coverageChoicesPage.checkPlanDropDowns();
+
+	  }
+	  @Then ("^the user navigates through learn extra links on Cost Basic page$")
+	  public void user_navigates_extra_links() {
+		  CostBasicsPage costBasicsPage=(CostBasicsPage)getLoginScenario().getBean(PageConstants.COST_BASICS_PAGE);
+		  costBasicsPage.navigatesExtraLinks();
+	  }
+	  
+	  @Then("^the user check Medicare Savings Program link$")
+	  public void user_check_Medicare_saving_link() {
+		  CostBasicsPage costBasicsPage=(CostBasicsPage)getLoginScenario().getBean(PageConstants.COST_BASICS_PAGE);
+		  costBasicsPage.navigatesToMedicareSaving();  
+	  }
+	  @Then("^the user click on next article link$")
+	  public void user_click_next_link(){
+		  LearnAboutMedicareHomePage learnAboutMedicareHomePage=(LearnAboutMedicareHomePage)getLoginScenario().getBean(PageConstants.LEARN_ABOUT_MEDICARE_PAGE);
+		  learnAboutMedicareHomePage.clickOnReadNextLink();
+	  }
+	  @Then("^the user navigates to plan information page$")
+	  public void user_navigates_to_plan(DataTable givenAttributes) {
+		  List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+			Map<String, String> memberAttributesMap = new HashMap<String, String>();
+			for (int i = 0; i < memberAttributesRow.size(); i++) {
+				memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+						memberAttributesRow.get(i).getCells().get(1));
+			}
+			String planType = memberAttributesMap.get("planType");
+			 LearnAboutMedicareHomePage learnAboutMedicareHomePage=(LearnAboutMedicareHomePage)getLoginScenario().getBean(PageConstants.LEARN_ABOUT_MEDICARE_PAGE);
+			 if(planType.equalsIgnoreCase("MA")) {
+				 MedicareAdvantagePartCPlansPage MAplanPage=learnAboutMedicareHomePage.planSelectionMA();
+				 if(MAplanPage!=null) {
+					 getLoginScenario().saveBean(PageConstants.MEDICARE_ADVANTAGE_PLANS_PAGE, MAplanPage);
+					 getLoginScenario().saveBean(VPPCommonConstants.PLAN_TYPE, planType);
+					 Assert.assertTrue(true);
+				 }else {
+					 Assert.fail("MA plan page not loaded");
+				 }
+			 }else if(planType.equalsIgnoreCase("MS")) {
+				 MedicareSupplementInsurancePlansPage MSplanPage=learnAboutMedicareHomePage.planSelectionMS();
+				 if(MSplanPage!=null) {
+					 getLoginScenario().saveBean(PageConstants.MEDICARE_SUPPLEMENT_INSURANCE_PLANS_PAGE, MSplanPage);
+					 getLoginScenario().saveBean(VPPCommonConstants.PLAN_TYPE, planType);
+					 Assert.assertTrue(true);
+				 }else {
+					 Assert.fail("MS plan page not loaded");
+				 }
+			 }else if(planType.equalsIgnoreCase("PDP")) {
+				 MedicarePrescriptionDrugPartDPlansPage PDPplanPage=learnAboutMedicareHomePage.planSelectionPDP();
+				 if(PDPplanPage!=null) {
+					 
+					 getLoginScenario().saveBean(PageConstants.MEDICARE_PRESCRIPTION_DRUG_PLANS_PAGE, PDPplanPage);
+					 getLoginScenario().saveBean(VPPCommonConstants.PLAN_TYPE, planType);
+					 Assert.assertTrue(true);
+				 }else {
+					 Assert.fail("PDP plan page not loaded");
+				 }
+			 }
+	  }
+	  @Then("^user click on see plan in your area link$")
+	  public void user_click_on_see_plan_in_your_area_link() {
+		  LearnAboutMedicareHomePage learnAboutMedicareHomePage=(LearnAboutMedicareHomePage)getLoginScenario().getBean(PageConstants.LEARN_ABOUT_MEDICARE_PAGE);
+		  learnAboutMedicareHomePage.clickOnSeePlanLink();
+	  }
+	  
+	  @Then("^the user navigates to Enrollment Basics Page$")
+	  public void the_user_navigates_to_Enrollment_Basics_Page() {
+
+		  LearnAboutMedicareHomePage learnAboutMedicareHomePage=(LearnAboutMedicareHomePage)getLoginScenario().getBean(PageConstants.LEARN_ABOUT_MEDICARE_PAGE);
+		  EnrollmentBasicsPage enrollmentBasicsPage=learnAboutMedicareHomePage.clickonEnrollmentBasicLink();
+		  if(enrollmentBasicsPage!=null) {
+			  getLoginScenario().saveBean(PageConstants.ENROLLMENT_BASICS_PAGE, enrollmentBasicsPage);
+		  }
+		  
+	  }
+	  
+	  @Then("^the user check the inner links on Enrollment Basic Page$")
+	  public void check_the_inner_links_on_Enrollment_Basic() {
+		  EnrollmentBasicsPage enrollmentBasicsPage=(EnrollmentBasicsPage)getLoginScenario().getBean(PageConstants.ENROLLMENT_BASICS_PAGE);
+		  enrollmentBasicsPage.selectStateForGeotargeting();
+		  enrollmentBasicsPage.checkInnerLinks();
+		  enrollmentBasicsPage.clickSocialSecurity();
+	  }
+	  
+	  @Then ("^the user check Social Security link on Enrollment Basic Page$")
+	  public void check_the_socaial_security_link_on_Enrollment_Basic() {
+		  EnrollmentBasicsPage enrollmentBasicsPage=(EnrollmentBasicsPage)getLoginScenario().getBean(PageConstants.ENROLLMENT_BASICS_PAGE);
+		  enrollmentBasicsPage.clickSocialSecurity();
+	  }
+	  
+	  @Then ("^the user click on see all plan link on Enrollment Basic Page$")
+	  public void check_the_see_all_plan_link_on_Enrollment_Basic() {
+		  EnrollmentBasicsPage enrollmentBasicsPage=(EnrollmentBasicsPage)getLoginScenario().getBean(PageConstants.ENROLLMENT_BASICS_PAGE);
+		  enrollmentBasicsPage.clickSeePlans();
+	  }
+	  @Then("^the user hover over and select plan page link$")
+	  public void the_user_hover_over_and_select_MS_plan_page_link(DataTable givenAttributes)
+	  {
+		  List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+			Map<String, String> memberAttributesMap = new HashMap<String, String>();
+			for (int i = 0; i < memberAttributesRow.size(); i++) {
+				memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+						memberAttributesRow.get(i).getCells().get(1));
+			}
+			String plantype = memberAttributesMap.get("nextplanType");
+		  LearnAboutMedicareHomePage learnAboutMedicareHomePage=(LearnAboutMedicareHomePage)getLoginScenario().getBean(PageConstants.LEARN_ABOUT_MEDICARE_PAGE);
+		  learnAboutMedicareHomePage.hoverToPlanPage(plantype);
+	  }
+	  
+	  @Then("^the user hover over Shop for a Plan and validates zipcode component$")
+	  public void the_user_hover_over_Shop_for_a_Plan_and_validates_zipcode_component() {
+		  AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage)getLoginScenario() .getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		  if(aquisitionhomepage.checkZipCompErrorInSubNav()==true){
+			  Assert.assertTrue(true);
+		  }else
+			  Assert.fail("Zip Component not present or Error msg not shown");
+	  }
+	  
+	  @Then("^the user validate ZipCode Components on SubNav using ZipCode \"([^\"]*)\"$")
+	  public void the_user_enter_zipcode_and_go_to_Plan_Summary_Page(String zipCode){
+		  AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage)getLoginScenario() .getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		  VPPPlanSummaryPage vppPlanSummaryPage=aquisitionhomepage.checkZipCompSubNavVpp(zipCode);
+		  if(vppPlanSummaryPage!=null) {
+			  System.out.println("Vpp Plan Summary Page opened Successfully");
+			  Assert.assertTrue(true);
+		  }else
+			  Assert.fail("Error Loading in VPP Plan Summary Page");
+		  
+		  
+	  }
+	  @Then("^the user check Still have a question$")
+	  public void the_user_check_Still_have_a_question() {
+		  LearnAboutMedicareHomePage learnAboutMedicareHomePage=(LearnAboutMedicareHomePage)getLoginScenario().getBean(PageConstants.LEARN_ABOUT_MEDICARE_PAGE);
+		  learnAboutMedicareHomePage.chechStillHaveQues();
+	  }
+	  
+	 
+	  
+}
+
 
