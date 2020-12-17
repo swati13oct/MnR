@@ -3078,5 +3078,19 @@ public void user_clicks_on_continue_enrollment_button_on_the_modal() throws Thro
 				.getBean(PageConstants.PLAN_COMPARE_PAGE);
 		planComparePage.CounterDentalFlyerLink(PDFtype, DocCode);
 	}
+	
+	@When("^user removes drugs from plan card$")
+	public void user_removes_drugs_from_plan_card() {
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		plansummaryPage.removeDrugsFromPlanCard();
+	}
+
+	@When("^user removes provider from plan card$")
+	public void user_removes_provider_from_plan_card() {
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		plansummaryPage.removeProvidersFromPlanCard();
+	}
 
 }

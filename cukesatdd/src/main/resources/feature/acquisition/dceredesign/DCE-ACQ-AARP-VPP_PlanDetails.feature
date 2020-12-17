@@ -44,36 +44,33 @@ Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanDetails AARP - To test DCE - VPP Plan De
 
     @DCE_Redesign_VPP_PlanDetails_MAPD_AARP
     Examples: 
-      |	site	| zipcode |planyear	| plantype | county | isMultutiCounty | drug1     | drug2                | drug3      | drug4         | drug5            | drug6   | planname                                           |
-      |	AARP	|   90210 | future	|	MAPD     | none   | no              | meloxicam | diclofenac potassium | febuxostat | buprenorphine | fentanyl citrate | Lipitor | AARP Medicare Advantage SecureHorizons Focus (HMO) |
-      
-      @DCE_Redesign_VPP_PlanDetails_MAPD_UHC
+      | site | zipcode | planyear | plantype | county | isMultutiCounty | drug1     | drug2                | drug3      | drug4         | drug5            | drug6   | planname                                           |
+      | AARP |   90210 | future   | MAPD     | none   | no              | meloxicam | diclofenac potassium | febuxostat | buprenorphine | fentanyl citrate | Lipitor | AARP Medicare Advantage SecureHorizons Focus (HMO) |
+
+    @DCE_Redesign_VPP_PlanDetails_MAPD_UHC
     Examples: 
-      |	site	| zipcode | planyear| plantype | county | isMultutiCounty | drug1     | drug2                | drug3      | drug4         | drug5            | drug6   | planname                                           |
-      |	UHC		|   90210 | future	|	MAPD     | none   | no              | meloxicam | diclofenac potassium | febuxostat | buprenorphine | fentanyl citrate | Lipitor | AARP Medicare Advantage SecureHorizons Focus (HMO) |
+      | site | zipcode | planyear | plantype | county | isMultutiCounty | drug1     | drug2                | drug3      | drug4         | drug5            | drug6   | planname                                           |
+      | UHC  |   90210 | future   | MAPD     | none   | no              | meloxicam | diclofenac potassium | febuxostat | buprenorphine | fentanyl citrate | Lipitor | AARP Medicare Advantage SecureHorizons Focus (HMO) |
 
     @DCE_Redesign_VPP_PlanDetails_PDP_AARP
     Examples: 
-      |	site	| zipcode |planyear	| plantype | county       | isMultutiCounty | drug1     | drug2                | drug3      | drug4         | drug5            | drug6   | planname                        |
-      |	AARP	|   80002 |future		| PDP      | Adams County | yes             | meloxicam | diclofenac potassium | febuxostat | buprenorphine | fentanyl citrate | Lipitor | AARP MedicareRx Walgreens (PDP) |
-      
+      | site | zipcode | planyear | plantype | county       | isMultutiCounty | drug1     | drug2                | drug3      | drug4         | drug5            | drug6   | planname                        |
+      | AARP |   80002 | future   | PDP      | Adams County | yes             | meloxicam | diclofenac potassium | febuxostat | buprenorphine | fentanyl citrate | Lipitor | AARP MedicareRx Walgreens (PDP) |
 
     @DCE_Redesign_VPP_PlanDetails_PDP_UHC
     Examples: 
-      |	site	| zipcode | planyear| plantype | county       | isMultutiCounty | drug1     | drug2                | drug3      | drug4         | drug5            | drug6   | planname                        |
-      |	UHC		|   80002 | future	|	PDP      | Adams County | yes             | meloxicam | diclofenac potassium | febuxostat | buprenorphine | fentanyl citrate | Lipitor | AARP MedicareRx Walgreens (PDP) |  
-
+      | site | zipcode | planyear | plantype | county       | isMultutiCounty | drug1     | drug2                | drug3      | drug4         | drug5            | drug6   | planname                        |
+      | UHC  |   80002 | future   | PDP      | Adams County | yes             | meloxicam | diclofenac potassium | febuxostat | buprenorphine | fentanyl citrate | Lipitor | AARP MedicareRx Walgreens (PDP) |
 
     @DCE_Redesign_VPP_PlanDetails_SNP_AARP
     Examples: 
-      |	site	| zipcode | planyear| plantype | county       | isMultutiCounty | drug1     | drug2                | drug3      | drug4         | drug5            | drug6   | planname                                              |
-      |	AARP	|   78006 | future	|	SNP      | Bexar County | yes             | meloxicam | diclofenac potassium | febuxostat | buprenorphine | fentanyl citrate | Lipitor | UnitedHealthcare Dual Complete Choice (Regional PPO D-SNP) |
+      | site | zipcode | planyear | plantype | county       | isMultutiCounty | drug1     | drug2                | drug3      | drug4         | drug5            | drug6   | planname                                                   |
+      | AARP |   78006 | future   | SNP      | Bexar County | yes             | meloxicam | diclofenac potassium | febuxostat | buprenorphine | fentanyl citrate | Lipitor | UnitedHealthcare Dual Complete Choice (Regional PPO D-SNP) |
 
     @DCE_Redesign_VPP_PlanDetails_SNP_UHC
     Examples: 
-      |	site	| zipcode |planyear	| plantype | county       | isMultutiCounty | drug1     | drug2                | drug3      | drug4         | drug5            | drug6   | planname                                              |
-      |	UHC		|   78006 | future	| SNP      | Bexar County | yes             | meloxicam | diclofenac potassium | febuxostat | buprenorphine | fentanyl citrate | Lipitor | UnitedHealthcare Dual Complete Choice (Regional PPO D-SNP) |
-
+      | site | zipcode | planyear | plantype | county       | isMultutiCounty | drug1     | drug2                | drug3      | drug4         | drug5            | drug6   | planname                                                   |
+      | UHC  |   78006 | future   | SNP      | Bexar County | yes             | meloxicam | diclofenac potassium | febuxostat | buprenorphine | fentanyl citrate | Lipitor | UnitedHealthcare Dual Complete Choice (Regional PPO D-SNP) |
 
   @drugDetailsDCEViewPlanSummaryButton
   Scenario Outline: Test to verify the Drug cost estimator and view plan summary buttons on VPP detail page
@@ -94,39 +91,40 @@ Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanDetails AARP - To test DCE - VPP Plan De
     Then the user validates Get Started Page
     Then the user clicks on Build Drug List to navigate to Build Drug List Page
     Then the user searches and adds the following Drug to Drug List
-      | DrugName | <drug1> | 
-     Then the user clicks on Review Drug Costs to Land on Drug Details Page
-   Then the user Clicks button to VPP Plan Details Page from Drug Details Page
+      | DrugName | <drug1> |
+    Then the user clicks on Review Drug Costs to Land on Drug Details Page
+    Then the user Clicks button to VPP Plan Details Page from Drug Details Page
     Then the user validates planName matches plan Name in VPP
     Then the user verify the drug cost estimator and view plan summary on VPP detail page in AARP
     Then the user click on drug cost estimator on vpp plan detail page in AARP
     Then User validates planName matches plan Name in DCE detail page in AARP
-    
+
     @DCE_Redesign_DCE_Detail_to_Vpp_Details_MAPD
-      
-      Examples: 
-      | zipcode | plantype | county | isMultutiCounty | drug1     | drug2                | drug3      | drug4         | drug5            | drug6   | planname                                           |
-      |   90210 | MAPD     | none   | no              | meloxicam | diclofenac potassium | febuxostat | buprenorphine | fentanyl citrate | Lipitor | AARP Medicare Advantage SecureHorizons Focus (HMO) |
-      
-     @DCE_Redesign_DCE_Detail_to_Vpp_Details_PDP
     Examples: 
-      | zipcode | plantype | county       | isMultutiCounty | drug1     | drug2                | drug3      | drug4         | drug5            | drug6   | planname                        |
-      |   80002 | PDP      | Adams County | yes             | meloxicam | diclofenac potassium | febuxostat | buprenorphine | fentanyl citrate | Lipitor | AARP MedicareRx Walgreens (PDP) |
+      | zipcode | plantype | county | isMultutiCounty | drug1     | planname                                           | planyear |
+      |   90210 | MAPD     | none   | no              | meloxicam | AARP Medicare Advantage SecureHorizons Focus (HMO) | future   |
+
+    @DCE_Redesign_DCE_Detail_to_Vpp_Details_PDP
+    Examples: 
+      | zipcode | plantype | county       | isMultutiCounty | drug1     | planname                        | planyear |
+      |   80002 | PDP      | Adams County | yes             | meloxicam | AARP MedicareRx Walgreens (PDP) | future   |
 
     @DCE_Redesign_DCE_Detail_to_Vpp_Details_SNP
     Examples: 
-      | zipcode | plantype | county       | isMultutiCounty | drug1     | drug2                | drug3      | drug4         | drug5            | drug6   | planname                                              |  |
-      |   78006 | SNP      | Bexar County | yes             | meloxicam | diclofenac potassium | febuxostat | buprenorphine | fentanyl citrate | Lipitor | UnitedHealthcare Medicare Silver (Regional PPO C-SNP) |  |
-      
-     
-      @DCE_Redesign_VPPSummary_to_Vpp_Details
-     
-      Scenario Outline: Test to verify the Drug cost estimator and view plan summary are not visible when user navigate away from DCE and navigate to VPP detail page
+      | zipcode | plantype | county       | isMultutiCounty | drug1     | planname                                              | planyear |
+      |   78006 | SNP      | Bexar County | yes             | meloxicam | UnitedHealthcare Medicare Silver (Regional PPO C-SNP) | future   |
+
+  @DCE_Redesign_VPPSummary_to_Vpp_Details
+  Scenario Outline: Test to verify the Drug cost estimator and view plan summary are not visible when user navigate away from DCE and navigate to VPP detail page
     Given the user is on the AARP medicare site landing page
     When the user performs plan search using following information in the AARP site
       | Zip Code        | <zipcode>         |
       | County Name     | <county>          |
       | Is Multi County | <isMultutiCounty> |
+    And the user views the plans of the below plan type
+      | Plan Type | <plantype> |
+    And the user selects plan year
+      | Plan Year | <planyear> |
     Then the user navigates to the plan details for the given plan type in AARP site
       | Plan Type | <plantype> |
       | Plan Name | <planname> |
@@ -134,41 +132,41 @@ Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanDetails AARP - To test DCE - VPP Plan De
     Then the user validates Get Started Page
     Then the user clicks on Build Drug List to navigate to Build Drug List Page
     Then the user searches and adds the following Drug to Drug List
-      | DrugName | <drug1> |   
+      | DrugName | <drug1> |
     And clicks on Review drug cost button
     Then the user Clicks button to VPP Plan Details Page from Drug Details Page
     Then the user validates planName matches plan Name in VPP
     Then the user verify the drug cost estimator and view plan summary on VPP detail page in AARP
     Then the user click on view plan summary on vpp detail page
     Then user click on veiw plan details on summary page in AARP
+
     #Then user verifiy drug cost estomator and view plan summary is not exist in vpp detail page in ARRP
-     
-      @DCE_Redesign_VPPSummary_to_Vpp_Details_MAPD
-     
-      Examples: 
-      | zipcode | plantype | county | isMultutiCounty | drug1     | drug2                | drug3      | drug4         | drug5            | drug6   | planname                                           |
-      |   90210 | MAPD     | none   | no              | meloxicam | diclofenac potassium | febuxostat | buprenorphine | fentanyl citrate | Lipitor | AARP Medicare Advantage SecureHorizons Focus (HMO) |
-      
-       @DCE_Redesign_VPPSummary_to_Vpp_Details_PDP
-       
-        Examples: 
-      | zipcode | plantype | county       | isMultutiCounty | drug1     | drug2                | drug3      | drug4         | drug5            | drug6   | planname                        |
-      |   80002 | PDP      | Adams County | yes             | meloxicam | diclofenac potassium | febuxostat | buprenorphine | fentanyl citrate | Lipitor | AARP MedicareRx Walgreens (PDP) |
-       
-       @DCE_Redesign_VPPSummary_to_Vpp_Details_SNP
-     
-       Examples: 
-      | zipcode | plantype | county       | isMultutiCounty | drug1     | drug2                | drug3      | drug4         | drug5            | drug6   | planname                                              |  |
-      |   78006 | SNP      | Bexar County | yes             | meloxicam | diclofenac potassium | febuxostat | buprenorphine | fentanyl citrate | Lipitor | UnitedHealthcare Medicare Silver (Regional PPO C-SNP) |  |
-      
-      
-      @noPrescriptionCoverage @F492445
-      Scenario Outline: Test to verify No Prescription Coverage for Pharmacies on DCE Details Page
-   Given the user is on the AARP medicare site landing page
+    @DCE_Redesign_VPPSummary_to_Vpp_Details_MAPD
+    Examples: 
+      | zipcode | plantype | county | isMultutiCounty | drug1     | planname                                           | planyear |
+      |   90210 | MAPD     | none   | no              | meloxicam | AARP Medicare Advantage SecureHorizons Focus (HMO) | future   |
+
+    @DCE_Redesign_VPPSummary_to_Vpp_Details_PDP
+    Examples: 
+      | zipcode | plantype | county       | isMultutiCounty | drug1     | planname                        | planyear |
+      |   80002 | PDP      | Adams County | yes             | meloxicam | AARP MedicareRx Walgreens (PDP) | future   |
+
+    @DCE_Redesign_VPPSummary_to_Vpp_Details_SNP
+    Examples: 
+      | zipcode | plantype | county       | isMultutiCounty | drug1     | planname                                              | planyear |
+      |   78006 | SNP      | Bexar County | yes             | meloxicam | UnitedHealthcare Medicare Silver (Regional PPO C-SNP) | future   |
+
+  @noPrescriptionCoverage @F492445
+  Scenario Outline: Test to verify No Prescription Coverage for Pharmacies on DCE Details Page
+    Given the user is on the AARP medicare site landing page
     When the user performs plan search using following information in the AARP site
       | Zip Code        | <zipcode>         |
       | County Name     | <county>          |
       | Is Multi County | <isMultutiCounty> |
+    And the user views the plans of the below plan type
+      | Plan Type | <plantype> |
+    And the user selects plan year
+      | Plan Year | <planyear> |
     Then the user navigates to the plan details for the given plan type in AARP site
       | Plan Type | <plantype> |
       | Plan Name | <planname> |
@@ -176,38 +174,37 @@ Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanDetails AARP - To test DCE - VPP Plan De
     Then the user validates Get Started Page
     Then the user clicks on Build Drug List to navigate to Build Drug List Page
     Then the user searches and adds the following Drug to Drug List
-      | DrugName | <drug1> | 
-     And clicks on Review drug cost button  
+      | DrugName | <drug1> |
+    And clicks on Review drug cost button
     #Then the user Clicks button to VPP Plan Details Page from Drug Details Page
-     And user clicks on change pharmacy link from details page in AARP
-     Then user change the pharmacy to view no prescription coverage
-     #Then user validate the monthly premium value on detail page 
-     
-     @noPrescriptionCoverge_MAPD
-     
-      Examples: 
-      | zipcode | plantype | county       | isMultutiCounty | drug1     | drug2                | drug3      | drug4         | drug5            | drug6   | planname                                              |  |
-      |   78006 | MAPD     | Bexar County | yes             | Lipitor | diclofenac potassium | febuxostat | buprenorphine | fentanyl citrate | Lipitor |  AARP Medicare Advantage Choice (PPO)  |  |
-      
-   # @noPrescriptionCoverge_SNP
-    #  Examples: 
-     # | zipcode | plantype | county       | isMultutiCounty | drug1     | drug2                | drug3      | drug4         | drug5            | drug6   | planname                                              |  |
-      #|   78006 | SNP      | Bexar County | yes             | Lipitor | diclofenac potassium | febuxostat | buprenorphine | fentanyl citrate | Lipitor | UnitedHealthcare Dual Complete (HMO D-SNP) |  |
-      
-     # @noPrescriptionCoverge_PDP
-    #  Examples: 
-     # | zipcode | plantype | county       | isMultutiCounty | drug1     | drug2                | drug3      | drug4         | drug5            | drug6   | planname                                              |  |
-      #|   78006 | PDP      | Bexar County | yes             | Lipitor | diclofenac potassium | febuxostat | buprenorphine | fentanyl citrate | Lipitor |  AARP MedicareRx Walgreens (PDP) |  |
-      
-     
-     
-      @dceRedesignExtraHelpAlertDetailPage @F478554 @F492102
-   Scenario Outline: Test to Verify that Extra help Warning messgae on drug detail page
+    And user clicks on change pharmacy link from details page in AARP
+    Then user change the pharmacy to view no prescription coverage
+
+    #Then user validate the monthly premium value on detail page
+    @noPrescriptionCoverge_MAPD
+    Examples: 
+      | zipcode | plantype | county       | isMultutiCounty | drug1   | planname                             | planyear |
+      |   78006 | MAPD     | Bexar County | yes             | Lipitor | AARP Medicare Advantage Choice (PPO) | future   |
+
+  # @noPrescriptionCoverge_SNP
+  #  Examples:
+  # | zipcode | plantype | county       | isMultutiCounty | drug1     | drug2                | drug3      | drug4         | drug5            | drug6   | planname                                              | planyear |
+  #|   78006 | SNP      | Bexar County | yes             | Lipitor | diclofenac potassium | febuxostat | buprenorphine | fentanyl citrate | Lipitor | UnitedHealthcare Dual Complete (HMO D-SNP) | future |
+  # @noPrescriptionCoverge_PDP
+  #  Examples:
+  # | zipcode | plantype | county       | isMultutiCounty | drug1     | drug2                | drug3      | drug4         | drug5            | drug6   | planname                                              | planyear |
+  #|   78006 | PDP      | Bexar County | yes             | Lipitor | diclofenac potassium | febuxostat | buprenorphine | fentanyl citrate | Lipitor |  AARP MedicareRx Walgreens (PDP) | future |
+  @dceRedesignExtraHelpAlertDetailPage @F478554 @F492102
+  Scenario Outline: Test to Verify that Extra help Warning messgae on drug detail page
     Given the user is on the AARP medicare site landing page
     When the user performs plan search using following information in the AARP site
       | Zip Code        | <zipcode>         |
       | County Name     | <county>          |
       | Is Multi County | <isMultutiCounty> |
+    And the user views the plans of the below plan type
+      | Plan Type | <plantype> |
+    And the user selects plan year
+      | Plan Year | <planyear> |
     Then the user navigates to the plan details for the given plan type in AARP site
       | Plan Type | <plantype> |
       | Plan Name | <planname> |
@@ -379,12 +376,12 @@ Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanDetails AARP - To test DCE - VPP Plan De
     And the user verifies the catastrophic coverage message
       | catastrophicCoverage | <catastrophicCoverageMessage> |
 
-    @dceRedesignExtraHelpAlertDetailPage_AARP
+    @dceRedesignExtraHelpAlertDetailPage_AARP @extraHelpSNPAARP
     Examples: 
       | site | zipcode | plantype | county       | isMultutiCounty | drug1 | planyear | planname                                   | coverageGapMessage                                                           | catastrophicCoverageMessage                                                           |
       | AARP |   78006 | SNP      | Bexar County | yes             | Emsam | future   | UnitedHealthcare Dual Complete (HMO D-SNP) | During the Coverage Gap Stage, the plan pays all of the cost for your drugs. | During the Catastrophic Coverage Stage, the plan pays all of the cost for your drugs. |
 
-    @dceRedesignExtraHelpAlertDetailPage_UHC
+    @dceRedesignExtraHelpAlertDetailPage_UHC @extraHelpDSNUHC
     Examples: 
       | site | zipcode | plantype | county       | isMultutiCounty | drug1 | planyear | planname                                   | coverageGapMessage                                                           | catastrophicCoverageMessage                                                           |
       | UHC  |   78006 | SNP      | Bexar County | yes             | Emsam | future   | UnitedHealthcare Dual Complete (HMO D-SNP) | During the Coverage Gap Stage, the plan pays all of the cost for your drugs. | During the Catastrophic Coverage Stage, the plan pays all of the cost for your drugs. |
@@ -413,7 +410,7 @@ Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanDetails AARP - To test DCE - VPP Plan De
     Then the user verify the Retail chain pharmacy on detail page
     And user clicks on change pharmacy link from details page
     Then user clicks on Keep Using This Pharmacy on change pharmacy page
-    Then User validate Walgreens pharmacy on detail page
+    Then user validate "WALGREENS" pharmacy on detail page
 
     @dceRedesignDrugDetailsDefaultPharmacy_MAPD_AARP @drugDetailschangePharmacyAARP
     Examples: 
@@ -501,7 +498,7 @@ Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanDetails AARP - To test DCE - VPP Plan De
       |   53503 | No              | Iowa County | MAPD     | UnitedHealthcare Medicare Advantage Open (PPO) | $47            | $564          | current  |
 
   @dceSwitchtoGenericNBA @F505210 @decRelease
-  Scenario Outline: Test to verify Switch to generic NBA on DCE Details Page 
+  Scenario Outline: Test to verify Switch to generic NBA on DCE Details Page
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     When the user performs plan search using following information
@@ -524,12 +521,12 @@ Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanDetails AARP - To test DCE - VPP Plan De
     Then user verify and click on switch to generic NBA on drug detail page
     Then verify drug is switched to generic on detail page
 
-    @dceSwitchtoGenericNBA_MAPD_AARP
+    @dceSwitchtoGenericNBA_MAPD_AARP  @switchtoGenericAARP
     Examples: 
       | site | zipcode | plantype | county       | isMultutiCounty | drug1   | drug2   | planname                             |
       | AARP |   78006 | MAPD     | Bexar County | yes             | Lipitor | orfadin | AARP Medicare Advantage Choice (PPO) |
 
-    @dceSwitchtoGenericNBA_MAPD_UHC
+    @dceSwitchtoGenericNBA_MAPD_UHC @switchtoGenericUHC
     Examples: 
       | site | zipcode | plantype | county       | isMultutiCounty | drug1   | drug2   | planname                             |
       | UHC  |   78006 | MAPD     | Bexar County | yes             | Lipitor | orfadin | AARP Medicare Advantage Choice (PPO) |
@@ -627,6 +624,7 @@ Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanDetails AARP - To test DCE - VPP Plan De
     Then the user searches and adds the following Drug to Drug List
       | DrugName | <drug1> |
     Then the user clicks on Review Drug Costs to Land on Drug Details Page
+    When user clicks on change pharmacy link from details page
     Then user verify details page change pharmacy modal
     When user selects Preferred mail order pharmacy from drug details page
     Then the message "OptumRx Home Delivery only provides 90-day refill for your drugs." should be displayed on change pharmacy modal from drug detail page
@@ -647,10 +645,10 @@ Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanDetails AARP - To test DCE - VPP Plan De
 
     @drugDetailPharmacyFunctionality_AARP @drugDetailschangePharmacyAARP
     Examples: 
-      | site | zipcode | plantype | county | isMultutiCounty | drug1     | zipCode1 | zipCode2 | drug4         | drug5            | drug6   | planname                                           |
-      | AARP |   90001 | MAPD     | none   | no              | meloxicam |    96799 |    78456 | buprenorphine | fentanyl citrate | Lipitor | AARP Medicare Advantage SecureHorizons Focus (HMO) |
+      | site | zipcode | plantype | county | isMultutiCounty | drug1     | zipCode1 | zipCode2 | planname                                           |
+      | AARP |   90001 | MAPD     | none   | no              | meloxicam |    96799 |    78456 | AARP Medicare Advantage SecureHorizons Focus (HMO) |
 
-    @drugDetailPharmacyFunctionality_AARP_UHC @drugDetailschangePharmacyAARP
+    @drugDetailPharmacyFunctionality_UHC @drugDetailschangePharmacyUHC
     Examples: 
       | site | zipcode | plantype | county | isMultutiCounty | drug1     | zipCode1 | zipCode2 | drug4         | drug5            | drug6   | planname                                           |
       | UHC  |   90001 | MAPD     | none   | no              | meloxicam |    96799 |    78456 | buprenorphine | fentanyl citrate | Lipitor | AARP Medicare Advantage SecureHorizons Focus (HMO) |
@@ -684,7 +682,7 @@ Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanDetails AARP - To test DCE - VPP Plan De
     Then no results message should be displayed from drug details
       | NoResultsMessage | <message> |
 
-    @dCERedesign_ChangePharmacyDetailsNoResults_AARP @drugDetailschangePharmacyAARP
+    @dCERedesign_ChangePharmacyDetailsNoResults_AARP111 @drugDetailschangePharmacyAARP
     Examples: 
       | site | zipcode | plantype | planyear | county | isMultutiCounty | drug1     | zipCode1 | zipCode2 | message                                                                                                    | planname                                           |
       | AARP |   90001 | MAPD     | future   | none   | no              | meloxicam |    78006 |    78456 | Prescription drug home delivery is available through OptumRx. Learn more about OptumRx Mail Order Pharmacy | AARP Medicare Advantage SecureHorizons Focus (HMO) |
@@ -702,10 +700,14 @@ Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanDetails AARP - To test DCE - VPP Plan De
       | Zip Code        | <zipcode>         |
       | County Name     | <county>          |
       | Is Multi County | <isMultutiCounty> |
+    And the user views the plans of the below plan type
+      | Plan Type | <plantype> |
+    And the user selects plan year
+      | Plan Year | <planyear> |
     Then the user navigates to the plan details for the given plan type
       | Plan Type | <plantype> |
       | Plan Name | <planname> |
-    And I access the DCE Redesign from Plan Details
+    And I access the DCE Redesign from Plan Details for the plan
     Then the user validates Get Started Page
     Then the user clicks on Build Drug List to navigate to Build Drug List Page
     Then the user searches and adds the following Drug to Drug List
@@ -723,18 +725,18 @@ Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanDetails AARP - To test DCE - VPP Plan De
 
     @dCERedesign_PlanSave_PDP_AARP @dceDrugDetailSaveAARP
     Examples: 
-      | site | zipcode | plantype | planyear | county       | isMultutiCounty | drug1   | planname                        |
-      | AARP |   80002 | PDP      | future   | Adams County | yes             | Lipitor | AARP MedicareRx Walgreens (PDP) |
+      | site | zipcode | plantype | planyear | county       | isMultutiCounty | drug1   | planname                        | planyear |
+      | AARP |   80002 | PDP      | future   | Adams County | yes             | Lipitor | AARP MedicareRx Walgreens (PDP) | future   |
 
     @dCERedesign_PlanSave_PDP_AARP @dceDrugDetailSaveAARP
     Examples: 
-      | site | zipcode | plantype | planyear | county       | isMultutiCounty | drug1   | planname                                              | tabName                       |
-      | AARP |   78006 | SNP      | future   | Bexar County | yes             | Lipitor | UnitedHealthcare Medicare Silver (Regional PPO C-SNP) | Medical Benefits and Programs |
+      | site | zipcode | plantype | planyear | county | isMultutiCounty | drug1   | planname                                   | planyear |
+      | AARP |   10001 | SNP      | future   | none   | no              | Lipitor | UnitedHealthcare Dual Complete (HMO D-SNP) | future   |
 
     @dCERedesign_PlanSave_MAPD_UHC @dceDrugDetailSaveUHC
     Examples: 
-      | site | zipcode | plantype | county | isMultutiCounty | drug1     | planname                                       |
-      | UHC  |   90210 | MAPD     | none   | no              | meloxicam | AARP Medicare Advantage Freedom Plus (HMO-POS) |
+      | site | zipcode | plantype | county | isMultutiCounty | drug1     | planname                                       | planyear |
+      | UHC  |   90210 | MAPD     | none   | no              | meloxicam | AARP Medicare Advantage Freedom Plus (HMO-POS) | future   |
 
     @dCERedesign_PlanSave_PDP_UHC @dceDrugDetailSaveUHC
     Examples: 
@@ -774,10 +776,10 @@ Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanDetails AARP - To test DCE - VPP Plan De
 
     @dce_Redesign_VPP_PlanDetails_Pharmacy_PDP_AARP @drugDetailschangePharmacyAARP
     Examples: 
-      | site | zipcode | planyear | planyear | plantype | county       | isMultutiCounty | drug1     | zipCode1 | message                                                                                                    | planyear | planname                        |
-      | AARP |   80002 | current  | future   | PDP      | Adams County | yes             | meloxicam |    78006 | Prescription drug home delivery is available through OptumRx. Learn more about OptumRx Mail Order Pharmacy | future   | AARP MedicareRx Walgreens (PDP) |
+      | site | zipcode | planyear | planyear | plantype | county       | isMultutiCounty | drug1     | zipCode1 | planyear | planname                        |
+      | AARP |   80002 | current  | future   | PDP      | Adams County | yes             | meloxicam |    78006 | future   | AARP MedicareRx Walgreens (PDP) |
 
     @dce_Redesign_VPP_PlanDetails_Pharmacy_PDP_UHC @drugDetailschangePharmacyAARP
     Examples: 
-      | site | zipcode | planyear | planyear | plantype | county       | isMultutiCounty | drug1     | zipCode1 | message                                                                                                    | planyear | planname                        |
-      | UHC  |   80002 | current  | future   | PDP      | Adams County | yes             | meloxicam |    78006 | Prescription drug home delivery is available through OptumRx. Learn more about OptumRx Mail Order Pharmacy | future   | AARP MedicareRx Walgreens (PDP) |
+      | site | zipcode | planyear | planyear | plantype | county       | isMultutiCounty | drug1     | zipCode1 | planyear | planname                        |
+      | UHC  |   80002 | current  | future   | PDP      | Adams County | yes             | meloxicam |    78006 | future   | AARP MedicareRx Walgreens (PDP) |

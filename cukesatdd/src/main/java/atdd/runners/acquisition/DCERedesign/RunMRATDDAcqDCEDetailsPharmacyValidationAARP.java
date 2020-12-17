@@ -10,7 +10,7 @@ import com.github.mkolisnyk.cucumber.runner.ExtendedCucumberOptions;
 import cucumber.api.CucumberOptions;
 
 /**
- * this file is to run test cases for RunMRATDDAcqDCEDetailsPreferredCopayAARP - Scenario for DCE Details Page copay section Preferred Pharmacy copays validation
+ * this file is to run test cases for RunMRATDDAcqDCEDetailsPharmacyValidationAARP - Scenario for DCE Details Page pharmacy validation
  */
 @RunWith(ExtendedCucumber.class)
 @ExtendedCucumberOptions(retryCount=1,screenShotSize="", screenShotLocation="/screenshots/",jsonReport = "target/cucumber-RunMRATDDAcqDCEDetailsPharmacyValidationAARP.json",detailedReport = true,
