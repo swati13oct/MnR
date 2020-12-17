@@ -257,7 +257,7 @@ public class DrugDetailsPage extends UhcDriver {
 	
 	//@FindBy(xpath = "//button[contains(@aria-label,'Select ROCK PHARMACY -')]")
 	
-	@FindBy(xpath ="//*[@id='selectPharmacyBtn2']")
+	@FindBy(xpath ="//*[@id='selectPharmacyBtn3']")
 	public WebElement selectRockPharm;
 	
 	@FindBy(xpath = "//*[@class='uhc-button__text'][contains(text(),'Save and Update Drug Costs')]")
@@ -403,7 +403,7 @@ public class DrugDetailsPage extends UhcDriver {
 	public void validatePlanName(String planName) {
 
 		System.out.println("Plan Name : "+planName);
-		WebElement PlanNameElement = driver.findElement(By.xpath("//h1[contains(text(), '"+planName+"')]"));
+		WebElement PlanNameElement = driver.findElement(By.xpath("//h2[contains(text(), '"+planName+"')]"));
 		if(validateNew(PlanNameElement)) {
 			Assert.assertTrue("Plan Name is correct for Drug Details Page"+PlanNameElement.getText(), true);
 		}
