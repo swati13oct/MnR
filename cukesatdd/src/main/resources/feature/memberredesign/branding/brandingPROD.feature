@@ -21,7 +21,7 @@ Feature: 1.14 Member Branding functionality
       | TID   | planType | memberType              | copayCategory | logoToBeDisplayedOnDashboard | logoToBeDisplayedOnSecondaryPage | Test Case                                             | username | password | member                |
       | 15146 | MAPD     | AARPIndividual_Branding | NON LIS       | AARP                         | dam/UCP/Images/logo/AARP.svg     | TC_01_Branding for AARP Plan member - Federal Member  | jkuma14  | Brock@04 | skho@roadrunner.com   |
       | 15147 | SHIP     | SHIPOnly_Branding       | NON LIS       | AARP                         | dam/UCP/Images/logo/AARP.svg     | TC_02_ Branding  for AARP Plan member - SHIP   Member | jkuma14  | Brock@04 | Pramila1946           |
-      | 15153 | MEDICA   | Medica_Branding         | NON LIS       | MEDICA                       | dam/UCP/Images/logo/MEDICA.svg   | TC_03_ Branding for Branding for Medica Plan member   | jkuma14  | Brock@04 | SUSICHAPMAN@GMAIL.COM |
+      | 15153 | MEDICA   | Medica_Branding         | NON LIS       | MEDICA                       | dam/UCP/Images/logo/MEDICA.svg   | TC_03_ Branding for Branding for Medica Plan member   | jkuma14  | Brock@04 | TCZUNIGA52 |
 
 
   @regressionMemberPROD2

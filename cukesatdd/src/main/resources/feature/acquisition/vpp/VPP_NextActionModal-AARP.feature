@@ -181,7 +181,7 @@ Feature: 1.03-ACQ-Next Action Modal on vpp flow AARP
     When user clicks on Find My Doctor button
     When user selects a provider and retuns to VPP page
     Then user should be able to see the NBA modal to Enroll Plan on the VPP summary page
-    When user clicks on Continue Enrollment button on summary page
+    When user clicks on Select a plan button on NBA
     Then user should be able to see the Select Plan for Enroll Modal with saved plans
       | Test Plans | <testPlans> |
     When user clicks on Enroll in plan button on the select plan modal on vpp summary page
@@ -215,7 +215,7 @@ Feature: 1.03-ACQ-Next Action Modal on vpp flow AARP
     When user clicks on Find My Doctor button
     When user selects a provider and retuns to VPP page
     Then user should be able to see the NBA modal to Enroll Plan on the VPP summary page
-    When user clicks on Continue Enrollment button on summary page
+    When user clicks on Select a plan button on NBA
     Then user should be able to see the Select Plan for Enroll Modal with all plans on vpp summary page
     When user clicks on Enroll in plan button on the select plan modal on vpp summary page
     Then user should be navigated to OLE page
@@ -318,7 +318,7 @@ Feature: 1.03-ACQ-Next Action Modal on vpp flow AARP
     Then user should be able to see Medicare Advantage plan by default
     When user clicks on Return to plan summary page link in DCE
     Then user should be able to see the NBA modal to Enroll Plan on the VPP summary page
-    When user clicks on Continue Enrollment button on summary page
+   When user clicks on Select a plan button on NBA
     Then user should be able to see the Select Plan for Enroll Modal with saved plans
       | Test Plans | <testPlans> |
     When user clicks on Enroll in plan button on the select plan modal on vpp summary page
@@ -349,7 +349,7 @@ Feature: 1.03-ACQ-Next Action Modal on vpp flow AARP
     Then user should be able to see Medicare Advantage plan by default
     When user clicks on Return to plan summary page link in DCE
     Then user should be able to see the NBA modal to Enroll Plan on the VPP summary page
-    When user clicks on Continue Enrollment button on summary page
+    When user clicks on Select a plan button on NBA
     Then user should be able to see the Select Plan for Enroll Modal with all plans on vpp summary page
     When user clicks on Enroll in plan button on the select plan modal on vpp summary page
     Then user should be navigated to OLE page
