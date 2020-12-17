@@ -280,6 +280,7 @@ public class ProviderSearchPageMobile extends UhcDriver {
 			saveBtn2.click();
 		}
 		threadsleep(10);
+		scrollToView(providerNameText);
 		validateNew(providerNameText);
 		String providerSaved = providerNameText.getText().trim();
 		System.out.println("Provider Name is : " + providerSaved);

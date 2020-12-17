@@ -140,7 +140,7 @@ public class PlanRecommendationEngineLandingAndZipcodeMobilePages extends UhcDri
 		System.out.println("Validating Title: ");
 		//String preBreadcrumbs = (driver.findElement(By.cssSelector("div.breadcrumb"))).getText();
 		//Assert.assertTrue(preBreadcrumbs.contains("Home / Plan Recommendation Engine"));
-		String ExpectedTitle = "plan";
+		String ExpectedTitle = "Get Help Finding a Plan";
 		validateNew(landingpageHeader, 30);
 		String ActualTitle = landingpageHeader.getText();
 		System.out.println(ActualTitle.equalsIgnoreCase(ExpectedTitle));

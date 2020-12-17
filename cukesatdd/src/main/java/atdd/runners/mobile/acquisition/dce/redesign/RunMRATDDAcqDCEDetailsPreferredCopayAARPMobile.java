@@ -10,16 +10,16 @@ import com.github.mkolisnyk.cucumber.runner.ExtendedCucumberOptions;
 import cucumber.api.CucumberOptions;
 
 /**
- * this file is to run test cases for RunMRATDDAcqDCEDetailsPreferredCopayAARP - Scenario for DCE Details Page copay section Preferred Pharmacy copays validation
+ * this file is to run test cases for RunMRATDDAcqDCEDetailsPreferredCopayAARPMobile - Scenario for DCE Details Page copay section Preferred Pharmacy copays validation
  */
 @RunWith(ExtendedCucumber.class)
 @ExtendedCucumberOptions(retryCount=1,screenShotSize="", screenShotLocation="/screenshots/",
-jsonReport = "target/cucumber-RunMRATDDAcqDCEDetailsPreferredCopayAARP.json",detailedReport = true,
+jsonReport = "target/cucumber-RunMRATDDAcqDCEDetailsPreferredCopayAARPMobile.json",detailedReport = true,
  detailedAggregatedReport = true, overviewReport = true, toPDF = true, 
- outputFolder = "target/RunMRATDDAcqDCEDetailsPreferredCopayAARP")
+ outputFolder = "target/RunMRATDDAcqDCEDetailsPreferredCopayAARPMobile")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.mobile.acquisition" }, 
 features = { "src/main/resources/feature/mobile/acquisition/dceredesign" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcqDCEDetailsPreferredCopayAARP.json" }, 
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcqDCEDetailsPreferredCopayAARPMobile.json" }, 
 tags = { "@DCE_DrugDetailsCopay_Preferred_AARP" }, dryRun=false)
 
 public class RunMRATDDAcqDCEDetailsPreferredCopayAARPMobile {
