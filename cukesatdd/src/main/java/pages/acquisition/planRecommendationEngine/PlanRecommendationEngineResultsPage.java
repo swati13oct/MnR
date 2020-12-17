@@ -288,6 +288,7 @@ public class PlanRecommendationEngineResultsPage extends UhcDriver {
 	private List<WebElement> SNPPlansSaveIcon;
 	
 	@FindBy(css = "#pop-btn-1 span")
+	//	@FindBy(css = ".modal-footer #popupClose")
 	private WebElement keepshoppingPlansBtn;
 	
 	@FindBy(css = "#pop-btn-2 span")
@@ -1614,8 +1615,8 @@ public String savingplans(WebElement plan, WebElement saveplan) {
 	String save = saveplan.getText().trim();
 	if (save.equalsIgnoreCase("Save") || save.equalsIgnoreCase("Save Plan")) { 
 		threadsleep(3000);
-//		saveplan.click();
-		jsClickNew(saveplan);
+		saveplan.click();
+//		jsClickNew(saveplan);
 	}
 	threadsleep(5000);
 	return exceptedplanName;
