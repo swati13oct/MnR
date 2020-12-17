@@ -73,7 +73,7 @@ public class VisitorProfileMobileStepDefinition {
 					givenAttributesRow.get(i).getCells().get(1));
 		}
 		String savedPlanNames = givenAttributesMap.get("Test Plans");
-		VisitorProfilePageMobile visitorProfile = (VisitorProfilePageMobile) getLoginScenario().getBean(PageConstants.VISITOR_PROFILE_PAGE);
+		pages.mobile.acquisition.ulayer.VisitorProfilePageMobile visitorProfile = (pages.mobile.acquisition.ulayer.VisitorProfilePageMobile) getLoginScenario().getBean(PageConstants.VISITOR_PROFILE_PAGE);
 		visitorProfile.deletePlans(savedPlanNames);
 	}
 	

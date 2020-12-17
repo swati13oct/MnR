@@ -1036,7 +1036,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 			System.out.println("PDP Plan Type Clicked");
 			validateNew(planListContainer, 30);
 		} else if (planType.equalsIgnoreCase("MA") || planType.equalsIgnoreCase("MAPD")) {
-			int maPlans = Integer.valueOf(maPlansCount.getText().trim().replace(" Plans", ""));
+			int maPlans = Integer.valueOf(maPlansCount.getText().trim().replace("Plans", ""));
 			if (maPlans == 0) {
 				jsClickNew(maPlansViewLink);
 				sleepBySec(2);
