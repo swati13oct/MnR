@@ -14,7 +14,7 @@ import cucumber.api.CucumberOptions;
 @ExtendedCucumberOptions(retryCount=0,screenShotSize="", screenShotLocation="/screenshots/",jsonReport = "target/cucumber- RunMRATDDAcquisitionSitesearchShop2UHC.json",detailedReport = true,
  detailedAggregatedReport = true, overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDAcquisitionSitesearchShop2UHC")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.acquisition" }, features = { "src/main/resources/feature/acquisition/Sitesearch/" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber- RunMRATDDAcquisitionSitesearchShop2UHC.json" }, tags = { " @SiteSearchShop2_UHC"})
+		"pretty", "html:reports/test-report", "json:target/cucumber- RunMRATDDAcquisitionSitesearchShop2UHC.json" }, tags = { "@SiteSearchShop2_UHC"})
 
 public class RunMRATDDAcquisitionSitesearchShop2UHC { 
  
