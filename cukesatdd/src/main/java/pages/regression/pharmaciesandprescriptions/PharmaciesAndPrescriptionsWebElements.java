@@ -472,7 +472,7 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	@FindBy(xpath = "//*[contains(text(),'1-800-721-0627')]")
 	protected WebElement technicalSupportNumber;
 
-	@FindBy(xpath = "//*[contains(text(),'1-866-255-4835')]")
+	@FindBy(xpath = "//*[contains(text(),'1-844-876-6177')]")
 	protected WebElement planSupportNumber;
 
 	@FindBy(xpath = "//*[@id='needhelpsectioncontactus']/div/section/div/div[2]/div/div/div[1]/div/div/p[3]")
@@ -1347,7 +1347,7 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	public boolean validateNeedHelpsPhoneNumbers() {
 
 		String techNumber="1-800-721-0627";
-		String planNumber="1-866-255-4835";
+		String planNumber="1-844-876-6177";
 
 		if (techNumber.equals(technicalSupportNumber.getText()) && planNumber.equals(planSupportNumber.getText())) {
 
