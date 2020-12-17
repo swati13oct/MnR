@@ -14,11 +14,11 @@ import cucumber.api.CucumberOptions;
  */
 @RunWith(ExtendedCucumber.class)
 @ExtendedCucumberOptions(retryCount=1,screenShotSize="", screenShotLocation="/screenshots/",
-jsonReport = "target/cucumber-RunMRATDDAcqDCEDetailsStandardCopayAARP.json",detailedReport = true,
- detailedAggregatedReport = true, overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDAcqDCEDetailsStandardCopayAARP")
+jsonReport = "target/cucumber-RunMRATDDAcqDCEDetailsStandardCopayAARPMobile.json",detailedReport = true,
+ detailedAggregatedReport = true, overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDAcqDCEDetailsStandardCopayAARPMobile")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.mobile.acquisition" }, features = { "src/main/resources/feature/mobile/acquisition/dceredesign" }, 
 plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcqDCEDetailsStandardCopayAARP.json" }, 
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcqDCEDetailsStandardCopayAARPMobile.json" }, 
 tags = { "@DCE_DrugDetailsCopay_Standard_AARP" }, dryRun=false)
 
 public class RunMRATDDAcqDCEDetailsStandardCopayAARPMobile {
