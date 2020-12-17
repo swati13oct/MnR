@@ -176,6 +176,43 @@ public class OLEconfirmationPage extends UhcDriver{
 					   gpsData.put("PD Group Number", secondaryGroup); 
 					   String secondaryMemberNumber = rs.getString("SECONDARY_RX_ID");
 					   gpsData.put("PD Member Number", secondaryMemberNumber); 
+					   
+					/*   //-----------Adding for CSNP----------------//
+					   String otherCoverageName = rs.getString("ASMENT_DIAB1_DOC_INFORMED_DIAB");
+					   gpsData.put("Prescription Name", otherCoverageName); 
+					     String secondaryGroup = rs.getString("ASMENT_DIAB2_PRESCRIBED_INSULN");
+					   gpsData.put("PD Group Number", secondaryGroup); 
+					   String secondaryMemberNumber = rs.getString("CHRONIC_AUTH_HEART_FAILURE");
+					   gpsData.put("PD Member Number", secondaryMemberNumber); 
+					   String otherCoverageName = rs.getString("ASMENT_LUNG1_BRONC_EMPH_ASTHMA");
+					   gpsData.put("Prescription Name", otherCoverageName); 
+					     String secondaryGroup = rs.getString("ASMENT_HEART2_CARDC_BYPASS");
+					   gpsData.put("PD Group Number", secondaryGroup); 
+					   String secondaryMemberNumber = rs.getString("CHRONIC_AUTH_VASCULAR_DISEASE");
+					   gpsData.put("PD Member Number", secondaryMemberNumber); 
+					   String otherCoverageName = rs.getString("ASMENT_HEART1_HEART_ATTACK");
+					   gpsData.put("Prescription Name", otherCoverageName); 
+					     String secondaryGroup = rs.getString("ASMENT_HEART10_ANGINA");
+					   gpsData.put("PD Group Number", secondaryGroup); 
+					   String secondaryMemberNumber = rs.getString("ASMENT_HBP2_MEDICATION_FOR_HBP");
+					   gpsData.put("PD Member Number", secondaryMemberNumber); 
+					   String otherCoverageName = rs.getString("ASMENT_HEART7_PACEMKR_R_DEFIB");
+					   gpsData.put("Prescription Name", otherCoverageName); 
+					     String secondaryGroup = rs.getString("ASMENT_HEART3_ANGIOPLASTY");
+					   gpsData.put("PD Group Number", secondaryGroup); 
+					   String secondaryMemberNumber = rs.getString("ASMENT_SIGN_PRESENCE_ENROLLEE");
+					   gpsData.put("PD Member Number", secondaryMemberNumber); 
+					   
+					   String secondaryMemberNumber = rs.getString("DO_YOU_HAVE_A_CHRONIC_ILLNESS");
+					   gpsData.put("PD Member Number", secondaryMemberNumber); 
+					   String otherCoverageName = rs.getString("CHRONIC_PHYSICIAN_NAME");
+					   gpsData.put("Prescription Name", otherCoverageName); 
+					     String secondaryGroup = rs.getString("CHRONIC_PHYSICIAN_PHONE_NUM");
+					   gpsData.put("PD Group Number", secondaryGroup); 
+					   String secondaryMemberNumber = rs.getString("ASMENT_FULL_ADDR_FOR_PHYSICIAN");
+					   gpsData.put("PD Member Number", secondaryMemberNumber); 
+					   
+					*/   //------------------------------------------//
 					
 					   //   PD Member Number
 						   

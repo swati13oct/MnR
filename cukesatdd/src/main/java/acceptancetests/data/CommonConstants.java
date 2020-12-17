@@ -879,14 +879,7 @@ public class CommonConstants {
 	//public static final String CONNECTION_URL = "jdbc:oracle:thin:qaread/testreadonly@orass0464:1521/gpsst04svc_trn.uhc.com";
 	
 	public static final String CONNECTION_URL = "jdbc:oracle:thin:qaread/testreadonly@dbslt0102:1521/gpsts18";
-	public static final String GPS_QUERY = "Select MEDICAID_IND,\n" + 
-			"MEDICAID_NUMBER,\n" + 
-			"MAILING_ZIP_CD,\n" + 
-			"MAILING_STATE_CD,\n" + 
-			"MAILING_CITY,\n" + 
-			"MAILING_ADDRESS_LINE_2,\n" + 
-			"MAILING_ADDRESS_LINE_1,\n" + 
-			"FIRST_NAME,\n" + 
+	public static final String GPS_QUERY = "Select FIRST_NAME,\n" + 
 			"MIDDLE_INITIAL,\n" + 
 			"LAST_NAME,\n" + 
 			"DATE_OF_BIRTH,\n" + 
@@ -896,28 +889,84 @@ public class CommonConstants {
 			"CITY,\n" + 
 			"STATE_CD,\n" + 
 			"ZIP_CD,\n" + 
+			"MAILING_ADDRESS_LINE_1,\n" + 
+			"MAILING_ADDRESS_LINE_2,\n" + 
+			"MAILING_CITY,\n" + 
+			"MAILING_STATE_CD,\n" + 
+			"MAILING_ZIP_CD,\n" + 
 			"DAYTIME_PHONE_NUM,\n" + 
 			"EVENING_PHONE_NUM,\n" + 
+			"MOBILE_PHONE_NUM,\n" + 
+			"'N/A',\n" + 
 			"PAPERLESS_PREFERENCE_IND,\n" + 
 			"EMAIL,\n" + 
 			"LANGUAGE_PREFERENCE,\n" + 
 			"MEDICARE_NUMBER,\n" + 
+			"SSN,\n" + 
 			"MEDICARE_PART_A_EFFECTIVE_DATE,\n" + 
 			"MEDICARE_PART_B_EFFECTIVE_DATE,\n" + 
+			"MEDICAID_IND,\n" + 
+			"MEDICAID_NUMBER,\n" + 
+			"ASMENT_DIAB1_DOC_INFORMED_DIAB\n" + 
+			"ASMENT_DIAB2_PRESCRIBED_INSULN\n" + 
+			"CHRONIC_AUTH_HEART_FAILURE\n" + 
+			"ASMENT_LUNG1_BRONC_EMPH_ASTHMA\n" + 
+			"ASMENT_HEART2_CARDC_BYPASS\n" + 
+			"CHRONIC_AUTH_VASCULAR_DISEASE\n" + 
+			"ASMENT_HEART1_HEART_ATTACK\n" + 
+			"ASMENT_HEART10_ANGINA\n" + 
+			"ASMENT_HBP2_MEDICATION_FOR_HBP\n" + 
+			"ASMENT_HEART7_PACEMKR_R_DEFIB\n" + 
+			"ASMENT_HEART3_ANGIOPLASTY\n" + 
+			"ASMENT_SIGN_PRESENCE_ENROLLEE\n" + 
+			"DO_YOU_HAVE_A_CHRONIC_ILLNESS\n" + 
+			"CHRONIC_PHYSICIAN_NAME\n" + 
+			"CHRONIC_PHYSICIAN_PHONE_NUM\n" + 
+			"ASMENT_FULL_ADDR_FOR_PHYSICIAN\n" + 
+			"ESRD_IND,\n" + 
 			"DO_YOU_HAVE_OTHER_HEALTH_INS,\n" + 
 			"OTHER_HEALTH_INSURANCE_NAME,\n" + 
 			"OTHER_HEALTH_INSURANCE_GRP_NUM,\n" + 
 			"OTHER_HEALTH_INSURANCE_ID,\n" + 
-			"SECONDARY_RX_COVERAGE_NAME,\n" + 
-			"OTHER_RX_COVERAGE_NAME,\n" + 
+			"DO_YOU_HAVE_OTHER_RX_COVERAGE,\n" + 
+			"(OTHER_RX_COVERAGE_NAME || '"+"' || SECONDARY_RX_COVERAGE_NAME) as PDCName,\n" + 
 			"SECONDARY_RX_GROUP,\n" + 
 			"SECONDARY_RX_ID,\n" + 
+			"MEDICARE_PART_A_EFFECTIVE_DATE,\n" + 
+			"MEDICARE_PART_B_EFFECTIVE_DATE,\n" + 
+			"'N/A',\n" + 
+			"SPECIAL_ELECTION_REASON_ID,\n" + 
+			"NOTE,\n" + 
+			"NOTE,\n" + 
+			"NOTE,\n" + 
+			"NOTE,\n" + 
+			"NOTE,\n" + 
+			"NOTE,\n" + 
+			"NOTE,\n" + 
+			"NOTE,\n" + 
+			"NOTE,\n" + 
+			"NOTE,\n" + 
+			"NOTE,\n" + 
+			"NOTE,\n" + 
 			"NOTE,\n" + 
 			"REQUESTED_EFFECTIVE_DATE,\n" + 
-			"PRIMARY_CARE_PHYSICIAN_NUMBER,\n" + 
-			"XEROX_STAGE_ID,\n" +
 			"PRIMARY_CARE_PHYSICIAN,\n" + 
-			"DENTAL_PLATINUM from Xerox_stage where xerox_stage_id =\n" + 
+			"PRIMARY_CARE_PHYSICIAN_NUMBER,\n" + 
+			"CURRENTLY_A_PATIENT_OF_THE_PCP,\n" + 
+			"PAYMENT_METHOD,\n" + 
+			"DENTAL_PLATINUM,\n" + 
+			"AUTHORIZED_REPRESENTATIVE_IND,\n" + 
+			"AUTHORIZED_REP_FIRST_NAME,\n" + 
+			"AUTHORIZED_REP_LAST_NAME,\n" + 
+			"AUTHORIZED_REP_RELATIONSHIP,\n" + 
+			"AUTHORIZED_REP_MAILING_ADDR_1,\n" + 
+			"AUTHORIZED_REP_MAILING_ADDR_2,\n" + 
+			"AUTHORIZED_REP_MAILING_CITY,\n" + 
+			"AUTHORIZED_REP_MAILING_STATE,\n" + 
+			"AUTHORIZED_REP_MAILING_ZIP_CD,\n" + 
+			"AUTHORIZED_REP_DAYTIME_PHONE,\n" + 
+			"SIGNATURE_PRESENCE,\n" + 
+			"XEROX_STAGE_ID  from Xerox_stage where xerox_stage_id =\n" + 
 			"";
 	public static final String GPS_QUERY_1 ="Select\n" + 
 			"FIRST_NAME,\n" + 
