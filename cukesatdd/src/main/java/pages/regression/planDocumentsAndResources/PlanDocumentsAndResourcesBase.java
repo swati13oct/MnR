@@ -347,7 +347,7 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 		List<String> noteList=new ArrayList<String> ();
 		int expectedSize=exp_docListFromApi.size();
 		int actualSize=act_docListFromUi.size();
-		System.out.println("Compare number of doc: Expected doc frokm API="+expectedSize+" | Actual doc from UI="+actualSize);
+		System.out.println("Compare number of doc: Expected doc from API="+expectedSize+" | Actual doc from UI="+actualSize);
 		if (!expDocDisplay) {
 			boolean condition=false;
 			if (section.equals("Annual Notice of Changes Documents")) {
@@ -781,7 +781,6 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 		String targetSubSection=testInputInfoMap.get("targetSubSection");
 		String targetLang=testInputInfoMap.get("targetLang");
 		boolean checkDestUrl=Boolean.valueOf(testInputInfoMap.get("checkDestUrl"));
-		
 		boolean expDocDisplay=Boolean.valueOf(testInputInfoMap.get("expDocDisplay"));
 		boolean validateApi=Boolean.valueOf(testInputInfoMap.get("validateApi"));
 		List<HashMap<String, Document>> act_docListFromUi=new ArrayList<HashMap<String, Document>>();
@@ -806,7 +805,7 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 			}
 			boolean anocFlag=false;
 			List<HashMap<String, Document>> exp_docListFromApi=new ArrayList<HashMap<String, Document>>();
-			//note: use hte right expected list of doc based on the seciton and language
+			//note: use the right expected list of doc based on the seciton and language
 			if (targetSubSection.equals("currentYear")) {
 				anocFlag=api_planDocMap.isAnocCurrentYearFlag();
 				System.out.println("TEST - api_planDocMap.isAnocCurrentYearFlag()="+anocFlag);
@@ -864,6 +863,7 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 						exp_docListFromApi=api_planDocMap.getProPhmDir_zh_nxtYr_docList();
 				}
 			}
+
 			List<String> docList_noteList=compareUiApiDocList(testInputInfoMap, act_docListFromUi, exp_docListFromApi, anocFlag, expDocDisplay, checkDestUrl);
 			//note: fix up the note and send it back up level to take care of the validation
 			if (docList_noteList.get(0).equals("API VALIDATOIN PASSED")) {
