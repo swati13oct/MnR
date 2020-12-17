@@ -4480,11 +4480,6 @@ public void validateCountResults() {
 }
 
 
-}			
-
-		
-
-
 	public VPPPlanSummaryPage checkZipCompSubNavVpp(String zipCode) {
 		sendkeys(OurPlans_zipfield, zipCode);
 		jsClickNew(FindPlansButton1);
