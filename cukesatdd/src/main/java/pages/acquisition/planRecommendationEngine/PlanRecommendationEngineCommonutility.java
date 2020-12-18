@@ -174,6 +174,9 @@ public class PlanRecommendationEngineCommonutility extends UhcDriver {
 					if (flow.equalsIgnoreCase("MA")) {
 						nextPagePercentage = "22%";
 					}
+					if (flow.equalsIgnoreCase("PDPTOMAPD")) {
+						nextPagePercentage = "30%";
+					}
 				} else if (currentPageName.contains("SPECIAL")) {
 					previousPageName = "Coverage";
 					previousPagePercentage = "20%";
@@ -184,6 +187,9 @@ public class PlanRecommendationEngineCommonutility extends UhcDriver {
 						previousPagePercentage = "22%";
 						currrentPagePercentage = "22%";
 						nextPagePercentage = "33%";
+					}
+					if (flow.equalsIgnoreCase("PDPTOMAPD")) {
+						nextPagePercentage = "40%";
 					}
 				} else if (currentPageName.contains("TRAVEL") || currentPageName.contains("CARE AWAY")) {
 					previousPageName = "Special";
@@ -196,6 +202,9 @@ public class PlanRecommendationEngineCommonutility extends UhcDriver {
 						currrentPagePercentage = "33%";
 						nextPagePercentage = "44%";
 					}
+					if (flow.equalsIgnoreCase("PDPTOMAPD")) {
+						nextPagePercentage = "50%";
+					}
 				} else if (currentPageName.contains("DOCTOR")) {
 					previousPageName = "Travel";
 					previousPagePercentage = "40%";
@@ -207,6 +216,9 @@ public class PlanRecommendationEngineCommonutility extends UhcDriver {
 						currrentPagePercentage = "44%";
 						nextPageName = "Additional";
 						nextPagePercentage = "56%";
+					}
+					if (flow.equalsIgnoreCase("PDPTOMAPD")) {
+						nextPagePercentage = "60%";
 					}
 				} else if (currentPageName.contains("DRUG")) {
 					previousPageName = "Doctor";

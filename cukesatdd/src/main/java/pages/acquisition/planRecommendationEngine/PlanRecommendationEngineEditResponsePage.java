@@ -474,7 +474,7 @@ public class PlanRecommendationEngineEditResponsePage extends UhcDriver {
 		verifyClickEditButton("coverage", true);
 		validate(progressInfo, 10);
 		PlanRecommendationEngineCoverageOptionPage coverage = new PlanRecommendationEngineCoverageOptionPage(driver);
-		coverage.chooseCoverageOption(inputValues.get("Plan Type"));
+		coverage.chooseCoverageOption(inputValues.get("Plan Type").toUpperCase().replace("PDPTOMAPD", "MAPD"));
 		jsClickNew(saveBtn);
 	}
 

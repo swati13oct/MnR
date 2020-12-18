@@ -485,7 +485,7 @@ public class EditResponseMobilePage extends UhcDriver {
 		verifyClickEditButton("coverage", true);
 		validate(progressInfo, 10);
 		CoverageOptionsMobilePage coverage =  new CoverageOptionsMobilePage(driver);
-		coverage.coverageOptionMobile(inputValues.get("Plan Type"));
+		coverage.coverageOptionMobile(inputValues.get("Plan Type").toUpperCase().replace("PDPTOMAPD", "MAPD"));
 		jsClickNew(saveBtn);
 	}
 	
