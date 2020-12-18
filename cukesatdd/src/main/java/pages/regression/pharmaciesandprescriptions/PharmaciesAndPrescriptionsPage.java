@@ -1448,9 +1448,12 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 		}
 
 		public void clickOnRefillAllMedications() {
+
+			TestHarness.checkForIPerceptionModel(driver);
 			Assert.assertTrue("PROBLEM - unable to locate Refill All Medications link text element",
 					validate(refillAllMedications, 50));
-			refillAllMedications.click();
+			checkModelPopup(driver);
+			jsClickNew(refillAllMedications);
 
 		}
 
