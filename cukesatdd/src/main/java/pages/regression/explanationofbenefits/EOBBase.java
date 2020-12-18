@@ -461,7 +461,7 @@ public class EOBBase extends EOBWebElements{
 
 				for (LogEntry entry : entries) {
 					String line=entry.getMessage();
-					System.out.println("TEST each line="+line);
+					//keepForDebug System.out.println("TEST each line="+line);
 					if (line.contains(lookForText1) && line.contains(lookForText2)) {
 						apiReqeust=line;
 						//keepForDebug System.out.println("TEST found line="+line);
