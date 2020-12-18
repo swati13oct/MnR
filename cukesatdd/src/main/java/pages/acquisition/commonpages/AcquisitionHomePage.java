@@ -3162,7 +3162,7 @@ action.moveToElement(navigationSectionHomeLink).moveToElement(ourPlansHoverLink)
 		}
 		
 		public AcquisitionHomePage  validateCallpopup() throws InterruptedException {
-			int retry = 1;
+		/*	int retry = 1;
 			do	{
 				driver.navigate().refresh();
 				CommonUtility.checkPageIsReady(driver);
@@ -3171,28 +3171,39 @@ action.moveToElement(navigationSectionHomeLink).moveToElement(ourPlansHoverLink)
 				jsClickNew(callsam);
 				System.out.println("@@@@@@@@@@@@@@@ Call Icon Clicked @@@@@@@@@@@@@@@");
 				driver.switchTo().activeElement();
-//				System.out.println(CallSamTFN.getText());
-//				CallSamTFNClose.click();
-//				validateNew(callsam);
+			System.out.println(CallSamTFN.getText());
+			CallSamTFNClose.click();
+				validateNew(callsam);
 				System.out.println("Call Sam checking for "+retry+" times");
 				retry++;
-			} while (!validate(CallSamTFN) && (retry<6));
+			} while (!validate(CallSamTFN) && (retry<1));
 			
 			System.out.println(CallSamTFN.getText());
 //			CallSamTFNClose.click();
 			jsClickNew(CallSamTFNClose);
 			validateNew(callsam);		
-			return null;
-			
-		/*	validate(callsamtooltip);
+			return null;*/
+			driver.navigate().refresh();
+			CommonUtility.checkPageIsReady(driver);
 			CheckiPerseptions();
-			callsam.click();
+			validate(callsamtooltip);
+			String ActualCallSAMTFN = callsam.getText();
+			System.out.println("TFN No displayed on the Page" + ActualCallSAMTFN);
+			jsClickNew(callsam);
 			System.out.println("@@@@@@@@@@@@@@@ Call Icon Clicked @@@@@@@@@@@@@@@");
 			driver.switchTo().activeElement();
-			System.out.println(CallSamTFN.getText());
-			CallSamTFNClose.click();
-			validateNew(callsam);		
-			return null;*/
+			String ExpectedCallSAMTFN = CallSamTFN.getText();
+			System.out.println("TFN No displayed on the Page" + ExpectedCallSAMTFN);
+			if(ExpectedCallSAMTFN.contains(ActualCallSAMTFN)) {
+				System.out.println("****************TFN number was  found macthing with the SAM call Popup  ***************");
+				validate(CallSamTFNClose);
+				jsClickNew(CallSamTFNClose);
+				Assert.assertTrue(true);
+			}
+			else {
+				Assert.fail("*****************TFN number was  not found macthing with the SAM call Popup ***************");
+			}
+			return null;
 		}
 		
 		public void validateChatSam() throws InterruptedException {
@@ -4274,11 +4285,20 @@ action.moveToElement(navigationSectionHomeLink).moveToElement(ourPlansHoverLink)
 			else {
 				Assert.fail("****************member signin Page is not loaded ***************");
 			}
-
-			ViewMedicareplanlinks.click();
-
+			validateNew(ViewMedicareplanlinks);
+			CommonUtility.waitForPageLoadNew(driver, ViewMedicareplanlinks, 30);
+			String parentWindow1 = driver.getWindowHandle();
+			jsClickNew(ViewMedicareplanlinks);
+			sleepBySec(3);
+			Set<String> tabs_windows1 = driver.getWindowHandles();
+			Iterator<String> itr1 = tabs_windows1.iterator();
+			while(itr1.hasNext()) {
+				String window = itr1.next();
+				if(!parentWindow1.equals(window)) {
+					driver.switchTo().window(window);
+				}
+			}
 		}
-		
 
 
 //		
