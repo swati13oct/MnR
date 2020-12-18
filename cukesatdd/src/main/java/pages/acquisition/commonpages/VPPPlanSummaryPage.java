@@ -904,10 +904,10 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(id = "enrollAlertTitle")
 	private WebElement nextBestActionModalMsgAuthenticated;
 
-	@FindBy(xpath = "//div[contains(@class,'component_info_wrap')]//button[text()='Select a Plan']")
+	@FindBy(xpath = "//div[contains(@class,'component_info_wrap')]//button[text()='Continue Enrollment']")
 	private WebElement nextBestActionModalContinueEnrollmentBtn;
 
-	@FindBy(xpath = "//*[contains(@id,'plan')]//following-sibling::span//span[text()='Select a Plan']/..")
+	@FindBy(xpath = "//*[contains(@id,'plan')]//following-sibling::span//span[text()='Continue Enrollment']/..")
 	private List<WebElement> selectPlanModalContinueEnrollmentBtnList;
 
 	@FindBy(xpath = "//*[@class='uhc-modal__content']//*[contains(@id,'plan')]")
