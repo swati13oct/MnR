@@ -257,7 +257,7 @@ public class DrugDetailsPage extends UhcDriver {
 	
 	//@FindBy(xpath = "//button[contains(@aria-label,'Select ROCK PHARMACY -')]")
 	
-	@FindBy(xpath ="//*[@id='selectPharmacyBtn2']")
+	@FindBy(xpath ="//*[@id='selectPharmacyBtn3']")
 	public WebElement selectRockPharm;
 	
 	@FindBy(xpath = "//*[@class='uhc-button__text'][contains(text(),'Save and Update Drug Costs')]")
@@ -371,7 +371,7 @@ public class DrugDetailsPage extends UhcDriver {
 	@FindBy(id = "inValidZipcodeLbl")
 	private WebElement invalidZipCodeMsg;
 
-	@FindBy(xpath = "//*[@id='selectaPharmacy-overlay']/div/div[2]/div/div[6]/div/div/div[2]/div/div[2]/span")
+	@FindBy(xpath = "//*[@id='selectaPharmacy-overlay']//*[@class='field-error-msgfordceui']")
 	private WebElement noResultsMessage;
 
 	
@@ -1813,5 +1813,10 @@ public class DrugDetailsPage extends UhcDriver {
 		waitforElement(standardPharmacyTab);
 		validate(standardPharmacyTab);
 		standardPharmacyTab.click();
+	}
+	
+	public void validateDefaultPharmacyName(String defaultPharmacy) {
+		validateNew(pharmacyName);
+		Assert.assertTrue("Default pharmacy name is not displayed", pharmacyName.getText().contains(defaultPharmacy));
 	}
 }

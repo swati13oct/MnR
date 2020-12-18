@@ -7,6 +7,7 @@ import java.util.Map;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import acceptancetests.acquisition.dceredesign.DCERedesignCommonConstants;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstants;
 import atdd.framework.MRScenario;
@@ -132,6 +133,7 @@ public class ShopperProfileStepDefinition {
 				.getBean(PageConstants.PLAN_COMPARE_PAGE);
 		
 		comparePlansPage.validateMemberDetails(userData);
+		getLoginScenario().saveBean(DCERedesignCommonConstants.DRUGLIST, givenAttributesMap.get("Drugs"));
 	}
 
 	@Then("^I ask the shopper calling in to provide me with the Email Address and Search$")

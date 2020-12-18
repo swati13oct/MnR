@@ -873,14 +873,26 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(id = "enrollAlertTitle")
 	private WebElement nextBestActionModalMsgAuthenticated;
 
-	@FindBy(xpath = "//div[contains(@class,'component_info_wrap')]//button[text()='Select a Plan']")
+	@FindBy(xpath = "//div[contains(@class,'component_info_wrap')]//button[text()='Continue Enrollment']")
 	private WebElement nextBestActionModalContinueEnrollmentBtn;
 
-	@FindBy(xpath = "//*[contains(@id,'plan')]//following-sibling::span//span[text()='Select a ']/..")
+	@FindBy(xpath = "//*[contains(@id,'plan')]//following-sibling::span//span[text()='Continue Enrollment']/..")
 	private List<WebElement> selectPlanModalContinueEnrollmentBtnList;
 
 	@FindBy(xpath = "//*[@class='uhc-modal__content']//*[contains(@id,'plan')]")
 	private List<WebElement> selectPlanModalPlansList;
+	
+	@FindBy(xpath = "//*[contains(@id,'drug-list-title')]")
+	private WebElement drugListPlanCard;
+	
+	@FindBy(xpath = "//*[@aria-expanded='true']//*[@class='remove-drug']")
+	private List<WebElement> removeDrugListPlanCard;
+	
+	@FindBy(xpath = "//*[contains(@id,'provider-title')]")
+	private WebElement providerListPlanCard;
+	
+	@FindBy(xpath = "//*[@aria-expanded='true']//*[@class='remove-provider']")
+	private List<WebElement> removeProviderListPlanCard;
 
 	private static String NEXT_ACTION_MODAL_MSG_PROVIDER_SEARCH = "Is my doctor covered?";
 	private static String NEXT_ACTION_MODAL_MSG_ENROLL_PLAN = "How do I enroll?";
@@ -5726,6 +5738,32 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	public void clickContinueEnrollmentBtnOnModal() {
 		selectPlanModalContinueEnrollmentBtnList.get(0).click();
+	}
+	
+	public void removeDrugsFromPlanCard() {
+		try {
+			drugListPlanCard.click();
+		while(removeDrugListPlanCard.size()!=0) {
+			removeDrugListPlanCard.get(0).click();
+			System.out.println("Removed drugs in plan card");
+		}
+		}
+		catch(Exception e) {
+			System.out.println("No drugs in plan card");
+		}
+	}
+	
+	public void removeProvidersFromPlanCard() {
+		try {
+			providerListPlanCard.click();
+		while(removeProviderListPlanCard.size()!=0) {
+			removeProviderListPlanCard.get(0).click();
+			System.out.println("Removed providers in plan card");
+		}
+		}
+		catch(Exception e) {
+			System.out.println("No providers in plan card");
+		}
 	}
 
 }
