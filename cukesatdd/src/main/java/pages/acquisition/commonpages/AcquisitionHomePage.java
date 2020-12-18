@@ -2711,12 +2711,20 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			else {
 				Assert.fail("****************member signin Page is not loaded ***************");
 			}
-		//	String urlCheck=driver.getCurrentUrl();
-		//	if(urlCheck.contains("medicare-education.html")) {
-			ViewMedicareplanlinks.click();
-			
+			validateNew(ViewMedicareplanlinks);
+			CommonUtility.waitForPageLoadNew(driver, ViewMedicareplanlinks, 30);
+			String parentWindow1 = driver.getWindowHandle();
+			jsClickNew(ViewMedicareplanlinks);
+			sleepBySec(3);
+			Set<String> tabs_windows1 = driver.getWindowHandles();
+			Iterator<String> itr1 = tabs_windows1.iterator();
+			while(itr1.hasNext()) {
+				String window = itr1.next();
+				if(!parentWindow1.equals(window)) {
+					driver.switchTo().window(window);
+				}
+			}
 		}
-		
 
 		public void validateSubtitle() {
         threadsleep(5);
