@@ -71,7 +71,7 @@ public abstract class UhcDriver {
 	@FindBy(xpath = "//div[@class='menu-text']")
 	public WebElement MenuMobile;
 
-	@FindBy(xpath = "//span[text()='Shop For a Plan']")
+	@FindBy(xpath = "//span[contains(text(),'Shop For a Plan')]")
 	public WebElement MenuShopForPlanMobile;
 
 	@FindBy(xpath = "//a[contains(text(),'Drug Cost Estimator')]")
@@ -108,7 +108,7 @@ public abstract class UhcDriver {
 	public void MobileMenuShopTool() {
 		jsClickNew(MenuMobile);
 		jsClickNew(MenuShopForPlanMobile);
-		jsClickNew(ShopTool);
+		//jsClickNew(ShopTool);
 	}
 
 	public void MobileMenuAccessDCE() {

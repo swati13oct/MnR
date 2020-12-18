@@ -154,11 +154,19 @@ public class PlanRecommendationStepDefinitionMobile {
 	public void user_navigate_PRE_Breadcrumbs() throws InterruptedException {
 		PlanRecommendationEngineHeaderAndFooterMobile headerAndFooter = new PlanRecommendationEngineHeaderAndFooterMobile(
 				wd);
-		//headerAndFooter.navigationToPlanRecommendationEngine();
-		headerAndFooter.MobileMenuAndGetStarted();
-		//headerAndFooter.breadCrumbs();
-		
-	
+		headerAndFooter.navigationToPlanRecommendationEngineViaShopTools();
+		// headerAndFooter.breadCrumbs();
+
+	}
+
+	@When("^user navigate Plan Recommendation Engine Using Shop From Home in Find Your Plan$")
+	public void navigate_Plan_Selector_tool() {
+		PlanRecommendationEngineHeaderAndFooterMobile headerAndFooter = new PlanRecommendationEngineHeaderAndFooterMobile(
+				wd);
+
+		headerAndFooter.navigationToPlanRecommendationEngineViaShopTools();
+
+		/// headerAndFooter.breadCrumbs();
 	}
 
 	@Then("^user validate elements on landing page of Plan Recommendation Engine$")
@@ -166,16 +174,6 @@ public class PlanRecommendationStepDefinitionMobile {
 		PlanRecommendationEngineLandingAndZipcodeMobilePages planSelectorhomepage = new PlanRecommendationEngineLandingAndZipcodeMobilePages(
 				wd);
 		planSelectorhomepage.landingpage();
-	}
-
-	@When("^user navigate Plan Recommendation Engine Using Shop From Home in Find Your Plan$")
-	public void navigate_Plan_Selector_tool() {
-		PlanRecommendationEngineHeaderAndFooterMobile headerAndFooter = new PlanRecommendationEngineHeaderAndFooterMobile(
-				wd);
-		PlanRecommendationEngineLandingAndZipcodeMobilePages planSelectorhomepage = new PlanRecommendationEngineLandingAndZipcodeMobilePages(
-				wd);
-		headerAndFooter.navigationToPlanRecommendationEngineViaShopTools();
-		///headerAndFooter.breadCrumbs();
 	}
 
 	@Then("^user validate Header elements and Link Validation of Plan Recommendation Engine$")
@@ -227,7 +225,7 @@ public class PlanRecommendationStepDefinitionMobile {
 				wd);
 		PlanRecommendationEngineHeaderAndFooterMobile headerAndFooter = new PlanRecommendationEngineHeaderAndFooterMobile(
 				wd);
-		//headerAndFooter.breadCrumbs();
+		// headerAndFooter.breadCrumbs();
 		if (isMultiCounty.equalsIgnoreCase("NO")) {
 			planSelectorhomepage.getStartedAndRunInvalidzipcode(zipcode);
 		} else {
@@ -242,7 +240,7 @@ public class PlanRecommendationStepDefinitionMobile {
 				wd);
 		PlanRecommendationEngineHeaderAndFooterMobile headerAndFooter = new PlanRecommendationEngineHeaderAndFooterMobile(
 				wd);
-		//headerAndFooter.breadCrumbs();
+		// headerAndFooter.breadCrumbs();
 		planSelectorCoverageepage.coverageOptionpage();
 
 	}
@@ -341,7 +339,7 @@ public class PlanRecommendationStepDefinitionMobile {
 				wd);
 		PlanRecommendationEngineHeaderAndFooterMobile headerAndFooter = new PlanRecommendationEngineHeaderAndFooterMobile(
 				wd);
-		//headerAndFooter.breadCrumbs();
+		// headerAndFooter.breadCrumbs();
 		planSelectorDoctorspage.doctorspageElements();
 
 	}
@@ -505,7 +503,7 @@ public class PlanRecommendationStepDefinitionMobile {
 				wd);
 		PlanRecommendationEngineHeaderAndFooterMobile headerAndFooter = new PlanRecommendationEngineHeaderAndFooterMobile(
 				wd);
-		//headerAndFooter.breadCrumbs();
+		// headerAndFooter.breadCrumbs();
 		planSelectorPharmacyepage.pharmacypage();
 
 	}
@@ -547,7 +545,7 @@ public class PlanRecommendationStepDefinitionMobile {
 				wd);
 		PlanRecommendationEngineHeaderAndFooterMobile headerAndFooter = new PlanRecommendationEngineHeaderAndFooterMobile(
 				wd);
-		//headerAndFooter.breadCrumbs();
+		// headerAndFooter.breadCrumbs();
 		planSelectorAdditionalpage.additionalpage(inputValues.get("Drug Selection"));
 	}
 
@@ -573,7 +571,7 @@ public class PlanRecommendationStepDefinitionMobile {
 				wd);
 		PlanRecommendationEngineHeaderAndFooterMobile headerAndFooter = new PlanRecommendationEngineHeaderAndFooterMobile(
 				wd);
-		//headerAndFooter.breadCrumbs();
+		// headerAndFooter.breadCrumbs();
 		planSelectorPreferencespage.costpreferencepage();
 	}
 

@@ -205,10 +205,9 @@ public class PlanRecommendationEngineHeaderAndFooterMobile extends UhcDriver {
 
 	@FindBy(xpath = "//a[contains(text(),'Learn More')]")
 	private WebElement ShopFromHomeLearnMoreLink;
-	
-	@FindBy(xpath = "//a[contains(text(),'Get Recommendations')]")
+
+	@FindBy(xpath = "//a[contains(text(),'Get a Plan Recommendation')]")
 	private WebElement GetRecommendationsbtn;
-	
 
 	// Footer Elements
 
@@ -479,7 +478,7 @@ public class PlanRecommendationEngineHeaderAndFooterMobile extends UhcDriver {
 	// PRE BreadCrumbs in Header
 
 	public void breadCrumbs() {
-		validate((driver.findElement(By.cssSelector("div.breadcrumb"))),3000);
+		validate((driver.findElement(By.cssSelector("div.breadcrumb"))), 3000);
 		String preBreadcrumbs = (driver.findElement(By.cssSelector("div.breadcrumb"))).getText();
 		Assert.assertTrue(preBreadcrumbs.contains("Home / Plan Recommendation Engine"));
 		System.out.println(preBreadcrumbs);
@@ -621,18 +620,10 @@ public class PlanRecommendationEngineHeaderAndFooterMobile extends UhcDriver {
 	// -->Shop-->Tools-->Get Help Choosing
 	public void navigationToPlanRecommendationEngineViaShopTools() {
 		MobileMenuShopTool();
-		validate(ShopFromHomeLearnMoreLink, 30);
-
-		jsClickNew(ShopFromHomeLearnMoreLink);
+		
+		scrollToView(GetRecommendationsbtn);
 		jsClickNew(GetRecommendationsbtn);
-		// validate(headerNavigationBarShopForaPlanTab, 45);
-		// actions.clickAndHold(headerNavigationBarShopForaPlanTab).build().perform();
-		// desktopCommonUtils.MouseOver(headerNavigationBarShopForaPlanTab,
-		// Browsername);
-		// headerShopLink.click();
-		//validate(HeaderShopToolsGetHelpChoosingLink, 30);
-		// HeaderShopToolsGetHelpChoosingLink.click();
-		//jsClickNew(HeaderShopToolsGetHelpChoosingLink);
+
 		validate(landingpageHeader, 30);
 		Assert.assertTrue(landingpageHeader.getText().contains("Plan"));
 	}

@@ -50,7 +50,7 @@ public class PlanRecommendationEngineLandingAndZipcodeMobilePages extends UhcDri
 	@FindBy(css = "div[class*='get-started-main-inner'] button")
 	private WebElement getStartedBtn1;
 
-	@FindBy(xpath = "//h1[contains(text(),'Get Help Finding a Plan')]")
+	@FindBy(xpath = "//*[contains(text(),'Get Help Finding a Plan')]")
 	private WebElement landingpageHeader;
 
 	@FindBy(xpath = "//*[@class='get-started-banner']//img[@class='mb-3 mb-0-lg']")
@@ -137,31 +137,13 @@ public class PlanRecommendationEngineLandingAndZipcodeMobilePages extends UhcDri
 	// Landing Page Element Verification Method
 
 	public void landingpage() {
-		System.out.println("Validating Title: ");
-		//String preBreadcrumbs = (driver.findElement(By.cssSelector("div.breadcrumb"))).getText();
-		//Assert.assertTrue(preBreadcrumbs.contains("Home / Plan Recommendation Engine"));
-		String ExpectedTitle = "Get Help Finding a Plan";
-		validateNew(landingpageHeader, 30);
-		String ActualTitle = landingpageHeader.getText();
-		System.out.println(ActualTitle.equalsIgnoreCase(ExpectedTitle));
+
 		System.out.println("Validating Animation Images: ");
 		validate(landingpageAnimationImage, 30);
 		System.out.println("Validating Text: ");
-		/*
-		 * validate(landingpageText, 30); String ExpectedText =
-		 * " Answer a few simple questions and get personalized plan recommendations in about 10 minutes. "
-		 * ; String ActualText = landingpageText.getText();
-		 * System.out.println(ActualText.equalsIgnoreCase(ExpectedText));
-		 */
-		validate(getStartedBtn, 30);
-		validate(landingpageMainInner, 30);
-		System.out.println("Validating Title in Inner Section: ");
-		validate(landingpageInnerTitle, 30);
-		/*
-		 * String ExpectedText1 = "How does this work?"; String ActualText1 =
-		 * landingpageInnerTitle.getText();
-		 * System.out.println(ActualText1.equalsIgnoreCase(ExpectedText1));
-		 */
+		validate(landingpageText, 30);
+		mobileswipe("70%", true);
+
 		for (int i = 1; i <= 3; i++) {
 			String landingpageTracker = (driver.findElement(By.xpath("//*[@class='get-started-list']/li[" + i + "]")))
 					.getText();
