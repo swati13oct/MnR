@@ -896,7 +896,7 @@ Feature: 1.01 Member  benefits and Coverage page
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
     Then The user navigate to Benefits and Coverage page
-    And the users validate Benefits page has combo tabs
+    And the users validate Benefits page has combo tabs for combo users
     And the users validate UCPBenefits related API requests are not having undefined input value
 
     @comboApi
