@@ -31,6 +31,8 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 	@Override
 	public void openAndValidate() { 
 	}
+	
+	static String winHandleBefore = null;
 
 	public void validateHeaderSectionContent(String firstname, String lastName) {
 		Assert.assertTrue("PROBLEM - unable to locate pnp page header element", 
@@ -3374,6 +3376,8 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 		public void clickOTCCallToActionOnPnPPage() {
 			Assert.assertTrue("PROBLEM - unable to locate OTC call to action Tile element",
 					validate(OTCToActnBtn, 30));
+			// Store the current window handle
+			winHandleBefore = driver.getWindowHandle();
 			OTCToActnBtn.click();
 		}
 		
@@ -3387,17 +3391,20 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 			int size = countOfNewWindowTab();
 			System.out.println("Number of windows opened when user click on OTC CTA is :: " + size);
 			if (size == 2) {
-				pageloadcomplete();
-				System.out.println("Current url is ::  "+currentUrl());
-				if(currentUrl().contains("https://healthybenefitsplus.com/base/About")) {
+				// Switch to new window opened
+				for(String winHandle : driver.getWindowHandles()){
+				    driver.switchTo().window(winHandle);
+				    pageloadcomplete();
+				    System.out.println("Current url is ::  "+currentUrl());
+				    if(currentUrl().contains("https://healthybenefitsplus.com/base/About")) {
 						Assert.assertTrue(true);
 					}
 					else {
 						Assert.assertFalse("PROBLEM - New tab is opened but Solutran page is not successfully displayed",
 								true);
 					}
+				}				
 			}else {
-				pageloadcomplete();
 				System.out.println("Current url is ::  "+currentUrl());
 				Assert.assertFalse("PROBLEM - Solutran Health Benefit Page is not opened in new browser window", true);
 			}
