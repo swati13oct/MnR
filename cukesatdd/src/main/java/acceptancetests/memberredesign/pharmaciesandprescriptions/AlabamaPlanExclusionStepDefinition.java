@@ -44,8 +44,8 @@ public class AlabamaPlanExclusionStepDefinition {
 
 	}
 
-	@Then("^user will not view any questions related to OptumRx home delivery$")
-	public void user_will_not_view_any_questions_related_to_OptumRx_home_delivery() throws Throwable {
+	@Then("^user not view any questions related to OptumRx home delivery$")
+	public void user_not_view_any_questions_related_to_OptumRx_home_delivery() throws Throwable {
 
 		PharmaciesAndPrescriptionsPage pnpPg = (PharmaciesAndPrescriptionsPage) getLoginScenario()
 				.getBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE);

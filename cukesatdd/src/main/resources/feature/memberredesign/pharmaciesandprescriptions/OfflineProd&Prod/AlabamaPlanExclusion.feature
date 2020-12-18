@@ -14,7 +14,7 @@ Feature: Alabama Plan Exclusion
       | PlanType    | <planType>   |
       | Member Type | <memberType> |
     When user views common questions section
-    Then user will not view any questions related to OptumRx home delivery
+    Then user not view any questions related to OptumRx home delivery
     When user clicks on Drug Lookup Call To Action
     Then user will be directed to the Drug Estimator tool developed by Rally in the same window using memAuth
 
@@ -37,7 +37,7 @@ Feature: Alabama Plan Exclusion
       | PlanType    | <planType>   |
       | Member Type | <memberType> |
     When user views common questions section
-    Then user will not view any questions related to OptumRx home delivery
+    Then user not view any questions related to OptumRx home delivery
     When user clicks on Drug Lookup Call To Action
     Then user will be directed to the Drug Estimator tool developed by Rally in the same window using memAuth
 
