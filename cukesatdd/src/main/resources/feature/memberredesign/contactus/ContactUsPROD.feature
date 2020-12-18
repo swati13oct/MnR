@@ -59,9 +59,9 @@ Feature: 1.16 Prod Member Contact us Page
       | PlanType | <planType> |
 
     Examples: 
-      | UID       | username | password | member     | planType     |
-      | TestCase3 | jkuma14  | Brock@04 | DKELLY27   | ComboPDPSSUP |
-      | TestCase4 | jkuma14  | Brock@04 | Shephard09 | ComboPdpSHIP |
+      | UID       | username | password | member         | planType     |
+      | TestCase3 | jkuma14  | Brock@04 | tomwindsor1955 | ComboPDPSSUP |
+ #     | TestCase4 | jkuma14  | Brock@04 | Shephard09     | ComboPdpSHIP |
 
   #TestCaseSHIP4
   @regressionMemberPROD2
