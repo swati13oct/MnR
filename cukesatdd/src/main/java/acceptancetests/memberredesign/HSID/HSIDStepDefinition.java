@@ -1624,4 +1624,26 @@ public class HSIDStepDefinition {
 												healthwellnessDeepLinkLoginPageSHIP.validateofflinePageElements();
 												healthwellnessDeepLinkLoginPageSHIP.validateOfflineProdhealthwellnessPage();
 											}
+											/** 
+											 * @todo :member lands on the offline PROD health & wellness deeplink page
+											*/
+											@Given("^member lands on the PROD /offline edelivery deeplink page$")
+											public void the_user_is_on_offline_PROD_edelivery_deeplink_Page(DataTable givenAttributes) throws InterruptedException{
+												String brand = givenAttributes.asList(String.class).get(0);
+												WebDriver wd = getLoginScenario().getWebDriver();
+												getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+												myDocumentsEdeliveryDeeplinkLoginPage myDocumentsEdeliveryDeeplinkLoginPage = new myDocumentsEdeliveryDeeplinkLoginPage(wd);
+												myDocumentsEdeliveryDeeplinkLoginPage.navigateToLoginURLoffline(brand);
+												getLoginScenario().saveBean(PageConstants.Offline_PROD_edelivery,myDocumentsEdeliveryDeeplinkLoginPage);
+														}
+											/** 
+											 * @throws InterruptedException 
+											 * @todo :deep link login page elements validate  
+											*/
+											@And("^the offline PROD edelivery deeplink login page is displayed with all the fields$")
+											public void offlinePROD_edelivery_displayed() throws InterruptedException{
+												myDocumentsEdeliveryDeeplinkLoginPage myDocumentsEdeliveryDeeplinkLoginPage = (myDocumentsEdeliveryDeeplinkLoginPage) loginScenario.getBean(PageConstants.Offline_PROD_edelivery);
+												myDocumentsEdeliveryDeeplinkLoginPage.validateofflinePageElements();
+												myDocumentsEdeliveryDeeplinkLoginPage.validateOfflineProdedeliverypage();
+											}
 										}
