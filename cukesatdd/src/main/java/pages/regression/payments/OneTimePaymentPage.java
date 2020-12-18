@@ -533,7 +533,9 @@ public class OneTimePaymentPage extends UhcDriver {
 	    public void selectAndEnterAmount(String otherAmount) {
 		TestHarness.checkForIPerceptionModel(driver);
 		validate(otherAmountRadioButton);
+		TestHarness.checkForIPerceptionModel(driver);
 		otherAmountRadioButton.click();
+		TestHarness.checkForIPerceptionModel(driver);
 		otherAmountInput.clear();
 		TestHarness.checkForIPerceptionModel(driver);
 		otherAmountInput.sendKeys(otherAmount);
