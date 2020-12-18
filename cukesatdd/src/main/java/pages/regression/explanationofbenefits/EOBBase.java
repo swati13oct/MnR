@@ -451,27 +451,33 @@ public class EOBBase extends EOBWebElements{
 
 		if (eobType.equals("dream") && !planType.equals("SSP")) {
 			//note: need to do two search
-			System.out.println("TEST - first API request...");
-			String lookForText1="/dreamEob/search?memberNumber=";
-			String lookForText2="responseReceived";
+			String lookForText1="";
+			String lookForText2="";
+			if (!planType.equals("PDP")) {
+				System.out.println("TEST - first API request...");
+				//tbd String lookForText1="/dreamEob/search?memberNumber=";
+				lookForText1="/dreamEob/search?claimSystem=";
+				lookForText2="responseReceived";
 
-			for (LogEntry entry : entries) {
-				String line=entry.getMessage();
-				//System.out.println("TEST each line="+line);
-				if (line.contains(lookForText1) && line.contains(lookForText2)) {
-					apiReqeust=line;
-					//keepForDebug System.out.println("TEST found line="+line);
-					//break; //note: only break if looking for the first response, otherwise always take the latest line
+				for (LogEntry entry : entries) {
+					String line=entry.getMessage();
+					System.out.println("TEST each line="+line);
+					if (line.contains(lookForText1) && line.contains(lookForText2)) {
+						apiReqeust=line;
+						//keepForDebug System.out.println("TEST found line="+line);
+						//break; //note: only break if looking for the first response, otherwise always take the latest line
+					}
 				}
+				Assert.assertTrue("PROBLEM - unable to locate the network entry that contains '"+lookForText1+"' and '"+lookForText2+"'", apiReqeust!=null);
+				String m_urlStr=parseLine(apiReqeust);
+				System.out.println("TEST - m_urlStr="+m_urlStr);
+				urlList.add(m_urlStr);
 			}
-			Assert.assertTrue("PROBLEM - unable to locate the network entry that contains '"+lookForText1+"' and '"+lookForText2+"'", apiReqeust!=null);
-			String m_urlStr=parseLine(apiReqeust);
-			System.out.println("TEST - m_urlStr="+m_urlStr);
-			urlList.add(m_urlStr);
-
+			
 			if (!planType.equals("MA")) {
 				System.out.println("TEST - second API request...");
-				lookForText1="/dreamEob/rx/search?medicareId";
+				//tbd lookForText1="/dreamEob/rx/search?medicareId";
+				lookForText1="/dreamEob/rx/search?endDate";
 				for (LogEntry entry : entries) {
 					String line=entry.getMessage();
 					if (line.contains(lookForText1) && line.contains(lookForText2)) {

@@ -154,17 +154,23 @@ public class EobStepDefinition {
 			eobType="dream";
 			//note: there are two requests for dream, need to fix up the string
 			List<String> tmpResponsJson=eobPage.getApiRequestUrl(planType, memberType, eobType);
-			String m_requestUrl=tmpResponsJson.get(0);
-			System.out.println("TEST - m_requestUrl="+m_requestUrl);
-			String m_apiResponseJson=eobPage.getApiResponse(planType, memberType, m_requestUrl);
-			EobApiResponse eobResponseObj=eobPage.parseApiResponse(m_apiResponseJson);
-			Assert.assertTrue("PROBLEM - unable to get a successful API response for further testing. resp1="+m_apiResponseJson, eobResponseObj!=null);
-			System.out.println("Before cleanup, 1st call size="+eobResponseObj.getListOfEob().size());
-
+			EobApiResponse eobResponseObj=new EobApiResponse();
+			if (!planType.equals("PDP")) {
+				String m_requestUrl=tmpResponsJson.get(0);
+				System.out.println("TEST - m_requestUrl="+m_requestUrl);
+				String m_apiResponseJson=eobPage.getApiResponse(planType, memberType, m_requestUrl);
+				eobResponseObj=eobPage.parseApiResponse(m_apiResponseJson);
+				Assert.assertTrue("PROBLEM - unable to get a successful API response for further testing. resp1="+m_apiResponseJson, eobResponseObj!=null);
+				System.out.println("Before cleanup, 1st call size="+eobResponseObj.getListOfEob().size());
+			}
 			EobApiResponse r_eobResponseObj=new EobApiResponse();
 			//TODO: for release 12/16 DSNP works like MA with just medical EOB for now
 			if (!planType.equals("MA") && !planType.contains("SSP")) {
-				String r_requestUrl=tmpResponsJson.get(1);
+				int x=1;
+				if (planType.equals("PDP")) {
+					x=0;
+				}
+				String r_requestUrl=tmpResponsJson.get(x);
 				System.out.println("TEST - r_requestUrl="+r_requestUrl);
 				String r_apiResponseJson=eobPage.getApiResponse(planType, memberType, r_requestUrl);
 				r_eobResponseObj=eobPage.parseApiResponse(r_apiResponseJson);
