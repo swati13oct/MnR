@@ -56,6 +56,9 @@ public class MemberAuthPage extends UhcDriver {
 
 	@FindBy(xpath = "//*[@class='searchResults']/table/tbody/tr[2]/td[1]/a")
 	private WebElement MemberTableUserName;
+	
+	@FindBy(xpath = "//span[@class='redError']")
+	private WebElement HSIDerror;
 
 	@FindBy(xpath = "//*[@class='modal-content']//div[@role='document']//div[@class='btn-group--full-width loginbutton']/a[1]")
 	private WebElement MemberPopUpLogin;
@@ -766,6 +769,23 @@ public class MemberAuthPage extends UhcDriver {
 			System.out.println("no need to perform undeliverable email workaround...");
 		}
 	} 
+	public MemberAuthPage MainMemberLogin1(String MemberUserName) throws InterruptedException {
+		memberUsername.clear();
+		memberUsername.sendKeys(MemberUserName);
+		FinalSearchButton.click();
+
+		Assert.assertTrue("PROBLEM - Got 'Unable to retrieve member' error after clicking Search button", !validate(redUnableToRetrMemErr,1));
+		//waitforElement(MemberTableUserName); // updated this wait as it is failing for 20 seconds
+		CommonUtility.waitForPageLoad(driver, HSIDerror, 10);
+		Assert.assertTrue("PROBLEM - unable ot locate member name from table after search", validate(HSIDerror,0));
+		if (HSIDerror.isDisplayed()) {
+			System.out.println("User is not Registered with HSID'");
+			//MemberTableUserName.click();
+			return new MemberAuthPage(driver);
+		} else
+			System.out.println("Member UserName Not found");
+		return null;
+	}
 
 
 }

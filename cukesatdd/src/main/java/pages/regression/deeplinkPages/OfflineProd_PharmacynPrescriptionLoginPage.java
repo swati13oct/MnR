@@ -37,8 +37,11 @@ public class OfflineProd_PharmacynPrescriptionLoginPage extends UhcDriver {
 	@FindBy(xpath = "//*[contains(@onclick,'HSIDSignIn')]")
 	private WebElement mnrSignInButton;
 	
-	@FindBy(xpath = "//button[contains(text(),'Sign In')]")
-	private static WebElement offlineSignin;	
+	//@FindBy(xpath = "//button[contains(text(),'Sign In')]")
+	@FindBy(xpath="//button[contains(@class,'btn btn-primary btn-block')]")
+	private static WebElement offlineSignin;
+	
+	
 	
 	@FindBy(xpath = "//h3[contains(text(),'Support for UnitedHealthcare members')]")
 	private WebElement textonpage1;
@@ -144,9 +147,11 @@ public class OfflineProd_PharmacynPrescriptionLoginPage extends UhcDriver {
 						e.printStackTrace();
 					}
 					validateNew(textonpage1);
-					if (driver.getCurrentUrl().contains("SMSR/member/pharmacy/overview.html")) {
+					System.out.println("*** Page URL ***" + driver.getCurrentUrl());
+					System.out.println("*** PageTitle ***" + driver.getTitle());
+					if (driver.getCurrentUrl().contains("SMSR/sso/outbound%3foutboundTo=solutran")) {
 						System.out.println("*** Page URL ***" + driver.getCurrentUrl());
-						System.out.println("** User landed on pharmacy deep link sign in page **");
+						System.out.println("** User landed on solutran deeplink **");
 						System.out.println("*** PageTitle ***" + driver.getTitle());
 						Assert.assertTrue(driver.getTitle().contains("UnitedHealthcare Medicare Member Sign In"));
 						return true;
