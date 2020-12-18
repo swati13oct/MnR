@@ -17,7 +17,7 @@ Feature: Drug Lookup CTA Tile on P&P page
     Then user validates an image for Drug Lookup Call To Action
     Then user validates a title for Drug Lookup Call To Action
     Then user validates a description for Drug Lookup Call To Action
-    When user clicks on Drug Lookup a Medication Call To Action
+    When user clicks on Drug Lookup Call To Action
     Then user will be directed to the Drug Estimator tool developed by Rally in the same window using memAuth
 
     Examples: 
@@ -40,7 +40,7 @@ Feature: Drug Lookup CTA Tile on P&P page
     Then user validates an image for Drug Lookup Call To Action
     Then user validates a title for Drug Lookup Call To Action
     Then user validates a description for Drug Lookup Call To Action
-    When user clicks on Drug Lookup a Medication Call To Action
+    When user clicks on Drug Lookup Call To Action
     Then user will be directed to the Drug Estimator tool developed by Rally in the same window using memAuth
 
     Examples: 
@@ -60,7 +60,7 @@ Feature: Drug Lookup CTA Tile on P&P page
       | PlanType    | <planType>   |
       | Member Type | <memberType> |
     Then user view Drug Lookup Call To Action
-    When user clicks on Drug Lookup a Medication Call To Action
+    When user clicks on Drug Lookup Call To Action
     Then user will be directed to the Drug Estimator tool developed by Rally in the same window using memAuth
 
     Examples: 
@@ -80,7 +80,7 @@ Feature: Drug Lookup CTA Tile on P&P page
       | PlanType    | <planType>   |
       | Member Type | <memberType> |
     Then user view Drug Lookup Call To Action
-    When user clicks on Drug Lookup a Medication Call To Action
+    When user clicks on Drug Lookup Call To Action
     Then user will be directed to the Drug Estimator tool developed by Rally in the same window using memAuth
 
     Examples: 
