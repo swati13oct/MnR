@@ -21,6 +21,8 @@ import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import pages.regression.testharness.TestHarness;
 
+import javax.xml.bind.ValidationEvent;
+
 /**
  * Functionality : validations for Pharmacies & Prescriptions page
  */
@@ -1505,11 +1507,31 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 
 		}
 
-		public void validateNeedHelpSectionHours() {
+	public void validateCommonQuestionsHeader() {
+
+		Assert.assertTrue("PROBLEM - Common Questions section header element not available", validate(commonQuestionHeader,50));
+
+	}
+
+	public void validateNeedHelpSectionHours() {
 
 			Assert.assertTrue("PROBLEM - Need Help section hours of operations not available",
 					validateNeedHelpsHoursOfOperations());
 		}
+
+	  public void validateNotViewCommonQuestionOnenTwo() {
+
+		Assert.assertTrue("PROBLEM - Common Questions One and Two should not be available",
+				validateCommonQuestionsNotAvailable());
+
+	}
+
+	public void validateViewCommonQuestionOnenTwo() {
+
+		Assert.assertFalse("PROBLEM - Common Questions One and Two not available",
+				validateCommonQuestionsNotAvailable());
+
+	}
 
 		public void validateDayOfSupply() {
 			Assert.assertTrue("PROBLEM - Days Of Supply not available", validateFieldValueContent(listOfDaysSupply));
