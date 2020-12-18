@@ -14,8 +14,9 @@ Feature: Change Shipping Address
       | PlanType    | <planType>   |
       | Member Type | <memberType> |
     And user clicks View all medications link to view the My Medications page
-    And user select the Refill All Medications CTA
-    Then user will see "Complete Your Refill" Page
+    Then user will view the Refill All Medications CTA on MY Medications Page
+    When user select the Refill All Medications CTA
+    Then user will be brought to the "Complete Your Refill" page for that medication
     When user select the Change Shipping Address link
     Then user will view the "Change Shipping Address" page
 
