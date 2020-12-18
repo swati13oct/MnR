@@ -3384,22 +3384,22 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 				
 		public void validateSolutranOpensInNewWindow_memAuth() {
 			pageloadcomplete();
-			Set handles = driver.getWindowHandles();
-			System.out.println("Total Window Handle Count:: " + handles.size());			
-			String pnpPageHandle = driver.getWindowHandle();
-			String [] winhandles = (String[]) handles.toArray();						
-			driver.switchTo().window(winhandles[2]);
-			pageloadcomplete();
-			System.out.println("Current url is ::  "+currentUrl());
-			if(currentUrl().contains("https://healthybenefitsplus.com/base/About")) {
-				if(getTitle().equalsIgnoreCase("healthybenefitsplus")) {
-					Assert.assertTrue(true);
-				}
-				else {
-					Assert.assertFalse("PROBLEM - Solutran page is not successfully displayed",
-							true);
-				}
-				
+			int size = countOfNewWindowTab();
+			System.out.println("Number of windows opened when user click on OTC CTA is :: " + size);
+			if (size == 2) {
+				pageloadcomplete();
+				System.out.println("Current url is ::  "+currentUrl());
+				if(currentUrl().contains("https://healthybenefitsplus.com/base/About")) {
+						Assert.assertTrue(true);
+					}
+					else {
+						Assert.assertFalse("PROBLEM - New tab is opened but Solutran page is not successfully displayed",
+								true);
+					}
+			}else {
+				pageloadcomplete();
+				System.out.println("Current url is ::  "+currentUrl());
+				Assert.assertFalse("PROBLEM - Solutran Health Benefit Page is not opened in new browser window", true);
 			}
 		}
 
