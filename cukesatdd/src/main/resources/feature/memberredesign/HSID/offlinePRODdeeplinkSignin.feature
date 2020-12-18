@@ -49,3 +49,14 @@ Feature: To test URL formation on offline PROD Signin from various Deeplinks on 
       | SHIP   |
        
      #offline.myaarpmedicare.com/Extras  
+     
+         @regressionMemberPROD @codeWarriors @F392073 @p1
+  Scenario Outline: Verify Member lands on the documents page after signing in from edelivery deeplink.
+   Given member lands on the PROD /offline edelivery deeplink page
+      | <brand> |
+    And the offline PROD edelivery deeplink login page is displayed with all the fields
+
+    Examples: 
+      | brand  |
+      | PCP    |
+    
