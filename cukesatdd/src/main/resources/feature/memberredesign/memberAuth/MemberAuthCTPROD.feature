@@ -95,7 +95,7 @@ Feature: S1.1 To test Member Auth Sign for SSO Micro App.
 
     Examples: 
       | username | password | member                               | Scenario                                                                        |
-      | jkuma14  | Brock@04 | sandrakaye86                         | Scenario 8: Search using legacy username                                        |
+      | jkuma14  | Brock@04 | Yjl1007                              | Scenario 8: Search using legacy username                                        |
       
 @sanityMemberPROD2
   Scenario Outline: Scenario- <Scenario> - Test Case_To test single signon using member auth - Search using memberid and dob
