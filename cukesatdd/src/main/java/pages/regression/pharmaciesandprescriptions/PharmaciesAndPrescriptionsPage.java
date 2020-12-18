@@ -3382,28 +3382,22 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 		public void validateSolutranOpensInNewWindow_memAuth() {
 			pageloadcomplete();
 			Set handles = driver.getWindowHandles();
+			System.out.println("Total Window Handle Count:: " + handles.size());			
 			String pnpPageHandle = driver.getWindowHandle();
-			handles.remove(pnpPageHandle);
-			String winHandle = (String) handles.iterator().next();
-			if (winHandle != pnpPageHandle) {
-				String SolutranHandle = winHandle;
-				driver.switchTo().window(SolutranHandle);
-				pageloadcomplete();
-				CommonUtility.checkPageIsReady(driver);
-				if(currentUrl().contains("https://healthybenefitsplus.com/base/About")) {
-					if(getTitle().equalsIgnoreCase("healthybenefitsplus")) {
-						Assert.assertTrue(true);
-					}
-					else {
-						Assert.assertFalse("PROBLEM - Solutran page is not successfully displayed",
-								true);
-					}
-				
+			String [] winhandles = (String[]) handles.toArray();						
+			driver.switchTo().window(winhandles[2]);
+			pageloadcomplete();
+			System.out.println("Current url is ::  "+currentUrl());
+			if(currentUrl().contains("https://healthybenefitsplus.com/base/About")) {
+				if(getTitle().equalsIgnoreCase("healthybenefitsplus")) {
+					Assert.assertTrue(true);
 				}
+				else {
+					Assert.assertFalse("PROBLEM - Solutran page is not successfully displayed",
+							true);
+				}
+				
 			}
-			driver.close();
-			driver.switchTo().window(pnpPageHandle);
-
 		}
 
 }
