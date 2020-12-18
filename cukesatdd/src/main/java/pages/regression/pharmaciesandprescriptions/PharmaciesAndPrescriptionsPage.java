@@ -2,6 +2,8 @@ package pages.regression.pharmaciesandprescriptions;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Random;
 import java.util.Set;
@@ -3379,35 +3381,35 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 			// Store the current window handle
 			winHandleBefore = driver.getWindowHandle();
 			OTCToActnBtn.click();
+			switchToNewWindow(3);
+			
 		}
 		
 		public void validateOTCCallToActionNOTOnPnPPage() { 
 			Assert.assertFalse("PROBLEM - able to locate OTC call to action tile element"
 			 , validate(OTCToActnBtn, 30)); 
 		}
+		
+		public void switchToNewWindow(int windowCount) {
+		    Set<String> handles = driver.getWindowHandles();   
+		    Iterator<String> itr = handles.iterator();
+		    System.out.println(handles.size());
+		    int i = 1;
+		    while (itr.hasNext() && i < 4) {
+		        String popupHandle = itr.next().toString();
+		        driver.switchTo().window(popupHandle);
+		        System.out.println("Window title is : "+driver.getTitle());
+		        if (i == windowCount) break;
+		        i++;
+		    }
+		}
 				
-		public void validateSolutranOpensInNewWindow_memAuth() {
-			pageloadcomplete();
-			int size = countOfNewWindowTab();
-			System.out.println("Number of windows opened when user click on OTC CTA is :: " + size);
-			if (size == 2) {
-				// Switch to new window opened
-				for(String winHandle : driver.getWindowHandles()){
-				    driver.switchTo().window(winHandle);
-				    pageloadcomplete();
-				    System.out.println("Current url is ::  "+currentUrl());
-				    if(currentUrl().contains("https://healthybenefitsplus.com/base/About")) {
-						Assert.assertTrue(true);
-					}
-					else {
-						Assert.assertFalse("PROBLEM - New tab is opened but Solutran page is not successfully displayed",
-								true);
-					}
-				}				
+		public void validateSolutranOpensInNewWindow_memAuth() {			
+			if(driver.getTitle().equalsIgnoreCase("About") && driver.getCurrentUrl().equalsIgnoreCase("https://healthybenefitsplus.com/base/About")){
+				Assert.assertTrue(true);
 			}else {
-				System.out.println("Current url is ::  "+currentUrl());
-				Assert.assertFalse("PROBLEM - Solutran Health Benefit Page is not opened in new browser window", true);
-			}
+				Assert.assertFalse("PROBLEM - unable to switch window thus HealthBenefit page is not displayed successfully", true);
+			}						
 		}
 
 }
