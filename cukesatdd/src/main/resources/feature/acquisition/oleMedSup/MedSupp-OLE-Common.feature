@@ -185,8 +185,8 @@ Feature: 1.05.9 -OLE MedSupp Flow
       | Plan Type | <plantype> |
 		Then the site user clicks on View Plans Button proceed to View Plans Page
       | DOB           | <DOB>         |
-       And user clicks on save button and saves to plan cart for "first" time
-       | No Of Plans To Compare      | <NoOfPlans>         |
+       And user clicks on heart icon and save two heart icon plans
+       | No Of Plans To Save      | <NoOfPlans>         |
        And user clicks on view saved plans land on shopper profile page
        And user clicks on Edit Your Information link and navigate back to micro form
        Then user validate all fields are editable and view plan and cancel buttons are visible

@@ -467,7 +467,6 @@ public class VppCommonStepDefinition {
 
 	}
 
-
 	@And("^user clicks on save button and saves to plan cart for \"([^\"]*)\" time$")
 	public void user_clicks_on_save_button_and_saves_to_plan_cart(String attempt, DataTable givenAttributes)
 			throws Throwable {
@@ -540,15 +539,56 @@ public class VppCommonStepDefinition {
 		System.out.println("Plans saved on summary page are displayed on compare page");
 	}
 	
+	@And("^user clicks on heart icon and save two heart icon plans$")
+	public void user_clicks_on_heart_icon_and_save_two_heart_icon_plans(DataTable givenAttributes) throws Throwable {
+	    // Write code here that turns the phrase above into concrete actions
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		String planCount = memberAttributesMap.get("No Of Plans To Save");
+		int number = Integer.parseInt(planCount);
+		
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		
+		boolean result = plansummaryPage.savePlansOnSummaryPage(number);
+		Assert.assertTrue("user saved two heart icon plans", result);
+		System.out.println("user saved two heart icon plans");
+
+	      
+	}
+
+
 	@And("^user clicks on view saved plans land on shopper profile page$")
 	public void user_clicks_on_view_saved_plans_land_on_shopper_profile_page() throws Throwable {
 	    // Write code here that turns the phrase above into concrete actions
+		
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		
+		boolean result = plansummaryPage.clickOnSavedPlansAndNavigateToShopperProfile();
+		Assert.assertTrue("user land on shopper profile page", result);
+		System.out.println("user land on shopper profile page");
+
 	   
 	}
 
 	@Then("^user validate all fields are editable and view plan and cancel buttons are visible$")
 	public void user_validate_all_fields_are_editable_and_view_plan_and_cancel_buttons_are_visible() throws Throwable {
 	    // Write code here that turns the phrase above into concrete actions
+		
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		
+		boolean result = plansummaryPage.validateAllFieldsEditable();
+		Assert.assertTrue("all fields are editable and view plan and cancel buttons are visible", result);
+		System.out.println("all fields are editable and view plan and cancel buttons are visible");
+
 	    
 	}
 
