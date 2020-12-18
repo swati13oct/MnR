@@ -18,7 +18,8 @@ Feature: Pharmacy Locator CTA Tile on P&P page
     Then user validates a title for Pharmacy Locator Call To Action
     Then user validates a description for Pharmacy Locator Call To Action
     And user clicks on Pharmacy Locator call to action displayed second within that section
-    Then user will be directed to the Choose a plan year page
+    Then user will be directed to the new Pharmacy Locator tool built by Rally in the same browser window memAuth
+    #Then user will be directed to the Choose a plan year page
 
     Examples: 
       | username | password | memUserName | planType | memberType |
@@ -41,7 +42,8 @@ Feature: Pharmacy Locator CTA Tile on P&P page
     Then user validates a title for Pharmacy Locator Call To Action
     Then user validates a description for Pharmacy Locator Call To Action
     And user clicks on Pharmacy Locator call to action displayed second within that section
-    Then user will be directed to the Choose a plan year page
+    Then user will be directed to the new Pharmacy Locator tool built by Rally in the same browser window memAuth
+   # Then user will be directed to the Choose a plan year page
 
     Examples: 
       | username | password | memUserName | planType | memberType |
@@ -64,7 +66,8 @@ Feature: Pharmacy Locator CTA Tile on P&P page
     Then user validates a title for Pharmacy Locator Call To Action
     Then user validates a description for Pharmacy Locator Call To Action
     And user clicks on Pharmacy Locator call to action displayed second within that section
-    Then user will be directed to the Choose a plan year page
+    Then user will be directed to the new Pharmacy Locator tool built by Rally in the same browser window memAuth
+    #Then user will be directed to the Choose a plan year page
 
     Examples: 
       | username | password | memUserName         | planType | memberType |
@@ -87,7 +90,8 @@ Feature: Pharmacy Locator CTA Tile on P&P page
     Then user validates a title for Pharmacy Locator Call To Action
     Then user validates a description for Pharmacy Locator Call To Action
     And user clicks on Pharmacy Locator call to action displayed second within that section
-    Then user will be directed to the Choose a plan year page
+    Then user will be directed to the new Pharmacy Locator tool built by Rally in the same browser window memAuth
+   # Then user will be directed to the Choose a plan year page
 
     Examples: 
       | username | password | memUserName | planType | memberType |
