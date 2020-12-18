@@ -3162,7 +3162,7 @@ action.moveToElement(navigationSectionHomeLink).moveToElement(ourPlansHoverLink)
 		}
 		
 		public AcquisitionHomePage  validateCallpopup() throws InterruptedException {
-			int retry = 1;
+		/*	int retry = 1;
 			do	{
 				driver.navigate().refresh();
 				CommonUtility.checkPageIsReady(driver);
@@ -3182,6 +3182,27 @@ action.moveToElement(navigationSectionHomeLink).moveToElement(ourPlansHoverLink)
 //			CallSamTFNClose.click();
 			jsClickNew(CallSamTFNClose);
 			validateNew(callsam);		
+			return null;*/
+			driver.navigate().refresh();
+			CommonUtility.checkPageIsReady(driver);
+			CheckiPerseptions();
+			validate(callsamtooltip);
+			String ActualCallSAMTFN = callsam.getText();
+			System.out.println("TFN No displayed on the Page" + ActualCallSAMTFN);
+			jsClickNew(callsam);
+			System.out.println("@@@@@@@@@@@@@@@ Call Icon Clicked @@@@@@@@@@@@@@@");
+			driver.switchTo().activeElement();
+			String ExpectedCallSAMTFN = CallSamTFN.getText();
+			System.out.println("TFN No displayed on the Page" + ExpectedCallSAMTFN);
+			if(ExpectedCallSAMTFN.contains(ActualCallSAMTFN)) {
+				System.out.println("****************TFN number was  found macthing with the SAM call Popup  ***************");
+				validate(CallSamTFNClose);
+				jsClickNew(CallSamTFNClose);
+				Assert.assertTrue(true);
+			}
+			else {
+				Assert.fail("*****************TFN number was  not found macthing with the SAM call Popup ***************");
+			}
 			return null;
 		}
 		
