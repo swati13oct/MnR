@@ -1614,28 +1614,18 @@ public class AcquisitionHomePage extends GlobalWebElements {
 				jsClickNew(callsam);
 				System.out.println("@@@@@@@@@@@@@@@ Call Icon Clicked @@@@@@@@@@@@@@@");
 				driver.switchTo().activeElement();
-//				System.out.println(CallSamTFN.getText());
-//				CallSamTFNClose.click();
-//				validateNew(callsam);
+			System.out.println(CallSamTFN.getText());
+			CallSamTFNClose.click();
+				validateNew(callsam);
 				System.out.println("Call Sam checking for "+retry+" times");
 				retry++;
-			} while (!validate(CallSamTFN) && (retry<6));
+			} while (!validate(CallSamTFN) && (retry<1));
 			
 			System.out.println(CallSamTFN.getText());
 //			CallSamTFNClose.click();
 			jsClickNew(CallSamTFNClose);
 			validateNew(callsam);		
 			return null;
-			
-		/*	validate(callsamtooltip);
-			CheckiPerseptions();
-			callsam.click();
-			System.out.println("@@@@@@@@@@@@@@@ Call Icon Clicked @@@@@@@@@@@@@@@");
-			driver.switchTo().activeElement();
-			System.out.println(CallSamTFN.getText());
-			CallSamTFNClose.click();
-			validateNew(callsam);		
-			return null;*/
 		}
 		
 		public void validateChatSam() throws InterruptedException {
