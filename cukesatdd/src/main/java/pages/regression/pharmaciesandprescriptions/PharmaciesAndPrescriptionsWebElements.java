@@ -478,6 +478,12 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	@FindBy(xpath = "//*[contains(text(),'1-844-876-6177')]")
 	protected WebElement planSupportNumber;
 
+	@FindBy(xpath = "//*[contains(@id,'accordion-header-6-0')]")
+	protected WebElement commonQuestionOne;
+
+	@FindBy(xpath = "//*[contains(@id,'accordion-header-8-0')]")
+	protected WebElement commonQuestionTwo;
+
 	@FindBy(xpath = "//*[@id='needhelpsectioncontactus']/div/section/div/div[2]/div/div/div[1]/div/div/p[3]")
 	protected WebElement planSupportHours;
 
@@ -1376,6 +1382,18 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 		}
 	}
 
+	public boolean validateCommonQuestionsNotAvailable() {
+
+
+		if (commonQuestionOne.isDisplayed() && commonQuestionTwo.isDisplayed()) {
+
+			return false;
+		} else {
+
+			return true;
+		}
+	}
+
 	public boolean disclaimer() {
 		validateNew(disclaimer,30);
 		waitforElementVisibilityInTime(disclaimer, 50);
@@ -1474,6 +1492,9 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 
 	@FindBy(xpath = "//button[@data-testid='confirm__delete__cancel']")
 	protected WebElement removePopUpCancelBtn;
+
+	@FindBy(xpath = "//h2[contains(text(),'Common Questions')]")
+	protected WebElement commonQuestionHeader;
 
 	@FindBy(xpath = "/html/body/div[3]/div[1]/main/div/div/div[2]/div/div/div[3]/div[3]/div[2]/div[1]/div[2]/div[2]")
 	protected WebElement walgreensRefillsLeft;
