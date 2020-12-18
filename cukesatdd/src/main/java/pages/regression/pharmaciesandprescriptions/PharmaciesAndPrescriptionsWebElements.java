@@ -3,7 +3,10 @@ package pages.regression.pharmaciesandprescriptions;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
+import gherkin.formatter.model.Match;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -469,8 +472,8 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	@FindBy(xpath = "//h2[@data-testid='section__header']")
 	protected List<WebElement> NumberInParenthesisRefillAll;
 
-	@FindBy(xpath = "//*[contains(text(),'1-800-721-0627')]")
-	protected WebElement technicalSupportNumber;
+	@FindBy(xpath = "//*[starts-with(@class,'display-inline')]")
+	protected List<WebElement> needHelpPhoneNumbers;
 
 	@FindBy(xpath = "//*[contains(text(),'1-844-876-6177')]")
 	protected WebElement planSupportNumber;
@@ -1346,10 +1349,11 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 
 	public boolean validateNeedHelpsPhoneNumbers() {
 
-		String techNumber="1-800-721-0627";
-		String planNumber="1-844-876-6177";
+		String randomNumber=needHelpPhoneNumbers.get(new Random().nextInt(needHelpPhoneNumbers.size())).getText();
+		Pattern pattern=Pattern.compile("^[0-9]+(-[0-9]+)+$");
+		Matcher matcher=pattern.matcher(randomNumber);
 
-		if (techNumber.equals(technicalSupportNumber.getText()) && planNumber.equals(planSupportNumber.getText())) {
+		if (matcher.matches()) {
 
 			return true;
 		} else {
@@ -1360,10 +1364,10 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 
 	public boolean validateNeedHelpsHoursOfOperations() {
 
-		String Hours1="7 a.m. - 10 p.m. CT, 7 days a week";
-		String Hours2="8 a.m. - 8 p.m. local time, 7 days a week";
+//		String Hours1="7 a.m. - 10 p.m. CT, 7 days a week";
+//		String Hours2="8 a.m. - 8 p.m. local time, 7 days a week";
 
-		if (planSupportHours.getText().equals(Hours1) && technicalSupportHours.getText().equals(Hours2)) {
+		if (!planSupportHours.getText().isEmpty() && !technicalSupportHours.getText().isEmpty()) {
 
 			return true;
 		} else {
