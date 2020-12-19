@@ -28,7 +28,7 @@ Feature: 1.04.1.1 To Test NON-DREAM EOB for Members - E2E - Member Auth - PROD
 
     Examples: 
       | index | username  | password  | MemUserName            | planType                 | memberType         | eobType | realEob | flagZeroEob |
-      | S01   | kkumard   | tnps459#  | gingerdrais46          | SHIP_HOSPITAL INDEMNITY  | MULTI_SHIP_EOB     | Medical | true    | false       | 
+      | S01   | kkumard   | tnps459#  | Pauline3707            | SHIP_HOSPITAL INDEMNITY  | MULTI_SHIP_EOB     | Medical | true    | false       | 
 
   #----- begin regression
   @prod_eob01
