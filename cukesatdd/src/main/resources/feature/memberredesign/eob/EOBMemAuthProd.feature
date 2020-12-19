@@ -21,6 +21,8 @@ Feature: 1.04.1.1 To Test NON-DREAM EOB for Members - E2E - Member Auth - PROD
       | Member Type  | <memberType>  |
     #-------------- navigate to the target test page for testing
     Then the user navigates to EOB page
+    And the user selects the eob type
+      | EOB Type | <eobType> |
     #----- Validate Date Range Last 90 Days ----  
     And the user selects the desired date range
       | Date Range | Last 90 Days |
