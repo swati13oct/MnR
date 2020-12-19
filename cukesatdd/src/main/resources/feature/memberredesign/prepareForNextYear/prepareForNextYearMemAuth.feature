@@ -47,7 +47,7 @@ Feature: 1.25.1 Member Prepare For Next Year - Member Auth
 	    | index | FID     | username  | password  | MemUserName             | planType | memberType          |
 	    | 1-04  | F437767 | qavgogine | qavgogine | preeffectiveFEDMA_001   | MA	   | IND_PREEFF_PFNY     |
 	    | 1-05  | F437767 | qavgogine | qavgogine | q2_june_Cosmos_Seg056   | MA	   | IND_TERM_PFNY       |
-	    | 1-06  | F437767 | qavgogine | qavgogine | q4_Ship_013      | SHIP	   | IND_PFNY            |
+	    | 1-06  | F437767 | qavgogine | qavgogine | q4_Ship_ANOC_009      | SHIP	   | IND_PFNY            |
 			
 	@memAuth_pfny01_comboPdpSsp
     Examples: 

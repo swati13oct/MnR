@@ -26,7 +26,7 @@ Feature: 1.24.1.a Member Individual Health Record - Member Auth - P1 - Dashboard
     @memAuth_no_ihr_p1_ship_exclude
     Examples: 
 	    | index | FID     | username  | password  | MemUserName             | planType                 | memberType         | expectLink  | 
-	    | 01    | F424804 | qavgogine | qavgogine | q4_Ship_013      | SHIP_MEDICARE SUPPLEMENT | NO_IHR             | false       |
+	    | 01    | F424804 | qavgogine | qavgogine | q4_Ship_ANOC_009      | SHIP_MEDICARE SUPPLEMENT | NO_IHR             | false       |
 	    | 02    | F424804 | qavgogine | qavgogine | q2_may_rally032         | MA                       | EXCLUDE_IHR        | false       |
 
     @memAuth_no_ihr_p1_shipCombo

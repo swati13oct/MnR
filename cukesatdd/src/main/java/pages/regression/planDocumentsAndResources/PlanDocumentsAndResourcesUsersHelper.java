@@ -1429,11 +1429,11 @@ public class PlanDocumentsAndResourcesUsersHelper {
 				targetTestDocList.add("Evidence of Coverage");
 				targetTestDocList.add("Certificate of Coverage");
 				targetTestDocList.add("Additional Drug Coverage");
-				//targetTestDocList.add("Formulary/Drug List - Comprehensive");
-				//targetTestDocList.add("Prior Authorization Criteria");
-				//targetTestDocList.add("Step Therapy Criteria");
-				//targetTestDocList.add("Formulary Additions");
-				//targetTestDocList.add("Formulary Deletions");
+				targetTestDocList.add("Formulary/Drug List - Comprehensive");
+				targetTestDocList.add("Prior Authorization Criteria");
+				targetTestDocList.add("Step Therapy Criteria");
+				targetTestDocList.add("Formulary Additions");
+				targetTestDocList.add("Formulary Deletions");
 				targetTestDocList.add("Plan Guide");
 				return targetTestDocList;
 			} 
