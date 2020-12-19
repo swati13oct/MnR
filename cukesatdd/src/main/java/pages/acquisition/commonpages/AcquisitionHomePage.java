@@ -311,6 +311,12 @@ public class AcquisitionHomePage extends GlobalWebElements {
    	@FindBy(xpath ="//*[@id='sam-call-modal']/div/div")
    	private WebElement callSamPopup;
    	
+   	@FindBy(xpath ="//*[contains(@id,'sam-call-modal')]//*[contains(@class,'timezone')]")
+	private WebElement CallSamTFNtimezone;
+	
+	@FindBy(xpath ="//p[contains(text(),'Already a member?')]")
+	private WebElement CallSamTFNMember;
+   	
    	@FindBy(xpath = "//*[contains(@class,'companyNameHeader')]/p")
    	private WebElement pageheader;
 
@@ -3196,14 +3202,49 @@ action.moveToElement(navigationSectionHomeLink).moveToElement(ourPlansHoverLink)
 			System.out.println("TFN No displayed on the Page" + ExpectedCallSAMTFN);
 			if(ExpectedCallSAMTFN.contains(ActualCallSAMTFN)) {
 				System.out.println("****************TFN number was  found macthing with the SAM call Popup  ***************");
-				validate(CallSamTFNClose);
-				jsClickNew(CallSamTFNClose);
+				
 				Assert.assertTrue(true);
 			}
 			else {
 				Assert.fail("*****************TFN number was  not found macthing with the SAM call Popup ***************");
 			}
+			String ActualCallSamTFNtimezone ="Hours: 8 a.m. – 8 p.m., 7 days a week.*\n*Alaska and Hawaii: 8 a.m. – 8 p.m. Monday – Friday, 8 a.m. – 5 p.m. Saturday and Sunday.";
+			System.out.println(ActualCallSamTFNtimezone);
+	String ExpectedCallSamTFNtimezone = CallSamTFNtimezone.getText();
+			System.out.println(ExpectedCallSamTFNtimezone);
+			System.out.println(ActualCallSamTFNtimezone);
+			if(ExpectedCallSamTFNtimezone.contains(ActualCallSamTFNtimezone)) {
+						System.out.println("****************TFN Timezone Content was  found macthing with the SAM call Popup  ***************");
+						Assert.assertTrue(true);	
+				}
+			else {
+				Assert.fail("*****************TFN Timezone Content was not found macthing with the SAM call Popup  ***************");
+			}
+			String ActualCallSamTFNMember="Already a member? Call the number on the back of your member ID card.";
+			//ActualCallSamTFNMember.replace("", " ");	
+		//	WebElement strCallSamTFNMember= driver.findElement(By.xpath("//p[contains(text(),'Already a member?')]"));
+			String ExpectedCallSamTFNMember = CallSamTFNMember.getText();
+			System.out.println(ExpectedCallSamTFNMember);
+			if(ExpectedCallSamTFNMember.contains(ActualCallSamTFNMember)) {
+				System.out.println("****************TFN Member Content was  found macthing with the SAM call Popup  ***************");		
+				Assert.assertTrue(true);
+			}
+			else {
+				Assert.fail("*****************TFN Timezone Content was not found macthing with the SAM call Popup  ***************");
+				}
+			validate(CallSamTFNClose);
+			jsClickNew(CallSamTFNClose);
+		/*	validate(callsamtooltip);
+			CheckiPerseptions();
+			callsam.click();
+			System.out.println("@@@@@@@@@@@@@@@ Call Icon Clicked @@@@@@@@@@@@@@@");
+			driver.switchTo().activeElement();
+			System.out.println(CallSamTFN.getText());
+			CallSamTFNClose.click();
+			validateNew(callsam);		
+			return null;*/
 			return null;
+		
 		}
 		
 		public void validateChatSam() throws InterruptedException {
