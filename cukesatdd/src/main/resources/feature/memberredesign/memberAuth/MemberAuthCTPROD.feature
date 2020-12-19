@@ -12,7 +12,7 @@ Feature: S1.1 To test Member Auth Sign for SSO Micro App.
 
     Examples: 
       | username | password | member                               | Scenario                                                                        |
-      | jkuma14  | Brock@04 | skho@roadrunner.com                  | Scenario 1:  Search with member username : Federal Individual MAPD Member- NICE |
+      | jkuma14  | Brock@04 | KEVINC1234                           | Scenario 1:  Search with member username : Federal Individual MAPD Member- NICE |
       | jkuma14  | Brock@04 | Pramila1946                          | Scenario 2a: Search using username – SHIP Member                                |
       | jkuma14  | Brock@04 | marylamb823                          | Scenario 3: Search using username – PCP Plan Member                             |
 
