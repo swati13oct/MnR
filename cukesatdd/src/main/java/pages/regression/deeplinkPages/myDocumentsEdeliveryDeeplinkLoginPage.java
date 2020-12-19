@@ -266,7 +266,61 @@ public class myDocumentsEdeliveryDeeplinkLoginPage extends UhcDriver {
 						return true;							
 					
 				}
+				//page from MR constants 	
+				private static String Offline_PROD_edelivery = MRConstants.Offline_PROD_edelivery;
 				
+				 /*This method will open deep link page */
+				public healthwellnessDeepLinkLoginPageSHIP navigateToLoginURLoffline(String brand){
+					start(Offline_PROD_edelivery);
+					driver.manage().deleteAllCookies();
+					
+					try {
+						Thread.sleep(10000);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}		
+					return null;
+					}
+
+				@FindBy(xpath="//button[contains(@class,'btn btn-primary btn-block')]")
+				private static WebElement offlineSignin;
+				
+				// This method validated the elements on the DEEPLINK page 
+				public void validateofflinePageElements() throws InterruptedException{
+					Thread.sleep(10000);
+					System.out.println(driver.getCurrentUrl());
+					validateNew(offlineSignin);
+				}
+				
+				@FindBy(xpath = "//h3[contains(text(),'Support for UnitedHealthcare members')]")
+				private WebElement textonpage1;	
+				
+					public boolean validateOfflineProdedeliverypage() {
+						checkForIPerceptionModel(driver);
+						CommonUtility.checkPageIsReadyNew(driver);	
+						try {
+							Thread.sleep(10000);
+						} catch (InterruptedException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+						validateNew(textonpage1);
+						System.out.println("*** Page URL ***" + driver.getCurrentUrl());
+						System.out.println("*** PageTitle ***" + driver.getTitle());
+						if (driver.getCurrentUrl().contains("SMSR/medicare/member/my-documents/overview.html%3fdeeplink")) {
+							System.out.println("*** Page URL ***" + driver.getCurrentUrl());
+							System.out.println("** User landed on edelivery deeplink page**");
+							System.out.println("*** PageTitle ***" + driver.getTitle());
+							Assert.assertTrue(driver.getTitle().contains("UnitedHealthcare Medicare Member Sign In"));
+							return true;
+							} else {
+								Assert.fail("The element " + textonpage1.getText() + "is not found");
+							}
+											
+							return true;	
+						}
+					
 				
 }
 

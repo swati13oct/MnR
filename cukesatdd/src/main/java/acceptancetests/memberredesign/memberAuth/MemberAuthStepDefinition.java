@@ -112,7 +112,7 @@ public class MemberAuthStepDefinition{
 	
 	@Given("^the user is on member auth login flow page$")
 	public void member_auth_login_flow_page(){
-		WebDriver wd = getLoginScenario().getWebDriverNew();	
+		WebDriver wd = getLoginScenario().getWebDriver();	
 		wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 
@@ -791,4 +791,29 @@ public class MemberAuthStepDefinition{
 			Assert.fail();
 		}
 		}
+	@And("^Member Enters the legacy Username he wants to search$")
+	public void member_enters_legacyusername_and_searches(DataTable profileAttributes) throws InterruptedException{
+
+
+		MemberAuthPage memberauth = (MemberAuthPage) getLoginScenario().getBean(PageConstants.Member_Auth_Login);
+
+		List<DataTableRow> profileAttributesRow = profileAttributes
+				.getGherkinRows();
+		Map<String, String> profileAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < profileAttributesRow.size(); i++) {
+
+			profileAttributesMap.put(profileAttributesRow.get(i).getCells()
+					.get(0), profileAttributesRow.get(i).getCells().get(1));
+		}		
+		getLoginScenario().saveBean(LoginCommonConstants.USERNAME, profileAttributesMap.get("MemUsername"));
+
+		MemberAuthPage mauthPage = memberauth.MainMemberLogin1(profileAttributesMap.get("MemUsername"));
+		
+		if(mauthPage!=null){
+			getLoginScenario().saveBean(PageConstants.Member_Auth_PopUp, mauthPage);
+		} else {
+			System.out.println("mauthPage is null");
+		}
+
+	}
 }

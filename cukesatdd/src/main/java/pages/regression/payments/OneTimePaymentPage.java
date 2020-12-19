@@ -36,7 +36,7 @@ public class OneTimePaymentPage extends UhcDriver {
 	@FindBy(id = "optionsRadios1")
 	private WebElement AmountDueTodayButton;
 	
-	@FindBy(xpath = "//label[@for='optionsRadios10']//input")
+	@FindBy(xpath = "//label[@for='optionsRadios30']//input")
 	private WebElement CheckingAccountRadioButton;
 
 	@FindBy(xpath = "//label[@for='optionsRadios40']//input")
@@ -533,7 +533,9 @@ public class OneTimePaymentPage extends UhcDriver {
 	    public void selectAndEnterAmount(String otherAmount) {
 		TestHarness.checkForIPerceptionModel(driver);
 		validate(otherAmountRadioButton);
+		TestHarness.checkForIPerceptionModel(driver);
 		otherAmountRadioButton.click();
+		TestHarness.checkForIPerceptionModel(driver);
 		otherAmountInput.clear();
 		TestHarness.checkForIPerceptionModel(driver);
 		otherAmountInput.sendKeys(otherAmount);

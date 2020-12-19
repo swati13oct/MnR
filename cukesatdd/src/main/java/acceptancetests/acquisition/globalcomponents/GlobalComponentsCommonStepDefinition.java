@@ -345,67 +345,67 @@ public class GlobalComponentsCommonStepDefinition {
 		  aquisitionhomepage.clickBrowserBackButton();
 		  
 	  }
-
- @And("^user clicks on visit aarp.org link in the header$")
- public void click_visitAARP_Link_in_the_header() { 
-	  AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage)getLoginScenario() .getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		  aquisitionhomepage.clickVisitAARPHeaderLink();
-	  
-	  }
+//
+// @And("^user clicks on visit aarp.org link in the header$")
+// public void click_visitAARP_Link_in_the_header() { 
+//	  AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage)getLoginScenario() .getBean(PageConstants.ACQUISITION_HOME_PAGE);
+//		  aquisitionhomepage.clickVisitAARPHeaderLink();
+//	  
+//	  }
   
-	  @And("^user clicks on visit aarp.org link in the footer$")
-	  public void click_visitAARP_Link_in_the_footer() { 
-		  AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage)getLoginScenario() .getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		  aquisitionhomepage.clickVisitAARPFooterLink();
-		  
-	  }
+//	  @And("^user clicks on visit aarp.org link in the footer$")
+//	  public void click_visitAARP_Link_in_the_footer() { 
+//		  AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage)getLoginScenario() .getBean(PageConstants.ACQUISITION_HOME_PAGE);
+//		  aquisitionhomepage.clickVisitAARPFooterLink();
+//		  
+//	  }
+//
+//
+//	  @When("^the user clicks on Medicare Advantage Plans Link$")
+//	  public void the_user_clicks_on_Medicare_Advantage_Plans_Link() throws Throwable {
+//		  AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage)getLoginScenario() .getBean(PageConstants.ACQUISITION_HOME_PAGE);
+//		  aquisitionhomepage.MedicareAdvantagePlans();
+//		 
+//	  }
+//
+//	  @When("^the user clicks on Dual Special Needs Plans Link$")
+//	  public void the_user_clicks_on_Dual_Special_Needs_Plans_Link() throws Throwable {
+//		  AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage)getLoginScenario() .getBean(PageConstants.ACQUISITION_HOME_PAGE);
+//		  aquisitionhomepage.DualSplNeedPlans();
+//	  }
+//
+//	  @When("^the user clicks on Medicare Supplement Insurance Plans Link$")
+//	  public void the_user_clicks_on_Medicare_Supplement_Insurance_Plans_Link() throws Throwable {
+//		  AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage)getLoginScenario() .getBean(PageConstants.ACQUISITION_HOME_PAGE);
+//		  aquisitionhomepage.Medicaresupplementinsuranceplans();
+//	  }
+//
+//	  @When("^the user clicks on Medicare Prescription Drug Plans Link$")
+//	  public void the_user_clicks_on_Medicare_Prescription_Drug_Plans_Link() throws Throwable {
+//		  AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage)getLoginScenario() .getBean(PageConstants.ACQUISITION_HOME_PAGE);
+//		  aquisitionhomepage.MedicarePrescriptionDrugPlans();
+//	  }
 
-
-	  @When("^the user clicks on Medicare Advantage Plans Link$")
-	  public void the_user_clicks_on_Medicare_Advantage_Plans_Link() throws Throwable {
-		  AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage)getLoginScenario() .getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		  aquisitionhomepage.MedicareAdvantagePlans();
-		 
-	  }
-
-	  @When("^the user clicks on Dual Special Needs Plans Link$")
-	  public void the_user_clicks_on_Dual_Special_Needs_Plans_Link() throws Throwable {
-		  AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage)getLoginScenario() .getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		  aquisitionhomepage.DualSplNeedPlans();
-	  }
-
-	  @When("^the user clicks on Medicare Supplement Insurance Plans Link$")
-	  public void the_user_clicks_on_Medicare_Supplement_Insurance_Plans_Link() throws Throwable {
-		  AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage)getLoginScenario() .getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		  aquisitionhomepage.Medicaresupplementinsuranceplans();
-	  }
-
-	  @When("^the user clicks on Medicare Prescription Drug Plans Link$")
-	  public void the_user_clicks_on_Medicare_Prescription_Drug_Plans_Link() throws Throwable {
-		  AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage)getLoginScenario() .getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		  aquisitionhomepage.MedicarePrescriptionDrugPlans();
-	  }
-
-	  @When("^the user clicks on Medicare Education Link$")
-	  public void the_user_clicks_on_Medicare_Education_Link() throws Throwable {
-		  AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage)getLoginScenario() .getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		  aquisitionhomepage.MedicareEducation();
-	  }
-
-	  @When("^the user clicks on Back to top Link$")
-	  public void the_user_clicks_on_Back_to_top_Link() throws Throwable {
-		  AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage)getLoginScenario() .getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		  aquisitionhomepage.backtotop();
-	  }
-
-
-     @When("^the user clicks on Accessibility Link$")
-     public void the_user_clicks_on_Accessibility_Link() throws Throwable {
-	  AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage)getLoginScenario() .getBean(PageConstants.ACQUISITION_HOME_PAGE);
-	  aquisitionhomepage.Accessibility();
-}
-
-
+//	  @When("^the user clicks on Medicare Education Link$")
+//	  public void the_user_clicks_on_Medicare_Education_Link() throws Throwable {
+//		  AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage)getLoginScenario() .getBean(PageConstants.ACQUISITION_HOME_PAGE);
+//		  aquisitionhomepage.MedicareEducation();
+//	  }
+//
+//	  @When("^the user clicks on Back to top Link$")
+//	  public void the_user_clicks_on_Back_to_top_Link() throws Throwable {
+//		  AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage)getLoginScenario() .getBean(PageConstants.ACQUISITION_HOME_PAGE);
+//		  aquisitionhomepage.backtotop();
+//	  }
+//
+//
+//     @When("^the user clicks on Accessibility Link$")
+//     public void the_user_clicks_on_Accessibility_Link() throws Throwable {
+//	  AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage)getLoginScenario() .getBean(PageConstants.ACQUISITION_HOME_PAGE);
+//	  aquisitionhomepage.Accessibility();
+//}
+//
+//
 
 	  @Then("^user select state for geotargeting from global footer of the Medicare Plans All page$")
 	  public void user_select_state_for_geotargeting(){
@@ -437,19 +437,19 @@ public class GlobalComponentsCommonStepDefinition {
 	  }
 	  
 	  @When("^the user navigates to Medicare Education Page from homepage$")
-	  public void user_navigates_to_Medicare_Education_Page_from_homepage()
-	  {
-		  AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage)getLoginScenario() .getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		  LearnAboutMedicareHomePage learnAboutMedicareHomePage=aquisitionhomepage.clickLearnMoreOnHomePage();  
-		  if(learnAboutMedicareHomePage!=null)
-		  {
-			  getLoginScenario().saveBean(PageConstants.LEARN_ABOUT_MEDICARE_PAGE, learnAboutMedicareHomePage);
-			  System.out.println("Medicare Education Page opened");
-			  Assert.assertTrue(true);
-		  }else {
-			  Assert.fail("Error in opening Medicare Education Page ");
-		  }
-	  }
+//	  public void user_navigates_to_Medicare_Education_Page_from_homepage()
+//	  {
+//		  AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage)getLoginScenario() .getBean(PageConstants.ACQUISITION_HOME_PAGE);
+//		  LearnAboutMedicareHomePage learnAboutMedicareHomePage=aquisitionhomepage.clickLearnMoreOnHomePage();  
+//		  if(learnAboutMedicareHomePage!=null)
+//		  {
+//			  getLoginScenario().saveBean(PageConstants.LEARN_ABOUT_MEDICARE_PAGE, learnAboutMedicareHomePage);
+//			  System.out.println("Medicare Education Page opened");
+//			  Assert.assertTrue(true);
+//		  }else {
+//			  Assert.fail("Error in opening Medicare Education Page ");
+//		  }
+//	  }
 	  
 	  @Then("^the user navigates to Prescriptions, Providers and Benefits page$")
 	  public void the_user_navigates_to_Prescriptions_Providers_and_Benefits_page()
@@ -675,15 +675,15 @@ public class GlobalComponentsCommonStepDefinition {
 		  LearnAboutMedicareHomePage learnAboutMedicareHomePage=(LearnAboutMedicareHomePage)getLoginScenario().getBean(PageConstants.LEARN_ABOUT_MEDICARE_PAGE);
 		  learnAboutMedicareHomePage.hoverToPlanPage(plantype);
 	  }
-	  
-	  @Then("^the user hover over Shop for a Plan and validates zipcode component$")
-	  public void the_user_hover_over_Shop_for_a_Plan_and_validates_zipcode_component() {
-		  AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage)getLoginScenario() .getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		  if(aquisitionhomepage.checkZipCompErrorInSubNav()==true){
-			  Assert.assertTrue(true);
-		  }else
-			  Assert.fail("Zip Component not present or Error msg not shown");
-	  }
+//	  
+//	  @Then("^the user hover over Shop for a Plan and validates zipcode component$")
+//	  public void the_user_hover_over_Shop_for_a_Plan_and_validates_zipcode_component() {
+//		  AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage)getLoginScenario() .getBean(PageConstants.ACQUISITION_HOME_PAGE);
+//		  if(aquisitionhomepage.checkZipCompErrorInSubNav()==true){
+//			  Assert.assertTrue(true);
+//		  }else
+//			  Assert.fail("Zip Component not present or Error msg not shown");
+//	  }
 	  
 	  @Then("^the user validate ZipCode Components on SubNav using ZipCode \"([^\"]*)\"$")
 	  public void the_user_enter_zipcode_and_go_to_Plan_Summary_Page(String zipCode){
@@ -697,8 +697,13 @@ public class GlobalComponentsCommonStepDefinition {
 		  
 		  
 	  }
+	  @Then("^the user check Still have a question$")
+	  public void the_user_check_Still_have_a_question() {
+		  LearnAboutMedicareHomePage learnAboutMedicareHomePage=(LearnAboutMedicareHomePage)getLoginScenario().getBean(PageConstants.LEARN_ABOUT_MEDICARE_PAGE);
+		  learnAboutMedicareHomePage.chechStillHaveQues();
+	  }
+	  
 	 
 	  
-
 }
 

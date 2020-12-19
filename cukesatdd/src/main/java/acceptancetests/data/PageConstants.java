@@ -746,6 +746,8 @@ public static final String STAGE_Pharmacy_DEEPLINK_lOGIN_PAGE="pharmacydeeplinkl
 	public static final String PHARMACY_NAME = "pharmacyName";
 	public static final String Offline_PROD_VirtualVisit_DEEPLINK_lOGIN_PAGE="offlinePRODvirtualVisitdeeplinklogin";
 	public static final String Offline_PROD_HWP_DEEPLINK_lOGIN_PAGE="offlinePRODHWPdeeplinklogin";
+	public static final String Offline_PROD_SHIP_healthNwellness="offlinePRODshiphealthwellnessdeeplinklogin";
+	public static final String Offline_PROD_edelivery="offlinePRODedeliverysdeeplinklogin";
 
 
 	public static final String PRESCRIPTION_PROVIDER_BENEFITS_PAGE="prescriptionProviderBenefitsPage";

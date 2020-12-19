@@ -447,4 +447,7 @@ public static final String UHC_DEEPLINK_URL_Pharmacy = "http://stage-myuhcmedica
   public static String MEDICA_GUEST_PAYMENTS_PAGE_URL_PROD= "https://www.medicare.uhc.com/medica/premium-payment/#/"; 
   public static String GUEST_PAYMENTS_PAGE_URL_TEAM_A_TEST= "https://www.team-atest-medicare.ocp-elr-core-nonprod.optum.com/content/medicare/guest-payment.html/#/"; 
 
+  public static final String Offline_PROD_SHIP_extra ="https://offline.myaarpmedicare.com/Extras";
+  public static final String Offline_PROD_edelivery ="https://offline.medicare.uhc.com/?TARGET=SMSR/medicare/member/my-documents/overview.html%3fdeeplink=true&WT.mc_ID=8003461&mrcid=email_fed_m";
+  
   }

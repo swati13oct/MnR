@@ -173,7 +173,7 @@ public class PersonalInformationPage extends UhcDriver{
 	@FindBy(css="a#enrollment-saved-wc")
 	private WebElement enrollSavedClose;
 	
-	@FindBy(xpath = "//img[@alt='AARP Medicare Plans from United Healthcare']")
+	@FindBy(xpath = "//img[contains(@alt,'AARP Medicare Plans')]")
 	private WebElement aarpLogo;
 	
 	@FindBy(xpath = "//a[@class='enrollProfileBtn cta-button']")
