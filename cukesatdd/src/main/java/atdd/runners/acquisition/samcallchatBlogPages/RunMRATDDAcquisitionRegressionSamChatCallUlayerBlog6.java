@@ -1,4 +1,4 @@
-package atdd.runners.acquisition.samcallchat;
+package atdd.runners.acquisition.samcallchatBlogPages;
 
 
 import org.junit.runner.RunWith;

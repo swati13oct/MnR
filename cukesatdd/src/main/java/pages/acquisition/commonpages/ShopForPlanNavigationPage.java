@@ -77,7 +77,9 @@ public class ShopForPlanNavigationPage extends UhcDriver {
 	
 	@FindBy(xpath = "//div[@id='accordion2']//h3[text()='Enrollment']")
 	private WebElement EnrollmentLink;
-
+	@FindBy(xpath = "//a[text()='Provider Search']")
+	private WebElement providerSearchLink;
+	
 	public ShopForPlanNavigationPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -145,5 +147,10 @@ public class ShopForPlanNavigationPage extends UhcDriver {
 		}
 	//	return null;
 		return null;
+	}
+	
+	public void providersearch() {
+		CommonUtility.waitForPageLoadNew(driver, providerSearchLink, 60);
+		validateNew(providerSearchLink);
 	}
 }
