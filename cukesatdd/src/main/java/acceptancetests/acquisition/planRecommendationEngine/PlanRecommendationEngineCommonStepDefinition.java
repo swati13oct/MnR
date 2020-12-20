@@ -65,8 +65,8 @@ public class PlanRecommendationEngineCommonStepDefinition {
 	@When("^user navigate to Plan Recommendation Engine and Check Breadcrumbs$")
 	public void user_navigate_PRE_Breadcrumbs() throws InterruptedException {
 		PlanRecommendationEngineHeaderAndFooter headerAndFooter =  new PlanRecommendationEngineHeaderAndFooter(wd);
-		headerAndFooter.breadCrumbs();
-//		headerAndFooter.navigationToPlanRecommendationEngine();
+	//	headerAndFooter.breadCrumbs();
+		headerAndFooter.navigationToPlanRecommendationEngine();
 	}
 	
 	@And("^clicks on get started button and runs a questionnaire$")
