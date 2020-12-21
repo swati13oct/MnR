@@ -1,5 +1,5 @@
-Feature: P&P Notification is activated
-  To validate P&P Notification is activated.
+Feature: P&P Notification is activated for PDP member
+  To validate PDP user, P&P Notification is activated.
 
   @Sanity @Regression
   Scenario Outline: To verify P&P Notification is activated

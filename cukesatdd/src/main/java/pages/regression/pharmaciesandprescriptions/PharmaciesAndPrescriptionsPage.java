@@ -3426,7 +3426,8 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 		    }
 		}
 				
-		public void validateSolutranOpensInNewWindow_memAuth() {			
+		public void validateSolutranOpensInNewWindow_memAuth() {
+			CommonUtility.checkPageIsReady(driver);
 			if(driver.getTitle().equalsIgnoreCase("About") && driver.getCurrentUrl().equalsIgnoreCase("https://healthybenefitsplus.com/base/About")){
 				Assert.assertTrue(true);
 			}else {

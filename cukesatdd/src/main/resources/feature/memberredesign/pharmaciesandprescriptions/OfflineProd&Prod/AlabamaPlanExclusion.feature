@@ -86,3 +86,43 @@ Feature: Alabama Plan Exclusion
     Examples:
       | username | password | memUserName | planType | memberType |
       | yaihemai | Yusufu6$ | LUGRUG11    | MAPD     | Individual |
+      
+      
+ @Sanity @Regression
+  Scenario Outline: To verify (AL SEIB) P&P Notification is deactivated
+    Given the user is on member auth login flow page
+    When the member is able to login with correct username and password
+      | Username | <username> |
+      | Password | <password> |
+    And Member Enters the Username he wants to search
+      | MemUsername | <memUserName> |
+    And user clicks on member to select
+    When now user navigates to the pharmacies and prescriptions page from dashboard or testharness page
+      | PlanType    | <planType>   |
+      | Member Type | <memberType> |
+    When a PnP notification is deactivated
+
+    #When a PnP notification is activated
+    Examples: 
+      | username | password | memUserName | planType | memberType |
+      | kjadha10 | Virus$$1 | Aldridge314 | SEIB     | Group      |
+
+  @Sanity @Regression
+  Scenario Outline: To verify (AL LGHIB) P&P Notification is deactivated
+    Given the user is on member auth login flow page
+    When the member is able to login with correct username and password
+      | Username | <username> |
+      | Password | <password> |
+    And Member Enters the Username he wants to search
+      | MemUsername | <memUserName> |
+    And user clicks on member to select
+    When now user navigates to the pharmacies and prescriptions page from dashboard or testharness page
+      | PlanType    | <planType>   |
+      | Member Type | <memberType> |
+    When a PnP notification is deactivated
+
+    #When a PnP notification is activated
+    Examples: 
+      | username | password | memUserName | planType | memberType |
+      | kjadha10 | Virus$$1 | Xldycop     | LGHIB    | Individual |
+
