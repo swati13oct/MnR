@@ -396,13 +396,13 @@ public void the_user_navigates_to_following_memeber_signin_page_AARP(DataTable a
 	getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, aquisitionhomepage);
 	
 	if (getLoginScenario().environment.equalsIgnoreCase("stage")) {
-//		aquisitionhomepage.clickonmemberSignInStagelink(memberSignINSTAGEURL);
+		aquisitionhomepage.clickonmemberSignInStagelink(memberSignINSTAGEURL);
 	} 
 	else if (getLoginScenario().environment.equalsIgnoreCase("prod")){
 		aquisitionhomepage.clickonmemberSignInlink(memberSignINURL);
 	}
 	else if(getLoginScenario().environment.equalsIgnoreCase("offline")) {
-//		aquisitionhomepage.clickonmemberSignInOfflinelink(memberSignINOFFLINEURL);
+	aquisitionhomepage.clickonmemberSignInOfflinelink(memberSignINOFFLINEURL);
 	}
 	else {
 		Assert.fail("Error in loading the UHC Agent Page");
