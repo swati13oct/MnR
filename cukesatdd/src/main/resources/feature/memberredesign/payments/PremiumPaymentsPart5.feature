@@ -52,3 +52,39 @@ Background: Feature security flag needs to be true before ATDD script execution
     Examples: 
       | TID       | planType | memberType                       | Name | CreditCardNumber | validMonth | validYear | paymentType |
       | F243897   | PDP      | MakeOneTimeCCOther_SavedCardPayments      | Test | 4111111111111111 |         04 |      2028 | OneTime     |
+      
+      
+        #Test Case 35 - Federal member - One time CC - With replace card link
+  @regressionMember
+  Scenario Outline: TID: <memberType> - Test Case 35 - Verify MakeOne time Payment submission for Credit card with Replace card link
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type   | <planType>   |
+      | Member Type | <memberType> |
+    When the user clicks on Premium Payments on Header
+    And user clicks on Make one time payment on payment overview page
+    And user selects other amount and enters "1.00" and selects credit card and click on Replace Card link
+    Then user Navigates to UPG payment page and Enter Mandatory fields and click on Proceed
+      | Name             | <Name>             |
+      | CreditCardNumber | <CreditCardNumber> |
+      | Month            | <validMonth>       |
+      | Year             | <validYear>        |
+    Then for saving card user navigates to payment overview screen and selects agreements and save card checkbox and click on Make one time payment
+    Then User navigates to payment confirmation page for CC flow
+    And the user delete recurring payment record from GPS so that he can run recurring payment again
+      | Payment Type | <paymentType> |
+
+    Examples: 
+      | TID       | planType  | memberType                  | Name | CreditCardNumber | validMonth | validYear | paymentType |
+      | F243897   | MAPD      | MakeOneTimeCCReplaceCard    | Test | 4111111111111111 |         04 |      2028 | OneTime     |
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
