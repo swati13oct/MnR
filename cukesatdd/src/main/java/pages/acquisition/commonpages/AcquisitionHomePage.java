@@ -3215,7 +3215,7 @@ action.moveToElement(navigationSectionHomeLink).moveToElement(ourPlansHoverLink)
 			String ActualCallSamTFNtimezone = CallSamTFNtimezone.getText();
 			System.out.println(ExpectedCallSamTFNtimezone);
 			System.out.println(ActualCallSamTFNtimezone);
-			if(ExpectedCallSamTFNtimezone.equalsIgnoreCase(ActualCallSamTFNtimezone)) {
+			if(ExpectedCallSamTFNtimezone.replace(" ", "").replace("\n", "").equalsIgnoreCase(ActualCallSamTFNtimezone.replace(" ", "").replace("\n", ""))) {
 						System.out.println("****************TFN Timezone Content was  found macthing with the SAM call Popup  ***************");
 						Assert.assertTrue(true);	
 				}
