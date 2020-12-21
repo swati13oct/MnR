@@ -137,9 +137,6 @@ public class MemberAuthPage extends UhcDriver {
 	@FindBy(xpath="//span[@class='redError' and contains(text(),'Unable to retrieve member')]")
 	protected WebElement redUnableToRetrMemErr;
 	
-	@FindBy(xpath="//span[@class='redError' and contains(text(),'User is not Registered with HSID')]")
-	protected WebElement redNoHsidErr;
-	
 	@FindBy(xpath="//h1[@translate='INTERNAL_ERROR_SORRY']")
 	protected WebElement sorryItsNotYouErr;
 
@@ -237,7 +234,6 @@ public class MemberAuthPage extends UhcDriver {
 		FinalSearchButton.click();
 
 		Assert.assertTrue("PROBLEM - Got 'Unable to retrieve member' error after clicking Search button", !validate(redUnableToRetrMemErr,1));
-		Assert.assertTrue("PROBLEM - Got 'User is not Registered with HSID' error after clicking Search button", !validate(redNoHsidErr,1));
 		//waitforElement(MemberTableUserName); // updated this wait as it is failing for 20 seconds
 		CommonUtility.waitForPageLoad(driver, MemberTableUserName, 10);
 		Assert.assertTrue("PROBLEM - unable ot locate member name from table after search", validate(MemberTableUserName,0));

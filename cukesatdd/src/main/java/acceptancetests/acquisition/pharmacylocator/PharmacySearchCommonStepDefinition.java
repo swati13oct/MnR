@@ -66,7 +66,7 @@ public class PharmacySearchCommonStepDefinition {
 	public void userNavigatesToPharmacySearchPage() {
 		AcquisitionHomePage aquisitionhomepage= (AcquisitionHomePage)getLoginScenario().getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		WebDriver wd = ( WebDriver)getLoginScenario().getBean(CommonConstants.WEBDRIVER);
-		aquisitionhomepage.selectState("Select State"); // note: default it to no state selected for predictable result
+//		aquisitionhomepage.selectState("Select State"); // note: default it to no state selected for predictable result
 		System.out.println("Unselected state on home page for more predictable result");
 		String testSiteUrl = aquisitionhomepage.getTestSiteUrl();
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
@@ -84,7 +84,7 @@ public class PharmacySearchCommonStepDefinition {
 		String state = inputAttributesMap.get("State");
 		AcquisitionHomePage aquisitionhomepage= (AcquisitionHomePage)getLoginScenario().getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		WebDriver wd = ( WebDriver)getLoginScenario().getBean(CommonConstants.WEBDRIVER);
-		aquisitionhomepage.selectState(state);
+//		aquisitionhomepage.selectState(state);
 		System.out.println("Selected state '" + state + "' on home page");
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, aquisitionhomepage);
@@ -536,7 +536,7 @@ public class PharmacySearchCommonStepDefinition {
 	public void userNavigatesFromplantypeToPharmacySearchPage() {
 		AcquisitionHomePage aquisitionhomepage= (AcquisitionHomePage)getLoginScenario().getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		WebDriver wd = ( WebDriver)getLoginScenario().getBean(CommonConstants.WEBDRIVER);
-		aquisitionhomepage.selectState("Select State"); // note: default it to no state selected for predictable result
+//		aquisitionhomepage.selectState("Select State"); // note: default it to no state selected for predictable result
 		System.out.println("Unselected state on home page for more predictable result");
 		String testSiteUrl = aquisitionhomepage.getTestSiteUrl();
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
