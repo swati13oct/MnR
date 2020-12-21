@@ -5409,8 +5409,10 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		System.out.println("Validating zip code is editable----------");
 		medSuppZipCode.clear();
 		medSuppZipCode.sendKeys(zip);
+		medSuppZipCode.sendKeys(Keys.TAB);
 		Thread.sleep(2000);
-		flag = medSuppZipCode.getText().equalsIgnoreCase(zip);
+		String actualzip = medSuppZipCode.getAttribute("value");
+		flag = actualzip.equalsIgnoreCase(zip);
 		if(flag) {
 			System.out.println("---------zip code is editable----------");
 		}
@@ -5422,8 +5424,10 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		System.out.println("Validating Date of birth is editable----------");
 		DOB.clear();
 		DOB.sendKeys(dob);
+		DOB.sendKeys(Keys.TAB);
 		Thread.sleep(2000);
-		flag = DOB.getText().equalsIgnoreCase(dob);
+		String actualDOB = DOB.getAttribute("value");
+		flag = actualDOB.equalsIgnoreCase(dob);
 		if(flag) {
 			System.out.println("---------Date of birth is editable----------");
 		}
@@ -5529,7 +5533,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		}
 		
 		if(flag) {
-		Thread.sleep(15000);
+		Thread.sleep(2000);
 		System.out.println("Validating View Plan button is visible----------");
 		jsMouseOver(ViewPlanMedSupPage);
 		if(ViewPlanMedSupPage.isDisplayed()) {
@@ -5543,7 +5547,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		}
 		
 		if(flag) {
-		Thread.sleep(15000);
+		Thread.sleep(2000);
 		System.out.println("Validating Cancel button is visible----------");
 		if(CancelBtn.isDisplayed()) {
 		flag = true;
@@ -5557,8 +5561,202 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		
 		return flag;
 	}
+	
+	public boolean validateFieldsOnPlanDetails () throws InterruptedException {
+		String planName = "Plan F";
+		boolean flag = false;
+		Thread.sleep(2000);
+		
+		jsClickNew(viewPlanDetailsBtn);
+		Thread.sleep(2000);
+		
+		System.out.println("Validating user navigated to plan details----------");
+		String url = driver.getCurrentUrl();
+		flag = url.contains("planDetails"); 
+		if(flag) {
+			System.out.println("---------user navigated to plan details----------");
+			}
+			else {
+			System.out.println("---------user not navigated to plan details----------");
+			}
+		
+		if(flag) {
+		System.out.println("Validating plan name on plan details----------");
+		
+		flag = planNameOnPlanDetails.getText().contains(planName);
+			if(flag) {
+				System.out.println("---------plan name on plan details is correct----------");
+			} else {
+			System.out.println("---------plan name on plan details is incorrect----------");
+			}
+		}
+		
+		if(flag) {
+			System.out.println("Validating benefit table link on plan details----------");
+			
+			String parentHandle = driver.getWindowHandle();
+			
+			jsClickNew(benefitTableLink);
+			Thread.sleep(2000);
+			
+			Set <String> windowhandles = driver.getWindowHandles();
+			
+			for (String windowHandle : windowhandles) {
+				if(!windowHandle.equalsIgnoreCase(parentHandle)) {
+					driver.switchTo().window(windowHandle);
+					String url1 = driver.getCurrentUrl();
+					flag = url1.contains("MedSuppDocs/BenefitsTable");
+				}
+			}
+			
+			driver.switchTo().window(parentHandle);
+			
+				if(flag) {
+					System.out.println("---------benefit table link on plan details is working----------");
+				} else {
+				System.out.println("---------benefit table link on plan details is not working----------");
+				}
+			}
+		
+		if(flag) {
+			System.out.println("Validating start application button on plan details----------");
+			
+			jsClickNew(startApplicationBtn);
+			Thread.sleep(2000);
+			flag = insuredStatusHeader.isDisplayed();
+			
+				if(flag) {
+					System.out.println("---------start application button on plan details is working----------");
+				} else {
+				System.out.println("---------start application button on plan details is not working----------");
+				}
+		}
+		
+		return flag;
+	}
+	
+	public boolean validateFieldsOnPlanCompare () throws InterruptedException {
+		String planName1 = "Plan F";
+		String planName2 = "Plan G";
+		int noOfPlans = 2;
+		boolean flag = false;
+		Thread.sleep(2000);
+		
+		jsClickNew(comparePlansLink);
+		Thread.sleep(2000);
+		
+		System.out.println("Validating user navigated to plan compare----------");
+		String url = driver.getCurrentUrl();
+		flag = url.contains("compare"); 
+		if(flag) {
+			System.out.println("---------user navigated to plan compare----------");
+			}
+			else {
+			System.out.println("---------user not navigated to plan compare----------");
+			}
+		
+		if(flag) {
+		System.out.println("Validating plan names on plan compare----------");
+		
+		flag = comparePagePlan1.getText().contains(planName1) && comparePagePlan2.getText().contains(planName2);
+			if(flag) {
+				System.out.println("---------plan names on plan compare are correct----------");
+			} else {
+			System.out.println("---------plan name on plan compare are incorrect----------");
+			}
+		}
+		
+		if(flag) {
+			System.out.println("Validating benefit table link on plan compare----------");
+			
+			String parentHandle = driver.getWindowHandle();
+			
+			jsClickNew(comparePageBenefitTableLink);
+			Thread.sleep(2000);
+			
+			Set <String> windowhandles = driver.getWindowHandles();
+			
+			for (String windowHandle : windowhandles) {
+				if(!windowHandle.equalsIgnoreCase(parentHandle)) {
+					driver.switchTo().window(windowHandle);
+					String url1 = driver.getCurrentUrl();
+					flag = url1.contains("MedSuppDocs/BenefitsTable");
+				}
+			}
+			
+			driver.switchTo().window(parentHandle);
+			
+				if(flag) {
+					System.out.println("---------benefit table link on plan compare is working----------");
+				} else {
+				System.out.println("---------benefit table link on plan compare is not working----------");
+				}
+			}
+		
+		if(flag) {
+			System.out.println("Validating saved plan count on plan compare----------");
+			int noOfSavedPlans = Integer.parseInt(savedPlanHeaderCount.getText());
+			if (noOfSavedPlans == noOfPlans) {
+				flag = true;
+			}
+			else {
+				flag = false;
+			}
+			if(flag) {
+				System.out.println("---------saved plan count on plan compare is correct ----------");
+				} else {
+				System.out.println("---------saved plan count on plan compare is incorrect----------");
+				}
+		
+		}
 
-
+		if(flag) {
+			System.out.println("Validating start application button on plan compare----------");
+			
+			jsClickNew(comparePageStartApplicationBtn);
+			Thread.sleep(2000);
+			flag = insuredStatusHeader.isDisplayed();
+			
+				if(flag) {
+					System.out.println("---------start application button on plan compare is working----------");
+				} else {
+				System.out.println("---------start application button on plan compare is not working----------");
+				}
+		}	
+			
+		return flag;
+	}
+	
+	@FindBy(xpath = "(//a[text()='Benefit Table'])[1]")
+	WebElement comparePageBenefitTableLink;
+	
+	@FindBy(xpath = "(//span[text()='Start application'])[1]//parent::a")
+	WebElement comparePageStartApplicationBtn;
+			
+	@FindBy(xpath = "(//h3[@class='inline'])[1]")
+	WebElement comparePagePlan1;
+	
+	@FindBy(xpath = "(//h3[@class='inline'])[2]")
+	WebElement comparePagePlan2;
+	
+	@FindBy(xpath = "//a[text()='Compare Plans']")
+	WebElement comparePlansLink;
+	
+	@FindBy(xpath = "//span[@class='globalTitle']")
+	WebElement insuredStatusHeader;
+	
+	@FindBy(id = "planDetailStartApp")
+	WebElement startApplicationBtn;
+		
+	@FindBy(xpath = "//a[text()='Benefit Table']")
+	WebElement benefitTableLink;
+	
+	@FindBy(xpath = "//h2[@class='plan-title noMargin']")
+	WebElement planNameOnPlanDetails;
+	
+	@FindBy(xpath = "(//*[text()='View plan details'])[1]")
+	WebElement viewPlanDetailsBtn;
+	
 	@FindBy(xpath = "(//*[contains(@class,'backToPlanSummarry')])[2]")
 	WebElement CancelBtn;
 	
