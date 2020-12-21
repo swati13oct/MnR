@@ -313,12 +313,6 @@ public class AcquisitionHomePage extends GlobalWebElements {
    	@FindBy(xpath ="//*[@id='sam-call-modal']/div/div")
    	private WebElement callSamPopup;
    	
-   	@FindBy(xpath ="//*[contains(@id,'sam-call-modal')]//*[contains(@class,'timezone')]")
-	private WebElement CallSamTFNtimezone;
-	
-	@FindBy(xpath ="//p[contains(text(),'Already a member?')]")
-	private WebElement CallSamTFNMember;
-   	
    	@FindBy(xpath = "//*[contains(@class,'companyNameHeader')]/p")
    	private WebElement pageheader;
 
@@ -341,6 +335,12 @@ public class AcquisitionHomePage extends GlobalWebElements {
    	
    	@FindBy(xpath ="//*[contains(@id,'sam-call-modal')]//*[contains(@dtmname,'TFN Link') and contains(text(),'1-')]")
    	private WebElement CallSamTFN;
+   	
+	@FindBy(xpath ="//*[contains(@id,'sam-call-modal')]//*[contains(@class,'timezone')]")
+	private WebElement CallSamTFNtimezone;
+	
+	@FindBy(xpath ="//p[contains(text(),'Already a member?')]")
+	private WebElement CallSamTFNMember;
    	
    	@FindBy(xpath ="//*[contains(@id,'sam-call-modal')]//*[contains(@class,'modal-close')]")
    	private WebElement CallSamTFNClose;
@@ -1868,7 +1868,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		}
 		
 		public AcquisitionHomePage  validateCallpopup() throws InterruptedException {
-		/*	int retry = 1;
+			/*	int retry = 1;
 			do	{
 				driver.navigate().refresh();
 				CommonUtility.checkPageIsReady(driver);
@@ -1893,11 +1893,13 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			CommonUtility.checkPageIsReady(driver);
 			CheckiPerseptions();
 			validate(callsamtooltip);
+			validate(callsam);
 			String ActualCallSAMTFN = callsam.getText();
 			System.out.println("TFN No displayed on the Page" + ActualCallSAMTFN);
 			jsClickNew(callsam);
 			System.out.println("@@@@@@@@@@@@@@@ Call Icon Clicked @@@@@@@@@@@@@@@");
 			driver.switchTo().activeElement();
+			validate(CallSamTFN);
 			String ExpectedCallSAMTFN = CallSamTFN.getText();
 			System.out.println("TFN No displayed on the Page" + ExpectedCallSAMTFN);
 			if(ExpectedCallSAMTFN.contains(ActualCallSAMTFN)) {
@@ -1906,31 +1908,32 @@ public class AcquisitionHomePage extends GlobalWebElements {
 				Assert.assertTrue(true);
 			}
 			else {
-				Assert.fail("*****************TFN number was  not found macthing with the SAM call Popup ***************");
+				Assert.fail("*****************TFN number was  not found macthing with the SAM call Popup ***************"+ExpectedCallSAMTFN);
 			}
-			String ActualCallSamTFNtimezone ="Hours: 8 a.m. � 8 p.m., 7 days a week.*\n*Alaska and Hawaii: 8 a.m. � 8 p.m. Monday � Friday, 8 a.m. � 5 p.m. Saturday and Sunday.";
-			System.out.println(ActualCallSamTFNtimezone);
-	String ExpectedCallSamTFNtimezone = CallSamTFNtimezone.getText();
+			String ExpectedCallSamTFNtimezone ="Hours: 8 a.m. – 8 p.m., 7 days a week.*\n*Alaska and Hawaii: 8 a.m. – 8 p.m. Monday – Friday, 8 a.m. – 5 p.m. Saturday and Sunday.";
+			validate(CallSamTFNtimezone);
+			String ActualCallSamTFNtimezone = CallSamTFNtimezone.getText();
 			System.out.println(ExpectedCallSamTFNtimezone);
 			System.out.println(ActualCallSamTFNtimezone);
-			if(ExpectedCallSamTFNtimezone.contains(ActualCallSamTFNtimezone)) {
+			if(ExpectedCallSamTFNtimezone.replace(" ", "").replace("\n", "").equalsIgnoreCase(ActualCallSamTFNtimezone.replace(" ", "").replace("\n", ""))) {
 						System.out.println("****************TFN Timezone Content was  found macthing with the SAM call Popup  ***************");
 						Assert.assertTrue(true);	
 				}
 			else {
-				Assert.fail("*****************TFN Timezone Content was not found macthing with the SAM call Popup  ***************");
+				Assert.fail("*****************TFN Timezone Content was not found macthing with the SAM call Popup  ***************"+ActualCallSamTFNtimezone);
 			}
-			String ActualCallSamTFNMember="Already a member? Call the number on the back of your member ID card.";
+			String ExpectedCallSamTFNMember="Already a member? Call the number on the back of your member ID card.";
 			//ActualCallSamTFNMember.replace("", " ");	
 		//	WebElement strCallSamTFNMember= driver.findElement(By.xpath("//p[contains(text(),'Already a member?')]"));
-			String ExpectedCallSamTFNMember = CallSamTFNMember.getText();
+			validate(CallSamTFNMember);
+			String ActualCallSamTFNMember = CallSamTFNMember.getText();
 			System.out.println(ExpectedCallSamTFNMember);
-			if(ExpectedCallSamTFNMember.contains(ActualCallSamTFNMember)) {
+			if(ExpectedCallSamTFNMember.equalsIgnoreCase(ActualCallSamTFNMember)) {
 				System.out.println("****************TFN Member Content was  found macthing with the SAM call Popup  ***************");		
 				Assert.assertTrue(true);
 			}
 			else {
-				Assert.fail("*****************TFN Timezone Content was not found macthing with the SAM call Popup  ***************");
+				Assert.fail("*****************TFN Member Content was not found macthing with the SAM call Popup  ***************"+ActualCallSamTFNMember);
 				}
 			validate(CallSamTFNClose);
 			jsClickNew(CallSamTFNClose);
@@ -1944,7 +1947,6 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			validateNew(callsam);		
 			return null;*/
 			return null;
-		
 		}
 		
 		public void validateChatSam() throws InterruptedException {
@@ -3011,7 +3013,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 			CommonUtility.checkPageIsReadyNew(driver);
 			String CurrentmemberSigninURL = driver.getCurrentUrl();
-			String ActualmemberSigninURL=CurrentmemberSigninURL.substring(0, 27).trim();
+			String ActualmemberSigninURL=CurrentmemberSigninURL.substring(0, 28).trim();
 			System.out.println("memberSignin Page is displayed : "+ActualmemberSigninURL);
 			System.out.println("Expected member signin URL: "+ExpectedmemberSigninURL);
 			System.out.println("Actual member signin URL: "+ActualmemberSigninURL);
@@ -3038,6 +3040,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 				}
 			}
 		}
+		
 
 		public void validateSubtitle() {
         threadsleep(5);
