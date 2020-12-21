@@ -54,7 +54,7 @@ public class VisitorProfileStepDefinition {
 
 		CommonConstants.SELECTED_STATE  = state; 
 		
-		acqHomePage.selectState(state);
+//		acqHomePage.selectState(state);
 	}
 	
 	@And("^the user clicks on the shopping cart icon$")
