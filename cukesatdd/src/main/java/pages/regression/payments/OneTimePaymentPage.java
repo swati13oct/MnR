@@ -44,6 +44,9 @@ public class OneTimePaymentPage extends UhcDriver {
 
 	@FindBy(xpath = "//*[@class='payment-selection__actions']/button")
 	private WebElement NextButton;
+	
+	@FindBy(xpath = "//button[@id='replace-cc']")
+	private WebElement replaceCard;
 
 	@FindBy(id = "div_cardInfo")
 	private WebElement EnterCreditInfo;
@@ -625,6 +628,25 @@ public class OneTimePaymentPage extends UhcDriver {
 		}
 	}
 	
+	public CreditCardUPGPage clickOnReplaceCardlink() {
+		validate(otheramountfield);
+		TestHarness.checkForIPerceptionModel(driver);
+		replaceCard.click();
+		System.out.println("User Click on Replace card link on one time paymentpage");
+		try {
+			Thread.sleep(5000);
+			System.out.println(driver.getCurrentUrl());
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		if (driver.getTitle().contains("Payment")) {
+			System.out.println("Navigated to UPG Credit card page");
+			return new CreditCardUPGPage(driver);
+		} else {
+			System.out.println("UPG is not displayed");
+			return null;
+		}
+	}
 	
 	public PaymentsFormPage clickOnContuineButton() {
 		TestHarness.checkForIPerceptionModel(driver);
