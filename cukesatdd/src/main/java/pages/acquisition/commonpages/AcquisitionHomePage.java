@@ -1910,7 +1910,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			else {
 				Assert.fail("*****************TFN number was  not found macthing with the SAM call Popup ***************"+ExpectedCallSAMTFN);
 			}
-			String ExpectedCallSamTFNtimezone ="Hours: 8 a.m. â€“ 8 p.m., 7 days a week.*\n*Alaska and Hawaii: 8 a.m. â€“ 8 p.m. Monday â€“ Friday, 8 a.m. â€“ 5 p.m. Saturday and Sunday.";
+			String ExpectedCallSamTFNtimezone ="Hours: 8 a.m. – 8 p.m., 7 days a week.*\n*Alaska and Hawaii: 8 a.m. – 8 p.m. Monday – Friday, 8 a.m. – 5 p.m. Saturday and Sunday.";
 			validate(CallSamTFNtimezone);
 			String ActualCallSamTFNtimezone = CallSamTFNtimezone.getText();
 			System.out.println(ExpectedCallSamTFNtimezone);
