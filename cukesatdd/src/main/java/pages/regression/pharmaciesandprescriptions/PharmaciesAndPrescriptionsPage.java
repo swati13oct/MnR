@@ -680,12 +680,12 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 	
 	// F436319
 		public void validatePharmacies_PrescriptionNotification() {
-
+			pageloadcomplete();
 			Assert.assertTrue("PROBLEM - unable to locate pnp page notification element", validate(PnPNotification, 30));
 		}
 		
 		public void validatePharmacies_PrescriptionNotification_Deactivated() {
-
+			pageloadcomplete();
 			Assert.assertFalse("PROBLEM - unable to locate pnp page notification element", validate(PnPNotification, 30));
 		}
 
