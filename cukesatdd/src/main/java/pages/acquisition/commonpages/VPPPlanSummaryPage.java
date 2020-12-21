@@ -623,6 +623,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	@FindBy(xpath = "//*[contains(@class,'viewPlans')]")
 	WebElement ViewPlanMedSupPage;
+	
+	@FindBy(xpath = "(//*[contains(@for,'Gender_2')])[2]")
+	private WebElement femaleGender;
 
 	@FindBy(xpath = "(//*[contains(@for,'Gender_1')])[2]")
 	private WebElement MaleGender;
@@ -812,6 +815,30 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	private WebElement enrolledPlansBanner;
 	@FindBy(xpath = "(//label[text()='Add to compare'])[1]")
 	private WebElement compareLink;
+	
+	@FindBy(xpath = "(//a[@class='collapsed add-button'])[2]")
+	private WebElement addBtn2;
+
+	@FindBy(xpath = "(//a[@class='add-button collapsed'])[3]")
+	private WebElement addBtn3;
+	
+	@FindBy(xpath = "(//button[@class='unliked buttonIntoText'])[10]")
+	private WebElement savePlanK;
+		
+	@FindBy(xpath = "(//button[@class='unliked buttonIntoText'])[11]")
+	private WebElement savePlanL;
+	
+	@FindBy(xpath = "//a[contains(text(),'Back to all plans')]")
+	private WebElement backToPlans;
+
+	@FindBy(xpath = "(//button[@class='addComparePlan  btn secondary rightMargin bottomMargin15'])[2]")
+	private WebElement planK;
+		
+	@FindBy(xpath = "(//button[@class='addComparePlan  btn secondary rightMargin bottomMargin15'])[3]")
+	private WebElement planL;
+
+	@FindBy(xpath = "(//h3[contains(text(),'Plan L')])[1]")
+	private WebElement displayplanL;
 
 	@FindBy(xpath = "//div[contains(@class,'component_info_wrap')]")
 	private WebElement nextBestActionModal;
@@ -830,8 +857,12 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	@FindBy(xpath = "(//button[@class='unliked buttonIntoText'])[1]")
 	private WebElement savePlanButton;
+	
+	@FindBy(xpath = "//img[@class='uhc-modal__close']")
+	private WebElement close;
 
-	@FindBy(xpath = "(//button[@class='liked buttonIntoText'])[1]/img")
+
+	@FindBy(xpath = "(//*[@class='liked buttonIntoText'])[1]/img")
 	private WebElement savePlanImg;
 
 	@FindBy(xpath = "(//a[@class='edit-your-info-link back-arrow-right show returnEntryPage'])[1]")
@@ -992,7 +1023,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			CommonUtility.waitForPageLoadNew(driver, planListContainer, 30);
 		} else if (planType.equalsIgnoreCase("MS")) {
 			CommonUtility.waitForPageLoadNew(driver, msPlansViewLink, 30);
-			// sleepBySec(2);
+			sleepBySec(2);
 			jsClickNew(msPlansViewLink);
 			waitForPageLoadSafari();
 			CommonUtility.waitForPageLoadNew(driver, medSuppZipCode, 30);
@@ -5163,27 +5194,45 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			System.out.println("NBA modal not found");
 		}
 	}
-
-	public boolean clickAndVerifyNavigateToPage(String btn, int plans, String shot) throws InterruptedException {
+	
+	public boolean addTwoMorePlansForComparing() throws InterruptedException {
+		boolean flag = false;
+		Actions action = new Actions(driver);
+		Thread.sleep(2000);
+		action.moveToElement(addBtn2).build().perform();
+		addBtn2.click();
+		Thread.sleep(10000);
+		jsClickNew(planK);
+		Thread.sleep(2000);
+		action.moveToElement(addBtn3).build().perform();
+		addBtn3.click();
+		Thread.sleep(10000);
+		jsClickNew(planL);
+		Thread.sleep(10000);
+		flag=displayplanL.getAttribute("class").equalsIgnoreCase("inline");
+	
+		return flag;
+		}
+	
+	public boolean clickAndVerifyNavigateToPage(String btn, int plans, String shot, String navigateComparePage) throws InterruptedException {
 		boolean flag = false;
 		Actions action = new Actions(driver);
 		if (btn.equalsIgnoreCase("Compare")) {
 			if (plans == 1) {
 				Thread.sleep(2000);
-				action.moveToElement(compareLink).build().perform();
-				compareLink.click();
+				jsClickNew(compareLink);
 				Thread.sleep(10000);
 			} else {
 				while (plans > 0) {
 					Thread.sleep(2000);
 					WebElement comparePlanLink = driver
-							.findElement(By.xpath("(//label[text()='Add to compare'])[" + plans + "])"));
-					action.moveToElement(comparePlanLink).build().perform();
-					comparePlanLink.click();
+							.findElement(By.xpath("(//label[text()='Add to compare'])[" + plans + "]"));
+					jsClickNew(compareLink);
 					Thread.sleep(10000);
 					plans = plans - 1;
 				}
 			}
+			if(navigateComparePage.equalsIgnoreCase("Yes")) {
 			action.moveToElement(compareButton).build().perform();
 			compareButton.click();
 			Thread.sleep(2000);
@@ -5191,38 +5240,44 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			if (comparePageHeader.isDisplayed()) {
 				flag = true;
 			}
+			}
+			if(navigateComparePage.equalsIgnoreCase("No")) {
+				flag = true;
+			}
+		
+			
 		} else if (btn.equalsIgnoreCase("Save")) {
 			if (plans == 1) {
 				Thread.sleep(2000);
 				action.moveToElement(savePlanButton).build().perform();
 				savePlanButton.click();
 				Thread.sleep(2000);
+				flag=savePlanImg.getAttribute("class").equalsIgnoreCase("liked");
 			} else if (shot.equalsIgnoreCase("first")) {
 				while (plans > 0) {
 					Thread.sleep(2000);
 					WebElement savePlanLink = driver
-							.findElement(By.xpath("(//button[@class='unliked buttonIntoText'])[" + plans + "])"));
+							.findElement(By.xpath("(//*[@class='unliked buttonIntoText'])[" + plans + "]"));
+					
 					action.moveToElement(savePlanLink).build().perform();
 					savePlanLink.click();
 					Thread.sleep(10000);
 					plans = plans - 1;
+					if(close.isDisplayed()) {
+						close.click();
+					}
+					flag=savePlanImg.getAttribute("class").equalsIgnoreCase("liked");
 				}
 			} else if (shot.equalsIgnoreCase("second")) {
 				Thread.sleep(2000);
-				WebElement savePlan3 = driver.findElement(By.xpath("(//button[@class='unliked buttonIntoText'])[10])"));
-				action.moveToElement(savePlan3).build().perform();
-				savePlan3.click();
+				jsClickNew(savePlanK);
 				Thread.sleep(10000);
-				WebElement savePlan4 = driver.findElement(By.xpath("(//button[@class='unliked buttonIntoText'])[12])"));
-				action.moveToElement(savePlan4).build().perform();
-				savePlan4.click();
+				jsClickNew(savePlanL);
+				Thread.sleep(10000);
+				flag=savePlanImg.getAttribute("class").equalsIgnoreCase("liked");
+				backToPlans.click();
 				Thread.sleep(10000);
 			}
-
-		}
-		action.moveToElement(savePlanImg).build().perform();
-		if (savePlanImg.getAttribute("class").equalsIgnoreCase("liked")) {
-			flag = true;
 		} else if (btn.equalsIgnoreCase("Information")) {
 			Thread.sleep(2000);
 			action.moveToElement(editYourInformationLink).build().perform();
@@ -5247,24 +5302,272 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		return flag;
 	}
 
-	public boolean verifyPlanCount() throws InterruptedException {
+	public boolean verifyPlanCount(int savedPlan) throws InterruptedException {
 		boolean flag = false;
 		Thread.sleep(2000);
-		for (WebElement planToSave : unsavedPlanButton) {
-			planToSave.click();
-		}
+		
+		List<WebElement> unsavedPlanButton = driver.findElements(By.xpath("//span[@class='unliked buttonIntoText']"));
+		
 		int planToSaveCount = unsavedPlanButton.size();
-		int savePlanImgCount = savePlanImgList.size();
-		if (planToSaveCount == savePlanImgCount) {
-			int count = Integer.parseInt(savedPlanHeaderCount.getText());
-			if (count == savePlanImgCount) {
+		int totalNoOfPlans = planToSaveCount;
+		int alreadySavedPlanOnComparePage = savedPlan;
+		
+		while (planToSaveCount > 0) {
+			Thread.sleep(2000);
+			WebElement planToSave = driver
+					.findElement(By.xpath("(//span[@class='unliked buttonIntoText'])[" + planToSaveCount + "]"));
+			jsClickNew(planToSave);
+			Thread.sleep(10000);
+			planToSaveCount = planToSaveCount - 1;
+		}
+		
+		int noOfSavedPlansOnPlanCart = totalNoOfPlans - alreadySavedPlanOnComparePage;
+		int noOfPlansOnHeartIcon = Integer.parseInt(savedPlanHeaderCount.getText());
+		
+		if (noOfSavedPlansOnPlanCart == noOfPlansOnHeartIcon) {
 				flag = true;
 			}
 
+		return flag;
+	}
+	
+	public boolean verifyPlanSavedOnSummaryAreDisplayedOnCompare() throws InterruptedException {
+		boolean flag = false;
+		Thread.sleep(2000);
+		
+		List<WebElement> unsavedPlanButton = driver.findElements(By.xpath("//span[@class='unliked buttonIntoText']"));
+		
+		int planToSaveCount = unsavedPlanButton.size();
+		int totalNoOfPlans = planToSaveCount;
+		
+		while (planToSaveCount > 0) {
+			Thread.sleep(2000);
+			WebElement planToSave = driver
+					.findElement(By.xpath("(//span[@class='unliked buttonIntoText'])[" + planToSaveCount + "]"));
+			jsClickNew(planToSave);
+			Thread.sleep(10000);
+			if(close.isDisplayed()) {
+				close.click();
+			}
+			Thread.sleep(2000);
+			planToSaveCount = planToSaveCount - 1;
 		}
+		
+		compareButton.click();
+		Thread.sleep(2000);
+		
+		int noOfPlansOnHeartIcon = Integer.parseInt(savedPlanHeaderCount.getText());
+		
+		if (totalNoOfPlans == noOfPlansOnHeartIcon) {
+				flag = true;
+			}
 
 		return flag;
 	}
+
+	public boolean savePlansOnSummaryPage (int noOfPlansToSave) throws InterruptedException {
+		boolean flag = false;
+		Thread.sleep(2000);
+		
+		int i = 1;
+		while (i <= noOfPlansToSave) {
+			Thread.sleep(2000);
+			WebElement planToSave = driver
+					.findElement(By.xpath("(//span[@class='unliked buttonIntoText'])[" + i + "]"));
+			jsClickNew(planToSave);
+			Thread.sleep(2000);
+			WebElement heartIcon = driver
+					.findElement(By.xpath("(//div[contains(@class,'save-icon pull-right')]/div/div)[" + i + "]"));
+			flag = heartIcon.getAttribute("class").equalsIgnoreCase("save-favorite-plan added");
+			
+			i = i + 1;
+		}
+				return flag;
+	}
+	
+	public boolean clickOnSavedPlansAndNavigateToShopperProfile () throws InterruptedException {
+		boolean flag = false;
+		Thread.sleep(2000);
+		jsClickNew(viewSavedPlansBtn);
+		Thread.sleep(2000);
+		if(shopperProfilePageHeader.isDisplayed()) {
+			flag = true;
+		}
+		
+		return flag;
+	}
+	
+	public boolean validateAllFieldsEditable () throws InterruptedException {
+		boolean flag = false;
+		Thread.sleep(2000);
+		
+		String zip = "90202";
+		String dob = "11/13/1940";
+		
+		validateNew(DOB, 30);
+		System.out.println("MedSup page form is displayed");
+		
+		System.out.println("Validating zip code is editable----------");
+		medSuppZipCode.clear();
+		medSuppZipCode.sendKeys(zip);
+		Thread.sleep(2000);
+		flag = medSuppZipCode.getText().equalsIgnoreCase(zip);
+		if(flag) {
+			System.out.println("---------zip code is editable----------");
+		}
+		else {
+			System.out.println("--------------zip code is not editable---------------");
+		}
+		
+		if(flag) {
+		System.out.println("Validating Date of birth is editable----------");
+		DOB.clear();
+		DOB.sendKeys(dob);
+		Thread.sleep(2000);
+		flag = DOB.getText().equalsIgnoreCase(dob);
+		if(flag) {
+			System.out.println("---------Date of birth is editable----------");
+		}
+		else {
+			System.out.println("--------------Date of birth is not editable---------------");
+		}
+		}
+		
+		if(flag) {
+		System.out.println("Validating Gender is editable----------");
+		Thread.sleep(2000);
+		try {
+		jsClickNew(femaleGender);
+		flag = true;
+		System.out.println("---------Gender is editable----------");
+		}
+		catch(Exception e) {
+		flag = false;
+		System.out.println("---------Gender is not editable----------");
+		}
+		}
+		
+		if(flag) {
+		Thread.sleep(2000);
+		System.out.println("Validating Part A Month is editable----------");
+		try {
+		part_A_monthDrpDwn.click();
+		Thread.sleep(2000);
+		Part_A_monthDrpDwnOption.click();
+		Thread.sleep(2000);
+		flag = true;
+		System.out.println("---------Part A Month is editable----------");
+		}
+		catch(Exception e) {
+		flag = false;
+		System.out.println("---------Part A Month is not editable----------");
+		}
+		}
+		
+		if(flag) {
+		Thread.sleep(2000);
+		System.out.println("Validating Part A Year is editable----------");
+		try {
+		jsClickNew(part_A_yearDrpDwn);
+		Thread.sleep(2000);
+		Part_A_yearDrpDwnOption.click();
+		flag = true;
+		System.out.println("---------Part A Year is editable----------");
+		}
+		catch(Exception e) {
+		flag = false;
+		System.out.println("---------Part A Year is not editable----------");
+		}
+		}
+		
+		if(flag) {
+		Thread.sleep(2000);
+		System.out.println("Validating Part B Month is editable----------");
+		try {
+		part_B_monthDrpDwn.click();
+		Thread.sleep(2000);
+		Part_B_monthDrpDwnOption.click();
+		flag = true;
+		System.out.println("---------Part B Month is editable----------");
+		}
+		catch(Exception e) {
+		flag = false;
+		System.out.println("---------Part B Month is not editable----------");
+		}
+		}
+		
+		if(flag) {
+		Thread.sleep(2000);
+		System.out.println("Validating Part B Year is editable----------");
+		try {
+		part_B_yearDrpDwn.click();
+		Thread.sleep(2000);
+		Part_B_yearDrpDwnOption.click();
+		flag = true;
+		System.out.println("---------Part B Year is editable----------");
+		}
+		catch(Exception e) {
+		flag = false;
+		System.out.println("---------Part B Year is not editable----------");
+		}
+		}
+		
+		if(flag) {
+		Thread.sleep(2000);
+		System.out.println("Validating Plan Start drop down is editable----------");
+		try {
+		scrollToView(startDrpDwn);
+		jsClickNew(startDrpDwn);
+		Thread.sleep(2000);
+		startDrpDwnOption.click();
+		flag = true;
+		System.out.println("---------Plan Start drop down is editable----------");
+		}
+		catch(Exception e) {
+		flag = false;
+		System.out.println("---------Plan Start drop down is not editable----------");
+		}
+		}
+		
+		if(flag) {
+		Thread.sleep(15000);
+		System.out.println("Validating View Plan button is visible----------");
+		jsMouseOver(ViewPlanMedSupPage);
+		if(ViewPlanMedSupPage.isDisplayed()) {
+		flag = true;
+		System.out.println("---------View Plan button is visible----------");
+		}
+		else {
+		flag = false;
+		System.out.println("---------View Plan button is not visible----------");
+		}
+		}
+		
+		if(flag) {
+		Thread.sleep(15000);
+		System.out.println("Validating Cancel button is visible----------");
+		if(CancelBtn.isDisplayed()) {
+		flag = true;
+		System.out.println("---------Cancel button is visible----------");
+		}
+		else {
+		flag = false;
+		System.out.println("---------Cancel button is not visible----------");
+		}
+		}
+		
+		return flag;
+	}
+
+
+	@FindBy(xpath = "(//*[contains(@class,'backToPlanSummarry')])[2]")
+	WebElement CancelBtn;
+	
+	@FindBy(xpath = "//span[@class='uhc-button__text view-btn-ie']")
+	private WebElement viewSavedPlansBtn;
+	
+	@FindBy(xpath = "//h2[text()='Your Guest Profile']")
+	private WebElement shopperProfilePageHeader;
 
 	@FindBy(xpath = "(//input[@id='updates-email'])[2]")
 	private WebElement requestemailaddress;

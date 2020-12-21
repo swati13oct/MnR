@@ -305,7 +305,7 @@ Examples:
     
 
 @SiteSearchULayer @UATRegression
- Scenario Outline: <Scenario> : Verify search results on Visitor profile from VPP page
+ Scenario Outline: <Scenario> : Verify search results on Visitor profile from VPP page - <searchValue> - <NewSearchValue>
     Given the user is on medicare acquisition site landing page
      	|Site| <site>|
     When the user performs plan search using following information
@@ -340,8 +340,8 @@ Examples:
 
      
     
-@SiteSearchULayer @UATRegression
- Scenario Outline: <Scenario> : To verify Errorhandling on Visitor profile from VPP page
+@SiteSearchULayer @UATRegression 
+ Scenario Outline: <Scenario> : To verify Errorhandling on Visitor profile from VPP page - <searchValue> - <NewSearchValue>
    Given the user is on medicare acquisition site landing page
    	|Site| <site>|
    When the user performs plan search using following information
@@ -384,7 +384,7 @@ Examples:
    |E2E Scenario 3_UMS    |UHC  |15652 |   19019 | No              | Philadelphia County           | MAPD            | AARP Medicare Advantage Choice Plan 2 (PPO) | Medicare    |InvalidCharacter|@@@@|
   
 @SiteSearchULayer @UATRegression
- Scenario Outline: <Scenario> : To verify provider search third party URL on Visitor profile from VPP Page
+ Scenario Outline: <Scenario> : To verify provider search third party URL on Visitor profile from VPP Page - <searchValue> 
     Given the user is on medicare acquisition site landing page
      	|Site| <site>|
     When the user performs plan search using following information
@@ -412,8 +412,8 @@ Examples:
    |E2E Scenario 3_UMS |UHC |15652 |   19019 | No              | Philadelphia County           | MAPD            | AARP Medicare Advantage Choice Plan 2 (PPO)    | Provider search    |https://connect.werally.com/county-plan-selection/uhc.mnr/zip|
     
   
-@SiteSearchULayer @UATRegression
- Scenario Outline: <Scenario> : To verify provider search third party URL on page mentioned
+@SiteSearchULayerPages @UATRegression
+ Scenario Outline: <Scenario> : To verify provider search third party URL on page mentioned - - <searchValue> 
    Given the user is on medicare acquisition site landing page
   		| Site | <site>	|
     Given the user navigates to following medicare acquisition site page
@@ -524,11 +524,10 @@ Examples:
       |	E2E Scenario 2_UMS |	UHC  |medicare-education/medicare-part-d.html|Medicare Prescription Drug Plans| Provider search     |https://connect.werally.com/county-plan-selection/uhc.mnr/zip|
      
      
-    @SiteSearchULayer @UATRegression
- Scenario Outline: Verify search results on on page mentioned
+    @SiteSearchULayerPages @UATRegression
+ Scenario Outline: Verify search results on page mentioned - <searchValue> - <newsearchvalue>
    Given the user is on medicare acquisition site landing page
-    Given the user is on medicare acquisition site landing page
-     	|Site| <site>|
+         	|Site| <site>|
     Given the user navigates to following medicare acquisition site page
       | PageName | <pageName> |
       | PagePath | <path>     |
@@ -607,19 +606,19 @@ Examples:
      |E2E Scenario 2_UMS|  UHC   |health-plans/estimate-drug-costs.html#/drug-cost-estimator|Drug Cost Estimator|Medicare  |Pharmacy      |Medicare|MEDICARE PART D CLAIM FORM(PDF)|Dental coverage| Drug cost estimator|
       |E2E Scenario 2_UMS|  UHC   |health-plans/aarp-pharmacy.html#/Pharmacy-Search-English|Pharmacy Locator|Medicare  |Pharmacy      |Medicare|MEDICARE PART D CLAIM FORM(PDF)|Dental coverage| Drug cost estimator|
        
-     @SiteSearchMedEd1_AARP
+   @SiteSearchMedEd1_AARP
     Examples: 
-     |Scenario             |	site	| path                                    | pageName                   | searchValue         |newsearchvalue|searchValue |newsearchvalue|searchValue |newsearchvalue|
-     |	E2E Scenario 2_AMP|	AARP	| medicare-education.html                   | Understanding Medicare      | Medicare  |Pharmacy      |Medicare|MEDICARE PART D CLAIM FORM(PDF)|Dental coverage| Drug cost estimator|
-     |	E2E Scenario 2_AMP |	AARP	| medicare-education/medicare-eligibility.html       | Medicare Eligibility       |Medicare  | Pharmacy      |Medicare|MEDICARE PART D CLAIM FORM(PDF)|Dental coverage| Drug cost estimator|
-     |	E2E Scenario 2_AMP |	AARP	| medicare-education/medicare-parts-and-.htmlmedigap-plans     | Medicare and Medigap Coverage Options     |Medicare  | Pharmacy      |Medicare|MEDICARE PART D CLAIM FORM(PDF)|Dental coverage| Drug cost estimator|
-     |	E2E Scenario 2_AMP |	 AARP	| medicare-education/medicare-benefits.html                 |  Medicare Prescriptions, Providers & Benefits      | Medicare  |Pharmacy      |Medicare|MEDICARE PART D CLAIM FORM(PDF)|Dental coverage| Drug cost estimator|
+     |Scenario             |	site	| path                                                     | pageName                   | searchValue         |newsearchvalue|searchValue |newsearchvalue|searchValue |newsearchvalue|
+     |	E2E Scenario 2_AMP |	AARP	| medicare-education.html                                  | Understanding Medicare     | Medicare  |Pharmacy      |Medicare|MEDICARE PART D CLAIM FORM(PDF)|Dental coverage| Drug cost estimator|
+     |	E2E Scenario 2_AMP |	AARP	| medicare-education/medicare-eligibility.html             | Medicare Eligibility       |Medicare   |Pharmacy      |Medicare|MEDICARE PART D CLAIM FORM(PDF)|Dental coverage| Drug cost estimator|
+     |	E2E Scenario 2_AMP |	AARP	| medicare-education/medicare-parts-and-.htmlmedigap-plans | Medicare and Medigap Coverage Options     |Medicare  | Pharmacy      |Medicare|MEDICARE PART D CLAIM FORM(PDF)|Dental coverage| Drug cost estimator|
+     |	E2E Scenario 2_AMP |	 AARP	| medicare-education/medicare-benefits.html                |  Medicare Prescriptions, Providers & Benefits      | Medicare  |Pharmacy      |Medicare|MEDICARE PART D CLAIM FORM(PDF)|Dental coverage| Drug cost estimator|
      |	E2E Scenario 2_AMP |	AARP	| medicare-education/medicare-costs.html                   | Medicare Cost Basics    | Medicare  |Pharmacy      |Medicare|MEDICARE PART D CLAIM FORM(PDF)|Dental coverage| Drug cost estimator|
      |	E2E Scenario 2_AMP |	AARP  |medicare-education/enrollment-and-changing-plans.html|Medicare Enrollment Basics | Medicare  |Pharmacy      |Medicare|MEDICARE PART D CLAIM FORM(PDF)|Dental coverage| Drug cost estimator|
-     |	E2E Scenario 2_AMP |	AARP  |medicare-education/medicare-faq.html|Medicare FAQ | Pharmacy      |Medicare|MEDICARE PART D CLAIM FORM(PDF)|Dental coverage| Drug cost estimator|
+     |	E2E Scenario 2_AMP |	AARP  |medicare-education/medicare-faq.html                      |Medicare FAQ |Medicare|Pharmacy|Medicare|MEDICARE PART D CLAIM FORM(PDF)|Dental coverage| Drug cost estimator|
      |	E2E Scenario 2_AMP |	AARP  |medicare-education/medicare-advantage-plans.html|Medicare Advantage (Part C) Plans |Medicare  | Pharmacy      |Medicare|MEDICARE PART D CLAIM FORM(PDF)|Dental coverage| Drug cost estimator|
      |	E2E Scenario 2_AMP |	AARP  |medicare-education/medicare-supplement-plans.html|Medicare Supplement Insurance Plans| Medicare  |Pharmacy      |Medicare|MEDICARE PART D CLAIM FORM(PDF)|Dental coverage| Drug cost estimator|
-      |	E2E Scenario 2_AMP |	AARP  |medicare-education/medicare-part-d.html|Medicare Prescription Drug Plans| Medicare  |Pharmacy      |Medicare|MEDICARE PART D CLAIM FORM(PDF)|Dental coverage| Drug cost estimator|
+     |	E2E Scenario 2_AMP |	AARP  |medicare-education/medicare-part-d.html|Medicare Prescription Drug Plans| Medicare  |Pharmacy      |Medicare|MEDICARE PART D CLAIM FORM(PDF)|Dental coverage| Drug cost estimator|
  
    @SiteSearchMedEd1_UHC
     Examples: 
@@ -627,7 +626,7 @@ Examples:
      |	E2E Scenario 2_UMS |	UHC	| medicare-education.html                   | Understanding Medicare      | Medicare  |Pharmacy      |Medicare|MEDICARE PART D CLAIM FORM(PDF)|Dental coverage| Drug cost estimator|
      |	E2E Scenario 2_UMS |	UHC	| medicare-education/medicare-eligibility.html       | Medicare Eligibility       | Medicare  |Pharmacy      |Medicare|MEDICARE PART D CLAIM FORM(PDF)|Dental coverage| Drug cost estimator|
      |	E2E Scenario 2_UMS |	UHC	| medicare-education/medicare-parts-and-.htmlmedigap-plans     | Medicare and Medigap Coverage Options     | Medicare  |Pharmacy      |Medicare|MEDICARE PART D CLAIM FORM(PDF)|Dental coverage| Drug cost estimator|
-     |	E2E Scenario 2_UMS |	UHC	| medicare-education/medicare-benefits.html                 |  Medicare Prescriptions, Providers & Benefits      | Pharmacy      |Medicare|MEDICARE PART D CLAIM FORM(PDF)|Dental coverage| Drug cost estimator|
+     |	E2E Scenario 2_UMS |	UHC	| medicare-education/medicare-benefits.html                 |  Medicare Prescriptions, Providers & Benefits      | Medicare|Pharmacy      |Medicare|MEDICARE PART D CLAIM FORM(PDF)|Dental coverage| Drug cost estimator|
      |	E2E Scenario 2_UMS |	UHC	| medicare-education/medicare-costs.html                   | Medicare Cost Basics  |Medicare  | Pharmacy      |Medicare|MEDICARE PART D CLAIM FORM(PDF)|Dental coverage| Drug cost estimator|
      |	E2E Scenario 2_UMS |	UHC  |medicare-education/enrollment-and-changing-plans.html|Medicare Enrollment Basics |Medicare  | Pharmacy      |Medicare|MEDICARE PART D CLAIM FORM(PDF)|Dental coverage| Drug cost estimator|
      |	E2E Scenario 2_UMS |	UHC  |medicare-education/medicare-faq.html|Medicare FAQ | Medicare  |Pharmacy      |Medicare|MEDICARE PART D CLAIM FORM(PDF)|Dental coverage| Drug cost estimator|
@@ -636,8 +635,8 @@ Examples:
       |	E2E Scenario 2_UMS |	UHC  |medicare-education/medicare-part-d.html|Medicare Prescription Drug Plans| Medicare  |Pharmacy      |Medicare|MEDICARE PART D CLAIM FORM(PDF)|Dental coverage| Drug cost estimator|
    
    
-    @SiteSearchULayer @UATRegression
- Scenario Outline: <Scenario>: Verify Error handling on page mentioned
+    @SiteSearchULayerPages @UATRegression
+ Scenario Outline: <Scenario>: Verify Error handling on page mentioned - <searchValue> - <NewSearchValue> 
     Given the user is on medicare acquisition site landing page
     |Site| <site>|
     Given the user navigates to following medicare acquisition site page
@@ -726,7 +725,7 @@ Examples:
      |	E2E Scenario 2_AMP |	 AARP	| medicare-education/medicare-benefits.html                 |  Medicare Prescriptions, Providers & Benefits      | Medicare  |Empty	  | | Medicare|InvalidCharacter|medicareeee|  Medicare|InvalidCharacter|ggahjkllllllllllllllllllllllllllllllllllllllllllljjjjjjjjjjjjjjjjjjjjjjjjjj| Medicare|InvalidCharacter|Unicorn|
      |	E2E Scenario 2_AMP |	AARP	| medicare-education/medicare-costs.html                   | Medicare Cost Basics    | Medicare  |Empty	  | | Medicare|InvalidCharacter|medicareeee|  Medicare|InvalidCharacter|ggahjkllllllllllllllllllllllllllllllllllllllllllljjjjjjjjjjjjjjjjjjjjjjjjjj| Medicare|InvalidCharacter|Unicorn|
      |	E2E Scenario 2_AMP |	AARP  |medicare-education/enrollment-and-changing-plans.html|Medicare Enrollment Basics | Medicare  |Empty	  | | Medicare|InvalidCharacter|medicareeee|  Medicare|InvalidCharacter|ggahjkllllllllllllllllllllllllllllllllllllllllllljjjjjjjjjjjjjjjjjjjjjjjjjj| Medicare|InvalidCharacter|Unicorn|
-     |	E2E Scenario 2_AMP |	AARP  |medicare-education/medicare-faq.html|Medicare FAQ | Pharmacy      |Medicare|MEDICARE PART D CLAIM FORM(PDF)|Dental coverage| Drug cost estimator|
+     |	E2E Scenario 2_AMP |	AARP  |medicare-education/medicare-faq.html|Medicare FAQ | Medicare  |Empty	  | | Medicare|InvalidCharacter|medicareeee|  Medicare|InvalidCharacter|ggahjkllllllllllllllllllllllllllllllllllllllllllljjjjjjjjjjjjjjjjjjjjjjjjjj| Medicare|InvalidCharacter|Unicorn|
      |	E2E Scenario 2_AMP |	AARP  |medicare-education/medicare-advantage-plans.html|Medicare Advantage (Part C) Plans | Medicare  |Empty	  | | Medicare|InvalidCharacter|medicareeee|  Medicare|InvalidCharacter|ggahjkllllllllllllllllllllllllllllllllllllllllllljjjjjjjjjjjjjjjjjjjjjjjjjj| Medicare|InvalidCharacter|Unicorn|
      |	E2E Scenario 2_AMP |	AARP  |medicare-education/medicare-supplement-plans.html|Medicare Supplement Insurance Plans| Medicare  |Empty	  | | Medicare|InvalidCharacter|medicareeee|  Medicare|InvalidCharacter|ggahjkllllllllllllllllllllllllllllllllllllllllllljjjjjjjjjjjjjjjjjjjjjjjjjj| Medicare|InvalidCharacter|Unicorn|
       |	E2E Scenario 2_AMP |	AARP  |medicare-education/medicare-part-d.html|Medicare Prescription Drug Plans| Medicare  |Empty	  | | Medicare|InvalidCharacter|medicareeee|  Medicare|InvalidCharacter|ggahjkllllllllllllllllllllllllllllllllllllllllllljjjjjjjjjjjjjjjjjjjjjjjjjj| Medicare|InvalidCharacter|Unicorn|
@@ -740,7 +739,7 @@ Examples:
      |	E2E Scenario 2_UMS |	UHC	| medicare-education/medicare-benefits.html                 |  Medicare Prescriptions, Providers & Benefits      | Medicare  |Empty	  | | Medicare|InvalidCharacter|medicareeee|  Medicare|InvalidCharacter|ggahjkllllllllllllllllllllllllllllllllllllllllllljjjjjjjjjjjjjjjjjjjjjjjjjj| Medicare|InvalidCharacter|Unicorn|
      |	E2E Scenario 2_UMS |	UHC	| medicare-education/medicare-costs.html                   | Medicare Cost Basics  | Medicare  |Empty	  | | Medicare|InvalidCharacter|medicareeee|  Medicare|InvalidCharacter|ggahjkllllllllllllllllllllllllllllllllllllllllllljjjjjjjjjjjjjjjjjjjjjjjjjj| Medicare|InvalidCharacter|Unicorn|
      |	E2E Scenario 2_UMS |	UHC  |medicare-education/enrollment-and-changing-plans.html|Medicare Enrollment Basics | Medicare  |Empty	  | | Medicare|InvalidCharacter|medicareeee|  Medicare|InvalidCharacter|ggahjkllllllllllllllllllllllllllllllllllllllllllljjjjjjjjjjjjjjjjjjjjjjjjjj| Medicare|InvalidCharacter|Unicorn|
-     |	E2E Scenario 2_UMS |	UHC  |medicare-education/medicare-faq.html|Medicare FAQ | Pharmacy      |Medicare|MEDICARE PART D CLAIM FORM(PDF)|Dental coverage| Drug cost estimator|
+     |	E2E Scenario 2_UMS |	UHC  |medicare-education/medicare-faq.html|Medicare FAQ |Medicare  |Empty	  | | Medicare|InvalidCharacter|medicareeee|  Medicare|InvalidCharacter|ggahjkllllllllllllllllllllllllllllllllllllllllllljjjjjjjjjjjjjjjjjjjjjjjjjj| Medicare|InvalidCharacter|Unicorn|
       |	E2E Scenario 2_UMS |	UHC  |medicare-education/medicare-advantage-plans.html|Medicare Advantage (Part C) Plans | Medicare  |Empty	  | | Medicare|InvalidCharacter|medicareeee|  Medicare|InvalidCharacter|ggahjkllllllllllllllllllllllllllllllllllllllllllljjjjjjjjjjjjjjjjjjjjjjjjjj| Medicare|InvalidCharacter|Unicorn|
      |	E2E Scenario 2_UMS |	UHC  |medicare-education/medicare-supplement-plans.html|Medicare Supplement Insurance Plans| Medicare  |Empty	  | | Medicare|InvalidCharacter|medicareeee|  Medicare|InvalidCharacter|ggahjkllllllllllllllllllllllllllllllllllllllllllljjjjjjjjjjjjjjjjjjjjjjjjjj| Medicare|InvalidCharacter|Unicorn|
       |	E2E Scenario 2_UMS |	UHC  |medicare-education/medicare-part-d.html|Medicare Prescription Drug Plans| Medicare  |Empty	  | | Medicare|InvalidCharacter|medicareeee|  Medicare|InvalidCharacter|ggahjkllllllllllllllllllllllllllllllllllllllllllljjjjjjjjjjjjjjjjjjjjjjjjjj| Medicare|InvalidCharacter|Unicorn|
