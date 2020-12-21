@@ -38,7 +38,7 @@ Feature: 1.09.1 Member Health and Wellness Page - Member Auth
     @memAuth_healthAndWellness01_fedShipCombo_shipFedCombo
     Examples: 
       | TID   | username  | password  | MemUserName     | planType | memberType        | hasReward | hasRenewActive |
-      | 15343 | qavgogine | qavgogine | q4_ShipVAS_005  | FED_SHIP_COMBO | RewardsMember | false    | true       |
+      | 15343 | qavgogine | qavgogine | q4_ShipVAS_005  | FED_SHIP_COMBO | RewardsMember | false    | false       |
       | 15343 | qavgogine | qavgogine | GENARO_Q4_COMBO    | SHIP_FED_COMBO | RewardsMember| true    | true       |
  
  
