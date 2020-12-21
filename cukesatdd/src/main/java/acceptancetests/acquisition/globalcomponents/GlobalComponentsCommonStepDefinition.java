@@ -335,7 +335,7 @@ public class GlobalComponentsCommonStepDefinition {
 		  AcquisitionHomePage aquisitionHomePageReload =
 		  aquisitionhomepage.homeFooterClick();
      
-		//  Assert.assertTrue("home page not found", aquisitionHomePageReload!= null); 
+//		  Assert.assertTrue("home page not found", aquisitionHomePageReload!= null); 
 	  }
 
 	  @And("^the user clicks on browser back button$")
