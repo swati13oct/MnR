@@ -20,7 +20,7 @@ Feature: Alabama Plan Exclusion
 
     Examples:
       | username | password | memUserName | planType | memberType |
-      | yaihemai | Yusufu6$ | Aldridge314 | SEIB     | Group      |
+      | yaihemai | Yusufu7$ | Aldridge314 | SEIB     | Group      |
 
 
 
@@ -43,7 +43,7 @@ Feature: Alabama Plan Exclusion
 
     Examples:
       | username | password | memUserName | planType | memberType |
-      | yaihemai | Yusufu6$ | Xldycop     | LGHIB    | Group      |
+      | yaihemai | Yusufu7$ | Xldycop     | LGHIB    | Group      |
 
 
   @Regression
@@ -64,7 +64,7 @@ Feature: Alabama Plan Exclusion
 
     Examples:
       | username | password | memUserName | planType | memberType |
-      | yaihemai | Yusufu6$ | WENDYKETHAN2| PDP      | Group      |
+      | yaihemai | Yusufu7$ | WENDYKETHAN2| PDP      | Group      |
 
 
   @Regression
@@ -85,7 +85,7 @@ Feature: Alabama Plan Exclusion
 
     Examples:
       | username | password | memUserName | planType | memberType |
-      | yaihemai | Yusufu6$ | LUGRUG11    | MAPD     | Individual |
+      | yaihemai | Yusufu7$ | LUGRUG11    | MAPD     | Individual |
       
       
  @Sanity @Regression

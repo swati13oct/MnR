@@ -39,7 +39,7 @@ Feature: Drug Name and Get Pricing
 
     Examples: 
       | username | password | memUserName | planType | memberType |
-      | yaihemai | Yusufu6$ | JAN06ARY    | PDP      | Individual |
+      | yaihemai | Yusufu7$ | JAN06ARY    | PDP      | Individual |
 
   @Sanity @Regression
   Scenario Outline: To verify MAPD user has access to Drug Name
@@ -59,7 +59,7 @@ Feature: Drug Name and Get Pricing
 
     Examples: 
       | username | password | memUserName | planType | memberType |
-      | yaihemai | Yusufu6$ | LUGRUG11    | MAPD     | Individual |
+      | yaihemai | Yusufu7$ | LUGRUG11    | MAPD     | Individual |
 
   @Sanity @Regression
   Scenario Outline: To verify MAPD user has access to Get Pricing
@@ -79,7 +79,7 @@ Feature: Drug Name and Get Pricing
 
     Examples: 
       | username | password | memUserName | planType | memberType |
-      | yaihemai | Yusufu6$ | LUGRUG11    | MAPD     | Individual |
+      | yaihemai | Yusufu7$ | LUGRUG11    | MAPD     | Individual |
 
   @Sanity @Regression
   Scenario Outline: To verify PCP user has access to Drug Name
@@ -99,7 +99,7 @@ Feature: Drug Name and Get Pricing
 
     Examples: 
       | username | password | memUserName         | planType | memberType |
-      | yaihemai | Yusufu6$ | sofyabakman@msn.com | PCP      | Individual |
+      | yaihemai | Yusufu7$ | sofyabakman@msn.com | PCP      | Individual |
 
   @Sanity @Regression
   Scenario Outline: To verify PCP user has access to Get Pricing
@@ -119,7 +119,7 @@ Feature: Drug Name and Get Pricing
 
     Examples: 
       | username | password | memUserName         | planType | memberType |
-      | yaihemai | Yusufu6$ | sofyabakman@msn.com | PCP      | Individual |
+      | yaihemai | Yusufu7$ | sofyabakman@msn.com | PCP      | Individual |
 
   @Sanity @Regression
   Scenario Outline: To verify Medica user has access to Drug Name
@@ -139,7 +139,7 @@ Feature: Drug Name and Get Pricing
 
     Examples: 
       | username | password | memUserName | planType | memberType |
-      | yaihemai | Yusufu6$ | TCZUNIGA52  | Medica   | Individual |
+      | yaihemai | Yusufu7$ | TCZUNIGA52  | Medica   | Individual |
 
   @Sanity @Regression
   Scenario Outline: To verify Medica user has access to Get Pricing
@@ -159,4 +159,4 @@ Feature: Drug Name and Get Pricing
 
     Examples: 
       | username | password | memUserName | planType | memberType |
-      | yaihemai | Yusufu6$ | TCZUNIGA52  | Medica   | Individual |
+      | yaihemai | Yusufu7$ | TCZUNIGA52  | Medica   | Individual |
