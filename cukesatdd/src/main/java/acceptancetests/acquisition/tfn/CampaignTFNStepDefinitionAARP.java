@@ -137,13 +137,13 @@ public class CampaignTFNStepDefinitionAARP {
 		AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(driver);
 		//getLoginScenario().saveBean(CommonConstants.WEBDRIVER, driver);
 		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, aquisitionhomepage);
-//		String EnvironmentUrl = aquisitionhomepage.fetchEnvironmentUrls();
+		String EnvironmentUrl = aquisitionhomepage.fetchEnvironmentUrls();
 		Map<String, String> inputAttributesMap=parseInputArguments(arg1);
 		String URLpath = inputAttributesMap.get("Campaign URL");
 		String TFN_Xpath = inputAttributesMap.get("TFN Xpath");
 		CampaignTFNPage tfnPage = new CampaignTFNPage(driver);
 		getLoginScenario().saveBean(PageConstants.CAMPAIGN_TFN_PAGE, tfnPage);
-//		tfnPage.navigateToCampaignURL(URLpath , EnvironmentUrl);
+		tfnPage.navigateToCampaignURL(URLpath , EnvironmentUrl);
 	}
 	
 
@@ -484,19 +484,19 @@ public void the_user_lands_on_AARP_from_External_Link_Landon_MA_Plans(DataTable 
 	AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(driver);
 	//getLoginScenario().saveBean(CommonConstants.WEBDRIVER, driver);
 	getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, aquisitionhomepage);
-//	String EnvironmentUrl = aquisitionhomepage.fetchEnvironmentUrls();
+	String EnvironmentUrl = aquisitionhomepage.fetchEnvironmentUrls();
 	Map<String, String> inputAttributesMap=parseInputArguments(arg1);
 	String URLpath = inputAttributesMap.get("Campaign URL");
 	//String TFN_Xpath = "//button[@id='sam-call-button']//span[contains(@class,'sam__button__text desktop')]";
 	CampaignTFNPage tfnPage = new CampaignTFNPage(driver);
 	getLoginScenario().saveBean(PageConstants.CAMPAIGN_TFN_PAGE, tfnPage);
-//	tfnPage.navigateToCampaignURL(URLpath , EnvironmentUrl);
+	tfnPage.navigateToCampaignURL(URLpath , EnvironmentUrl);
 	String PlanType = "MA";
 	tfnPage.ViewPlanSummary(PlanType);
 	tfnPage.NavigateToPlanDetails(PlanType);
 	//String TFNXpath_PlanDetails = "//a[contains(@class, 'tel')]";
-	//tfnPage.validateFederalTFN(TFNXpath_PlanDetails);	
-}
+	//tfnPage.validateFederalTFN(TFNXpath_PlanDetails);
+	}
 
 @And("^the user signs in with optum Id credentials for campaign TFN$")
 public void the_user_signs_in_with_optum_Id_credentials_in_AARP_site_campaign_tfn(DataTable credentials) {
