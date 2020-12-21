@@ -1753,18 +1753,19 @@ public void validatePDPPlanNamesAndEnroll() {
 	int pdpPlanCount = Integer.parseInt(PDPPlanCount.getText());
 	System.out.println(pdpPlanCount);
 	validate(PDP1stPlanName, 60);
-	String exceptedplanName = PDPPlansNames.get(0).getText().split("\n")[0];
+	String exceptedplanName = PDPPlansNames.get(0).getText().split("\n")[0].toUpperCase();
+	System.out.println("Plan Name in VPP Summary Page: "+exceptedplanName);
 	WebElement planViewdetailsBut = PDPPlansNames.get(0).findElement(By.cssSelector("#viewmoredetlinkpdp"));
 	planViewdetailsBut.click();
 	pageloadcomplete();
-	String actualplanName = planNameVPPDetailsPage.getText().split("\n")[0];
+	String actualplanName = planNameVPPDetailsPage.getText().split("\n")[0].toUpperCase();
 	System.out.println("Plan Name in VPP Details Page: "+actualplanName);
-	Assert.assertTrue(exceptedplanName.contains(actualplanName), "--- Plan name are not matches---");
+	Assert.assertTrue(exceptedplanName.equalsIgnoreCase(actualplanName), "--- Plan name are not matches---");
 	enrollBtnPlanDetails.get(0).click();
 	pageloadcomplete();
-	String planNameinOLE = planNameEnrollPage.getText().trim(); 
+	String planNameinOLE = planNameEnrollPage.getText().trim().toUpperCase(); 
 	System.out.println("Plan Name in Plan Enroll Page: "+planNameinOLE);
-	Assert.assertTrue(planNameinOLE.contains(exceptedplanName), "--- Plan name are not matches---");	
+	Assert.assertTrue(planNameinOLE.equalsIgnoreCase(exceptedplanName), "--- Plan name are not matches---");	
 	System.out.println(driver.getCurrentUrl());
 	Assert.assertTrue(driver.getCurrentUrl().contains("online-application.html/welcome"), "OLE page not loaded");
 }
