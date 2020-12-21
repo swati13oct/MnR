@@ -3193,11 +3193,13 @@ action.moveToElement(navigationSectionHomeLink).moveToElement(ourPlansHoverLink)
 			CommonUtility.checkPageIsReady(driver);
 			CheckiPerseptions();
 			validate(callsamtooltip);
+			validate(callsam);
 			String ActualCallSAMTFN = callsam.getText();
 			System.out.println("TFN No displayed on the Page" + ActualCallSAMTFN);
 			jsClickNew(callsam);
 			System.out.println("@@@@@@@@@@@@@@@ Call Icon Clicked @@@@@@@@@@@@@@@");
 			driver.switchTo().activeElement();
+			validate(CallSamTFN);
 			String ExpectedCallSAMTFN = CallSamTFN.getText();
 			System.out.println("TFN No displayed on the Page" + ExpectedCallSAMTFN);
 			if(ExpectedCallSAMTFN.contains(ActualCallSAMTFN)) {
@@ -3206,11 +3208,11 @@ action.moveToElement(navigationSectionHomeLink).moveToElement(ourPlansHoverLink)
 				Assert.assertTrue(true);
 			}
 			else {
-				Assert.fail("*****************TFN number was  not found macthing with the SAM call Popup ***************");
+				Assert.fail("*****************TFN number was  not found macthing with the SAM call Popup ***************"+ExpectedCallSAMTFN);
 			}
-			String ActualCallSamTFNtimezone ="Hours: 8 a.m. – 8 p.m., 7 days a week.*\n*Alaska and Hawaii: 8 a.m. – 8 p.m. Monday – Friday, 8 a.m. – 5 p.m. Saturday and Sunday.";
-			System.out.println(ActualCallSamTFNtimezone);
-	String ExpectedCallSamTFNtimezone = CallSamTFNtimezone.getText();
+			String ExpectedCallSamTFNtimezone ="Hours: 8 a.m. – 8 p.m., 7 days a week.*\n*Alaska and Hawaii: 8 a.m. – 8 p.m. Monday – Friday, 8 a.m. – 5 p.m. Saturday and Sunday.";
+			validate(CallSamTFNtimezone);
+			String ActualCallSamTFNtimezone = CallSamTFNtimezone.getText();
 			System.out.println(ExpectedCallSamTFNtimezone);
 			System.out.println(ActualCallSamTFNtimezone);
 			if(ExpectedCallSamTFNtimezone.contains(ActualCallSamTFNtimezone)) {
@@ -3218,19 +3220,20 @@ action.moveToElement(navigationSectionHomeLink).moveToElement(ourPlansHoverLink)
 						Assert.assertTrue(true);	
 				}
 			else {
-				Assert.fail("*****************TFN Timezone Content was not found macthing with the SAM call Popup  ***************");
+				Assert.fail("*****************TFN Timezone Content was not found macthing with the SAM call Popup  ***************"+ActualCallSamTFNtimezone);
 			}
-			String ActualCallSamTFNMember="Already a member? Call the number on the back of your member ID card.";
+			String ExpectedCallSamTFNMember="Already a member? Call the number on the back of your member ID card.";
 			//ActualCallSamTFNMember.replace("", " ");	
 		//	WebElement strCallSamTFNMember= driver.findElement(By.xpath("//p[contains(text(),'Already a member?')]"));
-			String ExpectedCallSamTFNMember = CallSamTFNMember.getText();
+			validate(CallSamTFNMember);
+			String ActualCallSamTFNMember = CallSamTFNMember.getText();
 			System.out.println(ExpectedCallSamTFNMember);
 			if(ExpectedCallSamTFNMember.contains(ActualCallSamTFNMember)) {
 				System.out.println("****************TFN Member Content was  found macthing with the SAM call Popup  ***************");		
 				Assert.assertTrue(true);
 			}
 			else {
-				Assert.fail("*****************TFN Timezone Content was not found macthing with the SAM call Popup  ***************");
+				Assert.fail("*****************TFN Member Content was not found macthing with the SAM call Popup  ***************"+ActualCallSamTFNMember);
 				}
 			validate(CallSamTFNClose);
 			jsClickNew(CallSamTFNClose);
