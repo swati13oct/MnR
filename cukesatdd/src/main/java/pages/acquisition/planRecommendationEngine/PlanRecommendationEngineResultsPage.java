@@ -1538,11 +1538,13 @@ public void validateCombineSavePlan(String year) {
 	keepshoppingPlansBtn.click();
 	threadsleep(3000);
 	scrollToView(MAViewPlansLink);
-	viewplanLink(MAPlanNames);
+	threadsleep(2000);
+	MAViewPlansLink.click();
 	savecomboplans(MAPlanNames,saveplans, year, MAPlansSaveIcon);
 	threadsleep(3000);
 	scrollToView(SNPViewPlansLink);
-	viewplanLink(SNPPlansName);
+	threadsleep(2000);
+	SNPViewPlansLink.click();
 	savecomboplans(SNPPlansName,1, year, SNPPlansSaveIcon);
 	Collections.sort(comboPlanNames);
 	System.out.println(comboPlanNames);
