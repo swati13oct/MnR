@@ -54,7 +54,7 @@ public class VisitorProfileStepDefinition {
 
 		CommonConstants.SELECTED_STATE  = state; 
 		
-		acqHomePage.selectState(state);
+//		acqHomePage.selectState(state);
 	}
 	
 	@And("^the user clicks on the shopping cart icon$")
@@ -465,9 +465,9 @@ public void the_user_navigates_to_visitor_profile_page() {
 	AcquisitionHomePage acqHomePage = (AcquisitionHomePage) getLoginScenario()
 			.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 
-	VisitorProfilePage visitorProfilePage = acqHomePage.navigateToNewVisitorProfilePage();
+//	VisitorProfilePage visitorProfilePage = acqHomePage.navigateToNewVisitorProfilePage();
 
-	getLoginScenario().saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfilePage);
+//	getLoginScenario().saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfilePage);
 }
 
 @And("^the user login with optum Id credentials$")

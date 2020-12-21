@@ -335,7 +335,7 @@ public class GlobalComponentsCommonStepDefinition {
 		  AcquisitionHomePage aquisitionHomePageReload =
 		  aquisitionhomepage.homeFooterClick();
      
-		//  Assert.assertTrue("home page not found", aquisitionHomePageReload!= null); 
+//		  Assert.assertTrue("home page not found", aquisitionHomePageReload!= null); 
 	  }
 
 	  @And("^the user clicks on browser back button$")
@@ -382,27 +382,27 @@ public class GlobalComponentsCommonStepDefinition {
 
 	  @When("^the user clicks on Medicare Prescription Drug Plans Link$")
 	  public void the_user_clicks_on_Medicare_Prescription_Drug_Plans_Link() throws Throwable {
-		  AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage)getLoginScenario() .getBean(PageConstants.ACQUISITION_HOME_PAGE);
+	  AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage)getLoginScenario() .getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		  aquisitionhomepage.MedicarePrescriptionDrugPlans();
 	  }
 
-	  @When("^the user clicks on Medicare Education Link$")
+  @When("^the user clicks on Medicare Education Link$")
 	  public void the_user_clicks_on_Medicare_Education_Link() throws Throwable {
 		  AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage)getLoginScenario() .getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		  aquisitionhomepage.MedicareEducation();
-	  }
+  }
 
-	  @When("^the user clicks on Back to top Link$")
-	  public void the_user_clicks_on_Back_to_top_Link() throws Throwable {
-		  AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage)getLoginScenario() .getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		  aquisitionhomepage.backtotop();
-	  }
+ @When("^the user clicks on Back to top Link$")
+public void the_user_clicks_on_Back_to_top_Link() throws Throwable {
+	  AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage)getLoginScenario() .getBean(PageConstants.ACQUISITION_HOME_PAGE);
+	  aquisitionhomepage.backtotop();
+  }
 
 
      @When("^the user clicks on Accessibility Link$")
-     public void the_user_clicks_on_Accessibility_Link() throws Throwable {
-	  AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage)getLoginScenario() .getBean(PageConstants.ACQUISITION_HOME_PAGE);
-	  aquisitionhomepage.Accessibility();
+  public void the_user_clicks_on_Accessibility_Link() throws Throwable {
+  AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage)getLoginScenario() .getBean(PageConstants.ACQUISITION_HOME_PAGE);
+  aquisitionhomepage.Accessibility();
 }
 
 
@@ -437,19 +437,19 @@ public class GlobalComponentsCommonStepDefinition {
 	  }
 	  
 	  @When("^the user navigates to Medicare Education Page from homepage$")
-	  public void user_navigates_to_Medicare_Education_Page_from_homepage()
-	  {
-		  AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage)getLoginScenario() .getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		  LearnAboutMedicareHomePage learnAboutMedicareHomePage=aquisitionhomepage.clickLearnMoreOnHomePage();  
-		  if(learnAboutMedicareHomePage!=null)
-		  {
-			  getLoginScenario().saveBean(PageConstants.LEARN_ABOUT_MEDICARE_PAGE, learnAboutMedicareHomePage);
-			  System.out.println("Medicare Education Page opened");
-			  Assert.assertTrue(true);
-		  }else {
-			  Assert.fail("Error in opening Medicare Education Page ");
-		  }
-	  }
+//	  public void user_navigates_to_Medicare_Education_Page_from_homepage()
+//	  {
+//		  AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage)getLoginScenario() .getBean(PageConstants.ACQUISITION_HOME_PAGE);
+//		  LearnAboutMedicareHomePage learnAboutMedicareHomePage=aquisitionhomepage.clickLearnMoreOnHomePage();  
+//		  if(learnAboutMedicareHomePage!=null)
+//		  {
+//			  getLoginScenario().saveBean(PageConstants.LEARN_ABOUT_MEDICARE_PAGE, learnAboutMedicareHomePage);
+//			  System.out.println("Medicare Education Page opened");
+//			  Assert.assertTrue(true);
+//		  }else {
+//			  Assert.fail("Error in opening Medicare Education Page ");
+//		  }
+//	  }
 	  
 	  @Then("^the user navigates to Prescriptions, Providers and Benefits page$")
 	  public void the_user_navigates_to_Prescriptions_Providers_and_Benefits_page()
@@ -675,15 +675,15 @@ public class GlobalComponentsCommonStepDefinition {
 		  LearnAboutMedicareHomePage learnAboutMedicareHomePage=(LearnAboutMedicareHomePage)getLoginScenario().getBean(PageConstants.LEARN_ABOUT_MEDICARE_PAGE);
 		  learnAboutMedicareHomePage.hoverToPlanPage(plantype);
 	  }
-	  
-	  @Then("^the user hover over Shop for a Plan and validates zipcode component$")
-	  public void the_user_hover_over_Shop_for_a_Plan_and_validates_zipcode_component() {
-		  AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage)getLoginScenario() .getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		  if(aquisitionhomepage.checkZipCompErrorInSubNav()==true){
-			  Assert.assertTrue(true);
-		  }else
-			  Assert.fail("Zip Component not present or Error msg not shown");
-	  }
+//	  
+//	  @Then("^the user hover over Shop for a Plan and validates zipcode component$")
+//	  public void the_user_hover_over_Shop_for_a_Plan_and_validates_zipcode_component() {
+//		  AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage)getLoginScenario() .getBean(PageConstants.ACQUISITION_HOME_PAGE);
+//		  if(aquisitionhomepage.checkZipCompErrorInSubNav()==true){
+//			  Assert.assertTrue(true);
+//		  }else
+//			  Assert.fail("Zip Component not present or Error msg not shown");
+//	  }
 	  
 	  @Then("^the user validate ZipCode Components on SubNav using ZipCode \"([^\"]*)\"$")
 	  public void the_user_enter_zipcode_and_go_to_Plan_Summary_Page(String zipCode){
