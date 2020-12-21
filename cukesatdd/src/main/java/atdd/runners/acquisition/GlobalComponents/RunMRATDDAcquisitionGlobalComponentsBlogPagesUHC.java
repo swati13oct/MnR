@@ -8,15 +8,15 @@ import com.github.mkolisnyk.cucumber.runner.ExtendedCucumberOptions;
 import cucumber.api.CucumberOptions;
 
 /**
- * this file is to run test cases for RunMRATDDAcquisitionGlobalComponentsShoppagesShopUHC
+ * this file is to run test cases for RunMRATDDAcquisitionGlobalComponentsBlogPagesBlog1UHC
  */
 @RunWith(ExtendedCucumber.class)
 @ExtendedCucumberOptions(retryCount=2,screenShotSize="", screenShotLocation="/screenshots/",
-jsonReport = "target/cucumber-RunMRATDDAcquisitionGlobalComponentsShoppagesShopUHC.json",
+jsonReport = "target/cucumber-RunMRATDDAcquisitionGlobalComponentsBlogPagesUHC.json",
 detailedReport = true, detailedAggregatedReport = true, overviewReport = true, toPDF = true, 
-outputFolder = "target/RunMRATDDAcquisitionGlobalComponentsShoppagesShopUHC")
+outputFolder = "target/RunMRATDDAcquisitionGlobalComponentsBlogPagesUHC")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.acquisition" }, features = { "src/main/resources/feature/acquisition/globalComponents" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionGlobalComponentsShoppagesShopUHC.json" }, tags = { "@ShopPages_Shop_GlobalCompsUHC" })
-public class RunMRATDDAcquisitionGlobalComponentsShoppagesShopUHC {
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionGlobalComponentsBlogPagesUHC.json" }, tags = { "@BlogPages_GlobalCompsUHC" })
+public class RunMRATDDAcquisitionGlobalComponentsBlogPagesUHC {
 
 }

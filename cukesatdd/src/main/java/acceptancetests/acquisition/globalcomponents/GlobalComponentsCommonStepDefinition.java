@@ -60,8 +60,9 @@ public class GlobalComponentsCommonStepDefinition {
 					memberAttributesRow.get(i).getCells().get(1));
 		}
 		String site = memberAttributesMap.get("Site");
+		
 		AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd, site);
- 
+		
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, aquisitionhomepage);
 		aquisitionhomepage.validateSubtitle();
@@ -382,6 +383,18 @@ public class GlobalComponentsCommonStepDefinition {
 //		  AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage)getLoginScenario() .getBean(PageConstants.ACQUISITION_HOME_PAGE);
 //		  aquisitionhomepage.clickVisitAARPFooterLink();
 //		  
-	  }
+	  
+
+
+@Then("^the user validates whether call icon is displayed$")
+public void the_user_validates_whether_callicon_isdisplayed() throws InterruptedException {
+	
+AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+			.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+	aquisitionhomepage.validateCallSamValue();
+
+}
+
+}
 
 

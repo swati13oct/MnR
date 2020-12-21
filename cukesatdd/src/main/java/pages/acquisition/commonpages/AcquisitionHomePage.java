@@ -301,6 +301,12 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "//button[@id='sam-call-button']//*[contains(@class,'sam__button__text desktop')]")
    	private WebElement callsam;
    	
+	@FindBy(xpath = "//*[@data-asset-container='Right rail:Call UnitedHealthcare']")
+   	private WebElement callusonpage;
+	
+	@FindBy(xpath = "//a[@dtmid='acq_floating_tfn_modal']/following::div/p/a")
+   	private WebElement tfnonpopup;
+	
    	//@FindBy(xpath = "//*[@id='sam-call-button']/div/span[1]")
   	@FindBy(xpath = "//*[contains(@class,'sam__button__text') and contains(text(),'1-')]")
    	private WebElement callsamtooltip;
@@ -355,6 +361,20 @@ public class AcquisitionHomePage extends GlobalWebElements {
    	
    	@FindBy(xpath ="//*[contains(@class,'commonFields')]//*[contains(@id,'first_name')]")
 	private WebElement samChatFirstNameField;
+   	
+   	@FindBy(xpath = "//div[@class='proactive-offer__button-wrapper']/button[2]")
+	private WebElement proActiveChat;
+   	
+   	@FindBy(xpath = "//div[@class='proactive-offer__button-wrapper']")
+	private WebElement proActiveChatPopUp;
+
+	@FindBy(xpath = "//input[@id='cancelPreChatForm']")
+	private WebElement proActiveChatCancel;
+
+
+	@FindBy(xpath = "//input[@id='submitChat']")
+	private WebElement proActiveChatSubmit;
+
 	
 	@FindBy(xpath ="//*[contains(@class,'commonFields')]//*[contains(@id,'last_name')]")
 	private WebElement samChatLastNameField;
@@ -544,12 +564,12 @@ public class AcquisitionHomePage extends GlobalWebElements {
 				checkModelPopup(driver,15);
 				CommonUtility.waitForPageLoadNew(driver, zipCode, 45);
 				try{
-					if(proactiveChatExitBtn!=null)
+					if(proactiveChatExitBtn!=null) {
 					jsClickNew(proactiveChatExitBtn);
-					
-					else 
+					}
+					else {
 						Assert.fail("Please check booleanvalue");
-					
+					}
 				}catch(Exception e){
 					System.out.println("Proactive chat popup not displayed");
 				}
@@ -3099,6 +3119,36 @@ action.moveToElement(navigationSectionHomeLink).moveToElement(ourPlansHoverLink)
 	        	Assert.fail("@@@@@@@@@ No TFN widget @@@@@@@@@");
 	      
 		}
+	 
+	 public void validateCallSamValue() throws InterruptedException {
+	        boolean present;
+//	        driver.navigate().refresh();
+	        try {
+	        validateNew(callsam);
+	        present = true;
+	        String valueOncallSam=callsam.getText();
+	        System.out.println("valueOncallSam"+valueOncallSam);
+	        String valueonCallUs=callusonpage.getText();
+	        System.out.println("valueonCallUs"+valueonCallUs);
+	        Assert.assertEquals(valueOncallSam, valueonCallUs);
+	        
+	        callsam.click();
+	        threadsleep(5);
+	        String valueOnPopup=tfnonpopup.getText();
+	        System.out.println("valueOnPopup"+valueOnPopup);
+	        Assert.assertEquals(valueOncallSam, valueOnPopup);
+	        driver.findElement(By.xpath("//a[@class='modal-close']")).click();
+	        threadsleep(5);
+	        } catch (NoSuchElementException e) {
+	        present = false;
+	        }
+	        if (present) {
+	          System.out.println("@@@@@@@@@ Able to find TFN widget @@@@@@@@@");
+	        }
+	        else
+	        	Assert.fail("@@@@@@@@@ No TFN widget @@@@@@@@@");
+	      
+		}
 		
 		public void validateCallSamContent() throws InterruptedException {
 			
@@ -3372,6 +3422,41 @@ action.moveToElement(navigationSectionHomeLink).moveToElement(ourPlansHoverLink)
 			
 			System.out.println("Failed Due To-------"+e.getMessage());
 			}
+
+
+	}
+		public void validateProActiveChatpopupconnect()  {
+			driver.navigate().refresh();
+			System.out.println("@@here@@@");
+			threadsleep(8);
+			waitTillElementClickableInTime(proactiveChatExitBtn, 30);
+			if(proactiveChatExitBtn!=null){
+			System.out.println("@@@proactive chat popup is displayed@@@@");
+			waitTillElementClickableInTime(proactiveChatChatBtn, 30);
+				jsClickNew(proactiveChatChatBtn);
+			System.out.println("@@@clciked@@@@");
+			}//driver.switchTo().defaultContent();
+			driver.switchTo().frame("sp-chat-iframe");
+			validateNew(samChatFirstNameField);				
+			samChatFirstNameField.sendKeys("tester");				
+			
+			validateNew(samChatLastNameField);
+			samChatLastNameField.sendKeys("test");		
+			
+			validateNew(samChatZipField);
+			samChatZipField.sendKeys("90210");
+		
+			validateNew(samChatEmailField);
+			samChatEmailField.sendKeys("test123@test.com");
+			
+			 validateNew(samChatOptions); 
+			 samChatOptions.click();
+			 validateNew(proActiveChatCancel);
+			 validateNew(proActiveChatSubmit);
+			 proActiveChatCancel.click();
+			 driver.switchTo().defaultContent();
+			System.out.println("Page Title---"+driver.getTitle());
+			
 
 
 	}
