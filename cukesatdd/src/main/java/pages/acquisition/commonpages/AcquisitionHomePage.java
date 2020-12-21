@@ -2226,6 +2226,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 				WebElement AARPLogo = driver.findElement(By.xpath("//*[contains(@id, 'aarpSVGLogo')]"));
 				WebElement UHCLogo = driver.findElement(By.xpath("//*[contains(@id, 'uhcSVGLogo')]"));
 				if (AARPLogo.isDisplayed() && AARPLogo.isEnabled() && !UHCLogo.isDisplayed()) {
+					scrollToView(AARPLogo);
 					Assert.assertTrue(true);
 					System.out.println("Correct AARP Logo is Displayed");
 				} else {
@@ -2236,6 +2237,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 				WebElement AARPLogo = driver.findElement(By.xpath("//*[contains(@id, 'aarpSVGLogo')]"));
 				WebElement UHCLogo = driver.findElement(By.xpath("//*[contains(@id, 'uhcSVGLogo')]"));
 				if (UHCLogo.isDisplayed() && UHCLogo.isEnabled() && !AARPLogo.isDisplayed()) {
+					scrollToView(UHCLogo);
 					Assert.assertTrue(true);
 					System.out.println("Correct UHC Logo is Displayed");
 				} else {
@@ -3523,4 +3525,126 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		return null;
 
 	}
+	
+
+	//method to click View Disclaimer Information link present in Footer
+	public void clickViewDisclaimerInfoLink() {
+		CommonUtility.checkPageIsReadyNew(driver);
+		scrollToView(viewAllDisclaimerInformationLink);
+		jsClickNew(viewAllDisclaimerInformationLink);
+		sleepBySec(2);
+		WebElement content=driver.findElement(By.xpath("//div[contains(@class,'hideLink')]"));
+		if(content.isDisplayed() && content.isEnabled())
+		{
+			System.out.println("View Diclaimer Information Link clicked Successfully");
+			Assert.assertTrue(true);
+		}else {
+			Assert.fail("Error clicking View Diclaimer Information Link ");
+		}		
+	}
+	
+	//method to click Hide Disclaimer Information link present in Footer
+		public void clickHideDisclaimerInfoLink() {
+			CommonUtility.checkPageIsReadyNew(driver);
+			scrollToView(hideDiscliamerInformation);
+			jsClickNew(hideDiscliamerInformation);
+			sleepBySec(2);
+			WebElement content=driver.findElement(By.xpath("//div[contains(@class,'hideLink')]"));
+			if(!content.isDisplayed() && content.isEnabled())
+			{
+				System.out.println("Hide Diclaimer Information Link clicked Successfully");
+				Assert.assertTrue(true);
+			}else {
+				Assert.fail("Error clicking Hide Diclaimer Information Link ");
+			}		
+		}
+
+		public void checkLinkContact(String language){
+			
+			WebElement lnkContact;
+			if(language.equalsIgnoreCase("english")){
+			lnkContact=driver.findElement(By.xpath("//a[contains(text(),'contact')]"));
+			}
+			else {
+				lnkContact=driver.findElement(By.xpath("//a[contains(@title,'"+language+"')]"));
+			}
+			
+			scrollToView(lnkContact);
+			validateNew(lnkContact);
+			jsClickNew(lnkContact);
+			CommonUtility.checkPageIsReadyNew(driver);
+			if(driver.getCurrentUrl().contains("contact-us.html")) {
+				System.out.println("Contact( "+language+" ) link is clicked Successfully");
+
+			}else{
+				Assert.fail("Error Clicking Contact( "+language+" ) link");
+			}
+			//driver.navigate().back();
+			WebElement headLogo=driver.findElement(By.xpath("//div[contains(@class,'logo aarplogo')]"));
+			scrollToView(headLogo);
+			headLogo.click();
+			CommonUtility.checkPageIsReadyNew(driver);
+			clickViewDisclaimerInfoLink();
+
+		}
+		public void selectStateForGeotargeting() {
+			//driver.findElement(By.cssSelector("body")).sendKeys(Keys.CONTROL,Keys.END);
+			WebElement stateDropDown = driver.findElement(By.id("state-select"));
+			scrollToView(stateDropDown);
+			waitTllOptionsAvailableInDropdown(stateDropDown, 5);
+			
+			WebElement stateGeotargeting = driver.findElement(By.xpath("(//select[@id='state-select']//option)[2]"));
+//			scrollToView(stateGeotargeting);
+//			stateGeotargeting.click();
+			jsClickNew(stateGeotargeting);
+			waitforElementNew(stateGeotargeting, 5);
+			System.out.println("State selected for Geotagging: "+ stateGeotargeting.getText());
+			waitforElementNew(stateGeotargeting, 5);
+			jsClickNew(backToTop);
+		}
+
+		public void clickComplaintFormLink() {
+			WebElement lnkComplaintForm=driver.findElement(By.xpath("(//a[contains(text(),'Complaint Form')])[1]"));
+			validateNew(lnkComplaintForm);
+			scrollToView(lnkComplaintForm);
+			jsClickNew(lnkComplaintForm);
+			proceedToLeaveAARP();
+			if(driver.getCurrentUrl().contains("medicare.gov/MedicareComplaintForm")) {
+				System.out.println("Successfully clicked Complaint Form link");
+				Assert.assertTrue(true);
+				
+			}else {
+				Assert.fail("Error clicking Complaint Form link");
+			}
+			driver.navigate().back();
+			CommonUtility.checkPageIsReadyNew(driver);
+			clickViewDisclaimerInfoLink();
+		}
+
+		public void validateAssistancelink(String language) {
+			CommonUtility.checkPageIsReadyNew(driver);
+			WebElement lnkAssistance = null;
+			if(language.equalsIgnoreCase("english")) {
+				lnkAssistance=driver.findElement(By.xpath("(//a[contains(@href,'legal/medicare')])[1]"));
+			} else if(language.equalsIgnoreCase("spanish")) {
+				lnkAssistance=driver.findElement(By.xpath("(//a[contains(@href,'legal/medicare')])[2]"));
+			} else if(language.equalsIgnoreCase("chinese")) {
+				lnkAssistance=driver.findElement(By.xpath("(//a[contains(@href,'legal/medicare')])[3]"));
+			}
+			
+			scrollToView(lnkAssistance);
+			validateNew(lnkAssistance);
+			sleepBySec(2);
+			switchToNewTabNew(lnkAssistance);
+			if(driver.getCurrentUrl().contains("https://www.uhc.com/legal/medicare-plans")) {
+				System.out.println("Assistance link( "+language+" ) clicked Successfully ");
+				Assert.assertTrue(true);
+			}else {
+				Assert.fail("Assistance link( "+language+" ) did not clicked Successfully ");
+			}
+			driver.close();
+			driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
+			CommonUtility.checkPageIsReadyNew(driver);			
+		}
+	
 }

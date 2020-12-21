@@ -437,19 +437,19 @@ public void the_user_clicks_on_Back_to_top_Link() throws Throwable {
 	  }
 	  
 	  @When("^the user navigates to Medicare Education Page from homepage$")
-//	  public void user_navigates_to_Medicare_Education_Page_from_homepage()
-//	  {
-//		  AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage)getLoginScenario() .getBean(PageConstants.ACQUISITION_HOME_PAGE);
-//		  LearnAboutMedicareHomePage learnAboutMedicareHomePage=aquisitionhomepage.clickLearnMoreOnHomePage();  
-//		  if(learnAboutMedicareHomePage!=null)
-//		  {
-//			  getLoginScenario().saveBean(PageConstants.LEARN_ABOUT_MEDICARE_PAGE, learnAboutMedicareHomePage);
-//			  System.out.println("Medicare Education Page opened");
-//			  Assert.assertTrue(true);
-//		  }else {
-//			  Assert.fail("Error in opening Medicare Education Page ");
-//		  }
-//	  }
+	  public void user_navigates_to_Medicare_Education_Page_from_homepage()
+	  {
+		  AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage)getLoginScenario() .getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		  LearnAboutMedicareHomePage learnAboutMedicareHomePage=aquisitionhomepage.clickLearnMoreOnHomePage();  
+		  if(learnAboutMedicareHomePage!=null)
+		  {
+			  getLoginScenario().saveBean(PageConstants.LEARN_ABOUT_MEDICARE_PAGE, learnAboutMedicareHomePage);
+			  System.out.println("Medicare Education Page opened");
+			  Assert.assertTrue(true);
+		  }else {
+			  Assert.fail("Error in opening Medicare Education Page ");
+		  }
+	  }
 	  
 	  @Then("^the user navigates to Prescriptions, Providers and Benefits page$")
 	  public void the_user_navigates_to_Prescriptions_Providers_and_Benefits_page()
@@ -675,15 +675,15 @@ public void the_user_clicks_on_Back_to_top_Link() throws Throwable {
 		  LearnAboutMedicareHomePage learnAboutMedicareHomePage=(LearnAboutMedicareHomePage)getLoginScenario().getBean(PageConstants.LEARN_ABOUT_MEDICARE_PAGE);
 		  learnAboutMedicareHomePage.hoverToPlanPage(plantype);
 	  }
-//	  
-//	  @Then("^the user hover over Shop for a Plan and validates zipcode component$")
-//	  public void the_user_hover_over_Shop_for_a_Plan_and_validates_zipcode_component() {
-//		  AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage)getLoginScenario() .getBean(PageConstants.ACQUISITION_HOME_PAGE);
-//		  if(aquisitionhomepage.checkZipCompErrorInSubNav()==true){
-//			  Assert.assertTrue(true);
-//		  }else
-//			  Assert.fail("Zip Component not present or Error msg not shown");
-//	  }
+	  
+	  @Then("^the user hover over Shop for a Plan and validates zipcode component$")
+	  public void the_user_hover_over_Shop_for_a_Plan_and_validates_zipcode_component() {
+		  AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage)getLoginScenario() .getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		  if(aquisitionhomepage.checkZipCompErrorInSubNav()==true){
+			  Assert.assertTrue(true);
+		  }else
+			  Assert.fail("Zip Component not present or Error msg not shown");
+	  }
 	  
 	  @Then("^the user validate ZipCode Components on SubNav using ZipCode \"([^\"]*)\"$")
 	  public void the_user_enter_zipcode_and_go_to_Plan_Summary_Page(String zipCode){
@@ -703,6 +703,48 @@ public void the_user_clicks_on_Back_to_top_Link() throws Throwable {
 		  learnAboutMedicareHomePage.chechStillHaveQues();
 	  }
 	  
+	  @Then("^the user clicks on View all disclaimer information link in footer$")
+	  public void clicks_on_View_all_disclaimer_information_link() {
+		  AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage)getLoginScenario() .getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		  aquisitionhomepage.clickViewDisclaimerInfoLink();
+	  }
+
+	  @Then("^the user validate links in disclaimer information section$")
+	  public void the_user_validate_links_in_disclaimer_information_section() {
+		  AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage)getLoginScenario() .getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		  aquisitionhomepage.checkLinkContact("english");
+		  aquisitionhomepage.checkLinkContact("spanish");
+		  aquisitionhomepage.checkLinkContact("chinese");
+		 
+	  }
+	  
+	  @Then("^the user clicks on Hide all disclaimer information link in footer$")
+	   public void clicks_on_Hide_all_disclaimer_information_link() {
+			  AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage)getLoginScenario() .getBean(PageConstants.ACQUISITION_HOME_PAGE);
+			  aquisitionhomepage.clickHideDisclaimerInfoLink();
+	  }
+	  
+	  @Then("^the user clicks on Complaint Form link in footer$")
+	  public void the_user_clicks_on_Complaint_Form_link() {
+		  AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage)getLoginScenario() .getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		  aquisitionhomepage.clickComplaintFormLink();
+	  }
+	  
+	  @Then("^user select state for geotargeting from global footer on homepage$")
+	  public void user_select_state_for_geotargeting_on_homepage(){
+		  AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage)getLoginScenario() .getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		  aquisitionhomepage.selectStateForGeotargeting();
+	  }
+	  
+	  @Then("^the user validates Language assistance links$")
+	  public void the_user_validates_Language_assistance_links() {
+		  AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage)getLoginScenario() .getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		  aquisitionhomepage.validateAssistancelink("English");
+		  aquisitionhomepage.validateAssistancelink("Spanish");
+		  aquisitionhomepage.validateAssistancelink("Chinese");
+	  }
+	 
+
 	 
 	  
 }
