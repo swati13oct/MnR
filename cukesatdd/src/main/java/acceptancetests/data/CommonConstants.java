@@ -875,6 +875,7 @@ public class CommonConstants {
 	public static final String APPIUM_VERSION = "APPIUM_VERSION";
 	public static final String MOBILE_DEVICE_TYPE = "MOBILE_DEVICE_TYPE";
 	public static final String MOBILE_DEVICE_TYPE_DEFAULT = "Real";
+	public static final String MOBILE_DEVICE_TYPE_VIRTUAL = "Virtual";
 	
 	public static final String SCREEN_RESOLUTION = "screenResolution";
 	/*public static final String CONNECTION_URL = "jdbc:sqlserver://120.130.10.2:1433;" +

@@ -173,6 +173,7 @@ public class PlanRecommendationEngineLandingAndZipcodeMobilePages extends UhcDri
 	// SingleCounty Method Mobile
 	public void quizStartsAndRunQuestionnaire(String zipcode) throws InterruptedException {
 
+		jsClickNew(getStartedBtn);
 		System.out.println("After clicking GetStarted");
 		zipcodePage();
 		waitforElementVisibilityInTime(zipCode, 45);
@@ -193,13 +194,7 @@ public class PlanRecommendationEngineLandingAndZipcodeMobilePages extends UhcDri
 
 	// SingleCounty Method
 	public void quizStartAndRunQuestionnaire(String zipcode) throws InterruptedException {
-
-		// switchToNewIframe(iframePst);
-		// waitTillElementClickableInTime(getStartedBtn, 30);
-		// AcquisitionHomePage.clickIfElementPresentInTime(driver,
-		// proactiveChatExitBtn,5);
-		// waitTillElementClickableInTime(getStartedBtn, 45);
-		// waitTillElementClickableInTime(getStartedBtn1, 45);
+	
 		System.out.println("Before clicking GetStarted");
 		// MobileMenu();
 		scrollToView(getStartedBtn);

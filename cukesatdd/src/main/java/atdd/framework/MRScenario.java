@@ -1154,12 +1154,15 @@ public class MRScenario {
 	}
 
 	public static String returnJobURL() {
-		if(MRScenario.environment.equalsIgnoreCase(VirtualDeviceURL)) {
+		if (mobileDeviceType.equalsIgnoreCase(CommonConstants.MOBILE_DEVICE_TYPE_VIRTUAL)) {
+
 			return JobURLVD;
-					
-		} else
-		return JobURL;
-		
+		}
+
+		else {
+			return JobURL;
+		}
+
 	}
 
 	public void getJobURL(String jobID) {
@@ -1167,10 +1170,10 @@ public class MRScenario {
 		JobURL = "https://saucelabs.com/jobs/" + jobID + "?auth=" + digest;
 		System.out.println("JobURL ---" + JobURL);
 	}
-	
+
 	public void getVDJobURL(String jobID) {
-		//String digest = hmacDigest(jobID, USERNAME + ":" + ACCESS_KEY, "HmacMD5");
-		JobURLVD = "https://saucelabs.com/tests/" + jobID; //+ "?auth=" + digest;
+		String digest = hmacDigest(jobID, USERNAME + ":" + ACCESS_KEY, "HmacMD5");
+		JobURLVD = "https://saucelabs.com/tests/" + jobID + "?auth=" + digest;
 		System.out.println("JobURL ---" + JobURLVD);
 	}
 
@@ -1267,15 +1270,15 @@ public class MRScenario {
 				System.out.println(mobileDriver.getContext());
 			} else {
 
-				JobURLVD = ("https://app.saucelabs.com/tests/"
-						+ mobileDriver.getSessionId());
-				System.out.println("SEE TEST EXECUTION HERE:***" +JobURLVD);
-				
+				// JobURLVD = ("https://app.saucelabs.com/tests/"
+				// + mobileDriver.getSessionId());
+				// System.out.println("SEE TEST EXECUTION HERE:***" +JobURLVD);
+				//
 				System.out.println("Session ID:" + ((mobileDriver).getSessionId()).toString());
+
 				getVDJobURL(((mobileDriver).getSessionId()).toString());
 			}
-			
-			
+
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

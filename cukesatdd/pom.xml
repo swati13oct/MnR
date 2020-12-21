@@ -1,4 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.uhg</groupId>
@@ -28,30 +29,30 @@
 		</resources>
 
 		<plugins>
-		
-			 <plugin>
-			      <artifactId>maven-assembly-plugin</artifactId>
-			      <configuration>
-			        <archive>
-			          <manifest>
-			            <mainClass>fully.qualified.MainClass</mainClass>
-			          </manifest>
-			        </archive>
-			        <descriptorRefs>
-			          <descriptorRef>jar-with-dependencies</descriptorRef>
-			        </descriptorRefs>
-			      </configuration>
-			      <executions>
-					    <execution>
-					      <id>make-assembly</id> <!-- this is used for inheritance merges -->
-					      <phase>package</phase> <!-- bind to the packaging phase -->
-					      <goals>
-					        <goal>single</goal>
-					      </goals>
-					    </execution>
-					  </executions>
-    		</plugin>
-		<plugin>
+
+			<plugin>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<configuration>
+					<archive>
+						<manifest>
+							<mainClass>fully.qualified.MainClass</mainClass>
+						</manifest>
+					</archive>
+					<descriptorRefs>
+						<descriptorRef>jar-with-dependencies</descriptorRef>
+					</descriptorRefs>
+				</configuration>
+				<executions>
+					<execution>
+						<id>make-assembly</id> <!-- this is used for inheritance merges -->
+						<phase>package</phase> <!-- bind to the packaging phase -->
+						<goals>
+							<goal>single</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.5.1</version>
@@ -91,7 +92,7 @@
 						</goals>
 					</execution>
 				</executions>
- 				<dependencies>
+				<dependencies>
 					<dependency>
 						<groupId>org.apache.maven.surefire</groupId>
 						<artifactId>surefire-junit47</artifactId>
@@ -99,7 +100,12 @@
 					</dependency>
 				</dependencies>
 				<configuration>
-					 <useSystemClassLoader>false</useSystemClassLoader>
+
+					<parallel>methods</parallel>
+					<useUnlimitedThreads>true</useUnlimitedThreads>
+
+
+					<useSystemClassLoader>false</useSystemClassLoader>
 					<forkCount>20</forkCount>
 					<reuseForks>true</reuseForks>
 					<testSourceDirectory>${basedir}/src/main/java/</testSourceDirectory>
@@ -110,38 +116,24 @@
 						<webdriverhost>${webdriverhost}</webdriverhost>
 					</systemPropertyVariables>
 				</configuration>
-				
+
 			</plugin>
-			<!--
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>exec-maven-plugin</artifactId>
-				<version>1.1.1</version>
-				<executions>
-					<execution>
-						<id>script-execution</id>
-						<phase>post-integration-test</phase>
-						<goals>
-							<goal>exec</goal>
-						</goals>
-					</execution>
-				</executions>
-				<configuration>
-					<executable>${basedir}/src/main/resources/pdfReportGenerator.sh</executable>
-				</configuration>
-			</plugin>
-			-->
+			<!-- <plugin> <groupId>org.codehaus.mojo</groupId> <artifactId>exec-maven-plugin</artifactId> 
+				<version>1.1.1</version> <executions> <execution> <id>script-execution</id> 
+				<phase>post-integration-test</phase> <goals> <goal>exec</goal> </goals> </execution> 
+				</executions> <configuration> <executable>${basedir}/src/main/resources/pdfReportGenerator.sh</executable> 
+				</configuration> </plugin> -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-pmd-plugin</artifactId>
 				<version>3.9.0</version>
 				<configuration>
 					<targetJdk>1.8</targetJdk>
-				<rulesets>
-					<ruleset>${project.basedir}/src/main/resources/ucp-custom-ruleset.xml</ruleset>
-				</rulesets>
-				<failsOnError>false</failsOnError>
-     			<failOnViolation>false</failOnViolation>
+					<rulesets>
+						<ruleset>${project.basedir}/src/main/resources/ucp-custom-ruleset.xml</ruleset>
+					</rulesets>
+					<failsOnError>false</failsOnError>
+					<failOnViolation>false</failOnViolation>
 				</configuration>
 				<executions>
 					<execution>
@@ -152,7 +144,7 @@
 				</executions>
 			</plugin>
 		</plugins>
-	
+
 		<pluginManagement>
 			<plugins>
 				<!--This plugin's configuration is used to store Eclipse m2e settings 
@@ -190,28 +182,28 @@
 			</plugins>
 		</pluginManagement>
 	</build>
-		<reporting>
-    		<plugins>
-       		 <plugin>
-          	  <groupId>org.apache.maven.plugins</groupId>
-          	  <artifactId>maven-jxr-plugin</artifactId>
-           	 <version>2.5</version>
-       		 </plugin>
-       		 
-        <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-pmd-plugin</artifactId>
-            <version>3.9.0</version>
-            <configuration>
-                <linkXRef>false</linkXRef>
-                <targetJdk>1.8</targetJdk>
-                <rulesets>
-                    <ruleset>/rulesets/basic.xml</ruleset>
-                </rulesets>
-            </configuration>
-        </plugin>
-    		</plugins>
-		</reporting>
+	<reporting>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jxr-plugin</artifactId>
+				<version>2.5</version>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-pmd-plugin</artifactId>
+				<version>3.9.0</version>
+				<configuration>
+					<linkXRef>false</linkXRef>
+					<targetJdk>1.8</targetJdk>
+					<rulesets>
+						<ruleset>/rulesets/basic.xml</ruleset>
+					</rulesets>
+				</configuration>
+			</plugin>
+		</plugins>
+	</reporting>
 
 	<dependencies>
 		<dependency>
@@ -219,6 +211,7 @@
 			<artifactId>junit</artifactId>
 			<version>4.12</version>
 		</dependency>
+
 
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -372,9 +365,9 @@
 		</dependency>
 
 		<dependency>
-		    <groupId>com.googlecode.json-simple</groupId>
-		    <artifactId>json-simple</artifactId>
-		    <version>1.1</version>
+			<groupId>com.googlecode.json-simple</groupId>
+			<artifactId>json-simple</artifactId>
+			<version>1.1</version>
 		</dependency>
 
 		<dependency>
@@ -394,28 +387,28 @@
 			<artifactId>cucumber-reports</artifactId>
 			<version>1.0.7</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>com.codeborne</groupId>
 			<artifactId>phantomjsdriver</artifactId>
 			<version>1.2.1</version>
 		</dependency>
-		
+
 		<dependency>
-		    <groupId>javax.mail</groupId>
-		    <artifactId>javax.mail-api</artifactId>
-		    <version>1.5.5</version>
+			<groupId>javax.mail</groupId>
+			<artifactId>javax.mail-api</artifactId>
+			<version>1.5.5</version>
 		</dependency>
 		<dependency>
-		    <groupId>com.sun.mail</groupId>
-		    <artifactId>javax.mail</artifactId>
-		    <version>1.5.5</version>
+			<groupId>com.sun.mail</groupId>
+			<artifactId>javax.mail</artifactId>
+			<version>1.5.5</version>
 		</dependency>
-		
+
 		<dependency>
-    		<groupId>org.jsoup</groupId>
-    		<artifactId>jsoup</artifactId>
-    		<version>1.11.2</version>
+			<groupId>org.jsoup</groupId>
+			<artifactId>jsoup</artifactId>
+			<version>1.11.2</version>
 		</dependency>
 		<dependency>
 			<groupId>mysql</groupId>
@@ -423,66 +416,66 @@
 			<version>5.1.6</version>
 		</dependency>
 		<dependency>
-		    <groupId>com.applitools</groupId>
-		    <artifactId>eyes-selenium-java3</artifactId>
-		    <version>RELEASE</version>
-		    <exclusions>
-		        <exclusion>
-		            <groupId>org.seleniumhq.selenium</groupId>
-		            <artifactId>selenium-java</artifactId>
-		        </exclusion>
-		        <exclusion>
-		            <groupId>org.seleniumhq.selenium</groupId>
-		            <artifactId>selenium-api</artifactId>
-		        </exclusion>
-		    </exclusions>
+			<groupId>com.applitools</groupId>
+			<artifactId>eyes-selenium-java3</artifactId>
+			<version>RELEASE</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.seleniumhq.selenium</groupId>
+					<artifactId>selenium-java</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.seleniumhq.selenium</groupId>
+					<artifactId>selenium-api</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
-    <groupId>com.saucelabs</groupId>
-    <artifactId>saucerest</artifactId>
-    <version>1.0.38</version>
-    <scope>test</scope>
-  </dependency>
+			<groupId>com.saucelabs</groupId>
+			<artifactId>saucerest</artifactId>
+			<version>1.0.38</version>
+			<scope>test</scope>
+		</dependency>
 		<dependency>
 			<groupId>org.apache.pdfbox</groupId>
 			<artifactId>pdfbox</artifactId>
 			<version>2.0.16</version>
 		</dependency>
-	<dependency>
-    <groupId>io.appium</groupId>
-    <artifactId>java-client</artifactId>
-    <version>7.3.0</version>
-	</dependency>		
 		<dependency>
-    <groupId>jdbcJar</groupId>
-    <artifactId>ojdbc6</artifactId>
-    <scope>system</scope>
-    <version>11.2.0.4.0</version>
-    <systemPath>${basedir}/src/main/resources/lib/ojdbc6.jar</systemPath>
-</dependency>
+			<groupId>io.appium</groupId>
+			<artifactId>java-client</artifactId>
+			<version>7.3.0</version>
+		</dependency>
+		<dependency>
+			<groupId>jdbcJar</groupId>
+			<artifactId>ojdbc6</artifactId>
+			<scope>system</scope>
+			<version>11.2.0.4.0</version>
+			<systemPath>${basedir}/src/main/resources/lib/ojdbc6.jar</systemPath>
+		</dependency>
 
-    <dependency>
-        <groupId>javax.xml.bind</groupId>
-        <artifactId>jaxb-api</artifactId>
-        <version>2.3.0</version>
-    </dependency>
-    <dependency>
-        <groupId>com.sun.xml.bind</groupId>
-        <artifactId>jaxb-impl</artifactId>
-        <version>2.3.0</version>
-    </dependency>
-    <dependency>
-        <groupId>org.glassfish.jaxb</groupId>
-        <artifactId>jaxb-runtime</artifactId>
-        <version>2.3.0</version>
-    </dependency>
-    <dependency>
-        <groupId>javax.activation</groupId>
-        <artifactId>activation</artifactId>
-        <version>1.1.1</version>
-    </dependency>
+		<dependency>
+			<groupId>javax.xml.bind</groupId>
+			<artifactId>jaxb-api</artifactId>
+			<version>2.3.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.sun.xml.bind</groupId>
+			<artifactId>jaxb-impl</artifactId>
+			<version>2.3.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.glassfish.jaxb</groupId>
+			<artifactId>jaxb-runtime</artifactId>
+			<version>2.3.0</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.activation</groupId>
+			<artifactId>activation</artifactId>
+			<version>1.1.1</version>
+		</dependency>
 
 
 	</dependencies>
-	
+
 </project>
