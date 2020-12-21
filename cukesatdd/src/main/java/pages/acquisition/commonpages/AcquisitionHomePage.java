@@ -3215,7 +3215,7 @@ action.moveToElement(navigationSectionHomeLink).moveToElement(ourPlansHoverLink)
 			String ActualCallSamTFNtimezone = CallSamTFNtimezone.getText();
 			System.out.println(ExpectedCallSamTFNtimezone);
 			System.out.println(ActualCallSamTFNtimezone);
-			if(ExpectedCallSamTFNtimezone.contains(ActualCallSamTFNtimezone)) {
+			if(ExpectedCallSamTFNtimezone.equalsIgnoreCase(ActualCallSamTFNtimezone)) {
 						System.out.println("****************TFN Timezone Content was  found macthing with the SAM call Popup  ***************");
 						Assert.assertTrue(true);	
 				}
@@ -3228,7 +3228,7 @@ action.moveToElement(navigationSectionHomeLink).moveToElement(ourPlansHoverLink)
 			validate(CallSamTFNMember);
 			String ActualCallSamTFNMember = CallSamTFNMember.getText();
 			System.out.println(ExpectedCallSamTFNMember);
-			if(ExpectedCallSamTFNMember.contains(ActualCallSamTFNMember)) {
+			if(ExpectedCallSamTFNMember.equalsIgnoreCase(ActualCallSamTFNMember)) {
 				System.out.println("****************TFN Member Content was  found macthing with the SAM call Popup  ***************");		
 				Assert.assertTrue(true);
 			}
