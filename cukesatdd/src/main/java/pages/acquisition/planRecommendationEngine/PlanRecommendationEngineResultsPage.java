@@ -281,7 +281,7 @@ public class PlanRecommendationEngineResultsPage extends UhcDriver {
 	@FindBy(css = "#plan-list-1 .swiper-container .module-plan-overview a[id*='savePlan']")
 	private List<WebElement> MAPlansSaveIcon;
 	
-	@FindBy(css = "#plan-list-3 .swiper-wrapper .module-plan-overview a[class*='favorite-plan']:nth-child(1) img[class*='unliked']")
+	@FindBy(css = "#plan-list-3 .swiper-wrapper .module-plan-overview a[class*='favorite-plan']:nth-child(1) span[class*='unliked']")
 	private List<WebElement> PDPPlansSaveIcon;
 	
 	@FindBy(css = "#plan-list-4 .swiper-container .module-plan-overview a[id*='savePlan']")
