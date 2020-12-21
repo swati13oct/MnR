@@ -36,14 +36,11 @@ public class OneTimePaymentPage extends UhcDriver {
 	@FindBy(id = "optionsRadios1")
 	private WebElement AmountDueTodayButton;
 	
-	@FindBy(xpath = "//label[@for='optionsRadios30']//input")
-	private WebElement CheckingAccountRadioButton;
-	
-	@FindBy(xpath = "//label[@for='optionsRadios10']//input")
-	private WebElement CheckingAccountRadioButtonNew;
+	@FindBy(xpath = "//*[(@id='optionsRadios10') or (@id='optionsRadios30')]")
+	private List <WebElement> CheckingAccountRadioButton;
 
-	@FindBy(xpath = "//label[@for='optionsRadios40']//input")
-	private WebElement creditcardRadioButton;
+	@FindBy(xpath = "//*[(@id='optionsRadios20') or (@id='optionsRadios40')]")
+	private List <WebElement> creditcardRadioButton;
 
 	@FindBy(xpath = "//*[@class='payment-selection__actions']/button")
 	private WebElement NextButton;
@@ -552,32 +549,62 @@ public class OneTimePaymentPage extends UhcDriver {
 	}
 
 	public void selectCreditCardOption() {
-		validate(creditcardRadioButton);
-		creditcardRadioButton.click();
-		System.out.println("User selects Credit Card Option");
+		try
+		{
+	      List<WebElement> allInputElements = creditcardRadioButton;
+				
+				   if(allInputElements.size() != 0) 
+				   {
+					  System.out.println(allInputElements.size() + " Elements found by id of radio button as input \n");
+					   for(WebElement inputElement : allInputElements) 
+					   {
+						   if(inputElement.isDisplayed())
+						   {
+							   inputElement.click();
+						        break;
+						   }
+					   }
+				   }
+	
+	
+		}
+		catch (Exception e) 
+		{
+			
+			System.out.println(" Radio button for Credit Card is not clicked.Please handle the Exception");
+        }
+		System.out.println("User clicked on Credit Card Option");
 
-	}
+	    }
 	
 	public void selectCheckingAccountOption() {
-		 try {
-	            Thread.sleep(5000);
-	            System.out.println(driver.getCurrentUrl());
-	        } catch (InterruptedException e) {
-	            e.printStackTrace();
-	        }
-		TestHarness.checkForIPerceptionModel(driver);
-		validate(CheckingAccountRadioButton);
-		try {
-		CheckingAccountRadioButton.click();
-		System.out.println("User selected Checking Account radio button");
-		    }
-		catch (Exception e) {
-			CheckingAccountRadioButtonNew.click();  
-            }
-		System.out.println("User selects Checking Account Option");
+		try
+		{
+	      List<WebElement> allInputElements = CheckingAccountRadioButton;
+				
+				   if(allInputElements.size() != 0) 
+				   {
+					  System.out.println(allInputElements.size() + " Elements found by id of radio button as input \n");
+					   for(WebElement inputElement : allInputElements) 
+					   {
+						   if(inputElement.isDisplayed())
+						   {
+							   inputElement.click();
+						        break;
+						   }
+					   }
+				   }
+	
+	
+		}
+		catch (Exception e) 
+		{
+			System.out.println(" Radio button for Checking Account is not clicked.Please handle the Exception");
+        }
+		System.out.println("User clicked on Checking Account Option");
 
-	}
-
+	    }
+	
 	public CreditCardUPGPage clickOnNextButton() {
 		validate(otheramountfield);
 		TestHarness.checkForIPerceptionModel(driver);
