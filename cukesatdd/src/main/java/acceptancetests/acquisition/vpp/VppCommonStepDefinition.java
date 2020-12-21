@@ -1242,82 +1242,82 @@ public class VppCommonStepDefinition {
 
 	}
 
-	@And("^user clicks on contact us link of aboutus page$")
-	public void click_contact_us() {
-		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
-				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		ContactUsAARPPage contactUsAARPPage = aquisitionhomepage.contactUsFooterClick();
-		if (contactUsAARPPage != null) {
-			getLoginScenario().saveBean(PageConstants.AARP_Contact_US_PAGE, contactUsAARPPage);
-			Assert.assertTrue(true);
-		} else {
-			Assert.fail("contactus page not found");
-		}
-	}
+//	@And("^user clicks on contact us link of aboutus page$")
+//	public void click_contact_us() {
+//		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+//				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+//		ContactUsAARPPage contactUsAARPPage = aquisitionhomepage.contactUsFooterClick();
+//		if (contactUsAARPPage != null) {
+//			getLoginScenario().saveBean(PageConstants.AARP_Contact_US_PAGE, contactUsAARPPage);
+//			Assert.assertTrue(true);
+//		} else {
+//			Assert.fail("contactus page not found");
+//		}
+//	}
 
-	@And("^user clicks on sitemap link of contact us page$")
-	public void click_sitemap() {
-		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
-				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		SiteMapAARPPage siteMapAARPPage = aquisitionhomepage.siteMapFooterClick();
-		if (siteMapAARPPage != null) {
-			getLoginScenario().saveBean(PageConstants.AARP_SITE_MAP_PAGE, siteMapAARPPage);
+//	@And("^user clicks on sitemap link of contact us page$")
+//	public void click_sitemap() {
+//		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+//				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+//		SiteMapAARPPage siteMapAARPPage = aquisitionhomepage.siteMapFooterClick();
+//		if (siteMapAARPPage != null) {
+//			getLoginScenario().saveBean(PageConstants.AARP_SITE_MAP_PAGE, siteMapAARPPage);
+//
+//			Assert.assertTrue(true);
+//		} else {
+//			Assert.fail("sitemap page not found");
+//		}
+//	}
 
-			Assert.assertTrue(true);
-		} else {
-			Assert.fail("sitemap page not found");
-		}
-	}
+//	@And("^user clicks on privacy policy link of sitemap page$")
+//	public void click_privacypolicy() {
+//		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+//				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+//		PrivacyPolicyAARPPage privacyPolicyAARPPage = aquisitionhomepage.privacypolicyFooterClick();
+//		if (privacyPolicyAARPPage != null) {
+//			getLoginScenario().saveBean(PageConstants.AARP_PRIVACY_POLICY_PAGE, privacyPolicyAARPPage);
+//
+//			Assert.assertTrue(true);
+//		} else {
+//			Assert.fail("privacypolicy page not found");
+//		}
+//	}
 
-	@And("^user clicks on privacy policy link of sitemap page$")
-	public void click_privacypolicy() {
-		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
-				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		PrivacyPolicyAARPPage privacyPolicyAARPPage = aquisitionhomepage.privacypolicyFooterClick();
-		if (privacyPolicyAARPPage != null) {
-			getLoginScenario().saveBean(PageConstants.AARP_PRIVACY_POLICY_PAGE, privacyPolicyAARPPage);
+//	@And("^user clicks on disclaimers link of terms & conditions page$")
+//	public void click_disclaimers() {
+//		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+//				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+//		DisclaimersAARPPage disclaimersAARPPage = aquisitionhomepage.disclaimersFooterClick();
+//		if (disclaimersAARPPage != null) {
+//			getLoginScenario().saveBean(PageConstants.AARP_DISCLAIMERS_PAGE, disclaimersAARPPage);
+//
+//			Assert.assertTrue(true);
+//		} else {
+//			Assert.fail("disclaimers page not found");
+//		}
+//	}
 
-			Assert.assertTrue(true);
-		} else {
-			Assert.fail("privacypolicy page not found");
-		}
-	}
+//	@And("^user clicks on agents & brokers link of disclaimers page$")
+//	public void click_agentsnbrokers() {
+//		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+//				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+//		AgentsnBrokersAARPPage agentsnBrokersAARPPage = aquisitionhomepage.agentsnbrokersFooterClick();
+//		if (agentsnBrokersAARPPage != null) {
+//			getLoginScenario().saveBean(PageConstants.AARP_AGENTS_AND_BROKERS_PAGE, agentsnBrokersAARPPage);
+//
+//			Assert.assertTrue(true);
+//		} else {
+//			Assert.fail("agents&brokers page not found");
+//		}
+//	}
 
-	@And("^user clicks on disclaimers link of terms & conditions page$")
-	public void click_disclaimers() {
-		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
-				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		DisclaimersAARPPage disclaimersAARPPage = aquisitionhomepage.disclaimersFooterClick();
-		if (disclaimersAARPPage != null) {
-			getLoginScenario().saveBean(PageConstants.AARP_DISCLAIMERS_PAGE, disclaimersAARPPage);
-
-			Assert.assertTrue(true);
-		} else {
-			Assert.fail("disclaimers page not found");
-		}
-	}
-
-	@And("^user clicks on agents & brokers link of disclaimers page$")
-	public void click_agentsnbrokers() {
-		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
-				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		AgentsnBrokersAARPPage agentsnBrokersAARPPage = aquisitionhomepage.agentsnbrokersFooterClick();
-		if (agentsnBrokersAARPPage != null) {
-			getLoginScenario().saveBean(PageConstants.AARP_AGENTS_AND_BROKERS_PAGE, agentsnBrokersAARPPage);
-
-			Assert.assertTrue(true);
-		} else {
-			Assert.fail("agents&brokers page not found");
-		}
-	}
-
-	@And("^user verifies home link of agents & brokers page$")
-	public void click_home() {
-		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
-				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		AcquisitionHomePage aquisitionHomePageReload = aquisitionhomepage.homeFooterClick();
-		Assert.assertTrue("home page not found", aquisitionHomePageReload != null);
-	}
+//	@And("^user verifies home link of agents & brokers page$")
+//	public void click_home() {
+//		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+//				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+//		AcquisitionHomePage aquisitionHomePageReload = aquisitionhomepage.homeFooterClick();
+//		Assert.assertTrue("home page not found", aquisitionHomePageReload != null);
+//	}
 
 	@Then("^the user clicks on Learn More for Rocky Mountain plans$")
 	public void the_user_clicks_on_Learn_More__for_Rocky_Mountain_plans(DataTable planAttributes) throws Throwable {
@@ -2598,7 +2598,7 @@ public class VppCommonStepDefinition {
 		System.out.println("TEST - testSiteUrl=" + testSiteUrl);
 		getLoginScenario().saveBean(PageConstants.TEST_SITE_URL, testSiteUrl);
 
-		aquisitionhomepage.selectState("Select State"); // note: default it to no state selected for predictable result
+//		aquisitionhomepage.selectState("Select State"); // note: default it to no state selected for predictable result
 		System.out.println("Unselected state on home page for more predictable result");
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, aquisitionhomepage);

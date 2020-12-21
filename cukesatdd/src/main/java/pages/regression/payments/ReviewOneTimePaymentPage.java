@@ -22,7 +22,7 @@ import pages.regression.payments.ConfirmOneTimePaymentPage;
  */
 public class ReviewOneTimePaymentPage extends UhcDriver {
 
-	@FindBy(xpath = "//button[text()='CHANGE CARD']")
+	@FindBy(xpath = "//a[text()='CHANGE CARD']")
 	private WebElement ChangeCard;
 
 	@FindBy(xpath = "//button[text()='MAKE PAYMENT']")
@@ -34,7 +34,7 @@ public class ReviewOneTimePaymentPage extends UhcDriver {
 	@FindBy(id = "termsAgree")
 	private WebElement AgreeCheckBox;
 
-	@FindBy(id = "saveCCInFile")
+	@FindBy(xpath = "//input[@id='saveCCInFile']")
 	private WebElement saveCardCheckbox;
 	
 	@FindBy(id = "custom-page-title")
@@ -91,13 +91,31 @@ public class ReviewOneTimePaymentPage extends UhcDriver {
 		validate(ChangeCard);
 		System.out.println("User is on Review one Time CC Page");
 		PaymentsDataVerificationonReviewPage();
+		
+		String isSaveCardCheckBoxCheckedbefore = saveCardCheckbox.getAttribute("checked");
+		System.out.println("Checkbox checked flag before is  :"+isSaveCardCheckBoxCheckedbefore);
+		
 		jsClickNew(saveCardCheckbox);
+		
+		String isSaveCardCheckBoxChecked = saveCardCheckbox.getAttribute("checked");
+		System.out.println("Checkbox checked flag is  :"+isSaveCardCheckBoxChecked);
+		
+		if (isSaveCardCheckBoxChecked.contentEquals("true"))
+		{
+			System.out.println("Save Card Check box was checked");
+		}
+		else
+		{
+			Assert.fail("Save Card Checkbox was not checked");
+		}
+		
 		try {
 			Thread.sleep(2000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 		jsClickNew(AgreeCheckBox);
 		ContinueButton.click();
 		try {

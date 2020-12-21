@@ -1524,6 +1524,25 @@ public class OneTimePaymentAarpStepDefintion {
 		}
 	}
 	
+	@When("^user selects other amount and enters \"([^\"]*)\" and selects credit card and click on Replace Card link$")
+	public void user_selects_other_amount_and_enters_and_selects_credit_card_and_click_on_replceCardLink(
+			String otherAmountvalue) throws Throwable {
+		OneTimePaymentPage oneTimePaymentPage = (OneTimePaymentPage) getLoginScenario()
+				.getBean(PageConstants.One_Time_Payments_Page);
+
+		CreditCardUPGPage creditCardPaymentPage=null;
+		if(oneTimePaymentPage!=null) {
+			oneTimePaymentPage.selectAndEnterAmount(otherAmountvalue);
+			oneTimePaymentPage.selectCreditCardOption();
+			creditCardPaymentPage = oneTimePaymentPage.clickOnReplaceCardlink();
+		}
+		if (creditCardPaymentPage != null) {
+			getLoginScenario().saveBean(PageConstants.Credit_Card_Payments_Page, creditCardPaymentPage);
+			System.out.println("User is on UPG Credit cards page");
+
+		}
+	}
+	
 	@When("^user selects other amount and enters \"([^\"]*)\" and selects Checking Account and click on Next button$")
 	public void user_selects_other_amount_and_enters_and_selects_Checking_Account_and_click_on_Next_button(
 			String otherAmountvalue) throws Throwable {
