@@ -31,7 +31,7 @@ Background: Feature security flag needs to be true before ATDD script execution
       
       
   #Test Case 34 - Federal member - One time CC - Payment made with a existing Saved Card
-  @regressionMember1
+  @regressionMember
   Scenario Outline: TID: <memberType> - Test Case 34 - Verify MakeOne time Payment submission for Credit card Other amount with an existing saved card
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
@@ -51,4 +51,4 @@ Background: Feature security flag needs to be true before ATDD script execution
 
     Examples: 
       | TID       | planType | memberType                       | Name | CreditCardNumber | validMonth | validYear | paymentType |
-      | F243897   | PDP      | MakeOneTimeCCOther_Payments      | Test | 4111111111111111 |         04 |      2028 | OneTime     |
+      | F243897   | PDP      | MakeOneTimeCCOther_SavedCardPayments      | Test | 4111111111111111 |         04 |      2028 | OneTime     |
