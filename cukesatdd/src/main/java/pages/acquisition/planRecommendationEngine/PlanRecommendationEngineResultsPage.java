@@ -1529,24 +1529,21 @@ public void validateSavePlan(String year) {
 	verifySavePlans(year, vppPlans);
 }
 
+ArrayList<String> comboPlanNames = new ArrayList<String>();
 public void validateCombineSavePlan(String year) {
-	ArrayList<String> comboPlanNames = new ArrayList<String>();
 	System.out.println("Validate PRE Save Plans functionality : ");
 	int saveplans = 2;
-	saveplans(PDPPlansName,saveplans, year, PDPPlansSaveIcon);
-	comboPlanNames.add(vppPlans.toString().replace("[", "").replace("]", "").replace(",", "").trim());
+	savecomboplans(PDPPlansName,saveplans, year, PDPPlansSaveIcon);
 	validate(keepshoppingPlansBtn);
 	keepshoppingPlansBtn.click();
 	threadsleep(3000);
 	scrollToView(MAViewPlansLink);
 	viewplanLink(MAPlanNames);
-	saveplans(MAPlanNames,saveplans, year, MAPlansSaveIcon);
-	comboPlanNames.add(vppPlans.toString().replace("[", "").replace("]", "").replace(",", "").trim());
+	savecomboplans(MAPlanNames,saveplans, year, MAPlansSaveIcon);
 	threadsleep(3000);
 	scrollToView(SNPViewPlansLink);
 	viewplanLink(SNPPlansName);
-	saveplans(SNPPlansName,1, year, SNPPlansSaveIcon);
-	comboPlanNames.add(vppPlans.toString().replace("[", "").replace("]", "").replace(",", "").trim());
+	savecomboplans(SNPPlansName,1, year, SNPPlansSaveIcon);
 	Collections.sort(comboPlanNames);
 	System.out.println(comboPlanNames);
 	scrollToView(heartIcon);
@@ -1587,6 +1584,15 @@ public ArrayList<String> saveplans(List<WebElement> plansName, int saveplans,	St
 	System.out.println(vppPlans);
 	threadsleep(3000);
 	return vppPlans;
+}
+public ArrayList<String> savecomboplans(List<WebElement> plansName, int saveplans,	String year, List<WebElement> savePlan) {
+	System.out.println("Plans Count :" +plansName.size());
+	threadsleep(3000);
+	for (int plan = 0; plan < saveplans; plan++) {
+		comboPlanNames.add(savingplans(plansName.get(plan), savePlan.get(plan)));
+	}
+	threadsleep(3000);
+	return comboPlanNames;
 }
 
 public void verifySavePlans(String year, ArrayList<String> vppPlans) {
