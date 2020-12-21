@@ -1765,7 +1765,7 @@ public void validatePDPPlanNamesAndEnroll() {
 	pageloadcomplete();
 	String planNameinOLE = planNameEnrollPage.getText().trim().toUpperCase(); 
 	System.out.println("Plan Name in Plan Enroll Page: "+planNameinOLE);
-	Assert.assertTrue(exceptedplanName.equalsIgnoreCase(planNameinOLE), "--- Plan name are not matches---");	
+	Assert.assertTrue(planNameinOLE.contains(exceptedplanName), "--- Plan name are not matches---");	
 	System.out.println(driver.getCurrentUrl());
 	Assert.assertTrue(driver.getCurrentUrl().contains("online-application.html/welcome"), "OLE page not loaded");
 }
