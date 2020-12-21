@@ -130,7 +130,7 @@ Feature: Plan Recommendation Engine flow - Verify PRE flows functionalities with
 
     Examples: 
       | Zipcode | isMultiCounty | county         | isCoverageOpt | specialNeeds | travel   | doctors         | DoctorsName | isMultiDoctor | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities      | 1stRecommendation | 2ndRecommendation |
-      |   10003 | NO            | New York       | MA            | None         | withinUS | Lookup          | john        | YES           | Yes,No,No,Yes                 | Lower                | both           | Doctors, Dental | MA                | MS                |
+      |   10003 | NO            | New York       | MA            | None         | withinUS | Lookup          | sue         | YES           | Yes,No,No,Yes                 | Lower                | both           | Doctors, Dental | MA                | MS                |
       |   25813 | NO            | Raleigh County | MA            | Medicaid     | regular  | AcceptsMedicare |             |               | No,No,No,No                   | Higher               | None           | Doctors, Dental | MS                |                   |
 
   @PRE @planrecommendation @MAPDFlow @F358830 @F458224 @PRERegression2

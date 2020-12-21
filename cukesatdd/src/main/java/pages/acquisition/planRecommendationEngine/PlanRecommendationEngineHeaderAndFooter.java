@@ -141,13 +141,13 @@ public class PlanRecommendationEngineHeaderAndFooter extends UhcDriver {
     private WebElement headerShopLink;
     
     @FindBy(css = "#planTypesColumn h3:nth-of-type(2)>a")
-    private WebElement headerNewExistingMemberLink;
-    
-    @FindBy(css = "#planTypesColumn h3:nth-of-type(3)>a")
     private WebElement headerEnrollLink;
     
-    @FindBy(css = "#planTypesColumn h3:nth-of-type(4)>a")
+    @FindBy(css = "#planTypesColumn h3:nth-of-type(3)>a")
     private WebElement headerResourcesLink;
+    
+//    @FindBy(css = "#planTypesColumn h3:nth-of-type(4)>a")
+//    private WebElement headerResourcesLink;
     
     @FindBy(css = "#subnav_2 div[class$='content-2']>h3:nth-of-type(1)>a")
     private WebElement headerAdvantageplanLink;
@@ -334,8 +334,8 @@ public class PlanRecommendationEngineHeaderAndFooter extends UhcDriver {
 //2nd column in Shop for a plan		headerNewExistingMemberLink
 		validate(headerShopLink, 30);
 		Assert.assertTrue(headerShopLink.getText().contains("Shop"));
-		validate(headerNewExistingMemberLink, 30);
-		Assert.assertTrue(headerNewExistingMemberLink.getText().contains("New and Existing Members"));
+//		validate(headerNewExistingMemberLink, 30);
+//		Assert.assertTrue(headerNewExistingMemberLink.getText().contains("New and Existing Members"));
 		validate(headerEnrollLink, 30);
 		Assert.assertTrue(headerEnrollLink.getText().contains("Enroll"));
 		validate(headerResourcesLink, 30);

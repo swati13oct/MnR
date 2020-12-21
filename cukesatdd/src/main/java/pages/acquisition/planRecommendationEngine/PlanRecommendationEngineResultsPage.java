@@ -1530,23 +1530,29 @@ public void validateSavePlan(String year) {
 }
 
 public void validateCombineSavePlan(String year) {
+	ArrayList<String> comboPlanNames = new ArrayList<String>();
 	System.out.println("Validate PRE Save Plans functionality : ");
 	int saveplans = 2;
 	saveplans(PDPPlansName,saveplans, year, PDPPlansSaveIcon);
+	comboPlanNames.add(vppPlans.toString());
 	validate(keepshoppingPlansBtn);
 	keepshoppingPlansBtn.click();
 	threadsleep(3000);
 	viewplanLink(MAPlanNames);
 	saveplans(MAPlanNames,saveplans, year, MAPlansSaveIcon);
+	comboPlanNames.add(vppPlans.toString());
 	threadsleep(3000);
 	viewplanLink(SNPPlansName);
 	saveplans(SNPPlansName,1, year, SNPPlansSaveIcon);
+	comboPlanNames.add(vppPlans.toString());
+	Collections.sort(comboPlanNames);
+	System.out.println(comboPlanNames);
 	scrollToView(heartIcon);
 	validate(heartIcon);
 	heartIcon.click();
 	validate(viewSavedItemsBtn);
 	viewSavedItemsBtn.click();
-	verifySavePlans(year, vppPlans);
+	verifySavePlans(year, comboPlanNames);
 	verifyPlansVPandPDP(planNamesVisitorPrf);
 }
 
