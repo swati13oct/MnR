@@ -26,7 +26,7 @@ Feature: 1.19 Verify the premium payment flows on member portal - Part 1 - Test 
 
   #Test Case 01
   @regressionMember
-  Scenario Outline: TID: <memberType> - Test Case 01 - Verify MakeOne time Payment submission for Credit card Other amount
+  Scenario Outline: TID: <memberType> - Test Case 01 - Verify MakeOne time Payment submission for Credit card Other amount without saving card
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |

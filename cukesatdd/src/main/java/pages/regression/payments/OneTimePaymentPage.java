@@ -38,6 +38,9 @@ public class OneTimePaymentPage extends UhcDriver {
 	
 	@FindBy(xpath = "//label[@for='optionsRadios30']//input")
 	private WebElement CheckingAccountRadioButton;
+	
+	@FindBy(xpath = "//label[@for='optionsRadios10']//input")
+	private WebElement CheckingAccountRadioButtonNew;
 
 	@FindBy(xpath = "//label[@for='optionsRadios40']//input")
 	private WebElement creditcardRadioButton;
@@ -564,7 +567,13 @@ public class OneTimePaymentPage extends UhcDriver {
 	        }
 		TestHarness.checkForIPerceptionModel(driver);
 		validate(CheckingAccountRadioButton);
+		try {
 		CheckingAccountRadioButton.click();
+		System.out.println("User selected Checking Account radio button");
+		    }
+		catch (Exception e) {
+			CheckingAccountRadioButtonNew.click();  
+            }
 		System.out.println("User selects Checking Account Option");
 
 	}
