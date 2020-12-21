@@ -312,7 +312,7 @@ public class DCEACQVPPPlanSummaryMobile {
 		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 
-		plansummaryPage.viewPlanSummary(plantype);
+		//plansummaryPage.viewPlanSummary(plantype);
 
 		GetStartedPageMobile getStartedPage = plansummaryPage.navigateToDCERedesignFromVPPPlanCard(plantype, planName);
 		getLoginScenario().saveBean(DCERedesignCommonConstants.PLANTYPE, plantype);
