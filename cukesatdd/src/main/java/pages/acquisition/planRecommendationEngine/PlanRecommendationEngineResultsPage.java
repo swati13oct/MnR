@@ -1753,7 +1753,7 @@ public void validatePDPPlanNamesAndEnroll() {
 	int pdpPlanCount = Integer.parseInt(PDPPlanCount.getText());
 	System.out.println(pdpPlanCount);
 	validate(PDP1stPlanName, 60);
-	String exceptedplanName = PDPPlansNames.get(0).getText().split("\n")[0].toUpperCase();
+	String exceptedplanName = PDPPlansName.get(0).getText().split("\n")[0].trim().toUpperCase();
 	System.out.println("Plan Name in VPP Summary Page: "+exceptedplanName);
 	WebElement planViewdetailsBut = PDPPlansNames.get(0).findElement(By.cssSelector("#viewmoredetlinkpdp"));
 	planViewdetailsBut.click();
@@ -1765,7 +1765,7 @@ public void validatePDPPlanNamesAndEnroll() {
 	pageloadcomplete();
 	String planNameinOLE = planNameEnrollPage.getText().trim().toUpperCase(); 
 	System.out.println("Plan Name in Plan Enroll Page: "+planNameinOLE);
-	Assert.assertTrue(planNameinOLE.equalsIgnoreCase(exceptedplanName), "--- Plan name are not matches---");	
+	Assert.assertTrue(exceptedplanName.equalsIgnoreCase(planNameinOLE), "--- Plan name are not matches---");	
 	System.out.println(driver.getCurrentUrl());
 	Assert.assertTrue(driver.getCurrentUrl().contains("online-application.html/welcome"), "OLE page not loaded");
 }
