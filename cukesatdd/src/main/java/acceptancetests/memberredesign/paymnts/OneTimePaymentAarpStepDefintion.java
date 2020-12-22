@@ -1543,6 +1543,29 @@ public class OneTimePaymentAarpStepDefintion {
 		}
 	}
 	
+	
+	@When("^user selects other amount and enters \"([^\"]*)\" and selects SAVED credit card and click on Next button$")
+	public void user_selects_other_amount_and_enters_and_selects_SAVED_credit_card_and_click_on_Next_button(
+			String otherAmountvalue) throws Throwable {
+		OneTimePaymentPage oneTimePaymentPage = (OneTimePaymentPage) getLoginScenario()
+				.getBean(PageConstants.One_Time_Payments_Page);
+
+		ReviewOneTimePaymentPage reviewOneTimePaymentsPage=null;
+		if(oneTimePaymentPage!=null) {
+			oneTimePaymentPage.selectAndEnterAmount(otherAmountvalue);
+			oneTimePaymentPage.verifyReplaceCardLinkDisabled();
+			oneTimePaymentPage.selectCreditCardOption();
+			oneTimePaymentPage.verifySavedCardDetailsDisplayed();
+			oneTimePaymentPage.verifyReplaceCardLinkEnabled();
+			reviewOneTimePaymentsPage = oneTimePaymentPage.clickOnNextButtonSavedCard();
+		}
+		if (reviewOneTimePaymentsPage != null) {
+			getLoginScenario().saveBean(PageConstants.Review_OneTime_Payments_Page, reviewOneTimePaymentsPage);
+			System.out.println("User is on Review One time payments page");
+		}
+		
+	}
+	
 	@When("^user selects other amount and enters \"([^\"]*)\" and selects Checking Account and click on Next button$")
 	public void user_selects_other_amount_and_enters_and_selects_Checking_Account_and_click_on_Next_button(
 			String otherAmountvalue) throws Throwable {
@@ -1659,6 +1682,38 @@ public class OneTimePaymentAarpStepDefintion {
 
 	}
 
+	@Then("^user navigates to payment overview screen for SAVED Card and selects agreements and click on Make one time payment$")
+	public void user_navigates_to_payment_overview_screen_SAVED_CARD_and_selects_agreements_and_click_on_Make_one_time_payment()
+			throws Throwable {
+		ReviewOneTimePaymentPage reviewOneTimePaymentsPage = (ReviewOneTimePaymentPage) getLoginScenario()
+				.getBean(PageConstants.Review_OneTime_Payments_Page);
+
+		ConfirmOneTimePaymentPage confirmOneTimePaymentPage = reviewOneTimePaymentsPage
+				.selectAgreeAndClickOnMakePaymentExistingSavedCard();
+		if (confirmOneTimePaymentPage != null) {
+			getLoginScenario().saveBean(PageConstants.ONE_TIME_PAYMENT_PAGE, confirmOneTimePaymentPage);
+			getLoginScenario().saveBean(PageConstants.ALREADY_ENROLLED_FLAG,"false");
+
+			Assert.assertTrue(true);
+		}else {
+
+			boolean Validation_Status =reviewOneTimePaymentsPage.validate_onlyOnePaymentRequest_Message();
+
+			if(Validation_Status) {
+				System.out.println("Only one payment request message is displayed on review one time page : " + Validation_Status + " - Validation Passed");
+				getLoginScenario().saveBean(PageConstants.Review_OneTime_Payments_Page, reviewOneTimePaymentsPage);
+				getLoginScenario().saveBean(PageConstants.ALREADY_ENROLLED_FLAG, "true");
+				Assert.assertTrue(true);
+			}else{
+				System.out.println("Only one payment request message is NOT Displayed on review one time payment page : "+Validation_Status);
+				Assert.fail("Some Other Error happened, failing test case");
+			}
+
+		}
+
+	}
+	
+	
 	@Then("^for saving card user navigates to payment overview screen and selects agreements and save card checkbox and click on Make one time payment$")
 	public void then_user_navigates_to_payment_overview_screen_and_selects_agreements_save_card_checkbox_and_click_on_Make_one_time_payemnt()
 			throws Throwable {
@@ -1702,11 +1757,23 @@ public class OneTimePaymentAarpStepDefintion {
 		 * getLoginScenario().saveBean(PageConstants.ALREADY_ENROLLED_FLAG,"true");
 		 * Assert.assertTrue(true); }else {
 		 */
-			ConfirmOneTimePaymentPage confirmOneTimePaymentPage = (ConfirmOneTimePaymentPage) getLoginScenario()
+		
+		String errorMessageDisplayedOnOneTimePayment = (String)getLoginScenario().getBean(PageConstants.ALREADY_ENROLLED_FLAG);
+		System.out.println("Was second payment in a day error message displayed? -  "+errorMessageDisplayedOnOneTimePayment);
+			
+		if (errorMessageDisplayedOnOneTimePayment == "true")
+		{
+			System.out.println("This is a second payment in a day, Error message is fine in Saved Card Scenario. Passing test case");
+			Assert.assertTrue("This is a second payment in a day, Error message is fine in Saved Card Scenario. Passing test case",true);
+		}
+		else
+		{
+		ConfirmOneTimePaymentPage confirmOneTimePaymentPage = (ConfirmOneTimePaymentPage) getLoginScenario()
 					.getBean(PageConstants.ONE_TIME_PAYMENT_PAGE);
 			confirmOneTimePaymentPage.OneTimeCCverification();
 			Assert.assertTrue("One time Payment submission for Credit card Other amount is successfully done",true);
-	//	}
+	    }
+		
 	}
 
 	@Given("^user clicks on Set up Automatic payments on payment overview page$")
