@@ -211,6 +211,25 @@ public class BenefitsAndCoverageUmsStepDefinition {
 		String dateStr=benefitsCoveragePage.convertDateToStrFormat_MMDDYYYY(currentDate);
 		getLoginScenario().saveBean(BenefitsAndCoverageCommonConstants.TEST_DATE_STR, dateStr);
 	}
+
+	@Then("^The user will not be able to navigate to Benefits and Coverage page$")
+	public void user_noBenefitsAndCoverage() {
+		String planType=(String) getLoginScenario().getBean(LoginCommonConstants.PLANTYPE);
+		String memberType=(String) getLoginScenario().getBean(LoginCommonConstants.CATOGERY);
+		Assert.assertTrue("PROBLEM - this scenario is for terminated user only", 
+				planType.toUpperCase().contains("TERM") || memberType.toUpperCase().contains("TERM"));
+		System.out.println("***The user navigates to Benefits and Coverage page***");
+		BenefitsAndCoveragePage benefitsCoveragePage;
+		if ("YES".equalsIgnoreCase(MRScenario.isTestHarness)) {
+			TestHarness testHarness = (TestHarness) getLoginScenario().getBean(PageConstantsMnR.TEST_HARNESS_PAGE);
+			benefitsCoveragePage = testHarness.navigateDirectToBnCPag();
+		}else{
+			AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
+			benefitsCoveragePage = accountHomePage.navigateDirectToBnCPag();	
+		}
+		Assert.assertTrue("PROBLEM - not expecting terminated user to be able to land on Benefits page",benefitsCoveragePage == null);
+	}
+
 	/** 
 	 * @toDo : The user logs in to legacy site  in Mobile view 
 	 */
@@ -2350,7 +2369,6 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	
 	@Then("^the user validate drug cost table display behavior$")
 	public void vaoidateDrugCostTblBehavior(DataTable memberAttributes) throws InterruptedException {
-		
 		Map<String, String> memberAttributesMap=parseInputArguments(memberAttributes);
 		String planType=memberAttributesMap.get("Plan Type");
 		String memberType=memberAttributesMap.get("Member Type");
@@ -2583,6 +2601,67 @@ public class BenefitsAndCoverageUmsStepDefinition {
 			getLoginScenario().saveBean(BenefitsAndCoverageCommonConstants.TEST_RESULT_NOTE, testNote);
 			Assert.fail(testNote.get(0));
 		}
+	}
+	
+	@Then("^the users validate Benefits page has combo tabs for combo users$")
+	public void verifyComboTab() {
+		String planType=(String) getLoginScenario().getBean(LoginCommonConstants.PLANTYPE);
+		BenefitsAndCoveragePage bncPg = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
+		int numTab=bncPg.numberOfComboTab();
+		if (planType.toUpperCase().contains("COMBO")) 
+			Assert.assertTrue("PROBLEM - user has '"+numTab+"' combo tab, not suitable for this scenario testing", numTab > 1);
+		else
+			Assert.assertTrue("PROBLEM - user has '"+numTab+"' combo tab, not suitable for this scenario testing", numTab == 0);
+	}
+	
+	@Then("^the users validate UCPBenefits related API requests are not having undefined input value$")
+	public void verifyApi() {
+		BenefitsAndCoveragePage bncPg = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
+		List<String> testNote = new ArrayList<String>();
+		testNote.addAll(bncPg.verifyApi());
+
+		if (testNote.size()>0) {
+			getLoginScenario().saveBean(BenefitsAndCoverageCommonConstants.TEST_RESULT_NOTE, testNote);
+		}	
+		
+		for (String url: testNote) {
+			Assert.assertTrue("PROBLEM - planBenefits API contains 'undefined' value in the request. issue: "+url, !url.contains("undefined"));
+		}
+		
+
+	}
+	
+	@Then("user validates to not display pharmacy out-of-pocket maximum beside drug lookup")
+	public void  validatePharmacyOutOfPocketMaximum(DataTable memberAttributes) throws InterruptedException {
+		List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		String plantype = memberAttributesMap.get("Plan Type");
+		System.out.println("TEST - "+plantype);
+		String memberType=(String) getLoginScenario().getBean(LoginCommonConstants.CATOGERY);
+		String type=memberAttributesMap.get("Type");
+		
+		BenefitsAndCoveragePage bncPg = (BenefitsAndCoveragePage) getLoginScenario()
+				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
+		
+		boolean isPharm = true;
+		
+		if(type!=null) {
+			if(type.contains("Individual")) {
+				Assert.assertTrue(!bncPg.checkpharmoutpockttextarea());
+				isPharm = false;
+			}
+		}else if(memberType!=null && isPharm) {
+			if(memberType.contains("Individual_BnC")) {
+				Assert.assertTrue(!bncPg.checkpharmoutpockttextarea());
+			}
+		}
+		
 	}
 	
 }//end of class

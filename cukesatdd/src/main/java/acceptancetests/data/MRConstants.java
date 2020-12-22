@@ -387,6 +387,8 @@ public class MRConstants {
   public static final String OSE_NEW_URL_PCP_OR_MEDIA = "https://www."+MRScenario.environment+"-mymedicareaccount."+MRScenario.domain+"/content/medicare/login/memberRedesign.html?testharness=true";
   public static final String OFFLINE_STAGE_TESTHARNESS = "https://"+ MRScenario.environment +"-medicare."+MRScenario.domain+"/medicare/login/overview.html?testharness=true";  
 //  public static final String OFFLINE_STAGE_TESTHARNESS = "https://"+ MRScenario.environment +"-medicare."+MRScenario.domain+"/?testharness=true";  
+  public static final String TEAM_ATEST_URL = "https://www." + MRScenario.environment + "-medicare."+ MRScenario.domain+"/AARP";
+  public static final String TEAM_ATEST_URL_PCP_OR_MEDIA = "https://www."+MRScenario.environment+"-mymedicareaccount."+MRScenario.domain+"/content/medicare/login/memberRedesign.html?testharness=true";
   
   //vvv note:
   public static final String OFFLINE_PROD_MEMBER_AUTH = "https://offline-generic.uhc.com/memberonlineaccount#/memberAuthLogin";

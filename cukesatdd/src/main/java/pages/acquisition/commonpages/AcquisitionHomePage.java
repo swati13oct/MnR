@@ -313,12 +313,6 @@ public class AcquisitionHomePage extends GlobalWebElements {
    	@FindBy(xpath ="//*[@id='sam-call-modal']/div/div")
    	private WebElement callSamPopup;
    	
-   	@FindBy(xpath ="//*[contains(@id,'sam-call-modal')]//*[contains(@class,'timezone')]")
-	private WebElement CallSamTFNtimezone;
-	
-	@FindBy(xpath ="//p[contains(text(),'Already a member?')]")
-	private WebElement CallSamTFNMember;
-   	
    	@FindBy(xpath = "//*[contains(@class,'companyNameHeader')]/p")
    	private WebElement pageheader;
 
@@ -341,6 +335,12 @@ public class AcquisitionHomePage extends GlobalWebElements {
    	
    	@FindBy(xpath ="//*[contains(@id,'sam-call-modal')]//*[contains(@dtmname,'TFN Link') and contains(text(),'1-')]")
    	private WebElement CallSamTFN;
+   	
+	@FindBy(xpath ="//*[contains(@id,'sam-call-modal')]//*[contains(@class,'timezone')]")
+	private WebElement CallSamTFNtimezone;
+	
+	@FindBy(xpath ="//p[contains(text(),'Already a member?')]")
+	private WebElement CallSamTFNMember;
    	
    	@FindBy(xpath ="//*[contains(@id,'sam-call-modal')]//*[contains(@class,'modal-close')]")
    	private WebElement CallSamTFNClose;
@@ -1868,7 +1868,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		}
 		
 		public AcquisitionHomePage  validateCallpopup() throws InterruptedException {
-		/*	int retry = 1;
+			/*	int retry = 1;
 			do	{
 				driver.navigate().refresh();
 				CommonUtility.checkPageIsReady(driver);
@@ -1893,11 +1893,13 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			CommonUtility.checkPageIsReady(driver);
 			CheckiPerseptions();
 			validate(callsamtooltip);
+			validate(callsam);
 			String ActualCallSAMTFN = callsam.getText();
 			System.out.println("TFN No displayed on the Page" + ActualCallSAMTFN);
 			jsClickNew(callsam);
 			System.out.println("@@@@@@@@@@@@@@@ Call Icon Clicked @@@@@@@@@@@@@@@");
 			driver.switchTo().activeElement();
+			validate(CallSamTFN);
 			String ExpectedCallSAMTFN = CallSamTFN.getText();
 			System.out.println("TFN No displayed on the Page" + ExpectedCallSAMTFN);
 			if(ExpectedCallSAMTFN.contains(ActualCallSAMTFN)) {
@@ -1906,31 +1908,32 @@ public class AcquisitionHomePage extends GlobalWebElements {
 				Assert.assertTrue(true);
 			}
 			else {
-				Assert.fail("*****************TFN number was  not found macthing with the SAM call Popup ***************");
+				Assert.fail("*****************TFN number was  not found macthing with the SAM call Popup ***************"+ExpectedCallSAMTFN);
 			}
-			String ActualCallSamTFNtimezone ="Hours: 8 a.m. � 8 p.m., 7 days a week.*\n*Alaska and Hawaii: 8 a.m. � 8 p.m. Monday � Friday, 8 a.m. � 5 p.m. Saturday and Sunday.";
-			System.out.println(ActualCallSamTFNtimezone);
-	String ExpectedCallSamTFNtimezone = CallSamTFNtimezone.getText();
+			String ExpectedCallSamTFNtimezone ="Hours: 8 a.m. – 8 p.m., 7 days a week.*\n*Alaska and Hawaii: 8 a.m. – 8 p.m. Monday – Friday, 8 a.m. – 5 p.m. Saturday and Sunday.";
+			validate(CallSamTFNtimezone);
+			String ActualCallSamTFNtimezone = CallSamTFNtimezone.getText();
 			System.out.println(ExpectedCallSamTFNtimezone);
 			System.out.println(ActualCallSamTFNtimezone);
-			if(ExpectedCallSamTFNtimezone.contains(ActualCallSamTFNtimezone)) {
+			if(ExpectedCallSamTFNtimezone.replace(" ", "").replace("\n", "").equalsIgnoreCase(ActualCallSamTFNtimezone.replace(" ", "").replace("\n", ""))) {
 						System.out.println("****************TFN Timezone Content was  found macthing with the SAM call Popup  ***************");
 						Assert.assertTrue(true);	
 				}
 			else {
-				Assert.fail("*****************TFN Timezone Content was not found macthing with the SAM call Popup  ***************");
+				Assert.fail("*****************TFN Timezone Content was not found macthing with the SAM call Popup  ***************"+ActualCallSamTFNtimezone);
 			}
-			String ActualCallSamTFNMember="Already a member? Call the number on the back of your member ID card.";
+			String ExpectedCallSamTFNMember="Already a member? Call the number on the back of your member ID card.";
 			//ActualCallSamTFNMember.replace("", " ");	
 		//	WebElement strCallSamTFNMember= driver.findElement(By.xpath("//p[contains(text(),'Already a member?')]"));
-			String ExpectedCallSamTFNMember = CallSamTFNMember.getText();
+			validate(CallSamTFNMember);
+			String ActualCallSamTFNMember = CallSamTFNMember.getText();
 			System.out.println(ExpectedCallSamTFNMember);
-			if(ExpectedCallSamTFNMember.contains(ActualCallSamTFNMember)) {
+			if(ExpectedCallSamTFNMember.equalsIgnoreCase(ActualCallSamTFNMember)) {
 				System.out.println("****************TFN Member Content was  found macthing with the SAM call Popup  ***************");		
 				Assert.assertTrue(true);
 			}
 			else {
-				Assert.fail("*****************TFN Timezone Content was not found macthing with the SAM call Popup  ***************");
+				Assert.fail("*****************TFN Member Content was not found macthing with the SAM call Popup  ***************"+ActualCallSamTFNMember);
 				}
 			validate(CallSamTFNClose);
 			jsClickNew(CallSamTFNClose);
@@ -1944,7 +1947,6 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			validateNew(callsam);		
 			return null;*/
 			return null;
-		
 		}
 		
 		public void validateChatSam() throws InterruptedException {
@@ -2226,6 +2228,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 				WebElement AARPLogo = driver.findElement(By.xpath("//*[contains(@id, 'aarpSVGLogo')]"));
 				WebElement UHCLogo = driver.findElement(By.xpath("//*[contains(@id, 'uhcSVGLogo')]"));
 				if (AARPLogo.isDisplayed() && AARPLogo.isEnabled() && !UHCLogo.isDisplayed()) {
+					scrollToView(AARPLogo);
 					Assert.assertTrue(true);
 					System.out.println("Correct AARP Logo is Displayed");
 				} else {
@@ -2236,6 +2239,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 				WebElement AARPLogo = driver.findElement(By.xpath("//*[contains(@id, 'aarpSVGLogo')]"));
 				WebElement UHCLogo = driver.findElement(By.xpath("//*[contains(@id, 'uhcSVGLogo')]"));
 				if (UHCLogo.isDisplayed() && UHCLogo.isEnabled() && !AARPLogo.isDisplayed()) {
+					scrollToView(UHCLogo);
 					Assert.assertTrue(true);
 					System.out.println("Correct UHC Logo is Displayed");
 				} else {
@@ -3009,7 +3013,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 			CommonUtility.checkPageIsReadyNew(driver);
 			String CurrentmemberSigninURL = driver.getCurrentUrl();
-			String ActualmemberSigninURL=CurrentmemberSigninURL.substring(0, 27).trim();
+			String ActualmemberSigninURL=CurrentmemberSigninURL.substring(0, 28).trim();
 			System.out.println("memberSignin Page is displayed : "+ActualmemberSigninURL);
 			System.out.println("Expected member signin URL: "+ExpectedmemberSigninURL);
 			System.out.println("Actual member signin URL: "+ActualmemberSigninURL);
@@ -3036,6 +3040,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 				}
 			}
 		}
+		
 
 		public void validateSubtitle() {
         threadsleep(5);
@@ -3523,4 +3528,126 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		return null;
 
 	}
+	
+
+	//method to click View Disclaimer Information link present in Footer
+	public void clickViewDisclaimerInfoLink() {
+		CommonUtility.checkPageIsReadyNew(driver);
+		scrollToView(viewAllDisclaimerInformationLink);
+		jsClickNew(viewAllDisclaimerInformationLink);
+		sleepBySec(2);
+		WebElement content=driver.findElement(By.xpath("//div[contains(@class,'hideLink')]"));
+		if(content.isDisplayed() && content.isEnabled())
+		{
+			System.out.println("View Diclaimer Information Link clicked Successfully");
+			Assert.assertTrue(true);
+		}else {
+			Assert.fail("Error clicking View Diclaimer Information Link ");
+		}		
+	}
+	
+	//method to click Hide Disclaimer Information link present in Footer
+		public void clickHideDisclaimerInfoLink() {
+			CommonUtility.checkPageIsReadyNew(driver);
+			scrollToView(hideDiscliamerInformation);
+			jsClickNew(hideDiscliamerInformation);
+			sleepBySec(2);
+			WebElement content=driver.findElement(By.xpath("//div[contains(@class,'hideLink')]"));
+			if(!content.isDisplayed() && content.isEnabled())
+			{
+				System.out.println("Hide Diclaimer Information Link clicked Successfully");
+				Assert.assertTrue(true);
+			}else {
+				Assert.fail("Error clicking Hide Diclaimer Information Link ");
+			}		
+		}
+
+		public void checkLinkContact(String language){
+			
+			WebElement lnkContact;
+			if(language.equalsIgnoreCase("english")){
+			lnkContact=driver.findElement(By.xpath("//a[contains(text(),'contact')]"));
+			}
+			else {
+				lnkContact=driver.findElement(By.xpath("//a[contains(@title,'"+language+"')]"));
+			}
+			
+			scrollToView(lnkContact);
+			validateNew(lnkContact);
+			jsClickNew(lnkContact);
+			CommonUtility.checkPageIsReadyNew(driver);
+			if(driver.getCurrentUrl().contains("contact-us.html")) {
+				System.out.println("Contact( "+language+" ) link is clicked Successfully");
+
+			}else{
+				Assert.fail("Error Clicking Contact( "+language+" ) link");
+			}
+			//driver.navigate().back();
+			WebElement headLogo=driver.findElement(By.xpath("//div[contains(@class,'logo aarplogo')]"));
+			scrollToView(headLogo);
+			headLogo.click();
+			CommonUtility.checkPageIsReadyNew(driver);
+			clickViewDisclaimerInfoLink();
+
+		}
+		public void selectStateForGeotargeting() {
+			//driver.findElement(By.cssSelector("body")).sendKeys(Keys.CONTROL,Keys.END);
+			WebElement stateDropDown = driver.findElement(By.id("state-select"));
+			scrollToView(stateDropDown);
+			waitTllOptionsAvailableInDropdown(stateDropDown, 5);
+			
+			WebElement stateGeotargeting = driver.findElement(By.xpath("(//select[@id='state-select']//option)[2]"));
+//			scrollToView(stateGeotargeting);
+//			stateGeotargeting.click();
+			jsClickNew(stateGeotargeting);
+			waitforElementNew(stateGeotargeting, 5);
+			System.out.println("State selected for Geotagging: "+ stateGeotargeting.getText());
+			waitforElementNew(stateGeotargeting, 5);
+			jsClickNew(backToTop);
+		}
+
+		public void clickComplaintFormLink() {
+			WebElement lnkComplaintForm=driver.findElement(By.xpath("(//a[contains(text(),'Complaint Form')])[1]"));
+			validateNew(lnkComplaintForm);
+			scrollToView(lnkComplaintForm);
+			jsClickNew(lnkComplaintForm);
+			proceedToLeaveAARP();
+			if(driver.getCurrentUrl().contains("medicare.gov/MedicareComplaintForm")) {
+				System.out.println("Successfully clicked Complaint Form link");
+				Assert.assertTrue(true);
+				
+			}else {
+				Assert.fail("Error clicking Complaint Form link");
+			}
+			driver.navigate().back();
+			CommonUtility.checkPageIsReadyNew(driver);
+			clickViewDisclaimerInfoLink();
+		}
+
+		public void validateAssistancelink(String language) {
+			CommonUtility.checkPageIsReadyNew(driver);
+			WebElement lnkAssistance = null;
+			if(language.equalsIgnoreCase("english")) {
+				lnkAssistance=driver.findElement(By.xpath("(//a[contains(@href,'legal/medicare')])[1]"));
+			} else if(language.equalsIgnoreCase("spanish")) {
+				lnkAssistance=driver.findElement(By.xpath("(//a[contains(@href,'legal/medicare')])[2]"));
+			} else if(language.equalsIgnoreCase("chinese")) {
+				lnkAssistance=driver.findElement(By.xpath("(//a[contains(@href,'legal/medicare')])[3]"));
+			}
+			
+			scrollToView(lnkAssistance);
+			validateNew(lnkAssistance);
+			sleepBySec(2);
+			switchToNewTabNew(lnkAssistance);
+			if(driver.getCurrentUrl().contains("https://www.uhc.com/legal/medicare-plans")) {
+				System.out.println("Assistance link( "+language+" ) clicked Successfully ");
+				Assert.assertTrue(true);
+			}else {
+				Assert.fail("Assistance link( "+language+" ) did not clicked Successfully ");
+			}
+			driver.close();
+			driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
+			CommonUtility.checkPageIsReadyNew(driver);			
+		}
+	
 }
