@@ -93,7 +93,8 @@ public class PlanPremiumPageMobile extends UhcDriver{
 	}	
 
 	public AuthorizationPageMobile navigate_to_Authorization_Page() {
-		agreeBtn.click();
+		//agreeBtn.click();
+		jsClickMobile(agreeBtn);
 		validateNew(NextBtn);
 		jsClickNew(NextBtn);
 		/*JavascriptExecutor executor = (JavascriptExecutor)driver;

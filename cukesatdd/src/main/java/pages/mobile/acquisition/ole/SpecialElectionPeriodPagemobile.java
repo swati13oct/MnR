@@ -30,6 +30,10 @@ public class SpecialElectionPeriodPagemobile extends UhcDriver {
 	@FindBy(id = "ole-form-next-button")
 	private WebElement NextBtn;
 
+	
+	@FindBy(xpath = "//*[@id='new']")
+	private WebElement trial;
+	
 	@FindBy(id = "ole-form-back-button")
 	private WebElement BackBtn;
 
@@ -473,7 +477,10 @@ public class SpecialElectionPeriodPagemobile extends UhcDriver {
 		 * JavascriptExecutor executor = (JavascriptExecutor)driver;
 		 * executor.executeScript("arguments[0].click();", NextBtn);
 		 */
-
+		//*[@id="new"]
+		jsClickMobile(trial);
+		validateNew(NextBtn);
+		jsClickMobile(NextBtn);
 		if (validateNew(pedHeader)) {
 			System.out.println("OLE Proposed Effective Date Page is Displayed");
 			return new ProposedEffectiveDatePageMobile(driver);

@@ -242,17 +242,17 @@ public boolean validate_required_field_representative(Map<String, String> Member
 			
 			jsClickNew(AuthorizedRepresentativeRadio);
 			
-			sendkeys(Authorized_FirstName,AuthorizationFirstname);
-			sendkeys(Authorized_LastName,AuthorizationLastname);
-			sendkeys(Authorized_Relation,AuthorizationRelationship);
-			sendkeys(Authorized_Address,AuthorizationAddress);
-			sendkeys(Authorized_City,AuthorizationCity);
+			Authorized_FirstName.sendKeys(AuthorizationFirstname);
+			Authorized_LastName.sendKeys(AuthorizationLastname);
+			Authorized_Relation.sendKeys(AuthorizationRelationship);
+			Authorized_Address.sendKeys(AuthorizationAddress);
+			Authorized_City.sendKeys(AuthorizationCity);
 			Select SelectState = new Select(Authorized_State);
 			SelectState.selectByValue(AuthorizationStateDisplay);
 			//sendkeys(Authorized_State,AuthorizationStateDisplay);
-			sendkeys(Authorized_ZipCode,AuthorizationZip);
-			sendkeys(Authorized_PhNo,AuthorizationPhoneNo);
-			sendkeys(Authorized_Apartment, AuthorizationApartmentSuite);
+			Authorized_ZipCode.sendKeys(AuthorizationZip);
+			Authorized_PhNo.sendKeys(AuthorizationPhoneNo);
+			Authorized_Apartment.sendKeys(AuthorizationApartmentSuite);
 			if(NextBtn.isEnabled()){
 				validation_Flag = (!validation_Flag)?false:true;
 				System.out.println("Validation Passed : All required fields are entered");
