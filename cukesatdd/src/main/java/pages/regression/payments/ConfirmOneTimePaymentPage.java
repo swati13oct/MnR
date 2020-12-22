@@ -317,11 +317,13 @@ public class ConfirmOneTimePaymentPage extends UhcDriver {
 	}
 
 	public void OneTimeCCverification() {
-
-
 		validate(ConfirmationNumber);
 		PaymentsDataVerificationonConfirmationPage();
 		System.out.println("Your Confimation Number is : " + ConfirmationNumber.getText());
+		if (!(ConfirmationNumber.isDisplayed()))
+		{
+			Assert.fail("Confirmation number is null, failing test case.");
+		}
 
 	}
 
