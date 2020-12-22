@@ -238,7 +238,7 @@ public class PharmacyDeeplinkLoginPage extends UhcDriver {
 					if (driver.getCurrentUrl().contains("pharmacy/overview.html")) {
 						Assert.assertTrue(driver.getTitle().contains("M&R Pharmacy"));
 					} else {
-							Assert.fail("Pharmacy page is not loaded through deeplink");
+							Assert.fail("Soultran page is not loaded through deeplink");
 					}
 					return true;
 				}

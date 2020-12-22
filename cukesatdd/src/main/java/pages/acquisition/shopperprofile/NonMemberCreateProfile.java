@@ -126,6 +126,7 @@ public class NonMemberCreateProfile extends UhcDriver {
 			}
 			waitforElementNew(progressBar);
 			waitforElementNew(successMessage);
+			Thread.sleep(2000);
 //			switchToNewTab();
 			Set<String> tabs = driver.getWindowHandles();
 			for(String tab : tabs) {

@@ -471,10 +471,12 @@ public class ReviewSubmitPage extends UhcDriver{
 		
 
 		validateNew(SubmitApplicationBtn);
+		scrollToView(SubmitApplicationBtn);
 		jsClickNew(SubmitApplicationBtn);
 		//SubmitApplicationBtn.click();
-		CommonUtility.checkPageIsReadyNew(driver);
+		threadsleep(3000);
 		waitForPageLoadSafari();
+		CommonUtility.checkPageIsReadyNew(driver);
 		//waitforElementDisapper(By.xpath("//button[contains(@class,'confirm-button')]"), 60);
 		/*JavascriptExecutor executor = (JavascriptExecutor)driver;
 		executor.executeScript("arguments[0].click();", SubmitApplicationBtn);*/
@@ -576,7 +578,7 @@ public class ReviewSubmitPage extends UhcDriver{
 		boolean flag = true;
 		
 		String Expected_PlanYear_PlanName = Expected_PlanYear+" "+Expected_PlanName;
-		flag=validateText(PlanYear_NameDisplay,Expected_PlanYear_PlanName);
+		flag=validateTextPlanName(PlanYear_NameDisplay,Expected_PlanYear_PlanName);
 		String Zip = "ZIP: "+Expected_ZipCode;
 		flag&=validateText(PlanZipDisplay,Zip);
 		flag&=validateText(FirstNameDisplay,FirstName);
@@ -687,11 +689,25 @@ public class ReviewSubmitPage extends UhcDriver{
 				actualText=actualText.replaceAll("-", "");
 			}
 			
-		result&=actualText.equalsIgnoreCase(expectedValue);
+				result&=actualText.equalsIgnoreCase(expectedValue);
 		//result&=actualText.contains(expectedValue);
 		System.out.println(expectedValue +" "+element.getText()+" "+result);
 		if(!result) {
 			System.out.println("Review and Submit Pages validation failed for -----------------------" +" "+element.getText());
+		}
+		}
+		return result;
+	}
+	
+	public boolean validateTextPlanName(WebElement element,String expectedValue) {
+		boolean result = true;
+		if(!StringUtils.isEmpty(expectedValue)) {
+			String actualText = element.getText().trim();
+				result&=actualText.equalsIgnoreCase(expectedValue);
+		
+		System.out.println(expectedValue +" "+element.getText()+" "+result);
+		if(!result) {
+			System.out.println("Review and Submit Pages validation failed for PlanName-----------------------" +" "+element.getText());
 		}
 		}
 		return result;

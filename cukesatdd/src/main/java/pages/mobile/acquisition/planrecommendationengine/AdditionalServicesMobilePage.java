@@ -140,6 +140,7 @@ public class AdditionalServicesMobilePage extends UhcDriver {
 		validate(fitnessQuestion, 30);
 		Assert.assertTrue(fitnessQuestion.getText().contains("Fitness"));
 		mobileUtils.mobileLocateElementClick(dentalYes);
+		mobileUtils.mobileLocateElement(previousBtn);
 		mobileUtils.mobileLocateElementClick(previousBtn);
 		System.out.println("Validating " + page + " page Previous button functionality");
 		if(drugInfo.toUpperCase().contains("NO"))

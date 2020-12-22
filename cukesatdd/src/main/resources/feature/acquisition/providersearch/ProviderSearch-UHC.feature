@@ -20,7 +20,7 @@ Feature: 2.07. ACQ- Provider Search Flow in UMS
 
     Examples: 
       | zipcode | isMultutiCounty | county          | plantype | planname                             |planyear|
-      |   10001 | NO              | New York County | MA       | AARP Medicare Advantage Plan 2 (HMO) |current|
+      |   10001 | NO              | New York County | MA       | AARP Medicare Advantage Plan 2 (HMO) |future|
 
   @ProviderSearchFromGlobalHeaderBlayer @AcqRegressionProviderSearchBlayer @prodRegression
   Scenario Outline: Verify Provider Search in UHC site from Global Header
@@ -34,7 +34,7 @@ Feature: 2.07. ACQ- Provider Search Flow in UMS
 
     Examples: 
       | zipcode | planname                             | year     |
-      |   10001 | AARP Medicare Advantage Plan 2 (HMO) | current |
+      |   10001 | AARP Medicare Advantage Plan 2 (HMO) | future |
 
   @ProviderSearchFromGlobalHeaderBlayer1 
   Scenario Outline: Verify Provider Search  plan count in UMS site from Global Header- plan count - <plancount>
@@ -48,12 +48,12 @@ Feature: 2.07. ACQ- Provider Search Flow in UMS
 	@AcqRegressionProviderSearchBlayer
     Examples: 
       | zipcode | plancount |year|
-      |   10001 |        12 |current|
+      |   10001 |        12 |future|
       
     Examples: 
       | zipcode | plancount |year|
-      |   55344 |         7 |current|
-      |   04011 |         6 |current|
+      |   55344 |         7 |future|
+      |   04011 |         6 |future|
 
   @ProviderSearchFromWidgetBlayer @AcqRegressionProviderSearchBlayer
   Scenario Outline: Verify Provider Search  plan count in UMS site from Home page - plan count - <plancount>
@@ -67,12 +67,12 @@ Feature: 2.07. ACQ- Provider Search Flow in UMS
 	@AcqRegressionProviderSearchBlayer
     Examples: 
       | zipcode | plancount |year|
-      |   10001 |        12 |current|
+      |   10001 |        12 |future|
       
     Examples: 
       | zipcode | plancount |year|
-      |   55344 |         7 |current|
-      |   04011 |         6 |current|
+      |   55344 |         7 |future|
+      |   04011 |         6 |future|
 
   @ProviderSearchFromVppPlanSummaryPageBlayer @prodRegression
   Scenario Outline: Verify Provider Search  in UHC site from plan summary page
@@ -94,7 +94,7 @@ Feature: 2.07. ACQ- Provider Search Flow in UMS
       | PlanName | <planName> |
     Examples: 
       | zipcode | isMultutiCounty | county          | plantype | planName                             | aep |planyear|
-      |   10001 | NO              | New York County | MAPD     | AARP Medicare Advantage Plan 2 (HMO) | no  |current|
+      |   10001 | NO              | New York County | MAPD     | AARP Medicare Advantage Plan 2 (HMO) | no  |future|
 
   @ProviderSearchFromVppPlanDetailsPageBlayer @AcqRegressionProviderSearchBlayer @prodRegression
   Scenario Outline: Verify Provider Search  in UHC site from Plan Details page
@@ -115,7 +115,7 @@ Feature: 2.07. ACQ- Provider Search Flow in UMS
 
     Examples: 
       | zipcode | isMultutiCounty | county          | plantype | planName                                | aep |planyear|
-      |   10001 | NO              | New York County | MA       | AARP Medicare Advantage Essential (HMO) | no  |current|
+      |   10001 | NO              | New York County | MA       | AARP Medicare Advantage Essential (HMO) | no  |future|
 
   @ProviderSearchFromHomePageBlayer @AcqRegressionProviderSearchBlayer @ProviderSearchFromHomePageNextYrBlayerSmoke @prodRegression
   Scenario Outline: Verify Provider Search  in UHC site from Home Page

@@ -62,16 +62,21 @@ public class PlanRecommendationEngineSpecialNeedsPage extends UhcDriver {
 	@FindBy(css = "p.all-fields-marked-wi")
 	private WebElement pageRequiredInfo;
 
-	@FindBy(css = "uhc-checkbox-group>fieldset>div:nth-child(2)>uhc-checkbox>label>span.checkbox-label-content>span.labelCheck")
+	//E2E : below commented locator till snpNone do not work across all browsers. Updated to locate the checkbox instead of label
+//	@FindBy(css = "uhc-checkbox-group>fieldset>div:nth-child(2)>uhc-checkbox>label>span.checkbox-label-content>span.labelCheck")
+	@FindBy(css = "uhc-checkbox-group>fieldset>div:nth-child(2)>uhc-checkbox>label>span.checkbox-container>span.checkbox-square")
 	private WebElement snpMedicaid;
 
-	@FindBy(css = "uhc-checkbox-group>fieldset>div:nth-child(3)>uhc-checkbox>label>span.checkbox-label-content>span.labelCheck")
+//	@FindBy(css = "uhc-checkbox-group>fieldset>div:nth-child(3)>uhc-checkbox>label>span.checkbox-label-content>span.labelCheck")
+	@FindBy(css = "uhc-checkbox-group>fieldset>div:nth-child(3)>uhc-checkbox>label>span.checkbox-container>span.checkbox-square")
 	private WebElement snpConditions;
 
-	@FindBy(css = "uhc-checkbox-group>fieldset>div:nth-child(4)>uhc-checkbox>label>span.checkbox-label-content>span.labelCheck")
+//	@FindBy(css = "uhc-checkbox-group>fieldset>div:nth-child(4)>uhc-checkbox>label>span.checkbox-label-content>span.labelCheck")
+	@FindBy(css = "uhc-checkbox-group>fieldset>div:nth-child(4)>uhc-checkbox>label>span.checkbox-container>span.checkbox-square")
 	private WebElement snpNursinghome;
 
-	@FindBy(css = "uhc-checkbox-group>fieldset>div:nth-child(5)>uhc-checkbox>label>span.checkbox-label-content>span.labelCheck")
+//	@FindBy(css = "uhc-checkbox-group>fieldset>div:nth-child(5)>uhc-checkbox>label>span.checkbox-label-content>span.labelCheck")
+	@FindBy(css = "uhc-checkbox-group>fieldset>div:nth-child(5)>uhc-checkbox>label>span.checkbox-container>span.checkbox-square")
 	private WebElement snpNone;
 
 	@FindBy(css = "uhc-checkbox-group>fieldset>div:nth-child(2)>uhc-accordion>div .accordion-header")
@@ -212,7 +217,8 @@ public class PlanRecommendationEngineSpecialNeedsPage extends UhcDriver {
 				Assert.assertTrue(snpMedicaidAccordionMoreInfo.getText().contains("More"));
 //					Assert.assertTrue(snpMedicaidAccordionMoreInfo1stPara.getText().contains("D-SNP"));
 //					Assert.assertTrue(snpMedicareAccordionMoreInfo2ndPara.getText().contains("toll free"));
-				jsClickNew(snpMedicaidAccordionCarrot);
+				snpMedicaidAccordionCarrot.click();
+//				jsClickNew(snpMedicaidAccordionCarrot);
 			} else {
 				System.out.println("Accordion is not displayed for  " + SNPType + " .");
 			}
@@ -222,7 +228,8 @@ public class PlanRecommendationEngineSpecialNeedsPage extends UhcDriver {
 				Assert.assertTrue(snpConditionsAccordionMoreInfo.getText().contains("More"));
 //					Assert.assertTrue(snpConditionsAccordionMoreInfo1stPara.getText().contains("C-SNP"));
 //					Assert.assertTrue(snpConditionsAccordionMoreInfo2ndPara.getText().contains("toll free"));
-				jsClickNew(snpConditionsAccordionCarrot);
+				snpConditionsAccordionCarrot.click();
+//				jsClickNew(snpConditionsAccordionCarrot);
 			} else {
 				System.out.println("Accordion is not displayed for  " + SNPType + " .");
 			}
@@ -232,7 +239,8 @@ public class PlanRecommendationEngineSpecialNeedsPage extends UhcDriver {
 				Assert.assertTrue(snpNursinghomeAccordionMoreInfo.getText().contains("More"));
 //					Assert.assertTrue(snpNursinghomeAccordionMoreInfo1stPara.getText().contains("I-SNP"));
 //					Assert.assertTrue(snpNursinghomeAccordionMoreInfo2ndPara.getText().contains("toll free"));
-				jsClickNew(snpNursinghomeAccordionCarrot);
+				snpNursinghomeAccordionCarrot.click();
+//				jsClickNew(snpNursinghomeAccordionCarrot);
 			} else {
 				System.out.println("Accordion is not displayed for  " + SNPType + " .");
 			}

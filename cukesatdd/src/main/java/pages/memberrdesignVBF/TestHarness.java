@@ -1,6 +1,7 @@
 package pages.memberrdesignVBF;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import org.junit.Assert;
 import org.openqa.selenium.By;
@@ -360,11 +361,12 @@ public class TestHarness extends UhcDriver {
 	 * @return
 	 */
 	public EOBPage navigateToEOBPage() {
+		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
 		CommonUtility.waitForPageLoad(driver, eobPageLink,30);
 		validateNew(eobPageLink);
 		eobPageLink.click();
 		CommonUtility.checkPageIsReadyNew(driver);
-		CommonUtility.waitForPageLoad(driver, heading, CommonConstants.TIMEOUT_60);
+		CommonUtility.waitForPageLoad(driver, heading, 15);
 		if (!(driver.getTitle().contains("Explanation of Benefits"))) {
 			Assert.fail("EOB page not getting displayed");
 			return null;
