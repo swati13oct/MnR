@@ -124,5 +124,5 @@ Feature: Plan Recommendation Engine Ranking - Verify PRE Business flows with API
     Then user validate UI and API recommendation rankings in results page mobile
 
     Examples: 
-      | Zipcode | isMultiCounty | County        | isCoverageOpt | SpecialNeeds     | TravelOption | DoctorsSelection | DoctorsName                      | isMultiDoctor | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities        |
-      |   30012 | YES           | Walton County | MA            | Medicaid,Nursing | WithinUS     | lookup           | Emily Adams, NP:Azizul Hoque, MD | NO            | Yes,Yes,Yes,Yes               | Lower                | both           | Travel,Heath Cost |
+      | Zipcode | isMultiCounty | County        | isCoverageOpt | SpecialNeeds     | TravelOption | DoctorsSelection | DoctorsName                      | isMultiDoctor | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities         |
+      |   30012 | YES           | Walton County | MA            | Medicaid,Nursing | WithinUS     | lookup           | Emily Adams, NP:Azizul Hoque, MD | NO            | Yes,Yes,Yes,Yes               | Lower                | both           | Travel,Health Cost |

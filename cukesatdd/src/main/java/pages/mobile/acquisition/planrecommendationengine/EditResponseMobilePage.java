@@ -167,15 +167,15 @@ public class EditResponseMobilePage extends UhcDriver {
 		inputValues = userInput;
 		String flow = inputValues.get("Plan Type");
 		if (flow.equalsIgnoreCase("pdp")) {
-			mobileUtils.mobileLocateElementClick(PDPViewPlansLink);
+			jsClickMobile(PDPViewPlansLink);
 			pdpEditResponseButton.click();
 		} else {
 			if (inputValues.get("SNP Options").equalsIgnoreCase("none")) {
-				mobileUtils.mobileLocateElementClick(MAViewPlansLink); // Have zip with snp for all flows
+				jsClickMobile(MAViewPlansLink); // Have zip with snp for all flows
 				mapdEditResponseButton.click();
 			}
 			else {
-				mobileUtils.mobileLocateElementClick(SNPViewPlansLink);
+				jsClickMobile(SNPViewPlansLink);
 				snpEditResponseButton.click();
 			}
 		}
