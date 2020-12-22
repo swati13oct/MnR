@@ -21,7 +21,7 @@ Feature: Refill All Medications CTA - My Medications
 
     Examples: 
       | username | password | memUserName                          | planType | memberType |
-      | yaihemai | Yusufu6$ | b2dc8f2f-56d5-43e5-bef3-bb36ad49d6f9 | HMO      | Individual |
+      | yaihemai | Yusufu7$ | b2dc8f2f-56d5-43e5-bef3-bb36ad49d6f9 | HMO      | Individual |
 
   @Regression
   Scenario Outline: To verify Refill All Medications CTA is not displayed on My Medications page if user is not eligible for refill
@@ -43,4 +43,4 @@ Feature: Refill All Medications CTA - My Medications
 
     Examples: 
       | username | password | memUserName | planType | memberType |
-      | yaihemai | Yusufu6$ | TCZUNIGA52  | Medica   | Individual |
+      | yaihemai | Yusufu7$ | TCZUNIGA52  | Medica   | Individual |

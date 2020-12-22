@@ -18,4 +18,4 @@ Feature: Need Help Phone Numbers on PnP Page
 
     Examples: 
       | username | password | memUserName | planType | memberType |
-      | yaihemai | Yusufu6$ | Berniewb    | PDP      | Individual |
+      | yaihemai | Yusufu7$ | Berniewb    | PDP      | Individual |

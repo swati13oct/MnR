@@ -18,11 +18,9 @@ Feature: Alabama Plan Exclusion
     When user clicks on Drug Lookup Call To Action
     Then user will be directed to the Drug Estimator tool developed by Rally in the same window using memAuth
 
-    Examples:
-      | username | password | memUserName | planType | memberType |
-      | yaihemai | Yusufu6$ | Aldridge314 | SEIB     | Group      |
-
-
+    Examples: 
+      | username | password | memUserName | planType                | memberType |
+      | yaihemai | Yusufu7$ | Aldridge314 | GroupMAPDWithoutPayment | Group      |
 
   @Regression
   Scenario Outline: To verify AL LGHIB plans do not view any content related to OptumRx home delivery
@@ -41,10 +39,9 @@ Feature: Alabama Plan Exclusion
     When user clicks on Drug Lookup Call To Action
     Then user will be directed to the Drug Estimator tool developed by Rally in the same window using memAuth
 
-    Examples:
-      | username | password | memUserName | planType | memberType |
-      | yaihemai | Yusufu6$ | Xldycop     | LGHIB    | Group      |
-
+    Examples: 
+      | username | password | memUserName | planType                | memberType |
+      | yaihemai | Yusufu7$ | Xldycop     | GroupMAPDWithoutPayment | Group      |
 
   @Regression
   Scenario Outline: To verify PDP plans view any content related to OptumRx home delivery
@@ -61,11 +58,9 @@ Feature: Alabama Plan Exclusion
     When user views common questions section
     Then user views any questions related to OptumRx home delivery
 
-
-    Examples:
-      | username | password | memUserName | planType | memberType |
-      | yaihemai | Yusufu6$ | WENDYKETHAN2| PDP      | Group      |
-
+    Examples: 
+      | username | password | memUserName  | planType                | memberType |
+      | yaihemai | Yusufu7$ | WENDYKETHAN2 | GroupMAPDWithoutPayment | Group      |
 
   @Regression
   Scenario Outline: To verify MAPD plans view any content related to OptumRx home delivery
@@ -82,13 +77,11 @@ Feature: Alabama Plan Exclusion
     When user views common questions section
     Then user views any questions related to OptumRx home delivery
 
-
-    Examples:
+    Examples: 
       | username | password | memUserName | planType | memberType |
-      | yaihemai | Yusufu6$ | LUGRUG11    | MAPD     | Individual |
-      
-      
- @Sanity @Regression
+      | yaihemai | Yusufu7$ | LUGRUG11    | MAPD     | Individual |
+
+  @Sanity @Regression
   Scenario Outline: To verify (AL SEIB) P&P Notification is deactivated
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
@@ -104,8 +97,8 @@ Feature: Alabama Plan Exclusion
 
     #When a PnP notification is activated
     Examples: 
-      | username | password | memUserName | planType | memberType |
-      | kjadha10 | Virus$$1 | Aldridge314 | SEIB     | Group      |
+      | username | password | memUserName | planType                | memberType |
+      | kjadha10 | Virus$$1 | Aldridge314 | GroupMAPDWithoutPayment | Group      |
 
   @Sanity @Regression
   Scenario Outline: To verify (AL LGHIB) P&P Notification is deactivated
@@ -123,6 +116,5 @@ Feature: Alabama Plan Exclusion
 
     #When a PnP notification is activated
     Examples: 
-      | username | password | memUserName | planType | memberType |
-      | kjadha10 | Virus$$1 | Xldycop     | LGHIB    | Individual |
-
+      | username | password | memUserName | planType                | memberType |
+      | kjadha10 | Virus$$1 | Xldycop     | GroupMAPDWithoutPayment | Group      |
