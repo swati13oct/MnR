@@ -196,10 +196,10 @@ public class ComparePlansPageMobile extends UhcDriver {
 	@FindBy(xpath="//*[contains(@id,'viewLocationLink-0')]")
 	private WebElement viewlocationsLink;	
 	
-	@FindBy(xpath="//div[text()='Your Drugs']")
+	@FindBy(xpath="//h2[@id='yourdrugsheading']")
 	private WebElement yourDrugsBanner;
 	
-	@FindBy(xpath="//a[text()='Add Drugs']")
+	@FindBy(xpath="//a[contains(text(),'Add Drugs')]")
 	private WebElement addDrugsLink;
 	
 	@FindBy(xpath="//*[normalize-space(text())='Edit Drugs']")
@@ -1172,9 +1172,8 @@ public class ComparePlansPageMobile extends UhcDriver {
 
 	public GetStartedPageMobile navigateToDCERedesign() {
 		
-		validateNew(addDrugsLink);
-		JavascriptExecutor executor = (JavascriptExecutor) driver;
-		executor.executeScript("arguments[0].scrollIntoView(true);", addDrugsLink);
+		validateNew(addDrugsLink,30);
+		scrollToView(addDrugsLink);
 		jsClickNew(addDrugsLink);
 		if (validateNew(getStartedTab)) {
 			System.out.println("User is on DCE Get started Page");
