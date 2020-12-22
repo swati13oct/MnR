@@ -3075,7 +3075,6 @@ public void the_user_validates_the_OLE_Submission_Details_in_GPS(DataTable arg1)
 				medicareNumber=medicareNumber.replaceAll("-", "").toUpperCase();
 				DetailsMap.put("Medicare Number", medicareNumber);
 				
-				
 				String otherHealthInsuranceeName = (String) getLoginScenario().getBean(oleCommonConstants.HEALTH_INSURANCE_NAME);
 				DetailsMap.put("Health Insurance Name", otherHealthInsuranceeName.toUpperCase());
 
@@ -3092,29 +3091,135 @@ public void the_user_validates_the_OLE_Submission_Details_in_GPS(DataTable arg1)
 				
 				DetailsMap.put("PD Member Number", (String) getLoginScenario().getBean(oleCommonConstants.PRESCRIPTION_MEMBER_NUMBER));
 				
+				String healthInsurance = (String) getLoginScenario().getBean(oleCommonConstants.HEALTH_INSURANCE);
+				DetailsMap.put("Health Insurance", healthInsurance.toUpperCase());
+				String prescriptionDrug = (String) getLoginScenario().getBean(oleCommonConstants.PRESCRIPTION_DRUG);
+				DetailsMap.put("Prescription Drug", prescriptionDrug.toUpperCase());
+				
+				String pcpName = (String) getLoginScenario().getBean(oleCommonConstants.PCP_NAME);
+				DetailsMap.put("PCP Name", pcpName.toUpperCase());
+				String pcpNumber = (String) getLoginScenario().getBean(oleCommonConstants.PCP_NUMBER);
+				DetailsMap.put("PCP Number", pcpNumber.toUpperCase());
+				String pcpRecentlyVisited = (String) getLoginScenario().getBean(oleCommonConstants.PCP_RECENTLY_VISITED);
+				DetailsMap.put("PCP Recently Visited", pcpRecentlyVisited.toUpperCase());
+				DetailsMap.put("Medicaid Number", (String) getLoginScenario().getBean(oleCommonConstants.MEDICAID_NUMBER));
+				
+				String planName = (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_NAME);
+				DetailsMap.put("Plan Name", planName.toUpperCase());
+				DetailsMap.put("Plan Year", (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_YEAR));	
+				String county = (String) getLoginScenario().getBean(oleCommonConstants.OLE_COUNTY);
+				DetailsMap.put("County", county.toUpperCase());
+				DetailsMap.put("Zip Code", (String) getLoginScenario().getBean(oleCommonConstants.OLE_ZIPCODE));	
+				DetailsMap.put("Plan Premium", (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_PREMIUM));
+				
+				String perm_Street = (String) getLoginScenario().getBean(oleCommonConstants.PERM_STREET);
+				DetailsMap.put("Perm_Street", perm_Street.toUpperCase());
+				String perm_city = (String) getLoginScenario().getBean(oleCommonConstants.PERM_CITY);
+				DetailsMap.put("Perm_city", perm_city.toUpperCase());
+				String mailing_Question = (String) getLoginScenario().getBean(oleCommonConstants.MAILING_QUESTION);
+				DetailsMap.put("Mailing_Question", mailing_Question.toUpperCase());
+				String mailing_Street = (String) getLoginScenario().getBean(oleCommonConstants.MAILING_STREET);
+				DetailsMap.put("Mailing_Street", mailing_Street.toUpperCase());
+				String mailing_City = (String) getLoginScenario().getBean(oleCommonConstants.MAILING_CITY);
+				DetailsMap.put("Mailing_City", mailing_City.toUpperCase());
+				String mailing_State = (String) getLoginScenario().getBean(oleCommonConstants.MAILING_STATE);
+				DetailsMap.put("Mailing_State", mailing_State.toUpperCase());
+				DetailsMap.put("Mailing_Zip", (String) getLoginScenario().getBean(oleCommonConstants.MAILING_ZIP));
+				String email = (String) getLoginScenario().getBean(oleCommonConstants.EMAIL);
+				DetailsMap.put("Email", email.toUpperCase());
+				
+				String proposedEffectiveDate = (String) getLoginScenario().getBean(oleCommonConstants.PROPOSED_EFF_DATE);
+				proposedEffectiveDate  = OLEGPSValidation.converttogpsDate(proposedEffectiveDate );
+				DetailsMap.put("Proposed Effective date", proposedEffectiveDate);
+				
+				DetailsMap.put("Mailing Apartment Number", (String) getLoginScenario().getBean(oleCommonConstants.MAILING_APARTMENT_NUMBER));	
+				
+				String phoneNumber= (String) getLoginScenario().getBean(oleCommonConstants.PRIMARY_PHONE_NUMBER);
+				phoneNumber=phoneNumber.replaceAll("-", "").toUpperCase();
+				DetailsMap.put("Home Number", phoneNumber);
+				String mobileNumber= (String) getLoginScenario().getBean(oleCommonConstants.MOBILE_NUMBER);
+				mobileNumber=mobileNumber.replaceAll("-", "").toUpperCase();
+				DetailsMap.put("Mobile Number", mobileNumber);
+				DetailsMap.put("Email Confirmation", (String) getLoginScenario().getBean(oleCommonConstants.EMAIL_CONFIRMATION));
+				DetailsMap.put("Paperless Delivery", (String) getLoginScenario().getBean(oleCommonConstants.Go_Green));
+				
+				String authorizationFirstName = (String) getLoginScenario().getBean(oleCommonConstants.AUTHORIZATION_FIRST_NAME);
+				DetailsMap.put("Authorization First Name", authorizationFirstName.toUpperCase());
+				String authorizationLastName = (String) getLoginScenario().getBean(oleCommonConstants.AUTHORIZATION_LAST_NAME);
+				DetailsMap.put("Authorization last Name", authorizationLastName.toUpperCase());
+				DetailsMap.put("Authorization Address", (String) getLoginScenario().getBean(oleCommonConstants. AUTHORIZATION_ADDRESS));
+				DetailsMap.put("Authorization Apartment Suite", (String) getLoginScenario().getBean(oleCommonConstants.AUTHORIZATION_APARTMENT_SUITE));
+				DetailsMap.put("Authorization City", (String) getLoginScenario().getBean(oleCommonConstants.AUTHORIZATION_CITY));
+				String authorizationPhoneNumber= (String) getLoginScenario().getBean(oleCommonConstants.AUTHORIZATION_PHONE_NO);
+				authorizationPhoneNumber=authorizationPhoneNumber.replaceAll("-", "").toUpperCase();
+				DetailsMap.put("Authorization Phone No", authorizationPhoneNumber);
+				String authorizationAgree = (String) getLoginScenario().getBean(oleCommonConstants.AUTHORIZATION_AGREE);
+				DetailsMap.put("Authorization Agree", authorizationAgree.toUpperCase());
+				String authorizationRelationship = (String) getLoginScenario().getBean(oleCommonConstants.AUTHORIZATION_RELATIONSHIP);
+				DetailsMap.put("Authorization Relationship", authorizationRelationship.toUpperCase());
+				String authorizationState = (String) getLoginScenario().getBean(oleCommonConstants.AUTHORIZATION_STATE_DISPLAY);
+				DetailsMap.put("Authorization State", authorizationState.toUpperCase());
+				DetailsMap.put("Auth Zip Display", (String) getLoginScenario().getBean(oleCommonConstants.AUTHORIZATION_ZIP));
+				
 				//-----------Adding for CSNP-----------------//
 				
-				DetailsMap.put("Diabetes Question 1", (String) getLoginScenario().getBean(oleCommonConstants.DIABETES_QUESTION_1));
-				DetailsMap.put("Diabetes Question 2", (String) getLoginScenario().getBean(oleCommonConstants.DIABETES_QUESTION_2));
-				DetailsMap.put("Chronic Heart Failure Question 1", (String) getLoginScenario().getBean(oleCommonConstants. CHRONIC_HEART_FAILURE_QUESTION_1 ));
-				DetailsMap.put("Chronic Heart Failure Question 2", (String) getLoginScenario().getBean(oleCommonConstants.CHRONIC_HEART_FAILURE_QUESTION_2));
-				DetailsMap.put("Chronic Heart Failure Question 3", (String) getLoginScenario().getBean(oleCommonConstants.CHRONIC_HEART_FAILURE_QUESTION_3));
-				DetailsMap.put("Cardio Vascular Disorder Question 1", (String) getLoginScenario().getBean(oleCommonConstants.CARDIO_VASCULAR_DISORDER_QUESTION_1));
-				DetailsMap.put("Cardio Vascular Disorder Question 2", (String) getLoginScenario().getBean(oleCommonConstants.CARDIO_VASCULAR_DISORDER_QUESTION_2));
-				DetailsMap.put("Cardio Vascular Disorder Question 3", (String) getLoginScenario().getBean(oleCommonConstants.CARDIO_VASCULAR_DISORDER_QUESTION_3));
-				DetailsMap.put("Cardio Vascular Disorder Question 4", (String) getLoginScenario().getBean(oleCommonConstants.CARDIO_VASCULAR_DISORDER_QUESTION_4));
-				DetailsMap.put("Cardio Vascular Disorder Question 5", (String) getLoginScenario().getBean(oleCommonConstants.CARDIO_VASCULAR_DISORDER_QUESTION_5));
-				DetailsMap.put("Cardio Vascular Disorder Question 6", (String) getLoginScenario().getBean(oleCommonConstants.CARDIO_VASCULAR_DISORDER_QUESTION_6));
-
+				String diabetesquestion1= (String) getLoginScenario().getBean(oleCommonConstants.DIABETES_QUESTION_1);
+				diabetesquestion1=diabetesquestion1.substring(0, 1);
+				DetailsMap.put("Diabetes Question 1",diabetesquestion1);
+				String diabetesquestion2= (String) getLoginScenario().getBean(oleCommonConstants.DIABETES_QUESTION_2);
+				diabetesquestion2=diabetesquestion2.substring(0, 1);
+				DetailsMap.put("Diabetes Question 2",diabetesquestion2);
 				
-				DetailsMap.put("Disclosure Checkbox", (String) getLoginScenario().getBean(oleCommonConstants.DISCLOSURE_CHECKBOX));
-				DetailsMap.put("Disclosure Provider Name", (String) getLoginScenario().getBean(oleCommonConstants.DISCLOSURE_PROVIDER_NAME));
-				DetailsMap.put("Disclosure Provider Street Address", (String) getLoginScenario().getBean(oleCommonConstants.DISCLOSURE_PROVIDER_STREET_ADDRESS));
-				DetailsMap.put("Disclosure Provider City", (String) getLoginScenario().getBean(oleCommonConstants.DISCLOSURE_PROVIDER_CITY));
-				DetailsMap.put("Disclosure Provider State", (String) getLoginScenario().getBean(oleCommonConstants.DISCLOSURE_PROVIDER_STATE));
+				String chronicheartfailurequestion1= (String) getLoginScenario().getBean(oleCommonConstants.CHRONIC_HEART_FAILURE_QUESTION_1);
+				chronicheartfailurequestion1=chronicheartfailurequestion1.substring(0, 1);
+				DetailsMap.put("Chronic Heart Failure Question 1",chronicheartfailurequestion1);
+				String chronicheartfailurequestion2= (String) getLoginScenario().getBean(oleCommonConstants.CHRONIC_HEART_FAILURE_QUESTION_2);
+				chronicheartfailurequestion2=chronicheartfailurequestion2.substring(0, 1);
+				DetailsMap.put("Chronic Heart Failure Question 2",chronicheartfailurequestion2);				
+				String chronicheartfailurequestion3= (String) getLoginScenario().getBean(oleCommonConstants.CHRONIC_HEART_FAILURE_QUESTION_3);
+				chronicheartfailurequestion3=chronicheartfailurequestion3.substring(0, 1);
+				DetailsMap.put("Chronic Heart Failure Question 3",chronicheartfailurequestion3);
+				
+				String cardiovasculardisorderquestion1= (String) getLoginScenario().getBean(oleCommonConstants.CARDIO_VASCULAR_DISORDER_QUESTION_1);
+				cardiovasculardisorderquestion1=cardiovasculardisorderquestion1.substring(0, 1);
+				DetailsMap.put("Cardio Vascular Disorder Question 1",cardiovasculardisorderquestion1);
+				String cardiovasculardisorderquestion2= (String) getLoginScenario().getBean(oleCommonConstants.CARDIO_VASCULAR_DISORDER_QUESTION_2);
+				cardiovasculardisorderquestion2=cardiovasculardisorderquestion2.substring(0, 1);
+				DetailsMap.put("Cardio Vascular Disorder Question 2",cardiovasculardisorderquestion2);
+				String cardiovasculardisorderquestion3= (String) getLoginScenario().getBean(oleCommonConstants.CARDIO_VASCULAR_DISORDER_QUESTION_3);
+				cardiovasculardisorderquestion3=cardiovasculardisorderquestion3.substring(0, 1);
+				DetailsMap.put("Cardio Vascular Disorder Question 3",cardiovasculardisorderquestion3);
+				String cardiovasculardisorderquestion4= (String) getLoginScenario().getBean(oleCommonConstants.CARDIO_VASCULAR_DISORDER_QUESTION_4);
+				cardiovasculardisorderquestion4=cardiovasculardisorderquestion4.substring(0, 1);
+				DetailsMap.put("Cardio Vascular Disorder Question 4",cardiovasculardisorderquestion4);
+				String cardiovasculardisorderquestion5= (String) getLoginScenario().getBean(oleCommonConstants.CARDIO_VASCULAR_DISORDER_QUESTION_5);
+				cardiovasculardisorderquestion5=cardiovasculardisorderquestion5.substring(0, 1);
+				DetailsMap.put("Cardio Vascular Disorder Question 5",cardiovasculardisorderquestion5);
+				String cardiovasculardisorderquestion6= (String) getLoginScenario().getBean(oleCommonConstants.CARDIO_VASCULAR_DISORDER_QUESTION_6);
+				cardiovasculardisorderquestion6=cardiovasculardisorderquestion6.substring(0, 1);
+				DetailsMap.put("Cardio Vascular Disorder Question 6",cardiovasculardisorderquestion6);
+				
+				String disclosurecheckbox = (String) getLoginScenario().getBean(oleCommonConstants.DISCLOSURE_CHECKBOX);
+				DetailsMap.put("Disclosure Checkbox", disclosurecheckbox.toUpperCase());
+				
+				String disclosureprovidername = (String) getLoginScenario().getBean(oleCommonConstants.DISCLOSURE_PROVIDER_NAME);
+				DetailsMap.put("Disclosure Provider Name", disclosureprovidername.toUpperCase());
+				
+				String disclosureproviderstreetaddress = (String) getLoginScenario().getBean(oleCommonConstants.DISCLOSURE_PROVIDER_STREET_ADDRESS);
+				DetailsMap.put("Disclosure Provider Street Address", disclosureproviderstreetaddress.toUpperCase());
+				
+				String disclosureprovidercity = (String) getLoginScenario().getBean(oleCommonConstants.DISCLOSURE_PROVIDER_CITY);
+				DetailsMap.put("Disclosure Provider City", disclosureprovidercity.toUpperCase());
+				
+				String disclosureproviderstate = (String) getLoginScenario().getBean(oleCommonConstants.DISCLOSURE_PROVIDER_STATE);
+				DetailsMap.put("Disclosure Provider State", disclosureproviderstate.toUpperCase());
+				
 				DetailsMap.put("Disclosure Provider Zip", (String) getLoginScenario().getBean(oleCommonConstants.DISCLOSURE_PROVIDER_ZIP));
-				DetailsMap.put("Disclosure Provider PhoneNumber", (String) getLoginScenario().getBean(oleCommonConstants.DISCLOSURE_PROVIDER_PHONENUMBER));
 				
+				
+				String disclosureProviderPhoneNumber= (String) getLoginScenario().getBean(oleCommonConstants.DISCLOSURE_PROVIDER_PHONENUMBER);
+				disclosureProviderPhoneNumber=disclosureProviderPhoneNumber.replaceAll("-", "").toUpperCase();
+				DetailsMap.put("Disclosure Provider PhoneNumber", disclosureProviderPhoneNumber);
 				
 				//---------------------------------------------------//
 				

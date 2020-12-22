@@ -177,42 +177,57 @@ public class OLEconfirmationPage extends UhcDriver{
 					   String secondaryMemberNumber = rs.getString("SECONDARY_RX_ID");
 					   gpsData.put("PD Member Number", secondaryMemberNumber); 
 					   
-					/*   //-----------Adding for CSNP----------------//
-					   String otherCoverageName = rs.getString("ASMENT_DIAB1_DOC_INFORMED_DIAB");
-					   gpsData.put("Prescription Name", otherCoverageName); 
-					     String secondaryGroup = rs.getString("ASMENT_DIAB2_PRESCRIBED_INSULN");
-					   gpsData.put("PD Group Number", secondaryGroup); 
-					   String secondaryMemberNumber = rs.getString("CHRONIC_AUTH_HEART_FAILURE");
-					   gpsData.put("PD Member Number", secondaryMemberNumber); 
-					   String otherCoverageName = rs.getString("ASMENT_LUNG1_BRONC_EMPH_ASTHMA");
-					   gpsData.put("Prescription Name", otherCoverageName); 
-					     String secondaryGroup = rs.getString("ASMENT_HEART2_CARDC_BYPASS");
-					   gpsData.put("PD Group Number", secondaryGroup); 
-					   String secondaryMemberNumber = rs.getString("CHRONIC_AUTH_VASCULAR_DISEASE");
-					   gpsData.put("PD Member Number", secondaryMemberNumber); 
-					   String otherCoverageName = rs.getString("ASMENT_HEART1_HEART_ATTACK");
-					   gpsData.put("Prescription Name", otherCoverageName); 
-					     String secondaryGroup = rs.getString("ASMENT_HEART10_ANGINA");
-					   gpsData.put("PD Group Number", secondaryGroup); 
-					   String secondaryMemberNumber = rs.getString("ASMENT_HBP2_MEDICATION_FOR_HBP");
-					   gpsData.put("PD Member Number", secondaryMemberNumber); 
-					   String otherCoverageName = rs.getString("ASMENT_HEART7_PACEMKR_R_DEFIB");
-					   gpsData.put("Prescription Name", otherCoverageName); 
-					     String secondaryGroup = rs.getString("ASMENT_HEART3_ANGIOPLASTY");
-					   gpsData.put("PD Group Number", secondaryGroup); 
-					   String secondaryMemberNumber = rs.getString("ASMENT_SIGN_PRESENCE_ENROLLEE");
-					   gpsData.put("PD Member Number", secondaryMemberNumber); 
+					   String proposedeffectiveDate = rs.getString("REQUESTED_EFFECTIVE_DATE");
+					   proposedeffectiveDate = proposedeffectiveDate.substring(0, 10);
+						gpsData.put("Proposed Effective date", proposedeffectiveDate);  					   
+
+						String pcpName = rs.getString("PRIMARY_CARE_PHYSICIAN");
+						   gpsData.put("PCP Name", pcpName); 
+						   
+						String pcpNumber = rs.getString("PRIMARY_CARE_PHYSICIAN_NUMBER");
+						   gpsData.put("PCP Number", pcpName); 
+						   
+					 String pCPRecentlyVisited = rs.getString("CURRENTLY_A_PATIENT_OF_THE_PCP");
+						   gpsData.put("PCP Recently Visited", pCPRecentlyVisited);  
 					   
-					   String secondaryMemberNumber = rs.getString("DO_YOU_HAVE_A_CHRONIC_ILLNESS");
-					   gpsData.put("PD Member Number", secondaryMemberNumber); 
-					   String otherCoverageName = rs.getString("CHRONIC_PHYSICIAN_NAME");
-					   gpsData.put("Prescription Name", otherCoverageName); 
-					     String secondaryGroup = rs.getString("CHRONIC_PHYSICIAN_PHONE_NUM");
-					   gpsData.put("PD Group Number", secondaryGroup); 
-					   String secondaryMemberNumber = rs.getString("ASMENT_FULL_ADDR_FOR_PHYSICIAN");
-					   gpsData.put("PD Member Number", secondaryMemberNumber); 
+				   //-----------Adding for CSNP----------------//
+					   String diabetes1 = rs.getString("ASMENT_DIAB1_DOC_INFORMED_DIAB");
+					   gpsData.put("Diabetes Question 1", diabetes1); 
+					     String diabetes2 = rs.getString("ASMENT_DIAB2_PRESCRIBED_INSULN");
+					   gpsData.put("Diabetes Question 2", diabetes2); 
+					   String chronic1 = rs.getString("CHRONIC_AUTH_HEART_FAILURE");
+					   gpsData.put("Chronic Heart Failure Question 1", chronic1); 
+					   String chronic2 = rs.getString("ASMENT_LUNG1_BRONC_EMPH_ASTHMA");
+					   gpsData.put("Chronic Heart Failure Question 2", chronic2); 
+					     String chronic3 = rs.getString("ASMENT_HEART2_CARDC_BYPASS");
+					   gpsData.put("Chronic Heart Failure Question 3", chronic3); 
+					   String Cardiovascular1 = rs.getString("CHRONIC_AUTH_VASCULAR_DISEASE");
+					   gpsData.put("Cardio Vascular Disorder Question 1", Cardiovascular1); 
+					   String Cardiovascular2 = rs.getString("ASMENT_HEART1_HEART_ATTACK");
+					   gpsData.put("Cardio Vascular Disorder Question 2", Cardiovascular2); 
+					     String Cardiovascular3 = rs.getString("ASMENT_HEART10_ANGINA");
+					   gpsData.put("Cardio Vascular Disorder Question 3", Cardiovascular3); 
+					   String Cardiovascular4 = rs.getString("ASMENT_HBP2_MEDICATION_FOR_HBP");
+					   gpsData.put("Cardio Vascular Disorder Question 4", Cardiovascular4); 
+					   String Cardiovascular5 = rs.getString("ASMENT_HEART7_PACEMKR_R_DEFIB");
+					   gpsData.put("Cardio Vascular Disorder Question 5", Cardiovascular5); 
+					     String Cardiovascular6 = rs.getString("ASMENT_HEART3_ANGIOPLASTY");
+					   gpsData.put("Cardio Vascular Disorder Question 6", Cardiovascular6); 
+					   String chronicEnrollmentcheckbox = rs.getString("ASMENT_SIGN_PRESENCE_ENROLLEE");
+					  gpsData.put("Disclosure Checkbox", chronicEnrollmentcheckbox); 
 					   
-					*/   //------------------------------------------//
+					   String chronicillness = rs.getString("DO_YOU_HAVE_A_CHRONIC_ILLNESS");
+					   gpsData.put("Disclosure Checkbox", chronicillness); 
+					   String chronicphysician = rs.getString("CHRONIC_PHYSICIAN_NAME");
+					   gpsData.put("Disclosure Provider Name", chronicphysician); 
+					     String chronicphysicianPhoneNumber = rs.getString("CHRONIC_PHYSICIAN_PHONE_NUM");
+					   gpsData.put("Disclosure Provider PhoneNumber", chronicphysicianPhoneNumber); 
+					   String chronicphysicianAddress = rs.getString("ASMENT_FULL_ADDR_FOR_PHYSICIAN");
+					//   gpsData.put("Disclosure Provider City","Disclosure Provider Street Address","Disclosure Provider State","Disclosure Provider Zip", chronicphysicianAddress); 
+					   
+				 
+					   
+					   //------------------------------------------//
 					
 					   //   PD Member Number
 						   
