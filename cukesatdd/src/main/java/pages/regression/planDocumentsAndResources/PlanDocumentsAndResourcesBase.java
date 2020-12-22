@@ -598,6 +598,9 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 			return "6017";
 		if (docName.toLowerCase().equalsIgnoreCase("Plan Documents".toLowerCase()) ) 
 			return "dunno";
+		if (docName.toLowerCase().equalsIgnoreCase("Medicare Supplement Hospital Select Directories".toLowerCase())
+				|| docName.toLowerCase().equalsIgnoreCase("Medicare Supplement Hospital Select Directory".toLowerCase())) 
+			return "5003";
 		System.out.println("TEST - unable to find a type match for docName="+docName);
 		return "-2";
 	}
@@ -971,6 +974,8 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 						expDocName=expDocName.replace("Evidence Of Coverage","Evidence of Coverage");
 					if (actualDocName.contains("Evidence Of Coverage")) 
 						actualDocName=actualDocName.replace("Evidence Of Coverage", "Evidence of Coverage");
+					if (actualDocName.contains("Medicare Supplement Hospital Select Directories")) 
+						actualDocName=actualDocName.replace("Medicare Supplement Hospital Select Directories", "Medicare Supplement Hospital Select Directory");
 					//note: use regex to find match for document name
 					//note: because actual docName will have (PDF,xxxKB)... at the end of the string
 					//note: also if spanish name, latin characters will not work well with "equals" or "contains" during jenkins run
