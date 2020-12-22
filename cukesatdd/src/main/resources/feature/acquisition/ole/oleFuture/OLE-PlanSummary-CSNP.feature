@@ -36,7 +36,7 @@ Feature: 1.05.4 OLE common tool flow E2E CSNP
       | MedicaidNumber           | <medicaidnumber>         |
 	Then the user enters following information in Personal Information Page
      | Email Confirmation | <emailConfirmation> |
-     | Go Green           | <goGreen>           |
+    # | Go Green           | <goGreen>           |
       | Email              | <email>             |
       |Home Number             | <phoneno>       |
       | Mobile Number          | <mobileno>      |   
