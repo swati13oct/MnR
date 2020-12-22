@@ -21,6 +21,9 @@ Feature: 1.19 Verify the premium payment flows on member portal - Part 5 - Test 
       | Year             | <validYear>        |
     Then for saving card user navigates to payment overview screen and selects agreements and save card checkbox and click on Make one time payment
     Then User navigates to payment confirmation page for CC flow
+    And the user pulls the value of keep card on file indicator from GPS
+    | Payment Type | <paymentType> |
+    And the user confirms that keep card on file indicator is sent to GPS as Y
     And the user delete recurring payment record from GPS so that he can run recurring payment again
       | Payment Type | <paymentType> |
 

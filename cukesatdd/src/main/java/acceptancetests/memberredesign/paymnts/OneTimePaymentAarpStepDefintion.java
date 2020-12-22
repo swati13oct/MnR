@@ -1713,6 +1713,16 @@ public class OneTimePaymentAarpStepDefintion {
 
 	}
 	
+	@Then("^user navigates to payment overview screen for SAVED Card and selects agreements for Prod$")
+	public void user_navigates_to_payment_overview_screen_SAVED_CARD_and_selects_agreements_for_Prod()
+			throws Throwable {
+		ReviewOneTimePaymentPage reviewOneTimePaymentsPage = (ReviewOneTimePaymentPage) getLoginScenario()
+				.getBean(PageConstants.Review_OneTime_Payments_Page);
+
+		ConfirmOneTimePaymentPage confirmOneTimePaymentPage = reviewOneTimePaymentsPage
+				.selectAgreeExistingSavedCard();
+
+		}
 	
 	@Then("^for saving card user navigates to payment overview screen and selects agreements and save card checkbox and click on Make one time payment$")
 	public void then_user_navigates_to_payment_overview_screen_and_selects_agreements_save_card_checkbox_and_click_on_Make_one_time_payemnt()
@@ -1754,6 +1764,14 @@ public class OneTimePaymentAarpStepDefintion {
 		
 	}
 	
+	@Then("^for saving card user navigates to payment overview screen and selects agreements and save card checkbox on Prod$")
+	public void then_user_navigates_to_payment_overview_screen_and_selects_agreements_save_card_checkbox_on_Prod()
+			throws Throwable {
+		ReviewOneTimePaymentPage reviewOneTimePaymentsPage = (ReviewOneTimePaymentPage) getLoginScenario()
+				.getBean(PageConstants.Review_OneTime_Payments_Page);
+		ConfirmOneTimePaymentPage confirmOneTimePaymentPage = reviewOneTimePaymentsPage.selectAgreeSelectSaveCardPROD();
+		
+	}
 	
 	@Then("^User navigates to payment confirmation page for CC flow$")
 	public void user_navigates_to_payment_confirmation_page_for_CC_flow() throws Throwable {
@@ -2519,6 +2537,37 @@ public class OneTimePaymentAarpStepDefintion {
 		
 		confirmOneTimePaymentPage.deletePaymetnRecordFromGPS(paymentTypeMap);
 
+		
+	}
+	
+	@And("^the user pulls the value of keep card on file indicator from GPS$")	
+	public void verifyKeepCardOnFileRecord(DataTable givenAttributes) throws InterruptedException{
+		System.out.println("******Trying to find Keep Card on file record from GPS*****");
+		List<DataTableRow> paymentTypeRow = givenAttributes.getGherkinRows();
+		Map<String, String> paymentTypeMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < paymentTypeRow.size(); i++) {
+			paymentTypeMap.put(paymentTypeRow.get(i).getCells().get(0),
+					paymentTypeRow.get(i).getCells().get(1));
+		}
+		Thread.sleep(2000); 
+		
+		ConfirmOneTimePaymentPage confirmOneTimePaymentPage = (ConfirmOneTimePaymentPage) getLoginScenario()
+				.getBean(PageConstants.ONE_TIME_PAYMENT_PAGE);
+		
+		
+		String keepCardOnFileIndFromGPSDatabase = confirmOneTimePaymentPage.verifyKeepCardOnFileRecordFromGPS(paymentTypeMap);
+		getLoginScenario().saveBean(PageConstants.KEEP_CARD_ON_FILE_IND, keepCardOnFileIndFromGPSDatabase);
+		
+		System.out.println("Value of keepCardOnFileIndFromGPSDatabase is "+keepCardOnFileIndFromGPSDatabase);
+		
+	}
+	
+	@And("^the user confirms that keep card on file indicator is sent to GPS as Y$")	
+	public void verifyKeepCardOnFileRecordAsY() throws InterruptedException{
+		ConfirmOneTimePaymentPage confirmOneTimePaymentPage = (ConfirmOneTimePaymentPage) getLoginScenario()
+				.getBean(PageConstants.ONE_TIME_PAYMENT_PAGE);
+		String keepCardOnFileIndFromGPSDatabase = (String)getLoginScenario().getBean(PageConstants.KEEP_CARD_ON_FILE_IND);
+		confirmOneTimePaymentPage.verifyKeepCardOnFileRecordFromGPSIsY(keepCardOnFileIndFromGPSDatabase);
 		
 	}
 	

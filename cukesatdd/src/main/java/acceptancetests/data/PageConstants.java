@@ -758,4 +758,6 @@ public static final String STAGE_Pharmacy_DEEPLINK_lOGIN_PAGE="pharmacydeeplinkl
 public static final String GUEST_PAYMENTS_HOME_PAGE = "guestPaymentsHomePage";
 	public static final String Review_OneTime_Guest_Payments_Page = "reviewOneTimeGuestPaymentsPage";
 
-	public static final String Confirm_OneTime_Guest_Payments_Page = "confirmOneTimeGuestPaymentsPage";}
+	public static final String Confirm_OneTime_Guest_Payments_Page = "confirmOneTimeGuestPaymentsPage";
+	public static final String KEEP_CARD_ON_FILE_IND = "keepCardOnFileIndFromGPSDatabase";
+}

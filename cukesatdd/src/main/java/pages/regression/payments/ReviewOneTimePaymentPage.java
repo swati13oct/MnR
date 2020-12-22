@@ -66,7 +66,15 @@ public class ReviewOneTimePaymentPage extends UhcDriver {
 	}
 
 	public ConfirmOneTimePaymentPage selectAgreeAndClickOnMakePayment() {
-		validate(ChangeCard);
+		if((ChangeCard.isDisplayed()))
+   		{
+   			System.out.println("Change Card Link was displayed , Passed");	
+   		}
+   		else
+   		
+   		{
+   			Assert.fail("Change Card Link was not displayed , Failed");	
+   		}
 		System.out.println("User is on Review one Time CC Page");
 		PaymentsDataVerificationonReviewPage();
 		jsClickNew(AgreeCheckBox);
@@ -100,6 +108,15 @@ public class ReviewOneTimePaymentPage extends UhcDriver {
 			System.out.println("Change Card Link was not displayed for a Saved Card , Passed");
 		}
 		jsClickNew(AgreeCheckBox);
+		if(!(saveCardCheckbox.isDisplayed()))
+   		{
+   			System.out.println("Save Card Checkbox was not displayed for an existing card payment , Passed");	
+   		}
+   		else
+   		
+   		{
+   			Assert.fail("Save Card Checkbox was displayed for an existing card payment , Failed");	
+   		}
 		ContinueButton.click();
 		try {
 			Thread.sleep(20000);
@@ -118,7 +135,21 @@ public class ReviewOneTimePaymentPage extends UhcDriver {
 	}
 
 	public ConfirmOneTimePaymentPage selectAgreeSelectSaveCardAndClickOnMakePayment() {
-		validate(ChangeCard);
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		if((ChangeCard.isDisplayed()))
+   		{
+   			System.out.println("Change Card Link was displayed , Passed");	
+   		}
+   		else
+   		
+   		{
+   			Assert.fail("Change Card Link was not displayed , Failed");	
+   		}
 		System.out.println("User is on Review one Time CC Page");
 		PaymentsDataVerificationonReviewPage();
 		
@@ -195,6 +226,74 @@ public class ReviewOneTimePaymentPage extends UhcDriver {
 		
 			
 		}
+	
+     public ConfirmOneTimePaymentPage selectAgreeExistingSavedCard() {
+   		
+   		System.out.println("User is on Review one Time CC Page");
+   		if (ChangeCard.isDisplayed())
+   		{
+   			Assert.fail("Change Card link should not be displayed for an Existing Saved Card , Failed");
+   		
+   		}
+   		else
+   		{
+   			System.out.println("Change Card Link was not displayed for a Saved Card , Passed");
+   		}
+   		jsClickNew(AgreeCheckBox);
+   		
+   		if(!(saveCardCheckbox.isDisplayed()))
+   		{
+   			System.out.println("Save Card Checkbox was not displayed for an existing card payment , Passed");	
+   		}
+   		else
+   		
+   		{
+   			Assert.fail("Save Card Checkbox was displayed for an existing card payment , Failed");	
+   		}
+   			return null;
+   	}
+     
+     public ConfirmOneTimePaymentPage selectAgreeSelectSaveCardPROD() {
+ 		if((ChangeCard.isDisplayed()))
+    		{
+    			System.out.println("Change Card Link was displayed , Passed");	
+    		}
+    		else
+    		
+    		{
+    			Assert.fail("Change Card Link was not displayed , Failed");	
+    		}
+ 		System.out.println("User is on Review one Time CC Page");
+ 		PaymentsDataVerificationonReviewPage();
+ 		
+ 		String isSaveCardCheckBoxCheckedbefore = saveCardCheckbox.getAttribute("checked");
+ 		System.out.println("Checkbox checked flag before is  :"+isSaveCardCheckBoxCheckedbefore);
+ 		
+ 		jsClickNew(saveCardCheckbox);
+ 		
+ 		String isSaveCardCheckBoxChecked = saveCardCheckbox.getAttribute("checked");
+ 		System.out.println("Checkbox checked flag after is  :"+isSaveCardCheckBoxChecked);
+ 		
+ 		if (isSaveCardCheckBoxChecked.contentEquals("true"))
+ 		{
+ 			System.out.println("Save Card Check box was checked");
+ 		}
+ 		else
+ 		{
+ 			Assert.fail("Save Card Checkbox was not checked");
+ 		}
+ 		
+ 		try {
+ 			Thread.sleep(2000);
+ 		} catch (InterruptedException e) {
+ 			// TODO Auto-generated catch block
+ 			e.printStackTrace();
+ 		}
+ 		
+ 		jsClickNew(AgreeCheckBox);
+ 		return null;
+ 		
+ 		}
 	
 	@Override
 	public void openAndValidate() {
