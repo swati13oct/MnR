@@ -19,7 +19,7 @@ Feature: Drug Name and Get Pricing
 
     Examples: 
       | username | password | memUserName | planType | memberType |
-      | yaihemai | Yusufu6$ | JAN06ARY    | PDP      | Individual |
+      | yaihemai | Yusufu7$ | JAN06ARY    | PDP      | Individual |
 
   @Sanity @Regression
   Scenario Outline: To verify PDP user has access to Get Pricing
