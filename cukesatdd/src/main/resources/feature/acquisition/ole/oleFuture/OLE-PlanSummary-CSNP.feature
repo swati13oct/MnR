@@ -98,8 +98,8 @@ Feature: 1.05.4 OLE common tool flow E2E CSNP
     Then the user clicks on Submit Enrollment to complete enrollment
     # Then the user validates Plan and Member Details on Confirmation Page
     Then the user Validates Next Steps in Confirmation Page for the Plan Type.
-		#Then the user validates the OLE Submission Details in GPS
-    #| Plan Type | <plantype> |
+		Then the user validates the OLE Submission Details in GPS
+    | Plan Type | <plantype> |
 	
 	@CSNP_OLE_AARP_Future
     Examples: 
