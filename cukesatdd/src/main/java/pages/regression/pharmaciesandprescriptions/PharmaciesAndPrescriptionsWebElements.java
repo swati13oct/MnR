@@ -1394,6 +1394,18 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 		}
 	}
 
+	public boolean validateCommonQuestionsAvailable() {
+
+
+		if (validate(commonQuestionOne)) {
+
+			return true;
+		} else {
+
+			return false;
+		}
+	}
+
 	public boolean disclaimer() {
 		validateNew(disclaimer,30);
 		waitforElementVisibilityInTime(disclaimer, 50);
