@@ -5730,7 +5730,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "(//a[text()='Benefit Table'])[1]")
 	WebElement comparePageBenefitTableLink;
 	
-	@FindBy(xpath = "(//span[text()='Start application'])[1]//parent::a")
+	//@FindBy(xpath = "(//span[text()='Start application'])[1]//parent::a")
+	@FindBy(xpath = "(//button[contains(@class,'cta-button')]//span[contains(text(),'Start application')])[1]")
 	WebElement comparePageStartApplicationBtn;
 			
 	@FindBy(xpath = "(//h3[@class='inline'])[1]")
