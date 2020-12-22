@@ -1921,6 +1921,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 				}
 			else {
 			//	Assert.fail("*****************TFN Timezone Content was not found macthing with the SAM call Popup  ***************"+ActualCallSamTFNtimezone);
+				System.out.println("****************TFN Timezone Content was not found macthing with the SAM call Popup  ***************");
 			}
 			String ExpectedCallSamTFNMember="Already a member? Call the number on the back of your member ID card.";
 			//ActualCallSamTFNMember.replace("", " ");	
