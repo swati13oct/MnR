@@ -235,7 +235,7 @@ public class EOBBase extends EOBWebElements{
 			} else if (planType.toLowerCase().contains("ma") && !planType.toLowerCase().contains("pd")) {
 				Assert.assertTrue("PROBLEM - unable to locate combo tab for MA", eobValidate(comboTab_MA));
 				comboTab_MA.click();
-			} else if (planType.toLowerCase().contains("ship_hip")) {
+			} else if (planType.toLowerCase().contains("ship_hip") || planType.toUpperCase().contains("SHIP_HOSPITAL INDEMNITY")) {
 				Assert.assertTrue("PROBLEM - unable to locate combo tab for SHIP_HIP", eobValidate(comboTab_SHIP_HIP));
 				comboTab_SHIP_HIP.click();
 			} else if (planType.toLowerCase().contains("ship")) {
@@ -449,29 +449,35 @@ public class EOBBase extends EOBWebElements{
 		String apiReqeust=null;
 		List<LogEntry> entries = driver.manage().logs().get(LogType.PERFORMANCE).getAll();
 
-		if (eobType.equals("dream") && !memberType.contains("DSNP") && !planType.equals("SSP")) {
+		if (eobType.equals("dream") && !planType.equals("SSP")) {
 			//note: need to do two search
-			System.out.println("TEST - first API request...");
-			String lookForText1="/dreamEob/search?memberNumber=";
-			String lookForText2="responseReceived";
+			String lookForText1="";
+			String lookForText2="";
+			if (!planType.equals("PDP")) {
+				System.out.println("TEST - first API request...");
+				//tbd String lookForText1="/dreamEob/search?memberNumber=";
+				lookForText1="/dreamEob/search?claimSystem=";
+				lookForText2="responseReceived";
 
-			for (LogEntry entry : entries) {
-				String line=entry.getMessage();
-				//System.out.println("TEST each line="+line);
-				if (line.contains(lookForText1) && line.contains(lookForText2)) {
-					apiReqeust=line;
-					//keepForDebug System.out.println("TEST found line="+line);
-					//break; //note: only break if looking for the first response, otherwise always take the latest line
+				for (LogEntry entry : entries) {
+					String line=entry.getMessage();
+					//keepForDebug System.out.println("TEST each line="+line);
+					if (line.contains(lookForText1) && line.contains(lookForText2)) {
+						apiReqeust=line;
+						//keepForDebug System.out.println("TEST found line="+line);
+						//break; //note: only break if looking for the first response, otherwise always take the latest line
+					}
 				}
+				Assert.assertTrue("PROBLEM - unable to locate the network entry that contains '"+lookForText1+"' and '"+lookForText2+"'", apiReqeust!=null);
+				String m_urlStr=parseLine(apiReqeust);
+				System.out.println("TEST - m_urlStr="+m_urlStr);
+				urlList.add(m_urlStr);
 			}
-			Assert.assertTrue("PROBLEM - unable to locate the network entry that contains '"+lookForText1+"' and '"+lookForText2+"'", apiReqeust!=null);
-			String m_urlStr=parseLine(apiReqeust);
-			System.out.println("TEST - m_urlStr="+m_urlStr);
-			urlList.add(m_urlStr);
-
+			
 			if (!planType.equals("MA")) {
 				System.out.println("TEST - second API request...");
-				lookForText1="/dreamEob/rx/search?medicareId";
+				//tbd lookForText1="/dreamEob/rx/search?medicareId";
+				lookForText1="/dreamEob/rx/search?endDate";
 				for (LogEntry entry : entries) {
 					String line=entry.getMessage();
 					if (line.contains(lookForText1) && line.contains(lookForText2)) {
@@ -484,8 +490,29 @@ public class EOBBase extends EOBWebElements{
 				System.out.println("TEST - r_urlStr="+r_urlStr);
 				urlList.add(r_urlStr);
 			}
+			
+			if (memberType.contains("DSNP")) {
+				System.out.println("TEST - DSNP API request...");
+				lookForText1="dreamEob/search/medicaleobs?";
+				lookForText2="responseReceived";
+
+				for (LogEntry entry : entries) {
+					String line=entry.getMessage();
+					//System.out.println("TEST each line="+line);
+					if (line.contains(lookForText1) && line.contains(lookForText2)) {
+						apiReqeust=line;
+						//keepForDebug System.out.println("TEST found line="+line);
+						//break; //note: only break if looking for the first response, otherwise always take the latest line
+					}
+				}
+				Assert.assertTrue("PROBLEM - unable to locate the network entry that contains '"+lookForText1+"' and '"+lookForText2+"'", apiReqeust!=null);
+				String d_urlStr=parseLine(apiReqeust);
+				System.out.println("TEST - d_urlStr="+d_urlStr);
+				urlList.add(d_urlStr);				
+			}
+			
 			return urlList; 
-		} else if (memberType.contains("DSNP") || planType.equals("SSP")) {
+		} else if (planType.equals("SSP")) {
 			//note: need to do two search, release 12/16 has cover medical only
 			System.out.println("TEST - first API request...");
 			String lookForText1="dreamEob/search/medicaleobs?";

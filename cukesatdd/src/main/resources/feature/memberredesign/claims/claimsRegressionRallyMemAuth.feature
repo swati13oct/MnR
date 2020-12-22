@@ -40,12 +40,12 @@ Feature: 1.12.2 Member Rally claims - Member Auth
     Examples: 
       | TID   | username   | password  | MemUserName  | planType | memberType          | claimSystem     | 
       | 15230 | qavgogine  | qavgogine | q2_jun_aarp0061 | MAPD  | AARP_Individual     | COSMOS_CLAIMS   | 
-      | xxxxx | qavgogine  | qavgogine | q3_sep_UAT4_Group224 | MAPD  | UHC_GROUP        | COSMOS_CLAIMS   | 
+      | xxxxx | qavgogine  | qavgogine | q3_sep_UAT4_Group029 | MAPD  | UHC_GROUP        | COSMOS_CLAIMS   | 
 
     @memAuth_rallyClaims01_ship
     Examples: 
       | TID   | username   | password  | MemUserName  | planType | memberType          | claimSystem     | 
-      | 15236 | qavgogine  | qavgogine | q4_Ship_013 | SHIP | Individual       | COMPASS_CLAIMS  | 
+      | 15236 | qavgogine  | qavgogine | q4_Ship_ANOC_009 | SHIP | Individual       | COMPASS_CLAIMS  | 
 
     @memAuth_rallyClaims01_pdp
     Examples: 

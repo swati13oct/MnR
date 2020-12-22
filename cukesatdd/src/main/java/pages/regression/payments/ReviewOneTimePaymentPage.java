@@ -86,6 +86,36 @@ public class ReviewOneTimePaymentPage extends UhcDriver {
 			return null;
 		}
 	}
+	
+       public ConfirmOneTimePaymentPage selectAgreeAndClickOnMakePaymentExistingSavedCard() {
+		
+		System.out.println("User is on Review one Time CC Page");
+		if (ChangeCard.isDisplayed())
+		{
+			Assert.fail("Change Card link should not be displayed for an Existing Saved Card , Failed");
+		
+		}
+		else
+		{
+			System.out.println("Change Card Link was not displayed for a Saved Card , Passed");
+		}
+		jsClickNew(AgreeCheckBox);
+		ContinueButton.click();
+		try {
+			Thread.sleep(20000);
+			System.out.println(driver.getCurrentUrl());
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		if (driver.getTitle().contains("One-Time Payment Submitted")) {
+			System.out.println("User is on Confirmation Page");
+			return new ConfirmOneTimePaymentPage(driver);
+		} else {
+
+			System.out.println("User is not on Confirmation Page");
+			return null;
+		}
+	}
 
 	public ConfirmOneTimePaymentPage selectAgreeSelectSaveCardAndClickOnMakePayment() {
 		validate(ChangeCard);
@@ -135,9 +165,40 @@ public class ReviewOneTimePaymentPage extends UhcDriver {
 			
 		}
 	
+	public ConfirmOneTimePaymentPage SelectAgreeAndRememberCard() {
+		validate(ChangeCard);
+		System.out.println("User is on Review one Time CC Page");
+		PaymentsDataVerificationonReviewPage();
+		
+		String isSaveCardCheckBoxCheckedbefore = saveCardCheckbox.getAttribute("checked");
+		System.out.println("Checkbox checked flag before is  :"+isSaveCardCheckBoxCheckedbefore);
+		
+		jsClickNew(saveCardCheckbox);
+		
+		String isSaveCardCheckBoxChecked = saveCardCheckbox.getAttribute("checked");
+		System.out.println("Checkbox checked flag is  :"+isSaveCardCheckBoxChecked);
+		
+		if (isSaveCardCheckBoxChecked.contentEquals("true"))
+		{
+			System.out.println("Save Card Check box was checked");
+			Assert.assertTrue("Save Card Check box was checked", true);
+			
+			return null;
+		}
+		else
+		{
+			Assert.fail("Save Card Checkbox was not checked");
+			return null;
+		}
+		
+		
+		
+			
+		}
+	
 	@Override
 	public void openAndValidate() {
-		validate(ChangeCard);
+		//validate(ChangeCard);
 
 	}
 	

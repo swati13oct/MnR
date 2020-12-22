@@ -120,7 +120,7 @@ Feature: 1.04.2.1 To Test DREAM EOB for Members - E2E - Member Auth
     @memAuth_dreamEob01j_pdpComboFedShip
     Examples: 
       | index | username  | password  | MemUserName             | planType | memberType        | note                              | flagZeroEob |
-      | 10    | qavgogine | qavgogine | q3_sep_UAT4_AARP273     | PDP      | PDP_SHIP_COMBO_DEOB| na                                | false       |
+      | 10    | qavgogine | qavgogine | q4_ShipVAS_005          | PDP      | PDP_SHIP_COMBO_DEOB| na                                | false       |
 
     @memAuth_dreamEob01k_mapdEsCnD
     Examples: 

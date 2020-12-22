@@ -169,6 +169,18 @@ public class OneTimePaymentPage extends UhcDriver {
 	@FindBy(xpath = "//a[@class='btn btn--primary onetimepayment']")
 	private WebElement MakeAPaymentButton;
 	
+	@FindBy(id = "replace-cc")
+	private WebElement replaceCardLink;
+	
+	@FindBy(xpath = "//*[@id=\"cc-enhancement\"]/section/div/div/div[1]/form/fieldset[2]/div[2]/div[2]/div/label/span")
+	private WebElement cardDetail1;
+	
+	@FindBy(xpath = "//*[@id=\"savedcard\"]/span[1]")
+	private WebElement cardDetail2;
+	
+	@FindBy(xpath = "//*[@id=\"savedcard\"]/span[3]")
+	private WebElement cardDetail3;
+	
 		
 	public OneTimePaymentPage(WebDriver driver) {
 		super(driver);
@@ -619,14 +631,41 @@ public class OneTimePaymentPage extends UhcDriver {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		if (driver.getTitle().contains("Payment")) {
+		if (driver.getCurrentUrl().contains("gates/redirects")) 
+		{
 			System.out.println("Navigated to UPG Credit card page");
 			return new CreditCardUPGPage(driver);
-		} else {
-			System.out.println("UPG is not displayed");
+		} 
+		
+		else {
+			System.out.println("UPG page was not displayed");
 			return null;
-		}
+		     }
 	}
+	
+	public ReviewOneTimePaymentPage clickOnNextButtonSavedCard() {
+		validate(otheramountfield);
+		TestHarness.checkForIPerceptionModel(driver);
+		NextButton.click();
+		System.out.println("User Clicked on Next button on one time page");
+		try {
+			Thread.sleep(5000);
+			System.out.println(driver.getCurrentUrl());
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		if (driver.getCurrentUrl().contains("onetime-cc-review")) 
+		{
+			System.out.println("Navigated to One time payment Review Page");
+			return new ReviewOneTimePaymentPage(driver);
+		} 
+		
+		else {
+			System.out.println("Review One time payment page was not displayed");
+			return null;
+		     }
+	}
+	
 	
 	public CreditCardUPGPage clickOnReplaceCardlink() {
 		validate(otheramountfield);
@@ -883,6 +922,52 @@ public OneTimePaymentPage BalanceSummaryValidation() {
 			return null;
 		}
 	}
+
+
+	public void verifyReplaceCardLinkDisabled() {
+		
+		System.out.println("Verifying that Replace Card Link is Disabled");
+		if(replaceCardLink.isEnabled())
+		{
+			Assert.fail("Replace card link was enabled, expected: Disabled");
+		}
+		else
+		{
+			System.out.println("Replace Card Link is disabled, Passed");
+			
+		}
+			
+     	}
+	
+public void verifySavedCardDetailsDisplayed() {
+		
+		System.out.println("Verifying the Saved Card details are displayed");
+		if (cardDetail1.isDisplayed() &&  cardDetail2.isDisplayed() && cardDetail3.isDisplayed())
+		{
+			System.out.println("Card details are displayed as: Card Type and Last 4 digits : "+cardDetail1.getText()+", Card Holder Name: "+cardDetail2.getText()+" , Expiry Information : "+cardDetail3.getText());
+		}
+		else
+		{
+			Assert.fail("Card Details : Card Details were not displayed");
+		}
+			
+	}
+	
+public void verifyReplaceCardLinkEnabled() {
+	
+	System.out.println("Verifying that Replace Card Link is Enabled");
+	if(replaceCardLink.isEnabled())
+	{
+		System.out.println("Replace Card Link is enabled, Passed");
+		
+	}
+	else
+	{
+		Assert.fail("Replace card link was disabled, expected: Enabled");
+		
+	}
+		
+ 	}
 
 
 }
