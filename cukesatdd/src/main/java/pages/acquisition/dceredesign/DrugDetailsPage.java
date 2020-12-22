@@ -256,8 +256,8 @@ public class DrugDetailsPage extends UhcDriver {
 	public WebElement pharmacyName;
 	
 	//@FindBy(xpath = "//button[contains(@aria-label,'Select ROCK PHARMACY -')]")
-	
-	@FindBy(xpath ="//*[@id='selectPharmacyBtn3']")
+	////button[contains(@aria-label,'Select ALIXARX - MN')]
+	@FindBy(xpath ="//*[@id='selectPharmacyBtn2']")
 	public WebElement selectRockPharm;
 	
 	@FindBy(xpath = "//*[@class='uhc-button__text'][contains(text(),'Save and Update Drug Costs')]")

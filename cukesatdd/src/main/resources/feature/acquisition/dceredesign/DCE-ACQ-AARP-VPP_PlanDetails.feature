@@ -156,44 +156,7 @@ Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanDetails AARP - To test DCE - VPP Plan De
       | zipcode | plantype | county       | isMultutiCounty | drug1     | planname                                              | planyear |
       |   78006 | SNP      | Bexar County | yes             | meloxicam | UnitedHealthcare Medicare Silver (Regional PPO C-SNP) | future   |
 
-  @noPrescriptionCoverage @F492445
-  Scenario Outline: Test to verify No Prescription Coverage for Pharmacies on DCE Details Page
-    Given the user is on the AARP medicare site landing page
-    When the user performs plan search using following information in the AARP site
-      | Zip Code        | <zipcode>         |
-      | County Name     | <county>          |
-      | Is Multi County | <isMultutiCounty> |
-    And the user views the plans of the below plan type
-      | Plan Type | <plantype> |
-    And the user selects plan year
-      | Plan Year | <planyear> |
-    Then the user navigates to the plan details for the given plan type in AARP site
-      | Plan Type | <plantype> |
-      | Plan Name | <planname> |
-    And I access the DCE Redesign on aarp site from Plan Details for the plan
-    Then the user validates Get Started Page
-    Then the user clicks on Build Drug List to navigate to Build Drug List Page
-    Then the user searches and adds the following Drug to Drug List
-      | DrugName | <drug1> |
-    And clicks on Review drug cost button
-    #Then the user Clicks button to VPP Plan Details Page from Drug Details Page
-    And user clicks on change pharmacy link from details page in AARP
-    Then user change the pharmacy to view no prescription coverage
-
-    #Then user validate the monthly premium value on detail page
-    @noPrescriptionCoverge_MAPD
-    Examples: 
-      | zipcode | plantype | county       | isMultutiCounty | drug1   | planname                             | planyear |
-      |   78006 | MAPD     | Bexar County | yes             | Lipitor | AARP Medicare Advantage Choice (PPO) | future   |
-
-  # @noPrescriptionCoverge_SNP
-  #  Examples:
-  # | zipcode | plantype | county       | isMultutiCounty | drug1     | drug2                | drug3      | drug4         | drug5            | drug6   | planname                                              | planyear |
-  #|   78006 | SNP      | Bexar County | yes             | Lipitor | diclofenac potassium | febuxostat | buprenorphine | fentanyl citrate | Lipitor | UnitedHealthcare Dual Complete (HMO D-SNP) | future |
-  # @noPrescriptionCoverge_PDP
-  #  Examples:
-  # | zipcode | plantype | county       | isMultutiCounty | drug1     | drug2                | drug3      | drug4         | drug5            | drug6   | planname                                              | planyear |
-  #|   78006 | PDP      | Bexar County | yes             | Lipitor | diclofenac potassium | febuxostat | buprenorphine | fentanyl citrate | Lipitor |  AARP MedicareRx Walgreens (PDP) | future |
+  
   @dceRedesignExtraHelpAlertDetailPage @F478554 @F492102
   Scenario Outline: Test to Verify that Extra help Warning messgae on drug detail page
     Given the user is on the AARP medicare site landing page
