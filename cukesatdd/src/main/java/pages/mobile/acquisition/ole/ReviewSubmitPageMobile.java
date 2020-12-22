@@ -649,9 +649,9 @@ public class ReviewSubmitPageMobile extends UhcDriver {
 		flag&=validateText(PrescriptionDrugRadio,prescriptionDrug);
 		if(!Expected_PlanName.contains("PDP")) {
 		flag&=validateText(HealthInsuranceRadio,healthInsurance);
-		flag&=validateText(HealthInsuranceName,healthInsuranceName);
-		flag&=validateText(HealthInsuranceGroupNo,healthInsuranceGroupNo);
-		flag&=validateText(HealthInsuranceMemberNo,healthInsuranceMemberNo);
+		//flag&=validateText(HealthInsuranceName,healthInsuranceName);
+		//flag&=validateText(HealthInsuranceGroupNo,healthInsuranceGroupNo);
+		//flag&=validateText(HealthInsuranceMemberNo,healthInsuranceMemberNo);
 		}
 		flag&=validateText(PrescriptionDrugName,prescriptionDrugName);
 		flag&=validateText(PrescriptionDrugGroupNo,prescriptionGroupNumber);		

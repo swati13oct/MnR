@@ -351,7 +351,8 @@ public class PrimaryCarePhysicianPageMobile extends UhcDriver {
 
 		String pcp_name = ProviderNameDisplay_PCPpage.getText().replaceAll("-", "").trim();
 		String pcp_number = ProviderNumberDisplay_PCPpage.getText().trim();
-		CurrentPCP_Question_Yes.click();
+		//CurrentPCP_Question_Yes.click();
+		jsClickMobile(CurrentPCP_Question_Yes);
 		String pcp_question_text = "Yes";
 		pcp.add(pcp_name);
 		pcp.add(pcp_number);
