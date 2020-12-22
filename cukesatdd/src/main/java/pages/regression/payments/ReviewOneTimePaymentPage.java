@@ -165,6 +165,37 @@ public class ReviewOneTimePaymentPage extends UhcDriver {
 			
 		}
 	
+	public ConfirmOneTimePaymentPage SelectAgreeAndRememberCard() {
+		validate(ChangeCard);
+		System.out.println("User is on Review one Time CC Page");
+		PaymentsDataVerificationonReviewPage();
+		
+		String isSaveCardCheckBoxCheckedbefore = saveCardCheckbox.getAttribute("checked");
+		System.out.println("Checkbox checked flag before is  :"+isSaveCardCheckBoxCheckedbefore);
+		
+		jsClickNew(saveCardCheckbox);
+		
+		String isSaveCardCheckBoxChecked = saveCardCheckbox.getAttribute("checked");
+		System.out.println("Checkbox checked flag is  :"+isSaveCardCheckBoxChecked);
+		
+		if (isSaveCardCheckBoxChecked.contentEquals("true"))
+		{
+			System.out.println("Save Card Check box was checked");
+			Assert.assertTrue("Save Card Check box was checked", true);
+			
+			return null;
+		}
+		else
+		{
+			Assert.fail("Save Card Checkbox was not checked");
+			return null;
+		}
+		
+		
+		
+			
+		}
+	
 	@Override
 	public void openAndValidate() {
 		//validate(ChangeCard);

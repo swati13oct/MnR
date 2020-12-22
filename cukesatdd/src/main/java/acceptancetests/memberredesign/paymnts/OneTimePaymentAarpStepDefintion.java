@@ -1744,6 +1744,17 @@ public class OneTimePaymentAarpStepDefintion {
 		}
 	}
 	
+	@Then("^for saved card user navigates to payment review page and selects agreements and save card checkbox and validate change card link$")
+	public void then_user_navigates_to_payment_Review_screen_and_selects_agreements_save_card_checkbox()
+			throws Throwable {
+		ReviewOneTimePaymentPage reviewOneTimePaymentsPage = (ReviewOneTimePaymentPage) getLoginScenario()
+				.getBean(PageConstants.Review_OneTime_Payments_Page);
+
+		ConfirmOneTimePaymentPage confirmOneTimePaymentPage = reviewOneTimePaymentsPage.SelectAgreeAndRememberCard();
+		
+	}
+	
+	
 	@Then("^User navigates to payment confirmation page for CC flow$")
 	public void user_navigates_to_payment_confirmation_page_for_CC_flow() throws Throwable {
 
