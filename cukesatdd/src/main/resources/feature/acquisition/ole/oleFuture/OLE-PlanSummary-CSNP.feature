@@ -34,13 +34,6 @@ Feature: 1.05.4 OLE common tool flow E2E CSNP
       | Mailing_Zip              | <mailingzip>             |
       | Email                    | <email>                  |
       | MedicaidNumber           | <medicaidnumber>         |
-	Then the user enters following information in Personal Information Page
-     | Email Confirmation | <emailConfirmation> |
-    # | Go Green           | <goGreen>           |
-      | Email              | <email>             |
-      |Home Number             | <phoneno>       |
-      | Mobile Number          | <mobileno>      |   
-      | Middle Name         | <middlename>         |
     Then the user validates the Plan details in Personal Information Page OLE Right Rail
     Then the user validates the Member details dynamic display in Personal Information Page
     Then the user navigates to Medicare Information Page
