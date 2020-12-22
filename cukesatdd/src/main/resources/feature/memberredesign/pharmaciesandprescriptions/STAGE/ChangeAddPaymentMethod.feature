@@ -15,6 +15,6 @@ Feature: Change or Add Payment Details
     When user select Change Payment
     Then user will view Change Payment in a full page modal
 
-    Examples:
-      | planType | memberType             |
-      | PDP     | Rx_Refill_ChangePaymentMethod |
+    Examples: 
+      | planType | memberType                    |
+      | MAPD     | Rx_Refill_ChangePaymentMethod |

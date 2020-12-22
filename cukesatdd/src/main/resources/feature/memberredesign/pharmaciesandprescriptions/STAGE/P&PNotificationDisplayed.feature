@@ -9,6 +9,6 @@ Feature: P&P Notification is deactivated
     When user navigates to the pharmacies and prescriptions page from testharness page
     When a PnP notification is deactivated
 
-    Examples:
-      | planType | memberType             |
-      | PDP     | Rx_Refill_ChangePaymentMethod |
+    Examples: 
+      | planType | memberType                    |
+      | PDP      | Rx_Refill_ChangePaymentMethod |

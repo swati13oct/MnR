@@ -11,6 +11,6 @@ Feature: MedCab Load On P&P Page
     Then user validates the disclaimer Medication appearance subject to change
     And user validates first six of his active prescriptions
 
-    Examples:
-      | planType | memberType             |
-      | PDP     | Rx_Refill_ChangePaymentMethod |
+    Examples: 
+      | planType | memberType |
+      | MAPD     | MAPD_Pnp   |

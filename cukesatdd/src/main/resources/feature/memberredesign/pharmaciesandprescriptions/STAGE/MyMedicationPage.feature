@@ -12,7 +12,6 @@ Feature: My Medication Page
     Then user validates first ten of his active prescriptions
     And user advance and reverse through the pages
 
-    Examples:
-      | planType | memberType             |
-      | PDP     | Rx_OrderStatus_Shipped|
-
+    Examples: 
+      | planType | memberType                    |
+      | MAPD     | Rx_Refill_ChangePaymentMethod |
