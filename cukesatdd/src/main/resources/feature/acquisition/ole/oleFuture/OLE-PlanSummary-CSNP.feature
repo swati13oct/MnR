@@ -52,7 +52,7 @@ Feature: 1.05.4 OLE common tool flow E2E CSNP
     #  | PartB Date         | <partbdate>         |
       | Card Type          | <cardtype>          |
       | Email Confirmation | <emailConfirmation> |
-      | Go Green           | <goGreen>           |
+    #  | Go Green           | <goGreen>           |
       | Email              | <email>             |
     Then the user validates the Plan details in Medicare Info OLE Right Rail
 #    Then the user navigates to Preliminary Questions Page
