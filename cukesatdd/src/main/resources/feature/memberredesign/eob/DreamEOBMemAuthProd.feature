@@ -106,7 +106,8 @@ Feature: 1.04.2.2 To Test DREAM EOB for Members - E2E - Member Auth - PROD
     @prod_dreamEob01b_mapdNice
     Examples: 
       | index | username  | password  | MemUserName             | planType | memberType         | flagZeroEob |
-      | 02    | kkumard   | tnps459#  | sandrakaye86            | MAPD     | NICE_DEOB          | true        |  
+    #x| 02    | kkumard   | tnps459#  | sandrakaye86            | MAPD     | NICE_DEOB          | true        |  
+      | 02    | kkumard   | tnps459#  | wq2451601               | MAPD     | NICE_DEOB          | true        |  
 
     @prod_dreamEob01c_pdp 
     Examples: 
@@ -117,7 +118,8 @@ Feature: 1.04.2.2 To Test DREAM EOB for Members - E2E - Member Auth - PROD
     @prod_dreamEob01d_maCosmos 
     Examples: 
       | index | username  | password  | MemUserName             | planType | memberType         | flagZeroEob |
-      | 05    | kkumard   | tnps459#  | haradaty32              | MA       | COSMOS_DEOB        | true        |
+    #x| 05    | kkumard   | tnps459#  | haradaty32              | MA       | COSMOS_DEOB        | true        |
+      | 05    | kkumard   | tnps459#  | ExDesertrat             | MA       | COSMOS_DEOB        | true        |
 
     #@prod_dreamEob01e_maNice 
     #Examples: 
@@ -128,12 +130,14 @@ Feature: 1.04.2.2 To Test DREAM EOB for Members - E2E - Member Auth - PROD
     Examples: 
       | index | username  | password  | MemUserName             | planType | memberType              | flagZeroEob |
 #     | 07    | kkumard   | tnps459#  | testuserTBD             | PDP      | COMBO_SHIP_PDP_RX_DEOB  | true        |  
-      | 08    | kkumard   | tnps459#  | phleauxdailles43        | MA       | COMBO_SHIP_MA_NICE_DEOB | true        | 
+    #x| 08    | kkumard   | tnps459#  | phleauxdailles43        | MA       | COMBO_SHIP_MA_NICE_DEOB | true        | 
+      | 08    | kkumard   | tnps459#  | VirginiaRuth1936        | MA       | COMBO_SHIP_MA_NICE_DEOB | true        | 
 
     @prod_dreamEob01g_pdpComboPdpSsp
     Examples: 
       | index | username  | password  | MemUserName             | planType | memberType         | flagZeroEob |
-      | 09    | kkumard   | tnps459#  | rldf1942                | PDP      | PDP_SSP_COMBO_DEOB | true        |
+    #x| 09    | kkumard   | tnps459#  | rldf1942                | PDP      | PDP_SSP_COMBO_DEOB | true        |
+      | 09    | kkumard   | tnps459#  | DKELLY27                | PDP      | PDP_SSP_COMBO_DEOB | true        |
 
     @prod_dreamEob01h_fedComboFedShip
     Examples: 
