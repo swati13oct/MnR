@@ -3407,6 +3407,16 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 			
 		}
 		
+		public void clickOTCCTAOnPnPPage() {
+			Assert.assertTrue("PROBLEM - unable to locate OTC call to action Tile element",
+					validate(OTCToActnBtn, 30));
+			// Store the current window handle
+			winHandleBefore = driver.getWindowHandle();
+			OTCToActnBtn.click();
+			switchToNewWindow(2);
+			
+		}
+		
 		public void validateOTCCallToActionNOTOnPnPPage() { 
 			Assert.assertFalse("PROBLEM - able to locate OTC call to action tile element"
 			 , validate(OTCToActnBtn, 30)); 
@@ -3427,6 +3437,15 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 		}
 				
 		public void validateSolutranOpensInNewWindow_memAuth() {
+			CommonUtility.checkPageIsReady(driver);
+			if(driver.getTitle().equalsIgnoreCase("About") && driver.getCurrentUrl().equalsIgnoreCase("https://healthybenefitsplus.com/base/About")){
+				Assert.assertTrue(true);
+			}else {
+				Assert.assertFalse("PROBLEM - unable to switch window thus HealthBenefit page is not displayed successfully", true);
+			}						
+		}
+		
+		public void validateSolutranOpensInNewWindow() {
 			CommonUtility.checkPageIsReady(driver);
 			if(driver.getTitle().equalsIgnoreCase("About") && driver.getCurrentUrl().equalsIgnoreCase("https://healthybenefitsplus.com/base/About")){
 				Assert.assertTrue(true);

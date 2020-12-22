@@ -13,7 +13,7 @@ Feature: OTC CTA Tile on P&P page
 
     Examples: 
       | planType | memberType                    |
-      | PDP      | Rx_Refill_ChangePaymentMethod |
+      | MAPD      | Rx_Refill_ChangePaymentMethod |
 
   @STAGERegression
   Scenario Outline: To verify MAPD Individual member - OTC CTA Tile Image,Title,Description on P&P page and Redirection to Solutran's healthybenefits Page
@@ -27,7 +27,7 @@ Feature: OTC CTA Tile on P&P page
     Then user validates an image for OTC Call To Action
     Then user validates a title for OTC Call To Action
     Then user validates a description for OTC Call To Action
-    When user clicks on OTC Call To Action
+    When user will not be able to view OTC CTA
     Then user will see the authenticated healthybenefits web page open in a new tab
 
     Examples: 

@@ -11,10 +11,9 @@ Feature: Drug Name and Get Pricing
     When user clicks on the name of a drug
     Then user views the Prices page for that medication
 
-    Examples:
-      | planType | memberType             |
-      | PDP     | Rx_Refill_ChangePaymentMethod |
-
+    Examples: 
+      | planType | memberType                    |
+      | MAPD     | Rx_Refill_ChangePaymentMethod |
 
   @STAGERegression
   Scenario Outline: To verify user has access to Get Pricing
@@ -26,6 +25,6 @@ Feature: Drug Name and Get Pricing
     When user clicks the Get Pricing button on a drug card
     Then user views the Prices page for that medication
 
-    Examples:
-      | planType | memberType             |
-      | PDP     | Rx_Refill_ChangePaymentMethod |
+    Examples: 
+      | planType | memberType                    |
+      | PDP      | Rx_Refill_ChangePaymentMethod |
