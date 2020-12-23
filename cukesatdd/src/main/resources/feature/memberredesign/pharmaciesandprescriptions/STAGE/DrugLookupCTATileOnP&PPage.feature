@@ -50,7 +50,7 @@ Feature: Drug Lookup CTA Tile on P&P page
 
     Examples: 
       | planType | memberType    |
-      | PCP      | PDP_Pnp_rally |
+      | PCP      | PCP_Pnp_rally |
 
   @STAGERegression
   Scenario Outline: To verify Medica member for Drug Lookup CTA Tile position,Image,Title,Description on P&P page and Redirection to Rally Page
