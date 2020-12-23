@@ -146,7 +146,6 @@ Feature: 1.10.1 DCE-REDISIGN AARP - To test Acq Visitor Profile to NEW DCE Flows
     Then the user searches and adds the following Drug to Drug List
       | DrugName | <drug2> |
     Then the user clicks on Review Drug Costs button to Land on Drug Summary Page
-    
     Then user should be able to see Return to profile link on summary page
     And Back to profile button should be displayed for each plan card
     Then the user selects View Drug details for following plantype and PlanName
@@ -159,7 +158,7 @@ Feature: 1.10.1 DCE-REDISIGN AARP - To test Acq Visitor Profile to NEW DCE Flows
       | site | drug1   | zipCode | drug2  | planType | planName                                            | userName      | password   |
       | AARP | Orkambi |   80002 | Fanapt | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) | chargersdev@1 | Password@1 |
 
-    @DCEShopperProfileAddDrugsGloballyAuthenticatedUser_UHC 
+    @DCEShopperProfileAddDrugsGloballyAuthenticatedUser_UHC
     Examples: 
       | site | drug1   | zipCode | drug2  | planType | planName                                            | userName      | password   |
       | UHC  | Orkambi |   80002 | Fanapt | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) | chargersdev@1 | Password@1 |
