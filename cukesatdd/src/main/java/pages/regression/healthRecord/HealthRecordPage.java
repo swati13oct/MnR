@@ -390,7 +390,7 @@ public class HealthRecordPage  extends HealthRecordBase {
 				checkModelPopup(driver,1);
 				if (expectIhrLnk) {
 					WebElement firstLink=root1.findElement(By.cssSelector("#dropdown-options-2 > a:nth-child(1)"));
-					Assert.assertTrue("PROBLEM - 'Health Record' link should be the first link on the dropdown", firstLink.getText().toLowerCase().contains("health record"));
+					Assert.assertTrue("PROBLEM - 'Health Record' link should be the first link on the dropdown.  First link text='"+firstLink.getText()+"'", firstLink.getText().toLowerCase().contains("health record"));
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -455,6 +455,10 @@ public class HealthRecordPage  extends HealthRecordBase {
 				System.out.println("TEST - This has react stuff");
 				ihrLnk=testHarn_desktop_AcctProf_IHRLnk_react;
 				acctProfOptLst=testHarn_AcctProfDropdown_react;
+			} else if (noWaitValidate(testHarn_IHRLnk)) {
+				System.out.println("TEST - This has another desktop IHR xpath");
+				ihrLnk=testHarn_IHRLnk;
+				acctProfOptLst=testHarn_AcctProfDropdown;
 			} else {
 				System.out.println("TEST - Can't match anything");
 				return false;

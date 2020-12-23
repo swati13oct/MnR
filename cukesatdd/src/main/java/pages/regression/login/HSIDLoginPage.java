@@ -181,6 +181,8 @@ public class HSIDLoginPage extends UhcDriver {
 				PAGE_URL = MRConstants.TEAMCI_TESTHARNESS;
 			} else if ("team-h".equalsIgnoreCase(MRScenario.environment)) {
 				PAGE_URL = MRConstants.Team_H_NEW_URL_TESTHARNESS;
+			} else if ("team-atest".equalsIgnoreCase(MRScenario.environment)) {
+				PAGE_URL = MRConstants.TEAM_ATEST_URL;
 			} else {
 				PAGE_URL = MRConstants.TESTHARNESS.replace("awe-", "");
 			}

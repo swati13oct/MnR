@@ -645,13 +645,16 @@ public class VisitorProfilePage extends UhcDriver {
 	 * @param planName
 	 */
 	public void cancelEnrollment(String planName) {
-
-		WebElement removeEnrolledPlan = driver.findElement(By.xpath("//button[@aria-label='Remove " + planName + "']"));
-		jsClickNew(removeEnrolledPlan);
-		waitforElement(cancelEnrollment);
-		jsClickNew(cancelEnrollment);
-		waitforElementDisapper(By.xpath("//button[@aria-label='Remove " + planName + "']"), 5);
-
+		
+		if(driver.findElements(By.xpath("//button[@aria-label='Remove " + planName + "']")).size()>0) {
+			WebElement removeEnrolledPlan = driver.findElement(By.xpath("//button[@aria-label='Remove " + planName + "']"));
+			jsClickNew(removeEnrolledPlan);
+			waitforElement(cancelEnrollment);
+			jsClickNew(cancelEnrollment);
+			waitforElementDisapper(By.xpath("//button[@aria-label='Remove " + planName + "']"), 5);
+		}else {
+			System.out.println("#############No saved Enrollment found#############");
+		}
 	}
 
 	public VisitorProfilePage validateVisitorProfilePage() {

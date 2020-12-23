@@ -257,7 +257,7 @@ public class PlanDocumentsAndResourcesUsersHelperProd {
 			if (subSection.equals("Medication Authorization Forms")) {
 				targetTestDocList = new ArrayList<String>();
 				targetTestDocList.add("Drug-specific Prior Authorization Request Forms");
-				targetTestDocList.add("Medication Prior Authorization Request Form");
+				//targetTestDocList.add("Medication Prior Authorization Request Form");
 				targetTestDocList.add("Medicare Part D Coverage Determination Request Form");
 				targetTestDocList.add("Redetermination Request Form");
 				return targetTestDocList;
@@ -402,8 +402,8 @@ public class PlanDocumentsAndResourcesUsersHelperProd {
 			}
 			if (subSection.equals("EN-nextYear")) {
 				targetTestDocList = new ArrayList<String>();
-				targetTestDocList.add("Annual Notice of Changes");
-				targetTestDocList.add("Evidence Of Coverage");
+				//targetTestDocList.add("Annual Notice of Changes");
+				//targetTestDocList.add("Evidence Of Coverage");
 				//targetTestDocList.add("Comprehensive Formulary");
 				//targetTestDocList.add("Certificate of Coverage");
 				//targetTestDocList.add("Additional Drug Coverage");
@@ -471,7 +471,7 @@ public class PlanDocumentsAndResourcesUsersHelperProd {
 				targetTestDocList.add("How to appoint a representative");
 				targetTestDocList.add("Appointment of Representative Form");
 				targetTestDocList.add("Authorization to Share Personal Information Form");
-				targetTestDocList.add("Medication Prior Authorization Request Form");
+				//targetTestDocList.add("Medication Prior Authorization Request Form");
 				targetTestDocList.add("Medicare Part D Coverage Determination Request Form");
 				targetTestDocList.add("Drug-specific Prior Authorization Request Forms");
 				targetTestDocList.add("Redetermination Request Form");
@@ -1377,7 +1377,7 @@ public class PlanDocumentsAndResourcesUsersHelperProd {
 			if (subSection.equals("Medication Authorization Forms")) {
 				targetTestDocList = new ArrayList<String>();
 				targetTestDocList.add("Drug-specific Prior Authorization Request Forms");
-				targetTestDocList.add("Medication Prior Authorization Request Form");
+				//targetTestDocList.add("Medication Prior Authorization Request Form");
 				targetTestDocList.add("Medicare Part D Coverage Determination Request Form");
 				targetTestDocList.add("Redetermination Request Form");
 				return targetTestDocList;
@@ -1573,7 +1573,7 @@ public class PlanDocumentsAndResourcesUsersHelperProd {
 			}
 			if (subSection.equals("Medication Authorization Forms")) {
 				targetTestDocList = new ArrayList<String>();
-				targetTestDocList.add("Medication Prior Authorization Request Form");
+				//targetTestDocList.add("Medication Prior Authorization Request Form");
 				targetTestDocList.add("Medicare Part D Coverage Determination Request Form");
 				targetTestDocList.add("Drug-specific Prior Authorization Request Forms");
 				targetTestDocList.add("Redetermination Request Form");
@@ -1932,7 +1932,7 @@ public class PlanDocumentsAndResourcesUsersHelperProd {
 				targetTestDocList.add("How to appoint a representative");
 				targetTestDocList.add("Appointment of Representative Form");
 				targetTestDocList.add("Authorization to Share Personal Information Form");
-				targetTestDocList.add("Medication Prior Authorization Request Form");
+				//targetTestDocList.add("Medication Prior Authorization Request Form");
 				targetTestDocList.add("Medicare Part D Coverage Determination Request Form");
 				targetTestDocList.add("Drug-specific Prior Authorization Request Forms");
 				targetTestDocList.add("Redetermination Request Form");
@@ -2174,7 +2174,7 @@ public class PlanDocumentsAndResourcesUsersHelperProd {
 			if (subSection.equals("Medication Authorization Forms")) {
 				targetTestDocList = new ArrayList<String>();
 				targetTestDocList.add("Drug-specific Prior Authorization Request Forms");
-				targetTestDocList.add("Medication Prior Authorization Request Form");
+				//targetTestDocList.add("Medication Prior Authorization Request Form");
 				targetTestDocList.add("Medicare Part D Coverage Determination Request Form");
 				targetTestDocList.add("Redetermination Request Form");
 				return targetTestDocList;
@@ -2415,7 +2415,7 @@ public class PlanDocumentsAndResourcesUsersHelperProd {
 			if (subSection.equals("Medication Authorization Forms")) {
 				targetTestDocList = new ArrayList<String>();
 				targetTestDocList.add("Drug-specific Prior Authorization Request Forms");
-				targetTestDocList.add("Medication Prior Authorization Request Form");
+				//targetTestDocList.add("Medication Prior Authorization Request Form");
 				targetTestDocList.add("Medicare Part D Coverage Determination Request Form");
 				targetTestDocList.add("Redetermination Request Form");
 				return targetTestDocList;
@@ -2996,7 +2996,7 @@ public class PlanDocumentsAndResourcesUsersHelperProd {
 			if (subSection.equals("Medication Authorization Forms")) {
 				targetTestDocList = new ArrayList<String>();
 				targetTestDocList.add("Drug-specific Prior Authorization Request Forms");
-				targetTestDocList.add("Medication Prior Authorization Request Form");
+				//targetTestDocList.add("Medication Prior Authorization Request Form");
 				targetTestDocList.add("Medicare Part D Coverage Determination Request Form");
 				targetTestDocList.add("Redetermination Request Form");
 				return targetTestDocList;
@@ -3400,7 +3400,7 @@ public class PlanDocumentsAndResourcesUsersHelperProd {
 			if (subSection.equals("Medication Authorization Forms")) {
 				targetTestDocList = new ArrayList<String>();
 				targetTestDocList.add("Drug-specific Prior Authorization Request Forms");
-				targetTestDocList.add("Medication Prior Authorization Request Form");
+				//targetTestDocList.add("Medication Prior Authorization Request Form");
 				targetTestDocList.add("Medicare Part D Coverage Determination Request Form");
 				targetTestDocList.add("Redetermination Request Form");
 				return targetTestDocList;
@@ -3781,7 +3781,7 @@ public class PlanDocumentsAndResourcesUsersHelperProd {
 			if (subSection.equals("Medication Authorization Forms")) {
 				targetTestDocList = new ArrayList<String>();
 				targetTestDocList.add("Drug-specific Prior Authorization Request Forms");
-				targetTestDocList.add("Medication Prior Authorization Request Form");
+				//targetTestDocList.add("Medication Prior Authorization Request Form");
 				targetTestDocList.add("Medicare Part D Coverage Determination Request Form");
 				targetTestDocList.add("Redetermination Request Form (PDF");
 				return targetTestDocList;
@@ -3966,7 +3966,7 @@ public class PlanDocumentsAndResourcesUsersHelperProd {
 			}
 			if (subSection.equals("Medication Authorization Forms")) {
 				targetTestDocList = new ArrayList<String>();
-				targetTestDocList.add("Medication Prior Authorization Request Form");
+				//targetTestDocList.add("Medication Prior Authorization Request Form");
 				targetTestDocList.add("Medicare Part D Coverage Determination Request Form");
 				targetTestDocList.add("Drug-specific Prior Authorization Request Forms");
 				targetTestDocList.add("Redetermination Request Form");

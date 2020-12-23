@@ -3277,6 +3277,35 @@ public class AccountHomePage extends UhcDriver {
 		return null;
 	}
 	
+	public PlanDocumentsAndResourcesPage navigateDirectToPlanDocViaBenefitsTerm() {
+		checkModelPopup(driver,5);
+		if (noWaitValidate(shadowRootHeader)) {
+			System.out.println("located shadow-root element, attempt to process further...");
+			WebElement root1 = expandRootElement(shadowRootHeader);
+			try {
+				WebElement benefitsTopMenuShadowRootLink = root1.findElement(By.cssSelector("a[data-testid*=nav-link-coverage]"));
+				benefitsTopMenuShadowRootLink.click();
+				try {
+					Thread.sleep(10000);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			} catch (Exception e) {
+				Assert.assertTrue("PROBLEM - unable to locate Benefits link on Rally Dashboard top menu", false);
+			}		
+
+		} 
+		CommonUtility.checkPageIsReady(driver);
+		checkModelPopup(driver,5);
+
+		CommonUtility.waitForPageLoad(driver, heading, 50);
+		if (driver.getTitle().contains("Plan Documents")) {
+			return new PlanDocumentsAndResourcesPage(driver);
+		}
+
+		return null;
+	}
+	
 	public void navigateDirectToBnCPgNoTitleChk() {
 		checkModelPopup(driver,5);
 		if (noWaitValidate(shadowRootHeader)) {

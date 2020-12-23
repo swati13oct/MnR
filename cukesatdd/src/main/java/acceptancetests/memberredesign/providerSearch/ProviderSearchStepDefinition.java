@@ -123,7 +123,7 @@ public class ProviderSearchStepDefinition {
 		testNote.add("\tValidation for page '"+targetPage+"' landing from Provider Search page");
 		String originalUrl=wd.getCurrentUrl();
 		ProviderSearchPage ProviderSearchPage = new ProviderSearchPage(wd);
-		wd=ProviderSearchPage.navigateToBenefitsPage();
+		wd=ProviderSearchPage.navigateToBenefitsPage(planType);
 
 		//note: consumerDetail only show up on secondary page, get all the info now for later use
 		String consumerDetailStr=ProviderSearchPage.getConsumerDetailsFromlocalStorage();
