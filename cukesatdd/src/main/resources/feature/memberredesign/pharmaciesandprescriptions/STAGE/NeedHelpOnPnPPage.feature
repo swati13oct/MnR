@@ -10,6 +10,6 @@ Feature: Need Help Phone Numbers on PnP Page
     Then user validates Need Help section phone numbers
     Then user validates Need Help section hours of operations
 
-    Examples:
-      | planType | memberType             |
+    Examples: 
+      | planType | memberType                 |
       | MAPD     | Rx_Individual_PnP_needhelp |

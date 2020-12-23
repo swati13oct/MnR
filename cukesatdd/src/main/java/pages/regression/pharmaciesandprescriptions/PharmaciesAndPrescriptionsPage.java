@@ -730,9 +730,6 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 						pnpValidate(DrugEstimatorToolPageSearchBar, 30));
 			} else {
 				pageloadcomplete();
-				waitforElementVisibilityInTime(DrugEstimatorToolPageSearchBar, 50);
-				Assert.assertTrue("PROBLEM - Drug Estimator Tool Page Search bar is NOT displayed successfully",
-						pnpValidate(DrugEstimatorToolPageSearchBar, 30));
 				Assert.assertTrue("PROBLEM - Drug Estimator Tool page is opened in new browser window", false);
 			}
 		}

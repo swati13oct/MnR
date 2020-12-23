@@ -7,13 +7,11 @@ Feature: OTC CTA Tile on P&P page
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
     When user navigates to the pharmacies and prescriptions page from testharness page
-      | PlanType    | <planType>   |
-      | Member Type | <memberType> |
     Then user will not be able to view OTC Call To Action
 
     Examples: 
       | planType | memberType                    |
-      | MAPD      | Rx_Refill_ChangePaymentMethod |
+      | MAPD     | Rx_Refill_ChangePaymentMethod |
 
   @STAGERegression
   Scenario Outline: To verify MAPD Individual member - OTC CTA Tile Image,Title,Description on P&P page and Redirection to Solutran's healthybenefits Page
@@ -21,8 +19,6 @@ Feature: OTC CTA Tile on P&P page
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
     When user navigates to the pharmacies and prescriptions page from testharness page
-      | PlanType    | <planType>   |
-      | Member Type | <memberType> |
     Then user view OTC Call To Action
     Then user validates an image for OTC Call To Action
     Then user validates a title for OTC Call To Action

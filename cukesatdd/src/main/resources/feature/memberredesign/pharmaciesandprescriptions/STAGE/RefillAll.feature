@@ -14,9 +14,9 @@ Feature: Refill All Medications CTA - My Medications
     When user select the Refill All Medications CTA
     Then user will be brought to the "Complete Your Refill" page for that medication
 
-    Examples:
-      | planType | memberType             |
-      | PDP     | Rx_Refill_AutoRefillOff |
+    Examples: 
+      | planType | memberType                    |
+      | MAPD     | Rx_Refill_ChangePaymentMethod |
 
   @STAGERegression
   Scenario Outline: To verify Refill All Medications CTA is not displayed on My Medications page if user is not eligible for refill
@@ -30,6 +30,6 @@ Feature: Refill All Medications CTA - My Medications
     Then user will NOT view the Refill All Medications CTA on MY Medications Page
     And user will not see an explanation of the Refill All Medications CTA
 
-    Examples:
-      | planType | memberType             |
-      | PDP     | Rx_Refill_AutoRefillOff |
+    Examples: 
+      | planType | memberType                    |
+      | MAPD     | Rx_Refill_ChangePaymentMethod |

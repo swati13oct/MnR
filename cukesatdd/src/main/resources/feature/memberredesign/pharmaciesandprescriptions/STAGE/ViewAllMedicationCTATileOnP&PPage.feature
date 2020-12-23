@@ -15,6 +15,6 @@ Feature: View All Medication CTA Tile on P&P page
     And user clicks on View All Medication call to action displayed Third within that section
     Then user will be directed to My Medications page
 
-    Examples:
-      | planType | memberType             |
-      | PDP     | Rx_Refill_ChangePaymentMethod |
+    Examples: 
+      | planType | memberType                    |
+      | MAPD     | Rx_Refill_ChangePaymentMethod |

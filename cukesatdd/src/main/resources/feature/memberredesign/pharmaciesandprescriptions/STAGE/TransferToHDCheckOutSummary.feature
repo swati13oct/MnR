@@ -1,4 +1,4 @@
-Feature: To test Transfer To HD Checkout Summary Page
+Feature: Transfer To HD Checkout Summary Page
 
   @STAGERegression
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Transfer to Home Delivery Page Functionality
@@ -46,6 +46,6 @@ Feature: To test Transfer To HD Checkout Summary Page
     Then user will view the disclaimer message
     And disclaimer will remind the user that "OptumRx" is fulfilling the order
 
-    Examples:
-      | planType | memberType             |
-      | PDP     | Rx_Refill_AutoRefillOff |
+    Examples: 
+      | planType | memberType              |
+      | PDP      | Rx_Refill_AutoRefillOff |

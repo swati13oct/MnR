@@ -1,5 +1,5 @@
-Feature: P&P Notification is deactivated
-  To validate P&P Notification is deactivated.
+Feature: P&P Notification is activated
+  To validate P&P Notification is activated.
 
   @STAGERegression
   Scenario Outline: To verify P&P Notification is deactivated
@@ -7,8 +7,9 @@ Feature: P&P Notification is deactivated
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
     When user navigates to the pharmacies and prescriptions page from testharness page
-    When a PnP notification is deactivated
+    When a PnP notification is activated
 
+    #When a PnP notification is deactivated
     Examples: 
       | planType | memberType                    |
       | PDP      | Rx_Refill_ChangePaymentMethod |

@@ -1,4 +1,4 @@
-Feature: To test Refill Checkout Summary Page
+Feature: Refill Checkout Summary Page
 
   @STAGERegression
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify Complete Your Refill Page Functionality
@@ -47,7 +47,6 @@ Feature: To test Refill Checkout Summary Page
     Then user will view the disclaimer message
     And disclaimer will remind the user that "OptumRx" is fulfilling the order
 
-    Examples:
-      | planType | memberType             |
-      | PDP     | Rx_Refill_ChangePaymentMethod |
-
+    Examples: 
+      | planType | memberType                    |
+      | PDP      | Rx_Refill_ChangePaymentMethod |

@@ -7,8 +7,6 @@ Feature: Alabama Plan Exclusion
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
     When user navigates to the pharmacies and prescriptions page from testharness page
-      | PlanType    | <planType>   |
-      | Member Type | <memberType> |
     When user views common questions section
     Then user not view any questions related to OptumRx home delivery
     When user clicks on Drug Lookup Call To Action
@@ -24,8 +22,6 @@ Feature: Alabama Plan Exclusion
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
     When user navigates to the pharmacies and prescriptions page from testharness page
-      | PlanType    | <planType>   |
-      | Member Type | <memberType> |
     When user views common questions section
     Then user not view any questions related to OptumRx home delivery
     When user clicks on Drug Lookup Call To Action
@@ -41,8 +37,6 @@ Feature: Alabama Plan Exclusion
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
     When user navigates to the pharmacies and prescriptions page from testharness page
-      | PlanType    | <planType>   |
-      | Member Type | <memberType> |
     When user views common questions section
     Then user views any questions related to OptumRx home delivery
 
@@ -56,8 +50,6 @@ Feature: Alabama Plan Exclusion
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
     When user navigates to the pharmacies and prescriptions page from testharness page
-      | PlanType    | <planType>   |
-      | Member Type | <memberType> |
     When user views common questions section
     Then user views any questions related to OptumRx home delivery
 
@@ -71,8 +63,6 @@ Feature: Alabama Plan Exclusion
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
     When user navigates to the pharmacies and prescriptions page from testharness page
-      | PlanType    | <planType>   |
-      | Member Type | <memberType> |
     When a PnP notification is deactivated
 
     #When a PnP notification is activated
@@ -86,8 +76,6 @@ Feature: Alabama Plan Exclusion
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
     When user navigates to the pharmacies and prescriptions page from testharness page
-      | PlanType    | <planType>   |
-      | Member Type | <memberType> |
     When a PnP notification is deactivated
 
     #When a PnP notification is activated

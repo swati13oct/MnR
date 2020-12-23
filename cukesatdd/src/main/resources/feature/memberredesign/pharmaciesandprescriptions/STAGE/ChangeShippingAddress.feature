@@ -13,6 +13,6 @@ Feature: Change Shipping Address
     When user select the Change Shipping Address link
     Then user will view the "Change Shipping Address" page
 
-    Examples:
+    Examples: 
       | planType | memberType             |
-      | PDP     | Rx_OrderStatus_Shipped|
+      | PDP      | Rx_OrderStatus_Shipped |
