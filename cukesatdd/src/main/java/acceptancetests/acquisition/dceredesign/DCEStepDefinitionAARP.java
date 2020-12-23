@@ -1896,8 +1896,8 @@ public void the_user_navigate_to_visitor_profile_page() {
 	AcquisitionHomePage acqHomePage = (AcquisitionHomePage) getLoginScenario()
 			.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 
-//	VisitorProfilePage visitorProfilePage=acqHomePage.navigateToNewVisitorProfilePage();
-//	getLoginScenario().saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfilePage);
+	VisitorProfilePage visitorProfilePage=acqHomePage.navigateToNewVisitorProfilePage();
+	getLoginScenario().saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfilePage);
 }
 
 @And("^user validates the plans on new visitor profile page of AARP site$")
