@@ -7,7 +7,7 @@ import org.junit.runner.RunWith;
 
 
 @RunWith(ExtendedCucumber.class)
-@ExtendedCucumberOptions(retryCount=0,screenShotSize="", screenShotLocation="/screenshots/",
+@ExtendedCucumberOptions(retryCount=1,screenShotSize="", screenShotLocation="/screenshots/",
 		jsonReport = "target/cucumber-RunMRATDDRegressionRefillAllRegressionPROD.json",detailedReport = true, detailedAggregatedReport = true,
 		overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionRefillAllRegressionPROD")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberredesign" },

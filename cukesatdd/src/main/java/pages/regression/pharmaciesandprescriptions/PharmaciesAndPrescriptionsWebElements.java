@@ -1385,12 +1385,24 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	public boolean validateCommonQuestionsNotAvailable() {
 
 
-		if (commonQuestionOne.isDisplayed() && commonQuestionTwo.isDisplayed()) {
-
-			return false;
-		} else {
+		if (!validate(commonQuestionOne)) {
 
 			return true;
+		} else {
+
+			return false;
+		}
+	}
+
+	public boolean validateCommonQuestionsAvailable() {
+
+
+		if (validate(commonQuestionOne)) {
+
+			return true;
+		} else {
+
+			return false;
 		}
 	}
 

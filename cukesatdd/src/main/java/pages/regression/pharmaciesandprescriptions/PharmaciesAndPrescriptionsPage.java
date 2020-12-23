@@ -1521,7 +1521,7 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 
 	  public void validateNotViewCommonQuestionOnenTwo() {
 
-		Assert.assertTrue("PROBLEM - Common Questions One and Two should not be available",
+		Assert.assertFalse("PROBLEM - Common Questions should not be available",
 				validateCommonQuestionsNotAvailable());
 
 	}
