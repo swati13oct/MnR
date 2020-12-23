@@ -47,5 +47,5 @@ Feature: Renew Checkout Summary Page
     And disclaimer will remind the user that "OptumRx" is fulfilling the order
 
     Examples: 
-      | planType | memberType                    |
-      | PDP      | Rx_Refill_ChangePaymentMethod |
+      | planType | memberType                   |
+      | PDP      | Rx_Individual_PnP_rx_renewal |

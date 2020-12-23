@@ -47,5 +47,5 @@ Feature: Transfer To HD Checkout Summary Page
     And disclaimer will remind the user that "OptumRx" is fulfilling the order
 
     Examples: 
-      | planType | memberType              |
-      | PDP      | Rx_Refill_AutoRefillOff |
+      | planType | memberType             |
+      | MAPD     | Rx_PnP_Retail_Transfer |

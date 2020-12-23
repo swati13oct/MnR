@@ -1420,29 +1420,38 @@ public class TestHarness extends UhcDriver {
     	
     	public PharmaciesAndPrescriptionsPage navigateToPharAndPresFromTestHarnessPage() {
     		CommonUtility.checkPageIsReady(driver);
-			checkModelPopup(driver,1);
-			validateNew(testHarnessPharPresLink,0);
-			testHarnessPharPresLink.click();
-			CommonUtility.checkPageIsReady(driver);
-			checkModelPopup(driver,1);
-			CommonUtility.waitForPageLoad(driver, healthAndWellnessHeader, 90);    		
-    		/*CommonUtility.checkPageIsReady(driver);
-			checkModelPopup(driver,10);//Yusufu popup handling
+    		checkModelPopup(driver, 30);//Yusufu popup handling
 			checkForIPerceptionModel(driver);
     		try{
     			if (noWaitValidate(testHarnessPharPresLink)) 
+    				try {
     				testHarnessPharPresLink.click();
+    				}
+    			    catch(Exception e) {
+    			    	System.out.println("Print error for iPerception pop" + e.getMessage());
+    			    	WebElement ele=driver.findElement(By.xpath("//*[contains(@id,'ip-no')]"));
+    			    	ele.click();
+    			    	testHarnessPharPresLink.click();
+    			    }
     			else 
+    				try{
     				testHarnessTopMenuPhaPresLink.click();
+    		        }
+		            catch(Exception e) {
+		            	System.out.println("Print error for iPerception pop" + e.getMessage());
+		    	        WebElement ele=driver.findElement(By.xpath("//*[contains(@id,'ip-no')]"));
+		    	        ele.click();
+		    	        testHarnessPharPresLink.click();
+		            }
     		} catch (WebDriverException e) {
     			checkForIPerceptionModel(driver);
     			CommonUtility.checkPageIsReady(driver);
     			testHarnessPharPresLink.click();
     		}
     		CommonUtility.checkPageIsReadyNew(driver);
-			checkModelPopup(driver,2);
     		System.out.println("Now waiting for Drug Look up on Pharmacies And Prescriptions page to show up");
-			CommonUtility.waitForPageLoad(driver, LookUpDrugsButton, 40);*/
+			CommonUtility.waitForPageLoad(driver, LookUpDrugsButton, 40);
+			checkModelPopup(driver,20);
     		if (driver.getCurrentUrl().contains("pharmacy/overview.html")) {
     			return new PharmaciesAndPrescriptionsPage(driver);
     		}
