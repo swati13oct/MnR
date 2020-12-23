@@ -35,6 +35,7 @@ import pages.redesign_deprecated.UlayerHomePage;
 import pages.regression.accounthomepage.AccountHomePage;
 import pages.regression.benefitandcoverage.BenefitsAndCoveragePage;
 import pages.regression.benefitandcoverage.ValueAddedServicepage;
+import pages.regression.planDocumentsAndResources.PlanDocumentsAndResourcesPage;
 import pages.regression.testharness.TestHarness;
 
 /**
@@ -214,20 +215,21 @@ public class BenefitsAndCoverageUmsStepDefinition {
 
 	@Then("^The user will not be able to navigate to Benefits and Coverage page$")
 	public void user_noBenefitsAndCoverage() {
+		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		String planType=(String) getLoginScenario().getBean(LoginCommonConstants.PLANTYPE);
 		String memberType=(String) getLoginScenario().getBean(LoginCommonConstants.CATOGERY);
 		Assert.assertTrue("PROBLEM - this scenario is for terminated user only", 
 				planType.toUpperCase().contains("TERM") || memberType.toUpperCase().contains("TERM"));
 		System.out.println("***The user navigates to Benefits and Coverage page***");
-		BenefitsAndCoveragePage benefitsCoveragePage;
+		PlanDocumentsAndResourcesPage planDocPg;
 		if ("YES".equalsIgnoreCase(MRScenario.isTestHarness)) {
 			TestHarness testHarness = (TestHarness) getLoginScenario().getBean(PageConstantsMnR.TEST_HARNESS_PAGE);
-			benefitsCoveragePage = testHarness.navigateDirectToBnCPag();
+			planDocPg = testHarness.navigateToEOBPageThenBenefitsTerm();
 		}else{
 			AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
-			benefitsCoveragePage = accountHomePage.navigateDirectToBnCPag();	
+			planDocPg = accountHomePage.navigateDirectToPlanDocViaBenefitsTerm();	
 		}
-		Assert.assertTrue("PROBLEM - not expecting terminated user to be able to land on Benefits page",benefitsCoveragePage == null);
+		Assert.assertTrue("PROBLEM - terminated user should land on Plan Documents and Resources page when clicking on Benefits menu option.  current page title='"+wd.getTitle()+"'",wd.getTitle().contains("Plan Documents"));
 	}
 
 	/** 
