@@ -534,7 +534,15 @@ public class DCEStepDefinitionAARP {
 		ZipCodePlanYearCapturePage zipCodePlanYearPage = DCEbuildDrugList.navigateToZipEntryPage();
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_ZipCodePlanYearCapture, zipCodePlanYearPage);
 	}
-
+	
+	@Then("^the user clicks on Review Drug Costs button to Land on Drug Summary Page$")
+	public void the_user_clicks_on_Review_Drug_Costs_button_to_Land_on_Drug_Summary_Page() throws Throwable {
+		BuildYourDrugList DCEbuildDrugList = (BuildYourDrugList) getLoginScenario()
+				.getBean(PageConstants.DCE_Redesign_BuildDrugList);
+		DrugSummaryPage drugSummaryPage = DCEbuildDrugList.navigateToDrugSummay();
+		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
+	}
+	
 	@When("^adds drugs in drug list page$")
 	public void adds_drugs_in_drug_list_page(DataTable givenAttributes) {
 		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
