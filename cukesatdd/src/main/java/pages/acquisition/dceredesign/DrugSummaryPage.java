@@ -494,10 +494,11 @@ public class DrugSummaryPage extends UhcDriver {
 		}
 
 		validateNew(drugTitle);
-		validateNew(switchToGenericBtn);
+		//validateNew(switchToGenericBtn);
 		validateNew(drugPricingDeductText);
 		Assert.assertTrue("Expected text not displayed on Drug pricing modal", drugPricingDeductText.getText().equals(LIS_MESSAGE_DRUG_PRICING));
-		
+		validateNew(drugClose);
+		jsClickNew(drugClose);
 	}
 
 	public void verifyDrugCoverageAndYouPayNotCoveredDrug() {
