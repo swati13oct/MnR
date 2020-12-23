@@ -807,7 +807,8 @@ public class ResultsMobilePage extends UhcDriver {
 			backtoTop();
 		}
 		List<String> pdpAPIRankings = getAPIPlansRanking(rankingJSON, "PDP");
-		mobileUtils.mobileLocateElementClick(PDPViewPlansLink);
+		mobileUtils.mobileLocateElement(PDPViewPlansLink);
+		jsClickMobile(PDPViewPlansLink);
 		validate(PDP1stPlanName, 60);
 		mobileUtils.mobileLocateElement(PDP1stPlanEnroll);
 		verifyAPIRankings(PDPPlansId, pdpAPIRankings);
@@ -818,7 +819,8 @@ public class ResultsMobilePage extends UhcDriver {
 		backtoTop();
 		List<String> snpAPIRankings = getAPIPlansRanking(rankingJSON, "SNP");
 		if (snpAPIRankings.size() > 0) {
-			mobileUtils.mobileLocateElementClick(SNPViewPlansLink);
+			mobileUtils.mobileLocateElement(SNPViewPlansLink);
+			jsClickMobile(SNPViewPlansLink);
 			validate(SNP1stPlanName, 60);
 			mobileUtils.mobileLocateElement(SNP1stPlanEnroll);
 			verifyAPIRankings(SNPPlansId, snpAPIRankings);
