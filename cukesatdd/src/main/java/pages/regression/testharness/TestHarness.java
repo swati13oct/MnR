@@ -1420,22 +1420,36 @@ public class TestHarness extends UhcDriver {
     	
     	public PharmaciesAndPrescriptionsPage navigateToPharAndPresFromTestHarnessPage() {
     		CommonUtility.checkPageIsReady(driver);
-			checkModelPopup(driver,30);//Yusufu popup handling
+    		checkModelPopup(driver, 30);//Yusufu popup handling
 			checkForIPerceptionModel(driver);
     		try{
     			if (noWaitValidate(testHarnessPharPresLink)) 
+    				try {
     				testHarnessPharPresLink.click();
+    				}
+    			    catch(Exception e) {
+    			    	WebElement ele=driver.findElement(By.xpath("//*[contains(@id,'ip-no')]"));
+    			    	ele.click();
+    			    	testHarnessPharPresLink.click();
+    			    }
     			else 
+    				try{
     				testHarnessTopMenuPhaPresLink.click();
+    		        }
+		            catch(Exception e) {
+		    	        WebElement ele=driver.findElement(By.xpath("//*[contains(@id,'ip-no')]"));
+		    	        ele.click();
+		    	        testHarnessPharPresLink.click();
+		            }
     		} catch (WebDriverException e) {
     			checkForIPerceptionModel(driver);
     			CommonUtility.checkPageIsReady(driver);
     			testHarnessPharPresLink.click();
     		}
     		CommonUtility.checkPageIsReadyNew(driver);
-			checkModelPopup(driver,2);
     		System.out.println("Now waiting for Drug Look up on Pharmacies And Prescriptions page to show up");
 			CommonUtility.waitForPageLoad(driver, LookUpDrugsButton, 40);
+			checkModelPopup(driver,20);
     		if (driver.getCurrentUrl().contains("pharmacy/overview.html")) {
     			return new PharmaciesAndPrescriptionsPage(driver);
     		}
