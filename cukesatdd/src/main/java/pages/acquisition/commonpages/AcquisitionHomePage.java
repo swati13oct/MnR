@@ -485,6 +485,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "//span[contains(text(),'Medicare Prescription Drug Plans')]")
     private WebElement MedicarePrescriptionDrugPlans;
 	
+	@FindBy(xpath="//a[@id='gfn_lnk_row2_5']")
+	private WebElement footerMedicarePrescriptionDrugPlans;
+	
 	@FindBy(xpath = "//span[contains(text(),'Medicare Education')]")
     private WebElement MedicareEducation;
 	
@@ -3381,8 +3384,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			
 			threadsleep(6);
 //			MedicarePrescriptionDrugPlans.click();
-			jsClickNew(MedicarePrescriptionDrugPlans);
+			jsClickNew(footerMedicarePrescriptionDrugPlans);
 			threadsleep(5);
+			CommonUtility.checkPageIsReadyNew(driver);
 			if(driver.getCurrentUrl().contains("shop/prescription-drug-plans.html")) {
 				Assert.assertTrue(true);
 				System.out.println("PDP Plan Page open: URL-->"+driver.getCurrentUrl());
