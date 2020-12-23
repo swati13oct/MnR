@@ -27,7 +27,7 @@ Feature: OTC CTA Tile on P&P page
     Then user validates an image for OTC Call To Action
     Then user validates a title for OTC Call To Action
     Then user validates a description for OTC Call To Action
-    When user will not be able to view OTC CTA
+    When user clicks on OTC CTA
     Then user will see the authenticated healthybenefits web page open in a new tab
 
     Examples: 
