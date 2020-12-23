@@ -14,5 +14,5 @@ Feature: Change Shipping Address
     Then user will view the "Change Shipping Address" page
 
     Examples: 
-      | planType | memberType             |
-      | PDP      | Rx_OrderStatus_Shipped |
+      | planType | memberType                    |
+      | MAPD     | Rx_Refill_ChangePaymentMethod |

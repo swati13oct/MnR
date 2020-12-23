@@ -55,7 +55,7 @@ Feature: Alabama Plan Exclusion
 
     Examples: 
       | planType | memberType |
-      | MAPD     | MADP_Pnp   |
+      | MAPD     | MAPD_Pnp   |
 
   @STAGERegression
   Scenario Outline: To verify (AL SEIB) P&P Notification is deactivated

@@ -31,5 +31,5 @@ Feature: Refill All Medications CTA - My Medications
     And user will not see an explanation of the Refill All Medications CTA
 
     Examples: 
-      | planType | memberType                    |
-      | MAPD     | Rx_Refill_ChangePaymentMethod |
+      | planType | memberType              |
+      | MAPD     | Rx_Refill_AutoRefillOff |
