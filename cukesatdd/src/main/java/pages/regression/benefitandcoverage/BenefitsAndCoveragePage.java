@@ -309,6 +309,14 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 		validateWithValue("Look Up Drugs Button", LookUpDrugsButton);
 		scrollElementToCenterScreen(LookUpDrugsButton);
 		String actHref=LookUpDrugsButton.getAttribute("href");
+		if (MRScenario.environment.contains("team-a")) {
+			//note: can't click Rally pages on team env
+			String expHref="/pharmacy-uhc/drugs";
+			Assert.assertTrue("PROBLEM - env: '"+MRScenario.environment+"' - href value is not as expected for '' link.  "
+					+ "Expected to contain '"+expHref+"' | Actual href value='"+actHref+"'", 
+					actHref.contains(expHref));
+			return;
+		}
 		LookUpDrugsButton.click();
 		CommonUtility.checkPageIsReadyNew(driver);
 		if (MRScenario.isTestHarness.equalsIgnoreCase("YES")) { //note: new DCE is a Rally page, access via testharness will land on myuhc.com login page
