@@ -578,30 +578,57 @@ public class PaymentHistoryPage extends UhcDriver {
 
 	@FindBy(xpath = "//button[contains(text(),'Total Amount Due ')]")
 	private WebElement totalAmntDuelink;
+	
+	@FindBy(xpath = "(//button[contains(text(),'Total Amount Due ')])[2]")
+	private WebElement totalAmntDuelinkShip;
 
 	@FindBy(xpath = "//h2[@id='amtDueHeader-0' or @id='amtDueHeader-1' or @id='amtDueHeader-2']")
 	private WebElement totalAmntDueToolTip;
-
+	
+	@FindBy(xpath = "(//h2[@id='amtDueHeader-0' or @id='amtDueHeader-1' or @id='amtDueHeader-2'])[2]")
+	private WebElement totalAmntDueToolTipShip;
+	
 	@FindBy(xpath = "//div[@id='amount-due-content-0']//a[contains(text(),'Close')]")
 	private WebElement totalAmntDueCloseBtn;
 
+	@FindBy(xpath = "//div[@id='amount-due-content-1']//a[contains(text(),'Close')]")
+	private WebElement totalAmntDueCloseBtnShip;
+	
 	@FindBy(xpath = "//button[contains(text(),'Next Premium Payment ')]")
 	private WebElement NextPremiumPaymentlink;
 
+	@FindBy(xpath = "(//button[contains(text(),'Next Premium Payment ')])[2]")
+	private WebElement NextPremiumPaymentlinkShip;
+
 	@FindBy(xpath = "//h2[@id='nextPremHeader-0' or @id='nextPremHeader-1' or @id='nextPremHeader-2']")
 	private WebElement NextPremiumPaymentToolTip;
+	
+	@FindBy(xpath = "(//h2[@id='nextPremHeader-0' or @id='nextPremHeader-1' or @id='nextPremHeader-2'])[2]")
+	private WebElement NextPremiumPaymentToolTipShip;
 
 	@FindBy(xpath = "//div[@id='tentcon-ment-mium-0']//a[contains(text(),'Close')]")
 	private WebElement NextPremiumPaymentCloseBtn;
-
+	
+	@FindBy(xpath = "//div[@id='tentcon-ment-mium-1']//a[contains(text(),'Close')]")
+	private WebElement NextPremiumPaymentCloseBtnShip;
+	
 	@FindBy(xpath = "//button[contains(text(),'Monthly Premium')]")
 	private WebElement MonthlyPremiumtlink;
+	
+	@FindBy(xpath = "(//button[contains(text(),'Monthly Premium')])[2]")
+	private WebElement MonthlyPremiumtlinkShip;
 
 	@FindBy(xpath = "//h2[@id='heading-mon-h2-0' or @id='heading-mon-h2-1' or @id='heading-mon-h2-2']")
 	private WebElement MonthlyPremiumtToolTip;
 
+	@FindBy(xpath = "(//h2[@id='heading-mon-h2-0' or @id='heading-mon-h2-1' or @id='heading-mon-h2-2'])[2]")
+	private WebElement MonthlyPremiumtToolTipShip;
+	
 	@FindBy(xpath = "//div[@id='monthly-premium-0']//a[contains(text(),'Close')]")
 	private WebElement MonthlyPremiumtCloseBtn;
+	
+	@FindBy(xpath = "//div[@id='monthly-premium-1']//a[contains(text(),'Close')]")
+	private WebElement MonthlyPremiumtCloseBtnShip;
 
 	@FindBy(xpath = "(//button[contains(text(),'Learn about ways to pay ')])[2]")
 	private WebElement Learnaboutwaystopaylink;
@@ -2338,7 +2365,8 @@ public void paidInFullFlag() {
 			}
 }
 
-public void toolTipsValidation() throws InterruptedException {
+public void toolTipsValidation(String userType) throws InterruptedException {
+	if(userType.equalsIgnoreCase("Federal")) {
 	Thread.sleep(5000);
 	TestHarness.checkForIPerceptionModel(driver);
 	System.out.println("Validate Total Amount Due pop-up ");
@@ -2389,6 +2417,59 @@ public void toolTipsValidation() throws InterruptedException {
 
 			}
 }
+	
+	else if(userType.equalsIgnoreCase("Ship")) {
+		Thread.sleep(5000);
+		TestHarness.checkForIPerceptionModel(driver);
+		System.out.println("Validate Total Amount Due pop-up ");
+		if(totalAmntDuelinkShip.isDisplayed()) 
+		{ 
+			totalAmntDuelinkShip.click() ;
+		Thread.sleep(2000);
+		Assert.assertTrue("Total Amount Due pop-up is displaying",totalAmntDueToolTipShip.isDisplayed()); 
+		totalAmntDueCloseBtnShip.click();
+		Thread.sleep(2000);
+		Assert.assertTrue("total Amount Due label is displaying",totalAmntDuelinkShip.isDisplayed());
+		System.out.println("Total amount due tool tip is displaying successfully"); 
+				}
+		else { 
+			System.err.println("Total amount due popup is failing ");
+		Assert.fail("Total amount due popup is failing ");
+		}
+
+		System.out.println("Validate Next Premium Payment pop-up ");
+		if(NextPremiumPaymentlinkShip.isDisplayed()) 
+		{ 
+			NextPremiumPaymentlinkShip.click() ;
+		Thread.sleep(2000);
+		Assert.assertTrue("Next Premium Payment  pop-up is displaying",NextPremiumPaymentToolTipShip.isDisplayed());
+		NextPremiumPaymentCloseBtnShip.click();
+		Thread.sleep(2000);
+		Assert.assertTrue("Next Premium Payment label is displaying",NextPremiumPaymentlinkShip.isDisplayed());
+		System.out.println("Next Premium Payment tip is displaying successfully"); }
+		else {
+		System.err.println("Next Premium Payment  popup is failing ");
+		Assert.fail("Next Premium Payment  popup is failing ");
+
+		}
+
+		System.out.println("Validate Monthly Premium pop-up ");
+		if(MonthlyPremiumtlinkShip.isDisplayed()) 
+		{
+		MonthlyPremiumtlinkShip.click() ;
+		Thread.sleep(2000); 
+		Assert.assertTrue("Monthly Premium pop-up is displaying",MonthlyPremiumtToolTipShip.isDisplayed());
+		MonthlyPremiumtCloseBtnShip.click();
+				Thread.sleep(2000);
+				Assert.assertTrue("Monthly Premium label is displaying",MonthlyPremiumtlinkShip.isDisplayed());
+				System.out.println("Monthly Premium tip is displaying successfully"); } else
+				{ 
+					System.err.println("Monthly Premium popup is failing ");
+				Assert.fail("Monthly Premium popup is failing ");
+
+				}
+	}}
+
 
 public void billingPaymentAndDownloadButtons() throws InterruptedException {
 	Thread.sleep(5000);
