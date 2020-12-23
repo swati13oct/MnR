@@ -162,18 +162,18 @@ Feature: 1.10.1 DCE-REDISIGN AARP - To test Acq Visitor Profile to NEW DCE Flows
       | Plan Name | <planName> |
     Then user should be able to see Return to profile link on details page
     
-    @DCEShopperProfileAddDrugsGloballyAuthenticatedUser_AARP
+    @DCEShopperProfileAddDrugsGloballyAuthenticatedUser_AARP123
     Examples: 
       |site| drug1   | zipCode |drug2|planType|planName|userName| password|
-      |AARP| Orkambi | 80002 |Fanapt|MAPD|AARP Medicare Advantage SecureHorizons Plan 2 (HMO)|jarvisstage23111 | Password@15 |
+      |AARP| Orkambi | 80002 |Fanapt|MAPD|AARP Medicare Advantage SecureHorizons Plan 2 (HMO)|chargersdev@1 | Password@1 |
       
       @DCEShopperProfileAddDrugsGloballyAuthenticatedUser_UHC
       Examples: 
       |site| drug1   | zipCode |drug2|planType|planName|userName| password|
-      |UHC| Orkambi | 80002 |Fanapt|MAPD|AARP Medicare Advantage SecureHorizons Plan 2 (HMO)|jarvisstage23111 | Password@15 |
-      
-      
-      @drugSummary_DefaultPlanType @F504721
+      |UHC| Orkambi | 80002 |Fanapt|MAPD|AARP Medicare Advantage SecureHorizons Plan 2 (HMO)|chargersdev@1 | Password@1 |
+
+
+@drugSummary_DefaultPlanType @F504721
   Scenario Outline: To verify default plan type on drug summary page when there are no MAPD plans available from visitor profile page
     Given the user is on medicare acquisition site landing page
     		|Site| <site>|

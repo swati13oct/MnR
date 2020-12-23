@@ -66,15 +66,23 @@ public class HealthAndWellnessWebElements extends UhcDriver{
 	@FindBy(xpath="//h1")
 	protected WebElement generalHeader;
 
-
+	@FindBy(xpath="//div[contains(@class,'aside')]//a[contains(@data-linkdesc,'Renew Active')]//img")
+	protected WebElement renewActiveIconImg_ship2;
+	
 	@FindBy(xpath="//div[contains(@class,'aside')]//div[contains(@class,'o-box')][1]//a[contains(@data-linkdesc,'Renew Active')]//img")
 	protected WebElement renewActiveIconImg_ship;
 
 	@FindBy(xpath="//div[contains(@class,'aside')]//div[contains(@class,'o-box')][2]//h4")
 	protected WebElement cardTitle_ship;
 
+	@FindBy(xpath="//div[contains(@class,'aside')]//h4")
+	protected WebElement cardTitle_ship2;
+
 	@FindBy(xpath="//div[contains(@class,'aside')]//div[contains(@class,'o-box')][4]//a[text()='LEARN MORE']")
 	protected WebElement learnMoreBtn_ship;
+
+	@FindBy(xpath="//div[contains(@class,'aside')]//a[text()='LEARN MORE']")
+	protected WebElement learnMoreBtn_ship2;
 
 	@FindBy(xpath="//div[contains(@class,'aside')]//div[contains(@class,'o-box')][5]//a[text()='Find a gym']")
 	protected WebElement findGymLnk_ship;

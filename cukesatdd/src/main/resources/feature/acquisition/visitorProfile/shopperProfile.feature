@@ -51,6 +51,10 @@ Feature: 1.08. ACQ- Shopper Profile
       | Last Name          | <lname>            |
       | DOB                | <dob>              |
       | MBI                | <mbi>              |
+    Then the user clicks on View Drug Information link for the following Plan and lands on DCE details
+      | PlanName | <planName> |
+    Then the user clicks on Back to Compare link and validates Plan Compare page, Drug Info Modal
+    Then the user closes the Drug Info Modal on Plan Compare page
     Then the user clicks on back on all plan linnk in Plan Compare page
     Then I land on the plan summary page of VPP
       | Enrolled Plan Name | <enrolledplanName> |

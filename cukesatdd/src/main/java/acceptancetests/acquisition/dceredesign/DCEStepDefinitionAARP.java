@@ -1251,10 +1251,10 @@ public class DCEStepDefinitionAARP {
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetailsPage);
 	}
 
-	@When("^User validate Walgreens pharmacy on detail page")
-	public void user_validate_pharmacy() throws InterruptedException {
+	@When("^user validate \"([^\"]*)\" pharmacy on detail page")
+	public void user_validate_pharmacy_on_detail_page(String pharmacyName) throws InterruptedException {
 		DrugDetailsPage drugDetailsPage = new DrugDetailsPage(driver);
-		drugDetailsPage.validateAndClickKeepPharm();
+		drugDetailsPage.validateDefaultPharmacyName(pharmacyName);
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetailsPage);
 	}
 
@@ -1896,8 +1896,8 @@ public void the_user_navigate_to_visitor_profile_page() {
 	AcquisitionHomePage acqHomePage = (AcquisitionHomePage) getLoginScenario()
 			.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 
-	VisitorProfilePage visitorProfilePage=acqHomePage.navigateToNewVisitorProfilePage();
-	getLoginScenario().saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfilePage);
+//	VisitorProfilePage visitorProfilePage=acqHomePage.navigateToNewVisitorProfilePage();
+//	getLoginScenario().saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfilePage);
 }
 
 @And("^user validates the plans on new visitor profile page of AARP site$")
@@ -2404,5 +2404,11 @@ public void user_verify_details_page_change_pharmacy_modal_for_preferred_tab() {
 		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
 		drugSummaryPage.clickswitchToGeneric();
 
+	}
+	
+	@Then("^user click on standard tab from drug details$")
+	public void user_click_on_standard_tab_from_drug_details() {
+		DrugDetailsPage drugDetailsPage = new DrugDetailsPage(driver);
+		drugDetailsPage.validateStandardTab();
 	}
 }

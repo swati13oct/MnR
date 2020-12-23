@@ -121,5 +121,5 @@ Feature: 1.18.1.1 Member Pharamcies And Prescriptions page - Pre-Effective - Mem
 	#@memAuth_pnpPreEff_ship_ind
     #Examples: 
 	#  | FID     | username  | password  | MemUserName             | planType | memberType          | expectLink |
-	#  | F493942 | qavgogine | qavgogine | shipPreeffective707     | SHIP     | IND_PREEFF_PnP      | no         |
+	#  | F493942 | qavgogine | qavgogine | q4_Ship_013     | SHIP     | IND_PREEFF_PnP      | no         |
 	  

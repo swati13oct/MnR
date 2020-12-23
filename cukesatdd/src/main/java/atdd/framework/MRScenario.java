@@ -269,18 +269,18 @@ public class MRScenario {
 			if (environment.contains("team-ci")) {
 				csvName = "MemberRedesign-VBF-Teamci.csv";
 
-			} else if ((environment.contains("team-a")
-					|| (//(environment.equalsIgnoreCase("team-h")) || Team-h condition added separately to take username as login
-							(environment.equalsIgnoreCase("team-e"))
+			} else if ((environment.equalsIgnoreCase("team-e"))
 							|| (environment.equalsIgnoreCase("team-f")) || (environment.equalsIgnoreCase("team-g"))
-							|| (environment.equalsIgnoreCase("team-c")) || (environment.equalsIgnoreCase("team-acme")) || (environment.equalsIgnoreCase("team-voc"))|| (environment.equalsIgnoreCase("team-t") || (environment.equalsIgnoreCase("team-chargers") || (environment.equalsIgnoreCase("team-avengers-plm") ||(environment.equalsIgnoreCase("chargers-qa")))))))) {
+							|| (environment.equalsIgnoreCase("team-c")) || (environment.equalsIgnoreCase("team-acme")) 
+							|| (environment.equalsIgnoreCase("team-voc"))|| (environment.equalsIgnoreCase("team-t")) 
+							|| (environment.equalsIgnoreCase("team-chargers")) || (environment.equalsIgnoreCase("team-avengers-plm")) 
+							|| (environment.equalsIgnoreCase("chargers-qa"))) {
 				csvName = "MemberRedesign-UUID.csv";
 			} else if (tagName.equalsIgnoreCase("@MemberVBF") && environment.contains("stage")) {
 				csvName = "MemberRedesign-VBF.csv";
-			} else if (environment.equalsIgnoreCase("team-h")) {
+			} else if (environment.equalsIgnoreCase("team-h") || environment.equalsIgnoreCase("team-atest")) {
 				csvName = "UMS-Member-Type.csv";
-			}
-			/*
+			}			/*
 			 * note: Dec2018 - comment out because this section caused stage run not to use
 			 * UMS-Member-Type.csv else{ if
 			 * (tagName.equalsIgnoreCase("@benefitsAndCoverage")) { csvName =

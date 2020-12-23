@@ -429,8 +429,8 @@ public class VppCommonStepDefinition {
 		plansummaryPage.MedSupFormValidation(DateOfBirth);
 	}
 
-	@Then("^user clicks on compare button and navigate to plan compare page$")
-	public void user_clicks_on_compare_button_and_navigate_to_plan_compare_page(DataTable givenAttributes)
+	@And("^user clicks on compare button and navigate to plan compare page for \"([^\"]*)\" time$")
+	public void user_clicks_on_compare_button_and_navigate_to_plan_compare_page(String attempt, DataTable givenAttributes)
 			throws Throwable {
 		List<DataTableRow> givenAttributesRow = givenAttributes.getGherkinRows();
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
@@ -442,18 +442,33 @@ public class VppCommonStepDefinition {
 
 		String totalPlans = givenAttributesMap.get("No Of Plans To Compare");
 		int total_plans = Integer.parseInt(totalPlans);
+		
+		String navigateToCompare = givenAttributesMap.get("Navigate To Compare");
 
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		String attempt = "first";
-		boolean result = plansummaryPage.clickAndVerifyNavigateToPage("Compare", total_plans, attempt);
+		
+		boolean result = plansummaryPage.clickAndVerifyNavigateToPage("Compare", total_plans, attempt , navigateToCompare);
 		Assert.assertTrue("On clicking compare button user is navigated to plan compare page", result);
 		System.out.println("user clicks on compare button and navigate to plan compare page");
 
 	}
+	
+	
+	
+	@And("^user clicks on add more plans for comparing$")
+	public void user_clicks_on_add_more_plans_for_comparing()
+			throws Throwable {
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		boolean result = plansummaryPage.addTwoMorePlansForComparing();
+		Assert.assertTrue("User successfully add two more plans", result);
+		System.out.println("User successfully add two more plans");
 
-	@Then("^user clicks on save button and saves to plan cart \"([^\"]*)\" time $")
-	public void user_clicks_on_save_button_and_saves_to_plan_cart(DataTable givenAttributes, String attempt)
+	}
+
+	@And("^user clicks on save button and saves to plan cart for \"([^\"]*)\" time$")
+	public void user_clicks_on_save_button_and_saves_to_plan_cart(String attempt, DataTable givenAttributes)
 			throws Throwable {
 		List<DataTableRow> givenAttributesRow = givenAttributes.getGherkinRows();
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
@@ -468,19 +483,19 @@ public class VppCommonStepDefinition {
 
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		boolean result = plansummaryPage.clickAndVerifyNavigateToPage("Save", total_plans, attempt);
-		Assert.assertTrue("On clicking save button use,r is navigated to save plan page", result);
+		boolean result = plansummaryPage.clickAndVerifyNavigateToPage("Save", total_plans, attempt, "Yes");
+		Assert.assertTrue("On clicking save button user is navigated to save plan page", result);
 		System.out.println("user clicks on save button and saves to plan cart");
 
 	}
 
-	/*---------------------------Added steps for Medsupp Ole----------------
+	
 	
 	@Then("^user clicks on Edit Your Information link and navigate back to micro form$")
 	public void user_clicks_on_Edit_Your_Information_link_and_navigate_back_to_micro_form() throws Throwable {
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		boolean result = plansummaryPage.clickAndVerifyNavigateToPage("Information");
+		boolean result = plansummaryPage.clickAndVerifyNavigateToPage("Information", 1, "first", "Yes");
 		Assert.assertTrue("On clicking Edit Your Information link and navigate back to micro form", result);
 		System.out.println("user clicks on Edit Your Information link and navigate back to micro form");
 	}
@@ -489,20 +504,118 @@ public class VppCommonStepDefinition {
 	public void user_clicks_on_View_plan_button_link_and_navigate_back_to_vpp_summary_page_of_medsupp() throws Throwable {
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		boolean result = plansummaryPage.clickAndVerifyNavigateToPage("View Plan");
+		boolean result = plansummaryPage.clickAndVerifyNavigateToPage("View Plan", 1, "first", "Yes");
 		Assert.assertTrue("On clicking View Plan button user is navigated to plan summary page", result);
 		System.out.println("user clicks on View plan button link and navigate back to vpp summary page of medsupp");
 	}
-	---------------------------Added steps for Medsupp Ole----------------*/
+	
 
 	@Then("^user clicks on Save icon for all the plans and validate count in cart should match to plans$")
-	public void user_clicks_on_Save_icon_for_all_the_plans_and_match_count() throws Throwable {
+	public void user_clicks_on_Save_icon_for_all_the_plans_and_match_count(DataTable givenAttributes) throws Throwable {
+		List<DataTableRow> givenAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < givenAttributesRow.size(); i++) {
+
+			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+					givenAttributesRow.get(i).getCells().get(1));
+		}
+
+		String noOfPlansSavedOnComparePage = givenAttributesMap.get("No Of Saved Plans On Compare Page");
+		int savedPlanCountOfComparePage = Integer.parseInt(noOfPlansSavedOnComparePage);
+
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		boolean result = plansummaryPage.verifyPlanCount();
+		boolean result = plansummaryPage.verifyPlanCount(savedPlanCountOfComparePage);
 		Assert.assertTrue("Plan count is matched", result);
 		System.out.println("Plan count is matched");
 	}
+
+	@Then("^user saves more than two plans on summary page navigate to compare page and validate that saved plans are displayed$")
+	public void user_validate_saved_plans_on_compare() throws Throwable {
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		boolean result = plansummaryPage.verifyPlanSavedOnSummaryAreDisplayedOnCompare();
+		Assert.assertTrue("Plans saved on summary page are displayed on compare page", result);
+		System.out.println("Plans saved on summary page are displayed on compare page");
+	}
+	
+	@And("^user clicks on heart icon and save two heart icon plans$")
+	public void user_clicks_on_heart_icon_and_save_two_heart_icon_plans(DataTable givenAttributes) throws Throwable {
+	    // Write code here that turns the phrase above into concrete actions
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		String planCount = memberAttributesMap.get("No Of Plans To Save");
+		int number = Integer.parseInt(planCount);
+		
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		
+		boolean result = plansummaryPage.savePlansOnSummaryPage(number);
+		Assert.assertTrue("user saved two heart icon plans", result);
+		System.out.println("user saved two heart icon plans");
+
+	      
+	}
+
+
+	@And("^user clicks on view saved plans land on shopper profile page$")
+	public void user_clicks_on_view_saved_plans_land_on_shopper_profile_page() throws Throwable {
+	    // Write code here that turns the phrase above into concrete actions
+		
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		
+		boolean result = plansummaryPage.clickOnSavedPlansAndNavigateToShopperProfile();
+		Assert.assertTrue("user land on shopper profile page", result);
+		System.out.println("user land on shopper profile page");
+
+	   
+	}
+
+	@Then("^user validate all fields are editable and view plan and cancel buttons are visible$")
+	public void user_validate_all_fields_are_editable_and_view_plan_and_cancel_buttons_are_visible() throws Throwable {
+	    // Write code here that turns the phrase above into concrete actions
+		
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		
+		boolean result = plansummaryPage.validateAllFieldsEditable();
+		Assert.assertTrue("all fields are editable and view plan and cancel buttons are visible", result);
+		System.out.println("all fields are editable and view plan and cancel buttons are visible");
+
+	    
+	}
+	
+	@Then("^user clicks on view plan details button and validates plan name start application button and benefit link$")
+	public void user_clicks_on_view_plan_details_button_and_validates_plan_name_start_application_button_and_benefit_link() throws Throwable {
+	    // Write code here that turns the phrase above into concrete actions
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		
+		boolean result = plansummaryPage.validateFieldsOnPlanDetails();
+		Assert.assertTrue("plan name start application button and benefit link are validated", result);
+		System.out.println("plan name start application button and benefit link are validated");
+
+	}
+
+	@Then("^user clicks on compare plans link and validates plan name start application button and benefit link$")
+	public void user_clicks_on_compare_plans_link_and_validates_plan_name_start_application_button_and_benefit_link() throws Throwable {
+	    // Write code here that turns the phrase above into concrete actions
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		
+		boolean result = plansummaryPage.validateFieldsOnPlanCompare();
+		Assert.assertTrue("plan name start application button and benefit link are validated", result);
+		System.out.println("plan name start application button and benefit link are validated");
+
+	}
+
 
 	@Then("^user clicks on resume application button$")
 	public void click_resume_application(DataTable givenAttributes) throws Throwable {
@@ -1129,82 +1242,82 @@ public class VppCommonStepDefinition {
 
 	}
 
-	@And("^user clicks on contact us link of aboutus page$")
-	public void click_contact_us() {
-		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
-				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		ContactUsAARPPage contactUsAARPPage = aquisitionhomepage.contactUsFooterClick();
-		if (contactUsAARPPage != null) {
-			getLoginScenario().saveBean(PageConstants.AARP_Contact_US_PAGE, contactUsAARPPage);
-			Assert.assertTrue(true);
-		} else {
-			Assert.fail("contactus page not found");
-		}
-	}
+//	@And("^user clicks on contact us link of aboutus page$")
+//	public void click_contact_us() {
+//		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+//				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+//		ContactUsAARPPage contactUsAARPPage = aquisitionhomepage.contactUsFooterClick();
+//		if (contactUsAARPPage != null) {
+//			getLoginScenario().saveBean(PageConstants.AARP_Contact_US_PAGE, contactUsAARPPage);
+//			Assert.assertTrue(true);
+//		} else {
+//			Assert.fail("contactus page not found");
+//		}
+//	}
 
-	@And("^user clicks on sitemap link of contact us page$")
-	public void click_sitemap() {
-		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
-				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		SiteMapAARPPage siteMapAARPPage = aquisitionhomepage.siteMapFooterClick();
-		if (siteMapAARPPage != null) {
-			getLoginScenario().saveBean(PageConstants.AARP_SITE_MAP_PAGE, siteMapAARPPage);
+//	@And("^user clicks on sitemap link of contact us page$")
+//	public void click_sitemap() {
+//		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+//				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+//		SiteMapAARPPage siteMapAARPPage = aquisitionhomepage.siteMapFooterClick();
+//		if (siteMapAARPPage != null) {
+//			getLoginScenario().saveBean(PageConstants.AARP_SITE_MAP_PAGE, siteMapAARPPage);
+//
+//			Assert.assertTrue(true);
+//		} else {
+//			Assert.fail("sitemap page not found");
+//		}
+//	}
 
-			Assert.assertTrue(true);
-		} else {
-			Assert.fail("sitemap page not found");
-		}
-	}
+//	@And("^user clicks on privacy policy link of sitemap page$")
+//	public void click_privacypolicy() {
+//		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+//				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+//		PrivacyPolicyAARPPage privacyPolicyAARPPage = aquisitionhomepage.privacypolicyFooterClick();
+//		if (privacyPolicyAARPPage != null) {
+//			getLoginScenario().saveBean(PageConstants.AARP_PRIVACY_POLICY_PAGE, privacyPolicyAARPPage);
+//
+//			Assert.assertTrue(true);
+//		} else {
+//			Assert.fail("privacypolicy page not found");
+//		}
+//	}
 
-	@And("^user clicks on privacy policy link of sitemap page$")
-	public void click_privacypolicy() {
-		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
-				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		PrivacyPolicyAARPPage privacyPolicyAARPPage = aquisitionhomepage.privacypolicyFooterClick();
-		if (privacyPolicyAARPPage != null) {
-			getLoginScenario().saveBean(PageConstants.AARP_PRIVACY_POLICY_PAGE, privacyPolicyAARPPage);
+//	@And("^user clicks on disclaimers link of terms & conditions page$")
+//	public void click_disclaimers() {
+//		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+//				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+//		DisclaimersAARPPage disclaimersAARPPage = aquisitionhomepage.disclaimersFooterClick();
+//		if (disclaimersAARPPage != null) {
+//			getLoginScenario().saveBean(PageConstants.AARP_DISCLAIMERS_PAGE, disclaimersAARPPage);
+//
+//			Assert.assertTrue(true);
+//		} else {
+//			Assert.fail("disclaimers page not found");
+//		}
+//	}
 
-			Assert.assertTrue(true);
-		} else {
-			Assert.fail("privacypolicy page not found");
-		}
-	}
+//	@And("^user clicks on agents & brokers link of disclaimers page$")
+//	public void click_agentsnbrokers() {
+//		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+//				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+//		AgentsnBrokersAARPPage agentsnBrokersAARPPage = aquisitionhomepage.agentsnbrokersFooterClick();
+//		if (agentsnBrokersAARPPage != null) {
+//			getLoginScenario().saveBean(PageConstants.AARP_AGENTS_AND_BROKERS_PAGE, agentsnBrokersAARPPage);
+//
+//			Assert.assertTrue(true);
+//		} else {
+//			Assert.fail("agents&brokers page not found");
+//		}
+//	}
 
-	@And("^user clicks on disclaimers link of terms & conditions page$")
-	public void click_disclaimers() {
-		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
-				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		DisclaimersAARPPage disclaimersAARPPage = aquisitionhomepage.disclaimersFooterClick();
-		if (disclaimersAARPPage != null) {
-			getLoginScenario().saveBean(PageConstants.AARP_DISCLAIMERS_PAGE, disclaimersAARPPage);
-
-			Assert.assertTrue(true);
-		} else {
-			Assert.fail("disclaimers page not found");
-		}
-	}
-
-	@And("^user clicks on agents & brokers link of disclaimers page$")
-	public void click_agentsnbrokers() {
-		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
-				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		AgentsnBrokersAARPPage agentsnBrokersAARPPage = aquisitionhomepage.agentsnbrokersFooterClick();
-		if (agentsnBrokersAARPPage != null) {
-			getLoginScenario().saveBean(PageConstants.AARP_AGENTS_AND_BROKERS_PAGE, agentsnBrokersAARPPage);
-
-			Assert.assertTrue(true);
-		} else {
-			Assert.fail("agents&brokers page not found");
-		}
-	}
-
-	@And("^user verifies home link of agents & brokers page$")
-	public void click_home() {
-		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
-				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		AcquisitionHomePage aquisitionHomePageReload = aquisitionhomepage.homeFooterClick();
-		Assert.assertTrue("home page not found", aquisitionHomePageReload != null);
-	}
+//	@And("^user verifies home link of agents & brokers page$")
+//	public void click_home() {
+//		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+//				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+//		AcquisitionHomePage aquisitionHomePageReload = aquisitionhomepage.homeFooterClick();
+//		Assert.assertTrue("home page not found", aquisitionHomePageReload != null);
+//	}
 
 	@Then("^the user clicks on Learn More for Rocky Mountain plans$")
 	public void the_user_clicks_on_Learn_More__for_Rocky_Mountain_plans(DataTable planAttributes) throws Throwable {
@@ -1915,7 +2028,7 @@ public class VppCommonStepDefinition {
 		// ----- PDP plan type ---------------------------
 		planType = "PDP";
 		plansummaryPage.viewPlanSummary(planType);
-		plansummaryPage.handlePlanYearSelectionPopup();
+		plansummaryPage.handlePlanYearSelectionPopup(planYear);
 		plansummaryPage.validateAbilityToSavePlans(pdp_savePlanNames, planType);
 		// plansummaryPage.validatePlansAreSaved(pdp_savePlanNames, planType);
 		// //commented out because the previous line already validates after saving plan
@@ -1923,7 +2036,7 @@ public class VppCommonStepDefinition {
 		// ----- SNP plan type ---------------------------
 		planType = "SNP";
 		plansummaryPage.viewPlanSummary(planType);
-		plansummaryPage.handlePlanYearSelectionPopup();
+		plansummaryPage.handlePlanYearSelectionPopup(planYear);
 		plansummaryPage.validateAbilityToSavePlans(snp_savePlanNames, planType);
 		// plansummaryPage.validatePlansAreSaved(snp_savePlanNames, planType);
 		// //commented out because the previous line already validates after saving plan
@@ -2309,18 +2422,20 @@ public class VppCommonStepDefinition {
 		String pdp_savePlanNames = memberAttributesMap.get("PDP Test Plans");
 		String snp_savePlanNames = memberAttributesMap.get("SNP Test Plans");
 
+		String planYear = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_YEAR);
+		
 		// ----- MA plan type ---------------------------
 		String planType = "MA";
 		System.out.println("Proceed to validate " + planType + " saved plan(s) are still saved");
 		plansummaryPage.viewPlanSummary(planType);
-		plansummaryPage.handlePlanYearSelectionPopup();
+		plansummaryPage.handlePlanYearSelectionPopup(planYear);
 		plansummaryPage.validatePlansAreSaved(ma_savePlanNames, planType);
 
 		// ----- PDP plan type --------------------------
 		planType = "PDP";
 		System.out.println("Proceed to validate " + planType + " saved plan(s) are still saved");
 		plansummaryPage.viewPlanSummary(planType);
-		plansummaryPage.handlePlanYearSelectionPopup();
+		plansummaryPage.handlePlanYearSelectionPopup(planYear);
 		plansummaryPage.validatePlansAreSaved(pdp_savePlanNames, planType);
 
 		// ----- SNP plan type --------------------------
@@ -2483,7 +2598,7 @@ public class VppCommonStepDefinition {
 		System.out.println("TEST - testSiteUrl=" + testSiteUrl);
 		getLoginScenario().saveBean(PageConstants.TEST_SITE_URL, testSiteUrl);
 
-		aquisitionhomepage.selectState("Select State"); // note: default it to no state selected for predictable result
+//		aquisitionhomepage.selectState("Select State"); // note: default it to no state selected for predictable result
 		System.out.println("Unselected state on home page for more predictable result");
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, aquisitionhomepage);
@@ -3014,5 +3129,81 @@ public void user_clicks_on_continue_enrollment_button_on_the_modal() throws Thro
 			.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 	plansummaryPage.clickContinueEnrollmentBtnOnModal();
 }
+
+	@Then("^the user clicks on Enroll in plan and validates the Welcome to OLE Page on new Plan Compare")
+	public void user_clicks_enrollInPlan_newPlanCompare() throws InterruptedException {
+		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		WelcomePage welcomeOLEPage = planComparePage.Enroll_OLE_Plancompare();
+		if (welcomeOLEPage != null) {
+			getLoginScenario().saveBean(PageConstants.OLE_WELCOME_PAGE, welcomeOLEPage);
+		} else {
+			Assert.fail("Error Loading Welcome Page for OLE");
+		}
+	}
+
+	@Then("^the user clicks on Plan details link in new Plan Compare page")
+	public void user_clicks_planDetails_newPlanCompare() throws InterruptedException {
+		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		PlanDetailsPage vppPlanDetailsPage = planComparePage.navigateToPlanDetailfromplanCompare();
+		if (vppPlanDetailsPage != null) {
+			getLoginScenario().saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE, vppPlanDetailsPage);
+			Assert.assertTrue(true);
+		} else
+			Assert.fail("Error in Loading the Plan Details Page");
+
+	}
+
+	@Then("^Click on view more plans for right navigaton$")
+	public void Clickonviewmoreplansforrightnavigatonon() throws Throwable {
+		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		planComparePage.validateViewMoreplansComparePage();
+	}
+
+	@Then("^Click on view less plans for left navigaton$")
+	public void Clickonviewlessplansforrightnavigatonon() throws Throwable {
+		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		planComparePage.validateViewlessplansComparePage();
+	}
+
+	@Given("^remove one plan from \"([^\"]*)\" new plan compare and verify remove icon is disabled page$")
+	public void removeoneplanfrom_compare_plan_link(String Counter) throws Throwable {
+		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		planComparePage.CounterNewRemoveLink(Counter);
+	}
+
+	@Then("^Click on Dental Flyer Link$")
+	public void clickonDentalFlyerLink(DataTable givenAttributes) throws Throwable {
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		String PDFtype = memberAttributesMap.get("PDF LINK");
+		String DocCode = memberAttributesMap.get("DocumentCode");
+		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		planComparePage.CounterDentalFlyerLink(PDFtype, DocCode);
+	}
+	
+	@When("^user removes drugs from plan card$")
+	public void user_removes_drugs_from_plan_card() {
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		plansummaryPage.removeDrugsFromPlanCard();
+	}
+
+	@When("^user removes provider from plan card$")
+	public void user_removes_provider_from_plan_card() {
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		plansummaryPage.removeProvidersFromPlanCard();
+	}
 
 }

@@ -68,6 +68,9 @@ public class TestHarness extends UhcDriver {
 
 	@FindBy(xpath = "//table[@class='componentTable']/tbody/tr/td/a[contains(.,'EOB Search')]")
 	private WebElement eobPageLink;
+	
+	@FindBy(xpath="//a[@id='coveragebenefits_1']")
+	private WebElement preEffBenefitsTab;
 
 	@FindBy(xpath = "//table[@class='componentTable']/tbody/tr/td/a[contains(.,'Order Plan material')]")
 	private WebElement orderPlanPageLink;
@@ -747,6 +750,31 @@ public class TestHarness extends UhcDriver {
 			return null;
 		} else {
 			return new EOBPage(driver);
+		}
+	}
+	
+	public PlanDocumentsAndResourcesPage navigateToEOBPageThenBenefitsTerm() {
+		CommonUtility.waitForPageLoad(driver, eobPageLink,30);
+		validateNew(eobPageLink);
+		eobPageLink.click();
+		CommonUtility.checkPageIsReadyNew(driver);
+		CommonUtility.waitForPageLoad(driver, heading, CommonConstants.TIMEOUT_60);
+		if (!(driver.getTitle().contains("Explanation of Benefits"))) {
+			Assert.fail("Unable to navigate to EOB page");
+			return null;
+		} else {
+			Assert.assertTrue("PROBLEM - unable to locate Benefits tab on top menu", validate(preEffBenefitsTab,0));
+			preEffBenefitsTab.click();
+			//try {
+			//	Thread.sleep(10000);
+			//} catch (InterruptedException e) {
+			//	e.printStackTrace();
+			//}
+			CommonUtility.checkPageIsReadyNew(driver);
+			CommonUtility.waitForPageLoad(driver, heading, CommonConstants.TIMEOUT_60);
+			System.out.println(driver.getTitle());
+			Assert.assertTrue("PROBLEM - unable to navigate to Plan Documents and Resources page via Benefits menu option for Terminated user", !driver.getTitle().contains("Benefits"));
+			return new PlanDocumentsAndResourcesPage(driver);
 		}
 	}
 	

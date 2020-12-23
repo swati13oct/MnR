@@ -753,7 +753,9 @@ public class PlanDocumentsAndResourcesUsersHelper {
 			if (subSection.equals("EN")) {
 				targetTestDocList = new ArrayList<String>();
 				targetTestDocList.add("Plan Benefits Table");
+				targetTestDocList.add("Plan Documents");
 				targetTestDocList.add("A Guide to Health Insurance for People with Medicare");
+				targetTestDocList.add("Medicare Supplement Hospital Select Directories");
 				return targetTestDocList;
 			} 
 			if (subSection.equals("ES")) {
@@ -1430,10 +1432,10 @@ public class PlanDocumentsAndResourcesUsersHelper {
 				targetTestDocList.add("Certificate of Coverage");
 				targetTestDocList.add("Additional Drug Coverage");
 				//targetTestDocList.add("Formulary/Drug List - Comprehensive");
-				//targetTestDocList.add("Prior Authorization Criteria");
-				//targetTestDocList.add("Step Therapy Criteria");
-				//targetTestDocList.add("Formulary Additions");
-				//targetTestDocList.add("Formulary Deletions");
+				targetTestDocList.add("Prior Authorization Criteria");
+				targetTestDocList.add("Step Therapy Criteria");
+				targetTestDocList.add("Formulary Additions");
+				targetTestDocList.add("Formulary Deletions");
 				targetTestDocList.add("Plan Guide");
 				return targetTestDocList;
 			} 

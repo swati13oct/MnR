@@ -335,7 +335,7 @@ public class GlobalComponentsCommonStepDefinition {
 		  AcquisitionHomePage aquisitionHomePageReload =
 		  aquisitionhomepage.homeFooterClick();
      
-		//  Assert.assertTrue("home page not found", aquisitionHomePageReload!= null); 
+//		  Assert.assertTrue("home page not found", aquisitionHomePageReload!= null); 
 	  }
 
 	  @And("^the user clicks on browser back button$")
@@ -382,27 +382,27 @@ public class GlobalComponentsCommonStepDefinition {
 
 	  @When("^the user clicks on Medicare Prescription Drug Plans Link$")
 	  public void the_user_clicks_on_Medicare_Prescription_Drug_Plans_Link() throws Throwable {
-		  AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage)getLoginScenario() .getBean(PageConstants.ACQUISITION_HOME_PAGE);
+	  AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage)getLoginScenario() .getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		  aquisitionhomepage.MedicarePrescriptionDrugPlans();
 	  }
 
-	  @When("^the user clicks on Medicare Education Link$")
+  @When("^the user clicks on Medicare Education Link$")
 	  public void the_user_clicks_on_Medicare_Education_Link() throws Throwable {
 		  AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage)getLoginScenario() .getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		  aquisitionhomepage.MedicareEducation();
-	  }
+  }
 
-	  @When("^the user clicks on Back to top Link$")
-	  public void the_user_clicks_on_Back_to_top_Link() throws Throwable {
-		  AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage)getLoginScenario() .getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		  aquisitionhomepage.backtotop();
-	  }
+ @When("^the user clicks on Back to top Link$")
+public void the_user_clicks_on_Back_to_top_Link() throws Throwable {
+	  AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage)getLoginScenario() .getBean(PageConstants.ACQUISITION_HOME_PAGE);
+	  aquisitionhomepage.backtotop();
+  }
 
 
      @When("^the user clicks on Accessibility Link$")
-     public void the_user_clicks_on_Accessibility_Link() throws Throwable {
-	  AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage)getLoginScenario() .getBean(PageConstants.ACQUISITION_HOME_PAGE);
-	  aquisitionhomepage.Accessibility();
+  public void the_user_clicks_on_Accessibility_Link() throws Throwable {
+  AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage)getLoginScenario() .getBean(PageConstants.ACQUISITION_HOME_PAGE);
+  aquisitionhomepage.Accessibility();
 }
 
 
@@ -697,8 +697,55 @@ public class GlobalComponentsCommonStepDefinition {
 		  
 		  
 	  }
+	  @Then("^the user check Still have a question$")
+	  public void the_user_check_Still_have_a_question() {
+		  LearnAboutMedicareHomePage learnAboutMedicareHomePage=(LearnAboutMedicareHomePage)getLoginScenario().getBean(PageConstants.LEARN_ABOUT_MEDICARE_PAGE);
+		  learnAboutMedicareHomePage.chechStillHaveQues();
+	  }
+	  
+	  @Then("^the user clicks on View all disclaimer information link in footer$")
+	  public void clicks_on_View_all_disclaimer_information_link() {
+		  AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage)getLoginScenario() .getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		  aquisitionhomepage.clickViewDisclaimerInfoLink();
+	  }
+
+	  @Then("^the user validate links in disclaimer information section$")
+	  public void the_user_validate_links_in_disclaimer_information_section() {
+		  AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage)getLoginScenario() .getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		  aquisitionhomepage.checkLinkContact("english");
+		  aquisitionhomepage.checkLinkContact("spanish");
+		  aquisitionhomepage.checkLinkContact("chinese");
+		 
+	  }
+	  
+	  @Then("^the user clicks on Hide all disclaimer information link in footer$")
+	   public void clicks_on_Hide_all_disclaimer_information_link() {
+			  AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage)getLoginScenario() .getBean(PageConstants.ACQUISITION_HOME_PAGE);
+			  aquisitionhomepage.clickHideDisclaimerInfoLink();
+	  }
+	  
+	  @Then("^the user clicks on Complaint Form link in footer$")
+	  public void the_user_clicks_on_Complaint_Form_link() {
+		  AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage)getLoginScenario() .getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		  aquisitionhomepage.clickComplaintFormLink();
+	  }
+	  
+	  @Then("^user select state for geotargeting from global footer on homepage$")
+	  public void user_select_state_for_geotargeting_on_homepage(){
+		  AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage)getLoginScenario() .getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		  aquisitionhomepage.selectStateForGeotargeting();
+	  }
+	  
+	  @Then("^the user validates Language assistance links$")
+	  public void the_user_validates_Language_assistance_links() {
+		  AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage)getLoginScenario() .getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		  aquisitionhomepage.validateAssistancelink("English");
+		  aquisitionhomepage.validateAssistancelink("Spanish");
+		  aquisitionhomepage.validateAssistancelink("Chinese");
+	  }
+	 
+
 	 
 	  
-
 }
 

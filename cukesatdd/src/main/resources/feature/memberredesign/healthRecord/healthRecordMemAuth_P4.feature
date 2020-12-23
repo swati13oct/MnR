@@ -25,13 +25,13 @@ Feature: 1.24.1.d Member Individual Health Record - Member Auth - P4 - HealthAnd
     @memAuth_no_ihr_p4_ship_exclude
     Examples: 
 	    | index | FID     | username  | password  | MemUserName             | planType                 | memberType         | expectLink  | 
-	    | 01    | F424804 | qavgogine | qavgogine | q4_Ship_013      | SHIP_MEDICARE SUPPLEMENT | NO_IHR             | false       |
+	    | 01    | F424804 | qavgogine | qavgogine | q4_Ship_ANOC_009      | SHIP_MEDICARE SUPPLEMENT | NO_IHR             | false       |
 	    | 02    | F424804 | qavgogine | qavgogine | q2_may_rally032         | MA                       | EXCLUDE_IHR        | false       |
 
     @memAuth_no_ihr_p4_shipCombo
     Examples: 
 	    | index | FID     | username  | password  | MemUserName             | planType                 | memberType         | expectLink | 
-	    | 03    | F424804 | qavgogine | qavgogine | q3_sep_UAT4_AARP273     | SHIP_MEDICARE SUPPLEMENT | COMBO_PDP_SHIP_IHR | false      |
+	    | 03    | F424804 | qavgogine | qavgogine | q4_ShipVAS_005     | SHIP_MEDICARE SUPPLEMENT | COMBO_PDP_SHIP_IHR | false      |
 	 #  | 04    | F424804 | qavgogine | qavgogine | Dream_EOB_PDP_001       | SHIP_MEDICARE SUPPLEMENT | COMBO_SHIP_PDP_IHR | false      |
 	    | 04    | F424804 | qavgogine | qavgogine | GENARO_Q4_COMBO         | SHIP_MEDICARE SUPPLEMENT | COMBO_SHIP_MAPD_IHR | false      |
 
@@ -76,7 +76,7 @@ Feature: 1.24.1.d Member Individual Health Record - Member Auth - P4 - HealthAnd
     @memAuth_ihr_p4_fedShipCombo_shipFedCombo
     Examples: 
 	    | index | FID     | username  | password  | MemUserName             | planType | memberType         | expectLink | 
-	    | 15    | F424804 | qavgogine | qavgogine | q3_sep_UAT4_AARP273     | PDP      | COMBO_PDP_SHIP_IHR | true       |
+	    | 15    | F424804 | qavgogine | qavgogine | q4_ShipVAS_005     | PDP      | COMBO_PDP_SHIP_IHR | true       |
 	    | 16    | F424804 | qavgogine | qavgogine | GENARO_Q4_COMBO         | MAPD       | COMBO_SHIP_MAPD_IHR  | true       |
 
     @memAuth_ihr_p4_medica_pcp

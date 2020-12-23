@@ -99,13 +99,13 @@ Feature: 1.06.2.1 Member Plans and Documents - section: header -and- My Document
 	@memAuth_active_ship
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | md_sd | eob_sd | eob_m | eob_d | rm_sd |
-      | 19-019 | 15119,15304 | qavgogine | qavgogine | q4_Ship_013    | SHIP     | IND_EFF_PDnR          | false | true   | true  | false | false |
+      | 19-019 | 15119,15304 | qavgogine | qavgogine | q4_Ship_ANOC_009    | SHIP     | IND_EFF_PDnR          | false | true   | true  | false | false |
       | 20-115 | 15119,15304 | qavgogine | qavgogine | q4_Ship_014    | SHIP     | MULTI_IND_EFF_PDnR    | false | true   | true  | false | false |
 
 	@memAuth_preeffective_ship
 	Examples: 
       | index  | TID         | username  | password  | MemUserName         | planType | memberType            | md_sd | eob_sd | eob_m | eob_d | rm_sd |
-      | 21-121 | xxxxx       | qavgogine | qavgogine | shipPreeffective707 | SHIP     | IND_PREEFF_PDnR       | false | false  | false | false | false |
+      | 21-121 | xxxxx       | qavgogine | qavgogine | q4_Ship_013 | SHIP     | IND_PREEFF_PDnR       | false | false  | false | false | false |
 
 
     

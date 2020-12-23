@@ -12,7 +12,7 @@ Feature: S1.1 To test Member Auth Sign for SSO Micro App.
 
     Examples: 
       | username | password | member                               | Scenario                                                                        |
-      | jkuma14  | Brock@04 | skho@roadrunner.com                  | Scenario 1:  Search with member username : Federal Individual MAPD Member- NICE |
+      | jkuma14  | Brock@04 | KEVINC1234                           | Scenario 1:  Search with member username : Federal Individual MAPD Member- NICE |
       | jkuma14  | Brock@04 | Pramila1946                          | Scenario 2a: Search using username – SHIP Member                                |
       | jkuma14  | Brock@04 | marylamb823                          | Scenario 3: Search using username – PCP Plan Member                             |
 
@@ -28,7 +28,7 @@ Feature: S1.1 To test Member Auth Sign for SSO Micro App.
 
     Examples: 
       | username | password | member                               | Scenario                                                                        |
-      | jkuma14  | Brock@04 | SUSICHAPMAN@GMAIL.COM                | Scenario 4: Search using username – Medica Plan Member                          |
+      | jkuma14  | Brock@04 | SWHITE33436                          | Scenario 4: Search using username – Medica Plan Member                          |
       | jkuma14  | Brock@04 | erbenoit56                           | Scenario 5: Search using username – Terminated<12                               |
       | jkuma14  | Brock@04 | Enri12                               | Scenario 6: Search using username – Pre-effective                               |
 
@@ -45,8 +45,8 @@ Feature: S1.1 To test Member Auth Sign for SSO Micro App.
     Examples: 
       | username | password | member                               | Scenario                                                                        |
       | jkuma14  | Brock@04 | 6b8691ed-7b30-4673-9dd6-54a8acc66129 | Scenario 7: Search using username – UUID                                        |
-      | jkuma14  | Brock@04 | sandrakaye86                         | Scenario 8: Search using legacy username                                        |
-
+      #| jkuma14  | Brock@04 | sandrakaye86                         | Scenario 8: Search using legacy username                                        |
+      #commented the scenario out as legacy member signin will not work
   @regressionMemberPROD4
   Scenario Outline: Scenario- <Scenario> - Test Case_To test single signon using member auth - Search using memberid and dob
     Given the user is on member auth login flow page
@@ -95,7 +95,7 @@ Feature: S1.1 To test Member Auth Sign for SSO Micro App.
 
     Examples: 
       | username | password | member                               | Scenario                                                                        |
-      | jkuma14  | Brock@04 | sandrakaye86                         | Scenario 8: Search using legacy username                                        |
+      | jkuma14  | Brock@04 | Yjl1007                              | Scenario 8: Search using legacy username                                        |
       
 @sanityMemberPROD2
   Scenario Outline: Scenario- <Scenario> - Test Case_To test single signon using member auth - Search using memberid and dob

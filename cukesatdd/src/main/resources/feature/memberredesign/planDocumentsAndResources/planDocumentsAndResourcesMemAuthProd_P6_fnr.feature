@@ -64,17 +64,17 @@ Feature: 1.06.6.2 Member Plans and Documents - section: Forms And Resources - Me
 #	@prod_terminated_mapd
 #	Examples: 
 #      | index  | TID         | username  | password  | MemUserName     | planType | memberType            | fnr_sd | fnr_pdmo | fnr_ppi | fnr_rf | fnr_af | fnr_maf | fnr_or | fnr_di |
-#      | 07-101 | xxxxx       | kkumard  | tnps459#  | BEVERLY_BOB5    | MAPD     | IND_TERM_PDnR         | true   | true     | true    | true   | true   | true    | true   | true   | 
+#      | 07-101 | xxxxx       | kkumard  | tnps459#  | Patkeving    | MAPD     | IND_TERM_PDnR         | true   | true     | true    | true   | true   | true    | true   | true   | 
 
 	@prod_active_ma_ind @prod_active_ma
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | fnr_sd | fnr_pdmo | fnr_ppi | fnr_rf | fnr_af | fnr_maf | fnr_or | fnr_di |
-      | 09-104 | 15129       | kkumard  | tnps459#  | haradaty32   | MA       | AARP_IND_EFF_PDnR     | true   | false    | true    | true   | true   | false   | true   | true   |
+      | 09-104 | 15129       | kkumard  | tnps459#  | ssmhi1   | MA       | AARP_IND_EFF_PDnR     | true   | false    | true    | true   | true   | false   | true   | true   |
 
 	@prod_active_ma_grp @prod_active_ma
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | fnr_sd | fnr_pdmo | fnr_ppi | fnr_rf | fnr_af | fnr_maf | fnr_or | fnr_di |
-      | 10-105 | 15130       | kkumard  | tnps459#  | 1GIRL4DEAN    | MA       | GROUP_EFF_PDnR        | true   | false    | false   | true   | true   | false   | true   | true   |
+      | 10-105 | 15130       | kkumard  | tnps459#  | ExDesertrat    | MA       | GROUP_EFF_PDnR        | true   | false    | false   | true   | true   | false   | true   | true   |
 #      | 10-105 | 15130       | kkumard  | tnps459#  | SPENCEPR1    | MA       | NICE_GROUP_EFF_PDnR        | true   | false    | false   | true   | true   | false   | true   | true   |
 
 	@prod_active_mapd_ind @prod_active_mapd
@@ -92,17 +92,17 @@ Feature: 1.06.6.2 Member Plans and Documents - section: Forms And Resources - Me
 	@prod_active_pcp
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | fnr_sd | fnr_pdmo | fnr_ppi | fnr_rf | fnr_af | fnr_maf | fnr_or | fnr_di |
-      | 14-109 | 15128       | kkumard  | tnps459#  | BATLLOT@AOL.COM    | PCP      | IND_EFF_PDnR       | true   | true     | true    | true   | true   | true    | true   | true   | 
+      | 14-109 | 15128       | kkumard  | tnps459#  | SOFYABAKMAN@MSN.COM    | PCP      | IND_EFF_PDnR       | true   | true     | true    | true   | true   | true    | true   | true   | 
 
 	@prod_active_medica
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | fnr_sd | fnr_pdmo | fnr_ppi | fnr_rf | fnr_af | fnr_maf | fnr_or | fnr_di |
-      | 15-110 | 15128       | kkumard  | tnps459#  | SUSICHAPMAN@GMAIL.COM    | MEDICA   | IND_EFF_PDnR | true   | true     | true    | true   | true   | true    | true   | true   | 
+      | 15-110 | 15128       | kkumard  | tnps459#  | TCZUNIGA52    | MEDICA   | IND_EFF_PDnR | true   | true     | true    | true   | true   | true    | true   | true   | 
 
 	@prod_active_pdp_ind @prod_active_pdp
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | fnr_sd | fnr_pdmo | fnr_ppi | fnr_rf | fnr_af | fnr_maf | fnr_or | fnr_di |
-      | 16-111 | 15126,15127 | kkumard  | tnps459#  | nawal1215    | PDP      | AARP_IND_EFF_PDnR     | true   | true     | true    | true   | true   | true    | true   | true   | 
+      | 16-111 | 15126,15127 | kkumard  | tnps459#  | PWINSAUER51    | PDP      | AARP_IND_EFF_PDnR     | true   | true     | true    | true   | true   | true    | true   | true   | 
 
 	@prod_active_pdp_grp @prod_active_pdp
 	Examples: 
