@@ -606,29 +606,59 @@ public class PaymentHistoryPage extends UhcDriver {
 	@FindBy(xpath = "(//button[contains(text(),'Learn about ways to pay ')])[2]")
 	private WebElement Learnaboutwaystopaylink;
 
+	@FindBy(xpath = "(//button[contains(text(),'Learn about ways to pay ')])[3]")
+	private WebElement LearnaboutwaystopaylinkShip;
+	
 	@FindBy(xpath = "//div[@id='ways-to-pay-content-1']")
 	private WebElement LearnaboutwaystopayToolTip;
+	
+	@FindBy(xpath = "//div[@id='ways-to-pay-content-2']")
+	private WebElement LearnaboutwaystopayToolTipShip;
 
 	@FindBy(xpath = "//div[@id='ways-to-pay-content-1']//a[@class='link link--icon-right link--icon-circled align-right moreInfocloseIcon'][contains(text(),'Close')]")
 	private WebElement LearnaboutwaystopayCloseBtn;
+	
+	@FindBy(xpath = "//div[@id='ways-to-pay-content-2']//a[@class='link link--icon-right link--icon-circled align-right moreInfocloseIcon'][contains(text(),'Close')]")
+	private WebElement LearnaboutwaystopayCloseBtnShip;
 
 	@FindBy(xpath = "//button[contains(text(),'Learn More About Your Billing History ')]")
 	private WebElement LearnMoreAboutYourBillingHistorylink;
+	
+	@FindBy(xpath = "(//button[contains(text(),'Learn About Billing History')])[1]")
+	private WebElement LearnMoreAboutYourBillingHistorylinkShip;
+	
 
 	@FindBy(xpath = "//div[@id='b-history-content-0']")
 	private WebElement LearnMoreAboutYourBillingHistoryToolTip;
 
+	@FindBy(xpath = "//div[@id='b-history-content-1']")
+	private WebElement LearnMoreAboutYourBillingHistoryToolTipShip;
+	
+	
 	@FindBy(xpath = "//div[@id='b-history-content-0']//a[@class='link link--icon-right link--icon-circled align-right moreInfocloseIcon'][contains(text(),'Close')]")
 	private WebElement LearnMoreAboutYourBillingHistoryCloseBtn;
+	
+	@FindBy(xpath = "//div[@id='b-history-content-1']//a[@class='link link--icon-right link--icon-circled align-right moreInfocloseIcon'][contains(text(),'Close')]")
+	private WebElement LearnMoreAboutYourBillingHistoryCloseBtnShip;
 
 	@FindBy(xpath = "//button[contains(text(),'Learn More About Your Payment History ')]")
 	private WebElement LearnMoreAboutYourPaymentHistorylink;
+	
+	@FindBy(xpath = "(//button[contains(text(),'Learn About Payments History ')])[1]")
+	private WebElement LearnMoreAboutYourPaymentHistorylinkShip;
 
 	@FindBy(xpath = "//div[@id='p-history-content-0']")
 	private WebElement LearnMoreAboutYourPaymentHistoryToolTip;
 
+	
+	@FindBy(xpath = "//div[@id='p-history-content-1']")
+	private WebElement LearnMoreAboutYourPaymentHistoryToolTipShip;
+	
 	@FindBy(xpath = "//div[@id='p-history-content-0']//a[@class='link link--icon-right link--icon-circled align-right moreInfocloseIcon'][contains(text(),'Close')]")
 	private WebElement LearnMoreAboutYourPaymentHistoryCloseBtn;
+	
+	@FindBy(xpath = "//div[@id='p-history-content-1']//a[@class='link link--icon-right link--icon-circled align-right moreInfocloseIcon'][contains(text(),'Close')]")
+	private WebElement LearnMoreAboutYourPaymentHistoryCloseBtnShip;
 	
 	@FindBy(xpath = "//table[@id='resultscount_0']")
 	private WebElement billingTable;
@@ -2391,9 +2421,11 @@ try {
 	System.err.println("Print payment History and download button are not displaying"); 
 	Assert.fail("Print payment History and download button are not displaying");	}
 }
-public void billingPaymentHistorytoolTipsValidation() throws InterruptedException {
+public void billingPaymentHistorytoolTipsValidation(String userType) throws InterruptedException {
 	Thread.sleep(5000);
 	TestHarness.checkForIPerceptionModel(driver);
+	
+	if(userType.equalsIgnoreCase("Federal")) {
 	System.out.println("Validate Learn Moreh About Ways To Pay pop-up");
 	if(Learnaboutwaystopaylink.isDisplayed()) {
 		Learnaboutwaystopaylink.click() ;
@@ -2442,7 +2474,58 @@ public void billingPaymentHistorytoolTipsValidation() throws InterruptedExceptio
 		System.err.println("Learn More About Your Payment History popup is failing"); 
 		Assert.fail("Learn More About Your Payment History popup is failing");
 
+	}}
+	
+	else if(userType.equalsIgnoreCase("Ship")) {
+		System.out.println("Validate Learn Moreh About Ways To Pay pop-up");
+	if(LearnaboutwaystopaylinkShip.isDisplayed()) {
+		LearnaboutwaystopaylinkShip.click() ;
+		Thread.sleep(2000);
+		Assert.assertTrue("Learn More About Ways To Pay pop-up is displaying", LearnaboutwaystopayToolTipShip.isDisplayed());
+		LearnaboutwaystopayCloseBtnShip.click();
+		Thread.sleep(2000);
+		Assert.assertTrue("Learn More About Ways To Paylabel is displaying", LearnaboutwaystopaylinkShip.isDisplayed());
+		System.out.println("Learn More About Ways To Pay tip is displaying successfully");
 	}
+	else {
+		System.err.println("Learn More About Ways To Pay popup is failing "); 
+		Assert.fail("Learn More About Ways To Pay popup is failing ");
+
+	}
+	System.out.println("Validate Learn More About Your Billing History pop-up ");
+	JavascriptExecutor jse = (JavascriptExecutor)driver;
+	jse.executeScript("arguments[0].scrollIntoView()", LearnMoreAboutYourBillingHistorylinkShip);
+	if(LearnMoreAboutYourBillingHistorylinkShip.isDisplayed()) {
+		LearnMoreAboutYourBillingHistorylinkShip.click() ;
+		Thread.sleep(2000);
+		Assert.assertTrue("Learn More About Your Billing History pop-up is displaying", LearnMoreAboutYourBillingHistoryToolTipShip.isDisplayed());
+		LearnMoreAboutYourBillingHistoryCloseBtnShip.click();
+		Thread.sleep(2000);
+		Assert.assertTrue("Learn More About Your Billing History label is displaying", LearnMoreAboutYourBillingHistorylinkShip.isDisplayed());
+		System.out.println("Learn More About Your Billing History tool tip is displaying successfully");
+	}
+	else {
+		System.err.println("Learn More About Your Billing History popup is failing"); 
+		Assert.fail("Learn More About Your Billing History popup is failing");
+
+	}
+
+	System.out.println("Validate Learn More About Your payment History pop-up ");
+	jse.executeScript("arguments[0].scrollIntoView()", LearnMoreAboutYourPaymentHistorylinkShip);
+	if(LearnMoreAboutYourPaymentHistorylinkShip.isDisplayed()) {
+		LearnMoreAboutYourPaymentHistorylinkShip.click() ;
+		Thread.sleep(2000);
+		Assert.assertTrue("Learn More About Your Payment History pop-up is displaying", LearnMoreAboutYourPaymentHistoryToolTipShip.isDisplayed());
+		LearnMoreAboutYourPaymentHistoryCloseBtnShip.click();
+		Thread.sleep(2000);
+		Assert.assertTrue("Learn More About Your Payment History label is displaying", LearnMoreAboutYourPaymentHistorylinkShip.isDisplayed());
+		System.out.println("Learn More About Your Payment History tool tip is displaying successfully");
+	}
+	else {
+		System.err.println("Learn More About Your Payment History popup is failing"); 
+		Assert.fail("Learn More About Your Payment History popup is failing");
+
+	}}
 
 }
 public PaymentHistoryPage verifyBillingAndPaymentHistoryDisabled() throws InterruptedException {
