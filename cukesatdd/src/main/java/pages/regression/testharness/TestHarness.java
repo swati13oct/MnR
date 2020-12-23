@@ -1420,7 +1420,7 @@ public class TestHarness extends UhcDriver {
     	
     	public PharmaciesAndPrescriptionsPage navigateToPharAndPresFromTestHarnessPage() {
     		CommonUtility.checkPageIsReady(driver);
-			checkModelPopup(driver,10);//Yusufu popup handling
+			checkModelPopup(driver,30);//Yusufu popup handling
 			checkForIPerceptionModel(driver);
     		try{
     			if (noWaitValidate(testHarnessPharPresLink)) 
