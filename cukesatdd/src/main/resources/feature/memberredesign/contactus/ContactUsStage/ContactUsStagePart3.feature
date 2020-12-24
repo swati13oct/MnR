@@ -1,6 +1,11 @@
 @contactUs @velocityDashers
 Feature: 1.16 Member Contact us Page
 
+Background: Feature security flag needs to be true before ATDD script execution
+     Given First check if feature security flag is set to true
+      | Feature | UCPContactus |
+###############################Regression Scenarios Begin Here ########################################
+
   @smokeTest @ContactUs
   Scenario Outline: VBF - Verify Click to Call and email Widget section on contact us page for Federal member
     Given login with following details logins in the member portal and validate elements
