@@ -214,3 +214,37 @@ Feature: 1.10.1 DCE-REDISIGN AARP - To test Acq Visitor Profile to NEW DCE Flows
     Examples: 
       | drug1   | zipCode | site |
       | Orkambi |   90210 | UHC  |
+
+  @DCEShopperProfileAddDrugsgloablly @febRelease @febF539025
+  Scenario Outline: To verify DCE will not prompt the user to input a ZIP code from VP when plans are saved and drugs are editing globally
+    Given the user is on medicare acquisition site landing page
+      | Site | <site> |
+    When the user performs plan search using following information
+      | Zip Code        | <zipcode>       |
+      | County Name     | <county>        |
+      | Is Multi County | <isMultiCounty> |
+    And the user views the plans of the below plan type
+      | Plan Type | <plantype> |
+    Then user saves two plans as favorite
+      | Plan Type  | <plantype>  |
+      | Test Plans | <testPlans> |
+    Then user gets a create profile prompt
+    Then user click on view saved plans button
+    And user validates the added plans on new visitor profile page
+      | Test Plans | <testPlans> |
+    And the user clicks on the add drugs button to navigate to DCE Redesign on the profile page
+    Then the user validates Get Started Page
+    Then the user clicks on Build Drug List to navigate to Build Drug List Page
+    Then the user searches and adds the following Drug to Drug List
+      | DrugName | <drug1> |
+    Then the user clicks on Review Drug Costs button to Land on Drug Summary Page
+
+    @DCEShopperProfileAddDrugsGlobally_AARP @F539025
+    Examples: 
+      | site | drug1   | drug2  | plantype | testPlans                                                                 | zipcode | isMultiCounty | county          |
+      | AARP | Orkambi | Fanapt | MAPD     | AARP Medicare Advantage Plan 1 (HMO),AARP Medicare Advantage Plan 2 (HMO) |   10001 | NO            | New York County |
+
+    @DCEShopperProfileAddDrugsGlobally_UHC @F539025
+    Examples: 
+      | site | drug1   | drug2  | plantype | testPlans                                                                 | zipcode | isMultiCounty | county          |
+      | UHC  | Orkambi | Fanapt | MAPD     | AARP Medicare Advantage Plan 1 (HMO),AARP Medicare Advantage Plan 2 (HMO) |   10001 | NO            | New York County |
