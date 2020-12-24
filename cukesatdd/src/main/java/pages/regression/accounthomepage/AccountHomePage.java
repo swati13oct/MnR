@@ -4491,7 +4491,8 @@ public class AccountHomePage extends UhcDriver {
 				pharPresDashboardLinkAlternative.click();
 			 else if(validate(pharmacyPrescriptionTab)) {
 				 scrollToView(pharmacyPrescriptionTab);
-				 pharmacyPrescriptionTab.click();
+				 jsClickNew(pharmacyPrescriptionTab);
+				 //pharmacyPrescriptionTab.click();
 				}				 
 			else {
 				if (validate(shadowRootHeader)) {
@@ -4517,7 +4518,7 @@ public class AccountHomePage extends UhcDriver {
 					pnpTopMenuItemCssStr);
 			if (isPnpLink(pnpTopMenuLink.getText())) {
 				locateAndClickElementWithinShadowRoot(shadowRootHeader, pnpTopMenuItemCssStr);
-			}
+			}else
 			{
 				pnpTopMenuItemCssStr="#sticky-main-nav > div > div > div > a:nth-child(6)";
 				pnpTopMenuLink = locateElementWithinShadowRoot(shadowRootHeader,
