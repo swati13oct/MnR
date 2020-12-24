@@ -569,4 +569,7 @@ public class PlanDocumentsAndResourcesWebElements extends UhcDriver  {
 	
 	@FindBy(xpath="//div[contains(@class,'hw-program-root')]")
 	protected WebElement prevIssBody;
+	
+	@FindBy(xpath="//div[contains(@class,'desktop')]//h2[contains(text(),'Select Prior')]")
+	protected WebElement maCoverageSummaryHeader;
 }

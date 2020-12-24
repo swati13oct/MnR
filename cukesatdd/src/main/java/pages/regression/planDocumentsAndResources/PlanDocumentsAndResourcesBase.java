@@ -1091,7 +1091,8 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 					BufferedInputStream TestFile = new BufferedInputStream(TestURL.openStream());
 					PDDocument document = PDDocument.load(TestFile);
 					String PDFText = new PDFTextStripper().getText(document);
-					//keep-for-debug System.out.println("PDF text : "+PDFText);
+					//keep-for-debug 
+					System.out.println("PDF text : "+PDFText);
 					if (targetDocName.equals("Medicare Plan Appeals & Grievances Form (PDF)") 
 							|| targetDocName.equals("Medicare Plan Appeals & Grievances Form")) {
 						section_note.add("    SKIPPED - has trouble parsing this particular PDF, skip the detail validation for now");
@@ -1186,6 +1187,11 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 						&& planDocValidate(systemError)
 						&& MRScenario.environment.equalsIgnoreCase("offline")) {
 						section_note.add("    * KNOWN ISSUE - offline-prod domain got system error opening this doc '"+testInputInfoMap.get("docName")+"'");
+					} else if (targetDocName.contains("UnitedHealthcare Medicare Advantage Coverage Summaries")) {
+						if (!validate(maCoverageSummaryHeader,0)) {
+							section_note.add("    * FAILED - unable to locate page header element on the landing page for doc '"+testInputInfoMap.get("docName")+"'");
+							Assert.assertTrue("PROBLEM - unable to locate expected page text element on the landing page for doc '"+testInputInfoMap.get("docName")+"' - doc name="+targetDocName, false);
+						}
 					} else {
 						section_note.add("    * FAILED - unable to locate page header text element on the landing page for doc '"+testInputInfoMap.get("docName")+"'");
 						Assert.assertTrue("PROBLEM - unable to locate expected page text element on the landing page for doc '"+testInputInfoMap.get("docName")+"' - doc name="+targetDocName, false);
