@@ -3128,18 +3128,20 @@ public void the_user_validates_the_OLE_Submission_Details_in_GPS(DataTable arg1)
 				String email = (String) getLoginScenario().getBean(oleCommonConstants.EMAIL);
 				DetailsMap.put("Email", email.toUpperCase());
 				
-				String proposedEffectiveDate = (String) getLoginScenario().getBean(oleCommonConstants.PROPOSED_EFF_DATE);
+			/*	String proposedEffectiveDate = (String) getLoginScenario().getBean(oleCommonConstants.PROPOSED_EFF_DATE);
 				proposedEffectiveDate  = OLEGPSValidation.converttogpsDate(proposedEffectiveDate );
-				DetailsMap.put("Proposed Effective date", proposedEffectiveDate);
-				
+				DetailsMap.put("Proposed Effective date", proposedEffectiveDate);*/			
+				DetailsMap.put("Proposed Effective date", (String) getLoginScenario().getBean(oleCommonConstants.PROPOSED_EFF_DATE));
 				DetailsMap.put("Mailing Apartment Number", (String) getLoginScenario().getBean(oleCommonConstants.MAILING_APARTMENT_NUMBER));	
+				DetailsMap.put("Home Number", (String) getLoginScenario().getBean(oleCommonConstants.PRIMARY_PHONE_NUMBER));
+				DetailsMap.put("Mobile Number", (String) getLoginScenario().getBean(oleCommonConstants.MOBILE_NUMBER));
 				
-				String phoneNumber= (String) getLoginScenario().getBean(oleCommonConstants.PRIMARY_PHONE_NUMBER);
-				phoneNumber=phoneNumber.replaceAll("-", "").toUpperCase();
+			/*	String phoneNumber= (String) getLoginScenario().getBean(oleCommonConstants.PRIMARY_PHONE_NUMBER);
+				phoneNumber=phoneNumber.replaceAll("-", "");
 				DetailsMap.put("Home Number", phoneNumber);
 				String mobileNumber= (String) getLoginScenario().getBean(oleCommonConstants.MOBILE_NUMBER);
-				mobileNumber=mobileNumber.replaceAll("-", "").toUpperCase();
-				DetailsMap.put("Mobile Number", mobileNumber);
+				mobileNumber=mobileNumber.replaceAll("-", "");
+				DetailsMap.put("Mobile Number", mobileNumber);*/
 				DetailsMap.put("Email Confirmation", (String) getLoginScenario().getBean(oleCommonConstants.EMAIL_CONFIRMATION));
 				DetailsMap.put("Paperless Delivery", (String) getLoginScenario().getBean(oleCommonConstants.Go_Green));
 				
@@ -3150,9 +3152,11 @@ public void the_user_validates_the_OLE_Submission_Details_in_GPS(DataTable arg1)
 				DetailsMap.put("Authorization Address", (String) getLoginScenario().getBean(oleCommonConstants. AUTHORIZATION_ADDRESS));
 				DetailsMap.put("Authorization Apartment Suite", (String) getLoginScenario().getBean(oleCommonConstants.AUTHORIZATION_APARTMENT_SUITE));
 				DetailsMap.put("Authorization City", (String) getLoginScenario().getBean(oleCommonConstants.AUTHORIZATION_CITY));
-				String authorizationPhoneNumber= (String) getLoginScenario().getBean(oleCommonConstants.AUTHORIZATION_PHONE_NO);
+				/*String authorizationPhoneNumber= (String) getLoginScenario().getBean(oleCommonConstants.AUTHORIZATION_PHONE_NO);
 				authorizationPhoneNumber=authorizationPhoneNumber.replaceAll("-", "").toUpperCase();
-				DetailsMap.put("Authorization Phone No", authorizationPhoneNumber);
+				DetailsMap.put("Authorization Phone No", authorizationPhoneNumber);*/
+				DetailsMap.put("Authorization Phone No", (String) getLoginScenario().getBean(oleCommonConstants.AUTHORIZATION_PHONE_NO));
+				
 				String authorizationAgree = (String) getLoginScenario().getBean(oleCommonConstants.AUTHORIZATION_AGREE);
 				DetailsMap.put("Authorization Agree", authorizationAgree.toUpperCase());
 				String authorizationRelationship = (String) getLoginScenario().getBean(oleCommonConstants.AUTHORIZATION_RELATIONSHIP);

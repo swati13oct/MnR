@@ -15,8 +15,8 @@ Feature: 1.05.4 OLE common tool flow E2E CSNP
     Then the user clicks on Enroll Now for AARP site to start the OLE flow
       | Plan Name | <planName> |
     Then the user validates the Plan details on OLE
-    Then the user validates TFN in Welcome OLE Right Rail
-    #Then the user validates Learn more modal for Welcome OLE
+   Then the user validates TFN in Welcome OLE Right Rail
+    Then the user validates Learn more modal for Welcome OLE
     Then the user validates Leave OLE modal for Welcome OLE
     Then the user validates cancellation modal for Welcome OLE
     Then the user navigates to Personal Information Page
@@ -34,6 +34,13 @@ Feature: 1.05.4 OLE common tool flow E2E CSNP
       | Mailing_Zip              | <mailingzip>             |
       | Email                    | <email>                  |
       | MedicaidNumber           | <medicaidnumber>         |
+    	Then the user enters following information in Personal Information Page DSNP
+      # | Email Confirmation | <emailConfirmation> |
+     #| Go Green           | <goGreen>           |
+      | Email              | <email>             |
+      |Home Number             | <phoneno>       |
+      | Mobile Number          | <mobileno>      |   
+      | Middle Name         | <middlename>       |
     Then the user validates the Plan details in Personal Information Page OLE Right Rail
     Then the user validates the Member details dynamic display in Personal Information Page
     Then the user navigates to Medicare Information Page
@@ -55,9 +62,9 @@ Feature: 1.05.4 OLE common tool flow E2E CSNP
     Then the user validates the required fields for CSNP plans on Medicare Information Page
    		 | MedicaidNumber | <medicaidnumber> |
 #		Then the user validates the dispalyed sections for the Plan Type in Medicare Information Page
-#    Then the user answers following questions in Medicare Information Page
-#      | PDP Question      | <pdpFlag>      |
-#      | LongTerm Question | <longTermFlag> |
+    Then the user answers following questions in Medicare Information Page
+      | PDP Question      | <pdpFlag>      |
+      | LongTerm Question | <longTermFlag> |
     Then the user validates the long term questions in Medicare Information Page
     | Health Insurance Name| <healthinsurancename>  |
     |   Group Number			 | <groupnumber>          |
@@ -108,8 +115,8 @@ Feature: 1.05.4 OLE common tool flow E2E CSNP
     Then the user clicks on Submit Enrollment to complete enrollment
     # Then the user validates Plan and Member Details on Confirmation Page
     Then the user Validates Next Steps in Confirmation Page for the Plan Type.
-		Then the user validates the OLE Submission Details in GPS
-    | Plan Type | <plantype> |
+		#Then the user validates the OLE Submission Details in GPS
+    #| Plan Type | <plantype> |
 	
 	@CSNP_OLE_AARP_Future
     Examples: 
@@ -122,7 +129,7 @@ Feature: 1.05.4 OLE common tool flow E2E CSNP
     Examples: 
      Examples: 
       | TID   | PlanType |site| planyear|planYear|zipcode | isMultutiCounty | county       | plantype | planName                                              | cardtype | firstname | lastname | medicarenumber | ssnflag | partadate | partbdate | medicaidnumber | esrdflag | dob      | gender | permstreet    | permcity    | mailingaddressquestion | mailingstreet | mailingcity | mailingstate | mailingzip | email         | selectoptions                                                                                                                                                                                                                                       | optiondata              | pdpFlag | longTermFlag | riderflag | providername | provideraddress | providercity | providerzipcode | providernumber | emailConfirmation | goGreen | phoneno   | mobileno |healthinsurancename|groupnumber| membernumber|prescriptioncoveragename|pdgroupnumber|pdmembernumber|inputdataType|middlename|authorizefirstN|authorizelastN|authorizeaddress|authorizeapartment|authorizecity|authorizezip|authorizephonenumber|authorizeRelationship|authorizestate|authorizationagree|permaptno|mailingaptno|
-      | 15586 | CSNP-MBI |UHC | future  |future |  78006 | YES             | Bexar County | SNP      | UnitedHealthcare Chronic Complete (HMO C-SNP)           | MBI      | GOTTFRIED | GARRAND     | 5N69QY6ET34    | false|   09011997 |  11012002 |      431665465 | true     | 04261944 | Male   | 003 Morris Rd | Los Angeles | No                    |     123 Mcgee st          |   IRVING          | TX           |      78006 | test@test.com | Medicare Advantage Open Enrollment Period (MA OEP)/change in my Medicaid (newly got Medicaid)/Medicare (or my state)/(or my state helps pay for my Medicare premiums)/major disaster (as declared by the Federal Emergency Management Agency (FEMA) | /12202018/12202018/ / / | yes     | yes          | false    | John         | address of prov | Palmer       |           99645 |     1231231234 | NO                | NO      |1234567890|2345678901|HealthInsurance             |HI1562759    | ABC12345DEF     |PrescriptionCoverage            |PD5646136   | BCD12345EFG |Valid|              |Test_K|Test_M|122 2ND AVE|655|MINNEAPOLIS|55455|1235678901|FRIEND|MN|Agree|566|677|
+      | 15586 | CSNP-MBI |UHC | future  |future |  78006 | YES             | Bexar County | SNP      | UnitedHealthcare Chronic Complete (HMO C-SNP)           | MBI      | GOTTFRIED | GARRAND     | 5N69QY6ET32    | false|   09011997 |  11012002 |      431665465 | true     | 04261944 | Male   | 003 Morris Rd | Los Angeles | No                    |     123 Mcgee st          |   IRVING          | TX           |      78006 | test@test.com | Medicare Advantage Open Enrollment Period (MA OEP)/change in my Medicaid (newly got Medicaid)/Medicare (or my state)/(or my state helps pay for my Medicare premiums)/major disaster (as declared by the Federal Emergency Management Agency (FEMA) | /12202018/12202018/ / / | yes     | yes          | false    | John         | address of prov | Palmer       |           99645 |     1231231234 | NO                | NO      |1234567890|2345678901|HealthInsurance             |HI1562759    | ABC12345DEF     |PrescriptionCoverage            |PD5646136   | BCD12345EFG |Valid|              |Test_K|Test_M|122 2ND AVE|655|MINNEAPOLIS|55455|1235678901|FRIEND|MN|Agree|566|677|
     	| 15587 | CSNP-MBI |UHC | future  |future |  78006 | YES             | Bexar County | SNP      | UnitedHealthcare Medicare Silver (Regional PPO C-SNP)   | MBI      | GOTTFRIED | GARRAND     | 5N69QY6ET32    | false|   09011997 |  11012002 |      431665465 | true     | 04261944 | Male   | 003 Morris Rd | Los Angeles | No                    |     123 Mcgee st          |   IRVING          | TX           |      78006 | test@test.com | Medicare Advantage Open Enrollment Period (MA OEP)/change in my Medicaid (newly got Medicaid)/Medicare (or my state)/(or my state helps pay for my Medicare premiums)/major disaster (as declared by the Federal Emergency Management Agency (FEMA) | /12202018/12202018/ / / | yes     | yes           | false     | John         | address of prov | Palmer       |           99645 |     1231231234 | NO                | NO      |1234567890|2345678901|HealthInsurance             |HI1562759    | ABC12345DEF     |PrescriptionCoverage            |PD5646136   | BCD12345EFG |Valid|              |Test_K|Test_M|122 2ND AVE|655|MINNEAPOLIS|55455|1235678901|FRIEND|MN|Agree|566|677|
     	| 15588 | CSNP-MBI |UHC | future  |future |  78006 | YES             | Bexar County | SNP      | UnitedHealthcare Medicare Gold (Regional PPO C-SNP)      | MBI      | GOTTFRIED | GARRAND     | 5N69QY6ET33    | false|   09011997 |  11012002 |      431665465 | true     | 04261944 | Male   | 003 Morris Rd | Los Angeles | No                    |     123 Mcgee st          |   IRVING          | TX           |      78006 | test@test.com | Medicare Advantage Open Enrollment Period (MA OEP)/change in my Medicaid (newly got Medicaid)/Medicare (or my state)/(or my state helps pay for my Medicare premiums)/major disaster (as declared by the Federal Emergency Management Agency (FEMA) | /12202018/12202018/ / / | yes     | yes          | true     | John         | address of prov | Palmer       |           99645 |     1231231234 | NO                | NO      |1234567890|2345678901|HealthInsurance             |HI1562759    | ABC12345DEF     |PrescriptionCoverage            |PD5646136   | BCD12345EFG |Valid|              |Test_K|Test_M|122 2ND AVE|655|MINNEAPOLIS|55455|1235678901|FRIEND|MN|Agree|566|677|
     
