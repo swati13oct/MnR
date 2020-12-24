@@ -39,7 +39,7 @@ Feature: 1.06.6.2 Member Plans and Documents - section: Forms And Resources Part
 #      | 01-096 | xxxxx       | kkumard  | tnps459#  | Ranch1955    | MA       | AARP_IND_PREEFF_PDnR  | false  | false    | false   | false  | 
 #      | 02-097 | xxxxx       | kkumard  | tnps459#  | testusername    | MA       | GROUP_PREEFF_PDnR     | false  | false    | false   | false  |
 
-@abc	@prod_preeffective_mapd_3of7
+	@prod_preeffective_mapd_3of7
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | fnr_sd | fnr_pdmo | fnr_ppi | fnr_rf |
       | 03-098 | xxxxx       | kkumard  | tnps459#  | Mino77003          | MAPD     | AARP_IND_PREEFF_PDnR  | false  | false    | false   | false  |

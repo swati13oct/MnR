@@ -10,6 +10,7 @@ Feature: 1.24.2.e Member Individual Health Record - PROD - P5 - PharmacyLocator,
       | Password | <password> |
     And Member Enters the Username he wants to search
       | MemUsername | <MemUserName> |
+      | Retry | true |
     And user clicks on member to select
     And user stores test input for validations
       | Username | <MemUserName> |
@@ -39,6 +40,7 @@ Feature: 1.24.2.e Member Individual Health Record - PROD - P5 - PharmacyLocator,
       | Password | <password> |
     And Member Enters the Username he wants to search
       | MemUsername | <MemUserName> |
+      | Retry | true |
     And user clicks on member to select
     And user stores test input for validations
       | Username | <MemUserName> |
@@ -69,6 +71,7 @@ Feature: 1.24.2.e Member Individual Health Record - PROD - P5 - PharmacyLocator,
       | Password | <password> |
     And Member Enters the Username he wants to search
       | MemUsername | <MemUserName> |
+      | Retry | true |
     And user clicks on member to select
     And user stores test input for validations
       | Username | <MemUserName> |

@@ -158,7 +158,7 @@ public class PlanDocumentsAndResourcesFnRDocsHelper {
 			testInputInfoMap.put("redirectUrl", "none");
 			testInputInfoMap.put("checkDestUrl", "false");//TODO - this link hang
 			testInputInfoMap.put("switchTab", "true");
-			testInputInfoMap.put("headerText","none");
+			testInputInfoMap.put("headerText","Welcome");
 			testInputInfoMap.put("sampleBodyText","none");
 			return testInputInfoMap; 
 		}
@@ -261,8 +261,8 @@ public class PlanDocumentsAndResourcesFnRDocsHelper {
 			testInputInfoMap.put("redirectUrl", "none");
 			testInputInfoMap.put("checkDestUrl", "true");
 			testInputInfoMap.put("switchTab", "true");
-			testInputInfoMap.put("headerText","For Quality Health Plans");
-			testInputInfoMap.put("sampleBodyText","You Can Count On UnitedHealthcare");
+			testInputInfoMap.put("headerText","Choosing a health care plan may be a challenge");
+			testInputInfoMap.put("sampleBodyText","Our Quality Improvement Program");
 			return testInputInfoMap; 
 		}
 		if (docName.equals("UnitedHealthcare Medicare Advantage Coverage Summaries")) {
