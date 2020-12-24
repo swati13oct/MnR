@@ -3930,6 +3930,8 @@ public class AccountHomePage extends UhcDriver {
 		checkForIPerceptionModel(driver);
 		if (driver.getCurrentUrl().contains("/dashboard")) {
 			System.out.println("User is on dashboard page and URL is ====>" + driver.getCurrentUrl());
+			/*String cssSelector_ManagePrescription ="#dashboard > div > section.hide-mobile.vertical-layout.two-column-vertical-flex-container > div:nth-child(2) > div > div > div > div:nth-child(2) > a";
+			driver.findElement(By.cssSelector(cssSelector_ManagePrescription)).click();*/
 			ClaimsSummaryPage claimsPg=navigateToClaimsSummaryPage();
 			Assert.assertTrue("PROBLEM - unable to go to secondary page claims first", claimsPg!=null);
 			if (validate(pharPresDashboardLink)) 
