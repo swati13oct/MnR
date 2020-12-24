@@ -471,8 +471,11 @@ public class ReviewSubmitPage extends UhcDriver{
 		
 
 		validateNew(SubmitApplicationBtn);
+		scrollToView(SubmitApplicationBtn);
 		jsClickNew(SubmitApplicationBtn);
 		//SubmitApplicationBtn.click();
+		threadsleep(3000);
+		waitForPageLoadSafari();
 		CommonUtility.checkPageIsReadyNew(driver);
 		//waitforElementDisapper(By.xpath("//button[contains(@class,'confirm-button')]"), 60);
 		/*JavascriptExecutor executor = (JavascriptExecutor)driver;
@@ -530,7 +533,7 @@ public class ReviewSubmitPage extends UhcDriver{
 		String Expected_ZipCode = detailsMap.get("Zip Code");
 		String Expected_County = detailsMap.get("County");
 		String Expected_PlanPremium = detailsMap.get("Plan Premium");
-		String Medicaid_No = detailsMap.get("Medicaid");
+		String Medicaid_No = detailsMap.get("Medicaid Number");
 		String Mailing_AptNo = detailsMap.get("Mailing Apartment Number");
 		String PrimaryPhoneNumber = detailsMap.get("Home Number");
 		String MobilePhoneNumber = detailsMap.get("Mobile Phone Number");
@@ -575,7 +578,7 @@ public class ReviewSubmitPage extends UhcDriver{
 		boolean flag = true;
 		
 		String Expected_PlanYear_PlanName = Expected_PlanYear+" "+Expected_PlanName;
-		flag=validateText(PlanYear_NameDisplay,Expected_PlanYear_PlanName);
+		flag=validateTextPlanName(PlanYear_NameDisplay,Expected_PlanYear_PlanName);
 		String Zip = "ZIP: "+Expected_ZipCode;
 		flag&=validateText(PlanZipDisplay,Zip);
 		flag&=validateText(FirstNameDisplay,FirstName);
@@ -585,7 +588,9 @@ public class ReviewSubmitPage extends UhcDriver{
 		flag&=validateText(MedicareClaimNumberDisplay,MedicareNumber);
 		flag&=validateText(PartADisplay,PartAeffectiveDate);
 		flag&=validateText(PartBDisplay,PartBeffectiveDate);
+		if(Expected_PlanName.contains("DSNP")) {
 		flag&=validateText(MedicaidNo,Medicaid_No);
+		}
 		flag&=validateText(MobilePhoneNo,MobilePhoneNumber);
 		flag&=validateText(PrimaryPhoneNo,PrimaryPhoneNumber);
 		//flag&=validateText(EmailConfirmationNo,EmailConfirmationNumber);
@@ -684,11 +689,25 @@ public class ReviewSubmitPage extends UhcDriver{
 				actualText=actualText.replaceAll("-", "");
 			}
 			
-		result&=actualText.equalsIgnoreCase(expectedValue);
+				result&=actualText.equalsIgnoreCase(expectedValue);
 		//result&=actualText.contains(expectedValue);
 		System.out.println(expectedValue +" "+element.getText()+" "+result);
 		if(!result) {
 			System.out.println("Review and Submit Pages validation failed for -----------------------" +" "+element.getText());
+		}
+		}
+		return result;
+	}
+	
+	public boolean validateTextPlanName(WebElement element,String expectedValue) {
+		boolean result = true;
+		if(!StringUtils.isEmpty(expectedValue)) {
+			String actualText = element.getText().trim();
+				result&=actualText.equalsIgnoreCase(expectedValue);
+		
+		System.out.println(expectedValue +" "+element.getText()+" "+result);
+		if(!result) {
+			System.out.println("Review and Submit Pages validation failed for PlanName-----------------------" +" "+element.getText());
 		}
 		}
 		return result;

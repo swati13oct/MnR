@@ -119,6 +119,7 @@ public class ProposedEffectiveDatePage extends UhcDriver{
 
 		validateNew(NextBtn);
 		jsClickNew(NextBtn);
+		threadsleep(2000);
 		/*JavascriptExecutor executor = (JavascriptExecutor)driver;
 		executor.executeScript("arguments[0].click();", NextBtn);*/
 		

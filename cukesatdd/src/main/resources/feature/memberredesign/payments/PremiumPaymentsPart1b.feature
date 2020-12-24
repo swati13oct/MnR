@@ -7,7 +7,7 @@ Background: Feature security flag needs to be true before ATDD script execution
 
   #Test Case 07
   @regressionMember
-  Scenario Outline: TID: <memberType> - Test Case 07 -Verify the overPayment credit flag and verbiage
+  Scenario Outline: TID: <planType> - Test Case 07 -Verify the overPayment credit flag and verbiage
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
@@ -21,7 +21,7 @@ Background: Feature security flag needs to be true before ATDD script execution
 
   #Test Case 08
   @regressionMember
-  Scenario Outline: TID: <memberType> - Test Case 08 -Verify the overdue flag and verbiage
+  Scenario Outline: TID: <planType>- Test Case 08 -Verify the overdue flag and verbiage
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
@@ -35,7 +35,7 @@ Background: Feature security flag needs to be true before ATDD script execution
 
   #Test Case 09
   @regressionMember
-  Scenario Outline: TID: <memberType> - Test Case 09 -Verify the Paid In Full flag and verbiage
+  Scenario Outline: TID: <planType> - Test Case 09 -Verify the Paid In Full flag and verbiage
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
@@ -49,35 +49,35 @@ Background: Feature security flag needs to be true before ATDD script execution
 
   #Test Case 10
   @regressionMember
-  Scenario Outline: TID: <memberType> - Test Case 10 -Verify tool tips on overview section on the payments page
+  Scenario Outline: TID: <planType> - Test Case 10 -Verify tool tips on overview section on the payments page
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
     When the user clicks on Premium Payments on Header
     Then User validates tool tips on the payments overview page
-
+      | userType | <userType> |
     Examples: 
-      | TID     | planType | memberType      |
-      | TC10    | MAPD     | OverdueFlag     |
-      | TC10-P2 | SHIP     | SHIPOverdueFlag |
+      | TID     | planType | memberType      | userType |
+      | TC10    | MAPD     | OverdueFlag     | Federal  |
+      | TC10-P2 | SHIP     | SHIPOverdueFlag | Ship    |
 
   #Test Case 11
   @regressionMember
-  Scenario Outline: TID: <memberType> - Test Case 11 -Verify billing/Payment history table tool tips on the payments overview page
+  Scenario Outline: TID: <planType> - Test Case 11 -Verify billing/Payment history table tool tips on the payments overview page
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
     When the user clicks on Premium Payments on Header
     Then User validates billing and payment history table tool tips on the page
-
+	  | userType | <userType> |
     Examples: 
-      | TID     | planType | memberType      |
-      | TC11    | MAPD     | OverdueFlag     |
-      | TC11-P2 | SHIP     | SHIPOverdueFlag |
+      | TID     | planType | memberType      | userType |
+     | TC11    | MAPD     | OverdueFlag     | Federal  |
+     | TC11-P2 | SHIP     | SHIPOverdueFlag | Ship    |
 
   #Test Case 12
   @regressionMember
-  Scenario Outline: TID: <memberType> - Test Case 12 -Verify print billing/payment history and download payment history buttons
+  Scenario Outline: TID: <planType> - Test Case 12 -Verify print billing/payment history and download payment history buttons
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |

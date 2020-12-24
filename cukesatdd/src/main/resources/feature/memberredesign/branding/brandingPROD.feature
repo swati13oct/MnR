@@ -21,7 +21,7 @@ Feature: 1.14 Member Branding functionality
       | TID   | planType | memberType              | copayCategory | logoToBeDisplayedOnDashboard | logoToBeDisplayedOnSecondaryPage | Test Case                                             | username | password | member                |
       | 15146 | MAPD     | AARPIndividual_Branding | NON LIS       | AARP                         | dam/UCP/Images/logo/AARP.svg     | TC_01_Branding for AARP Plan member - Federal Member  | jkuma14  | Brock@04 | skho@roadrunner.com   |
       | 15147 | SHIP     | SHIPOnly_Branding       | NON LIS       | AARP                         | dam/UCP/Images/logo/AARP.svg     | TC_02_ Branding  for AARP Plan member - SHIP   Member | jkuma14  | Brock@04 | Pramila1946           |
-      | 15153 | MEDICA   | Medica_Branding         | NON LIS       | MEDICA                       | dam/UCP/Images/logo/MEDICA.svg   | TC_03_ Branding for Branding for Medica Plan member   | jkuma14  | Brock@04 | SUSICHAPMAN@GMAIL.COM |
+      | 15153 | MEDICA   | Medica_Branding         | NON LIS       | MEDICA                       | dam/UCP/Images/logo/MEDICA.svg   | TC_03_ Branding for Branding for Medica Plan member   | jkuma14  | Brock@04 | TCZUNIGA52 |
 
 
   @regressionMemberPROD2
@@ -65,8 +65,8 @@ Feature: 1.14 Member Branding functionality
       | Secondary Page Logo | <logoToBeDisplayedOnSecondaryPage> |
 
     Examples: 
-      | TID   | planType | memberType        | copayCategory | logoToBeDisplayedOnDashboard | logoToBeDisplayedOnSecondaryPage    | Test Case                            | username | password | member     |
-      | 15151 | MAPD     | TEXASERS_Branding | NON LIS       | TEXASERS                     | dam/UCP/Images/logo/TEXAS%20ERS.svg | TC_06_ Branding for Texas ERS member | jkuma14  | Brock@04 | lanecarolb |
+      | TID   | planType | memberType        | copayCategory | logoToBeDisplayedOnDashboard | logoToBeDisplayedOnSecondaryPage  | Test Case                            | username | password | member     |
+      | 15151 | MAPD     | TEXASERS_Branding | NON LIS       | TEXASERS                     | dam/UCP/Images/logo/TX-ERSNew.svg | TC_06_ Branding for Texas ERS member | jkuma14  | Brock@04 | lanecarolb |
 
   @regressionMemberPROD3
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify_<Test Case>

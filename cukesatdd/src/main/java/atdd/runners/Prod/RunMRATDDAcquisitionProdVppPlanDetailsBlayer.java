@@ -13,8 +13,8 @@ import cucumber.api.CucumberOptions;
 @RunWith(ExtendedCucumber.class)
 @ExtendedCucumberOptions(retryCount=0,screenShotSize="", screenShotLocation="/screenshots/",jsonReport = "target/cucumber-RunMRATDDAcquisitionProdVppPlanDetailsBlayer.json",detailedReport = true,
  detailedAggregatedReport = true, overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDAcquisitionProdVppPlanDetailsBlayer")
-@CucumberOptions(glue = { "atdd.framework", "acceptancetests.acquisition" }, features = { "src/main/resources/feature/acquisition/vpp/VPP_PlanDetail-UHC.feature" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionProdVppPlanDetailsBlayer.json" }, tags = { "@prodRegression" })
+@CucumberOptions(glue = { "atdd.framework", "acceptancetests.acquisition" }, features = { "src/main/resources/feature/acquisition/vpp/MicroAPP/VppPlanDetails_Common.feature" }, plugin = {
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionProdVppPlanDetailsBlayer.json" }, tags = { "@prodRegression_UHC" })
 public class RunMRATDDAcquisitionProdVppPlanDetailsBlayer { 
  
 }

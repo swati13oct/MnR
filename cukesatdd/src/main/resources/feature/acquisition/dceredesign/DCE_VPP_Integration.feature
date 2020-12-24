@@ -33,7 +33,7 @@ Feature: 1.10.3 DCE-REDESIGN- To test integration flows between DCE and VPP from
     	| Plan Type | <plantype> |
   	  | Plan Name | <planname> |
   	And the user clicks on Edit your drug list link on drug details page	  
-    And the user clicks on Edit button on Get Started page on DCE
+    And the user clicks on Edit button on Drug List page on DCE
 				| DrugName | <drug1> |
 		And the user changes the supply length
 			 |Supply Length| <supplyLength>|
@@ -49,7 +49,7 @@ Feature: 1.10.3 DCE-REDESIGN- To test integration flows between DCE and VPP from
 		And the user verifies the drug information on prescription drug tab
 				| DrugName | <drug1> |
 		And the user clicks on Edit drug on plan details page and navigates to DCE
-		And the user clicks on Remove button on Get Started page on DCE to delete drug
+		And the user clicks on Remove button on Drug List page on DCE to delete drug
 				| DrugName | <drug1> |
 		Then the user searches and adds the following Drug to Drug List
 				|DrugName| <drug2>|
@@ -60,7 +60,7 @@ Feature: 1.10.3 DCE-REDESIGN- To test integration flows between DCE and VPP from
 			 | DrugName | <drug2> |
 		Then the user click on Plan costs tab
 		And the user click on Edit Drugs Link on plan costs tab
-		And the user clicks on Edit button on Get Started page on DCE
+		And the user clicks on Edit button on Drug List page on DCE
 				| DrugName | <drug2> |
 		And the user changes the supply length
 			 |Supply Length| <supplyLength>|
@@ -73,12 +73,12 @@ Feature: 1.10.3 DCE-REDESIGN- To test integration flows between DCE and VPP from
     @DCE_Redesign_VPP_PlanSummary_Integration_MAPD_AARP
     Examples: 
       |	site	| zipcode | planyear|plantype | county | isMultutiCounty | drug1   |	drug2		| planname                                           |supplyLength|
-      |	AARP	|   90210 | current| MAPD     | none   | no              | Orkambi | Lipitor	|AARP Medicare Advantage SecureHorizons Focus (HMO) |Every 3 Months|
+      |	AARP	|   90210 | future	| MAPD     | none   | no              | Orkambi | Lipitor	|AARP Medicare Advantage SecureHorizons Focus (HMO) |Every 3 Months|
 
 		@DCE_Redesign_VPP_PlanSummary_MAPD_UHC
     Examples: 
       |	site	| zipcode | planyear|plantype | county | isMultutiCounty | drug1   |	drug2		|planname                                           |supplyLength|
-      |	UHC		|   90210 | current| MAPD     | none   | no              | Orkambi |	Lipitor	| AARP Medicare Advantage SecureHorizons Focus (HMO) |Every 3 Months|
+      |	UHC		|   90210 | future	| MAPD     | none   | no              | Orkambi |	Lipitor	| AARP Medicare Advantage SecureHorizons Focus (HMO) |Every 3 Months|
        
      
     Scenario Outline: To test the NBA - to -DCE Redesign flow for PlanType :  <plantype> from vpp Plan Summary
@@ -115,5 +115,5 @@ Feature: 1.10.3 DCE-REDESIGN- To test integration flows between DCE and VPP from
    @VPP_NBA_DCE_Redesign_Integration_AARP   
    Examples: 
       |	site	| zipcode | planyear	|	plantype | county | isMultutiCounty |	planname																													|	drug1		|
-      |	AARP	|   10001 | current		| MAPD     | none   | no              | UnitedHealthcare Medicare Advantage Choice Plan 1 (Regional PPO)	|	Orkambi	|
+      |	AARP	|   10001 | future		| MAPD     | none   | no              | UnitedHealthcare Medicare Advantage Choice Plan 1 (Regional PPO)	|	Orkambi	|
       

@@ -20,6 +20,7 @@ import cucumber.api.java.en.When;
 import gherkin.formatter.model.DataTableRow;
 import pages.acquisition.commonpages.AcquisitionHomePage;
 import pages.acquisition.commonpages.PlanDetailsPage;
+import pages.acquisition.commonpages.PrescriptionsProvidersBenefitsPage;
 import pages.acquisition.commonpages.ProviderSearchPage;
 import pages.acquisition.commonpages.VPPPlanSummaryPage;
 //import pages.acquisition.commonpages.VPPTestHarnessPage;
@@ -255,6 +256,29 @@ public class ProviderSearchCommonStepDefinition {
 			Assert.fail("Error Loading Rally tool from Home Page");
 		}
 	}
+	
+	@When("^the user click on Provider Search on the Benefit Page$")
+	public void providerSearch_details_in_aarp_site_from_BenefitPage() {
+		
+		PrescriptionsProvidersBenefitsPage benefitsPage= (PrescriptionsProvidersBenefitsPage)getLoginScenario().getBean(PageConstants.PRESCRIPTION_PROVIDER_BENEFITS_PAGE);
+		
+		ProviderSearchPage providerSearchPage = benefitsPage.clicksOnRallyToolFromMedEdPage();
+
+		if (providerSearchPage != null) {
+			getLoginScenario().saveBean(PageConstants.PROVIDER_SEARCH_PAGE, providerSearchPage);
+		} else {
+			Assert.fail("Error Loading Rally tool from Home Page");
+		}
+	}
+	
+	@Then("user go back to MedEd page from Rally tool")
+	public void user_go_back_to_MedEd_page() {  
+		ProviderSearchPage providerSearchPage = (ProviderSearchPage) getLoginScenario()
+				.getBean(PageConstants.PROVIDER_SEARCH_PAGE);
+		
+		AcquisitionHomePage acquisitionHomePage=providerSearchPage.returnToAcqHomePage();
+	
+	}
 //	
 //	@When("^user selects a provider and retuns to TestHarness page for AARP$")
 //	public void user_selects_a_provider_and_retuns_to_TestHarness_page_for_AARP() {
@@ -382,6 +406,12 @@ public class ProviderSearchCommonStepDefinition {
 		}
 	}
 
+	@Then("^user should be redirected to Provider search Rally page$")
+	public void user_should_be_redirected_to_Provider_search_Rally_page() throws Throwable {
+		ProviderSearchPage providerSearchPage = (ProviderSearchPage) getLoginScenario()
+				.getBean(PageConstants.PROVIDER_SEARCH_PAGE);
+		providerSearchPage.verifyProviderSearchRallyPageDisplayed();
+	}
 
 	}
 

@@ -45,7 +45,7 @@ Feature: 1.09 Member Health and Wellness Page
     @healthAndWellness01_fedShipCombo_shipFedCombo
     Examples: 
       | TID   | planType          | memberType        | hasReward | hasRenewActive |
-      | 15343 | FED_SHIP_COMBO    | RewardsMember     | false     | true           |
+      | 15343 | FED_SHIP_COMBO    | RewardsMember     | false     | false          |
       | 15343 | SHIP_FED_COMBO    | RewardsMember     | true      | true           |
  
   @healthAndWellness02_uhcDeeplink

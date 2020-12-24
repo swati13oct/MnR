@@ -274,13 +274,16 @@ public class PlanDocumentsAndResourcesPD extends PlanDocumentsAndResourcesBase  
 	 * Validate jumplink for Provider And Pharmacy Directories (MAPD) or Pharmacy Directory (PDP) or Provider Directory (MA)
 	 * @param sectionDisplay
 	 */
-	public void validateJumplink_PD(boolean sectionDisplay) {
+	public void validateJumplink_PD(boolean sectionDisplay, String memberType) {
 		String item="Provider And Pharmacy Directories";
 		WebElement sectionElement=sectionHeader_PD;
 		WebElement jumpLinkElement=jumpLink_PD;
 		
 		if (sectionDisplay) {
-			Assert.assertTrue("PROBLEM - unable to locate jumplink for '"+item+"'", planDocValidate(jumpLinkElement));
+			if (memberType.contains("PREEFF"))
+				Assert.assertTrue("PROBLEM - KNOWN ISSUE - INC19115934 - unable to locate jumplink for '"+item+"'", planDocValidate(jumpLinkElement));
+			else
+				Assert.assertTrue("PROBLEM - unable to locate jumplink for '"+item+"'", planDocValidate(jumpLinkElement));
 			jumpLinkElement.click();
 			CommonUtility.waitForPageLoad(driver, sectionElement, 5);
 			Assert.assertTrue("PROBLEM - unable to locate section for '"+item+"' after clicking jumplink", planDocValidate(sectionElement));

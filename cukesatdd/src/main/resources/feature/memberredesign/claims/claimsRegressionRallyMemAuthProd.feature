@@ -28,37 +28,37 @@ Feature: 1.12.2 Member Rally claims - Member Auth - PROD
     @prod_rallyClaims01_ma
     Examples: 
       | TID   | username   | password  | MemUserName  | planType | memberType          | claimSystem    |
-      | 15234 | kkumard   | mnrs786@  | haradaty32   | MA       | UHC_Individual      | COSMOS_CLAIMS   |
+      | 15234 | kkumard    | tnps459#  | ssmhi1       | MA       | UHC_Individual      | COSMOS_CLAIMS   |
       
    @prod_rallyClaims01_ma             @claims_prodsanityMA_Group
      Examples: 
       | TID   | username   | password  | MemUserName  | planType | memberType          | claimSystem     |
-      | xxxxx | kkumard   | mnrs786@  | ExDesertrat    | MA       | UHC_GROUP           | COSMOS_CLAIMS   | 
+      | xxxxx | kkumard    | tnps459#  | ExDesertrat  | MA       | UHC_GROUP           | COSMOS_CLAIMS   | 
    
 
     @prod_rallyClaims01_medica_pcp          @claims_prodsanityPcp
     Examples: 
-      | TID   | username   | password  | MemUserName  | planType | memberType          | claimSystem     | 
-      | 15268 | kkumard   | mnrs786@  | BATLLOT@AOL.COM | PCP   | Individual          | COSMOS_CLAIMS   | 
+      | TID   | username   | password  | MemUserName        | planType | memberType          | claimSystem     | 
+      | 15268 | kkumard    | tnps459#  | SOFYABAKMAN@MSN.COM| PCP   | Individual          | COSMOS_CLAIMS   | 
 
     @prod_rallyClaims01_mapd
     Examples: 
       | TID   | username   | password  | MemUserName  | planType | memberType          | claimSystem     | 
-      | xxxxx | kkumard   | mnrs786@  | Andersonga1@Bellsouth.Net | MAPD  | UHC_GROUP | COSMOS_CLAIMS   | 
+      | xxxxx | kkumard   | tnps459#  | Andersonga1@Bellsouth.Net | MAPD  | UHC_GROUP | COSMOS_CLAIMS   | 
       
    @prod_rallyClaims01_mapd      @claims_prodsanityMapd_Individual
      Examples:   
        | TID   | username   | password  | MemUserName  | planType | memberType          | claimSystem     | 
-      | 15230 | kkumard   | mnrs786@  | BILL.ROSNER123# | MAPD  | AARP_Individual     | COSMOS_CLAIMS   |
+      | 15230 | kkumard   | tnps459#  | kirit1976 | MAPD  | AARP_Individual     | COSMOS_CLAIMS   |
 
     @prod_rallyClaims01_ship @claims_prodsanityShip
     Examples: 
       | TID   | username   | password  | MemUserName  | planType | memberType          | claimSystem     | 
-      | 15236 | kkumard   | mnrs786@  | vernajohnson19651  | SHIP     | Individual          | COMPASS_CLAIMS  | 
+      | 15236 | kkumard   | tnps459#  | tntparents82  | SHIP     | Individual          | COMPASS_CLAIMS  | 
 
     @prod_rallyClaims01_pdp
     Examples: 
       | TID   | username   | password  | MemUserName  | planType | memberType          | claimSystem     | 
-      | 15299 | kkumard   | mnrs786@  | nawal1215    | PDP      | Individual          | RX_CLAIMS       | 
-      | 15300 | kkumard   | mnrs786@  | MON48DA      | PDP      | GROUP               | RX_CLAIMS       | 
+      | 15299 | kkumard   | tnps459#  | Branford910    | PDP      | Individual          | RX_CLAIMS       | 
+      | 15300 | kkumard   | tnps459#  | LeanoraF      | PDP      | GROUP               | RX_CLAIMS       | 
   #----- end of Non Regression claims scenarios section ------------------------

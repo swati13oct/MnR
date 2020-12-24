@@ -45,3 +45,22 @@ Then the user fills the form out and submits the agent appointment application
 Examples: 
 | TCID    | firstName 	   | lastName | state |
 | F266872 | CHRISTINE      | LEE      | CA    | 
+
+@Request_Agent_Appointment_Right_Rail_AARP
+  Scenario Outline: UID: <UID> - To Test Request Agent Appointment E2E on AARP site
+    Given the user is on AARP medicare acquisition site landing page
+    When the user performs plan search using following information in the AARP site
+      | Zip Code        | <zipcode>         |
+    And the user view below plans on vpp page and matches plan count for all plans
+    |Medicare Advantage (Part C) plans|
+	|Medicare Supplement Insurance plans| 
+	|Medicare Prescription Drug (Part D) plans|
+	|Medicare Special Needs plans|
+    Then the user clicks on View plan details link for each plan type and validate find agent link for all plans 
+    |Medicare Advantage (Part C) Plans|
+	|Medicare Prescription Drug (Part D) Plans|
+	|Medicare Special Needs Plans|
+    ##
+    Examples: 
+      | UID | zipcode |
+      |     |   88009 |

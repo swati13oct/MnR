@@ -45,7 +45,7 @@ public class PlanRecommendationEngineCostPreferencesPage extends UhcDriver {
 
 	@FindBy(css = "div legend.primary-question-tex")
 	private WebElement preferencesTitle;
-	
+
 	@FindBy(css = "div legend.primary-question-tex span>sup")
 	private WebElement costPagePrimaryQuestionMark;
 
@@ -119,14 +119,10 @@ public class PlanRecommendationEngineCostPreferencesPage extends UhcDriver {
 // Selecting Cost Preference options and processed to Cost Preference Page
 
 	public void costPreferencepageFunctional(String preference) {
-		if (!(preference.isEmpty())) {
-			System.out.println("Cost Preferences Page Functional Operations");
-			costPreferencepageOptions(preference);
-			jsClickNew(continueBtn);
-			System.out.println("Validating " + page + " page Continue button functionality");
-		} else {
-			System.out.println("Cost Preferences Page Functional Operations is not needed for PDP");
-		}
+		System.out.println("Cost Preferences Page Functional Operations");
+		costPreferencepageOptions(preference);
+		jsClickNew(continueBtn);
+		System.out.println("Validating " + page + " page Continue button functionality");
 	}
 
 //Cost Preference Page Error Function Verification     
@@ -135,6 +131,10 @@ public class PlanRecommendationEngineCostPreferencesPage extends UhcDriver {
 		System.out.println("Cost Preference type is not selected - Error Scenario in Cost Preference Page");
 		jsClickNew(continueBtn);
 		desktopCommonUtils.desktopErrorValidation(page);
+	}
+
+	public void edit_cost(String preference) {
+		costPreferencepageOptions(preference);
 	}
 
 }

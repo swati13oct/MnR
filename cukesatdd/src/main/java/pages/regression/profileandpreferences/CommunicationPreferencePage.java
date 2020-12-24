@@ -76,6 +76,8 @@ public class CommunicationPreferencePage extends CommunicationPreferenceWebEleme
 	}
 
 	public boolean changeAndVerifyOnlinePreference() {
+		
+		
 		driver.switchTo().defaultContent(); //note: make sure not on iframe first
 		CommonUtility.waitForPageLoad(driver, iframeEPMP, 15);
 		System.out.println("validating frame");
@@ -83,6 +85,10 @@ public class CommunicationPreferencePage extends CommunicationPreferenceWebEleme
 		System.out.println("frame validated");
 		driver.switchTo().frame(iframeEPMP);
 		System.out.println("switched to frame");
+		
+		//Click to expand the accordian
+          paperlessSettingsAccordian.click();
+		
 		if (!prefValidate(paperlessOptionActive)) {
 		waitTillElementClickableInTime(paperlessOptionInactive, 2);
 			paperlessOptionInactive.click();
@@ -404,7 +410,7 @@ public class CommunicationPreferencePage extends CommunicationPreferenceWebEleme
 	}
 
 	public void validateSuccessText() {
-		CommonUtility.waitForPageLoad(driver, shipSuccMsg, 5);
+		CommonUtility.waitForPageLoad(driver, shipSuccMsg, 10);
 		Assert.assertTrue("PROBLEM - unable to locate success message after submit", validate(shipSuccMsg));		
 	}
 

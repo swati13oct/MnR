@@ -73,7 +73,9 @@ public class PlanDocumentsAndResourcesFnRDocLinksHelper extends PlanDocumentsAnd
 		if (itemName.equals("Medication Prior Authorization Request Form")) {
 			return medPriorAuthReq_link_MA_FnR;
 		}
-		if (itemName.equals("Medicare Part D Coverage Determination Request Form")) {
+		//TODO - should be 'Prescription Drug' instead of 'Part D' 
+		//note: for now take both until the changes propergate to prod
+		if (itemName.equals("Medicare Part D Coverage Determination Request Form") || itemName.equals("Medicare Prescription Drug Coverage Determination Request Form")) {
 			return medPartDCovDeteReq_link_MA_FnR;
 		}
 		if (itemName.equals("Redetermination Request Form") || itemName.equals("Redetermination Request Form (PDF")) {

@@ -1,4 +1,3 @@
-
 package atdd.framework;
 
 import java.io.BufferedReader;
@@ -270,18 +269,18 @@ public class MRScenario {
 			if (environment.contains("team-ci")) {
 				csvName = "MemberRedesign-VBF-Teamci.csv";
 
-			} else if ((environment.contains("team-a")
-					|| (//(environment.equalsIgnoreCase("team-h")) || Team-h condition added separately to take username as login
-							(environment.equalsIgnoreCase("team-e"))
+			} else if ((environment.equalsIgnoreCase("team-e"))
 							|| (environment.equalsIgnoreCase("team-f")) || (environment.equalsIgnoreCase("team-g"))
-							|| (environment.equalsIgnoreCase("team-c")) || (environment.equalsIgnoreCase("team-acme")) || (environment.equalsIgnoreCase("team-voc"))|| (environment.equalsIgnoreCase("team-t") || (environment.equalsIgnoreCase("team-chargers") || (environment.equalsIgnoreCase("team-avengers-plm"))))))) {
+							|| (environment.equalsIgnoreCase("team-c")) || (environment.equalsIgnoreCase("team-acme")) 
+							|| (environment.equalsIgnoreCase("team-voc"))|| (environment.equalsIgnoreCase("team-t")) 
+							|| (environment.equalsIgnoreCase("team-chargers")) || (environment.equalsIgnoreCase("team-avengers-plm")) 
+							|| (environment.equalsIgnoreCase("chargers-qa"))) {
 				csvName = "MemberRedesign-UUID.csv";
 			} else if (tagName.equalsIgnoreCase("@MemberVBF") && environment.contains("stage")) {
 				csvName = "MemberRedesign-VBF.csv";
-			} else if (environment.equalsIgnoreCase("team-h")) {
+			} else if (environment.equalsIgnoreCase("team-h") || environment.equalsIgnoreCase("team-atest")) {
 				csvName = "UMS-Member-Type.csv";
-			}
-			/*
+			}			/*
 			 * note: Dec2018 - comment out because this section caused stage run not to use
 			 * UMS-Member-Type.csv else{ if
 			 * (tagName.equalsIgnoreCase("@benefitsAndCoverage")) { csvName =
@@ -641,7 +640,7 @@ try {
 		}else{
 		if(environment.contains("stage"))
 		domain = "uhc.com";
-		else if(environment.equals("team-atest") || environment.equals("team-e")||environment.equals("team-t")||environment.equals("team-v1")||environment.equals("team-acme")|| environment.equals("team-voc") ||environment.equals("team-acme") ||environment.contains("digital-uat") ||environment.equals("team-chargers") ||environment.contains("chargers")||environment.equals("team-avengers-plm") ||environment.contains("team-avengers-plm"))
+		else if(environment.equals("team-atest") || environment.equals("team-e")||environment.equals("team-t")||environment.equals("team-v1")||environment.equals("team-acme")|| environment.equals("team-voc") ||environment.equals("team-acme") ||environment.contains("digital-uat") ||environment.equals("team-chargers") ||environment.contains("chargers")||environment.equals("team-avengers-plm") ||environment.contains("team-avengers-plm")||environment.contains("chargers-qa"))
 		domain = "ocp-elr-core-nonprod.optum.com";
 		else if(environment.contains("mnr-acq"))
 			domain = "origin-elr-dmz.optum.com";
@@ -1030,7 +1029,6 @@ try {
 				capabilities.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
 				//System.setProperty("webdriver.chrome.driver", pathToBinary);
 				System.setProperty("webdriver.chrome.driver", "C:\\ProgramData\\Chrome_driver_80.0.3987.16\\chromedriver.exe");
-
 				webDriver = new ChromeDriver();
 				saveBean(CommonConstants.WEBDRIVER, webDriver);
 				return webDriver;
@@ -1273,10 +1271,15 @@ try {
 			//String url = "jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=dbslt0039.uhc.com)(PORT=1521))(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=gpsts14svc.uhc.com)))"; 
 			//Below is GPS UAT2 URL (enable/disable based on GPS env that you want to connect)
 			//String url = "jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=dbslt0041.uhc.com)(PORT=1521))(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=gpsts20svc.uhc.com)))"; 
+			
 			//Below is GPS UAT3 URL (enable/disable based on GPS env that you want to connect)
-			//  String url = "jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=dbslt0102)(PORT=1521))(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=gpsts18)))"; 
+			
+			//PLEASE DO NOT CHANGE THIS CODE BELOW WITHOUT INFORMING CT TEAM (JITESH AND KAPIL)  
+		
+			String url = "jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=dbslt0102)(PORT=1521))(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=gpsts18)))"; 
+			
 			//Below is GPS UAT4 URL (enable/disable based on GPS env that you want to connect)
-			String url = "jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=dbslt0103)(PORT=1521))(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=gpsts19)))"; 
+			//String url = "jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=dbslt0103)(PORT=1521))(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=gpsts19)))"; 
 						
 			con = DriverManager.getConnection(url, user, pwd);
 			System.out.println("Oracle Database Connection established**********");

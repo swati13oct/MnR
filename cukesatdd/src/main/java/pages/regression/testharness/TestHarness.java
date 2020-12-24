@@ -68,6 +68,9 @@ public class TestHarness extends UhcDriver {
 
 	@FindBy(xpath = "//table[@class='componentTable']/tbody/tr/td/a[contains(.,'EOB Search')]")
 	private WebElement eobPageLink;
+	
+	@FindBy(xpath="//a[@id='coveragebenefits_1']")
+	private WebElement preEffBenefitsTab;
 
 	@FindBy(xpath = "//table[@class='componentTable']/tbody/tr/td/a[contains(.,'Order Plan material')]")
 	private WebElement orderPlanPageLink;
@@ -256,6 +259,9 @@ public class TestHarness extends UhcDriver {
 	
 	@FindBy(xpath = "//*[contains(@id,'findcarecost')]")
 	private WebElement findCareCostTab;
+
+	@FindBy(xpath = "//*[contains(@id,'findcare') and text()='Find Care']")
+	private WebElement findCareTab;
 	
 	@FindBy(xpath="(//a[@id='pharmacies_5'])[1]")
 	private WebElement pharmaciesTab;
@@ -263,7 +269,7 @@ public class TestHarness extends UhcDriver {
 	@FindBy(xpath="//h1[contains(text(),'Pharmacies')]")
 	private WebElement pharmaciesHeader;
 	
-	@FindBy(id="healthwellness_6")
+	@FindBy(id="healthwellness_7")
 	private WebElement healthAndWellnessTab;
 	
 	@FindBy(xpath="//h1//*[contains(text(),'Health & Wellness')]")
@@ -340,7 +346,7 @@ public class TestHarness extends UhcDriver {
 			validateNew(pcpMedicaLogo);		
 		}
 		else{
-			CommonUtility.waitForPageLoad(driver, panelHome, 30);
+			CommonUtility.waitForPageLoad(driver, panelHome, 10);
 		}	
 		//validateNew(panelHome);
 		//validateNew(panelClaims);
@@ -532,6 +538,7 @@ public class TestHarness extends UhcDriver {
 	 * @return
 	 */
 	public pages.regression.benefitandcoverage.BenefitsAndCoveragePage navigateDirectToBnCPag() {
+   		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
 		JavascriptExecutor jse = (JavascriptExecutor) driver;
 		jse.executeScript("window.scrollBy(0,50)", "");
 		scrollToView(benefitsPageLink);
@@ -539,11 +546,12 @@ public class TestHarness extends UhcDriver {
 
 		CommonUtility.checkPageIsReadyNew(driver);
 		CommonUtility.waitForPageLoad(driver, heading, CommonConstants.TIMEOUT_60);
+		/* tbd 
 		try {
 			Thread.sleep(5000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
-		}
+		} */
 		System.out.println(driver.getTitle());
 		if (driver.getTitle().contains("Benefits")) {
 			return new pages.regression.benefitandcoverage.BenefitsAndCoveragePage(driver);
@@ -742,6 +750,31 @@ public class TestHarness extends UhcDriver {
 			return null;
 		} else {
 			return new EOBPage(driver);
+		}
+	}
+	
+	public PlanDocumentsAndResourcesPage navigateToEOBPageThenBenefitsTerm() {
+		CommonUtility.waitForPageLoad(driver, eobPageLink,30);
+		validateNew(eobPageLink);
+		eobPageLink.click();
+		CommonUtility.checkPageIsReadyNew(driver);
+		CommonUtility.waitForPageLoad(driver, heading, CommonConstants.TIMEOUT_60);
+		if (!(driver.getTitle().contains("Explanation of Benefits"))) {
+			Assert.fail("Unable to navigate to EOB page");
+			return null;
+		} else {
+			Assert.assertTrue("PROBLEM - unable to locate Benefits tab on top menu", validate(preEffBenefitsTab,0));
+			preEffBenefitsTab.click();
+			//try {
+			//	Thread.sleep(10000);
+			//} catch (InterruptedException e) {
+			//	e.printStackTrace();
+			//}
+			CommonUtility.checkPageIsReadyNew(driver);
+			CommonUtility.waitForPageLoad(driver, heading, CommonConstants.TIMEOUT_60);
+			System.out.println(driver.getTitle());
+			Assert.assertTrue("PROBLEM - unable to navigate to Plan Documents and Resources page via Benefits menu option for Terminated user", !driver.getTitle().contains("Benefits"));
+			return new PlanDocumentsAndResourcesPage(driver);
 		}
 	}
 	
@@ -1311,6 +1344,7 @@ public class TestHarness extends UhcDriver {
     	 * @param driver
     	 */
     	public static void checkForIPerceptionModel(WebDriver driver) {
+    		driver.manage().timeouts().implicitlyWait(1,TimeUnit.SECONDS) ;
     		int counter = 0;
     		do {
     			System.out.println("current value of counter: " + counter);
@@ -1883,5 +1917,13 @@ public class TestHarness extends UhcDriver {
 				return new DrugCostEstimatorPage(driver);
 			}
 			return null;
+		}
+		
+		public void validateFindCareTab() {
+			validateNew(findCareTab,0);
+		}
+		
+		public void validateFindCareTabNotAvailable() {
+			Assert.assertFalse("find care tab displayed when not expected", validate(findCareTab,0));			
 		}
 }

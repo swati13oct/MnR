@@ -102,7 +102,7 @@ public class BuildYourDrugList extends UhcDriver {
 
 	public void addDrugs(String drugName) {
 		EnterDrugNameTxt.sendKeys(drugName);
-		WebElement drugname = driver.findElement(By.xpath("//*[contains(@id,'"+drugName+"')]/div"));
+		WebElement drugname = driver.findElement(By.xpath("//*[contains(@id,'"+drugName+"')]"));
 		
 		jsClickNew(drugname);
 		/*
@@ -148,7 +148,7 @@ public class BuildYourDrugList extends UhcDriver {
 
 	public TellUsAboutDrug SelectDrugfromList(String drugName) {
 		validateNew(AutoCompleteList);
-		WebElement Drug = driver.findElement(By.xpath("//uhc-menu-item[@id='"+drugName+"']"));
+		WebElement Drug = driver.findElement(By.xpath("//*[@id='"+drugName+"']"));
 		jsClickNew(Drug);
 		CommonUtility.waitForPageLoadNew(driver, TellUsABoutHeader, 20);
 		if(validateNew(TellUsABoutHeader) && validateNew(TellUsABoutCloseBtn))
@@ -185,6 +185,8 @@ public class BuildYourDrugList extends UhcDriver {
 		WebElement SelectDrug = driver.findElement(By.xpath("//uhc-list-item//button[contains(@aria-label, 'Select "+drugName+"')]"));
 		validateNew(SelectDrug);
 		jsClickNew(SelectDrug);
+		threadsleep(2000);
+		waitForPageLoadSafari();
 		CommonUtility.checkPageIsReadyNew(driver);
 		CommonUtility.waitForPageLoadNew(driver, TellUsABoutHeader, 20);
 		if(validateNew(TellUsABoutHeader) && validateNew(TellUsABoutCloseBtn))
@@ -206,6 +208,8 @@ public class BuildYourDrugList extends UhcDriver {
 	public DrugDetailsPage navigateToDrugDetailsPage() {
 		validateNew(reviewDrugCost);
 		jsClickNew(reviewDrugCost);
+		waitForPageLoadSafari();
+		threadsleep(2000);
 		CommonUtility.waitForPageLoadNew(driver, DrugDetails_DrugCostsHeading, 20);
 		if(validateNew(DrugDetails_ChangePharmacyLnk) && validateNew(DrugDetails_DrugCostsHeading))
 		{
@@ -249,12 +253,17 @@ public class BuildYourDrugList extends UhcDriver {
 	
 	public void ValidateAddedDrugsList(String druglist) {
 		String[] DrugListItems = druglist.split("&");
-		System.out.println("Added Drug Count : "+DrugListItems.length);
-		for(String currentDrug : DrugListItems) {
+		int i;
+		String currentDrug;
+		int DrugCount_Total = DrugListItems.length-1;
+		System.out.println("Total Added Drug Count : "+DrugCount_Total);
+		System.out.println("Total Added Drug Count : "+DrugCount_Total);
+		for(i=1; i<=DrugCount_Total; i++) {
+			currentDrug = DrugListItems[i];
 			System.out.println("Current Added Drug Name : "+currentDrug);
 			WebElement DrugName = driver.findElement(By.xpath("//uhc-list-item//h4[contains(text(), '"+currentDrug+"')]"));
-			WebElement DrugEditBtn = driver.findElement(By.xpath("//uhc-list-item//button[contains(@aria-label, 'Edit "+currentDrug+"')]"));
-			WebElement DrugRemoveBtn = driver.findElement(By.xpath("//uhc-list-item//button[contains(@aria-label, 'Remove "+currentDrug+"')]"));
+			WebElement DrugEditBtn = driver.findElement(By.xpath("//uhc-list-item//button[contains(@aria-label, 'Edit') and contains(@aria-label, '"+currentDrug+"')]"));
+			WebElement DrugRemoveBtn = driver.findElement(By.xpath("//uhc-list-item//button[contains(@aria-label, 'Remove') and contains(@aria-label, '"+currentDrug+"')]"));
 
 			if(validateNew(DrugName) && validateNew(DrugEditBtn) && validateNew(DrugRemoveBtn)) {
 				Assert.assertTrue("Validated Drug List for Drug : "+currentDrug, true);
@@ -267,9 +276,30 @@ public class BuildYourDrugList extends UhcDriver {
 	public ComparePlansPage returnToPlanComparePage() {
 
 		validateNew(returnToCompareBtn);
-		returnToCompareBtn.click();
+		jsClickNew(returnToCompareBtn);
+		waitForPageLoadSafari();
 		return new ComparePlansPage(driver);
 	}
+
+	public void deleteDrug(String deleteDrug) {
+		System.out.println("Drug to be removed : "+deleteDrug);
+		WebElement removeLink = driver.findElement(By.xpath("//*[contains(@aria-label,'Remove "+deleteDrug+"')]"));
+		jsClickNew(removeLink);
+		
+	}
+
+	public TellUsAboutDrug EditDrug(String drugName) {
+		WebElement removeLink = driver.findElement(By.xpath("//*[contains(@aria-label,'Edit "+drugName+"')]"));
+		jsClickNew(removeLink);
+		CommonUtility.waitForPageLoadNew(driver, TellUsABoutHeader, 20);
+		if(validateNew(TellUsABoutHeader) && validateNew(TellUsABoutCloseBtn))
+		{
+			return new TellUsAboutDrug(driver);
+		}
+		else {
+			Assert.fail("Tell Us About Drug Page is NOT Displayed");
+			return null;
+		}	}
 
 	public DrugSummaryPage verifyReviewDrugCostPage() {
 		CommonUtility.waitForPageLoad(driver, reviewDrugCostPageHeading, 30);
@@ -280,5 +310,25 @@ public class BuildYourDrugList extends UhcDriver {
 			return null;
 		}
 	}
+	
+	public TellUsAboutDrug clickOnEditButton(String drug) {
 
+		WebElement editLink = driver.findElement(By.xpath("//*[contains(@aria-label,'Edit "+drug+"')]"));
+		jsClickNew(editLink);
+		
+		return new TellUsAboutDrug(driver);
+		
+	}
+
+	public void clickOnRemoveButton(String drug) {
+		WebElement removeLink = driver.findElement(By.xpath("//*[contains(@aria-label,'Remove "+drug+"')]"));
+		jsClickNew(removeLink);
+		
+	}
+
+	public void validateBuildDrugListPageDisplayed() {
+		validateNew(EnterDrugNameTxt);
+		validateNew(SearchBtn);
+		validateNew(PreviousBtn);
+	}
 }

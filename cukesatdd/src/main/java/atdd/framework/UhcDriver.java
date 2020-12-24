@@ -444,11 +444,11 @@ try {
             return jsonObject;
     }
 
-	public void jsClickNew(WebElement element) {
-		JavascriptExecutor js = (JavascriptExecutor) driver;
-		js.executeScript("arguments[0].click();", element);
-//		System.out.println("The WebElement ===  " +getidentifier(element) + "  : is Clicked");
-	}
+    public void jsClickNew(WebElement element) {
+    	JavascriptExecutor js = (JavascriptExecutor) driver;
+    	js.executeScript("arguments[0].click();", element);
+    	//		System.out.println("The WebElement ===  " +getidentifier(element) + "  : is Clicked");
+    }
 	
 	public static String getidentifier(WebElement element) {
 	      String elementStr = element.toString();
@@ -515,6 +515,7 @@ try {
 		CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
 		int initialCount = driver.getWindowHandles().size();
 		jsClickNew(Element);
+		waitForPageLoadSafari();
 		waitForCountIncrement(initialCount);
 		ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
 		String currentHandle = null;
@@ -556,7 +557,7 @@ try {
 	 */
 	public void sendkeysNew(WebElement element, String message) {
 		validateNew(element);
-		element.click();
+		jsClickNew(element);
 		element.clear();
 		element.sendKeys(message);
 
@@ -579,7 +580,6 @@ try {
 				//System.out.println("@@@The element " + element.getText() + "is found@@@");
 			}
 		} catch (Exception e) {
-
 			Assert.fail("The element " + element.getText() + "is not  found");
 			return false;
 		}
@@ -734,6 +734,7 @@ try {
 		jsMouseOver(menuDropListItem);
 		jsClickNew(menuDropListItem);
 		CommonUtility.checkPageIsReadyNew(driver);
+		waitForPageLoadSafari();
 
 	}
 	
@@ -1214,12 +1215,13 @@ try {
     		// First checking to see if the loading indicator is found
     		// we catch and throw no exception here in case they aren't ignored
     		try {
-    			threadsleep(5000);			//Adding sleep since the loading spinner sometimes takes long to come up
+    			threadsleep(3000);			//Adding sleep since the loading spinner sometimes takes long to come up
+//    			CommonUtility.checkPageIsReadyNew(driver);
     			System.out.println("Waiting to check if Loading screen is present");
     			loadingScreen = fwait.until(new Function<WebDriver, List<WebElement>>() {
 					public List<WebElement> apply(WebDriver driver) {
 						return driver.findElements(By.xpath(
-								"//div[(((@id='overlay' and not(./ancestor::footer)) or @id='loading_fader' or @class='loading-block' or @class='spinner') and not(contains(@style,'none')))]"));
+								"//div[(((@id='overlay' and not(./ancestor::footer)) or @id='loading_fader' or @class='loading-block' or @class='spinner' or @id='loader') and not(contains(@style,'none')))]"));
 					}
     			});
     		} catch (Exception e) {}
@@ -1256,18 +1258,17 @@ try {
 	 * 
 	 * Note: use the jsMouseOut if using jsMouseOver for tooltip
 	 */
-	public boolean jsMouseOver(WebElement element) {
-		try {
-			JavascriptExecutor js = (JavascriptExecutor) driver;
-			js.executeScript("$(arguments[0]).mouseover();", element);
-		} catch (Exception e) {
-			Assert.fail("The element " + element.getText() + "is not  found");
-			return false;
-		}
+    public boolean jsMouseOver(WebElement element) {
+    	try {
+    		JavascriptExecutor js = (JavascriptExecutor) driver;
+    		js.executeScript("$(arguments[0]).mouseover();", element);
+    	} catch (Exception e) {
+    		Assert.fail("Could not complete mouse over action, reason "+e.getMessage());
+    		return false;
+    	}
 
-		return true;
-	}
-	
+    	return true;
+    }
 	
 	/**
 	 * move mouse out from the element using jQuery event, mouseout.
@@ -1282,7 +1283,7 @@ try {
 			JavascriptExecutor js = (JavascriptExecutor) driver;
 			js.executeScript("$(arguments[0]).mouseout();", element);
 		} catch (Exception e) {
-			Assert.fail("The element " + element.getText() + "is not  found");
+			Assert.fail("Could not complete mouse out action, reason "+e.getMessage());
 			return false;
 		}
 

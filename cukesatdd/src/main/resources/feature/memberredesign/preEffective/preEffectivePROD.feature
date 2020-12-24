@@ -35,7 +35,7 @@ Feature: 1.15 Member pre-effective functionality
       | planType | memberType          | copayCategory | technicalTFN   | segmentId | username | password | member                  | planstartdate |
       # | IndMA    | preeffectiveIndMA   | NON LIS       | 1-888-980-8125 |       000 | jkuma14  | Brock@04 | Ranch1955            | 10/01/2020    |
       | IndMAPD  | preeffectiveIndMAPD | NON LIS       | 1-888-980-8125 |       000 | jkuma14  | Brock@04 | Mino77003               | 01/01/2021    |
-      | IndPDP   | preeffectiveIndMA   | NON LIS       | 1-888-980-8125 |       000 | jkuma14  | Brock@04 | Cindyrose1218@Gmail.Com | 12/01/2020    |
+      | IndPDP   | preeffectiveIndMA   | NON LIS       | 1-888-980-8125 |       000 | jkuma14  | Brock@04 | vdurham49               | 01/01/2021    |
 
   @regressionMemberPROD2
   Scenario Outline: -planType: <planType> - Member Type: - <memberType> - Verify that correct links and messages are displayed on Dashboard and Secondary Page.
@@ -106,7 +106,7 @@ Feature: 1.15 Member pre-effective functionality
 
     Examples: 
       | planType  | memberType            | copayCategory | technicalTFN   | segmentId | username | password | member       | planstartdate |
-      | GroupMAPD | preeffectiveGroupMAPD | NON LIS       | 1-888-980-8125 |       000 | jkuma14  | Brock@04 | CatnJack     | 12/01/2020    |
+      | GroupMAPD | preeffectiveGroupMAPD | NON LIS       | 1-888-980-8125 |       000 | jkuma14  | Brock@04 | pxhtennisbum | 01/01/2021    |
       | SHIP      | preeffectiveSHIPOnly  | NON LIS       | 1-866-254-3132 |       000 | jkuma14  | Brock@04 | JoEsCo       | 01/01/2021    |
 
   @regressionMemberPROD4 @sanityMemberPROD1
@@ -148,7 +148,7 @@ Feature: 1.15 Member pre-effective functionality
     #    | Technical TFN SHIP | <technicalTFNSHIP> |
     Examples: 
       | planType | memberType               | copayCategory | technicalTFN   | segmentId | username | password | member         | planstartdate | technicalTFNSHIP |
-      | IndPDP   | preeffectivePDPSHIPCOMBO | NON LIS       | 1-888-980-8125 |       000 | jkuma14  | Brock@04 | daleandnancy20 | 12/01/2020    | 1-866-254-3132   |
+      | IndPDP   | preeffectivePDPSHIPCOMBO | NON LIS       | 1-888-980-8125 |       000 | jkuma14  | Brock@04 | pstuart12160   | 01/01/2021    | 1-866-254-3132   |
 
   #Commenting tag due to unavailability of prod data - Jitesh 11/05/2020 @regressionMemberPROD4 @sanityMemberPROD2
   Scenario Outline: -planType: <planType> - Member Type - <memberType> - Verify that correct links and messages are displayed on Dashboard and Secondary Page.

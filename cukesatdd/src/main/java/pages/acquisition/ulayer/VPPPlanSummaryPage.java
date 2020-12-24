@@ -37,6 +37,7 @@ import acceptancetests.data.MRConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
+import pages.acquisition.dceredesign.DrugDetailsPage;
 import pages.acquisition.dceredesign.GetStartedPage;
 import pages.acquisition.isdecisionguide.IsDecisionGuideStep1;
 import pages.acquisition.isinsuranceagent.IsInsuranceAgent;
@@ -345,7 +346,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	
 	@FindBy(xpath = "//div[contains(@class,'component_info_wrap')]//button[text()='Select a Plan']")
 	//@FindBy(xpath = "//div[contains(@class,'component_info_wrap')]//button[text()='Continue Enrollment']")
-	private WebElement nextBestActionModalContinueEnrollmentBtn;
+	private WebElement nextBestActionModalSelectPlanBtn;
 	
 	@FindBy(xpath = "button[ng-click='getProviders()']")
 	private WebElement findMyDoctorBtn;
@@ -359,6 +360,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	private String savedPlanImgXpath="//img[contains(@src,'ic_favorite-filled.png')]";
 	private static String NEXT_ACTION_MODAL_MSG_PROVIDER_SEARCH="Is my doctor covered?";
 	private static String NEXT_ACTION_MODAL_MSG_ENROLL_PLAN="How do I enroll?";
+	private static String NEXT_ACTION_MODAL_MSG_DRUG_COST="How much will my drugs cost?";
+	private static String NEXT_ACTION_MODAL_MSG_CONTINUE_ENROLLMENT="Continue my enrollment";
 	
 	@FindBy(xpath = "//div[@id='emailPlanSummaryPopUp']")
 	private WebElement emailPlanSummaryPopupScreen;
@@ -731,9 +734,42 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		@FindBy(xpath = "//*[contains(@id, 'GoBtnText')]")
 		private WebElement  SelectYearGoBtn;
 		
-		@FindBy(xpath = "//input[@class='nextButton']")
+//		@FindBy(xpath = "//input[@class='nextButton']")
+		@FindBy(id = "authQuesSubmitButton")
 		private WebElement  Submit;
+		
+		@FindBy(xpath = "//span[@class='title']//small")
+		public List<WebElement>  planTypes;
+		
+		@FindBy(xpath = "//span[@class='title']//span")
+		public List<WebElement>  planCount;
+		
+		@FindBy(xpath = "//span[@class='title']//span")//
+		public WebElement  titleCount;
+		
+		@FindBy(xpath="//span[text()='Enroll in Plan']/..")
+		private WebElement  enrollInPlanBtn;
 
+		@FindBy(xpath = "//a[text()='View Saved Items']")
+		private WebElement viewSavedItems;
+		
+		@FindBy(xpath = "//*[@class='drug-list-toggle accordion-arrow drug-list-title collapsed ng-binding']")
+		private WebElement drugInfo;
+		
+		@FindBy(xpath = "//a[text()='Drug Summary']")
+		private WebElement drugSummaryBtn;
+
+		@FindBy(id = "enrollModalCloseBtn")
+		private WebElement enrollModalCloseBtn;
+		
+		@FindBy(id="pop-btn-1")
+        private WebElement viewSavedPlans;
+		
+		@FindBy(xpath = "//div[contains(@class,'component_info_wrap')]//button[text()='Continue Enrollment']")
+		private WebElement nextBestActionModalContinueEnrollmentBtn;
+		
+		@FindBy(id = "enrollAlertTitle")
+		private WebElement nextBestActionModalMsgAuthenticated;
 		
 		public WebElement getValEstimatedAnnualDrugCostValue(String planName) {
 			//WebElement valEstimatedAnnualDrugCostValue = driver.findElement(By.xpath("//*[contains(text(),'"+planName+"')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//*[@ng-show='plan.network']"));
@@ -951,8 +987,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 		CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
 
-		WebElement ProviderSearchLink = driver.findElement(By.xpath("//*[contains(text(),\'" + planName
-				+ "\')]/ancestor::div[contains(@class,'module-plan-overview')]//*[contains(@dtmname,'Provider Search')]"));
+		WebElement ProviderSearchLink = driver.findElement(By.xpath("//*[contains(text(),'" + planName+ "')]/ancestor::div[contains(@class,'module-plan-overview')]//*[contains(@dtmname,'Provider Search')]"));
 		validateNew(ProviderSearchLink);
 //		switchToNewTabNew(ProviderSearchLink);
 		jsClickNew(ProviderSearchLink);
@@ -3298,8 +3333,7 @@ for (int i = 0; i < initialCount + 1; i++) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}		
-		//part_B_monthDrpDwn.click();
-		jsClickNew(part_B_monthDrpDwn);
+		part_B_monthDrpDwn.click();
 		try {
 			Thread.sleep(2000);
 		} catch (InterruptedException e) {
@@ -3327,7 +3361,7 @@ for (int i = 0; i < initialCount + 1; i++) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}		
-		startDrpDwn.click();	
+		startDrpDwn.click();
 		try {
 			Thread.sleep(2000);
 		} catch (InterruptedException e) {
@@ -3360,7 +3394,8 @@ for (int i = 0; i < initialCount + 1; i++) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}		
-		ViewPlanMedSupPage.click();
+		jsClickNew(ViewPlanMedSupPage);
+		waitForPageLoadSafari();
 		return EnteredData;
 		
 	}
@@ -3507,7 +3542,7 @@ for (int i = 0; i < initialCount + 1; i++) {
 	private WebElement DecisionGuideLink;
 	public IsDecisionGuideStep1 clickOnRequestADecisionGuide() {
 		Assert.assertTrue("Decision Guide Link is not displayed on Med Supp VPP Plan Summary Page", validate(DecisionGuideLink));
-		DecisionGuideLink.click();
+		jsClickNew(DecisionGuideLink);
 		CommonUtility.checkPageIsReadyNew(driver);
 		if (driver.getCurrentUrl().contains("medicare-information.html"))
 			return new IsDecisionGuideStep1(driver);
@@ -3529,7 +3564,7 @@ for (int i = 0; i < initialCount + 1; i++) {
 	 * @return
 	 */
 	public VisitorProfilePage continueAsGuest(){
-		continueAsGuest.click();
+		jsClickNew(continueAsGuest);
 		if(driver.getCurrentUrl().contains("profile")) {
 			CommonUtility.checkPageIsReadyNew(driver);
 			return new VisitorProfilePage(driver);
@@ -4065,6 +4100,7 @@ for (int i = 0; i < initialCount + 1; i++) {
 				Collections.sort(actualPlanNames);
 				System.out.println(expectedPlanNames);
 				System.out.println(actualPlanNames);
+				enrollModalCloseBtn.click();
 				Assert.assertTrue("Saved plans not displayed in Enroll Popup.../n Expected plans" + expectedPlanNames
 						+ "\n Actual plans" + actualPlanNames, actualPlanNames.equals(expectedPlanNames));
 			}
@@ -4096,6 +4132,7 @@ for (int i = 0; i < initialCount + 1; i++) {
 					Collections.sort(actualPlanNames);
 					System.out.println(allPlanNames);
 					System.out.println(actualPlanNames);
+					jsClickNew(enrollModalCloseBtn);
 					Assert.assertTrue("All plans not displayed in Enroll Plan Popup.../n Expected plans" + allPlanNames
 							+ "\n Actual plans" + actualPlanNames, actualPlanNames.equals(allPlanNames));
 				}
@@ -4239,7 +4276,7 @@ for (int i = 0; i < initialCount + 1; i++) {
 	private WebElement InsuranceAgentLink;
 	public IsInsuranceAgent clickOnRequestInsuranceAgent() {
 		Assert.assertTrue("InsuranceAgent Link is not displayed on Med Supp VPP Plan Summary Page", validate(InsuranceAgentLink));
-		InsuranceAgentLink.click();
+		jsClickNew(InsuranceAgentLink);
 		CommonUtility.checkPageIsReadyNew(driver);
 		if (driver.getCurrentUrl().contains("agent-appointment.html"))
 			return new IsInsuranceAgent(driver);
@@ -4341,8 +4378,8 @@ for (int i = 0; i < initialCount + 1; i++) {
 			driver.findElement(By.cssSelector("input#passwdId_input")).sendKeys(password);
 			driver.findElement(By.cssSelector("input#SignIn")).click();
 			waitForPageLoadSafari();
-			String Question = driver.findElement(By.cssSelector("label#challengeQuestionLabelId")).getText().trim();
-			WebElement securityAnswer = driver.findElement(By.cssSelector("div#challengeSecurityAnswerId >input"));
+			String Question = driver.findElement(By.cssSelector("#challengeQuestionLabelId")).getText().trim();
+			WebElement securityAnswer = driver.findElement(By.cssSelector("#challengeSecurityAnswerId > input"));
 			if (Question.equalsIgnoreCase("What is your best friend's name?")) {
 				System.out.println("Question is related to friendname");
 				securityAnswer.sendKeys("name1");
@@ -4403,4 +4440,130 @@ for (int i = 0; i < initialCount + 1; i++) {
 		//return NavigateToURL;
 	}
 
+	public boolean validateContactAgentPage(List <String> planName) {
+		boolean flag = false;
+		for (int i = 0; i < planName.size(); i++) {
+			
+			driver.findElement(By.xpath("//a[contains(@aria-label,"+"'"+planName+"'"+")]")).click();
+			try {
+				Thread.sleep(5000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			if(planName.get(i).contains("Drug")) {
+			driver.findElement(By.xpath("(//a[contains(text(),'View plan and drug')])[1]")).click();	
+			}
+			else {
+			driver.findElement(By.xpath("(//a[contains(text(),'View Plan Details')])[1]")).click();
+			}
+			
+		}
+			
+		return flag;
+	}
+		
+	public void clickEnrollPlanBtnOnSelectPlanModal() {
+		validateNew(enrollInPlanBtn);
+//		enrollInPlanBtn.click();
+		jsClickNew(enrollInPlanBtn);
+	}
+	public void validateNavigatedToOle() {
+		if(driver.getCurrentUrl().contains("welcome")) {
+			Assert.assertTrue("Navigation to OLE failed", driver.getTitle().contains("Online Enrollment"));
+		}
+	}
+	
+	public void getValidate() {
+		validate(getStartedBtn);
+		validate(viewSavedItems);
+	}
+	
+	public void validateProviderNBA() {
+		try {
+			if(nextBestActionModal.isDisplayed()) {
+				validate(nextBestActionModalFindMyDoctorsBtn);
+				Assert.assertTrue("The Provider NBA message is not displayed on NBA.../n Expected Message"+NEXT_ACTION_MODAL_MSG_PROVIDER_SEARCH+ "\n Actual message"+nextBestActionModalMsg.getText(), nextBestActionModalMsg.getText().equals(NEXT_ACTION_MODAL_MSG_PROVIDER_SEARCH));
+			}
+		}
+		catch(Exception ex) {
+			System.out.println("NBA modal not found");
+		}
+	}
+	
+	public void verifyNextBestActionModalForDrugCostAuthenticated() {
+		try {
+			if(nextBestActionModal.isDisplayed()) {
+				validate(getStartedBtn);
+				Assert.assertTrue("The Drug cost message is not displayed on NBA.../n Expected Message"+NEXT_ACTION_MODAL_MSG_DRUG_COST+ "\n Actual message"+nextBestActionModalMsg.getText(), nextBestActionModalMsg.getText().equals(NEXT_ACTION_MODAL_MSG_DRUG_COST));
+			}
+		}
+		catch(Exception ex) {
+			System.out.println("NBA modal not found");
+		}
+	}
+	public void enternewZip(String zipCode) {
+		ChangeLocationLink.click();
+		validate(ZipCodeTxtBx);
+		ZipCodeTxtBx.click();
+		ZipCodeTxtBx.clear();
+		ZipCodeTxtBx.sendKeys(zipCode);
+		validate(FIndPlansButton);
+		FIndPlansButton.click();
+		
+		CommonUtility.checkPageIsReadyNew(driver);
+	}
+	public void clickSavedItems() {
+		viewSavedItems.click();
+	}
+	public DrugDetailsPage clickonDrugSummary() {
+		validate(drugInfo);
+		drugInfo.click();		
+		validate(drugSummaryBtn);
+		drugSummaryBtn.click();	
+		if (validateNew(driver.findElement(By.id("changePharmacyLink"))))
+			return new DrugDetailsPage(driver);
+		return null;
+	}
+	
+	/**
+	 * Click on View Saved plans button on Plan saved prompt
+	 * @return
+	 */
+	public VisitorProfilePage viewSavedPlans(){
+		viewSavedPlans.click();
+		if(driver.getCurrentUrl().contains("profile")) {
+			CommonUtility.checkPageIsReadyNew(driver);
+			return new VisitorProfilePage(driver);
+		}else {
+			System.out.println("Navigation to visitor profile is failed");
+			return null;
+		}
+	}
+	
+	public void verifyNextBestActionModalForContinueEnrollment() {
+		try {
+			if(nextBestActionModal.isDisplayed()) {
+				Assert.assertTrue("The Continue Enrollment message is not displayed.../n Expected Message"+NEXT_ACTION_MODAL_MSG_CONTINUE_ENROLLMENT+ "\n Actual message"+nextBestActionModalMsgAuthenticated.getText(), nextBestActionModalMsgAuthenticated.getText().equals(NEXT_ACTION_MODAL_MSG_CONTINUE_ENROLLMENT));
+			}
+		}
+		catch(Exception ex) {
+			System.out.println("NBA modal not found");
+		}
+	}
+
+	
+	public void clickNextBestActionModalContinueEnrollmentBtn() {
+		waitTillElementClickableInTime(nextBestActionModalContinueEnrollmentBtn,15);
+		nextBestActionModalContinueEnrollmentBtn.click();
+	}
+
+	public void verifyNavigationToOLEPage() {
+		if(driver.getTitle().contains("Online Enrollment")){
+			System.out.println("OLE Welcome Page is Displayed");
+		}
+		else {
+			Assert.fail("User not navigates to OLE page");
+		}
+	}
 }

@@ -74,6 +74,9 @@ public void verifyCorrectLogoDisplayedOnDashboardHomePage(DataTable givenAttribu
 		Thread.sleep(3000);
 		TestHarness testHarnessPage = (TestHarness) getLoginScenario().getBean(PageConstantsMnR.TEST_HARNESS_PAGE);
 		System.out.println("Now checking for logo on Team-h or stage test harness page");
+		if("TEXASERS".equalsIgnoreCase(memberAttributesMap.get("Dashboard Logo"))) {
+			logoToBeDisplayedOnSecondaryPage = "dam/UCP/Images/logo/TEXAS%20ERS.svg";//Verify old logo on test harness page 
+		}
 		testHarnessPage.validateImagePresent(logoToBeDisplayedOnSecondaryPage);
 		System.out.println("logo on test harness page was displayed.");
 	    getLoginScenario().saveBean(PageConstants.TEST_HARNESS_PAGE, testHarnessPage);

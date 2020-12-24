@@ -1,3 +1,4 @@
+
 package pages.acquisition.commonpages;
 
 import org.openqa.selenium.WebDriver;
@@ -89,8 +90,9 @@ public class GlobalWebElements  extends UhcDriver{
 	@FindBy(xpath = ".//*[contains(@class, 'viewLink disclaimer')]")
 	 public static WebElement viewAllDisclaimerInformationLink;
 	
-	@FindBy(linkText = "Hide disclaimer information")
-	 public static WebElement hideDiscliamerInformation;
+	//@FindBy(linkText = "Hide disclaimer information")
+	@FindBy(xpath="//a[contains(@class,'disclaimer hideLink')]") 
+	public static WebElement hideDiscliamerInformation;
 	
 	@FindBy(css = "a.backtotop1.hideLink")
 	 public static WebElement disclaimerBackToTopLink;
@@ -241,7 +243,7 @@ public class GlobalWebElements  extends UhcDriver{
 	@FindBy(xpath = "//*[contains(@onclick,'jumpToHSIDSignIn()')]")
 	public static WebElement signIn;
 	
-	@FindBy(xpath="//*[@id='planTypesColumn']/h3[4]/a")
+	@FindBy(xpath="//*[@id='planTypesColumn']/h3[3]/a")
 	public static WebElement menuShop;
 	
 	public void ourPlansHover() {

@@ -37,7 +37,7 @@ public class LearnMoreModal extends UhcDriver{
 
 	public Object returntoOLE() {
 		validate(BackBtn);
-		BackBtn.click();
+		jsClickNew(BackBtn);
 		try {
 			Thread.sleep(6000);
 		} catch (InterruptedException e) {

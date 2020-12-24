@@ -1,6 +1,11 @@
 @regressionMember
 Feature: 1.16 Member Contact us Page CHAT
 
+ Background: Feature security flag needs to be true before ATDD script execution
+     Given First check if feature security flag is set to true
+      | Feature | UCPContactus |
+###############################Regression Scenarios Begin Here ########################################
+
   #Agent logins have been commented out as the agents id's expire frequently & the agent portal login does not work not MNR work
   #@regressionMember @agentSigninforAARPCHAT @shipChat
   # Scenario Outline: Verify AARP chat agent login in.

@@ -5,21 +5,25 @@ import java.util.List;
 import java.util.Map;
 
 import org.junit.Assert;
+import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstants;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
 import gherkin.formatter.model.DataTableRow;
 import pages.acquisition.commonpages.AcquisitionHomePage;
 import pages.acquisition.commonpages.ComparePlansPage;
 import pages.acquisition.commonpages.DrugCostEstimatorPage;
-import pages.acquisition.dceredesign.GetStartedPage;
 import pages.acquisition.commonpages.PlanDetailsPage;
 import pages.acquisition.commonpages.VPPPlanSummaryPage;
 import pages.acquisition.commonpages.VisitorProfilePage;
+import pages.acquisition.dceredesign.BuildYourDrugList;
+import pages.acquisition.dceredesign.GetStartedPage;
 import pages.acquisition.ulayer.VisitorProfileTestHarnessPage;
 /**
  * @author bnaveen4
@@ -33,7 +37,7 @@ public class VisitorProfileStepDefinition {
 	public MRScenario getLoginScenario() {
 		return loginScenario;
 	}
-
+	
 	@And("^the user selects the state drop down value in home page$")
 	public void the_user_selects_the_state_drop_down_value_in_AARP_home_page(DataTable givenAttributes) {
 		List<DataTableRow> givenAttributesRow = givenAttributes.getGherkinRows();
@@ -48,7 +52,9 @@ public class VisitorProfileStepDefinition {
 		AcquisitionHomePage acqHomePage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 
-		acqHomePage.selectState(state);
+		CommonConstants.SELECTED_STATE  = state; 
+		
+//		acqHomePage.selectState(state);
 	}
 	
 	@And("^the user clicks on the shopping cart icon$")
@@ -206,10 +212,26 @@ public class VisitorProfileStepDefinition {
 		visitorProfile.deleteAllDrugs();
 	}
 	
-	@And("^user delets all the added providers on visitor profile page$")
-	public void user_delets_all_the_added_providers_on_visitor_profile_page_of_AARP_site() {
+	@And("^user clicks on Edit Drug and Pharmacy on visitor profile page$")
+	public void user_clicks_on_Edit_Drug_and_Pharmacy_on_visitor_profile_page() {
 		VisitorProfilePage visitorProfile = (VisitorProfilePage) getLoginScenario().getBean(PageConstants.VISITOR_PROFILE_PAGE);
-		visitorProfile.deleteAllProviders();
+		BuildYourDrugList DCEbuildDrugList = visitorProfile.clickOnEditDrugAndPharmacy();
+		getLoginScenario().saveBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE, DCEbuildDrugList);
+	}
+	
+	@And("^user delets all the added providers on visitor profile page$")
+	public void user_delets_all_the_added_providers_on_visitor_profile_page_of_AARP_site(DataTable Planname) {
+		List<DataTableRow> plannameAttributesRow = Planname
+				.getGherkinRows();
+		Map<String, String> plannameAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < plannameAttributesRow.size(); i++) {
+
+			plannameAttributesMap.put(plannameAttributesRow.get(i).getCells()
+					.get(0), plannameAttributesRow.get(i).getCells().get(1));
+		}
+		String planName = plannameAttributesMap.get("PlanName");
+		VisitorProfilePage visitorProfile = (VisitorProfilePage) getLoginScenario().getBean(PageConstants.VISITOR_PROFILE_PAGE);
+		visitorProfile.deleteProviders(planName);
 	}
 	
 	@Then("^Verify X out of Y provider covered information is displayed on visitor profile page$")
@@ -242,6 +264,7 @@ public class VisitorProfileStepDefinition {
 		
 		VisitorProfilePage visitorProfile = (VisitorProfilePage) getLoginScenario().getBean(PageConstants.VISITOR_PROFILE_PAGE);
 		visitorProfile.signIn(username, password);
+		getLoginScenario().saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfile);
 	}
 	
 	@And("^enroll In Plan should not be clickable on Visitor Profile page in Agent mode$")
@@ -333,7 +356,159 @@ public class VisitorProfileStepDefinition {
 		
 		getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, planSummary);
 	}
-} 
+	
+	@And("^validate OLE details$")
+	public void validate_OLE_details(DataTable oleDetails) {
+		VisitorProfilePage visitorProfile = (VisitorProfilePage) getLoginScenario().getBean(PageConstants.VISITOR_PROFILE_PAGE);
+		visitorProfile.validateOLEDetails(oleDetails);
+		
+	}
+	
+	@And("^the user cancel the enrollment$")
+	public void the_user_cance_the_enrollments(DataTable cancelOLEDetails) {
+		
+		List<DataTableRow> plannameAttributesRow = cancelOLEDetails.getGherkinRows();
+		Map<String, String> plannameAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < plannameAttributesRow.size(); i++) {
+
+			plannameAttributesMap.put(plannameAttributesRow.get(i).getCells().get(0),
+					plannameAttributesRow.get(i).getCells().get(1));
+		}
+		String planName = plannameAttributesMap.get("Plan Name");
+		
+		VisitorProfilePage visitorProfile = (VisitorProfilePage) getLoginScenario().getBean(PageConstants.VISITOR_PROFILE_PAGE);
+		visitorProfile.cancelEnrollment(planName);
+	}
+	
+	@And("^user delets the added Ms plans on visitor profile page$")
+	public void user_delets_the_added_ms_plans_on_visitor_profile_page_of_AARP_site(DataTable planNames) {
+		List<DataTableRow> givenAttributesRow = planNames.getGherkinRows();
+		Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < givenAttributesRow.size(); i++) {
+
+			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+					givenAttributesRow.get(i).getCells().get(1));
+		}
+		String savedPlanNames = givenAttributesMap.get("MS_testPlans");
+		VisitorProfilePage visitorProfile = (VisitorProfilePage) getLoginScenario().getBean(PageConstants.VISITOR_PROFILE_PAGE);
+		visitorProfile.deleteMSPlans(savedPlanNames);
+	}
 
 
+@And("^user validates the added plans on new visitor profile page$")
+public void user_validates_the_added_plans_on_new_visitor_profile_page(DataTable planNames) {
+	List<DataTableRow> givenAttributesRow = planNames.getGherkinRows();
+	Map<String, String> givenAttributesMap = new HashMap<String, String>();
+	for (int i = 0; i < givenAttributesRow.size(); i++) {
 
+		givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+				givenAttributesRow.get(i).getCells().get(1));
+	}
+	String savePlanNames = givenAttributesMap.get("Test Plans");
+	VisitorProfilePage visitorProfile = (VisitorProfilePage) getLoginScenario()
+			.getBean(PageConstants.VISITOR_PROFILE_PAGE);
+	visitorProfile.validateAddedPlansNew(savePlanNames);
+}
+
+@Then("^the user clicks on the enter drug information button from plan card on Visitor Profile page$")
+public void the_user_clicks_on_the_enter_drug_information_button_from_plan_card_on_VP_page() {
+	VisitorProfilePage visitorProfile = (VisitorProfilePage) getLoginScenario()
+			.getBean(PageConstants.VISITOR_PROFILE_PAGE);
+	visitorProfile.clickAddDrugsPlancardNew();
+}
+
+@Then("^user should see back to drug cost estimator link on visitor profile page$")
+public void user_should_see_back_to_drug_cost_estimator_link_on_visitor_profile_page() {
+	VisitorProfilePage visitorProfile = (VisitorProfilePage) getLoginScenario()
+			.getBean(PageConstants.VISITOR_PROFILE_PAGE);
+	visitorProfile.validateBackToDceLink();
+}
+
+@When("^user clicks on edit drugs button from plan card$")
+public void user_clicks_on_edit_drugs_button_from_plan_card() {
+	VisitorProfilePage visitorProfile = (VisitorProfilePage) getLoginScenario()
+			.getBean(PageConstants.VISITOR_PROFILE_PAGE);
+	visitorProfile.clickEditDrugsPlancard();
+}
+
+@When("^user clicks on edit drugs button globally$")
+public void user_clicks_on_edit_drugs_button_globally() {
+	VisitorProfilePage visitorProfile = (VisitorProfilePage) getLoginScenario()
+			.getBean(PageConstants.VISITOR_PROFILE_PAGE);
+	visitorProfile.clickEditDrugs();
+}
+
+@And("^user validates the added plans on new visitor profile page of AARP site$")
+public void user_validates_the_added_plans_on_new_visitor_profile_page_of_AARP_site(DataTable planNames) {
+	List<DataTableRow> givenAttributesRow = planNames.getGherkinRows();
+	Map<String, String> givenAttributesMap = new HashMap<String, String>();
+	for (int i = 0; i < givenAttributesRow.size(); i++) {
+
+		givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+				givenAttributesRow.get(i).getCells().get(1));
+	}
+	String savePlanNames = givenAttributesMap.get("Test Plans");
+	VisitorProfilePage visitorProfile = (VisitorProfilePage) getLoginScenario()
+			.getBean(PageConstants.VISITOR_PROFILE_PAGE);
+	visitorProfile.validateAddedPlansNew(savePlanNames);
+}
+
+@Then("^the user clicks on the enter drug information button from plan card to navigate to DCE Redesign$")
+public void the_user_clicks_on_the_enter_drug_information_button_from_plan_card_to_navigate_to_DCE_Redesign() {
+	VisitorProfilePage visitorProfile = (VisitorProfilePage) getLoginScenario()
+			.getBean(PageConstants.VISITOR_PROFILE_PAGE);
+	visitorProfile.clickAddDrugsPlancardNew();
+}
+
+@And("^the user navigates to Visitor profile page$")
+public void the_user_navigates_to_visitor_profile_page() {
+	AcquisitionHomePage acqHomePage = (AcquisitionHomePage) getLoginScenario()
+			.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+
+//	VisitorProfilePage visitorProfilePage = acqHomePage.navigateToNewVisitorProfilePage();
+
+//	getLoginScenario().saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfilePage);
+}
+
+@And("^the user login with optum Id credentials$")
+public void the_user_login_with_optum_Id_credentials(DataTable credentials) {
+	List<DataTableRow> plannameAttributesRow = credentials.getGherkinRows();
+	Map<String, String> plannameAttributesMap = new HashMap<String, String>();
+	for (int i = 0; i < plannameAttributesRow.size(); i++) {
+
+		plannameAttributesMap.put(plannameAttributesRow.get(i).getCells().get(0),
+				plannameAttributesRow.get(i).getCells().get(1));
+	}
+	String username = plannameAttributesMap.get("User Name");
+	String password = plannameAttributesMap.get("Password");
+	WebDriver driver = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+	VisitorProfilePage visitorProfile = new VisitorProfilePage(driver);
+	System.out.println("credentials"+username+ password);
+	visitorProfile.logIn(username, password);
+	getLoginScenario().saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfile);
+}
+
+@Then("^user clears the existing drugs in Visitor profile$")
+public void user_clears_the_existing_drugs_in_visitor_profile() {
+	VisitorProfilePage visitorProfile = (VisitorProfilePage) getLoginScenario()
+			.getBean(PageConstants.VISITOR_PROFILE_PAGE);
+	visitorProfile.clearDrugsFromPlanCard();
+	getLoginScenario().saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfile);
+}
+
+@Then("^user clears the provider in visitor profile page$")
+public void user_clears_the_provider_in_visitor_profile_page() {
+	VisitorProfilePage visitorProfile = (VisitorProfilePage) getLoginScenario()
+			.getBean(PageConstants.VISITOR_PROFILE_PAGE);
+	visitorProfile.clearProvider();
+	getLoginScenario().saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfile);
+}
+
+@And("^user clicks on home menu from Visitor profile page$")
+public void user_clicks_on_home_from_visitor_profile_page() {
+	VisitorProfilePage visitorProfilePage = (VisitorProfilePage) getLoginScenario()
+			.getBean(PageConstants.VISITOR_PROFILE_PAGE);
+	AcquisitionHomePage acquisitionHomePage = visitorProfilePage.clickHomeMenu();
+	getLoginScenario().saveBean(PageConstants.ACCOUNT_HOME_PAGE, acquisitionHomePage);
+}
+}

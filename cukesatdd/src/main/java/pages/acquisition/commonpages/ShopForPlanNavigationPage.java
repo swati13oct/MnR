@@ -77,7 +77,9 @@ public class ShopForPlanNavigationPage extends UhcDriver {
 	
 	@FindBy(xpath = "//div[@id='accordion2']//h3[text()='Enrollment']")
 	private WebElement EnrollmentLink;
-
+	@FindBy(xpath = "//a[text()='Provider Search']")
+	private WebElement providerSearchLink;
+	
 	public ShopForPlanNavigationPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -92,7 +94,7 @@ public class ShopForPlanNavigationPage extends UhcDriver {
 
 	public EnrollmentBasicsPage enrollLinkOnShopPlan() throws Exception {
 		waitforElement(enrollLink);
-		enrollLink.click();
+		jsClickNew(enrollLink);
 		Thread.sleep(4000);
 		if (validate(maLeanHowToEnrollLink)) {
 			waitforElement(maLeanHowToEnrollLink);
@@ -104,7 +106,8 @@ public class ShopForPlanNavigationPage extends UhcDriver {
 
 	public ShopPage ShopLinkOnShopPlan() throws Exception {
 		waitforElement(shopLink);
-		shopLink.click();
+		jsClickNew(shopLink);
+		Thread.sleep(4000);
 		return new ShopPage(driver);
 		
 	}
@@ -114,33 +117,40 @@ public class ShopForPlanNavigationPage extends UhcDriver {
 	public void clickONshopLink(String plantype, String planName) throws Exception{
 		if(plantype.equals("SNP")){
 			waitforElement(dsnpLeanHowToshopLink);
-			dsnpLeanHowToshopLink.click();
+			jsClickNew(dsnpLeanHowToshopLink);
 			Thread.sleep(5000);
 		
 		}
 		else if(plantype.equals("PDP")){
 			waitforElement(pdpLeanHowToshopLink);
-			pdpLeanHowToshopLink.click();
+			jsClickNew(pdpLeanHowToshopLink);
 			Thread.sleep(5000);
 		}	
 		
 		else if(plantype.equals("MAPD") || plantype.equals("MA")){
 			waitforElement(maLeanHowToshopLink);
-			maLeanHowToshopLink.click();
+			jsClickNew(maLeanHowToshopLink);
 			Thread.sleep(5000);
 		}	
 	}
 
 	public ShopPage ShopLinkOnMedsuppPlan() throws Exception {
 		waitforElement(shopLink);
-		shopLink.click();
+		jsClickNew(shopLink);
 		Thread.sleep(4000);
 		if (validate(msLeanHowToshopLink)) {
 			waitforElement(msLeanHowToshopLink);
-			msLeanHowToshopLink.click();
+			jsClickNew(msLeanHowToshopLink);
+			threadsleep(2000);
 			System.out.println("Shop Page Medsupp Plan is Displayed");
-			return new ShopPage(driver);
+			//return new ShopPage(driver);
 		}
+	//	return null;
 		return null;
+	}
+	
+	public void providersearch() {
+		CommonUtility.waitForPageLoadNew(driver, providerSearchLink, 60);
+		validateNew(providerSearchLink);
 	}
 }

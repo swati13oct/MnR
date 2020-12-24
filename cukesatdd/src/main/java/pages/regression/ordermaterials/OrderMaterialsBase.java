@@ -81,7 +81,12 @@ public class OrderMaterialsBase extends OrderMaterialsWebElements  {
 		} else if (planType.equalsIgnoreCase("SHIP") || planType.equalsIgnoreCase("MEDSUPP")) {
 			Assert.assertTrue("PROBLEM - unable to locate combo tab for SHIP", orderValidate(OPM_comboTab_SHIP));
 			targetTab=OPM_comboTab_SHIP;
-		} else if (planType.equalsIgnoreCase("PDP")) {
+		}
+		 else if (planType.equalsIgnoreCase("MA")) {
+				Assert.assertTrue("PROBLEM - unable to locate combo tab for SHIP", orderValidate(OPM_comboTab_MA));
+				targetTab=OPM_comboTab_MA;
+			}
+		 else if (planType.equalsIgnoreCase("PDP")) {
 			Assert.assertTrue("PROBLEM - unable to locate combo tab for PDP", orderValidate(OPM_comboTab_PDP));
 			targetTab=OPM_comboTab_PDP;
 		} else if (planType.equalsIgnoreCase("SSUP")) {

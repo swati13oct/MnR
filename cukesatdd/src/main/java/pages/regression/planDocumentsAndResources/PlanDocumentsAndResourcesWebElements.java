@@ -412,7 +412,8 @@ public class PlanDocumentsAndResourcesWebElements extends UhcDriver  {
 	protected WebElement medPriorAuthReq_link_MA_FnR;
 	//- href="/Individual/Medication_Prior_Authorization_Request_Form.pdf" 
 	
-	@FindBy(xpath="//div[contains(@class,'FormsAndResources') and not(contains(@class,'ng-hide'))]//a[contains(text(),'Medicare Part D Coverage Determination Request Form')]")
+	//tbd @FindBy(xpath="//div[contains(@class,'FormsAndResources') and not(contains(@class,'ng-hide'))]//a[contains(text(),'Medicare Part D Coverage Determination Request Form')]")
+	@FindBy(xpath="//div[contains(@class,'FormsAndResources') and not(contains(@class,'ng-hide'))]//a[contains(text(),'Coverage Determination Request Form')]")
 	protected WebElement medPartDCovDeteReq_link_MA_FnR;
 	//- href="/Individual/Medicare_PartD_Coverage_Determination_Request_Form.pdf" 
 	

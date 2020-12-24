@@ -51,7 +51,7 @@ public class PlanRecommendationEngineHeaderAndFooter extends UhcDriver {
 	@FindBy(xpath = "//*[@id='aarpSVGLogo']/img")
 	private WebElement AARPlogoInHeader;
 	
-	@FindBy(css = "#uhcSVGLogo > svg")
+	@FindBy(css = "#uhcSVGLogo")
 	private WebElement UHClogoInHeader;
 	
 	@FindBy(css = ".companyNameHeader>p")
@@ -628,13 +628,10 @@ public class PlanRecommendationEngineHeaderAndFooter extends UhcDriver {
 		//desktopCommonUtils.MouseOver(headerNavigationBarShopForaPlanTab, Browsername);
 		jsMouseOver(headerNavigationBarShopForaPlanTab);
 		jsClickNew(headerNavigationBarShopForaPlanTab);
-		//headerShopLink.click();
 		jsClickNew(headerShopLink);
 		validate(HeaderShopFromHomeInFindYourPlan, 30);
-		//HeaderShopFromHomeInFindYourPlan.click();
 		jsClickNew(HeaderShopFromHomeInFindYourPlan);
 		validate(HeaderGetRecommendationInShop, 30);
-		//HeaderGetRecommendationInShop.click();
 		jsClickNew(HeaderGetRecommendationInShop);
 		validate(landingpageHeader, 30);
 		Assert.assertTrue(landingpageHeader.getText().contains("Plan"));
@@ -646,12 +643,12 @@ public class PlanRecommendationEngineHeaderAndFooter extends UhcDriver {
 //		actions.clickAndHold(headerNavigationBarShopForaPlanTab).build().perform();
 //		actions.moveToElement(headerShopForaPlanZipcodeBox).click();
 		desktopCommonUtils.MouseOver(headerNavigationBarShopForaPlanTab, Browsername);
-		headerShopForaPlanZipcodeBox.click();
+		jsClickNew(headerShopForaPlanZipcodeBox);
 		headerShopForaPlanZipcodeBox.sendKeys(zipcode);
-		headerShopForaPlanZipcodeButton.click();
+		jsClickNew(headerShopForaPlanZipcodeButton);
 		Thread.sleep(5000);
 		validateLinks("/plan-summary");
-		headerNavigationBarHomeTab.click();
+		jsClickNew(headerNavigationBarHomeTab);
 		navigationToPlanRecommendationEngine();
 	}
 	
@@ -660,16 +657,16 @@ public class PlanRecommendationEngineHeaderAndFooter extends UhcDriver {
 		validate(headerNavigationBarShopForaPlanTab, 45);
 //		actions.clickAndHold(headerNavigationBarShopForaPlanTab).build().perform();
 		desktopCommonUtils.MouseOver(headerNavigationBarShopForaPlanTab, Browsername);
-		headerShopForaPlanEmailBox.click();
+		jsClickNew(headerShopForaPlanEmailBox);
 		headerShopForaPlanEmailBox.sendKeys(email);
-		headerShopForaPlanEmailButton.click();
+		jsClickNew(headerShopForaPlanEmailButton);
 		validate(headerShopForaPlanThankYou, 60);
 		try {
 			validate(closeIcon,30);
 			validate(closeIcon, 60);
-			closeIcon.click();
+			jsClickNew(closeIcon);
 			validate(headerNavigationBarHomeTab, 60);
-			headerNavigationBarHomeTab.click();
+			jsClickNew(headerNavigationBarHomeTab);
 			navigationToPlanRecommendationEngine();
 			}catch(Exception e) {
 				System.out.println("Thank You Popup is not displaying");
@@ -704,7 +701,7 @@ public class PlanRecommendationEngineHeaderAndFooter extends UhcDriver {
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("window.scrollBy(0,1200)");
 		validate(footerBackToTopLink, 45);
-		footerBackToTopLink.click();
+		jsClickNew(footerBackToTopLink);
 		String actualpageurl = driver.getCurrentUrl();
 		if(actualpageurl.contains("aarpmedicareplans")) {
 			validate(AARPlogoInHeader, 30);

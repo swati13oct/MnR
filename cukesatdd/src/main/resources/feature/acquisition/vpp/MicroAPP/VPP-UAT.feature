@@ -1,5 +1,5 @@
 @UATRegression
-Feature: 1.10.4 UAT Feature to test VPP scenarios
+Feature: 1.01.4 UAT Feature to test VPP scenarios
 
 
 	Scenario Outline: <Scenario> To test VPP stand alone widget from Shop pages 

@@ -320,6 +320,9 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(linkText = "Find Care & Costs")
 	private WebElement findCareCost;
 
+	@FindBy(linkText = "Find Care")
+	private WebElement findCareUsingLinkText;
+	
 	@FindBy(xpath = "//h1[@class='main-heading margin-none']")
 	private WebElement EOBHeading;
 
@@ -482,7 +485,19 @@ public class AccountHomePage extends UhcDriver {
 	//@FindBy(xpath="//a[contains(text(),'View Documents & Resources')]")
 	@FindBy(xpath="//div[contains(@class,'link-bar')]//a[contains(@href,'documents/overview.html')]")
 	protected WebElement planDocResPgLink;
+	
+	@FindBy(xpath="//section[contains(@class,'hide-mobile')]//a[contains(@href,'documents/overview.html')]")
+	protected WebElement planDocResPgLink_newRallyDesign;
 
+	@FindBy(xpath="//a[contains(@href,'documents/overview.html') and contains(text(),'VIEW PLAN DOCUMENTS')]")
+	protected WebElement preEffPlanDocLnkOnBncPg;
+	
+	@FindBy(xpath="//span[contains(@class,'warning-message') and contains(text(),'coverage end date')]")
+	protected WebElement yellowBannerForTermUser;
+	
+	@FindBy(xpath="//nav[@class='menuL1']//a[contains(@id,'formsandresources') and contains(text(),'Plan Documents')]")
+	protected WebElement activeUsrPlanDocLnkOnBncPg;
+	
 	@FindBy(name="zipCode")
 	private WebElement zipCodeTextBox;
 
@@ -814,7 +829,7 @@ public class AccountHomePage extends UhcDriver {
 					if (PlanType.equalsIgnoreCase("SHIP"))
 					{	
 						WebElement BenefitsandCoverageTab = root1.findElement(By
-								.cssSelector("#sticky-main-nav > div > div > div > a:nth-child(3)"));
+								.cssSelector("#sticky-main-nav > div > div > div > a:nth-child(4)"));
 						System.out.println("shadow-root element has been located, now clicking on Benefits and Coverage tab");	
 						TestHarness.checkForIPerceptionModel(driver);
 						BenefitsandCoverageTab.click();
@@ -3261,6 +3276,50 @@ public class AccountHomePage extends UhcDriver {
 
 		return null;
 	}
+	
+	public PlanDocumentsAndResourcesPage navigateDirectToPlanDocViaBenefitsTerm() {
+		checkModelPopup(driver,5);
+		if (noWaitValidate(shadowRootHeader)) {
+			System.out.println("located shadow-root element, attempt to process further...");
+			WebElement root1 = expandRootElement(shadowRootHeader);
+			try {
+				WebElement benefitsTopMenuShadowRootLink = root1.findElement(By.cssSelector("a[data-testid*=nav-link-coverage]"));
+				benefitsTopMenuShadowRootLink.click();
+				try {
+					Thread.sleep(10000);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			} catch (Exception e) {
+				Assert.assertTrue("PROBLEM - unable to locate Benefits link on Rally Dashboard top menu", false);
+			}		
+
+		} 
+		CommonUtility.checkPageIsReady(driver);
+		checkModelPopup(driver,5);
+
+		CommonUtility.waitForPageLoad(driver, heading, 50);
+		if (driver.getTitle().contains("Plan Documents")) {
+			return new PlanDocumentsAndResourcesPage(driver);
+		}
+
+		return null;
+	}
+	
+	public void navigateDirectToBnCPgNoTitleChk() {
+		checkModelPopup(driver,5);
+		if (noWaitValidate(shadowRootHeader)) {
+			System.out.println("located shadow-root element, attempt to process further...");
+			WebElement root1 = expandRootElement(shadowRootHeader);
+			try {
+				WebElement benefitsTopMenuShadowRootLink = root1.findElement(By.cssSelector("a[data-testid*=nav-link-coverage]"));
+				benefitsTopMenuShadowRootLink.click();
+			} catch (Exception e) {
+				Assert.assertTrue("PROBLEM - unable to locate Benefits link on Rally Dashboard top menu", false);
+			}		
+
+		} 
+	}
 
 	@FindBy(xpath="//div[contains(@class,'preEffectiveParsys')]//h1")
 	private WebElement preEffBnfHeading;
@@ -3365,7 +3424,7 @@ public class AccountHomePage extends UhcDriver {
 				if (planType.equalsIgnoreCase("SHIP"))
 				{	
 					WebElement PremiumPaymentTab = root1.findElement(By
-							.cssSelector("#sticky-main-nav > div > div > div > a:nth-child(4)"));
+							.cssSelector("#sticky-main-nav > div > div > div > a:nth-child(5)"));
 					System.out.println("shadow-root element has been located");	
 					TestHarness.checkForIPerceptionModel(driver);
 					System.out.println("getText() of Premium Payment is :" +PremiumPaymentTab.getText());
@@ -3837,10 +3896,30 @@ public class AccountHomePage extends UhcDriver {
 				}
 				checkModelPopup(driver,2);
 			} else if (MRScenario.environment.equalsIgnoreCase("prod") || MRScenario.environment.equalsIgnoreCase("offline")) {
-				Assert.assertTrue("PROBLEM - unable to locate the plan doc link on rally dashboard", noWaitValidate(planDocResPgLink));
-				checkModelPopup(driver, 2);
-				scrollElementToCenterScreen(planDocResPgLink);
-				planDocResPgLink.click();
+				//tbd Assert.assertTrue("PROBLEM - unable to locate the plan doc link on rally dashboard", noWaitValidate(planDocResPgLink));
+				if (noWaitValidate(yellowBannerForTermUser)) {
+					//note: if terminated user, would be on planDoc page already after clicking Benefits
+					navigateDirectToBnCPgNoTitleChk();
+				} else {
+					WebElement planDocElement=null;
+					if (noWaitValidate(planDocResPgLink)) { //note: old rally dashboard planDoc quick link
+						planDocElement=planDocResPgLink; 
+					} else if (noWaitValidate(planDocResPgLink_newRallyDesign)) { //note: new rally dashboard quick link
+						planDocElement=planDocResPgLink_newRallyDesign;
+					} else { //note: either active or pre-eff user
+						navigateDirectToBnCPag();
+						if (noWaitValidate(preEffPlanDocLnkOnBncPg)) { //note: pre-eff user
+							planDocElement=preEffPlanDocLnkOnBncPg;
+						} else if (noWaitValidate(activeUsrPlanDocLnkOnBncPg)){ //note: active user
+							planDocElement=activeUsrPlanDocLnkOnBncPg;
+						} else {
+							Assert.assertTrue("PROBLEM - unable to locate the navigate to PlanDoc page from Benefits page", false);
+						}
+					}
+					checkModelPopup(driver, 2);
+					scrollElementToCenterScreen(planDocElement);
+					planDocElement.click();
+				}
 			} else {
 				if (driver.getCurrentUrl().contains("mymedicareaccount"))
 					driver.navigate().to("https://" + MRScenario.environmentMedicare
@@ -4495,4 +4574,33 @@ public class AccountHomePage extends UhcDriver {
 		
     return null;
 	}
+	
+	/*
+	 * validate that the Find care tab is not displayed on the header
+	 */
+
+	public void onlyFindCareNotAvailable() {
+
+		if (locateElementWithinShadowRoot(shadowRootHeader, "a[data-testid*=nav-link-find-care]")!=null) {
+			Assert.fail("find care tab is displayed");
+		}
+	}
+
+	/**
+	 * validate Find Care Tab is displayed
+	 */
+
+	public void validateFindCareTab() {
+		if (validate(findCareUsingLinkText,0)) {
+			Assert.assertTrue("Find Care and Cost tab is not displayed", validate(findCareUsingLinkText,0));
+		} else {
+			System.out.println("Unable to locate 'Find Care & Costs' from dashboard, check to see if it's in shadow-root");
+			if(locateElementWithinShadowRoot(shadowRootHeader, "a[data-testid*=nav-link-find-care]")==null) {
+				Assert.fail("find care tab is not displayed");
+			}
+		}
+
+	}
+	
+	
 }

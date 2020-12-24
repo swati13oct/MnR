@@ -77,6 +77,7 @@ public class SupplementalBenefitsPage extends UhcDriver{
 	public AuthorizationPage navigate_to_Authorization_Page() {
 		validateNew(NextBtn);
 		jsClickNew(NextBtn);
+		threadsleep(2000);
 		/*JavascriptExecutor executor = (JavascriptExecutor)driver;
 		executor.executeScript("arguments[0].click();", NextBtn);*/
 		

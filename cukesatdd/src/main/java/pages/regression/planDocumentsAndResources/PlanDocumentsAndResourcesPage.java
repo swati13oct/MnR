@@ -98,8 +98,8 @@ public class PlanDocumentsAndResourcesPage extends PlanDocumentsAndResourcesBase
 		anoc.validateDefaultLangSelect_ANOC(sectionDisplay);
 	}
 
-	public void  validateJumplink_PD(boolean sectionDisplay) {
-		providerDirectories.validateJumplink_PD(sectionDisplay);
+	public void  validateJumplink_PD(boolean sectionDisplay, String memberType) {
+		providerDirectories.validateJumplink_PD(sectionDisplay, memberType);
 	}
 
 	public void validateSectionHeader_PD(HashMap<String, String> testInputInfoMap, boolean sectionDisplay, HashMap<String, Boolean> expectedDocTypeDisplayMap, HashMap<String, String> yearsMap) {

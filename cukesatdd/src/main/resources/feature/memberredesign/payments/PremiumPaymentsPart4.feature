@@ -1,10 +1,10 @@
 Feature: 1.19 Verify the premium payment flows on member portal - Part 4 - Test case 27 to 32
 
-Background: Feature security flag needs to be true before ATDD script execution
-     Given First check if feature security flag is set to true
-      | Feature           | UCPPayments |
-###############################Regression Scenarios Begin Here ########################################
+  Background: Feature security flag needs to be true before ATDD script execution
+    Given First check if feature security flag is set to true
+      | Feature | UCPPayments |
 
+  ###############################Regression Scenarios Begin Here ########################################
   #Test Case 27 - Pre-effective federal member with no billing and no payment history
   @regressionMember
   Scenario Outline: FID: <FID> -plan: <planType> -memberType: <memberType> - Test Case 27 -Verify payments for Pre-effective Federal member with no billing and no payment history
@@ -150,8 +150,8 @@ Background: Feature security flag needs to be true before ATDD script execution
     Then user clicks on Make Payment button and lands on Premium Payments page
 
     Examples: 
-      | TID   | planType | memberType       | copayCategory | Test Scenario                          |
-      | XXXXX | MAPD     | ACTIVEIndPayment | NON LIS       | Federal member with Total Amount Due>0 |
+      | TID   | planType | memberType              | copayCategory | Test Scenario                          |
+      | XXXXX | MAPD     | ACTIVEIndPayment_BNC_MP | NON LIS       | Federal member with Total Amount Due>0 |
 
   #Test Case 31 - Payment flow  for Fed+Fed - Active Group PDP + Active Group SSUP member - Submit One time EFT for both plans
   @regressionMember
@@ -176,7 +176,7 @@ Background: Feature security flag needs to be true before ATDD script execution
     Then User navigates to payment confirmation page and verifies ConfirmationNo for One time
     And the user delete recurring payment record from GPS so that he can run recurring payment again
       | Payment Type | <paymentType> |
-    And the user moves to Go to Payment History Page button
+    And the user moves to Go to Payment History Page button for one time payment
     And user clicks on Make one time payment on payment overview page for plan 2
     And user selects other amount and enters "2.00" and selects Checking Account and click on Next button
     And user Enters all Mandatory fields on form page and click on Authorize button for Make one Time CA

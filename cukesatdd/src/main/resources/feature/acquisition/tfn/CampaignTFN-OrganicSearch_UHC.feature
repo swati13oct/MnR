@@ -182,8 +182,8 @@ Feature: To test Organic Search Campaign TFN on UHC site
      # | ulayer |         880180 |         880188 |         880189 | /?WT.mc_id=800086 |         800086 | health-plans/enroll/ma-enrollment.html | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | health-plans/medicare-supplement-plans/medicare-information.html?vpp=true | //*[@id='tfn'] |
 | ulayer |         880180 |         880188 |         880189 | /?WT.mc_id=800086 |         800086 | enroll/ma-enrollment.html | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | health-plans/medicare-supplement-plans/medicare-information.html?vpp=true | //*[@id='tfn'] |
       
-     
-    @Scenario4_7Campaign_Trafic_Member_UHC 
+          
+   @Scenario4_7Campaign_Trafic_Member_UHC1
    Scenario Outline: 4.7 Campaign traffic from Member page to Acquisition Portals for UHC
    Given the user is on the uhcmedicaresolutions site landing page
     And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
@@ -191,6 +191,7 @@ Feature: To test Organic Search Campaign TFN on UHC site
       | PSC Code | <Precedence1PSC> |
      Then the user navigates to following memeber signin page and navigate to view medicare plans link UHC
      | Member Signin URL |<memberSignIn>     |
+      And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
      Then the user validates PSC code
       | PSC Code | <Precedence2PSC> |
       Then the user validate the sam icons tfn with federal TFN on Acquistion page
@@ -269,4 +270,7 @@ Feature: To test Organic Search Campaign TFN on UHC site
       | 15531 | blayer | 80001   | PDP      | No              |future  | 880180  |  8013925          |//button[@id='sam-call-button']//*[contains(@class,'sam__button__text desktop')] |
       
     
+      
+      
+      
       

@@ -205,6 +205,36 @@ public class MemberRedesignHeaderStepDefinition {
 	}
 
 	/**
+	 *  validate Find care tab header
+	 */
+	@Then("^I should be able to see and use the Find Care tab Header$")
+	public void I_should_be_able_to_see_and_use_the_Find_Care_tab() {
+		if ("YES".equalsIgnoreCase(MRScenario.isTestHarness)) {
+			TestHarness testHarness = (TestHarness) getLoginScenario().getBean(PageConstantsMnR.TEST_HARNESS_PAGE);
+			testHarness.validateFindCareTab();
+		}else{	
+			AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean
+				(PageConstantsMnR.ACCOUNT_HOME_PAGE);
+						accountHomePage.validateFindCareTab();
+						accountHomePage.validateFindCarePage();
+					}
+	}
+	
+	/**
+	 * verify that the Find Care tab is not displayed
+	 */
+	@Then("^I should not be able to see the Find Care tab Header$")
+	public void I_should_not_be_able_to_see_the_Find_Care_tab() {
+		if ("YES".equalsIgnoreCase(MRScenario.isTestHarness)) {
+			TestHarness testHarness = (TestHarness) getLoginScenario().getBean(PageConstantsMnR.TEST_HARNESS_PAGE);
+			testHarness.validateFindCareTabNotAvailable();
+		}else{
+			AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
+			accountHomePage.onlyFindCareNotAvailable();
+		}
+	}
+	
+	/**
 	 *  @toDo : see and validate Claims tab Header
 	 */
 	@Then("^I should be able to see and use the Claims tab Header$")

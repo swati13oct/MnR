@@ -488,10 +488,10 @@ public class ProfileandPreferencesPage extends UhcDriver {
 	@FindBy(xpath = "//*[@class='section main-view ng-scope']//*[@id='phoneview']/div[@class='go-to-icon test']/i")
 	private WebElement phoneSectionArrowIframe;
 
-	@FindBy(xpath = "//*[@id='phone']/div[2]/div[1]/div[1]/div/span[2]")
+	@FindBy(xpath = "//*[@id='phoneview']/div[1]/div[2]/div/div[1]/p/span[1]")
 	private WebElement updatedHomePhoneAfterSave;
 	
-	@FindBy(xpath = "//*[@id='phone']/div[2]/div[1]/div[2]/div/span[2]")
+	@FindBy(xpath = "//*[@id='phoneview']/div[1]/div[2]/div/div[4]/p/span[1]")
 	private WebElement updatedMobilePhoneAfterSave;
 
 	@FindBy(id = "main")
@@ -2013,18 +2013,18 @@ private WebElement editEmailAddressArrowbutton;
 		validateNew(hsidPasswordLink);
 		hsidPasswordLink.click();
 		Thread.sleep(10000);
-		System.out.println("PageTitle " + driver.getTitle());
-		Assert.assertTrue(driver.getTitle().contains("identity"));
-		ConfirmSecurityQuestion cs = new ConfirmSecurityQuestion(driver);
-		try {
-			cs.enterValidSecurityAnswer();
-			System.out.println(driver.getCurrentUrl());
-			System.out.println("Check to see if document.readyState is ready...");
-			CommonUtility.checkPageIsReadyNew(driver); 
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		System.out.println("PageTitle " + driver.getCurrentUrl());
+		Assert.assertTrue(driver.getTitle().contains("settings"));
+//		ConfirmSecurityQuestion cs = new ConfirmSecurityQuestion(driver);
+//		try {
+//			cs.enterValidSecurityAnswer();
+//			System.out.println(driver.getCurrentUrl());
+//			System.out.println("Check to see if document.readyState is ready...");
+//			CommonUtility.checkPageIsReadyNew(driver);
+//		} catch (Exception e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 		
 		CommonUtility.waitForPageLoadNew(driver, usernameText, 30);
 		if (validateNew(passwordEditLink))

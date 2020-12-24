@@ -23,7 +23,7 @@ import cucumber.api.CucumberOptions;
 		outputFolder = "target/RunMRATDDAcquisitionPREDCEVppIntegrationAARP")
 @CucumberOptions(
 		glue = { "atdd.framework", "acceptancetests.acquisition" },
-		features = { "src/main/resources/feature/acquisition" },
+		features = { "src/main/resources/feature/acquisition/PlanRecommendationEngine" },
 		plugin = { "pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionPREDCEVppIntegrationAARP.json" },
 		tags = { "@PRE_VppPlanSummaryCard_DCE_AARP" })
 

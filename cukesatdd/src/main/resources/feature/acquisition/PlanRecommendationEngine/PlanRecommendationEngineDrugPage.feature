@@ -255,7 +255,7 @@ Feature: Plan Recommendation Engine flow - Verify Drug page in plan Recommendati
 
     Examples: 
       | Zipcode | isMultiCounty | county | isCoverageOpt | specialNeeds             | travel                     | doctors    | DoctorsName | isMultiDoctor | Drug Selection | SearchText | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch |
-      |   90201 | NO            |        | MAPD          | Medicaid,chronic,nursing | withinUS,outsideUS,regular | UHGNetwork |             |               | Yes            | Lipi       | Lipitor,NO,,,25,1,YES,NO                                             |
+      |   90201 | NO            |        | MAPD          | Medicaid,chronic,nursing | withinUS,outsideUS,regular | UHGNetwork |             |               | Yes            | Lipitor    | Lipitor,NO,,,25,1,YES,NO                                             |
 
   @PRE @planrecommendation @drugpage @chooseNodrug @drugpageadddrug @F374225
   Scenario Outline: <Zipcode>, <isMultiCounty> , <isCoverageOpt> , <specialNeeds> , <travel> , <doctors> , <Drug Selection> - To validate Drug page choose no drug function in Plan Recommendation Engine

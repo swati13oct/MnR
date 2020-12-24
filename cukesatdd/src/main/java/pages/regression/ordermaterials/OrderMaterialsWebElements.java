@@ -16,6 +16,9 @@ public class OrderMaterialsWebElements extends UhcDriver  {
 
 	@FindBy(xpath="//*[@id='profileTabHeader']//div[@class='tabs-desktop']//li//a[contains(.,'Med') and contains(.,'Drug')]") 
 	protected WebElement OPM_comboTab_MAPD;
+	
+	@FindBy(xpath="//*[@id='profileTabHeader']//div[@class='tabs-desktop']//li//a[contains(.,'Med')") 
+	protected WebElement OPM_comboTab_MA;
 
 	@FindBy(xpath="//*[@id='profileTabHeader']//div[@class='tabs-desktop']//li//a[contains(.,'Supplement')]") 
 	protected WebElement OPM_comboTab_SHIP;

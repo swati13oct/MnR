@@ -1,5 +1,10 @@
 Feature: 1.15 Member pre-effective functionality
 
+ Background: Feature security flag needs to be true before ATDD script execution
+     Given First check if feature security flag is set to true
+      | Feature | UCPUserManagement |
+###############################Regression Scenarios Begin Here ########################################
+
   @regressionMember
   Scenario Outline: -planType: <planType> - Member Type: - <memberType> - Verify that correct links and messages are displayed on Dashboard and Secondary Page.
     Given login with following details logins in the member portal and validate elements

@@ -8,6 +8,7 @@ import java.util.regex.Pattern;
 
 import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -46,6 +47,7 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 			distance=distance+" miles";
 		sleepBySec(3);
 		CommonUtility.waitForPageLoadNew(driver, distanceDropownID, 60);
+		scrollToView(distanceDropownID);
 		selectFromDropDownByText(driver, distanceDropownID, distance);
 		sleepBySec(3);
 		String initialZipVal=zipcodeField.getAttribute("value");
@@ -63,7 +65,7 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 					System.out.println("This is either the first time entering zip for multicounty or changing to zip that's multicounty, expect selection popup");
 					Assert.assertTrue("PROBLEM - expects zipcode '"+zipcode+"' with multi-county but county selection popup is NOT showing", 
 							pharmacyValidate(countyModal));
-					driver.findElement(By.xpath("//div[@id='selectCounty']//a[text()='" + county + "']")).click();
+					jsClickNew(driver.findElement(By.xpath("//div[@id='selectCounty']//a[text()='" + county + "']")));
 					CommonUtility.checkPageIsReadyNew(driver);
 					CommonUtility.waitForPageLoadNew(driver, pharmacylocatorheader, 10); //note: should be on vpp page afterward
 				} else {
@@ -81,11 +83,14 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 	public void validateNoresultsZipcodeError(String zipcode) {
 		zipcodeField.clear();
 		sleepBySec(8);
-		
+
 		zipcodeField.sendKeys(zipcode);
 		if(zipcode.length()!=5){
+			zipcodeField.sendKeys(Keys.TAB);
+			sleepBySec(2);
+			/*jsMouseOver(distanceDropDownField);
 			distanceDropDownField.click();
-			distanceOption_15miles.click();
+			distanceOption_15miles.click();*/
 		}
 		//searchbtn.click();
 		//CommonUtility.waitForPageLoadNew(driver, zipcodeErrorMessage, 10);
@@ -141,6 +146,7 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 	}
 
 	public void selectsPlanName(String planName, String testSiteUrl) {
+		scrollToView(seletPlandropdown);
 		waitTllOptionsAvailableInDropdown(seletPlandropdown, 45);
 //		seletPlandropdown.click();
 		jsClickNew(seletPlandropdown);
@@ -182,8 +188,9 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 
 	public void selectsPlanYear(String planYear) {
 		CommonUtility.checkPageIsReadyNew(driver);
+		scrollToView(yearDropdown);
 		waitTllOptionsAvailableInDropdown(yearDropdown, 45);
-//		yearDropdown.click();
+		//		yearDropdown.click();
 		Select yearList=new Select(yearDropdown);
 		yearList.selectByVisibleText(planYear);
 		System.out.println("Selected year='"+planYear+"' from year dropdown");
@@ -293,6 +300,7 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 				if (isPlanYear()) {
 					System.out.println("Year dropdown is displayed, proceed to select '"+testPlanYear+"' year");
 					selectsPlanYear(testPlanYear);
+					sleepBySec(2);
 					CommonUtility.checkPageIsReady(driver);
 				}
 				selectsPlanName(planName, testSiteUrl);

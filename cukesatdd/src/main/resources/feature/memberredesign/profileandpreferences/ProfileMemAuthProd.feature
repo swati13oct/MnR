@@ -30,7 +30,7 @@ Feature: 1.02.1 Member Profile page - Prod
 
     Examples:
       | TID        | username | password | MemUserName       | planType | memberType         |
-      | Unknown_11 | ujethwa | 221Umang | WILLIAMGARRISON48 | MAPD     | MAPD_Group         |
+      | Unknown_11 | ujethwa | Member22 | WILLIAMGARRISON48 | MAPD     | MAPD_Group         |
 
   @prod_accountProfile01
   Scenario Outline: TID: <TID> -Plan Type: <planType> -Member Type: <memberType> - To test end to end regression scenario for account profile and preferences for a combo member
@@ -51,7 +51,7 @@ Feature: 1.02.1 Member Profile page - Prod
 
     Examples:
       | TID       | username | password | MemUserName | planType       | memberType              |
-      | Unknown_6 | ujethwa | 221Umang | LUISGARCIA2054 | Combo_PDP_SSUP | EPMPEnabled_ProfilePref |
+      | Unknown_6 | ujethwa | Member22 | LUISGARCIA2054 | Combo_PDP_SSUP | EPMPEnabled_ProfilePref |
 
 
   @prod_accountProfile02
@@ -79,10 +79,10 @@ Feature: 1.02.1 Member Profile page - Prod
 
     Examples:
       | TID        | username | password | MemUserName       | planType | memberType         |
-      | Unknown_7  | ujethwa | 221Umang | LSLOMSKI777       | PDP      | PDP_AARPIndividual |
-      | Unknown_8  | ujethwa | 221Umang | LAMBS1972        | GrpPDP   | PDP_Group          |
-      | Unknown_9  | ujethwa | 221Umang | TOMIKOARMER2      | MA       | MA_UHCIndividual   |
-      | Unknown_11 | ujethwa | 221Umang | WILLIAMGARRISON48 | MAPD     | MAPD_Group         |
+      | Unknown_7  | ujethwa | Member22 | LSLOMSKI777       | PDP      | PDP_AARPIndividual |
+      | Unknown_8  | ujethwa | Member22 | LAMBS1972        | GrpPDP   | PDP_Group          |
+      | Unknown_9  | ujethwa | Member22 | TOMIKOARMER2      | MA       | MA_UHCIndividual   |
+      | Unknown_11 | ujethwa | Member22 | WILLIAMGARRISON48 | MAPD     | MAPD_Group         |
 
   @prod_accountProfile03
   Scenario Outline: TID: <TID> -Member Type: <memberType> -To test end to end regression scenario for account profile page for PCP medica members
@@ -110,7 +110,7 @@ Feature: 1.02.1 Member Profile page - Prod
 
     Examples:
       | TID        | username | password | MemUserName | planType | memberType |
-      | Unknown_13 | ujethwa | 221Umang | marylamb823 | MA       | PCP        |
+      | Unknown_13 | ujethwa | Member22 | marylamb823 | MA       | PCP        |
 
   @prod_accountProfile04
   Scenario Outline: TID: <TID> -Plan Type: <planType> -Member Type: <memberType> -To test end to end regression scenario for account profile  page for a terminated member
@@ -138,7 +138,7 @@ Feature: 1.02.1 Member Profile page - Prod
 
     Examples:
       | TID        | username | password | MemUserName | planType | memberType        |
-      | Unknown_15 | ujethwa | 221Umang | PJVANEKRIS65  | MAPD     | Terminated_AccPro |
+      | Unknown_15 | ujethwa | Member22 | PJVANEKRIS65  | MAPD     | Terminated_AccPro |
 
   @prod_accountProfile05 @SHIP_ProfilePref  @prodSanity_Ship
   Scenario Outline: TID: <TID> -Plan Type: <planType> - To verify Profile page End to End test for Ship Members
@@ -174,5 +174,5 @@ Feature: 1.02.1 Member Profile page - Prod
 
     Examples:
       | TID   | username | password | MemUserName | planType | memberType       |
-      | 15103 | ujethwa | 221Umang |kataz2525 | SHIP     | SHIP_ProfilePref |
+      | 15103 | ujethwa | Member22 |kataz2525 | SHIP     | SHIP_ProfilePref |
 

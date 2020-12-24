@@ -40,7 +40,7 @@ public class LeavingOLEmodal extends UhcDriver{
 
 	public Object returntoOLE() {
 		validate(NoBacktoOLE);
-		NoBacktoOLE.click();
+		jsClickNew(NoBacktoOLE);
 		try {
 			Thread.sleep(6000);
 		} catch (InterruptedException e) {

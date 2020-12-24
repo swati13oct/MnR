@@ -162,4 +162,11 @@ public class PlanRecommendationEngineTravelPage extends UhcDriver {
 
 		driver.navigate().back();
 	}
+	
+	public void edit_travel(String options) {
+		String snpoptions[] = options.split(",");
+		for(String option:snpoptions) {
+			travelpageFunctional(option);
+		}
+	}
 }

@@ -426,9 +426,13 @@ public class BenefitsAndCoverageBase extends BenefitsAndCoverageWebElements {
 	}
 
 	public void clicksOnJumpLinksAndCheckRespectiveSectionsDSNP(String planType, String memberType) {
-		
-		clicksOnLinkAndBackToTop(getJmpLinkToMedicalCopaysOrCoinsurance(), getCopayscoinsuranceheader());
-		clicksOnLinkAndBackToTop(getJmpLinkToOutofPocketMaximum(), getOutOfPocketSectionHeader());
+		//tbd if (MRScenario.environment.equals("offline") || MRScenario.environment.equals("prod")) {
+		//tbd 	clicksOnLinkAndBackToTop(getJmpLinkToMedicalCopaysOrCoinsurance(), getCopayscoinsuranceheader());
+		//tbd 	clicksOnLinkAndBackToTop(getJmpLinkToOutofPocketMaximum(), getOutOfPocketSectionHeader());
+		//tbd } else {
+		Assert.assertTrue("PROBLEM - should not be able to locate the 'MedicalCopaysOrCoinsurance' jumplink", !validate(getCopayscoinsuranceheader(),0));
+		Assert.assertTrue("PROBLEM - should not be able to locate the 'OutofPocketMaximum' jumplink", !validate(getOutOfPocketSectionHeader(),0));
+		//tbd }
 		clicksOnLinkAndBackToTop(getJmpLinkToPrimaryCareProvider(), getPrimaryCareProviderHeaderInd());
 		clicksOnLinkAndBackToTop(getJmpLinkToDrugCopaysAndDiscounts(), getDrugCopaysAndDiscountsSectionHeader());
 		clicksOnLinkAndBackToTop(getJmpLinkToDrugCoverage(), getDrugCoverageSectionHeader());
@@ -539,6 +543,7 @@ public class BenefitsAndCoverageBase extends BenefitsAndCoverageWebElements {
 	//tbd public boolean validateWithValue(String value, WebElement element) {
 	public void validateWithValue(String value, WebElement element) {
 		Assert.assertTrue("Element " +value+ " not found!!!!", validate(element,0));
+		scrollToView(element);
 		System.out.println("Element " +value+ " found!!!!");
 		/* tbd 
 		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
@@ -782,6 +787,7 @@ public class BenefitsAndCoverageBase extends BenefitsAndCoverageWebElements {
 	public void contactUslink() {
 		validateWithValue("Link- Contact US", contactUslink);
 		if (contactUslink.isEnabled()) {
+			scrollElementToCenterScreen(contactUslink);
 			contactUslink.click();
 			sleepBySec(10);
 			Assert.assertTrue("Contact Us page is loaded successfully",driver.getCurrentUrl().contains("contact-us/overview.html"));
@@ -937,7 +943,6 @@ public class BenefitsAndCoverageBase extends BenefitsAndCoverageWebElements {
 		
 	}
 			
-	
 	
 	public void clicksToOptumRxSSOLink(String optumrxssolink ) {
 		// TODO Auto-generated method stub

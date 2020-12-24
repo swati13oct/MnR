@@ -15,8 +15,8 @@ import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 import cucumber.api.DataTable;
 import gherkin.formatter.model.DataTableRow;
-import pages.acquisition.ulayer.ComparePlansPage;
-import pages.acquisition.ulayer.VPPPlanSummaryPage;
+import pages.acquisition.commonpages.ComparePlansPage;
+
 
 public class NonMemberCreateProfile extends UhcDriver {
 	
@@ -126,6 +126,7 @@ public class NonMemberCreateProfile extends UhcDriver {
 			}
 			waitforElementNew(progressBar);
 			waitforElementNew(successMessage);
+			Thread.sleep(2000);
 //			switchToNewTab();
 			Set<String> tabs = driver.getWindowHandles();
 			for(String tab : tabs) {
