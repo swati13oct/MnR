@@ -7,6 +7,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import gherkin.formatter.model.Match;
+import pages.regression.testharness.TestHarness;
+
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -817,6 +819,8 @@ public class PharmaciesAndPrescriptionsWebElements extends UhcDriver {
 	}
 
 	public void clickOnActiveMedicationDisplayedOnCurrentMedications() {
+		TestHarness.checkForIPerceptionModel(driver);
+		checkModelPopup(driver);
 		List<Integer> listOfIndex = getListOfIndexForDrugName();
 		Random rand = new Random();
 		rand_int = rand.nextInt(listOfIndex.size());

@@ -2270,7 +2270,7 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 		}
 
 		public void validateProperUseTab() {
-
+			waitforElement(properUseTab);
 			Assert.assertTrue("PROBLEM - unable to locate Proper Use tab element", properUseTab());
 		}
 
@@ -3278,8 +3278,10 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 		}
 		
 		public void clickOnViewAllMedicationCallToAction() {
+			TestHarness.checkForIPerceptionModel(driver);
 			Assert.assertTrue("PROBLEM - unable to locate View All Medication call to Action element",
-					pnpValidate(ViewAllMedicationCallToActnBtn));
+					validate(ViewAllMedicationCallToActnBtn,50));
+			checkModelPopup(driver);
 			ViewAllMedicationCallToActnBtn.click();
 		}
 		
