@@ -1134,9 +1134,9 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 			int size = countOfNewWindowTab();
 			System.out.println("Number of windows opened when user click on 2020 CTA is :: " + size);
 			if (size == 1) {
-				pageloadcomplete();
+				waitforElement(SearchButtonPharmacyLocatorPageByRally);
 				Assert.assertTrue("PROBLEM - Pharmacy Locator Tool Page is NOT displayed successfully",
-						pnpValidate(SearchButtonPharmacyLocatorPageByRally, 50));
+						pnpValidate(SearchButtonPharmacyLocatorPageByRally, 90));
 			} else {
 				pageloadcomplete();
 				/*Assert.assertTrue("PROBLEM - Pharmacy Locator Tool Page is NOT displayed",
