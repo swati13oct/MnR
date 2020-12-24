@@ -29,11 +29,11 @@ Scenario Outline: <scenario> 1.19.1.2 To test the SAM icons on Visitor Profile P
   #Then user validates visitor profile on home page site
 	Then the user validates whether call icon is visible  
 	Then the user validates whether chat icon is visible
-		@samChatCallulayer
+		@samChatCallulayer1
 		Examples: 
 			| pagename |site| scenario               |
 			|/|AARP|E2E Scenario 3_AMP|
-			@samChatCallblayer
+			@samChatCallblayer1
 		Examples: 
 			| pagename |site| scenario               |			
 			|/|UHC|E2E Scenario 3_UMS|
