@@ -1,8 +1,8 @@
- @UATRegression @F448210
+@UATRegression @F448210
 Feature: 1.13 UAT - Shop Blog Pages flows
     
      
-    @GlobalComponentsAARPShopPages @UATRegression 
+  @GlobalComponentsAARPShopPages @UATRegression 
   Scenario Outline: To verify Global Components for the page mentioned of AARP site <pageName> : <path>
     Given the user is on medicare acquisition site landing page
   		| Site | <site>	|
