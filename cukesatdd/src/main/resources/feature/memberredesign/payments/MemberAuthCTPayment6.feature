@@ -1,9 +1,9 @@
 @regressionMemberPROD
 Feature: S1.1 To test Member Auth premium payment flows Micro App.
 
-  #Test Case 12 - Verify MakeOne time Payment submission for Credit card with Replace card link
+  #Test Case 15 - Verify MakeOne time Payment submission for Credit card with Replace card link
   @regressionMemberPROD
-  Scenario Outline: <planType> -memberType: <memberType> - Test Case 11 -Verify MakeOne time Payment submission for Credit card with Replace card link
+  Scenario Outline: <planType> -memberType: <memberType> - Test Case 15 -Verify MakeOne time Payment submission for Credit card with Replace card link
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
       | Username | <username> |
