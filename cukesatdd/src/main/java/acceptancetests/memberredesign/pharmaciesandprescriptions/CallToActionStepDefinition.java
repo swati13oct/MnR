@@ -50,7 +50,7 @@ public class CallToActionStepDefinition {
 		} else {
 			AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario()
 					.getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
-			pnpPg = accountHomePage.navigateToPharmaciesAndPrescriptions();
+			pnpPg = accountHomePage.navigateToPharmaciesAndPrescriptionWithOutTestHarness();
 			if (pnpPg == null) // note: try secondary page before giving up
 				pnpPg = accountHomePage.navigateToPharmaciesAndPrescriptionsFromSecondaryPg();
 			getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE,

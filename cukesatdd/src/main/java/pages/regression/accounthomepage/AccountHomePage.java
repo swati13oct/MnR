@@ -4471,7 +4471,59 @@ public class AccountHomePage extends UhcDriver {
 		if (validate(myDocumentsHeader,5)) {
 			return new MyDocumentsPage(driver);
 		}
+		try {
+			
+		}finally {
+			
+		}
 		
     return null;
+	}
+	
+	public PharmaciesAndPrescriptionsPage navigateToPharmaciesAndPrescriptionWithOutTestHarness() {
+		System.out.println("user is on '" + MRScenario.environment + "' login page");
+		checkForIPerceptionModel(driver);
+		if (driver.getCurrentUrl().contains("/dashboard")) {
+			System.out.println("User is on dashboard page and URL is ====>" + driver.getCurrentUrl());
+			if (validate(pharPresDashboardLink))
+				pharPresDashboardLink.click();
+			else if (validate(pharPresDashboardLinkAlternative))
+				pharPresDashboardLinkAlternative.click();
+			 else if(validate(pharmacyPrescriptionTab)) {
+				 scrollToView(pharmacyPrescriptionTab);
+				 pharmacyPrescriptionTab.click();
+				}				 
+			else {
+				if (validate(shadowRootHeader)) {
+					System.out.println("Check for shadow-root before giving up");
+					attemptShadowRootTopMenuLinkNavigationToPnP();
+				} else {
+					System.out.println("There is no shadow-root menu");
+				}
+			}
+			CommonUtility.checkPageIsReadyNew(driver);
+		}
+		if (driver.getCurrentUrl().contains("pharmacy/overview.html"))
+			return new PharmaciesAndPrescriptionsPage(driver);
+		return null;
+	}
+	
+	public void attemptShadowRootTopMenuLinkNavigationToPnP() {
+		//note: use the 2nd menu link as the base and determine which one I really need
+		// if 2 is FIND CARE then 6 is PnP
+		// if 2 is CARE then 5 is PnP
+			String pnpTopMenuItemCssStr="#sticky-main-nav > div > div > div > a:nth-child(5)";
+			WebElement pnpTopMenuLink = locateElementWithinShadowRoot(shadowRootHeader,
+					pnpTopMenuItemCssStr);
+			if (isPnpLink(pnpTopMenuLink.getText())) {
+				locateAndClickElementWithinShadowRoot(shadowRootHeader, pnpTopMenuItemCssStr);
+			}
+			{
+				pnpTopMenuItemCssStr="#sticky-main-nav > div > div > div > a:nth-child(6)";
+				pnpTopMenuLink = locateElementWithinShadowRoot(shadowRootHeader,
+						pnpTopMenuItemCssStr);
+				if (isPnpLink(pnpTopMenuLink.getText())) 
+					locateAndClickElementWithinShadowRoot(shadowRootHeader, pnpTopMenuItemCssStr);
+			}
 	}
 }
