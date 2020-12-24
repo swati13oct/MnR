@@ -70,28 +70,6 @@ public class VppCommonStepDefinition {
 	 * @toDo:user is on medicare acquisition site landing page
 	 */
 
-	@Given("^the user is on medicare acquisition site landing page$")
-	public void the_user_on__medicaresolutions_Site(DataTable givenAttributes) {
-		wd = getLoginScenario().getWebDriverNew();
-		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		Map<String, String> memberAttributesMap = new HashMap<String, String>();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}
-		String site = memberAttributesMap.get("Site");
-		AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd, site);
-
-		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
-		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, aquisitionhomepage);
-		getLoginScenario().saveBean(DCERedesignCommonConstants.DRUGLIST, " ");
-		getLoginScenario().saveBean(DCERedesignCommonConstants.YOUPAYLIST_ALLDRUGS, " ");
-
-		getLoginScenario().saveBean(oleCommonConstants.ACQ_SITE_NAME, site);
-		if (site.equalsIgnoreCase("AARP"))
-			aquisitionhomepage.validateSubtitle();
-	}
-
 //	@Given("^the user is on medicare acquisition site landing page$")
 //	public void the_user_on__medicaresolutions_Site(DataTable givenAttributes) {
 //		wd = getLoginScenario().getWebDriverNew();
@@ -103,10 +81,14 @@ public class VppCommonStepDefinition {
 //		}
 //		String site = memberAttributesMap.get("Site");
 //		AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd, site);
-// 
+//
 //		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 //		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, aquisitionhomepage);
-//		if(site.equalsIgnoreCase("AARP"))
+//		getLoginScenario().saveBean(DCERedesignCommonConstants.DRUGLIST, " ");
+//		getLoginScenario().saveBean(DCERedesignCommonConstants.YOUPAYLIST_ALLDRUGS, " ");
+//
+//		getLoginScenario().saveBean(oleCommonConstants.ACQ_SITE_NAME, site);
+//		if (site.equalsIgnoreCase("AARP"))
 //			aquisitionhomepage.validateSubtitle();
 //	}
 
