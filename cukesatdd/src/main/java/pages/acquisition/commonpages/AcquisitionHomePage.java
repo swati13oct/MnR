@@ -301,10 +301,13 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "//button[@id='sam-call-button']//*[contains(@class,'sam__button__text desktop')]")
    	private WebElement callsam;
    	
-	@FindBy(xpath = "//*[@data-asset-container='Right rail:Call UnitedHealthcare']")
+	@FindBy(xpath = "(//div[@ng-show='fedTfn'])[2]/p/span/a/u")
    	private WebElement callusonpage;
 	
-	@FindBy(xpath = "//a[@dtmid='acq_floating_tfn_modal']/following::div/p/a")
+	@FindBy(xpath = "(//span[contains(text(),'Need Help?')]/following::p/span/a[@class='tel tfn desktop ng-scope'])[1]")
+   	private WebElement needhelp;
+	
+	@FindBy(xpath = "//h3[contains(text(),'Call UnitedHealthcare at:')]/following::p/a[1]")
    	private WebElement tfnonpopup;
 	
    	//@FindBy(xpath = "//*[@id='sam-call-button']/div/span[1]")
@@ -3121,34 +3124,29 @@ action.moveToElement(navigationSectionHomeLink).moveToElement(ourPlansHoverLink)
 		}
 	 
 	 public void validateCallSamValue() throws InterruptedException {
-	        boolean present;
-//	        driver.navigate().refresh();
-	        try {
+	       
+	        threadsleep(10);
 	        validateNew(callsam);
-	        present = true;
 	        String valueOncallSam=callsam.getText();
 	        System.out.println("valueOncallSam"+valueOncallSam);
+	        threadsleep(15);
 	        String valueonCallUs=callusonpage.getText();
 	        System.out.println("valueonCallUs"+valueonCallUs);
 	        Assert.assertEquals(valueOncallSam, valueonCallUs);
-	        
 	        callsam.click();
-	        threadsleep(5);
+	        threadsleep(10);
 	        String valueOnPopup=tfnonpopup.getText();
 	        System.out.println("valueOnPopup"+valueOnPopup);
 	        Assert.assertEquals(valueOncallSam, valueOnPopup);
 	        driver.findElement(By.xpath("//a[@class='modal-close']")).click();
-	        threadsleep(5);
-	        } catch (NoSuchElementException e) {
-	        present = false;
+	        threadsleep(10);
+	        
+	        if(needhelp.isDisplayed()) {
+	        String needHelpValue=	needhelp.getText();
+	        System.out.println("needHelpValue"+needHelpValue);
+	        Assert.assertEquals(valueOncallSam, needHelpValue);
 	        }
-	        if (present) {
-	          System.out.println("@@@@@@@@@ Able to find TFN widget @@@@@@@@@");
-	        }
-	        else
-	        	Assert.fail("@@@@@@@@@ No TFN widget @@@@@@@@@");
-	      
-		}
+	 }
 		
 		public void validateCallSamContent() throws InterruptedException {
 			

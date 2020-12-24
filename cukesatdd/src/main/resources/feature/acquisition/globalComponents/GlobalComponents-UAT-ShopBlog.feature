@@ -1,8 +1,8 @@
- @UATRegression
+ @UATRegression @F448210
 Feature: 1.13 UAT - Shop Blog Pages flows
     
      
-    @GlobalComponentsAARPShopPages 
+    @GlobalComponentsAARPShopPages @UATRegression 
   Scenario Outline: To verify Global Components for the page mentioned of AARP site <pageName> : <path>
     Given the user is on medicare acquisition site landing page
   		| Site | <site>	|
@@ -10,10 +10,11 @@ Feature: 1.13 UAT - Shop Blog Pages flows
       | PageName | <pageName> |
       | PagePath | <path>     |
     Then the user validate ZipCode Components on page using ZipCode "55410"
-    Then the user validates whether call icon is displayed
+    Then the user validates whether call icon is displayed on the page
+    Then the user validates proactive chat popup
     When the user clicks on Agent link and validates the correct URL is loaded
       |UHC Agent URL|  <UHCUrl>  |
-    Then the user validates proactive chat popup
+    
     
     
    @ShopPages_Shop5_GlobalCompsAARP
@@ -23,35 +24,33 @@ Feature: 1.13 UAT - Shop Blog Pages flows
    |E2E Scenario 1_AMP   |	AARP	| shop/medicare-supplement-plans.html              | ShopPlan: Shop Med Supp Plan | 
    |E2E Scenario 1_AMP   |	AARP	| shop/prescription-drug-plans.html                | ShopPlan: Shop PDP Plan      | 
    |E2E Scenario 1_AMP   |	AARP	| shop/dual-special-needs-plans.html               | ShopPlan: Shop DSNP Plan     | 
-   |E2E Scenario 1_AMP   |	AARP	| safe-shopping.html                               | ShopPlan: Shop               |
+   |E2E Scenario 1_AMP   |  AARP	| enroll.html                                      | ShopPlan: Enroll             |
    |E2E Scenario 1_AMP   |	AARP	| shop.html                                        | ShopPlan: Shop Hub           |
    |E2E Scenario 1_AMP   |	AARP	| shop/compare/compare-ms.html                     | ShopPlan: Compare            |
    |E2E Scenario 1_AMP   |	AARP	| shop/compare/compare-ma-ms.html                  | ShopPlan: Compare MA MS      |
-   |E2E Scenario 1_AMP   |  AARP	| enroll/ms-apply.html                             | ShopPlan: MS Enrollment   | 
-   |E2E Scenario 1_AMP   |  AARP	| enroll.html                                      | ShopPlan: Enroll|
+   |E2E Scenario 1_AMP   |  AARP	| enroll/ms-apply.html                             | ShopPlan: MS Enrollment      | 
+   |E2E Scenario 1_AMP   |	AARP	| safe-shopping.html                               | ShopPlan: Shop               |
    
-    @ShopPages_Shop5_GlobalCompsUHC
+   @ShopPages_Shop5_GlobalCompsUHC
    Examples: 
    |Scenario             |site  |path                                              | pageName            | 
    |E2E Scenario 1_UMS	 | UHC  | shop/medicare-advantage-plans.html               | ShopPlan: Shop MA Plan       | 
    |E2E Scenario 1_UMS	 | UHC	| shop/medicare-supplement-plans.html              | ShopPlan: Shop Med Supp Plan | 
    |E2E Scenario 1_UMS	 | UHC	| shop/prescription-drug-plans.html                | ShopPlan: Shop PDP Plan      | 
    |E2E Scenario 1_UMS	 | UHC	| shop/dual-special-needs-plans.html               | ShopPlan: Shop DSNP Plan     | 
-   |E2E Scenario 1_UMS	 | UHC	| safe-shopping.html                               | ShopPlan: Shop               |
+   |E2E Scenario 1_UMS	 | UHC	| enroll.html                                      | ShopPlan: Enroll             |
    |E2E Scenario 1_UMS	 | UHC	| shop.html                                        | ShopPlan: Shop Hub           |
    |E2E Scenario 1_UMS	 | UHC	| shop/compare/compare-ms.html                     | ShopPlan: Compare            |
    |E2E Scenario 1_UMS	 | UHC	| shop/compare/compare-ma-ms.html                  | ShopPlan: Compare MA MS      |
-   |E2E Scenario 1_UMS	 | UHC	| enroll/ms-apply.html                             | ShopPlan: MS Enrollment   | 
-   |E2E Scenario 1_UMS	 | UHC	| enroll.html                                      | ShopPlan: Enroll|
+   |E2E Scenario 1_UMS	 | UHC	| enroll/ms-apply.html                             | ShopPlan: MS Enrollment      |   
+   |E2E Scenario 1_UMS	 | UHC	| safe-shopping.html                               | ShopPlan: Shop               | 
     
-    
-    @ShopPages_Shop6_GlobalCompsAARP
+   @ShopPages_Shop6_GlobalCompsAARP
    Examples: 
-   |Scenario            |site   |path                                                                       | pageName            |
-   |E2E Scenario 1_AMP  |AARP   | contact-us.html                                                           | Request more help   |
-   |E2E Scenario 1_AMP  |AARP   | shop/estimate/ma-costs.html                                               | Estimate  MA  | 
-   |E2E Scenario 1_AMP  |AARP   | shop/estimate/pdp-costs.html                                              | Estimate PDP  |
-   |E2E Scenario 1_AMP  |AARP   | shop/renew-active.html                                                    | Renew Active  |
+   |Scenario            |site   |path                                                                     | pageName            |
+   |E2E Scenario 1_AMP  |AARP   | contact-us.html                                                         | Request more help   |
+   |E2E Scenario 1_AMP  |AARP   | shop/estimate/ma-costs.html                                             | Estimate  MA  | 
+   |E2E Scenario 1_AMP  |AARP   | shop/estimate/pdp-costs.html                                            | Estimate PDP  |
    |E2E Scenario 1_AMP  |AARP   | shop/medicare-advantage-plans/ma-plan-benefits.html                       | MA Plan benefits|
    |E2E Scenario 1_AMP  |AARP   | shop/compare/compare-ma.html                                              | Compare MA    |
    |E2E Scenario 1_AMP  |AARP   | shop/compare/compare-pdp.html                                             | Compare PDP   |
@@ -62,7 +61,6 @@ Feature: 1.13 UAT - Shop Blog Pages flows
    |E2E Scenario 1_AMP  |AARP	  | shop/estimate.html                                                        | ShopPlan: Estimate |
 
    
-         
    @ShopPages_Shop6_GlobalCompsUHC 
    Examples: 
    |Scenario            |site  |path                                                                       | pageName            |
@@ -81,7 +79,7 @@ Feature: 1.13 UAT - Shop Blog Pages flows
  
    
   
-   @GlobalComponentsAARPBlogPages   
+   @GlobalComponentsAARPBlogPages   @UATRegression 
   Scenario Outline: <Scenario>- To verify Global Components for the page mentioned of AARP site <pageName> : <path>
     Given the user is on medicare acquisition site landing page
   		| Site | <site>	|

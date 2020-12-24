@@ -386,13 +386,13 @@ public class GlobalComponentsCommonStepDefinition {
 	  
 
 
-@Then("^the user validates whether call icon is displayed$")
-public void the_user_validates_whether_callicon_isdisplayed() throws InterruptedException {
-	
-AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+
+
+@Then("^the user validates whether call icon is displayed on the page$")
+public void the_user_validates_whether_call_icon_is_displayed_on_the_page() throws Throwable {
+	AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
 			.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 	aquisitionhomepage.validateCallSamValue();
-
 }
 
 }
