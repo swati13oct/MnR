@@ -227,12 +227,21 @@ public class MemberAuthPage extends UhcDriver {
 			return null;
 		}
 	}
-
+	
 	public MemberAuthPage MainMemberLogin(String MemberUserName) throws InterruptedException {
+		boolean retry=false;
+		return MainMemberLogin(retry, MemberUserName);
+	}
+
+	public MemberAuthPage MainMemberLogin(boolean retry, String MemberUserName) throws InterruptedException {
 		memberUsername.clear();
 		memberUsername.sendKeys(MemberUserName);
 		FinalSearchButton.click();
 
+		if (validate(redUnableToRetrMemErr,1) && retry) {
+			System.out.println("give it one more try before giving up...");
+			FinalSearchButton.click();
+		}
 		Assert.assertTrue("PROBLEM - Got 'Unable to retrieve member' error after clicking Search button", !validate(redUnableToRetrMemErr,1));
 		//waitforElement(MemberTableUserName); // updated this wait as it is failing for 20 seconds
 		CommonUtility.waitForPageLoad(driver, MemberTableUserName, 10);
