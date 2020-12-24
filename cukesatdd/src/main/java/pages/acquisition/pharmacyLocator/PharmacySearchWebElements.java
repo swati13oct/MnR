@@ -16,7 +16,7 @@ public class PharmacySearchWebElements extends UhcDriver {
 	@FindBy(xpath="//input[@id='zipcodeTxt']")
 	protected WebElement zipcodeField;
 
-	@FindBy(xpath="//*[@id='zipcode-wrapper']//span[contains(text(),'Continue')]/..")
+	@FindBy(xpath="//*[@id='zipcode-wrapper']//button[@class='uhc-button']")
 	protected WebElement searchbtn;;
 
 	@FindBy(id = "selectmultycounty_box")
