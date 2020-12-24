@@ -612,6 +612,16 @@ public class PlanDocumentsAndResourcesFnRDocsHelper {
 			return testInputInfoMap; 
 		}
 
+		if (docName.equals("Direct Member Reimbursement FAQ")) {
+			testInputInfoMap.put("docName", docName);
+			testInputInfoMap.put("expectedUrl", "Direct_Member_Reimbursement_FAQ.pdf");
+			testInputInfoMap.put("redirectUrl", "none");
+			testInputInfoMap.put("checkDestUrl", "true");
+			testInputInfoMap.put("switchTab", "true");
+			testInputInfoMap.put("headerText","Direct Member Reimbursement Form"); 
+			testInputInfoMap.put("sampleBodyText","What is a Direct Member Reimbursement");
+			return testInputInfoMap; 
+		}
 		
 		Assert.assertTrue("PROBLEM - need to update ATDD to handle docName='"+docName+"'", false);
 		return testInputInfoMap;

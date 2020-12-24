@@ -239,6 +239,7 @@ public class PlanDocumentsAndResourcesUsersHelper {
 				targetTestDocList.add("Medical Reimbursement Form (PDF)");
 				//tbd targetTestDocList.add("Prescription Drug Reimbursement Form");
 				targetTestDocList.add("Medicare Part D Claim Form");
+				targetTestDocList.add("Direct Member Reimbursement FAQ");
 				return targetTestDocList;
 			}
 			if (subSection.equals("Authorization Forms and Information") || subSection.equals("Authorization Forms")) {
@@ -452,6 +453,7 @@ public class PlanDocumentsAndResourcesUsersHelper {
 				targetTestDocList.add("Medical Reimbursement Form (PDF)");
 				//tbd targetTestDocList.add("Prescription Drug Reimbursement Form");
 				targetTestDocList.add("Medicare Part D Claim Form");
+				targetTestDocList.add("Direct Member Reimbursement FAQ");
 				targetTestDocList.add("Prescription Mail Order Form - Preferred Mail Service Pharmacy through OptumRx");
 				return targetTestDocList;
 			}
@@ -1352,6 +1354,7 @@ public class PlanDocumentsAndResourcesUsersHelper {
 				targetTestDocList = new ArrayList<String>();
 				//tbd targetTestDocList.add("Prescription Drug Reimbursement Form");
 				targetTestDocList.add("Medicare Part D Claim Form");
+				targetTestDocList.add("Direct Member Reimbursement FAQ");
 				return targetTestDocList;
 			}
 			if (subSection.equals("Authorization Forms and Information") || subSection.equals("Authorization Forms")) {
@@ -1547,6 +1550,7 @@ public class PlanDocumentsAndResourcesUsersHelper {
 				targetTestDocList = new ArrayList<String>();
 				//tbd targetTestDocList.add("Prescription Drug Reimbursement Form");
 				targetTestDocList.add("Medicare Part D Claim Form");
+				targetTestDocList.add("Direct Member Reimbursement FAQ");
 				return targetTestDocList;
 			}
 			if (subSection.equals("Authorization Forms and Information") || subSection.equals("Authorization Forms")) {
