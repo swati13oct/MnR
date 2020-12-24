@@ -77,7 +77,7 @@ Feature: 1.11. ACQ-Pharmacy Locator AARP
 
     @PharmacyLocatorCommonUHC01b
     Examples:
-      | TID   | siteName | zipcode | distance | countyName      | cy_planYear | cy_planName                                                      | ny_planYear | ny_planName                                                      | pharmacyType                | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
+      | TID   | site | zipcode | distance | countyName      | cy_planYear | cy_planName                                                      | ny_planYear | ny_planName                                                      | pharmacyType                | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
       | 15583 | UHC      |   78006 |       10 | Comal County    |        2021 | UnitedHealthcare Medicare Advantage Choice (Regional PPO)        |        2021 | UnitedHealthcare Medicare Advantage Choice (Regional PPO)        | Retail Pharmacy             | False                 | False            | True                 |
       | 15583 | UHC      |   80002 |       10 | Adams County    |        2021 | AARP Medicare Advantage SecureHorizons Plan 1 (HMO)              |        2021 | AARP Medicare Advantage SecureHorizons Plan 1 (HMO)              | Long-term care              | False                 | False            | True                 |
       | 15583 | UHC      |   14867 |       25 | Tompkins County |        2021 | UnitedHealthcare Medicare Advantage Choice Plan 3 (Regional PPO) |        2021 | UnitedHealthcare Medicare Advantage Choice Plan 3 (Regional PPO) | Long-term care              | False                 | False            | True                 |
@@ -122,7 +122,7 @@ Feature: 1.11. ACQ-Pharmacy Locator AARP
     #@prodRegression
     @PharmacyLocatorCommonProd_AARP
     Examples: 
-      | TID   | siteName | zipcode | distance | countyName | cy_planYear | cy_planName                     | ny_planYear | ny_planName                     | pharmacyType  | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
+      | TID   | site | zipcode | distance | countyName | cy_planYear | cy_planName                     | ny_planYear | ny_planName                     | pharmacyType  | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
       | 15582 | AARP     |   10980 |       15 | None       |        2021 | AARP MedicareRx Preferred (PDP) |        2021 | AARP MedicareRx Preferred (PDP) | E-Prescribing | True                  | False            | True                 |
 
     #@pharmacylocatorAARP02b
