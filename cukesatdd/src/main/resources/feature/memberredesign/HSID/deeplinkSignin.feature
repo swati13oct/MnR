@@ -182,3 +182,17 @@ Feature: To test member Signin from various Deeplinks
     Examples: 
       | username            | password   |
       | q3_Sep_TexasPCD_015 | Password@1 |
+
+      @regressionMember @codeWarriors @F513871
+  Scenario Outline: Verify Member lands on the Talix page for the Dentegra Dental Discount article after signing in from dental vanity URL.
+    Given member lands on dentegra dental deeplink page
+    And the page is displayed with all the fields
+    And I Sign on to the M&R Member Portal
+      | User Name | <username> |
+      | Password  | <password> |
+    And I will land on the Talix page for the Dentegra Dental Discount article
+
+    Examples: 
+      | username    	| password   |
+      | q4_Ship_023 	| Password@1 |
+      |q4_Ship_ANOC_009 | Password@1 |

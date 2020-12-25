@@ -1425,6 +1425,27 @@ public class HSIDStepDefinition {
 										     virtualVisitDeeplinkLoginPage.validateVirtualVisitPage();
 										}
 										
+										/** 
+										 * member lands on Dentegra Dental Deeplink URL
+										 */
+										@Given("^member lands on dentegra dental deeplink page$")
+										public void the_SHIP_user_iS_on_dentegra_dental_deeplink_Page() throws InterruptedException{
+											WebDriver wd = getLoginScenario().getWebDriver();
+											getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+											healthwellnessDeepLinkLoginPageSHIP healthwellnessDeepLinkLoginPageSHIP = new healthwellnessDeepLinkLoginPageSHIP(wd);
+											healthwellnessDeepLinkLoginPageSHIP.navigateToDentegraDentalURL();
+											getLoginScenario().saveBean(PageConstants.AARP_HAWL,healthwellnessDeepLinkLoginPageSHIP );	
+										}
+										/** 
+										 * member lands on Talix page for the Dentegra Dental Discount article
+										 */
+										 @Given("^I will land on the Talix page for the Dentegra Dental Discount article$") 
+										 public void i_will_land_on_the_Talix_page_for_Dentegra_Dental_Page() throws InterruptedException{											
+											 healthwellnessDeepLinkLoginPageSHIP healthwellnessDeepLinkLoginPageSHIP = (healthwellnessDeepLinkLoginPageSHIP) getLoginScenario().getBean(PageConstants.AARP_HAWL);
+										     Thread.sleep(3000);
+										     healthwellnessDeepLinkLoginPageSHIP.validateDentegraDentalPage();
+										}
+										 
 										@Then("^I click on logout and validate the login page$")
 										public void click_on_logout_validate_login_page() {
 											TestHarness testHarnessPage = (TestHarness) getLoginScenario().getBean(PageConstantsMnR.TEST_HARNESS_PAGE);
