@@ -54,11 +54,13 @@ Feature: S1.1 To test Member Auth premium payment flows Micro App.
    
     Examples: 
       | UID     | planType | memberType          | routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName |username | password | memUserName       | 
-      | F243897 | SHIP     | SHIPUpdate_Payments | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    | jkuma14  | Brock@04 | vernajohnson19651 | 
+      | F243897 | SHIP     | SHIPUpdate_Payments | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    | jkuma14  | Brock@04 | dmpeters513@gmail.com | 
       
       
   @regressionMemberPROD @sanityMemberPROD2
   Scenario Outline: UID: <UID> -plan: <planType> - Test Case 09 - Verify SHIP Setup Recurring EFT flow
+    Given First check if feature security flag is set to true
+      | Feature | UCPPayments |
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
       | Username | <username> |

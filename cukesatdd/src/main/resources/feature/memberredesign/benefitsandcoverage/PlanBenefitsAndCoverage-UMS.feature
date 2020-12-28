@@ -7,22 +7,6 @@ Feature: 1.01 Member  benefits and Coverage page
 
 ###############################Regression Scenarios Begin Here ########################################
   #TO BE DEPRECATED
-  #TC01_OutpatientSurgeryCentervisits_withprovidertiering
-  #@benefitsAndCoverage01 @outpatientcenterwithprovidertier @thepredators @regressionoutpatient @BnC_Part1_regressionMember
-  Scenario Outline: Index: <index> -TID: <TID> -plan: <planType> -memberType: <memberType> - Verify the outpatient widget for a member withprovidertiering
-    Given login with following details logins in the member portal and validate elements
-      | Plan Type   | <planType>   |
-      | Member Type | <memberType> |
-    Then The user navigates to Benefits and Coverage page
-      | Plan Type | <planType> |
-    And the user with providerTier validates the Outpatient Surgery Center Visits section
-
-    @devRegression
-    Examples: 
-      | index | TID   | planType | memberType       |
-      | 01    | 15084 | MAPD     | providerTier_BnC |
-
-  #TO BE DEPRECATED
   #TC05_Primarycareprovider_specialist_withoutprovidertiering
   #@benefitsAndCoverage02 @OfficeVisitswithoutprovidertiering @regression @BnC_Part1_regressionMember
   Scenario Outline: Index: <index> -TID: <TID> -plan: <planType> -memberType: <memberType> - Verify the Office visits widget for a member withoutprovidertiering
@@ -47,8 +31,7 @@ Feature: 1.01 Member  benefits and Coverage page
 
     Examples: 
       | index | TID   | planType | memberType       |
-      | 03    | 15091 | SHIP_HIP | ComboFEDShip_BnC |
-
+      | 03    | 15091 | SHIP     | ComboFEDShip_BnC |
 
   #TC10_Benefits_for_TexasERSMember
   @benefitsAndCoverage04 @BenefitsforTexasERSMember @regression @BnC_Part2_regressionMember
@@ -113,7 +96,7 @@ Feature: 1.01 Member  benefits and Coverage page
 	@bnc_Stage_sanity_ship 
     Examples: 
       | index | TID   | planType | memberType        | language |  numberOfBenefitCards | Identifier           | count | rider   |
-      | 05    | 15094 | SHIP      | SHIP_BnC         | ENGLISH  |  5                    | EffectiveShipMedSupp |     3 | NoRider |
+      | 05    | 15094 | SHIP      | SHIP_BnC         | ENGLISH  |  7                    | EffectiveShipMedSupp |     3 | NoRider |
 
   #TC13_Benefits_for_MA_SSUP_MEDSUPMember
   @benefitsAndCoverage06 @BenefitsForMAMedsupSSUPMember @regression  @BnC_Part3_regressionMember
@@ -205,16 +188,18 @@ Feature: 1.01 Member  benefits and Coverage page
       | Member Type | <memberType> |
     Then The user navigate to Benefits and Coverage page
     And the user validates the ways to save section
+    And user validates to not display pharmacy out-of-pocket maximum beside drug lookup
+      | Type   | <type>   |
   
     @devRegression @WaystoSave_walgreens
     Examples: 
-      | index | TID   | planType | memberType             |
-      | 09    | 15242 | PDP      | Wallgreens_BnC         |
+      | index | TID   | planType | memberType             | type      |
+      | 09    | 15242 | PDP      | Wallgreens_BnC         | Individual|
 
     @devRegression @WaystoSave_mailOrder
     Examples: 
-      | index | TID   | planType | memberType             |
-      | 10    | 15243 | PDP      | MailOrderPharamacy_BnC |
+      | index | TID   | planType | memberType             | type      |
+      | 10    | 15243 | PDP      | MailOrderPharamacy_BnC | Individual|
 
     @devRegression @noWaystoSave
     Examples: 
@@ -253,6 +238,8 @@ Feature: 1.01 Member  benefits and Coverage page
     And the user validates tier link should not display
     And the user view the Drug Cost header and text
     And the user validated the Look up Drugs link
+    And user validates to not display pharmacy out-of-pocket maximum beside drug lookup
+      | Type   | <type>   |
     And the user validates Locate a Pharmacy button should be visible
       | Plan Type | <planType> |
     And the drugcost dropdown should not display
@@ -273,8 +260,8 @@ Feature: 1.01 Member  benefits and Coverage page
     And the user validates contactus section
 
     Examples: 
-      | index | TID   | planType | memberType | copayCategory | SummaryofBenefits   | EvidenceofCoverage   | ComprehensiveFormularyDrug List | AlternativeDrugList   |
-      | 13    | 15248 | PDP      | PDPLIS_BnC | LIS 3         | Summary of Benefits | Evidence of Coverage | Comprehensive Formulary         | Alternative Drug List |
+      | index | TID   | planType | memberType | copayCategory | SummaryofBenefits   | EvidenceofCoverage   | ComprehensiveFormularyDrug List | AlternativeDrugList   | type      |
+      | 13    | 15248 | PDP      | PDPLIS_BnC | LIS 3         | Summary of Benefits | Evidence of Coverage | Comprehensive Formulary         | Alternative Drug List | Individual|
       
   #TC21_PDP_LIS(3,4)- Retail Drug Cost Table
   @benefitsAndCoverage12  @PDPLIS3member @BnC_Part6_regressionMember  
@@ -466,134 +453,6 @@ Feature: 1.01 Member  benefits and Coverage page
       | index | TID   | planType | memberType | copayCategory | language | SummaryofBenefits   | EvidenceofCoverage   | ComprehensiveFormularyDrug List | name           | memberid   | effectivedate | monthlypremium | UpdatedLanguage | DisplayFlag |
       | 18    | 15366 | PDP      | Group_BnC  | NON LIS       | ENGLISH  | Summary Of Benefits | Evidence of Coverage | Comprehensive Formulary         | BBBCCB FFAAFAD | 0191976081 | 01/01/2019    | Not Available  | Tier 2          | true        |
 
-
-  #TO BE DEPRECATED
-  #TC21_MAPD_LIS(1,2)- Retail Drug Cost Table
-  #@benefitsAndCoverage17 @CMmapdindlis @BnC_Part8_regressionMember  
-  Scenario Outline: Index: <index> -TID: <TID> -plan: <planType> -memberType: <memberType> - Verify PDF section is in place on Benefits and Coverage page for Lis user
-    Given login with following details logins in the member portal and validate elements
-      | Plan Type      | <planType>      |
-      | Member Type    | <memberType>    |
-      | Copay Category | <copayCategory> |
-    Then The user navigates to Benefits and Coverage page
-      | Plan Type | <planType> |
-	Then user verifies presence of jump links
-      | Plan Type  | <planType>   |
-      | Rider      | <rider>      |
-      | MemberType | <memberType> |
-      | identifier | <Identifier> |
-    And user clicks on the jump links and checks respective sections
-      | Plan Type  | <planType>   |
-      | Rider      | <rider>      |
-      | MemberType | <memberType> |
-      | identifier | <Identifier> |
-    And verifies links irrelevant to the plan type are not displayed
-      | Plan Type  | <planType>   |
-      | Rider      | <rider>      |
-      | Count      | <count>      |
-      | MemberType | <memberType> |
-    And the user validates Lis member plan overview section
-      | Name            | <name>           |
-      | Member ID       | <memberid>       |
-      | Effective Date  | <effectivedate>  |
-      | Monthly premium | <monthlypremium> |
-      | Extra Help      | <extrahelp>      |
-    And the user validates headers on Bnc page for indi members
-      | Plan Type | <planType> |
-   #And the user validates the Primarycare Provider section
-   #  | Plan Type | <planType> |
-    And the user validates the Out of Pocket Max section
-    And the user view the LIS Drug Copays & Discounts header
-    And the user MAPD LIS should see drug cost table for Lis members
-    And the user validates Drug coverage header and text under the section
-    And the user validates text for the Look Up Drugs section
-    And the user validates Look Up Drugs button should be visible
-      | Plan Type | <planType> |
-    And the user validates text for the Locate a Pharmacy section
-    And the user validates Locate a Pharmacy button should be visible
-      | Plan Type | <planType> |
-    And the drugcost dropdown should not display
-    And the user validates the Learn More section link for stage
-    And the user validates tier link should not display
-    And the user validates view and document label
-    And the user validates static links
-      | Plan Type | <planType> |
-    And the user validates the language dropdown and the value displayed by default and selects new value in dropdown successfully
-      | Language | <language> |
-    And the user verifies that the correct pdfs are there in the plan material section of benefits page
-      | Summary of Benefits                 | <SummaryofBenefits>               |
-      | Evidence of Coverage                | <EvidenceofCoverage>              |
-     #| UnitedHealth Passport Program       | <UnitedHealthPassportProgram>     |
-      | Comprehensive Formulary - Drug List | <ComprehensiveFormularyDrug List> |
-      | Alternative Drug List               | <AlternativeDrugList>             |
-    #note: moved to footer feature
-    #And the user validates Needhelp section
-    And the user clicks on More Information link
-    And the user validates contactus section
-
-    Examples: 
-      | index | TID   | planType | memberType     | copayCategory | language | SummaryofBenefits   | EvidenceofCoverage   |  ComprehensiveFormularyDrug List     | AlternativeDrugList   | name       | memberid     | effectivedate | monthlypremium | extrahelp            | Identifier       | count | rider   |
-      | 19    | 15245 | MAPD     | Individual_BnC | LIS 1         | ENGLISH  | Summary of Benefits | Evidence of Coverage | Comprehensive Formulary - Drug List | Alternative Drug List | DBAD ADFED | 919744565-00 | 01/01/2019    | Not Available  | Extra Help Level : 1 | IndEffectiveAARP |     7 | Rider   |
-
-  #TC21_MAPD_LIS(1,2)- Retail Drug Cost Table   - same as the one above but shorten for sanity run only
-  @bnc_Stage_Sanity_mapdIndividual  
-  Scenario Outline: Index: <index> -TID: <TID> -plan: <planType> -memberType: <memberType> - Verify PDF section is in place on Benefits and Coverage page for Lis user
-    Given login with following details logins in the member portal and validate elements
-      | Plan Type      | <planType>      |
-      | Member Type    | <memberType>    |
-      | Copay Category | <copayCategory> |
-    Then The user navigates to Benefits and Coverage page
-      | Plan Type | <planType> |
-	Then user verifies presence of jump links
-      | Plan Type  | <planType>   |
-      | Rider      | <rider>      |
-      | MemberType | <memberType> |
-      | identifier | <Identifier> |
-    And user clicks on the jump links and checks respective sections
-      | Plan Type  | <planType>   |
-      | Rider      | <rider>      |
-      | MemberType | <memberType> |
-      | identifier | <Identifier> |
-    And verifies links irrelevant to the plan type are not displayed
-      | Plan Type  | <planType>   |
-      | Rider      | <rider>      |
-      | Count      | <count>      |
-      | MemberType | <memberType> |
-    And the user validates Lis member plan overview section
-      | Name            | <name>           |
-      | Member ID       | <memberid>       |
-      | Effective Date  | <effectivedate>  |
-      | Monthly premium | <monthlypremium> |
-      | Extra Help      | <extrahelp>      |
-    And the user validates headers on Bnc page for indi members
-      | Plan Type | <planType> |
-   #And the user validates the Primarycare Provider section
-   #  | Plan Type | <planType> |
-    And the user validates the Out of Pocket Max section
-    And the user validates the Preventive Care section
-     | UserGender| <userGender> |
-    And the user view the LIS Drug Copays & Discounts header
-    And the user MAPD LIS should see drug cost table for Lis members
-    And the user validates Drug coverage header and text under the section
-    And the user validates text for the Look Up Drugs section
-    And the user validates Look Up Drugs button should be visible
-      | Plan Type | <planType> |
-    And the user validates text for the Locate a Pharmacy section
-    And the user validates Locate a Pharmacy button should be visible
-      | Plan Type | <planType> |
-    And the drugcost dropdown should not display
-    And the user validates the Learn More section link for stage
-    And the user validates tier link should not display
-    And the user validates view and document label
-    And the user validates static links
-      | Plan Type | <planType> |
-    And the user clicks on More Information link
-    And the user validates contactus section
-
-    Examples: 
-      | index | TID   | planType | memberType     | copayCategory | language | name       | memberid     | effectivedate | monthlypremium | extrahelp            | Identifier       | count | rider   |userGender|
-      | 20    | 15245 | MAPD     | Individual_BnC | LIS 1         | ENGLISH  | DBAD ADFED | 919744565-00 | 01/01/2019    | Not Available  | Extra Help Level : 1 | IndEffectiveAARP |     7 | Rider   | F        |
-      
   #TC22_NON LIS Ind plan member(PDP)- Drug Cost table
   @benefitsAndCoverage18 @CMFedPDPNonLis @BnC_Part9_regressionMember
   Scenario Outline: Index: <index> -TID: <TID> -plan: <planType> -memberType: <memberType> -language: <language> - Verify all sections for PDP Ind NonLIS member on Benefits and Coverage page
@@ -632,6 +491,8 @@ Feature: 1.01 Member  benefits and Coverage page
     And the user validates text for the Look Up Drugs section
     And the user validates Look Up Drugs button should be visible
       | Plan Type | <planType> |
+    And user validates to not display pharmacy out-of-pocket maximum beside drug lookup
+      | MemberType   | <memberType>   |
     And the user validates text for the Locate a Pharmacy section
     And the user validates Locate a Pharmacy button should be visible
       | Plan Type | <planType> |
@@ -706,6 +567,8 @@ Feature: 1.01 Member  benefits and Coverage page
     And the user validates text for the Look Up Drugs section
     And the user validates Look Up Drugs button should be visible
       | Plan Type | <planType> |
+    And user validates to not display pharmacy out-of-pocket maximum beside drug lookup
+       | MemberType   | <memberType>   |
     And the user validates text for the Locate a Pharmacy section
     And the user validates Locate a Pharmacy button should be visible
       | Plan Type | <planType> |
@@ -765,7 +628,8 @@ Feature: 1.01 Member  benefits and Coverage page
       | Plan Type | <planType> |
     And the user validates the Out of Pocket Max section for Dsnp indi member
     	 | Plan Type | <planType> |
-    And the user view the LIS Drug Copays & Discounts header
+    And validating the LIS Drug Copays, Discounts header and drug table for Dsnp indi member
+    	 | Copay Category | copayCategory |
     And the user validates Drug coverage header and text under the section
     And the user validates text for the Look Up Drugs section
     And the user validates Look Up Drugs button should be visible
@@ -774,7 +638,6 @@ Feature: 1.01 Member  benefits and Coverage page
     And the user validates Locate a Pharmacy button should be visible
       | Plan Type | <planType> |
     And the user validates the Learn More section link for stage
-    And the user validates tier link should not display
     And the user validates view and document label
     And the user validates static links
       | Plan Type | <planType> |
@@ -786,31 +649,38 @@ Feature: 1.01 Member  benefits and Coverage page
     @DSNP_CnS01 @devRegression
     Examples: 
       | index | FID             | planType   | memberType           | copayCategory | language | name         | memberid     | effectivedate | monthlypremium | extrahelp            | Identifier       | count | H-PBP    | rider  |
-      | 25-c1 | F494433,F506320 | DSNP_MAPD  | Individual_CnS01_BnC | LIS 2         | ENGLISH  | DREENA KIMURA| 971949191-00 | 01/01/2020    | Not Available  | Extra Help Level : 2 | IndEffectiveAARP |     6 | H0624-001| NoRider|
+      | 25-c1 | F494433,F506320 | DSNP_MAPD  | Individual_CnS01_BnC | LIS 2         | ENGLISH  | DREENA KIMURA| 971949191-00 | 01/01/2020    | Not Available  | Extra Help Level : 2 | IndEffectiveAARP |     4 | H0624-001| NoRider|
 
     @DSNP_CnS01
     Examples: 
       | index | FID             | planType   | memberType           | copayCategory | language | name         | memberid     | effectivedate | monthlypremium | extrahelp            | Identifier       | count | H-PBP    | rider  |
-      | 26-c2 | F494433,F506320 | DSNP_MAPD  | Individual_CnS02_BnC | LIS 3         | ENGLISH  | EBER KRYSTEK| 903010063-00 | 01/01/2020    | Not Available  | Extra Help Level : 3 | IndEffectiveAARP |     6 | H2228-045| NoRider|
+      | 26-c2 | F494433,F506320 | DSNP_MAPD  | Individual_CnS02_BnC | LIS 1         | ENGLISH  | EBER KRYSTEK| 903010063-00 | 01/01/2020    | Not Available  | Extra Help Level : 1 | IndEffectiveAARP |     4 | H2228-045| NoRider|
     
     @DSNP_CnS02
     Examples:       
       | index | FID             | planType   | memberType           | copayCategory | language | name         | memberid     | effectivedate | monthlypremium | extrahelp            | Identifier       | count | H-PBP    | rider  |
-      | 27-c3 | F494433,F506320 | DSNP_MAPD  | Individual_CnS03_BnC | LIS 1         | ENGLISH  | HULDIBERAH KINIRY | 967076552-1 | 01/01/2020 | Not Available  | Extra Help Level : 1 | IndEffectiveAARP |     6 | H3113-110| NoRider|
-      | 28-c4 | F494433,F506320 | DSNP_MAPD  | Individual_CnS04_BnC | LIS 1         | ENGLISH  | BLAIS OWEN        | 912002942-1 | 01/01/2020 | Not Available  | Extra Help Level : 1 | IndEffectiveAARP |     6 | H4527-003| NoRider|
-      | 29-c5 | F494433,F506320 | DSNP_MAPD  | Individual_CnS05_BnC | LIS 2         | ENGLISH  | KUMARI FROEHNER   | 006644986-1 | 01/01/2020 | Not Available  | Extra Help Level : 2 | IndEffectiveAARP |     6 | H4590-033| NoRider|
+      | 27-c3 | F494433,F506320 | DSNP_MAPD  | Individual_CnS03_BnC | LIS 1         | ENGLISH  | HULDIBERAH KINIRY | 967076552-1 | 01/01/2020 | Not Available  | Extra Help Level : 1 | IndEffectiveAARP |     4 | H3113-110| NoRider|
+      | 28-c4 | F494433,F506320 | DSNP_MAPD  | Individual_CnS04_BnC | LIS 1         | ENGLISH  | BLAIS OWEN        | 912002942-1 | 01/01/2020 | Not Available  | Extra Help Level : 1 | IndEffectiveAARP |     4 | H4527-003| NoRider|
+      | 29-c5 | F494433,F506320 | DSNP_MAPD  | Individual_CnS05_BnC | LIS 2         | ENGLISH  | KUMARI FROEHNER   | 006644986-1 | 01/01/2020 | Not Available  | Extra Help Level : 2 | IndEffectiveAARP |     4 | H4590-033| NoRider|
     
+    @DSNP_CnS03
+    Examples: 
+      | index | FID    		    | planType   | memberType           | copayCategory | language | name         | memberid     | effectivedate | monthlypremium | extrahelp | Identifier      | count | H-PBP    | rider  |
+      | 35-c6 | F494433,F506320 | DSNP_MAPD  | Individual_CnS06_BnC | Non Lis       | ENGLISH  | EBER KRYSTEK| 903010063-00 | 01/01/2020    | Not Available  | 			  |IndEffectiveAARP |     4 | H4527-015| NoRider|
+      | 36-c7 | F494433,F506320 | DSNP_MAPD  | Individual_CnS07_BnC | Non Lis       | ENGLISH  | EBER KRYSTEK| 903010063-00 | 01/01/2020    | Not Available  |            | IndEffectiveAARP|     4 | H5322-030| NoRider|
+      
+      
     @DSNP_MnR01
     Examples:       
        | index | FID             | planType   | memberType           | copayCategory | language | name         | memberid     | effectivedate | monthlypremium | extrahelp            | Identifier       | count | H-PBP    | rider  |
-       | 30-m1 | F494433,F506320 | DSNP_MAPD  | Individual_MnR01_BnC | LIS 1         | ENGLISH  | OFER MCLEON  | 937024725-1| 01/01/2020    | Not Available  | Extra Help Level : 1 | IndEffectiveAARP |     6 |  H0271-005 |  NoRider|
-       | 31-m2 | F494433,F506320 | DSNP_MAPD  | Individual_MnR02_BnC | LIS 1         | ENGLISH  | DBAD ADFED | 919744565-00 | 01/01/2020    | Not Available  | Extra Help Level : 1 | IndEffectiveAARP |     6 |  H5253-041 | NoRider |
+       | 30-m1 | F494433,F506320 | DSNP_MAPD  | Individual_MnR01_BnC | LIS 1         | ENGLISH  | OFER MCLEON  | 937024725-1| 01/01/2020    | Not Available  | Extra Help Level : 1 | IndEffectiveAARP |     4 |  H0271-005 |  NoRider|
+       | 31-m2 | F494433,F506320 | DSNP_MAPD  | Individual_MnR02_BnC | LIS 1         | ENGLISH  | DBAD ADFED | 919744565-00 | 01/01/2020    | Not Available  | Extra Help Level : 1 | IndEffectiveAARP |     4 |  H5253-041 | NoRider |
 
     @DSNP_MnR02
     Examples:      
        | index | FID             | planType   | memberType           | copayCategory | language | name         | memberid     | effectivedate | monthlypremium | extrahelp            | Identifier       | count | H-PBP    | rider  |
-       | 32-m3 | F494433,F506320 | DSNP_MAPD  | Individual_MnR03_BnC | LIS 1         | ENGLISH  | DBAD ADFED | 919744565-00 | 01/01/2020   | Not Available   | Extra Help Level : 1 | IndEffectiveAARP |     6 |  R2604-004 | NoRider|
-       | 33-m4 | F494433,F506320 | DSNP_MAPD  | Individual_MnR04_BnC | LIS 3         | ENGLISH  | DBAD ADFED | 919744565-00 | 01/01/2020    | Not Available  | Extra Help Level : 3 | IndEffectiveAARP |     6 |  H0271-006 | NoRider|
+       | 32-m3 | F494433,F506320 | DSNP_MAPD  | Individual_MnR03_BnC | LIS 1         | ENGLISH  | DBAD ADFED | 919744565-00 | 01/01/2020   | Not Available   | Extra Help Level : 1 | IndEffectiveAARP |     4 |  R2604-004 | NoRider|
+       | 33-m4 | F494433,F506320 | DSNP_MAPD  | Individual_MnR04_BnC | LIS 3         | ENGLISH  | DBAD ADFED | 919744565-00 | 01/01/2020    | Not Available  | Extra Help Level : 3 | IndEffectiveAARP |     4 |  H0271-006 | NoRider|
 
 
   @benefitsAndCoverage23 @insulin
@@ -875,4 +745,40 @@ Feature: 1.01 Member  benefits and Coverage page
       | index  | FID    | planType  | memberType     | copayCategory | deductible   | insulin      |
       | 34-I09 | 478830 | MAPD      | Individual_BnC | NON LIS       | T12345       | nonInsulin   | 
 
+  #note: if FED_SHIP_SHIP_BnC user stop working, replace with any FED+SHIP combo user would do, coverage is for combo with federal priority
+  @benefitsAndCoverage24 @api
+  Scenario Outline: Index: <index> -TID: <TID> -plan: <planType> -memberType: <memberType> - Verify UCPBenefits API not having undefined input value for COMBO user
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type   | <planType>   |
+      | Member Type | <memberType> |
+    Then The user navigate to Benefits and Coverage page
+    And the users validate Benefits page has combo tabs for combo users
+    And the users validate UCPBenefits related API requests are not having undefined input value
+
+    @comboApi
+    Examples: 
+      | index | TID   | planType | memberType   |
+      | 35    | xxxxx | COMBO    | SHIP_FED_BnC |
+      | 36    | xxxxx | COMBO    | FED_SHIP_SHIP_BnC |
+      | 37    | xxxxx | COMBO    | FED_FED_BnC  |
+
+    @singleApi
+    Examples: 
+      | index | TID   | planType | memberType   |
+      | 38    | xxxxx | MA       | FED_BnC      |
+      | 39    | xxxxx | MAPD     | FED_BnC      |
+      | 40    | xxxxx | PDP      | FED_BnC      |
+      
+  @benefitsAndCoverage25 @api
+  Scenario Outline: Index: <index> -TID: <TID> -plan: <planType> -memberType: <memberType> - Verify UCPBenefits API not having undefined input value for COMBO user
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type   | <planType>   |
+      | Member Type | <memberType> |
+    Then The user will not be able to navigate to Benefits and Coverage page
+      
+    @singleApi
+    Examples: 
+      | index | TID   | planType | memberType   |
+      | 41    | xxxxx | TERM     | FED_BnC      |
+      
  ###############################Regression Scenarios END Here ########################################

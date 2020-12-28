@@ -56,12 +56,12 @@ Feature: 1.25.2 Member Prepare For Next Year - PROD
 	@prod_pfny_ind_mapd_aarp_sanity
     Examples: 
 	    | index | FID     | username  | password  | MemUserName               | planType | memberType | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | co_us | co_es | co_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh | showNxtYrPlan |
-	    | S2-01 | F437767 | kkumard   | mnrs786@  | BILL.ROSNER123#           | MAPD	 | IND_PFNY   | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | false | false | false | true          |
+	    | S2-01 | F437767 | kkumard   | tnps459#  | kirit1976           | MAPD	 | IND_PFNY   | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | false | false | false | true          |
 
 	@prod_pfny02_grp_mapd_sanity
     Examples: 
 	    | index | FID     | username  | password  | MemUserName               | planType | memberType   | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | co_us | co_es | co_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh | showNxtYrPlan |
-	    | S2-06 | F437767 | kkumard   | mnrs786@  | Andersonga1@Bellsouth.Net | MAPD     | UHC_GRP_PFNY | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | false | false | false | false | false | false | true          |
+	    | S2-06 | F437767 | kkumard   | tnps459#  | Andersonga1@Bellsouth.Net | MAPD     | UHC_GRP_PFNY | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | false | false | false | false | false | false | true          |
 
 
   
@@ -102,30 +102,30 @@ Feature: 1.25.2 Member Prepare For Next Year - PROD
     @prod_pfny01_offcycle
     Examples: 
 	    | index | FID     | username  | password  | MemUserName       | planType | memberType          |
-	    | 1-01  | F437767 | kkumard   | mnrs786@  |  1MGriffin2       | PDP	     | GRP_OFFCYC_PFNY     |
-	   #| 1-02  | F437767 | kkumard   | mnrs786@  |  testUserName     | MA	     | GRP_OFFCYC_PFNY     |
-       #| 1-03  | F437767 | kkumard   | mnrs786@  |  diannahill1      | MAPD	 | GRP_OFFCYC_PFNY     |
+	   #| 1-01  | F437767 | kkumard   | tnps459#  |  1MGriffin2       | PDP	     | GRP_OFFCYC_PFNY     |
+	   #| 1-02  | F437767 | kkumard   | tnps459#  |  testUserName     | MA	     | GRP_OFFCYC_PFNY     |
+        | 1-03  | F437767 | kkumard   | tnps459#  |  mkdteach1        | MAPD	 | GRP_OFFCYC_PFNY     |
 
     # caution: if changing system time for testing, the PREEFF or TERM user may no longer be true
     @prod_pfny01_preTermShip
     Examples: 
 	    | index | FID     | username  | password  | MemUserName       | planType | memberType          |
-	   #| 1-04  | F437767 | kkumard   | mnrs786@  | Ranch1955         | MA	     | IND_PREEFF_PFNY     |
-	    | 1-04  | F437767 | kkumard   | mnrs786@  | Teripappas          | MAPD     | IND_PREEFF_PFNY     |
-	    | 1-05  | F437767 | kkumard   | mnrs786@  | BEVERLY_BOB5      | MA	     | IND_TERM_PFNY       |
-	    | 1-06  | F437767 | kkumard   | mnrs786@  | Pramila1946       | SHIP	 | IND_PFNY            |
+	   #| 1-04  | F437767 | kkumard   | tnps459#  | Ranch1955         | MA	     | IND_PREEFF_PFNY     |
+	    | 1-04  | F437767 | kkumard   | tnps459#  | Teripappas        | MAPD     | IND_PREEFF_PFNY     |
+	    | 1-05  | F437767 | kkumard   | tnps459#  | Patkeving       | MA	     | IND_TERM_PFNY       |
+	    | 1-06  | F437767 | kkumard   | tnps459#  | Pramila1946       | SHIP	 | IND_PFNY            |
 			
 	@prod_pfny01_comboPdpSsp
     Examples: 
 	    | index | FID     | username  | password  | MemUserName       | planType | memberType                 |
-	    | 1-07  | F437767 | kkumard   | mnrs786@  | JSENFYFDRE#ERY2GO | PDP      | COMBO_PDP_GRP_SSP_GRP_PFNY |
-	    | 1-08  | F437767 | kkumard   | mnrs786@  | JSENFYFDRE#ERY2GO | SSP      | COMBO_PDP_GRP_SSP_GRP_PFNY |
+	    | 1-07  | F437767 | kkumard   | tnps459#  | DKELLY27          | PDP      | COMBO_PDP_GRP_SSP_GRP_PFNY |
+	    | 1-08  | F437767 | kkumard   | tnps459#  | DKELLY27          | SSP      | COMBO_PDP_GRP_SSP_GRP_PFNY |
 		
 	@prod_pfny01_comboMaPdp
     Examples: 
 	    | index | FID     | username  | password  | MemUserName       | planType | memberType                |
-	    | 1-09  | F443004 | kkumard   | mnrs786@  | rc4614            | MA	     | COMBO_MA_GRP_PDP_GRP_PFNY |
-	    | 1-10  | F443004 | kkumard   | mnrs786@  | rc4614            | PDP	     | COMBO_MA_GRP_PDP_GRP_PFNY |
+	    | 1-09  | F443004 | kkumard   | tnps459#  | rc4614            | MA	     | COMBO_MA_GRP_PDP_GRP_PFNY |
+	    | 1-10  | F443004 | kkumard   | tnps459#  | rc4614            | PDP	     | COMBO_MA_GRP_PDP_GRP_PFNY |
 
   #-------------------------------------------------
   # note: for cases below -
@@ -181,72 +181,75 @@ Feature: 1.25.2 Member Prepare For Next Year - PROD
 	Then the user navigate to Prepare For Next Year page via Prepare For Next Year tab
 	Then the user validates Prepare For Next Year page content
 
-	@prod_pfny02_ind_mapd_aarp
-    Examples: 
-	    | index | FID     | username  | password  | MemUserName               | planType | memberType | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | co_us | co_es | co_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh | showNxtYrPlan |
-	    | 2-01  | F437767 | kkumard   | mnrs786@  | BILL.ROSNER123#           | MAPD	 | IND_PFNY   | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | false | false | false | true          |
+	#@prod_pfny02_ind_mapd_aarp
+    #Examples: 
+	#    | index | FID     | username  | password  | MemUserName               | planType | memberType | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | co_us | co_es | co_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh | showNxtYrPlan |
+	#    | 2-01  | F437767 | kkumard   | tnps459#  | kirit1976           | MAPD	 | IND_PFNY   | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | false | false | false | true          |
 
 	@prod_pfny02_ind_mapd_uhc
     Examples: 
 	    | index | FID     | username  | password  | MemUserName               | planType | memberType | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | co_us | co_es | co_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh | showNxtYrPlan |
-	    | 2-01  | F437767 | kkumard   | mnrs786@  | LMHOCHSCHILD11            | MAPD	 | UHC_IND_PFNY| true | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | false | false | false | true          |
+	    | 2-01  | F437767 | kkumard   | tnps459#  | LMHOCHSCHILD11            | MAPD	 | UHC_IND_PFNY| true | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | false | false | false | true          |
 
 	@prod_pfny02_ind_pdp
     Examples: 
 	    | index | FID     | username  | password  | MemUserName               | planType | memberType | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | co_us | co_es | co_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh | showNxtYrPlan |
-	    | 2-02  | F437767 | kkumard   | mnrs786@  | nawal1215                 | PDP	     | IND_PFNY   | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | false | false | false | false | false | false | true          |
+	    | 2-02  | F437767 | kkumard   | tnps459#  | Branford910                 | PDP	     | IND_PFNY   | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | false | false | false | false | false | false | true          |
 
 	@prod_pfny02_ind_ma
     Examples: 
 	    | index | FID     | username  | password  | MemUserName               | planType | memberType | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | co_us | co_es | co_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh | showNxtYrPlan |
-	    | 2-03  | F437767 | kkumard   | mnrs786@  | haradaty32                | MA	     | IND_PFNY   | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | false | false | false | true          |
+	    | 2-03  | F437767 | kkumard   | tnps459#  | ssmhi1                    | MA	     | IND_PFNY   | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | false | false | false | true          |
 
 	@prod_pfny02_ind_medica
     Examples: 
 	    | index | FID     | username  | password  | MemUserName               | planType | memberType | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | co_us | co_es | co_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh | showNxtYrPlan | 
-	    | 2-04  | F437767 | kkumard   | mnrs786@  | ALREALESTATE@AOL.COM      | MEDICA   | IND_PFNY   | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | false | false | false | true          |
+	  #x| 2-04  | F437767 | kkumard   | tnps459#  | ALREALESTATE@AOL.COM      | MEDICA   | IND_PFNY   | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | false | false | false | true          |
+	    | 2-04  | F437767 | kkumard   | tnps459#  | TCZUNIGA52                | MEDICA   | IND_PFNY   | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | false | false | false | true          |
 
 	@prod_pfny02_ind_pcp
     Examples: 
 	    | index | FID     | username  | password  | MemUserName               | planType | memberType | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | co_us | co_es | co_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh | showNxtYrPlan | 
-	    | 2-05  | F437767 | kkumard   | mnrs786@  | BATLLOT@AOL.COM           | PCP	     | IND_PFNY   | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | false | false | false | true          |
+	  #x| 2-05  | F437767 | kkumard   | tnps459#  | BATLLOT@AOL.COM           | PCP	     | IND_PFNY   | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | false | false | false | true          |
+	    | 2-05  | F437767 | kkumard   | tnps459#  | SOFYABAKMAN@MSN.COM       | PCP	     | IND_PFNY   | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | false | false | false | true          |
 
 	@prod_pfny02_grp_mapd
     Examples: 
 	    | index | FID     | username  | password  | MemUserName               | planType | memberType   | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | co_us | co_es | co_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh | showNxtYrPlan |
-	    | 2-06  | F437767 | kkumard   | mnrs786@  | Andersonga1@Bellsouth.Net | MAPD     | UHC_GRP_PFNY | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | false | false | false | false | false | false | true          |
+	    | 2-06  | F437767 | kkumard   | tnps459#  | Andersonga1@Bellsouth.Net | MAPD     | UHC_GRP_PFNY | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | false | false | false | false | false | false | true          |
 
     #note: no suitable user with 2021 doc for validation
 	#@prod_pfny02_grp_pdp
     #Examples: 
 	#    | index | FID     | username  | password  | MemUserName               | planType | memberType   | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | co_us | co_es | co_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh | showNxtYrPlan |
-	#    | 2-07  | F437767 | kkumard   | mnrs786@  | 7547MCGEE                 | PDP	  | UHC_GRP_PFNY | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | false | false | false | false | false | false | true          |
+	#    | 2-07  | F437767 | kkumard   | tnps459#  | 7547MCGEE                 | PDP	  | UHC_GRP_PFNY | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | false | false | false | false | false | false | true          |
 
     #note: no suitable user with 2021 doc for validation
 	#@prod_pfny02_grp_ma
     #Examples: 
 	#    | index | FID     | username  | password  | MemUserName               | planType | memberType   | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | co_us | co_es | co_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh | showNxtYrPlan |
-	#    | 2-08  | F437767 | kkumard   | mnrs786@  | 1GIRL4DEAN                | MA	      | UHC_GRP_PFNY | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | false | false | false | false | false | false | true          |
+	#    | 2-08  | F437767 | kkumard   | tnps459#  | 1GIRL4DEAN                | MA	      | UHC_GRP_PFNY | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | false | false | false | false | false | false | true          |
 
     #@prod_pfny02_ind_zh
     #Examples: 
 	#    | index | FID     | username  | password  | MemUserName              | planType | memberType        | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | co_us | co_es | co_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh | showNxtYrPlan | 
-    #    | 2-09  | F437767 | kkumard   | mnrs786@  | testUserName             | MAPD	 | IND_ESZH_PFNY     | true  | true  | true  | true  | true  | true  | true  | true  | true  | true  | true  | true  | false | false | false | false | false | false | true        |
+    #    | 2-09  | F437767 | kkumard   | tnps459#  | testUserName             | MAPD	 | IND_ESZH_PFNY     | true  | true  | true  | true  | true  | true  | true  | true  | true  | true  | true  | true  | false | false | false | false | false | false | true        |
 
     #@prod_pfny02_ind_1act
     #Examples: 
 	#    | index | FID     | username  | password  | MemUserName              | planType | memberType        | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | co_us | co_es | co_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh | showNxtYrPlan | 
-    #    | 2-10  | F437767 | kkumard   | mnrs786@  | testUserName             | MAPD	 | UHC_IND_1ACT_PFNY | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | false | false | false | false | false | false | true        |
+    #    | 2-10  | F437767 | kkumard   | tnps459#  | testUserName             | MAPD	 | UHC_IND_1ACT_PFNY | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | false | false | false | false | false | false | true        |
 
 	@prod_pfny02_combo_ship_fed
     Examples: 
 	    | index | FID     | username  | password  | MemUserName               | planType | memberType             | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | co_us | co_es | co_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh | showNxtYrPlan |
-	    | 2-11  | F437767 | kkumard   | mnrs786@  | phleauxdailles43          | MA       | COMBO_SHIP_MA_GRP_PFNY | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | false | false | false | false | false | false | true          |
+	  #x| 2-11  | F437767 | kkumard   | tnps459#  | phleauxdailles43          | MA       | COMBO_SHIP_MA_GRP_PFNY | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | false | false | false | false | false | false | true          |
+	    | 2-11  | F437767 | kkumard   | tnps459#  | VirginiaRuth1936          | MA       | COMBO_SHIP_MA_GRP_PFNY | true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | false | false | false | false | false | false | true          |
 
 	@prod_pfny02_combo_fed_ship
     Examples: 
 	    | index | FID     | username  | password  | MemUserName               | planType | memberType             | an_us | an_es | an_zh | ev_us | ev_es | ev_zh | co_us | co_es | co_zh | pr_us | pr_es | pr_zh | ve_us | ve_es | ve_zh | ph_us | ph_es | ph_zh | showNxtYrPlan |
-	    | 2-12  | F437767 | kkumard   | mnrs786@  | PAULAROTH2                | PDP	     | COMBO_PDP_IND_SHIP_PFNY| true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | false | false | false | false | false | false | true          |
+	    | 2-12  | F437767 | kkumard   | tnps459#  | PAULAROTH2                | PDP	     | COMBO_PDP_IND_SHIP_PFNY| true  | true  | false | true  | true  | false | true  | true  | false | true  | true  | false | false | false | false | false | false | false | true          |
 	    
   @prod_pfny03 @hasTab @noCombTabOnPfny
   Scenario Outline: -Index <index> -FID <FID> -Plan Type: <planType> -Member Type: <memberType> - To verify Prepare For Next Year tab will NOT display when conditions are NOT met
@@ -279,12 +282,13 @@ Feature: 1.25.2 Member Prepare For Next Year - PROD
 	@prod_pfny03a
     Examples: 
 	    | index | FID     | username  | password  | MemUserName             | planType | memberType              |
-	    | 3-01  | F437767 | kkumard   | mnrs786@  | phleauxdailles43        | SHIP_HIP | COMBO_SHIP_MA_GRP_PFNY  |
+	    | 3-01  | F437767 | kkumard   | tnps459#  | VirginiaRuth1936        | SHIP_HIP | COMBO_SHIP_MA_GRP_PFNY  |
+	  #x| 3-01  | F437767 | kkumard   | tnps459#  | phleauxdailles43        | SHIP_HIP | COMBO_SHIP_MA_GRP_PFNY  |
 			
 	@prod_pfny03b
     Examples: 
 	    | index | FID     | username  | password  | MemUserName             | planType | memberType              |
-	    | 3-02  | F437767 | kkumard   | mnrs786@  | PAULAROTH2              | SHIP	   | COMBO_PDP_IND_SHIP_PFNY |
+	    | 3-02  | F437767 | kkumard   | tnps459#  | PAULAROTH2              | SHIP	   | COMBO_PDP_IND_SHIP_PFNY |
 
   @prod_pfny04 @hasTab
   Scenario Outline: -Index <index> -FID <FID> -Plan Type: <planType> -Member Type: <memberType> - To verify Prepare For Next Year tab and page content will display when conditions are met 
@@ -319,6 +323,6 @@ Feature: 1.25.2 Member Prepare For Next Year - PROD
     Examples: 
 	    | index | FID     | username  | password  | MemUserName             | planType | memberType              | showNxtYrPlan |
 	 #note: cannot locate applicable user yet    
-	 #  | 4-01  | F443004 | kkumard   | mnrs786@  | testUserName            | MAPD     | UHC_SARS_PFNY           | false         |
-	    | 4-02  | F443004 | kkumard   | mnrs786@  | XrayBobby36512          | MAPD     | SARS_PFNY               | false         |
+	 #  | 4-01  | F443004 | kkumard   | tnps459#  | testUserName            | MAPD     | UHC_SARS_PFNY           | false         |
+	    | 4-02  | F443004 | kkumard   | tnps459#  | XrayBobby36512          | MAPD     | SARS_PFNY               | false         |
 	    

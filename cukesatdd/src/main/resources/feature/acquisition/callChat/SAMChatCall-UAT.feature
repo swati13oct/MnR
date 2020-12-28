@@ -46,6 +46,9 @@ And user opens the page to validate M&R Sites
  | pagename | <pagename> |
 Then the user validates whether call icon is visible 
 Then user validates whether chat Agent is not Available
+And the user hovers screen over the shop for a plan
+And click on provider search link on shop pages
+
 		@samChatnonhoursulayer
 		Examples: 
 			| pagename |site| scenario               |

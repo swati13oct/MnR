@@ -190,7 +190,7 @@ Feature: 1.01.1-Vpp to plan Summary AARP Scenarios
 
     Examples: 
       |	site	| zipcode | isMultiCounty | county             | plantype | planName                                       |planyear|
-      |	AARP	|   80001 | NO            | Los Angeles County | SNP      | UnitedHealthcare Nursing Home Plan (PPO I-SNP) |current|
+      |	AARP	|   80001 | NO            | Los Angeles County | SNP      | UnitedHealthcare Nursing Home Plan (PPO I-SNP) |future|
 
   @vppPlanSummaryAARP06 @vppPlanSummaryAARPRun02 @vppPlanSummaryAARPRegression
   Scenario Outline: Validate Cancel button for Multi Cunty Pop-up on VPP for Change Location

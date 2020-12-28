@@ -21,7 +21,7 @@ Feature: 1.14 Member Branding functionality
       | TID   | planType | memberType              | copayCategory | logoToBeDisplayedOnDashboard | logoToBeDisplayedOnSecondaryPage | Test Case                                             | username | password | member                |
       | 15146 | MAPD     | AARPIndividual_Branding | NON LIS       | AARP                         | dam/UCP/Images/logo/AARP.svg     | TC_01_Branding for AARP Plan member - Federal Member  | jkuma14  | Brock@04 | skho@roadrunner.com   |
       | 15147 | SHIP     | SHIPOnly_Branding       | NON LIS       | AARP                         | dam/UCP/Images/logo/AARP.svg     | TC_02_ Branding  for AARP Plan member - SHIP   Member | jkuma14  | Brock@04 | Pramila1946           |
-      | 15153 | MEDICA   | Medica_Branding         | NON LIS       | MEDICA                       | dam/UCP/Images/logo/MEDICA.svg   | TC_03_ Branding for Branding for Medica Plan member   | jkuma14  | Brock@04 | SUSICHAPMAN@GMAIL.COM |
+      | 15153 | MEDICA   | Medica_Branding         | NON LIS       | MEDICA                       | dam/UCP/Images/logo/MEDICA.svg   | TC_03_ Branding for Branding for Medica Plan member   | jkuma14  | Brock@04 | TCZUNIGA52 |
 
 
   @regressionMemberPROD2
@@ -117,7 +117,7 @@ Feature: 1.14 Member Branding functionality
     Examples: 
       | TID   | planType | memberType              | copayCategory | logoToBeDisplayedOnDashboard | logoToBeDisplayedOnSecondaryPage | cologoToBeDisplayedOnDashboard | cologoToBeDisplayedOnSecondaryPage                    | Test Case                                                                   | username | password | member                    |
       | 15158 | MAPD     | universityofkentuckySSO | NON LIS       | UHC                          | dam/UCP/Images/logo/UHC.svg      | UniversityOfKentucky           | dam/UCP/Images/logo/UofKY_Rally_Logo.svg              | TC_10_ Co-branding for Group Retiree Plans- University of Kentucky_Branding | jkuma14  | Brock@04 | ExDesertrat               |
-      | 15156 | MAPD     | NCSHP_Branding          | NON LIS       | UHC                          | dam/UCP/Images/logo/UHC.svg      | NCSHP                          | dam/UCP/Images/Images/logos-cobranding/NCSHP_Logo.svg | TC_11_ Co-branding for Group Retiree Plans -NCSHP_Branding                  | jkuma14  | Brock@04 | BFSSO-073367811~~         |
+      | 15156 | MAPD     | NCSHP_Branding          | NON LIS       | UHC                          | dam/UCP/Images/logo/UHC.svg      | NCSHP                          | dam/UCP/Images/Images/logos-cobranding/NCSHP_Logo.svg | TC_11_ Co-branding for Group Retiree Plans -NCSHP_Branding                  | jkuma14  | Brock@04 | dianahdavis@bellsouth.net |
 #     | 15156 | MAPD     | Calpers_Branding  | NON LIS       | UHC                          | dam/UCP/Images/logo/UHC.svg      | optum/MR12775/CalPERS.svg      | dam/UCP/Images/Images/logos-cobranding/CalPERS_Logo_Large.svg | TC_12_ Co-branding for Group Retiree Plans         |jkuma14  | Brock@04 | skho@roadrunner.com   |
 #     | 15154 | MAPD     | ALPEEHIP_Branding | NON LIS       | UHC                          | dam/UCP/Images/logo/UHC.svg      | optum/MR15500/alpeehip.svg     | dam/UCP/Images/Images/logos-cobranding/ALPEEHIP.svg   | TC_13_ Co-branding for AL PEEHIP Plan member               |jkuma14  | Brock@04 | skho@roadrunner.com   |
 

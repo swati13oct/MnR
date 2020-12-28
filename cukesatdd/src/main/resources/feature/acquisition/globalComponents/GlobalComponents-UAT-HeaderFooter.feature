@@ -21,12 +21,19 @@ Feature: 1.12 UAT - Header and Footer flows
     And the user clicks on browser back button
     And user clicks on agents&brokers link on disclaimers page
     And the user clicks on browser back button
-    And user verifies home link of agents&brokers page
+    #And user verifies home link of agents&brokers page
+    And user clicks on agents&brokers link on disclaimers page
     And the user clicks on browser back button
+    And user select state for geotargeting from global footer on homepage
+    And the user clicks on View all disclaimer information link in footer
+    And the user validate links in disclaimer information section
+    And the user clicks on Complaint Form link in footer
+    And the user clicks on Hide all disclaimer information link in footer
+    And the user validates Language assistance links
     When user accesses global header of the Medicare Plans home page
     And user verifies the logo 
     And user clicks on Sign in link 
-    And the user clicks on browser back button
+    #And the user clicks on browser back button
     And user clicks on register link 
     And the user clicks on browser back button
     Then user validates visitor profile 
@@ -52,12 +59,12 @@ Feature: 1.12 UAT - Header and Footer flows
   @globalfooter_AARP
   Examples: 
       |Scenario           |	site	|
-      |E2E Scenario_1 AMP|	AARP	| 
+      |E2E Scenario_1 AMP |	AARP	| 
        
   @globalfooter_UHC
   Examples: 
-       |Scenario          |	site	|
-       |E2E Scenario_1 UMS|	UHC	  |
+      |Scenario          |	site	|
+      |E2E Scenario_1 UMS|	UHC	  |
        
 
   @globalfooterULayer  @UATRegression
@@ -101,7 +108,7 @@ Feature: 1.12 UAT - Header and Footer flows
     When user accesses global header of the Medicare Plans home page
     And user verifies the logo 
     And user clicks on Sign in link 
-    And the user clicks on browser back button
+    #And the user clicks on browser back button
     And user clicks on register link 
     And the user clicks on browser back button
     Then user validates visitor profile 
@@ -118,8 +125,8 @@ Feature: 1.12 UAT - Header and Footer flows
  
  @globalfooter_UHC
   Examples: 
-      |Scenario					  |	site|zipcode | isMultutiCounty | county  |
-      |E2E Scenario_3 UMS |	UHC	| 10001	 | No							 | New York|				     
+      |Scenario					  |	site|zipcode | isMultutiCounty | county   |
+      |E2E Scenario_3 UMS |	UHC	| 80001	 | No							 | Jefferson|				     
        
 	@globalfooterULayer  @UATRegression
   Scenario Outline: <Scenario> : To verify links displayed in the global header and footer on DCE page
@@ -159,7 +166,7 @@ Feature: 1.12 UAT - Header and Footer flows
     When user accesses global header of the Medicare Plans home page
     And user verifies the logo 
     And user clicks on Sign in link 
-    And the user clicks on browser back button
+    #And the user clicks on browser back button
     And user clicks on register link 
     And the user clicks on browser back button
     Then user validates visitor profile 
@@ -218,7 +225,7 @@ Feature: 1.12 UAT - Header and Footer flows
     When user accesses global header of the Medicare Plans home page
     And user verifies the logo 
     And user clicks on Sign in link 
-    And the user clicks on browser back button
+    #And the user clicks on browser back button
     And user clicks on register link 
     And the user clicks on browser back button
     Then user validates visitor profile 
@@ -238,11 +245,11 @@ Feature: 1.12 UAT - Header and Footer flows
        |E2E Scenario_5 UMS|	UHC	  |
 
 @globalheaderULayer @UATRegression
-  Scenario Outline: <Scenario> : To verify links displayed in the global header and footer on static pages 
+  Scenario Outline: <Scenario> : To verify links displayed in the global header and footer on static pages : <pagename> page
     Given the user is on medicare acquisition site landing page
     	|Site| <site>| 
      Given the user navigates to following medicare acquisition site page
-      | PageName | <pageName> |
+      | PageName | <pagename> |
       | PagePath | <path>     |
     When user accesses global footer of the Medicare Plans All page
     And user clicks on Aboutus link from footer of the Medicare Plans home page 
@@ -277,7 +284,7 @@ Feature: 1.12 UAT - Header and Footer flows
     When user accesses global header of the Medicare Plans home page
     And user verifies the logo 
     And user clicks on Sign in link 
-    And the user clicks on browser back button
+    #And the user clicks on browser back button
     And user clicks on register link 
     And the user clicks on browser back button
     Then user validates visitor profile 
@@ -288,35 +295,32 @@ Feature: 1.12 UAT - Header and Footer flows
     
 @globalheader_AARP 
  Examples:
- |Scenario          |site|path                                                            |pagename|
+ |Scenario          |site|path                                                             |pagename|
  |E2E Scenario_2 AMP|AARP|health-plans.html#/zipcode                                       |Shop for a Plan|
  |E2E Scenario_2 AMP|AARP|shop.html                                                        |Shop Hub|
- |E2E Scenario_2 AMP|AARP|shop/medicare-advantage-plans.html                              |Shop Medicare Advantage Plans|
+ |E2E Scenario_2 AMP|AARP|shop/medicare-advantage-plans.html                               |Shop Medicare Advantage Plans|
  |E2E Scenario_2 AMP|AARP|shop/medicare-advantage-plans/wellness-discounts.html            |Wellness Resources and Services|
-  |E2E Scenario_2 AMP|AARP|shop/medicare-advantage-plans/health-care-management.html        |Clinical Programs: Condition Management and Care Management|
-  |E2E Scenario_2 AMP|AARP|shop/medicare-advantage-plans/ma-plan-benefits.html              |Medicare Advantage Plan Benefits|
-  |E2E Scenario_2 AMP|AARP|shop/prescription-drug-plans.html                                |Shop Medicare Prescription Drug Plans|
-  |E2E Scenario_2 AMP|AARP|shop/connect.html                                                |Connect with UnitedHealthcare|
-  |E2E Scenario_2 AMP|AARP|shop/connect/agentebrc.html                                      |Request an Appointment with a Health Insurance Agent|
+ |E2E Scenario_2 AMP|AARP|shop/medicare-advantage-plans/health-care-management.html        |Clinical Programs: Condition Management and Care Management|
+ |E2E Scenario_2 AMP|AARP|shop/medicare-advantage-plans/ma-plan-benefits.html              |Medicare Advantage Plan Benefits|
+ |E2E Scenario_2 AMP|AARP|shop/prescription-drug-plans.html                                |Shop Medicare Prescription Drug Plans|
+ |E2E Scenario_2 AMP|AARP|shop/connect.html                                                |Connect with UnitedHealthcare|
+ |E2E Scenario_2 AMP|AARP|shop/connect/agentebrc.html                                      |Request an Appointment with a Health Insurance Agent|
  |E2E Scenario_2 AMP|AARP|shop/connect/inquirykit.html                                     |Order Medicare Part D Enrollment Materials|
- 
- @globalheader_AARP_1 
- Examples:
- |Scenario          |site|path                                                            |pagename|
  |E2E Scenario_2 AMP|AARP|shop/connect/attend.html                                         |Find UnitedHealthcare in Your Community|
  |E2E Scenario_2 AMP|AARP|shop/compare.html                                                |Shop: Compare Plans|
  |E2E Scenario_2 AMP|AARP|shop/estimate.html                                               |Shop: Estimate Costs|
  |E2E Scenario_2 AMP|AARP|shop/switch.html                                                 |Shop: Switching Plans|
  |E2E Scenario_2 AMP|AARP|shop/medicare-supplement-plans.html                              |Shop Medicare Supplement Insurance Plans|
  |E2E Scenario_2 AMP|AARP|enroll.html                                                      |Enroll Hub|
+ 
+
+ @globalheader_AARP_1
+ Examples:
+ |Scenario          |site|path                                                                       |pagename|
  |E2E Scenario_2 AMP|AARP|enroll/ma-enrollment.html                                        |Medicare Advantage Enrollment Information|
  |E2E Scenario_2 AMP|AARP|enroll/pdp-enrollment.html                                       |Medicare Prescription Drug Plan Enrollment Information|
  |E2E Scenario_2 AMP|AARP|resources.html                                                   |Resources Hub|
  |E2E Scenario_2 AMP|AARP|resources/ma-resources-materials.html                            |Medicare Advantage Resources and Plan Materials|
- 
- @globalheader_AARP_2
- Examples:
- |Scenario          |site|path                                                                       |pagename|
  |E2E Scenario_2 AMP|AARP|resources/ma-resources-materials/ma-information-forms/medicare-appeal.html |Plan Information and Forms|
  |E2E Scenario_2 AMP|AARP|resources/ma-resources-materials/ma-information-forms/medicare-appeal.html |Appeals and Grievances|
  |E2E Scenario_2 AMP|AARP|resources/ma-resources-materials/ma-information-forms/member-rights.html  |Medicare Rights and Responsibilities|
@@ -327,12 +331,12 @@ Feature: 1.12 UAT - Header and Footer flows
  |E2E Scenario_2 AMP|AARP|resources/mail-order-pharmacy.html                                          |Preferred Mail Home Delivery|
  |E2E Scenario_2 AMP|AARP|resources/prescription-drug-transition.html                                 |Prescription Drug Transition Process|
  |E2E Scenario_2 AMP|AARP|resources/prescription-drug-costs-help.html                                 |Get Help with Prescription Drug Costs|
- 
-  @globalheader_AARP_3
- Examples:
- |Scenario          |site|path                                                            |pagename|
  |E2E Scenario_2 AMP|AARP|resources/how-to-pay-your-premium.html                          |How to Pay Your Premium|
  |E2E Scenario_2 AMP|AARP|resources/how-to-appoint-a-representative.html                  |How to Appoint a Representative|
+ 
+ @globalheader_AARP_2
+ Examples:
+ |Scenario          |site|path                                                            |pagename|
  |E2E Scenario_2 AMP|AARP|resources/medication-therapy-management-program.html            |Medication Therapy Management Program|
  |E2E Scenario_2 AMP|AARP|resources/prescription-drug-appeals.html                        |Prescription Drug Coverage Determinations, Appeals and Grievances|
  |E2E Scenario_2 AMP|AARP|resources/healthcare-fraud.html                                 |Preventing Medicare Fraud|
@@ -341,10 +345,6 @@ Feature: 1.12 UAT - Header and Footer flows
  |E2E Scenario_2 AMP|AARP|health-plans/medicare-supplement-plans/agent-appointment.html   |Health Insurance Free Agent Appointment|
  |E2E Scenario_2 AMP|AARP|medicare-education.html                                         |Understanding Medicare|
  |E2E Scenario_2 AMP|AARP|medicare-education/medicare-eligibility.html                    |Medicare Eligibility|
-
- @globalheader_AARP_4
- Examples:
- |Scenario          |site|path                                                            |pagename|
  |E2E Scenario_2 AMP|AARP|medicare-education/medicare-parts-and-medigap-plans.html         |Coverage Choices|
  |E2E Scenario_2 AMP|AARP|medicare-education/medicare-benefits.html                        |Prescriptions, Providers & Benefits|
  |E2E Scenario_2 AMP|AARP|medicare-education/medicare-costs.html                           |Medicare Cost Basics|
@@ -353,27 +353,24 @@ Feature: 1.12 UAT - Header and Footer flows
  |E2E Scenario_2 AMP|AARP|medicare-education/medicare-advantage-plans.html                  |Medicare Advantage (Part C) Plans|
  |E2E Scenario_2 AMP|AARP|medicare-education/medicare-supplement-plans.html                  |Medicare Supplement Insurance Plans|
  |E2E Scenario_2 AMP|AARP|medicare-education/medicare-part-d.html                            |Medicare Prescription Drug (Part D) Plans|
- |E2E Scenario_2 AMP|AARP|medicare-education/enrollment-and-changing-plans.html              |Enrollment & Changing Plans|
- |E2E Scenario_2 AMP|AARP|about-us.html                                                      |About Us|
  
-  @globalheader_AARP_5
- Examples:
-|Scenario          |site|path                                                            |pagename|
-|E2E Scenario_2 AMP|AARP|contact-us.html                                                  |Contact Us|
-|E2E Scenario_2 AMP|AARP|sitemap.html                                                     |Site Map|
-|E2E Scenario_2 AMP|AARP|privacy_policy.html                                              |Privacy Policy|
-|E2E Scenario_2 AMP|AARP|terms_and_conditions.html                                         |Terms of Use|
-|E2E Scenario_2 AMP|AARP|disclaimer.html                                                  |Disclaimers|
-|E2E Scenario_2 AMP|AARP|health-insurance-brokers.html                                    |Agents & Brokers|
-|E2E Scenario_2 AMP|AARP|shop-medicare-coverage.html                                       |Visit a UHC Store|
-|E2E Scenario_2 AMP|AARP|about-our-plans.html                                               |Why Choose UHC?|
-|E2E Scenario_2 AMP|AARP|profile/guest                                                      |Your Profile|
-|E2E Scenario_2 AMP|AARP|site-search.html/?q1=medicare&searchloc=header                     |Site search page|
-|E2E Scenario_2 AMP|AARP|medicare-articles.html                                             |Blog Homepage|
 
- @globalheader_AARP_6 
- Examples:
+ @globalheader_AARP_3
+  Examples:
 |Scenario          |site|path                                                                                     |pagename|
+|E2E Scenario_2 AMP|AARP|medicare-education/enrollment-and-changing-plans.html                                    |Enrollment & Changing Plans|
+|E2E Scenario_2 AMP|AARP|about-us.html                                                                            |About Us|
+|E2E Scenario_2 AMP|AARP|contact-us.html                                                                          |Contact Us|
+|E2E Scenario_2 AMP|AARP|sitemap.html                                                                             |Site Map|
+|E2E Scenario_2 AMP|AARP|privacy_policy.html                                                                      |Privacy Policy|
+|E2E Scenario_2 AMP|AARP|terms_and_conditions.html                                                                |Terms of Use|
+|E2E Scenario_2 AMP|AARP|disclaimer.html                                                                          |Disclaimers|
+|E2E Scenario_2 AMP|AARP|health-insurance-brokers.html                                                            |Agents & Brokers|
+|E2E Scenario_2 AMP|AARP|shop-medicare-coverage.html                                                              |Visit a UHC Store|
+|E2E Scenario_2 AMP|AARP|about-our-plans.html                                                                     |Why Choose UHC?|
+|E2E Scenario_2 AMP|AARP|profile/guest                                                                            |Your Profile|
+|E2E Scenario_2 AMP|AARP|site-search.html/?q1=medicare&searchloc=header                                           |Site search page|
+|E2E Scenario_2 AMP|AARP|medicare-articles.html                                                                   |Blog Homepage|
 |E2E Scenario_2 AMP|AARP|medicare-articles/eligibility-and-enrollment.html                                        |Category Page|
 |E2E Scenario_2 AMP|AARP|medicare-articles/unintended-part-d-gotcha-could-getcha-if-you-enroll-after-age-65.html  |Article Page 1|
 |E2E Scenario_2 AMP|AARP|medicare-articles/what-is-retiree-health-coverage.html                                   |Article Page 2|
@@ -382,7 +379,7 @@ Feature: 1.12 UAT - Header and Footer flows
    
  @globalheader_UHC 
  Examples:
- |Scenario          |site|path                                                             |pagename|
+ |Scenario          |site|path                                                            |pagename|
  |E2E Scenario_2 UMS|UHC|health-plans.html#/zipcode                                       |Shop for a Plan|
  |E2E Scenario_2 UMS|UHC|shop.html                                                        |Shop Hub|
  |E2E Scenario_2 UMS|UHC|shop/medicare-advantage-plans.html                               |Shop Medicare Advantage Plans|
@@ -393,25 +390,21 @@ Feature: 1.12 UAT - Header and Footer flows
  |E2E Scenario_2 UMS|UHC|shop/connect.html                                                |Connect with UnitedHealthcare|
  |E2E Scenario_2 UMS|UHC|shop/connect/agentebrc.html                                      |Request an Appointment with a Health Insurance Agent|
  |E2E Scenario_2 UMS|UHC|shop/connect/inquirykit.html                                     |Order Medicare Part D Enrollment Materials|
- 
-  @globalheader_UHC_1
- Examples:
- |Scenario          |site|path                                                            |pagename|
  |E2E Scenario_2 UMS|UHC|shop/connect/attend.html                                         |Find UnitedHealthcare in Your Community|
  |E2E Scenario_2 UMS|UHC|shop/compare.html                                                |Shop: Compare Plans|
  |E2E Scenario_2 UMS |UHC|shop/estimate.html                                              |Shop: Estimate Costs|
  |E2E Scenario_2 UMS |UHC|shop/switch.html                                                |Shop: Switching Plans|
  |E2E Scenario_2 UMS|UHC|shop/medicare-supplement-plans.html                              |Shop Medicare Supplement Insurance Plans|
  |E2E Scenario_2 UMS|UHC|enroll.html                                                      |Enroll Hub|
- |E2E Scenario_2 UMS|UHC|enroll/ma-enrollment.html                                        |Medicare Advantage Enrollment Information|
- |E2E Scenario_2 UMS|UHC|enroll/pdp-enrollment.html                                       |Medicare Prescription Drug Plan Enrollment Information|
- |E2E Scenario_2 UMS|UHC|resources.html                                                   |Resources Hub|
- |E2E Scenario_2 UMS|UHC|resources/ma-resources-materials.html                            |Medicare Advantage Resources and Plan Materials|
  
  
-  @globalheader_UHC_2
+  @globalheader_UHC_1
  Examples:
  |Scenario          |site|path                                                                        |pagename|
+ |E2E Scenario_2 UMS|UHC|enroll/ma-enrollment.html                                                    |Medicare Advantage Enrollment Information|
+ |E2E Scenario_2 UMS|UHC|enroll/pdp-enrollment.html                                                   |Medicare Prescription Drug Plan Enrollment Information|
+ |E2E Scenario_2 UMS|UHC|resources.html                                                               |Resources Hub|
+ |E2E Scenario_2 UMS|UHC|resources/ma-resources-materials.html                                        |Medicare Advantage Resources and Plan Materials|
  |E2E Scenario_2 UMS|UHC|resources/ma-resources-materials/ma-information-forms/medicare-appeal.html   |Plan Information and Forms|
  |E2E Scenario_2 UMS|UHC|resources/ma-resources-materials/ma-information-forms/medicare-appeal.html   |Appeals and Grievances|
  |E2E Scenario_2 UMS|UHC|resources/ma-resources-materials/ma-information-forms/member-rights.html     |Medicare Rights and Responsibilities|
@@ -422,12 +415,12 @@ Feature: 1.12 UAT - Header and Footer flows
  |E2E Scenario_2 UMS|UHC|resources/mail-order-pharmacy.html                                             |Preferred Mail Home Delivery|
  |E2E Scenario_2 UMS|UHC|resources/prescription-drug-transition.html                                    |Prescription Drug Transition Process|
  |E2E Scenario_2 UMS|UHC|resources/prescription-drug-costs-help.html                                    |Get Help with Prescription Drug Costs|
+ |E2E Scenario_2 UMS|UHC|resources/how-to-pay-your-premium.html                                         |How to Pay Your Premium|
+ |E2E Scenario_2 UMS|UHC|resources/how-to-appoint-a-representative.html                                 |How to Appoint a Representative|
  
-  @globalheader_UHC_3
+  @globalheader_UHC_2
  Examples:
  |Scenario          |site|path                                                             |pagename|
- |E2E Scenario_2 UMS|UHC|resources/how-to-pay-your-premium.html                            |How to Pay Your Premium|
- |E2E Scenario_2 UMS|UHC|resources/how-to-appoint-a-representative.html                    |How to Appoint a Representative|
  |E2E Scenario_2 UMS|UHC|resources/medication-therapy-management-program.html              |Medication Therapy Management Program|
  |E2E Scenario_2 UMS|UHC|resources/prescription-drug-appeals.html                          |Prescription Drug Coverage Determinations, Appeals and Grievances|
  |E2E Scenario_2 UMS|UHC|resources/healthcare-fraud.html                                   |Preventing Medicare Fraud|
@@ -436,10 +429,6 @@ Feature: 1.12 UAT - Header and Footer flows
  |E2E Scenario_2 UMS|UHC|health-plans/medicare-supplement-plans/agent-appointment.html     |Health Insurance Free Agent Appointment|
  |E2E Scenario_2 UMS|UHC|medicare-education.html                                           |Understanding Medicare|
  |E2E Scenario_2 UMS|UHC|medicare-education/medicare-eligibility.html                      |Medicare Eligibility|
- 
-  @globalheader_UHC_4
- Examples:
- |Scenario          |site|path                                                              |pagename|
  |E2E Scenario_2 UMS|UHC|medicare-education/medicare-parts-and-medigap-plans.html           |Coverage Choices|
  |E2E Scenario_2 UMS|UHC|medicare-education/medicare-benefits.html                          |Prescriptions, Providers & Benefits|
  |E2E Scenario_2 UMS|UHC|medicare-education/medicare-costs.html                             |Medicare Cost Basics|
@@ -448,26 +437,22 @@ Feature: 1.12 UAT - Header and Footer flows
  |E2E Scenario_2 UMS|UHC|medicare-education/medicare-advantage-plans.html                   |Medicare Advantage (Part C) Plans|
  |E2E Scenario_2 UMS|UHC|medicare-education/medicare-supplement-plans.html                  |Medicare Supplement Insurance Plans|
  |E2E Scenario_2 UMS|UHC|medicare-education/medicare-part-d.html                            |Medicare Prescription Drug (Part D) Plans|
- |E2E Scenario_2 UMS|UHC|medicare-education/enrollment-and-changing-plans.html              |Enrollment & Changing Plans|
- |E2E Scenario_2 UMS|UHC|about-us.html                                                      |About Us|
  
-  @globalheader_UHC_5
+  @globalheader_UHC_3
  Examples:
- |Scenario          |site|path                                                             |pagename|
- |E2E Scenario_2 UMS|UHC|contact-us.html                                                   |Contact Us|
- |E2E Scenario_2 UMS|UHC|sitemap.html                                                      |Site Map|
- |E2E Scenario_2 UMS|UHC|privacy_policy.html                                               |Privacy Policy|
- |E2E Scenario_2 UMS|UHC|terms_and_conditions.html                                         |Terms of Use|
- |E2E Scenario_2 UMS|UHC|disclaimer.html                                                   |Disclaimers|
- |E2E Scenario_2 UMS |UHC|health-insurance-brokers.html                                    |Agents & Brokers|
- |E2E Scenario_2 UMS|UHC|shop-medicare-coverage.html                                       |Visit a UHC Store|
- |E2E Scenario_2 UMS|UHC|about-our-plans.html                                              |Why Choose UHC?|
- |E2E Scenario_2 UMS|UHC|profile/guest                                                     |Your Profile|
- |E2E Scenario_2 UMS|UHC|site-search.html/?q1=medicare&searchloc=header                    |Site search page|
- 
-  @globalheader_UHC_6
- Examples:
- |Scenario          |site|path                                                                                     |pagename|
+ |Scenario          |site|path                                                                                |pagename|
+ |E2E Scenario_2 UMS|UHC|medicare-education/enrollment-and-changing-plans.html                                |Enrollment & Changing Plans|
+ |E2E Scenario_2 UMS|UHC|about-us.html                                                                        |About Us|
+ |E2E Scenario_2 UMS|UHC|contact-us.html                                                                      |Contact Us|
+ |E2E Scenario_2 UMS|UHC|sitemap.html                                                                         |Site Map|
+ |E2E Scenario_2 UMS|UHC|privacy_policy.html                                                                  |Privacy Policy|
+ |E2E Scenario_2 UMS|UHC|terms_and_conditions.html                                                            |Terms of Use|
+ |E2E Scenario_2 UMS|UHC|disclaimer.html                                                                      |Disclaimers|
+ |E2E Scenario_2 UMS |UHC|health-insurance-brokers.html                                                       |Agents & Brokers|
+ |E2E Scenario_2 UMS|UHC|shop-medicare-coverage.html                                                          |Visit a UHC Store|
+ |E2E Scenario_2 UMS|UHC|about-our-plans.html                                                                 |Why Choose UHC?|
+ |E2E Scenario_2 UMS|UHC|profile/guest                                                                        |Your Profile|
+ |E2E Scenario_2 UMS|UHC|site-search.html/?q1=medicare&searchloc=header                                       |Site search page|
  |E2E Scenario_2 UMS|UHC|medicare-articles.html                                                                    |Blog Homepage|
  |E2E Scenario_2 UMS|UHC|medicare-articles/eligibility-and-enrollment.html                                         |Category Page|
  |E2E Scenario_2 UMS|UHC|medicare-articles/unintended-part-d-gotcha-could-getcha-if-you-enroll-after-age-65.html   |Article Page 1|

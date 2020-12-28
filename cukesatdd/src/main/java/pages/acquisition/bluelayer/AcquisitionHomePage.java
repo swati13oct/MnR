@@ -247,8 +247,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	public static List<WebElement> proactiveChatExistBtn;
 
 	
-//	@FindBy(xpath = "//div[@class='overview-main']//h2")
-@FindBy(xpath = "//div[@class='overview-main']/h2")
+//	@FindBy(xpath = "//div[@class='overview-main']/h2")
+@FindBy(xpath = "//div[@class='overview-main']//h2")
 private WebElement vppTop;
 
 	@FindBy(id = "cobrowse-disclaimer")
@@ -2470,18 +2470,18 @@ public VPPTestHarnessPage GetVPPTestHarnessPage() {
 			actions.moveToElement(visitorprofileicon).perform();
 			System.out.println("Hover over visitor profile completed");
 		}
-		WebElement CreateProfile = driver.findElement(By.xpath("//a[contains(text(), 'Create Profile')]"));
-		WebElement VPSignIn = driver.findElement(
-				By.xpath("//a[contains(text(), 'Sign In') and not(contains(@aria-labelledby ,'VPSignIn'))]"));
-		validateNew(CreateProfile);
-		validateNew(VPSignIn);
-		if (CreateProfile.isEnabled() && VPSignIn.isEnabled()) {
-			Assert.assertTrue(true);
-			System.out.println("Visitor Profile elements are present on home page");
-		} else {
-			Assert.fail("Visitor Profile elements are not present on home page");
-		}
-		visitorprofileicon.click();
+//		WebElement CreateProfile = driver.findElement(By.xpath("//a[contains(text(), 'Create Profile')]"));
+//		WebElement VPSignIn = driver.findElement(
+//				By.xpath("//a[contains(text(), 'Sign In') and not(contains(@aria-labelledby ,'VPSignIn'))]"));
+//		validateNew(CreateProfile);
+//		validateNew(VPSignIn);
+//		if (CreateProfile.isEnabled() && VPSignIn.isEnabled()) {
+//			Assert.assertTrue(true);
+//			System.out.println("Visitor Profile elements are present on home page");
+//		} else {
+//			Assert.fail("Visitor Profile elements are not present on home page");
+//		}
+//		visitorprofileicon.click();
 		WebElement GuestProfile = driver.findElement(By.xpath("//*[contains(text(), 'Your Guest Profile')]"));
 		CheckPageLoad();
 		CheckiPerseptions();

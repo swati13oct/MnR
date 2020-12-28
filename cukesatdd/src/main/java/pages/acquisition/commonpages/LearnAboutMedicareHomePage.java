@@ -207,10 +207,12 @@ public class LearnAboutMedicareHomePage extends GlobalWebElements {
 
 	public void navigateToMenuLinks(WebElement hdrMenuElement, WebElement menuDropListItem) {
 
-		Actions actions = new Actions(driver);
+		/*Actions actions = new Actions(driver);
 		actions.moveToElement(hdrMenuElement);
 		actions.moveToElement(menuDropListItem);
-		actions.click().build().perform();
+		actions.click().build().perform();*/
+		jsMouseOver(hdrMenuElement);
+		jsMouseOver(menuDropListItem);
 		CommonUtility.checkPageIsReadyNew(driver);
 
 	}
@@ -308,12 +310,16 @@ public class LearnAboutMedicareHomePage extends GlobalWebElements {
 
 	/* Accessing MedicareAdvantage option from the learn About medicare homePage */
 	public MedicareAdvantagePartCPlansPage planSelectionMA() {
-		getLnkMedicareAdvantage().click();
+//		getLnkMedicareAdvantage().click();
+		jsClickNew(getLnkMedicareAdvantage());
+		waitForPageLoadSafari();
 		return new MedicareAdvantagePartCPlansPage(driver);
 
 	}
 	public MedicareSupplementInsurancePlansPage planSelectionMS() {
-		getLnkMedicareSupplement().click();
+//		getLnkMedicareSupplement().click();
+		jsClickNew(getLnkMedicareSupplement());
+		waitForPageLoadSafari();
 		return new MedicareSupplementInsurancePlansPage(driver);
 
 	}
@@ -323,7 +329,9 @@ public class LearnAboutMedicareHomePage extends GlobalWebElements {
 	 * homePage
 	 */
 	public MedicarePrescriptionDrugPartDPlansPage planSelectionPDP() {
-		getLnkMedicareAdvantage().click();
+//		getLnkMedicareAdvantage().click();
+		jsClickNew(getLnkMedicareAdvantage());
+		waitForPageLoadSafari();
 		CommonUtility.checkPageIsReadyNew(driver);
 		return new MedicarePrescriptionDrugPartDPlansPage(driver);
 
@@ -362,6 +370,7 @@ public class LearnAboutMedicareHomePage extends GlobalWebElements {
 		validateNew(lnkMedEligibility);
 		jsClickNew(lnkMedEligibility);
 		
+		waitForPageLoadSafari();
 		String checkUrl=driver.getCurrentUrl();
 		if(checkUrl.contains("medicare-education/medicare-eligibility.html")) {
 			return new MedicareEligibilityPage(driver);
@@ -375,6 +384,7 @@ public class LearnAboutMedicareHomePage extends GlobalWebElements {
 		WebElement lnkcvrgChoice=driver.findElement(By.xpath("//a[contains(@href,'medicare-parts')]//span[contains(text(),'Coverage') and contains(@class,'card')]"));
 		validateNew(lnkcvrgChoice);
 		jsClickNew(lnkcvrgChoice);
+		waitForPageLoadSafari();
 		CommonUtility.checkPageIsReadyNew(driver);
 		
 		String checkUrl=driver.getCurrentUrl();
@@ -392,7 +402,8 @@ public class LearnAboutMedicareHomePage extends GlobalWebElements {
 		validateNew(FindAnAgent);
 		CommonUtility.waitForPageLoadNew(driver, FindAnAgent, 30);
 		String parentWindow = driver.getWindowHandle();
-		FindAnAgent.click();
+//		FindAnAgent.click();
+		jsClickNew(FindAnAgent);
 		sleepBySec(3);
 		Set<String> tabs_windows = driver.getWindowHandles();
 		Iterator<String> itr = tabs_windows.iterator();
@@ -447,6 +458,7 @@ public class LearnAboutMedicareHomePage extends GlobalWebElements {
 		WebElement lnkNext=driver.findElement(By.xpath("//p[contains(@class,'meded-next')]"));
 		validateNew(lnkNext);
 		jsClickNew(lnkNext);
+		waitForPageLoadSafari();
 		CommonUtility.checkPageIsReadyNew(driver);
 		System.out.println(driver.getTitle());
 		
@@ -455,9 +467,14 @@ public class LearnAboutMedicareHomePage extends GlobalWebElements {
 	
 	public void selectStateForGeotargeting() {
 		//driver.findElement(By.cssSelector("body")).sendKeys(Keys.CONTROL,Keys.END);
+		WebElement stateDropDown = driver.findElement(By.id("state-select"));
+		scrollToView(stateDropDown);
+		waitTllOptionsAvailableInDropdown(stateDropDown, 5);
+		
 		WebElement stateGeotargeting = driver.findElement(By.xpath("(//select[@id='state-select']//option)[2]"));
-		scrollToView(stateGeotargeting);
-		stateGeotargeting.click();
+//		scrollToView(stateGeotargeting);
+//		stateGeotargeting.click();
+		jsClickNew(stateGeotargeting);
 		waitforElementNew(stateGeotargeting, 5);
 		System.out.println("State selected for Geotagging: "+ stateGeotargeting.getText());
 		waitforElementNew(stateGeotargeting, 5);
@@ -536,7 +553,7 @@ public class LearnAboutMedicareHomePage extends GlobalWebElements {
 		}
 		else if (pageName.contains("Cost Basics")) {
 			
-			WebElement lnkPremium=driver.findElement(By.xpath("(//a[contains(text(),'What is a premium?')])[2]"));
+			/*WebElement lnkPremium=driver.findElement(By.xpath("(//a[contains(text(),'What is a premium?')])[2]"));
 			jsClickNew(lnkPremium);
 			System.out.println(" Link Clicked: What is a premium? ");
 			
@@ -559,7 +576,7 @@ public class LearnAboutMedicareHomePage extends GlobalWebElements {
 			WebElement lnkMedCost=driver.findElement(By.xpath("(//a[contains(text(),'paying Medicare costs?')])[2]"));
 			scrollToView(lnkMedCost);
 			jsClickNew(lnkMedCost);
-			System.out.println(" What if I need help paying Medicare costs? ");
+			System.out.println(" What if I need help paying Medicare costs? ");*/
 		}
 	}
 	public void clickToYoutubeVideo() {
@@ -639,6 +656,7 @@ public class LearnAboutMedicareHomePage extends GlobalWebElements {
 	public EnrollmentBasicsPage clickonEnrollmentBasicLink() {
 		validateNew(lnkEnrollmentBasic);
 		jsClickNew(lnkEnrollmentBasic);
+		waitForPageLoadSafari();
 		CommonUtility.checkPageIsReadyNew(driver);
 		
 		String checkUrl=driver.getCurrentUrl();
@@ -663,6 +681,19 @@ public class LearnAboutMedicareHomePage extends GlobalWebElements {
 		CommonUtility.checkPageIsReadyNew(driver);
 		System.out.println("PlanType: "+ plantype);
 		System.out.println(""+driver.getCurrentUrl());
+		
+	}
+	public void chechStillHaveQues() {
+		CommonUtility.checkPageIsReadyNew(driver);
+		sleepBySec(4);
+		WebElement stillQues=driver.findElement(By.xpath("//section//*[contains(text(),'Still')]"));
+		validateNew(stillQues);
+		if(stillQues.isDisplayed()) {
+			Assert.assertTrue(true);
+		}
+		else {
+			Assert.fail("Still have a question not displayed");
+		}
 		
 	}
 }

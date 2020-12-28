@@ -175,7 +175,9 @@ public class PlanDocumentsAndResourcesFnRDocsHelper {
 			testInputInfoMap.put("sampleBodyText","Member Information");
 			return testInputInfoMap; 
 		}
-		if (docName.equals("Medicare Part D Coverage Determination Request Form")) {
+		//TODO - should be 'Prescription Drug' instead of 'Part D' 
+		//note: for now take both until the changes propergate to prod
+		if (docName.equals("Medicare Part D Coverage Determination Request Form") || docName.equals("Medicare Prescription Drug Coverage Determination Request Form")) {
 			testInputInfoMap.put("docName", docName);
 			//keep testInputInfoMap.put("expectedUrl", "/content/dam/shared/documents/Medicare_PartD_Coverage_Determination_Request_Form.pdf");
 			//keep if (MRScenario.environment.equalsIgnoreCase("offline"))

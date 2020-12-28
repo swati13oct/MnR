@@ -98,7 +98,6 @@ public class EOBPage extends EOBBase{
 		goToSpecificComboTab(planType, false);
 		Assert.assertTrue("PROBLEM - should not encounter 'internal server problem' error message",!eobValidate(internalServerError) && !eobValidate(internalServerError2));
 
-		
 		if(planType.toUpperCase().contains("SHIP")) {
 			Assert.assertTrue("PROBLEM - unable to locate EOB page sub section header element", eobValidate(eobSubSectionHeader));
 		}
@@ -202,8 +201,7 @@ public class EOBPage extends EOBBase{
 	 */
 	public void validateRightRail_DREAMEOB(String planType, String memberType, int ui_eobResultCount) {
 		CommonUtility.waitForPageLoad(driver, rightRailLearnMoreLink, 5);
-		//tbd if (ui_eobResultCount==0 || planType.contains("SHIP") || planType.contains("PDP")) {
-		if (planType.contains("SHIP") || planType.contains("PDP")) {
+		if (planType.contains("SHIP") || planType.contains("PDP") || planType.contains("SSP")) {
 			Assert.assertTrue("PROBLEM - should NOT be able to locate right rail Learn More section header element for '"+planType+"' plan", !eobValidate(rightRailLearnMoreHeader));
 			Assert.assertTrue("PROBLEM - should NOT be able to locate right rail Learn More section link element for '"+planType+"' plan", !eobValidate(rightRailLearnMoreLink));
 		} else {
@@ -249,7 +247,10 @@ public class EOBPage extends EOBBase{
 	public void validateHeaderSectionContent_DREAMEOB(String planType) {
 		checkModelPopup(driver,2);
 		CommonUtility.waitForPageLoad(driver, eobSubSectionDescription, 5);
-		//tbd Assert.assertTrue("PROBLEM - should not encounter 'internal server problem' error message",!eobValidate(internalServerError) && !eobValidate(internalServerError2));
+		if (planType.toUpperCase().contains("SSP")) {
+			Assert.assertTrue("PROBLEM - SSP should no longer see the old message 'EOBs for your plan are currently not available on this site. We apologize for the inconvenience.' on the page", !eobValidate(oldSspErrMsg));
+		}
+		
 		if (!eobValidate(eobHeader) || !eobValidate(eobSubSectionDescription))
 			Assert.assertTrue("PROBLEM - should not encounter 'internal server problem' error message",!eobValidate(internalServerError) && !eobValidate(internalServerError2));
 		Assert.assertTrue("PROBLEM - unable to locate EOB page header element", eobValidate(eobHeader));
@@ -697,6 +698,9 @@ public class EOBPage extends EOBBase{
 	}
 
 	public void validateTextElements(String planType, String memberType, String eobType) {
+		System.out.println("planType="+planType);
+		System.out.println("memberType="+memberType);
+		System.out.println("eobType="+eobType);
 		if(eobType.equals("Medical") && !planType.contains("SHIP")) {
 			Assert.assertTrue("PROBLEM - unable to locate text element 'eobstmts' above Learn More section'", eobValidate(eobStmt));
 			Assert.assertTrue("PROBLEM - unable to locate text element 'contactuseob' above Adobe section'", eobValidate(eobContactus));
@@ -903,9 +907,10 @@ public class EOBPage extends EOBBase{
 					System.out.println("TEST - UI eobType="+ui_eobType);
 					System.out.println("TEST - API eobType="+api_eobType);
 					if (ui_eobType.equals("Medical")) 
+						//note: for DSNP, eobType is PDF
 						Assert.assertTrue("PROBLEM - eobType is not matching between UI and API.  "
 								+ "UI='"+ui_eobType+"' | API='"+api_eobType+"'",
-								api_eobType.equals("PART C"));
+								api_eobType.equals("PART C") || api_eobType.equals("PDF"));
 					if (ui_eobType.equals("Prescription Drug")) 
 						Assert.assertTrue("PROBLEM - eobType is not matching between UI and API.  "
 								+ "UI='"+ui_eobType+"' | API='"+api_eobType+"'",

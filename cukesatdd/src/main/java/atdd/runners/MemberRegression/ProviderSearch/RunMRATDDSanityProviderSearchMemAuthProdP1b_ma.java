@@ -14,7 +14,7 @@ jsonReport = "target/cucumber-RunMRATDDSanityProviderSearchMemAuthProdP1b_ma.jso
 overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDSanityProviderSearchMemAuthProdP1b_ma")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberredesign" }, 
 features = { "src/main/resources/feature/memberredesign/providerSearch" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDSanityProviderSearchMemAuthProdP1b_ma.json" }, tags = { "@prod_sanity02","@prod_providerSearch01_ma" })
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDSanityProviderSearchMemAuthProdP1b_ma.json" }, tags = { "@prod_sanity02","@prod_sanity_providerSearch01_ma" })
 public class RunMRATDDSanityProviderSearchMemAuthProdP1b_ma {
 
 }
