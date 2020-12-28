@@ -646,8 +646,8 @@ public class PersonalInformationPage extends UhcDriver{
 		*/
 		
 		Thread.sleep(3000);
-			if(driver.getCurrentUrl().contains("special")){
-			Assert.assertTrue(driver.getCurrentUrl().contains("special"), "OLE SEP Page is Displayed");
+			if(driver.getCurrentUrl().contains("use")){
+			Assert.assertTrue(driver.getCurrentUrl().contains("use"), "OLE Use and Disclosure Authorization page is Displayed");
 			return new UseAndDisclosureAuthorizationPage(driver);
 			
 			}
@@ -662,9 +662,9 @@ public class PersonalInformationPage extends UhcDriver{
 					 validateNew(NextBtn); 
 					 jsClickNew(NextBtn);
 					
-					 if(driver.getCurrentUrl().contains("special")){
-					  System.out.println("OLE SEP Page is Displayed"); } else {
-					  System.out.println("OLE SEP Page is not Displayed"); }
+					 if(driver.getCurrentUrl().contains("use")){
+					  System.out.println("OLE Use and Disclosure Authorization Page is Displayed"); } else {
+					  System.out.println("OLE Use and Disclosure Authorization Page is not Displayed"); }
 					 return new UseAndDisclosureAuthorizationPage(driver);	
 				}
 			 }
