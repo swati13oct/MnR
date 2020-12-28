@@ -1,9 +1,9 @@
 @eob
 Feature: 1.04.1.1 To Test NON-DREAM EOB for Members - E2E - Member Auth - PROD
 
-  #Background: If run on stage then feature security flag needs to be true
-  #   Given feature security flag must set to true when testing on stage env
-  #    | Feature           | UCPEob |
+  Background: If run on stage then feature security flag needs to be true
+     Given feature security flag must set to true when testing on test env
+      | Feature           | UCPEob |
 
   #----- begin sanity
   @prod_sanity
@@ -21,6 +21,8 @@ Feature: 1.04.1.1 To Test NON-DREAM EOB for Members - E2E - Member Auth - PROD
       | Member Type  | <memberType>  |
     #-------------- navigate to the target test page for testing
     Then the user navigates to EOB page
+    And the user selects the eob type
+      | EOB Type | <eobType> |
     #----- Validate Date Range Last 90 Days ----  
     And the user selects the desired date range
       | Date Range | Last 90 Days |
@@ -28,7 +30,7 @@ Feature: 1.04.1.1 To Test NON-DREAM EOB for Members - E2E - Member Auth - PROD
 
     Examples: 
       | index | username  | password  | MemUserName            | planType                 | memberType         | eobType | realEob | flagZeroEob |
-      | S01   | kkumard   | mnrs786@  | gingerdrais46          | SHIP_HOSPITAL INDEMNITY  | MULTI_SHIP_EOB     | Medical | true    | false       | 
+      | S01   | kkumard   | tnps459#  | Pauline3707            | SHIP_HOSPITAL INDEMNITY  | MULTI_SHIP_EOB     | Medical | true    | false       | 
 
   #----- begin regression
   @prod_eob01
@@ -55,7 +57,7 @@ Feature: 1.04.1.1 To Test NON-DREAM EOB for Members - E2E - Member Auth - PROD
     #----- Validate Date Range Last 90 Days ----  
     And the user selects the desired date range
       | Date Range | Last 90 Days |
-    #Then the user obtains API response info for validation
+    Then the user obtains API response info for validation
     Then the user validates search result section content
     Then the user clicks on first eob from the list to validate pdf
       | Real EOB | <realEob> |
@@ -63,7 +65,7 @@ Feature: 1.04.1.1 To Test NON-DREAM EOB for Members - E2E - Member Auth - PROD
     #----- Validate Date Range Last 3-6 months ----  
     And the user selects the desired date range
       | Date Range | Last 3-6 months |
-    #Then the user obtains API response info for validation
+    Then the user obtains API response info for validation
     Then the user validates search result section content
     Then the user clicks on first eob from the list to validate pdf
       | Real EOB | <realEob> |
@@ -71,7 +73,7 @@ Feature: 1.04.1.1 To Test NON-DREAM EOB for Members - E2E - Member Auth - PROD
     #----- Validate Date Range Last 6-12 months ----  
     And the user selects the desired date range
       | Date Range | Last 6-12 months |
-    #Then the user obtains API response info for validation
+    Then the user obtains API response info for validation
     Then the user validates search result section content
     Then the user clicks on first eob from the list to validate pdf
       | Real EOB | <realEob> |
@@ -79,7 +81,7 @@ Feature: 1.04.1.1 To Test NON-DREAM EOB for Members - E2E - Member Auth - PROD
     #----- Validate Date Range Last 12- months ----  
     And the user selects the desired date range
       | Date Range | Last 12-18 months |
-    #Then the user obtains API response info for validation
+    Then the user obtains API response info for validation
     Then the user validates search result section content
     Then the user clicks on first eob from the list to validate pdf
       | Real EOB | <realEob> |
@@ -89,26 +91,29 @@ Feature: 1.04.1.1 To Test NON-DREAM EOB for Members - E2E - Member Auth - PROD
       | Flag Zero EOB User | <flagZeroEob> |
 
     # note: to correctly validate for SHIP, planType must be in this format: SHIP_<planCategory>
-    @prod_SHIP_EOBs @prod_SHIP_EOBs1
+    @prod_SHIP_EOBs @prod_SHIP_EOBs1_multiShip
     Examples: 
       | index | username  | password  | MemUserName            | planType                 | memberType         | eobType | realEob | flagZeroEob |
-      | 11    | kkumard  | mnrs786@  | gingerdrais46           | SHIP_HOSPITAL INDEMNITY  | MULTI_SHIP_EOB     | Medical | true    | false       | 
+      | 11    | kkumard   | tnps459#  | Pauline3707            | SHIP_HOSPITAL INDEMNITY  | MULTI_SHIP_EOB     | Medical | true    | false       | 
 
-    @prod_SHIP_EOBs @prod_SHIP_EOBs2
+    @prod_SHIP_EOBs @prod_SHIP_EOBs2_singleShip
     Examples: 
       | index | username  | password  | MemUserName            | planType                 | memberType         | eobType | realEob | flagZeroEob |
-      | 12    | kkumard  | mnrs786@  | Norm749                 | SHIP_MEDICARE SUPPLEMENT | PDP_SHIP_COMBO_EOB | Medical | true    | true       |
+    #x| 12    | kkumard   | tnps459#  | cdgatling-2            | SHIP_MEDICARE SUPPLEMENT | SHIP_EOB           | Medical | true    | true       |
+      | 12    | kkumard   | tnps459#  | tntparents82           | SHIP_MEDICARE SUPPLEMENT | SHIP_EOB           | Medical | true    | true       |
 
-    @prod_SHIP_EOBs @prod_SHIP_EOBs3
+    @prod_SHIP_EOBs @prod_SHIP_EOBs3_shipComboShipFed
     Examples: 
       | index | username  | password  | MemUserName            | planType                 | memberType              | eobType | realEob | flagZeroEob |
-      | 13    | kkumard  | mnrs786@  | phleauxdailles43        | SHIP_HOSPITAL INDEMNITY  | COMBO_SHIP_MA_NICE_DEOB | Medical | true    | false   | 
+    #x| 13    | kkumard   | tnps459#  | phleauxdailles43       | SHIP_HOSPITAL INDEMNITY  | COMBO_SHIP_MA_NICE_DEOB | Medical | true    | false   | 
+      | 13    | kkumard   | tnps459#  | VirginiaRuth1936       | SHIP_HOSPITAL INDEMNITY  | COMBO_SHIP_MA_NICE_DEOB | Medical | true    | false   | 
 
-    @prod_SHIP_EOBs @prod_SHIP_EOBs4
+    @prod_SHIP_EOBs @prod_SHIP_EOBs4_shipComboFedShip
     Examples: 
       | index | username  | password  | MemUserName            | planType                 | memberType              | eobType | realEob | flagZeroEob |
-    # | 14    | kkumard  | mnrs786@  | testusername            | SHIP_MEDICARE SUPPLEMENT | COMBO_SHIP_PDP_RX_DEOB  | Medical | true    | true   |  
-      | 14    | kkumard  | mnrs786@  | MaryLouMichels2         | SHIP_MEDICARE SUPPLEMENT | COMBO_PDP_SHIP_RX_DEOB  | Medical | true    | true   |  
+    # | 14    | kkumard   | tnps459#  | testusername           | SHIP_MEDICARE SUPPLEMENT | COMBO_SHIP_PDP_RX_DEOB  | Medical | true    | true   |  
+    #x| 14    | kkumard   | tnps459#  | MaryLouMichels2        | SHIP_MEDICARE SUPPLEMENT | COMBO_PDP_SHIP_RX_DEOB  | Medical | true    | true   |  
+      | 14    | kkumard   | tnps459#  | elizabeth6310          | SHIP_MEDICARE SUPPLEMENT | COMBO_PDP_SHIP_RX_DEOB  | Medical | true    | true   |  
 
 
   @prod_eob02 @regression_06_06_18FnF
@@ -131,7 +136,7 @@ Feature: 1.04.1.1 To Test NON-DREAM EOB for Members - E2E - Member Auth - PROD
     @prod_PHIP_EOBs
     Examples: 
       | index | username  | password  | MemUserName     | TID   | planType | memberType |
-      | 15    | kkumard  | mnrs786@  | kataz2525       | 15174 | PHIP     | SHIP_EOB   |
+      | 15    | kkumard  | tnps459#  | kataz2525       | 15174 | PHIP     | SHIP_EOB   |
 
 
   #note: pending coverage until SSUP individual user is available
@@ -155,7 +160,7 @@ Feature: 1.04.1.1 To Test NON-DREAM EOB for Members - E2E - Member Auth - PROD
   #
   #  Examples: 
   #    | index | username  | password  | MemUserName     | FID    | planType | memberType              |
-  #    | 16    | kkumard  | mnrs786@  | testusername    | 267688 | SSUP     | EOB_Deeplink_Individual |
+  #    | 16    | kkumard  | tnps459#  | testusername    | 267688 | SSUP     | EOB_Deeplink_Individual |
 
 
   @prod_eob04 @US1673112 @F267688_Test @claimsEOB_SSUP_Plan
@@ -178,4 +183,4 @@ Feature: 1.04.1.1 To Test NON-DREAM EOB for Members - E2E - Member Auth - PROD
     @prod_SSP_EOBs
     Examples: 
       | index | username  | password  | MemUserName              | FID    | planType | memberType | 
-      | 17    | kkumard  | mnrs786@  | JSENFYFDRE#ERY2GO        | 267688 | SSUP     | GROUP_EOB  | 
+      | 17    | kkumard  | tnps459#  | elizabeth6310#ERY2GO        | 267688 | SSUP     | GROUP_EOB  | 

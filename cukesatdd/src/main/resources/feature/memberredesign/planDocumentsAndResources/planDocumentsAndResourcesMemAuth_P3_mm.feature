@@ -2,7 +2,7 @@
 Feature: 1.06.3.1 Member Plans and Documents - section: Membership Materials - Member Auth
 
   #Background: If run on stage then feature security flag needs to be true
-  #   Given feature security flag must set to true when testing on stage env
+  #   Given feature security flag must set to true when testing on test env
   #    | Feature           | UCPPlanDocuments |
 
   #------------------------------------------
@@ -91,12 +91,12 @@ Feature: 1.06.3.1 Member Plans and Documents - section: Membership Materials - M
 	@memAuth_active_ship
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | mm_sd | mm_en | mm_es | mm_zh |
-      | 19-057 | 15119,15304 | qavgogine | qavgogine | PaidInFullShip0011    | SHIP     | IND_EFF_PDnR          | false | false | false | false |
-      | 20-117 | 15119,15304 | qavgogine | qavgogine | q3_SEP_2020SHIP_012    | SHIP     | MULTI_IND_EFF_PDnR    | false | false | false | false |
+      | 19-057 | 15119,15304 | qavgogine | qavgogine | q4_Ship_ANOC_009    | SHIP     | IND_EFF_PDnR          | false | false | false | false |
+      | 20-117 | 15119,15304 | qavgogine | qavgogine | q4_Ship_014    | SHIP     | MULTI_IND_EFF_PDnR    | false | false | false | false |
 
 	@memAuth_preeffective_ship
 	Examples: 
       | index  | TID         | username  | password  | MemUserName         | planType | memberType            | mm_sd | mm_en | mm_es | mm_zh |
-      | 21-121 | xxxxx       | qavgogine | qavgogine | shipPreeffective707 | SHIP     | IND_PREEFF_PDnR       | false | false | false | false |
+      | 21-121 | xxxxx       | qavgogine | qavgogine | q4_Ship_013 | SHIP     | IND_PREEFF_PDnR       | false | false | false | false |
 
      

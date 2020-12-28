@@ -19,8 +19,8 @@ import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 import cucumber.api.DataTable;
 import gherkin.formatter.model.DataTableRow;
-import pages.acquisition.ulayer.ComparePlansPage;
-import pages.acquisition.ulayer.VPPPlanSummaryPage;
+import pages.acquisition.commonpages.ComparePlansPage;
+
 
 public class ProfileSearch extends UhcDriver {
 	
@@ -118,6 +118,7 @@ public class ProfileSearch extends UhcDriver {
 			DeleteProfile deleteProfile = new DeleteProfile(driver);
 			deleteProfile.deleteAProfile(email);
 			backToProfileSearch.click();
+			CommonUtility.checkPageIsReadyNew(driver);
 			CommonUtility.waitForPageLoadNew(driver, visitorEmail, 20);
 			sendkeys(visitorEmail, email);
 			btnSearchShopper.click();
@@ -163,7 +164,7 @@ public class ProfileSearch extends UhcDriver {
 			sendkeys(lastName, lname);
 			btnSearchShopper.click();
 			waitforElement(errorMessage);
-			Assert.assertEquals(errorMessage.getText().trim(), "There are no results found for this user."+"\n"+"Please re-enter"
+			Assert.assertEquals(errorMessage.getText().trim().replaceAll("\\.\\s+", "\\.\n"), "There are no results found for this user."+"\n"+"Please re-enter"
 					+ " Email or First & Last name then click the search button."+"\n"+"or, Create a Shopper Profile for Consumer.");
 		}else {
 			sendkeys(visitorEmail, email);
@@ -194,13 +195,25 @@ public class ProfileSearch extends UhcDriver {
 	//public VPPPlanSummaryPage doCloakIn() {
 		try {
 			CommonUtility.waitForPageLoadNew(driver, searchResults.get(0), 45);
+			String winBeforeClick = driver.getWindowHandle();
 			btnCloakIn.click();
 			Thread.sleep(15000);
 			ArrayList<String> tabs = new ArrayList<String>(
                     driver.getWindowHandles());
-			driver.switchTo().window(tabs.get(1));
+			/*driver.switchTo().window(tabs.get(1));
 			driver.switchTo().window(tabs.get(0)).close();
-			driver.switchTo().window(tabs.get(1));
+			driver.switchTo().window(tabs.get(1));*/
+			
+			for(String tab: tabs) {
+				if(!tab.equals(winBeforeClick)) {
+					driver.switchTo().window(tab);
+					break;
+				} else {
+					driver.switchTo().window(tab).close();
+				}
+			}
+			
+			
 			CommonUtility.checkPageIsReadyNew(driver);
 			validateNew(AARPlogo);
 			if(driver.getCurrentUrl().contains("health-plans.html")) {

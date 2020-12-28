@@ -2,7 +2,7 @@
 Feature: 1.09 Member Health and Wellness Page
 
   Background: If run on stage then feature security flag needs to be true
-     Given feature security flag must set to true when testing on stage env
+     Given feature security flag must set to true when testing on test env
       | Feature           | UCPHealthWellness |
       
   #----- beginning of sanity ------------------
@@ -45,7 +45,7 @@ Feature: 1.09 Member Health and Wellness Page
     @healthAndWellness01_fedShipCombo_shipFedCombo
     Examples: 
       | TID   | planType          | memberType        | hasReward | hasRenewActive |
-      | 15343 | FED_SHIP_COMBO    | RewardsMember     | false     | true           |
+      | 15343 | FED_SHIP_COMBO    | RewardsMember     | false     | false          |
       | 15343 | SHIP_FED_COMBO    | RewardsMember     | true      | true           |
  
   @healthAndWellness02_uhcDeeplink

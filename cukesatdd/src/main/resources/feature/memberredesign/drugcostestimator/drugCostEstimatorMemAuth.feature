@@ -18,7 +18,7 @@ Feature: 1.07.1 Member DCE Page - Member Auth
 
     Examples: 
       | TID   | username  | password  | MemUserName        | planType | memberType   |
-      | 15326 | qavgogine | qavgogine | PaidInFullShip0011 | SHIP     | SHIP_DCE     |
+      | 15326 | qavgogine | qavgogine | q4_Ship_ANOC_009 | SHIP     | SHIP_DCE     |
       | 15337 | qavgogine | qavgogine | q2_may_rally017    | MA       | MA_DCE       |
       | 15327 | qavgogine | qavgogine | q2_jun_grp0255     | SSUP     | SSUP_DCE     |
    

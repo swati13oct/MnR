@@ -2,7 +2,7 @@
 Feature: 1.06.4 Member Plans and Documents - section: Annual Notice of Changes Documents
 
   Background: If run on stage then feature security flag needs to be true
-     Given feature security flag must set to true when testing on stage env
+     Given feature security flag must set to true when testing on test env
       | Feature           | UCPPlanDocuments |
 
   #------------------------------------------
@@ -38,7 +38,8 @@ Feature: 1.06.4 Member Plans and Documents - section: Annual Notice of Changes D
 	Examples: 
       | index  | TID         | planType | memberType            | an_sd | an_en_cy | an_es_cy | an_zh_cy | an_en_ny | an_es_ny | an_zh_ny |
       | 04-061 | xxxxx       | PDP      | AARP_IND_PREEFF_PDnR  | false | false    | false    | false    | false    | false    | false    |
-      | 05-062 | xxxxx       | PDP      | GROUP_PREEFF_PDnR     | false | false    | false    | false    | false    | false    | false    |
+	#note: no test user available for now
+    #  | 05-062 | xxxxx       | PDP      | GROUP_PREEFF_PDnR     | false | false    | false    | false    | false    | false    | false    |
 
 
 	@terminated_ma_mapd
@@ -94,8 +95,9 @@ Feature: 1.06.4 Member Plans and Documents - section: Annual Notice of Changes D
       | index  | TID         | planType | memberType            | an_sd | an_en_cy | an_es_cy | an_zh_cy | an_en_ny | an_es_ny | an_zh_ny |
       | 20-118 | 15119,15304 | SHIP     | MULTI_IND_EFF_PDnR    | false | false    | false    | false    | false    | false    | false    |
 
-	@preeffective_ship
-	Examples: 
-      | index  | TID         | planType | memberType            | an_sd | an_en_cy | an_es_cy | an_zh_cy | an_en_ny | an_es_ny | an_zh_ny |
-      | 21-124 | xxxxx       | SHIP     | IND_PREEFF_PDnR       | false | false    | false    | false    | false    | false    | false    |
+	#note: no test user available for now
+	#@preeffective_ship
+	#Examples: 
+    #  | index  | TID         | planType | memberType            | an_sd | an_en_cy | an_es_cy | an_zh_cy | an_en_ny | an_es_ny | an_zh_ny |
+    #  | 21-124 | xxxxx       | SHIP     | IND_PREEFF_PDnR       | false | false    | false    | false    | false    | false    | false    |
 

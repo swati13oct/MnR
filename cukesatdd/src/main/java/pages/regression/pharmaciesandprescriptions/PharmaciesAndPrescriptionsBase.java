@@ -1,6 +1,10 @@
 package pages.regression.pharmaciesandprescriptions;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.TimeZone;
 import java.util.concurrent.TimeUnit;
 
 import org.json.JSONArray;
@@ -17,6 +21,7 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.remote.html5.RemoteWebStorage;
 import org.openqa.selenium.support.PageFactory;
 import acceptancetests.util.CommonUtility;
+import atdd.framework.MRScenario;
 
 /**
  * Functionality : validations for Pharmacies & Prescriptions page
@@ -266,7 +271,7 @@ public class PharmaciesAndPrescriptionsBase extends PharmaciesAndPrescriptionsWe
 			lookForPlanCategory=planType;
 
 		String consumerDetails=getConsumerDetailsFromlocalStorage();
-		System.out.println("TEST - consumerDetails="+consumerDetails);
+		//keepForDebug System.out.println("TEST - consumerDetails="+consumerDetails);
 		//note: if first / last name, no need to go into planProfiles - infoType: firstName | lastName 
 		//note: LIS and segmentID needs to get within planProfiles - infoType: segmentId | planCategoryId 
 		Assert.assertTrue("PROBLEM - code only support locating the following info "
@@ -399,9 +404,30 @@ public class PharmaciesAndPrescriptionsBase extends PharmaciesAndPrescriptionsWe
 		driver.switchTo().window(afterClicked_tabs.get(afterClicked_numTabs-1));
 		CommonUtility.checkPageIsReady(driver);
 		CommonUtility.waitForPageLoad(driver, expElement, 10);
-		checkModelPopup(driver,5);
-		String currentUrl=driver.getCurrentUrl();
-		Assert.assertTrue("PROLEM: destination URL is not as expected for '"+targetItem+"'.  Expect to contain ='"+expUrl+"' | Actual='"+currentUrl+"'", currentUrl.contains(expUrl));
+		checkModelPopup(driver,1);
+		/* tbd 
+		if (targetItem.contains("ESTIMATE DRUG COSTS")) {
+			//note: vaidate the href element
+			//note: from testharness if clicked then likely land the myuhc.ocm sign-in page
+			//note: from dashboard if clicked then likely sorry error page then dce page
+			if (MRScenario.isTestHarness.equalsIgnoreCase("yes")) {
+				expUrl="https://www.myuhc.com/member/prelogoutLayout.do?reason=timeout&currentLanguageFromPreCheck=en";
+			}
+			if (validate(rallyDceSorryPgHeading,0)) {
+				checkModelPopup(driver,1);
+				rallyDceSorryPgBtnClose.click();
+				CommonUtility.checkPageIsReady(driver);
+				CommonUtility.waitForPageLoad(driver, rallyDcePgHeading, 5);
+				checkModelPopup(driver,1);
+			}
+			String currentUrl=driver.getCurrentUrl();
+			Assert.assertTrue("PROLEM: destination URL is not as expected for '"+targetItem+"'.  Expect to contain ='"+expUrl+"' | Actual='"+currentUrl+"'", currentUrl.contains(expUrl));
+
+		} else {
+		*/
+			String currentUrl=driver.getCurrentUrl();
+			Assert.assertTrue("PROLEM: destination URL is not as expected for '"+targetItem+"'.  Expect to contain ='"+expUrl+"' | Actual='"+currentUrl+"'", currentUrl.contains(expUrl));
+		//tbd }
 
 		if (noWaitValidate(acqPopupExit)) {
 			acqPopupExit.click();
@@ -430,7 +456,19 @@ public class PharmaciesAndPrescriptionsBase extends PharmaciesAndPrescriptionsWe
 		}
 		System.out.println("TEST - Switched back to prior page");
 	}	
+
+	public Boolean getPreEffInConsumerDetails(String consumerDetails) {
+		boolean actualPreEffFlag=false;
+		try {
+			JSONObject jsonObj = new JSONObject(consumerDetails);
+			actualPreEffFlag=jsonObj.getBoolean("preEffective");
+		} catch (Exception e) {
+			Assert.assertTrue("PROBLEM - unable to get preEffective field value from consumerDetail to determine if user is pre-effective user", false);
+		}
+		return actualPreEffFlag;
+	}
 	
+
 	// F436319
 		public boolean pnpNotificationPositionValidate(WebElement element) {
 			System.out.println("pnpNotification margin value is :: " +  element.getCssValue("margin"));
@@ -461,4 +499,38 @@ public class PharmaciesAndPrescriptionsBase extends PharmaciesAndPrescriptionsWe
 			driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 			return false;
 		}	
+}
+
+	public Date getCurrentSystemDate() {
+		if (MRScenario.environment.equalsIgnoreCase("offline") || MRScenario.environment.equalsIgnoreCase("prod")) {
+			//note: offline-prod and online-prod should always have current date anyway...
+			return new Date();
+		} else {
+			String dateTimeStr=getMemTestEnvSysTime();
+			String[] tmp=dateTimeStr.split(" ");
+			String month=tmp[1];
+			String day=tmp[2];
+			String year=tmp[5];
+			String s=month+" "+day+","+year;		
+			DateFormat df = new SimpleDateFormat("MMM dd,yyyy"); 
+			df.setTimeZone(TimeZone.getTimeZone("UTC"));
+			Date targetDate;
+			try {
+				targetDate = df.parse(s);
+				String newDateString = df.format(targetDate);
+				System.out.println("currentSystemDate="+newDateString);
+				return targetDate;
+			} catch (java.text.ParseException e) {
+				e.printStackTrace();
+				return null;
+			}
+		}
+	}
+	
+	public String convertDateToStrFormat_MMDDYYYY(Date d) {
+		String pattern = "MM/dd/yyyy";
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+		simpleDateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
+		return simpleDateFormat.format(d);
+	}
 }

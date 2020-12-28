@@ -2,7 +2,7 @@
 Feature: 1.03 Member Preferences page
 
   Background: If run on stage then feature security flag needs to be true
-     Given feature security flag must set to true when testing on stage env
+     Given feature security flag must set to true when testing on test env
       | Feature           | UCPProfileAndPreferences |
 
   #----- beginning of VBF preferences scenarios section ------------------
@@ -144,7 +144,7 @@ Feature: 1.03 Member Preferences page
 
     Examples: 
       | TID   | planType               |
-      | 15310 | SSUP_ProfilePref       |
+      #| 15310 | SSUP_ProfilePref       |
       | 15376 | Terminated_ProfilePref |
       | 15308 | PCP_ProfilePref        |
       | 15308 | MEDICA_ProfilePref     |

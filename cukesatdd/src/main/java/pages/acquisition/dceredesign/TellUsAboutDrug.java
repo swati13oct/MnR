@@ -128,6 +128,7 @@ public class TellUsAboutDrug extends UhcDriver {
 	public BuildYourDrugList ClickAddDrug() {
 		validateNew(AddDrugBtn);
 		jsClickNew(AddDrugBtn);
+		waitForPageLoadSafari();
 		CommonUtility.waitForPageLoad(driver, BuildDrugPage_EnterDrugNameTxt, 30);
 		if (validateNew(BuildDrugPage_EnterDrugNameTxt)) {
 			Assert.assertTrue("Naviagted to Build Drug List Page", true);
@@ -166,9 +167,12 @@ public class TellUsAboutDrug extends UhcDriver {
 
 	public void selectSupplyLength(String SupplyLength) {
 		validateNew(supplyLengthDrpDwn);
-		jsClickNew(supplyLengthDrpDwn);
-		WebElement element = driver.findElement(By.xpath("//select[@id='new-drug-refill']//option[contains(text(), '"+SupplyLength+"')]"));
-		jsClickNew(element);
+		supplyLengthDrpDwn.click();
+//		jsClickNew(supplyLengthDrpDwn);
+		WebElement SupplyLengthelement = driver.findElement(By.xpath("//select[@id='new-drug-refill']//option[contains(text(), '"+SupplyLength+"')]"));
+//		jsClickNew(SupplyLengthelement);
+		SupplyLengthelement.click();
+		System.out.println("Selected Supply Length : "+supplyLengthDrpDwn.getText());
 	
 	}
 }

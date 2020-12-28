@@ -51,7 +51,7 @@ public class PharmacyDeeplinkLoginPage extends UhcDriver {
 	
 	@FindBy(xpath = "//button[@class='btn btn-outline-primary text-transform-none home-btn']")
 	protected WebElement homePageNotice4;
-
+	
 	@FindBy(id = "details-button")
 	protected WebElement proxyPageAdvancedButton;
 	
@@ -171,54 +171,24 @@ public class PharmacyDeeplinkLoginPage extends UhcDriver {
 							{
 								System.out.println("Catch block with no significance");
 							}
-							if (driver.getCurrentUrl().contains("bannerpopup.html")) {
-								System.out.println("COVID 19 Banner page has appeared");
-								try {
-									CommonUtility.waitForPageLoad(driver, homePageNotice, 20);
-									if (validate(homePageNotice, 0)) {
-										homePageNotice.click();
-										CommonUtility.checkPageIsReady(driver);
-									} else if (validate(homePageNotice2, 0)) {
-										homePageNotice2.click();
-										CommonUtility.checkPageIsReady(driver);
-									} else if (validate(homePageNotice3, 0)) {
-										homePageNotice3.click();
-										CommonUtility.checkPageIsReady(driver);
-									}
-									
-									Thread.sleep(3000);
-								} catch (Exception e) {
-									// TODO Auto-generated catch block
-									System.out.println("Catch block");
-								}
-							} else {
-								System.out.println("COVID 19 Banner page did not appear");
-								System.out.println(driver.getCurrentUrl());	
-							}
-							if (driver.getCurrentUrl().contains("/no-email.html")) {
-								System.out.println("No email page has appeared");
-								try {
-									CommonUtility.waitForPageLoad(driver, homePageNotice4, 20);
-									if (validate(homePageNotice4, 0)) {
-										homePageNotice4.click();
-										CommonUtility.checkPageIsReady(driver);
-									} 									
-									Thread.sleep(3000);
-								} catch (Exception e) {
-									// TODO Auto-generated catch block
-									System.out.println("Catch block");
-								}
-							} else {
-								System.out.println("NO emmail page did not appear");
-							}
-							if (driver.getCurrentUrl().contains("/anoc.html")) {
-								System.out.println("annual notice of changes page has appeared");
+							try {
+								CommonUtility.checkPageIsReady(driver);
 								if (validate(homePageNotice, 0)) {
 									homePageNotice.click();
 									CommonUtility.checkPageIsReady(driver);
+								} else if (validate(homePageNotice2, 0)) {
+									homePageNotice2.click();
+									CommonUtility.checkPageIsReady(driver);
+								} else if (validate(homePageNotice3, 0)) {
+									homePageNotice3.click();
+									CommonUtility.checkPageIsReady(driver);
+								} else if (validate(homePageNotice4, 0)) {
+									homePageNotice4.click();
+									CommonUtility.checkPageIsReady(driver);
 								}
-							} else {
-								System.out.println("annual notice of changes page did not appear");
+								Thread.sleep(3000);
+							} catch (Exception e) {
+								System.out.println("Error occured while checking home page on banner pages." + e.getMessage());
 							}
 											
 					return;
@@ -268,7 +238,7 @@ public class PharmacyDeeplinkLoginPage extends UhcDriver {
 					if (driver.getCurrentUrl().contains("pharmacy/overview.html")) {
 						Assert.assertTrue(driver.getTitle().contains("M&R Pharmacy"));
 					} else {
-							Assert.fail("Pharmacy page is not loaded through deeplink");
+							Assert.fail("Soultran page is not loaded through deeplink");
 					}
 					return true;
 				}

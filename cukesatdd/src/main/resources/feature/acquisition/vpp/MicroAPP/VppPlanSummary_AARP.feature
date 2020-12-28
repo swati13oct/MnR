@@ -21,15 +21,15 @@ Feature: 1.01.1-Vpp to plan Summary AARP Scenarios
     Then the user views plan details of the above selected plan and validates
       | Plan Name | <planName> |
     Then the user clicks on back to all plans link and validates its redirection to Plan Summary
-    Then the user validates below plan benefit values for the above selected plan
-      | Monthly Premium            | <monthlyPremium>         |
-      | Primary Care Physician     | <primaryCarePhysician>   |
-      | Specialist                 | <specialist>             |
-      | Referral Required          | <referralRequired>       |
-      | Out Of Pocket Maximum      | <outOfPocketMaximum>     |
-      | Prescription Drugs, Tier 1 | <prescriptionDrugsTier1> |
-      | Plan Type                  | <plantype>               |
-      | Annual Deductible          | <annualDeductible>       |
+#    Then the user validates below plan benefit values for the above selected plan
+#      | Monthly Premium            | <monthlyPremium>         |
+#      | Primary Care Physician     | <primaryCarePhysician>   |
+#      | Specialist                 | <specialist>             |
+#      | Referral Required          | <referralRequired>       |
+#      | Out Of Pocket Maximum      | <outOfPocketMaximum>     |
+#      | Prescription Drugs, Tier 1 | <prescriptionDrugsTier1> |
+#     | Plan Type                  | <plantype>               |
+#      | Annual Deductible          | <annualDeductible>       |
     Then the user hover overs the tool tip for Why is my premium 0 and validates the text
     # New steps for DCE Redesign
     And I access the DCE Redesign from Plan Summary for mentioned plan
@@ -46,10 +46,10 @@ Feature: 1.01.1-Vpp to plan Summary AARP Scenarios
 
     Examples: 
       | TID   | zipcode | site| isMultutiCounty | county             | plantype | planName                                            | monthlyPremium | primaryCarePhysician | specialist | referralRequired | outOfPocketMaximum | prescriptionDrugsTier1                     | annualDeductible | planyear |
-      | 15545 |   90210 | AARP| NO              | Los Angeles County | MAPD     | AARP Medicare Advantage SecureHorizons Plan 1 (HMO) | $0             | $0  copay            | $0  copay  | Yes              | $3,400.00          | $4  copay                                  |                  | current |
-      | 15546 |   28105 | AARP| YES             | Mecklenburg County | SNP      | UnitedHealthcare Dual Complete (HMO-POS D-SNP)      | $0             | $0  copay            | $0  copay  | No               | $0 - $6,700.00     | $0, $1.25, $3.40 copay, or 15% coinsurance |                  |  current |
+      | 15545 |   90210 | AARP| NO              | Los Angeles County | MAPD     | AARP Medicare Advantage SecureHorizons Plan 1 (HMO) | $0             | $0  copay            | $0  copay  | Yes              | $3,400.00          | $4  copay                                  |                  | next |
+      | 15546 |   28105 | AARP| YES             | Mecklenburg County | SNP      | UnitedHealthcare Dual Complete RP (Regional PPO D-SNP)      | $0             | $0  copay            | $0  copay  | No               | $0 - $6,700.00     | $0, $1.25, $3.40 copay, or 15% coinsurance |                  |  next |
 
-  @vppPlanSummaryAARP02 @vppPlanSummaryAARPRun01 @vppPlanSummaryAARPRegression
+  @vppPlanSummaryAARP02 @vppPlanSummaryAARPRun01 @vppPlanSummaryAARPRegression @VBFTEAMC
   Scenario Outline: TID: <TID> -plan type: <plantype> - Verify right rail on plan summary page in AARP site
     Given the user is on AARP medicare acquisition site landing page
     When the user does plan search using the following information in the AARP site
@@ -190,7 +190,7 @@ Feature: 1.01.1-Vpp to plan Summary AARP Scenarios
 
     Examples: 
       |	site	| zipcode | isMultiCounty | county             | plantype | planName                                       |planyear|
-      |	AARP	|   80001 | NO            | Los Angeles County | SNP      | UnitedHealthcare Nursing Home Plan (PPO I-SNP) |current|
+      |	AARP	|   80001 | NO            | Los Angeles County | SNP      | UnitedHealthcare Nursing Home Plan (PPO I-SNP) |future|
 
   @vppPlanSummaryAARP06 @vppPlanSummaryAARPRun02 @vppPlanSummaryAARPRegression
   Scenario Outline: Validate Cancel button for Multi Cunty Pop-up on VPP for Change Location

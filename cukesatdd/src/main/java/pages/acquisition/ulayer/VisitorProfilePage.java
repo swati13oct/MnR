@@ -3,6 +3,7 @@ package pages.acquisition.ulayer;
 import java.util.Arrays;
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -31,14 +32,20 @@ public class VisitorProfilePage extends UhcDriver {
 	@FindBy(css = "div.signupCTA a.profileBtn")
 	private WebElement btnCreateProfile;
 	
-	@FindBy(css = "div.dashboardCard.plans a.empty-message-link")
-	private WebElement addPlans;
+	//@FindBy(css = "div.dashboardCard.plans a.empty-message-link")
+	//private WebElement addPlans;
 	
 	@FindBy(css = "a.addrugs")
 	private WebElement addrugs;
 	
 	@FindBy(css = "a.add-provider")
 	private WebElement addprovider;
+	
+	@FindBy(xpath = "//div[contains(@class,'find-plans')]/button")
+	private WebElement addPlans;
+	
+	@FindBy(xpath = "//div[contains(@class,'find-plans')]/button")
+	private WebElement addplans;
 	
 	@FindBy(xpath="//div[contains(@class,'drug-list-accordion')]//button[contains(@class,'drug-list-toggle')][contains(@class,'collapsed')]")
 	private WebElement expandDrugBlock;
@@ -91,6 +98,51 @@ public class VisitorProfilePage extends UhcDriver {
 	@FindBy(xpath = "//div[@class='multi-year-select']/button[contains(@class,'js-select-year select-year')][1]")
 	private WebElement profileCrntYrPlans;
 	
+	@FindBy(xpath = "//*[contains(@id,'ghn_lnk')]/span[text()='Shop For a Plan']")
+	private WebElement homeTab;
+	
+	@FindBy(xpath = "//*[@class='locationEnrollment']//*[contains(@class,'drug-list-accordion')]/button")
+	public WebElement expandDrugsGlobal;
+	
+	@FindBy(xpath = "//*[@class='locationEnrollment']//*[@class='edit-drugs']/a")
+	public WebElement editDrugsGlobal;
+	
+	@FindBy(xpath = "//*[@id='dashPlansContainer']//*[@class='add-drug']")
+	public WebElement addDrugsPlanCard;
+	
+	@FindBy(xpath = "//a[contains(text(),'Back to Drug Cost Estimator')]")
+	public WebElement backToDrugCostEstimatorLink;
+	
+	@FindBy(xpath = "(//*[contains(@class,'uhc-coverage-dropdown-trigger d-flex align-items-center justify-content-between pr-20 p-20')])[2]")
+	public WebElement expandDrugsPlanCard;
+	
+	@FindBy(xpath = "//*[text()='Edit Drugs']")
+	public WebElement editDrugsPlanCard;
+	
+	@FindBy(xpath = "//*[contains(@class,'add-drug')]")
+	public WebElement enterDrugInfoPlanCard;
+	
+	@FindBy(xpath = "//*[@id='globalContentIdForSkipLink']/..//a[text()='Sign In']")
+	public WebElement loginLink;
+	
+	@FindBy(xpath = "//*[@id='globalContentIdForSkipLink']/..//a[text()='Sign Out']")
+	public WebElement signOutLink;
+	
+	@FindBy(xpath = "//*[contains(text(),'Your Drugs (')]")
+	private List<WebElement> totalDrugs;
+
+	@FindBy(xpath = "//button[contains(@id,'DrugDelete')]")
+	private List<WebElement> editDrugs;
+	
+	@FindBy(xpath = "//button[contains(@id,'ProviderDelete')]")
+	private List<WebElement> editProviders;
+
+	@FindBy(xpath = "//*[contains(text(),'Your Providers (')]")
+	private List<WebElement> totalProviders;
+	
+	@FindBy(xpath = "//button[@aria-label='Delete Plan']")
+	private List<WebElement> deletPlan;
+	
 	public VisitorProfilePage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -125,10 +177,18 @@ public class VisitorProfilePage extends UhcDriver {
 	}
 	
 	public AcquisitionHomePage addPlan() throws Exception {
-		addPlans.click();
-		Thread.sleep(10000);
+		if(StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Pennsylvania") || StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Puerto Rico") || 
+				StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Virginia")) {
+			jsClickNew(addplans);
+		}else {
+			jsClickNew(addPlans);
+		}
+		
+//		addPlans.click();
+		
 		CommonUtility.checkPageIsReadyNew(driver);
-		if(driver.getCurrentUrl().contains("health-plans.html")){
+		waitForPageLoadSafari();
+		if(driver.getCurrentUrl().contains("plan-summary")){
 			String page = "health-plans";
 			return new AcquisitionHomePage(driver,page);
 		}
@@ -285,8 +345,8 @@ public class VisitorProfilePage extends UhcDriver {
 	public void deleteAllProviders() {
 		if(!(driver.findElements(By.cssSelector("div.no-providers")).size()>0)) {
 			CommonUtility.waitForPageLoadNew(driver, expandProviderBlock, 20);
-			expandProviderBlock.click();
-			driver.findElement(By.xpath("//li[@class='provider']//button")).click();
+			jsClickNew(expandProviderBlock);
+			jsClickNew(driver.findElement(By.xpath("//li[@class='provider']//button")));
 			waitforElementDisapper(By.xpath("//div[contains(@class,'provider--block card')]//button[contains(@class,'provider-title')][contains(@class,'collapsed')]"), 5);
 			Assert.assertTrue(validateNonPresenceOfElement(expandProviderBlock));
 		}else {
@@ -301,11 +361,13 @@ public class VisitorProfilePage extends UhcDriver {
 	 */
 	public void signIn(String username,String password) {
 		try {
-			
-			signIn.click();
+			validate(signIn, 5);
+			jsClickNew(signIn);
+			waitForPageLoadSafari();
 			driver.findElement(By.cssSelector("input#userNameId_input")).sendKeys(username);
 			driver.findElement(By.cssSelector("input#passwdId_input")).sendKeys(password);
-			driver.findElement(By.cssSelector("input#SignIn")).click();
+			jsClickNew(driver.findElement(By.cssSelector("input#SignIn")));
+			waitForPageLoadSafari();
 			String Question = driver.findElement(By.cssSelector("label#challengeQuestionLabelId")).getText().trim();
 			WebElement securityAnswer = driver.findElement(By.cssSelector("div#challengeSecurityAnswerId >input"));
 			if (Question.equalsIgnoreCase("What is your best friend's name?")) {
@@ -320,7 +382,8 @@ public class VisitorProfilePage extends UhcDriver {
 				System.out.println("Question is related to phone");
 				securityAnswer.sendKeys("number1");
 			}
-			driver.findElement(By.cssSelector("input#authQuesSubmitButton")).click();
+			jsClickNew(driver.findElement(By.cssSelector("input#authQuesSubmitButton")));
+			waitForPageLoadSafari();
 			CommonUtility.waitForPageLoadNew(driver, signOut, 15);
 			
 		} catch (Exception e) {
@@ -418,8 +481,9 @@ public class VisitorProfilePage extends UhcDriver {
 	 */
 	public VPPPlanSummaryPage backToPlans() {
 		try {
-			backToPlans.click();
+			jsClickNew(backToPlans);
 			CommonUtility.checkPageIsReadyNew(driver);
+			waitForPageLoadSafari();
 		if (driver.getCurrentUrl().contains("#/plan-summary")) {	
 			return new VPPPlanSummaryPage(driver);
 			}
@@ -427,5 +491,161 @@ public class VisitorProfilePage extends UhcDriver {
 		e.printStackTrace();
 		}
 		return null;
+	}
+	
+	
+	public AcquisitionHomePage findPlans() {
+		
+		jsClickNew(addPlans);
+		waitForPageLoadSafari();
+		if(driver.getCurrentUrl().contains("profile")) {
+			return new AcquisitionHomePage(driver);
+		}else {
+			System.out.println("Navigation to visitor profile is failed");
+			return null;
+		}
+	}
+	
+	public void backtoPlan() {
+		backToPlans.click();
+		CommonUtility.checkPageIsReadyNew(driver);
+	}
+	
+	
+	public AcquisitionHomePage clickHomeTab() {
+		try {
+			//homeTab.click();
+			jsClickNew(homeTab);
+			CommonUtility.checkPageIsReadyNew(driver);
+			if (driver.getCurrentUrl().contains("#/plan-summary")) {
+				return new AcquisitionHomePage(driver);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	public VisitorProfilePage validateVisitorProfilePageDisplayed() {
+		if (driver.getCurrentUrl().contains("profile")) {
+			return new VisitorProfilePage(driver);
+		} else {
+			System.out.println("Navigation to visitor profile is failed");
+			return null;
+		}
+	}
+	
+	/**
+	 * click edit drugs globally
+	 */
+	public void clickEditDrugs() {
+		expandDrugsGlobal.click();
+		editDrugsGlobal.click();
+	}
+	
+	/**
+	 * click add drugs from plan card
+	 */
+	public void clickAddDrugsPlancard() {
+		addDrugsPlanCard.click();
+	}
+	
+	public void validateBackToDceLink() {
+		validate(backToDrugCostEstimatorLink);
+	}
+	
+	/**
+	 * click edit drugs from plan card
+	 */
+	public void clickEditDrugsPlancard() {
+		expandDrugsPlanCard.click();
+		editDrugsPlanCard.click();
+	}
+	
+	public void validateAddedPlansNew(String planNames) {
+		List<String> listOfTestPlans = Arrays.asList(planNames.split(","));
+		CommonUtility.checkPageIsReadyNew(driver);
+		for (String plan: listOfTestPlans) {
+			Assert.assertEquals(plan, driver.findElement(By.xpath("//h3[text()=' "+plan+" ']")).getText());
+			Assert.assertTrue(driver.findElement(By.xpath("//h3[text()=' "+plan+" ']/following::button[1]")).isDisplayed());
+			System.out.println("Verified plans are added on vistior profile page");
+		}
+	}
+	
+	/**
+	 * click add drugs from plan card
+	 */
+	public void clickAddDrugsPlancardNew() {
+		enterDrugInfoPlanCard.click();
+	}
+	
+	public void logIn(String username, String password) {
+		try {
+
+			loginLink.click();
+			driver.findElement(By.cssSelector("input#userNameId_input")).sendKeys(username);
+			driver.findElement(By.cssSelector("input#passwdId_input")).sendKeys(password);
+			System.out.println("before signin");
+			driver.findElement(By.cssSelector("input#SignIn")).click();
+			System.out.println("before wait");
+			waitforElement(driver.findElement(By.cssSelector("#securityQues")));
+			System.out.println("after wait");
+			String Question = driver.findElement(By.cssSelector("#challengeQuestionLabelId")).getText().trim();
+			WebElement securityAnswer = driver.findElement(By.cssSelector("#UnrecognizedSecAns_input"));
+			if (Question.equalsIgnoreCase("What is your best friend's name?")) {
+				System.out.println("Question is related to friendname");
+				securityAnswer.sendKeys("name1");
+			}
+
+			else if (Question.equalsIgnoreCase("What is your favorite color?")) {
+				System.out.println("Question is related to color");
+				securityAnswer.sendKeys("color1");
+			} else {
+				System.out.println("Question is related to phone");
+				securityAnswer.sendKeys("number1");
+			}
+			driver.findElement(By.cssSelector("input#authQuesSubmitButton")).click();
+			CommonUtility.waitForPageLoadNew(driver, signOutLink, 20);
+
+		} catch (Exception e) {
+			Assert.fail("###############Optum Id Sign In failed###############");
+		}
+
+	}
+	
+	public void clearDrugs() {
+		if (totalDrugs.size()!=0) {
+			for(int i=0;i<editDrugs.size();i++) {
+				totalDrugs.get(0).click();
+				validate(editDrugs.get(i));
+				editDrugs.get(i).click();
+			}
+			validate(addrugs);
+		}
+	}
+	
+	public void clearProvider() {
+		if (totalProviders.size()!=0) {
+			for(int i=0;i<editProviders.size();i++) {
+				totalProviders.get(0).click();
+				validate(editProviders.get(i));
+				editProviders.get(i).click();
+			}
+		}
+	}
+	
+	public void deletePlans() {
+		if (deletPlan.size()!=0) {
+			for(int i=0;i<deletPlan.size();i++) {
+				try {
+					Thread.sleep(1500);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				validate(deletPlan.get(i));
+				deletPlan.get(i).click();
+			}
+		}
 	}
 }

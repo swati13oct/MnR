@@ -7,6 +7,7 @@ Feature: 1.18.1 Member Pharamcies And Prescriptions page - Pre-Effective
     Given login with following details logins in the member portal and validate elements
 	  | Plan Type   | <planType>   |
 	  | Member Type | <memberType> |
+    Then check if user is a preeffective user
     Then user should see Pharmacies and Prescription link on dashboard
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
@@ -27,6 +28,7 @@ Feature: 1.18.1 Member Pharamcies And Prescriptions page - Pre-Effective
 	  
 	  
   #----- being regression section --------------------
+  # note: pre-eff user has no EOB, skip eob page validation
   @pnpPreEff01 @regressionMember
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> -To verify the behavior of the pharmacies and prescriptions page
     Given login with following details logins in the member portal and validate elements
@@ -36,9 +38,9 @@ Feature: 1.18.1 Member Pharamcies And Prescriptions page - Pre-Effective
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
       | Expect Link | <expectLink> |
+    Then check if user is a preeffective user
     Then user navigates to the payment page to validate Pharamcies and Prescriptions link
     Then user navigates to the health and wellness page to validate Pharamcies and Prescriptions link
-    Then user navigates to the eob page to validate Pharamcies and Prescriptions link
     Then user navigates to the benefit and coverage page to validate Pharamcies and Prescriptions link
     Then user navigates to the plan documents and resources page to validate Pharamcies and Prescriptions link
     Then user navigates to the contact us page to validate Pharamcies and Prescriptions link
@@ -78,33 +80,35 @@ Feature: 1.18.1 Member Pharamcies And Prescriptions page - Pre-Effective
 	  | FID     | planType | memberType          | expectLink |
 	  | F493942 | PDP      | IND_PREEFF_PnP      | yes        |
 
-	@pnpPreEff_pdp_grp
-    Examples: 
-	  | FID     | planType | memberType          | expectLink |
-	  | F493942 | PDP      | GRP_PREEFF_PnP      | yes        |
+	#note: no test user available for now
+	#@pnpPreEff_pdp_grp
+    #Examples: 
+	#  | FID     | planType | memberType          | expectLink |
+	#  | F493942 | PDP      | GRP_PREEFF_PnP      | yes        |
 
 	@pnpPreEff_snp_ind
     Examples: 
 	  | FID     | planType | memberType          | expectLink |
 	  | F493942 | SNP      | IND_PREEFF_PnP      | yes        |
 
-	@pnpPreEff_ssp_grp
-    Examples: 
-	  | FID     | planType | memberType          | expectLink |
-	  | F493942 | SSP      | GRP_PREEFF_PnP      | yes        |
+	#note: no test user available for now
+	#@pnpPreEff_ssp_grp
+    #Examples: 
+	#  | FID     | planType | memberType          | expectLink |
+	#  | F493942 | SSP      | GRP_PREEFF_PnP      | yes        |
 
   @pnpPreEff02 @regressionMember
   Scenario Outline: FID: F<FID> -plan: <planType> -memberType: <memberType> - Verify member will not have access to Pharmacies and Prescriptions Page
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
+    Then check if user is a preeffective user
     Then user should not see Pharmacies and Prescription link on dashboard
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
       | Expect Link | <expectLink> |
     Then user navigates to the payment page to validate Pharamcies and Prescriptions link
     Then user navigates to the health and wellness page to validate Pharamcies and Prescriptions link
-    Then user navigates to the eob page to validate Pharamcies and Prescriptions link
     Then user navigates to the benefit and coverage page to validate Pharamcies and Prescriptions link
     Then user navigates to the plan documents and resources page to validate Pharamcies and Prescriptions link
     Then user navigates to the contact us page to validate Pharamcies and Prescriptions link
@@ -121,8 +125,9 @@ Feature: 1.18.1 Member Pharamcies And Prescriptions page - Pre-Effective
 	  | FID     | planType | memberType          | expectLink |
 	  | F493942 | MA       | GRP_PREEFF_PnP      | no         |
 
-	@pnpPreEff_ship_ind
-    Examples: 
-	  | FID     | planType | memberType          | expectLink |
-	  | F493942 | SHIP     | IND_PREEFF_PnP      | no         |
+	#note: no test user available for now
+	#@pnpPreEff_ship_ind
+    #Examples: 
+	#  | FID     | planType | memberType          | expectLink |
+	#  | F493942 | SHIP     | IND_PREEFF_PnP      | no         |
 	  

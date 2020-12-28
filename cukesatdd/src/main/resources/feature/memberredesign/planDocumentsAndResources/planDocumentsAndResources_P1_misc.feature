@@ -2,7 +2,7 @@
 Feature: 1.06.2 Member Plans and Documents - section: header -and- My Documents -and- EOB -and- Renew magine -and- Adobe -and- NeedHelp
 
   Background: If run on stage then feature security flag needs to be true
-     Given feature security flag must set to true when testing on stage env
+     Given feature security flag must set to true when testing on test env
       | Feature           | UCPPlanDocuments |
 
   #------------------------------------------
@@ -39,11 +39,13 @@ Feature: 1.06.2 Member Plans and Documents - section: header -and- My Documents 
       | 02-002 | xxxxx       | MA       | GROUP_PREEFF_PDnR     | true  | false  | false | false | false |
       | 03-003 | xxxxx       | MAPD     | AARP_IND_PREEFF_PDnR  | true  | false  | false | false | false |
 
+    # when 2021 comes, can switch back to use preeffectiveFEDPDP_001 for PDP IND pre-eff
 	@preeffective_pdp
 	Examples: 
       | index  | TID         | planType | memberType            | md_sd | eob_sd | eob_m | eob_d | rm_sd |
       | 04-004 | xxxxx       | PDP      | AARP_IND_PREEFF_PDnR  | true  | false  | false | false | false |
-      | 05-005 | xxxxx       | PDP      | GROUP_PREEFF_PDnR     | true  | false  | false | false | false |
+	#note: no test user available for now
+    #  | 05-005 | xxxxx       | PDP      | GROUP_PREEFF_PDnR     | true  | false  | false | false | false |
 
 	@terminated_ma_mapd
 	Examples: 
@@ -97,10 +99,11 @@ Feature: 1.06.2 Member Plans and Documents - section: header -and- My Documents 
       | index  | TID         | planType | memberType            | md_sd | eob_sd | eob_m | eob_d | rm_sd |
       | 20-115 | 15119,15304 | SHIP     | MULTI_IND_EFF_PDnR    | false | true   | true  | false | false |
 
-	@preeffective_ship
-	Examples: 
-      | index  | TID         | planType | memberType            | md_sd | eob_sd | eob_m | eob_d | rm_sd |
-      | 21-121 | xxxxx       | SHIP     | IND_PREEFF_PDnR       | false | false  | false | false | false |
+	#note: no test user available for now
+	#@preeffective_ship
+	#Examples: 
+    #  | index  | TID         | planType | memberType            | md_sd | eob_sd | eob_m | eob_d | rm_sd |
+    #  | 21-121 | xxxxx       | SHIP     | IND_PREEFF_PDnR       | false | false  | false | false | false |
 
 
 

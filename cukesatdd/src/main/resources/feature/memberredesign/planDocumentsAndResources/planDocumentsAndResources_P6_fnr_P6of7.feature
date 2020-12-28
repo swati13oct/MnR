@@ -2,7 +2,7 @@
 Feature: 1.06.6 Member Plans and Documents - section: Forms And Resources Part 6 of 7 - Other Resources
 
   Background: If run on stage then feature security flag needs to be true
-     Given feature security flag must set to true when testing on stage env
+     Given feature security flag must set to true when testing on test env
       | Feature           | UCPPlanDocuments |
 
   #------------------------------------------
@@ -38,7 +38,8 @@ Feature: 1.06.6 Member Plans and Documents - section: Forms And Resources Part 6
 	Examples: 
       | index  | TID         | planType | memberType            | fnr_sd | fnr_or |
       | 04-099 | xxxxx       | PDP      | AARP_IND_PREEFF_PDnR  | false  | false  |
-      | 05-100 | xxxxx       | PDP      | GROUP_PREEFF_PDnR     | false  | false  |
+	#note: no test user available for now
+    #  | 05-100 | xxxxx       | PDP      | GROUP_PREEFF_PDnR     | false  | false  |
 
 	@terminated_ma_6of7
 	Examples: 
@@ -100,7 +101,8 @@ Feature: 1.06.6 Member Plans and Documents - section: Forms And Resources Part 6
       | index  | TID         | planType | memberType            | fnr_sd | fnr_or |
       | 19-120 | 15119,15304 | SHIP     | MULTI_IND_EFF_PDnR    | true   | false  |    
       
-	@preeffective_ship_6of7
-	Examples: 
-      | index  | TID         | planType | memberType            | fnr_sd | fnr_or  |
-      | 20-121 | xxxxx       | SHIP     | IND_PREEFF_PDnR       | true   | false   |      
+	#note: no test user available for now
+	#@preeffective_ship_6of7
+	#Examples: 
+    #  | index  | TID         | planType | memberType            | fnr_sd | fnr_or  |
+    #  | 20-121 | xxxxx       | SHIP     | IND_PREEFF_PDnR       | true   | false   |      

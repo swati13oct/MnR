@@ -4,6 +4,7 @@
 package pages.memberrdesignVBF;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import org.junit.Assert;
 import org.openqa.selenium.JavascriptExecutor;
@@ -11,8 +12,11 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 
+import acceptancetests.data.CommonConstants;
 import acceptancetests.util.CommonUtility;
+import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 
 /**
@@ -20,6 +24,13 @@ import atdd.framework.UhcDriver;
  *
  */
 public class BenefitsAndCoveragePage extends UhcDriver {
+	
+	@Autowired
+	MRScenario loginScenario;
+
+	public MRScenario getLoginScenario() {
+		return loginScenario;
+	}
 
 	@FindBy(className = "atdd-need-help")
 	private WebElement NeedHelpHeader;
@@ -85,6 +96,9 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	private WebElement HospitalVisits;
 	@FindBy(className = "atdd-officevisits-title")
 	private WebElement OfficeVisits;
+	
+	@FindBy(xpath = "//*[contains(@class,'tdd-hospitalvisits-title')]")
+	private WebElement InPatientHospitalCare;
 
 	@FindBy(className = "atdd-outpatientsurgery-title")
 	private WebElement OutpatientSurgeryCenter;
@@ -166,6 +180,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 
 	@FindBy(xpath = "//table[@class='table-white atdd-bnc-standrdretailpharmcytable']/tbody/tr[2]/td[3]")
 	private WebElement federalValueIC;
+	
 
 	public BenefitsAndCoveragePage(WebDriver driver) {
 		super(driver);
@@ -313,6 +328,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	/***
 	 * 
 	 */
+	
 	public void validatePrimaryCareProvider() {
 
 		validateNew(PrimaryCareProviderHeader);
@@ -340,7 +356,7 @@ public class BenefitsAndCoveragePage extends UhcDriver {
 	//	validateTextUsingRegex(INNETWORKValue, "([NA]{1})|(\\$\\d{1,3}\\,\\d+\\.\\d{2})");
 		//validateTextUsingRegex(OUTOFNETWORKValue, "([NA]{1})|(\\$\\d{1,3}\\,\\d+\\.\\d{2})");
 	}
-
+	
 	public void ValidatesBenefitsForCombo() {
 		int numberOfTabsForCombo;
 		numberOfTabsForCombo = tabsForComboMember.size();

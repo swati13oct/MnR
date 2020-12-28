@@ -2,7 +2,7 @@
 Feature: 1.02 Member Profile page
 
   Background: If run on stage then feature security flag needs to be true
-     Given feature security flag must set to true when testing on stage env
+     Given feature security flag must set to true when testing on test env
       | Feature           | UCPProfileAndPreferences |
 
   @accountProfile01 @accountProfileMicroApp01 @ShipEndtoEnd @AP_Part1_Regression
@@ -113,7 +113,7 @@ Feature: 1.02 Member Profile page
     Examples: 
       | TID   | userSelection                           | planType | memberType                      |
     #  | 15105 | PCP-SouthFlorida-q2_jun_sofl0002        | PCP      | PCP_SouthFlorida_ProfilePref    |
-      | 15107 | MEDICA-SouthFlorida-q3_Sep_UAT4_Sofl019 | Medica   | Medica_SouthFlorida_ProfilePref |
+      | 15107 | MEDICA-SouthFlorida-q3_Sep_UAT4_Sofl053 | Medica   | Medica_SouthFlorida_ProfilePref |
 
   @accountProfile06 @regressionAccountProf&Pref @AP_Part2_Regression @regressionMember
   Scenario Outline: TID: <TID> -User Type: <userType> -Member Type: <memberType> - To test end to end regression scenario for account profile page aarp member
@@ -313,21 +313,7 @@ Feature: 1.02 Member Profile page
      | TID			  | planType | memberType        | copayCategory   |
      | Unknown_15 | MAPD     | Terminated_AccPro | NON LIS_ProfilePref |
      
-    @accountProfile16 @AP_Part5_Regression
-    Scenario Outline: TID: <TID> -Plan Type: <planType> -Member Type: <memberType> -To test end to end regression scenario for account profile  page for a terminated member
-    Given login with following details logins in the member portal and validate elements
-      | Plan Type   | <planType>   |
-      | Member Type | <memberType> |
-      | Copay Category | <copayCategory> |
-    Then the user navigates to Profile and Preferences page
-   # Then the user validates permanent address section
-	 # And the user verifies the Temporary Address Link on the Account settings page
-	  And the user validates the address sectioning
-     
-	    Examples:      
-      | TID			   | planType | memberType        | copayCategory   |
-      | Unknown_16 | GOVT     | AP_ADDRESS        | NON LIS_ProfilePref         |
-      
+ 
    @accountProfile17 @HsidLogin @codetransformers  @AP_Part5_Regression
    Scenario Outline: TID: <TID> -Plan Type: <planType> -Member Type: <memberType> -Verify HSID login functionality.
    Given login with following details logins in the member portal and validate elements
