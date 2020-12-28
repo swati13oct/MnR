@@ -195,7 +195,7 @@ Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanSummary AARP - To test VPP Plan Details 
       | UHC  |   90210 | MAPD     | none   | no              | Orkambi | AARP Medicare Advantage SecureHorizons Focus (HMO) | AARP Medicare Advantage Plan 1 (HMO) |      10001 |
 
   @drugSummary_InitialZipCodeRetained @F539025
-  Scenario Outline: To verify zipcode infomraiton retained when plans are saved and zip code updated while navigating to DCE from VPP summary
+  Scenario Outline: To verify zipcode infomraiton retained when plans are saved and zip code updated while navigating from VPP summary to DCE
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     When the user performs plan search using following information
@@ -247,10 +247,53 @@ Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanSummary AARP - To test VPP Plan Details 
 
     @F539025AARP
     Examples: 
-      | site | drug1   | drug2  | plantype | planyear | newzipcode | testPlans                                                                | zipcode | newzipcode | isMultiCounty | county          | planName                            | planType1 | testPlans1                                                                                        |
-      | AARP | Orkambi | Fanapt | MAPD     | next     |      90210 | AARP Medicare Advantage Prime (HMO),AARP Medicare Advantage Plan 1 (HMO) |   10001 |      90210 | NO            | New York County | AARP Medicare Advantage Prime (HMO) | MAPD      | AARP Medicare Advantage Freedom Plus (HMO-POS),AARP Medicare Advantage SecureHorizons Focus (HMO) |
+      | site | drug1   | drug2  | plantype | planyear | zipcode | testPlans                                                                | newzipcode | isMultiCounty | county          | planName                            | testPlans1                                                                                        |
+      | AARP | Orkambi | Fanapt | MAPD     | next     |   10001 | AARP Medicare Advantage Prime (HMO),AARP Medicare Advantage Plan 1 (HMO) |      90210 | NO            | New York County | AARP Medicare Advantage Prime (HMO) | AARP Medicare Advantage Freedom Plus (HMO-POS),AARP Medicare Advantage SecureHorizons Focus (HMO) |
 
     @F539025UHC
     Examples: 
-      | site | drug1   | drug2  | plantype | planyear | newzipcode | testPlans                                                                | zipcode | newzipcode | isMultiCounty | county          | planName                            | planType1 | testPlans1                                                                                        |
-      | UHC  | Orkambi | Fanapt | MAPD     | next     |      90210 | AARP Medicare Advantage Prime (HMO),AARP Medicare Advantage Plan 1 (HMO) |   10001 |      90210 | NO            | New York County | AARP Medicare Advantage Prime (HMO) | MAPD      | AARP Medicare Advantage Freedom Plus (HMO-POS),AARP Medicare Advantage SecureHorizons Focus (HMO) |
+      | site | drug1   | drug2  | plantype | planyear | zipcode | testPlans                                                                | newzipcode | isMultiCounty | county          | planName                            | testPlans1                                                                                        |
+      | UHC  | Orkambi | Fanapt | MAPD     | next     |   10001 | AARP Medicare Advantage Prime (HMO),AARP Medicare Advantage Plan 1 (HMO) |      90210 | NO            | New York County | AARP Medicare Advantage Prime (HMO) | AARP Medicare Advantage Freedom Plus (HMO-POS),AARP Medicare Advantage SecureHorizons Focus (HMO) |
+
+  @drugSummary_ZipCodeRetainedDCENBAFlow @F539025
+  Scenario Outline: To verify zipcode infomraiton retained when plans are saved while navigating from VPP summary through Get Started NBA
+    Given the user is on medicare acquisition site landing page
+      | Site | <site> |
+    When the user performs plan search using following information
+      | Zip Code        | <zipcode>         |
+      | County Name     | <county>          |
+      | Is Multi County | <isMultutiCounty> |
+    And the user views the plans of the below plan type
+      | Plan Type | <plantype> |
+    And the user selects plan year
+      | Plan Year | <planyear> |
+    And user Verify and click perform on Next Best Action Modal for Get Started
+    Then user should be navigated to first step of DCE Page
+    When the user clicks on Build Drug List to navigate to Build Drug List Page
+    And the user searches and adds the following Drug to Drug List
+      | DrugName | <drug1> |
+    And clicks on Review drug cost button
+    Then user should be able to see Medicare Advantage plan by default
+    When user clicks on Return to plan summary page link in DCE
+    Then user saves two plans as favorite
+      | Plan Type  | <plantype>  |
+      | Test Plans | <testPlans> |
+    Then user gets a create profile prompt
+    Then user click on view saved plans button
+    And user validates the added plans on new visitor profile page
+      | Test Plans | <testPlans> |
+    When user clicks on Edit Drug and Pharmacy on visitor profile page
+    Then user should be navigated to build drug list page
+    Then the user searches and adds the following Drug to Drug List
+      | DrugName | <drug2> |
+    Then the user clicks on Review Drug Costs button to Land on Drug Summary Page
+
+    @F539025AARP
+    Examples: 
+      | site | drug1   | drug2  | plantype | planyear | testPlans                                                                | zipcode | isMultiCounty | county          | 
+      | AARP | Orkambi | Fanapt | MAPD     | next     | AARP Medicare Advantage Prime (HMO),AARP Medicare Advantage Plan 1 (HMO) |   10001 | NO            | New York County | 
+
+    @F539025UHC
+    Examples: 
+      | site | drug1   | drug2  | plantype | planyear | testPlans                                                                | zipcode | isMultiCounty | county          | 
+      | UHC  | Orkambi | Fanapt | MAPD     | next     | AARP Medicare Advantage Prime (HMO),AARP Medicare Advantage Plan 1 (HMO) |   10001 | NO            | New York County | 
