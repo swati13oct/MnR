@@ -1689,4 +1689,3 @@ public class HSIDStepDefinition {
 												myDocumentsEdeliveryDeeplinkLoginPage.validateOfflineProdedeliverypage();
 											}
 										}
->>>>>>> refs/remotes/origin/develop

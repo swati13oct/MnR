@@ -499,7 +499,6 @@ public class PharmaciesAndPrescriptionsBase extends PharmaciesAndPrescriptionsWe
 			driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 			return false;
 		}	
-}
 
 	public Date getCurrentSystemDate() {
 		if (MRScenario.environment.equalsIgnoreCase("offline") || MRScenario.environment.equalsIgnoreCase("prod")) {
