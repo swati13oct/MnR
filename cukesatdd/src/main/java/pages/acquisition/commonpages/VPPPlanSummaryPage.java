@@ -6267,5 +6267,16 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			System.out.println("No providers in plan card");
 		}
 	}
+	
+	public void enternewZip(String zipCode) {
+		ChangeLocationLink.click();
+		validate(ZipCodeTxtBx);
+		ZipCodeTxtBx.click();
+		ZipCodeTxtBx.clear();
+		ZipCodeTxtBx.sendKeys(zipCode);
+		validate(FIndPlansButton);
+		FIndPlansButton.click();
+		CommonUtility.checkPageIsReadyNew(driver);
+	}
 
 }

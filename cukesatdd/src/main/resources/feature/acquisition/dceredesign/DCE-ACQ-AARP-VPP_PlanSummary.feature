@@ -157,7 +157,7 @@ Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanSummary AARP - To test VPP Plan Details 
     Then the user clicks on Review Drug Costs to Land on Drug DetailsP Page
     Then the user validates planName matches plan Name in VPP
     Then the user click on return to plan summary on DCE summary page
-    And user changes the new zipcode on vpp summary page
+    And user updates the new zipcode on vpp summary page
       | New Zip Code | <newzipcode> |
     And user navigate to Drug Summary page
     Then user save the plan on drug detail page
@@ -184,10 +184,73 @@ Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanSummary AARP - To test VPP Plan Details 
       | DrugName | <drug1> |
     Then the user clicks on Review Drug Costs button to Land on Drug Summary Page
 
+    @F539025AARP
     Examples: 
       | site | zipcode | plantype | county | isMultutiCounty | drug1   | planname                                           | mapdtestPlans                        | newzipcode |
       | AARP |   90210 | MAPD     | none   | no              | Orkambi | AARP Medicare Advantage SecureHorizons Focus (HMO) | AARP Medicare Advantage Plan 1 (HMO) |      10001 |
 
+    @F539025UHC
     Examples: 
       | site | zipcode | plantype | county | isMultutiCounty | drug1   | planname                                           | mapdtestPlans                        | newzipcode |
       | UHC  |   90210 | MAPD     | none   | no              | Orkambi | AARP Medicare Advantage SecureHorizons Focus (HMO) | AARP Medicare Advantage Plan 1 (HMO) |      10001 |
+
+  @drugSummary_InitialZipCodeRetained @F539025
+  Scenario Outline: To verify zipcode infomraiton retained when plans are saved and zip code updated while navigating to DCE from VPP summary
+    Given the user is on medicare acquisition site landing page
+      | Site | <site> |
+    When the user performs plan search using following information
+      | Zip Code        | <zipcode>         |
+      | County Name     | <county>          |
+      | Is Multi County | <isMultutiCounty> |
+    And the user views the plans of the below plan type
+      | Plan Type | <plantype> |
+    And the user selects plan year
+      | Plan Year | <planyear> |
+    Then user saves two plans as favorite
+      | Plan Type  | <plantype>  |
+      | Test Plans | <testPlans> |
+    Then user gets a create profile prompt
+    Then user click on view saved plans button
+    And user validates the added plans on new visitor profile page
+      | Test Plans | <testPlans> |
+    And the user clicks on the add drugs button to navigate to DCE Redesign on the profile page
+    Then the user validates Get Started Page
+    Then the user clicks on Build Drug List to navigate to Build Drug List Page
+    Then the user searches and adds the following Drug to Drug List
+      | DrugName | <drug1> |
+    Then the user clicks on Review Drug Costs button to Land on Drug Summary Page
+    Then user should be able to see Return to profile link on summary page
+    And Back to profile button should be displayed for each plan card
+    Then the user selects View Drug details for following plantype and PlanName
+      | Plan Type | <plantype> |
+      | Plan Name | <planName> |
+    Then user should be able to see Return to profile link on details page
+    Then the user Clicks button to VPP Plan Details Page from Drug Details Page
+    Then the user validates planName matches plan Name in VPP
+    Then the user click on view plan summary on vpp detail page
+    And user updates the new zipcode on vpp summary page
+      | New Zip Code | <newzipcode> |
+    Then user saves two plans as favorite
+      | Plan Type  | <plantype>   |
+      | Test Plans | <testPlans1> |
+    Then user gets a create profile prompt
+    Then user click on view saved plans button
+    And user validates the added plans on new visitor profile page
+      | Test Plans | <testPlans1> |
+    When user clicks on Edit Drug and Pharmacy on visitor profile page
+    Then user should be navigated to build drug list page
+    Then the user searches and adds the following Drug to Drug List
+      | DrugName | <drug2> |
+    Then the user clicks on Review Drug Costs button to Land on Drug Summary Page
+    Then user should be able to see Return to profile link on summary page
+    And Back to profile button should be displayed for each plan card
+
+    @F539025AARP
+    Examples: 
+      | site | drug1   | drug2  | plantype | planyear | newzipcode | testPlans                                                                | zipcode | newzipcode | isMultiCounty | county          | planName                            | planType1 | testPlans1                                                                                        |
+      | AARP | Orkambi | Fanapt | MAPD     | next     |      90210 | AARP Medicare Advantage Prime (HMO),AARP Medicare Advantage Plan 1 (HMO) |   10001 |      90210 | NO            | New York County | AARP Medicare Advantage Prime (HMO) | MAPD      | AARP Medicare Advantage Freedom Plus (HMO-POS),AARP Medicare Advantage SecureHorizons Focus (HMO) |
+
+    @F539025UHC
+    Examples: 
+      | site | drug1   | drug2  | plantype | planyear | newzipcode | testPlans                                                                | zipcode | newzipcode | isMultiCounty | county          | planName                            | planType1 | testPlans1                                                                                        |
+      | UHC  | Orkambi | Fanapt | MAPD     | next     |      90210 | AARP Medicare Advantage Prime (HMO),AARP Medicare Advantage Plan 1 (HMO) |   10001 |      90210 | NO            | New York County | AARP Medicare Advantage Prime (HMO) | MAPD      | AARP Medicare Advantage Freedom Plus (HMO-POS),AARP Medicare Advantage SecureHorizons Focus (HMO) |
