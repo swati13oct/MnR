@@ -150,13 +150,13 @@ public class OneTimePaymentPage extends UhcDriver {
 	@FindBy(xpath = "//dt[contains(text(),'Next Premium Payment:')]")
 	private WebElement NextPaymentSummary;
 
-	@FindBy(xpath = "//*[@class='onetime-bill']/div[@class='ng-binding ng-scope']")
+	@FindBy(xpath = "//*[@id=\"cc-enhancement\"]/section/div/div/div[2]/aside/div[2]/dl/dd[1]/span")
 	private WebElement NextPaymentProcess;
 
     @FindBy(xpath = "//dt[contains(text(),'Due Date:')]")
     private WebElement NextDueDateLabel;
 
-    @FindBy(xpath = "//*[@class='ng-scope']/dd[@class='onetime-bill ng-binding']")
+    @FindBy(xpath = "//*[@id=\"cc-enhancement\"]/section/div/div/div[2]/aside/div[2]/dl/dd[2]/span")
     private WebElement NextDueDateValue;
 
 
@@ -190,17 +190,30 @@ public class OneTimePaymentPage extends UhcDriver {
 
 	
 	public void PaymentsDataVerificationonReviewPage() {
-		List<WebElement> rowsList = driver.findElements(By.xpath("//div[@class='table-body-row']"));
+		List<WebElement> rowsList = driver.findElements(By.xpath("//*[@class='table-body-row']"));
 		List<WebElement> columnsList = null;
+		List<WebElement> columnsList2 = null;
 		for (WebElement row : rowsList) {
 			System.out.println();
 			columnsList = row.findElements(By.tagName("div"));
-
+			columnsList2 = row.findElements(By.tagName("li"));
 			for (WebElement column : columnsList) {
 				System.out.print(column.getText() + " - ");
 				if ((Strings.isNullOrEmpty(column.getText()))) {
 					Assert.fail("Coloumn Header or value is null");
 				}
+			}
+			try {
+			for (WebElement column : columnsList2) {
+				System.out.print(column.getText() + " - ");
+				if ((Strings.isNullOrEmpty(column.getText()))) {
+					Assert.fail("Coloumn Header or value is null");
+				}
+			}
+			}
+			catch (Exception e)
+			{
+				System.out.print("Exception not handled");
 			}
 		}
 	}

@@ -450,4 +450,6 @@ public static final String UHC_DEEPLINK_URL_Pharmacy = "http://stage-myuhcmedica
   public static final String Offline_PROD_SHIP_extra ="https://offline.myaarpmedicare.com/Extras";
   public static final String Offline_PROD_edelivery ="https://offline.medicare.uhc.com/?TARGET=SMSR/medicare/member/my-documents/overview.html%3fdeeplink=true&WT.mc_ID=8003461&mrcid=email_fed_m";
   
+  public static String DENTEGRA_DENTAL_DEEPLINK_URL = "stage-myaarpmedicare.uhc.com/dental";
+  
   }

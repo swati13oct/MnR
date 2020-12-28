@@ -1,4 +1,4 @@
-Feature: 1.19 Verify the premium payment flows on member portal - Part 5 - Test case 33 to 33
+Feature: 1.19 Verify the premium payment flows on member portal - Part 5 - Test case 33 to 35
 
   Background: Feature security flag needs to be true before ATDD script execution
     Given First check if feature security flag is set to true

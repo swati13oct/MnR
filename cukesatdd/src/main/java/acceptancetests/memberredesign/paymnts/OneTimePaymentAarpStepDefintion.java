@@ -17,6 +17,7 @@ import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -1794,6 +1795,7 @@ public class OneTimePaymentAarpStepDefintion {
 		{
 			System.out.println("This is a second payment in a day, Error message is fine in Saved Card Scenario. Passing test case");
 			Assert.assertTrue("This is a second payment in a day, Error message is fine in Saved Card Scenario. Passing test case",true);
+			
 		}
 		else
 		{
@@ -2531,13 +2533,19 @@ public class OneTimePaymentAarpStepDefintion {
 					paymentTypeRow.get(i).getCells().get(1));
 		}
 		Thread.sleep(2000); 
+		String errorMessageDisplayedOnOneTimePayment = (String)getLoginScenario().getBean(PageConstants.ALREADY_ENROLLED_FLAG);
+		if (errorMessageDisplayedOnOneTimePayment == "true")
 		
+		{
+			System.out.println("Skipping validation due to second time payment error message");
+		}
+		else 
+		{
 		ConfirmOneTimePaymentPage confirmOneTimePaymentPage = (ConfirmOneTimePaymentPage) getLoginScenario()
 				.getBean(PageConstants.ONE_TIME_PAYMENT_PAGE);
 		
 		confirmOneTimePaymentPage.deletePaymetnRecordFromGPS(paymentTypeMap);
-
-		
+		}		
 	}
 	
 	@And("^the user pulls the value of keep card on file indicator from GPS$")	
@@ -2551,24 +2559,39 @@ public class OneTimePaymentAarpStepDefintion {
 		}
 		Thread.sleep(2000); 
 		
+		String errorMessageDisplayedOnOneTimePayment = (String)getLoginScenario().getBean(PageConstants.ALREADY_ENROLLED_FLAG);
+		if (errorMessageDisplayedOnOneTimePayment == "true")
+		
+		{
+			System.out.println("Skipping validation due to second time payment error message");
+		}
+		else 
+		{
 		ConfirmOneTimePaymentPage confirmOneTimePaymentPage = (ConfirmOneTimePaymentPage) getLoginScenario()
 				.getBean(PageConstants.ONE_TIME_PAYMENT_PAGE);
-		
+	
 		
 		String keepCardOnFileIndFromGPSDatabase = confirmOneTimePaymentPage.verifyKeepCardOnFileRecordFromGPS(paymentTypeMap);
 		getLoginScenario().saveBean(PageConstants.KEEP_CARD_ON_FILE_IND, keepCardOnFileIndFromGPSDatabase);
 		
 		System.out.println("Value of keepCardOnFileIndFromGPSDatabase is "+keepCardOnFileIndFromGPSDatabase);
-		
+		}
 	}
 	
 	@And("^the user confirms that keep card on file indicator is sent to GPS as Y$")	
 	public void verifyKeepCardOnFileRecordAsY() throws InterruptedException{
+		String errorMessageDisplayedOnOneTimePayment = (String)getLoginScenario().getBean(PageConstants.ALREADY_ENROLLED_FLAG);
+		if (errorMessageDisplayedOnOneTimePayment == "true")
+		
+		{
+			System.out.println("Skipping validation due to second time payment error message");
+		}
+		else {
 		ConfirmOneTimePaymentPage confirmOneTimePaymentPage = (ConfirmOneTimePaymentPage) getLoginScenario()
 				.getBean(PageConstants.ONE_TIME_PAYMENT_PAGE);
 		String keepCardOnFileIndFromGPSDatabase = (String)getLoginScenario().getBean(PageConstants.KEEP_CARD_ON_FILE_IND);
 		confirmOneTimePaymentPage.verifyKeepCardOnFileRecordFromGPSIsY(keepCardOnFileIndFromGPSDatabase);
-		
+		}
 	}
 	
 	@And("^the user delete update recurring payment record from GPS$")
@@ -2799,17 +2822,34 @@ public class OneTimePaymentAarpStepDefintion {
 		
 	}
 	@Then("User validates tool tips on the payments overview page$")
-	public void User_validates_tool_tips_on_the_page() throws Throwable {
+	public void User_validates_tool_tips_on_the_page(DataTable memberAttributes) throws Throwable {
 		System.out.println("******User validates tool tips on the payments overview page*****");
+			List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
+			Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+			for (int i = 0; i < memberAttributesRow.size(); i++) {
+				memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+						.get(0), memberAttributesRow.get(i).getCells().get(1));
+			}
+	String userType  = memberAttributesMap.get("userType");
+	System.out.println("userType is "+userType);
 		PaymentHistoryPage paymentHistoryPage = (PaymentHistoryPage) getLoginScenario().getBean(PageConstants.Payments_History_Page);
-		 paymentHistoryPage.toolTipsValidation();
+		 paymentHistoryPage.toolTipsValidation(userType);
 		
 	}
 	@Then("^User validates billing and payment history table tool tips on the page$")
-	public void User_validates_tool_tips_on_billing_tablethe_page() throws Throwable {
-		System.out.println("******User validates billing and payment history table tool tips on the page*****");
-		PaymentHistoryPage paymentHistoryPage = (PaymentHistoryPage) getLoginScenario().getBean(PageConstants.Payments_History_Page);
-		 paymentHistoryPage.billingPaymentHistorytoolTipsValidation();
+	public void User_validates_tool_tips_on_billing_tablethe_page(DataTable memberAttributes) throws Throwable {
+			List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
+			Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+			for (int i = 0; i < memberAttributesRow.size(); i++) {
+				memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+						.get(0), memberAttributesRow.get(i).getCells().get(1));
+	String userType  = memberAttributesMap.get("userType");
+	System.out.println("userType is "+userType);
+System.out.println("******User validates billing and payment history table tool tips on the page*****");
+PaymentHistoryPage paymentHistoryPage = (PaymentHistoryPage) getLoginScenario().getBean(PageConstants.Payments_History_Page);
+ paymentHistoryPage.billingPaymentHistorytoolTipsValidation(userType);
+
+}
 		
 	}
 

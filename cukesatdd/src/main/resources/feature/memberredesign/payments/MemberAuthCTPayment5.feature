@@ -4,6 +4,8 @@ Feature: S1.1 To test Member Auth premium payment flows Micro App.
   #Test Case 12 - Active SHIP member with terminated and active plan in same year with billing and payment history in last 90 days
   @regressionMemberPROD
   Scenario Outline: <planType> -memberType: <memberType> - Test Case 12 -Verify billing and payment history for Active SHIP member with billing and payment history in last 90 days
+    Given First check if feature security flag is set to true
+      | Feature | UCPPayments |
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
       | Username | <username> |
