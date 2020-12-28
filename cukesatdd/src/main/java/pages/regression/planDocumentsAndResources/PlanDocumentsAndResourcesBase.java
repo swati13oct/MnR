@@ -378,6 +378,11 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 				String act_category = (String)act_mapElement.getKey(); 
 				Document act_doc=(Document) act_mapElement.getValue();
 
+				//note: for Medicare Supplement Hospital Select Directories, API response has name=Medicare Supplement Hospital Select Directory
+				//note: fix up the name before validation.
+				if (act_category.equals("Medicare Supplement Hospital Select Directories")) 
+					act_category="Medicare Supplement Hospital Select Directory";
+				
 				System.out.println("TEST - Actual doc From UI: category="+act_category+" | segment="+act_doc.getSegmentId()+" | type="+act_doc.getType()+" | year="+act_doc.getYear()+" | code="+act_doc.getCompCode()+" | link="+act_doc.getLink());
 				System.out.println("TEST - exp_docListFromApi size="+exp_docListFromApi.size());
 				boolean found=false;
@@ -598,6 +603,8 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 			return "6017";
 		if (docName.toLowerCase().equalsIgnoreCase("Plan Documents".toLowerCase()) ) 
 			return "dunno";
+		if (docName.toLowerCase().contains("Medicare Supplement Hospital Select Director".toLowerCase())) 
+			return "5003";
 		System.out.println("TEST - unable to find a type match for docName="+docName);
 		return "-2";
 	}
@@ -971,6 +978,13 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 						expDocName=expDocName.replace("Evidence Of Coverage","Evidence of Coverage");
 					if (actualDocName.contains("Evidence Of Coverage")) 
 						actualDocName=actualDocName.replace("Evidence Of Coverage", "Evidence of Coverage");
+					
+					//note: in API it's Directory but on UI it's Directories, look for the pattern 'Director' instead
+					if (expDocName.contains("Medicare Supplement Hospital Select Directories")) 
+						expDocName=expDocName.replace("Medicare Supplement Hospital Select Directories", "Medicare Supplement Hospital Select Director");
+					if (actualDocName.contains("Medicare Supplement Hospital Select Directories")) 
+						actualDocName=actualDocName.replace("Medicare Supplement Hospital Select Directories", "Medicare Supplement Hospital Select Directory");
+					
 					//note: use regex to find match for document name
 					//note: because actual docName will have (PDF,xxxKB)... at the end of the string
 					//note: also if spanish name, latin characters will not work well with "equals" or "contains" during jenkins run

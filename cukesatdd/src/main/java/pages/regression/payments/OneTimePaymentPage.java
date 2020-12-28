@@ -36,14 +36,17 @@ public class OneTimePaymentPage extends UhcDriver {
 	@FindBy(id = "optionsRadios1")
 	private WebElement AmountDueTodayButton;
 	
-	@FindBy(xpath = "//label[@for='optionsRadios30']//input")
-	private WebElement CheckingAccountRadioButton;
+	@FindBy(xpath = "//*[(@id='optionsRadios10') or (@id='optionsRadios30')]")
+	private List <WebElement> CheckingAccountRadioButton;
 
-	@FindBy(xpath = "//label[@for='optionsRadios40']//input")
-	private WebElement creditcardRadioButton;
+	@FindBy(xpath = "//*[(@id='optionsRadios20') or (@id='optionsRadios40')]")
+	private List <WebElement> creditcardRadioButton;
 
 	@FindBy(xpath = "//*[@class='payment-selection__actions']/button")
 	private WebElement NextButton;
+	
+	@FindBy(xpath = "//button[@id='replace-cc']")
+	private WebElement replaceCard;
 
 	@FindBy(id = "div_cardInfo")
 	private WebElement EnterCreditInfo;
@@ -147,13 +150,13 @@ public class OneTimePaymentPage extends UhcDriver {
 	@FindBy(xpath = "//dt[contains(text(),'Next Premium Payment:')]")
 	private WebElement NextPaymentSummary;
 
-	@FindBy(xpath = "//*[@class='onetime-bill']/div[@class='ng-binding ng-scope']")
+	@FindBy(xpath = "//*[@id=\"cc-enhancement\"]/section/div/div/div[2]/aside/div[2]/dl/dd[1]/span")
 	private WebElement NextPaymentProcess;
 
     @FindBy(xpath = "//dt[contains(text(),'Due Date:')]")
     private WebElement NextDueDateLabel;
 
-    @FindBy(xpath = "//*[@class='ng-scope']/dd[@class='onetime-bill ng-binding']")
+    @FindBy(xpath = "//*[@id=\"cc-enhancement\"]/section/div/div/div[2]/aside/div[2]/dl/dd[2]/span")
     private WebElement NextDueDateValue;
 
 
@@ -166,6 +169,18 @@ public class OneTimePaymentPage extends UhcDriver {
 	@FindBy(xpath = "//a[@class='btn btn--primary onetimepayment']")
 	private WebElement MakeAPaymentButton;
 	
+	@FindBy(id = "replace-cc")
+	private WebElement replaceCardLink;
+	
+	@FindBy(xpath = "//*[@id=\"cc-enhancement\"]/section/div/div/div[1]/form/fieldset[2]/div[2]/div[2]/div/label/span")
+	private WebElement cardDetail1;
+	
+	@FindBy(xpath = "//*[@id=\"savedcard\"]/span[1]")
+	private WebElement cardDetail2;
+	
+	@FindBy(xpath = "//*[@id=\"savedcard\"]/span[3]")
+	private WebElement cardDetail3;
+	
 		
 	public OneTimePaymentPage(WebDriver driver) {
 		super(driver);
@@ -175,17 +190,30 @@ public class OneTimePaymentPage extends UhcDriver {
 
 	
 	public void PaymentsDataVerificationonReviewPage() {
-		List<WebElement> rowsList = driver.findElements(By.xpath("//div[@class='table-body-row']"));
+		List<WebElement> rowsList = driver.findElements(By.xpath("//*[@class='table-body-row']"));
 		List<WebElement> columnsList = null;
+		List<WebElement> columnsList2 = null;
 		for (WebElement row : rowsList) {
 			System.out.println();
 			columnsList = row.findElements(By.tagName("div"));
-
+			columnsList2 = row.findElements(By.tagName("li"));
 			for (WebElement column : columnsList) {
 				System.out.print(column.getText() + " - ");
 				if ((Strings.isNullOrEmpty(column.getText()))) {
 					Assert.fail("Coloumn Header or value is null");
 				}
+			}
+			try {
+			for (WebElement column : columnsList2) {
+				System.out.print(column.getText() + " - ");
+				if ((Strings.isNullOrEmpty(column.getText()))) {
+					Assert.fail("Coloumn Header or value is null");
+				}
+			}
+			}
+			catch (Exception e)
+			{
+				System.out.print("Exception not handled");
 			}
 		}
 	}
@@ -533,7 +561,9 @@ public class OneTimePaymentPage extends UhcDriver {
 	    public void selectAndEnterAmount(String otherAmount) {
 		TestHarness.checkForIPerceptionModel(driver);
 		validate(otherAmountRadioButton);
+		TestHarness.checkForIPerceptionModel(driver);
 		otherAmountRadioButton.click();
+		TestHarness.checkForIPerceptionModel(driver);
 		otherAmountInput.clear();
 		TestHarness.checkForIPerceptionModel(driver);
 		otherAmountInput.sendKeys(otherAmount);
@@ -547,31 +577,114 @@ public class OneTimePaymentPage extends UhcDriver {
 	}
 
 	public void selectCreditCardOption() {
-		validate(creditcardRadioButton);
-		creditcardRadioButton.click();
-		System.out.println("User selects Credit Card Option");
+		try
+		{
+	      List<WebElement> allInputElements = creditcardRadioButton;
+				
+				   if(allInputElements.size() != 0) 
+				   {
+					  System.out.println(allInputElements.size() + " Elements found by id of radio button as input \n");
+					   for(WebElement inputElement : allInputElements) 
+					   {
+						   if(inputElement.isDisplayed())
+						   {
+							   inputElement.click();
+						        break;
+						   }
+					   }
+				   }
+	
+	
+		}
+		catch (Exception e) 
+		{
+			
+			System.out.println(" Radio button for Credit Card is not clicked.Please handle the Exception");
+        }
+		System.out.println("User clicked on Credit Card Option");
 
-	}
+	    }
 	
 	public void selectCheckingAccountOption() {
-		 try {
-	            Thread.sleep(5000);
-	            System.out.println(driver.getCurrentUrl());
-	        } catch (InterruptedException e) {
-	            e.printStackTrace();
-	        }
-		TestHarness.checkForIPerceptionModel(driver);
-		validate(CheckingAccountRadioButton);
-		CheckingAccountRadioButton.click();
-		System.out.println("User selects Checking Account Option");
+		try
+		{
+	      List<WebElement> allInputElements = CheckingAccountRadioButton;
+				
+				   if(allInputElements.size() != 0) 
+				   {
+					  System.out.println(allInputElements.size() + " Elements found by id of radio button as input \n");
+					   for(WebElement inputElement : allInputElements) 
+					   {
+						   if(inputElement.isDisplayed())
+						   {
+							   inputElement.click();
+						        break;
+						   }
+					   }
+				   }
+	
+	
+		}
+		catch (Exception e) 
+		{
+			System.out.println(" Radio button for Checking Account is not clicked.Please handle the Exception");
+        }
+		System.out.println("User clicked on Checking Account Option");
 
-	}
-
+	    }
+	
 	public CreditCardUPGPage clickOnNextButton() {
 		validate(otheramountfield);
 		TestHarness.checkForIPerceptionModel(driver);
 		NextButton.click();
 		System.out.println("User Click on Next button on one time page");
+		try {
+			Thread.sleep(5000);
+			System.out.println(driver.getCurrentUrl());
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		if (driver.getCurrentUrl().contains("gates/redirects")) 
+		{
+			System.out.println("Navigated to UPG Credit card page");
+			return new CreditCardUPGPage(driver);
+		} 
+		
+		else {
+			System.out.println("UPG page was not displayed");
+			return null;
+		     }
+	}
+	
+	public ReviewOneTimePaymentPage clickOnNextButtonSavedCard() {
+		validate(otheramountfield);
+		TestHarness.checkForIPerceptionModel(driver);
+		NextButton.click();
+		System.out.println("User Clicked on Next button on one time page");
+		try {
+			Thread.sleep(5000);
+			System.out.println(driver.getCurrentUrl());
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		if (driver.getCurrentUrl().contains("onetime-cc-review")) 
+		{
+			System.out.println("Navigated to One time payment Review Page");
+			return new ReviewOneTimePaymentPage(driver);
+		} 
+		
+		else {
+			System.out.println("Review One time payment page was not displayed");
+			return null;
+		     }
+	}
+	
+	
+	public CreditCardUPGPage clickOnReplaceCardlink() {
+		validate(otheramountfield);
+		TestHarness.checkForIPerceptionModel(driver);
+		replaceCard.click();
+		System.out.println("User Click on Replace card link on one time paymentpage");
 		try {
 			Thread.sleep(5000);
 			System.out.println(driver.getCurrentUrl());
@@ -586,7 +699,6 @@ public class OneTimePaymentPage extends UhcDriver {
 			return null;
 		}
 	}
-	
 	
 	public PaymentsFormPage clickOnContuineButton() {
 		TestHarness.checkForIPerceptionModel(driver);
@@ -823,6 +935,52 @@ public OneTimePaymentPage BalanceSummaryValidation() {
 			return null;
 		}
 	}
+
+
+	public void verifyReplaceCardLinkDisabled() {
+		
+		System.out.println("Verifying that Replace Card Link is Disabled");
+		if(replaceCardLink.isEnabled())
+		{
+			Assert.fail("Replace card link was enabled, expected: Disabled");
+		}
+		else
+		{
+			System.out.println("Replace Card Link is disabled, Passed");
+			
+		}
+			
+     	}
+	
+public void verifySavedCardDetailsDisplayed() {
+		
+		System.out.println("Verifying the Saved Card details are displayed");
+		if (cardDetail1.isDisplayed() &&  cardDetail2.isDisplayed() && cardDetail3.isDisplayed())
+		{
+			System.out.println("Card details are displayed as: Card Type and Last 4 digits : "+cardDetail1.getText()+", Card Holder Name: "+cardDetail2.getText()+" , Expiry Information : "+cardDetail3.getText());
+		}
+		else
+		{
+			Assert.fail("Card Details : Card Details were not displayed");
+		}
+			
+	}
+	
+public void verifyReplaceCardLinkEnabled() {
+	
+	System.out.println("Verifying that Replace Card Link is Enabled");
+	if(replaceCardLink.isEnabled())
+	{
+		System.out.println("Replace Card Link is enabled, Passed");
+		
+	}
+	else
+	{
+		Assert.fail("Replace card link was disabled, expected: Enabled");
+		
+	}
+		
+ 	}
 
 
 }

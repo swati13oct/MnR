@@ -85,7 +85,7 @@ Feature: To test member Signin from various Deeplinks
       | q3_sept_UAT4_AARP_025 | Password@1 |
 
   @regressionMember @myDocumentsDeepLink @CodeTransformers
-  Scenario Outline: Verify Member lands on the healthwellness page after signing in from healthwellness deeplink.
+  Scenario Outline: Verify Member lands on the myDocuments page after signing in from myDocuments deeplink.
     Given member lands on the myDocuments deeplink page
     And the myDocuments deeplink page is displayed with all the fields
     And on myDocuments deeplink page I enter the member details and click continue
@@ -135,7 +135,8 @@ Feature: To test member Signin from various Deeplinks
       | username            | password   |
       | q4_Ship_ANOC_009    | Password@1 |
 
-  @regressionMember @codeWarriors @F477221
+#enhancing this scenario - predators worked on F514599 pcp / medica members are blocked 
+  @regressionMember @codeWarriors @F477221 @p1
   Scenario Outline: Verify members lands on the pharmacy page after signing in from pharmacy deeplink.
     Given member lands on the pharmacy deeplink page
       | <brand> |
@@ -147,8 +148,8 @@ Feature: To test member Signin from various Deeplinks
 
     Examples: 
       | username            | password   | brand  |
-      | q3_Sep_UAT4_Sofl064 | Password@1 | PCP    |
-      | q3_Sep_UAT4_Sofl015 | Password@1 | Medica |
+     # | q3_Sep_UAT4_Sofl064 | Password@1 | PCP    |
+     # | q3_Sep_UAT4_Sofl015 | Password@1 | Medica |
       | q2_apr_aarp0250     | Password@1 | AARP   |
       | mapdtest1           | Password@1 | UHC    |
 
@@ -181,3 +182,17 @@ Feature: To test member Signin from various Deeplinks
     Examples: 
       | username            | password   |
       | q3_Sep_TexasPCD_015 | Password@1 |
+
+      @regressionMember @codeWarriors @F513871
+  Scenario Outline: Verify Member lands on the Talix page for the Dentegra Dental Discount article after signing in from dental vanity URL.
+    Given member lands on dentegra dental deeplink page
+    And the page is displayed with all the fields
+    And I Sign on to the M&R Member Portal
+      | User Name | <username> |
+      | Password  | <password> |
+    And I will land on the Talix page for the Dentegra Dental Discount article
+
+    Examples: 
+      | username    	| password   |
+      | q4_Ship_023 	| Password@1 |
+      |q4_Ship_ANOC_009 | Password@1 |
