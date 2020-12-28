@@ -63,12 +63,12 @@ Feature: 1.10.1 DCE-REDISIGN AARP - To test Acq Visitor Profile to NEW DCE Flows
       | Plan Name | <planName> |
     Then user should be able to see Return to profile link on details page
 
-    @DCEShopperProfileAddDrugsGlobally_AARP @F539025
+    @DCEShopperProfileAddDrugsGlobally_AARP @F539025AARP
     Examples: 
       | drug1   | zipCode | site | drug2  | planType | planName                                            |
       | Orkambi |   80002 | AARP | Fanapt | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) |
 
-    @DCEShopperProfileAddDrugsGlobally_UHC @F539025
+    @DCEShopperProfileAddDrugsGlobally_UHC @F539025UHC
     Examples: 
       | drug1   | zipCode | site | drug2  | planType | planName                                            |
       | Orkambi |   80002 | UHC  | Fanapt | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) |
@@ -153,12 +153,12 @@ Feature: 1.10.1 DCE-REDISIGN AARP - To test Acq Visitor Profile to NEW DCE Flows
       | Plan Name | <planName> |
     Then user should be able to see Return to profile link on details page
 
-    @DCEShopperProfileAddDrugsGloballyAuthenticatedUser_AARP123 @F539025
+    @DCEShopperProfileAddDrugsGloballyAuthenticatedUser_AARP123 @F539025AARP
     Examples: 
       | site | drug1   | zipCode | drug2  | planType | planName                                            | userName      | password   |
       | AARP | Orkambi |   80002 | Fanapt | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) | chargersdev@1 | Password@1 |
 
-    @DCEShopperProfileAddDrugsGloballyAuthenticatedUser_UHC
+    @DCEShopperProfileAddDrugsGloballyAuthenticatedUser_UHC @F539025UHC
     Examples: 
       | site | drug1   | zipCode | drug2  | planType | planName                                            | userName      | password   |
       | UHC  | Orkambi |   80002 | Fanapt | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) | chargersdev@1 | Password@1 |
@@ -225,6 +225,8 @@ Feature: 1.10.1 DCE-REDISIGN AARP - To test Acq Visitor Profile to NEW DCE Flows
       | Is Multi County | <isMultiCounty> |
     And the user views the plans of the below plan type
       | Plan Type | <plantype> |
+    And the user selects plan year
+      | Plan Year | <planyear> |
     Then user saves two plans as favorite
       | Plan Type  | <plantype>  |
       | Test Plans | <testPlans> |
@@ -238,13 +240,21 @@ Feature: 1.10.1 DCE-REDISIGN AARP - To test Acq Visitor Profile to NEW DCE Flows
     Then the user searches and adds the following Drug to Drug List
       | DrugName | <drug1> |
     Then the user clicks on Review Drug Costs button to Land on Drug Summary Page
+    Then user should be able to see Return to profile link on summary page
+    And Back to profile button should be displayed for each plan card
+    Then the user selects View Drug details for following plantype and PlanName
+      | Plan Type | <plantype> |
+      | Plan Name | <planName> |
+    Then user should be able to see Return to profile link on details page
+    Then the user Clicks button to VPP Plan Details Page from Drug Details Page
+    Then the user validates planName matches plan Name in VPP
 
-    @DCEShopperProfileAddDrugsGlobally_AARP @F539025
+    @DCEShopperProfileAddDrugsGlobally_AARP @F539025AARP
     Examples: 
-      | site | drug1   | drug2  | plantype | testPlans                                                                 | zipcode | isMultiCounty | county          |
-      | AARP | Orkambi | Fanapt | MAPD     | AARP Medicare Advantage Plan 1 (HMO),AARP Medicare Advantage Plan 2 (HMO) |   10001 | NO            | New York County |
+      | site | drug1   | drug2  | plantype | planyear|testPlans                                                                 | zipcode | isMultiCounty | county          |planName |
+      | AARP | Orkambi | Fanapt | MAPD     | next    |AARP Medicare Advantage Prime (HMO),AARP Medicare Advantage Plan 1 (HMO)  |   10001 | NO            | New York County |AARP Medicare Advantage Prime (HMO)|
 
-    @DCEShopperProfileAddDrugsGlobally_UHC @F539025
-    Examples: 
-      | site | drug1   | drug2  | plantype | testPlans                                                                 | zipcode | isMultiCounty | county          |
-      | UHC  | Orkambi | Fanapt | MAPD     | AARP Medicare Advantage Plan 1 (HMO),AARP Medicare Advantage Plan 2 (HMO) |   10001 | NO            | New York County |
+    @DCEShopperProfileAddDrugsGlobally_UHC @F539025UHC
+     Examples: 
+      | site | drug1   | drug2  | plantype | planyear|testPlans                                                                 | zipcode | isMultiCounty | county          |planName |
+      | UHC | Orkambi | Fanapt | MAPD     | next    |AARP Medicare Advantage Prime (HMO),AARP Medicare Advantage Plan 1 (HMO)  |   10001 | NO            | New York County |AARP Medicare Advantage Prime (HMO)|
