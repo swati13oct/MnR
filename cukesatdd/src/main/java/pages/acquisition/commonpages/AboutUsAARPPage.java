@@ -17,10 +17,12 @@ import acceptancetests.util.CommonUtility;
 
 public class AboutUsAARPPage extends GlobalWebElements{
 
-	@FindBy(xpath = "//*[contains(@class,'meded-article-header__title')]")
+	//@FindBy(xpath = "//*[contains(@class,'meded-article-header__title')]")
+	@FindBy(xpath="//span[contains(text(),'About UnitedHealthcare') and contains(@class,'heading-1')]")
 	public static WebElement header;
 	
-	@FindBy(xpath = "//section[contains(@class,'meded-article-content')]//p[string-length(text()) > '1']")
+	//@FindBy(xpath = "//section[contains(@class,'meded-article-content')]//p[string-length(text()) > '1']")
+	@FindBy(xpath="(//span[contains(@class,'paragraph') and string-length(text()) > '1'])[1]")
 	public static WebElement abountUsBodyParaSection;
 	
 	
