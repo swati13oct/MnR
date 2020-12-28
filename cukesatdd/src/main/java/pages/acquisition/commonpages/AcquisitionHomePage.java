@@ -5427,17 +5427,17 @@ public PrivacyPolicyAARPPage privacypolicyFooterClick() {
 		threadsleep(8);
 		
 		if(SubmitEmail.isDisplayed()) {
-		int size=driver.findElements(By.xpath("//span[contains(text(),'Sign Up')]")).size();
+		int size=driver.findElements(By.xpath("//span[contains(text(),'Submit')]")).size();
 		System.out.println("size of sign up"+size);
 		if(size>0){
-			driver.findElement(By.xpath("//span[contains(text(),'Sign Up')]")).click();
+			driver.findElement(By.xpath("//span[contains(text(),'Submit')]")).click();
 			threadsleep(4);
 			Assert.assertEquals(ErrorEmailAddress.getText(), "Please enter a valid email address");
 			threadsleep(4);
 		    EmailFirstName.sendKeys("abc");
 			EmailLastName.sendKeys("def");
 			EmailAddress.sendKeys("a@gmail.com");
-			driver.findElement(By.xpath("//span[contains(text(),'Sign Up')]")).click();
+			driver.findElement(By.xpath("//span[contains(text(),'Submit')]")).click();
 		}else {
 			SubmitEmail.click();
 			threadsleep(4);

@@ -9,11 +9,12 @@ Feature: 1.13 UAT - Shop Blog Pages flows
     And the user navigates to following medicare acquisition site page
       | PageName | <pageName> |
       | PagePath | <path>     |
-    Then the user validate ZipCode Components on page using ZipCode "55410"
     Then the user validates proactive chat popup
+    Then the user validate ZipCode Components on page using ZipCode "55410"
     When the user clicks on Agent link and validates the correct URL is loaded
       |UHC Agent URL|  <UHCUrl>  |
     Then the user validates whether call icon is displayed on the page
+  
     
         
    @ShopPages_Shop5_GlobalCompsAARP
@@ -86,12 +87,12 @@ Feature: 1.13 UAT - Shop Blog Pages flows
     And the user navigates to following medicare acquisition site page
       | PageName | <pageName> |
       | PagePath | <path>     |
-    Then the user enters and validate the fields and clicks on submit
     Then the user validates proactive chat popup
     Then the user validate ZipCode Components on page using ZipCode "55410"
     Then the user validates whether call icon is displayed
     When the user clicks on Agent link and validates the correct URL is loaded
       |UHC Agent URL|  <UHCUrl>  |
+    Then the user enters and validate the fields and clicks on submit
    
   
 
