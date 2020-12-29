@@ -780,5 +780,7 @@ Feature: 1.01 Member  benefits and Coverage page
     Examples: 
       | index | TID   | planType | memberType   |
       | 41    | xxxxx | TERM     | FED_BnC      |
+      | 42    | xxxxx | TERM     | PDP_FED_BnC  |
+      | 43    | xxxxx | TERM     | MAPD_FED_BnC | 
       
  ###############################Regression Scenarios END Here ########################################
