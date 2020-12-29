@@ -32,14 +32,14 @@ Feature: 1.06.5 Member Plans and Documents - section: Provider Directory -or- Ph
 	@preeffective_ma_mapd
 	Examples: 
       | index  | TID         | planType | memberType            | pd_sd | pd_ps | pd_pl | pd_en_cy | pd_es_cy | pd_zh_cy | pd_en_ny | pd_es_ny | pd_zh_ny |
-      | 01-077 | xxxxx       | MA       | AARP_IND_PREEFF_PDnR  | true  | true  | false | true     | true     | false    | false    | false    | false    |
+      | 01-077 | xxxxx       | MA       | AARP_IND_PREEFF_PDnR  | true  | true  | false | false    | false    | false    | true     | true     | false    |
       | 02-078 | xxxxx       | MA       | GROUP_PREEFF_PDnR     | true  | true  | false | false    | false    | false    | false    | false    | false    |
-      | 03-079 | xxxxx       | MAPD     | AARP_IND_PREEFF_PDnR  | true  | true  | true  | true     | true     | false    | false    | false    | false    |
+      | 03-079 | xxxxx       | MAPD     | AARP_IND_PREEFF_PDnR  | true  | true  | true  | false    | false   | false     | true     | true     | false    |
 
 	@preeffective_pdp
 	Examples: 
       | index  | TID         | planType | memberType            | pd_sd | pd_ps | pd_pl | pd_en_cy | pd_es_cy | pd_zh_cy | pd_en_ny | pd_es_ny | pd_zh_ny |
-      | 04-080 | xxxxx       | PDP      | AARP_IND_PREEFF_PDnR  | true  | false | true  | true     | true     | false    | false    | false    | false    |
+      | 04-080 | xxxxx       | PDP      | AARP_IND_PREEFF_PDnR  | true  | false | true  | false     | false     | false    | false    | false    | false    |
 	#note: no test user available for now
     #  | 05-081 | xxxxx       | PDP      | GROUP_PREEFF_PDnR     | true  | false | true  | false    | false    | false    | false    | false    | false    |
 
