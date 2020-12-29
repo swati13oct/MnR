@@ -3457,6 +3457,18 @@ action.moveToElement(navigationSectionHomeLink).moveToElement(ourPlansHoverLink)
 	 public void validateCallSamValue() throws InterruptedException {
 	       
 	        threadsleep(10);
+	        if(driver.findElement(By.xpath("(//div[@ng-show='fedTfn'])[1]/p/span/a/u")).isDisplayed()) {
+	        	//threadsleep(25); 
+	        	WebElement ele=driver.findElement(By.xpath("(//div[@ng-show='fedTfn'])[1]/p/span/a/u"));
+	        	waitforElementVisibilityInTime(ele, 30);
+	        	String str=ele.getText();
+	        	System.out.println("Stru"+str);
+	        	 String valueonCallUsMed=driver.findElement(By.xpath("//span[@class='sam__button__text desktop-tfn-text']")).getText();
+	 	        System.out.println("valueonCallUs"+valueonCallUsMed);
+		        System.out.println("valueOnPopup"+valueonCallUsMed);
+		        Assert.assertEquals(str, valueonCallUsMed);
+	        }
+	        else {
 	        validateNew(callsam);
 	        String valueOncallSam=callsam.getText();
 	        System.out.println("valueOncallSam"+valueOncallSam);
@@ -3477,6 +3489,8 @@ action.moveToElement(navigationSectionHomeLink).moveToElement(ourPlansHoverLink)
 	        System.out.println("needHelpValue"+needHelpValue);
 	        Assert.assertEquals(valueOncallSam, needHelpValue);
 	        }
+	        }  
+	         
 	 }
 		
 		public void validateCallSamContent() throws InterruptedException {
@@ -5423,21 +5437,18 @@ public PrivacyPolicyAARPPage privacypolicyFooterClick() {
 
 	
 		public void enterAndvalidateEmail() {
-	
-		threadsleep(8);
-		
-		if(SubmitEmail.isDisplayed()) {
-		int size=driver.findElements(By.xpath("//span[contains(text(),'Submit')]")).size();
+	    threadsleep(8);
+		int size=driver.findElements(By.xpath("//span[contains(text(),'Sign Up')]")).size();
 		System.out.println("size of sign up"+size);
 		if(size>0){
-			driver.findElement(By.xpath("//span[contains(text(),'Submit')]")).click();
+			driver.findElement(By.xpath("//span[contains(text(),'Sign Up')]")).click();
 			threadsleep(4);
 			Assert.assertEquals(ErrorEmailAddress.getText(), "Please enter a valid email address");
 			threadsleep(4);
 		    EmailFirstName.sendKeys("abc");
 			EmailLastName.sendKeys("def");
 			EmailAddress.sendKeys("a@gmail.com");
-			driver.findElement(By.xpath("//span[contains(text(),'Submit')]")).click();
+			driver.findElement(By.xpath("//span[contains(text(),'Sign Up')]")).click();
 		}else {
 			SubmitEmail.click();
 			threadsleep(4);
@@ -5458,8 +5469,9 @@ public PrivacyPolicyAARPPage privacypolicyFooterClick() {
 		}
 		
 		}
-	}
+	
 		
+				
 		public TermsnConditionsAARPPage termsnconditionsFooterClick() {
 			validate(footerTermsnConditionsLink);
 //			footerTermsnConditionsLink.click();
