@@ -1290,4 +1290,9 @@ try {
 		return true;
 	}
 	
+	
+	public int countOfNewWindowTab() {
+		return driver.getWindowHandles().size();
+	}
+	
 }
