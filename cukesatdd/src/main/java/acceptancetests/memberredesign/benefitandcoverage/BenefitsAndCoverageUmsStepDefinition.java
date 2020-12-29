@@ -2666,5 +2666,19 @@ public class BenefitsAndCoverageUmsStepDefinition {
 		
 	}
 	
+	@Then("^validates provider search tile not displayed$")
+	public void validates_provider_search_tile_not_displayed()
+	{
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario().getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
+		Assert.assertFalse(benefitsCoveragePage.display_provider_search_tile());
+	}
+	
+	@Then("^validates provider search tile displayed$")
+	public void validates_provider_search_tile_displayed()
+	{
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario().getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
+		Assert.assertTrue(benefitsCoveragePage.display_provider_search_tile());
+	}
+	
 }//end of class
 
