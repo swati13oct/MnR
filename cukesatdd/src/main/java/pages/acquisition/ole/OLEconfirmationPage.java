@@ -133,6 +133,15 @@ public class OLEconfirmationPage extends UhcDriver{
 		return false;
 	}
 
+	//THE FIELDS COMMENTED AS 29/12 ARE NOT PRESENT IN DETAILS MAP
+	/*BELOW FIELDS ARE RETURNED BY GPS QUERY BUT NOT PRESENT IN DETAILS MAP
+	LANGUAGE_PREFERENCE 
+	SSN
+	MEDICAID_IND 
+	ESRD_IND 
+	PAYMENT_METHOD 
+	DENTAL_PLATINUM */
+
 	public Map<String, String> retrieve_GPS_data(String confirmation_no) {
 	  	   Connection connection = createDataBaseConnection();
 		   ResultSet rs = null;
@@ -142,164 +151,190 @@ public class OLEconfirmationPage extends UhcDriver{
 			   stmt = connection.createStatement();
 			  rs = stmt.executeQuery(CommonConstants.GPS_QUERY + confirmation_no );
 			   while(rs.next()) {
+				   //Personal Information Page
+
+				   //Personal Information
 				   String firstName = rs.getString("FIRST_NAME");
 				   gpsData.put("First Name", firstName);
+				   //String middleInitial = rs.getString("MIDDLE_INITIAL"); 29/12
+				   //gpsData.put("MiddleInitial", middleInitial); 29/12
 				   String lastName = rs.getString("LAST_NAME");
 				   gpsData.put("Last Name", lastName);
+				   String doB = rs.getString("DATE_OF_BIRTH");
+				   doB = doB.substring(0, 10);
+				   gpsData.put("DOB", doB);
+
+				   //Gender
 				   String gender = rs.getString("GENDER");
 				   gpsData.put("Gender", gender);
+
+				   //Primary Address
+				   String address1 = rs.getString("ADDRESS_LINE_1");
+				   gpsData.put("Perm_Street", address1);
+				   //String address2 = rs.getString("ADDRESS_LINE_2"); 29/12 TODO-Need to check if this field is passed through examples
+				   //gpsData.put("Perm_Apartment", address2);
+				   String city = rs.getString("CITY");
+				   gpsData.put("Perm_city", city);
+				   //String state = rs.getString("STATE_CD"); 29/12
+				   //gpsData.put("State", state);
+				   String zipCode = rs.getString("ZIP_CD");
+				   gpsData.put("Zip Code", zipCode );
+
+				   //Mailing Address
+				   String mailingAddress1 = rs.getString("MAILING_ADDRESS_LINE_1");
+				   gpsData.put("Mailing_Street", mailingAddress1);
+				   String mailingAddress2 = rs.getString("MAILING_ADDRESS_LINE_2");
+				   gpsData.put("Mailing Apartment Number", mailingAddress2);
+				   String mailingCity = rs.getString("MAILING_CITY");
+				   gpsData.put("Mailing_City", mailingCity);
+				   String mailingState = rs.getString("MAILING_STATE_CD");
+				   gpsData.put("Mailing_State", mailingState);
+				   String mailingZipcode = rs.getString("MAILING_ZIP_CD");
+				   gpsData.put("Mailing_Zip", mailingZipcode);
+
+				   //Phone Number
+				   String dayTimePhoneNumber = rs.getString("DAYTIME_PHONE_NUM");
+				   gpsData.put("Home Number", dayTimePhoneNumber);
+				   String eveningTimePhoneNumber = rs.getString("EVENING_PHONE_NUM");
+				   gpsData.put("Mobile Number", eveningTimePhoneNumber); 
+				   
+				   //Email
+				   String email = rs.getString("EMAIL");
+				   gpsData.put("Home Number", email);
+				   String paperless = rs.getString("PAPERLESS_PREFERENCE_IND");
+				   gpsData.put("Paperless Delivery", paperless);
+				   				   
+				   //Medicare Information Page
+
+				   //Medicare and Medicaid Number
 				   String medicareNumber = rs.getString("MEDICARE_NUMBER");
 				   gpsData.put("Medicare Number", medicareNumber); 
+				   String medicaidNumber = rs.getString("MEDICAID_NUMBER");
+				   gpsData.put("Medicaid Number", medicaidNumber);
+
+				   //Other Health Insurance
+				   String healthInsurance= rs.getString("DO_YOU_HAVE_OTHER_HEALTH_INS");
+				   gpsData.put("Health Insurance", healthInsurance); 
+				   String healthInsuranceName = rs.getString("OTHER_HEALTH_INSURANCE_NAME");
+				   gpsData.put("Health Insurance Name", healthInsuranceName); 
+				   String healthInsuranceGroupName = rs.getString("OTHER_HEALTH_INSURANCE_GRP_NUM");
+				   gpsData.put("Group Number", healthInsuranceGroupName); 
+				   String healthInsuranceID  = rs.getString("OTHER_HEALTH_INSURANCE_ID");
+				   gpsData.put("Member Number", healthInsuranceID); 
+
+				   //Prescription Drug Coverage
+				   String secondaryCoverageName = rs.getString("SECONDARY_RX_COVERAGE_NAME");
+				   gpsData.put("Prescription Name", secondaryCoverageName); 
+				   String otherCoverageName = rs.getString("OTHER_RX_COVERAGE_NAME");
+				   gpsData.put("Prescription Name", otherCoverageName); 
+				   String secondaryGroup = rs.getString("SECONDARY_RX_GROUP");
+				   gpsData.put("PD Group Number", secondaryGroup); 
+				   String secondaryMemberNumber = rs.getString("SECONDARY_RX_ID");
+				   gpsData.put("PD Member Number", secondaryMemberNumber); 
+
+				   //Eligibility Page
 				   String partAEffectiveDate = rs.getString("MEDICARE_PART_A_EFFECTIVE_DATE");
-				   	partAEffectiveDate = partAEffectiveDate.substring(0, 10);
-					gpsData.put("PartA Date", partAEffectiveDate); 
-					String partBEffectiveDate = rs.getString("MEDICARE_PART_B_EFFECTIVE_DATE");
-					partBEffectiveDate = partBEffectiveDate.substring(0, 10);
-					gpsData.put("PartB Date", partBEffectiveDate);
-					String doB = rs.getString("DATE_OF_BIRTH");
-					doB = doB.substring(0, 10);
-					gpsData.put("DOB", doB);
-					String zipCode = rs.getString("ZIP_CD");
-					gpsData.put("Zip Code", zipCode );
+				   partAEffectiveDate = partAEffectiveDate.substring(0, 10);
+				   gpsData.put("PartA Date", partAEffectiveDate); 
+				   String partBEffectiveDate = rs.getString("MEDICARE_PART_B_EFFECTIVE_DATE");
+				   partBEffectiveDate = partBEffectiveDate.substring(0, 10);
+				   gpsData.put("PartB Date", partBEffectiveDate);
 
-					String healthInsuranceName = rs.getString("OTHER_HEALTH_INSURANCE_NAME");
-					 gpsData.put("Health Insurance Name", healthInsuranceName); 
-					   String healthInsuranceGroupName = rs.getString("OTHER_HEALTH_INSURANCE_GRP_NUM");
-					 gpsData.put("Group Number", healthInsuranceGroupName); 
-					    String healthInsuranceID  = rs.getString("OTHER_HEALTH_INSURANCE_ID");
-					   gpsData.put("Member Number", healthInsuranceID); 
-					    String secondaryCoverageName = rs.getString("SECONDARY_RX_COVERAGE_NAME");
-					   gpsData.put("Prescription Name", secondaryCoverageName); 
-					    String otherCoverageName = rs.getString("OTHER_RX_COVERAGE_NAME");
-					   gpsData.put("Prescription Name", otherCoverageName); 
-					     String secondaryGroup = rs.getString("SECONDARY_RX_GROUP");
-					   gpsData.put("PD Group Number", secondaryGroup); 
-					   String secondaryMemberNumber = rs.getString("SECONDARY_RX_ID");
-					   gpsData.put("PD Member Number", secondaryMemberNumber); 
-					   
-					   String proposedeffectiveDate = rs.getString("REQUESTED_EFFECTIVE_DATE");
-					   proposedeffectiveDate = proposedeffectiveDate.substring(0, 10);
-						gpsData.put("Proposed Effective date", proposedeffectiveDate);  					   
+				   //Proposed Effective Date
+				   String proposedeffectiveDate = rs.getString("REQUESTED_EFFECTIVE_DATE");
+				   proposedeffectiveDate = proposedeffectiveDate.substring(0, 10);
+				   gpsData.put("Proposed Effective date", proposedeffectiveDate);  					   
 
-						String pcpName = rs.getString("PRIMARY_CARE_PHYSICIAN");
-						   gpsData.put("PCP Name", pcpName); 
-						   
-						String pcpNumber = rs.getString("PRIMARY_CARE_PHYSICIAN_NUMBER");
-						   gpsData.put("PCP Number", pcpName); 
-						   
-					 String pCPRecentlyVisited = rs.getString("CURRENTLY_A_PATIENT_OF_THE_PCP");
-						   gpsData.put("PCP Recently Visited", pCPRecentlyVisited);  
-					   
-				   //-----------Adding for CSNP----------------//
-					   String diabetes1 = rs.getString("ASMENT_DIAB1_DOC_INFORMED_DIAB");
-					   gpsData.put("Diabetes Question 1", diabetes1); 
-					     String diabetes2 = rs.getString("ASMENT_DIAB2_PRESCRIBED_INSULN");
-					   gpsData.put("Diabetes Question 2", diabetes2); 
-					   String chronic1 = rs.getString("CHRONIC_AUTH_HEART_FAILURE");
-					   gpsData.put("Chronic Heart Failure Question 1", chronic1); 
-					   String chronic2 = rs.getString("ASMENT_LUNG1_BRONC_EMPH_ASTHMA");
-					   gpsData.put("Chronic Heart Failure Question 2", chronic2); 
-					     String chronic3 = rs.getString("ASMENT_HEART2_CARDC_BYPASS");
-					   gpsData.put("Chronic Heart Failure Question 3", chronic3); 
-					   String Cardiovascular1 = rs.getString("CHRONIC_AUTH_VASCULAR_DISEASE");
-					   gpsData.put("Cardio Vascular Disorder Question 1", Cardiovascular1); 
-					   String Cardiovascular2 = rs.getString("ASMENT_HEART1_HEART_ATTACK");
-					   gpsData.put("Cardio Vascular Disorder Question 2", Cardiovascular2); 
-					     String Cardiovascular3 = rs.getString("ASMENT_HEART10_ANGINA");
-					   gpsData.put("Cardio Vascular Disorder Question 3", Cardiovascular3); 
-					   String Cardiovascular4 = rs.getString("ASMENT_HBP2_MEDICATION_FOR_HBP");
-					   gpsData.put("Cardio Vascular Disorder Question 4", Cardiovascular4); 
-					   String Cardiovascular5 = rs.getString("ASMENT_HEART7_PACEMKR_R_DEFIB");
-					   gpsData.put("Cardio Vascular Disorder Question 5", Cardiovascular5); 
-					     String Cardiovascular6 = rs.getString("ASMENT_HEART3_ANGIOPLASTY");
-					   gpsData.put("Cardio Vascular Disorder Question 6", Cardiovascular6); 
-					   String chronicEnrollmentcheckbox = rs.getString("ASMENT_SIGN_PRESENCE_ENROLLEE");
-					  gpsData.put("Disclosure Checkbox", chronicEnrollmentcheckbox); 
-					   
-					   String chronicillness = rs.getString("DO_YOU_HAVE_A_CHRONIC_ILLNESS");
-					   gpsData.put("Disclosure Checkbox", chronicillness); 
-					   String chronicphysician = rs.getString("CHRONIC_PHYSICIAN_NAME");
-					   gpsData.put("Disclosure Provider Name", chronicphysician); 
-					     String chronicphysicianPhoneNumber = rs.getString("CHRONIC_PHYSICIAN_PHONE_NUM");
-					   gpsData.put("Disclosure Provider PhoneNumber", chronicphysicianPhoneNumber); 
-					   String chronicphysicianAddress = rs.getString("ASMENT_FULL_ADDR_FOR_PHYSICIAN");
-					//   gpsData.put("Disclosure Provider City","Disclosure Provider Street Address","Disclosure Provider State","Disclosure Provider Zip", chronicphysicianAddress); 
-					   
-				 
-					   
-					   //------------------------------------------//
-					
-					   //   PD Member Number
-						   
-				   //add for all the gps columns
-				   /* String confirmationNumber = rs.getString("XEROX_STAGE_ID");
-				   gpsData.put("Confirmation No", confirmationNumber);
-				   String middleInitial = rs.getString("MIDDLE_INITIAL");
-				   gpsData.put("MiddleInitial", middleInitial);
-				    String medicareNumber = rs.getString("MEDICAID_NUMBER");
-				   gpsData.put("First Name", firstName);
-				   String mailingZipcode = rs.getString("MAILING_ZIP_CD");
-				   gpsData.put("First Name", firstName);
-				   String mailingState = rs.getString("MAILING_STATE_CD");
-				   gpsData.put("First Name", mailingState);
-				   String mailingCity = rs.getString("MAILING_CITY");
-				   gpsData.put("First Name", mailingCity);
-				   String mailingAddress2 = rs.getString("MAILING_ADDRESS_LINE_2");
-				   gpsData.put("First Name", mailingAddress2);
-				   String mailingAddress1 = rs.getString("MAILING_ADDRESS_LINE_1");
-				   gpsData.put("First Name", mailingAddress1);
-				   String doB = rs.getString("DATE_OF_BIRTH");
-				   gpsData.put("First Name", doB);
-				   String gender = rs.getString("GENDER");
-				   gpsData.put("First Name", gender);
-				   String address1 = rs.getString("ADDRESS_LINE_1");
-				   gpsData.put("First Name", address1);
-				   String address2 = rs.getString("ADDRESS_LINE_2");
-				   gpsData.put("First Name", address2);
-				    String zipCode = rs.getString("ZIP_CD");
-				   gpsData.put("First Name", zipCode );
-				   String state = rs.getString("STATE_CD");
-				   gpsData.put("First Name", state);
-				   String city = rs.getString("CITY");
-				   gpsData.put("First Name", city);
-					String dayTimePhoneNumber = rs.getString("DAYTIME_PHONE_NUM");
-				   gpsData.put("First Name", dayTimePhoneNumber);
-				  String eveningTimePhoneNumber = rs.getString("EVENING_PHONE_NUM");
-				   gpsData.put("First Name", eveningTimePhoneNumber); 	
-			 	String medicareNumber = rs.getString("MEDICARE_NUMBER");
-				   gpsData.put("First Name", medicareNumber); 
-				    String partAEffectiveDate = rs.getString("MEDICARE_PART_A_EFFECTIVE_DATE");
-				   gpsData.put("First Name", partAEffectiveDate); 
-				    String partBEffectiveDate = rs.getString("MEDICARE_PART_B_EFFECTIVE_DATE");
-				   gpsData.put("First Name", partBEffectiveDate); 
-				    String healthInsurance= rs.getString("DO_YOU_HAVE_OTHER_HEALTH_INS");
-				   gpsData.put("First Name", healthInsurance); 
-				    String healthInsuranceName = rs.getString("OTHER_HEALTH_INSURANCE_NAME");
-				   gpsData.put("First Name", healthInsuranceName); 
-				    String healthInsuranceGroupName = rs.getString("OTHER_HEALTH_INSURANCE_GRP_NUM");
-				   gpsData.put("First Name", healthInsuranceGroupName); 
-				    String healthInsuranceID  = rs.getString("OTHER_HEALTH_INSURANCE_ID");
-				   gpsData.put("First Name", healthInsuranceID); 
-				    String secondaryCoverageName = rs.getString("SECONDARY_RX_COVERAGE_NAME");
-				   gpsData.put("First Name", secondaryCoverageName); 
-				    String otherCoverageName = rs.getString("OTHER_RX_COVERAGE_NAME");
-				   gpsData.put("First Name", otherCoverageName); 
-				     String secondaryGroup = rs.getString("SECONDARY_RX_GROUP");
-				   gpsData.put("First Name", secondaryGroup); 
-				    String secondaryId = rs.getString("SECONDARY_RX_ID");
-				   gpsData.put("First Name", secondaryId); 
-				     String note = rs.getString("NOTE");
-				   gpsData.put("First Name", note); 
-				    String effectiveDate = rs.getString("REQUESTED_EFFECTIVE_DATE");
-				   gpsData.put("First Name", effectiveDate); 
+				   //PCP Page
+				   String pcpName = rs.getString("PRIMARY_CARE_PHYSICIAN");
+				   gpsData.put("PCP Name", pcpName); 
 				   String pcpNumber = rs.getString("PRIMARY_CARE_PHYSICIAN_NUMBER");
-				   gpsData.put("First Name", pcpNumber); 
-				     String pcpName = rs.getString("PRIMARY_CARE_PHYSICIAN");
-				   gpsData.put("First Name", pcpName); 
-				    String dentalPlatinum = rs.getString("DENTAL_PLATINUM");
-				   gpsData.put("First Name", dentalPlatinum);    
+				   gpsData.put("PCP Number", pcpName); 
+				   String pCPRecentlyVisited = rs.getString("CURRENTLY_A_PATIENT_OF_THE_PCP");
+				   gpsData.put("PCP Recently Visited", pCPRecentlyVisited);  
 
-				     * *///----prashant
+
+				   String confirmationNumber = rs.getString("XEROX_STAGE_ID");
+				   gpsData.put("Confirmation No", confirmationNumber);
+				   
+				   
+				   
+				    //SEP Page 
+				   //String note = rs.getString("NOTE"); 29/12 TODO-Need to check if this field is passed through examples
+				  // gpsData.put("Note", note); 
+				   
+				   //String dentalPlatinum = rs.getString("DENTAL_PLATINUM"); 29/12 TODO-Need to check if this field is passed through examples
+				   //gpsData.put("Dental Platinum", dentalPlatinum);  
+				   
+				   //Authorization Page
+				   String authorizationFirstName = rs.getString("AUTHORIZED_REP_FIRST_NAME");
+				   gpsData.put("Authorization First Name", authorizationFirstName);
+				   
+				   String authorizationLastName = rs.getString("AUTHORIZED_REP_LAST_NAME");
+				   gpsData.put("Authorization last Name", authorizationLastName);
+				   
+				   String authRel = rs.getString("AUTHORIZED_REP_MAILING_ZIP_CD");
+				   gpsData.put("Authorization Relationship", authRel);
+				
+				   
+				   String authAddr1 = rs.getString("AUTHORIZED_REP_MAILING_ADDR_1");
+				   gpsData.put("Authorization Address", authAddr1);
+				   
+				   String authAddr2 = rs.getString("AUTHORIZED_REP_MAILING_ADDR_2");
+				   gpsData.put("Authorization Apartment Suite", authAddr2);
+				   
+				   String authCity = rs.getString("AUTHORIZED_REP_MAILING_CITY");
+				   gpsData.put("Authorization City", authCity);
+				   
+				   String authPhone = rs.getString("AUTHORIZED_REP_DAYTIME_PHONE");
+				   gpsData.put("Authorization Phone No", authPhone);
+				   
+				   String authState = rs.getString("AUTHORIZED_REP_MAILING_STATE");
+				   gpsData.put("Authorization State", authState);
+				   
+				   String authZip = rs.getString("AUTHORIZED_REP_MAILING_ZIP_CD");
+				   gpsData.put("Auth Zip Display", authZip);
+				
+				 //-----------Adding for CSNP----------------//
+				   String diabetes1 = rs.getString("ASMENT_DIAB1_DOC_INFORMED_DIAB");
+				   gpsData.put("Diabetes Question 1", diabetes1); 
+				   String diabetes2 = rs.getString("ASMENT_DIAB2_PRESCRIBED_INSULN");
+				   gpsData.put("Diabetes Question 2", diabetes2); 
+				   String chronic1 = rs.getString("CHRONIC_AUTH_HEART_FAILURE");
+				   gpsData.put("Chronic Heart Failure Question 1", chronic1); 
+				   String chronic2 = rs.getString("ASMENT_LUNG1_BRONC_EMPH_ASTHMA");
+				   gpsData.put("Chronic Heart Failure Question 2", chronic2); 
+				   String chronic3 = rs.getString("ASMENT_HEART2_CARDC_BYPASS");
+				   gpsData.put("Chronic Heart Failure Question 3", chronic3); 
+				   String Cardiovascular1 = rs.getString("CHRONIC_AUTH_VASCULAR_DISEASE");
+				   gpsData.put("Cardio Vascular Disorder Question 1", Cardiovascular1); 
+				   String Cardiovascular2 = rs.getString("ASMENT_HEART1_HEART_ATTACK");
+				   gpsData.put("Cardio Vascular Disorder Question 2", Cardiovascular2); 
+				   String Cardiovascular3 = rs.getString("ASMENT_HEART10_ANGINA");
+				   gpsData.put("Cardio Vascular Disorder Question 3", Cardiovascular3); 
+				   String Cardiovascular4 = rs.getString("ASMENT_HBP2_MEDICATION_FOR_HBP");
+				   gpsData.put("Cardio Vascular Disorder Question 4", Cardiovascular4); 
+				   String Cardiovascular5 = rs.getString("ASMENT_HEART7_PACEMKR_R_DEFIB");
+				   gpsData.put("Cardio Vascular Disorder Question 5", Cardiovascular5); 
+				   String Cardiovascular6 = rs.getString("ASMENT_HEART3_ANGIOPLASTY");
+				   gpsData.put("Cardio Vascular Disorder Question 6", Cardiovascular6); 
+				   String chronicEnrollmentcheckbox = rs.getString("ASMENT_SIGN_PRESENCE_ENROLLEE");
+				   gpsData.put("Disclosure Checkbox", chronicEnrollmentcheckbox); 
+
+				   String chronicillness = rs.getString("DO_YOU_HAVE_A_CHRONIC_ILLNESS");
+				   gpsData.put("Disclosure Checkbox", chronicillness); 
+				   String chronicphysician = rs.getString("CHRONIC_PHYSICIAN_NAME");
+				   gpsData.put("Disclosure Provider Name", chronicphysician); 
+				   String chronicphysicianPhoneNumber = rs.getString("CHRONIC_PHYSICIAN_PHONE_NUM");
+				   gpsData.put("Disclosure Provider PhoneNumber", chronicphysicianPhoneNumber); 
+				   String chronicphysicianAddress = rs.getString("ASMENT_FULL_ADDR_FOR_PHYSICIAN");
+				   //   gpsData.put("Disclosure Provider City","Disclosure Provider Street Address","Disclosure Provider State","Disclosure Provider Zip", chronicphysicianAddress); 
+
+
+				   
+				   //------------------------------------------//
+				
+			
 			   }
 		   } catch (Exception e) {
 			   e.printStackTrace();
@@ -342,7 +377,7 @@ public Connection createDataBaseConnection() {
 		boolean flag = false;
 		String confirmation_no = confirmationNumber.getText();
 		 System.out.println("OLE confirmation number is  " +confirmation_no);
-		//map.put("Confirmation No", confirmation_no);---Prashant
+		map.put("Confirmation No", confirmation_no); //29/12
 		Map<String,String> gpsdatamap = retrieve_GPS_data(confirmation_no);
 		if(map.equals(gpsdatamap)) {
 			flag = true;
