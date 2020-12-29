@@ -541,10 +541,10 @@ public class oleStepDefinition {
 	}	
 	
 	@Then("^the user validates the required fields for CSNP plans on Medicare Information Page$")
-	public void  the_user_validates_requierd_fields_for_Medicare_Information_Page_CSNP(DataTable Flags) throws Throwable {
+	public void  the_user_validates_requierd_fields_for_Medicare_Information_Page_CSNP(DataTable arg1) throws Throwable {
 
 
-		List<DataTableRow> personalAttributesRow = Flags.getGherkinRows();
+		/*List<DataTableRow> personalAttributesRow = Flags.getGherkinRows();
 		Map<String, String> PreliminaryFlagsMap = new HashMap<String, String>();
 		for (int i = 0; i < personalAttributesRow.size(); i++) {
 			PreliminaryFlagsMap.put(personalAttributesRow.get(i)
@@ -566,36 +566,35 @@ public class oleStepDefinition {
 			String cardioVasculardisorder5="";
 			String cardioVasculardisorder6="";
 			
-			MedicareInformationPage medicareInfoPage = (MedicareInformationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE);
-			medicareInfoPage.validate_Required_Fields_CSNP(medicaidNumber, planName);
+		*/
+		List<DataTableRow> givenAttributesRow = arg1.getGherkinRows();
+		Map<String, String> MemberDetailsMap = new HashMap<String, String>();
+		for (int i = 0; i < givenAttributesRow.size(); i++) {
+			MemberDetailsMap.put(givenAttributesRow.get(i).getCells().get(0),
+					givenAttributesRow.get(i).getCells().get(1));
+		}
+		String PlanName = (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_NAME);
+		MedicareInformationPage medicareInfoPage = (MedicareInformationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE);
+			medicareInfoPage.validate_Required_Fields_CSNP(MemberDetailsMap, PlanName);
 			
 		//------------Added for CSNP plans-------
-			getLoginScenario().saveBean(oleCommonConstants.DIABETES_QUESTION_1, diabetesQuestion1);
-			getLoginScenario().saveBean(oleCommonConstants.DIABETES_QUESTION_2, diabetesQuestion2);
-			getLoginScenario().saveBean(oleCommonConstants.CHRONIC_HEART_FAILURE_QUESTION_1, chronicHeartFailure1);
-			getLoginScenario().saveBean(oleCommonConstants.CHRONIC_HEART_FAILURE_QUESTION_2, chronicHeartFailure2);
-			getLoginScenario().saveBean(oleCommonConstants.CHRONIC_HEART_FAILURE_QUESTION_3, chronicHeartFailure3);
-			getLoginScenario().saveBean(oleCommonConstants.CARDIO_VASCULAR_DISORDER_QUESTION_1,cardioVasculardisorder1);
-			getLoginScenario().saveBean(oleCommonConstants.CARDIO_VASCULAR_DISORDER_QUESTION_2, cardioVasculardisorder2);
-			getLoginScenario().saveBean(oleCommonConstants.CARDIO_VASCULAR_DISORDER_QUESTION_3, cardioVasculardisorder3);
-			getLoginScenario().saveBean(oleCommonConstants.CARDIO_VASCULAR_DISORDER_QUESTION_4, cardioVasculardisorder4);
-			getLoginScenario().saveBean(oleCommonConstants.CARDIO_VASCULAR_DISORDER_QUESTION_5, cardioVasculardisorder5);
-			getLoginScenario().saveBean(oleCommonConstants.CARDIO_VASCULAR_DISORDER_QUESTION_6, cardioVasculardisorder6);
-		System.out.println("Diabetes Question1 is : "+diabetesQuestion1);
-			System.out.println("Diabetes Question2 is : "+diabetesQuestion2);
-			System.out.println("Chronic Heart Failure Question1  is : "+chronicHeartFailure1);
-			System.out.println("Chronic Heart Failure Question2 is : "+chronicHeartFailure2);
-			System.out.println("Chronic Heart Failure Question3 is : "+chronicHeartFailure3);
-			System.out.println("Cardio Vascular Disorder Question1 is : "+cardioVasculardisorder1);
-			System.out.println("Cardio Vascular Disorder Question2 is : "+cardioVasculardisorder2);
-			System.out.println("Cardio Vascular Disorder Question3 is: "+cardioVasculardisorder3);
-			System.out.println("Cardio Vascular Disorder Question4 is : "+cardioVasculardisorder4);
-			System.out.println("Cardio Vascular Disorder Question5 is: "+cardioVasculardisorder5);
-			System.out.println("Cardio Vascular Disorder Question6 is : "+cardioVasculardisorder6);
+			
+			getLoginScenario().saveBean(oleCommonConstants.DIABETES_QUESTION_1, MemberDetailsMap.get("diabetesQuestion1"));
+			getLoginScenario().saveBean(oleCommonConstants.DIABETES_QUESTION_2, MemberDetailsMap.get("diabetesQuestion2"));
+			getLoginScenario().saveBean(oleCommonConstants.CHRONIC_HEART_FAILURE_QUESTION_1, MemberDetailsMap.get("chronicHeartFailure1"));
+			getLoginScenario().saveBean(oleCommonConstants.CHRONIC_HEART_FAILURE_QUESTION_2, MemberDetailsMap.get("chronicHeartFailure2"));
+			getLoginScenario().saveBean(oleCommonConstants.CHRONIC_HEART_FAILURE_QUESTION_3, MemberDetailsMap.get("chronicHeartFailure3"));
+			getLoginScenario().saveBean(oleCommonConstants.CARDIO_VASCULAR_DISORDER_QUESTION_1,MemberDetailsMap.get("cardioVasculardisorder1"));
+			getLoginScenario().saveBean(oleCommonConstants.CARDIO_VASCULAR_DISORDER_QUESTION_2,MemberDetailsMap.get("cardioVasculardisorder2"));
+			getLoginScenario().saveBean(oleCommonConstants.CARDIO_VASCULAR_DISORDER_QUESTION_3,MemberDetailsMap.get("cardioVasculardisorder3"));
+			getLoginScenario().saveBean(oleCommonConstants.CARDIO_VASCULAR_DISORDER_QUESTION_4,MemberDetailsMap.get("cardioVasculardisorder4"));
+			getLoginScenario().saveBean(oleCommonConstants.CARDIO_VASCULAR_DISORDER_QUESTION_5,MemberDetailsMap.get("cardioVasculardisorder5"));
+			getLoginScenario().saveBean(oleCommonConstants.CARDIO_VASCULAR_DISORDER_QUESTION_6,MemberDetailsMap.get("cardioVasculardisorder6"));
+			Assert.assertTrue(true);
 			
 			//------------Added for CSNP plans-------
 	}
-
+	
 
 	@Then("^the user navigates to Medicare Information Page$")
 	public void the_user_navigates_to_Medicare_Information_Page() throws Throwable {
@@ -3191,10 +3190,11 @@ public void the_user_validates_the_OLE_Submission_Details_in_GPS(DataTable arg1)
 				System.out.println("--------------------Storing Data for Proposed Effective Date Started----------------------");
 
 				//Proposed Effective Date
-				String proposedEffectiveDate = (String) getLoginScenario().getBean(oleCommonConstants.PROPOSED_EFF_DATE);
+			/*	String proposedEffectiveDate = (String) getLoginScenario().getBean(oleCommonConstants.PROPOSED_EFF_DATE);
 				proposedEffectiveDate  = OLEGPSValidation.converttogpsDate(proposedEffectiveDate );
 				DetailsMap.put("Proposed Effective date", proposedEffectiveDate);		
-
+			 	*/
+				DetailsMap.put("Proposed Effective date", (String) getLoginScenario().getBean(oleCommonConstants.PROPOSED_EFF_DATE));
 				System.out.println("--------------------Storing Data for Proposed Effective Date Ended----------------------");
 
 				//------------------------------------------------------------------------------------------------------------------------------------------------

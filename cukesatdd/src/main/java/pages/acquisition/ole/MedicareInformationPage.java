@@ -239,6 +239,8 @@ public class MedicareInformationPage extends UhcDriver{
 		
 		@FindBy(xpath="//*[contains(@for,'diabetesQuestionYes')]")
 		private WebElement diabetesQuestions1Yes;
+		@FindBy(xpath="//*[contains(@for,'diabetesQuestionNo')]")
+		private WebElement diabetesQuestions1No;
 		
 		@FindBy(xpath="//*[contains(@for,'oralMedicationQuestionNo')]")
 		private WebElement diabetesQuestions2No;
@@ -288,7 +290,9 @@ public class MedicareInformationPage extends UhcDriver{
 		@FindBy(xpath="//*[contains(@for,'heartorlegsQuestionNo')]")
 		private WebElement CardiovascularDisordersQ6No;
 	
-	
+		@FindBy(xpath="//div[contains(@class,'enrollmentAllowed-error-msg ng-star-inserted')]")
+		private WebElement ErrorMessage_CSNP;
+		
 	public MedicareInformationPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -818,14 +822,43 @@ public boolean validate_notRequired_ESRD_Fields(String planType, String medicaid
 	
 }
 
-public boolean validate_Required_Fields_CSNP( String medicaidNumber, String PlanName) {
-	//System.out.println("plantype : "+plantype+" Medicare Number : "+medicaidNumber);
+public boolean validate_Required_Fields_CSNP( Map<String, String> MemberDetailsMap,String PlanName) {
 	
 			if(PlanName.contains("Chronic") || PlanName.contains("Gold") ||PlanName.contains("Silver")){
-				System.out.println("Medicaid Question is displayed for "+PlanName+" : "+validate(MedicaidQuestion));
+				/*System.out.println("Medicaid Question is displayed for "+PlanName+" : "+validate(MedicaidQuestion));
 				jsClickNew(medicaiddno);
-				System.out.println("Medicaid question : No clicked"+medicaiddno.isSelected());
+				System.out.println("Medicaid question : No clicked"+medicaiddno.isSelected());*/
 				
+				if(validate(diabetesQuestions1No) && validate(diabetesQuestions2No) 
+						&& validate(chronicHeartFailureQuestion1No) && validate(chronicHeartFailureQuestion2No) && validate(chronicHeartFailureQuestion3No) && validate(CardiovascularDisordersQ1No)
+						&& validate(CardiovascularDisordersQ2No) && validate(CardiovascularDisordersQ3No)&& validate(CardiovascularDisordersQ4No)&& validate(CardiovascularDisordersQ5No)&& validate(CardiovascularDisordersQ6No)){
+					
+					jsClickNew(diabetesQuestions1No);
+					jsClickNew(diabetesQuestions2No);
+					jsClickNew(chronicHeartFailureQuestion1No);	
+					jsClickNew(chronicHeartFailureQuestion2No);	
+					jsClickNew(chronicHeartFailureQuestion3No);	
+					jsClickNew(CardiovascularDisordersQ1No);	
+					jsClickNew(CardiovascularDisordersQ2No);	
+					jsClickNew(CardiovascularDisordersQ3No);
+					jsClickNew(CardiovascularDisordersQ4No);	
+					jsClickNew(CardiovascularDisordersQ5No);
+					jsClickNew(CardiovascularDisordersQ6No);
+
+					System.out.println("All the CSNP Preliminary questions are selected as No");
+					
+					if(validate(ErrorMessage_CSNP) && ErrorMessage_CSNP.isDisplayed()){
+						if(!ErrorMessage_CSNP.getText().contains("We're sorry, to enroll in a Chronic Special needs Plan (C-SNP),")){
+							System.out.println(" Error Message is Not  displayed : "+ErrorMessage_CSNP.getText());
+							return false;
+						}
+						System.out.println("Error Message Error : "+ErrorMessage_CSNP.getText());
+
+					}
+					else{
+						System.out.println("Error Message is not displayed");
+
+					}
 					//Diabetes questions
 					Assert.assertTrue(validateNew(diabetesQuestion1), "diabetes questions are present");
 					validateNew(diabetesQuestions1Yes);
@@ -879,8 +912,9 @@ public boolean validate_Required_Fields_CSNP( String medicaidNumber, String Plan
 			//	waitforElement(disclosureBox);
 				return true;*/
 	    }
-	
-			else return false;	
+			}
+		return false;
+			
 	
 	
 }
