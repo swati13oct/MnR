@@ -1,6 +1,4 @@
-/**
- * 
- */
+
 package pages.acquisition.agentRecommendationEngine;
 
 import java.text.DateFormat;
@@ -144,9 +142,12 @@ public class AREPlanRanking extends UhcDriver {
 	private List<WebElement> unsaveplanComparepage;
 
 	@FindBy(css = "div[class*='dupIcon'] img[dtmid*='visitor_profile']")
+	private WebElement heartIcon;
+	
+	@FindBy(css = "#auth-saved-items-button")
 	private WebElement viewSavedItems;
 
-	@FindBy(css = "#dashPlansContainer div[class*='item advantagePlan'] h4")
+	@FindBy(css = "div h3[class*='plan-name']")
 	private List<WebElement> planNamesVisitorPrf;
 
 	@FindBy(css = "div[class*='title-compare'] button[class*='btn']")
@@ -218,7 +219,13 @@ public class AREPlanRanking extends UhcDriver {
 	@FindBy(css = "div#multiSelect label[for='estimated_medical_costs']>input")
 	private WebElement mceCheck;
 	
-
+	// Feedback PopUp
+		@FindBy(css = "iframe[title*=' Survey']")
+		private WebElement popupFrame;
+		
+		@FindBy(css = "button[id*='no']")
+		private WebElement popupNo;
+	
 	public void validateUIElements() {
 		System.out.println("Validate ARE UI Elements : ");
 		String currentPageUrl = driver.getCurrentUrl();
@@ -337,17 +344,12 @@ public class AREPlanRanking extends UhcDriver {
 	public void agentaddDrugsPlanCompare(String drugDetails) {
 		pageloadcomplete();
 		System.out.println("Validate Adding Drugs from Plan Compare page : ");
-		validate(AddDrugsLink);}
-
-/*	public void actionMoveTo(WebElement elem) {
-		Actions action = new Actions(driver);
-		action.moveToElement(elem).perform();
-
+		validate(AddDrugsLink);
 		jsClickNew(AddDrugsLink);
 		DCEPage dceobj = new DCEPage(driver);
 		dceobj.drugsHandlerWithdetails(drugDetails);
 		returnToPlanCompare();
-	}*/
+	}
 
 	public void returnToPlanCompare() {
 		DCEPage dceobj = new DCEPage(driver);
@@ -455,7 +457,7 @@ public class AREPlanRanking extends UhcDriver {
 			comparePlanlink.click();
 		} else {
 			scrollToView(planInPDP);
-			//planInPDP.click();
+			close_Popup();
 			jsClickNew(planInPDP);
 			pageloadcomplete();
 			actualplanName = planNameEnrollPage.getText().trim();
@@ -570,7 +572,9 @@ public class AREPlanRanking extends UhcDriver {
 			Collections.sort(vppPlans);
 			System.out.println(vppPlans);
 			threadsleep(3000);
-			validate(viewSavedItems);
+			validate(heartIcon);
+			heartIcon.click();
+			threadsleep(3000);
 			viewSavedItems.click();
 			changePlanyearVisitorProfile(year);
 			visitorprofile(planNamesVisitorPrf, vppPlans);
@@ -583,7 +587,9 @@ public class AREPlanRanking extends UhcDriver {
 			Collections.sort(vppPlans);
 			System.out.println(vppPlans);
 			threadsleep(3000);
-			validate(viewSavedItems);
+			validate(heartIcon);
+			heartIcon.click();
+			threadsleep(3000);
 			viewSavedItems.click();
 			changePlanyearVisitorProfile(year);
 			visitorprofile(planNamesVisitorPrf, vppPlans);
@@ -608,13 +614,13 @@ public class AREPlanRanking extends UhcDriver {
 	}
 
 	public void visitorprofile(List<WebElement> plansName, List<String> vppPlans) {
-		List<String> vpPlans = new ArrayList<String>();
+		System.out.println("Plan Name in VPP Page: " + vppPlans);
 		String actualplanName = "";
-		String exceptedplanName = "";
 		pageloadcomplete();
 		System.out.println(plansName.size());
 		for (int i = 0; i < plansName.size(); i++) {
 			actualplanName = plansName.get(i).getText().trim();
+			System.out.println("Plan Name in Visitor Profile Page: " + actualplanName);
 			Assert.assertTrue(vppPlans.contains(actualplanName), "--- Plan name are not matches---");
 		}
 	}
@@ -1131,7 +1137,6 @@ public class AREPlanRanking extends UhcDriver {
 //		Actions action = new Actions(driver);
 //		action.moveToElement(elem).perform();
 		jsMouseOver(elem);
-
 		threadsleep(1000);
 	}
 	
@@ -1153,10 +1158,6 @@ public class AREPlanRanking extends UhcDriver {
 			Assert.assertFalse(validate(estimateMedicalCost, 30), "Estimated Annual Medical Cost row is displayed for this MBI ID");
 		}
 	}
-
-
-
-
 	
 	public void optionCheck(String option,boolean visible) {
 		System.out.println("Verify Options..");
@@ -1170,6 +1171,21 @@ public class AREPlanRanking extends UhcDriver {
 			if(option.equalsIgnoreCase("mce"))
 				Assert.assertFalse(validate(mceCheck,10), option+" is visible");	
 		}
+	}
+	
+	public boolean close_Popup() {
+		boolean popup_presents = false;
+		System.out.println("Checking Popup Status...");
+		if(validate(popupNo, 20)) {
+			if(validate(popupFrame, 5))
+				driver.switchTo().frame(popupFrame);
+			threadsleep(1000);
+			popupNo.click();
+			threadsleep(1000);
+			popup_presents = true;
+		}
+		driver.switchTo().defaultContent();
+		return popup_presents;
 	}
 
 }

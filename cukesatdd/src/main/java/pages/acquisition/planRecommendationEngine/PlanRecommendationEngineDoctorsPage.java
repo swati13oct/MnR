@@ -228,6 +228,7 @@ public class PlanRecommendationEngineDoctorsPage extends UhcDriver {
 		String curWindow = driver.getWindowHandle();
 		System.out.println(curWindow);
 //		modalFinddoctors.click();
+		validate(modalFinddoctors);
 		jsClickNew(modalFinddoctors);
 		validateLinksanotherWindow(curWindow, "Doctors", search, count);
 		threadsleep(5000);
@@ -400,7 +401,7 @@ public class PlanRecommendationEngineDoctorsPage extends UhcDriver {
 			}
 		}
 		System.out.println("Doctors Name validation Result " + result);
-		Assert.assertTrue(result,"Providers name mismatch");
+		Assert.assertTrue(result, "Providers name mismatch");
 		return result;
 	}
 
@@ -527,6 +528,25 @@ public class PlanRecommendationEngineDoctorsPage extends UhcDriver {
 		jsClickNew(modalContinuedoctors);
 		System.out.println("Validating " + page + " page Continue button functionality");
 		desktopCommonUtils.nextPageNameValidation(page.toUpperCase());
+	}
+
+	public void edit_doctor(String doctor, String doctorsName, String multiDoctor) {
+		doctorspageOptions(doctor);
+//		continueBtn.click();
+		jsClickNew(continueBtn);					//E2E : .click does not work in Safari, changed to jsClickNew
+		if (doctor.equalsIgnoreCase("Lookup")) {
+			if (multiDoctor.equalsIgnoreCase("YES"))
+				doctorModellookup(doctorsName, 3);
+			else
+				doctorModellookup(doctorsName, 1);
+		}
+	}
+	
+	public void addProviderEdit(String search) {
+		String curWindow = driver.getWindowHandle();
+		System.out.println(curWindow);
+		validateLinksanotherWindow(curWindow, "Doctors", search, 1);
+		threadsleep(5000);
 	}
 
 }

@@ -1,3 +1,4 @@
+
 package atdd.runners.acquisition.PRE;
 
 import org.junit.runner.RunWith;
@@ -25,13 +26,12 @@ import cucumber.api.CucumberOptions;
 		glue = { "atdd.framework", "acceptancetests.acquisition.planRecommendationEngine" }, 
 		features = { "src/main/resources/feature/acquisition/PlanRecommendationEngine" }, 
 		plugin = {"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionPlanRecommendationEngineBlayer.json" }, 
-
-		tags = {"~@PRERegression","~@PREAEPRegression"})
-
+		tags = {"~@PRERegression","~@PREAEPRegression","~@PlanRecommendationEngineVPPDCE","~@PlanRecommendationEngineUAT"})
 public class RunMRATDDAcquisitionPlanRecommendationEngineBlayer {
 
 }
 
 
 //note: these tags are for  
+
 	//	@Community_Meeting_AARP @Community_Meeting_UHC

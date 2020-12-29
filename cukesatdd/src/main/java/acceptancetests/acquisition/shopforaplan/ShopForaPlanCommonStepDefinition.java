@@ -171,5 +171,12 @@ public class ShopForaPlanCommonStepDefinition {
 		  shopPage.clickOnSNPShopButton();
 		  
 	  }
+	
+	@And("^click on provider search link on shop pages$")
+	public void click_on_provider_search_link_on_shop_pages() throws Throwable {
+		ShopForPlanNavigationPage shopaplan = (ShopForPlanNavigationPage) getLoginScenario()
+				.getBean(PageConstants.SHOP_FOR_A_PLAN_AARPLAYER);
+		shopaplan.providersearch();
+	}		
 }
 

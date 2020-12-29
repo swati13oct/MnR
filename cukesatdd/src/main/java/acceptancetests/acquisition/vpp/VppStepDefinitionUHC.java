@@ -120,7 +120,7 @@ public class VppStepDefinitionUHC {
 		if (("NO").equalsIgnoreCase(isMultiCounty.trim())) {
 			plansummaryPage = aquisitionhomepage.searchPlansWithOutCounty(zipcode);
 		} else {
-			plansummaryPage = aquisitionhomepage.searchPlans(zipcode, county);
+			plansummaryPage = aquisitionhomepage.searchPlans1(zipcode, county);
 		}
 
 		if (plansummaryPage != null) {
@@ -188,7 +188,7 @@ public class VppStepDefinitionUHC {
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		// VPPPlanSummaryPage plansummaryPage =
 		// aquisitionhomepage.searchPlans(zipcode, county);
-		VPPPlanSummaryPage plansummaryPage = aquisitionhomepage.searchPlans(zipcode, county);
+		VPPPlanSummaryPage plansummaryPage = aquisitionhomepage.searchPlans1(zipcode, county);
 		if (plansummaryPage != null) {
 			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
 			if (plansummaryPage.validateVPPPlanSummaryPage())
@@ -1262,7 +1262,7 @@ public class VppStepDefinitionUHC {
 		if (("NO").equalsIgnoreCase(isMultiCounty.trim())) {
 			plansummaryPage = aquisitionhomepage.searchPlansWithOutCounty(zipcode);
 		} else {
-			plansummaryPage = aquisitionhomepage.searchPlans(zipcode, county);
+			plansummaryPage = aquisitionhomepage.searchPlans1(zipcode, county);
 		}
 
 		if (plansummaryPage != null) {
@@ -1456,7 +1456,7 @@ public class VppStepDefinitionUHC {
 		if (("NO").equalsIgnoreCase(isMultiCounty.trim())) {
 			plansummaryPage = aquisitionhomepage.searchPlansWithOutCounty(zipcode);
 		} else {
-			plansummaryPage = aquisitionhomepage.searchPlans(zipcode, county);
+			plansummaryPage = aquisitionhomepage.searchPlans1(zipcode, county);
 		}
 
 		if (plansummaryPage != null) {
@@ -2967,7 +2967,8 @@ public class VppStepDefinitionUHC {
 	}
 
 	@And("^user selects Delete Provider on the Authenticated profile on UHC site$")
-	public void user_selects_DeleteProviderontheAuthenticatedprofile_on_AARP() throws Exception {
+	public void user_selects_DeleteProviderontheAuthenticatedprofile_on_AARP()
+			throws Exception {
 
 		VisitorProfileTestHarnessPage vpTestHarnessPage = (VisitorProfileTestHarnessPage) loginScenario
 				.getBean(PageConstants.VP_TESTHARNESS_PAGE);
@@ -2980,420 +2981,6 @@ public class VppStepDefinitionUHC {
 		}
 	}
 
-	@Then("^the user enter the searchValue in the search text box and hits enter on UHC Site$")
-	public void the_user_enter_the_searchValue_in_the_search_text_box_and_hits_enter(DataTable inputvalue)
-			throws Throwable {
-		/*
-		 * VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
-		 * .getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		 */
-
-		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
-				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		List<DataTableRow> AttributesRow = inputvalue.getGherkinRows();
-		Map<String, String> urlAttributesMap = new HashMap<String, String>();
-
-		for (int i = 0; i < AttributesRow.size(); i++) {
-
-			urlAttributesMap.put(AttributesRow.get(i).getCells().get(0), AttributesRow.get(i).getCells().get(1));
-		}
-		String InputValue = urlAttributesMap.get("search Value");
-		System.out.println("Search value" + InputValue);
-		Thread.sleep(3000);
-
-		aquisitionhomepage.enterSearchtextvalue(InputValue);
-
-	}
-
-	/*
-	 * @Then("^the user should see fifteen results before pagination on UHC Site$")
-	 * public void the_user_should_see_fifteen_results_before_pagination() throws
-	 * Throwable { AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage)
-	 * getLoginScenario() .getBean(PageConstants.ACQUISITION_HOME_PAGE);
-	 * aquisitionhomepage.validateFifteenResults();
-	 * 
-	 * }
-	 * 
-	 * 
-	 * @Then("^the user validates count of results aganist the total shown at top of the page on UHC Site$"
-	 * ) public void
-	 * the_user_validates_count_of_results_aganist_the_total_shown_at_top_of_the_page
-	 * () throws Throwable { AcquisitionHomePage aquisitionhomepage =
-	 * (AcquisitionHomePage) getLoginScenario()
-	 * .getBean(PageConstants.ACQUISITION_HOME_PAGE);
-	 * aquisitionhomepage.validateCountResults(); }
-	 * 
-	 * 
-	 * @Then("^the user validates pagination and results displayed on UHC Site$")
-	 * public void the_user_validates_pagination_and_results_displayed() throws
-	 * Throwable { AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage)
-	 * getLoginScenario() .getBean(PageConstants.ACQUISITION_HOME_PAGE);
-	 * aquisitionhomepage.validatePaginationofSearchResults(); }
-	 * 
-	 * 
-	 * @Then("^the user validates the secondary search by providing newsearchvalue in the text box on UHC Site$"
-	 * ) public void
-	 * the_user_validates_the_secondary_search_by_providing_newsearchvalue_in_the_text_box
-	 * (DataTable inputvalue) throws Throwable { AcquisitionHomePage
-	 * aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
-	 * .getBean(PageConstants.ACQUISITION_HOME_PAGE); List<DataTableRow>
-	 * AttributesRow = inputvalue.getGherkinRows(); Map<String, String>
-	 * urlAttributesMap = new HashMap<String, String>();
-	 * 
-	 * for (int i = 0; i < AttributesRow.size(); i++) {
-	 * 
-	 * urlAttributesMap.put(AttributesRow.get(i).getCells().get(0),
-	 * AttributesRow.get(i).getCells().get(1)); } String InputValue =
-	 * urlAttributesMap.get("NewSearchValue"); System.out.println("NewSearchValue" +
-	 * InputValue); Thread.sleep(3000);
-	 * 
-	 * aquisitionhomepage.enterSecondarySearchValue(InputValue);
-	 * 
-	 * }
-	 * 
-	 * @Then("^the user clear secondary search box and insert new search value on UHC Site$"
-	 * ) public void
-	 * the_user_clea_seacondary_search_box_and_insert_new_search_value(DataTable
-	 * inputvalue) throws Exception { AcquisitionHomePage aquisitionhomepage =
-	 * (AcquisitionHomePage) getLoginScenario()
-	 * .getBean(PageConstants.ACQUISITION_HOME_PAGE);
-	 * 
-	 * List<DataTableRow> AttributesRow = inputvalue.getGherkinRows(); Map<String,
-	 * String> urlAttributesMap = new HashMap<String, String>();
-	 * 
-	 * for (int i = 0; i < AttributesRow.size(); i++) {
-	 * 
-	 * urlAttributesMap.put(AttributesRow.get(i).getCells().get(0),
-	 * AttributesRow.get(i).getCells().get(1)); } String InputValue =
-	 * urlAttributesMap.get("New Search Value");
-	 * System.out.println("New Search Value" + InputValue); Thread.sleep(3000);
-	 * aquisitionhomepage.insertValueIntoSecondSearchBox(InputValue);
-	 * 
-	 * }
-	 * 
-	 * @Then("^the user validates Error message on UHC site$") public void
-	 * the_user_validates_pagination_and_results_displayed(DataTable inputvalue)
-	 * throws Throwable {
-	 * 
-	 * AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage)
-	 * getLoginScenario() .getBean(PageConstants.ACQUISITION_HOME_PAGE);
-	 * 
-	 * 
-	 * List<DataTableRow> AttributesRow = inputvalue.getGherkinRows(); Map<String,
-	 * String> urlAttributesMap = new HashMap<String, String>();
-	 * 
-	 * for (int i = 0; i < AttributesRow.size(); i++) {
-	 * 
-	 * urlAttributesMap.put(AttributesRow.get(i).getCells().get(0),
-	 * AttributesRow.get(i).getCells().get(1)); } String error =
-	 * urlAttributesMap.get("Error"); String
-	 * newSearchValue=urlAttributesMap.get("NewSearchValue");
-	 * System.out.println("Error : " + error); Thread.sleep(3000);
-	 * aquisitionhomepage.validateErrorMsg(error,newSearchValue); }
-	 * 
-	 * @Then("^user saves all plans as favorite on UHC site$") public void
-	 * user_saves_all_plans_as_favorite_on_AARP_site(DataTable givenAttributes) {
-	 * VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
-	 * .getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-	 * 
-	 * Map<String, String> memberAttributesMap = prepareTestInput(givenAttributes);
-	 * String savePlanNames = memberAttributesMap.get("Test Plans"); String planType
-	 * = memberAttributesMap.get("Plan Type");
-	 * 
-	 * switch (planType) { case "MAPD": plansummaryPage.viewPlanSummary(planType);
-	 * plansummaryPage.saveAllPlans(savePlanNames, planType); break; case "MA":
-	 * plansummaryPage.viewPlanSummary(planType);
-	 * plansummaryPage.saveAllPlans(savePlanNames, planType); break; case "SNP":
-	 * plansummaryPage.viewPlanSummary(planType);
-	 * plansummaryPage.saveAllPlans(savePlanNames, planType); break; case "PDP":
-	 * plansummaryPage.viewPlanSummary(planType);
-	 * plansummaryPage.saveAllPlans(savePlanNames, planType); break;
-	 * 
-	 * default: break; } }
-	 * 
-	 * @Then("^Navigate to Visitor Profile page on UHC site$") public void
-	 * navigate_to_Visitor_Profile_page_on_AARP_site() { VPPPlanSummaryPage
-	 * plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
-	 * .getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE); VisitorProfilePage
-	 * visitorProfilePage = plansummaryPage.navigateToVisitorProfilePage();
-	 * getLoginScenario().saveBean(PageConstants.VISITOR_PROFILE_PAGE,
-	 * visitorProfilePage); }
-	 * 
-	 * //New plan compare related
-	 * 
-	 * @And("^I click on Get Started on and Add PrimaryCare PCP from find care page in UHC$"
-	 * ) public void
-	 * I_click_on_Get_Started_and_Add_PrimaryCarePCP_find_care_page_in_UHC() throws
-	 * Exception { FindCarePageMobile findCarePage = (FindCarePageMobile)
-	 * getLoginScenario().getBean(PageConstants.FIND_CARE_PAGE); try {
-	 * Thread.sleep(3000); } catch (InterruptedException e) { // TODO Auto-generated
-	 * catch block e.printStackTrace(); } ComparePlansPageBlayerMobile
-	 * planComparePage = findCarePage.providerfromPrimaryCare(); if (planComparePage
-	 * != null) { getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE,
-	 * planComparePage); // comparePlansPage.backToVPPPage(); } else
-	 * Assert.fail("Error in loading the compare plans page"); }
-	 * 
-	 * @Then("^remove one plan from new plan compare page for UHC$") public void
-	 * remove_one_plan_from_new_plan_compare_page_for_UHC() throws Throwable {
-	 * ComparePlansPageBlayerMobile planComparePage = (ComparePlansPageBlayerMobile)
-	 * getLoginScenario() .getBean(PageConstants.PLAN_COMPARE_PAGE);
-	 * planComparePage.clickOnNewRemoveLink(); }
-	 * 
-	 * @Then("^Click on Add Icon on new Plan Compare and verify it navigates to plan summary page for UHC$"
-	 * ) public void
-	 * click_on_Add_Icon_newPlanCompare_and_verify_it_navigates_to_plan_summary_page_for_UHC
-	 * () throws Throwable { ComparePlansPageBlayerMobile planComparePage =
-	 * (ComparePlansPageBlayerMobile) getLoginScenario()
-	 * .getBean(PageConstants.PLAN_COMPARE_PAGE);
-	 * planComparePage.clickOnNewAddIcon(); }
-	 * 
-	 * @Then("^Verify newly added plan displayed on new plan compare page for UHC$")
-	 * public void
-	 * verify_newly_added_plan_displayed_on_new_plan_compare_page_for_UHC() throws
-	 * Throwable { ComparePlansPageBlayerMobile planComparePage =
-	 * (ComparePlansPageBlayerMobile) getLoginScenario()
-	 * .getBean(PageConstants.PLAN_COMPARE_PAGE);
-	 * planComparePage.validatenewlyAddPlanonNewPlanComapre(); }
-	 * 
-	 * @Then("^verify Your doctors is loaded with doctor summary on Plan Compare page UHC$"
-	 * ) public void verify_doctors_covered_uhc() { ComparePlansPageBlayerMobile
-	 * planComparePage = (ComparePlansPageBlayerMobile) getLoginScenario()
-	 * .getBean(PageConstants.PLAN_COMPARE_PAGE); planComparePage.validateDoctors();
-	 * }
-	 * 
-	 * @Then("^verify Your Hospital is loaded with doctor summary on Plan Compare page UHC$"
-	 * ) public void verify_Hospital_covered_uhc() { ComparePlansPageBlayerMobile
-	 * planComparePage = (ComparePlansPageBlayerMobile) getLoginScenario()
-	 * .getBean(PageConstants.PLAN_COMPARE_PAGE);
-	 * planComparePage.validateEditHospitals(); }
-	 * 
-	 * @Then("^verify Add doctors is loaded with doctor summary on Plan Compare page UHC$"
-	 * ) public void verify_Add_doctors_covered_uhc() { ComparePlansPageBlayerMobile
-	 * planComparePage = (ComparePlansPageBlayerMobile) getLoginScenario()
-	 * .getBean(PageConstants.PLAN_COMPARE_PAGE);
-	 * planComparePage.validateAddDoctors(); }
-	 * 
-	 * @Then("^verify Add Hospitals is loaded without summary on Plan Compare page UHC$"
-	 * ) public void verify_Add_Hospitals_covered_uhc() {
-	 * ComparePlansPageBlayerMobile planComparePage = (ComparePlansPageBlayerMobile)
-	 * getLoginScenario() .getBean(PageConstants.PLAN_COMPARE_PAGE);
-	 * planComparePage.validateAddHospitals(); }
-	 * 
-	 * @And("^click on Add your doctors link and Navigate to Rally page for UHC$")
-	 * public void clickOnAddyourdocits_UHC() throws Exception {
-	 * ComparePlansPageBlayerMobile planComparePage = (ComparePlansPageBlayerMobile)
-	 * getLoginScenario() .getBean(PageConstants.PLAN_COMPARE_PAGE);
-	 * FindCarePageMobile findCarePage = planComparePage.clickonAddYourDoctors(); if
-	 * (findCarePage != null) {
-	 * getLoginScenario().saveBean(PageConstants.FIND_CARE_PAGE, findCarePage); }
-	 * else Assert.fail("Error in loading the compare plans page"); }
-	 * 
-	 * @And("^click on Add your Hospitals link and Navigate to Rally page for UHC$")
-	 * public void clickOnAddyourHospitals_UHC() throws Exception {
-	 * ComparePlansPageBlayerMobile planComparePage = (ComparePlansPageBlayerMobile)
-	 * getLoginScenario() .getBean(PageConstants.PLAN_COMPARE_PAGE);
-	 * FindCarePageMobile findCarePage = planComparePage.clickonAddYourHospitals();
-	 * if (findCarePage != null) {
-	 * getLoginScenario().saveBean(PageConstants.FIND_CARE_PAGE, findCarePage); }
-	 * else Assert.fail("Error in loading the compare plans page"); }
-	 * 
-	 * @And("^click on Edit your doctors link and Navigate to Rally page for UHC$")
-	 * public void clickONEdityourdocits_UHC() throws Exception {
-	 * ComparePlansPageBlayerMobile planComparePage = (ComparePlansPageBlayerMobile)
-	 * getLoginScenario() .getBean(PageConstants.PLAN_COMPARE_PAGE);
-	 * FindCarePageMobile findCarePage = planComparePage.clickonEditYourDoctors();
-	 * if (findCarePage != null) {
-	 * getLoginScenario().saveBean(PageConstants.FIND_CARE_PAGE, findCarePage); }
-	 * else Assert.fail("Error in loading the compare plans page"); }
-	 * 
-	 * @And("^click on Edit your Hospitals link and Navigate to Rally page for UHC$"
-	 * ) public void clickONEdityourHospitals_UHC() throws Exception {
-	 * ComparePlansPageBlayerMobile planComparePage = (ComparePlansPageBlayerMobile)
-	 * getLoginScenario() .getBean(PageConstants.PLAN_COMPARE_PAGE);
-	 * FindCarePageMobile findCarePage = planComparePage.clickonEditYourHosptials();
-	 * if (findCarePage != null) {
-	 * getLoginScenario().saveBean(PageConstants.FIND_CARE_PAGE, findCarePage); }
-	 * else Assert.fail("Error in loading the compare plans page"); }
-	 * 
-	 * @And("^user selects a provider from medical group and retuns to plan compare page in UHC$"
-	 * ) public void selectsproviderfrommedicalGroupforUHC() throws Exception {
-	 * FindCarePageMobile findCarePage = (FindCarePageMobile)
-	 * getLoginScenario().getBean(PageConstants.FIND_CARE_PAGE); try {
-	 * Thread.sleep(3000); } catch (InterruptedException e) { // TODO Auto-generated
-	 * catch block e.printStackTrace(); } ComparePlansPageBlayerMobile
-	 * planComparePage = findCarePage.providerfromMedicalGroup(); if
-	 * (planComparePage != null) {
-	 * getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE,
-	 * planComparePage); // comparePlansPage.backToVPPPage(); } else
-	 * Assert.fail("Error in loading the compare plans page"); }
-	 * 
-	 * @And("^user selects a Hospitals from Clinical and retuns to plan compare page in UHC$"
-	 * ) public void selectsproviderfromPrimaryCareClinicforUHC() throws Exception {
-	 * FindCarePageMobile findCarePage = (FindCarePageMobile)
-	 * getLoginScenario().getBean(PageConstants.FIND_CARE_PAGE); try {
-	 * Thread.sleep(3000); } catch (InterruptedException e) { // TODO Auto-generated
-	 * catch block e.printStackTrace(); } ComparePlansPageBlayerMobile
-	 * planComparePage = findCarePage.providerfromPrimaryCareClinicButton(); if
-	 * (planComparePage != null) {
-	 * getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE,
-	 * planComparePage); // comparePlansPage.backToVPPPage(); } else
-	 * Assert.fail("Error in loading the compare plans page"); }
-	 * 
-	 * @And("^I click on Get Started on and Add Places from Hospitals find care page in UHC$"
-	 * ) public void
-	 * I_click_on_Get_Started_and_Add_PlacesfromHospitals_find_care_page_in_UHC()
-	 * throws Exception { FindCarePageMobile findCarePage = (FindCarePageMobile)
-	 * getLoginScenario().getBean(PageConstants.FIND_CARE_PAGE); try {
-	 * Thread.sleep(3000); } catch (InterruptedException e) { // TODO Auto-generated
-	 * catch block e.printStackTrace(); } ComparePlansPageBlayerMobile
-	 * planComparePage = findCarePage.placesfromHospital(); if (planComparePage !=
-	 * null) { getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE,
-	 * planComparePage); // comparePlansPage.backToVPPPage(); } else
-	 * Assert.fail("Error in loading the compare plans page"); }
-	 * 
-	 * @Then("^verify Edit your Drugs is loaded with Drugs summary on Plan Compare page UHC$"
-	 * ) public void verify_Edit_your_Drugswithsummary_covered_uhc() {
-	 * ComparePlansPageBlayerMobile planComparePage = (ComparePlansPageBlayerMobile)
-	 * getLoginScenario() .getBean(PageConstants.PLAN_COMPARE_PAGE);
-	 * planComparePage.validateEditDrugs(); }
-	 * 
-	 * @And("^click on Edit Drug link on plan compare for UHC site$") public void
-	 * clickonEditDruglinkonplancompareforUHCsite() { ComparePlansPageBlayerMobile
-	 * planComparePage = (ComparePlansPageBlayerMobile) getLoginScenario()
-	 * .getBean(PageConstants.PLAN_COMPARE_PAGE); try { Thread.sleep(3000); } catch
-	 * (InterruptedException e) { // TODO Auto-generated catch block
-	 * e.printStackTrace(); } DrugCostEstimatorPageMobile drugCostEstimatorPage =
-	 * planComparePage.clickonEdityourDrugs(); if (drugCostEstimatorPage != null) {
-	 * getLoginScenario().saveBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE,
-	 * drugCostEstimatorPage); // comparePlansPage.backToVPPPage(); } else
-	 * Assert.fail("Error in loading the compare plans page"); }
-	 * 
-	 * @Then("^Click on view more plans for right navigaton on UHC$") public void
-	 * ClickonviewmoreplansforrightnavigatononUHC() throws Throwable {
-	 * ComparePlansPageBlayerMobile planComparePage = (ComparePlansPageBlayerMobile)
-	 * getLoginScenario() .getBean(PageConstants.PLAN_COMPARE_PAGE);
-	 * planComparePage.validateViewMoreplansComparePage(); }
-	 * 
-	 * @Then("^Click on view less plans for left navigaton on UHC$") public void
-	 * ClickonviewlessplansforrightnavigatononUHC() throws Throwable {
-	 * ComparePlansPageBlayerMobile planComparePage = (ComparePlansPageBlayerMobile)
-	 * getLoginScenario() .getBean(PageConstants.PLAN_COMPARE_PAGE);
-	 * planComparePage.validateViewlessplansComparePage(); }
-	 * 
-	 * @And("^the user signs in with optum Id in medsup flow for uhc$") public void
-	 * the_user_signs_in_with_optum_Id(DataTable credentials) { List<DataTableRow>
-	 * plannameAttributesRow = credentials.getGherkinRows(); Map<String, String>
-	 * plannameAttributesMap = new HashMap<String, String>(); for (int i = 0; i <
-	 * plannameAttributesRow.size(); i++) {
-	 * 
-	 * plannameAttributesMap.put(plannameAttributesRow.get(i).getCells().get(0),
-	 * plannameAttributesRow.get(i).getCells().get(1)); } String username =
-	 * plannameAttributesMap.get("User Name"); String password =
-	 * plannameAttributesMap.get("Password");
-	 * 
-	 * VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage)
-	 * getLoginScenario().getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-	 * plansummaryPage.signInOptumId(username, password); }
-	 * 
-	 * @Then("^the user validate retrieve application URL in UHC Site$") public void
-	 * the_user_retrieve_application_URL_in_AARPSite(DataTable arg1) throws
-	 * InterruptedException { Map<String, String>
-	 * inputAttributesMap=parseInputArguments(arg1); String AARPURL =
-	 * inputAttributesMap.get("AARP URL"); String
-	 * AARPURLSTG=inputAttributesMap.get("AARP URL STG"); VPPPlanSummaryPage
-	 * plansummaryPage = (VPPPlanSummaryPage)
-	 * getLoginScenario().getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-	 * if(getLoginScenario().environment.equals("stage")){
-	 * plansummaryPage.RetrieveURL(AARPURLSTG); }else{
-	 * plansummaryPage.RetrieveURL(AARPURL); }
-	 * 
-	 * }
-	 */
-	@Then("^the user enter the searchValue in the search text box and hits enter on UHC site$")
-	public void the_user_enter_the_searchValue_in_the_search_text_box_and_hits_enter_on_UHC_site(DataTable inputvalue)
-			throws Throwable {
-		/*
-		 * VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
-		 * .getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		 */
-
-		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
-				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		List<DataTableRow> AttributesRow = inputvalue.getGherkinRows();
-		Map<String, String> urlAttributesMap = new HashMap<String, String>();
-
-		for (int i = 0; i < AttributesRow.size(); i++) {
-
-			urlAttributesMap.put(AttributesRow.get(i).getCells().get(0), AttributesRow.get(i).getCells().get(1));
-		}
-		String InputValue = urlAttributesMap.get("search Value");
-		System.out.println("Search value" + InputValue);
-		Thread.sleep(3000);
-
-		aquisitionhomepage.enterSearchtextvalue(InputValue);
-
-	}
-
-	@Then("^the user should see fifteen results before pagination on UHC Site$")
-	public void the_user_should_see_fifteen_results_before_pagination() throws Throwable {
-		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
-				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		aquisitionhomepage.validateFifteenResults();
-
-	}
-
-	@Then("^the user validates count of results aganist the total shown at top of the page on UHC Site$")
-	public void the_user_validates_count_of_results_aganist_the_total_shown_at_top_of_the_page() throws Throwable {
-		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
-				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		aquisitionhomepage.validateCountResults();
-	}
-
-	@Then("^the user validates pagination and results displayed on UHC Site$")
-	public void the_user_validates_pagination_and_results_displayed() throws Throwable {
-		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
-				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		aquisitionhomepage.validatePaginationofSearchResults();
-	}
-
-	@Then("^the user validates the secondary search by providing newsearchvalue in the text box on UHC Site$")
-	public void the_user_validates_the_secondary_search_by_providing_newsearchvalue_in_the_text_box(
-			DataTable inputvalue) throws Throwable {
-		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
-				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		List<DataTableRow> AttributesRow = inputvalue.getGherkinRows();
-		Map<String, String> urlAttributesMap = new HashMap<String, String>();
-
-		for (int i = 0; i < AttributesRow.size(); i++) {
-
-			urlAttributesMap.put(AttributesRow.get(i).getCells().get(0), AttributesRow.get(i).getCells().get(1));
-		}
-		String InputValue = urlAttributesMap.get("NewSearchValue");
-		System.out.println("NewSearchValue" + InputValue);
-		Thread.sleep(3000);
-
-		aquisitionhomepage.enterSecondarySearchValue(InputValue);
-
-	}
-
-	@Then("^the user clear secondary search box and insert new search value on UHC Site$")
-	public void the_user_clea_seacondary_search_box_and_insert_new_search_value(DataTable inputvalue) throws Exception {
-		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
-				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-
-		List<DataTableRow> AttributesRow = inputvalue.getGherkinRows();
-		Map<String, String> urlAttributesMap = new HashMap<String, String>();
-
-		for (int i = 0; i < AttributesRow.size(); i++) {
-
-			urlAttributesMap.put(AttributesRow.get(i).getCells().get(0), AttributesRow.get(i).getCells().get(1));
-		}
-		String InputValue = urlAttributesMap.get("New Search Value");
-		System.out.println("New Search Value" + InputValue);
-		Thread.sleep(3000);
-		aquisitionhomepage.insertValueIntoSecondSearchBox(InputValue);
-
-	}
 
 	@Then("^the user validates Error message on UHC site$")
 	public void the_user_validates_pagination_and_results_displayed(DataTable inputvalue) throws Throwable {

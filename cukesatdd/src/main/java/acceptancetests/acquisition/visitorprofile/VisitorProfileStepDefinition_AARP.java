@@ -5,13 +5,16 @@ import java.util.List;
 import java.util.Map;
 
 import org.junit.Assert;
+import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstants;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
 import gherkin.formatter.model.DataTableRow;
 import pages.acquisition.ulayer.AcquisitionHomePage;
 import pages.acquisition.ulayer.ComparePlansPage;
@@ -47,6 +50,7 @@ public class VisitorProfileStepDefinition_AARP {
 		String state = givenAttributesMap.get("State");
 		AcquisitionHomePage acqHomePage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		CommonConstants.SELECTED_STATE  = state; 
 
 		acqHomePage.selectState(state);
 	}
@@ -75,10 +79,14 @@ public class VisitorProfileStepDefinition_AARP {
 	@And("^the user clicks on the add plans button in the profile in AARP site$")
 	public void the_user_clicks_on_the_add_plans_button_in_the_profile_in_AARP_site() throws Exception {
 
+
+
+
 		VisitorProfilePage visitorProfilePage = (VisitorProfilePage) getLoginScenario()
 				.getBean(PageConstants.VISITOR_PROFILE_PAGE);
 
-		AcquisitionHomePage acqPage = visitorProfilePage.addPlan();
+		//AcquisitionHomePage acqPage = visitorProfilePage.addPlan();
+		AcquisitionHomePage acqPage = visitorProfilePage.findPlans();
 
 		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, acqPage);
 	}
@@ -125,6 +133,9 @@ public class VisitorProfileStepDefinition_AARP {
 					givenAttributesRow.get(i).getCells().get(1));
 		}
 		String savePlanNames = givenAttributesMap.get("Test Plans");
+
+		System.out.println("Plan names"+savePlanNames);
+
 		VisitorProfilePage visitorProfile = (VisitorProfilePage) getLoginScenario()
 				.getBean(PageConstants.VISITOR_PROFILE_PAGE);
 		visitorProfile.validateAddedPlans(savePlanNames);
@@ -244,8 +255,45 @@ public class VisitorProfileStepDefinition_AARP {
 
 		VisitorProfilePage visitorProfile = (VisitorProfilePage) getLoginScenario()
 				.getBean(PageConstants.VISITOR_PROFILE_PAGE);
+
+		System.out.println("credentials"+username+ password);
+
 		visitorProfile.signIn(username, password);
 	}
+
+
+	@Then("^user clicks on back to plan on VP authenticated AARP site$")
+
+	public void user_clicks_on_back_to_plan_on_VP_authenticated_AARP_site() {
+		VisitorProfilePage visitorProfile = (VisitorProfilePage) getLoginScenario()
+				.getBean(PageConstants.VISITOR_PROFILE_PAGE);
+		visitorProfile.backtoPlan();
+	}
+
+	@Then("^user clears the existing drugs$")
+
+	public void user_clears_the_existing_drugs() {
+		VisitorProfilePage visitorProfile = (VisitorProfilePage) getLoginScenario()
+				.getBean(PageConstants.VISITOR_PROFILE_PAGE);
+		visitorProfile.clearDrugs();
+	}
+
+	@Then("^user clears the provider$")
+
+	public void user_clears_the_provider() {
+		VisitorProfilePage visitorProfile = (VisitorProfilePage) getLoginScenario()
+				.getBean(PageConstants.VISITOR_PROFILE_PAGE);
+		visitorProfile.clearProvider();
+	}
+
+	@Then("^user removed existing saved plans$")
+
+	public void user_removed_existing_saved_plans() {
+		VisitorProfilePage visitorProfile = (VisitorProfilePage) getLoginScenario()
+				.getBean(PageConstants.VISITOR_PROFILE_PAGE);
+		visitorProfile.deletePlans();
+	}
+
 
 	@And("^enroll In Plan should not be clickable on Visitor Profile page in Agent mode on aarp$")
 	public void next_button_should_not_be_clickable_on_OLE_welcome_page_in_Agent_mode() {
@@ -339,4 +387,28 @@ public class VisitorProfileStepDefinition_AARP {
 
 		getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, planSummary);
 	}
+
+
+	@And("^user clicks on home on VP authenticated AARP site$")
+	public void user_clicks_on_home_on_VP_authenticated_AARP_site() {
+		VisitorProfilePage visitorProfilePage = (VisitorProfilePage) getLoginScenario()
+				.getBean(PageConstants.VISITOR_PROFILE_PAGE);
+		AcquisitionHomePage acquisitionHomePage = visitorProfilePage.clickHomeTab();
+		getLoginScenario().saveBean(PageConstants.ACCOUNT_HOME_PAGE, acquisitionHomePage);
+	}
+
+	@Then("^the user clicks on the add drugs button from plan card to navigate to DCE Redesign$")
+	public void the_user_clicks_on_the_add_drugs_button_from_plan_card_to_navigate_to_DCE_Redesign() {
+		VisitorProfilePage visitorProfile = (VisitorProfilePage) getLoginScenario()
+				.getBean(PageConstants.VISITOR_PROFILE_PAGE);
+		visitorProfile.clickAddDrugsPlancard();
+	}
+
+	@Then("^user should see back to drug cost estimator on visitor profile page$")
+	public void user_should_see_back_to_drug_cost_estimator_on_visitor_profile_page() {
+		VisitorProfilePage visitorProfile = (VisitorProfilePage) getLoginScenario()
+				.getBean(PageConstants.VISITOR_PROFILE_PAGE);
+		visitorProfile.validateBackToDceLink();
+	}
+
 }

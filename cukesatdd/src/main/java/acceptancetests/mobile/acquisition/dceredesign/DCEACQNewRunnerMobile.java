@@ -349,20 +349,20 @@ public class DCEACQNewRunnerMobile {
 				.getBean(PageConstants.DCE_Redesign_DrugDetails);
 		String druglist = (String) getLoginScenario().getBean(DCERedesignCommonConstants.DRUGLIST);
 		drugDetailsPage.ValidatesDrugsList(druglist);
-
+		getLoginScenario().saveBean(DCERedesignCommonConstants.DRUGLIST, drugDetailsPage);
 	}
-	
-	
+
 	@Then("^the user validates planName on LearnMore page matches plan Name in VPP$")
 	public void the_user_validates_planName_on_LearnMore_page_matches_plan_Name_in_VPP() throws Throwable {
-		DrugDetailsPageMobile drugDetailsPage = (DrugDetailsPageMobile) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugDetails);
-		
+		DrugDetailsPageMobile drugDetailsPage = (DrugDetailsPageMobile) getLoginScenario()
+				.getBean(PageConstants.DCE_Redesign_DrugDetails);
+
 		String PlanName = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_NAME);
 		drugDetailsPage.validatePlanNameLearnMore(PlanName);
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetailsPage);
 	}
 
-	// LearnMore changes Start
+//	LearnMore changes Start
 	@Then("^the user clicks PrescriptionBenifit Tab on Plan Details Page$")
 	public void the_user_clicks_PrescriptionBenifit_Tab_on_Plan_Details_Page() throws Throwable {
 		PlanDetailsPageMobile plandetailspage = (PlanDetailsPageMobile) getLoginScenario()
@@ -398,9 +398,10 @@ public class DCEACQNewRunnerMobile {
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetailsPage);
 
 	}
-	
+
 	@Then("^the user validates distance dropdown and Zipcode change on DCE Details page - Change Pharmacy Page$")
-	public void the_user_validates_distance_dropdown_and_Zipcode_change_on_Details_page_Change_Pharmacy_Page(DataTable arg1) throws Throwable {
+	public void the_user_validates_distance_dropdown_and_Zipcode_change_on_Details_page_Change_Pharmacy_Page(
+			DataTable arg1) throws Throwable {
 		List<DataTableRow> memberAttributesRow = arg1.getGherkinRows();
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
@@ -408,30 +409,33 @@ public class DCEACQNewRunnerMobile {
 					memberAttributesRow.get(i).getCells().get(1));
 		}
 		String PharmacyZipCode = memberAttributesMap.get("PharmacyZipCode");
-		DrugDetailsPageMobile drugDetailsPage = (DrugDetailsPageMobile) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugDetails);
+		DrugDetailsPageMobile drugDetailsPage = (DrugDetailsPageMobile) getLoginScenario()
+				.getBean(PageConstants.DCE_Redesign_DrugDetails);
 		drugDetailsPage.validateZipandDistanceDropDwn(PharmacyZipCode);
 	}
-	
+
 	@Then("^the user selects following pharmacy and returns to DCE Details page$")
-	public void the_user_selects_following_pharmacy_and_returns_to_DCE_Details_page(DataTable givenAttributes) throws Throwable {
+	public void the_user_selects_following_pharmacy_and_returns_to_DCE_Details_page(DataTable givenAttributes)
+			throws Throwable {
 		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
 			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
 					memberAttributesRow.get(i).getCells().get(1));
 		}
-		DrugDetailsPageMobile drugDetailsPage = (DrugDetailsPageMobile) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugDetails);
+		DrugDetailsPageMobile drugDetailsPage = (DrugDetailsPageMobile) getLoginScenario()
+				.getBean(PageConstants.DCE_Redesign_DrugDetails);
 		String PharmacytoSelect = memberAttributesMap.get("SelectPharmacy");
 		drugDetailsPage.SelectPharmacy(PharmacytoSelect);
 		drugDetailsPage.validatePharmacyName(PharmacytoSelect);
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetailsPage);
 
 	}
-	
 
 	@Then("^the user validates Not Covered Pharmacy view for DCE Details Page$")
 	public void the_user_validates_Not_Covered_Pharmacy_view_for_DCE_Details_Page() throws Throwable {
-		DrugDetailsPageMobile drugDetailsPage = (DrugDetailsPageMobile) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugDetails);
+		DrugDetailsPageMobile drugDetailsPage = (DrugDetailsPageMobile) getLoginScenario()
+				.getBean(PageConstants.DCE_Redesign_DrugDetails);
 		drugDetailsPage.validateNotCoveredPharmacyView();
 	}
 

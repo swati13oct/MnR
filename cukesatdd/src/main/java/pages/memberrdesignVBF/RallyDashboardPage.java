@@ -1,6 +1,8 @@
 package pages.memberrdesignVBF;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
+
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -579,6 +581,7 @@ public class RallyDashboardPage extends UhcDriver {
 	 * @return
 	 */
 	public EOBPage navigateToEOBPage() {
+		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
 		validateNew(EOB_Dashboard);
 		EOB_Dashboard.click();
 		CommonUtility.checkPageIsReadyNew(driver);

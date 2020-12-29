@@ -1,3 +1,4 @@
+
 package acceptancetests.acquisition.agentflow;
 
 import java.util.HashMap;
@@ -17,6 +18,7 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import gherkin.formatter.model.DataTableRow;
 import pages.acquisition.commonpages.AcquisitionHomePage;
+import pages.acquisition.commonpages.LearnAboutMedicareHomePage;
 import pages.acquisition.commonpages.RequestAgentAppointmentPage;
 import pages.acquisition.commonpages.RequestHelpAndInformationPage;
 import pages.acquisition.ulayer.ProviderSearchPage;
@@ -47,6 +49,20 @@ public class RequestAgentApptCommonStepDefinition {
 		
 		if(myUHCAgentURL!=null){
 			aquisitionhomepage.clickonFindanAgentlink(myUHCAgentURL);
+			Assert.assertTrue(true);
+		}else
+			Assert.fail("Error in loading the UHC Agent Page");
+	}
+	
+	@When("^the user clicks on Agent link and validates the correct URL is loaded for Medsupp page$")
+	public void User_navigate_EBRC_Links_through_Medsupp(DataTable arg1) throws InterruptedException {
+		Map<String, String> inputAttributesMap=parseInputArguments(arg1);
+		String myUHCAgentURL = inputAttributesMap.get("UHC Agent URL");
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage)getLoginScenario().getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		
+		
+		if(myUHCAgentURL!=null){
+			aquisitionhomepage.clickonFindanAgentlinkMedsupp(myUHCAgentURL);
 			Assert.assertTrue(true);
 		}else
 			Assert.fail("Error in loading the UHC Agent Page");
@@ -114,4 +130,31 @@ public class RequestAgentApptCommonStepDefinition {
 		
 			
 	}
+
+	
+//	@Then("^the user click on Request more Information$")
+//	public void click_on_Request_more_information() throws Throwable {
+//		AcquisitionHomePage requestAgentAppointmentPage = (AcquisitionHomePage)getLoginScenario().getBean(PageConstants.ACQUISITION_HOME_PAGE);
+//		RequestHelpAndInformationPage ContactusPage =requestAgentAppointmentPage.RequestLinkOnShopPlan();
+//	//	RequestAgentAppointmentPage ContactusPage = requestAgentAppointmentPage.RequestLinkOnShopPlan();
+//		if (ContactusPage != null)
+//			getLoginScenario().saveBean(PageConstants.REQUEST_MORE_HELP_INFORMATION_PAGE, ContactusPage);
+//		else
+//			System.out.println("Error in loading requestAgentAppointmentPage");
+//	}
+//	
+	@When("^the user clicks on Agent link and validates the correct URL is loaded from Med Ed Page$")
+	public void User_navigate_EBRC_Links_from_MedEd(DataTable arg1) throws InterruptedException {
+		Map<String, String> inputAttributesMap=parseInputArguments(arg1);
+		String myUHCAgentURL = inputAttributesMap.get("UHC Agent URL");
+		
+		LearnAboutMedicareHomePage learnAboutMedicareHomePage=(LearnAboutMedicareHomePage)getLoginScenario().getBean(PageConstants.LEARN_ABOUT_MEDICARE_PAGE);		
+		if(myUHCAgentURL!=null){
+			learnAboutMedicareHomePage.clickonFindanAgentlinkfromMedEd(myUHCAgentURL);
+			Assert.assertTrue(true);
+		}else
+			Assert.fail("Error in loading the UHC Agent Page");
+	}
+	
 }
+

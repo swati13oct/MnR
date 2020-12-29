@@ -34,6 +34,7 @@ public class ACQDrugCostEstimatorPage extends UhcDriver {
 	public static ArrayList<String> DCEDrugsList = new ArrayList<String>();
 	public static ArrayList<String> DrugsList = new ArrayList<String>();
 	static ArrayList<String> vppDrugsResults = new ArrayList<String>();
+	static ArrayList<String> DCEDrugsResults = new ArrayList<String>();
 
 	String page = "Drug Cost Estimator";
 
@@ -51,7 +52,7 @@ public class ACQDrugCostEstimatorPage extends UhcDriver {
 	@FindBy(css = "input#drugsearch")
 	private WebElement drugsearchBox;
 
-	@FindBy(css = "uhc-menu uhc-menu-item div")
+	@FindBy(css = "#listPop li")
 	private List<WebElement> drugsAutoList;
 
 	@FindBy(css = "button#search")
@@ -130,7 +131,13 @@ public class ACQDrugCostEstimatorPage extends UhcDriver {
 	@FindBy(css = "button.delete-drug-confirm")
 	private WebElement deleteBtn;
 	
+// DCE View Drug cost Plans
 	
+	@FindBy(css = "table[class*='yourDrugsTable'] tbody >tr")
+	private List<WebElement> drugsNamesinDCE; 
+	
+	@FindBy(css = "span[class*='text-normal']")
+	private WebElement PharmacyType;
 	
 	public void drugsHandlerWithdetails(String drugsDetails) {
 		String drugName = "";
@@ -174,6 +181,7 @@ public class ACQDrugCostEstimatorPage extends UhcDriver {
     	validate(drugpageButtons.get(0));
 
 		jsClickNew(drugpageButtons.get(0));
+		waitForPageLoadSafari();
 		pageloadcomplete();
 		threadsleep(2000);
 		validate(backtoPlansButton.get(0));
@@ -254,6 +262,26 @@ public class ACQDrugCostEstimatorPage extends UhcDriver {
 		System.out.println("DrugsList in DCE Size is : "+vppDrugsResults.size());
 		System.out.println("DrugList in DCE Content is : "+vppDrugsResults);
 		return vppDrugsResults;
+	}
+	
+	public ArrayList<String> getDrugNamesDCE() {
+		threadsleep(5000);
+		int count = drugsNamesinDCE.size();
+		DCEDrugsResults = new ArrayList<String>();
+		for (int i = count-1; i >= 0; i--){
+			DCEDrugsResults.add(drugsNamesinDCE.get(i).findElement(By.cssSelector("div[class='align-items-start'] span:nth-of-type(1)")).getText().trim().replace("(Brand)", "").toUpperCase()+ "" +
+					drugsListinDCE.get(i).findElement(By.cssSelector("p:nth-child(3)")).getText().trim().replace("Qty ", "").replace(", refill", "").toUpperCase());
+		}
+		Collections.sort(DCEDrugsResults);
+		System.out.println("DrugsList in DCE Size is : "+DCEDrugsResults.size());
+		System.out.println("DrugList in DCE Content is : "+DCEDrugsResults);
+		return DCEDrugsResults;
+	}
+	
+	public void Pharmacytype() {
+		threadsleep(5000);
+    	validate(PharmacyType);
+    	Assert.assertTrue(PharmacyType.getText().contains("Preferred Mail Service Pharmacy"), "Pharmacy is not default online");    			
 	}
 
 }

@@ -124,7 +124,7 @@ public class HealthRecordWebElements  extends UhcDriver {
 	@FindBy(xpath="//ul[contains(@id,'dropdown-options-3') or contains(@id,'dropdown-options-2')]//a")
 	protected List<WebElement> testHarn_AcctProfDropdown_react;
 
-	@FindBy(xpath="//div[@class='deskHeaderContainer']//div[contains(@class,'dropdown') and contains(@class,'open')]//a[contains(@id,'ihr')]")
+	@FindBy(xpath="//div[@class='deskHeaderContainer']//div[contains(@class,'dropdown') and contains(@class,'open')]//a[contains(@id,'ihr') or contains(text(),'Health record')]")
 	protected WebElement testHarn_desktop_AcctProf_IHRLnk;
 
 
@@ -135,6 +135,9 @@ public class HealthRecordWebElements  extends UhcDriver {
 	@FindBy(xpath="//div[@data-testid='shared-header']//ul[@aria-expanded='true' and contains(@id,'dropdown-options')]//a[@data-testid='TARGET_AWARE_HEALTH_RECORD']")
 
 	protected WebElement testHarn_desktop_AcctProf_IHRLnk_react;
+	
+	@FindBy(xpath="//li[@class='accountSettings']//a[contains(text(),'Health record')]")
+	protected WebElement testHarn_IHRLnk;
 	
 	@FindBy(xpath="//h1[contains(text(),'Welcome') and contains(text(),'Health Record')]")
 	protected WebElement heathRecordPgHeaderText;

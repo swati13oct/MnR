@@ -39,6 +39,12 @@ public class ZipCodePlanYearCapturePage extends UhcDriver {
 	@FindBy(css = "#site-wrapper > div.content-section > div > div.dceclient.parbase.section > app-root > app-dceplansummary > div.loading > app-loader > div > div > div:nth-child(2) > div > div > svg > circle.uhc-spinner__inner-circle")
 	public WebElement loadScreenSpinner;
 	
+	@FindBy(xpath = "//*[@id='previousButton2']")
+	public WebElement previousBtn;
+	
+	@FindBy(xpath = "//*[@id='heading']")
+	public WebElement buildYourDrugList;
+	
 	public ZipCodePlanYearCapturePage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -49,7 +55,6 @@ public class ZipCodePlanYearCapturePage extends UhcDriver {
 	public void openAndValidate() {
 		validateNew(zipCodeTxtbox);
 	}
-
 	public void enterZipCode(String zipcode) {
 		zipCodeTxtbox.clear();
 		zipCodeTxtbox.sendKeys(zipcode);
@@ -75,11 +80,23 @@ public class ZipCodePlanYearCapturePage extends UhcDriver {
 		return null;	
 	}
 	
+	public BuildYourDrugList clickPreviousBtn() {
+		validateNew(previousBtn);
+		previousBtn.click();
+		CommonUtility.waitForPageLoad(driver, buildYourDrugList, 30);
+
+		if(validateNew(buildYourDrugList)) {
+			return new BuildYourDrugList(driver);
+		}
+		Assert.fail("DCE - Build Your Drug List is not displayed");
+		return null;	
+	}
+	
 	public void selectPlanYear() {
 		if(validate(planYearDropdown)) {
 			planYearDropdown.click();
 			Select planYear = new Select(planYearDropdown);
-			planYear.selectByIndex(1);
+			planYear.selectByIndex(0);
 		}
 	}
 	

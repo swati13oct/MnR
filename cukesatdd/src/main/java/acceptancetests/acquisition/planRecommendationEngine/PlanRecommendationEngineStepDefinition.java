@@ -1,3 +1,4 @@
+
 package acceptancetests.acquisition.planRecommendationEngine;
 
 import java.util.ArrayList;
@@ -28,6 +29,44 @@ import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineCostPr
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineCoverageOptionPage;
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineDoctorsPage;
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineDrugsPage;
+import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineHeaderAndFooter;
+import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineLandingAndZipcodePages;
+import pages.acquisition.planRecommendationEngine.PlanRecommendationEnginePharmacyPage;
+import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineResultsPage;
+import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineSpecialNeedsPage;
+import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineTravelPage;
+
+
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
+import org.junit.Assert;
+import org.openqa.selenium.WebDriver;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import acceptancetests.acquisition.vpp.VPPCommonConstants;
+import acceptancetests.data.CommonConstants;
+import acceptancetests.data.PageConstants;
+import atdd.framework.MRScenario;
+import cucumber.api.DataTable;
+import cucumber.api.java.en.And;
+import cucumber.api.java.en.Given;
+import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
+import gherkin.formatter.model.DataTableRow;
+import pages.acquisition.bluelayer.AcquisitionHomePage;
+import pages.acquisition.bluelayer.PlanSelectorNewPage;
+import pages.acquisition.bluelayer.VPPPlanSummaryPage;
+import pages.acquisition.planRecommendationEngine.ACQDrugCostEstimatorPage;
+import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineAdditionalServicesPage;
+import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineCommonutility;
+import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineCostPreferencesPage;
+import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineCoverageOptionPage;
+import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineDoctorsPage;
+import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineDrugsPage;
+import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineEditResponsePage;
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineHeaderAndFooter;
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineLandingAndZipcodePages;
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEnginePharmacyPage;
@@ -132,7 +171,7 @@ public class PlanRecommendationEngineStepDefinition {
 	public void user_navigate_PRE_Breadcrumbs() throws InterruptedException {
 		PlanRecommendationEngineHeaderAndFooter headerAndFooter =  new PlanRecommendationEngineHeaderAndFooter(wd);
 //		headerAndFooter.navigationToPlanRecommendationEngine();
-		headerAndFooter.breadCrumbs();
+//		headerAndFooter.breadCrumbs();
 	}
 	
 	@Then("^user validate elements on landing page of Plan Recommendation Engine$")
@@ -147,7 +186,7 @@ public class PlanRecommendationEngineStepDefinition {
 		PlanRecommendationEngineHeaderAndFooter headerAndFooter =  new PlanRecommendationEngineHeaderAndFooter(wd);
 		PlanRecommendationEngineLandingAndZipcodePages planSelectorhomepage =  new PlanRecommendationEngineLandingAndZipcodePages(wd);
 		headerAndFooter.navigationToPlanRecommendationEngineViaShopTools();
-		headerAndFooter.breadCrumbs();
+//		headerAndFooter.breadCrumbs();
 }
 	
 	@Then("^user validate Header elements and Link Validation of Plan Recommendation Engine$")
@@ -192,7 +231,7 @@ public class PlanRecommendationEngineStepDefinition {
 		String isMultiCounty = inputValues.get("Is Multi County");
 		PlanRecommendationEngineLandingAndZipcodePages planSelectorhomepage =  new PlanRecommendationEngineLandingAndZipcodePages(wd);
 		PlanRecommendationEngineHeaderAndFooter headerAndFooter =  new PlanRecommendationEngineHeaderAndFooter(wd);
-		headerAndFooter.breadCrumbs();
+//		headerAndFooter.breadCrumbs();
 		if (isMultiCounty.equalsIgnoreCase("NO")) {
 			planSelectorhomepage.getStartedAndRunInvalidzipcode(zipcode);
 		} else {
@@ -205,7 +244,7 @@ public class PlanRecommendationEngineStepDefinition {
 	public void elements_coverage_page() {
 		PlanRecommendationEngineCoverageOptionPage planSelectorCoverageepage =  new PlanRecommendationEngineCoverageOptionPage(wd);
 		PlanRecommendationEngineHeaderAndFooter headerAndFooter =  new PlanRecommendationEngineHeaderAndFooter(wd);
-		headerAndFooter.breadCrumbs();
+//		headerAndFooter.breadCrumbs();
 		planSelectorCoverageepage.coverageOptionpage();
 		
 	}
@@ -292,7 +331,7 @@ public class PlanRecommendationEngineStepDefinition {
     public void elements_doctor_page() {
                     PlanRecommendationEngineDoctorsPage planSelectorDoctorspage =  new PlanRecommendationEngineDoctorsPage(wd);
                     PlanRecommendationEngineHeaderAndFooter headerAndFooter =  new PlanRecommendationEngineHeaderAndFooter(wd);
-                    headerAndFooter.breadCrumbs();
+//                    headerAndFooter.breadCrumbs();
                     planSelectorDoctorspage.doctorspageElements();
                     
     }
@@ -314,7 +353,7 @@ public class PlanRecommendationEngineStepDefinition {
                     PlanRecommendationEngineDoctorsPage planSelectorDoctorspage =  new PlanRecommendationEngineDoctorsPage(wd);
                     String doctor = inputValues.get("Doctors");
                     if (doctor.isEmpty()) {
-                                    //planSelectorDoctorspage.doctorspageerror();
+                                    planSelectorDoctorspage.doctorspageerror();
                     }
     }
     
@@ -330,14 +369,14 @@ public class PlanRecommendationEngineStepDefinition {
     public void previous_travel_page(DataTable givenAttributes) {
                     readfeaturedata(givenAttributes);
                     PlanRecommendationEngineDoctorsPage planSelectorDoctorspage =  new PlanRecommendationEngineDoctorsPage(wd);
-                   /// planSelectorDoctorspage.doctorspagePreviousButton(inputValues.get("Doctors"));
+                    planSelectorDoctorspage.doctorspagePreviousButton(inputValues.get("Doctors"));
     }
     
     @And("^user validating error scenario in doctors Page")
     public void error_doctor_page(DataTable givenAttributes) {
                     readfeaturedata(givenAttributes);
                     PlanRecommendationEngineDoctorsPage planSelectorDoctorspage =  new PlanRecommendationEngineDoctorsPage(wd);
-                    //planSelectorDoctorspage.doctorspageerror();             
+                    planSelectorDoctorspage.doctorspageerror();             
     }
     
     @And("^user selects Doctors in Doctors page and cancels the selection$")
@@ -351,7 +390,7 @@ public class PlanRecommendationEngineStepDefinition {
     public void elements_drugs_page() {
     				PlanRecommendationEngineDrugsPage planSelectorDrugspage =  new PlanRecommendationEngineDrugsPage(wd);
                     PlanRecommendationEngineHeaderAndFooter headerAndFooter =  new PlanRecommendationEngineHeaderAndFooter(wd);
-                    headerAndFooter.breadCrumbs();
+//                    headerAndFooter.breadCrumbs();
                     planSelectorDrugspage.drugspage();
                     
     }
@@ -444,7 +483,7 @@ public class PlanRecommendationEngineStepDefinition {
    	public void elements_pharmacy_page() {
     	PlanRecommendationEnginePharmacyPage planSelectorPharmacyepage =  new PlanRecommendationEnginePharmacyPage(wd);
    		PlanRecommendationEngineHeaderAndFooter headerAndFooter =  new PlanRecommendationEngineHeaderAndFooter(wd);
-   		headerAndFooter.breadCrumbs();
+//   		headerAndFooter.breadCrumbs();
    		planSelectorPharmacyepage.pharmacypage();
    		
    	}
@@ -481,7 +520,7 @@ public class PlanRecommendationEngineStepDefinition {
    		readfeaturedata(givenAttributes);
    		PlanRecommendationEngineAdditionalServicesPage planSelectorAdditionalpage =  new PlanRecommendationEngineAdditionalServicesPage(wd);
    		PlanRecommendationEngineHeaderAndFooter headerAndFooter =  new PlanRecommendationEngineHeaderAndFooter(wd);
-   		headerAndFooter.breadCrumbs();
+//   		headerAndFooter.breadCrumbs();
    		planSelectorAdditionalpage.additionalpage(inputValues.get("Drug Selection"));
    	}
    	
@@ -503,7 +542,7 @@ public class PlanRecommendationEngineStepDefinition {
    	public void elements_costpreferences_page() {
 		PlanRecommendationEngineCostPreferencesPage planSelectorPreferencespage =  new PlanRecommendationEngineCostPreferencesPage(wd);
 		PlanRecommendationEngineHeaderAndFooter headerAndFooter =  new PlanRecommendationEngineHeaderAndFooter(wd);
-   		headerAndFooter.breadCrumbs();
+//   		headerAndFooter.breadCrumbs();
    		planSelectorPreferencespage.costpreferencepage();
    	}
 	
@@ -528,7 +567,7 @@ public class PlanRecommendationEngineStepDefinition {
    	public void elements_results_page() {
 		PlanRecommendationEngineResultsPage planSelectorResultspage =  new PlanRecommendationEngineResultsPage(wd);
 		PlanRecommendationEngineHeaderAndFooter headerAndFooter =  new PlanRecommendationEngineHeaderAndFooter(wd);
-   		//headerAndFooter.breadCrumbs();
+//   		headerAndFooter.breadCrumbs();
    		planSelectorResultspage.resultsloadingpage();
    	}
 	
@@ -585,6 +624,12 @@ public class PlanRecommendationEngineStepDefinition {
 	public void drugs_DCE_VPP_PRE_page() {
 		PlanRecommendationEngineResultsPage planSelectorResultspage =  new PlanRecommendationEngineResultsPage(wd);
 		planSelectorResultspage.DrugsDetailsVPPtoPRE();
+	}
+	
+	@Then("^user validate drugs details from VPP to DCE page$")
+	public void drugs_VPP_DCE_page() {
+		PlanRecommendationEngineResultsPage planSelectorResultspage =  new PlanRecommendationEngineResultsPage(wd);
+		planSelectorResultspage.DrugsDetailsVPPtoDCE();
 	}
 	
 	@And("^user navigates to vpp summary page$")
@@ -794,6 +839,13 @@ public class PlanRecommendationEngineStepDefinition {
 		planSelectorResultspage.useraddDrugsVPP(inputValues.get("Drug Details"));
    	}
 	
+	@Then("^user navigate from VPP to DCE tool$")
+   	public void vpp_pre() {
+		PlanRecommendationEngineResultsPage planSelectorResultspage =  new PlanRecommendationEngineResultsPage(wd);
+		checkpopup();
+		planSelectorResultspage.userPreDCE();
+   	}
+	
 	@Then("^user validate future vs current UI and API recommendation rankings in results page$")
    	public void verify_Future_UI_API_rankings_results_page() {
 		checkpopup();
@@ -814,4 +866,102 @@ public class PlanRecommendationEngineStepDefinition {
 			popup_clicked = planSelectorhomepage.close_Popup();
 		}
 	}
+	
+	@Then("^user validate saved values in edit response page$")
+   	public void check_saved_value_editResponse_page(DataTable givenAttributes) {
+		readfeaturedata(givenAttributes);
+		PlanRecommendationEngineEditResponsePage preEditpage =  new PlanRecommendationEngineEditResponsePage(wd);
+		preEditpage.editResponsepage(inputValues);
+   	}
+	
+	@Then("^user return to vpp page using \"([^\"]*)\" from edit response page$")
+   	public void check_saved_value_editResponse_page(String button) {
+		PlanRecommendationEngineEditResponsePage preEditpage =  new PlanRecommendationEngineEditResponsePage(wd);
+		preEditpage.returnVPP(button);
+   	}
+	
+	@Then("^user edits values in edit response page$")
+   	public void edit_saved_value_editResponse_page(DataTable givenAttributes) {
+		readfeaturedata(givenAttributes);
+		PlanRecommendationEngineEditResponsePage preEditpage =  new PlanRecommendationEngineEditResponsePage(wd);
+		preEditpage.editUserResponse(inputValues);
+   	}
+	
+	@Then("^user adds doctor in edit response page$")
+   	public void add_doctor_editResponse_page(DataTable givenAttributes) {
+		readfeaturedata(givenAttributes);
+		PlanRecommendationEngineEditResponsePage preEditpage =  new PlanRecommendationEngineEditResponsePage(wd);
+		preEditpage.addDoctorEditResponse(inputValues);
+   	}
+	
+	@Then("^user navigates to edit response page$")
+   	public void navigate_editResponse_page(DataTable givenAttributes) {
+		readfeaturedata(givenAttributes);
+		PlanRecommendationEngineEditResponsePage preEditpage =  new PlanRecommendationEngineEditResponsePage(wd);
+		preEditpage.navigateEditResponsePage(inputValues.get("Plan Type"));
+   	}
+
+	@Then("^user edits coverage value in edit response page$")
+   	public void edit_coverage_editResponse_page(DataTable givenAttributes) {
+		readfeaturedata(givenAttributes);
+		PlanRecommendationEngineEditResponsePage preEditpage =  new PlanRecommendationEngineEditResponsePage(wd);
+		preEditpage.changeCoverage(inputValues);
+   	}
+	
+	@Then("^user validates coverage value in edit response page$")
+   	public void validate_coverage_editResponse_page(DataTable givenAttributes) {
+		readfeaturedata(givenAttributes);
+		PlanRecommendationEngineEditResponsePage preEditpage =  new PlanRecommendationEngineEditResponsePage(wd);
+		preEditpage.checkCoveragevalue(inputValues);
+   	}
+	
+	@Then("^user selects add drug option in drug page from edit response page$")
+   	public void add_drug_editResponse_page(DataTable givenAttributes) {
+		readfeaturedata(givenAttributes);
+		PlanRecommendationEngineEditResponsePage preEditpage =  new PlanRecommendationEngineEditResponsePage(wd);
+		preEditpage.addDrugs(inputValues);
+   	}
+	
+	@Then("^user save plans in vpp summary and Validate in Visitor profile page$")
+	public void user_verify_saveplan(DataTable givenAttributes) {
+		readfeaturedata(givenAttributes);
+		PlanRecommendationEngineResultsPage planSelectorResultspage =  new PlanRecommendationEngineResultsPage(wd);
+		planSelectorResultspage.changePlanyear(inputValues.get("Plan Year"));
+		planSelectorResultspage.validateCombineSavePlan(inputValues.get("Plan Year"));
+	}
+	
+	@Then("^user save 2 MA plans in vpp summary and Validate in Visitor profile page$")
+	public void user_saveplan(DataTable givenAttributes) {
+		readfeaturedata(givenAttributes);
+		PlanRecommendationEngineResultsPage planSelectorResultspage =  new PlanRecommendationEngineResultsPage(wd);
+		planSelectorResultspage.changePlanyear(inputValues.get("Plan Year"));
+		planSelectorResultspage.validateSavePlan(inputValues.get("Plan Year"));
+	}
+	
+	@Then("^user Validate Drug and Provider details in Visitor profile page$")
+	public void user_verify_drug_provider() {
+		PlanRecommendationEngineResultsPage planSelectorResultspage =  new PlanRecommendationEngineResultsPage(wd);
+		planSelectorResultspage.validateDrugProvider();
+	}
+	
+	@Given("^the user is on external acquisition site landing page$")
+	public void the_user_on_external_Site(DataTable givenAttributes) {
+		readfeaturedata(givenAttributes);
+		wd = getLoginScenario().getWebDriverNew();
+		AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd,"PRE",true);
+		aquisitionhomepage.openExternalLinkPRE(inputValues.get("Site Name"));
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE,
+				aquisitionhomepage);
+	}
+	
+	@When("^user navigate to Plan Recommendation Engine Tool$")
+	public void the_user_external_PRE(DataTable givenAttributes) {
+		readfeaturedata(givenAttributes);
+		PlanRecommendationEngineResultsPage planSelectorResultspage =  new PlanRecommendationEngineResultsPage(wd);
+		checkpopup();
+		planSelectorResultspage.navigatePRE(inputValues.get("Site Name"));
+	}
+
 }
+

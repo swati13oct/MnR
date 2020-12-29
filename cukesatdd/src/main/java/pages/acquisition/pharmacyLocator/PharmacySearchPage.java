@@ -11,12 +11,16 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
 import acceptancetests.acquisition.pharmacylocator.PharmacySearchCommonConstants;
+import acceptancetests.data.CommonConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
+import pages.acquisition.dceredesign.GetStartedPage;
+import pages.acquisition.ulayer.PageTitleConstants;
 
 public class PharmacySearchPage extends PharmacySearchBase {
 
@@ -26,6 +30,12 @@ public class PharmacySearchPage extends PharmacySearchBase {
 		openAndValidate();
 	}
 
+	@FindBy(xpath = "//a[text()='Estimate your drug costs at a preferred retail pharmacy']")
+	private WebElement DCELink;
+	
+	@FindBy(xpath = "//button[contains(@id,'addDrug')]")
+	public WebElement AddMyDrugsBtn;
+	
 	@Override
 	public void openAndValidate() {
 		CommonUtility.checkPageIsReadyNew(driver);
@@ -621,6 +631,19 @@ public class PharmacySearchPage extends PharmacySearchBase {
 						!pharmacyValidate(rightArrow));
 			}
 		}
+	}
+	
+	
+	
+	public GetStartedPage navigateToDCE() {
+		validateNew(DCELink);
+		JavascriptExecutor executor = (JavascriptExecutor) driver;
+		executor.executeScript("arguments[0].scrollIntoView(true);", DCELink);
+		DCELink.click();
+		CommonUtility.checkPageIsReadyNew(driver);
+		if (validateNew(AddMyDrugsBtn))
+			return new GetStartedPage(driver);
+		return null;
 	}
 	
 }

@@ -78,8 +78,11 @@ public class HealthRecordPage  extends HealthRecordBase {
 			testharnessTblDceLnk.click();
 		} else if (noWaitValidate(drugLookup)) {
 			drugLookup.click();
-		} else if (noWaitValidate(section_drugLocator)) {
-			section_drugLocator.click();
+		//TODO: when benefits Drug Look Up points to new DCE page, need to update the navigation
+		//TODO: navigation will got to Benefits then click DRUG LOOK UP link
+		//TODO: new DCE page will be rally page
+		//tbd } else if (noWaitValidate(section_drugLocator)) {
+		//tbd 	section_drugLocator.click();
 		} else {
 			//note: fix up the URL to get to the page...
 			navigateToBenefitsPage(memberType);
@@ -388,7 +391,7 @@ public class HealthRecordPage  extends HealthRecordBase {
 				checkModelPopup(driver,1);
 				if (expectIhrLnk) {
 					WebElement firstLink=root1.findElement(By.cssSelector("#dropdown-options-2 > a:nth-child(1)"));
-					Assert.assertTrue("PROBLEM - 'Health Record' link should be the first link on the dropdown", firstLink.getText().toLowerCase().contains("health record"));
+					Assert.assertTrue("PROBLEM - 'Health Record' link should be the first link on the dropdown.  First link text='"+firstLink.getText()+"'", firstLink.getText().toLowerCase().contains("health record"));
 				}
 
 
@@ -456,6 +459,10 @@ public class HealthRecordPage  extends HealthRecordBase {
 				System.out.println("TEST - This has react stuff");
 				ihrLnk=testHarn_desktop_AcctProf_IHRLnk_react;
 				acctProfOptLst=testHarn_AcctProfDropdown_react;
+			} else if (noWaitValidate(testHarn_IHRLnk)) {
+				System.out.println("TEST - This has another desktop IHR xpath");
+				ihrLnk=testHarn_IHRLnk;
+				acctProfOptLst=testHarn_AcctProfDropdown;
 			} else {
 				System.out.println("TEST - Can't match anything");
 				return false;

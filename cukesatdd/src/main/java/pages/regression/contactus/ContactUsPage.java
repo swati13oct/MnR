@@ -1256,7 +1256,7 @@ public class ContactUsPage extends UhcDriver{
 	
 			if (plantype.equalsIgnoreCase("PCP") || plantype.equalsIgnoreCase("Medica")) {
 				validateWithValue("What browsers are required for this website?", browsersRequiredQuestion);
-				validateWithValue("Why can’t I see my plan information?", palnInformationQuestion);
+				validateWithValue("Why canï¿½t I see my plan information?", palnInformationQuestion);
 				validateWithValue("How do I add my spouse to my online account?", onlineAccountQuestion);
 				validateWithValue("Where can I find my plan name?", planNameQuestion);
 	
@@ -1505,7 +1505,7 @@ public class ContactUsPage extends UhcDriver{
 		String techSupportSSUP ="1-855-651-7854";
 		String planSupportSSUP = "1-800-851-3802";
 		String techSupportPdp ="1-800-721-0627" ;
-		String planSupportPdp = "1-866-870-3470";
+		String planSupportPdp = "1-866-255-4835";
 		String callUsSHIP = "1-866-254-3132" ;
 		String generalQueSHIP = "1-800-523-5800";
 		String claimQueSHIP ="1-800-523-5880" ;

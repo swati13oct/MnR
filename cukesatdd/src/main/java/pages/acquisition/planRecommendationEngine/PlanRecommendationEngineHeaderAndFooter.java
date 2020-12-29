@@ -51,7 +51,7 @@ public class PlanRecommendationEngineHeaderAndFooter extends UhcDriver {
 	@FindBy(xpath = "//*[@id='aarpSVGLogo']/img")
 	private WebElement AARPlogoInHeader;
 	
-	@FindBy(css = "#uhcSVGLogo > svg")
+	@FindBy(css = "#uhcSVGLogo")
 	private WebElement UHClogoInHeader;
 	
 	@FindBy(css = ".companyNameHeader>p")
@@ -683,7 +683,7 @@ public class PlanRecommendationEngineHeaderAndFooter extends UhcDriver {
 		headerNavigationBarEnterSearchTab.click();
 		headerNavigationBarEnterSearchTab.sendKeys(SearchKey);
 		threadsleep(2000);
-		jsClickNew(headerNavigationBarSearchIconTab);
+		headerNavigationBarSearchIconTab.click();
 		String expectedpageurl = driver.getCurrentUrl();
 		String ExpectedPage = "site-search.html?";
 		Boolean url = ((actualpageurl.equals(expectedpageurl)));

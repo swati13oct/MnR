@@ -1,7 +1,30 @@
+
 /**
  * 
  */
 package pages.regression.deeplinkPages;
+
+
+import java.util.List;
+
+import org.junit.Assert;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
+
+import acceptancetests.data.MRConstants;
+import acceptancetests.util.CommonUtility;
+import atdd.framework.MRScenario;
+import atdd.framework.UhcDriver;
+import pages.regression.login.ConfirmSecurityQuestion;
+
+/**
+ * @author pminhas
+ *
+ */
+
 
 
 import java.util.List;
@@ -171,11 +194,9 @@ public class PharmacyDeeplinkLoginPage extends UhcDriver {
 							{
 								System.out.println("Catch block with no significance");
 							}
-
 							try {
 								CommonUtility.checkPageIsReady(driver);
 								if (validate(homePageNotice, 0)) {
-
 									homePageNotice.click();
 									CommonUtility.checkPageIsReady(driver);
 								} else if (validate(homePageNotice2, 0)) {
@@ -240,10 +261,11 @@ public class PharmacyDeeplinkLoginPage extends UhcDriver {
 					if (driver.getCurrentUrl().contains("pharmacy/overview.html")) {
 						Assert.assertTrue(driver.getTitle().contains("M&R Pharmacy"));
 					} else {
-							Assert.fail("Pharmacy page is not loaded through deeplink");
+							Assert.fail("Soultran page is not loaded through deeplink");
 					}
 					return true;
 				}
 				
 }
+
 

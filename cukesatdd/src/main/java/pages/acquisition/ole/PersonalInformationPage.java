@@ -173,7 +173,7 @@ public class PersonalInformationPage extends UhcDriver{
 	@FindBy(css="a#enrollment-saved-wc")
 	private WebElement enrollSavedClose;
 	
-	@FindBy(xpath = "//img[@alt='AARP Medicare Plans from United Healthcare']")
+	@FindBy(xpath = "//img[contains(@alt,'AARP Medicare Plans')]")
 	private WebElement aarpLogo;
 	
 	@FindBy(xpath = "//a[@class='enrollProfileBtn cta-button']")
@@ -496,8 +496,9 @@ public class PersonalInformationPage extends UhcDriver{
 
 		
 		Thread.sleep(3000);
-			if(driver.getCurrentUrl().contains("special")){
-			Assert.assertTrue(driver.getCurrentUrl().contains("special"), "OLE SEP Page is Displayed");
+			//if(driver.getCurrentUrl().contains("special")){
+			if(driver.getCurrentUrl().contains("special-election-period")){
+			Assert.assertTrue(driver.getCurrentUrl().contains("special-election-period"), "OLE SEP Page is Displayed");
 			return new SpecialElectionPeriodPage(driver);
 			
 			}
@@ -512,9 +513,10 @@ public class PersonalInformationPage extends UhcDriver{
 					 validateNew(NextBtn); 
 					 jsClickNew(NextBtn);
 					 waitForPageLoadSafari();
-					 if(driver.getCurrentUrl().contains("special")){
-					  System.out.println("OLE SEP Page is Displayed"); }
-					 else {
+
+					 if(driver.getCurrentUrl().contains("special-election-period")){
+					  System.out.println("OLE SEP Page is Displayed"); } else {
+
 					  System.out.println("OLE SEP Page is not Displayed"); }
 					 return new SpecialElectionPeriodPage(driver);	
 				}
@@ -528,13 +530,13 @@ public class PersonalInformationPage extends UhcDriver{
 		
 		String PartAeffectiveDate = MedicareDetailsMap.get("PartA Date");
 		String PartBeffectiveDate = MedicareDetailsMap.get("PartB Date"); 
-		//String MedicaidNo = MedicareDetailsMap.get("MedicaidNumber"); 
+		String MedicaidNo = MedicareDetailsMap.get("MedicaidNumber"); 
 		if(validateNew(driver.findElement(By.xpath("//h1[contains(text(),'Confirm')]")))){
 			System.out.println("OLE Confirm your Eligibility is Displayed");
 		
 			sendkeysNew(partAStartDateField, PartAeffectiveDate);
 			sendkeysNew(partBStartDateField, PartBeffectiveDate);
-			//sendkeysNew(medicaidNumberField,MedicaidNo);
+			sendkeysNew(medicaidNumberField,MedicaidNo);
 		}
 		
 		return new ConfirmYourEligibilityPage(driver);
@@ -614,6 +616,8 @@ public class PersonalInformationPage extends UhcDriver{
 		jsClickNew(enrollSavedClose);
 		jsClickNew(aarpLogo);
 		jsClickNew(enrollProfileYes);
+		jsClickNew(enrollSavedClose);
+		jsClickNew(aarpLogo);
 		jsClickNew(shoppingCartIcon);
 		jsClickNew(lnkProfile);
 		if(driver.getCurrentUrl().contains("profile")) {

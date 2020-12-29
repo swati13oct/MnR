@@ -119,10 +119,10 @@ public class HeaderFooterMobile extends UhcDriver {
 	@FindBy(css = "#subnav_2 div[class$='content-2']>h3:nth-of-type(2)>a")
 	private WebElement headerDualSpecialLink;
 	
-	@FindBy(css = "#subnav_2 div[class$='content-2']>h3:nth-of-type(3)>a")
+	@FindBy(css = "#subnav_2 div[class$='content-2']>h3:nth-of-type(3) a")
 	private WebElement headerMedicaresupplementplanLink;
 
-	@FindBy(css = "#subnav_2 div[class$='content-2']>h3:nth-of-type(4)>a")
+	@FindBy(css = "#subnav_2 div[class$='content-2']>h3:nth-of-type(5)>a")
 	private WebElement headerPrescriptionLink;
 
 	//@FindBy(css = "#subnav_2 div[class='content content-2'] h3:nth-of-type(3)>a")
@@ -190,11 +190,14 @@ public class HeaderFooterMobile extends UhcDriver {
 
 	@FindBy(css = "#gfn_lnk_row2_1 > span")
 	private WebElement footerMedicareAdvantagePlansLink;
+	
+	@FindBy(css = "#gfn_lnk_row2_2 > span")
+	private WebElement DualSNP;
 
-	@FindBy(css = ".linksCond #gfn_lnk_row2_2 span[itemprop='name'] span:nth-child(2)") // Geotargetting
+	@FindBy(css = ".linksCond #gfn_lnk_row2_3 span[itemprop='name'] span:nth-child(2)") // Geotargetting
 	private WebElement footerMedicareSupplementInsurancePlansLink;
 
-	@FindBy(css = "#gfn_lnk_row2_4 > span")
+	@FindBy(css = "#gfn_lnk_row2_5 > span")
 	private WebElement footerMedicarePrescriptionDrugPlansLink;
 
 	@FindBy(css = "#gfn_lnk_row3_1 > span")
@@ -256,8 +259,11 @@ public class HeaderFooterMobile extends UhcDriver {
 	private WebElement landingpageHeader;
 
 	// Shop page
-	@FindBy(css = "a.card-link__link[dtmname*='Get Help']")
-	private WebElement HeaderShopToolsGetHelpChoosingLink;
+	@FindBy(xpath = "//a[contains(text(),'Learn More')]")
+	private WebElement ShopFromHomeLearnMore;
+	
+	@FindBy(xpath = "//a[contains(text(),'Get Recommendation')]")
+	private WebElement ShopToolsGetHelpRecommendationLink;
 
 	// Header Element Verification Method
 	public void headerElementsMobile() {
@@ -404,9 +410,10 @@ public class HeaderFooterMobile extends UhcDriver {
 		}
 		validate(footerMedicareAdvantagePlansLink, 30);
 		Assert.assertTrue(footerMedicareAdvantagePlansLink.getText().contains("Medicare Advantage Plans"));
+		validate(DualSNP, 30);
+		Assert.assertTrue(DualSNP.getText().contains("Dual Special Needs Plan"));
 		try {
-			validate(footerMedicareSupplementInsurancePlansLink, 30);
-			if (footerMedicareSupplementInsurancePlansLink.isDisplayed())
+			if (validate(footerMedicareSupplementInsurancePlansLink, 30))
 				Assert.assertTrue(footerMedicareSupplementInsurancePlansLink.getText()
 						.contains("Medicare Supplement Insurance Plans"));
 		} catch (Exception e) {
@@ -454,9 +461,9 @@ public class HeaderFooterMobile extends UhcDriver {
 		shopforaplanLink.click();
 		validate(headerShopLink, 30);
 		headerShopLink.click();
-		mobileUtils.mobileLocateElement(HeaderShopToolsGetHelpChoosingLink);
-		navigatesubLink(HeaderShopToolsGetHelpChoosingLink.getAttribute("href"));
-		// mobileUtils.mobileLocateElementClick(HeaderShopToolsGetHelpChoosingLink);
+		mobileUtils.mobileLocateElementClick(ShopFromHomeLearnMore);
+		mobileUtils.mobileLocateElementClick(ShopToolsGetHelpRecommendationLink);
+		// navigatesubLink(ShopToolsGetHelpRecommendationLink.getAttribute("href"));
 		validate(landingpageHeader, 30);
 		//Assert.assertTrue(landingpageHeader.getText().contains("plan"));
 	}

@@ -284,12 +284,17 @@ public class HealthAndWellnessPage extends HealthAndWellnessBase {
 		if (planType.toUpperCase().contains("SHIP") && !planType.toUpperCase().contains("COMBO")) { 
 			//note: that shoe icon ------------------
 			String targetElement="Renew Active icon image";
-			Assert.assertTrue("PROBLEM - unable to locate '"+targetElement+"'", hwValidate(renewActiveIconImg_ship));
+			Assert.assertTrue("PROBLEM - unable to locate '"+targetElement+"'", hwValidate(renewActiveIconImg_ship) || hwValidate(renewActiveIconImg_ship2));
+			WebElement renewActiveIconImgElement=null;
+			if (hwValidate(renewActiveIconImg_ship))
+				renewActiveIconImgElement=renewActiveIconImg_ship;
+			else
+				renewActiveIconImgElement=renewActiveIconImg_ship2;
 			String expectedHref="/active/overview";
 			String expectedDomain=getExpectedDomain();
 			String expectedEnv=getExpectedEnv();
 			if (testThirdPartyPage && MRScenario.environment.equalsIgnoreCase("prod")) {
-				renewActiveIconImg_ship.click();
+				renewActiveIconImgElement.click();
 				CommonUtility.checkPageIsReady(driver);
 				CommonUtility.waitForPageLoad(driver, generalHeader, 15);
 				sleepBySec(10);
@@ -302,23 +307,35 @@ public class HealthAndWellnessPage extends HealthAndWellnessBase {
 
 			//note: card title ------------------
 			targetElement="Card Title";
-			Assert.assertTrue("PROBLEM - unable to locate '"+targetElement+"'", hwValidate(cardTitle_ship));
+			Assert.assertTrue("PROBLEM - unable to locate '"+targetElement+"'", hwValidate(cardTitle_ship) || hwValidate(cardTitle_ship2));
+			WebElement cardTitleElement=null;
+			if (hwValidate(cardTitle_ship)) {
+				cardTitleElement=cardTitle_ship;
+			} else {
+				cardTitleElement=cardTitle_ship2;
+			}
+			
 			String expectedText="Renew Active";
-			String actualText=cardTitle_ship.getText();
+			String actualText=cardTitleElement.getText();
 			Assert.assertTrue("PROBLEM - '"+targetElement+"' element text is not as expected. Expected='"+expectedText+"' | Actual='"+actualText+"'", actualText.contains(expectedText));
 
 
 			//note: Learn More button ------------------
 			targetElement="Learn More buttone";
-			Assert.assertTrue("PROBLEM - unable to locate '"+targetElement+"'", hwValidate(learnMoreBtn_ship));
+			Assert.assertTrue("PROBLEM - unable to locate '"+targetElement+"'", hwValidate(learnMoreBtn_ship)|| hwValidate(learnMoreBtn_ship2));
+			WebElement learnMoreBtnElement=null;
+			if (hwValidate(learnMoreBtn_ship)) 
+				learnMoreBtnElement=learnMoreBtn_ship;
+			else
+				learnMoreBtnElement=learnMoreBtn_ship2;
 			//expectedHref="https://member.int.uhc.com/active/overview";
 			expectedHref="/active/overview";
-			String actualEleLnkHref=learnMoreBtn_ship.getAttribute("href");
+			String actualEleLnkHref=learnMoreBtnElement.getAttribute("href");
 			expectedDomain=getExpectedDomain();
 			expectedEnv=getExpectedEnv();
 			Assert.assertTrue("PROBLEM - '"+targetElement+"' element href attribute value is not as expected. Expected='"+expectedHref+"' | Actual='"+actualEleLnkHref+"'", actualEleLnkHref.contains(expectedHref));
 			if (testThirdPartyPage && MRScenario.environment.equalsIgnoreCase("prod")) {
-				renewActiveIconImg_ship.click();
+				renewActiveIconImgElement.click();
 				CommonUtility.checkPageIsReady(driver);
 				CommonUtility.waitForPageLoad(driver, generalHeader, 15);
 				sleepBySec(10);

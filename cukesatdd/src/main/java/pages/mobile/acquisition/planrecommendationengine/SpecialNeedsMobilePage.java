@@ -144,6 +144,7 @@ public class SpecialNeedsMobilePage extends UhcDriver {
 		//Assert.assertTrue(snpNursinghome.getText().contains("facility"));
 		validate(snpNone, 30);
 		//Assert.assertTrue(snpNone.getText().contains("None"));
+		mobileUtils.mobileLocateElement(previousBtn);
 		mobileUtils.mobileLocateElementClick(previousBtn);
 		System.out.println("Validating " + page + " page Previous button functionality");
 		mobileUtils.previousPageValidation(page.toUpperCase());
@@ -231,4 +232,11 @@ public class SpecialNeedsMobilePage extends UhcDriver {
 		}
 	}
 
+	public void edit_specialneeds(String options) {
+		String snpoptions[] = options.split(",");
+		for (String option : snpoptions) {
+			specialNeedspageFunctional(option);
+			specialNeedsOptionsMoreInfo(option);
+		}
+	}
 }

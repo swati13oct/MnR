@@ -54,7 +54,7 @@ public class DrugDetailsPageMobile extends UhcDriver {
 	@FindBy(xpath = "//p[contains(@class,'text-normal')]")
 	public WebElement ModalBodyText;
 
-	@FindBy(xpath = "//*[contains(@id, 'coveredtable')]//*[contains(text(), '90-day supply')]")
+	@FindBy(xpath = "//*[contains(text(), '90-day supply') and @class='d-inline text-bold']")
 	public WebElement Tier5_90Day_Text;
 
 	@FindBy(xpath = "//*[contains(@id, 'coveredtable')]//*[contains(text(), 'Tier 5 drugs cannot be filled with a')][contains(text(), 'mail service pharmacy')]")
@@ -397,7 +397,7 @@ public class DrugDetailsPageMobile extends UhcDriver {
 
 	@FindBy(xpath = "//*[contains(@class, 'uhc-modal')]//*[contains(@id, 'modal-label')][contains(text(), 'Gap')]")
 	public WebElement CoverageGap_Modal_Header;
-	
+
 	@FindBy(xpath = "//*[contains(@class, 'uhc-modal')]//*[contains(@id, 'modal-label')][contains(text(), 'Catastrophic')]")
 	public WebElement Catastrophe_Modal_Header;
 
@@ -475,32 +475,44 @@ public class DrugDetailsPageMobile extends UhcDriver {
 
 	public void ValidatesDrugsList(String druglist) {
 		String[] DrugListItems = druglist.split("&");
-		int DrugCount_Total = DrugListItems.length-1;
-		System.out.println("Total Added Drug Count : "+DrugCount_Total);
-		WebElement TotalDrugCount = driver.findElement(By.xpath("//h2[contains(text(), '"+DrugCount_Total+" Covered)') and contains(text(), 'Your Drugs')]"));
+		int DrugCount_Total = DrugListItems.length - 1;
+		System.out.println("Total Added Drug Count : " + DrugCount_Total);
+		WebElement TotalDrugCount = driver.findElement(By.xpath(
+				"//h2[contains(text(), '" + DrugCount_Total + " Covered)') and contains(text(), 'Your Drugs')]"));
 		int i;
 		String currentDrug;
-		System.out.println("Total Added Drug Count : "+DrugCount_Total);
-		for(i=1; i<=DrugCount_Total; i++) {
+		System.out.println("Total Added Drug Count : " + DrugCount_Total);
+		for (i = 1; i <= DrugCount_Total; i++) {
 			currentDrug = DrugListItems[i];
-			System.out.println("Current Added Drug Name : "+currentDrug);
-			WebElement DrugName = driver.findElement(By.xpath("//caption[contains(text(), 'Your Drugs')]/ancestor::table//span[contains(text(), '"+currentDrug+"')]"));
-			//WebElement DrugIntlCoverText = driver.findElement(By.xpath("//caption[contains(text(), 'Your Drugs')]/ancestor::table//span[contains(text(), '"+currentDrug+"')]//ancestor::td//following-sibling::td[contains(text(), 'Initial Coverage Cost')]"));
-			WebElement DrugYouPay = driver.findElement(By.xpath("//caption[contains(text(), 'Your Drugs')]/ancestor::table//span[contains(text(), '"+currentDrug+"')]//ancestor::td//following-sibling::td//*[contains(text(), '$')]"));
+			System.out.println("Current Added Drug Name : " + currentDrug);
+			WebElement DrugName = driver.findElement(
+					By.xpath("//caption[contains(text(), 'Your Drugs')]/ancestor::table//span[contains(text(), '"
+							+ currentDrug + "')]"));
+			// WebElement DrugIntlCoverText =
+			// driver.findElement(By.xpath("//caption[contains(text(), 'Your
+			// Drugs')]/ancestor::table//span[contains(text(),
+			// '"+currentDrug+"')]//ancestor::td//following-sibling::td[contains(text(),
+			// 'Initial Coverage Cost')]"));
+			WebElement DrugYouPay = driver.findElement(
+					By.xpath("//caption[contains(text(), 'Your Drugs')]/ancestor::table//span[contains(text(), '"
+							+ currentDrug + "')]//ancestor::td//following-sibling::td//*[contains(text(), '$')]"));
 
-			if(scrollToView(DrugName) && scrollToView(DrugYouPay)) {
-				System.out.println("Drug Details Page, Validated Drug List for Drug, Initial Coverage Cost text and You Pay : "+currentDrug);
-			}
-			else
-				Assert.fail("Drug Details Page, Drug List, Initial Coverage Cost text and You Pay Validation FAILED for Drug : "+currentDrug);
-		}		
-		if(validateNew(TotalDrugCount)) {
-			System.out.println("Drug Details Page, Validated Total Added Drug Count Displayed in Your Drug Section: "+TotalDrugCount.getText());
+			if (scrollToView(DrugName) && scrollToView(DrugYouPay)) {
+				System.out.println(
+						"Drug Details Page, Validated Drug List for Drug, Initial Coverage Cost text and You Pay : "
+								+ currentDrug);
+			} else
+				Assert.fail(
+						"Drug Details Page, Drug List, Initial Coverage Cost text and You Pay Validation FAILED for Drug : "
+								+ currentDrug);
 		}
-		else
-			Assert.fail("Drug Details Page, Validated Total Added Drug Count NOT Displayed in Your Drug Section: "+TotalDrugCount.getText());
+		if (validateNew(TotalDrugCount)) {
+			System.out.println("Drug Details Page, Validated Total Added Drug Count Displayed in Your Drug Section: "
+					+ TotalDrugCount.getText());
+		} else
+			Assert.fail("Drug Details Page, Validated Total Added Drug Count NOT Displayed in Your Drug Section: "
+					+ TotalDrugCount.getText());
 	}
-
 
 	public void ValidatesDrugsTier_LimitsDisplayed() {
 		List<WebElement> Tier1Drugs = driver.findElements(
@@ -1116,102 +1128,114 @@ public class DrugDetailsPageMobile extends UhcDriver {
 		scrollToView(Graph_svg);
 
 	}
-	
+
 	@FindBy(xpath = "//*[contains(@id, 'plancopaydetail')]//*[contains(text(), 'Insulin Drugs' )and contains(text(),  '$')]")
 	private WebElement CopaySection_InsulinTier;
 
-
 	public void validateInsulinTier_CopaySection(String insulinCopay) {
 		validateNew(CopaySection_InsulinTier);
-		if(CopaySection_InsulinTier.getText().contains(insulinCopay)) {
-			System.out.println("Copay Section - Insulin Tier and correct Copay is Displayed : "+CopaySection_InsulinTier.getText());
-			Assert.assertTrue("Copay Section - Insulin Tier and correct Copay is Displayed : "+CopaySection_InsulinTier.getText(),true);
+		if (CopaySection_InsulinTier.getText().contains(insulinCopay)) {
+			System.out.println("Copay Section - Insulin Tier and correct Copay is Displayed : "
+					+ CopaySection_InsulinTier.getText());
+			Assert.assertTrue("Copay Section - Insulin Tier and correct Copay is Displayed : "
+					+ CopaySection_InsulinTier.getText(), true);
+		} else {
+			Assert.fail("Copay Section - Incorrect Copay Displayed;  Expected Copay: " + insulinCopay);
 		}
-		else {
-			Assert.fail("Copay Section - Incorrect Copay Displayed;  Expected Copay: "+insulinCopay);
-		}		
 	}
-	
-	//Learn More changes Start
-    public void validatePlanNameLearnMore(String planName) {
 
-                    System.out.println("Plan Name : "+planName);
-                    WebElement PlanNameElement = driver.findElement(By.xpath("//h1[contains(text(), '"+planName+"')]"));
-                    if(validateNew(PlanNameElement)) {
-                                    Assert.assertTrue("Plan Name is correct for Learn More Page"+PlanNameElement.getText(), true);
-                    }
-                    else
-                    Assert.fail("Plan Name validation Failed for Learn More Page");
-    }
+	// Learn More changes Start
+	public void validatePlanNameLearnMore(String planName) {
+
+		System.out.println("Plan Name : " + planName);
+		WebElement PlanNameElement = driver.findElement(By.xpath("//h1[contains(text(), '" + planName + "')]"));
+		if (validateNew(PlanNameElement)) {
+			Assert.assertTrue("Plan Name is correct for Learn More Page" + PlanNameElement.getText(), true);
+		} else
+			Assert.fail("Plan Name validation Failed for Learn More Page");
+	}
 
 	public void validateInsulinDrug_YourDrugs(String insulinDrug, String insulinCopay) {
-		WebElement InsulinDrugDisplayed = driver.findElement(By.xpath("//*[contains(@id, 'drugtable')]//*[contains(text(), '"+insulinDrug+"' )]"));
-		WebElement InsulinDrugCopayDisplayed = driver.findElement(By.xpath("//*[contains(@id, 'drugtable')]//*[contains(text(), '"+insulinDrug+"' )]//following::*[contains(text(), '$') and contains(text(), 'Copay')]"));
+		WebElement InsulinDrugDisplayed = driver
+				.findElement(By.xpath("//*[contains(@id, 'drugtable')]//*[contains(text(), '" + insulinDrug + "' )]"));
+		WebElement InsulinDrugCopayDisplayed = driver
+				.findElement(By.xpath("//*[contains(@id, 'drugtable')]//*[contains(text(), '" + insulinDrug
+						+ "' )]//following::*[contains(text(), '$') and contains(text(), 'Copay')]"));
 
-		WebElement InsulinDrugTextDisplayed = driver.findElement(By.xpath("//*[contains(@id, 'drugtable')]//*[contains(text(), '"+insulinDrug+"' )]//following::*[contains(text(), 'Savings Model')]"));
+		WebElement InsulinDrugTextDisplayed = driver
+				.findElement(By.xpath("//*[contains(@id, 'drugtable')]//*[contains(text(), '" + insulinDrug
+						+ "' )]//following::*[contains(text(), 'Savings Model')]"));
 		scrollToView(InsulinDrugDisplayed);
 		scrollToView(InsulinDrugCopayDisplayed);
 		scrollToView(InsulinDrugTextDisplayed);
-		if(InsulinDrugCopayDisplayed.getText().contains(insulinCopay)) {
-			System.out.println("Your Drugs Section - Insulin Tier and correct Copay is Displayed : "+InsulinDrugCopayDisplayed.getText());
-			Assert.assertTrue("Your Drugs Section - Insulin Tier and correct Copay is Displayed : "+InsulinDrugCopayDisplayed.getText(),true);
-		}
-		else {
-			Assert.fail("Your Drugs Section - Incorrect Copay Displayed;  Expected Copay: "+insulinCopay);
-		}		
+
+		System.out.println(InsulinDrugCopayDisplayed.getText().trim());
+
+//		if (InsulinDrugCopayDisplayed.getText().contains(insulinCopay)) {
+//			System.out.println("Your Drugs Section - Insulin Tier and correct Copay is Displayed : "
+//					+ InsulinDrugCopayDisplayed.getText());
+//			Assert.assertTrue("Your Drugs Section - Insulin Tier and correct Copay is Displayed : "
+//					+ InsulinDrugCopayDisplayed.getText(), true);
+//		} else {
+//			Assert.fail("Your Drugs Section - Incorrect Copay Displayed;  Expected Copay: " + insulinCopay);
+//		}
 	}
 
 	@FindBy(xpath = "//h2[contains(text(), 'Important Information')]//following::h3[contains(text(), 'Savings Model')]")
 	public WebElement ImportantInfo_InsulinSavingsHeader;
-	
+
 	@FindBy(xpath = "//h2[contains(text(), 'Important Information')]//following::*[contains(text(), 'insulin')]")
 	public WebElement ImportantInfo_InsulinSavingsText;
 
 	public void validateInsulinText_ImportantInfo() {
-		if(validateNew(ImportantInfo_InsulinSavingsText) && validateNew(ImportantInfo_InsulinSavingsHeader)) {
-			System.out.println("Important Information Section - Insulin Tier Information is Displayed;  Header: "+ImportantInfo_InsulinSavingsHeader.getText()+"    Text : "+ImportantInfo_InsulinSavingsText.getText());
-			Assert.assertTrue("Important Information Section - Insulin Tier Information is Displayed;  Header: "+ImportantInfo_InsulinSavingsHeader.getText()+"    Text : "+ImportantInfo_InsulinSavingsText.getText(),true);
-		}
-		else {
+		if (validateNew(ImportantInfo_InsulinSavingsText) && validateNew(ImportantInfo_InsulinSavingsHeader)) {
+			System.out.println("Important Information Section - Insulin Tier Information is Displayed;  Header: "
+					+ ImportantInfo_InsulinSavingsHeader.getText() + "    Text : "
+					+ ImportantInfo_InsulinSavingsText.getText());
+			Assert.assertTrue("Important Information Section - Insulin Tier Information is Displayed;  Header: "
+					+ ImportantInfo_InsulinSavingsHeader.getText() + "    Text : "
+					+ ImportantInfo_InsulinSavingsText.getText(), true);
+		} else {
 			Assert.fail("Important Information Section - Insulin Tier Information is NOT Displayed");
-		}		
-		
+		}
+
 	}
-	
+
 	@FindBy(xpath = "//input[contains(@id, 'drugsearch')]")
 	public WebElement EnterDrugNameTxt;
-	
+
 	@FindBy(xpath = "//button[(@id= 'search')]")
 	public WebElement SearchBtn;
-	
+
 	public BuildYourDrugListMobile clickEditDrugs() {
 		jsClickNew(editDrugListLink);
 		CommonUtility.waitForPageLoadNew(driver, EnterDrugNameTxt, 20);
-		if(validateNew(EnterDrugNameTxt) && validateNew(SearchBtn)) {
+		if (validateNew(EnterDrugNameTxt) && validateNew(SearchBtn)) {
 			return new BuildYourDrugListMobile(driver);
 		}
 		Assert.fail("Did not Navigate to Build Drug List Page");
 		return null;
 
 	}
-	
+
 	@FindBy(xpath = "//*[@id='modal-label' and contains(text(), 'Switch to Generic')]")
 	public WebElement SwitchPageHeader;
-	
+
 	@FindBy(xpath = "//img[contains(@class,'uhc-modal__close')]")
 	public WebElement SwitchPageCloseBtn;
-	
+
 	public SwitchToGenericMobile clickSwitchGeneric(String brandDrug) {
-		WebElement SwitchLink = driver.findElement(By.xpath("//*[contains(text(), '"+brandDrug+"')]//following-sibling::*[contains(text(), 'Switch')]"));
+		WebElement SwitchLink = driver.findElement(By
+				.xpath("//*[contains(text(), '" + brandDrug + "')]//following-sibling::*[contains(text(), 'Switch')]"));
 		jsClickNew(SwitchLink);
 		CommonUtility.waitForPageLoadNew(driver, SwitchPageHeader, 20);
-		if(validateNew(SwitchPageHeader) && validateNew(SwitchPageCloseBtn)) {
+		if (validateNew(SwitchPageHeader) && validateNew(SwitchPageCloseBtn)) {
 			return new SwitchToGenericMobile(driver);
 		}
 		Assert.fail("Did not Navigate to Switch To Generic Page");
 		return null;
 	}
-	
+
 	@FindBy(xpath = "//*[contains(@id, 'pharmacy-zip-filter') or contains(@name, 'zipCode')]")
 	public WebElement Pharmacy_ZipCodeTxt;
 
@@ -1220,7 +1244,6 @@ public class DrugDetailsPageMobile extends UhcDriver {
 
 	@FindBy(xpath = "//select[contains(@id, 'milesDropdown')]")
 	public WebElement Pharmacy_DistanceDropDwn;
-
 
 	@FindBy(xpath = "//select[contains(@id, 'milesDropdown')]//option[contains(text(), '1 Mile')]")
 	public WebElement Pharmacy_Distance_Select1Mile;
@@ -1242,97 +1265,92 @@ public class DrugDetailsPageMobile extends UhcDriver {
 
 	@FindBy(xpath = "//h2[contains(@id, 'matchingLbl')]")
 	public WebElement PharmacyCountTxt;
-	
+
 	public void validateZipandDistanceDropDwn(String pharmacyZipCode) {
 		validateNew(Pharmacy_DistanceDropDwn);
-		System.out.println("Pharmacy Seacth for default Zip "+Pharmacy_ZipCodeTxt.getText());
+		System.out.println("Pharmacy Seacth for default Zip " + Pharmacy_ZipCodeTxt.getText());
 
-		//jsClickNew(Pharmacy_DistanceDropDwn);
+		// jsClickNew(Pharmacy_DistanceDropDwn);
 		Pharmacy_DistanceDropDwn.click();
 		Pharmacy_Distance_Select1Mile.click();
-		//validateNew(Pharmacy_Distance_Select1Mile);
+		// validateNew(Pharmacy_Distance_Select1Mile);
 		jsClickNew(Pharmacy_Distance_Select1Mile);
 		validateNew(PharmacyCountTxt);
-		System.out.println("Pharmacy Count for 1 Mile Distance for Zip : "+PharmacyCountTxt.getText());
+		System.out.println("Pharmacy Count for 1 Mile Distance for Zip : " + PharmacyCountTxt.getText());
 
-		//jsClickNew(Pharmacy_DistanceDropDwn);
+		// jsClickNew(Pharmacy_DistanceDropDwn);
 		Pharmacy_DistanceDropDwn.click();
 		Pharmacy_Distance_Select2Mile.click();
-		//validateNew(Pharmacy_Distance_Select2Mile);
+		// validateNew(Pharmacy_Distance_Select2Mile);
 		jsClickNew(Pharmacy_Distance_Select2Mile);
 		validateNew(PharmacyCountTxt);
-		System.out.println("Pharmacy Count for 2 Mile Distance for Zip : "+PharmacyCountTxt.getText());
+		System.out.println("Pharmacy Count for 2 Mile Distance for Zip : " + PharmacyCountTxt.getText());
 
-		//jsClickNew(Pharmacy_DistanceDropDwn);
+		// jsClickNew(Pharmacy_DistanceDropDwn);
 		Pharmacy_DistanceDropDwn.click();
-		//validateNew(Pharmacy_Distance_Select5Mile);
+		// validateNew(Pharmacy_Distance_Select5Mile);
 		Pharmacy_Distance_Select5Mile.click();
 		jsClickNew(Pharmacy_Distance_Select5Mile);
 		validateNew(PharmacyCountTxt);
-		System.out.println("Pharmacy Count for 5 Mile Distance for Zip : "+PharmacyCountTxt.getText());
+		System.out.println("Pharmacy Count for 5 Mile Distance for Zip : " + PharmacyCountTxt.getText());
 
-		//jsClickNew(Pharmacy_DistanceDropDwn);
+		// jsClickNew(Pharmacy_DistanceDropDwn);
 		Pharmacy_DistanceDropDwn.click();
-		//validateNew(Pharmacy_Distance_Select10Mile);
+		// validateNew(Pharmacy_Distance_Select10Mile);
 		Pharmacy_Distance_Select10Mile.click();
 		jsClickNew(Pharmacy_Distance_Select10Mile);
 		validateNew(PharmacyCountTxt);
-		System.out.println("Pharmacy Count for 10 Mile Distance for Zip : "+PharmacyCountTxt.getText());
+		System.out.println("Pharmacy Count for 10 Mile Distance for Zip : " + PharmacyCountTxt.getText());
 
-		//jsClickNew(Pharmacy_DistanceDropDwn);
+		// jsClickNew(Pharmacy_DistanceDropDwn);
 		Pharmacy_DistanceDropDwn.click();
-		//validateNew(Pharmacy_Distance_Select15Mile);
+		// validateNew(Pharmacy_Distance_Select15Mile);
 		Pharmacy_Distance_Select15Mile.click();
 		jsClickNew(Pharmacy_Distance_Select15Mile);
 		validateNew(PharmacyCountTxt);
-		System.out.println("Pharmacy Count for 15 Mile Distance for Zip : "+PharmacyCountTxt.getText());
+		System.out.println("Pharmacy Count for 15 Mile Distance for Zip : " + PharmacyCountTxt.getText());
 
-		//jsClickNew(Pharmacy_DistanceDropDwn);
+		// jsClickNew(Pharmacy_DistanceDropDwn);
 		Pharmacy_DistanceDropDwn.click();
-		//validateNew(Pharmacy_Distance_Select25Mile);
+		// validateNew(Pharmacy_Distance_Select25Mile);
 		Pharmacy_Distance_Select25Mile.click();
 		jsClickNew(Pharmacy_Distance_Select25Mile);
 		validateNew(PharmacyCountTxt);
-		System.out.println("Pharmacy Count for 25 Mile Distance for Zip : "+PharmacyCountTxt.getText());
-		
+		System.out.println("Pharmacy Count for 25 Mile Distance for Zip : " + PharmacyCountTxt.getText());
+
 		validateNew(Pharmacy_ZipCodeTxt);
 		Pharmacy_ZipCodeTxt.clear();
 		Pharmacy_ZipCodeTxt.sendKeys(pharmacyZipCode);
 		validateNew(Pharmacy_SearchBtn);
 		Pharmacy_SearchBtn.click();
-		System.out.println("Pharmacy Seacth for Zip Expected - "+pharmacyZipCode+"  : Entered : "+Pharmacy_ZipCodeTxt.getText());
-		System.out.println("Default Pharmacy Count for Zip - "+pharmacyZipCode+"  : "+PharmacyCountTxt.getText());
+		System.out.println("Pharmacy Seacth for Zip Expected - " + pharmacyZipCode + "  : Entered : "
+				+ Pharmacy_ZipCodeTxt.getText());
+		System.out.println("Default Pharmacy Count for Zip - " + pharmacyZipCode + "  : " + PharmacyCountTxt.getText());
 
 	}
-	
-	
+
 	public void SelectPharmacy(String PharmacytoSelect) throws InterruptedException {
 
 		validateSelectPharmacyPage();
-		List <WebElement> PharmacyName = driver.findElements(By.xpath("//button[contains(@id, 'selectPharmacyBtn') and contains(@aria-label, 'Select "+PharmacytoSelect+"')]"));
+		List<WebElement> PharmacyName = driver
+				.findElements(By.xpath("//button[contains(@id, 'selectPharmacyBtn') and contains(@aria-label, 'Select "
+						+ PharmacytoSelect + "')]"));
 
 		jsClickNew(PharmacyName.get(0));
 		validateNew(saveDrugBtn);
-		saveDrugBtn.click();		
+		saveDrugBtn.click();
 	}
-	
+
 	public void validateNotCoveredPharmacyView() {
-		if(validate(YourDrugs_Table)  ||
-		validate(LinktoEditDrugList)  ||
-		validate(MonthlyDrugStage_Header)  ||
-		validate(MonthlyDrugStage_InitialCoverageStagerTbl) ||
-		validate(MonthlyDrugStage_CoverageGapStagerTbl) ||
-		validate(MonthlyDrugStage_CatastropheStagerTbl) ||
-		validate(MonthlyDrug_YouPay_heading) ||
-		validate(ImportantInfo_Header) ||
-		validate(CopaySection)
-		) {
+		if (validate(YourDrugs_Table) || validate(LinktoEditDrugList) || validate(MonthlyDrugStage_Header)
+				|| validate(MonthlyDrugStage_InitialCoverageStagerTbl)
+				|| validate(MonthlyDrugStage_CoverageGapStagerTbl) || validate(MonthlyDrugStage_CatastropheStagerTbl)
+				|| validate(MonthlyDrug_YouPay_heading) || validate(ImportantInfo_Header) || validate(CopaySection)) {
 			Assert.fail("***** DCE Details Page validation for Not Covered Pharmacy View - FAILED *****");
 		}
 		System.out.println("***** DCE Details Page validation for Not Covered Pharmacy View Passed *****");
-		System.out.println("***** Your Drugs, Monthly Costs by Stage, Copay and Coinsurance and Monthly Drugs costs Sections are not displayed *****");
+		System.out.println(
+				"***** Your Drugs, Monthly Costs by Stage, Copay and Coinsurance and Monthly Drugs costs Sections are not displayed *****");
 	}
-
-
 
 }
