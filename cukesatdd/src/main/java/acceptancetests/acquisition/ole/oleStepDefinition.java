@@ -3052,12 +3052,12 @@ public void the_user_validates_the_OLE_Submission_Details_in_GPS(DataTable arg1)
 				System.out.println("--------------------Storing Data for VPP Page Started----------------------");
 
 				//VPP Page
-				String planName = (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_NAME);
-				DetailsMap.put("Plan Name", planName.toUpperCase());
+				String PlanName = (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_NAME);
+				/*DetailsMap.put("Plan Name", PlanName.toUpperCase());
 				DetailsMap.put("Plan Year", (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_YEAR));	
 				String county = (String) getLoginScenario().getBean(oleCommonConstants.OLE_COUNTY);
 				DetailsMap.put("County", county.toUpperCase());
-
+				 */
 				System.out.println("--------------------Storing Data for VPP Page Ended----------------------");
 
 				//------------------------------------------------------------------------------------------------------------------------------------------------
@@ -3166,8 +3166,9 @@ public void the_user_validates_the_OLE_Submission_Details_in_GPS(DataTable arg1)
 				System.out.println("--------------------Storing Data for SEP Page Started----------------------");
 
 				//SEP Page
-
-				//TODO:Need to check and add Note
+				String note = "Q:I am losing coverage I had from an employer. A:09012020";
+				DetailsMap.put("Note", note);
+				
 
 				System.out.println("--------------------Storing Data for SEP Page Ended----------------------");
 
@@ -3201,10 +3202,13 @@ public void the_user_validates_the_OLE_Submission_Details_in_GPS(DataTable arg1)
 				System.out.println("--------------------Storing Data for Authorization Page Started----------------------");
 
 				//Authorization Page
-				//TODO:Need to check authorizationAgree is AUTHORIZED_REPRESENTATIVE_IND 
-				/*String authorizationAgree = (String) getLoginScenario().getBean(oleCommonConstants.AUTHORIZATION_AGREE);
-				DetailsMap.put("Authorization Agree", authorizationAgree.toUpperCase());
-				 */
+				String authorizationAgree = (String) getLoginScenario().getBean(oleCommonConstants.AUTHORIZATION_AGREE);
+				if(authorizationAgree.equalsIgnoreCase("Agree")) {
+				DetailsMap.put("Authorization Agree", "Y");
+				}
+				else {
+				DetailsMap.put("Authorization Agree", "N");	
+				}
 				String authorizationFirstName = (String) getLoginScenario().getBean(oleCommonConstants.AUTHORIZATION_FIRST_NAME);
 				DetailsMap.put("Authorization First Name", authorizationFirstName.toUpperCase());
 				String authorizationLastName = (String) getLoginScenario().getBean(oleCommonConstants.AUTHORIZATION_LAST_NAME);
@@ -3225,7 +3229,7 @@ public void the_user_validates_the_OLE_Submission_Details_in_GPS(DataTable arg1)
 				//------------------------------------------------------------------------------------------------------------------------------------------------
 
 				//-----------Adding for CSNP-----------------//
-
+				if(PlanName.contains("Chronic") || PlanName.contains("Gold") ||PlanName.contains("Silver")){
 				String diabetesquestion1= (String) getLoginScenario().getBean(oleCommonConstants.DIABETES_QUESTION_1);
 				diabetesquestion1=diabetesquestion1.substring(0, 1);
 				DetailsMap.put("Diabetes Question 1",diabetesquestion1);
@@ -3283,6 +3287,7 @@ public void the_user_validates_the_OLE_Submission_Details_in_GPS(DataTable arg1)
 				String disclosureProviderPhoneNumber= (String) getLoginScenario().getBean(oleCommonConstants.DISCLOSURE_PROVIDER_PHONENUMBER);
 				disclosureProviderPhoneNumber=disclosureProviderPhoneNumber.replaceAll("-", "").toUpperCase();
 				DetailsMap.put("Disclosure Provider PhoneNumber", disclosureProviderPhoneNumber);
+				}
 				
 				//---------------------------------------------------//
 				

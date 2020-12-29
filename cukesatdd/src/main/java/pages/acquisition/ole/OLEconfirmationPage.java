@@ -260,8 +260,8 @@ public class OLEconfirmationPage extends UhcDriver{
 				   
 				   
 				    //SEP Page 
-				   //String note = rs.getString("NOTE"); 29/12 TODO-Need to check if this field is passed through examples
-				  // gpsData.put("Note", note); 
+				   String note = rs.getString("NOTE");
+				   gpsData.put("Note", note); 
 				   
 				   //String dentalPlatinum = rs.getString("DENTAL_PLATINUM"); 29/12 TODO-Need to check if this field is passed through examples
 				   //gpsData.put("Dental Platinum", dentalPlatinum);  
