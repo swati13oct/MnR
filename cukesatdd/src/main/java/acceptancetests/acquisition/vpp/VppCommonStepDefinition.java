@@ -3205,5 +3205,21 @@ public void user_clicks_on_continue_enrollment_button_on_the_modal() throws Thro
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		plansummaryPage.removeProvidersFromPlanCard();
 	}
-
+	
+	@Then("^the user validate on medsupp plans confirmation page $")
+	public void User_validate_medsupp_plans_confirmation_page() throws Throwable {
+		
+		if (!(MRScenario.environment.equalsIgnoreCase("offline")
+				|| MRScenario.environment.equalsIgnoreCase("prod"))) {
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+	
+		plansummaryPage.medsuppOLEBenefitsTable();
+		plansummaryPage.medsuppOLEHealthInsurance();
+		plansummaryPage.medsuppOLEAARPSupplementPlans();
+		plansummaryPage.medsuppOLEPrintandSaveApplication();
+		plansummaryPage.medsuppOLEViewPrescriptionDrugPlans();
+	
+		}
+	}
 }

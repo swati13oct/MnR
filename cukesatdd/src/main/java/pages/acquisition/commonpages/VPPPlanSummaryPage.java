@@ -721,7 +721,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//span[contains(text(),'Submission Confirmation')]")
 	private WebElement submitconfirmation;
 
-	@FindBy(xpath = "//*[contains(text(),'View Prescription Drug Plans')]")
+	@FindBy(xpath = "//button[contains(text(),'View Prescription Drug Plans')]")
 	private WebElement ViewPrescriptionDrugPlans;
 
 	// @FindBy(xpath =
@@ -750,7 +750,18 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	// @FindBy(xpath = "(//a[contains(text(),'Enrollment Discount')])[2]")
 	@FindBy(xpath = "//a[contains(@href,'//aarpsupplementalhealth-stg.uhc.com/content/dam/ole/MedSuppDocs/EnrollmentDiscount') or contains(@href,'//www.aarpsupplementalhealth.com/content/dam/ole/MedSuppDocs/EnrollmentDiscount')]")
 	private WebElement EnrollmentDiscount;
-
+	
+	@FindBy(xpath = "//a[contains(text(), 'Benefit Table')]")
+	private WebElement RightRail_BenefitsTable;
+	
+	@FindBy(xpath = "//a[contains(text(), 'Guide to Health Insurance for People')]")
+	private WebElement RightRail_HealthInsurance;
+	@FindBy(xpath = "//a[contains(text(), 'Your Guide to AARP Medicare Supplement Insurance')]")
+	private WebElement RightRail_AARPSupplementPlans;
+	
+	@FindBy(xpath = "//a[contains(text(),'Print/save a copy of your application')]")
+	private WebElement PrintandSave_Application;
+	
 	@FindBy(xpath = "//a[contains(text(),'Back to all plans')]")
 	private WebElement backallplans;
 
@@ -6267,5 +6278,162 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			System.out.println("No providers in plan card");
 		}
 	}
+	public void medsuppOLEBenefitsTable() throws InterruptedException {
+		validateNew(RightRail_BenefitsTable);
+		CommonUtility.waitForPageLoadNew(driver, RightRail_BenefitsTable, 30);
+		String parentWindow = driver.getWindowHandle();
+		RightRail_BenefitsTable.click();
+		sleepBySec(3);
+		Set<String> tabs_windows = driver.getWindowHandles();
+		Iterator<String> itr = tabs_windows.iterator();
+		while (itr.hasNext()) {
+			String window = itr.next();
+			if (!parentWindow.equals(window)) {
+				driver.switchTo().window(window);
+			}
+		}
 
+		CommonUtility.checkPageIsReadyNew(driver);
+		String CurrentRailURL = driver.getCurrentUrl();
+		System.out.println("Actual  URL: " + CurrentRailURL);
+
+		if (CurrentRailURL.contains("https://aarpsupplementalhealth-stg.uhc.com/")
+				|| CurrentRailURL.contains("https://www.aarpsupplementalhealth.com/")
+						&& CurrentRailURL.contains(".pdf")) {
+			System.out.println("****************Benefits Table is displayed  ***************");
+
+			Assert.assertTrue(true);
+		} else {
+			Assert.fail("****************Benefits Table is not loaded ***************");
+		}
+		driver.switchTo().window(parentWindow);
+
+	}
+	
+	public void medsuppOLEHealthInsurance() throws InterruptedException {
+		validateNew(RightRail_HealthInsurance);
+		CommonUtility.waitForPageLoadNew(driver, RightRail_HealthInsurance, 30);
+		String parentWindow = driver.getWindowHandle();
+		RightRail_HealthInsurance.click();
+		sleepBySec(3);
+		Set<String> tabs_windows = driver.getWindowHandles();
+		Iterator<String> itr = tabs_windows.iterator();
+		while (itr.hasNext()) {
+			String window = itr.next();
+			if (!parentWindow.equals(window)) {
+				driver.switchTo().window(window);
+			}
+		}
+
+		CommonUtility.checkPageIsReadyNew(driver);
+		String CurrentRailURL = driver.getCurrentUrl();
+		System.out.println("Actual  URL: " + CurrentRailURL);
+
+		if (CurrentRailURL.contains("https://aarpsupplementalhealth-stg.uhc.com/")
+				|| CurrentRailURL.contains("https://www.aarpsupplementalhealth.com/")
+						&& CurrentRailURL.contains(".pdf")) {
+			System.out.println("****************Guide to Health Insurance for People with Medicare is displayed  ***************");
+
+			Assert.assertTrue(true);
+		} else {
+			Assert.fail("****************Guide to Health Insurance for People with Medicare is not loaded ***************");
+		}
+		driver.switchTo().window(parentWindow);
+
+	}
+	
+	public void medsuppOLEAARPSupplementPlans() throws InterruptedException {
+		validateNew(RightRail_AARPSupplementPlans);
+		CommonUtility.waitForPageLoadNew(driver, RightRail_AARPSupplementPlans, 30);
+		String parentWindow = driver.getWindowHandle();
+		RightRail_AARPSupplementPlans.click();
+		sleepBySec(3);
+		Set<String> tabs_windows = driver.getWindowHandles();
+		Iterator<String> itr = tabs_windows.iterator();
+		while (itr.hasNext()) {
+			String window = itr.next();
+			if (!parentWindow.equals(window)) {
+				driver.switchTo().window(window);
+			}
+		}
+
+		CommonUtility.checkPageIsReadyNew(driver);
+		String CurrentRailURL = driver.getCurrentUrl();
+		System.out.println("Actual  URL: " + CurrentRailURL);
+
+		if (CurrentRailURL.contains("https://aarpsupplementalhealth-stg.uhc.com/")
+				|| CurrentRailURL.contains("https://www.aarpsupplementalhealth.com/")
+						&& CurrentRailURL.contains(".pdf")) {
+			System.out.println("****************Your Guide to AARP Medicare Supplement Insurance Plans is displayed  ***************");
+
+			Assert.assertTrue(true);
+		} else {
+			Assert.fail("****************Your Guide to AARP Medicare Supplement Insurance Plans is not loaded ***************");
+		}
+		driver.switchTo().window(parentWindow);
+
+	}
+	
+	public void medsuppOLEPrintandSaveApplication() throws InterruptedException {
+		validateNew(PrintandSave_Application);
+		CommonUtility.waitForPageLoadNew(driver, PrintandSave_Application, 30);
+		String parentWindow = driver.getWindowHandle();
+		PrintandSave_Application.click();
+		sleepBySec(3);
+		Set<String> tabs_windows = driver.getWindowHandles();
+		Iterator<String> itr = tabs_windows.iterator();
+		while (itr.hasNext()) {
+			String window = itr.next();
+			if (!parentWindow.equals(window)) {
+				driver.switchTo().window(window);
+			}
+		}
+
+		CommonUtility.checkPageIsReadyNew(driver);
+		String CurrentRailURL = driver.getCurrentUrl();
+		System.out.println("Actual  URL: " + CurrentRailURL);
+
+		if (CurrentRailURL.contains("https://aarpsupplementalhealth-stg.uhc.com/")
+				|| CurrentRailURL.contains("https://www.aarpsupplementalhealth.com/")
+						&& CurrentRailURL.contains(".pdf")) {
+			System.out.println("**************** Print/save a copy of your application is displayed  ***************");
+
+			Assert.assertTrue(true);
+		} else {
+			Assert.fail("**************** Print/save a copy of your application is not loaded ***************");
+		}
+		driver.switchTo().window(parentWindow);
+
+	}
+	
+	public void medsuppOLEViewPrescriptionDrugPlans() throws InterruptedException {
+		validateNew(ViewPrescriptionDrugPlans);
+		CommonUtility.waitForPageLoadNew(driver, ViewPrescriptionDrugPlans, 30);
+		String parentWindow = driver.getWindowHandle();
+		ViewPrescriptionDrugPlans.click();
+		sleepBySec(3);
+		Set<String> tabs_windows = driver.getWindowHandles();
+		Iterator<String> itr = tabs_windows.iterator();
+		while (itr.hasNext()) {
+			String window = itr.next();
+			if (!parentWindow.equals(window)) {
+				driver.switchTo().window(window);
+			}
+		}
+
+		CommonUtility.checkPageIsReadyNew(driver);
+		String CurrentRailURL = driver.getCurrentUrl();
+		System.out.println("Actual  URL: " + CurrentRailURL);
+
+		if (CurrentRailURL.contains("https://www.stage-aarpmedicareplans.uhc.com/health-plans.html?product=pdp")
+				|| CurrentRailURL.contains("https://www.aarpmedicareplans.com/health-plans.html?product=pdp")) {
+			System.out.println("****************PDP Plans are displayed   ***************");
+
+			Assert.assertTrue(true);
+		} else {
+			Assert.fail("****************PDP Plans are not loaded ***************");
+		}
+	//	driver.switchTo().window(parentWindow);
+
+	}
 }

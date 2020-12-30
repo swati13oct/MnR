@@ -21,8 +21,8 @@ Feature: 1.05.9 UAT-OLE MedSupp Flow
       | Lastname      | <Lastname>    |
     Then the site user clicks on continue application until confirmaion page
     | MedicareNumber | <medicarenumber> |
-      
-    
+    Then the user validate on medsupp plans confirmation page 
+  
    @MedSupp_OLE_Common_AARP   
    Examples: 
     |scenario            | zipcode | isMultutiCounty | AARPUrl																					| county             | plantype | DOB      | Firstname | Lastname|  ApplicationID | applicationType | username | password |AARPUrl-stg|site|medicarenumber|
@@ -54,6 +54,7 @@ Scenario Outline: <scenario> MedSup E2E Flow through VPP Pages
       | Lastname      | <Lastname>    |
     Then the site user clicks on continue application until confirmaion page
     | MedicareNumber | <medicarenumber> |
+    Then the user validate on medsupp plans confirmation page 
        
    @MedSupp_OLE_Common_AARP
    Examples: 
