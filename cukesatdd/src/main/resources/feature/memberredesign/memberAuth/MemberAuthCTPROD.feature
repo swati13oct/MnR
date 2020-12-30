@@ -34,7 +34,9 @@ Feature: S1.1 To test Member Auth Sign for SSO Micro App.
 
   @regressionMemberPROD3
   Scenario Outline: Scenario- <Scenario> - Test Case_To test single signon using member auth - Search with Username
-    Given the user is on member auth login flow page
+    Given First check if feature security flag is set to true
+      | Feature | UCPSSOMemberAuth |
+    And the user is on member auth login flow page
     When the member is able to login with correct username and password
       | Username | <username> |
       | Password | <password> |
@@ -85,7 +87,9 @@ Feature: S1.1 To test Member Auth Sign for SSO Micro App.
       
     @sanityMemberPROD1
   Scenario Outline: Scenario- <Scenario> - Test Case_To test single signon using member auth - Search with Username
-    Given the user is on member auth login flow page
+    Given First check if feature security flag is set to true
+      | Feature | UCPSSOMemberAuth |
+    And the user is on member auth login flow page
     When the member is able to login with correct username and password
       | Username | <username> |
       | Password | <password> |
