@@ -2682,11 +2682,11 @@ public class VppCommonStepDefinition {
 		// if(urGuideURL!=null){
 		plansummaryPage.medsuppOLERightRail();
 		plansummaryPage.medsuppOLERightRailGuideourhealth();
-		// plansummaryPage.medsuppOLERightRailoutlinecoverage();
+	//	plansummaryPage.medsuppOLERightRailoutlinecoverage();
 		plansummaryPage.medsuppOLERightRailplanoverview();
 		plansummaryPage.medsuppOLERightRailRulesDisclose();
 		plansummaryPage.medsuppOLERightRailEnrollmentDiscount();
-		plansummaryPage.medsuppOLERightRailLearnmore();
+		//plansummaryPage.medsuppOLERightRailLearnmore();
 
 		// Assert.assertTrue(true);
 		// }else
@@ -2727,7 +2727,7 @@ public class VppCommonStepDefinition {
 		plansummaryPage.medsuppOLERightRailplanoverview();
 		plansummaryPage.medsuppOLERightRailRulesDisclose();
 		plansummaryPage.medsuppOLERightRailEnrollmentDiscount();
-		plansummaryPage.medsuppOLERightRailLearnmore();
+	//	plansummaryPage.medsuppOLERightRailLearnmore();
 	}
 
 	@Then("^agent saves two plans as favorite for user$")
@@ -3206,7 +3206,7 @@ public void user_clicks_on_continue_enrollment_button_on_the_modal() throws Thro
 		plansummaryPage.removeProvidersFromPlanCard();
 	}
 	
-	@Then("^the user validate on medsupp plans confirmation page $")
+	@Then("^the user validate on medsupp plans confirmation page$")
 	public void User_validate_medsupp_plans_confirmation_page() throws Throwable {
 		
 		if (!(MRScenario.environment.equalsIgnoreCase("offline")
@@ -3214,7 +3214,9 @@ public void user_clicks_on_continue_enrollment_button_on_the_modal() throws Thro
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 	
+		plansummaryPage.medsuppOLEPlanOverview();
 		plansummaryPage.medsuppOLEBenefitsTable();
+		plansummaryPage.medsuppOLERulesandDisclosures();
 		plansummaryPage.medsuppOLEHealthInsurance();
 		plansummaryPage.medsuppOLEAARPSupplementPlans();
 		plansummaryPage.medsuppOLEPrintandSaveApplication();
@@ -3222,4 +3224,6 @@ public void user_clicks_on_continue_enrollment_button_on_the_modal() throws Thro
 	
 		}
 	}
+	
+	
 }

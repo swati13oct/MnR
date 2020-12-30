@@ -1,4 +1,4 @@
-package atdd.runners.acquisition.ole;
+package atdd.runners.acquisition.ole_Medsupp;
 
 import org.junit.runner.RunWith;
 

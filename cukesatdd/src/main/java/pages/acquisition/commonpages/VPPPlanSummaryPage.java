@@ -380,8 +380,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	// MedSupp Resume application
 
-	// @FindBy(xpath = "(//*[contains(text(),'Start application')])[1]")
-	@FindBy(xpath = "(//*[contains(@class,'swiper-content')]//*[contains(text(),'Start application')])[1]")
+	@FindBy(xpath = "(//button[contains(text(),'Start application')])[1]")
+	//@FindBy(xpath = "(//*[contains(@class,'swiper-content')]//*[contains(text(),'Start application')])[1]")
 	private WebElement Start_ApplicationBtn;
 
 	@FindBy(className = "loading-dialog")
@@ -761,6 +761,12 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	
 	@FindBy(xpath = "//a[contains(text(),'Print/save a copy of your application')]")
 	private WebElement PrintandSave_Application;
+	
+	@FindBy(xpath = "//a[contains(text(), 'Plan Overview')]")
+	private WebElement medsuppOLE_PlanOverview;
+	
+	@FindBy(xpath = "//a[contains(text(), 'Rules and Disclosures')]")
+	private WebElement medsuppOLE_RulesandDisclosures;
 	
 	@FindBy(xpath = "//a[contains(text(),'Back to all plans')]")
 	private WebElement backallplans;
@@ -6434,6 +6440,70 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			Assert.fail("****************PDP Plans are not loaded ***************");
 		}
 	//	driver.switchTo().window(parentWindow);
+
+	}
+	public void medsuppOLEPlanOverview() throws InterruptedException {
+		validateNew(medsuppOLE_PlanOverview);
+		CommonUtility.waitForPageLoadNew(driver, medsuppOLE_PlanOverview, 30);
+		String parentWindow = driver.getWindowHandle();
+		medsuppOLE_PlanOverview.click();
+		sleepBySec(3);
+		Set<String> tabs_windows = driver.getWindowHandles();
+		Iterator<String> itr = tabs_windows.iterator();
+		while (itr.hasNext()) {
+			String window = itr.next();
+			if (!parentWindow.equals(window)) {
+				driver.switchTo().window(window);
+			}
+		}
+
+		CommonUtility.checkPageIsReadyNew(driver);
+		String CurrentRailURL = driver.getCurrentUrl();
+		System.out.println("Actual  URL: " + CurrentRailURL);
+
+		if (CurrentRailURL.contains("https://aarpsupplementalhealth-stg.uhc.com/")
+				|| CurrentRailURL.contains("https://www.aarpsupplementalhealth.com/")
+						&& CurrentRailURL.contains(".pdf")) {
+			System.out.println("****************  PlanOverview is displayed  ***************");
+
+			Assert.assertTrue(true);
+		} else {
+			Assert.fail("**************** PlanOverview is not loaded ***************");
+		}
+		driver.switchTo().window(parentWindow);
+
+	}
+	
+	
+	public void medsuppOLERulesandDisclosures() throws InterruptedException {
+		validateNew(medsuppOLE_RulesandDisclosures);
+		CommonUtility.waitForPageLoadNew(driver, medsuppOLE_RulesandDisclosures, 30);
+		String parentWindow = driver.getWindowHandle();
+		medsuppOLE_RulesandDisclosures.click();
+		sleepBySec(3);
+		Set<String> tabs_windows = driver.getWindowHandles();
+		Iterator<String> itr = tabs_windows.iterator();
+		while (itr.hasNext()) {
+			String window = itr.next();
+			if (!parentWindow.equals(window)) {
+				driver.switchTo().window(window);
+			}
+		}
+
+		CommonUtility.checkPageIsReadyNew(driver);
+		String CurrentRailURL = driver.getCurrentUrl();
+		System.out.println("Actual  URL: " + CurrentRailURL);
+
+		if (CurrentRailURL.contains("https://aarpsupplementalhealth-stg.uhc.com/")
+				|| CurrentRailURL.contains("https://www.aarpsupplementalhealth.com/")
+						&& CurrentRailURL.contains(".pdf")) {
+			System.out.println("****************  Rules and Disclosures is displayed  ***************");
+
+			Assert.assertTrue(true);
+		} else {
+			Assert.fail("**************** Rules and Disclosures is not loaded ***************");
+		}
+		driver.switchTo().window(parentWindow);
 
 	}
 }
