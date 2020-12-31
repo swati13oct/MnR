@@ -643,6 +643,7 @@ public class PlanRecommendationEngineHeaderAndFooter extends UhcDriver {
 //	Navigate to DCE
 	
 	public void navigationToDrugCostEstimatorViaShopTools() {
+		jsClickNew(headerNavigationBarHomeTab);
 		validate(headerNavigationBarShopForaPlanTab, 45);
 		jsMouseOver(headerNavigationBarShopForaPlanTab);
 //		jsClickNew(headerNavigationBarShopForaPlanTab);
