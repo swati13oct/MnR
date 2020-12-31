@@ -178,5 +178,28 @@ public class ShopForaPlanCommonStepDefinition {
 				.getBean(PageConstants.SHOP_FOR_A_PLAN_AARPLAYER);
 		shopaplan.providersearch();
 	}		
+	
+	@Given("^the user hovers screen over the learnabout Medicare for a plan$")
+	public void the_user_hovers_screen_over_the_learnabout_Medicare_for_a_plan() throws Throwable {	
+		AcquisitionHomePage acqusitionHomePage = (AcquisitionHomePage) getLoginScenario().getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		ShopForPlanNavigationPage shop = acqusitionHomePage.HoveronalearnaboutMedicare();
+		if (shop!=null) {
+			System.out.println("Medicare Education drop down is opened");
+			getLoginScenario().saveBean(PageConstants.SHOP_FOR_A_PLAN_AARPLAYER, shop);
+		}
+		else {
+			Assert.fail("Issue in selecting a plan drop down");
+		}
+	}
+	@Given("^click on Enroll Plan on Medicare Education Page for Medsupp plans$")
+	public void click_on_Enroll_Plan_on_Medicare_Education_for_Medicare_Avantage_plans() throws Throwable {
+		ShopForPlanNavigationPage shopaplan = (ShopForPlanNavigationPage) getLoginScenario()
+				.getBean(PageConstants.SHOP_FOR_A_PLAN_AARPLAYER);
+		ShopPage enrollPage = shopaplan.medicareductaionOnMedsuppPlan();
+		if (enrollPage != null)
+			getLoginScenario().saveBean(PageConstants.ENROLLMENT_BASICS_PAGE, enrollPage);
+		else
+			System.out.println("continue button is not displayed provider search page");
+	}
 }
 

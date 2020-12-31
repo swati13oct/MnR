@@ -80,6 +80,10 @@ public class ShopForPlanNavigationPage extends UhcDriver {
 	@FindBy(xpath = "//a[text()='Provider Search']")
 	private WebElement providerSearchLink;
 	
+	@FindBy(xpath = "(//a[contains(@href,'/medicare-education/medicare-supplement-plans.html')])[1]")
+	private WebElement MedicareSupplementLink;
+	
+	
 	public ShopForPlanNavigationPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -152,5 +156,20 @@ public class ShopForPlanNavigationPage extends UhcDriver {
 	public void providersearch() {
 		CommonUtility.waitForPageLoadNew(driver, providerSearchLink, 60);
 		validateNew(providerSearchLink);
+	}
+	
+	public ShopPage medicareductaionOnMedsuppPlan() throws Exception {
+		waitforElement(MedicareSupplementLink);
+		jsClickNew(MedicareSupplementLink);
+		Thread.sleep(4000);
+	/*	if (validate(msLeanHowToshopLink)) {
+			waitforElement(msLeanHowToshopLink);
+			jsClickNew(msLeanHowToshopLink);
+			threadsleep(2000);
+			System.out.println("Shop Page Medsupp Plan is Displayed");
+			//return new ShopPage(driver);
+		}*/
+	//	return null;
+		return null;
 	}
 }
