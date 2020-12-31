@@ -945,5 +945,18 @@ public class PlanRecommendationEngineStepDefinition {
 		checkpopup();
 		planSelectorResultspage.validatePDPPlanNamesAndEnroll();
 	}
+	
+	@Then("^user validate navigate to Drug Cost Estimator page$")
+	public void navigate_DCE() {
+		PlanRecommendationEngineHeaderAndFooter headerAndFooter =  new PlanRecommendationEngineHeaderAndFooter(wd);
+		headerAndFooter.navigationToDrugCostEstimatorViaShopTools();
+	}
+	
+	@And("^user validate druglist in Drug Cost Estimator page$")
+	public void Druglist_DCE() {
+		ACQDrugCostEstimatorPage dceDrugs =  new ACQDrugCostEstimatorPage(wd);
+		dceDrugs.getDruglist();
+	}
+	
 
 }

@@ -269,7 +269,13 @@ public class PlanRecommendationEngineHeaderAndFooter extends UhcDriver {
 	@FindBy(css = ".footer-middle>p:nth-of-type(2)")
 	public WebElement footerLastUpdated;
         
+// DCE elements
 	
+	@FindBy(css = "#addDrug")
+	private WebElement drugAddBtn;
+	
+	@FindBy(css = "h1#progressHeader")
+	private WebElement dceTitle;
 	
 //Header Element Verification Method 
 	
@@ -635,6 +641,18 @@ public class PlanRecommendationEngineHeaderAndFooter extends UhcDriver {
 		jsClickNew(HeaderGetRecommendationInShop);
 		validate(landingpageHeader, 30);
 		Assert.assertTrue(landingpageHeader.getText().contains("Plan"));
+	}
+	
+//	Navigate to DCE
+	
+	public void navigationToDrugCostEstimatorViaShopTools() {
+		validate(headerNavigationBarShopForaPlanTab, 45);
+		jsMouseOver(headerNavigationBarShopForaPlanTab);
+		jsClickNew(headerNavigationBarShopForaPlanTab);
+		jsClickNew(headerDrugcostLink);
+		validate(drugAddBtn, 30);
+		validate(dceTitle, 30);
+		Assert.assertTrue(dceTitle.getText().contains("Drug Cost Estimator"));
 	}
 	
 //ZipCode Function inside Shop for a Plan

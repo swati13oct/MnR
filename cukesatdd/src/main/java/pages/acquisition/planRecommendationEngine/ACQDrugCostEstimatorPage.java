@@ -32,6 +32,7 @@ public class ACQDrugCostEstimatorPage extends UhcDriver {
 	PlanRecommendationEngineCommonutility desktopCommonUtils = new PlanRecommendationEngineCommonutility(driver);
 	
 	public static ArrayList<String> DCEDrugsList = new ArrayList<String>();
+	ArrayList<String> druglistPRE;
 	public static ArrayList<String> DrugsList = new ArrayList<String>();
 	static ArrayList<String> vppDrugsResults = new ArrayList<String>();
 	static ArrayList<String> DCEDrugsResults = new ArrayList<String>();
@@ -271,6 +272,15 @@ public class ACQDrugCostEstimatorPage extends UhcDriver {
 		threadsleep(5000);
     	validate(PharmacyType);
     	Assert.assertTrue(PharmacyType.getText().contains("Preferred Mail Service Pharmacy"), "Pharmacy is not default online");    			
+	}
+	
+	public void getDruglist(){
+		PlanRecommendationEngineDrugsPage drugPRE = new PlanRecommendationEngineDrugsPage(driver);
+		druglistPRE = drugPRE.drugnamesList();
+		threadsleep(5000);
+		jsClickNew(drugAddBtn);
+		getDrugNamesDCE();
+		drugPRE.verifyConfirmationmodalResults(druglistPRE.size(), druglistPRE, DCEDrugsResults);
 	}
 
 }
