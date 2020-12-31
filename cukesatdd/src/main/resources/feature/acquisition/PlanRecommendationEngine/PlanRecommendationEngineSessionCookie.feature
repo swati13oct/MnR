@@ -364,7 +364,7 @@ Feature: Plan Recommendation Engine flow - Verify PRE flows functionalities with
     Then user selects add drug option in Drug page
       | Drug Selection | <Drug Selection>                                                       |
       | Drug Details   | <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch> |
-    Then user validate navigate to Drug Cost Estimator page
+    When user validate navigate to Drug Cost Estimator page
     And user validate druglist in Drug Cost Estimator page
 
     Examples: 
@@ -374,7 +374,7 @@ Feature: Plan Recommendation Engine flow - Verify PRE flows functionalities with
   @PRE @planrecommendation @DruglistSessionStorageDCEtoPRE @F537262 @PRERegression7
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds> , <travel> , <doctors> , <DoctorsName> , <isMultiDoctor> , <Drug Selection> , <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch> - To validate Drug list are same DCE vs PRE
     Given the user is on UHC medicare acquisition site landing page
-    Then user validate navigate to Drug Cost Estimator page
+    When user validate navigate to Drug Cost Estimator page
       | Drug Details | <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch> |
     Then user validate navigate to Get a Plan Recomendation page
     And clicks on get started button and runs questionnaire

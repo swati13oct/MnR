@@ -954,7 +954,7 @@ public class PlanRecommendationEngineStepDefinition {
 		planSelectorResultspage.validatePDPPlanNamesAndEnroll();
 	}
 	
-	@Then("^user validate navigate to Drug Cost Estimator page$")
+	@When("^user validate navigate to Drug Cost Estimator page$")
 	public void navigate_DCE() {
 		PlanRecommendationEngineHeaderAndFooter headerAndFooter =  new PlanRecommendationEngineHeaderAndFooter(wd);
 		headerAndFooter.navigationToDrugCostEstimatorViaShopTools();
