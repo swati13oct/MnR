@@ -285,7 +285,6 @@ public class ACQDrugCostEstimatorPage extends UhcDriver {
 	
 	public void useraddDrugsDCEWithoutVPP(String drugDetails) {
 		threadsleep(5000);
-		jsClickNew(drugAddBtn);
 		drugsHandlerWithdetails(drugDetails);
 		getDrugsDCE();
 	}
