@@ -279,7 +279,7 @@ public class ACQDrugCostEstimatorPage extends UhcDriver {
 		druglistPRE = drugPRE.drugnamesList();
 		threadsleep(5000);
 		jsClickNew(drugAddBtn);
-		getDrugNamesDCE();
+		getDrugsDCE();
 		drugPRE.verifyConfirmationmodalResults(druglistPRE.size(), druglistPRE, DCEDrugsResults);
 	}
 	
@@ -287,7 +287,7 @@ public class ACQDrugCostEstimatorPage extends UhcDriver {
 		threadsleep(5000);
 		jsClickNew(drugAddBtn);
 		drugsHandlerWithdetails(drugDetails);
-		getDrugNamesDCE();
+		getDrugsDCE();
 	}
 
 }
