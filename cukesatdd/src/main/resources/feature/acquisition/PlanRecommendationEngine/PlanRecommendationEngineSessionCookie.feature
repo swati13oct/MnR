@@ -375,6 +375,7 @@ Feature: Plan Recommendation Engine flow - Verify PRE flows functionalities with
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds> , <travel> , <doctors> , <DoctorsName> , <isMultiDoctor> , <Drug Selection> , <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch> - To validate Drug list are same DCE vs PRE
     Given the user is on UHC medicare acquisition site landing page
     When user validate navigate to Drug Cost Estimator page
+    Then user adds Drugs in Drug Cost Estimator page
       | Drug Details | <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch> |
     Then user validate navigate to Get a Plan Recomendation page
     And clicks on get started button and runs questionnaire
