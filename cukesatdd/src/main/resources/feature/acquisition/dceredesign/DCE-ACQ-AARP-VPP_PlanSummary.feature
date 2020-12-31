@@ -169,6 +169,11 @@ Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanSummary AARP - To test VPP Plan Details 
       | site | zipcode | plantype | county | isMultutiCounty | drug1   | planname                                           | mapdtestPlans                        | newzipcode |
       | AARP |   90210 | MAPD     | none   | no              | Orkambi | AARP Medicare Advantage SecureHorizons Focus (HMO) | AARP Medicare Advantage Plan 1 (HMO) |      10001 |
 
+
+    Examples: 
+      | site | zipcode | plantype | county | isMultutiCounty | drug1   | planname                                           | mapdtestPlans                        | newzipcode |
+      | UHC |   90210 | MAPD     | none   | no              | Orkambi | AARP Medicare Advantage SecureHorizons Focus (HMO) | AARP Medicare Advantage Plan 1 (HMO) |      10001 |
+
   @drugSummary_InitialZipCodeRetained @F539025
   Scenario Outline: To verify intial zipcode infomraiton retained while navigating to DCE from VPP summary
     Given the user is on medicare acquisition site landing page
@@ -186,13 +191,13 @@ Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanSummary AARP - To test VPP Plan Details 
 
     @F539025AARP
     Examples: 
-      | site | zipcode | plantype | county | isMultutiCounty | drug1   | planname                                           | mapdtestPlans                        | newzipcode |
-      | AARP |   90210 | MAPD     | none   | no              | Orkambi | AARP Medicare Advantage SecureHorizons Focus (HMO) | AARP Medicare Advantage Plan 1 (HMO) |      10001 |
+      | site | zipcode | county | isMultutiCounty | drug1   |
+      | AARP |   90210 | none   | no              | Orkambi |
 
     @F539025UHC
     Examples: 
-      | site | zipcode | plantype | county | isMultutiCounty | drug1   | planname                                           | mapdtestPlans                        | newzipcode |
-      | UHC  |   90210 | MAPD     | none   | no              | Orkambi | AARP Medicare Advantage SecureHorizons Focus (HMO) | AARP Medicare Advantage Plan 1 (HMO) |      10001 |
+      | site | zipcode | county | isMultutiCounty | drug1   |
+      | UHC  |   90210 | none   | no              | Orkambi |
 
   @drugSummary_InitialZipCodeRetained @F539025
   Scenario Outline: To verify zipcode infomraiton retained when plans are saved and zip code updated while navigating from VPP summary to DCE
@@ -288,12 +293,37 @@ Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanSummary AARP - To test VPP Plan Details 
       | DrugName | <drug2> |
     Then the user clicks on Review Drug Costs button to Land on Drug Summary Page
 
-    @F539025AARP
+    @F539025AARP0
     Examples: 
-      | site | drug1   | drug2  | plantype | planyear | testPlans                                                                | zipcode | isMultiCounty | county          | 
-      | AARP | Orkambi | Fanapt | MAPD     | next     | AARP Medicare Advantage Prime (HMO),AARP Medicare Advantage Plan 1 (HMO) |   10001 | NO            | New York County | 
+      | site | drug1   | drug2  | plantype | planyear | testPlans                                                                | zipcode | isMultiCounty | county          |
+      | AARP | Orkambi | Fanapt | MAPD     | next     | AARP Medicare Advantage Prime (HMO),AARP Medicare Advantage Plan 1 (HMO) |   10001 | NO            | New York County |
 
     @F539025UHC
     Examples: 
-      | site | drug1   | drug2  | plantype | planyear | testPlans                                                                | zipcode | isMultiCounty | county          | 
-      | UHC  | Orkambi | Fanapt | MAPD     | next     | AARP Medicare Advantage Prime (HMO),AARP Medicare Advantage Plan 1 (HMO) |   10001 | NO            | New York County | 
+      | site | drug1   | drug2  | plantype | planyear | testPlans                                                                | zipcode | isMultiCounty | county          |
+      | UHC  | Orkambi | Fanapt | MAPD     | next     | AARP Medicare Advantage Prime (HMO),AARP Medicare Advantage Plan 1 (HMO) |   10001 | NO            | New York County |
+
+  Scenario Outline: To verify zipcode infomraiton retained while navigating to shop pages from VPP summary
+    Given the user is on medicare acquisition site landing page
+      | Site | <site> |
+    When the user performs plan search using following information
+      | Zip Code        | <zipcode>         |
+      | County Name     | <county>          |
+      | Is Multi County | <isMultutiCounty> |
+    Then the user navigates to Shop plans for PDP Page and clicks on DCE link fto land on DCE Redesign
+    Then the user validates Get Started Page
+    Then the user clicks on Build Drug List to navigate to Build Drug List Page
+    Then the user searches and adds the following Drug to Drug List
+      | DrugName | <drug1> |
+    Then the user clicks on Review Drug Costs button to Land on Drug Summary Page
+    Then user should be able to see "Medicare Prescription Drug Plans" by default
+
+    @F549665
+    Examples: 
+      | site | zipcode | county | isMultutiCounty | drug1   |
+      | AARP |   90210 | none   | no              | Orkambi |
+
+   @F549665
+    Examples: 
+      | site | zipcode | county | isMultutiCounty | drug1   |
+      | UHC  |   90210 | none   | no              | Orkambi |
