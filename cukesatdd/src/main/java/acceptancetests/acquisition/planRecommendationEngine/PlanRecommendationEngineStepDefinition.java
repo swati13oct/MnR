@@ -415,6 +415,14 @@ public class PlanRecommendationEngineStepDefinition {
       		planSelectorDrugspage.drugsInitiate(inputValues.get("Drug Selection"));
       		planSelectorDrugspage.comparingDrugwithDCE();
       	}
+      	
+      	@Then("^user verify drug list are same in DCE VS Drug page$")
+      	public void verify_drugs_dce_vs_drug_page(DataTable givenAttributes) {
+      		readfeaturedata(givenAttributes);
+      		PlanRecommendationEngineDrugsPage planSelectorDrugspage =  new PlanRecommendationEngineDrugsPage(wd);
+      		planSelectorDrugspage.drugsInitiate(inputValues.get("Drug Selection"));
+      		planSelectorDrugspage.comparingDrugsDCEvsPRE();
+      	}
        
        @Then("^user selects add drug option and verifying the drugs in Drug page$")
      	public void verify_drugs_page(DataTable givenAttributes) {
@@ -956,6 +964,19 @@ public class PlanRecommendationEngineStepDefinition {
 	public void Druglist_DCE() {
 		ACQDrugCostEstimatorPage dceDrugs =  new ACQDrugCostEstimatorPage(wd);
 		dceDrugs.getDruglist();
+	}
+	
+	@Then("^user adds Drugs in Drug Cost Estimator page$")
+   	public void add_drugs_DCE_page(DataTable givenAttributes) {
+		readfeaturedata(givenAttributes);
+		ACQDrugCostEstimatorPage dce = new ACQDrugCostEstimatorPage(wd);
+		dce.useraddDrugsDCEWithoutVPP(inputValues.get("Drug Details"));
+   	}
+	
+	@Then("^user validate navigate to Get a Plan Recomendation page$")
+	public void navigate_PRE() {
+		PlanRecommendationEngineHeaderAndFooter headerAndFooter =  new PlanRecommendationEngineHeaderAndFooter(wd);
+		headerAndFooter.navigationToPlanRecommendationEngine();
 	}
 	
 

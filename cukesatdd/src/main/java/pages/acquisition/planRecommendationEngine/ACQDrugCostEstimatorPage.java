@@ -282,5 +282,12 @@ public class ACQDrugCostEstimatorPage extends UhcDriver {
 		getDrugNamesDCE();
 		drugPRE.verifyConfirmationmodalResults(druglistPRE.size(), druglistPRE, DCEDrugsResults);
 	}
+	
+	public void useraddDrugsDCEWithoutVPP(String drugDetails) {
+		threadsleep(5000);
+		jsClickNew(drugAddBtn);
+		drugsHandlerWithdetails(drugDetails);
+		getDrugNamesDCE();
+	}
 
 }

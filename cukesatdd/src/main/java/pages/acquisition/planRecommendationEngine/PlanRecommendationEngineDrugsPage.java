@@ -347,6 +347,17 @@ public class PlanRecommendationEngineDrugsPage extends UhcDriver {
 		drugnamesList();
 		verifyConfirmationmodalResults(DrugsInDCE.size(), DrugsInDCE, drugNames);
 	}
+	
+//	Fetch the drug details and compare with DCE 
+
+		public void comparingDrugsDCEvsPRE() {
+			System.out.println("Validating " + page + " page druglist with DCE drugs");
+			ACQDrugCostEstimatorPage dce = new ACQDrugCostEstimatorPage(driver);
+			DrugsInDCE = dce.DCEDrugsResults;
+			threadsleep(2000);
+			drugnamesList();
+			verifyConfirmationmodalResults(DrugsInDCE.size(), DrugsInDCE, drugNames);
+		}	
 
 // Compare the drug details and compare with DCE 
 

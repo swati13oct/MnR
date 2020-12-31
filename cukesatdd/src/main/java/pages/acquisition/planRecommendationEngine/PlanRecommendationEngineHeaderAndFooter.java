@@ -616,15 +616,12 @@ public class PlanRecommendationEngineHeaderAndFooter extends UhcDriver {
 	}
 	
 //Navigating Plan RecommendationEngine via Get Plan Recommendation	
-	public void navigationToPlanRecommendationEngine() throws InterruptedException{
-		/*validate(headerNavigationBarShopForaPlanTab, 45);
-		actions.moveToElement(headerNavigationBarShopForaPlanTab).perform();
-		 Thread.sleep(10000);
-		 validate(headerGetaPlanRecommendationLink, 30);
-		 actions.moveToElement(headerGetaPlanRecommendationLink,20,0).click().perform();*/
-		actions.moveToElement(headerNavigationBarShopForaPlanTab).click(headerGetaPlanRecommendationLink).build().perform();
+	public void navigationToPlanRecommendationEngine() {
+		validate(headerNavigationBarShopForaPlanTab, 45);
+		jsMouseOver(headerNavigationBarShopForaPlanTab);
+//		jsClickNew(headerNavigationBarShopForaPlanTab);
+		jsClickNew(headerGetaPlanRecommendationLink);
 		validate(landingpageHeader, 30);
-//		Assert.assertTrue(landingpageHeader.getText().contains("plan"));
 	}
 	
 //Navigating Plan RecommendationEngine via Shop for a plan -->Shop-->Tools-->Get Help Choosing	
@@ -648,7 +645,7 @@ public class PlanRecommendationEngineHeaderAndFooter extends UhcDriver {
 	public void navigationToDrugCostEstimatorViaShopTools() {
 		validate(headerNavigationBarShopForaPlanTab, 45);
 		jsMouseOver(headerNavigationBarShopForaPlanTab);
-		jsClickNew(headerNavigationBarShopForaPlanTab);
+//		jsClickNew(headerNavigationBarShopForaPlanTab);
 		jsClickNew(headerDrugcostLink);
 		validate(drugAddBtn, 30);
 		validate(dceTitle, 30);
