@@ -3681,9 +3681,20 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 			CommonUtility.waitForPageLoadNew(driver, zipCodeMedicareField, 30);
 			sendkeys(zipCodeMedicareField, zipcode);
-			jsClickNew(LearnMedicareMedsuppEnrollButton);
+			//jsClickNew(LearnMedicareMedsuppEnrollButton);
 			waitForPageLoadSafari();
-			// }
+			CommonUtility.waitForPageLoadNew(driver, LearnMedicareMedsuppEnrollButton, 30);
+			String parentWindow = driver.getWindowHandle();
+			jsClickNew(LearnMedicareMedsuppEnrollButton);
+			sleepBySec(3);
+			Set<String> tabs_windows = driver.getWindowHandles();
+			Iterator<String> itr = tabs_windows.iterator();
+			while (itr.hasNext()) {
+				String window = itr.next();
+				if (!parentWindow.equals(window)) {
+					driver.switchTo().window(window);
+				}
+			}
 			CommonUtility.waitForPageLoadNew(driver, zipcodeChangeLink, 30);
 			if (driver.getCurrentUrl().contains("health-plans")) {
 				return new VPPPlanSummaryPage(driver);
@@ -3693,7 +3704,18 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			public VPPPlanSummaryPage searchPlansLearnMedicareMedsupp(String zipcode, String countyName) {
 			CommonUtility.waitForPageLoadNew(driver, zipCodeMedicareField, 30);
 			sendkeys(zipCodeMedicareField, zipcode);
+			CommonUtility.waitForPageLoadNew(driver, LearnMedicareMedsuppEnrollButton, 30);
+			String parentWindow = driver.getWindowHandle();
 			jsClickNew(LearnMedicareMedsuppEnrollButton);
+			sleepBySec(3);
+			Set<String> tabs_windows = driver.getWindowHandles();
+			Iterator<String> itr = tabs_windows.iterator();
+			while (itr.hasNext()) {
+				String window = itr.next();
+				if (!parentWindow.equals(window)) {
+					driver.switchTo().window(window);
+				}
+			}
 			CommonUtility.waitForPageLoad(driver, countyModal, 45);
 			if (validate(countyModal))
 				jsClickNew(driver.findElement(By.xpath("//div[@id='selectCounty']//a[text()='" + countyName + "']")));
@@ -3703,4 +3725,6 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			}
 			return null;
 		}	
+			
+						
 }
