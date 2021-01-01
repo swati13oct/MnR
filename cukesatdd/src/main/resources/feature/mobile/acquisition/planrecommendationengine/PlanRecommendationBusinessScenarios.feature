@@ -92,8 +92,8 @@ Feature: Plan Recommendation Engine Ranking - Verify PRE Business flows with API
     Then user validate UI and API recommendation rankings in results page mobile
 
     Examples: 
-      | Zipcode | isMultiCounty | County     | isCoverageOpt | SpecialNeeds | TravelOption | DoctorsSelection | DoctorsName | isMultiDoctor | DrugSelection | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities          |
-      |   33143 | NO            | Miami-Dade | None          | None         | None         | UHCNetwork       |             |               | No            | Yes,No,No,No                  | Lower                | both           | Health Cost,Doctors |
+      | Zipcode | isMultiCounty | County     | isCoverageOpt | SpecialNeeds | TravelOption | DoctorsSelection | DoctorsName | isMultiDoctor | DrugSelection | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities                  |
+      |   33143 | NO            | Miami-Dade | None          | None         | None         | UHCNetwork       |             |               | No            | Yes,No,No,No                  | Lower                | both           | Health Care Premium,Doctors |
 
   @PRE @Rankingmobile @MAAPIUIRanking @APIRankingmobile @F358846
   Scenario Outline: Zipcode: <Zipcode> -MultiCountyOptions: <isMultiCounty> -CoverageOptions: <isCoverageOpt> -SNP: <SpecialNeeds> -Travel: <TravelOption> -Doctors: <DoctorsSelection> -AdditionalOption: <Dental-Hearing-Vision-Fitness> -CostPreferenceSelection: <costPreferenceOption> - To validate API ranking with UI plans in PRE Mobile
@@ -124,5 +124,5 @@ Feature: Plan Recommendation Engine Ranking - Verify PRE Business flows with API
     Then user validate UI and API recommendation rankings in results page mobile
 
     Examples: 
-      | Zipcode | isMultiCounty | County        | isCoverageOpt | SpecialNeeds     | TravelOption | DoctorsSelection | DoctorsName                      | isMultiDoctor | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities         |
-      |   30012 | YES           | Walton County | MA            | Medicaid,Nursing | WithinUS     | lookup           | Emily Adams, NP:Azizul Hoque, MD | NO            | Yes,Yes,Yes,Yes               | Lower                | both           | Travel,Health Cost |
+      | Zipcode | isMultiCounty | County        | isCoverageOpt | SpecialNeeds     | TravelOption | DoctorsSelection | DoctorsName                      | isMultiDoctor | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities                 |
+      |   30012 | YES           | Walton County | MA            | Medicaid,Nursing | WithinUS     | lookup           | Emily Adams, NP:Azizul Hoque, MD | NO            | Yes,Yes,Yes,Yes               | Lower                | both           | Travel,Health Care Premium |

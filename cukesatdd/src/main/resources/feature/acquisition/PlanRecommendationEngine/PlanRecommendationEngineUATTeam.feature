@@ -34,8 +34,8 @@ Feature: PRE_UAT - Verify UAT Scenarios in PRE
     Then user Validate Drug and Provider details in Visitor profile page
 
     Examples: 
-      | Zipcode | isMultiCounty | county   | isCoverageOpt | specialNeeds | travel | doctors | DoctorsName | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities             | PlanYear |
-      |   10001 | NO            | New York | None          | None         | None   | Lookup  | sue         | NO            | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,1,YES,NO                               | Yes,No,No,Yes                 | Lower                | both           | Drug Cost, Health Cost | current  |
+      | Zipcode | isMultiCounty | county   | isCoverageOpt | specialNeeds | travel | doctors | DoctorsName | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities                     | PlanYear |
+      |   10001 | NO            | New York | None          | None         | None   | Lookup  | sue         | NO            | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,1,YES,NO                               | Yes,No,No,Yes                 | Lower                | both           | Drug Cost, Health Care Premium | current  |
 
   @PRE @planrecommendation @PRE_UAT_DCE_VPP
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds> , <travel> , <DoctorsName> , <Dental-Hearing-Vision-Fitness> , <costPreferenceOption> - To validate Drugs in VPP page when MA flow complete in PRE and Add drugs in DCE
@@ -68,8 +68,8 @@ Feature: PRE_UAT - Verify UAT Scenarios in PRE
     Then user validate drugs details from DCE to VPP and PRE page
 
     Examples: 
-      | Zipcode | isMultiCounty | county  | isCoverageOpt | specialNeeds | travel   | doctors    | DoctorsName | isMultiDoctor | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities           | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch |
-      |   15537 | NO            | Bedford | MA            | Medicaid     | withinUS | UHGNetwork |             |               | Yes,No,No,No                  | Lower                | 1st            | Doctors, Health Cost | Lipitor,YES,Lipitor TAB 10MG,,,1,YES,NO                              |
+      | Zipcode | isMultiCounty | county  | isCoverageOpt | specialNeeds | travel   | doctors    | DoctorsName | isMultiDoctor | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities                   | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch |
+      |   15537 | NO            | Bedford | MA            | Medicaid     | withinUS | UHGNetwork |             |               | Yes,No,No,No                  | Lower                | 1st            | Doctors, Health Care Premium | Lipitor,YES,Lipitor TAB 10MG,,,1,YES,NO                              |
 
   @PRE @planrecommendation @PRE_UAT_ExternalLink
   Scenario Outline: <site>  - To validate drug and doctors in Visitor profile

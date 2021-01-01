@@ -106,9 +106,9 @@ Feature: Plan Recommendation Engine flow - Verify PRE flows functionalities with
       | 2nd Recommendation | <2ndRecommendation> |
 
     Examples: 
-      | Zipcode | isMultiCounty | County         | isCoverageOpt | SpecialNeeds | TravelOption | DoctorsSelection | DoctorsName | isMultiDoctor | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities          | 1stRecommendation | 2ndRecommendation |
-      |   10003 | NO            | New York       | MA            | None         | WithinUS     | lookup           | sue         | YES           | Yes,No,No,Yes                 | Lower                | both           | Travel,Doctors      | MA                | MS                |
-      |   25813 | NO            | Raleigh County | MA            | Medicaid     | Regular      | AcceptsMedicare  |             |               | No,No,No,No                   | Higher               | 1st            | Health Cost,Doctors | MS                |                   |
+      | Zipcode | isMultiCounty | County         | isCoverageOpt | SpecialNeeds | TravelOption | DoctorsSelection | DoctorsName | isMultiDoctor | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities                  | 1stRecommendation | 2ndRecommendation |
+      |   10003 | NO            | New York       | MA            | None         | WithinUS     | lookup           | sue         | YES           | Yes,No,No,Yes                 | Lower                | both           | Travel,Doctors              | MA                | MS                |
+      |   25813 | NO            | Raleigh County | MA            | Medicaid     | Regular      | AcceptsMedicare  |             |               | No,No,No,No                   | Higher               | 1st            | Health Care Premium,Doctors | MS                |                   |
 
   @PRE @planrecommandonationmobile @MAPDmobile @MAPDdrugmobile @F358830 @F458224
   Scenario Outline: Zipcode: <Zipcode> -MultiCountyOptions: <isMultiCounty> -CoverageOptions: <isCoverageOpt> -SNP: <SpecialNeeds> -Travel: <TravelOption> -Doctors: <DoctorsSelection> -AdditionalOption: <Dental-Hearing-Vision-Fitness> -CostPreferenceSelection: <costPreferenceOption> - To validate MAPD flow with drug functions for MA plans in PRE Mobile
@@ -148,8 +148,8 @@ Feature: Plan Recommendation Engine flow - Verify PRE flows functionalities with
       | 2nd Recommendation | <2ndRecommendation> |
 
     Examples: 
-      | Zipcode | isMultiCounty | County   | isCoverageOpt | SpecialNeeds | TravelOption | DoctorsSelection | DoctorsName | isMultiDoctor | DrugSelection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch | PharmacySelection | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities          | 1stRecommendation | 2ndRecommendation |
-      |   10003 | NO            | New York | MAPD          | None         | Regular      | lookup           | sue         | YES           | Yes           | Lipitor,NO,Lipitor TAB 20MG,,,3,YES,NO                               | Retail            | Yes,No,No,Yes                 | Lower                | 1st            | Health Cost,Doctors | MA                | MS                |
+      | Zipcode | isMultiCounty | County   | isCoverageOpt | SpecialNeeds | TravelOption | DoctorsSelection | DoctorsName | isMultiDoctor | DrugSelection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch | PharmacySelection | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities                  | 1stRecommendation | 2ndRecommendation |
+      |   10003 | NO            | New York | MAPD          | None         | Regular      | lookup           | sue         | YES           | Yes           | Lipitor,NO,Lipitor TAB 20MG,,,3,YES,NO                               | Retail            | Yes,No,No,Yes                 | Lower                | 1st            | Health Care Premium,Doctors | MA                | MS                |
 
   @PRE @planrecommandonationmobile @MAPDmobile @MAPDskipdrugmobile @F358830
   Scenario Outline: Zipcode: <Zipcode> -MultiCountyOptions: <isMultiCounty> -CoverageOptions: <isCoverageOpt> -SNP: <SpecialNeeds> -Travel: <TravelOption> -Doctors: <DoctorsSelection> -AdditionalOption: <Dental-Hearing-Vision-Fitness> -CostPreferenceSelection: <costPreferenceOption> - To validate MAPD skip drug flow functions for MS plans in PRE Mobile
