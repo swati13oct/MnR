@@ -39,5 +39,5 @@ Feature: OTC CTA Tile on P&P page
     Then user will see the authenticated healthybenefits web page open in a new tab using memAuth
 
     Examples: 
-      | username | password | memUserName                          | planType | memberType |
-      | kjadha10 | Virus$$1 | b92bec7d-d216-474e-9d33-dad7babeb443 | MAPD     | Individual |
+      | username | password | memUserName | planType | memberType |
+      | kjadha10 | Virus$$1 | elizfein    | MAPD     | Individual |
