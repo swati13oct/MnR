@@ -1120,6 +1120,7 @@ public class VppCommonStepDefinition {
 					memberAttributesRow.get(i).getCells().get(1));
 		}
 		String path = memberAttributesMap.get("PagePath");
+		//String plantype = memberAttributesMap.get("Plan Type");
 		path = path.replace("!", "#");
 		System.out.print("Path to Acq page : " + path);
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
@@ -1129,6 +1130,7 @@ public class VppCommonStepDefinition {
 		VPPPlanSummaryPage plansummaryPage = new VPPPlanSummaryPage(wd);
 		if (plansummaryPage != null) {
 			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
+		//	getLoginScenario().saveBean(VPPCommonConstants.PLAN_TYPE, plantype);
 
 		} else {
 			Assert.fail("Error Loading VPP plan summary page");
@@ -3251,6 +3253,38 @@ public void user_clicks_on_continue_enrollment_button_on_the_modal() throws Thro
 
 		if (plansummaryPage != null) {
 			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
+
+		} else {
+			Assert.fail("Error Loading VPP plan summary page");
+		}
+	}
+	
+	@Given("^the user navigates to following Campaign acquisition site page for External Links$")
+	public void the_user_navigates_to_following_medicare_acquisition_site_for_External_Links(DataTable givenAttributes) throws Throwable {
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		String path = memberAttributesMap.get("PagePath");
+		String plantype = memberAttributesMap.get("Plan Type");
+		String zipcode = memberAttributesMap.get("Zip Code");
+		String county = memberAttributesMap.get("County Name");
+		String isMultiCounty = memberAttributesMap.get("Is Multi County");
+		path = path.replace("!", "#");
+		System.out.print("Path to Acq page : " + path);
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+
+		aquisitionhomepage.navigateToPath(path);
+		VPPPlanSummaryPage plansummaryPage = new VPPPlanSummaryPage(wd);
+		if (plansummaryPage != null) {
+			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
+			getLoginScenario().saveBean(VPPCommonConstants.PLAN_TYPE, plantype);
+			getLoginScenario().saveBean(VPPCommonConstants.ZIPCODE, zipcode);
+			getLoginScenario().saveBean(VPPCommonConstants.COUNTY, county);
+			getLoginScenario().saveBean(VPPCommonConstants.IS_MULTICOUNTY, isMultiCounty);
 
 		} else {
 			Assert.fail("Error Loading VPP plan summary page");
