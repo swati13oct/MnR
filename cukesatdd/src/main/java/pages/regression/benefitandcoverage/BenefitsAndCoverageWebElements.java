@@ -208,7 +208,7 @@ public class BenefitsAndCoverageWebElements extends UhcDriver {
 	@FindBy(xpath = "//a[contains(text(),'VIEW DETAILS AT OPTUMRX.COM')]")
 	protected WebElement viewDetailsAtOptumrxLink;	
 	
-	@FindBy(xpath = "//p[contains(text(),'PRESCRIPTION DRUG COST SUMMARY')]")
+	@FindBy(xpath = "//h4[contains(text(),'PRESCRIPTION DRUG COST SUMMARY')]")
 	protected WebElement viewDetailsAtOptumrxLinkSection;	
 	
 	@FindBy(className = "atdd-bnc-drgcopaysdiscounts-title")

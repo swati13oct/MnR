@@ -20,7 +20,9 @@ Feature: S1.1 To test Member Auth CHAT functionality on PROD
 
   @regressionMemberPROD @regressionMemberPRODGroupChat @sanityMemberPROD2
   Scenario Outline: <Scenario> - Verify member auth functionality For Group member CHAT
-    Given the user is on member auth login flow page
+    Given First check if feature security flag is set to true
+      | Feature | UCPContactus |
+    And the user is on member auth login flow page
     When the member is able to login with correct username and password
       | Username | <username> |
       | Password | <password> |
