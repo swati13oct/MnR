@@ -5728,6 +5728,11 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 		}
 		return isDisplayed;
 	}
+	
+	public boolean display_provider_search_tile() {
+		TestHarness.checkForIPerceptionModel(driver);
+		return validate(providersearchlink,5);
+	}
 
 }
 

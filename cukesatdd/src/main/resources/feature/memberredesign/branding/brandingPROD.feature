@@ -49,7 +49,9 @@ Feature: 1.14 Member Branding functionality
 
   @regressionMemberPROD2
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify_<Test Case>
-    Given the user is on member auth login flow page
+    Given First check if feature security flag is set to true
+      | Feature | UCPUserManagement |
+    And the user is on member auth login flow page
     When the member is able to login with correct username and password
       | Username | <username> |
       | Password | <password> |
