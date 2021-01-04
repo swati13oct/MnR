@@ -18,13 +18,13 @@ Feature: 1.07.1 Member DCE Page - Member Auth - PROD
    
     Examples: 
       | index | TID   | username | password | MemUserName       | planType | memberType   |
-      | 01    | 15327 | kkumard  | tnps459# |  PTHUYNH50	    | SSUP     | SSUP_DCE     | 
+      | 01    | 15327 | kkumard  | tnps459# |  DKELLY27	        | SSUP     | SSUP_DCE     | 
 
 	@prod_sanity_01 
     Examples: 
       | index | TID   | username | password | MemUserName       | planType | memberType   |
-      | 02    | 15326 | kkumard  | tnps459# | vernajohnson19651	| SHIP     | SHIP_DCE     |
-      | 03    | 15337 | kkumard  | tnps459# | ExDesertrat  	    | MA       | MA_DCE       |
+      | 02    | 15326 | kkumard  | tnps459# | tntparents82	    | SHIP     | SHIP_DCE     |
+      | 03    | 15337 | kkumard  | tnps459# | ssmhi1     	    | MA       | MA_DCE       |
       
    
   @drugCostEstimator2 @prod @prod_dce_p2

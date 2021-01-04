@@ -591,6 +591,30 @@ public class VppCommonStepDefinition {
 
 	    
 	}
+	
+	@Then("^user clicks on view plan details button and validates plan name start application button and benefit link$")
+	public void user_clicks_on_view_plan_details_button_and_validates_plan_name_start_application_button_and_benefit_link() throws Throwable {
+	    // Write code here that turns the phrase above into concrete actions
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		
+		boolean result = plansummaryPage.validateFieldsOnPlanDetails();
+		Assert.assertTrue("plan name start application button and benefit link are validated", result);
+		System.out.println("plan name start application button and benefit link are validated");
+
+	}
+
+	@Then("^user clicks on compare plans link and validates plan name start application button and benefit link$")
+	public void user_clicks_on_compare_plans_link_and_validates_plan_name_start_application_button_and_benefit_link() throws Throwable {
+	    // Write code here that turns the phrase above into concrete actions
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		
+		boolean result = plansummaryPage.validateFieldsOnPlanCompare();
+		Assert.assertTrue("plan name start application button and benefit link are validated", result);
+		System.out.println("plan name start application button and benefit link are validated");
+
+	}
 
 
 	@Then("^user clicks on resume application button$")

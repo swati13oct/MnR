@@ -269,18 +269,18 @@ public class MRScenario {
 			if (environment.contains("team-ci")) {
 				csvName = "MemberRedesign-VBF-Teamci.csv";
 
-			} else if ((environment.contains("team-a")
-					|| (//(environment.equalsIgnoreCase("team-h")) || Team-h condition added separately to take username as login
-							(environment.equalsIgnoreCase("team-e"))
+			} else if ((environment.equalsIgnoreCase("team-e"))
 							|| (environment.equalsIgnoreCase("team-f")) || (environment.equalsIgnoreCase("team-g"))
-							|| (environment.equalsIgnoreCase("team-c")) || (environment.equalsIgnoreCase("team-acme")) || (environment.equalsIgnoreCase("team-voc"))|| (environment.equalsIgnoreCase("team-t") || (environment.equalsIgnoreCase("team-chargers") || (environment.equalsIgnoreCase("team-avengers-plm") ||(environment.equalsIgnoreCase("chargers-qa")))))))) {
+							|| (environment.equalsIgnoreCase("team-c")) || (environment.equalsIgnoreCase("team-acme")) 
+							|| (environment.equalsIgnoreCase("team-voc"))|| (environment.equalsIgnoreCase("team-t")) 
+							|| (environment.equalsIgnoreCase("team-chargers")) || (environment.equalsIgnoreCase("team-avengers-plm")) 
+							|| (environment.equalsIgnoreCase("chargers-qa")) || (environment.equalsIgnoreCase("team-uhc-rx"))) {
 				csvName = "MemberRedesign-UUID.csv";
 			} else if (tagName.equalsIgnoreCase("@MemberVBF") && environment.contains("stage")) {
 				csvName = "MemberRedesign-VBF.csv";
-			} else if (environment.equalsIgnoreCase("team-h")) {
+			} else if (environment.equalsIgnoreCase("team-h") || environment.equalsIgnoreCase("team-atest")) {
 				csvName = "UMS-Member-Type.csv";
-			}
-			/*
+			}			/*
 			 * note: Dec2018 - comment out because this section caused stage run not to use
 			 * UMS-Member-Type.csv else{ if
 			 * (tagName.equalsIgnoreCase("@benefitsAndCoverage")) { csvName =
@@ -640,7 +640,7 @@ try {
 		}else{
 		if(environment.contains("stage"))
 		domain = "uhc.com";
-		else if(environment.equals("team-atest") || environment.equals("team-e")||environment.equals("team-t")||environment.equals("team-v1")||environment.equals("team-acme")|| environment.equals("team-voc") ||environment.equals("team-acme") ||environment.contains("digital-uat") ||environment.equals("team-chargers") ||environment.contains("chargers")||environment.equals("team-avengers-plm") ||environment.contains("team-avengers-plm")||environment.contains("chargers-qa"))
+		else if(environment.equals("team-atest") || environment.equals("team-e")||environment.equals("team-t")||environment.equals("team-v1")||environment.equals("team-acme")|| environment.equals("team-voc") ||environment.equals("team-acme") ||environment.contains("digital-uat") ||environment.equals("team-chargers") ||environment.contains("chargers")||environment.equals("team-avengers-plm") ||environment.contains("team-avengers-plm")||environment.contains("chargers-qa") ||environment.contains("team-uhc-rx"))
 		domain = "ocp-elr-core-nonprod.optum.com";
 		else if(environment.contains("mnr-acq"))
 			domain = "origin-elr-dmz.optum.com";
@@ -1301,4 +1301,3 @@ try {
 	}
 
 }
-

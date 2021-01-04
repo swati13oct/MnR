@@ -65,7 +65,8 @@ public class MemberAuthStepDefinition{
 	 */
 	@Given("^the user is on member auth login page$")
 	public void the_user_is_on_member_auth_login_page(){
-		WebDriver wd = getLoginScenario().getWebDriver();
+		//tbd WebDriver wd = getLoginScenario().getWebDriver();
+		WebDriver wd = getLoginScenario().getWebDriverNew();
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 
 		MemberAuthLoginPage memberauth = new MemberAuthLoginPage(wd);
@@ -112,7 +113,8 @@ public class MemberAuthStepDefinition{
 	
 	@Given("^the user is on member auth login flow page$")
 	public void member_auth_login_flow_page(){
-		WebDriver wd = getLoginScenario().getWebDriver();	
+		//tbd WebDriver wd = getLoginScenario().getWebDriver();	
+		WebDriver wd = getLoginScenario().getWebDriverNew();	
 		wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 

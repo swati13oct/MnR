@@ -68,6 +68,9 @@ public class TestHarness extends UhcDriver {
 
 	@FindBy(xpath = "//table[@class='componentTable']/tbody/tr/td/a[contains(.,'EOB Search')]")
 	private WebElement eobPageLink;
+	
+	@FindBy(xpath="//a[@id='coveragebenefits_1']")
+	private WebElement preEffBenefitsTab;
 
 	@FindBy(xpath = "//table[@class='componentTable']/tbody/tr/td/a[contains(.,'Order Plan material')]")
 	private WebElement orderPlanPageLink;
@@ -750,6 +753,31 @@ public class TestHarness extends UhcDriver {
 		}
 	}
 	
+	public PlanDocumentsAndResourcesPage navigateToEOBPageThenBenefitsTerm() {
+		CommonUtility.waitForPageLoad(driver, eobPageLink,30);
+		validateNew(eobPageLink);
+		eobPageLink.click();
+		CommonUtility.checkPageIsReadyNew(driver);
+		CommonUtility.waitForPageLoad(driver, heading, CommonConstants.TIMEOUT_60);
+		if (!(driver.getTitle().contains("Explanation of Benefits"))) {
+			Assert.fail("Unable to navigate to EOB page");
+			return null;
+		} else {
+			Assert.assertTrue("PROBLEM - unable to locate Benefits tab on top menu", validate(preEffBenefitsTab,0));
+			preEffBenefitsTab.click();
+			//try {
+			//	Thread.sleep(10000);
+			//} catch (InterruptedException e) {
+			//	e.printStackTrace();
+			//}
+			CommonUtility.checkPageIsReadyNew(driver);
+			CommonUtility.waitForPageLoad(driver, heading, CommonConstants.TIMEOUT_60);
+			System.out.println(driver.getTitle());
+			Assert.assertTrue("PROBLEM - unable to navigate to Plan Documents and Resources page via Benefits menu option for Terminated user", !driver.getTitle().contains("Benefits"));
+			return new PlanDocumentsAndResourcesPage(driver);
+		}
+	}
+	
 	
 
 	@FindBy(xpath = ".//*[@id='IPEinvL']/map/area[2]")
@@ -1428,21 +1456,38 @@ public class TestHarness extends UhcDriver {
     	
     	public PharmaciesAndPrescriptionsPage navigateToPharAndPresFromTestHarnessPage() {
     		CommonUtility.checkPageIsReady(driver);
+    		checkModelPopup(driver, 30);//Yusufu popup handling
 			checkForIPerceptionModel(driver);
     		try{
     			if (noWaitValidate(testHarnessPharPresLink)) 
+    				try {
     				testHarnessPharPresLink.click();
+    				}
+    			    catch(Exception e) {
+    			    	System.out.println("Print error for iPerception pop" + e.getMessage());
+    			    	WebElement ele=driver.findElement(By.xpath("//*[contains(@id,'ip-no')]"));
+    			    	ele.click();
+    			    	testHarnessPharPresLink.click();
+    			    }
     			else 
+    				try{
     				testHarnessTopMenuPhaPresLink.click();
+    		        }
+		            catch(Exception e) {
+		            	System.out.println("Print error for iPerception pop" + e.getMessage());
+		    	        WebElement ele=driver.findElement(By.xpath("//*[contains(@id,'ip-no')]"));
+		    	        ele.click();
+		    	        testHarnessPharPresLink.click();
+		            }
     		} catch (WebDriverException e) {
     			checkForIPerceptionModel(driver);
     			CommonUtility.checkPageIsReady(driver);
     			testHarnessPharPresLink.click();
     		}
     		CommonUtility.checkPageIsReadyNew(driver);
-			checkModelPopup(driver,2);
     		System.out.println("Now waiting for Drug Look up on Pharmacies And Prescriptions page to show up");
 			CommonUtility.waitForPageLoad(driver, LookUpDrugsButton, 40);
+			checkModelPopup(driver,20);
     		if (driver.getCurrentUrl().contains("pharmacy/overview.html")) {
     			return new PharmaciesAndPrescriptionsPage(driver);
     		}

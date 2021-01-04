@@ -378,6 +378,12 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(id = "main-nav")
 	private WebElement dashboardHeader;
 
+	@FindBy(xpath = "//*[@id='pharmacies_5']")
+	protected List<WebElement> PPPageTab;
+
+	@FindBy(linkText = "Go To Pharmacies & Prescriptions Page")
+	protected WebElement goToPPPage;
+
 	// Terminated view
 
 	@FindBy(xpath = ".//header[@class='hide-mobile']//a[contains(text(),'Premium Payments')]")
@@ -469,7 +475,10 @@ public class AccountHomePage extends UhcDriver {
 
 	@FindBy(xpath = "//a[@id='pharmacies_5']")
 	private WebElement pharPresDashboardLinkAlternative;
-	
+
+	@FindBy(xpath="//a[@href='https://stage-medicare.uhc.com/medicare/member/pharmacy/overview.html']")
+	private WebElement pharmacyPrescriptionTab;
+
 	@FindBy(xpath = "//a[@id='preeffectivepharmacies_6']")
 	private WebElement pharPresDashboardLink_preEff;
 
@@ -3021,6 +3030,9 @@ public class AccountHomePage extends UhcDriver {
 		Assert.assertTrue("Header is displayed", dashboardHeader.isDisplayed());
 	}
 
+	public void validateDashboardURL() {
+		Assert.assertTrue("Dashboard URL is displayed", driver.getCurrentUrl().contains("dashboard"));
+	}
 	public void clickAccountProfile() {
 		if (accountProfile.isDisplayed()) {
 			accountProfile.click();
@@ -3277,6 +3289,35 @@ public class AccountHomePage extends UhcDriver {
 		return null;
 	}
 	
+	public PlanDocumentsAndResourcesPage navigateDirectToPlanDocViaBenefitsTerm() {
+		checkModelPopup(driver,5);
+		if (noWaitValidate(shadowRootHeader)) {
+			System.out.println("located shadow-root element, attempt to process further...");
+			WebElement root1 = expandRootElement(shadowRootHeader);
+			try {
+				WebElement benefitsTopMenuShadowRootLink = root1.findElement(By.cssSelector("a[data-testid*=nav-link-coverage]"));
+				benefitsTopMenuShadowRootLink.click();
+				try {
+					Thread.sleep(10000);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			} catch (Exception e) {
+				Assert.assertTrue("PROBLEM - unable to locate Benefits link on Rally Dashboard top menu", false);
+			}		
+
+		} 
+		CommonUtility.checkPageIsReady(driver);
+		checkModelPopup(driver,5);
+
+		CommonUtility.waitForPageLoad(driver, heading, 50);
+		if (driver.getTitle().contains("Plan Documents")) {
+			return new PlanDocumentsAndResourcesPage(driver);
+		}
+
+		return null;
+	}
+	
 	public void navigateDirectToBnCPgNoTitleChk() {
 		checkModelPopup(driver,5);
 		if (noWaitValidate(shadowRootHeader)) {
@@ -3435,6 +3476,23 @@ public class AccountHomePage extends UhcDriver {
 
 		}
 	}
+
+	public void validateNoPPPage() {
+		Assert.assertFalse("PROBLEM - able to locate P&P tab element",
+				validateNoPPpage());
+	}
+
+	public boolean validateNoPPpage() {
+
+		if(PPPageTab.size()>0){
+			return false;
+		}else {
+
+			return true;
+		}
+
+	}
+
 
 	/*
 	 * This method checks that correct pre-Effective message is displayed on
@@ -3945,6 +4003,10 @@ public class AccountHomePage extends UhcDriver {
 				pharPresDashboardLink.click();
 			else if (validate(pharPresDashboardLinkAlternative,0))
 				pharPresDashboardLinkAlternative.click();
+			 else if(validate(pharmacyPrescriptionTab,0)) {
+				 scrollToView(pharmacyPrescriptionTab);
+				 pharmacyPrescriptionTab.click();
+				}				 
 			else if (validate(pharPresDashboardLink_preEff,0))  //note: should only be available for pre-eff user
 				pharPresDashboardLink_preEff.click();
 			else {
@@ -4002,6 +4064,8 @@ public class AccountHomePage extends UhcDriver {
 		checkModelPopup(driver,1);
 		if (driver.getCurrentUrl().contains("/dashboard")) {
 			System.out.println("User is on dashboard page and URL is ====>" + driver.getCurrentUrl());
+			ClaimsSummaryPage claimsPg=navigateToClaimsSummaryPage();
+			Assert.assertTrue("PROBLEM - unable to go to secondary page claims first", claimsPg!=null);
 			BenefitsAndCoveragePage bncPg=navigateToBenefitAndCoveragePage();
 			//tbd ClaimsSummaryPage claimsPg=navigateToClaimsSummaryPage();
 			Assert.assertTrue("PROBLEM - unable to go to secondary page benefits first", bncPg!=null);
@@ -4009,8 +4073,6 @@ public class AccountHomePage extends UhcDriver {
 				pharPresDashboardLink.click();
 			else if (validate(pharPresDashboardLinkAlternative))
 				pharPresDashboardLinkAlternative.click();
-			else if (validate(pharPresDashboardLink_preEff,0))  //note: should only be available for pre-eff user
-				pharPresDashboardLink_preEff.click();
 			else {
 				if (validate(shadowRootHeader)) {
 					System.out.println("Check for shadow-root before giving up");
@@ -4107,6 +4169,9 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(xpath="//span[@class='hide-mobile ng-scope']")
 	private WebElement viewRecomend;
 
+	@FindBy(xpath = "//h1[contains(text(),'Preeffective Test Harness')]")
+	protected WebElement preeffectiveHeader;
+	
 	/*
 	 * This method validates login on Dashboard
 	 */
@@ -4119,6 +4184,12 @@ public class AccountHomePage extends UhcDriver {
 		System.out.println(" View & Print member ID cards assert is passed on the Dashboard !!");
 	}
 
+	public void validatePreeffectiveHeader() {
+
+		Assert.assertTrue("PROBLEM - unable to locate preeffective Header element",
+				preeffectiveHeader.isDisplayed());
+	}
+	
 	public void moveMouseToElement(WebElement targetElement) {
 		Actions action = new Actions(driver);
 		action.moveToElement(targetElement).build().perform(); 
@@ -4241,7 +4312,7 @@ public class AccountHomePage extends UhcDriver {
 
 		}
 
-		if (MRScenario.environment.equals("prod") || MRScenario.environment.equals("offline")) {
+		if (MRScenario.environment.equalsIgnoreCase("prod") || MRScenario.environment.equalsIgnoreCase("offline")) {
 			if (validate(shadowRootHeader)) {
 				System.out.println("located shadow-root element, attempt to process further...");
 				WebElement root1 = expandRootElement(shadowRootHeader);
@@ -4542,10 +4613,62 @@ public class AccountHomePage extends UhcDriver {
 		if (validate(myDocumentsHeader,5)) {
 			return new MyDocumentsPage(driver);
 		}
+		try {
+			
+		}finally {
+			
+		}
 		
     return null;
 	}
+
+	public PharmaciesAndPrescriptionsPage navigateToPharmaciesAndPrescriptionWithOutTestHarness() {
+		System.out.println("user is on '" + MRScenario.environment + "' login page");
+		checkForIPerceptionModel(driver);
+		if (driver.getCurrentUrl().contains("/dashboard")) {
+			System.out.println("User is on dashboard page and URL is ====>" + driver.getCurrentUrl());
+			if (validate(pharPresDashboardLink))
+				pharPresDashboardLink.click();
+			else if (validate(pharPresDashboardLinkAlternative))
+				pharPresDashboardLinkAlternative.click();
+			 else if(validate(pharmacyPrescriptionTab)) {
+				 scrollToView(pharmacyPrescriptionTab);
+				 jsClickNew(pharmacyPrescriptionTab);
+				 //pharmacyPrescriptionTab.click();
+				}				 
+			else {
+				if (validate(shadowRootHeader)) {
+					System.out.println("Check for shadow-root before giving up");
+					attemptShadowRootTopMenuLinkNavigationToPnP();
+				} else {
+					System.out.println("There is no shadow-root menu");
+				}
+			}
+			CommonUtility.checkPageIsReadyNew(driver);
+		}
+		if (driver.getCurrentUrl().contains("pharmacy/overview.html"))
+			return new PharmaciesAndPrescriptionsPage(driver);
+		return null;
+	}
 	
+	public void attemptShadowRootTopMenuLinkNavigationToPnP() {
+		//note: use the 2nd menu link as the base and determine which one I really need
+		// if 2 is FIND CARE then 6 is PnP
+		// if 2 is CARE then 5 is PnP
+			String pnpTopMenuItemCssStr="#sticky-main-nav > div > div > div > a:nth-child(5)";
+			WebElement pnpTopMenuLink = locateElementWithinShadowRoot(shadowRootHeader,
+					pnpTopMenuItemCssStr);
+			if (isPnpLink(pnpTopMenuLink.getText())) {
+				locateAndClickElementWithinShadowRoot(shadowRootHeader, pnpTopMenuItemCssStr);
+			}else
+			{
+				pnpTopMenuItemCssStr="#sticky-main-nav > div > div > div > a:nth-child(6)";
+				pnpTopMenuLink = locateElementWithinShadowRoot(shadowRootHeader,
+						pnpTopMenuItemCssStr);
+				if (isPnpLink(pnpTopMenuLink.getText())) 
+					locateAndClickElementWithinShadowRoot(shadowRootHeader, pnpTopMenuItemCssStr);
+			}
+	}
 	/*
 	 * validate that the Find care tab is not displayed on the header
 	 */
@@ -4572,6 +4695,4 @@ public class AccountHomePage extends UhcDriver {
 		}
 
 	}
-	
-	
 }

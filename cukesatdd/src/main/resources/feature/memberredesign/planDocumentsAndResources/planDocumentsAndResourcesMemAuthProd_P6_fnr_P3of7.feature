@@ -58,17 +58,17 @@ Feature: 1.06.6.2 Member Plans and Documents - section: Forms And Resources Part
 #	@prod_terminated_mapd_3of7
 #	Examples: 
 #      | index  | TID         | username  | password  | MemUserName     | planType | memberType            | fnr_sd | fnr_pdmo | fnr_ppi | fnr_rf |
-#      | 07-101 | xxxxx       | kkumard  | tnps459#  | BEVERLY_BOB5    | MAPD     | IND_TERM_PDnR         | true   | true     | true    | true   |
+#      | 07-101 | xxxxx       | kkumard  | tnps459#  | Patkeving    | MAPD     | IND_TERM_PDnR         | true   | true     | true    | true   |
 
 	@prod_active_ma_ind_3of7 @prod_active_ma_3of7
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | fnr_sd | fnr_rf |
-      | 09-104 | 15129       | kkumard   | tnps459#  | haradaty32       | MA       | AARP_IND_EFF_PDnR     | true   | true   |
+      | 09-104 | 15129       | kkumard   | tnps459#  | ssmhi1       | MA       | AARP_IND_EFF_PDnR     | true   | true   |
 
 	@prod_active_ma_grp_3of7 @prod_active_ma_3of7
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | fnr_sd | fnr_rf |
-      | 10-105 | 15130       | kkumard  | tnps459#  | 1GIRL4DEAN      | MA       | GROUP_EFF_PDnR        | true   | true   |
+      | 10-105 | 15130       | kkumard  | tnps459#  | ExDesertrat      | MA       | GROUP_EFF_PDnR        | true   | true   |
 #      | 10-105 | 15130       | kkumard  | tnps459#  | SPENCEPR1      | MA       | NICE_GROUP_EFF_PDnR        | true   | true   |
 
 	@prod_active_mapd_ind_3of7 @prod_active_mapd_3of7
@@ -86,17 +86,17 @@ Feature: 1.06.6.2 Member Plans and Documents - section: Forms And Resources Part
 	@prod_active_pcp_3of7
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | fnr_sd | fnr_rf |
-      | 14-109 | 15128       | kkumard  | tnps459#  | BATLLOT@AOL.COM    | PCP      | IND_EFF_PDnR          | true   | true   |
+      | 14-109 | 15128       | kkumard  | tnps459#  | SOFYABAKMAN@MSN.COM    | PCP      | IND_EFF_PDnR          | true   | true   |
 
 	@prod_active_medica_3of7
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | fnr_sd | fnr_rf |
-      | 15-110 | 15128       | kkumard  | tnps459#  | SUSICHAPMAN@GMAIL.COM    | MEDICA   | IND_EFF_PDnR          | true   | true   |
+      | 15-110 | 15128       | kkumard  | tnps459#  | TCZUNIGA52    | MEDICA   | IND_EFF_PDnR          | true   | true   |
 
 	@prod_active_pdp_ind_3of7 @prod_active_pdp_3of7
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | fnr_sd | fnr_rf |
-      | 16-111 | 15126,15127 | kkumard  | tnps459#  | nawal1215       | PDP      | AARP_IND_EFF_PDnR     | true   | true   |
+      | 16-111 | 15126,15127 | kkumard  | tnps459#  | PWINSAUER51       | PDP      | AARP_IND_EFF_PDnR     | true   | true   |
 
 	@prod_active_pdp_grp_3of7 @prod_active_pdp_3of7
 	Examples: 

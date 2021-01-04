@@ -111,7 +111,9 @@ Feature: 1.15 Member pre-effective functionality
 
   @regressionMemberPROD4 @sanityMemberPROD1
   Scenario Outline: -planType: <planType> - Member Type: - <memberType> - Verify that correct links and messages are displayed on Dashboard and Secondary Page.
-    Given the user is on member auth login flow page
+    Given First check if feature security flag is set to true
+      | Feature | UCPUserManagement |
+    And the user is on member auth login flow page
     When the member is able to login with correct username and password
       | Username | <username> |
       | Password | <password> |

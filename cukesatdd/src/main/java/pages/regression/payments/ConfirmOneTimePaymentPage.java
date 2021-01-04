@@ -18,7 +18,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import com.google.common.base.Strings;
-
+import acceptancetests.data.PageConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
@@ -317,11 +317,13 @@ public class ConfirmOneTimePaymentPage extends UhcDriver {
 	}
 
 	public void OneTimeCCverification() {
-
-
 		validate(ConfirmationNumber);
 		PaymentsDataVerificationonConfirmationPage();
 		System.out.println("Your Confimation Number is : " + ConfirmationNumber.getText());
+		if (!(ConfirmationNumber.isDisplayed()))
+		{
+			Assert.fail("Confirmation number is null, failing test case.");
+		}
 
 	}
 
@@ -407,7 +409,42 @@ public class ConfirmOneTimePaymentPage extends UhcDriver {
 		}}
 
 
+	public String verifyKeepCardOnFileRecordFromGPS(Map<String, String> paymentTypeMap) {
+		String keepCardOnFileIndFromGPSDatabase = null;
+		try (Connection con = MRScenario.getGPSuat3Connection()) {
 
+			String referenceNmbr = ConfirmationNumber.getText();                                                   
+			System.out.println("Confirmation/Reference number to be used in for finding Keep Card on File query is : "+referenceNmbr);
+			String paymentType = paymentTypeMap.get("Payment Type");
+
+			Statement stmt = null;
+			ResultSet rs = null;
+			stmt = con.createStatement();
+			if (paymentType.equalsIgnoreCase("OneTime")) {
+				
+				rs = stmt.executeQuery("Select KEEP_CARD_ON_FILE_IND from household_billing_profile  where  HOUSEHOLD_BILLING_PROFILE_ID ='"
+						+ referenceNmbr + "'");
+				
+				System.out.println(rs);
+				while (rs.next())
+	              {
+				System.out.println("Value of Keep Card On file before is "+keepCardOnFileIndFromGPSDatabase);
+	               keepCardOnFileIndFromGPSDatabase = (String)rs.getString(1);
+	               System.out.println("Value of Keep Card On file indicator has been found from household_billing_profile database and is "+keepCardOnFileIndFromGPSDatabase);
+	              return keepCardOnFileIndFromGPSDatabase;
+	              }
+			}
+
+			else {
+				System.out.println("Payment method other than one time payment is not handled");
+				Assert.fail("Payment method other than one time payment is not handled");
+			}
+
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		 return null;
+		}
 
 
 	public void deletePaymetnRecordFromGPSforexception(Map<String, String> paymentTypeMap, String referenceNmbr) {
@@ -484,5 +521,16 @@ public class ConfirmOneTimePaymentPage extends UhcDriver {
 		}
 
 	}
-
+	
+	 public void verifyKeepCardOnFileRecordFromGPSIsY(String keepCardOnFileIndFromGPSDatabase) {
+		System.out.println("Current Value of keepCardOnFileIndFromGPSDatabase in this method is "+keepCardOnFileIndFromGPSDatabase);
+		 if (keepCardOnFileIndFromGPSDatabase.equalsIgnoreCase("Y"))
+		 {
+			 System.out.println("Value of keepCardOnFileIndFromGPSDatabase in GPS Database is "+keepCardOnFileIndFromGPSDatabase+" , Test case is Passed");
+		 } 
+		 else
+			 {
+				 Assert.fail("Value of Keeo Card on File is not Y, Test Failed");
+			 }	 
+		}
 }

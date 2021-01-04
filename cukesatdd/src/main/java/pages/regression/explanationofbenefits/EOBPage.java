@@ -698,6 +698,9 @@ public class EOBPage extends EOBBase{
 	}
 
 	public void validateTextElements(String planType, String memberType, String eobType) {
+		System.out.println("planType="+planType);
+		System.out.println("memberType="+memberType);
+		System.out.println("eobType="+eobType);
 		if(eobType.equals("Medical") && !planType.contains("SHIP")) {
 			Assert.assertTrue("PROBLEM - unable to locate text element 'eobstmts' above Learn More section'", eobValidate(eobStmt));
 			Assert.assertTrue("PROBLEM - unable to locate text element 'contactuseob' above Adobe section'", eobValidate(eobContactus));

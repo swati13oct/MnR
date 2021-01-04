@@ -24,6 +24,12 @@ Feature: 1.12 UAT - Header and Footer flows
     #And user verifies home link of agents&brokers page
     And user clicks on agents&brokers link on disclaimers page
     And the user clicks on browser back button
+    And user select state for geotargeting from global footer on homepage
+    And the user clicks on View all disclaimer information link in footer
+    And the user validate links in disclaimer information section
+    And the user clicks on Complaint Form link in footer
+    And the user clicks on Hide all disclaimer information link in footer
+    And the user validates Language assistance links
     When user accesses global header of the Medicare Plans home page
     And user verifies the logo 
     And user clicks on Sign in link 
@@ -119,8 +125,8 @@ Feature: 1.12 UAT - Header and Footer flows
  
  @globalfooter_UHC
   Examples: 
-      |Scenario					  |	site|zipcode | isMultutiCounty | county  |
-      |E2E Scenario_3 UMS |	UHC	| 10001	 | No							 | New York|				     
+      |Scenario					  |	site|zipcode | isMultutiCounty | county   |
+      |E2E Scenario_3 UMS |	UHC	| 80001	 | No							 | Jefferson|				     
        
 	@globalfooterULayer  @UATRegression
   Scenario Outline: <Scenario> : To verify links displayed in the global header and footer on DCE page

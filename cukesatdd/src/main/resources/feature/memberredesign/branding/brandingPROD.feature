@@ -49,7 +49,9 @@ Feature: 1.14 Member Branding functionality
 
   @regressionMemberPROD2
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify_<Test Case>
-    Given the user is on member auth login flow page
+    Given First check if feature security flag is set to true
+      | Feature | UCPUserManagement |
+    And the user is on member auth login flow page
     When the member is able to login with correct username and password
       | Username | <username> |
       | Password | <password> |
@@ -117,7 +119,7 @@ Feature: 1.14 Member Branding functionality
     Examples: 
       | TID   | planType | memberType              | copayCategory | logoToBeDisplayedOnDashboard | logoToBeDisplayedOnSecondaryPage | cologoToBeDisplayedOnDashboard | cologoToBeDisplayedOnSecondaryPage                    | Test Case                                                                   | username | password | member                    |
       | 15158 | MAPD     | universityofkentuckySSO | NON LIS       | UHC                          | dam/UCP/Images/logo/UHC.svg      | UniversityOfKentucky           | dam/UCP/Images/logo/UofKY_Rally_Logo.svg              | TC_10_ Co-branding for Group Retiree Plans- University of Kentucky_Branding | jkuma14  | Brock@04 | ExDesertrat               |
-      | 15156 | MAPD     | NCSHP_Branding          | NON LIS       | UHC                          | dam/UCP/Images/logo/UHC.svg      | NCSHP                          | dam/UCP/Images/Images/logos-cobranding/NCSHP_Logo.svg | TC_11_ Co-branding for Group Retiree Plans -NCSHP_Branding                  | jkuma14  | Brock@04 | BFSSO-073367811~~         |
+      | 15156 | MAPD     | NCSHP_Branding          | NON LIS       | UHC                          | dam/UCP/Images/logo/UHC.svg      | NCSHP                          | dam/UCP/Images/Images/logos-cobranding/NCSHP_Logo.svg | TC_11_ Co-branding for Group Retiree Plans -NCSHP_Branding                  | jkuma14  | Brock@04 | dianahdavis@bellsouth.net |
 #     | 15156 | MAPD     | Calpers_Branding  | NON LIS       | UHC                          | dam/UCP/Images/logo/UHC.svg      | optum/MR12775/CalPERS.svg      | dam/UCP/Images/Images/logos-cobranding/CalPERS_Logo_Large.svg | TC_12_ Co-branding for Group Retiree Plans         |jkuma14  | Brock@04 | skho@roadrunner.com   |
 #     | 15154 | MAPD     | ALPEEHIP_Branding | NON LIS       | UHC                          | dam/UCP/Images/logo/UHC.svg      | optum/MR15500/alpeehip.svg     | dam/UCP/Images/Images/logos-cobranding/ALPEEHIP.svg   | TC_13_ Co-branding for AL PEEHIP Plan member               |jkuma14  | Brock@04 | skho@roadrunner.com   |
 
