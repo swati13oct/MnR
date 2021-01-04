@@ -32,9 +32,9 @@ Feature: 1.06.5 Member Plans and Documents - section: Provider Directory -or- Ph
 	@preeffective_ma_mapd
 	Examples: 
       | index  | TID         | planType | memberType            | pd_sd | pd_ps | pd_pl | pd_en_cy | pd_es_cy | pd_zh_cy | pd_en_ny | pd_es_ny | pd_zh_ny |
-      | 01-077 | xxxxx       | MA       | AARP_IND_PREEFF_PDnR  | true  | true  | false | false    | false    | false    | true     | true     | false    |
+      | 01-077 | xxxxx       | MA       | AARP_IND_PREEFF_PDnR  | true  | true  | false | false    | false    | false    | false    | false    | false    |
       | 02-078 | xxxxx       | MA       | GROUP_PREEFF_PDnR     | true  | true  | false | false    | false    | false    | false    | false    | false    |
-      | 03-079 | xxxxx       | MAPD     | AARP_IND_PREEFF_PDnR  | true  | true  | true  | false    | false   | false     | true     | true     | false    |
+      | 03-079 | xxxxx       | MAPD     | AARP_IND_PREEFF_PDnR  | true  | true  | true  | false    | false   | false     | false    | false    | false    |
 
 	@preeffective_pdp
 	Examples: 
@@ -54,13 +54,13 @@ Feature: 1.06.5 Member Plans and Documents - section: Provider Directory -or- Ph
 	@active_ma
 	Examples: 
       | index  | TID         | planType | memberType            | pd_sd | pd_ps | pd_pl | pd_en_cy | pd_es_cy | pd_zh_cy | pd_en_ny | pd_es_ny | pd_zh_ny |
-      | 09-085 | 15129       | MA       | AARP_IND_EFF_PDnR     | true  | true  | false | true     | true     | false    | true     | true     | false    |
+      | 09-085 | 15129       | MA       | AARP_IND_EFF_PDnR     | true  | true  | false | true     | true     | false    | false    | false    | false    |
       | 10-086 | 15130       | MA       | GROUP_EFF_PDnR        | true  | true  | false | false    | false    | false    | false    | false    | false    |
 
 	@active_mapd @devRegression
 	Examples: 
       | index  | TID         | planType | memberType            | pd_sd | pd_ps | pd_pl | pd_en_cy | pd_es_cy | pd_zh_cy | pd_en_ny | pd_es_ny | pd_zh_ny |
-      | 11-087 | 15108       | MAPD     | AARP_IND_EFF_PDnR     | true  | true  | true  | true     | true     | false    | true     | true     | false    |
+      | 11-087 | 15108       | MAPD     | AARP_IND_EFF_PDnR     | true  | true  | true  | true     | true     | false    | false    | false    | false    |
 
 	@active_mapd
 	Examples: 
@@ -72,8 +72,8 @@ Feature: 1.06.5 Member Plans and Documents - section: Provider Directory -or- Ph
 	@active_pcp_medica
 	Examples: 
       | index  | TID         | planType | memberType            | pd_sd | pd_ps | pd_pl | pd_en_cy | pd_es_cy | pd_zh_cy | pd_en_ny | pd_es_ny | pd_zh_ny |
-      | 14-090 | 15128       | PCP      | IND_EFF_PDnR          | true  | true  | true  | true     | true     | false    | true     | true     | false    |
-      | 15-091 | 15128       | MEDICA   | IND_EFF_PDnR          | true  | true  | true  | true     | true     | false    | true     | true     | false    |
+      | 14-090 | 15128       | PCP      | IND_EFF_PDnR          | true  | true  | true  | true     | true     | false    | false    | false    | false    |
+      | 15-091 | 15128       | MEDICA   | IND_EFF_PDnR          | true  | true  | true  | true     | true     | false    | false    | false    | false    |
 
 	@active_pdp
 	Examples: 
