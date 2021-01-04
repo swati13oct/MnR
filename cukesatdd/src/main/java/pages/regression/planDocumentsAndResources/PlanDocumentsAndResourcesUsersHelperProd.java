@@ -333,12 +333,12 @@ public class PlanDocumentsAndResourcesUsersHelperProd {
 		if (section.equals("Plan Materials")) {//note: PM
 			if (subSection.equals("EN")) {
 				targetTestDocList = new ArrayList<String>();
-				targetTestDocList.add("Benefit Highlights");
+				//targetTestDocList.add("Benefit Highlights");
 				targetTestDocList.add("Summary of Benefits");
 				targetTestDocList.add("Evidence of Coverage");
 				targetTestDocList.add("Certificate of Coverage");
-				//targetTestDocList.add("Formulary/Drug List - Comprehensive");
-				targetTestDocList.add("Additional Drug Coverage");
+				targetTestDocList.add("Formulary/Drug List - Comprehensive");
+				//targetTestDocList.add("Additional Drug Coverage");
 				targetTestDocList.add("Prior Authorization Criteria");
 				targetTestDocList.add("Step Therapy Criteria");
 				targetTestDocList.add("Formulary Additions");
@@ -360,8 +360,8 @@ public class PlanDocumentsAndResourcesUsersHelperProd {
 				targetTestDocList = new ArrayList<String>();
 				targetTestDocList.add("Plan Guide");
 				//targetTestDocList.add("Getting Started Guide");
-				targetTestDocList.add("Benefit Highlights");
-				//targetTestDocList.add("Comprehensive Formulary");
+				//targetTestDocList.add("Benefit Highlights");
+				targetTestDocList.add("Comprehensive Formulary");
 				targetTestDocList.add("Additional Drug Coverage");
 				targetTestDocList.add("Home Delivery Brochure");
 				targetTestDocList.add("Evidence Of Coverage");
@@ -383,7 +383,7 @@ public class PlanDocumentsAndResourcesUsersHelperProd {
 				targetTestDocList = new ArrayList<String>();
 				targetTestDocList.add("Annual Notice of Changes");
 				targetTestDocList.add("Evidence Of Coverage");
-				//targetTestDocList.add("Comprehensive Formulary");
+				targetTestDocList.add("Comprehensive Formulary");
 				targetTestDocList.add("Certificate of Coverage");
 				targetTestDocList.add("Additional Drug Coverage");
 				return targetTestDocList;
@@ -1030,7 +1030,7 @@ public class PlanDocumentsAndResourcesUsersHelperProd {
 		if (section.equals("Plan Materials")) {//note: PM
 			if (subSection.equals("EN")) {
 				targetTestDocList = new ArrayList<String>();
-				targetTestDocList.add("Benefit Highlights");
+				//targetTestDocList.add("Benefit Highlights");
 				targetTestDocList.add("Summary of Benefits");
 				targetTestDocList.add("Evidence of Coverage");
 				targetTestDocList.add("Plan Guide");
@@ -1049,7 +1049,7 @@ public class PlanDocumentsAndResourcesUsersHelperProd {
 			if (subSection.equals("EN")) {
 				targetTestDocList = new ArrayList<String>();
 				targetTestDocList.add("Plan Guide");
-				targetTestDocList.add("Benefit Highlights");
+				//targetTestDocList.add("Benefit Highlights");
 				targetTestDocList.add("Evidence Of Coverage");
 				targetTestDocList.add("Summary of Benefits");
 				return targetTestDocList;
@@ -1433,7 +1433,7 @@ public class PlanDocumentsAndResourcesUsersHelperProd {
 		if (section.equals("Plan Materials")) {//note: PM
 			if (subSection.equals("EN")) {
 				targetTestDocList = new ArrayList<String>();
-				targetTestDocList.add("Benefit Highlights");
+				//targetTestDocList.add("Benefit Highlights");
 				targetTestDocList.add("Summary of Benefits");
 				targetTestDocList.add("Evidence of Coverage");
 				targetTestDocList.add("Certificate of Coverage");
@@ -1460,7 +1460,7 @@ public class PlanDocumentsAndResourcesUsersHelperProd {
 				targetTestDocList = new ArrayList<String>();
 				targetTestDocList.add("Plan Guide");
 				//targetTestDocList.add("Quick Start Guide");
-				targetTestDocList.add("Benefit Highlights");
+				//targetTestDocList.add("Benefit Highlights");
 				//targetTestDocList.add("Additional Drug Coverage");
 				//targetTestDocList.add("Comprehensive Formulary");
 				targetTestDocList.add("Home Delivery Brochure");
