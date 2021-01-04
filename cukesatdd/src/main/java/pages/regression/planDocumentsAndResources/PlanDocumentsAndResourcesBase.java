@@ -1201,7 +1201,7 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 		} else {
 			//note: for other section, do simpler validatoin
 			if (actUrl.contains(".pdf") || actUrl.contains("alphadog")) {
-				if (targetDocName.contains("Over-the-Counter Drug List")) {
+				if (targetDocName.contains("Over-the-Counter Drug List") || targetDocName.contains("Lista de Medicamentos sin Receta")) {
 					section_note.add("    SKIPPED - skipping validation of pdf content - this doc takes too long to open");
 				} else {
 					try {
