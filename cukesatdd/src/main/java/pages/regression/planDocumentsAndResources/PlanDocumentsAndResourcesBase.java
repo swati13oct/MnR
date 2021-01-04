@@ -1129,6 +1129,7 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 					//keep Assert.assertTrue("PROBLEM - unable to validate pdf content - IOException - doc name="+targetDocName, false);
 				}
 			} else {
+				
 				if (targetDocName.equals("Disenrollment Form (Online)")) { //note: this page content is diff than the rest
 					try {
 						driver.findElement(By.xpath("//div[contains(text(),'Member')]"));
@@ -1136,6 +1137,14 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 					} catch (Exception e) {
 						section_note.add("    * FAILED - 'Member' text is not showing as expected");
 						Assert.assertTrue("PROBLEM - 'Member' text is not showing as expected- doc name="+targetDocName, false);
+					}
+				} else if (targetDocName.equals("Drug-specific Prior Authorization Request Forms") && MRScenario.environment.equals("stage")) {
+					String actStageUrl=driver.getCurrentUrl();
+					String expStageUrl="/content/rxmember/default/en_us/angular-free/optumrx/public-errorpage.html";
+					if (actStageUrl.contains(expStageUrl)) 
+						section_note.add("    PASSED - stage env could be getting sorry msg for doc name="+targetDocName);
+					else {
+						Assert.assertTrue("PROBLEM - not getting expected output (for stage, expect it to get sorry msg for have trouble opening)- doc name="+targetDocName, actStageUrl.contains(expStageUrl));
 					}
 				} else 
 				//note: for html or any url that's not pdf related
