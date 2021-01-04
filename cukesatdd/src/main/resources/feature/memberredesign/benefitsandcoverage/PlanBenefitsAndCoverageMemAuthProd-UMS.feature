@@ -102,10 +102,12 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth Prod
     And the user clicks on More Information link for ship
     Then the user validate Value Add Service page comes on clicking additional info button
     And the user validate vas tiles on vas page
+        | Plan Code | <planCode> | 
+	   | State Code | <stateCode> |
 
     Examples: 
-      | index |TID |username |password |MemUserName|planType|memberType|language|PlanBenefitsTable|numberOfBenefitCards|Identifier| count| rider   |
-      | 03    |15094|kkumard|tnps459#|Gcdurant3| SHIP |SHIP_BnC  | ENGLISH|Plan Benefits Table| 7 |EffectiveShipMedSupp|3| NoRider |
+      | index |TID |username |password |MemUserName|planType|memberType|language|PlanBenefitsTable|numberOfBenefitCards|Identifier| count| rider   | planCode | stateCode |
+      | 03    |15094|kkumard|tnps459#|Gcdurant3| SHIP |SHIP_BnC  | ENGLISH|Plan Benefits Table| 7 |EffectiveShipMedSupp|3| NoRider | G01 | LA |
       
   #TC13_Benefits_for_MA_SSUP_MEDSUPMember
   @prod__benefitsAndCoverage10 @BenefitsForMAMedsupSSUPMember @regression @Links_Validation_SSUP
