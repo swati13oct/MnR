@@ -79,7 +79,7 @@ Feature: 1.06.5.2 Member Plans and Documents - section: Provider Directory -or- 
 	@prod_active_mapd @prod_active_mapd_grp
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | pd_sd | pd_ps | pd_pl | pd_en_cy | pd_es_cy | pd_zh_cy | pd_en_ny | pd_es_ny | pd_zh_ny |
-      | 12-088 | 15303       | kkumard   | tnps459#  | SHERMANJAFFE65  | MAPD     | NICE_GROUP_EFF_PDnR   | true  | true  | true  | false    | false    | false    | false    | false    | false    |
+      | 12-088 | 15303       | kkumard   | tnps459#  | 2nancyreeves  | MAPD     | GROUP_EFF_PDnR   | true  | true  | true  | false    | false    | false    | false    | false    | false    |
 #     ### note: PEEHIP group terminated as of 12/31/2019
 #     #| 13-089 | 15130       | kkumard  | tnps459#  | testusername    | MAPD     | PEEHIP_GROUP_EFF_PDnR | true  | true  | true  | false    | false    | false    | false    | false    | false    |
 

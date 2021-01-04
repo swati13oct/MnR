@@ -34,7 +34,7 @@ Feature: 1.18.1.2 Member Pharamcies And Prescriptions page - Pre-Effective - PRO
 	@prod_pnpPreEff_mapd_ind_sanity
     Examples: 
 	  | FID     | username  | password  | MemUserName               | planType | memberType          | expectLink |
-	  | F493942 | kkumard   | tnps459#  | Teripappas                | MAPD     | IND_PREEFF_PnP      | yes        |
+	  | F493942 | kkumard   | tnps459#  | Beaver34                  | MAPD     | IND_PREEFF_PnP      | yes        |
 
   #----- being regression section --------------------
   @prod_pnpPreEff01
@@ -76,12 +76,12 @@ Feature: 1.18.1.2 Member Pharamcies And Prescriptions page - Pre-Effective - PRO
 	@prod_pnpPreEff_mapd_ind
     Examples: 
 	  | FID     | username  | password  | MemUserName               | planType | memberType          | expectLink |
-	  | F493942 | kkumard   | tnps459#  | Teripappas                | MAPD     | IND_PREEFF_PnP      | yes        |
+	  | F493942 | kkumard   | tnps459#  | Beaver34                  | MAPD     | IND_PREEFF_PnP      | yes        |
 
 	@prod_pnpPreEff_mapd_grp
     Examples: 
 	  | FID     | username  | password  | MemUserName               | planType | memberType          | expectLink |
-	  | F493942 | kkumard   | tnps459#  | Webfan50                  | MAPD     | GRP_PREEFF_PnP      | yes        |
+	  | F493942 | kkumard   | tnps459#  | ammorinrn                 | MAPD     | GRP_PREEFF_PnP      | yes        |
 
     #note: no prod user pre-eff for these groups for now
 	#@prod_pnpPreEff_mapd_grp_lghib
@@ -97,7 +97,7 @@ Feature: 1.18.1.2 Member Pharamcies And Prescriptions page - Pre-Effective - PRO
 	@prod_pnpPreEff_pdp_ind
     Examples: 
 	  | FID     | username  | password  | MemUserName               | planType | memberType          | expectLink |
-	  | F493942 | kkumard   | tnps459#  | Lelabos1952               | PDP      | IND_PREEFF_PnP      | yes        |
+	  | F493942 | kkumard   | tnps459#  | wsowell@gmail.com         | PDP      | IND_PREEFF_PnP      | yes        |
 
 	#@prod_pnpPreEff_pdp_grp
     #Examples: 
@@ -107,7 +107,7 @@ Feature: 1.18.1.2 Member Pharamcies And Prescriptions page - Pre-Effective - PRO
 	@prod_pnpPreEff_snp_ind
     Examples: 
 	  | FID     | username  | password  | MemUserName               | planType | memberType          | expectLink |
-	  | F493942 | kkumard   | tnps459#  | Sadiekennedy50@Yahoo.Com  | SNP      | IND_PREEFF_PnP      | yes        |
+	  | F493942 | kkumard   | tnps459#  | countdownkev              | SNP      | IND_PREEFF_PnP      | yes        |
 
 	#@prod_pnpPreEff_ssp_grp
     #Examples: 
@@ -155,5 +155,5 @@ Feature: 1.18.1.2 Member Pharamcies And Prescriptions page - Pre-Effective - PRO
 	@prod_pnpPreEff_ship_ind
     Examples: 
 	  | FID     | username  | password  | MemUserName             | planType | memberType          | expectLink |
-	  | F493942 | kkumard   | tnps459#  | Travelynn1              | SHIP     | IND_PREEFF_PnP      | no         |
+	  | F493942 | kkumard   | tnps459#  | HMChesar                | SHIP     | IND_PREEFF_PnP      | no         |
 	  

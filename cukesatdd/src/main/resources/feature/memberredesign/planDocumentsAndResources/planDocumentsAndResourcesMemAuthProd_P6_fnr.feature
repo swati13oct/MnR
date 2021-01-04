@@ -86,7 +86,7 @@ Feature: 1.06.6.2 Member Plans and Documents - section: Forms And Resources - Me
 	@prod_active_mapd_grp @prod_active_mapd
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | fnr_sd | fnr_pdmo | fnr_ppi | fnr_rf | fnr_af | fnr_maf | fnr_or | fnr_di |
-      | 12-107 | 15303       | kkumard  | tnps459#  | SHERMANJAFFE65    | MAPD     | NICE_GROUP_EFF_PDnR        | true   | false    | false   | true   | true   | false   | true   | true   |	  
+      | 12-107 | 15303       | kkumard  | tnps459#  | 2nancyreeves    | MAPD     | GROUP_EFF_PDnR        | true   | false    | false   | true   | true   | false   | true   | true   |	  
 #     ### note: PEEHIP group terminated as of 12/31/2019
 #     #| 13-108 | 15130       | kkumard  | tnps459#  | testusername    | MAPD     | PEEHIP_GROUP_EFF_PDnR | true   | false    | false   | true   | true   | false   | true   | true   |
 

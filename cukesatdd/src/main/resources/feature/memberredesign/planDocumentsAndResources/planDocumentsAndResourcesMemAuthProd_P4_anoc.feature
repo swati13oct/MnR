@@ -78,7 +78,7 @@ Feature: 1.06.4.2 Member Plans and Documents - section: Annual Notice of Changes
 	@prod_active_mapd @prod_active_mapd_grp
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | an_sd | an_en_cy | an_es_cy | an_zh_cy | an_en_ny | an_es_ny | an_zh_ny |
-      | 12-069 | 15303       | kkumard   | tnps459#  | SHERMANJAFFE65  | MAPD     | NICE_GROUP_EFF_PDnR   | true  | true     | false    | false    | false    | false    | false    |
+      | 12-069 | 15303       | kkumard   | tnps459#  | 2nancyreeves  | MAPD     | GROUP_EFF_PDnR   | true  | true     | false    | false    | false    | false    | false    |
 #     ### note: PEEHIP group terminated as of 12/31/2019
 #     #| 13-070 | 15130       | kkumard  | tnps459#  | testusername    | MAPD     | PEEHIP_GROUP_EFF_PDnR | true  | false    | false    | false    | false    | false    | false    |
 

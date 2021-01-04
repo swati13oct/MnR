@@ -73,7 +73,7 @@ Feature: 1.06.3.2 Member Plans and Documents - section: Membership Materials - M
 	@prod_active_mapd @prod_active_mapd_grp
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | mm_sd | mm_en | mm_es | mm_zh |
-      | 12-050 | 15303       | kkumard  | tnps459#  | SHERMANJAFFE65    | MAPD     | NICE_GROUP_EFF_PDnR        | true  | true  | false | false |
+      | 12-050 | 15303       | kkumard  | tnps459#  | 2nancyreeves    | MAPD     | GROUP_EFF_PDnR        | true  | true  | false | false |
 #     ### note: PEEHIP group terminated as of 12/31/2019
 #     #| 13-051 | 15130       | kkumard  | tnps459#  | testusername    | MAPD     | PEEHIP_GROUP_EFF_PDnR | true  | true  | false | false | 
 

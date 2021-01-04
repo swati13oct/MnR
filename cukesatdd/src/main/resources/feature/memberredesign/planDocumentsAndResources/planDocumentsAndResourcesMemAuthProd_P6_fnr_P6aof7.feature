@@ -80,7 +80,7 @@ Feature: 1.06.6.2a Member Plans and Documents - section: Forms And Resources Par
 	@prod_active_mapd_grp_6aof7 @prod_active_mapd_6aof7
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | fnr_sd | fnr_or |
-      | 12-107 | 15303       | kkumard  | tnps459#  | SHERMANJAFFE65 | MAPD | NICE_GROUP_EFF_PDnR  | true   | true   |  
+      | 12-107 | 15303       | kkumard  | tnps459#  | 2nancyreeves | MAPD | GROUP_EFF_PDnR  | true   | true   |  
 #     ### note: PEEHIP group terminated as of 12/31/2019
 #     #| 13-108 | 15130       | kkumard  | tnps459#  | testusername    | MAPD     | PEEHIP_GROUP_EFF_PDnR | true   | true   |
 

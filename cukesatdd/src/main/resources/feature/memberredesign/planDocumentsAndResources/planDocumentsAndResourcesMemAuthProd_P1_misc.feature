@@ -82,7 +82,7 @@ Feature: 1.06.2.2 Member Plans and Documents - section: header -and- My Document
 	@prod_active_mapd @prod_active_mapd_grp
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | md_sd | eob_sd | eob_m | eob_d | rm_sd |
-      | 12-012 | 15303       | kkumard  | tnps459#  | SHERMANJAFFE65    | MAPD     | NICE_GROUP_EFF_PDnR        | true  | true   | true  | true  | true  |	  
+      | 12-012 | 15303       | kkumard   | tnps459#  | 2nancyreeves    | MAPD     | GROUP_EFF_PDnR        | true  | true   | true  | true  | true  |	  
 #     ### note: PEEHIP group terminated as of 12/31/2019
 #     #| 13-013 | 15130       | kkumard  | tnps459#  | testusername    | MAPD     | PEEHIP_GROUP_EFF_PDnR | true  | true   | true  | true  | true  |
 
