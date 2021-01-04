@@ -44,7 +44,7 @@ Feature: 1.06.5.2 Member Plans and Documents - section: Provider Directory -or- 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | pd_sd | pd_ps | pd_pl | pd_en_cy | pd_es_cy | pd_zh_cy | pd_en_ny | pd_es_ny | pd_zh_ny |
 #     | 01-077 | xxxxx       | kkumard   | tnps459#  | Ranch1955       | MA       | AARP_IND_PREEFF_PDnR  | true  | true  | false | true     | true     | false    | false    | false    | false    |
 #     | 02-078 | xxxxx       | kkumard   | tnps459#  | testusername    | MA       | GROUP_PREEFF_PDnR     | true  | true  | false | false    | false    | false    | false    | false    | false    |
-      | 03-079 | xxxxx       | kkumard   | tnps459#  | Mino77003   | MAPD     | AARP_IND_PREEFF_PDnR  | true  | true  | true  | true     | true     | false    | false    | false    | false    |
+      | 03-079 | xxxxx       | kkumard   | tnps459#  | Beaver34        | MAPD     | AARP_IND_PREEFF_PDnR  | true  | true  | true  | true     | true     | false    | false    | false    | false    |
 
 #	@prod_preeffective_pdp
 #	Examples: 
@@ -57,24 +57,24 @@ Feature: 1.06.5.2 Member Plans and Documents - section: Provider Directory -or- 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | pd_sd | pd_ps | pd_pl | pd_en_cy | pd_es_cy | pd_zh_cy | pd_en_ny | pd_es_ny | pd_zh_ny |
 #     | 06-082 | xxxxx       | kkumard   | tnps459#  | testusername    | MA       | IND_TERM_PDnR         | false | false | false | false    | false    | false    | false    | false    | false    |
 #     | 07-083 | xxxxx       | kkumard   | tnps459#  | testusername    | MA       | GROUP_TERM_PDnR       | false | false | false | false    | false     | false    | false    | false    | false    |
-      | 08-084 | xxxxx       | kkumard   | tnps459#  | Patkeving    | MAPD     | IND_TERM_PDnR         | false | false | false | false    | false    | false    | false    | false    | false    |
+      | 08-084 | xxxxx       | kkumard   | tnps459#  | Patkeving       | MAPD     | IND_TERM_PDnR         | false | false | false | false    | false    | false    | false    | false    | false    |
 
 
 	@prod_active_ma @prod_active_ma_ind
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | pd_sd | pd_ps | pd_pl | pd_en_cy | pd_es_cy | pd_zh_cy | pd_en_ny | pd_es_ny | pd_zh_ny |
-      | 09-085 | 15129       | kkumard   | tnps459#  | ssmhi1      | MA       | AARP_IND_EFF_PDnR     | true  | true  | false | true     | true     | false    | true     | true     | false    |
+      | 09-085 | 15129       | kkumard   | tnps459#  | ssmhi1          | MA       | AARP_IND_EFF_PDnR     | true  | true  | false | true     | true     | false    | false    | false    | false    |
 
 	@prod_active_ma @prod_active_ma_grp
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | pd_sd | pd_ps | pd_pl | pd_en_cy | pd_es_cy | pd_zh_cy | pd_en_ny | pd_es_ny | pd_zh_ny |
-      | 10-086 | 15130       | kkumard   | tnps459#  | ExDesertrat      | MA       | GROUP_EFF_PDnR        | true  | true  | false | false    | false    | false    | false    | false    | false    |
+      | 10-086 | 15130       | kkumard   | tnps459#  | ExDesertrat     | MA       | GROUP_EFF_PDnR        | true  | true  | false | false    | false    | false    | false    | false    | false    |
 #     | 10-086 | 15130       | kkumard   | tnps459#  | SPENCEPR1       | MA       | NICE_GROUP_EFF_PDnR   | true  | true  | false | false    | false    | false    | false    | false    | false    |
 
 	@prod_active_mapd @prod_active_mapd_ind
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | pd_sd | pd_ps | pd_pl | pd_en_cy | pd_es_cy | pd_zh_cy | pd_en_ny | pd_es_ny | pd_zh_ny |
-      | 11-087 | 15108       | kkumard   | tnps459#  | LMHOCHSCHILD11 | MAPD     | AARP_IND_EFF_PDnR     | true  | true  | true  | true     | true     | false    | true     | true     | false    |
+      | 11-087 | 15108       | kkumard   | tnps459#  | LMHOCHSCHILD11  | MAPD     | AARP_IND_EFF_PDnR     | true  | true  | true  | true     | true     | false    | false    | false    | false    |
 
 	@prod_active_mapd @prod_active_mapd_grp
 	Examples: 
@@ -86,17 +86,17 @@ Feature: 1.06.5.2 Member Plans and Documents - section: Provider Directory -or- 
 	@prod_active_pcp
 	Examples: 
       | index  | TID         | username  | password  | MemUserName        | planType | memberType            | pd_sd | pd_ps | pd_pl | pd_en_cy | pd_es_cy | pd_zh_cy | pd_en_ny | pd_es_ny | pd_zh_ny |
-      | 14-090 | 15128       | kkumard   | tnps459#  | SOFYABAKMAN@MSN.COM    | PCP      | IND_EFF_PDnR          | true  | true  | true  | true     | true     | false    | true     | true     | false    |
+      | 14-090 | 15128       | kkumard   | tnps459#  | SOFYABAKMAN@MSN.COM| PCP      | IND_EFF_PDnR          | true  | true  | true  | true     | true     | false    | false    | false    | false    |
 
 	@prod_active_medica
 	Examples: 
-      | index  | TID         | username  | password  | MemUserName              | planType | memberType            | pd_sd | pd_ps | pd_pl | pd_en_cy | pd_es_cy | pd_zh_cy | pd_en_ny | pd_es_ny | pd_zh_ny |
-      | 15-091 | 15128       | kkumard   | tnps459#  | TCZUNIGA52    | MEDICA   | IND_EFF_PDnR          | true  | true  | true  | true     | true     | false    | true     | true     | false    |
+      | index  | TID         | username  | password  | MemUserName   | planType | memberType            | pd_sd | pd_ps | pd_pl | pd_en_cy | pd_es_cy | pd_zh_cy | pd_en_ny | pd_es_ny | pd_zh_ny |
+      | 15-091 | 15128       | kkumard   | tnps459#  | TCZUNIGA52    | MEDICA   | IND_EFF_PDnR          | true  | true  | true  | true     | true     | false    | false    | false    | false    |
 
 	@prod_active_pdp @prod_active_pdp_ind
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | pd_sd | pd_ps | pd_pl | pd_en_cy | pd_es_cy | pd_zh_cy | pd_en_ny | pd_es_ny | pd_zh_ny |
-      | 16-092 | 15126,15127 | kkumard   | tnps459#  | PWINSAUER51       | PDP      | AARP_IND_EFF_PDnR     | true  | false | true  | true     | true     | false    | false    | false    | false    |
+      | 16-092 | 15126,15127 | kkumard   | tnps459#  | PWINSAUER51      | PDP      | AARP_IND_EFF_PDnR     | true  | false | true  | true     | true     | false    | false    | false    | false    |
 
 	@prod_active_pdp @prod_active_pdp_grp
 	Examples: 

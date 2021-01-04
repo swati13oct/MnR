@@ -42,7 +42,7 @@ Feature: 1.06.6.2b Member Plans and Documents - section: Forms And Resources Par
 	@prod_preeffective_mapd_6bof7
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | fnr_sd | fnr_or |
-      | 03-098 | xxxxx       | kkumard  | tnps459#  | Mino77003          | MAPD     | AARP_IND_PREEFF_PDnR  | false  | false  |
+      | 03-098 | xxxxx       | kkumard  | tnps459#  | Beaver34          | MAPD     | AARP_IND_PREEFF_PDnR  | false  | false  |
 
 #	@prod_preeffective_pdp_6bof7
 #	Examples: 

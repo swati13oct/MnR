@@ -39,7 +39,7 @@ Feature: 1.06.3.2 Member Plans and Documents - section: Membership Materials - M
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | mm_sd | mm_en | mm_es | mm_zh |
 #      | 01-039 | xxxxx       | kkumard  | tnps459#  | Ranch1955    | MA       | AARP_IND_PREEFF_PDnR  | true  | true  | true  | false |
 #      | 02-040 | xxxxx       | kkumard  | tnps459#  | testusername    | MA       | GROUP_PREEFF_PDnR     | true  | false | false | false |
-      | 03-041 | xxxxx       | kkumard  | tnps459#  | Mino77003          | MAPD     | AARP_IND_PREEFF_PDnR  | true  | true  | true  | false |
+      | 03-041 | xxxxx       | kkumard  | tnps459#  | Beaver34          | MAPD     | AARP_IND_PREEFF_PDnR  | true  | true  | true  | false |
 
 #	@prod_preeffective_pdp
 #	Examples: 

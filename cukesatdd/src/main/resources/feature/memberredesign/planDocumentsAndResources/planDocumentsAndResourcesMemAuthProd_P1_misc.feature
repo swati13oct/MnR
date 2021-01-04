@@ -48,7 +48,7 @@ Feature: 1.06.2.2 Member Plans and Documents - section: header -and- My Document
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | md_sd | eob_sd | eob_m | eob_d | rm_sd |
 #      | 01-001 | xxxxx       | kkumard  | tnps459#  | Ranch1955       | MA       | AARP_IND_PREEFF_PDnR  | true  | false  | false | false | false |
 #      | 02-002 | xxxxx       | kkumard  | tnps459#  | testusername    | MA       | GROUP_PREEFF_PDnR     | true  | false  | false | false | false |
-      | 03-003 | xxxxx       | kkumard  | tnps459#  | Mino77003          | MAPD     | AARP_IND_PREEFF_PDnR  | true  | false  | false | false | false |
+      | 03-003 | xxxxx       | kkumard  | tnps459#  | Beaver34          | MAPD     | AARP_IND_PREEFF_PDnR  | true  | false  | false | false | false |
 
 #	@prod_preeffective_pdp
 #	Examples: 

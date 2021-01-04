@@ -115,7 +115,7 @@ Feature: 1.04.1.1 To Test NON-DREAM EOB for Members - E2E - Member Auth - PROD
       | index | username  | password  | MemUserName            | planType                 | memberType              | eobType | realEob | flagZeroEob |
     # | 14    | kkumard   | tnps459#  | testusername           | SHIP_MEDICARE SUPPLEMENT | COMBO_SHIP_PDP_RX_DEOB  | Medical | true    | true   |  
     #x| 14    | kkumard   | tnps459#  | MaryLouMichels2        | SHIP_MEDICARE SUPPLEMENT | COMBO_PDP_SHIP_RX_DEOB  | Medical | true    | true   |  
-      | 14    | kkumard   | tnps459#  | elizabeth6310          | SHIP_MEDICARE SUPPLEMENT | COMBO_PDP_SHIP_RX_DEOB  | Medical | true    | true   |  
+      | 14    | kkumard   | tnps459#  | nino2@theciliangroup.com|SHIP_MEDICARE SUPPLEMENT | COMBO_PDP_SHIP_RX_DEOB  | Medical | true    | true   |  
 
 
   @prod_eob02 @regression_06_06_18FnF
@@ -187,5 +187,5 @@ Feature: 1.04.1.1 To Test NON-DREAM EOB for Members - E2E - Member Auth - PROD
 
     @prod_SSP_EOBs
     Examples: 
-      | index | username  | password  | MemUserName              | FID    | planType | memberType | 
-      | 17    | kkumard  | tnps459#  | elizabeth6310#ERY2GO        | 267688 | SSUP     | GROUP_EOB  | 
+      | index | username  | password  | MemUserName    | FID    | planType | memberType | 
+      | 17    | kkumard   | tnps459#  | DKELLY27       | 267688 | SSUP     | GROUP_EOB  | 
