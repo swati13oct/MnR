@@ -88,7 +88,8 @@ public class MedicareInformationPage extends UhcDriver{
 	@FindBy(id = "emailAddress")
 	private WebElement emailAddressField;
 	
-	@FindBy(id = "medicareClaimNumber")
+	//@FindBy(id = "medicareClaimNumber")
+	@FindBy(xpath = "//input[contains(@id, 'medicareClaimNumber')]")
 	private WebElement claimNumberField;
 	
 	@FindBy(id = "SSN")
@@ -293,6 +294,11 @@ public class MedicareInformationPage extends UhcDriver{
 		@FindBy(xpath="//div[contains(@class,'enrollmentAllowed-error-msg ng-star-inserted')]")
 		private WebElement ErrorMessage_CSNP;
 		
+		@FindBy(xpath="//a[contains(@aria-label,'Edit Medicare Insurance Information')]")
+		private WebElement EditMedicareInformation;
+		
+		@FindBy(xpath="//button[contains(text(),'Save Changes')]")
+		private WebElement ReviewEditSavechanges;
 	public MedicareInformationPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -1256,5 +1262,4 @@ boolean Validation_Flag = true;
 	return true;
 
 }
-
 }

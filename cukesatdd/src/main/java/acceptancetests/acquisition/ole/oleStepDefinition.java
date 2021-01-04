@@ -3588,5 +3588,42 @@ public void the_user_navigates_to_Disclosure_Authorization_Page_Medicaid_Effecti
 		Assert.fail("OLE Use and Disclosure Authorization Page is NOT Displayed");
 	}
 
+@Then("^the user validate on Review Page and click on Edit information for Medicare Information Page$")
+public void the_user_navigates_to_Review_and_Submit_Page_clickon_Edit_Medicare_Page(DataTable Medicareoptions) throws Throwable {
+	List<DataTableRow> givenAttributesRow = Medicareoptions.getGherkinRows();
+	Map<String, String> MedicareDetailsMap = new HashMap<String, String>();
+	for (int i = 0; i < givenAttributesRow.size(); i++) {
+
+		MedicareDetailsMap.put(givenAttributesRow.get(i).getCells().get(0),
+				givenAttributesRow.get(i).getCells().get(1));
+	}  
+	
+	String CardType = MedicareDetailsMap.get("Card Type");
+	/*Random rnd = new Random();
+	int n = 100000000 + rnd.nextInt(900000000);
+	String MedicareNumber1 = Integer.toString(n)+"C";
+	MedicareDetailsMap.put("Medicare Number1", MedicareNumber1);*/
+	String MedicareNumber1 = MedicareDetailsMap.get("Medicare Number1");
+	ReviewSubmitPage reviewSubmitPage = (ReviewSubmitPage) getLoginScenario().getBean(OLE_PageConstants.OLE_REVIEW_SUBMIT_PAGE);
+		//AuthorizationPage authorizationPage = (AuthorizationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_AUTHORIZATION_PAGE);
+	//MedicareInformationPage medicareInfoPage = (MedicareInformationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE);
+
+	boolean medicareInfoPage = reviewSubmitPage.Review_page_enter_required_Medicare_details(MedicareDetailsMap);
+	if (medicareInfoPage) {
+
+		getLoginScenario().saveBean(oleCommonConstants.MEDICARE_NUMBER, MedicareDetailsMap.get("Medicare Number1"));
+		getLoginScenario().saveBean(oleCommonConstants.CARD_TYPE, MedicareDetailsMap.get("Card Type"));
+		//getLoginScenario().saveBean(oleCommonConstants.PARTA_EFFECTIVE, MedicareDetailsMap.get("PartA Date"));
+		//getLoginScenario().saveBean(oleCommonConstants.PARTB_EFFECTIVE, MedicareDetailsMap.get("PartB Date"));
+		getLoginScenario().saveBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE,
+				medicareInfoPage);
+		getLoginScenario().saveBean(OLE_PageConstants.OLE_REVIEW_SUBMIT_PAGE,
+				reviewSubmitPage);
+		System.out.println("OLE Medicare Information Page, Medicare Info is entered and navigated back to Review Page");
+		Assert.assertTrue(true);
+	}
+	else
+		Assert.fail("Medicare Info data entry failed and user not navigated back to Review Page");
+	}
 
 	}

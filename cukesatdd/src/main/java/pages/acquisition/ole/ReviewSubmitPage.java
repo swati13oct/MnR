@@ -302,7 +302,20 @@ public class ReviewSubmitPage extends UhcDriver{
 	@FindBy(xpath = "//*[contains(text(), 'Relationship to Applicant') or contains(text(), 'Relationship to Enrollee')]//following-sibling::*")
 	private WebElement AuthRelationship;
 	
-
+	@FindBy(xpath="//a[contains(@aria-label,'Edit Medicare Insurance Information')]")
+	private WebElement EditMedicareInformation;
+	
+	@FindBy(xpath="//button[contains(text(),'Save Changes')]")
+	private WebElement ReviewEditSavechanges;
+	
+	//@FindBy(id = "medicareClaimNumber")
+	@FindBy(xpath = "//input[contains(@id, 'medicareClaimNumber')]")
+	private WebElement claimNumberField;
+	
+	@FindBy(xpath = "//*[contains(@id, 'medicaidNumber')]/parent::span/input")
+	private WebElement medicaidNumberField;
+	
+	
 	public ReviewSubmitPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -812,5 +825,38 @@ public class ReviewSubmitPage extends UhcDriver{
 		}
 		return result;
 	}
+	public boolean Review_page_enter_required_Medicare_details(Map<String, String> MedicareDetailsMap) throws InterruptedException{
+		
+		boolean result = true;
+		String MedicareNumber1 = MedicareDetailsMap.get("Medicare Number1");
+//		String PartAeffectiveDate = MedicareDetailsMap.get("PartA Date");
+//		String PartBeffectiveDate = MedicareDetailsMap.get("PartB Date");
+		String CardType = MedicareDetailsMap.get("Card Type");
+		//String MedicaidNo = MedicareDetailsMap.get("MedicaidNumber"); 
+		
+		validate(EditMedicareInformation);
+		jsClickNew(EditMedicareInformation);
+		
+		validate(claimNumberField);
+		claimNumberField.clear();
+		validateNew(claimNumberField);
+		sendkeysNew(claimNumberField, MedicareNumber1);
+		Thread.sleep(2000);
+		sendkeysNew(medicaidNumberField,"12345876");
+		Thread.sleep(2000);
+		jsClickNew(ReviewEditSavechanges);
+		validateNew(ReviewEditSavechanges);
+		jsClickNew(ReviewEditSavechanges);
 
+		System.out.println(" MedicareNumber Details are entered");
+		/*
+		if(ReviewEditSavechanges.isEnabled()){
+			System.out.println("User navigate back to Review Page");
+			return true;
+		}
+		else
+			System.out.println("savechanges is disabled, User not navigated back to Review Page");
+		return false;*/
+		return result;
+	}
 	}
