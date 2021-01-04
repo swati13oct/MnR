@@ -504,7 +504,6 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "//div[@class='confirmationtext']/p[1]/b")
 	private WebElement Thankyou;
 	
-		
 	@FindBy(xpath = "//p[contains(text(),'UnitedHealthcare Insurance Company (UnitedHealthcare)')]")
     private WebElement UHCICSubTiltle;
 
@@ -3455,7 +3454,6 @@ action.moveToElement(navigationSectionHomeLink).moveToElement(ourPlansHoverLink)
 	}
 	 
 	 public void validateCallSamValue() throws InterruptedException {
-	       
 	        threadsleep(10);
 	        if(driver.findElement(By.xpath("(//div[@ng-show='fedTfn'])[1]/p/span/a/u")).isDisplayed()) {
 	        	//threadsleep(25); 
@@ -3463,7 +3461,7 @@ action.moveToElement(navigationSectionHomeLink).moveToElement(ourPlansHoverLink)
 	        	waitforElementVisibilityInTime(ele, 30);
 	        	String str=ele.getText();
 	        	System.out.println("Stru"+str);
-	        	 String valueonCallUsMed=driver.findElement(By.xpath("//span[@class='sam__button__text desktop-tfn-text']")).getText();
+	        	String valueonCallUsMed=driver.findElement(By.xpath("//span[@class='sam__button__text desktop-tfn-text']")).getText();
 	 	        System.out.println("valueonCallUs"+valueonCallUsMed);
 		        System.out.println("valueOnPopup"+valueonCallUsMed);
 		        Assert.assertEquals(str, valueonCallUsMed);
@@ -3518,7 +3516,7 @@ action.moveToElement(navigationSectionHomeLink).moveToElement(ourPlansHoverLink)
 		}
 		
 		public AcquisitionHomePage  validateCallpopup() throws InterruptedException {
-			/*	int retry = 1;
+			/*int retry = 1;
 			do	{
 				driver.navigate().refresh();
 				CommonUtility.checkPageIsReady(driver);
@@ -4915,6 +4913,7 @@ public ContactUsAARPPage contactUsFooterClick() {
 	}
 	return null;
 }
+
 public SiteMapAARPPage siteMapFooterClick() {
 	validateNew(footerSiteMapLink);
 //	footerSiteMapLink.click();
@@ -4926,6 +4925,7 @@ public SiteMapAARPPage siteMapFooterClick() {
 	}
 	return null;
 }
+
 public PrivacyPolicyAARPPage privacypolicyFooterClick() {
 	validateNew(footerPrivacyPolicyLink);
 //	footerPrivacyPolicyLink.click();
@@ -4944,9 +4944,7 @@ public PrivacyPolicyAARPPage privacypolicyFooterClick() {
 //
 //}			
 
-		
-
-		public String fetchEnvironmentUrls() {
+	public String fetchEnvironmentUrls() {
 			if (MRScenario.environment.equals("offline")) {
 				testSiteUrl = AARP_ACQISITION_OFFLINE_PAGE_URL;
 				return testSiteUrl;
