@@ -31,6 +31,8 @@ import gherkin.formatter.model.DataTableRow;
 import pages.acquisition.commonpages.AcquisitionHomePage;
 import pages.acquisition.commonpages.PlanDetailsPage;
 import pages.acquisition.commonpages.ProviderSearchPage;
+import pages.acquisition.commonpages.ShopForPlanNavigationPage;
+import pages.acquisition.commonpages.ShopPage;
 import pages.acquisition.commonpages.VPPPlanSummaryPage;
 import pages.acquisition.ole.PersonalInformationPage;
 import pages.acquisition.ole.WelcomePage;
@@ -3302,9 +3304,11 @@ public void user_clicks_on_continue_enrollment_button_on_the_modal() throws Thro
 					memberAttributesRow.get(i).getCells().get(1));
 		}		
 		String EmailAddress = memberAttributesMap.get("Email");
-		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
-				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		plansummaryPage.RequestPlanIInformationshoppages(EmailAddress);
+		ShopForPlanNavigationPage shopaplan = (ShopForPlanNavigationPage) getLoginScenario()
+				.getBean(PageConstants.SHOP_FOR_A_PLAN_AARPLAYER);
+		//ShopPage shopPage = 
+				shopaplan.RequestPlanIInformationshoppages(EmailAddress);
+		//getLoginScenario().saveBean(PageConstants.SHOP_PAGE, shopPage);
 
 	}
 }

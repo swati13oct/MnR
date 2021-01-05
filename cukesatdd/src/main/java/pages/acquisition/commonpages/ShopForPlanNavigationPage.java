@@ -1,5 +1,6 @@
 package pages.acquisition.commonpages;
 
+import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -171,5 +172,57 @@ public class ShopForPlanNavigationPage extends UhcDriver {
 		}*/
 	//	return null;
 		return null;
+	}
+	
+	@FindBy(xpath = "//input[@id='updates-email']")
+	private WebElement requestshoppageemailaddress;
+	@FindBy(xpath = "(//button[contains(text(),'Submit')])[2]")
+	private WebElement requestplaninformationShopsubmit;
+	@FindBy(xpath = "(//p[contains(text(),'Your guide will arrive in your inbox')])[2]")
+	private WebElement requestplaninformationshopsubmitpopup;
+	@FindBy(xpath = "(//*[contains(text(),'Please enter a valid email address')])[2]")
+	private WebElement RequestPlanInformationShoppages_ErrorMessage;
+	
+	
+	
+	public boolean RequestPlanIInformationshoppages(String EmailAddress)
+			throws InterruptedException {
+
+		boolean RequestPlanIInformation_Validation = true;
+
+		boolean flag = true;
+		
+		requestshoppageemailaddress.clear();
+		requestshoppageemailaddress.sendKeys("(*^*_asb@t.c");
+		requestplaninformationShopsubmit.click();
+		if (validate(RequestPlanInformationShoppages_ErrorMessage) && RequestPlanInformationShoppages_ErrorMessage.isDisplayed()) {
+			if (!RequestPlanInformationShoppages_ErrorMessage.getText()
+					.contains("Please enter a valid email address")) {
+				System.out.println(
+						"Email Invalid Error is Not  displayed : " + RequestPlanInformationShoppages_ErrorMessage.getText());
+				flag = false;
+			}
+			System.out.println("Email Invalid Error : " + RequestPlanInformationShoppages_ErrorMessage.getText());
+
+		} else {
+			System.out.println("Email Invalid Error field is not displayed");
+
+		}
+		validateNew(requestshoppageemailaddress);
+		requestshoppageemailaddress.clear();
+		requestshoppageemailaddress.sendKeys(EmailAddress);
+		System.out.println("Email Address is enetered : " + EmailAddress);
+		validateNew(requestplaninformationShopsubmit);
+		jsClickNew(requestplaninformationShopsubmit);
+		if (requestplaninformationshopsubmitpopup.getText().contains(
+				"Your guide will arrive in your inbox shortly")) {
+			System.out.println("****************Request  information is displayed  ***************");
+
+			Assert.assertTrue(true);
+		} else {
+			System.out.println("****************Request information is displayed  ***************");
+		}
+		return RequestPlanIInformation_Validation;
+
 	}
 }

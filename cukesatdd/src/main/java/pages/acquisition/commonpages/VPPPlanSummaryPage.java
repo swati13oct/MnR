@@ -6518,44 +6518,4 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	}
 	
-	public boolean RequestPlanIInformationshoppages(String EmailAddress)
-			throws InterruptedException {
-
-		boolean RequestPlanIInformation_Validation = true;
-
-		boolean flag = true;
-		
-		requestshoppageemailaddress.clear();
-		requestshoppageemailaddress.sendKeys("(*^*_asb@t.c");
-		requestplaninformationShopsubmit.click();
-		if (validate(RequestPlanInformationShoppages_ErrorMessage) && RequestPlanInformationShoppages_ErrorMessage.isDisplayed()) {
-			if (!RequestPlanInformationShoppages_ErrorMessage.getText()
-					.contains("Please enter a valid email address")) {
-				System.out.println(
-						"Email Invalid Error is Not  displayed : " + RequestPlanInformationShoppages_ErrorMessage.getText());
-				flag = false;
-			}
-			System.out.println("Email Invalid Error : " + RequestPlanInformationShoppages_ErrorMessage.getText());
-
-		} else {
-			System.out.println("Email Invalid Error field is not displayed");
-
-		}
-		validateNew(requestshoppageemailaddress);
-		requestshoppageemailaddress.clear();
-		requestshoppageemailaddress.sendKeys(EmailAddress);
-		System.out.println("Email Address is enetered : " + EmailAddress);
-		validateNew(requestplaninformationShopsubmit);
-		jsClickNew(requestplaninformationShopsubmit);
-		if (requestplaninformationshopsubmitpopup.getText().contains(
-				"Your guide will arrive in your inbox shortly")) {
-			System.out.println("****************Request  information is displayed  ***************");
-
-			Assert.assertTrue(true);
-		} else {
-			System.out.println("****************Request information is displayed  ***************");
-		}
-		return RequestPlanIInformation_Validation;
-
-	}
 }
