@@ -11,6 +11,7 @@ Feature: 1.25.2 Member Prepare For Next Year - PROD
       | Password | <password> |
     And Member Enters the Username he wants to search
       | MemUsername | <MemUserName> |
+      | Retry | true |
     And user clicks on member to select
     And user stores test input for validations
       | Username | <MemUserName> |
@@ -79,6 +80,7 @@ Feature: 1.25.2 Member Prepare For Next Year - PROD
       | Password | <password> |
     And Member Enters the Username he wants to search
       | MemUsername | <MemUserName> |
+      | Retry | true |
     And user clicks on member to select
     And user stores test input for validations
       | Username | <MemUserName> |
@@ -111,7 +113,7 @@ Feature: 1.25.2 Member Prepare For Next Year - PROD
     Examples: 
 	    | index | FID     | username  | password  | MemUserName       | planType | memberType          |
 	   #| 1-04  | F437767 | kkumard   | tnps459#  | Ranch1955         | MA	     | IND_PREEFF_PFNY     |
-	    | 1-04  | F437767 | kkumard   | tnps459#  | Teripappas        | MAPD     | IND_PREEFF_PFNY     |
+	    | 1-04  | F437767 | kkumard   | tnps459#  | Beaver34          | MAPD     | IND_PREEFF_PFNY     |
 	    | 1-05  | F437767 | kkumard   | tnps459#  | Patkeving       | MA	     | IND_TERM_PFNY       |
 	    | 1-06  | F437767 | kkumard   | tnps459#  | Pramila1946       | SHIP	 | IND_PFNY            |
 			
@@ -140,6 +142,7 @@ Feature: 1.25.2 Member Prepare For Next Year - PROD
       | Password | <password> |
     And Member Enters the Username he wants to search
       | MemUsername | <MemUserName> |
+      | Retry | true |
     And user clicks on member to select
     And user stores test input for validations
       | Username | <MemUserName> |
@@ -259,6 +262,7 @@ Feature: 1.25.2 Member Prepare For Next Year - PROD
       | Password | <password> |
     And Member Enters the Username he wants to search
       | MemUsername | <MemUserName> |
+      | Retry | true |
     And user clicks on member to select
     And user stores test input for validations
       | Username | <MemUserName> |
@@ -298,6 +302,7 @@ Feature: 1.25.2 Member Prepare For Next Year - PROD
       | Password | <password> |
     And Member Enters the Username he wants to search
       | MemUsername | <MemUserName> |
+      | Retry | true |
     And user clicks on member to select
     And user stores test input for validations
       | Username | <MemUserName> |
@@ -324,5 +329,5 @@ Feature: 1.25.2 Member Prepare For Next Year - PROD
 	    | index | FID     | username  | password  | MemUserName             | planType | memberType              | showNxtYrPlan |
 	 #note: cannot locate applicable user yet    
 	 #  | 4-01  | F443004 | kkumard   | tnps459#  | testUserName            | MAPD     | UHC_SARS_PFNY           | false         |
-	    | 4-02  | F443004 | kkumard   | tnps459#  | XrayBobby36512          | MAPD     | SARS_PFNY               | false         |
+	 #  | 4-02  | F443004 | kkumard   | tnps459#  | testUserName            | MAPD     | SARS_PFNY               | false         |
 	    
