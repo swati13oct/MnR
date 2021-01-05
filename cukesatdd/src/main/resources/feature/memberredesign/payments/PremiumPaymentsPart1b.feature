@@ -30,7 +30,7 @@ Background: Feature security flag needs to be true before ATDD script execution
 
     Examples: 
       | TID    | planType | memberType      |
-      | TC8    | MAPD     | OverdueFlag     |
+     | TC8    | MAPD     | OverdueFlag     |
       | TC8-P2 | SHIP     | SHIPOverdueFlag |
 
   #Test Case 09

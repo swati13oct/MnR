@@ -38,8 +38,10 @@ public class HealthRecordPage  extends HealthRecordBase {
 			WebElement root1 = expandRootElement(shadowRootFooter);
 			try {
 				WebElement footerContactUsShadowRootLnk = root1.findElement(By.cssSelector("a[data-testid*=TARGET_AWARE_FTR_HELP]"));
+				scrollElementToCenterScreen(footerContactUsShadowRootLnk);
 				footerContactUsShadowRootLnk.click();
 			} catch (Exception e) {
+				System.out.println(e.getMessage());
 				Assert.assertTrue("PROBLEM - unable to locate Contact Us link in footer section", false);
 			}
 		} 

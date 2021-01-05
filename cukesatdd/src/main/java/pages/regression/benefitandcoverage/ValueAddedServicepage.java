@@ -9,7 +9,11 @@ import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 
+import acceptancetests.data.LoginCommonConstants;
+import acceptancetests.util.CommonUtility;
+import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 import static org.hamcrest.CoreMatchers.*;
 
@@ -62,12 +66,118 @@ public class ValueAddedServicepage extends UhcDriver {
 	
 	@FindBy(xpath = "//h2[contains(text(),'Hearing Care Program by HearUSA')]")
 	private WebElement hearingCareProgramByHearUSATile;
+	
+	@FindBy(xpath="//h2[normalize-space(text())='Dental Discount']")
+	private WebElement dentalDiscountWidget;
+	
+	@FindBy(xpath="//h2[normalize-space(text())='Dental Discount']/following-sibling::p")
+	private WebElement dentalDiscountPara;
+	
+	@FindBy(xpath="//h2[normalize-space(text())='Dental Discount']/following-sibling::a")
+	private WebElement dentalDiscountShowmoreLnk;
+	
+	@FindBy(xpath="//h2[normalize-space(text())='Dental Discount']/../../../../../section[contains(@id,'collapseLargeCard')]")
+	private WebElement dentalDiscountShowmorePara;
+	
+	@FindBy(xpath="(//h2[normalize-space(text())='Hearing Care Program by HearUSA'])[2]")
+	private WebElement hearingCareProgramByHearUSAWidget;
+	
+	@FindBy(xpath="(//h2[normalize-space(text())='Hearing Care Program by HearUSA'])[2]/following-sibling::p")
+	private WebElement hearingCareProgramByHearUSAPara;
+	
+	@FindBy(xpath="(//h2[normalize-space(text())='Hearing Care Program by HearUSA'])[2]/following-sibling::a")
+	private WebElement hearingCareProgramByHearUSAShowMoreLnk;
+	
+	@FindBy(xpath="(//h2[normalize-space(text())='Hearing Care Program by HearUSA'])[2]/../../../../../section[contains(@id,'collapseLargeCard')]")
+	private WebElement hearingCareProgramByHearUSAShowMorePara;
+	
+	@FindBy(xpath="(//h2[normalize-space(text())='SilverSneakers'])[2]")
+	private WebElement silverSneakersWidget;
+	
+	@FindBy(xpath="(//h2[normalize-space(text())='SilverSneakers'])[2]/following-sibling::p")
+	private WebElement silverSneakersPara;
+	
+	@FindBy(xpath="(//h2[normalize-space(text())='SilverSneakers'])[2]/following-sibling::a")
+	private WebElement silverSneakersShowMoreLnk;
+	
+	@FindBy(xpath="(//h2[normalize-space(text())='SilverSneakers'])[2]/../../../../../section[contains(@id,'collapseLargeCard')]")
+	private WebElement silverSneakersShowMorePara;
+	
+	@FindBy(xpath="(//h2[normalize-space(text())='AARP'])[4]")
+	private WebElement aarpStayingSharpWidget;
+	
+	@FindBy(xpath="(//h2[normalize-space(text())='AARP'])[4]/following-sibling::p")
+	private WebElement aarpStayingSharpPara;
+	
+	@FindBy(xpath="(//h2[normalize-space(text())='AARP'])[4]/following-sibling::a")
+	private WebElement aarpStayingSharpShowMoreLnk;
+	
+	@FindBy(xpath="(//h2[normalize-space(text())='AARP'])[4]/../../../../../section[contains(@id,'collapseLargeCard')]")
+	private WebElement aarpStayingSharpShowMorePara;
+	
+	@FindBy(xpath="(//h2[normalize-space(text())='24/7 Nurse line'])[2]")
+	private WebElement nurseLineWidget;
+	
+	@FindBy(xpath="(//h2[normalize-space(text())='24/7 Nurse line'])[2]/following-sibling::p")
+	private WebElement nurseLinePara;
+	
+	@FindBy(xpath="(//h2[normalize-space(text())='24/7 Nurse line'])[2]/following-sibling::a")
+	private WebElement nurseLineShowMoreLnk;
+	
+	@FindBy(xpath="(//h2[normalize-space(text())='24/7 Nurse line'])[2]/../../../../../section[contains(@id,'collapseLargeCard')]")
+	private WebElement nurseLineShowMorePara;
+	
+	@FindBy(xpath="(//h2[normalize-space(text())='AARP'])[5]")
+	private WebElement aarpVisionDiscountsWidget;
+	
+	@FindBy(xpath="(//h2[normalize-space(text())='AARP'])[5]/following-sibling::p")
+	private WebElement aarpVisionDiscountsPara;
+	
+	@FindBy(xpath="(//h2[normalize-space(text())='AARP'])[5]/following-sibling::a")
+	private WebElement aarpVisionDiscountsShowMoreLnk;
+	
+	@FindBy(xpath="(//h2[normalize-space(text())='AARP'])[5]/../../../../../section[contains(@id,'collapseLargeCard')]")
+	private WebElement aarpVisionDiscountsShowMorePara;
+	
+	@FindBy(xpath="(//h2[contains(text(),'AARP Smart Driver')])[1]")
+	private WebElement aarpSmartDriverWidget;
+	
+	@FindBy(xpath="(//h2[contains(text(),'AARP Smart Driver')])[1]/following-sibling::p")
+	private WebElement aarpSmartDriverPara;
+	
+	@FindBy(xpath="(//h2[contains(text(),'AARP Smart Driver')])[1]/following-sibling::a")
+	private WebElement aarpSmartDriverShowMoreLnk;
+	
+	@FindBy(xpath="(//h2[contains(text(),'AARP Smart Driver')])[1]/../../../../../section[contains(@id,'collapseLargeCard')]")
+	private WebElement aarpSmartDriverShowMorePara;
+	
+	@FindBy(xpath="//h2[normalize-space(text())='Renew Active']")
+	private WebElement renewActiveWidget;
+	
+	@FindBy(xpath="//h2[normalize-space(text())='Renew Active']/following-sibling::p")
+	private WebElement renewActivePara;
+	
+	@FindBy(xpath="//h2[normalize-space(text())='Renew Active']/following-sibling::a")
+	private WebElement renewActiveShowMoreLnk;
+	
+	@FindBy(xpath="//h2[normalize-space(text())='Renew Active']/../../../../../section[contains(@id,'collapseLargeCard')]")
+	private WebElement renewActiveShowMorePara;
+	
+	@FindBy(xpath="//a[normalize-space(text())='Plan Benefits & Coverage']")
+	private WebElement planBenifitsAndCoverageLnk;
 	   
 	public ValueAddedServicepage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
 		openAndValidate();	
-		}
+	}
+	
+	@Autowired
+	MRScenario loginScenario;
+
+	public MRScenario getLoginScenario() {
+		return loginScenario;
+	}
 	
 	public void validatenurseHealthLine() {
 		validateNew(nurseHealthLine);
@@ -102,15 +212,157 @@ public class ValueAddedServicepage extends UhcDriver {
 	/**
 	 * @toDo : Validates the vas tiles on vas page
 	 */
-	public void vastiles()
+	
+	//VAS widgets will display as per user plancode & statecode
+	public void vastiles(String planCode, String stateCode)
 	{
-		try {
+	try {
 			Thread.sleep(5000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		Assert.assertTrue("PROBLEM - unable to locate element for 'At Your Best by UnitedHealthcare' or 'Browse your options'", 
-				validate(atYourBestTile) || validate(browseYourOptions));
+		
+		if(planCode.equalsIgnoreCase("F01") && stateCode.equalsIgnoreCase("AR")) {
+			validate(silverSneakersWidget);
+			
+			validate(silverSneakersPara);
+			
+			Assert.assertTrue(silverSneakersPara.getText().trim().contains("SilverSneakers is an exercise program for active older adults."));
+			
+			silverSneakersShowMoreLnk.click();
+			
+			CommonUtility.waitForPageLoadNew(driver, silverSneakersShowMorePara, 20);
+			
+			Assert.assertTrue(silverSneakersShowMorePara.getText().contains("SilverSneakers gives you access to thousands of participating locations"));
+			
+			CommonUtility.waitForPageLoadNew(driver, silverSneakersShowMoreLnk, 20);
+			
+			silverSneakersShowMoreLnk.click();
+			
+			
+			Assert.assertTrue("'Renew ActiveTM by UnitedHealthcare' is not expected to display", !validate(renewActiveWidget));
+			
+		}else if(planCode.equalsIgnoreCase("G01") && stateCode.equalsIgnoreCase("LA")) {
+			
+			validate(renewActiveWidget);
+			
+			validate(renewActivePara);
+			
+			Assert.assertTrue(renewActivePara.getText().trim().contains("Gives you access to an extensive network of gyms and fitness locations near you"));
+			
+			renewActiveShowMoreLnk.click();
+			
+			CommonUtility.waitForPageLoadNew(driver, renewActiveShowMorePara, 20);
+			
+			Assert.assertTrue(renewActiveShowMorePara.getText().contains("You will need a confirmation code to take advantage of these services."));
+			
+			CommonUtility.waitForPageLoadNew(driver, renewActiveShowMoreLnk, 20);
+			
+			renewActiveShowMoreLnk.click();
+			
+			
+			Assert.assertTrue("'silverSneakersWidget' is not expected to display", !validate(silverSneakersWidget));
+			
+		}
+		WebElement widgets[] = {dentalDiscountWidget, hearingCareProgramByHearUSAWidget, aarpStayingSharpWidget,
+				nurseLineWidget, aarpVisionDiscountsWidget, aarpSmartDriverWidget};
+		
+		WebElement widgetsPara[] = {dentalDiscountPara, hearingCareProgramByHearUSAPara, aarpStayingSharpPara,
+				nurseLinePara, aarpVisionDiscountsPara, aarpSmartDriverPara};
+		
+		String widgetsUIPara[] = {"You can receive discounts for dental services from in-network dentists through Dentegra.",
+				"You have access to a discount on hearing aids and screenings by certified HearUSA hearing care providers.",
+				"You have access to an online brain health program that helps support a healthy brain lifestyle.",
+				"A registered nurse is available to discuss your concerns and answer questions over the phone anytime, day or night.",
+				"You have access to savings on eye health services that include:",
+				"helps participants brush up on rules of the road"};
+		
+		
+		for(int i=0; i<widgets.length; i++) {
+			validate(widgets[i]);
+			validate(widgetsPara[i]);
+			Assert.assertTrue(widgetsPara[i].getText().trim().contains(widgetsUIPara[i]));
+		}
+		
+		Assert.assertTrue("'BrowseYourOptions' is not expected to display", !browseYourOptions.isSelected());
+		
+		Assert.assertTrue("'AtYourBestTile' is not expected to display", !validate(atYourBestTile));
+	
+		dentalDiscountShowmoreLnk.click();
+		
+		CommonUtility.waitForPageLoadNew(driver, dentalDiscountShowmorePara, 20);
+		
+		Assert.assertTrue(dentalDiscountShowmorePara.getText().contains("To take advantage of this offer"));
+		
+		CommonUtility.waitForPageLoadNew(driver, dentalDiscountShowmoreLnk, 20);
+		
+		dentalDiscountShowmoreLnk.click();
+		
+		
+		hearingCareProgramByHearUSAShowMoreLnk.click();
+		
+		CommonUtility.waitForPageLoadNew(driver, hearingCareProgramByHearUSAShowMorePara, 20);
+		
+		Assert.assertTrue(hearingCareProgramByHearUSAShowMorePara.getText().contains("To take advantage of the hearing program"));
+		
+		CommonUtility.waitForPageLoadNew(driver, hearingCareProgramByHearUSAShowMoreLnk, 20);
+		
+		hearingCareProgramByHearUSAShowMoreLnk.click();
+		
+		
+		aarpStayingSharpShowMoreLnk.click();
+		
+		CommonUtility.waitForPageLoadNew(driver, aarpStayingSharpShowMorePara, 20);
+		
+		Assert.assertTrue(aarpStayingSharpShowMorePara.getText().contains("Get your code from the right column of your Health and Wellness page and then visit"));
+		
+		CommonUtility.waitForPageLoadNew(driver, aarpStayingSharpShowMoreLnk, 20);
+		
+		aarpStayingSharpShowMoreLnk.click();
+		
+		
+		nurseLineShowMoreLnk.click();
+		
+		CommonUtility.waitForPageLoadNew(driver, nurseLineShowMorePara, 20);
+		
+		Assert.assertTrue(nurseLineShowMorePara.getText().contains("Just dial 1-888-543-5630 (TTY 711) any time, 24 hours a day, 7 days a week, and connect with a nurse."));
+		
+		CommonUtility.waitForPageLoadNew(driver, nurseLineShowMoreLnk, 20);
+		
+		nurseLineShowMoreLnk.click();
+		
+		
+		aarpVisionDiscountsShowMoreLnk.click();
+		
+		CommonUtility.waitForPageLoadNew(driver, aarpVisionDiscountsShowMorePara, 20);
+		
+		Assert.assertTrue(aarpVisionDiscountsShowMorePara.getText().contains("To benefit from the savings and service of this vision discount program"));
+		
+		CommonUtility.waitForPageLoadNew(driver, aarpVisionDiscountsShowMoreLnk, 20);
+		
+		aarpVisionDiscountsShowMoreLnk.click();
+		
+	
+		CommonUtility.waitForPageLoadNew(driver, aarpSmartDriverShowMoreLnk, 20);
+		
+		aarpSmartDriverShowMoreLnk.click();
+		
+		CommonUtility.waitForPageLoadNew(driver, aarpSmartDriverShowMorePara, 20);
+		
+		Assert.assertTrue(aarpSmartDriverShowMorePara.getText().contains("Here’s how to Register:"));
+		
+		CommonUtility.waitForPageLoadNew(driver, aarpSmartDriverShowMoreLnk, 20);
+		
+		aarpSmartDriverShowMoreLnk.click();
+		
+		
+		CommonUtility.waitForPageLoadNew(driver, planBenifitsAndCoverageLnk, 20);
+		
+		planBenifitsAndCoverageLnk.click();
+		
+		//TODO
+		//Assert.assertTrue("PROBLEM - unable to locate element for 'At Your Best by UnitedHealthcare' or 'Browse your options'", 
+				//validate(atYourBestTile) || validate(browseYourOptions));
 		/* tbd 
 		if(atYourBestTile!=null) {
 			validateNew(atYourBestTile);

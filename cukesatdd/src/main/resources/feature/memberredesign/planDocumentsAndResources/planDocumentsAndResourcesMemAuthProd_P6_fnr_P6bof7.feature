@@ -14,6 +14,7 @@ Feature: 1.06.6.2b Member Plans and Documents - section: Forms And Resources Par
       | Password | <password> |
     And Member Enters the Username he wants to search
       | MemUsername | <MemUserName> |
+      | Retry | true |
     And user clicks on member to select
     And user stores test input for validations
       | Username | <MemUserName> |
@@ -41,7 +42,7 @@ Feature: 1.06.6.2b Member Plans and Documents - section: Forms And Resources Par
 	@prod_preeffective_mapd_6bof7
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | fnr_sd | fnr_or |
-      | 03-098 | xxxxx       | kkumard  | tnps459#  | Mino77003          | MAPD     | AARP_IND_PREEFF_PDnR  | false  | false  |
+      | 03-098 | xxxxx       | kkumard  | tnps459#  | Beaver34          | MAPD     | AARP_IND_PREEFF_PDnR  | false  | false  |
 
 #	@prod_preeffective_pdp_6bof7
 #	Examples: 
@@ -79,7 +80,7 @@ Feature: 1.06.6.2b Member Plans and Documents - section: Forms And Resources Par
 	@prod_active_mapd_grp_6bof7 @prod_active_mapd_6bof7
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | fnr_sd | fnr_or |
-      | 12-107 | 15303       | kkumard  | tnps459#  | SHERMANJAFFE65 | MAPD | NICE_GROUP_EFF_PDnR  | true   | true   |  
+      | 12-107 | 15303       | kkumard  | tnps459#  | 2nancyreeves | MAPD | GROUP_EFF_PDnR  | true   | true   |  
 #     ### note: PEEHIP group terminated as of 12/31/2019
 #     #| 13-108 | 15130       | kkumard  | tnps459#  | testusername    | MAPD     | PEEHIP_GROUP_EFF_PDnR | true   | true   |
 

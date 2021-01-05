@@ -14,6 +14,7 @@ Feature: 1.06.3.2 Member Plans and Documents - section: Membership Materials - M
       | Password | <password> |
     And Member Enters the Username he wants to search
       | MemUsername | <MemUserName> |
+      | Retry | true |
     And user clicks on member to select
     And user stores test input for validations
       | Username | <MemUserName> |
@@ -38,7 +39,7 @@ Feature: 1.06.3.2 Member Plans and Documents - section: Membership Materials - M
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | mm_sd | mm_en | mm_es | mm_zh |
 #      | 01-039 | xxxxx       | kkumard  | tnps459#  | Ranch1955    | MA       | AARP_IND_PREEFF_PDnR  | true  | true  | true  | false |
 #      | 02-040 | xxxxx       | kkumard  | tnps459#  | testusername    | MA       | GROUP_PREEFF_PDnR     | true  | false | false | false |
-      | 03-041 | xxxxx       | kkumard  | tnps459#  | Mino77003          | MAPD     | AARP_IND_PREEFF_PDnR  | true  | true  | true  | false |
+      | 03-041 | xxxxx       | kkumard  | tnps459#  | Beaver34          | MAPD     | AARP_IND_PREEFF_PDnR  | true  | true  | true  | false |
 
 #	@prod_preeffective_pdp
 #	Examples: 
@@ -72,7 +73,7 @@ Feature: 1.06.3.2 Member Plans and Documents - section: Membership Materials - M
 	@prod_active_mapd @prod_active_mapd_grp
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | mm_sd | mm_en | mm_es | mm_zh |
-      | 12-050 | 15303       | kkumard  | tnps459#  | SHERMANJAFFE65    | MAPD     | NICE_GROUP_EFF_PDnR        | true  | true  | false | false |
+      | 12-050 | 15303       | kkumard  | tnps459#  | 2nancyreeves    | MAPD     | GROUP_EFF_PDnR        | true  | true  | false | false |
 #     ### note: PEEHIP group terminated as of 12/31/2019
 #     #| 13-051 | 15130       | kkumard  | tnps459#  | testusername    | MAPD     | PEEHIP_GROUP_EFF_PDnR | true  | true  | false | false | 
 

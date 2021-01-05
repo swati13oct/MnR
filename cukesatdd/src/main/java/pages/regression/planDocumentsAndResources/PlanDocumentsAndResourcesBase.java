@@ -1091,7 +1091,8 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 					BufferedInputStream TestFile = new BufferedInputStream(TestURL.openStream());
 					PDDocument document = PDDocument.load(TestFile);
 					String PDFText = new PDFTextStripper().getText(document);
-					//keep-for-debug System.out.println("PDF text : "+PDFText);
+					//keep-for-debug 
+					System.out.println("PDF text : "+PDFText);
 					if (targetDocName.equals("Medicare Plan Appeals & Grievances Form (PDF)") 
 							|| targetDocName.equals("Medicare Plan Appeals & Grievances Form")) {
 						section_note.add("    SKIPPED - has trouble parsing this particular PDF, skip the detail validation for now");
@@ -1128,6 +1129,7 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 					//keep Assert.assertTrue("PROBLEM - unable to validate pdf content - IOException - doc name="+targetDocName, false);
 				}
 			} else {
+				
 				if (targetDocName.equals("Disenrollment Form (Online)")) { //note: this page content is diff than the rest
 					try {
 						driver.findElement(By.xpath("//div[contains(text(),'Member')]"));
@@ -1135,6 +1137,14 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 					} catch (Exception e) {
 						section_note.add("    * FAILED - 'Member' text is not showing as expected");
 						Assert.assertTrue("PROBLEM - 'Member' text is not showing as expected- doc name="+targetDocName, false);
+					}
+				} else if (targetDocName.equals("Drug-specific Prior Authorization Request Forms") && MRScenario.environment.equals("stage")) {
+					String actStageUrl=driver.getCurrentUrl();
+					String expStageUrl="/content/rxmember/default/en_us/angular-free/optumrx/public-errorpage.html";
+					if (actStageUrl.contains(expStageUrl)) 
+						section_note.add("    PASSED - stage env could be getting sorry msg for doc name="+targetDocName);
+					else {
+						Assert.assertTrue("PROBLEM - not getting expected output (for stage, expect it to get sorry msg for have trouble opening)- doc name="+targetDocName, actStageUrl.contains(expStageUrl));
 					}
 				} else 
 				//note: for html or any url that's not pdf related
@@ -1186,6 +1196,11 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 						&& planDocValidate(systemError)
 						&& MRScenario.environment.equalsIgnoreCase("offline")) {
 						section_note.add("    * KNOWN ISSUE - offline-prod domain got system error opening this doc '"+testInputInfoMap.get("docName")+"'");
+					} else if (targetDocName.contains("UnitedHealthcare Medicare Advantage Coverage Summaries")) {
+						if (!validate(maCoverageSummaryHeader,0)) {
+							section_note.add("    * FAILED - unable to locate page header element on the landing page for doc '"+testInputInfoMap.get("docName")+"'");
+							Assert.assertTrue("PROBLEM - unable to locate expected page text element on the landing page for doc '"+testInputInfoMap.get("docName")+"' - doc name="+targetDocName, false);
+						}
 					} else {
 						section_note.add("    * FAILED - unable to locate page header text element on the landing page for doc '"+testInputInfoMap.get("docName")+"'");
 						Assert.assertTrue("PROBLEM - unable to locate expected page text element on the landing page for doc '"+testInputInfoMap.get("docName")+"' - doc name="+targetDocName, false);
@@ -1195,26 +1210,34 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 		} else {
 			//note: for other section, do simpler validatoin
 			if (actUrl.contains(".pdf") || actUrl.contains("alphadog")) {
-				try {
-					URL TestURL = new URL(driver.getCurrentUrl());
-					BufferedInputStream TestFile = new BufferedInputStream(TestURL.openStream());
-					PDDocument document = PDDocument.load(TestFile);
-					String PDFText = new PDFTextStripper().getText(document);
-					//keep-for-debug System.out.println("PDF text : "+PDFText);  
-					if(PDFText!=null && !PDFText.equals(""))
-						section_note.add("    PASSED - validated pdf content is not null or empty");
-					else {
-						section_note.add("    * FAILED - unable to validate pdf content - content either null or empty");
-						Assert.assertTrue("PROBLEM - unable to validate pdf content - content either null or empty- doc name="+targetDocName, false);
+				if (targetDocName.contains("Over-the-Counter Drug List") || targetDocName.contains("Lista de Medicamentos sin Receta")) {
+					section_note.add("    SKIPPED - skipping validation of pdf content - this doc takes too long to open");
+				} else {
+					try {
+						URL TestURL = new URL(driver.getCurrentUrl());
+						BufferedInputStream TestFile = new BufferedInputStream(TestURL.openStream());
+						PDDocument document = PDDocument.load(TestFile);
+						String PDFText = new PDFTextStripper().getText(document);
+						//keep-for-debug System.out.println("PDF text : "+PDFText);  
+						if(PDFText!=null && !PDFText.equals(""))
+							section_note.add("    PASSED - validated pdf content is not null or empty");
+						else {
+							section_note.add("    * FAILED - unable to validate pdf content - content either null or empty");
+							Assert.assertTrue("PROBLEM - unable to validate pdf content - content either null or empty- doc name="+targetDocName, false);
+						}
+					} catch (MalformedURLException e) {
+						section_note.add("    * FAILED - unable to validate pdf content - MalformedURLException");
+						e.printStackTrace();
+						Assert.assertTrue("PROBLEM - unable to validate pdf content - MalformedURLException- doc name="+targetDocName, false);
+					} catch (IOException e) {
+						section_note.add("    * FAILED - unable to validate pdf content - IOException");
+						e.printStackTrace();
+						Assert.assertTrue("PROBLEM - unable to validate pdf content - IOException- doc name="+targetDocName, false);
+					} catch (Exception e) {
+						section_note.add("    * FAILED - unable to validate pdf content - Exception");
+						e.printStackTrace();
+						Assert.assertTrue("PROBLEM - unable to validate pdf content - Exception- doc name="+targetDocName, false);
 					}
-				} catch (MalformedURLException e) {
-					section_note.add("    * FAILED - unable to validate pdf content - MalformedURLException");
-					e.printStackTrace();
-					Assert.assertTrue("PROBLEM - unable to validate pdf content - MalformedURLException- doc name="+targetDocName, false);
-				} catch (IOException e) {
-					section_note.add("    * FAILED - unable to validate pdf content - IOException");
-					e.printStackTrace();
-					Assert.assertTrue("PROBLEM - unable to validate pdf content - IOException- doc name="+targetDocName, false);
 				}
 			} else {
 				//note: for html or any url that's not pdf related

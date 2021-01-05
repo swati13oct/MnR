@@ -114,7 +114,7 @@ public class PlanDocumentsAndResourcesStepDefinition {
 		Boolean v=(Boolean) getLoginScenario().getBean(PlanDocumentsAndResourcesCommonConstants.TEST_VALIDATE_API);
 		if (v!=null)
 			this.validateApi=v;
-		this.skipLnkDestCheck=true; //note: default = true    
+		this.skipLnkDestCheck=false; //note: default = true    
 		Boolean s=(Boolean) getLoginScenario().getBean(PlanDocumentsAndResourcesCommonConstants.TEST_SKIP_LINK_DEST_CHECK);
 		if (s!=null)
 			this.skipLnkDestCheck=s;

@@ -119,7 +119,7 @@ public class PlanDocumentsAndResourcesUsersHelper {
 		if (section.equals("Membership Materials") || section.equals("Welcome Guide")) {//note: MM
 			if (subSection.equals("EN")) {
 				targetTestDocList = new ArrayList<String>();
-				targetTestDocList.add("Quick Start Guide");
+				//targetTestDocList.add("Quick Start Guide");
 				targetTestDocList.add("Benefit Highlights");
 				targetTestDocList.add("Comprehensive Formulary");
 				targetTestDocList.add("Alternative Drug List");
@@ -130,7 +130,7 @@ public class PlanDocumentsAndResourcesUsersHelper {
 			} 
 			if (subSection.equals("ES")) {
 				targetTestDocList = new ArrayList<String>();
-				targetTestDocList.add("Gu.a R.pida para Comenzar"); //note: regex
+				//targetTestDocList.add("Gu.a R.pida para Comenzar"); //note: regex
 				targetTestDocList.add("Beneficios Importantes");
 				targetTestDocList.add("Formulario completo");
 				targetTestDocList.add("Lista de Medicamentos");
@@ -163,16 +163,16 @@ public class PlanDocumentsAndResourcesUsersHelper {
 			}
 			if (subSection.equals("EN-nextYear")) {
 				targetTestDocList = new ArrayList<String>();
-				targetTestDocList.add("Annual Notice of Changes");
-				targetTestDocList.add("Evidence Of Coverage");
-				targetTestDocList.add("Comprehensive Formulary");
+				//targetTestDocList.add("Annual Notice of Changes");
+				//targetTestDocList.add("Evidence Of Coverage");
+				//targetTestDocList.add("Comprehensive Formulary");
 				return targetTestDocList;
 			} 
 			if (subSection.equals("ES-nextYear")) {
 				targetTestDocList = new ArrayList<String>();
-				targetTestDocList.add("Aviso Annual de Cambios");
-				targetTestDocList.add("Comprobante de Cobertura");
-				targetTestDocList.add("Formulario Completo");
+				//targetTestDocList.add("Aviso Annual de Cambios");
+				//targetTestDocList.add("Comprobante de Cobertura");
+				//targetTestDocList.add("Formulario Completo");
 				return targetTestDocList;
 			} 
 			if (subSection.equals("ZH-nextYear")) {
@@ -185,14 +185,14 @@ public class PlanDocumentsAndResourcesUsersHelper {
 				targetTestDocList = new ArrayList<String>();
 				targetTestDocList.add("Provider Directory");
 				targetTestDocList.add("Vendor Information Sheet");
-				targetTestDocList.add("Pharmacy Directory");
+				//targetTestDocList.add("Pharmacy Directory");
 				return targetTestDocList;
 			} 
 			if (subSection.equals("ES-currentYear")) {
 				targetTestDocList = new ArrayList<String>();
 				targetTestDocList.add("Directorio de Proveedores");
 				targetTestDocList.add("Informaci.n sobre proveedores"); //note: regex  - TODO the user has english name instead
-				targetTestDocList.add("Informaci.n del Directorio de Farmacia"); //note: regex
+				//targetTestDocList.add("Informaci.n del Directorio de Farmacia"); //note: regex
 				return targetTestDocList;
 			} 
 			if (subSection.equals("ZH-currentYear")) {
@@ -201,16 +201,14 @@ public class PlanDocumentsAndResourcesUsersHelper {
 			}
 			if (subSection.equals("EN-nextYear")) {
 				targetTestDocList = new ArrayList<String>();
-				targetTestDocList.add("Provider Directory");
-				targetTestDocList.add("Vendor Information Sheet");
-				//targetTestDocList.add("Pharmacy Directory");
+				//targetTestDocList.add("Provider Directory");
+				//targetTestDocList.add("Vendor Information Sheet");
 				return targetTestDocList;
 			} 
 			if (subSection.equals("ES-nextYear")) {
 				targetTestDocList = new ArrayList<String>();
-				targetTestDocList.add("Directorio de Proveedores");
-				targetTestDocList.add("Informaci.n sobre proveedores"); //note: regex
-				//targetTestDocList.add("Informaci.n del Directorio de Farmacia"); //note: regex
+				//targetTestDocList.add("Directorio de Proveedores");
+				//targetTestDocList.add("Informaci.n sobre proveedores"); //note: regex
 				return targetTestDocList;
 			} 
 			if (subSection.equals("ZH-nextYear")) {
@@ -239,6 +237,7 @@ public class PlanDocumentsAndResourcesUsersHelper {
 				targetTestDocList.add("Medical Reimbursement Form (PDF)");
 				//tbd targetTestDocList.add("Prescription Drug Reimbursement Form");
 				targetTestDocList.add("Medicare Part D Claim Form");
+				targetTestDocList.add("Direct Member Reimbursement FAQ");
 				return targetTestDocList;
 			}
 			if (subSection.equals("Authorization Forms and Information") || subSection.equals("Authorization Forms")) {
@@ -331,7 +330,7 @@ public class PlanDocumentsAndResourcesUsersHelper {
 		if (section.equals("Plan Materials")) {//note: PM
 			if (subSection.equals("EN")) {
 				targetTestDocList = new ArrayList<String>();
-				targetTestDocList.add("Benefit Highlights");
+				//targetTestDocList.add("Benefit Highlights");
 				targetTestDocList.add("Summary of Benefits");
 				targetTestDocList.add("Evidence of Coverage");
 				targetTestDocList.add("Certificate of Coverage");
@@ -395,11 +394,11 @@ public class PlanDocumentsAndResourcesUsersHelper {
 			}
 			if (subSection.equals("EN-nextYear")) {
 				targetTestDocList = new ArrayList<String>();
-				targetTestDocList.add("Annual Notice of Changes");
-				targetTestDocList.add("Evidence Of Coverage");
-				targetTestDocList.add("Comprehensive Formulary");
-				targetTestDocList.add("Certificate of Coverage");
-				targetTestDocList.add("Additional Drug Coverage");
+				//targetTestDocList.add("Annual Notice of Changes");
+				//targetTestDocList.add("Evidence Of Coverage");
+				//targetTestDocList.add("Comprehensive Formulary");
+				//targetTestDocList.add("Certificate of Coverage");
+				//targetTestDocList.add("Additional Drug Coverage");
 				return targetTestDocList;
 			} 
 			if (subSection.equals("ES-nextYear")) {
@@ -452,6 +451,7 @@ public class PlanDocumentsAndResourcesUsersHelper {
 				targetTestDocList.add("Medical Reimbursement Form (PDF)");
 				//tbd targetTestDocList.add("Prescription Drug Reimbursement Form");
 				targetTestDocList.add("Medicare Part D Claim Form");
+				targetTestDocList.add("Direct Member Reimbursement FAQ");
 				targetTestDocList.add("Prescription Mail Order Form - Preferred Mail Service Pharmacy through OptumRx");
 				return targetTestDocList;
 			}
@@ -571,14 +571,14 @@ public class PlanDocumentsAndResourcesUsersHelper {
 		if (section.equals("Membership Materials") || section.equals("Welcome Guide")) {//note: MM
 			if (subSection.equals("EN")) {
 				targetTestDocList = new ArrayList<String>();
-				targetTestDocList.add("Quick Start Guide");
+				//targetTestDocList.add("Quick Start Guide");
 				targetTestDocList.add("Benefit Highlights");
 				targetTestDocList.add("Evidence Of Coverage");
 				return targetTestDocList;
 			} 
 			if (subSection.equals("ES")) {
 				targetTestDocList = new ArrayList<String>();
-				targetTestDocList.add("Gu.a R.pida para Comenzar"); //note: regex
+				//targetTestDocList.add("Gu.a R.pida para Comenzar"); //note: regex
 				targetTestDocList.add("Beneficios Importantes");
 				targetTestDocList.add("Comprobante de Cobertura");
 				return targetTestDocList;
@@ -607,14 +607,14 @@ public class PlanDocumentsAndResourcesUsersHelper {
 			}
 			if (subSection.equals("EN-nextYear")) {
 				targetTestDocList = new ArrayList<String>();
-				targetTestDocList.add("Annual Notice of Changes");
-				targetTestDocList.add("Evidence Of Coverage");
+				//targetTestDocList.add("Annual Notice of Changes");
+				//targetTestDocList.add("Evidence Of Coverage");
 				return targetTestDocList;
 			} 
 			if (subSection.equals("ES-nextYear")) {
 				targetTestDocList = new ArrayList<String>();
-				targetTestDocList.add("Aviso Annual de Cambios");
-				targetTestDocList.add("Comprobante de Cobertura");
+				//targetTestDocList.add("Aviso Annual de Cambios");
+				//targetTestDocList.add("Comprobante de Cobertura");
 				return targetTestDocList;
 			} 
 			if (subSection.equals("ZH-nextYear")) {
@@ -641,14 +641,14 @@ public class PlanDocumentsAndResourcesUsersHelper {
 			}
 			if (subSection.equals("EN-nextYear")) {
 				targetTestDocList = new ArrayList<String>();
-				targetTestDocList.add("Provider Directory");
-				targetTestDocList.add("Vendor Information Sheet");
+				//targetTestDocList.add("Provider Directory");
+				//targetTestDocList.add("Vendor Information Sheet");
 				return targetTestDocList;
 			} 
 			if (subSection.equals("ES-nextYear")) {
 				targetTestDocList = new ArrayList<String>();
-				targetTestDocList.add("Directorio de Proveedores");
-				targetTestDocList.add("Información sobre proveedores");
+				//targetTestDocList.add("Directorio de Proveedores");
+				//targetTestDocList.add("Información sobre proveedores");
 				return targetTestDocList;
 			} 
 			if (subSection.equals("ZH-nextYear")) {
@@ -1025,7 +1025,7 @@ public class PlanDocumentsAndResourcesUsersHelper {
 		if (section.equals("Plan Materials")) {//note: PM
 			if (subSection.equals("EN")) {
 				targetTestDocList = new ArrayList<String>();
-				targetTestDocList.add("Benefit Highlights");
+				//targetTestDocList.add("Benefit Highlights");
 				targetTestDocList.add("Summary of Benefits");
 				targetTestDocList.add("Evidence of Coverage");
 				targetTestDocList.add("Plan Guide");
@@ -1246,7 +1246,7 @@ public class PlanDocumentsAndResourcesUsersHelper {
 		if (section.equals("Membership Materials") || section.equals("Welcome Guide")) {//note: MM
 			if (subSection.equals("EN")) {
 				targetTestDocList = new ArrayList<String>();
-				targetTestDocList.add("Quick Start Guide");
+				//targetTestDocList.add("Quick Start Guide");
 				targetTestDocList.add("Benefit Highlights");
 				targetTestDocList.add("Comprehensive Formulary");
 				targetTestDocList.add("Alternative Drug List");
@@ -1255,7 +1255,7 @@ public class PlanDocumentsAndResourcesUsersHelper {
 			} 
 			if (subSection.equals("ES")) {
 				targetTestDocList = new ArrayList<String>();
-				targetTestDocList.add("Gu.a R.pida para Comenzar"); //note: regex
+				//targetTestDocList.add("Gu.a R.pida para Comenzar"); //note: regex
 				targetTestDocList.add("Beneficios Importantes");
 				targetTestDocList.add("Formulario completo");
 				targetTestDocList.add("Lista de Medicamentos");
@@ -1288,16 +1288,16 @@ public class PlanDocumentsAndResourcesUsersHelper {
 			}
 			if (subSection.equals("EN-nextYear")) {
 				targetTestDocList = new ArrayList<String>();
-				targetTestDocList.add("Annual Notice of Changes");
-				targetTestDocList.add("Evidence Of Coverage");
-				targetTestDocList.add("Comprehensive Formulary");
+				//targetTestDocList.add("Annual Notice of Changes");
+				//targetTestDocList.add("Evidence Of Coverage");
+				//targetTestDocList.add("Comprehensive Formulary");
 				return targetTestDocList;
 			} 
 			if (subSection.equals("ES-nextYear")) {
 				targetTestDocList = new ArrayList<String>();
-				targetTestDocList.add("Aviso Annual de Cambios");
-				targetTestDocList.add("Comprobante de Cobertura");
-				targetTestDocList.add("Formulario Completo");
+				//targetTestDocList.add("Aviso Annual de Cambios");
+				//targetTestDocList.add("Comprobante de Cobertura");
+				//targetTestDocList.add("Formulario Completo");
 				return targetTestDocList;
 			} 
 			if (subSection.equals("ZH-nextYear")) {
@@ -1352,6 +1352,7 @@ public class PlanDocumentsAndResourcesUsersHelper {
 				targetTestDocList = new ArrayList<String>();
 				//tbd targetTestDocList.add("Prescription Drug Reimbursement Form");
 				targetTestDocList.add("Medicare Part D Claim Form");
+				targetTestDocList.add("Direct Member Reimbursement FAQ");
 				return targetTestDocList;
 			}
 			if (subSection.equals("Authorization Forms and Information") || subSection.equals("Authorization Forms")) {
@@ -1426,7 +1427,7 @@ public class PlanDocumentsAndResourcesUsersHelper {
 		if (section.equals("Plan Materials")) {//note: PM
 			if (subSection.equals("EN")) {
 				targetTestDocList = new ArrayList<String>();
-				targetTestDocList.add("Benefit Highlights");
+				//targetTestDocList.add("Benefit Highlights");
 				targetTestDocList.add("Summary of Benefits");
 				targetTestDocList.add("Evidence of Coverage");
 				targetTestDocList.add("Certificate of Coverage");
@@ -1491,10 +1492,10 @@ public class PlanDocumentsAndResourcesUsersHelper {
 			}
 			if (subSection.equals("EN-nextYear")) {
 				targetTestDocList = new ArrayList<String>();
-				targetTestDocList.add("Annual Notice of Changes");
-				targetTestDocList.add("Evidence Of Coverage");
-				targetTestDocList.add("Certificate of Coverage");
-				targetTestDocList.add("Additional Drug Coverage");
+				//targetTestDocList.add("Annual Notice of Changes");
+				//targetTestDocList.add("Evidence Of Coverage");
+				//targetTestDocList.add("Certificate of Coverage");
+				//targetTestDocList.add("Additional Drug Coverage");
 				//targetTestDocList.add("Comprehensive Formulary");
 				return targetTestDocList;
 			} 
@@ -1547,6 +1548,7 @@ public class PlanDocumentsAndResourcesUsersHelper {
 				targetTestDocList = new ArrayList<String>();
 				//tbd targetTestDocList.add("Prescription Drug Reimbursement Form");
 				targetTestDocList.add("Medicare Part D Claim Form");
+				targetTestDocList.add("Direct Member Reimbursement FAQ");
 				return targetTestDocList;
 			}
 			if (subSection.equals("Authorization Forms and Information") || subSection.equals("Authorization Forms")) {
@@ -2027,7 +2029,7 @@ public class PlanDocumentsAndResourcesUsersHelper {
 		if (section.equals("Membership Materials") || section.equals("Welcome Guide")) {//note: MM
 			if (subSection.equals("EN")) {
 				targetTestDocList = new ArrayList<String>();
-				targetTestDocList.add("Quick Start Guide");
+				//targetTestDocList.add("Quick Start Guide");
 				targetTestDocList.add("Benefit Highlights");
 				targetTestDocList.add("Comprehensive Formulary");
 				targetTestDocList.add("Alternative Drug List");
@@ -2037,7 +2039,7 @@ public class PlanDocumentsAndResourcesUsersHelper {
 			} 
 			if (subSection.equals("ES")) {
 				targetTestDocList = new ArrayList<String>();
-				targetTestDocList.add("Gu.a R.pida para Comenzar"); //note: regex
+				//targetTestDocList.add("Gu.a R.pida para Comenzar"); //note: regex
 				targetTestDocList.add("Beneficios Importantes");
 				targetTestDocList.add("Formulario completo");
 				targetTestDocList.add("Lista de Medicamentos");
@@ -2071,16 +2073,16 @@ public class PlanDocumentsAndResourcesUsersHelper {
 			}
 			if (subSection.equals("EN-nextYear")) {
 				targetTestDocList = new ArrayList<String>();
-				targetTestDocList.add("Annual Notice of Changes");
-				targetTestDocList.add("Evidence Of Coverage");
-				targetTestDocList.add("Comprehensive Formulary");
+				//targetTestDocList.add("Annual Notice of Changes");
+				//targetTestDocList.add("Evidence Of Coverage");
+				//targetTestDocList.add("Comprehensive Formulary");
 				return targetTestDocList;
 			} 
 			if (subSection.equals("ES-nextYear")) {
 				targetTestDocList = new ArrayList<String>();
-				targetTestDocList.add("Aviso Annual de Cambios");
-				targetTestDocList.add("Comprobante de Cobertura");
-				targetTestDocList.add("Formulario Completo");
+				//targetTestDocList.add("Aviso Annual de Cambios");
+				//targetTestDocList.add("Comprobante de Cobertura");
+				//targetTestDocList.add("Formulario Completo");
 				return targetTestDocList;
 			} 
 			if (subSection.equals("ZH-nextYear")) {
@@ -2093,14 +2095,14 @@ public class PlanDocumentsAndResourcesUsersHelper {
 				targetTestDocList = new ArrayList<String>();
 				targetTestDocList.add("Provider Directory");
 				targetTestDocList.add("Vendor Information Sheet");
-				targetTestDocList.add("Pharmacy Directory");
+				//targetTestDocList.add("Pharmacy Directory");
 				return targetTestDocList;
 			} 
 			if (subSection.equals("ES-currentYear")) {
 				targetTestDocList = new ArrayList<String>();
 				targetTestDocList.add("Directorio de Proveedores");
 				targetTestDocList.add("Informaci.n sobre proveedores"); //note: regex
-				targetTestDocList.add("Informaci.n del Directorio de Farmacia"); //note: regex
+				//targetTestDocList.add("Informaci.n del Directorio de Farmacia"); //note: regex
 				return targetTestDocList;
 			} 
 			if (subSection.equals("ZH-currentYear")) {
@@ -2109,16 +2111,14 @@ public class PlanDocumentsAndResourcesUsersHelper {
 			}
 			if (subSection.equals("EN-nextYear")) {
 				targetTestDocList = new ArrayList<String>();
-				targetTestDocList.add("Provider Directory");
-				targetTestDocList.add("Vendor Information Sheet");
-				//targetTestDocList.add("Pharmacy Directory");
+				//targetTestDocList.add("Provider Directory");
+				//targetTestDocList.add("Vendor Information Sheet");
 				return targetTestDocList;
 			} 
 			if (subSection.equals("ES-nextYear")) {
 				targetTestDocList = new ArrayList<String>();
-				targetTestDocList.add("Directorio de Proveedores");
-				targetTestDocList.add("Informaci.n sobre proveedores"); //note: regex
-				//targetTestDocList.add("Informaci.n del Directorio de Farmacia"); //note: regex
+				//targetTestDocList.add("Directorio de Proveedores");
+				//targetTestDocList.add("Informaci.n sobre proveedores"); //note: regex
 				return targetTestDocList;
 			} 
 			if (subSection.equals("ZH-nextYear")) {
@@ -2266,7 +2266,7 @@ public class PlanDocumentsAndResourcesUsersHelper {
 		if (section.equals("Membership Materials") || section.equals("Welcome Guide")) {//note: MM
 			if (subSection.equals("EN")) {
 				targetTestDocList = new ArrayList<String>();
-				targetTestDocList.add("Quick Start Guide");
+				//targetTestDocList.add("Quick Start Guide");
 				targetTestDocList.add("Benefit Highlights");
 				targetTestDocList.add("Comprehensive Formulary");
 				targetTestDocList.add("Alternative Drug List");
@@ -2276,7 +2276,7 @@ public class PlanDocumentsAndResourcesUsersHelper {
 			} 
 			if (subSection.equals("ES")) {
 				targetTestDocList = new ArrayList<String>();
-				targetTestDocList.add("Gu.a R.pida para Comenzar"); //note: regex
+				//targetTestDocList.add("Gu.a R.pida para Comenzar"); //note: regex
 				targetTestDocList.add("Beneficios Importantes");
 				targetTestDocList.add("Formulario completo");
 				targetTestDocList.add("Lista de Medicamentos");
@@ -2310,16 +2310,16 @@ public class PlanDocumentsAndResourcesUsersHelper {
 			}
 			if (subSection.equals("EN-nextYear")) {
 				targetTestDocList = new ArrayList<String>();
-				targetTestDocList.add("Annual Notice of Changes");
-				targetTestDocList.add("Evidence Of Coverage");
-				targetTestDocList.add("Comprehensive Formulary");
+				//targetTestDocList.add("Annual Notice of Changes");
+				//targetTestDocList.add("Evidence Of Coverage");
+				//targetTestDocList.add("Comprehensive Formulary");
 				return targetTestDocList;
 			} 
 			if (subSection.equals("ES-nextYear")) {
 				targetTestDocList = new ArrayList<String>();
-				targetTestDocList.add("Aviso Annual de Cambios");
-				targetTestDocList.add("Comprobante de Cobertura");
-				targetTestDocList.add("Formulario Completo");
+				//targetTestDocList.add("Aviso Annual de Cambios");
+				//targetTestDocList.add("Comprobante de Cobertura");
+				//targetTestDocList.add("Formulario Completo");
 				return targetTestDocList;
 			} 
 			if (subSection.equals("ZH-nextYear")) {
@@ -2332,14 +2332,14 @@ public class PlanDocumentsAndResourcesUsersHelper {
 				targetTestDocList = new ArrayList<String>();
 				targetTestDocList.add("Provider Directory");
 				targetTestDocList.add("Vendor Information Sheet");
-				targetTestDocList.add("Pharmacy Directory");
+				//targetTestDocList.add("Pharmacy Directory");
 				return targetTestDocList;
 			} 
 			if (subSection.equals("ES-currentYear")) {
 				targetTestDocList = new ArrayList<String>();
 				targetTestDocList.add("Directorio de Proveedores");
 				targetTestDocList.add("Informaci.n sobre proveedores"); //note: regex
-				targetTestDocList.add("Informaci.n del Directorio de Farmacia"); //note: regex
+				//targetTestDocList.add("Informaci.n del Directorio de Farmacia"); //note: regex
 				return targetTestDocList;
 			} 
 			if (subSection.equals("ZH-currentYear")) {
@@ -2350,14 +2350,12 @@ public class PlanDocumentsAndResourcesUsersHelper {
 				targetTestDocList = new ArrayList<String>();
 				targetTestDocList.add("Provider Directory");
 				targetTestDocList.add("Vendor Information Sheet");
-				//targetTestDocList.add("Pharmacy Directory");
 				return targetTestDocList;
 			} 
 			if (subSection.equals("ES-nextYear")) {
 				targetTestDocList = new ArrayList<String>();
 				targetTestDocList.add("Directorio de Proveedores");
 				targetTestDocList.add("Informaci.n sobre proveedores"); //note: regex
-				//targetTestDocList.add("Informaci.n del Directorio de Farmacia"); //note: regex
 				return targetTestDocList;
 			} 
 			if (subSection.equals("ZH-nextYear")) {
