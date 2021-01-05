@@ -14,6 +14,7 @@ Feature: 1.06.2.2 Member Plans and Documents - section: header -and- My Document
       | Password | <password> |
     And Member Enters the Username he wants to search
       | MemUsername | <MemUserName> |
+      | Retry | true |
     And user clicks on member to select
     And user stores test input for validations
       | Username | <MemUserName> |
@@ -47,7 +48,7 @@ Feature: 1.06.2.2 Member Plans and Documents - section: header -and- My Document
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | md_sd | eob_sd | eob_m | eob_d | rm_sd |
 #      | 01-001 | xxxxx       | kkumard  | tnps459#  | Ranch1955       | MA       | AARP_IND_PREEFF_PDnR  | true  | false  | false | false | false |
 #      | 02-002 | xxxxx       | kkumard  | tnps459#  | testusername    | MA       | GROUP_PREEFF_PDnR     | true  | false  | false | false | false |
-      | 03-003 | xxxxx       | kkumard  | tnps459#  | Mino77003          | MAPD     | AARP_IND_PREEFF_PDnR  | true  | false  | false | false | false |
+      | 03-003 | xxxxx       | kkumard  | tnps459#  | Beaver34          | MAPD     | AARP_IND_PREEFF_PDnR  | true  | false  | false | false | false |
 
 #	@prod_preeffective_pdp
 #	Examples: 
@@ -60,17 +61,17 @@ Feature: 1.06.2.2 Member Plans and Documents - section: header -and- My Document
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | md_sd | eob_sd | eob_m | eob_d | rm_sd |
 #      | 06-006 | xxxxx       | kkumard  | tnps459#  | testusername    | MA       | IND_TERM_PDnR         | true  | true   | true  | false | false |
 #      | 07-007 | xxxxx       | kkumard  | tnps459#  | testusername    | MA       | GROUP_TERM_PDnR       | true  | true   | true  | false | false |
-      | 08-008 | xxxxx       | kkumard  | tnps459#  | BEVERLY_BOB5    | MAPD     | IND_TERM_PDnR         | true  | true   | true  | true  | false |
+      | 08-008 | xxxxx       | kkumard  | tnps459#  | Patkeving    | MAPD     | IND_TERM_PDnR         | true  | true   | true  | true  | false |
 
 	@prod_active_ma @prod_active_ma_ind
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | md_sd | eob_sd | eob_m | eob_d | rm_sd |
-      | 09-009 | 15129       | kkumard  | tnps459#  | haradaty32   | MA       | AARP_IND_EFF_PDnR     | true  | true   | true  | false | true  |
+      | 09-009 | 15129       | kkumard  | tnps459#  | ssmhi1   | MA       | AARP_IND_EFF_PDnR     | true  | true   | true  | false | true  |
 
 	@prod_active_ma @prod_active_ma_grp
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | md_sd | eob_sd | eob_m | eob_d | rm_sd |
-      | 10-010 | 15130       | kkumard  | tnps459#  | 1GIRL4DEAN     | MA       | GROUP_EFF_PDnR        | true  | true   | true  | false | true  |
+      | 10-010 | 15130       | kkumard  | tnps459#  | ExDesertrat     | MA       | GROUP_EFF_PDnR        | true  | true   | true  | false | true  |
 #      | 10-010 | 15130       | kkumard  | tnps459#  | SPENCEPR1     | MA       | NICE_GROUP_EFF_PDnR        | true  | true   | true  | false | true  |
 
 	@prod_active_mapd @prod_active_mapd_ind
@@ -81,24 +82,24 @@ Feature: 1.06.2.2 Member Plans and Documents - section: header -and- My Document
 	@prod_active_mapd @prod_active_mapd_grp
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | md_sd | eob_sd | eob_m | eob_d | rm_sd |
-      | 12-012 | 15303       | kkumard  | tnps459#  | SHERMANJAFFE65    | MAPD     | NICE_GROUP_EFF_PDnR        | true  | true   | true  | true  | true  |	  
+      | 12-012 | 15303       | kkumard   | tnps459#  | 2nancyreeves    | MAPD     | GROUP_EFF_PDnR        | true  | true   | true  | true  | true  |	  
 #     ### note: PEEHIP group terminated as of 12/31/2019
 #     #| 13-013 | 15130       | kkumard  | tnps459#  | testusername    | MAPD     | PEEHIP_GROUP_EFF_PDnR | true  | true   | true  | true  | true  |
 
 	@prod_active_pcp      
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | md_sd | eob_sd | eob_m | eob_d | rm_sd |
-      | 14-014 | 15128       | kkumard  | tnps459#  | BATLLOT@AOL.COM    | PCP      | IND_EFF_PDnR       | true  | true   | true  | true  | false |
+      | 14-014 | 15128       | kkumard  | tnps459#  | SOFYABAKMAN@MSN.COM    | PCP      | IND_EFF_PDnR       | true  | true   | true  | true  | false |
 
 	@prod_active_medica      
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | md_sd | eob_sd | eob_m | eob_d | rm_sd |
-      | 15-015 | 15128       | kkumard  | tnps459#  | SUSICHAPMAN@GMAIL.COM    | MEDICA   | IND_EFF_PDnR | true  | true   | true  | true  | false |
+      | 15-015 | 15128       | kkumard  | tnps459#  | TCZUNIGA52    | MEDICA   | IND_EFF_PDnR | true  | true   | true  | true  | false |
 
 	@prod_active_pdp @prod_active_pdp_ind
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | md_sd | eob_sd | eob_m | eob_d | rm_sd |
-      | 16-016 | 15126,15127 | kkumard  | tnps459#  | nawal1215    | PDP      | AARP_IND_EFF_PDnR     | true  | true   | false | true  | true  |
+      | 16-016 | 15126,15127 | kkumard  | tnps459#  | PWINSAUER51    | PDP      | AARP_IND_EFF_PDnR     | true  | true   | false | true  | true  |
 
 	@prod_active_pdp @prod_active_pdp_grp
 	Examples: 

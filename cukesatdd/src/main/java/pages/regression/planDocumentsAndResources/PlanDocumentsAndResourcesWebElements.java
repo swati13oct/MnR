@@ -386,6 +386,10 @@ public class PlanDocumentsAndResourcesWebElements extends UhcDriver  {
 	protected WebElement medicarePartDClaimForm_link_RF_FnR;
 	//- href="/content/dam/shared/documents/Medicare-Part-D-Claim-Form.pdf" 
 
+	@FindBy(xpath="//div[contains(@class,'FormsAndResources') and not(contains(@class,'ng-hide'))]//a[contains(text(),'Direct Member Reimbursement FAQ')]")
+	protected WebElement directMemberReimbursementFaq_link_RF_FnR;
+	//- href="/content/dam/shared/documents/Direct_Member_Reimbursement_FAQ.pdf" 
+	
 	@FindBy(xpath="//div[contains(@class,'FormsAndResources') and not(contains(@class,'ng-hide'))]//a/span[contains(text(),'Authorization Forms')]")
 	protected WebElement authorizationFormsAndInfo_sectionAF_FnR;
 	
@@ -565,4 +569,7 @@ public class PlanDocumentsAndResourcesWebElements extends UhcDriver  {
 	
 	@FindBy(xpath="//div[contains(@class,'hw-program-root')]")
 	protected WebElement prevIssBody;
+	
+	@FindBy(xpath="//div[contains(@class,'desktop')]//h2[contains(text(),'Select Prior')]")
+	protected WebElement maCoverageSummaryHeader;
 }

@@ -86,7 +86,7 @@ Feature: 1.06.4.1 Member Plans and Documents - section: Annual Notice of Changes
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | an_sd | an_en_cy | an_es_cy | an_zh_cy | an_en_ny  | an_es_ny | an_zh_ny |
       | 16-073 | 15126,15127 | qavgogine | qavgogine | q3_sep_UAT4_AARP057 | PDP  | AARP_IND_EFF_PDnR     | true  | true     | true     | false    | false     | false    | false    |
-      | 17-074 | 15131,15233 | qavgogine | qavgogine | q2_jun_grp0255    | PDP    | COMBO_GROUP_EFF_PDnR  | true  | true     | false    | false    | true      | false    | false    |
+      | 17-074 | 15131,15233 | qavgogine | qavgogine | q2_jun_grp0255    | PDP    | COMBO_GROUP_EFF_PDnR  | true  | true     | false    | false    | false     | false    | false    |
 
 	@memAuth_active_ssup
 	Examples: 
@@ -96,11 +96,11 @@ Feature: 1.06.4.1 Member Plans and Documents - section: Annual Notice of Changes
 	@memAuth_active_ship
     Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | an_sd | an_en_cy | an_es_cy | an_zh_cy | an_en_ny | an_es_ny | an_zh_ny |
-      | 19-076 | 15119,15304 | qavgogine | qavgogine | q4_Ship_013 | SHIP  | IND_EFF_PDnR          | false | false    | false    | false    | false    | false    | false    |
+      | 19-076 | 15119,15304 | qavgogine | qavgogine | q4_Ship_ANOC_009 | SHIP  | IND_EFF_PDnR          | false | false    | false    | false    | false    | false    | false    |
       | 20-118 | 15119,15304 | qavgogine | qavgogine | q4_Ship_014| SHIP  | MULTI_IND_EFF_PDnR    | false | false    | false    | false    | false    | false    | false    |
 
 	@memAuth_preeffective_ship
 	Examples: 
       | index  | TID         | username  | password  | MemUserName         | planType | memberType            | an_sd | an_en_cy | an_es_cy | an_zh_cy | an_en_ny | an_es_ny | an_zh_ny |
-      | 21-121 | xxxxx       | qavgogine | qavgogine | shipPreeffective707 | SHIP     | IND_PREEFF_PDnR       | false | false    | false    | false    | false    | false    | false    |
+      | 21-121 | xxxxx       | qavgogine | qavgogine | q4_Ship_013 | SHIP     | IND_PREEFF_PDnR       | false | false    | false    | false    | false    | false    | false    |
 

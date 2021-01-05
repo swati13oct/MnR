@@ -2,7 +2,7 @@ Feature: 1.13 Member Inbound SSO functionality tested from TestHarness page for 
 
  Background: Feature security flag needs to be true before ATDD script execution
      Given First check if feature security flag is set to true
-      | Feature | UCPUserManagement |
+      | Feature | UCPSSOMemberAuth |
 ###############################Regression Scenarios Begin Here ########################################
 
   #This scenario below cannot be tested as test harness page is no longer working

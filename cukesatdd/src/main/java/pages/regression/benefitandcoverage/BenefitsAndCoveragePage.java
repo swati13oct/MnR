@@ -17,7 +17,9 @@ import java.util.regex.Pattern;
 import org.apache.commons.lang.StringUtils;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.text.PDFTextStripper;
-import org.json.JSONObject;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
@@ -25,6 +27,8 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.logging.LogEntry;
+import org.openqa.selenium.logging.LogType;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
@@ -305,6 +309,14 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 		validateWithValue("Look Up Drugs Button", LookUpDrugsButton);
 		scrollElementToCenterScreen(LookUpDrugsButton);
 		String actHref=LookUpDrugsButton.getAttribute("href");
+		if (MRScenario.environment.contains("team-a")) {
+			//note: can't click Rally pages on team env
+			String expHref="/pharmacy-uhc/drugs";
+			Assert.assertTrue("PROBLEM - env: '"+MRScenario.environment+"' - href value is not as expected for '' link.  "
+					+ "Expected to contain '"+expHref+"' | Actual href value='"+actHref+"'", 
+					actHref.contains(expHref));
+			return;
+		}
 		LookUpDrugsButton.click();
 		CommonUtility.checkPageIsReadyNew(driver);
 		if (MRScenario.isTestHarness.equalsIgnoreCase("YES")) { //note: new DCE is a Rally page, access via testharness will land on myuhc.com login page
@@ -737,10 +749,10 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 			validateNew(Copayscoinsuranceheader);
 
 			String ExpectedUrl="member/documents/overview.html";
-			if (MRScenario.environment.equals("offline") || MRScenario.environment.equals("prod")) 
-				Assert.assertTrue("'To view more details regarding----'  text is expected to display", medCopayText_old.isDisplayed());
-			else
-				Assert.assertTrue("'To view more details regarding----'  text is expected to display", medCopayText.isDisplayed());
+			//tbd if (MRScenario.environment.equals("offline") || MRScenario.environment.equals("prod")) 
+			//tbd 	Assert.assertTrue("'To view more details regarding----'  text is expected to display", medCopayText_old.isDisplayed());
+			//tbd else
+			Assert.assertTrue("'To view more details regarding----'  text is expected to display", medCopayText.isDisplayed());
 
 			//note: to save time, skip navigating to planDoc page, only validate link href has the correct url
 			/* keep
@@ -753,12 +765,12 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 			driver.navigate().back();
 			driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 			*/
-			if (MRScenario.environment.equals("offline") || MRScenario.environment.equals("prod")) 
-				Assert.assertTrue("PROBLEM - medCopayBenefitsLink href value is not as expected. "
-						+ "Expected to contain '"+ExpectedUrl+"' | Actual href='"+medCopayBenefitsLink_old.getAttribute("href")+"'", medCopayBenefitsLink_old.getAttribute("href").contains(ExpectedUrl));
-			else
-				Assert.assertTrue("PROBLEM - medCopayBenefitsLink href value is not as expected. "
-						+ "Expected to contain '"+ExpectedUrl+"' | Actual href='"+medCopayBenefitsLink.getAttribute("href")+"'", medCopayBenefitsLink.getAttribute("href").contains(ExpectedUrl));
+			//tbd if (MRScenario.environment.equals("offline") || MRScenario.environment.equals("prod")) 
+			//tbd 	Assert.assertTrue("PROBLEM - medCopayBenefitsLink href value is not as expected. "
+			//tbd     + "Expected to contain '"+ExpectedUrl+"' | Actual href='"+medCopayBenefitsLink_old.getAttribute("href")+"'", medCopayBenefitsLink_old.getAttribute("href").contains(ExpectedUrl));
+			//tbd else
+			Assert.assertTrue("PROBLEM - medCopayBenefitsLink href value is not as expected. "
+					+ "Expected to contain '"+ExpectedUrl+"' | Actual href='"+medCopayBenefitsLink.getAttribute("href")+"'", medCopayBenefitsLink.getAttribute("href").contains(ExpectedUrl));
 			
 			Assert.assertTrue("'OfficeVisits' is not expected to display", !OfficeVisits.isDisplayed());
 			Assert.assertTrue("'InPatientHospitalCare' is not expected to display", !InPatientHospitalCare.isDisplayed());
@@ -1247,6 +1259,10 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 		targetDocName="VIEW OTHER DOCUMENTS AND RESOURCES";
 		System.out.println("Proceed to validate '"+targetDocName+"' link");
 		validateNew(Viewotherdocsinpdfpdp);
+		String expHref="/content/medicare/member/documents/overview.html";
+		String actHref=Viewotherdocsinpdfpdp.getAttribute("href");
+		Assert.assertTrue("PROBLEM - '"+targetDocName+"' link href value is not as expected.  Expected to contain '"+expHref+"' | Actual = '"+actHref+"'", actHref.contains(expHref));
+		/* keep re-activate this validation if planDoc page ever load faster...
 		Viewotherdocsinpdfpdp.click();
 		sleepBySec(10);
 		expectedUrl="/member/documents/overview.html";
@@ -1255,6 +1271,7 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 		Assert.assertTrue("PROBLEM - '"+targetDocName+"' destination URL not as expected. Expected to contain '"+expectedUrl+"' | Actual = '"+actualUrl+"'", actualUrl.contains(expectedUrl));
 		sleepBySec(20);
 		driver.get(originalUrl);
+		*/
 	}
 
 	public void navigateToBenefitsPg(String plantype) {
@@ -1475,8 +1492,8 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 				+"Tier 1\n"
 				+"$5.00 copay\n"
 				+"$5.00 copay\n"
-				+"After your total drug costs reach $4,020, the plan continues to pay its share of the cost of your drugs and you pay your share of the cost.\n"
-				+"When your total out-of-pocket costs for Part D prescription drugs reach $6,350, you will pay a $0 copay for your drugs for the rest of the plan year.\n"
+				+"After your total drug costs reach $4,130, the plan continues to pay its share of the cost of your drugs and you pay your share of the cost.\n"
+				+"When your total out-of-pocket costs for Part D prescription drugs reach $6,550, you will pay a $0 copay for your drugs for the rest of the plan year.\n"
 				+"Tier 2\n"
 				+"$25.00 copay\n"
 				+"$25.00 copay\n"
@@ -1593,8 +1610,8 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 				+"$10 copay\n"
 				+"$20 copay\n"
 				+"$30 copay\n"
-				+"After your total drug costs reach $4,020, the plan covers all formulary drugs through the coverage gap at the same copays listed under the Initial Coverage Stage\n"
-				+"When your out-of-pocket costs reach the $6,350 limit for the plan year, you move to the Catastrophic Coverage Stage.  In this stage, you will continue to pay the same cost share that you paid in the Initial Coverage Stage.\n"
+				+"After your total drug costs reach $4,130, the plan covers all formulary drugs through the coverage gap at the same copays listed under the Initial Coverage Stage\n"
+				+"When your out-of-pocket costs reach the $6,550 limit for the plan year, you move to the Catastrophic Coverage Stage.  In this stage, you will continue to pay the same cost share that you paid in the Initial Coverage Stage.\n"
 				+"The catastrophic coverage will go toward Part D covered medications.\n"
 				+"Tier 2\n"
 				+"$35 copay\n"
@@ -2668,10 +2685,10 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 				+"Catastrophic Coverage Stage\n"
 				+"Covered Generic Drugs\n"
 				+"$0.00\n"
-				+"$3.60\n"
+				+"$3.70\n"
 				+"$0.00\n"
 				+"All Other Covered Drugs\n"
-				+"$8.95\n"
+				+"$9.20\n"
 				+"$0.00";
 
 		if(RetailDrugCost_Table.getText().equals(mapdGroupTable.toString())){
@@ -5620,6 +5637,101 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 			//tbd Assert.fail("The data in the drug cost table is not displaying correctly. table='"+tblName+"' | type='"+type+"'");
 		} */
 		return testNote;
+	}
+	
+	public int numberOfComboTab() {
+		return tabsForComboMember.size();
+	}
+	
+	public List<String> verifyApi() {
+		//note: loop through each tab and check the API
+		List<String> apiList=new ArrayList<String>();
+		WebElement targetTabElement=null;
+		int tabNum=0;
+		
+		if (tabsForComboMember.size()==0) {
+			apiList.add("API requests for this user (non-combo):");
+			apiList.addAll(lookforBenefitsApiRequests(tabNum, targetTabElement));
+		} else {
+			apiList.add("API requests for this user (combo) - click tab from left to right:");
+			for(int i=0; i< tabsForComboMember.size(); i++) {
+				tabsForComboMember.get(i).click();
+				CommonUtility.checkPageIsReady(driver);
+				System.out.println("-----------------------------------------------------");
+				System.out.println("TEST - on tab #"+(i+1)+" '"+tabsForComboMember.get(i).getText()+"'...");
+				targetTabElement=tabsForComboMember.get(i);
+				tabNum=(i+1);
+				apiList.addAll(lookforBenefitsApiRequests(tabNum, targetTabElement));
+			} 
+			apiList.add("API requests for this user (combo) - click tab from right to left:");
+			for(int i=(tabsForComboMember.size()-1); i>=0; i--) {
+				tabsForComboMember.get(i).click();
+				CommonUtility.checkPageIsReady(driver);
+				System.out.println("-----------------------------------------------------");
+				System.out.println("TEST - on tab #"+(i+1)+" '"+tabsForComboMember.get(i).getText()+"'...");
+				targetTabElement=tabsForComboMember.get(i);
+				tabNum=(i+1);
+				apiList.addAll(lookforBenefitsApiRequests(tabNum, targetTabElement));
+			} 
+		}
+
+		return apiList;
+	}
+	
+	
+	public List<String> lookforBenefitsApiRequests(int tabNum, WebElement targetTabElement) {
+		List<String> apiList=new ArrayList<String>();
+		String lookForText1="/UCPBenefits/";
+		String lookForText2="requestWillBeSent";
+
+		List<LogEntry> entries = driver.manage().logs().get(LogType.PERFORMANCE).getAll();
+		for (LogEntry entry : entries) {
+			String line=entry.getMessage();
+			//keepForDebug System.out.println("TEST each line="+line);
+			if (line.contains(lookForText1) && line.contains(lookForText2)) {
+				System.out.println("FOUND - line="+line);
+				
+				try {
+					JSONParser parser = new JSONParser();
+					JSONObject jsobObj=null;
+					jsobObj = (JSONObject) parser.parse(line);
+					JSONObject messageObj;
+					messageObj = (JSONObject) jsobObj.get("message");
+					Assert.assertTrue("PROBLEM - unable to locate message json object", messageObj!=null);
+					JSONObject paramsObj = (JSONObject) messageObj.get("params");
+					Assert.assertTrue("PROBLEM - unable to locate params json object", paramsObj!=null);
+					JSONObject requestObj = (JSONObject) paramsObj.get("request");
+					Assert.assertTrue("PROBLEM - unable to locate request json object", requestObj!=null);
+					System.out.println("TEST - requestObj="+requestObj.toString());
+					String urlStr = (String) requestObj.get("url");
+					Assert.assertTrue("PROBLEM - unable to locate postData string", urlStr!=null);
+					System.out.println("TEST - urlStr="+urlStr);
+					if (targetTabElement!=null) 
+						apiList.add("tab #"+tabNum+" ("+targetTabElement.getText()+") - "+urlStr);
+					else 
+						apiList.add(urlStr);
+				} catch (ParseException e) {
+					e.printStackTrace();
+					Assert.assertTrue("PROBLEM - unable to convert target string into json object", false);
+				}
+			}
+		}
+		return apiList;
+	}
+	
+	public boolean checkpharmoutpockttextarea() {
+		boolean isDisplayed = false;
+		try {
+			isDisplayed = pharmoutpockttextarea.isDisplayed();
+		}catch(Exception e) {
+			
+		}
+		return isDisplayed;
+	}
+	
+	public boolean display_provider_search_tile() {
+		TestHarness.checkForIPerceptionModel(driver);
+		return validate(providersearchlink,5);
 	}
 
 }
