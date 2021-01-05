@@ -15,6 +15,7 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth Prod
       | Password | <password> | 
     And Member Enters the Username he wants to search
       | MemUsername | <MemUserName> |
+      | Retry | true |
     And user clicks on member to select
     And user stores test input for validations
       | Username | <MemUserName> |
@@ -37,6 +38,7 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth Prod
       | Password | <password> |
     And Member Enters the Username he wants to search
       | MemUsername | <MemUserName> |
+      | Retry | true |
     And user clicks on member to select
     And user stores test input for validations
       | Username | <MemUserName> |
@@ -61,6 +63,7 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth Prod
       | Password | <password> |
     And Member Enters the Username he wants to search
       | MemUsername | <MemUserName> |
+      | Retry | true |
     And user clicks on member to select
     And user stores test input for validations
       | Username | <MemUserName> |
@@ -99,10 +102,12 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth Prod
     And the user clicks on More Information link for ship
     Then the user validate Value Add Service page comes on clicking additional info button
     And the user validate vas tiles on vas page
+        | Plan Code | <planCode> | 
+	   | State Code | <stateCode> |
 
     Examples: 
-      | index |TID |username |password |MemUserName|planType|memberType|language|PlanBenefitsTable|numberOfBenefitCards|Identifier| count| rider   |
-      | 03    |15094|kkumard|tnps459#|Gcdurant3| SHIP |SHIP_BnC  | ENGLISH|Plan Benefits Table| 7 |EffectiveShipMedSupp|3| NoRider |
+      | index |TID |username |password |MemUserName|planType|memberType|language|PlanBenefitsTable|numberOfBenefitCards|Identifier| count| rider   | planCode | stateCode |
+      | 03    |15094|kkumard|tnps459#|Gcdurant3| SHIP |SHIP_BnC  | ENGLISH|Plan Benefits Table| 7 |EffectiveShipMedSupp|3| NoRider | G01 | LA |
       
   #TC13_Benefits_for_MA_SSUP_MEDSUPMember
   @prod__benefitsAndCoverage10 @BenefitsForMAMedsupSSUPMember @regression @Links_Validation_SSUP
@@ -113,6 +118,7 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth Prod
       | Password | <password> |
     And Member Enters the Username he wants to search
       | MemUsername | <MemUserName> |
+      | Retry | true |
     And user clicks on member to select
     And user stores test input for validations
       | Username | <MemUserName> |
@@ -150,6 +156,7 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth Prod
       | Password | <password> |
     And Member Enters the Username he wants to search
       | MemUsername | <MemUserName> |
+      | Retry | true |
     And user clicks on member to select
     And user stores test input for validations
       | Username | <MemUserName> |
@@ -179,6 +186,7 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth Prod
       | Password | <password> |
     And Member Enters the Username he wants to search
       | MemUsername | <MemUserName> |
+      | Retry | true |
     And user clicks on member to select
     And user stores test input for validations
       | Username | <MemUserName> |
@@ -221,6 +229,7 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth Prod
       | Password | <password> |
     And Member Enters the Username he wants to search
       | MemUsername | <MemUserName> |
+      | Retry | true |
     And user clicks on member to select
     And user stores test input for validations
       | Username | <MemUserName> |
@@ -246,6 +255,7 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth Prod
       | Password | <password> |
     And Member Enters the Username he wants to search
       | MemUsername | <MemUserName> |
+      | Retry | true |
     And user clicks on member to select
     And user stores test input for validations
       | Username | <MemUserName> |
@@ -290,6 +300,7 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth Prod
       | Password | <password> |
     And Member Enters the Username he wants to search
       | MemUsername | <MemUserName> |
+      | Retry | true |
     And user clicks on member to select
     And user stores test input for validations
       | Username | <MemUserName> |
@@ -332,6 +343,7 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth Prod
       | Password | <password> |
     And Member Enters the Username he wants to search
       | MemUsername | <MemUserName> |
+      | Retry | true |
     And user clicks on member to select
     And user stores test input for validations
       | Username | <MemUserName> |
@@ -372,6 +384,7 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth Prod
       | Password | <password> |
     And Member Enters the Username he wants to search
       | MemUsername | <MemUserName> |
+      | Retry | true |
     And user clicks on member to select
     And user stores test input for validations
       | Username | <MemUserName> |
@@ -421,6 +434,7 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth Prod
       | Password | <password> |
     And Member Enters the Username he wants to search
       | MemUsername | <MemUserName> |
+      | Retry | true |
     And user clicks on member to select
     And user stores test input for validations
       | Username | <MemUserName> |
@@ -469,6 +483,7 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth Prod
       | Password | <password> |
     And Member Enters the Username he wants to search
       | MemUsername | <MemUserName> |
+      | Retry | true |
     And user clicks on member to select
     And user stores test input for validations
       | Username | <MemUserName> |
@@ -540,6 +555,7 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth Prod
       | Password | <password> |
     And Member Enters the Username he wants to search
       | MemUsername | <MemUserName> |
+      | Retry | true |
     And user clicks on member to select
     And user stores test input for validations
       | Username | <MemUserName> |
@@ -561,6 +577,7 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth Prod
       | Password | <password> |
     And Member Enters the Username he wants to search
       | MemUsername | <MemUserName> |
+      | Retry | true |
     And user clicks on member to select
     And user stores test input for validations
       | Username | <MemUserName> |
@@ -582,6 +599,7 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth Prod
       | Password | <password> |
     And Member Enters the Username he wants to search
       | MemUsername | <MemUserName> |
+      | Retry | true |
     And user clicks on member to select
     And user stores test input for validations
       | Username | <MemUserName> |
@@ -637,6 +655,7 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth Prod
       | Password | <password> |
     And Member Enters the Username he wants to search
       | MemUsername | <MemUserName> |
+      | Retry | true |
     And user clicks on member to select
     And user stores test input for validations
       | Username | <MemUserName> |
@@ -728,6 +747,7 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth Prod
       | Password | <password> |
     And Member Enters the Username he wants to search
       | MemUsername | <MemUserName> |
+      | Retry | true |
     And user clicks on member to select
     And user stores test input for validations
       | Username | <MemUserName> |
@@ -796,6 +816,7 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth Prod
       | Password | <password> |
     And Member Enters the Username he wants to search
       | MemUsername | <MemUserName> |
+      | Retry | true |
     And user clicks on member to select
     And user stores test input for validations
       | Username | <MemUserName> |
@@ -827,6 +848,7 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth Prod
       | Password | <password> |
     And Member Enters the Username he wants to search
       | MemUsername | <MemUserName> |
+      | Retry | true |
     And user clicks on member to select
     And user stores test input for validations
       | Username | <MemUserName> |
@@ -837,4 +859,7 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth Prod
 	@prod_singleApi
     Examples: 
       | index | TID   | username | password  | MemUserName              | planType | memberType   |
-      | 41    | xxxxx | kkumard  | tnps459#  | Patkeving                | TERM     | FED_BnC      |      
+      | 41    | xxxxx | kkumard  | tnps459#  | Patkeving                | TERM     | FED_BnC      |
+      | 42    | xxxxx | kkumard  | tnps459#  | erbenoit56               | TERM     | PDP_FED_BnC  |
+     # unable to search user 
+     # | 43    | xxxxx | kkumard  | tnps459#  | SWHITE33436              | TERM     | PCP_FED_BnC  |      

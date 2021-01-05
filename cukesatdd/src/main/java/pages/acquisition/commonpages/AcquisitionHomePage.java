@@ -259,7 +259,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "//*[contains(@dtmname,'Privacy')]//*[contains(text(),'Privacy Policy')]")
 	public WebElement privacyHeader;
 	
-	@FindBy(xpath = "//*[@class='container meded-article-header']//span[contains(text(),'Health Insurance Broker')]")
+	//@FindBy(xpath = "//*[@class='container meded-article-header']//span[contains(text(),'Health Insurance Broker')]")
+	@FindBy(xpath="//h1//*[contains(text(),'Health Insurance Broker & Agent Tools')]")
 	public WebElement brokerHeader;
 	
 	/* LearnAboutMedicare link */

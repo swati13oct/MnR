@@ -10,6 +10,7 @@ Feature: 1.24.2.a Member Individual Health Record - PROD - P1 - Dashboard, FindC
       | Password | <password> |
     And Member Enters the Username he wants to search
       | MemUsername | <MemUserName> |
+      | Retry | true |
     And user clicks on member to select
     And user stores test input for validations
       | Username | <MemUserName> |
@@ -30,7 +31,7 @@ Feature: 1.24.2.a Member Individual Health Record - PROD - P1 - Dashboard, FindC
     @prod_ihr_p1_mapd_sanity
     Examples: 
 	    | index | FID     | username  | password  | MemUserName             | planType | memberType         | expectLink | 
-	    | S09   | F424804 | kkumard   | tnps459#  | Grandmagrey123          | MAPD     | NONBOA_GROUP_IHR   | true       |
+	    | S09   | F424804 | kkumard   | tnps459#  | LMHOCHSCHILD11          | MAPD     | NONBOA_GROUP_IHR   | true       |
 
   @prod_sanity02
   Scenario Outline: -Index <index> -FID <FID> -Plan Type: <planType> -Member Type: <memberType> - To verify iHR link display for user that is not on the exclusion table - P1 - FindCare
@@ -40,6 +41,7 @@ Feature: 1.24.2.a Member Individual Health Record - PROD - P1 - Dashboard, FindC
       | Password | <password> |
     And Member Enters the Username he wants to search
       | MemUsername | <MemUserName> |
+      | Retry | true |
     And user clicks on member to select
     And user stores test input for validations
       | Username | <MemUserName> |
@@ -59,7 +61,7 @@ Feature: 1.24.2.a Member Individual Health Record - PROD - P1 - Dashboard, FindC
     @prod_ihr_p1_mapd_sanity
     Examples: 
 	    | index | FID     | username  | password  | MemUserName             | planType | memberType         | expectLink | 
-	    | S09   | F424804 | kkumard   | tnps459#  | Grandmagrey123          | MAPD     | NONBOA_GROUP_IHR   | true       |
+	    | S09   | F424804 | kkumard   | tnps459#  | LMHOCHSCHILD11          | MAPD     | NONBOA_GROUP_IHR   | true       |
 
 
   @prod_sanity03
@@ -70,6 +72,7 @@ Feature: 1.24.2.a Member Individual Health Record - PROD - P1 - Dashboard, FindC
       | Password | <password> |
     And Member Enters the Username he wants to search
       | MemUsername | <MemUserName> |
+      | Retry | true |
     And user clicks on member to select
     And user stores test input for validations
       | Username | <MemUserName> |
@@ -89,7 +92,7 @@ Feature: 1.24.2.a Member Individual Health Record - PROD - P1 - Dashboard, FindC
     @prod_ihr_p1_mapd_sanity
     Examples: 
 	    | index | FID     | username  | password  | MemUserName             | planType | memberType         | expectLink | 
-	    | S09   | F424804 | kkumard   | tnps459#  | Grandmagrey123          | MAPD     | NONBOA_GROUP_IHR   | true       |
+	    | S09   | F424804 | kkumard   | tnps459#  | LMHOCHSCHILD11          | MAPD     | NONBOA_GROUP_IHR   | true       |
 
 
   #----- begin regression
@@ -101,6 +104,7 @@ Feature: 1.24.2.a Member Individual Health Record - PROD - P1 - Dashboard, FindC
       | Password | <password> |
     And Member Enters the Username he wants to search
       | MemUsername | <MemUserName> |
+      | Retry | true |
     And user clicks on member to select
     And user stores test input for validations
       | Username | <MemUserName> |
@@ -145,7 +149,7 @@ Feature: 1.24.2.a Member Individual Health Record - PROD - P1 - Dashboard, FindC
     Examples: 
 	    | index | FID     | username  | password  | MemUserName             | planType | memberType         | expectLink | 
 	    | 08    | F424804 | kkumard   | tnps459#  | ssmhi1              | MA       | IHR                | true       |
-	    | 09    | F424804 | kkumard   | tnps459#  | Grandmagrey123          | MAPD     | NONBOA_GROUP_IHR   | true       |
+	    | 09    | F424804 | kkumard   | tnps459#  | LMHOCHSCHILD11          | MAPD     | NONBOA_GROUP_IHR   | true       |
 
     @prod_ihr_p1_pdp
     Examples: 
@@ -158,7 +162,7 @@ Feature: 1.24.2.a Member Individual Health Record - PROD - P1 - Dashboard, FindC
     Examples: 
 	    | index | FID     | username  | password  | MemUserName             | planType | memberType         | expectLink | 
 	   #| 11    | F424804 | kkumard   | tnps459#  | Ranch1955               | MA       | PREEFF_IHR         | true       |
-	    | 11    | F424804 | kkumard   | tnps459#  | Teripappas                | MAPD     | PREEFF_IHR         | true       |
+	    | 11    | F424804 | kkumard   | tnps459#  | Beaver34                | MAPD     | PREEFF_IHR         | true       |
 	    | 12    | F424804 | kkumard   | tnps459#  | Patkeving            | MAPD     | TERM_IHR           | false      |
 
     @prod_ihr_p1_pdpSspCombo
