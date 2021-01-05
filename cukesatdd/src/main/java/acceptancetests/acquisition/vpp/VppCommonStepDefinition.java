@@ -3290,4 +3290,21 @@ public void user_clicks_on_continue_enrollment_button_on_the_modal() throws Thro
 			Assert.fail("Error Loading VPP plan summary page");
 		}
 	}
+	
+	@Then("^the user enters following information in Request Plan Information Guide through Shop Pages$")
+	public void the_user_enters_following__information_in_Request_Plan_Information_Guide_through_shop_pages(DataTable givenAttributes)
+			throws Throwable {
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}		
+		String EmailAddress = memberAttributesMap.get("Email");
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		plansummaryPage.RequestPlanIInformationshoppages(EmailAddress);
+
+	}
 }

@@ -1031,8 +1031,8 @@ public class oleStepDefinition {
 					givenAttributesRow.get(i).getCells().get(1));
 		}
 		
-		String diclsoureCheckbox="";
-		String diclsourestate ="";
+		String diclsoureCheckbox="true";
+		String diclsourestate ="AK";
 		
 		UseAndDisclosureAuthorizationPage useranddisclosure = (UseAndDisclosureAuthorizationPage) getLoginScenario()
 	.getBean(OLE_PageConstants.OLE_User_And_Disclosure_PAGE);
@@ -1339,6 +1339,7 @@ public class oleStepDefinition {
 				getLoginScenario().saveBean(oleCommonConstants.MAILING_STATE, MemberDetailsMap.get("Mailing_State"));
 				getLoginScenario().saveBean(oleCommonConstants.MAILING_ZIP, MemberDetailsMap.get("Mailing_Zip"));
 				getLoginScenario().saveBean(oleCommonConstants.EMAIL, MemberDetailsMap.get("Email"));
+				getLoginScenario().saveBean(oleCommonConstants.MEDICAID_NUMBER, MemberDetailsMap.get("MedicaidNumber"));			
 				Assert.assertTrue(true);
 			}
 			else
@@ -1409,7 +1410,7 @@ public class oleStepDefinition {
 						personalInformationPage);
 				System.out.println("OLE Personal Information Page - All required Member Details are entered");
 				getLoginScenario().saveBean(oleCommonConstants.EMAIL, MemberDetailsMap.get("Email"));
-				getLoginScenario().saveBean(oleCommonConstants.PRIMARY_PHONE_NUMBER, MemberDetailsMap.get("Phone Number"));
+				getLoginScenario().saveBean(oleCommonConstants.PRIMARY_PHONE_NUMBER, MemberDetailsMap.get("Home Number"));
 				getLoginScenario().saveBean(oleCommonConstants.MOBILE_NUMBER, MemberDetailsMap.get("Mobile Number"));
 				getLoginScenario().saveBean(oleCommonConstants.MIDDLE_NAME, MemberDetailsMap.get("Middle Name"));
 				
@@ -3107,9 +3108,11 @@ public void the_user_validates_the_OLE_Submission_Details_in_GPS(DataTable arg1)
 				DetailsMap.put("Email Confirmation", (String) getLoginScenario().getBean(oleCommonConstants.EMAIL_CONFIRMATION));
 				String email = (String) getLoginScenario().getBean(oleCommonConstants.EMAIL);
 				DetailsMap.put("Email", email.toUpperCase());
-				DetailsMap.put("Paperless Delivery", (String) getLoginScenario().getBean(oleCommonConstants.Go_Green));
-
-				//Language
+				if(PlanName.contains("Chronic") || PlanName.contains("Gold") ||PlanName.contains("Silver")) {
+					DetailsMap.put("Paperless Delivery", "N");
+					} else {
+					DetailsMap.put("Paperless Delivery", (String) getLoginScenario().getBean(oleCommonConstants.Go_Green));	
+					}				//Language
 				//TODO: Need to check and add Language
 
 				System.out.println("--------------------Storing Data for Personal Information Page Ended----------------------");
@@ -3127,6 +3130,7 @@ public void the_user_validates_the_OLE_Submission_Details_in_GPS(DataTable arg1)
 				DetailsMap.put("Medicaid Number", (String) getLoginScenario().getBean(oleCommonConstants.MEDICAID_NUMBER));
 
 				//Other Health Insurance
+				if(!plantype.contains("PDP")) {
 				String healthInsurance = (String) getLoginScenario().getBean(oleCommonConstants.HEALTH_INSURANCE);
 				DetailsMap.put("Health Insurance", healthInsurance.toUpperCase());
 				String otherHealthInsuranceeName = (String) getLoginScenario().getBean(oleCommonConstants.HEALTH_INSURANCE_NAME);
@@ -3134,7 +3138,7 @@ public void the_user_validates_the_OLE_Submission_Details_in_GPS(DataTable arg1)
 				String groupNumber = (String) getLoginScenario().getBean(oleCommonConstants.GROUP_NUMBER);
 				DetailsMap.put("Group Number", groupNumber.toUpperCase());
 				DetailsMap.put("Member Number", (String) getLoginScenario().getBean(oleCommonConstants.MEMBER_NUMBER));
-
+				}
 				//Prescription Drug Coverage
 				String prescriptionDrug = (String) getLoginScenario().getBean(oleCommonConstants.PRESCRIPTION_DRUG);
 				DetailsMap.put("Prescription Drug", prescriptionDrug.toUpperCase());
@@ -3176,21 +3180,22 @@ public void the_user_validates_the_OLE_Submission_Details_in_GPS(DataTable arg1)
 				System.out.println("--------------------Storing Data for PCP Page Started----------------------");
 
 				//PCP Page
+				if(!plantype.contains("PDP")) {
 				String pcpName = (String) getLoginScenario().getBean(oleCommonConstants.PCP_NAME);
 				DetailsMap.put("PCP Name", pcpName.toUpperCase());
 				String pcpNumber = (String) getLoginScenario().getBean(oleCommonConstants.PCP_NUMBER);
 				DetailsMap.put("PCP Number", pcpNumber.toUpperCase());
 				String pcpRecentlyVisited = (String) getLoginScenario().getBean(oleCommonConstants.PCP_RECENTLY_VISITED);
 				DetailsMap.put("PCP Recently Visited", pcpRecentlyVisited.toUpperCase());
-
+				}
 				System.out.println("--------------------Storing Data for PCP Page Ended----------------------");
-
+				
 				//------------------------------------------------------------------------------------------------------------------------------------------------
 
 				System.out.println("--------------------Storing Data for Proposed Effective Date Started----------------------");
 
 				//Proposed Effective Date
-			/*	String proposedEffectiveDate = (String) getLoginScenario().getBean(oleCommonConstants.PROPOSED_EFF_DATE);
+				/*String proposedEffectiveDate = (String) getLoginScenario().getBean(oleCommonConstants.PROPOSED_EFF_DATE);
 				proposedEffectiveDate  = OLEGPSValidation.converttogpsDate(proposedEffectiveDate );
 				DetailsMap.put("Proposed Effective date", proposedEffectiveDate);		
 			 	*/
@@ -3232,7 +3237,7 @@ public void the_user_validates_the_OLE_Submission_Details_in_GPS(DataTable arg1)
 				if(PlanName.contains("Chronic") || PlanName.contains("Gold") ||PlanName.contains("Silver")){
 				String diabetesquestion1= (String) getLoginScenario().getBean(oleCommonConstants.DIABETES_QUESTION_1);
 				diabetesquestion1=diabetesquestion1.substring(0, 1);
-				DetailsMap.put("Diabetes Question 1",diabetesquestion1);
+				DetailsMap.put("Diabetes Question 1",diabetesquestion1.toUpperCase());
 				String diabetesquestion2= (String) getLoginScenario().getBean(oleCommonConstants.DIABETES_QUESTION_2);
 				diabetesquestion2=diabetesquestion2.substring(0, 1);
 				DetailsMap.put("Diabetes Question 2",diabetesquestion2);

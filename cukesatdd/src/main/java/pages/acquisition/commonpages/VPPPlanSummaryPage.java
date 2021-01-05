@@ -5786,18 +5786,29 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	@FindBy(xpath = "(//input[@id='updates-email'])[2]")
 	private WebElement requestemailaddress;
-
+	
+	@FindBy(xpath = "//input[@id='updates-email']")
+	private WebElement requestshoppageemailaddress;
 	@FindBy(xpath = "//p[contains(text(),'Submit')]")
 	private WebElement requestplaninformationsubmit;
-
+	
+	@FindBy(xpath = "(//button[contains(text(),'Submit')])[2]")
+	private WebElement requestplaninformationShopsubmit;
+	
 	@FindBy(xpath = "//p[contains(text(),'Your information has been submitted')]")
 	private WebElement requestplaninformationsubmitpopup;
+	
+	@FindBy(xpath = "(//p[contains(text(),'Your guide will arrive in your inbox')])[2]")
+	private WebElement requestplaninformationshopsubmitpopup;
 
 	@FindBy(xpath = "//a[contains(@class,'emailsubmit_close')]")
 	private WebElement requestplaninformationclose;
 
 	@FindBy(xpath = "//*[contains(@id, 'email-error-id')]")
 	private WebElement RequestPlanInformation_ErrorMessage;
+	
+	@FindBy(xpath = "(//*[contains(text(),'Please enter a valid email address')])[2]")
+	private WebElement RequestPlanInformationShoppages_ErrorMessage;
 
 	public boolean RequestPlanIInformation(String FirstName, String LastName, String EmailAddress)
 			throws InterruptedException {
@@ -6504,6 +6515,47 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			Assert.fail("**************** Rules and Disclosures is not loaded ***************");
 		}
 		driver.switchTo().window(parentWindow);
+
+	}
+	
+	public boolean RequestPlanIInformationshoppages(String EmailAddress)
+			throws InterruptedException {
+
+		boolean RequestPlanIInformation_Validation = true;
+
+		boolean flag = true;
+		
+		requestshoppageemailaddress.clear();
+		requestshoppageemailaddress.sendKeys("(*^*_asb@t.c");
+		requestplaninformationShopsubmit.click();
+		if (validate(RequestPlanInformationShoppages_ErrorMessage) && RequestPlanInformationShoppages_ErrorMessage.isDisplayed()) {
+			if (!RequestPlanInformationShoppages_ErrorMessage.getText()
+					.contains("Please enter a valid email address")) {
+				System.out.println(
+						"Email Invalid Error is Not  displayed : " + RequestPlanInformationShoppages_ErrorMessage.getText());
+				flag = false;
+			}
+			System.out.println("Email Invalid Error : " + RequestPlanInformationShoppages_ErrorMessage.getText());
+
+		} else {
+			System.out.println("Email Invalid Error field is not displayed");
+
+		}
+		validateNew(requestshoppageemailaddress);
+		requestshoppageemailaddress.clear();
+		requestshoppageemailaddress.sendKeys(EmailAddress);
+		System.out.println("Email Address is enetered : " + EmailAddress);
+		validateNew(requestplaninformationShopsubmit);
+		jsClickNew(requestplaninformationShopsubmit);
+		if (requestplaninformationshopsubmitpopup.getText().contains(
+				"Your guide will arrive in your inbox shortly")) {
+			System.out.println("****************Request  information is displayed  ***************");
+
+			Assert.assertTrue(true);
+		} else {
+			System.out.println("****************Request information is displayed  ***************");
+		}
+		return RequestPlanIInformation_Validation;
 
 	}
 }

@@ -879,7 +879,9 @@ public class CommonConstants {
 	//public static final String CONNECTION_URL = "jdbc:oracle:thin:qaread/testreadonly@orass0464:1521/gpsst04svc_trn.uhc.com";
 	
 	public static final String CONNECTION_URL = "jdbc:oracle:thin:qaread/testreadonly@dbslt0102:1521/gpsts18";
-	public static final String GPS_QUERY = "Select FIRST_NAME,\n" + 
+	public static final String GPS_QUERY = "\n" + 
+			"Select \n" + 
+			"FIRST_NAME,\n" + 
 			"MIDDLE_INITIAL,\n" + 
 			"LAST_NAME,\n" + 
 			"DATE_OF_BIRTH,\n" + 
@@ -895,8 +897,7 @@ public class CommonConstants {
 			"MAILING_STATE_CD,\n" + 
 			"MAILING_ZIP_CD,\n" + 
 			"DAYTIME_PHONE_NUM,\n" + 
-			"EVENING_PHONE_NUM,\n" + 
-			"MOBILE_PHONE_NUM,\n" + 
+			"EVENING_PHONE_NUM,\n" + 						   
 			"'N/A',\n" + 
 			"PAPERLESS_PREFERENCE_IND,\n" + 
 			"EMAIL,\n" + 
@@ -907,29 +908,29 @@ public class CommonConstants {
 			"MEDICARE_PART_B_EFFECTIVE_DATE,\n" + 
 			"MEDICAID_IND,\n" + 
 			"MEDICAID_NUMBER,\n" + 
-			"ASMENT_DIAB1_DOC_INFORMED_DIAB\n" + 
-			"ASMENT_DIAB2_PRESCRIBED_INSULN\n" + 
-			"CHRONIC_AUTH_HEART_FAILURE\n" + 
-			"ASMENT_LUNG1_BRONC_EMPH_ASTHMA\n" + 
-			"ASMENT_HEART2_CARDC_BYPASS\n" + 
-			"CHRONIC_AUTH_VASCULAR_DISEASE\n" + 
-			"ASMENT_HEART1_HEART_ATTACK\n" + 
-			"ASMENT_HEART10_ANGINA\n" + 
-			"ASMENT_HBP2_MEDICATION_FOR_HBP\n" + 
-			"ASMENT_HEART7_PACEMKR_R_DEFIB\n" + 
-			"ASMENT_HEART3_ANGIOPLASTY\n" + 
-			"ASMENT_SIGN_PRESENCE_ENROLLEE\n" + 
-			"DO_YOU_HAVE_A_CHRONIC_ILLNESS\n" + 
-			"CHRONIC_PHYSICIAN_NAME\n" + 
-			"CHRONIC_PHYSICIAN_PHONE_NUM\n" + 
-			"ASMENT_FULL_ADDR_FOR_PHYSICIAN\n" + 
+			"ASMENT_DIAB1_DOC_INFORMED_DIAB,\n" + 
+			"ASMENT_DIAB2_PRESCRIBED_INSULN,\n" + 
+			"CHRONIC_AUTH_HEART_FAILURE,\n" + 
+			"ASMENT_LUNG1_BRONC_EMPH_ASTHMA,\n" + 
+			"ASMENT_HEART2_CARDC_BYPASS,\n" + 
+			"CHRONIC_AUTH_VASCULAR_DISEASE,\n" + 
+			"ASMENT_HEART1_HEART_ATTACK,\n" + 
+			"ASMENT_HEART10_ANGINA,\n" + 
+			"ASMENT_HBP2_MEDICATION_FOR_HBP,\n" + 
+			"ASMENT_HEART7_PACEMKR_R_DEFIB,\n" + 
+			"ASMENT_HEART3_ANGIOPLASTY,\n" + 
+			"ASMENT_SIGN_PRESENCE_ENROLLEE,\n" + 
+			"DO_YOU_HAVE_A_CHRONIC_ILLNESS,\n" + 
+			"CHRONIC_PHYSICIAN_NAME,\n" + 
+			"CHRONIC_PHYSICIAN_PHONE_NUM,\n" + 
+			"ASMENT_FULL_ADDR_FOR_PHYSICIAN,\n" + 
 			"ESRD_IND,\n" + 
 			"DO_YOU_HAVE_OTHER_HEALTH_INS,\n" + 
 			"OTHER_HEALTH_INSURANCE_NAME,\n" + 
 			"OTHER_HEALTH_INSURANCE_GRP_NUM,\n" + 
 			"OTHER_HEALTH_INSURANCE_ID,\n" + 
 			"DO_YOU_HAVE_OTHER_RX_COVERAGE,\n" + 
-			"(OTHER_RX_COVERAGE_NAME || '"+"' || SECONDARY_RX_COVERAGE_NAME) as PDCName,\n" + 
+			"(OTHER_RX_COVERAGE_NAME || '\"+\"' || SECONDARY_RX_COVERAGE_NAME) as PDCName,\n" + 
 			"SECONDARY_RX_GROUP,\n" + 
 			"SECONDARY_RX_ID,\n" + 
 			"MEDICARE_PART_A_EFFECTIVE_DATE,\n" + 
@@ -966,8 +967,9 @@ public class CommonConstants {
 			"AUTHORIZED_REP_MAILING_ZIP_CD,\n" + 
 			"AUTHORIZED_REP_DAYTIME_PHONE,\n" + 
 			"SIGNATURE_PRESENCE,\n" + 
-			"XEROX_STAGE_ID  from Xerox_stage where xerox_stage_id =\n" + 
-			"";
+			"XEROX_STAGE_ID\n" + 
+			"from Xerox_stage where xerox_stage_id = ";
+	
 	public static final String GPS_QUERY_1 ="Select\n" + 
 			"FIRST_NAME,\n" + 
 			"LAST_NAME from Xerox_stage where xerox_stage_id = ";
