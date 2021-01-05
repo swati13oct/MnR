@@ -85,6 +85,11 @@ public abstract class UhcDriver {
 
 	@FindBy(css = "div[class*='get-started-banner'] button")
 	private WebElement getStartedBtn;
+	
+	@FindBy(xpath = "//span[text()='Back']")
+	private WebElement MobileMenuBackBtn;
+	
+
 
 	public void MobileMenu() {
 		jsClickNew(MenuMobile);

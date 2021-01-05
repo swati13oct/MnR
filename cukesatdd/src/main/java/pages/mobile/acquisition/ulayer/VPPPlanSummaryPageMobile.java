@@ -3686,34 +3686,32 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 	@FindBy(xpath = "//label[contains(@for, 'futureYear')]")
 	private WebElement NextYearPlansBtn;
 
+	@FindBy(css = "#doctorsAlertTitle")
+	private WebElement IsMyDoctorCovereredBanner;
+
 	public void handlePlanYearSelectionPopup(String planYear) {
 
-		CommonUtility.checkPageIsReadyNew(driver);
-		waitforElementVisibilityInTime(CurrentYearPlansBtn, 10);
-		scrollToView(CurrentYearPlansBtn);
-		if (planYear.equalsIgnoreCase("current")) { // if the scenario is for current year
-			if (validate(CurrentYearPlansBtn, 20)) {
-				System.out.println("*****CLICKING ON Current Year button*****: " + CurrentYearPlansBtn.getText());
-				jsClickNew(CurrentYearPlansBtn);
-				waitforElement(currentYearSelection);
+		// CommonUtility.checkPageIsReadyNew(driver);
+		// waitforElementVisibilityInTime(CurrentYearPlansBtn, 10);
+		// scrollToView(CurrentYearPlansBtn);
+		// if (planYear.equalsIgnoreCase("current")) { // if the scenario is for current
+		// year
+		// if (validate(CurrentYearPlansBtn, 20)) {
+		// System.out.println("*****CLICKING ON Current Year button*****: " +
+		// CurrentYearPlansBtn.getText());
+		// jsClickNew(CurrentYearPlansBtn);
+		// waitforElement(currentYearSelection);
+		//
+		// } else {
+		// scrollToView(nextYearSelection);
+		// jsClickNew(nextYearSelection);
+		// }
+		// }
 
-			} else {
-				scrollToView(nextYearSelection);
-				jsClickNew(nextYearSelection);
-			}
-		}
-
 		CommonUtility.checkPageIsReadyNew(driver);
-		/*
-		 * CommonUtility.checkPageIsReadyNew(driver); if(planYear.contains("current") &&
-		 * validate(CurrentYearPlansBtn, 20)) { // if the scenario is for current year
-		 * //if(validate(NextYearPlansBtn, 20)) {
-		 * System.out.println("*****CLICKING ON Current Year button*****: "
-		 * +CurrentYearPlansBtn.getText()); jsClickNew(CurrentYearPlansBtn); } else{
-		 * //if(validate(NextYearPlansBtn, 20)) {
-		 * System.out.println("*****CLICKING ON Current Year button*****: "
-		 * +NextYearPlansBtn.getText()); jsClickNew(NextYearPlansBtn); }
-		 */
+		scrollToView(IsMyDoctorCovereredBanner);
+		validateNew(IsMyDoctorCovereredBanner);
+		System.out.println("**** Select Plan year tabs removed as new year started  ****");
 
 	}
 

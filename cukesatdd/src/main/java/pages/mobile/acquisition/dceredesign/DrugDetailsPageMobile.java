@@ -1171,14 +1171,17 @@ public class DrugDetailsPageMobile extends UhcDriver {
 
 		System.out.println(InsulinDrugCopayDisplayed.getText().trim());
 
-//		if (InsulinDrugCopayDisplayed.getText().contains(insulinCopay)) {
-//			System.out.println("Your Drugs Section - Insulin Tier and correct Copay is Displayed : "
-//					+ InsulinDrugCopayDisplayed.getText());
-//			Assert.assertTrue("Your Drugs Section - Insulin Tier and correct Copay is Displayed : "
-//					+ InsulinDrugCopayDisplayed.getText(), true);
-//		} else {
-//			Assert.fail("Your Drugs Section - Incorrect Copay Displayed;  Expected Copay: " + insulinCopay);
-//		}
+		// if (InsulinDrugCopayDisplayed.getText().contains(insulinCopay)) {
+		// System.out.println("Your Drugs Section - Insulin Tier and correct Copay is
+		// Displayed : "
+		// + InsulinDrugCopayDisplayed.getText());
+		// Assert.assertTrue("Your Drugs Section - Insulin Tier and correct Copay is
+		// Displayed : "
+		// + InsulinDrugCopayDisplayed.getText(), true);
+		// } else {
+		// Assert.fail("Your Drugs Section - Incorrect Copay Displayed; Expected Copay:
+		// " + insulinCopay);
+		// }
 	}
 
 	@FindBy(xpath = "//h2[contains(text(), 'Important Information')]//following::h3[contains(text(), 'Savings Model')]")
@@ -1339,6 +1342,15 @@ public class DrugDetailsPageMobile extends UhcDriver {
 		jsClickNew(PharmacyName.get(0));
 		validateNew(saveDrugBtn);
 		saveDrugBtn.click();
+	}
+
+	@FindBy(xpath = "//span[contains(text(), 'Prescription Drug Benefits')]")
+	private WebElement prescriptionTab;
+
+	// LearnMore changes Start
+	public void clickPrescriptionBenifitTab() {
+		jsClickNew(prescriptionTab);
+
 	}
 
 	public void validateNotCoveredPharmacyView() {

@@ -37,6 +37,7 @@ import pages.acquisition.dceredesign.DrugDetailsPage;
 import pages.acquisition.dceredesign.GetStartedPage;
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.pharmacyLocator.PharmacySearchPage;
+import pages.mobile.acquisition.dceredesign.DrugDetailsPageMobile;
 import pages.acquisition.commonpages.VPPPlanSummaryPage;
 
 /**
@@ -1390,8 +1391,9 @@ public class PlanDetailsPage extends UhcDriver {
 	}
 
 //      LearnMore changes Start
-	public void clickPrescriptionBenifitTab() {
+	public DrugDetailsPageMobile clickPrescriptionBenifitTab() {
 		jsClickNew(prescriptionTab);
+		return null;
 
 	}
 

@@ -87,7 +87,7 @@ public class DCEACQHomeMobile {
 				.getBean(PageConstants.DCE_Redesign_GetStarted);
 		BuildYourDrugListMobile DCEbuildDrugList = DCEgetStarted.clickAddsDrugs();
 		String druglist = (String) getLoginScenario().getBean(DCERedesignCommonConstants.DRUGLIST);
-		druglist = "";
+		//druglist = "";
 		System.out.println("Setting Drugs List : " + druglist);
 		getLoginScenario().saveBean(DCERedesignCommonConstants.DRUGLIST, druglist);
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_BuildDrugList, DCEbuildDrugList);

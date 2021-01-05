@@ -541,7 +541,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		PageFactory.initElements(driver, this);
 		openAndValidate(siteOrPage, testharnessurl);
 	}
-	
+
 	public OLETestHarnessPageMobile GetOLETestHarnessPage() {
 		return new OLETestHarnessPageMobile(driver);
 	}
@@ -1480,9 +1480,9 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	public VPPPlanSummaryPageMobile searchPlansWithOutCounty(String zipcode) throws InterruptedException {
 
 		CommonUtility.waitForPageLoadNew(driver, zipCodeField, 30);
-		//sendkeys(zipCodeField, zipcode);
+		// sendkeys(zipCodeField, zipcode);
 		zipCodeField.sendKeys(zipcode);
-		//viewPlansButton.click();
+		// viewPlansButton.click();
 		jsClickNew(viewPlansButton);
 
 		CommonUtility.checkPageIsReadyNew(driver);
@@ -2225,16 +2225,23 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		CheckPageLoad();
 		// CheckiPerseptions();
 
-		waitforElement(ShopForaplan);
-		if (ShopForaplan.isDisplayed()) {
-			Actions actions = new Actions(driver);
-			actions.moveToElement(ShopForaplan);
-			actions.build().perform();
-			System.out.println("Hover over Shop for a Plan completed");
+		// waitforElement(ShopForaplan);
 
-			// waitforElementNew(driver.findElement(By.xpath("//input[@id='nav-zipcode']")));
-			// System.out.println("Submit button is displayed");
-		}
+		MobileMenuShopTool();
+
+		// MobileMenuMain();
+		// scrollToView(ShopForaplan);
+		// validateNew(ShopForaplan, 5);
+		// if (ShopForaplan.isDisplayed()) {
+		// Actions actions = new Actions(driver);
+		// actions.moveToElement(ShopForaplan);
+		// actions.build().perform();
+		// System.out.println("Hover over Shop for a Plan completed");
+		//
+		// //
+		// waitforElementNew(driver.findElement(By.xpath("//input[@id='nav-zipcode']")));
+		// // System.out.println("Submit button is displayed");
+		// }
 		WebElement ZipCodeTxt = driver.findElement(By.xpath("//input[@id='nav-zipcode']"));
 		WebElement FindPlansBtn = driver.findElement(By.xpath("//button[@dtmid='acq_top_nav']"));
 		WebElement RequestMoreInfoLink = driver
@@ -2293,19 +2300,28 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 			Assert.fail("Sub Nav - Shop for a Plan - All links and element not found / displayed on page : ");
 		}
 
+		MobileMenuBackBtn.click();
+
 	}
+
+	@FindBy(xpath = "//span[text()='Back']")
+	private WebElement MobileMenuBackBtn;
+
+	@FindBy(xpath = "//a[@aria-label='Close Navigation button']")
+	private WebElement MobileMenuCloseNavigationBtn;
 
 	public void validateSubNavMedEdLinks() {
 		CheckPageLoad();
 		// CheckiPerseptions();
 
 		waitforElement(lnkLearnAboutMedicare);
-		if (lnkLearnAboutMedicare.isDisplayed()) {
-			Actions actions = new Actions(driver);
-			actions.moveToElement(lnkLearnAboutMedicare);
-			actions.build().perform();
-			System.out.println("Hover over Learn about Medicare completed");
-		}
+		jsClickNew(lnkLearnAboutMedicare);
+		// if (lnkLearnAboutMedicare.isDisplayed()) {
+		// Actions actions = new Actions(driver);
+		// actions.moveToElement(lnkLearnAboutMedicare);
+		// actions.build().perform();
+		// System.out.println("Hover over Learn about Medicare completed");
+		// }
 		WebElement EligibilityTxt = driver.findElement(
 				By.xpath("//*[contains(@class, 'nav-col nav-col-3')]//a[contains(@href,'medicare-eligibility')]"));
 		WebElement ChoicesBtn = driver.findElement(By.xpath(
@@ -2327,29 +2343,41 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		// WebElement FAQLink = driver.findElement(By.xpath("//*[contains(@class,
 		// 'nav-col nav-col-3')]//a[contains(@href,'medicare-faq')]"));
 
-		validateNew(EligibilityTxt);
-		validateNew(ChoicesBtn);
-		validateNew(PresProvidersBenefitsLink);
-		validateNew(CostbasicsLink);
+		if (validateNew(EligibilityTxt)) {
+			validateNew(ChoicesBtn);
+			validateNew(PresProvidersBenefitsLink);
+			validateNew(CostbasicsLink);
 
-		validateNew(MAplansLink);
-		validateNew(MedSuppPlansLink);
-		validateNew(PDPplansLink);
+			validateNew(MAplansLink);
+			validateNew(MedSuppPlansLink);
+			validateNew(PDPplansLink);
 
-		validateNew(EnrollmentBasicsLink);
+			scrollToView(EnrollmentBasicsLink);
 
-		if (EligibilityTxt.isDisplayed() && ChoicesBtn.isDisplayed() && PresProvidersBenefitsLink.isDisplayed()
-				&& CostbasicsLink.isDisplayed() && MAplansLink.isDisplayed() && MedSuppPlansLink.isDisplayed()
-				&& PDPplansLink.isDisplayed() && EnrollmentBasicsLink.isDisplayed()) {
-			// && FAQLink.isDisplayed()
 			Assert.assertTrue(true);
 			System.out.println("Sub Nav - Learn about Medicare - All links and element displayed on Page");
-			Actions actions = new Actions(driver);
-			// actions.moveToElement(AARPlogo);
-			actions.build().perform();
-		} else {
+
+			// if (EligibilityTxt.isDisplayed() && ChoicesBtn.isDisplayed() &&
+			// PresProvidersBenefitsLink.isDisplayed()
+			// && CostbasicsLink.isDisplayed() && MAplansLink.isDisplayed() &&
+			// MedSuppPlansLink.isDisplayed()
+			// && PDPplansLink.isDisplayed() && EnrollmentBasicsLink.isDisplayed()) {
+			// // && FAQLink.isDisplayed()
+			// Assert.assertTrue(true);
+			// System.out.println("Sub Nav - Learn about Medicare - All links and element
+			// displayed on Page");
+			// Actions actions = new Actions(driver);
+			// // actions.moveToElement(AARPlogo);
+			// actions.build().perform();
+		} else
+
+		{
 			Assert.fail("Sub Nav - Learn about Medicare - All links and element not found / displayed on page");
 		}
+
+		MobileMenuBackBtn.click();
+		MobileMenuCloseNavigationBtn.click();
+
 	}
 
 	public void headerRegisterLink() {
@@ -2977,7 +3005,6 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		validateNew(AARPlogo);
 		validateNew(visitorprofileicon);
 	}
-
 
 	public void clickRequestAsistancce() {
 		validateNew(footerRequestforAssistancelink);

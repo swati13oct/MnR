@@ -136,7 +136,9 @@ public class GlobalComponentsCommonStepDefinition {
 	public void the_USer_validates_Shop_for_a_Plan_Navigation_links() throws Throwable {
 		AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		
 		if (aquisitionhomepage != null) {
+			
 			aquisitionhomepage.validateSubNavShopPlanLinks();
 		} else {
 			Assert.fail("Home Page not Loading");

@@ -362,12 +362,14 @@ public class DCEACQNewRunnerMobile {
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetailsPage);
 	}
 
-//	LearnMore changes Start
+	// LearnMore changes Start
 	@Then("^the user clicks PrescriptionBenifit Tab on Plan Details Page$")
 	public void the_user_clicks_PrescriptionBenifit_Tab_on_Plan_Details_Page() throws Throwable {
-		PlanDetailsPageMobile plandetailspage = (PlanDetailsPageMobile) getLoginScenario()
+
+		PlanDetailsPage plandetailspage = (PlanDetailsPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
-		plandetailspage.clickPrescriptionBenifitTab();
+	
+		DrugDetailsPageMobile drugDetailsPage = plandetailspage.clickPrescriptionBenifitTab();
 	}
 
 	@Then("^the user clicks Learn More button on Prescription Drug Costs Tab on Plan Details Page$")
