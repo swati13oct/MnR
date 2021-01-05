@@ -861,4 +861,5 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth Prod
       | index | TID   | username | password  | MemUserName              | planType | memberType   |
       | 41    | xxxxx | kkumard  | tnps459#  | Patkeving                | TERM     | FED_BnC      |
       | 42    | xxxxx | kkumard  | tnps459#  | erbenoit56               | TERM     | PDP_FED_BnC  |
-      | 43    | xxxxx | kkumard  | tnps459#  | SWHITE33436              | TERM     | PCP_FED_BnC  |      
+     # unable to search user 
+     # | 43    | xxxxx | kkumard  | tnps459#  | SWHITE33436              | TERM     | PCP_FED_BnC  |      
