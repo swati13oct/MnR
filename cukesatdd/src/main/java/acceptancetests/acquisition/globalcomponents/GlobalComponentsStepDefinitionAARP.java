@@ -357,24 +357,24 @@ public class GlobalComponentsStepDefinitionAARP {
 		}
 	}
 
-	@Then("^the user validates TFN on page$") 
-	public void the_user_validates_TFN_on_page(DataTable givenAttributes) throws Throwable {
-		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		Map<String, String> memberAttributesMap = new HashMap<String, String>();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}
-		String tfnXpath = memberAttributesMap.get("TFNxpath");
-		String tfnFlag = memberAttributesMap.get("TFNflag");
-
-		//EnterZipCodePage enterZipCodePage= new EnterZipCodePage(driver);
-		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
-				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		if(tfnFlag.equalsIgnoreCase("true")) {
-			aquisitionhomepage.validateTFNelement(tfnXpath);
-		}
-	}
+//	@Then("^the user validates TFN on page$") 
+//	public void the_user_validates_TFN_on_page(DataTable givenAttributes) throws Throwable {
+//		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+//		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+//		for (int i = 0; i < memberAttributesRow.size(); i++) {
+//			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+//					memberAttributesRow.get(i).getCells().get(1));
+//		}
+//		String tfnXpath = memberAttributesMap.get("TFNxpath");
+//		String tfnFlag = memberAttributesMap.get("TFNflag");
+//
+//		//EnterZipCodePage enterZipCodePage= new EnterZipCodePage(driver);
+//		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+//				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+//		if(tfnFlag.equalsIgnoreCase("true")) {
+//			aquisitionhomepage.validateTFNelement(tfnXpath);
+//		}
+//	}
 //	@Then("^the user validate ZipCode Components on page using ZipCode \"([^\"]*)\"$") 
 //	public void the_user_validate_ZipCode_Components_on_page_using_ZipCode(String zipCode) throws Throwable {
 //		//EnterZipCodePage enterZipCodePage= new EnterZipCodePage(driver);

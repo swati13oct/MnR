@@ -180,7 +180,7 @@ public class GlobalComponentsCommonStepDefinition {
 		}
 	}
 	
-	@Then("^the user validates TFN on the page$") 
+	@Then("^the user validates TFN on page$")
 	public void the_user_validates_TFN_on_page(DataTable givenAttributes) throws Throwable {
 		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
@@ -207,6 +207,8 @@ public class GlobalComponentsCommonStepDefinition {
 				EnterZipCodePage enterZipCodePage=aquisitionhomepage.enterZipCode();
 				enterZipCodePage.validateZipComp(zipCode);
 	}
+	
+	
 	
 	@Then("^the user enters and validate the fields and clicks on submit$")
 	public void the_user_enters_and_validate_the_fields_and_clicks_on_submit() throws Throwable {

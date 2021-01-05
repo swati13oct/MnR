@@ -12,11 +12,11 @@ import cucumber.api.CucumberOptions;
  */
 @RunWith(ExtendedCucumber.class)
 @ExtendedCucumberOptions(retryCount=1,screenShotSize="", screenShotLocation="/screenshots/",
-jsonReport = "target/cucumber-RunMRATDDAcquisitionGlobalComponentsBlogPagesAARP.json",
+jsonReport = "target/cucumber-RunMRATDDAcquisitionGlobalComponentsBlogPagesAARP2.json",
 detailedReport = true, detailedAggregatedReport = true, overviewReport = true, toPDF = true, 
-outputFolder = "target/RunMRATDDAcquisitionGlobalComponentsBlogPagesAARP")
+outputFolder = "target/RunMRATDDAcquisitionGlobalComponentsBlogPagesAARP2")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.acquisition" }, features = { "src/main/resources/feature/acquisition/globalComponents" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionGlobalComponentsBlogPagesAARP.json" }, tags = { "@BlogPages2_GlobalCompsAARP" })
-public class RunMRATDDAcquisitionGlobalComponentsBlogPagesAARP {
-	
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionGlobalComponentsBlogPagesAARP2.json" }, tags = { "@BlogPages2_GlobalCompsAARP" })
+public class RunMRATDDAcquisitionGlobalComponentsBlogPagesAARP2 {
+
 }
