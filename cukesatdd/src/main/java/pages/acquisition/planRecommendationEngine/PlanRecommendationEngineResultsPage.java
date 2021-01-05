@@ -583,17 +583,26 @@ public class PlanRecommendationEngineResultsPage extends UhcDriver {
 			temp.selectByVisibleText("January 1");
 			threadsleep(2000);							//E2E: Added for the overlay to disappear after selecting a option
 			temp = new Select(MSPlanPartAYear);
-			temp.selectByVisibleText("2021");
+			temp.selectByVisibleText(nxtYear);
 			threadsleep(2000);							//E2E: Added for the overlay to disappear after selecting a option
 			temp = new Select(MSPlanPartBMonth);
 			temp.selectByVisibleText("January 1");
 			threadsleep(2000);							//E2E: Added for the overlay to disappear after selecting a option
 			temp = new Select(MSPlanPartBYear);
-			temp.selectByVisibleText("2021");
+			temp.selectByVisibleText(nxtYear);
 			threadsleep(2000);							//E2E: Added for the overlay to disappear after selecting a option
 			temp = new Select(MSPlanStartMonth);
-			temp.selectByVisibleText("January 1, 2021");
+			temp.selectByVisibleText("January 1, " + nxtYear);
 			jsClickNew(MSViewPlanButton);
+		}
+		
+		int Year = Integer.parseInt(getCurrentYear()) +1;
+		String nxtYear = Integer.toString(Year);
+		public String getCurrentYear() {
+			DateFormat dateFormat = new SimpleDateFormat("mm/dd/yyyy");
+			Date date = new Date();
+			String curDate = dateFormat.format(date);
+			return curDate.split("/")[2];
 		}
 
 		public void clickEnrolldesktop(WebElement enrollButton,WebElement needhelp) {
