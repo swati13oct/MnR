@@ -1,9 +1,9 @@
 @planAndDocuments @thePredators @regressionMember @E2E @feature-F368974
 Feature: 1.06.1 Member Plans and Documents - section: Plan Materials
 
-  Background: If run on stage then feature security flag needs to be true
-     Given feature security flag must set to true when testing on test env
-      | Feature           | UCPPlanDocuments |
+  #Background: If run on stage then feature security flag needs to be true
+  #   Given feature security flag must set to true when testing on test env
+  #    | Feature           | UCPPlanDocuments |
 
   #------------------------------------------
   @planAndDocuments02 @planMaterials

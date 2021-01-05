@@ -499,7 +499,7 @@ public class PlanDocApiResponse {
 						if (!isDuplicate(docCategory, annNotChgDoc_zh_curYr_docList))
 							annNotChgDoc_zh_curYr_docList.add(docObjMap);
 					}
-				} else if (docObj.getType().equals("5009")) {
+				} else if (docObj.getType().equals("7018")) {
 					String docCategory="CDI Long Notice (CA Only)";
 					docObjMap.put(docCategory, docObj);
 					if (docObj.getLanguage().equals("en_us")) {
@@ -989,7 +989,7 @@ public class PlanDocApiResponse {
 						if (!isDuplicate(docCategory, annNotChgDoc_zh_nxtYr_docList))
 							annNotChgDoc_zh_nxtYr_docList.add(docObjMap);
 					}
-				} else if (docObj.getType().equals("5009")) {
+				} else if (docObj.getType().equals("7018")) {
 					String docCategory="CDI Long Notice (CA Only)";
 					docObjMap.put(docCategory, docObj);
 					if (docObj.getLanguage().equals("en_us")) {

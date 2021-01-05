@@ -321,7 +321,13 @@ public class PlanDocumentsAndResourcesStepDefinition {
 			testInputInfoMap.put("validateApi",String.valueOf(validateApi));
 
 			sectionNote=planDocumentsAndResourcesPage.validateDocOnUi(testInputInfoMap, expDocList, sectionNote, api_planDocMap);
-			sectionNote.add("PASSED - "+language+" documents UI validation");
+			if (sectionNote.get(0).contains("UI VALIDATOIN FAILED")) {
+				sectionNote.add("FAILED - "+language+" documents UI validation");
+				finalCheck=false;
+				problemText=problemText+"FAILED - "+language+" documents UI validation | ";
+			} else {
+				sectionNote.add("PASSED - "+language+" documents UI validation");
+			}
 			if (sectionNote.get(0).contains("API VALIDATOIN PASSED")) {
 				sectionNote.add("PASSED - "+language+" documents API validation");
 
@@ -352,7 +358,13 @@ public class PlanDocumentsAndResourcesStepDefinition {
 			testInputInfoMap.put("validateApi",String.valueOf(validateApi));
 
 			sectionNote=planDocumentsAndResourcesPage.validateDocOnUi(testInputInfoMap, expDocList, sectionNote, api_planDocMap);
-			sectionNote.add("PASSED - "+language+" documents UI validation");
+			if (sectionNote.get(0).contains("UI VALIDATOIN FAILED")) {
+				sectionNote.add("FAILED - "+language+" documents UI validation");
+				finalCheck=false;
+				problemText=problemText+"FAILED - "+language+" documents UI validation | ";
+			} else {
+				sectionNote.add("PASSED - "+language+" documents UI validation");
+			}
 			if (sectionNote.get(0).contains("API VALIDATOIN PASSED")) {
 				sectionNote.add("PASSED - "+language+" documents API validation");
 
@@ -381,7 +393,13 @@ public class PlanDocumentsAndResourcesStepDefinition {
 			testInputInfoMap.put("validateApi",String.valueOf(validateApi));
 
 			sectionNote=planDocumentsAndResourcesPage.validateDocOnUi(testInputInfoMap, expDocList, sectionNote, api_planDocMap);
-			sectionNote.add("PASSED - "+language+" documents UI validation");
+			if (sectionNote.get(0).contains("UI VALIDATOIN FAILED")) {
+				sectionNote.add("FAILED - "+language+" documents UI validation");
+				finalCheck=false;
+				problemText=problemText+"FAILED - "+language+" documents UI validation | ";
+			} else {
+				sectionNote.add("PASSED - "+language+" documents UI validation");
+			}
 			if (sectionNote.get(0).contains("API VALIDATOIN PASSED")) {
 				sectionNote.add("PASSED - "+language+" documents API validation");
 

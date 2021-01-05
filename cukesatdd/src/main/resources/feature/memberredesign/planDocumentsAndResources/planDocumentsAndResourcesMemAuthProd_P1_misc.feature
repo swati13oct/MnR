@@ -110,7 +110,8 @@ Feature: 1.06.2.2 Member Plans and Documents - section: header -and- My Document
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | md_sd | eob_sd | eob_m | eob_d | rm_sd |
       | 18-018 | 15131,15233 | kkumard  | tnps459#  | DKELLY27    | SSP      | COMBO_GROUP_EFF_PDnR  | true  | false  | false | false | false |
-
+	### note: use villarba if DKELLY27 stop working
+	
 	@prod_active_ship
 	Examples: 
       | index  | TID         | username  | password  | MemUserName      | planType | memberType            | md_sd | eob_sd | eob_m | eob_d | rm_sd |
