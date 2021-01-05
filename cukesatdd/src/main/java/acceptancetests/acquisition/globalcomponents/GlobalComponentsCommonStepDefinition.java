@@ -414,13 +414,13 @@ public class GlobalComponentsCommonStepDefinition {
 
 
 
-@Then("^the user validates whether sam call value is displayed on the page$")
-public void the_user_validates_whether_TFN_is_displayed_on_the_page() throws Throwable {
-	AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
-			.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-	aquisitionhomepage.validateCallSamValue();
+//@Then("^the user validates whether sam call value is displayed on the page$")
+//public void the_user_validates_whether_TFN_is_displayed_on_the_page() throws Throwable {
+//	AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+//			.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+//	aquisitionhomepage.validateCallSamValue();
 	
-}
+//}
 
 
 	  @When("^the user clicks on Medicare Advantage Plans Link$")
@@ -488,8 +488,7 @@ public void the_user_clicks_on_Back_to_top_Link() throws Throwable {
 			
 			LearnAboutMedicareHomePage learnAboutMedicareHomePage= (LearnAboutMedicareHomePage)getLoginScenario() .getBean(PageConstants.LEARN_ABOUT_MEDICARE_PAGE);
 			  learnAboutMedicareHomePage.checkInnerPageLinks(pageName);
-		  
-	  }
+		  	  }
 	  
 	  @Then ("^user clicks on Medicare Annual Enrollment Period Link and comes back$")
 	  public void user_clicks_on_Medicare_Annual_Enrollment_Period_Link() {
@@ -807,7 +806,6 @@ public void the_user_clicks_on_Back_to_top_Link() throws Throwable {
 	  }
 	 
 
-	 
 	  
 }
 

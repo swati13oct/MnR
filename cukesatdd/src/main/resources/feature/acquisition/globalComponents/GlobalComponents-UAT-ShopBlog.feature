@@ -81,7 +81,20 @@ Feature: 1.13 UAT - Shop Blog Pages flows
    |E2E Scenario 5_UMS  |UHC	 | shop/compare.html                                 | ShopPlan: Compare      | https://www.myuhcagent.com/|(//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[1] | true   |
    |E2E Scenario 5_UMS  |UHC   | enroll/ms-apply.html                              | ShopPlan: MS Enrollment    | https://www.myuhcagent.com/| (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[1] | true   |
   
-   
+  @ShopPages_Shop7_GlobalCompsAARP # with need help section
+   Examples: 
+   |Scenario            |site   |path                                                   | pageName            |UHCUrl|tfnXpath                                     | tfnFlag | 
+   |E2E Scenario 2_AMP	|AARP  | shop/medicare-advantage-plans.html               | ShopPlan: Shop MA Plan       |  https://www.myuhcagent.com/| (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[1] | true   |
+   |E2E Scenario 5_AMP	|AARP  | shop/compare.html                                 | ShopPlan: Compare      | https://www.myuhcagent.com/|(//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[1] | true   |
+   |E2E Scenario 4_AMP	|AARP 	| enroll.html                                      | ShopPlan: Enroll             |  https://www.myuhcagent.com/| (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[1] | true   |
+   |E2E Scenario 4_AMP   |AARP	| shop.html                            | ShopPlan: Shop Hub           | https://www.myuhcagent.com/| (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[1] | true   |
+   |E2E Scenario 4_AMP   |AARP	| shop/medicare-supplement-plans.html  | ShopPlan: Shop Med Supp Plan | https://www.myuhcagent.com/| (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[1] | true   |
+   |E2E Scenario 4_AMP   |AARP	| shop/prescription-drug-plans.html    | ShopPlan: Shop PDP Plan      | https://www.myuhcagent.com/| (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[1] | true   |
+   |E2E Scenario 4_AMP   |AARP	| shop/dual-special-needs-plans.html   | ShopPlan: Shop DSNP Plan     | https://www.myuhcagent.com/| (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[1] | true   |
+   |E2E Scenario 5_AMP  |AARP   | shop/estimate.html                   | Estimate   | https://www.myuhcagent.com/| (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[1] | true   |
+    
+    
+    
   @GlobalComponentsAARPBlogPages  
   Scenario Outline: <Scenario>- To verify Global Components for the page mentioned of AARP site <pageName> : <path>: <tfnXpath>
     Given the user is on medicare acquisition site landing page
