@@ -88,7 +88,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 	@FindBy(xpath = "//div[@class='overview-tabs module-tabs-tabs']/div[4]/div/span/span[@class='ng-binding']")
 	private WebElement snpPlansNumber;
 
-	@FindBy(xpath = "//div[contains(@class,'module-tabs-tabs')]/div[not (contains(@class,'active'))]//span[@id='maviewplans']/following-sibling::a")
+	@FindBy(xpath = "//*[@id=\"globalContentIdForSkipLink\"]/div/div[1]/div/div/div/div[2]/div[1]/div[1]/div/div[1]/div[2]/div/div[3]/div[1]/div/a")
 	private WebElement maPlansViewLink;
 
 	@FindBy(xpath = "//*[contains(@class,'module-tabs-tabs')]/*[not (contains(@class,'active'))]//*[contains(@dtmname,'SNP')]/following-sibling::a")
@@ -1033,6 +1033,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 		} else if (planType.equalsIgnoreCase("MA") || planType.equalsIgnoreCase("MAPD")) {
 			int maPlans = Integer.valueOf(maPlansCount.getText().trim().replace(" Plans", ""));
 			if (maPlans == 0) {
+				scrollToView(maPlansViewLink);
 				jsClickNew(maPlansViewLink);
 				sleepBySec(2);
 				validateNew(planListContainer, 30);
@@ -3689,29 +3690,33 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 	@FindBy(css = "#doctorsAlertTitle")
 	private WebElement IsMyDoctorCovereredBanner;
 
+	@FindBy(css = "#drugCostAlertTitle")
+	private WebElement HowMuchDrugCostBanner;
+
 	public void handlePlanYearSelectionPopup(String planYear) {
 
-		// CommonUtility.checkPageIsReadyNew(driver);
-		// waitforElementVisibilityInTime(CurrentYearPlansBtn, 10);
-		// scrollToView(CurrentYearPlansBtn);
-		// if (planYear.equalsIgnoreCase("current")) { // if the scenario is for current
-		// year
-		// if (validate(CurrentYearPlansBtn, 20)) {
-		// System.out.println("*****CLICKING ON Current Year button*****: " +
-		// CurrentYearPlansBtn.getText());
-		// jsClickNew(CurrentYearPlansBtn);
-		// waitforElement(currentYearSelection);
-		//
-		// } else {
-		// scrollToView(nextYearSelection);
-		// jsClickNew(nextYearSelection);
-		// }
-		// }
-
 		CommonUtility.checkPageIsReadyNew(driver);
-		scrollToView(IsMyDoctorCovereredBanner);
-		validateNew(IsMyDoctorCovereredBanner);
-		System.out.println("**** Select Plan year tabs removed as new year started  ****");
+
+		if (planYear.equalsIgnoreCase("current")) { // if the scenario is for current year
+			if (validate(IsMyDoctorCovereredBanner, 20)) {
+				System.out.println("***** Doctor banner verified ******");
+
+			}else {
+				validate(HowMuchDrugCostBanner, 10);
+				System.out.println("***** Drug cost banner verified ******");
+			}
+		}
+
+		// Use this code next year 2022
+
+		// if(planYear.equalsIgnoreCase("current")) { // if the scenario is for current
+		// year
+		// if(validate(CurrentYearPlansBtn, 20)) {
+		// System.out.println("*****CLICKING ON Current Year button*****:
+		// "+CurrentYearPlansBtn.getText());
+		// jsClickNew(CurrentYearPlansBtn);
+		// }
+		// }
 
 	}
 
@@ -4888,7 +4893,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 
 		} else if (planType.equalsIgnoreCase("PDP")) {
 			WebElement PDPmoreDetailsLink = driver.findElement(By.xpath("//*[contains(text(), '" + planName
-					+ "')]/ancestor::div[contains(@class,'module-plan-overview')]//*[contains(@id,'viewmoredetlinkpdp')]"));
+                    + "')]/ancestor::div[contains(@class,'module-plan-overview')]//*[contains(@id,'viewmoredetlinkpdp')]"));
 			// CommonUtility.waitForPageLoadNew(driver, PDPmoreDetailsLink, 30);
 			mobileswipeHorizantal("50", true);
 			scrollToView(PDPmoreDetailsLink);

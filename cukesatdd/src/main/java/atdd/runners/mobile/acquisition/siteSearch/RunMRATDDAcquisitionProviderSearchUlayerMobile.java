@@ -16,7 +16,9 @@ import cucumber.api.CucumberOptions;
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.mobile" }, features = { "src/main/resources/feature/mobile/acquisition/providersearch" }, 
 plugin = {
 		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionProviderSearchUlayerMobile.json" }, 
-tags = { "@AcqRegressionProviderSearchUlayer" }, dryRun=false)
+tags = { "@stage" }, dryRun=false)
 public class RunMRATDDAcquisitionProviderSearchUlayerMobile { 
  
 }
+
+//"@AcqRegressionProviderSearchUlayer"

@@ -10,15 +10,15 @@ import com.github.mkolisnyk.cucumber.runner.ExtendedCucumberOptions;
 import cucumber.api.CucumberOptions;
 
 /**
- * this file is to run test cases for RunMRATDDAcqDCEDetailsPageAARPMobile - Scenario for VPP Page
+ * this file is to run test cases for RunMRATDDAcquisitionDCEDetailsPageAARPMobile - Scenario for VPP Page
  */
 @RunWith(ExtendedCucumber.class)
 @ExtendedCucumberOptions(retryCount=1,screenShotSize="", screenShotLocation="/screenshots/",
-jsonReport = "target/cucumber-RunMRATDDAcqDCEDetailsPageAARPMobile.json",detailedReport = true,
- detailedAggregatedReport = true, overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDAcqDCEDetailsPageAARPMobile")
+jsonReport = "target/cucumber-RunMRATDDAcquisitionDCEDetailsPageAARPMobile.json",detailedReport = true,
+ detailedAggregatedReport = true, overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDAcquisitionDCEDetailsPageAARPMobile")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.mobile.acquisition" }, features = { "src/main/resources/feature/mobile/acquisition/dceredesign" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcqDCEDetailsPageAARPMobile.json" }, tags = { "@DCE_DrugDetailsValidation_AARP" },dryRun=false)
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionDCEDetailsPageAARPMobile.json" }, tags = { "@DCE_DrugDetailsValidation_AARP" },dryRun=false)
 
-public class RunMRATDDAcqDCEDetailsPageAARPMobile {
+public class RunMRATDDAcquisitionDCEDetailsPageAARPMobile {
 //,@DCE_DrugDetailsValidation_AARP, @DCE_DrugDetailsPremiumValidation_AARP
 }

@@ -110,7 +110,7 @@ public class ProviderSearchPageMobile extends UhcDriver {
 	@FindBy(xpath = "(//*[contains(@class,'searchData')]//*[contains(@data-test-id,'provider-name-link')])[2]")
 	private WebElement PrimaryCarePhysician;
 
-	@FindBy(xpath = "//*[contains(@class,'action-btn negative print')]")
+	@FindBy(xpath = "//*[@id=\"savedProviders\"]/div[2]/div[2]/div[2]/a/span")
 	private WebElement PrintEmailBtn;
 
 	@FindBy(xpath = "//span[contains(@ng-switch-when, 'false') and (text()='Save')]")
@@ -125,7 +125,7 @@ public class ProviderSearchPageMobile extends UhcDriver {
 	@FindBy(xpath = "//*[contains(text(),'Close')]")
 	private WebElement BtnClose;
 
-	@FindBy(xpath = "//*[contains(@class,'provider-name')]")
+	@FindBy(xpath = "//*[@id=\"savedProviders\"]/div[2]/div[1]/div/div/div/div[2]/div[2]/h2/a")
 	private WebElement providerNameText;
 
 	@FindBy(xpath = "//ul[contains(@class,'gs-options')]/li//div[contains(@class,'img')][contains(@src,'next')]")
@@ -436,6 +436,7 @@ public class ProviderSearchPageMobile extends UhcDriver {
 		if (validate(EditSavedButton)) {
 			ViewSavedProvidersLink.click();
 		}
+		scrollToView(providerNameText);
 		validateNew(providerNameText);
 		validateNew(PrintEmailBtn);
 

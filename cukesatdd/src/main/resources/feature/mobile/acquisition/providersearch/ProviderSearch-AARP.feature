@@ -32,46 +32,46 @@ Feature: 1.07 .ACQ- Provider Search Flow in AARP
     When user selects a provider and saves it
 
     Examples: 
-      | zipcode | planname                             | year     |
+      | zipcode | planname                             | year    |
       |   10001 | AARP Medicare Advantage Plan 2 (HMO) | current |
 
-  @ProviderSearchFromGlobalHeaderUlayer1 
+  @ProviderSearchFromGlobalHeaderUlayer1
   Scenario Outline: Verify Provider Search plan count in AARP site from Global Header -plan count-<plancount>
     Given the user is on AARP medicare acquisition site landing page
     When the user clicks on Provider Search on the global header
     When the user enters the zipcode and counts the plan Ulayer
       | Zip Code  | <zipcode>   |
       | Plancount | <plancount> |
-      | Year      | <year>     |
+      | Year      | <year>      |
 
     @AcqRegressionProviderSearchUlayer
     Examples: 
-      | zipcode | plancount | year|
-      |   10001 |        12 |current|
-      
-    Examples: 
-      | zipcode | plancount |year|
-      |   55344 |         7 |current|
-      |   04011 |         6 |current|
+      | zipcode | plancount | year    |
+      |   10001 |        12 | current |
 
-  @ProviderSearchFromWidgetUlayer 
-  Scenario Outline: Verify Provider Search plan count in AARP site from Home Page 
+    Examples: 
+      | zipcode | plancount | year    |
+      |   55344 |         7 | current |
+      |   04011 |         6 | current |
+
+  @ProviderSearchFromWidgetUlayer
+  Scenario Outline: Verify Provider Search plan count in AARP site from Home Page
     Given the user is on AARP medicare acquisition site landing page
     When the user clicks on Provider Search on the Home Page
     When the user enters the zipcode and counts the plan Ulayer
       | Zip Code  | <zipcode>   |
       | Plancount | <plancount> |
-      | Year      | <year>     |
+      | Year      | <year>      |
 
-	@AcqRegressionProviderSearchUlayer
+    @AcqRegressionProviderSearchUlayer
     Examples: 
-      | zipcode | plancount | year|
-      |   10001 |        12 |current|
-      
+      | zipcode | plancount | year    |
+      |   10001 |        12 | current |
+
     Examples: 
-      | zipcode | plancount | year|
-      |   55344 |         7 |current|
-      |   04011 |         6 |current|
+      | zipcode | plancount | year    |
+      |   55344 |         7 | current |
+      |   04011 |         6 | current |
 
   @ProviderSearchFromVppPlanSummaryPageUlayer @prodRegression @OnlyProd
   Scenario Outline: Verify Provider Search  in AARP site from plan summary page
@@ -83,29 +83,30 @@ Feature: 1.07 .ACQ- Provider Search Flow in AARP
     And the user views the plans of the below plan type in AARP site
       | Plan Type | <plantype> |
     And the user selects plan year for the AARP site
-    	|Plan Year	| <planyear>|
+      | Plan Year | <planyear> |
     When the user Click on Is my Provider covered link Ulayer
       | PlanName | <planname> |
     When user selects a provider and retuns to VPP page in ulayer
     Then Verify X out of Y provider covered information is displayed on Plan Summary page Ulayer
       | PlanName | <planname> |
-	Then Verify provider name is displayed on Plan Summary page Ulayer
+    Then Verify provider name is displayed on Plan Summary page Ulayer
       | PlanName | <planname> |
-    Examples: 
-      | zipcode | isMultutiCounty | county          | plantype | planname                             |planyear|
-      |   10001 | NO              | New York County | MAPD     | AARP Medicare Advantage Plan 2 (HMO) |current|
 
-  @ProviderSearchFromVppPlanDetailsPageUlayer @AcqRegressionProviderSearchUlayer @prodRegression @OnlyProd
+    Examples: 
+      | zipcode | isMultutiCounty | county          | plantype | planname                             | planyear |
+      |   10001 | NO              | New York County | MAPD     | AARP Medicare Advantage Plan 2 (HMO) | current  |
+
+  @ProviderSearchFromVppPlanDetailsPageUlayer @AcqRegressionProviderSearchUlayer @prodRegression @OnlyProd @stage
   Scenario Outline: Verify Provider Search  in AARP site from Plan Details page
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site
       | Zip Code        | <zipcode>         |
       | County Name     | <county>          |
       | Is Multi County | <isMultutiCounty> |
-   And the user views the plans of the below plan type in AARP site
+    And the user views the plans of the below plan type in AARP site
       | Plan Type | <plantype> |
     And the user selects plan year for the AARP site
-    	|Plan Year	| <planyear>|
+      | Plan Year | <planyear> |
     Then the user navigates to the plan Details page
       | Plan Name | <planName> |
     Then the user Click on Look up your Provider button
@@ -113,8 +114,8 @@ Feature: 1.07 .ACQ- Provider Search Flow in AARP
     Then Verify X out of Y provider covered information is displayed on Plan Details page Ulayer
 
     Examples: 
-      | zipcode | isMultutiCounty | county          | plantype | planName                                |planyear|
-      |   10001 | NO              | New York County | MA       | AARP Medicare Advantage Essential (HMO) |current|
+      | zipcode | isMultutiCounty | county          | plantype | planName                             | planyear |
+      |   10001 | NO              | New York County | MA       | AARP Medicare Advantage Plan 2 (HMO) | current  |
 
   @ProviderSearchFromHomePageUlayer @AcqRegressionProviderSearchUlayer @ProviderSearchFromHomePageNextYrUlayerSmoke @prodRegression @OnlyProd
   Scenario Outline: Verify Provider Search  in AARP site from Home Page
