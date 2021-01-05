@@ -630,19 +630,19 @@ public class PaymentHistoryPage extends UhcDriver {
 	@FindBy(xpath = "//div[@id='monthly-premium-1']//a[contains(text(),'Close')]")
 	private WebElement MonthlyPremiumtCloseBtnShip;
 
-	@FindBy(xpath = "(//button[contains(text(),'Learn about ways to pay ')])[2]")
+	@FindBy(xpath = "(//button[contains(text(),'Learn about ways to pay ')])[1]")
 	private WebElement Learnaboutwaystopaylink;
 
 	@FindBy(xpath = "(//button[contains(text(),'Learn about ways to pay ')])[3]")
 	private WebElement LearnaboutwaystopaylinkShip;
 	
-	@FindBy(xpath = "//div[@id='ways-to-pay-content-1']")
+	@FindBy(xpath = "//div[@id='ways-to-pay-content-0']")
 	private WebElement LearnaboutwaystopayToolTip;
 	
 	@FindBy(xpath = "//div[@id='ways-to-pay-content-2']")
 	private WebElement LearnaboutwaystopayToolTipShip;
 
-	@FindBy(xpath = "//div[@id='ways-to-pay-content-1']//a[@class='link link--icon-right link--icon-circled align-right moreInfocloseIcon'][contains(text(),'Close')]")
+	@FindBy(xpath = "//div[@id='ways-to-pay-content-0']//a[@class='link link--icon-right link--icon-circled align-right moreInfocloseIcon'][contains(text(),'Close')]")
 	private WebElement LearnaboutwaystopayCloseBtn;
 	
 	@FindBy(xpath = "//div[@id='ways-to-pay-content-2']//a[@class='link link--icon-right link--icon-circled align-right moreInfocloseIcon'][contains(text(),'Close')]")
@@ -2326,19 +2326,23 @@ public class PaymentHistoryPage extends UhcDriver {
 
 public void overdueflag() {
 
-		String amount = totalAmountDue.getText();
-		String amountdue = amount.substring(amount.indexOf("$") + 1, amount.indexOf("."));
-		System.out.println("Total due amount is "+amountdue);
-		 if(Integer.parseInt(amountdue)!=0) {
-			 Assert.assertTrue("Total amount due value is non-zero", true);
-			 System.out.println("Total amount due value is non-zero");
-		 }
-		if(overdueFlag.isDisplayed()) {
-	Assert.assertTrue("overdue Flag is displaying", overdueFlag.isDisplayed());
-		}
-		else {
-			Assert.fail("OverpaymentCreditFlag and verbiage is not displaying");
-		}
+	String amount = totalAmountDue.getText();
+	String amountdue = amount.substring(amount.indexOf("$") + 1, amount.indexOf("."));
+	amountdue = amountdue.replace(",", "");
+	System.out.println("Total due amount is "+amountdue);
+	 if(Integer.parseInt(amountdue)!=0) {
+		 Assert.assertTrue("Total amount due value is non-zero", true);
+		 System.out.println("Total amount due value is non-zero");
+	 }
+	if(overdueFlag.isDisplayed()) {
+Assert.assertTrue("overdue Flag is displaying", overdueFlag.isDisplayed());
+	}
+	else {
+		Assert.fail("OverpaymentCreditFlag and verbiage is not displaying");
+	
+} 
+
+		
 	} 
 
 public void paidInFullFlag() {
@@ -2505,7 +2509,8 @@ try {
 public void billingPaymentHistorytoolTipsValidation(String userType) throws InterruptedException {
 	Thread.sleep(5000);
 	TestHarness.checkForIPerceptionModel(driver);
-	
+	try {
+		
 	if(userType.equalsIgnoreCase("Federal")) {
 	System.out.println("Validate Learn Moreh About Ways To Pay pop-up");
 	if(Learnaboutwaystopaylink.isDisplayed()) {
@@ -2606,7 +2611,12 @@ public void billingPaymentHistorytoolTipsValidation(String userType) throws Inte
 		System.err.println("Learn More About Your Payment History popup is failing"); 
 		Assert.fail("Learn More About Your Payment History popup is failing");
 
-	}}
+	}
+	
+	}} catch (Exception e) {
+System.out.println("Ccatch block run");
+
+	}
 
 }
 public PaymentHistoryPage verifyBillingAndPaymentHistoryDisabled() throws InterruptedException {
