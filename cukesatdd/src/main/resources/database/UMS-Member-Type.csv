@@ -649,3 +649,5 @@ q3_sep_UAT4_UHC017/Password@1,MAPD,MAPD_Individual,,,
 q3_sep_UAT4_AARP057/Password@1,PDP,PDP_Individual,,,
 q3_sep_UAT4_Group175/Password@1,PDP,PDP_Group,,,
 q3_sep_UAT4_Group050/Password@1,MAPD,MAPD_Group,,,
+q3_sep_aarp0272/Password@1,TERM,PDP_FED_BnC
+Pre-effectiveMAPD001/Password@1,TERM,MAPD_FED_BnC

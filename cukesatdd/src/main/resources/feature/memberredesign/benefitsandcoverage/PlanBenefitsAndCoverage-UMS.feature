@@ -91,12 +91,13 @@ Feature: 1.01 Member  benefits and Coverage page
     And the user clicks on More Information link for ship
     Then the user validate Value Add Service page comes on clicking additional info button
     And the user validate vas tiles on vas page
-
+       | Plan Code | <planCode> | 
+	   | State Code | <stateCode> | 
     ### note: number of benefits tile may change if swap user
 	@bnc_Stage_sanity_ship 
     Examples: 
-      | index | TID   | planType | memberType        | language |  numberOfBenefitCards | Identifier           | count | rider   |
-      | 05    | 15094 | SHIP      | SHIP_BnC         | ENGLISH  |  7                    | EffectiveShipMedSupp |     3 | NoRider |
+      | index | TID   | planType | memberType        | language |  numberOfBenefitCards | Identifier           | count | rider   | planCode | stateCode |
+      | 05    | 15094 | SHIP      | SHIP_BnC         | ENGLISH  |  7                    | EffectiveShipMedSupp |     3 | NoRider | F01      |  AR       |
 
   #TC13_Benefits_for_MA_SSUP_MEDSUPMember
   @benefitsAndCoverage06 @BenefitsForMAMedsupSSUPMember @regression  @BnC_Part3_regressionMember
@@ -264,7 +265,7 @@ Feature: 1.01 Member  benefits and Coverage page
       | 13    | 15248 | PDP      | PDPLIS_BnC | LIS 3         | Summary of Benefits | Evidence of Coverage | Comprehensive Formulary         | Alternative Drug List | Individual|
       
   #TC21_PDP_LIS(3,4)- Retail Drug Cost Table
-  @benefitsAndCoverage12  @PDPLIS3member @BnC_Part6_regressionMember  
+   @PDPLIS3member  
   Scenario Outline: Index: <index> -TID: <TID> -plan: <planType> -memberType: <memberType> - Verify Group LIS 3/4 on Benefits and Coverage page
     Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>      |
@@ -780,5 +781,7 @@ Feature: 1.01 Member  benefits and Coverage page
     Examples: 
       | index | TID   | planType | memberType   |
       | 41    | xxxxx | TERM     | FED_BnC      |
+      | 42    | xxxxx | TERM     | PDP_FED_BnC  |
+      | 43    | xxxxx | TERM     | MAPD_FED_BnC | 
       
  ###############################Regression Scenarios END Here ########################################
