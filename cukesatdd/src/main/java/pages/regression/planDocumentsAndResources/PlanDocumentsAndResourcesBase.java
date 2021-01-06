@@ -801,17 +801,17 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 		for(String expDocName: expDocList) {
 			Boolean knownIssue=false;
 			String knownIssueMsg="";
-			if (expDocName.equals("Additional Drug Coverage") && memberType.contains("GROUP") && section.equals("Plan Materials")) { 
-				knownIssue=true;
-				knownIssueMsg="KNOWN ISSUE - Incident ticket: xyz";
-			}
+			//tbd if (expDocName.equals("Additional Drug Coverage") && memberType.contains("GROUP") && section.equals("Plan Materials")) { 
+			//tbd 	knownIssue=true;
+			//tbd 	knownIssueMsg="KNOWN ISSUE - Incident ticket: INC19574472";
+			//tbd }
 			if ((expDocName.equals("Your Plan Getting Started")
 					||expDocName.equals("Privacy Notice")
 					||expDocName.equals("CDI Long Notice")
 				)
 					&& planType.contains("SSP") && section.equals("Plan Materials")) { 
 				knownIssue=true;
-				knownIssueMsg="KNOWN ISSUE - Incident ticket: xyz";
+				knownIssueMsg="KNOWN ISSUE - Incident ticket: INC19574472";
 			}
 
 			System.out.println("************************************************************");
@@ -819,18 +819,22 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 			HashMap<String, Document> act_doc=validateDoc(testInputInfoMap, expDocName);
 			if (!(act_doc!=null ||!expDocDisplay)
 				&&  knownIssue				) { 
-				//note: MAPD GROUP and PDP GROUP are exhibiting the issue for Additional Drug Coverage PDF
-				//note: SSUP is exhibiting the issue for Your Plan Getting Started PDF
-				//Assert.assertTrue("PROBLEM - "+knownIssueMsg+" - unable to locate doc='"+expDocName+"'", act_doc!=null || !expDocDisplay);
 				sectionNote_tmp.add("  * FAILED - "+knownIssueMsg+" - unable to locate doc='"+expDocName+"' on UI");
 			} else {
 				//note: when the incident ticket is fixed, the if condition can be removed and only keep this line of code for validation
 				Assert.assertTrue("PROBLEM - unable to locate doc='"+expDocName+"'", act_doc!=null || !expDocDisplay);
 			}
-			//tbd if (expDocName.equals("Additional Drug Coverage") && memberType.contains("GROUP")) 
-			//tbd sectionNote.add("  PASSED - document '"+expDocName+"' validation UI vs expected list");
 			act_docListFromUi.add(act_doc);
 		}
+
+		for (String s: sectionNote_tmp) {
+			if (s.contains("FAILED")) {
+				sectionNote.addAll(sectionNote_tmp);
+				sectionNote.add(0, "UI VALIDATOIN FAILED");
+				return sectionNote; //note: no point of continuing, get out of here now
+			}
+		}
+		
 		//note: if validateApi==false, then we are all done at this point for this validation
 		//---------------------------------------
 		//note: this section will only invoke if step definition decide to validate API also
@@ -900,13 +904,6 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 				}
 			}
 
-			for (String s: sectionNote_tmp) {
-				if (s.contains("FAILED")) {
-					sectionNote_tmp.add(0, "UI VALIDATOIN FAILED");
-					sectionNote.addAll(sectionNote_tmp);
-					return sectionNote; //note: no point of continuing, get out of here now
-				}
-			}
 			List<String> docList_noteList=compareUiApiDocList(testInputInfoMap, act_docListFromUi, exp_docListFromApi, anocFlag, expDocDisplay, checkDestUrl);
 			//note: fix up the note and send it back up level to take care of the validation
 			if (docList_noteList.get(0).equals("API VALIDATOIN PASSED")) {

@@ -330,7 +330,6 @@ public class PlanDocumentsAndResourcesStepDefinition {
 			}
 			if (sectionNote.get(0).contains("API VALIDATOIN PASSED")) {
 				sectionNote.add("PASSED - "+language+" documents API validation");
-
 			} else if (sectionNote.get(0).contains("API VALIDATOIN FAILED")) {
 				sectionNote.add("FAILED - "+language+" documents API validation");
 				finalCheck=false;
