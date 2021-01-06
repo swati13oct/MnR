@@ -95,12 +95,12 @@ Feature: 1.04.2.1 To Test DREAM EOB for Members - E2E - Member Auth
     @memAuth_dreamEob01e_maCosmos 
     Examples: 
       | index | username  | password  | MemUserName             | planType | memberType        | note                              | flagZeroEob |
-      | 05    | qavgogine | qavgogine | q3_sep_UAT4_Group131    | MA       | COSMOS_DEOB       | old C                             | false       |
+      | 05    | qavgogine | qavgogine | q1_grp_apr256           | MA       | COSMOS_DEOB       | old C                             | false       |
 
     @memAuth_dreamEob01f_maNice 
     Examples: 
       | index | username  | password  | MemUserName             | planType | memberType        | note                              | flagZeroEob |
-      | 06    | qavgogine | qavgogine | Dream_EOB_MA_009        | MA       | MA_NICE_DEOB      | 1 new C, 1 old C                  | true        |
+      | 06    | qavgogine | qavgogine | q1_feb_Rx_006           | MA       | MA_NICE_DEOB      | 1 new C, 1 old C                  | false       |
 
     @memAuth_dreamEob01g_pdpComboShipFed
     Examples: 
