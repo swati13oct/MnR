@@ -133,15 +133,7 @@ public class OLEconfirmationPage extends UhcDriver{
 		return false;
 	}
 
-	//THE FIELDS COMMENTED AS 29/12 ARE NOT PRESENT IN DETAILS MAP
-	/*BELOW FIELDS ARE RETURNED BY GPS QUERY BUT NOT PRESENT IN DETAILS MAP
-	LANGUAGE_PREFERENCE 
-	SSN
-	MEDICAID_IND 
-	ESRD_IND 
-	PAYMENT_METHOD 
-	DENTAL_PLATINUM */
-
+	
 	public Map<String, String> retrieve_GPS_data(String confirmation_no) {
 	  	   Connection connection = createDataBaseConnection();
 		   ResultSet rs = null;
@@ -156,8 +148,8 @@ public class OLEconfirmationPage extends UhcDriver{
 				   //Personal Information
 				   String firstName = rs.getString("FIRST_NAME");
 				   gpsData.put("First Name", firstName);
-				   //String middleInitial = rs.getString("MIDDLE_INITIAL"); 29/12
-				   //gpsData.put("MiddleInitial", middleInitial); 29/12
+				   String middleInitial = rs.getString("MIDDLE_INITIAL");
+				   gpsData.put("MiddleInitial", middleInitial);
 				   String lastName = rs.getString("LAST_NAME");
 				   gpsData.put("Last Name", lastName);
 				   String doB = rs.getString("DATE_OF_BIRTH");
@@ -171,11 +163,11 @@ public class OLEconfirmationPage extends UhcDriver{
 				   //Primary Address
 				   String address1 = rs.getString("ADDRESS_LINE_1");
 				   gpsData.put("Perm_Street", address1);
-				   //String address2 = rs.getString("ADDRESS_LINE_2"); 29/12 TODO-Need to check if this field is passed through examples
-				   //gpsData.put("Perm_Apartment", address2);
+				   String address2 = rs.getString("ADDRESS_LINE_2");
+				   gpsData.put("Perm_Apartment", address2);
 				   String city = rs.getString("CITY");
 				   gpsData.put("Perm_city", city);
-				   //String state = rs.getString("STATE_CD"); 29/12
+				   //String state = rs.getString("STATE_CD"); 29/12 ++
 				   //gpsData.put("State", state);
 				   String zipCode = rs.getString("ZIP_CD");
 				   gpsData.put("Zip Code", zipCode );
@@ -200,9 +192,11 @@ public class OLEconfirmationPage extends UhcDriver{
 				   
 				   //Email
 				   String email = rs.getString("EMAIL");
-				   gpsData.put("Home Number", email);
+				   gpsData.put("Email", email);
 				   String paperless = rs.getString("PAPERLESS_PREFERENCE_IND");
 				   gpsData.put("Paperless Delivery", paperless);
+				   String language = rs.getString("LANGUAGE_PREFERENCE");
+				   gpsData.put("Language", language);
 				   				   
 				   //Medicare Information Page
 
@@ -211,7 +205,10 @@ public class OLEconfirmationPage extends UhcDriver{
 				   gpsData.put("Medicare Number", medicareNumber); 
 				   String medicaidNumber = rs.getString("MEDICAID_NUMBER");
 				   gpsData.put("Medicaid Number", medicaidNumber);
+				   String SSN = rs.getString("SSN");
+				   gpsData.put("SSN Number", SSN);
 
+				   
 				   //Other Health Insurance
 				   String healthInsurance= rs.getString("DO_YOU_HAVE_OTHER_HEALTH_INS");
 				   gpsData.put("Health Insurance", healthInsurance); 
@@ -223,9 +220,9 @@ public class OLEconfirmationPage extends UhcDriver{
 				   gpsData.put("Member Number", healthInsuranceID); 
 
 				   //Prescription Drug Coverage
-				   String secondaryCoverageName = rs.getString("SECONDARY_RX_COVERAGE_NAME");
+				   String secondaryCoverageName = rs.getString("PDCNAME");
 				   gpsData.put("Prescription Name", secondaryCoverageName); 
-				   String otherCoverageName = rs.getString("OTHER_RX_COVERAGE_NAME");
+				   String otherCoverageName = rs.getString("PDCNAME");
 				   gpsData.put("Prescription Name", otherCoverageName); 
 				   String secondaryGroup = rs.getString("SECONDARY_RX_GROUP");
 				   gpsData.put("PD Group Number", secondaryGroup); 
@@ -249,7 +246,7 @@ public class OLEconfirmationPage extends UhcDriver{
 				   String pcpName = rs.getString("PRIMARY_CARE_PHYSICIAN");
 				   gpsData.put("PCP Name", pcpName); 
 				   String pcpNumber = rs.getString("PRIMARY_CARE_PHYSICIAN_NUMBER");
-				   gpsData.put("PCP Number", pcpName); 
+				   gpsData.put("PCP Number", pcpNumber); 
 				   String pCPRecentlyVisited = rs.getString("CURRENTLY_A_PATIENT_OF_THE_PCP");
 				   gpsData.put("PCP Recently Visited", pCPRecentlyVisited);  
 
@@ -262,9 +259,13 @@ public class OLEconfirmationPage extends UhcDriver{
 				    //SEP Page 
 				   String note = rs.getString("NOTE");
 				   gpsData.put("Note", note); 
+				  
+				   //String dentalPlatinum = rs.getString("DENTAL_PLATINUM"); TODO:1/6-Check and update for which plan types ths value comes as Y and put logic to validate it
+				   //gpsData.put("Dental Platinum", dentalPlatinum);
 				   
-				   //String dentalPlatinum = rs.getString("DENTAL_PLATINUM"); 29/12 TODO-Need to check if this field is passed through examples
-				   //gpsData.put("Dental Platinum", dentalPlatinum);  
+				   String paymentMethod = rs.getString("PAYMENT_METHOD");
+				   gpsData.put("Payment Method", paymentMethod);
+
 				   
 				   //Authorization Page
 				   String authorizationFirstName = rs.getString("AUTHORIZED_REP_FIRST_NAME");
@@ -294,6 +295,13 @@ public class OLEconfirmationPage extends UhcDriver{
 				   
 				   String authZip = rs.getString("AUTHORIZED_REP_MAILING_ZIP_CD");
 				   gpsData.put("Auth Zip Display", authZip);
+				   
+				   String authRepInd = rs.getString("AUTHORIZED_REPRESENTATIVE_IND");
+				   gpsData.put("Auth Representative Indicator", authRepInd);
+				
+				   String authRepRelationship = rs.getString("AUTHORIZED_REP_RELATIONSHIP");
+				   gpsData.put("Authorization Relationship", authRepRelationship);
+				
 				
 				 //-----------Adding for CSNP----------------//
 				   String diabetes1 = rs.getString("ASMENT_DIAB1_DOC_INFORMED_DIAB");
@@ -320,15 +328,16 @@ public class OLEconfirmationPage extends UhcDriver{
 				   gpsData.put("Cardio Vascular Disorder Question 6", Cardiovascular6); 
 				   String chronicEnrollmentcheckbox = rs.getString("ASMENT_SIGN_PRESENCE_ENROLLEE");
 				   gpsData.put("Disclosure Checkbox", chronicEnrollmentcheckbox); 
-
+				   
+				   /*	
 				   String chronicillness = rs.getString("DO_YOU_HAVE_A_CHRONIC_ILLNESS");
-				   gpsData.put("Disclosure Checkbox", chronicillness); 
+				   gpsData.put("Disclosure Checkbox", chronicillness); */
 				   String chronicphysician = rs.getString("CHRONIC_PHYSICIAN_NAME");
 				   gpsData.put("Disclosure Provider Name", chronicphysician); 
 				   String chronicphysicianPhoneNumber = rs.getString("CHRONIC_PHYSICIAN_PHONE_NUM");
 				   gpsData.put("Disclosure Provider PhoneNumber", chronicphysicianPhoneNumber); 
 				   String chronicphysicianAddress = rs.getString("ASMENT_FULL_ADDR_FOR_PHYSICIAN");
-				   //   gpsData.put("Disclosure Provider City","Disclosure Provider Street Address","Disclosure Provider State","Disclosure Provider Zip", chronicphysicianAddress); 
+				    
 
 
 				   

@@ -3069,7 +3069,8 @@ public void the_user_validates_the_OLE_Submission_Details_in_GPS(DataTable arg1)
 				DetailsMap.put("First Name", firstName.toUpperCase());
 				String lastName = (String) getLoginScenario().getBean(oleCommonConstants.LAST_NAME);
 				DetailsMap.put("Last Name", lastName.toUpperCase());
-				// TODO: Need to check and add Middle Name
+				String middleName = (String) getLoginScenario().getBean(oleCommonConstants.MIDDLE_NAME);
+				DetailsMap.put("MiddleInitial", middleName.toUpperCase());
 				String dob = (String) getLoginScenario().getBean(oleCommonConstants.DOB);
 				dob  = OLEGPSValidation.converttogpsDate(dob );
 				DetailsMap.put("DOB", dob);
@@ -3082,7 +3083,7 @@ public void the_user_validates_the_OLE_Submission_Details_in_GPS(DataTable arg1)
 				//Primary Address
 				String perm_Street = (String) getLoginScenario().getBean(oleCommonConstants.PERM_STREET);
 				DetailsMap.put("Perm_Street", perm_Street.toUpperCase());
-				// TODO: Need to check and add Permanent Apartment
+				DetailsMap.put("Perm_Apartment", "");
 				String perm_city = (String) getLoginScenario().getBean(oleCommonConstants.PERM_CITY);
 				DetailsMap.put("Perm_city", perm_city.toUpperCase());
 				// TODO: Need to check and add Permanent State
@@ -3105,15 +3106,15 @@ public void the_user_validates_the_OLE_Submission_Details_in_GPS(DataTable arg1)
 				DetailsMap.put("Mobile Number", (String) getLoginScenario().getBean(oleCommonConstants.MOBILE_NUMBER));
 
 				//Email
-				DetailsMap.put("Email Confirmation", (String) getLoginScenario().getBean(oleCommonConstants.EMAIL_CONFIRMATION));
+				//DetailsMap.put("Email Confirmation", (String) getLoginScenario().getBean(oleCommonConstants.EMAIL_CONFIRMATION)); 1-6-This is not mentioned in GPS query so commented it
 				String email = (String) getLoginScenario().getBean(oleCommonConstants.EMAIL);
 				DetailsMap.put("Email", email.toUpperCase());
-				if(PlanName.contains("Chronic") || PlanName.contains("Gold") ||PlanName.contains("Silver")) {
+				if(PlanName.contains("Chronic") || PlanName.contains("Gold") ||PlanName.contains("Silver") || PlanName.contains("D-SNP")) {
 					DetailsMap.put("Paperless Delivery", "N");
 					} else {
 					DetailsMap.put("Paperless Delivery", (String) getLoginScenario().getBean(oleCommonConstants.Go_Green));	
-					}				//Language
-				//TODO: Need to check and add Language
+					}			
+				DetailsMap.put("Language", "1");
 
 				System.out.println("--------------------Storing Data for Personal Information Page Ended----------------------");
 
@@ -3128,6 +3129,16 @@ public void the_user_validates_the_OLE_Submission_Details_in_GPS(DataTable arg1)
 				medicareNumber=medicareNumber.replaceAll("-", "").toUpperCase();
 				DetailsMap.put("Medicare Number", medicareNumber);
 				DetailsMap.put("Medicaid Number", (String) getLoginScenario().getBean(oleCommonConstants.MEDICAID_NUMBER));
+				String ssnFlag = (String) getLoginScenario().getBean(oleCommonConstants.SSN_FLAG);
+				if(ssnFlag.equalsIgnoreCase("true")) {
+				String SSN = (String) getLoginScenario().getBean(oleCommonConstants.SSN_NUMBER);
+				DetailsMap.put("SSN Number", SSN);
+				}
+				else {
+				DetailsMap.put("SSN Number", "");
+					
+				}
+				
 
 				//Other Health Insurance
 				if(!plantype.contains("PDP")) {
@@ -3143,7 +3154,8 @@ public void the_user_validates_the_OLE_Submission_Details_in_GPS(DataTable arg1)
 				String prescriptionDrug = (String) getLoginScenario().getBean(oleCommonConstants.PRESCRIPTION_DRUG);
 				DetailsMap.put("Prescription Drug", prescriptionDrug.toUpperCase());
 				String prescriptionCoverageName = (String) getLoginScenario().getBean(oleCommonConstants.PRESCRIPTION_COVERAGE_NAME);
-				DetailsMap.put("Prescription Name", prescriptionCoverageName.toUpperCase());
+				prescriptionCoverageName=prescriptionCoverageName.toUpperCase()+"+"+"PRESCRIPTIONCOVERAGE";
+				DetailsMap.put("Prescription Name", prescriptionCoverageName);
 				String pdGroupNumber = (String) getLoginScenario().getBean(oleCommonConstants.PRESCRIPTION_GROUP_NUMBER);
 				DetailsMap.put("PD Group Number", pdGroupNumber.toUpperCase());
 				DetailsMap.put("PD Member Number", (String) getLoginScenario().getBean(oleCommonConstants.PRESCRIPTION_MEMBER_NUMBER));
@@ -3186,6 +3198,7 @@ public void the_user_validates_the_OLE_Submission_Details_in_GPS(DataTable arg1)
 				String pcpNumber = (String) getLoginScenario().getBean(oleCommonConstants.PCP_NUMBER);
 				DetailsMap.put("PCP Number", pcpNumber.toUpperCase());
 				String pcpRecentlyVisited = (String) getLoginScenario().getBean(oleCommonConstants.PCP_RECENTLY_VISITED);
+				pcpRecentlyVisited = pcpRecentlyVisited.substring(0, 1);
 				DetailsMap.put("PCP Recently Visited", pcpRecentlyVisited.toUpperCase());
 				}
 				System.out.println("--------------------Storing Data for PCP Page Ended----------------------");
@@ -3218,12 +3231,13 @@ public void the_user_validates_the_OLE_Submission_Details_in_GPS(DataTable arg1)
 				DetailsMap.put("Authorization First Name", authorizationFirstName.toUpperCase());
 				String authorizationLastName = (String) getLoginScenario().getBean(oleCommonConstants.AUTHORIZATION_LAST_NAME);
 				DetailsMap.put("Authorization last Name", authorizationLastName.toUpperCase());
+				DetailsMap.put("Auth Representative Indicator", "Y");
 				String authorizationRelationship = (String) getLoginScenario().getBean(oleCommonConstants.AUTHORIZATION_RELATIONSHIP);
 				DetailsMap.put("Authorization Relationship", authorizationRelationship.toUpperCase());
 				DetailsMap.put("Authorization Address", (String) getLoginScenario().getBean(oleCommonConstants. AUTHORIZATION_ADDRESS));
 				DetailsMap.put("Authorization Apartment Suite", (String) getLoginScenario().getBean(oleCommonConstants.AUTHORIZATION_APARTMENT_SUITE));
 				DetailsMap.put("Authorization City", (String) getLoginScenario().getBean(oleCommonConstants.AUTHORIZATION_CITY));
-				String authorizationState = (String) getLoginScenario().getBean(oleCommonConstants.AUTHORIZATION_STATE_DISPLAY);
+				DetailsMap.put("Authorization State", (String) getLoginScenario().getBean(oleCommonConstants.AUTHORIZATION_STATE_DISPLAY));
 				DetailsMap.put("Auth Zip Display", (String) getLoginScenario().getBean(oleCommonConstants.AUTHORIZATION_ZIP));
 				String authorizationPhoneNumber= (String) getLoginScenario().getBean(oleCommonConstants.AUTHORIZATION_PHONE_NO);
 				authorizationPhoneNumber=authorizationPhoneNumber.replaceAll("-", "").toUpperCase();
