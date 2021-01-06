@@ -6260,8 +6260,11 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	public void removeProvidersFromPlanCard() {
 		try {
 			providerListPlanCard.click();
+			Actions action = new Actions(driver);
 		while(removeProviderListPlanCard.size()!=0) {
+			action.moveToElement(removeProviderListPlanCard.get(0)).build().perform();
 			removeProviderListPlanCard.get(0).click();
+//			jsClickNew(removeProviderListPlanCard.get(0));
 			System.out.println("Removed providers in plan card");
 		}
 		}

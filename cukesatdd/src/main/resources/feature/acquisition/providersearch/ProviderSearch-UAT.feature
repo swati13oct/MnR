@@ -35,19 +35,20 @@ Feature: 1.07.2 UAT-Provider Search Flows
     When the user Click on Is my Provider covered link
       | PlanName | <planname> |
     When user selects a provider and retuns to VPP page
-    Then Verify X out of Y provider covered information is displayed on Plan Summary page
-      | PlanName | <planname> |
-    Then Verify provider name is displayed on Plan Summary page
-      | PlanName | <planname> |
+    #Then Verify X out of Y provider covered information is displayed on Plan Summary page
+      #| PlanName | <planname> |
+    #Then Verify provider name is displayed on Plan Summary page
+    #| PlanName | <planname> |
     # Need to add steps for change zip code and same steps above
     Then user changes zipcode within VPP page
-      | Zip Code        | <NewZipCode>         |
+      | Zip Code        | <NewZipCode>      |
       | Is Multi County | <isMultutiCounty> |
       | County Name     | <county>          |
-      And the user views the plans of the below plan type
-      | Plan Type | <plantype> |
-    And the user selects plan year
-      | Plan Year | <planyear> |
+    #And the user views the plans of the below plan type
+    #| Plan Type | <plantype> |
+    #And the user selects plan year
+    #| Plan Year | <planyear> |
+    When user removes provider from plan card
     When the user Click on Is my Provider covered link
       | PlanName | <planname> |
     When user selects a provider and retuns to VPP page
@@ -58,8 +59,8 @@ Feature: 1.07.2 UAT-Provider Search Flows
 
     @ProviderSearchCommon_AARP @ProviderSearchCommon_Prod_AARP @ProviderSearchFromVppPlanSummaryPageUlayer @Dummy1
     Examples: 
-      | Scenario                             | zipcode | site | isMultutiCounty | county          | plantype | planname                             | planyear | NewZipCode | 
-      | Provider Search - E2E Scenario 5_AMP |   10001 | AARP | NO              | New York County | MAPD     | AARP Medicare Advantage Plan 2 (HMO) | future   |      10010 | 
+      | Scenario                             | zipcode | site | isMultutiCounty | county          | plantype | planname                             | planyear | NewZipCode |
+      | Provider Search - E2E Scenario 5_AMP |   10001 | AARP | NO              | New York County | MAPD     | AARP Medicare Advantage Plan 2 (HMO) | future   |      10010 |
 
     @ProviderSearchCommon_UHC @ProviderSearchCommon_Prod_UHC @ProviderSearchFromVppPlanSummaryPageBlayer
     Examples: 
