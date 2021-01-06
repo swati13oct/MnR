@@ -43,7 +43,7 @@ public class DrugSummaryPageMobile extends UhcDriver {
 	@FindBy(xpath = "//*[text()='Monthly Premium']/following-sibling::div")
 	public WebElement monthlyPremium;
 
-	@FindBy(xpath = "//div[contains(text(), 'Annual Estimated')]//following-sibling::div")
+	@FindBy(xpath = "//h5[contains(text(), 'Annual Estimated')]//following-sibling::div")
 	public WebElement annualEstimatedTotal;
 
 	@FindBy(xpath = "//*[text()='Drugs Covered']/following-sibling::div")
@@ -64,7 +64,7 @@ public class DrugSummaryPageMobile extends UhcDriver {
 	@FindBy(xpath = "//button/span[text()='View Plan Details']")
 	public WebElement viewPlanDetailsBtn;
 
-	@FindBy(xpath = "//button//span[text()='Save']")
+	@FindBy(xpath = "//span[contains(text(),' Save ')]") 
 	public WebElement saveBtn;
 
 	@FindBy(xpath = "//*[@id='accordion-1-button']")

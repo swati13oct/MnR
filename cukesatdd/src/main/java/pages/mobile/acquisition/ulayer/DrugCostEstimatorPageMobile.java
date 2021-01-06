@@ -551,8 +551,8 @@ public class DrugCostEstimatorPageMobile extends UhcDriver {
 			checkModelPopup(driver, 10);
 		validateNew(addDrug);
 		validateNew(step1,3);
-		validateNew(step2,3);
-		validateNew(step3,3);
+//		validateNew(step2,3);
+//		validateNew(step3,3);
 
 	}
 

@@ -125,7 +125,7 @@ public class ProviderSearchPageMobile extends UhcDriver {
 	@FindBy(xpath = "//*[contains(text(),'Close')]")
 	private WebElement BtnClose;
 
-	@FindBy(xpath = "//*[@id=\"savedProviders\"]/div[2]/div[1]/div/div/div/div[2]/div[2]/h2/a")
+	@FindBy(xpath = "//*[contains(@class,'provider-name')]")
 	private WebElement providerNameText;
 
 	@FindBy(xpath = "//ul[contains(@class,'gs-options')]/li//div[contains(@class,'img')][contains(@src,'next')]")
