@@ -3039,6 +3039,8 @@ public void the_user_validates_the_OLE_Submission_Details_in_GPS(DataTable arg1)
 		}
 		
 		String plantype = MemberDetailsMap.get("Plan Type");
+		String AuthorizationRiderFlag = MemberDetailsMap.get("Rider Flag");
+		String MailingAddressQuestion = MemberDetailsMap.get("Mailing Address Question");
 		String [] dateArray = null;
 		
 		if (!(MRScenario.environment.equalsIgnoreCase("offline")
@@ -3090,8 +3092,11 @@ public void the_user_validates_the_OLE_Submission_Details_in_GPS(DataTable arg1)
 				DetailsMap.put("Zip Code", (String) getLoginScenario().getBean(oleCommonConstants.OLE_ZIPCODE));
 
 				//Mailing Address
+				/*<----------Mailing question is not showing up GPS----------------
 				String mailing_Question = (String) getLoginScenario().getBean(oleCommonConstants.MAILING_QUESTION);
 				DetailsMap.put("Mailing_Question", mailing_Question.toUpperCase());
+				----------Mailing question is not showing up GPS---------------->*/
+				if(MailingAddressQuestion.equalsIgnoreCase("no")) {
 				String mailing_Street = (String) getLoginScenario().getBean(oleCommonConstants.MAILING_STREET);
 				DetailsMap.put("Mailing_Street", mailing_Street.toUpperCase());
 				String mailing_City = (String) getLoginScenario().getBean(oleCommonConstants.MAILING_CITY);
@@ -3100,7 +3105,14 @@ public void the_user_validates_the_OLE_Submission_Details_in_GPS(DataTable arg1)
 				String mailing_State = (String) getLoginScenario().getBean(oleCommonConstants.MAILING_STATE);
 				DetailsMap.put("Mailing_State", mailing_State.toUpperCase());
 				DetailsMap.put("Mailing_Zip", (String) getLoginScenario().getBean(oleCommonConstants.MAILING_ZIP));
-
+				}
+				else {
+					DetailsMap.put("Mailing_Street", "");
+					DetailsMap.put("Mailing Apartment Number", "");
+					DetailsMap.put("Mailing_City", "");
+					DetailsMap.put("Mailing_State", "");
+					DetailsMap.put("Mailing_Zip", "");					
+					}
 				//Phone Number
 				DetailsMap.put("Home Number", (String) getLoginScenario().getBean(oleCommonConstants.PRIMARY_PHONE_NUMBER));
 				DetailsMap.put("Mobile Number", (String) getLoginScenario().getBean(oleCommonConstants.MOBILE_NUMBER));
@@ -3109,6 +3121,7 @@ public void the_user_validates_the_OLE_Submission_Details_in_GPS(DataTable arg1)
 				//DetailsMap.put("Email Confirmation", (String) getLoginScenario().getBean(oleCommonConstants.EMAIL_CONFIRMATION)); 1-6-This is not mentioned in GPS query so commented it
 				String email = (String) getLoginScenario().getBean(oleCommonConstants.EMAIL);
 				DetailsMap.put("Email", email.toUpperCase());
+				
 				if(PlanName.contains("Chronic") || PlanName.contains("Gold") ||PlanName.contains("Silver") || PlanName.contains("D-SNP")) {
 					DetailsMap.put("Paperless Delivery", "N");
 					} else {
@@ -3143,7 +3156,7 @@ public void the_user_validates_the_OLE_Submission_Details_in_GPS(DataTable arg1)
 				//Other Health Insurance
 				if(!plantype.contains("PDP")) {
 				String healthInsurance = (String) getLoginScenario().getBean(oleCommonConstants.HEALTH_INSURANCE);
-				DetailsMap.put("Health Insurance", healthInsurance.toUpperCase());
+				DetailsMap.put("Health Insurance", healthInsurance.substring(0, 1).toUpperCase());
 				String otherHealthInsuranceeName = (String) getLoginScenario().getBean(oleCommonConstants.HEALTH_INSURANCE_NAME);
 				DetailsMap.put("Health Insurance Name", otherHealthInsuranceeName.toUpperCase());
 				String groupNumber = (String) getLoginScenario().getBean(oleCommonConstants.GROUP_NUMBER);
@@ -3152,9 +3165,10 @@ public void the_user_validates_the_OLE_Submission_Details_in_GPS(DataTable arg1)
 				}
 				//Prescription Drug Coverage
 				String prescriptionDrug = (String) getLoginScenario().getBean(oleCommonConstants.PRESCRIPTION_DRUG);
-				DetailsMap.put("Prescription Drug", prescriptionDrug.toUpperCase());
+				DetailsMap.put("Prescription Drug", prescriptionDrug.substring(0, 1).toUpperCase());
 				String prescriptionCoverageName = (String) getLoginScenario().getBean(oleCommonConstants.PRESCRIPTION_COVERAGE_NAME);
-				prescriptionCoverageName=prescriptionCoverageName.toUpperCase()+"+"+"PRESCRIPTIONCOVERAGE";
+			//	prescriptionCoverageName=prescriptionCoverageName.toUpperCase()+"+"+"PRESCRIPTIONCOVERAGE";
+				prescriptionCoverageName=prescriptionCoverageName.toUpperCase()+"+"+prescriptionCoverageName.toUpperCase();
 				DetailsMap.put("Prescription Name", prescriptionCoverageName);
 				String pdGroupNumber = (String) getLoginScenario().getBean(oleCommonConstants.PRESCRIPTION_GROUP_NUMBER);
 				DetailsMap.put("PD Group Number", pdGroupNumber.toUpperCase());
@@ -3201,6 +3215,11 @@ public void the_user_validates_the_OLE_Submission_Details_in_GPS(DataTable arg1)
 				pcpRecentlyVisited = pcpRecentlyVisited.substring(0, 1);
 				DetailsMap.put("PCP Recently Visited", pcpRecentlyVisited.toUpperCase());
 				}
+				else {
+					DetailsMap.put("PCP Name", "");
+					DetailsMap.put("PCP Number", "");
+					DetailsMap.put("PCP Recently Visited", "");			
+					}
 				System.out.println("--------------------Storing Data for PCP Page Ended----------------------");
 				
 				//------------------------------------------------------------------------------------------------------------------------------------------------
@@ -3227,10 +3246,18 @@ public void the_user_validates_the_OLE_Submission_Details_in_GPS(DataTable arg1)
 				else {
 				DetailsMap.put("Authorization Agree", "N");	
 				}
+				if(AuthorizationRiderFlag.contains("true")) {
 				String authorizationFirstName = (String) getLoginScenario().getBean(oleCommonConstants.AUTHORIZATION_FIRST_NAME);
 				DetailsMap.put("Authorization First Name", authorizationFirstName.toUpperCase());
 				String authorizationLastName = (String) getLoginScenario().getBean(oleCommonConstants.AUTHORIZATION_LAST_NAME);
 				DetailsMap.put("Authorization last Name", authorizationLastName.toUpperCase());
+				/*String authorizationRepresentativeIndicator = (String) getLoginScenario().getBean(oleCommonConstants.AUTHORIZATION_REPRESENTATIVE_INDICATOR);
+				if(authorizationRepresentativeIndicator.contains(authorizationFirstName)) {
+				DetailsMap.put("Auth Representative Indicator", "Y");
+				}
+				else {
+				DetailsMap.put("Auth Representative Indicator", "N");	
+				}*/
 				DetailsMap.put("Auth Representative Indicator", "Y");
 				String authorizationRelationship = (String) getLoginScenario().getBean(oleCommonConstants.AUTHORIZATION_RELATIONSHIP);
 				DetailsMap.put("Authorization Relationship", authorizationRelationship.toUpperCase());
@@ -3244,7 +3271,18 @@ public void the_user_validates_the_OLE_Submission_Details_in_GPS(DataTable arg1)
 				DetailsMap.put("Authorization Phone No", authorizationPhoneNumber);
 
 				System.out.println("--------------------Storing Data for Authorization Page Ended----------------------");
-
+				}
+				else {
+					DetailsMap.put("Authorization First Name", "");
+					DetailsMap.put("Authorization last Name", "");
+					DetailsMap.put("Auth Representative Indicator", "N");	
+					DetailsMap.put("Authorization Relationship", "");
+					DetailsMap.put("Authorization Apartment Suite", "");
+					DetailsMap.put("Authorization City", "");	
+					DetailsMap.put("Authorization State", "");
+					DetailsMap.put("Auth Zip Display", "");
+					DetailsMap.put("Authorization Phone No", "");	
+					}
 				//------------------------------------------------------------------------------------------------------------------------------------------------
 
 				//-----------Adding for CSNP-----------------//
@@ -3286,14 +3324,20 @@ public void the_user_validates_the_OLE_Submission_Details_in_GPS(DataTable arg1)
 				DetailsMap.put("Cardio Vascular Disorder Question 6",cardiovasculardisorderquestion6);
 
 				String disclosurecheckbox = (String) getLoginScenario().getBean(oleCommonConstants.DISCLOSURE_CHECKBOX);
-				DetailsMap.put("Disclosure Checkbox", disclosurecheckbox.toUpperCase());
+				if(disclosurecheckbox.equalsIgnoreCase("true")) {
+					DetailsMap.put("Disclosure Checkbox", "Y");
+					}
+					else {
+					DetailsMap.put("Disclosure Checkbox", "N");	
+					}
+				//DetailsMap.put("Disclosure Checkbox", disclosurecheckbox.toUpperCase());
 
 				String disclosureprovidername = (String) getLoginScenario().getBean(oleCommonConstants.DISCLOSURE_PROVIDER_NAME);
 				DetailsMap.put("Disclosure Provider Name", disclosureprovidername.toUpperCase());
 
-				String disclosureproviderstreetaddress = (String) getLoginScenario().getBean(oleCommonConstants.DISCLOSURE_PROVIDER_STREET_ADDRESS);
-				DetailsMap.put("Disclosure Provider Street Address", disclosureproviderstreetaddress.toUpperCase());
-
+			/*	String disclosureproviderstreetaddress = (String) getLoginScenario().getBean(oleCommonConstants.DISCLOSURE_PROVIDER_STREET_ADDRESS);
+				DetailsMap.put("Disclosure Provider Street Address", disclosureproviderstreetaddress.toUpperCase());*/
+			 
 				String disclosureprovidercity = (String) getLoginScenario().getBean(oleCommonConstants.DISCLOSURE_PROVIDER_CITY);
 				DetailsMap.put("Disclosure Provider City", disclosureprovidercity.toUpperCase());
 
@@ -3301,11 +3345,21 @@ public void the_user_validates_the_OLE_Submission_Details_in_GPS(DataTable arg1)
 				DetailsMap.put("Disclosure Provider State", disclosureproviderstate.toUpperCase());
 
 				DetailsMap.put("Disclosure Provider Zip", (String) getLoginScenario().getBean(oleCommonConstants.DISCLOSURE_PROVIDER_ZIP));
+				String disclosureproviderzip = (String) getLoginScenario().getBean(oleCommonConstants.DISCLOSURE_PROVIDER_ZIP);
+				DetailsMap.put("Disclosure Provider Zip", disclosureproviderzip);
 
 				
 				String disclosureProviderPhoneNumber= (String) getLoginScenario().getBean(oleCommonConstants.DISCLOSURE_PROVIDER_PHONENUMBER);
 				disclosureProviderPhoneNumber=disclosureProviderPhoneNumber.replaceAll("-", "").toUpperCase();
 				DetailsMap.put("Disclosure Provider PhoneNumber", disclosureProviderPhoneNumber);
+				
+				String disclosureprovideraddress = (String) getLoginScenario().getBean(oleCommonConstants.DISCLOSURE_PROVIDER_STREET_ADDRESS);
+				//	prescriptionCoverageName=prescriptionCoverageName.toUpperCase()+"+"+"PRESCRIPTIONCOVERAGE";
+				disclosureprovideraddress=disclosureprovideraddress.toUpperCase()
+						+','+disclosureprovidercity.toUpperCase()
+						+','+disclosureproviderstate.toUpperCase()
+						+','+disclosureproviderzip;
+					DetailsMap.put("Disclosure Provider Address", disclosureprovideraddress);
 				}
 				
 				//---------------------------------------------------//

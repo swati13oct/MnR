@@ -125,9 +125,10 @@ Feature: 1.05.4 OLE common tool flow E2E CSNP
     Then the user clicks on Submit Enrollment to complete enrollment
     # Then the user validates Plan and Member Details on Confirmation Page
     Then the user Validates Next Steps in Confirmation Page for the Plan Type.
-		#Then the user validates the OLE Submission Details in GPS
-    #| Plan Type | <plantype> |
-	
+		Then the user validates the OLE Submission Details in GPS
+    	| Plan Type | <plantype> |
+		 | Rider Flag | <riderflag> |
+		 | Mailing Address Question | <mailingaddressquestion> |
 	@CSNP_OLE_AARP_Future
     Examples: 
       | TID   | PlanType |site| planyear|planYear|zipcode | isMultutiCounty | county       | plantype | planName                                              | cardtype | firstname | lastname | medicarenumber | ssnflag | partadate | partbdate | medicaidnumber | esrdflag | dob      | gender | permstreet    | permcity    | mailingaddressquestion | mailingstreet | mailingcity | mailingstate | mailingzip | email         | selectoptions                                                                                                                                                                                                                                       | optiondata              | pdpFlag | longTermFlag | riderflag | providername | provideraddress | providercity | providerzipcode | providernumber | emailConfirmation | goGreen |phoneno   | mobileno |healthinsurancename|groupnumber| membernumber|prescriptioncoveragename|pdgroupnumber|pdmembernumber|inputdataType|middlename|authorizefirstN|authorizelastN|authorizeaddress|authorizeapartment|authorizecity|authorizezip|authorizephonenumber|authorizeRelationship|authorizestate|authorizationagree|permaptno|mailingaptno|diabetesQ1|diabetesQ2|chronicQ1|chronicQ2|chronicQ3|cardioQ1|cardioQ2|cardioQ3|cardioQ4|cardioQ5|cardioQ6|

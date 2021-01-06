@@ -148,8 +148,13 @@ public class OLEconfirmationPage extends UhcDriver{
 				   //Personal Information
 				   String firstName = rs.getString("FIRST_NAME");
 				   gpsData.put("First Name", firstName);
+				   
 				   String middleInitial = rs.getString("MIDDLE_INITIAL");
+				   if(middleInitial==null) {
+					   middleInitial ="";
+				   }
 				   gpsData.put("MiddleInitial", middleInitial);
+				   
 				   String lastName = rs.getString("LAST_NAME");
 				   gpsData.put("Last Name", lastName);
 				   String doB = rs.getString("DATE_OF_BIRTH");
@@ -164,6 +169,9 @@ public class OLEconfirmationPage extends UhcDriver{
 				   String address1 = rs.getString("ADDRESS_LINE_1");
 				   gpsData.put("Perm_Street", address1);
 				   String address2 = rs.getString("ADDRESS_LINE_2");
+				   if(address2==null) {
+					   address2 ="";
+				   }
 				   gpsData.put("Perm_Apartment", address2);
 				   String city = rs.getString("CITY");
 				   gpsData.put("Perm_city", city);
@@ -174,20 +182,43 @@ public class OLEconfirmationPage extends UhcDriver{
 
 				   //Mailing Address
 				   String mailingAddress1 = rs.getString("MAILING_ADDRESS_LINE_1");
+				   if(mailingAddress1==null) {
+					   mailingAddress1 ="";
+				   }
 				   gpsData.put("Mailing_Street", mailingAddress1);
 				   String mailingAddress2 = rs.getString("MAILING_ADDRESS_LINE_2");
+				   if(mailingAddress2==null) {
+					   mailingAddress2 ="";
+				   }
 				   gpsData.put("Mailing Apartment Number", mailingAddress2);
 				   String mailingCity = rs.getString("MAILING_CITY");
+				   if(mailingCity==null) {
+					   mailingCity ="";
+				   }
 				   gpsData.put("Mailing_City", mailingCity);
+				
 				   String mailingState = rs.getString("MAILING_STATE_CD");
+				   if(mailingState==null) {
+					   mailingState ="";
+				   }
 				   gpsData.put("Mailing_State", mailingState);
+				   
 				   String mailingZipcode = rs.getString("MAILING_ZIP_CD");
+				   if(mailingZipcode==null) {
+					   mailingZipcode ="";
+				   }
 				   gpsData.put("Mailing_Zip", mailingZipcode);
 
 				   //Phone Number
 				   String dayTimePhoneNumber = rs.getString("DAYTIME_PHONE_NUM");
+				   if(dayTimePhoneNumber==null) {
+					   dayTimePhoneNumber ="";
+				   }
 				   gpsData.put("Home Number", dayTimePhoneNumber);
 				   String eveningTimePhoneNumber = rs.getString("EVENING_PHONE_NUM");
+				   if(eveningTimePhoneNumber==null) {
+					   eveningTimePhoneNumber ="";
+				   }
 				   gpsData.put("Mobile Number", eveningTimePhoneNumber); 
 				   
 				   //Email
@@ -204,8 +235,14 @@ public class OLEconfirmationPage extends UhcDriver{
 				   String medicareNumber = rs.getString("MEDICARE_NUMBER");
 				   gpsData.put("Medicare Number", medicareNumber); 
 				   String medicaidNumber = rs.getString("MEDICAID_NUMBER");
+				   if(medicaidNumber==null) {
+					   medicaidNumber ="";
+				   }
 				   gpsData.put("Medicaid Number", medicaidNumber);
 				   String SSN = rs.getString("SSN");
+				   if(SSN==null) {
+					   SSN ="";
+				   }
 				   gpsData.put("SSN Number", SSN);
 
 				   
@@ -220,8 +257,8 @@ public class OLEconfirmationPage extends UhcDriver{
 				   gpsData.put("Member Number", healthInsuranceID); 
 
 				   //Prescription Drug Coverage
-				   String secondaryCoverageName = rs.getString("PDCNAME");
-				   gpsData.put("Prescription Name", secondaryCoverageName); 
+				   String secondaryCoverage = rs.getString("DO_YOU_HAVE_OTHER_RX_COVERAGE");
+				   gpsData.put("Prescription Drug", secondaryCoverage); 
 				   String otherCoverageName = rs.getString("PDCNAME");
 				   gpsData.put("Prescription Name", otherCoverageName); 
 				   String secondaryGroup = rs.getString("SECONDARY_RX_GROUP");
@@ -244,10 +281,19 @@ public class OLEconfirmationPage extends UhcDriver{
 
 				   //PCP Page
 				   String pcpName = rs.getString("PRIMARY_CARE_PHYSICIAN");
+				   if(pcpName==null) {
+					   pcpName ="";
+				   }
 				   gpsData.put("PCP Name", pcpName); 
 				   String pcpNumber = rs.getString("PRIMARY_CARE_PHYSICIAN_NUMBER");
+				   if(pcpNumber==null) {
+					   pcpNumber ="";
+				   }
 				   gpsData.put("PCP Number", pcpNumber); 
 				   String pCPRecentlyVisited = rs.getString("CURRENTLY_A_PATIENT_OF_THE_PCP");
+				   if(pCPRecentlyVisited==null) {
+					   pCPRecentlyVisited ="";
+				   }
 				   gpsData.put("PCP Recently Visited", pCPRecentlyVisited);  
 
 
@@ -269,38 +315,71 @@ public class OLEconfirmationPage extends UhcDriver{
 				   
 				   //Authorization Page
 				   String authorizationFirstName = rs.getString("AUTHORIZED_REP_FIRST_NAME");
+				   if(authorizationFirstName==null) {
+					   authorizationFirstName ="";
+				   }
 				   gpsData.put("Authorization First Name", authorizationFirstName);
 				   
 				   String authorizationLastName = rs.getString("AUTHORIZED_REP_LAST_NAME");
+				   if(authorizationLastName==null) {
+					   authorizationLastName ="";
+				   }
 				   gpsData.put("Authorization last Name", authorizationLastName);
 				   
 				   String authRel = rs.getString("AUTHORIZED_REP_MAILING_ZIP_CD");
+				   if(authRel==null) {
+					   authRel ="";
+				   }
 				   gpsData.put("Authorization Relationship", authRel);
 				
 				   
 				   String authAddr1 = rs.getString("AUTHORIZED_REP_MAILING_ADDR_1");
+				   if(authAddr1==null) {
+					   authAddr1 ="";
+				   }
 				   gpsData.put("Authorization Address", authAddr1);
 				   
 				   String authAddr2 = rs.getString("AUTHORIZED_REP_MAILING_ADDR_2");
+				   if(authAddr2==null) {
+					   authAddr2 ="";
+				   }
 				   gpsData.put("Authorization Apartment Suite", authAddr2);
 				   
 				   String authCity = rs.getString("AUTHORIZED_REP_MAILING_CITY");
+				   if(authCity==null) {
+					   authCity ="";
+				   }
 				   gpsData.put("Authorization City", authCity);
 				   
 				   String authPhone = rs.getString("AUTHORIZED_REP_DAYTIME_PHONE");
+				   if(authPhone==null) {
+					   authPhone ="";
+				   }
 				   gpsData.put("Authorization Phone No", authPhone);
 				   
 				   String authState = rs.getString("AUTHORIZED_REP_MAILING_STATE");
+				   if(authState==null) {
+					   authState ="";
+				   }
 				   gpsData.put("Authorization State", authState);
 				   
 				   String authZip = rs.getString("AUTHORIZED_REP_MAILING_ZIP_CD");
+				   if(authZip==null) {
+					   authZip ="";
+				   }
 				   gpsData.put("Auth Zip Display", authZip);
 				   
 				   String authRepInd = rs.getString("AUTHORIZED_REPRESENTATIVE_IND");
 				   gpsData.put("Auth Representative Indicator", authRepInd);
 				
 				   String authRepRelationship = rs.getString("AUTHORIZED_REP_RELATIONSHIP");
+				   if(authRepRelationship==null) {
+					   authRepRelationship ="";
+				   }
 				   gpsData.put("Authorization Relationship", authRepRelationship);
+				   
+				   String authSignature = rs.getString("SIGNATURE_PRESENCE");
+				   gpsData.put("Authorization Agree", authSignature);
 				
 				
 				 //-----------Adding for CSNP----------------//
@@ -333,11 +412,21 @@ public class OLEconfirmationPage extends UhcDriver{
 				   String chronicillness = rs.getString("DO_YOU_HAVE_A_CHRONIC_ILLNESS");
 				   gpsData.put("Disclosure Checkbox", chronicillness); */
 				   String chronicphysician = rs.getString("CHRONIC_PHYSICIAN_NAME");
+				   if(chronicphysician==null) {
+					   chronicphysician ="";
+				   }
 				   gpsData.put("Disclosure Provider Name", chronicphysician); 
 				   String chronicphysicianPhoneNumber = rs.getString("CHRONIC_PHYSICIAN_PHONE_NUM");
+				   if(chronicphysicianPhoneNumber==null) {
+					   chronicphysicianPhoneNumber ="0";
+				   }
 				   gpsData.put("Disclosure Provider PhoneNumber", chronicphysicianPhoneNumber); 
+				   
 				   String chronicphysicianAddress = rs.getString("ASMENT_FULL_ADDR_FOR_PHYSICIAN");
-				    
+				   if(chronicphysicianAddress==null) {
+					   chronicphysicianAddress ="";
+				   }
+				   gpsData.put("Disclosure Provider Address", chronicphysicianAddress); 
 
 
 				   
