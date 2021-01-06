@@ -2690,5 +2690,16 @@ public class BenefitsAndCoverageUmsStepDefinition {
 		Assert.assertTrue(benefitsCoveragePage.display_provider_search_tile());
 	}
 	
+	@Then("^validates LEARN MORE ABOUT DRUG TIERS link content for user with insulin$")
+	public void validates_learnMoreAboutDrugTiers_insulin()
+	{
+		String copayCategory = (String) getLoginScenario().getBean(BenefitsAndCoverageCommonConstants.TEST_COPAY_CATEGORY);
+
+		String insulinFlag=(String) getLoginScenario().getBean(BenefitsAndCoverageCommonConstants.TEST_INSULIN);
+
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario().getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
+		benefitsCoveragePage.validate_learnmoreaboutlink_insulin(copayCategory, insulinFlag);
+	}
+	
 }//end of class
 

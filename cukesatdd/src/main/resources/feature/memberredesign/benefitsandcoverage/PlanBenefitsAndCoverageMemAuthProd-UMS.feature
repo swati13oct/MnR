@@ -762,6 +762,7 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth Prod
       | Copay Category | <copayCategory> |
       | Deductible | <deductible> |
       | Insulin | <insulin> |
+    Then validates LEARN MORE ABOUT DRUG TIERS link content for user with insulin
 	
     #@prod_hasInsulin_mapd_NoD
     #Examples: 
@@ -778,30 +779,30 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth Prod
     #  | index  | FID    | username | password  | MemUserName        | planType  | memberType     | copayCategory | deductible   | insulin      | note |
     #  | 31-I03 | 478830 | kkumard  | tnps459#  | testUserName       | MAPD      | Individual_BnC | NON LIS       | T123NoD_T45D | hasInsulin   |   H0294-017-000 - new UI| 
      
-    @prod_hasInsulin_pdp_NoD
-    Examples: 
-      | index  | FID    | username | password  | MemUserName        | planType  | memberType     | copayCategory | deductible   | insulin      | note |
-      | 31-I04 | 478830 | kkumard  | tnps459#  | DEBBERNARDO@55     | PDP       | Individual_BnC | NON LIS       | NoD          | hasInsulin   |   S5820-002-000| 
+    #@prod_hasInsulin_pdp_NoD
+    #Examples: 
+    #  | index  | FID    | username | password  | MemUserName        | planType  | memberType     | copayCategory | deductible   | insulin      | note |
+    #  | 31-I04 | 478830 | kkumard  | tnps459#  | DEBBERNARDO@55     | PDP       | Individual_BnC | NON LIS       | NoD          | hasInsulin   |   S5820-002-000| 
 
     @prod_hasInsulin_csnpPcp_NoD
     Examples: 
       | index  | FID    | username | password  | MemUserName        | planType  | memberType     | copayCategory | deductible   | insulin      | note |
-      | 31-I05 | 478830 | kkumard  | tnps459#  | ecueto1            | CSNP_PCP  | Individual_BnC | NON LIS       | NoD          | hasInsulin   | H1045-018-000|
+      | 31-I05 | 478830 | kkumard  | tnps459#  | Washington1965     | CSNP_PCP  | Individual_BnC | NON LIS       | NoD          | hasInsulin   | H1045-018-000|
 
     @prod_hasInsulin_csnpMapd_T123NoD_T45D
     Examples: 
       | index  | FID    | username | password  | MemUserName        | planType  | memberType     | copayCategory | deductible   | insulin      | note |
       | 31-I06 | 478830 | kkumard  | tnps459#  | Rzwobot            | CSNP_MAPD | Individual_BnC | NON LIS       | T123NoD_T45D | hasInsulin   | H1045-048-004|
 
-    @prod_hasInsulin_isnpMapd_T123NoD_T45D
-    Examples: 
-      | index  | FID    | username | password  | MemUserName        | planType  | memberType     | copayCategory | deductible   | insulin      | note |
-      | 31-I07 | 478830 | kkumard  | tnps459#  | Pattybach          | ISNP_MAPD | Individual_BnC | NON LIS       | T123NoD_T45D | hasInsulin   |  H0294-017-000|    
+    #@prod_hasInsulin_isnpMapd_T123NoD_T45D
+    #Examples: 
+    #  | index  | FID    | username | password  | MemUserName        | planType  | memberType     | copayCategory | deductible   | insulin      | note |
+    #  | 31-I07 | 478830 | kkumard  | tnps459#  | testUserName       | ISNP_MAPD | Individual_BnC | NON LIS       | T123NoD_T45D | hasInsulin   |  H0294-017-000|    
 
     @prod_nonInsulin_mapd_NoT
     Examples: 
-      | index  | FID    | username | password  | MemUserName                                   | planType  | memberType     | copayCategory | deductible   | insulin      | note |
-      | 34-I08 | 478830 | kkumard  | tnps459#  | HSID_SSO_f055fdb0-b555-45e4-b0ea-3326ebc92a16 | MAPD      | Individual_BnC | LIS 1         | NoTier       | nonInsulin   |   H0543-210-000| 
+      | index  | FID    | username | password  | MemUserName        | planType  | memberType     | copayCategory | deductible   | insulin      | note |
+      | 34-I08 | 478830 | kkumard  | tnps459#  | ecueto1            | CSNP_PCP  | Individual_BnC | LIS 2         | NoTier       | nonInsulin   | H1045-018-000| 
 
     #@prod_nonInsulin_mapd_T12345
     #Examples: 

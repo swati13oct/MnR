@@ -1217,6 +1217,11 @@ public class BenefitsAndCoverageWebElements extends UhcDriver {
 	@FindBy(xpath = "//span[text()='Pharmacy Out-Of-Pocket Maximum']")
 	protected WebElement pharmoutpockttextarea;
 	
+	@FindBy(xpath = "//div[contains(@class,'drugpricingTiers')]//div[contains(@class,'benefitsAndCoveragePage ng-scope')]")
+	protected WebElement LearnmoretierslinkInsulinContent;
+	
+	@FindBy(xpath = "//a[@class='display-block collapse-expand atdd-bnc-drgpricingtiers']")
+	protected WebElement Learnmoretierslink_toCloseIt;
 	
 	public BenefitsAndCoverageWebElements(WebDriver driver) {
 		super(driver);

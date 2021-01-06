@@ -3778,7 +3778,7 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 				+"Tier 2\n"
 				+"$12.00\n"
 				+"$12.00\n"
-				+"Select Insulin Drugs\n"
+				+"Select Insulin Drugs Tier 3\n"
 				+"$35.00\n"
 				+"$35.00\n"
 				+"Tier 3\n"
@@ -3855,7 +3855,7 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 				+"Tier 2\n"
 				+"$12.00\n"
 				+"$12.00\n"
-				+"Select Insulin Drugs\n"
+				+"Select Insulin Drugs Tier 3\n"
 				+"$95.00\n"
 				+"$95.00\n"
 				+"Tier 3\n"
@@ -3902,7 +3902,7 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 				+"Tier 2\n"
 				+"$0.00\n"
 				+"$0.00\n"
-				+"Select Insulin Drugs\n"
+				+"Select Insulin Drugs Tier 3\n"
 				+"100% until the $275.00 deductible is met.*\n"
 				+"$95.00\n"
 				+"$95.00\n"
@@ -3951,7 +3951,7 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 				+"Tier 2\n"
 				+"$20.00\n"
 				+"$20.00\n"
-				+"Select Insulin Drugs\n"
+				+"Select Insulin Drugs Tier 3\n"
 				+"$275.00\n"
 				+"$35.00\n"
 				+"$35.00\n"
@@ -4003,7 +4003,7 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 				+"Tier 2\n"
 				+"$0.00\n"
 				+"$0.00\n"
-				+"Select Insulin Drugs\n"
+				+"Select Insulin Drugs Tier 3\n"
 				+"100% until the $275.00 deductible is met.*\n"
 				+"$35.00\n"
 				+"$35.00\n"
@@ -4055,7 +4055,7 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 				+"Tier 2\n"
 				+"$0.00\n"
 				+"$0.00\n"
-				+"Select Insulin Drugs\n"
+				+"Select Insulin Drugs Tier 3\n"
 				+"$95.00\n"
 				+"$95.00\n"
 				+"Tier 3\n"
@@ -4104,7 +4104,7 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 				+"Tier 2\n"
 				+"$12.00\n"
 				+"$12.00\n"
-				+"Select Insulin Drugs\n"
+				+"Select Insulin Drugs Tier 3\n"
 				+"$35.00\n"
 				+"$35.00\n"
 				+"Tier 3\n"
@@ -4187,12 +4187,12 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 				+"Tier 2\n"
 				+"$20.00\n"
 				+"$20.00\n"
-				+"Select Insulin Drugs\n"
+				+"Select Insulin Drugs Tier 3\n"
 				+"$35.00\n"
 				+"$35.00\n"
 				+"Tier 3\n"
 				+"$47.00\n"
-				+"0%*\n"
+				+"no more than 25% for generic drugs or 25% for brand name drugs\n"
 				+"Tier 4\n"
 				+"45%\n"
 				+"no more than 25% for generic drugs or 25% for brand name drugs\n"
@@ -4241,7 +4241,7 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 				+"Tier 2\n"
 				+"$10.00\n"
 				+"$10.00\n"
-				+"Select Insulin Drugs\n"
+				+"Select Insulin Drugs Tier 3\n"
 				+"$35.00\n"
 				+"$35.00\n"
 				+"Tier 3\n"
@@ -4293,12 +4293,12 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 				+"Tier 2\n"
 				+"$0.00\n"
 				+"$0.00\n"
-				+"Select Insulin Drugs\n"
+				+"Select Insulin Drugs Tier 3\n"
 				+"$105.00\n"
 				+"$105.00\n"
 				+"Tier 3\n"
 				+"$120.00\n"
-				+"0%\n"
+				+"no more than 25% for generic drugs or 25% for brand name drugs\n"
 				+"Tier 4\n"
 				+"40%\n"
 				+"no more than 25% for generic drugs or 25% for brand name drugs";
@@ -4517,7 +4517,7 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 		+"Tier 2\n"
 		+"$0.00\n"
 		+"$0.00\n"
-		+"Select Insulin Drugs\n"
+		+"Select Insulin Drugs Tier 3\n"
 		+"$15.00\n"
 		+"$15.00\n"
 		+"Tier 3\n"
@@ -4598,7 +4598,7 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 				+"Tier 2\n"
 				+"$0.00\n"
 				+"$0.00\n"
-				+"Select Insulin Drugs\n"
+				+"Select Insulin Drugs Tier 3\n"
 				+"$35.00\n"
 				+"$35.00\n"
 				+"Tier 3\n"
@@ -4823,7 +4823,7 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 				+"Tier 2\n"
 				+"$0.00\n"
 				+"$0.00\n"
-				+"Select Insulin Drugs\n"
+				+"Select Insulin Drugs Tier 3\n"
 				+"$15.00\n"
 				+"$15.00\n"
 				+"Tier 3\n"
@@ -4904,7 +4904,7 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 				+"Tier 2\n"
 				+"$0.00\n"
 				+"$0.00\n"
-				+"Select Insulin Drugs\n"
+				+"Select Insulin Drugs Tier 3\n"
 				+"$35.00\n"
 				+"$35.00\n"
 				+"Tier 3\n"
@@ -4953,12 +4953,12 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 				+"Tier 2\n"
 				+"$0.00\n"
 				+"no more than 25% for generic drugs or 25% for brand name drugs\n"
-				+"Select Insulin Drugs\n"
+				+"Select Insulin Drugs Tier 3\n"
 				+"$95.00\n"
 				+"$95.00\n"
 				+"Tier 3\n"
 				+"$131.00\n"
-				+"0%\n"
+				+"no more than 25% for generic drugs or 25% for brand name drugs\n"
 				+"Tier 4\n"
 				+"100% until the $150.00 deductible is met.*\n"
 				+"$290.00\n"
@@ -5004,7 +5004,7 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 				+"Tier 2\n"
 				+"$20.00\n"
 				+"no more than 25% for generic drugs or 25% for brand name drugs\n"
-				+"Select Insulin Drugs\n"
+				+"Select Insulin Drugs Tier 3\n"
 				+"$35.00\n"
 				+"$35.00\n"
 				+"Tier 3\n"
@@ -5058,7 +5058,7 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 				+"Tier 2\n"
 				+"$0.00\n"
 				+"$0.00\n"
-				+"Select Insulin Drugs\n"
+				+"Select Insulin Drugs Tier 3\n"
 				+"$35.00\n"
 				+"$35.00\n"
 				+"Tier 3\n"
@@ -5374,7 +5374,7 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 				+"Tier 2\n"
 				+"$0.00\n"
 				+"no more than 25% for generic drugs or 25% for brand name drugs\n"
-				+"Select Insulin Drugs\n"
+				+"Select Insulin Drugs Tier 3\n"
 				+"$95.00\n"
 				+"$95.00\n"
 				+"Tier 3\n"
@@ -5425,7 +5425,7 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 				+"Tier 2\n"
 				+"$12.00\n"
 				+"no more than 25% for generic drugs or 25% for brand name drugs\n"
-				+"Select Insulin Drugs\n"
+				+"Select Insulin Drugs Tier 3\n"
 				+"$35.00\n"
 				+"$35.00\n"
 				+"Tier 3\n"
@@ -5733,6 +5733,34 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 	public boolean display_provider_search_tile() {
 		TestHarness.checkForIPerceptionModel(driver);
 		return validate(providersearchlink,5);
+	}
+	
+	public void validate_learnmoreaboutlink_insulin(String copayCategory, String insulinFlag) {
+		if (!copayCategory.equalsIgnoreCase("NON LIS")) {
+			Assert.assertTrue("PROBLEM - LIS user should not have 'Learn More About Drug Tiers' link", !validate(Learnmoretierslink,0));
+			return;
+		}
+		//note: should be NON LIS user to get to here
+		validateWithValue("Learn more tiers link", Learnmoretierslink);
+		scrollElementToCenterScreen(Learnmoretierslink);
+		Learnmoretierslink.click();
+		if (insulinFlag.equalsIgnoreCase("nonInsulin")) {
+			Assert.assertTrue("PROBLEM, unable to locate the 'Learn More About Drug Tiers' link content'", validate(LearnmoretierslinkInsulinContent,0));
+			String expText="Select Insulin Drugs Tier 3";
+			String actText=LearnmoretierslinkInsulinContent.getText();
+			System.out.println("TEST - actText="+actText);
+			Assert.assertTrue("PROBLEM - user with no insulin should NOT be able to locate text '"+expText+"' from the 'Learn more tiers link' content",!actText.contains(expText));
+		} else {
+			Assert.assertTrue("PROBLEM, unable to locate the 'Learn More About Drug Tiers' link content'", validate(LearnmoretierslinkInsulinContent,0));
+			String expText="Select Insulin Drugs Tier 3";
+			String actText=LearnmoretierslinkInsulinContent.getText();
+			System.out.println("TEST - actText="+actText);
+			Assert.assertTrue("PROBLEM - unable to locate expected text '"+expText+"' from the 'Learn more tiers link' content",actText.contains(expText));
+		}
+		
+		validateWithValue("Learn more tiers link to collapse", Learnmoretierslink_toCloseIt);
+		scrollElementToCenterScreen(Learnmoretierslink_toCloseIt);
+		Learnmoretierslink_toCloseIt.click();
 	}
 
 }
