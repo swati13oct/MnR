@@ -5379,7 +5379,7 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 				+"$95.00\n"
 				+"Tier 3\n"
 				+"$131.00\n"
-				+"0%\n"
+				+"no more than 25% for generic drugs or 25% for brand name drugs\n"
 				+"Tier 4\n"
 				+"100% until the $200.00 deductible is met.*\n"
 				+"$290.00\n"

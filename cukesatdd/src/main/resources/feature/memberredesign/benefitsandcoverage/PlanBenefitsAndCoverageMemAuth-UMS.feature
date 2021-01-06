@@ -885,12 +885,12 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth
     @memAuth_nonInsulin_mapd_NoT
     Examples: 
       | index  | FID    | username | password  | MemUserName        | planType  | memberType     | copayCategory | deductible   | insulin      |
-      | 34-I08 | 478830 | qavgogine | qavgogine| q4_insulinDemo_002 | MAPD      | Individual_BnC | LIS 4         | NoTier       | nonInsulin   | 
+      | 31-I08 | 478830 | qavgogine | qavgogine| q4_insulinDemo_002 | MAPD      | Individual_BnC | LIS 4         | NoTier       | nonInsulin   | 
 
     #@memAuth_nonInsulin_mapd_T12345
     #Examples: 
     #  | index  | FID    | username | password  | MemUserName        | planType  | memberType     | copayCategory | deductible   | insulin      |
-    #  | 34-I09 | 478830 | qavgogine| qavgogine | q4_insulinDemo_019 | MAPD      | Individual_BnC | NON LIS       | T12345       | nonInsulin   | 
+    #  | 31-I09 | 478830 | qavgogine| qavgogine | q4_insulinDemo_019 | MAPD      | Individual_BnC | NON LIS       | T12345       | nonInsulin   | 
 
   @memAuth_benefitsAndCoverage24 @memAuth_api
   Scenario Outline: Index: <index> -TID: <TID> -plan: <planType> -memberType: <memberType> - Verify UCPBenefits API not having undefined input value for COMBO user
