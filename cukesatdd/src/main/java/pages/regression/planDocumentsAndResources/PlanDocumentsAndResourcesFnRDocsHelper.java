@@ -483,7 +483,7 @@ public class PlanDocumentsAndResourcesFnRDocsHelper {
 		if (docName.equals("Naturopathy Provider Directory")) {
 			testInputInfoMap.put("docName", docName);
 			//keep testInputInfoMap.put("expectedUrl", "/content/dam/UCP/Group/Naturopathy_Provider_Directory_StofCT.pdf");
-			testInputInfoMap.put("expectedUrl", "Naturopathy_Provider_Directory_StofCT.pdf");
+			testInputInfoMap.put("expectedUrl", "Naturopathy_Provider_Directory.pdf");
 			testInputInfoMap.put("redirectUrl", "none");
 			testInputInfoMap.put("checkDestUrl", "true");
 			testInputInfoMap.put("switchTab", "true");
