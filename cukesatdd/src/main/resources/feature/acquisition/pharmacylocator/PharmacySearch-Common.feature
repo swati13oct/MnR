@@ -429,7 +429,7 @@ Feature: 1.11. ACQ-Pharmacy Locator Test Scripts
       | Zip Code        | <zipcode>         |
       | Is Multi County | <isMultutiCounty> |
       | County Name     | <county>          |
-		And the user views the plans of the below plan type
+    And the user views the plans of the below plan type
       | Plan Type | <plantype> |
     When the user navigate to pharmacy search page from the navigation bar
     Then user verify breadcrumb "Return to Plans" displayed on pharmacy search page
@@ -441,19 +441,32 @@ Feature: 1.11. ACQ-Pharmacy Locator Test Scripts
     Then user verify breadcrumb "Return to Compare" displayed on pharmacy search page
     When user clicks on breadcrumb on pharmacy search page
     Then verify plan compare page is loaded
-    When user clicks on home tab
-    And the user clicks on the shopping cart icon
+
+    @breadcrumbPharmacySearch_AARP
+    Examples: 
+      | site | zipcode | county      | isMultutiCounty | plantype |
+      | AARP |   19019 | Iowa County | No              | MAPD     |
+
+    @breadcrumbPharmacySearch_UHC
+    Examples: 
+      | site | zipcode | county      | isMultutiCounty | plantype |
+      | UHC  |   19019 | Iowa County | No              | MAPD     |
+
+  Scenario Outline: To verify breadcrumbs on pharmacy search page through guest profile on acquisition <site> site
+    Given the user is on medicare acquisition site landing page
+      | Site | <site> |
+    When the user navigate to Visitor profile page
     When the user navigate to pharmacy search page from the navigation bar
     Then user verify breadcrumb "Return to Profile" displayed on pharmacy search page
     When user clicks on breadcrumb on pharmacy search page
     Then user should be navigated to visitor profile page
-    
+
     @breadcrumbPharmacySearch_AARP
     Examples: 
-      | site | zipcode | county      | isMultutiCounty |plantype|
-      | AARP |   19019 | Iowa County | No              |MAPD|
-		
-		@breadcrumbPharmacySearch_UHC
+      | site | zipcode | county      | isMultutiCounty | plantype |
+      | AARP |   19019 | Iowa County | No              | MAPD     |
+
+    @breadcrumbPharmacySearch_UHC
     Examples: 
-      | site | zipcode | county      | isMultutiCounty |plantype|
-      | UHC  |   19019 | Iowa County | No              |MAPD|
+      | site | zipcode | county      | isMultutiCounty | plantype |
+      | UHC  |   19019 | Iowa County | No              | MAPD     |
