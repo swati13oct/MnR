@@ -1437,7 +1437,7 @@ public class PlanDocumentsAndResourcesUsersHelperProd {
 				targetTestDocList.add("Summary of Benefits");
 				targetTestDocList.add("Evidence of Coverage");
 				targetTestDocList.add("Certificate of Coverage");
-				targetTestDocList.add("Additional Drug Coverage");
+				//targetTestDocList.add("Additional Drug Coverage");
 				//targetTestDocList.add("Formulary/Drug List - Comprehensive");
 				//targetTestDocList.add("Prior Authorization Criteria");
 				//targetTestDocList.add("Step Therapy Criteria");
@@ -1461,7 +1461,7 @@ public class PlanDocumentsAndResourcesUsersHelperProd {
 				targetTestDocList.add("Plan Guide");
 				//targetTestDocList.add("Quick Start Guide");
 				//targetTestDocList.add("Benefit Highlights");
-				targetTestDocList.add("Additional Drug Coverage");
+				//targetTestDocList.add("Additional Drug Coverage");
 				//targetTestDocList.add("Comprehensive Formulary");
 				targetTestDocList.add("Home Delivery Brochure");
 				targetTestDocList.add("Evidence Of Coverage");
