@@ -3141,6 +3141,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	public VPPPlanSummaryPage navagateToChangeZipcodeOptionToChangeZipcode(String zipcode, String countyName,
 			String isMultiCounty) {
 		System.out.println("Proceed to go to plan overview section to enter zipcode '" + zipcode + "' to find plan'");
+		Actions action = new Actions(driver);
+		action.moveToElement(planOverviewChangeZipCodeLink).build().perform();
 		try {
 			// if change zip code link is there then click it, once you used it then it will
 			// only display field box going forward.
@@ -6264,8 +6266,11 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	public void removeProvidersFromPlanCard() {
 		try {
 			providerListPlanCard.click();
+			Actions action = new Actions(driver);
 		while(removeProviderListPlanCard.size()!=0) {
+			action.moveToElement(removeProviderListPlanCard.get(0)).build().perform();
 			removeProviderListPlanCard.get(0).click();
+//			jsClickNew(removeProviderListPlanCard.get(0));
 			System.out.println("Removed providers in plan card");
 		}
 		}
