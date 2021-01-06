@@ -1625,7 +1625,7 @@ public class PlanDocumentsAndResourcesUsersHelper {
 				targetTestDocList.add("Schedule of benefits");
 				targetTestDocList.add("Certificate of Coverage");
 				targetTestDocList.add("Your Plan Getting Started");
-				targetTestDocList.add("Privacy Notice");
+				//targetTestDocList.add("Privacy Notice");
 				targetTestDocList.add("CDI Long Notice");
 				//targetTestDocList.add("CDI Long Notice (CA Only)");
 				return targetTestDocList;
