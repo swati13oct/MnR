@@ -90,7 +90,7 @@ Feature: 1.04.2.1 To Test DREAM EOB for Members - E2E - Member Auth
     @memAuth_dreamEob01d_pdp
     Examples: 
       | index | username  | password  | MemUserName             | planType | memberType        | note                              | flagZeroEob |
-      | 04    | qavgogine | qavgogine | Dream_EOB_PDP_010       | PDP      | PDP_RX_DEOB       | 1 new D, 1 or 2 old D             | true        |  
+      | 04    | qavgogine | qavgogine | q3_sep_UAT4_AARP057     | PDP      | PDP_RX_DEOB       | 1 new D, 1 or 2 old D             | true        |  
 
     @memAuth_dreamEob01e_maCosmos 
     Examples: 
@@ -100,7 +100,7 @@ Feature: 1.04.2.1 To Test DREAM EOB for Members - E2E - Member Auth
     @memAuth_dreamEob01f_maNice 
     Examples: 
       | index | username  | password  | MemUserName             | planType | memberType        | note                              | flagZeroEob |
-      | 06    | qavgogine | qavgogine | q1_feb_Rx_006           | MA       | MA_NICE_DEOB      | 1 new C, 1 old C                  | false       |
+      | 06    | qavgogine | qavgogine | testUserMA_TERM         | MA       | MA_NICE_DEOB      | 1 new C, 1 old C                  | false       |
 
     @memAuth_dreamEob01g_pdpComboShipFed
     Examples: 
