@@ -2594,7 +2594,7 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 		CommonUtility.waitForPageLoad(driver, RetailDrugCost_TableNONLIS, 15);
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", RetailDrugCost_TableNONLIS);
 		validateWithValue("Drug cost table is diplaying for MAPD GROUP NON LIS USER", RetailDrugCost_TableNONLIS);
-		String mapdGroupTable_2020= "Additional Drug Coverage\n"
+	/*	String mapdGroupTable_2020= "Additional Drug Coverage\n"
 				+"Annual Deductible Stage \n"
 				+"Initial Coverage Stage \n"
 				+"Coverage Gap Stage\n"
@@ -2612,7 +2612,7 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 				+"Tier 3 \n"
 				+"$55.00\n"
 				+"Tier 4 \n"
-				+"$55.00";
+				+"$55.00"; */
 		String mapdGroupTable_2021= "Additional Drug Coverage\n"
 				+"Annual Deductible Stage \n"
 				+"Initial Coverage Stage \n"
@@ -2632,7 +2632,7 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 				+"$55.00\n"
 				+"Tier 4 \n"
 				+"$55.00";
-		String mapdGroupTable_2021_team="Additional Drug Coverage\n"
+		/*String mapdGroupTable_2021_team="Additional Drug Coverage\n"
 				+"Annual Deductible Stage \n"
 				+"Initial Coverage Stage \n"
 				+"Coverage Gap Stage\n"
@@ -2650,25 +2650,25 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 				+"Greater of $9.20 or 5.00%\n"
 				+"Tier 4 \n"
 				+"$55.00\n"
-				+"Greater of $9.20 or 5.00%";
+				+"Greater of $9.20 or 5.00%"; 
 		String mapdGroupTable=mapdGroupTable_2020;
 		if (dateStr.contains("2021") &&  MRScenario.environment.contains("team-a")) {
 			mapdGroupTable=mapdGroupTable_2021_team;
 		} else if (dateStr.contains("2021") && MRScenario.environment.contains("stage")) {
 			mapdGroupTable=mapdGroupTable_2021;
-		}
-		if(RetailDrugCost_TableNONLIS.getText().equals(mapdGroupTable.toString())){
+		} */
+		if(dateStr.contains("2021") && RetailDrugCost_TableNONLIS.getText().equals(mapdGroupTable_2021.toString())){
 			Assert.assertTrue("The data in the drug cost table is displaying correctly", true);
 			System.out.println("The data in the drug cost table is displaying correctly");  
 		}
 		else{
-			System.out.println(">>>>>>>>>>>>>The Expected Table  value is<<<<<<<<<<<<<<<<< \n"+mapdGroupTable.toString());
+			System.out.println(">>>>>>>>>>>>>The Expected Table  value is<<<<<<<<<<<<<<<<< \n"+mapdGroupTable_2021.toString());
 			System.out.println(">>>>>>>>>>>>>The Actual Table value is<<<<<<<<<<<<<<<<<<<< \n"+RetailDrugCost_TableNONLIS.getText());
 			System.err.println("The data in the drug cost table is not displaying correctly");
 
 			testNote.add("The data in the drug cost table is not displaying correctly. table='RetailDrug'");
 			testNote.add("The data in the drug cost table is not displaying correctly");
-			testNote.add("\n>>>>>>>>>>>>>The Expected Table  value is<<<<<<<<<<<<<<<<< \n"+mapdGroupTable);
+			testNote.add("\n>>>>>>>>>>>>>The Expected Table  value is<<<<<<<<<<<<<<<<< \n"+mapdGroupTable_2021);
 			testNote.add("\n>>>>>>>>>>>>>The Actual Table value is<<<<<<<<<<<<<<<<<<<< \n"+RetailDrugCost_TableNONLIS.getText());
 		} 
 		return testNote;
@@ -2923,7 +2923,7 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 				+"no more than 25% for generic drugs or 25% for brand name drugs\n"
 				+"*Once you reach the Coverage Gap Stage, you pay copays or coinsurance defined by your plan for all Tier 1 through Tier 5 drugs regardless of whether your full deductible has been met.";
 		String TableData= TableData_2020;
-		if (dateStr.contains("2021") && MRScenario.environment.contains("stage"))
+		if (dateStr.contains("2021"))
 			TableData=TableData_2021;
 		if(preferedMail_DrugTable.getText().equals(TableData.toString())){
 			Assert.assertTrue("The data in the drug cost table is displaying correctly", true);
