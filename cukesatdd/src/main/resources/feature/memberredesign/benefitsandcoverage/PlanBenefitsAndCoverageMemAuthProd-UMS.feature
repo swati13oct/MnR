@@ -51,7 +51,7 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth Prod
 
     Examples: 
       | index | TID   |username  | password  | MemUserName | planType | memberType    |
-      | 02    | 15093 |kkumard | tnps459#|HARRELLM2000| PDP      | TEXASERSGroup_BnC |
+      | 02    | 15093 |kkumard | tnps459#|HARRELLM2000| PDP      | COMBO_TEXASERSGroup_BnC |
         
   #TC11_Benefits_for_Ship_member
   #note: this scenario covers multiple testcases TID 15094,15240
