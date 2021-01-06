@@ -64,7 +64,7 @@ public class healthwellnessDeepLinkLoginPageSHIP extends UhcDriver {
 			private static String STAGE_DEEPLINK_URL_DENTEGRA_DENTAL = MRConstants.DENTEGRA_DENTAL_DEEPLINK_URL;
 			
 			 /*This method will open deep link page */
-			public healthwellnessDeepLinkLoginPageSHIP navigateToLoginURL(String brand){
+			public healthwellnessDeepLinkLoginPageSHIP navigateToLoginURL(){
 				start(AARP_HAWL);
 				driver.manage().deleteAllCookies();
 				

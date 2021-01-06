@@ -1280,12 +1280,11 @@ public class HSIDStepDefinition {
 										 * @todo :member lands on myDocuments deep link
 										 */
 										@Given("^I am an M&R SHIP member$")
-										public void the_SHIP_user_iS_on_deeplink_Page(DataTable givenAttributes) throws InterruptedException{
-											String brand = givenAttributes.asList(String.class).get(0);
+										public void the_SHIP_user_iS_on_deeplink_Page() throws InterruptedException{
 											WebDriver wd = getLoginScenario().getWebDriver();
 											getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 											healthwellnessDeepLinkLoginPageSHIP healthwellnessDeepLinkLoginPageSHIP = new healthwellnessDeepLinkLoginPageSHIP(wd);
-											healthwellnessDeepLinkLoginPageSHIP.navigateToLoginURL(brand);
+											healthwellnessDeepLinkLoginPageSHIP.navigateToLoginURL();
 											getLoginScenario().saveBean(PageConstants.AARP_HAWL,healthwellnessDeepLinkLoginPageSHIP );	
 										}
 										/** 
