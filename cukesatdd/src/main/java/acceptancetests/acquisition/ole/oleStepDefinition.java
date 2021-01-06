@@ -3168,7 +3168,7 @@ public void the_user_validates_the_OLE_Submission_Details_in_GPS(DataTable arg1)
 				DetailsMap.put("Prescription Drug", prescriptionDrug.substring(0, 1).toUpperCase());
 				String prescriptionCoverageName = (String) getLoginScenario().getBean(oleCommonConstants.PRESCRIPTION_COVERAGE_NAME);
 			//	prescriptionCoverageName=prescriptionCoverageName.toUpperCase()+"+"+"PRESCRIPTIONCOVERAGE";
-				prescriptionCoverageName=prescriptionCoverageName.toUpperCase()+""+""+prescriptionCoverageName.toUpperCase();
+				prescriptionCoverageName=prescriptionCoverageName.toUpperCase()+'"'+'+'+'"'+prescriptionCoverageName.toUpperCase();
 				DetailsMap.put("Prescription Name", prescriptionCoverageName);
 				String pdGroupNumber = (String) getLoginScenario().getBean(oleCommonConstants.PRESCRIPTION_GROUP_NUMBER);
 				DetailsMap.put("PD Group Number", pdGroupNumber.toUpperCase());
@@ -3228,7 +3228,7 @@ public void the_user_validates_the_OLE_Submission_Details_in_GPS(DataTable arg1)
 
 				//Proposed Effective Date
 				
-						String proposedEffectiveDate = (String) getLoginScenario().getBean(oleCommonConstants.PARTA_EFFECTIVE);
+						String proposedEffectiveDate = (String) getLoginScenario().getBean(oleCommonConstants.PROPOSED_EFF_DATE);
 				proposedEffectiveDate = OLEGPSValidation.converttogpsDate(proposedEffectiveDate);
 				DetailsMap.put("Proposed Effective date", proposedEffectiveDate);
 				System.out.println("--------------------Storing Data for Proposed Effective Date Ended----------------------" +proposedEffectiveDate);

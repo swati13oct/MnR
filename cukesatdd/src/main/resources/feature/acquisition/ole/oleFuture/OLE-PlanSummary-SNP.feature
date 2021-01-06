@@ -111,8 +111,10 @@ Feature: 1.05.4 OLE common tool flow E2E DSNP
     Then the user validates the Online Enrollment details on Review and Submit Page
     Then the user clicks on Submit Enrollment to complete enrollment
     Then the user Validates Next Steps in Confirmation Page for the Plan Type.
-		#Then the user validates the OLE Submission Details in GPS
-    #| Plan Type | <plantype> |
+		Then the user validates the OLE Submission Details in GPS
+    	| Plan Type | <plantype> |
+		 | Rider Flag | <riderflag> |
+		 | Mailing Address Question | <mailingaddressquestion> |
 		
 		#@SNP_OLE_AARP_Future @prodRegression
     Examples: 
@@ -221,24 +223,26 @@ Feature: 1.05.4 OLE common tool flow E2E DSNP
       | Rider Flag | <riderflag> |
     Then the user validates required fields for Authorization Page
     Then the user navigates to Review and Submit Page
-        Then the user validates the Plan and Member details on Review and Submit Page
-    #Then the user validates the Online Enrollment details on Review and Submit Page
+    Then the user validates the Plan and Member details on Review and Submit Page
+    Then the user validates the Online Enrollment details on Review and Submit Page
     Then the user clicks on Submit Enrollment to complete enrollment
     # Then the user validates Plan and Member Details on Confirmation Page
     #Then the user Validates Next Steps in Confirmation Page for the Plan Type.
-		#Then the user validates the OLE Submission Details in GPS
-    #| Plan Type | <plantype> |
+	Then the user validates the OLE Submission Details in GPS
+    	| Plan Type | <plantype> |
+		 | Rider Flag | <riderflag> |
+		 | Mailing Address Question | <mailingaddressquestion> |
     
     @SNP_OLE_AARP_Future
    		Examples: 
     Examples: 
      | TID   | site|PlanType |planyear|planYear|zipcode | isMultutiCounty | county            | plantype | planName                                                | cardtype | firstname | lastname    | medicarenumber | ssnflag |SSNnumber   | partadate | partbdate | medicaidnumber | esrdflag | dob      | gender | permstreet    | permcity    | mailingaddressquestion | mailingstreet | mailingcity | mailingstate | mailingzip | email         | selectoptions                                                                                                                                                                                                                                       | optiondata              | pdpFlag | longTermFlag | riderflag | emailConfirmation | goGreen |healthinsurancename|groupnumber| membernumber|prescriptioncoveragename|pdgroupnumber|pdmembernumber|inputdataType|
-     | 15576 | AARP|DSNP-MBI | future |future  |  10001 | NO              | New York County   | SNP      |  UnitedHealthcare Dual Complete (HMO D-SNP)             | MBI      | GOTTFRIED | GARRAND     | 1EG1TE1MK12    | true    | 123456789  |    09011997 |  11012002 |     0123456789 | true     | 04261944 | Female | 123 Perm Rd   | Los Angeles | Yes                    | 876 MailingSt | Mailing LA  | NY           |      10001 | test@test.com | losing coverage/ moved outside of the service area                                                                                                                                                                                                  | 01012018/01012018       | yes     | no           | false     | NO                | NO      |HealthInsurance             |HI1562759    | ABC12345DEF     |PrescriptionCoverage            |PD5646136   | BCD12345EFG |Valid|
+     | 15576 | AARP|DSNP-MBI | future |future  |  10001 | NO              | New York County   | SNP      |  UnitedHealthcare Dual Complete (HMO D-SNP)             | MBI      | GOTTFRIED | GARRAND     | 1EG1TE1MK12    | true    | 123456789  |    09011997 |  11012002 |     0123456789 | true     | 04261944 | Female | 123 Perm Rd   | Los Angeles | Yes                    | 876 MailingSt | Mailing LA  | NY           |      10001 | test@test.com | losing coverage/ moved outside of the service area                                                                                                                                                                                                  | 01012018/01012018       | yes     | yes           | false     | NO                | NO      |HealthInsurance             |HI1562759    | ABC12345DEF     |PrescriptionCoverage            |PD5646136   | BCD12345EFG |Valid|
   
      @SNP_OLE_UHC_Future
      Examples: 
       | TID   | site|PlanType |planyear|planYear|zipcode | isMultutiCounty | county            | plantype | planName                                             | cardtype | firstname | lastname | medicarenumber | ssnflag |SSNnumber   | partadate | partbdate | medicaidnumber | esrdflag | dob      | gender | permstreet    | permcity    | mailingaddressquestion | mailingstreet | mailingcity | mailingstate | mailingzip | email         | selectoptions                                                                                                                                                                                                                                       | optiondata              | pdpFlag | longTermFlag | riderflag | emailConfirmation | goGreen |healthinsurancename|groupnumber| membernumber|prescriptioncoveragename|pdgroupnumber|pdmembernumber|inputdataType|
-     | 15576 | UHC|DSNP-MBI | future|future|  10001 | NO              | New York County | SNP      |  UnitedHealthcare Dual Complete (HMO D-SNP)             | MBI      | GOTTFRIED | GARRAND     | 1EG1TE1MK12   | true| 123456789|    09011997 |  11012002 |     0123456789 | true     | 04261944 | Female | 123 Perm Rd   | Los Angeles | Yes                    | 876 MailingSt | Mailing LA  | NY           |      10001 | test@test.com | losing coverage/ moved outside of the service area                                                                                                                                                                                                  | 01012018/01012018       | yes     | no           | false     | NO                | NO      |HealthInsurance             |HI1562759    | ABC12345DEF     |PrescriptionCoverage            |PD5646136   | BCD12345EFG |Valid|
+     | 15576 | UHC|DSNP-MBI | future|future|  10001 | NO              | New York County | SNP      |  UnitedHealthcare Dual Complete (HMO D-SNP)             | MBI      | GOTTFRIED | GARRAND     | 1EG1TE1MK12   | true| 123456789|    09011997 |  11012002 |     0123456789 | true     | 04261944 | Female | 123 Perm Rd   | Los Angeles | Yes                    | 876 MailingSt | Mailing LA  | NY           |      10001 | test@test.com | losing coverage/ moved outside of the service area                                                                                                                                                                                                  | 01012018/01012018       | yes     | yes           | false     | NO                | NO      |HealthInsurance             |HI1562759    | ABC12345DEF     |PrescriptionCoverage            |PD5646136   | BCD12345EFG |Valid|
   
       #@SNP_OLE_UHC_DSNP_Future1
      # Examples: 

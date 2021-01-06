@@ -303,8 +303,8 @@ public class OLEconfirmationPage extends UhcDriver{
 				   
 				   
 				    //SEP Page 
-				   String note = rs.getString("NOTE");
-				   gpsData.put("Note", note); 
+				//   String note = rs.getString("NOTE");
+				 //  gpsData.put("Note", note); 
 				  
 				   //String dentalPlatinum = rs.getString("DENTAL_PLATINUM"); TODO:1/6-Check and update for which plan types ths value comes as Y and put logic to validate it
 				   //gpsData.put("Dental Platinum", dentalPlatinum);
