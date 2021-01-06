@@ -1013,7 +1013,8 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 		validateNew(learnmorebutton,0);
 		sleepBySec(30);
 		JavascriptExecutor jse = (JavascriptExecutor) driver;
-		jse.executeScript("window.scrollBy(0,-500)", "");
+		jse.executeScript("window.scrollBy(0,-1000)", "");
+		CommonUtility.waitForPageLoadNew(driver, learnmorebutton, 20);
 		learnmorebutton.click();
 		sleepBySec(20);
 		if (this.driver.getTitle().contains("Value Added Services")) {
