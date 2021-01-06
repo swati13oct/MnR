@@ -6279,4 +6279,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		CommonUtility.checkPageIsReadyNew(driver);
 	}
 
+	
+	public void validateVPPSummaryPage() {
+		Assert.assertTrue("user not navigated to VPP Page",driver.getCurrentUrl().contains("plan-summary"));
+	}
 }

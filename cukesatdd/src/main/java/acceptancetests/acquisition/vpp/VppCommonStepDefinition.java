@@ -3216,5 +3216,13 @@ public void user_clicks_on_continue_enrollment_button_on_the_modal() throws Thro
 		
 		plansummaryPage.enternewZip(zipCode);
 	}
+	
+	@Then("^user should be navigated to VPP summary page$")
+	public void user_should_be_navigated_to_VPP_summary_page() throws Throwable {
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		plansummaryPage.validateVPPSummaryPage();
+	}
+
 }
 

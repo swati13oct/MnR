@@ -36,6 +36,9 @@ public class PharmacySearchPage extends PharmacySearchBase {
 	@FindBy(xpath = "//button[contains(@id,'addDrug')]")
 	public WebElement AddMyDrugsBtn;
 	
+	@FindBy(xpath = "//div[@ng-if='returnLinkText']//a")
+	public WebElement breadCrumbLink;
+	
 	@Override
 	public void openAndValidate() {
 		CommonUtility.checkPageIsReadyNew(driver);
@@ -634,5 +637,13 @@ public class PharmacySearchPage extends PharmacySearchBase {
 		return null;
 	}
 	
+	public void validateBreadCrumb(String breadcrumb) {
+		validateNew(breadCrumbLink);
+		Assert.assertTrue("Expected breadcrumb"+breadcrumb+ "not displayed",breadcrumb.equals(breadCrumbLink.getText()));
+	}
+	
+	public void clickBreadCrumb() {
+		breadCrumbLink.click();
+	}
 }
 

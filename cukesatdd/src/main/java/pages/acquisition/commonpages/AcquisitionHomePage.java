@@ -515,6 +515,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "//a[@title='Pharmacy Locator']")
 	private WebElement pdpPharmacyLink;
 	
+	@FindBy(xpath = "//a[@id='ghn_lnk_1']")
+	private WebElement homeTab;
+	
    	String ChatSamText= "Chat with a Licensed Insurance Agent";
 
 	private static String TeamC_ACQUISITION_PAGE_URL = MRConstants.TeamC_UHC_URL;
@@ -3654,6 +3657,10 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			driver.close();
 			driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
 			CommonUtility.checkPageIsReadyNew(driver);			
+		}
+		
+		public void clickHomeTab() {
+			homeTab.click();
 		}
 	
 }

@@ -545,4 +545,28 @@ public class PharmacySearchCommonStepDefinition {
 		getLoginScenario().saveBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE, pharmacySearchPage);
 
 	}
+	
+	@Then("^user verify breadcrumb \"([^\"]*)\" displayed on pharmacy search page$")
+	public void user_verify_breadcrumb_displayed_on_pharmacy_search_page(String breadCrumb) {
+		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
+				.getBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE);
+		pharmacySearchPage.validateBreadCrumb(breadCrumb);
+		getLoginScenario().saveBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE, pharmacySearchPage);
+	}
+	
+	@When("^user clicks on home tab$")
+	public void user_clicks_on_home_tab() {
+		AcquisitionHomePage aquisitionhomepage= (AcquisitionHomePage)getLoginScenario().getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		WebDriver wd = ( WebDriver)getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		aquisitionhomepage.clickHomeTab();
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+	}
+	
+
+	@When("^user clicks on breadcrumb on pharmacy search page$")
+	public void user_clicks_on_breadcrumb_on_pharmacy_search_page()  {
+		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
+				.getBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE);
+		pharmacySearchPage.clickBreadCrumb();
+	}
 }
