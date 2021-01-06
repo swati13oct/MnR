@@ -42,7 +42,7 @@ Feature: 1.01 Member  benefits and Coverage page
     Then The user navigate to Benefits and Coverage page
     And the user validates the Drug costs Section
     Then the user verifies the Retail Cost sharing table
-    Then the user verifies the Mail Order Cost sharing table
+   # Then the user verifies the Mail Order Cost sharing table
 
     @devRegression
     Examples: 
