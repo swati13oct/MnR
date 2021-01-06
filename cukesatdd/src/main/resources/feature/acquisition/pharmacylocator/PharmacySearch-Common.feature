@@ -441,6 +441,13 @@ Feature: 1.11. ACQ-Pharmacy Locator Test Scripts
     Then user verify breadcrumb "Return to Compare" displayed on pharmacy search page
     When user clicks on breadcrumb on pharmacy search page
     Then verify plan compare page is loaded
+    When user clicks on home tab
+    And the user clicks on the shopping cart icon
+    #When the user navigate to Visitor profile page
+    When the user navigate to pharmacy search page from the navigation bar
+    Then user verify breadcrumb "Return to Profile" displayed on pharmacy search page
+    When user clicks on breadcrumb on pharmacy search page
+    Then user should be navigated to visitor profile page
 
     @breadcrumbPharmacySearch_AARP
     Examples: 
@@ -455,7 +462,10 @@ Feature: 1.11. ACQ-Pharmacy Locator Test Scripts
   Scenario Outline: To verify breadcrumbs on pharmacy search page through guest profile on acquisition <site> site
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
-    When the user navigate to Visitor profile page
+    When the user navigate to pharmacy search page from the navigation bar
+    #When user clicks on home tab
+    And the user clicks on the shopping cart icon
+    #When the user navigate to Visitor profile page
     When the user navigate to pharmacy search page from the navigation bar
     Then user verify breadcrumb "Return to Profile" displayed on pharmacy search page
     When user clicks on breadcrumb on pharmacy search page
