@@ -1492,8 +1492,8 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 				+"Tier 1\n"
 				+"$5.00 copay\n"
 				+"$5.00 copay\n"
-				+"After your total drug costs reach $4,020, the plan continues to pay its share of the cost of your drugs and you pay your share of the cost.\n"
-				+"When your total out-of-pocket costs for Part D prescription drugs reach $6,350, you will pay a $0 copay for your drugs for the rest of the plan year.\n"
+				+"After your total drug costs reach $4,130, the plan continues to pay its share of the cost of your drugs and you pay your share of the cost.\n"
+				+"When your total out-of-pocket costs for Part D prescription drugs reach $6,550, you will pay a $0 copay for your drugs for the rest of the plan year.\n"
 				+"Tier 2\n"
 				+"$25.00 copay\n"
 				+"$25.00 copay\n"
@@ -1610,8 +1610,8 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 				+"$10 copay\n"
 				+"$20 copay\n"
 				+"$30 copay\n"
-				+"After your total drug costs reach $4,020, the plan covers all formulary drugs through the coverage gap at the same copays listed under the Initial Coverage Stage\n"
-				+"When your out-of-pocket costs reach the $6,350 limit for the plan year, you move to the Catastrophic Coverage Stage.  In this stage, you will continue to pay the same cost share that you paid in the Initial Coverage Stage.\n"
+				+"After your total drug costs reach $4,130, the plan covers all formulary drugs through the coverage gap at the same copays listed under the Initial Coverage Stage\n"
+				+"When your out-of-pocket costs reach the $6,550 limit for the plan year, you move to the Catastrophic Coverage Stage.  In this stage, you will continue to pay the same cost share that you paid in the Initial Coverage Stage.\n"
 				+"The catastrophic coverage will go toward Part D covered medications.\n"
 				+"Tier 2\n"
 				+"$35 copay\n"
@@ -2685,10 +2685,10 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 				+"Catastrophic Coverage Stage\n"
 				+"Covered Generic Drugs\n"
 				+"$0.00\n"
-				+"$3.60\n"
+				+"$3.70\n"
 				+"$0.00\n"
 				+"All Other Covered Drugs\n"
-				+"$8.95\n"
+				+"$9.20\n"
 				+"$0.00";
 
 		if(RetailDrugCost_Table.getText().equals(mapdGroupTable.toString())){
@@ -5727,6 +5727,11 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 			
 		}
 		return isDisplayed;
+	}
+	
+	public boolean display_provider_search_tile() {
+		TestHarness.checkForIPerceptionModel(driver);
+		return validate(providersearchlink,5);
 	}
 
 }

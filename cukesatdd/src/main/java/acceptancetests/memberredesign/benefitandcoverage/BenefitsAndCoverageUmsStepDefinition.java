@@ -1477,11 +1477,21 @@ public class BenefitsAndCoverageUmsStepDefinition {
 
 
 	@Then("^the user validate vas tiles on vas page")
-	public void validatevastiles()
+	public void validatevastiles(DataTable memberAttributes)
 	{
 		ValueAddedServicepage valueaddedservices = (ValueAddedServicepage) getLoginScenario()
 				.getBean(PageConstantsMnR.VALUE_ADDED_SERVICES);
-		valueaddedservices.vastiles();
+		List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		String planCode = memberAttributesMap.get("Plan Code");
+		String stateCode = memberAttributesMap.get("State Code");
+		valueaddedservices.vastiles(planCode, stateCode);
 
 	}
 
@@ -2664,6 +2674,20 @@ public class BenefitsAndCoverageUmsStepDefinition {
 			}
 		}
 		
+	}
+	
+	@Then("^validates provider search tile not displayed$")
+	public void validates_provider_search_tile_not_displayed()
+	{
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario().getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
+		Assert.assertFalse(benefitsCoveragePage.display_provider_search_tile());
+	}
+	
+	@Then("^validates provider search tile displayed$")
+	public void validates_provider_search_tile_displayed()
+	{
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario().getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
+		Assert.assertTrue(benefitsCoveragePage.display_provider_search_tile());
 	}
 	
 }//end of class
