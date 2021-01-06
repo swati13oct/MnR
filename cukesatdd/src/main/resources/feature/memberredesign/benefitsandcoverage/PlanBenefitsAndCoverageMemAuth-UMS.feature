@@ -847,20 +847,20 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth
       | Deductible | <deductible> |
       | Insulin | <insulin> |
 	
-    @memAuth_hasInsulin_mapd_NoD
-    Examples: 
-      | index  | FID    | username | password  | MemUserName        | planType  | memberType     | copayCategory | deductible   | insulin      |
-      | 31-I01 | 478830 | qavgogine| qavgogine | q4_insulinDemo_005 | MAPD      | Individual_BnC | NON LIS       | NoD          | hasInsulin   | 
+    #@memAuth_hasInsulin_mapd_NoD
+    #Examples: 
+    #  | index  | FID    | username | password  | MemUserName        | planType  | memberType     | copayCategory | deductible   | insulin      |
+    #  | 31-I01 | 478830 | qavgogine| qavgogine | q4_insulinDemo_005 | MAPD      | Individual_BnC | NON LIS       | NoD          | hasInsulin   | 
 
-    @memAuth_hasInsulin_mapd_T12NoD_T345D
-    Examples: 
-      | index  | FID    | username | password  | MemUserName        | planType  | memberType     | copayCategory | deductible   | insulin      |
-      | 31-I02 | 478830 | qavgogine| qavgogine | q4_insulinDemo_003 | MAPD      | Individual_BnC | NON LIS       | T12NoD_T345D | hasInsulin   | 
+    #@memAuth_hasInsulin_mapd_T12NoD_T345D
+    #Examples: 
+    #  | index  | FID    | username | password  | MemUserName        | planType  | memberType     | copayCategory | deductible   | insulin      |
+    #  | 31-I02 | 478830 | qavgogine| qavgogine | q4_insulinDemo_003 | MAPD      | Individual_BnC | NON LIS       | T12NoD_T345D | hasInsulin   | 
 
-    @memAuth_hasInsulin_mapd_T123NoD_T45D
-    Examples: 
-      | index  | FID    | username | password  | MemUserName        | planType  | memberType     | copayCategory | deductible   | insulin      |
-      | 31-I03 | 478830 | qavgogine| qavgogine | Q4_insulinDemo_100 | MAPD      | Individual_BnC | NON LIS       | T123NoD_T45D | hasInsulin   | 
+    #@memAuth_hasInsulin_mapd_T123NoD_T45D
+    #Examples: 
+    #  | index  | FID    | username | password  | MemUserName        | planType  | memberType     | copayCategory | deductible   | insulin      |
+    #  | 31-I03 | 478830 | qavgogine| qavgogine | Q4_insulinDemo_100 | MAPD      | Individual_BnC | NON LIS       | T123NoD_T45D | hasInsulin   | 
      
     @memAuth_hasInsulin_pdp_NoD
     Examples: 
@@ -887,10 +887,10 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth
       | index  | FID    | username | password  | MemUserName        | planType  | memberType     | copayCategory | deductible   | insulin      |
       | 34-I08 | 478830 | qavgogine | qavgogine| q4_insulinDemo_002 | MAPD      | Individual_BnC | LIS 4         | NoTier       | nonInsulin   | 
 
-    @memAuth_nonInsulin_mapd_T12345
-    Examples: 
-      | index  | FID    | username | password  | MemUserName        | planType  | memberType     | copayCategory | deductible   | insulin      |
-      | 34-I09 | 478830 | qavgogine| qavgogine | q4_insulinDemo_019 | MAPD      | Individual_BnC | NON LIS       | T12345       | nonInsulin   | 
+    #@memAuth_nonInsulin_mapd_T12345
+    #Examples: 
+    #  | index  | FID    | username | password  | MemUserName        | planType  | memberType     | copayCategory | deductible   | insulin      |
+    #  | 34-I09 | 478830 | qavgogine| qavgogine | q4_insulinDemo_019 | MAPD      | Individual_BnC | NON LIS       | T12345       | nonInsulin   | 
 
   @memAuth_benefitsAndCoverage24 @memAuth_api
   Scenario Outline: Index: <index> -TID: <TID> -plan: <planType> -memberType: <memberType> - Verify UCPBenefits API not having undefined input value for COMBO user
