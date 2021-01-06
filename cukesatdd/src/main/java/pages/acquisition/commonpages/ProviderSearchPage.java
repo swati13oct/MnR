@@ -600,4 +600,11 @@ public class ProviderSearchPage extends UhcDriver {
 		driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
 		return new AcquisitionHomePage(driver);
 	}
+	@FindBy(xpath="(//*[@class='remove-provider'])[1]")
+	public WebElement removeExistingProvider;
+	
+	public void removeExistingProviderIfAny()
+	{
+		removeExistingProvider.click();
+	}
 }
