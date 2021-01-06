@@ -3168,7 +3168,7 @@ public void the_user_validates_the_OLE_Submission_Details_in_GPS(DataTable arg1)
 				DetailsMap.put("Prescription Drug", prescriptionDrug.substring(0, 1).toUpperCase());
 				String prescriptionCoverageName = (String) getLoginScenario().getBean(oleCommonConstants.PRESCRIPTION_COVERAGE_NAME);
 			//	prescriptionCoverageName=prescriptionCoverageName.toUpperCase()+"+"+"PRESCRIPTIONCOVERAGE";
-				prescriptionCoverageName=prescriptionCoverageName.toUpperCase()+"+"+prescriptionCoverageName.toUpperCase();
+				prescriptionCoverageName=prescriptionCoverageName.toUpperCase()+""+""+prescriptionCoverageName.toUpperCase();
 				DetailsMap.put("Prescription Name", prescriptionCoverageName);
 				String pdGroupNumber = (String) getLoginScenario().getBean(oleCommonConstants.PRESCRIPTION_GROUP_NUMBER);
 				DetailsMap.put("PD Group Number", pdGroupNumber.toUpperCase());
@@ -3227,12 +3227,11 @@ public void the_user_validates_the_OLE_Submission_Details_in_GPS(DataTable arg1)
 				System.out.println("--------------------Storing Data for Proposed Effective Date Started----------------------");
 
 				//Proposed Effective Date
-				/*String proposedEffectiveDate = (String) getLoginScenario().getBean(oleCommonConstants.PROPOSED_EFF_DATE);
-				proposedEffectiveDate  = OLEGPSValidation.converttogpsDate(proposedEffectiveDate );
-				DetailsMap.put("Proposed Effective date", proposedEffectiveDate);		
-			 	*/
-				DetailsMap.put("Proposed Effective date", (String) getLoginScenario().getBean(oleCommonConstants.PROPOSED_EFF_DATE));
-				System.out.println("--------------------Storing Data for Proposed Effective Date Ended----------------------");
+				
+						String proposedEffectiveDate = (String) getLoginScenario().getBean(oleCommonConstants.PARTA_EFFECTIVE);
+				proposedEffectiveDate = OLEGPSValidation.converttogpsDate(proposedEffectiveDate);
+				DetailsMap.put("Proposed Effective date", proposedEffectiveDate);
+				System.out.println("--------------------Storing Data for Proposed Effective Date Ended----------------------" +proposedEffectiveDate);
 
 				//------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -3272,7 +3271,7 @@ public void the_user_validates_the_OLE_Submission_Details_in_GPS(DataTable arg1)
 
 				System.out.println("--------------------Storing Data for Authorization Page Ended----------------------");
 				}
-				else {
+			/*	else {
 					DetailsMap.put("Authorization First Name", "");
 					DetailsMap.put("Authorization last Name", "");
 					DetailsMap.put("Auth Representative Indicator", "N");	
@@ -3282,7 +3281,7 @@ public void the_user_validates_the_OLE_Submission_Details_in_GPS(DataTable arg1)
 					DetailsMap.put("Authorization State", "");
 					DetailsMap.put("Auth Zip Display", "");
 					DetailsMap.put("Authorization Phone No", "");	
-					}
+					}*/
 				//------------------------------------------------------------------------------------------------------------------------------------------------
 
 				//-----------Adding for CSNP-----------------//
@@ -3339,14 +3338,14 @@ public void the_user_validates_the_OLE_Submission_Details_in_GPS(DataTable arg1)
 				DetailsMap.put("Disclosure Provider Street Address", disclosureproviderstreetaddress.toUpperCase());*/
 			 
 				String disclosureprovidercity = (String) getLoginScenario().getBean(oleCommonConstants.DISCLOSURE_PROVIDER_CITY);
-				DetailsMap.put("Disclosure Provider City", disclosureprovidercity.toUpperCase());
+				//DetailsMap.put("Disclosure Provider City", disclosureprovidercity.toUpperCase());
 
 				String disclosureproviderstate = (String) getLoginScenario().getBean(oleCommonConstants.DISCLOSURE_PROVIDER_STATE);
-				DetailsMap.put("Disclosure Provider State", disclosureproviderstate.toUpperCase());
+				//DetailsMap.put("Disclosure Provider State", disclosureproviderstate.toUpperCase());
 
-				DetailsMap.put("Disclosure Provider Zip", (String) getLoginScenario().getBean(oleCommonConstants.DISCLOSURE_PROVIDER_ZIP));
+				//DetailsMap.put("Disclosure Provider Zip", (String) getLoginScenario().getBean(oleCommonConstants.DISCLOSURE_PROVIDER_ZIP));
 				String disclosureproviderzip = (String) getLoginScenario().getBean(oleCommonConstants.DISCLOSURE_PROVIDER_ZIP);
-				DetailsMap.put("Disclosure Provider Zip", disclosureproviderzip);
+				//DetailsMap.put("Disclosure Provider Zip", disclosureproviderzip);
 
 				
 				String disclosureProviderPhoneNumber= (String) getLoginScenario().getBean(oleCommonConstants.DISCLOSURE_PROVIDER_PHONENUMBER);
@@ -3355,15 +3354,11 @@ public void the_user_validates_the_OLE_Submission_Details_in_GPS(DataTable arg1)
 				
 				String disclosureprovideraddress = (String) getLoginScenario().getBean(oleCommonConstants.DISCLOSURE_PROVIDER_STREET_ADDRESS);
 				//	prescriptionCoverageName=prescriptionCoverageName.toUpperCase()+"+"+"PRESCRIPTIONCOVERAGE";
-				disclosureprovideraddress=disclosureprovideraddress.toUpperCase()
-						+','+disclosureprovidercity.toUpperCase()
-						+','+disclosureproviderstate.toUpperCase()
-						+','+disclosureproviderzip;
+				disclosureprovideraddress=disclosureprovideraddress.toUpperCase()+','+disclosureprovidercity.toUpperCase()+','+disclosureproviderstate.toUpperCase()+','+disclosureproviderzip;
 					DetailsMap.put("Disclosure Provider Address", disclosureprovideraddress);
+					System.out.println("--------------------Storing Data for Preliminary questions and Use and disclosure  Ended----------------------"+disclosureprovideraddress);
 				}
-				
-				//---------------------------------------------------//
-				
+				//---------------------------------------------------//	
 				boolean Validation_Status = OLEGPSValidation.validate_GPS_for_Plantype(DetailsMap);
 				if (Validation_Status) {
 					System.out.println("OLE Confirmation Page : All Plan Details Validated in GPS");
