@@ -22,7 +22,7 @@ import cucumber.api.CucumberOptions;
 		toPDF = true, 
 		outputFolder = "target/RunMRATDDAcquisitionPlanRecommendationEngineRegression3UlayerMobile")
 @CucumberOptions(
-		glue = { "atdd.framework", "acceptancetests.mobile" }, 
+		glue = { "atdd.framework", "acceptancetests.mobile.acquisition" }, 
 		features = { "src/main/resources/feature/mobile/acquisition/planrecommendationengine/" }, 
 		plugin = {"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionPlanRecommendationEngineRegression3UlayerMobile.json" }, 
 		tags = {"@PRERegression3"}, dryRun=false)

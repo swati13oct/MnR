@@ -15,7 +15,7 @@ import cucumber.api.CucumberOptions;
 jsonReport = "target/cucumber-RunMRATDDAcquisitionVPPPlanCompareMobile.json", 
 detailedReport = true, detailedAggregatedReport = true, overviewReport = true, 
 toPDF = true, outputFolder = "target/RunMRATDDAcquisitionVPPPlanCompareMobile")
-@CucumberOptions(glue = { "atdd.framework", "acceptancetests.mobile" }, features = {
+@CucumberOptions(glue = { "atdd.framework", "acceptancetests.mobile.acquisition" }, features = {
 		"src/main/resources/feature/mobile/acquisition/vpp" }, plugin = { "pretty", "html:reports/test-report",
 				"json:target/cucumber-RunMRATDDAcquisitionVPPPlanCompareMobile.json" }, tags = {
 						"@vppPlanCompareUHC","@vppPlanCompareUHCRegression" },dryRun=false)

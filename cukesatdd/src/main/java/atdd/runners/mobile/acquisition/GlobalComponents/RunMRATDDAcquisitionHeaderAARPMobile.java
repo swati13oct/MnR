@@ -14,7 +14,7 @@ import cucumber.api.CucumberOptions;
 @ExtendedCucumberOptions(retryCount=1,screenShotSize="", screenShotLocation="/screenshots/",
 jsonReport = "target/cucumber-RunMRATDDAcquisitionHeaderAARPMobile.json",detailedReport = true, 
 detailedAggregatedReport = true, overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDAcquisitionHeaderAARPMobile")
-@CucumberOptions(glue = { "atdd.framework", "acceptancetests.mobile"  }, 
+@CucumberOptions(glue = { "atdd.framework", "acceptancetests.mobile.acquisition"  }, 
 features = { "src/main/resources/feature/mobile/acquisition/globalComponents" }, plugin = {
 				"pretty", "html:reports/test-report",
 				"json:target/cucumber-RunMRATDDAcquisitionHeaderAARPMobile.json" }, tags = { "@globalheader_AARP" })

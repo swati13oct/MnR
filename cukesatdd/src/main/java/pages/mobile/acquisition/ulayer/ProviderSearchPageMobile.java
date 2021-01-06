@@ -187,20 +187,20 @@ public class ProviderSearchPageMobile extends UhcDriver {
 		return null;
 
 	}
-	
 
 	public int entersZipcodeAndPlancountblayer(String zipcode, String planYear) {
 
-		validateNew(zipCodeTextfield);	
+		validateNew(zipCodeTextfield);
 		zipCodeTextfield.sendKeys(zipcode);
 		validateNew(continueButton);
 		continueButton.click();
 		selectYear(planYear);
-	    List<WebElement> topicDropDownValues = driver.findElements(By.xpath("//li//button[attribute::data-ui-element-name]"));
-	   
-	    return topicDropDownValues.size();
+		List<WebElement> topicDropDownValues = driver
+				.findElements(By.xpath("//li//button[attribute::data-ui-element-name]"));
+
+		return topicDropDownValues.size();
 	}
-	
+
 	public void selectYear(String year) {
 		if (year.contains("current")) {
 			if (validate(currentYrTile)) {
@@ -212,9 +212,9 @@ public class ProviderSearchPageMobile extends UhcDriver {
 			if (validate(nextYrTile))
 				nextYrTile.click();
 		}
-		
+
 	}
-	
+
 	@FindBy(xpath = "(//button[contains(@class,'saved-provider-button')])[1]")
 	private WebElement SaveBtn;
 
@@ -234,7 +234,7 @@ public class ProviderSearchPageMobile extends UhcDriver {
 		CommonUtility.waitForPageLoadNew(driver, Physician, 30);
 
 		Physician.click();
-		//CommonUtility.waitForPageLoadNew(driver, SaveBtn, 45);
+		// CommonUtility.waitForPageLoadNew(driver, SaveBtn, 45);
 		scrollToView(SaveBtn);
 		jsClickNew(SaveBtn);
 
@@ -272,9 +272,7 @@ public class ProviderSearchPageMobile extends UhcDriver {
 
 		Physician.click();
 
-
-
-		if (validate(selectLocationOption,10)) {
+		if (validate(selectLocationOption, 10)) {
 			selectLocationOption.click();
 			validateNew(saveBtn2);
 			saveBtn2.click();
@@ -284,8 +282,8 @@ public class ProviderSearchPageMobile extends UhcDriver {
 		validateNew(providerNameText);
 		String providerSaved = providerNameText.getText().trim();
 		System.out.println("Provider Name is : " + providerSaved);
-		MRConstants.PROV_NAME=providerSaved;
-		
+		MRConstants.PROV_NAME = providerSaved;
+
 		/*
 		 * if(driver.findElements(By.xpath(
 		 * "//*[@data-test-id='button-view-saved-provider']")).size() > 0)
@@ -298,18 +296,19 @@ public class ProviderSearchPageMobile extends UhcDriver {
 		 * 
 		 * }
 		 */
-		if(driver.findElements(By.xpath("(//button[contains(text(),'Check Provider Coverage')])[1]")).size() > 0){
+		if (driver.findElements(By.xpath("(//button[contains(text(),'Check Provider Coverage')])[1]")).size() > 0) {
 			System.out.println("OLD Rally page displayed");
 			Checkcoverage.click();
-		}	
-		else if(driver.findElements(By.xpath("(//form[@data-ui-element-name='check-provider-coverage']//button[contains(@class,'action-btn')])[1]")).size() > 0){
+		} else if (driver.findElements(By.xpath(
+				"(//form[@data-ui-element-name='check-provider-coverage']//button[contains(@class,'action-btn')])[1]"))
+				.size() > 0) {
 			System.out.println("NEW Rally page displayed");
 			FinishButton.click();
-		}else
+		} else
 			System.out.println("Issue with Xpath");
-	
+
 		threadsleep(3);
-//		waitForCountDecrement(2);
+		// waitForCountDecrement(2);
 		driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
 
 		return new VPPPlanSummaryPageMobile(driver);
@@ -420,9 +419,9 @@ public class ProviderSearchPageMobile extends UhcDriver {
 		CommonUtility.waitForPageLoadNew(driver, PrimaryCarePhysician, 30);
 		PrimaryCarePhysician.click();
 
-		//CommonUtility.waitForPageLoadNew(driver, selectProviderBtn, 45);
+		// CommonUtility.waitForPageLoadNew(driver, selectProviderBtn, 45);
 		scrollToView(selectProviderBtn);
-		//selectProviderBtn.click();
+		// selectProviderBtn.click();
 		jsClickNew(selectProviderBtn);
 
 		if (validate(selectLocationOption)) {
@@ -436,8 +435,8 @@ public class ProviderSearchPageMobile extends UhcDriver {
 		if (validate(EditSavedButton)) {
 			ViewSavedProvidersLink.click();
 		}
-		scrollToView(providerNameText);
-		validateNew(providerNameText);
+		// scrollToView(providerNameText);
+		// validateNew(providerNameText);
 		validateNew(PrintEmailBtn);
 
 	}

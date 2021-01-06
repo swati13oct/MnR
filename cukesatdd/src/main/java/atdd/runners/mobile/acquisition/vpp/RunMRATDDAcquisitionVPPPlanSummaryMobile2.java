@@ -16,7 +16,7 @@ jsonReport = "target/cucumber-RunMRATDDAcquisitionVPPPlanSummaryMobile2.json",
 detailedReport = true, detailedAggregatedReport = true, overviewReport = true, toPDF = true, 
 outputFolder = "target/RunMRATDDAcquisitionVPPPlanSummaryMobile2")
 
-@CucumberOptions(glue = { "atdd.framework", "acceptancetests.mobile" }, features = {
+@CucumberOptions(glue = { "atdd.framework", "acceptancetests.mobile.acquisition" }, features = {
 		"src/main/resources/feature/mobile/acquisition/vpp/" }, plugin = { "pretty", "html:reports/test-report",
 				"json:target/cucumber-RunMRATDDAcquisitionVPPPlanSummaryMobile2.json" }, tags = {
 						"@vppPlanSummaryAARP16", "@vppPlanSummaryAARPRun02",
