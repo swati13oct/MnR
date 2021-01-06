@@ -2485,7 +2485,7 @@ public class PlanDocumentsAndResourcesUsersHelperProd {
 				targetTestDocList.add("Benefit Highlights");
 				targetTestDocList.add("Summary of Benefits");
 				targetTestDocList.add("Evidence of Coverage");
-				//targetTestDocList.add("UnitedHealth Passport Program");
+				targetTestDocList.add("UnitedHealth Passport Program");
 				return targetTestDocList;
 			} 
 			if (subSection.equals("ES")) {
@@ -2493,7 +2493,7 @@ public class PlanDocumentsAndResourcesUsersHelperProd {
 				targetTestDocList.add("Beneficios Importantes");
 				targetTestDocList.add("Resumen de Beneficios");
 				targetTestDocList.add("Comprobante de Cobertura");
-				//targetTestDocList.add("Programa UnitedHealth Passport");
+				targetTestDocList.add("Programa UnitedHealth Passport");
 				return targetTestDocList;
 			}
 			if (subSection.equals("ZH")) {

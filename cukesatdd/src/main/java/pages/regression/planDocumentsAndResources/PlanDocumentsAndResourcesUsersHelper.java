@@ -1308,12 +1308,12 @@ public class PlanDocumentsAndResourcesUsersHelper {
 		if (section.equals("Provider and Pharmacy Directories") || section.equals("Provider Directory") || section.equals("Pharmacy Directory")) {//note: PD
 			if (subSection.equals("EN-currentYear")) {
 				targetTestDocList = new ArrayList<String>();
-				targetTestDocList.add("Pharmacy Directory Information");
+				//targetTestDocList.add("Pharmacy Directory Information");
 				return targetTestDocList;
 			} 
 			if (subSection.equals("ES-currentYear")) {
 				targetTestDocList = new ArrayList<String>();
-				targetTestDocList.add("Informaci.n del Directorio de Farmacia"); //note: regex
+				//targetTestDocList.add("Informaci.n del Directorio de Farmacia"); //note: regex
 				return targetTestDocList;
 			} 
 			if (subSection.equals("ZH-currentYear")) {
@@ -2348,14 +2348,14 @@ public class PlanDocumentsAndResourcesUsersHelper {
 			}
 			if (subSection.equals("EN-nextYear")) {
 				targetTestDocList = new ArrayList<String>();
-				targetTestDocList.add("Provider Directory");
-				targetTestDocList.add("Vendor Information Sheet");
+				//targetTestDocList.add("Provider Directory");
+				//targetTestDocList.add("Vendor Information Sheet");
 				return targetTestDocList;
 			} 
 			if (subSection.equals("ES-nextYear")) {
 				targetTestDocList = new ArrayList<String>();
-				targetTestDocList.add("Directorio de Proveedores");
-				targetTestDocList.add("Informaci.n sobre proveedores"); //note: regex
+				//targetTestDocList.add("Directorio de Proveedores");
+				//targetTestDocList.add("Informaci.n sobre proveedores"); //note: regex
 				return targetTestDocList;
 			} 
 			if (subSection.equals("ZH-nextYear")) {
@@ -2478,7 +2478,7 @@ public class PlanDocumentsAndResourcesUsersHelper {
 				targetTestDocList.add("Benefit Highlights");
 				targetTestDocList.add("Summary of Benefits");
 				targetTestDocList.add("Evidence of Coverage");
-				targetTestDocList.add("UnitedHealth Passport Program");
+				//targetTestDocList.add("UnitedHealth Passport Program");
 				return targetTestDocList;
 			} 
 			if (subSection.equals("ES")) {
@@ -2486,7 +2486,7 @@ public class PlanDocumentsAndResourcesUsersHelper {
 				targetTestDocList.add("Beneficios Importantes");
 				targetTestDocList.add("Resumen de Beneficios");
 				targetTestDocList.add("Comprobante de Cobertura");
-				targetTestDocList.add("Programa UnitedHealth Passport");
+				//targetTestDocList.add("Programa UnitedHealth Passport");
 				return targetTestDocList;
 			}
 			if (subSection.equals("ZH")) {
@@ -3699,12 +3699,12 @@ public class PlanDocumentsAndResourcesUsersHelper {
 		if (section.equals("Provider and Pharmacy Directories") || section.equals("Provider Directory") || section.equals("Pharmacy Directory")) {//note: PD
 			if (subSection.equals("EN-currentYear")) {
 				targetTestDocList = new ArrayList<String>();
-				targetTestDocList.add("Pharmacy Directory Information");
+				//targetTestDocList.add("Pharmacy Directory Information");
 				return targetTestDocList;
 			} 
 			if (subSection.equals("ES-currentYear")) {
 				targetTestDocList = new ArrayList<String>();
-				targetTestDocList.add("Informaci.n del Directorio de Farmacia"); //note: regex
+				//targetTestDocList.add("Informaci.n del Directorio de Farmacia"); //note: regex
 				return targetTestDocList;
 			} 
 			if (subSection.equals("ZH-currentYear")) {
