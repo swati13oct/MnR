@@ -349,6 +349,8 @@ public class ValueAddedServicepage extends UhcDriver {
 		
 		CommonUtility.waitForPageLoadNew(driver, aarpSmartDriverShowMorePara, 20);
 		
+		scrollToView(aarpSmartDriverShowMorePara);
+		
 		Assert.assertTrue(aarpSmartDriverShowMorePara.getText().contains("Here’s how to Register:"));
 		
 		CommonUtility.waitForPageLoadNew(driver, aarpSmartDriverShowMoreLnk, 20);
