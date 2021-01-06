@@ -59,7 +59,7 @@ public class PlanDocumentsAndResourcesUsersHelper {
 			targetTestDocList=getExpectedDocList_PDP_IND_EFF(memberType, section, subSection);
 		} else if (planType.equals("PDP") && memberType.contains("COMBO_GROUP_EFF")) {
 			targetTestDocList=getExpectedDocList_PDP_COMBO_GROUP_EFF(memberType, section, subSection);
-		} else if (planType.equals("SHIP") && memberType.contains("IND_EFF")) {
+		} else if (planType.equals("SHIP") && memberType.contains("IND_EFF") && !memberType.contains("MULTI_")) {
 			targetTestDocList=getExpectedDocList_SHIP_IND_EFF(memberType, section, subSection);
 		} else if (planType.equals("SHIP") && memberType.contains("MULTI_IND_EFF")) {
 			targetTestDocList=getExpectedDocList_SHIP_MULTI_IND_EFF(memberType, section, subSection);
@@ -1431,12 +1431,12 @@ public class PlanDocumentsAndResourcesUsersHelper {
 				targetTestDocList.add("Summary of Benefits");
 				targetTestDocList.add("Evidence of Coverage");
 				targetTestDocList.add("Certificate of Coverage");
-				targetTestDocList.add("Additional Drug Coverage");
+				//targetTestDocList.add("Additional Drug Coverage");
 				//targetTestDocList.add("Formulary/Drug List - Comprehensive");
-				targetTestDocList.add("Prior Authorization Criteria");
-				targetTestDocList.add("Step Therapy Criteria");
-				targetTestDocList.add("Formulary Additions");
-				targetTestDocList.add("Formulary Deletions");
+				//targetTestDocList.add("Prior Authorization Criteria");
+				//targetTestDocList.add("Step Therapy Criteria");
+				//targetTestDocList.add("Formulary Additions");
+				//targetTestDocList.add("Formulary Deletions");
 				targetTestDocList.add("Plan Guide");
 				return targetTestDocList;
 			} 

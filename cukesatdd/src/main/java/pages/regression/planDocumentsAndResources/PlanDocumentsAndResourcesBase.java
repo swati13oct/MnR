@@ -591,7 +591,9 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 			return "8002";
 		if (docName.toLowerCase().equalsIgnoreCase("Additional Drug Coverage".toLowerCase())) 
 			return "4005";
-		if (docName.toLowerCase().equalsIgnoreCase("CDI Long Notice".toLowerCase()) || docName.toLowerCase().equalsIgnoreCase("Privacy Notice".toLowerCase())) 
+		if (docName.toLowerCase().contains("CDI Long Notice".toLowerCase())) 
+			return "7018";
+		if (docName.toLowerCase().equalsIgnoreCase("Privacy Notice".toLowerCase())) 
 			return "5009";
 		if (docName.toLowerCase().equalsIgnoreCase("Schedule of benefits".toLowerCase()) ) 
 			return "1021";
