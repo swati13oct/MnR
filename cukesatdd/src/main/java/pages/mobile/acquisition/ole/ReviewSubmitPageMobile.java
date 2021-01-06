@@ -516,7 +516,8 @@ public class ReviewSubmitPageMobile extends UhcDriver {
 	public OLEconfirmationPageMobile submitEnrollment() {
 
 		validateNew(SubmitApplicationBtn);
-		SubmitApplicationBtn.click();
+	//	SubmitApplicationBtn.click();
+		jsClickMobile(SubmitApplicationBtn);
 		CommonUtility.checkPageIsReadyNew(driver);
 		// waitforElementDisapper(By.xpath("//button[contains(@class,'confirm-button')]"),
 		// 60);
