@@ -91,7 +91,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 	@FindBy(xpath = "//*[@id=\"globalContentIdForSkipLink\"]/div/div[1]/div/div/div/div[2]/div[1]/div[1]/div/div[1]/div[2]/div/div[3]/div[1]/div/a")
 	private WebElement maPlansViewLink;
 
-	@FindBy(xpath = "//*[contains(@class,'module-tabs-tabs')]/*[not (contains(@class,'active'))]//*[contains(@dtmname,'SNP')]/following-sibling::a")
+	@FindBy(xpath = "//*[@id=\"globalContentIdForSkipLink\"]/div/div[1]/div/div/div/div[2]/div[1]/div[1]/div/div[1]/div[2]/div/div[3]/div[4]/div/a")
 	private WebElement snpPlansViewLink;
 
 	@FindBy(id = "plan-list-1")
@@ -1054,6 +1054,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 
 		} else if (planType.equalsIgnoreCase("SNP")) {
 
+			scrollToView(snpPlansViewLink);
 			validateNew(snpPlansViewLink, 30);
 			jsClickNew(snpPlansViewLink);
 			sleepBySec(3);

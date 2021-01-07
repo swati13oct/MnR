@@ -1718,7 +1718,7 @@ public class VppPlanCompareMobile {
 		String planType = "MA";
 		System.out.println("Proceed to validate " + planType + " saved plan(s) are still saved");
 		plansummaryPage.viewPlanSummary(planType);
-		plansummaryPage.handlePlanYearSelectionPopup(planYear);
+		//plansummaryPage.handlePlanYearSelectionPopup(planYear);
 		plansummaryPage.validatePlansAreSaved(ma_savePlanNames, planType);
 
 		// ----- PDP plan type --------------------------
