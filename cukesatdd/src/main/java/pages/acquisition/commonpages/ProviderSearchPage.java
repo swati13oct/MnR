@@ -141,6 +141,10 @@ public class ProviderSearchPage extends UhcDriver {
 
 	@FindBy(xpath = "//*[contains(@class,'provider-name')]")
 	private WebElement providerNameText;
+	
+	
+	@FindBy(xpath = "//li[@class='provider-card']")
+	private WebElement providerCard;
 
 	@FindBy(xpath = "//ul[contains(@class,'gs-options')]/li//div[contains(@class,'img')][contains(@src,'next')]")
 	private WebElement nextYrTile;
@@ -382,8 +386,8 @@ public class ProviderSearchPage extends UhcDriver {
 			System.out.println("New Rally page not displayed");
 		 
 		}
-		CommonUtility.waitForPageLoadNew(driver, providerNameText, 30);
-		validateNew(providerNameText);
+		CommonUtility.waitForPageLoadNew(driver, providerCard, 30);
+		validateNew(providerCard);
 		validateNew(PrintEmailBtn);
 
 	}
