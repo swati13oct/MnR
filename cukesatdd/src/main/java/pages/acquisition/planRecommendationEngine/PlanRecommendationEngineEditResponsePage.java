@@ -87,6 +87,29 @@ public class PlanRecommendationEngineEditResponsePage extends UhcDriver {
 
 	@FindBy(css = "#plan-list-4 button#editMyAnswers")
 	private WebElement snpEditResponseButton;
+	
+	//Save Results elements
+	
+	@FindBy(css = "#plan-list-1 button#updateSaveRecommendationBtn")
+	private WebElement mapdSaveResultsButton;
+
+	@FindBy(css = "#plan-list-3 button#updateSaveRecommendationBtn")
+	private WebElement pdpSaveResultsButton;
+
+	@FindBy(css = "#plan-list-4 button#updateSaveRecommendationBtn")
+	private WebElement snpSaveResultsButton;
+	
+	@FindBy(css = "#saveResultConfirmationTitle")
+	private WebElement saveResultsTitle;
+	
+	@FindBy(css = "#saveResultPopupClose")
+	private WebElement saveResultsPopupClose;
+	
+	@FindBy(css = "button#keepShoppingBtn")
+	private WebElement KeepShoppingPlansButton;
+	
+	@FindBy(css = "button#viewPlanBtn")
+	private WebElement ViewProfileButton;
 
 	// Edit Responses page Elements
 
@@ -171,6 +194,21 @@ public class PlanRecommendationEngineEditResponsePage extends UhcDriver {
 		}
 		validate(editResponseTitle);
 		validate(returnToPlanLink, 30);
+	}
+	
+	public void navigateSaveResultsPage(String flow) {
+		if (flow.equalsIgnoreCase("pdp")) {
+			pdpSaveResultsButton.click();
+		} else {
+			if (validate(mapdSaveResultsButton, 10))
+				mapdSaveResultsButton.click();
+			else
+				snpSaveResultsButton.click();
+		}
+		validate(saveResultsTitle);
+		validate(saveResultsPopupClose, 30);
+		validate(KeepShoppingPlansButton, 30);
+		validate(ViewProfileButton, 30);
 	}
 
 	public void checkContent(String section) {
@@ -486,6 +524,15 @@ public class PlanRecommendationEngineEditResponsePage extends UhcDriver {
 	public void addDrugs(HashMap<String, String> userInput) {
 		inputValues = userInput;
 		editValue("drugs");
+	}
+	
+	public void validateSaveResults(String plantype) {
+		System.out.println("Validating Save Results : ");
+		pageloadcomplete();
+		navigateSaveResultsPage(plantype);
+		jsClickNew(ViewProfileButton);
+		threadsleep(5000);
+//		savedrecommendationVP();
 	}
 
 }

@@ -979,5 +979,13 @@ public class PlanRecommendationEngineStepDefinition {
 		headerAndFooter.navigationToPlanRecommendationEngine();
 	}
 	
+	@Then("^user save recommendation results and validate in VP$")
+   	public void save_results(DataTable givenAttributes) {
+		readfeaturedata(givenAttributes);
+		PlanRecommendationEngineEditResponsePage preEditpage =  new PlanRecommendationEngineEditResponsePage(wd);
+		checkpopup();
+		preEditpage.validateSaveResults(inputValues.get("Plan Type"));
+	}
+	
 
 }
