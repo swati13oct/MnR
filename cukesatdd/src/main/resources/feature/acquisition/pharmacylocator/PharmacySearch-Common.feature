@@ -419,7 +419,7 @@ Feature: 1.11. ACQ-Pharmacy Locator Test Scripts
     When user clicks on breadcrumb on pharmacy search page
     Then user should be navigated to home page
 
-    @breadcrumbPharmacySearch_AARP1
+    @breadcrumbPharmacySearch_AARP
     Examples: 
       | site |
       | AARP |
