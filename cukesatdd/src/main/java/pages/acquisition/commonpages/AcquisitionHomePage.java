@@ -120,6 +120,10 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	@FindBy(xpath = "//div[@id='subnav_2']//h3/a[contains(text(),'Pharmacy')]")
 	private WebElement pharmacylocator;
+	
+	
+	@FindBy(xpath = "//div[@id='subnav_2']//h3/a[contains(text(),'Provider')]")
+	private WebElement providerlocator;
 
 	@FindBy(id = "ghn_lnk_1")
 	public static WebElement navigationSectionHomeLink;
@@ -1663,9 +1667,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			return new MultiCountyModalPage(driver);
 		}
 		return null;
-	}		
+	}	*/	
 	
-	public ProviderSearchPage clicksOnRallyToolFromGlobalHeader() {
+	public ProviderSearchPage clicksOnProviderToolFromGlobalHeader() {
 
 //		Actions action = new Actions(driver);
 //		action.moveToElement(navigationSectionHomeLink).moveToElement(ourPlansHoverLink).build().perform();
@@ -1682,7 +1686,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 		}
 		return null;
-	}*/
+	}
 
 	public ProviderSearchPage clicksOnRallyToolFromHomePage() {
 		validateNew(providerSearchFromHomeScreen);
