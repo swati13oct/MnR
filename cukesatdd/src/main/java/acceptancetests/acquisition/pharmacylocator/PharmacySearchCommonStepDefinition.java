@@ -569,4 +569,10 @@ public class PharmacySearchCommonStepDefinition {
 				.getBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE);
 		pharmacySearchPage.clickBreadCrumb();
 	}
+	
+	@Then("^user should be navigated to home page$")
+	public void user_should_be_navigated_to_home_page() {
+		AcquisitionHomePage aquisitionhomepage= (AcquisitionHomePage)getLoginScenario().getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		aquisitionhomepage.validateHomePage();
+	}
 }

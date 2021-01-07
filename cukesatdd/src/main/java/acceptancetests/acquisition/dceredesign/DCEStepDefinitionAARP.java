@@ -2419,4 +2419,23 @@ public void user_verify_details_page_change_pharmacy_modal_for_preferred_tab() {
 		DrugDetailsPage drugDetailsPage = new DrugDetailsPage(driver);
 		drugDetailsPage.validateStandardTab();
 	}
+	
+	@Then("^user verify breadcrumb \"([^\"]*)\" on get started page$")
+	public void user_verify_breadcrumb_on_get_started_page(String breadCrumb) {
+		GetStartedPage DCEgetStarted = (GetStartedPage) getLoginScenario()
+				.getBean(PageConstants.DCE_Redesign_GetStarted);
+		DCEgetStarted.validateBreadCrumb(breadCrumb);
+	}
+
+	@Then("^user verify breadcrumb \"([^\"]*)\" on drug summary page$")
+	public void user_verify_breadcrumb_on_drug_summary_page(String breadCrumb) {
+		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
+		drugSummaryPage.validateBreadCrumb(breadCrumb);
+	}
+
+	@Then("^user verify breadcrumb \"([^\"]*)\" on drug details page$")
+	public void user_verify_breadcrumb_on_drug_details_page(String breadCrumb) {
+		DrugDetailsPage drugDetailsPage = new DrugDetailsPage(driver);
+		drugDetailsPage.validateBreadCrumb(breadCrumb);
+	}
 }

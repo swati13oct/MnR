@@ -3663,4 +3663,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			homeTab.click();
 		}
 	
+		public void validateHomePage() {
+			validate(zipCodeField);
+		}
 }

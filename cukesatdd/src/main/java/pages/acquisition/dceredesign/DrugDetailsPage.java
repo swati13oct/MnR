@@ -374,6 +374,8 @@ public class DrugDetailsPage extends UhcDriver {
 	@FindBy(xpath = "//*[@id='selectaPharmacy-overlay']//*[@class='field-error-msgfordceui']")
 	private WebElement noResultsMessage;
 
+	@FindBy(xpath = "(//a[contains(@class,'uhc-link-button')])[3]")
+	private WebElement breaCrumbLink;
 	
 	public DrugDetailsPage(WebDriver driver) {
 		super(driver);
@@ -1818,5 +1820,9 @@ public class DrugDetailsPage extends UhcDriver {
 	public void validateDefaultPharmacyName(String defaultPharmacy) {
 		validateNew(pharmacyName);
 		Assert.assertTrue("Default pharmacy name is not displayed", pharmacyName.getText().contains(defaultPharmacy));
+	}
+	
+	public void validateBreadCrumb(String breadCrumb) {
+		Assert.assertTrue("Expected breadcrumb "+ breadCrumb+" is not displayed",breaCrumbLink.getText().trim().equals(breadCrumb));
 	}
 }
