@@ -1554,7 +1554,8 @@ public class OneTimePaymentAarpStepDefintion {
 		ReviewOneTimePaymentPage reviewOneTimePaymentsPage=null;
 		if(oneTimePaymentPage!=null) {
 			oneTimePaymentPage.selectAndEnterAmount(otherAmountvalue);
-			oneTimePaymentPage.verifyReplaceCardLinkDisabled();
+			//oneTimePaymentPage.verifyReplaceCardLinkDisabled(); 01/07/2021 - This link has been enabled permanently now
+			oneTimePaymentPage.verifyReplaceCardLinkEnabled();
 			oneTimePaymentPage.selectCreditCardOption();
 			oneTimePaymentPage.verifySavedCardDetailsDisplayed();
 			oneTimePaymentPage.verifyReplaceCardLinkEnabled();
