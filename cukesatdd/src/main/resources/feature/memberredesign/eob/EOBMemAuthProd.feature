@@ -124,9 +124,14 @@ Feature: 1.04.1.1 To Test NON-DREAM EOB for Members - E2E - Member Auth - PROD
     When the member is able to login with correct username and password
       | Username | <username> |
       | Password | <password> |
-    And Member Enters the Username he wants to search
-      | MemUsername | <MemUserName> |
-      | Retry | true |
+    And Member Enters the memberid and dob he wants to search  
+      | Member ID | <memberid> |
+      | Month     | <month>    |
+      | Day       | <day>      |
+      | Year      | <year>     |
+    #And Member Enters the Username he wants to search
+    #  | MemUsername | <MemUserName> |
+    #  | Retry | true |
     And user clicks on member to select
     And user stores test input for validations
       | Username | <MemUserName> |
@@ -138,8 +143,8 @@ Feature: 1.04.1.1 To Test NON-DREAM EOB for Members - E2E - Member Auth - PROD
 
     @prod_PHIP_EOBs
     Examples: 
-      | index | username  | password  | MemUserName     | TID   | planType | memberType |
-      | 15    | kkumard  | tnps459#  | kataz2525       | 15174 | PHIP     | SHIP_EOB   |
+      | index | username  | password  | memberid     | month | day | year | MemUserName     | TID   | planType | memberType |
+      | 15    | kkumard   | tnps459#  | 312835841-11 |    02 |  21 | 1950 | kataz2525       | 15174 | PHIP     | SHIP_EOB   |
 
 
   #note: pending coverage until SSUP individual user is available
