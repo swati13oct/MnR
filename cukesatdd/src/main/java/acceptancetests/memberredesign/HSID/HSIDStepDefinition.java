@@ -1743,4 +1743,16 @@ public class HSIDStepDefinition {
 												myDocumentsEdeliveryDeeplinkLoginPage.navigateToLoginURLPOD(brand);
 												getLoginScenario().saveBean(PageConstants.Offline_PROD_edelivery,myDocumentsEdeliveryDeeplinkLoginPage);
 														}
+											/** 
+											 * @todo :member lands on virtual visit offline PROD deep link
+											*/
+											@Given("^member lands on the PROD HWP deeplink page$")
+											public void the_user_is_on__PROD_HWP_deeplink_Page(DataTable givenAttributes) throws InterruptedException{
+												String brand = givenAttributes.asList(String.class).get(0);
+												WebDriver wd = getLoginScenario().getWebDriver();
+												getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+												OfflineProd_PharmacynPrescriptionLoginPage OfflineProd_PharmacynPrescriptionLoginPage = new OfflineProd_PharmacynPrescriptionLoginPage(wd);
+												OfflineProd_PharmacynPrescriptionLoginPage.navigateToProdLoginURL(brand);
+												getLoginScenario().saveBean(PageConstants.Offline_PROD_HWP_DEEPLINK_lOGIN_PAGE,OfflineProd_PharmacynPrescriptionLoginPage);
+														}				
 										}
