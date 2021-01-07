@@ -2293,10 +2293,10 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		public void validatevisitorprofile() {
 			if (visitorprofileicon.isDisplayed()) {
 
-//				Actions actions = new Actions(driver);
-//				actions.moveToElement(visitorprofileicon).perform();
-				jsMouseOver(visitorprofileicon);
-				visitorprofileicon.click();
+				Actions actions = new Actions(driver);
+				actions.moveToElement(visitorprofileicon).perform();
+//				jsMouseOver(visitorprofileicon);
+//				visitorprofileicon.click();
 				System.out.println("Hover over visitor profile completed");
 			}
 			//WebElement CreateProfile = driver.findElement(By.xpath("//a[contains(text(), 'Create Profile')]"));
@@ -2313,8 +2313,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			}
 			visitorprofileicon.click();
 			jsClickNew(CreateProfile);
-			//CommonUtility.checkPageIsReadyNew(driver);
-			driver.navigate().refresh();
+			CommonUtility.checkPageIsReadyNew(driver);
+//			driver.navigate().refresh();
 			//sleepBySec(3);
 			//WebElement GuestProfile = driver.findElement(By.xpath("//*[contains(text(), 'Your Guest Profile')]"));
 			/*WebElement GuestProfile = driver.findElement(By.xpath("//h2[contains(text(), 'Your Guest Profile')]"));
@@ -3151,6 +3151,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			if (driver.getCurrentUrl().contains("aarpmedicareplans")) {
 				jsClickNew(visitAARPHeaderLink);
 				proceedToLeaveAARP();
+//				CommonUtility.checkPageIsReadyNew(driver);
 				if (!driver.getCurrentUrl().contains("aarp.org"))
 					Assert.fail("Visit AARP link did not lead to the right page");
 			}
@@ -3158,22 +3159,32 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		
 		public void clickVisitAARPFooterLink() {
 			if (driver.getCurrentUrl().contains("aarpmedicareplans")) {
-				switchToNewTabNew(visitAARPFooterLink);
-				proceedToLeaveAARP();
-				if (!driver.getCurrentUrl().contains("aarp.org")) {
-					Assert.fail("Visit AARP link did not lead to the right page");
-				} else {
-					Assert.assertTrue(true, "Navigated to AARP org page");
-					driver.close();
-					driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
+				CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
+				jsClickNew(visitAARPFooterLink);
+				// waitForPageLoadSafari();
+				Set<String> winHandles = driver.getWindowHandles();
+				for (String win : winHandles) {
+					if (!win.equals(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION)) {
+						driver.switchTo().window(win);
+						proceedToLeaveAARP();
+						if (!driver.getCurrentUrl().contains("aarp.org")) {
+							Assert.fail("Visit AARP link did not lead to the right page");
+						} else {
+							Assert.assertTrue(true, "Navigated to AARP org page");
+						}
+						driver.close();
+						break;
+					}
 				}
 			}
+			driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
 		}
 		
 		public void proceedToLeaveAARP() {
 			if (validate(leaveAARPMedicarePlansDialog)) {
 				jsClickNew(proceedLeaveAARPMedicare);
 				waitForPageLoadSafari();
+				sleepBySec(2);
 //				CommonUtility.checkPageIsReadyNew(driver);
 			}
 		}
