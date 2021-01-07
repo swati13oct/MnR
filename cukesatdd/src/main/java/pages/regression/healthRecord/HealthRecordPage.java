@@ -160,6 +160,7 @@ public class HealthRecordPage  extends HealthRecordBase {
 			System.out.println("located shadow-root element, attempt to process further...");
 			WebElement root1 = expandRootElement(shadowRootHeader);
 			try {
+				checkModelPopup(driver,1);
 				WebElement claimsTopMenuShadowRootLink = root1.findElement(By.cssSelector("a[data-testid*=nav-link-claims]"));
 				claimsTopMenuShadowRootLink.click();
 			} catch (Exception e) {
