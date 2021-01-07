@@ -1731,7 +1731,7 @@ public class VppPlanCompareMobile {
 		// ----- SNP plan type --------------------------
 		planType = "SNP";
 		System.out.println("Proceed to validate " + planType + " saved plan(s) are still saved");
-		plansummaryPage.viewPlanSummary(planType);
+		//plansummaryPage.viewPlanSummary(planType);
 		// plansummaryPage.handlePlanYearSelectionPopup(planYear);
 		plansummaryPage.validatePlansAreSaved(snp_savePlanNames, planType);
 	}
@@ -1774,21 +1774,21 @@ public class VppPlanCompareMobile {
 		String planType = "MA";
 		System.out.println("Proceed to validate " + planType + " saved plan(s) are still saved");
 		plansummaryPage.viewPlanSummary(planType);
-		plansummaryPage.handlePlanYearSelectionPopup(planYear);
+		//plansummaryPage.handlePlanYearSelectionPopup(planYear);
 		plansummaryPage.validatePlansAreSaved(ma_savePlanNames, planType);
 
 		// ----- PDP plan type --------------------------
 		planType = "PDP";
 		System.out.println("Proceed to validate " + planType + " saved plan(s) are still saved");
 		plansummaryPage.viewPlanSummary(planType);
-		plansummaryPage.handlePlanYearSelectionPopup(planYear);
+		//plansummaryPage.handlePlanYearSelectionPopup(planYear);
 		plansummaryPage.validatePlansAreSaved(pdp_savePlanNames, planType);
 
 		// ----- SNP plan type --------------------------
 		planType = "SNP";
 		System.out.println("Proceed to validate " + planType + " saved plan(s) are still saved");
 		plansummaryPage.viewPlanSummary(planType);
-		plansummaryPage.handlePlanYearSelectionPopup(planYear);
+		//plansummaryPage.handlePlanYearSelectionPopup(planYear);
 		plansummaryPage.validatePlansAreSaved(snp_savePlanNames, planType);
 	}
 

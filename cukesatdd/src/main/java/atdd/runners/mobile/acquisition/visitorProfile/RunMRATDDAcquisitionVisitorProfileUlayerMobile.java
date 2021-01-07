@@ -19,7 +19,7 @@ jsonReport = "target/cucumber-RunMRATDDAcquisitionVisitorProfileUlayerMobile.jso
 features = { "src/main/resources/feature/mobile/acquisition/visitorProfile" }, 
 plugin = {
 		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionVisitorProfileUlayerMobile.json" }, 
-tags = { "@VisitorProfile_AARP_mobile" })
+tags = { "@Test", "@AARPvisitorprofile" })
 public class RunMRATDDAcquisitionVisitorProfileUlayerMobile { 
  
 }

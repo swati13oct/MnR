@@ -91,7 +91,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 	@FindBy(xpath = "//*[@id=\"globalContentIdForSkipLink\"]/div/div[1]/div/div/div/div[2]/div[1]/div[1]/div/div[1]/div[2]/div/div[3]/div[1]/div/a")
 	private WebElement maPlansViewLink;
 
-	@FindBy(xpath = "//*[@id=\"globalContentIdForSkipLink\"]/div/div[1]/div/div/div/div[2]/div[1]/div[1]/div/div[1]/div[2]/div/div[3]/div[4]/div/a")
+	@FindBy(xpath = "//*[contains(@class,'module-tabs-tabs')]/*[not (contains(@class,'active'))]//*[contains(@dtmname,'SNP')]/following-sibling::a")
 	private WebElement snpPlansViewLink;
 
 	@FindBy(id = "plan-list-1")
@@ -392,7 +392,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 	@FindBy(xpath = "//div[@ng-show='showSnpPlans']//a[contains(@dtmname,'Email Saved Plan List')]")
 	private WebElement snpEmailOption;
 
-	@FindBy(xpath = "//*[@id='ghn_lnk_1']")
+	@FindBy(xpath = "//img[@class='img-responsive aarp']")
 	private WebElement homeBtn;
 
 	@FindBy(xpath = "//ul[contains(@class,'primary-nav')]//a[contains(@href,'health-plans.html')]")
@@ -1052,7 +1052,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 			sleepBySec(2);
 			validateNew(medSuppZipCode, 30);
 
-		} else if (planType.equalsIgnoreCase("SNP")) {
+		} else if (planType.equalsIgnoreCase("SNP") || planType.equalsIgnoreCase("D-SNP")) {
 
 			scrollToView(snpPlansViewLink);
 			validateNew(snpPlansViewLink, 30);
@@ -2960,9 +2960,11 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 		Actions builder = new Actions(driver);
 		Action mouseOverButton = builder.moveToElement(topMenushopForAPlanOption).build();
 		mouseOverButton.perform();
-		shopForAPlanOptionZipcodeFieldBox.sendKeys(zipcode);
+		//shopForAPlanOptionZipcodeFieldBox.sendKeys(zipcode);
+		jsSendkeys(shopForAPlanOptionZipcodeFieldBox, zipcode);
 		sleepBySec(1);
-		shopForAPlanOptionFindPlanButton.click();
+		//shopForAPlanOptionFindPlanButton.click();
+		jsClickNew(shopForAPlanOptionFindPlanButton);
 		if (isMultiCounty.equalsIgnoreCase("yes")) {
 			System.out.println("Handle mutliple county");
 			CommonUtility.waitForPageLoad(driver, countyModal, 45);
