@@ -3726,4 +3726,10 @@ public void the_user_navigates_to_Review_and_Submit_Page_clickon_Edit_Medicare_P
 		Assert.fail("Medicare Info data entry failed and user not navigated back to Review Page");
 	}
 
+	@Then("^the user validates cancellation and Save Return Later modal for OLE Page$")
+	public void the_user_validates_cancellation_save_return_later_for_OLE_pages() throws Throwable {
+		MedicareInformationPage medicareInfoPage = (MedicareInformationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE);
+		medicareInfoPage.OpenCancelOLEPages();
+		medicareInfoPage.OpensavereturnOLEPages();
 	}
+}
