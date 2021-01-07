@@ -3145,7 +3145,10 @@ public void the_user_validates_the_OLE_Submission_Details_in_GPS(DataTable arg1)
 				if(PlanName.contains("Chronic") || PlanName.contains("Gold") ||PlanName.contains("Silver") || PlanName.contains("D-SNP")) {
 					DetailsMap.put("Paperless Delivery", "N");
 					} else {
-					DetailsMap.put("Paperless Delivery", (String) getLoginScenario().getBean(oleCommonConstants.Go_Green));	
+						String paperless= (String) getLoginScenario().getBean(oleCommonConstants.Go_Green);
+						paperless=paperless.toUpperCase().substring(0, 1);
+						DetailsMap.put("Paperless Delivery",paperless);
+				//	DetailsMap.put("Paperless Delivery", (String) getLoginScenario().getBean(oleCommonConstants.Go_Green));	
 					}			
 				DetailsMap.put("Language", "1");
 
@@ -3229,7 +3232,7 @@ public void the_user_validates_the_OLE_Submission_Details_in_GPS(DataTable arg1)
 				//PCP Page
 				if(!plantype.contains("PDP")) {
 				String pcpName = (String) getLoginScenario().getBean(oleCommonConstants.PCP_NAME);
-				DetailsMap.put("PCP Name", pcpName.toUpperCase());
+				DetailsMap.put("PCP Name", pcpName.replaceAll("-", "").toUpperCase());
 				String pcpNumber = (String) getLoginScenario().getBean(oleCommonConstants.PCP_NUMBER);
 				DetailsMap.put("PCP Number", pcpNumber.toUpperCase());
 				String pcpRecentlyVisited = (String) getLoginScenario().getBean(oleCommonConstants.PCP_RECENTLY_VISITED);
@@ -3249,15 +3252,17 @@ public void the_user_validates_the_OLE_Submission_Details_in_GPS(DataTable arg1)
 
 				//Proposed Effective Date
 				
-			/*			String proposedEffectiveDate = (String) getLoginScenario().getBean(oleCommonConstants.PROPOSED_EFF_DATE);
-				proposedEffectiveDate = OLEGPSValidation.converttogpsDate(proposedEffectiveDate);
+						String proposedEffectiveDate = (String) getLoginScenario().getBean(oleCommonConstants.PROPOSED_EFF_DATE);
+				proposedEffectiveDate = proposedEffectiveDate.substring(0, 10);
+				System.out.println("--------------------Storing Data for Proposed Effective Date Ended----------------------" +proposedEffectiveDate);
+				proposedEffectiveDate=OLEGPSValidation.converttogpsDate1(proposedEffectiveDate);
 				DetailsMap.put("Proposed Effective date", proposedEffectiveDate);
-			*/
+		
 				
-				
+			/*	
 				String proposedEffectiveDate = (String) getLoginScenario().getBean(oleCommonConstants.PROPOSED_EFF_DATE);
 				DetailsMap.put("Proposed Effective date", proposedEffectiveDate);
-				//DetailsMap.put("Proposed Effective date", (String) getLoginScenario().getBean(oleCommonConstants. PROPOSED_EFF_DATE));
+				//DetailsMap.put("Proposed Effective date", (String) getLoginScenario().getBean(oleCommonConstants. PROPOSED_EFF_DATE));*/
 				System.out.println("--------------------Storing Data for Proposed Effective Date Ended----------------------" +proposedEffectiveDate);
 
 				//------------------------------------------------------------------------------------------------------------------------------------------------

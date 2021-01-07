@@ -22,6 +22,7 @@ import org.openqa.selenium.support.PageFactory;
 
 import acceptancetests.acquisition.ole.oleCommonConstants;
 import acceptancetests.data.CommonConstants;
+import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 
 /**
@@ -280,7 +281,7 @@ public class OLEconfirmationPage extends UhcDriver{
 
 				   //Proposed Effective Date
 				   String proposedeffectiveDate = rs.getString("REQUESTED_EFFECTIVE_DATE");
-				 //  proposedeffectiveDate = proposedeffectiveDate.substring(0, 10);
+				   proposedeffectiveDate = proposedeffectiveDate.substring(0, 10);
 				   gpsData.put("Proposed Effective date", proposedeffectiveDate);  					   
 					System.out.println("--------------------Storing Data for Eligibility Page Started----------------------"+proposedeffectiveDate);
 
@@ -289,8 +290,10 @@ public class OLEconfirmationPage extends UhcDriver{
 				   if(pcpName==null) {
 					   pcpName ="";
 				   }
+				   pcpName = pcpName.replaceAll("-", "");
 				   gpsData.put("PCP Name", pcpName); 
 				   String pcpNumber = rs.getString("PRIMARY_CARE_PHYSICIAN_NUMBER");
+				  
 				   if(pcpNumber==null) {
 					   pcpNumber ="";
 				   }
@@ -461,7 +464,7 @@ public class OLEconfirmationPage extends UhcDriver{
 	return gpsData;
 	  
 }
-	 
+/*	 
 public Connection createDataBaseConnection() {
 		Connection connection = null;
 		try {
@@ -474,7 +477,32 @@ public Connection createDataBaseConnection() {
 			 e.printStackTrace();
 		}
 		return connection;
-		}	
+		}	*/
+	
+	public Connection createDataBaseConnection() {
+		Connection connection = null;
+		try {
+			 Class.forName(CommonConstants.DB_ORACLE_DRIVER).newInstance();
+			 if(MRScenario.environment.equalsIgnoreCase("stage")) {
+			 connection = DriverManager.getConnection(CommonConstants.CONNECTION_URL);
+			 if(connection!=null) {
+				 System.out.println("Connection successful for stage Environment");
+			 }
+			 else {
+				 connection = DriverManager.getConnection(CommonConstants.CONNECTION_TEAM_URL);
+				 if(connection!=null) {
+					 System.out.println("Connection successful for team Environment");
+				 } 
+			 }
+			 }
+		}
+			 catch (Exception e) {
+			 e.printStackTrace();
+		}
+		
+		return connection;
+			
+}
 	
 	public boolean validate_GPS_for_Plantype(Map<String,String> map) {
 		boolean flag = false;
@@ -534,6 +562,15 @@ public Connection createDataBaseConnection() {
 		String date = intputDate.substring(2, 4);
 		String month = intputDate.substring(0, 2);;
 		String year = intputDate.substring(4,8);
+		String outputDate= year+"-"+month+"-"+date; 
+		System.out.println("Output Date====================== "+outputDate);
+		return outputDate;	
+	}
+	
+	public String converttogpsDate1(String intputDate) {
+		String date = intputDate.substring(3,5);
+        String month = intputDate.substring(0,2);
+        String year = intputDate.substring(6,10);
 		String outputDate= year+"-"+month+"-"+date; 
 		System.out.println("Output Date====================== "+outputDate);
 		return outputDate;	
