@@ -1223,6 +1223,24 @@ public class BenefitsAndCoverageWebElements extends UhcDriver {
 	@FindBy(xpath = "//a[@class='display-block collapse-expand atdd-bnc-drgpricingtiers']")
 	protected WebElement Learnmoretierslink_toCloseIt;
 	
+	@FindBy(xpath="//h2[text()='OPTIONAL SERVICES (RIDERS)']")
+	protected WebElement riderSection;
+	
+	@FindBy(xpath="//button[contains(@class,'add-rider-button')]")
+	protected WebElement riderAddBtn;
+	
+	@FindBy(xpath="//span[contains(@class,'remove-rider-button')]")
+	protected WebElement riderDeleteBtn;
+	
+	@FindBy(xpath="//div[contains(@class,'optionalRiders section')]//div[contains(@class,'message')]//div[@class='body']/p")
+	protected WebElement riderMsgWithStartDate;
+	
+	@FindBy(xpath="//div[contains(@class,'optionalRiders section')]//ul//li[contains(text(),'For assistance')]//a")
+	protected WebElement riderAssistanceLnk;
+	
+	@FindBy(xpath="//div[contains(@class,'optionalRiders section')]//div[contains(@ng-show,'rider') and not(contains(@class,'ng-hide'))]/a[contains(text(),'DOWNLOAD RIDER PDF')]")
+	protected WebElement riderViewPdfLnk;
+	
 	public BenefitsAndCoverageWebElements(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);

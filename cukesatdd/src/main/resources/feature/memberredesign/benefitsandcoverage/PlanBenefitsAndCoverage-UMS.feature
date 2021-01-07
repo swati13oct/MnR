@@ -785,5 +785,19 @@ Feature: 1.01 Member  benefits and Coverage page
       | 41    | xxxxx | TERM     | FED_BnC      |
       | 42    | xxxxx | TERM     | PDP_FED_BnC  |
       | 43    | xxxxx | TERM     | MAPD_FED_BnC | 
+
+  @benefitsAndCoverage26 @rider
+  Scenario Outline: Index: <index> -FID: <FID> -plan: <planType> -memberType: <memberType> - Verify Rider tile display
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type      | <planType>      |
+      | Member Type    | <memberType>    |
+    Then The user navigates to Benefits and Coverage page
+      | Plan Type | <planType> |
+	And the user validate rider tile is displayed
+	
+    Examples: 
+      | index  | FID    | planType  | memberType           |
+      | 44     | xxxxxx | MAPD      | Individual_Rider_BnC |
+
       
  ###############################Regression Scenarios END Here ########################################

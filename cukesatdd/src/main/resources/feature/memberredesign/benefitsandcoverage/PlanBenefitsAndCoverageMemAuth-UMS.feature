@@ -925,13 +925,43 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth
 
   @memAuth_benefitsAndCoverage25 @memAuth_api
   Scenario Outline: Index: <index> -TID: <TID> -plan: <planType> -memberType: <memberType> - Verify UCPBenefits API not having undefined input value for COMBO user
-    Given login with following details logins in the member portal and validate elements
-      | Plan Type   | <planType>   |
-      | Member Type | <memberType> |
+    Given the user is on member auth login flow page
+    When the member is able to login with correct username and password
+      | Username | <username> |
+      | Password | <password> |
+    And Member Enters the Username he wants to search
+      | MemUsername | <MemUserName> |
+    And user clicks on member to select
+    And user stores test input for validations
+      | Username | <MemUserName> |
+      | Plan Type    | <planType>    |
+      | Member Type  | <memberType>  |
     Then The user will not be able to navigate to Benefits and Coverage page
       
     @memAuth_singleApi
     Examples: 
       | index | TID   | username | password  | MemUserName        | planType | memberType   |
       | 41    | xxxxx | qavgogine| qavgogine | q2_jun_grp0440     | TERM     | FED_BnC      |
+      
+  @memAuth_benefitsAndCoverage26 @memAuth_rider
+  Scenario Outline: Index: <index> -FID: <FID> -plan: <planType> -memberType: <memberType> - Verify Rider tile display
+    Given the user is on member auth login flow page
+    When the member is able to login with correct username and password
+      | Username | <username> |
+      | Password | <password> |
+    And Member Enters the Username he wants to search
+      | MemUsername | <MemUserName> |
+    And user clicks on member to select
+    And user stores test input for validations
+      | Username | <MemUserName> |
+      | Plan Type    | <planType>    |
+      | Member Type  | <memberType>  |
+    Then The user navigates to Benefits and Coverage page
+      | Plan Type | <planType> |
+	And the user validate rider tile is displayed
+	
+    Examples: 
+      | index  | FID    | username | password  | MemUserName        | planType  | memberType           |
+      | 42     | xxxxxx | qavgogine| qavgogine | q4_3monthrider_003 | MAPD      | Individual_Rider_BnC |
+      
 ########################################################################################################  

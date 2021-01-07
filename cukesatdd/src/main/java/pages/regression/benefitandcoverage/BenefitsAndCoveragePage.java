@@ -15,8 +15,10 @@ import java.util.concurrent.TimeUnit;
 import java.util.regex.Pattern;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang.time.DateUtils;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.text.PDFTextStripper;
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -27,8 +29,12 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.html5.LocalStorage;
 import org.openqa.selenium.logging.LogEntry;
 import org.openqa.selenium.logging.LogType;
+import org.openqa.selenium.remote.RemoteExecuteMethod;
+import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.remote.html5.RemoteWebStorage;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
@@ -5761,6 +5767,185 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 		validateWithValue("Learn more tiers link to collapse", Learnmoretierslink_toCloseIt);
 		scrollElementToCenterScreen(Learnmoretierslink_toCloseIt);
 		Learnmoretierslink_toCloseIt.click();
+	}
+	
+	public String getConsumerDetailsFromlocalStorage() {
+		//WebStorage webStorage = (WebStorage) new Augmenter().augment(driver) ;
+		RemoteExecuteMethod executeMethod = new RemoteExecuteMethod((RemoteWebDriver) driver);
+		RemoteWebStorage webStorage = new RemoteWebStorage(executeMethod);
+		LocalStorage localStorage = webStorage.getLocalStorage();
+		String consumerDetails=localStorage.getItem("consumerDetails");
+		return consumerDetails;
+	}
+
+	public String getPlanStartDateInConsumerDetails(boolean isComboUser, String lookForPlanCategory, String consumerDetails) {
+		//keepForDebug System.out.println("TEST - consumerDetails="+consumerDetails);
+		String planStartDate=null;
+		try {
+			JSONParser parser = new JSONParser();
+			JSONObject apiResponseJsobObj=(JSONObject) parser.parse(consumerDetails);
+			JSONArray planProfilesArrayObj=(JSONArray) apiResponseJsobObj.get("planProfiles");
+			if (isComboUser) 
+				Assert.assertTrue("PROBLEM - test data expect this user to be a combo user "
+						+ "but the localStorage.consumerDetails has only one planProfiles.  "
+						+ "Please double check and correct test data", planProfilesArrayObj.size()>1);
+			for (int i = 0; i < planProfilesArrayObj.size(); i++) {
+				JSONObject planProfilesObj= (JSONObject) planProfilesArrayObj.get(i);
+				String actualPlanCategory = (String) planProfilesObj.get("planCategory");
+				System.out.println("TEST - lookForPlanCategory="+lookForPlanCategory);
+				System.out.println("TEST - actualPlanCategory="+actualPlanCategory);
+				if (lookForPlanCategory.equals(actualPlanCategory)) {
+					planStartDate = (String) planProfilesObj.get("planStartDate");
+					Assert.assertTrue("PROBLEM - unable to locate planStartDate from localStorage.consumerDetails, "
+							+ "please check to see if getConsumerInfo API response contains non-null planStartDate, consumerDetails="+consumerDetails, 
+							planStartDate!=null);
+				} 
+			}			
+			Assert.assertTrue("PROBLEM - unable to locate the expected planType from localStorage.consumerDetails, "
+					+ "please check to see if feature file input parameter planType contains the actual planType that is in getConsumerInfo API, consumerDetails="+consumerDetails, 
+					planStartDate!=null);
+
+
+		} catch (ParseException e) {
+			e.printStackTrace();
+			Assert.assertTrue("PROBLEM - encounted problem reading the json result from localStorage.consumerDetails", false);
+		}
+		return planStartDate;
+	}
+	
+	public String getPlanStartDateId(Boolean isComboUser, String planType) {
+		//note: if planType is for SHIP, parse the value to get the actual plan category name
+		String lookForPlanCategory= planType;
+		if (planType.contains("SHIP")) {
+			String[] tmp=planType.split("SHIP_");
+			Assert.assertTrue("PROBLEM - input setup for planType for SHIP needs to include planCategory which is used for validation, e.g. SHIP_<planCategory>", tmp.length>1);
+			lookForPlanCategory=tmp[1];
+		}
+		String consumerDetails=getConsumerDetailsFromlocalStorage();
+		String planStartDate = getPlanStartDateInConsumerDetails(isComboUser, lookForPlanCategory, consumerDetails);
+		System.out.println("TEST - planStartDate="+planStartDate);
+		return planStartDate;
+	}
+
+	
+	public Date convertStrToDate(String strDate) {
+		DateFormat df = new SimpleDateFormat("MM/dd/yyyy"); 
+		df.setTimeZone(TimeZone.getTimeZone("UTC"));
+		Date targetDate;
+		try {
+			targetDate = df.parse(strDate);
+			//String newDateString = df.format(targetDate);
+			//System.out.println(newDateString);
+			return targetDate;
+		} catch (java.text.ParseException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	public void validateRiderTileDisplay(boolean isComboUser, String planType, String currentDateStr) {
+		Assert.assertTrue("PROBLEM - expect rider section text 'OPTIONAL SERVICES (RIDERS)' for test user but not seeing it, please make sure test user has rider", validate(riderSection,0));
+
+		String planStartDate=getPlanStartDateId(isComboUser, planType);
+		Date planStartDateDateObj=convertStrToDate(planStartDate);
+		Date threeMonthsAfterPlanStartDate=DateUtils.addMonths(planStartDateDateObj, 3);
+
+		Date currentDateObj=convertStrToDate(currentDateStr);
+
+		//note: see Add button if not yet add current date is within 3 months after planStart
+		if (currentDateObj.before(threeMonthsAfterPlanStartDate) || currentDateObj.equals(threeMonthsAfterPlanStartDate)) {
+			if (validate(riderAddBtn,0)) {
+
+				//TODO: validate adding rider plan, not coding yet because timing from GPS may effect stability of the test result
+				//TODO: also don't want to accidentally add rider on prod env...
+			} else if (validate(riderDeleteBtn,0)) {
+
+				Assert.assertTrue("PROBLEM - Delete button exist implies rider plan is added, unable to locate the message with rider plan start date in tile contnet", validate(riderMsgWithStartDate,0));
+
+				//note: get the rider planStart date
+				String txt=riderMsgWithStartDate.getText();
+				String[] tmp=txt.split("effective on:");
+				Assert.assertTrue("PROBLEM - rider start message is showing but unable to locate the rider plan start date from the message.  msg='"+txt+"'", tmp.length>1);
+				String riderStartDate=tmp[1].replace("\\.", "");
+				Assert.assertTrue("PROBLEM - rider start message is showing but unable to locate the rider plan start date from the message", !riderStartDate.equals(""));
+				
+			} else {
+				Assert.assertTrue("PROBLEM - unable to locate add or remove rider button.  Within first 3 months of the planStart date, either Add or Remove rider button should show", false);
+			}
+		}
+		
+		if (currentDateObj.after(threeMonthsAfterPlanStartDate)) {
+			//note: for sure should not see add button
+			Assert.assertTrue("PROBLEM - planStartDate='"+planStartDate+"' and"
+					+ " system date='"+currentDateStr+"' is not within 3 months after planStartDate,"
+					+ " should NOT see Add rider button", 
+					!validate(riderAddBtn,0));
+			
+			//note: if see delete button then validate if it's within 3 months since rider started
+			if (validate(riderDeleteBtn,0)) {
+				Assert.assertTrue("PROBLEM - Delete button exist implies rider plan is added, unable to locate the message with rider plan start date in tile contnet", validate(riderMsgWithStartDate,0));
+
+				//note: get the rider planStart date
+				String txt=riderMsgWithStartDate.getText();
+				String[] tmp=txt.split("effective on:");
+				Assert.assertTrue("PROBLEM - rider start message is showing but unable to locate the rider plan start date from the message.  msg='"+txt+"'", tmp.length>1);
+				String riderStartDate=tmp[1].replace("\\.", "");
+				Assert.assertTrue("PROBLEM - rider start message is showing but unable to locate the rider plan start date from the message", !riderStartDate.equals(""));
+				Date riderStartDateDateObj=convertStrToDate(riderStartDate);
+				Date threeMonthsAfterRiderPlanStartDate=DateUtils.addMonths(riderStartDateDateObj, 3);
+				
+				Assert.assertTrue("PROBLEM - user can only delete added rider within 3 months from the date rider plan started. riderPlanStartDate='"+riderStartDate+"' | currentSystemDate='"+currentDateStr+"'",
+						currentDateObj.before(threeMonthsAfterRiderPlanStartDate));
+			}
+		}
+		
+		//------- validate  VIEW / DOWNLOAD RIDER PDF link ---------------------------
+		Assert.assertTrue("PROBLEM - unable to locate the VIEW PDF link in tile contnet", validate(riderViewPdfLnk,0));
+		String expUrl="alphadog";
+		String actUrl=riderViewPdfLnk.getAttribute("href");
+		Assert.assertTrue("PROBLEM - VIEW PDF link URL is not as expected. Expect to contain '"+expUrl+"' | Actual href='"+actUrl+"'", actUrl.contains(expUrl));
+
+		String winHandleBefore = driver.getWindowHandle();
+		ArrayList<String> beforeClicked_tabs = new ArrayList<String>(driver.getWindowHandles());
+		int beforeClicked_numTabs=beforeClicked_tabs.size();	
+
+		riderViewPdfLnk.click();
+
+		ArrayList<String> afterClicked_tabs = new ArrayList<String>(driver.getWindowHandles());
+		int afterClicked_numTabs=afterClicked_tabs.size();
+		Assert.assertTrue("PROBLEM - Did not get expected new tab after clicking 'VIEW PDF' link", (afterClicked_numTabs-beforeClicked_numTabs)==1);
+
+		driver.switchTo().window(afterClicked_tabs.get(afterClicked_numTabs-1));
+
+		try {
+			URL TestURL = new URL(driver.getCurrentUrl());
+			sleepBySec(5); //note: let the page settle before validating content
+			BufferedInputStream TestFile = new BufferedInputStream(TestURL.openStream());
+			PDDocument document = PDDocument.load(TestFile);
+			String PDFText = new PDFTextStripper().getText(document);
+			//keep-for-debug 	System.out.println("PDF text : "+PDFText);
+			String expText="Supplemental Benefit";
+			Assert.assertTrue("PROBLEM - unable to locate expected text from PDF content. Expect to contains '"+expText+"'", PDFText.contains(expText));
+			
+			driver.close();
+			driver.switchTo().window(winHandleBefore);
+
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+			Assert.assertTrue("PROBLEM - unable to validate pdf content - MalformedURLException", false);
+		} catch (IOException e) {
+			e.printStackTrace();
+			Assert.assertTrue("PROBLEM - unable to validate pdf content - IOException", false);
+		}
+
+		//------- validate uhcmedicaredentistsearch.com link ---------------------------
+		Assert.assertTrue("PROBLEM - unable to locate the Assistance link in tile contnet", validate(riderAssistanceLnk,0));
+		expUrl="https%3A~2F~2Fdentalsearch.yourdentalplan.com~2Fprovidersearch";
+		actUrl=riderAssistanceLnk.getAttribute("href");
+		Assert.assertTrue("PROBLEM - KNOWN ISSUE INC19517618 - Assistance link URL is not as expected. Expect to contain '"+expUrl+"' | Actual href='"+actUrl+"'", actUrl.contains(expUrl));
+		//TODO - click it and validate it land on the right page:  https://dentalsearch.yourdentalplan.com/providersearch
+
+		
 	}
 
 }

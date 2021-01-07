@@ -863,4 +863,25 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth Prod
       | 41    | xxxxx | kkumard  | tnps459#  | Patkeving                | TERM     | FED_BnC      |
       | 42    | xxxxx | kkumard  | tnps459#  | erbenoit56               | TERM     | PDP_FED_BnC  |
      # unable to search user 
-     # | 43    | xxxxx | kkumard  | tnps459#  | SWHITE33436              | TERM     | PCP_FED_BnC  |      
+     # | 43    | xxxxx | kkumard  | tnps459#  | SWHITE33436              | TERM     | PCP_FED_BnC  |    
+     
+  @prod_benefitsAndCoverage26 @prod_rider
+  Scenario Outline: Index: <index> -FID: <FID> -plan: <planType> -memberType: <memberType> - Verify Rider tile display
+    Given the user is on member auth login flow page
+    When the member is able to login with correct username and password
+      | Username | <username> |
+      | Password | <password> |
+    And Member Enters the Username he wants to search
+      | MemUsername | <MemUserName> |
+    And user clicks on member to select
+    And user stores test input for validations
+      | Username | <MemUserName> |
+      | Plan Type    | <planType>    |
+      | Member Type  | <memberType>  |
+    Then The user navigates to Benefits and Coverage page
+      | Plan Type | <planType> |
+	And the user validate rider tile is displayed
+@abc	
+    Examples: 
+      | index  | FID    | username | password  | MemUserName        | planType  | memberType           |
+      | 44     | xxxxxx | kkumard  | tnps459#  | JohnPrais          | MAPD      | Individual_Rider_BnC |       

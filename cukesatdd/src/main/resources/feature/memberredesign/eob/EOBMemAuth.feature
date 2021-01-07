@@ -158,4 +158,4 @@ Feature: 1.04.1.1 To Test NON-DREAM EOB for Members - E2E - Member Auth
     @memAuth_SSP_EOBs
     Examples: 
       | index | username  | password  | MemUserName              | FID    | planType | memberType | 
-      | 17    | qavgogine | qavgogine | q2_june_Cosmos_Seg233    | 267688 | SSUP     | GROUP_EOB  | 
+      | 17    | qavgogine | qavgogine | q2_jun_grp0255    | 267688 | SSUP     | GROUP_EOB  | 

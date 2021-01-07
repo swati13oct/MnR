@@ -2700,6 +2700,25 @@ public class BenefitsAndCoverageUmsStepDefinition {
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario().getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
 		benefitsCoveragePage.validate_learnmoreaboutlink_insulin(copayCategory, insulinFlag);
 	}
+
+	@Then("^the user validate rider tile is displayed$")
+	public void validates_riderTile()
+	{
+		
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario().getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
+		Date currentDate=benefitsCoveragePage.getCurrentSystemDate();
+		String dateStr=benefitsCoveragePage.convertDateToStrFormat_MMDDYYYY(currentDate);
+
+		String planType=(String) getLoginScenario().getBean(LoginCommonConstants.PLANTYPE);
+		String memberType=(String) getLoginScenario().getBean(LoginCommonConstants.CATOGERY);
+
+		boolean isComboUser=false;
+		if (memberType.toUpperCase().contains("COMBO"))
+			isComboUser=true;
+
+		benefitsCoveragePage.validateRiderTileDisplay(isComboUser, planType, dateStr);
+	}
+
 	
 }//end of class
 

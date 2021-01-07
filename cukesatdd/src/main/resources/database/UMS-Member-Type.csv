@@ -452,7 +452,7 @@ q1_grp_apr256/Password@1,MA,COSMOS_DEOB,,,
 q4_Ship_016/Password@1,SHIP_MEDICARE SUPPLEMENT,COMBO_MULTI_SHIP_EOB,,,
 q4_Ship_023/Password@1,SHIP_MEDICARE SUPPLEMENT,SHIP_EOB,,,
 q3_SEP_2020SHIP_037/Password@1,PHIP,SHIP_EOB,,,
-q2_june_Cosmos_Seg233/Password@1,SSUP,GROUP_EOB,,,
+q2_jun_grp0255/Password@1,SSUP,GROUP_EOB,,,
 q2_jun_grp0255/Password@1,PDP,PDP_SSP_COMBO_DEOB,,,
 q4_ShipVAS_005/Password@1,PDP,PDP_SHIP_COMBO_DEOB,,,
 q4_ShipVAS_005/Password@1,SHIP_MEDICARE SUPPLEMENT,PDP_SHIP_COMBO_EOB,,,
@@ -651,3 +651,4 @@ q3_sep_UAT4_Group175/Password@1,PDP,PDP_Group,,,
 q3_sep_UAT4_Group050/Password@1,MAPD,MAPD_Group,,,
 q3_sep_aarp0272/Password@1,TERM,PDP_FED_BnC
 Pre-effectiveMAPD001/Password@1,TERM,MAPD_FED_BnC
+q4_3monthrider_003/Password@1,MAPD,Individual_Rider_BnC
