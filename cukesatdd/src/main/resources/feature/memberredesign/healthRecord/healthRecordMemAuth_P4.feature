@@ -32,7 +32,7 @@ Feature: 1.24.1.d Member Individual Health Record - Member Auth - P4 - HealthAnd
     Examples: 
 	    | index | FID     | username  | password  | MemUserName             | planType                 | memberType         | expectLink | 
 	    | 03    | F424804 | qavgogine | qavgogine | q4_ShipVAS_005     | SHIP_MEDICARE SUPPLEMENT | COMBO_PDP_SHIP_IHR | false      |
-	 #  | 04    | F424804 | qavgogine | qavgogine | Dream_EOB_PDP_001       | SHIP_MEDICARE SUPPLEMENT | COMBO_SHIP_PDP_IHR | false      |
+	 #  | 04    | F424804 | qavgogine | qavgogine | q2_RxRetail_015       | SHIP_MEDICARE SUPPLEMENT | COMBO_SHIP_PDP_IHR | false      |
 	    | 04    | F424804 | qavgogine | qavgogine | GENARO_Q4_COMBO         | SHIP_MEDICARE SUPPLEMENT | COMBO_SHIP_MAPD_IHR | false      |
 
     @memAuth_no_ihr_p4_boaGrp1
@@ -44,7 +44,7 @@ Feature: 1.24.1.d Member Individual Health Record - Member Auth - P4 - HealthAnd
     @memAuth_no_ihr_p4_boaGrp2
     Examples: 
 	    | index | FID     | username  | password  | MemUserName             | planType | memberType         | expectLink | 
-	    | 07    | F424804 | qavgogine | qavgogine | q2_jun_grp0156          | MA       | BOA12324_TERM_GROUP_IHR | false |
+	    | 07    | F424804 | qavgogine | qavgogine | testUserGroupBOA12324          | MA       | BOA12324_GROUP_IHR | false |
 
     #----------- begin - cases with IHR link
     @memAuth_ihr_p4_ma_mapd
