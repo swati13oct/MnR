@@ -450,8 +450,14 @@ public class MRConstants {
   public static final String Offline_PROD_SHIP_extra ="https://offline.myaarpmedicare.com/Extras";
   public static final String Offline_PROD_edelivery ="https://offline.medicare.uhc.com/?TARGET=SMSR/medicare/member/my-documents/overview.html%3fdeeplink=true&WT.mc_ID=8003461&mrcid=email_fed_m";
   
-  public static String DENTEGRA_DENTAL_DEEPLINK_URL = "stage-myaarpmedicare.uhc.com/dental";
+  public static String DENTEGRA_DENTAL_DEEPLINK_URL = "https://stage-myaarpmedicare.uhc.com/dental";
   
   public static final String D_Rx_TESTHARNESS ="https://"+MRScenario.environment +"-medicare."+MRScenario.domain+"/?testharness=true";
+  public static final String PROD_UHC_DEEPLINK_URL_VirtualVisit = "https://myuhcmedicare.com/virtualvisits";
+  public static final String PROD_AARP_DEEPLINK_URL_VirtualVisit = "https://myaarpmedicare.com/virtualvisits";
+  public static final String PROD_PCP_DEEPLINK_URL_VirtualVisit = "https://mypcpmedicare.com/virtualvisits";
+  public static final String PROD_Medica_DEEPLINK_URL_VirtualVisit = "https://mymedicamedicare.com/virtualvisits";
+  public static final String PROD_SHIP_HWP ="https://myaarpmedicare.com/Extras";
+  public static final String PROD_DEEPLINK_URL_my_Documents_Edelivery ="https://medicare.uhc.com/?TARGET=SMSR/medicare/member/my-documents/overview.html%3fdeeplink=true&WT.mc_ID=8003461&mrcid=email_fed_m";
 
   }
