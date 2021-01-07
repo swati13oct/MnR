@@ -225,6 +225,9 @@ public class OLEconfirmationPage extends UhcDriver{
 				   String email = rs.getString("EMAIL");
 				   gpsData.put("Email", email);
 				   String paperless = rs.getString("PAPERLESS_PREFERENCE_IND");
+				   if(paperless==null) {
+					   paperless ="";
+				   }
 				   gpsData.put("Paperless Delivery", paperless);
 				   String language = rs.getString("LANGUAGE_PREFERENCE");
 				   gpsData.put("Language", language);
@@ -234,6 +237,7 @@ public class OLEconfirmationPage extends UhcDriver{
 				   //Medicare and Medicaid Number
 				   String medicareNumber = rs.getString("MEDICARE_NUMBER");
 				   gpsData.put("Medicare Number", medicareNumber); 
+				   
 				   String medicaidNumber = rs.getString("MEDICAID_NUMBER");
 				   if(medicaidNumber==null) {
 					   medicaidNumber ="";
@@ -276,8 +280,9 @@ public class OLEconfirmationPage extends UhcDriver{
 
 				   //Proposed Effective Date
 				   String proposedeffectiveDate = rs.getString("REQUESTED_EFFECTIVE_DATE");
-				   proposedeffectiveDate = proposedeffectiveDate.substring(0, 10);
+				 //  proposedeffectiveDate = proposedeffectiveDate.substring(0, 10);
 				   gpsData.put("Proposed Effective date", proposedeffectiveDate);  					   
+					System.out.println("--------------------Storing Data for Eligibility Page Started----------------------"+proposedeffectiveDate);
 
 				   //PCP Page
 				   String pcpName = rs.getString("PRIMARY_CARE_PHYSICIAN");
@@ -485,12 +490,16 @@ public Connection createDataBaseConnection() {
 			for (String keySource : map.keySet()) {
 				String strSource = map.get(keySource);
 			    if (gpsdatamap.containsKey(keySource)) { // keys match
-			    	String strTarget = gpsdatamap.get(keySource);
-			        if (strSource.equals(strTarget)) { // values match
+			    	String strTarget = gpsdatamap.get(keySource);			    	
+		    		System.out.println(keySource +" #  "+ strTarget+ " # "+strSource);	
+		    		if((strSource.isEmpty() || null == strSource) && (strTarget.isEmpty() || null == strTarget)) {
+			            matched.put(keySource, strSource);
+		    		} else if ((!strSource.isEmpty() && null != strSource && !strTarget.isEmpty() && null != strTarget) && strSource.equals(strTarget)) { // values match
 			            matched.put(keySource, strSource);
 			        } else { // values don't match
 			            mismatched.put(keySource, strSource);
 			        }
+			    	
 			}
 			}
 

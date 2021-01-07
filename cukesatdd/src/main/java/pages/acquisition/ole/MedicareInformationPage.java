@@ -810,6 +810,7 @@ public boolean validate_notRequired_ESRD_Fields(String planType, String medicaid
 				Medicaid_Validation = false;
 			}
 			jsClickNew(medicaiddyes);
+			medicaidnumTxtBx.sendKeys(medicaidNumber);
 			System.out.println("Medicaid question : Yes clicked"+medicaiddyes.isSelected());
 			if(validateNonPresenceOfElement(MedicaidError) && validateNonPresenceOfElement(CancelButton) && NextBtn.isEnabled()){
 				System.out.println("non DSNP - Medicare Number not required");
@@ -1209,6 +1210,7 @@ public boolean validate_MedicaidNumberField(String planType, String medicaidNumb
 				Medicaid_Validation = false;
 			}
 			jsClickNew(medicaiddyes);
+			medicaidnumTxtBx.sendKeys(medicaidNumber);
 			System.out.println("Medicaid question : Yes clicked"+medicaiddyes.isSelected());
 			if(validateNonPresenceOfElement(MedicaidError) && validateNonPresenceOfElement(CancelButton) && NextBtn.isEnabled()){
 				System.out.println("non DSNP - Medicare Number not required");

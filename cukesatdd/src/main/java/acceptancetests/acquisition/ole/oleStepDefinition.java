@@ -984,9 +984,9 @@ public class oleStepDefinition {
 	public void the_user_validates_not_requierd_fields_for_ESRD_Medicare_Questions_Page(DataTable Flags) throws Throwable {
 
 		List<DataTableRow> personalAttributesRow = Flags.getGherkinRows();
-		Map<String, String> PreliminaryFlagsMap = new HashMap<String, String>();
+		Map<String, String> MedicareDetailsMap = new HashMap<String, String>();
 		for (int i = 0; i < personalAttributesRow.size(); i++) {
-			PreliminaryFlagsMap.put(personalAttributesRow.get(i)
+			MedicareDetailsMap.put(personalAttributesRow.get(i)
 					.getCells().get(0), personalAttributesRow.get(i)
 					.getCells().get(1));
 		}
@@ -1000,17 +1000,22 @@ public class oleStepDefinition {
 		 * getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG,"true");
 		 * Assert.assertTrue(true); } else{
 		 */
-			String MedicaidNumber = PreliminaryFlagsMap.get("MedicaidNumber");
+			String medicaidNumber = MedicareDetailsMap.get("MedicaidNumber");
 			String PlanType = (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_TYPE);
 			String planName = (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_NAME);
 			//String planyear = (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_YEAR);
-			String planYear = PreliminaryFlagsMap.get("Plan Year");
+			//String planYear = MedicareDetailsMap.get("Plan Year");
+			String planYear = (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_YEAR);
 			
 			MedicareInformationPage medInfoPage = (MedicareInformationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE);
-			boolean Validation_Status = medInfoPage.validate_notRequired_ESRD_Fields(PlanType, MedicaidNumber,planName,planYear);
+			boolean Validation_Status = medInfoPage.validate_notRequired_ESRD_Fields(PlanType, medicaidNumber,planName,planYear);
 			if(Validation_Status){
 				System.out.println("Preliminary Questions Validation for required fields in OLE Preliminary Questions PAGE - Validation Passed : "+Validation_Status);
 				getLoginScenario().saveBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE, medInfoPage);
+				//getLoginScenario().saveBean(oleCommonConstants.MEDICAID_NUMBER,  MedicaidNumber);
+				getLoginScenario().saveBean(oleCommonConstants.MEDICAID_NUMBER,medicaidNumber);
+				getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_YEAR,planYear);
+				System.out.println("Preliminary Questions Validation for required fields in OLE Preliminary Questions PAGE - Validation Passed : "+medicaidNumber);
 				Assert.assertTrue(true);
 			}
 			else{
@@ -1319,6 +1324,8 @@ public class oleStepDefinition {
 				MemberDetailsMap.put(givenAttributesRow.get(i).getCells().get(0),
 						givenAttributesRow.get(i).getCells().get(1));
 			}
+			String Perm_Aptno="";
+			String Mailing_Aptno="";
 			PersonalInformationPage personalInformationPage = (PersonalInformationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_PERSONAL_INFO_PAGE);
 			boolean isFormFilled = personalInformationPage.enter_member_details(MemberDetailsMap);
 			if (isFormFilled) {
@@ -1330,16 +1337,16 @@ public class oleStepDefinition {
 				getLoginScenario().saveBean(oleCommonConstants.DOB, MemberDetailsMap.get("DOB"));
 				getLoginScenario().saveBean(oleCommonConstants.GENDER, MemberDetailsMap.get("Gender"));
 				getLoginScenario().saveBean(oleCommonConstants.PERM_STREET, MemberDetailsMap.get("Perm_Street"));
-				//getLoginScenario().saveBean(oleCommonConstants.PERM_APARTMENT_NUMBER, MemberDetailsMap.get("Perm_Aptno"));
+				getLoginScenario().saveBean(oleCommonConstants.PERM_APARTMENT_NUMBER,Perm_Aptno); 
 				getLoginScenario().saveBean(oleCommonConstants.PERM_CITY, MemberDetailsMap.get("Perm_city"));
 				getLoginScenario().saveBean(oleCommonConstants.MAILING_QUESTION, MemberDetailsMap.get("Mailing Address Question"));
 				getLoginScenario().saveBean(oleCommonConstants.MAILING_STREET, MemberDetailsMap.get("Mailing_Street"));
-				//getLoginScenario().saveBean(oleCommonConstants.MAILING_APARTMENT_NUMBER, MemberDetailsMap.get("Mailing_Aptno"));
+				getLoginScenario().saveBean(oleCommonConstants.MAILING_APARTMENT_NUMBER,Mailing_Aptno);
 				getLoginScenario().saveBean(oleCommonConstants.MAILING_CITY, MemberDetailsMap.get("Mailing_City"));
 				getLoginScenario().saveBean(oleCommonConstants.MAILING_STATE, MemberDetailsMap.get("Mailing_State"));
 				getLoginScenario().saveBean(oleCommonConstants.MAILING_ZIP, MemberDetailsMap.get("Mailing_Zip"));
 				getLoginScenario().saveBean(oleCommonConstants.EMAIL, MemberDetailsMap.get("Email"));
-				getLoginScenario().saveBean(oleCommonConstants.MEDICAID_NUMBER, MemberDetailsMap.get("MedicaidNumber"));			
+				//getLoginScenario().saveBean(oleCommonConstants.MEDICAID_NUMBER, MemberDetailsMap.get("MedicaidNumber"));			
 				Assert.assertTrue(true);
 			}
 			else
@@ -1402,7 +1409,10 @@ public class oleStepDefinition {
 			for (int i = 0; i < givenAttributesRow.size(); i++) {
 				MemberDetailsMap.put(givenAttributesRow.get(i).getCells().get(0),
 						givenAttributesRow.get(i).getCells().get(1));
+				
 			}
+			String EmailConfirmation = "";
+			String GoGreen = "";
 			PersonalInformationPage personalInformationPage = (PersonalInformationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_PERSONAL_INFO_PAGE);
 			boolean isFormFilled = personalInformationPage.enter_member_details_Other_dsnp(MemberDetailsMap);
 			if (isFormFilled) {
@@ -1413,7 +1423,15 @@ public class oleStepDefinition {
 				getLoginScenario().saveBean(oleCommonConstants.PRIMARY_PHONE_NUMBER, MemberDetailsMap.get("Home Number"));
 				getLoginScenario().saveBean(oleCommonConstants.MOBILE_NUMBER, MemberDetailsMap.get("Mobile Number"));
 				getLoginScenario().saveBean(oleCommonConstants.MIDDLE_NAME, MemberDetailsMap.get("Middle Name"));
-				
+			//	getLoginScenario().saveBean(oleCommonConstants.EMAIL_CONFIRMATION, MemberDetailsMap.get("Email Confirmation"));
+			//	getLoginScenario().saveBean(oleCommonConstants.Go_Green, MemberDetailsMap.get("Go Green"));
+				getLoginScenario().saveBean(oleCommonConstants.EMAIL_CONFIRMATION,EmailConfirmation);
+				getLoginScenario().saveBean(oleCommonConstants.Go_Green,GoGreen);          
+			/*	getLoginScenario().saveBean(oleCommonConstants.EMAIL_CONFIRMATION,                            
+						(null != MemberDetailsMap.get("Email Confirmation") && "" != MemberDetailsMap.get("Email Confirmation")) ? MemberDetailsMap.get("Email Confirmation") :  new Object());
+				getLoginScenario().saveBean(oleCommonConstants.Go_Green, 
+						(null != MemberDetailsMap.get("Go Green") && "" != MemberDetailsMap.get("Go Green")) ? MemberDetailsMap.get("Go Green") :  new Object());
+					//	MemberDetailsMap.get("Go Green"));*/
 				Assert.assertTrue(true);
 			}
 			else
@@ -3085,7 +3103,9 @@ public void the_user_validates_the_OLE_Submission_Details_in_GPS(DataTable arg1)
 				//Primary Address
 				String perm_Street = (String) getLoginScenario().getBean(oleCommonConstants.PERM_STREET);
 				DetailsMap.put("Perm_Street", perm_Street.toUpperCase());
-				DetailsMap.put("Perm_Apartment", "");
+			//	String perm_Address = (String) getLoginScenario().getBean(oleCommonConstants.PERM_APARTMENT_NUMBER);
+				DetailsMap.put("Perm_Apartment", (String) getLoginScenario().getBean(oleCommonConstants.PERM_APARTMENT_NUMBER));
+			//	DetailsMap.put("Perm_Apartment", "");
 				String perm_city = (String) getLoginScenario().getBean(oleCommonConstants.PERM_CITY);
 				DetailsMap.put("Perm_city", perm_city.toUpperCase());
 				// TODO: Need to check and add Permanent State
@@ -3106,13 +3126,13 @@ public void the_user_validates_the_OLE_Submission_Details_in_GPS(DataTable arg1)
 				DetailsMap.put("Mailing_State", mailing_State.toUpperCase());
 				DetailsMap.put("Mailing_Zip", (String) getLoginScenario().getBean(oleCommonConstants.MAILING_ZIP));
 				}
-				else {
+			/*	else {
 					DetailsMap.put("Mailing_Street", "");
 					DetailsMap.put("Mailing Apartment Number", "");
 					DetailsMap.put("Mailing_City", "");
 					DetailsMap.put("Mailing_State", "");
 					DetailsMap.put("Mailing_Zip", "");					
-					}
+					}*/
 				//Phone Number
 				DetailsMap.put("Home Number", (String) getLoginScenario().getBean(oleCommonConstants.PRIMARY_PHONE_NUMBER));
 				DetailsMap.put("Mobile Number", (String) getLoginScenario().getBean(oleCommonConstants.MOBILE_NUMBER));
@@ -3141,6 +3161,7 @@ public void the_user_validates_the_OLE_Submission_Details_in_GPS(DataTable arg1)
 				String medicareNumber= (String) getLoginScenario().getBean(oleCommonConstants.MEDICARE_NUMBER);
 				medicareNumber=medicareNumber.replaceAll("-", "").toUpperCase();
 				DetailsMap.put("Medicare Number", medicareNumber);
+				
 				DetailsMap.put("Medicaid Number", (String) getLoginScenario().getBean(oleCommonConstants.MEDICAID_NUMBER));
 				String ssnFlag = (String) getLoginScenario().getBean(oleCommonConstants.SSN_FLAG);
 				if(ssnFlag.equalsIgnoreCase("true")) {
@@ -3228,9 +3249,14 @@ public void the_user_validates_the_OLE_Submission_Details_in_GPS(DataTable arg1)
 
 				//Proposed Effective Date
 				
-						String proposedEffectiveDate = (String) getLoginScenario().getBean(oleCommonConstants.PROPOSED_EFF_DATE);
+			/*			String proposedEffectiveDate = (String) getLoginScenario().getBean(oleCommonConstants.PROPOSED_EFF_DATE);
 				proposedEffectiveDate = OLEGPSValidation.converttogpsDate(proposedEffectiveDate);
 				DetailsMap.put("Proposed Effective date", proposedEffectiveDate);
+			*/
+				
+				String proposedEffectiveDate = (String) getLoginScenario().getBean(oleCommonConstants.PROPOSED_EFF_DATE);
+				DetailsMap.put("Proposed Effective date", proposedEffectiveDate);
+				//DetailsMap.put("Proposed Effective date", (String) getLoginScenario().getBean(oleCommonConstants. PROPOSED_EFF_DATE));
 				System.out.println("--------------------Storing Data for Proposed Effective Date Ended----------------------" +proposedEffectiveDate);
 
 				//------------------------------------------------------------------------------------------------------------------------------------------------
@@ -3281,7 +3307,7 @@ public void the_user_validates_the_OLE_Submission_Details_in_GPS(DataTable arg1)
 					DetailsMap.put("Authorization State", "");
 					DetailsMap.put("Auth Zip Display", "");
 					DetailsMap.put("Authorization Phone No", "");	
-					}*/
+				}*/
 				//------------------------------------------------------------------------------------------------------------------------------------------------
 
 				//-----------Adding for CSNP-----------------//
