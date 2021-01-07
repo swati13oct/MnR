@@ -17,8 +17,8 @@ Feature: 1.05.4 OLE common tool flow E2E CSNP
    Then the user validates the Plan details on OLE
    Then the user validates TFN in Welcome OLE Right Rail
    Then the user validates Learn more modal for Welcome OLE
-    Then the user validates Leave OLE modal for Welcome OLE
-    Then the user validates cancellation modal for Welcome OLE
+   Then the user validates Leave OLE modal for Welcome OLE
+   Then the user validates cancellation modal for Welcome OLE
     Then the user navigates to Personal Information Page
     Then the user enters following required information in Personal Information Page
       | First Name         | <firstname>         |
@@ -56,9 +56,10 @@ Feature: 1.05.4 OLE common tool flow E2E CSNP
       | Email              | <email>             |
     Then the user validates the Plan details in Medicare Info OLE Right Rail
 #    Then the user navigates to Preliminary Questions Page
-	Then the user validates Medicare Number and not required ESRD question on Medicare Info Page
+	#Then the user validates Medicare Number and not required ESRD question on Medicare Info Page
+	 Then the user validates Medicaid Number in confirm Eligibility Page
       | MedicaidNumber | <medicaidnumber> |
-     |Plan Year | <planYear> |
+     	|Plan Year | <planYear> |  
     Then the user validates the required fields for CSNP plans on Medicare Information Page
       	|diabetesQuestion1|<diabetesQ1>|
       	|diabetesQuestion2|<diabetesQ2>|
