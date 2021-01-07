@@ -1477,7 +1477,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 
 
 	@Then("^the user validate vas tiles on vas page")
-	public void validatevastiles(DataTable memberAttributes)
+	public void validatevastiles(DataTable memberAttributes) throws InterruptedException
 	{
 		ValueAddedServicepage valueaddedservices = (ValueAddedServicepage) getLoginScenario()
 				.getBean(PageConstantsMnR.VALUE_ADDED_SERVICES);

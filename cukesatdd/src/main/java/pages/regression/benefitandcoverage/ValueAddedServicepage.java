@@ -103,17 +103,29 @@ public class ValueAddedServicepage extends UhcDriver {
 	@FindBy(xpath="(//h2[normalize-space(text())='SilverSneakers'])[2]/../../../../../section[contains(@id,'collapseLargeCard')]")
 	private WebElement silverSneakersShowMorePara;
 	
-	@FindBy(xpath="(//h2[normalize-space(text())='AARP'])[4]")
+	@FindBy(xpath="(//h2[normalize-space(text())='AARP'])[3]")
 	private WebElement aarpStayingSharpWidget;
 	
-	@FindBy(xpath="(//h2[normalize-space(text())='AARP'])[4]/following-sibling::p")
+	@FindBy(xpath="(//h2[normalize-space(text())='AARP'])[3]/following-sibling::p")
 	private WebElement aarpStayingSharpPara;
 	
-	@FindBy(xpath="(//h2[normalize-space(text())='AARP'])[4]/following-sibling::a")
+	@FindBy(xpath="(//h2[normalize-space(text())='AARP'])[3]/following-sibling::a")
 	private WebElement aarpStayingSharpShowMoreLnk;
 	
-	@FindBy(xpath="(//h2[normalize-space(text())='AARP'])[4]/../../../../../section[contains(@id,'collapseLargeCard')]")
+	@FindBy(xpath="(//h2[normalize-space(text())='AARP'])[3]/../../../../../section[contains(@id,'collapseLargeCard')]")
 	private WebElement aarpStayingSharpShowMorePara;
+	
+	@FindBy(xpath="(//h2[normalize-space(text())='AARP'])[4]")
+	private WebElement aarpStayingSharpStageWidget;
+	
+	@FindBy(xpath="(//h2[normalize-space(text())='AARP'])[4]/following-sibling::p")
+	private WebElement aarpStayingSharpStagePara;
+	
+	@FindBy(xpath="(//h2[normalize-space(text())='AARP'])[4]/following-sibling::a")
+	private WebElement aarpStayingSharpShowMoreStageLnk;
+	
+	@FindBy(xpath="(//h2[normalize-space(text())='AARP'])[4]/../../../../../section[contains(@id,'collapseLargeCard')]")
+	private WebElement aarpStayingSharpShowMoreStagePara;
 	
 	@FindBy(xpath="(//h2[normalize-space(text())='24/7 Nurse line'])[2]")
 	private WebElement nurseLineWidget;
@@ -210,11 +222,12 @@ public class ValueAddedServicepage extends UhcDriver {
 	}
 	
 	/**
+	 * @throws InterruptedException 
 	 * @toDo : Validates the vas tiles on vas page
 	 */
 	
 	//VAS widgets will display as per user plancode & statecode
-	public void vastiles(String planCode, String stateCode)
+	public void vastiles(String planCode, String stateCode) throws InterruptedException
 	{
 	try {
 			Thread.sleep(5000);
@@ -231,6 +244,8 @@ public class ValueAddedServicepage extends UhcDriver {
 			
 			silverSneakersShowMoreLnk.click();
 			
+			Thread.sleep(2000);
+			
 			CommonUtility.waitForPageLoadNew(driver, silverSneakersShowMorePara, 20);
 			
 			Assert.assertTrue(silverSneakersShowMorePara.getText().contains("SilverSneakers gives you access to thousands of participating locations"));
@@ -239,6 +254,7 @@ public class ValueAddedServicepage extends UhcDriver {
 			
 			silverSneakersShowMoreLnk.click();
 			
+			Thread.sleep(2000);
 			
 			Assert.assertTrue("'Renew ActiveTM by UnitedHealthcare' is not expected to display", !validate(renewActiveWidget));
 			
@@ -252,19 +268,22 @@ public class ValueAddedServicepage extends UhcDriver {
 			
 			renewActiveShowMoreLnk.click();
 			
-			CommonUtility.waitForPageLoadNew(driver, renewActiveShowMorePara, 20);
+			Thread.sleep(2000);
 			
+			//CommonUtility.waitForPageLoadNew(driver, renewActiveShowMorePara, 20);
+			scrollElementToCenterScreen(renewActiveShowMorePara);
 			Assert.assertTrue(renewActiveShowMorePara.getText().contains("You will need a confirmation code to take advantage of these services."));
 			
 			CommonUtility.waitForPageLoadNew(driver, renewActiveShowMoreLnk, 20);
 			
 			renewActiveShowMoreLnk.click();
 			
+			Thread.sleep(2000);
 			
 			Assert.assertTrue("'silverSneakersWidget' is not expected to display", !validate(silverSneakersWidget));
 			
 		}
-		WebElement widgets[] = {dentalDiscountWidget, hearingCareProgramByHearUSAWidget, aarpStayingSharpWidget,
+		WebElement widgets[] = {dentalDiscountWidget, hearingCareProgramByHearUSAWidget, aarpStayingSharpWidget, 
 				nurseLineWidget, aarpVisionDiscountsWidget, aarpSmartDriverWidget};
 		
 		WebElement widgetsPara[] = {dentalDiscountPara, hearingCareProgramByHearUSAPara, aarpStayingSharpPara,
@@ -281,7 +300,12 @@ public class ValueAddedServicepage extends UhcDriver {
 		for(int i=0; i<widgets.length; i++) {
 			validate(widgets[i]);
 			validate(widgetsPara[i]);
+			if(driver.getCurrentUrl().contains("stage") && i==2) {
+				widgetsPara[i] = aarpStayingSharpStagePara;
+			}
+			
 			Assert.assertTrue(widgetsPara[i].getText().trim().contains(widgetsUIPara[i]));
+			
 		}
 		
 		Assert.assertTrue("'BrowseYourOptions' is not expected to display", !browseYourOptions.isSelected());
@@ -289,6 +313,8 @@ public class ValueAddedServicepage extends UhcDriver {
 		Assert.assertTrue("'AtYourBestTile' is not expected to display", !validate(atYourBestTile));
 	
 		dentalDiscountShowmoreLnk.click();
+		
+		Thread.sleep(2000);
 		
 		CommonUtility.waitForPageLoadNew(driver, dentalDiscountShowmorePara, 20);
 		
@@ -298,8 +324,13 @@ public class ValueAddedServicepage extends UhcDriver {
 		
 		dentalDiscountShowmoreLnk.click();
 		
+		Thread.sleep(2000);
+		
+		CommonUtility.waitForPageLoadNew(driver, hearingCareProgramByHearUSAShowMoreLnk, 20);
 		
 		hearingCareProgramByHearUSAShowMoreLnk.click();
+		
+		Thread.sleep(2000);
 		
 		CommonUtility.waitForPageLoadNew(driver, hearingCareProgramByHearUSAShowMorePara, 20);
 		
@@ -309,44 +340,77 @@ public class ValueAddedServicepage extends UhcDriver {
 		
 		hearingCareProgramByHearUSAShowMoreLnk.click();
 		
+		Thread.sleep(2000);
 		
-		aarpStayingSharpShowMoreLnk.click();
+		if(driver.getCurrentUrl().contains("stage")) {
+			aarpStayingSharpShowMoreStageLnk.click();
+			
+			Thread.sleep(2000);
+			
+			CommonUtility.waitForPageLoadNew(driver, aarpStayingSharpShowMoreStagePara, 20);
+			
+			Assert.assertTrue(aarpStayingSharpShowMoreStagePara.getText().contains("Get your code from the right column of your Health and Wellness page"));
+			
+			CommonUtility.waitForPageLoadNew(driver, aarpStayingSharpShowMoreStageLnk, 20);
+			
+			aarpStayingSharpShowMoreStageLnk.click();
+			
+			Thread.sleep(2000);
+		}else {
+			aarpStayingSharpShowMoreLnk.click();
+			
+			Thread.sleep(2000);
+			
+			CommonUtility.waitForPageLoadNew(driver, aarpStayingSharpShowMorePara, 20);
+			
+			Assert.assertTrue(aarpStayingSharpShowMorePara.getText().contains("To get started, go to Renew Active"));
+			
+			CommonUtility.waitForPageLoadNew(driver, aarpStayingSharpShowMoreLnk, 20);
+			
+			aarpStayingSharpShowMoreLnk.click();
+			
+			Thread.sleep(2000);
+		}
 		
-		CommonUtility.waitForPageLoadNew(driver, aarpStayingSharpShowMorePara, 20);
-		
-		Assert.assertTrue(aarpStayingSharpShowMorePara.getText().contains("Get your code from the right column of your Health and Wellness page and then visit"));
-		
-		CommonUtility.waitForPageLoadNew(driver, aarpStayingSharpShowMoreLnk, 20);
-		
-		aarpStayingSharpShowMoreLnk.click();
-		
-		
+		scrollElementToCenterScreen(nurseLineShowMoreLnk);
+		CommonUtility.waitForPageLoadNew(driver, nurseLineShowMoreLnk, 20);
 		nurseLineShowMoreLnk.click();
-		
-		CommonUtility.waitForPageLoadNew(driver, nurseLineShowMorePara, 20);
+		Thread.sleep(2000);
+		scrollElementToCenterScreen(nurseLineShowMorePara);
+		//CommonUtility.waitForPageLoadNew(driver, nurseLineShowMorePara, 20);
 		
 		Assert.assertTrue(nurseLineShowMorePara.getText().contains("Just dial 1-888-543-5630 (TTY 711) any time, 24 hours a day, 7 days a week, and connect with a nurse."));
 		
 		CommonUtility.waitForPageLoadNew(driver, nurseLineShowMoreLnk, 20);
 		
+		scrollElementToCenterScreen(nurseLineShowMoreLnk);
 		nurseLineShowMoreLnk.click();
+		Thread.sleep(2000);
 		
 		
 		aarpVisionDiscountsShowMoreLnk.click();
-		
-		CommonUtility.waitForPageLoadNew(driver, aarpVisionDiscountsShowMorePara, 20);
+		Thread.sleep(2000);
+
+		scrollToView(aarpVisionDiscountsShowMorePara);
+	//	CommonUtility.waitForPageLoadNew(driver, aarpVisionDiscountsShowMorePara, 20);
 		
 		Assert.assertTrue(aarpVisionDiscountsShowMorePara.getText().contains("To benefit from the savings and service of this vision discount program"));
 		
 		CommonUtility.waitForPageLoadNew(driver, aarpVisionDiscountsShowMoreLnk, 20);
 		
+		scrollElementToCenterScreen(aarpVisionDiscountsShowMoreLnk);
+		
 		aarpVisionDiscountsShowMoreLnk.click();
 		
+		Thread.sleep(2000);		
 	
 		CommonUtility.waitForPageLoadNew(driver, aarpSmartDriverShowMoreLnk, 20);
 		
 		aarpSmartDriverShowMoreLnk.click();
 		
+		Thread.sleep(2000);
+		
+		scrollToView(aarpSmartDriverShowMorePara);
 		CommonUtility.waitForPageLoadNew(driver, aarpSmartDriverShowMorePara, 20);
 		
 		scrollToView(aarpSmartDriverShowMorePara);
@@ -355,10 +419,13 @@ public class ValueAddedServicepage extends UhcDriver {
 		
 		CommonUtility.waitForPageLoadNew(driver, aarpSmartDriverShowMoreLnk, 20);
 		
+		scrollElementToCenterScreen(aarpSmartDriverShowMoreLnk);
 		aarpSmartDriverShowMoreLnk.click();
 		
+		Thread.sleep(2000);
 		
-		CommonUtility.waitForPageLoadNew(driver, planBenifitsAndCoverageLnk, 20);
+		scrollElementToCenterScreen(planBenifitsAndCoverageLnk);
+		//CommonUtility.waitForPageLoadNew(driver, planBenifitsAndCoverageLnk, 20);
 		
 		planBenifitsAndCoverageLnk.click();
 		
@@ -420,5 +487,13 @@ public class ValueAddedServicepage extends UhcDriver {
 	
 	public void openAndValidate(){
 		
+	}
+	
+	public void scrollElementToCenterScreen(WebElement element) {
+		String scrollElementIntoMiddle = "var viewPortHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);"
+		                                            + "var elementTop = arguments[0].getBoundingClientRect().top;"
+		                                            + "window.scrollBy(0, elementTop-(viewPortHeight/2));";
+		((JavascriptExecutor) driver).executeScript(scrollElementIntoMiddle, element);
+		System.out.println("TEST - move element to center view"); 
 	}
 }
