@@ -3254,6 +3254,7 @@ public void the_user_validates_the_OLE_Submission_Details_in_GPS(DataTable arg1)
 				DetailsMap.put("Proposed Effective date", proposedEffectiveDate);
 			*/
 				
+				
 				String proposedEffectiveDate = (String) getLoginScenario().getBean(oleCommonConstants.PROPOSED_EFF_DATE);
 				DetailsMap.put("Proposed Effective date", proposedEffectiveDate);
 				//DetailsMap.put("Proposed Effective date", (String) getLoginScenario().getBean(oleCommonConstants. PROPOSED_EFF_DATE));
