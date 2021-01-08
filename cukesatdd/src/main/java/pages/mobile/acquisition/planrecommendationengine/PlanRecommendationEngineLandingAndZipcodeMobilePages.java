@@ -215,11 +215,11 @@ public class PlanRecommendationEngineLandingAndZipcodeMobilePages extends UhcDri
 	public void quizStartAndRunQuestionnaireWithCounty(String zip_code, String County) throws Exception {
 
 		Thread.sleep(20000);
-		driver.switchTo().defaultContent();
+		//driver.switchTo().defaultContent();
 		// switchToNewIframe(iframePst);
 		// waitTillElementClickableInTime(getStartedBtn, 45);
 		// waitTillElementClickableInTime(getStartedBtn1, 45);
-		// jsClickNew(getStartedBtn);
+		jsClickNew(getStartedBtn);
 		zipcodePage();
 		waitforElementVisibilityInTime(zipCode, 45);
 		sendkeys(zipCode, zip_code);
@@ -255,6 +255,7 @@ public class PlanRecommendationEngineLandingAndZipcodeMobilePages extends UhcDri
 		// Assert.assertTrue(pageStepsNumberName.getText().contains("Step 1:
 		// Location"));
 		// validate(pageProgressPercentage, 30);
+	
 		scrollToView(pageProgressPercentage);
 		Assert.assertTrue(pageProgressPercentage.getText().contains("0% Complete"));
 		validate(pageRequiredInfo);
