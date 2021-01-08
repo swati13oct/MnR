@@ -1297,11 +1297,15 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	public RequestHelpAndInformationPage navigateToMaMoreHelpAndInfo() {
 
-		Actions actions = new Actions(driver);
+		/*Actions actions = new Actions(driver);
 		PageFactory.initElements(driver, this);
 		actions.moveToElement(ourPlansHoverLink);
 		actions.moveToElement(moreHelpInfoLink);
-		actions.click().build().perform();
+		actions.click().build().perform();*/
+		jsMouseOver(ourPlansHoverLink);
+		jsMouseOver(moreHelpInfoLink);
+		jsClickNew(moreHelpInfoLink);
+		waitForPageLoadSafari();
 		CommonUtility.checkPageIsReadyNew(driver);
 		CommonUtility.waitForPageLoadNew(driver, requestAgentApptDropdown, 60);
 		if (validate(requestAgentApptDropdown)) {
