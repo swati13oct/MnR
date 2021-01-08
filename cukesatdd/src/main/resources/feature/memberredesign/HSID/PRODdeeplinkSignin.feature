@@ -1,5 +1,5 @@
 @regressionMemberPROD @OfflinePRODVanityURLdeeplinkSignin
-Feature: To test URL formation on offline PROD Signin from various Deeplinks on offlinePROD
+Feature: To test URL formation on PROD Signin from various Deeplinks
 
   @regressionMemberPROD @codeWarriors @F477221
   Scenario Outline: Verify members lands on the PROD virtual visit page after signing in from virtual visit Vanity URL.
@@ -19,10 +19,10 @@ Feature: To test URL formation on offline PROD Signin from various Deeplinks on 
   #mypcpmedicare.com/virtualvisits
   #mymedicamedicare.com/virtualvisits
   
- #F514599 preadtors  
+ #F514599 preadtors 
   @codeWarriors @F477221 @F514599predators
   Scenario Outline: Verify members lands on the PROD solutran deeplink HWP Vanity URL.
-    Given member lands on the offline PROD HWP deeplink page
+    Given member lands on the PROD HWP deeplink page
       | <brand> |
     And the offline PROD HWP deeplink login page is displayed with all the fields
 
