@@ -881,7 +881,7 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth Prod
     Then The user navigates to Benefits and Coverage page
       | Plan Type | <planType> |
 	And the user validate rider tile is displayed
-@abc	
+	
     Examples: 
       | index  | FID    | username | password  | MemUserName        | planType  | memberType           |
       | 44     | xxxxxx | kkumard  | tnps459#  | JohnPrais          | MAPD      | Individual_Rider_BnC |       
