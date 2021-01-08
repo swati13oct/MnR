@@ -5891,11 +5891,6 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 				Assert.assertTrue("PROBLEM - rider start message is showing but unable to locate the rider plan start date from the message.  msg='"+txt+"'", tmp.length>1);
 				String riderStartDate=tmp[1].replace("\\.", "");
 				Assert.assertTrue("PROBLEM - rider start message is showing but unable to locate the rider plan start date from the message", !riderStartDate.equals(""));
-				Date riderStartDateDateObj=convertStrToDate(riderStartDate);
-				Date threeMonthsAfterRiderPlanStartDate=DateUtils.addMonths(riderStartDateDateObj, 3);
-				
-				Assert.assertTrue("PROBLEM - user can only delete added rider within 3 months from the date rider plan started. riderPlanStartDate='"+riderStartDate+"' | currentSystemDate='"+currentDateStr+"'",
-						currentDateObj.before(threeMonthsAfterRiderPlanStartDate));
 			}
 		}
 		
