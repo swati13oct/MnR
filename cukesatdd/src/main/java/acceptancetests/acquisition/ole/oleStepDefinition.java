@@ -3196,6 +3196,14 @@ public void the_user_validates_the_OLE_Submission_Details_in_GPS(DataTable arg1)
 				DetailsMap.put("Group Number", groupNumber.toUpperCase());
 				DetailsMap.put("Member Number", (String) getLoginScenario().getBean(oleCommonConstants.MEMBER_NUMBER));
 				}
+				else {
+					DetailsMap.put("Health Insurance", "N");
+				/*	DetailsMap.put("Health Insurance Name", "");
+					DetailsMap.put("Group Number", "");		
+					DetailsMap.put("Member Number", "");	*/
+					}
+				System.out.println("--------------------Storing Data for PCP Page Ended----------------------");
+				
 				//Prescription Drug Coverage
 				String prescriptionDrug = (String) getLoginScenario().getBean(oleCommonConstants.PRESCRIPTION_DRUG);
 				DetailsMap.put("Prescription Drug", prescriptionDrug.substring(0, 1).toUpperCase());
@@ -3242,16 +3250,28 @@ public void the_user_validates_the_OLE_Submission_Details_in_GPS(DataTable arg1)
 				if(!plantype.contains("PDP")) {
 				String pcpName = (String) getLoginScenario().getBean(oleCommonConstants.PCP_NAME);
 				DetailsMap.put("PCP Name", pcpName.replaceAll("-", "").toUpperCase());
+				
 				String pcpNumber = (String) getLoginScenario().getBean(oleCommonConstants.PCP_NUMBER);
 				DetailsMap.put("PCP Number", pcpNumber.toUpperCase());
+				
 				String pcpRecentlyVisited = (String) getLoginScenario().getBean(oleCommonConstants.PCP_RECENTLY_VISITED);
 				pcpRecentlyVisited = pcpRecentlyVisited.substring(0, 1);
 				DetailsMap.put("PCP Recently Visited", pcpRecentlyVisited.toUpperCase());
+		/*		
+				if(PlanName.contains("PDP")) {
+					DetailsMap.put("PCP Recently Visited", "N");
+					} else {
+						String pcpRecentlyVisited= ((String) getLoginScenario().getBean(oleCommonConstants.PAPERLESS_DELIVERY));
+						pcpRecentlyVisited=pcpRecentlyVisited.toUpperCase().substring(0, 1);
+						DetailsMap.put("PCP Recently Visited",pcpRecentlyVisited);
+						
+				//	DetailsMap.put("Paperless Delivery", (String) getLoginScenario().getBean(oleCommonConstants.Go_Green));	
+					}	*/
 				}
 				else {
 					DetailsMap.put("PCP Name", "");
 					DetailsMap.put("PCP Number", "");
-					DetailsMap.put("PCP Recently Visited", "");			
+					DetailsMap.put("PCP Recently Visited", "N");			
 					}
 				System.out.println("--------------------Storing Data for PCP Page Ended----------------------");
 				
