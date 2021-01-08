@@ -532,7 +532,8 @@ public class PlanRecommendationEngineResultsPageMobile extends UhcDriver {
 		public void submitMSform() {
 			//Zip value is pre-populated by default
 			//MSPlanDOB.sendKeys("01/06/1940");
-			msPlanview.click();
+			//msPlanview.click();
+			jsClickNew(msPlanview);
 			jsSendkeys(MSPlanDOB, "01/06/1940");
 			jsClickNew(MSPlanGender);
 			threadsleep(8000);
