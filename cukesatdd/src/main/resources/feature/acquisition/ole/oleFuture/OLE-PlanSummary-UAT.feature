@@ -20,6 +20,7 @@ Feature: <-----UAT Scripts OLE common tool flow E2E- MA,MAPD,DSNP,ExternalLink M
     Then the user validates Leave OLE modal for Welcome OLE
     Then the user validates cancellation modal for Welcome OLE
     Then the user navigates to Personal Information Page
+     Then the user validates logo image on OLE Pages
     Then the user enters following required information in Personal Information Page
       | First Name         | <firstname>         |
       | Last Name          | <lastname>          |

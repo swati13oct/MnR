@@ -299,7 +299,38 @@ public class MedicareInformationPage extends UhcDriver{
 		
 		@FindBy(xpath="//button[contains(text(),'Save Changes')]")
 		private WebElement ReviewEditSavechanges;
-	public MedicareInformationPage(WebDriver driver) {
+		
+		@FindBy(xpath = "//a[contains(@class,'cancel-button modal-l')]")
+		private WebElement CancelEnrollmentLinkOLE;
+
+		@FindBy(xpath = "(//div[contains(@id,'enroll-cancel-profile')])[1]")
+		private WebElement CancellationModalOLE;
+		@FindBy(xpath = "(//a[contains(text(),'Create a Profile')])[2]")
+		private WebElement CreateProfile;
+
+		@FindBy(xpath = "(//a[contains(text(),'Sign In')])[2]")
+		private WebElement SignIn;
+		@FindBy(xpath = "(//a[contains(text(),'Leave Online Application')])[2]")
+		private WebElement LeaveOnlineApplication;
+
+		@FindBy(xpath = "(//a[contains(@class,'oleClose')])[3]")
+		private WebElement closepopup;
+
+		@FindBy(xpath = "(//a[contains(@id,'save-return-button')])[1]")
+		private WebElement SaveEnrollmentLinkOLE;		
+		@FindBy(xpath = "(//div[contains(@id,'enroll-save-popup')])[1]")
+		private WebElement SaveModalOLE;
+
+		@FindBy(xpath = "(//a[contains(text(),'Create a Profile')])[1]")
+		private WebElement CreateProfilesave;
+
+		@FindBy(xpath = "(//a[contains(text(),'Sign In')])[1]")
+		private WebElement SaveSignIn;
+
+		@FindBy(xpath = "(//a[contains(@class,'oleClose')])[1]")
+		private WebElement Saveclosepopup;
+		
+		public MedicareInformationPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
 		openAndValidate();
@@ -1265,36 +1296,6 @@ boolean Validation_Flag = true;
 
 }
 
-@FindBy(xpath = "//a[contains(@class,'cancel-button modal-l')]")
-private WebElement CancelEnrollmentLinkOLE;
-
-@FindBy(xpath = "(//div[contains(@id,'enroll-cancel-profile')])[1]")
-private WebElement CancellationModalOLE;
-@FindBy(xpath = "(//a[contains(text(),'Create a Profile')])[2]")
-private WebElement CreateProfile;
-
-@FindBy(xpath = "(//a[contains(text(),'Sign In')])[2]")
-private WebElement SignIn;
-@FindBy(xpath = "(//a[contains(text(),'Leave Online Application')])[2]")
-private WebElement LeaveOnlineApplication;
-
-@FindBy(xpath = "(//a[contains(@class,'oleClose')])[3]")
-private WebElement closepopup;
-
-@FindBy(xpath = "(//a[contains(@id,'save-return-button')])[1]")
-private WebElement SaveEnrollmentLinkOLE;		
-@FindBy(xpath = "(//div[contains(@id,'enroll-save-popup')])[1]")
-private WebElement SaveModalOLE;
-
-@FindBy(xpath = "(//a[contains(text(),'Create a Profile')])[1]")
-private WebElement CreateProfilesave;
-
-@FindBy(xpath = "(//a[contains(text(),'Sign In')])[1]")
-private WebElement SaveSignIn;
-
-@FindBy(xpath = "(//a[contains(@class,'oleClose')])[1]")
-private WebElement Saveclosepopup;
-
 public CancelOLEModal OpenCancelOLEPages() {
 	validate(CancelEnrollmentLinkOLE);
 	JavascriptExecutor executor = (JavascriptExecutor)driver;
@@ -1347,5 +1348,30 @@ public SaveandReturnOLEModal OpensavereturnOLEPages() {
 	}
 	return null;
 }
-
+public CancelOLEModal OpenlearnmoreLogoOLEPages() {
+	validate(CancelEnrollmentLinkOLE);
+	JavascriptExecutor executor = (JavascriptExecutor)driver;
+	executor.executeScript("arguments[0].click();", CancelEnrollmentLinkOLE);
+	
+	//((JavascriptExecutor) driver).executeScript("arguments[0].click;", CancelEnrollmentLink);
+	
+	//CancelEnrollmentLink.click();
+	try {
+		Thread.sleep(6000);
+	} catch (InterruptedException e) {
+		e.printStackTrace();
+	}
+	if(validate(CancellationModalOLE)){
+		System.out.println("OLE Cancel Enrollment Modal is Displayed");
+		validate(CreateProfile);
+		CreateProfile.isDisplayed();
+		validate(SignIn);
+		SignIn.isDisplayed();
+		validate(LeaveOnlineApplication);
+		LeaveOnlineApplication.isDisplayed();
+		closepopup.click();
+		return new CancelOLEModal(driver);
+	}
+	return null;
+}
 }

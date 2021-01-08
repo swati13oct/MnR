@@ -3731,5 +3731,13 @@ public void the_user_navigates_to_Review_and_Submit_Page_clickon_Edit_Medicare_P
 		MedicareInformationPage medicareInfoPage = (MedicareInformationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE);
 		medicareInfoPage.OpenCancelOLEPages();
 		medicareInfoPage.OpensavereturnOLEPages();
+		System.out.println("OLE cancellation and Save Return Later modal on OLE Pages");
+	}
+	
+	@Then("^the user validates logo image on OLE Pages$")
+	public void the_user_validates_logo_image_for_OLE_pages() throws Throwable {
+		PersonalInformationPage personalInformationPage = (PersonalInformationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_PERSONAL_INFO_PAGE);
+		personalInformationPage.OpenLogoOLEPages();
+		System.out.println("OLE logo image is clicked on OLE Pages");
 	}
 }

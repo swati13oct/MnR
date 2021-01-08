@@ -184,7 +184,25 @@ public class PersonalInformationPage extends UhcDriver{
 	
 	@FindBy(css="a#visitor-profile-header")
     private WebElement lnkProfile;
+	
+	@FindBy(xpath = "(//*[@class = 'logo']//img)[2]")
+	private WebElement logoimageOLE;
 
+	@FindBy(xpath = "(//div[contains(@id,'enroll-cancel-profile')])[1]")
+	private WebElement CancellationModalOLE;
+	
+	@FindBy(xpath = "(//a[contains(text(),'Create a Profile')])[2]")
+	private WebElement CreateProfile;
+
+	@FindBy(xpath = "(//a[contains(text(),'Sign In')])[2]")
+	private WebElement SignIn;
+	
+	@FindBy(xpath = "(//a[contains(text(),'Leave Online Application')])[2]")
+	private WebElement LeaveOnlineApplication;
+
+	@FindBy(xpath = "(//a[contains(@class,'oleClose')])[3]")
+	private WebElement closepopup;
+	
 	public PersonalInformationPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -687,5 +705,34 @@ public class PersonalInformationPage extends UhcDriver{
 		}
 		
 		return new ConfirmYourEligibilityPage(driver);
+	}
+	
+
+	
+	public CancelOLEModal OpenLogoOLEPages() {
+		validate(logoimageOLE);
+		JavascriptExecutor executor = (JavascriptExecutor)driver;
+		executor.executeScript("arguments[0].click();", logoimageOLE);
+		
+		//((JavascriptExecutor) driver).executeScript("arguments[0].click;", CancelEnrollmentLink);
+		
+		//CancelEnrollmentLink.click();
+		try {
+			Thread.sleep(6000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		if(validate(CancellationModalOLE)){
+			System.out.println("OLE Cancel Enrollment Modal is Displayed");
+			validate(CreateProfile);
+			CreateProfile.isDisplayed();
+			validate(SignIn);
+			SignIn.isDisplayed();
+			validate(LeaveOnlineApplication);
+			LeaveOnlineApplication.isDisplayed();
+			closepopup.click();
+			return new CancelOLEModal(driver);
+		}
+		return null;
 	}
 }
