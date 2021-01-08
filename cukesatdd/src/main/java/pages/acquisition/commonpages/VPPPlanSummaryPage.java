@@ -3700,6 +3700,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	public VisitorProfilePage continueAsGuest() {
 		jsClickNew(continueAsGuest);
 		sleepBySec(2);
+		waitForPageLoadSafari();
 		if (driver.getCurrentUrl().contains("profile")) {
 			return new VisitorProfilePage(driver);
 		} else {
@@ -6003,10 +6004,15 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//div[contains(@class,'plan-list show active')]//*[@class='segment-title oon-benefit-padding']//h3")
 	private List<WebElement> planNames;
 
-	public List<String> getAllPlanNames() {
+	public List<String> getAllPlanNames(String planType) {
 		List<String> allPlanNames = new ArrayList<String>();
 		for (WebElement plan : planNames) {
-			allPlanNames.add(plan.getText());
+			if(planType.equals("PDP") && MRScenario.browserName.equalsIgnoreCase("Safari")) {
+				allPlanNames.add(plan.findElement(By.xpath("./text()")).getText().trim());
+			} else {
+				allPlanNames.add(plan.getText().trim());
+			}
+			
 		}
 		return allPlanNames;
 	}
