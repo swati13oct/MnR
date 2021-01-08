@@ -483,17 +483,16 @@ public Connection createDataBaseConnection() {
 		Connection connection = null;
 		try {
 			 Class.forName(CommonConstants.DB_ORACLE_DRIVER).newInstance();
-			 if(MRScenario.environment.equalsIgnoreCase("stage")) {
+			 if(MRScenario.environment.equalsIgnoreCase("stage")) 
+			 {
 			 connection = DriverManager.getConnection(CommonConstants.CONNECTION_URL);
-			 if(connection!=null) {
-				 System.out.println("Connection successful for stage Environment");
 			 }
 			 else {
-				 connection = DriverManager.getConnection(CommonConstants.CONNECTION_TEAM_URL);
-				 if(connection!=null) {
-					 System.out.println("Connection successful for team Environment");
+		     connection = DriverManager.getConnection(CommonConstants.CONNECTION_TEAM_URL);
 				 } 
-			 }
+			 if(connection!=null) {
+				 System.out.println("Connection successful");
+
 			 }
 		}
 			 catch (Exception e) {

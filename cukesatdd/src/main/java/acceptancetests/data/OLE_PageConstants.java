@@ -37,4 +37,5 @@ public class OLE_PageConstants {
 	public static final String CITY = "providerCity";
 	public static final String ZIP = "providerZipcode";
 	public static final String PROVIDER_NUMBER = "providernumber";
+	public static final String MEDICAID_NUMBER  = "medicaidnumber";
 }

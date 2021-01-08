@@ -3165,7 +3165,7 @@ public void the_user_validates_the_OLE_Submission_Details_in_GPS(DataTable arg1)
 				medicareNumber=medicareNumber.replaceAll("-", "").toUpperCase();
 				DetailsMap.put("Medicare Number", medicareNumber);
 				
-				DetailsMap.put("Medicaid Number", (String) getLoginScenario().getBean(oleCommonConstants.MEDICAID_NUMBER));
+				DetailsMap.put("Medicaid Number", (String) getLoginScenario().getBean(OLE_PageConstants.MEDICAID_NUMBER));
 				String ssnFlag = (String) getLoginScenario().getBean(oleCommonConstants.SSN_FLAG);
 				if(ssnFlag.equalsIgnoreCase("true")) {
 				String SSN = (String) getLoginScenario().getBean(oleCommonConstants.SSN_NUMBER);
@@ -3530,12 +3530,15 @@ for (int i = 0; i < givenAttributesRow.size(); i++) {
 			givenAttributesRow.get(i).getCells().get(1));
 }
 MedicareInformationPage medicareInfoPage = (MedicareInformationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE);
+getLoginScenario().saveBean(OLE_PageConstants.MEDICAID_NUMBER, MemberDetailsMap.get("MedicaidNumber"));
 boolean MedicaidInformationStatus = medicareInfoPage.validate_Medicaid_Number_CEP(MemberDetailsMap);
 if (MedicaidInformationStatus) {
 	getLoginScenario().saveBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE,
 			medicareInfoPage);
 	System.out.println("OLE Medicaid Questions in Medicare Information Page - Medicaid Details are entered");
 	getLoginScenario().saveBean(oleCommonConstants.MEDICAID_NUMBER, MemberDetailsMap.get("MedicaidNumber"));
+	getLoginScenario().saveBean(oleCommonConstants.MEDICAID_NUMBER, MemberDetailsMap.get("MedicaidNumber"));
+	
 	Assert.assertTrue(true);
 }
 else
