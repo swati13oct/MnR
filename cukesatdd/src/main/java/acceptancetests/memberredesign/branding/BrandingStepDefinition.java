@@ -210,5 +210,40 @@ public void verifyCorrectCoLogoDisplayedOnSecondaryPage(DataTable givenAttribute
 	benefitsCoveragePage.validateImagePresent(logoToBeDisplayedOnSecondaryPage);
 	benefitsCoveragePage.validateCoLogoImagePresent(cologoToBeDisplayedOnSecondaryPage);
 }
+@Then("^Terminated user clicks on benefits and coverage tab on home page or test harness page$")
+public void terminateduserClicksOnBenefitAndCoveragePage(DataTable givenAttributes) throws Throwable {
+	List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+	Map<String, String> memberAttributesMap = new HashMap<String, String>();
+	for (int i = 0; i < memberAttributesRow.size(); i++) 
+	{
 
+		memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+				.get(0), memberAttributesRow.get(i).getCells().get(1));
+     }
+	String PlanType = memberAttributesMap.get("PlanType");
+	if ((MRScenario.environment.equalsIgnoreCase("stage") & "NO".equalsIgnoreCase(MRScenario.isTestHarness))|| MRScenario.environment.equalsIgnoreCase("prod") || MRScenario.environment.equalsIgnoreCase("offline"))
+	{
+	
+	AccountHomePage accountHomePage = (AccountHomePage) getLoginScenario().getBean(PageConstantsMnR.ACCOUNT_HOME_PAGE);
+	Thread.sleep(9000);
+	BenefitsAndCoveragePage benefitsCoveragePage = accountHomePage.termmembernavigateToBandCPage(PlanType);
+	getLoginScenario().saveBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE, benefitsCoveragePage);
+	}
+	
+	else if ((MRScenario.environment.equalsIgnoreCase("team-h")) || (MRScenario.environment.equalsIgnoreCase("stage") & "YES".equalsIgnoreCase(MRScenario.isTestHarness)) || MRScenario.environment.equalsIgnoreCase("offline-stage"))
+	{
+		System.out.println("Now clicking on Coverage and Benefits tab from Team-h or Stage test harness page");
+		TestHarness testHarnessPage = (TestHarness) getLoginScenario().getBean(PageConstantsMnR.TEST_HARNESS_PAGE);
+		BenefitsAndCoveragePage coverageandbenefitsPage = testHarnessPage.clickOnBenefitsandCoverageTab();
+		getLoginScenario().saveBean(PageConstants.BENEFITS_AND_COVERAGE_PAGE, coverageandbenefitsPage);
+				
+	}
+	
+	else 
+    {
+		System.out.println("Not clicking on coverage & benefits tab as the environment is not set to team-h or Stage or offline stage or prod or offline");
+	}
+	
+	
+}
 }

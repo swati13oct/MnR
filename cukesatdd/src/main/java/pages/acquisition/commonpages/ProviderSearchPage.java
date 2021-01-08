@@ -550,8 +550,9 @@ public class ProviderSearchPage extends UhcDriver {
 
 		}
 		CommonUtility.waitForPageLoadNew(driver, Savedproviders, 10);
-		 jsClickNew(Savedproviders); 	
-
+		jsClickNew(Savedproviders); 	
+		waitForPageLoadSafari();
+		
 	if(driver.findElements(By.xpath("(//button[contains(text(),'Check Provider Coverage')])[1]")).size() > 0){
 		System.out.println("OLD Rally page displayed");
 		Checkcoverage.click();
@@ -597,5 +598,12 @@ public class ProviderSearchPage extends UhcDriver {
 		driver.close();
 		driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
 		return new AcquisitionHomePage(driver);
+	}
+	@FindBy(xpath="(//*[@class='remove-provider'])[1]")
+	public WebElement removeExistingProvider;
+	
+	public void removeExistingProviderIfAny()
+	{
+		removeExistingProvider.click();
 	}
 }

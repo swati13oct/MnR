@@ -1105,7 +1105,7 @@ try {
 				sauceOptions.setCapability("idleTimeout", 200);
 
 				SafariOptions browserOptions = new SafariOptions();
-				browserOptions.setCapability("platformName", "macOS 10.15");
+				browserOptions.setCapability("platformName", "macOS 11.00");
 				browserOptions.setCapability("browserVersion", browserVersion);
 				browserOptions.setCapability("sauce:options", sauceOptions);
 				capabilities.merge(browserOptions);
