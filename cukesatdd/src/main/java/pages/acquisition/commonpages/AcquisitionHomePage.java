@@ -2292,7 +2292,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		
 		public void validatevisitorprofile() {
 			if (visitorprofileicon.isDisplayed()) {
-
+				scrollToView(visitorprofileicon);
 				Actions actions = new Actions(driver);
 				actions.moveToElement(visitorprofileicon).perform();
 //				jsMouseOver(visitorprofileicon);
@@ -3062,7 +3062,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			
 			//Added refresh and wait as elements are not located in Safari 13 browser after using navigate back
 			if(MRScenario.browserName.equalsIgnoreCase("Safari")) {
-				driver.navigate().refresh();
+				//driver.navigate().refresh();
 				waitForPageLoadSafari();
 			}
 		}
