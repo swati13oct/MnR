@@ -1327,7 +1327,7 @@ public class oleStepDefinition {
 			}
 			String Perm_Aptno="";
 			String Mailing_Aptno="";
-			String middleName="";
+		//	String middleName="";
 			
 			PersonalInformationPage personalInformationPage = (PersonalInformationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_PERSONAL_INFO_PAGE);
 			boolean isFormFilled = personalInformationPage.enter_member_details(MemberDetailsMap);
@@ -1336,12 +1336,12 @@ public class oleStepDefinition {
 						personalInformationPage);
 				System.out.println("OLE Personal Information Page - All required Member Details are entered");
 				getLoginScenario().saveBean(oleCommonConstants.FIRST_NAME, MemberDetailsMap.get("First Name"));
-				if(!MemberDetailsMap.get("Middle Name").contains("middlename")) {
+			/*	if(!MemberDetailsMap.get("Middle Name").contains("middlename")) {
 					getLoginScenario().saveBean(oleCommonConstants.MIDDLE_NAME, MemberDetailsMap.get("Middle Name"));	
 				}
 				else {
 				getLoginScenario().saveBean(oleCommonConstants.MIDDLE_NAME, middleName);
-				}
+				}*/
 				getLoginScenario().saveBean(oleCommonConstants.LAST_NAME, MemberDetailsMap.get("Last Name"));
 				getLoginScenario().saveBean(oleCommonConstants.DOB, MemberDetailsMap.get("DOB"));
 				getLoginScenario().saveBean(oleCommonConstants.GENDER, MemberDetailsMap.get("Gender"));
