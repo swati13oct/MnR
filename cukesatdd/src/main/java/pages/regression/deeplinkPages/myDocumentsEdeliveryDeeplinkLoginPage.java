@@ -61,7 +61,7 @@ public class myDocumentsEdeliveryDeeplinkLoginPage extends UhcDriver {
 	}
 	//page from MR constants 	
 			private static String STAGE_DEEPLINK_URL_my_Documents_Edelivery = MRConstants.STAGE_DEEPLINK_URL_my_Documents_Edelivery;
-			
+			private static String PROD_DEEPLINK_URL_my_Documents_Edelivery = MRConstants.PROD_DEEPLINK_URL_my_Documents_Edelivery;
 			 /*This method will open payments deep link page */
 			public myDocumentsEdeliveryDeeplinkLoginPage navigateToLoginURL(){
 				start(STAGE_DEEPLINK_URL_my_Documents_Edelivery);
@@ -296,7 +296,7 @@ public class myDocumentsEdeliveryDeeplinkLoginPage extends UhcDriver {
 				@FindBy(xpath = "//h3[contains(text(),'Support for UnitedHealthcare members')]")
 				private WebElement textonpage1;	
 				
-					public boolean validateOfflineProdedeliverypage() {
+					public boolean validateOfflineProdpRODedeliverypage() {
 						checkForIPerceptionModel(driver);
 						CommonUtility.checkPageIsReadyNew(driver);	
 						try {
@@ -319,6 +319,20 @@ public class myDocumentsEdeliveryDeeplinkLoginPage extends UhcDriver {
 							}
 											
 							return true;	
+						}
+					
+					 /*This method will open payments deep link page */
+					public myDocumentsEdeliveryDeeplinkLoginPage navigateToLoginURLPOD(String brand){
+						start(PROD_DEEPLINK_URL_my_Documents_Edelivery);
+						driver.manage().deleteAllCookies();
+
+						try {
+							Thread.sleep(10000);
+						} catch (InterruptedException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}		
+						return null;
 						}
 					
 				

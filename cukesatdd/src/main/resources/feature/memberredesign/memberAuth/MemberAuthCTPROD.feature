@@ -28,9 +28,9 @@ Feature: S1.1 To test Member Auth Sign for SSO Micro App.
 
     Examples: 
       | username | password | member                               | Scenario                                                                        |
-      | jkuma14  | Brock@04 | SWHITE33436                          | Scenario 4: Search using username – Medica Plan Member                          |
+      | jkuma14  | Brock@04 | TCZUNIGA52                           | Scenario 4: Search using username – Medica Plan Member                          |
       | jkuma14  | Brock@04 | erbenoit56                           | Scenario 5: Search using username – Terminated<12                               |
-      | jkuma14  | Brock@04 | Enri12                               | Scenario 6: Search using username – Pre-effective                               |
+      | jkuma14  | Brock@04 | Beaver34                             | Scenario 6: Search using username – Pre-effective                               |
 
   @regressionMemberPROD3
   Scenario Outline: Scenario- <Scenario> - Test Case_To test single signon using member auth - Search with Username
