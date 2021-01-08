@@ -878,7 +878,9 @@ public class CommonConstants {
 	//public static final String CONNECTION_URL = "jdbc:oracle:thin:qaread/testreadonly@orass0464:1521:GPSST04SVC_TRN";
 	//public static final String CONNECTION_URL = "jdbc:oracle:thin:qaread/testreadonly@orass0464:1521/gpsst04svc_trn.uhc.com";
 	//-----team-----------
-	public static final String CONNECTION_TEAM_URL = "jdbc:oracle:thin:qaread/testreadonly@dbslt0102:1521/gpsts18";
+//	public static final String CONNECTION_TEAM_URL = "jdbc:oracle:thin:qaread/testreadonly@dbslt0102:1521/gpsts18";
+	
+	public static final String CONNECTION_TEAM_URL = "jdbc:oracle:thin:qaread/testreadonly@orass0464:1521/gpsst04svc_trn.uhc.com";
 	//-----Stage-----------
 	public static final String CONNECTION_URL = "jdbc:oracle:thin:qaread/testreadonly@dbslt0103:1521/gpsts19";
 	public static final String GPS_QUERY = "\n" + 
