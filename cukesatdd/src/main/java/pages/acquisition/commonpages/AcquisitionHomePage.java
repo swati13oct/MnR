@@ -3820,8 +3820,8 @@ action.moveToElement(navigationSectionHomeLink).moveToElement(ourPlansHoverLink)
 		public void validateProActiveChatpopupconnect()  {
 			driver.navigate().refresh();
 			System.out.println("@@here@@@");
-			threadsleep(8);
-			waitTillElementClickableInTime(proactiveChatExitBtn, 30);
+			threadsleep(20);
+//			waitTillElementClickableInTime(proactiveChatExitBtn, 30);
 			if(proactiveChatExitBtn!=null){
 			System.out.println("@@@proactive chat popup is displayed@@@@");
 			waitTillElementClickableInTime(proactiveChatChatBtn, 30);
@@ -4057,6 +4057,7 @@ action.moveToElement(navigationSectionHomeLink).moveToElement(ourPlansHoverLink)
 		}
 		
 		public void validateTFNelement(String tfnXpath) {
+			threadsleep(15);
 			WebElement TFNelement = driver.findElement(By.xpath(tfnXpath));
 			JavascriptExecutor jse = (JavascriptExecutor) driver;
 			jse.executeScript("window.scrollBy(0,document.body.scrollHeight)");
@@ -4456,7 +4457,7 @@ action.moveToElement(navigationSectionHomeLink).moveToElement(ourPlansHoverLink)
 				
 				
 				public void clickonFindanAgentlink(String ExpectedUHCAgentURL ) {
-					
+					threadsleep(10);
 					validateNew(RightRail_FindAnAgent);
 					CommonUtility.waitForPageLoadNew(driver, RightRail_FindAnAgent, 30);
 					String parentWindow = driver.getWindowHandle();
@@ -5449,6 +5450,7 @@ public PrivacyPolicyAARPPage privacypolicyFooterClick() {
 			EmailAddress.sendKeys("a@gmail.com");
 			driver.findElement(By.xpath("//span[contains(text(),'Sign Up')]")).click();
 		}else {
+			threadsleep(8);
 			SubmitEmail.click();
 			threadsleep(4);
 			Assert.assertEquals(ErrorFirstName.getText(), "Please enter First Name");

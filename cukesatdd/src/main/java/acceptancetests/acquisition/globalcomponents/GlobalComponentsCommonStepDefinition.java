@@ -806,6 +806,47 @@ public void the_user_clicks_on_Back_to_top_Link() throws Throwable {
 	  }
 	 
 
-	  
+@Then("^the user validates TFN on right rail Medicare Article$")
+public void the_user_validates_TFN_on_right_rail_Medicare_article(DataTable givenAttributes) throws Throwable {
+	List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+	Map<String, String> memberAttributesMap = new HashMap<String, String>();
+	for (int i = 0; i < memberAttributesRow.size(); i++) {
+		memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+				memberAttributesRow.get(i).getCells().get(1));
+	}
+	String tfnXpath = memberAttributesMap.get("TFNxpath");
+	String tfnFlag = memberAttributesMap.get("TFNflag");
+
+	//EnterZipCodePage enterZipCodePage= new EnterZipCodePage(driver);
+	AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+			.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+	if(tfnFlag.equalsIgnoreCase("true")) {
+		aquisitionhomepage.validateTFNelement(tfnXpath);
+	}
 }
+   
+@Then("^the user validates TFN on right rail Shop pages$")
+public void the_user_validates_TFN_on_right_rail_Shop_pages(DataTable givenAttributes) throws Throwable {
+	List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+	Map<String, String> memberAttributesMap = new HashMap<String, String>();
+	for (int i = 0; i < memberAttributesRow.size(); i++) {
+		memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+				memberAttributesRow.get(i).getCells().get(1));
+	}
+	String tfnXpath = memberAttributesMap.get("TFNxpath");
+	String tfnFlag = memberAttributesMap.get("TFNflag");
+
+	//EnterZipCodePage enterZipCodePage= new EnterZipCodePage(driver);
+	AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+			.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+	if(tfnFlag.equalsIgnoreCase("true")) {
+		aquisitionhomepage.validateTFNelement(tfnXpath);
+}
+
+}
+}
+
+
+	  
+
 
