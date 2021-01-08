@@ -714,6 +714,7 @@ public class oleStepDefinition {
 
 		//	getLoginScenario().saveBean(oleCommonConstants.FIRST_NAME, MedicareDetailsMap.get("First Name"));
 		//	getLoginScenario().saveBean(oleCommonConstants.LAST_NAME, MedicareDetailsMap.get("Last Name"));
+			getLoginScenario().saveBean(oleCommonConstants.PAPERLESS_DELIVERY, MedicareDetailsMap.get("Go Green"));
 			getLoginScenario().saveBean(oleCommonConstants.MEDICARE_NUMBER, MedicareDetailsMap.get("Medicare Number"));
 			getLoginScenario().saveBean(oleCommonConstants.CARD_TYPE, MedicareDetailsMap.get("Card Type"));
 		//	getLoginScenario().saveBean(oleCommonConstants.PARTA_EFFECTIVE, MedicareDetailsMap.get("PartA Date"));
@@ -1326,6 +1327,8 @@ public class oleStepDefinition {
 			}
 			String Perm_Aptno="";
 			String Mailing_Aptno="";
+			String middleName="";
+			
 			PersonalInformationPage personalInformationPage = (PersonalInformationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_PERSONAL_INFO_PAGE);
 			boolean isFormFilled = personalInformationPage.enter_member_details(MemberDetailsMap);
 			if (isFormFilled) {
@@ -1333,6 +1336,12 @@ public class oleStepDefinition {
 						personalInformationPage);
 				System.out.println("OLE Personal Information Page - All required Member Details are entered");
 				getLoginScenario().saveBean(oleCommonConstants.FIRST_NAME, MemberDetailsMap.get("First Name"));
+				if(!MemberDetailsMap.get("Middle Name").contains("middlename")) {
+					getLoginScenario().saveBean(oleCommonConstants.MIDDLE_NAME, MemberDetailsMap.get("Middle Name"));	
+				}
+				else {
+				getLoginScenario().saveBean(oleCommonConstants.MIDDLE_NAME, middleName);
+				}
 				getLoginScenario().saveBean(oleCommonConstants.LAST_NAME, MemberDetailsMap.get("Last Name"));
 				getLoginScenario().saveBean(oleCommonConstants.DOB, MemberDetailsMap.get("DOB"));
 				getLoginScenario().saveBean(oleCommonConstants.GENDER, MemberDetailsMap.get("Gender"));
@@ -3145,7 +3154,7 @@ public void the_user_validates_the_OLE_Submission_Details_in_GPS(DataTable arg1)
 				if(PlanName.contains("Chronic") || PlanName.contains("Gold") ||PlanName.contains("Silver") || PlanName.contains("D-SNP")) {
 					DetailsMap.put("Paperless Delivery", "N");
 					} else {
-						String paperless= (String) getLoginScenario().getBean(oleCommonConstants.Go_Green);
+						String paperless= ((String) getLoginScenario().getBean(oleCommonConstants.PAPERLESS_DELIVERY));
 						paperless=paperless.toUpperCase().substring(0, 1);
 						DetailsMap.put("Paperless Delivery",paperless);
 				//	DetailsMap.put("Paperless Delivery", (String) getLoginScenario().getBean(oleCommonConstants.Go_Green));	
@@ -3219,9 +3228,9 @@ public void the_user_validates_the_OLE_Submission_Details_in_GPS(DataTable arg1)
 				System.out.println("--------------------Storing Data for SEP Page Started----------------------");
 
 				//SEP Page
-				String note = "Q:I am losing coverage I had from an employer. A:09012020";
+				/*String note = "Q:I am losing coverage I had from an employer. A:09012020";
 				DetailsMap.put("Note", note);
-				
+				*/
 
 				System.out.println("--------------------Storing Data for SEP Page Ended----------------------");
 
@@ -3270,13 +3279,8 @@ public void the_user_validates_the_OLE_Submission_Details_in_GPS(DataTable arg1)
 				System.out.println("--------------------Storing Data for Authorization Page Started----------------------");
 
 				//Authorization Page
-				String authorizationAgree = (String) getLoginScenario().getBean(oleCommonConstants.AUTHORIZATION_AGREE);
-				if(authorizationAgree.equalsIgnoreCase("Agree")) {
 				DetailsMap.put("Authorization Agree", "Y");
-				}
-				else {
-				DetailsMap.put("Authorization Agree", "N");	
-				}
+				
 				if(AuthorizationRiderFlag.contains("true")) {
 				String authorizationFirstName = (String) getLoginScenario().getBean(oleCommonConstants.AUTHORIZATION_FIRST_NAME);
 				DetailsMap.put("Authorization First Name", authorizationFirstName.toUpperCase());

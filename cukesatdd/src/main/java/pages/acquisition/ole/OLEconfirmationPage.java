@@ -536,7 +536,7 @@ public Connection createDataBaseConnection() {
 			System.out.println("Key\tValue");
 			System.out.println("============");
 			for (String key : matched.keySet()) {
-				String matchedValue = key + "\t" + matched.get(key).toString();
+				String matchedValue = key + "\t" + matched.get(key);
 			    System.out.println(matchedValue);
 			  Assert.assertTrue(matchedValue, flag);
 			}
@@ -548,7 +548,7 @@ public Connection createDataBaseConnection() {
 			System.out.println("Key\tValue");
 			System.out.println("============");
 			for (String key : mismatched.keySet()) {
-				String mismatchedValue = key + "\t" + mismatched.get(key).toString();
+				String mismatchedValue = key + "\t" + mismatched.get(key);
 			    System.out.println(mismatchedValue);
 			  Assert.assertTrue(mismatchedValue, flag);
 			}

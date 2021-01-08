@@ -15,10 +15,10 @@ Feature: 1.05.2 OLE common tool flow E2E MAPD
     Then the user clicks on Enroll Now for AARP site to start the OLE flow
       | Plan Name | <planName> |
     Then the user validates the Plan details on OLE
-    Then the user validates TFN in Welcome OLE Right Rail
-    Then the user validates Learn more modal for Welcome OLE
-    Then the user validates Leave OLE modal for Welcome OLE
-    Then the user validates cancellation modal for Welcome OLE
+    #Then the user validates TFN in Welcome OLE Right Rail
+    #Then the user validates Learn more modal for Welcome OLE
+    #Then the user validates Leave OLE modal for Welcome OLE
+    #Then the user validates cancellation modal for Welcome OLE
     Then the user navigates to Personal Information Page
     Then the user enters following required information in Personal Information Page
       | First Name               | <firstname>              |
@@ -34,6 +34,7 @@ Feature: 1.05.2 OLE common tool flow E2E MAPD
       | Mailing_Zip              | <mailingzip>             |
       | Email                    | <email>                  |
       | MedicaidNumber           | <medicaidnumber>         |
+      | Middle Name         | <middlename>       |
     Then the user validates the Plan details in Personal Information Page OLE Right Rail
     Then the user validates the Member details dynamic display in Personal Information Page
     Then the user navigates to Medicare Information Page
@@ -91,8 +92,10 @@ Feature: 1.05.2 OLE common tool flow E2E MAPD
     Then the user validates the Plan and Member details on Review and Submit Page
     #Then the user validates the Online Enrollment details on Review and Submit Page
     Then the user clicks on Submit Enrollment to complete enrollment
-    #Then the user validates the OLE Submission Details in GPS
-    # | Plan Type | <plantype> |
+    Then the user validates the OLE Submission Details in GPS
+     | Plan Type | <plantype> |
+     | Rider Flag | <riderflag> |
+	 | Mailing Address Question | <mailingaddressquestion> |
     # Then the user validates Plan and Member Details on Confirmation Page
     # Then the user Validates Next Steps in Confirmation Page for the Plan Type.
     @MAPD_OLE_Ulayer_Future
