@@ -85,6 +85,9 @@ public class HealthRecordWebElements  extends UhcDriver {
 
 	@FindBy(xpath="//input[@id='zipcodeTxt']")
 	protected WebElement pharmacySearchPgZipcodeField;
+	
+	@FindBy(xpath="//input[@data-component='SearchBarInput']")
+	protected WebElement pharmacySearchPgZipcodeField_newRally;
 
 	@FindBy(xpath="//header[@class='section-header']//a[contains(@class,'drug-lookup')]")
 	protected WebElement section_drugLocator;
@@ -105,8 +108,7 @@ public class HealthRecordWebElements  extends UhcDriver {
 	@FindBy(xpath="//a[contains(@id,'accsettings')]")
 	protected WebElement acctSettingsLnk;
 
-
-	@FindBy(xpath= "//button[@id='accountprofile' or @id='dropdown-toggle-3' or @id='dropdown-toggle-2']")
+	@FindBy(xpath= "//button[@id='accountprofile' or @id='dropdown-toggle-3' or @id='dropdown-toggle-2']//*[contains(text(),'Account')]")
 	protected WebElement testHarn_AcctProfBtn;
 
 	@FindBy(xpath= "//button[@id='accountprofile' or contains(@id,'dropdown-toggle')]/*[contains(text(),'Account')]")
@@ -124,6 +126,9 @@ public class HealthRecordWebElements  extends UhcDriver {
 
 	@FindBy(xpath="//div[@class='deskHeaderContainer']//div[contains(@class,'dropdown') and contains(@class,'open')]//a[contains(@id,'ihr') or contains(text(),'Health record')]")
 	protected WebElement testHarn_desktop_AcctProf_IHRLnk;
+	
+	@FindBy(xpath="//ul[@id='dropdown-options-3']//a[contains(@data-testid,'TARGET_AWARE_HEALTH_RECORD')]")
+	protected WebElement testHarn_desktop_AcctProf_IHRLnk_pharmacyLocator;
 
 	@FindBy(xpath="//div[contains(@class,'account-btn')]//ul[contains(@class,'dropdown-menu') or contains(@id,'dropdown-options')]//a[contains(@href,'ihr')]")
 	protected WebElement testHarn_desktop_AcctProf_IHRLnk_claims;

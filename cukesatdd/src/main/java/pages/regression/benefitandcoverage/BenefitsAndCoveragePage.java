@@ -252,18 +252,28 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 	 *       section of Ancillary benefits
 	 */
 	public void Exclusivelearnmore() {
+		ArrayList<String> beforeClick_tabNum = new ArrayList<String>(driver.getWindowHandles());
 			validateNew(LearnmoreButton,0);
+			scrollElementToCenterScreen(LearnmoreButton);
 			LearnmoreButton.click();
-			sleepBySec(30);
+			CommonUtility.checkPageIsReady(driver);
+			//tbd sleepBySec(30);
 			
 			/*ArrayList<String> tabs2 = new ArrayList<String>(driver.getWindowHandles());
 			driver.switchTo().window(tabs2.get(1));*/
 			System.out.println(driver.getCurrentUrl());
-			if (driver.getCurrentUrl().contains("uhchearing.com")) {
-				Assert.assertTrue(true);
-			} else {
-				Assert.fail("Not able to navigate to UHC Hearing site");
-			}
+			Assert.assertTrue("PROBLEM - Not able to navigate to UHC Hearing site", driver.getCurrentUrl().contains("uhchearing.com"));
+			driver.navigate().back();
+			CommonUtility.checkPageIsReady(driver);
+			Assert.assertTrue("PROBLEM - Unable to locate the Learn More button again after going back to the Benefits page", validate(LearnmoreButton,0));
+
+			
+			//tbd if (driver.getCurrentUrl().contains("uhchearing.com")) {
+			//tbd 	Assert.assertTrue(true);
+			//tbd } else {
+			//tbd 	Assert.fail("Not able to navigate to UHC Hearing site");
+			//tbd 
+			//tbd }
 	}
 
 	/**

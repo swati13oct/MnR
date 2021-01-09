@@ -68,8 +68,10 @@ public class HealthRecordPage  extends HealthRecordBase {
 			driver.get(plUrl);
 			CommonUtility.checkPageIsReadyNew(driver);
 		}
-		CommonUtility.waitForPageLoad(driver, pharmacySearchPgZipcodeField, 10);
-		Assert.assertTrue("PROBLEM - unable to navigator to Pharmacy Locator page", noWaitValidate(pharmacySearchPgZipcodeField));
+		//tbd CommonUtility.waitForPageLoad(driver, pharmacySearchPgZipcodeField, 10);
+		//tbd Assert.assertTrue("PROBLEM - unable to navigator to Pharmacy Locator page", noWaitValidate(pharmacySearchPgZipcodeField) || noWaitValidate(pharmacySearchPgZipcodeField_newRally));
+		CommonUtility.waitForPageLoad(driver, pharmacySearchPgZipcodeField_newRally, 10);
+		Assert.assertTrue("PROBLEM - unable to navigator to Pharmacy Locator page", noWaitValidate(pharmacySearchPgZipcodeField_newRally));
 		return driver;
 	}
 
@@ -517,17 +519,21 @@ public class HealthRecordPage  extends HealthRecordBase {
 
 	public void navigateFromTestHarnessToHeathRecordPage() {
 		checkModelPopup(driver,1);
-		if (!noWaitValidate(testHarn_desktop_AcctProf_IHRLnk)) {
-			Assert.assertTrue("PROBLEM - unable to locate Account Profile button on Rally Dashboard top menu", noWaitValidate(testHarn_AcctProfBtn));
+		WebElement ihrLnk=testHarn_desktop_AcctProf_IHRLnk;
+		if (noWaitValidate(testHarn_desktop_AcctProf_IHRLnk_pharmacyLocator))
+			ihrLnk=testHarn_desktop_AcctProf_IHRLnk_pharmacyLocator;
+		
+		if (!noWaitValidate(ihrLnk)) {
+			Assert.assertTrue("PROBLEM - unable to locate Account Profile button on Rally Dashboard top menu", noWaitValidate(ihrLnk));
 			JavascriptExecutor jse = (JavascriptExecutor) driver;
 			jse.executeScript("window.scrollBy(0,50)", "");
 			scrollToView(testHarn_AcctProfBtn);
 			jsClickNew(testHarn_AcctProfBtn);
 		}
 
-		Assert.assertTrue("PROBLEM - unable to locate Heath Record link on Account Profile button dropdown options", noWaitValidate(testHarn_desktop_AcctProf_IHRLnk));
+		Assert.assertTrue("PROBLEM - unable to locate Heath Record link on Account Profile button dropdown options", noWaitValidate(ihrLnk));
 
-		testHarn_desktop_AcctProf_IHRLnk.click();
+		ihrLnk.click();
 		CommonUtility.checkPageIsReadyNew(driver);
 		checkModelPopup(driver,1);
 	}		
