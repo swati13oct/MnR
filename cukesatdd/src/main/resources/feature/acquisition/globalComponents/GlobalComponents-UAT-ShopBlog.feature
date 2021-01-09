@@ -85,7 +85,7 @@ Feature: 1.13 UAT - Shop Blog Pages flows
     Then the user validates proactive chat popup
     Then the user validates whether chat icon is visible
     Then the user validates whether call icon is visible
-    Then the user validates TFN on right rail Shop pages
+    Then the user validates TFN on need help section of Shop pages
       | TFNxpath | <tfnXpath> |
       | TFNflag  | <tfnFlag>  |
      

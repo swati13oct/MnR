@@ -825,8 +825,8 @@ public void the_user_validates_TFN_on_right_rail_Medicare_article(DataTable give
 	}
 }
    
-@Then("^the user validates TFN on right rail Shop pages$")
-public void the_user_validates_TFN_on_right_rail_Shop_pages(DataTable givenAttributes) throws Throwable {
+@Then("^the user validates TFN on need help section of Shop pages$")
+public void the_user_validates_TFN_on_need_help_section_of_Shop_pages(DataTable givenAttributes) throws Throwable {
 	List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 	Map<String, String> memberAttributesMap = new HashMap<String, String>();
 	for (int i = 0; i < memberAttributesRow.size(); i++) {
