@@ -5936,6 +5936,8 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 		//------- validate uhcmedicaredentistsearch.com link ---------------------------
 		Assert.assertTrue("PROBLEM - unable to locate the Assistance link in tile contnet", validate(riderAssistanceLnk,0));
 		expUrl="https%3A~2F~2Fdentalsearch.yourdentalplan.com~2Fprovidersearch";
+		//TODO - which one is the correct expected URL destination??
+		//note: href="https://member.uhc.com/internal-redirect?deepLink=https%3A~2F~2Fconnect.werally.com~2FdentalProvider~2Froot%3FshowBackButton%3Dtrue"
 		actUrl=riderAssistanceLnk.getAttribute("href");
 		Assert.assertTrue("PROBLEM - KNOWN ISSUE INC19517618 - Assistance link URL is not as expected. Expect to contain '"+expUrl+"' | Actual href='"+actUrl+"'", actUrl.contains(expUrl));
 		//TODO - click it and validate it land on the right page:  https://dentalsearch.yourdentalplan.com/providersearch
