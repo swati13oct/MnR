@@ -3158,33 +3158,33 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		}
 		
 		public void clickVisitAARPFooterLink() {
-			if (driver.getCurrentUrl().contains("aarpmedicareplans")) {
-				CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
-				jsClickNew(visitAARPFooterLink);
-				// waitForPageLoadSafari();
-				Set<String> winHandles = driver.getWindowHandles();
-				for (String win : winHandles) {
-					if (!win.equals(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION)) {
-						driver.switchTo().window(win);
-						proceedToLeaveAARP();
-						if (!driver.getCurrentUrl().contains("aarp.org")) {
-							Assert.fail("Visit AARP link did not lead to the right page");
-						} else {
-							Assert.assertTrue(true, "Navigated to AARP org page");
-						}
-						driver.close();
-						break;
-					}
-				}
-			}
-			driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
-		}
+            if (driver.getCurrentUrl().contains("aarpmedicareplans")) {
+                CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
+                jsClickNew(visitAARPFooterLink);
+                // waitForPageLoadSafari();
+                Set<String> winHandles = driver.getWindowHandles();
+                for (String win : winHandles) {
+                    if (!win.equals(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION)) {
+                        driver.switchTo().window(win);
+                        proceedToLeaveAARP();
+                        if (!driver.getCurrentUrl().contains("aarp.org")) {
+                            Assert.fail("Visit AARP link did not lead to the right page");
+                        } else {
+                            Assert.assertTrue(true, "Navigated to AARP org page");
+                        }
+                        driver.close();
+                        break;
+                    }
+                }
+                driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
+            }
+        }
 		
 		public void proceedToLeaveAARP() {
 			if (validate(leaveAARPMedicarePlansDialog)) {
 				jsClickNew(proceedLeaveAARPMedicare);
 				waitForPageLoadSafari();
-				sleepBySec(2);
+				sleepBySec(5);
 //				CommonUtility.checkPageIsReadyNew(driver);
 			}
 		}
