@@ -838,7 +838,7 @@ try {
 		String winHandleBefore = driver.getWindowHandle();
 		System.out.println("Proceed to open a new blank tab to check the system time");
 		//tbd String urlGetSysTime=testSiteUrl+ "/DCERestWAR/dcerest/profiledetail/bConnected";
-		String urlGetSysTime=testSiteUrl+ "/PlanBenefitsWAR/profiledetail/aarp";
+		String urlGetSysTime=testSiteUrl+ "/PharmacySearchWAR/pharmacyrest/profiledetail/profiledetail/aarp";
 		System.out.println("test env URL for getting time: "+urlGetSysTime);
 		//open new tab
 		JavascriptExecutor js = (JavascriptExecutor) driver;
