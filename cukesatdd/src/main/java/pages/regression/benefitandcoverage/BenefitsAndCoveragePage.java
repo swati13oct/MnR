@@ -252,28 +252,29 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 	 *       section of Ancillary benefits
 	 */
 	public void Exclusivelearnmore() {
-		ArrayList<String> beforeClick_tabNum = new ArrayList<String>(driver.getWindowHandles());
-			validateNew(LearnmoreButton,0);
-			scrollElementToCenterScreen(LearnmoreButton);
-			LearnmoreButton.click();
-			CommonUtility.checkPageIsReady(driver);
-			//tbd sleepBySec(30);
-			
-			/*ArrayList<String> tabs2 = new ArrayList<String>(driver.getWindowHandles());
-			driver.switchTo().window(tabs2.get(1));*/
-			System.out.println(driver.getCurrentUrl());
-			Assert.assertTrue("PROBLEM - Not able to navigate to UHC Hearing site", driver.getCurrentUrl().contains("uhchearing.com"));
-			driver.navigate().back();
-			CommonUtility.checkPageIsReady(driver);
-			Assert.assertTrue("PROBLEM - Unable to locate the Learn More button again after going back to the Benefits page", validate(LearnmoreButton,0));
+		String origUrl=driver.getCurrentUrl();
+		validateNew(LearnmoreButton,0);
+		scrollElementToCenterScreen(LearnmoreButton);
+		LearnmoreButton.click();
+		CommonUtility.checkPageIsReady(driver);
+		CommonUtility.waitForPageLoad(driver, hearingPgHeader, 5);
+		//tbd sleepBySec(30);
 
-			
-			//tbd if (driver.getCurrentUrl().contains("uhchearing.com")) {
-			//tbd 	Assert.assertTrue(true);
-			//tbd } else {
-			//tbd 	Assert.fail("Not able to navigate to UHC Hearing site");
-			//tbd 
-			//tbd }
+		/*ArrayList<String> tabs2 = new ArrayList<String>(driver.getWindowHandles());
+			driver.switchTo().window(tabs2.get(1));*/
+		System.out.println(driver.getCurrentUrl());
+		Assert.assertTrue("PROBLEM - Not able to navigate to UHC Hearing site", driver.getCurrentUrl().contains("uhchearing.com"));
+		driver.get(origUrl);
+		CommonUtility.waitForPageLoad(driver, LearnmoreButton, 5);
+		Assert.assertTrue("PROBLEM - Unable to locate the Learn More button again after going back to the Benefits page", validate(LearnmoreButton,0));
+
+
+		//tbd if (driver.getCurrentUrl().contains("uhchearing.com")) {
+		//tbd 	Assert.assertTrue(true);
+		//tbd } else {
+		//tbd 	Assert.fail("Not able to navigate to UHC Hearing site");
+		//tbd 
+		//tbd }
 	}
 
 	/**

@@ -194,5 +194,11 @@ public class HealthRecordWebElements  extends UhcDriver {
 	
 	@FindBy(xpath="//h1[contains(.,'Benefit Summary')]")
 	protected WebElement benefitsPgHeader;
+	
+	@FindBy(xpath="//a[contains(@class,'atdd-bnc-locatepharmacybtn')]")
+	protected WebElement benefitsPgLocatePharmacyLnk;
+	
+	@FindBy(xpath="//button[contains(text(),'Close')]")
+	protected WebElement stagePharmacyLocatorCloseBtn;
 
 }

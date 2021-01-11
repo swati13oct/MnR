@@ -50,9 +50,10 @@ public class HealthRecordPage  extends HealthRecordBase {
 
 	public WebDriver navigateToPharmacyLocatorPage(String memberType) {
 		checkModelPopup(driver,1);
-		if (noWaitValidate(testharnessTblPharmacyLocatorLnk)) {
-			testharnessTblPharmacyLocatorLnk.click();
-		} else if (noWaitValidate(pharmacySearchLink)) {
+		//tbd if (noWaitValidate(testharnessTblPharmacyLocatorLnk)) {
+		//tbd 	testharnessTblPharmacyLocatorLnk.click();
+		//tbd } else 
+		if (noWaitValidate(pharmacySearchLink)) {
 			pharmacySearchLink.click();
 		} else if (noWaitValidate(section_pharmacySearchLink)) {
 			scrollElementToCenterScreen(section_pharmacySearchLink);
@@ -60,19 +61,39 @@ public class HealthRecordPage  extends HealthRecordBase {
 			section_pharmacySearchLink.click();
 		} else {
 			//note: fix up the URL to get to the page...
-			navigateToBenefitsPage(memberType);
-			CommonUtility.checkPageIsReadyNew(driver);
-			String[] tmp=driver.getCurrentUrl().split(".com/");
-			String plUrl=tmp[0]+".com/content/medicare/member/pharmacy-locator/overview.html#/Pharmacy-Search-English";
-			System.out.println("pharmacy locator pg URL="+plUrl);
-			driver.get(plUrl);
-			CommonUtility.checkPageIsReadyNew(driver);
-			checkModelPopup(driver,1);
+			//tbd navigateToBenefitsPage(memberType);
+			//tbd CommonUtility.checkPageIsReadyNew(driver);
+			//tbd CommonUtility.waitForPageLoad(driver, benefitsPgLocatePharmacyLnk, 5);
+			//tbd benefitsPgLocatePharmacyLnk.click();
+			//tbd String[] tmp=driver.getCurrentUrl().split(".com/");
+			//tbd String plUrl=tmp[0]+".com/content/medicare/member/pharmacy-locator/overview.html#/Pharmacy-Search-English";
+			//tbd System.out.println("pharmacy locator pg URL="+plUrl);
+			//tbd driver.get(plUrl);
+			if (MRScenario.environment.contains("team-a")
+					|| (MRScenario.environment.contains("stage") && MRScenario.isTestHarness.equalsIgnoreCase("Yes"))) {
+				System.out.println("SKIP validation - Pharmacy locator link is Raly page, will not work on team or stage-testharness env");
+				return driver;
+			} else if (MRScenario.environment.contains("stage") && !MRScenario.isTestHarness.equalsIgnoreCase("Yes")) {
+				//note: rally page will only work on stage if login via dashboard access
+				String rallyUrl="https://member.int.uhc.com/pharmacy-uhc/pharmacies";
+				driver.get(rallyUrl);
+				CommonUtility.checkPageIsReadyNew(driver);
+				if (validate(stagePharmacyLocatorCloseBtn,0)) {
+					stagePharmacyLocatorCloseBtn.click();
+					CommonUtility.checkPageIsReadyNew(driver);
+					checkModelPopup(driver,1);
+				}
+			} else if (MRScenario.environment.equals("offline") || MRScenario.environment.equals("prod")) {
+				String rallyUrl="https://member.uhc.com/pharmacy-uhc/pharmacies";
+				driver.get(rallyUrl);
+				CommonUtility.checkPageIsReadyNew(driver);
+				checkModelPopup(driver,1);
+			}
 		}
 		//tbd CommonUtility.waitForPageLoad(driver, pharmacySearchPgZipcodeField, 10);
 		//tbd Assert.assertTrue("PROBLEM - unable to navigator to Pharmacy Locator page", noWaitValidate(pharmacySearchPgZipcodeField) || noWaitValidate(pharmacySearchPgZipcodeField_newRally));
 		CommonUtility.waitForPageLoad(driver, pharmacySearchPgZipcodeField_newRally, 10);
-		Assert.assertTrue("PROBLEM - unable to navigator to Pharmacy Locator page", noWaitValidate(pharmacySearchPgZipcodeField_newRally));
+		Assert.assertTrue("PROBLEM - unable to navigator to (Rally) Pharmacy Locator page", noWaitValidate(pharmacySearchPgZipcodeField_newRally));
 		return driver;
 	}
 

@@ -331,8 +331,8 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth Prod
     And the user validates contactus section
 
     Examples: 
-      | index | TID   | username |password  |MemUserName|planType|memberType | copayCategory | SummaryofBenefits   | EvidenceofCoverage   | ComprehensiveFormularyDrug List |
-      | 10    | 15247 |kkumard| tnps459#|GLORIA9494| MAPD|Group_BnC| LIS 4|Summary Of Benefits|Evidence of Coverage| Comprehensive Formulary         |
+      | index | TID   | username |password  | MemUserName|planType|memberType | copayCategory | SummaryofBenefits   | EvidenceofCoverage   | ComprehensiveFormularyDrug List |
+      | 10    | 15247 |kkumard| tnps459#|GLORIA9494| MAPD|Group_BnC| LIS 2|Summary Of Benefits|Evidence of Coverage| Comprehensive Formulary         |
       
   #TC26_Group members_PDP_LIS(1,2)
   @prod__benefitsAndCoverage2  @CMGroupmembersPDPLIS_TC26 @prod_BnC_Part6 

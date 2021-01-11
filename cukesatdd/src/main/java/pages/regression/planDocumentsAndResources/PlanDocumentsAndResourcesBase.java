@@ -801,15 +801,11 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 		for(String expDocName: expDocList) {
 			Boolean knownIssue=false;
 			String knownIssueMsg="";
-			//tbd if (expDocName.equals("Additional Drug Coverage") && memberType.contains("GROUP") && section.equals("Plan Materials")) { 
-			//tbd 	knownIssue=true;
-			//tbd 	knownIssueMsg="KNOWN ISSUE - Incident ticket: INC19574472";
-			//tbd }
-			if ((expDocName.equals("Your Plan Getting Started")
-					||expDocName.equals("Privacy Notice")
-					||expDocName.equals("CDI Long Notice")
-				)
-					&& planType.contains("SSP") && section.equals("Plan Materials")) { 
+			if (expDocName.equals("CDI Long Notice") && planType.contains("SSP") && section.equals("Plan Materials")) { 
+			 	knownIssue=true;
+			 	knownIssueMsg="KNOWN ISSUE - Incident ticket: INC19654052";
+			}
+			if (expDocName.equals("Your Plan Getting Started") && planType.contains("SSP") && section.equals("Plan Materials")) { 
 				knownIssue=true;
 				knownIssueMsg="KNOWN ISSUE - Incident ticket: INC19574472";
 			}

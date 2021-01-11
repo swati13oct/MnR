@@ -463,6 +463,9 @@ public class BenefitsAndCoverageWebElements extends UhcDriver {
 	@FindBy(xpath = "//a[@class='btn btn--secondary margin-small atdd-bnc-ancilry-learnmorbtn']")
 	protected WebElement LearnmoreButton;
 
+	@FindBy(xpath="//div[@class='header']")
+	protected WebElement hearingPgHeader;
+	
 	@FindBy(className = "atdd-bnc-exclusivehrng-leavingpopuptxt")
 	protected WebElement popup;
 
