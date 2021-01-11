@@ -67,6 +67,7 @@ public class HealthRecordPage  extends HealthRecordBase {
 			System.out.println("pharmacy locator pg URL="+plUrl);
 			driver.get(plUrl);
 			CommonUtility.checkPageIsReadyNew(driver);
+			checkModelPopup(driver,1);
 		}
 		//tbd CommonUtility.waitForPageLoad(driver, pharmacySearchPgZipcodeField, 10);
 		//tbd Assert.assertTrue("PROBLEM - unable to navigator to Pharmacy Locator page", noWaitValidate(pharmacySearchPgZipcodeField) || noWaitValidate(pharmacySearchPgZipcodeField_newRally));
