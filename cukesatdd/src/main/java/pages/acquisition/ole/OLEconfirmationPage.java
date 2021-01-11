@@ -13,6 +13,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
@@ -151,9 +152,6 @@ public class OLEconfirmationPage extends UhcDriver{
 				   gpsData.put("First Name", firstName);
 				   
 				   String middleInitial = rs.getString("MIDDLE_INITIAL");
-				   if(middleInitial==null) {
-					   middleInitial ="";
-				   }
 				   gpsData.put("MiddleInitial", middleInitial);
 				   
 				   String lastName = rs.getString("LAST_NAME");
@@ -170,9 +168,7 @@ public class OLEconfirmationPage extends UhcDriver{
 				   String address1 = rs.getString("ADDRESS_LINE_1");
 				   gpsData.put("Perm_Street", address1);
 				   String address2 = rs.getString("ADDRESS_LINE_2");
-				   if(address2==null) {
-					   address2 ="";
-				   }
+				   
 				   gpsData.put("Perm_Apartment", address2);
 				   String city = rs.getString("CITY");
 				   gpsData.put("Perm_city", city);
@@ -183,52 +179,29 @@ public class OLEconfirmationPage extends UhcDriver{
 
 				   //Mailing Address
 				   String mailingAddress1 = rs.getString("MAILING_ADDRESS_LINE_1");
-				   if(mailingAddress1==null) {
-					   mailingAddress1 ="";
-				   }
 				   gpsData.put("Mailing_Street", mailingAddress1);
+				   
 				   String mailingAddress2 = rs.getString("MAILING_ADDRESS_LINE_2");
-				   if(mailingAddress2==null) {
-					   mailingAddress2 ="";
-				   }
 				   gpsData.put("Mailing Apartment Number", mailingAddress2);
 				   String mailingCity = rs.getString("MAILING_CITY");
-				   if(mailingCity==null) {
-					   mailingCity ="";
-				   }
 				   gpsData.put("Mailing_City", mailingCity);
 				
 				   String mailingState = rs.getString("MAILING_STATE_CD");
-				   if(mailingState==null) {
-					   mailingState ="";
-				   }
 				   gpsData.put("Mailing_State", mailingState);
 				   
 				   String mailingZipcode = rs.getString("MAILING_ZIP_CD");
-				   if(mailingZipcode==null) {
-					   mailingZipcode ="";
-				   }
 				   gpsData.put("Mailing_Zip", mailingZipcode);
 
 				   //Phone Number
 				   String dayTimePhoneNumber = rs.getString("DAYTIME_PHONE_NUM");
-				   if(dayTimePhoneNumber==null) {
-					   dayTimePhoneNumber ="";
-				   }
 				   gpsData.put("Home Number", dayTimePhoneNumber);
 				   String eveningTimePhoneNumber = rs.getString("EVENING_PHONE_NUM");
-				   if(eveningTimePhoneNumber==null) {
-					   eveningTimePhoneNumber ="";
-				   }
 				   gpsData.put("Mobile Number", eveningTimePhoneNumber); 
 				   
 				   //Email
 				   String email = rs.getString("EMAIL");
 				   gpsData.put("Email", email);
 				   String paperless = rs.getString("PAPERLESS_PREFERENCE_IND");
-				   if(paperless==null) {
-					   paperless ="";
-				   }
 				   gpsData.put("Paperless Delivery", paperless);
 				   String language = rs.getString("LANGUAGE_PREFERENCE");
 				   gpsData.put("Language", language);
@@ -240,14 +213,8 @@ public class OLEconfirmationPage extends UhcDriver{
 				   gpsData.put("Medicare Number", medicareNumber); 
 				   
 				   String medicaidNumber = rs.getString("MEDICAID_NUMBER");
-				   if(medicaidNumber==null) {
-					   medicaidNumber ="";
-				   }
 				   gpsData.put("Medicaid Number", medicaidNumber);
 				   String SSN = rs.getString("SSN");
-				   if(SSN==null) {
-					   SSN ="";
-				   }
 				   gpsData.put("SSN Number", SSN);
 
 				   
@@ -287,32 +254,18 @@ public class OLEconfirmationPage extends UhcDriver{
 
 				   //PCP Page
 				   String pcpName = rs.getString("PRIMARY_CARE_PHYSICIAN");
-				   if(pcpName==null) {
-					   pcpName ="";
-				   }
 				   pcpName = pcpName.replaceAll("-", "");
 				   gpsData.put("PCP Name", pcpName); 
 				   String pcpNumber = rs.getString("PRIMARY_CARE_PHYSICIAN_NUMBER");
-				  
-				   if(pcpNumber==null) {
-					   pcpNumber ="";
-				   }
 				   gpsData.put("PCP Number", pcpNumber); 
 				   String pCPRecentlyVisited = rs.getString("CURRENTLY_A_PATIENT_OF_THE_PCP");
-				   if(pCPRecentlyVisited==null) {
-					   pCPRecentlyVisited ="";
-				   }
 				   gpsData.put("PCP Recently Visited", pCPRecentlyVisited);  
-
-
 				   String confirmationNumber = rs.getString("XEROX_STAGE_ID");
 				   gpsData.put("Confirmation No", confirmationNumber);
 				   
-				   
-				   
-				    //SEP Page 
-				//   String note = rs.getString("NOTE");
-				 //  gpsData.put("Note", note); 
+				   //SEP Page 
+				   //String note = rs.getString("NOTE");
+				   //gpsData.put("Note", note); 
 				  
 				   //String dentalPlatinum = rs.getString("DENTAL_PLATINUM"); TODO:1/6-Check and update for which plan types ths value comes as Y and put logic to validate it
 				   //gpsData.put("Dental Platinum", dentalPlatinum);
@@ -323,67 +276,36 @@ public class OLEconfirmationPage extends UhcDriver{
 				   
 				   //Authorization Page
 				   String authorizationFirstName = rs.getString("AUTHORIZED_REP_FIRST_NAME");
-				   if(authorizationFirstName==null) {
-					   authorizationFirstName ="";
-				   }
 				   gpsData.put("Authorization First Name", authorizationFirstName);
 				   
 				   String authorizationLastName = rs.getString("AUTHORIZED_REP_LAST_NAME");
-				   if(authorizationLastName==null) {
-					   authorizationLastName ="";
-				   }
 				   gpsData.put("Authorization last Name", authorizationLastName);
 				   
 				   String authRel = rs.getString("AUTHORIZED_REP_MAILING_ZIP_CD");
-				   if(authRel==null) {
-					   authRel ="";
-				   }
 				   gpsData.put("Authorization Relationship", authRel);
 				
-				   
 				   String authAddr1 = rs.getString("AUTHORIZED_REP_MAILING_ADDR_1");
-				   if(authAddr1==null) {
-					   authAddr1 ="";
-				   }
 				   gpsData.put("Authorization Address", authAddr1);
 				   
 				   String authAddr2 = rs.getString("AUTHORIZED_REP_MAILING_ADDR_2");
-				   if(authAddr2==null) {
-					   authAddr2 ="";
-				   }
 				   gpsData.put("Authorization Apartment Suite", authAddr2);
 				   
 				   String authCity = rs.getString("AUTHORIZED_REP_MAILING_CITY");
-				   if(authCity==null) {
-					   authCity ="";
-				   }
 				   gpsData.put("Authorization City", authCity);
 				   
 				   String authPhone = rs.getString("AUTHORIZED_REP_DAYTIME_PHONE");
-				   if(authPhone==null) {
-					   authPhone ="";
-				   }
 				   gpsData.put("Authorization Phone No", authPhone);
 				   
 				   String authState = rs.getString("AUTHORIZED_REP_MAILING_STATE");
-				   if(authState==null) {
-					   authState ="";
-				   }
 				   gpsData.put("Authorization State", authState);
 				   
 				   String authZip = rs.getString("AUTHORIZED_REP_MAILING_ZIP_CD");
-				   if(authZip==null) {
-					   authZip ="";
-				   }
 				   gpsData.put("Auth Zip Display", authZip);
 				   
 				   String authRepInd = rs.getString("AUTHORIZED_REPRESENTATIVE_IND");
 				   gpsData.put("Auth Representative Indicator", authRepInd);
 				
 				   String authRepRelationship = rs.getString("AUTHORIZED_REP_RELATIONSHIP");
-				   if(authRepRelationship==null) {
-					   authRepRelationship ="";
-				   }
 				   gpsData.put("Authorization Relationship", authRepRelationship);
 				   
 				   String authSignature = rs.getString("SIGNATURE_PRESENCE");
@@ -420,20 +342,14 @@ public class OLEconfirmationPage extends UhcDriver{
 				   String chronicillness = rs.getString("DO_YOU_HAVE_A_CHRONIC_ILLNESS");
 				   gpsData.put("Disclosure Checkbox", chronicillness); */
 				   String chronicphysician = rs.getString("CHRONIC_PHYSICIAN_NAME");
-				   if(chronicphysician==null) {
-					   chronicphysician ="";
-				   }
+				  
 				   gpsData.put("Disclosure Provider Name", chronicphysician); 
 				   String chronicphysicianPhoneNumber = rs.getString("CHRONIC_PHYSICIAN_PHONE_NUM");
-				   if(chronicphysicianPhoneNumber==null) {
-					   chronicphysicianPhoneNumber ="0";
-				   }
+				   
 				   gpsData.put("Disclosure Provider PhoneNumber", chronicphysicianPhoneNumber); 
 				   
 				   String chronicphysicianAddress = rs.getString("ASMENT_FULL_ADDR_FOR_PHYSICIAN");
-				   if(chronicphysicianAddress==null) {
-					   chronicphysicianAddress ="";
-				   }
+				   
 				   gpsData.put("Disclosure Provider Address", chronicphysicianAddress); 
 
 
@@ -503,7 +419,7 @@ public Connection createDataBaseConnection() {
 			
 }
 	
-	public boolean validate_GPS_for_Plantype(Map<String,String> map) {
+/*	public boolean validate_GPS_for_Plantype(Map<String,String> map) {
 		boolean flag = false;
 		String confirmation_no = confirmationNumber.getText();
 		 System.out.println("OLE confirmation number is  " +confirmation_no);
@@ -555,7 +471,70 @@ public Connection createDataBaseConnection() {
 		}
 		return flag;
 	}
+*/	
+	public boolean validate_GPS_for_Plantype(Map<String,String> map) {
+		boolean flag = false;
+		try {
+			String confirmation_no = confirmationNumber.getText();
+			System.out.println("OLE confirmation number is  " +confirmation_no);
+			map.put("Confirmation No", confirmation_no);
+			Map<String,String> gpsdatamap = retrieve_GPS_data(confirmation_no);
+			Map <String, String> gpsmap = new HashMap<>();
+			String defaultValue = "";
+			gpsmap = null_vals(gpsdatamap, defaultValue);
+			Map <String, String> matched = new HashMap<>();
+			Map <String, String> mismatched = new HashMap<>();
+			for (String keySource : map.keySet()) {
+				String strSource = map.get(keySource);
+				if (gpsmap.containsKey(keySource)) {
+					String strTarget = gpsmap.get(keySource);
+					if(strSource.equalsIgnoreCase(strTarget)) {
+						flag = true;
+						matched.put(keySource, strSource);
+						// print out matched
+						System.out.println("Matched values in OLE GPS");
+						System.out.println(Arrays.asList(matched));
+						
+						/*System.out.println("============");  
+						System.out.println("Key\tValue");
+						System.out.println("============");
+						for (String key : matched.keySet()) {
+							String matchedValue = key + "\t" + matched.get(key);
+							System.out.println(key+"========================"+matchedValue);
+						}
+*/				}
+					else {
+						flag = false;
+						mismatched.put(keySource, strSource);
+						// print out matched
+						System.out.println("Mismatched values in OLE GPS");
+						System.out.println(Arrays.asList(mismatched));
+						/*System.out.println("============");  
+						System.out.println("Key\tValue");
+						System.out.println("============");
+						for (String key : mismatched.keySet()) {
+							String mismatchedValue = key + "\t" + mismatched.get(key);
+							System.out.println(key+"========================"+mismatchedValue);
+						}*/
+					}
+					//System.out.println(keySource +" #  "+ strTarget+ " # "+strSource);
+
+					
+
+					
+				}
+
+
+			}
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return flag;
+	}
 	
+
 	
 	public String converttogpsDate(String intputDate) {
 		String date = intputDate.substring(2, 4);
@@ -574,5 +553,16 @@ public Connection createDataBaseConnection() {
 		System.out.println("Output Date====================== "+outputDate);
 		return outputDate;	
 	}
+	
+	public <T, K> Map<K, T> null_vals(Map<K, T> my_map, T def_val){
+	      my_map = my_map.entrySet().stream().map(entry -> {
+	         if (entry.getValue() == null)
+	         entry.setValue(def_val);
+	         return entry;
+	      })
+	      .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+	      return my_map;
+	   }
+
 }
 	
