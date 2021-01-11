@@ -17,7 +17,7 @@ import acceptancetests.util.CommonUtility;
 
 public class AboutUsAARPPage extends GlobalWebElements{
 
-	@FindBy(xpath = "//*[contains(@class,'meded-article-header__title')]")
+	@FindBy(xpath = "//div[contains(@class,'breadcrumb aem-GridColumn aem-GridColumn--default--12')]")
 	public static WebElement header;
 	
 	@FindBy(xpath = "//section[contains(@class,'meded-article-content')]//p[string-length(text()) > '1']")

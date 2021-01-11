@@ -625,7 +625,8 @@ public class PlanRecommendationEngineHeaderAndFooterMobile extends UhcDriver {
 		jsClickNew(GetRecommendationsbtn);
 
 		validate(landingpageHeader, 30);
-		Assert.assertTrue(landingpageHeader.getText().contains("Plan"));
+		scrollToView(landingpageHeader);
+		Assert.assertTrue(landingpageHeader.getText().contains("Get a Plan Recommendation"));
 	}
 
 	// ZipCode Function inside Shop for a Plan

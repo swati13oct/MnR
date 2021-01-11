@@ -29,8 +29,9 @@ public class ACQDrugCostEstimatorPage extends UhcDriver {
 	public void openAndValidate() {
 	}
 
-	PlanRecommendationEngineCommonutilityMobile desktopCommonUtils = new PlanRecommendationEngineCommonutilityMobile(driver);
-	
+	PlanRecommendationEngineCommonutilityMobile desktopCommonUtils = new PlanRecommendationEngineCommonutilityMobile(
+			driver);
+
 	public static ArrayList<String> DCEDrugsList = new ArrayList<String>();
 	public static ArrayList<String> DrugsList = new ArrayList<String>();
 	static ArrayList<String> vppDrugsResults = new ArrayList<String>();
@@ -55,13 +56,13 @@ public class ACQDrugCostEstimatorPage extends UhcDriver {
 	private WebElement drugsearchButton;
 
 	@FindBy(css = "p[id*='drugDosageStrengthId']")
-	private List<WebElement> drugsListed; 
-	
-	@FindBy(css = ".text-regular")
+	private List<WebElement> drugsListed;
+
+	@FindBy(css = "#listPop")
 	private WebElement drugcount;
-	
+
 	@FindBy(css = "div[class*='list-item-content']")
-	private List<WebElement> drugsListinDCE; 
+	private List<WebElement> drugsListinDCE;
 
 	// drugs Page Modal popup
 
@@ -73,7 +74,7 @@ public class ACQDrugCostEstimatorPage extends UhcDriver {
 
 	@FindBy(css = "#buildyourdruglist button:nth-of-type(2)")
 	private List<WebElement> drugpageButtons;
-	
+
 	@FindBy(css = "#modal uhc-radio-group uhc-radio")
 	private List<WebElement> modalSelcetedDrugsList;
 
@@ -82,7 +83,7 @@ public class ACQDrugCostEstimatorPage extends UhcDriver {
 
 	@FindBy(xpath = "//button[contains(.,'Remove')]")
 	private List<WebElement> drugDeleteButtons;
-	
+
 	// Dosage Modal
 
 	@FindBy(css = "#drugModal #popup3 section>h2")
@@ -102,13 +103,13 @@ public class ACQDrugCostEstimatorPage extends UhcDriver {
 
 	@FindBy(css = "#new-drug-refill")
 	private WebElement modalSupplySelect;
-	
+
 	@FindBy(css = ".content-section button[type='submit']")
 	private WebElement addDrugButton;
-	
+
 	@FindBy(xpath = "//span[contains(text(),'Add to drug List')]")
 	private WebElement addToDrugList;
-	
+
 	@FindBy(xpath = "//span[contains(text(),'Add My Drugs')]")
 	private WebElement addMyDrug;
 
@@ -132,9 +133,7 @@ public class ACQDrugCostEstimatorPage extends UhcDriver {
 
 	@FindBy(css = "button.delete-drug-confirm")
 	private WebElement deleteBtn;
-	
-	
-	
+
 	public void drugsHandlerWithdetails(String drugsDetails) {
 		String drugName = "";
 		boolean searchButtonClick = false;
@@ -164,7 +163,7 @@ public class ACQDrugCostEstimatorPage extends UhcDriver {
 					switchGeneric = true;
 				threadsleep(2000);
 				jsClickNew(drugAddBtn);
-				//drugAddBtn.click();
+				// drugAddBtn.click();
 				threadsleep(2000);
 				addDrugbySearchDCE(drugName, searchButtonClick, dosage, packageName, count, threeeMonthfrequency,
 						GenericDrug, switchGeneric);
@@ -172,8 +171,8 @@ public class ACQDrugCostEstimatorPage extends UhcDriver {
 		}
 	}
 
-    public void choosePharmacyandBacktoPlans() {
-    	validate(drugpageButtons.get(0));
+	public void choosePharmacyandBacktoPlans() {
+		validate(drugpageButtons.get(0));
 		drugpageButtons.get(0).click();
 		pageloadcomplete();
 		threadsleep(2000);
@@ -181,9 +180,8 @@ public class ACQDrugCostEstimatorPage extends UhcDriver {
 		backtoPlansButton.get(0).click();
 		pageloadcomplete();
 		threadsleep(2000);
-}
-	
-	
+	}
+
 	public void addDrugbySearchDCE(String drugName, boolean searchButtonClick, String dosage, String packageName,
 			String count, boolean threeeMonthfrequency, boolean GenericDrug, boolean switchGeneric) {
 		try {
@@ -193,22 +191,22 @@ public class ACQDrugCostEstimatorPage extends UhcDriver {
 			drugsearchBox.clear();
 			drugsearchBox.sendKeys(drugName);
 			if (searchButtonClick) {
-			//drugsearchButton.click();
-			jsClickNew(drugsearchButton);
-			//Select modal
-			validate(searchList.get(0), 30);
-			threadsleep(2000);
-			for(WebElement elm:searchList) {
-				if(elm.findElement(By.cssSelector("span")).getText().trim().equalsIgnoreCase(drugName)) {
-					elm.findElement(By.cssSelector("button")).click();
-					break;
+				// drugsearchButton.click();
+				jsClickNew(drugsearchButton);
+				// Select modal
+				validate(searchList.get(0), 30);
+				threadsleep(2000);
+				for (WebElement elm : searchList) {
+					if (elm.findElement(By.cssSelector("span")).getText().trim().equalsIgnoreCase(drugName)) {
+						elm.findElement(By.cssSelector("button")).click();
+						break;
+					}
 				}
+				threadsleep(2000);
+			} else {
+				threadsleep(5000);
+				drugsAutoList.get(0).click();
 			}
-			threadsleep(2000);
-		} else {
-			threadsleep(5000);
-			drugsAutoList.get(0).click();
-		}
 
 			validate(modalDosageSelect, 30);
 			threadsleep(2000);
@@ -231,26 +229,28 @@ public class ACQDrugCostEstimatorPage extends UhcDriver {
 			dosage = dos.getFirstSelectedOption().getText().trim().split(" ")[1] + " "
 					+ dos.getFirstSelectedOption().getText().trim().split(" ")[2];
 			threadsleep(2000);
-			//addDrugButton.click();
+			// addDrugButton.click();
 			jsClickNew(addToDrugList);
 			// Not Covered switch generic as it is not DD scope in DCE page
 		} catch (Exception e) {
 			System.out.println("Unable to add drug");
 		}
 	}
-	
+
 	public ArrayList<String> getDrugsDCE() {
 		threadsleep(5000);
 		validate(drugcount, 60);
 		int count = Integer.parseInt(drugcount.getText().split("drugs")[0].split(" ")[2]);
 		vppDrugsResults = new ArrayList<String>();
-		for (int i = count-1; i >= 0; i--){
-			vppDrugsResults.add(drugsListinDCE.get(i).findElement(By.cssSelector("h4[class*='text-bold']")).getText().trim().replace("(Brand)", "").toUpperCase()+ "" +
-					drugsListinDCE.get(i).findElement(By.cssSelector("p:nth-child(3)")).getText().trim().replace("Qty ", "").replace(", refill", "").toUpperCase());
+		for (int i = count - 1; i >= 0; i--) {
+			vppDrugsResults.add(drugsListinDCE.get(i).findElement(By.cssSelector("h4[class*='text-bold']")).getText()
+					.trim().replace("(Brand)", "").toUpperCase() + ""
+					+ drugsListinDCE.get(i).findElement(By.cssSelector("p:nth-child(3)")).getText().trim()
+							.replace("Qty ", "").replace(", refill", "").toUpperCase());
 		}
 		Collections.sort(vppDrugsResults);
-		System.out.println("DrugsList in DCE Size is : "+vppDrugsResults.size());
-		System.out.println("DrugList in DCE Content is : "+vppDrugsResults);
+		System.out.println("DrugsList in DCE Size is : " + vppDrugsResults.size());
+		System.out.println("DrugList in DCE Content is : " + vppDrugsResults);
 		return vppDrugsResults;
 	}
 

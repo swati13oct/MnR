@@ -15,7 +15,7 @@ import cucumber.api.CucumberOptions;
 jsonReport = "target/cucumber-RunMRATDDAcquisitionVPPPlanSummaryMobile4.json",detailedReport = true,
  detailedAggregatedReport = true, overviewReport = true, toPDF = true, 
  outputFolder = "target/RunMRATDDAcquisitionVPPPlanSummaryMobile4")
-@CucumberOptions(glue = { "atdd.framework", "acceptancetests.mobile.acquisition" }, 
+@CucumberOptions(glue = { "atdd.framework", "acceptancetests.mobile" }, 
 features = { "src/main/resources/feature/mobile/acquisition/vpp/" }, 
 plugin = {
 		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionVPPPlanSummaryMobile4.json" }, 

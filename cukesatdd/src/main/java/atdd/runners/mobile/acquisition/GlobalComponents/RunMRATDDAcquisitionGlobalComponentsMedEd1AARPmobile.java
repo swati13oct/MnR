@@ -15,8 +15,10 @@ import cucumber.api.CucumberOptions;
 jsonReport = "target/cucumber-RunMRATDDAcquisitionGlobalComponentsMedEd1AARPmobile.json",
 detailedReport = true, detailedAggregatedReport = true, overviewReport = true, toPDF = true, 
 outputFolder = "target/RunMRATDDAcquisitionGlobalComponentsMedEd1AARPmobile")
-@CucumberOptions(glue = { "atdd.framework", "acceptancetests.mobile.acquisition" }, features = { "src/main/resources/feature/mobile/acquisition/globalComponents" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionGlobalComponentsMedEd1AARPmobile.json" }, tags = { "@MedEdPages_1_GlobalCompsAARP" })
+@CucumberOptions(glue = { "atdd.framework", "acceptancetests.mobile.acquisition" }, 
+features = { "src/main/resources/feature/mobile/acquisition/globalComponents" }, plugin = {
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionGlobalComponentsMedEd1AARPmobile.json" }, 
+tags = { "@MedEdPages_1_GlobalCompsAARP" })
 public class RunMRATDDAcquisitionGlobalComponentsMedEd1AARPmobile {
 
 }

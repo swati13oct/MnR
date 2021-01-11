@@ -11,12 +11,13 @@ import cucumber.api.CucumberOptions;
  * this file is to run test cases for RunMRATDDAcquisitionProviderSearchUlayerMobile
  */
 @RunWith(ExtendedCucumber.class)
-@ExtendedCucumberOptions(retryCount=1,screenShotSize="", screenShotLocation="/screenshots/",jsonReport = "target/cucumber-RunMRATDDAcquisitionProviderSearchUlayerMobile.json",detailedReport = true,
+@ExtendedCucumberOptions(retryCount=1,screenShotSize="", screenShotLocation="/screenshots/",
+jsonReport = "target/cucumber-RunMRATDDAcquisitionProviderSearchUlayerMobile.json",detailedReport = true,
  detailedAggregatedReport = true, overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDAcquisitionProviderSearchUlayerMobile")
-@CucumberOptions(glue = { "atdd.framework", "acceptancetests.mobile.acquisition" }, features = { "src/main/resources/feature/mobile/acquisition/providersearch" }, 
+@CucumberOptions(glue = { "atdd.framework", "acceptancetests.mobile" }, features = { "src/main/resources/feature/mobile/acquisition/providersearch" }, 
 plugin = {
 		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionProviderSearchUlayerMobile.json" }, 
-tags = { "@stage" }, dryRun=false)
+tags = { "@AcqRegressionProviderSearchUlayer" }, dryRun=false)
 public class RunMRATDDAcquisitionProviderSearchUlayerMobile { 
  
 }

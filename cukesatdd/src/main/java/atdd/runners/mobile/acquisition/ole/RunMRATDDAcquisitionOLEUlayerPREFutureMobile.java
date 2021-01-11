@@ -12,7 +12,8 @@ import cucumber.api.CucumberOptions;
  * this file is to run test cases for RunMRATDDAcquisitionOLEUlayerPREFutureMobile
  */
 @RunWith(ExtendedCucumber.class)
-@ExtendedCucumberOptions(retryCount=1,screenShotSize="", screenShotLocation="/screenshots/",jsonReport = "target/cucumber-RunMRATDDAcquisitionOLEUlayerPREFutureMobile.json",detailedReport = true,
+@ExtendedCucumberOptions(retryCount=1,screenShotSize="", screenShotLocation="/screenshots/",
+jsonReport = "target/cucumber-RunMRATDDAcquisitionOLEUlayerPREFutureMobile.json",detailedReport = true,
  detailedAggregatedReport = true, overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDAcquisitionOLEUlayerPREFutureMobile")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.mobile.acquisition" },monochrome=true, 
 features = { "src/main/resources/feature/mobile/acquisition/ole" }, plugin = {

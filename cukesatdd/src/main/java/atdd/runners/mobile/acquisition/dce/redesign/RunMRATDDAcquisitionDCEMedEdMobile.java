@@ -13,7 +13,7 @@ import cucumber.api.CucumberOptions;
 @RunWith(ExtendedCucumber.class)
 @ExtendedCucumberOptions(retryCount=1,screenShotSize="", screenShotLocation="/screenshots/",jsonReport = "target/cucumber-RunMRATDDAcquisitionDCEMedEdMobile.json",detailedReport = true,
  detailedAggregatedReport = true, overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDAcquisitionDCEMedEdMobile")
-@CucumberOptions(glue = { "atdd.framework", "acceptancetests.mobile.acquisition" },monochrome=true, 
+@CucumberOptions(glue = { "atdd.framework", "acceptancetests.mobile" },monochrome=true, 
 features = { "src/main/resources/feature/mobile/acquisition/dceredesign" }, plugin = {
 		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionDCEMedEdMobile.json" },
 tags = { "@dce_redesign_MedEd" })

@@ -17,7 +17,7 @@ import cucumber.api.CucumberOptions;
 jsonReport = "target/cucumber-RunMRATDDAcquisitionDCEDetailsPreferredCopayAARPMobile.json",detailedReport = true,
  detailedAggregatedReport = true, overviewReport = true, toPDF = true, 
  outputFolder = "target/RunMRATDDAcquisitionDCEDetailsPreferredCopayAARPMobile")
-@CucumberOptions(glue = { "atdd.framework", "acceptancetests.mobile.acquisition" }, 
+@CucumberOptions(glue = { "atdd.framework", "acceptancetests.mobile" }, 
 features = { "src/main/resources/feature/mobile/acquisition/dceredesign" }, plugin = {
 		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionDCEDetailsPreferredCopayAARPMobile.json" }, 
 tags = { "@DCE_DrugDetailsCopay_Preferred_AARP" }, dryRun=false)

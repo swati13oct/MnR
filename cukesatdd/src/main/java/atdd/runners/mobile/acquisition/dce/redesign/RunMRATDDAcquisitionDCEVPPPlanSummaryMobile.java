@@ -16,7 +16,7 @@ import cucumber.api.testng.AbstractTestNGCucumberTests;
 @RunWith(ExtendedCucumber.class)
 @ExtendedCucumberOptions(retryCount=1,screenShotSize="", screenShotLocation="/screenshots/",jsonReport = "target/cucumber-RunMRATDDAcquisitionDCEVPPPlanSummaryMobile.json",detailedReport = true,
  detailedAggregatedReport = true, overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDAcquisitionDCEVPPPlanSummaryMobile")
-@CucumberOptions(glue = { "atdd.framework", "acceptancetests.mobile.acquisition" },monochrome=true, features = { "src/main/resources/feature/mobile/acquisition/dceredesign" }, plugin = {
+@CucumberOptions(glue = { "atdd.framework", "acceptancetests.mobile" },monochrome=true, features = { "src/main/resources/feature/mobile/acquisition/dceredesign" }, plugin = {
 		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionDCEVPPPlanSummaryMobile.json" }, tags = { "@DCE_Redesign_VPP_PlanSummary" })
 
 

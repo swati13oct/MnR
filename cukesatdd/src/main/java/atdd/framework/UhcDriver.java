@@ -109,6 +109,13 @@ public abstract class UhcDriver {
 		jsClickNew(GetPlanRecoMobile);
 		jsClickNew(getStartedBtn);
 	}
+	
+	public void MobileMenuAndGetPlanRecom() {
+		jsClickNew(MenuMobile);
+		jsClickNew(MenuShopForPlanMobile);
+		jsClickNew(GetPlanRecoMobile);
+		
+	}
 
 	public void MobileMenuShopTool() {
 		jsClickNew(MenuMobile);

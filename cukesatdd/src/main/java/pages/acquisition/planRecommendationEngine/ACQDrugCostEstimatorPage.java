@@ -33,7 +33,7 @@ public class ACQDrugCostEstimatorPage extends UhcDriver {
 	
 	public static ArrayList<String> DCEDrugsList = new ArrayList<String>();
 	public static ArrayList<String> DrugsList = new ArrayList<String>();
-	static ArrayList<String> vppDrugsResults = new ArrayList<String>();
+	public static ArrayList<String> vppDrugsResults = new ArrayList<String>();
 	static ArrayList<String> DCEDrugsResults = new ArrayList<String>();
 
 	String page = "Drug Cost Estimator";

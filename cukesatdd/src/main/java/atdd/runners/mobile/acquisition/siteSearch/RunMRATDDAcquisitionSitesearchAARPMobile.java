@@ -15,7 +15,7 @@ import cucumber.api.CucumberOptions;
 jsonReport = "target/cucumber-RunMRATDDAcquisitionSitesearchAARPMobile.json",detailedReport = true,
  detailedAggregatedReport = true, overviewReport = true, toPDF = true,
  outputFolder = "target/RunMRATDDAcquisitionSitesearchAARPMobile")
-@CucumberOptions(glue = { "atdd.framework", "acceptancetests.mobile.acquisition" }, 
+@CucumberOptions(glue = { "atdd.framework", "acceptancetests.mobile" }, 
 features = { "src/main/resources/feature/mobile/acquisition/Sitesearch" }, 
 plugin = {
 		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionSitesearchAARPMobile.json" }, 

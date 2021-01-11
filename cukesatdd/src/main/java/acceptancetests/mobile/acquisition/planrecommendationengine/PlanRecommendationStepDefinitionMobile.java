@@ -759,6 +759,27 @@ public class PlanRecommendationStepDefinitionMobile {
 		}
 	}
 
+	@And("^clicks on get started button and runs questionnaires$")
+	public void clicks_on_get_started_button_and_directly_skip_to_results1(DataTable givenAttributes) throws Throwable {
+
+		readfeaturedataMobile(givenAttributes);
+
+		String zipcode = inputValues.get("Zip Code");
+		System.out.println("Zipcode is:" + zipcode);
+		String county = inputValues.get("CountyDropDown");
+		System.out.println("Email is:" + county);
+		String isMultiCounty = inputValues.get("Is Multi County");
+		System.out.println("Entered Search Key is:" + isMultiCounty);
+		checkpopup();
+		PlanRecommendationEngineLandingAndZipcodeMobilePages planSelectorhomepage = new PlanRecommendationEngineLandingAndZipcodeMobilePages(
+				(WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+		if (isMultiCounty.equalsIgnoreCase("NO")) {
+			planSelectorhomepage.quizStartsAndRunQuestionnaire(zipcode);
+		} else {
+			planSelectorhomepage.quizStartAndRunQuestionnaireWithCounty(zipcode, county);
+		}
+	}
+	
 	@And("^I select my Response and go to Next Questionnaire$")
 	public void I_click_questionnaire_first() throws Throwable {
 		PlanSelectorNewPageMobile planSelectorNewPage = (PlanSelectorNewPageMobile) getLoginScenario()
