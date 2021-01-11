@@ -474,7 +474,7 @@ public Connection createDataBaseConnection() {
 */	
 	public boolean validate_GPS_for_Plantype(Map<String,String> map) {
 		boolean flag = false;
-		try {
+		//try {
 			String confirmation_no = confirmationNumber.getText();
 			System.out.println("OLE confirmation number is  " +confirmation_no);
 			map.put("Confirmation No", confirmation_no);
@@ -527,10 +527,10 @@ public Connection createDataBaseConnection() {
 
 			}
 			
-		} catch (Exception e) {
+/*		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}*/
 		return flag;
 	}
 	
