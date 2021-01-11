@@ -4457,7 +4457,7 @@ action.moveToElement(navigationSectionHomeLink).moveToElement(ourPlansHoverLink)
 				
 				
 				public void clickonFindanAgentlink(String ExpectedUHCAgentURL ) {
-					threadsleep(10);
+//					threadsleep(10);
 					validateNew(RightRail_FindAnAgent);
 					CommonUtility.waitForPageLoadNew(driver, RightRail_FindAnAgent, 30);
 					String parentWindow = driver.getWindowHandle();
@@ -4887,15 +4887,16 @@ action.moveToElement(navigationSectionHomeLink).moveToElement(ourPlansHoverLink)
 						break;
 					}
 				}
+				driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
 			}
-			driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
+			//driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
 		}
 		
 		public void proceedToLeaveAARP() {
 			if (validate(leaveAARPMedicarePlansDialog)) {
 				jsClickNew(proceedLeaveAARPMedicare);
 				waitForPageLoadSafari();
-				sleepBySec(2);
+				sleepBySec(10);
 //				CommonUtility.checkPageIsReadyNew(driver);
 			}
 		}
@@ -5419,6 +5420,20 @@ public PrivacyPolicyAARPPage privacypolicyFooterClick() {
 			driver.close();
 			driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
 			CommonUtility.checkPageIsReadyNew(driver);			
+		}
+
+		public void closeBrowserTab() {
+			if (driver.getWindowHandles().size() > 1) {
+				String currentPage = driver.getWindowHandle();
+				Set<String> newWindow = driver.getWindowHandles();
+				for (String tabs : newWindow) {
+					if (!tabs.equalsIgnoreCase(currentPage)) {
+						driver.switchTo().window(currentPage).close();
+						driver.switchTo().window(tabs);
+					}
+				}
+			}
+			
 		}
 	
 		public ProviderSearchPage clicksOnRallyToolFromGlobalHeader() {
