@@ -3176,15 +3176,16 @@ public class AcquisitionHomePage extends GlobalWebElements {
 						break;
 					}
 				}
+				driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
 			}
-			driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
+			//driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
 		}
 		
 		public void proceedToLeaveAARP() {
 			if (validate(leaveAARPMedicarePlansDialog)) {
 				jsClickNew(proceedLeaveAARPMedicare);
 				waitForPageLoadSafari();
-				sleepBySec(2);
+				sleepBySec(10);
 //				CommonUtility.checkPageIsReadyNew(driver);
 			}
 		}
