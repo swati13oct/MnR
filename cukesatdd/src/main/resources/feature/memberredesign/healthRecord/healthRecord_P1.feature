@@ -107,7 +107,7 @@ Feature: 1.24.a Member Individual Health Record - P1 - Dashboard, FindCare, Clai
     @no_ihr_p1_boaGrp2
     Examples: 
 	    | index | FID     | planType | memberType         | expectLink | 
-	    | 07    | F424804 | MA       | BOA12324_TERM_GROUP_IHR | false |
+	    | 07    | F424804 | MA       | BOA12324_GROUP_IHR | false |
 
     #----------- begin - cases with IHR link
     @ihr_p1_ma_mapd @devRegression
