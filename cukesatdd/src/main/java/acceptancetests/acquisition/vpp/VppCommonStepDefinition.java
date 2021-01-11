@@ -2811,7 +2811,8 @@ public class VppCommonStepDefinition {
 	public void user_clicks_on_Continue_Enrollment_button_in_aarp_Site() throws Throwable {
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		allPlanNames = plansummaryPage.getAllPlanNames();
+		String planType = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
+		allPlanNames = plansummaryPage.getAllPlanNames(planType);
 		plansummaryPage.clickContinueEnrollmentBtn();
 
 	}
@@ -3060,7 +3061,8 @@ public class VppCommonStepDefinition {
 	public void user_clicks_on_select_a_plan_button_on_NBA() throws Throwable {
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		allPlanNames = plansummaryPage.getAllPlanNames();
+		String planType = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
+		allPlanNames = plansummaryPage.getAllPlanNames(planType);
 		plansummaryPage.clickSelectPlanButton();
 	}
 
