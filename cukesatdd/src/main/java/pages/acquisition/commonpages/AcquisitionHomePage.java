@@ -3185,15 +3185,16 @@ public class AcquisitionHomePage extends GlobalWebElements {
 						break;
 					}
 				}
+				driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
 			}
-			driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
+			//driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
 		}
 		
 		public void proceedToLeaveAARP() {
 			if (validate(leaveAARPMedicarePlansDialog)) {
 				jsClickNew(proceedLeaveAARPMedicare);
 				waitForPageLoadSafari();
-				sleepBySec(2);
+				sleepBySec(10);
 //				CommonUtility.checkPageIsReadyNew(driver);
 			}
 		}
@@ -3677,6 +3678,21 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
 			CommonUtility.checkPageIsReadyNew(driver);			
 		}
+
+		public void closeBrowserTab() {
+			if (driver.getWindowHandles().size() > 1) {
+				String currentPage = driver.getWindowHandle();
+				Set<String> newWindow = driver.getWindowHandles();
+				for (String tabs : newWindow) {
+					if (!tabs.equalsIgnoreCase(currentPage)) {
+						driver.switchTo().window(currentPage).close();
+						driver.switchTo().window(tabs);
+					}
+				}
+			}
+			
+		}
+	
 		
 		public ShopForPlanNavigationPage HoveronalearnaboutMedicare() throws InterruptedException
 	    {             

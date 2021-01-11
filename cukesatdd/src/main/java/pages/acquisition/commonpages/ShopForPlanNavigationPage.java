@@ -61,6 +61,9 @@ public class ShopForPlanNavigationPage extends UhcDriver {
 	
 	@FindBy(xpath = "//*[contains(@id,'planTypesColumn')]//*[contains(text(),'Shop')]")
 	private WebElement shopLink;
+	
+	@FindBy(xpath = "//*[contains(@id,'planTypesColumn')]//*[contains(text(),'Shop')]/../following-sibling::p[1]")
+	private WebElement shopLinkMsg;
 
 	@FindBy(xpath = "//a[contains(@href,'ma-enrollment')]")
 	private WebElement maLeanHowToEnrollLink;
@@ -78,6 +81,7 @@ public class ShopForPlanNavigationPage extends UhcDriver {
 	
 	@FindBy(xpath = "//div[@id='accordion2']//h3[text()='Enrollment']")
 	private WebElement EnrollmentLink;
+	
 	@FindBy(xpath = "//a[text()='Provider Search']")
 	private WebElement providerSearchLink;
 	
@@ -116,6 +120,19 @@ public class ShopForPlanNavigationPage extends UhcDriver {
 		return new ShopPage(driver);
 		
 	}
+	
+	public void CheckShopLinkOnShopPlan() {
+		waitforElement(shopLink);
+		waitforElement(shopLinkMsg);
+		String expMsg = "Get help making the right decision when shopping for coverage.";
+		String actualMsg = shopLinkMsg.getText();
+//		System.out.println("Message: "+actualMsg);
+		if (expMsg.equalsIgnoreCase(actualMsg))
+			System.out.println("Validated the content under the Shop link: "+actualMsg);
+		else
+			System.out.println("content under the Shop link does not match");
+		}
+
 	
 	
 	
