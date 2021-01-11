@@ -103,7 +103,7 @@ public class oleCommonConstants {
 	public static final String DISCLOSURE_PROVIDER_STATE = "disclosureproviderstate";
 	public static final String DISCLOSURE_PROVIDER_ZIP = "disclosureproviderzip";
 	public static final String DISCLOSURE_PROVIDER_PHONENUMBER = "disclosureproviderphonenumber";
-
+	public static final String TEST_RESULT_NOTE="test_result_note";
 	
 
 }

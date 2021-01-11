@@ -17,6 +17,7 @@ import acceptancetests.data.OLE_PageConstants;
 import acceptancetests.data.PageConstants;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
+import cucumber.api.Scenario;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -3424,7 +3425,7 @@ public void the_user_validates_the_OLE_Submission_Details_in_GPS(DataTable arg1)
 				disclosureprovideraddress=disclosureprovideraddress.toUpperCase()+','+disclosureprovidercity.toUpperCase()+','+disclosureproviderstate.toUpperCase()+','+disclosureproviderzip;
 					DetailsMap.put("Disclosure Provider Address", disclosureprovideraddress);
 					System.out.println("--------------------Storing Data for Preliminary questions and Use and disclosure  Ended----------------------"+disclosureprovideraddress);
-				}
+				}						
 				//---------------------------------------------------//	
 				boolean Validation_Status = OLEGPSValidation.validate_GPS_for_Plantype(DetailsMap);
 				if (Validation_Status) {
@@ -3778,4 +3779,17 @@ public void the_user_navigates_to_Review_and_Submit_Page_clickon_Edit_Medicare_P
 		personalInformationPage.OpenLogoOLEPages();
 		System.out.println("OLE logo image is clicked on OLE Pages");
 	}
+	
+	@cucumber.api.java.After
+	public void testResultNote(Scenario scenario) { 
+		if(null!=getLoginScenario().getBean(oleCommonConstants.TEST_RESULT_NOTE)) {   
+			List<String> testNote=(List<String>) getLoginScenario()
+					.getBean(oleCommonConstants.TEST_RESULT_NOTE);
+			for (String s: testNote) {   
+				scenario.write(s);				
+			}
+			testNote.clear(); 
+		}
+
+}
 }
