@@ -3066,7 +3066,7 @@ public void the_user_validates_the_OLE_Submission_Details_in_GPS(DataTable arg1)
 		}
 		
 		String plantype = MemberDetailsMap.get("Plan Type");
-		String AuthorizationRiderFlag = MemberDetailsMap.get("Rider Flag");
+		String AuthorizationRiderFlag = MemberDetailsMap.get("Auth Flag");
 		String MailingAddressQuestion = MemberDetailsMap.get("Mailing Address Question");
 		String [] dateArray = null;
 		
