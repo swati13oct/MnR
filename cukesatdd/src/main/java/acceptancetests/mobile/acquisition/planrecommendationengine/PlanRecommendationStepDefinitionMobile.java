@@ -1373,6 +1373,7 @@ public class PlanRecommendationStepDefinitionMobile {
 		PlanRecommendationEngineResultsPageMobile planSelectorResultspage = new PlanRecommendationEngineResultsPageMobile(
 				wd);
 		planSelectorResultspage.vppToPre();
+		planSelectorResultspage.MobileMenuAndGetStarted();
 		PlanRecommendationEngineLandingAndZipcodeMobilePages planSelectorhomepage = new PlanRecommendationEngineLandingAndZipcodeMobilePages(
 				wd);
 		planSelectorhomepage.navigatezipcodepage();
@@ -1441,7 +1442,8 @@ public class PlanRecommendationStepDefinitionMobile {
 		String zip = inputValues.get("Zip Code");
 		String county = inputValues.get("County Name");
 		String isMultiCounty = inputValues.get("Is Multi County");
-		planSelectorResultspage.vppToPre();
+		//planSelectorResultspage.vppToPre();
+		planSelectorResultspage.MobileMenuAndGetStarted();
 		planSelectorResultspage.validateZipcodePage(zip, county, isMultiCounty);
 	}
 

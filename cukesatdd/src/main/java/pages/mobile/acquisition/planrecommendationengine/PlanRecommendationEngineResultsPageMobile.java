@@ -624,14 +624,16 @@ public class PlanRecommendationEngineResultsPageMobile extends UhcDriver {
 		int count = DrugsInPRE.size();
 		drugsCoveredInVPP(count);
 		removeDrugs(count);
-		vppToPre();
+		//vppToPre();
+		MobileMenuAndGetStarted();
 		validateDrugPage(flow, true);
 	}
 
 	public void startnowtilldrugs() {
 		System.out.println("Navigating to PRE Using StartNow: ");
 		flow = PlanRecommendationEngineStepDefinition.PREflow;
-		vppToPre();
+		MobileMenuAndGetStarted();
+		//vppToPre();
 		validateDrugPage(flow, false);
 	}
 
