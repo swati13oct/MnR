@@ -20,7 +20,7 @@ public class AboutUsAARPPageMobile extends GlobalWebElements{
 	@FindBy(xpath = "//div[contains(@class,'breadcrumb aem-GridColumn aem-GridColumn--default--12')]")
 	public static WebElement header;
 	
-	@FindBy(xpath = "//section[contains(@class,'meded-article-content')]//p[string-length(text()) > '1']")
+	@FindBy(xpath = "//span[contains(text(),'UnitedHealthcare is dedicated to helping people li')]")
 	public static WebElement abountUsBodyParaSection;
 	
 	

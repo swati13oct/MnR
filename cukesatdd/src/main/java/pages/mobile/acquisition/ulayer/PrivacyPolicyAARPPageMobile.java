@@ -10,10 +10,10 @@ import pages.acquisition.ulayer.GlobalWebElements;
 
 public class PrivacyPolicyAARPPageMobile extends GlobalWebElements{
 	 
-		@FindBy(xpath = "//*[contains(@class,'meded-article-header__title')]")
+		@FindBy(xpath = "//span[@class='heading-1']")
 		public static WebElement header;
 		
-		@FindBy(xpath = "(//section[contains(@class,'meded-article-content')]//p)[1]")
+		@FindBy(xpath = "//h2//span[contains(@class,'paragraph')]")
 		public static WebElement pageContent_Para1;
 		
 		public PrivacyPolicyAARPPageMobile(WebDriver driver) {
@@ -25,7 +25,8 @@ public class PrivacyPolicyAARPPageMobile extends GlobalWebElements{
 		@Override
 		public void openAndValidate() {
 			CommonUtility.waitForPageLoadNew(driver, header, 30);
-			validateNew(pageContent_Para1);
+			
+			validateNew(pageContent_Para1,5);
 		}
 
 		
