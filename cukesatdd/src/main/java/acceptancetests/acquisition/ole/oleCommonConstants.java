@@ -46,7 +46,7 @@ public class oleCommonConstants {
 	public static final String HEALTH_INSURANCE_NAME = "healthinsurancename";
 	public static final String GROUP_NUMBER = "groupnumber";
 	public static final String MEMBER_NUMBER = "membernumber";
-	public static final String CONFIRMATION_NUMBER = "membernumber";
+	public static final String CONFIRMATION_NUMBER = "confirmationnumber";
 	public static final String PRESCRIPTION_COVERAGE_NAME = "prescriptioncoveragename";
 	public static final String PRESCRIPTION_GROUP_NUMBER = "pdgroupnumber";
 	public static final String PRESCRIPTION_MEMBER_NUMBER = "pdmembernumber";

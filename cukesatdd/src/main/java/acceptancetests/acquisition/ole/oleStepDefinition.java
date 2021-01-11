@@ -2437,6 +2437,7 @@ public class oleStepDefinition {
 		 * getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG,
 		 * "true"); Assert.assertTrue(true); } else {
 		 */
+	String ConfirmationNumber="";
 			if (!(MRScenario.environment.equalsIgnoreCase("offline")
 					|| MRScenario.environment.equalsIgnoreCase("prod"))) {
 				ReviewSubmitPage reviewSubmitPage = (ReviewSubmitPage) getLoginScenario()
@@ -2445,9 +2446,15 @@ public class oleStepDefinition {
 				if (oleConfirmationPage != null) {
 
 					getLoginScenario().saveBean(OLE_PageConstants.OLE_CONFIRMATION_PAGE, oleConfirmationPage);
+					getLoginScenario().saveBean(OLE_PageConstants.CONFIRMATION_NUMBER,ConfirmationNumber);
+					getLoginScenario().saveBean(oleCommonConstants.CONFIRMATION_NUMBER,ConfirmationNumber);
+				
 					System.out.println("OLE Confirmation Page is Displayed");
 				} else {
 					getLoginScenario().saveBean(OLE_PageConstants.OLE_CONFIRMATION_PAGE, oleConfirmationPage);
+					getLoginScenario().saveBean(OLE_PageConstants.CONFIRMATION_NUMBER,ConfirmationNumber);
+					getLoginScenario().saveBean(oleCommonConstants.CONFIRMATION_NUMBER,ConfirmationNumber);
+					
 					System.out.println("OLE Confirmation Page is NOT Displayed : OLE Submission Failed");				}
 			} else {
 				System.out.println("Skipping the submit functionality in Offline-Prod environment");
@@ -3079,15 +3086,19 @@ public void the_user_validates_the_OLE_Submission_Details_in_GPS(DataTable arg1)
 				Map<String, String> DetailsMap = new HashMap<String, String>();
 
 				System.out.println("--------------------Storing Data for VPP Page Started----------------------");
-
+				
+		
 				//VPP Page
 				String PlanName = (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_NAME);
+				//-------------------------------------------------------------------------------------
 				/*DetailsMap.put("Plan Name", PlanName.toUpperCase());
 				DetailsMap.put("Plan Year", (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_YEAR));	
 				String county = (String) getLoginScenario().getBean(oleCommonConstants.OLE_COUNTY);
 				DetailsMap.put("County", county.toUpperCase());
 				 */
-				System.out.println("--------------------Storing Data for VPP Page Ended----------------------");
+				DetailsMap.put("Confirmation No", (String) getLoginScenario().getBean(oleCommonConstants.CONFIRMATION_NUMBER));
+				
+				System.out.println("--------------------Storing Data for Confirmation Number----------------------");
 
 				//------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -3487,7 +3498,7 @@ public void the_user_validates_the_online_Enrollment_details_on_Review_and_Submi
 		DetailsMap.put("PCP Name", (String) getLoginScenario().getBean(oleCommonConstants.PCP_NAME));
 		DetailsMap.put("PCP Number", (String) getLoginScenario().getBean(oleCommonConstants.PCP_NUMBER));
 		DetailsMap.put("PCP Recently Visited", (String) getLoginScenario().getBean(oleCommonConstants.PCP_RECENTLY_VISITED));
-		DetailsMap.put("Medicaid Number", (String) getLoginScenario().getBean(oleCommonConstants.MEDICAID_NUMBER));
+		DetailsMap.put("Medicaid Number", (String) getLoginScenario().getBean(OLE_PageConstants.MEDICAID_NUMBER));
 
 		DetailsMap.put("Proposed Effective date", (String) getLoginScenario().getBean(oleCommonConstants.PROPOSED_EFF_DATE));
 		DetailsMap.put("Mailing Apartment Number", (String) getLoginScenario().getBean(oleCommonConstants.MAILING_APARTMENT_NUMBER));
@@ -3561,7 +3572,7 @@ if (MedicaidInformationStatus) {
 			medicareInfoPage);
 	System.out.println("OLE Medicaid Questions in Medicare Information Page - Medicaid Details are entered");
 	getLoginScenario().saveBean(oleCommonConstants.MEDICAID_NUMBER, MemberDetailsMap.get("MedicaidNumber"));
-	getLoginScenario().saveBean(oleCommonConstants.MEDICAID_NUMBER, MemberDetailsMap.get("MedicaidNumber"));
+	getLoginScenario().saveBean(OLE_PageConstants.MEDICAID_NUMBER, MemberDetailsMap.get("MedicaidNumber"));
 	
 	Assert.assertTrue(true);
 }
@@ -3708,7 +3719,7 @@ public void the_user_navigates_to_Disclosure_Authorization_Page_Medicaid_Effecti
 		
 	getLoginScenario().saveBean(oleCommonConstants.PARTA_EFFECTIVE, MedicareDetailsMap.get("PartA Date"));
 	getLoginScenario().saveBean(oleCommonConstants.PARTB_EFFECTIVE, MedicareDetailsMap.get("PartB Date"));
-	getLoginScenario().saveBean(oleCommonConstants.MEDICAID_NUMBER, MedicareDetailsMap.get("MedicaidNumber"));
+	//getLoginScenario().saveBean(oleCommonConstants.MEDICAID_NUMBER, MedicareDetailsMap.get("MedicaidNumber"));
 		Assert.assertTrue(true);
 	}
 	else
