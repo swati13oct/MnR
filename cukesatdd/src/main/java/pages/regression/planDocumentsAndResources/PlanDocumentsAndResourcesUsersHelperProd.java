@@ -483,7 +483,7 @@ public class PlanDocumentsAndResourcesUsersHelperProd {
 				targetTestDocList.add("Commitment to quality");
 				targetTestDocList.add("UnitedHealthcare Medicare Advantage Coverage Summaries");
 				targetTestDocList.add("Member rights and responsibilities");
-				targetTestDocList.add("Potential for Contract Termination");
+				//targetTestDocList.add("Potential for Contract Termination"); //note: Kari - starting 01/22 release no longer show this doc for group user
 				targetTestDocList.add("Prescription drug coverage determinations and appeals");
 				targetTestDocList.add("Prescription Drug Transition Process");
 				targetTestDocList.add("Medication Therapy Management (MTM) Program");
@@ -500,7 +500,7 @@ public class PlanDocumentsAndResourcesUsersHelperProd {
 				targetTestDocList.add("Commitment to quality");
 				targetTestDocList.add("UnitedHealthcare Medicare Advantage Coverage Summaries");
 				//targetTestDocList.add("Member rights and responsibilities");
-				//targetTestDocList.add("Potential for Contract Termination");
+				//targetTestDocList.add("Potential for Contract Termination"); //note: Kari - starting 01/22 release no longer show this doc for group user
 				//targetTestDocList.add("Prescription drug coverage determinations and appeals");
 				//targetTestDocList.add("Prescription Drug Transition Process");
 				//targetTestDocList.add("Medication Therapy Management (MTM) Program");
@@ -517,7 +517,7 @@ public class PlanDocumentsAndResourcesUsersHelperProd {
 				//targetTestDocList.add("Commitment to quality");
 				//targetTestDocList.add("UnitedHealthcare Medicare Advantage Coverage Summaries");
 				targetTestDocList.add("Member rights and responsibilities");
-				targetTestDocList.add("Potential for Contract Termination");
+				//targetTestDocList.add("Potential for Contract Termination"); //note: Kari - starting 01/22 release no longer show this doc for group user
 				targetTestDocList.add("Prescription drug coverage determinations and appeals");
 				targetTestDocList.add("Prescription Drug Transition Process");
 				targetTestDocList.add("Medication Therapy Management (MTM) Program");
@@ -1178,7 +1178,7 @@ public class PlanDocumentsAndResourcesUsersHelperProd {
 				//targetTestDocList.add("Commitment to quality");
 				//targetTestDocList.add("UnitedHealthcare Medicare Advantage Coverage Summaries");
 				//targetTestDocList.add("Member rights and responsibilities");
-				//targetTestDocList.add("Potential for Contract Termination");
+				//targetTestDocList.add("Potential for Contract Termination"); //note: Kari - starting 01/22 release no longer show this doc for group user
 				//targetTestDocList.add("Seasonal flu shot information");
 				return targetTestDocList;
 			}
@@ -1190,7 +1190,7 @@ public class PlanDocumentsAndResourcesUsersHelperProd {
 				targetTestDocList.add("Commitment to quality");
 				targetTestDocList.add("UnitedHealthcare Medicare Advantage Coverage Summaries");
 				targetTestDocList.add("Member rights and responsibilities");
-				targetTestDocList.add("Potential for Contract Termination");
+				//targetTestDocList.add("Potential for Contract Termination"); //note: Kari - starting 01/22 release no longer show this doc for group user
 				targetTestDocList.add("Seasonal flu shot information");
 				return targetTestDocList;
 			}
@@ -1315,12 +1315,12 @@ public class PlanDocumentsAndResourcesUsersHelperProd {
 		if (section.equals("Provider and Pharmacy Directories") || section.equals("Provider Directory") || section.equals("Pharmacy Directory")) {//note: PD
 			if (subSection.equals("EN-currentYear")) {
 				targetTestDocList = new ArrayList<String>();
-				targetTestDocList.add("Pharmacy Directory Information");
+				//targetTestDocList.add("Pharmacy Directory Information");
 				return targetTestDocList;
 			} 
 			if (subSection.equals("ES-currentYear")) {
 				targetTestDocList = new ArrayList<String>();
-				targetTestDocList.add("Informaci.n del Directorio de Farmacia"); //note: regex
+				//targetTestDocList.add("Informaci.n del Directorio de Farmacia"); //note: regex
 				return targetTestDocList;
 			} 
 			if (subSection.equals("ZH-currentYear")) {
@@ -1629,8 +1629,8 @@ public class PlanDocumentsAndResourcesUsersHelperProd {
 				targetTestDocList.add("Schedule of benefits");
 				targetTestDocList.add("Certificate of Coverage");
 				targetTestDocList.add("Your Plan Getting Started");
-				targetTestDocList.add("Privacy Notice");
-				targetTestDocList.add("CDI Long Notice");
+				//targetTestDocList.add("Privacy Notice");
+				//targetTestDocList.add("CDI Long Notice");
 				return targetTestDocList;
 			} 
 			if (subSection.equals("ES")) {
@@ -1748,7 +1748,7 @@ public class PlanDocumentsAndResourcesUsersHelperProd {
 				targetTestDocList.add("UnitedHealthcare Medicare Advantage Coverage Summaries");
 				targetTestDocList.add("Commitment to quality");
 				targetTestDocList.add("Member rights and responsibilities");
-				targetTestDocList.add("Potential for Contract Termination");
+				//targetTestDocList.add("Potential for Contract Termination"); //note: Kari - starting 01/22 release no longer show this doc for group user
 				targetTestDocList.add("Seasonal flu shot information");
 				return targetTestDocList;
 			}
@@ -1760,7 +1760,7 @@ public class PlanDocumentsAndResourcesUsersHelperProd {
 				targetTestDocList.add("UnitedHealthcare Medicare Advantage Coverage Summaries");
 				//targetTestDocList.add("Commitment to quality");
 				//targetTestDocList.add("Member rights and responsibilities");
-				//targetTestDocList.add("Potential for Contract Termination");
+				//targetTestDocList.add("Potential for Contract Termination"); //note: Kari - starting 01/22 release no longer show this doc for group user
 				//targetTestDocList.add("Seasonal flu shot information");
 				return targetTestDocList;
 			}
@@ -1772,7 +1772,7 @@ public class PlanDocumentsAndResourcesUsersHelperProd {
 				//targetTestDocList.add("UnitedHealthcare Medicare Advantage Coverage Summaries");
 				targetTestDocList.add("Commitment to quality");
 				targetTestDocList.add("Member rights and responsibilities");
-				targetTestDocList.add("Potential for Contract Termination");
+				//targetTestDocList.add("Potential for Contract Termination"); //note: Kari - starting 01/22 release no longer show this doc for group user
 				targetTestDocList.add("Seasonal flu shot information");
 				return targetTestDocList;
 			}
@@ -2793,7 +2793,7 @@ public class PlanDocumentsAndResourcesUsersHelperProd {
 				targetTestDocList.add("UnitedHealthcare Medicare Advantage Coverage Summaries");
 				//keep targetTestDocList.add("Step Therapy for Part B Drugs");
 				targetTestDocList.add("Member rights and responsibilities");
-				targetTestDocList.add("Potential for Contract Termination");
+				//targetTestDocList.add("Potential for Contract Termination"); //note: Kari - starting 01/22 release no longer show this doc for group user
 				targetTestDocList.add("Seasonal flu shot information");
 				return targetTestDocList;
 			}
@@ -2806,7 +2806,7 @@ public class PlanDocumentsAndResourcesUsersHelperProd {
 				targetTestDocList.add("UnitedHealthcare Medicare Advantage Coverage Summaries");
 				//keep targetTestDocList.add("Step Therapy for Part B Drugs");
 				//targetTestDocList.add("Member rights and responsibilities");
-				//targetTestDocList.add("Potential for Contract Termination");
+				//targetTestDocList.add("Potential for Contract Termination"); //note: Kari - starting 01/22 release no longer show this doc for group user
 				//targetTestDocList.add("Seasonal flu shot information");
 				return targetTestDocList;
 			}
@@ -2819,7 +2819,7 @@ public class PlanDocumentsAndResourcesUsersHelperProd {
 				//targetTestDocList.add("UnitedHealthcare Medicare Advantage Coverage Summaries");
 				//keep targetTestDocList.add("Step Therapy for Part B Drugs");
 				targetTestDocList.add("Member rights and responsibilities");
-				targetTestDocList.add("Potential for Contract Termination");
+				//targetTestDocList.add("Potential for Contract Termination"); //note: Kari - starting 01/22 release no longer show this doc for group user
 				targetTestDocList.add("Seasonal flu shot information");
 				return targetTestDocList;
 			}
@@ -3320,14 +3320,14 @@ public class PlanDocumentsAndResourcesUsersHelperProd {
 				targetTestDocList = new ArrayList<String>();
 				targetTestDocList.add("Provider Directory");
 				targetTestDocList.add("Vendor Information Sheet");
-				targetTestDocList.add("Pharmacy Directory Information");
+				//targetTestDocList.add("Pharmacy Directory Information");
 				return targetTestDocList;
 			} 
 			if (subSection.equals("ES-currentYear")) {
 				targetTestDocList = new ArrayList<String>();
 				targetTestDocList.add("Directorio de Proveedores");
 				targetTestDocList.add("Vendor Information Sheet"); 
-				targetTestDocList.add("Informaci.n del Directorio de Farmacia"); //note: regex
+				//targetTestDocList.add("Informaci.n del Directorio de Farmacia"); //note: regex
 				return targetTestDocList;
 			} 
 			if (subSection.equals("ZH-currentYear")) {
@@ -3603,7 +3603,7 @@ public class PlanDocumentsAndResourcesUsersHelperProd {
 				targetTestDocList.add("Commitment to quality");
 				//targetTestDocList.add("UnitedHealthcare Medicare Advantage Coverage Summaries");
 				//targetTestDocList.add("Member rights and responsibilities");
-				//targetTestDocList.add("Potential for Contract Termination");
+				//targetTestDocList.add("Potential for Contract Termination"); //note: Kari - starting 01/22 release no longer show this doc for group user
 				//targetTestDocList.add("Seasonal flu shot information");
 				return targetTestDocList;
 			}
@@ -3615,7 +3615,7 @@ public class PlanDocumentsAndResourcesUsersHelperProd {
 				//targetTestDocList.add("Commitment to quality");
 				targetTestDocList.add("UnitedHealthcare Medicare Advantage Coverage Summaries");
 				targetTestDocList.add("Member rights and responsibilities");
-				targetTestDocList.add("Potential for Contract Termination");
+				//targetTestDocList.add("Potential for Contract Termination"); //note: Kari - starting 01/22 release no longer show this doc for group user
 				targetTestDocList.add("Seasonal flu shot information");
 				return targetTestDocList;
 			}
@@ -3710,12 +3710,12 @@ public class PlanDocumentsAndResourcesUsersHelperProd {
 		if (section.equals("Provider and Pharmacy Directories") || section.equals("Provider Directory") || section.equals("Pharmacy Directory")) {//note: PD
 			if (subSection.equals("EN-currentYear")) {
 				targetTestDocList = new ArrayList<String>();
-				targetTestDocList.add("Pharmacy Directory Information");
+				//targetTestDocList.add("Pharmacy Directory Information");
 				return targetTestDocList;
 			} 
 			if (subSection.equals("ES-currentYear")) {
 				targetTestDocList = new ArrayList<String>();
-				targetTestDocList.add("Informaci.n del Directorio de Farmacia"); //note: regex
+				//targetTestDocList.add("Informaci.n del Directorio de Farmacia"); //note: regex
 				return targetTestDocList;
 			} 
 			if (subSection.equals("ZH-currentYear")) {

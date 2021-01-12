@@ -412,6 +412,12 @@ public class ProviderSearchCommonStepDefinition {
 				.getBean(PageConstants.PROVIDER_SEARCH_PAGE);
 		providerSearchPage.verifyProviderSearchRallyPageDisplayed();
 	}
-
+	@When("^user removes existing provider and selects a provider and retuns to VPP page$")
+	public void user_remove_existing_Provider_selects_provider_and_return_vpp_page_ulayer() {
+		ProviderSearchPage providerSearchPage = (ProviderSearchPage) getLoginScenario()
+				.getBean(PageConstants.PROVIDER_SEARCH_PAGE);
+		VPPPlanSummaryPage plansummaryPage = providerSearchPage.selectsProvider();
+		Assert.assertTrue("Not able to return to Plan Summary page", plansummaryPage != null);
+	}
 	}
 
