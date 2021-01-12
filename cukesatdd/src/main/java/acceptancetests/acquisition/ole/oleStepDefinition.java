@@ -15,6 +15,7 @@ import acceptancetests.acquisition.vpp.VPPCommonConstants;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.OLE_PageConstants;
 import acceptancetests.data.PageConstants;
+import acceptancetests.memberredesign.providerSearch.ProviderSearchCommonConstants;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
 import cucumber.api.Scenario;
@@ -3062,7 +3063,7 @@ public void the_user_validates_the_Prescription_drugcoverage_questions_in_Medica
 			Assert.fail("OLE Other Insurance Questions in Medicare Information Page - Adding Member Details Failed");
 	}
 
-
+@SuppressWarnings("unchecked")
 @Then("^the user validates the OLE Submission Details in GPS$")
 public void the_user_validates_the_OLE_Submission_Details_in_GPS(DataTable arg1) throws Throwable {
 		
@@ -3077,6 +3078,11 @@ public void the_user_validates_the_OLE_Submission_Details_in_GPS(DataTable arg1)
 		String AuthorizationRiderFlag = MemberDetailsMap.get("Auth Flag");
 		String MailingAddressQuestion = MemberDetailsMap.get("Mailing Address Question");
 		String [] dateArray = null;
+		
+		List<String> testNote=(List<String>) getLoginScenario().getBean(ProviderSearchCommonConstants.TEST_NOTE);
+		if (testNote==null)
+			testNote=new ArrayList<String>();
+
 		
 		if (!(MRScenario.environment.equalsIgnoreCase("offline")
 				|| MRScenario.environment.equalsIgnoreCase("prod")) ) {
@@ -3427,11 +3433,16 @@ public void the_user_validates_the_OLE_Submission_Details_in_GPS(DataTable arg1)
 					System.out.println("--------------------Storing Data for Preliminary questions and Use and disclosure  Ended----------------------"+disclosureprovideraddress);
 				}						
 				//---------------------------------------------------//	
+				
+				testNote.add("===================================================");
+				testNote.add("\tValidation for able to print all the values from the GPS");
+
 				boolean Validation_Status = OLEGPSValidation.validate_GPS_for_Plantype(DetailsMap);
 				if (Validation_Status) {
 					System.out.println("OLE Confirmation Page : All Plan Details Validated in GPS");
 					getLoginScenario().saveBean(OLE_PageConstants.OLE_CONFIRMATION_PAGE, OLEGPSValidation);
 					Assert.assertTrue(true);
+					testNote.add("\tPASSED- able to print all the values from the GPS");
 				} else {
 					System.out.println("OLE Confirmation Page : All Plan and Member Details  NOT validated in GPS");
 					Assert.fail("OLE Confirmation Page : All Plan and Member Details  NOT validated in GPS");
@@ -3780,16 +3791,17 @@ public void the_user_navigates_to_Review_and_Submit_Page_clickon_Edit_Medicare_P
 		System.out.println("OLE logo image is clicked on OLE Pages");
 	}
 	
+	//note: added code to print test results note in jenkins report at the end of test for successful cases
 	@cucumber.api.java.After
-	public void testResultNote(Scenario scenario) { 
-		if(null!=getLoginScenario().getBean(oleCommonConstants.TEST_RESULT_NOTE)) {   
-			List<String> testNote=(List<String>) getLoginScenario()
-					.getBean(oleCommonConstants.TEST_RESULT_NOTE);
-			for (String s: testNote) {   
-				scenario.write(s);				
+		public void testResultNote(Scenario scenario) { 
+			if(null!=getLoginScenario().getBean(oleCommonConstants.TEST_RESULT_NOTE)) {   
+				@SuppressWarnings("unchecked")   
+				List<String> testNote=(List<String>) getLoginScenario()
+						.getBean(oleCommonConstants.TEST_RESULT_NOTE);
+				for (String s: testNote) {   
+					scenario.write(s);
+				}
+				testNote.clear(); 
 			}
-			testNote.clear(); 
-		}
-
-}
+	}
 }
