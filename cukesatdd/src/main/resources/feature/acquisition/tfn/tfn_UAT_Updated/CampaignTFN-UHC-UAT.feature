@@ -1,7 +1,7 @@
 Feature: UAT-SCripts To test Campaign TFN in all flows on UHC site
 
 #######################Script 1: Direct traffic########################################
-   @Scenario_1_2_DirectTraffic__UHC_UAT 
+   @Scenario_1_2_DirectTraffic__UHC_UAT @UATRegression 
   Scenario Outline: <scenario>  Verify TFN in VPP Plan Details and OLE pages, DCE,
     Given the user is on the uhcmedicaresolutions site landing page
     And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
@@ -46,7 +46,7 @@ Then the user navigates to homepage validates Federal TFN
   
    #######################Script 2: Campaign traffic########################################
  
-   @Scenario_2_CampaignTraffic_UHC_UAT 
+   @Scenario_2_CampaignTraffic_UHC_UAT  @UATRegression
   Scenario Outline: <scenario> Verify TFN for different plan types through Campaign Traffic
    	Given the user Starts WebDriver
       Given the user is on following acquisition site from Campaign Traffic
@@ -74,7 +74,7 @@ Then the user navigates to homepage validates Federal TFN
    
    
    #######################Script 5: Email Validation########################################
-   @Scenario_5_2_DirectTraffic_Email_UHC_UAT
+   @Scenario_5_2_DirectTraffic_Email_UHC_UAT @UATRegression
   Scenario Outline: <scenario>  Verify TFN through Email validation
    Given the user is on the uhcmedicaresolutions site landing page
     And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
@@ -104,7 +104,7 @@ Then the user navigates to homepage validates Federal TFN
        |Scenario 5-Email - UMS 	|  880180 | 8014300|?WT.mc_id=8014300&mrcid=em:Acq:MR%7CNTM6501%7CEGEM3108%7C::8014300 |//a[contains(@class, 'tel') and contains(@href, 'tel')]|medicare-articles.html                         |//button[@id='sam-call-button']//span[contains(@class,'sam__button__text desktop')]|  shop/medicare-supplement-plans.html                       |(//*[contains(@class,'call')]//a[contains(@class,'tel')])[2]|
        
            #######################Script 6: External Link########################################
-   @Scenario_6_External_Link_UHC_UAT
+   @Scenario_6_External_Link_UHC_UAT @UATRegression
   Scenario Outline: <scenario>  Verify TFN through External Links
     Given the user Starts WebDriver
    Given the user is on UHC medicare solutions acquisition site from Campaign Traffic
