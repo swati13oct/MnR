@@ -52,6 +52,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "//*[contains(@id,'zipcodemeded-0')]")
 	private WebElement zipCodeShopField;
 	
+	@FindBy(xpath = "//input[contains(@id,'zipcodemeded')]")
+	private WebElement zipCodeMedicareField;
+	
 	@FindBy(xpath = "//*[contains(@id,'zipcodemeded')][1]//following-sibling::button//*[contains(text(),'Shop Plans')]")
 	private WebElement viewShopPlansButton;
 	
@@ -61,6 +64,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	//@FindBy(xpath = "//*[contains(@id,'zipcodemeded')][1]//following-sibling::button//*[contains(text(),'Get Started')]")
 	@FindBy(xpath = "(//*[contains(@id,'zipcodemeded')][1]//following-sibling::button)[1]")
 	private WebElement ShopEnrollButton;
+	
+	@FindBy(xpath = "(//button[contains(@class,'zip-button')])[2]")
+	private WebElement LearnMedicareMedsuppEnrollButton;
 	
 	@FindBy(id= "zipcode")
 	private WebElement healthPlansZipcode;
@@ -122,6 +128,10 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	@FindBy(xpath = "//div[@id='subnav_2']//h3/a[contains(text(),'Pharmacy')]")
 	private WebElement pharmacylocator;
+	
+	
+	@FindBy(xpath = "//div[@id='subnav_2']//h3/a[contains(text(),'Provider')]")
+	private WebElement providerlocator;
 
 	@FindBy(id = "ghn_lnk_1")
 	public static WebElement navigationSectionHomeLink;
@@ -272,6 +282,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	
 	@FindBy(id="ghn_lnk_2")
 	private WebElement ShopForaplan;
+	
+	@FindBy(id="ghn_lnk_3")
+	private WebElement learnaboutMedicare;
 	
     @FindBy(xpath=".//*[@id='updates-mobile-form']/div/div[2]/button")
 	private WebElement submit;
@@ -3283,9 +3296,9 @@ action.moveToElement(navigationSectionHomeLink).moveToElement(ourPlansHoverLink)
 			return new MultiCountyModalPage(driver);
 		}
 		return null;
-	}		
+	}	*/	
 	
-	public ProviderSearchPage clicksOnRallyToolFromGlobalHeader() {
+	public ProviderSearchPage clicksOnProviderToolFromGlobalHeader() {
 
 //		Actions action = new Actions(driver);
 //		action.moveToElement(navigationSectionHomeLink).moveToElement(ourPlansHoverLink).build().perform();
@@ -3302,7 +3315,7 @@ action.moveToElement(navigationSectionHomeLink).moveToElement(ourPlansHoverLink)
 
 		}
 		return null;
-	}*/
+	}
 
 	public ProviderSearchPage clicksOnRallyToolFromHomePage() {
 		validateNew(providerSearchFromHomeScreen);
@@ -5436,6 +5449,70 @@ public PrivacyPolicyAARPPage privacypolicyFooterClick() {
 			
 		}
 	
+		
+		public ShopForPlanNavigationPage HoveronalearnaboutMedicare() throws InterruptedException
+	    {             
+	           waitforElement(learnaboutMedicare);
+	     if (learnaboutMedicare.isDisplayed()) {
+	            Actions action = new Actions(driver);
+	           action.moveToElement(learnaboutMedicare).build().perform();
+			    jsMouseOver(learnaboutMedicare);
+	            return new ShopForPlanNavigationPage(driver);
+	     }
+	           else {
+	                  return null;}
+	    }
+		
+		public VPPPlanSummaryPage searchPlansWithOutCountyLearnMedicareMedsupp(String zipcode) throws InterruptedException {
+
+			CommonUtility.waitForPageLoadNew(driver, zipCodeMedicareField, 30);
+			sendkeys(zipCodeMedicareField, zipcode);
+			//jsClickNew(LearnMedicareMedsuppEnrollButton);
+			waitForPageLoadSafari();
+			CommonUtility.waitForPageLoadNew(driver, LearnMedicareMedsuppEnrollButton, 30);
+			String parentWindow = driver.getWindowHandle();
+			jsClickNew(LearnMedicareMedsuppEnrollButton);
+			sleepBySec(3);
+			Set<String> tabs_windows = driver.getWindowHandles();
+			Iterator<String> itr = tabs_windows.iterator();
+			while (itr.hasNext()) {
+				String window = itr.next();
+				if (!parentWindow.equals(window)) {
+					driver.switchTo().window(window);
+				}
+			}
+			CommonUtility.waitForPageLoadNew(driver, zipcodeChangeLink, 30);
+			if (driver.getCurrentUrl().contains("health-plans")) {
+				return new VPPPlanSummaryPage(driver);
+			} else
+				return null;
+		}
+			public VPPPlanSummaryPage searchPlansLearnMedicareMedsupp(String zipcode, String countyName) {
+			CommonUtility.waitForPageLoadNew(driver, zipCodeMedicareField, 30);
+			sendkeys(zipCodeMedicareField, zipcode);
+			CommonUtility.waitForPageLoadNew(driver, LearnMedicareMedsuppEnrollButton, 30);
+			String parentWindow = driver.getWindowHandle();
+			jsClickNew(LearnMedicareMedsuppEnrollButton);
+			sleepBySec(3);
+			Set<String> tabs_windows = driver.getWindowHandles();
+			Iterator<String> itr = tabs_windows.iterator();
+			while (itr.hasNext()) {
+				String window = itr.next();
+				if (!parentWindow.equals(window)) {
+					driver.switchTo().window(window);
+				}
+			}
+			CommonUtility.waitForPageLoad(driver, countyModal, 45);
+			if (validate(countyModal))
+				jsClickNew(driver.findElement(By.xpath("//div[@id='selectCounty']//a[text()='" + countyName + "']")));
+			CommonUtility.waitForPageLoadNew(driver, vppTop, 30);
+			if (driver.getCurrentUrl().contains("plan-summary")) {
+				return new VPPPlanSummaryPage(driver);
+			}
+			return null;
+		}	
+			
+						
 		public ProviderSearchPage clicksOnRallyToolFromGlobalHeader() {
 
 //			Actions action = new Actions(driver);

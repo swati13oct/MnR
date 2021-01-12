@@ -128,7 +128,7 @@ public class ProviderSearchCommonStepDefinition {
 		AcquisitionHomePage acquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		
-		ProviderSearchPage providerSearchPage = acquisitionhomepage.clicksOnRallyToolFromGlobalHeader();
+		ProviderSearchPage providerSearchPage = acquisitionhomepage.clicksOnProviderToolFromGlobalHeader();
 
 		if (providerSearchPage != null) {
 			getLoginScenario().saveBean(PageConstants.PROVIDER_SEARCH_PAGE, providerSearchPage);
