@@ -24,23 +24,29 @@ public class UseAndDisclosureAuthorizationPage extends UhcDriver{
 	@FindBy(xpath = "//*[@for='disclosureHealth']")
 	private WebElement disclosureBox;
 	
-	@FindBy(id = "providerName")
+	//@FindBy(id = "providerName")
+	@FindBy(xpath = "//input[@id='providerName']")
 	private WebElement ProviderName;
 	
-	@FindBy(id = "providerStreetAddress")
+	//@FindBy(id = "providerStreetAddress")
+	@FindBy(xpath= "//input[@id='providerStreetAddress']")
 	private WebElement ProviderStreetAddress;
 	
-	@FindBy(id = "providerCity")
+//	@FindBy(id = "providerCity")
+	@FindBy(xpath = "//input[@id='providerCity']")
 	private WebElement ProviderCity;	
 
-	@FindBy(id = "state")
+	//@FindBy(id = "state")
+	@FindBy(xpath = "//select[@id='state']")
 	private WebElement StateDropDown;
 	
 	
-	@FindBy(id = "providerZip")
+//	@FindBy(id = "providerZip")
+	@FindBy(xpath = "//input[@id='providerZip']")
 	private WebElement ZipCode;
 	
-	@FindBy(id = "providePhoneNumber")
+	//@FindBy(id = "providePhoneNumber")
+	@FindBy(xpath = "//input[@id='providePhoneNumber']")
 	private WebElement ProvidePhoneNumber;
 	
 	@FindBy(id = "ole-form-back-button")
@@ -65,8 +71,8 @@ public class UseAndDisclosureAuthorizationPage extends UhcDriver{
 		CommonUtility.waitForPageLoadNew(driver, disclosureBox, 30);
 	}
 	
-	
-	public PersonalInformationPage Validate_and_Enter_Details_for_YourProvide_Section(Map<String, String> MedicareDetailsMap){
+	/*-----------Updating the Use disclosure page to SEP from Personal Information Page------------*/
+	public SpecialElectionPeriodPage Validate_and_Enter_Details_for_YourProvide_Section(Map<String, String> MedicareDetailsMap){
 		String Providername = MedicareDetailsMap.get("Provider Name");
 		String ProviderAddress = MedicareDetailsMap.get("Provider Street Address");
 		String Providercity = MedicareDetailsMap.get("City");
@@ -91,8 +97,8 @@ public class UseAndDisclosureAuthorizationPage extends UhcDriver{
 		  else{
 			  System.out.println("Disclosure is not displayed"); 
 		  }
-		return new PersonalInformationPage(driver);
-		  
+	//	return new PersonalInformationPage(driver);
+		  return new SpecialElectionPeriodPage(driver);
 
 	}
 }

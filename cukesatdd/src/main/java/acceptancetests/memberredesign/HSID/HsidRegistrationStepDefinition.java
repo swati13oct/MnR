@@ -319,9 +319,18 @@ public class HsidRegistrationStepDefinition {
 		hsidRegistrationConfirmInformationPage.setConfirmationUrl(mailParts[0]);
 	}
 
-	@Then("^user should copy the confirm email url to browser$")
-	public void user_should_copy_the_confirm_email_url_to_browser() throws Throwable {
-		System.out.println("*****user should copy the confirm email url to browser****");
+	@Then("^user should see registration completed unread mail received in provided email address$")
+	public void user_should_see_registration_completed_unread_mail_recieved_in_provided_email_address() throws Throwable {
+		System.out.println("*****user should see registration completed unread mail recieved in provided email address*****");
+		HsidRegistrationConfirmInformation hsidRegistrationConfirmInformationPage = 
+				(HsidRegistrationConfirmInformation) loginScenario.getBean(PageConstants.HSID_REGISTRATION_CONFIRM_INFORMATION);
+		String[] mailParts = hsidRegistrationConfirmInformationPage.getSignInLinkURLFromPostRegistrationCompleteMail();
+		hsidRegistrationConfirmInformationPage.setConfirmationUrl(mailParts[0]);
+	}
+	
+	@Then("^user should copy the email url to browser$")
+	public void user_should_copy_the_email_url_to_browser() throws Throwable {
+		System.out.println("*****user should copy the email url to browser****");
 		HsidRegistrationConfirmInformation hsidRegistrationConfirmInformationPage = 
 				(HsidRegistrationConfirmInformation) loginScenario.getBean(PageConstants.HSID_REGISTRATION_CONFIRM_INFORMATION);
 		
@@ -486,7 +495,31 @@ public class HsidRegistrationStepDefinition {
 
 	}
 	
-	
+	@Then("^Validate registered user login from email link$")
+	public void Validate_registered_user_login_from_email_link(DataTable memberAttributes) throws Throwable {
+		System.out.println("*****user should be at Sign In page*****");
+		List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+					.get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+		
+		String password = memberAttributesMap.get("password");
+        String userName  = (String) getLoginScenario().getBean(LoginCommonConstants.Username);
+    	System.out.println("New user name is-"+userName);
+        
+    	HSIDLoginPage hsidLoginPage = (HSIDLoginPage) loginScenario.getBean(PageConstants.HSID_LOGIN_PAGE);
+		Object successfullLogin = hsidLoginPage.loginFromCredentialsPage(userName, password);
+		if (successfullLogin == null) {
+			Assert.fail("Failed to login for newly registered user from confirmation email link");
+		}
+		System.out.println("Member navigated to: " + successfullLogin.toString());
+		if (!successfullLogin.toString().contains("accounthomepage.AccountHomePage")) {
+			Assert.fail("Test failed. Member navigated to " + successfullLogin.toString() + " post login instead of dashboard");
+		}
+		
+	}
 }
   
 
