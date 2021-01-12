@@ -345,6 +345,14 @@ public class GlobalComponentsCommonStepDefinition {
 		  aquisitionhomepage.clickBrowserBackButton();
 		  
 	  }
+	  
+	  @And("^the user closes the new browser tab$")
+	  public void closes_new_browser_tab() { 
+		  AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage)
+		  getLoginScenario() .getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		  aquisitionhomepage.closeBrowserTab();
+		  
+	  }
 
  @And("^user clicks on visit aarp.org link in the header$")
  public void click_visitAARP_Link_in_the_header() { 

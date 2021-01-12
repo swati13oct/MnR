@@ -25,13 +25,13 @@ Feature: 1.24.1.e Member Individual Health Record - Member Auth - P5 - PharmacyL
     Examples: 
 	    | index | FID     | username  | password  | MemUserName             | planType                 | memberType         | expectLink  | 
 	    | 01    | F424804 | qavgogine | qavgogine | q4_Ship_ANOC_009      | SHIP_MEDICARE SUPPLEMENT | NO_IHR             | false       |
-	    | 02    | F424804 | qavgogine | qavgogine | q2_may_rally032         | MA                       | EXCLUDE_IHR        | false       |
+	    | 02    | F424804 | qavgogine | qavgogine | qq2_jun_grp0428         | MA                       | EXCLUDE_IHR        | false       |
 
     @memAuth_no_ihr_p5_shipCombo
     Examples: 
 	    | index | FID     | username  | password  | MemUserName             | planType                 | memberType         | expectLink | 
 	    | 03    | F424804 | qavgogine | qavgogine | q4_ShipVAS_005     | SHIP_MEDICARE SUPPLEMENT | COMBO_PDP_SHIP_IHR | false      |
-	 #  | 04    | F424804 | qavgogine | qavgogine | Dream_EOB_PDP_001       | SHIP_MEDICARE SUPPLEMENT | COMBO_SHIP_PDP_IHR | false      |
+	 #  | 04    | F424804 | qavgogine | qavgogine | q2_RxRetail_015       | SHIP_MEDICARE SUPPLEMENT | COMBO_SHIP_PDP_IHR | false      |
 	    | 04    | F424804 | qavgogine | qavgogine | GENARO_Q4_COMBO         | SHIP_MEDICARE SUPPLEMENT | COMBO_SHIP_MAPD_IHR | false      |
 
     @memAuth_no_ihr_p5_boaGrp1
@@ -43,7 +43,7 @@ Feature: 1.24.1.e Member Individual Health Record - Member Auth - P5 - PharmacyL
     @memAuth_no_ihr_p5_boaGrp2
     Examples: 
 	    | index | FID     | username  | password  | MemUserName             | planType | memberType         | expectLink | 
-	    | 07    | F424804 | qavgogine | qavgogine | q2_jun_grp0156          | MA       | BOA12324_TERM_GROUP_IHR | false |
+	    | 07    | F424804 | qavgogine | qavgogine | testUserGroupBOA12324          | MA       | BOA12324_GROUP_IHR | false |
 
     #----------- begin - cases with IHR link
     @memAuth_ihr_p5_ma_mapd
