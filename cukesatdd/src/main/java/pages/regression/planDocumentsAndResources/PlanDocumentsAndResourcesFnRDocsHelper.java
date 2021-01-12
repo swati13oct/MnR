@@ -317,10 +317,8 @@ public class PlanDocumentsAndResourcesFnRDocsHelper {
 							||	planType.toUpperCase().equals("MAPD") 
 							|| planType.toUpperCase().equals("SSP")))
 				testInputInfoMap.put("expectedUrl", "Potential_for_Contract_Termination.pdf");
-			if (MRScenario.environment.equalsIgnoreCase("offline") || MRScenario.environment.equalsIgnoreCase("prod")) {
-				if (planType.toUpperCase().equals("MA") && memberType.toUpperCase().contains("GROUP") && memberType.toUpperCase().contains("TERM")) 
-					testInputInfoMap.put("expectedUrl", "PotentialContractTermination.pdf");
-			}
+			if (planType.toUpperCase().equals("MA") && memberType.toUpperCase().contains("GROUP") && memberType.toUpperCase().contains("TERM")) 
+				testInputInfoMap.put("expectedUrl", "PotentialContractTermination.pdf");
 			
 			testInputInfoMap.put("redirectUrl", "none");
 			testInputInfoMap.put("checkDestUrl", "true");
@@ -485,7 +483,7 @@ public class PlanDocumentsAndResourcesFnRDocsHelper {
 		if (docName.equals("Naturopathy Provider Directory")) {
 			testInputInfoMap.put("docName", docName);
 			//keep testInputInfoMap.put("expectedUrl", "/content/dam/UCP/Group/Naturopathy_Provider_Directory_StofCT.pdf");
-			testInputInfoMap.put("expectedUrl", "Naturopathy_Provider_Directory_StofCT.pdf");
+			testInputInfoMap.put("expectedUrl", "Naturopathy_Provider_Directory.pdf");
 			testInputInfoMap.put("redirectUrl", "none");
 			testInputInfoMap.put("checkDestUrl", "true");
 			testInputInfoMap.put("switchTab", "true");

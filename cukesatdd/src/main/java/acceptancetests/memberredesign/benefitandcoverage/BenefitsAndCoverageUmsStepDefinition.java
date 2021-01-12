@@ -1477,7 +1477,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 
 
 	@Then("^the user validate vas tiles on vas page")
-	public void validatevastiles(DataTable memberAttributes)
+	public void validatevastiles(DataTable memberAttributes) throws InterruptedException
 	{
 		ValueAddedServicepage valueaddedservices = (ValueAddedServicepage) getLoginScenario()
 				.getBean(PageConstantsMnR.VALUE_ADDED_SERVICES);
@@ -2689,6 +2689,36 @@ public class BenefitsAndCoverageUmsStepDefinition {
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario().getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
 		Assert.assertTrue(benefitsCoveragePage.display_provider_search_tile());
 	}
+	
+	@Then("^validates LEARN MORE ABOUT DRUG TIERS link content for user with insulin$")
+	public void validates_learnMoreAboutDrugTiers_insulin()
+	{
+		String copayCategory = (String) getLoginScenario().getBean(BenefitsAndCoverageCommonConstants.TEST_COPAY_CATEGORY);
+
+		String insulinFlag=(String) getLoginScenario().getBean(BenefitsAndCoverageCommonConstants.TEST_INSULIN);
+
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario().getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
+		benefitsCoveragePage.validate_learnmoreaboutlink_insulin(copayCategory, insulinFlag);
+	}
+
+	@Then("^the user validate rider tile is displayed$")
+	public void validates_riderTile()
+	{
+		
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario().getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
+		Date currentDate=benefitsCoveragePage.getCurrentSystemDate();
+		String dateStr=benefitsCoveragePage.convertDateToStrFormat_MMDDYYYY(currentDate);
+
+		String planType=(String) getLoginScenario().getBean(LoginCommonConstants.PLANTYPE);
+		String memberType=(String) getLoginScenario().getBean(LoginCommonConstants.CATOGERY);
+
+		boolean isComboUser=false;
+		if (memberType.toUpperCase().contains("COMBO"))
+			isComboUser=true;
+
+		benefitsCoveragePage.validateRiderTileDisplay(isComboUser, planType, dateStr);
+	}
+
 	
 }//end of class
 

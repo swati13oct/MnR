@@ -74,7 +74,7 @@ Feature: 1.06.6.1 Member Plans and Documents - section: Forms And Resources - Me
 	@memAuth_active_ma_grp @memAuth_active_ma
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | fnr_sd | fnr_pdmo | fnr_ppi | fnr_rf | fnr_af | fnr_maf | fnr_or | fnr_di |
-      | 10-105 | 15130       | qavgogine | qavgogine | q3_sep_UAT4_Group289    | MA       | GROUP_EFF_PDnR        | true   | false    | false   | true   | true   | false   | true   | true   |
+      | 10-105 | 15130       | qavgogine | qavgogine | q3_sep_UAT4_Group152    | MA       | GROUP_EFF_PDnR        | true   | false    | false   | true   | true   | false   | true   | true   |
 
 	@memAuth_active_mapd_ind @memAuth_active_mapd
 	Examples: 

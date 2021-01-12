@@ -1081,6 +1081,62 @@ public class HSIDLoginPage extends UhcDriver {
 		return false;
 	}
 
+	public Object loginFromCredentialsPage(String username, String password) {
+		validateNew(userNameField);
+		sendkeys(userNameField, username);
+		sendkeys(passwordField, password);
+		hsidSignInButton.click();
+		CommonUtility.waitForPageLoad(driver, authQuestionlabel, 5);
 
+		if (driver.getCurrentUrl().contains("=securityQuestion")) {
+			System.out.println("Landed on security question page...");
+
+			ConfirmSecurityQuestion cs = new ConfirmSecurityQuestion(driver);
+			try {
+				cs.enterValidSecurityAnswer();
+				System.out.println(driver.getCurrentUrl());
+				System.out.println("Check to see if document.readyState is ready...");
+				CommonUtility.checkPageIsReadyNew(driver);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+			//note: do not remove wait, need to give it enough time for the dashboard or error page to load
+			System.out.println("Start to wait for the dashboard (or some form of error page) to load...");
+			try {
+				CommonUtility.checkPageIsReadyNew(driver);
+			} catch (NullPointerException  e) {
+				System.out.println("Sometimes may get NPE due to timing issue, give it one more try before giving up");
+				CommonUtility.checkPageIsReadyNew(driver);
+			}
+			waitToReachDashboard(username);	//note: after page is completed state, still need this wait for the page to finish loading
+
+			if (driver.getCurrentUrl().equals("https://stage-medicare.uhc.com/")) {
+				Assert.fail("***** Error in loading  Redesign Account Landing Page ***** username: "+username+" - got redirect back to login page after answered security question");
+			}
+		}
+
+		if (currentUrl().contains("/dashboard")) {
+			System.out.println(driver.getCurrentUrl());
+			return new AccountHomePage(driver);
+		} else if (currentUrl().contains("home/my-account-home.html")
+				|| currentUrl().contains("/login.html")) {
+			return new AccountHomePage(driver);
+		} else if (currentUrl().contains("terminated-plan.html")) {
+			return new TerminatedHomePage(driver);
+		} else if (currentUrl().contains("testharness.html")) {
+			System.out.println("Post login current Url is-->"+currentUrl());
+			return new TestHarness(driver);
+		} else if (currentUrl().contains("gogreen-splash")) {
+			System.out.println("Post login current Url is-->"+currentUrl());
+			return new GoGreenPage(driver);
+		} else if (driver.getCurrentUrl().contains("/my-documents/")) { //note: for deeplink validation
+			return new MyDocumentsPage(driver);
+		} else if (driver.getCurrentUrl().contains("/claims")) { //note: for deeplink validation
+			return new ClaimsSummaryPage(driver);
+		}
+
+		return null;
+	}
 
 }

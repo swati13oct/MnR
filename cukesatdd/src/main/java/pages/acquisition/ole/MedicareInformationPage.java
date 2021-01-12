@@ -88,7 +88,8 @@ public class MedicareInformationPage extends UhcDriver{
 	@FindBy(id = "emailAddress")
 	private WebElement emailAddressField;
 	
-	@FindBy(id = "medicareClaimNumber")
+	//@FindBy(id = "medicareClaimNumber")
+	@FindBy(xpath = "//input[contains(@id, 'medicareClaimNumber')]")
 	private WebElement claimNumberField;
 	
 	@FindBy(id = "SSN")
@@ -239,6 +240,8 @@ public class MedicareInformationPage extends UhcDriver{
 		
 		@FindBy(xpath="//*[contains(@for,'diabetesQuestionYes')]")
 		private WebElement diabetesQuestions1Yes;
+		@FindBy(xpath="//*[contains(@for,'diabetesQuestionNo')]")
+		private WebElement diabetesQuestions1No;
 		
 		@FindBy(xpath="//*[contains(@for,'oralMedicationQuestionNo')]")
 		private WebElement diabetesQuestions2No;
@@ -288,8 +291,46 @@ public class MedicareInformationPage extends UhcDriver{
 		@FindBy(xpath="//*[contains(@for,'heartorlegsQuestionNo')]")
 		private WebElement CardiovascularDisordersQ6No;
 	
-	
-	public MedicareInformationPage(WebDriver driver) {
+		@FindBy(xpath="//div[contains(@class,'enrollmentAllowed-error-msg ng-star-inserted')]")
+		private WebElement ErrorMessage_CSNP;
+		
+		@FindBy(xpath="//a[contains(@aria-label,'Edit Medicare Insurance Information')]")
+		private WebElement EditMedicareInformation;
+		
+		@FindBy(xpath="//button[contains(text(),'Save Changes')]")
+		private WebElement ReviewEditSavechanges;
+		
+		@FindBy(xpath = "//a[contains(@class,'cancel-button modal-l')]")
+		private WebElement CancelEnrollmentLinkOLE;
+
+		@FindBy(xpath = "(//div[contains(@id,'enroll-cancel-profile')])[1]")
+		private WebElement CancellationModalOLE;
+		@FindBy(xpath = "(//a[contains(text(),'Create a Profile')])[2]")
+		private WebElement CreateProfile;
+
+		@FindBy(xpath = "(//a[contains(text(),'Sign In')])[2]")
+		private WebElement SignIn;
+		@FindBy(xpath = "(//a[contains(text(),'Leave Online Application')])[2]")
+		private WebElement LeaveOnlineApplication;
+
+		@FindBy(xpath = "(//a[contains(@class,'oleClose')])[3]")
+		private WebElement closepopup;
+
+		@FindBy(xpath = "(//a[contains(@id,'save-return-button')])[1]")
+		private WebElement SaveEnrollmentLinkOLE;		
+		@FindBy(xpath = "(//div[contains(@id,'enroll-save-popup')])[1]")
+		private WebElement SaveModalOLE;
+
+		@FindBy(xpath = "(//a[contains(text(),'Create a Profile')])[1]")
+		private WebElement CreateProfilesave;
+
+		@FindBy(xpath = "(//a[contains(text(),'Sign In')])[1]")
+		private WebElement SaveSignIn;
+
+		@FindBy(xpath = "(//a[contains(@class,'oleClose')])[1]")
+		private WebElement Saveclosepopup;
+		
+		public MedicareInformationPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
 		openAndValidate();
@@ -800,6 +841,7 @@ public boolean validate_notRequired_ESRD_Fields(String planType, String medicaid
 				Medicaid_Validation = false;
 			}
 			jsClickNew(medicaiddyes);
+			medicaidnumTxtBx.sendKeys(medicaidNumber);
 			System.out.println("Medicaid question : Yes clicked"+medicaiddyes.isSelected());
 			if(validateNonPresenceOfElement(MedicaidError) && validateNonPresenceOfElement(CancelButton) && NextBtn.isEnabled()){
 				System.out.println("non DSNP - Medicare Number not required");
@@ -818,14 +860,43 @@ public boolean validate_notRequired_ESRD_Fields(String planType, String medicaid
 	
 }
 
-public boolean validate_Required_Fields_CSNP( String medicaidNumber, String PlanName) {
-	//System.out.println("plantype : "+plantype+" Medicare Number : "+medicaidNumber);
+public boolean validate_Required_Fields_CSNP( Map<String, String> MemberDetailsMap,String PlanName) {
 	
-			if(PlanName.contains("Chronic") || PlanName.contains("Gold")){
-				System.out.println("Medicaid Question is displayed for "+PlanName+" : "+validate(MedicaidQuestion));
+			if(PlanName.contains("Chronic") || PlanName.contains("Gold") ||PlanName.contains("Silver")){
+				/*System.out.println("Medicaid Question is displayed for "+PlanName+" : "+validate(MedicaidQuestion));
 				jsClickNew(medicaiddno);
-				System.out.println("Medicaid question : No clicked"+medicaiddno.isSelected());
+				System.out.println("Medicaid question : No clicked"+medicaiddno.isSelected());*/
 				
+				if(validate(diabetesQuestions1No) && validate(diabetesQuestions2No) 
+						&& validate(chronicHeartFailureQuestion1No) && validate(chronicHeartFailureQuestion2No) && validate(chronicHeartFailureQuestion3No) && validate(CardiovascularDisordersQ1No)
+						&& validate(CardiovascularDisordersQ2No) && validate(CardiovascularDisordersQ3No)&& validate(CardiovascularDisordersQ4No)&& validate(CardiovascularDisordersQ5No)&& validate(CardiovascularDisordersQ6No)){
+					
+					jsClickNew(diabetesQuestions1No);
+					jsClickNew(diabetesQuestions2No);
+					jsClickNew(chronicHeartFailureQuestion1No);	
+					jsClickNew(chronicHeartFailureQuestion2No);	
+					jsClickNew(chronicHeartFailureQuestion3No);	
+					jsClickNew(CardiovascularDisordersQ1No);	
+					jsClickNew(CardiovascularDisordersQ2No);	
+					jsClickNew(CardiovascularDisordersQ3No);
+					jsClickNew(CardiovascularDisordersQ4No);	
+					jsClickNew(CardiovascularDisordersQ5No);
+					jsClickNew(CardiovascularDisordersQ6No);
+
+					System.out.println("All the CSNP Preliminary questions are selected as No");
+					
+					if(validate(ErrorMessage_CSNP) && ErrorMessage_CSNP.isDisplayed()){
+						if(!ErrorMessage_CSNP.getText().contains("We're sorry, to enroll in a Chronic Special needs Plan (C-SNP),")){
+							System.out.println(" Error Message is Not  displayed : "+ErrorMessage_CSNP.getText());
+							return false;
+						}
+						System.out.println("Error Message Error : "+ErrorMessage_CSNP.getText());
+
+					}
+					else{
+						System.out.println("Error Message is not displayed");
+
+					}
 					//Diabetes questions
 					Assert.assertTrue(validateNew(diabetesQuestion1), "diabetes questions are present");
 					validateNew(diabetesQuestions1Yes);
@@ -857,7 +928,8 @@ public boolean validate_Required_Fields_CSNP( String medicaidNumber, String Plan
 				//	waitforElement(disclosureBox);
 					return true;
 		            
-	    }else if(PlanName.contains("Silver")){
+	/*  ----------------  Removed the lines for silver separately---------------------
+	 }else if(PlanName.contains("Silver")){
 			System.out.println("Medicaid Question is displayed for "+PlanName+" : "+validate(MedicaidQuestion));
 			jsClickNew(medicaiddno);
 			System.out.println("Medicaid question : No clicked"+medicaiddno.isSelected());
@@ -876,10 +948,11 @@ public boolean validate_Required_Fields_CSNP( String medicaidNumber, String Plan
 				validateNew(chronicHeartFailureQuestion3No);
 				jsClickNew(chronicHeartFailureQuestion3No);				
 			//	waitforElement(disclosureBox);
-				return true;
+				return true;*/
 	    }
-	
-			else return false;	
+			}
+		return false;
+			
 	
 	
 }
@@ -1168,6 +1241,7 @@ public boolean validate_MedicaidNumberField(String planType, String medicaidNumb
 				Medicaid_Validation = false;
 			}
 			jsClickNew(medicaiddyes);
+			medicaidnumTxtBx.sendKeys(medicaidNumber);
 			System.out.println("Medicaid question : Yes clicked"+medicaiddyes.isSelected());
 			if(validateNonPresenceOfElement(MedicaidError) && validateNonPresenceOfElement(CancelButton) && NextBtn.isEnabled()){
 				System.out.println("non DSNP - Medicare Number not required");
@@ -1222,4 +1296,82 @@ boolean Validation_Flag = true;
 
 }
 
+public CancelOLEModal OpenCancelOLEPages() {
+	validate(CancelEnrollmentLinkOLE);
+	JavascriptExecutor executor = (JavascriptExecutor)driver;
+	executor.executeScript("arguments[0].click();", CancelEnrollmentLinkOLE);
+	
+	//((JavascriptExecutor) driver).executeScript("arguments[0].click;", CancelEnrollmentLink);
+	
+	//CancelEnrollmentLink.click();
+	try {
+		Thread.sleep(6000);
+	} catch (InterruptedException e) {
+		e.printStackTrace();
+	}
+	if(validate(CancellationModalOLE)){
+		System.out.println("OLE Cancel Enrollment Modal is Displayed");
+		validate(CreateProfile);
+		CreateProfile.isDisplayed();
+		validate(SignIn);
+		SignIn.isDisplayed();
+		validate(LeaveOnlineApplication);
+		LeaveOnlineApplication.isDisplayed();
+		closepopup.click();
+		return new CancelOLEModal(driver);
+	}
+	return null;
+}
+
+public SaveandReturnOLEModal OpensavereturnOLEPages() {
+	validate(SaveEnrollmentLinkOLE);
+	JavascriptExecutor executor = (JavascriptExecutor)driver;
+	executor.executeScript("arguments[0].click();", SaveEnrollmentLinkOLE);
+	
+	//((JavascriptExecutor) driver).executeScript("arguments[0].click;", CancelEnrollmentLink);
+	
+	//CancelEnrollmentLink.click();
+	try {
+		Thread.sleep(6000);
+	} catch (InterruptedException e) {
+		e.printStackTrace();
+	}
+	if(validate(SaveModalOLE)){
+		System.out.println("OLE Cancel Enrollment Modal is Displayed");
+		validate(CreateProfilesave);
+		CreateProfilesave.isDisplayed();
+		validate(SaveSignIn);
+		SaveSignIn.isDisplayed();
+		Saveclosepopup.isDisplayed();
+		Saveclosepopup.click();
+		return new SaveandReturnOLEModal(driver);
+	}
+	return null;
+}
+public CancelOLEModal OpenlearnmoreLogoOLEPages() {
+	validate(CancelEnrollmentLinkOLE);
+	JavascriptExecutor executor = (JavascriptExecutor)driver;
+	executor.executeScript("arguments[0].click();", CancelEnrollmentLinkOLE);
+	
+	//((JavascriptExecutor) driver).executeScript("arguments[0].click;", CancelEnrollmentLink);
+	
+	//CancelEnrollmentLink.click();
+	try {
+		Thread.sleep(6000);
+	} catch (InterruptedException e) {
+		e.printStackTrace();
+	}
+	if(validate(CancellationModalOLE)){
+		System.out.println("OLE Cancel Enrollment Modal is Displayed");
+		validate(CreateProfile);
+		CreateProfile.isDisplayed();
+		validate(SignIn);
+		SignIn.isDisplayed();
+		validate(LeaveOnlineApplication);
+		LeaveOnlineApplication.isDisplayed();
+		closepopup.click();
+		return new CancelOLEModal(driver);
+	}
+	return null;
+}
 }
