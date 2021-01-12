@@ -73,10 +73,11 @@ public class VppStepDefinitionUpdatedAARP {
 	public void the_user_on_aarp_medicaresolutions_Site() {
 		WebDriver wd = getLoginScenario().getWebDriverNew();
 		AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd);
-		aquisitionhomepage.validateSubtitle();
+//		aquisitionhomepage.validateSubtitle();
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, aquisitionhomepage);
 	}
+	
 	@Given("^the user is on UHC medicare acquisition site page$")
 	public void the_user_on_uhc_medicares_Site() {
 		WebDriver wd = getLoginScenario().getWebDriverNew();
