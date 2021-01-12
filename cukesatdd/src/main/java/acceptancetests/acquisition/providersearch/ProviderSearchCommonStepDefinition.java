@@ -56,7 +56,7 @@ public class ProviderSearchCommonStepDefinition {
 			String planName = plannameAttributesMap.get("PlanName");
 			getLoginScenario().saveBean(VPPCommonConstants.PLAN_NAME, planName);
 			VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario().getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-			
+		
 			ProviderSearchPage providerSearchPage = plansummaryPage.clicksOnIsProviderCovered(planName);
 			if(providerSearchPage!=null) {
 				getLoginScenario().saveBean(PageConstants.PROVIDER_SEARCH_PAGE, providerSearchPage);

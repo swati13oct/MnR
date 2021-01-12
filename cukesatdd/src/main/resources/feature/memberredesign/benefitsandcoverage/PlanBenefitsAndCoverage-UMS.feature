@@ -427,16 +427,16 @@ Feature: 1.01 Member  benefits and Coverage page
     And the user validates dropdown selection functionality
     And the user validates text for the Look Up Drugs section
     And the user validates group Drug coverage header and text under the section
+    And the NON-LIS PDP group user should see drug cost table for non Lis members
+    And the user should see drug copay and discount table
+      | Updated Language | <UpdatedLanguage> |
+      | Display Flag     | <DisplayFlag>     |
+    And the user validates the user click on the link it expands and when user clicks it again it should collapse
     And the user validates text for the Look Up Drugs section
     And the user validates group Look Up Drugs button should be visible
     And the user validates text for the Locate a Pharmacy section
     And the user validates Locate a Pharmacy button should be visible
       | Plan Type | <planType> |
-    And the NON-LIS PDP group user should see drug cost table for Lis members
-    And the user should see drug copay and discount table
-      | Updated Language | <UpdatedLanguage> |
-      | Display Flag     | <DisplayFlag>     |
-    And the user validates the user click on the link it expands and when user clicks it again it should collapse
     And the user validates view and document label
     And the user validates static links
       | Plan Type | <planType> |
@@ -798,6 +798,3 @@ Feature: 1.01 Member  benefits and Coverage page
     Examples: 
       | index  | FID    | planType  | memberType           |
       | 44     | xxxxxx | MAPD      | Individual_Rider_BnC |
-
-      
- ###############################Regression Scenarios END Here ########################################
