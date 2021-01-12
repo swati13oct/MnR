@@ -1787,7 +1787,7 @@ public class DrugDetailsPage extends UhcDriver {
 		Assert.assertTrue("No results message not displayed", noResultsMessage.getText().equals(expectedMsg));
 	}
 
-	@FindBy(xpath = "//*[@class='uhc-button__text'][text()='Save ']")
+	@FindBy(xpath = "//*[@class='uhc-button__text'][text()='Save ']/parent::button")
 	public WebElement saveBtn;
 
 	@FindBy(xpath = "//*[@class='uhc-button__text'][text()='Saved ']")

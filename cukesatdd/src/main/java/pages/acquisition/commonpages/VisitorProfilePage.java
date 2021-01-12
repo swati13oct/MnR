@@ -677,7 +677,7 @@ public class VisitorProfilePage extends UhcDriver {
 					.getText());
 			Assert.assertEquals(plan, driver.findElement(By.xpath(
 					"//h2[@id='saved-plans']/..//*[contains(@id,'planName') and contains(text(),'" + plan + "')]"))
-					.getText());
+					.getText().trim());
 			Assert.assertTrue(driver
 					.findElement(By.xpath("//h2[@id='saved-plans']/..//*[contains(@id,'planName') and contains(text(),'"
 							+ plan + "')]/following::button[1]"))
