@@ -479,7 +479,7 @@ public class PlanRecommendationEngineEditResponsePage extends UhcDriver {
 			PlanRecommendationEngineDoctorsPage doc = new PlanRecommendationEngineDoctorsPage(driver);
 			doc.edit_doctor(inputValues.get("Doctors"), inputValues.get("Doctors Search Text"),
 					inputValues.get("Multi Doctor"));
-			jsClickNew(saveBtn);
+//			jsClickNew(saveBtn);
 			checkContent("doctor");
 			if (inputValues.get("Doctors").contains(("look"))) {
 				checkDrugDocInfo("doctor", false);
