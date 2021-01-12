@@ -1,6 +1,7 @@
 package acceptancetests.acquisition.ole;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -3079,11 +3080,7 @@ public void the_user_validates_the_OLE_Submission_Details_in_GPS(DataTable arg1)
 		String MailingAddressQuestion = MemberDetailsMap.get("Mailing Address Question");
 		String [] dateArray = null;
 		
-		List<String> testNote=(List<String>) getLoginScenario().getBean(ProviderSearchCommonConstants.TEST_NOTE);
-		if (testNote==null)
-			testNote=new ArrayList<String>();
-
-		
+				
 		if (!(MRScenario.environment.equalsIgnoreCase("offline")
 				|| MRScenario.environment.equalsIgnoreCase("prod")) ) {
 			OLEconfirmationPage OLEGPSValidation = (OLEconfirmationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_CONFIRMATION_PAGE);
@@ -3433,19 +3430,28 @@ public void the_user_validates_the_OLE_Submission_Details_in_GPS(DataTable arg1)
 					System.out.println("--------------------Storing Data for Preliminary questions and Use and disclosure  Ended----------------------"+disclosureprovideraddress);
 				}						
 				//---------------------------------------------------//	
-				
+			//------------Added for Jenkins Report---------------//
+				List<String> testNote=(List<String>) getLoginScenario().getBean(oleCommonConstants.TEST_RESULT_NOTE);
+				if (testNote==null)
+					testNote=new ArrayList<String>();
+
+
 				testNote.add("===================================================");
 				testNote.add("\tValidation for able to print all the values from the GPS");
-
-				boolean Validation_Status = OLEGPSValidation.validate_GPS_for_Plantype(DetailsMap);
+				Map<String,String> matched = new HashMap<String,String>();
+				Map<String,String> mismatched = new HashMap<String,String>();
+				//------------Added for Jenkins Report---------------//	
+				boolean Validation_Status = OLEGPSValidation.validate_GPS_for_Plantype(DetailsMap,matched,mismatched);
 				if (Validation_Status) {
 					System.out.println("OLE Confirmation Page : All Plan Details Validated in GPS");
 					getLoginScenario().saveBean(OLE_PageConstants.OLE_CONFIRMATION_PAGE, OLEGPSValidation);
+					getLoginScenario().saveBean(oleCommonConstants.TEST_RESULT_NOTE,OLEGPSValidation);
 					Assert.assertTrue(true);
-					testNote.add("\tPASSED- able to print all the values from the GPS");
+					testNote.add("\tPASSED- "+ Arrays.asList(matched)  +"able to print all the values from the GPS");
 				} else {
 					System.out.println("OLE Confirmation Page : All Plan and Member Details  NOT validated in GPS");
 					Assert.fail("OLE Confirmation Page : All Plan and Member Details  NOT validated in GPS");
+					testNote.add("\tFAILED- "+ Arrays.asList(mismatched)  +"not able to print all the values from the GPS");
 				}
 			} else {
 				getLoginScenario().saveBean(OLE_PageConstants.OLE_CONFIRMATION_PAGE, OLEGPSValidation);

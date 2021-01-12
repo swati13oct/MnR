@@ -472,7 +472,7 @@ public Connection createDataBaseConnection() {
 		return flag;
 	}
 */	
-	public boolean validate_GPS_for_Plantype(Map<String,String> map) {
+	public boolean validate_GPS_for_Plantype(Map<String,String> map,Map<String,String> matched,Map<String,String> mismatched) {
 		boolean flag = false;
 		//try {
 			String confirmation_no = confirmationNumber.getText();
@@ -480,10 +480,11 @@ public Connection createDataBaseConnection() {
 			map.put("Confirmation No", confirmation_no);
 			Map<String,String> gpsdatamap = retrieve_GPS_data(confirmation_no);
 			Map <String, String> gpsmap = new HashMap<>();
+			Map<String,String> validateGPS = new HashMap<String, String>();
 			String defaultValue = "";
 			gpsmap = null_vals(gpsdatamap, defaultValue);
-			Map <String, String> matched = new HashMap<>();
-			Map <String, String> mismatched = new HashMap<>();
+		//	Map <String, String> matched = new HashMap<>();
+		//	Map <String, String> mismatched = new HashMap<>();
 			for (String keySource : map.keySet()) {
 				String strSource = map.get(keySource);
 				if (gpsmap.containsKey(keySource)) {
@@ -532,6 +533,7 @@ public Connection createDataBaseConnection() {
 			e.printStackTrace();
 		}*/
 		return flag;
+	
 	}
 	
 
@@ -562,7 +564,6 @@ public Connection createDataBaseConnection() {
 	      })
 	      .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
 	      return my_map;
-	   }
-
+	   }	
 }
 	
