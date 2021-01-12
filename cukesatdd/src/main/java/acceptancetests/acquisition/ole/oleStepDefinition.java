@@ -3081,9 +3081,13 @@ public void the_user_validates_the_OLE_Submission_Details_in_GPS(DataTable arg1)
 		String [] dateArray = null;
 		
 				
-		if (!(MRScenario.environment.equalsIgnoreCase("offline")
+		/*if (!(MRScenario.environment.equalsIgnoreCase("offline")
 				|| MRScenario.environment.equalsIgnoreCase("prod")|| MRScenario.environment.equalsIgnoreCase("stage")) ) {
-			OLEconfirmationPage OLEGPSValidation = (OLEconfirmationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_CONFIRMATION_PAGE);
+			*/
+		if (!(MRScenario.environment.equalsIgnoreCase("offline")
+				|| MRScenario.environment.equalsIgnoreCase("prod"))) {
+		
+		OLEconfirmationPage OLEGPSValidation = (OLEconfirmationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_CONFIRMATION_PAGE);
 			if (OLEGPSValidation != null) {
 
 				System.out.println("--------------------Creating a map to store Expected Data for Comparison----------------------");
