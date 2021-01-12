@@ -141,6 +141,59 @@ public class HsidRegistrationConfirmInformation extends UhcDriver {
 		return rtrnrarr;
 	}
 	
+	public  String[] getSignInLinkURLFromPostRegistrationCompleteMail()
+			throws MessagingException, IOException, InterruptedException {
+
+		String username = "codetranformer004@gmail.com";
+        String pwd = "codetransformer@1";
+        
+        Thread.sleep(44000);
+	
+		Properties props = System.getProperties();
+		props.setProperty("mail.store.protocol", "imaps");
+		Session session = Session.getDefaultInstance(props, null);
+		Store store = session.getStore("imaps");
+		System.out.println("The value of the store element is --"+store);
+		store.connect("imap.gmail.com", username, pwd);
+		Folder inbox = store.getFolder("Inbox");
+
+		inbox.open(Folder.READ_WRITE);
+		//inbox.open(Folder.READ_ONLY);
+
+		// Filter inbox messages by "UNSEEN" and "TO={username}"
+		FlagTerm ft_unseen = new FlagTerm(new Flags(Flags.Flag.SEEN), false);
+		RecipientStringTerm ft_toEmail = new RecipientStringTerm(RecipientType.TO, username);
+		
+		SearchTerm st = new AndTerm(ft_unseen, ft_toEmail);
+		
+		Message msg[] = inbox.search(st);
+		System.out.println("getSignInLinkURLFromPostRegistrationCompleteMail::MAILS for [" + username + "]: " + msg.length);
+				
+		Object emailcontent = msg[msg.length - 1].getContent();
+		
+		System.out.println(emailcontent);
+		
+		String toberemoved = "This e-mail, including attachments, may include confidential and/or proprietary information, and may be used only by the person or entity to which it is addressed. If the reader of this e-mail is not the intended recipient or his or her authorized agent, the reader is hereby notified that any dissemination, distribution or copying of this e-mail is prohibited. If you have received this e-mail in error, please notify the sender by replying to this message and delete this e-mail immediately.";
+
+		String linkurl;
+		try {
+			String[] tmparr_2;
+			String[] tmparray = ((String) emailcontent).split("href=\"");
+			
+			tmparr_2 = tmparray[1].split("\"");
+			linkurl = tmparr_2[0];
+		} catch (Exception e) {
+			linkurl = " ";
+		}
+
+		String[] rtrnrarr = new String[] { linkurl, msg[msg.length - 1].getSubject().toString(),
+				Jsoup.parse(emailcontent.toString()).text().replace(toberemoved, "") };
+		System.out.println(rtrnrarr);
+		store.close();
+		session = null;
+		return rtrnrarr;
+	}
+	
 	public void confirmEmail(){
 		driver.get(getConfirmationUrl());
 		
