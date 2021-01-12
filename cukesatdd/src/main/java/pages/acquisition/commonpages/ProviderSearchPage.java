@@ -386,8 +386,8 @@ public class ProviderSearchPage extends UhcDriver {
 			System.out.println("New Rally page not displayed");
 		 
 		}
-		CommonUtility.waitForPageLoadNew(driver, providerCard, 30);
-		validateNew(providerCard);
+		CommonUtility.waitForPageLoadNew(driver, PrintEmailBtn, 30);
+		//validateNew(providerCard);
 		validateNew(PrintEmailBtn);
 
 	}
