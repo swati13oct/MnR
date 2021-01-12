@@ -331,7 +331,7 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth Prod
     And the user validates spanish and chinese should not display in dropdown
     And the user clicks on More Information link
     And the user validates contactus section
-
+@abc
     Examples: 
       | index | TID   | username |password  | MemUserName|planType|memberType | copayCategory | SummaryofBenefits   | EvidenceofCoverage   | ComprehensiveFormularyDrug List |
       | 10    | 15247 |kkumard| tnps459#|GLORIA9494| MAPD|Group_BnC| LIS 2|Summary Of Benefits|Evidence of Coverage| Comprehensive Formulary         |
@@ -456,7 +456,7 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth Prod
     And the user validates text for the Locate a Pharmacy section
     And the user validates Locate a Pharmacy button should be visible
       | Plan Type | <planType> |
-    And the NON-LIS PDP group user should see drug cost table for Lis members
+    And the NON-LIS PDP group user should see drug cost table for non Lis members
     And the user should see drug copay and discount table
       | Updated Language | <UpdatedLanguage> |
       | Display Flag     | <DisplayFlag>     |
