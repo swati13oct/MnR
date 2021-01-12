@@ -94,7 +94,7 @@ Feature: 1.24.b Member Individual Health Record - P2 - Benefits, Payments, PlanD
     @no_ihr_p2_boaGrp2
     Examples: 
 	    | index | FID     | planType | memberType         | expectLink | 
-	    | 07    | F424804 | MA       | BOA12324_TERM_GROUP_IHR | false |
+	    | 07    | F424804 | MA       | BOA12324_GROUP_IHR | false |
 
     #----------- begin - cases with IHR link
     @ihr_p2_ma_mapd @devRegression
