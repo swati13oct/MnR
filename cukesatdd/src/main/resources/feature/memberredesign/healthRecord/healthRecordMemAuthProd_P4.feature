@@ -139,7 +139,7 @@ Feature: 1.24.2.d Member Individual Health Record - PROD - P4 - HealthAndWellnes
     @prod_no_ihr_p4_boaGrp2
     Examples: 
 	    | index | FID     | username  | password  | MemUserName             | planType | memberType         | expectLink | 
-	    | 07    | F424804 | kkumard   | tnps459#  | bernwl               | MA       | BOA12324_TERM_GROUP_IHR | false |
+	    | 07    | F424804 | kkumard   | tnps459#  | bernwl               | MA       | BOA12324_GROUP_IHR | false |
 
     #----------- begin - cases with IHR link
     @prod_ihr_p4_ma_mapd

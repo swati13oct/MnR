@@ -29,7 +29,7 @@ Feature: 1.12.2 Member Rally claims - Member Auth
     Examples: 
       | TID   | username   | password  | MemUserName  | planType | memberType          | claimSystem     |
       | 15234 | qavgogine  | qavgogine | q3_sep_UAT4_UHC053 | MA       | UHC_Individual      | COSMOS_CLAIMS   |
-      | xxxxx | qavgogine  | qavgogine | q2_may_rally032 | MA | UHC_GROUP         | COSMOS_CLAIMS   |
+      | xxxxx | qavgogine  | qavgogine | q2_jun_grp0428 | MA | UHC_GROUP         | COSMOS_CLAIMS   |
 
     @memAuth_rallyClaims01_medica_pcp
     Examples: 
