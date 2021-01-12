@@ -993,10 +993,10 @@ public class BenefitsAndCoverageUmsStepDefinition {
 		}	
 	}
 	
-	@And("the NON-LIS PDP group user should see drug cost table for Lis members")
+	@And("the NON-LIS PDP group user should see drug cost table for non Lis members")
 	public void user_validate_drugcosttablePDP_NONLIS_Group() {
 		String dateStr=(String)getLoginScenario().getBean(BenefitsAndCoverageCommonConstants.TEST_DATE_STR);
-		System.out.println("***the NON-LIS PDP group user should see drug cost table for Lis members***");
+		System.out.println("***the NON-LIS PDP group user should see drug cost table for non Lis members***");
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
 				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
 		

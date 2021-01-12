@@ -298,6 +298,12 @@ public class BenefitsAndCoverageWebElements extends UhcDriver {
 	@FindBy(id = "mapdPageNonLisForSRetail")
 	protected WebElement RetailDrugCost_TableNONLIS;
 
+	@FindBy(xpath="//h3[contains(text(),'Standard Network Pharmacy Retail Drug Costs')]")
+	protected WebElement PdpStdNwtDrugCost_TableNONLIS_header;
+
+	@FindBy(xpath="//table[contains(@class,'atdd-bnc-rx187grptable')]")
+	protected WebElement PdpStdNwtDrugCost_TableNONLIS;
+	
 	@FindBy(xpath = ".//*[@id='mapdPageLis']")
 	protected WebElement RetailDrugCost_Table1; 
 

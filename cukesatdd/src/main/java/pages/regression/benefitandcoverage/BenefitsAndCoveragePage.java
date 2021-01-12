@@ -2728,67 +2728,48 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 	
 	public List<String> validatedrugcosttablePDPGroup_NONLIS(String dateStr) {
 		List<String> testNote=new ArrayList<String>();
-		CommonUtility.waitForPageLoad(driver, RetailDrugCost_TableNONLIS, 15);
-		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", RetailDrugCost_TableNONLIS);
-		validateWithValue("Drug cost table is diplaying for MAPD GROUP LIS 4", RetailDrugCost_TableNONLIS);
-		String mapdGroupTable_2020= "Additional Drug Coverage\n"
-				+"Annual Deductible Stage \n"
-				+"Initial Coverage Stage \n"
-				+"Coverage Gap Stage \n"
-				+"Catastrophic Coverage Stage \n"
+		CommonUtility.waitForPageLoad(driver, PdpStdNwtDrugCost_TableNONLIS_header, 15);
+		validateWithValue("Drug cost table PDP GROUP NON LIS section header", PdpStdNwtDrugCost_TableNONLIS_header);
+		String tbl="Standard Network Pharmacy Retail Drug Costs";
+		WebElement drugTbl=PdpStdNwtDrugCost_TableNONLIS;
+		validateWithValue("Drug cost table is diplaying for PDP GROUP NON LIS", drugTbl);
+		scrollElementToCenterScreen(drugTbl);
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", drugTbl);
+		String pdpGroupTable_2021="Annual Deductible Stage Initial Coverage Stage Coverage Gap Stage Catastrophic Coverage Stage*\n"
 				+"Tier 1 \n"
 				+"No Deductible\n"
 				+"$10.00\n"
 				+"$10.00\n"
-				+"Your share of the cost for a covered drug will be either coinsurance or a copayment whichever is the larger amount:\n"
-				+"-either- coinsurance of 5% of the cost of the drug\n"
-				+"-or- $3.60 for a generic drug or a drug that is treated like a generic and $8.95 for all other drugs.\n"
+				+"$10.00\n"
 				+"Tier 2 \n"
 				+"$20.00\n"
 				+"$20.00\n"
-				+"Tier 3\n"
-				+"$35.00\n"
-				+"$35.00\n"
-				+"Tier 4\n"
-				+"$35.00\n"
-				+"$35.00";
-		String mapdGroupTable_2021="Additional Drug Coverage\n"
-				+"Annual Deductible Stage \n"
-				+"Initial Coverage Stage \n"
-				+"Coverage Gap Stage \n"
-				+"Catastrophic Coverage Stage \n"
-				+"Tier 1 \n"
-				+"No Deductible\n"
-				+"$10.00\n"
-				+"$10.00\n"
-				+"Your share of the cost for a covered drug will be either coinsurance or a copayment whichever is the larger amount:\n"
-				+"-either- coinsurance of 5% of the cost of the drug\n"
-				+"-or- $3.70 for a generic drug or a drug that is treated like a generic and $9.20 for all other drugs.\n"
-				+"Tier 2 \n"
 				+"$20.00\n"
-				+"$20.00\n"
-				+"Tier 3\n"
-				+"$35.00\n"
-				+"$35.00\n"
-				+"Tier 4\n"
-				+"$35.00\n"
-				+"$35.00";		
-		String mapdGroupTable=mapdGroupTable_2020;
-		if (dateStr.contains("2021")) 
-			mapdGroupTable=mapdGroupTable_2021;
-		if(RetailDrugCost_TableNONLIS.getText().equals(mapdGroupTable.toString())){
+				+"Tier 3 \n"
+				+"$40.00\n"
+				+"$40.00\n"
+				+"$40.00\n"
+				+"Tier 4 \n"
+				+"20% coinsurance with a $200.00 maximum\n"
+				+"20% coinsurance with a $200.00 maximum\n"
+				+"20% coinsurance with a $200.00 maximum";
+		String pdpGroupTable_2022="tbd";
+		String pdpGroupTable=pdpGroupTable_2021;
+		if (dateStr.contains("2022")) 
+			pdpGroupTable=pdpGroupTable_2022;
+		if(drugTbl.getText().equals(pdpGroupTable.toString())){
 			Assert.assertTrue("The data in the drug cost table is displaying correctly", true);
 			System.out.println("The data in the drug cost table is displaying correctly");  
 		}
 		else{
-			System.out.println(">>>>>>>>>>>>>The Expected Table  value is<<<<<<<<<<<<<<<<<\n"+mapdGroupTable.toString());
-			System.out.println(">>>>>>>>>>>>>The Actual Table value is<<<<<<<<<<<<<<<<<<<<\n"+RetailDrugCost_TableNONLIS.getText());
+			System.out.println(">>>>>>>>>>>>>The Expected Table  value is<<<<<<<<<<<<<<<<<\n"+pdpGroupTable.toString());
+			System.out.println(">>>>>>>>>>>>>The Actual Table value is<<<<<<<<<<<<<<<<<<<<\n"+drugTbl.getText());
 			System.err.println(">>>>>>>>Problem<<<<<<<<<<<<<<<The data in the drug cost table is not displaying correctly<<<<<<<<<<<<<");
 
-			testNote.add("The data in the drug cost table is not displaying correctly. table='RetailDrug'");
+			testNote.add("The data in the drug cost table is not displaying correctly. table='"+tbl+"'");
 			testNote.add("The data in the drug cost table is not displaying correctly");
-			testNote.add("\n>>>>>>>>>>>>>The Expected Table  value is<<<<<<<<<<<<<<<<< \n"+mapdGroupTable);
-			testNote.add("\n>>>>>>>>>>>>>The Actual Table value is<<<<<<<<<<<<<<<<<<<< \n"+RetailDrugCost_TableNONLIS.getText());
+			testNote.add("\n>>>>>>>>>>>>>The Expected Table  value is<<<<<<<<<<<<<<<<< \n"+pdpGroupTable);
+			testNote.add("\n>>>>>>>>>>>>>The Actual Table value is<<<<<<<<<<<<<<<<<<<< \n"+drugTbl.getText());
 		} 
 		return testNote;
 	}
