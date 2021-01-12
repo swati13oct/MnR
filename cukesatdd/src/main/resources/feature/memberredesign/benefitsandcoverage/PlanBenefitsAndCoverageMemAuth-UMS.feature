@@ -251,7 +251,7 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth
 
     Examples: 
       | index | TID   |username |password  |MemUserName| planType| memberType| copayCategory |Identifier      | count | rider   |
-      | 08    | 15239 | qavgogine| qavgogine|q4_grp_dec204|PDP    | Group_BnC  | NON LIS     |GrpEffectiveUHC | 3     | NoRider |
+      | 08    | 15239 | qavgogine| qavgogine|q2_jun_grp0023|PDP    | Group_BnC  | NON LIS     |GrpEffectiveUHC | 3     | NoRider |
       
 
   #TC19_Ways To Save should come only for PDP members (Saver,Walgreen,Preferred, Symphonix)
@@ -474,16 +474,16 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth
     And the user validates dropdown selection functionality
     And the user validates text for the Look Up Drugs section
     And the user validates group Drug coverage header and text under the section
+    And the NON-LIS PDP group user should see drug cost table for non Lis members
+    And the user should see drug copay and discount table
+      | Updated Language | <UpdatedLanguage> |
+      | Display Flag     | <DisplayFlag>     |
+    And the user validates the user click on the link it expands and when user clicks it again it should collapse
     And the user validates text for the Look Up Drugs section
     And the user validates group Look Up Drugs button should be visible
     And the user validates text for the Locate a Pharmacy section
     And the user validates Locate a Pharmacy button should be visible
       | Plan Type | <planType> |
-    And the NON-LIS PDP group user should see drug cost table for Lis members
-    And the user should see drug copay and discount table
-      | Updated Language | <UpdatedLanguage> |
-      | Display Flag     | <DisplayFlag>     |
-    And the user validates the user click on the link it expands and when user clicks it again it should collapse
     And the user validates view and document label
     And the user validates static links
       | Plan Type | <planType> |
@@ -492,12 +492,14 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth
     And the user verifies that the correct pdfs are there in the plan material section of benefits page
       | Summary of Benefits                 | <SummaryofBenefits>               |
       | Evidence of Coverage                | <EvidenceofCoverage>              |
+     #| Comprehensive Formulary - Drug List | <ComprehensiveFormularyDrug List> |
+    #And the user validates Needhelp section
     And the user clicks on More Information link
     And the user validates contactus section
 
     Examples: 
       | index | TID   |username |password  |MemUserName| planType | memberType | copayCategory | language | SummaryofBenefits   | EvidenceofCoverage   | ComprehensiveFormularyDrug List | name           | memberid   | effectivedate | monthlypremium | UpdatedLanguage | DisplayFlag |
-      | 16    | 15366 |qavgogine| qavgogine| q4_grp_dec204|PDP      | Group_BnC  | NON LIS       | ENGLISH  | Summary Of Benefits | Evidence of Coverage | Comprehensive Formulary         | BBBCCB FFAAFAD | 0191976081 | 01/01/2019    | Not Available  | Tier 2          | true        |
+      | 16    | 15366 |qavgogine| qavgogine| q2_jun_grp0023|PDP      | Group_BnC  | NON LIS       | ENGLISH  | Summary Of Benefits | Evidence of Coverage | Comprehensive Formulary         | BBBCCB FFAAFAD | 0191976081 | 01/01/2019    | Not Available  | Tier 2          | true        |
 
   #TO BE DEPRECATED
   #TC21_MAPD_LIS(1,2)- Retail Drug Cost Table
