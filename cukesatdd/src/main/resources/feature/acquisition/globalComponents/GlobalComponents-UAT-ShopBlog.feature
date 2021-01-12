@@ -10,7 +10,6 @@ Feature: 1.13 UAT - Shop Blog Pages flows
       | PageName | <pageName> |
       | PagePath | <path>     |
     Then the user validate ZipCode Components on page using ZipCode "55410"
-     And the user clicks on browser back button
     When the user clicks on Agent link and validates the correct URL is loaded
       |UHC Agent URL|  <UHCUrl>  |
     Then the user validates TFN on page
@@ -76,7 +75,6 @@ Feature: 1.13 UAT - Shop Blog Pages flows
       | PageName | <pageName> |
       | PagePath | <path>     |
     Then the user validate ZipCode Components on page using ZipCode "55410"
-    And the user clicks on browser back button
     When the user clicks on Agent link and validates the correct URL is loaded
       |UHC Agent URL|  <UHCUrl>  |
     Then the user validates TFN on page
@@ -123,7 +121,6 @@ Feature: 1.13 UAT - Shop Blog Pages flows
       | PageName | <pageName> |
       | PagePath | <path>     |
     Then the user validate ZipCode Components on page using ZipCode "55424"
-    And the user clicks on browser back button
     Then the user validates proactive chat popup
     Then the user enters and validate the fields and clicks on submit
     Then the user validates TFN on page
@@ -131,8 +128,8 @@ Feature: 1.13 UAT - Shop Blog Pages flows
       | TFNflag  | <tfnFlag>  | 
     When the user clicks on Agent link and validates the correct URL is loaded
       |UHC Agent URL|  <UHCUrl>  |
-    Then the user validates whether call icon is visible
     Then the user validates whether chat icon is visible
+    Then the user validates whether call icon is visible
     
       
  @BlogPages_GlobalCompsAARP  
@@ -157,7 +154,6 @@ Feature: 1.13 UAT - Shop Blog Pages flows
       | PageName | <pageName> |
       | PagePath | <path>     |
     Then the user validate ZipCode Components on page using ZipCode "10001"
-    And the user clicks on browser back button
     Then the user validates proactive chat popup
     Then the user validates TFN on page
       | TFNxpath | <tfnXpath> |
@@ -165,11 +161,12 @@ Feature: 1.13 UAT - Shop Blog Pages flows
     Then the user enters and validate the fields and clicks on submit
     When the user clicks on Agent link and validates the correct URL is loaded
       |UHC Agent URL|  <UHCUrl>  |
-    Then the user validates whether chat icon is visible
-    Then the user validates whether call icon is visible
     Then the user validates TFN on right rail Medicare Article
       | TFNxpath | <tfnXpath> |
       | TFNflag  | <tfnFlag>  |
+    Then the user validates whether chat icon is visible
+    Then the user validates whether call icon is visible
+   
      
   
     
@@ -196,15 +193,15 @@ Feature: 1.13 UAT - Shop Blog Pages flows
       | PageName | <pageName> |
       | PagePath | <path>     |
     Then the user validate ZipCode Components on page using ZipCode "55410"
-    And the user clicks on browser back button
     When the user clicks on Agent link and validates the correct URL is loaded
       |UHC Agent URL|  <UHCUrl>  |
+    Then the user validates proactive chat popup
     Then the user validates TFN on page
       | TFNxpath | <tfnXpath> |
       | TFNflag  | <tfnFlag>  |
     Then the user validates whether call icon is visible
     Then the user validates whether chat icon is visible
-    Then the user validates proactive chat popup
+    
     
    
    @BlogPages2_GlobalCompsAARP  
