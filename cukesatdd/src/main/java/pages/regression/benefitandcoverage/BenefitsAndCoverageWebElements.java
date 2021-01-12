@@ -1259,3 +1259,4 @@ public class BenefitsAndCoverageWebElements extends UhcDriver {
 	}
 
 }
+

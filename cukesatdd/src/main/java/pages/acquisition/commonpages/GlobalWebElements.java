@@ -219,6 +219,9 @@ public class GlobalWebElements  extends UhcDriver{
 	@FindBy(xpath="//button[contains(@class,'button-primary proactive-offer__button main-background-color second-color proactive-offer__close')]")
 	public static WebElement proactiveChatExitBtn;
 	
+	@FindBy(xpath="//button[contains(@class,'button-primary proactive-offer__button main-background-color second-color proactive-offer__button_type_chat')]")
+	public static WebElement proactiveChatChatBtn;
+	
 	@FindBy(xpath="//*[@id='subnav_2']//*[contains(@href,'estimate')]")
 	public static WebElement headerDrugCostEstimatorLink;
 	

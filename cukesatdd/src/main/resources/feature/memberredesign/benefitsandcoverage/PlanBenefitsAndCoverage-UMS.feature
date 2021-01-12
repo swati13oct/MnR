@@ -798,6 +798,3 @@ Feature: 1.01 Member  benefits and Coverage page
     Examples: 
       | index  | FID    | planType  | memberType           |
       | 44     | xxxxxx | MAPD      | Individual_Rider_BnC |
-
-      
- ###############################Regression Scenarios END Here ########################################
