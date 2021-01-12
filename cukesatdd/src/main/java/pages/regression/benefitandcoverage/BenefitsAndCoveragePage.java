@@ -395,6 +395,7 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 				if (validate(ssoSurveyX,0))   //note: handle the sso page survey if needed
 					ssoSurveyX.click();
 				//note: should not get error for prod env
+				CommonUtility.waitForPageLoad(driver, ssoSearchBox, 15);
 				Assert.assertTrue("PROBLEM - not getting expected element on '"+MRScenario.environment+"' env",  
 						validate(ssoSearchBox,0) 
 						|| validate(medicineCabinetDrugSearchBtn,0)
