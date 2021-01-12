@@ -51,7 +51,7 @@ public class PlanDocsPage extends GlobalWebElements{
 	@FindBy(xpath = ".//*[@id='plan']/option[2]")
 	private WebElement planName;
 	
-	@FindBy(xpath = "//*[@id='planDocForm']/div[4]/div/button/span")
+	@FindBy(xpath = "//button//span[contains(@class,'uhc-button__text')]")
 	private WebElement continueButton;
 	
 	@FindBy(xpath = "//*[@id='planDocuments']/h3")
