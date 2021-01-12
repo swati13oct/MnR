@@ -90,6 +90,27 @@ public class GlobalWebElements extends UhcDriver {
 
 	@FindBy(linkText = "Hide disclaimer information")
 	public static WebElement hideDiscliamerInformation;
+	
+	@FindBy(xpath = "//a[@id='gfn_lnk_row2_1']")
+    private WebElement MedicareAdvantagePlans;
+	
+	@FindBy(xpath = "//a[@id='gfn_lnk_row2_2']")
+	private WebElement DualSpecialNeedsPlans;
+	
+	@FindBy(xpath = "//a[@id='gfn_lnk_row2_3']")
+    private WebElement MedicareSupplementInsurancePlans;
+	
+	@FindBy(xpath = "//span[contains(text(),'Medicare Prescription Drug Plans')]")
+    private WebElement MedicarePrescriptionDrugPlans;
+	
+	@FindBy(xpath="//a[@id='gfn_lnk_row2_5']")
+	private WebElement footerMedicarePrescriptionDrugPlans;
+	
+	@FindBy(xpath = "//span[contains(text(),'Medicare Education')]")
+    private WebElement MedicareEducation;
+	
+	@FindBy(xpath = "//a[@class='back-to-top']")
+    private WebElement BackToTop;
 
 	@FindBy(css = "a.backtotop1.hideLink")
 	public static WebElement disclaimerBackToTopLink;
