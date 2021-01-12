@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
 
+import org.apache.commons.lang3.StringUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Assert;
@@ -918,7 +919,7 @@ public class DrugDetailsPage extends UhcDriver {
 			catastrophicCoverage.click();
 			System.out.println(coverageMsg.getText());
 			System.out.println(message);
-			String catastrophicCoverage=coverageMsg.getText();
+			String catastrophicCoverage=StringUtils.normalizeSpace(coverageMsg.getText());
 			modalCloseIcon.click();
 			Assert.assertTrue("Catastrophic coverage message is incorrect",catastrophicCoverage.equals(message));
 		}
@@ -1770,6 +1771,7 @@ public class DrugDetailsPage extends UhcDriver {
 	public void validateInvalidZipErrCodeMsg(String expectedMsg) {
 		waitforElement(invalidZipCodeMsg);
 		System.out.println(invalidZipCodeMsg.getText());
+		System.out.println(expectedMsg);
 		Assert.assertTrue("Invalid zipcode message not displayed", invalidZipCodeMsg.getText().equals(expectedMsg));
 	}
 
