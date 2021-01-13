@@ -508,26 +508,26 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth Prod
       | Rider      | <rider>      |
       | Count      | <count>      |
       | MemberType | <memberType> |
-    And the user validates Ind plan overview
-      | Name            | <name>           |
-      | Member ID       | <memberid>       |
-      | Effective Date  | <effectivedate>  |
-      | Monthly premium | <monthlypremium> |
-    And the user view the Drug Copays & Discounts header
-    And the user validates Drug coverage header and text under the section
-    And the user validates dropdown selection functionality
-    And the user validates Default drug cost drop down value
-    And the user validates the Learn More section for stage and tier
-    And the user validates the user click on the link it expands and when user clicks it again it should collapse
-    And the pdp lis user validates Drug coverage header and text under the section
-    And the user validates text for the Look Up Drugs section
-    And the user validates Look Up Drugs button should be visible
-      | Plan Type | <planType> |
-    And user validates to not display pharmacy out-of-pocket maximum beside drug lookup
-      | MemberType   | <memberType>   |
-    And the user validates text for the Locate a Pharmacy section
-    And the user validates Locate a Pharmacy button should be visible
-      | Plan Type | <planType> |
+    ##And the user validates Ind plan overview
+    ##  | Name            | <name>           |
+    ##  | Member ID       | <memberid>       |
+    ##  | Effective Date  | <effectivedate>  |
+    ##  | Monthly premium | <monthlypremium> |
+    ##And the user view the Drug Copays & Discounts header
+    ##And the user validates Drug coverage header and text under the section
+    ##And the user validates dropdown selection functionality
+    ##And the user validates Default drug cost drop down value
+    ##And the user validates the Learn More section for stage and tier
+    ##And the user validates the user click on the link it expands and when user clicks it again it should collapse
+    ##And the pdp lis user validates Drug coverage header and text under the section
+    ##And the user validates text for the Look Up Drugs section
+    ##And the user validates Look Up Drugs button should be visible
+    ##  | Plan Type | <planType> |
+    ##And user validates to not display pharmacy out-of-pocket maximum beside drug lookup
+    ##  | MemberType   | <memberType>   |
+    ##And the user validates text for the Locate a Pharmacy section
+    ##And the user validates Locate a Pharmacy button should be visible
+    ##  | Plan Type | <planType> |
     ##And the user should see drug copay and discount table
     ##  | Updated Language | <UpdatedLanguage> |
     ##  | Display Flag     | <DisplayFlag>     |
