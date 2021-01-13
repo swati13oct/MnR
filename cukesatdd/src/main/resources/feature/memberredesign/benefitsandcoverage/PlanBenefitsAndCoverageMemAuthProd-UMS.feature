@@ -476,9 +476,9 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth Prod
       | index | TID   |username |password  |MemUserName| planType | memberType | copayCategory | language | SummaryofBenefits   | EvidenceofCoverage   | ComprehensiveFormularyDrug List | name           | memberid   | effectivedate | monthlypremium | UpdatedLanguage | DisplayFlag |
       | 13    | 15366 |kkumard| tnps459#|LeanoraF |PDP| Group_BnC| NON LIS | ENGLISH | Summary Of Benefits | Evidence of Coverage | Comprehensive Formulary         | PETER DAWSON | 0108537701 | 01/01/2013    | Not Available  | Tier 2          | true        |     
       
- #TC22_NON LIS Ind plan member(PDP)- Drug Cost table
-  @prod__benefitsAndCoverage15 @CMFedPDPNonLis  @Nonlis_Pdp
-  Scenario Outline: Index: 14 -TID: 15377 -plan: PDP -memberType: Individual_BnC - Verify all sections for PDP Ind NonLIS member on Benefits and Coverage page
+  #TC22_NON LIS Ind plan member(PDP)- Drug Cost table
+  @prod_benefitsAndCoverage15 @CMFedPDPNonLis @Nonlis_Pdp
+  Scenario Outline: Index: <index> -TID: <TID> -plan: <planType> -memberType: <memberType> - Verify all sections for PDP Ind NonLIS member on Benefits and Coverage page
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
       | Username | <username> |
@@ -488,7 +488,7 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth Prod
       | Retry | true |
     And user clicks on member to select
     And user stores test input for validations
-      | Username | <MemUserName> |
+      | Username     | <MemUserName> |
       | Plan Type    | <planType>    |
       | Member Type  | <memberType>  |
       | Copay Category | <copayCategory> |
@@ -546,8 +546,8 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth Prod
     And the user validates contactus section
 
     Examples: 
-      | index | TID   |username |password  |MemUserName| planType | memberType     | copayCategory | language | SummaryofBenefits   | EvidenceofCoverage   | ComprehensiveFormularyDrug List     | AlternativeDrugList   | name        | memberid   | effectivedate | monthlypremium | UpdatedLanguage | DisplayFlag | Identifier       | count | rider   |
-      | 16    | 15377 |kkumard| tnps459#|cmc29501 | PDP      | Individual_BnC | NON LIS       | ENGLISH  | Summary of Benefits | Evidence of Coverage | Comprehensive Formulary - Drug List | Alternative Drug List | ECADEA DCAA | 0197331001 | 05/01/2018    | Not Available  | Tier 2          | true |EffectivePDPAARP | 4     | NoRider |
+      | index | TID   |username | password  | MemUserName| planType | memberType     | copayCategory | language | SummaryofBenefits   | EvidenceofCoverage   | ComprehensiveFormularyDrug List     | AlternativeDrugList   | name        | memberid   | effectivedate | monthlypremium | UpdatedLanguage | DisplayFlag | Identifier       | count | rider   |
+      | 16    | 15377 |kkumard  | tnps459#  | cmc29501   | PDP      | Individual_BnC | NON LIS       | ENGLISH  | Summary of Benefits | Evidence of Coverage | Comprehensive Formulary - Drug List | Alternative Drug List | ECADEA DCAA | 0197331001 | 05/01/2018    | Not Available  | Tier 2          | true         |EffectivePDPAARP | 4     | NoRider |
       
    @prod__benefitsAndCoverage30  @hartfordprescriptionDrugBenefit @Greenwich_Hartford_Drugtable
   Scenario Outline: Index: <index> -TID: <TID> -plan: <planType> -memberType: <memberType> - Verify city of Hartford Prescription Drug Benefits

@@ -1100,7 +1100,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	/** 
 	 * @toDo : Validates the  Plan overview section for  a Non lis member Ind Member
 	 */
-	@And("the user validates Ind plan overview")
+	@And("^the user validates Ind plan overview$")
 	public void user_validate_IndplanOverviewsection(DataTable givenAttributes) {
 		System.out.println("***the user validates Ind plan overview***");
 		List<DataTableRow> memberAttributesRow = givenAttributes
