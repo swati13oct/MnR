@@ -415,7 +415,7 @@ Feature: 1.11. ACQ-Pharmacy Locator Test Scripts
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     When the user navigate to pharmacy search page from the navigation bar
-    Then user verify breadcrumb "Return to home page" displayed on pharmacy search page
+    Then user verify breadcrumb "Return to Home Page" displayed on pharmacy search page
     When user clicks on breadcrumb on pharmacy search page
     Then user should be navigated to home page
 
@@ -488,7 +488,7 @@ Feature: 1.11. ACQ-Pharmacy Locator Test Scripts
     And the user views the plans of the below plan type
       | Plan Type | <plantype> |
     When the user navigate to pharmacy search page from the navigation bar
-    Then user verify breadcrumb "Return to Plans" displayed on pharmacy search page
+    Then user verify breadcrumb "Return to plan summary" displayed on pharmacy search page
     When user clicks on breadcrumb on pharmacy search page
     Then user should be navigated to VPP summary page
 		
@@ -533,3 +533,27 @@ Feature: 1.11. ACQ-Pharmacy Locator Test Scripts
     Examples: 
       | site | zipcode | county      | isMultutiCounty | plantype |drug1|
       | UHC  |   19019 | Iowa County | No              | MAPD     |Lipitor|
+      
+      Scenario Outline: To verify breadcrumbs on pharmacy search page through Shop page page on acquisition <site> site
+    Given the user is on medicare acquisition site landing page
+      | Site | <site> |
+    When the user performs plan search using following information
+      | Zip Code        | <zipcode>         |
+      | Is Multi County | <isMultutiCounty> |
+      | County Name     | <county>          |
+    And the user views the plans of the below plan type
+      | Plan Type | <plantype> |
+    When the user navigate to pharmacy search page from the navigation bar
+    Then user verify breadcrumb "Return to Plans" displayed on pharmacy search page
+    When user clicks on breadcrumb on pharmacy search page
+    Then user should be navigated to VPP summary page
+		
+		#@breadcrumbPharmacySearch_AARP
+    Examples: 
+      | site | zipcode | county      | isMultutiCounty | plantype |
+      | AARP |   19019 | Iowa County | No              | MAPD     |
+
+    #@breadcrumbPharmacySearch_UHC
+    Examples: 
+      | site | zipcode | county      | isMultutiCounty | plantype |
+      | UHC  |   19019 | Iowa County | No              | MAPD     |
