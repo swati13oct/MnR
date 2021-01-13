@@ -402,7 +402,10 @@ public class ValueAddedServicepage extends UhcDriver {
 		
 		aarpVisionDiscountsShowMoreLnk.click();
 		
-		Thread.sleep(2000);		
+		Thread.sleep(2000);	
+		
+		JavascriptExecutor jse = (JavascriptExecutor) driver;
+		jse.executeScript("window.scrollBy(0,100)", "");
 	
 		CommonUtility.waitForPageLoadNew(driver, aarpSmartDriverShowMoreLnk, 20);
 		
