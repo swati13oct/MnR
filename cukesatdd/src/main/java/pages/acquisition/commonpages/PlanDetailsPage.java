@@ -1491,4 +1491,7 @@ public class PlanDetailsPage extends UhcDriver {
 		validateNew(backtoDrugEstBtn);
 		backtoDrugEstBtn.click();
 	}
+	public void validateVPPDetailsPage() {
+		Assert.assertTrue("user not navigated to VPP Details Page",driver.getCurrentUrl().contains("details"));
+}
 }
