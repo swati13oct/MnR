@@ -513,10 +513,6 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth Prod
       | Member ID       | 0197331001    |
       | Effective Date  | 05/01/2018    |
       | Monthly premium | Not Available |
-    #x  | Name            | <name>           |
-    #x  | Member ID       | <memberid>       |
-    #x  | Effective Date  | <effectivedate>  |
-    #x  | Monthly premium | <monthlypremium> |
     And the user view the Drug Copays & Discounts header
     And the user validates Drug coverage header and text under the section
     And the user validates dropdown selection functionality
@@ -552,8 +548,6 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth Prod
     Examples: 
       | index | TID   | username | password  | MemUserName| planType | memberType     | copayCategory | language | SummaryofBenefits   | EvidenceofCoverage   | ComprehensiveFormularyDrug List     | AlternativeDrugList   | UpdatedLanguage | DisplayFlag | Identifier       | count | rider   |
       | 16    | 15377 | kkumard  | tnps459#  | cmc29501   | PDP      | Individual_BnC | NON LIS       | ENGLISH  | Summary of Benefits | Evidence of Coverage | Comprehensive Formulary - Drug List | Alternative Drug List | Tier 2          | true        | EffectivePDPAARP | 4     | NoRider |
-#x      | index | TID   | username | password  | MemUserName| planType | memberType     | copayCategory | language | SummaryofBenefits   | EvidenceofCoverage   | ComprehensiveFormularyDrug List     | AlternativeDrugList   | name        | memberid   | effectivedate | monthlypremium | UpdatedLanguage | DisplayFlag | Identifier       | count | rider   |
-#x      | 16    | 15377 | kkumard  | tnps459#  | cmc29501   | PDP      | Individual_BnC | NON LIS       | ENGLISH  | Summary of Benefits | Evidence of Coverage | Comprehensive Formulary - Drug List | Alternative Drug List | ECADEA DCAA | 0197331001 | 05/01/2018    | Not Available  | Tier 2          | true        | EffectivePDPAARP | 4     | NoRider |
       
    @prod__benefitsAndCoverage30  @hartfordprescriptionDrugBenefit @Greenwich_Hartford_Drugtable
   Scenario Outline: Index: <index> -TID: <TID> -plan: <planType> -memberType: <memberType> - Verify city of Hartford Prescription Drug Benefits
@@ -893,77 +887,3 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth Prod
     Examples: 
       | index  | FID    | username | password  | MemUserName        | planType  | memberType           |
       | 44     | xxxxxx | kkumard  | tnps459#  | JohnPrais          | MAPD      | Individual_Rider_BnC |      
-      
-#============== experiment
-  @prod_benefitsAndCoverage15 @CMFedPDPNonLis @test123
-  Scenario Outline: Test123
-    Given the user is on member auth login flow page
-    When the member is able to login with correct username and password
-      | Username | <username> |
-      | Password | <password> |
-    And Member Enters the Username he wants to search
-      | MemUsername | <MemUserName> |
-      | Retry | true |
-    And user clicks on member to select
-    And user stores test input for validations
-      | Username | <MemUserName> |
-      | Plan Type    | <planType>    |
-      | Member Type  | <memberType>  |
-    Then The user navigates to Benefits and Coverage page
-      | Plan Type | <planType> |
-    Then user verifies presence of jump links
-      | Plan Type  | <planType>   |
-      | Rider      | <rider>      |
-      | MemberType | <memberType> |
-      | identifier | <Identifier> |
-    And user clicks on the jump links and checks respective sections
-      | Plan Type  | <planType>   |
-      | Rider      | <rider>      |
-      | MemberType | <memberType> |
-      | identifier | <Identifier> |
-    And verifies links irrelevant to the plan type are not displayed
-      | Plan Type  | <planType>   |
-      | Rider      | <rider>      |
-      | Count      | <count>      |
-      | MemberType | <memberType> |
-    And the user validates Ind plan overview
-      | Name            | ECADEA DCAA   |
-      | Member ID       | 0197331001    |
-      | Effective Date  | 05/01/2018    |
-      | Monthly premium | Not Available |
-    And the user view the Drug Copays & Discounts header
-    And the user validates Drug coverage header and text under the section
-    And the user validates dropdown selection functionality
-    And the user validates Default drug cost drop down value
-    And the user validates the Learn More section for stage and tier
-    And the user validates the user click on the link it expands and when user clicks it again it should collapse
-    And the pdp lis user validates Drug coverage header and text under the section
-    And the user validates text for the Look Up Drugs section
-    And the user validates Look Up Drugs button should be visible
-      | Plan Type | <planType> |
-    And user validates to not display pharmacy out-of-pocket maximum beside drug lookup
-      | MemberType   | <memberType>   |
-    And the user validates text for the Locate a Pharmacy section
-    And the user validates Locate a Pharmacy button should be visible
-      | Plan Type | <planType> |
-    And the user should see drug copay and discount table
-      | Updated Language | <UpdatedLanguage> |
-      | Display Flag     | <DisplayFlag>     |
-    And the PDP individual NON-LIS  user should see drug cost table for Lis members
-    And the user validates view and document label
-    And the user validates links for pdp in pdf section
-      | Plan Type | <planType> |
-    And the user validates the language dropdown and the value displayed by default and selects new value in dropdown successfully
-      | Language | <language> |
-    And the user verifies that the correct pdfs are there in the plan material section of benefits page
-      | Summary of Benefits                 | <SummaryofBenefits>               |
-      | Evidence of Coverage                | <EvidenceofCoverage>              |
-      | Comprehensive Formulary - Drug List | <ComprehensiveFormularyDrug List> |
-      | Alternative Drug List               | <AlternativeDrugList>             |
-    And the user clicks on More Information link
-    And the user validates contactus section
-
-    Examples: 
-      | index | TID   | username | password  | MemUserName| planType | memberType     | copayCategory | language | SummaryofBenefits   | EvidenceofCoverage   | ComprehensiveFormularyDrug List     | AlternativeDrugList   | UpdatedLanguage | DisplayFlag | Identifier       | count | rider   |
-      | 16    | 15377 | kkumard  | tnps459#  | cmc29501   | PDP      | Individual_BnC | NON LIS       | ENGLISH  | Summary of Benefits | Evidence of Coverage | Comprehensive Formulary - Drug List | Alternative Drug List | Tier 2          | true        | EffectivePDPAARP | 4     | NoRider |
-       
