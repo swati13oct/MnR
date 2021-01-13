@@ -2736,7 +2736,7 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 		validateWithValue("Drug cost table is diplaying for PDP GROUP NON LIS", drugTbl);
 		scrollElementToCenterScreen(drugTbl);
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", drugTbl);
-		String pdpGroupTable_2021="Annual Deductible Stage Initial Coverage Stage Coverage Gap Stage Catastrophic Coverage Stage*\n"
+		String pdpGroupTable_2021="Annual Deductible Stage Initial Coverage Stage  Coverage Gap Stage  Catastrophic Coverage Stage* \n"
 				+"Tier 1 \n"
 				+"No Deductible\n"
 				+"$10.00\n"
@@ -2768,7 +2768,7 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 			System.err.println(">>>>>>>>Problem<<<<<<<<<<<<<<<The data in the drug cost table is not displaying correctly<<<<<<<<<<<<<");
 
 			testNote.add("The data in the drug cost table is not displaying correctly. table='"+tbl+"'");
-			testNote.add("The data in the drug cost table is not displaying correctly");
+			//tbd testNote.add("The data in the drug cost table is not displaying correctly");
 			testNote.add("\n>>>>>>>>>>>>>The Expected Table  value is<<<<<<<<<<<<<<<<< \n"+pdpGroupTable);
 			testNote.add("\n>>>>>>>>>>>>>The Actual Table value is<<<<<<<<<<<<<<<<<<<< \n"+drugTbl.getText());
 		} 
