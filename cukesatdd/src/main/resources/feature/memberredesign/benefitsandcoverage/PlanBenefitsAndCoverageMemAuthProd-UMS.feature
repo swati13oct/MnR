@@ -215,7 +215,9 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth Prod
 
     Examples:  
       | index | TID   |username |password  |MemUserName | planType| memberType| copayCategory |Identifier      | count | rider   |
-      | 06    | 15239 | kkumard | tnps459# |padawson|PDP      | Group_BnC | NON LIS       |GrpEffectiveUHC | 3     | NoRider |
+      | 06    | 15239 | kkumard | tnps459# |LeanoraF|PDP      | Group_BnC | NON LIS       |GrpEffectiveUHC | 3     | NoRider |
+     #switched user to match the one on stage
+     # | 06    | 15239 | kkumard | tnps459# |padawson|PDP      | Group_BnC | NON LIS       |GrpEffectiveUHC | 3     | NoRider |
     
      #15238 is deprecated 
      # | xx    | 15238 | kkumard| tnps459#|APRILSSPACE1 |MAPD| Individual_BnC | NON LIS |IndEffectiveAARP | 7   | Rider |
@@ -329,7 +331,7 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth Prod
     And the user validates spanish and chinese should not display in dropdown
     And the user clicks on More Information link
     And the user validates contactus section
-
+@abc
     Examples: 
       | index | TID   | username |password  | MemUserName|planType|memberType | copayCategory | SummaryofBenefits   | EvidenceofCoverage   | ComprehensiveFormularyDrug List |
       | 10    | 15247 |kkumard| tnps459#|GLORIA9494| MAPD|Group_BnC| LIS 2|Summary Of Benefits|Evidence of Coverage| Comprehensive Formulary         |
@@ -454,7 +456,7 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth Prod
     And the user validates text for the Locate a Pharmacy section
     And the user validates Locate a Pharmacy button should be visible
       | Plan Type | <planType> |
-    And the NON-LIS PDP group user should see drug cost table for Lis members
+    And the NON-LIS PDP group user should see drug cost table for non Lis members
     And the user should see drug copay and discount table
       | Updated Language | <UpdatedLanguage> |
       | Display Flag     | <DisplayFlag>     |
@@ -472,7 +474,7 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth Prod
 
     Examples: 
       | index | TID   |username |password  |MemUserName| planType | memberType | copayCategory | language | SummaryofBenefits   | EvidenceofCoverage   | ComprehensiveFormularyDrug List | name           | memberid   | effectivedate | monthlypremium | UpdatedLanguage | DisplayFlag |
-      | 13    | 15366 |kkumard| tnps459#|padawson |PDP| Group_BnC| NON LIS | ENGLISH | Summary Of Benefits | Evidence of Coverage | Comprehensive Formulary         | PETER DAWSON | 0108537701 | 01/01/2013    | Not Available  | Tier 2          | true        |     
+      | 13    | 15366 |kkumard| tnps459#|LeanoraF |PDP| Group_BnC| NON LIS | ENGLISH | Summary Of Benefits | Evidence of Coverage | Comprehensive Formulary         | PETER DAWSON | 0108537701 | 01/01/2013    | Not Available  | Tier 2          | true        |     
       
  #TC22_NON LIS Ind plan member(PDP)- Drug Cost table
   @prod__benefitsAndCoverage15 @CMFedPDPNonLis  @Nonlis_Pdp

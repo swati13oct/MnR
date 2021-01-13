@@ -1,5 +1,6 @@
-@GlobalComponentsAARP @F448210
-Feature: 1.12 ACQ - Global Components AARP and UHC
+
+@GlobalComponentsAARP 
+Feature: 1.12 ACQ - Global Components AARP
 
   @globalfooterULayer
   Scenario Outline: To verify links displayed in the global footer of AARP site
@@ -35,9 +36,9 @@ Feature: 1.12 ACQ - Global Components AARP and UHC
       | Site | <site> |
     When user accesses global header of the Medicare Plans home page
     And user verifies the logo on home page
-    And user clicks on Sign in link on home page
-    And user clicks on register link on home page
-    Then user validates visitor profile on home page
+    And user clicks on Sign in link in the header
+    And user clicks on register link in the header
+    Then user clicks on the heart icon in the header
 
     @globalheader
     Examples: 
@@ -107,10 +108,6 @@ Feature: 1.12 ACQ - Global Components AARP and UHC
 
     @MedEdPages_3_GlobalCompsUHC
     Examples: 
-      | site | path                                                  | pageName                   | tfnXpath                                                             | tfnFlag |
-      | UHC  | medicare-education/medicare-costs.html                | Medicare Cost Basics       | //span[contains(@style,'inline')]//a[contains(@class, 'tel')]        | true    |
-      | UHC  | medicare-education/enrollment-and-changing-plans.html | Medicare Enrollment Basics | //div[contains(@style,'display: block')]//a[contains(@class, 'tel')] | true    |
-      | UHC  | medicare-education/medicare-faq.html                  | Medicare FAQ               | //div[contains(@style,'display: block')]//a[contains(@class, 'tel')] | true    |
 
     @ShopPlan_Shop1_GlobalCompsAARP
     Examples: 
@@ -373,9 +370,54 @@ Feature: 1.12 ACQ - Global Components AARP and UHC
       | path                               | pageName               | tfnXpath                                                           | tfnFlag |
       | shop/medicare-advantage-plans.html | ShopPlan: Shop MA Plan | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[1] | true    |
 
-  Scenario Outline: To verify Global Components (Sub Nav zipcode component)for the page mentioned of <site> site <pageName> : <path>
+   
+     
+    @GlobalComponentsAARPShopPages 
+  Scenario Outline: To verify Global Components for the page mentioned of AARP site <pageName> : <path>
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
+    Given the user navigates to following medicare acquisition site page
+      | PageName | <pageName> |
+      | PagePath | <path>     |
+    Then the user validate ZipCode Components on page using ZipCode "55410"
+    
+    
+    @ShopPages_Shop_GlobalCompsAARP
+     Examples: 
+    |site   | path                                                                      | pageName      | 
+    |AARP   | contact-us.html                                                           | Contact us  | 
+    |AARP   | shop/estimate/ma-costs.html                                               | Estimate  MA  | 
+    |AARP   | shop/estimate/pdp-costs.html                                              | Estimate PDP  |
+    |AARP   | shop/switch.html                                                          | Switch        |
+    |AARP   | shop/renew-active.html                                                    | Renew Active  |
+    |AARP   | shop/medicare-advantage-plans/ma-plan-benefits.html                       | MA Plan benefits|
+    |AARP   | shop/compare/compare-ma.html                                              | Compare MA    |
+    |AARP   | shop/compare/compare-pdp.html                                             | Compare PDP   |
+    |AARP   | shop/medicare-advantage-veteran-plan.html                                 | MA Veteran Plan|
+    |AARP   | enroll/ma-enrollment.html                                                 | MA Enrollment |
+    |AARP   | enroll/pdp-enrollment.html                                                | PDP Enrollment|
+    |AARP   |medicare-articles/eligibility-and-enrollment.html                          | Sample Category Page   |
+            
+    @ShopPages_Shop_GlobalCompsUHC
+     Examples: 
+    |site  | path                                                                      | pageName      | 
+    |UHC   | contact-us.html                                                           | Contact us    |
+    |UHC   | shop/estimate/ma-costs.html                                               | Estimate  MA  | 
+    |UHC   | shop/estimate/pdp-costs.html                                              | Estimate PDP  |
+    |UHC   | shop/switch.html                                                          | Switch        |
+    |UHC   | shop/renew-active.html                                                    | Renew Active  |
+    |UHC   | shop/medicare-advantage-plans/ma-plan-benefits.html                       | MA Plan benefits|
+    |UHC   | shop/compare/compare-ma.html                                              | Compare MA    |
+    |UHC   | shop/compare/compare-pdp.html                                             | Compare PDP   |
+    |UHC   | shop/medicare-advantage-veteran-plan.html                                 | MA Veteran Plan|
+    |UHC   | enroll/ma-enrollment.html                                                 | MA Enrollment |
+    |UHC   | enroll/pdp-enrollment.html                                                | PDP Enrollment|
+    |UHC   |medicare-articles/eligibility-and-enrollment.html                          | Sample Category Page   |
+    
+   @GlobalComponentsAARPBlogPages   
+  Scenario Outline: To verify Global Components for the page mentioned of AARP site <pageName> : <path>
+    Given the user is on medicare acquisition site landing page
+  		| Site | <site>	|
     Given the user navigates to following medicare acquisition site page
       | PageName | <pageName> |
       | PagePath | <path>     |
