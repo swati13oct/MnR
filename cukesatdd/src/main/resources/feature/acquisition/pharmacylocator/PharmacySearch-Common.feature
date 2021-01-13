@@ -480,10 +480,8 @@ Feature: 1.11. ACQ-Pharmacy Locator Test Scripts
   Scenario Outline: To verify breadcrumbs on pharmacy search page through DCE page on acquisition <site> site
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
-<<<<<<< HEAD
     When I access the acquisition DCE Redesign from home page
     Then the user validates Get Started Page
-=======
     When the user performs plan search using following information
       | Zip Code        | <zipcode>         |
       | Is Multi County | <isMultutiCounty> |
@@ -510,7 +508,6 @@ Feature: 1.11. ACQ-Pharmacy Locator Test Scripts
       | Site | <site> |
    	When I access the acquisition DCE Redesign from home page
    	Then the user validates Get Started Page
->>>>>>> branch 'feature-F504721' of https://github.optum.com/Consumer-Portals/MRATDD.git
     When the user navigate to pharmacy search page from the navigation bar
     Then user verify breadcrumb "Return to Drug Cost Estimator" displayed on pharmacy search page
     When user clicks on breadcrumb on pharmacy search page
@@ -535,7 +532,7 @@ Feature: 1.11. ACQ-Pharmacy Locator Test Scripts
 
     @breadcrumbPharmacySearch_UHC
     Examples: 
-<<<<<<< HEAD
+
       | site | zipcode | county      | isMultutiCounty | plantype | drug1   |
       | UHC  |   19019 | Iowa County | No              | MAPD     | Lipitor |
      
@@ -600,8 +597,6 @@ Feature: 1.11. ACQ-Pharmacy Locator Test Scripts
       | UHC |   90210 | Iowa County | No              | MAPD     |future|AARP Medicare Advantage SecureHorizons Focus (HMO)|
 
 
-   
-=======
       | site | zipcode | county      | isMultutiCounty | plantype |drug1|
       | UHC  |   19019 | Iowa County | No              | MAPD     |Lipitor|
       
@@ -628,4 +623,4 @@ Feature: 1.11. ACQ-Pharmacy Locator Test Scripts
     Examples: 
       | site | zipcode | county      | isMultutiCounty | plantype |
       | UHC  |   19019 | Iowa County | No              | MAPD     |
->>>>>>> branch 'feature-F504721' of https://github.optum.com/Consumer-Portals/MRATDD.git
+
