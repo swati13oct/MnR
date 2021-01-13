@@ -528,22 +528,22 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth Prod
     And the user validates text for the Locate a Pharmacy section
     And the user validates Locate a Pharmacy button should be visible
       | Plan Type | <planType> |
-    And the user should see drug copay and discount table
-      | Updated Language | <UpdatedLanguage> |
-      | Display Flag     | <DisplayFlag>     |
-    And the PDP individual NON-LIS  user should see drug cost table for Lis members
-    And the user validates view and document label
-    And the user validates links for pdp in pdf section
-      | Plan Type | <planType> |
-    And the user validates the language dropdown and the value displayed by default and selects new value in dropdown successfully
-      | Language | <language> |
-    And the user verifies that the correct pdfs are there in the plan material section of benefits page
-      | Summary of Benefits                 | <SummaryofBenefits>               |
-      | Evidence of Coverage                | <EvidenceofCoverage>              |
-      | Comprehensive Formulary - Drug List | <ComprehensiveFormularyDrug List> |
-      | Alternative Drug List               | <AlternativeDrugList>             |
-    And the user clicks on More Information link
-    And the user validates contactus section
+    ##And the user should see drug copay and discount table
+    ##  | Updated Language | <UpdatedLanguage> |
+    ##  | Display Flag     | <DisplayFlag>     |
+    ##And the PDP individual NON-LIS  user should see drug cost table for Lis members
+    ##And the user validates view and document label
+    ##And the user validates links for pdp in pdf section
+    ##  | Plan Type | <planType> |
+    ##And the user validates the language dropdown and the value displayed by default and selects new value in dropdown successfully
+    ##  | Language | <language> |
+    ##And the user verifies that the correct pdfs are there in the plan material section of benefits page
+    ##  | Summary of Benefits                 | <SummaryofBenefits>               |
+    ##  | Evidence of Coverage                | <EvidenceofCoverage>              |
+    ##  | Comprehensive Formulary - Drug List | <ComprehensiveFormularyDrug List> |
+    ##  | Alternative Drug List               | <AlternativeDrugList>             |
+    ##And the user clicks on More Information link
+    ##And the user validates contactus section
 
     Examples: 
       | index | TID   |username | password  | MemUserName| planType | memberType     | copayCategory | language | SummaryofBenefits   | EvidenceofCoverage   | ComprehensiveFormularyDrug List     | AlternativeDrugList   | name        | memberid   | effectivedate | monthlypremium | UpdatedLanguage | DisplayFlag | Identifier       | count | rider   |
