@@ -890,7 +890,7 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth Prod
       
 #============== experiment
   @prod_benefitsAndCoverage15 @CMFedPDPNonLis @test123
-  Scenario Outline: Index: <index> -TID: <TID> -plan: <planType> -memberType: <memberType> - Verify all sections for PDP Ind NonLIS member on Benefits and Coverage page
+  Scenario Outline: Test123
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
       | Username | <username> |
