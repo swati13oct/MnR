@@ -62,7 +62,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
     private WebElement UHCICSubTitle;
 
 	//@FindBy(xpath = "//*[contains(@id,'zipcodemeded')][1]//following-sibling::button//*[contains(text(),'Get Started')]")
-	@FindBy(xpath = "(//*[contains(@id,'zipcodemeded')][1]//following-sibling::button)[1]")
+	//@FindBy(xpath = "(//*[contains(@id,'zipcodemeded')][1]//following-sibling::button)[1]")
+	@FindBy(xpath = "//button//span[contains(text(), 'Shop')]")
 	private WebElement ShopEnrollButton;
 	
 	@FindBy(xpath = "(//button[contains(@class,'zip-button')])[2]")
