@@ -478,7 +478,7 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth Prod
       
  #TC22_NON LIS Ind plan member(PDP)- Drug Cost table
   @prod__benefitsAndCoverage15 @CMFedPDPNonLis  @Nonlis_Pdp
-  Scenario Outline: Index: <index> -TID: <TID> -plan: PDP -memberType: Individual_BnC - Verify all sections for PDP Ind NonLIS member on Benefits and Coverage page
+  Scenario Outline: Index: 14 -TID: 15377 -plan: PDP -memberType: Individual_BnC - Verify all sections for PDP Ind NonLIS member on Benefits and Coverage page
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
       | Username | <username> |
