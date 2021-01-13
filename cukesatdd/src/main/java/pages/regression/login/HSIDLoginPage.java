@@ -767,7 +767,7 @@ public class HSIDLoginPage extends UhcDriver {
 				} catch (Exception e1) {
 					System.out.println("did not encounter 'Go To Homepage', moving on. "+e1);
 				}
-				checkModelPopup(driver, 1);
+				checkModelPopup(driver, 2);
 			} else {
 				Assert.assertTrue("PROBLEM - will only workaround the splash page on team-atest or stage env, "
 						+ "please either use another test user or manually handle the splash page properly.  "
