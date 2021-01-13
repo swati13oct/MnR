@@ -229,7 +229,7 @@ public class GlobalWebElements extends UhcDriver {
 	@FindBy(xpath = "//div[@id='subnav_2']/div/div/div/div[2]/div/p[2]/a[2]/span")
 	public static WebElement medicareSelectHosipitalDirectoryLink;
 
-	@FindBy(xpath = "//div/a[contains(@dtmid, 'acq_top_nav') and contains(text(), 'Sign in')]")
+	@FindBy(xpath = "//div[@id='mobile-nav']//div//div//div//div/a[normalize-space()='Sign in']")
 	public static WebElement headerSignInLink;
 
 	@FindBy(xpath = "//div[@id='subnav_2']/div/div/div[2]/a")

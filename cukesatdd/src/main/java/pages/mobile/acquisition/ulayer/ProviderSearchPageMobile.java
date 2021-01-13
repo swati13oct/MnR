@@ -267,22 +267,23 @@ public class ProviderSearchPageMobile extends UhcDriver {
 
 		CommonUtility.waitForPageLoadNew(driver, Primary, 30);
 		Primary.click();
-
+		
 		CommonUtility.waitForPageLoadNew(driver, Physician, 30);
 
 		Physician.click();
+		CommonUtility.waitForPageLoadNew(driver, selectProviderBtn, 30);
+		jsClickNew(selectProviderBtn);
 
-		if (validate(selectLocationOption, 10)) {
-			selectLocationOption.click();
+		if (validate(selectLocationOption,10)) {
+			jsClickNew(selectLocationOption);
 			validateNew(saveBtn2);
-			saveBtn2.click();
+			jsClickNew(saveBtn2);
 		}
 		threadsleep(10);
-		scrollToView(providerNameText);
 		validateNew(providerNameText);
 		String providerSaved = providerNameText.getText().trim();
 		System.out.println("Provider Name is : " + providerSaved);
-		MRConstants.PROV_NAME = providerSaved;
+		MRConstants.PROV_NAME=providerSaved;
 
 		/*
 		 * if(driver.findElements(By.xpath(

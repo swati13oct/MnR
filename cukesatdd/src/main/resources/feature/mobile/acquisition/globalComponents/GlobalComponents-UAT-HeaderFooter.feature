@@ -224,7 +224,7 @@ Feature: 1.12 UAT - Header and Footer flows
     And the user clicks on browser back button
     And user clicks on visit aarp.org link in the header
     And the user clicks on browser back button
-    And user clicks on visit aarp.org link in the footer
+    #And user clicks on visit aarp.org link in the footer
 
     @globalfooter_AARPPPP
     Examples: 
@@ -282,7 +282,7 @@ Feature: 1.12 UAT - Header and Footer flows
     And the user clicks on browser back button
     And user clicks on visit aarp.org link in the header
     And the user clicks on browser back button
-    And user clicks on visit aarp.org link in the footer
+    #And user clicks on visit aarp.org link in the footer
 
     @globalheader_AARP
     Examples: 
