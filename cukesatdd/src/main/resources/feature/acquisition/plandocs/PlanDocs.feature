@@ -18,7 +18,7 @@ Feature: 1.13 ACQ AARP- To test plandocs in AARP and UHC Site
     @acq_plandocs_AARP
     Examples: 
       | TID | site | zipcode | county             | plan                                                   | aepyear |
-      |   1 | AARP |   90002 | Los Angeles County | AARP Medicare Advantage SecureHorizons Essential (HMO) | no                |
+      |   1 | AARP |   90002 | Los Angeles County | AARP Medicare Advantage SecureHorizons Focus (HMO) | no                |
       |   2 | AARP |   55344 | Hennepin County    | UnitedHealthcare Nursing Home Plan (PPO I-SNP)         | no                |
       |   3 | AARP |   80002 | Jefferson County   | AARP Medicare Advantage Patriot (HMO)         | no                |
       
@@ -26,7 +26,7 @@ Feature: 1.13 ACQ AARP- To test plandocs in AARP and UHC Site
     @acq_plandocs_UHC
     Examples: 
       | TID | site | zipcode | county             | plan                                                   | aepyear |
-      |   1 | UHC  |   90002 | Los Angeles County | AARP Medicare Advantage SecureHorizons Essential (HMO) | no                |
+      |   1 | UHC  |   90002 | Los Angeles County | AARP Medicare Advantage SecureHorizons Focus (HMO) | no                |
       |   2 | UHC  |   55344 | Hennepin County    | UnitedHealthcare Nursing Home Plan (PPO I-SNP)         | no                |
     
    Scenario Outline: TID: <TID> - To test the plan documents error message scenario
