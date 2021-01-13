@@ -907,6 +907,6 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth Prod
       | Plan Type | <planType> |
 
     Examples: 
-      | index | TID   | username | password  | MemUserName| planType | memberType     | copayCategory | language | SummaryofBenefits   | EvidenceofCoverage   | ComprehensiveFormularyDrug List     | AlternativeDrugList   | name        | memberid   | effectivedate | monthlypremium | UpdatedLanguage | DisplayFlag | Identifier       | count | rider   |
-      | 16    | 15377 | kkumard  | tnps459#  | cmc29501   | PDP      | Individual_BnC | NON LIS       | ENGLISH  | Summary of Benefits | Evidence of Coverage | Comprehensive Formulary - Drug List | Alternative Drug List | ECADEA DCAA | 0197331001 | 05/01/2018    | Not Available  | Tier 2          | true        | EffectivePDPAARP | 4     | NoRider |
+      | index | TID   | username | password  | MemUserName| planType | memberType     | 
+      | 16    | 15377 | kkumard  | tnps459#  | cmc29501   | PDP      | Individual_BnC |
        
