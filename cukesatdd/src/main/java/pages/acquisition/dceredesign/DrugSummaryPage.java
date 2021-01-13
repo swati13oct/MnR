@@ -108,10 +108,12 @@ public class DrugSummaryPage extends UhcDriver {
 	@FindBy(id = "changePharmacyLink")
 	public WebElement changePharmacy;
 
-	@FindBy(id = "selectaPharmacyHeader")
+//	@FindBy(id = "selectaPharmacyHeader")
+	@FindBy(xpath = "//h3[@id='modal-label'][text()='Select a Pharmacy']")
 	public WebElement selectPharmacyHeader;
 
-	@FindBy(id = "selectPharmcyModalCloseLink")
+//	@FindBy(id = "selectPharmcyModalCloseLink")
+	@FindBy(id = "cancelicon")
 	public WebElement selectPharmacyModalCloseBtn;
 
 	@FindBy(xpath = "//*[@class='uhc-card__content']//*[contains(text(),'We are currently')]")
