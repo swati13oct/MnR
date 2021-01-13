@@ -141,7 +141,7 @@ Scenario Outline: TID: <TID> -plan type: <PlanType> - OLE End to end from E2E Sh
      	| Plan Type | <plantype> |
       | Plan Name | <planName> |
        |Plan Year	| <planyear>|
-    When the user performs plan search using Shop Pages
+    When the user performs plan search using Shop Pages for DSNP Plans
       | Zip Code        | <zipcode>         |
       | County Name     | <county>          |
       | Is Multi County | <isMultutiCounty> |
