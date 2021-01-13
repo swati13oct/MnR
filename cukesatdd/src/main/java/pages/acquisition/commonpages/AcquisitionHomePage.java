@@ -63,7 +63,12 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	//@FindBy(xpath = "//*[contains(@id,'zipcodemeded')][1]//following-sibling::button//*[contains(text(),'Get Started')]")
 	@FindBy(xpath = "(//*[contains(@id,'zipcodemeded')][1]//following-sibling::button)[1]")
+	//@FindBy(xpath = "//button//span[contains(text(), 'Shop')]")
 	private WebElement ShopEnrollButton;
+	
+	//@FindBy(xpath = "(//*[contains(@id,'zipcodemeded')][1]//following-sibling::button)[1]")
+	@FindBy(xpath = "//button//span[contains(text(), 'Shop')]")
+	private WebElement ShopdsnpEnrollButton;
 	
 	@FindBy(xpath = "(//button[contains(@class,'zip-button')])[2]")
 	private WebElement LearnMedicareMedsuppEnrollButton;
@@ -5614,6 +5619,34 @@ public PrivacyPolicyAARPPage privacypolicyFooterClick() {
 			return null;
 		}
 		
+		
+		public VPPPlanSummaryPage searchPlansWithOutCountyShopDSNPEnroll(String zipcode) throws InterruptedException {
+
+			CommonUtility.waitForPageLoadNew(driver, zipCodeShopField, 30);
+			sendkeys(zipCodeShopField, zipcode);
+			jsClickNew(ShopdsnpEnrollButton);
+			waitForPageLoadSafari();
+			// }
+			CommonUtility.waitForPageLoadNew(driver, zipcodeChangeLink, 30);
+			if (driver.getCurrentUrl().contains("health-plans")) {
+				return new VPPPlanSummaryPage(driver);
+			} else
+				return null;
+		}
+			public VPPPlanSummaryPage searchPlansShopDSNPEnroll(String zipcode, String countyName) {
+			CommonUtility.waitForPageLoadNew(driver, zipCodeShopField, 30);
+			sendkeys(zipCodeShopField, zipcode);
+			jsClickNew(ShopdsnpEnrollButton);
+			CommonUtility.waitForPageLoad(driver, countyModal, 45);
+			if (validate(countyModal))
+				jsClickNew(driver.findElement(By.xpath("//div[@id='selectCounty']//a[text()='" + countyName + "']")));
+			CommonUtility.waitForPageLoadNew(driver, vppTop, 30);
+			if (driver.getCurrentUrl().contains("plan-summary")) {
+				return new VPPPlanSummaryPage(driver);
+			}
+			return null;
+		}	
+			
 		}
 		
 		

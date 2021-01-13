@@ -2,7 +2,7 @@ Feature: UAT Scripts-To test Organic SearchCampaign TFN on AARP site
 
  #######################Script 3: Organic Search via Google and Bing##########################################
  
-  @Scenario3_1_GoogleBingSearch_AARP_UAT
+  @Scenario3_1_GoogleBingSearch_AARP_UAT @UATRegression
   Scenario Outline: - <scenario> 3.1 Google search AARP Medicare Advantage Plan
     Given the user Starts WebDriver
     Given user is on Google and search AARP Medicare Advantage Plan to navigate to AARP page
@@ -52,7 +52,7 @@ Feature: UAT Scripts-To test Organic SearchCampaign TFN on AARP site
    
 
   #######################Script 6: Campaign Precedence Logic#######################################
-  @Scenario_6_Precedence_1_AARP_UAT
+  @Scenario_6_Precedence_1_AARP_UAT @UATRegression
   Scenario Outline: <scenario> Campaign Precedence Logic No 1
     #------------------------**********---------------------------------
     # Precedence 6.1 - Visit AMP using google URL , PSC code 810106
