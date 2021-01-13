@@ -488,26 +488,26 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth Prod
       | Retry | true |
     And user clicks on member to select
     And user stores test input for validations
-      | Username     | <MemUserName> |
+      | Username | <MemUserName> |
       | Plan Type    | <planType>    |
       | Member Type  | <memberType>  |
-      | Copay Category | <copayCategory> |
-    Then The user navigate to Benefits and Coverage page
+    Then The user navigates to Benefits and Coverage page
+      | Plan Type | <planType> |
     Then user verifies presence of jump links
       | Plan Type  | <planType>   |
       | Rider      | <rider>      |
       | MemberType | <memberType> |
       | identifier | <Identifier> |
-    And user clicks on the jump links and checks respective sections
-      | Plan Type  | <planType>   |
-      | Rider      | <rider>      |
-      | MemberType | <memberType> |
-      | identifier | <Identifier> |
-    And verifies links irrelevant to the plan type are not displayed
-      | Plan Type  | <planType>   |
-      | Rider      | <rider>      |
-      | Count      | <count>      |
-      | MemberType | <memberType> |
+    ##And user clicks on the jump links and checks respective sections
+    ##  | Plan Type  | <planType>   |
+    ##  | Rider      | <rider>      |
+    ##  | MemberType | <memberType> |
+    ##  | identifier | <Identifier> |
+    ##And verifies links irrelevant to the plan type are not displayed
+    ##  | Plan Type  | <planType>   |
+    ##  | Rider      | <rider>      |
+    ##  | Count      | <count>      |
+    ##  | MemberType | <memberType> |
     ##And the user validates Ind plan overview
     ##  | Name            | <name>           |
     ##  | Member ID       | <memberid>       |
