@@ -3435,27 +3435,23 @@ public void the_user_validates_the_OLE_Submission_Details_in_GPS(DataTable arg1)
 				}						
 				//---------------------------------------------------//	
 			//------------Added for Jenkins Report---------------//
-				List<String> testNote=(List<String>) getLoginScenario().getBean(oleCommonConstants.TEST_RESULT_NOTE);
-				if (testNote==null)
-					testNote=new ArrayList<String>();
-
-
-				testNote.add("===================================================");
-				testNote.add("\tValidation for able to print all the values from the GPS");
+				
 				Map<String,String> matched = new HashMap<String,String>();
 				Map<String,String> mismatched = new HashMap<String,String>();
 				//------------Added for Jenkins Report---------------//	
 				boolean Validation_Status = OLEGPSValidation.validate_GPS_for_Plantype(DetailsMap,matched,mismatched);
 				if (Validation_Status) {
 					System.out.println("OLE Confirmation Page : All Plan Details Validated in GPS");
-					getLoginScenario().saveBean(OLE_PageConstants.OLE_CONFIRMATION_PAGE, OLEGPSValidation);
-					getLoginScenario().saveBean(oleCommonConstants.TEST_RESULT_NOTE,OLEGPSValidation);
+					getLoginScenario().saveBean(OLE_PageConstants.OLE_CONFIRMATION_PAGE, OLEGPSValidation);										
+					
+				//	getLoginScenario().saveBean(oleCommonConstants.TEST_RESULT_NOTE,testNote1);
 					Assert.assertTrue(true);
-					testNote.add("\tPASSED- "+ Arrays.asList(matched)  +"able to print all the values from the GPS");
+					
+					
 				} else {
 					System.out.println("OLE Confirmation Page : All Plan and Member Details  NOT validated in GPS");
 					Assert.fail("OLE Confirmation Page : All Plan and Member Details  NOT validated in GPS");
-					testNote.add("\tFAILED- "+ Arrays.asList(mismatched)  +"not able to print all the values from the GPS");
+					
 				}
 			} else {
 				getLoginScenario().saveBean(OLE_PageConstants.OLE_CONFIRMATION_PAGE, OLEGPSValidation);
@@ -3463,7 +3459,7 @@ public void the_user_validates_the_OLE_Submission_Details_in_GPS(DataTable arg1)
 				Assert.fail("OLE Confirmation Page is NOT Displayed : OLE Submission Failed");
 			}
 		} else {
-			System.out.println("Skipping the Confirmation functionality in Offline-Prod/Prod environment/team acme environment");
+			System.out.println("Skipping the Confirmation functionality in Offline-Prod/Prod environment environment");
 		}
 
 }
@@ -3806,12 +3802,12 @@ public void the_user_navigates_to_Review_and_Submit_Page_clickon_Edit_Medicare_P
 		public void testResultNote(Scenario scenario) { 
 			if(null!=getLoginScenario().getBean(oleCommonConstants.TEST_RESULT_NOTE)) {   
 				@SuppressWarnings("unchecked")   
-				List<String> testNote=(List<String>) getLoginScenario()
+				List<String> testNote1=(List<String>) getLoginScenario()
 						.getBean(oleCommonConstants.TEST_RESULT_NOTE);
-				for (String s: testNote) {   
+				for (String s: testNote1) {   
 					scenario.write(s);
 				}
-				testNote.clear(); 
+				testNote1.clear(); 
 			}
 	}
 }
