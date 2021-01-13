@@ -478,7 +478,7 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth Prod
       
   #TC22_NON LIS Ind plan member(PDP)- Drug Cost table
   @prod_benefitsAndCoverage15 @CMFedPDPNonLis @Nonlis_Pdp
-  Scenario Outline: Index: <index> -TID: <TID> -plan: <planType> -memberType: <memberType> - Verify all sections for PDP Ind NonLIS member on Benefits and Coverage page
+  Scenario Outline: Index: <index> -TID: <TID> -plan: <planType> -memberType: <memberType> - Verify city of Hartford Prescription Drug Benefits
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
       | Username | <username> |
@@ -493,11 +493,11 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth Prod
       | Member Type  | <memberType>  |
     Then The user navigates to Benefits and Coverage page
       | Plan Type | <planType> |
-    Then user verifies presence of jump links
-      | Plan Type  | <planType>   |
-      | Rider      | <rider>      |
-      | MemberType | <memberType> |
-      | identifier | <Identifier> |
+    ##Then user verifies presence of jump links
+    ##  | Plan Type  | <planType>   |
+    ##  | Rider      | <rider>      |
+    ##  | MemberType | <memberType> |
+    ##  | identifier | <Identifier> |
     ##And user clicks on the jump links and checks respective sections
     ##  | Plan Type  | <planType>   |
     ##  | Rider      | <rider>      |
