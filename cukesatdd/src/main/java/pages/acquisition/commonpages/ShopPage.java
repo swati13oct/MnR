@@ -474,7 +474,7 @@ public class ShopPage extends UhcDriver {
 		}
 	}
 	
-	public void clickonFindanAgentlinkfromMedEd(String ExpectedUHCAgentURL ) {
+	public void clickonFindanAgentlinkfromShop(String ExpectedUHCAgentURL ) {
 		
 		validateNew(FindAnAgent);
 		CommonUtility.waitForPageLoadNew(driver, FindAnAgent, 30);

@@ -282,7 +282,7 @@ public class ShopForaPlanCommonStepDefinition {
 		Map<String, String> inputAttributesMap=parseInputArguments(arg1);
 		String myUHCAgentURL = inputAttributesMap.get("UHC Agent URL");
 		ShopPage shopPage = (ShopPage)getLoginScenario().getBean(PageConstants.SHOP_PAGE);
-		shopPage.clickonFindanAgentlinkfromMedEd(myUHCAgentURL);
+		shopPage.clickonFindanAgentlinkfromShop(myUHCAgentURL);
 		
 	}
 	
