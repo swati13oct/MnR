@@ -754,6 +754,7 @@ public class TestHarness extends UhcDriver {
 	}
 	
 	public PlanDocumentsAndResourcesPage navigateToEOBPageThenBenefitsTerm() {
+		checkModelPopup(driver,5);
 		CommonUtility.waitForPageLoad(driver, eobPageLink,30);
 		validateNew(eobPageLink);
 		eobPageLink.click();

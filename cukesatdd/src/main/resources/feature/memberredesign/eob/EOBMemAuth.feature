@@ -68,12 +68,12 @@ Feature: 1.04.1.1 To Test NON-DREAM EOB for Members - E2E - Member Auth
     @memAuth_SHIP_EOBs @memAuth_SHIP_EOBs1_multiShip
     Examples: 
       | index | username  | password  | MemUserName             | planType                 | memberType           | eobType | realEob | flagZeroEob |
-      | 11    | qavgogine | qavgogine | q4_Ship_014     | SHIP_MEDICARE SUPPLEMENT | COMBO_MULTI_SHIP_EOB | Medical | false   | true        | 
+      | 11    | qavgogine | qavgogine | q4_Ship_016             | SHIP_MEDICARE SUPPLEMENT | COMBO_MULTI_SHIP_EOB | Medical | false   | true        | 
 
     @memAuth_SHIP_EOBs @memAuth_SHIP_EOBs2_singleShip
     Examples: 
       | index | username  | password  | MemUserName             | planType                 | memberType           | eobType | realEob | flagZeroEob |
-      | 18    | qavgogine | qavgogine | Ship_EOB_Sep_002        | SHIP_MEDICARE SUPPLEMENT | SHIP_EOB             | Medical | true    | true        | 
+      | 18    | qavgogine | qavgogine | q4_Ship_023             | SHIP_MEDICARE SUPPLEMENT | SHIP_EOB             | Medical | false   | true        | 
 
     @memAuth_SHIP_EOBs @memAuth_SHIP_EOBs3_shipComboFedShip
     Examples: 
@@ -111,7 +111,7 @@ Feature: 1.04.1.1 To Test NON-DREAM EOB for Members - E2E - Member Auth
     @memAuth_PHIP_EOBs
     Examples: 
       | index | username  | password  | MemUserName        | TID   | planType | memberType |
-      | 15    | qavgogine | qavgogine | q3_SEP_2020SHIP_037| 15174 | PHIP     | SHIP_EOB   |
+      | 15    | qavgogine | qavgogine | q4_Ship_044 | 15174 | PHIP     | SHIP_EOB   |
 
 
   #note: pending coverage until SSUP individual user is available
@@ -158,4 +158,4 @@ Feature: 1.04.1.1 To Test NON-DREAM EOB for Members - E2E - Member Auth
     @memAuth_SSP_EOBs
     Examples: 
       | index | username  | password  | MemUserName              | FID    | planType | memberType | 
-      | 17    | qavgogine | qavgogine | q2_june_Cosmos_Seg233    | 267688 | SSUP     | GROUP_EOB  | 
+      | 17    | qavgogine | qavgogine | q2_jun_grp0255    | 267688 | SSUP     | GROUP_EOB  | 

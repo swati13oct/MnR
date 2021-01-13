@@ -58,7 +58,7 @@ Feature: 1.24.2 Member Individual Health Record - PROD
     @prod_no_ihr_boaGrp2
     Examples: 
 	    | index | FID     | username  | password  | MemUserName             | planType | memberType         | expectLink | 
-	    | 07    | F424804 | kkumard   | tnps459#  | bernwl               | MA       | BOA12324_TERM_GROUP_IHR | false |
+	    | 07    | F424804 | kkumard   | tnps459#  | bernwl               | MA       | BOA12324_GROUP_IHR | false |
 
     #----------- begin - cases with IHR link
     @prod_ihr_ma_mapd

@@ -591,7 +591,9 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 			return "8002";
 		if (docName.toLowerCase().equalsIgnoreCase("Additional Drug Coverage".toLowerCase())) 
 			return "4005";
-		if (docName.toLowerCase().equalsIgnoreCase("CDI Long Notice".toLowerCase()) || docName.toLowerCase().equalsIgnoreCase("Privacy Notice".toLowerCase())) 
+		if (docName.toLowerCase().contains("CDI Long Notice".toLowerCase())) 
+			return "7018";
+		if (docName.toLowerCase().equalsIgnoreCase("Privacy Notice".toLowerCase())) 
 			return "5009";
 		if (docName.toLowerCase().equalsIgnoreCase("Schedule of benefits".toLowerCase()) ) 
 			return "1021";
@@ -794,20 +796,47 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 		if (expDocDisplay  && !planType.equals("SHIP")) //note: for ship there is no language option
 			selectLangFromDropdown(section, targetLang);
 
+		List<String> sectionNote_tmp=new ArrayList<String>();
+		
 		for(String expDocName: expDocList) {
+			Boolean knownIssue=false;
+			String knownIssueMsg="";
+			if (expDocName.equals("CDI Long Notice") && planType.contains("SSP") && section.equals("Plan Materials")) { 
+			 	knownIssue=true;
+			 	knownIssueMsg="KNOWN ISSUE - Incident ticket: INC19654052";
+			}
+			if (expDocName.equals("Your Plan Getting Started") && planType.contains("SSP") && section.equals("Plan Materials")) { 
+				knownIssue=true;
+				knownIssueMsg="KNOWN ISSUE - Incident ticket: INC19574472";
+			}
+
 			System.out.println("************************************************************");
 			System.out.println("TEST - looking for expDocName '"+expDocName+"' on UI");
 			HashMap<String, Document> act_doc=validateDoc(testInputInfoMap, expDocName);
-			Assert.assertTrue("PROBLEM - unable to locate doc='"+expDocName+"'", act_doc!=null || !expDocDisplay);
-			sectionNote.add("  PASSED - document '"+expDocName+"' validation UI vs expected list");
+			if (!(act_doc!=null ||!expDocDisplay)
+				&&  knownIssue				) { 
+				sectionNote_tmp.add("  * FAILED - "+knownIssueMsg+" - unable to locate doc='"+expDocName+"' on UI");
+			} else {
+				//note: when the incident ticket is fixed, the if condition can be removed and only keep this line of code for validation
+				Assert.assertTrue("PROBLEM - unable to locate doc='"+expDocName+"'", act_doc!=null || !expDocDisplay);
+			}
 			act_docListFromUi.add(act_doc);
 		}
+
+		for (String s: sectionNote_tmp) {
+			if (s.contains("FAILED")) {
+				sectionNote.addAll(sectionNote_tmp);
+				sectionNote.add(0, "UI VALIDATOIN FAILED");
+				return sectionNote; //note: no point of continuing, get out of here now
+			}
+		}
+		
 		//note: if validateApi==false, then we are all done at this point for this validation
 		//---------------------------------------
 		//note: this section will only invoke if step definition decide to validate API also
 		if (validateApi) {
 			if (memberType.contains("TERM")) {
-				sectionNote.add("  BYPASS - UI vs API validation because terminated user has no doc list");
+				sectionNote_tmp.add("  BYPASS - UI vs API validation because terminated user has no doc list");
 				return sectionNote;
 			}
 			boolean anocFlag=false;
@@ -1091,8 +1120,7 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 					BufferedInputStream TestFile = new BufferedInputStream(TestURL.openStream());
 					PDDocument document = PDDocument.load(TestFile);
 					String PDFText = new PDFTextStripper().getText(document);
-					//keep-for-debug 
-					System.out.println("PDF text : "+PDFText);
+					//keep-for-debug System.out.println("PDF text : "+PDFText);
 					if (targetDocName.equals("Medicare Plan Appeals & Grievances Form (PDF)") 
 							|| targetDocName.equals("Medicare Plan Appeals & Grievances Form")) {
 						section_note.add("    SKIPPED - has trouble parsing this particular PDF, skip the detail validation for now");
@@ -1141,10 +1169,12 @@ public class PlanDocumentsAndResourcesBase extends PlanDocumentsAndResourcesBase
 				} else if (targetDocName.equals("Drug-specific Prior Authorization Request Forms") && MRScenario.environment.equals("stage")) {
 					String actStageUrl=driver.getCurrentUrl();
 					String expStageUrl="/content/rxmember/default/en_us/angular-free/optumrx/public-errorpage.html";
-					if (actStageUrl.contains(expStageUrl)) 
-						section_note.add("    PASSED - stage env could be getting sorry msg for doc name="+targetDocName);
+					String expStageUrl2="/content/eligibility";
+					String expStageUrl3="/register/personalInfo";
+					if (actStageUrl.contains(expStageUrl) || actStageUrl.contains(expStageUrl2)|| actStageUrl.contains(expStageUrl3)) 
+						section_note.add("    PASSED - stage env could be getting sorry or ineligbility or personalInfo msg for doc name="+targetDocName);
 					else {
-						Assert.assertTrue("PROBLEM - not getting expected output (for stage, expect it to get sorry msg for have trouble opening)- doc name="+targetDocName, actStageUrl.contains(expStageUrl));
+						Assert.assertTrue("PROBLEM - not getting expected output (for stage, expect it to get sorry msg for have trouble opening)- doc name="+targetDocName+". actStageUrl='"+actStageUrl+"'", actStageUrl.contains(expStageUrl));
 					}
 				} else 
 				//note: for html or any url that's not pdf related

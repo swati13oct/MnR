@@ -356,6 +356,7 @@ public void user_clicks_on_View_all_disclaimer_information_link_on_home_page_in_
 		}
 	}
 
+
 	@Then("^the user validate ZipCode Components on UHC page using ZipCode \"([^\"]*)\"$") 
 	public void the_user_validate_ZipCode_Components_on_page_using_ZipCode(String zipCode) throws Throwable {
 		//EnterZipCodePage enterZipCodePage= new EnterZipCodePage(driver);
@@ -371,8 +372,9 @@ public void user_clicks_on_View_all_disclaimer_information_link_on_home_page_in_
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		aquisitionhomepage.enterAndvalidateEmail();
+
 		
-	}
+}
 	
 	@Then("^the user validates Pro-active Chat on UHC site$")
 	public void the_user_validates_Pro_active_Chat_uhc() throws Throwable {
