@@ -1,6 +1,7 @@
 package acceptancetests.acquisition.shopforaplan;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -274,5 +275,23 @@ public class ShopForaPlanCommonStepDefinition {
 			getLoginScenario().saveBean(PageConstants.ENROLLMENT_BASICS_PAGE, enrollPage);
 		else
 			System.out.println("continue button is not displayed provider search page");
+	}
+	
+	@Then("^the user clicks on Agent link and validates the correct URL is loaded from shop page$")
+	public void the_user_clicks_on_Agent_link_and_validates_the_correct_URL_is_loaded_from_shop_page(DataTable arg1) throws InterruptedException {
+		Map<String, String> inputAttributesMap=parseInputArguments(arg1);
+		String myUHCAgentURL = inputAttributesMap.get("UHC Agent URL");
+		ShopPage shopPage = (ShopPage)getLoginScenario().getBean(PageConstants.SHOP_PAGE);
+		shopPage.clickonFindanAgentlinkfromMedEd(myUHCAgentURL);
+		
+	}
+	
+	public Map<String, String> parseInputArguments(DataTable memberAttributes) {
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+		return memberAttributesMap;
 	}
 }
