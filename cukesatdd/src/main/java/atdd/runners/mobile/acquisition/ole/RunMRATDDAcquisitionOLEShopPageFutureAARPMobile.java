@@ -15,9 +15,10 @@ import cucumber.api.CucumberOptions;
 @ExtendedCucumberOptions(retryCount=1,screenShotSize="", screenShotLocation="/screenshots/",
 jsonReport = "target/cucumber-RunMRATDDAcquisitionOLEShopPageFutureAARPMobile.json",detailedReport = true,
  detailedAggregatedReport = true, overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDAcquisitionOLEShopPageFutureAARPMobile")
-@CucumberOptions(glue = { "atdd.framework", "acceptancetests.mobile.acquisition" },monochrome=true, 
+@CucumberOptions(glue = { "atdd.framework", "acceptancetests.mobile" },monochrome=true, 
 features = { "src/main/resources/feature/mobile/acquisition/ole" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionOLEShopPageFutureAARPMobile.json" }, tags = { "@ShopPage_OLE_Future_AARP" })
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionOLEShopPageFutureAARPMobile.json" }, 
+tags = { "@ShopPage_OLE_Future_AARP" }, dryRun=false)
 
 
 

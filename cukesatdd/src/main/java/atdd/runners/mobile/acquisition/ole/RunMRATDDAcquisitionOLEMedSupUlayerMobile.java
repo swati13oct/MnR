@@ -14,9 +14,10 @@ import cucumber.api.CucumberOptions;
 @ExtendedCucumberOptions(retryCount=1,screenShotSize="", screenShotLocation="/screenshots/",
 jsonReport = "target/cucumber-RunMRATDDAcquisitionOLEMedSupUlayerMobile.json",detailedReport = true,
  detailedAggregatedReport = true, overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDAcquisitionOLEMedSupUlayerMobile")
-@CucumberOptions(glue = { "atdd.framework", "acceptancetests.mobile.acquisition" },monochrome=true,
+@CucumberOptions(glue = { "atdd.framework", "acceptancetests.mobile" },monochrome=true,
 features = { "src/main/resources/feature/mobile/acquisition/ole" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionOLEMedSupUlayerMobile.json" }, tags = { "@MedSupp_OLE_Common_AARP" })
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionOLEMedSupUlayerMobile.json" }, tags = { "@MedSupp_OLE_Common_AARP" },
+				dryRun=false)
 public class RunMRATDDAcquisitionOLEMedSupUlayerMobile { 
  
 }

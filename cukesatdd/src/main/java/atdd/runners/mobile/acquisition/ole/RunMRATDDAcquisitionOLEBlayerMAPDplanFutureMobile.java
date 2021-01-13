@@ -14,10 +14,10 @@ import cucumber.api.CucumberOptions;
 @ExtendedCucumberOptions(retryCount = 1, screenShotSize = "", screenShotLocation = "/screenshots/", 
 jsonReport = "target/cucumber-RunMRATDDAcquisitionOLEBlayerMAPDplanFutureMobile.json", detailedReport = true, 
 detailedAggregatedReport = true, overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDAcquisitionOLEBlayerMAPDplanFutureMobile")
-@CucumberOptions(glue = { "atdd.framework", "acceptancetests.mobile.acquisition" }, monochrome = true, features = {
+@CucumberOptions(glue = { "atdd.framework", "acceptancetests.mobile" }, monochrome = true, features = {
 		"src/main/resources/feature/mobile/acquisition/ole" }, plugin = { "pretty", "html:reports/test-report",
 				"json:target/cucumber-RunMRATDDAcquisitionOLEBlayerMAPDplanFutureMobile.json" }, tags = {
-						"@MAPD_OLE_UHC_Future" })
+						"@MAPD_OLE_UHC_Future" }, dryRun=false)
 
 public class RunMRATDDAcquisitionOLEBlayerMAPDplanFutureMobile {
 
