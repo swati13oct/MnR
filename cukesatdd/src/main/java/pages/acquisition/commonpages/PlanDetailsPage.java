@@ -1281,16 +1281,29 @@ public class PlanDetailsPage extends UhcDriver {
 		return false;
 	}
 
-	public boolean clickAndValidatePDFText_URL(String pdfType, String documentCode) {
+	public HashMap<Boolean,String> clickAndValidatePDFText_URL(String pdfType) {
 		List <WebElement> PDFlink = driver.findElements(By.xpath("//*[contains(@id, 'planDocuments')]//a[contains(text(), '"+pdfType+"')]"));
-
-		String PdfHref = PDFlink.get(0).getAttribute("href");
-		System.out.println("href for the PDF is : "+PdfHref);
-		if(PdfHref.contains(documentCode)){
-			System.out.println("Expected Document code :"+documentCode+"-  is mathing the PDF link :  "+PdfHref);
-			
+		String documentCode = "",pdfHref ="";
+		HashMap<Boolean, String> comparedResult = new HashMap<Boolean, String>();
+		if(pdfType.contains("Step Therapy")) {
+			documentCode = "Step Therapy";
+		}else if(pdfType.contains("Prior Auth")) {
+			documentCode = "Prior Authorization";
+		}else if(pdfType.contains("Formulary Additions")){
+			documentCode = "Formulary Additions";
+		}else if(pdfType.contains("Formulary Deletions")){
+			documentCode = "Formulary Deletions";
+		}else {
+		
+			pdfHref = PDFlink.get(0).getAttribute("href");
+			String a = "/";
+			 int posA = pdfHref.lastIndexOf(a);
+		     int adjustedPosA = posA + a.length();
+		     documentCode = pdfHref.substring(adjustedPosA);  
 		}
 		
+		System.out.println("Expected Document code :"+documentCode);
+
 		String parentHandle = driver.getWindowHandle();
 		
 
@@ -1306,10 +1319,10 @@ public class PlanDetailsPage extends UhcDriver {
 		for(String winHandle : driver.getWindowHandles()){
 		    driver.switchTo().window(winHandle);
 		}
-		System.out.println("Switched to new window : Passed");
+		//System.out.println("Switched to new window : Passed");
 		CommonUtility.checkPageIsReadyNew(driver);
 
-		boolean Validation_Flag = false;
+		boolean validationFlag = false; String validationString = "FAILED";
 		
 		try {
 			URL TestURL = new URL(driver.getCurrentUrl());
@@ -1319,11 +1332,14 @@ public class PlanDetailsPage extends UhcDriver {
 			TestPDF.parse();*/
 			String PDFText = new PDFTextStripper().getText(document);
 			if(PDFText.contains(documentCode)){
-				 System.out.println("PDF : " +pdfType+" text contains expected Document code : "+documentCode);
-				 Validation_Flag= true;
+				 System.out.println("PASSED - PDF : " +pdfType+" text contains expected Document code : "+documentCode);
+				 validationFlag= true;
+				 validationString = "PASSED";
 			 }
 			 else{
-				 System.out.println("PDF: " +pdfType+" text DOES NOT contains expected Document code : "+documentCode);
+				 System.out.println("FAILED - PDF: " +pdfType+" text DOES NOT contains expected Document code : "+documentCode);
+				 if(PDFText.contains("PDF coming soon"))
+					 validationString = "PDF coming soon";
 			 }
 
 		} catch (MalformedURLException e) {
@@ -1331,10 +1347,10 @@ public class PlanDetailsPage extends UhcDriver {
 		} catch (IOException e) {
 			 System.out.println("FAILURE, Exception in Reading PDF");
 		}
-		
+		comparedResult.put(validationFlag, validationString);
 		driver.close();
 		driver.switchTo().window(parentHandle);
-		return Validation_Flag;
+		return comparedResult;
 	}
 
 	public void clickAndValidatePrescriptionDrugBenefits() {

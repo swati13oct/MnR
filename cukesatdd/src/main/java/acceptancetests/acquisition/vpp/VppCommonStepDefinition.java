@@ -3417,13 +3417,11 @@ public class VppCommonStepDefinition {
 			 PlanDetailsPage planDetailsPage = null;
 			 String currentCellValue = "";
 			 String currentColName = "";
-			  
-			 HashMap <String, String> benefitsMap = new HashMap<String, String>();
 			 System.out.println(sheetName+ " SAUCE URL: "+ MRScenario.returnJobURL());
 			 
 			 for(int rowIndex=0; rowIndex<=lastRow; rowIndex++)
 	            {
-				 	int failureCounter = 0;
+				 
 				 	int cellIndex = 0;
 				 	
 				 	HSSFRow row = (HSSFRow) sheet.getRow(rowIndex);
@@ -3434,7 +3432,7 @@ public class VppCommonStepDefinition {
 	                while (cellIterator.hasNext()) 
 	                {
 	                	 HashMap <Boolean, String> resultMap = new HashMap<Boolean, String>(); 
-	                	 boolean valueMatches = true;
+	                	 boolean valueMatches = true; 
 	                	 HSSFCell cell = (HSSFCell) cellIterator.next();
 			             
 	                	 try {
@@ -3451,18 +3449,19 @@ public class VppCommonStepDefinition {
 						 if(rowIndex!=0) { //skip the header row
 							 if(cellIndex==0) { 
 								 
-								  System.out.println("Validating "+sheetName+ " Plan "+rowIndex+" ************************************************************");
+								  System.out.println("Validating "+sheetName+ " Row "+rowIndex+" ************************************************************");
 								  new VppCommonPage(wd,siteType,currentCellValue);  //gets the partial deeplink fromt the excel and appends it with the environment URL and navigates to plan details page	
 								  planDetailsPage = new PlanDetailsPage(wd);
 							 }
 							 if(!(currentColName.contains("Link")||currentColName.equalsIgnoreCase("zipcode")||currentColName.equalsIgnoreCase("county")||currentColName.equalsIgnoreCase("plan name")||currentColName.equalsIgnoreCase("fips")||currentColName.equalsIgnoreCase("plan type")||currentColName.equalsIgnoreCase("plan id"))){ 
-							 boolean pdfFlag = planDetailsPage.clickAndValidatePDFText_URL(currentColName, currentCellValue);
-								if (pdfFlag) {
+							  resultMap = planDetailsPage.clickAndValidatePDFText_URL(currentColName);
+								
+							  	if (resultMap.containsKey(true)) {
 									newCell.setCellStyle(stylePassed);
-									newCell.setCellValue("PASS");
+									newCell.setCellValue(resultMap.get(true));
 								} else {
 									newCell.setCellStyle(styleFailed);
-									newCell.setCellValue("FAIL");
+									newCell.setCellValue(resultMap.get(false));
 								
 								}
 							 }else {
