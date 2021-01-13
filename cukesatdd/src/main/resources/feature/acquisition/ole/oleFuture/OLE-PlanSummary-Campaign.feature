@@ -2,7 +2,7 @@
 
   Scenario Outline: TID: <Scenario> -plan type: <plantype> - OLE End to end from UHC Acquisition site VPP Plan Summary
   #Given the user is on VPP Plan Summary page after hits Campaign URL
-  Given the user is on medicare acquisition site landing page
+  Given the user is on medicare acquisition site landing page fro campaign Traffic
     	|Site| <site>|
 		Given the user navigates to following Campaign acquisition site page
      # | PageName | <pageName> |
@@ -99,7 +99,7 @@
 			
 #added for current Year Plans CAMPAIGN URL PDP Plan	
   Scenario Outline: TID: <TID> -plan type: <plantype> - OLE End to end from  Acquisition PDP Campaign URL VPP Plan Summary
-    Given the user is on medicare acquisition site landing page
+    Given the user is on medicare acquisition site landing page fro campaign Traffic
     	|Site| <site>|
 		Given the user navigates to following Campaign acquisition site page
      # | PageName | <pageName> |
