@@ -10,7 +10,7 @@ Feature: 1.13 UAT - Shop Blog Pages flows
       | PageName | <pageName> |
       | PagePath | <path>     |
     Then the user validate ZipCode Components on page using ZipCode "55410"
-    When the user clicks on Agent link and validates the correct URL is loaded
+    When the user clicks on Agent link and validates the correct URL is loaded from article page
       |UHC Agent URL|  <UHCUrl>  |
     Then the user validates TFN on page
       | TFNxpath | <tfnXpath> |
@@ -75,7 +75,7 @@ Feature: 1.13 UAT - Shop Blog Pages flows
       | PageName | <pageName> |
       | PagePath | <path>     |
     Then the user validate ZipCode Components on page using ZipCode "55410"
-    When the user clicks on Agent link and validates the correct URL is loaded
+    When the user clicks on Agent link and validates the correct URL is loaded from article page
       |UHC Agent URL|  <UHCUrl>  |
     Then the user validates TFN on page
       | TFNxpath | <tfnXpath> |
@@ -126,7 +126,7 @@ Feature: 1.13 UAT - Shop Blog Pages flows
     Then the user validates TFN on page
       | TFNxpath | <tfnXpath> |
       | TFNflag  | <tfnFlag>  | 
-    When the user clicks on Agent link and validates the correct URL is loaded
+    When the user clicks on Agent link and validates the correct URL is loaded from article page
       |UHC Agent URL|  <UHCUrl>  |
     Then the user validates whether chat icon is visible
     Then the user validates whether call icon is visible
@@ -159,7 +159,7 @@ Feature: 1.13 UAT - Shop Blog Pages flows
       | TFNxpath | <tfnXpath> |
       | TFNflag  | <tfnFlag>  |
     Then the user enters and validate the fields and clicks on submit
-    When the user clicks on Agent link and validates the correct URL is loaded
+    When the user clicks on Agent link and validates the correct URL is loaded from article page
       |UHC Agent URL|  <UHCUrl>  |
     Then the user validates TFN on right rail Medicare Article
       | TFNxpath | <tfnXpath> |
@@ -193,7 +193,7 @@ Feature: 1.13 UAT - Shop Blog Pages flows
       | PageName | <pageName> |
       | PagePath | <path>     |
     Then the user validate ZipCode Components on page using ZipCode "55410"
-    When the user clicks on Agent link and validates the correct URL is loaded
+    When the user clicks on Agent link and validates the correct URL is loaded from article page
       |UHC Agent URL|  <UHCUrl>  |
     Then the user validates proactive chat popup
     Then the user validates TFN on page

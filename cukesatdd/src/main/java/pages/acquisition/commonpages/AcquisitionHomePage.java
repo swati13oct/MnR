@@ -587,6 +587,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "//a[@title='Pharmacy Locator']")
 	private WebElement pdpPharmacyLink;
 	
+	@FindBy(xpath="//a[contains(@href,'https://www.myuhcagent.com/')]")
+	private WebElement FindAnAgent; 
+	
    	String ChatSamText= "Chat with a Licensed Insurance Agent";
 
 	private static String TeamC_ACQUISITION_PAGE_URL = MRConstants.TeamC_UHC_URL;
@@ -4866,13 +4869,15 @@ action.moveToElement(navigationSectionHomeLink).moveToElement(ourPlansHoverLink)
 
 }
 		public void headerRegisterLink() {
-			if (headerRegisterLink.isDisplayed() && headerRegisterLink.isEnabled()) {
+			validateNew(headerRegisterLink);
 				Assert.assertTrue(true);
-				System.out.println("Register link is displayed on home page");
-			} else {
-				Assert.fail("Register link is not found/ displayed on home page");
-				
-			}
+			jsClickNew(headerRegisterLink);
+			CommonUtility.checkPageIsReadyNew(driver);
+			waitForPageLoadSafari();
+			if(validate(registerFirstName))
+				System.out.println("Register link is displayed in the header");
+			else 
+				Assert.fail("Register link did not lead to the right page");
 		}
 		
 			public void clickVisitAARPHeaderLink() {
@@ -5647,7 +5652,58 @@ public PrivacyPolicyAARPPage privacypolicyFooterClick() {
 			return null;
 		}	
 			
+		public void clickonFindanAgentlinkfromArticle(String ExpectedUHCAgentURL ) {
+			
+			validateNew(FindAnAgent);
+			CommonUtility.waitForPageLoadNew(driver, FindAnAgent, 30);
+			String parentWindow = driver.getWindowHandle();
+//			FindAnAgent.click();
+			jsClickNew(FindAnAgent);
+			sleepBySec(3);
+			Set<String> tabs_windows = driver.getWindowHandles();
+			Iterator<String> itr = tabs_windows.iterator();
+			while(itr.hasNext()) {
+				String window = itr.next();
+				if(!parentWindow.equals(window)) {
+					driver.switchTo().window(window);
+				}
+			}
+			
+			/*CommonUtility.checkPageIsReadyNew(driver);
+			String CurrentUHCAgentURL = driver.getCurrentUrl();
+			System.out.println("myuhcagent Page is displayed : "+CurrentUHCAgentURL);
+			System.out.println("Expected myuhcagent URL: "+ExpectedUHCAgentURL);
+			
+			if(ExpectedUHCAgentURL.equalsIgnoreCase(CurrentUHCAgentURL)) {
+				System.out.println("****************myuhcagent Page is displayed  ***************");
+
+				Assert.assertTrue(true);
+			}
+			else {
+				Assert.fail("****************myuhcagent Page is not loaded ***************");
+			}*/
+			CommonUtility.checkPageIsReadyNew(driver);
+			String CurrentUHCAgentURL = driver.getCurrentUrl();
+			String ActualCurrentUHCAgentURL=CurrentUHCAgentURL.substring(0, 27).trim();
+			System.out.println("myuhcagent Page is displayed : "+ActualCurrentUHCAgentURL);
+			System.out.println("Expected myuhcagent URL: "+ExpectedUHCAgentURL);
+			System.out.println("Actual myuhcagent URL: "+ActualCurrentUHCAgentURL);
+
+			if(ExpectedUHCAgentURL.equalsIgnoreCase(ActualCurrentUHCAgentURL)) {
+				System.out.println("****************myuhcagent Page is displayed  ***************");
+
+				Assert.assertTrue(true);
+			}
+			else {
+				Assert.fail("****************myuhcagent Page is not loaded ***************");
+			}
+			
+			driver.close();
+			driver.switchTo().window(parentWindow);
+		
 		}
+		
+}
 		
 		
 		
