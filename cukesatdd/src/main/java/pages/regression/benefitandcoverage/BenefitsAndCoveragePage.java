@@ -2738,7 +2738,7 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", drugTbl);
 		//note: online-stage and prod content was slightly different by a space
 		String pdpGroupTable_2021="Annual Deductible Stage Initial Coverage Stage  Coverage Gap Stage  Catastrophic Coverage Stage*\n";
-		if (MRScenario.environment.equals("offline") && MRScenario.environment.equals("prod")) {
+		if (MRScenario.environment.equals("offline") || MRScenario.environment.equals("prod")) {
 			pdpGroupTable_2021="Annual Deductible Stage Initial Coverage Stage  Coverage Gap Stage  Catastrophic Coverage Stage* \n";
 		}
 		pdpGroupTable_2021=pdpGroupTable_2021+
