@@ -410,10 +410,10 @@ public class ValueAddedServicepage extends UhcDriver {
 		
 		Thread.sleep(2000);
 		
-		scrollToView(aarpSmartDriverShowMorePara);
+		scrollElementToCenterScreen(aarpSmartDriverShowMorePara);
 		CommonUtility.waitForPageLoadNew(driver, aarpSmartDriverShowMorePara, 20);
 		
-		scrollToView(aarpSmartDriverShowMorePara);
+		scrollElementToCenterScreen(aarpSmartDriverShowMorePara);
 		
 		Assert.assertTrue(aarpSmartDriverShowMorePara.getText().contains("Here’s how to Register:"));
 		
