@@ -23,4 +23,4 @@ tags = { "@globalfooter_AARP" }, dryRun=false)
 public class RunMRATDDAcquisitionFooterAARPMobile {
 
 }
-//@globalfooter_AARP
+//@globalfooter_AARP atdd.runners.mobile.acquisition.GlobalComponents

@@ -38,7 +38,7 @@ Feature: 1.12 UAT - Header and Footer flows
     And the user clicks on browser back button
     Then user validates visitor profile
     And the user clicks on browser back button
-    And user clicks on visit aarp.org link in the header
+    And user clicks on visit aarporg link in the header
     And the user clicks on browser back button
     And the user clicks on Accessibility Link
     And the user clicks on browser back button
@@ -53,7 +53,7 @@ Feature: 1.12 UAT - Header and Footer flows
     And the user clicks on Medicare Education Link
     And the user clicks on browser back button
     And the user clicks on Back to top Link
-    And user clicks on visit aarp.org link in the footer
+    And user clicks on visit aarporg link in the footer
 
     @globalfooter_AARP
     Examples: 
@@ -110,9 +110,9 @@ Feature: 1.12 UAT - Header and Footer flows
     And the user clicks on browser back button
     Then user validates visitor profile
     And the user clicks on browser back button
-    And user clicks on visit aarp.org link in the header
+    And user clicks on visit aarporg link in the header
     And the user clicks on browser back button
-    And user clicks on visit aarp.org link in the footer
+    And user clicks on visit aarporg link in the footer
 
     @globalfooter_AARP
     Examples: 
@@ -166,9 +166,9 @@ Feature: 1.12 UAT - Header and Footer flows
     And the user clicks on browser back button
     Then user validates visitor profile
     And the user clicks on browser back button
-    And user clicks on visit aarp.org link in the header
+    And user clicks on visit aarporg link in the header
     And the user clicks on browser back button
-    And user clicks on visit aarp.org link in the footer
+    And user clicks on visit aarporg link in the footer
 
     @globalfooter_AARP
     Examples: 
@@ -222,9 +222,9 @@ Feature: 1.12 UAT - Header and Footer flows
     And the user clicks on browser back button
     Then user validates visitor profile
     And the user clicks on browser back button
-    And user clicks on visit aarp.org link in the header
+    And user clicks on visit aarporg link in the header
     And the user clicks on browser back button
-    #And user clicks on visit aarp.org link in the footer
+    And user clicks on visit aarporg link in the footer
 
     @globalfooter_AARPPPP
     Examples: 
@@ -280,9 +280,9 @@ Feature: 1.12 UAT - Header and Footer flows
     And the user clicks on browser back button
     Then user validates visitor profile
     And the user clicks on browser back button
-    And user clicks on visit aarp.org link in the header
+    And user clicks on visit aarporg link in the header
     And the user clicks on browser back button
-    #And user clicks on visit aarp.org link in the footer
+    And user clicks on visit aarporg link in the footer
 
     @globalheader_AARP
     Examples: 

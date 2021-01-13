@@ -235,14 +235,21 @@ public class GlobalComponentsStepDefinitionAARPMobile {
 		aquisitionhomepage.clickRequestAsistancce();
 	}
 
-	@And("^user clicks on visit aarp.org link in the header$")
+	@And("^user clicks on visit aarporg link in the header$")
 	public void click_visitAARP_Link_in_the_header() {
 		AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		aquisitionhomepage.clickVisitAARPHeaderLink();
 	}
-	
-	
+
+	@And("^user clicks on visit aarporg link in the footer$")
+	public void click_visitAARP_Link_in_the_footer() {
+		AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		aquisitionhomepage.clickVisitAARPFooterLink();
+
+	}
+
 	@When("^user accesses global header of the AARP Medicare Plans home page$")
 	public void access_global_header_aarp() {
 

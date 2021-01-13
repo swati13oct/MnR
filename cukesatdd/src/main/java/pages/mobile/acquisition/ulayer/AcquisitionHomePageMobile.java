@@ -58,7 +58,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	@FindBy(xpath = "//*[contains(@id,'zipcodemeded')][1]//following-sibling::button//*[contains(text(),'Shop Plans')]")
 	private WebElement viewShopPlansButton;
 
-	@FindBy(id = "zipcode")
+	@FindBy(css = "#cta-zipcode")
 	private WebElement healthPlansZipcode;
 
 	@FindBy(className = "fd_myPlans")
@@ -2165,7 +2165,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		Actions action = new Actions(driver);
 		scrollToView(ourPlansHoverLink);
 		action.moveToElement(navigationSectionHomeLink).moveToElement(ourPlansHoverLink).build().perform();
-		//pharmacylocator.click();
+		// pharmacylocator.click();
 		jsClickNew(pharmacylocator);
 		CommonUtility.checkPageIsReadyNew(driver);
 
@@ -3260,11 +3260,10 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 			assertTrue(true);
 		}
 	}
-	
-    @FindBy(xpath="//*[contains(@id, 'aarplink')]")
-    private WebElement visitAARPHeaderLink;
 
-	
+	@FindBy(xpath = "//*[contains(@id, 'aarplink')]")
+	private WebElement visitAARPHeaderLink;
+
 	public void clickVisitAARPHeaderLink() {
 		if (driver.getCurrentUrl().contains("aarpmedicareplans")) {
 			jsClickNew(visitAARPHeaderLink);
@@ -3273,8 +3272,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 				Assert.fail("Visit AARP link did not lead to the right page");
 		}
 	}
-	
-	
+
 	public void MedicarePrescriptionDrugPlans() {
 
 		threadsleep(6);
@@ -3326,6 +3324,21 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 			assertTrue(true);
 		}
 
+	}
+
+	public void clickVisitAARPFooterLink() {
+		if (driver.getCurrentUrl().contains("aarpmedicareplans")) {
+			switchToNewTabNew(visitAARPFooterLink);
+			proceedToLeaveAARP();
+			if (!driver.getCurrentUrl().contains("aarp.org")) {
+				Assert.fail("Visit AARP link did not lead to the right page");
+			} else {
+				Assert.assertTrue(true, "Navigated to AARP org page");
+				driver.close();
+				driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
+			}
+		}
+		
 	}
 
 }
