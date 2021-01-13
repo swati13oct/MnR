@@ -63,9 +63,9 @@ Feature: PRE_UAT - Verify UAT Scenarios in PRE
       | Priority Option | <priorityOption> |
       | Priorities      | <priorities>     |
     Then user validate elements in loading results page
-#    When user adds Drugs in vpp summary page
-#      | Drug Details | <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch> |
-#    Then user validate drugs details from DCE to VPP and PRE page
+    When user adds Drugs in vpp summary page
+      | Drug Details | <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch> |
+    Then user validate drugs details from DCE to VPP and PRE page
 
     Examples: 
       | Zipcode | isMultiCounty | county  | isCoverageOpt | specialNeeds | travel   | doctors    | DoctorsName | isMultiDoctor | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities    | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch |
