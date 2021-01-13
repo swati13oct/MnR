@@ -240,7 +240,8 @@ public class GlobalWebElements  extends UhcDriver{
 	@FindBy(xpath = "//img[contains(@dtmid,'acq_visitor_profile')]")
 	 public static WebElement visitorprofileicon;
 	
-	@FindBy(xpath = "//*[contains(@onclick,'jumpToHSIDSignIn()')]")
+	//@FindBy(xpath = "//*[contains(@onclick,'jumpToHSIDSignIn()')]")
+	@FindBy(xpath="//*[contains(@onclick,\"jumpToHSIDSignIn('body')\")]")
 	public static WebElement signIn;
 	
 	@FindBy(xpath="//*[@id='planTypesColumn']/h3[3]/a")
