@@ -2736,8 +2736,8 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 		validateWithValue("Drug cost table is diplaying for PDP GROUP NON LIS", drugTbl);
 		scrollElementToCenterScreen(drugTbl);
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", drugTbl);
-		//note: online-stage and prod content was slightly different by a space
-		String pdpGroupTable_2021="Annual Deductible Stage Initial Coverage Stage  Coverage Gap Stage  Catastrophic Coverage Stage*\n";
+		//note: online-stage and prod content was slightly different by extra space
+		String pdpGroupTable_2021="Annual Deductible Stage Initial Coverage Stage Coverage Gap Stage Catastrophic Coverage Stage*\n";
 		if (MRScenario.environment.equals("offline") || MRScenario.environment.equals("prod")) {
 			pdpGroupTable_2021="Annual Deductible Stage Initial Coverage Stage  Coverage Gap Stage  Catastrophic Coverage Stage* \n";
 		}
