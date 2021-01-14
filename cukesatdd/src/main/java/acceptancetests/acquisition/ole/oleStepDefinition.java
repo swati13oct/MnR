@@ -3435,6 +3435,10 @@ public void the_user_validates_the_OLE_Submission_Details_in_GPS(DataTable arg1)
 				}						
 				//---------------------------------------------------//	
 			//------------Added for Jenkins Report---------------//
+				Map<String,String> testNote=new HashMap<String,String>();
+			//	testNote.add("===================================================");
+				
+			//	testNote.add("\tValidation for able to print all the values from the GPS");
 				
 				Map<String,String> matched = new HashMap<String,String>();
 				Map<String,String> mismatched = new HashMap<String,String>();
@@ -3446,7 +3450,7 @@ public void the_user_validates_the_OLE_Submission_Details_in_GPS(DataTable arg1)
 					
 				//	getLoginScenario().saveBean(oleCommonConstants.TEST_RESULT_NOTE,testNote1);
 					Assert.assertTrue(true);
-					
+					testNote.get(matched);
 					
 				} else {
 					System.out.println("OLE Confirmation Page : All Plan and Member Details  NOT validated in GPS");
