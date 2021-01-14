@@ -116,10 +116,10 @@ Feature: 1.05.1. OLE common tool flow E2E through VisitorProfile
     Then the user clicks on Submit Enrollment to complete enrollment
     # Then the user validates Plan and Member Details on Confirmation Page
     #Then the user Validates Next Steps in Confirmation Page for the Plan Type.
-Then the user validates the OLE Submission Details in GPS
-    	| Plan Type | <plantype> |
-	      | Auth Flag | <authflag> |
-		 | Mailing Address Question | <mailingaddressquestion> |
+	#Then the user validates the OLE Submission Details in GPS
+    	#| Plan Type | <plantype> |
+	     # | Auth Flag | <authflag> |
+		# | Mailing Address Question | <mailingaddressquestion> |
     @VP_OLE_Ulayer_Future 
     Examples: 
        | TID   | site|PlanType |planyear|planYear|zipcode    | isMultutiCounty | county          | plantype |planyear| planName                                | cardtype | firstname | lastname    | medicarenumber | ssnflag | partadate  | partbdate | medicaidnumber | esrdflag | dob      | gender | permstreet    | permcity    | mailingaddressquestion | mailingstreet | mailingcity | mailingstate | mailingzip | email         | selectoptions                                                                                                                                                                                                                                                    | optiondata              | pdpFlag | longTermFlag | riderflag | emailConfirmation | goGreen | phoneno   | mobileno | healthinsurancename|groupnumber  | membernumber    |prescriptioncoveragename        |pdgroupnumber|pdmembernumber|inputdataType|middlename|authorizefirstN|authorizelastN|authorizeaddress|authorizeapartment|authorizecity|authorizezip|authorizephonenumber|authorizeRelationship|authorizestate|authorizationagree|permaptno|mailingaptno|authflag|
