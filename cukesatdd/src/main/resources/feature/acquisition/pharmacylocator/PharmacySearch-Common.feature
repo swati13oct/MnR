@@ -411,7 +411,7 @@ Feature: 1.11. ACQ-Pharmacy Locator Test Scripts
       | xxxxx | UHC  | Minnesota |
 
   ############## Pharmacy search- Breadcrumb validations ##########################
-  Scenario Outline: To verify breadcrumbs on pharmacy search page through Home page on acquisition <site> site
+  Scenario Outline: To verify breadcrumbs on pharmacy search page through home page on acquisition <site> site
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     When the user navigate to pharmacy search page from the navigation bar
@@ -480,6 +480,8 @@ Feature: 1.11. ACQ-Pharmacy Locator Test Scripts
   Scenario Outline: To verify breadcrumbs on pharmacy search page through VPP page on acquisition <site> site
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
+    When I access the acquisition DCE Redesign from home page
+    Then the user validates Get Started Page
     When the user performs plan search using following information
       | Zip Code        | <zipcode>         |
       | Is Multi County | <isMultutiCounty> |
@@ -533,6 +535,35 @@ Feature: 1.11. ACQ-Pharmacy Locator Test Scripts
       | site | zipcode | county      | isMultutiCounty | plantype | drug1   |
       | UHC  |   19019 | Iowa County | No              | MAPD     | Lipitor |
 
+  Scenario Outline: To verify breadcrumbs on pharmacy search page through VPP details page on acquisition <site> site
+    Given the user is on medicare acquisition site landing page
+      | Site | <site> |
+    When the user performs plan search using following information
+      | Zip Code        | <zipcode>         |
+      | County Name     | <county>          |
+      | Is Multi County | <isMultutiCounty> |
+    And the user views the plans of the below plan type
+      | Plan Type | <plantype> |
+    And the user selects plan year
+      | Plan Year | <planyear> |
+    Then the user navigates to the plan details for the given plan type
+      | Plan Type | <plantype> |
+      | Plan Name | <planname> |
+    When the user navigate to pharmacy search page from the navigation bar
+    Then user verify breadcrumb "Return to plan details" displayed on pharmacy search page
+    When user clicks on breadcrumb on pharmacy search page
+    Then user should be navigated to VPP detail page
+
+    @breadcrumbPharmacySearch_AARP
+    Examples: 
+      | site | zipcode | county      | isMultutiCounty | plantype | planyear | planname                                           |
+      | AARP |   90210 | Iowa County | No              | MAPD     | future   | AARP Medicare Advantage SecureHorizons Focus (HMO) |
+
+    @breadcrumbPharmacySearch_UHC
+    Examples: 
+      | site | zipcode | county      | isMultutiCounty | plantype | planyear | planname                                           |
+      | UHC  |   90210 | Iowa County | No              | MAPD     | future   | AARP Medicare Advantage SecureHorizons Focus (HMO) |
+      
   Scenario Outline: To verify breadcrumbs on pharmacy search page through Shop page page on acquisition <site> site
     Given the user is on medicare acquisition site landing page
       | Site | <site> |

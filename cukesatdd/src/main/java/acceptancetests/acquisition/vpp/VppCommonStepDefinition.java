@@ -3223,6 +3223,11 @@ public void user_clicks_on_continue_enrollment_button_on_the_modal() throws Thro
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		plansummaryPage.validateVPPSummaryPage();
 	}
-
+	@Then("^user should be navigated to VPP detail page$")
+	public void user_should_be_navigated_to_VPP_details_page() throws Throwable {
+		PlanDetailsPage vppPlanDetailsPage = (PlanDetailsPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
+		vppPlanDetailsPage.validateVPPDetailsPage();
+	}
 }
 
