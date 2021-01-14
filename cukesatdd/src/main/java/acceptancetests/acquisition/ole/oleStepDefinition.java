@@ -3086,7 +3086,7 @@ public void the_user_validates_the_OLE_Submission_Details_in_GPS(DataTable arg1)
 				|| MRScenario.environment.equalsIgnoreCase("prod")|| MRScenario.environment.equalsIgnoreCase("stage")) ) {
 			*/
 		if (!(MRScenario.environment.equalsIgnoreCase("offline")
-				|| MRScenario.environment.equalsIgnoreCase("prod"))) {
+				|| MRScenario.environment.equalsIgnoreCase("prod") || MRScenario.environment.equalsIgnoreCase("stage"))) {
 		
 		OLEconfirmationPage OLEGPSValidation = (OLEconfirmationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_CONFIRMATION_PAGE);
 			if (OLEGPSValidation != null) {
@@ -3441,17 +3441,17 @@ public void the_user_validates_the_OLE_Submission_Details_in_GPS(DataTable arg1)
 				
 			//	testNote.add("\tValidation for able to print all the values from the GPS");
 				
-				List<String> matched = new ArrayList<String>();
-				List<String> mismatched = new ArrayList<String>();
+				Map <String, String> matched = new HashMap<>();
+				Map <String, String> mismatched = new HashMap<>();
 				//------------Added for Jenkins Report---------------//	
-				boolean Validation_Status = OLEGPSValidation.validate_GPS_for_Plantype(DetailsMap,(List<String>) matched,mismatched);
+				boolean Validation_Status = OLEGPSValidation.validate_GPS_for_Plantype(DetailsMap,matched,mismatched);
 				if (Validation_Status) {
 					System.out.println("OLE Confirmation Page : All Plan Details Validated in GPS");
 					getLoginScenario().saveBean(OLE_PageConstants.OLE_CONFIRMATION_PAGE, OLEGPSValidation);										
 					
 				//	getLoginScenario().saveBean(oleCommonConstants.TEST_RESULT_NOTE,testNote1);
 					Assert.assertTrue(true);
-					testNote.addAll(matched);
+				//	testNote.addAll(matched);
 					
 				} else {
 					System.out.println("OLE Confirmation Page : All Plan and Member Details  NOT validated in GPS");

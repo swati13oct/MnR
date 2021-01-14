@@ -472,7 +472,7 @@ public Connection createDataBaseConnection() {
 		return flag;
 	}
 */	
-	public boolean validate_GPS_for_Plantype(Map<String,String> map,List<String> matched,List<String> mismatched) {
+	public boolean validate_GPS_for_Plantype(Map<String,String> map,Map<String,String> matched,Map<String,String> mismatched) {
 		boolean flag = false;
 		//try {
 			String confirmation_no = confirmationNumber.getText();
@@ -491,12 +491,11 @@ public Connection createDataBaseConnection() {
 					String strTarget = gpsmap.get(keySource);
 					if(strSource.equalsIgnoreCase(strTarget)) {
 						flag = true;
-						 ((Map<String, String>) matched).put(keySource, strSource);
-						//String matchedValue = matched.put(keySource, strSource);
+						matched.put(keySource, strSource);
 						// print out matched
 						System.out.println("Matched values in OLE GPS");
 						System.out.println(Arrays.asList(matched));
-					//	System.out.println("========================"+matchedValue);
+						
 						/*System.out.println("============");  
 						System.out.println("Key\tValue");
 						System.out.println("============");
@@ -507,7 +506,7 @@ public Connection createDataBaseConnection() {
 */				}
 					else {
 						flag = false;
-						((Map<String, String>) mismatched).put(keySource, strSource);
+						mismatched.put(keySource, strSource);
 						// print out matched
 						System.out.println("Mismatched values in OLE GPS");
 						System.out.println(Arrays.asList(mismatched));

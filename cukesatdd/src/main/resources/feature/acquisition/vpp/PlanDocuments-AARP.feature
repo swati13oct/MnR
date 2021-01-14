@@ -75,4 +75,4 @@ Feature: test Plan Documents PDFs on Plan Deatils Page
 
     Examples: 
       | excelPath                   | workSheet |
-      | AcqPlanDocs_Validation_Data | PlanDocs  |
+      | PlanDocs_Validation_Data | Sheet1  |
