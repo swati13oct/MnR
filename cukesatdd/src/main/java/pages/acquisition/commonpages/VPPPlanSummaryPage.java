@@ -759,7 +759,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//a[contains(text(), 'Your Guide to AARP Medicare Supplement Insurance')]")
 	private WebElement RightRail_AARPSupplementPlans;
 	
-	@FindBy(xpath = "//a[contains(text(),'Print/save a copy of your application')]")
+	@FindBy(xpath = "//a[contains(text(),'Print/save a copy of your application') or contains(text(),'Print information on this page')]")
 	private WebElement PrintandSave_Application;
 	
 	@FindBy(xpath = "//a[contains(text(), 'Plan Overview')]")

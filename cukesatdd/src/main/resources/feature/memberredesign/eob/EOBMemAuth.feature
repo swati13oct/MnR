@@ -111,7 +111,7 @@ Feature: 1.04.1.1 To Test NON-DREAM EOB for Members - E2E - Member Auth
     @memAuth_PHIP_EOBs
     Examples: 
       | index | username  | password  | MemUserName        | TID   | planType | memberType |
-      | 15    | qavgogine | qavgogine | q3_SEP_2020SHIP_037| 15174 | PHIP     | SHIP_EOB   |
+      | 15    | qavgogine | qavgogine | q4_Ship_044 | 15174 | PHIP     | SHIP_EOB   |
 
 
   #note: pending coverage until SSUP individual user is available

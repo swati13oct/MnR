@@ -72,8 +72,30 @@ public class VppCommonStepDefinition {
 	 * @toDo:user is on medicare acquisition site landing page
 	 */
 
-	@Given("^the user is on medicare acquisition site landing page$")
-	public void the_user_on__medicaresolutions_Site(DataTable givenAttributes) {
+//	@Given("^the user is on medicare acquisition site landing page$")
+//	public void the_user_on__medicaresolutions_Site(DataTable givenAttributes) {
+//		wd = getLoginScenario().getWebDriverNew();
+//		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+//		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+//		for (int i = 0; i < memberAttributesRow.size(); i++) {
+//			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+//					memberAttributesRow.get(i).getCells().get(1));
+//		}
+//		String site = memberAttributesMap.get("Site");
+//		AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd, site);
+//
+//		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+//		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, aquisitionhomepage);
+//		getLoginScenario().saveBean(DCERedesignCommonConstants.DRUGLIST, " ");
+//		getLoginScenario().saveBean(DCERedesignCommonConstants.YOUPAYLIST_ALLDRUGS, " ");
+//
+//		getLoginScenario().saveBean(oleCommonConstants.ACQ_SITE_NAME, site);
+//		if (site.equalsIgnoreCase("AARP"))
+//			aquisitionhomepage.validateSubtitle();
+//	}
+
+	@Given("^the user is on medicare acquisition site landing page fro campaign Traffic$")
+	public void the_user_on__medicaresolutions_Site_campaign_Traffic(DataTable givenAttributes) {
 		wd = getLoginScenario().getWebDriverNew();
 		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
@@ -90,10 +112,9 @@ public class VppCommonStepDefinition {
 		getLoginScenario().saveBean(DCERedesignCommonConstants.YOUPAYLIST_ALLDRUGS, " ");
 
 		getLoginScenario().saveBean(oleCommonConstants.ACQ_SITE_NAME, site);
-		if (site.equalsIgnoreCase("AARP"))
-			aquisitionhomepage.validateSubtitle();
+		if (site.equalsIgnoreCase("AARP")) 
+		aquisitionhomepage.validateSubtitle();
 	}
-
 	@When("^the user performs plan search using following information$")
 	public void zipcode_details_in_aarp_site(DataTable givenAttributes) throws InterruptedException {
 		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
@@ -3347,6 +3368,37 @@ public class VppCommonStepDefinition {
 			plansummaryPage.navagateToChangeZipcodeOptionToChangeZipcode(zipcode, county, isMultiCounty);
 		} else {
 			Assert.assertTrue("PROBLEM - plansummaryPage is null", false);
+		}
+	}
+	@When("^the user performs plan search using Shop Pages for DSNP Plans$")
+	public void Standalone_zipcode_details_dsnp_plans(DataTable givenAttributes) throws InterruptedException {
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		String zipcode = memberAttributesMap.get("Zip Code");
+		String county = memberAttributesMap.get("County Name");
+		String isMultiCounty = memberAttributesMap.get("Is Multi County");
+		getLoginScenario().saveBean(VPPCommonConstants.ZIPCODE, zipcode);
+		getLoginScenario().saveBean(VPPCommonConstants.COUNTY, county);
+		getLoginScenario().saveBean(VPPCommonConstants.IS_MULTICOUNTY, isMultiCounty);
+
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		VPPPlanSummaryPage plansummaryPage = null;
+		if (("NO").equalsIgnoreCase(isMultiCounty.trim())) {
+			plansummaryPage = aquisitionhomepage.searchPlansWithOutCountyShopDSNPEnroll(zipcode);
+		} else {
+			plansummaryPage = aquisitionhomepage.searchPlansShopDSNPEnroll(zipcode, county);
+		}
+
+		if (plansummaryPage != null) {
+			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
+
+		} else {
+			Assert.fail("Error Loading VPP plan summary page");
 		}
 	}
 }
