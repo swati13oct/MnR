@@ -5933,12 +5933,33 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 
 		//------- validate uhcmedicaredentistsearch.com link ---------------------------
 		Assert.assertTrue("PROBLEM - unable to locate the Assistance link in tile contnet", validate(riderAssistanceLnk,0));
-		expUrl="https%3A~2F~2Fdentalsearch.yourdentalplan.com~2Fprovidersearch";
-		//TODO - which one is the correct expected URL destination??
-		//note: href="https://member.uhc.com/internal-redirect?deepLink=https%3A~2F~2Fconnect.werally.com~2FdentalProvider~2Froot%3FshowBackButton%3Dtrue"
+		expUrl="werally.com~2FdentalProvider~2Froot%3FshowBackButton%3Dtrue";
 		actUrl=riderAssistanceLnk.getAttribute("href");
-		Assert.assertTrue("PROBLEM - KNOWN ISSUE INC19517618 - Assistance link URL is not as expected. Expect to contain '"+expUrl+"' | Actual href='"+actUrl+"'", actUrl.contains(expUrl));
-		//TODO - click it and validate it land on the right page:  https://dentalsearch.yourdentalplan.com/providersearch
+		Assert.assertTrue("PROBLEM - Assistance link URL is not as expected. Expect to contain '"+expUrl+"' | Actual href='"+actUrl+"'", actUrl.contains(expUrl));
+		if ((MRScenario.environment.contains("stage") && !MRScenario.isTestHarness.equalsIgnoreCase("YES"))
+			||	MRScenario.environment.equals("offline") 
+			|| MRScenario.environment.equals("prod")) {
+			winHandleBefore = driver.getWindowHandle();
+			beforeClicked_tabs = new ArrayList<String>(driver.getWindowHandles());
+			beforeClicked_numTabs=beforeClicked_tabs.size();	
+
+			riderAssistanceLnk.click();
+
+			afterClicked_tabs = new ArrayList<String>(driver.getWindowHandles());
+			afterClicked_numTabs=afterClicked_tabs.size();
+			Assert.assertTrue("PROBLEM - Did not get expected new tab after clicking 'Assistance' link", (afterClicked_numTabs-beforeClicked_numTabs)==1);
+
+			driver.switchTo().window(afterClicked_tabs.get(afterClicked_numTabs-1));
+
+			
+			CommonUtility.checkPageIsReady(driver);
+			CommonUtility.waitForPageLoad(driver, rallyDentalSearchHeader, 5);
+			Assert.assertTrue("PROBLEM - unable to locate 'Dental Care' header text on Rally dental care search page after clicking the rider assistance link", validate(rallyDentalSearchHeader,0));
+			
+			driver.close();
+			driver.switchTo().window(winHandleBefore);
+
+		}
 
 		
 	}

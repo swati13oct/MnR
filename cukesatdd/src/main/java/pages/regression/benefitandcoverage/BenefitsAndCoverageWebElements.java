@@ -1250,6 +1250,9 @@ public class BenefitsAndCoverageWebElements extends UhcDriver {
 	@FindBy(xpath="//div[contains(@class,'optionalRiders section')]//div[contains(@ng-show,'rider') and not(contains(@class,'ng-hide'))]/a[contains(text(),'DOWNLOAD RIDER PDF')]")
 	protected WebElement riderViewPdfLnk;
 	
+	@FindBy(xpath="//h1/strong[contains(text(),'Dental Care')]")
+	protected WebElement rallyDentalSearchHeader;
+	
 	public BenefitsAndCoverageWebElements(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
