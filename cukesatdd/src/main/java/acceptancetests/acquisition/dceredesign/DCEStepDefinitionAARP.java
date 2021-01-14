@@ -2438,4 +2438,10 @@ public void user_verify_details_page_change_pharmacy_modal_for_preferred_tab() {
 		DrugDetailsPage drugDetailsPage = new DrugDetailsPage(driver);
 		drugDetailsPage.validateBreadCrumb(breadCrumb);
 	}
+	
+	@Then("^user should be able to see Back to profile button on details page$")
+	public void user_should_be_able_to_see_Back_to_profile_button_on_details_page(){
+		DrugDetailsPage drugDetailsPage = new DrugDetailsPage(driver);
+		drugDetailsPage.verifyBackToProfileBtnDisplayed();
+	}
 }

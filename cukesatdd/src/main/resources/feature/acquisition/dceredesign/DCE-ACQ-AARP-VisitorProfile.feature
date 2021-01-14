@@ -33,7 +33,7 @@ Feature: 1.10.1 DCE-REDISIGN AARP - To test Acq Visitor Profile to NEW DCE Flows
       | drug1   | drug2  | drug3   | drug4    | zipCode | site |
       | Orkambi | Fanapt | Humalog | Adderall |   80002 | UHC  |
 
-  @DCEShopperProfileAddDrugsGlobally @decRelease @FebRelease
+  @DCEShopperProfileAddDrugsGlobally @decRelease @FebRelease @F547321
   Scenario Outline: To verify DCE REDESIGN shopper profile flow when adding and editing drugs globally
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
@@ -62,6 +62,7 @@ Feature: 1.10.1 DCE-REDISIGN AARP - To test Acq Visitor Profile to NEW DCE Flows
       | Plan Type | <planType> |
       | Plan Name | <planName> |
     Then user should be able to see Return to profile link on details page
+    And user should be able to see Back to profile button on details page
 
     @DCEShopperProfileAddDrugsGlobally_AARP @F539025AARP
     Examples: 
@@ -73,7 +74,7 @@ Feature: 1.10.1 DCE-REDISIGN AARP - To test Acq Visitor Profile to NEW DCE Flows
       | drug1   | zipCode | site | drug2  | planType | planName                                            |
       | Orkambi |   80002 | UHC  | Fanapt | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) |
 
-  @DCEShopperProfileAddDrugsPlancard @decRelease
+  @DCEShopperProfileAddDrugsPlancard @decRelease @F547321
   Scenario Outline: To verify DCE REDESIGN shopper profile flow when adding and editing drugs from plan card
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
@@ -106,6 +107,7 @@ Feature: 1.10.1 DCE-REDISIGN AARP - To test Acq Visitor Profile to NEW DCE Flows
       | DrugName | <drug2> |
     And clicks on Review drug cost button
     Then user should be able to see Return to profile link on details page
+    And user should be able to see Back to profile button on details page
 
     @DCEShopperProfileAddDrugsPlancard_AARP
     Examples: 
