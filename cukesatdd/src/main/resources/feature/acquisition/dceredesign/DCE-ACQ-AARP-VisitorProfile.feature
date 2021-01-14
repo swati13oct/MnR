@@ -154,6 +154,7 @@ Feature: 1.10.1 DCE-REDISIGN AARP - To test Acq Visitor Profile to NEW DCE Flows
       | Plan Type | <planType> |
       | Plan Name | <planName> |
     Then user should be able to see Return to profile link on details page
+    And user should be able to see Back to profile button on details page
 
     @DCEShopperProfileAddDrugsGloballyAuthenticatedUser_AARP123 @F539025AARP_01
     Examples: 
@@ -262,7 +263,7 @@ Feature: 1.10.1 DCE-REDISIGN AARP - To test Acq Visitor Profile to NEW DCE Flows
       | UHC | Orkambi | Fanapt | MAPD     | next    |AARP Medicare Advantage Prime (HMO),AARP Medicare Advantage Plan 1 (HMO)  |   10001 | NO            | New York County |AARP Medicare Advantage Prime (HMO)|
       
       
-      Scenario Outline: To verify zipcode infomraiton retained while navigating to shop pages from visitor profile 
+      Scenario Outline: To verify zipcode information retained while navigating to shop pages from visitor profile 
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     When the user performs plan search using following information
