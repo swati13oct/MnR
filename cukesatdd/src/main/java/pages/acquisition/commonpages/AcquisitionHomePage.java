@@ -3666,4 +3666,13 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		public void validateHomePage() {
 			validate(zipCodeField);
 		}
+		
+		public void validatePageNavigated(String path) {
+			if(driver.getCurrentUrl().contains(path)) {
+				Assert.assertTrue(true);
+			}
+			else {
+				Assert.fail("User not navigated to correct page");
+			}
+		}
 }

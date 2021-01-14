@@ -450,8 +450,8 @@ Feature: 1.11. ACQ-Pharmacy Locator Test Scripts
     Examples: 
       | site |
       | UHC  |
-      
-      Scenario Outline: To verify breadcrumbs on pharmacy search page through plan compare page on acquisition <site> site
+
+  Scenario Outline: To verify breadcrumbs on pharmacy search page through plan compare page on acquisition <site> site
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     When the user performs plan search using following information
@@ -466,8 +466,8 @@ Feature: 1.11. ACQ-Pharmacy Locator Test Scripts
     Then user verify breadcrumb "Return to Compare" displayed on pharmacy search page
     When user clicks on breadcrumb on pharmacy search page
     Then verify plan compare page is loaded
-		
-		@breadcrumbPharmacySearch_AARP
+
+    @breadcrumbPharmacySearch_AARP
     Examples: 
       | site | zipcode | county      | isMultutiCounty | plantype |
       | AARP |   19019 | Iowa County | No              | MAPD     |
@@ -476,9 +476,8 @@ Feature: 1.11. ACQ-Pharmacy Locator Test Scripts
     Examples: 
       | site | zipcode | county      | isMultutiCounty | plantype |
       | UHC  |   19019 | Iowa County | No              | MAPD     |
-      
-      
-      Scenario Outline: To verify breadcrumbs on pharmacy search page through VPP page on acquisition <site> site
+
+  Scenario Outline: To verify breadcrumbs on pharmacy search page through VPP page on acquisition <site> site
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     When the user performs plan search using following information
@@ -491,8 +490,8 @@ Feature: 1.11. ACQ-Pharmacy Locator Test Scripts
     Then user verify breadcrumb "Return to plan summary" displayed on pharmacy search page
     When user clicks on breadcrumb on pharmacy search page
     Then user should be navigated to VPP summary page
-		
-		@breadcrumbPharmacySearch_AARP
+
+    @breadcrumbPharmacySearch_AARP
     Examples: 
       | site | zipcode | county      | isMultutiCounty | plantype |
       | AARP |   19019 | Iowa County | No              | MAPD     |
@@ -501,12 +500,12 @@ Feature: 1.11. ACQ-Pharmacy Locator Test Scripts
     Examples: 
       | site | zipcode | county      | isMultutiCounty | plantype |
       | UHC  |   19019 | Iowa County | No              | MAPD     |
-      
-      Scenario Outline: To verify breadcrumbs on pharmacy search page through DCE page on acquisition <site> site
+
+  Scenario Outline: To verify breadcrumbs on pharmacy search page through DCE page on acquisition <site> site
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
-   	When I access the acquisition DCE Redesign from home page
-   	Then the user validates Get Started Page
+    When I access the acquisition DCE Redesign from home page
+    Then the user validates Get Started Page
     When the user navigate to pharmacy search page from the navigation bar
     Then user verify breadcrumb "Return to Drug Cost Estimator" displayed on pharmacy search page
     When user clicks on breadcrumb on pharmacy search page
@@ -523,37 +522,41 @@ Feature: 1.11. ACQ-Pharmacy Locator Test Scripts
     Then user verify breadcrumb "Return to Pharmacy Search" on drug summary page
     When user clicks view drug cost button
     Then user verify breadcrumb "Return to Pharmacy Search" on drug details page
-		
-		@breadcrumbPharmacySearch_AARP
+
+    @breadcrumbPharmacySearch_AARP
     Examples: 
-      | site | zipcode | county      | isMultutiCounty | plantype |drug1|
-      | AARP |   19019 | Iowa County | No              | MAPD     |Lipitor|
+      | site | zipcode | county      | isMultutiCounty | plantype | drug1   |
+      | AARP |   19019 | Iowa County | No              | MAPD     | Lipitor |
 
     @breadcrumbPharmacySearch_UHC
     Examples: 
-      | site | zipcode | county      | isMultutiCounty | plantype |drug1|
-      | UHC  |   19019 | Iowa County | No              | MAPD     |Lipitor|
-      
-      Scenario Outline: To verify breadcrumbs on pharmacy search page through Shop page page on acquisition <site> site
+      | site | zipcode | county      | isMultutiCounty | plantype | drug1   |
+      | UHC  |   19019 | Iowa County | No              | MAPD     | Lipitor |
+
+  Scenario Outline: To verify breadcrumbs on pharmacy search page through Shop page page on acquisition <site> site
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
-    When the user performs plan search using following information
-      | Zip Code        | <zipcode>         |
-      | Is Multi County | <isMultutiCounty> |
-      | County Name     | <county>          |
-    And the user views the plans of the below plan type
-      | Plan Type | <plantype> |
+    Given the user navigates to following medicare acquisition site page
+      | PageName | <pageName> |
+      | PagePath | <path>     |
     When the user navigate to pharmacy search page from the navigation bar
-    Then user verify breadcrumb "Return to Plans" displayed on pharmacy search page
+    Then user verify breadcrumb "Return to previous page" displayed on pharmacy search page
     When user clicks on breadcrumb on pharmacy search page
-    Then user should be navigated to VPP summary page
-		
-		#@breadcrumbPharmacySearch_AARP
-    Examples: 
-      | site | zipcode | county      | isMultutiCounty | plantype |
-      | AARP |   19019 | Iowa County | No              | MAPD     |
+    Then user should be navigated to the previous page
+      | PagePath | <path> |
 
-    #@breadcrumbPharmacySearch_UHC
+    @breadcrumbPharmacySearch_AARP
     Examples: 
-      | site | zipcode | county      | isMultutiCounty | plantype |
-      | UHC  |   19019 | Iowa County | No              | MAPD     |
+      | site | path                              | pageName                                                         |
+      | AARP | shop.html                         | ShopPlan: Shop                                                   |
+      | AARP | shop/compare/compare-pdp.html     | Compare Medicare Part D Plans                                    |
+      | AARP | shop/estimate/pdp-costs.html      | Medicare Prescription Drug (Part D) Plan Costs                   |
+      | AARP | shop/prescription-drug-plans.html | Shop AARP Medicare Prescription Drug Plans from UnitedHealthcare |
+
+		@breadcrumbPharmacySearch_UHC
+    Examples: 
+      | site | path                              | pageName                                                         |
+      | UHC  | shop.html                         | ShopPlan: Shop                                                   |
+      | UHC  | shop/compare/compare-pdp.html     | Compare Medicare Part D Plans                                    |
+      | UHC  | shop/estimate/pdp-costs.html      | Medicare Prescription Drug (Part D) Plan Costs                   |
+      | UHC  | shop/prescription-drug-plans.html | Shop AARP Medicare Prescription Drug Plans from UnitedHealthcare |

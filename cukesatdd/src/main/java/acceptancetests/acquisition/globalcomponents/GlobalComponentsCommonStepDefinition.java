@@ -745,7 +745,18 @@ public void the_user_clicks_on_Back_to_top_Link() throws Throwable {
 	  }
 	 
 
-	 
+	  @Then("^user should be navigated to the previous page$")
+	  public void user_should_be_navigated_to_the_previous_page(DataTable givenAttributes) throws Throwable {
+		  AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage)getLoginScenario() .getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		  List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+			Map<String, String> memberAttributesMap = new HashMap<String, String>();
+			for (int i = 0; i < memberAttributesRow.size(); i++) {
+				memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+						memberAttributesRow.get(i).getCells().get(1));
+			}
+			String path = memberAttributesMap.get("PagePath");
+			aquisitionhomepage.validatePageNavigated(path);
+	  }
 	  
 }
 
