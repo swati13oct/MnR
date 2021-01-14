@@ -2,7 +2,7 @@ Feature: UAT Scripts-To test Campaign TFN in all flows on AARP site
 
  
  #######################Script 1: Direct traffic########################################
-   @Scenario_1_2_DirectTraffic_UAT
+   @Scenario_1_2_DirectTraffic_UAT @UATRegression
   Scenario Outline: <scenario> 1.0 Verify TFN in VPP Plan Details and OLE pages, DCE,
    Given the user is on AARP medicare acquisition site landing page
     And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
@@ -43,7 +43,7 @@ Feature: UAT Scripts-To test Campaign TFN in all flows on AARP site
       | Scenario 1 - AMP | AARP |https://www.medicare.uhc.com/ | https://stage-medicare.uhc.com/|https://offline.medicare.uhc.com/|Alabama| 810027 | enroll/ma-enrollment.html | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | shop/estimate/pdp-costs.html | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | health-plans.html?zipcode=28035&deepLink=favPlansDeepLink&plantype=MA&year=2020&planId=H5253041000&planYear=2020&systemYear=2020&zipcode=28035&fipsCode=119&product=MAPD&yearDisclaimer=undefined&month=2&yearToggle=undefined&deepLink=plandetail&WT.mc_id=897749&mrcid=em:Acq:MR%7cFederal%7cEGEM3011%7c::897749!/details | //a[contains(@class, 'tel')] | health-plans/medicare-supplement-plans/medicare-information.html?vpp=true | //*[@id='tfn'] | medicare-education.html | (//a[contains(@class, 'tel')])[1] | Ulayer |   80001 | MA       | No              | current  | mnrqavd11 | Password@1 | health-plans/estimate-drug-costs.html#/drug-cost-estimator |        8009508 | 
 
   #######################Script 2: Campaign traffic########################################
-  @Scenario_2_CampaignTraffic_UAT
+  @Scenario_2_CampaignTraffic_UAT @UATRegression
   Scenario Outline: <scenario> Verify TFN for different plan types through Campaign Traffic
     Given the user Starts WebDriver
     Given the user is on following acquisition site from Campaign Traffic
@@ -86,7 +86,7 @@ Feature: UAT Scripts-To test Campaign TFN in all flows on AARP site
    
    
     ############################ Script 4: AMS Referral Traffic & Referral Visit###########################################
-      @Scenario4_1_ExternalLink_AARP_UAT
+      @Scenario4_1_ExternalLink_AARP_UAT @UATRegression
        Scenario Outline: <scenario> 4.7.1 Verify Externals referral plan functionalities 
     Given the user Starts WebDriver
       Given the user is on following acquisition site from Campaign Traffic
@@ -144,7 +144,7 @@ Feature: UAT Scripts-To test Campaign TFN in all flows on AARP site
 	
     #######################Script 5: Portfolio Campaign Traffic to Med Ed########################################
      
-     @Scenario_5_Portfolio_CampaignTraffic_MedEd1_UAT
+     @Scenario_5_Portfolio_CampaignTraffic_MedEd1_UAT @UATRegression
   Scenario Outline: <scenario>1.0 Verify TFN in MedEd Pages and VPP
     Given the user Starts WebDriver
     Given the user is on following acquisition site from Campaign Traffic
@@ -172,7 +172,7 @@ Feature: UAT Scripts-To test Campaign TFN in all flows on AARP site
       | Scenerio 5-Portfolio- AMP | ulayer | 8001277 | /medicare-education.html?WT.mc_id=8001277 | medicare-articles.html | (//span[@class='heading-6']//u)[1] | medicare-articles/medicare-made-clear.html | medicare-articles/eligibility-and-enrollment.html |
 
   #######################Script 7: Email Validation########################################
-  @Scenario_7_DirectTraffic_Email_UAT
+  @Scenario_7_DirectTraffic_Email_UAT @UATRegression
   Scenario Outline: <scenario> 1.0 Verify TFN through Email Validation
     Given the user is on AARP medicare acquisition site landing page
     And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
@@ -202,7 +202,7 @@ Feature: UAT Scripts-To test Campaign TFN in all flows on AARP site
       | Scenario 7-Email - AMP |  810027 |  8013925 | /?WT.mc_id=8013925&mrcid=em:Acq:MR%7CNTM65%7CEGEM3107%7C::8013925 | (//a[contains(@class, 'tel')])[1] | medicare-articles.html | //button[@id='sam-call-button']//span[contains(@class,'sam__button__text desktop')] | shop/medicare-supplement-plans.html | //button[@id='sam-call-button']//span[contains(@class,'sam__button__text desktop')] |
 
   #######################Script 8: External Link PDP########################################
-  @Scenario_8_External_Link_PDP_UAT
+  @Scenario_8_External_Link_PDP_UAT @UATRegression
   Scenario Outline: <scenario> 1.0  Verify TFN through External Links PDP
     Given the user Starts WebDriver
     Given the user is on following acquisition site from Campaign Traffic
@@ -270,7 +270,7 @@ Feature: UAT Scripts-To test Campaign TFN in all flows on AARP site
       
         #######################Script 9: External Link Plan 11########################################
    
-   @Scenario_9_External_Link_UAT
+   @Scenario_9_External_Link_UAT @UATRegression
   Scenario Outline: <scenario> 1.0 Verify TFN through External Links
     Given the user Starts WebDriver
     Given the user is on AARP medicare acquisition site from External Link and Land on MA Plans
