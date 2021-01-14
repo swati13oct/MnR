@@ -418,7 +418,7 @@ public class ValueAddedServicepage extends UhcDriver {
 		JavascriptExecutor jse = (JavascriptExecutor) driver;
 		jse.executeScript("window.scrollBy(0,200)", "");
 		
-		Assert.assertTrue(aarpSmartDriverShowMorePara.getText().contains("Here’s how to Register:"));
+		Assert.assertTrue(aarpSmartDriverShowMorePara.getText().contains("how to Register:"));
 		
 		CommonUtility.waitForPageLoadNew(driver, aarpSmartDriverShowMoreLnk, 20);
 		
