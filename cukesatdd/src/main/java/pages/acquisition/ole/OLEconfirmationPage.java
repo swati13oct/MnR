@@ -399,14 +399,21 @@ public Connection createDataBaseConnection() {
 		Connection connection = null;
 		try {
 			 Class.forName(CommonConstants.DB_ORACLE_DRIVER).newInstance();
-			 if(MRScenario.environment.equalsIgnoreCase("stage")) 
+			 if(MRScenario.environment.equalsIgnoreCase("stage") || MRScenario.environment.equalsIgnoreCase("team-acme")) 
 			 {
-			 connection = DriverManager.getConnection(CommonConstants.CONNECTION_URL);
+			 connection = DriverManager.getConnection(CommonConstants.CONNECTION_URL_UAT20);
 			 }
-			 else {
-		     connection = DriverManager.getConnection(CommonConstants.CONNECTION_TEAM_URL);
+			if(MRScenario.environment.equalsIgnoreCase("stage") || MRScenario.environment.equalsIgnoreCase("team-acme")){
+				 connection = DriverManager.getConnection(CommonConstants.CONNECTION_URL_UAT19);
+			 }
+			if(MRScenario.environment.equalsIgnoreCase("stage") || MRScenario.environment.equalsIgnoreCase("team-acme")){
+				 connection = DriverManager.getConnection(CommonConstants.CONNECTION_URL_UAT18); 
+			 }
+			if(MRScenario.environment.equalsIgnoreCase("stage") || MRScenario.environment.equalsIgnoreCase("team-acme")){
+		     connection = DriverManager.getConnection(CommonConstants.CONNECTION_URL_STAGE);
 				 } 
 			 if(connection!=null) {
+				 
 				 System.out.println("Connection successful");
 
 			 }
