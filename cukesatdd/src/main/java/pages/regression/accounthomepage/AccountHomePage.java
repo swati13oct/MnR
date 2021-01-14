@@ -4695,4 +4695,164 @@ public class AccountHomePage extends UhcDriver {
 		}
 
 	}
+	/*
+	 * This function clicks on Benefits and Coverage link from Dashboard after
+	 * waiting for Hello-Person name text to be displayed on page
+	 */
+
+	public BenefitsAndCoveragePage termmembernavigateToBandCPage(String PlanType){
+		System.out.println("Checking for Welcome or Hello on Dashboard home page now");
+
+		try {
+			CommonUtility.waitForPageLoad(driver, helloPerson, 5);
+			if (helloPerson.isDisplayed()) 
+			{
+				System.out.println("Hello PersonName on Dashboard home page was found and exact message is :"+helloPerson.getText());
+			}
+		}
+		catch (Exception e) {
+			// TODO Auto-generated catch block
+			System.out.println("Catch block - Hello PersonName message was not found on Dashboard home page, ignore if it is pre-effective member ");	
+		}	
+		try 
+		{
+			CommonUtility.waitForPageLoad(driver, welcome, 5);
+			if (welcome.isDisplayed()) 
+				System.out.println("Welcome message displayed on Dashboard is: "+welcome.getText());
+		}
+		catch (Exception e) {
+			// TODO Auto-generated catch block
+			System.out.println("Catch block - Welcome message was not found on Dashboard home page, ignore if it active member ");	
+		}
+		if (MRScenario.environment.equalsIgnoreCase("stage") && ("NO".equalsIgnoreCase(MRScenario.isTestHarness))) 
+		{
+			System.out.println("user is on Stage login page");
+			// CommonUtility.waitForPageLoad(driver, claimsDashboardLink, 90);
+
+			if (driver.getCurrentUrl().contains("/aarp/dashboard"))
+			{
+				System.out.println("User is on dashboard page and URL is ==>" + driver.getCurrentUrl());
+
+				driver.navigate().to(PAGE_URL + "aarp/member/benefits-coverage.html");
+			}
+
+			if (driver.getCurrentUrl().contains("/pcp/dashboard"))
+			{
+				System.out.println("User is on dashboard page and URL is ==>" + driver.getCurrentUrl());
+
+				driver.navigate().to("https://" + MRScenario.environment
+						+ "-mymedicareaccount.uhc.com/pcp/member/benefits-coverage.html");
+			}
+			if (driver.getCurrentUrl().contains("/medica/dashboard"))
+			{
+				System.out.println("User is on dashboard page and URL is ==>" + driver.getCurrentUrl());
+
+				driver.navigate().to("https://" + MRScenario.environment
+						+ "-mymedicareaccount.uhc.com/medica/member/benefits-coverage.html");
+			}
+			if (driver.getCurrentUrl().contains("/retiree/dashboard"))
+			{
+				System.out.println("User is on dashboard page and URL is ==>" + driver.getCurrentUrl());
+
+				driver.navigate().to(PAGE_URL + "retiree/member/benefits-coverage.html"); 
+			}
+			if (driver.getCurrentUrl().contains("/medicare/dashboard"))
+			{
+				System.out.println("User is on dashboard page and URL is ==>" + driver.getCurrentUrl());
+
+				driver.navigate().to(PAGE_URL + "medicare/member/benefits-coverage.html"); 
+			}
+
+			try {
+				Thread.sleep(5000);
+			} catch (InterruptedException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			System.out.println(driver.getCurrentUrl());
+			//CommonUtility.waitForPageLoad(driver, heading, 30);
+			if (driver.getTitle().contains("Benefits")) {
+				System.out.println(driver.getTitle());
+				return new BenefitsAndCoveragePage(driver);
+			}
+		}										
+
+		else if (MRScenario.environment.equals("stage") && ("YES".equalsIgnoreCase(MRScenario.isTestHarness))) {
+			driver.navigate().to(PAGE_URL + "content/medicare/member/benefits/overview.html");
+			System.out.println(driver.getCurrentUrl());
+			if (driver.getTitle().contains("Benefits")) {
+				System.out.println(driver.getTitle());
+				return new BenefitsAndCoveragePage(driver);
+			}
+
+		} else if (MRScenario.environment.equals("team-h") || MRScenario.environment.equals("test-a")) {
+
+			driver.navigate().to(PAGE_URL + "medicare/member/benefits-coverage.html");
+			System.out.println(driver.getCurrentUrl());
+		} else if (MRScenario.environment.equals("team-c")) {
+			driver.navigate().to(
+					"https://team-c-medicare.ose-elr-core.optum.com/content/medicare/member/benefits/overview.html");
+			System.out.println(driver.getCurrentUrl());
+			return new BenefitsAndCoveragePage(driver);
+		} else if (MRScenario.environment.equals("team-e")) {
+			jsClickNew(driver.findElement(By.xpath("//td[text()='benefits and coverage page ']/following::a[1]")));
+			CommonUtility.waitForPageLoad(driver, heading, 30);
+			System.out.println(driver.getCurrentUrl());
+			return new BenefitsAndCoveragePage(driver);
+		} else if (MRScenario.environment.equals("prod") || MRScenario.environment.equals("offline")) {
+
+
+			if (validate(shadowRootHeader)) {
+				System.out.println("located shadow-root element, attempt to process further...");
+				WebElement root1 = expandRootElement(shadowRootHeader);
+				try {
+					// Going inside shadow root to get element, in this case the
+					// logo is in the shadow root header
+					System.out.println("Value of Plan Type is: "+PlanType);
+
+					if (PlanType.equalsIgnoreCase("SHIP"))
+					{	
+						WebElement BenefitsandCoverageTab = root1.findElement(By
+								.cssSelector("#sticky-main-nav > div > div > div > a:nth-child(4)"));
+						System.out.println("shadow-root element has been located, now clicking on Benefits and Coverage tab");	
+						TestHarness.checkForIPerceptionModel(driver);
+						BenefitsandCoverageTab.click();
+					}
+					else 
+					{
+						driver.navigate().to("https://www.medicare.uhc.com/retiree/member/documents/overview.html");
+						System.out.println(driver.getCurrentUrl());
+						System.out.println("Benefits an Coverage tab has been clicked");	
+					}
+
+				//	System.out.println("Benefits an Coverage tab has been clicked");	
+					CommonUtility.checkPageIsReadyNew(driver);
+					System.out.println("Current URL is : "+driver.getCurrentUrl());
+					if (driver.getCurrentUrl().contains("documents"))
+					{
+						System.out.println("Current URL contains documents text in it, documents page for a terminated member");	
+						return new BenefitsAndCoveragePage(driver);
+					} 
+					else
+					{
+						Assert.fail("Current URL doesn't contains benefits text in it, benefits page didn't appear , failed");
+					}
+				}
+				catch(Exception e)
+				{
+					System.out.println("Could not locate shadow root element for benefits and coverage tab");
+					Assert.fail("Could not locate shadow root element for benefits and coverage tab");
+				}
+			}
+		}
+		else
+		{
+			driver.navigate().to(
+					"https://team-ci1-medicare.ose-elr-core.optum.com/content/medicare/member/benefits/overview.html");
+			System.out.println(driver.getCurrentUrl());
+			return new BenefitsAndCoveragePage(driver);
+		}
+		return null;
+
+}
 }

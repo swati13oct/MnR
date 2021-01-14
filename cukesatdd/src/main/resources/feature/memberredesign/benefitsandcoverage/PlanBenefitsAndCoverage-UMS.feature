@@ -42,7 +42,7 @@ Feature: 1.01 Member  benefits and Coverage page
     Then The user navigate to Benefits and Coverage page
     And the user validates the Drug costs Section
     Then the user verifies the Retail Cost sharing table
-    Then the user verifies the Mail Order Cost sharing table
+   # Then the user verifies the Mail Order Cost sharing table
 
     @devRegression
     Examples: 
@@ -427,16 +427,16 @@ Feature: 1.01 Member  benefits and Coverage page
     And the user validates dropdown selection functionality
     And the user validates text for the Look Up Drugs section
     And the user validates group Drug coverage header and text under the section
+    And the NON-LIS PDP group user should see drug cost table for non Lis members
+    And the user should see drug copay and discount table
+      | Updated Language | <UpdatedLanguage> |
+      | Display Flag     | <DisplayFlag>     |
+    And the user validates the user click on the link it expands and when user clicks it again it should collapse
     And the user validates text for the Look Up Drugs section
     And the user validates group Look Up Drugs button should be visible
     And the user validates text for the Locate a Pharmacy section
     And the user validates Locate a Pharmacy button should be visible
       | Plan Type | <planType> |
-    And the NON-LIS PDP group user should see drug cost table for Lis members
-    And the user should see drug copay and discount table
-      | Updated Language | <UpdatedLanguage> |
-      | Display Flag     | <DisplayFlag>     |
-    And the user validates the user click on the link it expands and when user clicks it again it should collapse
     And the user validates view and document label
     And the user validates static links
       | Plan Type | <planType> |
@@ -700,21 +700,23 @@ Feature: 1.01 Member  benefits and Coverage page
       | Copay Category | <copayCategory> |
       | Deductible | <deductible> |
       | Insulin | <insulin> |
+    Then validates LEARN MORE ABOUT DRUG TIERS link content for user with insulin  
 	
-    @hasInsulin_mapd_NoD
-    Examples: 
-      | index  | FID    | planType  | memberType     | copayCategory | deductible   | insulin      |
-      | 34-I01 | 478830 | MAPD      | Individual_BnC | NON LIS       | NoD          | hasInsulin   | 
+	### note: no legacy view user
+    #@hasInsulin_mapd_NoD
+    #Examples: 
+    #  | index  | FID    | planType  | memberType     | copayCategory | deductible   | insulin      |
+    #  | 34-I01 | 478830 | MAPD      | Individual_BnC | NON LIS       | NoD          | hasInsulin   | 
 
-    @hasInsulin_mapd_T12NoD_T345D
-    Examples: 
-      | index  | FID    | planType  | memberType     | copayCategory | deductible   | insulin      |
-      | 34-I02 | 478830 | MAPD      | Individual_BnC | NON LIS       | T12NoD_T345D | hasInsulin   | 
+    #@hasInsulin_mapd_T12NoD_T345D
+    #Examples: 
+    #  | index  | FID    | planType  | memberType     | copayCategory | deductible   | insulin      |
+    #  | 34-I02 | 478830 | MAPD      | Individual_BnC | NON LIS       | T12NoD_T345D | hasInsulin   | 
 
-    @hasInsulin_mapd_T123NoD_T45D
-    Examples: 
-      | index  | FID    | planType  | memberType     | copayCategory | deductible   | insulin      |
-      | 34-I03 | 478830 | MAPD      | Individual_BnC | NON LIS       | T123NoD_T45D | hasInsulin   | 
+    #@hasInsulin_mapd_T123NoD_T45D
+    #Examples: 
+    #  | index  | FID    | planType  | memberType     | copayCategory | deductible   | insulin      |
+    #  | 34-I03 | 478830 | MAPD      | Individual_BnC | NON LIS       | T123NoD_T45D | hasInsulin   | 
      
     @hasInsulin_pdp_NoD
     Examples: 
@@ -741,10 +743,10 @@ Feature: 1.01 Member  benefits and Coverage page
       | index  | FID    | planType  | memberType     | copayCategory | deductible   | insulin      |
       | 34-I08 | 478830 | MAPD      | Individual_BnC | LIS 4         | NoTier       | nonInsulin   | 
 
-    @nonInsulin_mapd_T12345
-    Examples: 
-      | index  | FID    | planType  | memberType     | copayCategory | deductible   | insulin      |
-      | 34-I09 | 478830 | MAPD      | Individual_BnC | NON LIS       | T12345       | nonInsulin   | 
+    #@nonInsulin_mapd_T12345
+    #Examples: 
+    #  | index  | FID    | planType  | memberType     | copayCategory | deductible   | insulin      |
+    #  | 34-I09 | 478830 | MAPD      | Individual_BnC | NON LIS       | T12345       | nonInsulin   | 
 
   #note: if FED_SHIP_SHIP_BnC user stop working, replace with any FED+SHIP combo user would do, coverage is for combo with federal priority
   @benefitsAndCoverage24 @api
@@ -783,5 +785,16 @@ Feature: 1.01 Member  benefits and Coverage page
       | 41    | xxxxx | TERM     | FED_BnC      |
       | 42    | xxxxx | TERM     | PDP_FED_BnC  |
       | 43    | xxxxx | TERM     | MAPD_FED_BnC | 
-      
- ###############################Regression Scenarios END Here ########################################
+
+  @benefitsAndCoverage26 @rider
+  Scenario Outline: Index: <index> -FID: <FID> -plan: <planType> -memberType: <memberType> - Verify Rider tile display
+    Given login with following details logins in the member portal and validate elements
+      | Plan Type      | <planType>      |
+      | Member Type    | <memberType>    |
+    Then The user navigates to Benefits and Coverage page
+      | Plan Type | <planType> |
+	And the user validate rider tile is displayed
+	
+    Examples: 
+      | index  | FID    | planType  | memberType           |
+      | 44     | xxxxxx | MAPD      | Individual_Rider_BnC |

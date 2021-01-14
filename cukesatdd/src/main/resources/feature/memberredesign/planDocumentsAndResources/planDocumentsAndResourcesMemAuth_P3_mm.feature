@@ -57,7 +57,7 @@ Feature: 1.06.3.1 Member Plans and Documents - section: Membership Materials - M
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | mm_sd | mm_en | mm_es | mm_zh |
       | 09-047 | 15129       | qavgogine | qavgogine | q2_june_NiceSeg_1595    | MA       | AARP_IND_EFF_PDnR     | true  | true  | true  | false |
-      | 10-048 | 15130       | qavgogine | qavgogine | q3_sep_UAT4_Group289    | MA       | GROUP_EFF_PDnR        | true  | true  | false | false | 
+      | 10-048 | 15130       | qavgogine | qavgogine | q3_sep_UAT4_Group152    | MA       | GROUP_EFF_PDnR        | true  | true  | false | false | 
 
 	@memAuth_active_mapd
 	Examples: 
