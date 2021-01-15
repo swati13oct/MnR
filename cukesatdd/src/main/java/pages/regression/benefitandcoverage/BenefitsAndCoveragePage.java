@@ -326,47 +326,112 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 		validateWithValue("Look Up Drugs Button", LookUpDrugsButton);
 		scrollElementToCenterScreen(LookUpDrugsButton);
 		String actHref=LookUpDrugsButton.getAttribute("href");
+		String initialUrl = driver.getCurrentUrl();
+		LookUpDrugsButton.click();
 		if (MRScenario.environment.contains("team-a")) {
 			//note: can't click Rally pages on team env
 			String expHref="/pharmacy-uhc/drugs";
 			Assert.assertTrue("PROBLEM - env: '"+MRScenario.environment+"' - href value is not as expected for '' link.  "
 					+ "Expected to contain '"+expHref+"' | Actual href value='"+actHref+"'", 
 					actHref.contains(expHref));
-			return;
-		}
-		LookUpDrugsButton.click();
-		CommonUtility.checkPageIsReadyNew(driver);
-		if (MRScenario.isTestHarness.equalsIgnoreCase("YES")) { //note: new DCE is a Rally page, access via testharness will land on myuhc.com login page
-			if (actHref.contains("/pharmacy-uhc/drugs")) {
-				String expUrl="https://www.myuhc.com/member/prelogoutLayout.do?reason=logout&currentLanguageFromPreCheck=en";
-				String actUrl=driver.getCurrentUrl();
-				Assert.assertTrue("PROBLEM - not getting expected URL. From team or stage env. Expect to contains '"+expUrl+"' | Actual URL='"+actUrl+"'", actUrl.contains(expUrl));
-			} else { //note: assume still the old DCE page if not the new Rally DCE
-				CommonUtility.waitForPageLoad(driver, oldDcePgHeader, 5);
-				Assert.assertTrue("PROBLEM - unable to locate the DCE page header", 
-						validate(oldDcePgHeader,0) );
+			CommonUtility.checkPageIsReadyNew(driver);
+			try {
+				Thread.sleep(5000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
 			}
-		} else {
-			if (driver.getCurrentUrl().contains("/pharmacy-uhc/drugs")) {
-				if (validate(newDcePrePgCloseBtn,0)) {
-					newDcePrePgCloseBtn.click();
-					CommonUtility.checkPageIsReadyNew(driver);
-				} else {
-					CommonUtility.waitForPageLoad(driver, newDcePgSearchBtn, 5);
+			if (MRScenario.isTestHarness.equalsIgnoreCase("YES")) { //note: new DCE is a Rally page, access via testharness will land on myuhc.com login page
+				if (actHref.contains("/pharmacy-uhc/drugs")) {
+					String expUrl="https://www.myuhc.com/member/prelogoutLayout.do?reason=logout&currentLanguageFromPreCheck=en";
+					String actUrl=driver.getCurrentUrl();
+					Assert.assertTrue("PROBLEM - not getting expected URL. From team or stage env. Expect to contains '"+expUrl+"' | Actual URL='"+actUrl+"'", actUrl.contains(expUrl));
+					driver.get(initialUrl);
+					Assert.assertTrue("PROBLEM - not getting expected URL. From team or stage env. Expect to contains '"+initialUrl+"' | Actual URL='"+initialUrl+"'", initialUrl.contains("member/benefits/overview.html"));
+				} else { //note: assume still the old DCE page if not the new Rally DCE
+					CommonUtility.waitForPageLoad(driver, oldDcePgHeader, 5);
 					Assert.assertTrue("PROBLEM - unable to locate the DCE page header", 
-							validate(newDcePgSearchBtn,0) );
+							validate(oldDcePgHeader,0) );
 				}
 			} else {
-				CommonUtility.waitForPageLoad(driver, oldDcePgHeader, 5);
-				Assert.assertTrue("PROBLEM - unable to locate the DCE page header", 
-						validate(oldDcePgHeader,0) );
+				if (driver.getCurrentUrl().contains("/pharmacy-uhc/drugs")) {
+					if (validate(newDcePrePgCloseBtn,0)) {
+						newDcePrePgCloseBtn.click();
+						CommonUtility.checkPageIsReadyNew(driver);
+					} else {
+						CommonUtility.waitForPageLoad(driver, newDcePgSearchBtn, 5);
+						Assert.assertTrue("PROBLEM - unable to locate the DCE page header", 
+								validate(newDcePgSearchBtn,0) );
+					}
+				} else {
+					CommonUtility.waitForPageLoad(driver, oldDcePgHeader, 5);
+					Assert.assertTrue("PROBLEM - unable to locate the DCE page header", 
+							validate(oldDcePgHeader,0) );
+				}
 			}
-		}
-		driver.navigate().back();
-		CommonUtility.checkPageIsReadyNew(driver);
-		checkModelPopup(driver,2);
-	}
-
+		} else if (MRScenario.environment.contains("stage") || MRScenario.environment.contains("offline") || MRScenario.environment.contains("prod") ) {
+			String expUrl="medicare/member/drug-lookup/overview.html#/drug-cost-estimator";
+			String actUrl=driver.getCurrentUrl();
+			Assert.assertTrue("PROBLEM - not getting expected URL. Expect to contains '"+expUrl+"' | Actual URL='"+actUrl+"'", actUrl.contains(expUrl));
+			driver.get(initialUrl);
+	    }
+			CommonUtility.checkPageIsReadyNew(driver);
+			try {
+				Thread.sleep(5000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			
+		/* Time being added , will modify when changes at stage ,offline prod and prod 
+		 * if (MRScenario.environment.contains("stage") || MRScenario.environment.contains("offline") || MRScenario.environment.contains("prod")) {
+			String expHref = null;
+			if(MRScenario.environment.contains("stage") && plantype.equalsIgnoreCase("MAPD") || plantype.equalsIgnoreCase("PDP")) {
+				expHref="https://member.int.uhc.com/pharmacy-uhc/drugs";
+				Assert.assertTrue("PROBLEM - env: '"+MRScenario.environment+"' - href value is not as expected for '' link.  "
+						+ "Expected to contain '"+expHref+"' | Actual href value='"+actHref+"'", 
+						actHref.contains(expHref));
+			}else if(MRScenario.environment.contains("stage") && plantype.equalsIgnoreCase("PCP") || plantype.equalsIgnoreCase("MEDICA")) {
+				expHref="https://member.int.mymedicareaccount.uhc.com/pharmacy-uhc/drugs";
+				Assert.assertTrue("PROBLEM - env: '"+MRScenario.environment+"' - href value is not as expected for '' link.  "
+						+ "Expected to contain '"+expHref+"' | Actual href value='"+actHref+"'", 
+						actHref.contains(expHref));
+			}
+			if(MRScenario.environment.contains("offline") && !MRScenario.isTestHarness.equalsIgnoreCase("YES") && plantype.equalsIgnoreCase("MAPD") || plantype.equalsIgnoreCase("PDP")) {
+				expHref="https://member.uat.uhc.com/pharmacy-uhc/drugs";
+				Assert.assertTrue("PROBLEM - env: '"+MRScenario.environment+"' - href value is not as expected for '' link.  "
+						+ "Expected to contain '"+expHref+"' | Actual href value='"+actHref+"'", 
+						actHref.contains(expHref));
+			}else if(MRScenario.environment.contains("offline")&& !MRScenario.isTestHarness.equalsIgnoreCase("YES")  && plantype.equalsIgnoreCase("PCP") || plantype.equalsIgnoreCase("MEDICA")) {
+				expHref="https://member.uat.mymedicareaccount.com/pharmacy-uhc/drugs";
+				Assert.assertTrue("PROBLEM - env: '"+MRScenario.environment+"' - href value is not as expected for '' link.  "
+						+ "Expected to contain '"+expHref+"' | Actual href value='"+actHref+"'", 
+						actHref.contains(expHref));
+			}
+			if(MRScenario.environment.contains("prod") && !MRScenario.isTestHarness.equalsIgnoreCase("YES") && plantype.equalsIgnoreCase("MAPD") || plantype.equalsIgnoreCase("PDP")) {
+				expHref=" https://member.uhc.com/pharmacy-uhc/drugs";
+				Assert.assertTrue("PROBLEM - env: '"+MRScenario.environment+"' - href value is not as expected for '' link.  "
+						+ "Expected to contain '"+expHref+"' | Actual href value='"+actHref+"'", 
+						actHref.contains(expHref));
+			}else if(MRScenario.environment.contains("prod") && !MRScenario.isTestHarness.equalsIgnoreCase("YES") && plantype.equalsIgnoreCase("PCP") || plantype.equalsIgnoreCase("MEDICA")) {
+				expHref="https://member.mymedicareaccount.com/pharmacy-uhc/drugs";
+				Assert.assertTrue("PROBLEM - env: '"+MRScenario.environment+"' - href value is not as expected for '' link.  "
+						+ "Expected to contain '"+expHref+"' | Actual href value='"+actHref+"'", 
+						actHref.contains(expHref));
+			}
+			LookUpDrugsButton.click();
+			CommonUtility.checkPageIsReadyNew(driver);
+			try {
+				Thread.sleep(5000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			if (MRScenario.isTestHarness.equalsIgnoreCase("YES")) { //note: new DCE is a Rally page, access via testharness will land on myuhc.com login page
+				String expUrl=expHref;
+				String actUrl=driver.getCurrentUrl();
+				Assert.assertTrue("PROBLEM - not getting expected URL. From team or stage env. Expect to contains '"+expUrl+"' | Actual URL='"+actUrl+"'", actUrl.contains(expUrl));
+			}
+		} */	
+	} 
+	
 	public void validategrouplookupdrugsbutton() 
 	{
 		validateNew(LookUpDrugsButton,0);
