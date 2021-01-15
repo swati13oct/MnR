@@ -27,7 +27,7 @@ Feature: S1.1 To test Member Auth premium payment flows Micro App.
 
     Examples: 
       | UID     | username | password | memUserName | planType | claimPeriod    | dateRange      | routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName | paymentType |
-      | F243897 | jkuma14  | Brock@04 | Pramila1946 | SHIP     | Last 24 months | Last 18 months | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    | Recurring   |
+      | F243897 | jkuma14  | Brock@05 | Pramila1946 | SHIP     | Last 24 months | Last 18 months | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    | Recurring   |
 
  
   @regressionMemberPROD
@@ -54,7 +54,7 @@ Feature: S1.1 To test Member Auth premium payment flows Micro App.
    
     Examples: 
       | UID     | planType | memberType          | routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName |username | password | memUserName       | 
-      | F243897 | SHIP     | SHIPUpdate_Payments | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    | jkuma14  | Brock@04 | dmpeters513@gmail.com | 
+      | F243897 | SHIP     | SHIPUpdate_Payments | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    | jkuma14  | Brock@05 | dmpeters513@gmail.com | 
       
       
   @regressionMemberPROD @sanityMemberPROD2
@@ -82,4 +82,4 @@ Feature: S1.1 To test Member Auth premium payment flows Micro App.
 
     Examples: 
       | UID     | username | password | memUserName | planType | routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName |
-      | F243897 | jkuma14  | Brock@04 | Pramila1946 | SHIP     | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    |
+      | F243897 | jkuma14  | Brock@05 | Pramila1946 | SHIP     | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    |

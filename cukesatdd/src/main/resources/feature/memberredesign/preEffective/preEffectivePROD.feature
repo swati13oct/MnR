@@ -33,10 +33,10 @@ Feature: 1.15 Member pre-effective functionality
 
     Examples: 
       | planType | memberType          | copayCategory | technicalTFN   | segmentId | username | password | member                  | planstartdate |
-      # | IndMA    | preeffectiveIndMA   | NON LIS       | 1-888-980-8125 |       000 | jkuma14  | Brock@04 | Ranch1955            | 10/01/2020    |
-      | IndMAPD  | preeffectiveIndMAPD | NON LIS       | 1-888-980-8125 |       000 | jkuma14  | Brock@04 | Charlybirdnyc          | 03/01/2021    |
+      # | IndMA    | preeffectiveIndMA   | NON LIS       | 1-888-980-8125 |       000 | jkuma14  | Brock@05 | Ranch1955            | 10/01/2020    |
+      | IndMAPD  | preeffectiveIndMAPD | NON LIS       | 1-888-980-8125 |       000 | jkuma14  | Brock@05 | Charlybirdnyc          | 03/01/2021    |
        #Commenting tag due to unavailability of prod data - Pooja 01/04/2021
-     # | IndPDP   | preeffectiveIndMA   | NON LIS       | 1-888-980-8125 |       000 | jkuma14  | Brock@04 | vdurham49               | 01/01/2021    |
+     # | IndPDP   | preeffectiveIndMA   | NON LIS       | 1-888-980-8125 |       000 | jkuma14  | Brock@05 | vdurham49               | 01/01/2021    |
 
   @regressionMemberPROD2
   Scenario Outline: -planType: <planType> - Member Type: - <memberType> - Verify that correct links and messages are displayed on Dashboard and Secondary Page.
@@ -71,9 +71,9 @@ Feature: 1.15 Member pre-effective functionality
 
     Examples: 
       | planType | memberType          | copayCategory | technicalTFN   | segmentId | username | password | member            | planstartdate |
-      | IndPDP   | preeffectiveIndPDP  | NON LIS       | 1-888-980-8125 |       000 | jkuma14  | Brock@04 | wsowell@gmail.com | 03/01/2021    |
+      | IndPDP   | preeffectiveIndPDP  | NON LIS       | 1-888-980-8125 |       000 | jkuma14  | Brock@05 | wsowell@gmail.com | 03/01/2021    |
        #Commenting tag due to unavailability of prod data - Pooja  01/04/2021
-    #  | GroupMA  | preeffectiveGroupMA | NON LIS       | 1-888-980-8125 |       000 | jkuma14  | Brock@04 | Muellerja         | 01/01/2021    |
+    #  | GroupMA  | preeffectiveGroupMA | NON LIS       | 1-888-980-8125 |       000 | jkuma14  | Brock@05 | Muellerja         | 01/01/2021    |
 
   @regressionMemberPROD3
   Scenario Outline: -planType: <planType> - Member Type: - <memberType> - Verify that correct links and messages are displayed on Dashboard and Secondary Page.
@@ -108,8 +108,8 @@ Feature: 1.15 Member pre-effective functionality
 
     Examples: 
       | planType  | memberType            | copayCategory | technicalTFN   | segmentId | username | password | member                   | planstartdate |
-      | GroupMAPD | preeffectiveGroupMAPD | NON LIS       | 1-888-980-8125 |       000 | jkuma14  | Brock@04 | karen.stook.us@gmail.com | 02/01/2021    |
-      | SHIP      | preeffectiveSHIPOnly  | NON LIS       | 1-866-254-3132 |       000 | jkuma14  | Brock@04 | Terrielewis56            | 03/01/2021    |
+      | GroupMAPD | preeffectiveGroupMAPD | NON LIS       | 1-888-980-8125 |       000 | jkuma14  | Brock@05 | karen.stook.us@gmail.com | 02/01/2021    |
+      | SHIP      | preeffectiveSHIPOnly  | NON LIS       | 1-866-254-3132 |       000 | jkuma14  | Brock@05 | Terrielewis56            | 03/01/2021    |
 
   @regressionMemberPROD4 @sanityMemberPROD1
   Scenario Outline: -planType: <planType> - Member Type: - <memberType> - Verify that correct links and messages are displayed on Dashboard and Secondary Page.
@@ -152,7 +152,7 @@ Feature: 1.15 Member pre-effective functionality
     #    | Technical TFN SHIP | <technicalTFNSHIP> |
     Examples: 
       | planType | memberType               | copayCategory | technicalTFN   | segmentId | username | password | member         | planstartdate | technicalTFNSHIP |
-      | IndPDP   | preeffectivePDPSHIPCOMBO | NON LIS       | 1-888-980-8125 |       000 | jkuma14  | Brock@04 | Deboss24       | 02/01/2021    | 1-866-254-3132   |
+      | IndPDP   | preeffectivePDPSHIPCOMBO | NON LIS       | 1-888-980-8125 |       000 | jkuma14  | Brock@05 | Deboss24       | 02/01/2021    | 1-866-254-3132   |
 
   #Commenting tag due to unavailability of prod data - Jitesh 11/05/2020 @regressionMemberPROD4 @sanityMemberPROD2
   Scenario Outline: -planType: <planType> - Member Type - <memberType> - Verify that correct links and messages are displayed on Dashboard and Secondary Page.
@@ -188,4 +188,4 @@ Feature: 1.15 Member pre-effective functionality
 
     Examples: 
       | planType     | memberType                    | copayCategory | technicalTFN   | segmentId | username | password | member    | planstartdate |
-      | GroupPDPSSUP | preeffectiveGROUPPDPSSUPCOMBO | NON LIS       | 1-888-980-8125 |       000 | jkuma14  | Brock@04 | Be7779311 | 11/01/2020    |
+      | GroupPDPSSUP | preeffectiveGROUPPDPSSUPCOMBO | NON LIS       | 1-888-980-8125 |       000 | jkuma14  | Brock@05 | Be7779311 | 11/01/2020    |

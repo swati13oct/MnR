@@ -41,7 +41,7 @@ Feature: 1.19 Verify the premium payment flows on member portal - Part 5 - Test 
     And user clicks on Make one time payment on payment overview page
     And user selects other amount and enters "1.00" and selects SAVED credit card and click on Next button
     Then user navigates to payment overview screen for SAVED Card and selects agreements and click on Make one time payment
-    Then User navigates to payment confirmation page for CC flow
+    Then User navigates to payment confirmation page for CC flow for saved card
 
     Examples: 
       | TID     | planType | memberType                           | Name | CreditCardNumber | validMonth | validYear | paymentType |
