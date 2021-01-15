@@ -25,4 +25,4 @@ Feature: S1.1 To test Member Auth premium payment flows Micro App.
 
     Examples: 
       | UID     | username | password | memUserName | planType | claimPeriod    | dateRange      | Name         | CreditCardNumber | validMonth | validYear | paymentType |
-      | F243897 | jkuma14  | Brock@04 | KarenBloch  | MAPD     | Last 24 months | Last 18 months | Pooja Minhas | 4121600170691201 |         01 |      2021 | OneTime     |
+      | F243897 | jkuma14  | Brock@05 | KarenBloch  | MAPD     | Last 24 months | Last 18 months | Pooja Minhas | 4121600170691201 |         01 |      2021 | OneTime     |
