@@ -4702,7 +4702,8 @@ action.moveToElement(navigationSectionHomeLink).moveToElement(ourPlansHoverLink)
 		@FindBy(xpath="(//*[contains(text(),'Sign in')])[1]")
 		private WebElement memberSignInPage;
 
-		@FindBy(xpath="//a[contains(@href,'https://www.aarpmedicareplans.com/health-plans.html?WT.mc_id=8009508')]")
+	//@FindBy(xpath="//a[contains(@href,'https://www.aarpmedicareplans.com/health-plans.html?WT.mc_id=8009508')]")
+		@FindBy(xpath="//a[contains(@href,'https://www.aarpmedicareplans.com') or contains(@href,'https://www.aarpmedicareplans.com/health-plans.html?WT.mc_id=8009508')]")
 		private WebElement ViewMedicareplanlinks;
 
 		public void clickonmemberSignInlink(String ExpectedmemberSigninURL) {

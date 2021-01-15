@@ -231,12 +231,12 @@ public class WelcomePage extends UhcDriver{
 		//((JavascriptExecutor) driver).executeScript("arguments[0].click;", CancelEnrollmentLink);
 		
 		//CancelEnrollmentLink.click();
-		try {
+		/*try {
 			Thread.sleep(6000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
-		}
-		if(validate(CancellationModal)){
+		}*/
+		if(validate(CancellationModal,20)){
 			System.out.println("OLE Cancel Enrollment Modal is Displayed");
 			return new CancelOLEModal(driver);
 		}
