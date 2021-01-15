@@ -3810,4 +3810,18 @@ public void the_user_navigates_to_Review_and_Submit_Page_clickon_Edit_Medicare_P
 				testNote1.clear(); 
 			}
 	}
+	@Then("^the user cancels enrollment and navigates to homepage$")
+	public void the_user_cancels_enrollment() throws Throwable {
+		WelcomePage welcomePage = (WelcomePage) getLoginScenario().getBean(OLE_PageConstants.OLE_WELCOME_PAGE);
+		CancelOLEModal cancelOLEmodal = welcomePage.OpenCancelOLE();
+		if (cancelOLEmodal != null) {
+
+			getLoginScenario().saveBean(OLE_PageConstants.OLE_LEARNMORE_MODAL_PAGE,
+					cancelOLEmodal);
+			System.out.println("OLE Cancellation Modal is Displayed");
+			cancelOLEmodal.leaveApplication();
+		}
+		else
+			Assert.fail("OLE Cancellation Modal is NOT Displayed");
+	}
 }

@@ -1499,6 +1499,12 @@ public class PlanDetailsPage extends UhcDriver {
 			return new ComparePlansPage(driver);
 		return null;
 	}
+	
+	public ComparePlansPage navigateToPlanCompare() {
+		jsClickNew(comparePlansLink);
+		return new ComparePlansPage(driver);
+		
+	}
 
 	public void validateDefaultTab(String tabName) {
 		validateNew(defaultSelectedTab);
