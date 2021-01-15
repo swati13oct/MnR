@@ -556,17 +556,17 @@ Feature: 1.11. ACQ-Pharmacy Locator Test Scripts
 
     @breadcrumbPharmacySearch_AARP
     Examples: 
-      | site | zipcode | county      | isMultutiCounty | plantype | planyear | planname                                           |
-      | AARP |   90210 | Iowa County | No              | MAPD     | future   | AARP Medicare Advantage SecureHorizons Focus (HMO) |
-      | AARP |   90210 | Iowa County | No              | PDP     | future   | AARP MedicareRx Walgreens (PDP) |
-      | AARP |   10001 | New York County | No              | SNP     | future   | UnitedHealthcare Dual Complete (HMO D-SNP) |
-            
+      | site | zipcode | county          | isMultutiCounty | plantype | planyear | planname                                           |
+      | AARP |   90210 | Iowa County     | No              | MAPD     | future   | AARP Medicare Advantage SecureHorizons Focus (HMO) |
+      | AARP |   90210 | Iowa County     | No              | PDP      | future   | AARP MedicareRx Walgreens (PDP)                    |
+      | AARP |   10001 | New York County | No              | SNP      | future   | UnitedHealthcare Dual Complete (HMO D-SNP)         |
+
     @breadcrumbPharmacySearch_UHC
     Examples: 
-      | site | zipcode | county      | isMultutiCounty | plantype | planyear | planname                                           |
-      | UHC  |   90210 | Iowa County | No              | MAPD     | future   | AARP Medicare Advantage SecureHorizons Focus (HMO) |
-      | UHC |   90210 | Iowa County | No              | PDP     | future   | AARP MedicareRx Walgreens (PDP) |
-      | UHC |   10001 | New York County | No              | SNP     | future   | UnitedHealthcare Dual Complete (HMO D-SNP) |
+      | site | zipcode | county          | isMultutiCounty | plantype | planyear | planname                                           |
+      | UHC  |   90210 | Iowa County     | No              | MAPD     | future   | AARP Medicare Advantage SecureHorizons Focus (HMO) |
+      | UHC  |   90210 | Iowa County     | No              | PDP      | future   | AARP MedicareRx Walgreens (PDP)                    |
+      | UHC  |   10001 | New York County | No              | SNP      | future   | UnitedHealthcare Dual Complete (HMO D-SNP)         |
 
   Scenario Outline: To verify breadcrumbs on pharmacy search page through Shop page page on acquisition <site> site
     Given the user is on medicare acquisition site landing page
@@ -628,3 +628,32 @@ Feature: 1.11. ACQ-Pharmacy Locator Test Scripts
     Examples: 
       | site | planyear | zipcode | isMultutiCounty | county             | plantype | planName                        | path                                                                                                      |
       | UHC  | future   |   90210 | NO              | Los Angeles County | PDP      | AARP MedicareRx Walgreens (PDP) | health-plans/prescription-drug-plans/medicare-application/aarp-medicarerx-online-application.html/welcome |
+
+  Scenario Outline: To verify breadcrumbs on pharmacy search page through home page for Preferred Retail Pharmacy on acquisition <site> site
+    Given the user is on medicare acquisition site landing page
+      | Site | <site> |
+    When the user navigate to pharmacy search page from the navigation bar
+    Then user verify breadcrumb "Return to Home Page" displayed on pharmacy search page
+    And the user enters following details for the pharmacy search
+      | Zip Code    | <zipcode>    |
+      | Distance    | <distance>   |
+      | County Name | <countyName> |
+    And the user chooses a plan from dropdown
+      | Current Year Plan Name | <cy_planName> |
+      | Current Year Plan Year | <cy_planYear> |
+      | Next Year Plan Name    | <ny_planName> |
+      | Next Year Plan Year    | <ny_planYear> |
+    And click on DCE Link on Pharmacy Page
+    Then the user validates Get Started Page
+    Then user click on breadcrumb "Return to Pharmacy Search" on get started page
+    Then user verify breadcrumb "Return to Drug Cost Estimator" displayed on pharmacy search page
+
+    @breadcrumbPharmacySearch_AARP
+    Examples: 
+      | site | zipcode | distance | countyName | cy_planYear | cy_planName                     | ny_planYear | ny_planName                     |
+      | AARP |   10980 |       15 | None       |        2021 | AARP MedicareRx Preferred (PDP) |        2021 | AARP MedicareRx Preferred (PDP) |
+
+    @breadcrumbPharmacySearch_UHC
+    Examples: 
+      | site | zipcode | distance | countyName | cy_planYear | cy_planName                     | ny_planYear | ny_planName                     |
+      | AARP |   10980 |       15 | None       |        2021 | AARP MedicareRx Preferred (PDP) |        2021 | AARP MedicareRx Preferred (PDP) |
