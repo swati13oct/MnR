@@ -42,20 +42,29 @@ public class PlanDocsPage extends GlobalWebElements{
 	@FindBy(xpath = "//*[@id='zip-code']")
 	private WebElement zipCode;
 	
-	@FindBy(xpath = ".//*[@id='county']/option[2]")
+	@FindBy(id = "county")
 	private  WebElement selectMultiCounty;
 	
-	@FindBy(xpath = ".//*[@id='plan-year']/option[2]")
+	@FindBy(id = "plan")
 	private WebElement planYear;
 	
 	@FindBy(xpath = ".//*[@id='plan']/option[2]")
 	private WebElement planName;
 	
-	@FindBy(xpath = "//*[@id='planDocForm']/div[4]/div/button/span")
+	@FindBy(xpath = "//button//span[contains(@class,'uhc-button__text')]")
 	private WebElement continueButton;
 	
 	@FindBy(xpath = "//*[@id='planDocuments']/h3")
-	private WebElement planTitle;	
+	private WebElement planTitle;
+	
+	@FindBy(id = "zip-code-error")
+	private WebElement zipcodeerror;
+	
+	@FindBy(id = "county-error")
+	private WebElement countyerror;
+	
+	@FindBy(id = "plan-error")
+	private WebElement planerror;
 	
 	@FindBy(xpath = "//*[@id='planDocuments']/div/div[1]")
 	private WebElement PDF;
@@ -91,40 +100,81 @@ public class PlanDocsPage extends GlobalWebElements{
 		}else
 			Assert.fail("County is not matching");
 		
-		//System.out.println("labelPlan=="+labelPlan.getText());
-		/*if(labelPlan.getText().contains("Choose a plan")){
-			Assert.assertTrue("Plan is::"+labelPlan.getText(), true); 	
-		}else
-			Assert.fail("Plan is not matching");	*/	
+	
 	}
 	
-	public void enterValue(String zipcodeval,String selcounty, String plan, String plandropdown ) throws InterruptedException {
-		System.out.println("zipCode=="+zipcodeval+"==county=="+selcounty);
-		sendkeys(zipCode, zipcodeval);
-		
-		selectMultiCounty.click();
-		
+	public void enterYearValue(String plandropdown ) throws InterruptedException {
 		if(plandropdown.equalsIgnoreCase("yes")){
 			planYear.click();
-			System.out.println("plan=="+plan);
 		}
-		planName.click();
-		
-		
-		
+	}	
+
+	public void enterZipCodeValue(String zipcodeval) {
+		sendkeys(zipCode, zipcodeval);	
+	}
+	
+
+	public void enterCountyValue(String county) {
+		jsClickNew(selectMultiCounty);
+		WebElement countySelection = driver.findElement(By.xpath("//option[contains(text(), '" + county + "')]"));
+		countySelection.click();
+	}
+	
+
+	public void enterPlanValue(String plan) {
+		jsClickNew(planName);
+		WebElement planSelection = driver.findElement(By.xpath("//option[contains(text(), '" + plan + "')]"));
+		planSelection.click();
+	}
+	
+	public void continuebuttonOnClick() {
+		continueButton.click();	
+	}
+	
+	public boolean verifyErrorZipCodeMessage() {
+		if(zipcodeerror.isDisplayed()){
+			zipcodeerror.getText().contains("Please enter a valid ZIP code");
+			Assert.assertTrue("zipcodeerror section is visible", true); 
+			return true;
+		}else{
+			Assert.fail("zipcodeerror is not visible");
+			return false;
+		}
+	}
+	
+	public boolean verifyErrorCountyMessage() {
+		if(countyerror.isDisplayed()){
+			countyerror.getText().contains("Please select a county");
+			Assert.assertTrue("countyerror section is visible", true); 	
+			return true;
+		}else{
+			Assert.fail("countyerror is not visible");
+			return false;
+		}
+	}
+	
+	public boolean verifyErrorPlanMessage() {
+		if(planerror.isDisplayed()){
+			planerror.getText().contains("Please select a plan");
+			Assert.assertTrue("planerror section is visible", true); 	
+			return true;
+		}else{
+			Assert.fail("planerror is not visible");
+			return false;
+		}		
 	}
 	
 	public void verifyPDF(String plan) {
-		continueButton.click();	
+		continuebuttonOnClick();
 		System.out.println("Plan Documents for "+plan);
 		CommonUtility.waitForPageLoadNew(driver, header, 30);
 		System.out.println(planTitle.getText());
 
 			if(PDF.isDisplayed()){
 				System.out.println("PDF is visible");
-				Assert.assertTrue("PDF section is not there", true); 	
+				Assert.assertTrue("PDF section is visible", true); 	
 			}else
-				Assert.fail("PDF section is there");		
+				Assert.fail("PDF section is not visible");		
 			
 		
 			if(driver.findElement(By.xpath("//*[@id='planDocuments']/div/div[1]/h4")).getText().equalsIgnoreCase("English"))
