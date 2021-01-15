@@ -505,10 +505,48 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 
 	/**
 	 * Validates the text in locate a pharmacy section
+	 * @throws InterruptedException 
 	 */
-	public void validate_locateapharmacysection(String plantype) {
-		validateWithValue("PHARMACY LOCATOR",locateapharmacysection);
-		validateWithValue("LOCATE A PHARMACY button",locateapharmacybutton);
+	public void validate_locateapharmacysection(String plantype) throws InterruptedException {
+	
+		String actHref=locateapharmacybutton.getAttribute("href");
+		String initialUrl = driver.getCurrentUrl();
+		
+		if (MRScenario.environment.contains("team-a")) {
+			//note: can't click Rally pages on team env
+			String expHref="/pharmacy-uhc/pharmacies";
+			Assert.assertTrue("PROBLEM - env: '"+MRScenario.environment+"' - href value is not as expected for '' link.  "
+					+ "Expected to contain '"+expHref+"' | Actual href value='"+actHref+"'", 
+					actHref.contains(expHref));
+			CommonUtility.checkPageIsReadyNew(driver);
+			try {
+				Thread.sleep(2000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			if (MRScenario.isTestHarness.equalsIgnoreCase("YES")) { //note: new DCE is a Rally page, access via testharness will land on myuhc.com login page
+				if (actHref.contains("/pharmacy-uhc/pharmacies")) {
+					locateapharmacybutton.click();
+					Thread.sleep(5000);
+					String expUrl="https://www.myuhc.com/member/prelogoutLayout.do?reason=logout&currentLanguageFromPreCheck=en";
+					String actUrl=driver.getCurrentUrl();
+					Assert.assertTrue("PROBLEM - not getting expected URL. From team or stage env. Expect to contains '"+expUrl+"' | Actual URL='"+actUrl+"'", actUrl.contains(expUrl));
+					driver.get(initialUrl);
+					Assert.assertTrue("PROBLEM - not getting expected URL. From team or stage env. Expect to contains '"+initialUrl+"' | Actual URL='"+initialUrl+"'", initialUrl.contains("member/benefits/overview.html"));
+				} else { //note: assume still the old pharmacy  page if not the new Rally pharmacy
+					CommonUtility.waitForPageLoad(driver,oldPharmacyLocatorHeader, 5);
+					Assert.assertTrue("PROBLEM - unable to locate the Pharmacy Locator page header", 
+							validate(oldPharmacyLocatorHeader,0) );
+				}
+			} else if (driver.getCurrentUrl().contains("/pharmacy-uhc/pharmacies")) {
+					validate(rallyPharmacyResultsHeader,0);
+					CommonUtility.checkPageIsReadyNew(driver);
+				} 
+		}	
+		else if (MRScenario.environment.contains("stage") || MRScenario.environment.contains("offline") || MRScenario.environment.contains("prod")) {
+				validateWithValue("PHARMACY LOCATOR",locateapharmacysection);
+				validateWithValue("LOCATE A PHARMACY button",locateapharmacybutton);
+		}
 	}
 
 	/**
@@ -1343,7 +1381,7 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 		targetDocName="VIEW OTHER DOCUMENTS AND RESOURCES";
 		System.out.println("Proceed to validate '"+targetDocName+"' link");
 		validateNew(Viewotherdocsinpdfpdp);
-		String expHref="/content/medicare/member/documents/overview.html";
+		String expHref="/member/documents/overview.html";
 		String actHref=Viewotherdocsinpdfpdp.getAttribute("href");
 		Assert.assertTrue("PROBLEM - '"+targetDocName+"' link href value is not as expected.  Expected to contain '"+expHref+"' | Actual = '"+actHref+"'", actHref.contains(expHref));
 		/* keep re-activate this validation if planDoc page ever load faster...
