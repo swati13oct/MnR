@@ -270,7 +270,9 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth Prod
    And the user validates the Learn More section link for stage
     And the user validates tier link should not display
     And the user view the Drug Cost header and text
-    And the user validated the Look up Drugs link
+   # And the user validated the Look up Drugs link
+    And the user validates Look Up Drugs button should be visible
+      | Plan Type | <planType> |
     And the user validates Locate a Pharmacy button should be visible
       | Plan Type | <planType> |
     And the drugcost dropdown should not display
