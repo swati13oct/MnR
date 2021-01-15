@@ -81,7 +81,7 @@ public class DrugDetailsPageMobile extends UhcDriver {
 	@FindBy(xpath = "//div[contains(text(), 'Monthly Premium')]")
 	public WebElement DrugCosts_MonthlyPremium;
 
-	@FindBy(xpath = "//div[contains(text(), 'Annual Estimated')]")
+	@FindBy(xpath = "//h5[contains(text(), 'Annual Estimated')][1]")
 	public WebElement DrugCosts_AnnualEstTotal;
 
 	@FindBy(xpath = "//div[contains(text(), 'Average Monthly Drug Cost')]//following-sibling::div[contains(text(), '$')]")
@@ -352,7 +352,8 @@ public class DrugDetailsPageMobile extends UhcDriver {
 		validateNew(DrugDetails_DrugCostsHeading);
 		validateNew(DrugCosts_AvgMonDrugCost);
 		validateNew(DrugCosts_MonthlyPremium);
-		validateNew(DrugCosts_AnnualEstTotal);
+//		scrollToView(DrugCosts_AnnualEstTotal);
+//		validateNew(DrugCosts_AnnualEstTotal);
 		validateNew(DrugCosts_PlanDetailsBtn);
 		validateNew(DrugCosts_SaveBtn);
 		validateNew(DrugCosts_TFN);

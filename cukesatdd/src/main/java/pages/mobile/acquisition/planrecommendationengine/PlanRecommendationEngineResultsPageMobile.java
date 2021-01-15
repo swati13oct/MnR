@@ -296,6 +296,9 @@ public class PlanRecommendationEngineResultsPageMobile extends UhcDriver {
 
 	@FindBy(css = "#startoverdetails")
 	private WebElement StartOverDetails;
+	
+	@FindBy(xpath = "//a[@aria-describedby='recommendation_ma']")
+	private WebElement MAPDLink;
 
 	@FindBy(css = "#startOverContent")
 	private WebElement StartOverContent;
@@ -930,6 +933,9 @@ public class PlanRecommendationEngineResultsPageMobile extends UhcDriver {
 	}
 
 	public void vppToPreStartOver() {
+		if(MAPDLink.isDisplayed())
+			jsClickNew(MAPDLink);
+			
 		System.out.println("Validating VPP to PRE Page Clicking on Start Over Button");
 		validate(StartOverButton, 20);
 		jsClickNew(StartOverButton);

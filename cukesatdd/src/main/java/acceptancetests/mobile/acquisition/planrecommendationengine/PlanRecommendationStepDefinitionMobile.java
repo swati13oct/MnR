@@ -1457,6 +1457,7 @@ public class PlanRecommendationStepDefinitionMobile {
 		String zip = inputValues.get("Zip Code");
 		String county = inputValues.get("County Name");
 		String isMultiCounty = inputValues.get("Is Multi County");
+		
 		planSelectorResultspage.vppToPreStartOver();
 		planSelectorResultspage.validateZipcodePage(zip, county, isMultiCounty);
 	}

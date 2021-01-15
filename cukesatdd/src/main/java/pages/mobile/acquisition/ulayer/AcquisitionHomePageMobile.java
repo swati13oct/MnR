@@ -309,7 +309,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	@FindBy(xpath = "//h3[@id='guest-profile']")
 	private WebElement guestProfileLink;
 
-	@FindBy(xpath = "//*[@id='sam-call-button']//*[contains(@class,'sam__button__icon')]")
+	@FindBy(xpath = "//a[@id='ctc-sam-mobile']//span[contains(text(),'Call a Medicare Expert')]")
 	private WebElement callsam;
 
 	// @FindBy(xpath = "//*[@id='sam-call-button']/div/span[1]")
