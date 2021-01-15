@@ -882,10 +882,15 @@ public class CommonConstants {
 	
 	//public static final String CONNECTION_TEAM_URL = "jdbc:oracle:thin:qaread/testreadonly@orass0464:1521/gpsst04svc_trn.uhc.com";
 	//-----Stage-----------
+//	public static final String CONNECTION_URL = "jdbc:oracle:thin:qaread/testreadonly@dbslt0103:1521/gpsts19";
+	//public static final String CONNECTION_URL = "jdbc:oracle:thin:qaread/testreadonly@dbslt0104:1521/gpsts20";
+	
 	public static final String CONNECTION_URL_UAT19 = "jdbc:oracle:thin:qaread/testreadonly@dbslt0103:1521/gpsts19";
 	public static final String CONNECTION_URL_UAT18 = "jdbc:oracle:thin:qaread/testreadonly@dbslt0102:1521/gpsts18";
 	public static final String CONNECTION_URL_UAT20 = "jdbc:oracle:thin:qaread/testreadonly@dbslt0104:1521/gpsts20";
 	public static final String CONNECTION_URL_STAGE = "jdbc:oracle:thin:qaread/testreadonly@orass0464:1521/gpsst04svc_trn.uhc.com";
+	
+	
 	
 	public static final String GPS_QUERY = "\n" + 
 			"Select \n" + 

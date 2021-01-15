@@ -395,7 +395,7 @@ public Connection createDataBaseConnection() {
 		return connection;
 		}	*/
 	
-	public Connection createDataBaseConnection() {
+/*	public Connection createDataBaseConnection() {
 		Connection connection = null;
 		try {
 			 Class.forName(CommonConstants.DB_ORACLE_DRIVER).newInstance();
@@ -424,7 +424,7 @@ public Connection createDataBaseConnection() {
 		
 		return connection;
 			
-}
+}*/
 	
 /*	public boolean validate_GPS_for_Plantype(Map<String,String> map) {
 		boolean flag = false;
@@ -479,6 +479,38 @@ public Connection createDataBaseConnection() {
 		return flag;
 	}
 */	
+	
+	public Connection createDataBaseConnection() {
+		Connection connection = null;
+		try {
+			 Class.forName(CommonConstants.DB_ORACLE_DRIVER).newInstance();
+			 if(MRScenario.environment.equalsIgnoreCase("stage") || MRScenario.environment.equalsIgnoreCase("team-acme")) 
+			 {
+			 connection = DriverManager.getConnection(CommonConstants.CONNECTION_URL_UAT20);
+			 }
+			if(MRScenario.environment.equalsIgnoreCase("stage") || MRScenario.environment.equalsIgnoreCase("team-acme")){
+				 connection = DriverManager.getConnection(CommonConstants.CONNECTION_URL_UAT19);
+			 }
+			if(MRScenario.environment.equalsIgnoreCase("stage") || MRScenario.environment.equalsIgnoreCase("team-acme")){
+				 connection = DriverManager.getConnection(CommonConstants.CONNECTION_URL_UAT18); 
+			 }
+			if(MRScenario.environment.equalsIgnoreCase("stage") || MRScenario.environment.equalsIgnoreCase("team-acme")){
+		     connection = DriverManager.getConnection(CommonConstants.CONNECTION_URL_STAGE);
+				 } 
+			 if(connection!=null) {
+				 
+				 System.out.println("Connection successful");
+
+			 }
+		}
+			 catch (Exception e) {
+			 e.printStackTrace();
+		}
+		
+		return connection;
+			
+}
+	
 	public boolean validate_GPS_for_Plantype(Map<String,String> map,Map<String,String> matched,Map<String,String> mismatched) {
 		boolean flag = false;
 		//try {
