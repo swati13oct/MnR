@@ -82,7 +82,7 @@ Feature: 1.04.1 To Test NON-DREAM EOB for Members - E2E
     @SHIP_EOBs @devRegression @SHIP_EOBs2_singleShip
     Examples: 
       | index | planType                 | memberType          | eobType | realEob | flagZeroEob |
-      | 18    | SHIP_MEDICARE SUPPLEMENT | SHIP_EOB            | Medical | true    | true        | 
+      | 18    | SHIP_MEDICARE SUPPLEMENT | SHIP_EOB            | Medical | false   | true        | 
 
     @SHIP_EOBs @SHIP_EOBs3_shipComboFedShip
     Examples: 

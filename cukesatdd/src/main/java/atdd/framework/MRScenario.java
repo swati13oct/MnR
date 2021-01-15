@@ -1105,7 +1105,7 @@ try {
 				sauceOptions.setCapability("idleTimeout", 200);
 
 				SafariOptions browserOptions = new SafariOptions();
-				browserOptions.setCapability("platformName", "macOS 10.15");
+				browserOptions.setCapability("platformName", "macOS 11.00");
 				browserOptions.setCapability("browserVersion", browserVersion);
 				browserOptions.setCapability("sauce:options", sauceOptions);
 				capabilities.merge(browserOptions);
@@ -1265,7 +1265,7 @@ try {
 
 			String env = HSID_ENV;
 			String user = "UHG_000611921";  
-			String pwd = "Passx&9e";
+			String pwd = "Passy&0f";
 			
 			//Below is GPS UAT URL (enable/disable based on GPS env that you want to connect)
 			//String url = "jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=dbslt0039.uhc.com)(PORT=1521))(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=gpsts14svc.uhc.com)))"; 

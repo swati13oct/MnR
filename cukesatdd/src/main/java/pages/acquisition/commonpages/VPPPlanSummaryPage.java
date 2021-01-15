@@ -380,8 +380,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	// MedSupp Resume application
 
-	// @FindBy(xpath = "(//*[contains(text(),'Start application')])[1]")
-	@FindBy(xpath = "(//*[contains(@class,'swiper-content')]//*[contains(text(),'Start application')])[1]")
+	@FindBy(xpath = "(//button[contains(text(),'Start application')])[1]")
+	//@FindBy(xpath = "(//*[contains(@class,'swiper-content')]//*[contains(text(),'Start application')])[1]")
 	private WebElement Start_ApplicationBtn;
 
 	@FindBy(className = "loading-dialog")
@@ -721,7 +721,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//span[contains(text(),'Submission Confirmation')]")
 	private WebElement submitconfirmation;
 
-	@FindBy(xpath = "//*[contains(text(),'View Prescription Drug Plans')]")
+	@FindBy(xpath = "//button[contains(text(),'View Prescription Drug Plans')]")
 	private WebElement ViewPrescriptionDrugPlans;
 
 	// @FindBy(xpath =
@@ -750,7 +750,24 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	// @FindBy(xpath = "(//a[contains(text(),'Enrollment Discount')])[2]")
 	@FindBy(xpath = "//a[contains(@href,'//aarpsupplementalhealth-stg.uhc.com/content/dam/ole/MedSuppDocs/EnrollmentDiscount') or contains(@href,'//www.aarpsupplementalhealth.com/content/dam/ole/MedSuppDocs/EnrollmentDiscount')]")
 	private WebElement EnrollmentDiscount;
-
+	
+	@FindBy(xpath = "//a[contains(text(), 'Benefit Table')]")
+	private WebElement RightRail_BenefitsTable;
+	
+	@FindBy(xpath = "//a[contains(text(), 'Guide to Health Insurance for People')]")
+	private WebElement RightRail_HealthInsurance;
+	@FindBy(xpath = "//a[contains(text(), 'Your Guide to AARP Medicare Supplement Insurance')]")
+	private WebElement RightRail_AARPSupplementPlans;
+	
+	@FindBy(xpath = "//a[contains(text(),'Print/save a copy of your application') or contains(text(),'Print information on this page')]")
+	private WebElement PrintandSave_Application;
+	
+	@FindBy(xpath = "//a[contains(text(), 'Plan Overview')]")
+	private WebElement medsuppOLE_PlanOverview;
+	
+	@FindBy(xpath = "//a[contains(text(), 'Rules and Disclosures')]")
+	private WebElement medsuppOLE_RulesandDisclosures;
+	
 	@FindBy(xpath = "//a[contains(text(),'Back to all plans')]")
 	private WebElement backallplans;
 
@@ -3683,6 +3700,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	public VisitorProfilePage continueAsGuest() {
 		jsClickNew(continueAsGuest);
 		sleepBySec(2);
+		waitForPageLoadSafari();
 		if (driver.getCurrentUrl().contains("profile")) {
 			return new VisitorProfilePage(driver);
 		} else {
@@ -5771,18 +5789,29 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	@FindBy(xpath = "(//input[@id='updates-email'])[2]")
 	private WebElement requestemailaddress;
-
+	
+	@FindBy(xpath = "//input[@id='updates-email']")
+	private WebElement requestshoppageemailaddress;
 	@FindBy(xpath = "//p[contains(text(),'Submit')]")
 	private WebElement requestplaninformationsubmit;
-
+	
+	@FindBy(xpath = "(//button[contains(text(),'Submit')])[2]")
+	private WebElement requestplaninformationShopsubmit;
+	
 	@FindBy(xpath = "//p[contains(text(),'Your information has been submitted')]")
 	private WebElement requestplaninformationsubmitpopup;
+	
+	@FindBy(xpath = "(//p[contains(text(),'Your guide will arrive in your inbox')])[2]")
+	private WebElement requestplaninformationshopsubmitpopup;
 
 	@FindBy(xpath = "//a[contains(@class,'emailsubmit_close')]")
 	private WebElement requestplaninformationclose;
 
 	@FindBy(xpath = "//*[contains(@id, 'email-error-id')]")
 	private WebElement RequestPlanInformation_ErrorMessage;
+	
+	@FindBy(xpath = "(//*[contains(text(),'Please enter a valid email address')])[2]")
+	private WebElement RequestPlanInformationShoppages_ErrorMessage;
 
 	public boolean RequestPlanIInformation(String FirstName, String LastName, String EmailAddress)
 			throws InterruptedException {
@@ -5975,10 +6004,15 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//div[contains(@class,'plan-list show active')]//*[@class='segment-title oon-benefit-padding']//h3")
 	private List<WebElement> planNames;
 
-	public List<String> getAllPlanNames() {
+	public List<String> getAllPlanNames(String planType) {
 		List<String> allPlanNames = new ArrayList<String>();
 		for (WebElement plan : planNames) {
-			allPlanNames.add(plan.getText());
+			if(planType.equals("PDP") && MRScenario.browserName.equalsIgnoreCase("Safari")) {
+				allPlanNames.add(plan.findElement(By.xpath("./text()")).getText().trim());
+			} else {
+				allPlanNames.add(plan.getText().trim());
+			}
+			
 		}
 		return allPlanNames;
 	}
@@ -6026,11 +6060,13 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//span[text()='Enroll in Plan']/..")
 	private WebElement enrollInPlanBtn;
 
-	public void clickEnrollPlanBtnOnSelectPlanModal() {
+	public WelcomePage clickEnrollPlanBtnOnSelectPlanModal() {
 		validateNew(enrollInPlanBtn);
 //		enrollInPlanBtn.click();
 		jsClickNew(enrollInPlanBtn);
 		waitForPageLoadSafari();
+		
+		return new WelcomePage(driver);
 	}
 
 	public void validateNavigatedToOle() {
@@ -6081,7 +6117,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 				System.out.println(expectedPlanNames);
 				System.out.println(actualPlanNames);
 				Assert.assertTrue("Saved plans not displayed in Enroll Popup.../n Expected plans" + expectedPlanNames
-						+ "\n Actual plans" + actualPlanNames, actualPlanNames.equals(expectedPlanNames));
+						+ "\n Actual plans" + actualPlanNames, actualPlanNames.contains(expectedPlanNames));
 			}
 		} catch (Exception ex) {
 			System.out.println("NBA modal not found");
@@ -6272,5 +6308,227 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			System.out.println("No providers in plan card");
 		}
 	}
+	public void medsuppOLEBenefitsTable() throws InterruptedException {
+		validateNew(RightRail_BenefitsTable);
+		CommonUtility.waitForPageLoadNew(driver, RightRail_BenefitsTable, 30);
+		String parentWindow = driver.getWindowHandle();
+		RightRail_BenefitsTable.click();
+		sleepBySec(3);
+		Set<String> tabs_windows = driver.getWindowHandles();
+		Iterator<String> itr = tabs_windows.iterator();
+		while (itr.hasNext()) {
+			String window = itr.next();
+			if (!parentWindow.equals(window)) {
+				driver.switchTo().window(window);
+			}
+		}
 
+		CommonUtility.checkPageIsReadyNew(driver);
+		String CurrentRailURL = driver.getCurrentUrl();
+		System.out.println("Actual  URL: " + CurrentRailURL);
+
+		if (CurrentRailURL.contains("https://aarpsupplementalhealth-stg.uhc.com/")
+				|| CurrentRailURL.contains("https://www.aarpsupplementalhealth.com/")
+						&& CurrentRailURL.contains(".pdf")) {
+			System.out.println("****************Benefits Table is displayed  ***************");
+
+			Assert.assertTrue(true);
+		} else {
+			Assert.fail("****************Benefits Table is not loaded ***************");
+		}
+		driver.switchTo().window(parentWindow);
+
+	}
+	
+	public void medsuppOLEHealthInsurance() throws InterruptedException {
+		validateNew(RightRail_HealthInsurance);
+		CommonUtility.waitForPageLoadNew(driver, RightRail_HealthInsurance, 30);
+		String parentWindow = driver.getWindowHandle();
+		RightRail_HealthInsurance.click();
+		sleepBySec(3);
+		Set<String> tabs_windows = driver.getWindowHandles();
+		Iterator<String> itr = tabs_windows.iterator();
+		while (itr.hasNext()) {
+			String window = itr.next();
+			if (!parentWindow.equals(window)) {
+				driver.switchTo().window(window);
+			}
+		}
+
+		CommonUtility.checkPageIsReadyNew(driver);
+		String CurrentRailURL = driver.getCurrentUrl();
+		System.out.println("Actual  URL: " + CurrentRailURL);
+
+		if (CurrentRailURL.contains("https://aarpsupplementalhealth-stg.uhc.com/")
+				|| CurrentRailURL.contains("https://www.aarpsupplementalhealth.com/")
+						&& CurrentRailURL.contains(".pdf")) {
+			System.out.println("****************Guide to Health Insurance for People with Medicare is displayed  ***************");
+
+			Assert.assertTrue(true);
+		} else {
+			Assert.fail("****************Guide to Health Insurance for People with Medicare is not loaded ***************");
+		}
+		driver.switchTo().window(parentWindow);
+
+	}
+	
+	public void medsuppOLEAARPSupplementPlans() throws InterruptedException {
+		validateNew(RightRail_AARPSupplementPlans);
+		CommonUtility.waitForPageLoadNew(driver, RightRail_AARPSupplementPlans, 30);
+		String parentWindow = driver.getWindowHandle();
+		RightRail_AARPSupplementPlans.click();
+		sleepBySec(3);
+		Set<String> tabs_windows = driver.getWindowHandles();
+		Iterator<String> itr = tabs_windows.iterator();
+		while (itr.hasNext()) {
+			String window = itr.next();
+			if (!parentWindow.equals(window)) {
+				driver.switchTo().window(window);
+			}
+		}
+
+		CommonUtility.checkPageIsReadyNew(driver);
+		String CurrentRailURL = driver.getCurrentUrl();
+		System.out.println("Actual  URL: " + CurrentRailURL);
+
+		if (CurrentRailURL.contains("https://aarpsupplementalhealth-stg.uhc.com/")
+				|| CurrentRailURL.contains("https://www.aarpsupplementalhealth.com/")
+						&& CurrentRailURL.contains(".pdf")) {
+			System.out.println("****************Your Guide to AARP Medicare Supplement Insurance Plans is displayed  ***************");
+
+			Assert.assertTrue(true);
+		} else {
+			Assert.fail("****************Your Guide to AARP Medicare Supplement Insurance Plans is not loaded ***************");
+		}
+		driver.switchTo().window(parentWindow);
+
+	}
+	
+	public void medsuppOLEPrintandSaveApplication() throws InterruptedException {
+		validateNew(PrintandSave_Application);
+		CommonUtility.waitForPageLoadNew(driver, PrintandSave_Application, 30);
+		String parentWindow = driver.getWindowHandle();
+		PrintandSave_Application.click();
+		sleepBySec(3);
+		Set<String> tabs_windows = driver.getWindowHandles();
+		Iterator<String> itr = tabs_windows.iterator();
+		while (itr.hasNext()) {
+			String window = itr.next();
+			if (!parentWindow.equals(window)) {
+				driver.switchTo().window(window);
+			}
+		}
+
+		CommonUtility.checkPageIsReadyNew(driver);
+		String CurrentRailURL = driver.getCurrentUrl();
+		System.out.println("Actual  URL: " + CurrentRailURL);
+
+		if (CurrentRailURL.contains("https://aarpsupplementalhealth-stg.uhc.com/")
+				|| CurrentRailURL.contains("https://www.aarpsupplementalhealth.com/")
+						&& CurrentRailURL.contains(".pdf")) {
+			System.out.println("**************** Print/save a copy of your application is displayed  ***************");
+
+			Assert.assertTrue(true);
+		} else {
+			Assert.fail("**************** Print/save a copy of your application is not loaded ***************");
+		}
+		driver.switchTo().window(parentWindow);
+
+	}
+	
+	public void medsuppOLEViewPrescriptionDrugPlans() throws InterruptedException {
+		validateNew(ViewPrescriptionDrugPlans);
+		CommonUtility.waitForPageLoadNew(driver, ViewPrescriptionDrugPlans, 30);
+		String parentWindow = driver.getWindowHandle();
+		ViewPrescriptionDrugPlans.click();
+		sleepBySec(3);
+		Set<String> tabs_windows = driver.getWindowHandles();
+		Iterator<String> itr = tabs_windows.iterator();
+		while (itr.hasNext()) {
+			String window = itr.next();
+			if (!parentWindow.equals(window)) {
+				driver.switchTo().window(window);
+			}
+		}
+
+		CommonUtility.checkPageIsReadyNew(driver);
+		String CurrentRailURL = driver.getCurrentUrl();
+		System.out.println("Actual  URL: " + CurrentRailURL);
+
+		if (CurrentRailURL.contains("https://www.stage-aarpmedicareplans.uhc.com/health-plans.html?product=pdp")
+				|| CurrentRailURL.contains("https://www.aarpmedicareplans.com/health-plans.html?product=pdp")) {
+			System.out.println("****************PDP Plans are displayed   ***************");
+
+			Assert.assertTrue(true);
+		} else {
+			Assert.fail("****************PDP Plans are not loaded ***************");
+		}
+	//	driver.switchTo().window(parentWindow);
+
+	}
+	public void medsuppOLEPlanOverview() throws InterruptedException {
+		validateNew(medsuppOLE_PlanOverview);
+		CommonUtility.waitForPageLoadNew(driver, medsuppOLE_PlanOverview, 30);
+		String parentWindow = driver.getWindowHandle();
+		medsuppOLE_PlanOverview.click();
+		sleepBySec(3);
+		Set<String> tabs_windows = driver.getWindowHandles();
+		Iterator<String> itr = tabs_windows.iterator();
+		while (itr.hasNext()) {
+			String window = itr.next();
+			if (!parentWindow.equals(window)) {
+				driver.switchTo().window(window);
+			}
+		}
+
+		CommonUtility.checkPageIsReadyNew(driver);
+		String CurrentRailURL = driver.getCurrentUrl();
+		System.out.println("Actual  URL: " + CurrentRailURL);
+
+		if (CurrentRailURL.contains("https://aarpsupplementalhealth-stg.uhc.com/")
+				|| CurrentRailURL.contains("https://www.aarpsupplementalhealth.com/")
+						&& CurrentRailURL.contains(".pdf")) {
+			System.out.println("****************  PlanOverview is displayed  ***************");
+
+			Assert.assertTrue(true);
+		} else {
+			Assert.fail("**************** PlanOverview is not loaded ***************");
+		}
+		driver.switchTo().window(parentWindow);
+
+	}
+	
+	
+	public void medsuppOLERulesandDisclosures() throws InterruptedException {
+		validateNew(medsuppOLE_RulesandDisclosures);
+		CommonUtility.waitForPageLoadNew(driver, medsuppOLE_RulesandDisclosures, 30);
+		String parentWindow = driver.getWindowHandle();
+		medsuppOLE_RulesandDisclosures.click();
+		sleepBySec(3);
+		Set<String> tabs_windows = driver.getWindowHandles();
+		Iterator<String> itr = tabs_windows.iterator();
+		while (itr.hasNext()) {
+			String window = itr.next();
+			if (!parentWindow.equals(window)) {
+				driver.switchTo().window(window);
+			}
+		}
+
+		CommonUtility.checkPageIsReadyNew(driver);
+		String CurrentRailURL = driver.getCurrentUrl();
+		System.out.println("Actual  URL: " + CurrentRailURL);
+
+		if (CurrentRailURL.contains("https://aarpsupplementalhealth-stg.uhc.com/")
+				|| CurrentRailURL.contains("https://www.aarpsupplementalhealth.com/")
+						&& CurrentRailURL.contains(".pdf")) {
+			System.out.println("****************  Rules and Disclosures is displayed  ***************");
+
+			Assert.assertTrue(true);
+		} else {
+			Assert.fail("**************** Rules and Disclosures is not loaded ***************");
+		}
+		driver.switchTo().window(parentWindow);
+
+	}
+	
 }
