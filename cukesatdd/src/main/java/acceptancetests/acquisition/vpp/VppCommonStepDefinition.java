@@ -220,6 +220,20 @@ public class VppCommonStepDefinition {
 		} else
 			Assert.fail("Error in loading the compare plans page");
 	}
+	
+	@Given("^I select \"([^\"]*)\" plans to compare$")
+	public void i_select_plans_to_compare(String planType) throws Throwable {
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		if (planType.equals("MAPD")) {
+			plansummaryPage.checkAllMAPlans();
+			System.out.println("Selected All MAPD plans for Plan Compare");
+		} else if (planType.equals("PDP")) {
+			plansummaryPage.checkAllPDPlans();
+			System.out.println("Selected All PDP plans for Plan Compare");
+		}
+		
+	}
 
 	@Then("^verify plan compare page is loaded$")
 	public void verify_plan_compare_page_is_loaded_on_AARP() throws Throwable {
@@ -2851,7 +2865,8 @@ public class VppCommonStepDefinition {
 	public void user_clicks_on_Enroll_in_plan_button_on_the_select_plan_modal() throws Throwable {
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		plansummaryPage.clickEnrollPlanBtnOnSelectPlanModal();
+		WelcomePage welcomepage = (WelcomePage) plansummaryPage.clickEnrollPlanBtnOnSelectPlanModal();
+		getLoginScenario().saveBean(OLE_PageConstants.OLE_WELCOME_PAGE,welcomepage);
 	}
 
 	@Then("^user should be navigated to OLE page$")
@@ -3488,5 +3503,14 @@ public class VppCommonStepDefinition {
 			e.printStackTrace();
 		}
 
+	}
+	
+	@Then("^the user clicks on compare plans button on plan details page and navigate to compare page$")
+	public void clicks__compare_plans_button_on_plan_details_page_and_navigate_to_compare_page() throws Throwable {
+		PlanDetailsPage planDetailsPage = (PlanDetailsPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
+		ComparePlansPage planComparePage = planDetailsPage.navigateToPlanCompare();
+		getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
+		
 	}
 }
