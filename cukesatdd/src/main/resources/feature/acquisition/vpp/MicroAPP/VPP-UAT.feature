@@ -66,7 +66,7 @@ Feature: 1.01.4 UAT Feature to test VPP scenarios
   |Scenario						|	site	|	UHCUrl											|
   |E2E Scenario 3_UMS	|	UHC		|	https://www.myuhcagent.com/	|
 
-	Scenario Outline: <Scenario> To test VPP NBA scenario
+	Scenario Outline: <Scenario> To test VPP NBA scenario for MA/PDP plans
 	Given the user is on medicare acquisition site landing page
       | Site | <site> | 
   When the user performs plan search using following information
@@ -83,11 +83,11 @@ Feature: 1.01.4 UAT Feature to test VPP scenarios
     When the user clicks on Build Drug List to navigate to Build Drug List Page
     And the user searches and adds the following Drug to Drug List
       | DrugName | <drug1> |
-#    And the user searches and adds the following Drug to Drug List
-#      | DrugName | <drug2> |
-#    And the user searches and adds the following Drug to Drug List
-#      | DrugName | <drug3> |
-#    Then the user validates all added drugs in DrugList
+    And the user searches and adds the following Drug to Drug List
+      | DrugName | <drug2> |
+    And the user searches and adds the following Drug to Drug List
+      | DrugName | <drug3> |
+    Then the user validates all added drugs in DrugList
      And clicks on Review drug cost button to land on drug summary page
     And the user clicks view plan details button for first plan from Drug Summary Page
     And the user clicks on compare plans button on plan details page and navigate to compare page
@@ -96,10 +96,10 @@ Feature: 1.01.4 UAT Feature to test VPP scenarios
     When the user Click on Is my Provider covered link
       | PlanName | <planname1> |
     When user selects a provider and retuns to VPP page
-#    Then Verify X out of Y provider covered information is displayed on Plan Summary page
-#      | PlanName | <planname1> |
-#    Then Verify provider name is displayed on Plan Summary page
-#      | PlanName | <planname1> |
+    Then Verify X out of Y provider covered information is displayed on Plan Summary page
+      | PlanName | <planname1> |
+    Then Verify provider name is displayed on Plan Summary page
+      | PlanName | <planname1> |
     Then user should be able to see the NBA modal to Enroll Plan on the VPP summary page
     When user clicks on Select a plan button on NBA
 #    Then user should be able to see the Select Plan for Enroll Modal with saved plans
@@ -131,6 +131,9 @@ Feature: 1.01.4 UAT Feature to test VPP scenarios
       	| Middle Name         | <middlename>         |
     	Then the user navigates to Medicare Information Page
     	And the user cancels enrollment and navigates to homepage
+    	And the user quits the session
+ 			When the user is on medicare acquisition site landing page
+      | Site | <site> | 
      When the user performs plan search using following information
       | Zip Code        | <zipcode2>         |
       | Is Multi County | <isMultutiCounty> |
@@ -145,10 +148,10 @@ Feature: 1.01.4 UAT Feature to test VPP scenarios
     When the user clicks on Build Drug List to navigate to Build Drug List Page
     And the user searches and adds the following Drug to Drug List
       | DrugName | <drug1> |
-#    And the user searches and adds the following Drug to Drug List
-#      | DrugName | <drug2> |
-#    And the user searches and adds the following Drug to Drug List
-#      | DrugName | <drug3> |
+    And the user searches and adds the following Drug to Drug List
+      | DrugName | <drug2> |
+    And the user searches and adds the following Drug to Drug List
+      | DrugName | <drug3> |
     Then the user validates all added drugs in DrugList
      And clicks on Review drug cost button to land on drug summary page
     And the user clicks view plan details button for first plan from Drug Summary Page
@@ -196,3 +199,4 @@ Feature: 1.01.4 UAT Feature to test VPP scenarios
    Examples: 
       |Scenario              | site | zipcode |zipcode2| isMultutiCounty | county        |county2    | plantype | plantype1 | drug1   | drug2    | drug3   |  planyear |planname                         |planname1													|firstname | lastname |dob      | gender | permstreet     | permcity    | mailingaddressquestion | mailingstreet        | mailingcity | mailingstate | mailingzip		 | email         | emailConfirmation | goGreen | phoneno   | mobileno |  middlename|                                               
       |VPP-E2E Scenario5_UMS |UHC |   33111 |90210| No              | Miami-Dade County |Los Angeles| PDP      | MAPD      | Lipitor | Ibuprofen| Nicomide|next       |AARP MedicareRx Walgreens (PDP)  |AARP Medicare Advantage Choice (PPO)|GOTTFRIED | GARRAND  | 04261944 | Male   | 003 Morris Rd | Miami        | No                    |  123 Test             |  Miami 		| FL          	|  33111       |test@test.com |  yes               | yes     | 1234567890|2345678901| Test_Middle|
+   
