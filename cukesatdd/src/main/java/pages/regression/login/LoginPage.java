@@ -126,7 +126,12 @@ public class LoginPage extends UhcDriver {
 				if ("team-ci1".equalsIgnoreCase(MRScenario.environment)
 						|| "team-ci2".equalsIgnoreCase(MRScenario.environment)) {
 					PAGE_URL = MRConstants.TEAMCI_TESTHARNESS;
-				} else {
+				} 
+				else if ("team-uhc-rx".equalsIgnoreCase(MRScenario.environment)) {
+					System.out.println("Running on team-uhc-rx env");
+					PAGE_URL = MRConstants.D_Rx_TESTHARNESS;
+				}
+				else {
 					PAGE_URL = MRConstants.TESTHARNESS.replace("awe-", "");
 				}
 			} else if ("YES".equalsIgnoreCase(MRScenario.isTestHarness)
@@ -134,7 +139,7 @@ public class LoginPage extends UhcDriver {
 				if ("team-ci1".equalsIgnoreCase(MRScenario.environment)
 						|| "team-ci2".equalsIgnoreCase(MRScenario.environment)) {
 					PAGE_URL = MRConstants.LEGACY_TESTHARNESS;
-				}  else if((MRScenario.environment.contains("team-a"))||(MRScenario.environment.contains("team-h")) ||(MRScenario.environment.contains("team-voc"))) {
+				}  else if((MRScenario.environment.contains("team-h")) ||(MRScenario.environment.contains("team-voc"))) {
 					System.out.println("Running on " +MRScenario.environment + " env, teamSpecialCase="+teamSpecialCase);
 						if (teamSpecialCase) {
 							PAGE_URL=MRConstants.OSE_NEW_URL_PCP_OR_MEDIA;
@@ -144,6 +149,9 @@ public class LoginPage extends UhcDriver {
 						if (MRScenario.environment.contains("team-voc")) {
 							PAGE_URL=PAGE_URL.replace("www.", "");
 						}
+				}  else if(MRScenario.environment.contains("team-a")) { //note: team-atest same URL handles MEDICA/PCP now, no need to handle separately
+					System.out.println("Running on " +MRScenario.environment + " env, teamSpecialCase="+teamSpecialCase);
+					PAGE_URL=MRConstants.OSE_NEW_URL;	
 				} else if("team-c".equalsIgnoreCase(MRScenario.environment)) {
 					if (teamSpecialCase) {
 						PAGE_URL=MRConstants.OSE_NEW_URL_PCP_OR_MEDIA;
@@ -157,6 +165,10 @@ public class LoginPage extends UhcDriver {
 					} else {
 					PAGE_URL=MRConstants.OSE_NEW_URL; 
 					}}
+				else if ("team-uhc-rx".equalsIgnoreCase(MRScenario.environment)) {
+					System.out.println("Running on team-uhc-rx env");
+					PAGE_URL = MRConstants.D_Rx_TESTHARNESS;
+				}
 				else {
 					PAGE_URL = MRConstants.LEGACY_TESTHARNESS.replace("awe-", "");
 				}

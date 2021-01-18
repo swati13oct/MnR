@@ -158,7 +158,7 @@ public class PlanDocumentsAndResourcesFnRDocsHelper {
 			testInputInfoMap.put("redirectUrl", "none");
 			testInputInfoMap.put("checkDestUrl", "false");//TODO - this link hang
 			testInputInfoMap.put("switchTab", "true");
-			testInputInfoMap.put("headerText","none");
+			testInputInfoMap.put("headerText","Welcome");
 			testInputInfoMap.put("sampleBodyText","none");
 			return testInputInfoMap; 
 		}
@@ -261,8 +261,8 @@ public class PlanDocumentsAndResourcesFnRDocsHelper {
 			testInputInfoMap.put("redirectUrl", "none");
 			testInputInfoMap.put("checkDestUrl", "true");
 			testInputInfoMap.put("switchTab", "true");
-			testInputInfoMap.put("headerText","For Quality Health Plans");
-			testInputInfoMap.put("sampleBodyText","You Can Count On UnitedHealthcare");
+			testInputInfoMap.put("headerText","Choosing a health care plan may be a challenge");
+			testInputInfoMap.put("sampleBodyText","Our Quality Improvement Program");
 			return testInputInfoMap; 
 		}
 		if (docName.equals("UnitedHealthcare Medicare Advantage Coverage Summaries")) {
@@ -317,10 +317,8 @@ public class PlanDocumentsAndResourcesFnRDocsHelper {
 							||	planType.toUpperCase().equals("MAPD") 
 							|| planType.toUpperCase().equals("SSP")))
 				testInputInfoMap.put("expectedUrl", "Potential_for_Contract_Termination.pdf");
-			if (MRScenario.environment.equalsIgnoreCase("offline") || MRScenario.environment.equalsIgnoreCase("prod")) {
-				if (planType.toUpperCase().equals("MA") && memberType.toUpperCase().contains("GROUP") && memberType.toUpperCase().contains("TERM")) 
-					testInputInfoMap.put("expectedUrl", "PotentialContractTermination.pdf");
-			}
+			if (planType.toUpperCase().equals("MA") && memberType.toUpperCase().contains("GROUP") && memberType.toUpperCase().contains("TERM")) 
+				testInputInfoMap.put("expectedUrl", "PotentialContractTermination.pdf");
 			
 			testInputInfoMap.put("redirectUrl", "none");
 			testInputInfoMap.put("checkDestUrl", "true");
@@ -485,7 +483,7 @@ public class PlanDocumentsAndResourcesFnRDocsHelper {
 		if (docName.equals("Naturopathy Provider Directory")) {
 			testInputInfoMap.put("docName", docName);
 			//keep testInputInfoMap.put("expectedUrl", "/content/dam/UCP/Group/Naturopathy_Provider_Directory_StofCT.pdf");
-			testInputInfoMap.put("expectedUrl", "Naturopathy_Provider_Directory_StofCT.pdf");
+			testInputInfoMap.put("expectedUrl", "Naturopathy_Provider_Directory.pdf");
 			testInputInfoMap.put("redirectUrl", "none");
 			testInputInfoMap.put("checkDestUrl", "true");
 			testInputInfoMap.put("switchTab", "true");
@@ -612,6 +610,16 @@ public class PlanDocumentsAndResourcesFnRDocsHelper {
 			return testInputInfoMap; 
 		}
 
+		if (docName.equals("Direct Member Reimbursement FAQ")) {
+			testInputInfoMap.put("docName", docName);
+			testInputInfoMap.put("expectedUrl", "Direct_Member_Reimbursement_FAQ.pdf");
+			testInputInfoMap.put("redirectUrl", "none");
+			testInputInfoMap.put("checkDestUrl", "true");
+			testInputInfoMap.put("switchTab", "true");
+			testInputInfoMap.put("headerText","Direct Member Reimbursement Form"); 
+			testInputInfoMap.put("sampleBodyText","What is a Direct Member Reimbursement");
+			return testInputInfoMap; 
+		}
 		
 		Assert.assertTrue("PROBLEM - need to update ATDD to handle docName='"+docName+"'", false);
 		return testInputInfoMap;

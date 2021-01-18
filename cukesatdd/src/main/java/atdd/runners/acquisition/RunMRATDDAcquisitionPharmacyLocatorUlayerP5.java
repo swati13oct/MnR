@@ -11,10 +11,12 @@ import cucumber.api.CucumberOptions;
  * this file is to run test cases for RunMRATDDAcquisitionPharmacyLocator
  */
 @RunWith(ExtendedCucumber.class)
-@ExtendedCucumberOptions(retryCount=1,screenShotSize="", screenShotLocation="/screenshots/",jsonReport = "target/cucumber-RunMRATDDAcquisitionPharmacyLocatorUlayerP5.json",
-detailedReport = true, detailedAggregatedReport = true, overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDAcquisitionPharmacyLocatorUlayerP5")
-@CucumberOptions(glue = { "atdd.framework", "acceptancetests.acquisition" }, features = { "src/main/resources/feature/acquisition/pharmacylocator/PharmacySearch-Common.feature" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionPharmacyLocatorUlayerP5.json" }, tags = { "@PharmacyLocatorCommonAARP03"})//"@pharmacyLocatorRegression","@pharmacylocatorulayer03" })
-public class RunMRATDDAcquisitionPharmacyLocatorUlayerP5{ 
- 
+@ExtendedCucumberOptions(retryCount = 1, screenShotSize = "", screenShotLocation = "/screenshots/", jsonReport = "target/cucumber-RunMRATDDAcquisitionPharmacyLocatorUlayerP5.json", detailedReport = true, detailedAggregatedReport = true, overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDAcquisitionPharmacyLocatorUlayerP5")
+@CucumberOptions(glue = { "atdd.framework", "acceptancetests.acquisition" }, features = {
+		"src/main/resources/feature/acquisition/pharmacylocator/PharmacySearch-Common.feature" }, plugin = { "pretty",
+				"html:reports/test-report",
+				"json:target/cucumber-RunMRATDDAcquisitionPharmacyLocatorUlayerP5.json" }, tags = {
+						"@PharmacyLocatorCommonAARP03" }) // "@pharmacyLocatorRegression","@pharmacylocatorulayer03" })
+public class RunMRATDDAcquisitionPharmacyLocatorUlayerP5 {
+
 }

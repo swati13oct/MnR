@@ -410,10 +410,9 @@ public class PharmacySearchPage extends PharmacySearchBase {
 				"PROBLEM - '" + linkType + "' link on '" + widgetName + "' widget is not opening expected page.  "
 						+ "Expected url contains '" + expUrl + "' Actual URL='" + actUrl + "'",
 				actUrl.contains(expUrl));
-		driver.navigate().back(); // note: use driver back to go back to pharmacy locator page
-		// tbd Thread.sleep(2000); //note: keep for timing issue
-		driver.navigate().refresh(); // note: added refresh since Safari has issues locating elements after navigate
-										// back
+		driver.navigate().back(); //note: use driver back to go back to pharmacy locator page
+		//tbd Thread.sleep(2000); //note: keep for timing issue
+		//driver.navigate().refresh(); //note: added refresh since Safari has issues locating elements after navigate back
 		sleepBySec(2);
 		CommonUtility.checkPageIsReady(driver);
 		expUrl = "/Pharmacy-Search-";

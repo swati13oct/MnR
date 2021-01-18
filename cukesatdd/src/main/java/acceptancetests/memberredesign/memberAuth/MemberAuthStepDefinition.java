@@ -9,6 +9,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
+import org.apache.http.impl.execchain.RetryExec;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
@@ -168,8 +169,14 @@ public class MemberAuthStepDefinition{
 		}		
 		getLoginScenario().saveBean(LoginCommonConstants.USERNAME, profileAttributesMap.get("MemUsername"));
 
-		MemberAuthPage mauthPage = memberauth.MainMemberLogin(profileAttributesMap.get("MemUsername"));
-		
+		MemberAuthPage mauthPage = null;
+		if (profileAttributesMap.get("Retry")!=null) {
+			String retry=profileAttributesMap.get("Retry");
+			if (retry.equalsIgnoreCase("true")) 
+				mauthPage = memberauth.MainMemberLogin(Boolean.valueOf(retry), profileAttributesMap.get("MemUsername"));
+		} else 
+		mauthPage = memberauth.MainMemberLogin(profileAttributesMap.get("MemUsername"));
+
 		if(mauthPage!=null){
 			getLoginScenario().saveBean(PageConstants.Member_Auth_PopUp, mauthPage);
 		} else {

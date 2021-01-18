@@ -387,9 +387,18 @@ public class DCEStepDefinitionAARP {
 	public void clicks_on_Review_drug_cost_button_Detail_Page() {
 		BuildYourDrugList buildDrugList = (BuildYourDrugList) getLoginScenario()
 				.getBean(PageConstants.DCE_Redesign_BuildDrugList);
-		buildDrugList.clickReviewDrugCostBtn();
-		DrugDetailsPage drugDetailsPage = new DrugDetailsPage(driver);
+		DrugDetailsPage drugDetailsPage = buildDrugList.navigateToDrugDetailsPage();
+		
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetailsPage);
+	}
+	
+	@When("^clicks on Review drug cost button to land on drug summary page$")
+	public void clicks_on_Review_drug_cost_for_drug_summary_Page() {
+		BuildYourDrugList buildDrugList = (BuildYourDrugList) getLoginScenario()
+				.getBean(PageConstants.DCE_Redesign_BuildDrugList);
+		DrugSummaryPage drugSummaryPage = buildDrugList.navigateToDrugSummaryPage();
+		
+		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
 	}
 
 	@Then("^load screen should be displayed$")
@@ -682,7 +691,16 @@ public class DCEStepDefinitionAARP {
 		} else
 			Assert.fail("VPP Plan Details not loaded");
 	}
-
+	
+	@Then("^the user clicks view plan details button for first plan from Drug Summary Page$")
+	public void the_user_clicks_plan_details_button_on_Drug_Details_Page() throws Throwable {
+		DrugSummaryPage drugSummaryPage = (DrugSummaryPage) getLoginScenario()
+				.getBean(PageConstants.DCE_Redesign_DrugSummary);
+		
+		PlanDetailsPage plandetailspage = drugSummaryPage.clickViewPlanDetails();
+		getLoginScenario().saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE, plandetailspage);
+		
+	}
 	@Then("^the user clicks on return to compare link on build drug list page to returns to plan compare$")
 	public void the_user_Clicks_button_to_VPP_Plan_Compare_Page_from_Drug_details_Page() throws Throwable {
 		BuildYourDrugList buildDrugListPage = (BuildYourDrugList) getLoginScenario()
@@ -744,6 +762,17 @@ public class DCEStepDefinitionAARP {
 		AcquisitionHomePage acquisitionHomePage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		acquisitionHomePage.navigateToShopPDPpage();
+		GetStartedPage getStartedPage = acquisitionHomePage.clickDCERedesignLinkonShopPDPpage();
+		if (null != getStartedPage) {
+			getLoginScenario().saveBean(PageConstants.DCE_Redesign_GetStarted, getStartedPage);
+		} else
+			Assert.fail("DCE Redesign page object not loaded");
+	}
+
+	@And("^the user clicks on DCE link to land on DCE Redesign from PDP Shop page$")
+	public void the_user_clicks_on_DCE_link_to_land_on_DCE_Redesign_from_PDP_Shop_page() throws Throwable {
+		AcquisitionHomePage acquisitionHomePage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		GetStartedPage getStartedPage = acquisitionHomePage.clickDCERedesignLinkonShopPDPpage();
 		if (null != getStartedPage) {
 			getLoginScenario().saveBean(PageConstants.DCE_Redesign_GetStarted, getStartedPage);

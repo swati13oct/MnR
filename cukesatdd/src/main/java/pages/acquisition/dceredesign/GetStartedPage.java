@@ -49,7 +49,7 @@ public class GetStartedPage extends UhcDriver {
 
 	@FindBy(css = "a#visitor-profile-header")
 	private WebElement lnkProfile;
-	
+
 	@FindBy(xpath = "//a[@class='uhc-link-button']/span")
 	private WebElement breaCrumbLink;
 
@@ -139,9 +139,9 @@ public class GetStartedPage extends UhcDriver {
 		}
 		return null;
 	}
-	
+
 	public void validateBreadCrumb(String breadCrumb) {
 		Assert.assertTrue("Expected breadcrumb "+ breadCrumb+" is not displayed",breaCrumbLink.getText().equals(breadCrumb));
-	}
+		        }
 
 }

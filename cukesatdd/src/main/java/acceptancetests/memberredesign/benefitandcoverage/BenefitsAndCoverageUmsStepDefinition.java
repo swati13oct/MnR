@@ -993,10 +993,10 @@ public class BenefitsAndCoverageUmsStepDefinition {
 		}	
 	}
 	
-	@And("the NON-LIS PDP group user should see drug cost table for Lis members")
+	@And("the NON-LIS PDP group user should see drug cost table for non Lis members")
 	public void user_validate_drugcosttablePDP_NONLIS_Group() {
 		String dateStr=(String)getLoginScenario().getBean(BenefitsAndCoverageCommonConstants.TEST_DATE_STR);
-		System.out.println("***the NON-LIS PDP group user should see drug cost table for Lis members***");
+		System.out.println("***the NON-LIS PDP group user should see drug cost table for non Lis members***");
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
 				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
 		
@@ -1477,11 +1477,21 @@ public class BenefitsAndCoverageUmsStepDefinition {
 
 
 	@Then("^the user validate vas tiles on vas page")
-	public void validatevastiles()
+	public void validatevastiles(DataTable memberAttributes) throws InterruptedException
 	{
 		ValueAddedServicepage valueaddedservices = (ValueAddedServicepage) getLoginScenario()
 				.getBean(PageConstantsMnR.VALUE_ADDED_SERVICES);
-		valueaddedservices.vastiles();
+		List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		String planCode = memberAttributesMap.get("Plan Code");
+		String stateCode = memberAttributesMap.get("State Code");
+		valueaddedservices.vastiles(planCode, stateCode);
 
 	}
 
@@ -2665,6 +2675,50 @@ public class BenefitsAndCoverageUmsStepDefinition {
 		}
 		
 	}
+	
+	@Then("^validates provider search tile not displayed$")
+	public void validates_provider_search_tile_not_displayed()
+	{
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario().getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
+		Assert.assertFalse(benefitsCoveragePage.display_provider_search_tile());
+	}
+	
+	@Then("^validates provider search tile displayed$")
+	public void validates_provider_search_tile_displayed()
+	{
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario().getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
+		Assert.assertTrue(benefitsCoveragePage.display_provider_search_tile());
+	}
+	
+	@Then("^validates LEARN MORE ABOUT DRUG TIERS link content for user with insulin$")
+	public void validates_learnMoreAboutDrugTiers_insulin()
+	{
+		String copayCategory = (String) getLoginScenario().getBean(BenefitsAndCoverageCommonConstants.TEST_COPAY_CATEGORY);
+
+		String insulinFlag=(String) getLoginScenario().getBean(BenefitsAndCoverageCommonConstants.TEST_INSULIN);
+
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario().getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
+		benefitsCoveragePage.validate_learnmoreaboutlink_insulin(copayCategory, insulinFlag);
+	}
+
+	@Then("^the user validate rider tile is displayed$")
+	public void validates_riderTile()
+	{
+		
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario().getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
+		Date currentDate=benefitsCoveragePage.getCurrentSystemDate();
+		String dateStr=benefitsCoveragePage.convertDateToStrFormat_MMDDYYYY(currentDate);
+
+		String planType=(String) getLoginScenario().getBean(LoginCommonConstants.PLANTYPE);
+		String memberType=(String) getLoginScenario().getBean(LoginCommonConstants.CATOGERY);
+
+		boolean isComboUser=false;
+		if (memberType.toUpperCase().contains("COMBO"))
+			isComboUser=true;
+
+		benefitsCoveragePage.validateRiderTileDisplay(isComboUser, planType, dateStr);
+	}
+
 	
 }//end of class
 

@@ -274,7 +274,7 @@ public class MRScenario {
 							|| (environment.equalsIgnoreCase("team-c")) || (environment.equalsIgnoreCase("team-acme")) 
 							|| (environment.equalsIgnoreCase("team-voc"))|| (environment.equalsIgnoreCase("team-t")) 
 							|| (environment.equalsIgnoreCase("team-chargers")) || (environment.equalsIgnoreCase("team-avengers-plm")) 
-							|| (environment.equalsIgnoreCase("chargers-qa"))) {
+							|| (environment.equalsIgnoreCase("chargers-qa")) || (environment.equalsIgnoreCase("team-uhc-rx"))) {
 				csvName = "MemberRedesign-UUID.csv";
 			} else if (tagName.equalsIgnoreCase("@MemberVBF") && environment.contains("stage")) {
 				csvName = "MemberRedesign-VBF.csv";
@@ -640,7 +640,7 @@ try {
 		}else{
 		if(environment.contains("stage"))
 		domain = "uhc.com";
-		else if(environment.equals("team-atest") || environment.equals("team-e")||environment.equals("team-t")||environment.equals("team-v1")||environment.equals("team-acme")|| environment.equals("team-voc") ||environment.equals("team-acme") ||environment.contains("digital-uat") ||environment.equals("team-chargers") ||environment.contains("chargers")||environment.equals("team-avengers-plm") ||environment.contains("team-avengers-plm")||environment.contains("chargers-qa"))
+		else if(environment.equals("team-atest") || environment.equals("team-e")||environment.equals("team-t")||environment.equals("team-v1")||environment.equals("team-acme")|| environment.equals("team-voc") ||environment.equals("team-acme") ||environment.contains("digital-uat") ||environment.equals("team-chargers") ||environment.contains("chargers")||environment.equals("team-avengers-plm") ||environment.contains("team-avengers-plm")||environment.contains("chargers-qa") ||environment.contains("team-uhc-rx"))
 		domain = "ocp-elr-core-nonprod.optum.com";
 		else if(environment.contains("mnr-acq"))
 			domain = "origin-elr-dmz.optum.com";
@@ -1105,7 +1105,7 @@ try {
 				sauceOptions.setCapability("idleTimeout", 200);
 
 				SafariOptions browserOptions = new SafariOptions();
-				browserOptions.setCapability("platformName", "macOS 10.15");
+				browserOptions.setCapability("platformName", "macOS 11.00");
 				browserOptions.setCapability("browserVersion", browserVersion);
 				browserOptions.setCapability("sauce:options", sauceOptions);
 				capabilities.merge(browserOptions);
@@ -1265,7 +1265,7 @@ try {
 
 			String env = HSID_ENV;
 			String user = "UHG_000611921";  
-			String pwd = "Passx&9e";
+			String pwd = "Passy&0f";
 			
 			//Below is GPS UAT URL (enable/disable based on GPS env that you want to connect)
 			//String url = "jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=dbslt0039.uhc.com)(PORT=1521))(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=gpsts14svc.uhc.com)))"; 
@@ -1301,4 +1301,3 @@ try {
 	}
 
 }
-

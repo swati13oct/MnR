@@ -1554,7 +1554,8 @@ public class OneTimePaymentAarpStepDefintion {
 		ReviewOneTimePaymentPage reviewOneTimePaymentsPage=null;
 		if(oneTimePaymentPage!=null) {
 			oneTimePaymentPage.selectAndEnterAmount(otherAmountvalue);
-			oneTimePaymentPage.verifyReplaceCardLinkDisabled();
+			//oneTimePaymentPage.verifyReplaceCardLinkDisabled(); 01/07/2021 - This link has been enabled permanently now
+			//oneTimePaymentPage.verifyReplaceCardLinkEnabled();
 			oneTimePaymentPage.selectCreditCardOption();
 			oneTimePaymentPage.verifySavedCardDetailsDisplayed();
 			oneTimePaymentPage.verifyReplaceCardLinkEnabled();
@@ -1802,6 +1803,39 @@ public class OneTimePaymentAarpStepDefintion {
 		ConfirmOneTimePaymentPage confirmOneTimePaymentPage = (ConfirmOneTimePaymentPage) getLoginScenario()
 					.getBean(PageConstants.ONE_TIME_PAYMENT_PAGE);
 			confirmOneTimePaymentPage.OneTimeCCverification();
+			Assert.assertTrue("One time Payment submission for Credit card Other amount is successfully done",true);
+	    }
+		
+	}
+	
+	@Then("^User navigates to payment confirmation page for CC flow for saved card$")
+	public void user_navigates_to_payment_confirmation_page_for_CC_flow_saved_card() throws Throwable {
+
+		/*
+		 * String alreadyEnrolled = (String)
+		 * getLoginScenario().getBean(PageConstants.ALREADY_ENROLLED_FLAG); boolean
+		 * alreadyEnrolled_Flag = (alreadyEnrolled.contentEquals("true"))?true:false;
+		 * if(alreadyEnrolled_Flag){ System.out.
+		 * println("Only one payment request message is Displayed in in review one time PAGE : "
+		 * +alreadyEnrolled+"  :  "+alreadyEnrolled_Flag+" - Validation Passed");
+		 * getLoginScenario().saveBean(PageConstants.ALREADY_ENROLLED_FLAG,"true");
+		 * Assert.assertTrue(true); }else {
+		 */
+		
+		String errorMessageDisplayedOnOneTimePayment = (String)getLoginScenario().getBean(PageConstants.ALREADY_ENROLLED_FLAG);
+		System.out.println("Was second payment in a day error message displayed? -  "+errorMessageDisplayedOnOneTimePayment);
+			
+		if (errorMessageDisplayedOnOneTimePayment == "true")
+		{
+			System.out.println("This is a second payment in a day, Error message is fine in Saved Card Scenario. Passing test case");
+			Assert.assertTrue("This is a second payment in a day, Error message is fine in Saved Card Scenario. Passing test case",true);
+			
+		}
+		else
+		{
+		ConfirmOneTimePaymentPage confirmOneTimePaymentPage = (ConfirmOneTimePaymentPage) getLoginScenario()
+					.getBean(PageConstants.ONE_TIME_PAYMENT_PAGE);
+			confirmOneTimePaymentPage.OneTimeCCverificationSavedCard();
 			Assert.assertTrue("One time Payment submission for Credit card Other amount is successfully done",true);
 	    }
 		

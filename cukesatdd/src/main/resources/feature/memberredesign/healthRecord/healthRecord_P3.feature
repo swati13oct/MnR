@@ -93,7 +93,7 @@ Feature: 1.24.c Member Individual Health Record - P3 - EOB, OrderPlan, Pharmacie
     @no_ihr_p3_boaGrp2
     Examples: 
 	    | index | FID     | planType | memberType         | expectLink | 
-	    | 07    | F424804 | MA       | BOA12324_TERM_GROUP_IHR | false |
+	    | 07    | F424804 | MA       | BOA12324_GROUP_IHR | false |
 
     #----------- begin - cases with IHR link
     @ihr_p3_ma_mapd @devRegression

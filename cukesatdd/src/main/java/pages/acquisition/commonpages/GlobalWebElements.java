@@ -219,6 +219,9 @@ public class GlobalWebElements  extends UhcDriver{
 	@FindBy(xpath="//button[contains(@class,'button-primary proactive-offer__button main-background-color second-color proactive-offer__close')]")
 	public static WebElement proactiveChatExitBtn;
 	
+	@FindBy(xpath="//button[contains(@class,'button-primary proactive-offer__button main-background-color second-color proactive-offer__button_type_chat')]")
+	public static WebElement proactiveChatChatBtn;
+	
 	@FindBy(xpath="//*[@id='subnav_2']//*[contains(@href,'estimate')]")
 	public static WebElement headerDrugCostEstimatorLink;
 	
@@ -237,7 +240,8 @@ public class GlobalWebElements  extends UhcDriver{
 	@FindBy(xpath = "//img[contains(@dtmid,'acq_visitor_profile')]")
 	 public static WebElement visitorprofileicon;
 	
-	@FindBy(xpath = "//*[contains(@onclick,'jumpToHSIDSignIn()')]")
+	//@FindBy(xpath = "//*[contains(@onclick,'jumpToHSIDSignIn()')]")
+	@FindBy(xpath="//*[contains(@onclick,\"jumpToHSIDSignIn('body')\")]")
 	public static WebElement signIn;
 	
 	@FindBy(xpath="//*[@id='planTypesColumn']/h3[3]/a")

@@ -37,7 +37,7 @@ public class DrugDetailsPage extends UhcDriver {
 
 
 
-	@FindBy(xpath = "//button[contains(@id,'changePharmacyLink')]")
+	@FindBy(xpath = "//*[contains(@id,'changePharmacyLink')]")
 	public WebElement DrugDetails_ChangePharmacyLnk;
 
 	@FindBy(xpath = "//a[contains(@class, 'uhc-link-button') and contains(text(), 'plans in your area')]")
@@ -1838,4 +1838,5 @@ public class DrugDetailsPage extends UhcDriver {
 			Assert.fail("Back to profile button is not displayed");
 		}
 	}
+
 }

@@ -14,6 +14,7 @@ Feature: 1.04.1.1 To Test NON-DREAM EOB for Members - E2E - Member Auth - PROD
       | Password | <password> |
     And Member Enters the Username he wants to search
       | MemUsername | <MemUserName> |
+      | Retry | true |
     And user clicks on member to select
     And user stores test input for validations
       | Username | <MemUserName> |
@@ -41,6 +42,7 @@ Feature: 1.04.1.1 To Test NON-DREAM EOB for Members - E2E - Member Auth - PROD
       | Password | <password> |
     And Member Enters the Username he wants to search
       | MemUsername | <MemUserName> |
+      | Retry | true |
     And user clicks on member to select
     And user stores test input for validations
       | Username | <MemUserName> |
@@ -113,7 +115,7 @@ Feature: 1.04.1.1 To Test NON-DREAM EOB for Members - E2E - Member Auth - PROD
       | index | username  | password  | MemUserName            | planType                 | memberType              | eobType | realEob | flagZeroEob |
     # | 14    | kkumard   | tnps459#  | testusername           | SHIP_MEDICARE SUPPLEMENT | COMBO_SHIP_PDP_RX_DEOB  | Medical | true    | true   |  
     #x| 14    | kkumard   | tnps459#  | MaryLouMichels2        | SHIP_MEDICARE SUPPLEMENT | COMBO_PDP_SHIP_RX_DEOB  | Medical | true    | true   |  
-      | 14    | kkumard   | tnps459#  | elizabeth6310          | SHIP_MEDICARE SUPPLEMENT | COMBO_PDP_SHIP_RX_DEOB  | Medical | true    | true   |  
+      | 14    | kkumard   | tnps459#  | nino2@theciliangroup.com|SHIP_MEDICARE SUPPLEMENT | COMBO_PDP_SHIP_RX_DEOB  | Medical | true    | true   |  
 
 
   @prod_eob02 @regression_06_06_18FnF
@@ -122,8 +124,14 @@ Feature: 1.04.1.1 To Test NON-DREAM EOB for Members - E2E - Member Auth - PROD
     When the member is able to login with correct username and password
       | Username | <username> |
       | Password | <password> |
-    And Member Enters the Username he wants to search
-      | MemUsername | <MemUserName> |
+    And Member Enters the memberid and dob he wants to search  
+      | Member ID | <memberid> |
+      | Month     | <month>    |
+      | Day       | <day>      |
+      | Year      | <year>     |
+    #And Member Enters the Username he wants to search
+    #  | MemUsername | <MemUserName> |
+    #  | Retry | true |
     And user clicks on member to select
     And user stores test input for validations
       | Username | <MemUserName> |
@@ -135,8 +143,8 @@ Feature: 1.04.1.1 To Test NON-DREAM EOB for Members - E2E - Member Auth - PROD
 
     @prod_PHIP_EOBs
     Examples: 
-      | index | username  | password  | MemUserName     | TID   | planType | memberType |
-      | 15    | kkumard  | tnps459#  | kataz2525       | 15174 | PHIP     | SHIP_EOB   |
+      | index | username  | password  | memberid     | month | day | year | MemUserName     | TID   | planType | memberType |
+      | 15    | kkumard   | tnps459#  | 312835841-11 |    02 |  21 | 1950 | kataz2525       | 15174 | PHIP     | SHIP_EOB   |
 
 
   #note: pending coverage until SSUP individual user is available
@@ -148,6 +156,7 @@ Feature: 1.04.1.1 To Test NON-DREAM EOB for Members - E2E - Member Auth - PROD
   #    | Password | <password> |
   #  And Member Enters the Username he wants to search
   #    | MemUsername | <MemUserName> |
+  #    | Retry | true |
   #  And user clicks on member to select
   #  And user stores test input for validations
   #    | Username | <MemUserName> |
@@ -171,6 +180,7 @@ Feature: 1.04.1.1 To Test NON-DREAM EOB for Members - E2E - Member Auth - PROD
       | Password | <password> |
     And Member Enters the Username he wants to search
       | MemUsername | <MemUserName> |
+      | Retry | true |
     And user clicks on member to select
     And user stores test input for validations
       | Username | <MemUserName> |
@@ -182,5 +192,5 @@ Feature: 1.04.1.1 To Test NON-DREAM EOB for Members - E2E - Member Auth - PROD
 
     @prod_SSP_EOBs
     Examples: 
-      | index | username  | password  | MemUserName              | FID    | planType | memberType | 
-      | 17    | kkumard  | tnps459#  | elizabeth6310#ERY2GO        | 267688 | SSUP     | GROUP_EOB  | 
+      | index | username  | password  | MemUserName    | FID    | planType | memberType | 
+      | 17    | kkumard   | tnps459#  | DKELLY27       | 267688 | SSUP     | GROUP_EOB  | 

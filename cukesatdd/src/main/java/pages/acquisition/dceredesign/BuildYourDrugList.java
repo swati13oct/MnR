@@ -203,7 +203,7 @@ public class BuildYourDrugList extends UhcDriver {
 		}
 	}
 
-	@FindBy(xpath = "//button[@id='changePharmacyLink']")
+	@FindBy(xpath = "//*[contains(@id,'changePharmacyLink')]")
 	public WebElement DrugDetails_ChangePharmacyLnk;
 
 	@FindBy(xpath = "//h2[contains(text(), 'Drug Cost Details')]")
@@ -214,8 +214,9 @@ public class BuildYourDrugList extends UhcDriver {
 		jsClickNew(reviewDrugCost);
 		waitForPageLoadSafari();
 		threadsleep(2000);
-		CommonUtility.waitForPageLoadNew(driver, DrugDetails_DrugCostsHeading, 20);
-		if (validateNew(DrugDetails_ChangePharmacyLnk) && validateNew(DrugDetails_DrugCostsHeading)) {
+		//CommonUtility.waitForPageLoadNew(driver, DrugDetails_DrugCostsHeading, 20);
+		if(validateNew(DrugDetails_ChangePharmacyLnk))
+		{
 			return new DrugDetailsPage(driver);
 		} else {
 			Assert.fail("Drug Details is NOT Displayed");
@@ -334,5 +335,13 @@ public class BuildYourDrugList extends UhcDriver {
 		validateNew(EnterDrugNameTxt);
 		validateNew(SearchBtn);
 		validateNew(PreviousBtn);
+	}
+
+	public DrugSummaryPage navigateToDrugSummaryPage() {
+		validateNew(reviewDrugCost);
+		jsClickNew(reviewDrugCost);
+		waitForPageLoadSafari();
+		
+		return new DrugSummaryPage(driver);
 	}
 }
