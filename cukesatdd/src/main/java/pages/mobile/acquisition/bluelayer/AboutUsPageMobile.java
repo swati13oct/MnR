@@ -17,7 +17,7 @@ import pages.acquisition.bluelayer.GlobalWebElements;
  */
 public class AboutUsPageMobile extends GlobalWebElements{
 	
-	@FindBy(xpath = "//*[contains(@class,'meded-article-header__title')]")
+	@FindBy(xpath = "//span[contains(@class,'visible-inline-block')][1]")
 	public static WebElement header;
 	
 	@FindBy(xpath = "//section[contains(@class,'meded-article-content')]//p[string-length(text()) > '1']")

@@ -48,7 +48,7 @@ public class ProviderSearchPageMobile extends UhcDriver {
 	@FindBy(id = "pageHeader")
 	private WebElement pageHeader;
 
-	@FindBy(xpath = "(//body//div[@id='application-root']//div[@ng-switch-when='true']//div//div//div[1]//div[1]//div[1]//div[1]//div[2]//div[3]//div[1]//div[3]//button[1]//span[1]")
+	@FindBy(xpath = "(//*[@data-test-id='saved-provider-button'])[1]")
 	private WebElement selectProviderBtn;
 
 	@FindBys(value = {

@@ -22,8 +22,8 @@ Feature: 1.01.2-Vpp to plan Details AARP Scenarios
       | DocumentCode | <docCode> |
 
     Examples: 
-      | TCID  | zipcode | isMultutiCounty | county      | plantype | planName                                       | pdfType               | docCode                 | planyear |
-      | 00001 |   53503 | No              | Iowa County | MAPD     | UnitedHealthcare Medicare Advantage Open (PPO) | Step Therapy Criteria | Step_Therapy_MCORE_2020 | current  |
+      | TCID  | zipcode | isMultutiCounty | county      | plantype | planName                                  | pdfType               | docCode                 | planyear |
+      | 00001 |   53503 | No              | Iowa County | MAPD     | AARP Medicare Advantage Open Plan 2 (PPO) | Step Therapy Criteria | Step_Therapy_MCORE_2020 | current  |
 
   @vppPlanDetailsAARP02 @vppPlanDetailsAARPRun01
   Scenario Outline: Plan type: <plantype> - PDF Type: <pdfType> - Verify specific PDF Plan Documents in Plan Details Page for provided plan
@@ -67,11 +67,11 @@ Feature: 1.01.2-Vpp to plan Details AARP Scenarios
       | Yearly Premium  | <yearlyPremium>  |
 
     Examples: 
-      | TID   | zipcode | isMultutiCounty | county         | plantype | planName                                       | monthlyPremium | yearlyPremium | planyear |
-      | 15638 |   53503 | No              | Iowa County    | MAPD     | UnitedHealthcare Medicare Advantage Open (PPO) | $47            | $564          | current  |
-      #| 15640 |   99210 | No              | Spokane County | MA       | AARP Medicare Advantage Essential (HMO)        | $0             | $0            | current  |
-      #| 15641 |   99210 | No              | Spokane County | SNP      | UnitedHealthcare Dual Complete (HMO D-SNP)     | $25            | $300          | current  |
+      | TID   | zipcode | isMultutiCounty | county      | plantype | planName                                  | monthlyPremium | yearlyPremium | planyear |
+      | 15638 |   53503 | No              | Iowa County | MAPD     | AARP Medicare Advantage Open Plan 2 (PPO) | $47            | $564          | current  |
 
+  #| 15640 |   99210 | No              | Spokane County | MA       | AARP Medicare Advantage Essential (HMO)        | $0             | $0            | current  |
+  #| 15641 |   99210 | No              | Spokane County | SNP      | UnitedHealthcare Dual Complete (HMO D-SNP)     | $25            | $300          | current  |
   @vppPlanDetailsAARP04 @vppPlanDetailsAARPRun01 @vppPlanDetailsAARPRegression @OnlyProd
   Scenario Outline: UserStory: <TID> -plan type: <plantype> - Verify Optional Services tab in Plan Details for provided plan
     Given the user is on AARP medicare acquisition site landing page
@@ -115,8 +115,8 @@ Feature: 1.01.2-Vpp to plan Details AARP Scenarios
     Then the user clicks on both top and bottom back to plans link and validates its redirection AARP
 
     Examples: 
-      | TCID  | zipcode | isMultiCounty | county             | plantype | planName                                               | planyear |
-      | 00004 |   90210 | NO            | Los Angeles County | MA       | AARP Medicare Advantage SecureHorizons Essential (HMO) | current  |
+      | TCID  | zipcode | isMultiCounty | county             | plantype | planName                                            | planyear |
+      | 00004 |   90210 | NO            | Los Angeles County | MA       | AARP Medicare Advantage SecureHorizons Plan 1 (HMO) | current  |
 
   @vppPlanDetailsAARP06 @vppPlanDetailsAARPRun02 @vppPlanDetailsAARPRegression @swipe @debug
   Scenario Outline: <TCID> - Plan type: <plantype> - Verify OLE Landing from VPP Plan Details
@@ -135,13 +135,13 @@ Feature: 1.01.2-Vpp to plan Details AARP Scenarios
     Then the user validates the Plan details on OLE
 
     Examples: 
-      | TCID  | zipcode | isMultutiCounty | county             | plantype | planName                                                   | planyear |
-      | 00005 |   90210 | NO              | Los Angeles County | MAPD     | AARP Medicare Advantage SecureHorizons Plan 1 (HMO)        | next  |
-      | 00006 |   90210 | NO              | Los Angeles County | PDP      | AARP MedicareRx Walgreens (PDP)                            | next  |
-      | 00007 |   24571 | YES             | Bedford County     | MAPD     | Piedmont Select Medicare Option One (PPO)                  | next  |
-      | 00008 |   78006 | YES             | Bexar County       | SNP      | UnitedHealthcare Dual Complete (HMO D-SNP)								 | next  |
-#      | 00009 |   78006 | YES             | Bexar County       | SNP      | UnitedHealthcare Medicare Gold (Regional PPO C-SNP)        | current  |
+      | TCID  | zipcode | isMultutiCounty | county             | plantype | planName                                                | planyear |
+      | 00005 |   90210 | NO              | Los Angeles County | MAPD     | AARP Medicare Advantage SecureHorizons Plan 1 (HMO)     | next     |
+      | 00006 |   90210 | NO              | Los Angeles County | PDP      | AARP MedicareRx Walgreens (PDP)                         | next     |
+      | 00007 |   24571 | YES             | Bedford County     | MAPD     | UnitedHealthcare Medicare Advantage Choice Plan 2 (PPO) | next     |
+      | 00008 |   78006 | YES             | Bexar County       | SNP      | UnitedHealthcare Dual Complete (HMO D-SNP)              | next     |
 
+  #      | 00009 |   78006 | YES             | Bexar County       | SNP      | UnitedHealthcare Medicare Gold (Regional PPO C-SNP)        | current  |
   @vppPlanDetailsAARP07 @vppPlanDetailsAARPRun02 @vppPlanDetailsAARPRegression
   Scenario Outline: UserStory: <TCID> -plan type: <plantype> - Verify Provider Search  in AARP site from Plan Details page
     Given the user is on AARP medicare acquisition site landing page
@@ -160,8 +160,8 @@ Feature: 1.01.2-Vpp to plan Details AARP Scenarios
     Then Verify X out of Y provider covered information is displayed on Plan Details page Ulayer
 
     Examples: 
-      | TCID  | zipcode | isMultutiCounty | county       | plantype | planName                                               | planyear |
-      | 00010 |   78006 | YES             | Bexar County | MA       | AARP Medicare Advantage SecureHorizons Essential (HMO) | current  |
+      | TCID  | zipcode | isMultutiCounty | county       | plantype | planName                                     | planyear |
+      | 00010 |   78006 | YES             | Bexar County | MA       | AARP Medicare Advantage SecureHorizons (HMO) | current  |
 
   @vppPlanDetailsAARP08
   Scenario Outline: UserStory: <TCID> -plan type: <plantype> -  To Verify the drug cost estimator flow for <plantype> through plan details page's Plan Costs tab
@@ -215,7 +215,6 @@ Feature: 1.01.2-Vpp to plan Details AARP Scenarios
       | TCID  | zipcode | county             | drugInitials1 | drugName1 | drugInitials2 | drugName2  | drugInitials3 | drugName3     | pharmacyType     | distance | pharmacyName                    | plantype | planName                        | quantity | frequency     | newPharmacyType | genericName1 | genricName3 | aep | currentyear | planyear |
       | 00011 |   90210 | Los Angeles County | lipi          | Lipitor   | dron          | dronabinol | Adva          | Advair Diskus | Preferred Retail | 15 miles | COMMUNITY, A WALGREENS PHARMACY | PDP      | AARP MedicareRx Walgreens (PDP) |       30 | Every 1 month | Mail Order      | atorvastatin | fluticasone | no  | no          | current  |
 
-	
   @vppPlanDetailsAARP09 @vppPlanDetailsAARPRun03 @vppPlanDetailsAARPRegression @OnlyProd
   Scenario Outline: UserStory: <TCID> -plan type: <plantype> - Verify Prescription Drug Benefits tab in Plan Details for provided plan
     Given the user is on AARP medicare acquisition site landing page
@@ -261,8 +260,8 @@ Feature: 1.01.2-Vpp to plan Details AARP Scenarios
     And user verifies home link of agents&brokers page ulayer
 
     Examples: 
-      | TCID  | zipcode | isMultutiCounty | county       | plantype | planName                                               | planyear |
-      | 00016 |   78006 | YES             | Bexar County | MA       | AARP Medicare Advantage SecureHorizons Essential (HMO) | current  |
+      | TCID  | zipcode | isMultutiCounty | county       | plantype | planName                                     | planyear |
+      | 00016 |   78006 | YES             | Bexar County | MA       | AARP Medicare Advantage SecureHorizons (HMO) | current  |
 
   @vppPlanDetailsAARP11 @vppPlanDetailsAARPRun03 @vppPlanDetailsAARPRegression @Choice
   Scenario Outline: UserStory: <TCID> -plan type: <plantype> - Verify plan details and back to summary and add to compare and uncheck in plan details and verify uncheck in plan summary
@@ -280,11 +279,11 @@ Feature: 1.01.2-Vpp to plan Details AARP Scenarios
     And the user validates the pdf section
     Then User clicks on Back to Plans link and navigate back to plan summary in AARP site
     Then User click on add to compare checkbox and click on view details link on AARP
-    #Then I uncheck and go back to the vpp page to validate for AARP
 
+    #Then I uncheck and go back to the vpp page to validate for AARP
     Examples: 
-      | TCID   | zipcode | isMultutiCounty | county       | plantype | planName                                               | planyear |
-      | 000017 |   78006 | YES             | Bexar County | MA       | AARP Medicare Advantage SecureHorizons Essential (HMO) | current  |
+      | TCID   | zipcode | isMultutiCounty | county       | plantype | planName                                     | planyear |
+      | 000017 |   78006 | YES             | Bexar County | MA       | AARP Medicare Advantage SecureHorizons (HMO) | current  |
 
   @vppPlanDetailsAARP12 @vppPlanDetailsAARPRun03 @vppPlanDetailsAARPRegression @OnlyProd
   Scenario Outline: UserStory: <TID> -plan type: <plantype> - Verify <optionalRider> in Plan Details for provided plan and validating Dental Directory link
@@ -304,8 +303,8 @@ Feature: 1.01.2-Vpp to plan Details AARP Scenarios
       | Plan Name      | <planName>      |
 
     Examples: 
-      | TID        | zipcode | isMultutiCounty | county          | plantype | planName                                                         | optionalRider   | planyear |
-      | F435191-01 |   11516 | No              | Nassau County   | MA       | UnitedHealthcare Medicare Advantage Essential (Regional PPO)     | Dental Platinum | current  |
+      | TID        | zipcode | isMultutiCounty | county        | plantype | planName                                                         | optionalRider   | planyear |
+      | F435191-01 |   11516 | No              | Nassau County | MA       | UnitedHealthcare Medicare Advantage Choice Plan 1 (Regional PPO) | Dental Platinum | current  |
       #| F435191-02 |   11516 | No              | Nassau County   | MAPD     | UnitedHealthcare Medicare Advantage Choice Plan 1 (Regional PPO) | Dental Platinum | current  |
       #| F435191-03 |   78006 | Yes             | Bexar County    | SNP      | UnitedHealthcare Medicare Gold (Regional PPO C-SNP)              | Dental Platinum | current  |
       #| F435191-04 |   55343 | No              | Hennepin County | MAPD     | AARP Medicare Advantage Headwaters (PPO)                         |                 | current  |

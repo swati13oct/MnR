@@ -93,7 +93,7 @@ public class ComparePlansPageMobile extends UhcDriver {
 	@FindBy(xpath=".//*[@id='emailSuccessMsgPopUp']/div/form/div[2]/button")
 	private WebElement closeButtonthankyoumessagepopup;
 
-	@FindBy(xpath = "//*[@id='sam-call-button']//*[contains(@class,'sam__button__icon')]")
+	@FindBy(xpath = "//button[@id='sam-call-button-mobile']")
    	private WebElement callsam;
    	
    	@FindBy(xpath = "//*[contains(@id,'sam-call-button')]//*[contains(@class,'sam__button__text')]")
@@ -140,8 +140,9 @@ public class ComparePlansPageMobile extends UhcDriver {
 	@FindBy(xpath="//span[@class='remove-button removebtn3']")
 	private WebElement remove4thplanName;
 	
-	@FindBy(xpath="//div[contains(@class,'align-items-lg-start')]//button)[4]")
+	@FindBy(xpath="//thead/tr[1]/th[5]/div[1]/a[1]")
 	private WebElement Newremove4thplan;
+	
 	
 	@FindBy(xpath="//div[contains(@class,'align-items-lg-start')]//div)[4]")
 	private WebElement Newremove4thplanName;

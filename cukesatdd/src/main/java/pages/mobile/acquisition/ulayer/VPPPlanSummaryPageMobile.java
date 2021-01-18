@@ -759,7 +759,8 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 	@FindBy(xpath = "//label[contains(@for,'compare-plan')]")
 	private WebElement planCompareCheckBox;
 
-	@FindBy(xpath = "//span[contains(@class,'multiple-added-text ng-binding show')]")
+	
+	@FindBy(xpath="//span[@class='multiple-added-text show']")
 	private WebElement multipleCompareText;
 
 	@FindBy(xpath = "//div[contains(@class,'plan-list show active')]//*[@class='segment-title oon-benefit-padding']//h3")
@@ -4786,11 +4787,13 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 		List<WebElement> compareLinks = driver.findElements(
 				By.xpath("//*[contains(@class,'multiple-added-text')]//button[contains(text(),'Compare plans')]"));
 		scrollToView(compareLinks.get(1));
-		jsClickNew(compareLinks.get(1));
+		compareLinks.get(1).click();
 
 		if (currentUrl().contains("/health-plans.html#/plan-compare"))
 			return new ComparePlansPageMobile(driver);
 		return null;
+		
+		
 	}
 
 	public ComparePlansPageMobile clickOnCompareLinkAARP(String plantype) {

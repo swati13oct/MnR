@@ -311,6 +311,10 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 	@FindBy(xpath = "//a[@id='ctc-sam-mobile']//span[contains(text(),'Call a Medicare Expert')]")
 	private WebElement callsam;
+	
+//	String CallSam= "Call a Licensed Insurance Agent";
+	String CallSam1855= "1-855";
+	String CallSam1877= "1-877";
 
 	// @FindBy(xpath = "//*[@id='sam-call-button']/div/span[1]")
 	// @FindBy(xpath =
@@ -1937,21 +1941,27 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	}
 
 	public void validateCallSamContent() throws InterruptedException {
-		Actions action = new Actions(driver);
-		WebElement element = callsam;
-		action.moveToElement(element).perform();
+		
+//		Actions action = new Actions(driver);
+//		WebElement element = callsam;
+//		action.moveToElement(element).perform();
+		waitforElementNew(callsamtooltip,30);
 		String toolTipText = callsamtooltip.getText();
 		System.out.println("====================================================================");
 		System.out.println(toolTipText);
 		System.out.println("====================================================================");
-
-		if (toolTipText.contains(CallSam)) {
-			System.out.println("Call sticky action menu roll out and contain the text Call a Licensed Insurance Agent");
-			// return new AcquisitionHomePage(driver);
-		} else
-			Assert.fail(
-					"No Call sticky action menu didn't roll out and doesn't contain the text Call a Licensed Insurance Agent");
-		// return null;
+		
+        if (toolTipText.contains(CallSam1877)) {
+          System.out.println("Call sticky action menu roll out and contain the text: "+ toolTipText);
+          
+        }
+        else if (toolTipText.contains(CallSam1855))	{
+        	System.out.println("Call sticky action menu roll out and contain the text"+ toolTipText);
+        }
+        		
+        else
+        	Assert.fail("No Call sticky action menu didn't roll out and doesn't contain the text 1-877");
+       
 	}
 
 	public void selectState(String state) {
