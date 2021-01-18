@@ -1,4 +1,5 @@
 
+
 package pages.acquisition.ulayer;
 
 import static org.junit.Assert.assertTrue;
@@ -424,33 +425,33 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "//*[contains(text(),'UnitedHealthcare Medicare Solutions | Provider Search')]")
 	private WebElement UnitedHealthcareMedicareSolutions;
 	
-	@FindBy(xpath = "//span[contains(text(),'Submit')]")
-	private WebElement SubmitEmail;
-	
-	@FindBy(xpath = "//span[contains(text(),'SignUp')]")
-	private WebElement SignUpEmail;
-		
-	@FindBy(xpath = "//*[contains(text(),'Please enter First Name')]")
-	private WebElement ErrorFirstName;
-	
-	@FindBy(xpath = "//*[contains(text(),'Please enter Last Name')]")
-	private WebElement ErrorLastName;
-	
-	@FindBy(xpath = "(//*[contains(text(),'Please enter a valid email address')])[3]")
-	private WebElement ErrorEmailAddress;
-	
-	@FindBy(xpath = "//input[@name='newsletter-input1']")
-	private WebElement EmailFirstName;
-	
-	@FindBy(xpath = "//input[@name='newsletter-input2']")
-	private WebElement EmailLastName;
-	
-	@FindBy(xpath = "//input[@name='newsletter-input3']")
-	private WebElement EmailAddress;
-	
-	@FindBy(xpath = "//div[@class='confirmationtext']/p[1]/b")
-	private WebElement Thankyou;
-	
+//	@FindBy(xpath = "//span[contains(text(),'Submit')]")
+//	private WebElement SubmitEmail;
+//	
+//	@FindBy(xpath = "//span[contains(text(),'SignUp')]")
+//	private WebElement SignUpEmail;
+//		
+//	@FindBy(xpath = "//*[contains(text(),'Please enter First Name')]")
+//	private WebElement ErrorFirstName;
+//	
+//	@FindBy(xpath = "//*[contains(text(),'Please enter Last Name')]")
+//	private WebElement ErrorLastName;
+//	
+//	@FindBy(xpath = "(//*[contains(text(),'Please enter a valid email address')])[3]")
+//	private WebElement ErrorEmailAddress;
+//	
+//	@FindBy(xpath = "//input[@name='newsletter-input1']")
+//	private WebElement EmailFirstName;
+//	
+//	@FindBy(xpath = "//input[@name='newsletter-input2']")
+//	private WebElement EmailLastName;
+//	
+//	@FindBy(xpath = "//input[@name='newsletter-input3']")
+//	private WebElement EmailAddress;
+//	
+//	@FindBy(xpath = "//div[@class='confirmationtext']/p[1]/b")
+//	private WebElement Thankyou;
+//	
 	
 	
 	@FindBy(xpath = "//body/div[@id='overlay']")
@@ -1298,11 +1299,15 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	public RequestHelpAndInformationPage navigateToMaMoreHelpAndInfo() {
 
-		Actions actions = new Actions(driver);
+		/*Actions actions = new Actions(driver);
 		PageFactory.initElements(driver, this);
 		actions.moveToElement(ourPlansHoverLink);
 		actions.moveToElement(moreHelpInfoLink);
-		actions.click().build().perform();
+		actions.click().build().perform();*/
+		jsMouseOver(ourPlansHoverLink);
+		jsMouseOver(moreHelpInfoLink);
+		jsClickNew(moreHelpInfoLink);
+		waitForPageLoadSafari();
 		CommonUtility.checkPageIsReadyNew(driver);
 		CommonUtility.waitForPageLoadNew(driver, requestAgentApptDropdown, 60);
 		if (validate(requestAgentApptDropdown)) {
@@ -2632,45 +2637,45 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		
 	}
 	
-	public void enterAndvalidateEmail() {
-		
-		threadsleep(8);
-		
-		//if(SubmitEmail.isDisplayed()) {
-		int size=driver.findElements(By.xpath("//span[contains(text(),'Sign Up')]")).size();
-		System.out.println("size of sign up"+size);
-		if(size>0){
-			driver.findElement(By.xpath("//span[contains(text(),'Sign Up')]")).click();
-			threadsleep(4);
-			Assert.assertEquals(ErrorEmailAddress.getText(), "Please enter a valid email address");
-			threadsleep(4);
-			EmailFirstName.sendKeys("abc");
-			EmailLastName.sendKeys("def");
-			EmailAddress.sendKeys("a@gmail.com");
-			driver.findElement(By.xpath("//span[contains(text(),'Sign Up')]")).click();
-		}else {
-			SubmitEmail.click();
-			threadsleep(4);
-			Assert.assertEquals(ErrorFirstName.getText(), "Please enter First Name");
-			threadsleep(2);
-			Assert.assertEquals(ErrorLastName.getText(), "Please enter Last Name");
-			threadsleep(2);
-			Assert.assertEquals(ErrorEmailAddress.getText(), "Please enter a valid email address");
-			threadsleep(4);
-			EmailFirstName.sendKeys("abc");
-			EmailLastName.sendKeys("def");
-			EmailAddress.sendKeys("a@gmail.com");
-			SubmitEmail.click();
-		}
-		
-			threadsleep(4);
-			if(Thankyou.getText().equalsIgnoreCase("Thank you!")) {
-				assertTrue(true);
-			}
-			
-			
-						
-		}
+//	public void enterAndvalidateEmail() {
+//		
+//		threadsleep(8);
+//		
+//		//if(SubmitEmail.isDisplayed()) {
+//		int size=driver.findElements(By.xpath("//span[contains(text(),'Sign Up')]")).size();
+//		System.out.println("size of sign up"+size);
+//		if(size>0){
+//			driver.findElement(By.xpath("//span[contains(text(),'Sign Up')]")).click();
+//			threadsleep(4);
+//			Assert.assertEquals(ErrorEmailAddress.getText(), "Please enter a valid email address");
+//			threadsleep(4);
+//			EmailFirstName.sendKeys("abc");
+//			EmailLastName.sendKeys("def");
+//			EmailAddress.sendKeys("a@gmail.com");
+//			driver.findElement(By.xpath("//span[contains(text(),'Sign Up')]")).click();
+//		}else {
+//			SubmitEmail.click();
+//			threadsleep(4);
+//			Assert.assertEquals(ErrorFirstName.getText(), "Please enter First Name");
+//			threadsleep(2);
+//			Assert.assertEquals(ErrorLastName.getText(), "Please enter Last Name");
+//			threadsleep(2);
+//			Assert.assertEquals(ErrorEmailAddress.getText(), "Please enter a valid email address");
+//			threadsleep(4);
+//			EmailFirstName.sendKeys("abc");
+//			EmailLastName.sendKeys("def");
+//			EmailAddress.sendKeys("a@gmail.com");
+//			SubmitEmail.click();
+//		}
+//		
+//			threadsleep(4);
+//			if(Thankyou.getText().equalsIgnoreCase("Thank you!")) {
+//				assertTrue(true);
+//			}
+//			
+//			
+//						
+//		}
 		
 	
 		public VPPPlanSummaryPage searchPlansWithOutCountyShop(String zipcode) throws InterruptedException {
@@ -2831,4 +2836,5 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		}
 	}
 }
+
 

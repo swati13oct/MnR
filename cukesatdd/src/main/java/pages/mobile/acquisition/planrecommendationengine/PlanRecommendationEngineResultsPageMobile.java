@@ -177,10 +177,9 @@ public class PlanRecommendationEngineResultsPageMobile extends UhcDriver {
 
 	@FindBy(css = "button[class*='viewPlans']")
 	private WebElement MSViewPlanButton;
-	
+
 	@FindBy(xpath = "//a[contains(text(),'Back to plan results') and @href='#']")
 	private WebElement BackToPlanResultsLink;
-	
 
 	@FindBy(css = "#mainBody .swiper-container .module-plan-overview:nth-of-type(1)")
 	private WebElement MS1stPlan;
@@ -296,7 +295,7 @@ public class PlanRecommendationEngineResultsPageMobile extends UhcDriver {
 
 	@FindBy(css = "#startoverdetails")
 	private WebElement StartOverDetails;
-	
+
 	@FindBy(xpath = "//a[@aria-describedby='recommendation_ma']")
 	private WebElement MAPDLink;
 
@@ -559,7 +558,7 @@ public class PlanRecommendationEngineResultsPageMobile extends UhcDriver {
 		// temp.selectByVisibleText("February 1, 2021");
 		temp.selectByIndex(1);
 		jsClickNew(MSViewPlanButton);
-		//E2E Mobile specific code 
+		// E2E Mobile specific code
 		jsClickNew(BackToPlanResultsLink);
 	}
 
@@ -627,7 +626,7 @@ public class PlanRecommendationEngineResultsPageMobile extends UhcDriver {
 		int count = DrugsInPRE.size();
 		drugsCoveredInVPP(count);
 		removeDrugs(count);
-		//vppToPre();
+		// vppToPre();
 		MobileMenuAndGetStarted();
 		validateDrugPage(flow, true);
 	}
@@ -636,13 +635,13 @@ public class PlanRecommendationEngineResultsPageMobile extends UhcDriver {
 		System.out.println("Navigating to PRE Using StartNow: ");
 		flow = PlanRecommendationEngineStepDefinition.PREflow;
 		MobileMenuAndGetStarted();
-		//vppToPre();
+		// vppToPre();
 		validateDrugPage(flow, false);
 	}
 
 	public void DrugsDetailsVPPtoPRE() {
 		System.out.println("Validating Drugs Details from DCE to VPP Drug Page: ");
-		
+
 		ACQDrugCostEstimatorPage dce = new ACQDrugCostEstimatorPage(driver);
 		DrugsInDCE = dce.vppDrugsResults;
 		int count = DrugsInDCE.size();
@@ -650,7 +649,7 @@ public class PlanRecommendationEngineResultsPageMobile extends UhcDriver {
 		verifyConfirmationmodalResults(count, DrugsInDCE, DrugsList);
 		System.out.println("Validating Drugs Details from VPP to PRE Drug Page: ");
 		MobileMenuAndGetPlanRecom();
-		//vppToPre();
+		// vppToPre();
 	}
 
 	public void removeDrugs(int count) {
@@ -933,9 +932,9 @@ public class PlanRecommendationEngineResultsPageMobile extends UhcDriver {
 	}
 
 	public void vppToPreStartOver() {
-		if(MAPDLink.isDisplayed())
+		if (MAPDLink.isDisplayed())
 			jsClickNew(MAPDLink);
-			
+
 		System.out.println("Validating VPP to PRE Page Clicking on Start Over Button");
 		validate(StartOverButton, 20);
 		jsClickNew(StartOverButton);
@@ -1401,6 +1400,7 @@ public class PlanRecommendationEngineResultsPageMobile extends UhcDriver {
 		drugCoveredeVPP = MA1stPlanList.get(0).findElement(By.cssSelector("a[class*='add-drug']"));
 		jsClickNew(drugCoveredeVPP);
 	}
+
 	public boolean changePlanyear(String year) {
 
 		jsClickNew(MAViewPlansLink);

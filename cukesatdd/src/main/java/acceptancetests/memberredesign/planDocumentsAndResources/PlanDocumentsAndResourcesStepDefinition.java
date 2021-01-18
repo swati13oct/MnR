@@ -1,3 +1,4 @@
+
 package acceptancetests.memberredesign.planDocumentsAndResources;
 
 import gherkin.formatter.model.DataTableRow;
@@ -114,7 +115,7 @@ public class PlanDocumentsAndResourcesStepDefinition {
 		Boolean v=(Boolean) getLoginScenario().getBean(PlanDocumentsAndResourcesCommonConstants.TEST_VALIDATE_API);
 		if (v!=null)
 			this.validateApi=v;
-		this.skipLnkDestCheck=true; //note: default = true    
+		this.skipLnkDestCheck=false; //note: default = true    
 		Boolean s=(Boolean) getLoginScenario().getBean(PlanDocumentsAndResourcesCommonConstants.TEST_SKIP_LINK_DEST_CHECK);
 		if (s!=null)
 			this.skipLnkDestCheck=s;
@@ -161,7 +162,6 @@ public class PlanDocumentsAndResourcesStepDefinition {
 		yearsMap.put("nextYear", String.valueOf(nextYear));
 		getLoginScenario().saveBean(PlanDocumentsAndResourcesCommonConstants.TEST_YEARS_MAP, yearsMap);
 		getLoginScenario().saveBean(PlanDocumentsAndResourcesCommonConstants.TEST_INPUT_INFO,testInputInfoMap);
-
 		getLoginScenario().saveBean(PageConstants.PLAN_DOCUMENTS_AND_RESOURCES_PAGE,planDocumentsAndResourcesPage);
 	}
 
@@ -322,10 +322,15 @@ public class PlanDocumentsAndResourcesStepDefinition {
 			testInputInfoMap.put("validateApi",String.valueOf(validateApi));
 
 			sectionNote=planDocumentsAndResourcesPage.validateDocOnUi(testInputInfoMap, expDocList, sectionNote, api_planDocMap);
-			sectionNote.add("PASSED - "+language+" documents UI validation");
+			if (sectionNote.get(0).contains("UI VALIDATOIN FAILED")) {
+				sectionNote.add("FAILED - "+language+" documents UI validation");
+				finalCheck=false;
+				problemText=problemText+"FAILED - "+language+" documents UI validation | ";
+			} else {
+				sectionNote.add("PASSED - "+language+" documents UI validation");
+			}
 			if (sectionNote.get(0).contains("API VALIDATOIN PASSED")) {
 				sectionNote.add("PASSED - "+language+" documents API validation");
-
 			} else if (sectionNote.get(0).contains("API VALIDATOIN FAILED")) {
 				sectionNote.add("FAILED - "+language+" documents API validation");
 				finalCheck=false;
@@ -353,7 +358,13 @@ public class PlanDocumentsAndResourcesStepDefinition {
 			testInputInfoMap.put("validateApi",String.valueOf(validateApi));
 
 			sectionNote=planDocumentsAndResourcesPage.validateDocOnUi(testInputInfoMap, expDocList, sectionNote, api_planDocMap);
-			sectionNote.add("PASSED - "+language+" documents UI validation");
+			if (sectionNote.get(0).contains("UI VALIDATOIN FAILED")) {
+				sectionNote.add("FAILED - "+language+" documents UI validation");
+				finalCheck=false;
+				problemText=problemText+"FAILED - "+language+" documents UI validation | ";
+			} else {
+				sectionNote.add("PASSED - "+language+" documents UI validation");
+			}
 			if (sectionNote.get(0).contains("API VALIDATOIN PASSED")) {
 				sectionNote.add("PASSED - "+language+" documents API validation");
 
@@ -382,7 +393,13 @@ public class PlanDocumentsAndResourcesStepDefinition {
 			testInputInfoMap.put("validateApi",String.valueOf(validateApi));
 
 			sectionNote=planDocumentsAndResourcesPage.validateDocOnUi(testInputInfoMap, expDocList, sectionNote, api_planDocMap);
-			sectionNote.add("PASSED - "+language+" documents UI validation");
+			if (sectionNote.get(0).contains("UI VALIDATOIN FAILED")) {
+				sectionNote.add("FAILED - "+language+" documents UI validation");
+				finalCheck=false;
+				problemText=problemText+"FAILED - "+language+" documents UI validation | ";
+			} else {
+				sectionNote.add("PASSED - "+language+" documents UI validation");
+			}
 			if (sectionNote.get(0).contains("API VALIDATOIN PASSED")) {
 				sectionNote.add("PASSED - "+language+" documents API validation");
 
@@ -3276,3 +3293,4 @@ public class PlanDocumentsAndResourcesStepDefinition {
 		planDocumentsAndResourcesPage.validateNEWTextAgainstPlanDocument();
 	}
 }
+

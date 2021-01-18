@@ -1,3 +1,4 @@
+
 package pages.regression.healthRecord;
 
 import java.util.List;
@@ -85,6 +86,9 @@ public class HealthRecordWebElements  extends UhcDriver {
 
 	@FindBy(xpath="//input[@id='zipcodeTxt']")
 	protected WebElement pharmacySearchPgZipcodeField;
+	
+	@FindBy(xpath="//input[@data-component='SearchBarInput']")
+	protected WebElement pharmacySearchPgZipcodeField_newRally;
 
 	@FindBy(xpath="//header[@class='section-header']//a[contains(@class,'drug-lookup')]")
 	protected WebElement section_drugLocator;
@@ -105,8 +109,7 @@ public class HealthRecordWebElements  extends UhcDriver {
 	@FindBy(xpath="//a[contains(@id,'accsettings')]")
 	protected WebElement acctSettingsLnk;
 
-
-	@FindBy(xpath= "//button[@id='accountprofile' or @id='dropdown-toggle-3' or @id='dropdown-toggle-2']")
+	@FindBy(xpath= "//button[@id='accountprofile' or @id='dropdown-toggle-3' or @id='dropdown-toggle-2']//*[contains(text(),'Account')]")
 	protected WebElement testHarn_AcctProfBtn;
 
 	@FindBy(xpath= "//button[@id='accountprofile' or contains(@id,'dropdown-toggle')]/*[contains(text(),'Account')]")
@@ -116,24 +119,23 @@ public class HealthRecordWebElements  extends UhcDriver {
 	@FindBy(xpath="//ul[contains(@class,'dropdown-menu')]//li")
 	protected List<WebElement> testHarn_AcctProfDropdown;
 
-
 	@FindBy(xpath="//div[contains(@class,'account-btn')]//ul[contains(@class,'dropdown-menu') or contains(@id,'dropdown-options')]//a")
 	protected List<WebElement> testHarn_AcctProfDropdown_claims;
-
 
 	@FindBy(xpath="//ul[contains(@id,'dropdown-options-3') or contains(@id,'dropdown-options-2')]//a")
 	protected List<WebElement> testHarn_AcctProfDropdown_react;
 
 	@FindBy(xpath="//div[@class='deskHeaderContainer']//div[contains(@class,'dropdown') and contains(@class,'open')]//a[contains(@id,'ihr') or contains(text(),'Health record')]")
 	protected WebElement testHarn_desktop_AcctProf_IHRLnk;
-
+	
+	@FindBy(xpath="//ul[@id='dropdown-options-3']//a[contains(@data-testid,'TARGET_AWARE_HEALTH_RECORD')]")
+	protected WebElement testHarn_desktop_AcctProf_IHRLnk_pharmacyLocator;
 
 	@FindBy(xpath="//div[contains(@class,'account-btn')]//ul[contains(@class,'dropdown-menu') or contains(@id,'dropdown-options')]//a[contains(@href,'ihr')]")
 	protected WebElement testHarn_desktop_AcctProf_IHRLnk_claims;
 
 	//tbd @FindBy(xpath="//div[@data-testid='shared-header']//ul[@aria-expanded='true' and (@id='dropdown-options-3' or @id='dropdown-options-2')]//a[@data-testid='TARGET_AWARE_HEALTH_RECORD']")
 	@FindBy(xpath="//div[@data-testid='shared-header']//ul[@aria-expanded='true' and contains(@id,'dropdown-options')]//a[@data-testid='TARGET_AWARE_HEALTH_RECORD']")
-
 	protected WebElement testHarn_desktop_AcctProf_IHRLnk_react;
 	
 	@FindBy(xpath="//li[@class='accountSettings']//a[contains(text(),'Health record')]")
@@ -193,5 +195,12 @@ public class HealthRecordWebElements  extends UhcDriver {
 	
 	@FindBy(xpath="//h1[contains(.,'Benefit Summary')]")
 	protected WebElement benefitsPgHeader;
+	
+	@FindBy(xpath="//a[contains(@class,'atdd-bnc-locatepharmacybtn')]")
+	protected WebElement benefitsPgLocatePharmacyLnk;
+	
+	@FindBy(xpath="//button[contains(text(),'Close')]")
+	protected WebElement stagePharmacyLocatorCloseBtn;
+
 
 }

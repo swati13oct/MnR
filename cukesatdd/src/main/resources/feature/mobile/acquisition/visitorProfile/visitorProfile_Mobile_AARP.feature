@@ -52,7 +52,7 @@ Feature: 1.08. ACQ- Visitor profile
       | Alabama  | Lipitor |   90210 | AARP |
       | Virginia | Lipitor |   22320 | AARP |
 
-  @VisitorProfile_AARP_mobile @prod
+  @VisitorProfile_AARP_mobile @prod 
   Scenario Outline: Verify user is able to add plans to the unauthenticated visitor profile - zip -<zipcode>
     Given the user is on medicare acquisition site landing page
       | Site | <site> |

@@ -29,6 +29,7 @@ import pages.acquisition.ulayer.VisitorProfileTestHarnessPage;
 import pages.mobile.acquisition.commonpages.VisitorProfilePageMobile;
 import pages.mobile.acquisition.dceredesign.GetStartedPageMobile;
 import pages.mobile.acquisition.ulayer.AcquisitionHomePageMobile;
+import pages.mobile.acquisition.ulayer.ComparePlansPageMobile;
 import pages.mobile.acquisition.ulayer.PlanDetailsPageMobile;
 import pages.mobile.acquisition.ulayer.VPPPlanSummaryPageMobile;
 /**
@@ -150,9 +151,13 @@ public class VisitorProfileMobileStepDefinition {
 		getLoginScenario().saveBean(VPPCommonConstants.COUNTY, county);
 		getLoginScenario().saveBean(VPPCommonConstants.IS_MULTICOUNTY, isMultiCounty);
 
+		
+		
+		
 		AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		VPPPlanSummaryPageMobile plansummaryPage = aquisitionhomepage.searchPlanOnHealthPlansPage(zipcode, county, isMultiCounty);
+		VPPPlanSummaryPageMobile plansummaryPage = null;
+		plansummaryPage = aquisitionhomepage.searchPlanOnHealthPlansPage(zipcode, county, isMultiCounty);
 
 			
 		if (plansummaryPage != null) {
@@ -161,6 +166,14 @@ public class VisitorProfileMobileStepDefinition {
 		} else {
 			Assert.fail("Error Loading VPP plan summary page");
 		}
+	}
+	
+	@Then("^Navigate to Visitor Profile page$")
+	public void navigate_to_Visitor_Profile_page() {
+		ComparePlansPageMobile comparePlansPage = (ComparePlansPageMobile) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		VisitorProfilePageMobile visitorProfilePage = comparePlansPage.navigateToVisitorProfilePage();
+		getLoginScenario().saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfilePage);
 	}
 
 	

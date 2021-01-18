@@ -573,6 +573,7 @@ public class ComparePlansPage extends UhcDriver {
   			//validateNew(enrollForPlan);
 //  			enrollForPlan.click();
   			jsClickNew(enrollForPlan);
+  			waitForPageLoadSafari();
   		}
   		CommonUtility.waitForPageLoadNew(driver, NextBtn, 30);
   		System.out.println(driver.getCurrentUrl());

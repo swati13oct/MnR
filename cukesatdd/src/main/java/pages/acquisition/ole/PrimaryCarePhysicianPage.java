@@ -207,7 +207,9 @@ public class PrimaryCarePhysicianPage extends UhcDriver{
 				e1.printStackTrace();
 			}
 			for(String winHandle : driver.getWindowHandles()){
-			    driver.switchTo().window(winHandle);
+				if(!winHandle.equals(PCPWindow)) {
+					driver.switchTo().window(winHandle);
+				}
 			}
 			
 			String CurrentURL = driver.getCurrentUrl();

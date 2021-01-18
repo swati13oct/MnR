@@ -473,6 +473,38 @@ public class PharmaciesAndPrescriptionsBase extends PharmaciesAndPrescriptionsWe
 		return actualPreEffFlag;
 	}
 	
+
+	// F436319
+		public boolean pnpNotificationPositionValidate(WebElement element) {
+			System.out.println("pnpNotification margin value is :: " +  element.getCssValue("margin"));
+			return element.getCssValue("margin").equals("16px 0px");
+		}
+
+		// F436319
+		public void closePnPNotification(WebElement element) {
+			Actions actions = new Actions(driver);
+			actions.moveToElement(element);
+			actions.click().build().perform();
+		}
+
+		public boolean pnpValidateAlphaNumeric(WebElement element, long timeoutInSec) {
+			//note: if ever need to control the wait time out, use the one in UhcDriver validate(element, timeoutInSec)
+			driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+			try {
+				if (element.isDisplayed() && element.getText().matches("[a-zA-Z0-9]+")) {
+					System.out.println("Element '"+element.toString()+"' found!!!!");
+					return true;
+				} else {
+					System.out.println("Element '"+element.toString()+"' not found/not visible");
+				}
+			} catch (Exception e) {
+				System.out.println("Element '"+element.toString()+"' not found/not visible. Exception");
+			}
+			//note: default in UhcDriver is 10
+			driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+			return false;
+		}	
+
 	public Date getCurrentSystemDate() {
 		if (MRScenario.environment.equalsIgnoreCase("offline") || MRScenario.environment.equalsIgnoreCase("prod")) {
 			//note: offline-prod and online-prod should always have current date anyway...
@@ -505,7 +537,5 @@ public class PharmaciesAndPrescriptionsBase extends PharmaciesAndPrescriptionsWe
 		simpleDateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
 		return simpleDateFormat.format(d);
 	}
-	
-
 
 }

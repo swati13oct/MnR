@@ -1,6 +1,4 @@
-/**
- * 
- */
+
 package pages.acquisition.planRecommendationEngine;
 
 import java.util.ArrayList;
@@ -43,10 +41,8 @@ public class ACQDrugCostEstimatorPage extends UhcDriver {
 
 	// DCE Page Elements
 
-
 //	@FindBy(css = "#adddrugfooter")
 	@FindBy(css = "#addDrug")
-
 	private WebElement drugAddBtn;
 
 	@FindBy(css = "input#drugsearch")
@@ -167,9 +163,7 @@ public class ACQDrugCostEstimatorPage extends UhcDriver {
 				if (drugDetails[7].toUpperCase().equals("YES"))
 					switchGeneric = true;
 				threadsleep(2000);
-
 				jsClickNew(drugAddBtn);
-
 				threadsleep(2000);
 				addDrugbySearchDCE(drugName, searchButtonClick, dosage, packageName, count, threeeMonthfrequency,
 						GenericDrug, switchGeneric);
@@ -179,7 +173,6 @@ public class ACQDrugCostEstimatorPage extends UhcDriver {
 
     public void choosePharmacyandBacktoPlans() {
     	validate(drugpageButtons.get(0));
-
 		jsClickNew(drugpageButtons.get(0));
 		waitForPageLoadSafari();
 		pageloadcomplete();
@@ -189,7 +182,6 @@ public class ACQDrugCostEstimatorPage extends UhcDriver {
 		pageloadcomplete();
 		threadsleep(2000);
 		waitForPageLoadSafari();
-
 }
 	
 	
@@ -201,7 +193,6 @@ public class ACQDrugCostEstimatorPage extends UhcDriver {
 			drugsearchBox.clear();
 			drugsearchBox.sendKeys(drugName);
 			if (searchButtonClick) {
-
 			jsClickNew(drugsearchButton);
 			//Select modal
 			validate(searchList.get(0), 30);
@@ -216,7 +207,6 @@ public class ACQDrugCostEstimatorPage extends UhcDriver {
 		} else {
 			threadsleep(10000);
 			jsClickNew(drugsAutoList.get(0));
-
 		}
 
 			validate(modalDosageSelect, 30);
@@ -240,9 +230,7 @@ public class ACQDrugCostEstimatorPage extends UhcDriver {
 			dosage = dos.getFirstSelectedOption().getText().trim().split(" ")[1] + " "
 					+ dos.getFirstSelectedOption().getText().trim().split(" ")[2];
 			threadsleep(2000);
-
 			jsClickNew(addDrugButton);
-
 			// Not Covered switch generic as it is not DD scope in DCE page
 		} catch (Exception e) {
 			System.out.println("Unable to add drug");
@@ -285,3 +273,4 @@ public class ACQDrugCostEstimatorPage extends UhcDriver {
 	}
 
 }
+

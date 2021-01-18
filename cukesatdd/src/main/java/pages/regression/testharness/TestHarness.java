@@ -1,3 +1,4 @@
+
 package pages.regression.testharness;
 
 import java.util.List;
@@ -568,9 +569,7 @@ public class TestHarness extends UhcDriver {
 		WebElement heading_e=heading;
 		if (memberType.contains("PREEFF"))
 			heading_e=preEffBnfHeading;
-
 		CommonUtility.waitForPageLoad(driver, heading_e, 10);
-
 		System.out.println(driver.getTitle());
 		if (!driver.getTitle().contains("Benefits")) { //note: in case timing issue, one more try
 			try {
@@ -756,6 +755,7 @@ public class TestHarness extends UhcDriver {
 	}
 	
 	public PlanDocumentsAndResourcesPage navigateToEOBPageThenBenefitsTerm() {
+		checkModelPopup(driver,5);
 		CommonUtility.waitForPageLoad(driver, eobPageLink,30);
 		validateNew(eobPageLink);
 		eobPageLink.click();
@@ -1458,21 +1458,38 @@ public class TestHarness extends UhcDriver {
     	
     	public PharmaciesAndPrescriptionsPage navigateToPharAndPresFromTestHarnessPage() {
     		CommonUtility.checkPageIsReady(driver);
+    		checkModelPopup(driver, 30);//Yusufu popup handling
 			checkForIPerceptionModel(driver);
     		try{
     			if (noWaitValidate(testHarnessPharPresLink)) 
+    				try {
     				testHarnessPharPresLink.click();
+    				}
+    			    catch(Exception e) {
+    			    	System.out.println("Print error for iPerception pop" + e.getMessage());
+    			    	WebElement ele=driver.findElement(By.xpath("//*[contains(@id,'ip-no')]"));
+    			    	ele.click();
+    			    	testHarnessPharPresLink.click();
+    			    }
     			else 
+    				try{
     				testHarnessTopMenuPhaPresLink.click();
+    		        }
+		            catch(Exception e) {
+		            	System.out.println("Print error for iPerception pop" + e.getMessage());
+		    	        WebElement ele=driver.findElement(By.xpath("//*[contains(@id,'ip-no')]"));
+		    	        ele.click();
+		    	        testHarnessPharPresLink.click();
+		            }
     		} catch (WebDriverException e) {
     			checkForIPerceptionModel(driver);
     			CommonUtility.checkPageIsReady(driver);
     			testHarnessPharPresLink.click();
     		}
     		CommonUtility.checkPageIsReadyNew(driver);
-			checkModelPopup(driver,2);
     		System.out.println("Now waiting for Drug Look up on Pharmacies And Prescriptions page to show up");
 			CommonUtility.waitForPageLoad(driver, LookUpDrugsButton, 40);
+			checkModelPopup(driver,20);
     		if (driver.getCurrentUrl().contains("pharmacy/overview.html")) {
     			return new PharmaciesAndPrescriptionsPage(driver);
     		}
@@ -1482,10 +1499,8 @@ public class TestHarness extends UhcDriver {
     	public PharmaciesAndPrescriptionsPage navigateToPharAndPresFromTestHarnessPage(String memberType) {
     		CommonUtility.checkPageIsReady(driver);
 			checkForIPerceptionModel(driver);
-
 			if ((MRScenario.environment.contains("team-a") || MRScenario.environment.contains("stage"))
 					&& memberType.toUpperCase().contains("PREEFF")) {
-
 				testHarnessTopMenuPhaPresLink_preeff.click();
 			} else {
 	    		try{
@@ -1516,13 +1531,9 @@ public class TestHarness extends UhcDriver {
     	private WebElement shadowRootHeader;
 
     	public boolean findPnPLinksExistOnPg(String memberType) {
-
     		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
-
     		System.out.println("user is on '" + MRScenario.environmentMedicare + "' dashboard page, attempt to navigate to secondary page to see if PnP link exists");
-
     		checkModelPopup(driver,1);
-
     		if (noWaitValidate(preEffPnpMenuLnk) && memberType.contains("PREEFF")) 
     			return true;
     		if (noWaitValidate(pharPresDashboardLink)) {
@@ -1893,7 +1904,6 @@ public class TestHarness extends UhcDriver {
 			if (validate(logOut,0)) {
 				logOut.click();
 				CommonUtility.checkPageIsReadyNew(driver);
-
 				try {
 					if(driver.getTitle().contains("Signing off")) {
 						Thread.sleep(2000);
@@ -1902,7 +1912,6 @@ public class TestHarness extends UhcDriver {
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-
 				System.out.println("Title after logout-" + driver.getTitle());
 				if(MRScenario.environment.contains("team-h")) {
 					if (validate(accountProfile,0)) {
@@ -1937,3 +1946,4 @@ public class TestHarness extends UhcDriver {
 			Assert.assertFalse("find care tab displayed when not expected", validate(findCareTab,0));			
 		}
 }
+

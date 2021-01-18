@@ -58,7 +58,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	@FindBy(xpath = "//*[contains(@id,'zipcodemeded')][1]//following-sibling::button//*[contains(text(),'Shop Plans')]")
 	private WebElement viewShopPlansButton;
 
-	@FindBy(css = "#cta-zipcode")
+	@FindBy(css = "#zipcode")
 	private WebElement healthPlansZipcode;
 
 	@FindBy(className = "fd_myPlans")
@@ -3062,6 +3062,8 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		headLogo.click();
 		CommonUtility.checkPageIsReadyNew(driver);
 		clickViewDisclaimerInfoLink();
+		
+		
 
 	}
 

@@ -48,7 +48,7 @@ public class ProviderSearchPageMobile extends UhcDriver {
 	@FindBy(id = "pageHeader")
 	private WebElement pageHeader;
 
-	@FindBy(xpath = "(//*[@data-test-id='saved-provider-button'])[1]")
+	@FindBy(xpath = "(//body//div[@id='application-root']//div[@ng-switch-when='true']//div//div//div[1]//div[1]//div[1]//div[1]//div[2]//div[3]//div[1]//div[3]//button[1]//span[1]")
 	private WebElement selectProviderBtn;
 
 	@FindBys(value = {
@@ -267,14 +267,15 @@ public class ProviderSearchPageMobile extends UhcDriver {
 
 		CommonUtility.waitForPageLoadNew(driver, Primary, 30);
 		Primary.click();
-		
+
 		CommonUtility.waitForPageLoadNew(driver, Physician, 30);
 
 		Physician.click();
+		scrollToView(selectProviderBtn);
 		CommonUtility.waitForPageLoadNew(driver, selectProviderBtn, 30);
 		jsClickNew(selectProviderBtn);
 
-		if (validate(selectLocationOption,10)) {
+		if (validate(selectLocationOption, 10)) {
 			jsClickNew(selectLocationOption);
 			validateNew(saveBtn2);
 			jsClickNew(saveBtn2);
@@ -283,7 +284,7 @@ public class ProviderSearchPageMobile extends UhcDriver {
 		validateNew(providerNameText);
 		String providerSaved = providerNameText.getText().trim();
 		System.out.println("Provider Name is : " + providerSaved);
-		MRConstants.PROV_NAME=providerSaved;
+		MRConstants.PROV_NAME = providerSaved;
 
 		/*
 		 * if(driver.findElements(By.xpath(

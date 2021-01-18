@@ -1,3 +1,4 @@
+
 package pages.acquisition.dceredesign;
 
 import java.util.Map;
@@ -86,7 +87,6 @@ public class GetStartedPage extends UhcDriver {
 		CommonUtility.checkPageIsReadyNew(driver);
 
 //		while(validate(overlayFilm, 10)) {/**wait*/}
-
 //		CommonUtility.waitForElementToDisappear(driver, overlayFilm, 75);
 		waitForPageLoadSafari();
 
@@ -117,7 +117,6 @@ public class GetStartedPage extends UhcDriver {
 		}
 	}
 
-
 	public PrescriptionsProvidersBenefitsPage clickReturnToAcqHomePAge() {
 		validateNew(LinktoExitScenario);
 		jsClickNew(LinktoExitScenario);
@@ -139,5 +138,5 @@ public class GetStartedPage extends UhcDriver {
 		return null;
 	}
 
-
 }
+

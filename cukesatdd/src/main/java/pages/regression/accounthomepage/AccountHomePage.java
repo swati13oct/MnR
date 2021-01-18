@@ -1,3 +1,4 @@
+
 package pages.regression.accounthomepage;
 
 import static org.junit.Assert.assertTrue;
@@ -311,12 +312,8 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(id = "paymentOverviewApp")
 	public static WebElement paymentsOverview;
 
-
-
 	@FindBy(xpath="(//*[@class='btn btn--secondary onetimepayment' or @class='btn btn--primary onetimepayment'])[1]")
 	private WebElement MakeAPaymentButton;
-
-
 
 	@FindBy(xpath="//span[contains(text(),'Make a Payment')]")
 	private WebElement makeapayment;
@@ -324,11 +321,9 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(linkText = "Find Care & Costs")
 	private WebElement findCareCost;
 
-
 	@FindBy(linkText = "Find Care")
 	private WebElement findCareUsingLinkText;
 	
-
 	@FindBy(xpath = "//h1[@class='main-heading margin-none']")
 	private WebElement EOBHeading;
 
@@ -383,6 +378,12 @@ public class AccountHomePage extends UhcDriver {
 
 	@FindBy(id = "main-nav")
 	private WebElement dashboardHeader;
+
+	@FindBy(xpath = "//*[@id='pharmacies_5']")
+	protected List<WebElement> PPPageTab;
+
+	@FindBy(linkText = "Go To Pharmacies & Prescriptions Page")
+	protected WebElement goToPPPage;
 
 	// Terminated view
 
@@ -475,7 +476,10 @@ public class AccountHomePage extends UhcDriver {
 
 	@FindBy(xpath = "//a[@id='pharmacies_5']")
 	private WebElement pharPresDashboardLinkAlternative;
-	
+
+	@FindBy(xpath="//a[@href='https://stage-medicare.uhc.com/medicare/member/pharmacy/overview.html']")
+	private WebElement pharmacyPrescriptionTab;
+
 	@FindBy(xpath = "//a[@id='preeffectivepharmacies_6']")
 	private WebElement pharPresDashboardLink_preEff;
 
@@ -484,8 +488,6 @@ public class AccountHomePage extends UhcDriver {
 
 	@FindBy(xpath = "//div[@id='ui-view-page']//a[@track='EOB_SEARCH']")
 	private WebElement EOB_Dashboard;
-
-
 
 	@FindBy(xpath="//header[contains(@class,'sub-nav-header')]//a[contains(@ng-href,'eob.html') or contains(@href,'eob.html')]")
 	protected WebElement eobTopMenuLink;
@@ -539,10 +541,9 @@ public class AccountHomePage extends UhcDriver {
 
 	@FindBy(xpath = "//*[contains(@onclick,'HSIDSignIn')]")
 	private WebElement mnrSignInButton;
-
+	
 	@FindBy(xpath = "//h3[contains(text(),'My Documents')]")
 	private WebElement myDocumentsHeader;
-
 
 	private PageData myAccountHome;
 
@@ -3030,6 +3031,9 @@ public class AccountHomePage extends UhcDriver {
 		Assert.assertTrue("Header is displayed", dashboardHeader.isDisplayed());
 	}
 
+	public void validateDashboardURL() {
+		Assert.assertTrue("Dashboard URL is displayed", driver.getCurrentUrl().contains("dashboard"));
+	}
 	public void clickAccountProfile() {
 		if (accountProfile.isDisplayed()) {
 			accountProfile.click();
@@ -3278,7 +3282,6 @@ public class AccountHomePage extends UhcDriver {
 		CommonUtility.checkPageIsReady(driver);
 		checkModelPopup(driver,5);
 
-
 		CommonUtility.waitForPageLoad(driver, heading, 50);
 		if (driver.getTitle().contains("Benefits")) {
 			return new BenefitsAndCoveragePage(driver);
@@ -3365,7 +3368,6 @@ public class AccountHomePage extends UhcDriver {
 
 		return null;
 	}
-
 
 	public BenefitsAndCoveragePage navigateToBandCPag() {
 
@@ -3475,6 +3477,23 @@ public class AccountHomePage extends UhcDriver {
 
 		}
 	}
+
+	public void validateNoPPPage() {
+		Assert.assertFalse("PROBLEM - able to locate P&P tab element",
+				validateNoPPpage());
+	}
+
+	public boolean validateNoPPpage() {
+
+		if(PPPageTab.size()>0){
+			return false;
+		}else {
+
+			return true;
+		}
+
+	}
+
 
 	/*
 	 * This method checks that correct pre-Effective message is displayed on
@@ -3985,6 +4004,10 @@ public class AccountHomePage extends UhcDriver {
 				pharPresDashboardLink.click();
 			else if (validate(pharPresDashboardLinkAlternative,0))
 				pharPresDashboardLinkAlternative.click();
+			 else if(validate(pharmacyPrescriptionTab,0)) {
+				 scrollToView(pharmacyPrescriptionTab);
+				 pharmacyPrescriptionTab.click();
+				}				 
 			else if (validate(pharPresDashboardLink_preEff,0))  //note: should only be available for pre-eff user
 				pharPresDashboardLink_preEff.click();
 			else {
@@ -4042,6 +4065,8 @@ public class AccountHomePage extends UhcDriver {
 		checkModelPopup(driver,1);
 		if (driver.getCurrentUrl().contains("/dashboard")) {
 			System.out.println("User is on dashboard page and URL is ====>" + driver.getCurrentUrl());
+			ClaimsSummaryPage claimsPg=navigateToClaimsSummaryPage();
+			Assert.assertTrue("PROBLEM - unable to go to secondary page claims first", claimsPg!=null);
 			BenefitsAndCoveragePage bncPg=navigateToBenefitAndCoveragePage();
 			//tbd ClaimsSummaryPage claimsPg=navigateToClaimsSummaryPage();
 			Assert.assertTrue("PROBLEM - unable to go to secondary page benefits first", bncPg!=null);
@@ -4049,8 +4074,6 @@ public class AccountHomePage extends UhcDriver {
 				pharPresDashboardLink.click();
 			else if (validate(pharPresDashboardLinkAlternative))
 				pharPresDashboardLinkAlternative.click();
-			else if (validate(pharPresDashboardLink_preEff,0))  //note: should only be available for pre-eff user
-				pharPresDashboardLink_preEff.click();
 			else {
 				if (validate(shadowRootHeader)) {
 					System.out.println("Check for shadow-root before giving up");
@@ -4076,10 +4099,8 @@ public class AccountHomePage extends UhcDriver {
 
 	public boolean findPnPLinksExistOnPg(String memberType) {
 		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
-
 		System.out.println("user is on '" + MRScenario.environmentMedicare + "' dashboard page, attempt to navigate to secondary page to see if PnP link exists");
-	checkModelPopup(driver,1);
-
+		checkModelPopup(driver,1);
 		if (noWaitValidate(preEffPnpMenuLnk) && memberType.contains("PREEFF")) 
 			return true;
 		if (noWaitValidate(pharPresDashboardLink)) {
@@ -4149,6 +4170,9 @@ public class AccountHomePage extends UhcDriver {
 	@FindBy(xpath="//span[@class='hide-mobile ng-scope']")
 	private WebElement viewRecomend;
 
+	@FindBy(xpath = "//h1[contains(text(),'Preeffective Test Harness')]")
+	protected WebElement preeffectiveHeader;
+	
 	/*
 	 * This method validates login on Dashboard
 	 */
@@ -4161,6 +4185,12 @@ public class AccountHomePage extends UhcDriver {
 		System.out.println(" View & Print member ID cards assert is passed on the Dashboard !!");
 	}
 
+	public void validatePreeffectiveHeader() {
+
+		Assert.assertTrue("PROBLEM - unable to locate preeffective Header element",
+				preeffectiveHeader.isDisplayed());
+	}
+	
 	public void moveMouseToElement(WebElement targetElement) {
 		Actions action = new Actions(driver);
 		action.moveToElement(targetElement).build().perform(); 
@@ -4283,7 +4313,7 @@ public class AccountHomePage extends UhcDriver {
 
 		}
 
-		if (MRScenario.environment.equals("prod") || MRScenario.environment.equals("offline")) {
+		if (MRScenario.environment.equalsIgnoreCase("prod") || MRScenario.environment.equalsIgnoreCase("offline")) {
 			if (validate(shadowRootHeader)) {
 				System.out.println("located shadow-root element, attempt to process further...");
 				WebElement root1 = expandRootElement(shadowRootHeader);
@@ -4338,7 +4368,6 @@ public class AccountHomePage extends UhcDriver {
 	public PaymentHistoryPage navigateDirectToPaymentHitorypage() {
 
 		if (MRScenario.environment.equalsIgnoreCase("stage") || MRScenario.environment.contains("prod") || MRScenario.environment.equalsIgnoreCase("offline")) {
-
 			System.out.println("Member auth agent is on the Dashboard page");
 			System.out.println(driver.getCurrentUrl());
 
@@ -4355,7 +4384,6 @@ public class AccountHomePage extends UhcDriver {
 						}
 					} catch (Exception e) {
 						System.out.println("iPerception Pop Up not displayed");
-
 					}
 
 					validateNew(makeapayment,0);
@@ -4432,16 +4460,12 @@ public class AccountHomePage extends UhcDriver {
 
 			}
 
-
 			if (driver.getCurrentUrl().contains("payments")) {
-
 				return new PaymentHistoryPage(driver);
 			}
 
 		}
-
 		return null;		
-
 	}
 
 	public PaymentHistoryPage navigatePaymentHistoryPage1() {
@@ -4552,7 +4576,6 @@ public class AccountHomePage extends UhcDriver {
 		}
 	}
 
-
 	public void clickAccountProfileDashboard() {
 		checkForIPerceptionModel(driver);
 		//Click on Account profile on Rally dashboard. Under shadow element
@@ -4591,11 +4614,62 @@ public class AccountHomePage extends UhcDriver {
 		if (validate(myDocumentsHeader,5)) {
 			return new MyDocumentsPage(driver);
 		}
+		try {
+			
+		}finally {
+			
+		}
 		
     return null;
+	}
 
+	public PharmaciesAndPrescriptionsPage navigateToPharmaciesAndPrescriptionWithOutTestHarness() {
+		System.out.println("user is on '" + MRScenario.environment + "' login page");
+		checkForIPerceptionModel(driver);
+		if (driver.getCurrentUrl().contains("/dashboard")) {
+			System.out.println("User is on dashboard page and URL is ====>" + driver.getCurrentUrl());
+			if (validate(pharPresDashboardLink))
+				pharPresDashboardLink.click();
+			else if (validate(pharPresDashboardLinkAlternative))
+				pharPresDashboardLinkAlternative.click();
+			 else if(validate(pharmacyPrescriptionTab)) {
+				 scrollToView(pharmacyPrescriptionTab);
+				 jsClickNew(pharmacyPrescriptionTab);
+				 //pharmacyPrescriptionTab.click();
+				}				 
+			else {
+				if (validate(shadowRootHeader)) {
+					System.out.println("Check for shadow-root before giving up");
+					attemptShadowRootTopMenuLinkNavigationToPnP();
+				} else {
+					System.out.println("There is no shadow-root menu");
+				}
+			}
+			CommonUtility.checkPageIsReadyNew(driver);
+		}
+		if (driver.getCurrentUrl().contains("pharmacy/overview.html"))
+			return new PharmaciesAndPrescriptionsPage(driver);
+		return null;
 	}
 	
+	public void attemptShadowRootTopMenuLinkNavigationToPnP() {
+		//note: use the 2nd menu link as the base and determine which one I really need
+		// if 2 is FIND CARE then 6 is PnP
+		// if 2 is CARE then 5 is PnP
+			String pnpTopMenuItemCssStr="#sticky-main-nav > div > div > div > a:nth-child(5)";
+			WebElement pnpTopMenuLink = locateElementWithinShadowRoot(shadowRootHeader,
+					pnpTopMenuItemCssStr);
+			if (isPnpLink(pnpTopMenuLink.getText())) {
+				locateAndClickElementWithinShadowRoot(shadowRootHeader, pnpTopMenuItemCssStr);
+			}else
+			{
+				pnpTopMenuItemCssStr="#sticky-main-nav > div > div > div > a:nth-child(6)";
+				pnpTopMenuLink = locateElementWithinShadowRoot(shadowRootHeader,
+						pnpTopMenuItemCssStr);
+				if (isPnpLink(pnpTopMenuLink.getText())) 
+					locateAndClickElementWithinShadowRoot(shadowRootHeader, pnpTopMenuItemCssStr);
+			}
+	}
 	/*
 	 * validate that the Find care tab is not displayed on the header
 	 */
@@ -4622,6 +4696,165 @@ public class AccountHomePage extends UhcDriver {
 		}
 
 	}
-	
-	
+	/*
+	 * This function clicks on Benefits and Coverage link from Dashboard after
+	 * waiting for Hello-Person name text to be displayed on page
+	 */
+
+	public BenefitsAndCoveragePage termmembernavigateToBandCPage(String PlanType){
+		System.out.println("Checking for Welcome or Hello on Dashboard home page now");
+
+		try {
+			CommonUtility.waitForPageLoad(driver, helloPerson, 5);
+			if (helloPerson.isDisplayed()) 
+			{
+				System.out.println("Hello PersonName on Dashboard home page was found and exact message is :"+helloPerson.getText());
+			}
+		}
+		catch (Exception e) {
+			// TODO Auto-generated catch block
+			System.out.println("Catch block - Hello PersonName message was not found on Dashboard home page, ignore if it is pre-effective member ");	
+		}	
+		try 
+		{
+			CommonUtility.waitForPageLoad(driver, welcome, 5);
+			if (welcome.isDisplayed()) 
+				System.out.println("Welcome message displayed on Dashboard is: "+welcome.getText());
+		}
+		catch (Exception e) {
+			// TODO Auto-generated catch block
+			System.out.println("Catch block - Welcome message was not found on Dashboard home page, ignore if it active member ");	
+		}
+		if (MRScenario.environment.equalsIgnoreCase("stage") && ("NO".equalsIgnoreCase(MRScenario.isTestHarness))) 
+		{
+			System.out.println("user is on Stage login page");
+			// CommonUtility.waitForPageLoad(driver, claimsDashboardLink, 90);
+
+			if (driver.getCurrentUrl().contains("/aarp/dashboard"))
+			{
+				System.out.println("User is on dashboard page and URL is ==>" + driver.getCurrentUrl());
+
+				driver.navigate().to(PAGE_URL + "aarp/member/benefits-coverage.html");
+			}
+
+			if (driver.getCurrentUrl().contains("/pcp/dashboard"))
+			{
+				System.out.println("User is on dashboard page and URL is ==>" + driver.getCurrentUrl());
+
+				driver.navigate().to("https://" + MRScenario.environment
+						+ "-mymedicareaccount.uhc.com/pcp/member/benefits-coverage.html");
+			}
+			if (driver.getCurrentUrl().contains("/medica/dashboard"))
+			{
+				System.out.println("User is on dashboard page and URL is ==>" + driver.getCurrentUrl());
+
+				driver.navigate().to("https://" + MRScenario.environment
+						+ "-mymedicareaccount.uhc.com/medica/member/benefits-coverage.html");
+			}
+			if (driver.getCurrentUrl().contains("/retiree/dashboard"))
+			{
+				System.out.println("User is on dashboard page and URL is ==>" + driver.getCurrentUrl());
+
+				driver.navigate().to(PAGE_URL + "retiree/member/benefits-coverage.html"); 
+			}
+			if (driver.getCurrentUrl().contains("/medicare/dashboard"))
+			{
+				System.out.println("User is on dashboard page and URL is ==>" + driver.getCurrentUrl());
+
+				driver.navigate().to(PAGE_URL + "medicare/member/benefits-coverage.html"); 
+			}
+
+			try {
+				Thread.sleep(5000);
+			} catch (InterruptedException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			System.out.println(driver.getCurrentUrl());
+			//CommonUtility.waitForPageLoad(driver, heading, 30);
+			if (driver.getTitle().contains("Benefits")) {
+				System.out.println(driver.getTitle());
+				return new BenefitsAndCoveragePage(driver);
+			}
+		}										
+
+		else if (MRScenario.environment.equals("stage") && ("YES".equalsIgnoreCase(MRScenario.isTestHarness))) {
+			driver.navigate().to(PAGE_URL + "content/medicare/member/benefits/overview.html");
+			System.out.println(driver.getCurrentUrl());
+			if (driver.getTitle().contains("Benefits")) {
+				System.out.println(driver.getTitle());
+				return new BenefitsAndCoveragePage(driver);
+			}
+
+		} else if (MRScenario.environment.equals("team-h") || MRScenario.environment.equals("test-a")) {
+
+			driver.navigate().to(PAGE_URL + "medicare/member/benefits-coverage.html");
+			System.out.println(driver.getCurrentUrl());
+		} else if (MRScenario.environment.equals("team-c")) {
+			driver.navigate().to(
+					"https://team-c-medicare.ose-elr-core.optum.com/content/medicare/member/benefits/overview.html");
+			System.out.println(driver.getCurrentUrl());
+			return new BenefitsAndCoveragePage(driver);
+		} else if (MRScenario.environment.equals("team-e")) {
+			jsClickNew(driver.findElement(By.xpath("//td[text()='benefits and coverage page ']/following::a[1]")));
+			CommonUtility.waitForPageLoad(driver, heading, 30);
+			System.out.println(driver.getCurrentUrl());
+			return new BenefitsAndCoveragePage(driver);
+		} else if (MRScenario.environment.equals("prod") || MRScenario.environment.equals("offline")) {
+
+
+			if (validate(shadowRootHeader)) {
+				System.out.println("located shadow-root element, attempt to process further...");
+				WebElement root1 = expandRootElement(shadowRootHeader);
+				try {
+					// Going inside shadow root to get element, in this case the
+					// logo is in the shadow root header
+					System.out.println("Value of Plan Type is: "+PlanType);
+
+					if (PlanType.equalsIgnoreCase("SHIP"))
+					{	
+						WebElement BenefitsandCoverageTab = root1.findElement(By
+								.cssSelector("#sticky-main-nav > div > div > div > a:nth-child(4)"));
+						System.out.println("shadow-root element has been located, now clicking on Benefits and Coverage tab");	
+						TestHarness.checkForIPerceptionModel(driver);
+						BenefitsandCoverageTab.click();
+					}
+					else 
+					{
+						driver.navigate().to("https://www.medicare.uhc.com/retiree/member/documents/overview.html");
+						System.out.println(driver.getCurrentUrl());
+						System.out.println("Benefits an Coverage tab has been clicked");	
+					}
+
+				//	System.out.println("Benefits an Coverage tab has been clicked");	
+					CommonUtility.checkPageIsReadyNew(driver);
+					System.out.println("Current URL is : "+driver.getCurrentUrl());
+					if (driver.getCurrentUrl().contains("documents"))
+					{
+						System.out.println("Current URL contains documents text in it, documents page for a terminated member");	
+						return new BenefitsAndCoveragePage(driver);
+					} 
+					else
+					{
+						Assert.fail("Current URL doesn't contains benefits text in it, benefits page didn't appear , failed");
+					}
+				}
+				catch(Exception e)
+				{
+					System.out.println("Could not locate shadow root element for benefits and coverage tab");
+					Assert.fail("Could not locate shadow root element for benefits and coverage tab");
+				}
+			}
+		}
+		else
+		{
+			driver.navigate().to(
+					"https://team-ci1-medicare.ose-elr-core.optum.com/content/medicare/member/benefits/overview.html");
+			System.out.println(driver.getCurrentUrl());
+			return new BenefitsAndCoveragePage(driver);
+		}
+		return null;
+
+}
+
 }

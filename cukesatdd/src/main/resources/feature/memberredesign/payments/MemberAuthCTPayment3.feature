@@ -25,7 +25,7 @@ Feature: S1.1 To test Member Auth premium payment flows Micro App.
     And the user clicks on cancel button in One time EFT or Recurring EFT
     Examples: 
       | UID     | username | password | memUserName         | planType | claimPeriod    | dateRange      | routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName | paymentType |
-      | F243897 | jkuma14 | Brock@04 | TELGUY1@HOTMAIL.COM | MA       | Last 24 months | Last 18 months | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    | Recurring   |
+      | F243897 | jkuma14 | Brock@05 | TELGUY1@HOTMAIL.COM | MA       | Last 24 months | Last 18 months | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    | Recurring   |
 
   @regressionMemberPROD
   Scenario Outline: TID: <TID> -  Test Case 06- Verify Setup Recurring for CC federal member
@@ -48,6 +48,7 @@ Feature: S1.1 To test Member Auth premium payment flows Micro App.
 
     Examples: 
       | UID     | username | password | memUserName         | planType | claimPeriod    | dateRange      | Name         | CreditCardNumber | validMonth | validYear | paymentType |
+<<<<<<< HEAD
 <<<<<<< HEAD
       | F243897 | jkuma14 | Brock@03 | TELGUY1@HOTMAIL.COM | MA       | Last 24 months | Last 18 months | Pooja Minhas | 4121600170691201 |         01 |      2021 | OneTime     |
 
@@ -72,6 +73,9 @@ Feature: S1.1 To test Member Auth premium payment flows Micro App.
       | TC008   | jkuma14  | Brock@03 | mleroy@mcn.org | MAPD     | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    |
 =======
       | F243897 | jkuma14 | Brock@04 | TELGUY1@HOTMAIL.COM | MA       | Last 24 months | Last 18 months | Pooja Minhas | 4121600170691201 |         01 |      2021 | OneTime     |
+=======
+      | F243897 | jkuma14 | Brock@05 | TELGUY1@HOTMAIL.COM | MA       | Last 24 months | Last 18 months | Pooja Minhas | 4121600170691201 |         01 |      2021 | OneTime     |
+>>>>>>> branch 'develop' of https://github.optum.com/Consumer-Portals/MRATDD
 
          
   #Test Case 08
@@ -91,5 +95,9 @@ Feature: S1.1 To test Member Auth premium payment flows Micro App.
 
     Examples:
       | TID     | username | password | memUserName    | planType |  routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName |
+<<<<<<< HEAD
       | TC008   | jkuma14  | Brock@04 | mleroy@mcn.org | MAPD     | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    |
+>>>>>>> branch 'develop' of https://github.optum.com/Consumer-Portals/MRATDD
+=======
+      | TC008   | jkuma14  | Brock@05 | mleroy@mcn.org | MAPD     | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    |
 >>>>>>> branch 'develop' of https://github.optum.com/Consumer-Portals/MRATDD

@@ -28,9 +28,13 @@ Feature: S1.1 To test Member Auth premium payment flows Micro App.
     Examples: 
       | UID     | username | password | memUserName | planType | claimPeriod    | dateRange      | routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName | paymentType |
 <<<<<<< HEAD
+<<<<<<< HEAD
       | F243897 | jkuma14  | Brock@03 | Pramila1946 | SHIP     | Last 24 months | Last 18 months | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    | Recurring   |
 =======
       | F243897 | jkuma14  | Brock@04 | Pramila1946 | SHIP     | Last 24 months | Last 18 months | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    | Recurring   |
+>>>>>>> branch 'develop' of https://github.optum.com/Consumer-Portals/MRATDD
+=======
+      | F243897 | jkuma14  | Brock@05 | Pramila1946 | SHIP     | Last 24 months | Last 18 months | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    | Recurring   |
 >>>>>>> branch 'develop' of https://github.optum.com/Consumer-Portals/MRATDD
 
 <<<<<<< HEAD
@@ -61,7 +65,11 @@ Feature: S1.1 To test Member Auth premium payment flows Micro App.
    
     Examples: 
       | UID     | planType | memberType          | routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName |username | password | memUserName       | 
+<<<<<<< HEAD
       | F243897 | SHIP     | SHIPUpdate_Payments | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    | jkuma14  | Brock@04 | vernajohnson19651 | 
+=======
+      | F243897 | SHIP     | SHIPUpdate_Payments | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    | jkuma14  | Brock@05 | dmpeters513@gmail.com | 
+>>>>>>> branch 'develop' of https://github.optum.com/Consumer-Portals/MRATDD
       
       
   @regressionMemberPROD @sanityMemberPROD2
@@ -117,5 +125,9 @@ Feature: S1.1 To test Member Auth premium payment flows Micro App.
       | F243897 | jkuma14  | Brock@03 | Pramila1946 | SHIP     | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    |
 =======
       | UID     | username | password | memUserName | planType | routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName |
+<<<<<<< HEAD
       | F243897 | jkuma14  | Brock@04 | Pramila1946 | SHIP     | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    |
+>>>>>>> branch 'develop' of https://github.optum.com/Consumer-Portals/MRATDD
+=======
+      | F243897 | jkuma14  | Brock@05 | Pramila1946 | SHIP     | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    |
 >>>>>>> branch 'develop' of https://github.optum.com/Consumer-Portals/MRATDD

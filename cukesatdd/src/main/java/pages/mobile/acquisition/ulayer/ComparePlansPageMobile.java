@@ -35,6 +35,7 @@ import pages.acquisition.ulayer.FindCarePage;
 import pages.acquisition.ulayer.PlanDetailsPage;
 import pages.acquisition.ulayer.VPPPlanSummaryPage;
 import pages.acquisition.ulayer.VisitorProfilePage;
+import pages.mobile.acquisition.commonpages.VisitorProfilePageMobile;
 import pages.mobile.acquisition.dce.bluelayer.DrugCostEstimatorPageMobile;
 import pages.mobile.acquisition.dceredesign.GetStartedPageMobile;
 import pages.mobile.acquisition.ole.WelcomePageMobile;
@@ -1187,11 +1188,11 @@ public class ComparePlansPageMobile extends UhcDriver {
 	 * 
 	 * @return
 	 */
-	public VisitorProfilePage navigateToVisitorProfilePage() {
+	public VisitorProfilePageMobile navigateToVisitorProfilePage() {
 		shoppingCartIcon.click();
 		if (driver.getCurrentUrl().contains("profile")) {
 			CommonUtility.checkPageIsReadyNew(driver);
-			return new VisitorProfilePage(driver);
+			return new VisitorProfilePageMobile(driver);
 		} else {
 			System.out.println("Navigation to visitor profile is failed");
 			return null;

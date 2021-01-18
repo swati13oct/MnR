@@ -15,6 +15,7 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth Prod
       | Password | <password> | 
     And Member Enters the Username he wants to search
       | MemUsername | <MemUserName> |
+      | Retry | true |
     And user clicks on member to select
     And user stores test input for validations
       | Username | <MemUserName> |
@@ -37,6 +38,7 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth Prod
       | Password | <password> |
     And Member Enters the Username he wants to search
       | MemUsername | <MemUserName> |
+      | Retry | true |
     And user clicks on member to select
     And user stores test input for validations
       | Username | <MemUserName> |
@@ -49,7 +51,11 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth Prod
 
     Examples: 
       | index | TID   |username  | password  | MemUserName | planType | memberType    |
+<<<<<<< HEAD
       | 02    | 15093 |kkumard | mnrs786@|HARRELLM2000| PDP      | TEXASERSGroup_BnC |
+=======
+      | 02    | 15093 |kkumard | tnps459#|HARRELLM2000| PDP      | COMBO_TEXASERSGroup_BnC |
+>>>>>>> branch 'develop' of https://github.optum.com/Consumer-Portals/MRATDD
         
   #TC11_Benefits_for_Ship_member
   #note: this scenario covers multiple testcases TID 15094,15240
@@ -66,6 +72,7 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth Prod
       | Password | <password> |
     And Member Enters the Username he wants to search
       | MemUsername | <MemUserName> |
+      | Retry | true |
     And user clicks on member to select
     And user stores test input for validations
       | Username | <MemUserName> |
@@ -104,10 +111,17 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth Prod
     And the user clicks on More Information link for ship
     Then the user validate Value Add Service page comes on clicking additional info button
     And the user validate vas tiles on vas page
+        | Plan Code | <planCode> | 
+	   | State Code | <stateCode> |
 
     Examples: 
+<<<<<<< HEAD
       | index |TID |username |password |MemUserName|planType|memberType|language|PlanBenefitsTable|numberOfBenefitCards|Identifier| count| rider   |
       | 03    |15094|kkumard|mnrs786@|Gcdurant3| SHIP |SHIP_BnC  | ENGLISH|Plan Benefits Table| 7 |EffectiveShipMedSupp|3| NoRider |
+=======
+      | index |TID |username |password |MemUserName|planType|memberType|language|PlanBenefitsTable|numberOfBenefitCards|Identifier| count| rider   | planCode | stateCode |
+      | 03    |15094|kkumard|tnps459#|Gcdurant3| SHIP |SHIP_BnC  | ENGLISH|Plan Benefits Table| 7 |EffectiveShipMedSupp|3| NoRider | G01 | LA |
+>>>>>>> branch 'develop' of https://github.optum.com/Consumer-Portals/MRATDD
       
   #TC13_Benefits_for_MA_SSUP_MEDSUPMember
   @prod__benefitsAndCoverage10 @BenefitsForMAMedsupSSUPMember @regression @Links_Validation_SSUP
@@ -118,6 +132,7 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth Prod
       | Password | <password> |
     And Member Enters the Username he wants to search
       | MemUsername | <MemUserName> |
+      | Retry | true |
     And user clicks on member to select
     And user stores test input for validations
       | Username | <MemUserName> |
@@ -155,6 +170,7 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth Prod
       | Password | <password> |
     And Member Enters the Username he wants to search
       | MemUsername | <MemUserName> |
+      | Retry | true |
     And user clicks on member to select
     And user stores test input for validations
       | Username | <MemUserName> |
@@ -184,6 +200,7 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth Prod
       | Password | <password> |
     And Member Enters the Username he wants to search
       | MemUsername | <MemUserName> |
+      | Retry | true |
     And user clicks on member to select
     And user stores test input for validations
       | Username | <MemUserName> |
@@ -212,8 +229,15 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth Prod
 
     Examples:  
 <<<<<<< HEAD
+<<<<<<< HEAD
       | TID   |username |password  |MemUserName | planType| memberType| copayCategory |Identifier      | count | rider   |
       | 15239 | kkumard | mnrs786@ |BIGDADDY0808|PDP      | Group_BnC | NON LIS       |GrpEffectiveUHC | 3     | NoRider |
+=======
+      | index | TID   |username |password  |MemUserName | planType| memberType| copayCategory |Identifier      | count | rider   |
+      | 06    | 15239 | kkumard | tnps459# |LeanoraF|PDP      | Group_BnC | NON LIS       |GrpEffectiveUHC | 3     | NoRider |
+     #switched user to match the one on stage
+     # | 06    | 15239 | kkumard | tnps459# |padawson|PDP      | Group_BnC | NON LIS       |GrpEffectiveUHC | 3     | NoRider |
+>>>>>>> branch 'develop' of https://github.optum.com/Consumer-Portals/MRATDD
     
      #15238 is deprecated 
      # | 15238 | kkumard| mnrs786@|APRILSSPACE1 |MAPD| Individual_BnC | NON LIS |IndEffectiveAARP | 7   | Rider |
@@ -234,6 +258,7 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth Prod
       | Password | <password> |
     And Member Enters the Username he wants to search
       | MemUsername | <MemUserName> |
+      | Retry | true |
     And user clicks on member to select
     And user stores test input for validations
       | Username | <MemUserName> |
@@ -283,6 +308,7 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth Prod
       | Password | <password> |
     And Member Enters the Username he wants to search
       | MemUsername | <MemUserName> |
+      | Retry | true |
     And user clicks on member to select
     And user stores test input for validations
       | Username | <MemUserName> |
@@ -332,6 +358,7 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth Prod
       | Password | <password> |
     And Member Enters the Username he wants to search
       | MemUsername | <MemUserName> |
+      | Retry | true |
     And user clicks on member to select
     And user stores test input for validations
       | Username | <MemUserName> |
@@ -360,10 +387,15 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth Prod
     And the user validates spanish and chinese should not display in dropdown
     And the user clicks on More Information link
     And the user validates contactus section
-
+@abc
     Examples: 
+<<<<<<< HEAD
       | index | TID   | username |password  |MemUserName|planType|memberType | copayCategory | SummaryofBenefits   | EvidenceofCoverage   | ComprehensiveFormularyDrug List |
       | 10    | 15247 |kkumard| mnrs786@|GLORIA9494| MAPD|Group_BnC| LIS 4|Summary Of Benefits|Evidence of Coverage| Comprehensive Formulary         |
+=======
+      | index | TID   | username |password  | MemUserName|planType|memberType | copayCategory | SummaryofBenefits   | EvidenceofCoverage   | ComprehensiveFormularyDrug List |
+      | 10    | 15247 |kkumard| tnps459#|GLORIA9494| MAPD|Group_BnC| LIS 2|Summary Of Benefits|Evidence of Coverage| Comprehensive Formulary         |
+>>>>>>> branch 'develop' of https://github.optum.com/Consumer-Portals/MRATDD
       
   #TC26_Group members_PDP_LIS(1,2)
   @prod__benefitsAndCoverage2  @CMGroupmembersPDPLIS_TC26 @prod_BnC_Part6 
@@ -374,6 +406,7 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth Prod
       | Password | <password> |
     And Member Enters the Username he wants to search
       | MemUsername | <MemUserName> |
+      | Retry | true |
     And user clicks on member to select
     And user stores test input for validations
       | Username | <MemUserName> |
@@ -414,6 +447,7 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth Prod
       | Password | <password> |
     And Member Enters the Username he wants to search
       | MemUsername | <MemUserName> |
+      | Retry | true |
     And user clicks on member to select
     And user stores test input for validations
       | Username | <MemUserName> |
@@ -463,6 +497,7 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth Prod
       | Password | <password> |
     And Member Enters the Username he wants to search
       | MemUsername | <MemUserName> |
+      | Retry | true |
     And user clicks on member to select
     And user stores test input for validations
       | Username | <MemUserName> |
@@ -482,7 +517,7 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth Prod
     And the user validates text for the Locate a Pharmacy section
     And the user validates Locate a Pharmacy button should be visible
       | Plan Type | <planType> |
-    And the NON-LIS PDP group user should see drug cost table for Lis members
+    And the NON-LIS PDP group user should see drug cost table for non Lis members
     And the user should see drug copay and discount table
       | Updated Language | <UpdatedLanguage> |
       | Display Flag     | <DisplayFlag>     |
@@ -500,6 +535,7 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth Prod
 
     Examples: 
       | index | TID   |username |password  |MemUserName| planType | memberType | copayCategory | language | SummaryofBenefits   | EvidenceofCoverage   | ComprehensiveFormularyDrug List | name           | memberid   | effectivedate | monthlypremium | UpdatedLanguage | DisplayFlag |
+<<<<<<< HEAD
       | 13    | 15366 |kkumard| mnrs786@|padawson |PDP| Group_BnC| NON LIS | ENGLISH | Summary Of Benefits | Evidence of Coverage | Comprehensive Formulary         | PETER DAWSON | 0108537701 | 01/01/2013    | Not Available  | Tier 2          | true        |     
       
  #TO BE DEPRECATED    
@@ -711,6 +747,9 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth Prod
     Examples: 
       | index | TID   |username |password  |MemUserName  | planType | memberType     | copayCategory |  name        |memberid      | effectivedate| monthlypremium | extrahelp            |Identifier       | count | rider   |
       | 15    | 15245 |kkumard  | mnrs786@ |JamesRShuler1| MAPD     | Individual_BnC | LIS 1         |   DBAD ADFED | 919744565-00 | 01/01/2019   | Not Available  | Extra Help Level : 1 |IndEffectiveAARP |7       |Rider |
+=======
+      | 13    | 15366 |kkumard| tnps459#|LeanoraF |PDP| Group_BnC| NON LIS | ENGLISH | Summary Of Benefits | Evidence of Coverage | Comprehensive Formulary         | PETER DAWSON | 0108537701 | 01/01/2013    | Not Available  | Tier 2          | true        |     
+>>>>>>> branch 'develop' of https://github.optum.com/Consumer-Portals/MRATDD
       
  #TC22_NON LIS Ind plan member(PDP)- Drug Cost table
   @prod__benefitsAndCoverage15 @CMFedPDPNonLis  @Nonlis_Pdp
@@ -721,6 +760,7 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth Prod
       | Password | <password> |
     And Member Enters the Username he wants to search
       | MemUsername | <MemUserName> |
+      | Retry | true |
     And user clicks on member to select
     And user stores test input for validations
       | Username | <MemUserName> |
@@ -790,6 +830,7 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth Prod
       | Password | <password> |
     And Member Enters the Username he wants to search
       | MemUsername | <MemUserName> |
+      | Retry | true |
     And user clicks on member to select
     And user stores test input for validations
       | Username | <MemUserName> |
@@ -811,6 +852,7 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth Prod
       | Password | <password> |
     And Member Enters the Username he wants to search
       | MemUsername | <MemUserName> |
+      | Retry | true |
     And user clicks on member to select
     And user stores test input for validations
       | Username | <MemUserName> |
@@ -832,6 +874,7 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth Prod
       | Password | <password> |
     And Member Enters the Username he wants to search
       | MemUsername | <MemUserName> |
+      | Retry | true |
     And user clicks on member to select
     And user stores test input for validations
       | Username | <MemUserName> |
@@ -885,6 +928,7 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth Prod
       | Password | <password> |
     And Member Enters the Username he wants to search
       | MemUsername | <MemUserName> |
+      | Retry | true |
     And user clicks on member to select
     And user stores test input for validations
       | Username | <MemUserName> |
@@ -969,6 +1013,7 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth Prod
       | Password | <password> |
     And Member Enters the Username he wants to search
       | MemUsername | <MemUserName> |
+      | Retry | true |
     And user clicks on member to select
     And user stores test input for validations
       | Username | <MemUserName> |
@@ -983,6 +1028,7 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth Prod
       | Copay Category | <copayCategory> |
       | Deductible | <deductible> |
       | Insulin | <insulin> |
+    Then validates LEARN MORE ABOUT DRUG TIERS link content for user with insulin
 	
     #@prod_hasInsulin_mapd_NoD
     #Examples: 
@@ -999,33 +1045,137 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth Prod
     #  | index  | FID    | username | password  | MemUserName        | planType  | memberType     | copayCategory | deductible   | insulin      | note |
     #  | 31-I03 | 478830 | kkumard  | mnrs786@  | testUserName       | MAPD      | Individual_BnC | NON LIS       | T123NoD_T45D | hasInsulin   |   H0294-017-000 - new UI| 
      
+<<<<<<< HEAD
     @prod_hasInsulin_pdp_NoD
     Examples: 
       | index  | FID    | username | password  | MemUserName        | planType  | memberType     | copayCategory | deductible   | insulin      | note |
       | 31-I04 | 478830 | kkumard  | mnrs786@  | DEBBERNARDO@55     | PDP       | Individual_BnC | NON LIS       | NoD          | hasInsulin   |   S5820-002-000| 
+=======
+    #@prod_hasInsulin_pdp_NoD
+    #Examples: 
+    #  | index  | FID    | username | password  | MemUserName        | planType  | memberType     | copayCategory | deductible   | insulin      | note |
+    #  | 31-I04 | 478830 | kkumard  | tnps459#  | DEBBERNARDO@55     | PDP       | Individual_BnC | NON LIS       | NoD          | hasInsulin   |   S5820-002-000| 
+>>>>>>> branch 'develop' of https://github.optum.com/Consumer-Portals/MRATDD
 
     @prod_hasInsulin_csnpPcp_NoD
     Examples: 
       | index  | FID    | username | password  | MemUserName        | planType  | memberType     | copayCategory | deductible   | insulin      | note |
+<<<<<<< HEAD
       | 31-I05 | 478830 | kkumard  | mnrs786@  | ecueto1            | CSNP_PCP  | Individual_BnC | NON LIS       | NoD          | hasInsulin   | H1045-018-000|
+=======
+      | 31-I05 | 478830 | kkumard  | tnps459#  | Washington1965     | CSNP_PCP  | Individual_BnC | NON LIS       | NoD          | hasInsulin   | H1045-018-000|
+>>>>>>> branch 'develop' of https://github.optum.com/Consumer-Portals/MRATDD
 
     @prod_hasInsulin_csnpMapd_T123NoD_T45D
     Examples: 
       | index  | FID    | username | password  | MemUserName        | planType  | memberType     | copayCategory | deductible   | insulin      | note |
       | 31-I06 | 478830 | kkumard  | mnrs786@  | Rzwobot            | CSNP_MAPD | Individual_BnC | NON LIS       | T123NoD_T45D | hasInsulin   | H1045-048-004|
 
+<<<<<<< HEAD
     @prod_hasInsulin_isnpMapd_T123NoD_T45D
     Examples: 
       | index  | FID    | username | password  | MemUserName        | planType  | memberType     | copayCategory | deductible   | insulin      | note |
       | 31-I07 | 478830 | kkumard  | mnrs786@  | Pattybach          | ISNP_MAPD | Individual_BnC | NON LIS       | T123NoD_T45D | hasInsulin   |  H0294-017-000|    
+=======
+    #@prod_hasInsulin_isnpMapd_T123NoD_T45D
+    #Examples: 
+    #  | index  | FID    | username | password  | MemUserName        | planType  | memberType     | copayCategory | deductible   | insulin      | note |
+    #  | 31-I07 | 478830 | kkumard  | tnps459#  | testUserName       | ISNP_MAPD | Individual_BnC | NON LIS       | T123NoD_T45D | hasInsulin   |  H0294-017-000|    
+>>>>>>> branch 'develop' of https://github.optum.com/Consumer-Portals/MRATDD
 
     @prod_nonInsulin_mapd_NoT
     Examples: 
+<<<<<<< HEAD
       | index  | FID    | username | password  | MemUserName                                   | planType  | memberType     | copayCategory | deductible   | insulin      | note |
       | 34-I08 | 478830 | kkumard  | mnrs786@  | HSID_SSO_f055fdb0-b555-45e4-b0ea-3326ebc92a16 | MAPD      | Individual_BnC | LIS 1         | NoTier       | nonInsulin   |   H0543-210-000| 
+=======
+      | index  | FID    | username | password  | MemUserName        | planType  | memberType     | copayCategory | deductible   | insulin      | note |
+      | 34-I08 | 478830 | kkumard  | tnps459#  | ecueto1            | CSNP_PCP  | Individual_BnC | LIS 2         | NoTier       | nonInsulin   | H1045-018-000| 
+>>>>>>> branch 'develop' of https://github.optum.com/Consumer-Portals/MRATDD
 
     #@prod_nonInsulin_mapd_T12345
     #Examples: 
     #  | index  | FID    | username | password  | MemUserName        | planType  | memberType     | copayCategory | deductible   | insulin      | note |
+<<<<<<< HEAD
     #  | 34-I09 | 478830 | kkumard  | mnrs786@  | testUserName       | MAPD      | Individual_BnC | NON LIS       | T12345       | nonInsulin   |   H0271-017-000| 
       
+=======
+    #  | 34-I09 | 478830 | kkumard  | tnps459#  | testUserName       | MAPD      | Individual_BnC | NON LIS       | T12345       | nonInsulin   |   H0271-017-000| 
+
+  @prod_benefitsAndCoverage24 @prod_api
+  Scenario Outline: Index: <index> -TID: <TID> -plan: <planType> -memberType: <memberType> - Verify UCPBenefits API not having undefined input value
+    Given the user is on member auth login flow page
+    When the member is able to login with correct username and password
+      | Username | <username> |
+      | Password | <password> |
+    And Member Enters the Username he wants to search
+      | MemUsername | <MemUserName> |
+      | Retry | true |
+    And user clicks on member to select
+    And user stores test input for validations
+      | Username | <MemUserName> |
+      | Plan Type    | <planType>    |
+      | Member Type  | <memberType>  |
+    Then The user navigate to Benefits and Coverage page
+    And the users validate Benefits page has combo tabs for combo users
+    And the users validate UCPBenefits related API requests are not having undefined input value
+
+	@prod_comboApi
+    Examples: 
+      | index | TID   | username | password  | MemUserName              | planType | memberType   |
+      | 35    | xxxxx | kkumard  | tnps459#  | VirginiaRuth1936         | COMBO    | SHIP_FED_BnC |
+      | 36    | xxxxx | kkumard  | tnps459#  | nino2@theciliangroup.com | COMBO    | FED_SHIP_BnC |
+      | 37    | xxxxx | kkumard  | tnps459#  | DKELLY27                 | COMBO    | FED_FED_BnC  |
+
+	@prod_singleApi
+    Examples: 
+      | index | TID   | username | password  | MemUserName              | planType | memberType   |
+      | 38    | xxxxx | kkumard  | tnps459#  | ssmhi1                   | MA       | FED_BnC      |
+      | 39    | xxxxx | kkumard  | tnps459#  | kirit1976                | MAPD     | FED_BnC      |
+      | 40    | xxxxx | kkumard  | tnps459#  | lkd3408                  | PDP      | FED_BnC      |
+
+  @prod_benefitsAndCoverage25 @prod_api
+  Scenario Outline: Index: <index> -TID: <TID> -plan: <planType> -memberType: <memberType> - Verify UCPBenefits API not having undefined input value
+    Given the user is on member auth login flow page
+    When the member is able to login with correct username and password
+      | Username | <username> |
+      | Password | <password> |
+    And Member Enters the Username he wants to search
+      | MemUsername | <MemUserName> |
+      | Retry | true |
+    And user clicks on member to select
+    And user stores test input for validations
+      | Username | <MemUserName> |
+      | Plan Type    | <planType>    |
+      | Member Type  | <memberType>  |
+    Then The user will not be able to navigate to Benefits and Coverage page
+
+	@prod_singleApi
+    Examples: 
+      | index | TID   | username | password  | MemUserName              | planType | memberType   |
+      | 41    | xxxxx | kkumard  | tnps459#  | Patkeving                | TERM     | FED_BnC      |
+      | 42    | xxxxx | kkumard  | tnps459#  | erbenoit56               | TERM     | PDP_FED_BnC  |
+     # unable to search user 
+     # | 43    | xxxxx | kkumard  | tnps459#  | SWHITE33436              | TERM     | PCP_FED_BnC  |    
+     
+  @prod_benefitsAndCoverage26 @prod_rider
+  Scenario Outline: Index: <index> -FID: <FID> -plan: <planType> -memberType: <memberType> - Verify Rider tile display
+    Given the user is on member auth login flow page
+    When the member is able to login with correct username and password
+      | Username | <username> |
+      | Password | <password> |
+    And Member Enters the Username he wants to search
+      | MemUsername | <MemUserName> |
+    And user clicks on member to select
+    And user stores test input for validations
+      | Username | <MemUserName> |
+      | Plan Type    | <planType>    |
+      | Member Type  | <memberType>  |
+    Then The user navigates to Benefits and Coverage page
+      | Plan Type | <planType> |
+	And the user validate rider tile is displayed
+	
+    Examples: 
+      | index  | FID    | username | password  | MemUserName        | planType  | memberType           |
+      | 44     | xxxxxx | kkumard  | tnps459#  | JohnPrais          | MAPD      | Individual_Rider_BnC |       
+>>>>>>> branch 'develop' of https://github.optum.com/Consumer-Portals/MRATDD

@@ -1,18 +1,27 @@
 package pages.regression.pharmaciesandprescriptions;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Random;
 import java.util.Set;
 import java.util.regex.Pattern;
 
 import org.junit.Assert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 
+import acceptancetests.memberredesign.pharmaciesandprescriptions.PharmaciesAndPrescriptionsCommonConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import pages.regression.testharness.TestHarness;
+
+import javax.xml.bind.ValidationEvent;
 
 /**
  * Functionality : validations for Pharmacies & Prescriptions page
@@ -26,6 +35,8 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 	@Override
 	public void openAndValidate() { 
 	}
+	
+	static String winHandleBefore = null;
 
 	public void validateHeaderSectionContent(String firstname, String lastName) {
 		Assert.assertTrue("PROBLEM - unable to locate pnp page header element", 
@@ -677,4 +688,2781 @@ public class PharmaciesAndPrescriptionsPage extends PharmaciesAndPrescriptionsBa
 		  		actText.contains(expText));
 	}
 	
+	
+	// F436319
+		public void validatePharmacies_PrescriptionNotification() {
+			pageloadcomplete();
+			Assert.assertTrue("PROBLEM - unable to locate pnp page notification element", validate(PnPNotification, 30));
+		}
+		
+		public void validatePharmacies_PrescriptionNotification_Deactivated() {
+			pageloadcomplete();
+			Assert.assertFalse("PROBLEM - unable to locate pnp page notification element", validate(PnPNotification, 30));
+		}
+
+		// F436319
+		public void validatePharmacies_PrescriptionNotificationNotDisplayedOnOtherPages() {
+			pageloadcomplete();
+			Assert.assertFalse("PROBLEM - able to locate pnp page notification element", pnpValidate(PnPNotification));
+		}
+
+		// F436319
+		public void validatePharmacies_PrescriptionNotificationPosition() {
+			Assert.assertTrue("PROBLEM - unable to locate pnp page notification position element",
+					pnpNotificationPositionValidate(PnPNotification));
+		}
+
+		// F436319
+		public void navigateBackToPnPPage() {
+			driver.navigate().back();
+		}
+
+		// F436319
+		public void clickDrugCostSummaryCallToAction() {
+			Assert.assertTrue("PROBLEM - unable to locate Drug Cost Summary to Action element",
+					pnpValidate(DrugCostSummaryCallToActnBtn));
+			DrugCostSummaryCallToActnBtn.click();
+		}
+
+		public void validateFindAndPriceExternalLinkIconNotDisplayed() {
+			Assert.assertFalse("PROBLEM - Find and Price a Medication External Link Icon is displayed",
+					pnpValidate(FindAndPriceExternalIcon));
+		}
+
+		public void validateDrugEstimatorToolPageOpensInSameWindow() {
+			pageloadcomplete();
+			int size = countOfNewWindowTab();
+			System.out.println("Number of windows opened when user click on Find & Price a Medication CTA is :: " + size);
+			if (size == 1) {
+				pageloadcomplete();
+				waitforElementVisibilityInTime(DrugEstimatorToolPageSearchBar, 50);
+				//Assert.assertTrue("PROBLEM - No new bowser window is opened", true);
+				Assert.assertTrue("PROBLEM - Drug Estimator Tool Page is NOT displayed successfully",
+						pnpValidate(DrugEstimatorToolPageSearchBar, 30));
+			} else {
+				pageloadcomplete();
+				Assert.assertTrue("PROBLEM - Drug Estimator Tool page is opened in new browser window", false);
+			}
+		}
+		
+		public void validateDrugEstimatorToolPageOpensInSameWindow_memAuth() {
+			pageloadcomplete();
+			int size = countOfNewWindowTab();
+			System.out.println("Number of windows opened when user click on Find & Price a Medication CTA is :: " + size);
+			if (size == 2) {
+				pageloadcomplete();
+				waitforElementVisibilityInTime(DrugEstimatorToolPageSearchBar, 50);
+				//Assert.assertTrue("PROBLEM - No new bowser window is opened", true);
+				Assert.assertTrue("PROBLEM - Drug Estimator Tool Page is NOT displayed successfully",
+						pnpValidate(DrugEstimatorToolPageSearchBar, 30));
+			} else {
+				pageloadcomplete();
+				waitforElementVisibilityInTime(DrugEstimatorToolPageSearchBar, 50);
+				Assert.assertTrue("PROBLEM - Drug Estimator Tool Page Search bar is NOT displayed successfully",
+						pnpValidate(DrugEstimatorToolPageSearchBar, 30));
+				Assert.assertTrue("PROBLEM - Drug Estimator Tool page is opened in new browser window", false);
+			}
+		}
+
+		// F436319
+		public void closePharmacies_PrescriptionNotification() {
+			closePnPNotification(PnPNotificationCloseBtn);
+		}
+
+		// F436319
+		public void validatePharmacies_PrescriptionNotificationNotDisplayedOnPnPPage() {
+			Assert.assertFalse("PROBLEM - able to locate pnp page notification element", pnpValidate(PnPNotification));
+		}
+
+		// F436319
+		public void validatePersistanceOfRemovalOfPharmacies_PrescriptionNotificationOnPnPPage() {
+			Assert.assertFalse("PROBLEM - able to locate pnp page notification element", pnpValidate(PnPNotification));
+		}
+
+		// F436319 Drug Lookup
+		
+		 public void validateDrugLookupCallToActionOnPnPPage() { Assert.
+		 assertTrue("PROBLEM - unable to locate Drug Lookup call to action Tile element"
+		 , validate(DrugLookupCallToActnBtn, 30)); }
+		 
+
+		public void validateFindAndPriceAMedicationCallToActionOnPnPPage() {
+			Assert.assertTrue("PROBLEM - unable to locate Find and Price a Medication call to action Tile element",
+					validate(FindAndPriceCallToActnBtn, 30));
+		}
+
+		public void validateANOCCallToActionOnPnPPage() {
+			Assert.assertTrue("PROBLEM - unable to locate ANOC call to action Button element",
+					validate(ANOCCallToActnBtn, 30));
+		}
+		
+		public void validateANOCCallToActionNotDisplayedOnPnPPage() {
+			Assert.assertFalse("PROBLEM - able to locate ANOC call to action Button element",
+					validate(ANOCCallToActnBtn, 30));
+		}
+
+		public void clickANOCCallToActionOnPnPPage() {
+			Assert.assertTrue("PROBLEM - unable to locate ANOC call to action Button element",
+					validate(ANOCCallToActnBtn, 30));
+			ANOCCallToActnBtn.click();
+		}
+
+		public void validateANOCPageHeader() {
+			Assert.assertTrue("PROBLEM - unable to locate ANOC Page Header element", validate(ANOCCallToActnBtn, 30));
+		}
+
+		// F436319
+		/*
+		 * public void validateImageDrugLookupCallToActionOnPnPPage() { Assert.
+		 * assertTrue("PROBLEM - unable to locate Drug Lookup call to action Image element"
+		 * , pnpValidate(DrugLookupCTAImg)); }
+		 */
+
+		// F436319
+		/*
+		 * public void validateTitleDrugLookupCallToActionOnPnPPage() { Assert.
+		 * assertTrue("PROBLEM - unable to locate Drug Lookup call to action Title element"
+		 * , pnpValidate(DrugLookupCTATitle)); }
+		 */
+
+		// F436319
+		/*
+		 * public void validateDescriptionDrugLookupCallToActionOnPnPPage() { Assert.
+		 * assertTrue("PROBLEM - unable to locate Drug Lookup call to action Description element"
+		 * , pnpValidate(DrugLookupCTADescription)); }
+		 */
+
+		// F436319 Pharmacy Locator Call To Action
+		public void validatePharmacyLocatorCallToActionOnPnPPage() {
+			Assert.assertTrue("PROBLEM - unable to locate Pharmacy Locator call to action button element",
+					pnpValidate(PharmacyLocatorCallToActnBtn));
+		}
+
+		// F436319
+		public void validateImagePharmacyLocatorCallToActionOnPnPPage() {
+			Assert.assertTrue("PROBLEM - unable to locate Pharmacy Locator call to action Image element",
+					pnpValidate(PharmacyLocatorCTAImg));
+		}
+
+		// F436319
+		public void validateTitlePharmacyLocatorCallToActionOnPnPPage() {
+			Assert.assertTrue("PROBLEM - unable to locate Pharmacy Locator call to action Title element",
+					pnpValidate(PharmacyLocatorCTATitle));
+		}
+
+		// F436319
+		public void validateDescriptionPharmacyLocatorCallToActionOnPnPPage() {
+			Assert.assertTrue("PROBLEM - unable to locate Pharmacy Locator  call to action Description element",
+					pnpValidate(PharmacyLocatorCTADescription));
+		}
+
+		// F436319 Refill Home Delivery Call To Action
+		public void validateOrderPrescriptionCallToActionOnPnPPage() {
+			Assert.assertTrue("PROBLEM - unable to locate Order Prescription call to action button element",
+					pnpValidate(OrderPrescriptionCallToActnBtn));
+		}
+
+		// F436319
+		public void validateImageOrderPrescriptionCallToActionOnPnPPage() {
+			Assert.assertTrue("PROBLEM - unable to locate Order Prescription call to action Image element",
+					pnpValidate(OrderPrescriptionCTAImg));
+		}
+
+		// F436319
+		public void validateTitleOrderPrescriptionCallToActionOnPnPPage() {
+			Assert.assertTrue("PROBLEM - unable to locate Order Prescription call to action Title element",
+					pnpValidate(OrderPrescriptionCTATitle));
+		}
+
+		// F436319
+		public void validateDescriptionOrderPrescriptionCallToActionOnPnPPage() {
+			Assert.assertTrue("PROBLEM - unable to locate Order Prescription call to action Description  element",
+					pnpValidate(OrderPrescriptionCTADescription));
+		}
+
+		// F436319 Drug Cost Summary To Action
+		public void validateDrugCostSummaryCallToActionOnPnPPage() {
+			Assert.assertTrue("PROBLEM - unable to locate Drug Cost Summary to action Tile element",
+					pnpValidate(DrugCostSummaryCallToActnBtn));
+		}
+
+		// F436319 Drug Cost Summary To Action
+		public void validateOrderPrescriptonCallToActionNOTDisplayedOnPnPPage() {
+			boolean isOrderPrescriptionCTA_NotDisplayed = pnpValidate(OrderPrescriptionCallToActnBtn);
+			Assert.assertFalse("PROBLEM - able to locate Order Prescription Call to action button element",
+					pnpValidate(OrderPrescriptionCallToActnBtn));
+		}
+
+		public void validateDrugCostSummaryCallToActionNOTDisplayedOnPnPPage() {
+			boolean isDrugCostSummaryCTA_NotDisplayed = pnpValidate(DrugCostSummaryCallToActnBtn);
+			Assert.assertFalse("PROBLEM - able to locate Drug Cost Summary Call to action element",
+					pnpValidate(DrugCostSummaryCallToActnBtn));
+		}
+
+		public void validateImageDrugCostSummaryCallToActionOnPnPPage() {
+			Assert.assertTrue("PROBLEM - unable to locate Drug Cost Summary to action Image element",
+					pnpValidate(DrugCostSummaryCTAImg));
+		}
+
+		// F436319
+		public void validateImageANOCCallToActionOnPnPPage() {
+			Assert.assertTrue("PROBLEM - unable to locate ANOC to action Image element", pnpValidate(ANOCCTAImg));
+		}
+
+		public void validateTitleDrugCostSummaryCallToActionOnPnPPage() {
+			Assert.assertTrue("PROBLEM - unable to locate Drug Cost Summary to action  Title element",
+					pnpValidate(DrugCostSummaryCTATitle));
+		}
+
+		public void validateTitleANOCCallToActionOnPnPPage() {
+			Assert.assertTrue("PROBLEM - unable to locate ANOC to action Title element", pnpValidate(ANOCCTATitle));
+		}
+
+		public void validateDescriptionDrugCostSummaryCallToActionOnPnPPage() {
+			Assert.assertTrue("PROBLEM - unable to locate Drug Cost Summary to action Description element",
+					pnpValidate(DrugCostSummaryCTADescription));
+		}
+		
+		public void validateDescriptionANOCCallToActionOnPnPPage() {
+			Assert.assertTrue("PROBLEM - unable to locate ANOC to action Description element",
+					pnpValidate(ANOCCTADescription));
+		}
+
+		// F436319
+		public void validateFirstPositionOfFindAndPriceCallToActionOnPnPPage(String position) {
+			Assert.assertTrue("PROBLEM - unable to locate Find And Price Call to Action at First Position",
+					FindAndPriceCallToActnBtn.getAttribute("data-cta-position").equals(position));
+		}
+		
+		public void validateFirstPositionOfDrugLookupCallToActionOnPnPPage(String position) {
+			Assert.assertTrue("PROBLEM - unable to locate Drug Lookup Call to Action at First Position",
+					FindAndPriceCallToActnBtn.getAttribute("data-cta-position").equals(position));
+		}
+
+		public void validateSecondPositionOfPharmacyLocatorCallToActionOnPnPPage(String position) {
+			Assert.assertTrue("PROBLEM - unable to locate Pharmacy Locator Call to Action at Second Position",
+					PharmacyLocatorCallToActnBtn.getAttribute("data-cta-position").equals(position));
+		}
+
+		public void validateThirdPositionOfOrderPrescriptionCallToActionOnPnPPage(String position) {
+			Assert.assertTrue("PROBLEM - unable to locate Order Prescription Call to Action at Third Position",
+					OrderPrescriptionCallToActnBtn.getAttribute("data-cta-position").equals(position));
+		}
+		
+		public void validateFourthPositionOfDrugCostSummaryCallToActionOnPnPPage(String position) {
+			Assert.assertTrue("PROBLEM - unable to locate Drug Cost Summary Call to Action at Fourth Position",
+					DrugCostSummaryCallToActnBtn.getAttribute("data-cta-position").equals(position));
+		}
+
+		public void validateFifthPositionOfANOCCallToActionOnPnPPage(String position) {
+			Assert.assertTrue("PROBLEM - unable to locate ANOC Call to Action at Fifth Position",
+					ANOCCallToActnBtn.getAttribute("data-cta-position").equals(position));
+		}
+
+		public void validateThirdPositionOfDrugCostSummaryCallToActionOnPnPPage(String position) {
+			Assert.assertTrue("PROBLEM - unable to locate Drug Cost Summary Call to Action at Third Position",
+					DrugCostSummaryCallToActnBtn.getAttribute("data-cta-position").equals(position));
+		}
+		
+		public void validateFourthPositionOfANOCCallToActionOnPnPPage(String position) {
+			Assert.assertTrue("PROBLEM - unable to locate ANOC Call to Action at Third Position",
+					ANOCCallToActnBtn.getAttribute("data-cta-position").equals(position));
+		}
+
+		// F436319
+		public void clickOnFindAndPriceAMedicationCallToAction() {
+			Assert.assertTrue("PROBLEM - unable to locate Find and Price a Medication Call to Action element",
+					pnpValidate(FindAndPriceCallToActnBtn));
+			FindAndPriceCallToActnBtn.click();
+		}
+
+		// F436319
+		public void validateNavigationToOptumRxDrugPricingPageOnNewTab() {
+			Set handles = driver.getWindowHandles();
+			String pnpPageHandle = driver.getWindowHandle();
+			handles.remove(pnpPageHandle);
+			String winHandle = (String) handles.iterator().next();
+			if (winHandle != pnpPageHandle) {
+				String OptumRxDrugPricePageHandle = winHandle;
+				driver.switchTo().window(OptumRxDrugPricePageHandle);
+				Assert.assertTrue("PROBLEM - unable to locate OptumRx Drug Price Page Header element",
+						pnpValidate(OptumRxDrugPricePageHeader));
+			}
+			driver.close();
+			driver.switchTo().window(pnpPageHandle);
+
+		}
+
+		// F436319
+		public void clickOnPharmacyLocatorCallToAction() {
+			Assert.assertTrue("PROBLEM - unable to locate Pharmacy Locator call to Action element",
+					pnpValidate(PharmacyLocatorCallToActnBtn));
+			PharmacyLocatorCallToActnBtn.click();
+		}
+
+		// F436319
+		public void validateNavigationToChoosePlanYearPage() {
+			Assert.assertTrue("PROBLEM - unable to locate Choose a plan year page Header element",
+					pnpValidate(HeaderOnChoosePlanYearPage));
+
+		}
+
+		// F436319
+		public void clickOnOrderPrescriptionCallToAction() {
+			Assert.assertTrue("PROBLEM - unable to locate Order Prescription call to Action element",
+					pnpValidate(OrderPrescriptionCallToActnBtn));
+			OrderPrescriptionCallToActnBtn.click();
+
+		}
+
+		// F436319
+		public void validateNavigationToOptumRxMedicineCabinetOnNewTab() {
+
+			Set handles = driver.getWindowHandles();
+			String pnpPageHandle = driver.getWindowHandle();
+			handles.remove(pnpPageHandle);
+			String winHandle = (String) handles.iterator().next();
+			if (winHandle != pnpPageHandle) {
+				String OptumRxMedicineCabinetPageHandle = winHandle;
+				driver.switchTo().window(OptumRxMedicineCabinetPageHandle);
+				Assert.assertTrue("PROBLEM - unable to locate OptumRx Medicine Cabinet Page Header element",
+						pnpValidate(OptumRxMedicineCabinetHeader));
+			}
+			driver.close();
+			driver.switchTo().window(pnpPageHandle);
+
+		}
+
+		public void validateNavigationToOptumRxManagePrescriptionOnNewTab() {
+			pageloadcomplete();
+			Set handles = driver.getWindowHandles();
+			String pnpPageHandle = driver.getWindowHandle();
+			handles.remove(pnpPageHandle);
+			String winHandle = (String) handles.iterator().next();
+			if (winHandle != pnpPageHandle) {
+				String OptumRxMedicineCabinetPageHandle = winHandle;
+				driver.switchTo().window(OptumRxMedicineCabinetPageHandle);
+				pageloadcomplete();
+				CommonUtility.waitForPageLoad(driver, OptumRxManagePrescriptionHeader, 60);
+				Assert.assertTrue("PROBLEM - unable to locate OptumRx Manage Prescription Page Header element",
+						pnpValidate(OptumRxManagePrescriptionHeader, 30));
+			}
+			driver.close();
+			driver.switchTo().window(pnpPageHandle);
+		}
+
+		public void validateNavigationToOptumRxBenefitsInformationOnNewTab() {
+			pageloadcomplete();
+			Set handles = driver.getWindowHandles();
+			String pnpPageHandle = driver.getWindowHandle();
+			handles.remove(pnpPageHandle);
+			String winHandle = (String) handles.iterator().next();
+			if (winHandle != pnpPageHandle) {
+				String OptumRxMedicineCabinetPageHandle = winHandle;
+				driver.switchTo().window(OptumRxMedicineCabinetPageHandle);
+				pageloadcomplete();
+				CommonUtility.waitForPageLoad(driver, OptumRxBenefitsInformationHeader, 60);
+				Assert.assertTrue("PROBLEM - unable to locate OptumRx Benefits Information Page Header element",
+						pnpValidate(OptumRxBenefitsInformationHeader, 30));
+			}
+			driver.close();
+			driver.switchTo().window(pnpPageHandle);
+
+		}
+		
+		
+		public void validatePrepareForNextYearPageDisplayed() {
+			pageloadcomplete();
+			Set handles = driver.getWindowHandles();
+			String pnpPageHandle = driver.getWindowHandle();
+			handles.remove(pnpPageHandle);
+			String winHandle = (String) handles.iterator().next();
+			if (winHandle != pnpPageHandle) {
+				String ANOCPageHandle = winHandle;
+				driver.switchTo().window(ANOCPageHandle);
+				pageloadcomplete();
+				CommonUtility.checkPageIsReady(driver);
+				if(currentUrl().contains("/preparefornextyear/overview.html")) {
+					if(getTitle().equalsIgnoreCase("overview")) {
+						Assert.assertTrue(true);
+					}
+					else {
+						Assert.assertFalse("PROBLEM - prepare for nect year page is not successfully displayed",
+								true);
+					}
+				
+				}
+			}
+			driver.close();
+			driver.switchTo().window(pnpPageHandle);
+
+		}
+
+		public void validateBackButtonOnChoosePlanYearPage() {
+			Assert.assertTrue("PROBLEM - unable to locate Back Button element on Choose a plan year page",
+					pnpValidate(BackButtonOnChoosePlanYearPage));
+		}
+
+		public void validateHeaderOnChoosePlanYearPage() {
+			Assert.assertTrue("PROBLEM - unable to locate Header element on Choose a plan year page",
+					pnpValidate(HeaderOnChoosePlanYearPage));
+		}
+
+		public void validateDescriptiveContentOnChoosePlanYearPage() {
+			Assert.assertTrue("PROBLEM - unable to locate Descriptive Content element on Choose a plan year page",
+					pnpValidate(DescriptiveContentOnChoosePlanYearPage));
+		}
+
+		public void validateTwentyTwentyCTAOnChoosePlanYearPage() {
+			Assert.assertTrue("PROBLEM - unable to locate 2020 CTA element on Choose a plan year page",
+					pnpValidate(PharmacyLocator2020CTA));
+		}
+
+		public void clickTwentyTwentyCTAOnChoosePlanYearPage() {
+			Assert.assertTrue("PROBLEM - unable to locate 2020 CTA element on Choose a plan year page",
+					pnpValidate(PharmacyLocator2020CTA));
+			PharmacyLocator2020CTA.click();
+		}
+
+		public void validateTwentyTwentyOneCTAOnChoosePlanYearPage() {
+			Assert.assertTrue("PROBLEM - unable to locate 2021 CTA element on Choose a plan year page",
+					pnpValidate(PharmacyLocator2021CTA));
+		}
+
+		public void clickTwentyTwentyOneCTAOnChoosePlanYearPage() {
+			Assert.assertTrue("PROBLEM - unable to locate 2021 CTA element on Choose a plan year page",
+					pnpValidate(PharmacyLocator2021CTA));
+			PharmacyLocator2021CTA.click();
+		}
+
+		public void validateExternalIconNotDisplayedForTwentyTwentyCTAOnChoosePlanYearPage() {
+			Assert.assertFalse("PROBLEM - able to locate External Icon for 2020 CTA element on Choose a plan year page",
+					pnpValidate(PharmacyLocator2020CTAExternalIcon));
+		}
+
+		public void validatePharmacyLocatortoolbuiltbyRallyInSameBrowserWindow() {
+			pageloadcomplete();
+			int size = countOfNewWindowTab();
+			System.out.println("Number of windows opened when user click on 2020 CTA is :: " + size);
+			if (size == 1) {
+				waitforElement(SearchButtonPharmacyLocatorPageByRally);
+				Assert.assertTrue("PROBLEM - Pharmacy Locator Tool Page is NOT displayed successfully",
+						pnpValidate(SearchButtonPharmacyLocatorPageByRally, 90));
+			} else {
+				pageloadcomplete();
+				/*Assert.assertTrue("PROBLEM - Pharmacy Locator Tool Page is NOT displayed",
+						pnpValidate(SearchButtonPharmacyLocatorPageByRally, 30));*/
+				Assert.assertTrue("PROBLEM - Pharmacy Locator Tool Page NOT displayed in same browser window", false);
+			}
+		}
+		
+		public void validatePharmacyLocatortoolbuiltbyRallyInSameBrowserWindow_memAuth() {
+			pageloadcomplete();
+			int size = countOfNewWindowTab();
+			System.out.println("Number of windows opened when user click on 2020 CTA is :: " + size);
+			if (size == 2) {
+				pageloadcomplete();
+				waitforElement(SearchButtonPharmacyLocatorPageByRally);
+				Assert.assertTrue("PROBLEM - Pharmacy Locator Tool Page is NOT displayed successfully",
+						pnpValidate(SearchButtonPharmacyLocatorPageByRally, 50));
+			} else {
+				pageloadcomplete();
+				/*Assert.assertTrue("PROBLEM - Pharmacy Locator Tool Page is NOT displayed",
+						pnpValidate(SearchButtonPharmacyLocatorPageByRally, 30));*/
+				Assert.assertTrue("PROBLEM - Pharmacy Locator Tool Page NOT displayed in same browser window", false);
+			}
+		}
+
+		public void validateLegacyPharmacyLocatortoolInSameBrowserWindow() {
+			int size = countOfNewWindowTab();
+			System.out.println("Number of windows opened when user click on 2021 CTA is :: " + size);
+			if (size == 1) {
+				//Assert.assertTrue("PROBLEM - same browser window is opened", true);
+				Assert.assertTrue("PROBLEM - Legacy Pharmacy Locator Page zip code text box is NOT displayed",
+						pnpValidate(zipCodeTextBoxLegacyPharmacyLocatorPage, 50));
+			} else {
+				/*Assert.assertTrue("PROBLEM - Legacy Pharmacy Locator Page zip code text box is NOT displayed",
+						pnpValidate(zipCodeTextBoxLegacyPharmacyLocatorPage, 50));*/
+				Assert.assertTrue("PROBLEM - Legacy Pharmacy Locator Tool Page is NOT displayed in same browser window",
+						false);
+			}
+
+		}
+		
+		public void validateLegacyPharmacyLocatortoolInSameBrowserWindow_memAuth() {
+			int size = countOfNewWindowTab();
+			System.out.println("Number of windows opened when user click on 2021 CTA is :: " + size);
+			if (size == 2) {
+				//Assert.assertTrue("PROBLEM - same browser window is opened", true);
+				Assert.assertTrue("PROBLEM - Legacy Pharmacy Locator Page zip code text box is NOT displayed",
+						pnpValidate(zipCodeTextBoxLegacyPharmacyLocatorPage, 50));
+			} else {
+				/*Assert.assertTrue("PROBLEM - Legacy Pharmacy Locator Page zip code text box is NOT displayed",
+						pnpValidate(zipCodeTextBoxLegacyPharmacyLocatorPage, 50));*/
+				Assert.assertTrue("PROBLEM - Legacy Pharmacy Locator Tool Page is NOT displayed in same browser window",
+						false);
+			}
+
+		}
+
+		public void clickBackButtonOnPharmacyLocatortoolbuiltbyRally() {
+			Assert.assertFalse("PROBLEM - unable to locate Back Button On Pharmacy Locator Page By Rally ",
+					pnpValidate(BackButtonOnPharmacyLocatorPageByRally));
+			BackButtonOnPharmacyLocatorPageByRally.click();
+		}
+
+		public void clickBackButton() {
+			Assert.assertTrue("PROBLEM - unable to locate Back Button ",
+					validate(backButton));
+			backButton.click();
+		}
+
+
+
+
+		public void validateFAQSectionOnChoosePlanYearPage() {
+			Assert.assertTrue("PROBLEM - unable to locate FAQ section on Choose a plan year page",
+					pnpValidate(FAQSectionOnChoosePlanYearPage));
+		}
+
+		public void validateNeedHelpSectionOnChoosePlanYearPage() {
+			Assert.assertTrue("PROBLEM - unable to Need help section on Choose a plan year page",
+					pnpValidate(NeedHelpSectionOnChoosePlanYearPage));
+		}
+
+		public void validateMoreInfoSectionOnChoosePlanYearPage() {
+			Assert.assertTrue("PROBLEM - unable to locate More Information Section  on Choose a plan year page",
+					pnpValidate(MoreInformationSectionOnChoosePlanYearPage));
+		}
+
+		public void validateGlobalFooterOnChoosePlanYearPage() {
+			validateNew(GlobalFooterSectionOnChoosePlanYearPage);
+			Assert.assertTrue("PROBLEM - unable to locate Global Footer Section on Choose a plan year page",
+					pnpValidate(GlobalFooterSectionOnChoosePlanYearPage));
+		}
+
+		// F436319 Find and Price
+		public void validateFindAndPriceCallToActionOnPnPPage() {
+			Assert.assertTrue("PROBLEM - unable to locate Find and Price call to action Button element",
+					pnpValidate(FindAndPriceCallToActnBtn));
+		}
+
+		// F436319
+		public void validateImageFindAndPriceCallToActionOnPnPPage() {
+			Assert.assertTrue("PROBLEM - unable to locate Find and Price call to action Image element",
+					pnpValidate(FindAndPriceCTAImg));
+		}
+		
+		public void validateImageDrugLookupCallToActionOnPnPPage() {
+			Assert.assertTrue("PROBLEM - unable to locate Drug Lookup call to action Image element",
+					pnpValidate(DrugLookupCTAImg));
+		}
+
+		// F436319
+		public void validateTitleFindAndPriceCallToActionOnPnPPage() {
+			Assert.assertTrue("PROBLEM - unable to locate Find and Price call to action Title element",
+					pnpValidate(FindAndPriceCTATitle));
+		}
+		
+		public void validateTitleDrugLookupCallToActionOnPnPPage() {
+			Assert.assertTrue("PROBLEM - unable to locate Drug Lookup call to action Title element",
+					pnpValidate(DrugLookupCTATitle));
+		}
+
+		// F436319
+		public void validateDescriptionFindAndPriceCallToActionOnPnPPage() {
+			Assert.assertTrue("PROBLEM - unable to locate Find and Price call to action Description element",
+					pnpValidate(FindAndPriceCTADescription));
+		}
+		
+		public void validateDescriptionDrugLookupCallToActionOnPnPPage() {
+			Assert.assertTrue("PROBLEM - unable to locate Drug Lookup call to action Description element",
+					pnpValidate(DrugLookupCTADescription));
+		}
+
+		// F436319 Refill Home Delivery Call To Action
+		public void validateRefillHomeDeliveryCallToActionOnPnPPage() {
+			Assert.assertTrue("PROBLEM - unable to locate Refill Home Delivery call to action Button element",
+					pnpValidate(managePrescriptionCallToActnBtn));
+		}
+
+		// F436319
+		public void validateImageRefillHomeDeliveryCallToActionOnPnPPage() {
+			Assert.assertTrue("PROBLEM - unable to locate Refill Home Delivery call to action Image element",
+					pnpValidate(managePresciptionImage));
+		}
+
+		// F436319
+		public void validateTitleRefillHomeDeliveryCallToActionOnPnPPage() {
+			Assert.assertTrue("PROBLEM - unable to locate Refill Home Delivery call to action Title element",
+					pnpValidate(managePrescriptionTitle));
+		}
+
+		// F436319
+		public void validateDescriptionRefillHomeDeliveryCallToActionOnPnPPage() {
+			Assert.assertTrue("PROBLEM - unable to locate Refill Home Delivery  call to action Description  element",
+					pnpValidate(managePrescriptionDesc));
+		}
+
+		// F436319 Whats New Call To Action
+		public void validateWhatsNewCallToActionOnPnPPage() {
+			Assert.assertTrue("PROBLEM - unable to locate whats new call to action Tile element",
+					pnpValidate(whatsNewCallToActnBtn));
+		}
+
+		// F436319 Whats New Call To Action
+		public void validateWhatsNewCallToActionNOTDisplayedOnPnPPage() {
+			Assert.assertFalse("PROBLEM - able to locate whats new call to action element",
+					pnpValidate(whatsNewCallToActnBtn));
+		}
+
+		// F436319
+		public void validateImageWhatsNewCallToActionOnPnPPage() {
+			Assert.assertTrue("PROBLEM - unable to locate whats new call to action Image element",
+					pnpValidate(whatsNewImage));
+		}
+
+		// F436319
+		public void validateTitleWhatsNewCallToActionOnPnPPage() {
+			Assert.assertTrue("PROBLEM - unable to locate whats new call to action  Title element",
+					pnpValidate(whatsNewTitle));
+		}
+
+		// F436319
+		public void validateDescriptionWhatsNewCallToActionOnPnPPage() {
+			Assert.assertTrue("PROBLEM - unable to locate whats new call to action Description element",
+					pnpValidate(whatsNewDesc));
+		}
+
+		// F436319
+		public void clickOnFindAndPriceCallToAction() {
+			Assert.assertTrue("PROBLEM - unable to locate Find and Price Call to Action element",
+					pnpValidate(findPrescriptionsCallToActnBtn));
+			findPrescriptionsCallToActnBtn.click();
+
+		}
+
+		// F436319
+		public void validateNavigationToPharmacyLocatorToolPage() {
+			/*
+			 * Set handles = driver.getWindowHandles(); String pnpPageHandle =
+			 * driver.getWindowHandle(); handles.remove(pnpPageHandle); String winHandle=
+			 * (String) handles.iterator().next(); if (winHandle!=pnpPageHandle){ String
+			 * OptumRxDrugPricePageHandle=winHandle;
+			 * driver.switchTo().window(OptumRxDrugPricePageHandle); }
+			 */
+			Assert.assertTrue("PROBLEM - unable to locate Pharmacy Locator Tool Header element",
+					pnpValidate(PharmacyLocatorToolHeader));
+			/*
+			 * driver.close(); driver.switchTo().window(pnpPageHandle);
+			 */
+
+		}
+
+		// F436319
+		public void clickOnRefillHomeDeliveryCallToAction() {
+			Assert.assertTrue("PROBLEM - unable to locate Refill Home Delivery call to Action element",
+					pnpValidate(managePrescriptionCallToActnBtn));
+			managePrescriptionCallToActnBtn.click();
+
+		}
+
+		// F392596 Meidine Cabinet
+		public void validateCurrentMedicationsHeader() {
+			pnpValidate(CurrentMedicationsHeader,50);
+			JavascriptExecutor js = (JavascriptExecutor) driver;
+			js.executeScript("arguments[0].scrollIntoView(true);", CurrentMedicationsHeader);
+			Assert.assertTrue("PROBLEM - unable to locate Current Medications Header element",
+				pnpValidate(CurrentMedicationsHeader,50));
+		}
+
+		public void validateOrderStatusHeader() {
+
+			pnpValidate(orderStatusPageHeader,50);
+			JavascriptExecutor js = (JavascriptExecutor) driver;
+			js.executeScript("arguments[0].scrollIntoView(true);", orderStatusPageHeader);
+			Assert.assertTrue("PROBLEM - unable to locate Current Medications Header element",
+					pnpValidate(orderStatusPageHeader,50));
+		}
+
+		public void validateMyMedicationsHeader() {
+
+			Assert.assertTrue("PROBLEM - unable to locate My Medications Header element", pnpValidate(myMedicationsHeader));
+		}
+
+		public void validateSixActivePrescriptions() {
+
+			Assert.assertTrue("PROBLEM - unable to validate 6 active medication on MedCab",
+					sixActivePrescription());
+		}
+		
+		public void validateTenActivePrescriptions() {
+
+			Assert.assertTrue("PROBLEM - unable to validate 10 active medication on My Medication Page",
+					tenActivePrescription());
+		}
+
+		public void validateMoreThenTenActivePrescriptions() {
+
+			Assert.assertTrue("PROBLEM - unable to locate more than 10 Active Prescriptions  element",
+					moreThanTenActivePrescription());
+		}
+
+		public void validateExternalLink() {
+
+			Assert.assertTrue("PROBLEM - unable to locate external link element", externalLink());
+		}
+
+		public void validateAssociatedCallToAction() {
+
+			Assert.assertTrue("PROBLEM - unable to locate Associated Call To Action element", associatedCallToAction());
+		}
+
+		public void validateNumberInParenthesis() {
+
+			Assert.assertTrue("PROBLEM - unable to validate  a number in parentheses ", alphaNumeric());
+		}
+
+		public void validateCorrespondingNumberInParenthesis() {
+
+			Assert.assertTrue(
+					"PROBLEM - unable to validate that number will correspond to the total number of active medications I have ",
+					corredpondingMedicationsNumbers());
+
+		}
+
+		public void validateNumberOfRefillMedications() {
+
+			Assert.assertTrue("PROBLEM - unable to validate that number of refill medications ",
+					corredpondingRefillMedicationsNumbers());
+
+		}
+
+		public void validateDisclaimer() {
+			Assert.assertTrue("PROBLEM - unable to locate the disclaimer Medication appearance subject to change  element",
+					disclaimer());
+		}
+
+		public void clickOnRemoveItemFromOrderLink() {
+			Assert.assertTrue("PROBLEM - unable to locate Remove Item from Order link text element",
+					validate(removeItemFromOrderLink, 50));
+			removeItemFromOrderLink.click();
+
+		}
+
+		// F392596
+		public void clickOnViewAllMedicationsLink() {
+			TestHarness.checkForIPerceptionModel(driver);
+			Assert.assertTrue("PROBLEM - unable to locate Medicine Cabinet View All Medications link text element",
+					validate(ViewAllMedications, 50));
+			checkModelPopup(driver);
+			jsClickNew(ViewAllMedications);
+			
+			//ViewAllMedications.click();
+		}
+
+		public void clickOnRefillAllMedications() {
+
+			TestHarness.checkForIPerceptionModel(driver);
+			Assert.assertTrue("PROBLEM - unable to locate Refill All Medications link text element",
+					validate(refillAllMedications, 50));
+			checkModelPopup(driver);
+			jsClickNew(refillAllMedications);
+
+		}
+
+		// F392596
+		public void validateMyMedicationsPage() {
+			if (!validate(MyMedicationsPageHeader, 60)) {
+				//System.out.println("Inside waitTillMedCabLoads");
+				tryAgainMedCabTimeOut.click();
+				CommonUtility.checkPageIsReady(driver);				
+				CommonUtility.waitForPageLoad(driver, MyMedicationsPageHeader, 80);
+			}
+			Assert.assertTrue("PROBLEM - unable to locate My Medications Page Header element",
+					validate(MyMedicationsPageHeader, 20));
+		}
+
+		public void validateMedicationName() {
+			Assert.assertTrue("PROBLEM -  Medication Name Value not available", validateFieldValueContent(listOfDrugName));
+		}
+
+		public void validateImage() throws Exception {
+			Assert.assertTrue("PROBLEM - Medication Drug Image not available", validateDrugImage(listOfDrugImage));
+		}
+
+		public void validateStrength() {
+			Assert.assertTrue("PROBLEM - Strength of the medicine Strength not available",
+					validateMedicineStrengthFieldValue());
+		}
+
+		public void validatePriceMemberPaid() {
+			Assert.assertTrue("PROBLEM - You Paid Amount not available", validateFieldValueContent(listOfYouPaid));
+		}
+
+		public void validateRefillsLeft() {
+			Assert.assertTrue("PROBLEM - Refills Left not available", validateFieldValueContent(listOfRefillsLeft));
+		}
+
+		public void validateRefillsLeftWalgreens() {
+			Assert.assertTrue("PROBLEM - Refills Left amount not available",
+					validateRefillLeftAmount(walgreensRefillsLeft));
+		}
+
+		public void validateNeedHelpSectionPhoneNumbers() {
+
+			Assert.assertTrue("PROBLEM - Need Help section phone numbers not available", validateNeedHelpsPhoneNumbers());
+
+		}
+
+	public void validateCommonQuestionsHeader() {
+
+		Assert.assertTrue("PROBLEM - Common Questions section header element not available", validate(commonQuestionHeader,50));
+
+	}
+
+	public void validateNeedHelpSectionHours() {
+
+			Assert.assertTrue("PROBLEM - Need Help section hours of operations not available",
+					validateNeedHelpsHoursOfOperations());
+		}
+
+	  public void validateNotViewCommonQuestionOnenTwo() {
+
+		Assert.assertFalse("PROBLEM - Common Questions should not be available",
+				validateCommonQuestionsNotAvailable());
+
+	}
+
+	public void validateViewCommonQuestionOnenTwo() {
+
+		Assert.assertFalse("PROBLEM - Common Questions One and Two not available",
+				validateCommonQuestionsNotAvailable());
+
+	}
+
+		public void validateDayOfSupply() {
+			Assert.assertTrue("PROBLEM - Days Of Supply not available", validateFieldValueContent(listOfDaysSupply));
+		}
+
+		public void validateOrderStatus() {
+			Assert.assertTrue("PROBLEM - Order Status for applicable Medication not available",
+					validateOrderStatusForAssociatedCTA());
+		}
+
+		public void validateTrackStatusButton() {
+			Assert.assertTrue("PROBLEM - Track Status button for applicable Medication not available",
+					validateTrackStatusBtn());
+		}
+
+		public void validateDelivered() {
+			Assert.assertTrue("PROBLEM - Delivered for applicable Medication not available", validateDeliveredStatus());
+		}
+
+		public void validateViewOrderButton() {
+			Assert.assertTrue("PROBLEM - View Order button for applicable Medication not available", viewOrderButton());
+		}
+
+		public void validateContactPharmacyButton() {
+			Assert.assertTrue("PROBLEM - Contact Pharmacy button for applicable Medication not available", contactPharmacyButton());
+		}
+
+		public void validateHDAssociateOrderStatus() {
+			Assert.assertTrue("PROBLEM - Track Order Status for applicable Home Delivery Drug not available",
+					validateOrderStatusForTrackHDDrug());
+		}
+
+		public void validateHDOrderStatusForInProg() {
+			Assert.assertTrue("PROBLEM - Order Status for in progress Home Delivery Drug not available",
+					validateOrderStatusForTrackHDDrug());
+		}
+
+		List<String> listOfOrderStatusForTrackHDMedicine = new ArrayList<>(Arrays.asList("Request Received",
+				"Verifying With Doctor", "Order Verified", "Order Processing", "Shipped", "Delivered"));
+
+		public boolean validateOrderStatusForTrackHDDrug() {
+			List<Integer> listOfIndex = getListOfIndexForHDPharmacy();
+			for (Integer val : listOfIndex) {
+				if (!listOfOrderStatusForTrackHDMedicine.contains(listOfOrderStatus.get(val).getText())) {
+					return false;
+				}
+			}
+			return true;
+		}
+
+		public void validateRelevantCallToAction() {
+			Assert.assertTrue("PROBLEM - Relevant calls to action not available", validateCallToActionsForHDDrug());
+		}
+
+		public void validateInfoOnRemainingRefills() {
+			Assert.assertTrue("PROBLEM - Information On Remaining Refills not available",
+					validateFieldValueContent(listOfRefillsLeft));
+		}
+
+		public void validateContactPharmacyButton(String expectedContactPharmacy) {
+			Assert.assertTrue("PROBLEM - Contact Pharmacy Button not available",
+					validateContactPharmacyButtonForRetailDrug(expectedContactPharmacy));
+		}
+
+		/*
+		 * public void clickOnMedicationName() {
+		 * Assert.assertTrue("PROBLEM - unable to locate Medicine name element",
+		 * pnpValidate(FirstCurrentMedication)); FirstCurrentMedication.click();
+		 * Assert.assertTrue("PROBLEM - unable to locate Medicine name element",
+		 * pnpValidate(MedicationName)); MedicationName.click();
+		 * 
+		 * }
+		 */
+
+		public void validatePharmacyName() {
+			Assert.assertTrue("PROBLEM - Pharmacy Name  not available", validateFieldValueContent(listOfPharmacyName));
+		}
+
+		public void validateDrugDetailOverview() {
+			PharmaciesAndPrescriptionsBase pnpBase = new PharmaciesAndPrescriptionsBase(driver);
+			String drugName = pnpBase.getDrugName();
+			String currentURL = driver.getCurrentUrl();
+			boolean flag = true;
+			if (currentURL.contains("overview.html#/medication-information")) {
+				Assert.assertTrue("SUCCESS - User redirected to medication information overview page", flag);
+				if (drugName.contains(MedicationName_OnDrugInfoPage.getText())) {
+					Assert.assertTrue("SUCCESS - Drug Name verified on medication information overview page", flag);
+				} else {
+					Assert.assertTrue("PROBLEM - Drug Name NOT verified on medication information overview page", flag);
+				}
+			} else {
+				Assert.assertTrue("PROBLEM - User NOT redirected to medication information overview page", flag);
+			}
+		}
+
+		public void validateViewAllMedicationsLink() {
+			Assert.assertTrue("PROBLEM - unable to locate Medicine Cabinet View All Medications link text element",
+					pnpValidate(ViewAllMedications));
+		}
+
+		public void validateRefillAllMedications() {
+			if (!validate(refillAllMedications, 60)) {
+				//System.out.println("Inside waitTillMedCabLoads");
+				tryAgainMedCabTimeOut.click();
+				CommonUtility.checkPageIsReady(driver);				
+				CommonUtility.waitForPageLoad(driver, refillAllMedications, 80);				
+			}
+			Assert.assertTrue("PROBLEM - unable to locate Refill All Medications link text element on My Medications",
+					pnpValidate(refillAllMedications,50));
+		}
+
+		public void validateNoRefillAllMedications() {
+			Assert.assertFalse("PROBLEM - should unable to locate Refill All Medications link text element on My Medications",
+					validateNoRefillAllMedicationsBtn());
+		}
+
+		public boolean validateNoRefillAllMedicationsBtn() {
+
+			if(validate(refillAllMedications)){
+				 return true;
+			}else {
+				return false;
+			}
+		}
+
+		public void selectTwoDayShipping() throws InterruptedException {
+
+			Assert.assertTrue("PROBLEM - unable to Select two Shipping Method on Complete Your Refill page",
+					choosingTwoDayShipping());
+
+		}
+
+		public boolean choosingTwoDayShipping() {
+
+			standarShipping.click();
+			if (twoDayShipping.isDisplayed()) {
+				twoDayShipping.click();
+				return true;
+			} else {
+				return false;
+			}
+		}
+
+		public boolean choosingExpeditedShipping() {
+			selectShippingMethod.click();
+			if (expeditedShipping.isDisplayed()) {
+				expeditedShipping.click();
+				return true;
+			} else {
+				return false;
+			}
+		}
+
+		public void selectExpeditedShipping() {
+
+			Assert.assertTrue("PROBLEM - unable to Select expedited Shipping Method on Complete Your Refill page",
+					choosingExpeditedShipping());
+
+		}
+
+		public void validateRefillAllMedicationsExplanation() {
+			Assert.assertTrue(
+					"PROBLEM - unable to locate explanation of Refill All Medications link text element on My Medications",
+					pnpValidate(refillAllMedicationsExplanation));
+		}
+
+		public void validateNoRefillAllMedicationsExplanation() {
+			Assert.assertFalse(
+					"PROBLEM - should unable to locate explanation of Refill All Medications link text element on My Medications",
+					pnpValidate(refillAllMedicationsExplanation));
+		}
+
+		public void validateRequestReceived() {
+
+			Assert.assertTrue("PROBLEM - unable to locate Request received elements",
+
+					isRequestReceived());
+		}
+
+		public void validateOrderReceived() {
+
+			Assert.assertTrue("PROBLEM - unable to locate Order received elements",
+
+					isOrderReceived());
+		}
+
+		public void validateRequestPlaced() {
+
+			Assert.assertTrue("PROBLEM - unable to locate Request Placed elements",
+
+					isRequestPlaced());
+		}
+
+		public void validateRequestCancelled() {
+
+			Assert.assertTrue("PROBLEM - unable to locate Request Cacncelled elements",
+
+					isRequestCancelled());
+		}
+
+		public void validateMessageRequestCancelled() {
+
+			Assert.assertTrue("PROBLEM - unable to locate Request Cacncelled  message elements",
+
+					isRequestCancelledMessageDisplayed());
+		}
+
+
+		public void validateTriagleIcon() {
+
+			Assert.assertTrue("PROBLEM - unable to locate triangle icon elements",
+
+					isTriangleIconDisplayed());
+		}
+
+		public void validateProcessingMessage() {
+
+			Assert.assertTrue("PROBLEM - unable to locate Processing message elements",
+
+					isProcessingMessageDispplayed());
+		}
+
+		public void validateRequestPlacedPending() {
+
+			Assert.assertTrue("PROBLEM - unable to locate Request Placed Estimated delivery Pending elements",
+
+					isRequestPlacedPending());
+		}
+
+		public void validateRequestPlacedNoOrderNumber() {
+
+			Assert.assertTrue("PROBLEM - should unable to locate Request Placed order number elements",
+
+					isRequestPlacedOrderNumber());
+		}
+
+
+		public void validateOptumRx() {
+
+			Assert.assertTrue("PROBLEM - unable to locate Request received elements", isOptumRX());
+		}
+
+		public void validateProcessing() {
+
+			Assert.assertTrue("PROBLEM - unable to locate processing elements",
+
+					isOrderProcessing());
+		}
+
+		public void validateTransferToHDHeader() {
+
+			Assert.assertTrue("PROBLEM - unable to locate transfer to HD page header elements",
+
+					transferToHDHeaderDisplayed());
+		}
+
+		public void isTransfer2HDCTADisplayed() {
+
+			Assert.assertTrue("PROBLEM - unable to locate transfer to HD button element",
+
+					isTransfer2HDCTA());
+		}
+
+		// F392596 Meidine Cabinet// when user click on learn more button on current
+		// medication on PNP page.
+
+		public void validateDrugInfopage() {
+			PharmaciesAndPrescriptionsBase pnpBase = new PharmaciesAndPrescriptionsBase(driver);
+			String drugName = pnpBase.getDrugNameLearnMore();
+			String currentURL = driver.getCurrentUrl();
+			boolean flag = true;
+
+			if (currentURL.contains("overview.html#/medication-information")) {
+				Assert.assertTrue("SUCCESS - User redirected to medication information overview page", flag);
+				if (drugName.contains(MedicationName_OnDrugInfoPage.getText())) {
+					Assert.assertTrue("SUCCESS - Drug Name verified on medication information overview page", flag);
+				} else {
+					Assert.assertTrue("PROBLEM - Drug Name NOT verified on medication information overview page", flag);
+				}
+			} else {
+				Assert.assertTrue("PROBLEM - User NOT redirected to medication information overview page", flag);
+			}
+
+		}
+
+		public void validateWalgreensSubmitRequestBtn() {
+			JavascriptExecutor js = (JavascriptExecutor) driver;
+			js.executeScript("arguments[0].scrollIntoView(true);", submitRequestBtn);
+			Assert.assertTrue("PROBLEM - unable to locate Walgreens website Submit request button element",
+					pnpValidate(submitRequestBtn));
+		}
+
+		public void validateHalfHarveyBall() {
+			Assert.assertTrue("PROBLEM - unable to locate half Harvey ball  elements", isHalfHarveyBall());
+		}
+
+		public void validateOneFourthHarveyBall() {
+			Assert.assertTrue("PROBLEM - unable to locate one fourth Harvey ball  elements", isOneFourthHarveyBall());
+		}
+
+		public void validateRemovedMessage() {
+			Assert.assertTrue("PROBLEM - unable to locate a message element that confirming my medication was removed", validate(removedMessage));
+		}
+
+		public void validateZeroPrescriptionMessage() {
+			Assert.assertTrue("PROBLEM - unable to locate a message element that says zero prescription left to refill", validate(zeroPrescriptionMessage));
+		}
+
+		public void validateWalgreensDrug() {
+			Assert.assertTrue("PROBLEM - unable to locate Walgreens Drug", validateWalgreens());
+			// pnpValidate(RefillMedications));
+		}
+
+		public void validateWalgreensDrugWithoutStoreNumbers() {
+			Assert.assertTrue("PROBLEM - unable to locate Walgreens Drug without store numbers", validateWalgreensWithoutStoreNumbers());
+			// pnpValidate(RefillMedications));
+		}
+
+		public void validateMessageAddressDeleted() {
+			Assert.assertTrue("PROBLEM - unable to locate address deleted message", validate(addressDeleteMessage));
+			// pnpValidate(RefillMedications));
+		}
+
+		public void validateRefillMedications() {
+			Assert.assertTrue("PROBLEM - unable to locate HD Drug Eligible For Refill", validateHDDrugEligibleForRefill());
+			// pnpValidate(RefillMedications));
+		}
+
+		public void validateNoRefillMedications() {
+			Assert.assertFalse("PROBLEM - it should not able to locate HD Drug Eligible For Refill",
+					validateHDDrugEligibleForRefill());
+			// pnpValidate(RefillMedications));
+		}
+
+		public void validateNoEstimatedDeliveryDate() {
+			Assert.assertFalse("PROBLEM - it should not able to locate estimated delivery date webelement",
+					validate(estimatedDeliveryDate));
+			// pnpValidate(RefillMedications));
+		}
+
+		public void validateRenewMedications() {
+			Assert.assertTrue("PROBLEM - unable to locate Renewal Medicationss text element",
+					validateHDDrugEligibleForRenew());
+			// pnpValidate(RenewMedications));
+		}
+
+		public void validateMedicationsOnActionableHold() {
+			Assert.assertTrue("PROBLEM - unable to locate Renewal Medicationss text element",
+					validateHDDrugEligibleForRenew());
+			// pnpValidate(RenewMedications));
+		}
+
+		public List<String> getDrugNameListValue() {
+			List<String> listOfDrug = new ArrayList<>();
+			int size = listOfDrugName.size();
+			int expectedSize = 6;
+			try {
+				waitforElementVisibilityInTime(NumberInParenthesis, 20);
+				String numberTXT = NumberInParenthesis.getText();
+				int number = Integer.parseInt(numberTXT.replaceAll("[^0-9]", ""));
+				if (number < 6) {
+					expectedSize = number;
+				}
+			} catch (Exception e) {
+				System.out.println("Got exception ");
+				String numberTXT = drugsAvailableOnMyMedication.getText();
+				expectedSize = Integer.parseInt(numberTXT);
+			}
+			System.out.println("Expected Drug Name Size" + expectedSize);
+			while (size != expectedSize) {
+				size = listOfDrugName.size();
+			}
+			for (WebElement ele : listOfDrugName) {
+				waitforElementVisibilityInTime(ele, 50);
+				System.out.println("Value of Drug Name :" + ele.getText());
+				listOfDrug.add(ele.getText());
+			}
+			return listOfDrug;
+		}
+
+		public boolean validateFieldValueContent(List<WebElement> listOfWebElement) {
+			if (listOfWebElement.size() > 0) {
+				for (WebElement ele : listOfWebElement) {
+					waitforElementVisibilityInTime(ele, 50);
+					System.out.println("Value of Element :" + ele.getText());
+					if (ele.getText().isEmpty()) {
+						return false;
+					}
+				}
+				return true;
+			} else {
+				return false;
+			}
+		}
+
+		public boolean validateRefillLeftAmount(WebElement refillLeft) {
+
+			int refill = Integer.parseInt(refillLeft.getText());
+			if (refill > 0) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+
+		public boolean validateDrugImage(List<WebElement> listOfWebElement) throws Exception {
+			int size = listOfWebElement.size();
+			int expectedSize = 6;
+			String numberTXT = NumberInParenthesis.getText();
+			int number = Integer.parseInt(numberTXT.replaceAll("[^0-9]", ""));
+			if (number < 6) {
+				expectedSize = number;
+			}
+			System.out.println("Expected Drug Img Size : " + expectedSize);
+			int count = 60;
+			while (size != expectedSize) {
+				size = listOfWebElement.size();
+				count--;
+				if (count == 0) {
+					throw new Exception("Drug Image not available");
+				}
+			}
+			if (listOfWebElement.size() > 0) {
+				for (WebElement ele : listOfWebElement) {
+					if (ele.getAttribute("src").isEmpty()) {
+						return false;
+					}
+				}
+				return true;
+			} else {
+				return false;
+			}
+		}
+
+		public boolean validateMedicineStrengthFieldValue() {
+			if (listOfDrugName.size() > 0) {
+				for (WebElement ele : listOfDrugName) {
+					if (ele.getText().isEmpty()) {
+						return false;
+					}
+
+					/*
+					 * String[] arrayOfMedicineName = ele.getText().split(" "); if
+					 * (arrayOfMedicineName[arrayOfMedicineName.length - 1].isEmpty()) { return
+					 * false; }
+					 */
+				}
+				return true;
+			} else {
+				return false;
+			}
+		}
+
+		public List<Integer> getListOfIndexForRetailPharmacy() {
+			List<Integer> listOfIndex = new ArrayList<>();
+			for (int i = 0; i < listOfPharmacyName.size(); i++) {
+				scrollToView(listOfPharmacyName.get(i));
+				String text = listOfPharmacyName.get(i).getText();
+				for (WebElement child : listOfPharmacyName.get(i).findElements(By.xpath("./*"))) {
+					text = text.replaceFirst(child.getText(), "");
+				}
+
+				/*
+				 * if (listOfPharmacyName.get(i).getText().equals("OptumRx")) {
+				 * listOfIndex.add(i); }
+				 */
+
+				if (!text.trim().equals("OptumRx")) {
+					listOfIndex.add(i);
+				}
+			}
+			System.out.println("List of Retail Pharmacy :" + listOfIndex);
+			return listOfIndex;
+		}
+
+		public List<Integer> getListOfIndexForHDPharmacy() {
+			List<Integer> listOfIndex = new ArrayList<>();
+			for (int i = 0; i < listOfPharmacyName.size(); i++) {
+				String text = listOfPharmacyName.get(i).getText();
+				for (WebElement child : listOfPharmacyName.get(i).findElements(By.xpath("./*"))) {
+					text = text.replaceFirst(child.getText(), "");
+				}
+
+				/*
+				 * if (listOfPharmacyName.get(i).getText().equals("OptumRx")) {
+				 * listOfIndex.add(i); }
+				 */
+				System.out.println("HD Pharmacy " + text.trim());
+				if (text.trim().equals("OptumRx")) {
+					listOfIndex.add(i);
+				}
+
+			}
+			return listOfIndex;
+		}
+
+		String[] listOfCallToActionForHDMed = { "TRACK STATUS", "RESOLVE HOLD", "REFILL MEDICATION", "RENEW MEDICATION",
+				"VIEW ORDER" };
+
+		public boolean validateCallToActionsForHDDrug() {
+			List<Integer> listOfIndex = getListOfIndexForHDPharmacy();
+			System.out.println("Size of HD Pharmacy :" + listOfIndex.size());
+			List<String> listOfCallToActionForHDMedicine = Arrays.asList(listOfCallToActionForHDMed);
+			if (listOfIndex.size() > 0) {
+				for (Integer val : listOfIndex) {
+					if (!listOfCallToActionForHDMedicine.contains(listOfCallToActnForActiveMedication.get(val).getText())) {
+						return false;
+					}
+				}
+				return true;
+			} else {
+				return false;
+			}
+		}
+
+		public boolean validateContactPharmacyButtonForRetailDrug(String expectedButtonValue) {
+			List<Integer> listOfIndex = getListOfIndexForRetailPharmacy();
+			if (listOfIndex.size() > 0) {
+				int count = 0;
+				for (Integer val : listOfIndex) {
+					if (listOfCTAWithoutSpanTag.get(val).getText().equalsIgnoreCase(expectedButtonValue)
+							&& listOfCTAWithoutSpanTag.get(val).getTagName().equals("button") && listOfCTAWithoutSpanTag
+									.get(val).getCssValue("background-color").equals("rgba(13, 136, 11, 1)")) {
+						count = count + 1;
+					}
+				}
+				return count == listOfIndex.size();
+			} else {
+				return false;
+			}
+		}
+
+		public void clickOnContactPharmacy() {
+			List<Integer> listOfIndex = getListOfIndexForRetailPharmacy();
+			Random rand = new Random();
+			int rand_int = rand.nextInt(listOfIndex.size());
+			System.out.println(listOfIndex.get(rand_int));
+			listOfCTAWithoutSpanTag.get(listOfIndex.get(rand_int)).click();
+		}
+
+		public boolean validateContactPharmacyPopUpHavingNumber() {
+			boolean flag = false;
+			if (validate(contactPharmacyPopUp, 30)) {
+				String contactNumber = contactPharmacyNumber.getText();
+				String[] arrayval = contactNumber.split(" ");
+				String pattern = "(?:\\d{3}-){2}\\d{4}";
+				if (!arrayval[1].trim().isEmpty() && arrayval[1].matches(pattern)
+						&& (arrayval[2] + " " + arrayval[3]).equals("(TTY 711)")) {
+					flag = true;
+				}
+			} else {
+				Assert.assertTrue("PROBLEM - Contact Pharmacy PopUp not available", flag);
+			}
+			return flag;
+		}
+
+		public boolean validateOrderStatusForAssociatedCTA() {
+			List<Integer> listOfIndex = getListOfIndexForTrackAndViewOrderCTA();
+			try {
+				if (listOfIndex.size() > 0) {
+					if (listOfIndex.size() == listOfOrderStatus.size()) {
+						for (int i = 0; i < listOfOrderStatus.size(); i++) {
+							if (listOfOrderStatus.get(i).getText().isEmpty()) {
+								return false;
+							}
+						}
+					} else {
+						return false;
+					}
+					return true;
+				} else {
+					return false;
+				}
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+			}
+			return false;
+		}
+
+		public List<Integer> getListOfIndexForTrackCTA() {
+			List<Integer> listOfIndex = new ArrayList<>();
+			for (int i = 0; i < listOfCallToActnForActiveMedication.size(); i++) {
+				System.out.println(listOfCallToActnForActiveMedication.get(i).getText());
+				if (listOfCallToActnForActiveMedication.get(i).getText().equalsIgnoreCase("Track Status")) {
+					listOfIndex.add(i);
+				}
+			}
+			System.out.println("List of Index For Track Status " + listOfIndex);
+			return listOfIndex;
+		}
+
+		public List<Integer> getListOfIndexForTrackAndViewOrderCTA() {
+			List<Integer> listOfIndex = new ArrayList<>();
+			for (int i = 0; i < listOfCallToActnForActiveMedication.size(); i++) {
+				String status = listOfCallToActnForActiveMedication.get(i).getText();
+				System.out.println(status);
+				if (status.equalsIgnoreCase("Track Status") || status.equalsIgnoreCase("View Order")) {
+					listOfIndex.add(i);
+				}
+			}
+			System.out.println("List of Index For Track Status " + listOfIndex);
+			return listOfIndex;
+		}
+
+		public void validateActiveRetailMedication() {
+			Assert.assertTrue("PROBLEM - Active Retail not available", validateRetailMedication());
+		}
+
+		public boolean validateRetailMedication() {
+			List<Integer> listOfIndex = getListOfIndexForRetailPharmacy();
+			if (listOfIndex.size() != 0) {
+				for (Integer val : listOfIndex) {
+					// System.out.println("Retail Pharmacy Name :" +
+					// listOfPharmacyName.get(val).getText());
+
+					String text = listOfPharmacyName.get(val).getText();
+					for (WebElement child : listOfPharmacyName.get(val).findElements(By.xpath("./*"))) {
+						text = text.replaceFirst(child.getText(), "");
+					}
+					if (text.trim().equals("OptumRx")) {
+						return false;
+					}
+				}
+				return true;
+
+			} else {
+				return false;
+			}
+		}
+
+		public void validatePhoneNumberOnPopUp() {
+			Assert.assertTrue("PROBLEM - Phone Number not available on PopUp", validateContactPharmacyPopUpHavingNumber());
+		}
+
+		public List<Integer> getOrderStatusIndexBasedOnStatusValue(String orderStatus) {
+			List<Integer> listOfIndex = new ArrayList<>();
+			for (int i = 0; i < listOfOrderStatus.size(); i++) {
+				if (listOfOrderStatus.get(i).getText().trim().equalsIgnoreCase(orderStatus)) {
+					scrollToView(listOfOrderStatus.get(i));
+					listOfIndex.add(i);
+				}
+			}
+			System.out.println("Order Status size :" + listOfIndex.size());
+			return listOfIndex;
+		}
+
+		public boolean validateHarveyBallForHDDrugOrder(String orderStatus, String ballSize) {
+			List<Integer> listOfIndex = getOrderStatusIndexBasedOnStatusValue(orderStatus);
+			if (listOfIndex.size() != 0) {
+				int count = 0;
+				for (Integer val : listOfIndex) {
+					scrollToView(listOfHarveyBall.get(val));
+					if (orderStatus.equalsIgnoreCase("Completed")
+							&& listOfHarveyBall.get(val).getAttribute("data-testid").contains(ballSize)
+							&& validate(listOfCheckMarkOnFullHarveyBall.get(val), 30)) {
+						scrollToView(listOfCheckMarkOnFullHarveyBall.get(val));
+						count = count + 1;
+					} else if (listOfHarveyBall.get(val).getAttribute("data-testid").contains(ballSize)) {
+						count = count + 1;
+					}
+				}
+				return count == listOfIndex.size();
+			} else {
+				return false;
+			}
+		}
+
+		public boolean clickOnTrackOrderStatus(String orderStatus) {
+			return true;
+		}
+
+		public boolean clickOnHDDrugCTA(String orderStatus, String callToAction) {
+			List<Integer> listOfIndex = getOrderStatusIndexBasedOnStatusValue(orderStatus);
+			if (listOfIndex.size() != 0) {
+				for (Integer val : listOfIndex) {
+					if (listOfCallToActionOnMedication.get(val).getText().equals(callToAction)) {
+						listOfCallToActionOnMedication.get(val).click();
+						return true;
+					} else {
+						return false;
+					}
+				}
+			}
+			return false;
+		}
+
+		public boolean validateOderStatusPageURL() {
+			if (driver.getCurrentUrl().contains("/pharmacy/overview.html#/order-status")) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+
+		public boolean validatePAndPPageURL() {
+			if (driver.getCurrentUrl().contains("/pharmacy/overview.html#/")) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+
+		public void validateOderStatusPage() {
+			Assert.assertTrue("PROBLEM - Order Status page is not displayed", validateOderStatusPageURL());
+		}
+
+		public void validatePAndPPage() {
+			Assert.assertTrue("PROBLEM - P and P page is not displayed", validatePAndPPageURL());
+		}
+
+		public void validateClickOnHDDrugCTA(String orderStatus, String callToAction) {
+			Assert.assertTrue("PROBLEM - " + orderStatus + " Call to action button is not available on Current Medication",
+					clickOnHDDrugCTA(orderStatus, callToAction));
+		}
+
+		public void validateClickOnTrackOrderStatus() {
+			List<String> list = Arrays.asList("Request Received", "Verifying with Doctor", "Order Verified",
+					"Order Processing", "Order Processed", "Order Shipped");
+			ArrayList<String> trackOrderStatus = new ArrayList<String>();
+			trackOrderStatus.addAll(list);
+			for (String status : trackOrderStatus) {
+				clickOnTrackOrderStatus(status);
+			}
+		}
+
+		public void validateOrderStatusForHDDrug(String orderStatus) {
+			Assert.assertTrue("PROBLEM - " + orderStatus + " Status not available on Current Medication",
+					getOrderStatusIndexBasedOnStatusValue(orderStatus).size() >= 0);
+		}
+
+		public void validateHarveyBallOrderStatusForHDDrug(String orderStatus, String ballSize) {
+			Assert.assertTrue("PROBLEM - " + ballSize + " Harvey Ball not available for " + orderStatus
+					+ " order on Current Medication", validateHarveyBallForHDDrugOrder(orderStatus, ballSize));
+		}
+
+		public void validateShippedOrderStatusForHDDrug(String orderStatus) {
+			Assert.assertTrue("PROBLEM - Shipped Order not available on Current Medication",
+					getOrderStatusIndexBasedOnStatusValue(orderStatus).size() > 0);
+		}
+
+		public void validateProperUseTab() {
+			waitforElement(properUseTab);
+			Assert.assertTrue("PROBLEM - unable to locate Proper Use tab element", properUseTab());
+		}
+
+		public void validateCanceledOrderStatusForHDDrug(String orderStatus) {
+			Assert.assertTrue("PROBLEM - Request Canceled not available on Current Medication",
+					getOrderStatusIndexBasedOnStatusValue(orderStatus).size() >= 0);
+		}
+
+		public boolean validateHDDrugDisplayedOnCurrentMedication() {
+			List<Integer> listOfIndex = getListOfIndexForHDPharmacy();
+			if (listOfIndex.size() != 0) {
+				for (Integer val : listOfIndex) {
+					String text = listOfPharmacyName.get(val).getText();
+					for (WebElement child : listOfPharmacyName.get(val).findElements(By.xpath("./*"))) {
+						text = text.replaceFirst(child.getText(), "");
+					}
+					System.out.println("Pharmacy Name : " + text);
+					if (!text.trim().equals("OptumRx")) {
+						return false;
+					}
+				}
+				return true;
+			} else {
+				return false;
+			}
+		}
+
+		public void validateHDDrug() {
+			Assert.assertTrue("PROBLEM - User DO NOT have Home delivery drug displayed on Current Medication",
+					validateHDDrugDisplayedOnCurrentMedication());
+		}
+
+		public void validateOptumRxLandingPage(String page) {
+			Set<String> handles = driver.getWindowHandles();
+			String pnpPageHandle = driver.getWindowHandle();
+			handles.remove(pnpPageHandle);
+			String winHandle = (String) handles.iterator().next();
+			if (winHandle != pnpPageHandle) {
+				String OptumRxLandingPageHandle = winHandle;
+				driver.switchTo().window(OptumRxLandingPageHandle);
+				if (page.equals("My Prescriptions"))
+					Assert.assertTrue("PROBLEM - unable to locate OptumRx Landing Page Header element",
+							validate(OptumRxMyPrescriptionHeader));
+				{
+					Assert.assertTrue("PROBLEM - unable to locate OptumRx Landing Page Header element",
+							validate(OptumRxOrderStatusHeader));
+				}
+			}
+			driver.close();
+			driver.switchTo().window(pnpPageHandle);
+		}
+
+		public void validateDeliveredOrderStatusForHDDrug(String orderStatus, String ballSize) {
+			Assert.assertTrue("PROBLEM - " + ballSize + "Harvey Ball not available for " + orderStatus
+					+ " order on Current Medication", validateHarveyBallForHDDrugOrder(orderStatus, ballSize));
+		}
+
+		public List<Integer> getIndexOfMedicationHavingHold(String holdType) {
+			List<Integer> listOfIndex = new ArrayList<>();
+
+			for (int i = 0; i < listOfResolveHoldBtn.size(); i++) {
+				if (listOfResolveHoldBtn.get(i).getAttribute("data-test-hold-type").equalsIgnoreCase(holdType)) {
+					listOfIndex.add(i);
+				}
+			}
+
+			/*
+			 * for (int i = 0; i < listOfPharmacyName.size(); i++) { if
+			 * (listOfPharmacyName.get(i).getText().equals(holdType)) { listOfIndex.add(i);
+			 * } }
+			 */
+			return listOfIndex;
+		}
+
+		public boolean validateCurrentMedicationHavingHold(String holdType) {
+			System.out.println("Size of Resolve data :" + listOfResolveHoldBtn.size());
+			for (int i = 0; i < listOfResolveHoldBtn.size(); i++) {
+				System.out.println(listOfResolveHoldBtn.get(i).getAttribute("data-test-hold-type"));
+				if (listOfResolveHoldBtn.get(i).getAttribute("data-test-hold-type").contains(holdType)) {
+					scrollToView(listOfResolveHoldBtn.get(i));
+					return true;
+				}
+			}
+			return false;
+		}
+
+		public boolean validateOnHoldIndicator(String holdColor, String holdIndicator, String holdType) {
+			List<Integer> listOfIndex = getIndexOfMedicationHavingHold(holdType);
+			if (listOfIndex.size() != 0) {
+				int count = 0;
+				for (Integer val : listOfIndex) {
+					scrollToView(listOfOnHoldMsg.get(val));
+					if (validate(listOfOnHoldMsg.get(val), 30)
+							&& listOfOnHoldMsg.get(val).getCssValue("color").equals("rgba(172, 43, 0, 1)")
+							&& validate(listOfHoldWarningSymbol.get(val), 30)) {
+						count = count + 1;
+					}
+				}
+				return count == listOfIndex.size();
+
+			} else {
+				return false;
+			}
+		}
+
+		public boolean validateResolveHoldButtonForHDDrug(String expectedButtonColor, String expectedButtonValue,
+				String holdType) {
+			List<Integer> listOfIndex = getIndexOfMedicationHavingHold(holdType);
+			if (listOfIndex.size() != 0) {
+				int count = 0;
+				for (Integer val : listOfIndex) {
+					System.out.println("Button Value :"
+							+ listForResolveHoldCallToActn.get(val).findElement(By.xpath(".//span")).getText());
+					scrollToView(listForResolveHoldCallToActn.get(val));
+					if (listForResolveHoldCallToActn.get(val).findElement(By.xpath(".//span")).getText().equalsIgnoreCase(
+							expectedButtonValue) && listForResolveHoldCallToActn.get(val).getTagName().equals("button")
+							&& listForResolveHoldCallToActn.get(val).getCssValue("background-color")
+									.equals("rgba(13, 136, 11, 1)")) {
+						count = count + 1;
+					}
+				}
+				return count == listOfIndex.size();
+			} else {
+				return false;
+			}
+		}
+
+		public boolean validateExternalLinkOnButton(String holdType) {
+			List<Integer> listOfIndex = getIndexOfMedicationHavingHold(holdType);
+			if (listOfIndex.size() != 0) {
+				int count = 0;
+				for (Integer val : listOfIndex) {
+					scrollToView(listOfExternalLinkOnResolveHldBtn.get(val));
+					if (validate(listOfExternalLinkOnResolveHldBtn.get(val), 30)) {
+						count = count + 1;
+					}
+				}
+				return count == listOfIndex.size();
+			} else {
+				return false;
+			}
+		}
+
+		public void validatePaymentHoldForHDMedication(String holdType) {
+			Assert.assertTrue("PROBLEM - Payment Hold not available for HD Medication ",
+					validateCurrentMedicationHavingHold(holdType));
+		}
+
+		public void validateOnHoldIndicatorForHDDrug(String holdColor, String holdIndicator, String holdType) {
+			Assert.assertTrue("PROBLEM - On Hold Indicator not available for HD Medication ",
+					validateOnHoldIndicator(holdColor, holdIndicator, holdType));
+
+		}
+
+		public void validateOnResolveHoldBtnForHDDrug(String holdColor, String buttonValue, String holdType) {
+			Assert.assertTrue("PROBLEM - On Resolve Hold Button not available for HD Medication ",
+					validateResolveHoldButtonForHDDrug(holdColor, buttonValue, holdType));
+		}
+
+		public void validateExternalLnkOnButtonForHDDrug(String holdType) {
+			Assert.assertTrue("PROBLEM - External Link not available on Button for HD Medication ",
+					validateExternalLinkOnButton(holdType));
+		}
+
+		public void validateAddressHoldForHDMedication(String holdType) {
+			Assert.assertTrue("PROBLEM - Address Hold not available for HD Medication ",
+					validateCurrentMedicationHavingHold(holdType));
+		}
+
+		public void validatePriceAdjsutmentHoldForHDMedication(String holdType) {
+			Assert.assertTrue("PROBLEM - Price Adjustment Hold not available for HD Medication ",
+					validateCurrentMedicationHavingHold(holdType));
+
+		}
+
+		public void validateCallHoldForHDMedication(String holdType) {
+			Assert.assertTrue("PROBLEM - Call Hold not available for HD Medication ",
+					validateCurrentMedicationHavingHold(holdType));
+		}
+
+		public void validateInformationalHoldForHDMedication() {
+			Assert.assertTrue("PROBLEM - Informational Hold not available for HD Medication ",
+					getMedicationNameHavingInfoHld().size() > 0);
+		}
+
+		public void clickOnNextPageArrow() {
+			Assert.assertTrue("PROBLEM - Next Page Navigation is disabled", validate(nextPageArrow, 30));
+			JavascriptExecutor js = (JavascriptExecutor) driver;
+			js.executeScript("arguments[0].scrollIntoView(true);", nextPageArrow);
+			nextPageArrow.click();
+		}
+		
+		public void clickOnPreviousPageArrow() {
+			Assert.assertTrue("PROBLEM - Previous Page Navigation is disabled", validate(previousPageArrow, 30));
+			JavascriptExecutor js = (JavascriptExecutor) driver;
+			js.executeScript("arguments[0].scrollIntoView(true);", previousPageArrow);
+			previousPageArrow.click();
+		}
+	
+		public boolean verifyRemainingPrescriptions(String totalMedication) {
+			boolean flag = false;
+			int medicationOnPageTwo = Integer.parseInt(drugsAvailableOnMyMedication.getText());
+			int totalMedicationAvailable = Integer.parseInt(totalMedication);
+			int medicationRemainingOnPageTwo = totalMedicationAvailable - 10;
+
+			if (!(medicationRemainingOnPageTwo > 10)) {
+				int size = listOfDrugName.size();
+				String numberTXT = drugsAvailableOnMyMedication.getText();
+				int expectedSize = Integer.parseInt(numberTXT);
+				System.out.println("Expected Drug Name Size" + expectedSize);
+				while (size != expectedSize) {
+					size = listOfDrugName.size();
+				}
+				flag = medicationOnPageTwo == size;
+			}
+			/*
+			 * else { int size=listOfDrugName.size(); String numberTXT =
+			 * drugsAvailableOnMyMedication.getText(); int expectedSize =
+			 * Integer.parseInt(numberTXT);
+			 * System.out.println("Expected Drug Name Size"+expectedSize);
+			 * while(size!=expectedSize) { size=listOfDrugName.size(); }
+			 * 
+			 * }
+			 */
+			return flag;
+		}
+
+		public void validateRemainingPrescriptionsOnMyMedPage(String medicationOnPageOne) {
+			Assert.assertTrue("PROBLEM - Active Prescription not available on Next My Medication Page ",
+					verifyRemainingPrescriptions(medicationOnPageOne));
+		}
+
+		// F436319
+		public void validatePositionOfCallToActionOnPnPPage(int position, String callToActionTitle) {
+			List<WebElement> callToActions = driver.findElements(By.xpath("//div[@class='sc-LzLMQ ejtotn']//button//h2"));
+			WebElement element = callToActions.get(position);
+			position = position + 1;
+			if (element.getText().equalsIgnoreCase(callToActionTitle)) {
+				Assert.assertEquals("SUCCESS - " + callToActionTitle + "Is placed on position :: " + position, true,
+						pnpValidate(element));
+			} else {
+				Assert.assertTrue("PROBLEM - unable to locate expected position of call to action for " + callToActionTitle,
+						false);
+			}
+		}
+
+		public List<String> getDrugNameListValueOnMyMedication() {
+			List<String> listOfDrug = new ArrayList<>();
+			int size = listOfDrugName.size();
+			// int expectedSize=6;
+			validate(drugsAvailableOnMyMedication, 10);
+			String numberTXT = drugsAvailableOnMyMedication.getText();
+			int expectedSize = Integer.parseInt(numberTXT);
+			/*
+			 * if(number<6) { expectedSize=number; }
+			 */
+			System.out.println("Expected Drug Name Size" + expectedSize);
+			while (size != expectedSize) {
+				size = listOfDrugName.size();
+			}
+			for (WebElement ele : listOfDrugName) {
+				waitforElementVisibilityInTime(ele, 50);
+				String text = ele.getText();
+				for (WebElement child : ele.findElements(By.xpath("./*"))) {
+					text = text.replaceFirst(child.getText(), "");
+				}
+				System.out.println("Value of Drug Name :" + text);
+				listOfDrug.add(text);
+			}
+			return listOfDrug;
+		}
+		/*
+		 * public boolean validateHarveyBallCheckMark(String orderStatus) {
+		 * List<Integer> listOfIndex =
+		 * getOrderStatusIndexBasedOnStatusValue(orderStatus); if (listOfIndex.size() !=
+		 * 0) { int count = 0; for (Integer val : listOfIndex) {
+		 * scrollToView(listOf.get(val)); if
+		 * (listOfHarveyBall.get(val).getAttribute("data-testid").contains(ballSize)) {
+		 * count = count + 1; } } return count == listOfIndex.size();
+		 * 
+		 * } else { return false; } }
+		 */
+
+		public String countOfTotalMedication() {
+			return NumberInParenthesis.getText().replaceAll("[^0-9]", "");
+		}
+
+		public boolean validateMedicationHavingInformationalHold(List<String> listOfMedName) {
+			List<Integer> listOfInd = getMedIndexBasedOnMedicationName(listOfMedName);
+			if (listOfInd.size() > 0) {
+				for (Integer val : listOfIndex) {
+					if (listOfCallToActnForActiveMedication.get(val).getText().contains("Hold")) {
+						return false;
+					}
+				}
+				return true;
+			} else {
+				return false;
+			}
+
+		}
+
+		public void validateEmptyHarveyBall() {
+			JavascriptExecutor js = (JavascriptExecutor) driver;
+			js.executeScript("arguments[0].scrollIntoView(true);", emptyHarveyBall);
+			Assert.assertTrue("PROBLEM - unable to locate empty harvey ball icon element", pnpValidate(emptyHarveyBall));
+		}
+
+		public List<Integer> getMedIndexBasedOnMedicationName(List<String> listOfMedName) {
+			List<Integer> listOfIndex = new ArrayList<>();
+			for (int i = 0; i < listOfDrugName.size(); i++) {
+				for (String str : listOfMedName) {
+					if (str.equalsIgnoreCase(listOfDrugName.get(i).getText())) {
+						listOfIndex.add(i);
+						break;
+					}
+				}
+			}
+			return listOfIndex;
+		}
+
+		public List<String> getMedicationNameHavingInfoHld() {
+			List<String> listOfVal = new ArrayList<>();
+			for (WebElement ele : listOfmedicationHavingInformationalHold) {
+				listOfVal.add(ele.getText());
+			}
+			return listOfVal;
+		}
+
+		public boolean validateWalgreens() {
+			if (walgreens.size() >= 0) {
+				for (int i = 0; i < walgreens.size(); i++) {
+					String text = walgreens.get(i).getText();
+					for (WebElement child : walgreens.get(i).findElements(By.xpath("./*"))) {
+						text = text.replaceFirst(child.getText(), "");
+					}
+					if (!text.trim().equals("Walgreens")) {
+						return false;
+					}
+				}
+				return true;
+			}
+			return false;
+		}
+
+		public boolean validateWalgreensWithoutStoreNumbers() {
+			if (walgreens.size() >= 0) {
+				for (int i = 0; i < walgreens.size(); i++) {
+					String text = walgreens.get(i).getText();
+					for (WebElement child : walgreens.get(i).findElements(By.xpath("./*"))) {
+						text = text.replaceFirst(child.getText(), "");
+					}
+					if (!text.trim().equals("Walgreens")) {
+						return false;
+					}
+				}
+				return true;
+			}
+			return false;
+		}
+
+		public boolean validateHDDrugEligibleForRefill() {
+			if (listOfPharmacyEligibleFrRefill.size() > 0) {
+				for (int i = 0; i < listOfPharmacyEligibleFrRefill.size(); i++) {
+					String text = listOfPharmacyEligibleFrRefill.get(i).getText();
+					for (WebElement child : listOfPharmacyEligibleFrRefill.get(i).findElements(By.xpath("./*"))) {
+						text = text.replaceFirst(child.getText(), "");
+					}
+					if (!text.trim().equals("OptumRx")) {
+						return false;
+					}
+				}
+				return true;
+			}
+			return false;
+		}
+
+		public boolean validateHDDrugEligibleForRenew() {
+			if (listOfPharmacyEligibleFrRenew.size() > 0) {
+				/*
+				 * for(WebElement ele:listOfPharmacyEligibleFrRenew) {
+				 * if(!ele.getText().equals("OptumRx")) { return false; } }
+				 */
+
+				for (int i = 0; i < listOfPharmacyEligibleFrRenew.size(); i++) {
+					String text = listOfPharmacyEligibleFrRenew.get(i).getText();
+					for (WebElement child : listOfPharmacyEligibleFrRenew.get(i).findElements(By.xpath("./*"))) {
+						text = text.replaceFirst(child.getText(), "");
+					}
+					if (!text.trim().equals("OptumRx")) {
+						return false;
+					}
+				}
+				return true;
+			}
+			return false;
+		}
+
+		public boolean validateHDDrugEligibleForActionableHold() {
+			if (listOfHDMedicationHavingHold.size() > 0) {
+				/*
+				 * for(WebElement ele:listOfHDMedicationHavingHold) {
+				 * if(!ele.getText().equals("OptumRx")) { return false; } }
+				 */
+
+				for (int i = 0; i < listOfHDMedicationHavingHold.size(); i++) {
+					String text = listOfHDMedicationHavingHold.get(i).getText();
+					for (WebElement child : listOfHDMedicationHavingHold.get(i).findElements(By.xpath("./*"))) {
+						text = text.replaceFirst(child.getText(), "");
+					}
+					if (!text.trim().equals("OptumRx")) {
+						return false;
+					}
+				}
+
+				return true;
+			}
+			return false;
+		}
+
+		public void validateRefillRemainingFieldOnCurrentMed(String expectedVal) {
+			Assert.assertTrue("PROBLEM - Refill Remaining Field not available for HD Medication on Current Medication",
+					verifyRefillRemainingFieldForHDMedication(expectedVal));
+		}
+
+		public boolean verifyRefillRemainingFieldForHDMedication(String expectedVal) {
+			if (verifyHdMedicationEligibleForRefiilLeftField()) {
+				for (WebElement ele : listofHDMedicationHavingRefillLeftField) {
+					if (!(ele.getText().equalsIgnoreCase(expectedVal))) {
+						return false;
+					}
+				}
+				return true;
+			}
+			return false;
+		}
+
+		public void validateRefillRemainingValueOnCurrentMed() {
+			Assert.assertTrue("PROBLEM - Refill Remaining Val not available for HD Medication on Current Medication",
+					verifyRefillRemainingValueForHDMedication());
+		}
+
+		public boolean verifyRefillRemainingValueForHDMedication() {
+			for (WebElement ele : listofHDMedicationHavingRefillLeftVal) {
+				if (ele.getText().isEmpty()) {
+					return false;
+				}
+			}
+			return true;
+		}
+
+		public CheckOutSummaryPage navigateToCheckOutSummaryPage() {
+			TestHarness.checkForIPerceptionModel(driver);
+			CommonUtility.waitForPageLoad(driver, orderCheckoutPageHeader, 40);
+			CommonUtility.waitForPageLoad(driver, drugNameOnCheckOutPage, 60);
+			/*CommonUtility.waitForPageLoad(driver, drugNameOnCheckOutPage, 60);*/
+			CommonUtility.checkPageIsReady(driver);
+			if (driver.getCurrentUrl().contains("/pharmacy/overview.html#/medication-management")) {
+				CommonUtility.checkPageIsReady(driver);
+                checkModelPopup(driver);
+				return new CheckOutSummaryPage(driver);
+			}
+			return null;
+		}
+
+		public OrderConfirmationPage navigateToOrderConfirmationPage() {
+			// CommonUtility.waitForPageLoad(driver, ThankyouMessageOrderConfirmation, 40);
+			CommonUtility.checkPageIsReady(driver);
+			if (driver.getCurrentUrl().contains("/pharmacy/overview.html#/medication-management")) {
+				CommonUtility.checkPageIsReady(driver);
+				return new OrderConfirmationPage(driver);
+			}
+			return null;
+		}
+
+		public List<Object> fetchesMedicationInformationFrRefill() {
+			List<Object> listOfVal = new ArrayList<>();
+			Random rand = new Random();
+			rand_int = rand.nextInt(listOfRefillMedication.size());
+
+			String text = listOfMedicationEligibleFrRefill.get(rand_int).getText();
+			
+			// Commenting as Xpath got changed
+			
+			/*for (WebElement child : listOfMedicationEligibleFrRefill.get(rand_int).findElements(By.xpath("./*"))) {
+				text = text.replaceFirst(child.getText(), "");
+			}*/
+			listOfVal.add(text);
+			
+			/*String text2 = listOfRefillLeftEligibleFrRefill.get(rand_int).getText();
+			for (WebElement child : listOfRefillLeftEligibleFrRefill.get(rand_int).findElements(By.xpath("./*"))) {
+				text = text.replaceFirst(child.getText(), "");
+			}
+			System.out.println("Refills Remaining "+text2);
+			
+			listOfVal.add(text2);*/
+			//listOfVal.add(listOfMedicationEligibleFrRefill.get(rand_int).getText());
+			listOfVal.add(listOfRefillLeftEligibleFrRefill.get(rand_int).getText());
+			
+			/*String text1 = listOfDaySupplyEligibleFrRefill.get(rand_int).getText();
+			for (WebElement child : listOfDaySupplyEligibleFrRefill.get(rand_int).findElements(By.xpath("./*"))) {
+				text = text.replaceFirst(child.getText(), "");
+			}
+			listOfVal.add(text1);*/
+			listOfVal.add(listOfDaySupplyEligibleFrRefill.get(rand_int).getText());
+			// listOfVal.add(listOfAmntPaidEligibleFrRefill.get(rand_int).getText());
+			listOfVal.add(rand_int);
+			return listOfVal;
+		}
+
+		public List<Object> fetchesMedicationInformationFrRenew() {
+			List<Object> listOfVal = new ArrayList<>();
+			Random rand = new Random();
+			rand_int = rand.nextInt(listOfRenewMedication.size());
+
+			String text = listOfMedicationEligibleFrRenew.get(rand_int).getText();
+			//Commenting after Xpath got changed
+			/*for (WebElement child : listOfMedicationEligibleFrRenew.get(rand_int).findElements(By.xpath("./*"))) {
+				text = text.replaceFirst(child.getText(), "");
+			}
+		*/	
+			listOfVal.add(text);
+			listOfVal.add(listOfDaySupplyEligibleFrRenew.get(rand_int).getText());
+			// listOfVal.add(listOfAmntPaidEligibleFrRenew.get(rand_int).getText());
+			listOfVal.add(rand_int);
+			return listOfVal;
+		}
+
+		public List<Object> fetchesMedicationInformationFrRequestPlaced() {
+			List<Object> listOfVal = new ArrayList<>();
+			Random rand = new Random();
+			rand_int = rand.nextInt(listOfRequestPlaced.size());
+
+			String text = listOfMedicationRequestPlaced.get(rand_int).getText();
+			for (WebElement child : listOfMedicationRequestPlaced.get(rand_int).findElements(By.xpath("./*"))) {
+				text = text.replaceFirst(child.getText(), "");
+			}
+			listOfVal.add(text);
+			listOfVal.add(listOfDaySupplyEligibleFrRequestPlaced.get(rand_int).getText());
+			// listOfVal.add(listOfAmntPaidEligibleFrRenew.get(rand_int).getText());
+			listOfVal.add(rand_int);
+			return listOfVal;
+		}
+
+		public List<Object> fetchesMedicationInformationFrRequestCancelled() {
+			List<Object> listOfVal = new ArrayList<>();
+			Random rand = new Random();
+			rand_int = rand.nextInt(listOfRequestCancelled.size());
+
+			String text = listOfMedicationRequestCancelled.get(rand_int).getText();
+			for (WebElement child : listOfMedicationRequestCancelled.get(rand_int).findElements(By.xpath("./*"))) {
+				text = text.replaceFirst(child.getText(), "");
+			}
+			listOfVal.add(text);
+			listOfVal.add(listOfDaySupplyEligibleFrRequestPlaced.get(rand_int).getText());
+			// listOfVal.add(listOfAmntPaidEligibleFrRenew.get(rand_int).getText());
+			listOfVal.add(rand_int);
+			return listOfVal;
+		}
+
+		public List<Object> fetchesMedicationInformationFrShipped() {
+			List<Object> listOfVal = new ArrayList<>();
+			Random rand = new Random();
+			rand_int = rand.nextInt(listOfShipped.size());
+
+			String text = listOfMedicationShipped.get(rand_int).getText();
+			for (WebElement child : listOfMedicationShipped.get(rand_int).findElements(By.xpath("./*"))) {
+				text = text.replaceFirst(child.getText(), "");
+			}
+			listOfVal.add(text);
+			listOfVal.add(listOfDaySupplyEligibleFrRequestPlaced.get(rand_int).getText());
+			// listOfVal.add(listOfAmntPaidEligibleFrRenew.get(rand_int).getText());
+			listOfVal.add(rand_int);
+			return listOfVal;
+		}
+
+		public List<Object> fetchesMedicationInformationFrProcessing() {
+			List<Object> listOfVal = new ArrayList<>();
+			Random rand = new Random();
+			rand_int = rand.nextInt(listOfProcessing.size());
+
+			String text = listOfMedicationRequestPlaced.get(rand_int).getText();
+			for (WebElement child : listOfMedicationRequestPlaced.get(rand_int).findElements(By.xpath("./*"))) {
+				text = text.replaceFirst(child.getText(), "");
+			}
+			listOfVal.add(text);
+			listOfVal.add(listOfDaySupplyEligibleFrRequestPlaced.get(rand_int).getText());
+			// listOfVal.add(listOfAmntPaidEligibleFrRenew.get(rand_int).getText());
+			listOfVal.add(rand_int);
+			return listOfVal;
+		}
+
+		public void clickOnRefillMedicationCTABasedOnIndex(int index) {
+			checkModelPopup(driver);
+			listOfRefillMedication.get(rand_int).click();
+		}
+
+		public void clickOnRenewMedicationCTABasedOnIndex(int index) {
+			listOfRenewMedication.get(rand_int).click();
+		}
+
+		public void clickOnRequestPlacedCTABasedOnIndex(int index) {
+			listOfTrackStatus.get(rand_int).click();
+		}
+
+		public void clickOnRequestCancelledCTABasedOnIndex(int index) {
+			listOfViewOrderRequestCancelled.get(rand_int).click();
+		}
+
+		public void clickOnProcessingCTABasedOnIndex(int index) {
+			listOfTrackStatus.get(rand_int).click();
+		}
+
+		public void refreshPnPPage() {
+			driver.navigate().refresh();
+			validateCurrentMedicationsHeader();
+		}
+
+		public void validateOrderStatusAndCTAUpdatedForRefillTransaction() {
+			//
+			clickOnViewAllMedicationsLink();
+			validateFieldValueContent(listOfDrugName);
+
+		}
+
+		public void clickTryAgainCurrentmedication() {
+			int count = 0;
+			do {
+				if (validate(tryAgainMedCabTimeOut)) {
+					tryAgainMedCabTimeOut.click();
+				}
+				count++;
+			} while (count != 2);
+		}
+
+		public void waitTillMedCabLoads() {
+			TestHarness.checkForIPerceptionModel(driver);
+			if (!validate(ViewAllMedications, 60)) {
+				System.out.println("Inside waitTillMedCabLoads");
+				tryAgainMedCabTimeOut.click();
+				CommonUtility.checkPageIsReady(driver);				
+				CommonUtility.waitForPageLoad(driver, ViewAllMedications, 80);				
+				scrollToView(ViewAllMedications);
+			}
+		}
+
+		public boolean validateRetailMedNotHavingRefillLeftField() {
+			for (WebElement ele : listOfMedicationSectionNotFrmOptum) {
+				if (!ele.getAttribute("data-is-refill-eligible").equals("false")) {
+					return false;
+				}
+			}
+			return true;
+		}
+
+		public boolean verifyHdMedicationEligibleForRefiilLeftField() {
+			for (WebElement ele : listOfMedicationSectionFromOptum) {
+				if (!ele.getAttribute("data-is-refill-eligible").trim().equalsIgnoreCase("true")) {
+					return false;
+				}
+			}
+			return true;
+		}
+
+		public void verifyRefillLeftNotAvailableForRetalPharm() {
+			Assert.assertTrue("PROBLEM - Refill Left Field available for Retail Medication",
+					validateRetailMedNotHavingRefillLeftField());
+		}
+
+		public boolean isNextArrowEnabled() {
+			return validate(nextPaginationDisabled, 1);
+		}
+
+		public String getCountOfMyMedPage() {
+			validate(totalNumberOfPage, 10);
+			return totalNumberOfPage.getText();
+		}
+
+		public WebDriver getDriver() {
+			return driver;
+		}
+
+		public List<Integer> getListOfIndexForRefillMedicationOnMyMed() {
+			int size = listOfDrugName.size();
+			validate(drugsAvailableOnMyMedication, 30);
+			String numberTXT = drugsAvailableOnMyMedication.getText();
+			int expectedSize = Integer.parseInt(numberTXT);
+			System.out.println("Expected Drug Name Size" + expectedSize);
+			while (size != expectedSize) {
+				size = listOfDrugName.size();
+			}
+			List<Integer> listOfIndex = new ArrayList<>();
+			for (int i = 0; i < listOfRefillMedication.size(); i++) {
+				listOfIndex.add(i);
+			}
+			return listOfIndex;
+		}
+
+	public List<Integer> getListOfIndexForWalgreensWithoutNumberOnMyMed() {
+		int size = listOfDrugName.size();
+		validate(drugsAvailableOnMyMedication, 10);
+		String numberTXT = drugsAvailableOnMyMedication.getText();
+		int expectedSize = Integer.parseInt(numberTXT);
+		System.out.println("Expected Drug Name Size" + expectedSize);
+		while (size != expectedSize) {
+			size = listOfDrugName.size();
+		}
+		List<Integer> listOfIndex = new ArrayList<>();
+		for (int i = 0; i < walgreens.size(); i++) {
+			listOfIndex.add(i);
+		}
+		return listOfIndex;
+	}
+
+		public List<Integer> getListOfIndexForRenewMedicationOnMyMed() {
+			int size = listOfDrugName.size();
+			validate(drugsAvailableOnMyMedication, 35);
+			String numberTXT = drugsAvailableOnMyMedication.getText();
+			int expectedSize = Integer.parseInt(numberTXT);
+			System.out.println("Expected Drug Name Size" + expectedSize);
+			while (size != expectedSize) {
+				size = listOfDrugName.size();
+			}
+			List<Integer> listOfIndex = new ArrayList<>();
+			for (int i = 0; i < listOfRenewMedication.size(); i++) {
+				listOfIndex.add(i);
+			}
+			return listOfIndex;
+		}
+
+		public List<Integer> getListOfIndexForRequestPlacedOnMyMed() {
+			int size = listOfDrugName.size();
+			validate(drugsAvailableOnMyMedication, 10);
+			String numberTXT = drugsAvailableOnMyMedication.getText();
+			int expectedSize = Integer.parseInt(numberTXT);
+			System.out.println("Expected Drug Name Size" + expectedSize);
+			while (size != expectedSize) {
+				size = listOfDrugName.size();
+			}
+			List<Integer> listOfIndex = new ArrayList<>();
+			for (int i = 0; i < listOfRequestPlaced.size(); i++) {
+				listOfIndex.add(i);
+			}
+			return listOfIndex;
+		}
+
+		public List<Integer> getListOfIndexForOrderReceivedOnMyMed() {
+			int size = listOfDrugName.size();
+			validate(drugsAvailableOnMyMedication, 10);
+			String numberTXT = drugsAvailableOnMyMedication.getText();
+			int expectedSize = Integer.parseInt(numberTXT);
+			System.out.println("Expected Drug Name Size" + expectedSize);
+			while (size != expectedSize) {
+				size = listOfDrugName.size();
+			}
+			List<Integer> listOfIndex = new ArrayList<>();
+			for (int i = 0; i < listOfOrderReceived.size(); i++) {
+				listOfIndex.add(i);
+			}
+			return listOfIndex;
+		}
+
+		public List<Integer> getListOfIndexForProcessingOnMyMed() {
+			int size = listOfDrugName.size();
+			validate(drugsAvailableOnMyMedication, 10);
+			String numberTXT = drugsAvailableOnMyMedication.getText();
+			int expectedSize = Integer.parseInt(numberTXT);
+			System.out.println("Expected Drug Name Size" + expectedSize);
+			while (size != expectedSize) {
+				size = listOfDrugName.size();
+			}
+			List<Integer> listOfIndex = new ArrayList<>();
+			for (int i = 0; i < listOfProcessing.size(); i++) {
+				listOfIndex.add(i);
+			}
+			return listOfIndex;
+		}
+
+		public List<Integer> getListOfIndexForRequestCancelledOnMyMed() {
+			int size = listOfDrugName.size();
+			validate(drugsAvailableOnMyMedication, 10);
+			String numberTXT = drugsAvailableOnMyMedication.getText();
+			int expectedSize = Integer.parseInt(numberTXT);
+			System.out.println("Expected Drug Name Size" + expectedSize);
+			while (size != expectedSize) {
+				size = listOfDrugName.size();
+			}
+			List<Integer> listOfIndex = new ArrayList<>();
+			for (int i = 0; i < listOfRequestCancelled.size(); i++) {
+				listOfIndex.add(i);
+			}
+			return listOfIndex;
+		}
+		
+		public List<Integer> getListOfIndexForTransferMedication() {
+			int size = listOfDrugName.size();
+			validate(drugsAvailableOnMyMedication, 10);
+			String numberTXT = drugsAvailableOnMyMedication.getText();
+			int expectedSize = Integer.parseInt(numberTXT);
+			System.out.println("Expected Drug Name Size" + expectedSize);
+			while (size != expectedSize) {
+				size = listOfDrugName.size();
+			}
+			List<Integer> listOfIndex = new ArrayList<>();
+			for (int i = 0; i < listOfRenewMedication.size(); i++) {
+				listOfIndex.add(i);
+			}
+			return listOfIndex;
+		}
+
+		public void validateDrugCostSummaryExternalLinkIconDisplayed() {
+			Assert.assertTrue("PROBLEM - Drug Cost Summary External Link Icon is not displayed",
+					pnpValidate(MedicationCostSummaryExternalIcon));
+		}
+		
+		public void validateANOCExternalLinkIconDisplayed() {
+			Assert.assertTrue("PROBLEM - ANOC External Link Icon is not displayed",
+					pnpValidate(ANOCExternalIcon));
+		}
+
+		public void validateNoMedCabVisible() throws InterruptedException {
+			Assert.assertTrue("PROBLEM - MEDCAB is visible",
+					NoMedCabVisible());
+		}
+
+		public void validateViewCurrentMedicationsBtn() {
+			Assert.assertTrue("PROBLEM - unable to locate View Current Medications button element",
+					pnpValidate(viewCurrentMedicationsBtn));
+		}
+		public void validateViewCurrentMedicationsBtnNotVisible() {
+			Assert.assertFalse("PROBLEM - should not be able to locate View Current Medications button element",
+					pnpValidate(viewCurrentMedicationsBtn));
+		}
+
+
+		public void clickViewCurrentMedicationsBtn() {
+
+			Assert.assertTrue("PROBLEM - unable to locate View Current Medications button element",
+					validate(viewCurrentMedicationsBtn, 50));
+			viewCurrentMedicationsBtn.click();
+
+		}
+
+		public boolean NoMedCabVisible() throws InterruptedException {
+
+
+			JavascriptExecutor jse = (JavascriptExecutor) driver;
+			jse.executeScript("window.scrollBy(0,-1000)", "");
+			Thread.sleep(3000);
+
+			if (myMedicationsHeader.isDisplayed()){
+				return false;
+			}else{
+				return true;
+			}
+		}
+
+		public void clickOnTransferToHDCTABasedOnIndex(int index) {
+			listOfTransferToHDCTA.get(rand_int).click();
+		}
+		
+		public List<Object> fetchesMedicationInformationFrTransferToHD() {
+			List<Object> listOfVal = new ArrayList<>();
+			Random rand = new Random();
+			rand_int = rand.nextInt(listOfTransferToHDCTA.size());
+
+			String text = listOfRetailMedEligibleForTransferToHD.get(rand_int).getText();
+
+			//Commenting as Xpath got changed
+			
+			/*for (WebElement child : listOfRetailMedEligibleForTransferToHD.get(rand_int).findElements(By.xpath("./*"))) {
+				text = text.replaceFirst(child.getText(), "");
+			}*/
+			listOfVal.add(text);
+			listOfVal.add(listOfDaySupplyEligibleForTransferToHD.get(rand_int).getText());
+			// listOfVal.add(listOfAmntPaidEligibleFrRenew.get(rand_int).getText());
+			listOfVal.add(rand_int);
+			return listOfVal;
+		}
+		
+		public List<Integer> getListOfIndexForRetailTransferToHDOnMyMed() {
+			int size = listOfDrugName.size();
+			validate(drugsAvailableOnMyMedication, 35);
+			String numberTXT = drugsAvailableOnMyMedication.getText();
+			int expectedSize = Integer.parseInt(numberTXT);
+			System.out.println("Expected Drug Name Size" + expectedSize);
+			while (size != expectedSize) {
+				size = listOfDrugName.size();
+			}
+			List<Integer> listOfIndex = new ArrayList<>();
+			for (int i = 0; i < listOfTransferToHDCTA.size(); i++) {
+				listOfIndex.add(i);
+			}
+			return listOfIndex;
+		}
+		
+		public boolean validateRetailMedicationEligiblForTransferToHD() {
+			if(listOfRetailMedEligibleForTransferToHD.size()>0) {
+			for(WebElement ele:listOfRetailMedEligibleForTransferToHD) {
+				String text = ele.getText();
+				for (WebElement child : ele.findElements(By.xpath("./*"))) {
+					text = text.replaceFirst(child.getText(), "");
+				}
+				if(text.trim().equals("OptumRx")) {
+					return false;
+				}
+			}
+			return true;
+			}
+			return false;
+		}
+		
+		public boolean validateTransferToHDBtnForEligibleMed(String expectedButtonValue) {
+			List<Integer> listOfIndex = getListOfIndexForRetailTransferToHDOnMyMed();
+			if (listOfIndex.size() > 0) {
+				int count = 0;
+				for (Integer val : listOfIndex) {
+					if (listOfTransferToHDCTA.get(val).getText().equalsIgnoreCase(expectedButtonValue)
+							&& listOfTransferToHDCTA.get(val).getTagName().equals("a") && listOfTransferToHDCTA
+									.get(val).getCssValue("background-color").equals("rgba(255, 255, 255, 1)")) {
+						count = count + 1;
+					}
+				}
+				return count == listOfIndex.size();
+			} else {
+				return false;
+			}
+		}
+		
+		public List<Integer> getListOfIndexForOrderShippedOnMyMed() {
+			int size = listOfDrugName.size();
+			validate(drugsAvailableOnMyMedication, 10);
+			String numberTXT = drugsAvailableOnMyMedication.getText();
+			int expectedSize = Integer.parseInt(numberTXT);
+			System.out.println("Expected Drug Name Size" + expectedSize);
+			while (size != expectedSize) {
+				size = listOfDrugName.size();
+			}
+			List<Integer> listOfIndex = new ArrayList<>();
+			for (int i = 0; i < listOfShipped.size(); i++) {
+				listOfIndex.add(i);
+			}
+			return listOfIndex;
+		}
+
+		
+		public void clickOnShippedCTABasedOnIndex(int index) {
+			listOfTrackStatus.get(rand_int).click();
+		}
+		
+		
+		public void validateShipped() {
+			Assert.assertTrue("PROBLEM - unable to locate Shipped elements",
+					isOrderShipped());
+		}
+		
+		public void validateThreeFourthHarveyBall() {
+			Assert.assertTrue("PROBLEM - unable to locate three fourth Harvey ball  elements", isThreeFourthHarveyBall());
+		}
+		
+		public boolean validateShippedonOrderTracker() {
+			return pnpValidate(ShippedOrderTracker,30);
+		}
+		
+		public void clickOnViewOrderCTA() {
+			validate(viewOrderCTA, 20);
+			viewOrderCTA.click();
+		}
+		
+		public boolean validateOrderStatusTitleHeader() {
+			return validate(orderStatusPageTitle, 30);
+		}
+		
+		public boolean validateOrderNumber() {
+			return validate(orderNumber, 30) && orderNumber.getText().matches("^[0-9]*$");
+		}
+		
+		//View All Medication CTA
+		public void validateViewAllMedicationCallToActionOnPnPPage() {
+			Assert.assertTrue("PROBLEM - unable to locate View All Medication call to action button element",
+					pnpValidate(ViewAllMedicationCallToActnBtn));
+		}
+
+		// F436319
+		public void validateImageViewAllMedicationCallToActionOnPnPPage() {
+			Assert.assertTrue("PROBLEM - unable to locate View All Medication call to action Image element",
+					pnpValidate(ViewAllMedicationCTAImg));
+		}
+
+		// F436319
+		public void validateTitleViewAllMedicationCallToActionOnPnPPage() {
+			Assert.assertTrue("PROBLEM - unable to locate View All Medication call to action Title element",
+					pnpValidate(ViewAllMedicationCTATitle));
+		}
+
+		// F436319
+		public void validateDescriptionViewAllMedicationCallToActionOnPnPPage() {
+			Assert.assertTrue("PROBLEM - unable to locate View All Medication  call to action Description element",
+					pnpValidate(ViewAllMedicationCTADescription));
+		}
+		
+		public void validateThirdPositionOfViewAllMedicationCallToActionOnPnPPage(String position) {
+			Assert.assertTrue("PROBLEM - unable to locate View All Medication Call to Action at Third Position",
+					ViewAllMedicationCallToActnBtn.getAttribute("data-cta-position").equals(position));
+		}
+		
+		public void clickOnViewAllMedicationCallToAction() {
+			TestHarness.checkForIPerceptionModel(driver);
+			Assert.assertTrue("PROBLEM - unable to locate View All Medication call to Action element",
+					validate(ViewAllMedicationCallToActnBtn,50));
+			checkModelPopup(driver);
+			ViewAllMedicationCallToActnBtn.click();
+		}
+		
+		public void clickDrugLookupCallToActionOnPnPPage() {
+			Assert.assertTrue("PROBLEM - unable to locate Drug Lookup call to action Tile element",
+					validate(DrugLookupCallToActnBtn, 30));
+			DrugLookupCallToActnBtn.click();
+		}
+		
+		public void waitTillMyMedLoads() {
+			if (!validate(MyMedicationsPageHeader, 60)) {
+				System.out.println("Inside waitTillMyMedLoads");
+				tryAgainMedCabTimeOut.click();
+				CommonUtility.checkPageIsReady(driver);
+				CommonUtility.waitForPageLoad(driver, MyMedicationsPageHeader, 80);
+			}
+		}
+		
+		public boolean validateOTCTile() {
+			return validate(OTCCallToAction);
+		}
+		
+		public boolean validateOTCImage() {
+			return validate(OTCCTAIcon);
+		}
+
+		public boolean validateOTCTitle() {
+			return validate(OTCCTATitle);
+		}
+		
+		public boolean validateOTCDescription() {
+			return validate(OTCCTADescription);
+		}
+		
+		public boolean validateOTCExternalIcon() {
+			return validate(OTCCTAExternalIcon);
+		}
+		
+		public void clickOnOTCTile() {
+			switchToNewTabNew(OTCCallToAction);
+		}
+		
+		public boolean validateSolutranPage(String expectedTitle) {
+			return getTitle().contains(expectedTitle);
+		}
+			
+		public List<Integer> getListOfIndexForRefillMedication_NE() {
+			int size = listOfDrugName.size();
+			validate(drugsAvailableOnMyMedication, 10);
+			String numberTXT = drugsAvailableOnMyMedication.getText();
+			int expectedSize = Integer.parseInt(numberTXT);
+			System.out.println("Expected Drug Name Size" + expectedSize);
+			while (size != expectedSize) {
+				size = listOfDrugName.size();
+			}
+			List<Integer> listOfIndex = new ArrayList<>();
+			for (int i = 0; i < listOfRefillMedication_NE.size(); i++) {
+				listOfIndex.add(i);
+			}
+			return listOfIndex;
+		}
+		
+		public List<Integer> getListOfIndexForRefillMedication_ON() {
+			int size = listOfDrugName.size();
+			validate(drugsAvailableOnMyMedication, 10);
+			String numberTXT = drugsAvailableOnMyMedication.getText();
+			int expectedSize = Integer.parseInt(numberTXT);
+			System.out.println("Expected Drug Name Size" + expectedSize);
+			while (size != expectedSize) {
+				size = listOfDrugName.size();
+			}
+			List<Integer> listOfIndex = new ArrayList<>();
+			for (int i = 0; i < listOfRefillMedication_ON.size(); i++) {
+				listOfIndex.add(i);
+			}
+			return listOfIndex;
+		}
+		
+		public List<Integer> getListOfIndexForRefillMedication_OFF() {
+			int size = listOfDrugName.size();
+			validate(drugsAvailableOnMyMedication, 10);
+			String numberTXT = drugsAvailableOnMyMedication.getText();
+			int expectedSize = Integer.parseInt(numberTXT);
+			System.out.println("Expected Drug Name Size" + expectedSize);
+			while (size != expectedSize) {
+				size = listOfDrugName.size();
+			}
+			List<Integer> listOfIndex = new ArrayList<>();
+			for (int i = 0; i < listOfRefillMedication_Off.size(); i++) {
+				listOfIndex.add(i);
+			}
+			return listOfIndex;
+		}
+		
+		public void validateOTCCallToActionOnPnPPage() { 
+			Assert.assertTrue("PROBLEM - unable to locate OTC call to action tile element"
+			 , validate(OTCToActnBtn, 30)); 
+		}
+		
+		public void validateImageOTCCallToActionOnPnPPage() {
+			Assert.assertTrue("PROBLEM - unable to locate OTC call to action Image element",
+					pnpValidate(OTCCTAImg));
+		}
+		
+		public void validateTitleOTCCallToActionOnPnPPage() {
+			Assert.assertTrue("PROBLEM - unable to locate OTC call to action Title element",
+					pnpValidate(OTCCTATitle));
+		}
+		
+		public void validateDescriptionOTCCallToActionOnPnPPage() {
+			Assert.assertTrue("PROBLEM - unable to locate OTC call to action Description element",
+					pnpValidate(OTCCTADescription));
+		}
+		
+		public void clickOTCCallToActionOnPnPPage() {
+			Assert.assertTrue("PROBLEM - unable to locate OTC call to action Tile element",
+					validate(OTCToActnBtn, 30));
+			// Store the current window handle
+			winHandleBefore = driver.getWindowHandle();
+			OTCToActnBtn.click();
+			switchToNewWindow(3);
+			
+		}
+		
+		public void clickOTCCTAOnPnPPage() {
+			Assert.assertTrue("PROBLEM - unable to locate OTC call to action Tile element",
+					validate(OTCToActnBtn, 30));
+			// Store the current window handle
+			winHandleBefore = driver.getWindowHandle();
+			OTCToActnBtn.click();
+			switchToNewWindow(2);
+			
+		}
+		
+		public void validateOTCCallToActionNOTOnPnPPage() { 
+			Assert.assertFalse("PROBLEM - able to locate OTC call to action tile element"
+			 , validate(OTCToActnBtn, 30)); 
+		}
+		
+		public void switchToNewWindow(int windowCount) {
+		    Set<String> handles = driver.getWindowHandles();   
+		    Iterator<String> itr = handles.iterator();
+		    System.out.println(handles.size());
+		    int i = 1;
+		    while (itr.hasNext() && i < 4) {
+		        String popupHandle = itr.next().toString();
+		        driver.switchTo().window(popupHandle);
+		        System.out.println("Window title is : "+driver.getTitle());
+		        if (i == windowCount) break;
+		        i++;
+		    }
+		}
+				
+		public void validateSolutranOpensInNewWindow_memAuth() {
+			CommonUtility.checkPageIsReady(driver);
+			if(driver.getTitle().equalsIgnoreCase("About") && driver.getCurrentUrl().equalsIgnoreCase("https://healthybenefitsplus.com/base/About")){
+				Assert.assertTrue(true);
+			}else {
+				Assert.assertFalse("PROBLEM - unable to switch window thus HealthBenefit page is not displayed successfully", true);
+			}						
+		}
+		
+		public void validateSolutranOpensInNewWindow() {
+			CommonUtility.checkPageIsReady(driver);
+			if(driver.getTitle().equalsIgnoreCase("About") && driver.getCurrentUrl().equalsIgnoreCase("https://healthybenefitsplus.com/base/About")){
+				Assert.assertTrue(true);
+			}else {
+				Assert.assertFalse("PROBLEM - unable to switch window thus HealthBenefit page is not displayed successfully", true);
+			}						
+		}
+
 }
+

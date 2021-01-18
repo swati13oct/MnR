@@ -1,6 +1,4 @@
-/**
-* 
- */
+
 package pages.acquisition.planRecommendationEngine;
 
 import java.util.ArrayList;
@@ -395,7 +393,6 @@ public class PlanRecommendationEngineDrugsPage extends UhcDriver {
 
 //Drug name List
 
-
 	public ArrayList<String> drugnamesList() {
 		int count = drugNameList.size();
 		drugNames = new ArrayList<String>();
@@ -410,7 +407,6 @@ public class PlanRecommendationEngineDrugsPage extends UhcDriver {
 		System.out.println("Drugs Name list is : " + drugNames);
 		return drugNames;
 	}
-
 
 //Canceling the Model in Drug Page                                
 
@@ -737,3 +733,4 @@ public class PlanRecommendationEngineDrugsPage extends UhcDriver {
 	}
 
 }
+

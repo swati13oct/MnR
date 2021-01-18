@@ -1289,5 +1289,9 @@ public abstract class UhcDriver {
 
 		return true;
 	}
+	
+	public int countOfNewWindowTab() {
+		return driver.getWindowHandles().size();
+	}
 
 }

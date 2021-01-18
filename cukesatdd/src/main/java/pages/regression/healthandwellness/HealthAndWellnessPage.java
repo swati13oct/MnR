@@ -1,3 +1,4 @@
+
 package pages.regression.healthandwellness;
 
 import org.junit.Assert;
@@ -14,10 +15,7 @@ import atdd.framework.MRScenario;
 
 public class HealthAndWellnessPage extends HealthAndWellnessBase {
 
-
 	boolean testThirdPartyPage=true; //note: consent is to not test 3rd party page, but capable if needs to
-
-
 
 	public HealthAndWellnessPage(WebDriver driver){
 		super(driver);
@@ -71,7 +69,6 @@ public class HealthAndWellnessPage extends HealthAndWellnessBase {
 			//String cssPath="#sticky-main-nav > div > div > div > a:nth-child("+index+")";
 			locateAndClickElementWithinShadowRoot(shadowRootHeader,targetCssPath);
 		}
-
 		hwCheckModelPopup(driver);
 	}
 
@@ -189,8 +186,6 @@ public class HealthAndWellnessPage extends HealthAndWellnessBase {
 		Assert.assertTrue("PROBLEM - expect NOT to see Get Reward link for user", !hwValidate(getRewardLink));
 	}
 
-
-
 	public void validateGetReward() {
 		Assert.assertTrue("PROBLEM - expect to see Get Reward link for user", hwValidate(getRewardLink));
 		String expectedUrl="uhc.com/rewards";
@@ -209,9 +204,7 @@ public class HealthAndWellnessPage extends HealthAndWellnessBase {
 			Assert.assertTrue("PROBLEM - not getting expected URL after clicking Get Reward link.  Expect to contain '"+expectedUrl+"' | Actual URL='"+actualUrl+"'", actualUrl.contains(expectedUrl));
 
 			if (hwValidate(notNowLnk,0)) {
-
 				checkModelPopup(driver,1);
-
 				notNowLnk.click();
 				sleepBySec(15);
 			}
@@ -458,5 +451,5 @@ public class HealthAndWellnessPage extends HealthAndWellnessBase {
 			goBackToPriorPgViaBack(originalUrl);
 		}
 	}
-
 }
+

@@ -866,6 +866,13 @@ public class CommonConstants {
 	//public static final String SAUCELABS_DEFAULT_TUNNEL = "OptumSharedTunnel-Stg";
 	public static final String SAUCELABS_DEFAULT_TUNNEL = "Optum-Stage";
 	public static String MAIN_WINDOW_HANDLE_ACQUISITION = null;
+
+	public static final String CONNECTION_URL_UAT19 = "jdbc:oracle:thin:qaread/testreadonly@dbslt0103:1521/gpsts19";
+	public static final String CONNECTION_URL_UAT18 = "jdbc:oracle:thin:qaread/testreadonly@dbslt0102:1521/gpsts18";
+	public static final String CONNECTION_URL_UAT20 = "jdbc:oracle:thin:qaread/testreadonly@dbslt0104:1521/gpsts20";
+	public static final String CONNECTION_URL_STAGE = "jdbc:oracle:thin:qaread/testreadonly@orass0464:1521/gpsst04svc_trn.uhc.com";
+	
+	
 	public static final String SAUCELABS_DEFAULT_MOBILE_TUNNEL = "None";
 	//public static final String SAUCELABS_MOBILE_TUNNEL_IDENTIFIER = "SAUCELABS_MOBILE_TUNNEL_IDENTIFIER";
 	public static final String SAUCELABS_MOBILE_TUNNEL_IDENTIFIER = "OptumRDC_Manual_Stage";

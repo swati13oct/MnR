@@ -1,3 +1,4 @@
+
 package pages.regression.healthRecord;
 
 
@@ -20,6 +21,8 @@ import atdd.framework.MRScenario;
 
 public class HealthRecordPage  extends HealthRecordBase {
 
+
+
 	public HealthRecordPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -38,8 +41,10 @@ public class HealthRecordPage  extends HealthRecordBase {
 			WebElement root1 = expandRootElement(shadowRootFooter);
 			try {
 				WebElement footerContactUsShadowRootLnk = root1.findElement(By.cssSelector("a[data-testid*=TARGET_AWARE_FTR_HELP]"));
+				scrollElementToCenterScreen(footerContactUsShadowRootLnk);
 				footerContactUsShadowRootLnk.click();
 			} catch (Exception e) {
+				System.out.println(e.getMessage());
 				Assert.assertTrue("PROBLEM - unable to locate Contact Us link in footer section", false);
 			}
 		} 
@@ -48,9 +53,10 @@ public class HealthRecordPage  extends HealthRecordBase {
 
 	public WebDriver navigateToPharmacyLocatorPage(String memberType) {
 		checkModelPopup(driver,1);
-		if (noWaitValidate(testharnessTblPharmacyLocatorLnk)) {
-			testharnessTblPharmacyLocatorLnk.click();
-		} else if (noWaitValidate(pharmacySearchLink)) {
+		//tbd if (noWaitValidate(testharnessTblPharmacyLocatorLnk)) {
+		//tbd 	testharnessTblPharmacyLocatorLnk.click();
+		//tbd } else 
+		if (noWaitValidate(pharmacySearchLink)) {
 			pharmacySearchLink.click();
 		} else if (noWaitValidate(section_pharmacySearchLink)) {
 			scrollElementToCenterScreen(section_pharmacySearchLink);
@@ -58,16 +64,39 @@ public class HealthRecordPage  extends HealthRecordBase {
 			section_pharmacySearchLink.click();
 		} else {
 			//note: fix up the URL to get to the page...
-			navigateToBenefitsPage(memberType);
-			CommonUtility.checkPageIsReadyNew(driver);
-			String[] tmp=driver.getCurrentUrl().split(".com/");
-			String plUrl=tmp[0]+".com/content/medicare/member/pharmacy-locator/overview.html#/Pharmacy-Search-English";
-			System.out.println("pharmacy locator pg URL="+plUrl);
-			driver.get(plUrl);
-			CommonUtility.checkPageIsReadyNew(driver);
+			//tbd navigateToBenefitsPage(memberType);
+			//tbd CommonUtility.checkPageIsReadyNew(driver);
+			//tbd CommonUtility.waitForPageLoad(driver, benefitsPgLocatePharmacyLnk, 5);
+			//tbd benefitsPgLocatePharmacyLnk.click();
+			//tbd String[] tmp=driver.getCurrentUrl().split(".com/");
+			//tbd String plUrl=tmp[0]+".com/content/medicare/member/pharmacy-locator/overview.html#/Pharmacy-Search-English";
+			//tbd System.out.println("pharmacy locator pg URL="+plUrl);
+			//tbd driver.get(plUrl);
+			if (MRScenario.environment.contains("team-a")
+					|| (MRScenario.environment.contains("stage") && MRScenario.isTestHarness.equalsIgnoreCase("Yes"))) {
+				System.out.println("SKIP validation - Pharmacy locator link is Raly page, will not work on team or stage-testharness env");
+				return driver;
+			} else if (MRScenario.environment.contains("stage") && !MRScenario.isTestHarness.equalsIgnoreCase("Yes")) {
+				//note: rally page will only work on stage if login via dashboard access
+				String rallyUrl="https://member.int.uhc.com/pharmacy-uhc/pharmacies";
+				driver.get(rallyUrl);
+				CommonUtility.checkPageIsReadyNew(driver);
+				if (validate(stagePharmacyLocatorCloseBtn,0)) {
+					stagePharmacyLocatorCloseBtn.click();
+					CommonUtility.checkPageIsReadyNew(driver);
+					checkModelPopup(driver,1);
+				}
+			} else if (MRScenario.environment.equals("offline") || MRScenario.environment.equals("prod")) {
+				String rallyUrl="https://member.uhc.com/pharmacy-uhc/pharmacies";
+				driver.get(rallyUrl);
+				CommonUtility.checkPageIsReadyNew(driver);
+				checkModelPopup(driver,1);
+			}
 		}
-		CommonUtility.waitForPageLoad(driver, pharmacySearchPgZipcodeField, 10);
-		Assert.assertTrue("PROBLEM - unable to navigator to Pharmacy Locator page", noWaitValidate(pharmacySearchPgZipcodeField));
+		//tbd CommonUtility.waitForPageLoad(driver, pharmacySearchPgZipcodeField, 10);
+		//tbd Assert.assertTrue("PROBLEM - unable to navigator to Pharmacy Locator page", noWaitValidate(pharmacySearchPgZipcodeField) || noWaitValidate(pharmacySearchPgZipcodeField_newRally));
+		CommonUtility.waitForPageLoad(driver, pharmacySearchPgZipcodeField_newRally, 10);
+		Assert.assertTrue("PROBLEM - unable to navigator to (Rally) Pharmacy Locator page", noWaitValidate(pharmacySearchPgZipcodeField_newRally));
 		return driver;
 	}
 
@@ -158,6 +187,7 @@ public class HealthRecordPage  extends HealthRecordBase {
 			System.out.println("located shadow-root element, attempt to process further...");
 			WebElement root1 = expandRootElement(shadowRootHeader);
 			try {
+				checkModelPopup(driver,1);
 				WebElement claimsTopMenuShadowRootLink = root1.findElement(By.cssSelector("a[data-testid*=nav-link-claims]"));
 				claimsTopMenuShadowRootLink.click();
 			} catch (Exception e) {
@@ -240,7 +270,6 @@ public class HealthRecordPage  extends HealthRecordBase {
 	public WebDriver navigateToPlanDocPage(String memberType) {
 		navigateToBenefitsPage(memberType);
 		System.out.println("Finished navigating to benefits page");
-		checkModelPopup(driver,1);
 		if (noWaitValidate(planDocHeaderTxt)) {
 			System.out.println("Already on PlanDoc page, no need to go any further");
 		} else {
@@ -393,8 +422,6 @@ public class HealthRecordPage  extends HealthRecordBase {
 					WebElement firstLink=root1.findElement(By.cssSelector("#dropdown-options-2 > a:nth-child(1)"));
 					Assert.assertTrue("PROBLEM - 'Health Record' link should be the first link on the dropdown.  First link text='"+firstLink.getText()+"'", firstLink.getText().toLowerCase().contains("health record"));
 				}
-
-
 			} catch (Exception e) {
 				e.printStackTrace();
 				if (noWaitValidate(sorryError)) {
@@ -446,7 +473,6 @@ public class HealthRecordPage  extends HealthRecordBase {
 			checkModelPopup(driver,1);
 			WebElement ihrLnk=null;
 			List<WebElement> acctProfOptLst=null;
-
 			if (driver.getCurrentUrl().contains("claims") && noWaitValidate(testHarn_desktop_AcctProf_IHRLnk_claims)) {
 				System.out.println("TEST - This is on claims page");
 				ihrLnk=testHarn_desktop_AcctProf_IHRLnk_claims;
@@ -477,7 +503,6 @@ public class HealthRecordPage  extends HealthRecordBase {
 			String actUrl=ihrLnk.getAttribute("href");
 			Assert.assertTrue("PROBLEM - Health Record link href value not as expected.  Expect to contains: '"+expUrl+"' | Actual URL='"+actUrl+"'", actUrl.contains(expUrl));
 			return true;
-
 		} else {
 			System.out.println("unable to locate Account Profile from top menu");
 			return false;
@@ -519,17 +544,21 @@ public class HealthRecordPage  extends HealthRecordBase {
 
 	public void navigateFromTestHarnessToHeathRecordPage() {
 		checkModelPopup(driver,1);
-		if (!noWaitValidate(testHarn_desktop_AcctProf_IHRLnk)) {
-			Assert.assertTrue("PROBLEM - unable to locate Account Profile button on Rally Dashboard top menu", noWaitValidate(testHarn_AcctProfBtn));
+		WebElement ihrLnk=testHarn_desktop_AcctProf_IHRLnk;
+		if (noWaitValidate(testHarn_desktop_AcctProf_IHRLnk_pharmacyLocator))
+			ihrLnk=testHarn_desktop_AcctProf_IHRLnk_pharmacyLocator;
+		
+		if (!noWaitValidate(ihrLnk)) {
+			Assert.assertTrue("PROBLEM - unable to locate Account Profile button on Rally Dashboard top menu", noWaitValidate(ihrLnk));
 			JavascriptExecutor jse = (JavascriptExecutor) driver;
 			jse.executeScript("window.scrollBy(0,50)", "");
 			scrollToView(testHarn_AcctProfBtn);
 			jsClickNew(testHarn_AcctProfBtn);
 		}
 
-		Assert.assertTrue("PROBLEM - unable to locate Heath Record link on Account Profile button dropdown options", noWaitValidate(testHarn_desktop_AcctProf_IHRLnk));
+		Assert.assertTrue("PROBLEM - unable to locate Heath Record link on Account Profile button dropdown options", noWaitValidate(ihrLnk));
 
-		testHarn_desktop_AcctProf_IHRLnk.click();
+		ihrLnk.click();
 		CommonUtility.checkPageIsReadyNew(driver);
 		checkModelPopup(driver,1);
 	}		
