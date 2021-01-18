@@ -1542,6 +1542,9 @@ ArrayList<String> comboPlanNames = new ArrayList<String>();
 public void validateCombineSavePlan(String year) {
 	System.out.println("Validate PRE Save Plans functionality : ");
 	int saveplans = 2;
+	threadsleep(5000);
+	validate(PDPViewPlansLink);
+	PDPViewPlansLink.click();
 	savecomboplans(PDPPlansName,saveplans, year, PDPPlansSaveIcon);
 	validate(keepshoppingPlansBtn);
 	keepshoppingPlansBtn.click();
@@ -1635,7 +1638,7 @@ public void verifyPlansVPandPDP(List<WebElement> plansName) {
 
 public String savingplans(WebElement plan, WebElement saveplan) {
 	scrollToView(plan);
-	String exceptedplanName = plan.getText().trim();
+	String exceptedplanName = plan.getText();
 	System.out.println("Plan Name in VPP Summary Page: " + exceptedplanName);
 	String save = saveplan.getText().trim();
 	if (save.equalsIgnoreCase("Save") || save.equalsIgnoreCase("Save Plan")) { 

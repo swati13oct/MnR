@@ -920,6 +920,7 @@ public class PlanRecommendationEngineStepDefinition {
 		wd = getLoginScenario().getWebDriverNew();
 		AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd,"PRE",true);
 		aquisitionhomepage.openExternalLinkPRE(inputValues.get("Site Name"));
+		checkpopup();
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE,
 				aquisitionhomepage);

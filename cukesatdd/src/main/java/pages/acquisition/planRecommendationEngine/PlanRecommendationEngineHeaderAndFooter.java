@@ -155,7 +155,7 @@ public class PlanRecommendationEngineHeaderAndFooter extends UhcDriver {
     @FindBy(css = "#subnav_2 div[class$='content-2']>h3:nth-of-type(2)>a")
 	private WebElement headerDualSpecialLink;
 
-	@FindBy(css = "#subnav_2 div[class$='content-2']>h3 #_82nrmz9f2>a")
+	@FindBy(css = "#subnav_2 div[class$='content-2']>h3:nth-of-type(3)>span:nth-of-type(2)>a")
     private WebElement headerMedicaresupplementplanLink;
     
 	@FindBy(css = "#subnav_2 div[class$='content-2']>h3:nth-of-type(5)>a")
