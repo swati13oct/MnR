@@ -87,9 +87,11 @@ public class DCEStepDefinitionAARP {
 				.getBean(PageConstants.DCE_Redesign_GetStarted);
 		BuildYourDrugList DCEbuildDrugList = DCEgetStarted.clickAddsDrugs();
 		String druglist = (String) getLoginScenario().getBean(DCERedesignCommonConstants.DRUGLIST);
-		/*
-		 * if(null == druglist) { druglist = ""; }
-		 */
+		
+		if (druglist == null) {
+			druglist = "";
+		}
+		 
 		System.out.println("Setting Drugs List : " + druglist);
 		getLoginScenario().saveBean(DCERedesignCommonConstants.DRUGLIST, druglist);
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_BuildDrugList, DCEbuildDrugList);
@@ -421,12 +423,15 @@ public class DCEStepDefinitionAARP {
 		TellUsAboutDrug tellUsAboutDrug = buildDrugList.SearchaddDrugs(drugName);
 		buildDrugList = tellUsAboutDrug.ClickAddDrug();
 		String druglist = (String) getLoginScenario().getBean(DCERedesignCommonConstants.DRUGLIST);
-		/*
-		 * if(druglist.isEmpty()) { druglist = ""; }
-		 */
+		
+		 
 		System.out.println("Drugs List : " + druglist);
 
-		druglist = druglist + "&" + drugName;
+		if (druglist.isEmpty()) {
+			druglist = drugName;
+		} else {
+			druglist = druglist + "&" + drugName;
+		}
 		System.out.println("Drugs List after Drug " + drugName + " , Added : " + druglist);
 		getLoginScenario().saveBean(DCERedesignCommonConstants.DRUGLIST, druglist);
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_BuildDrugList, buildDrugList);

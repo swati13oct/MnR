@@ -3470,10 +3470,10 @@ action.moveToElement(navigationSectionHomeLink).moveToElement(ourPlansHoverLink)
 	public void validateCallSam() throws InterruptedException {
 		boolean present;
 		//driver.navigate().refresh();
-		if(MRScenario.browserName.equalsIgnoreCase("Safari")) {	//Adding because Safari 13 fails to locate element after navigate back
+		/*if(MRScenario.browserName.equalsIgnoreCase("Safari")) {	//Adding because Safari 13 fails to locate element after navigate back
 			driver.navigate().refresh();
 			sleepBySec(2);
-		}
+		}*/
 		
 	}
 	 

@@ -164,6 +164,7 @@ public class BuildYourDrugList extends UhcDriver {
 	public ZipCodePlanYearCapturePage navigateToZipEntryPage() {
 		validateNew(reviewDrugCost);
 		jsClickNew(reviewDrugCost);
+		waitForPageLoadSafari();
 		CommonUtility.waitForPageLoadNew(driver, zipCodeTxtbox, 20);
 		if(validateNew(zipCodeTxtbox))
 		{
@@ -255,10 +256,12 @@ public class BuildYourDrugList extends UhcDriver {
 		String[] DrugListItems = druglist.split("&");
 		int i;
 		String currentDrug;
-		int DrugCount_Total = DrugListItems.length-1;
+		//int DrugCount_Total = DrugListItems.length-1;   	//Commenting because null is handled when drugs are added to druglist array, thus array will only have drug names.
+		int DrugCount_Total = DrugListItems.length;
 		System.out.println("Total Added Drug Count : "+DrugCount_Total);
 		System.out.println("Total Added Drug Count : "+DrugCount_Total);
-		for(i=1; i<=DrugCount_Total; i++) {
+		//for(i=1; i<=DrugCount_Total; i++) {				//Druglist array does not have null and only has drug names, hence starting from 0 to array length - 1.
+		for(i=0; i<DrugCount_Total; i++) {
 			currentDrug = DrugListItems[i];
 			System.out.println("Current Added Drug Name : "+currentDrug);
 			WebElement DrugName = driver.findElement(By.xpath("//uhc-list-item//h4[contains(text(), '"+currentDrug+"')]"));
