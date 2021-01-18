@@ -3565,4 +3565,11 @@ public class VppCommonStepDefinition {
 		getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
 		
 	}
+	
+	@Then("^the user quits the session$")
+	public void user_ends_current_session() throws Throwable {
+		WebDriver wd  =(WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		wd.quit();
+		
+	}
 }

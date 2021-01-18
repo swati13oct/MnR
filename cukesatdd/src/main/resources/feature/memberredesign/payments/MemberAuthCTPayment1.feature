@@ -22,7 +22,7 @@ Feature: S1.1 To test Member Auth premium payment flows Micro App.
 
     Examples: 
       | UID     | username | password | memUserName    | planType | claimPeriod    | dateRange      | Name         | CreditCardNumber | validMonth | validYear | paymentType |
-      | F243897 | jkuma14  | Brock@04 | LMHOCHSCHILD11 | MAPD     | Last 24 months | Last 18 months | Pooja Minhas | 4121600170691201 |         01 |      2021 | OneTime     |
+      | F243897 | jkuma14  | Brock@05 | LMHOCHSCHILD11 | MAPD     | Last 24 months | Last 18 months | Pooja Minhas | 4121600170691201 |         01 |      2021 | OneTime     |
 
   @regressionMemberPROD
   Scenario Outline: TID: <TID> -  Test Case 02-Verify One time EFT payment flow for federal member
@@ -50,7 +50,7 @@ Feature: S1.1 To test Member Auth premium payment flows Micro App.
     #Removed 11/5/2020 - And the user is displayed with an error message that he is not authorized
     Examples: 
       | TID   | username | password | memUserName    | planType | claimPeriod    | dateRange      | routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName | paymentType |
-      | TC002 | jkuma14  | Brock@04 | mleroy@mcn.org | MAPD     | Last 24 months | Last 18 months | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    | Recurring   |
+      | TC002 | jkuma14  | Brock@05 | mleroy@mcn.org | MAPD     | Last 24 months | Last 18 months | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    | Recurring   |
 
   @regressionMemberPROD
   Scenario Outline: TID: <TID> -  Test Case 04 -Verify cancel button on Update Recurring EFT flow for federal member
@@ -76,4 +76,4 @@ Feature: S1.1 To test Member Auth premium payment flows Micro App.
 
     Examples: 
       | TID   | username | password | memUserName    | planType | routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName |
-      | TC004 | jkuma14  | Brock@04 | mleroy@mcn.org | MAPD     | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    |
+      | TC004 | jkuma14  | Brock@05 | mleroy@mcn.org | MAPD     | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    |

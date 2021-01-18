@@ -35,7 +35,7 @@ public class WelcomePage extends UhcDriver{
 	private WebElement NextBtn;
 	
 	//@FindBy(xpath = "//*[@class = 'cancel-button modal-link']")
-	@FindBy(id = "cancel-enrollment")
+	@FindBy(xpath = "//*[contains(@id,'cancel-enrollment') or contains(@id,'ole-form-cancel-button')]")
 	private WebElement CancelEnrollmentLink;
 	
 	// WebElements for Welcome Page
@@ -45,7 +45,7 @@ public class WelcomePage extends UhcDriver{
 	@FindBy(id = "view-learn-enrollment")
 	private WebElement LearnMore_Modal;
 
-	@FindBy(id = "ole-cancel-confirm")
+	@FindBy(xpath = "//*[(contains(@id,'ole-cancel-confirm') or contains(@id,'enroll-cancel-profile')) and contains(@class,'active')]")
 	private WebElement CancellationModal;
 	
 	@FindBy(id = "leavingSite-linkrouter")
