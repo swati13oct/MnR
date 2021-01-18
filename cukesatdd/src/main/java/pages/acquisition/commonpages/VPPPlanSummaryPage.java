@@ -759,7 +759,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//a[contains(text(), 'Your Guide to AARP Medicare Supplement Insurance')]")
 	private WebElement RightRail_AARPSupplementPlans;
 	
-	@FindBy(xpath = "//a[contains(text(),'Print/save a copy of your application')]")
+	@FindBy(xpath = "//a[contains(text(),'Print/save a copy of your application') or contains(text(),'Print information on this page')]")
 	private WebElement PrintandSave_Application;
 	
 	@FindBy(xpath = "//a[contains(text(), 'Plan Overview')]")
@@ -6060,11 +6060,13 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//span[text()='Enroll in Plan']/..")
 	private WebElement enrollInPlanBtn;
 
-	public void clickEnrollPlanBtnOnSelectPlanModal() {
+	public WelcomePage clickEnrollPlanBtnOnSelectPlanModal() {
 		validateNew(enrollInPlanBtn);
 //		enrollInPlanBtn.click();
 		jsClickNew(enrollInPlanBtn);
 		waitForPageLoadSafari();
+		
+		return new WelcomePage(driver);
 	}
 
 	public void validateNavigatedToOle() {
@@ -6115,7 +6117,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 				System.out.println(expectedPlanNames);
 				System.out.println(actualPlanNames);
 				Assert.assertTrue("Saved plans not displayed in Enroll Popup.../n Expected plans" + expectedPlanNames
-						+ "\n Actual plans" + actualPlanNames, actualPlanNames.equals(expectedPlanNames));
+						+ "\n Actual plans" + actualPlanNames, actualPlanNames.contains(expectedPlanNames));
 			}
 		} catch (Exception ex) {
 			System.out.println("NBA modal not found");

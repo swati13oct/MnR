@@ -1,6 +1,7 @@
 package acceptancetests.acquisition.ole;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -3079,14 +3080,14 @@ public void the_user_validates_the_OLE_Submission_Details_in_GPS(DataTable arg1)
 		String MailingAddressQuestion = MemberDetailsMap.get("Mailing Address Question");
 		String [] dateArray = null;
 		
-		List<String> testNote=(List<String>) getLoginScenario().getBean(ProviderSearchCommonConstants.TEST_NOTE);
-		if (testNote==null)
-			testNote=new ArrayList<String>();
-
-		
+				
+		/*if (!(MRScenario.environment.equalsIgnoreCase("offline")
+				|| MRScenario.environment.equalsIgnoreCase("prod")|| MRScenario.environment.equalsIgnoreCase("stage")) ) {
+			*/
 		if (!(MRScenario.environment.equalsIgnoreCase("offline")
-				|| MRScenario.environment.equalsIgnoreCase("prod")) ) {
-			OLEconfirmationPage OLEGPSValidation = (OLEconfirmationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_CONFIRMATION_PAGE);
+				|| MRScenario.environment.equalsIgnoreCase("prod"))) {
+		
+		OLEconfirmationPage OLEGPSValidation = (OLEconfirmationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_CONFIRMATION_PAGE);
 			if (OLEGPSValidation != null) {
 
 				System.out.println("--------------------Creating a map to store Expected Data for Comparison----------------------");
@@ -3433,19 +3434,24 @@ public void the_user_validates_the_OLE_Submission_Details_in_GPS(DataTable arg1)
 					System.out.println("--------------------Storing Data for Preliminary questions and Use and disclosure  Ended----------------------"+disclosureprovideraddress);
 				}						
 				//---------------------------------------------------//	
+			//------------Added for Jenkins Report---------------//
 				
-				testNote.add("===================================================");
-				testNote.add("\tValidation for able to print all the values from the GPS");
-
-				boolean Validation_Status = OLEGPSValidation.validate_GPS_for_Plantype(DetailsMap);
+				Map<String,String> matched = new HashMap<String,String>();
+				Map<String,String> mismatched = new HashMap<String,String>();
+				//------------Added for Jenkins Report---------------//	
+				boolean Validation_Status = OLEGPSValidation.validate_GPS_for_Plantype(DetailsMap,matched,mismatched);
 				if (Validation_Status) {
 					System.out.println("OLE Confirmation Page : All Plan Details Validated in GPS");
-					getLoginScenario().saveBean(OLE_PageConstants.OLE_CONFIRMATION_PAGE, OLEGPSValidation);
+					getLoginScenario().saveBean(OLE_PageConstants.OLE_CONFIRMATION_PAGE, OLEGPSValidation);										
+					
+				//	getLoginScenario().saveBean(oleCommonConstants.TEST_RESULT_NOTE,testNote1);
 					Assert.assertTrue(true);
-					testNote.add("\tPASSED- able to print all the values from the GPS");
+					
+					
 				} else {
 					System.out.println("OLE Confirmation Page : All Plan and Member Details  NOT validated in GPS");
 					Assert.fail("OLE Confirmation Page : All Plan and Member Details  NOT validated in GPS");
+					
 				}
 			} else {
 				getLoginScenario().saveBean(OLE_PageConstants.OLE_CONFIRMATION_PAGE, OLEGPSValidation);
@@ -3453,7 +3459,7 @@ public void the_user_validates_the_OLE_Submission_Details_in_GPS(DataTable arg1)
 				Assert.fail("OLE Confirmation Page is NOT Displayed : OLE Submission Failed");
 			}
 		} else {
-			System.out.println("Skipping the Confirmation functionality in Offline-Prod/Prod environment/team acme environment");
+			System.out.println("Skipping the Confirmation functionality in Offline-Prod/Prod environment environment");
 		}
 
 }
@@ -3796,12 +3802,26 @@ public void the_user_navigates_to_Review_and_Submit_Page_clickon_Edit_Medicare_P
 		public void testResultNote(Scenario scenario) { 
 			if(null!=getLoginScenario().getBean(oleCommonConstants.TEST_RESULT_NOTE)) {   
 				@SuppressWarnings("unchecked")   
-				List<String> testNote=(List<String>) getLoginScenario()
+				List<String> testNote1=(List<String>) getLoginScenario()
 						.getBean(oleCommonConstants.TEST_RESULT_NOTE);
-				for (String s: testNote) {   
+				for (String s: testNote1) {   
 					scenario.write(s);
 				}
-				testNote.clear(); 
+				testNote1.clear(); 
 			}
+	}
+	@Then("^the user cancels enrollment and navigates to homepage$")
+	public void the_user_cancels_enrollment() throws Throwable {
+		WelcomePage welcomePage = (WelcomePage) getLoginScenario().getBean(OLE_PageConstants.OLE_WELCOME_PAGE);
+		CancelOLEModal cancelOLEmodal = welcomePage.OpenCancelOLE();
+		if (cancelOLEmodal != null) {
+
+			getLoginScenario().saveBean(OLE_PageConstants.OLE_LEARNMORE_MODAL_PAGE,
+					cancelOLEmodal);
+			System.out.println("OLE Cancellation Modal is Displayed");
+			cancelOLEmodal.leaveApplication();
+		}
+		else
+			Assert.fail("OLE Cancellation Modal is NOT Displayed");
 	}
 }

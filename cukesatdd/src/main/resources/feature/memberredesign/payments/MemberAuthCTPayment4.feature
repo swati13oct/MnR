@@ -42,8 +42,8 @@ Feature: S1.1 To test Member Auth premium payment flows Micro App.
 
     Examples: 
       | UID     | username | password | memUserName         | planType | memberType | copayCategory      |         |
-      | F243897 | jkuma14  | Brock@04 | mleroy@mcn.org      | IndMA    | IndMA      | ACTIVEIndPayment   | NON LIS |
-      | F243897 | jkuma14  | Brock@04 | Earlzietz@yahoo.com | Group    | Group      | ACTIVEGroupPayment | NON LIS |
+      | F243897 | jkuma14  | Brock@05 | mleroy@mcn.org      | IndMA    | IndMA      | ACTIVEIndPayment   | NON LIS |
+      | F243897 | jkuma14  | Brock@05 | Earlzietz@yahoo.com | Group    | Group      | ACTIVEGroupPayment | NON LIS |
 
   #Test Case 11 - Active SHIP member with billing and payment history in last 90 days
   @regressionMemberPROD
@@ -87,4 +87,4 @@ Feature: S1.1 To test Member Auth premium payment flows Micro App.
 
     Examples: 
       | UID     | username | password | memUserName | planType | memberType | copayCategory     |         |
-      | F243897 | jkuma14  | Brock@04 | pramila1946 | SHIP     | SHIP       | ACTIVESHIPPayment | NON LIS |
+      | F243897 | jkuma14  | Brock@05 | pramila1946 | SHIP     | SHIP       | ACTIVESHIPPayment | NON LIS |

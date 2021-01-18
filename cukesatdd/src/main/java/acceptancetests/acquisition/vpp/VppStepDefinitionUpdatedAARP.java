@@ -9,11 +9,17 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.poi.hssf.usermodel.HSSFCell;
+import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.IndexedColors;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -52,6 +58,8 @@ import pages.acquisition.ulayer.VPPTestHarnessPage;
 import pages.acquisition.ulayer.VisitorProfilePage;
 import pages.acquisition.ulayer.VisitorProfileTestHarnessPage;
 import pages.acquisition.ulayer.ZipcodeLookupHomePage;
+import pages.acquisition.vppforaep.AepPlanDetailsPage;
+import pages.acquisition.vppforaep.VppCommonPage;
 
 /**
  * Functionality: VPP flow for AARP site
@@ -73,10 +81,11 @@ public class VppStepDefinitionUpdatedAARP {
 	public void the_user_on_aarp_medicaresolutions_Site() {
 		WebDriver wd = getLoginScenario().getWebDriverNew();
 		AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd);
-		aquisitionhomepage.validateSubtitle();
+//		aquisitionhomepage.validateSubtitle();
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, aquisitionhomepage);
 	}
+	
 	@Given("^the user is on UHC medicare acquisition site page$")
 	public void the_user_on_uhc_medicares_Site() {
 		WebDriver wd = getLoginScenario().getWebDriverNew();
@@ -3134,7 +3143,7 @@ public class VppStepDefinitionUpdatedAARP {
 //
 //	}
 //	
-	@Then("^the user picks each example from excel to validate Plan Document PDFs and reports into excel$")
+	/*@Then("^the user picks each example from excel to validate Plan Document PDFs and reports into excel$")
 	public void the_user_ExceldataValidation_PDF_link_and_validates_document_code_in_PDFtext_URL(DataTable givenAttributes) throws Throwable {
 		List<DataTableRow> givenAttributesRow = givenAttributes
 				.getGherkinRows();
@@ -3145,8 +3154,13 @@ public class VppStepDefinitionUpdatedAARP {
 					givenAttributesRow.get(i).getCells().get(1));
 		}
 		String ExcelName = givenAttributesMap.get("ExcelFile");
-		String SheetName = givenAttributesMap.get("WorkSheetName");
-		System.out.println("Set of TFNs from Sheet : "+SheetName);
+		String sheetName = givenAttributesMap.get("WorkSheetName");
+		String siteType = givenAttributesMap.get("Site");
+		System.out.println("Set of TFNs from Sheet : "+sheetName);
+		
+		 WebDriver wd = getLoginScenario().getWebDriverNew();
+		 getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+		
 		//Getting Date
 		DateFormat dateFormat = new SimpleDateFormat("MMddyyyy");
 		Date RunDate = new Date();
@@ -3154,112 +3168,93 @@ public class VppStepDefinitionUpdatedAARP {
 		String parentDirectory = null;
 		parentDirectory = new java.io.File(".").getCanonicalPath();
 		String InputFilePath = parentDirectory+"/src/main/resources/database/PlanDocs/"+ExcelName+".xls";
-		String OutputFilePath = parentDirectory+"/target/PDFvalidation_Results_"+SheetName+"_"+DateCreated+".xls";
+		String OutputFilePath = parentDirectory+"/target/PDFvalidation_Results_"+sheetName+"_"+DateCreated+".xls";
+		
 		//Reading Excel.xls file
 		File InputFile = new File(InputFilePath);
 		FileInputStream inputStream = new FileInputStream(InputFile);
 		Workbook workbook = new HSSFWorkbook(inputStream);
-		Sheet sheet = workbook.getSheet(SheetName);
+		Sheet sheet = workbook.getSheet(sheetName);
 		int lastRow = sheet.getLastRowNum();
+		
+		//Creating the results excel book
 		Workbook ResultWorkbook = new HSSFWorkbook();
-		Sheet ResultsSheet = ResultWorkbook.createSheet(SheetName);
-		//Setting First Row for Results excel
-		Row resultsRow = ResultsSheet.createRow(0);
-		resultsRow.createCell(0).setCellValue((String) "Zipcode");
-		resultsRow.createCell(1).setCellValue((String) "PlanName");
-		resultsRow.createCell(2).setCellValue((String) "pdfType");
-		resultsRow.createCell(3).setCellValue((String) "docCode");
-		resultsRow.createCell(4).setCellValue((String) "Plan Summary Loaded PASS/FAIL");
-		resultsRow.createCell(5).setCellValue((String) "Plan Details Loaded PASS/FAIL");
-
-		resultsRow.createCell(6).setCellValue((String) "PDF Link Validated PASS/FAIL");
-		resultsRow.createCell(7).setCellValue((String) "PDF URL/Text validated PASS/FAIL");
-		//Looping over entire row
+		Sheet ResultsSheet = ResultWorkbook.createSheet(sheetName);
+		
+		
+		//Creating styles to use to highlight cells with colors
+		CellStyle stylePassed = ResultWorkbook.createCellStyle();
+		stylePassed.setFillForegroundColor(IndexedColors.GREEN.getIndex());
+		stylePassed.setFillPattern(CellStyle.SOLID_FOREGROUND);
+		
+		CellStyle styleFailed = ResultWorkbook.createCellStyle();
+		styleFailed.setFillForegroundColor(IndexedColors.RED.getIndex());
+		styleFailed.setFillPattern(CellStyle.SOLID_FOREGROUND);
 		try {
-			for(int i=1; i<=lastRow; i++){
-				//Get input data Row
-				Row row = sheet.getRow(i);
-				double zipcodeint = row.getCell(0).getNumericCellValue();
-				
-				String zipcode = String.valueOf(zipcodeint);
-				String isMultiCounty = row.getCell(1).getStringCellValue().trim();
-				String county = row.getCell(2).getStringCellValue().trim();
-				String plantype = row.getCell(3).getStringCellValue().trim();
-				String planName = row.getCell(4).getStringCellValue().trim();
-				String pdfType = row.getCell(5).getStringCellValue().trim();
-				String docCode = row.getCell(6).getStringCellValue().trim();
+			 PlanDetailsPage planDetailsPage = null;
+			 String currentCellValue = "";
+			 String currentColName = "";
+			  
+			 HashMap <String, String> benefitsMap = new HashMap<String, String>();
+			 System.out.println(sheetName+ " SAUCE URL: "+ MRScenario.returnJobURL());
+			 
+			 for(int rowIndex=0; rowIndex<=lastRow; rowIndex++)
+	            {
+				 	int failureCounter = 0;
+				 	int cellIndex = 0;
+				 	
+				 	HSSFRow row = (HSSFRow) sheet.getRow(rowIndex);
+	                Iterator<Cell> cellIterator = row.cellIterator();
+	                HSSFRow resultsRow = (HSSFRow) ResultsSheet.createRow(rowIndex);
 
-				System.out.println("Excel data Row # : "+i);
-
-				System.out.println("Zipcode : "+zipcode);
-				System.out.println("Plan Type : "+plantype);
-				System.out.println("Plan Name : "+planName);
-				System.out.println("PDF Type : "+pdfType);
-				System.out.println("Document Code : "+docCode);
-
-				//Create Results Row
-				resultsRow = ResultsSheet.createRow(i);
-				resultsRow.createCell(0).setCellValue((String) zipcode);
-				resultsRow.createCell(1).setCellValue((String) planName);
-				resultsRow.createCell(2).setCellValue((String) pdfType);
-				resultsRow.createCell(3).setCellValue((String) docCode);
-				
-				WebDriver wd = getLoginScenario().getWebDriverNew();
-				AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd);
-
-				getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
-				
-				getLoginScenario().saveBean(VPPCommonConstants.ZIPCODE, zipcode);
-				getLoginScenario().saveBean(VPPCommonConstants.COUNTY, county);
-				getLoginScenario().saveBean(VPPCommonConstants.IS_MULTICOUNTY, isMultiCounty);
-
-				VPPPlanSummaryPage plansummaryPage = null;
-				if (("NO").equalsIgnoreCase(isMultiCounty.trim())) {
-					plansummaryPage = aquisitionhomepage.searchPlansWithOutCounty(zipcode);
-				} else {
-					plansummaryPage = aquisitionhomepage.searchPlans(zipcode, county);
-				}
-
-				if (plansummaryPage != null) {
-					resultsRow.createCell(4).setCellValue((String) "PASS");
-
-				} else {
-					resultsRow.createCell(4).setCellValue((String) "FAIL");
-				}
-				
-				plansummaryPage.viewPlanSummary(plantype);
-				plansummaryPage.CheckClick_CurrentYear_Plans();
-				
-				PlanDetailsPage vppPlanDetailsPage = plansummaryPage.navigateToPlanDetails(planName, plantype);
-				if (vppPlanDetailsPage != null) {
-					resultsRow.createCell(5).setCellValue((String) "PASS");
-				} else
-					resultsRow.createCell(5).setCellValue((String) "FAIL");
-				boolean pdfLinkFlag = vppPlanDetailsPage.ValidatePDFlinkIsDisplayed(pdfType,docCode);
-				if (pdfLinkFlag) {
-					resultsRow.createCell(6).setCellValue((String) "PASS");
-				} else
-					resultsRow.createCell(6).setCellValue((String) "FAIL");
-				boolean pdfFlag = vppPlanDetailsPage.ClickValidatePDFText_URL_ForDocCode(pdfType, docCode);
-				if (pdfFlag) {
-					resultsRow.createCell(7).setCellValue((String) "PASS");
-				} else
-					resultsRow.createCell(7).setCellValue((String) "FAIL");
-				
-				//wd.close();
-				wd.quit();
-				//getLoginScenario().nullifyWebDriverNew();
-
-			}
+	                //looping through columns until an empty column is found
+	                while (cellIterator.hasNext()) 
+	                {
+	                	 HashMap <Boolean, String> resultMap = new HashMap<Boolean, String>(); 
+	                	 boolean valueMatches = true;
+	                	 HSSFCell cell = (HSSFCell) cellIterator.next();
+			             
+	                	 try {
+	                		 currentCellValue = cell.getStringCellValue();
+	                		 currentColName = sheet.getRow(0).getCell(cellIndex).getStringCellValue();
+	                	 }catch (Exception e) {
+	                		 System.out.println("Error getting value for "+sheetName+ " Row "+rowIndex +" Cell "+cell);
+	                		 System.out.println(e);
+	                	 }
+		                 HSSFCell newCell = (HSSFCell) resultsRow.createCell(cellIndex); 
+						 if(rowIndex==0) {
+							 newCell.setCellValue(cell.getStringCellValue()); 
+						 }
+						 if(rowIndex!=0) { //skip the header row
+							 if(cellIndex==0) { 
+								 
+								  System.out.println("Validating "+sheetName+ " Plan "+rowIndex+" ************************************************************");
+								  new VppCommonPage(wd,siteType,currentCellValue);  //gets the partial deeplink fromt the excel and appends it with the environment URL and navigates to plan details page	
+								  planDetailsPage = new PlanDetailsPage(wd);
+							 }
+							 if(!(currentColName.contains("Link")||currentColName.equalsIgnoreCase("zipcode")||currentColName.equalsIgnoreCase("county")||currentColName.equalsIgnoreCase("plan name")||currentColName.equalsIgnoreCase("fips")||currentColName.equalsIgnoreCase("plan type")||currentColName.equalsIgnoreCase("plan id"))){ 
+							 boolean pdfFlag = planDetailsPage.clickAndValidatePDFText_URL(currentColName, currentCellValue);
+								if (pdfFlag) {
+									newCell.setCellStyle(stylePassed);
+									newCell.setCellValue("PASS");
+								} else {
+									newCell.setCellStyle(styleFailed);
+									newCell.setCellValue("FAIL");
+								
+								}
+							 }
+							 
+						 }
+						 
+						 cellIndex++;
+	                }
+	            }
 			File OutputFile = new File(OutputFilePath);
 			FileOutputStream outputStream = new FileOutputStream(OutputFile);
 			ResultWorkbook.write(outputStream);
 			inputStream.close();
-			outputStream.flush();
-			
+			outputStream.flush();			
 			outputStream.close();
-
-			//softAssertions.assertAll();
 		} catch (Exception e) {
 			File OutputFile = new File(OutputFilePath);
 			FileOutputStream outputStream = new FileOutputStream(OutputFile);
@@ -3267,11 +3262,10 @@ public class VppStepDefinitionUpdatedAARP {
 			inputStream.close();
 			outputStream.flush();
 			outputStream.close();
-			//softAssertions.assertAll();
 			e.printStackTrace();
 		}
 
-	}
+	}*/
 
 	//--------------------------------------------
 	//note: begin - added for deeplink validaton
