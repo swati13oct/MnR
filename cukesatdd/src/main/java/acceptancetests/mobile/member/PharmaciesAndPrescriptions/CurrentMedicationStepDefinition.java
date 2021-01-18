@@ -120,43 +120,43 @@ public class CurrentMedicationStepDefinition {
 		getLoginScenario().saveBean(PharmaciesAndPrescriptionsCommonConstants.PHARMACIES_AND_PRESCRIPTIONS_PAGE, pnpPg);
 	}
 
-	@Given("^user opens the page to validate on AARP Tablet$")
-	public void user_opens_the_page_to_validate_on_AARP_Tablet(DataTable givenAttributes) {
-		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}
-		String pagename = memberAttributesMap.get("pagename");
-		System.out.println(pagename);
-		AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
-				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		aquisitionhomepage.navigateToPage(pagename);
-	}
+//	@Given("^user opens the page to validate on AARP Tablet$")
+//	public void user_opens_the_page_to_validate_on_AARP_Tablet(DataTable givenAttributes) {
+//		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+//		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+//		for (int i = 0; i < memberAttributesRow.size(); i++) {
+//			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+//					memberAttributesRow.get(i).getCells().get(1));
+//		}
+//		String pagename = memberAttributesMap.get("pagename");
+//		System.out.println(pagename);
+//		AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
+//				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+//		aquisitionhomepage.navigateToPage(pagename);
+//	}
 
-	@Then("^the user validates whether call icon is visible on AARP Tablet$")
-	public void the_user_validates_whether_call_icon_is_visible_on_AARP_Tablet() throws InterruptedException {
-		AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
-				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		aquisitionhomepage.validateCallSamOnTablet();
-		aquisitionhomepage.validateCallSamContentOnTablet();
-		AcquisitionHomePageMobile returnval = aquisitionhomepage.validateCallpopupOnTablet();
-		if (returnval == null) {
-			Assert.fail("No TFN found");
-		} else {
-			Assert.assertTrue(true);
-		}
+//	@Then("^the user validates whether call icon is visible on AARP Tablet$")
+//	public void the_user_validates_whether_call_icon_is_visible_on_AARP_Tablet() throws InterruptedException {
+//		AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
+//				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+//		aquisitionhomepage.validateCallSamOnTablet();
+//		aquisitionhomepage.validateCallSamContentOnTablet();
+//		AcquisitionHomePageMobile returnval = aquisitionhomepage.validateCallpopupOnTablet();
+//		if (returnval == null) {
+//			Assert.fail("No TFN found");
+//		} else {
+//			Assert.assertTrue(true);
+//		}
+//
+//	}
 
-	}
-
-	@Then("^the user validates whether chat icon is visible on AARP Tablet$")
-	public void the_user_validates_whether_chat_icon_is_visible_on_AARP_Tablet() throws InterruptedException {
-		AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
-				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		aquisitionhomepage.validateChatSamOnTablet();
-		aquisitionhomepage.validateChatSamContentOnTablet();
-		aquisitionhomepage.verifyChatpopupOnTablet();
-	}
+//	@Then("^the user validates whether chat icon is visible on AARP Tablet$")
+//	public void the_user_validates_whether_chat_icon_is_visible_on_AARP_Tablet() throws InterruptedException {
+//		AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
+//				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+//		aquisitionhomepage.validateChatSamOnTablet();
+//		aquisitionhomepage.validateChatSamContentOnTablet();
+//		aquisitionhomepage.verifyChatpopupOnTablet();
+//	}
 
 }
