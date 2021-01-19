@@ -7,6 +7,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -427,7 +428,8 @@ public class DCEStepDefinitionAARP {
 		 
 		System.out.println("Drugs List : " + druglist);
 
-		if (druglist.isEmpty()) {
+//		if (druglist.isEmpty()) {
+		if(StringUtils.isEmpty(druglist)) {
 			druglist = drugName;
 		} else {
 			druglist = druglist + "&" + drugName;
