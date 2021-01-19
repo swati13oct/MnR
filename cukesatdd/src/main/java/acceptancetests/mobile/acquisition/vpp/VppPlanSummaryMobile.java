@@ -11,6 +11,7 @@ import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import pages.acquisition.commonpages.VPPPlanSummaryPage;
 import pages.mobile.acquisition.bluelayer.AboutUsPageMobile;
 import pages.mobile.acquisition.bluelayer.ContactUsUmsPageMobile;
 import pages.mobile.acquisition.bluelayer.DisclaimersPageMobile;
@@ -68,8 +69,6 @@ public class VppPlanSummaryMobile {
 		getLoginScenario().saveBean(VPPCommonConstants.PLAN_NAME, planName);
 		VPPPlanSummaryPageMobile planSummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		planSummaryPage.sleepBySec(3);
-		planSummaryPage.clickCurrentYearTab();
 		Assert.assertTrue("Error loading specific plan summary in VPP plan summary page",
 				planSummaryPage.getSpecificPlanInfo(planName));
 	}

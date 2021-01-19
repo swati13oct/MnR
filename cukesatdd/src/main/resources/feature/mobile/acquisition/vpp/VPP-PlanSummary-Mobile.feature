@@ -1,7 +1,7 @@
 @vppPlanSummaryAARP
 Feature: 1.01.1-Vpp to plan Summary AARP Scenarios
 
-  @vppPlanSummaryAARP01 @vppPlanSummaryAARPRun01 @vppPlanSummaryAARPRegression @VPP123 @OnlyProd
+  @vppPlanSummaryAARP01 @vppPlanSummaryAARPRun01 @vppPlanSummaryAARPRegression @VPP123 @OnlyProd 
   Scenario Outline: TID: <TID> -plan type: <plantype> - Verify plan cards on plan summary page in <site> site
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
@@ -46,7 +46,7 @@ Feature: 1.01.1-Vpp to plan Summary AARP Scenarios
 
     Examples: 
       | TID   | zipcode | site | isMultutiCounty | county             | plantype | planName                                               | monthlyPremium | primaryCarePhysician | specialist | referralRequired | outOfPocketMaximum | prescriptionDrugsTier1                     | annualDeductible | planyear |
-      | 15545 |   90210 | AARP | NO              | Los Angeles County | MAPD     | AARP Medicare Advantage SecureHorizons Plan 1 (HMO)    | $0             | $0  copay            | $0  copay  | Yes              | $3,400.00          | $4  copay                                  |                  | next     |
+      | 15545 |   90210 | AARP | NO              | Los Angeles County | MAPD     | AARP Medicare Advantage Freedom Plus (HMO-POS)         | $0             | $0  copay            | $0  copay  | Yes              | $3,400.00          | $4  copay                                  |                  | next     |
       | 15546 |   28105 | AARP | YES             | Mecklenburg County | SNP      | UnitedHealthcare Dual Complete RP (Regional PPO D-SNP) | $0             | $0  copay            | $0  copay  | No               | $0 - $6,700.00     | $0, $1.25, $3.40 copay, or 15% coinsurance |                  | next     |
 
   @vppPlanSummaryAARP02 @vppPlanSummaryAARPRun01 @vppPlanSummaryAARPRegression
@@ -138,9 +138,9 @@ Feature: 1.01.1-Vpp to plan Summary AARP Scenarios
       | SNP Test Plans  | <SNP_testPlans> |
 
     Examples: 
-      | UID | zipcode | isMultiCounty | county | MA_testPlans | PDP_testPlans | SNP_testPlans |
+      | UID     | zipcode | isMultiCounty | county           | MA_testPlans                                                                                            | PDP_testPlans                                                    | SNP_testPlans                              |
+      | 1598162 |   80001 | NO            | Jefferson County | AARP Medicare Advantage SecureHorizons Plan 2 (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO) | AARP MedicareRx Preferred (PDP),AARP MedicareRx Saver Plus (PDP) | UnitedHealthcare Dual Complete (HMO D-SNP) |
 
-  #| 1598162 |   80001 | NO            | Jefferson County | AARP Medicare Advantage SecureHorizons Essential (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO) | AARP MedicareRx Preferred (PDP),AARP MedicareRx Saver Plus (PDP) | UnitedHealthcare Dual Complete (HMO D-SNP) |
   @vppPlanSummaryAARP04
   Scenario Outline: UID: <UID> -zipcode: <zipcode> - Verify user can favorite plans will be saved within session on view plan preview page on AARP site
     Given the user is on AARP medicare acquisition site landing page
@@ -168,8 +168,8 @@ Feature: 1.01.1-Vpp to plan Summary AARP Scenarios
       | SNP Test Plans | <SNP_testPlans> |
 
     Examples: 
-      | UID     | zipcode | isMultiCounty | county           | MA_testPlans                                                                                               | PDP_testPlans                                                    | SNP_testPlans                              | planyear |
-      | 1598162 |   80001 | NO            | Jefferson County | AARP Medicare Advantage SecureHorizons Essential (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO) | AARP MedicareRx Preferred (PDP),AARP MedicareRx Saver Plus (PDP) | UnitedHealthcare Dual Complete (HMO D-SNP) | current  |
+      | UID     | zipcode | isMultiCounty | county           | MA_testPlans                                                                                            | PDP_testPlans                                                    | SNP_testPlans                              | planyear |
+      | 1598162 |   80001 | NO            | Jefferson County | AARP Medicare Advantage SecureHorizons Plan 2 (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO) | AARP MedicareRx Preferred (PDP),AARP MedicareRx Saver Plus (PDP) | UnitedHealthcare Dual Complete (HMO D-SNP) | current  |
 
   @vppPlanSummaryAARP05
   Scenario Outline: Zipcode: <zipcode> -plan type: <plantype> - Verify plan summary for SNP plan types in AARP site
@@ -221,7 +221,7 @@ Feature: 1.01.1-Vpp to plan Summary AARP Scenarios
   #Examples:
   #| zipcode | isMultutiCounty | plantype | planName                    |
   #|   55344 | NO              | MA       | UnitedHealthcare Sync (PPO) |
-  @vppPlanSummaryAARP08 @vppPlanSummaryAARPRun02 @vppPlanSummaryAARPRegression
+  @vppPlanSummaryAARP08 @vppPlanSummaryAARPRun02 @vppPlanSummaryAARPRegression @Harshal
   Scenario Outline: UID: <UID>  - Verify Call sticky action menu on AARP site
     Given the user is on AARP medicare acquisition site landing page
     When the user does plan search using the following information in the AARP site
@@ -230,7 +230,7 @@ Feature: 1.01.1-Vpp to plan Summary AARP Scenarios
       | County Name     | <county>          |
     When verify Call SAM icon is visible or not
     And verify Call SAM roll out and contain the text Call a Licensed Insurance Agent
-    Then user verify the popup and content
+    #Then user verify the popup and content
 
     Examples: 
       | UID     | zipcode | isMultutiCounty | county             |
@@ -481,7 +481,7 @@ Feature: 1.01.1-Vpp to plan Summary AARP Scenarios
       | Plan Name | <planName> |
 
     Examples: 
-      | TID       | zipcode | isMultutiCounty | county        | plantype | planName                              | planyear |
+      | TID       | zipcode | isMultutiCounty | county        | plantype | planName                          | planyear |
       | US2567133 |   70515 | YES             | Acadia Parish | MAPD     | Peoples Health Choices Gold (HMO) | current  |
       #| US2567133 |   70515 | YES             | Acadia Parish | MAPD     | Peoples Health Choices Value (HMO)       |current|
       #| US2567133 |   70515 | YES             | Acadia Parish | SNP      | Peoples Health Secure Health (HMO D-SNP) |current|

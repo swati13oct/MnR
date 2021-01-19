@@ -23,3 +23,4 @@ tags = {"@vppPlanSummaryAARPRegression"}, dryRun=false)
 public class RunMRATDDAcquisitionVPPPlanSummaryMobile4 { 
  
 }
+//@vppPlanSummaryAARPRegression

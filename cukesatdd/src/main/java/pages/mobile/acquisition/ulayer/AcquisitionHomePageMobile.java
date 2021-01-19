@@ -309,7 +309,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	@FindBy(xpath = "//h3[@id='guest-profile']")
 	private WebElement guestProfileLink;
 
-	@FindBy(xpath = "//a[@id='ctc-sam-mobile']//span[contains(text(),'Call a Medicare Expert')]")
+	@FindBy(xpath = "//a[@id='ctc-sam-mobile']")
 	private WebElement callsam;
 	
 //	String CallSam= "Call a Licensed Insurance Agent";
@@ -319,8 +319,10 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	// @FindBy(xpath = "//*[@id='sam-call-button']/div/span[1]")
 	// @FindBy(xpath =
 	// "//*[contains(@id,'sam-call-button')]//*[contains(@class,'sam__button__text')]")
-	@FindBy(xpath = "//*[contains(@id,'sam-call-button')]/span")
+	@FindBy(xpath = "//a[@id='ctc-sam-mobile']")
 	private WebElement callsamtooltip;
+	
+	
 
 	@FindBy(xpath = "//*[@id='sam-call-modal']/div/div")
 	private WebElement callSamPopup;
@@ -2598,15 +2600,25 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 	}
 
-	public AcquisitionHomePage validateCallpopup() throws InterruptedException {
+	public void validateCallpopup() throws InterruptedException {
+		
 		// CommonUtility.checkPageIsReady(driver);
-		callsam.click();
-		System.out.println("@@@@@@@@@@@@@@@ Call Icon Clicked @@@@@@@@@@@@@@@");
-		driver.switchTo().activeElement();
-		System.out.println(CallSamTFN.getText());
-		CallSamTFNClose.click();
-		validateNew(callsam);
-		return null;
+				System.out.println(callsam.getText());
+				callsam.click();
+				System.out.println("@@@@@@@@@@@@@@@ Call Icon Clicked @@@@@@@@@@@@@@@");
+				driver.switchTo().activeElement();
+				System.out.println(CallSamTFN.getText());
+				// CallSamTFNClose.click();
+				// validateNew(callsam);
+				// return null;
+				if (CallSamTFN.getText().isEmpty()) {
+					// return null;
+					Assert.fail("TFN number was not found on the SAM call Popup");
+				} else {
+					CallSamTFNClose.click();
+					validateNew(callsam);
+					// return new AcquisitionHomePage(driver);
+				}
 	}
 
 	public void validateChatSam() throws InterruptedException {
@@ -3347,7 +3359,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 			} else {
 				Assert.assertTrue(true, "Navigated to AARP org page");
 				driver.close();
-				driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
+				//driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
 			}
 		}
 		

@@ -861,11 +861,13 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 	}
 
 	private boolean getSpecificPlanSummary(WebElement element, String planName) {
+		System.out.println("******************>>>>>>>> " +element.getText());
 		if (element.getText().contains(planName)) {
 			return true;
 		} else {
 			return false;
 		}
+	
 	}
 
 	public void clickCurrentYearTab() {
@@ -4926,10 +4928,10 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 
 	public void validateIsMyProviderCoveredLink(String planType, String planName) {
 		int attempts = 0;
-		if (nextYearSelection.isDisplayed())
-
-			jsClickNew(nextYearSelection);
-		waitforElementVisibilityInTime(CurrentYearPlansBtn, 10);
+//		if (nextYearSelection.isDisplayed())
+//
+//			jsClickNew(nextYearSelection);
+//		waitforElementVisibilityInTime(CurrentYearPlansBtn, 10);
 
 		while (attempts < 2) {
 			try {
