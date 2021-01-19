@@ -1804,10 +1804,12 @@ public class DrugDetailsPage extends UhcDriver {
 		validate(savedBtn);
 	}
 	
-	@FindBy(xpath = "//*[@id='selectaPharmacy-overlay']/div/div[2]/div/div[5]/div/div/fieldset/div/label[1]/span")
+//	@FindBy(xpath = "//*[@id='selectaPharmacy-overlay']/div/div[2]/div/div[5]/div/div/fieldset/div/label[1]/span")
+	@FindBy(xpath = "//span[contains(text(),'Preferred Pharmacies')]/parent::label[contains(@class,'uhc-filter')]")
 	public WebElement preferredPharmacyTab;
 
-	@FindBy(xpath = "//*[@id='selectaPharmacy-overlay']/div/div[2]/div/div[5]/div/div/fieldset/div/label[2]/span")
+//	@FindBy(xpath = "//*[@id='selectaPharmacy-overlay']/div/div[2]/div/div[5]/div/div/fieldset/div/label[2]/span")
+	@FindBy(xpath = "//span[contains(text(),'Standard Pharmacies')]/parent::label[contains(@class,'uhc-filter')]")
 	public WebElement standardPharmacyTab;
 	
 	public void validatePreferredTab() {
