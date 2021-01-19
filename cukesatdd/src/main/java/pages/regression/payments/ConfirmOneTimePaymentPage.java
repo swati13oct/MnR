@@ -326,6 +326,16 @@ public class ConfirmOneTimePaymentPage extends UhcDriver {
 		}
 
 	}
+	
+	public void OneTimeCCverificationSavedCard() {
+		validate(ConfirmationNumber);
+		System.out.println("Your Confimation Number is : " + ConfirmationNumber.getText());
+		if (!(ConfirmationNumber.isDisplayed()))
+		{
+			Assert.fail("Confirmation number is null, failing test case.");
+		}
+
+	}
 
 	public String OneTimeEFTverification() {
 		validate(ConfirmationNumber);
