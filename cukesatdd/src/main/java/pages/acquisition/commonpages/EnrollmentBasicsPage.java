@@ -128,6 +128,7 @@ public class EnrollmentBasicsPage extends GlobalWebElements {
 		
 		WebElement stateGeotargeting = driver.findElement(By.xpath("(//select[@id='state-select']//option)[2]"));
 //		scrollToView(stateGeotargeting);
+//		stateGeotargeting.click();
 		jsClickNew(stateGeotargeting);
 		
 		waitforElementNew(stateGeotargeting, 5);

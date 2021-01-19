@@ -114,7 +114,7 @@ public class PlanDocumentsAndResourcesStepDefinition {
 		Boolean v=(Boolean) getLoginScenario().getBean(PlanDocumentsAndResourcesCommonConstants.TEST_VALIDATE_API);
 		if (v!=null)
 			this.validateApi=v;
-		this.skipLnkDestCheck=true; //note: default = true    
+		this.skipLnkDestCheck=false; //note: default = true    
 		Boolean s=(Boolean) getLoginScenario().getBean(PlanDocumentsAndResourcesCommonConstants.TEST_SKIP_LINK_DEST_CHECK);
 		if (s!=null)
 			this.skipLnkDestCheck=s;
@@ -202,6 +202,7 @@ public class PlanDocumentsAndResourcesStepDefinition {
 		Assert.assertTrue("PROBLEM - unable to get a successful API response", apiSuccess);
 		getLoginScenario().saveBean(PlanDocumentsAndResourcesCommonConstants.TEST_ACTUAL_DOC_LIST_MAP, planDocMap);
 
+		//note: SHIP has a separate API call for Plan Document PDF
 		String apiResponseStr2="none";
 		if (planType.toUpperCase().contains("SHIP") && !planDocAndResources_apiResponse_url2.equals("none")) {
 			apiResponseStr2=planDocumentsAndResourcesPage.getApiResponse(planType, memberType, planDocAndResources_apiResponse_url2);
@@ -320,10 +321,15 @@ public class PlanDocumentsAndResourcesStepDefinition {
 			testInputInfoMap.put("validateApi",String.valueOf(validateApi));
 
 			sectionNote=planDocumentsAndResourcesPage.validateDocOnUi(testInputInfoMap, expDocList, sectionNote, api_planDocMap);
-			sectionNote.add("PASSED - "+language+" documents UI validation");
+			if (sectionNote.get(0).contains("UI VALIDATOIN FAILED")) {
+				sectionNote.add("FAILED - "+language+" documents UI validation");
+				finalCheck=false;
+				problemText=problemText+"FAILED - "+language+" documents UI validation | ";
+			} else {
+				sectionNote.add("PASSED - "+language+" documents UI validation");
+			}
 			if (sectionNote.get(0).contains("API VALIDATOIN PASSED")) {
 				sectionNote.add("PASSED - "+language+" documents API validation");
-
 			} else if (sectionNote.get(0).contains("API VALIDATOIN FAILED")) {
 				sectionNote.add("FAILED - "+language+" documents API validation");
 				finalCheck=false;
@@ -351,7 +357,13 @@ public class PlanDocumentsAndResourcesStepDefinition {
 			testInputInfoMap.put("validateApi",String.valueOf(validateApi));
 
 			sectionNote=planDocumentsAndResourcesPage.validateDocOnUi(testInputInfoMap, expDocList, sectionNote, api_planDocMap);
-			sectionNote.add("PASSED - "+language+" documents UI validation");
+			if (sectionNote.get(0).contains("UI VALIDATOIN FAILED")) {
+				sectionNote.add("FAILED - "+language+" documents UI validation");
+				finalCheck=false;
+				problemText=problemText+"FAILED - "+language+" documents UI validation | ";
+			} else {
+				sectionNote.add("PASSED - "+language+" documents UI validation");
+			}
 			if (sectionNote.get(0).contains("API VALIDATOIN PASSED")) {
 				sectionNote.add("PASSED - "+language+" documents API validation");
 
@@ -380,7 +392,13 @@ public class PlanDocumentsAndResourcesStepDefinition {
 			testInputInfoMap.put("validateApi",String.valueOf(validateApi));
 
 			sectionNote=planDocumentsAndResourcesPage.validateDocOnUi(testInputInfoMap, expDocList, sectionNote, api_planDocMap);
-			sectionNote.add("PASSED - "+language+" documents UI validation");
+			if (sectionNote.get(0).contains("UI VALIDATOIN FAILED")) {
+				sectionNote.add("FAILED - "+language+" documents UI validation");
+				finalCheck=false;
+				problemText=problemText+"FAILED - "+language+" documents UI validation | ";
+			} else {
+				sectionNote.add("PASSED - "+language+" documents UI validation");
+			}
 			if (sectionNote.get(0).contains("API VALIDATOIN PASSED")) {
 				sectionNote.add("PASSED - "+language+" documents API validation");
 
@@ -475,10 +493,11 @@ public class PlanDocumentsAndResourcesStepDefinition {
 		PlanDocApiResponse api_planDocMap=(PlanDocApiResponse) getLoginScenario().getBean(PlanDocumentsAndResourcesCommonConstants.TEST_ACTUAL_DOC_LIST_MAP);
 		PlanDocumentsAndResourcesPage planDocumentsAndResourcesPage=(PlanDocumentsAndResourcesPage) getLoginScenario().getBean(PageConstants.PLAN_DOCUMENTS_AND_RESOURCES_PAGE);
 		
+		/* keep
 		if ((MRScenario.environment.equals("offline") || MRScenario.environment.equals("prod")) && memberType.toUpperCase().contains("PREEFF")) {
-			System.out.println("TEST running for offline-prod and PREEFF user, load the page one more time to workaround the quick guide issue");
+			System.out.println("TEST running for offline/online-prod and PREEFF user, load the page one more time to workaround the quick guide issue");
 			planDocumentsAndResourcesPage.reloadPgWorkaround_MM();
-		}
+		} */
 		
 		//note: first go back to top of the page
 		planDocumentsAndResourcesPage.backToTopOfPage(planType, memberType);
@@ -517,8 +536,15 @@ public class PlanDocumentsAndResourcesStepDefinition {
 
 			testInputInfoMap.put("section",section);
 			testInputInfoMap.put("targetSubSection","currentYear");
-			testInputInfoMap.put("targetLang",targetLang);
 			testInputInfoMap.put("targetYr",targetYr);
+			//note: special case for during year transition when pre-eff user has plan start in next year
+			if (memberType.contains("PREEFF")) {
+				if (api_planDocMap.getMemMatl_es_nxtYr_docList().size()>0) {
+					testInputInfoMap.put("targetSubSection","nextYear");
+					testInputInfoMap.put("targetYr",yearsMap.get("nextYear"));
+				}
+			}
+			testInputInfoMap.put("targetLang",targetLang);
 			testInputInfoMap.put("checkDestUrl",String.valueOf(checkDestUrl));
 			testInputInfoMap.put("expDocDisplay",String.valueOf(expDocDisplay));
 			testInputInfoMap.put("validateApi",String.valueOf(validateApi));
@@ -548,8 +574,15 @@ public class PlanDocumentsAndResourcesStepDefinition {
 				expDocList=userHelper.getTargetDocList(planType, memberType, section, targetLang);
 			testInputInfoMap.put("section",section);
 			testInputInfoMap.put("targetSubSection","currentYear");
-			testInputInfoMap.put("targetLang",targetLang);
 			testInputInfoMap.put("targetYr",targetYr);
+			//note: special case for during year transition when pre-eff user has plan start in next year
+			if (memberType.contains("PREEFF")) {
+				if (api_planDocMap.getMemMatl_es_nxtYr_docList().size()>0) {
+					testInputInfoMap.put("targetSubSection","nextYear");
+					testInputInfoMap.put("targetYr",yearsMap.get("nextYear"));
+				}
+			}
+			testInputInfoMap.put("targetLang",targetLang);
 			testInputInfoMap.put("checkDestUrl",String.valueOf(checkDestUrl));
 			testInputInfoMap.put("expDocDisplay",String.valueOf(expDocDisplay));
 			testInputInfoMap.put("validateApi",String.valueOf(validateApi));
@@ -579,6 +612,13 @@ public class PlanDocumentsAndResourcesStepDefinition {
 			testInputInfoMap.put("targetLang",targetLang);
 			testInputInfoMap.put("targetSubSection","currentYear");
 			testInputInfoMap.put("targetYr",targetYr);
+			//note: special case for during year transition when pre-eff user has plan start in next year
+			if (memberType.contains("PREEFF")) {
+				if (api_planDocMap.getMemMatl_es_nxtYr_docList().size()>0) {
+					testInputInfoMap.put("targetSubSection","nextYear");
+					testInputInfoMap.put("targetYr",yearsMap.get("nextYear"));
+				}
+			}
 			testInputInfoMap.put("checkDestUrl",String.valueOf(checkDestUrl));
 			testInputInfoMap.put("expDocDisplay",String.valueOf(expDocDisplay));
 			testInputInfoMap.put("validateApi",String.valueOf(validateApi));
@@ -1022,7 +1062,7 @@ public class PlanDocumentsAndResourcesStepDefinition {
 		testInputInfoMap.put("section", section);
 
 		//note: validate jumplink
-		planDocumentsAndResourcesPage.validateJumplink_PD(sectionDisplay);
+		planDocumentsAndResourcesPage.validateJumplink_PD(sectionDisplay, memberType);
 		sectionNote.add("PASSED - jumplink validation");
 
 		//note: validate section header
@@ -1276,7 +1316,7 @@ public class PlanDocumentsAndResourcesStepDefinition {
 		testInputInfoMap.put("section", section);
 
 		//note: validate jumplink
-		planDocumentsAndResourcesPage.validateJumplink_PD(sectionDisplay);
+		planDocumentsAndResourcesPage.validateJumplink_PD(sectionDisplay, memberType);
 		sectionNote.add("PASSED - jumplink validation");
 
 		//note: validate section header

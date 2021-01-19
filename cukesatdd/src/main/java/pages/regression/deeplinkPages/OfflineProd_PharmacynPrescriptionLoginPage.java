@@ -37,8 +37,11 @@ public class OfflineProd_PharmacynPrescriptionLoginPage extends UhcDriver {
 	@FindBy(xpath = "//*[contains(@onclick,'HSIDSignIn')]")
 	private WebElement mnrSignInButton;
 	
-	@FindBy(xpath = "//button[contains(text(),'Sign In')]")
-	private static WebElement offlineSignin;	
+	//@FindBy(xpath = "//button[contains(text(),'Sign In')]")
+	@FindBy(xpath="//button[contains(@class,'btn btn-primary btn-block')]")
+	private static WebElement offlineSignin;
+	
+	
 	
 	@FindBy(xpath = "//h3[contains(text(),'Support for UnitedHealthcare members')]")
 	private WebElement textonpage1;
@@ -69,6 +72,11 @@ public class OfflineProd_PharmacynPrescriptionLoginPage extends UhcDriver {
 	  public static final String Offline_PROD_AARP_DEEPLINK_URL_HWP ="https://offline.myaarpmedicare.com/hwp";
 	  public static final String Offline_PROD_PCP_DEEPLINK_URL_HWP ="https://offline.mypcpmedicare.com/hwp";
 	  public static final String Offline_PROD_Medica_DEEPLINK_URL_HWP ="https://offline.mymedicamedicare.com/hwp";
+	  
+	  public static final String PROD_UHC_DEEPLINK_URL_HWP ="https://myuhcmedicare.com/hwp";
+	  public static final String PROD_AARP_DEEPLINK_URL_HWP ="https://myuhcmedicare.com/hwp";
+	  public static final String PROD_PCP_DEEPLINK_URL_HWP ="https://myuhcmedicare.com/hwp";
+	  public static final String PROD_Medica_DEEPLINK_URL_HWP ="https://myuhcmedicare.com/hwp";
 			
 			 /*This method will open deep link page */
 			public OfflineProd_PharmacynPrescriptionLoginPage navigateToLoginURL(String brand){
@@ -144,9 +152,11 @@ public class OfflineProd_PharmacynPrescriptionLoginPage extends UhcDriver {
 						e.printStackTrace();
 					}
 					validateNew(textonpage1);
-					if (driver.getCurrentUrl().contains("SMSR/member/pharmacy/overview.html")) {
+					System.out.println("*** Page URL ***" + driver.getCurrentUrl());
+					System.out.println("*** PageTitle ***" + driver.getTitle());
+					if (driver.getCurrentUrl().contains("SMSR/sso/outbound%3foutboundTo=solutran")) {
 						System.out.println("*** Page URL ***" + driver.getCurrentUrl());
-						System.out.println("** User landed on pharmacy deep link sign in page **");
+						System.out.println("** User landed on solutran deeplink **");
 						System.out.println("*** PageTitle ***" + driver.getTitle());
 						Assert.assertTrue(driver.getTitle().contains("UnitedHealthcare Medicare Member Sign In"));
 						return true;
@@ -156,7 +166,34 @@ public class OfflineProd_PharmacynPrescriptionLoginPage extends UhcDriver {
 										
 						return true;	
 					}
-				
+				 /*This method will open deep link page */
+				public OfflineProd_PharmacynPrescriptionLoginPage navigateToProdLoginURL(String brand){
+					
+					switch (brand) {
+					case "UHC":
+						start(PROD_UHC_DEEPLINK_URL_HWP);
+						break;
+					case "AARP":
+						start(PROD_AARP_DEEPLINK_URL_HWP);
+						break;
+					case "PCP":
+						start(PROD_PCP_DEEPLINK_URL_HWP);
+						break;
+					case "Medica":
+						start(PROD_Medica_DEEPLINK_URL_HWP);
+						break;
+					}
+					driver.manage().deleteAllCookies();
+					
+					try {
+						Thread.sleep(10000);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}		
+					return null;
+					}
+					
 				
 }
 

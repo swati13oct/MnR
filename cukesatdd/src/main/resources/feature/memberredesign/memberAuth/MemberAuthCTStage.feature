@@ -18,13 +18,14 @@ Feature: S1.1 To test Member Auth Sign for SSO Micro App.
 
     Examples: 
       | username  | password  | member                               | Scenario                                                        |
-      | qavgogine | qavgogine | Auto20191121091814_4                 | Scenario 1:  Search with member username : Federal Member- NICE |
-      | qavgogine | qavgogine | q3_SEP_2020SHIP_019                  | Scenario 2a: Search using username – SHIP Member                |
+      | qavgogine | qavgogine | q3_sep_UAT4_MAPD_009                 | Scenario 1:  Search with member username : Federal Member- NICE |
+      | qavgogine | qavgogine | q4_Ship_ANOC_010                     | Scenario 2a: Search using username – SHIP Member                |
       | qavgogine | qavgogine | q3_Sep_UAT4_Sofl022                  | Scenario 3: Search using username – PCP/Medica Member           |
       | qavgogine | qavgogine | q2_jun_aarp0065                      | Scenario 4: Search using username – Terminated<12               |
       | qavgogine | qavgogine | PreeffectiveFEDMA_001                | Scenario 5: Search using username – Pre-effective               |
-      | qavgogine | qavgogine | 2e9f4a8f-c2e0-4de2-b5ad-330bc63232b7 | Scenario 6: Search using username – UUID                        |
-      | qavgogine | qavgogine | legacyid001                          | Scenario 7: Search using legacy username                        |
+      | qavgogine | qavgogine | e446b48e-5f7b-4dce-a3c0-c1deac349f8c | Scenario 6: Search using username – UUID                        |
+      # commenting legacy name as not a valid scenario 1/7/2021 error will be observed |
+      #| qavgogine | qavgogine | legacyid001                          | Scenario 7: Search using legacy username                        |
 
   @regressionMember
   Scenario Outline: Scenario: <Scenario> - Test Case_To test single signon using member auth - Search using memberid and dob

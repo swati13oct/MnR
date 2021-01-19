@@ -33,11 +33,11 @@ Feature: 1.08. UAT- Visitor profile
     @VisitorProfile_AARP_UAT @prodRegression_AARP
     Examples: 
       |	site	| state   | UID       |	planyear	| zipcode | isMultiCounty | county           | plantype | testPlans                                                                                              |
-      |	AARP	| Alabama | US1770330 | current		| 90210 	| NO            | Jefferson County | MAPD     | AARP Medicare Advantage SecureHorizons Focus (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO) |
+      |	AARP	| Alabama | US1770330 | future		| 90210 	| NO            | Jefferson County | MAPD     | AARP Medicare Advantage SecureHorizons Focus (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO) |
       #| Alabama | US1770330 |   53503 | NO            | Jefferson County | SNP      | UnitedHealthcare Dual Complete LP1 (HMO D-SNP),UnitedHealthcare Medicare Advantage Assist (PPO C-SNP)  |
       
     @VisitorProfile_UHC_UAT @prodRegression_UHC
     Examples:
       |	site	| state   | UID       |	planyear	| zipcode | isMultiCounty | county           | plantype | testPlans                                                                                              |
-      |	UHC		| Alabama | US1770330 |  current	| 90210 | NO            | Jefferson County | MAPD     | AARP Medicare Advantage SecureHorizons Focus (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO) |
+      |	UHC		| Alabama | US1770330 |  future	| 90210 | NO            | Jefferson County | MAPD     | AARP Medicare Advantage SecureHorizons Focus (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO) |
 

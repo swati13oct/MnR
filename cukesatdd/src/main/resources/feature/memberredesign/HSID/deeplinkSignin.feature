@@ -68,8 +68,8 @@ Feature: To test member Signin from various Deeplinks
     And user is navigated to the coverageandBenefits deep link page
 
     Examples: 
-      | username		  | password   |
-      | premiumpayment011 | Password@1 |
+      | username | password   |
+      | prema02  | Password@1 |
 
   @regressionMember @healthwellnessDeepLink @CodeTransformers
   Scenario Outline: Verify Member lands on the healthwellness page after signing in from healthwellness deeplink.
@@ -85,7 +85,7 @@ Feature: To test member Signin from various Deeplinks
       | q3_sept_UAT4_AARP_025 | Password@1 |
 
   @regressionMember @myDocumentsDeepLink @CodeTransformers
-  Scenario Outline: Verify Member lands on the my documents page after signing in from my documents deeplink.
+  Scenario Outline: Verify Member lands on the myDocuments page after signing in from myDocuments deeplink.
     Given member lands on the myDocuments deeplink page
     And the myDocuments deeplink page is displayed with all the fields
     And on myDocuments deeplink page I enter the member details and click continue
@@ -116,11 +116,11 @@ Feature: To test member Signin from various Deeplinks
       | <navigatedPage> |
 
     Examples: 
-      | samlsubject  | firstName | lastName  | dateOfBirth | mbi         | applandingurlStage                                                          | navigatedPage     | uhcid | applandingurlteamh | applandingurlofflinestage |
-      | canopyhealth | MARYBETH  | NEUBURGER | 05281938    | 2EE1V96VD04 | https://stage-medicare.uhc.com/sso/inbound/canopy?target=/pharmacy          | pharmacy          |       |                    |                           |
-      | canopyhealth | MARYBETH  | NEUBURGER | 05281938    | 2EE1V96VD04 | https://stage-medicare.uhc.com/sso/inbound/canopy?target=/payments          | payment           |       |                    |                           |
-      | canopyhealth | MARYBETH  | NEUBURGER | 05281938    | 2EE1V96VD04 | https://stage-medicare.uhc.com/sso/inbound/canopy?target=/order-materials   | order-materials   |       |                    |                           |
-      | canopyhealth | MARYBETH  | NEUBURGER | 05281938    | 2EE1V96VD04 | https://stage-medicare.uhc.com/sso/inbound/canopy?target=/benefits-coverage | benefits-coverage |       |                    |                           |
+      | samlsubject  | firstName | lastName | dateOfBirth | mbi         | applandingurlStage                                                          | navigatedPage     | uhcid | applandingurlteamh | applandingurlofflinestage |
+      | canopyhealth | KASEEB    | GAULDEN  |    12071947 | 2QM2NK2XP19 | https://stage-medicare.uhc.com/sso/inbound/canopy?target=/pharmacy          | pharmacy          |       |                    |                           |
+      | canopyhealth | KASEEB    | GAULDEN  |    12071947 | 2QM2NK2XP19 | https://stage-medicare.uhc.com/sso/inbound/canopy?target=/payments          | payment           |       |                    |                           |
+      | canopyhealth | KASEEB    | GAULDEN  |    12071947 | 2QM2NK2XP19 | https://stage-medicare.uhc.com/sso/inbound/canopy?target=/order-materials   | order-materials   |       |                    |                           |
+      | canopyhealth | KASEEB    | GAULDEN  |    12071947 | 2QM2NK2XP19 | https://stage-medicare.uhc.com/sso/inbound/canopy?target=/benefits-coverage | benefits-coverage |       |                    |                           |
 
   @regressionMember @codeWarriors @F477221
   Scenario Outline: Verify SHIP Member lands on the healthwellness page after signing in from healthwellness deeplink.
@@ -132,10 +132,11 @@ Feature: To test member Signin from various Deeplinks
     And I will land on the Talix page for At Your Best
 
     Examples: 
-      | username    | password   |
-      | q4_Ship_023 | Password@1 |
+      | username            | password   |
+      | q4_Ship_ANOC_009    | Password@1 |
 
-  @regressionMember @codeWarriors @F477221
+#enhancing this scenario - predators worked on F514599 pcp / medica members are blocked 
+  @regressionMember @codeWarriors @F477221 @p1
   Scenario Outline: Verify members lands on the pharmacy page after signing in from pharmacy deeplink.
     Given member lands on the pharmacy deeplink page
       | <brand> |
@@ -147,8 +148,8 @@ Feature: To test member Signin from various Deeplinks
 
     Examples: 
       | username            | password   | brand  |
-      | q3_Sep_UAT4_Sofl073 | Password@1 | PCP    |
-      | q3_Sep_UAT4_Sofl015 | Password@1 | Medica |
+     # | q3_Sep_UAT4_Sofl064 | Password@1 | PCP    |
+     # | q3_Sep_UAT4_Sofl015 | Password@1 | Medica |
       | q2_apr_aarp0250     | Password@1 | AARP   |
       | mapdtest1           | Password@1 | UHC    |
 
@@ -163,11 +164,11 @@ Feature: To test member Signin from various Deeplinks
     And user is navigated to the virtual visit deep link page
 
     Examples: 
-      | username            | password   | brand  |
-      | q3_Sep_UAT4_Sofl073 | Password@1 | PCP    |
-      | q2_june_Medica_010  | Password@1 | Medica |
-      | q2_apr_aarp0250     | Password@1 | AARP   |
-      | mapdtest1           | Password@1 | UHC    |
+      | username              | password   | brand  |
+      | q3_sept_UAT4_AARP_042 | Password@1 | PCP    |
+      | ActiveMedica01        | Password@1 | Medica |
+      | q2_apr_aarp0250       | Password@1 | AARP   |
+      | q3_sep_UAT4_Group289  | Password@1 | UHC    |
       
         @regressionMember @codeWarriors @F392073
   Scenario Outline: Verify Member lands on the documents page after signing in from edelivery deeplink.
@@ -181,8 +182,8 @@ Feature: To test member Signin from various Deeplinks
     Examples: 
       | username            | password   |
       | q3_Sep_TexasPCD_015 | Password@1 |
-      
-  @regressionMember @codeWarriors @F513871
+
+      @regressionMember @codeWarriors @F513871
   Scenario Outline: Verify Member lands on the Talix page for the Dentegra Dental Discount article after signing in from dental vanity URL.
     Given member lands on dentegra dental deeplink page
     And the page is displayed with all the fields
@@ -192,5 +193,6 @@ Feature: To test member Signin from various Deeplinks
     And I will land on the Talix page for the Dentegra Dental Discount article
 
     Examples: 
-      | username    | password   |
-      | q4_Ship_023 | Password@1 |
+      | username    	 | password   |
+      | q4_Ship_023 	 | Password@1 |
+      | q4_Ship_ANOC_009 | Password@1 |

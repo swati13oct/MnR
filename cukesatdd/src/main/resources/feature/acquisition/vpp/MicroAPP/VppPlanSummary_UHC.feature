@@ -46,14 +46,14 @@ Feature: 2.01.1-Vpp to plan Summary UHC Scenarios
 
     Examples: 
       | TID   | zipcode | site| isMultutiCounty | county             | plantype | planName                                            | monthlyPremium | primaryCarePhysician | specialist | referralRequired | outOfPocketMaximum | prescriptionDrugsTier1                     | annualDeductible | planyear |
-      | 15545 |   90210 | UHC| NO              | Los Angeles County | MAPD     | AARP Medicare Advantage SecureHorizons Plan 1 (HMO) | $0             | $0  copay            | $0  copay  | Yes              | $3,400.00          | $4  copay                                  |                  | current |
-      | 15546 |   28105 | UHC| YES             | Mecklenburg County | SNP      | UnitedHealthcare Dual Complete (HMO-POS D-SNP)      | $0             | $0  copay            | $0  copay  | No               | $0 - $6,700.00     | $0, $1.25, $3.40 copay, or 15% coinsurance |                  |  current |
+      | 15545 |   90210 | UHC| NO              | Los Angeles County | MAPD     | AARP Medicare Advantage SecureHorizons Plan 1 (HMO) | $0             | $0  copay            | $0  copay  | Yes              | $3,400.00          | $4  copay                                  |                  | future |
+      | 15546 |   28105 | UHC| YES             | Mecklenburg County | SNP      | UnitedHealthcare Dual Complete (HMO-POS D-SNP)      | $0             | $0  copay            | $0  copay  | No               | $0 - $6,700.00     | $0, $1.25, $3.40 copay, or 15% coinsurance |                  |  future |
 
     @prodRegression
     Examples: 
       | TID   | zipcode | site|isMultutiCounty | county             | plantype | planName                                               | monthlyPremium | primaryCarePhysician | specialist | referralRequired | outOfPocketMaximum | prescriptionDrugsTier1 | annualDeductible                                      |planyear|
-      | 15542 |   90210 | UHC|  NO              | Los Angeles County | MA       | AARP Medicare Advantage SecureHorizons Essential (HMO) | $0             | $5  copay            | $10  copay | Yes              | $4,900.00          | No drug coverage       |                                                       |current|
-      | 15543 |   90210 | UHC | NO              | Los Angeles County | PDP      | AARP MedicareRx Walgreens (PDP)                        | $0             |                      |            |                  |                    | $0  copay              | $0 for Tier 1, Tier 2 $415 for Tier 3, Tier 4, Tier 5 |current|
+      | 15542 |   90210 | UHC|  NO              | Los Angeles County | MA       | AARP Medicare Advantage SecureHorizons Essential (HMO) | $0             | $5  copay            | $10  copay | Yes              | $4,900.00          | No drug coverage       |                                                       |future|
+      | 15543 |   90210 | UHC | NO              | Los Angeles County | PDP      | AARP MedicareRx Walgreens (PDP)                        | $0             |                      |            |                  |                    | $0  copay              | $0 for Tier 1, Tier 2 $415 for Tier 3, Tier 4, Tier 5 |future|
 
   @vppPlanSummaryUHC02 @vppPlanSummaryUHCRun01 @vppPlanSummaryUHCRegression
   Scenario Outline: TID: <TID> -plan type: <plantype> - Verify right rail on plan summary page in UMS site
@@ -82,7 +82,7 @@ Feature: 2.01.1-Vpp to plan Summary UHC Scenarios
     # Then the user validates Medicare Plans Video Guide Page after clicking Choose a video link in ums Site
     Examples: 
       | TID   | zipcode | isMultutiCounty | county             | plantype | firstName | lastName | emailAddress  |planyear|
-      | 15549 |   90210 | NO              | Los Angeles County | MAPD     | test      | test     | test@test.com |current|
+      | 15549 |   90210 | NO              | Los Angeles County | MAPD     | test      | test     | test@test.com |future|
 
   @vppPlanSummaryUHC03 @vppPlanSummaryUHCRun01 @vppPlanSummaryUHCRegression
   Scenario Outline: UD: <UID> -zipcode: <zipcode> - Verify user can save and unsave favorite plans on view plan preview page on UHC site
@@ -295,7 +295,7 @@ Feature: 2.01.1-Vpp to plan Summary UHC Scenarios
       | PlanName | <planName> |
     Examples: 
       | zipcode | isMultutiCounty | county             | plantype | planName                                            |planyear|
-      |   90210 | NO              | Los Angeles County | MA       | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) |current|
+      |   90210 | NO              | Los Angeles County | MA       | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) |future|
 
   @vppPlanSummaryUHC12 @vppPlanSummaryUHCRun02 @vppPlanSummaryUHCRegression
   Scenario Outline: To Verify the drug cost estimator flow for <plantype> through plan details page's Plan Costs tab
@@ -304,7 +304,7 @@ Feature: 2.01.1-Vpp to plan Summary UHC Scenarios
       | Zip Code    | <zipcode>     |
       | County      | <county>      |
       | aep         | <aep>         |
-      | currentyear | <currentyear> |
+      | futureyear | <futureyear> |
    When user views plans of the below plan type in UMS site
       | Plan Type | <plantype> |
     And the user selects plan year for the UMS site
@@ -346,8 +346,8 @@ Feature: 2.01.1-Vpp to plan Summary UHC Scenarios
       | PlanName | <planName> |
 
     Examples: 
-      | zipcode | county             | drugInitials1 | drugName1 | drugInitials2 | drugName2  | drugInitials3 | drugName3     | pharmacyType     | distance | pharmacyName                    | plantype | planName                        | quantity | frequency     | newPharmacyType | genericName1 | genricName3 | aep | currentyear | planyear|
-      |   90210 | Los Angeles County | lipi          | Lipitor   | dron          | dronabinol | Adva          | Advair Diskus | Preferred Retail | 15 miles | COMMUNITY, A WALGREENS PHARMACY | PDP      | AARP MedicareRx Walgreens (PDP) |       30 | Every 1 month | Mail Order      | atorvastatin | fluticasone | no  | no          |current|
+      | zipcode | county             | drugInitials1 | drugName1 | drugInitials2 | drugName2  | drugInitials3 | drugName3     | pharmacyType     | distance | pharmacyName                    | plantype | planName                        | quantity | frequency     | newPharmacyType | genericName1 | genricName3 | aep | futureyear | planyear|
+      |   90210 | Los Angeles County | lipi          | Lipitor   | dron          | dronabinol | Adva          | Advair Diskus | Preferred Retail | 15 miles | COMMUNITY, A WALGREENS PHARMACY | PDP      | AARP MedicareRx Walgreens (PDP) |       30 | Every 1 month | Mail Order      | atorvastatin | fluticasone | no  | no          |future|
 
   @vppPlanSummaryUHC13 @vppPlanSummaryUHCRun02 @vppPlanSummaryUHCRegression
   Scenario Outline: TID: <TID>- zipcode -<zipcode> -plan type: <plantype> - Verify Loopup Zipcode is navigation to VPP page
@@ -378,8 +378,8 @@ Feature: 2.01.1-Vpp to plan Summary UHC Scenarios
 
     Examples: 
       | TID   | zipcode | isMultiCounty | county             | plantype | address                    | city      | state       | firstName | lastName | emailAddress  |planyear|
-      | 15550 |   90210 | NO            | Los Angeles County | MAPD     | 584 MAIN AVE NORWALK       | FAIRFIELD | CONNECTICUT | test      | test     | test@test.com |current|
-      | 15550 |   30606 | YES           | Clarke County      | MAPD     | 1750 EPPS BRIDGE RD ATHENS | OCONEE    | GEORGIA     | test      | test     | test@test.com |current|
+      | 15550 |   90210 | NO            | Los Angeles County | MAPD     | 584 MAIN AVE NORWALK       | FAIRFIELD | CONNECTICUT | test      | test     | test@test.com |future|
+      | 15550 |   30606 | YES           | Clarke County      | MAPD     | 1750 EPPS BRIDGE RD ATHENS | OCONEE    | GEORGIA     | test      | test     | test@test.com |future|
 
   @vppPlanSummaryUHC14 @vppPlanSummaryUHCRun02 @vppPlanSummaryUHCRegression
   Scenario Outline: TID: <TID> -zipcode -<zipcode> -plan type: <plantype> - Verify Change Zipcode on VPP using Search By Address
@@ -414,8 +414,8 @@ Feature: 2.01.1-Vpp to plan Summary UHC Scenarios
 
     Examples: 
       | TID   | zipcode | isMultiCounty | county             | plantype | address                    | city      | state       | firstName | lastName | emailAddress  | isMultiCounty2 | county2          |planyear|
-      | 15550 |   90210 | NO            | Los Angeles County | MAPD     | 584 MAIN AVE NORWALK       | FAIRFIELD | CONNECTICUT | test      | test     | test@test.com | NO             | Fairfield County |current|
-      | 15550 |   78006 | YES           | Bexar County       | MAPD     | 1750 EPPS BRIDGE RD ATHENS | OCONEE    | GEORGIA     | test      | test     | test@test.com | YES            | Clarke County    |current|
+      | 15550 |   90210 | NO            | Los Angeles County | MAPD     | 584 MAIN AVE NORWALK       | FAIRFIELD | CONNECTICUT | test      | test     | test@test.com | NO             | Fairfield County |future|
+      | 15550 |   78006 | YES           | Bexar County       | MAPD     | 1750 EPPS BRIDGE RD ATHENS | OCONEE    | GEORGIA     | test      | test     | test@test.com | YES            | Clarke County    |future|
 
   @vppPlanSummaryUHC15 @vppPlanSummaryUHCRun02 @vppPlanSummaryUHCRegression
   Scenario Outline: TID: <TID> -plan type: <plantype> - Verify Rocky Mountain Health Learn More lands on Correct site from UHC site from plan summary page
@@ -435,7 +435,7 @@ Feature: 2.01.1-Vpp to plan Summary UHC Scenarios
 
     Examples: 
       | TID       | zipcode | isMultutiCounty | county      | plantype | planName                                              |planyear|
-      | US2567142 |   81501 | NO              | Mesa County | SNP      | Rocky Mountain Health Plans DualCare Plus (HMO D-SNP) |current|
+      | US2567142 |   81501 | NO              | Mesa County | SNP      | Rocky Mountain Health Plans DualCare Plus (HMO D-SNP) |future|
 
   @vppPlanSummaryUHC16 @vppPlanSummaryUHCRun02 @vppPlanSummaryUHCRegression
   Scenario Outline: TID: <TID> -plan type: <plantype> -plan name: -<planName>- Verify People Health plans Learn More lands on Correct site from UHC site from plan summary page
@@ -455,9 +455,9 @@ Feature: 2.01.1-Vpp to plan Summary UHC Scenarios
 
     Examples: 
       | TID       | zipcode | isMultutiCounty | county        | plantype | planName                                 |planyear|
-      | US2567133  |   70515 | YES             | Acadia Parish | MAPD     | Peoples Health Choices Gold (HMO-POS)    |current|
-      #| US2567133 |   70515 | YES             | Acadia Parish | MAPD     | Peoples Health Choices Value (HMO)       |current|
-      #| US2567133 |   70515 | YES             | Acadia Parish | SNP      | Peoples Health Secure Health (HMO D-SNP) |current|
+      | US2567133  |   70515 | YES             | Acadia Parish | MAPD     | Peoples Health Choices Gold (HMO-POS)    |future|
+      #| US2567133 |   70515 | YES             | Acadia Parish | MAPD     | Peoples Health Choices Value (HMO)       |future|
+      #| US2567133 |   70515 | YES             | Acadia Parish | SNP      | Peoples Health Secure Health (HMO D-SNP) |future|
       #| US2567133 |   70718 | YES             | Ascension Parish | MAPD     | Peoples Health Choices 65 "#14 (HMO)"    |
       #| US2567133 |   70420 | YES             | Ascension Parish | MAPD     | Peoples Health Choices 65 "#14 (HMO)"    |
       

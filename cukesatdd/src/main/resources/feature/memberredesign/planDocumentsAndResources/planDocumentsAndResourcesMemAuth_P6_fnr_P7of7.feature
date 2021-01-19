@@ -68,7 +68,7 @@ Feature: 1.06.6.1 Member Plans and Documents - section: Forms And Resources Part
 	@memAuth_active_ma_grp_7of7 @memAuth_active_ma_7of7
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | fnr_sd | fnr_di |
-      | 10-105 | 15130       | qavgogine | qavgogine | q3_sep_UAT4_Group289 | MA  | GROUP_EFF_PDnR        | true   | true   |
+      | 10-105 | 15130       | qavgogine | qavgogine | q3_sep_UAT4_Group152 | MA  | GROUP_EFF_PDnR        | true   | true   |
 
 	@memAuth_active_mapd_ind_7of7 @memAuth_active_mapd_7of7
 	Examples: 
@@ -111,11 +111,11 @@ Feature: 1.06.6.1 Member Plans and Documents - section: Forms And Resources Part
 	#@memAuth_active_ship_7of7
 	#Examples: 
     #  | index  | TID         | username  | password  | MemUserName     | planType | memberType            | fnr_sd | fnr_di |
-    #  | 19-114 | 15119,15304 | qavgogine | qavgogine | PaidInFullShip0011 | SHIP  | IND_EFF_PDnR          | true   | false  |
-    #  | 19-120 | 15119,15304 | qavgogine | qavgogine | q3_SEP_2020SHIP_012| SHIP  | MULTI_IND_EFF_PDnR    | true   | false  |    
+    #  | 19-114 | 15119,15304 | qavgogine | qavgogine | q4_Ship_ANOC_009 | SHIP  | IND_EFF_PDnR          | true   | false  |
+    #  | 19-120 | 15119,15304 | qavgogine | qavgogine | q4_Ship_014| SHIP  | MULTI_IND_EFF_PDnR    | true   | false  |    
 
 	#@memAuth_preeffective_ship_7bf7
 	#Examples: 
     #  | index  | TID         | username  | password  | MemUserName         | planType | memberType            | fnr_sd | fnr_di  |
-    #  | 21-121 | xxxxx       | qavgogine | qavgogine | shipPreeffective707 | SHIP     | IND_PREEFF_PDnR       | true   | false   |
+    #  | 21-121 | xxxxx       | qavgogine | qavgogine | q4_Ship_013 | SHIP     | IND_PREEFF_PDnR       | true   | false   |
     

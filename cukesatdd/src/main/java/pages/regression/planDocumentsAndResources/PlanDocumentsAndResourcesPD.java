@@ -160,7 +160,7 @@ public class PlanDocumentsAndResourcesPD extends PlanDocumentsAndResourcesBase  
 		List<WebElement> instElement=providerSearch_instr_PD;
 		String expectedUrl="";
 		String redirectUrl="";
-		if (testInputInfoMap.get("memberType").contains("_PREEFF_")) {
+		//tbd if (testInputInfoMap.get("memberType").contains("_PREEFF_")) {
 			expectedUrl="https://member.uhc.com/UHC/find-care";
 			redirectUrl="https://www.myuhc.com/member/prewelcome.do";
 
@@ -238,14 +238,14 @@ public class PlanDocumentsAndResourcesPD extends PlanDocumentsAndResourcesBase  
 					}
 				}
 			}
-		} else {
-			expectedUrl="/county-plan-selection/uhc.mnr/zip?clientPortalCode=";
-			redirectUrl="none";
-			if (testInputInfoMap.get("memberType").contains("GROUP")) {
-				expectedUrl="https://connect.werally.com/guest/acquisition/guestSearch/";
-			 	redirectUrl="https://connect.werally.com/county-plan-selection/uhc.mnr/zip?clientPortalCode";
-			}
-		}
+		//tbd } else {
+		//tbd 	expectedUrl="/county-plan-selection/uhc.mnr/zip?clientPortalCode=";
+		//tbd 	redirectUrl="none";
+		//tbd 	if (testInputInfoMap.get("memberType").contains("GROUP")) {
+		//tbd 		expectedUrl="https://connect.werally.com/guest/acquisition/guestSearch/";
+		//tbd 	 	redirectUrl="https://connect.werally.com/county-plan-selection/uhc.mnr/zip?clientPortalCode";
+		//tbd 	}
+		//tbd }
 		
 
 		testInputInfoMap.put("section", section);
@@ -274,13 +274,16 @@ public class PlanDocumentsAndResourcesPD extends PlanDocumentsAndResourcesBase  
 	 * Validate jumplink for Provider And Pharmacy Directories (MAPD) or Pharmacy Directory (PDP) or Provider Directory (MA)
 	 * @param sectionDisplay
 	 */
-	public void validateJumplink_PD(boolean sectionDisplay) {
+	public void validateJumplink_PD(boolean sectionDisplay, String memberType) {
 		String item="Provider And Pharmacy Directories";
 		WebElement sectionElement=sectionHeader_PD;
 		WebElement jumpLinkElement=jumpLink_PD;
 		
 		if (sectionDisplay) {
-			Assert.assertTrue("PROBLEM - unable to locate jumplink for '"+item+"'", planDocValidate(jumpLinkElement));
+			if (memberType.contains("PREEFF"))
+				Assert.assertTrue("PROBLEM - KNOWN ISSUE - INC19115934 - unable to locate jumplink for '"+item+"'", planDocValidate(jumpLinkElement));
+			else
+				Assert.assertTrue("PROBLEM - unable to locate jumplink for '"+item+"'", planDocValidate(jumpLinkElement));
 			jumpLinkElement.click();
 			CommonUtility.waitForPageLoad(driver, sectionElement, 5);
 			Assert.assertTrue("PROBLEM - unable to locate section for '"+item+"' after clicking jumplink", planDocValidate(sectionElement));

@@ -79,7 +79,7 @@ public class VppPlanSummaryStepDefinitionUHC {
 		if (("NO").equalsIgnoreCase(isMultiCounty.trim())) {
 			plansummaryPage = aquisitionhomepage.searchPlansWithOutCounty(zipcode);
 		} else {
-			plansummaryPage = aquisitionhomepage.searchPlans(zipcode, county);
+			plansummaryPage = aquisitionhomepage.searchPlans1(zipcode, county);
 		}
 
 		if (plansummaryPage != null) {
@@ -1140,5 +1140,18 @@ public class VppPlanSummaryStepDefinitionUHC {
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		plansummaryPage.waitForPlanSummaryPageLoad();
 	}
-
+	
+	@When("^user clicks on Enroll in plan button on the select plan modal in UHC$")
+	public void user_clicks_on_Enroll_in_plan_button_on_the_select_plan_modal() throws Throwable {
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		plansummaryPage.clickEnrollPlanBtnOnSelectPlanModal();
+	}
+	
+	@Then("^user should be navigated to OLE page in UHC$")
+	public void user_should_be_navigated_to_OLE_page() throws Throwable {
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		plansummaryPage.validateNavigatedToOle();
+	}
 }

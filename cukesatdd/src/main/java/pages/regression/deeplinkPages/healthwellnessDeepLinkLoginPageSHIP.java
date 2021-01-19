@@ -62,6 +62,8 @@ public class healthwellnessDeepLinkLoginPageSHIP extends UhcDriver {
 	//page from MR constants 	
 			private static String AARP_HAWL = MRConstants.AARP_HAWL;
 			private static String STAGE_DEEPLINK_URL_DENTEGRA_DENTAL = MRConstants.DENTEGRA_DENTAL_DEEPLINK_URL;
+			private static String PROD_SHIP_HWP = MRConstants.PROD_SHIP_HWP;
+			
 			
 			 /*This method will open deep link page */
 			public healthwellnessDeepLinkLoginPageSHIP navigateToLoginURL(){
@@ -81,7 +83,7 @@ public class healthwellnessDeepLinkLoginPageSHIP extends UhcDriver {
 			public healthwellnessDeepLinkLoginPageSHIP navigateToDentegraDentalURL(){
 				start(STAGE_DEEPLINK_URL_DENTEGRA_DENTAL);
 				driver.manage().deleteAllCookies();
-				
+
 				try {
 					Thread.sleep(10000);
 				} catch (InterruptedException e) {
@@ -257,22 +259,90 @@ public class healthwellnessDeepLinkLoginPageSHIP extends UhcDriver {
 */									
 						return true;	
 					}
+				//page from MR constants 	
+				private static String Offline_PROD_SHIP_extra = MRConstants.Offline_PROD_SHIP_extra;
 				
-				public boolean validateDentegraDentalPage() {
-					checkForIPerceptionModel(driver);
-					CommonUtility.checkPageIsReadyNew(driver);	
+				 /*This method will open deep link page */
+				public healthwellnessDeepLinkLoginPageSHIP navigateToLoginURLoffline(String brand){
+					start(Offline_PROD_SHIP_extra);
+					driver.manage().deleteAllCookies();
+					
 					try {
 						Thread.sleep(10000);
 					} catch (InterruptedException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
+					}		
+					return null;
 					}
-					validateNew(textonpage);
-					System.out.println("*** Page URL ***" + driver.getCurrentUrl());
+
+				@FindBy(xpath="//button[contains(@class,'btn btn-primary btn-block')]")
+				private static WebElement offlineSignin;
+				
+				// This method validated the elements on the DEEPLINK page 
+				public void validateofflinePageElements() throws InterruptedException{
+					Thread.sleep(10000);
+					System.out.println(driver.getCurrentUrl());
+					validateNew(offlineSignin);
+				}
+				
+				@FindBy(xpath = "//h3[contains(text(),'Support for UnitedHealthcare members')]")
+				private WebElement textonpage1;	
+				
+					public boolean validateOfflineProdhealthwellnessPage() {
+						checkForIPerceptionModel(driver);
+						CommonUtility.checkPageIsReadyNew(driver);	
+						try {
+							Thread.sleep(10000);
+						} catch (InterruptedException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+						validateNew(textonpage1);
+						System.out.println("*** Page URL ***" + driver.getCurrentUrl());
+						System.out.println("*** PageTitle ***" + driver.getTitle());
+						if (driver.getCurrentUrl().contains("SMSR/healthlineu/health/uhcarticle/hwal-introducing-at-your-best")) {
+							System.out.println("*** Page URL ***" + driver.getCurrentUrl());
+							System.out.println("** User landed on health & wellness deeplink **");
+							System.out.println("*** PageTitle ***" + driver.getTitle());
+							Assert.assertTrue(driver.getTitle().contains("UnitedHealthcare Medicare Member Sign In"));
+							return true;
+							} else {
+								Assert.fail("The element " + textonpage1.getText() + "is not found");
+							}
+											
+							return true;	
+						}
 					
-					Assert.assertTrue(driver.getCurrentUrl().contains("wellness/health/uhcarticle/hwal-dentegra-dental-discount"));
-					return true;	
-				}				
+					public boolean validateDentegraDentalPage() {
+						checkForIPerceptionModel(driver);
+						CommonUtility.checkPageIsReadyNew(driver);	
+						try {
+							Thread.sleep(10000);
+						} catch (InterruptedException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+						validateNew(textonpage);
+						System.out.println("*** Page URL ***" + driver.getCurrentUrl());
+
+						Assert.assertTrue(driver.getCurrentUrl().contains("wellness/health/uhcarticle/hwal-dentegra-dental-discount"));
+						return true;	
+					}	
+					
+					 /*This method will open deep link page */
+					public healthwellnessDeepLinkLoginPageSHIP navigateToLoginURLPROD(String brand){
+						start(PROD_SHIP_HWP);
+						driver.manage().deleteAllCookies();
+						
+						try {
+							Thread.sleep(10000);
+						} catch (InterruptedException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}		
+						return null;
+						}
 				
 }
 

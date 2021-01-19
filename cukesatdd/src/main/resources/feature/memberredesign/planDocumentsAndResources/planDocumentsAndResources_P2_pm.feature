@@ -37,7 +37,8 @@ Feature: 1.06.1 Member Plans and Documents - section: Plan Materials
 	Examples: 
       | index  | TID         | planType | memberType            | pm_sd | pm_op | pm_mi | pm_en | pm_es | pm_zh |
       | 04-023 | xxxxx       | PDP      | AARP_IND_PREEFF_PDnR  | false | false | false | false | false | false |
-      | 05-024 | xxxxx       | PDP      | GROUP_PREEFF_PDnR     | false | false | false | false | false | false |
+	#note: no test user available for now
+    #  | 05-024 | xxxxx       | PDP      | GROUP_PREEFF_PDnR     | false | false | false | false | false | false |
 
 	@terminated_ma_mapd
 	Examples: 
@@ -91,10 +92,11 @@ Feature: 1.06.1 Member Plans and Documents - section: Plan Materials
       | index  | TID         | planType | memberType            | pm_sd | pm_op | pm_mi | pm_en | pm_es | pm_zh |
       | 20-116 | 15119,15304 | SHIP     | MULTI_IND_EFF_PDnR    | true  | true  | true  | true  | false | false |  
 
-	@preeffective_ship
-	Examples: 
-      | index  | TID         | planType | memberType            | pm_sd | pm_op | pm_mi | pm_en | pm_es | pm_zh |
-      | 21-122 | xxxxx       | SHIP     | IND_PREEFF_PDnR       | true  | false | false | true  | false | false | 
+	#note: no test user available for now
+	#@preeffective_ship
+	#Examples: 
+    #  | index  | TID         | planType | memberType            | pm_sd | pm_op | pm_mi | pm_en | pm_es | pm_zh |
+    #  | 21-122 | xxxxx       | SHIP     | IND_PREEFF_PDnR       | true  | false | false | true  | false | false | 
 
 
     

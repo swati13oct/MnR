@@ -16,6 +16,7 @@ Feature: 1.09.1 Member Health and Wellness Page - Member Auth - PROD
       | Password | <password> |
     And Member Enters the Username he wants to search
       | MemUsername | <MemUserName> |
+      | Retry | true |
     And user clicks on member to select
     And user stores test input for validations
       | Username | <MemUserName> |
@@ -32,29 +33,34 @@ Feature: 1.09.1 Member Health and Wellness Page - Member Auth - PROD
     @prod_healthAndWellness01_ma_mapd @prod_sanity
     Examples: 
       | TID   | username  | password  | MemUserName     | planType | memberType        | hasReward | hasRenewActive |
-      | 15340 | kkumard   | mnrs786@  | BILL.ROSNER123# | MAPD     | RewardsMember     | true      | true           |
+    #x| 15340 | kkumard   | tnps459#  | kirit1976 | MAPD     | RewardsMember     | true      | true           |
+      | 15340 | kkumard   | tnps459#  | mleroy@mcn.org  | MAPD     | RewardsMember     | true      | false          |
 
     @prod_healthAndWellness01_ma_mapd
     Examples: 
       | TID   | username  | password  | MemUserName     | planType | memberType        | hasReward | hasRenewActive |
-      | 15341 | kkumard   | mnrs786@  | haradaty32      | MA       | AARP_RewardsMember| true      | true           |
-      | 15341 | kkumard   | mnrs786@  | ExDesertrat     | MA       | UHC_RewardsMember | true      | false          |
+      | 15341 | kkumard   | tnps459#  | Johntvolpe@Aol.Com| MA     | AARP_RewardsMember| true      | true           |
+    #x| 15341 | kkumard   | tnps459#  | haradaty32      | MA       | AARP_RewardsMember| true      | true           |
+      | 15341 | kkumard   | tnps459#  | ExDesertrat     | MA       | UHC_RewardsMember | true      | false          |
 
     @prod_healthAndWellness01_pdp_ship
     Examples: 
       | TID   | username  | password  | MemUserName     | planType | memberType        | hasReward | hasRenewActive |
-      | 15342 | kkumard   | mnrs786@  | nawal1215       | PDP      | RewardsMember     | false     | false          |
+      | 15342 | kkumard   | tnps459#  | PWINSAUER51     | PDP      | RewardsMember     | false     | false          |
+    #x| 15342 | kkumard   | tnps459#  | Branford910       | PDP      | RewardsMember     | false     | false          |
 
     @prod_healthAndWellness01_pdp_ship @prod_sanity
     Examples: 
       | TID   | username  | password  | MemUserName     | planType | memberType        | hasReward | hasRenewActive |
-      | xxxxx | kkumard   | mnrs786@  | vernajohnson19651 | SHIP   | RewardsMember     | false     | false          |
+    #x| xxxxx | kkumard   | tnps459#  | vernajohnson19651 | SHIP   | RewardsMember     | false     | false          |
+      | xxxxx | kkumard   | tnps459#  | tntparents82    | SHIP     | RewardsMember     | false     | true           |
 
     @prod_healthAndWellness01_fedShipCombo_shipFedCombo
     Examples: 
       | TID   | username  | password  | MemUserName     | planType | memberType        | hasReward | hasRenewActive |
-      | 15343 | kkumard   | mnrs786@  | rldf1942        | FED_SHIP_COMBO | RewardsMember | false   | true           |
+      | 15343 | kkumard   | tnps459#  | Norm749         | FED_SHIP_COMBO | RewardsMember | false   | true           |
+    #x| 15343 | kkumard   | tnps459#  | rldf1942        | FED_SHIP_COMBO | RewardsMember | false   | true           |
 	#note: can't find a prod combo user w/ SHIP priority yet
-    # | 15343 | kkumard   | mnrs786@  | testuserTBD     | SHIP_FED_COMBO | RewardsMember | false   | true           |
+    # | 15343 | kkumard   | tnps459#  | testuserTBD     | SHIP_FED_COMBO | RewardsMember | false   | true           |
  
  

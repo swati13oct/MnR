@@ -65,7 +65,7 @@ Feature: 1.03-ACQ-Next Action Modal on vpp flow UHC
       |zipcode | isMultutiCounty | county         | plantype |planname                          |
       |  19019 | No              | Iowa County    | MAPD     |AARP Medicare Advantage Choice Plan 2 (PPO)|
       
-      @vppNextActionModalAddDrugAndProviderEnrollPlan @NBA_MAPD_UHC01
+      @vppNextActionModalAddDrugAndProviderEnrollPlan @NBA_MAPD_UHC02
     Scenario Outline: UserStory: Plan type: <plantype> -Test to verify the Next action modal on VPP summary page for MAPD plan when both Drug cost and  Provider are added
     Given the user is on uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
@@ -292,6 +292,8 @@ Feature: 1.03-ACQ-Next Action Modal on vpp flow UHC
      Then user should be able to see the NBA modal to Enroll Plan on the VPP summary page in UMS site
      When user clicks on Continue Enrollment button in UMS Site
      Then user should be able to see the Select Plan for Enroll Modal with all plans in UMS site
+     When user clicks on Enroll in plan button on the select plan modal in UHC
+     Then user should be navigated to OLE page in UHC
       Examples: 
       | zipcode | isMultutiCounty | county         | plantype |drug1    |
       |   19019 | No              | Iowa County    | MAPD     |Lipitor |
@@ -317,6 +319,8 @@ Feature: 1.03-ACQ-Next Action Modal on vpp flow UHC
      Then user should be able to see the NBA modal to Enroll Plan on the VPP summary page in UMS site
      When user clicks on Continue Enrollment button in UMS Site
      Then user should be able to see the Select Plan for Enroll Modal with all plans in UMS site
+     When user clicks on Enroll in plan button on the select plan modal in UHC
+     Then user should be navigated to OLE page in UHC
       Examples: 
       | zipcode | isMultutiCounty | county         | plantype |drug1    |
       |   19019 | No              | Iowa County    | PDP     |Lipitor |
@@ -345,6 +349,8 @@ Feature: 1.03-ACQ-Next Action Modal on vpp flow UHC
      When user clicks on Continue Enrollment button in UMS Site
      Then user should be able to see the Select Plan for Enroll Modal with saved plans in UMS site
      | Test Plans   | <testPlans>  |
+     When user clicks on Enroll in plan button on the select plan modal in UHC
+     Then user should be navigated to OLE page in UHC
       Examples: 
       | zipcode | isMultutiCounty | county         | plantype |drug1    |testPlans|
       |   19019 | No              | Iowa County    | PDP     |Lipitor |AARP MedicareRx Walgreens (PDP)|

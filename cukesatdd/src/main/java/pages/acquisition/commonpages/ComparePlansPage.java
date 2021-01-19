@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.TreeSet;
 
@@ -24,6 +23,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import com.google.common.base.Strings;
 import com.mysql.jdbc.StringUtils;
 
+import acceptancetests.acquisition.dce.DceCommonConstants;
+import acceptancetests.acquisition.dceredesign.DCERedesignCommonConstants;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
@@ -292,6 +293,15 @@ public class ComparePlansPage extends UhcDriver {
 	
 	@FindBy(xpath="//h2[contains(text(),'Medical Benefits')]/following::span[@class='uhc-switch__slider']")
 	public static WebElement medicalBenefitsOONToggleNotDisplayed;
+	
+	@FindBy(css = "#viewLocationLink-0")
+	private WebElement viewLocationLink;
+	
+	@FindBy(xpath="//tr[contains(@ng-repeat,'uniqueDoctorProviders')]//child::span[contains(@class,'provider-name')][1]")
+	private WebElement firstDoctorNameLabel;
+	
+	@FindBy(xpath="//h2[@id='viewLocationTitle']")
+	private WebElement viewLocationPopupProviderName;
 
 
 	public ComparePlansPage(WebDriver driver) {
@@ -563,6 +573,7 @@ public class ComparePlansPage extends UhcDriver {
   			//validateNew(enrollForPlan);
 //  			enrollForPlan.click();
   			jsClickNew(enrollForPlan);
+  			waitForPageLoadSafari();
   		}
   		CommonUtility.waitForPageLoadNew(driver, NextBtn, 30);
   		System.out.println(driver.getCurrentUrl());
@@ -733,13 +744,9 @@ public class ComparePlansPage extends UhcDriver {
 		jsClickNew(removelink);
 		System.out.println("Clicked on Remove Link on plan Compare page");
 		
-		if(driver.findElement(By.xpath("//th[@ng-repeat='plan in count'][1]//a[contains(@class,'remove')]")).isDisplayed()){
-			System.out.println("Element is Present");
-			Assert.fail("remove icon is Displaying in plan compare page");
-			}else{
-			System.out.println("remove icon is not Displaying in plan compare page");
+	    Assert.assertTrue(!(driver.findElements(By.xpath("//th[@ng-repeat='plan in count'][1]//*[contains(@class,'uhc-link-button d-none d-lg-inline-block')]")).size()>0));
+		System.out.println("remove icon is not Displaying in plan compare page");
 
-			}
 
 	}
 	
@@ -1104,6 +1111,7 @@ public class ComparePlansPage extends UhcDriver {
 					System.out.println("#########"+drugList.get(i+1).findElement(By.cssSelector("th>span>span")).getText().trim()+"#########");
 				}
 			}
+			
 		}else {
 			System.out.println("#########No Drugs available for this member#########");
 		}
@@ -1375,7 +1383,15 @@ public class ComparePlansPage extends UhcDriver {
 		Assert.assertTrue("OON Toggle Should be Displayed for Medical Benefits", driver.findElements(By.xpath("//h2[contains(text(),'Medical Benefits')]/following::span[@class='uhc-switch__slider']")).isEmpty());
 		Assert.assertTrue("OON Toggle Should be Displayed for Additional Benefits", driver.findElements(By.xpath("//h2[contains(text(),'Additional Benefits')]/following::span[@class='uhc-switch__slider']")).isEmpty());
 	}
-	
+			
+	public void validateViewLocation()
+	{
+		System.out.println(firstDoctorNameLabel.getText());
+		String firstDoctorName=firstDoctorNameLabel.getText();
+		viewLocationLink.click();
+		Assert.assertEquals("Doctor name is not displayed correctly", firstDoctorName, viewLocationPopupProviderName.getText());
+	}
+
 	public void CounterDentalFlyerLink(String counter,String Documentcode) throws Exception{
 		String ParentWindow = driver.getTitle();
 		WebElement DentalFlyerLink;

@@ -119,7 +119,11 @@ public class HealthRecordStepDefinition {
 		if (expHealthRecordLnk!=hasHealthRecordLnk && memberType.toUpperCase().contains("TERM")) {
 			testNote.add("\tFAILED - KNOWN ISSUE - Rally page for terminated user - Bypass for now so to validate the rest of pages- Health Record link is NOT display on dropdown option just as expected");
 		} else {
-			Assert.assertTrue("PROBLEM - health record link display behavior is not as expected.  Expected to display='"+expHealthRecordLnk+"' | Actual display='"+hasHealthRecordLnk+"'", expHealthRecordLnk==hasHealthRecordLnk);
+			if ((targetPage.equals("Initial landing page after login")|| targetPage.equals("Find Care")) 
+					&& memberType.equals("EXCLUDE_IHR")) 
+				Assert.assertTrue("PROBLEM - KNOWN ISSUE - already notified rally - health record link display behavior is not as expected.  Expected to display='"+expHealthRecordLnk+"' | Actual display='"+hasHealthRecordLnk+"'", expHealthRecordLnk==hasHealthRecordLnk);
+			else
+				Assert.assertTrue("PROBLEM - health record link display behavior is not as expected.  Expected to display='"+expHealthRecordLnk+"' | Actual display='"+hasHealthRecordLnk+"'", expHealthRecordLnk==hasHealthRecordLnk);
 			if (expHealthRecordLnk) {
 				testNote.add("\tHealth Record link IS displaying on dropdown option and href is as expected");
 			} else
@@ -221,7 +225,11 @@ public class HealthRecordStepDefinition {
 			expHealthRecordLnk=true; //note: if fed is part of combo plan, iHR will show even though SHIP may have priority in some cases
 		}
 		boolean hasHealthRecordLnk=healthRecordPage.isHeathRecordLnkOnAcctProfDropdownOption(planType, memberType, expComboTab, targetPage,expHealthRecordLnk);
-		Assert.assertTrue("PROBLEM - '"+targetPage+"' page health record link display behavior is not as expected.  Expected to display='"+expHealthRecordLnk+"' | Actual display='"+hasHealthRecordLnk+"'", expHealthRecordLnk==hasHealthRecordLnk);
+		if (memberType.contains("EXCLUDE_IHR") && MRScenario.environment.contains("stage")) {
+			Assert.assertTrue("PROBLEM - KNOWN ISSUE already notified Rally - '"+targetPage+"' page health record link display behavior is not as expected.  Expected to display='"+expHealthRecordLnk+"' | Actual display='"+hasHealthRecordLnk+"'", expHealthRecordLnk==hasHealthRecordLnk);
+		} else {
+			Assert.assertTrue("PROBLEM - '"+targetPage+"' page health record link display behavior is not as expected.  Expected to display='"+expHealthRecordLnk+"' | Actual display='"+hasHealthRecordLnk+"'", expHealthRecordLnk==hasHealthRecordLnk);
+		}
 		if (expHealthRecordLnk) {
 			testNote.add("\tHealth Record link IS displaying on dropdown option and href is as expected");
 		} else
@@ -890,16 +898,21 @@ public class HealthRecordStepDefinition {
 	@SuppressWarnings("unchecked")
 	@Then("^the user navigates to Pharmacy Locator page and validate Health Record link display behavior$")
 	public void user_toPharmacyLocator() {
-		WebDriver wd=(WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
-		wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
-		String planType=(String) getLoginScenario().getBean(LoginCommonConstants.PLANTYPE);
-		String memberType=(String) getLoginScenario().getBean(LoginCommonConstants.CATOGERY);
 		List<String> testNote=(List<String>) getLoginScenario().getBean(HealthRecordCommonConstants.TEST_NOTE);
 		if (testNote==null)
 			testNote=new ArrayList<String>();
 		String targetPage="Pharmacy Locator";
 		testNote.add("===================================================");
 		testNote.add("\tValidation for page '"+targetPage+"'");
+		testNote.add("\tSKIPPED - Health Record link destination validation - "+targetPage+" is Rally page");
+		getLoginScenario().saveBean(HealthRecordCommonConstants.TEST_NOTE, testNote);
+		return;
+		/* keep - resurrect this code and fix it up if we need to validate Rally page also
+		WebDriver wd=(WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
+		String planType=(String) getLoginScenario().getBean(LoginCommonConstants.PLANTYPE);
+		String memberType=(String) getLoginScenario().getBean(LoginCommonConstants.CATOGERY);
+
 		if (planType.toUpperCase().contains("SHIP") || planType.equalsIgnoreCase("MA") 
 				|| planType.equalsIgnoreCase("SSUP") || memberType.toUpperCase().contains("TERM")) {
 			System.out.println(planType+" user doesn't have '"+targetPage+"' page, skipping step...");
@@ -947,23 +960,28 @@ public class HealthRecordStepDefinition {
 		}
 		healthRecordPage.backToOriginalLinkToPrepNextStep(planType, memberType, originalUrl);
 		testNote.add("\tPASSED - Health Record link destination validation");
-		getLoginScenario().saveBean(HealthRecordCommonConstants.TEST_NOTE, testNote);
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+		getLoginScenario().saveBean(HealthRecordCommonConstants.TEST_NOTE, testNote);
+		*/
 	}
 
 	@SuppressWarnings("unchecked")
 	@Then("^the user navigates to DCE page and validate Health Record link display behavior$")
 	public void user_toDce() {
-		WebDriver wd=(WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
-		wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
-		String planType=(String) getLoginScenario().getBean(LoginCommonConstants.PLANTYPE);
-		String memberType=(String) getLoginScenario().getBean(LoginCommonConstants.CATOGERY);
 		List<String> testNote=(List<String>) getLoginScenario().getBean(HealthRecordCommonConstants.TEST_NOTE);
 		if (testNote==null)
 			testNote=new ArrayList<String>();
 		String targetPage="DCE";
 		testNote.add("===================================================");
 		testNote.add("\tValidation for page '"+targetPage+"'");
+		testNote.add("\tSKIPPED - Health Record link destination validation - "+targetPage+" is Rally page");
+		getLoginScenario().saveBean(HealthRecordCommonConstants.TEST_NOTE, testNote);
+		return;
+		/* keep - resurrect this code and fix it up if we need to validate Rally page also
+		WebDriver wd=(WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
+		String planType=(String) getLoginScenario().getBean(LoginCommonConstants.PLANTYPE);
+		String memberType=(String) getLoginScenario().getBean(LoginCommonConstants.CATOGERY);
 		if (planType.toUpperCase().contains("SHIP") || planType.equalsIgnoreCase("MA") 
 				|| planType.equalsIgnoreCase("SSUP") || memberType.toUpperCase().contains("TERM")) {
 			System.out.println(planType+" user doesn't have '"+targetPage+"' page, skipping step...");
@@ -1013,6 +1031,7 @@ public class HealthRecordStepDefinition {
 		testNote.add("\tPASSED - Health Record link destination validation");
 		getLoginScenario().saveBean(HealthRecordCommonConstants.TEST_NOTE, testNote);
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+		*/
 	}
 
 	@SuppressWarnings("unchecked")

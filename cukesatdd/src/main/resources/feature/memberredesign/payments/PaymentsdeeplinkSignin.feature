@@ -1,7 +1,7 @@
 @deeplinkSignin
 Feature: To test member Signin from new and old payment's Deeplinks
 
- Background: Feature security flag needs to be true before ATDD script execution
+Background: Feature security flag needs to be true before ATDD script execution
      Given First check if feature security flag is set to true
       | Feature | UCPUserManagement |
 ###############################Regression Scenarios Begin Here ########################################

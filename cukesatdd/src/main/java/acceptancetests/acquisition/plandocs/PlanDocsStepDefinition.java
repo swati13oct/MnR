@@ -117,13 +117,88 @@ public class PlanDocsStepDefinition {
 			String zipcode = memberAttributesMap.get("zipcode");
 			String county = memberAttributesMap.get("county");
 			String plan = memberAttributesMap.get("plan");	
-			String currentplandrodown = memberAttributesMap.get("currentplandrodown");
-			
+			String aepyear = memberAttributesMap.get("aepyear");		
 		
 			
 		PlanDocsPage plandocspage = (PlanDocsPage) getLoginScenario().getBean(PageConstants.PLANDOCS_PAGE);
-		plandocspage.enterValue(zipcode,county,plan,currentplandrodown);
+		plandocspage.enterZipCodeValue(zipcode);
+		plandocspage.enterCountyValue(county);
+		plandocspage.enterPlanValue(plan);
+		if(aepyear.equalsIgnoreCase("yes")){
+			plandocspage.enterYearValue(aepyear);
+		}
 		
+	}
+	
+	
+	@When("^the form fields are not selected and continue button is clicked")
+	public void the_form_fields_are_not_selected_and_continue_button_is_clicked() throws Throwable {
+		PlanDocsPage plandocspage = (PlanDocsPage) getLoginScenario().getBean(PageConstants.PLANDOCS_PAGE);
+		plandocspage.continuebuttonOnClick();
+		
+	}
+	
+	@When("^verifying error messages for Zip code and county and plan year")
+	public void verifying_error_messages_for_Zipcode_and_county_and_plan_year() throws Throwable {
+		PlanDocsPage plandocspage = (PlanDocsPage) getLoginScenario().getBean(PageConstants.PLANDOCS_PAGE);
+		boolean isZipErrMsg = plandocspage.verifyErrorZipCodeMessage();
+		boolean isCountyErrMsg = plandocspage.verifyErrorCountyMessage();
+		boolean isPlanErrMsg = plandocspage.verifyErrorPlanMessage();
+		if(isZipErrMsg && isCountyErrMsg && isPlanErrMsg){
+			Assert.assertTrue("Error messages are visible", true); 
+		}
+	}
+	
+	@When("^user enters zipcode with non-multi county and continue button is clicked and county and plan error message is visible")
+	public void user_enters_zipcode_with_nonmulticounty_and_continue_button_is_clicked(DataTable givenAttributes) throws InterruptedException {
+		
+		List<DataTableRow> memberAttributesRow = givenAttributes
+					.getGherkinRows();
+			Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+			for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+				memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+						.get(0), memberAttributesRow.get(i).getCells().get(1));
+			}
+
+			String zipcode = memberAttributesMap.get("zipcode");
+		
+		PlanDocsPage plandocspage = (PlanDocsPage) getLoginScenario().getBean(PageConstants.PLANDOCS_PAGE);
+		plandocspage.enterZipCodeValue(zipcode);
+		plandocspage.continuebuttonOnClick();
+		
+		boolean isCountyErrMsg = plandocspage.verifyErrorCountyMessage();
+		boolean isPlanErrMsg = plandocspage.verifyErrorPlanMessage();
+		if(isCountyErrMsg && isPlanErrMsg){
+			Assert.assertTrue("Error messages are visible", true); 
+		}
+	}
+	
+	
+	@When("^user enters zipcode and county and continue button is clicked and plan error message is visible")
+	public void user_enters_zipcode_and_county_and_continue_button_is_clicked(DataTable givenAttributes) throws InterruptedException {
+		
+		List<DataTableRow> memberAttributesRow = givenAttributes
+					.getGherkinRows();
+			Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+			for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+				memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+						.get(0), memberAttributesRow.get(i).getCells().get(1));
+			}
+
+			String zipcode = memberAttributesMap.get("zipcode");
+			String county = memberAttributesMap.get("county");
+		
+		PlanDocsPage plandocspage = (PlanDocsPage) getLoginScenario().getBean(PageConstants.PLANDOCS_PAGE);
+		plandocspage.enterZipCodeValue(zipcode);
+		plandocspage.enterCountyValue(county);
+		plandocspage.continuebuttonOnClick();
+		
+		boolean isPlanErrMsg = plandocspage.verifyErrorPlanMessage();
+		if(isPlanErrMsg){
+			Assert.assertTrue("Error messages are visible", true); 
+		}
 	}
 	
 	@Then("^the user should be able to see the pdf")

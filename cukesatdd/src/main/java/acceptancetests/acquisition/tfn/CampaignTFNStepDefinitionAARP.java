@@ -390,22 +390,23 @@ public void the_user_navigates_to_following_memeber_signin_page_AARP(DataTable a
 	Map<String, String> inputAttributesMap=parseInputArguments(arg1);
 	String memberSignINURL = inputAttributesMap.get("Member Signin URL");
 	String memberSignINSTAGEURL = inputAttributesMap.get("Member Signin URL STG");
+	String memberSignINOFFLINEURL = inputAttributesMap.get("Member Signin URL Offline");
 	AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(driver);
 	//AcquisitionHomePage aquisitionhomepage1 = (AcquisitionHomePage)getLoginScenario().getBean(PageConstants.ACQUISITION_HOME_PAGE);
 	getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, aquisitionhomepage);
 	
-	if (getLoginScenario().environment.equals("stage")) {
+	if (getLoginScenario().environment.equalsIgnoreCase("stage")) {
 		aquisitionhomepage.clickonmemberSignInStagelink(memberSignINSTAGEURL);
-	} else {
+	} 
+	else if (getLoginScenario().environment.equalsIgnoreCase("prod")){
 		aquisitionhomepage.clickonmemberSignInlink(memberSignINURL);
 	}
-	/*if(memberSignINURL!=null){
-		aquisitionhomepage.clickonmemberSignInlink(memberSignINURL);
-		Assert.assertTrue(true);
-	}else
+	else if(getLoginScenario().environment.equalsIgnoreCase("offline")) {
+	aquisitionhomepage.clickonmemberSignInOfflinelink(memberSignINOFFLINEURL);
+	}
+	else {
 		Assert.fail("Error in loading the UHC Agent Page");
-	//tfnPage.validateFederalTFN(TFN_Xpath);
-*/
+	}
 	
 }
 
@@ -494,8 +495,8 @@ public void the_user_lands_on_AARP_from_External_Link_Landon_MA_Plans(DataTable 
 	tfnPage.ViewPlanSummary(PlanType);
 	tfnPage.NavigateToPlanDetails(PlanType);
 	//String TFNXpath_PlanDetails = "//a[contains(@class, 'tel')]";
-	//tfnPage.validateFederalTFN(TFNXpath_PlanDetails);	
-}
+	//tfnPage.validateFederalTFN(TFNXpath_PlanDetails);
+	}
 
 @And("^the user signs in with optum Id credentials for campaign TFN$")
 public void the_user_signs_in_with_optum_Id_credentials_in_AARP_site_campaign_tfn(DataTable credentials) {
@@ -555,13 +556,13 @@ public void the_user_lands_on_AARP_from_External_Link_Landon_DCE_Page(DataTable 
 	AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(driver);
 	//getLoginScenario().saveBean(CommonConstants.WEBDRIVER, driver);
 	getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, aquisitionhomepage);
-	String EnvironmentUrl = aquisitionhomepage.fetchEnvironmentUrls();
+//	String EnvironmentUrl = aquisitionhomepage.fetchEnvironmentUrls();
 	Map<String, String> inputAttributesMap=parseInputArguments(arg1);
 	String URLpath = inputAttributesMap.get("Campaign URL");
 	//String TFN_Xpath = "//button[@id='sam-call-button']//span[contains(@class,'sam__button__text desktop')]";
 	CampaignTFNPage tfnPage = new CampaignTFNPage(driver);
 	getLoginScenario().saveBean(PageConstants.CAMPAIGN_TFN_PAGE, tfnPage);
-	tfnPage.navigateToCampaignURL(URLpath , EnvironmentUrl);
+//	tfnPage.navigateToCampaignURL(URLpath , EnvironmentUrl);
 	String TFNXpath_PlanDetails = "//button[@id='sam-call-button']//span[contains(@class,'sam__button__text desktop')]";
 	tfnPage.validateFederalTFN(TFNXpath_PlanDetails);	
 	
@@ -604,13 +605,13 @@ public void the_user_lands_on_AARP_from_External_Link_start_now_Landon_pharmacy_
 	AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(driver);
 	//getLoginScenario().saveBean(CommonConstants.WEBDRIVER, driver);
 	getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, aquisitionhomepage);
-	String EnvironmentUrl = aquisitionhomepage.fetchEnvironmentUrls();
+//	String EnvironmentUrl = aquisitionhomepage.fetchEnvironmentUrls();
 	Map<String, String> inputAttributesMap=parseInputArguments(arg1);
 	String URLpath = inputAttributesMap.get("Campaign URL");
 	//String TFN_Xpath = "//button[@id='sam-call-button']//span[contains(@class,'sam__button__text desktop')]";
 	CampaignTFNPage tfnPage = new CampaignTFNPage(driver);
 	getLoginScenario().saveBean(PageConstants.CAMPAIGN_TFN_PAGE, tfnPage);
-	tfnPage.navigateToCampaignURL(URLpath , EnvironmentUrl);
+//	tfnPage.navigateToCampaignURL(URLpath , EnvironmentUrl);
 	String TFNXpath_PlanDetails = "//button[@id='sam-call-button']//span[contains(@class,'sam__button__text desktop')]";
 	tfnPage.validateFederalTFN(TFNXpath_PlanDetails);	
 	

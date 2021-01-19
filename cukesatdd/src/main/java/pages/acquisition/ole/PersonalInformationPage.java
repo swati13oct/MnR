@@ -173,7 +173,7 @@ public class PersonalInformationPage extends UhcDriver{
 	@FindBy(css="a#enrollment-saved-wc")
 	private WebElement enrollSavedClose;
 	
-	@FindBy(xpath = "//img[@alt='AARP Medicare Plans from United Healthcare']")
+	@FindBy(xpath = "//img[contains(@alt,'AARP Medicare Plans')]")
 	private WebElement aarpLogo;
 	
 	@FindBy(xpath = "//a[@class='enrollProfileBtn cta-button']")
@@ -184,7 +184,25 @@ public class PersonalInformationPage extends UhcDriver{
 	
 	@FindBy(css="a#visitor-profile-header")
     private WebElement lnkProfile;
+	
+	@FindBy(xpath = "(//*[@class = 'logo']//img)[2]")
+	private WebElement logoimageOLE;
 
+	@FindBy(xpath = "(//div[contains(@id,'enroll-cancel-profile')])[1]")
+	private WebElement CancellationModalOLE;
+	
+	@FindBy(xpath = "(//a[contains(text(),'Create a Profile')])[2]")
+	private WebElement CreateProfile;
+
+	@FindBy(xpath = "(//a[contains(text(),'Sign In')])[2]")
+	private WebElement SignIn;
+	
+	@FindBy(xpath = "(//a[contains(text(),'Leave Online Application')])[2]")
+	private WebElement LeaveOnlineApplication;
+
+	@FindBy(xpath = "(//a[contains(@class,'oleClose')])[3]")
+	private WebElement closepopup;
+	
 	public PersonalInformationPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -630,5 +648,91 @@ public class PersonalInformationPage extends UhcDriver{
 			System.out.println("Navigation to visitor profile is failed");
 			return null;
 		}
+	}
+	
+	public UseAndDisclosureAuthorizationPage navigate_to_SEP_page_CSNP(Map<String, String> MedicareDetailsMap) throws InterruptedException {
+
+		validateNew(NextBtn);
+		jsClickNew(NextBtn);
+		/*JavascriptExecutor executor = (JavascriptExecutor)driver;
+		executor.executeScript("arguments[0].click();", NextBtn);*/
+		
+		/*if(validateNew(driver.findElement(By.xpath("//h1[contains(text(),'Special Election')]")))){
+			System.out.println("OLE SEP Page is Displayed");
+			return new SpecialElectionPeriodPage(driver);
+		}
+		*/
+		
+		Thread.sleep(3000);
+			if(driver.getCurrentUrl().contains("use")){
+			Assert.assertTrue(driver.getCurrentUrl().contains("use"), "OLE Use and Disclosure Authorization page is Displayed");
+			return new UseAndDisclosureAuthorizationPage(driver);
+			
+			}
+		else if(driver.getCurrentUrl().contains("eligibility"))
+
+			 {
+				
+				ConfirmYourEligibilityPage confirmYourEligibilityPage= enterConfirmEligibilityPageDataCSNP(MedicareDetailsMap);
+				if(confirmYourEligibilityPage!=null) {
+					
+					
+					 validateNew(NextBtn); 
+					 jsClickNew(NextBtn);
+					
+					 if(driver.getCurrentUrl().contains("use")){
+					  System.out.println("OLE Use and Disclosure Authorization Page is Displayed"); } else {
+					  System.out.println("OLE Use and Disclosure Authorization Page is not Displayed"); }
+					 return new UseAndDisclosureAuthorizationPage(driver);	
+				}
+			 }
+		return null;
+	}	
+
+
+
+	public ConfirmYourEligibilityPage enterConfirmEligibilityPageDataCSNP(Map<String, String> MedicareDetailsMap) {
+		
+		String PartAeffectiveDate = MedicareDetailsMap.get("PartA Date");
+		String PartBeffectiveDate = MedicareDetailsMap.get("PartB Date"); 
+		//String MedicaidNo = MedicareDetailsMap.get("MedicaidNumber"); 
+		if(validateNew(driver.findElement(By.xpath("//h1[contains(text(),'Confirm')]")))){
+			System.out.println("OLE Confirm your Eligibility is Displayed");
+		
+			sendkeysNew(partAStartDateField, PartAeffectiveDate);
+			sendkeysNew(partBStartDateField, PartBeffectiveDate);
+			//sendkeysNew(medicaidNumberField,MedicaidNo);
+		}
+		
+		return new ConfirmYourEligibilityPage(driver);
+	}
+	
+
+	
+	public CancelOLEModal OpenLogoOLEPages() {
+		validate(logoimageOLE);
+		JavascriptExecutor executor = (JavascriptExecutor)driver;
+		executor.executeScript("arguments[0].click();", logoimageOLE);
+		
+		//((JavascriptExecutor) driver).executeScript("arguments[0].click;", CancelEnrollmentLink);
+		
+		//CancelEnrollmentLink.click();
+		try {
+			Thread.sleep(6000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		if(validate(CancellationModalOLE)){
+			System.out.println("OLE Cancel Enrollment Modal is Displayed");
+			validate(CreateProfile);
+			CreateProfile.isDisplayed();
+			validate(SignIn);
+			SignIn.isDisplayed();
+			validate(LeaveOnlineApplication);
+			LeaveOnlineApplication.isDisplayed();
+			closepopup.click();
+			return new CancelOLEModal(driver);
+		}
+		return null;
 	}
 }

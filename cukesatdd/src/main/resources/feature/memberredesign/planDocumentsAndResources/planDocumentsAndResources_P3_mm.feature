@@ -35,7 +35,8 @@ Feature: 1.06.3 Member Plans and Documents - section: Membership Materials
 	Examples: 
       | index  | TID         | planType | memberType            | mm_sd | mm_en | mm_es | mm_zh |
       | 04-042 | xxxxx       | PDP      | AARP_IND_PREEFF_PDnR  | true  | true  | true  | false |
-      | 05-043 | xxxxx       | PDP      | GROUP_PREEFF_PDnR     | true  | true  | false | false |
+	#note: no test user available for now
+    #  | 05-043 | xxxxx       | PDP      | GROUP_PREEFF_PDnR     | true  | true  | false | false |
 
 	@terminated_ma_mapd
 	Examples: 
@@ -89,9 +90,10 @@ Feature: 1.06.3 Member Plans and Documents - section: Membership Materials
       | index  | TID         | planType | memberType            | mm_sd | mm_en | mm_es | mm_zh |
       | 20-117 | 15119,15304 | SHIP     | MULTI_IND_EFF_PDnR    | false | false | false | false |
 
-	@preeffective_ship
-	Examples: 
-      | index  | TID         | planType | memberType            | mm_sd | mm_en | mm_es | mm_zh |
-      | 21-123 | xxxxx       | SHIP     | IND_PREEFF_PDnR       | false | false | false | false |
+	#note: no test user available for now
+	#@preeffective_ship
+	#Examples: 
+    #  | index  | TID         | planType | memberType            | mm_sd | mm_en | mm_es | mm_zh |
+    #  | 21-123 | xxxxx       | SHIP     | IND_PREEFF_PDnR       | false | false | false | false |
 
      

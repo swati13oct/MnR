@@ -1180,15 +1180,15 @@ public class PlanDetailsPage extends UhcDriver {
 		jsClickNew(compareBox);
 	}
 
-	public boolean ClickValidatePDFText_URL_ForDocCode(String pDFtype, String documentCode) {
-		WebElement PDFlink = driver.findElement(By.xpath("//*[contains(@id, 'planDocuments')]//a[contains(text(), '"+pDFtype+"')]"));
+	public boolean clickAndValidatePDFText_URL(String pDFtype, String documentCode) {
+		List <WebElement> PDFlink = driver.findElements(By.xpath("//*[contains(@id, 'planDocuments')]//a[contains(text(), '"+pDFtype+"')]"));
 
 		String parentHandle = driver.getWindowHandle();
 		int initialCount = driver.getWindowHandles().size();
 
 		JavascriptExecutor executor = (JavascriptExecutor)driver;
-		executor.executeScript("arguments[0].scrollIntoView(true);", PDFlink);
-		executor.executeScript("arguments[0].click();", PDFlink);
+		executor.executeScript("arguments[0].scrollIntoView(true);", PDFlink.get(0));
+		executor.executeScript("arguments[0].click();", PDFlink.get(0));
 
 		//PDFlink.click();
 
@@ -1208,14 +1208,11 @@ public class PlanDetailsPage extends UhcDriver {
 		CommonUtility.checkPageIsReadyNew(driver);
 
 		boolean Validation_Flag = false;
-		if(driver.getCurrentUrl().contains(documentCode))	{
-			System.out.println("PDF url has the correct document code.. : "+documentCode);
-			System.out.println("PDF url : "+driver.getCurrentUrl());
-			 Validation_Flag= true;
-		}
-		else{
-			System.out.println("PDF url does NOT CONTAIN the correct document code.. : "+documentCode);
-			System.out.println("PDF url : "+driver.getCurrentUrl());
+		String PdfHref = PDFlink.get(0).getAttribute("href");
+		System.out.println("href for the PDF is : "+PdfHref);
+		if(PdfHref.contains(documentCode)){
+			System.out.println("Expected Document code :"+documentCode+"-  is mathing the PDF link :  "+PdfHref);
+			
 		}
 		try {
 			URL TestURL = new URL(driver.getCurrentUrl());
@@ -1237,6 +1234,9 @@ public class PlanDetailsPage extends UhcDriver {
 		} catch (IOException e) {
 			 System.out.println("FAILURE, Exception in Reading PDF");
 		}
+		
+		driver.close();
+		driver.switchTo().window(parentHandle);
 		return Validation_Flag;
 	}
 	

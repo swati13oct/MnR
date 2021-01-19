@@ -499,8 +499,9 @@ public class PlanDocApiResponse {
 						if (!isDuplicate(docCategory, annNotChgDoc_zh_curYr_docList))
 							annNotChgDoc_zh_curYr_docList.add(docObjMap);
 					}
-				} else if (docObj.getType().equals("5009")) {
-					String docCategory="CDI Long Notice (CA Only)";
+				} else if (docObj.getType().equals("7018")) {
+					//String docCategory="CDI Long Notice (CA Only)";
+					String docCategory="CDI Long Notice";
 					docObjMap.put(docCategory, docObj);
 					if (docObj.getLanguage().equals("en_us")) {
 						if (!isDuplicate(docCategory, planMatl_en_curYr_docList))
@@ -524,18 +525,18 @@ public class PlanDocApiResponse {
 								memMatl_zh_curYr_docList.add(docObjMap);
 						}
 					}
-					HashMap<String, Document> docObjMap2=new HashMap<String, Document>(); 
-					String docCategory2="Privacy Notice";
-					docObjMap2.put(docCategory2, docObj);
+				} else if (docObj.getType().equals("5009")) {
+					String docCategory="Privacy Notice";
+					docObjMap.put(docCategory, docObj);
 					if (docObj.getLanguage().equals("en_us")) {
-						if (!isDuplicate(docCategory2, planMatl_en_curYr_docList))
-							planMatl_en_curYr_docList.add(docObjMap2);
+						if (!isDuplicate(docCategory, planMatl_en_curYr_docList))
+							planMatl_en_curYr_docList.add(docObjMap);
 					} else if (docObj.getLanguage().equals("es")) {
-						if (!isDuplicate(docCategory2, planMatl_es_curYr_docList))
-							planMatl_es_curYr_docList.add(docObjMap2);
+						if (!isDuplicate(docCategory, planMatl_es_curYr_docList))
+							planMatl_es_curYr_docList.add(docObjMap);
 					} else if (docObj.getLanguage().equals("zh")) {
-						if (!isDuplicate(docCategory2, planMatl_zh_curYr_docList))
-							planMatl_zh_curYr_docList.add(docObjMap2);
+						if (!isDuplicate(docCategory, planMatl_zh_curYr_docList))
+							planMatl_zh_curYr_docList.add(docObjMap);
 					}
 				} else if (docObj.getType().equals("1021")) {
 					String docCategory="Schedule of benefits";
@@ -650,6 +651,19 @@ public class PlanDocApiResponse {
 							planMatl_zh_curYr_docList.add(docObjMap);
 						if (!isDuplicate(docCategory, memMatl_zh_curYr_docList))
 							memMatl_zh_curYr_docList.add(docObjMap);
+					}
+				} else if (docObj.getType().equals("5003")) {
+					String docCategory="Medicare Supplement Hospital Select Directory";
+					docObjMap.put(docCategory, docObj);
+					if (docObj.getLanguage().equals("en_us")) {
+						if (!isDuplicate(docCategory, planMatl_en_curYr_docList))
+							planMatl_en_curYr_docList.add(docObjMap);
+					} else if (docObj.getLanguage().equals("es")) {
+						if (!isDuplicate(docCategory, planMatl_es_curYr_docList))
+							planMatl_es_curYr_docList.add(docObjMap);
+					} else if (docObj.getLanguage().equals("zh")) {
+						if (!isDuplicate(docCategory, planMatl_zh_curYr_docList))
+							planMatl_zh_curYr_docList.add(docObjMap);
 					}
 				}					
 				//--------------	
@@ -932,6 +946,25 @@ public class PlanDocApiResponse {
 						if (!isDuplicate(docCategory, proPhmDir_zh_nxtYr_docList))
 							proPhmDir_zh_nxtYr_docList.add(docObjMap);
 					}
+				} else if (docObj.getType().equals("7001")) {
+					String docCategory="UnitedHealth Passport Program";
+					docObjMap.put(docCategory, docObj);
+					if (docObj.getLanguage().equals("en_us")) {
+						if (!isDuplicate(docCategory, planMatl_en_nxtYr_docList)) 
+							planMatl_en_nxtYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, memMatl_en_nxtYr_docList)) 
+							memMatl_en_nxtYr_docList.add(docObjMap);
+					} else if (docObj.getLanguage().equals("es")) {
+						if (!isDuplicate(docCategory, planMatl_es_nxtYr_docList))
+							planMatl_es_nxtYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, memMatl_es_nxtYr_docList))
+							memMatl_es_nxtYr_docList.add(docObjMap);
+					} else if (docObj.getLanguage().equals("zh")) {
+						if (!isDuplicate(docCategory, planMatl_zh_nxtYr_docList))
+							planMatl_zh_nxtYr_docList.add(docObjMap);
+						if (!isDuplicate(docCategory, memMatl_zh_nxtYr_docList))
+							memMatl_zh_nxtYr_docList.add(docObjMap);
+					}
 				} else if (docObj.getType().equals("4005")) {
 					String docCategory="Additional Drug Coverage";
 					docObjMap.put(docCategory, docObj);
@@ -957,8 +990,9 @@ public class PlanDocApiResponse {
 						if (!isDuplicate(docCategory, annNotChgDoc_zh_nxtYr_docList))
 							annNotChgDoc_zh_nxtYr_docList.add(docObjMap);
 					}
-				} else if (docObj.getType().equals("5009")) {
-					String docCategory="CDI Long Notice (CA Only)";
+				} else if (docObj.getType().equals("7018")) {
+					//String docCategory="CDI Long Notice (CA Only)";
+					String docCategory="CDI Long Notice";
 					docObjMap.put(docCategory, docObj);
 					if (docObj.getLanguage().equals("en_us")) {
 						if (!isDuplicate(docCategory, planMatl_en_nxtYr_docList))
@@ -982,18 +1016,18 @@ public class PlanDocApiResponse {
 								memMatl_zh_nxtYr_docList.add(docObjMap);
 						}
 					}
-					HashMap<String, Document> docObjMap2=new HashMap<String, Document>(); 
-					String docCategory2="Privacy Notice";
-					docObjMap2.put(docCategory2, docObj);
+				} else if (docObj.getType().equals("5009")) {
+					String docCategory="Privacy Notice";
+					docObjMap.put(docCategory, docObj);
 					if (docObj.getLanguage().equals("en_us")) {
-						if (!isDuplicate(docCategory2, planMatl_en_nxtYr_docList))
-							planMatl_en_nxtYr_docList.add(docObjMap2);
+						if (!isDuplicate(docCategory, planMatl_en_nxtYr_docList))
+							planMatl_en_nxtYr_docList.add(docObjMap);
 					} else if (docObj.getLanguage().equals("es")) {
-						if (!isDuplicate(docCategory2, planMatl_es_nxtYr_docList))
-							planMatl_es_nxtYr_docList.add(docObjMap2);
+						if (!isDuplicate(docCategory, planMatl_es_nxtYr_docList))
+							planMatl_es_nxtYr_docList.add(docObjMap);
 					} else if (docObj.getLanguage().equals("zh")) {
-						if (!isDuplicate(docCategory2, planMatl_zh_nxtYr_docList))
-							planMatl_zh_nxtYr_docList.add(docObjMap2);
+						if (!isDuplicate(docCategory, planMatl_zh_nxtYr_docList))
+							planMatl_zh_nxtYr_docList.add(docObjMap);
 					}
 				} else if (docObj.getType().equals("1021")) {
 					String docCategory="Schedule of benefits";
@@ -1089,6 +1123,19 @@ public class PlanDocApiResponse {
 							planMatl_zh_nxtYr_docList.add(docObjMap);
 						if (!isDuplicate(docCategory, memMatl_zh_nxtYr_docList))
 							memMatl_zh_nxtYr_docList.add(docObjMap);
+					}
+				} else if (docObj.getType().equals("5003")) {
+					String docCategory="Medicare Supplement Hospital Select Directory";
+					docObjMap.put(docCategory, docObj);
+					if (docObj.getLanguage().equals("en_us")) {
+						if (!isDuplicate(docCategory, planMatl_en_nxtYr_docList))
+							planMatl_en_nxtYr_docList.add(docObjMap);
+					} else if (docObj.getLanguage().equals("es")) {
+						if (!isDuplicate(docCategory, planMatl_es_nxtYr_docList))
+							planMatl_es_nxtYr_docList.add(docObjMap);
+					} else if (docObj.getLanguage().equals("zh")) {
+						if (!isDuplicate(docCategory, planMatl_zh_nxtYr_docList))
+							planMatl_zh_nxtYr_docList.add(docObjMap);
 					}
 				}
 			}

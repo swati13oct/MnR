@@ -56,6 +56,9 @@ public class MemberAuthPage extends UhcDriver {
 
 	@FindBy(xpath = "//*[@class='searchResults']/table/tbody/tr[2]/td[1]/a")
 	private WebElement MemberTableUserName;
+	
+	@FindBy(xpath = "//span[@class='redError']")
+	private WebElement HSIDerror;
 
 	@FindBy(xpath = "//*[@class='modal-content']//div[@role='document']//div[@class='btn-group--full-width loginbutton']/a[1]")
 	private WebElement MemberPopUpLogin;
@@ -224,16 +227,25 @@ public class MemberAuthPage extends UhcDriver {
 			return null;
 		}
 	}
-
+	
 	public MemberAuthPage MainMemberLogin(String MemberUserName) throws InterruptedException {
+		boolean retry=false;
+		return MainMemberLogin(retry, MemberUserName);
+	}
+
+	public MemberAuthPage MainMemberLogin(boolean retry, String MemberUserName) throws InterruptedException {
 		memberUsername.clear();
 		memberUsername.sendKeys(MemberUserName);
 		FinalSearchButton.click();
 
+		if (validate(redUnableToRetrMemErr,1) && retry) {
+			System.out.println("give it one more try before giving up...");
+			FinalSearchButton.click();
+		}
 		Assert.assertTrue("PROBLEM - Got 'Unable to retrieve member' error after clicking Search button", !validate(redUnableToRetrMemErr,1));
 		//waitforElement(MemberTableUserName); // updated this wait as it is failing for 20 seconds
 		CommonUtility.waitForPageLoad(driver, MemberTableUserName, 10);
-		Assert.assertTrue("PROBLEM - unable ot locate member name from table after search", validate(MemberTableUserName,0));
+		Assert.assertTrue("PROBLEM - unable to locate member name from table after search", validate(MemberTableUserName,0));
 		if (MemberTableUserName.isDisplayed()) {
 			System.out.println("member Username under the table is displayed");
 			MemberTableUserName.click();
@@ -766,6 +778,23 @@ public class MemberAuthPage extends UhcDriver {
 			System.out.println("no need to perform undeliverable email workaround...");
 		}
 	} 
+	public MemberAuthPage MainMemberLogin1(String MemberUserName) throws InterruptedException {
+		memberUsername.clear();
+		memberUsername.sendKeys(MemberUserName);
+		FinalSearchButton.click();
+
+		Assert.assertTrue("PROBLEM - Got 'Unable to retrieve member' error after clicking Search button", !validate(redUnableToRetrMemErr,1));
+		//waitforElement(MemberTableUserName); // updated this wait as it is failing for 20 seconds
+		CommonUtility.waitForPageLoad(driver, HSIDerror, 10);
+		Assert.assertTrue("PROBLEM - unable to locate member name from table after search", validate(HSIDerror,0));
+		if (HSIDerror.isDisplayed()) {
+			System.out.println("User is not Registered with HSID'");
+			//MemberTableUserName.click();
+			return new MemberAuthPage(driver);
+		} else
+			System.out.println("Member UserName Not found");
+		return null;
+	}
 
 
 }

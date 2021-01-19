@@ -1,7 +1,7 @@
 @contactUs @velocityDashers
 Feature: 1.16 Member Contact us Page
 
- Background: Feature security flag needs to be true before ATDD script execution
+Background: Feature security flag needs to be true before ATDD script execution
      Given First check if feature security flag is set to true
       | Feature | UCPContactus |
 ###############################Regression Scenarios Begin Here ########################################

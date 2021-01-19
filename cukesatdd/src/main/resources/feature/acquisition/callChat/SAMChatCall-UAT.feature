@@ -9,11 +9,11 @@ And user opens the page to validate M&R Sites
 Then the user validates whether call icon is visible  
 #Then the user validates whether chat icon is visible on UHC
 Then the user validates whether chat icon is visible
- 			@samChatCallulayer
+ 			@samChatCallulayer @UATRegression
 		Examples: 
 			| pagename |site| scenario               |
 			|/|AARP|E2E Scenario 1_AMP|
-			@samChatCallblayer
+			@samChatCallblayer @UATRegression
 			Examples: 
 			| pagename |site| scenario               |			
 			|/|UHC|E2E Scenario 1_UMS|
@@ -29,11 +29,11 @@ Scenario Outline: <scenario> 1.19.1.2 To test the SAM icons on Visitor Profile P
   #Then user validates visitor profile on home page site
 	Then the user validates whether call icon is visible  
 	Then the user validates whether chat icon is visible
-		@samChatCallulayer
+		@samChatCallulayer @UATRegression
 		Examples: 
 			| pagename |site| scenario               |
 			|/|AARP|E2E Scenario 3_AMP|
-			@samChatCallblayer
+			@samChatCallblayer @UATRegression
 		Examples: 
 			| pagename |site| scenario               |			
 			|/|UHC|E2E Scenario 3_UMS|
@@ -46,7 +46,10 @@ And user opens the page to validate M&R Sites
  | pagename | <pagename> |
 Then the user validates whether call icon is visible 
 Then user validates whether chat Agent is not Available
-		@samChatnonhoursulayer
+And the user hovers screen over the shop for a plan
+And click on provider search link on shop pages
+
+		@samChatnonhoursulayer @UATRegression
 		Examples: 
 			| pagename |site| scenario               |
 			|/| AARP|E2E Scenario 4_AMP|
@@ -110,7 +113,7 @@ Then user validates whether chat Agent is not Available
     | contact-us.html               | AARP|E2E Scenario 4_AMP||
       | privacy-policy.html           |AARP|E2E Scenario 4_AMP|
 			
-			@samChatnonhoursblayer
+			@samChatnonhoursblayer @UATRegression
 			Examples: 		
 			| pagename |site| scenario               |
 			|/| UHC|E2E Scenario 4_UMS|

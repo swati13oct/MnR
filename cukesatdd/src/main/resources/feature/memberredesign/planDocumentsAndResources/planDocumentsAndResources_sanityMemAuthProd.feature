@@ -14,6 +14,7 @@ Feature: 1.06.7.1 Member Plans and Documents - Sanity - PROD
       | Password | <password> |
     And Member Enters the Username he wants to search
       | MemUsername | <MemUserName> |
+      | Retry | true |
     And user clicks on member to select
     And user stores test input for validations
       | Username | <MemUserName> |
@@ -36,12 +37,12 @@ Feature: 1.06.7.1 Member Plans and Documents - Sanity - PROD
 	@prod_active_mapd_1of2 @sanity
 	Examples: 
       | index | TID         | username  | password  | MemUserName     | planType | memberType            | pm_sd | mm_sd | an_sd | pd_sd |
-      | S-01  | 15108       | kkumard   | mnrs786@  | BILL.ROSNER123# | MAPD     | AARP_IND_EFF_PDnR     | true  | true  | true  | true  |	
+      | S-01  | 15108       | kkumard   | tnps459#  | kirit1976 | MAPD     | AARP_IND_EFF_PDnR     | true  | true  | true  | true  |	
 
 	@prod_active_ship_1of2 @sanity
 	Examples: 
       | index | TID         | username  | password  | MemUserName     | planType | memberType            | pm_sd | mm_sd | an_sd | pd_sd |
-      | S-02  | 15119,15304 | kkumard   | mnrs786@  | Pramila1946     | SHIP     | IND_EFF_PDnR          | true  | false | false | false |
+      | S-02  | 15119,15304 | kkumard   | tnps459#  | Pramila1946     | SHIP     | IND_EFF_PDnR          | true  | false | false | false |
       
   #------------------------------------------
   @prod_planAndDocuments08
@@ -52,6 +53,7 @@ Feature: 1.06.7.1 Member Plans and Documents - Sanity - PROD
       | Password | <password> |
     And Member Enters the Username he wants to search
       | MemUsername | <MemUserName> |
+      | Retry | true |
     And user clicks on member to select
     And user stores test input for validations
       | Username | <MemUserName> |
@@ -74,11 +76,11 @@ Feature: 1.06.7.1 Member Plans and Documents - Sanity - PROD
 	@prod_active_mapd_2of2 @sanity
 	Examples: 
       | index | TID         | username  | password  | MemUserName     | planType | memberType            | fnr_sd | md_sd | eob_sd | rm_sd |
-      | S-01  | 15108       | kkumard   | mnrs786@  | BILL.ROSNER123# | MAPD     | AARP_IND_EFF_PDnR     | true   | true  | true   | true  |	
+      | S-01  | 15108       | kkumard   | tnps459#  | kirit1976 | MAPD     | AARP_IND_EFF_PDnR     | true   | true  | true   | true  |	
 
 	@prod_active_ship_2of2 @sanity
 	Examples: 
       | index | TID         | username  | password  | MemUserName     | planType | memberType            | fnr_sd | md_sd | eob_sd | rm_sd |
-      | S-02  | 15119,15304 | kkumard   | mnrs786@  | Pramila1946     | SHIP     | IND_EFF_PDnR          | true   | false | true   | false |
+      | S-02  | 15119,15304 | kkumard   | tnps459#  | Pramila1946     | SHIP     | IND_EFF_PDnR          | true   | false | true   | false |
       
       

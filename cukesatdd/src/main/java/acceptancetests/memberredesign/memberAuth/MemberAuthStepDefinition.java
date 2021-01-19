@@ -9,6 +9,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
+import org.apache.http.impl.execchain.RetryExec;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
@@ -65,7 +66,8 @@ public class MemberAuthStepDefinition{
 	 */
 	@Given("^the user is on member auth login page$")
 	public void the_user_is_on_member_auth_login_page(){
-		WebDriver wd = getLoginScenario().getWebDriver();
+		//tbd WebDriver wd = getLoginScenario().getWebDriver();
+		WebDriver wd = getLoginScenario().getWebDriverNew();
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 
 		MemberAuthLoginPage memberauth = new MemberAuthLoginPage(wd);
@@ -112,6 +114,7 @@ public class MemberAuthStepDefinition{
 	
 	@Given("^the user is on member auth login flow page$")
 	public void member_auth_login_flow_page(){
+		//tbd WebDriver wd = getLoginScenario().getWebDriver();	
 		WebDriver wd = getLoginScenario().getWebDriverNew();	
 		wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
@@ -166,8 +169,14 @@ public class MemberAuthStepDefinition{
 		}		
 		getLoginScenario().saveBean(LoginCommonConstants.USERNAME, profileAttributesMap.get("MemUsername"));
 
-		MemberAuthPage mauthPage = memberauth.MainMemberLogin(profileAttributesMap.get("MemUsername"));
-		
+		MemberAuthPage mauthPage = null;
+		if (profileAttributesMap.get("Retry")!=null) {
+			String retry=profileAttributesMap.get("Retry");
+			if (retry.equalsIgnoreCase("true")) 
+				mauthPage = memberauth.MainMemberLogin(Boolean.valueOf(retry), profileAttributesMap.get("MemUsername"));
+		} else 
+		mauthPage = memberauth.MainMemberLogin(profileAttributesMap.get("MemUsername"));
+
 		if(mauthPage!=null){
 			getLoginScenario().saveBean(PageConstants.Member_Auth_PopUp, mauthPage);
 		} else {
@@ -791,4 +800,29 @@ public class MemberAuthStepDefinition{
 			Assert.fail();
 		}
 		}
+	@And("^Member Enters the legacy Username he wants to search$")
+	public void member_enters_legacyusername_and_searches(DataTable profileAttributes) throws InterruptedException{
+
+
+		MemberAuthPage memberauth = (MemberAuthPage) getLoginScenario().getBean(PageConstants.Member_Auth_Login);
+
+		List<DataTableRow> profileAttributesRow = profileAttributes
+				.getGherkinRows();
+		Map<String, String> profileAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < profileAttributesRow.size(); i++) {
+
+			profileAttributesMap.put(profileAttributesRow.get(i).getCells()
+					.get(0), profileAttributesRow.get(i).getCells().get(1));
+		}		
+		getLoginScenario().saveBean(LoginCommonConstants.USERNAME, profileAttributesMap.get("MemUsername"));
+
+		MemberAuthPage mauthPage = memberauth.MainMemberLogin1(profileAttributesMap.get("MemUsername"));
+		
+		if(mauthPage!=null){
+			getLoginScenario().saveBean(PageConstants.Member_Auth_PopUp, mauthPage);
+		} else {
+			System.out.println("mauthPage is null");
+		}
+
+	}
 }

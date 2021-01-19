@@ -247,9 +247,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	public static List<WebElement> proactiveChatExistBtn;
 
 	
-	@FindBy(xpath = "//div[@class='overview-main']//h2")
-	//@FindBy(xpath = "//div[@class='overview-main']/h2")
-	private WebElement vppTop;
+//	@FindBy(xpath = "//div[@class='overview-main']/h2")
+@FindBy(xpath = "//div[@class='overview-main']//h2")
+private WebElement vppTop;
 
 	@FindBy(id = "cobrowse-disclaimer")
 	private List<WebElement> requestAssistanceModal;
@@ -678,30 +678,30 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		}
 	}
 
-	public VPPPlanSummaryPage searchPlans(String zipcode, String countyName) {
-		if (isHealthPlan) {
-			validateNew(zipCodeHealthPlans, 25);
-			sendkeys(zipCodeHealthPlans, zipcode);
-
-			GoBtnHealthPlans.click();
-			//CommonUtility.waitForPageLoadNew(driver, vppTop, 30);
-
-		} else {
-			CommonUtility.waitForPageLoadNew(driver, zipCodeField, 20);
-			sendkeys(zipCodeField, zipcode);
-			viewPlansButton.click();
-		}
-		CommonUtility.waitForPageLoad(driver, countyModal, 45);
-		if (validate(countyModal))
-			driver.findElement(By.xpath("//div[@id='selectCounty']//a[text()='" + countyName + "']")).click();
-		// CommonUtility.checkPageIsReadyNew(driver);
-		CommonUtility.waitForPageLoadNew(driver, vppTop, 35);
-
-		if (driver.getCurrentUrl().contains("plan-summary")) {
-			return new VPPPlanSummaryPage(driver);
-
-		}
-		return null;
+//	public VPPPlanSummaryPage searchPlans(String zipcode, String countyName) {
+//		if (isHealthPlan) {
+//			validateNew(zipCodeHealthPlans, 25);
+//			sendkeys(zipCodeHealthPlans, zipcode);
+//
+//			GoBtnHealthPlans.click();
+//			//CommonUtility.waitForPageLoadNew(driver, vppTop, 30);
+//
+//		} else {
+//			CommonUtility.waitForPageLoadNew(driver, zipCodeField, 20);
+//			sendkeys(zipCodeField, zipcode);
+//			viewPlansButton.click();
+//		}
+//		CommonUtility.waitForPageLoad(driver, countyModal, 45);
+//		if (validate(countyModal))
+//			driver.findElement(By.xpath("//div[@id='selectCounty']//a[text()='" + countyName + "']")).click();
+//		// CommonUtility.checkPageIsReadyNew(driver);
+//		CommonUtility.waitForPageLoadNew(driver, vppTop, 35);
+//
+//		if (driver.getCurrentUrl().contains("plan-summary")) {
+//			return new VPPPlanSummaryPage(driver);
+//
+//		}
+//		return null;
 		/*
 		 * try {
 		 * 
@@ -719,7 +719,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		 * (driver.getCurrentUrl().contains("plan-summary")) { return new
 		 * VPPPlanSummaryPage(driver); } return null;
 		 */
-	}
+//	}
 
 	public VPPPlanSummaryPage searchPlans(String zipcode) {
 		sendkeys(zipCodeField, zipcode);
@@ -1377,7 +1377,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		viewPlansButton.click();
 		waitForPageLoadSafari();
 		validateNew(vppTop);
-		// }
+		 
 		/*
 		 * try { if (countyModal.isDisplayed()) { for (WebElement county : countyRows) {
 		 * if (county.getText().equalsIgnoreCase(countyName)) { county.click(); break; }
@@ -1387,29 +1387,29 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		//CommonUtility.waitForPageLoadNew(driver, changeLocationLink, 30);
 
 		System.out.println(driver.getCurrentUrl());
-		if (driver.getCurrentUrl().contains("health-plans")) {
+	if (driver.getCurrentUrl().contains("health-plans")) {
 			return new VPPPlanSummaryPage(driver);
-		}
+	}
 		return null;
 	}
 
 	public void validateFooterLinks() {
 		validateNew(footerHomeLink);
 		validateNew(footerAboutUsLink);
-		validateNew(footerContactUsLink);
+	validateNew(footerContactUsLink);
 		validateNew(footerSiteMapLink);
 		validateNew(footerPrivacyPolicyLink);
-		validateNew(footerTermsnConditionsLink);
+	validateNew(footerTermsnConditionsLink);
 		validateNew(footerDisclaimersLink);
 		validateNew(footerAgentsnBrokersLink);
-		// validateNew(footerRequestforAssistancelink);
+//validateNew(footerRequestforAssistancelink);
 		validateNew(footerAccessibilitylink);
-		validateNew(medicareAdvantagePlansLink);
-		validateNew(medicareSupplementInsurancePlansLink);
+	validateNew(medicareAdvantagePlansLink);
+	validateNew(medicareSupplementInsurancePlansLink);
 		validateNew(medicareSpecialNeedsPlansLink);
 		validateNew(medicarePrescriptionDrug_PlansLink);
-		validateNew(learnAboutMedicareLink);
-		validateNew(viewAllDisclaimerInformationLink);
+	validateNew(learnAboutMedicareLink);
+	validateNew(viewAllDisclaimerInformationLink);
 
 	}
 
@@ -1943,14 +1943,14 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	}
 
 	public VPPPlanSummaryPage searchPlanOnHealthPlansPage(String zipcode, String county, String isMultiCounty) {
-		CommonUtility.waitForPageLoadNew(driver, healthPlansZipcode, 30);
+	CommonUtility.waitForPageLoadNew(driver, healthPlansZipcode, 30);
 		sendkeys(healthPlansZipcode, zipcode);
-		findPlansBtn.click();
+	findPlansBtn.click();
 
 		if (isMultiCounty.equalsIgnoreCase("YES")) {
 			CommonUtility.waitForPageLoad(driver, countyModal, 45);
 			if (validate(countyModal))
-				driver.findElement(By.xpath("//div[@id='selectCounty']//a[text()='" + county + "']")).click();
+			driver.findElement(By.xpath("//div[@id='selectCounty']//a[text()='" + county + "']")).click();
 		}
 		CommonUtility.waitForPageLoadNew(driver, vppTop, 30);
 		if (driver.getCurrentUrl().contains("plan-summary")) {
@@ -2157,48 +2157,48 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	}
 
-	public VPPPlanSummaryPage searchPlansCounty(String countyName) {
-		if (isHealthPlan) {
+public VPPPlanSummaryPage searchPlansCounty(String countyName) {
+	if (isHealthPlan) {
 			CommonUtility.waitForPageLoadNew(driver, zipCodeHealthPlans, 45);
-			GoBtnHealthPlans.click();
+		GoBtnHealthPlans.click();
 			CommonUtility.waitForPageLoadNew(driver, vppTop, 30);
 
 		} else {
 			CommonUtility.waitForPageLoadNew(driver, zipCodeField, 20);
 			viewPlansButton.click();
 		}
-		CommonUtility.waitForPageLoad(driver, countyModal, 45);
+	CommonUtility.waitForPageLoad(driver, countyModal, 45);
 		if (validate(countyModal))
 			System.out.println("County should be selected : " + countyName);
 		driver.findElement(By.xpath("//div[@id='selectCounty']//a[text()='" + countyName + "']")).click();
 		CommonUtility.waitForPageLoadNew(driver, vppTop, 35);
 
-		if (driver.getCurrentUrl().contains("plan-summary")) {
+	if (driver.getCurrentUrl().contains("plan-summary")) {
 			return new VPPPlanSummaryPage(driver);
 
-		}
+	}
 		return null;
 	}
 
-	public VPPPlanSummaryPage searchPlansNoCounty() {
-		if (isHealthPlan) {
+public VPPPlanSummaryPage searchPlansNoCounty() {
+	if (isHealthPlan) {
 			CommonUtility.waitForPageLoadNew(driver, zipCodeHealthPlans, 45);
-			GoBtnHealthPlans.click();
+		GoBtnHealthPlans.click();
 			CommonUtility.waitForPageLoadNew(driver, vppTop, 30);
 
 		} else {
-			CommonUtility.waitForPageLoadNew(driver, zipCodeField, 20);
+		CommonUtility.waitForPageLoadNew(driver, zipCodeField, 20);
 			viewPlansButton.click();
-			CommonUtility.waitForPageLoadNew(driver, vppTop, 35);
+		CommonUtility.waitForPageLoadNew(driver, vppTop, 35);
 		}
 		if (driver.getCurrentUrl().contains("plan-summary")) {
 			return new VPPPlanSummaryPage(driver);
-		}
+	}
 		return null;
 	}
 
-	public VPPTestHarnessPage GetVPPTestHarnessPage() {
-		return new VPPTestHarnessPage(driver);
+public VPPTestHarnessPage GetVPPTestHarnessPage() {
+	return new VPPTestHarnessPage(driver);
 	}
 		
 	
@@ -2470,18 +2470,18 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			actions.moveToElement(visitorprofileicon).perform();
 			System.out.println("Hover over visitor profile completed");
 		}
-		WebElement CreateProfile = driver.findElement(By.xpath("//a[contains(text(), 'Create Profile')]"));
-		WebElement VPSignIn = driver.findElement(
-				By.xpath("//a[contains(text(), 'Sign In') and not(contains(@aria-labelledby ,'VPSignIn'))]"));
-		validateNew(CreateProfile);
-		validateNew(VPSignIn);
-		if (CreateProfile.isEnabled() && VPSignIn.isEnabled()) {
-			Assert.assertTrue(true);
-			System.out.println("Visitor Profile elements are present on home page");
-		} else {
-			Assert.fail("Visitor Profile elements are not present on home page");
-		}
-		visitorprofileicon.click();
+//		WebElement CreateProfile = driver.findElement(By.xpath("//a[contains(text(), 'Create Profile')]"));
+//		WebElement VPSignIn = driver.findElement(
+//				By.xpath("//a[contains(text(), 'Sign In') and not(contains(@aria-labelledby ,'VPSignIn'))]"));
+//		validateNew(CreateProfile);
+//		validateNew(VPSignIn);
+//		if (CreateProfile.isEnabled() && VPSignIn.isEnabled()) {
+//			Assert.assertTrue(true);
+//			System.out.println("Visitor Profile elements are present on home page");
+//		} else {
+//			Assert.fail("Visitor Profile elements are not present on home page");
+//		}
+//		visitorprofileicon.click();
 		WebElement GuestProfile = driver.findElement(By.xpath("//*[contains(text(), 'Your Guest Profile')]"));
 		CheckPageLoad();
 		CheckiPerseptions();
@@ -2810,17 +2810,19 @@ public boolean isValidatePageLoadError(){
 		UnitedHealthcareMedicareSolutions.click();
 	}
 	
-	public void validateUrl(String url) {
-		threadsleep(6);
-		String parentWindow = driver.getWindowHandle();
-		driver.switchTo().window(driver.getWindowHandles().toArray()[1].toString());
-		System.out.println(driver.getTitle());
-		String str=driver.getTitle();
-		//Assert.assertTrue( "Title mismatch for dental directory",driver.getTitle().equals(url));
-		if(str.equals(url)) {
-			assertTrue(true);
-		}
-	}
+//	public void validateUrl(String url) {
+//		threadsleep(6);
+//		String parentWindow = driver.getWindowHandle();
+//		driver.switchTo().window(driver.getWindowHandles().toArray()[1].toString());
+//		System.out.println(driver.getTitle());
+//		String str=driver.getTitle();
+//		//Assert.assertTrue( "Title mismatch for dental directory",driver.getTitle().equals(url));
+//		if(str.equals(url)) {
+//			assertTrue(true);
+//		}
+//		driver.switchTo().window(parentWindow);
+//		Assert.assertEquals(driver.getTitle(), "Site Search");
+//	}
 	
 public void enterAndvalidateEmail() {
 		
@@ -2874,19 +2876,19 @@ public void enterAndvalidateEmail() {
 			return null;
 	}
 		public VPPPlanSummaryPage searchPlansShop(String zipcode, String countyName) {
-		CommonUtility.waitForPageLoadNew(driver, zipCodeShopField, 30);
+	CommonUtility.waitForPageLoadNew(driver, zipCodeShopField, 30);
 		sendkeys(zipCodeShopField, zipcode);
 		viewShopPlansButton.click();
 		CommonUtility.waitForPageLoad(driver, countyModal, 45);
 		if (validate(countyModal))
 			driver.findElement(By.xpath("//div[@id='selectCounty']//a[text()='" + countyName + "']")).click();
 		CommonUtility.waitForPageLoadNew(driver, vppTop, 30);
-		if (driver.getCurrentUrl().contains("plan-summary")) {
+	if (driver.getCurrentUrl().contains("plan-summary")) {
 			return new VPPPlanSummaryPage(driver);
 		}
-		return null;
+	return null;
 	}
-//	
+	
 //	public PlanDocsPage navigateToPlanDocsFromHome() {
 //     	navigateToMenuLinks(ShopForaplan, menuShop);
 //     	
