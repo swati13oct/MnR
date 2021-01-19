@@ -259,11 +259,15 @@ public class PharmacySearchPageMobile extends PharmacySearchBaseMobile {
 			}
 		} else {
 			if (!pattern.matcher(inputZip).matches()) { //note: zip invalid format
-				String exp_zipFormatErrTxt="Please enter a ZIP code";
+				String exp_zipFormatErrTxt="Please enter your ZIP code as 5 numbers like this: 12345.";
+			//	System.out.println("PROBLEM - Zip format error text is not as expected. "
+				//		+ "Expected='"+exp_zipFormatErrTxt+act_zipFormatErrTxt);
+				
 				Assert.assertTrue("PROBLEM - not seeing zip format error element",
-						pharmacyValidate(noZipcode));
+						pharmacyValidate(invalidZip));
 				if (language.equalsIgnoreCase("English")) {
-					String act_zipFormatErrTxt=noZipcode.getText();
+					String act_zipFormatErrTxt=invalidZip.getText();
+					
 					Assert.assertTrue("PROBLEM - Zip format error text is not as expected. "
 							+ "Expected='"+exp_zipFormatErrTxt+"' | Actual='"+act_zipFormatErrTxt+"'",
 							act_zipFormatErrTxt.contains(exp_zipFormatErrTxt));

@@ -41,14 +41,18 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 	public PharmacySearchPageMobile enterDistanceZipDetails(String distance, String zipcode) {
 		
 		CommonUtility.checkPageIsReady(driver);
-		CommonUtility.waitForElementToDisappear(driver, loadingImage, 90);
+		//CommonUtility.waitForElementToDisappear(driver, loadingImage, 90);
 		CommonUtility.waitForPageLoad(driver, zipcodeField, 60);
 		//moveMouseToElement(inputInstruction);
 		//zipcodeField.clear();
 		
-		//driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);	
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);	
 		//sendkeys(zipcodeField, zipcode);
-		jsSendkeys(zipcodeField, zipcode);
+		//jsSendkeys(zipcodeField, zipcode);
+		
+		//jsClickNew(zipcodeField);
+		//jsSendkeys(zipcodeField, zipcode);		
+		zipcodeField.sendKeys(zipcode);
 		
 		Select select = new Select(distanceDropDownField);           
 		String DistanceSelection = distance+" miles";
@@ -60,7 +64,7 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 		
 		CommonUtility.checkPageIsReady(driver);
 		
-		CommonUtility.waitForElementToDisappear(driver, loadingImage, 90);
+//		CommonUtility.waitForElementToDisappear(driver, loadingImage, 90);
 		
 		
 		jsClickMobile(searchbtn);
@@ -439,7 +443,7 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 	public void searchesPharmacy(String language, String planName, String testPlanYear, String testSiteUrl, String testPdfLinkTextDate, AppiumDriver wd) throws InterruptedException {
 		int total=0;
 		CommonUtility.checkPageIsReadyNew(driver);
-		CommonUtility.waitForElementToDisappear(driver, loadingImage, 90);
+	//	CommonUtility.waitForElementToDisappear(driver, loadingImage, 90);
 		int PharmacyCount = 0;
 		if (!pharmacyValidate(noResultMsg)) {
 			PharmacyCount = PharmacyResultList.size();
@@ -462,9 +466,7 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 						+ "in 'pharmacies with India/Tribal/Urbal...' section", 
 						pharmacyValidate(contactUsLink));//locationContextEnabled: false
 				//driver.context()
-				System.out.println("testing for pop to go------------------------"+wd);
-				System.out.println("testing for pop to go------------------------");
-				System.out.println("testing for pop to go---------------(\".//android.widget.Button[@text='Allow']\")).click();---------");}}
+				}}
 				/*wd.context("NATIVE_APP");
 				wd.findElement(By.xpath(".//android.widget.Button[@text='Allow']")).click();
 				jsClickMobile(contactUsLink);*/
