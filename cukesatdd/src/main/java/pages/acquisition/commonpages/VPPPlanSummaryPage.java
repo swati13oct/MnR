@@ -35,7 +35,6 @@ import com.mysql.jdbc.StringUtils;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.ElementData;
 import acceptancetests.data.MRConstants;
-import acceptancetests.data.PageConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
@@ -875,7 +874,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "(//button[@class='unliked buttonIntoText'])[1]")
 	private WebElement savePlanButton;
 	
-	@FindBy(xpath = "//img[@class='uhc-modal__close']")
+	@FindBy(xpath = "(//img[@class='uhc-modal__close'])[2]")
 	private WebElement close;
 
 
@@ -5223,6 +5222,10 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		Thread.sleep(10000);
 		jsClickNew(planK);
 		Thread.sleep(2000);
+		if (close.isDisplayed()) {
+			close.click();
+			Thread.sleep(2000);
+		}
 		action.moveToElement(addBtn3).build().perform();
 		addBtn3.click();
 		Thread.sleep(10000);
@@ -6060,11 +6063,13 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//span[text()='Enroll in Plan']/..")
 	private WebElement enrollInPlanBtn;
 
-	public void clickEnrollPlanBtnOnSelectPlanModal() {
+	public WelcomePage clickEnrollPlanBtnOnSelectPlanModal() {
 		validateNew(enrollInPlanBtn);
 //		enrollInPlanBtn.click();
 		jsClickNew(enrollInPlanBtn);
 		waitForPageLoadSafari();
+		
+		return new WelcomePage(driver);
 	}
 
 	public void validateNavigatedToOle() {

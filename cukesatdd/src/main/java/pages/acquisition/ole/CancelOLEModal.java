@@ -9,6 +9,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import atdd.framework.UhcDriver;
+import pages.acquisition.commonpages.AcquisitionHomePage;
 
 /**
  *@author sdwaraka
@@ -19,6 +20,8 @@ public class CancelOLEModal extends UhcDriver{
 	@FindBy(id = "ole-cancel-confirm")
 	private WebElement CancellationModal;
 	
+	@FindBy(xpath = "//*[contains(@class,'leaveApp')]")
+	private WebElement leaveAppBtn;
 	
 	@FindBy(id = "backBtn")
 	private WebElement BackBtn;
@@ -65,5 +68,13 @@ public class CancelOLEModal extends UhcDriver{
 			return new SpecialElectionPeriodPage(driver);
 		}
 		return null;	
+	}
+	
+	public AcquisitionHomePage leaveApplication() {
+		
+		validateNew(leaveAppBtn);
+		jsClickNew(leaveAppBtn);
+		return new AcquisitionHomePage(driver);
+		
 	}
 }
