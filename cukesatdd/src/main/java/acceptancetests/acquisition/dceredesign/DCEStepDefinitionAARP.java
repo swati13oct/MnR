@@ -292,10 +292,17 @@ public class DCEStepDefinitionAARP {
 				.getBean(PageConstants.DCE_Redesign_TellUsAboutDrug);
 		BuildYourDrugList DCEbuildDrugList = tellUsAboutDrug.ClickAddDrug();
 		String druglist = (String) getLoginScenario().getBean(DCERedesignCommonConstants.DRUGLIST);
-		if (null == druglist) {
+		/*if (null == druglist) {
 			druglist = "";
 		}
-		druglist = druglist + "&" + drugName;
+		druglist = druglist + "&" + drugName;*/
+		
+		if(StringUtils.isEmpty(druglist)) {
+			druglist = drugName;
+		} else {
+			druglist = druglist + "&" + drugName;
+		}
+		
 		System.out.println("Drugs List : " + druglist);
 		getLoginScenario().saveBean(DCERedesignCommonConstants.DRUGLIST, druglist);
 	}
