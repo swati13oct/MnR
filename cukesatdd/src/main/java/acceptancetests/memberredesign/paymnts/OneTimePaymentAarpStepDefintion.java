@@ -17,6 +17,7 @@ import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -1553,7 +1554,8 @@ public class OneTimePaymentAarpStepDefintion {
 		ReviewOneTimePaymentPage reviewOneTimePaymentsPage=null;
 		if(oneTimePaymentPage!=null) {
 			oneTimePaymentPage.selectAndEnterAmount(otherAmountvalue);
-			oneTimePaymentPage.verifyReplaceCardLinkDisabled();
+			//oneTimePaymentPage.verifyReplaceCardLinkDisabled(); 01/07/2021 - This link has been enabled permanently now
+			//oneTimePaymentPage.verifyReplaceCardLinkEnabled();
 			oneTimePaymentPage.selectCreditCardOption();
 			oneTimePaymentPage.verifySavedCardDetailsDisplayed();
 			oneTimePaymentPage.verifyReplaceCardLinkEnabled();
@@ -1713,6 +1715,16 @@ public class OneTimePaymentAarpStepDefintion {
 
 	}
 	
+	@Then("^user navigates to payment overview screen for SAVED Card and selects agreements for Prod$")
+	public void user_navigates_to_payment_overview_screen_SAVED_CARD_and_selects_agreements_for_Prod()
+			throws Throwable {
+		ReviewOneTimePaymentPage reviewOneTimePaymentsPage = (ReviewOneTimePaymentPage) getLoginScenario()
+				.getBean(PageConstants.Review_OneTime_Payments_Page);
+
+		ConfirmOneTimePaymentPage confirmOneTimePaymentPage = reviewOneTimePaymentsPage
+				.selectAgreeExistingSavedCard();
+
+		}
 	
 	@Then("^for saving card user navigates to payment overview screen and selects agreements and save card checkbox and click on Make one time payment$")
 	public void then_user_navigates_to_payment_overview_screen_and_selects_agreements_save_card_checkbox_and_click_on_Make_one_time_payemnt()
@@ -1754,6 +1766,14 @@ public class OneTimePaymentAarpStepDefintion {
 		
 	}
 	
+	@Then("^for saving card user navigates to payment overview screen and selects agreements and save card checkbox on Prod$")
+	public void then_user_navigates_to_payment_overview_screen_and_selects_agreements_save_card_checkbox_on_Prod()
+			throws Throwable {
+		ReviewOneTimePaymentPage reviewOneTimePaymentsPage = (ReviewOneTimePaymentPage) getLoginScenario()
+				.getBean(PageConstants.Review_OneTime_Payments_Page);
+		ConfirmOneTimePaymentPage confirmOneTimePaymentPage = reviewOneTimePaymentsPage.selectAgreeSelectSaveCardPROD();
+		
+	}
 	
 	@Then("^User navigates to payment confirmation page for CC flow$")
 	public void user_navigates_to_payment_confirmation_page_for_CC_flow() throws Throwable {
@@ -1776,12 +1796,46 @@ public class OneTimePaymentAarpStepDefintion {
 		{
 			System.out.println("This is a second payment in a day, Error message is fine in Saved Card Scenario. Passing test case");
 			Assert.assertTrue("This is a second payment in a day, Error message is fine in Saved Card Scenario. Passing test case",true);
+			
 		}
 		else
 		{
 		ConfirmOneTimePaymentPage confirmOneTimePaymentPage = (ConfirmOneTimePaymentPage) getLoginScenario()
 					.getBean(PageConstants.ONE_TIME_PAYMENT_PAGE);
 			confirmOneTimePaymentPage.OneTimeCCverification();
+			Assert.assertTrue("One time Payment submission for Credit card Other amount is successfully done",true);
+	    }
+		
+	}
+	
+	@Then("^User navigates to payment confirmation page for CC flow for saved card$")
+	public void user_navigates_to_payment_confirmation_page_for_CC_flow_saved_card() throws Throwable {
+
+		/*
+		 * String alreadyEnrolled = (String)
+		 * getLoginScenario().getBean(PageConstants.ALREADY_ENROLLED_FLAG); boolean
+		 * alreadyEnrolled_Flag = (alreadyEnrolled.contentEquals("true"))?true:false;
+		 * if(alreadyEnrolled_Flag){ System.out.
+		 * println("Only one payment request message is Displayed in in review one time PAGE : "
+		 * +alreadyEnrolled+"  :  "+alreadyEnrolled_Flag+" - Validation Passed");
+		 * getLoginScenario().saveBean(PageConstants.ALREADY_ENROLLED_FLAG,"true");
+		 * Assert.assertTrue(true); }else {
+		 */
+		
+		String errorMessageDisplayedOnOneTimePayment = (String)getLoginScenario().getBean(PageConstants.ALREADY_ENROLLED_FLAG);
+		System.out.println("Was second payment in a day error message displayed? -  "+errorMessageDisplayedOnOneTimePayment);
+			
+		if (errorMessageDisplayedOnOneTimePayment == "true")
+		{
+			System.out.println("This is a second payment in a day, Error message is fine in Saved Card Scenario. Passing test case");
+			Assert.assertTrue("This is a second payment in a day, Error message is fine in Saved Card Scenario. Passing test case",true);
+			
+		}
+		else
+		{
+		ConfirmOneTimePaymentPage confirmOneTimePaymentPage = (ConfirmOneTimePaymentPage) getLoginScenario()
+					.getBean(PageConstants.ONE_TIME_PAYMENT_PAGE);
+			confirmOneTimePaymentPage.OneTimeCCverificationSavedCard();
 			Assert.assertTrue("One time Payment submission for Credit card Other amount is successfully done",true);
 	    }
 		
@@ -2513,13 +2567,65 @@ public class OneTimePaymentAarpStepDefintion {
 					paymentTypeRow.get(i).getCells().get(1));
 		}
 		Thread.sleep(2000); 
+		String errorMessageDisplayedOnOneTimePayment = (String)getLoginScenario().getBean(PageConstants.ALREADY_ENROLLED_FLAG);
+		if (errorMessageDisplayedOnOneTimePayment == "true")
 		
+		{
+			System.out.println("Skipping validation due to second time payment error message");
+		}
+		else 
+		{
 		ConfirmOneTimePaymentPage confirmOneTimePaymentPage = (ConfirmOneTimePaymentPage) getLoginScenario()
 				.getBean(PageConstants.ONE_TIME_PAYMENT_PAGE);
 		
 		confirmOneTimePaymentPage.deletePaymetnRecordFromGPS(paymentTypeMap);
-
+		}		
+	}
+	
+	@And("^the user pulls the value of keep card on file indicator from GPS$")	
+	public void verifyKeepCardOnFileRecord(DataTable givenAttributes) throws InterruptedException{
+		System.out.println("******Trying to find Keep Card on file record from GPS*****");
+		List<DataTableRow> paymentTypeRow = givenAttributes.getGherkinRows();
+		Map<String, String> paymentTypeMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < paymentTypeRow.size(); i++) {
+			paymentTypeMap.put(paymentTypeRow.get(i).getCells().get(0),
+					paymentTypeRow.get(i).getCells().get(1));
+		}
+		Thread.sleep(2000); 
 		
+		String errorMessageDisplayedOnOneTimePayment = (String)getLoginScenario().getBean(PageConstants.ALREADY_ENROLLED_FLAG);
+		if (errorMessageDisplayedOnOneTimePayment == "true")
+		
+		{
+			System.out.println("Skipping validation due to second time payment error message");
+		}
+		else 
+		{
+		ConfirmOneTimePaymentPage confirmOneTimePaymentPage = (ConfirmOneTimePaymentPage) getLoginScenario()
+				.getBean(PageConstants.ONE_TIME_PAYMENT_PAGE);
+	
+		
+		String keepCardOnFileIndFromGPSDatabase = confirmOneTimePaymentPage.verifyKeepCardOnFileRecordFromGPS(paymentTypeMap);
+		getLoginScenario().saveBean(PageConstants.KEEP_CARD_ON_FILE_IND, keepCardOnFileIndFromGPSDatabase);
+		
+		System.out.println("Value of keepCardOnFileIndFromGPSDatabase is "+keepCardOnFileIndFromGPSDatabase);
+		}
+	}
+	
+	@And("^the user confirms that keep card on file indicator is sent to GPS as Y$")	
+	public void verifyKeepCardOnFileRecordAsY() throws InterruptedException{
+		String errorMessageDisplayedOnOneTimePayment = (String)getLoginScenario().getBean(PageConstants.ALREADY_ENROLLED_FLAG);
+		if (errorMessageDisplayedOnOneTimePayment == "true")
+		
+		{
+			System.out.println("Skipping validation due to second time payment error message");
+		}
+		else {
+		ConfirmOneTimePaymentPage confirmOneTimePaymentPage = (ConfirmOneTimePaymentPage) getLoginScenario()
+				.getBean(PageConstants.ONE_TIME_PAYMENT_PAGE);
+		String keepCardOnFileIndFromGPSDatabase = (String)getLoginScenario().getBean(PageConstants.KEEP_CARD_ON_FILE_IND);
+		confirmOneTimePaymentPage.verifyKeepCardOnFileRecordFromGPSIsY(keepCardOnFileIndFromGPSDatabase);
+		}
 	}
 	
 	@And("^the user delete update recurring payment record from GPS$")
@@ -2750,17 +2856,34 @@ public class OneTimePaymentAarpStepDefintion {
 		
 	}
 	@Then("User validates tool tips on the payments overview page$")
-	public void User_validates_tool_tips_on_the_page() throws Throwable {
+	public void User_validates_tool_tips_on_the_page(DataTable memberAttributes) throws Throwable {
 		System.out.println("******User validates tool tips on the payments overview page*****");
+			List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
+			Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+			for (int i = 0; i < memberAttributesRow.size(); i++) {
+				memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+						.get(0), memberAttributesRow.get(i).getCells().get(1));
+			}
+	String userType  = memberAttributesMap.get("userType");
+	System.out.println("userType is "+userType);
 		PaymentHistoryPage paymentHistoryPage = (PaymentHistoryPage) getLoginScenario().getBean(PageConstants.Payments_History_Page);
-		 paymentHistoryPage.toolTipsValidation();
+		 paymentHistoryPage.toolTipsValidation(userType);
 		
 	}
 	@Then("^User validates billing and payment history table tool tips on the page$")
-	public void User_validates_tool_tips_on_billing_tablethe_page() throws Throwable {
-		System.out.println("******User validates billing and payment history table tool tips on the page*****");
-		PaymentHistoryPage paymentHistoryPage = (PaymentHistoryPage) getLoginScenario().getBean(PageConstants.Payments_History_Page);
-		 paymentHistoryPage.billingPaymentHistorytoolTipsValidation();
+	public void User_validates_tool_tips_on_billing_tablethe_page(DataTable memberAttributes) throws Throwable {
+			List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
+			Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+			for (int i = 0; i < memberAttributesRow.size(); i++) {
+				memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+						.get(0), memberAttributesRow.get(i).getCells().get(1));
+	String userType  = memberAttributesMap.get("userType");
+	System.out.println("userType is "+userType);
+System.out.println("******User validates billing and payment history table tool tips on the page*****");
+PaymentHistoryPage paymentHistoryPage = (PaymentHistoryPage) getLoginScenario().getBean(PageConstants.Payments_History_Page);
+ paymentHistoryPage.billingPaymentHistorytoolTipsValidation(userType);
+
+}
 		
 	}
 

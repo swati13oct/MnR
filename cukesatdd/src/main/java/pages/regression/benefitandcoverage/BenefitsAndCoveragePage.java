@@ -15,8 +15,10 @@ import java.util.concurrent.TimeUnit;
 import java.util.regex.Pattern;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang.time.DateUtils;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.text.PDFTextStripper;
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -27,8 +29,12 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.html5.LocalStorage;
 import org.openqa.selenium.logging.LogEntry;
 import org.openqa.selenium.logging.LogType;
+import org.openqa.selenium.remote.RemoteExecuteMethod;
+import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.remote.html5.RemoteWebStorage;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
@@ -246,18 +252,29 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 	 *       section of Ancillary benefits
 	 */
 	public void Exclusivelearnmore() {
-			validateNew(LearnmoreButton,0);
-			LearnmoreButton.click();
-			sleepBySec(30);
-			
-			/*ArrayList<String> tabs2 = new ArrayList<String>(driver.getWindowHandles());
+		String origUrl=driver.getCurrentUrl();
+		validateNew(LearnmoreButton,0);
+		scrollElementToCenterScreen(LearnmoreButton);
+		LearnmoreButton.click();
+		CommonUtility.checkPageIsReady(driver);
+		CommonUtility.waitForPageLoad(driver, hearingPgHeader, 5);
+		//tbd sleepBySec(30);
+
+		/*ArrayList<String> tabs2 = new ArrayList<String>(driver.getWindowHandles());
 			driver.switchTo().window(tabs2.get(1));*/
-			System.out.println(driver.getCurrentUrl());
-			if (driver.getCurrentUrl().contains("uhchearing.com")) {
-				Assert.assertTrue(true);
-			} else {
-				Assert.fail("Not able to navigate to UHC Hearing site");
-			}
+		System.out.println(driver.getCurrentUrl());
+		Assert.assertTrue("PROBLEM - Not able to navigate to UHC Hearing site", driver.getCurrentUrl().contains("uhchearing.com"));
+		driver.get(origUrl);
+		CommonUtility.waitForPageLoad(driver, LearnmoreButton, 5);
+		Assert.assertTrue("PROBLEM - Unable to locate the Learn More button again after going back to the Benefits page", validate(LearnmoreButton,0));
+
+
+		//tbd if (driver.getCurrentUrl().contains("uhchearing.com")) {
+		//tbd 	Assert.assertTrue(true);
+		//tbd } else {
+		//tbd 	Assert.fail("Not able to navigate to UHC Hearing site");
+		//tbd 
+		//tbd }
 	}
 
 	/**
@@ -309,6 +326,14 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 		validateWithValue("Look Up Drugs Button", LookUpDrugsButton);
 		scrollElementToCenterScreen(LookUpDrugsButton);
 		String actHref=LookUpDrugsButton.getAttribute("href");
+		if (MRScenario.environment.contains("team-a")) {
+			//note: can't click Rally pages on team env
+			String expHref="/pharmacy-uhc/drugs";
+			Assert.assertTrue("PROBLEM - env: '"+MRScenario.environment+"' - href value is not as expected for '' link.  "
+					+ "Expected to contain '"+expHref+"' | Actual href value='"+actHref+"'", 
+					actHref.contains(expHref));
+			return;
+		}
 		LookUpDrugsButton.click();
 		CommonUtility.checkPageIsReadyNew(driver);
 		if (MRScenario.isTestHarness.equalsIgnoreCase("YES")) { //note: new DCE is a Rally page, access via testharness will land on myuhc.com login page
@@ -370,6 +395,7 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 				if (validate(ssoSurveyX,0))   //note: handle the sso page survey if needed
 					ssoSurveyX.click();
 				//note: should not get error for prod env
+				CommonUtility.waitForPageLoad(driver, ssoSearchBox, 15);
 				Assert.assertTrue("PROBLEM - not getting expected element on '"+MRScenario.environment+"' env",  
 						validate(ssoSearchBox,0) 
 						|| validate(medicineCabinetDrugSearchBtn,0)
@@ -1005,7 +1031,8 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 		validateNew(learnmorebutton,0);
 		sleepBySec(30);
 		JavascriptExecutor jse = (JavascriptExecutor) driver;
-		jse.executeScript("window.scrollBy(0,-500)", "");
+		jse.executeScript("window.scrollBy(0,-1000)", "");
+		CommonUtility.waitForPageLoadNew(driver, learnmorebutton, 20);
 		learnmorebutton.click();
 		sleepBySec(20);
 		if (this.driver.getTitle().contains("Value Added Services")) {
@@ -1484,8 +1511,8 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 				+"Tier 1\n"
 				+"$5.00 copay\n"
 				+"$5.00 copay\n"
-				+"After your total drug costs reach $4,020, the plan continues to pay its share of the cost of your drugs and you pay your share of the cost.\n"
-				+"When your total out-of-pocket costs for Part D prescription drugs reach $6,350, you will pay a $0 copay for your drugs for the rest of the plan year.\n"
+				+"After your total drug costs reach $4,130 the plan continues to pay its share of the cost of your drugs and you pay your share of the cost.\n"
+				+"When your total out-of-pocket costs for Part D prescription drugs reach $6,550, you will pay a $0 copay for your drugs for the rest of the plan year.\n"
 				+"Tier 2\n"
 				+"$25.00 copay\n"
 				+"$25.00 copay\n"
@@ -1523,8 +1550,8 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 				+"Tier 1\n"
 				+"$5.00 copay\n"
 				+"$5.00 copay\n"
-				+"After your total drug costs reach $4,020, the plan continues to pay its share of the cost of your drugs and you pay your share of the cost.\n"
-				+"When your total out-of-pocket costs for Part D prescription drugs reach $6,350, you will pay a $0 copay for your drugs for the rest of the plan year.\n"
+				+"After your total drug costs reach $4,130 the plan continues to pay its share of the cost of your drugs and you pay your share of the cost.\n"
+				+"When your total out-of-pocket costs for Part D prescription drugs reach $6,550, you will pay a $0 copay for your drugs for the rest of the plan year.\n"
 				+"Tier 2\n"
 				+"$5.00 copay\n"
 				+"$5.00 copay\n"
@@ -1602,8 +1629,8 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 				+"$10 copay\n"
 				+"$20 copay\n"
 				+"$30 copay\n"
-				+"After your total drug costs reach $4,020, the plan covers all formulary drugs through the coverage gap at the same copays listed under the Initial Coverage Stage\n"
-				+"When your out-of-pocket costs reach the $6,350 limit for the plan year, you move to the Catastrophic Coverage Stage.  In this stage, you will continue to pay the same cost share that you paid in the Initial Coverage Stage.\n"
+				+"After your total drug costs reach $4,130, the plan covers all formulary drugs through the coverage gap at the same copays listed under the Initial Coverage Stage\n"
+				+"When your out-of-pocket costs reach the $6,550 limit for the plan year, you move to the Catastrophic Coverage Stage.  In this stage, you will continue to pay the same cost share that you paid in the Initial Coverage Stage.\n"
 				+"The catastrophic coverage will go toward Part D covered medications.\n"
 				+"Tier 2\n"
 				+"$35 copay\n"
@@ -1660,8 +1687,8 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 				+"You pay 100% of costs until $50 deductible is met*\n"
 				+"$20 copay\n"
 				+"$30 copay\n"
-				+"After your total drug costs reach $4,020, the plan covers all formulary drugs through the coverage gap at the same copays listed under the Initial Coverage Stage\n"
-				+"When your out-of-pocket costs reach the $6,350 limit for the plan year, you move to the Catastrophic Coverage Stage.  In this stage, you will continue to pay the same cost share that you paid in the Initial Coverage Stage.\n"
+				+"After your total drug costs reach $4,130, the plan covers all formulary drugs through the coverage gap at the same copays listed under the Initial Coverage Stage\n"
+				+"When your out-of-pocket costs reach the $6,550 limit for the plan year, you move to the Catastrophic Coverage Stage.  In this stage, you will continue to pay the same cost share that you paid in the Initial Coverage Stage.\n"
 				+"The catastrophic coverage will go toward Part D covered medications.\n"
 				+"Tier 2 :\n"
 				+"$70 copay\n"
@@ -2586,7 +2613,7 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 		CommonUtility.waitForPageLoad(driver, RetailDrugCost_TableNONLIS, 15);
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", RetailDrugCost_TableNONLIS);
 		validateWithValue("Drug cost table is diplaying for MAPD GROUP NON LIS USER", RetailDrugCost_TableNONLIS);
-		String mapdGroupTable_2020= "Additional Drug Coverage\n"
+	/*	String mapdGroupTable_2020= "Additional Drug Coverage\n"
 				+"Annual Deductible Stage \n"
 				+"Initial Coverage Stage \n"
 				+"Coverage Gap Stage\n"
@@ -2604,7 +2631,7 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 				+"Tier 3 \n"
 				+"$55.00\n"
 				+"Tier 4 \n"
-				+"$55.00";
+				+"$55.00"; */
 		String mapdGroupTable_2021= "Additional Drug Coverage\n"
 				+"Annual Deductible Stage \n"
 				+"Initial Coverage Stage \n"
@@ -2624,7 +2651,7 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 				+"$55.00\n"
 				+"Tier 4 \n"
 				+"$55.00";
-		String mapdGroupTable_2021_team="Additional Drug Coverage\n"
+		/*String mapdGroupTable_2021_team="Additional Drug Coverage\n"
 				+"Annual Deductible Stage \n"
 				+"Initial Coverage Stage \n"
 				+"Coverage Gap Stage\n"
@@ -2642,25 +2669,25 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 				+"Greater of $9.20 or 5.00%\n"
 				+"Tier 4 \n"
 				+"$55.00\n"
-				+"Greater of $9.20 or 5.00%";
+				+"Greater of $9.20 or 5.00%"; 
 		String mapdGroupTable=mapdGroupTable_2020;
 		if (dateStr.contains("2021") &&  MRScenario.environment.contains("team-a")) {
 			mapdGroupTable=mapdGroupTable_2021_team;
 		} else if (dateStr.contains("2021") && MRScenario.environment.contains("stage")) {
 			mapdGroupTable=mapdGroupTable_2021;
-		}
-		if(RetailDrugCost_TableNONLIS.getText().equals(mapdGroupTable.toString())){
+		} */
+		if(dateStr.contains("2021") && RetailDrugCost_TableNONLIS.getText().equals(mapdGroupTable_2021.toString())){
 			Assert.assertTrue("The data in the drug cost table is displaying correctly", true);
 			System.out.println("The data in the drug cost table is displaying correctly");  
 		}
 		else{
-			System.out.println(">>>>>>>>>>>>>The Expected Table  value is<<<<<<<<<<<<<<<<< \n"+mapdGroupTable.toString());
+			System.out.println(">>>>>>>>>>>>>The Expected Table  value is<<<<<<<<<<<<<<<<< \n"+mapdGroupTable_2021.toString());
 			System.out.println(">>>>>>>>>>>>>The Actual Table value is<<<<<<<<<<<<<<<<<<<< \n"+RetailDrugCost_TableNONLIS.getText());
 			System.err.println("The data in the drug cost table is not displaying correctly");
 
 			testNote.add("The data in the drug cost table is not displaying correctly. table='RetailDrug'");
 			testNote.add("The data in the drug cost table is not displaying correctly");
-			testNote.add("\n>>>>>>>>>>>>>The Expected Table  value is<<<<<<<<<<<<<<<<< \n"+mapdGroupTable);
+			testNote.add("\n>>>>>>>>>>>>>The Expected Table  value is<<<<<<<<<<<<<<<<< \n"+mapdGroupTable_2021);
 			testNote.add("\n>>>>>>>>>>>>>The Actual Table value is<<<<<<<<<<<<<<<<<<<< \n"+RetailDrugCost_TableNONLIS.getText());
 		} 
 		return testNote;
@@ -2677,10 +2704,10 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 				+"Catastrophic Coverage Stage\n"
 				+"Covered Generic Drugs\n"
 				+"$0.00\n"
-				+"$3.60\n"
+				+"$3.70\n"
 				+"$0.00\n"
 				+"All Other Covered Drugs\n"
-				+"$8.95\n"
+				+"$9.20\n"
 				+"$0.00";
 
 		if(RetailDrugCost_Table.getText().equals(mapdGroupTable.toString())){
@@ -2702,67 +2729,48 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 	
 	public List<String> validatedrugcosttablePDPGroup_NONLIS(String dateStr) {
 		List<String> testNote=new ArrayList<String>();
-		CommonUtility.waitForPageLoad(driver, RetailDrugCost_TableNONLIS, 15);
-		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", RetailDrugCost_TableNONLIS);
-		validateWithValue("Drug cost table is diplaying for MAPD GROUP LIS 4", RetailDrugCost_TableNONLIS);
-		String mapdGroupTable_2020= "Additional Drug Coverage\n"
-				+"Annual Deductible Stage \n"
-				+"Initial Coverage Stage \n"
-				+"Coverage Gap Stage \n"
-				+"Catastrophic Coverage Stage \n"
+		CommonUtility.waitForPageLoad(driver, PdpStdNwtDrugCost_TableNONLIS_header, 15);
+		validateWithValue("Drug cost table PDP GROUP NON LIS section header", PdpStdNwtDrugCost_TableNONLIS_header);
+		String tbl="Standard Network Pharmacy Retail Drug Costs";
+		WebElement drugTbl=PdpStdNwtDrugCost_TableNONLIS;
+		validateWithValue("Drug cost table is diplaying for PDP GROUP NON LIS", drugTbl);
+		scrollElementToCenterScreen(drugTbl);
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", drugTbl);
+		String pdpGroupTable_2021="Annual Deductible Stage Initial Coverage Stage Coverage Gap Stage Catastrophic Coverage Stage*\n"
 				+"Tier 1 \n"
 				+"No Deductible\n"
 				+"$10.00\n"
 				+"$10.00\n"
-				+"Your share of the cost for a covered drug will be either coinsurance or a copayment whichever is the larger amount:\n"
-				+"-either- coinsurance of 5% of the cost of the drug\n"
-				+"-or- $3.60 for a generic drug or a drug that is treated like a generic and $8.95 for all other drugs.\n"
+				+"$10.00\n"
 				+"Tier 2 \n"
 				+"$20.00\n"
 				+"$20.00\n"
-				+"Tier 3\n"
-				+"$35.00\n"
-				+"$35.00\n"
-				+"Tier 4\n"
-				+"$35.00\n"
-				+"$35.00";
-		String mapdGroupTable_2021="Additional Drug Coverage\n"
-				+"Annual Deductible Stage \n"
-				+"Initial Coverage Stage \n"
-				+"Coverage Gap Stage \n"
-				+"Catastrophic Coverage Stage \n"
-				+"Tier 1 \n"
-				+"No Deductible\n"
-				+"$10.00\n"
-				+"$10.00\n"
-				+"Your share of the cost for a covered drug will be either coinsurance or a copayment whichever is the larger amount:\n"
-				+"-either- coinsurance of 5% of the cost of the drug\n"
-				+"-or- $3.70 for a generic drug or a drug that is treated like a generic and $9.20 for all other drugs.\n"
-				+"Tier 2 \n"
 				+"$20.00\n"
-				+"$20.00\n"
-				+"Tier 3\n"
-				+"$35.00\n"
-				+"$35.00\n"
-				+"Tier 4\n"
-				+"$35.00\n"
-				+"$35.00";		
-		String mapdGroupTable=mapdGroupTable_2020;
-		if (dateStr.contains("2021")) 
-			mapdGroupTable=mapdGroupTable_2021;
-		if(RetailDrugCost_TableNONLIS.getText().equals(mapdGroupTable.toString())){
+				+"Tier 3 \n"
+				+"$40.00\n"
+				+"$40.00\n"
+				+"$40.00\n"
+				+"Tier 4 \n"
+				+"20% coinsurance with a $200.00 maximum\n"
+				+"20% coinsurance with a $200.00 maximum\n"
+				+"20% coinsurance with a $200.00 maximum";
+		String pdpGroupTable_2022="tbd";
+		String pdpGroupTable=pdpGroupTable_2021;
+		if (dateStr.contains("2022")) 
+			pdpGroupTable=pdpGroupTable_2022;
+		if(drugTbl.getText().equals(pdpGroupTable.toString())){
 			Assert.assertTrue("The data in the drug cost table is displaying correctly", true);
 			System.out.println("The data in the drug cost table is displaying correctly");  
 		}
 		else{
-			System.out.println(">>>>>>>>>>>>>The Expected Table  value is<<<<<<<<<<<<<<<<<\n"+mapdGroupTable.toString());
-			System.out.println(">>>>>>>>>>>>>The Actual Table value is<<<<<<<<<<<<<<<<<<<<\n"+RetailDrugCost_TableNONLIS.getText());
+			System.out.println(">>>>>>>>>>>>>The Expected Table  value is<<<<<<<<<<<<<<<<<\n"+pdpGroupTable.toString());
+			System.out.println(">>>>>>>>>>>>>The Actual Table value is<<<<<<<<<<<<<<<<<<<<\n"+drugTbl.getText());
 			System.err.println(">>>>>>>>Problem<<<<<<<<<<<<<<<The data in the drug cost table is not displaying correctly<<<<<<<<<<<<<");
 
-			testNote.add("The data in the drug cost table is not displaying correctly. table='RetailDrug'");
+			testNote.add("The data in the drug cost table is not displaying correctly. table='"+tbl+"'");
 			testNote.add("The data in the drug cost table is not displaying correctly");
-			testNote.add("\n>>>>>>>>>>>>>The Expected Table  value is<<<<<<<<<<<<<<<<< \n"+mapdGroupTable);
-			testNote.add("\n>>>>>>>>>>>>>The Actual Table value is<<<<<<<<<<<<<<<<<<<< \n"+RetailDrugCost_TableNONLIS.getText());
+			testNote.add("\n>>>>>>>>>>>>>The Expected Table  value is<<<<<<<<<<<<<<<<< \n"+pdpGroupTable);
+			testNote.add("\n>>>>>>>>>>>>>The Actual Table value is<<<<<<<<<<<<<<<<<<<< \n"+drugTbl.getText());
 		} 
 		return testNote;
 	}
@@ -2915,7 +2923,7 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 				+"no more than 25% for generic drugs or 25% for brand name drugs\n"
 				+"*Once you reach the Coverage Gap Stage, you pay copays or coinsurance defined by your plan for all Tier 1 through Tier 5 drugs regardless of whether your full deductible has been met.";
 		String TableData= TableData_2020;
-		if (dateStr.contains("2021") && MRScenario.environment.contains("stage"))
+		if (dateStr.contains("2021"))
 			TableData=TableData_2021;
 		if(preferedMail_DrugTable.getText().equals(TableData.toString())){
 			Assert.assertTrue("The data in the drug cost table is displaying correctly", true);
@@ -3769,7 +3777,7 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 				+"Tier 2\n"
 				+"$12.00\n"
 				+"$12.00\n"
-				+"Select Insulin Drugs\n"
+				+"Select Insulin Drugs Tier 3\n"
 				+"$35.00\n"
 				+"$35.00\n"
 				+"Tier 3\n"
@@ -3846,7 +3854,7 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 				+"Tier 2\n"
 				+"$12.00\n"
 				+"$12.00\n"
-				+"Select Insulin Drugs\n"
+				+"Select Insulin Drugs Tier 3\n"
 				+"$95.00\n"
 				+"$95.00\n"
 				+"Tier 3\n"
@@ -3893,7 +3901,7 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 				+"Tier 2\n"
 				+"$0.00\n"
 				+"$0.00\n"
-				+"Select Insulin Drugs\n"
+				+"Select Insulin Drugs Tier 3\n"
 				+"100% until the $275.00 deductible is met.*\n"
 				+"$95.00\n"
 				+"$95.00\n"
@@ -3942,7 +3950,7 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 				+"Tier 2\n"
 				+"$20.00\n"
 				+"$20.00\n"
-				+"Select Insulin Drugs\n"
+				+"Select Insulin Drugs Tier 3\n"
 				+"$275.00\n"
 				+"$35.00\n"
 				+"$35.00\n"
@@ -3994,7 +4002,7 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 				+"Tier 2\n"
 				+"$0.00\n"
 				+"$0.00\n"
-				+"Select Insulin Drugs\n"
+				+"Select Insulin Drugs Tier 3\n"
 				+"100% until the $275.00 deductible is met.*\n"
 				+"$35.00\n"
 				+"$35.00\n"
@@ -4046,7 +4054,7 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 				+"Tier 2\n"
 				+"$0.00\n"
 				+"$0.00\n"
-				+"Select Insulin Drugs\n"
+				+"Select Insulin Drugs Tier 3\n"
 				+"$95.00\n"
 				+"$95.00\n"
 				+"Tier 3\n"
@@ -4095,7 +4103,7 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 				+"Tier 2\n"
 				+"$12.00\n"
 				+"$12.00\n"
-				+"Select Insulin Drugs\n"
+				+"Select Insulin Drugs Tier 3\n"
 				+"$35.00\n"
 				+"$35.00\n"
 				+"Tier 3\n"
@@ -4178,12 +4186,12 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 				+"Tier 2\n"
 				+"$20.00\n"
 				+"$20.00\n"
-				+"Select Insulin Drugs\n"
+				+"Select Insulin Drugs Tier 3\n"
 				+"$35.00\n"
 				+"$35.00\n"
 				+"Tier 3\n"
 				+"$47.00\n"
-				+"0%*\n"
+				+"no more than 25% for generic drugs or 25% for brand name drugs\n"
 				+"Tier 4\n"
 				+"45%\n"
 				+"no more than 25% for generic drugs or 25% for brand name drugs\n"
@@ -4232,7 +4240,7 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 				+"Tier 2\n"
 				+"$10.00\n"
 				+"$10.00\n"
-				+"Select Insulin Drugs\n"
+				+"Select Insulin Drugs Tier 3\n"
 				+"$35.00\n"
 				+"$35.00\n"
 				+"Tier 3\n"
@@ -4284,12 +4292,12 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 				+"Tier 2\n"
 				+"$0.00\n"
 				+"$0.00\n"
-				+"Select Insulin Drugs\n"
+				+"Select Insulin Drugs Tier 3\n"
 				+"$105.00\n"
 				+"$105.00\n"
 				+"Tier 3\n"
 				+"$120.00\n"
-				+"0%\n"
+				+"no more than 25% for generic drugs or 25% for brand name drugs\n"
 				+"Tier 4\n"
 				+"40%\n"
 				+"no more than 25% for generic drugs or 25% for brand name drugs";
@@ -4508,7 +4516,7 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 		+"Tier 2\n"
 		+"$0.00\n"
 		+"$0.00\n"
-		+"Select Insulin Drugs\n"
+		+"Select Insulin Drugs Tier 3\n"
 		+"$15.00\n"
 		+"$15.00\n"
 		+"Tier 3\n"
@@ -4589,7 +4597,7 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 				+"Tier 2\n"
 				+"$0.00\n"
 				+"$0.00\n"
-				+"Select Insulin Drugs\n"
+				+"Select Insulin Drugs Tier 3\n"
 				+"$35.00\n"
 				+"$35.00\n"
 				+"Tier 3\n"
@@ -4814,7 +4822,7 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 				+"Tier 2\n"
 				+"$0.00\n"
 				+"$0.00\n"
-				+"Select Insulin Drugs\n"
+				+"Select Insulin Drugs Tier 3\n"
 				+"$15.00\n"
 				+"$15.00\n"
 				+"Tier 3\n"
@@ -4895,7 +4903,7 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 				+"Tier 2\n"
 				+"$0.00\n"
 				+"$0.00\n"
-				+"Select Insulin Drugs\n"
+				+"Select Insulin Drugs Tier 3\n"
 				+"$35.00\n"
 				+"$35.00\n"
 				+"Tier 3\n"
@@ -4944,12 +4952,12 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 				+"Tier 2\n"
 				+"$0.00\n"
 				+"no more than 25% for generic drugs or 25% for brand name drugs\n"
-				+"Select Insulin Drugs\n"
+				+"Select Insulin Drugs Tier 3\n"
 				+"$95.00\n"
 				+"$95.00\n"
 				+"Tier 3\n"
 				+"$131.00\n"
-				+"0%\n"
+				+"no more than 25% for generic drugs or 25% for brand name drugs\n"
 				+"Tier 4\n"
 				+"100% until the $150.00 deductible is met.*\n"
 				+"$290.00\n"
@@ -4995,7 +5003,7 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 				+"Tier 2\n"
 				+"$20.00\n"
 				+"no more than 25% for generic drugs or 25% for brand name drugs\n"
-				+"Select Insulin Drugs\n"
+				+"Select Insulin Drugs Tier 3\n"
 				+"$35.00\n"
 				+"$35.00\n"
 				+"Tier 3\n"
@@ -5049,7 +5057,7 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 				+"Tier 2\n"
 				+"$0.00\n"
 				+"$0.00\n"
-				+"Select Insulin Drugs\n"
+				+"Select Insulin Drugs Tier 3\n"
 				+"$35.00\n"
 				+"$35.00\n"
 				+"Tier 3\n"
@@ -5365,12 +5373,12 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 				+"Tier 2\n"
 				+"$0.00\n"
 				+"no more than 25% for generic drugs or 25% for brand name drugs\n"
-				+"Select Insulin Drugs\n"
+				+"Select Insulin Drugs Tier 3\n"
 				+"$95.00\n"
 				+"$95.00\n"
 				+"Tier 3\n"
 				+"$131.00\n"
-				+"0%\n"
+				+"no more than 25% for generic drugs or 25% for brand name drugs\n"
 				+"Tier 4\n"
 				+"100% until the $200.00 deductible is met.*\n"
 				+"$290.00\n"
@@ -5416,7 +5424,7 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 				+"Tier 2\n"
 				+"$12.00\n"
 				+"no more than 25% for generic drugs or 25% for brand name drugs\n"
-				+"Select Insulin Drugs\n"
+				+"Select Insulin Drugs Tier 3\n"
 				+"$35.00\n"
 				+"$35.00\n"
 				+"Tier 3\n"
@@ -5719,6 +5727,215 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 			
 		}
 		return isDisplayed;
+	}
+	
+	public boolean display_provider_search_tile() {
+		TestHarness.checkForIPerceptionModel(driver);
+		return validate(providersearchlink,5);
+	}
+	
+	public void validate_learnmoreaboutlink_insulin(String copayCategory, String insulinFlag) {
+		if (!copayCategory.equalsIgnoreCase("NON LIS")) {
+			Assert.assertTrue("PROBLEM - LIS user should not have 'Learn More About Drug Tiers' link", !validate(Learnmoretierslink,0));
+			return;
+		}
+		//note: should be NON LIS user to get to here
+		validateWithValue("Learn more tiers link", Learnmoretierslink);
+		scrollElementToCenterScreen(Learnmoretierslink);
+		Learnmoretierslink.click();
+		if (insulinFlag.equalsIgnoreCase("nonInsulin")) {
+			Assert.assertTrue("PROBLEM, unable to locate the 'Learn More About Drug Tiers' link content'", validate(LearnmoretierslinkInsulinContent,0));
+			String expText="Select Insulin Drugs Tier 3";
+			String actText=LearnmoretierslinkInsulinContent.getText();
+			System.out.println("TEST - actText="+actText);
+			Assert.assertTrue("PROBLEM - user with no insulin should NOT be able to locate text '"+expText+"' from the 'Learn more tiers link' content",!actText.contains(expText));
+		} else {
+			Assert.assertTrue("PROBLEM, unable to locate the 'Learn More About Drug Tiers' link content'", validate(LearnmoretierslinkInsulinContent,0));
+			String expText="Select Insulin Drugs Tier 3";
+			String actText=LearnmoretierslinkInsulinContent.getText();
+			System.out.println("TEST - actText="+actText);
+			Assert.assertTrue("PROBLEM - unable to locate expected text '"+expText+"' from the 'Learn more tiers link' content",actText.contains(expText));
+		}
+		
+		validateWithValue("Learn more tiers link to collapse", Learnmoretierslink_toCloseIt);
+		scrollElementToCenterScreen(Learnmoretierslink_toCloseIt);
+		Learnmoretierslink_toCloseIt.click();
+	}
+	
+	public String getConsumerDetailsFromlocalStorage() {
+		//WebStorage webStorage = (WebStorage) new Augmenter().augment(driver) ;
+		RemoteExecuteMethod executeMethod = new RemoteExecuteMethod((RemoteWebDriver) driver);
+		RemoteWebStorage webStorage = new RemoteWebStorage(executeMethod);
+		LocalStorage localStorage = webStorage.getLocalStorage();
+		String consumerDetails=localStorage.getItem("consumerDetails");
+		return consumerDetails;
+	}
+
+	public String getPlanStartDateInConsumerDetails(boolean isComboUser, String lookForPlanCategory, String consumerDetails) {
+		//keepForDebug System.out.println("TEST - consumerDetails="+consumerDetails);
+		String planStartDate=null;
+		try {
+			JSONParser parser = new JSONParser();
+			JSONObject apiResponseJsobObj=(JSONObject) parser.parse(consumerDetails);
+			JSONArray planProfilesArrayObj=(JSONArray) apiResponseJsobObj.get("planProfiles");
+			if (isComboUser) 
+				Assert.assertTrue("PROBLEM - test data expect this user to be a combo user "
+						+ "but the localStorage.consumerDetails has only one planProfiles.  "
+						+ "Please double check and correct test data", planProfilesArrayObj.size()>1);
+			for (int i = 0; i < planProfilesArrayObj.size(); i++) {
+				JSONObject planProfilesObj= (JSONObject) planProfilesArrayObj.get(i);
+				String actualPlanCategory = (String) planProfilesObj.get("planCategory");
+				System.out.println("TEST - lookForPlanCategory="+lookForPlanCategory);
+				System.out.println("TEST - actualPlanCategory="+actualPlanCategory);
+				if (lookForPlanCategory.equals(actualPlanCategory)) {
+					planStartDate = (String) planProfilesObj.get("planStartDate");
+					Assert.assertTrue("PROBLEM - unable to locate planStartDate from localStorage.consumerDetails, "
+							+ "please check to see if getConsumerInfo API response contains non-null planStartDate, consumerDetails="+consumerDetails, 
+							planStartDate!=null);
+				} 
+			}			
+			Assert.assertTrue("PROBLEM - unable to locate the expected planType from localStorage.consumerDetails, "
+					+ "please check to see if feature file input parameter planType contains the actual planType that is in getConsumerInfo API, consumerDetails="+consumerDetails, 
+					planStartDate!=null);
+
+
+		} catch (ParseException e) {
+			e.printStackTrace();
+			Assert.assertTrue("PROBLEM - encounted problem reading the json result from localStorage.consumerDetails", false);
+		}
+		return planStartDate;
+	}
+	
+	public String getPlanStartDateId(Boolean isComboUser, String planType) {
+		//note: if planType is for SHIP, parse the value to get the actual plan category name
+		String lookForPlanCategory= planType;
+		if (planType.contains("SHIP")) {
+			String[] tmp=planType.split("SHIP_");
+			Assert.assertTrue("PROBLEM - input setup for planType for SHIP needs to include planCategory which is used for validation, e.g. SHIP_<planCategory>", tmp.length>1);
+			lookForPlanCategory=tmp[1];
+		}
+		String consumerDetails=getConsumerDetailsFromlocalStorage();
+		String planStartDate = getPlanStartDateInConsumerDetails(isComboUser, lookForPlanCategory, consumerDetails);
+		System.out.println("TEST - planStartDate="+planStartDate);
+		return planStartDate;
+	}
+
+	
+	public Date convertStrToDate(String strDate) {
+		DateFormat df = new SimpleDateFormat("MM/dd/yyyy"); 
+		df.setTimeZone(TimeZone.getTimeZone("UTC"));
+		Date targetDate;
+		try {
+			targetDate = df.parse(strDate);
+			//String newDateString = df.format(targetDate);
+			//System.out.println(newDateString);
+			return targetDate;
+		} catch (java.text.ParseException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	public void validateRiderTileDisplay(boolean isComboUser, String planType, String currentDateStr) {
+		Assert.assertTrue("PROBLEM - expect rider section text 'OPTIONAL SERVICES (RIDERS)' for test user but not seeing it, please make sure test user has rider", validate(riderSection,0));
+
+		String planStartDate=getPlanStartDateId(isComboUser, planType);
+		Date planStartDateDateObj=convertStrToDate(planStartDate);
+		Date threeMonthsAfterPlanStartDate=DateUtils.addMonths(planStartDateDateObj, 3);
+
+		Date currentDateObj=convertStrToDate(currentDateStr);
+
+		//note: see Add button if not yet add current date is within 3 months after planStart
+		if (currentDateObj.before(threeMonthsAfterPlanStartDate) || currentDateObj.equals(threeMonthsAfterPlanStartDate)) {
+			if (validate(riderAddBtn,0)) {
+
+				//TODO: validate adding rider plan, not coding yet because timing from GPS may effect stability of the test result
+				//TODO: also don't want to accidentally add rider on prod env...
+			} else if (validate(riderDeleteBtn,0)) {
+
+				Assert.assertTrue("PROBLEM - Delete button exist implies rider plan is added, unable to locate the message with rider plan start date in tile contnet", validate(riderMsgWithStartDate,0));
+
+				//note: get the rider planStart date
+				String txt=riderMsgWithStartDate.getText();
+				String[] tmp=txt.split("effective on:");
+				Assert.assertTrue("PROBLEM - rider start message is showing but unable to locate the rider plan start date from the message.  msg='"+txt+"'", tmp.length>1);
+				String riderStartDate=tmp[1].replace("\\.", "");
+				Assert.assertTrue("PROBLEM - rider start message is showing but unable to locate the rider plan start date from the message", !riderStartDate.equals(""));
+				
+			} else {
+				Assert.assertTrue("PROBLEM - unable to locate add or remove rider button.  Within first 3 months of the planStart date, either Add or Remove rider button should show", false);
+			}
+		}
+		
+		if (currentDateObj.after(threeMonthsAfterPlanStartDate)) {
+			//note: for sure should not see add button
+			Assert.assertTrue("PROBLEM - planStartDate='"+planStartDate+"' and"
+					+ " system date='"+currentDateStr+"' is not within 3 months after planStartDate,"
+					+ " should NOT see Add rider button", 
+					!validate(riderAddBtn,0));
+			
+			//note: if see delete button then validate if it's within 3 months since rider started
+			if (validate(riderDeleteBtn,0)) {
+				Assert.assertTrue("PROBLEM - Delete button exist implies rider plan is added, unable to locate the message with rider plan start date in tile contnet", validate(riderMsgWithStartDate,0));
+
+				//note: get the rider planStart date
+				String txt=riderMsgWithStartDate.getText();
+				String[] tmp=txt.split("effective on:");
+				Assert.assertTrue("PROBLEM - rider start message is showing but unable to locate the rider plan start date from the message.  msg='"+txt+"'", tmp.length>1);
+				String riderStartDate=tmp[1].replace("\\.", "");
+				Assert.assertTrue("PROBLEM - rider start message is showing but unable to locate the rider plan start date from the message", !riderStartDate.equals(""));
+			}
+		}
+		
+		//------- validate  VIEW / DOWNLOAD RIDER PDF link ---------------------------
+		Assert.assertTrue("PROBLEM - unable to locate the VIEW PDF link in tile contnet", validate(riderViewPdfLnk,0));
+		String expUrl="alphadog";
+		String actUrl=riderViewPdfLnk.getAttribute("href");
+		Assert.assertTrue("PROBLEM - VIEW PDF link URL is not as expected. Expect to contain '"+expUrl+"' | Actual href='"+actUrl+"'", actUrl.contains(expUrl));
+
+		String winHandleBefore = driver.getWindowHandle();
+		ArrayList<String> beforeClicked_tabs = new ArrayList<String>(driver.getWindowHandles());
+		int beforeClicked_numTabs=beforeClicked_tabs.size();	
+
+		riderViewPdfLnk.click();
+
+		ArrayList<String> afterClicked_tabs = new ArrayList<String>(driver.getWindowHandles());
+		int afterClicked_numTabs=afterClicked_tabs.size();
+		Assert.assertTrue("PROBLEM - Did not get expected new tab after clicking 'VIEW PDF' link", (afterClicked_numTabs-beforeClicked_numTabs)==1);
+
+		driver.switchTo().window(afterClicked_tabs.get(afterClicked_numTabs-1));
+
+		try {
+			URL TestURL = new URL(driver.getCurrentUrl());
+			sleepBySec(5); //note: let the page settle before validating content
+			BufferedInputStream TestFile = new BufferedInputStream(TestURL.openStream());
+			PDDocument document = PDDocument.load(TestFile);
+			String PDFText = new PDFTextStripper().getText(document);
+			//keep-for-debug 	System.out.println("PDF text : "+PDFText);
+			String expText="Supplemental Benefit";
+			Assert.assertTrue("PROBLEM - unable to locate expected text from PDF content. Expect to contains '"+expText+"'", PDFText.contains(expText));
+			
+			driver.close();
+			driver.switchTo().window(winHandleBefore);
+
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+			Assert.assertTrue("PROBLEM - unable to validate pdf content - MalformedURLException", false);
+		} catch (IOException e) {
+			e.printStackTrace();
+			Assert.assertTrue("PROBLEM - unable to validate pdf content - IOException", false);
+		}
+
+		//------- validate uhcmedicaredentistsearch.com link ---------------------------
+		Assert.assertTrue("PROBLEM - unable to locate the Assistance link in tile contnet", validate(riderAssistanceLnk,0));
+		expUrl="https%3A~2F~2Fdentalsearch.yourdentalplan.com~2Fprovidersearch";
+		//TODO - which one is the correct expected URL destination??
+		//note: href="https://member.uhc.com/internal-redirect?deepLink=https%3A~2F~2Fconnect.werally.com~2FdentalProvider~2Froot%3FshowBackButton%3Dtrue"
+		actUrl=riderAssistanceLnk.getAttribute("href");
+		Assert.assertTrue("PROBLEM - KNOWN ISSUE INC19517618 - Assistance link URL is not as expected. Expect to contain '"+expUrl+"' | Actual href='"+actUrl+"'", actUrl.contains(expUrl));
+		//TODO - click it and validate it land on the right page:  https://dentalsearch.yourdentalplan.com/providersearch
+
+		
 	}
 
 }

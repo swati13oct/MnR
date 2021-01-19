@@ -1,4 +1,4 @@
-Feature: 1.19 Verify the premium payment flows on member portal - Part 5 - Test case 33 to 33
+Feature: 1.19 Verify the premium payment flows on member portal - Part 5 - Test case 33 to 35
 
   Background: Feature security flag needs to be true before ATDD script execution
     Given First check if feature security flag is set to true
@@ -21,6 +21,9 @@ Feature: 1.19 Verify the premium payment flows on member portal - Part 5 - Test 
       | Year             | <validYear>        |
     Then for saving card user navigates to payment overview screen and selects agreements and save card checkbox and click on Make one time payment
     Then User navigates to payment confirmation page for CC flow
+    And the user pulls the value of keep card on file indicator from GPS
+    | Payment Type | <paymentType> |
+    And the user confirms that keep card on file indicator is sent to GPS as Y
     And the user delete recurring payment record from GPS so that he can run recurring payment again
       | Payment Type | <paymentType> |
 
@@ -38,7 +41,7 @@ Feature: 1.19 Verify the premium payment flows on member portal - Part 5 - Test 
     And user clicks on Make one time payment on payment overview page
     And user selects other amount and enters "1.00" and selects SAVED credit card and click on Next button
     Then user navigates to payment overview screen for SAVED Card and selects agreements and click on Make one time payment
-    Then User navigates to payment confirmation page for CC flow
+    Then User navigates to payment confirmation page for CC flow for saved card
 
     Examples: 
       | TID     | planType | memberType                           | Name | CreditCardNumber | validMonth | validYear | paymentType |

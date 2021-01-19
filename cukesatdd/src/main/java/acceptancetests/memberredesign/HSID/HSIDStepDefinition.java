@@ -39,6 +39,7 @@ import pages.regression.deeplinkPages.OfflineProd_PharmacynPrescriptionLoginPage
 import pages.regression.deeplinkPages.OfflineProd_VirtualVisitDeeplinkLoginPage;
 import pages.regression.deeplinkPages.PaymentsDeeplinkLoginPage;
 import pages.regression.deeplinkPages.PharmacyDeeplinkLoginPage;
+import pages.regression.deeplinkPages.Prod_VirtualVisitDeeplinkLoginPage;
 import pages.regression.deeplinkPages.VirtualVisitDeeplinkLoginPage;
 import pages.regression.deeplinkPages.aarpChatAgentLogin;
 import pages.regression.deeplinkPages.accountsProfileDeeplinkLoginPage;
@@ -1280,12 +1281,11 @@ public class HSIDStepDefinition {
 										 * @todo :member lands on myDocuments deep link
 										 */
 										@Given("^I am an M&R SHIP member$")
-										public void the_SHIP_user_iS_on_deeplink_Page(DataTable givenAttributes) throws InterruptedException{
-											String brand = givenAttributes.asList(String.class).get(0);
+										public void the_SHIP_user_iS_on_deeplink_Page() throws InterruptedException{
 											WebDriver wd = getLoginScenario().getWebDriver();
 											getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 											healthwellnessDeepLinkLoginPageSHIP healthwellnessDeepLinkLoginPageSHIP = new healthwellnessDeepLinkLoginPageSHIP(wd);
-											healthwellnessDeepLinkLoginPageSHIP.navigateToLoginURL(brand);
+											healthwellnessDeepLinkLoginPageSHIP.navigateToLoginURL();
 											getLoginScenario().saveBean(PageConstants.AARP_HAWL,healthwellnessDeepLinkLoginPageSHIP );	
 										}
 										/** 
@@ -1425,6 +1425,27 @@ public class HSIDStepDefinition {
 										     virtualVisitDeeplinkLoginPage.validateVirtualVisitPage();
 										}
 										
+										/** 
+										 * member lands on Dentegra Dental Deeplink URL
+										 */
+										@Given("^member lands on dentegra dental deeplink page$")
+										public void the_SHIP_user_iS_on_dentegra_dental_deeplink_Page() throws InterruptedException{
+											WebDriver wd = getLoginScenario().getWebDriver();
+											getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+											healthwellnessDeepLinkLoginPageSHIP healthwellnessDeepLinkLoginPageSHIP = new healthwellnessDeepLinkLoginPageSHIP(wd);
+											healthwellnessDeepLinkLoginPageSHIP.navigateToDentegraDentalURL();
+											getLoginScenario().saveBean(PageConstants.AARP_HAWL,healthwellnessDeepLinkLoginPageSHIP );	
+										}
+										/** 
+										 * member lands on Talix page for the Dentegra Dental Discount article
+										 */
+										 @Given("^I will land on the Talix page for the Dentegra Dental Discount article$") 
+										 public void i_will_land_on_the_Talix_page_for_Dentegra_Dental_Page() throws InterruptedException{											
+											 healthwellnessDeepLinkLoginPageSHIP healthwellnessDeepLinkLoginPageSHIP = (healthwellnessDeepLinkLoginPageSHIP) getLoginScenario().getBean(PageConstants.AARP_HAWL);
+										     Thread.sleep(3000);
+										     healthwellnessDeepLinkLoginPageSHIP.validateDentegraDentalPage();
+										}
+										 
 										@Then("^I click on logout and validate the login page$")
 										public void click_on_logout_validate_login_page() {
 											TestHarness testHarnessPage = (TestHarness) getLoginScenario().getBean(PageConstantsMnR.TEST_HARNESS_PAGE);
@@ -1439,8 +1460,8 @@ public class HSIDStepDefinition {
 										}
 
 										@Given("^First check if feature security flag is set to true$")
-										public void checkSecurityFlagCTCW(DataTable memberAttributes) {
-										  String stageDomain = null;
+										 public void checkSecurityFlagCTCW(DataTable memberAttributes) {
+										  String domain = null;
 										  Map < String,
 										  String > memberAttributesMap = parseInputArguments(memberAttributes);
 										  String feature = memberAttributesMap.get("Feature");
@@ -1452,58 +1473,79 @@ public class HSIDStepDefinition {
 										    Assert.assertTrue("PROBLEM - ATDD code doesn't support security flag check for feature '" + feature + "' yet or make sure it's spelled correctly", false);
 										  }
 										  System.out.println("feature=" + feature);
-										  String securityFlagXpath = "//td[text()='enableSecurity']/following-sibling::td";
+										  
 										  if (MRScenario.environment.equalsIgnoreCase("stage"))
 										  {
-										    stageDomain = "http://apsrs7260.uhc.com:8080";
+											  domain = "http://apsrs7260.uhc.com:8080";
 										  }
+										 
 										  else if (MRScenario.environment.equalsIgnoreCase("team-h")) {
 										    if (feature.equals("UCPPayments")) {
-										      stageDomain = "http://ucp-payments-team-h.ocp-ctc-dmz-nonprod.optum.com";
+										    	domain = "http://ucp-payments-team-h.ocp-ctc-dmz-nonprod.optum.com";
 										    } else if (feature.equals("UCPUserManagement")) {
-										      stageDomain = "http://ucp-user-management-team-h.ocp-ctc-dmz-nonprod.optum.com";
+										    	domain = "http://ucp-user-management-team-h.ocp-ctc-dmz-nonprod.optum.com";
 										    } else if (feature.equals("UCPContactus")) {
-										      stageDomain = "http://ucp-contactus-team-h.ocp-ctc-dmz-nonprod.optum.com/";
+										    	domain = "http://ucp-contactus-team-h.ocp-ctc-dmz-nonprod.optum.com/";
 										    } else if (feature.equals("UCPSSOMemberAuth")) {
-										      stageDomain = "http://ucp-benefits-mnr-ucp-stage-3.ocp-ctc-dmz-stg.optum.com";
+										    	domain = "http://ucp-benefits-mnr-ucp-stage-3.ocp-ctc-dmz-stg.optum.com";
 										    }
 										  }
-										  //tbd configPgUrl="https://www."+MRScenario.environment+"-medicare."+MRScenario.domain+"/"+feature+"/wsConfig";
-										  String configPgUrl = stageDomain + "/" + feature + "/wsConfig";
-										  System.out.println("Config page URL=" + configPgUrl);
+										  
+										  
 										  MRScenario m = new MRScenario();
 										  WebDriver d = m.getWebDriverNew();
 										  d.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-										  d.get(configPgUrl);
-										  d.navigate().refresh();
-										  CommonUtility.checkPageIsReady(d);
-										  try {
-										    WebElement e = d.findElement(By.xpath(securityFlagXpath));
-										    CommonUtility.waitForPageLoad(d, e, 5);
-										    if (e.isDisplayed()) {
-										      System.out.println("Element '" + e.toString() + "' found!!!!");
-										      String value = e.getText();
-										      if (value.equalsIgnoreCase("false")) {
-										        if (MRScenario.environment.toLowerCase().contains("stage"))
-										        Assert.assertTrue("PROBLEM - " + MRScenario.environment + " environment should have feature '" + feature + "' security flag = true, right now it is set to " + value + " | configPgUrl=" + configPgUrl + ", stopping all tests now. | saurcelab session=" + MRScenario.returnJobURL(), false);
-										        else
-										        System.out.println("feature '" + feature + "' security flag is false on env '" + MRScenario.environment + "' configPgUrl=" + configPgUrl + ", not on stage, okay to move on...");
-										      } else {
-										        System.out.println("feature '" + feature + "' security flag is true on env '" + MRScenario.environment + "' configPgUrl=" + configPgUrl + ", okay to move on...");
-										      }
-										    } else {
-										      Assert.assertTrue("PROBLEM - unable to locate security flag in the config URL='" + configPgUrl + "' page, stopping all tests now. | saurcelab session=" + MRScenario.returnJobURL(), false);
-										    }
-										  } catch(Exception e) {
-										    if (MRScenario.environment.toLowerCase().contains("stage")) {
-										      e.printStackTrace();
-										      Assert.assertTrue("PROBLEM - unable to locate security flag in the config URL='" + configPgUrl + "' page, stopping all tests now. | saurcelab session=" + MRScenario.returnJobURL(), false);
-										    } else {
-										      System.out.println("unable to locate security flag in the config URL='" + configPgUrl + "' page, not on stage, okay to move on...");
-										    }
-										  }
+										  if (MRScenario.environment.contains("stage")|| MRScenario.environment.contains("team-h")) {
+												//note: for stage or team-h, only check 1 server
+											  checkEnableSecurityPerServerCTCW(d, domain, feature);
+												
+											} else if (MRScenario.environment.equalsIgnoreCase("offline") || MRScenario.environment.equalsIgnoreCase("prod")) {
+												//note: offline/online-prod servers will keep switching between release
+												//note: it's hard to figure out at run time which server to use so just check for both
+												//note: in theory,both should always be true anyway
+												domain="http://apsrp04756.uhc.com:8080";
+												checkEnableSecurityPerServerCTCW(d, domain, feature);
+
+												domain="http://apsrp04757.uhc.com:8080";
+												checkEnableSecurityPerServerCTCW(d, domain, feature);
+												
+											}
+										
 										  d.quit();
 										}
+										
+										public void checkEnableSecurityPerServerCTCW(WebDriver d, String domain, String feature) {
+											  String configPgUrl = domain + "/" + feature + "/wsConfig";
+											  System.out.println("Config page URL=" + configPgUrl);
+
+											  d.get(configPgUrl);
+											  d.navigate().refresh();
+											  CommonUtility.checkPageIsReady(d);
+											  try {
+												String securityFlagXpath = "//td[text()='enableSecurity']/following-sibling::td";
+											    WebElement e = d.findElement(By.xpath(securityFlagXpath));
+											    CommonUtility.waitForPageLoad(d, e, 5);
+											    if (e.isDisplayed()) {
+											      System.out.println("Element '" + e.toString() + "' found!!!!");
+											      String value = e.getText();
+											      System.out.println("Value of enableSecurity flag is : "+value);
+											      if (value.equalsIgnoreCase("false")) 
+											      {      
+											        Assert.assertTrue("PROBLEM - " + MRScenario.environment + " environment should have feature '" + feature + "' security flag = true, right now it is set to " + value + " | configPgUrl=" + configPgUrl + ", stopping all tests now. | saurcelab session=" + MRScenario.returnJobURL(), false);
+											      }
+											      else {
+											        System.out.println("feature '" + feature + "' security flag is true on env '" + MRScenario.environment + "' configPgUrl=" + configPgUrl + ", okay to move on...");
+											      }
+											    } else {
+											      Assert.assertTrue("PROBLEM - unable to locate security flag in the config URL='" + configPgUrl + "' page, stopping all tests now. | saurcelab session=" + MRScenario.returnJobURL(), false);
+											    }
+											  } catch(Exception e) {
+											    
+											      System.out.println("unable to locate security flag in the config URL='" + configPgUrl + "' page");
+											       Assert.fail("unable to locate security flag in the config URL='\" + configPgUrl + \"' page");
+											  }
+										}
+										
 										/** 
 										 * @todo :member lands on myDocuments e-delivery deep link page 
 										 */
@@ -1644,6 +1686,73 @@ public class HSIDStepDefinition {
 											public void offlinePROD_edelivery_displayed() throws InterruptedException{
 												myDocumentsEdeliveryDeeplinkLoginPage myDocumentsEdeliveryDeeplinkLoginPage = (myDocumentsEdeliveryDeeplinkLoginPage) loginScenario.getBean(PageConstants.Offline_PROD_edelivery);
 												myDocumentsEdeliveryDeeplinkLoginPage.validateofflinePageElements();
-												myDocumentsEdeliveryDeeplinkLoginPage.validateOfflineProdedeliverypage();
+												myDocumentsEdeliveryDeeplinkLoginPage.validateOfflineProdpRODedeliverypage();
 											}
+											/** 
+											 * @todo :member lands on virtual visit offline PROD deep link
+											*/
+											@Given("^member lands on the PROD virtual visit deeplink page$")
+											public void the_user_is_on_PROD_virtualVisit_deeplink_Page(DataTable givenAttributes) throws InterruptedException{
+												String brand = givenAttributes.asList(String.class).get(0);
+												WebDriver wd = getLoginScenario().getWebDriver();
+												getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+												Prod_VirtualVisitDeeplinkLoginPage Prod_VirtualVisitDeeplinkLoginPage = new Prod_VirtualVisitDeeplinkLoginPage(wd);
+												Prod_VirtualVisitDeeplinkLoginPage.navigateToLoginURL(brand);
+												getLoginScenario().saveBean(PageConstants.PROD_VirtualVisit_DEEPLINK_lOGIN_PAGE,Prod_VirtualVisitDeeplinkLoginPage);
+														}
+											/** 
+											 * @todo :deep link login page elements validate  
+											*/
+											@And("^the PROD virtual visit deeplink login page is displayed with all the fields$")
+											public void PROD_virtualVisit_pageis_displayed(){
+												Prod_VirtualVisitDeeplinkLoginPage Prod_VirtualVisitDeeplinkLoginPage = (Prod_VirtualVisitDeeplinkLoginPage) loginScenario.getBean(PageConstants.PROD_VirtualVisit_DEEPLINK_lOGIN_PAGE);
+												Prod_VirtualVisitDeeplinkLoginPage.validatePageElements();
+												Prod_VirtualVisitDeeplinkLoginPage.validateOfflineProdVirtualVisitPage();
+											}  
+											/** 
+											 * @todo :member lands on the offline PROD health & wellness deeplink page
+											*/
+											@Given("^member lands on the PROD health & wellness deeplink page$")
+											public void the_user_is_on_PROD_healthnwellness_deeplink_Page(DataTable givenAttributes) throws InterruptedException{
+												String brand = givenAttributes.asList(String.class).get(0);
+												WebDriver wd = getLoginScenario().getWebDriver();
+												getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+												healthwellnessDeepLinkLoginPageSHIP healthwellnessDeepLinkLoginPageSHIP = new healthwellnessDeepLinkLoginPageSHIP(wd);
+												healthwellnessDeepLinkLoginPageSHIP.navigateToLoginURLPROD(brand);
+												getLoginScenario().saveBean(PageConstants.Offline_PROD_SHIP_healthNwellness,healthwellnessDeepLinkLoginPageSHIP);
+														}
+											/** 
+											 * @throws InterruptedException 
+											 * @todo :deep link login page elements validate  
+											*/
+											@And("^the PROD health & wellness deeplink login page is displayed with all the fields$")
+											public void PROD_healthnWellness_displayed() throws InterruptedException{
+												healthwellnessDeepLinkLoginPageSHIP healthwellnessDeepLinkLoginPageSHIP = (healthwellnessDeepLinkLoginPageSHIP) loginScenario.getBean(PageConstants.Offline_PROD_SHIP_healthNwellness);
+												healthwellnessDeepLinkLoginPageSHIP.validateofflinePageElements();
+												healthwellnessDeepLinkLoginPageSHIP.validateOfflineProdhealthwellnessPage();
+											}
+											/** 
+											 * @todo :member lands on the offline PROD health & wellness deeplink page
+											*/
+											@Given("^member lands on the PROD edelivery deeplink page$")
+											public void the_user_is_on_PROD_edelivery_deeplink_Page(DataTable givenAttributes) throws InterruptedException{
+												String brand = givenAttributes.asList(String.class).get(0);
+												WebDriver wd = getLoginScenario().getWebDriver();
+												getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+												myDocumentsEdeliveryDeeplinkLoginPage myDocumentsEdeliveryDeeplinkLoginPage = new myDocumentsEdeliveryDeeplinkLoginPage(wd);
+												myDocumentsEdeliveryDeeplinkLoginPage.navigateToLoginURLPOD(brand);
+												getLoginScenario().saveBean(PageConstants.Offline_PROD_edelivery,myDocumentsEdeliveryDeeplinkLoginPage);
+														}
+											/** 
+											 * @todo :member lands on virtual visit offline PROD deep link
+											*/
+											@Given("^member lands on the PROD HWP deeplink page$")
+											public void the_user_is_on__PROD_HWP_deeplink_Page(DataTable givenAttributes) throws InterruptedException{
+												String brand = givenAttributes.asList(String.class).get(0);
+												WebDriver wd = getLoginScenario().getWebDriver();
+												getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+												OfflineProd_PharmacynPrescriptionLoginPage OfflineProd_PharmacynPrescriptionLoginPage = new OfflineProd_PharmacynPrescriptionLoginPage(wd);
+												OfflineProd_PharmacynPrescriptionLoginPage.navigateToProdLoginURL(brand);
+												getLoginScenario().saveBean(PageConstants.Offline_PROD_HWP_DEEPLINK_lOGIN_PAGE,OfflineProd_PharmacynPrescriptionLoginPage);
+														}				
 										}

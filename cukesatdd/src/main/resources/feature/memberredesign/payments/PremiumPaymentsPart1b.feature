@@ -30,7 +30,7 @@ Background: Feature security flag needs to be true before ATDD script execution
 
     Examples: 
       | TID    | planType | memberType      |
-      | TC8    | MAPD     | OverdueFlag     |
+     | TC8    | MAPD     | OverdueFlag     |
       | TC8-P2 | SHIP     | SHIPOverdueFlag |
 
   #Test Case 09
@@ -55,11 +55,11 @@ Background: Feature security flag needs to be true before ATDD script execution
       | Member Type | <memberType> |
     When the user clicks on Premium Payments on Header
     Then User validates tool tips on the payments overview page
-
+      | userType | <userType> |
     Examples: 
-      | TID     | planType | memberType      |
-      | TC10    | MAPD     | OverdueFlag     |
-      | TC10-P2 | SHIP     | SHIPOverdueFlag |
+      | TID     | planType | memberType      | userType |
+      | TC10    | MAPD     | OverdueFlag     | Federal  |
+      | TC10-P2 | SHIP     | SHIPOverdueFlag | Ship    |
 
   #Test Case 11
   @regressionMember
@@ -69,11 +69,11 @@ Background: Feature security flag needs to be true before ATDD script execution
       | Member Type | <memberType> |
     When the user clicks on Premium Payments on Header
     Then User validates billing and payment history table tool tips on the page
-
+	  | userType | <userType> |
     Examples: 
-      | TID     | planType | memberType      |
-      | TC11    | MAPD     | OverdueFlag     |
-      | TC11-P2 | SHIP     | SHIPOverdueFlag |
+      | TID     | planType | memberType      | userType |
+     | TC11    | MAPD     | OverdueFlag     | Federal  |
+     | TC11-P2 | SHIP     | SHIPOverdueFlag | Ship    |
 
   #Test Case 12
   @regressionMember

@@ -73,7 +73,7 @@ Background: Feature security flag needs to be true before ATDD script execution
 
     Examples: 
       | TID   | username  | password  | member              | routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName |
-      | 15118 | qavgogine | qavgogine | q3_sep_UAT4_AARP069 | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    |
+      | 15118 | qavgogine | qavgogine | PerfCCM_01903       | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    |
 
   #Test Case 21 - Any member will work - Member Auth - FED - Error message on submitting payment - One time EFT
   @regressionMember
@@ -101,12 +101,12 @@ Background: Feature security flag needs to be true before ATDD script execution
     And the user is displayed with an error message that he is not authorized
 
     Examples: 
-      | TID   | username  | password  | member    | routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName | Amount |
-      | 15118 | qavgogine | qavgogine | canrec001 | 123123123 |        123123123 |     12345 |            12345 | FIRSTNAME | MIDDLENAME | LASTNAME |   1.12 |
+      | TID   | username  | password  | member         | routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName | Amount |
+      | 15118 | qavgogine | qavgogine | q3_Payment_060 | 123123123 |        123123123 |     12345 |            12345 | FIRSTNAME | MIDDLENAME | LASTNAME |   1.12 |
 
   #Test Case 22 - COMBO member - Needs a SHIP/HIP member with Setup Recurring Payment button and a Fed MAPD/PDP Plan member
   @regressionMember
-  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Test Case 22 - Verify Payment Submission for Fed+SHIP Combo member - Recurrung EFT for SHIP and One Time EFT for Federal
+  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Test Case 22 - Verify Payment Submission for Fed+SHIP Combo member - Setup Recurring EFT for SHIP and One Time EFT for Federal
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
@@ -145,7 +145,7 @@ Background: Feature security flag needs to be true before ATDD script execution
 
   #Test Case 23 -Fed Only Member with Recurring method already setup and with billing history (same as in test case #15)
   @regressionMember
-  Scenario Outline: UID: <UID> -plan: <planType> -memberType: <memberType> - Test Case 23 - Verify Payment Hisory Section and Cancel Model Popup for Fed Recurring EFT
+  Scenario Outline: UID: <UID> -plan: <planType> -memberType: <memberType> - Test Case 23 - Verify Payment History Section and Cancel Model Popup for Fed Recurring EFT
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
@@ -199,7 +199,7 @@ Background: Feature security flag needs to be true before ATDD script execution
       | UID       | planType | memberType                |
       | US1449078 | MAPD     | UpdateRecurrStop_Payments |
 
-  #Test Case 26 -Fed - member with single federal plan and Next payment Due amount and date
+  #Test Case 26 -Fed - member with single federal plan and Next payment Due amount and date available
   @regressionMember
   Scenario Outline: UID: <UID> -plan: <planType> -memberType: <memberType> - Test Case 26 - Verify Payment Summary for OneTime payment Flow
     Given login with following details logins in the member portal and validate elements

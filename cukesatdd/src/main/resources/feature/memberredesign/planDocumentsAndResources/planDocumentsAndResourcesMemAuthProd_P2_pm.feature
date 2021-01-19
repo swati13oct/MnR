@@ -14,6 +14,7 @@ Feature: 1.06.1.2 Member Plans and Documents - section: Plan Materials - Member 
       | Password | <password> |
     And Member Enters the Username he wants to search
       | MemUsername | <MemUserName> |
+      | Retry | true |
     And user clicks on member to select
     And user stores test input for validations
       | Username | <MemUserName> |
@@ -40,7 +41,7 @@ Feature: 1.06.1.2 Member Plans and Documents - section: Plan Materials - Member 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | pm_sd | pm_op | pm_mi | pm_en | pm_es | pm_zh |
 #      | 01-020 | xxxxx       | kkumard  | tnps459#  | Ranch1955    | MA       | AARP_IND_PREEFF_PDnR  | false | false | false | false | false | false |
 #      | 02-021 | xxxxx       | kkumard  | tnps459#  | testusername    | MA       | GROUP_PREEFF_PDnR     | false | false | false | false | false | false |
-      | 03-022 | xxxxx       | kkumard  | tnps459#  | Mino77003          | MAPD     | AARP_IND_PREEFF_PDnR  | false | false | false | false | false | false |
+      | 03-022 | xxxxx       | kkumard  | tnps459#  | Beaver34          | MAPD     | AARP_IND_PREEFF_PDnR  | false | false | false | false | false | false |
 
 #	@prod_preeffective_pdp
 #	Examples: 
@@ -74,7 +75,7 @@ Feature: 1.06.1.2 Member Plans and Documents - section: Plan Materials - Member 
 	@prod_active_mapd @prod_active_mapd_grp
 	Examples: 
       | index  | TID         | username  | password  | MemUserName     | planType | memberType            | pm_sd | pm_op | pm_mi | pm_en | pm_es | pm_zh |
-      | 12-031 | 15303       | kkumard  | tnps459#  | SHERMANJAFFE65    | MAPD     | NICE_GROUP_EFF_PDnR        | true  | true  | true  | true  | false | false |
+      | 12-031 | 15303       | kkumard  | tnps459#  | 2nancyreeves    | MAPD     | GROUP_EFF_PDnR        | true  | true  | true  | true  | false | false |
      ### note: PEEHIP group terminated as of 12/31/2019
      #| 13-032 | 15130       | kkumard  | tnps459#  | testusername    | MAPD     | PEEHIP_GROUP_EFF_PDnR | true  | true  | true  | true  | false | false |
 

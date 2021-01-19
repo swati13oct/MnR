@@ -56,7 +56,7 @@ public class ProviderSearchCommonStepDefinition {
 			String planName = plannameAttributesMap.get("PlanName");
 			getLoginScenario().saveBean(VPPCommonConstants.PLAN_NAME, planName);
 			VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario().getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-			
+		
 			ProviderSearchPage providerSearchPage = plansummaryPage.clicksOnIsProviderCovered(planName);
 			if(providerSearchPage!=null) {
 				getLoginScenario().saveBean(PageConstants.PROVIDER_SEARCH_PAGE, providerSearchPage);
@@ -128,7 +128,7 @@ public class ProviderSearchCommonStepDefinition {
 		AcquisitionHomePage acquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		
-		ProviderSearchPage providerSearchPage = acquisitionhomepage.clicksOnRallyToolFromGlobalHeader();
+		ProviderSearchPage providerSearchPage = acquisitionhomepage.clicksOnProviderToolFromGlobalHeader();
 
 		if (providerSearchPage != null) {
 			getLoginScenario().saveBean(PageConstants.PROVIDER_SEARCH_PAGE, providerSearchPage);
@@ -412,6 +412,12 @@ public class ProviderSearchCommonStepDefinition {
 				.getBean(PageConstants.PROVIDER_SEARCH_PAGE);
 		providerSearchPage.verifyProviderSearchRallyPageDisplayed();
 	}
-
+	@When("^user removes existing provider and selects a provider and retuns to VPP page$")
+	public void user_remove_existing_Provider_selects_provider_and_return_vpp_page_ulayer() {
+		ProviderSearchPage providerSearchPage = (ProviderSearchPage) getLoginScenario()
+				.getBean(PageConstants.PROVIDER_SEARCH_PAGE);
+		VPPPlanSummaryPage plansummaryPage = providerSearchPage.selectsProvider();
+		Assert.assertTrue("Not able to return to Plan Summary page", plansummaryPage != null);
+	}
 	}
 

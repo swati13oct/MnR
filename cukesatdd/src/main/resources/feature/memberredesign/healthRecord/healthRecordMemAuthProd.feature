@@ -9,6 +9,7 @@ Feature: 1.24.2 Member Individual Health Record - PROD
       | Password | <password> |
     And Member Enters the Username he wants to search
       | MemUsername | <MemUserName> |
+      | Retry | true |
     And user clicks on member to select
     And user stores test input for validations
       | Username | <MemUserName> |
@@ -57,14 +58,14 @@ Feature: 1.24.2 Member Individual Health Record - PROD
     @prod_no_ihr_boaGrp2
     Examples: 
 	    | index | FID     | username  | password  | MemUserName             | planType | memberType         | expectLink | 
-	    | 07    | F424804 | kkumard   | tnps459#  | bernwl               | MA       | BOA12324_TERM_GROUP_IHR | false |
+	    | 07    | F424804 | kkumard   | tnps459#  | bernwl               | MA       | BOA12324_GROUP_IHR | false |
 
     #----------- begin - cases with IHR link
     @prod_ihr_ma_mapd
     Examples: 
 	    | index | FID     | username  | password  | MemUserName             | planType | memberType         | expectLink | 
 	    | 08    | F424804 | kkumard   | tnps459#  | ssmhi1              | MA       | IHR                | true       |
-	    | 09    | F424804 | kkumard   | tnps459#  | Grandmagrey123          | MAPD     | NONBOA_GROUP_IHR   | true       |
+	    | 09    | F424804 | kkumard   | tnps459#  | LMHOCHSCHILD11          | MAPD     | NONBOA_GROUP_IHR   | true       |
 
     @prod_ihr_pdp
     Examples: 
@@ -77,7 +78,7 @@ Feature: 1.24.2 Member Individual Health Record - PROD
     Examples: 
 	    | index | FID     | username  | password  | MemUserName             | planType | memberType         | expectLink | 
 	 #  | 11    | F424804 | kkumard   | tnps459#  | Ranch1955               | MA       | PREEFF_IHR         | true       |
-	    | 11    | F424804 | kkumard   | tnps459#  | Teripappas                | MAPD     | PREEFF_IHR         | true       |
+	    | 11    | F424804 | kkumard   | tnps459#  | Beaver34                | MAPD     | PREEFF_IHR         | true       |
 	    | 12    | F424804 | kkumard   | tnps459#  | Patkeving            | MAPD     | TERM_IHR           | false      |
 
     @prod_ihr_pdpSspCombo

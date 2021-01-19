@@ -243,6 +243,9 @@ public class DrugSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//*[@id='modal']//*[@id='cancelicon']")
 	private WebElement closeIconPlanSavePopup;
 	
+	@FindBy(xpath = "(//button/span[contains(text(), 'View Plan Details')])[1]")
+	public WebElement firstViewPlanDetailsBtn;
+	
 	public static String LIS_MESSAGE_DRUG_PRICING="If you receive \"Extra Help\" to pay your prescription drugs, this payment stage does not apply to you. Learn more about Extra Help.";
 	
 	@Override
@@ -1113,4 +1116,10 @@ public class DrugSummaryPage extends UhcDriver {
 		keepUsingPharmacyLink.click();
 	}
 
+	public PlanDetailsPage clickViewPlanDetails() {
+		validateNew(firstViewPlanDetailsBtn);
+		jsClickNew(firstViewPlanDetailsBtn);
+		waitForPageLoadSafari();
+		return new PlanDetailsPage(driver);
+	}
 }
