@@ -17,7 +17,7 @@ public class PharmacySearchWebElements extends UhcDriver {
 	protected WebElement zipcodeField;
 
 	@FindBy(xpath="//*[@id='zipcode-wrapper']//button[@class='uhc-button']")
-	protected WebElement searchbtn;;
+	protected WebElement searchbtn;
 
 	@FindBy(id = "selectmultycounty_box")
 	protected WebElement countyPopOut;
@@ -226,6 +226,7 @@ public class PharmacySearchWebElements extends UhcDriver {
 	@FindBy(xpath="//div[@id='collapseInfo' and @aria-hidden='false']")
 	protected WebElement moreInfoText_show;
 
+	//@FindBy(className = "loading-block")
 	@FindBy(className = "uhc-spinner")
 	protected WebElement loadingImage;
 	
