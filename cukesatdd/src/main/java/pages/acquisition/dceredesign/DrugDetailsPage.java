@@ -210,10 +210,12 @@ public class DrugDetailsPage extends UhcDriver {
 	@FindBy(xpath = "//div[contains(@id,'disclaimer-accordion-wrap')]")
 	public WebElement Disclaimer_Accordian;
 
-	@FindBy(id = "selectaPharmacyHeader")
+//	@FindBy(id = "selectaPharmacyHeader")
+	@FindBy(xpath = "//h3[@id='modal-label'][text()='Select a Pharmacy']")
 	public WebElement selectPharmacyHeader;
 	
-	@FindBy(id = "selectPharmcyModalCloseLink")
+//	@FindBy(id = "selectPharmcyModalCloseLink")
+	@FindBy(id = "cancelicon")
 	public WebElement selectPharmacyModalCloseBtn;
 	
 	@FindBy(xpath = "//*[@class='uhc-card__content']//*[contains(text(),'We are currently')]")
@@ -258,7 +260,8 @@ public class DrugDetailsPage extends UhcDriver {
 	
 	//@FindBy(xpath = "//button[contains(@aria-label,'Select ROCK PHARMACY -')]")
 	
-	@FindBy(xpath ="//*[@id='selectPharmacyBtn3']")
+//	@FindBy(xpath ="//*[@id='selectPharmacyBtn3']")
+	@FindBy(xpath = "//span[text()='ROCK PHARMACY']/../../preceding-sibling::button")
 	public WebElement selectRockPharm;
 	
 	@FindBy(xpath = "//*[@class='uhc-button__text'][contains(text(),'Save and Update Drug Costs')]")
