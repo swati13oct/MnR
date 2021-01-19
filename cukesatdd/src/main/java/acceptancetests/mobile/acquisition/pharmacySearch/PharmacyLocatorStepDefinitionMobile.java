@@ -174,7 +174,7 @@ public class PharmacyLocatorStepDefinitionMobile {
 		getLoginScenario().saveBean(PharmacySearchCommonConstants.TEST_SYSTEM_YEAR, envTimeYear);
 		*/
 		pharmacySearchPage.enterZipDistanceDetails(zipcode, distance, county);
-		System.out.println("hbhbhjafkjjjbjbjbjbhbj");
+		//System.out.println("hbhbhjafkjjjbjbjbjbhbj");
 		/*noteList.addAll(testNote);
 		getLoginScenario().saveBean(PharmacySearchCommonConstants.TEST_RESULT_NOTE, noteList);*/
 
