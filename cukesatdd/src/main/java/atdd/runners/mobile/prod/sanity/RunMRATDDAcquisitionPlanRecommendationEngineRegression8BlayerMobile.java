@@ -1,4 +1,4 @@
-package atdd.runners.mobile.acquisition.pre;
+package atdd.runners.mobile.prod.sanity;
 
 import org.junit.runner.RunWith;
 
@@ -15,22 +15,21 @@ import cucumber.api.CucumberOptions;
 		retryCount=1, 
 		screenShotSize="", 
 		screenShotLocation="/screenshots/",
-		jsonReport = "target/cucumber-RunMRATDDAcquisitionPlanRecommendationEngineRegression1UlayerMobile.json",
+		jsonReport = "target/cucumber-RunMRATDDAcquisitionPlanRecommendationEngineRegression8BlayerMobile.json",
 		detailedReport = true, 
 		detailedAggregatedReport = true, 
 		overviewReport = true, 
 		toPDF = true, 
-		outputFolder = "target/RunMRATDDAcquisitionPlanRecommendationEngineRegression1UlayerMobile")
+		outputFolder = "target/RunMRATDDAcquisitionPlanRecommendationEngineRegression8BlayerMobile")
 @CucumberOptions(
 		glue = { "atdd.framework", "acceptancetests.mobile" }, 
 		features = { "src/main/resources/feature/mobile/acquisition/planrecommendationengine/" }, 
-		plugin = {"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionPlanRecommendationEngineRegression1UlayerMobile.json" }, 
-		tags = {"@PRERegression1"}, dryRun=false)
-public class RunMRATDDAcquisitionPlanRecommendationEngineRegression1UlayerMobile {
+		plugin = {"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionPlanRecommendationEngineRegression8BlayerMobile.json" }, 
+		tags = {"@PRERegression8"})
+public class RunMRATDDAcquisitionPlanRecommendationEngineRegression8BlayerMobile {
 
 }
 
 
-
 //note: these tags are for  
-	//	@Community_Meeting_AARP @Community_Meeting_UHC @PRERegression1 "@PRERegression1"
+	//	@Community_Meeting_AARP @Community_Meeting_UHC

@@ -1385,6 +1385,17 @@ public class PlanRecommendationEngineResultsPageMobile extends UhcDriver {
 		driver.navigate().back();
 		plansLoader();
 	}
+	
+	
+	public void DrugsDetailsVPPtoDCE() {
+		pages.mobile.acquisition.planrecommendationengine.ACQDrugCostEstimatorPage dce = new pages.mobile.acquisition.planrecommendationengine.ACQDrugCostEstimatorPage(driver);
+		System.out.println("Validating Pharmacy Details in DCE Page: ");
+		dce.Pharmacytype();
+		System.out.println("Validating Drugs Details from VPP to DCE Page: ");
+		DrugsInDCE = dce.DCEDrugsResults;
+		int count =DrugsInDCE.size();
+		verifyConfirmationmodalResults(count,DrugsInDCE,DrugsList);
+	}
 
 	public void useraddDrugsVPP(String drugDetails) {
 		threadsleep(10000);

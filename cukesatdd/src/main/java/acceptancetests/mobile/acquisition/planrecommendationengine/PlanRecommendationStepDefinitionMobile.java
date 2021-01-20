@@ -9,6 +9,7 @@ import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEnginePrioritiesPage;
+import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineResultsPage;
 import pages.mobile.acquisition.bluelayer.AcquisitionHomePageMobile;
 import pages.mobile.acquisition.planrecommendationengine.CoverageOptionsMobilePage;
 import pages.mobile.acquisition.planrecommendationengine.DoctorsMobilePage;
@@ -54,6 +55,7 @@ import pages.mobile.acquisition.planrecommendationengine.PlanRecommendationEngin
 import pages.mobile.acquisition.planrecommendationengine.PlanRecommendationEngineHeaderAndFooterMobile;
 import pages.mobile.acquisition.planrecommendationengine.PlanRecommendationEngineLandingAndZipcodeMobilePages;
 import pages.mobile.acquisition.planrecommendationengine.PlanRecommendationEnginePharmacyPageMobile;
+import pages.mobile.acquisition.planrecommendationengine.PlanRecommendationEnginePrioritiesPageMobile;
 import pages.mobile.acquisition.planrecommendationengine.PlanRecommendationEngineResultsPageMobile;
 import pages.mobile.acquisition.planrecommendationengine.PlanRecommendationEngineSpecialNeedsPageMobile;
 import pages.mobile.acquisition.planrecommendationengine.PlanRecommendationEngineTravelPageMobile;
@@ -85,6 +87,21 @@ public class PlanRecommendationStepDefinitionMobile {
 		}
 	}
 
+	@Then("^user selects priority in priorities page$")
+	public void user_selects_priorities(DataTable givenAttributes) {
+		readfeaturedataMobile(givenAttributes);
+		PlanRecommendationEnginePrioritiesPageMobile priorities =  new PlanRecommendationEnginePrioritiesPageMobile(wd);
+		priorities.prioritiesFunctional(inputValues.get("Priority Option"),inputValues.get("Priorities"));
+		priorities.continuePriority();
+	}
+
+	@Then("^user validate drugs details from VPP to DCE page$")
+	public void drugs_VPP_DCE_page() {
+		PlanRecommendationEngineResultsPageMobile planSelectorResultspage =  new PlanRecommendationEngineResultsPageMobile(wd);
+		planSelectorResultspage.DrugsDetailsVPPtoDCE();
+	}
+	
+	
 	@Given("^the user is on UHC medicare acquisition site mobile$")
 	public void the_user_on_uhc_medicaresolutions_site_mobile() {
 		wd = getLoginScenario().getMobileDriver();

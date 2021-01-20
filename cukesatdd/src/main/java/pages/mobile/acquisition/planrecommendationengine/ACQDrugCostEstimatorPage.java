@@ -35,6 +35,7 @@ public class ACQDrugCostEstimatorPage extends UhcDriver {
 	public static ArrayList<String> DCEDrugsList = new ArrayList<String>();
 	public static ArrayList<String> DrugsList = new ArrayList<String>();
 	static ArrayList<String> vppDrugsResults = new ArrayList<String>();
+	static ArrayList<String> DCEDrugsResults = new ArrayList<String>();
 
 	String page = "Drug Cost Estimator";
 
@@ -109,6 +110,9 @@ public class ACQDrugCostEstimatorPage extends UhcDriver {
 
 	@FindBy(xpath = "//span[contains(text(),'Add to drug List')]")
 	private WebElement addToDrugList;
+	
+	@FindBy(css = "span[class*='text-normal']")
+	private WebElement PharmacyType;
 
 	@FindBy(xpath = "//span[contains(text(),'Add My Drugs')]")
 	private WebElement addMyDrug;
@@ -235,6 +239,13 @@ public class ACQDrugCostEstimatorPage extends UhcDriver {
 		} catch (Exception e) {
 			System.out.println("Unable to add drug");
 		}
+	}
+
+	public void Pharmacytype() {
+		threadsleep(5000);
+		validate(PharmacyType);
+		Assert.assertTrue(PharmacyType.getText().contains("Preferred Mail Service Pharmacy"),
+				"Pharmacy is not default online");
 	}
 
 	public ArrayList<String> getDrugsDCE() {
