@@ -1,5 +1,7 @@
 package pages.regression.healthandwellness;
 
+import java.util.List;
+
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -127,10 +129,21 @@ public class HealthAndWellnessPage extends HealthAndWellnessBase {
 		return result;
 	}
 
+	@SuppressWarnings("unchecked")
 	public WebElement expandRootElement(WebElement element) {
-		WebElement ele = (WebElement) ((JavascriptExecutor)driver)
-				.executeScript("return arguments[0].shadowRoot", element);
-		return ele;
+		if (MRScenario.browserName.equalsIgnoreCase("Firefox")) {
+			List<WebElement> eleList= (List<WebElement>) ((JavascriptExecutor) driver).executeScript("return arguments[0].shadowRoot.children",
+					element);
+			for (WebElement e: eleList) {
+				System.out.println("TEST - e="+e.getAttribute("innerHTML"));
+			}
+			//note: return the last element from the list
+			return eleList.get(eleList.size()-1);
+		} else {
+			WebElement ele = (WebElement) ((JavascriptExecutor) driver).executeScript("return arguments[0].shadowRoot",
+					element);
+			return ele;
+		}
 	}
 
 	public String locateElementWithinShadowRoot(WebElement shadowRootElement, String inputCssSelector) {
