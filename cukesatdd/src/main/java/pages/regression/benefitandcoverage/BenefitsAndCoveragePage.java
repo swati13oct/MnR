@@ -6040,7 +6040,6 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 		actUrl=riderAssistanceLnk.getAttribute("href");
 		Assert.assertTrue("PROBLEM - Assistance link URL is not as expected. Expect to contain '"+expUrl+"' | Actual href='"+actUrl+"'", actUrl.contains(expUrl));
 		if ((MRScenario.environment.contains("stage") && !MRScenario.isTestHarness.equalsIgnoreCase("YES"))
-			||	MRScenario.environment.equals("offline") 
 			|| MRScenario.environment.equals("prod")) {
 			winHandleBefore = driver.getWindowHandle();
 			beforeClicked_tabs = new ArrayList<String>(driver.getWindowHandles());
