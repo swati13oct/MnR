@@ -318,13 +318,16 @@ public class MedicareInformationPageMobile extends UhcDriver {
 		String goGreen = MedicareDetailsMap.get("Go Green");
 		String email = MedicareDetailsMap.get("Email");
 		
-		//jsClickMobile(claimNumberField);
-		jsSendkeys(claimNumberField, MedicareNumber);
+		jsClickMobile(claimNumberField);
+		//jsSendkeys(claimNumberField, MedicareNumber);
+		getkeypad();
+		//wait
+		//mobileactionsendkeys(claimNumberField, MedicareNumber);
 		//claimNumberField.sendKeys(MedicareNumber);
 		jsClickMobile(claimNumberField);
-		claimNumberField.clear();
+		//claimNumberField.clear();
 		System.out.println("Medicare number cleared");
-		jsSendkeys(claimNumberField, MedicareNumber);
+		mobileactionsendkeys(claimNumberField, MedicareNumber);
 		System.out.println("Medicare number set again");
 
 		if (SSNflag.contains("true")) {

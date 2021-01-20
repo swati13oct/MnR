@@ -3531,7 +3531,8 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 		// waitTillElementClickableInTime(Start_ApplicationBtn, 60);
 		// jsClickNew(Start_ApplicationBtn);
 		CommonUtility.waitForPageLoadNew(driver, resumeApplication, 30);
-		resumeApplication.click();
+		//resumeApplication.click();
+		jsClickMobile(resumeApplication);
 		System.out.println("Resume application link clicked successfully");
 	}
 

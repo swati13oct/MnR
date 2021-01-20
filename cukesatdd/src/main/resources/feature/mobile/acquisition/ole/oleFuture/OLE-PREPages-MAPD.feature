@@ -15,7 +15,7 @@ Feature: 1.05.8. OLE PRE Integration Flow
     Then the user clicks on Enroll Now for AARP site to start the OLE flow
       | Plan Name | <planName> |
     Then the user validates the Plan details on OLE
-    Then the user validates TFN in Welcome OLE Right Rail
+    #Then the user validates TFN in Welcome OLE Right Rail
     Then the user validates Learn more modal for Welcome OLE
     Then the user validates Leave OLE modal for Welcome OLE
     Then the user validates cancellation modal for Welcome OLE
