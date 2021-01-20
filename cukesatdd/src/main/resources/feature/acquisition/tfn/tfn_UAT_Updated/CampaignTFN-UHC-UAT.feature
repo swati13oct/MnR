@@ -3,46 +3,95 @@ Feature: UAT-SCripts To test Campaign TFN in all flows on UHC site
 #######################Script 1: Direct traffic########################################
    @Scenario_1_2_DirectTraffic__UHC_UAT @UATRegression 
   Scenario Outline: <scenario>  Verify TFN in VPP Plan Details and OLE pages, DCE,
-    Given the user is on the uhcmedicaresolutions site landing page
-    And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
+    #Given the user is on the uhcmedicaresolutions site landing page
+    #And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
+    Given the user is on medicare acquisition site landing page
+   		|Site| <site>|
     Then the user validates PSC code
       | PSC Code | <pscCode> | 
-    Then the user navigates to MA Plan Details Page and validates Federal TFN
-    Then the user navigates to following  Medicare Education Page URL and validate Federal TFN  
-      | MEDICARE URL    | <medicareUrl> |
-      | TFN Xpath | <medicareTFN> |
-   Then the user navigates to Medsupp Plans in VPP and validates Medsupp TFN
- Then the user navigates to PDP Plan Details Page and validates Federal TFN
- Then the user navigates to PDP OLE Page and validates Federal TFN
-Then the user navigates to homepage validates Federal TFN
-	And the user selects the state drop down value in UHC home page
-      | State | <state> |
-	And the user clicks on the shopping cart icon in UHC site
-  	And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
+And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
+    Then the user validates TFN Number
+       | TFN No | <TFNNo> |
+       | TFN Xpath | <TFNxpath> |
     Then the user validates PSC code
       | PSC Code | <pscCode> |
-	And the user clicks on the add plans button in the guest profile in UHC site
-	#When the user enters zipcode on health plans page
-     # | Zip Code        | <zipcode>         |
-     # | Is Multi County | <isMultutiCounty> |
-      #| County Name     | <county>          |
-  # And the user views the plans of the below plan type
-     # | Plan Type | <plantype> |
-   #And the user selects plan year
-    #  | Plan Year | <planyear> |
-    #  | Plan Type | <plantype> |
-   	And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
+    Then the user navigates to MA Plan Details Page and validates Federal TFN
+    	  | Zip Code        | <zipcode>|
+ 		Then the user validates TFN Number
+       | TFN No | <TFNNo> |
+       | TFN Xpath | <TFNxpath> |
+    Then the user navigate to following MedED Pages URL and validate Federal TFN
+       | MedEd URL | <medicareUrl> |
+    Then the user validates TFN Number
+       | TFN No | <TFNNo> |
+       | TFN Xpath | <TFNxpath> |
+		When the user performs plan search using learn about medicare Pages
+      | Zip Code        | <zipcode>         |
+      | County Name     | <county>          |
+      | Is Multi County | <isMultutiCounty> |
+    Then the user navigates to plan tab for any plan
+        | Plan Type | <MAplantype> |
+  Then the user navigates to Plan Details Page for any plan and validates Federal TFN 
+      | Plan Type | <MAplantype> |
+  Then the user validates TFN Number
+       | TFN No | <TFNNo> |
+        | TFN Xpath | <TFNxpath> |
+   Then the user navigates to Medsupp Plans in VPP and validates Medsupp TFN
+   	  | Zip Code        | <zipcode>|
+   	Then the user validates TFN Number
+       | TFN No | <TFNNo> |
+       | TFN Xpath | <MedsuppTFNxpath> |
+    Then the user navigates to plan tab for any plan
+        | Plan Type | <PDPplantype> |
+  Then the user navigates to Plan Details Page for any plan and validates Federal TFN 
+      | Plan Type | <PDPplantype> |
+  Then the user validates TFN Number
+       | TFN No | <TFNNo> |
+        | TFN Xpath | <TFNxpath> |
+  Then the user navigates to Plan Details Page for any plan for Enroll and validates Federal TFN
+    | Plan Type | <PDPplantype> |
+   Then the user validates TFN Number
+       | TFN No | <TFNNo> |
+        | TFN Xpath | <TFNxpath> |
+    Then the user navigates back to page
+ #Then the user navigates to PDP Plan Details Page and validates Federal TFN
+ 	#| Zip Code        | <zipcode>|
+ #Then the user navigates to PDP OLE Page and validates Federal TFN
+ #	| Zip Code        | <zipcode>|
+ Then the user navigates to homepage validates Federal TFN
+  #And the user selects the state drop down value in AARP home page
+    # | State | <state> |
+     And the user clicks on the shopping cart icon in AARP site
+  	#And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
+    Then the user validates PSC code
+      | PSC Code | <pscCode> |
+ 		Then the user validates TFN Number
+        | TFN No | <TFNNo> |
+        | TFN Xpath | <TFNxpath> |
+	And the user clicks on the add plans button in the profile in AARP site
+	  Then the user validates TFN Number
+        | TFN No | <TFNNo> |
+        | TFN Xpath | <TFNxpath> |
+   # And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
     Then the user validates PSC code
       | PSC Code | <pscCode> | 
-    Then the user navigates to following  DCE Page URL and validate Federal TFN 
-      | DCE URL    | <dceUrl> |
-    And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
-    Then the user validates PSC code
-      | PSC Code | <pscCode> | 
-  Examples: 
-  |scenario           | pscCode | state   | maUrl                    | maTFN                                                          | pdpUrl                                    | pdpTFN                                                         | snpUrl                                                                                                                                                                                                                                                                                                                      | snpTFN                       | medSuppUrl                                                                | medSuppTFN     | medicareUrl                |medicareTFN| site   | zipcode |county| plantype | isMultutiCounty |planyear |userName|password| dceUrl|Precedence2PSC |memberSignIn|
-  |Scenario 1 - UMS 	|  880180 |Alabama  |enroll/ma-enrollment.html | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | shop/estimate/pdp-costs.html | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | health-plans.html?zipcode=28035&deepLink=favPlansDeepLink&plantype=MA&year=2020&planId=H5253041000&planYear=2020&systemYear=2020&zipcode=28035&fipsCode=119&product=MAPD&yearDisclaimer=undefined&month=2&yearToggle=undefined&deepLink=plandetail&WT.mc_id=897749&mrcid=em:Acq:MR%7cFederal%7cEGEM3011%7c::897749!/details | //a[contains(@class, 'tel')] | health-plans/medicare-supplement-plans/medicare-information.html?vpp=true | //*[@id='tfn'] | /medicare-education.html     |(//a[contains(@class, 'tel')])[1]|blayer | 10001|New York County   | MA       | No              |current  |mnrqavd11|Password@1|health-plans/estimate-drug-costs.html#/drug-cost-estimator|8009508 |https://www.medicare.uhc.com/  |
-  
+     Then the user navigates to plan tab for any plan
+        | Plan Type | <MAplantype> |  
+    Then the user navigates to Plan Details Page for any plan and validates Federal TFN 
+      | Plan Type | <MAplantype> |
+     Then the user validates TFN Number
+        | TFN No | <TFNNo> |
+        | TFN Xpath | <TFNxpath> |
+    Then the user navigates to following  DCE Page URL and validate Federal TFN
+      | DCE URL | <dceUrl> |
+    Then the user validates TFN Number
+        | TFN No | <TFNNo> |
+        | TFN Xpath | <DCETFNxpath> |
+
+    Examples: 
+      | scenario         | site |zipcode|TFNNo          |isMultutiCounty | county                |pscCode | maUrl                     | pdpUrl                        |  snpUrl                                                                                                                                                                                                                                                                                                                      | medSuppUrl                                                                |  medicareUrl             | site   | zipcode | plantype | isMultutiCounty | planyear | dceUrl                                                     | Precedence2PSC | PDPplantype|MAplantype|TFNxpath                         |MedsuppTFNxpath                  |DCETFNxpath|
+ 			| Scenario 1 - AMP | UHC  |90210  |1-877-596-3258 |NO              | Baldwin County        | 880180 | enroll/ma-enrollment.html |  shop/estimate/pdp-costs.html | health-plans.html?zipcode=28035&deepLink=favPlansDeepLink&plantype=MA&year=2020&planId=H5253041000&planYear=2020&systemYear=2020&zipcode=28035&fipsCode=119&product=MAPD&yearDisclaimer=undefined&month=2&yearToggle=undefined&deepLink=plandetail&WT.mc_id=897749&mrcid=em:Acq:MR%7cFederal%7cEGEM3011%7c::897749!/details | health-plans/medicare-supplement-plans/medicare-information.html?vpp=true  |  medicare-education.html | Ulayer |   80001 | MA       | No              | current  | health-plans/estimate-drug-costs.html#/drug-cost-estimator |        8009508 | PDP        |MA        |(//a[contains(@class, 'tel')])[1]|//*[contains(@class,'tel right')]|//button[contains(@id,'sam-call-button')]//*[contains(@class,'sam__button__text desktop')]|
+     
   
    #######################Script 2: Campaign traffic########################################
  

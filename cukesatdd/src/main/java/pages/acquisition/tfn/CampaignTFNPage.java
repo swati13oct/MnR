@@ -752,24 +752,10 @@ public class CampaignTFNPage extends UhcDriver {
 							Assert.assertTrue("OLE Welcome Page NOT Diaplyed for Plan Type : "+planType, false);
 						}
 			}
-			/*
-			 String PSC_Code = PSC_CODE;
-		System.out.println("Expected PSC code: "+ExpectedpscCode);
-		System.out.println("Actual PSC code: "+PSC_Code);
-		
-		if(ExpectedpscCode.contentEquals(PSC_Code)) {
-			System.out.println("****************Expected PSC Code matches Actual PSC code from TFN cookie ***************");
-
-			Assert.assertTrue(true);
-		}
-		else {
-			Assert.fail("****************Expected PSC Code DOES NOT match Actual PSC code from TFN cookie ***************");
-		}
-		// TOD
-			 */
+			
 			public void validateFederalTFNNo(String TFNXpath, String ExpecetdTFNNo) {
 				
-				
+				driver.navigate().back();
 				try {
 					Thread.sleep(3000);
 				} catch (InterruptedException e) {
@@ -788,5 +774,10 @@ public class CampaignTFNPage extends UhcDriver {
 					Assert.fail("TFN elemnet is not found / displayed on page : "+TFNXpath);
 				}
 				
-			}		
+			}	
+			
+			public void validatebackpage() {
+				
+				driver.navigate().back();
+			}
 }
