@@ -11,10 +11,10 @@ import cucumber.api.CucumberOptions;
  * this file is to run test cases for community Meeting User Stories in Acquisition sites
  */
 @RunWith(ExtendedCucumber.class)
-@ExtendedCucumberOptions(retryCount=1, screenShotSize="", screenShotLocation="/screenshots/",jsonReport = "target/cucumber-RunMRATDDAcquisitionPlanRecommendationEngineSanityMobileBlayer.json",detailedReport = true, detailedAggregatedReport = true, overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDAcquisitionPlanRecommendationEngineSanityMobileBlayer")
-@CucumberOptions(glue = { "atdd.framework", "acceptancetests.mobile" }, features = { "src/main/resources/feature/mobile/acquisition/planrecommendationengine/"}, plugin = {
+@ExtendedCucumberOptions(retryCount=0, screenShotSize="", screenShotLocation="/screenshots/",jsonReport = "target/cucumber-RunMRATDDAcquisitionPlanRecommendationEngineSanityMobileBlayer.json",detailedReport = true, detailedAggregatedReport = true, overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDAcquisitionPlanRecommendationEngineSanityMobileBlayer")
+@CucumberOptions(glue = { "atdd.framework", "acceptancetests.mobile.acquisition.planrecommendationengine" }, features = { "src/main/resources/feature/mobile/acquisition/planrecommendationengine/"}, plugin = {
 		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionPlanRecommendationEngineSanityMobileBlayer.json" }, 
-tags = {"@PRESanityMobile"})
+tags = {"@MobileVerifyEdit"})
 public class RunMRATDDAcquisitionPlanRecommendationEngineSanityMobileBlayer {
 
 }
