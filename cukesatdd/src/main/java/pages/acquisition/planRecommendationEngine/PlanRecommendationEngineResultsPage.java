@@ -1,7 +1,4 @@
 
-/**
-* 
- */
 package pages.acquisition.planRecommendationEngine;
 
 import java.text.DateFormat;
@@ -282,13 +279,14 @@ public class PlanRecommendationEngineResultsPage extends UhcDriver {
 	@FindBy(css = "#plan-list-1 .swiper-container .module-plan-overview a[id*='savePlan']")
 	private List<WebElement> MAPlansSaveIcon;
 	
-	@FindBy(css = "#plan-list-3 .swiper-container .module-plan-overview a[class*='favorite-plan'] span[class*='unliked']")
+	@FindBy(css = "#plan-list-3 .swiper-wrapper .module-plan-overview a[class*='favorite-plan']:nth-child(1) span[class*='unliked']")
 	private List<WebElement> PDPPlansSaveIcon;
 	
 	@FindBy(css = "#plan-list-4 .swiper-container .module-plan-overview a[id*='savePlan']")
 	private List<WebElement> SNPPlansSaveIcon;
 	
 	@FindBy(css = "#pop-btn-1 span")
+	//	@FindBy(css = ".modal-footer #popupClose")
 	private WebElement keepshoppingPlansBtn;
 	
 	@FindBy(css = "#pop-btn-2 span")
@@ -385,6 +383,9 @@ public class PlanRecommendationEngineResultsPage extends UhcDriver {
 	
 	@FindBy(css = "input#currentYear[class*='selected']")
 	private WebElement currentPlanYearSelected;
+	
+	@FindBy(css = "#highlights a[class*='cta-button']:nth-child(1)")
+	private List<WebElement> enrollBtnPlanDetails;
 	
 // Visitor profile elements
 	
@@ -580,17 +581,26 @@ public class PlanRecommendationEngineResultsPage extends UhcDriver {
 			temp.selectByVisibleText("January 1");
 			threadsleep(2000);							//E2E: Added for the overlay to disappear after selecting a option
 			temp = new Select(MSPlanPartAYear);
-			temp.selectByVisibleText("2021");
+			temp.selectByVisibleText(nxtYear);
 			threadsleep(2000);							//E2E: Added for the overlay to disappear after selecting a option
 			temp = new Select(MSPlanPartBMonth);
 			temp.selectByVisibleText("January 1");
 			threadsleep(2000);							//E2E: Added for the overlay to disappear after selecting a option
 			temp = new Select(MSPlanPartBYear);
-			temp.selectByVisibleText("2021");
+			temp.selectByVisibleText(nxtYear);
 			threadsleep(2000);							//E2E: Added for the overlay to disappear after selecting a option
 			temp = new Select(MSPlanStartMonth);
-			temp.selectByVisibleText("January 1, 2021");
+			temp.selectByVisibleText("January 1, " + nxtYear);
 			jsClickNew(MSViewPlanButton);
+		}
+		
+		int Year = Integer.parseInt(getCurrentYear()) +1;
+		String nxtYear = Integer.toString(Year);
+		public String getCurrentYear() {
+			DateFormat dateFormat = new SimpleDateFormat("mm/dd/yyyy");
+			Date date = new Date();
+			String curDate = dateFormat.format(date);
+			return curDate.split("/")[2];
 		}
 
 		public void clickEnrolldesktop(WebElement enrollButton,WebElement needhelp) {
@@ -1526,24 +1536,34 @@ public void validateSavePlan(String year) {
 	verifySavePlans(year, vppPlans);
 }
 
+ArrayList<String> comboPlanNames = new ArrayList<String>();
 public void validateCombineSavePlan(String year) {
 	System.out.println("Validate PRE Save Plans functionality : ");
 	int saveplans = 2;
-	saveplans(PDPPlansName,saveplans, year, PDPPlansSaveIcon);
+	threadsleep(5000);
+	validate(PDPViewPlansLink);
+	PDPViewPlansLink.click();
+	savecomboplans(PDPPlansName,saveplans, year, PDPPlansSaveIcon);
 	validate(keepshoppingPlansBtn);
 	keepshoppingPlansBtn.click();
 	threadsleep(3000);
-	viewplanLink(MAPlanNames);
-	saveplans(MAPlanNames,saveplans, year, MAPlansSaveIcon);
+	scrollToView(MAViewPlansLink);
+	threadsleep(2000);
+	MAViewPlansLink.click();
+	savecomboplans(MAPlanNames,saveplans, year, MAPlansSaveIcon);
 	threadsleep(3000);
-	viewplanLink(SNPPlansName);
-	saveplans(SNPPlansName,1, year, SNPPlansSaveIcon);
+	scrollToView(SNPViewPlansLink);
+	threadsleep(2000);
+	SNPViewPlansLink.click();
+	savecomboplans(SNPPlansName,1, year, SNPPlansSaveIcon);
+	Collections.sort(comboPlanNames);
+	System.out.println(comboPlanNames);
 	scrollToView(heartIcon);
 	validate(heartIcon);
 	heartIcon.click();
 	validate(viewSavedItemsBtn);
 	viewSavedItemsBtn.click();
-	verifySavePlans(year, vppPlans);
+	verifySavePlans(year, comboPlanNames);
 	verifyPlansVPandPDP(planNamesVisitorPrf);
 }
 
@@ -1570,16 +1590,21 @@ public ArrayList<String> saveplans(List<WebElement> plansName, int saveplans,	St
 	System.out.println("Plans Count :" +plansName.size());
 	threadsleep(3000);
 	for (int plan = 0; plan < saveplans; plan++) {
-		if(plansName.get(1).getText().equalsIgnoreCase("MedicareRx")) {
-			vppPlans.add(savingplans(plansName.get(plan), savePlan.get(2)));
-			continue;
-		}
 		vppPlans.add(savingplans(plansName.get(plan), savePlan.get(plan)));
 	}
 	Collections.sort(vppPlans);
 	System.out.println(vppPlans);
 	threadsleep(3000);
 	return vppPlans;
+}
+public ArrayList<String> savecomboplans(List<WebElement> plansName, int saveplans,	String year, List<WebElement> savePlan) {
+	System.out.println("Plans Count :" +plansName.size());
+	threadsleep(3000);
+	for (int plan = 0; plan < saveplans; plan++) {
+		comboPlanNames.add(savingplans(plansName.get(plan), savePlan.get(plan)));
+	}
+	threadsleep(3000);
+	return comboPlanNames;
 }
 
 public void verifySavePlans(String year, ArrayList<String> vppPlans) {
@@ -1611,13 +1636,13 @@ public void verifyPlansVPandPDP(List<WebElement> plansName) {
 
 public String savingplans(WebElement plan, WebElement saveplan) {
 	scrollToView(plan);
-	String exceptedplanName = plan.getText().trim();
+	String exceptedplanName = plan.getText();
 	System.out.println("Plan Name in VPP Summary Page: " + exceptedplanName);
 	String save = saveplan.getText().trim();
 	if (save.equalsIgnoreCase("Save") || save.equalsIgnoreCase("Save Plan")) { 
 		threadsleep(3000);
-//		saveplan.click();
-		jsClickNew(saveplan);
+		saveplan.click();
+//		jsClickNew(saveplan);
 	}
 	threadsleep(5000);
 	return exceptedplanName;
@@ -1739,7 +1764,30 @@ public void PREStage(String primaryWindow, String aarp) {
 			}
 	}
 	threadsleep(5000);
-	driver.switchTo().window(primaryWindow);
+//	driver.switchTo().window(primaryWindow);
+}
+
+public void validatePDPPlanNamesAndEnroll() {
+	System.out.println("Validating PDP Plan Names in Details pages : ");
+	plansLoader();
+	int pdpPlanCount = Integer.parseInt(PDPPlanCount.getText());
+	System.out.println(pdpPlanCount);
+	validate(PDP1stPlanName, 60);
+	String exceptedplanName = PDPPlansName.get(0).getText().split("\n")[0].trim().toUpperCase();
+	System.out.println("Plan Name in VPP Summary Page: "+exceptedplanName);
+	WebElement planViewdetailsBut = PDPPlansNames.get(0).findElement(By.cssSelector("#viewmoredetlinkpdp"));
+	planViewdetailsBut.click();
+	pageloadcomplete();
+	String actualplanName = planNameVPPDetailsPage.getText().split("\n")[0].toUpperCase();
+	System.out.println("Plan Name in VPP Details Page: "+actualplanName);
+	Assert.assertTrue(exceptedplanName.equalsIgnoreCase(actualplanName), "--- Plan name are not matches---");
+	enrollBtnPlanDetails.get(0).click();
+	pageloadcomplete();
+	String planNameinOLE = planNameEnrollPage.getText().trim().toUpperCase(); 
+	System.out.println("Plan Name in Plan Enroll Page: "+planNameinOLE);
+	Assert.assertTrue(planNameinOLE.contains(exceptedplanName), "--- Plan name are not matches---");	
+	System.out.println(driver.getCurrentUrl());
+	Assert.assertTrue(driver.getCurrentUrl().contains("online-application.html/welcome"), "OLE page not loaded");
 }
 
 }

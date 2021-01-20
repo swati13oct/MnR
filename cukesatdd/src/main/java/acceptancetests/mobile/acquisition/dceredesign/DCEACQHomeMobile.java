@@ -157,6 +157,7 @@ public class DCEACQHomeMobile {
 		DrugSummaryPageMobile drugSummaryPage = zipCodePlanYearPage.clickContinueBtn();
 		// zipCodePlanYearPage.verifyLoadScreen();
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
+		getLoginScenario().saveBean(PageConstants.DCE_Redesign_ZipCodePlanYearCapture, drugSummaryPage);
 	}
 
 	@Then("^the user selects View Drug details for following plantype and PlanName$")

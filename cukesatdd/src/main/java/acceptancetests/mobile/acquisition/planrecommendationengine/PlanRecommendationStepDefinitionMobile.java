@@ -8,6 +8,7 @@ import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import pages.acquisition.planRecommendationEngine.PlanRecommendationEnginePrioritiesPage;
 import pages.mobile.acquisition.bluelayer.AcquisitionHomePageMobile;
 import pages.mobile.acquisition.planrecommendationengine.CoverageOptionsMobilePage;
 import pages.mobile.acquisition.planrecommendationengine.DoctorsMobilePage;
@@ -16,6 +17,7 @@ import pages.mobile.acquisition.planrecommendationengine.HeaderFooterMobile;
 import pages.mobile.acquisition.planrecommendationengine.LandingAndZipcodeMobilePage;
 import pages.mobile.acquisition.planrecommendationengine.LoadingMobilePage;
 import pages.mobile.acquisition.planrecommendationengine.PharmacyMobilePage;
+import pages.mobile.acquisition.planrecommendationengine.PrioritiesMobilePage;
 import pages.mobile.acquisition.planrecommendationengine.ResultsMobilePage;
 import pages.mobile.acquisition.planrecommendationengine.SpecialNeedsMobilePage;
 import pages.mobile.acquisition.planrecommendationengine.TravelMobilePage;
@@ -692,7 +694,14 @@ public class PlanRecommendationStepDefinitionMobile {
 	public void edit_coverage_editResponse_page(DataTable givenAttributes) {
 		readfeaturedataMobile(givenAttributes);
 		EditResponseMobilePage preEditMobile = new EditResponseMobilePage(wd);
-		preEditMobile.changeCoverage(inputValues);
+		preEditMobile.changeCoverage(inputValues);}
+
+
+	@Then("^user validate elements in priorities page mobile$")
+	public void user_validate_prioritiesElements() {
+		PrioritiesMobilePage prioritiesMobile =  new PrioritiesMobilePage(wd);
+		prioritiesMobile.prioritiesElementsMobile();
+
 	}
 
 	@Then("^user validates coverage value in edit response page mobile$")

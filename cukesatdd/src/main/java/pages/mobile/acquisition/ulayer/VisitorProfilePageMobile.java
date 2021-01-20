@@ -24,6 +24,7 @@ import pages.mobile.acquisition.ole.WelcomePageMobile;
 import pages.acquisition.commonpages.AcquisitionHomePage;
 import pages.acquisition.commonpages.ComparePlansPage;
 import pages.acquisition.commonpages.PlanDetailsPage;
+import pages.acquisition.commonpages.VisitorProfilePage;
 import pages.acquisition.dceredesign.GetStartedPage;
 import pages.acquisition.ole.WelcomePage;
 
@@ -420,7 +421,68 @@ public class VisitorProfilePageMobile extends UhcDriver {
 		}
 		return null;
 	}
+	
+	@FindBy(xpath = "//*[@id='saved-drugs']/../..//*[text()='Get Started']/..")
+	public WebElement addDrugsGlobal;
+	
+	public void clickAddDrugsGlobal() {
+		validateNew(addDrugsGlobal);
+		//addDrugsGlobal.click();
+		jsClickNew(addDrugsGlobal);
+	}
 
+	@FindBy(xpath = "//*[contains(@aria-controls,'plan-drugs-dropdown')]/img")
+	public WebElement expandDrugsPlanCard;
+	
+	@FindBy(xpath = "//*[text()='Edit Drugs']")
+	public WebElement editDrugsPlanCard;
+	
+	/**
+	 * click edit drugs from plan card
+	 */
+	public void clickEditDrugsPlancard() {
+		expandDrugsPlanCard.click();
+		editDrugsPlanCard.click();
+	}
+	
+	@FindBy(xpath = "//*[contains(@class,'add-drug')]")
+	public WebElement enterDrugInfoPlanCard;
+	
+	/**
+	 * click add drugs from plan card
+	 */
+	public void clickAddDrugsPlancardNew() {
+		enterDrugInfoPlanCard.click();
+	}
+	
+	@FindBy(xpath = "//a[contains(text(),'Back to Drug Cost Estimator')]")
+	public WebElement backToDrugCostEstimatorLink;
+
+	public void validateBackToDceLink() {
+		validate(backToDrugCostEstimatorLink);
+	}
+
+	
+	public void validateAddedPlansNew(String planNames) {
+		List<String> listOfTestPlans = Arrays.asList(planNames.split(","));
+		CommonUtility.checkPageIsReadyNew(driver);
+		for (String plan : listOfTestPlans) {
+			System.out.println(plan);
+			System.out.println(driver.findElement(By.xpath(
+					"//h2[@id='saved-plans']/..//*[contains(@id,'planName') and contains(text(),'" + plan + "')]"))
+					.getText());
+			Assert.assertEquals(plan, driver.findElement(By.xpath(
+					"//h2[@id='saved-plans']/..//*[contains(@id,'planName') and contains(text(),'" + plan + "')]"))
+					.getText());
+			Assert.assertTrue(driver
+					.findElement(By.xpath("//h2[@id='saved-plans']/..//*[contains(@id,'planName') and contains(text(),'"
+							+ plan + "')]/following::button[1]"))
+					.isDisplayed());
+			System.out.println("Verified plans are added on visitior profile page");
+		}
+	}
+	
+	
 	public void validateAddedMsPlans(String planNames) {
 		try {
 			List<String> listOfTestPlans = Arrays.asList(planNames.split(","));
@@ -436,6 +498,17 @@ public class VisitorProfilePageMobile extends UhcDriver {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	
+	public VisitorProfilePageMobile validateVisitorProfilePage() {
+		if (driver.getCurrentUrl().contains("profile")) {
+			validate(btnCreateProfile);
+			return new VisitorProfilePageMobile(driver);
+		} else {
+			Assert.fail("Navigation to visitor profile is failed");
+		}
+		return null;
 	}
 
 	public void validateAddedPlansPDFLinks(String planNames) {

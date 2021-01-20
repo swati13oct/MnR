@@ -131,8 +131,7 @@ public class WerallyMobilePage extends UhcDriver {
 							//jsClickNew(saveButton);
 							System.out.println("Flow Iteration : "+i);
 							System.out.println("Count : "+count);
-							mobileUtils.mobileLocateElementClick(saveButton);
-							//saveButton.click();
+							saveButton.click();
 							threadsleep(3000);
 							chooseFirstLocation();
 

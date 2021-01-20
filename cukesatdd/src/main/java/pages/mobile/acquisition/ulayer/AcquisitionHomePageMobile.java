@@ -37,6 +37,7 @@ import pages.mobile.acquisition.dce.bluelayer.DCETestHarnessPageMobile;
 import pages.mobile.acquisition.planrecommendationengine.CommonutilitiesMobile;
 import pages.mobile.acquisition.ulayer.AcquisitionHomePageMobile;
 import pages.acquisition.commonpages.AcquisitionHomePage;
+import pages.acquisition.commonpages.VisitorProfilePage;
 import pages.acquisition.commonpages.keywordSearchAARP;
 import pages.acquisition.ulayer.PageTitleConstants;
 import pages.mobile.acquisition.dceredesign.GetStartedPageMobile;
@@ -311,18 +312,16 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 	@FindBy(xpath = "//a[@id='ctc-sam-mobile']")
 	private WebElement callsam;
-	
-//	String CallSam= "Call a Licensed Insurance Agent";
-	String CallSam1855= "1-855";
-	String CallSam1877= "1-877";
+
+	// String CallSam= "Call a Licensed Insurance Agent";
+	String CallSam1855 = "1-855";
+	String CallSam1877 = "1-877";
 
 	// @FindBy(xpath = "//*[@id='sam-call-button']/div/span[1]")
 	// @FindBy(xpath =
 	// "//*[contains(@id,'sam-call-button')]//*[contains(@class,'sam__button__text')]")
 	@FindBy(xpath = "//a[@id='ctc-sam-mobile']")
 	private WebElement callsamtooltip;
-	
-	
 
 	@FindBy(xpath = "//*[@id='sam-call-modal']/div/div")
 	private WebElement callSamPopup;
@@ -1943,27 +1942,26 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	}
 
 	public void validateCallSamContent() throws InterruptedException {
-		
-//		Actions action = new Actions(driver);
-//		WebElement element = callsam;
-//		action.moveToElement(element).perform();
-		waitforElementNew(callsamtooltip,30);
+
+		// Actions action = new Actions(driver);
+		// WebElement element = callsam;
+		// action.moveToElement(element).perform();
+		waitforElementNew(callsamtooltip, 30);
 		String toolTipText = callsamtooltip.getText();
 		System.out.println("====================================================================");
 		System.out.println(toolTipText);
 		System.out.println("====================================================================");
-		
-        if (toolTipText.contains(CallSam1877)) {
-          System.out.println("Call sticky action menu roll out and contain the text: "+ toolTipText);
-          
-        }
-        else if (toolTipText.contains(CallSam1855))	{
-        	System.out.println("Call sticky action menu roll out and contain the text"+ toolTipText);
-        }
-        		
-        else
-        	Assert.fail("No Call sticky action menu didn't roll out and doesn't contain the text 1-877");
-       
+
+		if (toolTipText.contains(CallSam1877)) {
+			System.out.println("Call sticky action menu roll out and contain the text: " + toolTipText);
+
+		} else if (toolTipText.contains(CallSam1855)) {
+			System.out.println("Call sticky action menu roll out and contain the text" + toolTipText);
+		}
+
+		else
+			Assert.fail("No Call sticky action menu didn't roll out and doesn't contain the text 1-877");
+
 	}
 
 	public void selectState(String state) {
@@ -2601,24 +2599,24 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	}
 
 	public void validateCallpopup() throws InterruptedException {
-		
+
 		// CommonUtility.checkPageIsReady(driver);
-				System.out.println(callsam.getText());
-				callsam.click();
-				System.out.println("@@@@@@@@@@@@@@@ Call Icon Clicked @@@@@@@@@@@@@@@");
-				driver.switchTo().activeElement();
-				System.out.println(CallSamTFN.getText());
-				// CallSamTFNClose.click();
-				// validateNew(callsam);
-				// return null;
-				if (CallSamTFN.getText().isEmpty()) {
-					// return null;
-					Assert.fail("TFN number was not found on the SAM call Popup");
-				} else {
-					CallSamTFNClose.click();
-					validateNew(callsam);
-					// return new AcquisitionHomePage(driver);
-				}
+		System.out.println(callsam.getText());
+		callsam.click();
+		System.out.println("@@@@@@@@@@@@@@@ Call Icon Clicked @@@@@@@@@@@@@@@");
+		driver.switchTo().activeElement();
+		System.out.println(CallSamTFN.getText());
+		// CallSamTFNClose.click();
+		// validateNew(callsam);
+		// return null;
+		if (CallSamTFN.getText().isEmpty()) {
+			// return null;
+			Assert.fail("TFN number was not found on the SAM call Popup");
+		} else {
+			CallSamTFNClose.click();
+			validateNew(callsam);
+			// return new AcquisitionHomePage(driver);
+		}
 	}
 
 	public void validateChatSam() throws InterruptedException {
@@ -3084,8 +3082,6 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		headLogo.click();
 		CommonUtility.checkPageIsReadyNew(driver);
 		clickViewDisclaimerInfoLink();
-		
-		
 
 	}
 
@@ -3241,6 +3237,41 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 				|| driver.getCurrentUrl().contains("uhcmedicaresolutions.com")) {
 			assertTrue(true);
 		}
+
+	}
+
+	@FindBy(xpath = "//*[@id='enrollmentPopup']/..")
+	private WebElement savedPlansPopup;
+
+	@FindBy(xpath = "//*[@id='enrollmentPopup']/..//*[@class='uhc-modal__close']")
+	private WebElement savedPlansPopupCloseIcon;
+
+	/**
+	 * This method used to navigate to new visitor profile dashboard
+	 * 
+	 * @return
+	 */
+	public VisitorProfilePageMobile navigateToNewVisitorProfilePage() {
+		try {
+			if (savedPlansPopup.isDisplayed()) {
+				savedPlansPopupCloseIcon.click();
+			}
+		} catch (Exception e) {
+			System.out.println("Saved Plans modal not displayed");
+		}
+		waitforElement(shoppingCartIcon);
+		shoppingCartIcon.click();
+		//guestProfileLink.click();
+		jsClickNew(guestProfileLink);
+		CommonUtility.checkPageIsReadyNew(driver);
+		if (driver.getCurrentUrl().contains("profile")) {
+			System.out.println("Navigated to Visitor profile page");
+			return new VisitorProfilePageMobile(driver);
+		} else {
+			System.out.println("Navigation to visitor profile is failed");
+			Assert.fail("User not navigated to Visitor profile page");
+		}
+		return null;
 	}
 
 	public void DualSplNeedPlans() {
@@ -3359,10 +3390,10 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 			} else {
 				Assert.assertTrue(true, "Navigated to AARP org page");
 				driver.close();
-				//driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
+				// driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
 			}
 		}
-		
+
 	}
 
 }

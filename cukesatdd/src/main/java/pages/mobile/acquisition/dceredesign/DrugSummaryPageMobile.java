@@ -64,7 +64,7 @@ public class DrugSummaryPageMobile extends UhcDriver {
 	@FindBy(xpath = "//button/span[text()='View Plan Details']")
 	public WebElement viewPlanDetailsBtn;
 
-	@FindBy(xpath = "//span[contains(text(),' Save ')]") 
+	@FindBy(xpath = "//span[contains(text(),' Save ')]")
 	public WebElement saveBtn;
 
 	@FindBy(xpath = "//*[@id='accordion-1-button']")
@@ -123,7 +123,7 @@ public class DrugSummaryPageMobile extends UhcDriver {
 
 	@Override
 	public void openAndValidate() {
-		validateNew(reviewDrugCostPageHeading);
+		//validateNew(reviewDrugCostPageHeading);
 
 	}
 
@@ -374,6 +374,46 @@ public class DrugSummaryPageMobile extends UhcDriver {
 
 	public void clickViewDrugCostBtn() {
 		viewDrugCostBtn.click();
+	}
+
+	@FindBy(xpath = "//button//span[text()='Back to Profile']")
+	public List<WebElement> backToProfileBtn;
+
+	public void clickBackToProfileBtn() {
+		try {
+			backToProfileBtn.get(1).click();
+			System.out.println("Back to profile clicked");
+		} catch (Exception e) {
+			Assert.fail("Back to profile not displayed ");
+		}
+	}
+
+	@FindBy(xpath = "//span[contains(text(),'Return to Profile')]")
+	public WebElement returnToProfileLink;
+
+	public void verifyReturnToProfileDisplayed() {
+		validateNew(returnToProfileLink, 3);
+		scrollToView(returnToProfileLink);
+		try {
+			if (returnToProfileLink.isDisplayed()) {
+				System.out.println("Return to profile displayed");
+			}
+		} catch (Exception e) {
+			Assert.fail("Return to profile not displayed");
+		}
+	}
+
+	@FindBy(xpath = "//*[@class='plane-name-block']")
+	public List<WebElement> planNames;
+
+	public void verifyBackToProfileDisplayed() {
+		try {
+			if (backToProfileBtn.size() == planNames.size()) {
+				System.out.println("Back to profile displayed for each plan card");
+			}
+		} catch (Exception e) {
+			Assert.fail("Back to profile not displayed for each plan card");
+		}
 	}
 
 	@FindBy(xpath = "//label[contains(@class,'uhc-filter')]//span[contains(text(),'Medicare Advantage Plans')]")

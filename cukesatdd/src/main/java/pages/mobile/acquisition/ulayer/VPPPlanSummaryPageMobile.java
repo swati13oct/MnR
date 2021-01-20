@@ -5117,6 +5117,25 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 		}
 		return null;
 	}
+	
+	
+	@FindBy(id = "pop-btn-2")
+	private WebElement viewSavedPlans;
+	/**
+	 * Click on View Saved plans button on Plan saved prompt
+	 * 
+	 * @return
+	 */
+	public VisitorProfilePageMobile viewSavedPlans() {
+		viewSavedPlans.click();
+		if (driver.getCurrentUrl().contains("profile")) {
+			CommonUtility.checkPageIsReadyNew(driver);
+			return new VisitorProfilePageMobile(driver);
+		} else {
+			System.out.println("Navigation to visitor profile is failed");
+			return null;
+		}
+	}
 
 	public void ResumeApplicationButton() throws InterruptedException {
 		Thread.sleep(5000);

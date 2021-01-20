@@ -352,8 +352,8 @@ public class DrugDetailsPageMobile extends UhcDriver {
 		validateNew(DrugDetails_DrugCostsHeading);
 		validateNew(DrugCosts_AvgMonDrugCost);
 		validateNew(DrugCosts_MonthlyPremium);
-//		scrollToView(DrugCosts_AnnualEstTotal);
-//		validateNew(DrugCosts_AnnualEstTotal);
+		// scrollToView(DrugCosts_AnnualEstTotal);
+		// validateNew(DrugCosts_AnnualEstTotal);
 		validateNew(DrugCosts_PlanDetailsBtn);
 		validateNew(DrugCosts_SaveBtn);
 		validateNew(DrugCosts_TFN);
@@ -1354,6 +1354,43 @@ public class DrugDetailsPageMobile extends UhcDriver {
 
 	}
 
+	@FindBy(xpath = "//*[text()='Return to Profile ']")
+	public WebElement returnToProfileLink;
+
+	public void clickReturnToProfile() {
+		try {
+			if (returnToProfileLink.isDisplayed()) {
+				System.out.println("Return to profile displayed");
+				returnToProfileLink.click();
+			}
+
+		} catch (Exception e) {
+			Assert.fail("Return to profile not displayed");
+
+		}
+	}
+	
+	public void verifyReturnToProfileDisplayed() {
+		try {
+			if (returnToProfileLink.isDisplayed()) {
+				System.out.println("Return to profile displayed");
+			}
+		} catch (Exception e) {
+			Assert.fail("Return to profile not displayed");
+		}
+	}
+
+	@FindBy(xpath = "//button//span[text()='Back to Profile']")
+	public List<WebElement> backToProfileBtn;
+	
+	public void clickBackToProfileBtn() {
+		try {
+			backToProfileBtn.get(1).click();
+			System.out.println("Back to profile clicked");
+		} catch (Exception e) {
+			Assert.fail("Back to profile not displayed ");
+		}
+	}
 	public void validateNotCoveredPharmacyView() {
 		if (validate(YourDrugs_Table) || validate(LinktoEditDrugList) || validate(MonthlyDrugStage_Header)
 				|| validate(MonthlyDrugStage_InitialCoverageStagerTbl)

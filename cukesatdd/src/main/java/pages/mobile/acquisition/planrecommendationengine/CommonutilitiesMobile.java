@@ -37,6 +37,7 @@ public class CommonutilitiesMobile extends UhcDriver {
 	public static final String pharmacyPageName = "Pharmacy"; //Removed From PRE
 	public static final String additionalServicesPageName = "Additional Services";
 	public static final String costPreferencesPageName = "Cost Preferences";
+	public static final String prioritiesPageName = "Priorities";
 	public static final String resultsPageName = "Plan Recommendation Summary";
 	
 	String flow;
@@ -294,15 +295,15 @@ public class CommonutilitiesMobile extends UhcDriver {
 				previousPageName = "Location";
 				previousPagePercentage = "10%";
 				nextPageName = "Drug";
-				nextPagePercentage = "20%";
+				nextPagePercentage = "50%";
 				currrentPagePercentage = "10%";
 			}
 			if (currentPageName.contains("DRUG")) {
 				previousPageName = "Coverage";
-				previousPagePercentage = "20%";
+				previousPagePercentage = "50%";
 				nextPageName = "NULL";
 				nextPagePercentage = "NULL";
-				currrentPagePercentage = "20%";
+				currrentPagePercentage = "50%";
 //				if (currentPageName.contains("SKIP")) {
 //					nextPageName = "NULL";
 //					nextPagePercentage = "NULL";
@@ -324,6 +325,12 @@ public class CommonutilitiesMobile extends UhcDriver {
 				nextPageName = "Special";
 				nextPagePercentage = "20%";
 				currrentPagePercentage = "10%";
+				if (flow.equalsIgnoreCase("MA")) {
+					nextPagePercentage = "22%";
+				}
+				if (flow.equalsIgnoreCase("PDPTOMAPD")) {
+					nextPagePercentage = "30%";
+				}
 			} else if (currentPageName.contains("SPECIAL")) {
 				previousPageName = "Coverage";
 				previousPagePercentage = "20%";
@@ -331,7 +338,12 @@ public class CommonutilitiesMobile extends UhcDriver {
 				nextPagePercentage = "30%";
 				currrentPagePercentage = "20%";
 				if (flow.equalsIgnoreCase("MA")) {
+					previousPagePercentage = "22%";
+					currrentPagePercentage = "22%";
 					nextPagePercentage = "33%";
+				}
+				if (flow.equalsIgnoreCase("PDPTOMAPD")) {
+					nextPagePercentage = "40%";
 				}
 			} else if (currentPageName.contains("TRAVEL") || currentPageName.contains("CARE AWAY")) {
 				previousPageName = "Special";
@@ -341,8 +353,11 @@ public class CommonutilitiesMobile extends UhcDriver {
 				currrentPagePercentage = "30%";
 				if (flow.equalsIgnoreCase("MA")) {
 					previousPagePercentage = "33%";
-					nextPagePercentage = "46%";
 					currrentPagePercentage = "33%";
+					nextPagePercentage = "44%";
+				}
+				if (flow.equalsIgnoreCase("PDPTOMAPD")) {
+					nextPagePercentage = "50%";
 				}
 			} else if (currentPageName.contains("DOCTOR")) {
 				previousPageName = "Travel";
@@ -351,10 +366,13 @@ public class CommonutilitiesMobile extends UhcDriver {
 				nextPagePercentage = "50%";
 				currrentPagePercentage = "40%";
 				if (flow.equalsIgnoreCase("MA")) {
-					previousPagePercentage = "46%";
+					previousPagePercentage = "44%";
+					currrentPagePercentage = "44%";
 					nextPageName = "Additional";
-					nextPagePercentage = "59%";
-					currrentPagePercentage = "46%";
+					nextPagePercentage = "56%";
+				}
+				if (flow.equalsIgnoreCase("PDPTOMAPD")) {
+					nextPagePercentage = "60%";
 				}
 			} else if (currentPageName.contains("DRUG")) {
 				previousPageName = "Doctor";
@@ -365,7 +383,7 @@ public class CommonutilitiesMobile extends UhcDriver {
 				//if (currentPageName.contains("SKIP"))
 //					if ((flow.equalsIgnoreCase("MAPD") || flow.equalsIgnoreCase("NONE"))) {
 						nextPageName = "Additional";
-						nextPagePercentage = "70%";
+						nextPagePercentage = "60%";
 //					}
 			}
 //			else if (currentPageName.contains("PHARMACY")) {
@@ -379,13 +397,13 @@ public class CommonutilitiesMobile extends UhcDriver {
 				previousPageName = "Drug";
 				previousPagePercentage = "60%";
 				nextPageName = "Cost";
-				nextPagePercentage = "80%";
-				currrentPagePercentage = "70%";
+				nextPagePercentage = "70%";
+				currrentPagePercentage = "60%";
 				if (flow.equalsIgnoreCase("MA")) {
 					previousPageName = "Doctor";
-					previousPagePercentage = "59%";
-					nextPagePercentage = "72%";
-					currrentPagePercentage = "59%";
+					previousPagePercentage = "56%";
+					currrentPagePercentage = "56%";
+					nextPagePercentage = "67%";
 				}
 //				if (currentPageName.contains("SKIP")) {
 //					previousPageName = "Drug";
@@ -393,15 +411,25 @@ public class CommonutilitiesMobile extends UhcDriver {
 //				}
 			} else if (currentPageName.contains("COST")) {
 				previousPageName = "Additional";
+				previousPagePercentage = "70%";
+				nextPageName = "Priorities";
+				nextPagePercentage = "80%";
+				currrentPagePercentage = "70%";
+				if (flow.equalsIgnoreCase("MA")) {
+					previousPagePercentage = "67%";
+					currrentPagePercentage = "67%";
+					nextPagePercentage = "78%";
+				}
+			}else if (currentPageName.contains("PRIORITIES")) {
+				previousPageName = "Cost";
 				previousPagePercentage = "80%";
 				nextPageName = "NULL";
 				nextPagePercentage = "NULL";
 				currrentPagePercentage = "80%";
 				if (flow.equalsIgnoreCase("MA")) {
-					previousPagePercentage = "72%";
-					currrentPagePercentage = "72%";
+					previousPagePercentage = "78%";
+					currrentPagePercentage = "78%";
 				}
-				return;
 			} else {
 				previousPageName = "";
 				previousPagePercentage = "";

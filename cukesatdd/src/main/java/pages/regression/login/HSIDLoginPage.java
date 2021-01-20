@@ -236,6 +236,20 @@ public class HSIDLoginPage extends UhcDriver {
 		// TODO Auto-generated method stub
 		startNew(deepLinkUrl);
 		CommonUtility.checkPageIsReadyNew(driver);
+		try {
+			if(privacyNotice.getText().contains("Your connection is not private"))
+			{
+				System.out.println("Privacy error page opened, clicking on Advanced");
+				advancedLink.click();
+				System.out.println("Clicked on Advanced");
+				validate(proceedLink);
+				System.out.println("Clicking on Proceed Link");
+				proceedLink.click();
+				System.out.println("Clicked on Proceed Link");
+			}
+		}catch (Exception e) {
+			System.out.println("Privacy error Page didn't appear");
+		}
 		//validateNew(mnrSignInButton);
 		/*
 		 * if ("NO".equalsIgnoreCase(MRScenario.isHSIDCompatible))

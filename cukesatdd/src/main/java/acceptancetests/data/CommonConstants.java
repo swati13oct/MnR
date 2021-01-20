@@ -1,6 +1,4 @@
-/**
- * 
- */
+
 package acceptancetests.data;
 
 /**

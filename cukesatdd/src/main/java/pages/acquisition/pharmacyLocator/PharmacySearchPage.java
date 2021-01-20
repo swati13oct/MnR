@@ -15,12 +15,9 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
-import acceptancetests.acquisition.pharmacylocator.PharmacySearchCommonConstants;
-import acceptancetests.data.CommonConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import pages.acquisition.dceredesign.GetStartedPage;
-import pages.acquisition.ulayer.PageTitleConstants;
 
 public class PharmacySearchPage extends PharmacySearchBase {
 
@@ -253,7 +250,7 @@ public class PharmacySearchPage extends PharmacySearchBase {
 				pharmacyValidate(distanceOption_25miles));
 		Assert.assertTrue("PROBLEM - unable to locate the zipcode input field element", 
 				pharmacyValidate(zipcodeField));
-		Assert.assertTrue("PROBLEM - unable to locate the search button", pharmacyValidate(searchbtn));
+//		Assert.assertTrue("PROBLEM - unable to locate the search button", pharmacyValidate(searchbtn));
 		if (pharmacyValidate(drpYear)) {
 			select = new Select(drpYear);           
 			List <WebElement> yearList = select.getOptions();

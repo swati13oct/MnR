@@ -13,14 +13,12 @@ import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import pages.acquisition.commonpages.PlanDetailsPage;
+import pages.acquisition.commonpages.VPPPlanSummaryPage;
 import pages.acquisition.dceredesign.BuildYourDrugList;
-import pages.acquisition.dceredesign.DrugDetailsPage;
-import pages.acquisition.dceredesign.DrugSummaryPage;
 import pages.acquisition.dceredesign.GetStartedPage;
 import pages.acquisition.dceredesign.SwitchToGeneric;
 import pages.acquisition.dceredesign.TellUsAboutDrug;
 import pages.acquisition.dceredesign.ZipCodePlanYearCapturePage;
-import pages.acquisition.ulayer.AcquisitionHomePage;
 import pages.acquisition.ulayer.DrugCostEstimatorPage;
 import pages.mobile.acquisition.dceredesign.BuildYourDrugListMobile;
 import pages.mobile.acquisition.dceredesign.DrugDetailsPageMobile;
@@ -30,6 +28,8 @@ import pages.mobile.acquisition.dceredesign.ZipCodeAndPlanYearCapturePageMobile;
 import pages.mobile.acquisition.ulayer.AcquisitionHomePageMobile;
 import pages.mobile.acquisition.ulayer.DrugCostEstimatorPageMobile;
 import pages.mobile.acquisition.ulayer.PlanDetailsPageMobile;
+import pages.mobile.acquisition.ulayer.VPPPlanSummaryPageMobile;
+import pages.mobile.acquisition.ulayer.VisitorProfilePageMobile;
 //import pages.mobile.acquisition.ulayer.GetStartedPageMobile;
 import pages.mobile.acquisition.dceredesign.GetStartedPageMobile;
 import pages.mobile.acquisition.dceredesign.SwitchToGenericMobile;
@@ -344,7 +344,7 @@ public class DCEACQNewRunnerMobile {
 	}
 
 	@Then("^the user validates Drug List in Your Drugs Section on Drug Details Page$")
-	public void the_user_validates_druglist_yourDrugs_DrugDetailsPage() throws Throwable {
+	public void the_user_validates_druglist_yourDrugs_DrugDetailsPageMobile() throws Throwable {
 		DrugDetailsPageMobile drugDetailsPage = (DrugDetailsPageMobile) getLoginScenario()
 				.getBean(PageConstants.DCE_Redesign_DrugDetails);
 		String druglist = (String) getLoginScenario().getBean(DCERedesignCommonConstants.DRUGLIST);
@@ -368,7 +368,7 @@ public class DCEACQNewRunnerMobile {
 
 		PlanDetailsPage plandetailspage = (PlanDetailsPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
-	
+
 		DrugDetailsPageMobile drugDetailsPage = plandetailspage.clickPrescriptionBenifitTab();
 	}
 
@@ -439,6 +439,116 @@ public class DCEACQNewRunnerMobile {
 		DrugDetailsPageMobile drugDetailsPage = (DrugDetailsPageMobile) getLoginScenario()
 				.getBean(PageConstants.DCE_Redesign_DrugDetails);
 		drugDetailsPage.validateNotCoveredPharmacyView();
+	}
+
+	@When("^user clicks on edit drugs button from plan card$")
+	public void user_clicks_on_edit_drugs_button_from_plan_card() {
+		VisitorProfilePageMobile visitorProfile = (VisitorProfilePageMobile) getLoginScenario()
+				.getBean(PageConstants.VISITOR_PROFILE_PAGE);
+		visitorProfile.clickEditDrugsPlancard();
+	}
+
+	@Then("^user should see back to drug cost estimator link on visitor profile page$")
+	public void user_should_see_back_to_drug_cost_estimator_link_on_visitor_profile_page() {
+		VisitorProfilePageMobile visitorProfile = (VisitorProfilePageMobile) getLoginScenario()
+				.getBean(PageConstants.VISITOR_PROFILE_PAGE);
+		visitorProfile.validateBackToDceLink();
+	}
+
+	@When("^user clicks on Return to profile link on details page$")
+	public void user_clicks_on_Return_to_profile_link_on_details_page() {
+		DrugDetailsPageMobile drugDetailsPage = new DrugDetailsPageMobile(wd);
+		drugDetailsPage.clickReturnToProfile();
+	}
+
+	@Then("^the user clicks on the enter drug information button from plan card on Visitor Profile page$")
+	public void the_user_clicks_on_the_enter_drug_information_button_from_plan_card_on_VP_page() {
+		VisitorProfilePageMobile visitorProfile = (VisitorProfilePageMobile) getLoginScenario()
+				.getBean(PageConstants.VISITOR_PROFILE_PAGE);
+		visitorProfile.clickAddDrugsPlancardNew();
+	}
+
+	@And("^user validates the added plans on new visitor profile page$")
+	public void user_validates_the_added_plans_on_new_visitor_profile_page(DataTable planNames) {
+		List<DataTableRow> givenAttributesRow = planNames.getGherkinRows();
+		Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < givenAttributesRow.size(); i++) {
+
+			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+					givenAttributesRow.get(i).getCells().get(1));
+		}
+		String savePlanNames = givenAttributesMap.get("Test Plans");
+		VisitorProfilePageMobile visitorProfile = (VisitorProfilePageMobile) getLoginScenario()
+				.getBean(PageConstants.VISITOR_PROFILE_PAGE);
+		visitorProfile.validateAddedPlansNew(savePlanNames);
+	}
+
+	@And("^user click on view saved plans button$")
+	public void user_click_on_view_saved_plans_button() {
+		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+
+		VisitorProfilePageMobile visitorProfilePage = plansummaryPage.viewSavedPlans();
+
+		getLoginScenario().saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfilePage);
+	}
+
+	@Then("^user should be able to see Return to profile link on details page$")
+	public void user_should_be_able_to_see_Return_to_profile_link_on_details_page() {
+		DrugDetailsPageMobile drugDetailsPage = new DrugDetailsPageMobile(wd);
+		drugDetailsPage.verifyReturnToProfileDisplayed();
+	}
+
+	@Then("^user should be navigated to build drug list page$")
+	public void user_should_be_navigated_to_build_drug_list_page() {
+		BuildYourDrugList buildDrugListPage = (BuildYourDrugList) getLoginScenario()
+				.getBean(PageConstants.DCE_Redesign_BuildDrugList);
+		buildDrugListPage.validateBuildDrugListPageDisplayed();
+	}
+
+	@Then("^user should be navigated to shopper profile page$")
+	public void user_should_be_navigated_to_shopper_profile_page() {
+		VisitorProfilePageMobile visitorProfile = new VisitorProfilePageMobile(wd);
+		visitorProfile.validateVisitorProfilePage();
+
+	}
+
+	@When("^user clicks on Back to profile button$")
+	public void user_clicks_on_Back_to_profile_button() {
+		DrugSummaryPageMobile drugSummaryPage = new DrugSummaryPageMobile(wd);
+		drugSummaryPage.clickBackToProfileBtn();
+	}
+
+	@Then("^Back to profile button should be displayed for each plan card$")
+	public void back_to_profile_button_for_each_plan_card() {
+		DrugSummaryPageMobile drugSummaryPage = new DrugSummaryPageMobile(wd);
+		drugSummaryPage.verifyBackToProfileDisplayed();
+	}
+
+	@Then("^user should be able to see Return to profile link on summary page$")
+	public void user_should_be_able_to_see_Return_to_profile_link_on_summary_page() {
+		
+		
+		DrugSummaryPageMobile drugSummaryPage = new DrugSummaryPageMobile(wd);
+		getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugSummary);
+		getLoginScenario().getBean(PageConstants.DCE_Redesign_ZipCodePlanYearCapture);
+		drugSummaryPage.verifyReturnToProfileDisplayed();
+	}
+
+	@And("^the user navigate to Visitor profile page$")
+	public void the_user_navigate_to_visitor_profile_page() {
+		AcquisitionHomePageMobile acqHomePage = (AcquisitionHomePageMobile) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+
+		VisitorProfilePageMobile visitorProfilePage = acqHomePage.navigateToNewVisitorProfilePage();
+		getLoginScenario().saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfilePage);
+	}
+
+	@And("^the user clicks on the add drugs button globally on the profile page$")
+	public void the_user_clicks_on_the_add_drugs_button_globally_in__profile_page() {
+		VisitorProfilePageMobile visitorProfilePage = (VisitorProfilePageMobile) getLoginScenario()
+				.getBean(PageConstants.VISITOR_PROFILE_PAGE);
+		visitorProfilePage.clickAddDrugsGlobal();
 	}
 
 }
