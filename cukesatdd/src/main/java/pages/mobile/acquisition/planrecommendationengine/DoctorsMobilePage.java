@@ -456,12 +456,20 @@ public class DoctorsMobilePage extends UhcDriver {
 	public void edit_doctor(String doctor, String doctorsName, String multiDoctor) {
 		doctorspageOptions(doctor);
 		mobileUtils.mobileLocateElementClick(continueBtn);
+		if(validate(modalEditdoctors)) {
+			modalEditdoctors.click();
+		}
+		String curWindow = driver.getWindowHandle();
+		System.out.println(curWindow);
+		modalFinddoctors.click();
+		threadsleep(5000);
 		if (doctor.equalsIgnoreCase("Lookup")) {
 			if (multiDoctor.equalsIgnoreCase("YES"))
-				doctorlookup(doctorsName, 3);
+				validateWerallySearchanotherWindowmobile(curWindow, "Doctors", doctorsName, 3);
 			else
-				doctorlookup(doctorsName, 1);
+				validateWerallySearchanotherWindowmobile(curWindow, "Doctors", doctorsName, 1);
 		}
+		modalContinuedoctors.click();
 	}
 	
 	public void addProviderEdit(String search) {

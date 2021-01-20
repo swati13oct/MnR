@@ -17,11 +17,23 @@ Feature: To test HSID member SignIn
 
     Examples: 
       | planType  | memberType | copayCategory |
-      | MAPD      | Individual | NON LIS       |
       | PCP       | Individual | NON LIS       |
-      | Medica    | Individual | NON LIS       |
       | MAGroup   | Group      | NON LIS       |
       | MAPDGroup | Group      | NON LIS       |
+
+  @Login @US968315 @regressionMember
+  Scenario Outline: Verify HSID login functionality for <planType> <memberType> member sign in
+    Given login with a cross domain URL in the member portal and validate elements
+      | Plan Type      | <planType>      |
+      | Member Type    | <memberType>    |
+      | Copay Category | <copayCategory> |
+    Then I validate that login is successfull
+    And I click on logout and validate the login page
+
+    Examples: 
+      | planType  | memberType | copayCategory |
+	  | MAPD      | Individual | NON LIS       |
+	  | Medica    | Individual | NON LIS       |
 
   @hsid4 @codetransformers
   Scenario Outline: To verify that iperception smiley survey is displayed on medicare.uhc.com signin pages

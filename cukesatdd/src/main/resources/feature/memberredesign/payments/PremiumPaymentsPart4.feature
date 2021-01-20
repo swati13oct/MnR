@@ -146,7 +146,7 @@ Feature: 1.19 Verify the premium payment flows on member portal - Part 4 - Test 
       | Copay Category | <copayCategory> |
     And user clicks on benefits and coverage tab on home page or test harness page
       | PlanType | <planType> |
-    And user scrolls down to Monthly Premium section to click on Make Payment button
+   # And user scrolls down to Monthly Premium section to click on Make Payment button
     Then user clicks on Make Payment button and lands on Premium Payments page
 
     Examples: 

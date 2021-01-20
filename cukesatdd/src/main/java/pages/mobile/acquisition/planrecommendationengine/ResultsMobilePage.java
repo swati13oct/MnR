@@ -150,6 +150,9 @@ public class ResultsMobilePage extends UhcDriver {
 
 	@FindBy(css = "div[data-rel='#plan-list-4'] a")
 	private WebElement SNPViewPlansLink;
+	
+	@FindBy(css = "div[data-rel='#plan-list-4'] .title")
+	private WebElement SNPPlansTitle;
 
 	@FindBy(css = "#plan-list-4 .swiper-container .module-plan-overview:nth-of-type(1)")
 	private WebElement SNP1stPlan;
@@ -551,7 +554,8 @@ public class ResultsMobilePage extends UhcDriver {
 	public void navigateVPPPRE() {
 		System.out.println("Navigate from VPP to PRE using Startnow : ");
 		plansLoader();
-		mobileUtils.mobileLocateElementClick(PDPViewPlansLink);
+		mobileUtils.mobileLocateElement(SNPPlansTitle);
+		jsClickMobile(PDPViewPlansLink);
 		mobileUtils.mobileLocateElement(startnowButton);
 		mobileUtils.mobileLocateElementClick(startnowButton);
 		pageloadcomplete();
@@ -559,9 +563,10 @@ public class ResultsMobilePage extends UhcDriver {
 	}
 
 	public void navigateVPPPREStartover() {
-		System.out.println("Navigate from VPP to PRE using Startnow : ");
+		System.out.println("Navigate from VPP to PRE using StartOver : ");
 		plansLoader();
-		mobileUtils.mobileLocateElementClick(PDPViewPlansLink);
+		mobileUtils.mobileLocateElement(SNPPlansTitle);
+		jsClickMobile(PDPViewPlansLink);
 		mobileUtils.mobileLocateElement(pdpstartoverButton);
 		mobileUtils.mobileLocateElementClick(pdpstartoverButton);
 		modalstartoverButton.click();
@@ -802,7 +807,8 @@ public class ResultsMobilePage extends UhcDriver {
 			backtoTop();
 		}
 		List<String> pdpAPIRankings = getAPIPlansRanking(rankingJSON, "PDP");
-		mobileUtils.mobileLocateElementClick(PDPViewPlansLink);
+		mobileUtils.mobileLocateElement(PDPViewPlansLink);
+		jsClickMobile(PDPViewPlansLink);
 		validate(PDP1stPlanName, 60);
 		mobileUtils.mobileLocateElement(PDP1stPlanEnroll);
 		verifyAPIRankings(PDPPlansId, pdpAPIRankings);
@@ -813,7 +819,8 @@ public class ResultsMobilePage extends UhcDriver {
 		backtoTop();
 		List<String> snpAPIRankings = getAPIPlansRanking(rankingJSON, "SNP");
 		if (snpAPIRankings.size() > 0) {
-			mobileUtils.mobileLocateElementClick(SNPViewPlansLink);
+			mobileUtils.mobileLocateElement(SNPViewPlansLink);
+			jsClickMobile(SNPViewPlansLink);
 			validate(SNP1stPlanName, 60);
 			mobileUtils.mobileLocateElement(SNP1stPlanEnroll);
 			verifyAPIRankings(SNPPlansId, snpAPIRankings);
